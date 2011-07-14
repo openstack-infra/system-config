@@ -49,13 +49,28 @@ node default {
         ensure => latest
           }
 
+    package { "python-dev":
+         ensure => latest
+           }
+
     package { "python-pip":
-        ensure => latest
+        ensure => latest,
+        require => Package[python-dev]
+          }
+
+    package { "python-coverage":
+        ensure => latest,
+        require => Package[python-nose]
+          }
+
+    package { "python-nose":
+        ensure => latest,
+        require => Package[python-pip]
           }
 
     package { "nosexcover":
         ensure => latest,
         provider => pip,
-        require => Package[python-pip]
+        require => Package[python-coverage]
     }
 }
