@@ -48,4 +48,14 @@ node default {
     package { "byobu":
         ensure => latest
           }
+
+    package { "python-pip":
+        ensure => latest
+          }
+
+    package { "nosexcover":
+        ensure => latest,
+        provider => pip,
+        require => Package[python-pip]
+    }
 }
