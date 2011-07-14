@@ -15,10 +15,13 @@ slave.pp is intended to be for jenkins slaves and adds all members of
 server.pp is intended as the base for other servers and adds members of
 ~openstack-admins
 
+Puppet needs to be installed via gems, because we use the pip package
+provider for one of the packages and that is only in 2.7.
+
 For instance:
 
-puppet apply --modulepath=`pwd`/modules manifests/slave.pp
+/var/lib/gems/1.8/bin/puppet apply --modulepath=`pwd`/modules manifests/slave.pp
 
 or
 
-puppet apply --modulepath=`pwd`/modules manifests/server.pp
+/var/lib/gems/1.8/bin/puppet apply --modulepath=`pwd`/modules manifests/server.pp
