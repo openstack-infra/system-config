@@ -36,8 +36,9 @@ class %s_users {
         ssh_keys = ssh_keys.replace("\n","\\n")
 
         for nick in member.irc_nicknames:
-          if nick.network == 'build.drizzle.org':
+          if nick.network == 'ci.openstack.org':
             login_name = nick.nickname
+
         user_pp.write("""
   group { '%(login_name)s':
     ensure => 'present'
@@ -78,7 +79,7 @@ class %s_users {
     },
     owner => '%(login_name)s',
     group => '%(login_name)s',
-    mode => 600,
+    mode => 700,
     ensure => 'directory',
     require => File['%(login_name)shome'],
   }
@@ -139,8 +140,36 @@ class %s_users {
     ensure => 'present',
   }
 
+  file { '%(login_name)sbazaardir':
+    name => $operatingsystem ? {
+      Darwin => '/Users/%(login_name)s/.bazaar',
+      solaris => '/export/home/%(login_name)s/.bazaar',
+      default => '/home/%(login_name)s/.bazaar',
+    },
+    owner => '%(login_name)s',
+    group => '%(login_name)s',
+    mode => 755,
+    ensure => 'directory',
+    require => File['%(login_name)shome'],
+  }
 
-""" % dict(login_name=login_name, full_name=full_name, ssh_keys=ssh_keys))
+
+  file { '%(login_name)sbazaarauth':
+    name => $operatingsystem ? {
+      Darwin => '/Users/%(login_name)s/.bazaar/authentication.conf',
+      solaris => '/export/home/%(login_name)s/.bazaar/authentication.conf',
+      default => '/home/%(login_name)s/.bazaar/authentication.conf',
+    },
+    owner => '%(login_name)s',
+    group => '%(login_name)s',
+    mode => 640,
+    content => "[Launchpad]\\nhost = .launchpad.net\\nscheme = ssh\\nuser = %(member_name)s\\n",
+    ensure => 'present',
+    require => File['%(login_name)sbazaardir'],
+  }
+
+""" % dict(login_name=login_name, full_name=full_name, ssh_keys=ssh_keys,
+           member_name=member.name))
 
 
       print "User=%s created" % login_name

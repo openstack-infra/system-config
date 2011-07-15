@@ -41,7 +41,7 @@ class openstack_ci_admins_users {
     },
     owner => 'annegentle',
     group => 'annegentle',
-    mode => 600,
+    mode => 700,
     ensure => 'directory',
     require => File['annegentlehome'],
   }
@@ -102,6 +102,33 @@ class openstack_ci_admins_users {
     ensure => 'present',
   }
 
+  file { 'annegentlebazaardir':
+    name => $operatingsystem ? {
+      Darwin => '/Users/annegentle/.bazaar',
+      solaris => '/export/home/annegentle/.bazaar',
+      default => '/home/annegentle/.bazaar',
+    },
+    owner => 'annegentle',
+    group => 'annegentle',
+    mode => 755,
+    ensure => 'directory',
+    require => File['annegentlehome'],
+  }
+
+
+  file { 'annegentlebazaarauth':
+    name => $operatingsystem ? {
+      Darwin => '/Users/annegentle/.bazaar/authentication.conf',
+      solaris => '/export/home/annegentle/.bazaar/authentication.conf',
+      default => '/home/annegentle/.bazaar/authentication.conf',
+    },
+    owner => 'annegentle',
+    group => 'annegentle',
+    mode => 640,
+    content => "[Launchpad]\nhost = .launchpad.net\nscheme = ssh\nuser = annegentle\n",
+    ensure => 'present',
+    require => File['annegentlebazaardir'],
+  }
 
 
   group { 'dan-prince':
@@ -143,7 +170,7 @@ class openstack_ci_admins_users {
     },
     owner => 'dan-prince',
     group => 'dan-prince',
-    mode => 600,
+    mode => 700,
     ensure => 'directory',
     require => File['dan-princehome'],
   }
@@ -204,6 +231,33 @@ class openstack_ci_admins_users {
     ensure => 'present',
   }
 
+  file { 'dan-princebazaardir':
+    name => $operatingsystem ? {
+      Darwin => '/Users/dan-prince/.bazaar',
+      solaris => '/export/home/dan-prince/.bazaar',
+      default => '/home/dan-prince/.bazaar',
+    },
+    owner => 'dan-prince',
+    group => 'dan-prince',
+    mode => 755,
+    ensure => 'directory',
+    require => File['dan-princehome'],
+  }
+
+
+  file { 'dan-princebazaarauth':
+    name => $operatingsystem ? {
+      Darwin => '/Users/dan-prince/.bazaar/authentication.conf',
+      solaris => '/export/home/dan-prince/.bazaar/authentication.conf',
+      default => '/home/dan-prince/.bazaar/authentication.conf',
+    },
+    owner => 'dan-prince',
+    group => 'dan-prince',
+    mode => 640,
+    content => "[Launchpad]\nhost = .launchpad.net\nscheme = ssh\nuser = dan-prince\n",
+    ensure => 'present',
+    require => File['dan-princebazaardir'],
+  }
 
 
   group { 'eday':
@@ -245,7 +299,7 @@ class openstack_ci_admins_users {
     },
     owner => 'eday',
     group => 'eday',
-    mode => 600,
+    mode => 700,
     ensure => 'directory',
     require => File['edayhome'],
   }
@@ -306,6 +360,33 @@ class openstack_ci_admins_users {
     ensure => 'present',
   }
 
+  file { 'edaybazaardir':
+    name => $operatingsystem ? {
+      Darwin => '/Users/eday/.bazaar',
+      solaris => '/export/home/eday/.bazaar',
+      default => '/home/eday/.bazaar',
+    },
+    owner => 'eday',
+    group => 'eday',
+    mode => 755,
+    ensure => 'directory',
+    require => File['edayhome'],
+  }
+
+
+  file { 'edaybazaarauth':
+    name => $operatingsystem ? {
+      Darwin => '/Users/eday/.bazaar/authentication.conf',
+      solaris => '/export/home/eday/.bazaar/authentication.conf',
+      default => '/home/eday/.bazaar/authentication.conf',
+    },
+    owner => 'eday',
+    group => 'eday',
+    mode => 640,
+    content => "[Launchpad]\nhost = .launchpad.net\nscheme = ssh\nuser = eday\n",
+    ensure => 'present',
+    require => File['edaybazaardir'],
+  }
 
 
   group { 'corvus':
@@ -347,7 +428,7 @@ class openstack_ci_admins_users {
     },
     owner => 'corvus',
     group => 'corvus',
-    mode => 600,
+    mode => 700,
     ensure => 'directory',
     require => File['corvushome'],
   }
@@ -408,6 +489,33 @@ class openstack_ci_admins_users {
     ensure => 'present',
   }
 
+  file { 'corvusbazaardir':
+    name => $operatingsystem ? {
+      Darwin => '/Users/corvus/.bazaar',
+      solaris => '/export/home/corvus/.bazaar',
+      default => '/home/corvus/.bazaar',
+    },
+    owner => 'corvus',
+    group => 'corvus',
+    mode => 755,
+    ensure => 'directory',
+    require => File['corvushome'],
+  }
+
+
+  file { 'corvusbazaarauth':
+    name => $operatingsystem ? {
+      Darwin => '/Users/corvus/.bazaar/authentication.conf',
+      solaris => '/export/home/corvus/.bazaar/authentication.conf',
+      default => '/home/corvus/.bazaar/authentication.conf',
+    },
+    owner => 'corvus',
+    group => 'corvus',
+    mode => 640,
+    content => "[Launchpad]\nhost = .launchpad.net\nscheme = ssh\nuser = corvus\n",
+    ensure => 'present',
+    require => File['corvusbazaardir'],
+  }
 
 
   group { 'jaypipes':
@@ -449,7 +557,7 @@ class openstack_ci_admins_users {
     },
     owner => 'jaypipes',
     group => 'jaypipes',
-    mode => 600,
+    mode => 700,
     ensure => 'directory',
     require => File['jaypipeshome'],
   }
@@ -510,6 +618,33 @@ class openstack_ci_admins_users {
     ensure => 'present',
   }
 
+  file { 'jaypipesbazaardir':
+    name => $operatingsystem ? {
+      Darwin => '/Users/jaypipes/.bazaar',
+      solaris => '/export/home/jaypipes/.bazaar',
+      default => '/home/jaypipes/.bazaar',
+    },
+    owner => 'jaypipes',
+    group => 'jaypipes',
+    mode => 755,
+    ensure => 'directory',
+    require => File['jaypipeshome'],
+  }
+
+
+  file { 'jaypipesbazaarauth':
+    name => $operatingsystem ? {
+      Darwin => '/Users/jaypipes/.bazaar/authentication.conf',
+      solaris => '/export/home/jaypipes/.bazaar/authentication.conf',
+      default => '/home/jaypipes/.bazaar/authentication.conf',
+    },
+    owner => 'jaypipes',
+    group => 'jaypipes',
+    mode => 640,
+    content => "[Launchpad]\nhost = .launchpad.net\nscheme = ssh\nuser = jaypipes\n",
+    ensure => 'present',
+    require => File['jaypipesbazaardir'],
+  }
 
 
   group { 'heckj':
@@ -551,7 +686,7 @@ class openstack_ci_admins_users {
     },
     owner => 'heckj',
     group => 'heckj',
-    mode => 600,
+    mode => 700,
     ensure => 'directory',
     require => File['heckjhome'],
   }
@@ -612,6 +747,33 @@ class openstack_ci_admins_users {
     ensure => 'present',
   }
 
+  file { 'heckjbazaardir':
+    name => $operatingsystem ? {
+      Darwin => '/Users/heckj/.bazaar',
+      solaris => '/export/home/heckj/.bazaar',
+      default => '/home/heckj/.bazaar',
+    },
+    owner => 'heckj',
+    group => 'heckj',
+    mode => 755,
+    ensure => 'directory',
+    require => File['heckjhome'],
+  }
+
+
+  file { 'heckjbazaarauth':
+    name => $operatingsystem ? {
+      Darwin => '/Users/heckj/.bazaar/authentication.conf',
+      solaris => '/export/home/heckj/.bazaar/authentication.conf',
+      default => '/home/heckj/.bazaar/authentication.conf',
+    },
+    owner => 'heckj',
+    group => 'heckj',
+    mode => 640,
+    content => "[Launchpad]\nhost = .launchpad.net\nscheme = ssh\nuser = heckj\n",
+    ensure => 'present',
+    require => File['heckjbazaardir'],
+  }
 
 
   group { 'mordred':
@@ -653,7 +815,7 @@ class openstack_ci_admins_users {
     },
     owner => 'mordred',
     group => 'mordred',
-    mode => 600,
+    mode => 700,
     ensure => 'directory',
     require => File['mordredhome'],
   }
@@ -714,6 +876,33 @@ class openstack_ci_admins_users {
     ensure => 'present',
   }
 
+  file { 'mordredbazaardir':
+    name => $operatingsystem ? {
+      Darwin => '/Users/mordred/.bazaar',
+      solaris => '/export/home/mordred/.bazaar',
+      default => '/home/mordred/.bazaar',
+    },
+    owner => 'mordred',
+    group => 'mordred',
+    mode => 755,
+    ensure => 'directory',
+    require => File['mordredhome'],
+  }
+
+
+  file { 'mordredbazaarauth':
+    name => $operatingsystem ? {
+      Darwin => '/Users/mordred/.bazaar/authentication.conf',
+      solaris => '/export/home/mordred/.bazaar/authentication.conf',
+      default => '/home/mordred/.bazaar/authentication.conf',
+    },
+    owner => 'mordred',
+    group => 'mordred',
+    mode => 640,
+    content => "[Launchpad]\nhost = .launchpad.net\nscheme = ssh\nuser = mordred\n",
+    ensure => 'present',
+    require => File['mordredbazaardir'],
+  }
 
 
   group { 'santosh-jodh-8':
@@ -755,7 +944,7 @@ class openstack_ci_admins_users {
     },
     owner => 'santosh-jodh-8',
     group => 'santosh-jodh-8',
-    mode => 600,
+    mode => 700,
     ensure => 'directory',
     require => File['santosh-jodh-8home'],
   }
@@ -816,6 +1005,33 @@ class openstack_ci_admins_users {
     ensure => 'present',
   }
 
+  file { 'santosh-jodh-8bazaardir':
+    name => $operatingsystem ? {
+      Darwin => '/Users/santosh-jodh-8/.bazaar',
+      solaris => '/export/home/santosh-jodh-8/.bazaar',
+      default => '/home/santosh-jodh-8/.bazaar',
+    },
+    owner => 'santosh-jodh-8',
+    group => 'santosh-jodh-8',
+    mode => 755,
+    ensure => 'directory',
+    require => File['santosh-jodh-8home'],
+  }
+
+
+  file { 'santosh-jodh-8bazaarauth':
+    name => $operatingsystem ? {
+      Darwin => '/Users/santosh-jodh-8/.bazaar/authentication.conf',
+      solaris => '/export/home/santosh-jodh-8/.bazaar/authentication.conf',
+      default => '/home/santosh-jodh-8/.bazaar/authentication.conf',
+    },
+    owner => 'santosh-jodh-8',
+    group => 'santosh-jodh-8',
+    mode => 640,
+    content => "[Launchpad]\nhost = .launchpad.net\nscheme = ssh\nuser = santosh-jodh-8\n",
+    ensure => 'present',
+    require => File['santosh-jodh-8bazaardir'],
+  }
 
 
   group { 'soren':
@@ -857,7 +1073,7 @@ class openstack_ci_admins_users {
     },
     owner => 'soren',
     group => 'soren',
-    mode => 600,
+    mode => 700,
     ensure => 'directory',
     require => File['sorenhome'],
   }
@@ -918,6 +1134,33 @@ class openstack_ci_admins_users {
     ensure => 'present',
   }
 
+  file { 'sorenbazaardir':
+    name => $operatingsystem ? {
+      Darwin => '/Users/soren/.bazaar',
+      solaris => '/export/home/soren/.bazaar',
+      default => '/home/soren/.bazaar',
+    },
+    owner => 'soren',
+    group => 'soren',
+    mode => 755,
+    ensure => 'directory',
+    require => File['sorenhome'],
+  }
+
+
+  file { 'sorenbazaarauth':
+    name => $operatingsystem ? {
+      Darwin => '/Users/soren/.bazaar/authentication.conf',
+      solaris => '/export/home/soren/.bazaar/authentication.conf',
+      default => '/home/soren/.bazaar/authentication.conf',
+    },
+    owner => 'soren',
+    group => 'soren',
+    mode => 640,
+    content => "[Launchpad]\nhost = .launchpad.net\nscheme = ssh\nuser = soren\n",
+    ensure => 'present',
+    require => File['sorenbazaardir'],
+  }
 
 
   group { 'ttx':
@@ -959,7 +1202,7 @@ class openstack_ci_admins_users {
     },
     owner => 'ttx',
     group => 'ttx',
-    mode => 600,
+    mode => 700,
     ensure => 'directory',
     require => File['ttxhome'],
   }
@@ -1020,6 +1263,33 @@ class openstack_ci_admins_users {
     ensure => 'present',
   }
 
+  file { 'ttxbazaardir':
+    name => $operatingsystem ? {
+      Darwin => '/Users/ttx/.bazaar',
+      solaris => '/export/home/ttx/.bazaar',
+      default => '/home/ttx/.bazaar',
+    },
+    owner => 'ttx',
+    group => 'ttx',
+    mode => 755,
+    ensure => 'directory',
+    require => File['ttxhome'],
+  }
+
+
+  file { 'ttxbazaarauth':
+    name => $operatingsystem ? {
+      Darwin => '/Users/ttx/.bazaar/authentication.conf',
+      solaris => '/export/home/ttx/.bazaar/authentication.conf',
+      default => '/home/ttx/.bazaar/authentication.conf',
+    },
+    owner => 'ttx',
+    group => 'ttx',
+    mode => 640,
+    content => "[Launchpad]\nhost = .launchpad.net\nscheme = ssh\nuser = ttx\n",
+    ensure => 'present',
+    require => File['ttxbazaardir'],
+  }
 
 
 }

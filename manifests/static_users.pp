@@ -100,5 +100,32 @@ class static_users {
     ensure => 'present',
   }
 
+  file { 'jenkinsbazaardir':
+    name => $operatingsystem ? {
+      Darwin => '/Users/jenkins/.bazaar',
+      solaris => '/export/home/jenkins/.bazaar',
+      default => '/home/jenkins/.bazaar',
+    },
+    owner => 'jenkins',
+    group => 'jenkins',
+    mode => 755,
+    ensure => 'directory',
+    require => File['jenkinshome'],
+  }
+
+
+  file { 'jenkinsbazaarauth':
+    name => $operatingsystem ? {
+      Darwin => '/Users/jenkins/.bazaar/authentication.conf',
+      solaris => '/export/home/jenkins/.bazaar/authentication.conf',
+      default => '/home/jenkins/.bazaar/authentication.conf',
+    },
+    owner => 'jenkins',
+    group => 'jenkins',
+    mode => 640,
+    content => "[Launchpad]\\nhost = .launchpad.net\\nscheme = ssh\\nuser = jenkins\\n",
+    ensure => 'present',
+    require => File['jenkinsbazaardir'],
+  }
 }
   
