@@ -1,4 +1,4 @@
-class static_users {
+class jenkinsuser {
 
   group { 'jenkins':
     ensure => 'present'

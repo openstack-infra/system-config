@@ -1,8 +1,10 @@
 class jenkins_slave {
 
+    jenkins_user { "jenkins" }
+
     slavecirepo { "openstack-ci":
       ensure => present,
-      require => Package[git]
+      require => [ Package[git], Jenkinsuser[jenkins] ]
     }
 
     package { "python-software-properties":
