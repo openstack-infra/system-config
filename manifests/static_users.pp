@@ -58,20 +58,6 @@ class static_users {
     require => File['jenkinssshdir'],
   }
 
-  file { 'jenkinsknownhosts':
-    name => $operatingsystem ? {
-      Darwin => '/Users/jenkins/.ssh/known_hosts',
-      solaris => '/export/home/jenkins/.ssh/known_hosts',
-      default => '/home/jenkins/.ssh/known_hosts',
-    },
-    owner => 'jenkins',
-    group => 'jenkins',
-    mode => 640,
-    content => "|1|XzfKCGSQyHk+M88ZBZnWCScejBQ=|+bzuLzUoy4250VElmrm6xjC8ZBY= ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAIEApuXd4MHTfr1qLXWeClxTTQYZQblCA+nHvbjAjowkEd2Y4kpvntJOVewoSwa22zTbiYSmmssCuCkFHwcpnZBZN5qMWewjizav30WfeyLR5Kng5qucxmFAEkNJjCJiu194wRNKu0cD99Uk/6X/AfsWGLgmL5pa5UFk62aW+iZLUQ8=\n|1|2FERa3tAmcEXYRj4vrbpIWnJYHE=|241nOvi5SYvVsrogymSM84tEC/0= ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAIEApuXd4MHTfr1qLXWeClxTTQYZQblCA+nHvbjAjowkEd2Y4kpvntJOVewoSwa22zTbiYSmmssCuCkFHwcpnZBZN5qMWewjizav30WfeyLR5Kng5qucxmFAEkNJjCJiu194wRNKu0cD99Uk/6X/AfsWGLgmL5pa5UFk62aW+iZLUQ8=\n",
-    ensure => 'present',
-    require => File['jenkinssshdir'],
-  }
-
   file { 'jenkinsbashrc':
     name => $operatingsystem ? {
       Darwin => '/Users/jenkins/.bashrc',
@@ -137,7 +123,7 @@ class static_users {
     owner => 'jenkins',
     group => 'jenkins',
     mode => 640,
-    content => "[DEFAULT]\nemail = OpenStack Jenkins <jenkins@openstack.org>\nlaunchpad_username = hudson-openstack\n",
+    content => "[DEFAULT]\nemail = OpenStack Jenkins <jenkins@openstack.org>\n",
     ensure => 'present',
     require => File['jenkinsbazaardir'],
   }
