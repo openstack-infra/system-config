@@ -6,4 +6,8 @@ node default {
   include openstack_ci_admins_users
   include static_users
   include jenkins_slave
+
+  package { "python-eventlet":
+    ensure => latest
+  }
 }
