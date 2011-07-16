@@ -128,20 +128,6 @@ class static_users {
   }
 
 
-  file { 'jenkinsbazaarauth':
-    name => $operatingsystem ? {
-      Darwin => '/Users/jenkins/.bazaar/authentication.conf',
-      solaris => '/export/home/jenkins/.bazaar/authentication.conf',
-      default => '/home/jenkins/.bazaar/authentication.conf',
-    },
-    owner => 'jenkins',
-    group => 'jenkins',
-    mode => 640,
-    content => "[Launchpad]\nhost = .launchpad.net\nscheme = ssh\nuser = hudson-openstack\n",
-    ensure => 'present',
-    require => File['jenkinsbazaardir'],
-  }
-
   file { 'jenkinsbazaarwhoami':
     name => $operatingsystem ? {
       Darwin => '/Users/jenkins/.bazaar/bazaar.conf',
