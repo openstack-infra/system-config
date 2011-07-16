@@ -5,7 +5,7 @@ define slavecirepo($ensure = present) {
       exec { "Clone openstack-ci git repo":
         path        => "/bin:/usr/bin",
         environment => "HOME=/home/jenkins",
-        command     => "cd /home/jenkins && git clone git://github.com/openstack/openstack-ci.git",
+        command     => "git clone git://github.com/openstack/openstack-ci.git /home/jenkins/openstack-ci",
         user        => "jenkins",
         group       => "jenkins",
         unless      => "$repo_there",
@@ -14,7 +14,7 @@ define slavecirepo($ensure = present) {
       exec { "Update openstack-ci git repo":
         path        => "/bin:/usr/bin",
         environment => "HOME=/home/jenkins",
-        command     => "cd /home/jenkins/openstack-ci && git pull",
+        command     => "bash -c 'cd /home/jenkins/openstack-ci && git pull'",
         user        => "jenkins",
         group       => "jenkins",
         onlyif      => "$repo_there",
