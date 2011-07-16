@@ -1,5 +1,10 @@
 class jenkins_slave {
 
+    slavecirepo { "openstack-ci":
+      ensure => present,
+      require => Package[git]
+    }
+
     package { "python-software-properties":
         ensure => latest
           }
