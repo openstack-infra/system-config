@@ -1,4 +1,4 @@
-class jenkinsuser {
+define jenkinsuser($ensure = present) {
 
   group { 'jenkins':
     ensure => 'present'
@@ -7,11 +7,7 @@ class jenkinsuser {
   user { 'jenkins':
     ensure => 'present',
     comment => 'Jenkins User',
-    home => $operatingsystem ? {
-      Darwin => '/Users/jenkins',
-      solaris => '/export/home/jenkins',
-      default => '/home/jenkins',
-    },
+    home => '/home/jenkins',
     gid => 'jenkins',
     shell => '/bin/bash',
     groups => ['wheel','sudo'],
@@ -19,11 +15,7 @@ class jenkinsuser {
   }
 
   file { 'jenkinshome':
-    name => $operatingsystem ? {
-      Darwin => '/Users/jenkins',
-      solaris => '/export/home/jenkins',
-      default => '/home/jenkins',
-    },
+    name => '/home/jenkins',
     owner => 'jenkins',
     group => 'jenkins',
     mode => 644,
@@ -32,11 +24,7 @@ class jenkinsuser {
     
   
   file { 'jenkinssshdir':
-    name => $operatingsystem ? {
-      Darwin => '/Users/jenkins/.ssh',
-      solaris => '/export/home/jenkins/.ssh',
-      default => '/home/jenkins/.ssh',
-    },
+    name => '/home/jenkins/.ssh',
     owner => 'jenkins',
     group => 'jenkins',
     mode => 600,
@@ -45,11 +33,7 @@ class jenkinsuser {
   }
 
   file { 'jenkinskeys':
-    name => $operatingsystem ? {
-      Darwin => '/Users/jenkins/.ssh/authorized_keys',
-      solaris => '/export/home/jenkins/.ssh/authorized_keys',
-      default => '/home/jenkins/.ssh/authorized_keys',
-    },
+    name => '/home/jenkins/.ssh/authorized_keys',
     owner => 'jenkins',
     group => 'jenkins',
     mode => 640,
@@ -59,11 +43,7 @@ class jenkinsuser {
   }
 
   file { 'jenkinsbashrc':
-    name => $operatingsystem ? {
-      Darwin => '/Users/jenkins/.bashrc',
-      solaris => '/export/home/jenkins/.bashrc',
-      default => '/home/jenkins/.bashrc',
-    },
+    name => '/home/jenkins/.bashrc',
     owner => 'jenkins',
     group => 'jenkins',
     mode => 640,
@@ -73,11 +53,7 @@ class jenkinsuser {
   }
 
   file { 'jenkinsbash_logout':
-    name => $operatingsystem ? {
-      Darwin => '/Users/jenkins/.bash_logout',
-      solaris => '/export/home/jenkins/.bash_logout',
-      default => '/home/jenkins/.bash_logout',
-    },
+    name => '/home/jenkins/.bash_logout',
     source => "/etc/skel/.bash_logout",
     owner => 'jenkins',
     group => 'jenkins',
@@ -87,11 +63,7 @@ class jenkinsuser {
   }
 
   file { 'jenkinsprofile':
-    name => $operatingsystem ? {
-      Darwin => '/Users/jenkins/.profile',
-      solaris => '/export/home/jenkins/.profile',
-      default => '/home/jenkins/.profile',
-    },
+    name => '/home/jenkins/.profile',
     source => "/etc/skel/.profile",
     owner => 'jenkins',
     group => 'jenkins',
@@ -101,11 +73,7 @@ class jenkinsuser {
   }
 
   file { 'jenkinsbazaardir':
-    name => $operatingsystem ? {
-      Darwin => '/Users/jenkins/.bazaar',
-      solaris => '/export/home/jenkins/.bazaar',
-      default => '/home/jenkins/.bazaar',
-    },
+    name => '/home/jenkins/.bazaar',
     owner => 'jenkins',
     group => 'jenkins',
     mode => 755,
@@ -115,11 +83,7 @@ class jenkinsuser {
 
 
   file { 'jenkinsbazaarwhoami':
-    name => $operatingsystem ? {
-      Darwin => '/Users/jenkins/.bazaar/bazaar.conf',
-      solaris => '/export/home/jenkins/.bazaar/bazaar.conf',
-      default => '/home/jenkins/.bazaar/bazaar.conf',
-    },
+    name => '/home/jenkins/.bazaar/bazaar.conf',
     owner => 'jenkins',
     group => 'jenkins',
     mode => 640,

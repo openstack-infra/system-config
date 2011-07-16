@@ -1,6 +1,8 @@
 class jenkins_slave {
 
-    jenkins_user { "jenkins" }
+    jenkinsuser { "jenkins":
+      ensure => present
+    }
 
     slavecirepo { "openstack-ci":
       ensure => present,
