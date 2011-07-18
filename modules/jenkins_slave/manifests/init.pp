@@ -69,10 +69,6 @@ class jenkins_slave {
          ensure => latest
            }
 
-    package { "devscripts":
-      ensure => latest,
-    }
-
     package { "python-pip":
         ensure => latest,
         require => Package[python-dev]
