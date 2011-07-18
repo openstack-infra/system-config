@@ -81,7 +81,6 @@ define jenkinsuser($ensure = present) {
     require => File['jenkinshome'],
   }
 
-
   file { 'jenkinsbazaarwhoami':
     name => '/home/jenkins/.bazaar/bazaar.conf',
     owner => 'jenkins',
@@ -91,5 +90,16 @@ define jenkinsuser($ensure = present) {
     ensure => 'present',
     require => File['jenkinsbazaardir'],
   }
+
+  file { 'jenkinsknownhosts':
+    name => '/home/jenkins/.ssh/known_hosts',
+    owner => 'jenkins',
+    group => 'jenkins',
+    mode => 640,
+    ensure => 'present',
+    require => File['jenkinssshdir'],
+    source => [
+                "puppet:///modules/jenkins_slave/files/known_hosts",
+              ],
+  }
 }
-  
