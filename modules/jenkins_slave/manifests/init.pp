@@ -15,6 +15,12 @@ class jenkins_slave {
       command => "cd /root/openstack-ci-puppet && /usr/bin/git pull && /var/lib/gems/1.8/bin/puppet apply -l /tmp/manifest.log --modulepath=/root/openstack-ci-puppet/modules manifests/this.pp"
     }
 
+    cron { "updateci":
+      user => jenkins,
+      minute => "*/15",
+      command => "cd /home/jenkins/openstack-ci && /usr/bin/git pull"
+    }
+
     package { "python-software-properties":
         ensure => latest
           }
