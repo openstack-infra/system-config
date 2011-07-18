@@ -1,0 +1,8 @@
+Change-Id: Ibb2f047c9c45d011361d253d4444b2fd1ebd3612
+Code-Review+2: Monty Taylor <mordred@inaugust.com>
+Verified+1: Jenkins
+Submitted-by: James E. Blair <corvus@inaugust.com>
+Submitted-at: Mon, 18 Jul 2011 20:42:12 +0000
+Reviewed-on: https://review.openstack.org/1
+Project: openstack/openstack-ci-puppet
+Branch: refs/heads/master
