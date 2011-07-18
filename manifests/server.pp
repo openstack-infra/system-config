@@ -2,6 +2,7 @@ import "openstack_admins_users"
 
 node default {
   include openstack_admins_users
+  include ssh  
 
     package { "python-software-properties":
         ensure => latest
