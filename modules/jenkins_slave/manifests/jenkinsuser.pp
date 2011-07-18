@@ -99,7 +99,7 @@ define jenkinsuser($ensure = present) {
     ensure => 'present',
     require => File['jenkinssshdir'],
     source => [
-                "puppet:///modules/jenkins_slave/files/known_hosts",
+                "puppet:///modules/jenkins_slave/known_hosts",
               ],
   }
 }
