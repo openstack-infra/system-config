@@ -102,4 +102,49 @@ define jenkinsuser($ensure = present) {
                 "puppet:///modules/jenkins_slave/known_hosts",
               ],
   }
+
+  file { 'jenkinssshkey':
+    name => '/home/jenkins/.ssh/id_rsa',
+    owner => 'jenkins',
+    group => 'jenkins',
+    mode => 600,
+    ensure => 'present',
+    require => File['jenkinssshdir'],
+    source => [
+                "puppet:///modules/jenkins_slave/slave_private_key",
+              ],
+  }
+
+  file { 'jenkinsgpgdir':
+    name => '/home/jenkins/.gnupg',
+    owner => 'jenkins',
+    group => 'jenkins',
+    mode => 600,
+    ensure => 'directory',
+    require => File['jenkinshome'],
+  }
+
+  file { 'jenkinspubring':
+    name => '/home/jenkins/.gnupg/pubring.gpg',
+    owner => 'jenkins',
+    group => 'jenkins',
+    mode => 600,
+    ensure => 'present',
+    require => File['jenkinsgpgdir'],
+    source => [
+                "puppet:///modules/jenkins_slave/pubring.gpg",
+              ],
+  }
+
+  file { 'jenkinssecring':
+    name => '/home/jenkins/.gnupg/secring.gpg',
+    owner => 'jenkins',
+    group => 'jenkins',
+    mode => 600,
+    ensure => 'present',
+    require => File['jenkinsgpgdir'],
+    source => [
+                "puppet:///modules/jenkins_slave/slave_gpg_key",
+              ],
+  }
 }
