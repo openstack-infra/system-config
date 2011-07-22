@@ -21,6 +21,28 @@ class jenkins_slave {
       command => "cd /home/jenkins/openstack-ci && /usr/bin/git pull"
     }
 
+    file { 'aptsources':
+      name => '/etc/apt/sources.list',
+      owner => 'root',
+      group => 'root',
+      mode => 644,
+      ensure => 'present',
+      source => [
+         "puppet:///modules/jenkins_slave/sources.list",
+       ],
+    }
+
+    file { 'profilerubygems':
+      name => '/etc/profile.d/rubygems.sh',
+      owner => 'root',
+      group => 'root',
+      mode => 644,
+      ensure => 'present',
+      source => [
+         "puppet:///modules/jenkins_slave/rubygems.sh",
+       ],
+    }
+
     package { "python-software-properties":
         ensure => latest
           }
