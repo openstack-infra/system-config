@@ -9,7 +9,8 @@ node default {
     ensure => present
   }
   apt::builddep { "swift":
-    ensure => present
+    ensure => present,
+    require => Apt::Ppa["ppa:swift-core/trunk"]
   }
 
 }

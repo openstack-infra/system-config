@@ -9,7 +9,8 @@ node default {
     ensure => present
   }
   apt::builddep { "nova":
-    ensure => present
+    ensure => present,
+    require => Apt::Ppa["ppa:nova-core/trunk"]
   }
 
 }
