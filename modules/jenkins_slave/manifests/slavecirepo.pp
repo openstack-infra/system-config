@@ -3,7 +3,7 @@ define slavecirepo($ensure = present) {
   case $ensure {
     present: {
       exec { "Clone openstack-ci git repo":
-        path        => "/bin:/usr/bin",
+        path        => "/usr/sbin:/usr/bin:/sbin:/bin",
         environment => "HOME=/home/jenkins",
         command     => "sudo -H -u jenkins -i git clone git://github.com/openstack/openstack-ci.git /home/jenkins/openstack-ci",
         user        => "root",
@@ -12,7 +12,7 @@ define slavecirepo($ensure = present) {
         logoutput   => on_failure,
       }
       exec { "Update openstack-ci git repo":
-        path        => "/bin:/usr/bin",
+        path        => "/usr/sbin:/usr/bin:/sbin:/bin",
         environment => "HOME=/home/jenkins",
         command     => "sudo -H -u jenkins -i bash -c 'cd /home/jenkins/openstack-ci && git pull'",
         user        => "root",
@@ -23,7 +23,7 @@ define slavecirepo($ensure = present) {
     }
     absent:  {
       exec { "Remove OpenStack git repo":
-        path    => "/bin:/usr/bin",
+        path    => "/usr/sbin:/usr/bin:/sbin:/bin",
         environment => "HOME=/root",
         command => "rm -rf /home/jenkins/openstack-ci",
         user    => "root",
