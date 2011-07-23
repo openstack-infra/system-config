@@ -9,10 +9,15 @@ class jenkins_slave {
       require => [ Package[git], Jenkinsuser[jenkins] ]
     }
 
+    apt::ppa { "ppa:tarmac/ppa":
+      ensure => present,
+    }
+
     cron { "updatepuppet":
       user => root,
       minute => "*/15",
-      command => "cd /root/openstack-ci-puppet && /usr/bin/git pull && /var/lib/gems/1.8/bin/puppet apply -l /tmp/manifest.log --modulepath=/root/openstack-ci-puppet/modules manifests/this.pp"
+      command => "cd /root/openstack-ci-puppet && /usr/bin/git pull && /var/lib/gems/1.8/bin/puppet apply -l /tmp/manifest.log --modulepath=/root/openstack-ci-puppet/modules manifests/this.pp",
+      require => [ Jenkinsuser[jenkins] ]
     }
 
     cron { "updateci":
@@ -90,6 +95,11 @@ class jenkins_slave {
     package { "python-dev":
          ensure => latest
            }
+
+    package { "tarmac":
+      ensure => latest,
+      require => Apt::Ppa["ppa:tarmac/ppa"]
+    }
 
     package { "python-pip":
         ensure => latest,

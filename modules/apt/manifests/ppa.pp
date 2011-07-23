@@ -1,10 +1,10 @@
-define ppa($ensure = present) {
+define apt::ppa($ensure = present) {
   case $ensure {
     present: {
       exec { "Add $name PPA":
         path        => "/bin:/usr/bin",
         environment => "HOME=/root",
-        command     => "add-apt-repository $name",
+        command     => "add-apt-repository $name ; apt-get update",
         user        => "root",
         group       => "root",
         logoutput   => on_failure,
@@ -14,7 +14,7 @@ define ppa($ensure = present) {
       exec { "Add $name PPA":
         path        => "/bin:/usr/bin",
         environment => "HOME=/root",
-        command     => "add-apt-repository --remove $name",
+        command     => "add-apt-repository --remove $name ; apt-get update",
         user        => "root",
         group       => "root",
         logoutput   => on_failure,
