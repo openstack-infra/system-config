@@ -23,7 +23,7 @@ class jenkins_slave {
     cron { "updateci":
       user => jenkins,
       minute => "*/15",
-      command => "cd /home/jenkins/openstack-ci && /usr/bin/git pull"
+      command => "cd /home/jenkins/openstack-ci && /usr/bin/git pull origin master"
     }
 
     file { 'aptsources':
