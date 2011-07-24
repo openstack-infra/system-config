@@ -5,6 +5,15 @@ node default {
   include openstack_ci_admins_users
   include jenkins_slave
 
+  apt::ppa { "ppa:glance-core/trunk":
+    ensure => present
+  }
+
+  apt::builddep { "glance":
+    ensure => present,
+    require => Apt::Ppa["ppa:glance-core/trunk"]
+  }
+
 package { "python-argparse":
   ensure => latest
 }
