@@ -56,7 +56,7 @@ class jenkins_slave {
         ensure => latest
           }
     
-    package { "puppet":
+    package { "devscripts":
         ensure => latest
           }
     
