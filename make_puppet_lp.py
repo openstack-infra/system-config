@@ -1,4 +1,5 @@
-import sys, subprocess
+import sys
+import subprocess
 from launchpadlib.launchpad import Launchpad
 from launchpadlib.uris import LPNET_SERVICE_ROOT
 
