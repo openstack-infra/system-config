@@ -60,6 +60,10 @@ class jenkins_slave {
         ensure => latest
           }
     
+    package { "puppet":
+        ensure => latest
+          }
+    
     package { "bzr":
         ensure => latest
           }
