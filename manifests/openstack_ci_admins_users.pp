@@ -1,7 +1,7 @@
 
 class openstack_ci_admins_users {
-  include sudoers
-  
+    include sudoers
+    
   group { 'annegentle':
     ensure => 'present'
   }
@@ -31,8 +31,8 @@ class openstack_ci_admins_users {
     mode => 644,
     ensure => 'directory',
   }
-    
-  
+
+
   file { 'annegentlesshdir':
     name => $operatingsystem ? {
       Darwin => '/Users/annegentle/.ssh',
@@ -160,8 +160,8 @@ class openstack_ci_admins_users {
     mode => 644,
     ensure => 'directory',
   }
-    
-  
+
+
   file { 'dan-princesshdir':
     name => $operatingsystem ? {
       Darwin => '/Users/dan-prince/.ssh',
@@ -289,8 +289,8 @@ class openstack_ci_admins_users {
     mode => 644,
     ensure => 'directory',
   }
-    
-  
+
+
   file { 'edaysshdir':
     name => $operatingsystem ? {
       Darwin => '/Users/eday/.ssh',
@@ -418,8 +418,8 @@ class openstack_ci_admins_users {
     mode => 644,
     ensure => 'directory',
   }
-    
-  
+
+
   file { 'corvussshdir':
     name => $operatingsystem ? {
       Darwin => '/Users/corvus/.ssh',
@@ -547,8 +547,8 @@ class openstack_ci_admins_users {
     mode => 644,
     ensure => 'directory',
   }
-    
-  
+
+
   file { 'jaypipessshdir':
     name => $operatingsystem ? {
       Darwin => '/Users/jaypipes/.ssh',
@@ -676,8 +676,8 @@ class openstack_ci_admins_users {
     mode => 644,
     ensure => 'directory',
   }
-    
-  
+
+
   file { 'heckjsshdir':
     name => $operatingsystem ? {
       Darwin => '/Users/heckj/.ssh',
@@ -805,8 +805,8 @@ class openstack_ci_admins_users {
     mode => 644,
     ensure => 'directory',
   }
-    
-  
+
+
   file { 'mordredsshdir':
     name => $operatingsystem ? {
       Darwin => '/Users/mordred/.ssh',
@@ -934,8 +934,8 @@ class openstack_ci_admins_users {
     mode => 644,
     ensure => 'directory',
   }
-    
-  
+
+
   file { 'santosh-jodh-8sshdir':
     name => $operatingsystem ? {
       Darwin => '/Users/santosh-jodh-8/.ssh',
@@ -1063,8 +1063,8 @@ class openstack_ci_admins_users {
     mode => 644,
     ensure => 'directory',
   }
-    
-  
+
+
   file { 'sorensshdir':
     name => $operatingsystem ? {
       Darwin => '/Users/soren/.ssh',
@@ -1192,8 +1192,8 @@ class openstack_ci_admins_users {
     mode => 644,
     ensure => 'directory',
   }
-    
-  
+
+
   file { 'ttxsshdir':
     name => $operatingsystem ? {
       Darwin => '/Users/ttx/.ssh',

@@ -1,7 +1,7 @@
 
 class openstack_admins_users {
-  include sudoers
-  
+    include sudoers
+    
   group { 'corvus':
     ensure => 'present'
   }
@@ -31,8 +31,8 @@ class openstack_admins_users {
     mode => 644,
     ensure => 'directory',
   }
-    
-  
+
+
   file { 'corvussshdir':
     name => $operatingsystem ? {
       Darwin => '/Users/corvus/.ssh',
@@ -160,8 +160,8 @@ class openstack_admins_users {
     mode => 644,
     ensure => 'directory',
   }
-    
-  
+
+
   file { 'jaypipessshdir':
     name => $operatingsystem ? {
       Darwin => '/Users/jaypipes/.ssh',
@@ -289,8 +289,8 @@ class openstack_admins_users {
     mode => 644,
     ensure => 'directory',
   }
-    
-  
+
+
   file { 'john-purriersshdir':
     name => $operatingsystem ? {
       Darwin => '/Users/john-purrier/.ssh',
@@ -418,8 +418,8 @@ class openstack_admins_users {
     mode => 644,
     ensure => 'directory',
   }
-    
-  
+
+
   file { 'mordredsshdir':
     name => $operatingsystem ? {
       Darwin => '/Users/mordred/.ssh',
@@ -547,8 +547,8 @@ class openstack_admins_users {
     mode => 644,
     ensure => 'directory',
   }
-    
-  
+
+
   file { 'dendrobatessshdir':
     name => $operatingsystem ? {
       Darwin => '/Users/dendrobates/.ssh',
@@ -676,8 +676,8 @@ class openstack_admins_users {
     mode => 644,
     ensure => 'directory',
   }
-    
-  
+
+
   file { 'sorensshdir':
     name => $operatingsystem ? {
       Darwin => '/Users/soren/.ssh',
@@ -805,8 +805,8 @@ class openstack_admins_users {
     mode => 644,
     ensure => 'directory',
   }
-    
-  
+
+
   file { 'ttxsshdir':
     name => $operatingsystem ? {
       Darwin => '/Users/ttx/.ssh',
@@ -934,8 +934,8 @@ class openstack_admins_users {
     mode => 644,
     ensure => 'directory',
   }
-    
-  
+
+
   file { 'wreesesshdir':
     name => $operatingsystem ? {
       Darwin => '/Users/wreese/.ssh',

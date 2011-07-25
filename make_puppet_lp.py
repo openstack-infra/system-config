@@ -1,8 +1,9 @@
-import sys, subprocess
+import sys
+import subprocess
 from launchpadlib.launchpad import Launchpad
 from launchpadlib.uris import LPNET_SERVICE_ROOT
 
-cachedir="~/.launchpadlib/cache"
+cachedir = "~/.launchpadlib/cache"
 launchpad = Launchpad.login_with('Sync Users', LPNET_SERVICE_ROOT, cachedir)
 
 
@@ -12,13 +13,13 @@ def get_type(in_type):
     else:
         return "ssh-dsa"
 
-for team_todo in ('openstack-ci-admins','openstack-admins'):
-    team_underscores = team_todo.replace('-','_')
+for team_todo in ('openstack-ci-admins', 'openstack-admins'):
+    team_underscores = team_todo.replace('-', '_')
 
     team = launchpad.people[team_todo]
     details = [detail for detail in team.members_details]
 
-    users=[]
+    users = []
 
     with open("manifests/%s_users.pp" % team_underscores, "w") as user_pp:
         user_pp.write("""
@@ -29,15 +30,20 @@ class %s_users {
             sudo = True
             member = detail.member
             status = detail.status
-            if (status == "Approved" or status == "Administrator") and member.is_valid:
-                full_name = member.display_name.replace("'","\\'")
+            if (status == "Approved" or status == "Administrator") \
+                and member.is_valid:
+                full_name = member.display_name.replace("'", "\\'")
                 login_name = member.name
-                ssh_keys = "\\n".join(["%s %s %s" % (get_type(key.keytype), key.keytext, key.comment) for key in member.sshkeys])
-                ssh_keys = ssh_keys.replace("\n","\\n")
+                ssh_keys = "\\n".join(["%s %s %s" % (get_type(key.keytype),
+                    key.keytext, key.comment) for key in member.sshkeys])
+                ssh_keys = ssh_keys.replace("\n", "\\n")
 
                 for nick in member.irc_nicknames:
                     if nick.network == 'ci.openstack.org':
                         login_name = nick.nickname
+
+                auth_content = "[Launchpad]\\nhost = .launchpad.net\\n" + \
+                    "scheme = ssh\\nuser = %s\\n" % member.name
 
                 user_pp.write("""
   group { '%(login_name)s':
@@ -69,8 +75,8 @@ class %s_users {
     mode => 644,
     ensure => 'directory',
   }
-    
-  
+
+
   file { '%(login_name)ssshdir':
     name => $operatingsystem ? {
       Darwin => '/Users/%(login_name)s/.ssh',
@@ -163,14 +169,13 @@ class %s_users {
     owner => '%(login_name)s',
     group => '%(login_name)s',
     mode => 640,
-    content => "[Launchpad]\\nhost = .launchpad.net\\nscheme = ssh\\nuser = %(member_name)s\\n",
+    content => "%(auth_content)s",
     ensure => 'present',
     require => File['%(login_name)sbazaardir'],
   }
 
 """ % dict(login_name=login_name, full_name=full_name, ssh_keys=ssh_keys,
-           member_name=member.name))
-
+           member_name=member.name, auth_content=auth_content))
 
             print "User=%s created" % login_name
         user_pp.write("""
