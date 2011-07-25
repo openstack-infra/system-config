@@ -7,39 +7,39 @@ launchpad = Launchpad.login_with('Sync Users', LPNET_SERVICE_ROOT, cachedir)
 
 
 def get_type(in_type):
-  if in_type == "RSA":
-    return "ssh-rsa"
-  else:
-    return "ssh-dsa"
+    if in_type == "RSA":
+        return "ssh-rsa"
+    else:
+        return "ssh-dsa"
 
 for team_todo in ('openstack-ci-admins','openstack-admins'):
-  team_underscores = team_todo.replace('-','_')
+    team_underscores = team_todo.replace('-','_')
 
-  team = launchpad.people[team_todo]
-  details = [detail for detail in team.members_details]
+    team = launchpad.people[team_todo]
+    details = [detail for detail in team.members_details]
 
-  users=[]
+    users=[]
 
-  with open("manifests/%s_users.pp" % team_underscores, "w") as user_pp:
-    user_pp.write("""
-class %s_users {
-  include sudoers
-  """ % team_underscores)
-    for detail in details:
-      sudo = True
-      member = detail.member
-      status = detail.status
-      if (status == "Approved" or status == "Administrator") and member.is_valid:
-        full_name = member.display_name.replace("'","\\'")
-        login_name = member.name
-        ssh_keys = "\\n".join(["%s %s %s" % (get_type(key.keytype), key.keytext, key.comment) for key in member.sshkeys])
-        ssh_keys = ssh_keys.replace("\n","\\n")
-
-        for nick in member.irc_nicknames:
-          if nick.network == 'ci.openstack.org':
-            login_name = nick.nickname
-
+    with open("manifests/%s_users.pp" % team_underscores, "w") as user_pp:
         user_pp.write("""
+class %s_users {
+    include sudoers
+    """ % team_underscores)
+        for detail in details:
+            sudo = True
+            member = detail.member
+            status = detail.status
+            if (status == "Approved" or status == "Administrator") and member.is_valid:
+                full_name = member.display_name.replace("'","\\'")
+                login_name = member.name
+                ssh_keys = "\\n".join(["%s %s %s" % (get_type(key.keytype), key.keytext, key.comment) for key in member.sshkeys])
+                ssh_keys = ssh_keys.replace("\n","\\n")
+
+                for nick in member.irc_nicknames:
+                    if nick.network == 'ci.openstack.org':
+                        login_name = nick.nickname
+
+                user_pp.write("""
   group { '%(login_name)s':
     ensure => 'present'
   }
@@ -172,7 +172,7 @@ class %s_users {
            member_name=member.name))
 
 
-      print "User=%s created" % login_name
-    user_pp.write("""
+            print "User=%s created" % login_name
+        user_pp.write("""
 }
   """)
