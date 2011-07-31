@@ -1,11 +1,11 @@
 server {
   listen 80;
   server_name <%= name %>.openstack.org;
-  DocumentRoot /srv/docs/<%= name %>;
-  Location ^~ /docs/ {
+  root /srv/docs/<%= name %>;
+  location ^~ /docs/ {
     alias /srv/docs/<%= name %>/trunk;
   }
-  Location ^~ /tarballs/ {
+  location ^~ /tarballs/ {
     alias /srv/tarballs/<%= name %>;
   }
 }
