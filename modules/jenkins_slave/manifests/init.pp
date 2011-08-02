@@ -16,7 +16,7 @@ class jenkins_slave {
     cron { "updatepuppet":
       user => root,
       minute => "*/15",
-      command => "cd /root/openstack-ci-puppet && /usr/bin/git pull && /var/lib/gems/1.8/bin/puppet apply -l /tmp/manifest.log --modulepath=/root/openstack-ci-puppet/modules manifests/this.pp",
+      command => "cd /root/openstack-ci-puppet && /usr/bin/git pull && /var/lib/gems/1.8/bin/puppet apply -l /tmp/manifest.log --modulepath=/root/openstack-ci-puppet/modules manifests/site.pp",
       require => [ Jenkinsuser[jenkins] ]
     }
 
@@ -48,31 +48,11 @@ class jenkins_slave {
        ],
     }
 
-    package { "python-software-properties":
-        ensure => latest
-          }
-
     package { "openjdk-6-jre":
         ensure => latest
           }
     
     package { "devscripts":
-        ensure => latest
-          }
-    
-    package { "puppet":
-        ensure => latest
-          }
-    
-    package { "bzr":
-        ensure => latest
-          }
-    
-    package { "git":
-        ensure => latest
-          }
-    
-    package { "python-setuptools":
         ensure => latest
           }
     
@@ -92,10 +72,6 @@ class jenkins_slave {
         ensure => latest
           }
     
-    package { "byobu":
-        ensure => latest
-          }
-
     package { "python-dev":
          ensure => latest
            }
