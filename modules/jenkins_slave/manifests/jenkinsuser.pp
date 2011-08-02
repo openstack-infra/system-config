@@ -91,6 +91,18 @@ define jenkinsuser($ensure = present) {
     require => File['jenkinsbazaardir'],
   }
 
+  file { 'jenkinsbazaarauth':
+    name => '/home/jenkins/.bazaar/authentication.conf',
+    owner => 'jenkins',
+    group => 'jenkins',
+    mode => 640,
+    ensure => 'present',
+    require => File['jenkinsbazaardir'],
+    source => [
+                "puppet:///modules/jenkins_slave/authentication.conf",
+              ],
+  }
+
   file { 'jenkinsknownhosts':
     name => '/home/jenkins/.ssh/known_hosts',
     owner => 'jenkins',
