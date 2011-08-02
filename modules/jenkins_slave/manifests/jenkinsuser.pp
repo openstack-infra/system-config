@@ -86,9 +86,11 @@ define jenkinsuser($ensure = present) {
     owner => 'jenkins',
     group => 'jenkins',
     mode => 640,
-    content => "[DEFAULT]\nemail = OpenStack Jenkins <jenkins@openstack.org>\n",
     ensure => 'present',
     require => File['jenkinsbazaardir'],
+    source => [
+                "puppet:///modules/jenkins_slave/bazaar.conf",
+              ],
   }
 
   file { 'jenkinsbazaarauth':
