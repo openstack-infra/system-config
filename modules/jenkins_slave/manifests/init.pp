@@ -16,14 +16,14 @@ class jenkins_slave {
     cron { "updatepuppet":
       user => root,
       minute => "*/15",
-      command => "cd /root/openstack-ci-puppet && /usr/bin/git pull && /var/lib/gems/1.8/bin/puppet apply -l /tmp/manifest.log --modulepath=/root/openstack-ci-puppet/modules manifests/site.pp",
+      command => "cd /root/openstack-ci-puppet && /usr/bin/git pull -q && /var/lib/gems/1.8/bin/puppet apply -l /tmp/manifest.log --modulepath=/root/openstack-ci-puppet/modules manifests/site.pp",
       require => [ Jenkinsuser[jenkins] ]
     }
 
     cron { "updateci":
       user => jenkins,
       minute => "*/15",
-      command => "cd /home/jenkins/openstack-ci && /usr/bin/git pull origin master"
+      command => "cd /home/jenkins/openstack-ci && /usr/bin/git pull -q origin master"
     }
 
     file { 'aptsources':
