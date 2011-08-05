@@ -129,6 +129,9 @@ node /^glance(-\d+)?\.slave\.openstack\.org$/ {
 node /^keystone(-\d+)?\.slave\.openstack\.org$/ {
   include openstack_jenkins_slave
 
+  apt::ppa { "ppa:keystone-core/trunk":
+    ensure => present
+  }
   apt::ppa { "ppa:nova-core/trunk":
     ensure => present
   }
@@ -144,11 +147,14 @@ node /^keystone(-\d+)?\.slave\.openstack\.org$/ {
                      "python-sqlalchemy",
                      "python-webob",
 		     "python-nova",
+                     "python-unittest2",
+                     "python-dtest",
 		     "python-swift"]
 
   package { $slave_packages:
     ensure => "latest",
-    require => [Apt::Ppa["ppa:nova-core/trunk"],
+    require => [Apt::Ppa["ppa:keystone-core/trunk"],
+                Apt::Ppa["ppa:nova-core/trunk"],
                 Apt::Ppa["ppa:swift-core/trunk"]]
   }
 }
