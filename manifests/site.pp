@@ -156,13 +156,20 @@ node /^keystone(-\d+)?\.slave\.openstack\.org$/ {
 node /^quantum(-\d+)?\.slave\.openstack\.org$/ {
   include openstack_jenkins_slave
 
+  apt::ppa { "ppa:nova-core/trunk":
+    ensure => present
+  }
+
   $slave_packages = ["python-eventlet",
                      "python-paste",
                      "python-routes",
                      "python-sqlalchemy",
+                     "python-gflags",
                      "python-webob"]
+
   package { $slave_packages:
     ensure => "latest",
+    require => Apt::Ppa["ppa:nova-core/trunk"]
   }
 }
 
