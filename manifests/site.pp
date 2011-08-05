@@ -6,12 +6,12 @@ import "doc_server" # TODO: refactor out of module
 # Abstract classes:
 #
 class openstack_base {
-  include ssh  
+  include ssh
 
   package { "ntp":
     ensure => installed
     }
-    
+
   service { 'ntpd':
     name       => 'ntp',
     ensure     => running,
@@ -19,7 +19,7 @@ class openstack_base {
     hasrestart => true,
     require => Package['ntp'],
   }
-  
+
   $packages = ["python-software-properties",
                "puppet",
                "bzr",
@@ -146,10 +146,21 @@ node /^keystone(-\d+)?\.slave\.openstack\.org$/ {
 		     "python-nova",
 		     "python-swift"]
 
-  package { $slave_packages: 
+  package { $slave_packages:
     ensure => "latest",
     require => [Apt::Ppa["ppa:nova-core/trunk"],
                 Apt::Ppa["ppa:swift-core/trunk"]]
+  }
+}
+
+node /^quantum(-\d+)?\.slave\.openstack\.org$/ {
+  $slave_packages = ["python-eventlet",
+                     "python-paste",
+                     "python-routes",
+                     "python-sqlalchemy",
+                     "python-webob"]
+  package { $slave_packages:
+    ensure => "latest",
   }
 }
 
