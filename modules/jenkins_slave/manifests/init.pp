@@ -52,6 +52,10 @@ class jenkins_slave {
         ensure => latest
           }
     
+    package { "cdbs":
+        ensure => latest
+          }
+
     package { "devscripts":
         ensure => latest
           }
