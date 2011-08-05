@@ -154,6 +154,8 @@ node /^keystone(-\d+)?\.slave\.openstack\.org$/ {
 }
 
 node /^quantum(-\d+)?\.slave\.openstack\.org$/ {
+  include openstack_jenkins_slave
+
   $slave_packages = ["python-eventlet",
                      "python-paste",
                      "python-routes",
