@@ -1,0 +1,32 @@
+# This file is managed by puppet.
+# https://github.com/openstack/openstack-ci-puppet
+
+[gerrit]
+	basePath = git
+	canonicalWebUrl = <%= canonicalweburl %>
+[database]
+	type = MYSQL
+	hostname = localhost
+	database = reviewdb
+	username = gerrit2
+[auth]
+	type = OPENID_SSO
+	openIdSsoUrl = <%= openidssourl %>
+[sendemail]
+	smtpServer = localhost
+[container]
+	user = gerrit2
+	javaHome = /usr/lib/jvm/java-6-openjdk/jre
+[sshd]
+	listenAddress = *:29418
+[httpd]
+	listenUrl = proxy-https://*:8081/
+[cache]
+	directory = cache
+[user]
+	email = <%= email %>
+<% commentlinks.each do |commentlink| -%>
+[commentlink "<%= commentlink['name'] %>"]
+        match = "<%= commentlink['match'] %>"
+        link = "<%= commentlink['link'] %>"
+<% end -%>

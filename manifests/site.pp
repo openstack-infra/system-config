@@ -43,8 +43,20 @@ class openstack_jenkins_slave {
 #
 # Long lived servers:
 #
-node "gerrit.openstack.org", "gerrit-dev.openstack.org" {
+node "gerrit.openstack.org" {
   include openstack_server
+  class { 'gerrit':
+    canonicalweburl => "https://review.openstack.org/",
+    email => "review@openstack.org",
+  }
+}
+
+node "gerrit-dev.openstack.org" {
+  include openstack_server
+  class { 'gerrit':
+    canonicalweburl => "https://review-dev.openstack.org/",
+    email => "review-dev@openstack.org",
+  }
 }
 
 node "docs.openstack.org" {

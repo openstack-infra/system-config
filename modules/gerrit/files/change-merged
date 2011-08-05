@@ -1,0 +1,174 @@
+#!/usr/bin/env python
+#
+# Gerrit-Launchpad Hook, inspired by https://github.com/hobbs/jirret
+#
+# Copyright (C) 2011 Catalyst IT (http://www.catalyst.net.nz)
+# Copyright (C) 2011 Rackspace US, Inc.
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+# Changed by James E. Blair <james.blair@rackspace.com> to add 
+# config file parsing, and signed email with commands.
+
+# Some parts:
+# Copyright 2009-2011 Canonical Ltd.  This software is licensed under the
+# GNU Affero General Public License version 3 (see the file LICENSE).
+
+from email.mime.text import MIMEText
+from getopt import getopt
+import re
+import smtplib
+import subprocess
+import sys, os
+import pyme, pyme.core
+import StringIO
+import ConfigParser
+
+TO_ADDRESS_SUFFIX = '@bugs.launchpad.net'
+BASE_DIR = '/home/gerrit2/review_site'
+GERRIT_CONFIG = os.environ.get('GERRIT_CONFIG','/home/gerrit2/review_site/etc/gerrit.config')
+
+def get_broken_config(filename):
+  """ gerrit config ini files are broken and have leading tabs """
+  text = ""
+  with open(filename,"r") as conf:
+    for line in conf.readlines():
+      text = "%s%s" % (text, line.lstrip())
+
+  fp = StringIO.StringIO(text)
+  c=ConfigParser.ConfigParser()
+  c.readfp(fp)
+  return c
+
+gerrit_config = get_broken_config(GERRIT_CONFIG)
+FROM_ADDRESS = gerrit_config.get('user', 'email')
+
+
+# From Launchpad: lib/lp/services/mail/incoming.py
+# Match '\n' and '\r' line endings. That is, all '\r' that are not
+# followed by a '\n', and all '\n' that are not preceded by a '\r'.
+non_canonicalised_line_endings = re.compile('((?<!\r)\n)|(\r(?!\n))')
+
+# Match trailing whitespace.
+trailing_whitespace = re.compile(r'[ \t]*((?=\r\n)|$)')
+
+def canonicalise_line_endings(text):
+    r"""Canonicalise the line endings to '\r\n'.
+
+        >>> canonicalise_line_endings('\n\nfoo\nbar\rbaz\r\n')
+        '\r\n\r\nfoo\r\nbar\r\nbaz\r\n'
+
+        >>> canonicalise_line_endings('\r\rfoo\r\nbar\rbaz\n')
+        '\r\n\r\nfoo\r\nbar\r\nbaz\r\n'
+
+        >>> canonicalise_line_endings('\r\nfoo\r\nbar\nbaz\r')
+        '\r\nfoo\r\nbar\r\nbaz\r\n'
+    """
+    if non_canonicalised_line_endings.search(text):
+        text = non_canonicalised_line_endings.sub('\r\n', text)
+    if trailing_whitespace.search(text):
+        text = trailing_whitespace.sub('', text)
+    return text
+# End code from Launchpad: lib/lp/services/mail/incoming.py
+
+def email_tracker(change_url, project, branch, submitter, commit):
+    # Extract git log of all merged commits
+    git_log = subprocess.Popen(['git', '--git-dir=' + BASE_DIR + '/git/' + project + '.git', 'log', '--no-merges', commit + '^1..' + commit], stdout=subprocess.PIPE).communicate()[0]
+
+    # Find bug numbers referenced in the git log
+    bug_regexp = r'([Bb]ug|[Ll][Pp])\s*[#:]?\s*(\d+)'
+    tokens = re.split(bug_regexp, git_log)
+
+    # Extract unique bug numbers
+    bugs = []
+    for token in tokens:
+        if re.match('^\d+$', token) and (token not in bugs):
+            bugs.append(token)
+            send_bug_mail(token, change_url, project, commit, submitter, branch, git_log)
+
+def send_bug_mail(bug_number, change_url, project, commit, submitter, branch, git_log):
+
+    to_address = bug_number + TO_ADDRESS_SUFFIX
+
+    gitorious_url = 'http://github.com/%s/commit/%s' % (project, commit)
+    body = '''Reviewed:  %s
+Committed: %s
+Submitter: %s
+Branch:    %s
+
+ status fixcommitted
+ done\n''' % (change_url, gitorious_url, submitter, branch)
+
+    body = body + '\n' + git_log
+
+    bodypart = MIMEText(body)
+    bodystring = bodypart.as_string()
+    bodystring = canonicalise_line_endings(bodystring)
+
+    plain = pyme.core.Data(bodystring)
+    cipher = pyme.core.Data()
+    gpg = pyme.core.Context()
+    gpg.set_armor(1)
+
+    gpg.op_keylist_start(FROM_ADDRESS, 0)
+    gpg.op_sign(plain, cipher, pyme.pygpgme.GPGME_SIG_MODE_DETACH)
+    cipher.seek(0,0)
+    signature = cipher.read()
+
+    from email.mime.multipart import MIMEMultipart
+    from email.mime.base import MIMEBase
+    msg = MIMEMultipart(_subtype='signed',protocol='application/pgp-signature')
+    msg['Subject'] = 'A change has been merged to %s' % project
+    msg['From'] = FROM_ADDRESS
+    msg['To'] = to_address
+
+    msg.attach(bodypart)
+    signpart = MIMEBase('application','pgp-signature')
+    signpart.set_payload(signature)
+    msg.attach(signpart)
+
+    #print msg.as_string()
+    s = smtplib.SMTP()
+    s.connect()
+    s.sendmail(FROM_ADDRESS, [to_address], msg.as_string())
+    s.quit()
+
+def main():
+    # https://gerrit.googlecode.com/svn/documentation/2.1.6/config-hooks.html#change-merged
+    gerrit_args = ['change=', 'change-url=', 'project=', 'branch=', 'submitter=', 'commit=']
+    args, unused = getopt(sys.argv[1:], '', gerrit_args)
+
+    change_url = project = branch = submitter = commit = None
+    for argname, argv in args:
+        if argname == '--change-url':
+            change_url = argv
+        elif argname == '--project':
+            project = argv
+        elif argname == '--branch':
+            branch = argv
+        elif argname == '--submitter':
+            submitter = argv
+        elif argname == '--commit':
+            commit = argv
+
+    if change_url and project and branch and submitter and commit:
+        email_tracker(change_url, project, branch, submitter, commit)
+    else:
+        print 'Missing arguments'
+	return 1
+
+    return 0;
+
+if __name__ == '__main__':
+    sys.exit(main())
