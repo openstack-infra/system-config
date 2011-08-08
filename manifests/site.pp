@@ -49,6 +49,10 @@ node "gerrit.openstack.org" {
     canonicalweburl => "https://review.openstack.org/",
     email => "review@openstack.org",
   }
+
+  class { 'iptables':
+    public_tcp_ports => [80, 443, 29418]
+  }    
 }
 
 node "gerrit-dev.openstack.org" {
@@ -57,6 +61,10 @@ node "gerrit-dev.openstack.org" {
     canonicalweburl => "https://review-dev.openstack.org/",
     email => "review-dev@openstack.org",
   }
+
+  class { 'iptables':
+    public_tcp_ports => [80, 443, 29418]
+  }    
 }
 
 node "docs.openstack.org" {
