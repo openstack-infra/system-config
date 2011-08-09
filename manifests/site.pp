@@ -217,7 +217,7 @@ node /^swift(-\d+)?\.slave\.openstack\.org$/ {
   }
 }
 
-node /^driver(\d+)\.1918\.openstack\.com/ {
+node /^driver(\d+)\.1918\.openstack\.org$/ {
   include openstack_jenkins_slave
 
 }
