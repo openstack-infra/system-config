@@ -131,6 +131,135 @@ class openstack_ci_admins_users {
   }
 
 
+  group { 'carlp':
+    ensure => 'present'
+  }
+
+  user { 'carlp':
+    ensure => 'present',
+    comment => 'Carl Perry',
+    home => $operatingsystem ? {
+      Darwin => '/Users/carlp',
+      solaris => '/export/home/carlp',
+      default => '/home/carlp',
+    },
+    shell => '/bin/bash',
+    gid => 'carlp',
+    groups => ['wheel','sudo','admin'],
+    membership => 'minimum',
+  }
+
+  file { 'carlphome':
+    name => $operatingsystem ? {
+      Darwin => '/Users/carlp',
+      solaris => '/export/home/carlp',
+      default => '/home/carlp',
+    },
+    owner => 'carlp',
+    group => 'carlp',
+    mode => 644,
+    ensure => 'directory',
+  }
+
+
+  file { 'carlpsshdir':
+    name => $operatingsystem ? {
+      Darwin => '/Users/carlp/.ssh',
+      solaris => '/export/home/carlp/.ssh',
+      default => '/home/carlp/.ssh',
+    },
+    owner => 'carlp',
+    group => 'carlp',
+    mode => 700,
+    ensure => 'directory',
+    require => File['carlphome'],
+  }
+
+  file { 'carlpkeys':
+    name => $operatingsystem ? {
+      Darwin => '/Users/carlp/.ssh/authorized_keys',
+      solaris => '/export/home/carlp/.ssh/authorized_keys',
+      default => '/home/carlp/.ssh/authorized_keys',
+    },
+    owner => 'carlp',
+    group => 'carlp',
+    mode => 640,
+    content => "",
+    ensure => 'present',
+    require => File['carlpsshdir'],
+  }
+
+  file { 'carlpbashrc':
+    name => $operatingsystem ? {
+      Darwin => '/Users/carlp/.bashrc',
+      solaris => '/export/home/carlp/.bashrc',
+      default => '/home/carlp/.bashrc',
+    },
+    owner => 'carlp',
+    group => 'carlp',
+    mode => 640,
+    source => "/etc/skel/.bashrc",
+    replace => 'false',
+    ensure => 'present',
+  }
+
+  file { 'carlpbash_logout':
+    name => $operatingsystem ? {
+      Darwin => '/Users/carlp/.bash_logout',
+      solaris => '/export/home/carlp/.bash_logout',
+      default => '/home/carlp/.bash_logout',
+    },
+    source => "/etc/skel/.bash_logout",
+    owner => 'carlp',
+    group => 'carlp',
+    mode => 640,
+    replace => 'false',
+    ensure => 'present',
+  }
+
+  file { 'carlpprofile':
+    name => $operatingsystem ? {
+      Darwin => '/Users/carlp/.profile',
+      solaris => '/export/home/carlp/.profile',
+      default => '/home/carlp/.profile',
+    },
+    source => "/etc/skel/.profile",
+    owner => 'carlp',
+    group => 'carlp',
+    mode => 640,
+    replace => 'false',
+    ensure => 'present',
+  }
+
+  file { 'carlpbazaardir':
+    name => $operatingsystem ? {
+      Darwin => '/Users/carlp/.bazaar',
+      solaris => '/export/home/carlp/.bazaar',
+      default => '/home/carlp/.bazaar',
+    },
+    owner => 'carlp',
+    group => 'carlp',
+    mode => 755,
+    ensure => 'directory',
+    require => File['carlphome'],
+  }
+
+
+  file { 'carlpbazaarauth':
+    name => $operatingsystem ? {
+      Darwin => '/Users/carlp/.bazaar/authentication.conf',
+      solaris => '/export/home/carlp/.bazaar/authentication.conf',
+      default => '/home/carlp/.bazaar/authentication.conf',
+    },
+    owner => 'carlp',
+    group => 'carlp',
+    mode => 640,
+    content => "[Launchpad]\nhost = .launchpad.net\nscheme = ssh\nuser = carlp\n",
+    ensure => 'present',
+    require => File['carlpbazaardir'],
+  }
+
+
   group { 'dan-prince':
     ensure => 'present'
   }
@@ -902,6 +1031,135 @@ class openstack_ci_admins_users {
     content => "[Launchpad]\nhost = .launchpad.net\nscheme = ssh\nuser = mordred\n",
     ensure => 'present',
     require => File['mordredbazaardir'],
+  }
+
+
+  group { 'ppouliot':
+    ensure => 'present'
+  }
+
+  user { 'ppouliot':
+    ensure => 'present',
+    comment => 'Peter Pouliot',
+    home => $operatingsystem ? {
+      Darwin => '/Users/ppouliot',
+      solaris => '/export/home/ppouliot',
+      default => '/home/ppouliot',
+    },
+    shell => '/bin/bash',
+    gid => 'ppouliot',
+    groups => ['wheel','sudo','admin'],
+    membership => 'minimum',
+  }
+
+  file { 'ppouliothome':
+    name => $operatingsystem ? {
+      Darwin => '/Users/ppouliot',
+      solaris => '/export/home/ppouliot',
+      default => '/home/ppouliot',
+    },
+    owner => 'ppouliot',
+    group => 'ppouliot',
+    mode => 644,
+    ensure => 'directory',
+  }
+
+
+  file { 'ppouliotsshdir':
+    name => $operatingsystem ? {
+      Darwin => '/Users/ppouliot/.ssh',
+      solaris => '/export/home/ppouliot/.ssh',
+      default => '/home/ppouliot/.ssh',
+    },
+    owner => 'ppouliot',
+    group => 'ppouliot',
+    mode => 700,
+    ensure => 'directory',
+    require => File['ppouliothome'],
+  }
+
+  file { 'ppouliotkeys':
+    name => $operatingsystem ? {
+      Darwin => '/Users/ppouliot/.ssh/authorized_keys',
+      solaris => '/export/home/ppouliot/.ssh/authorized_keys',
+      default => '/home/ppouliot/.ssh/authorized_keys',
+    },
+    owner => 'ppouliot',
+    group => 'ppouliot',
+    mode => 640,
+    content => "ssh-dsa AAAAB3NzaC1kc3MAAACBAJraAkItCv7jskj4Umf6HSAum8jFTdIu/K5J032MJBpyf0qhj4YUKmLdIsCmokV2eXcQPI9eR7kyk8XmvH2qFd1KTMxKeJIMmPSWVNZkzHQKOOwoATgylwnnpjsZcSH7+a98S4XHmyzKp2xCsdKbxq8xphyALQFZURzDWN6H8/TFAAAAFQDoGeFRwiM9V41wwos5VJxAGeTRxwAAAIBXyW1P//9/Z2kFZuXvjGw2OU0u69yFhwHkPnY4XGkAGcnC8ssNiyO6LCzCoFge61QQtytGINaCKu1UNhMaRLX3O08LHiTbpN39qmeY6jWtS1lHemVwm1TNmnjl7e16kV67n/2OKN1H0gl8h7mgAb2wHKAqV+NmIk5pjHwR38LJQgAAAIBdIzAuc9UozBXXCo8TgIRCBlxUATLDzW3xdIVaAMw3bM4OG2EPoP/1L8bhJobM2jFxY4NgsyX+YkeCD61SZMOcowN9DtYNu6MH0WlVtNPRJWZl4ZLV/WeXn8SgiVYKmTw29fFKngIUHWtxCy0D/KHnjIE+IYsYIHQSm3gRVgZ3qg== root@jil-d-a-16-a\n",
+    ensure => 'present',
+    require => File['ppouliotsshdir'],
+  }
+
+  file { 'ppouliotbashrc':
+    name => $operatingsystem ? {
+      Darwin => '/Users/ppouliot/.bashrc',
+      solaris => '/export/home/ppouliot/.bashrc',
+      default => '/home/ppouliot/.bashrc',
+    },
+    owner => 'ppouliot',
+    group => 'ppouliot',
+    mode => 640,
+    source => "/etc/skel/.bashrc",
+    replace => 'false',
+    ensure => 'present',
+  }
+
+  file { 'ppouliotbash_logout':
+    name => $operatingsystem ? {
+      Darwin => '/Users/ppouliot/.bash_logout',
+      solaris => '/export/home/ppouliot/.bash_logout',
+      default => '/home/ppouliot/.bash_logout',
+    },
+    source => "/etc/skel/.bash_logout",
+    owner => 'ppouliot',
+    group => 'ppouliot',
+    mode => 640,
+    replace => 'false',
+    ensure => 'present',
+  }
+
+  file { 'ppouliotprofile':
+    name => $operatingsystem ? {
+      Darwin => '/Users/ppouliot/.profile',
+      solaris => '/export/home/ppouliot/.profile',
+      default => '/home/ppouliot/.profile',
+    },
+    source => "/etc/skel/.profile",
+    owner => 'ppouliot',
+    group => 'ppouliot',
+    mode => 640,
+    replace => 'false',
+    ensure => 'present',
+  }
+
+  file { 'ppouliotbazaardir':
+    name => $operatingsystem ? {
+      Darwin => '/Users/ppouliot/.bazaar',
+      solaris => '/export/home/ppouliot/.bazaar',
+      default => '/home/ppouliot/.bazaar',
+    },
+    owner => 'ppouliot',
+    group => 'ppouliot',
+    mode => 755,
+    ensure => 'directory',
+    require => File['ppouliothome'],
+  }
+
+
+  file { 'ppouliotbazaarauth':
+    name => $operatingsystem ? {
+      Darwin => '/Users/ppouliot/.bazaar/authentication.conf',
+      solaris => '/export/home/ppouliot/.bazaar/authentication.conf',
+      default => '/home/ppouliot/.bazaar/authentication.conf',
+    },
+    owner => 'ppouliot',
+    group => 'ppouliot',
+    mode => 640,
+    content => "[Launchpad]\nhost = .launchpad.net\nscheme = ssh\nuser = ppouliot\n",
+    ensure => 'present',
+    require => File['ppouliotbazaardir'],
   }
 
 
