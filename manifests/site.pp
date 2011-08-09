@@ -236,3 +236,8 @@ node /^swift(-\d+)?\.slave\.openstack\.org$/ {
     require => Apt::Ppa["ppa:swift-core/trunk"]
   }
 }
+
+node /^driver(\d+)\.1918\.openstack\.com/ {
+  include openstack_jenkins_slave
+
+}
