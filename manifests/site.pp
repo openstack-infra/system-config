@@ -159,7 +159,8 @@ node /^keystone(-\d+)?\.slave\.openstack\.org$/ {
     ensure => present
   }
 
-  $slave_packages = ["python-eventlet",
+  $slave_packages = ["memcached",
+                     "python-eventlet",
                      "python-ldap",
                      "python-memcache",
                      "python-paste",
