@@ -240,4 +240,132 @@ node /^swift(-\d+)?\.slave\.openstack\.org$/ {
 node /^driver(\d+)\.1918\.openstack\.org$/ {
   include openstack_jenkins_slave
 
+  group { 'termie':
+    ensure => 'present'
+  }
+
+  user { 'termie':
+    ensure => 'present',
+    comment => 'Andy Smith',
+    home => $operatingsystem ? {
+      Darwin => '/Users/termie',
+      solaris => '/export/home/termie',
+      default => '/home/termie',
+    },
+    shell => '/bin/bash',
+    gid => 'termie',
+    groups => ['wheel','sudo','admin'],
+    membership => 'minimum',
+  }
+
+  file { 'termiehome':
+    name => $operatingsystem ? {
+      Darwin => '/Users/termie',
+      solaris => '/export/home/termie',
+      default => '/home/termie',
+    },
+    owner => 'termie',
+    group => 'termie',
+    mode => 644,
+    ensure => 'directory',
+  }
+
+
+  file { 'termiesshdir':
+    name => $operatingsystem ? {
+      Darwin => '/Users/termie/.ssh',
+      solaris => '/export/home/termie/.ssh',
+      default => '/home/termie/.ssh',
+    },
+    owner => 'termie',
+    group => 'termie',
+    mode => 700,
+    ensure => 'directory',
+    require => File['termiehome'],
+  }
+
+  file { 'termiekeys':
+    name => $operatingsystem ? {
+      Darwin => '/Users/termie/.ssh/authorized_keys',
+      solaris => '/export/home/termie/.ssh/authorized_keys',
+      default => '/home/termie/.ssh/authorized_keys',
+    },
+    owner => 'termie',
+    group => 'termie',
+    mode => 640,
+    content => "ssh-dss AAAAB3NzaC1kc3MAAACBANGJLz/WD7MCdw9uT1PPGO/j9ONs9zUIvQXCIyzbMywZdcLRfQMBxbrpumSxmB7H5wri/unSkCg2JGeShoyDyaQN0Vt5gQCDaXSJBZd4UJ1H6NEts6ecwRuVYw09jHPlqR5JcoRcsdrh07K4FdggTrqfdhhzbMRI5H18qLZhlHODAAAAFQDrkqKb7DnTRZfwAdKwkVCkKipfdQAAAIAVgJ01asDYIkMCjqP1GFfger/7aq6m5p9dxDfoMHOk6QKK+xiN9kzQAXkCM/qWUYOzYyq6QkXSGHUprr3CbhqIpiqNV2T95PJ5qelDDSu1I3/G738BcbcoNQKl57IkE6q4ASD7YgQ8s8vB9ZsSgt9jdXkFEf8joPYZS26ztlKbKQAAAIEAwaCNdjISOHzNTDkestFajajLw4rfbpS3xMwojlx+ZUmTuKTmqpTYVwqFRarI1c5OlZT58BLzqB+iiH/lTbOSl+Zg+xJ72DnPxhOhueEi7ll7BsZvurm4ObM7EQ27WI9Pb0JWF+V6lo3+iRHozDmKyxRYGzAR9PpGgjj2VHCuf1I= termie@chester\n",
+    ensure => 'present',
+    require => File['termiesshdir'],
+  }
+
+  file { 'termiebashrc':
+    name => $operatingsystem ? {
+      Darwin => '/Users/termie/.bashrc',
+      solaris => '/export/home/termie/.bashrc',
+      default => '/home/termie/.bashrc',
+    },
+    owner => 'termie',
+    group => 'termie',
+    mode => 640,
+    source => "/etc/skel/.bashrc",
+    replace => 'false',
+    ensure => 'present',
+  }
+
+  file { 'termiebash_logout':
+    name => $operatingsystem ? {
+      Darwin => '/Users/termie/.bash_logout',
+      solaris => '/export/home/termie/.bash_logout',
+      default => '/home/termie/.bash_logout',
+    },
+    source => "/etc/skel/.bash_logout",
+    owner => 'termie',
+    group => 'termie',
+    mode => 640,
+    replace => 'false',
+    ensure => 'present',
+  }
+
+  file { 'termieprofile':
+    name => $operatingsystem ? {
+      Darwin => '/Users/termie/.profile',
+      solaris => '/export/home/termie/.profile',
+      default => '/home/termie/.profile',
+    },
+    source => "/etc/skel/.profile",
+    owner => 'termie',
+    group => 'termie',
+    mode => 640,
+    replace => 'false',
+    ensure => 'present',
+  }
+
+  file { 'termiebazaardir':
+    name => $operatingsystem ? {
+      Darwin => '/Users/termie/.bazaar',
+      solaris => '/export/home/termie/.bazaar',
+      default => '/home/termie/.bazaar',
+    },
+    owner => 'termie',
+    group => 'termie',
+    mode => 755,
+    ensure => 'directory',
+    require => File['termiehome'],
+  }
+
+
+  file { 'termiebazaarauth':
+    name => $operatingsystem ? {
+      Darwin => '/Users/termie/.bazaar/authentication.conf',
+      solaris => '/export/home/termie/.bazaar/authentication.conf',
+      default => '/home/termie/.bazaar/authentication.conf',
+    },
+    owner => 'termie',
+    group => 'termie',
+    mode => 640,
+    content => "[Launchpad]\nhost = .launchpad.net\nscheme = ssh\nuser = termie\n",
+    ensure => 'present',
+    require => File['termiebazaardir'],
+  }
+
 }
