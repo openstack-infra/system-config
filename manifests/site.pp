@@ -48,6 +48,13 @@ node "gerrit.openstack.org" {
   class { 'gerrit':
     canonicalweburl => "https://review.openstack.org/",
     email => "review@openstack.org",
+    github_projects => [ {
+                         name => 'openstack/keystone',
+                         close_pull => 'true'
+                         }, {
+                         name => 'openstack/glance',
+                         close_pull => 'true'
+                         } ]
   }
 
   class { 'iptables':
@@ -60,6 +67,10 @@ node "gerrit-dev.openstack.org" {
   class { 'gerrit':
     canonicalweburl => "https://review-dev.openstack.org/",
     email => "review-dev@openstack.org",
+    github_projects => [ {
+                         name => 'gtest-org/gerrit',
+                         close_pull => 'true'
+                         } ]
   }
 
   class { 'iptables':
