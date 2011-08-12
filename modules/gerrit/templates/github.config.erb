@@ -1,0 +1,7 @@
+# This file is managed by puppet.
+# https://github.com/openstack/openstack-ci-puppet
+
+<% github_projects.each do |project| -%>
+[project "<%= project['name'] %>"]
+close_pull = <%= project['close_pull'] %>
+<% end -%>
