@@ -209,7 +209,8 @@ node /^quantum(-\d+)?\.slave\.openstack\.org$/ {
                      "python-routes",
                      "python-sqlalchemy",
                      "python-gflags",
-                     "python-webob"]
+                     "python-webob",
+                     "python-webtest"]
 
   package { $slave_packages:
     ensure => "latest",
