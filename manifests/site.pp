@@ -65,7 +65,7 @@ node "gerrit.openstack.org" {
 
   class { 'iptables':
     public_tcp_ports => [80, 443, 29418]
-  }    
+  }
 }
 
 node "gerrit-dev.openstack.org" {
@@ -81,7 +81,7 @@ node "gerrit-dev.openstack.org" {
 
   class { 'iptables':
     public_tcp_ports => [80, 443, 29418]
-  }    
+  }
 }
 
 node "docs.openstack.org" {
@@ -208,6 +208,7 @@ node /^quantum(-\d+)?\.slave\.openstack\.org$/ {
                      "python-routes",
                      "python-sqlalchemy",
                      "python-gflags",
+                     "python-webtest",
                      "python-webob"]
 
   package { $slave_packages:
