@@ -2,9 +2,19 @@ class gerrit($canonicalweburl='',
 $openidssourl="https://login.launchpad.net/+openid",
 $email='',
 $github_projects = [],
-$commentlinks = [ { name => 'launchpad',
+$commentlinks = [ { name => 'changeid',
+                  match => '(I[0-9a-f]{8,40})',
+                  link => '#q,$1,n,z' },
+
+                  { name => 'launchpad',
                   match => '([Bb]ug|[Ll][Pp])\\s*[#:]?\\s*(\\d+)',
-                  link => 'https://code.launchpad.net/bugs/$2' } ]
+                  link => 'https://code.launchpad.net/bugs/$2' },
+
+                  { name => 'blueprint',
+                  match => '([Bb]lue[Pp]rint|[Bb][Pp])\\s*[#:]?\\s*(\\S+)',
+                  link => 'https://blueprints.launchpad.net/openstack/?searchtext=$2' },
+
+                  ]
   ) {
   
   package { "python-dev":
@@ -77,6 +87,15 @@ $commentlinks = [ { name => 'launchpad',
       replace => 'true',
     }
 
+    file { '/home/gerrit2/review_site/hooks/patchset-created':
+      owner => 'root',
+      group => 'root',
+      mode => 555,
+      ensure => 'present',
+      source => 'puppet:///modules/gerrit/patchset-created',
+      replace => 'true',
+    }
+    
   } else {
     notice('Gerrit is not installed')
   }
