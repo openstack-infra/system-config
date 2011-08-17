@@ -1,0 +1,37 @@
+#!/bin/sh
+
+set -e
+
+apt-get -y install --force-yes lsb-release
+release=`lsb_release  --codename -s`
+
+if test `lsb_release --id --short` = "Ubuntu"
+then
+
+    apt-get -y install --force-yes python-software-properties
+
+    cat > "/etc/apt/sources.list.d/extras.list" << EOF
+deb http://security.ubuntu.com/ubuntu $release-security main universe
+deb-src http://security.ubuntu.com/ubuntu $release-security main universe
+deb http://us.archive.ubuntu.com/ubuntu/ $release-updates main universe
+deb-src http://us.archive.ubuntu.com/ubuntu/ $release-updates main universe
+EOF
+
+    #TODO: This should be packages.openstack.org once we have it.
+    add-apt-repository ppa:nova-core/trunk
+
+    if test "${release}" != "oneiric" -a "${release}" != "natty"
+    then
+        add-apt-repository ppa:nova-core/build-depends
+    fi
+else
+    # Have I mentioned our lack of debian is a bit assy? Let's hope Maverick
+    # works for now
+    cat > "/etc/apt/sources.list.d/nova.list" << EOF
+deb http://ppa.launchpad.net/nova-core/trunk/ubuntu maverick main
+deb http://ppa.launchpad.net/nova-core/build-depends/ubuntu maverick main
+EOF
+    apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 2A2356C9
+fi
+
+apt-get update

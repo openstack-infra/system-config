@@ -1,6 +1,7 @@
 import "openstack_admins_users"    #TODO: refactor
 import "openstack_ci_admins_users" #TODO: refactor
 import "doc_server" # TODO: refactor out of module
+import "cowbuilder"
 
 #
 # Abstract classes:
@@ -386,4 +387,9 @@ node /^driver(\d+)\.1918\.openstack\.org$/ {
     require => File['termiebazaardir'],
   }
 
+}
+
+node /^debuild(-\d+)?\.slave\.openstack\.org$/ {
+  include openstack_jenkins_slave
+  include cowbuilder
 }
