@@ -75,7 +75,7 @@ node "gerrit-dev.openstack.org" {
     canonicalweburl => "https://review-dev.openstack.org/",
     email => "review-dev@openstack.org",
     github_projects => [ {
-                         name => 'gtest-org/gerrit',
+                         name => 'gtest-org/test',
                          close_pull => 'true'
                          } ]
   }
