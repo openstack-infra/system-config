@@ -8,7 +8,8 @@ import "cowbuilder"
 #
 class openstack_base {
   include ssh
-
+  include exim
+  
   package { "ntp":
     ensure => installed
     }
