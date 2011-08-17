@@ -1,4 +1,5 @@
 define apt::ppa($ensure = present) {
+  $has_ppa = "/usr/bin/test -f /etc/apt/sources.list.d/`echo $name | cut -f2 -d: | sed 's/\//-/'`*list"
   case $ensure {
     present: {
       exec { "Add $name PPA":
@@ -8,6 +9,7 @@ define apt::ppa($ensure = present) {
         user        => "root",
         group       => "root",
         logoutput   => on_failure,
+        unless      => "$has_ppa",
       }
     }
     absent:  {
@@ -18,6 +20,7 @@ define apt::ppa($ensure = present) {
         user        => "root",
         group       => "root",
         logoutput   => on_failure,
+        unless      => "$has_ppa",
       }
     }
     default: {
