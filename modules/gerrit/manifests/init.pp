@@ -39,19 +39,19 @@ $commentlinks = [ { name => 'changeid',
     cron { "gerritupdateci":
       user => gerrit2,
       minute => "*/15",
-      command => "sleep $((RANDOM\%60)) && cd /home/gerrit2/openstack-ci && /usr/bin/git pull -q origin master"
+      command => 'sleep $((RANDOM\%60)) && cd /home/gerrit2/openstack-ci && /usr/bin/git pull -q origin master'
     }
 
     cron { "gerritsyncusers":
       user => gerrit2,
       minute => "*/15",
-      command => "sleep $((RANDOM\%60+60)) && cd /home/gerrit2/openstack-ci && python gerrit/update_gerrit_users.py"
+      command => 'sleep $((RANDOM\%60+60)) && cd /home/gerrit2/openstack-ci && python gerrit/update_gerrit_users.py'
     }
 
     cron { "gerritclosepull":
       user => gerrit2,
       minute => "*/5",
-      command => "sleep $((RANDOM\%60+90)) && cd /home/gerrit2/openstack-ci && python gerrit/close_pull_requests.py"
+      command => 'sleep $((RANDOM\%60+90)) && cd /home/gerrit2/openstack-ci && python gerrit/close_pull_requests.py'
     }
 
     file { '/home/gerrit2/github.config':

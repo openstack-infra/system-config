@@ -1,7 +1,6 @@
 import "openstack_admins_users"    #TODO: refactor
 import "openstack_ci_admins_users" #TODO: refactor
 import "doc_server" # TODO: refactor out of module
-import "cowbuilder"
 
 #
 # Abstract classes:
@@ -33,7 +32,7 @@ class openstack_base {
   cron { "updatepuppet":
     user => root,
     minute => "*/15",
-    command => "sleep $((RANDOM\%600)) && cd /root/openstack-ci-puppet && /usr/bin/git pull -q && /var/lib/gems/1.8/bin/puppet apply -l /tmp/manifest.log --modulepath=/root/openstack-ci-puppet/modules manifests/site.pp",
+    command => 'sleep $((RANDOM\%600)) && cd /root/openstack-ci-puppet && /usr/bin/git pull -q && /var/lib/gems/1.8/bin/puppet apply -l /tmp/manifest.log --modulepath=/root/openstack-ci-puppet/modules manifests/site.pp',
   }
 }
 
