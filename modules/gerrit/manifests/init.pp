@@ -17,6 +17,9 @@ $commentlinks = [ { name => 'changeid',
                   ]
   ) {
   
+  package { "gitweb":
+    ensure => latest
+  }
   package { "python-dev":
     ensure => latest
   }
