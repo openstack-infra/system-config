@@ -91,13 +91,16 @@ rebase_changes()
 
 assert_diverge()
 {
-    git diff origin/$branch..HEAD | grep -q .;
+    if ! git diff origin/$branch..HEAD | grep -q .
+    then
+	echo "No changes between the current branch and origin/$branch."
+	exit 1
+    fi
 }
 
 
 main()
 {
-
     set_hooks_commit_msg;
 
     check_remote;
