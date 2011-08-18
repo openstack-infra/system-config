@@ -85,7 +85,7 @@ rebase_changes()
 {
     git fetch;
 
-    GIT_EDITOR=/bin/true git rebase -i origin/$branch;
+    GIT_EDITOR=/bin/true git rebase -i origin/$branch || exit $?;
 }
 
 
@@ -106,7 +106,9 @@ main()
 
     assert_diverge;
 
-    bug=$(git show --format='%s %b' | perl -nle '/\b([Bb]ug|[Ll][Pp])\s*[#:]?\s*(\d+)/ && print "$2"')
+    bug=$(git show --format='%s %b' | perl -nle 'if (/\b([Bb]ug|[Ll][Pp])\s*[#:]?\s*(\d+)/) {print "$2"; exit}')
+
+    bp=$(git show --format='%s %b' | perl -nle 'if (/\b([Bb]lue[Pp]rint|[Bb][Pp])\s*[#:]?\s*([0-9a-zA-Z-_]+)/) {print "$2"; exit}')
 
     if [ "$DRY_RUN" = 1 ]; then
         drier='echo -e Please use the following command to send your commits to review:\n\n'
@@ -116,7 +118,11 @@ main()
 
     local_branch=`git branch | grep -Ei "\* (.*)" | cut -f2 -d' '`
     if [ -z "$bug" ]; then
-        $drier git push gerrit HEAD:refs/for/$branch/$local_branch;
+	if [ -z "$bp" ]; then
+            $drier git push gerrit HEAD:refs/for/$branch/$local_branch;
+	else
+	    $drier git push gerrit HEAD:refs/for/$branch/bp/$bp;
+	fi
     else
         $drier git push gerrit HEAD:refs/for/$branch/bug/$bug;
     fi
