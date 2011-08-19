@@ -35,6 +35,8 @@ set_hooks_commit_msg()
     curl -o $f $u || wget -O $f $u;
 
     chmod +x $f;
+
+    GIT_EDITOR=/bin/true git commit --amend
 }
 
 add_remote()
