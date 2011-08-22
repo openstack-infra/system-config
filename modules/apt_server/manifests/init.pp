@@ -37,11 +37,11 @@ class apt_server {
   }
 
   file {"/srv/packages/conf":
-    owner => 'root',
-    group => 'root',
-    mode => 555,
+    owner => 'jenkins',
+    group => 'jenkins',
+    mode => 755,
     ensure => directory,
-    require => File["/srv/packages"],
+    require => [File["/srv/packages"], User[jenkins]]
   }
 
   file {"/srv/packages/conf/distributions":
