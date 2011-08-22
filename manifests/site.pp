@@ -392,6 +392,8 @@ node /^driver(\d+)\.1918\.openstack\.org$/ {
 node /^debuild(-\d+)?\.slave\.openstack\.org$/ {
   include openstack_jenkins_slave
   include cowbuilder
+
+  class { "reprepro": }
 }
 
 node /^packages\.openstack\.org$/ {
