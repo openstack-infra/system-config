@@ -1,9 +1,6 @@
 class apt_server {
 
-  $packages = ["reprepro",
-               "nginx"]
-
-  package { $packages: ensure => "latest" }
+  package { "nginx": ensure => "latest" }
 
   file { "/etc/nginx/sites-available/default":
     owner => 'root',
@@ -29,27 +26,11 @@ class apt_server {
   }
 
   file {"/srv/packages":
-    owner => 'root',
-    group => 'root',
-    mode => 755,
-    ensure => directory,
-    require => File["/srv"],
-  }
-
-  file {"/srv/packages/conf":
     owner => 'jenkins',
     group => 'jenkins',
     mode => 755,
     ensure => directory,
-    require => [File["/srv/packages"], User[jenkins]]
-  }
-
-  file {"/srv/packages/conf/distributions":
-    owner => 'root',
-    group => 'root',
-    mode => 444,
-    ensure => 'present',
-    source => "puppet:///modules/apt_server/distributions",
+    require => File["/srv"],
   }
 
   service { 'nginx':
