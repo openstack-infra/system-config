@@ -30,7 +30,7 @@ class reprepro {
     group => 'root',
     mode => 444,
     ensure => 'present',
-    source => "puppet:///modules/apt_server/distributions",
+    source => "puppet:///modules/reprepro/distributions",
   }
 
 }
