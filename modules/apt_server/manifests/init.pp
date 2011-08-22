@@ -39,6 +39,7 @@ class apt_server {
     enable     => true,
     hasrestart => true,
     require => Package['nginx'],
+    subscribe       => File['/etc/nginx/sites-available/default'],
   }
 
 }
