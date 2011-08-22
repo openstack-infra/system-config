@@ -393,3 +393,9 @@ node /^debuild(-\d+)?\.slave\.openstack\.org$/ {
   include openstack_jenkins_slave
   include cowbuilder
 }
+
+node /^packages\.openstack\.org$/ {
+  include openstack_jenkins_slave
+
+  class { "apt_server": }
+}
