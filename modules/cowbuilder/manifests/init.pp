@@ -3,6 +3,7 @@ class cowbuilder {
   $slave_packages = ["git-buildpackage",
                      "pbuilder",
                      "cowbuilder",
+                     "linux32",
                      "debian-archive-keyring"]
 
   $ubuntu_releases = [ "lucid",
@@ -39,11 +40,15 @@ class cowbuilder {
 
   cowbuilder::cow { $ubuntu_releases:
     distro => 'ubuntu',
-    require => [Package[debian-archive-keyring], File[cowhook]],
+    require => [ Package[debian-archive-keyring],
+                 Package[linux32],
+                 File[cowhook]
+               ],
   }
   cowbuilder::cow { $debian_releases:
     distro => 'debian',
     require => [ Package[debian-archive-keyring],
+                 Package[linux32],
                  File[cowhook],
                  Cowbuilder::Debgpg[AED4B06F473041FA],
                ],
