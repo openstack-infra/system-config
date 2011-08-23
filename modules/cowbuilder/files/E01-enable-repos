@@ -15,23 +15,22 @@ deb http://security.ubuntu.com/ubuntu $release-security main universe
 deb-src http://security.ubuntu.com/ubuntu $release-security main universe
 deb http://us.archive.ubuntu.com/ubuntu/ $release-updates main universe
 deb-src http://us.archive.ubuntu.com/ubuntu/ $release-updates main universe
+
+deb http://packages.openstack.org/trunk $release main
+deb-src http://packages.openstack.org/trunk $release main
 EOF
 
-    #TODO: This should be packages.openstack.org once we have it.
-    add-apt-repository ppa:nova-core/trunk
-
-    if test "${release}" != "oneiric" -a "${release}" != "natty"
-    then
-        add-apt-repository ppa:nova-core/build-depends
-    fi
+    apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 32EE128C
+    rm -rf /etc/apt/sources.list.d/nova-core*
 else
     # Have I mentioned our lack of debian is a bit assy? Let's hope Maverick
     # works for now
-    cat > "/etc/apt/sources.list.d/nova.list" << EOF
-deb http://ppa.launchpad.net/nova-core/trunk/ubuntu maverick main
-deb http://ppa.launchpad.net/nova-core/build-depends/ubuntu maverick main
+    cat > "/etc/apt/sources.list.d/extras.list" << EOF
+deb http://packages.openstack.org/trunk $release main
+deb-src http://packages.openstack.org/trunk $release main
 EOF
-    apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 2A2356C9
+    rm -rf /etc/apt/sources.list.d/nova.list
+    apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 32EE128C
 fi
 
 apt-get update
