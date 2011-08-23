@@ -5,6 +5,14 @@ class cowbuilder {
                      "cowbuilder",
                      "debian-archive-keyring"]
 
+  $ubuntu32_releases = [ "lucid",
+                         "maverick",
+                         "natty",
+                         "oneiric" ]
+
+  $debian32_releases = [ "wheezy",
+                         "squeeze" ]
+
   $ubuntu_releases = [ "lucid",
                        "maverick",
                        "natty",
@@ -36,6 +44,20 @@ class cowbuilder {
   }
 
   cowbuilder::debgpg { 'AED4B06F473041FA': }
+
+  cowbuilder::cow { $ubuntu32_releases:
+    distro => 'ubuntu',
+    bits => '32',
+    require => [Package[debian-archive-keyring], File[cowhook]],
+  }
+  cowbuilder::cow { $debian32_releases:
+    distro => 'debian',
+    bits => '32',
+    require => [ Package[debian-archive-keyring],
+                 File[cowhook],
+                 Cowbuilder::Debgpg[AED4B06F473041FA],
+               ],
+  }
 
   cowbuilder::cow { $ubuntu_releases:
     distro => 'ubuntu',
