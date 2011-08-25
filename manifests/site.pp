@@ -26,15 +26,13 @@ class openstack_base {
                "bzr",
                "git",
                "python-setuptools",
-               "util-linux",
                "byobu"]
   package { $packages: ensure => "latest" }
 
   cron { "updatepuppet":
     user => root,
     minute => "*/15",
-    command => 'sleep $((RANDOM\%600)) && cd /root/openstack-ci-puppet && /usr/bin/git pull -q && /usr/bin/flock -x /var/run/puppet.lock -w 120 /var/lib/gems/1.8/bin/puppet apply -l /tmp/manifest.log --modulepath=/root/openstack-ci-puppet/modules manifests/site.pp',
-    require => Package['util-linux'],
+    command => 'sleep $((RANDOM\%600)) && cd /root/openstack-ci-puppet && /usr/bin/git pull -q && /var/lib/gems/1.8/bin/puppet apply -l /tmp/manifest.log --modulepath=/root/openstack-ci-puppet/modules manifests/site.pp',
   }
 }
 
