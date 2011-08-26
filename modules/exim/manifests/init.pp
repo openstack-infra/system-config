@@ -1,6 +1,13 @@
 class exim() {
-  package {
-    'exim4-daemon-light': ensure => present;
+  package { 'exim4-base':
+    ensure => present;
+  }
+  package { 'exim4-config':
+    ensure => present;
+  }
+  package { 'exim4-daemon-light':
+    ensure => present,
+    require => [Package[exim4-base], Package[exim4-config]],
   }
 
   service { 'exim4':
