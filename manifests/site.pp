@@ -8,7 +8,7 @@ import "doc_server" # TODO: refactor out of module
 class openstack_base {
   include ssh
   include exim
-  
+
   package { "ntp":
     ensure => installed
     }
@@ -209,6 +209,7 @@ node /^quantum(-\d+)?\.slave\.openstack\.org$/ {
                      "python-routes",
                      "python-sqlalchemy",
                      "python-gflags",
+                     "python-cheetah",
                      "python-webtest",
                      "python-webob"]
 
