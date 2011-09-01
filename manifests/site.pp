@@ -187,6 +187,7 @@ node /^keystone(-\d+)?\.slave\.openstack\.org$/ {
 		     "python-nova",
                      "python-unittest2",
                      "python-dtest",
+		     "python-mox",
 		     "python-swift"]
 
   package { $slave_packages:
