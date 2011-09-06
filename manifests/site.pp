@@ -61,6 +61,21 @@ node "gerrit.openstack.org" {
                          }, {
                          name => 'openstack/glance',
                          close_pull => 'true'
+                         }, {
+                         name => 'openstack/swift',
+                         close_pull => 'true'
+                         }, {
+                         name => 'openstack/openstack-ci',
+                         close_pull => 'true'
+                         }, {
+                         name => 'openstack/openstack-ci-puppet',
+                         close_pull => 'true'
+                         }, {
+                         name => 'openstack/openstack-puppet',
+                         close_pull => 'true'
+                         }, {
+                         name => 'openstack/openstack-chef',
+                         close_pull => 'true'
                          } ]
   }
 
