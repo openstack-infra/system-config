@@ -48,6 +48,14 @@ class openstack_jenkins_slave {
 }
 
 #
+# Default: should at least behave like an openstack server
+#
+
+node default {
+  include openstack_server
+}
+
+#
 # Long lived servers:
 #
 node "gerrit.openstack.org" {
