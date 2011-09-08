@@ -100,6 +100,141 @@ node "gerrit-dev.openstack.org" {
   }
 }
 
+node "community.openstack.org" {
+  include openstack_server
+  class { 'iptables':
+    public_tcp_ports => [80, 443]
+  }
+
+  group { 'smaffulli':
+    ensure => 'present'
+  }
+
+  user { 'smaffulli':
+    ensure => 'present',
+    comment => 'Stefano Maffulli',
+    home => $operatingsystem ? {
+      Darwin => '/Users/smaffulli',
+      solaris => '/export/home/smaffulli',
+      default => '/home/smaffulli',
+    },
+    shell => '/bin/bash',
+    gid => 'smaffulli',
+    groups => ['wheel','sudo','admin'],
+    membership => 'minimum',
+  }
+
+  file { 'smaffullihome':
+    name => $operatingsystem ? {
+      Darwin => '/Users/smaffulli',
+      solaris => '/export/home/smaffulli',
+      default => '/home/smaffulli',
+    },
+    owner => 'smaffulli',
+    group => 'smaffulli',
+    mode => 644,
+    ensure => 'directory',
+  }
+
+  file { 'smaffullisshdir':
+    name => $operatingsystem ? {
+      Darwin => '/Users/smaffulli/.ssh',
+      solaris => '/export/home/smaffulli/.ssh',
+      default => '/home/smaffulli/.ssh',
+    },
+    owner => 'smaffulli',
+    group => 'smaffulli',
+    mode => 700,
+    ensure => 'directory',
+    require => File['smaffullihome'],
+  }
+
+  file { 'smaffullikeys':
+    name => $operatingsystem ? {
+      Darwin => '/Users/smaffulli/.ssh/authorized_keys',
+      solaris => '/export/home/smaffulli/.ssh/authorized_keys',
+      default => '/home/smaffulli/.ssh/authorized_keys',
+    },
+    owner => 'smaffulli',
+    group => 'smaffulli',
+    mode => 640,
+    content => "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDD/zAvXaOUXCAT6/B4sCMu/38d/PyOIg/tYsYFAMgfDUzuZwkjZWNGrTpp/HFrOAZISER5KmOg48DKPvm91AeZOHfAXHCP6x9/FcogP9rmc48ym1B5XyIc78QVQjgN6JMSlEZsl0GWzFhQsPDjXundflY07TZfSC1IhpG9UgzamEVFcRjmNztnBuvq2uYVGpdI+ghmqFw9kfvSXJvUbj/F7Pco5XyJBx2e+gofe+X/UNee75xgoU/FyE2a6dSSc4uP4oUBvxDNU3gIsUKrSCmV8NuVQvMB8C9gXYR+JqtcvUSS9DdUAA8StP65woVsvuU+lqb+HVAe71JotDfOBd6f stefano@mattone-E6420\n",
+    ensure => 'present',
+    require => File['smaffullisshdir'],
+  }
+
+  file { 'smaffullibashrc':
+    name => $operatingsystem ? {
+      Darwin => '/Users/smaffulli/.bashrc',
+      solaris => '/export/home/smaffulli/.bashrc',
+      default => '/home/smaffulli/.bashrc',
+    },
+    owner => 'smaffulli',
+    group => 'smaffulli',
+    mode => 640,
+    source => "/etc/skel/.bashrc",
+    replace => 'false',
+    ensure => 'present',
+  }
+
+  file { 'smaffullibash_logout':
+    name => $operatingsystem ? {
+      Darwin => '/Users/smaffulli/.bash_logout',
+      solaris => '/export/home/smaffulli/.bash_logout',
+      default => '/home/smaffulli/.bash_logout',
+    },
+    source => "/etc/skel/.bash_logout",
+    owner => 'smaffulli',
+    group => 'smaffulli',
+    mode => 640,
+    replace => 'false',
+    ensure => 'present',
+  }
+
+  file { 'smaffulliprofile':
+    name => $operatingsystem ? {
+      Darwin => '/Users/smaffulli/.profile',
+      solaris => '/export/home/smaffulli/.profile',
+      default => '/home/smaffulli/.profile',
+    },
+    source => "/etc/skel/.profile",
+    owner => 'smaffulli',
+    group => 'smaffulli',
+    mode => 640,
+    replace => 'false',
+    ensure => 'present',
+  }
+
+  file { 'smaffullibazaardir':
+    name => $operatingsystem ? {
+      Darwin => '/Users/smaffulli/.bazaar',
+      solaris => '/export/home/smaffulli/.bazaar',
+      default => '/home/smaffulli/.bazaar',
+    },
+    owner => 'smaffulli',
+    group => 'smaffulli',
+    mode => 755,
+    ensure => 'directory',
+    require => File['smaffullihome'],
+  }
+
+
+  file { 'smaffullibazaarauth':
+    name => $operatingsystem ? {
+      Darwin => '/Users/smaffulli/.bazaar/authentication.conf',
+      solaris => '/export/home/smaffulli/.bazaar/authentication.conf',
+      default => '/home/smaffulli/.bazaar/authentication.conf',
+    },
+    owner => 'smaffulli',
+    group => 'smaffulli',
+    mode => 640,
+    content => "[Launchpad]\nhost = .launchpad.net\nscheme = ssh\nuser = smaffulli\n",
+    ensure => 'present',
+    require => File['smaffullibazaardir'],
+  }
+
+}
+
 node "docs.openstack.org" {
   include openstack_server
   include doc_server
