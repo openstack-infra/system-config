@@ -99,23 +99,4 @@ class jenkins_slave {
         require => [Apt::Ppa["ppa:nova-core/trunk"],
                     Package[python-coverage]]
           }
-
-    package { "coverage":
-        ensure => absent,
-        provider => pip,
-        require => Package[python-pip],
-          }
-
-    package { "nose":
-        ensure => absent,
-        provider => pip,
-        require => Package[python-pip],
-          }
-
-    package { "nosexcover":
-        ensure => absent,
-        provider => pip,
-        require => Package[python-pip],
-    }
-
 }
