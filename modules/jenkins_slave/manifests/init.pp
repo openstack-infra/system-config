@@ -85,18 +85,37 @@ class jenkins_slave {
 
     package { "python-coverage":
         ensure => latest,
-        require => Package[python-nose]
+        require => [Apt::Ppa["ppa:nova-core/trunk"],
+                    Package[python-nose]]
           }
 
     package { "python-nose":
         ensure => latest,
-        require => Package[python-pip]
+        require => Apt::Ppa["ppa:nova-core/trunk"],
+          }
+
+    package { "python-nosexcover":
+        ensure => latest,
+        require => [Apt::Ppa["ppa:nova-core/trunk"],
+                    Package[python-coverage]]
+          }
+
+    package { "coverage":
+        ensure => absent,
+        provider => pip,
+        require => Package[python-pip],
+          }
+
+    package { "nose":
+        ensure => absent,
+        provider => pip,
+        require => Package[python-pip],
           }
 
     package { "nosexcover":
-        ensure => latest,
+        ensure => absent,
         provider => pip,
-        require => Package[python-coverage]
+        require => Package[python-pip],
     }
 
 }

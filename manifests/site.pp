@@ -45,6 +45,10 @@ class openstack_jenkins_slave {
   include openstack_base
   include openstack_ci_admins_users
   include jenkins_slave
+
+  apt::ppa { "ppa:nova-core/trunk":
+    ensure => present
+  }
 }
 
 #
@@ -328,9 +332,6 @@ node /^keystone(-\d+)?\.slave\.openstack\.org$/ {
   apt::ppa { "ppa:keystone-core/trunk":
     ensure => present
   }
-  apt::ppa { "ppa:nova-core/trunk":
-    ensure => present
-  }
   apt::ppa { "ppa:swift-core/trunk":
     ensure => present
   }
@@ -359,10 +360,6 @@ node /^keystone(-\d+)?\.slave\.openstack\.org$/ {
 node /^quantum(-\d+)?\.slave\.openstack\.org$/ {
   include openstack_jenkins_slave
 
-  apt::ppa { "ppa:nova-core/trunk":
-    ensure => present
-  }
-
   $slave_packages = ["python-eventlet",
                      "python-paste",
                      "python-routes",
@@ -388,10 +385,6 @@ node /^manuals(-\d+)?\.slave\.openstack\.org$/ {
 
 node /^nova(-\d+)?\.slave\.openstack\.org$/ {
   include openstack_jenkins_slave
-
-  apt::ppa { "ppa:nova-core/trunk":
-    ensure => present
-  }
 
   apt::builddep { "nova":
     ensure => present,
