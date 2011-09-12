@@ -7,8 +7,13 @@ import "doc_server" # TODO: refactor out of module
 #
 class openstack_base {
   include ssh
+  include snmpd
   include exim
 
+  class { 'iptables':
+    public_tcp_ports => $iptables_public_tcp_ports,
+  }
+  
   package { "ntp":
     ensure => installed
     }
@@ -63,6 +68,7 @@ node default {
 # Long lived servers:
 #
 node "gerrit.openstack.org" {
+  $iptables_public_tcp_ports = [80, 443, 29418]
   include openstack_server
   class { 'gerrit':
     canonicalweburl => "https://review.openstack.org/",
@@ -90,13 +96,10 @@ node "gerrit.openstack.org" {
                          close_pull => 'true'
                          } ]
   }
-
-  class { 'iptables':
-    public_tcp_ports => [80, 443, 29418]
-  }
 }
 
 node "gerrit-dev.openstack.org" {
+  $iptables_public_tcp_ports = [80, 443, 29418]
   include openstack_server
   class { 'gerrit':
     canonicalweburl => "https://review-dev.openstack.org/",
@@ -106,17 +109,11 @@ node "gerrit-dev.openstack.org" {
                          close_pull => 'true'
                          } ]
   }
-
-  class { 'iptables':
-    public_tcp_ports => [80, 443, 29418]
-  }
 }
 
 node "community.openstack.org" {
+  $iptables_public_tcp_ports = [80, 443, 29418]
   include openstack_server
-  class { 'iptables':
-    public_tcp_ports => [80, 443]
-  }
 
   group { 'smaffulli':
     ensure => 'present'
