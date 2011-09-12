@@ -7,6 +7,7 @@ import "doc_server" # TODO: refactor out of module
 #
 class openstack_base {
   include ssh
+  include snmpd
   include exim
 
   package { "ntp":
