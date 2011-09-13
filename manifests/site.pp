@@ -88,6 +88,18 @@ node "gerrit.openstack.org" {
                          }, {
                          name => 'openstack/openstack-chef',
                          close_pull => 'true'
+                         }, {
+                         name => 'openstack/compute-api',
+                         close_pull => 'true'
+                         }, {
+                         name => 'openstack/image-api',
+                         close_pull => 'true'
+                         }, {
+                         name => 'openstack/identity-api',
+                         close_pull => 'true'
+                         }, {
+                         name => 'openstack/object-api',
+                         close_pull => 'true'
                          } ]
   }
 
