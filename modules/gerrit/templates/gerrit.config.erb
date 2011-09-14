@@ -12,6 +12,7 @@
 [auth]
 	type = OPENID_SSO
 	openIdSsoUrl = <%= openidssourl %>
+	cookieSecure = true
 [sendemail]
 	smtpServer = localhost
 [container]
@@ -23,6 +24,8 @@
 	listenUrl = proxy-https://*:8081/
 [cache]
 	directory = cache
+[cache "web_sessions"]
+	maxAge = 1d
 [user]
 	email = <%= email %>
 <% commentlinks.each do |commentlink| -%>
