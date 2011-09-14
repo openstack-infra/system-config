@@ -4,6 +4,7 @@ import "users"
 # Abstract classes:
 #
 class openstack_base {
+  include openstack_project::users
   include ssh
   include snmpd
   include exim
@@ -114,8 +115,6 @@ node "gerrit.openstack.org" {
 node "gerrit-dev.openstack.org" {
   $iptables_public_tcp_ports = [80, 443, 29418]
   include openstack_server
-  include openstack_project::users
-  
  
   class { 'gerrit':
     canonicalweburl => "https://review-dev.openstack.org/",
