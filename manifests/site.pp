@@ -97,6 +97,9 @@ node "gerrit.openstack.org" {
                          name => 'openstack/openstack-chef',
                          close_pull => 'true'
                          }, {
+                         name => 'openstack/openstack-manuals',
+                         close_pull => 'true'
+                         }, {
                          name => 'openstack/compute-api',
                          close_pull => 'true'
                          }, {
