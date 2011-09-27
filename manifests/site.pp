@@ -85,6 +85,9 @@ node "gerrit.openstack.org" {
                          name => 'openstack/swift',
                          close_pull => 'true'
                          }, {
+                         name => 'openstack/nova',
+                         close_pull => 'true'
+                         }, {
                          name => 'openstack/openstack-ci',
                          close_pull => 'true'
                          }, {
