@@ -1,0 +1,7 @@
+Code-Review+2: Monty Taylor <mordred@inaugust.com>
+Verified+1: Jenkins
+Submitted-by: Jenkins
+Submitted-at: Tue, 27 Sep 2011 18:14:46 +0000
+Reviewed-on: https://review.openstack.org/692
+Project: openstack/openstack-ci-puppet
+Branch: refs/heads/master
