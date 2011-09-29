@@ -230,21 +230,8 @@ node /^keystone(-\d+)?\.slave\.openstack\.org$/ {
     ensure => present
   }
 
-  $slave_packages = ["python-eventlet",
-                     "python-ldap",
-                     "python-memcache",
-                     "python-paste",
-                     "python-routes",
-                     "python-sqlalchemy",
-                     "python-webob",
-		     "python-nova",
-                     "python-unittest2",
-                     "python-dtest",
-		     "python-mox",
-		     "python-swift"]
-
-  package { $slave_packages:
-    ensure => "latest",
+  apt::builddep { "keystone":
+    ensure => present,
     require => [Apt::Ppa["ppa:keystone-core/trunk"],
                 Apt::Ppa["ppa:nova-core/trunk"],
                 Apt::Ppa["ppa:swift-core/trunk"]]
