@@ -11,7 +11,7 @@ $commentlinks = [ { name => 'changeid',
                   link => 'https://code.launchpad.net/bugs/$2' },
 
                   { name => 'blueprint',
-                  match => '([Bb]lue[Pp]rint|[Bb][Pp])\\s*[#:]?\\s*(\\S+)',
+                  match => '([Bb]lue[Pp]rint|[Bb][Pp])\\s*[#:]?\\s*([A-Za-z0-9\\-]+)',
                   link => 'https://blueprints.launchpad.net/openstack/?searchtext=$2' },
 
                   ]
