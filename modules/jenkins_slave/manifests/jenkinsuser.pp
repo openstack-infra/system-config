@@ -10,8 +10,9 @@ define jenkinsuser($ensure = present) {
     home => '/home/jenkins',
     gid => 'jenkins',
     shell => '/bin/bash',
-    groups => ['wheel','sudo'],
+    groups => ['wheel','sudo','jenkins'],
     membership => 'minimum',
+    require => [Group['wheel'], Group['sudo'], Group['jenkins']],
   }
 
   file { 'jenkinshome':

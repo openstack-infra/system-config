@@ -30,6 +30,7 @@ class openstack_base {
                "bzr",
                "git",
                "python-setuptools",
+               "python-virtualenv",
                "byobu"]
   package { $packages: ensure => "latest" }
 
@@ -42,20 +43,19 @@ class openstack_base {
 
 class openstack_server {
   include openstack_base
+  include sudoers
   realize (
     User::Virtual::Localuser["mordred"],
     User::Virtual::Localuser["corvus"],
     User::Virtual::Localuser["soren"],
   )
+
 }
 
 class openstack_jenkins_slave {
-  include openstack_base
+  include openstack_server
   include jenkins_slave
 
-  apt::ppa { "ppa:nova-core/trunk":
-    ensure => present
-  }
 }
 
 #
@@ -149,160 +149,14 @@ node "docs.openstack.org" {
 #
 # Jenkins slaves:
 #
-node /^burrow-java(-\d+)?\.slave\.openstack\.org$/ {
+node /^.*\.slave\.openstack\.org$/ {
   include openstack_jenkins_slave
-
-  package { "maven2":
-    ensure => latest
-  }
-}
-
-node /^burrow(-\d+)?\.slave\.openstack\.org$/ {
-  include openstack_jenkins_slave
-
-  package { "python-eventlet":
-    ensure => latest
-  }
-}
-
-node /^libburrow(-\d+)?\.slave\.openstack\.org$/ {
-  include openstack_jenkins_slave
-
-  $slave_packages = ["build-essential",
-                     "libcurl4-gnutls-dev",
-                     "libtool",
-                     "autoconf",
-                     "automake"]
-  package { $slave_packages: ensure => "latest" }
-}
-
-node /^dashboard(-\d+)?\.slave\.openstack\.org$/ {
-  include openstack_jenkins_slave
-
-  package { "python-virtualenv":
-    ensure => present
-  }
-}
-
-node /^glance(-\d+)?\.slave\.openstack\.org$/ {
-  include openstack_jenkins_slave
-
-  apt::ppa { "ppa:glance-core/trunk":
-    ensure => present
-  }
-
-  apt::builddep { "glance":
-    ensure => present,
-    require => Apt::Ppa["ppa:glance-core/trunk"]
-  }
-
-  $slave_packages = ["python-argparse",
-                     "python-decorator",
-                     "python-eventlet",
-                     "python-formencode",
-                     "python-greenlet",
-                     "python-migrate",
-                     "python-mox",
-                     "python-netifaces",
-                     "python-openid",
-                     "python-openssl",
-                     "python-paste",
-                     "python-pastedeploy",
-                     "python-pastescript",
-                     "python-routes",
-                     "python-scgi",
-                     "python-sqlalchemy",
-                     "python-sqlalchemy-ext",
-                     "python-swift",
-                     "python-tempita",
-                     "python-webob",
-                     "python-xattr"]
-  package { $slave_packages: ensure => "latest" }
-}
-
-node /^keystone(-\d+)?\.slave\.openstack\.org$/ {
-  include openstack_jenkins_slave
-
-  apt::ppa { "ppa:keystone-core/trunk":
-    ensure => present
-  }
-  apt::ppa { "ppa:swift-core/trunk":
-    ensure => present
-  }
-
-  apt::builddep { "keystone":
-    ensure => present,
-    require => [Apt::Ppa["ppa:keystone-core/trunk"],
-                Apt::Ppa["ppa:nova-core/trunk"],
-                Apt::Ppa["ppa:swift-core/trunk"]]
-  }
-}
-
-node /^quantum(-\d+)?\.slave\.openstack\.org$/ {
-  include openstack_jenkins_slave
-
-  $slave_packages = ["python-eventlet",
-                     "python-paste",
-                     "python-routes",
-                     "python-sqlalchemy",
-                     "python-gflags",
-                     "python-cheetah",
-                     "python-webtest",
-                     "python-webob"]
-
-  package { $slave_packages:
-    ensure => "latest",
-    require => Apt::Ppa["ppa:nova-core/trunk"]
-  }
-}
-
-node /^manuals(-\d+)?\.slave\.openstack\.org$/ {
-  include openstack_jenkins_slave
-
-  package { "maven2":
-    ensure => latest
-  }
-}
-
-node /^nova(-\d+)?\.slave\.openstack\.org$/ {
-  include openstack_jenkins_slave
-
-  apt::builddep { "nova":
-    ensure => present,
-    require => Apt::Ppa["ppa:nova-core/trunk"]
-  }
-}
-
-node /^openstack-ci(-\d+)?\.slave\.openstack\.org$/ {
-  include openstack_jenkins_slave
-}
-
-node /^swift(-\d+)?\.slave\.openstack\.org$/ {
-  include openstack_jenkins_slave
-
-  apt::ppa { "ppa:swift-core/trunk":
-    ensure => present
-  }
-
-  apt::builddep { "swift":
-    ensure => present,
-    require => Apt::Ppa["ppa:swift-core/trunk"]
-  }
 }
 
 node /^driver(\d+)\.1918\.openstack\.org$/ {
   include openstack_jenkins_slave
 }
 
-node /^debuild(-\d+)?\.slave\.openstack\.org$/ {
-  include openstack_jenkins_slave
-  include cowbuilder
-
-  class { "reprepro": }
-}
-
 node /^packages\.openstack\.org$/ {
-  include openstack_jenkins_slave
-
-  class { "apt_server": }
+  include openstack_server
 }

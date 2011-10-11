@@ -1,6 +1,0 @@
-server {
-  listen 80;
-  server_name packages.openstack.org;
-  root /srv/packages;
-  autoindex on;
-}

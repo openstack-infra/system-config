@@ -9,9 +9,50 @@ class jenkins_slave {
       require => [ Package[git], Jenkinsuser[jenkins] ]
     }
 
-    apt::ppa { "ppa:tarmac/ppa":
-      ensure => present,
+    apt::ppa { "ppa:openstack-ci/build-depends":
+      ensure => present
     }
+
+    $packages = ["apache2",
+                 "autoconf",
+                 "automake",
+                 "cdbs",
+                 "curl",
+                 "build-essential",
+                 "devscripts",
+                 "dnsmasq-base",
+                 "ebtables",
+                 "gawk",
+                 "graphviz",
+                 "kpartx",
+                 "kvm",
+                 "iptables",
+                 "libapache2-mod-wsgi",
+                 "libcurl4-gnutls-dev",
+                 "libldap2-dev",
+                 "libsasl2-dev",
+                 "libtool",
+                 "libvirt-bin",
+                 "libxml2-dev",
+                 "libxslt1-dev",
+                 "maven2",
+                 "openjdk-6-jre",
+                 "pep8",
+                 "psmisc",
+                 "pylint",
+                 "python-libvirt",
+                 "python-pip",
+                 "python-all-dev",
+                 "python-sphinx",
+                 "python-unittest2",
+                 "python3-all-dev",
+                 "screen",
+                 "socat",
+                 "sqlite3",
+                 "unzip",
+                 "vlan",
+                 "wget"]
+    package { $packages: ensure => "latest" }
 
     cron { "updateci":
       user => jenkins,
@@ -41,62 +82,4 @@ class jenkins_slave {
        ],
     }
 
-    package { "openjdk-6-jre":
-        ensure => latest
-          }
-    
-    package { "cdbs":
-        ensure => latest
-          }
-
-    package { "devscripts":
-        ensure => latest
-          }
-    
-    package { "python-sphinx":
-        ensure => latest
-          }
-    
-    package { "graphviz":
-        ensure => latest
-          }
-    
-    package { "pep8":
-        ensure => latest
-          }
-    
-    package { "pylint":
-        ensure => latest
-          }
-    
-    package { "python-dev":
-         ensure => latest
-           }
-
-    package { "tarmac":
-      ensure => latest,
-      require => Apt::Ppa["ppa:tarmac/ppa"]
-    }
-
-    package { "python-pip":
-        ensure => latest,
-        require => Package[python-dev]
-          }
-
-    package { "python-coverage":
-        ensure => latest,
-        require => [Apt::Ppa["ppa:nova-core/trunk"],
-                    Package[python-nose]]
-          }
-
-    package { "python-nose":
-        ensure => latest,
-        require => Apt::Ppa["ppa:nova-core/trunk"],
-          }
-
-    package { "python-nosexcover":
-        ensure => latest,
-        require => [Apt::Ppa["ppa:nova-core/trunk"],
-                    Package[python-coverage]]
-          }
 }
