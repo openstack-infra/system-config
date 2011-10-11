@@ -10,7 +10,7 @@ class user::virtual {
       home    => "/home/$title",
       shell   => $shell,
       gid     => $title,
-      groups  => ['wheel','sudo','admin'],
+      groups  => ['sudo','admin'],
       membership => 'minimum',
       managehome => true,  # creates the home directory (does not actually manage it)
       require => Group[$title],
