@@ -10,7 +10,6 @@ define jenkinsuser($ensure = present) {
     home => '/home/jenkins',
     gid => 'jenkins',
     shell => '/bin/bash',
-    groups => ['wheel','sudo'],
     membership => 'minimum',
   }
 
@@ -169,39 +168,6 @@ define jenkinsuser($ensure = present) {
     mode => 755,
     ensure => 'directory',
     require => File['jenkinshome'],
-  }
-
-  file { 'jenkinsconftarmacdir':
-    name => '/home/jenkins/.config/tarmac',
-    owner => 'jenkins',
-    group => 'jenkins',
-    mode => 755,
-    ensure => 'directory',
-    require => File['jenkinsconfigdir'],
-  }
-
-  file { 'jenkinstarmacconf':
-    name => '/home/jenkins/.config/tarmac/tarmac.conf',
-    owner => 'jenkins',
-    group => 'jenkins',
-    mode => 644,
-    ensure => 'present',
-    require => File['jenkinsconftarmacdir'],
-    source => [
-                "puppet:///modules/jenkins_slave/tarmac.conf",
-              ],
-  }
-
-  file { 'jenkinstarmaccredentials':
-    name => '/home/jenkins/.config/tarmac/credentials',
-    owner => 'jenkins',
-    group => 'jenkins',
-    mode => 640,
-    ensure => 'present',
-    require => File['jenkinsconftarmacdir'],
-    source => [
-                "puppet:///modules/jenkins_slave/slave_tarmac_key",
-              ],
   }
 
 }

@@ -12,13 +12,14 @@ Defaults	env_reset
 # User alias specification
 
 # Cmnd alias specification
-#drizzle    ALL = NOPASSWD: /usr/bin/pbuilder
-
 
 # User privilege specification
 root	ALL=(ALL) ALL
 
-# Uncomment to allow members of group sudo to not need a password
+# Allow members of group sudo to execute any command after they have
+# provided their password
 # (Note that later entries override this, so you might need to move
 # it further down)
-%wheel ALL=NOPASSWD: ALL
+%sudo ALL=(ALL) NOPASSWD: ALL
+#
+#includedir /etc/sudoers.d
