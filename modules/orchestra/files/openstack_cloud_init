@@ -1,0 +1,39 @@
+#set http_server=$getVar('$http_server', 'true')
+<%
+import orchestra.utils.cloudinit
+import base64
+
+cfg = """#cloud-config
+apt_update: false
+apt_upgrade: false
+disable_root: false
+output: {all: '| tee -a /var/log/cloud-init-output.log'}
+runcmd:
+ - echo "cloud init waiting"
+ - sleep 60
+ - sudo apt-get -y install kexec-tools
+ - sudo sed -i /etc/default/kexec -e s/LOAD_KEXEC=false/LOAD_KEXEC=true/
+ - sudo mkdir /var/spool/rsyslog
+ - sudo chown syslog.syslog /var/spool/rsyslog
+ - echo "\$ModLoad imuxsock" > /tmp/rsyslog.conf
+ - echo "\$WorkDirectory /var/spool/rsyslog" >> /tmp/rsyslog.conf
+ - echo "\$MaxMessageSize 32k" >> /tmp/rsyslog.conf
+ - echo "\$ActionQueueType LinkedList" >> /tmp/rsyslog.conf
+ - echo "\$ActionQueueFileName srvrfwd" >> /tmp/rsyslog.conf
+ - echo "\$ActionResumeRetryCount -1" >> /tmp/rsyslog.conf
+ - echo "\$ActionQueueSaveOnShutdown on" >> /tmp/rsyslog.conf
+ - echo "*.* @@%s:10514" >> /tmp/rsyslog.conf
+ - sudo mv /tmp/rsyslog.conf /etc/rsyslog.d/10-remote.conf
+ - sudo chown root.root /etc/rsyslog.d/10-remote.conf
+ - sudo lvrename /dev/main/root orig_root
+ - sudo lvcreate -L20G -s -n root /dev/main/orig_root
+ - reboot
+ssh_authorized_keys: 
+ - ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAtioTW2wh3mBRuj+R0Jyb/mLt5sjJ8dEvYyA8zfur1dnqEt5uQNLacW4fHBDFWJoLHfhdfbvray5wWMAcIuGEiAA2WEH23YzgIbyArCSI+z7gB3SET8zgff25ukXlN+1mBSrKWxIza+tB3NU62WbtO6hmelwvSkZ3d7SDfHxrc4zEpmHDuMhxALl8e1idqYzNA+1EhZpbcaf720mX+KD3oszmY2lqD1OkKMquRSD0USXPGlH3HK11MTeCArKRHMgTdIlVeqvYH0v0Wd1w/8mbXgHxfGzMYS1Ej0fzzJ0PC5z5rOqsMqY1X2aC1KlHIFLAeSf4Cx0JNlSpYSrlZ/RoiQ== hudson@hudson
+""" % http_server
+
+user_data = orchestra.utils.cloudinit.get_user_data_late_command(base64.b64encode(cfg))
+
+%> \
+$orchestra.utils.cloudinit.get_meta_data_late_command($getVar('$uid', 'true'), $getVar('$hostname', 'true')) \ && \
+$user_data \

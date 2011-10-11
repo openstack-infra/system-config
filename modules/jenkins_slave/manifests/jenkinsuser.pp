@@ -104,15 +104,15 @@ define jenkinsuser($ensure = present) {
               ],
   }
 
-  file { 'jenkinsknownhosts':
-    name => '/home/jenkins/.ssh/known_hosts',
+  file { 'jenkinssshconfig':
+    name => '/home/jenkins/.ssh/config',
     owner => 'jenkins',
     group => 'jenkins',
     mode => 640,
     ensure => 'present',
     require => File['jenkinssshdir'],
     source => [
-                "puppet:///modules/jenkins_slave/known_hosts",
+                "puppet:///modules/jenkins_slave/ssh_config",
               ],
   }
 

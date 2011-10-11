@@ -1,0 +1,7 @@
+<%
+import orchestra.utils.cloudinit
+script = 'echo "blacklist xgifb" > /etc/modprobe.d/blacklist-xgifb.conf'
+
+blacklist = orchestra.utils.cloudinit._KSMETA_LATE_COMMAND_TEMPLATE % (orchestra.utils.cloudinit.base64_gzip(script), "blacklist")
+%> \
+$blacklist \

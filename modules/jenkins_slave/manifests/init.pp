@@ -9,6 +9,11 @@ class jenkins_slave {
       require => [ Package[git], Jenkinsuser[jenkins] ],
     }
 
+    devstackrepo { "devstack":
+      ensure => present,
+      require => [ Package[git], Jenkinsuser[jenkins] ],
+    }
+
     apt::ppa { "ppa:openstack-ci/build-depends":
       ensure => present
     }
