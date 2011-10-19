@@ -129,7 +129,8 @@ Branch:    %s
     from email.mime.multipart import MIMEMultipart
     from email.mime.base import MIMEBase
     msg = MIMEMultipart(_subtype='signed',protocol='application/pgp-signature')
-    msg['Subject'] = 'A change has been merged to %s' % project
+    short_project = project.split("/")[-1]
+    msg['Subject'] = 'Fix merged to %s (%s)' % (short_project, branch)
     msg['From'] = FROM_ADDRESS
     msg['To'] = to_address
 
