@@ -17,9 +17,7 @@ define devstackrepo($ensure = present) {
         mode => 444,
         ensure => 'present',
         source => 'puppet:///modules/jenkins_slave/localrc',
-	require => [Exec["Clone devstack git repo"],
-	            File["/var/lib/cobbler/snippets/openstack_mysql_password"],
-		    ]
+	require => Exec["Clone devstack git repo"],
       }
       exec { "Update devstack git repo":
         path        => "/usr/sbin:/usr/bin:/sbin:/bin",
