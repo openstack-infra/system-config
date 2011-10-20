@@ -153,11 +153,7 @@ node /^.*\.slave\.openstack\.org$/ {
   include openstack_jenkins_slave
 }
 
-node /^driver(\d+)\.1918\.openstack\.org$/ {
-  include openstack_jenkins_slave
-}
-
-node /^deploy(\d+)\.1918\.openstack\.org$/ {
+node /^deploy.*.openstack\.org$/ {
   include openstack_jenkins_slave
   include orchestra
 }
