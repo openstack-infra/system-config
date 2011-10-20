@@ -1,5 +1,4 @@
 class orchestra {
-    $mysql_pass = generate('/usr/bin/openssl', 'rand', '-hex', '12')
     package { ipmitool: ensure => present }
     package { ubuntu-orchestra-server: ensure => present }
     exec { cobbler-sync:
@@ -28,8 +27,7 @@ class orchestra {
       group => 'root',
       mode => 444,
       ensure => 'present',
-      content	  => template('orchestra/openstack_mysql_password.erb'),
-      replace	  => 'false',
+      source	  => 'puppet:///modules/orchestra/openstack_mysql_password',
     }
     file { "/etc/cobbler/dnsmasq.template":
       owner => 'root',
