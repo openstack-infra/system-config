@@ -1,8 +1,0 @@
-deb http://archive.ubuntu.com/ubuntu/ natty main restricted universe
-deb-src http://archive.ubuntu.com/ubuntu/ natty main restricted universe
-
-deb http://archive.ubuntu.com/ubuntu/ natty-updates main restricted universe
-deb-src http://archive.ubuntu.com/ubuntu/ natty-updates main restricted universe
-
-deb http://security.ubuntu.com/ubuntu natty-security main restricted universe
-deb-src http://security.ubuntu.com/ubuntu natty-security main restricted universe

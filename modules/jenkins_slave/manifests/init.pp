@@ -70,17 +70,6 @@ class jenkins_slave {
       require => [ Jenkinsuser[jenkins] ],
     }
 
-    file { 'aptsources':
-      name => '/etc/apt/sources.list',
-      owner => 'root',
-      group => 'root',
-      mode => 644,
-      ensure => 'present',
-      source => [
-         "puppet:///modules/jenkins_slave/sources.list",
-       ],
-    }
-
     file { 'profilerubygems':
       name => '/etc/profile.d/rubygems.sh',
       owner => 'root',
