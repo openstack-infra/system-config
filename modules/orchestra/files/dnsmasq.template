@@ -10,7 +10,7 @@ addn-hosts = /var/lib/cobbler/cobbler_hosts
 #domain=
 dhcp-ignore=tag:!known
 
-dhcp-range=10.14.247.42,10.14.247.45
+dhcp-range=10.14.247.37,10.14.247.45
 dhcp-option=3,10.14.247.33
 dhcp-lease-max=1000
 dhcp-authoritative
