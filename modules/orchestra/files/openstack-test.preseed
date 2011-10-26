@@ -125,7 +125,7 @@ d-i     pkgsel/include string debconf byobu capistrano cloud-init openssh-server
 	python-m2crypto python-boto python-numpy mysql-common mysql-client-5.1 \
 	erlang-base erlang-ssl erlang-nox erlang-inets erlang-mnesia \
 	libhtml-template-perl gettext-base libavahi-client3 libxml2-utils \
-	libpciaccess0 libparted0debian1
+	libpciaccess0 libparted0debian1 iscsitarget
 
 mysql-server-5.1 mysql-server/root_password password $SNIPPET('openstack_mysql_password')
 mysql-server-5.1 mysql-server/root_password_again password $SNIPPET('openstack_mysql_password')
