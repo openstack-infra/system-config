@@ -88,6 +88,12 @@ node "gerrit.openstack.org" {
                          name => 'openstack/nova',
                          close_pull => 'true'
                          }, {
+                         name => 'openstack/horizon',
+                         close_pull => 'true'
+                         }, {
+                         name => 'openstack/quantum',
+                         close_pull => 'true'
+                         }, {
                          name => 'openstack/openstack-ci',
                          close_pull => 'true'
                          }, {
@@ -113,6 +119,9 @@ node "gerrit.openstack.org" {
                          close_pull => 'true'
                          }, {
                          name => 'openstack/object-api',
+                         close_pull => 'true'
+                         }, {
+                         name => 'openstack/netconn-api',
                          close_pull => 'true'
                          } ]
   }
