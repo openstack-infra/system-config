@@ -142,7 +142,7 @@ node "gerrit-dev.openstack.org" {
 }
 
 node "community.openstack.org" {
-  $iptables_public_tcp_ports = [80, 443, 29418]
+  $iptables_public_tcp_ports = [80, 443, 8099, 8080]
   include openstack_server
 
   realize (
