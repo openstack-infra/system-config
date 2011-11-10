@@ -105,10 +105,14 @@ def send_bug_mail(bug_number, change_url, project, commit, submitter, branch, gi
     body = '''Reviewed:  %s
 Committed: %s
 Submitter: %s
-Branch:    %s
+Branch:    %s\n''' % (change_url, gitorious_url, submitter, branch)
 
- status fixcommitted
- done\n''' % (change_url, gitorious_url, submitter, branch)
+    if branch == 'master':
+        body = body + '\n status fixcommitted\n done\n'
+    else:
+        branch_name = branch.replace('/','-')
+        if branch_name.replace('-','').isalnum():
+           body = body + '\n tag in-%s\n done\n' % branch_name
 
     body = body + '\n' + git_log
 
