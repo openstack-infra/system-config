@@ -69,6 +69,12 @@ class jenkins_slave {
       require => Apt::Ppa["ppa:openstack-ci/build-depends"],
     }
 
+    package { "apache-libcloud":
+      ensure => latest,
+      provider => pip,
+      require => Package[python-pip]
+    }
+
     cron { "updateci":
       user => jenkins,
       minute => "*/15",
