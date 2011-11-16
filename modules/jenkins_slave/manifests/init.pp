@@ -37,6 +37,7 @@ class jenkins_slave {
                  "libcurl4-gnutls-dev",
                  "libldap2-dev",
                  "libsasl2-dev",
+                 "libsqlite0-dev",
                  "libtool",
                  "libvirt-bin",
                  "libxml2-dev",
