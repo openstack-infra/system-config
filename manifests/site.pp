@@ -155,6 +155,12 @@ node "docs.openstack.org" {
   include doc_server
 }
 
+node "devstack-oneiric.template.openstack.org" {
+  include openstack_server
+  include devstack_host
+}
+
+
 #
 # Jenkins slaves:
 #
