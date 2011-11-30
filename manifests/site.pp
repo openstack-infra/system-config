@@ -94,6 +94,12 @@ node "gerrit.openstack.org" {
                          name => 'openstack/quantum',
                          close_pull => 'true'
                          }, {
+                         name => 'openstack/melange',
+                         close_pull => 'true'
+                         }, {
+                         name => 'openstack/tempest',
+                         close_pull => 'true'
+                         }, {
                          name => 'openstack/openstack-ci',
                          close_pull => 'true'
                          }, {
