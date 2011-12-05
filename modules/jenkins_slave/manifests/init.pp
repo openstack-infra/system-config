@@ -36,7 +36,6 @@ class jenkins_slave {
                  "libapache2-mod-wsgi",
                  "libcurl4-gnutls-dev",
                  "libldap2-dev",
-                 "libmysqlclient-dev",
                  "libsasl2-dev",
                  "libsqlite3-dev",
                  "libtool",
@@ -75,12 +74,6 @@ class jenkins_slave {
       ensure => latest,
       provider => pip,
       require => Package[python-pip]
-    }
-
-    package { "git-review":
-      ensure => latest,
-      provide => pip,
-      require => Package[git-review],
     }
 
     cron { "updateci":
