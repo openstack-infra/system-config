@@ -1,0 +1,8 @@
+Change-Id: Iba9394500e6aca887ab4842ae452d74d28c690d0
+Code-Review+2: James E. Blair <corvus@inaugust.com>
+Verified+1: Jenkins
+Submitted-by: Jenkins
+Submitted-at: Mon, 05 Dec 2011 19:51:06 +0000
+Reviewed-on: https://review.openstack.org/2083
+Project: openstack/openstack-ci-puppet
+Branch: refs/heads/master
