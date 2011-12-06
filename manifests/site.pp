@@ -34,7 +34,9 @@ class openstack_base {
                "python-virtualenv",
                "byobu"]
   package { $packages: ensure => "latest" }
+}
 
+class openstack_cron {
   cron { "updatepuppet":
     user => root,
     minute => "*/15",
@@ -42,20 +44,25 @@ class openstack_base {
   }
 }
 
-class openstack_server {
+# A template host with no running services
+class openstack_template {
   include openstack_base
   realize (
     User::Virtual::Localuser["mordred"],
     User::Virtual::Localuser["corvus"],
     User::Virtual::Localuser["soren"],
   )
+}
 
+# A server that we expect to run for some time
+class openstack_server {
+  include openstack_template
+  include openstack_cron
 }
 
 class openstack_jenkins_slave {
   include openstack_server
   include jenkins_slave
-
 }
 
 #
@@ -174,7 +181,7 @@ node "docs.openstack.org" {
 }
 
 node "devstack-oneiric.template.openstack.org" {
-  include openstack_server
+  include openstack_template
   include devstack_host
 }
 
