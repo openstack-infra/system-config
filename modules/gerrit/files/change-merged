@@ -21,68 +21,22 @@
 # Changed by James E. Blair <james.blair@rackspace.com> to add 
 # config file parsing, and signed email with commands.
 
-# Some parts:
-# Copyright 2009-2011 Canonical Ltd.  This software is licensed under the
-# GNU Affero General Public License version 3 (see the file LICENSE).
-
-from email.mime.text import MIMEText
 from getopt import getopt
+from launchpadlib.launchpad import Launchpad
+from launchpadlib.uris import LPNET_SERVICE_ROOT
 import re
-import smtplib
 import subprocess
 import sys, os
-import pyme, pyme.core
-import StringIO
-import ConfigParser
 
-TO_ADDRESS_SUFFIX = '@bugs.launchpad.net'
+
 BASE_DIR = '/home/gerrit2/review_site'
-GERRIT_CONFIG = os.environ.get('GERRIT_CONFIG','/home/gerrit2/review_site/etc/gerrit.config')
-
-def get_broken_config(filename):
-  """ gerrit config ini files are broken and have leading tabs """
-  text = ""
-  with open(filename,"r") as conf:
-    for line in conf.readlines():
-      text = "%s%s" % (text, line.lstrip())
-
-  fp = StringIO.StringIO(text)
-  c=ConfigParser.ConfigParser()
-  c.readfp(fp)
-  return c
-
-gerrit_config = get_broken_config(GERRIT_CONFIG)
-FROM_ADDRESS = gerrit_config.get('user', 'email')
+GERRIT_CACHE_DIR = os.path.expanduser(os.environ.get('GERRIT_CACHE_DIR',
+                                '~/.launchpadlib/cache'))
+GERRIT_CREDENTIALS = os.path.expanduser(os.environ.get('GERRIT_CREDENTIALS',
+                                '~/.launchpadlib/creds'))
 
 
-# From Launchpad: lib/lp/services/mail/incoming.py
-# Match '\n' and '\r' line endings. That is, all '\r' that are not
-# followed by a '\n', and all '\n' that are not preceded by a '\r'.
-non_canonicalised_line_endings = re.compile('((?<!\r)\n)|(\r(?!\n))')
-
-# Match trailing whitespace.
-trailing_whitespace = re.compile(r'[ \t]*((?=\r\n)|$)')
-
-def canonicalise_line_endings(text):
-    r"""Canonicalise the line endings to '\r\n'.
-
-        >>> canonicalise_line_endings('\n\nfoo\nbar\rbaz\r\n')
-        '\r\n\r\nfoo\r\nbar\r\nbaz\r\n'
-
-        >>> canonicalise_line_endings('\r\rfoo\r\nbar\rbaz\n')
-        '\r\n\r\nfoo\r\nbar\r\nbaz\r\n'
-
-        >>> canonicalise_line_endings('\r\nfoo\r\nbar\nbaz\r')
-        '\r\nfoo\r\nbar\r\nbaz\r\n'
-    """
-    if non_canonicalised_line_endings.search(text):
-        text = non_canonicalised_line_endings.sub('\r\n', text)
-    if trailing_whitespace.search(text):
-        text = trailing_whitespace.sub('', text)
-    return text
-# End code from Launchpad: lib/lp/services/mail/incoming.py
-
-def email_tracker(change_url, project, branch, submitter, commit):
+def lp_tracker(launchpad, change_url, project, branch, submitter, commit):
     # Extract git log of all merged commits
     git_log = subprocess.Popen(['git', '--git-dir=' + BASE_DIR + '/git/' + project + '.git', 'log', '--no-merges', commit + '^1..' + commit], stdout=subprocess.PIPE).communicate()[0]
 
@@ -95,59 +49,42 @@ def email_tracker(change_url, project, branch, submitter, commit):
     for token in tokens:
         if re.match('^\d+$', token) and (token not in bugs):
             bugs.append(token)
-            send_bug_mail(token, change_url, project, commit, submitter, branch, git_log)
+            update_bug(launchpad, token, change_url, project, commit, submitter, branch, git_log)
 
-def send_bug_mail(bug_number, change_url, project, commit, submitter, branch, git_log):
 
-    to_address = bug_number + TO_ADDRESS_SUFFIX
+def update_bug(launchpad, bug_number, change_url, git_project, commit, submitter, branch, git_log):
 
-    gitorious_url = 'http://github.com/%s/commit/%s' % (project, commit)
-    body = '''Reviewed:  %s
+    group, project = git_project.split('/')
+    if group != 'openstack':
+        project = 'openstack-ci'
+    try:
+        lp_bug = launchpad.bugs[bug_number]
+        for lp_task in lp_bug.bug_tasks:
+            if lp_task.bug_target_name == project:
+                subject = 'Fix merged to %s (%s)' % (project, branch)
+                git_url = 'http://github.com/%s/commit/%s' % (project, commit)
+                body = '''Reviewed:  %s
 Committed: %s
 Submitter: %s
-Branch:    %s\n''' % (change_url, gitorious_url, submitter, branch)
+Branch:    %s\n''' % (change_url, git_url, submitter, branch)
+                body = body + '\n' + git_log
 
-    if branch == 'master':
-        body = body + '\n status fixcommitted\n done\n'
-    else:
-        branch_name = branch.replace('/','-')
-        if branch_name.replace('-','').isalnum():
-           body = body + '\n tag in-%s\n done\n' % branch_name
+                if branch == 'master':
+                    lp_task.status = "Fix Committed"
+                    lp_task.lp_save()
+                else:
+                    branch_name = branch.replace('/','-')
+                    if branch_name.replace('-','').isalnum():
+                        lp_bug.tags = lp_bug.tags + ["in-%s" % branch_name]
+                        lp_bug.tags.append("in-%s" % branch_name)
+                        lp_bug.lp_save()
 
-    body = body + '\n' + git_log
+                lp_bug.newMessage(subject=subject, content=body)
+                break
+    except KeyError:
+        # Unknown bug
+        pass
 
-    bodypart = MIMEText(body)
-    bodystring = bodypart.as_string()
-    bodystring = canonicalise_line_endings(bodystring)
-
-    plain = pyme.core.Data(bodystring)
-    cipher = pyme.core.Data()
-    gpg = pyme.core.Context()
-    gpg.set_armor(1)
-
-    gpg.op_keylist_start(FROM_ADDRESS, 0)
-    gpg.op_sign(plain, cipher, pyme.pygpgme.GPGME_SIG_MODE_DETACH)
-    cipher.seek(0,0)
-    signature = cipher.read()
-
-    from email.mime.multipart import MIMEMultipart
-    from email.mime.base import MIMEBase
-    msg = MIMEMultipart(_subtype='signed',protocol='application/pgp-signature')
-    short_project = project.split("/")[-1]
-    msg['Subject'] = 'Fix merged to %s (%s)' % (short_project, branch)
-    msg['From'] = FROM_ADDRESS
-    msg['To'] = to_address
-
-    msg.attach(bodypart)
-    signpart = MIMEBase('application','pgp-signature')
-    signpart.set_payload(signature)
-    msg.attach(signpart)
-
-    #print msg.as_string()
-    s = smtplib.SMTP()
-    s.connect()
-    s.sendmail(FROM_ADDRESS, [to_address], msg.as_string())
-    s.quit()
 
 def main():
     # https://gerrit.googlecode.com/svn/documentation/2.1.6/config-hooks.html#change-merged
@@ -167,11 +104,16 @@ def main():
         elif argname == '--commit':
             commit = argv
 
+    launchpad = Launchpad.login_with('Gerrit User Sync', LPNET_SERVICE_ROOT,
+                                     GERRIT_CACHE_DIR,
+                                     credentials_file = GERRIT_CREDENTIALS,
+                                     version='devel')
+
     if change_url and project and branch and submitter and commit:
-        email_tracker(change_url, project, branch, submitter, commit)
+        lp_tracker(launchpad, change_url, project, branch, submitter, commit)
     else:
         print 'Missing arguments'
-	return 1
+    return 1
 
     return 0;
 
