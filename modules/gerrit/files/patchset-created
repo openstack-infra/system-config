@@ -1,3 +1,4 @@
 #!/bin/sh
 
 python ~/openstack-ci/gerrit/update_blueprint.py patchset-created "$@"
+python ~/openstack-ci/gerrit/update_bug.py patchset-created "$@"
