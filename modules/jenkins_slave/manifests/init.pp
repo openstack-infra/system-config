@@ -90,15 +90,4 @@ class jenkins_slave {
       require => [ Jenkinsuser[jenkins] ],
     }
 
-    file { 'profilerubygems':
-      name => '/etc/profile.d/rubygems.sh',
-      owner => 'root',
-      group => 'root',
-      mode => 644,
-      ensure => 'present',
-      source => [
-         "puppet:///modules/jenkins_slave/rubygems.sh",
-       ],
-    }
-
 }
