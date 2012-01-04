@@ -98,6 +98,15 @@ $commentlinks = [ { name => 'changeid',
       source => 'puppet:///modules/gerrit/patchset-created',
       replace => 'true',
     }
+
+    file { '/home/gerrit2/review_site/static/echosign-cla.html':
+      owner => 'root',
+      group => 'root',
+      mode => 444,
+      ensure => 'present',
+      source => 'puppet:///modules/gerrit/echosign-cla.html',
+      replace => 'true',
+    }
     
   } else {
     notice('Gerrit is not installed')
