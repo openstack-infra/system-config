@@ -167,6 +167,12 @@ node "gerrit-dev.openstack.org" {
   }
 }
 
+node "jenkins.openstack.org" {
+  $iptables_public_tcp_ports = [80, 443]
+  include openstack_server
+  include jenkins_master
+}
+
 node "community.openstack.org" {
   $iptables_public_tcp_ports = [80, 443, 8099, 8080]
   include openstack_server
@@ -198,3 +204,4 @@ node /^deploy.*.openstack\.org$/ {
   include openstack_jenkins_slave
   include orchestra
 }
+
