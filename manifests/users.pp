@@ -20,4 +20,9 @@ class openstack_project::users {
     realname => 'Stefano Maffulli',
     sshkeys  => "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDD/zAvXaOUXCAT6/B4sCMu/38d/PyOIg/tYsYFAMgfDUzuZwkjZWNGrTpp/HFrOAZISER5KmOg48DKPvm91AeZOHfAXHCP6x9/FcogP9rmc48ym1B5XyIc78QVQjgN6JMSlEZsl0GWzFhQsPDjXundflY07TZfSC1IhpG9UgzamEVFcRjmNztnBuvq2uYVGpdI+ghmqFw9kfvSXJvUbj/F7Pco5XyJBx2e+gofe+X/UNee75xgoU/FyE2a6dSSc4uP4oUBvxDNU3gIsUKrSCmV8NuVQvMB8C9gXYR+JqtcvUSS9DdUAA8StP65woVsvuU+lqb+HVAe71JotDfOBd6f stefano@mattone-E6420\n",
   }
+
+  @user::virtual::localuser { 'linuxjedi':
+    realname => 'Andrew Hutchings',
+    sshkeys => "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDuq6XODXwbxOr00EU/Wza5NdM+St2ig/ztogiAX5yEmBjTNoLUUyKCZqilos8cq3wITykhbBNg0aBxCzDjiXhjV8sHWP/Feqzd0ICB4DgjYWipPBfkvTpfZ8xPsBClZ4oMO0yLqEmUxqi6f8wist1XMfMQp/1rXojeWVMnYq5S0LKtb6/5FAZZcGOFO0jMMmTbVmDp7jLo3HEbe8dTHJCDw0bx4iH1KlfQMe2WRAZkNNvVin1P/tWp9tdvWYKd5ucDUfpQ0Li8u5YdT1J0bJFp5XeJg2WMSNifkJ1dDD0BvmmeqyG09C5LyFMgu3+gkOhNv85nM0BzB5LVdY5BcCZ3 linuxjedi@linuxjedi-laptop\n",
+  }
 }
