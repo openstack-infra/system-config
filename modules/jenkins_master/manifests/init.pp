@@ -14,7 +14,7 @@ class jenkins_master {
     group => 'root',
     mode => 444,
     ensure => 'present',
-    source => "puppet:///modules/jenkins_server/apache.conf",
+    source => "puppet:///modules/jenkins_master/apache.conf",
     replace => 'true',
     require => Package['apache2'],
   }
