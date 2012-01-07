@@ -150,6 +150,12 @@ node "gerrit.openstack.org" {
                          }, {
                          name => 'openstack-ci/git-review',
                          close_pull => 'true'
+                         }, {
+                         name => 'openstack/openstack-common',
+                         close_pull => 'true'
+                         }, {
+                         name => 'openstack-dev/openstack-nose',
+                         close_pull => 'true'
                          } ]
   }
 }
