@@ -170,4 +170,37 @@ define jenkinsuser($ensure = present) {
     require => File['jenkinshome'],
   }
 
+  file { 'jenkinsglanceconfigdir':
+    name => '/home/jenkins/.config/glance',
+    owner => 'jenkins',
+    group => 'jenkins',
+    mode => 700,
+    ensure => 'directory',
+    require => File['jenkinsconfigdir'],
+  }
+
+  file { 'glances3conf':
+    name => '/home/jenkins/.config/glance/s3.conf',
+    owner => 'jenkins',
+    group => 'jenkins',
+    mode => 400,
+    ensure => 'present',
+    require => File['jenkinsglanceconfigdir'],
+    source => [
+                "puppet:///modules/jenkins_slave/glance_s3.conf",
+              ],
+  }
+
+  file { 'glanceswiftconf':
+    name => '/home/jenkins/.config/glance/swift.conf',
+    owner => 'jenkins',
+    group => 'jenkins',
+    mode => 400,
+    ensure => 'present',
+    require => File['jenkinsglanceconfigdir'],
+    source => [
+                "puppet:///modules/jenkins_slave/glance_swift.conf",
+              ],
+  }
+
 }
