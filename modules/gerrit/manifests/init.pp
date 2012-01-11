@@ -54,6 +54,17 @@ $commentlinks = [ { name => 'changeid',
       command => 'sleep $((RANDOM\%60+90)) && cd /home/gerrit2/openstack-ci && python gerrit/close_pull_requests.py'
     }
 
+    cron { "expireoldreviews":
+      user => gerrit2,
+      hour => 6,
+      command => 'cd /home/gerrit2/openstack-ci && python gerrit/expire_old_reviews.py'
+    }  
+
+    file { "/var/log/gerrit":
+      ensure => "directory",
+      owner => 'gerrit2'
+    }
+
     file { '/home/gerrit2/github.config':
       owner => 'root',
       group => 'root',
