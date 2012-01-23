@@ -203,8 +203,26 @@ node "devstack-oneiric.template.openstack.org" {
 #
 # Jenkins slaves:
 #
-node /^.*\.slave\.openstack\.org$/ {
+node /^build.*\.slave\.openstack\.org$/ {
   include openstack_jenkins_slave
+}
+
+node /^dev.*\.slave\.openstack\.org$/ {
+  include openstack_jenkins_slave
+}
+
+node /^oneiric.*\.slave\.openstack\.org$/ {
+  include openstack_jenkins_slave
+
+  package { "mercurial":
+    ensure => "latest",
+  }
+
+  package { "tox":
+    ensure => latest,
+    provider => pip,
+    require => Package[python-pip],
+  }
 }
 
 node /^deploy.*.openstack\.org$/ {
