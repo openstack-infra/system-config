@@ -192,6 +192,7 @@ node "community.openstack.org" {
 node "docs.openstack.org" {
   include openstack_server
   include doc_server
+  include lodgeit
 }
 
 node "devstack-oneiric.template.openstack.org" {
