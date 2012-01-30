@@ -1,0 +1,8 @@
+description "<%= name %> Lodgeit server"
+author      "Andrew Hutchings <andrew@linuxjedi.co.uk>"
+
+start on (local-filesystems and net-device-up)
+stop on runlevel [!2345]
+
+exec python /srv/lodgeit/<%= name %>/manage.py runserver -h 127.0.0.1 -p <%= port %>
+

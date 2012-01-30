@@ -194,6 +194,11 @@ node "docs.openstack.org" {
   include doc_server
 }
 
+node "paste.openstack.org" {
+  include openstack_server
+  include lodgeit
+}
+
 node "devstack-oneiric.template.openstack.org" {
   include openstack_template
   include devstack_host
