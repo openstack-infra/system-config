@@ -1,0 +1,91 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+  "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+  <head>
+    <title>{{ page_title|e }} | LodgeIt!</title>
+    <link rel="stylesheet" href="/static/style.css" type="text/css">
+    <link rel="stylesheet" href="/static/print.css" type="text/css" media="print">
+    <script type="text/javascript" src="/static/jquery.js"></script>
+    <script type="text/javascript" src="/static/cookie.js"></script>
+    <script type="text/javascript" src="/static/lodgeit.js"></script>
+    {%- if css %}
+    <style type="text/css">
+      {{ css|e }}
+    </style>
+    {%- endif %}
+  </head>
+  <body>
+    <div class="page">
+      <div id="header">
+        <h1>
+          <% if has_variable?("image") then %>
+          <img src="/static/<%= image %>" style="padding-bottom: 10px; margin-left: 10px;" alt="<%= name.capitalize %> Pastebin" />
+          <% else %>
+          <%= name.capitalize %> Pastebin
+          <% end %>
+        </h1></div>
+      <ul id="navigation">
+      {%- for href, id, caption in [
+        ('/', 'new', _('New')),
+        ('/all/', 'all', _('All')),
+        ('/about/', 'about', _('About')),
+        ('/help/', 'help', '?')
+      ] %}
+        <li{% if active_page == id %} class="active"{% endif %}>
+          <a href="{{ href|e }}">{{ caption|e }}</a>
+        </li>
+      {%- endfor %}
+      </ul>
+      {# <ul id="languages">
+      {% for lang, name in i18n_languages %}
+        <li{% if request.locale.language == lang %} class="active"{% endif %}>
+          <a href="{{ '/language/%s'|format(lang) }}"><img alt="{{ lang }}" src="{{ '/static/flags/%s.png'|format(lang) }}"></a>
+        </li>
+      {% endfor %}
+      </ul> #}
+      <div class="content">
+        <h2>{{ page_title|e }}</h2>
+        {%- if new_replies %}
+          <div class="notification">
+            <h3>{% trans %}Someone Replied To Your Paste{% endtrans %}</h3>
+            {% for paste in new_replies %}
+            <p>{% trans date=paste.pub_date|datetimeformat, parent=paste.parent.paste_id,
+                        paste=paste.paste_id, paste_url=paste.url|e, parent_url=paste.parent.url|e %}
+              on {{ date }} someone replied to your paste 
+              <a href="{{ parent_url }}">#{{ parent }}</a>,
+              in paste <a href="{{ paste_url }}">#{{ paste }}</a>. Click here to
+              <a href="/compare/{{ paste }}/{{ parent }}/">compare
+              those two pastes</a>.{% endtrans %}
+            </p>
+            {% endfor %}
+            <p><a href="javascript:LodgeIt.hideNotification()">{% trans %}hide this notification{% endtrans %}</a></p>
+          </div>
+        {% elif request.first_visit %}
+          <div class="notification">
+            <h3>{% trans %}Welcome On LodgeIt{% endtrans %}</h3>
+            <p>{%- trans -%}
+              Welcome to the LodgeIt pastebin. In order to use the notification feature
+              a 31 day cookie with an unique ID was created for you. The lodgeit database
+              does not store any information about you, it's just used for an advanced
+              pastebin experience :-). Read more on the <a href="/about/#privacy">about
+              lodgeit</a> page. Have fun :-){%- endtrans -%}
+            </p>
+            <p><a href="javascript:LodgeIt.hideNotification()">{% trans %}hide this notification{% endtrans %}</a></p>
+          </div>
+        {% endif -%}
+        {% block body %}{% endblock -%}
+        <div class="footer"></div>
+      </div>
+    </div>
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-27485426-1']);
+      _gaq.push(['_trackPageview']);
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+  </body>
+</html>

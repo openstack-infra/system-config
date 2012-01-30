@@ -194,6 +194,20 @@ node "docs.openstack.org" {
   include doc_server
 }
 
+node "paste.openstack.org" {
+  include openstack_server
+  include lodgeit
+  lodgeit::site { "openstack":
+    port => "5000",
+    image => "header-bg2.png"
+  }
+
+  lodgeit::site { "drizzle":
+    port => "5001"
+  }
+
+}
+
 node "devstack-oneiric.template.openstack.org" {
   include openstack_template
   include devstack_host
