@@ -1,0 +1,10 @@
+server {
+  listen 80;
+  server_name paste.<%= name %>.org;
+  root /srv/lodgeit/<%= name %>;
+
+  location / {
+    proxy_pass http://localhost:<%= port %>/;
+  }
+}
+
