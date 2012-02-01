@@ -40,7 +40,7 @@ class lodgeit {
 # otherwise get a new clone of it
 
   exec { "get_lodgeit":
-    command => "hg clone http://dev.pocoo.org/hg/lodgeit-main /tmp/lodgeit-main",
+    command => "hg clone https://bitbucket.org/dcolish/lodgeit-main /tmp/lodgeit-main",
     path => "/bin:/usr/bin",
     onlyif => "test ! -d /tmp/lodgeit-main"
   }

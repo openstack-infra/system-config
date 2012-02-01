@@ -33,13 +33,6 @@ define lodgeit::site($port, $image="") {
     }
   }
 
-# Database file needs replacing to be compatible with SQLAlchemy 0.7
-
-  file { "/srv/lodgeit/${name}/lodgeit/database.py":
-    replace => true,
-    source => 'puppet:///modules/lodgeit/database.py'
-  }
-
   file { "/srv/lodgeit/${name}/manage.py":
     mode => 755,
     replace => true,
