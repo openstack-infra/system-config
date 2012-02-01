@@ -46,6 +46,7 @@ class jenkins_slave {
                  "lxc",
                  "maven2",
                  "openjdk-6-jre",
+		 "pandoc", #for docs, markdown->docbook, bug 924507
                  "parted",
                  "pep8",
                  "psmisc",
