@@ -45,6 +45,14 @@ class lodgeit {
     onlyif => "test ! -d /tmp/lodgeit-main"
   }
 
+# create initial git DB backup location
+
+  exec { "create_db_backup":
+    command => "git init /var/backups/lodgeit_db",
+    path => "/bin:/usr/bin",
+    onlyif => "test ! -d /var/backups/lodgeit_db"
+  }
+
   service { 'nginx':
     ensure => running,
     hasrestart => true

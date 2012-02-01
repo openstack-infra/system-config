@@ -50,6 +50,24 @@ define lodgeit::site($port, $image="") {
     require => Service["drizzle"]
   }
 
+# create a backup .sql file in git
+
+  exec { "create_db_backup_${name}":
+    command => "touch ${name}.sql && git add ${name}.sql && git commit -am \"Initial commit for ${name}\"",
+    cwd => "/var/backups/lodgeit_db/",
+    path => "/bin:/usr/bin",
+    onlyif => "test ! -f /var/backups/lodgeit_db/${name}.sql"
+  }
+
+# cron to take a backup and commit it in git
+
+  cron { "update_backup_${name}":
+    user => root,
+    hour => 6,
+    minute => 23,
+    command => "sleep $((RANDOM%60+60)) && cd /var/backups/lodgeit_db && drizzledump -uroot ${name} > ${name}.sql && git commit -am \"Updating DB backup for ${name}\""
+  }
+
   service { "${name}-paste":
     provider => upstart,
     ensure => running,
