@@ -9,7 +9,7 @@
 	hostname = localhost
 	database = reviewdb
 	username = gerrit2
-	poolLimit = 20
+	poolLimit = 32
 [auth]
 	type = OPENID_SSO
 	openIdSsoUrl = <%= openidssourl %>
@@ -22,7 +22,7 @@
 	javaHome = /usr/lib/jvm/java-6-openjdk/jre
 [sshd]
 	listenAddress = *:29418
-	threads = 12
+	threads = 24
 [httpd]
 	listenUrl = proxy-https://*:8081/
 	acceptorThreads = 8
