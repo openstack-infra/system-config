@@ -65,7 +65,7 @@ define lodgeit::site($port, $image="") {
     user => root,
     hour => 6,
     minute => 23,
-    command => "sleep $((RANDOM%60+60)) && cd /var/backups/lodgeit_db && drizzledump -uroot ${name} > ${name}.sql && git commit -am \"Updating DB backup for ${name}\""
+    command => "sleep $((RANDOM\\%60+60)) && cd /var/backups/lodgeit_db && drizzledump -uroot ${name} > ${name}.sql && git commit -am \"Updating DB backup for ${name}\""
   }
 
   service { "${name}-paste":
