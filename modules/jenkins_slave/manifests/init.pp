@@ -30,6 +30,7 @@ class jenkins_slave {
                  "ebtables",
                  "gawk",
                  "graphviz",
+		 "hg", # needed by pip bundle (erroneously as it turns out)
                  "iptables",
                  "kpartx",
                  "kvm",
