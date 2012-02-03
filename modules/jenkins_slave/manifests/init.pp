@@ -30,7 +30,6 @@ class jenkins_slave {
                  "ebtables",
                  "gawk",
                  "graphviz",
-		 "hg", # needed by pip bundle (erroneously as it turns out)
                  "iptables",
                  "kpartx",
                  "kvm",
@@ -46,6 +45,7 @@ class jenkins_slave {
                  "libxslt1-dev",
                  "lxc",
                  "maven2",
+		 "mercurial", # needed by pip bundle
                  "openjdk-6-jre",
 		 "pandoc", #for docs, markdown->docbook, bug 924507
                  "parted",
