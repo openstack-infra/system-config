@@ -209,6 +209,7 @@ node "paste.openstack.org" {
 }
 
 node "planet.openstack.org" {
+  include openstack_server
   include planet
  
   planet::site { "openstack":
