@@ -208,6 +208,15 @@ node "paste.openstack.org" {
 
 }
 
+node "planet.openstack.org" {
+  include planet
+ 
+  planet::site { "openstack":
+    git_url => "https://github.com/openstack/openstack-planet.git"
+  }
+}
+
+
 node "devstack-oneiric.template.openstack.org" {
   include openstack_template
   include devstack_host
