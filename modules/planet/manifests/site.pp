@@ -32,8 +32,8 @@ define planet::site($git_url) {
 
   cron { "update_planet_${name}":
     user => root,
-    minute => 3,
-    command => "planet /var/lib/planet/${name}.ini"
+    minute => "*/5",
+    command => "cd /var/lib/planet/${name} && planet /var/lib/planet/${name}/planet.ini > /var/log/planet/${name}.log 2>&1"
   }
 
 }

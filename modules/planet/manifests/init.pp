@@ -16,6 +16,10 @@ class planet {
     ensure => directory
   }
 
+  file { '/var/log/planet':
+    ensure => directory
+  }
+
   service { 'nginx':
     ensure => running,
     hasrestart => true
