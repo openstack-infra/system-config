@@ -16,7 +16,7 @@ define planet::site($git_url) {
 # if we already have the mercurial repo the pull updates
 
   exec { "update_${name}_planet":
-    command => "git pull",
+    command => "git pull --ff-only",
     cwd => "/var/lib/planet/${name}",
     path => "/bin:/usr/bin",
     onlyif => "test -d /var/lib/planet/${name}"
