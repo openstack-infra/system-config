@@ -228,10 +228,6 @@ node /^dev.*\.slave\.openstack\.org$/ {
 node /^oneiric.*\.slave\.openstack\.org$/ {
   include openstack_jenkins_slave
 
-  package { "mercurial":
-    ensure => "latest",
-  }
-
   package { "tox":
     ensure => latest,
     provider => pip,
