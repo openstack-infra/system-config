@@ -7,11 +7,9 @@ from lodgeit import local
 from lodgeit.application import make_app
 from lodgeit.database import session
 
-#dburi = 'sqlite:////tmp/lodgeit.db'
 dburi = 'drizzle://127.0.0.1:4427/<%= name %>'
 
 SECRET_KEY = 'no secret key'
-
 
 def run_app(app, path='/'):
     env = create_environ(path, SECRET_KEY)

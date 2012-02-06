@@ -20,7 +20,7 @@ class planet {
     ensure => directory
   }
 
-  service { 'nginx':
+  service { "nginx":
     ensure => running,
     hasrestart => true
   }

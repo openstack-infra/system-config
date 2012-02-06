@@ -4,7 +4,8 @@ define lodgeit::site($port, $image="") {
     ensure => 'present',
     content => template("lodgeit/nginx.erb"),
     replace => 'true',
-    require => Package[nginx]
+    require => Package[nginx],
+    notify => Service[nginx]
   }
 
   file { "/etc/nginx/sites-enabled/${name}":
@@ -17,7 +18,8 @@ define lodgeit::site($port, $image="") {
     ensure => 'present',
     content => template("lodgeit/upstart.erb"),
     replace => 'true',
-    require => Package[nginx]
+    require => Package[nginx],
+    notify => Service["${name}-paste"]
   }
 
   file { "/srv/lodgeit/${name}":
@@ -36,7 +38,8 @@ define lodgeit::site($port, $image="") {
   file { "/srv/lodgeit/${name}/manage.py":
     mode => 755,
     replace => true,
-    content => template("lodgeit/manage.py.erb")
+    content => template("lodgeit/manage.py.erb"),
+    notify => Service["${name}-paste"]
   }
 
   file { "/srv/lodgeit/${name}/lodgeit/views/layout.html":

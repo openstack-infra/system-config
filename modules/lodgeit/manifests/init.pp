@@ -28,6 +28,10 @@ class lodgeit {
     hasrestart => true
   }
 
+  service { "nginx":
+    ensure => running,
+    hasrestart => true
+  }
 
 # if we already have the mercurial repo the pull updates
 
@@ -53,8 +57,4 @@ class lodgeit {
     onlyif => "test ! -d /var/backups/lodgeit_db"
   }
 
-  service { 'nginx':
-    ensure => running,
-    hasrestart => true
-  }
 }

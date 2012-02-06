@@ -4,7 +4,8 @@ define planet::site($git_url) {
     ensure => present,
     content => template("planet/nginx.erb"),
     replace => true,
-    require => Package[nginx]
+    require => Package[nginx],
+    notify => Service[nginx]
   }
 
   file { "/etc/nginx/sites-enabled/planet-${name}":
@@ -33,7 +34,7 @@ define planet::site($git_url) {
   cron { "update_planet_${name}":
     user => root,
     minute => "*/5",
-    command => "cd /var/lib/planet/${name} && planet /var/lib/planet/${name}/planet.ini > /var/log/planet/${name}.log 2>&1"
+    command => "date >> /var/log/planet/${name}.log && cd /var/lib/planet/${name} && planet /var/lib/planet/${name}/planet.ini >> /var/log/planet/${name}.log 2>&1"
   }
 
 }
