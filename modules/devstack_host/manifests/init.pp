@@ -1,6 +1,10 @@
 # A machine ready to run devstack
 class devstack_host {
 
+    package { "linux-headers-virtual":
+      ensure => "latest",
+    }
+
     package { "mysql-server":
       ensure => "latest",
     }
