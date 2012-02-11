@@ -30,8 +30,9 @@ class jenkins_master {
   }
 
   $packages = [
-    jenkins,
-    apache2
+    "jenkins",
+    "python-pip",
+    "apache2"
   ]
 
   package { $packages:
