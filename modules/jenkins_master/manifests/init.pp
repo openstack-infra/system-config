@@ -32,11 +32,11 @@ class jenkins_master {
 
   package { $packages:
     ensure => "latest",
-    require => File['/etc/apt/sources.list.d/jenkins'],
+    require => File['/etc/apt/sources.list.d/jenkins.list'],
   }
 
   exec { "update apt cache":
-    subscribe => [ File["/etc/apt/sources.list.d/jenkins"]],
+    subscribe => [ File["/etc/apt/sources.list.d/jenkins.list"]],
     refreshonly => true,
     path => "/bin:/usr/bin",
     command => "apt-get update",
