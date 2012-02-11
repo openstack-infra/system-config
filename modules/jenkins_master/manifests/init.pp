@@ -39,6 +39,12 @@ class jenkins_master {
     require => File['/etc/apt/sources.list.d/jenkins.list'],
   }
 
+  package { "apache-libcloud":
+    ensure => latest,
+    provider => pip,
+    require => Package[python-pip]
+  }
+
   exec { "update apt cache":
     subscribe => [ File["/etc/apt/sources.list.d/jenkins.list"]],
     refreshonly => true,
