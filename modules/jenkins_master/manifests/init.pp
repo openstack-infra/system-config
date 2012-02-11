@@ -1,5 +1,7 @@
 class jenkins_master {
 
+  #TODO: apache modules: ssl, proxy, rewrite
+
   file { '/etc/apt/sources.list.d/jenkins.list':
     owner => 'root',
     group => 'root',
