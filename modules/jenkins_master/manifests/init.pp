@@ -19,8 +19,8 @@ class jenkins_master {
     require => Package['apache2'],
   }
 
-  file { '/etc/apache2/sites-enabled/apache2':
-    target => '/etc/apache2/site-available/jenkins',
+  file { '/etc/apache2/sites-enabled/jenkins':
+    target => '/etc/apache2/sites-available/jenkins',
     ensure => link,
     require => File['/etc/apache2/sites-available/jenkins'],
   }
