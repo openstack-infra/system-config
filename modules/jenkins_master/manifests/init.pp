@@ -1,5 +1,8 @@
 class jenkins_master {
 
+  #TODO: apache modules: ssl, proxy, rewrite
+  #TODO: wget -q -O - http://pkg.jenkins-ci.org/debian/jenkins-ci.org.key | sudo apt-key add -
+
   file { '/etc/apt/sources.list.d/jenkins.list':
     owner => 'root',
     group => 'root',
