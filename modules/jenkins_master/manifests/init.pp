@@ -1,6 +1,6 @@
 class jenkins_master {
 
-  file { '/etc/apt/sources.list.d/jenkins':
+  file { '/etc/apt/sources.list.d/jenkins.list':
     owner => 'root',
     group => 'root',
     mode => 444,
