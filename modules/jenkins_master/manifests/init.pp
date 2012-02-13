@@ -45,6 +45,21 @@ class jenkins_master {
     require => File['/etc/apt/sources.list.d/jenkins.list'],
   }
 
+  service { "versions":
+    provider => upstart,
+    ensure => running,
+  }
+
+  file { '/etc/init/versions.conf':
+    owner => 'root',
+    group => 'root',
+    mode => 444,
+    ensure => 'present',
+    source => "puppet:///modules/jenkins_master/versions.conf",
+    replace => 'true',
+    notify => Service["versions"]
+  }
+
   package { "apache-libcloud":
     ensure => latest,
     provider => pip,
