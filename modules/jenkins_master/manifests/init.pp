@@ -29,6 +29,11 @@ class jenkins_master {
     require => File['/etc/apache2/sites-available/jenkins'],
   }
 
+  file { '/etc/apache2/sites-enabled/000-default':
+    require => File['/etc/apache2/sites-enabled/jenkins'],
+    ensure => absent,
+  }
+
   $packages = [
     "jenkins",
     "python-pip",
