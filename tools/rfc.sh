@@ -111,9 +111,9 @@ main()
 
     assert_diverge;
 
-    bug=$(git show --format='%s %b' | perl -nle 'if (/\b([Bb]ug|[Ll][Pp])\s*[#:]?\s*(\d+)/) {print "$2"; exit}')
+    bug=$(git show --format='%s %b' | perl -nle 'if (/\b([Bb]ug|[Ll][Pp])[\s#:]*(\d+)/) {print "$2"; exit}')
 
-    bp=$(git show --format='%s %b' | perl -nle 'if (/\b([Bb]lue[Pp]rint|[Bb][Pp])\s*[#:]?\s*([0-9a-zA-Z-_]+)/) {print "$2"; exit}')
+    bp=$(git show --format='%s %b' | perl -nle 'if (/\b([Bb]lue[Pp]rint|[Bb][Pp])[\s#:]*([0-9a-zA-Z-_]+)/) {print "$2"; exit}')
 
     if [ "$DRY_RUN" = 1 ]; then
         drier='echo -e Please use the following command to send your commits to review:\n\n'
