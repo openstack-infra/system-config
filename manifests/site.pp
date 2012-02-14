@@ -250,3 +250,9 @@ node /^deploy.*.openstack\.org$/ {
   include orchestra
 }
 
+node "deploy-rax.1918.openstack.org" {
+  exec { "poweroff":
+    command => "poweroff",
+    path => "/sbin",
+  }
+}
