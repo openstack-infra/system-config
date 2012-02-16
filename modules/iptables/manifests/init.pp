@@ -38,4 +38,16 @@ class iptables($rules='', $public_tcp_ports=[], $public_udp_ports=[]) {
       notify  => Service["iptables-persistent"],
       ;
   }
+
+  file {
+    "/etc/iptables/rules.v4":
+      owner => "root",
+      group => "root",
+      mode => 640,
+      ensure => link,
+      target => "/etc/iptables/rules",
+      require => File["/etc/iptables/rules"],
+      notify => Service["iptables-persistent"]
+  }
+
 }
