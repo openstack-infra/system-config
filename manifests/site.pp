@@ -14,6 +14,10 @@ class openstack_base {
     public_tcp_ports => $iptables_public_tcp_ports,
   }
   
+  file { '/etc/profile.d/Z98-byobu.sh':
+    ensure => 'absent'
+  }
+
   package { "ntp":
     ensure => installed
     }
