@@ -195,6 +195,7 @@ node "docs.openstack.org" {
 }
 
 node "paste.openstack.org" {
+  $iptables_public_tcp_ports = [80]
   include openstack_server
   include lodgeit
   lodgeit::site { "openstack":
@@ -209,6 +210,7 @@ node "paste.openstack.org" {
 }
 
 node "planet.openstack.org" {
+  $iptables_public_tcp_ports = [80]
   include openstack_server
   include planet
  
