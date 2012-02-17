@@ -37,6 +37,7 @@ class jenkins_master {
   $packages = [
     "jenkins",
     "python-pip",
+    "python-babel",
     "apache2"
   ]
 
@@ -61,6 +62,12 @@ class jenkins_master {
   }
 
   package { "apache-libcloud":
+    ensure => latest,
+    provider => pip,
+    require => Package[python-pip]
+  }
+
+  package { "git-review":
     ensure => latest,
     provider => pip,
     require => Package[python-pip]
