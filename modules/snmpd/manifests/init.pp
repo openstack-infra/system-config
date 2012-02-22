@@ -3,6 +3,7 @@ class snmpd {
     service { snmpd: 
       ensure          => running,
       hasrestart      => true,
+      require => File["/etc/snmp/snmpd.conf"],
     }
     file { "/etc/snmp/snmpd.conf":
       owner => 'root',
