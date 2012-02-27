@@ -46,7 +46,7 @@ class jenkins_slave {
                  "lxc",
                  "maven2",
 		 "mercurial", # needed by pip bundle
-                 "openjdk-6-jre",
+                 "default-jdk", # jdk for building java jobs
 		 "pandoc", #for docs, markdown->docbook, bug 924507
                  "parted",
                  "pep8",
