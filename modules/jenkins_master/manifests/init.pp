@@ -1,8 +1,10 @@
 class jenkins_master {
 
-  #TODO: apache modules: ssl, proxy, rewrite
-  #TODO: wget -q -O - http://pkg.jenkins-ci.org/debian/jenkins-ci.org.key | sudo apt-key add -
-  #TODO: or something like: sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys KEYID
+  #This key is at http://pkg.jenkins-ci.org/debian/jenkins-ci.org.key
+  apt::key { "D50582E6":
+    keyid  => "D50582E6",
+    ensure => present,
+  }
 
   file { '/etc/apt/sources.list.d/jenkins.list':
     owner => 'root',
@@ -11,6 +13,7 @@ class jenkins_master {
     ensure => 'present',
     content => "deb http://pkg.jenkins-ci.org/debian binary/",
     replace => 'true',
+    require => Apt::Key['D50582E6'],
   }
 
   file { '/etc/apache2/sites-available/jenkins':
@@ -26,12 +29,56 @@ class jenkins_master {
   file { '/etc/apache2/sites-enabled/jenkins':
     target => '/etc/apache2/sites-available/jenkins',
     ensure => link,
-    require => File['/etc/apache2/sites-available/jenkins'],
+    require => [
+      File['/etc/apache2/sites-available/jenkins'],
+      File['/etc/apache2/mods-enabled/ssl.conf'],
+      File['/etc/apache2/mods-enabled/ssl.load'],
+      File['/etc/apache2/mods-enabled/rewrite.load'],
+      File['/etc/apache2/mods-enabled/proxy.conf'],
+      File['/etc/apache2/mods-enabled/proxy.load'],
+      File['/etc/apache2/mods-enabled/proxy_http.load'],
+    ],
   }
 
   file { '/etc/apache2/sites-enabled/000-default':
-    require => File['/etc/apache2/sites-enabled/jenkins'],
+    require => File['/etc/apache2/sites-available/jenkins'],
     ensure => absent,
+  }
+
+  file { '/etc/apache2/mods-enabled/ssl.conf':
+    target => '/etc/apache2/mods-available/ssl.conf',
+    ensure => link,
+    require => Package['apache2'],
+  }
+
+  file { '/etc/apache2/mods-enabled/ssl.load':
+    target => '/etc/apache2/mods-available/ssl.load',
+    ensure => link,
+    require => Package['apache2'],
+  }
+
+  file { '/etc/apache2/mods-enabled/rewrite.load':
+    target => '/etc/apache2/mods-available/rewrite.load',
+    ensure => link,
+    require => Package['apache2'],
+  }
+
+  file { '/etc/apache2/mods-enabled/proxy.conf':
+    target => '/etc/apache2/mods-available/proxy.conf',
+    ensure => link,
+    require => Package['apache2'],
+  }
+
+  file { '/etc/apache2/mods-enabled/proxy.load':
+    target => '/etc/apache2/mods-available/proxy.load',
+    ensure => link,
+    require => Package['apache2'],
+  }
+
+  file { '/etc/apache2/mods-enabled/proxy_http.load':
+    target => '/etc/apache2/mods-available/proxy_http.load',
+    ensure => link,
+    require => Package['apache2'],
   }
 
   $packages = [
@@ -43,7 +90,7 @@ class jenkins_master {
 
   package { $packages:
     ensure => "latest",
-    require => File['/etc/apt/sources.list.d/jenkins.list'],
+    require => [File['/etc/apt/sources.list.d/jenkins.list'], Exec["update apt cache"]],
   }
 
   service { "versions":

@@ -184,6 +184,12 @@ node "jenkins.openstack.org" {
   include jenkins_master
 }
 
+node "jenkins-dev.openstack.org" {
+  $iptables_public_tcp_ports = [80, 443, 4155]
+  include openstack_server
+  include jenkins_master
+}
+
 node "community.openstack.org" {
   $iptables_public_tcp_ports = [80, 443, 8099, 8080]
   include openstack_server
