@@ -1,4 +1,3 @@
-
 These are a set of puppet manifests and modules that are currently being
 used to manage some of the efforts of the OpenStack CI project. They are
 quite bare and crappy at the moment, but should grow soon.
