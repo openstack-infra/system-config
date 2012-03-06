@@ -13,7 +13,7 @@ class openstack_base {
   class { 'iptables':
     public_tcp_ports => $iptables_public_tcp_ports,
   }
-  
+
   file { '/etc/profile.d/Z98-byobu.sh':
     ensure => 'absent'
   }
@@ -40,15 +40,6 @@ class openstack_base {
   package { $packages: ensure => "latest" }
 }
 
-class openstack_cron {
-  cron { "updatepuppet":
-    user => root,
-    minute => "*/15",
-    command => 'apt-get update >/dev/null 2>&1 ; sleep $((RANDOM\%600)) && cd /root/openstack-ci-puppet && /usr/bin/git pull -q && puppet apply -l /tmp/manifest.log --modulepath=/root/openstack-ci-puppet/modules manifests/site.pp',
-    environment => "PATH=/var/lib/gems/1.8/bin:/usr/bin:/bin:/usr/sbin:/sbin",
-  }
-}
-
 # A template host with no running services
 class openstack_template {
   include openstack_base
@@ -63,7 +54,6 @@ class openstack_template {
 # A server that we expect to run for some time
 class openstack_server {
   include openstack_template
-  include openstack_cron
 }
 
 class openstack_jenkins_slave {
@@ -82,12 +72,17 @@ node default {
 #
 # Long lived servers:
 #
-node "gerrit.openstack.org" {
+node "puppet.stackforge.org" {
+  $iptables_public_tcp_ports = [8140]
+  include openstack_server
+}
+
+node "review.stackforge.org" {
   $iptables_public_tcp_ports = [80, 443, 29418]
   include openstack_server
   class { 'gerrit':
-    canonicalweburl => "https://review.openstack.org/",
-    email => "review@openstack.org",
+    canonicalweburl => "https://review.stackforge.org/",
+    email => "review@stackforge.org",
     github_projects => [ {
                          name => 'openstack/keystone',
                          close_pull => 'true'
@@ -164,94 +159,26 @@ node "gerrit.openstack.org" {
   }
 }
 
-node "gerrit-dev.openstack.org" {
-  $iptables_public_tcp_ports = [80, 443, 29418]
-  include openstack_server
-
-  class { 'gerrit':
-    canonicalweburl => "https://review-dev.openstack.org/",
-    email => "review-dev@openstack.org",
-    github_projects => [ {
-                         name => 'gtest-org/test',
-                         close_pull => 'true'
-                         } ]
-  }
-}
-
-node "jenkins.openstack.org" {
+node "jenkins.stackforge.org" {
   $iptables_public_tcp_ports = [80, 443, 4155]
   include openstack_server
   class { 'jenkins_master':
-    site => 'openstack'
+    site => 'stackforge'
   }
 }
-
-node "jenkins-dev.openstack.org" {
-  $iptables_public_tcp_ports = [80, 443, 4155]
-  include openstack_server
-  class { 'jenkins_master':
-    site => 'openstack'
-  }
-}
-
-node "community.openstack.org" {
-  $iptables_public_tcp_ports = [80, 443, 8099, 8080]
-  include openstack_server
-
-  realize (
-    User::Virtual::Localuser["smaffulli"],
-  )
-}
-
-node "docs.openstack.org" {
-  include openstack_server
-  include doc_server
-}
-
-node "paste.openstack.org" {
-  $iptables_public_tcp_ports = [80]
-  include openstack_server
-  include lodgeit
-  lodgeit::site { "openstack":
-    port => "5000",
-    image => "header-bg2.png"
-  }
-
-  lodgeit::site { "drizzle":
-    port => "5001"
-  }
-
-}
-
-node "planet.openstack.org" {
-  $iptables_public_tcp_ports = [80]
-  include openstack_server
-  include planet
- 
-  planet::site { "openstack":
-    git_url => "https://github.com/openstack/openstack-planet.git"
-  }
-}
-
-
-node "devstack-oneiric.template.openstack.org" {
-  include openstack_template
-  include devstack_host
-}
-
 
 #
 # Jenkins slaves:
 #
-node /^build.*\.slave\.openstack\.org$/ {
+node /^build.*\.slave\.stackforge\.org$/ {
   include openstack_jenkins_slave
 }
 
-node /^dev.*\.slave\.openstack\.org$/ {
+node /^dev.*\.slave\.stackforge\.org$/ {
   include openstack_jenkins_slave
 }
 
-node /^oneiric.*\.slave\.openstack\.org$/ {
+node /^oneiric.*\.slave\.stackforge\.org$/ {
   include openstack_jenkins_slave
 
   package { "tox":
@@ -261,14 +188,8 @@ node /^oneiric.*\.slave\.openstack\.org$/ {
   }
 }
 
-node /^deploy.*.openstack\.org$/ {
+node /^deploy.*.stackforge\.org$/ {
   include openstack_jenkins_slave
   include orchestra
 }
 
-node "deploy-rax.1918.openstack.org" {
-  exec { "poweroff":
-    command => "poweroff",
-    path => "/sbin",
-  }
-}
