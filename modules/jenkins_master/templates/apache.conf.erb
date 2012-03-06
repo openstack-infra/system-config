@@ -1,5 +1,5 @@
 <VirtualHost _default_:80>
-             ServerAdmin webmaster@openstack.org
+             ServerAdmin <%= serveradmin %>
 
              ErrorLog ${APACHE_LOG_DIR}/jenkins-error.log
 
@@ -9,12 +9,12 @@
 
              CustomLog ${APACHE_LOG_DIR}/jenkins-access.log combined
 
-             Redirect / https://jenkins.openstack.org/
+             Redirect / https://<%= site %>/
 
 </VirtualHost>
 
 <VirtualHost _default_:443>
-             ServerAdmin webmaster@openstack.org
+             ServerAdmin <%= serveradmin %>
 
              ErrorLog ${APACHE_LOG_DIR}/jenkins-ssl-error.log
 
@@ -28,8 +28,8 @@
              #   Enable/Disable SSL for this virtual host.
              SSLEngine on
 
-             SSLCertificateFile    /etc/ssl/certs/jenkins.openstack.org.pem
-             SSLCertificateKeyFile /etc/ssl/private/jenkins.openstack.org.key
+             SSLCertificateFile    /etc/ssl/certs/<%= site %>.pem
+             SSLCertificateKeyFile /etc/ssl/private/<%= site %>.key
              SSLCertificateChainFile /etc/ssl/certs/intermediate.pem
 
              BrowserMatch "MSIE [2-6]" \
@@ -39,8 +39,8 @@
              BrowserMatch "MSIE [17-9]" ssl-unclean-shutdown
 
              RewriteEngine on
-             RewriteCond %{HTTP_HOST} !jenkins.openstack.org
-             RewriteRule ^.*$ https://jenkins.openstack.org/
+             RewriteCond %{HTTP_HOST} !<%= site %>
+             RewriteRule ^.*$ https://<%= site %>/
 
              ProxyPass / http://127.0.0.1:8080/ retry=0
              ProxyPassReverse / http://127.0.0.1:8080/
