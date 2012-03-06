@@ -1,7 +1,8 @@
-class jenkins_slave {
+class jenkins_slave($ssh_key) {
 
     jenkinsuser { "jenkins":
       ensure => present,
+      ssh_key => "${ssh_key}"
     }
 
     slavecirepo { "openstack-ci":

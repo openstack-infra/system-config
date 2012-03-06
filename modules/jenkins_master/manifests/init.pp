@@ -1,4 +1,4 @@
-class jenkins_master {
+class jenkins_master($site, $serveradmin) {
 
   #This key is at http://pkg.jenkins-ci.org/debian/jenkins-ci.org.key
   apt::key { "D50582E6":
@@ -21,7 +21,7 @@ class jenkins_master {
     group => 'root',
     mode => 444,
     ensure => 'present',
-    source => "puppet:///modules/jenkins_master/apache.conf",
+    content => template("jenkins_master/apache.conf.erb"),
     replace => 'true',
     require => Package['apache2'],
   }
