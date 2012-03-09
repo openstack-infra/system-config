@@ -61,6 +61,15 @@ $commentlinks = [ { name => 'changeid',
       command => 'cd /home/gerrit2/openstack-ci && python gerrit/expire_old_reviews.py'
     }  
 
+    cron { "gerrit_repack":
+      user => gerrit2,
+      weekday => 0,
+      hour => 4,
+      minute => 7,
+      command => 'find /home/gerrit2/review_site/git/ -type d -name "*.git" -print -exec git --git-dir="{}" repack -afd \;',
+      environment => "PATH=/usr/bin:/bin:/usr/sbin:/sbin",
+    }
+
     file { "/var/log/gerrit":
       ensure => "directory",
       owner => 'gerrit2'
