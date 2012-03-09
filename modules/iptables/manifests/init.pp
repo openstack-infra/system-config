@@ -15,11 +15,11 @@ class iptables($rules='', $public_tcp_ports=[], $public_udp_ports=[]) {
     # iptables is part of the kernel.)
     hasstatus => true,
     status => "true",
-    
+
     # Under Debian, the "restart" parameter does not reload the rules, so tell
     # Puppet to fall back to stop/start, which does work.
     hasrestart => false,
-    
+
   }
 
   file { "/etc/iptables":
@@ -33,7 +33,7 @@ class iptables($rules='', $public_tcp_ports=[], $public_udp_ports=[]) {
       mode    => 640,
       content => template('iptables/rules.erb'),
       require => [Package["iptables-persistent"], File["/etc/iptables"]],
-      
+
       # When this file is updated, make sure the rules get reloaded.
       notify  => Service["iptables-persistent"],
       ;

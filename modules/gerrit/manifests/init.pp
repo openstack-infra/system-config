@@ -16,7 +16,7 @@ $commentlinks = [ { name => 'changeid',
 
                   ]
   ) {
-  
+
   package { "gitweb":
     ensure => latest
   }
@@ -32,7 +32,7 @@ $commentlinks = [ { name => 'changeid',
     provider => pip,
     require => Package[python-pip]
   }
-  
+
   if $gerrit_installed {
     #notice('Gerrit is installed')
 
@@ -59,7 +59,7 @@ $commentlinks = [ { name => 'changeid',
       hour => 6,
       minute => 3,
       command => 'cd /home/gerrit2/openstack-ci && python gerrit/expire_old_reviews.py'
-    }  
+    }
 
     cron { "gerrit_repack":
       user => gerrit2,
@@ -128,7 +128,7 @@ $commentlinks = [ { name => 'changeid',
       source => 'puppet:///modules/gerrit/echosign-cla.html',
       replace => 'true',
     }
-    
+
   } else {
     notice('Gerrit is not installed')
   }

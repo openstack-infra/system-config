@@ -13,7 +13,7 @@ class openstack_base {
   class { 'iptables':
     public_tcp_ports => $iptables_public_tcp_ports,
   }
-  
+
   file { '/etc/profile.d/Z98-byobu.sh':
     ensure => 'absent'
   }
@@ -167,7 +167,7 @@ node "gerrit.openstack.org" {
 node "gerrit-dev.openstack.org" {
   $iptables_public_tcp_ports = [80, 443, 29418]
   include openstack_server
- 
+
   class { 'gerrit':
     canonicalweburl => "https://review-dev.openstack.org/",
     email => "review-dev@openstack.org",
@@ -223,7 +223,7 @@ node "planet.openstack.org" {
   $iptables_public_tcp_ports = [80]
   include openstack_server
   include planet
- 
+
   planet::site { "openstack":
     git_url => "https://github.com/openstack/openstack-planet.git"
   }
