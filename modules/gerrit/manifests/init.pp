@@ -84,6 +84,26 @@ $commentlinks = [ { name => 'changeid',
       replace => 'true',
     }
 
+    file { '/home/gerrit2/review_site/static/open-stack-cloud-computing-logo-2.png':
+      ensure => 'present',
+      source => 'puppet:///modules/gerrit/open-stack-cloud-computing-logo-2.png',
+    }
+
+    file { '/home/gerrit2/review_site/static/openstack-page-bkg.jpg':
+      ensure => 'present',
+      source => 'puppet:///modules/gerrit/openstack-page-bkg.jpg'
+    }
+
+    file { '/home/gerrit2/review_site/etc/GerritSite.css':
+      ensure => 'present',
+      source => 'puppet:///modules/gerrit/GerritSite.css'
+    }
+
+    file { '/home/gerrit2/review_site/etc/GerritSiteHeader.html':
+      ensure => 'present',
+      source => 'puppet:///modules/gerrit/GerritSiteHeader.html'
+    }
+
     file { '/home/gerrit2/review_site/etc/replication.config':
       owner => 'root',
       group => 'root',
