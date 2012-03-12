@@ -88,7 +88,8 @@ node "review.stackforge.org" {
     github_projects => [ {
                          name => 'stackforge/MRaaS',
                          close_pull => 'true'
-                         } ]
+                         } ],
+    logo => 'stackforge.png'
   }
 }
 
@@ -97,7 +98,8 @@ node "jenkins.stackforge.org" {
   include openstack_server
   class { 'jenkins_master':
     serveradmin => 'webmaster@stackforge.org',
-    site => 'jenkins.stackforge.org'
+    site => 'jenkins.stackforge.org',
+    logo => 'stackforge.png'
   }
 }
 

@@ -162,7 +162,8 @@ node "gerrit.openstack.org" {
                          }, {
                          name => 'openstack-dev/openstack-nose',
                          close_pull => 'true'
-                         } ]
+                         } ],
+    logo => 'openstack.png'
   }
 }
 
@@ -176,7 +177,8 @@ node "gerrit-dev.openstack.org" {
     github_projects => [ {
                          name => 'gtest-org/test',
                          close_pull => 'true'
-                         } ]
+                         } ],
+    logo => 'openstack.png'
   }
 }
 
@@ -185,7 +187,8 @@ node "jenkins.openstack.org" {
   include openstack_server
   class { 'jenkins_master':
     site => 'jenkins.openstack.org',
-    serveradmin => 'webmaster@openstack.org'
+    serveradmin => 'webmaster@openstack.org',
+    logo => 'openstack.png'
   }
 }
 

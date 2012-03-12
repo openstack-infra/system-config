@@ -1,0 +1,26 @@
+<div>
+  <h1 style="color: #CF2F19"><img src="static/title.png" style="vertical-align:middle;" /> Code Review</h1>
+  <script type="text/javascript">
+    function getHash() {
+      var hash = window.location.hash;
+      return hash.substring(1); // remove #
+    }
+    window.onload = function() {
+      var hash_arr= getHash().split(",");
+      if (hash_arr[0] == 'patch') {
+        var elem = document.getElementById("gerrit_body");
+        elem.className = elem.className + ' patch';
+      }
+    };
+    window.onhashchange = function() {
+      var hash_arr= getHash().split(",");
+      var elem = document.getElementById("gerrit_body");
+      if (hash_arr[0] == 'patch') {
+        elem.className = elem.className + ' patch';
+      } else {
+        elem.className = elem.className.replace(' patch', '');
+      }
+    };
+    
+  </script>
+</div>

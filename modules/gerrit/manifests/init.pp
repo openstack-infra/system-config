@@ -14,7 +14,8 @@ $commentlinks = [ { name => 'changeid',
                   match => '([Bb]lue[Pp]rint|[Bb][Pp])[\\s#:]*([A-Za-z0-9\\-]+)',
                   link => 'https://blueprints.launchpad.net/openstack/?searchtext=$2' },
 
-                  ]
+                  ],
+$logo
   ) {
 
   user { "gerrit2":
@@ -121,6 +122,26 @@ $commentlinks = [ { name => 'changeid',
     content => template('gerrit/github.config.erb'),
     replace => 'true',
     require => User["gerrit2"]
+  }
+
+  file { '/home/gerrit2/review_site/static/title.png':
+    ensure => 'present',
+    source => 'puppet:///modules/gerrit/${logo}',
+  }
+
+  file { '/home/gerrit2/review_site/static/openstack-page-bkg.jpg':
+    ensure => 'present',
+    source => 'puppet:///modules/gerrit/openstack-page-bkg.jpg'
+  }
+
+  file { '/home/gerrit2/review_site/etc/GerritSite.css':
+    ensure => 'present',
+    source => 'puppet:///modules/gerrit/GerritSite.css'
+  }
+
+  file { '/home/gerrit2/review_site/etc/GerritSiteHeader.html':
+    ensure => 'present',
+    source => 'puppet:///modules/gerrit/GerritSiteHeader.html'
   }
 
   file { '/home/gerrit2/review_site/etc/replication.config':

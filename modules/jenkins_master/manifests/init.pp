@@ -1,4 +1,4 @@
-class jenkins_master($site, $serveradmin) {
+class jenkins_master($site, $serveradmin, $logo) {
 
   #This key is at http://pkg.jenkins-ci.org/debian/jenkins-ci.org.key
   apt::key { "D50582E6":
@@ -154,7 +154,7 @@ class jenkins_master($site, $serveradmin) {
 
   file { "/var/lib/jenkins/plugins/simple-theme-plugin/openstack.js":
     ensure => present,
-    source => "puppet:///modules/jenkins_master/openstack.js",
+    content => template("jenkins_master/openstack.js.erb"),
     require => File["/var/lib/jenkins/plugins/simple-theme-plugin"]
   }
 
@@ -166,7 +166,7 @@ class jenkins_master($site, $serveradmin) {
 
   file { "/var/lib/jenkins/plugins/simple-theme-plugin/title.png":
     ensure => present,
-    source => "puppet:///modules/jenkins_master/title.png",
+    source => "puppet:///modules/jenkins_master/${logo}",
     require => File["/var/lib/jenkins/plugins/simple-theme-plugin"]
   }
 }
