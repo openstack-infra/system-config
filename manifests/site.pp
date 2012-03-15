@@ -229,12 +229,9 @@ node "planet.openstack.org" {
   }
 }
 
-
-node "devstack-oneiric.template.openstack.org" {
+node /^.*\.template\.openstack\.org$/ {
   include openstack_template
-  include devstack_host
 }
-
 
 #
 # Jenkins slaves:
@@ -254,17 +251,5 @@ node /^oneiric.*\.slave\.openstack\.org$/ {
     ensure => latest,
     provider => pip,
     require => Package[python-pip],
-  }
-}
-
-node /^deploy.*.openstack\.org$/ {
-  include openstack_jenkins_slave
-  include orchestra
-}
-
-node "deploy-rax.1918.openstack.org" {
-  exec { "poweroff":
-    command => "poweroff",
-    path => "/sbin",
   }
 }
