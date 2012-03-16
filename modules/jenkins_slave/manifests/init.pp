@@ -65,6 +65,7 @@ class jenkins_slave {
                  "socat",
                  "sqlite3",
                  "swig",
+                 "tmpreaper",
                  "unzip",
                  "vlan",
                  "wget"]
@@ -102,5 +103,13 @@ class jenkins_slave {
          "puppet:///modules/jenkins_slave/rubygems.sh",
        ],
     }
+
+    cron { "tmpreaper":
+      user => jenkins,
+      minute => '0',
+      hour   => '1',
+      command => '/usr/sbin/tmpreaper --runtime 1200 --delay 600 1d /tmp',
+      require => [ Package[tmpreaper], Jenkinsuser[jenkins] ],
+   }
 
 }
