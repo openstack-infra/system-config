@@ -229,8 +229,15 @@ node "planet.openstack.org" {
   }
 }
 
+# A bare machine, but with a jenkins user
 node /^.*\.template\.openstack\.org$/ {
   include openstack_template
+  # This sets up a user with jenkins ssh key and adds it to the sudo group.
+  # Don't do that on regular jenkins slaves, only on lowest-privilege test
+  # hosts, such as the devstack hosts.
+  realize(
+     User::Virtual::Localuser["jenkins"],
+  )
 }
 
 #
