@@ -25,4 +25,9 @@ class openstack_project::users {
     realname => 'Andrew Hutchings',
     sshkeys => "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDWd+45ODB7c9YbNtIc8iVYioT1sPY7Gob9bm/WiiBA0CWLdaD8TzX1htBMYJeszdvDkThhdwVt4EyJIFuSc7MEQUEfDB/VyYAOJKNOb2Q9uC+INgdigQ03gxL2sTV6loTkHXdOpCQN7CD642IctS94VGDxJhGVSrzoJvMuJJDqDuI7xl37aIRAS7Ehh+B71p4gbLKvwrXDPEZL2FnpmevFQmhnq11/U1wK0864r+FjyNiDekwDSBSqtI5Ic5VoNWuCDW74/mlKrfaylfvr5/tDp9iJYixzH2PP6X+EHU3qfWNrABBJC3RG+KcQzqD8a+r+iE5UTEG2ISqjA0j6LR6b linuxjedi@linuxjedi-laptop\n",
   }
+
+  @user::virtual::localuser { 'jenkins':
+    realname => 'OpenStack Jenkins',
+    sshkeys => "ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAtioTW2wh3mBRuj+R0Jyb/mLt5sjJ8dEvYyA8zfur1dnqEt5uQNLacW4fHBDFWJoLHfhdfbvray5wWMAcIuGEiAA2WEH23YzgIbyArCSI+z7gB3SET8zgff25ukXlN+1mBSrKWxIza+tB3NU62WbtO6hmelwvSkZ3d7SDfHxrc4zEpmHDuMhxALl8e1idqYzNA+1EhZpbcaf720mX+KD3oszmY2lqD1OkKMquRSD0USXPGlH3HK11MTeCArKRHMgTdIlVeqvYH0v0Wd1w/8mbXgHxfGzMYS1Ej0fzzJ0PC5z5rOqsMqY1X2aC1KlHIFLAeSf4Cx0JNlSpYSrlZ/RoiQ== hudson@hudson\n",
+  }
 }
