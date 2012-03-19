@@ -1,0 +1,30 @@
+    <hudson.tasks.ArtifactArchiver>
+      <artifacts>dist/*.tar.gz</artifacts>
+      <latestOnly>false</latestOnly>
+    </hudson.tasks.ArtifactArchiver>
+    <be.certipost.hudson.plugin.SCPRepositoryPublisher>
+      <siteName><%= project %>.<%= site %>.org</siteName>
+      <entries>
+        <be.certipost.hudson.plugin.Entry>
+          <filePath>tarballs/<%= project %>/</filePath>
+          <sourceFile>dist/*.tar.gz</sourceFile>
+          <keepHierarchy>false</keepHierarchy>
+        </be.certipost.hudson.plugin.Entry>
+      </entries>
+    </be.certipost.hudson.plugin.SCPRepositoryPublisher>
+    <hudson.plugins.parameterizedtrigger.BuildTrigger>
+      <configs>
+        <hudson.plugins.parameterizedtrigger.BuildTriggerConfig>
+          <configs>
+            <hudson.plugins.parameterizedtrigger.PredefinedBuildParameters>
+              <properties>BUILD_SELECTOR=&lt;SpecificBuildSelector&gt;&lt;buildNumber&gt;$BUILD_NUMBER&lt;/buildNumber&gt;&lt;/SpecificBuildSelector&gt;
+BRANCH=$GERRIT_REFNAME
+</properties>
+            </hudson.plugins.parameterizedtrigger.PredefinedBuildParameters>
+          </configs>
+          <projects><%= project %>-ppa</projects>
+          <condition>SUCCESS</condition>
+          <triggerWithNoParameters>false</triggerWithNoParameters>
+        </hudson.plugins.parameterizedtrigger.BuildTriggerConfig>
+      </configs>
+    </hudson.plugins.parameterizedtrigger.BuildTrigger>

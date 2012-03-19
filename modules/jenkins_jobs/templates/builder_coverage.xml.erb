@@ -1,0 +1,9 @@
+    <hudson.tasks.Shell>
+      <command>if [ -f .cache.bundle ] ; then
+  tox -ejenkinscover
+else
+  tox -evenv -- nosetests test/unit --with-xcoverage --cover-erase --cover-package=<%= project %>
+
+fi</command>
+    </hudson.tasks.Shell>
+

@@ -1,0 +1,20 @@
+    <be.certipost.hudson.plugin.SCPRepositoryPublisher>
+      <siteName><%= project %>.<%= site %>.org</siteName>
+      <entries>
+        <be.certipost.hudson.plugin.Entry>
+          <filePath>docs/<%= project %></filePath>
+          <sourceFile>doc/build/html/**</sourceFile>
+          <keepHierarchy>false</keepHierarchy>
+        </be.certipost.hudson.plugin.Entry>
+        <be.certipost.hudson.plugin.Entry>
+          <filePath>docs/<%= project %>/_static</filePath>
+          <sourceFile>doc/build/html/_static/**</sourceFile>
+          <keepHierarchy>false</keepHierarchy>
+        </be.certipost.hudson.plugin.Entry>
+        <be.certipost.hudson.plugin.Entry>
+          <filePath>docs/<%= project %>/_sources</filePath>
+          <sourceFile>doc/build/html/_sources/**</sourceFile>
+          <keepHierarchy>false</keepHierarchy>
+        </be.certipost.hudson.plugin.Entry>
+      </entries>
+    </be.certipost.hudson.plugin.SCPRepositoryPublisher>

@@ -1,0 +1,8 @@
+    <hudson.tasks.Shell>
+      <command>if [ -f .cache.bundle ]
+then
+  tox -v -ejenkinspy27
+else
+  tox -v -epy27
+fi</command>
+    </hudson.tasks.Shell>
