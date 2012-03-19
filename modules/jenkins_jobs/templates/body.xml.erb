@@ -1,0 +1,59 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<project>
+  <actions/>
+  <description></description>
+  <%= logrotate %>
+  <keepDependencies>false</keepDependencies>
+  <properties>
+    <com.coravy.hudson.plugins.github.GithubProjectProperty>
+      <projectUrl>https://github.com/<%= site %>/<%= project %>/</projectUrl>
+    </com.coravy.hudson.plugins.github.GithubProjectProperty>
+    <hudson.plugins.throttleconcurrents.ThrottleJobProperty>
+      <maxConcurrentPerNode>0</maxConcurrentPerNode>
+      <maxConcurrentTotal>0</maxConcurrentTotal>
+      <categories/>
+      <throttleEnabled>false</throttleEnabled>
+      <throttleOption>project</throttleOption>
+      <configVersion>1</configVersion>
+    </hudson.plugins.throttleconcurrents.ThrottleJobProperty>
+    <EnvInjectJobProperty>
+      <info>
+        <propertiesContent>PROJECT=<%= project %></propertiesContent>
+        <loadFilesFromMaster>false</loadFilesFromMaster>
+      </info>
+      <on>true</on>
+      <keepJenkinsSystemVariables>true</keepJenkinsSystemVariables>
+      <keepBuildVariables>true</keepBuildVariables>
+      <contributors/>
+    </EnvInjectJobProperty>
+    <hudson.security.AuthorizationMatrixProperty>
+      <permission>hudson.model.Item.Build:authenticated</permission>
+    </hudson.security.AuthorizationMatrixProperty>
+  </properties>
+  <% if scm == "" %>
+  <scm class="hudson.scm.NullSCM"/>
+  <% else %>
+  <%= scm %>
+  <% end %>
+  <canRoam>false</canRoam>
+  <disabled>false</disabled>
+  <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+  <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+  <% if triggers != "" %>
+  <triggers class="vector">
+  <%= triggers %>
+  </triggers>
+  <% end %>
+  <concurrentBuild>false</concurrentBuild>
+  <% if builders != "" %>
+  <builders>
+  <%= builders %>
+  </builders>
+  <% end %>
+  <% if publishers != "" %>
+  <publishers>
+  <%= publishers %>
+  </publishers>
+  <% end %>
+  <buildWrappers/>
+</project>

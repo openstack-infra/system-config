@@ -1,0 +1,10 @@
+    <hudson.tasks.Shell>
+      <command>mkdir -p doc/build
+export HUDSON_PUBLISH_DOCS=1
+if [ -f .cache.bundle ] ; then
+  tox -ejenkinsvenv python setup.py build_sphinx
+else
+  tox -evenv python setup.py build_sphinx
+fi</command>
+    </hudson.tasks.Shell>
+
