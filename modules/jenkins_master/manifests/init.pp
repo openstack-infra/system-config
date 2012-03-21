@@ -134,4 +134,39 @@ class jenkins_master($site, $serveradmin) {
     command => "apache2ctl graceful",
   }
 
+  file { "/var/lib/jenkins/plugins/simple-theme-plugin":
+    ensure => directory,
+    owner => 'jenkins',
+    group => 'nogroup'
+  }
+
+  file { "/var/lib/jenkins/plugins/simple-theme-plugin/breadcrumb.png":
+    ensure => present,
+    source => "puppet:///modules/jenkins_master/breadcrumb.png",
+    require => File["/var/lib/jenkins/plugins/simple-theme-plugin"]
+  }
+
+  file { "/var/lib/jenkins/plugins/simple-theme-plugin/openstack.css":
+    ensure => present,
+    source => "puppet:///modules/jenkins_master/openstack.css",
+    require => File["/var/lib/jenkins/plugins/simple-theme-plugin"]
+  }
+
+  file { "/var/lib/jenkins/plugins/simple-theme-plugin/openstack.js":
+    ensure => present,
+    source => "puppet:///modules/jenkins_master/openstack.js",
+    require => File["/var/lib/jenkins/plugins/simple-theme-plugin"]
+  }
+
+  file { "/var/lib/jenkins/plugins/simple-theme-plugin/openstack-page-bkg.jpg":
+    ensure => present,
+    source => "puppet:///modules/jenkins_master/openstack-page-bkg.jpg",
+    require => File["/var/lib/jenkins/plugins/simple-theme-plugin"]
+  }
+
+  file { "/var/lib/jenkins/plugins/simple-theme-plugin/title.png":
+    ensure => present,
+    source => "puppet:///modules/jenkins_master/title.png",
+    require => File["/var/lib/jenkins/plugins/simple-theme-plugin"]
+  }
 }
