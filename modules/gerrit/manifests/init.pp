@@ -24,7 +24,6 @@ $logo
     home => "/home/gerrit2",
     shell => "/bin/bash",
     gid => "gerrit2",
-    system => true,
     managehome => true,
     require => Group["gerrit2"]
   }
