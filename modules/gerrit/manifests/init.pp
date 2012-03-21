@@ -125,7 +125,7 @@ $logo
 
   file { '/home/gerrit2/review_site/static/title.png':
     ensure => 'present',
-    source => 'puppet:///modules/gerrit/${logo}',
+    source => "puppet:///modules/gerrit/${logo}",
   }
 
   file { '/home/gerrit2/review_site/static/openstack-page-bkg.jpg':
