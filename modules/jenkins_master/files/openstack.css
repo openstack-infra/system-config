@@ -1,7 +1,7 @@
 body {color: #535353 !important; background: url("/plugin/simple-theme-plugin/openstack-page-bkg.jpg") no-repeat scroll 0 0 white !important; position: static}
 a,a:visited {color: #264D69 !important; text-decoration: none !important;}
 a:hover {color: #000 !important; text-decoration: underline !important}
-#breadcrumbs LI A {background:url('/plugin/simple-theme-plugin/breadcrumb.png') no-repeat right center !important}
+#breadcrumbs {border-top: 1px solid #D3D7CF; background: #fff}
 
 #header {margin-top: 5px}
 #header tr:first-child {height: 60px}

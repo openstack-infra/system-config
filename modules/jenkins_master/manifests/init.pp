@@ -140,12 +140,6 @@ class jenkins_master($site, $serveradmin, $logo) {
     group => 'nogroup'
   }
 
-  file { "/var/lib/jenkins/plugins/simple-theme-plugin/breadcrumb.png":
-    ensure => present,
-    source => "puppet:///modules/jenkins_master/breadcrumb.png",
-    require => File["/var/lib/jenkins/plugins/simple-theme-plugin"]
-  }
-
   file { "/var/lib/jenkins/plugins/simple-theme-plugin/openstack.css":
     ensure => present,
     source => "puppet:///modules/jenkins_master/openstack.css",
