@@ -20,3 +20,5 @@ div[id*='title-dashboard_portlet'] {background-color: #EEEEEE !important; border
 #viewList td.inactive:hover {background: none !important}
 #viewList td.active {border-top: 0; border-right: 0; border-left: 0; border-bottom: 3px solid #CF2F19; padding-bottom: 0px !important; color: #CF2F19; background: none;}
 #viewList td.filler {border: 0}
+pre {color: black}
+label {color: black}
