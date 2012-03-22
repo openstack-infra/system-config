@@ -20,6 +20,7 @@ a.gwt-InlineHyperlink {background: none !important}
 #gerrit_body:not(.patch) tr:nth-child(odd)>td {background: #FFF; color: #353535}
 #gerrit_body tr:nth-child(even)>td.header {background: #EEF3F5; font-style: normal; color: #353535; font-weight: bold;}
 #gerrit_body tr:nth-child(odd)>td.header {background: #FFF; font-style: normal; color: #353535; font-weight: bold;}
+#gerrit_body tr>td {padding: 3px 6px}
 #gerrit_body tr>td div {background-color: transparent; color: #353535}
 #gerrit_body tr>td div a {background: none; color: #353535}
 #gerrit_body tr:first-child>td {color: #353535; background: #FFF}
