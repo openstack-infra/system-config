@@ -26,6 +26,11 @@ class openstack_project::users {
     sshkeys => "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDWd+45ODB7c9YbNtIc8iVYioT1sPY7Gob9bm/WiiBA0CWLdaD8TzX1htBMYJeszdvDkThhdwVt4EyJIFuSc7MEQUEfDB/VyYAOJKNOb2Q9uC+INgdigQ03gxL2sTV6loTkHXdOpCQN7CD642IctS94VGDxJhGVSrzoJvMuJJDqDuI7xl37aIRAS7Ehh+B71p4gbLKvwrXDPEZL2FnpmevFQmhnq11/U1wK0864r+FjyNiDekwDSBSqtI5Ic5VoNWuCDW74/mlKrfaylfvr5/tDp9iJYixzH2PP6X+EHU3qfWNrABBJC3RG+KcQzqD8a+r+iE5UTEG2ISqjA0j6LR6b linuxjedi@linuxjedi-laptop\n",
   }
 
+  @user::virtual::localuser { 'devananda':
+    realname => 'Devananda van der Veen',
+    sshkeys => "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQC1sfZvhT3qLnszR77OEDMtdjyG68fq4RkgZuA/DLzaEm3fxG7+8yLQfiK/5hsMvDiqfjcNIBsWa0EM2xau/08wjSWBF1Cf8AWXYic/gczmWG/Ovpu2ZXGgtLG+xJQaUmg2IyV0IkdUKQne4Or3S1h4DnPBq6H2GGffASzZfkChYI15EAl9lxuNGsFN2QLYkAB7exzV3Zmb0UZ5Gh7D8qXngqzALPApAGq+CuQibX48fx0dCEQ5bUcwJOy30c2Ws7TTSxkOhSCJR56j6TA+g8nsKnaNyrmI0MV9gY1XXcgSkppcXoiuDdUU7j8WJIYZw+C0aoQ8QuaIVu8+vJNSbcqtQrGzyY+9sVuqXg26+aJhehY0hDHCZ5KV8EFjyyT0FqnDDShahY7Drk38wBtDuTUkTlV2G/UqlyVOjFwlQ71KE69yxrl5yfycy0UmdMazmmIC0+UCgE2gJ18RP9UWFolCJ7K/DQVk/uGFNeZXRO3KDDRCd6tOlderQv3g0aX6ndA5AYmMplO3erNgmbmSxo8HIws+VSS26/h0NVlUAo1OV8Xa7xbg7RX5sVwli/XDCnlXZOtCcYHy0s9e4/iDrE51RRWoPslE5bm2p+18iHraA4hzXCQFnyaZD6fe6MIrol2lzliz313lLyNbtx+qlthVO8cFi6cAjdDWx555R0SCGQ== Devananda-2012\n",
+  }
+
   @user::virtual::localuser { 'jenkins':
     realname => 'OpenStack Jenkins',
     sshkeys => "ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAtioTW2wh3mBRuj+R0Jyb/mLt5sjJ8dEvYyA8zfur1dnqEt5uQNLacW4fHBDFWJoLHfhdfbvray5wWMAcIuGEiAA2WEH23YzgIbyArCSI+z7gB3SET8zgff25ukXlN+1mBSrKWxIza+tB3NU62WbtO6hmelwvSkZ3d7SDfHxrc4zEpmHDuMhxALl8e1idqYzNA+1EhZpbcaf720mX+KD3oszmY2lqD1OkKMquRSD0USXPGlH3HK11MTeCArKRHMgTdIlVeqvYH0v0Wd1w/8mbXgHxfGzMYS1Ej0fzzJ0PC5z5rOqsMqY1X2aC1KlHIFLAeSf4Cx0JNlSpYSrlZ/RoiQ== hudson@hudson\n",
