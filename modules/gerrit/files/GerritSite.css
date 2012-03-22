@@ -26,6 +26,7 @@ a.gwt-InlineHyperlink {background: none !important}
 #gerrit_body tr:first-child>td {color: #353535; background: #FFF}
 
 #gerrit_topmenu tbody tr td table.gwt-TabBar {color: #353535; border-bottom: 1px solid #C5E2EA;}
+#gerrit_topmenu .gwt-Button {padding: 3px 6px}
 .gwt-TabBarItem-selected {color: #CF2F19 !important; border-bottom: 3px solid #CF2F19;}
 .gwt-TabBarItem {color: #353535; border-right: 0 !important}
 .gwt-TabBar .gwt-TabBarItem, .gwt-TabBar .gwt-TabBarRest, .gwt-TabPanelBottom {background: 0 !important;}
