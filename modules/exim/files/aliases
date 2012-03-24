@@ -12,7 +12,7 @@ abuse: root
 noc: root
 security: root
 
-sysadmin: corvus@inaugust.com, mordred@inaugust.com, andrew@linuxjedi.co.uk
+sysadmin: corvus@inaugust.com, mordred@inaugust.com, andrew@linuxjedi.co.uk, devananda.vdv@gmail.com
 root: sysadmin
 gerrit2: sysadmin
 jenkins: sysadmin
