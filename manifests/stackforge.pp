@@ -89,6 +89,9 @@ node "review.stackforge.org" {
     github_projects => [ {
                          name => 'stackforge/MRaaS',
                          close_pull => 'true'
+                         }, {
+                         name => 'stackforge/reddwarf',
+                         close_pull => 'true'
                          } ],
     logo => 'stackforge.png'
   }
@@ -101,6 +104,11 @@ node "jenkins.stackforge.org" {
     serveradmin => 'webmaster@stackforge.org',
     site => 'jenkins.stackforge.org',
     logo => 'stackforge.png'
+  }
+
+  class { "jenkins_jobs":
+    site => "stackforge",
+    projects => ["reddwarf"]
   }
 }
 
