@@ -109,8 +109,13 @@ class jenkins_slave($ssh_key) {
       user => jenkins,
       minute => '0',
       hour   => '1',
-      command => '/usr/sbin/tmpreaper --runtime 1200 --delay 600 1d /tmp',
+      command => "/usr/sbin/tmpreaper --runtime 1200 --delay 600 1d /tmp 2>&1 | grep -v 'failed: Permission denied'",
       require => [ Package[tmpreaper], Jenkinsuser[jenkins] ],
+   }
+
+   file { 'tmpreaper-cron.daily':
+      name => '/etc/cron.daily/tmpreaper',
+      ensure => 'absent',
    }
 
 }
