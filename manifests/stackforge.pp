@@ -20,7 +20,11 @@ class openstack_base {
 
   package { "ntp":
     ensure => installed
-    }
+  }
+
+  package { "popularity-contest":
+    ensure => purged
+  }
 
   service { 'ntpd':
     name       => 'ntp',
