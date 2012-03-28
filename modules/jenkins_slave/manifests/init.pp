@@ -87,6 +87,12 @@ class jenkins_slave($ssh_key) {
       require => Package[python-pip],
     }
 
+    package { "tox":
+      ensure => latest,
+      provider => pip,
+      require => Package[python-pip]
+    }
+
     cron { "updateci":
       user => jenkins,
       minute => "*/15",
