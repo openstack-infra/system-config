@@ -168,6 +168,9 @@ node "gerrit.openstack.org" {
                          name => 'openstack/python-novaclient',
                          close_pull => 'true'
                          }, {
+                         name => 'openstack/python-glanceclient',
+                         close_pull => 'true'
+                         }, {
                          name => 'openstack-ci/git-review',
                          close_pull => 'true'
                          }, {
