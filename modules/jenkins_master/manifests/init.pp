@@ -108,7 +108,7 @@ class jenkins_master($site, $serveradmin, $logo) {
     notify => Service["versions"]
   }
 
-  package { "python-novaclient":
+  package { "apache-libcloud":
     ensure => latest,
     provider => pip,
     require => Package[python-pip]
