@@ -3,7 +3,7 @@ import "users"
 #
 # Abstract classes:
 #
-class openstack_base {
+class openstack_base ($iptables_public_tcp_ports) {
   include openstack_project::users
   include ssh
   include snmpd
@@ -54,8 +54,10 @@ class openstack_cron {
 }
 
 # A template host with no running services
-class openstack_template {
-  include openstack_base
+class openstack_template ($iptables_public_tcp_ports) {
+  class { 'openstack_base':
+    iptables_public_tcp_ports => $iptables_public_tcp_ports
+  }
   realize (
     User::Virtual::Localuser["mordred"],
     User::Virtual::Localuser["corvus"],
@@ -66,13 +68,17 @@ class openstack_template {
 }
 
 # A server that we expect to run for some time
-class openstack_server {
-  include openstack_template
+class openstack_server ($iptables_public_tcp_ports) {
+  class { 'openstack_template':
+    iptables_public_tcp_ports => $iptables_public_tcp_ports
+  }
   include openstack_cron
 }
 
 class openstack_jenkins_slave {
-  include openstack_server
+  class { 'openstack_server':
+    iptables_public_tcp_ports => []
+  }
   class { 'jenkins_slave':
     ssh_key => 'ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAtioTW2wh3mBRuj+R0Jyb/mLt5sjJ8dEvYyA8zfur1dnqEt5uQNLacW4fHBDFWJoLHfhdfbvray5wWMAcIuGEiAA2WEH23YzgIbyArCSI+z7gB3SET8zgff25ukXlN+1mBSrKWxIza+tB3NU62WbtO6hmelwvSkZ3d7SDfHxrc4zEpmHDuMhxALl8e1idqYzNA+1EhZpbcaf720mX+KD3oszmY2lqD1OkKMquRSD0USXPGlH3HK11MTeCArKRHMgTdIlVeqvYH0v0Wd1w/8mbXgHxfGzMYS1Ej0fzzJ0PC5z5rOqsMqY1X2aC1KlHIFLAeSf4Cx0JNlSpYSrlZ/RoiQ== hudson@hudson'
   }
@@ -83,15 +89,18 @@ class openstack_jenkins_slave {
 #
 
 node default {
-  include openstack_server
+  class { 'openstack_server':
+    iptables_public_tcp_ports => []
+  }
 }
 
 #
 # Long lived servers:
 #
 node "gerrit.openstack.org" {
-  $iptables_public_tcp_ports = [80, 443, 29418]
-  include openstack_server
+  class { 'openstack_server':
+    iptables_public_tcp_ports => [80, 443, 29418]
+  }
   class { 'gerrit':
     canonicalweburl => "https://review.openstack.org/",
     email => "review@openstack.org",
@@ -176,8 +185,9 @@ node "gerrit.openstack.org" {
 }
 
 node "gerrit-dev.openstack.org" {
-  $iptables_public_tcp_ports = [80, 443, 29418]
-  include openstack_server
+  class { 'openstack_server':
+    iptables_public_tcp_ports => [80, 443, 29418]
+  }
 
   class { 'gerrit':
     canonicalweburl => "https://review-dev.openstack.org/",
@@ -191,8 +201,9 @@ node "gerrit-dev.openstack.org" {
 }
 
 node "jenkins.openstack.org" {
-  $iptables_public_tcp_ports = [80, 443, 4155]
-  include openstack_server
+  class { 'openstack_server':
+    iptables_public_tcp_ports => [80, 443, 4155]
+  }
   class { 'jenkins_master':
     site => 'jenkins.openstack.org',
     serveradmin => 'webmaster@openstack.org',
@@ -201,16 +212,18 @@ node "jenkins.openstack.org" {
 }
 
 node "jenkins-dev.openstack.org" {
-  $iptables_public_tcp_ports = [80, 443, 4155]
-  include openstack_server
+ class { 'openstack_server':
+    iptables_public_tcp_ports => [80, 443, 4155]
+  } 
   class { 'jenkins_master':
     site => 'openstack'
   }
 }
 
 node "community.openstack.org" {
-  $iptables_public_tcp_ports = [80, 443, 8099, 8080]
-  include openstack_server
+  class { 'openstack_server':
+    iptables_public_tcp_ports => [80, 443, 8099, 8080]
+  }
 
   realize (
     User::Virtual::Localuser["smaffulli"],
@@ -218,13 +231,16 @@ node "community.openstack.org" {
 }
 
 node "docs.openstack.org" {
-  include openstack_server
+  class { 'openstack_server':
+    iptables_public_tcp_ports => []
+  }
   include doc_server
 }
 
 node "paste.openstack.org" {
-  $iptables_public_tcp_ports = [80]
-  include openstack_server
+  class { 'openstack_server':
+    iptables_public_tcp_ports => [80]
+  }
   include lodgeit
   lodgeit::site { "openstack":
     port => "5000",
@@ -238,8 +254,9 @@ node "paste.openstack.org" {
 }
 
 node "planet.openstack.org" {
-  $iptables_public_tcp_ports = [80]
-  include openstack_server
+  class { 'openstack_server':
+    iptables_public_tcp_ports => [80]
+  }
   include planet
 
   planet::site { "openstack":
@@ -278,3 +295,4 @@ node /^oneiric.*\.slave\.openstack\.org$/ {
     require => Package[python-pip],
   }
 }
+
