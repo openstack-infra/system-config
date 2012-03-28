@@ -7,12 +7,12 @@ class jenkins_slave($ssh_key) {
 
     slavecirepo { "openstack-ci":
       ensure => present,
-      require => [ Package[git], Jenkinsuser[jenkins] ],
+      require => [ Package[git], File[jenkinshome] ],
     }
 
     devstackrepo { "devstack":
       ensure => present,
-      require => [ Package[git], Jenkinsuser[jenkins] ],
+      require => [ Package[git], File[jenkinshome] ],
     }
 
     apt::ppa { "ppa:openstack-ci/build-depends":
@@ -91,7 +91,7 @@ class jenkins_slave($ssh_key) {
       user => jenkins,
       minute => "*/15",
       command => "cd /home/jenkins/openstack-ci && /usr/bin/git pull -q origin master",
-      require => [ Jenkinsuser[jenkins] ],
+      require => [ File[jenkinshome] ],
     }
 
     file { 'profilerubygems':
@@ -110,7 +110,7 @@ class jenkins_slave($ssh_key) {
       minute => '0',
       hour   => '1',
       command => "/usr/sbin/tmpreaper --runtime 1200 --delay 600 1d /tmp 2>&1 | grep -v 'failed: Permission denied'",
-      require => [ Package[tmpreaper], Jenkinsuser[jenkins] ],
+      require => [ Package[tmpreaper], File[jenkinshome] ],
    }
 
    file { 'tmpreaper-cron.daily':

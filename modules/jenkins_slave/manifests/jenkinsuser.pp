@@ -11,6 +11,7 @@ define jenkinsuser($ensure = present, $ssh_key) {
     gid => 'jenkins',
     shell => '/bin/bash',
     membership => 'minimum',
+    require => Group['jenkins']
   }
 
   file { 'jenkinshome':
@@ -19,6 +20,7 @@ define jenkinsuser($ensure = present, $ssh_key) {
     group => 'jenkins',
     mode => 644,
     ensure => 'directory',
+    require => User['jenkins']
   }
     
   
