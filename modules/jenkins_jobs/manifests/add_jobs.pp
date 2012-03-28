@@ -74,7 +74,7 @@ define jenkins_jobs::add_jobs($site) {
 
   jenkins_jobs::job { "${name}-venv":
     site => "${site}",
-    project => "${job}",
+    project => "${name}",
     job => "venv",
     triggers => template("jenkins_jobs/trigger_timed_midnight.xml.erb"),
     builders => template("jenkins_jobs/builder_venv.xml.erb"),
