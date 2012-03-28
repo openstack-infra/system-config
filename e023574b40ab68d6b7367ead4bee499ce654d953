@@ -1,0 +1,9 @@
+Change-Id: Ie023574b40ab68d6b7367ead4bee499ce654d953
+Approved+1: James E. Blair <corvus@inaugust.com>
+Code-Review+2: James E. Blair <corvus@inaugust.com>
+Verified+1: James E. Blair <corvus@inaugust.com>
+Submitted-by: James E. Blair <corvus@inaugust.com>
+Submitted-at: Wed, 28 Mar 2012 22:40:53 +0000
+Reviewed-on: https://review.openstack.org/5937
+Project: openstack/openstack-ci-puppet
+Branch: refs/heads/master
