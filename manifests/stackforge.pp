@@ -107,7 +107,10 @@ node "review.stackforge.org" {
                          name => 'stackforge/reddwarf',
                          close_pull => 'true'
                          } ],
-    logo => 'stackforge.png'
+    logo => 'stackforge.png',
+    gerrit_user => 'update',
+    gerrit_ssh_key_file => 'id_rsa',
+    gerrit_project => 'stackforge'
   }
 }
 

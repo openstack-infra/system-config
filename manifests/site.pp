@@ -183,7 +183,10 @@ node "gerrit.openstack.org" {
                          name => 'openstack-dev/openstack-nose',
                          close_pull => 'true'
                          } ],
-    logo => 'openstack.png'
+    logo => 'openstack.png',
+    gerrit_user => 'launchpadsync',
+    gerrit_ssh_key_file => 'launchpadsync_rsa',
+    gerrit_project => 'openstack'
   }
 }
 
@@ -199,7 +202,10 @@ node "gerrit-dev.openstack.org" {
                          name => 'gtest-org/test',
                          close_pull => 'true'
                          } ],
-    logo => 'openstack.png'
+    logo => 'openstack.png',
+    gerrit_user => 'update',
+    gerrit_ssh_key_file => 'id_rsa',
+    gerrit_project => 'openstack'
   }
 }
 
