@@ -66,7 +66,6 @@ class jenkins_slave($ssh_key) {
                  "socat",
                  "sqlite3",
                  "swig",
-                 "tmpreaper",
                  "unzip",
                  "vlan",
                  "wget"]
@@ -107,15 +106,18 @@ class jenkins_slave($ssh_key) {
 
     cron { "tmpreaper":
       user => jenkins,
-      minute => '0',
-      hour   => '1',
-      command => "/usr/sbin/tmpreaper --runtime 1200 --delay 600 1d /tmp 2>&1 | grep -v 'failed: Permission denied'",
-      require => [ Package[tmpreaper], File[jenkinshome] ],
+      ensure => 'absent',
    }
 
-   file { 'tmpreaper-cron.daily':
-      name => '/etc/cron.daily/tmpreaper',
+   file { 'jenkinslogs':
+      name => '/var/log/jenkins/tmpreaper.log*',
       ensure => 'absent',
+   }
+
+   file { 'jenkinslogdir':
+     name => '/var/log/jenkins',
+     ensure => 'absent',
+     force => true,
    }
 
 }

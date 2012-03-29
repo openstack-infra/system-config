@@ -76,6 +76,7 @@ class openstack_server ($iptables_public_tcp_ports) {
 }
 
 class openstack_jenkins_slave {
+  include tmpreaper
   class { 'openstack_server':
     iptables_public_tcp_ports => []
   }

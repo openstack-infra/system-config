@@ -1,0 +1,7 @@
+/var/log/jenkins/tmpreaper.log {
+        missingok
+        rotate 4
+        compress
+        notifempty
+        create 644 jenkins jenkins
+}
