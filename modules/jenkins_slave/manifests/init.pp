@@ -109,13 +109,37 @@ class jenkins_slave($ssh_key) {
       user => jenkins,
       minute => '0',
       hour   => '1',
-      command => "/usr/sbin/tmpreaper --runtime 1200 --delay 600 1d /tmp 2>&1 | grep -v 'failed: Permission denied'",
-      require => [ Package[tmpreaper], File[jenkinshome] ],
+      command => "(echo && date && /usr/sbin/tmpreaper --runtime 20m --delay 1m --mtime 1d /tmp) >> /var/log/jenkins/tmpreaper.log 2>&1",
+      require => [ 
+                  Package[tmpreaper], File[jenkinshome], 
+                  File['jenkinslogdir'], File['tmpreaper-logrotate'] 
+                 ],
    }
 
    file { 'tmpreaper-cron.daily':
       name => '/etc/cron.daily/tmpreaper',
       ensure => 'absent',
+   }
+
+   file { 'jenkinslogdir':
+     name => '/var/log/jenkins',
+     owner => 'jenkins',
+     group => 'jenkins',
+     mode => 755,
+     ensure => 'directory',
+     require => [ File[jenkinshome] ],
+   }
+
+   file { 'tmpreaper-logrotate':
+     name => '/etc/logrotate.d/tmpreaper',
+     owner => 'root',
+     group => 'root',
+     mode => 644,
+     ensure => 'present',
+     require => File['jenkinslogdir'],
+     source => [
+                "puppet:///modules/jenkins_slave/tmpreaper-logrotate",
+               ],
    }
 
 }
