@@ -1,9 +1,3 @@
     <hudson.tasks.Shell>
-      <command>#!/bin/sh
-
-if [ -f .cache.bundle ] ; then
-  tox -v -ejenkinspep8 | tee pep8.txt
-else
-  tox -v -epep8 | tee pep8.txt
-fi</command>
+      <command>tox -v -epep8 | tee pep8.txt</command>
     </hudson.tasks.Shell>

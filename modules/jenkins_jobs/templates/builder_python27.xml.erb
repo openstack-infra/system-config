@@ -1,8 +1,3 @@
     <hudson.tasks.Shell>
-      <command>if [ -f .cache.bundle ]
-then
-  tox -v -ejenkinspy27
-else
-  tox -v -epy27
-fi</command>
+      <command>bash -x ~/openstack-ci/slave_scripts/run-tox.sh 26</command>
     </hudson.tasks.Shell>

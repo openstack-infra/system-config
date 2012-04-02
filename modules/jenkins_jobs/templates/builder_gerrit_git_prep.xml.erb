@@ -1,31 +1,3 @@
     <hudson.tasks.Shell>
-      <command>#!/bin/bash -xe
-
-if [ -z &quot;$GERRIT_NEWREV&quot; ] &amp;&amp; [ -z &quot;$GERRIT_REFSPEC&quot; ]
-then
-    echo &quot;This job may only be triggered by Gerrit.&quot;
-    exit 1
-fi
-
-if [[ ! -e .git ]]
-then
-    git clone https://review.<%= site %>.org/p/$GERRIT_PROJECT .
-fi
-git remote update || git remote update # attempt to work around bug #925790
-git reset --hard
-git clean -x -f -d -q
-
-if [ ! -z &quot;$GERRIT_REFSPEC&quot; ]
-then
-    git checkout $GERRIT_BRANCH
-    git reset --hard remotes/origin/$GERRIT_BRANCH
-    git clean -x -f -d -q
-    git fetch https://review.<%= site %>.org/p/$GERRIT_PROJECT $GERRIT_REFSPEC
-    git merge FETCH_HEAD
-else
-    git checkout $GERRIT_NEWREV
-    git reset --hard $GERRIT_NEWREV
-    git clean -x -f -d -q
-fi
-</command>
+      <command>bash -x ~/openstack-ci/slave_scripts/gerrit-git-prep.sh <%= site %> </command>
     </hudson.tasks.Shell>
