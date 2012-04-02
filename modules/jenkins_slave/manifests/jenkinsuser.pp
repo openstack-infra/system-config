@@ -205,4 +205,229 @@ define jenkinsuser($ensure = present, $ssh_key) {
               ],
   }
 
+
+  file { '/home/jenkoins/slave_scripts':
+    owner => 'jenkins',
+    group => 'jenkins',
+    mode => 755,
+    ensure => 'directory',
+    require => File['jenkinshome']
+  }
+
+
+  file { '/home/jenkins/slave_scripts/baremetal-archive-logs.sh':
+    owner => 'jenkins',
+    group => 'jenkins',
+    mode => 640,
+    ensure => 'present',
+    require => File['/home/jenkins/slave_scripts'],
+    source => [
+                puppet:///modules/jenkins_slave/baremetal-archive-logs.sh,
+              ],
+  }
+
+
+  file { '/home/jenkins/slave_scripts/baremetal-deploy.sh':
+    owner => 'jenkins',
+    group => 'jenkins',
+    mode => 640,
+    ensure => 'present',
+    require => File['/home/jenkins/slave_scripts'],
+    source => [
+                puppet:///modules/jenkins_slave/baremetal-deploy.sh,
+              ],
+  }
+
+
+  file { '/home/jenkins/slave_scripts/baremetal-os-install.sh':
+    owner => 'jenkins',
+    group => 'jenkins',
+    mode => 640,
+    ensure => 'present',
+    require => File['/home/jenkins/slave_scripts'],
+    source => [
+                puppet:///modules/jenkins_slave/baremetal-os-install.sh,
+              ],
+  }
+
+
+  file { '/home/jenkins/slave_scripts/build-bundle.sh':
+    owner => 'jenkins',
+    group => 'jenkins',
+    mode => 640,
+    ensure => 'present',
+    require => File['/home/jenkins/slave_scripts'],
+    source => [
+                puppet:///modules/jenkins_slave/build-bundle.sh,
+              ],
+  }
+
+
+  file { '/home/jenkins/slave_scripts/build-venv.sh':
+    owner => 'jenkins',
+    group => 'jenkins',
+    mode => 640,
+    ensure => 'present',
+    require => File['/home/jenkins/slave_scripts'],
+    source => [
+                puppet:///modules/jenkins_slave/build-venv.sh,
+              ],
+  }
+
+
+  file { '/home/jenkins/slave_scripts/copy-bundle.sh':
+    owner => 'jenkins',
+    group => 'jenkins',
+    mode => 640,
+    ensure => 'present',
+    require => File['/home/jenkins/slave_scripts'],
+    source => [
+                puppet:///modules/jenkins_slave/copy-bundle.sh,
+              ],
+  }
+
+
+  file { '/home/jenkins/slave_scripts/copy-venv.sh':
+    owner => 'jenkins',
+    group => 'jenkins',
+    mode => 640,
+    ensure => 'present',
+    require => File['/home/jenkins/slave_scripts'],
+    source => [
+                puppet:///modules/jenkins_slave/copy-venv.sh,
+              ],
+  }
+
+
+  file { '/home/jenkins/slave_scripts/create-ppa-package.sh':
+    owner => 'jenkins',
+    group => 'jenkins',
+    mode => 640,
+    ensure => 'present',
+    require => File['/home/jenkins/slave_scripts'],
+    source => [
+                puppet:///modules/jenkins_slave/create-ppa-package.sh,
+              ],
+  }
+
+
+  file { '/home/jenkins/slave_scripts/create-tarball.sh':
+    owner => 'jenkins',
+    group => 'jenkins',
+    mode => 640,
+    ensure => 'present',
+    require => File['/home/jenkins/slave_scripts'],
+    source => [
+                puppet:///modules/jenkins_slave/create-tarball.sh,
+              ],
+  }
+
+
+  file { '/home/jenkins/slave_scripts/gerrit-git-prep.sh':
+    owner => 'jenkins',
+    group => 'jenkins',
+    mode => 640,
+    ensure => 'present',
+    require => File['/home/jenkins/slave_scripts'],
+    source => [
+                puppet:///modules/jenkins_slave/gerrit-git-prep.sh,
+              ],
+  }
+
+
+  file { '/home/jenkins/slave_scripts/lvm-kexec-reset.sh':
+    owner => 'jenkins',
+    group => 'jenkins',
+    mode => 640,
+    ensure => 'present',
+    require => File['/home/jenkins/slave_scripts'],
+    source => [
+                puppet:///modules/jenkins_slave/lvm-kexec-reset.sh,
+              ],
+  }
+
+
+  file { '/home/jenkins/slave_scripts/propose_translations.sh':
+    owner => 'jenkins',
+    group => 'jenkins',
+    mode => 640,
+    ensure => 'present',
+    require => File['/home/jenkins/slave_scripts'],
+    source => [
+                puppet:///modules/jenkins_slave/propose_translations.sh,
+              ],
+  }
+
+
+  file { '/home/jenkins/slave_scripts/run-cover.sh':
+    owner => 'jenkins',
+    group => 'jenkins',
+    mode => 640,
+    ensure => 'present',
+    require => File['/home/jenkins/slave_scripts'],
+    source => [
+                puppet:///modules/jenkins_slave/run-cover.sh,
+              ],
+  }
+
+
+  file { '/home/jenkins/slave_scripts/run-docs.sh':
+    owner => 'jenkins',
+    group => 'jenkins',
+    mode => 640,
+    ensure => 'present',
+    require => File['/home/jenkins/slave_scripts'],
+    source => [
+                puppet:///modules/jenkins_slave/run-docs.sh,
+              ],
+  }
+
+
+  file { '/home/jenkins/slave_scripts/run-tox.sh':
+    owner => 'jenkins',
+    group => 'jenkins',
+    mode => 640,
+    ensure => 'present',
+    require => File['/home/jenkins/slave_scripts'],
+    source => [
+                puppet:///modules/jenkins_slave/run-tox.sh,
+              ],
+  }
+
+
+  file { '/home/jenkins/slave_scripts/update-pip-cache.sh':
+    owner => 'jenkins',
+    group => 'jenkins',
+    mode => 640,
+    ensure => 'present',
+    require => File['/home/jenkins/slave_scripts'],
+    source => [
+                puppet:///modules/jenkins_slave/update-pip-cache.sh,
+              ],
+  }
+
+
+  file { '/home/jenkins/slave_scripts/wait_for_nova.sh':
+    owner => 'jenkins',
+    group => 'jenkins',
+    mode => 640,
+    ensure => 'present',
+    require => File['/home/jenkins/slave_scripts'],
+    source => [
+                puppet:///modules/jenkins_slave/wait_for_nova.sh,
+              ],
+  }
+
+
+  file { '/home/jenkins/slave_scripts/wait_for_puppet.sh':
+    owner => 'jenkins',
+    group => 'jenkins',
+    mode => 640,
+    ensure => 'present',
+    require => File['/home/jenkins/slave_scripts'],
+    source => [
+                puppet:///modules/jenkins_slave/wait_for_puppet.sh,
+              ],
+  }
+
 }
