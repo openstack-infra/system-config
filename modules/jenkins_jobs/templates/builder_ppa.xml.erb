@@ -17,6 +17,6 @@ mkdir build
 #export DO_UPLOAD=&quot;no&quot;
 export PROJECT=&quot;<%= project %>&quot;
 export GERRIT_REFNAME=$BRANCH
-/bin/bash -xe ~/openstack-ci/slave_scripts/create-ppa-package.sh
+/usr/local/jenkins/slave_scripts/create-ppa-package.sh
 </command>
     </hudson.tasks.Shell>
