@@ -212,6 +212,10 @@ node "jenkins.openstack.org" {
     serveradmin => 'webmaster@openstack.org',
     logo => 'openstack.png'
   }
+  class { "jenkins_jobs":
+    site => "openstack",
+    projects => ["python-glanceclient"]
+  }
 }
 
 node "jenkins-dev.openstack.org" {
