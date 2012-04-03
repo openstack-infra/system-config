@@ -205,4 +205,56 @@ define jenkinsuser($ensure = present, $ssh_key) {
               ],
   }
 
+
+  file { '/usr/local/jenkins':
+    owner => 'root',
+    group => 'root',
+    mode => 755,
+    ensure => 'directory',
+  }
+
+  file { '/usr/local/jenkins/slave_scripts':
+    owner => 'root',
+    group => 'root',
+    mode => 755,
+    ensure => 'directory',
+    require => File['/usr/local/jenkins'],
+  }
+
+
+  $slave_scripts = [
+    'slave_scripts/baremetal-archive-logs.sh',
+    'slave_scripts/baremetal-deploy.sh',
+    'slave_scripts/baremetal-os-install.sh',
+    'slave_scripts/build-bundle.sh',
+    'slave_scripts/build-venv.sh',
+    'slave_scripts/copy-bundle.sh',
+    'slave_scripts/copy-venv.sh',
+    'slave_scripts/create-ppa-package.sh',
+    'slave_scripts/create-tarball.sh',
+    'slave_scripts/gerrit-git-prep.sh',
+    'slave_scripts/lvm-kexec-reset.sh',
+    'slave_scripts/ping.py',
+    'slave_scripts/propose_translations.sh',
+    'slave_scripts/run-cover.sh',
+    'slave_scripts/run-docs.sh',
+    'slave_scripts/run-tox.sh',
+    'slave_scripts/update-pip-cache.sh',
+    'slave_scripts/wait_for_nova.sh',
+    'slave_scripts/wait_for_puppet.sh',
+  ]
+
+  file { $slave_scripts:
+    name => "/usr/local/jenkins/slave_scripts/${name}",
+    owner => 'root',
+    group => 'root',
+    mode => 750,
+    ensure => 'present',
+    require => File['/usr/local/jenkins/slave_scripts'],
+    source => [
+                "puppet:///modules/jenkins_slave/${name}",
+              ],
+  }
+
+
 }
