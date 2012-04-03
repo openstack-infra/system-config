@@ -216,7 +216,7 @@ define jenkinsuser($ensure = present, $ssh_key) {
   file { '/usr/local/jenkins/slave_scripts':
     owner => 'root',
     group => 'root',
-    mode => 644,
+    mode => 755,
     ensure => 'directory',
     recurse => true,
     require => File['/usr/local/jenkins'],
