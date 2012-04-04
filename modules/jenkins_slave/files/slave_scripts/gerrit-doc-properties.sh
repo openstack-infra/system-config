@@ -23,4 +23,7 @@ then
     DOC_COMMENTS_ENABLED=1
 fi
 
-echo "DOC_RELEASE_PATH=$DOC_RELEASE_PATH" >$WORKSPACE/gerrit-doc.properties
+echo "DOC_RELEASE_PATH=$DOC_RELEASE_PATH" >gerrit-doc.properties
+echo "DOC_COMMENTS_ENABLED=$DOC_COMMENTS_ENABLED" >>gerrit-doc.properties
+
+pwd
