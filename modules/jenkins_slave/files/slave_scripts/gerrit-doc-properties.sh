@@ -13,12 +13,14 @@ BRANCH=$GERRIT_REFNAME
 if [ $BRANCH == "master" ]
 then
     DOC_RELEASE_PATH="trunk"
+    DOC_COMMENTS_ENABLED=0
 fi
 
 # The stable/diablo branch should get published to /diablo
 if [[ $BRANCH =~ ^stable/(.*)$ ]]
 then
     DOC_RELEASE_PATH=${BASH_REMATCH[1]}
+    DOC_COMMENTS_ENABLED=1
 fi
 
 echo "DOC_RELEASE_PATH=$DOC_RELEASE_PATH" >$WORKSPACE/gerrit-doc.properties
