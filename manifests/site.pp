@@ -98,7 +98,7 @@ node default {
 #
 # Long lived servers:
 #
-node "gerrit.openstack.org" {
+node "gerrit.openstack.org", "review.openstack.org" {
   class { 'openstack_server':
     iptables_public_tcp_ports => [80, 443, 29418]
   }
@@ -188,7 +188,7 @@ node "gerrit.openstack.org" {
   }
 }
 
-node "gerrit-dev.openstack.org" {
+node "gerrit-dev.openstack.org", "review-dev.openstack.org" {
   class { 'openstack_server':
     iptables_public_tcp_ports => [80, 443, 29418]
   }
