@@ -123,7 +123,9 @@ node "jenkins.stackforge.org" {
 
   class { "jenkins_jobs":
     site => "stackforge",
-    projects => ["reddwarf"]
+    projects => ["reddwarf"],
+    assigned_nodes => ["natty"],
+    type => 'python'
   }
 }
 

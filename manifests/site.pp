@@ -215,7 +215,9 @@ node "jenkins.openstack.org" {
   }
   class { "jenkins_jobs":
     site => "openstack",
-    projects => ["python-glanceclient"]
+    projects => ["python-glanceclient"],
+    assigned_nods => ["oneiric"],
+    type => 'python'
   }
 }
 
