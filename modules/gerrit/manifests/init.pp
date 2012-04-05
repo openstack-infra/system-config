@@ -15,7 +15,10 @@ $commentlinks = [ { name => 'changeid',
                   link => 'https://blueprints.launchpad.net/openstack/?searchtext=$2' },
 
                   ],
-$logo
+$logo,
+$gerrit_ssh_user,
+$gerrit_ssh_key_file,
+$gerrit_project
   ) {
 
   user { "gerrit2":
@@ -35,13 +38,16 @@ $logo
   package { "gitweb":
     ensure => latest
   }
+
   package { "python-dev":
     ensure => latest
   }
+
   package { "python-pip":
     ensure => latest,
     require => Package[python-dev]
   }
+
   package { "github2":
     ensure => latest,
     provider => pip,
@@ -57,20 +63,20 @@ $logo
   cron { "gerritsyncusers":
     user => gerrit2,
     minute => "*/15",
-    command => 'sleep $((RANDOM\%60+60)) && cd /home/gerrit2/openstack-ci && python gerrit/update_gerrit_users.py'
+    command => "sleep $((RANDOM\%60+60)) && cd /home/gerrit2/scripts && python gerrit/update_gerrit_users.py --user=${gerrit_ssh_user} --key=${gerrit_ssh_key} --project=${gerrit_project}"
   }
 
   cron { "gerritclosepull":
     user => gerrit2,
     minute => "*/5",
-    command => 'sleep $((RANDOM\%60+90)) && cd /home/gerrit2/openstack-ci && python gerrit/close_pull_requests.py'
+    command => 'sleep $((RANDOM\%60+90)) && cd /home/gerrit2/scripts && python gerrit/close_pull_requests.py'
   }
 
   cron { "expireoldreviews":
     user => gerrit2,
     hour => 6,
     minute => 3,
-    command => 'cd /home/gerrit2/openstack-ci && python gerrit/expire_old_reviews.py'
+    command => "cd /home/gerrit2/scripts && python gerrit/expire_old_reviews.py --user=${gerrit_ssh_user} --key=${gerrit_ssh_key}"
   }
 
   cron { "gerrit_repack":
@@ -82,35 +88,24 @@ $logo
     environment => "PATH=/usr/bin:/bin:/usr/sbin:/sbin",
   }
 
-  file { "/var/log/gerrit":
-    ensure => "directory",
-    owner => 'gerrit2'
-  }
-
 # directory creation hacks until we can automate gerrit installation
 
-  file { "/home/gerrit2/review_site":
+  file { [ "/home/gerrit2/review_site",
+           "/home/gerrit2/review_site/etc",
+           "/home/gerrit2/review_site/hooks",
+           "/home/gerrit2/review_site/static",
+           "/var/log/gerrit" ]:
     ensure => "directory",
     owner => "gerrit2",
     require => User["gerrit2"]
   }
 
-  file { "/home/gerrit2/review_site/etc":
-    ensure => "directory",
-    owner => "gerrit2",
-    require => File["/home/gerrit2/review_site"]
-  }
-
-  file { "/home/gerrit2/review_site/hooks":
-    ensure => "directory",
-    owner => "gerrit2",
-    require => File["/home/gerrit2/review_site"]
-  }
-
-  file { "/home/gerrit2/review_site/static":
-    ensure => "directory",
-    owner => "gerrit2",
-    require => File["/home/gerrit2/review_site"]
+  file { '/home/gerrit2/scripts':
+    owner => 'gerrit2',
+    ensure => 'directory',
+    recurse => true,
+    require => User['gerrit2'],
+    source => "puppet:///modules/gerrit/scripts"
   }
 
   file { '/home/gerrit2/github.config':
