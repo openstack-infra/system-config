@@ -63,20 +63,20 @@ $gerrit_project
   cron { "gerritsyncusers":
     user => gerrit2,
     minute => "*/15",
-    command => "sleep $((RANDOM\%60+60)) && cd /home/gerrit2/scripts && python gerrit/update_gerrit_users.py --user=${gerrit_ssh_user} --key=${gerrit_ssh_key} --project=${gerrit_project}"
+    command => "sleep $((RANDOM\%60+60)) && cd /home/gerrit2/scripts && python update_gerrit_users.py --user=${gerrit_ssh_user} --key=${gerrit_ssh_key_file} --project=${gerrit_project}"
   }
 
   cron { "gerritclosepull":
     user => gerrit2,
     minute => "*/5",
-    command => 'sleep $((RANDOM\%60+90)) && cd /home/gerrit2/scripts && python gerrit/close_pull_requests.py'
+    command => 'sleep $((RANDOM\%60+90)) && cd /home/gerrit2/scripts && python close_pull_requests.py'
   }
 
   cron { "expireoldreviews":
     user => gerrit2,
     hour => 6,
     minute => 3,
-    command => "cd /home/gerrit2/scripts && python gerrit/expire_old_reviews.py --user=${gerrit_ssh_user} --key=${gerrit_ssh_key}"
+    command => "cd /home/gerrit2/scripts && python expire_old_reviews.py --user=${gerrit_ssh_user} --key=${gerrit_ssh_key_file}"
   }
 
   cron { "gerrit_repack":
