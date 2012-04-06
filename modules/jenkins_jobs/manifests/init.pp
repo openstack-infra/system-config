@@ -5,7 +5,7 @@ class jenkins_jobs($site, $projects) {
   }
 
   exec { "jenkins":
-    command => "curl https://jenkins.${site}.org/reload",
+    command => "/usr/bin/curl https://jenkins.${site}.org/reload",
     refreshonly => true
   }
 }
