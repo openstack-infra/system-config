@@ -22,7 +22,7 @@ define jenkins_jobs::job($site, $project, $job, $triggers="", $builders, $publis
     content => template("jenkins_jobs/body.xml.erb"),
     owner => 'jenkins',
     require => File["/var/lib/jenkins/jobs/${project}-${job}"],
-    notify => Service["jenkins"]
+    notify => Exec["jenkins"]
   }
 
   file { "/var/lib/jenkins/jobs/${project}-${job}/nextBuildNumber":
