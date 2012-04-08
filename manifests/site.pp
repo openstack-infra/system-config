@@ -7,7 +7,7 @@ class openstack_base ($iptables_public_tcp_ports) {
   include openstack_project::users
   include ssh
   include snmpd
-  include exim
+
   include sudoers
 
   class { 'iptables':
@@ -71,6 +71,12 @@ class openstack_template ($iptables_public_tcp_ports) {
 class openstack_server ($iptables_public_tcp_ports) {
   class { 'openstack_template':
     iptables_public_tcp_ports => $iptables_public_tcp_ports
+  }
+  class { 'exim':
+    sysadmin => ['corvus@inaugust.com',
+                 'mordred@inaugust.com',
+                 'andrew@linuxjedi.co.uk',
+                 'devananda.vdv@gmail.com']
   }
   include openstack_cron
 }
