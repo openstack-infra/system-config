@@ -22,7 +22,7 @@ define jenkins_jobs::add_jobs($site) {
     scm => template("jenkins_jobs/scm_git.xml.erb")
   }
 
-  jenkins_jobs::job { "${name}-merge":
+  jenkins_jobs::job { "gate-${name}-merge":
     site => "${site}",
     project => "${name}",
     job => "merge",
@@ -30,7 +30,7 @@ define jenkins_jobs::add_jobs($site) {
     builders => template("jenkins_jobs/builder_gerrit_git_prep.xml.erb")
   }
 
-  jenkins_jobs::job { "${name}-pep8":
+  jenkins_jobs::job { "gate-${name}-pep8":
     site => "${site}",
     project => "${name}",
     job => "pep8",
@@ -47,7 +47,7 @@ define jenkins_jobs::add_jobs($site) {
     publishers => template("jenkins_jobs/publisher_ppa.xml.erb")
   }
 
-  jenkins_jobs::job { "${name}-python26":
+  jenkins_jobs::job { "gate-${name}-python26":
     site => "${site}",
     project => "${name}",
     job => "python26",
@@ -55,7 +55,7 @@ define jenkins_jobs::add_jobs($site) {
     builders => [template("jenkins_jobs/builder_gerrit_git_prep.xml.erb"), template("jenkins_jobs/builder_copy_bundle.xml.erb"), template("jenkins_jobs/builder_python26.xml.erb")],
   }
 
-  jenkins_jobs::job { "${name}-python27":
+  jenkins_jobs::job { "gate-${name}-python27":
     site => "${site}",
     project => "${name}",
     job => "python27",
