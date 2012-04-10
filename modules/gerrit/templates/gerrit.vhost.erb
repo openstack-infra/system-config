@@ -1,0 +1,54 @@
+<VirtualHost *:80>
+  ErrorLog ${APACHE_LOG_DIR}/gerrit-error.log
+
+  LogLevel warn
+
+  CustomLog ${APACHE_LOG_DIR}/gerrit-access.log combined
+
+  Redirect / <%= canonicalweburl %>
+
+</VirtualHost>
+
+<IfModule mod_ssl.c>
+<VirtualHost _default_:443>
+  ErrorLog ${APACHE_LOG_DIR}/gerrit-ssl-error.log
+
+  LogLevel warn
+
+  CustomLog ${APACHE_LOG_DIR}/gerrit-ssl-access.log combined
+
+  SSLEngine on
+
+  SSLCertificateFile      <%= ssl_cert_file %>
+  SSLCertificateKeyFile   <%= ssl_key_file %>
+<% if ssl_chain_file != "" %>
+  SSLCertificateChainFile <%= ssl_chain_file %>
+<% end %>
+
+  <FilesMatch "\.(cgi|shtml|phtml|php)$">
+      SSLOptions +StdEnvVars
+  </FilesMatch>
+  <Directory /usr/lib/cgi-bin>
+      SSLOptions +StdEnvVars
+  </Directory>
+
+  BrowserMatch "MSIE [2-6]" \
+      nokeepalive ssl-unclean-shutdown \
+      downgrade-1.0 force-response-1.0
+  # MSIE 7 and newer should be able to use keepalive
+  BrowserMatch "MSIE [17-9]" ssl-unclean-shutdown
+
+  RewriteEngine on
+  RewriteCond %{HTTP_HOST} !<%= virtual_hostname %>
+  RewriteRule ^.*$ <%= canonicalweburl %>
+
+      ProxyPassReverse / http://localhost:8081/
+      <Location />
+        Order allow,deny
+        Allow from all
+        ProxyPass http://localhost:8081/ retry=0
+      </Location>
+
+
+</VirtualHost>
+</IfModule>
