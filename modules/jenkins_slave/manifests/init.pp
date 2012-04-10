@@ -20,6 +20,7 @@ class jenkins_slave($ssh_key) {
     }
 
     $packages = ["apache2",
+                 "asciidoc", # for building gerrit
                  "autoconf",
                  "automake",
                  "build-essential",
