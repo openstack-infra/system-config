@@ -1,4 +1,8 @@
-class gerrit($canonicalweburl='',
+class gerrit($virtual_hostname='',
+$ssl_cert_file='',
+$ssl_key_file='',
+$ssl_chain_file='',
+$canonicalweburl='',
 $openidssourl="https://login.launchpad.net/+openid",
 $email='',
 $github_projects = [],
@@ -15,7 +19,8 @@ $commentlinks = [ { name => 'changeid',
                   link => 'https://blueprints.launchpad.net/openstack/?searchtext=$2' },
 
                   ],
-$logo
+$logo,
+$war
   ) {
 
   user { "gerrit2":
@@ -38,6 +43,15 @@ $logo
   package { "python-dev":
     ensure => latest
   }
+  package { "openjdk-6-jre-headless":
+    ensure => latest
+  }
+  package { "mysql-server":
+    ensure => latest
+  }
+  package { "apache2":
+    ensure => latest
+  }
   package { "python-pip":
     ensure => latest,
     require => Package[python-dev]
@@ -48,39 +62,40 @@ $logo
     require => Package[python-pip]
   }
 
-  cron { "gerritupdateci":
-    user => gerrit2,
-    minute => "*/15",
-    command => 'sleep $((RANDOM\%60)) && cd /home/gerrit2/openstack-ci && /usr/bin/git pull -q origin master'
-  }
+#XXX work in progress, add back before committing. -jeblair
+  # cron { "gerritupdateci":
+  #   user => gerrit2,
+  #   minute => "*/15",
+  #   command => 'sleep $((RANDOM\%60)) && cd /home/gerrit2/openstack-ci && /usr/bin/git pull -q origin master'
+  # }
 
-  cron { "gerritsyncusers":
-    user => gerrit2,
-    minute => "*/15",
-    command => 'sleep $((RANDOM\%60+60)) && cd /home/gerrit2/openstack-ci && python gerrit/update_gerrit_users.py'
-  }
+  # cron { "gerritsyncusers":
+  #   user => gerrit2,
+  #   minute => "*/15",
+  #   command => 'sleep $((RANDOM\%60+60)) && cd /home/gerrit2/openstack-ci && python gerrit/update_gerrit_users.py'
+  # }
 
-  cron { "gerritclosepull":
-    user => gerrit2,
-    minute => "*/5",
-    command => 'sleep $((RANDOM\%60+90)) && cd /home/gerrit2/openstack-ci && python gerrit/close_pull_requests.py'
-  }
+  # cron { "gerritclosepull":
+  #   user => gerrit2,
+  #   minute => "*/5",
+  #   command => 'sleep $((RANDOM\%60+90)) && cd /home/gerrit2/openstack-ci && python gerrit/close_pull_requests.py'
+  # }
 
-  cron { "expireoldreviews":
-    user => gerrit2,
-    hour => 6,
-    minute => 3,
-    command => 'cd /home/gerrit2/openstack-ci && python gerrit/expire_old_reviews.py'
-  }
+  # cron { "expireoldreviews":
+  #   user => gerrit2,
+  #   hour => 6,
+  #   minute => 3,
+  #   command => 'cd /home/gerrit2/openstack-ci && python gerrit/expire_old_reviews.py'
+  # }
 
-  cron { "gerrit_repack":
-    user => gerrit2,
-    weekday => 0,
-    hour => 4,
-    minute => 7,
-    command => 'find /home/gerrit2/review_site/git/ -type d -name "*.git" -print -exec git --git-dir="{}" repack -afd \;',
-    environment => "PATH=/usr/bin:/bin:/usr/sbin:/sbin",
-  }
+  # cron { "gerrit_repack":
+  #   user => gerrit2,
+  #   weekday => 0,
+  #   hour => 4,
+  #   minute => 7,
+  #   command => 'find /home/gerrit2/review_site/git/ -type d -name "*.git" -print -exec git --git-dir="{}" repack -afd \;',
+  #   environment => "PATH=/usr/bin:/bin:/usr/sbin:/sbin",
+  # }
 
   file { "/var/log/gerrit":
     ensure => "directory",
@@ -96,6 +111,12 @@ $logo
   }
 
   file { "/home/gerrit2/review_site/etc":
+    ensure => "directory",
+    owner => "gerrit2",
+    require => File["/home/gerrit2/review_site"]
+  }
+
+  file { "/home/gerrit2/review_site/bin":
     ensure => "directory",
     owner => "gerrit2",
     require => File["/home/gerrit2/review_site"]
@@ -143,15 +164,16 @@ $logo
     source => 'puppet:///modules/gerrit/GerritSiteHeader.html'
   }
 
-  file { '/home/gerrit2/review_site/etc/replication.config':
-    owner => 'root',
-    group => 'root',
-    mode => 444,
-    ensure => 'present',
-    source => 'puppet:///modules/gerrit/replication.config',
-    replace => 'true',
-    require => File["/home/gerrit2/review_site/etc"]
-  }
+#XXX temprarily removed for testing --jeblair
+  # file { '/home/gerrit2/review_site/etc/replication.config':
+  #   owner => 'root',
+  #   group => 'root',
+  #   mode => 444,
+  #   ensure => 'present',
+  #   source => 'puppet:///modules/gerrit/replication.config',
+  #   replace => 'true',
+  #   require => File["/home/gerrit2/review_site/etc"]
+  # }
 
   file { '/home/gerrit2/review_site/etc/gerrit.config':
     owner => 'root',
@@ -193,4 +215,202 @@ $logo
     require => File["/home/gerrit2/review_site/static"]
   }
 
+# secret files
+
+  file { '/home/gerrit2/github.secure.config':
+    owner => 'root',
+    group => 'gerrit2',
+    mode => 440,
+    ensure => 'present',
+    source => 'file:///root/secret-files/github.secure.config',
+    replace => 'true',
+    require => User['gerrit2']
+  }
+
+  file { '/home/gerrit2/gerritbot.config':
+    owner => 'root',
+    group => 'gerrit2',
+    mode => 440,
+    ensure => 'present',
+    source => 'file:///root/secret-files/gerritbot.config',
+    replace => 'true',
+    require => User['gerrit2']
+  }
+
+  file { '/home/gerrit2/review_site/etc/secure.config':
+    owner => 'root',
+    group => 'gerrit2',
+    mode => 440,
+    ensure => 'present',
+    source => 'file:///root/secret-files/secure.config',
+    replace => 'true',
+    require => File["/home/gerrit2/review_site/etc"]
+  }
+
+# setup mysql
+# This obviously wants to be refactored into a mysql module.
+
+  exec { "gerrit-mysql":
+    creates => "/var/lib/mysql/reviewdb/",
+    command => "/usr/bin/mysql --defaults-file=/etc/mysql/debian.cnf -e \"\
+      CREATE USER 'gerrit2'@'localhost' IDENTIFIED BY '`grep password /home/gerrit2/review_site/etc/secure.config |cut -d= -f2|sed -e 's/ //'`';\
+      CREATE DATABASE reviewdb;\
+      ALTER DATABASE reviewdb charset=latin1;\
+      GRANT ALL ON reviewdb.* TO 'gerrit2'@'localhost';\
+      FLUSH PRIVILEGES;\"",
+    require => [File['/home/gerrit2/review_site/etc/secure.config'], Package["mysql-server"]],
+  }
+
+  file { "/etc/mysql/my.cnf":
+    source => 'puppet:///modules/gerrit/my.cnf',
+    owner => 'root',
+    group => 'root',
+    ensure => 'present',
+    replace => 'true',
+    mode => 444,
+    require => Package["mysql-server"],
+  }
+
+# setup apache
+
+  file { "/etc/apache2/sites-available/gerrit":
+    content => template('gerrit/gerrit.vhost.erb'),
+    owner => 'root',
+    group => 'root',
+    ensure => 'present',
+    replace => 'true',
+    mode => 444,
+    require => Package["apache2"],
+  }
+
+  file { "/etc/apache2/sites-enabled/gerrit":
+    ensure => link,
+    target => '/etc/apache2/sites-available/gerrit',
+    require => [
+      File['/etc/apache2/sites-available/gerrit'],
+      File['/etc/apache2/mods-enabled/ssl.conf'],
+      File['/etc/apache2/mods-enabled/ssl.load'],
+      File['/etc/apache2/mods-enabled/rewrite.load'],
+      File['/etc/apache2/mods-enabled/proxy.conf'],
+      File['/etc/apache2/mods-enabled/proxy.load'],
+      File['/etc/apache2/mods-enabled/proxy_http.load'],
+    ],
+  }
+
+  file { '/etc/apache2/sites-enabled/000-default':
+    require => File['/etc/apache2/sites-available/gerrit'],
+    ensure => absent,
+  }
+
+  file { '/etc/apache2/mods-enabled/ssl.conf':
+    target => '/etc/apache2/mods-available/ssl.conf',
+    ensure => link,
+    require => Package['apache2'],
+  }
+
+  file { '/etc/apache2/mods-enabled/ssl.load':
+    target => '/etc/apache2/mods-available/ssl.load',
+    ensure => link,
+    require => Package['apache2'],
+  }
+
+  file { '/etc/apache2/mods-enabled/rewrite.load':
+    target => '/etc/apache2/mods-available/rewrite.load',
+    ensure => link,
+    require => Package['apache2'],
+  }
+
+  file { '/etc/apache2/mods-enabled/proxy.conf':
+    target => '/etc/apache2/mods-available/proxy.conf',
+    ensure => link,
+    require => Package['apache2'],
+  }
+
+  file { '/etc/apache2/mods-enabled/proxy.load':
+    target => '/etc/apache2/mods-available/proxy.load',
+    ensure => link,
+    require => Package['apache2'],
+  }
+
+  file { '/etc/apache2/mods-enabled/proxy_http.load':
+    target => '/etc/apache2/mods-available/proxy_http.load',
+    ensure => link,
+    require => Package['apache2'],
+  }
+
+  exec { "gracefully restart apache":
+    subscribe => [ File["/etc/apache2/sites-available/gerrit"]],
+    refreshonly => true,
+    path => "/bin:/usr/bin:/usr/sbin",
+    command => "apache2ctl graceful",
+  }
+
+# install gerrit
+
+  if $war =~ /.*\/(.*)/ {
+    $basewar = $1
+  } else {
+    $basewar = $war
+  }
+
+  file { "/home/gerrit2/puppet-tmp":
+    ensure => "directory",
+    require => User["gerrit2"]
+  }
+
+  exec { "download:$war":
+    command => "/usr/bin/wget $war -O /home/gerrit2/puppet-tmp/$basewar",
+    creates => "/home/gerrit2/puppet-tmp/$basewar",
+    require => File["/home/gerrit2/puppet-tmp"],
+  }
+
+  file { "/home/gerrit2/review_site/bin/gerrit.war":
+    source => "file:///home/gerrit2/puppet-tmp/$basewar",
+    require => Exec["download:$war"],
+    ensure => present,
+    replace => 'true',
+    # user, group, and mode have to be set this way to avoid retriggering gerrit-init on every run
+    # because gerrit init sets them this way
+    owner => 'gerrit2',
+    group => 'gerrit2',
+    mode => 644,
+  }
+
+  exec { "gerrit-init":
+    user => 'gerrit2',
+    command => "/usr/bin/java -jar /home/gerrit2/review_site/bin/gerrit.war init -d /home/gerrit2/review_site --batch --no-auto-start",
+    subscribe => File["/home/gerrit2/review_site/bin/gerrit.war"],
+    refreshonly => true,
+    require => [Package["openjdk-6-jre-headless"], User["gerrit2"], Exec["gerrit-mysql"], File["/etc/mysql/my.cnf"]],
+  }
+
+  file { "/etc/init.d/gerrit":
+    source => 'puppet:///modules/gerrit/gerrit.init',
+    ensure => present,
+    replace => 'true',
+    owner => 'root',
+    group => 'root',
+    mode => 555,
+  }
+
+  file { "/etc/default/gerritcodereview":
+    source => 'puppet:///modules/gerrit/gerritcodereview.default',
+    ensure => present,
+    replace => 'true',
+    owner => 'root',
+    group => 'root',
+    mode => 444,
+  }
+
+  file { ['/etc/rc0.d/K10gerrit',
+          '/etc/rc1.d/K10gerrit',
+          '/etc/rc2.d/S90gerrit',
+          '/etc/rc3.d/S90gerrit',
+          '/etc/rc4.d/S90gerrit',
+          '/etc/rc5.d/S90gerrit',
+          '/etc/rc6.d/K10gerrit']:
+    ensure => link,
+    target => '/etc/init.d/gerrit',
+    require => File['/etc/init.d/gerrit'],
+  }
 }
