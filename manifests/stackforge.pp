@@ -34,7 +34,11 @@ node "review.stackforge.org" {
     iptables_public_tcp_ports => [80, 443, 29418]
   }
   class { 'gerrit':
+    virtual_hostname => 'review.stackforge.org',
     canonicalweburl => "https://review.stackforge.org/",
+    ssl_cert_file => '/etc/ssl/certs/review.stackforge.org.crt',
+    ssl_key_file => '/etc/ssl/private/review.stackforge.org.key',
+    ssl_chain_file => '/etc/ssl/certs/intermediate.crt',
     email => "review@stackforge.org",
     github_projects => [ {
                          name => 'stackforge/MRaaS',
@@ -43,7 +47,8 @@ node "review.stackforge.org" {
                          name => 'stackforge/reddwarf',
                          close_pull => 'true'
                          } ],
-    logo => 'stackforge.png'
+    logo => 'stackforge.png',
+    war => 'http://ci.openstack.org/tarballs/gerrit-2.3-5-gaec571e.war',
   }
 }
 

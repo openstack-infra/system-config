@@ -10,7 +10,7 @@
 	database = reviewdb
 	username = gerrit2
 	poolLimit = 32
-   connectionpool = true   
+        connectionpool = true
 [auth]
 	type = OPENID_SSO
 	openIdSsoUrl = <%= openidssourl %>
@@ -38,3 +38,9 @@
         match = "<%= commentlink['match'] %>"
         link = "<%= commentlink['link'] %>"
 <% end -%>
+[theme]
+        backgroundColor = ffffff
+        topMenuColor = ffffff
+        textColor = 264d69
+        trimColor = eef3f5
+        selectionColor = d1e6ea
