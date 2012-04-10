@@ -28,7 +28,11 @@ node "gerrit.openstack.org", "review.openstack.org" {
     iptables_public_tcp_ports => [80, 443, 29418]
   }
   class { 'gerrit':
+    virtual_hostname => 'review.openstack.org',
     canonicalweburl => "https://review.openstack.org/",
+    ssl_cert_file => '/etc/ssl/certs/review.openstack.org.pem',
+    ssl_key_file => '/etc/ssl/private/review.openstack.org.key',
+    ssl_chain_file => '/etc/ssl/certs/intermediate.pem',
     email => "review@openstack.org",
     github_projects => [ {
                          name => 'openstack/keystone',
@@ -109,7 +113,8 @@ node "gerrit.openstack.org", "review.openstack.org" {
                          name => 'openstack-dev/openstack-nose',
                          close_pull => 'true'
                          } ],
-    logo => 'openstack.png'
+    logo => 'openstack.png',
+    war => 'http://ci.openstack.org/tarballs/gerrit-2.2.2-363-gd0a67ce.war',
   }
 }
 
@@ -119,13 +124,18 @@ node "gerrit-dev.openstack.org", "review-dev.openstack.org" {
   }
 
   class { 'gerrit':
+    virtual_hostname => 'review-dev.openstack.org',
     canonicalweburl => "https://review-dev.openstack.org/",
+    ssl_cert_file => '/etc/ssl/certs/ssl-cert-snakeoil.pem',
+    ssl_key_file => '/etc/ssl/private/ssl-cert-snakeoil.key',
+    ssl_chain_file => '',
     email => "review-dev@openstack.org",
     github_projects => [ {
                          name => 'gtest-org/test',
                          close_pull => 'true'
                          } ],
-    logo => 'openstack.png'
+    logo => 'openstack.png',
+    war => 'http://ci.openstack.org/tarballs/gerrit-2.2.2-363-gd0a67ce.war',
   }
 }
 
