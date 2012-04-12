@@ -11,6 +11,8 @@
 
 <IfModule mod_ssl.c>
 <VirtualHost _default_:443>
+  ServerName <%= virtual_hostname %>
+
   ErrorLog ${APACHE_LOG_DIR}/gerrit-ssl-error.log
 
   LogLevel warn
