@@ -39,6 +39,7 @@
 # TODO: move apache configuration to another module
 # TODO: move mysql configuration to another module
 # TODO: make more gerrit options configurable here
+# TODO: launchpadlib creds for user sync script
 
 class gerrit($virtual_hostname='',
       $canonicalweburl='',
