@@ -86,6 +86,9 @@ class gerrit($virtual_hostname='',
                "python-dev",
 	       "openjdk-6-jre-headless",
 	       "mysql-server",
+	       "python-mysqldb",      # for launchpad sync script
+	       "python-openid",       # for launchpad sync script
+	       "python-launchpadlib", # for launchpad sync script
 	       "apache2"]
 
   package { $packages:
