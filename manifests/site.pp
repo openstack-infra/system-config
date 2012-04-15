@@ -207,6 +207,23 @@ node "planet.openstack.org" {
   }
 }
 
+node "meetbot.openstack.org" {
+  class { 'openstack_server':
+    iptables_public_tcp_ports => [80]
+  }
+  include meetbot
+
+  meetbot::site { "openstack":
+    nick => "openstack_test",
+    network => "FreeNode",
+    server => "chat.us.freenode.net:7000",
+    channels => "#lxjtest",
+    url => "meetbot.openstack.org",
+#    channels => "#openstack #openstack-dev #openstack-meeting",
+    use_ssl => "True"
+  }
+}
+
 # A bare machine, but with a jenkins user
 node /^.*\.template\.openstack\.org$/ {
   class { 'openstack_template':
