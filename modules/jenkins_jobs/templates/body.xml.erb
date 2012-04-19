@@ -45,26 +45,20 @@ In modules/jenkins_jobs
   <% else %>
   <%= scm %>
   <% end %>
-  <assignedNode>oneiric</assignedNode>
+  <assignedNode><%= node_group %></assignedNode>
   <canRoam>false</canRoam>
   <disabled>false</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
-  <% if triggers != "" %>
   <triggers class="vector">
   <%= triggers %>
   </triggers>
-  <% end %>
   <concurrentBuild>false</concurrentBuild>
-  <% if builders != "" %>
   <builders>
   <%= builders %>
   </builders>
-  <% end %>
   <publishers>
-  <% if publishers != "" %>
   <%= publishers %>
-  <% end %>
   </publishers>
   <buildWrappers/>
 </project>
