@@ -135,7 +135,7 @@ node "gerrit-dev.openstack.org", "review-dev.openstack.org" {
                          close_pull => 'true'
                          } ],
     logo => 'openstack.png',
-    war => 'http://ci.openstack.org/tarballs/gerrit-2.3-5-gaec571e.war',
+    war => 'http://ci.openstack.org/tarballs/gerrit-2.3-6-g667798c.war',
   }
 }
 
