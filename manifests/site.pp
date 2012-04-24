@@ -1,6 +1,16 @@
 import "openstack"
 
+class openstack_cron {
+  cron { "updatepuppet":
+    user => root,
+    minute => "*/15",
+    command => 'apt-get update >/dev/null 2>&1 ; sleep $((RANDOM\%600)) && cd /root/openstack-ci-puppet && /usr/bin/git pull -q && puppet apply -l /tmp/manifest.log --modulepath=/root/openstack-ci-puppet/modules manifests/site.pp',
+    environment => "PATH=/var/lib/gems/1.8/bin:/usr/bin:/bin:/usr/sbin:/sbin",
+  }
+}
+
 class openstack_jenkins_slave {
+  include openstack_cron
   include tmpreaper
   class { 'openstack_server':
     iptables_public_tcp_ports => []
@@ -15,6 +25,7 @@ class openstack_jenkins_slave {
 #
 
 node default {
+  include openstack_cron
   class { 'openstack_server':
     iptables_public_tcp_ports => []
   }
@@ -24,6 +35,7 @@ node default {
 # Long lived servers:
 #
 node "gerrit.openstack.org", "review.openstack.org" {
+  include openstack_cron
   class { 'openstack_server':
     iptables_public_tcp_ports => [80, 443, 29418]
   }
@@ -119,6 +131,7 @@ node "gerrit.openstack.org", "review.openstack.org" {
 }
 
 node "gerrit-dev.openstack.org", "review-dev.openstack.org" {
+  include openstack_cron
   class { 'openstack_server':
     iptables_public_tcp_ports => [80, 443, 29418]
   }
@@ -140,6 +153,7 @@ node "gerrit-dev.openstack.org", "review-dev.openstack.org" {
 }
 
 node "jenkins.openstack.org" {
+  include openstack_cron
   class { 'openstack_server':
     iptables_public_tcp_ports => [80, 443, 4155]
   }
@@ -158,7 +172,8 @@ node "jenkins.openstack.org" {
 }
 
 node "jenkins-dev.openstack.org" {
- class { 'openstack_server':
+  include openstack_cron
+  class { 'openstack_server':
     iptables_public_tcp_ports => [80, 443, 4155]
   } 
   class { 'jenkins_master':
@@ -172,6 +187,7 @@ node "jenkins-dev.openstack.org" {
 }
 
 node "community.openstack.org" {
+  include openstack_cron
   class { 'openstack_server':
     iptables_public_tcp_ports => [80, 443, 8099, 8080]
   }
@@ -182,6 +198,7 @@ node "community.openstack.org" {
 }
 
 node "docs.openstack.org" {
+  include openstack_cron
   class { 'openstack_server':
     iptables_public_tcp_ports => []
   }
@@ -189,6 +206,7 @@ node "docs.openstack.org" {
 }
 
 node "paste.openstack.org" {
+  include openstack_cron
   class { 'openstack_server':
     iptables_public_tcp_ports => [80]
   }
@@ -205,6 +223,7 @@ node "paste.openstack.org" {
 }
 
 node "planet.openstack.org" {
+  include openstack_cron
   class { 'openstack_server':
     iptables_public_tcp_ports => [80]
   }
@@ -232,14 +251,17 @@ node /^.*\.template\.openstack\.org$/ {
 # Jenkins slaves:
 #
 node /^build.*\.slave\.openstack\.org$/ {
+  include openstack_cron
   include openstack_jenkins_slave
 }
 
 node /^dev.*\.slave\.openstack\.org$/ {
+  include openstack_cron
   include openstack_jenkins_slave
 }
 
 node /^oneiric.*\.slave\.openstack\.org$/ {
+  include openstack_cron
   include openstack_jenkins_slave
 
   package { "tox":
