@@ -21,7 +21,7 @@ class jenkins_master($site, $serveradmin, $logo) {
     group => 'root',
     mode => 444,
     ensure => 'present',
-    content => template("jenkins_master/apache.conf.erb"),
+    content => template("jenkins_master/jenkins.vhost.erb"),
     replace => 'true',
     require => Package['apache2'],
   }
