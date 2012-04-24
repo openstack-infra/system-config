@@ -160,6 +160,8 @@ node "jenkins-dev.openstack.org" {
   } 
   class { 'jenkins_master':
     site => 'openstack'
+    serveradmin => 'webmaster@openstack.org',
+    logo => 'openstack.png'
   }
 }
 
