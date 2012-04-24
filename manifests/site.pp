@@ -159,7 +159,9 @@ node "jenkins-dev.openstack.org" {
     iptables_public_tcp_ports => [80, 443, 4155]
   } 
   class { 'jenkins_master':
-    site => 'openstack'
+    site => 'openstack',
+    serveradmin => 'webmaster@openstack.org',
+    logo => 'openstack.png'
   }
 }
 
