@@ -59,7 +59,10 @@ node "jenkins.stackforge.org" {
   class { 'jenkins_master':
     serveradmin => 'webmaster@stackforge.org',
     site => 'jenkins.stackforge.org',
-    logo => 'stackforge.png'
+    logo => 'stackforge.png',
+    ssl_cert_file => '/etc/ssl/certs/jenkins.stackforge.org.pem',
+    ssl_key_file => '/etc/ssl/private/jenkins.stackforge.org.key',
+    ssl_chain_file => '/etc/ssl/certs/intermediate.pem',
   }
 
   class { "jenkins_jobs":

@@ -146,7 +146,10 @@ node "jenkins.openstack.org" {
   class { 'jenkins_master':
     site => 'jenkins.openstack.org',
     serveradmin => 'webmaster@openstack.org',
-    logo => 'openstack.png'
+    logo => 'openstack.png',
+    ssl_cert_file => '/etc/ssl/certs/jenkins.openstack.org.pem',
+    ssl_key_file => '/etc/ssl/private/jenkins.openstack.org.key',
+    ssl_chain_file => '/etc/ssl/certs/intermediate.pem',
   }
   class { "jenkins_jobs":
     site => "openstack",
@@ -161,7 +164,10 @@ node "jenkins-dev.openstack.org" {
   class { 'jenkins_master':
     site => 'openstack',
     serveradmin => 'webmaster@openstack.org',
-    logo => 'openstack.png'
+    logo => 'openstack.png',
+    ssl_cert_file => '/etc/ssl/certs/ssl-cert-snakeoil.pem',
+    ssl_key_file => '/etc/ssl/private/ssl-cert-snakeoil.key',
+    ssl_chain_file => '',
   }
 }
 
