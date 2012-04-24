@@ -28,9 +28,11 @@
              #   Enable/Disable SSL for this virtual host.
              SSLEngine on
 
-             SSLCertificateFile    /etc/ssl/certs/<%= site %>.pem
-             SSLCertificateKeyFile /etc/ssl/private/<%= site %>.key
-             SSLCertificateChainFile /etc/ssl/certs/intermediate.pem
+             SSLCertificateFile      <%= ssl_cert_file %>
+             SSLCertificateKeyFile   <%= ssl_key_file %>
+             <% if ssl_chain_file != "" %>
+               SSLCertificateChainFile <%= ssl_chain_file %>
+             <% end %>
 
              BrowserMatch "MSIE [2-6]" \
                      nokeepalive ssl-unclean-shutdown \
