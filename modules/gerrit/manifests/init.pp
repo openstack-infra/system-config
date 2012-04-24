@@ -226,10 +226,11 @@ class gerrit($virtual_hostname='',
     }
   }
 
+  # Gerrit sets these permissions in 'init'; don't fight them.
   file { '/home/gerrit2/review_site/etc/gerrit.config':
-    owner => 'root',
-    group => 'root',
-    mode => 444,
+    owner => 'gerrit2',
+    group => 'gerrit2',
+    mode => 644,
     ensure => 'present',
     content => template('gerrit/gerrit.config.erb'),
     replace => 'true',
@@ -290,10 +291,13 @@ class gerrit($virtual_hostname='',
     require => User['gerrit2']
   }
 
+  # Gerrit sets these permissions in 'init'; don't fight them.  If
+  # these permissions aren't set correctly, gerrit init will write a
+  # new secure.config file and lose the mysql password.
   file { '/home/gerrit2/review_site/etc/secure.config':
-    owner => 'root',
+    owner => 'gerrit2',
     group => 'gerrit2',
-    mode => 440,
+    mode => 600,
     ensure => 'present',
     source => 'file:///root/secret-files/secure.config',
     replace => 'true',
