@@ -173,7 +173,11 @@ node "jenkins.openstack.org" {
     project => "python-glanceclient",
     node_group => "oneiric"
   }
-  
+  jenkins_jobs::python_jobs { "cinder":
+    site => "openstack",
+    project => "cinder",
+    node_group => "oneiric"
+  }
 }
 
 node "jenkins-dev.openstack.org" {
