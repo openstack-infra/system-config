@@ -1,13 +1,18 @@
+    <com.sonyericsson.hudson.plugins.gerrit.trigger.hudsontrigger.GerritTrigger>
+      <spec></spec>
+      <gerritProjects>
+        <% trigger_branches.each do |trigger| %>
         <com.sonyericsson.hudson.plugins.gerrit.trigger.hudsontrigger.data.GerritProject>
           <compareType>PLAIN</compareType>
-          <pattern><%= site %>/<%= project %></pattern>
+          <pattern><%= site %>/<%= trigger[0] %></pattern>
           <branches>
             <com.sonyericsson.hudson.plugins.gerrit.trigger.hudsontrigger.data.Branch>
               <compareType>REG_EXP</compareType>
-              <pattern>^(?!refs/).*$</pattern>
+              <pattern><%= trigger[1] %></pattern>
             </com.sonyericsson.hudson.plugins.gerrit.trigger.hudsontrigger.data.Branch>
           </branches>
         </com.sonyericsson.hudson.plugins.gerrit.trigger.hudsontrigger.data.GerritProject>
+        <% end %>
       </gerritProjects>
       <silentMode>false</silentMode>
       <escapeQuotes>true</escapeQuotes>

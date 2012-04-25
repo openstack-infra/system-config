@@ -67,7 +67,18 @@ node "jenkins.stackforge.org" {
 
   class { "jenkins_jobs":
     site => "stackforge",
-    projects => ["reddwarf"]
+  }
+
+  jenkins_jobs::python_jobs { "reddwarf-natty":
+    site => "stackforge",
+    project => "reddwarf",
+    node_group => "natty"
+  }
+
+  jenkins_jobs::generic_jobs { "reddwarf":
+    site => "stackforge",
+    project => "reddwarf",
+    node_group => "oneiric"
   }
 }
 

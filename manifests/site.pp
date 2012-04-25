@@ -167,8 +167,13 @@ node "jenkins.openstack.org" {
   }
   class { "jenkins_jobs":
     site => "openstack",
-    projects => ["python-glanceclient"]
   }
+  jenkins_jobs::python_jobs { "python-glanceclient":
+    site => "openstack",
+    project => "python-glanceclient",
+    node_group => "oneiric"
+  }
+  
 }
 
 node "jenkins-dev.openstack.org" {
