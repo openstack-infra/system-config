@@ -168,9 +168,19 @@ node "jenkins.openstack.org" {
   class { "jenkins_jobs":
     site => "openstack",
   }
+  jenkins_jobs::generic_jobs { "python-glanceclient":
+    site => "openstack",
+    project => "python-glanceclient",
+    node_group => "oneiric"
+  }
   jenkins_jobs::python_jobs { "python-glanceclient":
     site => "openstack",
     project => "python-glanceclient",
+    node_group => "oneiric"
+  }
+  jenkins_jobs::generic_jobs { "cinder":
+    site => "openstack",
+    project => "cinder",
     node_group => "oneiric"
   }
   jenkins_jobs::python_jobs { "cinder":
