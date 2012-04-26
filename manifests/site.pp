@@ -253,7 +253,7 @@ node "planet.openstack.org" {
   }
 }
 
-node "meetbot.openstack.org" {
+node "eavesdrop.openstack.org" {
   class { 'openstack_server':
     iptables_public_tcp_ports => [80]
   }
@@ -263,7 +263,7 @@ node "meetbot.openstack.org" {
     nick => "openstack",
     network => "FreeNode",
     server => "chat.us.freenode.net:7000",
-    url => "meetbot.openstack.org",
+    url => "eavesdrop.openstack.org",
     channels => "#openstack #openstack-dev #openstack-meeting",
     use_ssl => "True"
   }

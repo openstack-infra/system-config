@@ -1,4 +1,5 @@
 define meetbot::site($nick, $network, $server, $url, $channels, $use_ssl) {
+  $nickpass = file("/root/secret-files/${name}-nickserv.pass")
 
   file { "/etc/nginx/sites-available/${name}-meetbot":
     ensure => 'present',
