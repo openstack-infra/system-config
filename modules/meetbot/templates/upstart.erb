@@ -1,0 +1,9 @@
+description "<%= name %> Meetbot Server"
+author      "Andrew Hutchings <andrew@linuxjedi.co.uk>"
+
+start on (local-filesystem and net-device-up)
+stop on runlevel [!2345]
+
+env PYTHONPATH=/var/lib/meetbot/<%= name %>
+
+exec start-stop-daemon --start --chdir /var/lib/meetbot/openstack --chuid meetbot --name meetbot --startas  /usr/bin/python /usr/bin/supybot /var/lib/meetbot/<%= name %>.conf
