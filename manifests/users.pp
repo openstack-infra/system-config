@@ -31,6 +31,11 @@ class openstack_project::users {
     sshkeys => "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQC1sfZvhT3qLnszR77OEDMtdjyG68fq4RkgZuA/DLzaEm3fxG7+8yLQfiK/5hsMvDiqfjcNIBsWa0EM2xau/08wjSWBF1Cf8AWXYic/gczmWG/Ovpu2ZXGgtLG+xJQaUmg2IyV0IkdUKQne4Or3S1h4DnPBq6H2GGffASzZfkChYI15EAl9lxuNGsFN2QLYkAB7exzV3Zmb0UZ5Gh7D8qXngqzALPApAGq+CuQibX48fx0dCEQ5bUcwJOy30c2Ws7TTSxkOhSCJR56j6TA+g8nsKnaNyrmI0MV9gY1XXcgSkppcXoiuDdUU7j8WJIYZw+C0aoQ8QuaIVu8+vJNSbcqtQrGzyY+9sVuqXg26+aJhehY0hDHCZ5KV8EFjyyT0FqnDDShahY7Drk38wBtDuTUkTlV2G/UqlyVOjFwlQ71KE69yxrl5yfycy0UmdMazmmIC0+UCgE2gJ18RP9UWFolCJ7K/DQVk/uGFNeZXRO3KDDRCd6tOlderQv3g0aX6ndA5AYmMplO3erNgmbmSxo8HIws+VSS26/h0NVlUAo1OV8Xa7xbg7RX5sVwli/XDCnlXZOtCcYHy0s9e4/iDrE51RRWoPslE5bm2p+18iHraA4hzXCQFnyaZD6fe6MIrol2lzliz313lLyNbtx+qlthVO8cFi6cAjdDWx555R0SCGQ== Devananda-2012\n",
   }
 
+  @user::virtual::localuser { 'oubiwann':
+    realname => 'Duncan McGreggor',
+    sshkeys  => "ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAttca0Lahzo1rskWcCGwYh71ADmUsn/6RNBd7H7WVsX+QTacq90fpNghFNTen4I7tC1p0IemwHcCOb1noeXkjxl7W5r7l0OhiqMHp/u2ao0F3dINryuNEww2IHRhY6GwwGJ+slv+i4/FviUgqHZVzopUon/9VY0mu1wfu3vTRw0qXsvqr09Jiavt/8gJ0Fa5PsYkf7l0edFk0scTmGp3G4HY/ZvnbChfZMg6L/xcGPtK/GbLYg6PGtLVVnubXMtxD9GZYhwrY0i9Z2egcRI2W7IznM4OGFzYgA9HZqylPoWt4+ghzC5azUlbO2u6+8HigJVblAGHRWcznEf/ZDR3erw== oubiwann@rhosgobel\n",
+  }
+
   @user::virtual::localuser { 'jenkins':
     realname => 'OpenStack Jenkins',
     sshkeys => "ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAtioTW2wh3mBRuj+R0Jyb/mLt5sjJ8dEvYyA8zfur1dnqEt5uQNLacW4fHBDFWJoLHfhdfbvray5wWMAcIuGEiAA2WEH23YzgIbyArCSI+z7gB3SET8zgff25ukXlN+1mBSrKWxIza+tB3NU62WbtO6hmelwvSkZ3d7SDfHxrc4zEpmHDuMhxALl8e1idqYzNA+1EhZpbcaf720mX+KD3oszmY2lqD1OkKMquRSD0USXPGlH3HK11MTeCArKRHMgTdIlVeqvYH0v0Wd1w/8mbXgHxfGzMYS1Ej0fzzJ0PC5z5rOqsMqY1X2aC1KlHIFLAeSf4Cx0JNlSpYSrlZ/RoiQ== hudson@hudson\n",

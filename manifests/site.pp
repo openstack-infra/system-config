@@ -199,6 +199,29 @@ node "community.openstack.org" {
   )
 }
 
+node "lists.openstack.org" {
+  include openstack_cron
+
+  # Using openstack_template instead of openstack_server
+  # because the exim config on this machine is almost certainly
+  # going to be more complicated than normal.
+  class { 'openstack_template':
+    iptables_public_tcp_ports => [25, 465]
+  }
+
+  class { 'exim':
+    sysadmin => ['corvus@inaugust.com',
+                 'mordred@inaugust.com',
+                 'andrew@linuxjedi.co.uk',
+                 'devananda.vdv@gmail.com',
+		 'duncan@dreamhost.com']
+  }
+
+  realize (
+    User::Virtual::Localuser["oubiwann"],
+  )
+}
+
 node "docs.openstack.org" {
   include openstack_cron
   class { 'openstack_server':
