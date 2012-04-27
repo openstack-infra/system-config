@@ -209,13 +209,13 @@ node "lists.openstack.org" {
     iptables_public_tcp_ports => [25, 465]
   }
 
-  class { 'exim':
-    sysadmin => ['corvus@inaugust.com',
-                 'mordred@inaugust.com',
-                 'andrew@linuxjedi.co.uk',
-                 'devananda.vdv@gmail.com',
-		 'duncan@dreamhost.com']
-  }
+  # class { 'exim':
+  #   sysadmin => ['corvus@inaugust.com',
+  #                'mordred@inaugust.com',
+  #                'andrew@linuxjedi.co.uk',
+  #                'devananda.vdv@gmail.com',
+  # 		 'duncan@dreamhost.com']
+  # }
 
   realize (
     User::Virtual::Localuser["oubiwann"],
