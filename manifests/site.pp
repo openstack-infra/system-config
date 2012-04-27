@@ -237,6 +237,7 @@ node "planet.openstack.org" {
 }
 
 node "eavesdrop.openstack.org" {
+  include openstack_cron
   class { 'openstack_server':
     iptables_public_tcp_ports => [80]
   }
