@@ -171,16 +171,6 @@ node "jenkins.openstack.org" {
   class { "jenkins_jobs":
     site => "openstack",
   }
-  jenkins_jobs::generic_jobs { "python-openstackclient":
-    site => "openstack",
-    project => "python-openstackclient",
-    node_group => "oneiric"
-  }
-  jenkins_jobs::python_jobs { "python-openstackclient":
-    site => "openstack",
-    project => "python-openstackclient",
-    node_group => "oneiric"
-  }
 }
 
 node "jenkins-dev.openstack.org" {
