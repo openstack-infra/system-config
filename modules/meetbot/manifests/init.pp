@@ -36,7 +36,7 @@ class meetbot {
   }
 
   package { ['supybot', 'nginx', 'python-twisted']:
-    ensure => present
+    ensure => latest
   }
 
   service { "nginx":
@@ -59,7 +59,8 @@ class meetbot {
 
   file { "/etc/nginx/sites-enabled/default":
     ensure => absent,
-    require => Package['nginx']
+    require => Package['nginx'],
+    notify => Service['nginx']
   }
 
 }
