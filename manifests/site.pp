@@ -119,6 +119,9 @@ node "gerrit.openstack.org", "review.openstack.org" {
                          name => 'openstack-ci/lodgeit',
                          close_pull => 'true'
                          }, {
+                         name => 'openstack-ci/meetbot',
+                         close_pull => 'true'
+                         }, {
                          name => 'openstack/openstack-common',
                          close_pull => 'true'
                          }, {
