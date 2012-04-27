@@ -24,6 +24,7 @@ class jenkins_slave($ssh_key) {
                  "autoconf",
                  "automake",
                  "build-essential",
+                 "ccache",
                  "cdbs",
                  "curl",
                  "debootstrap",
@@ -108,17 +109,45 @@ class jenkins_slave($ssh_key) {
     cron { "tmpreaper":
       user => jenkins,
       ensure => 'absent',
-   }
+    }
 
-   file { 'jenkinslogs':
+    file { 'jenkinslogs':
       name => '/var/log/jenkins/tmpreaper.log*',
       ensure => 'absent',
-   }
+    }
 
-   file { 'jenkinslogdir':
-     name => '/var/log/jenkins',
-     ensure => 'absent',
-     force => true,
-   }
+    file { 'jenkinslogdir':
+      name => '/var/log/jenkins',
+      ensure => 'absent',
+      force => true,
+    }
+
+    file { 'ccachegcc':
+      name => '/usr/local/bin/gcc',
+      ensure => link,
+      target => '/usr/bin/ccache',
+      require => Package['ccache'],
+    }
+
+    file { 'ccacheg++':
+      name => '/usr/local/bin/g++',
+      ensure => link,
+      target => '/usr/bin/ccache',
+      require => Package['ccache'],
+    }
+
+    file { 'ccachecc':
+      name => '/usr/local/bin/cc',
+      ensure => link,
+      target => '/usr/bin/ccache',
+      require => Package['ccache'],
+    }
+
+    file { 'ccachec++':
+      name => '/usr/local/bin/c++',
+      ensure => link,
+      target => '/usr/bin/ccache',
+      require => Package['ccache'],
+    }
 
 }
