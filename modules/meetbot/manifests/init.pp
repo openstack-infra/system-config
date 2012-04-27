@@ -11,7 +11,7 @@ class vcs {
 # otherwise get a new clone of it
 
   exec { "clone_meebot_repo":
-    command => "git clone https://github.com/emonty/meetbot.git /tmp/meetbot",
+    command => "git clone https://github.com/openstack-ci/meetbot.git /tmp/meetbot",
     path => "/bin:/usr/bin",
     onlyif => "test ! -d /tmp/meetbot"
   }
