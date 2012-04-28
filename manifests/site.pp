@@ -125,6 +125,12 @@ node "gerrit.openstack.org", "review.openstack.org" {
                          name => 'openstack/openstack-common',
                          close_pull => 'true'
                          }, {
+                         name => 'openstack/cinder',
+                         close_pull => 'true'
+                         }, {
+                         name => 'openstack/python-openstackclient',
+                         close_pull => 'true'
+                         }, {
                          name => 'openstack-dev/openstack-nose',
                          close_pull => 'true'
                          } ],
