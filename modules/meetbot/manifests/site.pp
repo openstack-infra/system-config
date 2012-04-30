@@ -64,7 +64,7 @@ define meetbot::site($nick, $network, $server, $url, $channels, $use_ssl) {
   file { "/var/lib/meetbot/${name}/ircmeeting":
     ensure => directory,
     recurse => true,
-    source => "/tmp/meetbot/ircmeeting",
+    source => "/opt/meetbot/ircmeeting",
     owner => 'meetbot',
     require => File["/var/lib/meetbot/${name}"]
   }

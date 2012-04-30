@@ -3,17 +3,17 @@ class vcs {
 
   exec { "update_meetbot_repo":
     command => "git pull --ff-only",
-    cwd => "/tmp/meetbot",
+    cwd => "/opt/meetbot",
     path => "/bin:/usr/bin",
-    onlyif => "test -d /tmp/meetbot"
+    onlyif => "test -d /opt/meetbot"
   }
 
 # otherwise get a new clone of it
 
   exec { "clone_meebot_repo":
-    command => "git clone https://github.com/emonty/meetbot.git /tmp/meetbot",
+    command => "git clone https://github.com/openstack-ci/meetbot.git /opt/meetbot",
     path => "/bin:/usr/bin",
-    onlyif => "test ! -d /tmp/meetbot"
+    onlyif => "test ! -d /opt/meetbot"
   }
 }
 
@@ -53,7 +53,7 @@ class meetbot {
   file { "/usr/share/pyshared/supybot/plugins/MeetBot":
     ensure => directory,
     recurse => true,
-    source => "/tmp/meetbot/MeetBot",
+    source => "/opt/meetbot/MeetBot",
     require => Package["supybot"]
   }
 
