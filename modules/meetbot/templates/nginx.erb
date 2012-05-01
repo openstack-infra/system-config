@@ -3,6 +3,10 @@ server {
   server_name <%= url %>;
   root /srv/meetbot-<%= name %>;
 
+  types {
+    text/plain log;
+  }
+
   location /meetings {
     autoindex on;
   }
