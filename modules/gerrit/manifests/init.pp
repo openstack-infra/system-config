@@ -140,6 +140,24 @@ class gerrit($virtual_hostname='',
       command => 'find /home/gerrit2/review_site/git/ -type d -name "*.git" -print -exec git --git-dir="{}" repack -afd \;',
       environment => "PATH=/usr/bin:/bin:/usr/sbin:/sbin",
     }
+
+    file { "/usr/local/gerrit/gerritbot":
+      owner => 'root',
+      group => 'root',
+      mode => 555,
+      ensure => 'present',
+      source => 'puppet:///modules/gerrit/gerritbot',
+    }
+
+    file { "/etc/init.d/gerritbot":
+      owner => 'root',
+      group => 'root',
+      mode => 555,
+      ensure => 'present',
+      source => 'puppet:///modules/gerrit/gerritbot.init',
+      require => File['/usr/local/gerrit/gerritbot'],
+    }
+
   } # testmode==false
 
   file { "/var/log/gerrit":

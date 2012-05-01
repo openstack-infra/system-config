@@ -1,0 +1,221 @@
+#! /usr/bin/env python
+
+# The configuration file should look like:
+"""
+[ircbot]
+nick=NICKNAME
+pass=PASSWORD
+channel=CHANNEL
+server=irc.freenode.net
+port=6667
+
+[gerrit]
+user=gerrit2
+key=/path/to/id_rsa
+host=review.example.com
+port=29418
+events=patchset-created, change-merged
+branches=master
+"""
+
+import ircbot
+import time
+import subprocess
+import threading
+import select
+import json
+import sys
+import ConfigParser
+import daemon, daemon.pidlockfile
+import traceback
+
+class GerritBot(ircbot.SingleServerIRCBot):
+    def __init__(self, channel, nickname, password, server, port=6667):
+        if channel[0] != '#': channel = '#'+channel
+        ircbot.SingleServerIRCBot.__init__(self, 
+                                           [(server, port)], 
+                                           nickname, nickname)
+        self.channel = channel
+        self.nickname = nickname
+        self.password = password
+
+    def on_nicknameinuse(self, c, e):
+        c.nick(c.get_nickname() + "_")
+        c.privmsg("nickserv", "identify %s " % self.password)
+        c.privmsg("nickserv", "ghost %s %s" % (self.nickname, self.password))
+        c.privmsg("nickserv", "release %s %s" % (self.nickname, self.password))
+        time.sleep(1)
+        c.nick(self.nickname)
+
+    def on_welcome(self, c, e):
+        c.privmsg("nickserv", "identify %s "% self.password)
+        c.join(self.channel)
+
+    def send(self, msg):
+        self.connection.privmsg(self.channel, msg)
+        time.sleep(0.5)
+
+class Gerrit(threading.Thread):
+    def __init__(self, ircbot, events, branches,
+                 username, keyfile, server, port=29418):
+        threading.Thread.__init__(self)
+        self.ircbot = ircbot
+        self.events = events
+        self.branches = branches
+        self.username = username
+        self.keyfile = keyfile
+        self.server = server
+        self.port = port
+        self.proc = None
+        self.poll = select.poll()
+
+    def _open(self):
+        self.proc = subprocess.Popen(['/usr/bin/ssh', '-p', str(self.port), 
+                                      '-i', self.keyfile,
+                                      '-l', self.username, self.server,
+                                      'gerrit', 'stream-events'],
+                                     bufsize=1, 
+                                     stdin=None,
+                                     stdout=subprocess.PIPE,
+                                     stderr=None,
+                                     )
+        self.poll.register(self.proc.stdout)
+
+    def _close(self):
+        try:
+            self.poll.unregister(self.proc.stdout)
+        except:
+            pass
+        try:
+            self.proc.kill()
+        except:
+            pass
+        self.proc = None
+
+    def patchset_created(self, data):
+        if 'patchset-created' in self.events:
+            msg = '%s proposed a change to %s: %s  %s' % (
+                data['patchSet']['uploader']['name'], 
+                data['change']['project'], 
+                data['change']['subject'],
+                data['change']['url'])
+            self.ircbot.send(msg)
+
+    def comment_added(self, data):
+        if 'comment-added' in self.events:
+            msg = 'A comment has been added to a proposed change to %s: %s  %s' % (
+                data['change']['project'], 
+                data['change']['subject'],
+                data['change']['url'])
+            self.ircbot.send(msg)
+        
+        for approval in data.get('approvals', []):
+            if (approval['type'] == 'VRIF' and approval['value'] == '-1' and
+                'x-vrif-minus-1' in self.events):
+                msg = 'Verification of a change to %s failed: %s  %s' % (
+                    data['change']['project'], 
+                    data['change']['subject'],
+                    data['change']['url'])
+                self.ircbot.send(msg)
+
+            if (approval['type'] == 'VRIF' and approval['value'] == '1' and
+                'x-vrif-plus-1' in self.events):
+                msg = 'Verification of a change to %s succeeded: %s  %s' % (
+                    data['change']['project'], 
+                    data['change']['subject'],
+                    data['change']['url'])
+                self.ircbot.send(msg)
+
+            if (approval['type'] == 'CRVW' and approval['value'] == '-2' and
+                'x-crvw-minus-2' in self.events):
+                msg = 'A change to %s has been rejected: %s  %s' % (
+                    data['change']['project'], 
+                    data['change']['subject'],
+                    data['change']['url'])
+                self.ircbot.send(msg)
+
+            if (approval['type'] == 'CRVW' and approval['value'] == '2' and
+                'x-crvw-plus-2' in self.events):
+                msg = 'A change to %s has been approved: %s  %s' % (
+                    data['change']['project'], 
+                    data['change']['subject'],
+                    data['change']['url'])
+                self.ircbot.send(msg)
+
+    def change_merged(self, data):
+        if 'change-merged' in self.events:
+            msg = 'A change was merged to %s: %s  %s' % (
+                data['change']['project'], 
+                data['change']['subject'],
+                data['change']['url'])
+            self.ircbot.send(msg)
+
+    def _read(self):
+        l = self.proc.stdout.readline()
+        data = json.loads(l)
+        # If branches is specified, ignore notifications for other branches
+        if self.branches and data['change']['branch'] not in self.branches:
+            return
+        if data['type'] == 'comment-added':
+            self.comment_added(data)
+        elif data['type'] == 'patchset-created':
+            self.patchset_created(data)
+        elif data['type'] == 'change-merged':
+            self.change_merged(data)
+
+    def _listen(self):
+        while True:
+            ret = self.poll.poll()
+            for (fd, event) in ret:
+                if fd == self.proc.stdout.fileno():
+                    if event == select.POLLIN:
+                        self._read()
+                    else:
+                        raise Exception("event on ssh connection")
+        
+    def _run(self):
+        try:
+            if not self.proc:
+                self._open()
+            self._listen()
+        except:
+            traceback.print_exc()
+            self._close()
+            time.sleep(5)
+
+    def run(self):
+        time.sleep(5)
+        while True:
+            self._run()
+            
+def _main():
+    config=ConfigParser.ConfigParser()
+    config.read(sys.argv[1])
+
+    bot = GerritBot(config.get('ircbot', 'channel'), 
+                    config.get('ircbot', 'nick'),
+                    config.get('ircbot', 'pass'),
+                    config.get('ircbot', 'server'),
+                    config.getint('ircbot', 'port'))
+    g = Gerrit(bot, 
+               config.get('gerrit', 'events'),
+               config.get('gerrit', 'branches'),
+               config.get('gerrit', 'user'),
+               config.get('gerrit', 'key'),
+               config.get('gerrit', 'host'),
+               config.getint('gerrit', 'port'))
+    g.start()
+    bot.start()
+
+def main():
+    if len(sys.argv) != 2:
+        print "Usage: %s CONFIGFILE" % sys.argv[0]
+        sys.exit(1)
+
+    pid = daemon.pidlockfile.TimeoutPIDLockFile("/var/run/gerritbot/gerritbot.pid", 10)
+    with daemon.DaemonContext(pidfile=pid):
+        _main()
+
+
+if __name__ == "__main__":
+    main()
