@@ -21,6 +21,29 @@ define meetbot::site($nick, $network, $server, $url, $channels, $use_ssl) {
     require => File["/var/lib/meetbot"]
   }
 
+  file { "/srv/meetbot-${name}":
+    ensure => directory,
+  }
+
+  file { "/srv/meetbot-${name}/index.html":
+    ensure => present,
+    content => template("meetbot/index.html.erb"),
+    require => File["/srv/meetbot-${name}"]
+  }
+
+  file { "/srv/meetbot-${name}/irclogs":
+    ensure => link,
+    target => "/var/lib/meetbot/${name}/logs/ChannelLogger/${network}/",
+    require => File["/srv/meetbot-${name}"]
+  }
+
+  file { "/srv/meetbot-${name}/meetings":
+    ensure => link,
+    target => "/var/lib/meetbot/${name}/meetings/",
+    require => File["/srv/meetbot-${name}"]
+  }
+
+
   file { "/var/lib/meetbot/${name}/conf":
     ensure => directory,
     owner => 'meetbot',

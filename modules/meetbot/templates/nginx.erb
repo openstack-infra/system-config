@@ -1,9 +1,13 @@
 server {
   listen 80;
   server_name <%= url %>;
-  root /var/lib/meetbot/<%= name %>;
+  root /srv/meetbot-<%= name %>;
 
   location /meetings {
+    autoindex on;
+  }
+
+  location /irclogs {
     autoindex on;
   }
 }
