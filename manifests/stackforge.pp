@@ -88,7 +88,7 @@ node "jenkins.stackforge.org" {
     site => "stackforge",
     project => "ceilometer",
     node_group => "oneiric",
-    trigger_branches => [["stackforge/ceilometer", '**']]
+    trigger_branches => [["ceilometer", '**']]
   }
 
 }
