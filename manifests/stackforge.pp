@@ -46,6 +46,9 @@ node "review.stackforge.org" {
                          }, {
                          name => 'stackforge/reddwarf',
                          close_pull => 'true'
+                         }, {
+                         name => 'stackforge/ceilometer',
+                         close_pull => 'true'
                          } ],
     logo => 'stackforge.png',
     war => 'http://ci.openstack.org/tarballs/gerrit-2.3-5-gaec571e.war',
@@ -80,6 +83,14 @@ node "jenkins.stackforge.org" {
     project => "reddwarf",
     node_group => "oneiric"
   }
+
+  jenkins_jobs::jobs::merge_gate { "ceilometer":
+    site => "stackforge",
+    project => "ceilometer",
+    node_group => "oneiric",
+    trigger_branches => [["stackforge/ceilometer", '**']]
+  }
+
 }
 
 #
