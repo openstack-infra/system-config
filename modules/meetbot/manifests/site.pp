@@ -92,6 +92,7 @@ define meetbot::site($nick, $network, $server, $url, $channels, $use_ssl) {
   service { "${name}-meetbot":
     provider => upstart,
     ensure => running,
-    require => File["/etc/init/${name}-meetbot.conf"]
+    require => File["/etc/init/${name}-meetbot.conf"],
+    subscribe => [File["/usr/share/pyshared/supybot/plugins/MeetBot"], File["/var/lib/meetbot/${name}/ircmeeting"]]
   }
 }
