@@ -109,29 +109,27 @@ class gerrit($virtual_hostname='',
 
   # Skip cron jobs if we're in test mode
   if ($testmode == false) {
-    cron { "gerritupdateci":
-      user => gerrit2,
-      minute => "*/15",
-      command => 'sleep $((RANDOM\%60)) && cd /home/gerrit2/openstack-ci && /usr/bin/git pull -q origin master'
-    }
 
     cron { "gerritsyncusers":
       user => gerrit2,
       minute => "*/15",
-      command => 'sleep $((RANDOM\%60+60)) && cd /home/gerrit2/openstack-ci && python gerrit/update_gerrit_users.py'
+      command => 'sleep $((RANDOM\%60+60)) && python /usr/local/gerrit/scripts/update_gerrit_users.py',
+      require => File['/usr/local/gerrit/scripts'],
     }
 
     cron { "gerritclosepull":
       user => gerrit2,
       minute => "*/5",
-      command => 'sleep $((RANDOM\%60+90)) && cd /home/gerrit2/openstack-ci && python gerrit/close_pull_requests.py'
+      command => 'sleep $((RANDOM\%60+90)) && python /usr/local/gerrit/scripts/close_pull_requests.py',
+      require => File['/usr/local/gerrit/scripts'],
     }
 
     cron { "expireoldreviews":
       user => gerrit2,
       hour => 6,
       minute => 3,
-      command => 'cd /home/gerrit2/openstack-ci && python gerrit/expire_old_reviews.py'
+      command => 'python /usr/local/gerrit/scripts/expire_old_reviews.py',
+      require => File['/usr/local/gerrit/scripts'],
     }
 
     cron { "gerrit_repack":
@@ -493,5 +491,24 @@ class gerrit($virtual_hostname='',
       command => '/etc/init.d/gerrit start',
       require => File['/etc/init.d/gerrit'],
       refreshonly => true,
+  }
+
+  file { '/usr/local/gerrit':
+    owner => 'root',
+    group => 'root',
+    mode => 755,
+    ensure => 'directory',
+  }
+
+  file { '/usr/local/gerrit/scripts':
+    owner => 'root',
+    group => 'root',
+    mode => 755,
+    ensure => 'directory',
+    recurse => true,
+    require => File['/usr/local/gerrit'],
+    source => [
+                "puppet:///modules/gerrit/scripts",
+              ],
   }
 }
