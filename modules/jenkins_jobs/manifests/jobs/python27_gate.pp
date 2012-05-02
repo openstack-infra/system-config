@@ -5,7 +5,7 @@ define jenkins_jobs::jobs::python27_gate($site, $project, $node_group, $trigger_
     project => $project,
     job => "python27",
     node_group => $node_group,
-    triggers => trigger("gerrit_comment"),
+    triggers => trigger("gerrit_comment_plain"),
     builders => [builder("gerrit_git_prep"), builder("copy_bundle"), builder("python27")],
     trigger_branches => $trigger_branches,
     auth_build => true
