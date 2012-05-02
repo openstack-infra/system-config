@@ -5,6 +5,27 @@ define jenkins_jobs::python_jobs($site, $project, $node_group, $ensure="present"
     node_group => $node_group,
     ensure => $ensure
   }
+  jenkins_jobs::jobs::pep8_check { $name:
+    site => $site,
+    project => $project,
+    node_group => $node_group,
+    trigger_branches => [[$project, '**']],
+    ensure => $ensure
+  }
+  jenkins_jobs::jobs::python26_check { $name:
+    site => $site,
+    project => $project,
+    node_group => $node_group,
+    trigger_branches => [[$project, '**']],
+    ensure => $ensure
+  }
+  jenkins_jobs::jobs::python27_check { $name:
+    site => $site,
+    project => $project,
+    node_group => $node_group,
+    trigger_branches => [[$project, '**']],
+    ensure => $ensure
+  }
   jenkins_jobs::jobs::pep8_gate { $name:
     site => $site,
     project => $project,
