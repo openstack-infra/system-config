@@ -75,7 +75,8 @@ node "jenkins.stackforge.org" {
   jenkins_jobs::python_jobs { "reddwarf-natty":
     site => "stackforge",
     project => "reddwarf",
-    node_group => "natty"
+    node_group => "natty",
+    ensure => "disabled"
   }
 
   jenkins_jobs::generic_jobs { "reddwarf":

@@ -3,10 +3,10 @@
       <latestOnly>false</latestOnly>
     </hudson.tasks.ArtifactArchiver>
     <be.certipost.hudson.plugin.SCPRepositoryPublisher>
-      <siteName><%= project %>.<%= site %>.org</siteName>
+      <siteName><%= upload_project %>.<%= site %>.org</siteName>
       <entries>
         <be.certipost.hudson.plugin.Entry>
-          <filePath>tarballs/<%= project %>/</filePath>
+          <filePath>tarballs/<%= upload_project %>/</filePath>
           <sourceFile>dist/*.tar.gz</sourceFile>
           <keepHierarchy>false</keepHierarchy>
         </be.certipost.hudson.plugin.Entry>

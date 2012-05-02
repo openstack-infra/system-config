@@ -36,9 +36,11 @@ In modules/jenkins_jobs
       <keepBuildVariables>true</keepBuildVariables>
       <contributors/>
     </EnvInjectJobProperty>
+    <% if auth_build == true %>
     <hudson.security.AuthorizationMatrixProperty>
       <permission>hudson.model.Item.Build:authenticated</permission>
     </hudson.security.AuthorizationMatrixProperty>
+    <% end %>
   </properties>
   <% if scm == "" %>
   <scm class="hudson.scm.NullSCM"/>
@@ -47,7 +49,11 @@ In modules/jenkins_jobs
   <% end %>
   <assignedNode><%= node_group %></assignedNode>
   <canRoam>false</canRoam>
+  <% if disabled == true %>
+  <disabled>true</disabled>
+  <% else %>
   <disabled>false</disabled>
+  <% end %>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
   <triggers class="vector">

@@ -1,5 +1,6 @@
-define jenkins_jobs::jobs::docs($site, $project, $node_group) {
+define jenkins_jobs::jobs::docs($site, $project, $node_group, $ensure="present") {
   jenkins_jobs::build_job { "${name}-docs":
+    ensure => $ensure,
     site => $site,
     project => $project,
     job => "docs",
