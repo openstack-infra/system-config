@@ -181,25 +181,25 @@ node "jenkins.openstack.org" {
     site => "openstack",
   }
 
-  jenkins_jobs::jobs::python_jobs { "python-openstackclient":
+  jenkins_jobs::python_jobs { "python-openstackclient":
     site => "openstack",
     project => "python-openstackclient",
     node_group => "oneiric",
   }
 
-  jenkins_jobs::jobs::python_jobs { "python-cinderclient":
+  jenkins_jobs::python_jobs { "python-cinderclient":
     site => "openstack",
     project => "python-cinderclient",
     node_group => "oneiric",
   }
 
-  jenkins_jobs::jobs::python_jobs { "python-glanceclient":
+  jenkins_jobs::python_jobs { "python-glanceclient":
     site => "openstack",
     project => "python-cinderclient",
     node_group => "oneiric",
   }
 
-  jenkins_jobs::jobs::python_jobs { "cinder":
+  jenkins_jobs::python_jobs { "cinder":
     site => "openstack",
     project => "cinder",
     node_group => "oneiric",
