@@ -83,7 +83,7 @@ DB_DB = gerrit_config.get("database","database")
 
 db_backup_file = "%s.%s.sql" % (DB_DB, datetime.isoformat(datetime.now()))
 db_backup_path = os.path.join(GERRIT_BACKUP_PATH, db_backup_file)
-retval = os.system("mysqldump --opt -u%s -p%s %s > %s" %
+retval = os.system("mysqldump --opt -u%s -p%s %s | gzip -9 > %s.gz" %
                      (DB_USER, DB_PASS, DB_DB, db_backup_path))
 if retval != 0:
   print "Problem taking a db dump, aborting db update"
