@@ -101,6 +101,7 @@ def short_project(full_project_name):
 def git2lp(full_project_name):
     """Convert Git repo name to Launchpad project"""
     project_map = {
+        'openstack/python-cinderclient': 'cinder',
         'openstack/python-glanceclient': 'glance',
         'openstack/python-keystoneclient': 'keystone',
         'openstack/python-melangeclient': 'melange',

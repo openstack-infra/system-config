@@ -133,6 +133,9 @@ node "gerrit.openstack.org", "review.openstack.org" {
                          }, {
                          name => 'openstack-dev/openstack-nose',
                          close_pull => 'true'
+                         }, {
+                         name => 'openstack/python-cinderclient',
+                         close_pull => 'true'
                          } ],
     logo => 'openstack.png',
     war => 'http://ci.openstack.org/tarballs/gerrit-2.3-7-g1f029ab.war',
@@ -177,6 +180,51 @@ node "jenkins.openstack.org" {
   class { "jenkins_jobs":
     site => "openstack",
   }
+
+  jenkins_jobs::jobs::python_jobs { "python-openstackclient":
+    site => "openstack",
+    project => "python-openstackclient",
+    node_group => "oneiric",
+  }
+  jenkins_jobs::generic_jobs { "python-openstackclient":
+    site => "openstack",
+    project => "python-openstackclient",
+    node_group => "oneiric"
+  }
+
+  jenkins_jobs::jobs::python_jobs { "python-cinderclient":
+    site => "openstack",
+    project => "python-cinderclient",
+    node_group => "oneiric",
+  }
+  jenkins_jobs::generic_jobs { "python-cinderclient":
+    site => "openstack",
+    project => "python-cinderclient",
+    node_group => "oneiric"
+  }
+
+  jenkins_jobs::jobs::python_jobs { "python-glanceclient":
+    site => "openstack",
+    project => "python-cinderclient",
+    node_group => "oneiric",
+  }
+  jenkins_jobs::generic_jobs { "python-glanceclient":
+    site => "openstack",
+    project => "python-glanceclient",
+    node_group => "oneiric"
+  }
+
+  jenkins_jobs::jobs::python_jobs { "cinder":
+    site => "openstack",
+    project => "cinder",
+    node_group => "oneiric",
+  }
+  jenkins_jobs::generic_jobs { "cinder":
+    site => "openstack",
+    project => "cinder",
+    node_group => "oneiric"
+  }
+
 }
 
 node "jenkins-dev.openstack.org" {
