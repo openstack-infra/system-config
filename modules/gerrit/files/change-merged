@@ -1,3 +1,3 @@
 #!/bin/sh
 
-python ~/openstack-ci/gerrit/update_bug.py change-merged "$@"
+python /usr/local/gerrit/scripts/update_bug.py change-merged "$@"
