@@ -216,7 +216,7 @@ node "lists.openstack.org" {
   # because the exim config on this machine is almost certainly
   # going to be more complicated than normal.
   class { 'openstack_template':
-    iptables_public_tcp_ports => [25, 465]
+    iptables_public_tcp_ports => [25, 80, 465]
   }
 
   # class { 'exim':
