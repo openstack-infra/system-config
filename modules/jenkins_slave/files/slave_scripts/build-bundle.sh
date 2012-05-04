@@ -16,14 +16,13 @@ do
     mkdir -p jenkins_venvs/$branch
     bundle=jenkins_venvs/$branch/.cache.bundle
 
+    REQUIRES="distribute openstack.nose_plugin"
     if [ -f tools/pip-requires ] ; then
-        if [ -f tools/test-requires ] ; then
-            pip bundle $bundle -r tools/pip-requires -r tools/test-requires
-        else
-            pip bundle $bundle -r tools/pip-requires
-        fi
-    else
-        pip bundle $bundle distribute openstack.nose_plugin
+        REQUIRES="${REQUIRES} -r tools/pip-requires"
     fi
+    if [ -f tools/test-requires ] ; then
+        REQUIRES="${REQUIRES} -r tools/test-requires"
+    fi
+    pip bundle $bundle $REQUIRES
 done
 git checkout master
