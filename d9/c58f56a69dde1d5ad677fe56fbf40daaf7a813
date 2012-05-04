@@ -1,0 +1,9 @@
+Approved+1: Monty Taylor <mordred@inaugust.com>
+Verified+2: Jenkins
+Approved+1: linuxjedi <andrew@linuxjedi.co.uk>
+Code-Review+2: linuxjedi <andrew@linuxjedi.co.uk>
+Submitted-by: Jenkins
+Submitted-at: Fri, 04 May 2012 16:25:02 +0000
+Reviewed-on: https://review.openstack.org/7105
+Project: openstack/openstack-ci-puppet
+Branch: refs/heads/master
