@@ -16,7 +16,7 @@ do
     mkdir -p jenkins_venvs/$branch
     bundle=jenkins_venvs/$branch/.cache.bundle
 
-    REQUIRES="distribute openstack.nose_plugin $@"
+    REQUIRES="$@"
     if [ -f tools/pip-requires ] ; then
         REQUIRES="${REQUIRES} -r tools/pip-requires"
     fi
