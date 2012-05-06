@@ -23,6 +23,9 @@ do
     if [ -f tools/test-requires ] ; then
         REQUIRES="${REQUIRES} -r tools/test-requires"
     fi
+    if [ -z "${REQUIRES}"] ; then
+        REQUIRES="distribute"
+    fi
     pip bundle $bundle $REQUIRES
 done
 git checkout master
