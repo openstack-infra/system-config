@@ -1,0 +1,24 @@
+<%= log %> {
+<% options.each do |opt| -%> <%= opt %>
+<% end -%>
+<% if prerotate != 'undef' -%>
+ prerotate
+  <%= prerotate %>
+ endscript
+<% end -%>
+<% if postrotate != 'undef' -%>
+ postrotate
+  <%= postrotate %>
+ endscript
+<% end -%>
+<% if firstaction != 'undef' -%>
+ firstaction
+  <%= firstaction %>
+ endscript
+<% end -%>
+<% if lastaction != 'undef' -%>
+ lastaction
+  <%= lastaction %>
+ endscript
+<% end -%>
+}
