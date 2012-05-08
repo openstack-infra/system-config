@@ -49,6 +49,7 @@ class jenkins_slave($ssh_key) {
                  "lxc",
                  "maven2",
 		 "mercurial", # needed by pip bundle
+                 "mysql-server",
                  "default-jdk", # jdk for building java jobs
 		 "pandoc", #for docs, markdown->docbook, bug 924507
                  "parted",
@@ -111,7 +112,17 @@ class jenkins_slave($ssh_key) {
       ensure => 'absent',
     }
 
-    file { 'jenkinslogs':
+   exec { "jenins-slave-mysql":
+     creates => "/var/lib/mysql/openstack_citest/",
+     command => "/usr/bin/mysql --defaults-file=/etc/mysql/debian.cnf -e \"\
+       CREATE USER 'openstack_citest'@'localhost' IDENTIFIED BY 'openstack_citest';\
+       CREATE DATABASE openstack_citest;\
+       GRANT ALL ON openstack_citest.* TO 'openstack_citest'@'localhost';\
+       FLUSH PRIVILEGES;\"",
+     require => Package["mysql-server"]
+  }
+
+   file { 'jenkinslogs':
       name => '/var/log/jenkins/tmpreaper.log*',
       ensure => 'absent',
     }
