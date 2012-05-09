@@ -1,0 +1,63 @@
+---
+modules:
+  - logrotate
+  - properties
+  - scm
+  - assignednode
+  - trigger_gerrit
+  - builders
+  - publisher_venv
+
+main:
+  name: 'test-myjob'
+  site: 'openstack'
+  project: 'test'
+  authenticatedBuild: 'true'
+  disabled: 'false'
+
+trigger:
+  triggerOnPatchsetUploadedEvent: 'false'
+  triggerOnChangeMergedEvent: 'false'
+  triggerOnCommentAddedEvent: 'true'
+  triggerOnRefUpdatedEvent: 'false'
+  triggerApprovalCategory: 'APRV'
+  triggerApprovalValue: 1
+  failureMessage: 'This change was unable to be automatically merged with the current state of the repository. Please rebase your change and upload a new patchset.'
+  projects:
+    - projectCompareType: 'PLAIN'
+      projectPattern: 'openstack/nova'
+      branchCompareType: 'ANT'
+      branchPattern: '**'
+    - projectCompareType: 'PLAIN'
+      projectPattern: 'openstack/glance'
+      branchCompareType: 'ANT'
+      branchPattern: '**'
+
+builders:
+  - 'gerrit_git_prep'
+  - 'python27'
+
+scm:
+  scm: 'true'
+
+assignednode:
+  node: 'oneiric'
+
+logrotate:
+  daysToKeep: 3
+  numToKeep: 20
+  artifactDaysToKeep: -1
+  artifactNumToKeep: -1
+
+---
+modules:
+  - properties
+  - publisher_pep8
+
+main:
+  name: 'test-newjob'
+  site: 'openstack'
+  project: 'test2'
+  authenticatedBuild: 'true'
+  disabled: 'false'
+
