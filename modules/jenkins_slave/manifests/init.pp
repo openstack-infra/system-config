@@ -119,7 +119,11 @@ class jenkins_slave($ssh_key) {
        CREATE DATABASE openstack_citest;\
        GRANT ALL ON openstack_citest.* TO 'openstack_citest'@'localhost';\
        FLUSH PRIVILEGES;\"",
-     require => Package["mysql-server"]
+     require => [
+                 File["/etc/mysql/my.cnf"],  # For myisam default tables
+                 Package["mysql-server"],
+                 Service["mysql"]
+                 ]
   }
 
    file { 'jenkinslogs':
@@ -159,6 +163,24 @@ class jenkins_slave($ssh_key) {
       ensure => link,
       target => '/usr/bin/ccache',
       require => Package['ccache'],
+    }
+
+    file { "/etc/mysql/my.cnf":
+      source => 'puppet:///modules/jenkins_slave/my.cnf',
+      owner => 'root',
+      group => 'root',
+      ensure => 'present',
+      replace => 'true',
+      mode => 444,
+      require => Package["mysql-server"],
+    }
+
+    service { "mysql":
+      name => "mysql",
+      ensure    => running,
+      enable    => true,
+      subscribe => File["/etc/mysql/my.cnf"],
+      require => [File["/etc/mysql/my.cnf"], Package["mysql-server"]]
     }
 
 }
