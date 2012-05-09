@@ -187,10 +187,6 @@ node "jenkins.openstack.org" {
     ssl_key_file => '/etc/ssl/private/jenkins.openstack.org.key',
     ssl_chain_file => '/etc/ssl/certs/intermediate.pem',
   }
-  class { "jenkins_jobs":
-    site => "openstack",
-  }
-
 }
 
 node "jenkins-dev.openstack.org" {

@@ -70,26 +70,7 @@ node "jenkins.stackforge.org" {
 
   class { "jenkins_jobs":
     site => "stackforge",
-  }
-
-  jenkins_jobs::python_jobs { "reddwarf-natty":
-    site => "stackforge",
-    project => "reddwarf",
-    node_group => "natty",
-    ensure => "disabled"
-  }
-
-  jenkins_jobs::generic_jobs { "reddwarf":
-    site => "stackforge",
-    project => "reddwarf",
-    node_group => "oneiric"
-  }
-
-  jenkins_jobs::jobs::merge_gate { "ceilometer":
-    site => "stackforge",
-    project => "ceilometer",
-    node_group => "oneiric",
-    trigger_branches => [["ceilometer", '**']]
+    projects => ['reddwarf', 'ceilometer']
   }
 
 }
