@@ -143,6 +143,10 @@ node "gerrit.openstack.org", "review.openstack.org" {
                          name => 'openstack/python-cinderclient',
                          close_pull => 'true'
                          } ],
+    upstream_projects => [ {
+                         name => 'openstack-ci/gerrit',
+                         remote => 'https://gerrit.googlesource.com/gerrit'
+                         } ],
     logo => 'openstack.png',
     war => 'http://ci.openstack.org/tarballs/gerrit-2.3-7-g1f029ab.war',
   }
