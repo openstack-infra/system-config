@@ -1,0 +1,62 @@
+[DEFAULT]
+# the root folder of all mirrored packages.
+# if necessary it will be created for you
+mirror_file_path = <%= mirror_file_path %>
+
+# where's your mirror on the net?
+base_url = <%= base_url %>
+
+# lock file to avoid duplicate runs of the mirror script
+lock_file_name = /var/lock/pypi-poll-access.lock
+
+# days to fetch in past on update
+fetch_since_days = <%= fetch_since_days %>
+
+# Pattern for package files, only those matching will be mirrored
+filename_matches =
+    *.zip
+    *.tgz
+    *.egg
+    *.tar.gz
+    *.tar.bz2
+
+# Pattern for package names; only packages having matching names will
+# be mirrored
+package_matches = 
+ <% package_matches.each do |match| -%>
+   <%= match %>
+ <% end -%>
+
+# remove packages not on pypi (or externals) anymore
+cleanup = True
+
+# create index.html files
+create_indexes = True
+
+# be more verbose
+verbose = True
+
+# resolve download_url links on pypi which point to files and download
+# the files from there (if they match filename_matches).
+# The filename and filesize (from the download header) are used
+# to find out if the file is already on the mirror. Not all servers
+# support the content-length header, so be prepared to download
+# a lot of data on each mirror update.
+# This is highly experimental and shouldn't be used right now.
+# 
+# NOTE: This option should only be set to True if package_matches is not 
+# set to '*' - otherwise you will mirror a huge amount of data. BE CAREFUL
+# using this option!!!
+external_links = <%= external_links_real %>
+
+# similar to 'external_links' but also follows an index page if no
+# download links are available on the referenced download_url page
+# of a given package.
+#
+# NOTE: This option should only be set to True if package_matches is not 
+# set to '*' - otherwise you will mirror a huge amount of data. BE CAREFUL
+# using this option!!!
+follow_external_index_pages = <%= follow_external_index_pages_real %>
+
+# logfile 
+log_filename = <%= log_filename %>

@@ -1,0 +1,9 @@
+server {
+  listen 80;
+
+  index index.html index.htm;
+
+  location / {
+    root /usr/local/pypimirror;
+  }
+}
