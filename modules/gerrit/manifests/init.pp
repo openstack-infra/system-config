@@ -49,6 +49,7 @@ class gerrit($virtual_hostname='',
       $openidssourl="https://login.launchpad.net/+openid",
       $email='',
       $github_projects = [],
+      $upstream_projects = [],
       $commentlinks = [ { name => 'changeid',
                           match => '(I[0-9a-f]{8,40})',
               		  link => '#q,$1,n,z' },
@@ -149,6 +150,13 @@ class gerrit($virtual_hostname='',
       environment => "PATH=/usr/bin:/bin:/usr/sbin:/sbin",
     }
 
+    cron { "gerritfetchremotes":
+      user => gerrit2,
+      minute => "*/30",
+      command => 'sleep $((RANDOM\%60+90)) && python /usr/local/gerrit/scripts/fetch_remotes.py',
+      require => File['/usr/local/gerrit/scripts'],
+    }
+
     file { "/usr/local/gerrit/gerritbot":
       owner => 'root',
       group => 'root',
@@ -221,6 +229,16 @@ class gerrit($virtual_hostname='',
     mode => 444,
     ensure => 'present',
     content => template('gerrit/github.config.erb'),
+    replace => 'true',
+    require => User["gerrit2"]
+  }
+
+  file { '/home/gerrit2/remotes.config':
+    owner => 'root',
+    group => 'root',
+    mode => 444,
+    ensure => 'present',
+    content => template('gerrit/remotes.config.erb'),
     replace => 'true',
     require => User["gerrit2"]
   }
