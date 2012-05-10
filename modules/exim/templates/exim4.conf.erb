@@ -288,7 +288,33 @@ timeout_frozen_after = 7d
 
 # split_spool_directory = true
 
-
+<% if mailman_domains.length > 0 -%>
+# Home dir for your Mailman installation -- aka Mailman's prefix
+# directory.
+MM_HOME=/var/lib/mailman
+#
+# User and group for Mailman, should match your --with-mail-gid
+# switch to Mailman's configure script.
+# Value is normally "mailman"
+MM_UID=list
+MM_GID=list
+#
+# Domains that your lists are in - colon separated list
+# you may wish to add these into local_domains as well
+domainlist mm_domains=<%= mailman_domains.join(":") %>
+#
+# -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+#
+# These values are derived from the ones above and should not need
+# editing unless you have munged your mailman installation
+#
+# The path of the Mailman mail wrapper script
+MM_WRAP=MM_HOME/mail/mailman
+#
+# The path of the list config file (used as a required file when
+# verifying list addresses)
+MM_LISTCHK=MM_HOME/lists/${lc::$local_part}/config.pck
+<% end -%>
 
 ######################################################################
 #                       ACL CONFIGURATION                            #
@@ -484,6 +510,40 @@ acl_check_data:
 
 begin routers
 
+<% if mailman_domains.length > 0 -%>
+# Pick up on messages from our local mailman and route them via our
+# special VERP-enabled transport
+#
+mailman_verp_router:
+driver = dnslookup
+# we only consider messages sent in through loopback
+condition = ${if or{{eq{$sender_host_address}{127.0.0.1}} \
+                    {eq{$sender_host_address}{::1}}}{yes}{no}}
+# we do not do this for traffic going to the local machine
+domains = !+local_domains:!+mm_domains
+ignore_target_hosts = <; 0.0.0.0; \
+                         64.94.110.11; \
+                         127.0.0.0/8; \
+                         ::1/128;fe80::/10;fe \
+                         c0::/10;ff00::/8
+# only the un-VERPed bounce addresses are handled
+senders = "*-bounces@*"
+transport = mailman_verp_smtp
+
+mailman_router:
+  driver            = accept
+  domains           = +mm_domains
+  require_files     = MM_LISTCHK
+  local_part_suffix_optional
+  local_part_suffix = -admin     : \
+         -bounces   : -bounces+* : \
+         -confirm   : -confirm+* : \
+         -join      : -leave     : \
+         -owner     : -request   : \
+         -subscribe : -unsubscribe
+  transport         = mailman_transport
+<% end -%>
+
 # This router routes to remote hosts over SMTP by explicit IP address,
 # when an email address is given in "domain literal" form, for example,
 # <user@[192.168.35.64]>. The RFCs require this facility. However, it is
@@ -635,6 +695,35 @@ address_file:
 
 address_reply:
   driver = autoreply
+
+<% if mailman_domains.length > 0 -%>
+mailman_transport:
+  driver  = pipe
+  command = MM_WRAP \
+          '${if def:local_part_suffix \
+                {${sg{$local_part_suffix}{-(\\w+)(\\+.*)?}{\$1}}} \
+                {post}}' \
+          $local_part
+  current_directory = MM_HOME
+  home_directory    = MM_HOME
+  user              = MM_UID
+  group             = MM_GID
+
+# Mailman VERP envelope sender address formatting.  This seems not to use
+# quoted-printable encoding of the address, but instead just replaces the
+# '@' in the recipient address with '='.
+#
+mailman_verp_smtp:
+  driver = smtp
+# put recipient address into return_path
+  return_path = \
+    ${local_part:$return_path}+$local_part=$domain@${domain:$return_path}
+# must restrict to one recipient at a time
+  max_rcpt = 1
+# Errors-To: may carry old return_path
+  headers_remove = Errors-To
+  headers_add = Errors-To: ${return_path}
+<% end -%>
 
 ######################################################################
 #                      RETRY CONFIGURATION                           #

@@ -229,13 +229,18 @@ node "lists.openstack.org" {
     iptables_public_tcp_ports => [25, 80, 465]
   }
 
-  # class { 'exim':
-  #   sysadmin => ['corvus@inaugust.com',
-  #                'mordred@inaugust.com',
-  #                'andrew@linuxjedi.co.uk',
-  #                'devananda.vdv@gmail.com',
-  # 		 'duncan@dreamhost.com']
-  # }
+  class { 'exim':
+    sysadmin => ['corvus@inaugust.com',
+                 'mordred@inaugust.com',
+                 'andrew@linuxjedi.co.uk',
+                 'devananda.vdv@gmail.com',
+  		 'duncan@dreamhost.com'],
+    mailman_domains => ['lists.openstack.org'],
+  }
+
+  class { 'mailman':
+    mailman_host => 'lists.openstack.org'
+  }
 
   realize (
     User::Virtual::Localuser["oubiwann"],
