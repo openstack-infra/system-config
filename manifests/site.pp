@@ -296,6 +296,13 @@ node "eavesdrop.openstack.org" {
   }
 }
 
+node "pypi.openstack.org" {
+  include openstack_cron
+  class { "pypimirror":
+    base_url => "http://pypi.openstack.org",
+  }
+}
+
 # A bare machine, but with a jenkins user
 node /^.*\.template\.openstack\.org$/ {
   class { 'openstack_template':
