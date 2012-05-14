@@ -40,9 +40,9 @@ ssh.connect('localhost', username=GERRIT_USER, key_filename=GERRIT_SSH_KEY, port
 
 def expire_patch_set(patch_id, patch_subject, has_negative):
   if has_negative:
-    message= 'code review expired after 1 week of no activity after a negative review, it can be restored using the \`Restore Change\` button above'
+    message= 'code review expired after 1 week of no activity after a negative review, it can be restored using the \`Restore Change\` button under the Patch Set on the web interface'
   else:
-    message= 'code review expired after 2 weeks of no activity, it can be restored using the \`Restore Change\` button above'
+    message= 'code review expired after 2 weeks of no activity, it can be restored using the \`Restore Change\` button under the Patch Set on the web interface'
   command='gerrit review --abandon --message="{0}" {1}'.format(message, patch_id)
   logger.info('Expiring: %s - %s: %s', patch_id, patch_subject, message)
   stdin, stdout, stderr = ssh.exec_command(command)
