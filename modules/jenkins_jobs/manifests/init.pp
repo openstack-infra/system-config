@@ -18,7 +18,7 @@ class jenkins_jobs($site, $projects) {
     require => File['/usr/local/jenkins_jobs']
   }
 
-  jenkins_jobs::process_projects { $projects:
+  process_projects { $projects:
     site => $site,
     require => File['/usr/local/jenkins_jobs/jenkins_jobs.ini']
   }
