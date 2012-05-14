@@ -296,6 +296,16 @@ node "eavesdrop.openstack.org" {
   }
 }
 
+node "pypi.openstack.org" {
+  include openstack_cron
+  class { 'openstack_server':
+    iptables_public_tcp_ports => [80]
+  }
+  class { "pypimirror":
+    base_url => "http://pypi.openstack.org",
+  }
+}
+
 # A bare machine, but with a jenkins user
 node /^.*\.template\.openstack\.org$/ {
   class { 'openstack_template':
