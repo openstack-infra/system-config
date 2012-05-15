@@ -6,7 +6,7 @@ class jenkins_slave($ssh_key) {
     }
 
     slavecirepo { "openstack-ci":
-      ensure => present,
+      ensure => absent,
       require => [ Package[git], File[jenkinshome] ],
     }
 
@@ -16,7 +16,7 @@ class jenkins_slave($ssh_key) {
     }
 
     apt::ppa { "ppa:openstack-ci/build-depends":
-      ensure => present
+      ensure => absent
     }
 
     $packages = ["apache2",
