@@ -99,7 +99,7 @@ class pypimirror ( $base_url,
 
   file { "/etc/nginx/sites-available/default":
     ensure => present,
-    source => "puppet:///modules/pypimirror/default",
+    content => template('pypimirror/nginx_default.erb'),
     replace => true,
     owner => "root",
     group => "root",
