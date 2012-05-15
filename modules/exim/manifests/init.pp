@@ -1,4 +1,4 @@
-class exim($sysadmin=[]) {
+class exim($sysadmin=[], $mailman_domains=[]) {
   package { 'exim4-base':
     ensure => present;
   }
@@ -21,7 +21,7 @@ class exim($sysadmin=[]) {
     group => 'root',
     mode => 444,
     ensure => 'present',
-    source => 'puppet:///modules/exim/exim4.conf',
+    content => template("exim/exim4.conf.erb"),
     replace => 'true',
   }
 
