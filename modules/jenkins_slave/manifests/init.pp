@@ -90,6 +90,7 @@ class jenkins_slave($ssh_key) {
     }
 
     cron { "updateci":
+      ensure => absent,
       user => jenkins,
       minute => "*/15",
       command => "cd /home/jenkins/openstack-ci && /usr/bin/git pull -q origin master",
