@@ -23,7 +23,34 @@ define jenkinsuser($ensure = present, $ssh_key) {
     require => User['jenkins']
   }
     
-  
+  file { 'jenkinspipdir':
+    name => '/home/jenkins/.pip',
+    owner => 'jenkins',
+    group => 'jenkins',
+    ensure => 'directory',
+    require => File['jenkinshome'],
+  }
+
+  file { 'jenkinspipconf':
+    name => '/home/jenkins/.pip/pip.conf',
+    owner => 'jenkins',
+    group => 'jenkins',
+    mode => 640,
+    ensure => 'present',
+    source => "puppet:///modules/jenkins_slave/pip.conf",
+    require => File['jenkinspipdir'],
+  }
+
+  file { 'jenkinspydistutilscfg':
+    name => '/home/jenkins/.pydistutils.cfg',
+    owner => 'jenkins',
+    group => 'jenkins',
+    mode => 640,
+    ensure => 'present',
+    source => "puppet:///modules/jenkins_slave/pydistutils.cfg",
+    require => File['jenkinshome'],
+  }
+   
   file { 'jenkinssshdir':
     name => '/home/jenkins/.ssh',
     owner => 'jenkins',
