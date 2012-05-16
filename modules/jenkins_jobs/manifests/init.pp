@@ -1,4 +1,9 @@
 class jenkins_jobs($site, $projects) {
+  package { 'PyXML':
+    provider => pip,
+    ensure => present
+  }
+
   file { '/usr/local/jenkins_jobs':
     owner => 'root',
     group => 'root',

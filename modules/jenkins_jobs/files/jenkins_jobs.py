@@ -50,7 +50,22 @@ class YamlParser(object):
     def __init__(self, yfile):
         self.data = yaml.load_all(yfile)
         self.it = self.data.__iter__()
-        self.current = ''
+        self.current = self.it.next()
+        if self.current.has_key('project'):
+            self.process_template()
+        self.it = self.data.__iter__()
+
+    def process_template(self):
+        project_data = self.current['project']
+        template_file = file('templates/' + project_data['template']  + '.yml', 'r')
+        template = template_file.read()
+        template_file.close()
+        values = self.current['values'].iteritems()
+        for key, value in values:
+            key = '@' + key.upper() + '@'
+            template = template.replace(key, value)
+        template_steam = StringIO(template)
+        self.data = yaml.load_all(template_steam)
 
     def get_next_xml(self):
         self.current = self.it.next()
