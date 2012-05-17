@@ -110,16 +110,16 @@ class Gerrit(threading.Thread):
             self.ircbot.send(msg)
         
         for approval in data.get('approvals', []):
-            if (approval['type'] == 'VRIF' and approval['value'] == '-1' and
-                'x-vrif-minus-1' in self.events):
+            if (approval['type'] == 'VRIF' and approval['value'] == '-2' and
+                'x-vrif-minus-2' in self.events):
                 msg = 'Verification of a change to %s failed: %s  %s' % (
                     data['change']['project'], 
                     data['change']['subject'],
                     data['change']['url'])
                 self.ircbot.send(msg)
 
-            if (approval['type'] == 'VRIF' and approval['value'] == '1' and
-                'x-vrif-plus-1' in self.events):
+            if (approval['type'] == 'VRIF' and approval['value'] == '2' and
+                'x-vrif-plus-2' in self.events):
                 msg = 'Verification of a change to %s succeeded: %s  %s' % (
                     data['change']['project'], 
                     data['change']['subject'],
