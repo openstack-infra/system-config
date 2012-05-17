@@ -22,10 +22,15 @@ import os
 import paramiko
 import json
 import logging
+import argparse
 
-GERRIT_USER = os.environ.get('GERRIT_USER', 'launchpadsync')
-GERRIT_SSH_KEY = os.environ.get('GERRIT_SSH_KEY',
-                                 '/home/gerrit2/.ssh/launchpadsync_rsa')
+parser = argparse.ArgumentParser()
+parser.add_argument('user', help='The gerrit admin user')
+parser.add_argument('ssh_key', help='The gerrit admin SSH key file')
+options = parser.parse_args()
+
+GERRIT_USER = options.user
+GERRIT_SSH_KEY = options.ssh_key
 
 logging.basicConfig(format='%(asctime)-6s: %(name)s - %(levelname)s - %(message)s', filename='/var/log/gerrit/expire_reviews.log')
 logger= logging.getLogger('expire_reviews')
