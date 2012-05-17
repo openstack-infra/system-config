@@ -17,11 +17,12 @@ fi
 # Should be + if tarball version is already released and we're moving forward after it.
 SEPARATOR=${SEPARATOR:-'~'}
 
-if [ -z "$PROJECT" ]
+if [ -z "$1" ]
 then
-    echo '$PROJECT not set.'
+    echo '$1 not set.'
     exit 1
 fi
+PROJECT=$1
 
 find_next_version() {
     datestamp="${datestamp:-$(date +%Y%m%d)}"
