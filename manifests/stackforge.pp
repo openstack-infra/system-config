@@ -49,6 +49,9 @@ node "review.stackforge.org" {
                          }, {
                          name => 'stackforge/ceilometer',
                          close_pull => 'true'
+                         }, {
+                         name => 'stackforge/heat',
+                         close_pull => 'true'
                          } ],
     logo => 'stackforge.png',
     war => 'http://ci.openstack.org/tarballs/gerrit-2.3-5-gaec571e.war',
@@ -70,7 +73,7 @@ node "jenkins.stackforge.org" {
 
   class { "jenkins_jobs":
     site => "stackforge",
-    projects => ['reddwarf', 'ceilometer']
+    projects => ['reddwarf', 'ceilometer', 'heat']
   }
 
 }
