@@ -25,7 +25,7 @@ from datetime import datetime
 
 import StringIO
 import ConfigParser
-
+import argparse
 import MySQLdb
 
 from launchpadlib.launchpad import Launchpad
@@ -36,13 +36,18 @@ from openid.cryptutil import randomString
 
 DEBUG = False
 
-GERRIT_USER = os.environ.get('GERRIT_USER', 'launchpadsync')
+parser = argparse.ArgumentParser()
+parser.add_argument('user', help='The gerrit admin user')
+parser.add_argument('ssh_key', help='The gerrit admin SSH key file')
+parser.add_argument('site', help='The site in use (typically openstack or stackforge)')
+options = parser.parse_args()
+
+GERRIT_USER = options.user
 GERRIT_CONFIG = os.environ.get('GERRIT_CONFIG',
                                  '/home/gerrit2/review_site/etc/gerrit.config')
 GERRIT_SECURE_CONFIG = os.environ.get('GERRIT_SECURE_CONFIG',
                                  '/home/gerrit2/review_site/etc/secure.config')
-GERRIT_SSH_KEY = os.environ.get('GERRIT_SSH_KEY',
-                                 '/home/gerrit2/.ssh/launchpadsync_rsa')
+GERRIT_SSH_KEY = options.ssh_key
 GERRIT_CACHE_DIR = os.path.expanduser(os.environ.get('GERRIT_CACHE_DIR',
                                 '~/.launchpadlib/cache'))
 GERRIT_CREDENTIALS = os.path.expanduser(os.environ.get('GERRIT_CREDENTIALS',
@@ -368,7 +373,7 @@ for (username, user_details) in users.items():
         if os_project_name is not None:
           if os_project_name.endswith("-core"):
               os_project_name = os_project_name[:-5]
-          os_project_name = "openstack/%s" % os_project_name
+          os_project_name = "{site}/{project}".format(site=options.site, project=os_project_name)
           if os_project_name in projects:
             if not cur.execute("""select account_id
                                    from account_project_watches

@@ -149,6 +149,9 @@ node "gerrit.openstack.org", "review.openstack.org" {
                          } ],
     logo => 'openstack.png',
     war => 'http://ci.openstack.org/tarballs/gerrit-2.3-7-g1f029ab.war',
+    script_user => 'launchpadsync',
+    script_key_file => '/home/gerrit2/.ssh/launchpadsync_rsa',
+    script_site => 'openstack'
   }
 }
 
@@ -171,6 +174,9 @@ node "gerrit-dev.openstack.org", "review-dev.openstack.org" {
                          } ],
     logo => 'openstack.png',
     war => 'http://ci.openstack.org/tarballs/gerrit-2.3-7-g1f029ab.war',
+    script_user => 'update',
+    script_key_file => '/home/gerrit2/.ssh/id_rsa',
+    script_site => 'openstack'
   }
 }
 

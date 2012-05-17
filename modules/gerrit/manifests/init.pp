@@ -63,7 +63,10 @@ class gerrit($virtual_hostname='',
                          link => 'https://blueprints.launchpad.net/openstack/?searchtext=$2' },
                   ],
       $logo,
-      $war
+      $war,
+      $script_user,
+      $script_key_file,
+      $script_site
   ) {
 
   # Set this to true to disable cron jobs and replication, which can
@@ -114,7 +117,7 @@ class gerrit($virtual_hostname='',
     cron { "gerritsyncusers":
       user => gerrit2,
       minute => "*/15",
-      command => 'sleep $((RANDOM\%60+60)) && python /usr/local/gerrit/scripts/update_gerrit_users.py',
+      command => "sleep $((RANDOM\%60+60)) && python /usr/local/gerrit/scripts/update_gerrit_users.py ${script_user} ${script_key_file} ${script_site}",
       require => File['/usr/local/gerrit/scripts'],
     }
 
@@ -129,7 +132,7 @@ class gerrit($virtual_hostname='',
       user => gerrit2,
       hour => 6,
       minute => 3,
-      command => 'python /usr/local/gerrit/scripts/expire_old_reviews.py',
+      command => "python /usr/local/gerrit/scripts/expire_old_reviews.py ${script_user} ${script_key_file}",
       require => File['/usr/local/gerrit/scripts'],
     }
 
