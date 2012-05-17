@@ -34,14 +34,6 @@ class builders(object):
         shell = XML.SubElement(xml_parent, 'hudson.tasks.Shell')
         XML.SubElement(shell, 'command').text = script
 
-    def _copy_bundle(self, xml_parent):
-        copy = XML.SubElement(xml_parent, 'hudson.plugins.copyartifact.CopyArtifact')
-        XML.SubElement(copy, 'projectName').text = '$PROJECT-venv'
-        XML.SubElement(copy, 'filter')
-        XML.SubElement(copy, 'target')
-        XML.SubElement(copy, 'selector', {'class':'hudson.plugins.copyartifact.StatusBuildSelector'})
-        self._add_script(xml_parent, '/usr/local/jenkins/slave_scripts/copy-bundle.sh')
-
     def _coverage(self, xml_parent):
         self._add_script(xml_parent, '/usr/local/jenkins/slave_scripts/run-cover.sh')
 
@@ -62,9 +54,6 @@ class builders(object):
 
     def _tarball(self, xml_parent):
         self._add_script(xml_parent, '/usr/local/jenkins/slave_scripts/create-tarball.sh')
-
-    def _venv(self, xml_parent):
-        self._add_script(xml_parent, '/usr/local/jenkins/slave_scripts/build-bundle.sh')
 
     def _ppa(self, xml_parent):
         self._add_script(xml_parent, 'rm -rf build dist.zip\n\
