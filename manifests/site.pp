@@ -231,11 +231,11 @@ node "lists.openstack.org" {
                  'andrew@linuxjedi.co.uk',
                  'devananda.vdv@gmail.com',
   		 'duncan@dreamhost.com'],
-    mailman_domains => ['lists.openstack.org'],
+    mailman_domains => ['stagelists.openstack.org'],
   }
 
   class { 'mailman':
-    mailman_host => 'lists.openstack.org'
+    mailman_host => 'stagelists.openstack.org'
   }
 
   realize (
