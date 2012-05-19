@@ -20,6 +20,20 @@ class jenkins_jobs($site, $projects) {
 
   process_projects { $projects:
     site => $site,
-    require => File['/usr/local/jenkins_jobs/jenkins_jobs.ini']
+    require => [
+      File['/usr/local/jenkins_jobs/jenkins_jobs.ini'],
+      Package['python-jenkins']
+      ]
   }
+
+  package { "python-pip":
+    ensure => present
+  }
+
+  package { "python-jenkins":
+    ensure => latest,
+    provider => pip,
+    require => Package[python-pip],
+  }
+
 }
