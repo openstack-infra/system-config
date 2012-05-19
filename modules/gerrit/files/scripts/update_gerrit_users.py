@@ -23,6 +23,11 @@ import subprocess
 
 from datetime import datetime
 
+# There is a bug (810019) somewhere deep which causes pkg_resources
+# to bitch if it's imported after argparse. launchpadlib imports it,
+# so if we head it off at the pass, we can skip cronspam
+import pkg_resources
+
 import StringIO
 import ConfigParser
 import argparse
