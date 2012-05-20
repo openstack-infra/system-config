@@ -1,0 +1,7 @@
+project:
+  template: 'python_jobs'
+
+values:
+  name: 'swift'
+  site: 'openstack'
+  disabled: 'false'

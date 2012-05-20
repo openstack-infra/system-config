@@ -1,0 +1,7 @@
+project:
+  template: 'python_jobs'
+
+values:
+  name: 'glance'
+  site: 'openstack'
+  disabled: 'false'
