@@ -197,12 +197,18 @@ node "jenkins.openstack.org" {
     site => "openstack",
     projects => [
       'cinder',
+      'glance',
+      'keystone',
+      'nova',
+      'quantum',
+      'swift',
       'python-cinderclient',
       'python-glanceclient',
       'python-keystoneclient',
       'python-novaclient',
       'python-openstackclient',
-      'python-quantumclient'
+      'python-quantumclient',
+      'python-swiftclient',
     ]
   }
 }
