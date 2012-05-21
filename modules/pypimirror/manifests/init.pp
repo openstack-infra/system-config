@@ -4,7 +4,7 @@ class pypimirror ( $base_url,
                    $fetch_since_days = 1,
                    $package_matches = ["*"],
                    $external_links = true,
-                   $follow_external_index_pages = false )
+                   $follow_external_index_pages = true )
 {
 
   if $external_links == true {
