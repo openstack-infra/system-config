@@ -1,5 +1,7 @@
 import "openstack"
 
+$jenkins_ssh_key = 'ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAtioTW2wh3mBRuj+R0Jyb/mLt5sjJ8dEvYyA8zfur1dnqEt5uQNLacW4fHBDFWJoLHfhdfbvray5wWMAcIuGEiAA2WEH23YzgIbyArCSI+z7gB3SET8zgff25ukXlN+1mBSrKWxIza+tB3NU62WbtO6hmelwvSkZ3d7SDfHxrc4zEpmHDuMhxALl8e1idqYzNA+1EhZpbcaf720mX+KD3oszmY2lqD1OkKMquRSD0USXPGlH3HK11MTeCArKRHMgTdIlVeqvYH0v0Wd1w/8mbXgHxfGzMYS1Ej0fzzJ0PC5z5rOqsMqY1X2aC1KlHIFLAeSf4Cx0JNlSpYSrlZ/RoiQ== hudson@hudson'
+
 class openstack_cron {
   include logrotate
   cron { "updatepuppet":
@@ -22,7 +24,7 @@ class openstack_jenkins_slave {
     iptables_public_tcp_ports => []
   }
   class { 'jenkins_slave':
-    ssh_key => 'ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAtioTW2wh3mBRuj+R0Jyb/mLt5sjJ8dEvYyA8zfur1dnqEt5uQNLacW4fHBDFWJoLHfhdfbvray5wWMAcIuGEiAA2WEH23YzgIbyArCSI+z7gB3SET8zgff25ukXlN+1mBSrKWxIza+tB3NU62WbtO6hmelwvSkZ3d7SDfHxrc4zEpmHDuMhxALl8e1idqYzNA+1EhZpbcaf720mX+KD3oszmY2lqD1OkKMquRSD0USXPGlH3HK11MTeCArKRHMgTdIlVeqvYH0v0Wd1w/8mbXgHxfGzMYS1Ej0fzzJ0PC5z5rOqsMqY1X2aC1KlHIFLAeSf4Cx0JNlSpYSrlZ/RoiQ== hudson@hudson'
+    ssh_key => $jenkins_ssh_key
   }
 }
 
@@ -326,12 +328,11 @@ node /^.*\.template\.openstack\.org$/ {
   class { 'openstack_template':
     iptables_public_tcp_ports => []
   }
-  # This sets up a user with jenkins ssh key and adds it to the sudo group.
-  # Don't do that on regular jenkins slaves, only on lowest-privilege test
-  # hosts, such as the devstack hosts.
-  realize(
-     User::Virtual::Localuser["jenkins"],
-  )
+  class { 'jenkins_slave':
+    ssh_key => $jenkins_ssh_key,
+    sudo => true,
+    bare => true
+  }
 }
 
 #

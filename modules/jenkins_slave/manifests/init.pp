@@ -1,7 +1,8 @@
-class jenkins_slave($ssh_key) {
+class jenkins_slave($ssh_key, $sudo = false, $bare = false) {
 
     jenkinsuser { "jenkins":
       ensure => present,
+      sudo => $sudo,
       ssh_key => "${ssh_key}"
     }
 
@@ -10,25 +11,28 @@ class jenkins_slave($ssh_key) {
       require => [ Package[git], File[jenkinshome] ],
     }
 
-    devstackrepo { "devstack":
-      ensure => present,
-      require => [ Package[git], File[jenkinshome] ],
-    }
-
     apt::ppa { "ppa:openstack-ci/build-depends":
       ensure => absent
     }
 
-    $packages = ["apache2",
-                 "asciidoc", # for building gerrit
+    # Packages that all jenkins slaves need
+    $common_packages = [
+	         "default-jdk", # jdk for building java jobs
+                 "build-essential",
                  "autoconf",
                  "automake",
-                 "build-essential",
                  "ccache",
+                 "devscripts",
+                 "python-pip",
+      		 ]
+
+    # Packages that most jenkins slaves (eg, unit test runners) need
+    $standard_packages = [
+    		 "apache2",
+                 "asciidoc", # for building gerrit
                  "cdbs",
                  "curl",
                  "debootstrap",
-                 "devscripts",
                  "dnsmasq-base",
                  "ebtables",
                  "gawk",
@@ -49,8 +53,7 @@ class jenkins_slave($ssh_key) {
                  "lxc",
                  "maven2",
 		 "mercurial", # needed by pip bundle
-                 "mysql-server",
-                 "default-jdk", # jdk for building java jobs
+		 "mysql-server",
 		 "pandoc", #for docs, markdown->docbook, bug 924507
                  "parted",
                  "pep8",
@@ -60,7 +63,6 @@ class jenkins_slave($ssh_key) {
                  "python-cheetah",
                  "python-libvirt",
                  "python-libxml2",
-                 "python-pip",
                  "python-sphinx",
                  "python-unittest2",
                  "python-vm-builder",
@@ -72,15 +74,16 @@ class jenkins_slave($ssh_key) {
                  "unzip",
                  "vlan",
                  "wget"]
+
+    if ($bare == false) {
+        $packages = [$common_packages, $standard_packages]
+    } else {
+        $packages = $common_packages
+    }
+
     package { $packages:
       ensure => "latest",
       require => Apt::Ppa["ppa:openstack-ci/build-depends"],
-    }
-
-    package { "apache-libcloud":
-      ensure => latest,
-      provider => pip,
-      require => Package[python-pip]
     }
 
     package { "git-review":
@@ -106,36 +109,6 @@ class jenkins_slave($ssh_key) {
       source => [
          "puppet:///modules/jenkins_slave/rubygems.sh",
        ],
-    }
-
-    cron { "tmpreaper":
-      user => jenkins,
-      ensure => 'absent',
-    }
-
-   exec { "jenins-slave-mysql":
-     creates => "/var/lib/mysql/openstack_citest/",
-     command => "/usr/bin/mysql --defaults-file=/etc/mysql/debian.cnf -e \"\
-       CREATE USER 'openstack_citest'@'localhost' IDENTIFIED BY 'openstack_citest';\
-       CREATE DATABASE openstack_citest;\
-       GRANT ALL ON openstack_citest.* TO 'openstack_citest'@'localhost';\
-       FLUSH PRIVILEGES;\"",
-     require => [
-                 File["/etc/mysql/my.cnf"],  # For myisam default tables
-                 Package["mysql-server"],
-                 Service["mysql"]
-                 ]
-  }
-
-   file { 'jenkinslogs':
-      name => '/var/log/jenkins/tmpreaper.log*',
-      ensure => 'absent',
-    }
-
-    file { 'jenkinslogdir':
-      name => '/var/log/jenkins',
-      ensure => 'absent',
-      force => true,
     }
 
     file { 'ccachegcc':
@@ -166,22 +139,38 @@ class jenkins_slave($ssh_key) {
       require => Package['ccache'],
     }
 
-    file { "/etc/mysql/my.cnf":
-      source => 'puppet:///modules/jenkins_slave/my.cnf',
-      owner => 'root',
-      group => 'root',
-      ensure => 'present',
-      replace => 'true',
-      mode => 444,
-      require => Package["mysql-server"],
-    }
 
-    service { "mysql":
-      name => "mysql",
-      ensure    => running,
-      enable    => true,
-      subscribe => File["/etc/mysql/my.cnf"],
-      require => [File["/etc/mysql/my.cnf"], Package["mysql-server"]]
-    }
+    if ($bare == false) {
+         exec { "jenins-slave-mysql":
+          creates => "/var/lib/mysql/openstack_citest/",
+       	  command => "/usr/bin/mysql --defaults-file=/etc/mysql/debian.cnf -e \"\
+       	    CREATE USER 'openstack_citest'@'localhost' IDENTIFIED BY 'openstack_citest';\
+            CREATE DATABASE openstack_citest;\
+            GRANT ALL ON openstack_citest.* TO 'openstack_citest'@'localhost';\
+            FLUSH PRIVILEGES;\"",
+          require => [
+            File["/etc/mysql/my.cnf"],  # For myisam default tables
+            Package["mysql-server"],
+            Service["mysql"]
+          ]
+        }
 
+        file { "/etc/mysql/my.cnf":
+          source => 'puppet:///modules/jenkins_slave/my.cnf',
+          owner => 'root',
+          group => 'root',
+          ensure => 'present',
+          replace => 'true',
+          mode => 444,
+          require => Package["mysql-server"],
+        }
+
+        service { "mysql":
+          name => "mysql",
+          ensure    => running,
+          enable    => true,
+          subscribe => File["/etc/mysql/my.cnf"],
+          require => [File["/etc/mysql/my.cnf"], Package["mysql-server"]]
+        }
+    }
 }
