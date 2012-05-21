@@ -1,4 +1,8 @@
 class jenkins_jobs($site, $projects) {
+  package { 'python-yaml':
+    ensure => 'present'
+  }
+
   file { '/usr/local/jenkins_jobs':
     owner => 'root',
     group => 'root',
@@ -6,6 +10,7 @@ class jenkins_jobs($site, $projects) {
     ensure => 'directory',
     recurse => true,
     source => ['puppet:///modules/jenkins_jobs/']
+    require => Package['python-yaml']
   }
 
   file { '/usr/local/jenkins_jobs/jenkins_jobs.ini':
