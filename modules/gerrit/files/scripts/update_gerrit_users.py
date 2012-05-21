@@ -17,6 +17,7 @@
 
 import os
 import sys
+import fcntl
 import uuid
 import os
 import subprocess
@@ -40,6 +41,14 @@ from openid.consumer import consumer
 from openid.cryptutil import randomString
 
 DEBUG = False
+
+pid_file = '/tmp/update_gerrit_users.pid'
+fp = open(pid_file, 'w')
+try:
+    fcntl.lockf(fp, fcntl.LOCK_EX | fcntl.LOCK_NB)
+except IOError:
+    # another instance is running
+    sys.exit(0)
 
 parser = argparse.ArgumentParser()
 parser.add_argument('user', help='The gerrit admin user')
@@ -249,7 +258,7 @@ if DEBUG:
       print "\t", new_groups
 
 for (username, user_details) in users.items():
-
+  member = launchpad.people[username]
   # accounts
   account_id = None
   if cur.execute("""select account_id from account_external_ids where
@@ -258,9 +267,7 @@ for (username, user_details) in users.items():
     # We have this bad boy - all we need to do is update his group membership
 
   else:
-
     # We need details
-    member = launchpad.people[username]
     if not member.is_team:
 
       openid_consumer = consumer.Consumer(dict(id=randomString(16, '0123456789abcdef')), None)
@@ -277,9 +284,6 @@ for (username, user_details) in users.items():
                           and account_id = %s""",
                      ('username:%s' % username, account_id))
       else:
-        user_details['ssh_keys'] = ["%s %s %s" % (get_type(key.keytype), key.keytext, key.comment) for key in member.sshkeys]
-
-
         email = None
         try:
           email = member.preferred_email_address.email
@@ -294,25 +298,6 @@ for (username, user_details) in users.items():
 
         cur.execute("""insert into accounts (account_id, full_name, preferred_email) values
         (%s, %s, %s)""", (account_id, username, user_details['email']))
-
-        # account_ssh_keys
-        for key in user_details['ssh_keys']:
-
-          cur.execute("""select ssh_public_key from account_ssh_keys where
-            account_id = %s""", account_id)
-          db_keys = [r[0].strip() for r in cur.fetchall()]
-          if key.strip() not in db_keys:
-
-            cur.execute("""select max(seq)+1 from account_ssh_keys
-                                  where account_id = %s""", account_id)
-            seq = cur.fetchall()[0][0]
-            if seq is None:
-              seq = 1
-            cur.execute("""insert into account_ssh_keys
-                            (ssh_public_key, valid, account_id, seq)
-                            values
-                            (%s, 'Y', %s, %s)""",
-                            (key.strip(), account_id, seq))
 
         # account_external_ids
         ## external_id
@@ -341,6 +326,27 @@ for (username, user_details) in users.items():
                         user_details['email']))
 
   if account_id is not None:
+    # account_ssh_keys
+    user_details['ssh_keys'] = ["%s %s %s" % (get_type(key.keytype), key.keytext, key.comment) for key in member.sshkeys]
+
+    for key in user_details['ssh_keys']:
+
+      cur.execute("""select ssh_public_key from account_ssh_keys where
+        account_id = %s""", account_id)
+      db_keys = [r[0].strip() for r in cur.fetchall()]
+      if key.strip() not in db_keys:
+
+        cur.execute("""select max(seq)+1 from account_ssh_keys
+                              where account_id = %s""", account_id)
+        seq = cur.fetchall()[0][0]
+        if seq is None:
+          seq = 1
+        cur.execute("""insert into account_ssh_keys
+                        (ssh_public_key, valid, account_id, seq)
+                        values
+                        (%s, 'Y', %s, %s)""",
+                        (key.strip(), account_id, seq))
+
     # account_group_members
     # user_details['add_groups'] is a list of group names for which the
     # user is either "Approved" or "Administrator"
