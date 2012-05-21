@@ -209,7 +209,7 @@ node "jenkins-dev.openstack.org" {
     iptables_public_tcp_ports => [80, 443, 4155]
   } 
   class { 'jenkins_master':
-    site => 'openstack',
+    site => 'jenkins-dev.openstack.org',
     serveradmin => 'webmaster@openstack.org',
     logo => 'openstack.png',
     ssl_cert_file => '/etc/ssl/certs/ssl-cert-snakeoil.pem',
