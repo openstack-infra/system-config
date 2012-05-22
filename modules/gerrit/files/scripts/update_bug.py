@@ -74,12 +74,18 @@ def set_fix_committed(bugtask):
     bugtask.lp_save()
 
 
+def set_fix_released(bugtask):
+    """Set bug fix released"""
+
+    bugtask.status = "Fix Released"
+    bugtask.lp_save()
+
+
 def release_fixcommitted(bugtask):
     """Set bug FixReleased if it was FixCommitted"""
 
     if bugtask.status == u'Fix Committed':
-        bugtask.status = "Fix Released"
-        bugtask.lp_save()
+        set_fix_released(bugtask)
 
 
 def tag_in_branchname(bugtask, branch):
@@ -109,8 +115,23 @@ def git2lp(full_project_name):
         'openstack/python-quantumclient': 'quantum',
         'openstack/openstack-ci-puppet': 'openstack-ci',
         'openstack-ci/devstack-gate': 'openstack-ci',
+        'openstack-ci/lodgeit': 'openstack-ci',
+        'openstack-ci/meetbot': 'openstack-ci',
         }
     return project_map.get(full_project_name, short_project(full_project_name))
+
+
+def is_direct_release(full_project_name):
+    """Test against a list of projects who directly release changes."""
+    return full_project name in [
+        'openstack-ci/devstack-gate',
+        'openstack-ci/lodgeit',
+        'openstack-ci/meetbot',
+        'openstack-dev/devstack',
+        'openstack/openstack-ci',
+        'openstack/openstack-ci-puppet',
+        'openstack/openstack-manuals',
+        ]
 
 
 def process_bugtask(launchpad, bugtask, git_log, args):
@@ -118,7 +139,10 @@ def process_bugtask(launchpad, bugtask, git_log, args):
 
     if args.hook == "change-merged":
         if args.branch == 'master':
-            set_fix_committed(bugtask)
+            if is_direct_release(args.project):
+                set_fix_released(bugtask)
+            else:
+                set_fix_committed(bugtask)
         elif args.branch == 'milestone-proposed':
             release_fixcommitted(bugtask)
         else:
