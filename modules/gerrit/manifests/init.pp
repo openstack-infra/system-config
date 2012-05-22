@@ -184,7 +184,6 @@ class gerrit($virtual_hostname='',
       hasrestart => true,
       require => File['/etc/init.d/gerritbot'],
       subscribe => [ File["/usr/local/gerrit/gerritbot"] ],
-      refreshonly => true,
     }
 
   } # testmode==false
