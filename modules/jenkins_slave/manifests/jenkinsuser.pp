@@ -1,7 +1,13 @@
-define jenkinsuser($ensure = present, $ssh_key) {
+define jenkinsuser($ensure = present, $sudo = false, $ssh_key) {
 
   group { 'jenkins':
     ensure => 'present'
+  }
+
+  if ($sudo == true) {
+    $groups = ['sudo', 'admin']
+  } else {
+    $groups = []
   }
 
   user { 'jenkins':
@@ -11,6 +17,7 @@ define jenkinsuser($ensure = present, $ssh_key) {
     gid => 'jenkins',
     shell => '/bin/bash',
     membership => 'minimum',
+    groups => $groups,
     require => Group['jenkins']
   }
 
