@@ -43,11 +43,7 @@ define jenkinsuser($ensure = present, $ssh_key) {
 
   file { 'jenkinspydistutilscfg':
     name => '/home/jenkins/.pydistutils.cfg',
-    owner => 'jenkins',
-    group => 'jenkins',
-    mode => 640,
-    ensure => 'present',
-    source => "puppet:///modules/jenkins_slave/pydistutils.cfg",
+    ensure => 'absent',
     require => File['jenkinshome'],
   }
    
