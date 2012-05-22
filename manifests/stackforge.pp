@@ -50,7 +50,7 @@ node "review.stackforge.org" {
                          name => 'stackforge/ceilometer',
                          close_pull => 'true'
                          }, {
-                         name => 'stackforge/heat',
+                         name => 'heat-api/heat',
                          close_pull => 'true'
                          } ],
     logo => 'stackforge.png',
