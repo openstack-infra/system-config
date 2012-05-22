@@ -31,10 +31,6 @@ class jenkins_jobs($site, $projects) {
       ]
   }
 
-  package { "python-pip":
-    ensure => present
-  }
-
   package { "python-jenkins":
     ensure => latest,
     provider => pip,
