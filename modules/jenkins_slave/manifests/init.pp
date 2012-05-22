@@ -83,7 +83,6 @@ class jenkins_slave($ssh_key, $sudo = false, $bare = false) {
 
     package { $packages:
       ensure => "latest",
-      require => Apt::Ppa["ppa:openstack-ci/build-depends"],
     }
 
     package { "git-review":
