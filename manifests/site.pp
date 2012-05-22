@@ -4,6 +4,7 @@ $jenkins_ssh_key = 'ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAtioTW2wh3mBRuj+R0Jyb/mLt
 
 class openstack_cron {
   include logrotate
+  include puppetboot
   cron { "updatepuppet":
     user => root,
     minute => "*/15",
