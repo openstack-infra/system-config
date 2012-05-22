@@ -55,7 +55,8 @@ CONFDIR = /etc/exim4
 # +local_domains, +relay_to_domains, and +relay_from_hosts, respectively. They
 # are all colon-separated lists:
 
-domainlist local_domains = @
+domainlist local_domains = @<% if mailman_domains.length > 0 -%>:<%= mailman_domains.join(":") %><% end -%>
+
 domainlist relay_to_domains =
 hostlist   relay_from_hosts = 127.0.0.1
 
