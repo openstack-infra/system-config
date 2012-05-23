@@ -123,7 +123,7 @@ def git2lp(full_project_name):
 
 def is_direct_release(full_project_name):
     """Test against a list of projects who directly release changes."""
-    return full_project name in [
+    return full_project_name in [
         'openstack-ci/devstack-gate',
         'openstack-ci/lodgeit',
         'openstack-ci/meetbot',
