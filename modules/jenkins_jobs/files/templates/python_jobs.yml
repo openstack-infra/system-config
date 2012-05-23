@@ -180,6 +180,9 @@ trigger:
 builders:
   - docs
 
+publisher:
+  siteName: '@SCPSITE@'
+
 scm:
   scm: 'true'
 
@@ -286,6 +289,9 @@ trigger:
 builders:
   - gerrit_git_prep
   - tarball
+
+publisher:
+  siteName: '@SCPSITE@'
 
 scm:
   scm: 'true'

@@ -5,4 +5,4 @@ values:
   name: 'reddwarf'
   site: 'stackforge'
   disabled: 'true'
-
+  scpsite: 'reddwarf.stackforge.org'
