@@ -17,6 +17,7 @@
 # To use you can optionally add the following into your YAML:
 # publisher:
 #   uploadProject: 'glance'
+#   siteName: 'nova.openstack.org'
 #
 # If you do not add this it will default to the project specified in the YAML
 
@@ -28,7 +29,7 @@ class publisher_tarball(object):
 
     def gen_xml(self, xml_parent):
         if self.data.has_key('publisher') and self.data['publisher'].has_key('upload_project'):
-            project = self.data['publisher']['upload_project']
+            project = self.data['publisher']['uploadProject']
         else:
             project = self.data['main']['project']
         publishers = XML.SubElement(xml_parent, 'publishers')
@@ -36,7 +37,7 @@ class publisher_tarball(object):
         XML.SubElement(archiver, 'artifacts').text = 'dist/*.tar.gz'
         XML.SubElement(archiver, 'latestOnly').text = 'false'
         scp = XML.SubElement(publishers, 'be.certipost.hudson.plugin.SCPRepositoryPublisher')
-        XML.SubElement(scp, 'siteName').text = '{proj}.{site}.org'.format(proj=project, site=self.data['main']['site'])
+        XML.SubElement(scp, 'siteName').text = self.data['publisher']['uploadProject']
         entries = XML.SubElement(scp, 'entries')
         entry = XML.SubElement(entries, 'be.certipost.hudson.plugin.Entry')
         XML.SubElement(entry, 'filePath').text = 'tarballs/{proj}/'.format(proj=project)

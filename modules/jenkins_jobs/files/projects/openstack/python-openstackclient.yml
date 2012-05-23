@@ -5,3 +5,4 @@ values:
   name: 'python-openstackclient'
   site: 'openstack'
   disabled: 'false'
+  scpsite: 'nova.openstack.org'
