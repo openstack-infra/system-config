@@ -145,8 +145,18 @@ def process_bugtask(launchpad, bugtask, git_log, args):
                 set_fix_committed(bugtask)
         elif args.branch == 'milestone-proposed':
             release_fixcommitted(bugtask)
-        else:
-            tag_in_branchname(bugtask, args.branch)
+        elif args.branch.startswith('stable/'):
+            series = args.branch[7:]
+            # Look for a related task matching the series
+            for reltask in bugtask.related_tasks:
+                if reltask.bug_target_name.endswith("/" + series):
+                    # Use fixcommitted if there is any
+                    set_fix_committed(reltask)
+                    break
+            else:
+                # Use tagging if there isn't any
+                tag_in_branchname(bugtask, args.branch)
+
         add_change_merged_message(bugtask, args.change_url, args.project,
                                   args.commit, args.submitter, args.branch,
                                   git_log)
@@ -154,6 +164,14 @@ def process_bugtask(launchpad, bugtask, git_log, args):
     if args.hook == "patchset-created":
         if args.branch == 'master':
             set_in_progress(bugtask, launchpad, args.uploader, args.change_url)
+        elif args.branch.startswith('stable/'):
+            series = args.branch[7:]
+            for reltask in bugtask.related_tasks:
+                if reltask.bug_target_name.endswith("/" + series):
+                    set_in_progress(reltask, launchpad,
+                                    args.uploader, args.change_url)
+                    break
+
         if args.patchset == '1':
             add_change_proposed_message(bugtask, args.change_url,
                                         args.project, args.branch)
