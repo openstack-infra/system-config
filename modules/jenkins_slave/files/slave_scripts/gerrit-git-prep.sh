@@ -1,9 +1,19 @@
-#!/bin/bash -xe
+#!/bin/bash -e
+
+# Needed environment variables:
+# GERRIT_PROJECT
+# GERRIT_BRANCH
+# GERRIT_REFSPEC or GERRIT_NEWREV
+#
+# Optional params:
+# DEPENDENT_CHANGES="gtest-org/test:master:refs/changes/20/420/1^gtest-org/test:master:refs/changes/21/421/1"
+# DEPENDENT_CHANGES="gtest-org/test:master:refs/changes/21/421/1"
+# DEPENDENT_CHANGES=""
 
 SITE=$1
 if [ -z "$SITE" ]
 then
-  echo "The site name (eg 'openstack') must be the first argument."
+  echo "The site name (eg 'review.openstack.org') must be the first argument."
   exit 1
 fi
 
@@ -13,9 +23,44 @@ then
     exit 1
 fi
 
+function merge_change {
+    PROJECT=$1
+    REFSPEC=$2
+    
+    git fetch https://$SITE/p/$PROJECT $REFSPEC
+    git merge FETCH_HEAD
+}
+
+function merge_dependent_changes {
+    set +x
+    OIFS=$IFS
+    IFS='^'
+    for change in $DEPENDENT_CHANGES
+    do
+	OIFS2=$IFS
+	IFS=':'
+	change_array=($change)
+	IFS=$OIFS2
+   
+	CHANGE_PROJECT=${change_array[0]}
+	CHANGE_BRANCH=${change_array[1]}
+	CHANGE_REFSPEC=${change_array[2]}
+
+	if [ "$CHANGE_PROJECT" = "$GERRIT_PROJECT" ] &&
+	   [ "$CHANGE_BRANCH" = "$GERRIT_BRANCH" ]; then
+	    set -x
+	    merge_change $CHANGE_PROJECT $CHANGE_REFSPEC
+	    set +x
+	fi
+    done
+    IFS=$OIFS
+    set -x
+}
+
+set -x
 if [[ ! -e .git ]]
 then
-    git clone https://review.$SITE.org/p/$GERRIT_PROJECT .
+    git clone https://$SITE/p/$GERRIT_PROJECT .
 fi
 git remote update || git remote update # attempt to work around bug #925790
 git reset --hard
@@ -26,8 +71,9 @@ then
     git checkout $GERRIT_BRANCH
     git reset --hard remotes/origin/$GERRIT_BRANCH
     git clean -x -f -d -q
-    git fetch https://review.$SITE.org/p/$GERRIT_PROJECT $GERRIT_REFSPEC
-    git merge FETCH_HEAD
+
+    merge_dependent_changes
+    merge_change $GERRIT_PROJECT $GERRIT_REFSPEC
 else
     git checkout $GERRIT_NEWREV
     git reset --hard $GERRIT_NEWREV
