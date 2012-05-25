@@ -16,14 +16,8 @@
 # Add launchpad ids listed in the wiki CLA page to the CLA group in LP.
 
 import os
-import sys
-import uuid
-import os
 import urllib
 import re
-
-import StringIO
-import ConfigParser
 
 from launchpadlib.launchpad import Launchpad
 from launchpadlib.uris import LPNET_SERVICE_ROOT

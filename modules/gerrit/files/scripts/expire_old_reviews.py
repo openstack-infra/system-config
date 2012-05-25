@@ -18,7 +18,6 @@
 # 1. if open and no activity in 2 weeks, expire
 # 2. if negative comment and no activity in 1 week, expire
 
-import os
 import paramiko
 import json
 import logging
