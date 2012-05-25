@@ -73,7 +73,8 @@ class jenkins_slave($ssh_key, $sudo = false, $bare = false) {
                  "swig",
                  "unzip",
                  "vlan",
-                 "wget"]
+                 "wget",
+                 "pyflakes"]
 
     if ($bare == false) {
         $packages = [$common_packages, $standard_packages]
