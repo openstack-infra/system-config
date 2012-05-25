@@ -29,7 +29,6 @@
 
 import github2.client
 import os
-import StringIO
 import ConfigParser
 import logging
 import re

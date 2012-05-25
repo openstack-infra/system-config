@@ -20,16 +20,13 @@
 # remote = https://gerrit.googlesource.com/gerrit
 
 import ConfigParser
-import StringIO
 import logging
 import os
 import re
 import subprocess
-
+import shlex
 
 def run_command(cmd, status=False, env={}):
-    if VERBOSE:
-        print datetime.datetime.now(), "Running:", cmd
     cmd_list = shlex.split(str(cmd))
     newenv = os.environ
     newenv.update(env)

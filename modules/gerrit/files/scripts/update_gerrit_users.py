@@ -19,7 +19,6 @@ import os
 import sys
 import fcntl
 import uuid
-import os
 import subprocess
 
 from datetime import datetime
@@ -41,6 +40,9 @@ from openid.consumer import consumer
 from openid.cryptutil import randomString
 
 DEBUG = False
+
+# suppress pyflakes
+pkg_resources.get_supported_platform()
 
 pid_file = '/tmp/update_gerrit_users.pid'
 fp = open(pid_file, 'w')

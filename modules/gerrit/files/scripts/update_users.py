@@ -19,6 +19,7 @@
 # 2. split out the two classes into separate files to be used as a library
 
 import os
+import sys
 import ConfigParser
 import StringIO
 import paramiko
@@ -301,7 +302,7 @@ class GerritAction(object):
       user_ssh_keys= ["%s %s %s" % ('ssh-%s' % key.keytype.lower(), key.keytext, key.comment) for key in user_data.sshkeys]
       user_email= None
       try:
-        email = user_data.preferred_email_address.email
+        user_email = user_data.preferred_email_address.email
       except ValueError:
         pass
       query= "insert into account_id (s) values (NULL)"
