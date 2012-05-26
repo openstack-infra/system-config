@@ -45,9 +45,9 @@ def run_command_status(cmd, env={}):
 logging.basicConfig(level=logging.ERROR)
 
 REPO_ROOT = os.environ.get('REPO_ROOT',
-                           '/home/gerrit2/git')
+                           '/home/gerrit2/review_site/git')
 REMOTES_CONFIG = os.environ.get('REMOTES_CONFIG',
-                               '/home/gerrit2/remote.config')
+                               '/home/gerrit2/remotes.config')
 
 PROJECT_RE = re.compile(r'^project\s+"(.*)"$')
 
