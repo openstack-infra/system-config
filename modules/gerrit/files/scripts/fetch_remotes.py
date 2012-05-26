@@ -47,7 +47,7 @@ logging.basicConfig(level=logging.ERROR)
 REPO_ROOT = os.environ.get('REPO_ROOT',
                            '/home/gerrit2/git')
 REMOTES_CONFIG = os.environ.get('REMOTES_CONFIG',
-                               '/home/gerrit2/remote.config')
+                               '/home/gerrit2/remotes.config')
 
 PROJECT_RE = re.compile(r'^project\s+"(.*)"$')
 
