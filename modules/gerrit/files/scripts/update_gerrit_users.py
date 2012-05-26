@@ -335,7 +335,7 @@ for (username, user_details) in users.items():
 
       cur.execute("""select ssh_public_key from account_ssh_keys where
         account_id = %s""", account_id)
-      db_keys = [r[0].strip() for r in cur.fetchall()]
+      db_keys = [r[0].strip().decode('utf-8') for r in cur.fetchall()]
       if key.strip() not in db_keys:
 
         cur.execute("""select max(seq)+1 from account_ssh_keys
