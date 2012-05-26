@@ -200,6 +200,7 @@ node "jenkins.openstack.org" {
     site => "openstack",
     projects => [
       'cinder',
+      'gerrit',
       'glance',
       'keystone',
       'nova',
