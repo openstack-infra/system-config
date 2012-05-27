@@ -202,17 +202,20 @@ node "jenkins.openstack.org" {
       'cinder',
       'gerrit',
       'glance',
+      'horizon',
       'keystone',
+      'melange',
       'nova',
-      'quantum',
-      'swift',
       'python-cinderclient',
       'python-glanceclient',
       'python-keystoneclient',
+      'python-melangeclient',
       'python-novaclient',
       'python-openstackclient',
       'python-quantumclient',
       'python-swiftclient',
+      'quantum',
+      'swift',
     ]
   }
 }
