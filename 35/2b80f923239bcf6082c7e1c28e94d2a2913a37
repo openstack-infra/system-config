@@ -1,0 +1,9 @@
+Change-Id: I352b80f923239bcf6082c7e1c28e94d2a2913a37
+Approved+1: Monty Taylor <mordred@inaugust.com>
+Code-Review+2: Monty Taylor <mordred@inaugust.com>
+Verified+2: Jenkins
+Submitted-by: Jenkins
+Submitted-at: Sun, 27 May 2012 16:17:34 +0000
+Reviewed-on: https://review.openstack.org/7835
+Project: openstack/openstack-ci-puppet
+Branch: refs/heads/master
