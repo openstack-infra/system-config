@@ -49,18 +49,39 @@ The bare minimum YAML needs to look like this:
 
    main:
      name: 'job-name'
-     site: 'stackforge'
+     review_site: 'review.stackforge.org'
+     github_org: 'stackforge'
      project: 'project'
      authenticatedBuild: 'false'
      disabled: 'false'
 
-This example starts with ``---``, this signifies the start of a job, there can
-be multiple jobs per project file.
-The ``modules`` entry is an array of modules that should be loaded for this job.
-Modules are located in the ``modules/jenkins_jobs/files/modules/`` directory
-and are python scripts to generate the required XML.  Each module has a comment
-near the top showing the required YAML to support that module.  The follow
-modules are required to generate a correct XML that Jenkins will support:
+or for a templated project:
+
+.. code-block:: yaml
+   :linenos:
+
+   project:
+     template: 'python_jobs'
+
+   values:
+     name: 'cinder'
+     disabled: 'false'
+     github_org: 'openstack'
+     review_site: 'review.openstack.org'
+     publisher_site: 'nova.openstack.org'
+
+
+The first example starts with ``---``, this signifies the start of a job, there
+can be multiple jobs per project file.  The file does not need to start with the
+``---`` but jobs do need to be separated by it.  Each YAML file can contain any
+combination of templated or normal jobs.
+
+In the first example the ``modules`` entry is an array of modules that should be
+loaded for this job.  Modules are located in the
+``modules/jenkins_jobs/files/modules/`` directory and are python scripts to
+generate the required XML.  Each module has a comment near the top showing the
+required YAML to support that module.  The follow modules are required to
+generate a correct XML that Jenkins will support:
 
 * properties (supplies the <properties> XML data)
 * scm (supplies the <scm> XML data, required even is scm is not used
@@ -72,14 +93,44 @@ Each module also requires a ``main`` section which has the main data for the
 modules, inside this there is:
 
 * name - the name of the job
-* site - openstack or stackforge
+* review_site - review.openstack.org or review.stackforge.org
+* github_org - the parent of the github branch for the project (typically `openstack` or `stackforge`
 * project - the name of the project
 * authenticatedBuild - whether or not you need to be authenticated to hit the
   build button
 * disabled - whether or not this job should be disabled
 
-Testing for Job Changes
------------------------
+In the templated example there is the ``project`` tag to specify that this is
+a templated project.  The ``template`` value specified a template file found in
+the ``modules/jenkins_jobs/files/templates`` directory.  The template will look
+like a regular set of jobs but contain values in caps surrounded by '@' symbols.
+The template process takes the parameters specified in the ``values`` section
+and replaces the values surrounded by the '@' symbol.
+
+As an example in the template:
+
+.. code-block:: yaml
+
+   main:
+     name: 'gate-@NAME@-pep8'
+
+Using the above example of a templated job the ``@NAME@`` would be replaced with
+``cinder``.
+
+Testing a Job
+-------------
+
+Once a new YAML file has been created its output can be tested by using the
+``jenkins_jobs.py`` script directly.  For example:
+
+.. code-block:: bash
+
+   $ python jenkins_jobs.py test projects/openstack/cinder.yml
+
+This will spit out the XML that would normally be sent directly to Jenkins.
+
+Job Caching
+-----------
 
 The Jenkins Jobs builder maintains a special YAML file in
 ``~/.jenkins_jobs_cache.yml``.  This contains an MD5 of every generated XML that
