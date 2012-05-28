@@ -88,3 +88,14 @@ node /^build.*\.slave\.stackforge\.org$/ {
   include stackforge_jenkins_slave
 }
 
+# bare-bones slaves spun up by jclouds. Specifically need to not set ssh
+# login limits, because it screws up jclouds provisioning
+node /^.*\.jclouds\.stackforge\.org$/ {
+
+  include openstack_base
+
+  class { 'jenkins_slave':
+    ssh_key => "",
+    user => false
+  }
+} 

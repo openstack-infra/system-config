@@ -1,18 +1,11 @@
-class jenkins_slave($ssh_key, $sudo = false, $bare = false) {
+class jenkins_slave($ssh_key, $sudo = false, $bare = false, $user = true) {
 
-    jenkinsuser { "jenkins":
-      ensure => present,
-      sudo => $sudo,
-      ssh_key => "${ssh_key}"
-    }
-
-    slavecirepo { "openstack-ci":
-      ensure => absent,
-      require => [ Package[git], File[jenkinshome] ],
-    }
-
-    apt::ppa { "ppa:openstack-ci/build-depends":
-      ensure => absent
+    if ($user == true) {
+      jenkinsuser { "jenkins":
+        ensure => present,
+        sudo => $sudo,
+        ssh_key => "${ssh_key}"
+      }
     }
 
     # Packages that all jenkins slaves need
@@ -90,14 +83,6 @@ class jenkins_slave($ssh_key, $sudo = false, $bare = false) {
       ensure => latest,
       provider => pip,
       require => Package[python-pip],
-    }
-
-    cron { "updateci":
-      ensure => absent,
-      user => jenkins,
-      minute => "*/15",
-      command => "cd /home/jenkins/openstack-ci && /usr/bin/git pull -q origin master",
-      require => [ File[jenkinshome] ],
     }
 
     file { 'profilerubygems':

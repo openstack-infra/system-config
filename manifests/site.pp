@@ -419,3 +419,14 @@ node /^oneiric.*\.slave\.openstack\.org$/ {
   }
 }
 
+# bare-bones slaves spun up by jclouds. Specifically need to not set ssh
+# login limits, because it screws up jclouds provisioning
+node /^.*\.jclouds\.openstack\.org$/ {
+
+  include openstack_base
+
+  class { 'jenkins_slave':
+    ssh_key => "",
+    user => false
+  }
+} 
