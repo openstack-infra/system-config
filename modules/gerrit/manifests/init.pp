@@ -13,6 +13,16 @@
 #     The URL to use for OpenID in SSO mode.
 #   email:
 #     The email address Gerrit should use when sending mail.
+#   database_poollimit:
+#   container_heaplimit:
+#   core_packedgitopenfiles:
+#   core_packedgitlimit:
+#   core_packedgitwindowsize:
+#   sshd_threads:
+#   httpd_acceptorthreads:
+#   httpd_minthreads:
+#   httpd_maxthreads:
+#     Gerrit configuration options; see Gerrit docs.
 #   commentlinks:
 #     A list of regexes Gerrit should hyperlink.
 #   logo:
@@ -48,6 +58,15 @@ class gerrit($virtual_hostname='',
       $ssl_chain_file='',
       $openidssourl="https://login.launchpad.net/+openid",
       $email='',
+      $database_poollimit='',
+      $container_heaplimit='',
+      $core_packedgitopenfiles='',
+      $core_packedgitlimit='',
+      $core_packedgitwindowsize='',
+      $sshd_threads='',
+      $httpd_acceptorthreads='',
+      $httpd_minthreads='',
+      $httpd_maxthreads='',
       $github_projects = [],
       $upstream_projects = [],
       $commentlinks = [ { name => 'changeid',
