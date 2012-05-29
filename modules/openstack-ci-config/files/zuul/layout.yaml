@@ -1,0 +1,35 @@
+queue:
+  - name: check
+    manager: IndependentQueueManager
+    trigger:
+      - event: patchset-uploaded
+    success:
+      verified: 1
+    failure:
+      verified: -1
+  - name: gate
+    manager: DependentQueueManager
+    trigger:
+      - event: comment-added
+        approval:
+          - approved: 1
+    success:
+      verified: 2
+      submit: true
+    failure:
+      verified: -2
+
+jobs:
+  - name: zuul-merge
+    failure-message: This change was unable to be automatically merged with the current state of the repository. Please rebase your change and upload a new patchset.
+
+projects:
+  - name: openstack-ci/zuul
+    check:
+      - gate-zuul-merge:
+        - gate-zuul-pep8
+        - gate-zuul-pyflakes
+    gate:
+      - gate-zuul-merge:
+        - gate-zuul-pep8
+        - gate-zuul-pyflakes
