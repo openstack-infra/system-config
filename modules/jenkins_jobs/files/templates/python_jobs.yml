@@ -299,7 +299,7 @@ builders:
   - tarball
 
 scm:
-  scm: 'false'
+  scm: 'true'
 
 assignednode:
   node: 'oneiric'
