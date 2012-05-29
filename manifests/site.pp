@@ -243,6 +243,15 @@ node "jenkins.openstack.org" {
       'swift',
     ]
   }
+  class { 'zuul': }
+  file { "/etc/zuul/layout.yaml":
+    ensure => 'present',
+    source => 'puppet:///modules/openstack-ci-config/zuul/layout.yaml'
+  }
+  file { "/etc/zuul/logging.conf":
+    ensure => 'present',
+    source => 'puppet:///modules/openstack-ci-config/zuul/logging.conf'
+  }
 }
 
 node "jenkins-dev.openstack.org" {
