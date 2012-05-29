@@ -9,7 +9,9 @@
 	hostname = localhost
 	database = reviewdb
 	username = gerrit2
-	poolLimit = 32
+<% if database_poollimit != "" -%>
+	poolLimit = <%= database_poollimit %>
+<% end -%>
         connectionpool = true
 [auth]
 	type = OPENID_SSO
@@ -21,12 +23,35 @@
 [container]
 	user = gerrit2
 	javaHome = /usr/lib/jvm/java-6-openjdk/jre
+<% if container_heaplimit != "" -%>
+	heapLimit = <%= container_heaplimit %>
+<% end -%>
+[core]
+<% if core_packedgitopenfiles != "" -%>
+	packedGitOpenFiles = <%= core_packedgitopenfiles %>
+<% end -%>
+<% if core_packedgitlimit != "" -%>
+	packedGitLimit = <%= core_packedgitlimit %>
+<% end -%>
+<% if core_packedgitwindowsize != "" -%>
+	packedGitWindowSize = <%= core_packedgitwindowsize %>
+<% end -%>
 [sshd]
 	listenAddress = *:29418
-	threads = 24
+<% if sshd_threads != "" -%>
+	threads = <%= sshd_threads %>
+<% end -%>
 [httpd]
 	listenUrl = proxy-https://*:8081/
-	acceptorThreads = 8
+<% if httpd_acceptorthreads != "" -%>
+	acceptorThreads = <%= httpd_acceptorthreads %>
+<% end -%>
+<% if httpd_minthreads != "" -%>
+	minThreads = <%= httpd_minthreads %>
+<% end -%>
+<% if httpd_maxthreads != "" -%>
+	maxThreads = <%= httpd_maxthreads %>
+<% end -%>
 [cache]
 	directory = cache
 [cache "web_sessions"]

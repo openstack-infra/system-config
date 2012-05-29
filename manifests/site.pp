@@ -43,7 +43,26 @@ node default {
 #
 # Long lived servers:
 #
-node "gerrit.openstack.org", "review.openstack.org" {
+
+# Current thinking on Gerrit tuning parameters:
+
+# database.poolLimit:
+# This limit must be several units higher than the total number of
+# httpd and sshd threads as some request processing code paths may need
+# multiple connections.
+# database.poolLimit = 1 + max(sshd.threads,sshd.batchThreads) + sshd.streamThreads + sshd.commandStartThreads + httpd.acceptorThreads + httpd.maxThreads 
+# http://groups.google.com/group/repo-discuss/msg/4c2809310cd27255
+# or "2x sshd.threads"
+# http://groups.google.com/group/repo-discuss/msg/269024c966e05d6a
+
+# container.heaplimit:
+# core.packedgit*
+# http://groups.google.com/group/repo-discuss/msg/269024c966e05d6a
+
+# sshd.threads:
+# http://groups.google.com/group/repo-discuss/browse_thread/thread/b91491c185295a71
+
+node "review.openstack.org" {
   include openstack_cron
   class { 'openstack_server':
     iptables_public_tcp_ports => [80, 443, 29418]
@@ -54,7 +73,13 @@ node "gerrit.openstack.org", "review.openstack.org" {
     ssl_cert_file => '/etc/ssl/certs/review.openstack.org.pem',
     ssl_key_file => '/etc/ssl/private/review.openstack.org.key',
     ssl_chain_file => '/etc/ssl/certs/intermediate.pem',
-    email => "review@openstack.org",
+    email => 'review@openstack.org',
+    database_poollimit => '150',    # 1 + 100 + 9 + 2 + 2 + 25 = 139(rounded up)
+    container_heaplimit => '8g',
+    core_packedgitopenfiles => '4096',
+    core_packedgitlimit => '400m',
+    core_packedgitwindowsize => '16k',
+    sshd_threads => '100',
     github_projects => [ {
                          name => 'openstack/keystone',
                          close_pull => 'true'
