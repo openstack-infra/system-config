@@ -1,0 +1,8 @@
+Verified+2: Jenkins
+Approved+1: linuxjedi <andrew@linuxjedi.co.uk>
+Code-Review+2: linuxjedi <andrew@linuxjedi.co.uk>
+Submitted-by: Jenkins
+Submitted-at: Tue, 29 May 2012 09:08:05 +0000
+Reviewed-on: https://review.openstack.org/7847
+Project: openstack/openstack-ci-puppet
+Branch: refs/heads/master
