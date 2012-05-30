@@ -1,5 +1,12 @@
 class zuul ()
 {
+  $packages = ["python-webob",
+               "python-paste"]
+
+  package { $packages:
+    ensure => "present",
+  }
+
   # if we already have the repo the pull updates
 
   exec { "update_zuul":
@@ -27,5 +34,10 @@ class zuul ()
 
   file { "/etc/zuul":
     ensure => "directory",
+  }
+
+  file { "/var/log/zuul":
+    ensure => "directory",
+    owner => 'jenkins'
   }
 }
