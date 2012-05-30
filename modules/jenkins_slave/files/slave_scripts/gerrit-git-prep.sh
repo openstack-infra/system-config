@@ -17,10 +17,22 @@ then
   exit 1
 fi
 
-if [ -z "$GERRIT_NEWREV" ] && [ -z "$GERRIT_REFSPEC" ] && [ -z "$GERRIT_CHANGES"]
+if [ -z "$GERRIT_NEWREV" ] && [ -z "$GERRIT_REFSPEC" ] && [ -z "$GERRIT_CHANGES" ]
 then
     echo "This job may only be triggered by Gerrit."
     exit 1
+fi
+
+if [ ! -z "$GERRIT_CHANGES" ]
+then
+    CHANGE_NUMBER=`echo $GERRIT_CHANGES|grep -Po ".*/\K\d+(?=/\d+)"`
+    echo "Triggered by: https://$SITE/$CHANGE_NUMBER"
+fi
+
+if [ ! -z "$GERRIT_REFSPEC" ]
+then
+    CHANGE_NUMBER=`echo $GERRIT_REFSPEC|grep -Po ".*/\K\d+(?=/\d+)"`
+    echo "Triggered by: https://$SITE/$CHANGE_NUMBER"
 fi
 
 function merge_change {
