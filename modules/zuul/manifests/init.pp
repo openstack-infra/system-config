@@ -25,4 +25,7 @@ class zuul ()
     subscribe => [ Exec["get_zuul"], Exec["update_zuul"] ],
   }
 
+  file { "/etc/zuul":
+    ensure => "directory",
+  }
 }

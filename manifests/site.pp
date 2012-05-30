@@ -241,6 +241,7 @@ node "jenkins.openstack.org" {
       'python-swiftclient',
       'quantum',
       'swift',
+      'zuul',
     ]
   }
   class { 'zuul': }
