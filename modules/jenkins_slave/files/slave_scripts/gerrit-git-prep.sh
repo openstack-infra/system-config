@@ -3,12 +3,12 @@
 # Needed environment variables:
 # GERRIT_PROJECT
 # GERRIT_BRANCH
-# GERRIT_REFSPEC or GERRIT_NEWREV
+# GERRIT_REFSPEC or GERRIT_NEWREV or GERRIT_CHANGES
 #
-# Optional params:
-# DEPENDENT_CHANGES="gtest-org/test:master:refs/changes/20/420/1^gtest-org/test:master:refs/changes/21/421/1"
-# DEPENDENT_CHANGES="gtest-org/test:master:refs/changes/21/421/1"
-# DEPENDENT_CHANGES=""
+# GERRIT_CHANGES format:
+# GERRIT_CHANGES="gtest-org/test:master:refs/changes/20/420/1^gtest-org/test:master:refs/changes/21/421/1"
+# GERRIT_CHANGES="gtest-org/test:master:refs/changes/21/421/1"
+# GERRIT_CHANGES=""
 
 SITE=$1
 if [ -z "$SITE" ]
@@ -17,7 +17,7 @@ then
   exit 1
 fi
 
-if [ -z "$GERRIT_NEWREV" ] && [ -z "$GERRIT_REFSPEC" ]
+if [ -z "$GERRIT_NEWREV" ] && [ -z "$GERRIT_REFSPEC" ] && [ -z "$GERRIT_CHANGES"]
 then
     echo "This job may only be triggered by Gerrit."
     exit 1
@@ -31,11 +31,11 @@ function merge_change {
     git merge FETCH_HEAD
 }
 
-function merge_dependent_changes {
+function merge_changes {
     set +x
     OIFS=$IFS
     IFS='^'
-    for change in $DEPENDENT_CHANGES
+    for change in $GERRIT_CHANGES
     do
 	OIFS2=$IFS
 	IFS=':'
@@ -66,14 +66,18 @@ git remote update || git remote update # attempt to work around bug #925790
 git reset --hard
 git clean -x -f -d -q
 
-if [ ! -z "$GERRIT_REFSPEC" ]
+if [ -z "$GERRIT_NEWREV" ]
 then
     git checkout $GERRIT_BRANCH
     git reset --hard remotes/origin/$GERRIT_BRANCH
     git clean -x -f -d -q
 
-    merge_dependent_changes
-    merge_change $GERRIT_PROJECT $GERRIT_REFSPEC
+    if [ ! -z "$GERRIT_REFSPEC" ]    
+    then
+        merge_change $GERRIT_PROJECT $GERRIT_REFSPEC
+    else
+        merge_changes
+    fi
 else
     git checkout $GERRIT_NEWREV
     git reset --hard $GERRIT_NEWREV
