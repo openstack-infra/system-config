@@ -39,36 +39,40 @@ class pypimirror ( $base_url,
     content => template('pypimirror/config.erb'),
   }
 
+  file { '/usr/local/z3c.pypimirror':
+    ensure => absent,
+  }
+
   # if we already have the repo the pull updates
 
-  exec { "update_z3c.pypimirror":
+  exec { "update_pypi_mirror":
     command => "git pull --ff-only",
-    cwd => "/usr/local/z3c.pypimirror",
+    cwd => "/usr/local/pypi-mirror",
     path => "/bin:/usr/bin",
-    onlyif => "test -d /usr/local/z3c.pypimirror",
-    before => Exec["get_z3c.pypimirror"],
+    onlyif => "test -d /usr/local/pypi-mirror",
+    before => Exec["get_pypi_mirror"],
   }
 
   # otherwise get a new clone of it
 
-  exec { "get_z3c.pypimirror":
-    command => "git clone git://github.com/openstack-ci/pypi-mirror.git /usr/local/z3c.pypimirror",
+  exec { "get_pypi_mirror":
+    command => "git clone git://github.com/openstack-ci/pypi-mirror.git /usr/local/pypi-mirror",
     path => "/bin:/usr/bin",
-    onlyif => "test ! -d /usr/local/z3c.pypimirror"
+    onlyif => "test ! -d /usr/local/pypi-mirror"
   }
 
-  exec { "install_z3c.pypimirror":
+  exec { "install_pypi_mirror":
     command => "python setup.py install",
-    cwd => "/usr/local/z3c.pypimirror",
+    cwd => "/usr/local/pypi-mirror",
     path => "/bin:/usr/bin",
-    subscribe => [ Exec["get_z3c.pypimirror"], Exec["update_z3c.pypimirror"] ],
+    subscribe => [ Exec["get_pypi_mirror"], Exec["update_pypi_mirror"] ],
   }
 
   exec { "initialize_mirror":
     command => "pypimirror --initial-fetch /etc/pypimirror.cfg",
     path => "/bin:/usr/bin:/usr/local/bin",
     onlyif => "test ! -d ${mirror_file_path}",
-    require => [ Exec["get_z3c.pypimirror"], Exec["install_z3c.pypimirror"] ],
+    require => [ Exec["get_pypi_mirror"], Exec["install_pypi_mirror"] ],
   }
 
   # Add cron job to update the mirror
@@ -77,7 +81,7 @@ class pypimirror ( $base_url,
     user => root,
     hour => 0,
     command => '/usr/local/bin/pypimirror --initial-fetch /etc/pypimirror.cfg',
-    require => Exec["install_z3c.pypimirror"],
+    require => Exec["install_pypi_mirror"],
   }
 
   # Rotate the mirror log file
