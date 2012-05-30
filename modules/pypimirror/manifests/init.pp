@@ -21,8 +21,7 @@ class pypimirror ( $base_url,
     $follow_external_index_pages_real = 'False'
   }
 
-  $packages = [ 'mercurial',
-                'nginx',
+  $packages = [ 'nginx',
                 'python-pip' ]
 
   package { $packages:
@@ -43,7 +42,7 @@ class pypimirror ( $base_url,
   # if we already have the repo the pull updates
 
   exec { "update_z3c.pypimirror":
-    command => "hg pull",
+    command => "git pull --ff-only",
     cwd => "/usr/local/z3c.pypimirror",
     path => "/bin:/usr/bin",
     onlyif => "test -d /usr/local/z3c.pypimirror",
@@ -53,7 +52,7 @@ class pypimirror ( $base_url,
   # otherwise get a new clone of it
 
   exec { "get_z3c.pypimirror":
-    command => "hg clone https://bitbucket.org/rsyring/z3c.pypimirror /usr/local/z3c.pypimirror",
+    command => "git clone git://github.com/openstack-ci/pypi-mirror.git /usr/local/z3c.pypimirror",
     path => "/bin:/usr/bin",
     onlyif => "test ! -d /usr/local/z3c.pypimirror"
   }
@@ -77,7 +76,7 @@ class pypimirror ( $base_url,
   cron { "update_mirror":
     user => root,
     hour => 0,
-    command => '/usr/local/bin/pypimirror --update-fetch /etc/pypimirror.cfg',
+    command => '/usr/local/bin/pypimirror --initial-fetch /etc/pypimirror.cfg',
     require => Exec["install_z3c.pypimirror"],
   }
 
