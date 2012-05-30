@@ -76,7 +76,7 @@ class pypimirror ( $base_url,
   cron { "update_mirror":
     user => root,
     hour => 0,
-    command => '/usr/local/bin/pypimirror --update-fetch /etc/pypimirror.cfg',
+    command => '/usr/local/bin/pypimirror --initial-fetch /etc/pypimirror.cfg',
     require => Exec["install_z3c.pypimirror"],
   }
 
