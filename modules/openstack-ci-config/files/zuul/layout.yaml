@@ -24,6 +24,8 @@ jobs:
     failure-message: This change was unable to be automatically merged with the current state of the repository. Please rebase your change and upload a new patchset.
   - name: gate-pypi-mirror-merge
     failure-message: This change was unable to be automatically merged with the current state of the repository. Please rebase your change and upload a new patchset.
+  - name: gate-gerrit-merge
+    failure-message: This change was unable to be automatically merged with the current state of the repository. Please rebase your change and upload a new patchset.
 
 projects:
   - name: openstack-ci/zuul
@@ -42,3 +44,10 @@ projects:
     gate:
       - gate-pypi-mirror-merge:
         - gate-pypi-mirror-pyflakes
+  - name: openstack-ci/gerrit
+    check:
+      - gate-gerrit-merge:
+        - check-gerrit-unittests
+    gate:
+      - gate-gerrit-merge:
+        - gate-gerrit-unittests
