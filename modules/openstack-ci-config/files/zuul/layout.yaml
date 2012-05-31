@@ -2,7 +2,7 @@ queue:
   - name: check
     manager: IndependentQueueManager
     trigger:
-      - event: patchset-uploaded
+      - event: patchset-created
     success:
       verified: 1
     failure:
@@ -20,7 +20,9 @@ queue:
       verified: -2
 
 jobs:
-  - name: zuul-merge
+  - name: gate-zuul-merge
+    failure-message: This change was unable to be automatically merged with the current state of the repository. Please rebase your change and upload a new patchset.
+  - name: gate-pypi-mirror-merge
     failure-message: This change was unable to be automatically merged with the current state of the repository. Please rebase your change and upload a new patchset.
 
 projects:
@@ -33,3 +35,10 @@ projects:
       - gate-zuul-merge:
         - gate-zuul-pep8
         - gate-zuul-pyflakes
+  - name: openstack-ci/pypi-mirror
+    check:
+      - gate-pypi-mirror-merge:
+        - gate-pypi-mirror-pyflakes
+    gate:
+      - gate-pypi-mirror-merge:
+        - gate-pypi-mirror-pyflakes

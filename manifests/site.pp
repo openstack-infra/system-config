@@ -156,6 +156,12 @@ node "review.openstack.org" {
                          name => 'openstack-ci/meetbot',
                          close_pull => 'true'
                          }, {
+                         name => 'openstack-ci/zuul',
+                         close_pull => 'true'
+                         }, {
+                         name => 'openstack-ci/pypi-mirror',
+                         close_pull => 'true'
+                         }, {
                          name => 'openstack/openstack-common',
                          close_pull => 'true'
                          }, {
@@ -169,6 +175,9 @@ node "review.openstack.org" {
                          close_pull => 'true'
                          }, {
                          name => 'openstack/python-cinderclient',
+                         close_pull => 'true'
+                         }, {
+                         name => 'openstack/python-swiftclient',
                          close_pull => 'true'
                          } ],
     upstream_projects => [ {
@@ -231,6 +240,7 @@ node "jenkins.openstack.org" {
       'keystone',
       'melange',
       'nova',
+      'pypi-mirror',
       'python-cinderclient',
       'python-glanceclient',
       'python-keystoneclient',
