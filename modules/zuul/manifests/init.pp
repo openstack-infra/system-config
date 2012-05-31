@@ -1,6 +1,7 @@
 class zuul ()
 {
   $packages = ["python-webob",
+               "python-daemon",
                "python-paste"]
 
   package { $packages:
@@ -40,4 +41,32 @@ class zuul ()
     ensure => "directory",
     owner => 'jenkins'
   }
+
+  file { "/var/run/zuul":
+    ensure => "directory",
+    owner => 'jenkins'
+  }
+
+  file { "/etc/init.d/zuul/":
+    owner => 'root',
+    group => 'root',
+    mode => 555,
+    ensure => 'present',
+    source => 'puppet:///modules/zuul/zuul.init',
+  }
+
+  exec { "zuul-reload":
+      command => '/etc/init.d/zuul reload',
+      require => File['/etc/init.d/zuul'],
+      refreshonly => true,
+      subscribe => [ File["/etc/zuul/layout.yaml"], File["/etc/zuul/logging.conf"], ],
+  }
+
+  service { 'zuul':
+    name       => 'zuul',
+    enable     => true,
+    hasrestart => true,
+    require => File['/etc/init.d/zuul'],
+  }
+
 }
