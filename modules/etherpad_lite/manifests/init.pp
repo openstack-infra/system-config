@@ -107,10 +107,6 @@ class etherpad_lite (
     mode   => 0664,
   }
 
-  package { 'git':
-    ensure => present
-  }
-
   git_repo { 'nodejs_repo':
     repo    => 'https://github.com/joyent/node.git',
     dest    => "${base_install_dir}/nodejs",
@@ -151,7 +147,6 @@ class etherpad_lite (
     user        => $ep_user,
     cwd         => "${base_install_dir}/etherpad-lite",
     environment => "HOME=${base_log_dir}/${ep_user}",
-    creates     => "${base_install_dir}/etherpad-lite/node_modules",
     require     => [Git_repo['etherpad_repo'],
                     Buildsource["${base_install_dir}/nodejs"]],
     before      => File["${base_install_dir}/etherpad-lite/settings.json"]

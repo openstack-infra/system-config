@@ -383,6 +383,20 @@ node "pypi.openstack.org" {
   }
 }
 
+node 'etherpadlite.openstack.org' {
+  include openstack_cron
+  class { 'openstack_server':
+    iptables_public_tcp_ports => [22, 80, 443]
+  }
+
+  include etherpad_lite
+  class { 'etherpad_lite::nginx':
+    server_name => 'etherpadlite.openstack.org'
+  }
+  include etherpad_lite::site
+  include etherpad_lite::mysql
+}
+
 # A bare machine, but with a jenkins user
 node /^.*\.template\.openstack\.org$/ {
   class { 'openstack_template':
