@@ -27,6 +27,8 @@ else
   venv=py$version
 fi
 
+export NOSE_WITH_XUNIT=1
+
 tox -e$venv
 result=$?
 
