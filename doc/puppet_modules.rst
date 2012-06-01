@@ -364,10 +364,11 @@ Nginx
 
 The reverse proxy is configured to talk to Etherpad Lite over localhost:9001.
 Nginx listens on TCP 443 for HTTPS connections. Because HTTPS is used you will
-need SSL certificates (again not managed by Puppet because of the sensitive
-nature of these files). Nginx expects your certificate file to be at
-``/etc/nginx/ssl/eplite.crt`` and your certificate key file to be at
-``/etc/nginx/ssl/eplite.key``.
+need SSL certificates. These files are not directly managed by Puppet (again
+because of the sensitive nature of these files), but Puppet will look for
+``/root/secret-files/eplite.crt`` and ``/root/secret-files/eplite.key`` and 
+copy them to ``/etc/nginx/ssl/eplite.crt`` and ``/etc/nginx/ssl/eplite.key``,
+which is where Nginx expects them to be.
 
 MySQL
 ^^^^^

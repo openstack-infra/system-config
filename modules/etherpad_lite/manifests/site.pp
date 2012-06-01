@@ -30,7 +30,7 @@ class etherpad_lite::site (
     require => Class['etherpad_lite']
   }
 
-  file { "${etherpad_lite::base_install_dir}/etherpad-lite/static/custom/pad.js":
+  file { "${etherpad_lite::base_install_dir}/etherpad-lite/src/static/custom/pad.js":
     ensure  => 'present',
     source  => 'puppet:///modules/etherpad_lite/pad.js',
     owner   => $etherpad_lite::ep_user,
