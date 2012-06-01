@@ -240,6 +240,7 @@ node "jenkins.openstack.org" {
       'keystone',
       'melange',
       'nova',
+      'openstack-ci-puppet',
       'pypi-mirror',
       'python-cinderclient',
       'python-glanceclient',
