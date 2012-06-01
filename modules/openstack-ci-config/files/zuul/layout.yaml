@@ -1,4 +1,4 @@
-queue:
+queues:
   - name: check
     manager: IndependentQueueManager
     trigger:
@@ -25,11 +25,7 @@ queue:
         ref: ^(?!refs/).*$
 
 jobs:
-  - name: gate-zuul-merge
-    failure-message: This change was unable to be automatically merged with the current state of the repository. Please rebase your change and upload a new patchset.
-  - name: gate-pypi-mirror-merge
-    failure-message: This change was unable to be automatically merged with the current state of the repository. Please rebase your change and upload a new patchset.
-  - name: gate-gerrit-merge
+  - name: ^.*-merge$
     failure-message: This change was unable to be automatically merged with the current state of the repository. Please rebase your change and upload a new patchset.
 
 projects:
