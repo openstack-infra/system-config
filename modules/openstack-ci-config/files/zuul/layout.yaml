@@ -54,3 +54,10 @@ projects:
         - gate-gerrit-unittests
     post:
       - gerrit-package
+  - name: openstack/openstack-ci-puppet
+    check:
+      - gate-ci-puppet-merge:
+        - gate-ci-puppet-syntax
+    gate:
+      - gate-ci-puppet-merge:
+        - gate-ci-puppet-syntax
