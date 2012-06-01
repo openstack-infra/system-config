@@ -18,6 +18,11 @@ queue:
       submit: true
     failure:
       verified: -2
+  - name: post
+    manager: IndependentQueueManager
+    trigger:
+      - event: ref-updated
+        ref: ^(?!refs/).*$
 
 jobs:
   - name: gate-zuul-merge
@@ -51,3 +56,5 @@ projects:
     gate:
       - gate-gerrit-merge:
         - gate-gerrit-unittests
+    post:
+      - gerrit-package
