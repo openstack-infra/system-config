@@ -79,6 +79,15 @@ node "jenkins.stackforge.org" {
     projects => ['reddwarf', 'ceilometer', 'heat']
   }
 
+  class { 'zuul': }
+  file { "/etc/zuul/layout.yaml":
+    ensure => 'present',
+    source => 'puppet:///modules/stackforge-config/zuul/layout.yaml'
+  }
+  file { "/etc/zuul/logging.conf":
+    ensure => 'present',
+    source => 'puppet:///modules/stackforge-config/zuul/logging.conf'
+  }
 }
 
 #
