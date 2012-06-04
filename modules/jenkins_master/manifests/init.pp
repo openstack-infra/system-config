@@ -167,4 +167,16 @@ class jenkins_master($site, $serveradmin, $logo,
     source => "puppet:///modules/jenkins_master/${logo}",
     require => File["/var/lib/jenkins/plugins/simple-theme-plugin"]
   }
+
+  file { '/usr/local/jenkins/slave_scripts':
+    owner => 'root',
+    group => 'root',
+    mode => 755,
+    ensure => 'directory',
+    recurse => true,
+    require => File['/usr/local/jenkins'],
+    source => [
+                "puppet:///modules/jenkins_slave/slave_scripts",
+              ],
+  }
 }
