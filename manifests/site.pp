@@ -396,6 +396,7 @@ node 'etherpadlite.openstack.org' {
   }
   include etherpad_lite::site
   include etherpad_lite::mysql
+  include etherpad_lite::backup
 }
 
 # A bare machine, but with a jenkins user
