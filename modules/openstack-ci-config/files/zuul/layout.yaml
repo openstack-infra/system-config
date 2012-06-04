@@ -7,6 +7,7 @@ queues:
       verified: 1
     failure:
       verified: -1
+
   - name: gate
     manager: DependentQueueManager
     trigger:
@@ -18,15 +19,23 @@ queues:
       submit: true
     failure:
       verified: -2
+
   - name: post
     manager: IndependentQueueManager
     trigger:
       - event: ref-updated
         ref: ^(?!refs/).*$
 
+  - name: silent
+    manager: IndependentQueueManager
+    trigger:
+      - event: patchset-created
+
+
 jobs:
   - name: ^.*-merge$
     failure-message: This change was unable to be automatically merged with the current state of the repository. Please rebase your change and upload a new patchset.
+
 
 projects:
   - name: openstack-ci/zuul
@@ -38,6 +47,7 @@ projects:
       - gate-zuul-merge:
         - gate-zuul-pep8
         - gate-zuul-pyflakes
+
   - name: openstack-ci/pypi-mirror
     check:
       - gate-pypi-mirror-merge:
@@ -45,6 +55,7 @@ projects:
     gate:
       - gate-pypi-mirror-merge:
         - gate-pypi-mirror-pyflakes
+
   - name: openstack-ci/gerrit
     check:
       - gate-gerrit-merge:
@@ -54,6 +65,7 @@ projects:
         - gate-gerrit-unittests
     post:
       - gerrit-package
+
   - name: openstack/openstack-ci-puppet
     check:
       - gate-ci-puppet-merge:
@@ -61,3 +73,251 @@ projects:
     gate:
       - gate-ci-puppet-merge:
         - gate-ci-puppet-syntax
+
+  - name: openstack/cinder
+    check:
+      - gate-cinder-merge:
+        - gate-cinder-pep8
+        - gate-cinder-python26
+        - gate-cinder-python27
+    gate:
+      - gate-cinder-merge:
+        - gate-cinder-pep8
+        - gate-cinder-python26
+        - gate-cinder-python27
+
+  - name: openstack/glance
+    check:
+      - gate-glance-merge:
+        - gate-glance-pep8
+        - gate-glance-python26
+        - gate-glance-python27
+        - gate-integration-tests-devstack-vm
+    gate:
+      - gate-glance-merge:
+        - gate-glance-pep8
+        - gate-glance-python26
+        - gate-glance-python27
+        - gate-integration-tests-devstack-vm
+    silent:
+        - gate-tempest-devstack-vm
+
+  - name: openstack/horizon
+    check:
+      - gate-horizon-merge:
+        - gate-horizon-pep8
+        - gate-horizon-python26
+        - gate-horizon-python27
+        - gate-integration-tests-devstack-vm
+    gate:
+      - gate-horizon-merge:
+        - gate-horizon-pep8
+        - gate-horizon-python26
+        - gate-horizon-python27
+        - gate-integration-tests-devstack-vm
+    silent:
+        - gate-tempest-devstack-vm
+
+  - name: openstack/keystone
+    check:
+      - gate-keystone-merge:
+        - gate-keystone-pep8
+        - gate-keystone-python26
+        - gate-keystone-python27
+        - gate-integration-tests-devstack-vm
+    gate:
+      - gate-keystone-merge:
+        - gate-keystone-pep8
+        - gate-keystone-python26
+        - gate-keystone-python27
+        - gate-integration-tests-devstack-vm
+    silent:
+        - gate-tempest-devstack-vm
+
+  - name: openstack/melange
+    check:
+      - gate-melange-merge:
+        - gate-melange-pep8
+        - gate-melange-python26
+        - gate-melange-python27
+    gate:
+      - gate-melange-merge:
+        - gate-melange-pep8
+        - gate-melange-python26
+        - gate-melange-python27
+    silent:
+        - gate-tempest-devstack-vm
+
+  - name: openstack/nova
+    check:
+      - gate-nova-merge:
+        - gate-nova-pep8
+        - gate-nova-python26
+        - gate-nova-python27
+        - gate-integration-tests-devstack-vm
+    gate:
+      - gate-nova-merge:
+        - gate-nova-pep8
+        - gate-nova-python26
+        - gate-nova-python27
+        - gate-integration-tests-devstack-vm
+    silent:
+        - gate-tempest-devstack-vm
+
+  - name: openstack/quantum
+    check:
+      - gate-quantum-merge:
+        - gate-quantum-pep8
+        - gate-quantum-python26
+        - gate-quantum-python27
+    gate:
+      - gate-quantum-merge:
+        - gate-quantum-pep8
+        - gate-quantum-python26
+        - gate-quantum-python27
+
+  - name: openstack/swift
+    check:
+      - gate-swift-merge:
+        - gate-swift-pep8
+        - gate-swift-python26
+        - gate-swift-python27
+    gate:
+      - gate-swift-merge:
+        - gate-swift-pep8
+        - gate-swift-python26
+        - gate-swift-python27
+
+  - name: openstack/python-cinderclient
+    check:
+      - gate-python-cinderclient-merge:
+        - gate-python-cinderclient-pep8
+        - gate-python-cinderclient-python26
+        - gate-python-cinderclient-python27
+    gate:
+      - gate-python-cinderclient-merge:
+        - gate-python-cinderclient-pep8
+        - gate-python-cinderclient-python26
+        - gate-python-cinderclient-python27
+    silent:
+        - gate-tempest-devstack-vm
+
+  - name: openstack/python-glanceclient
+    check:
+      - gate-python-glanceclient-merge:
+        - gate-python-glanceclient-pep8
+        - gate-python-glanceclient-python26
+        - gate-python-glanceclient-python27
+        - gate-integration-tests-devstack-vm
+    gate:
+      - gate-python-glanceclient-merge:
+        - gate-python-glanceclient-pep8
+        - gate-python-glanceclient-python26
+        - gate-python-glanceclient-python27
+        - gate-integration-tests-devstack-vm
+    silent:
+        - gate-tempest-devstack-vm
+
+  - name: openstack/python-keystoneclient
+    check:
+      - gate-python-keystoneclient-merge:
+        - gate-python-keystoneclient-pep8
+        - gate-python-keystoneclient-python26
+        - gate-python-keystoneclient-python27
+        - gate-integration-tests-devstack-vm
+    gate:
+      - gate-python-keystoneclient-merge:
+        - gate-python-keystoneclient-pep8
+        - gate-python-keystoneclient-python26
+        - gate-python-keystoneclient-python27
+        - gate-integration-tests-devstack-vm
+    silent:
+        - gate-tempest-devstack-vm
+
+  - name: openstack/python-melangeclient
+    check:
+      - gate-python-melangeclient-merge:
+        - gate-python-melangeclient-pep8
+        - gate-python-melangeclient-python26
+        - gate-python-melangeclient-python27
+    gate:
+      - gate-python-melangeclient-merge:
+        - gate-python-melangeclient-pep8
+        - gate-python-melangeclient-python26
+        - gate-python-melangeclient-python27
+
+  - name: openstack/python-novaclient
+    check:
+      - gate-python-novaclient-merge:
+        - gate-python-novaclient-pep8
+        - gate-python-novaclient-python26
+        - gate-python-novaclient-python27
+        - gate-integration-tests-devstack-vm
+    gate:
+      - gate-python-novaclient-merge:
+        - gate-python-novaclient-pep8
+        - gate-python-novaclient-python26
+        - gate-python-novaclient-python27
+        - gate-integration-tests-devstack-vm
+    silent:
+        - gate-tempest-devstack-vm
+
+  - name: openstack/python-openstackclient
+    check:
+      - gate-python-openstackclient-merge:
+        - gate-python-openstackclient-pep8
+        - gate-python-openstackclient-python26
+        - gate-python-openstackclient-python27
+    gate:
+      - gate-python-openstackclient-merge:
+        - gate-python-openstackclient-pep8
+        - gate-python-openstackclient-python26
+        - gate-python-openstackclient-python27
+
+  - name: openstack/python-quantumclient
+    check:
+      - gate-python-quantumclient-merge:
+        - gate-python-quantumclient-pep8
+        - gate-python-quantumclient-python26
+        - gate-python-quantumclient-python27
+        - gate-integration-tests-devstack-vm
+    gate:
+      - gate-python-quantumclient-merge:
+        - gate-python-quantumclient-pep8
+        - gate-python-quantumclient-python26
+        - gate-python-quantumclient-python27
+        - gate-integration-tests-devstack-vm
+    silent:
+        - gate-tempest-devstack-vm
+
+  - name: openstack/python-swiftclient
+    check:
+      - gate-python-swiftclient-merge:
+        - gate-python-swiftclient-pep8
+        - gate-python-swiftclient-python26
+        - gate-python-swiftclient-python27
+    gate:
+      - gate-python-swiftclient-merge:
+        - gate-python-swiftclient-pep8
+        - gate-python-swiftclient-python26
+        - gate-python-swiftclient-python27
+
+  - name: openstack-dev/devstack:
+    check:
+      - gate-devstack-merge:
+        - gate-integration-tests-devstack-vm
+    gate:
+      - gate-devstack-merge:
+        - gate-integration-tests-devstack-vm
+    silent:
+        - gate-tempest-devstack-vm
+
+  - name: openstack-ci/devstack-gate:
+    check:
+      - gate-devstack-gate-merge:
+        - gate-integration-tests-devstack-vm
+    gate:
+      - gate-devstack-gate-merge:
+        - gate-integration-tests-devstack-vm
+    silent:
+        - gate-tempest-devstack-vm
