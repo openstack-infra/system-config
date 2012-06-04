@@ -1,87 +1,76 @@
 class pypimirror ( $base_url,
                    $log_filename = "/var/log/pypimirror.log",
                    $mirror_file_path = "/var/lib/pypimirror",
-                   $fetch_since_days = 1,
-                   $package_matches = ["*"],
-                   $external_links = true,
-                   $follow_external_index_pages = true )
+                   $pip_download = "/var/lib/pip-download",
+                   $pip_cache = "/var/cache/pip",
+                   $projects = [] )
 {
 
-  if $external_links == true {
-    $external_links_real = 'True'
-  }
-  else {
-    $external_links_real = 'False'
-  }
-
-  if $follow_external_index_pages == true {
-    $follow_external_index_pages_real = 'True'
-  }
-  else {
-    $follow_external_index_pages_real = 'False'
-  }
-
-  $packages = [ 'nginx',
-                'python-pip' ]
-
-  package { $packages:
+  package { 'nginx':
     ensure => present,
   }
 
-  # Build the mirror config file based on options provided.
+  package { 'pip':
+    ensure => latest,
+    provider => 'pip',
+    require => Package['python-pip'],
+  }
 
-  file { 'pypimirror.cfg':
-    path => '/etc/pypimirror.cfg',
-    ensure => present,
-    mode => 644,
+  file { '/usr/local/mirror_scripts':
+    ensure => 'directory',
+    mode => 755,
     owner => 'root',
     group => 'root',
-    content => template('pypimirror/config.erb'),
+  }
+    
+  file { $pip_download:
+    ensure => 'directory',
+    mode => 755,
+    owner => 'root',
+    group => 'root',
+  }
+    
+  file { $pip_cache:
+    ensure => 'directory',
+    mode => 755,
+    owner => 'root',
+    group => 'root',
+  }
+    
+  file { '/usr/local/mirror_scripts/run-mirror.sh':
+    ensure => present,
+    mode => 755,
+    owner => 'root',
+    group => 'root',
+    content => template('pypimirror/run-mirror.sh.erb'),
+    require => File['/usr/local/mirror_scripts'],
   }
 
-  file { '/usr/local/z3c.pypimirror':
-    ensure => absent,
+  file { '/usr/local/mirror_scripts/pull-repo.sh':
+    ensure => present,
+    mode => 755,
+    owner => 'root',
+    group => 'root',
+    source => "puppet:///modules/pypimirror/pull-repo.sh",
+    require => File['/usr/local/mirror_scripts'],
   }
 
-  # if we already have the repo the pull updates
-
-  exec { "update_pypi_mirror":
-    command => "git pull --ff-only",
-    cwd => "/usr/local/pypi-mirror",
-    path => "/bin:/usr/bin",
-    onlyif => "test -d /usr/local/pypi-mirror",
-    before => Exec["get_pypi_mirror"],
-  }
-
-  # otherwise get a new clone of it
-
-  exec { "get_pypi_mirror":
-    command => "git clone git://github.com/openstack-ci/pypi-mirror.git /usr/local/pypi-mirror",
-    path => "/bin:/usr/bin",
-    onlyif => "test ! -d /usr/local/pypi-mirror"
-  }
-
-  exec { "install_pypi_mirror":
-    command => "python setup.py install",
-    cwd => "/usr/local/pypi-mirror",
-    path => "/bin:/usr/bin",
-    subscribe => [ Exec["get_pypi_mirror"], Exec["update_pypi_mirror"] ],
-  }
-
-  exec { "initialize_mirror":
-    command => "pypimirror --initial-fetch /etc/pypimirror.cfg",
-    path => "/bin:/usr/bin:/usr/local/bin",
-    onlyif => "test ! -d ${mirror_file_path}",
-    require => [ Exec["get_pypi_mirror"], Exec["install_pypi_mirror"] ],
+  file { '/usr/local/mirror_scripts/process_cache.py':
+    ensure => present,
+    mode => 755,
+    owner => 'root',
+    group => 'root',
+    source => "puppet:///modules/pypimirror/process_cache.py",
+    require => File['/usr/local/mirror_scripts'],
   }
 
   # Add cron job to update the mirror
 
   cron { "update_mirror":
     user => root,
-    hour => 0,
-    command => '/usr/local/bin/pypimirror --initial-fetch /etc/pypimirror.cfg',
-    require => Exec["install_pypi_mirror"],
+    minute => "0",
+    command => '/usr/local/mirror_scripts/run-mirror.sh',
+    require => File["/usr/local/mirror_scripts/run-mirror.sh"],
   }
 
   # Rotate the mirror log file
