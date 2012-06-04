@@ -85,6 +85,12 @@ class jenkins_slave($ssh_key, $sudo = false, $bare = false, $user = true) {
       require => Package[python-pip],
     }
 
+    package { 'pip':
+      ensure => latest,
+      provider => 'pip',
+      require => Package['python-pip'],
+    }
+
     file { 'profilerubygems':
       name => '/etc/profile.d/rubygems.sh',
       owner => 'root',
