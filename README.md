@@ -26,3 +26,4 @@ or
 
 /var/lib/gems/1.8/bin/puppet apply --modulepath=`pwd`/modules manifests/server.pp
 
+test
