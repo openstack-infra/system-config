@@ -376,11 +376,38 @@ node "eavesdrop.openstack.org" {
 
 node "pypi.openstack.org" {
   include openstack_cron
+
+  # include jenkins slave so that build deps are there for the pip download
+  class { 'jenkins_slave':
+    ssh_key => "",
+    user => false
+  }
+
   class { 'openstack_server':
     iptables_public_tcp_ports => [80]
   }
+
   class { "pypimirror":
     base_url => "http://pypi.openstack.org",
+    projects => [
+      'cinder',
+      'glance',
+      'horizon',
+      'keystone',
+      'melange',
+      'nova',
+      'openstack-common',
+      'python-cinderclient',
+      'python-glanceclient',
+      'python-keystoneclient',
+      'python-melangeclient',
+      'python-novaclient',
+      'python-openstackclient',
+      'python-quantumclient',
+      'python-swiftclient',
+      'quantum',
+      'swift'
+      ]
   }
 }
 
