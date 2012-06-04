@@ -1,0 +1,31 @@
+queues:
+  - name: check
+    manager: IndependentQueueManager
+    trigger:
+      - event: patchset-created
+    success:
+      verified: 1
+    failure:
+      verified: -1
+  - name: gate
+    manager: DependentQueueManager
+    trigger:
+      - event: comment-added
+        approval:
+          - approved: 1
+    success:
+      verified: 2
+      submit: true
+    failure:
+      verified: -2
+  - name: post
+    manager: IndependentQueueManager
+    trigger:
+      - event: ref-updated
+        ref: ^(?!refs/).*$
+
+jobs:
+  - name: ^.*-merge$
+    failure-message: This change was unable to be automatically merged with the current state of the repository. Please rebase your change and upload a new patchset.
+
+projects:
