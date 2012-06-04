@@ -168,6 +168,13 @@ class jenkins_master($site, $serveradmin, $logo,
     require => File["/var/lib/jenkins/plugins/simple-theme-plugin"]
   }
 
+  file { '/usr/local/jenkins':
+    owner => 'root',
+    group => 'root',
+    mode => 755,
+    ensure => 'directory',
+  }
+
   file { '/usr/local/jenkins/slave_scripts':
     owner => 'root',
     group => 'root',
