@@ -381,6 +381,25 @@ node "pypi.openstack.org" {
   }
   class { "pypimirror":
     base_url => "http://pypi.openstack.org",
+    projects => [
+      'cinder',
+      'glance',
+      'horizon',
+      'keystone',
+      'melange',
+      'nova',
+      'openstack-common',
+      'python-cinderclient',
+      'python-glanceclient',
+      'python-keystoneclient',
+      'python-melangeclient',
+      'python-novaclient',
+      'python-openstackclient',
+      'python-quantumclient',
+      'python-swiftclient',
+      'quantum',
+      'swift'
+      ]
   }
 }
 
