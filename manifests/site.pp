@@ -234,6 +234,8 @@ node "jenkins.openstack.org" {
     site => "openstack",
     projects => [
       'cinder',
+      'devstack',
+      'devstack-gate',
       'gerrit',
       'glance',
       'horizon',
