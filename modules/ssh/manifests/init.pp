@@ -1,5 +1,5 @@
 class ssh {
-    package { openssh-server: ensure => latest }
+    package { openssh-server: ensure => present }
     service { ssh: 
       ensure          => running,
       hasrestart      => true,

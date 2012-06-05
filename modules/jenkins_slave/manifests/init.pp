@@ -76,11 +76,11 @@ class jenkins_slave($ssh_key, $sudo = false, $bare = false, $user = true) {
     }
 
     package { $packages:
-      ensure => "latest",
+      ensure => present,
     }
 
     package { "git-review":
-      ensure => latest,
+      ensure => latest,  # okay to use latest for pip
       provider => pip,
       require => Package[python-pip],
     }
