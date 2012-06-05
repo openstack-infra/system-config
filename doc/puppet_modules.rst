@@ -374,8 +374,9 @@ MySQL
 ^^^^^
 
 MySQL is configured by the Puppet module to allow user ``eplite`` to use
-database ``etherpad-lite``. This module does not configure backups for the
-``etherpad-lite`` database.
+database ``etherpad-lite``. If you want backups for the ``etherpad-lite``
+database you can include ``etherpad_lite::backup``. By default this will backup
+the ``etherpad-lite`` DB daily and keep a rotation of 30 days of backups.
 
 .. rubric:: Footnotes
 .. [1] `Lodgeit homepage <http://www.pocoo.org/projects/lodgeit/>`_
