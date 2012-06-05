@@ -34,7 +34,8 @@ for filename in os.listdir(source_cache):
         continue
 
     realname = urllib.unquote(filename)
-    tarball = os.path.basename(realname)
+    # The ? accounts for sourceforge downloads
+    tarball = os.path.basename(realname).split("?")[0]
     name_match = PACKAGE_VERSION_RE.search(tarball)
 
     if name_match is None:
