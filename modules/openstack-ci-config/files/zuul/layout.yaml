@@ -302,7 +302,7 @@ projects:
         - gate-python-swiftclient-python26
         - gate-python-swiftclient-python27
 
-  - name: openstack-dev/devstack:
+  - name: openstack-dev/devstack
     check:
       - gate-devstack-merge:
         - gate-integration-tests-devstack-vm
@@ -312,7 +312,7 @@ projects:
     silent:
         - gate-tempest-devstack-vm
 
-  - name: openstack-ci/devstack-gate:
+  - name: openstack-ci/devstack-gate
     check:
       - gate-devstack-gate-merge:
         - gate-integration-tests-devstack-vm
