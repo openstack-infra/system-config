@@ -414,6 +414,17 @@ node "pypi.openstack.org" {
   }
 }
 
+node 'etherpad.openstack.org' {
+  include openstack_cron
+  class { 'openstack_server':
+    iptables_public_tcp_ports => [22, 80, 443]
+  }
+
+  realize (
+    User::Virtual::Localuser["clarkb"],
+  )
+}
+
 node 'etherpadlite.openstack.org' {
   include openstack_cron
   class { 'openstack_server':
