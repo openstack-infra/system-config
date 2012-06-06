@@ -16,25 +16,30 @@ ship the data to the clients.  To install this:
 
 .. code-block:: bash
 
-  sudo apt-get install puppet puppetmaster puppetmaster-passenger
+  sudo apt-get install puppet puppetmaster-passenger
 
-Note that this may break the first time round due to not-so-perfect packaging
-involved.  You will also need to stop the puppetmaster service and edit the
-``/etc/defaults/puppetmaster`` file to change ``START=no``.  Puppetmaster needs
-to run first because it creates the SSL CA used to sign puppet agents (the
-passenger service does not do this).
-
-This should then allow you to start ``apache2`` which in turn will automatically
-manage the puppet master.
-
-Files for puppet master are stored in ``/etc/puppet`` with the subdirectories
-``manifests`` and ``modules`` being the important ones.  In StackForge we have
-a ``root`` cron job that automatically populates these from our puppet git
-repository as follows:
+Files for puppet master are stored in a git repo clone at
+``/opt/openstack-ci-puppet``.  In StackForge we have a ``root`` cron job that
+automatically populates these from our puppet git repository as follows:
 
 .. code-block:: bash
 
-  */15 * * * * sleep $((RANDOM\%600)) && cd /srv/openstack-ci-puppet && /usr/bin/git pull -q  && cp /srv/openstack-ci-puppet/manifests/users.pp /etc/puppet/manifests/ && cp /srv/openstack-ci-puppet/manifests/stackforge.pp /etc/puppet/manifests/site.pp && cp -a /srv/openstack-ci-puppet/modules/ /etc/puppet/
+  */15 * * * * sleep $((RANDOM\%600)) && cd /opt/openstack-ci-puppet && /usr/bin/git pull -q
+
+The ``/etc/puppet/puppet.conf`` file then needs updating to point to the
+manifest and modules as follows:
+
+.. code-block:: ini
+
+   [master]
+   # These are needed when the puppetmaster is run by passenger
+   # and can safely be removed if webrick is used.
+   ssl_client_header = SSL_CLIENT_S_DN
+   ssl_client_verify_header = SSL_CLIENT_VERIFY
+   manifestdir=/opt/openstack-ci-puppet/manifests
+   modulepath=/opt/openstack-ci-puppet/modules
+   manifest=$manifestdir/stackforge.pp
+
 
 Adding a node
 -------------
@@ -45,26 +50,30 @@ On the new server connecting to the puppet master:
 
   sudo apt-get install puppet
 
-Then edit the ``/etc/default/puppet`` file to look like this:
+Then edit the ``/etc/default/puppet`` file to change the start variable:
 
 .. code-block:: ini
-
-  # Defaults for puppet - sourced by /etc/init.d/puppet
 
   # Start puppet on boot?
   START=yes
 
-  # Startup options
-  DAEMON_OPTS="--server puppet.stackforge.org"
+The node then needs to be configured to set a fixed hostname and the hostname
+of the puppet master with the following additions to ``/etc/puppet/puppet.conf``:
 
-You can then start the puppet agent with:
+.. code-block:: ini
+
+   [main]
+   server=puppet.stackforge.org
+   certname=review.stackforge.org
+
+The cert signing process needs to be started with:
 
 .. code-block:: bash
 
-  sudo service puppet start
+  sudo puppet agent --test
 
-Once the node has started it will make a request to the puppet master to have
-its SSL cert signed.  On the puppet master:
+This will make a request to the puppet master to have its SSL cert signed.
+On the puppet master:
 
 .. code-block:: bash
 
@@ -72,26 +81,30 @@ its SSL cert signed.  On the puppet master:
 
 You should get a list of entries similar to the one below::
 
-  review.novalocal       (44:18:BB:DF:08:50:62:70:17:07:82:1F:D5:70:0E:BF)
+  review.stackforge.org  (44:18:BB:DF:08:50:62:70:17:07:82:1F:D5:70:0E:BF)
 
 If you see the new node there you can sign its cert on the puppet master with:
 
 .. code-block:: bash
 
-  sudo puppet cert sign review.novalocal
+  sudo puppet cert sign review.stackforge.org
+
+Finally on the puppet agent you need to start the agent daemon:
+
+.. code-block:: bash
+
+   sudo service puppet start
 
 Now that it is signed the puppet agent will execute any instructions for its
 node on the next run (default is every 30 minutes).  You can trigger this
-earlier by restarting the puppet service on the new node.
+earlier by restarting the puppet service on the agent node.
 
 Important Notes
 ---------------
 
-#. The hostname of the nodes **must** match the the forward looking for the DNS.
-   For example the server pointed to with the DNS entry
-   ``jenkins.stackforge.org`` must have the hostname ``jenkins.stackforge.org``
-   otherwise the SSL signing or standard run will fail.
-
 #. Make sure the site manifest **does not** include the puppet cron job, this
    conflicts with puppet master and can cause issues.  The initial puppet run
    that create users should be done using the puppet agent configuration above.
+
+#. If you do not see the cert in the master's cert list the agent's
+   ``/var/log/syslog`` should have an entry showing you why.
