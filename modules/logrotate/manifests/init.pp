@@ -3,7 +3,7 @@
 class logrotate {
 
   package { "logrotate":
-    ensure => latest,
+    ensure => present,
   }
 
   file { "/etc/logrotate.d":

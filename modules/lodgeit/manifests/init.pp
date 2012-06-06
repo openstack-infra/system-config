@@ -11,7 +11,7 @@ class lodgeit {
                 "drizzle",
                 "python-mysqldb" ]
 
-  package { $packages: ensure => latest }
+  package { $packages: ensure => present }
 
   package { 'SQLAlchemy':
     provider => pip,

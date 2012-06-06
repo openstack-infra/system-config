@@ -32,7 +32,7 @@ class jenkins_jobs($site, $projects) {
   }
 
   package { "python-jenkins":
-    ensure => latest,
+    ensure => latest,  # okay to use latest for pip
     provider => pip,
     require => Package[python-pip],
   }

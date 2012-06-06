@@ -17,8 +17,12 @@ class openstack_base {
   $packages = ["puppet",
                "git",
                "python-setuptools",
-               "python-virtualenv"]
-  package { $packages: ensure => "latest" }
+               "python-virtualenv",
+               "python-software-properties",
+               "bzr",
+               "byobu",
+               "emacs23-nox"]
+  package { $packages: ensure => "present" }
 
   realize (
     User::Virtual::Localuser["mordred"],
@@ -34,7 +38,8 @@ class openstack_template ($iptables_public_tcp_ports) {
   include openstack_base
   include ssh
   include snmpd
-
+  include apt::unattended-upgrades
+  
   class { 'iptables':
     public_tcp_ports => $iptables_public_tcp_ports,
   }
@@ -50,11 +55,6 @@ class openstack_template ($iptables_public_tcp_ports) {
     hasrestart => true,
     require => Package['ntp'],
   }
-
-  $packages = ["python-software-properties",
-               "bzr",
-               "byobu"]
-  package { $packages: ensure => "latest" }
 }
 
 # A server that we expect to run for some time

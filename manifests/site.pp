@@ -21,6 +21,7 @@ class openstack_cron {
 class openstack_jenkins_slave {
   include openstack_cron
   include tmpreaper
+  include apt::unattended-upgrades
   class { 'openstack_server':
     iptables_public_tcp_ports => []
   }
@@ -458,7 +459,7 @@ node /^oneiric.*\.slave\.openstack\.org$/ {
   include openstack_jenkins_slave
 
   package { "tox":
-    ensure => latest,
+    ensure => latest,  # okay to use latest for pip
     provider => pip,
     require => Package[python-pip],
   }

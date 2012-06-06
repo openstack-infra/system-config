@@ -116,16 +116,16 @@ class gerrit($virtual_hostname='',
 	       "apache2"]
 
   package { $packages:
-    ensure => "latest",
+    ensure => present,
   }
 
   package { "python-pip":
-    ensure => latest,
+    ensure => present,
     require => Package[python-dev]
   }
 
   package { "github2":
-    ensure => latest,
+    ensure => latest,  # okay to use latest for pip
     provider => pip,
     require => Package[python-pip]
   }
@@ -301,6 +301,16 @@ class gerrit($virtual_hostname='',
 
   # Gerrit sets these permissions in 'init'; don't fight them.
   file { '/home/gerrit2/review_site/etc/gerrit.config':
+    owner => 'gerrit2',
+    group => 'gerrit2',
+    mode => 644,
+    ensure => 'present',
+    content => template('gerrit/gerrit.config.erb'),
+    replace => 'true',
+    require => File["/home/gerrit2/review_site/etc"]
+  }
+
+  file { '/home/gerrit2/review_site/etc/gerrit.config.puppet':
     owner => 'gerrit2',
     group => 'gerrit2',
     mode => 644,
@@ -507,10 +517,9 @@ class gerrit($virtual_hostname='',
     require => Exec["download:$war"],
     ensure => present,
     replace => 'true',
-    # user, group, and mode have to be set this way to avoid retriggering gerrit-init on every run
+    # user, and mode have to be set this way to avoid retriggering gerrit-init on every run
     # because gerrit init sets them this way
     owner => 'gerrit2',
-    group => 'gerrit2',
     mode => 644,
   }
 

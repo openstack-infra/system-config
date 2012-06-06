@@ -36,7 +36,7 @@ class meetbot {
   }
 
   package { ['supybot', 'nginx', 'python-twisted']:
-    ensure => latest
+    ensure => present
   }
 
   service { "nginx":

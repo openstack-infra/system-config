@@ -2,15 +2,15 @@
 class devstack_host {
 
     package { "linux-headers-virtual":
-      ensure => "latest",
+      ensure => present,
     }
 
     package { "mysql-server":
-      ensure => "latest",
+      ensure => present,
     }
 
     package { "rabbitmq-server":
-      ensure => "latest",
+      ensure => present,
       require => File['rabbitmq-env.conf'],
     }
 
