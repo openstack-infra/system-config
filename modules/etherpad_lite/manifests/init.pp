@@ -3,8 +3,16 @@ define git_repo (
   $repo,
   $dest,
   $user   = 'root',
-  $branch = 'master'
+  $branch = 'master',
+  $clone_only = undef
 ) {
+
+  if $clone_only == 'true' {
+    $checkout_condition = "false"
+  }
+  else {
+    $checkout_condition = "test -d ${dest}"
+  }
 
 # if we already have the git repo the pull updates
   exec { "update_${title}":
@@ -12,7 +20,7 @@ define git_repo (
     cwd     => $dest,
     path    => '/bin:/usr/bin',
     user    => $user,
-    onlyif  => "test -d ${dest}",
+    onlyif  => $checkout_condition,
     before  => Exec["clone_${title}"],
   }
 
@@ -108,10 +116,11 @@ class etherpad_lite (
   }
 
   git_repo { 'nodejs_repo':
-    repo    => 'https://github.com/joyent/node.git',
-    dest    => "${base_install_dir}/nodejs",
-    branch  => 'v0.6.16-release',
-    require => Package['git']
+    repo       => 'https://github.com/joyent/node.git',
+    dest       => "${base_install_dir}/nodejs",
+    branch     => 'v0.6.16-release',
+    clone_only => 'true',
+    require    => Package['git']
   }
 
   package { ['gzip',
@@ -135,10 +144,11 @@ class etherpad_lite (
   }
 
   git_repo { 'etherpad_repo':
-    repo    => 'https://github.com/Pita/etherpad-lite.git',
-    dest    => "${base_install_dir}/etherpad-lite",
-    user    => $ep_user,
-    require => Package['git']
+    repo       => 'https://github.com/Pita/etherpad-lite.git',
+    dest       => "${base_install_dir}/etherpad-lite",
+    user       => $ep_user,
+    clone_only => 'true',
+    require    => Package['git']
   }
 
   exec { 'install_etherpad_dependencies':
