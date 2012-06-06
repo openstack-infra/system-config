@@ -93,7 +93,7 @@ class jenkins_master($site, $serveradmin, $logo,
   ]
 
   package { $packages:
-    ensure => "latest",
+    ensure => "present",
     require => [File['/etc/apt/sources.list.d/jenkins.list'], Exec["update apt cache"]],
   }
 
@@ -113,7 +113,7 @@ class jenkins_master($site, $serveradmin, $logo,
   }
 
   package { "apache-libcloud":
-    ensure => latest,
+    ensure => present,
     provider => pip,
     require => Package[python-pip]
   }
