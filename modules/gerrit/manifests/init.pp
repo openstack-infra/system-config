@@ -310,16 +310,6 @@ class gerrit($virtual_hostname='',
     require => File["/home/gerrit2/review_site/etc"]
   }
 
-  file { '/home/gerrit2/review_site/etc/gerrit.config.puppet':
-    owner => 'gerrit2',
-    group => 'gerrit2',
-    mode => 644,
-    ensure => 'present',
-    content => template('gerrit/gerrit.config.erb'),
-    replace => 'true',
-    require => File["/home/gerrit2/review_site/etc"]
-  }
-
   file { '/home/gerrit2/review_site/hooks/change-merged':
     owner => 'root',
     group => 'root',
@@ -517,9 +507,10 @@ class gerrit($virtual_hostname='',
     require => Exec["download:$war"],
     ensure => present,
     replace => 'true',
-    # user, and mode have to be set this way to avoid retriggering gerrit-init on every run
+    # user, group, and mode have to be set this way to avoid retriggering gerrit-init on every run
     # because gerrit init sets them this way
     owner => 'gerrit2',
+    group => 'gerrit2',
     mode => 644,
   }
 
