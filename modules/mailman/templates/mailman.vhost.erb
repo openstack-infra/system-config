@@ -1,0 +1,49 @@
+<VirtualHost *:80>
+	ServerName <%= mailman_host %>
+
+	ErrorLog ${APACHE_LOG_DIR}/mailman-error.log
+
+	# Possible values include: debug, info, notice, warn, error, crit,
+	# alert, emerg.
+	LogLevel warn
+
+	CustomLog ${APACHE_LOG_DIR}/mailman-access.log combined
+
+	DocumentRoot /var/www
+
+# We can find mailman here:
+ScriptAlias /cgi-bin/mailman/ /usr/lib/cgi-bin/mailman/
+# And the public archives:
+Alias /pipermail/ /var/lib/mailman/archives/public/
+# Logos:
+Alias /images/mailman/ /usr/share/images/mailman/
+
+# Use this if you don't want the "cgi-bin" component in your URL:
+# In case you want to access mailman through a shorter URL you should enable
+# this:
+#ScriptAlias /mailman/ /usr/lib/cgi-bin/mailman/
+# In this case you need to set the DEFAULT_URL_PATTERN in
+# /etc/mailman/mm_cfg.py to http://%s/mailman/ for the cookie
+# authentication code to work.  Note that you need to change the base
+# URL for all the already-created lists as well.
+
+<Directory /usr/lib/cgi-bin/mailman/>
+    AllowOverride None
+    Options ExecCGI
+    AddHandler cgi-script .cgi
+    Order allow,deny
+    Allow from all
+</Directory>
+<Directory /var/lib/mailman/archives/public/>
+    Options FollowSymlinks
+    AllowOverride None
+    Order allow,deny
+    Allow from all
+</Directory>
+<Directory /usr/share/images/mailman/>
+    AllowOverride None
+    Order allow,deny
+    Allow from all
+</Directory>
+
+</VirtualHost>
