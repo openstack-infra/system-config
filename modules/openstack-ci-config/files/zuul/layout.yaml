@@ -321,3 +321,13 @@ projects:
         - gate-integration-tests-devstack-vm
     silent:
         - gate-tempest-devstack-vm
+
+  - name: openstack/tempest
+    check:
+      - gate-tempest-merge:
+        - gate-tempest-pep8
+    gate:
+      - gate-devstack-gate-merge:
+        - gate-tempest-pep8
+    silent:
+        - gate-tempest-devstack-vm

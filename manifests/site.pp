@@ -255,6 +255,7 @@ node "jenkins.openstack.org" {
       'python-swiftclient',
       'quantum',
       'swift',
+      'tempest',
       'zuul',
     ]
   }
