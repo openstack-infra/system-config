@@ -19,7 +19,7 @@ class etherpad_lite::backup (
   include logrotate
   logrotate::file { 'eplitedb':
     log     => $dest,
-    options => ['nocompress', 'missingok', "rotate ${num_backups}", $rotation],
+    options => ['nocompress', "rotate ${num_backups}", $rotation],
     require => Cron['eplitedbbackup']
   }
 

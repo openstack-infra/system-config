@@ -41,13 +41,13 @@ class etherpad_lite::site (
   include logrotate
   logrotate::file { 'epliteerror':
     log     => "${etherpad_lite::base_log_dir}/${etherpad_lite::ep_user}/error.log",
-    options => ['compress', 'delaycompress', 'missingok', 'rotate 7', 'daily', 'notifempty'],
+    options => ['compress', 'copytruncate', 'missingok', 'rotate 7', 'daily', 'notifempty'],
     require => Service['etherpad-lite']
   }
 
   logrotate::file { 'epliteaccess':
     log     => "${etherpad_lite::base_log_dir}/${etherpad_lite::ep_user}/access.log",
-    options => ['compress', 'delaycompress', 'missingok', 'rotate 7', 'daily', 'notifempty'],
+    options => ['compress', 'copytruncate', 'missingok', 'rotate 7', 'daily', 'notifempty'],
     require => Service['etherpad-lite']
   }
 
