@@ -66,6 +66,7 @@ class openstack_server ($iptables_public_tcp_ports) {
     sysadmin => ['corvus@inaugust.com',
                  'mordred@inaugust.com',
                  'andrew@linuxjedi.co.uk',
-                 'devananda.vdv@gmail.com']
+                 'devananda.vdv@gmail.com',
+                 'clark.boylan@gmail.com']
   }
 }
