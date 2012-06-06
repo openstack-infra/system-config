@@ -27,7 +27,7 @@ class etherpad_lite::mysql {
   } ->
 
   exec { "grant-etherpad-lite-db":
-    unless  => "mysql -ueplite -p'`grep password ${etherpad_lite::base_install_dir}/etherpad-lite/settings.json | cut -d: -f2 | sed -e 's/.*\"\(.*\)\".*/\1/'`' etherpad-lite",
+    unless  => "mysql -ueplite -p\"`grep password ${etherpad_lite::base_install_dir}/etherpad-lite/settings.json | cut -d: -f2 | sed -e 's/.*\"\(.*\)\".*/\1/'`\" etherpad-lite",
     path    => ['/bin', '/usr/bin'],
     command => "mysql --defaults-file=/etc/mysql/debian.cnf -e \"grant all on \`etherpad-lite\`.* to 'eplite'@'localhost' identified by '`grep password ${etherpad_lite::base_install_dir}/etherpad-lite/settings.json | cut -d: -f2 | sed -e 's/.*\"\(.*\)\".*/\1/'`';\" mysql",
     require => [Service['mysql'],
