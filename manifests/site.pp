@@ -295,6 +295,12 @@ node "community.openstack.org" {
   )
 }
 
+node "puppet.openstack.org" {
+  class { 'openstack_server':
+    iptables_public_tcp_ports => [8140]
+  }
+}
+
 node "lists.openstack.org" {
   include openstack_cron
 
