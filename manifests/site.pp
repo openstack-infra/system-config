@@ -321,6 +321,18 @@ node "lists.openstack.org" {
   realize (
     User::Virtual::Localuser["oubiwann"],
   )
+
+  file { '/usr/share/mailman/en':
+    owner => 'root',
+    group => 'list',
+    mode => 644,
+    ensure => 'directory',
+    recurse => true,
+    require => File['/usr/share/mailmain/en'],
+    source => [
+                "puppet://modules/mailman/html-templates-en",
+              ],
+  }
 }
 
 node "docs.openstack.org" {
