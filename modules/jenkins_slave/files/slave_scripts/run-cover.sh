@@ -16,6 +16,8 @@ fi
 
 tox -e$venv
 result=$?
+source .tox/$venv/bin/activate
+coverage xml
 
 echo "Begin pip freeze output from test virtualenv:"
 echo "======================================================================"
