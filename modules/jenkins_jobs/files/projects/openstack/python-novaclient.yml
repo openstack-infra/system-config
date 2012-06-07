@@ -8,3 +8,36 @@ values:
   review_site: 'review.openstack.org'
   publisher_site: 'nova.openstack.org'
   node: 'oneiric'
+
+---
+# FTP Doc Publishing
+modules:
+  - properties
+  - scm
+  - assignednode
+  - trigger_pollscm
+  - builders
+  - publisher_docs_ftp
+
+main:
+  name: 'python-novaclient-docs-ftp'
+  project: 'python-novaclient'
+  github_org: 'openstack'
+  review_site: 'review.openstack.org'
+  authenticatedBuild: 'false'
+  disabled: 'false'
+
+trigger:
+  pollscm: '*/15 * * * *'
+
+builders:
+  - docs
+
+scm:
+  scm: 'true'
+
+assignednode:
+  node: 'oneiric'
+
+publisher:
+  site: 'docs.openstack.org'
