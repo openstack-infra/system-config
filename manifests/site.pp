@@ -295,6 +295,19 @@ node "community.openstack.org" {
   )
 }
 
+node "ci-puppetmaster.openstack.org" {
+  class { 'openstack_server':
+    iptables_public_tcp_ports => [8140]
+  }
+  cron { "updatepuppetmaster":
+    user => root,
+    minute => "*/15",
+    command => 'sleep $((RANDOM\%600)) && cd /opt/openstack-ci-puppet && /usr/bin/git pull -q',
+    environment => "PATH=/var/lib/gems/1.8/bin:/usr/bin:/bin:/usr/sbin:/sbin",
+  }
+
+}
+
 node "lists.openstack.org" {
   include openstack_cron
 
