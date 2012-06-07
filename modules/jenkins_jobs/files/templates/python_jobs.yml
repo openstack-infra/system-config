@@ -204,7 +204,7 @@ assignednode:
   node: '@NODE@'
 
 publisher:
-  site: '@PUBLISHER_SITE@'
+  site: '@DOC_PUBLISHER_SITE@'
 
 ---
 # merge-gate
