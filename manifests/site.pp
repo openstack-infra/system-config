@@ -357,7 +357,6 @@ node "docs.openstack.org" {
 }
 
 node "paste.openstack.org" {
-  include openstack_cron
   class { 'openstack_server':
     iptables_public_tcp_ports => [80]
   }
@@ -374,7 +373,6 @@ node "paste.openstack.org" {
 }
 
 node "planet.openstack.org" {
-  include openstack_cron
   class { 'openstack_server':
     iptables_public_tcp_ports => [80]
   }
@@ -386,7 +384,6 @@ node "planet.openstack.org" {
 }
 
 node "eavesdrop.openstack.org" {
-  include openstack_cron
   class { 'openstack_server':
     iptables_public_tcp_ports => [80]
   }
