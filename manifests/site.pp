@@ -455,17 +455,7 @@ node /^.*\.template\.openstack\.org$/ {
 #
 # Jenkins slaves:
 #
-node /^build.*\.slave\.openstack\.org$/ {
-  include openstack_cron
-  include openstack_jenkins_slave
-}
-
-node /^dev.*\.slave\.openstack\.org$/ {
-  include openstack_cron
-  include openstack_jenkins_slave
-}
-
-node /^oneiric.*\.slave\.openstack\.org$/ {
+node /^.*\.slave\.openstack\.org$/ {
   include openstack_cron
   include openstack_jenkins_slave
 
