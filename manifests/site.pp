@@ -18,6 +18,20 @@ class openstack_cron {
   }
 }
 
+class remove_openstack_cron {
+  cron { "updatepuppet":
+    ensure => absent
+  }
+
+  file { '/etc/init/puppetboot.conf':
+    ensure => absent
+  }
+
+  file { "/etc/logrotate.d/updatepuppet":
+    ensure => absent
+  }
+}
+
 class openstack_jenkins_slave {
   include openstack_cron
   include tmpreaper
@@ -358,7 +372,7 @@ node "docs.openstack.org" {
 }
 
 node "paste.openstack.org" {
-  include openstack_cron
+  include remove_openstack_cron
   class { 'openstack_server':
     iptables_public_tcp_ports => [80]
   }
@@ -375,7 +389,7 @@ node "paste.openstack.org" {
 }
 
 node "planet.openstack.org" {
-  include openstack_cron
+  include remove_openstack_cron
   class { 'openstack_server':
     iptables_public_tcp_ports => [80]
   }
@@ -387,7 +401,7 @@ node "planet.openstack.org" {
 }
 
 node "eavesdrop.openstack.org" {
-  include openstack_cron
+  include remove_openstack_cron
   class { 'openstack_server':
     iptables_public_tcp_ports => [80]
   }
