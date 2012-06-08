@@ -29,6 +29,11 @@ fi
 
 export NOSE_WITH_XUNIT=1
 
+# Work around bug in tox 1.3 by explicitly removing
+# no-global-site-packages.txt (we need system installed package to get
+# libvirt support. This can go away once tox 1.4 is out
+find .tox/$venv 2>/dev/null | grep no-global-site-packages.txt | xargs rm -f
+
 tox -e$venv
 result=$?
 
