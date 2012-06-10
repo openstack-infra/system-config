@@ -115,6 +115,7 @@ def git2lp(full_project_name):
         'openstack/python-quantumclient': 'quantum',
         'openstack/openstack-ci-puppet': 'openstack-ci',
         'openstack-ci/devstack-gate': 'openstack-ci',
+        'openstack-ci/gerrit': 'openstack-ci',
         'openstack-ci/lodgeit': 'openstack-ci',
         'openstack-ci/meetbot': 'openstack-ci',
         }
