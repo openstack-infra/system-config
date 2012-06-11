@@ -349,7 +349,7 @@ class gerrit($virtual_hostname='',
     group => 'gerrit2',
     mode => 440,
     ensure => 'present',
-    source => 'file:///root/secret-files/github.secure.config',
+    source => "file:///root/secret-files/${virtual_hostname}/github.secure.config",
     replace => 'true',
     require => User['gerrit2']
   }
@@ -359,7 +359,7 @@ class gerrit($virtual_hostname='',
     group => 'gerrit2',
     mode => 440,
     ensure => 'present',
-    source => 'file:///root/secret-files/gerritbot.config',
+    source => "file:///root/secret-files/${virtual_hostname}/gerritbot.config",
     replace => 'true',
     require => User['gerrit2']
   }
@@ -372,7 +372,7 @@ class gerrit($virtual_hostname='',
     group => 'gerrit2',
     mode => 600,
     ensure => 'present',
-    source => 'file:///root/secret-files/secure.config',
+    source => "file:///root/secret-files/${virtual_hostname}/secure.config",
     replace => 'true',
     require => File["/home/gerrit2/review_site/etc"]
   }
