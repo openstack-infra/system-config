@@ -1,16 +1,20 @@
 import datetime
 from setuptools import setup
-from sphinx.setup_command import BuildDoc
 
 ci_cmdclass={}
 
-class local_BuildDoc(BuildDoc):
-    def run(self):
-        for builder in ['html', 'man']:
-            self.builder = builder
-            self.finalize_options()
-            BuildDoc.run(self)
-ci_cmdclass['build_sphinx'] = local_BuildDoc
+try:
+    from sphinx.setup_command import BuildDoc
+
+    class local_BuildDoc(BuildDoc):
+        def run(self):
+            for builder in ['html', 'man']:
+                self.builder = builder
+                self.finalize_options()
+                BuildDoc.run(self)
+    ci_cmdclass['build_sphinx'] = local_BuildDoc
+except Exception:
+    pass
 
 setup(name='nova',
       version="%d.%02d" % (datetime.datetime.now().year, datetime.datetime.now().month), 
