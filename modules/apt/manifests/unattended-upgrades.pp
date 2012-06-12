@@ -3,6 +3,10 @@ class apt::unattended-upgrades($email='') {
     ensure => present;
   }
 
+  package { 'mailutils':
+    ensure => present;
+  }
+
   file { '/etc/apt/apt.conf.d/10periodic':
     owner => 'root',
     group => 'root',
