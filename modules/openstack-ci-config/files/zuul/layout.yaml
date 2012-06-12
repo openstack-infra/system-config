@@ -327,7 +327,7 @@ projects:
       - gate-tempest-merge:
         - gate-tempest-pep8
     gate:
-      - gate-devstack-gate-merge:
+      - gate-tempest-merge:
         - gate-tempest-pep8
     silent:
         - gate-tempest-devstack-vm
