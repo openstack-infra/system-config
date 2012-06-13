@@ -14,8 +14,23 @@ logrotate:
   artifactDaysToKeep: -1
   artifactNumToKeep: -1
 
-triggers:
-  - pollscm: '*/15 * * * *'
+parameters:
+  - name: UUID
+    type: string
+    description: Zuul provided key to link builds with Gerrit events
+  - name: GERRIT_PROJECT
+    type: string
+    description: Zuul provided project name
+  - name: GERRIT_BRANCH
+    type: string
+    description: Zuul provided branch name
+  - name: GERRIT_CHANGES
+    type: string
+    description: Zuul provided list of dependent changes to merge
+
+notification_endpoints:
+  - protocol: HTTP
+    URL: http://127.0.0.1:8001/jenkins_endpoint
 
 builders:
   - coverage
@@ -24,7 +39,7 @@ post_build_actions:
   - coverage
 
 scm:
-  scm: 'true'
+  scm: 'false'
 
 assignednode:
   node: '@NODE@'
@@ -147,8 +162,23 @@ logrotate:
   artifactDaysToKeep: -1
   artifactNumToKeep: -1
 
-triggers:
-  - pollscm: '*/15 * * * *'
+parameters:
+  - name: UUID
+    type: string
+    description: Zuul provided key to link builds with Gerrit events
+  - name: GERRIT_PROJECT
+    type: string
+    description: Zuul provided project name
+  - name: GERRIT_BRANCH
+    type: string
+    description: Zuul provided branch name
+  - name: GERRIT_CHANGES
+    type: string
+    description: Zuul provided list of dependent changes to merge
+
+notification_endpoints:
+  - protocol: HTTP
+    URL: http://127.0.0.1:8001/jenkins_endpoint
 
 builders:
   - docs
@@ -162,7 +192,7 @@ post_build_actions:
       excludes: ''
 
 scm:
-  scm: 'true'
+  scm: 'false'
 
 assignednode:
   node: '@NODE@'
@@ -197,14 +227,13 @@ assignednode:
   node: '@NODE@'
 
 ---
-# ppa
+# docs-gate
 main:
-  name: '@NAME@-ppa'
+  name: 'gate-@NAME@-docs'
   review_site: '@REVIEW_SITE@'
   github_org: '@GITHUB_ORG@'
   project: '@NAME@'
   authenticatedBuild: 'false'
-  disabled: true
 
 logrotate:
   daysToKeep: 28
@@ -212,11 +241,26 @@ logrotate:
   artifactDaysToKeep: -1
   artifactNumToKeep: -1
 
-builders:
-  - ppa
+parameters:
+  - name: UUID
+    type: string
+    description: Zuul provided key to link builds with Gerrit events
+  - name: GERRIT_PROJECT
+    type: string
+    description: Zuul provided project name
+  - name: GERRIT_BRANCH
+    type: string
+    description: Zuul provided branch name
+  - name: GERRIT_CHANGES
+    type: string
+    description: Zuul provided list of dependent changes to merge
 
-post_build_actions:
-  - ppa
+notification_endpoints:
+  - protocol: HTTP
+    URL: http://127.0.0.1:8001/jenkins_endpoint
+
+builders:
+  - docs
 
 scm:
   scm: 'false'
