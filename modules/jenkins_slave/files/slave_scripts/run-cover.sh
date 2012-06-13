@@ -7,12 +7,7 @@
 # what packages we ended up testing.
 #
 
-if [ -f .cache.bundle ]
-then
-  venv=jenkinscover
-else
-  venv=cover
-fi
+venv=cover
 
 tox -e$venv
 result=$?

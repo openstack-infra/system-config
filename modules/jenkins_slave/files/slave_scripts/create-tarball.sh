@@ -53,30 +53,7 @@ snapshotversion=$(find_next_version)
 
 rm -f dist/*.tar.gz
 if [ -f setup.py ] ; then
-    # Try tox and cached bundles first
-    if [ -e ".cache.bundle" ] ; then
-        if [ -f tox.ini ] ; then
-            if tox --showconfig | grep testenv | grep jenkinsvenv >/dev/null 2>&1
-            then
-                tox -ejenkinsvenv python setup.py sdist
-            else
-                tox -evenv python setup.py sdist
-            fi
-        else
-            rm -rf .venv
-            mv .cache.bundle .cache.pybundle
-            virtualenv --no-site-packages .venv
-            .venv/bin/pip install .cache.pybundle
-            rm .cache.pybundle
-            tools/with_venv.sh python setup.py sdist
-        fi
-    # Try old style venv's second
-    elif [ -d .venv -a -f tools/with_venv.sh ] ; then
-        tools/with_venv.sh python setup.py sdist
-    # Last but not least, just make a tarball
-    else
-        python setup.py sdist
-    fi
+    tox -evenv python setup.py sdist
     # There should only be one, so this should be safe.
     tarball=$(echo dist/*.tar.gz)
 

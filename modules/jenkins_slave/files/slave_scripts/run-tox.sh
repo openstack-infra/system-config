@@ -20,12 +20,7 @@ then
   exit 1
 fi
 
-if [ -f .cache.bundle ]
-then
-  venv=jenkins$version
-else
-  venv=py$version
-fi
+venv=py$version
 
 export NOSE_WITH_XUNIT=1
 
