@@ -65,6 +65,8 @@ else:
     ghub = github.Github(secure_config.get("github", "username"),
                          secure_config.get("github", "password"))
 
+orgs = ghub.get_user().get_orgs()
+orgs_dict = dict(zip([o.name.lower() for o in orgs], orgs))
 for section in config.sections():
     # Each section looks like [project "openstack/project"]
     m = PROJECT_RE.match(section)
@@ -76,8 +78,14 @@ for section in config.sections():
             config.get(section, "close_pull").lower() == 'true'):
         continue
 
+    # Find the project's repo
+    project_split = project.split('/', 1)
+    if len(project_split) > 1:
+        repo = orgs_dict[project_split[0].lower()].get_repo(project_split[1])
+    else:
+        repo = ghub.get_user().get_repo(project)
+
     # Close each pull request
-    repo = ghub.get_user().get_repo(project)
     pull_requests = repo.get_pulls("open")
     for req in pull_requests:
         vars = dict(project=project)
