@@ -89,6 +89,7 @@ for section in config.sections():
     pull_requests = repo.get_pulls("open")
     for req in pull_requests:
         vars = dict(project=project)
-        issue = repo.get_issue(req.number)
+        issue_data = {"url": repo.url + "/issues/" + str(req.number)}
+        issue = github.Issue.Issue(req._requester, issue_data, completed = True)
         issue.create_comment(MESSAGE % vars)
         req.edit(state = "closed")
