@@ -5,7 +5,6 @@ modules:
   - properties
   - scm
   - assignednode
-  - trigger_pollscm
   - builders
   - publisher_coverage
 
@@ -17,14 +16,29 @@ main:
   authenticatedBuild: 'false'
   disabled: '@DISABLED@' 
 
-trigger:
-  pollscm: '*/15 * * * *'
+parameters:
+  - name: UUID
+    type: string
+    description: Zuul provided key to link builds with Gerrit events
+  - name: GERRIT_PROJECT
+    type: string
+    description: Zuul provided project name
+  - name: GERRIT_BRANCH
+    type: string
+    description: Zuul provided branch name
+  - name: GERRIT_CHANGES
+    type: string
+    description: Zuul provided list of dependent changes to merge
+
+notification_endpoints:
+  - protocol: HTTP
+    URL: http://127.0.0.1:8001/jenkins_endpoint
 
 builders:
   - coverage
 
 scm:
-  scm: 'true'
+  scm: 'false'
 
 assignednode:
   node: '@NODE@'
@@ -186,7 +200,6 @@ modules:
   - properties
   - scm
   - assignednode
-  - trigger_pollscm
   - builders
   - publisher_ftp
 
@@ -198,14 +211,29 @@ main:
   authenticatedBuild: 'false'
   disabled: '@DISABLED@'
 
-trigger:
-  pollscm: '*/15 * * * *'
+parameters:
+  - name: UUID
+    type: string
+    description: Zuul provided key to link builds with Gerrit events
+  - name: GERRIT_PROJECT
+    type: string
+    description: Zuul provided project name
+  - name: GERRIT_BRANCH
+    type: string
+    description: Zuul provided branch name
+  - name: GERRIT_CHANGES
+    type: string
+    description: Zuul provided list of dependent changes to merge
+
+notification_endpoints:
+  - protocol: HTTP
+    URL: http://127.0.0.1:8001/jenkins_endpoint
 
 builders:
   - docs
 
 scm:
-  scm: 'true'
+  scm: 'false'
 
 assignednode:
   node: '@NODE@'
@@ -263,31 +291,51 @@ assignednode:
   node: '@NODE@'
 
 ---
-# ppa
+# docs-gate
 modules:
   - properties
   - scm
   - assignednode
-  - trigger_none
   - builders
-  - publisher_ppa
+  - publisher_none
 
 main:
-  name: '@NAME@-ppa'
+  name: 'gate-@NAME@-docs'
   review_site: '@REVIEW_SITE@'
   github_org: '@GITHUB_ORG@'
   project: '@NAME@'
   authenticatedBuild: 'false'
-  disabled: 'true'
+  disabled: '@DISABLED@'
+
+parameters:
+  - name: UUID
+    type: string
+    description: Zuul provided key to link builds with Gerrit events
+  - name: GERRIT_PROJECT
+    type: string
+    description: Zuul provided project name
+  - name: GERRIT_BRANCH
+    type: string
+    description: Zuul provided branch name
+  - name: GERRIT_CHANGES
+    type: string
+    description: Zuul provided list of dependent changes to merge
+
+notification_endpoints:
+  - protocol: HTTP
+    URL: http://127.0.0.1:8001/jenkins_endpoint
 
 builders:
-  - ppa
+  - docs
 
 scm:
   scm: 'false'
 
 assignednode:
   node: '@NODE@'
+
+publisher:
+  site: '@PUBLISHER_SITE@'
 
 ---
 # tarball
