@@ -13,6 +13,13 @@ mkdir -p doc/build
 export HUDSON_PUBLISH_DOCS=1
 tox -e$venv -- python setup.py build_sphinx
 result=$?
+TAG=`echo $GERRIT_REFNAME | sed 's/refs.tags.//'`
+if [ ! -z $TAG ] ; then
+    # Move the docs into a subdir if this is a tagged build
+    mkdir doc/build/$TAG
+    mv doc/build/html/* doc/build/$TAG
+    mv doc/build/$TAG doc/build/html/$TAG
+fi
 
 echo "Begin pip freeze output from test virtualenv:"
 echo "======================================================================"
