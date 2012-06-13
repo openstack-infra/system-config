@@ -66,7 +66,7 @@ else:
                          secure_config.get("github", "password"))
 
 orgs = ghub.get_user().get_orgs()
-orgs_dict = dict(zip([o.name.lower() for o in orgs], orgs))
+orgs_dict = dict(zip([o.login.lower() for o in orgs], orgs))
 for section in config.sections():
     # Each section looks like [project "openstack/project"]
     m = PROJECT_RE.match(section)
