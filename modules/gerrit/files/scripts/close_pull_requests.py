@@ -25,9 +25,14 @@
 
 # [github]
 # username = GITHUB_USERNAME
-# api_token = GITHUB_API_TOKEN
+# password = GITHUB_PASSWORD
+#
+# or
+#
+# [github]
+# oauth_token = GITHUB_OAUTH_TOKEN
 
-import github2.client
+import github
 import os
 import ConfigParser
 import logging
@@ -54,9 +59,11 @@ secure_config.read(GITHUB_SECURE_CONFIG)
 config = ConfigParser.ConfigParser()
 config.read(GITHUB_CONFIG)
 
-github = github2.client.Github(requests_per_second=1.0,
-                               username=secure_config.get("github", "username"),
-                               api_token=secure_config.get("github", "api_token"))
+if secure_config.has_option("github", "oauth_token"):
+    ghub = github.Github(secure_config.get("github", "oauth_token"))
+else:
+    ghub = github.Github(secure_config.get("github", "username"),
+                         secure_config.get("github", "password"))
 
 for section in config.sections():
     # Each section looks like [project "openstack/project"]
@@ -70,8 +77,10 @@ for section in config.sections():
         continue
 
     # Close each pull request
-    pull_requests = github.pull_requests.list(project)
+    repo = ghub.get_user().get_repo(project)
+    pull_requests = repo.get_pulls("open")
     for req in pull_requests:
         vars = dict(project=project)
-        github.issues.comment(project, req.number, MESSAGE%vars)
-        github.issues.close(project, req.number)
+        issue = repo.get_issue(req.number)
+        issue.create_comment(MESSAGE % vars)
+        req.edit(state = "closed")

@@ -124,7 +124,7 @@ class gerrit($virtual_hostname='',
     require => Package[python-dev]
   }
 
-  package { "github2":
+  package { "PyGithub":
     ensure => latest,  # okay to use latest for pip
     provider => pip,
     require => Package[python-pip]
