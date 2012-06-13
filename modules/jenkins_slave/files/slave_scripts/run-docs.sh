@@ -7,12 +7,7 @@
 # what packages we ended up testing.
 #
 
-if [ -f .cache.bundle ]
-then
-  venv=jenkinsvenv
-else
-  venv=venv
-fi
+venv=venv
 
 mkdir -p doc/build
 export HUDSON_PUBLISH_DOCS=1
