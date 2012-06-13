@@ -200,7 +200,7 @@ node "review.openstack.org" {
                          remote => 'https://gerrit.googlesource.com/gerrit'
                          } ],
     logo => 'openstack.png',
-    war => 'http://ci.openstack.org/tarballs/gerrit-2.4-12-gfed0b72.war',
+    war => 'http://ci.openstack.org/tarballs/gerrit-2.4-17-gd201697.war',
     script_user => 'launchpadsync',
     script_key_file => '/home/gerrit2/.ssh/launchpadsync_rsa',
     script_site => 'openstack'
