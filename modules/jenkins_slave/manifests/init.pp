@@ -158,4 +158,23 @@ class jenkins_slave($ssh_key, $sudo = false, $bare = false, $user = true) {
           require => [File["/etc/mysql/my.cnf"], Package["mysql-server"]]
         }
     }
+
+    file { '/usr/local/jenkins':
+      owner => 'root',
+      group => 'root',
+      mode => 755,
+      ensure => 'directory',
+    }
+
+    file { '/usr/local/jenkins/slave_scripts':
+      owner => 'root',
+      group => 'root',
+      mode => 755,
+      ensure => 'directory',
+      recurse => true,
+      require => File['/usr/local/jenkins'],
+      source => [
+                  "puppet:///modules/jenkins_slave/slave_scripts",
+                ],
+    }
 }

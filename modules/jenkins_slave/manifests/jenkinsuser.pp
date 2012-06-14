@@ -236,23 +236,5 @@ define jenkinsuser($ensure = present, $sudo = false, $ssh_key) {
   }
 
 
-  file { '/usr/local/jenkins':
-    owner => 'root',
-    group => 'root',
-    mode => 755,
-    ensure => 'directory',
-  }
-
-  file { '/usr/local/jenkins/slave_scripts':
-    owner => 'root',
-    group => 'root',
-    mode => 755,
-    ensure => 'directory',
-    recurse => true,
-    require => File['/usr/local/jenkins'],
-    source => [
-                "puppet:///modules/jenkins_slave/slave_scripts",
-              ],
-  }
 
 }
