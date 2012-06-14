@@ -14,6 +14,8 @@ queues:
       - event: comment-added
         approval:
           - approved: 1
+    start:
+      verified: 0
     success:
       verified: 2
       submit: true
