@@ -59,6 +59,7 @@ class jenkins_slave($ssh_key, $sudo = false, $bare = false, $user = true) {
                  "python-sphinx",
                  "python-unittest2",
                  "python-vm-builder",
+                 "python-zmq", # zeromq unittests (not pip installable)
                  "python3-all-dev",
                  "screen",
                  "socat",
