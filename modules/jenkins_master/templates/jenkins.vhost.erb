@@ -44,6 +44,8 @@
              RewriteCond %{HTTP_HOST} !<%= site %>
              RewriteRule ^.*$ https://<%= site %>/
 
+             RewriteRule /zuul/status http://127.0.0.1:8001/status [P]
+
              ProxyPass / http://127.0.0.1:8080/ retry=0
              ProxyPassReverse / http://127.0.0.1:8080/
 </VirtualHost>
