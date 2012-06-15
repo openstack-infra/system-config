@@ -18,6 +18,19 @@ class openstack_cron {
   }
 }
 
+class backup ($backup_user) {
+  package { "bup":
+    ensure => "present"
+  }
+
+  cron { "bup-rs-ord":
+    user => root,
+    hour => "5",
+    minute => "37",
+    command => "tar --exclude=/proc/ --exclude=/sys/ --exclude=/dev/ --exclude=/tmp/ --exclude=/floppy/ --exclude=/cdrom/ --exclude=/var/spool/squid/ --exclude=/var/spool/exim/ --exclude=/media/ --exclude=/mnt/ --exclude=/var/agentx/ -cfP - / | bup split -r $backup_user@ci-backup-rs-ord.openstack.org: -n root -q",
+  }
+}
+
 class remove_openstack_cron {
   cron { "updatepuppet":
     ensure => absent
@@ -287,6 +300,9 @@ node "jenkins-dev.openstack.org" {
   class { 'openstack_server':
     iptables_public_tcp_ports => [80, 443, 4155]
   } 
+  class { 'backup':
+    backup_user => 'bup-jenkins-dev'
+  }
   class { 'jenkins_master':
     site => 'jenkins-dev.openstack.org',
     serveradmin => 'webmaster@openstack.org',
@@ -485,6 +501,13 @@ node /^.*\.template\.openstack\.org$/ {
     ssh_key => $jenkins_ssh_key,
     sudo => true,
     bare => true
+  }
+}
+
+# A backup machine.  Don't run cron or puppet agent on it.
+node /^ci-backup-.*\.openstack\.org$/ {
+  class { 'openstack_template':
+    iptables_public_tcp_ports => []
   }
 }
 
