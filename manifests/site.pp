@@ -225,7 +225,7 @@ node "gerrit-dev.openstack.org", "review-dev.openstack.org" {
                          close_pull => 'true'
                          } ],
     logo => 'openstack.png',
-    war => 'http://ci.openstack.org/tarballs/gerrit-2.4-17-gd201697.war',
+    war => 'http://ci.openstack.org/tarballs/gerrit-2.4.1-8-g5bbcc7f.war',
     script_user => 'update',
     script_key_file => '/home/gerrit2/.ssh/id_rsa',
     script_site => 'openstack'
