@@ -71,4 +71,16 @@ class mailman($mailman_host='') {
     subscribe       => File["/etc/apache2/sites-available/mailman"],
     require         => Package["apache2"]
   }
+
+  file { '/etc/mailman/en':
+    owner => 'root',
+    group => 'list',
+    mode => 644,
+    ensure => 'directory',
+    recurse => true,
+    require => Package['mailman'],
+    source => [
+                "puppet://modules/mailman/html-templates-en",
+              ],
+  }
 }
