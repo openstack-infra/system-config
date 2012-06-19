@@ -35,6 +35,7 @@ class etherpad_lite::site (
     source  => 'puppet:///modules/etherpad_lite/pad.js',
     owner   => $etherpad_lite::ep_user,
     group   => $etherpad_lite::ep_user,
+    mode    => 0644,
     require => Class['etherpad_lite']
   }
 

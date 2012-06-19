@@ -44,35 +44,6 @@ define git_repo (
 
 }
 
-# define to build from source using ./configure && make && make install.
-define buildsource(
-  $dir  = $title,
-  $user = 'root'
-) {
-
-  exec { "./configure in ${dir}":
-    command => './configure',
-    path    => "/usr/bin:/bin:/usr/local/bin:${dir}",
-    user    => $user,
-    cwd     => $dir,
-  } ->
-
-  exec { "make in ${dir}":
-    command => 'make',
-    path    => '/usr/bin:/bin',
-    user    => $user,
-    cwd     => $dir,
-  } ->
-
-  exec { "make install in ${dir}":
-    command => 'make install',
-    path    => '/usr/bin:/bin',
-    user    => $user,
-    cwd     => $dir,
-  }
-
-}
-
 # Class to install etherpad lite. Puppet acts a lot like a package manager
 # through this class.
 #
@@ -115,32 +86,16 @@ class etherpad_lite (
     mode   => 0664,
   }
 
-  git_repo { 'nodejs_repo':
-    repo       => 'https://github.com/joyent/node.git',
-    dest       => "${base_install_dir}/nodejs",
-    branch     => 'v0.6.16-release',
-    clone_only => 'true',
-    require    => Package['git']
-  }
-
   package { ['gzip',
              'curl',
              'python',
              'libssl-dev',
              'pkg-config',
              'abiword',
-             'build-essential',]:
+             'build-essential',
+             'nodejs',
+             'npm',]:
     ensure => present
-  }
-
-  buildsource { "${base_install_dir}/nodejs":
-    require => [Package['gzip'],
-                Package['curl'],
-                Package['python'],
-                Package['libssl-dev'],
-                Package['pkg-config'],
-                Package['build-essential'],
-                Git_repo['nodejs_repo']]
   }
 
   git_repo { 'etherpad_repo':
@@ -158,7 +113,15 @@ class etherpad_lite (
     cwd         => "${base_install_dir}/etherpad-lite",
     environment => "HOME=${base_log_dir}/${ep_user}",
     require     => [Git_repo['etherpad_repo'],
-                    Buildsource["${base_install_dir}/nodejs"]],
+                    Package['gzip'],
+                    Package['curl'],
+                    Package['python'],
+                    Package['libssl-dev'],
+                    Package['pkg-config'],
+                    Package['build-essential'],
+                    Package['nodejs'],
+                    Package['npm']
+                   ],
     before      => File["${base_install_dir}/etherpad-lite/settings.json"]
   }
 
