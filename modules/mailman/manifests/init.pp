@@ -80,7 +80,7 @@ class mailman($mailman_host='') {
     recurse => true,
     require => Package['mailman'],
     source => [
-                "puppet://modules/mailman/html-templates-en",
+                "puppet:///modules/mailman/html-templates-en",
               ],
   }
 }
