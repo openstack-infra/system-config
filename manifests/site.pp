@@ -444,24 +444,17 @@ node 'etherpad.openstack.org' {
     iptables_public_tcp_ports => [22, 80, 443]
   }
 
-  realize (
-    User::Virtual::Localuser["clarkb"],
-  )
-}
-
-node 'etherpadlite.openstack.org' {
-  include openstack_cron
-  class { 'openstack_server':
-    iptables_public_tcp_ports => [22, 80, 443]
-  }
-
   include etherpad_lite
   class { 'etherpad_lite::nginx':
-    server_name => 'etherpadlite.openstack.org'
+    server_name => 'etherpad.openstack.org'
   }
   include etherpad_lite::site
   include etherpad_lite::mysql
   include etherpad_lite::backup
+
+  realize (
+    User::Virtual::Localuser["clarkb"],
+  )
 }
 
 # A bare machine, but with a jenkins user
