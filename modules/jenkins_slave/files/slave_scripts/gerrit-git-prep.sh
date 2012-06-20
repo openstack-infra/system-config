@@ -40,7 +40,10 @@ function merge_change {
     REFSPEC=$2
     
     git fetch https://$SITE/p/$PROJECT $REFSPEC
-    git merge FETCH_HEAD
+    # This should be equivalent to what gerrit does if a repo is
+    # set to "merge commits when necessary" and "automatically resolve
+    # conflicts" is set to true:
+    git merge -s resolve FETCH_HEAD
 }
 
 function merge_changes {
