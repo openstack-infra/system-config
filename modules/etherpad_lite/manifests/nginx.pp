@@ -13,13 +13,18 @@ class etherpad_lite::nginx (
     notify  => Service['nginx']
   }
 
-  file { '/etc/nginx/sites-enabled/etherpad-lite':
+  file { '/etc/nginx/sites-available/etherpad-lite':
     ensure  => present,
     content => template('etherpad_lite/nginx.erb'),
     replace => 'true',
     owner   => 'root',
     require => File['/etc/nginx/ssl/eplite.crt', '/etc/nginx/ssl/eplite.key'],
     notify  => Service['nginx']
+  }
+
+  file { '/etc/nginx/sites-enabled/etherpad-lite':
+    ensure => link,
+    target => '/etc/nginx/sites-available/etherpad-lite'
   }
 
   file { '/etc/nginx/ssl':
