@@ -1,7 +1,7 @@
 import datetime
 from setuptools import setup
 
-ci_cmdclass={}
+ci_cmdclass = {}
 
 try:
     from sphinx.setup_command import BuildDoc
@@ -17,7 +17,8 @@ except Exception:
     pass
 
 setup(name='nova',
-      version="%d.%02d" % (datetime.datetime.now().year, datetime.datetime.now().month), 
+      version="%d.%02d" % (datetime.datetime.now().year,
+                           datetime.datetime.now().month),
       description="OpenStack Continuous Integration Scripts",
       author="OpenStack CI Team",
       author_email="openstack-ci@lists.launchpad.net",
