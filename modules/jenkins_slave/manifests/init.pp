@@ -178,4 +178,20 @@ class jenkins_slave($ssh_key, $sudo = false, $bare = false, $user = true) {
                   "puppet:///modules/jenkins_slave/slave_scripts",
                 ],
     }
+
+    # Temporary for debugging glance launch problem
+    # https://lists.launchpad.net/openstack/msg13381.html
+    file { '/etc/sysctl.d/10-ptrace.conf':
+      ensure => present,
+      source => "puppet:///modules/jenkins_slave/10-ptrace.conf",
+      owner => 'root',
+      group => 'root',
+      mode => 444,
+    }
+
+    exec { "ptrace sysctl":
+      subscribe => File['/etc/sysctl.d/10-ptrace.conf'],
+      refreshonly => true,
+      command => "/sbin/sysctl -p /etc/sysctl.d/10-ptrace.conf",
+    }
 }
