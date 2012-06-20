@@ -49,7 +49,51 @@ must be observed for SSH access:
    openstack-ci-puppet repository.
  * SSH keys should be periodically rotated (at least once per year).
    During rotation, a new key can be added to puppet for a time, and
-   then the old one removed.
+   then the old one removed.  Be sure to run puppet on the backup
+   servers to make sure they are updated.
+
+Backups
+*******
+
+Off-site backups are made to two servers:
+
+ * ci-backup-rs-ord.openstack.org
+ * ci-backup-hp-az1.openstack.org
+
+Puppet is used to perform the initial configuration of those machines,
+but to protect them from unauthorized access in case access to the
+puppet git repo is compromised, it is not run in agent or in cron mode
+on them.  Instead, it should be manually run when changes are made
+that should be applied to the backup servers.
+
+To start backing up a server, some commands need to be run manually on
+both the backup server, and the server to be backed up.  On the server
+to be backed up::
+
+  ssh-keygen -t rsa -f /root/.ssh/id_rsa -N ""
+
+And then ''cat /root/.ssh/id_rsa.pub'' for use later.
+
+On the backup servers::
+
+  sudo su -
+  BUPUSER=bup-<short-servername>  # eg, bup-jenkins-dev
+  useradd -r $BUPUSER -s /bin/bash -m 
+  cd /home/$BUPUSER
+  mkdir .ssh
+  cat >.ssh/authorized_keys
+
+and add this to the authorized_keys file::
+
+  command="BUP_DEBUG=0 BUP_FORCE_TTY=3 bup server",no-port-forwarding,no-agent-forwarding,no-X11-forwarding,no-pty <ssh key from earlier>
+
+Switching back to the server to be backed up, run::
+
+  ssh $BUPUSER@ci-backup-rs-ord.openstack.org
+  ssh $BUPUSER@ci-backup-hp-az1.openstack.org
+
+And verify the host key.  Add the "backup" class in puppet to the server
+to be backed up.
 
 GitHub Access
 *************
