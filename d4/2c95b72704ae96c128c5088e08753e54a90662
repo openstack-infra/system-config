@@ -1,0 +1,8 @@
+Code-Review+2: James E. Blair <corvus@inaugust.com>
+Verified+2: Jenkins
+Approved+1: linuxjedi <andrew@linuxjedi.co.uk>
+Submitted-by: Jenkins
+Submitted-at: Thu, 21 Jun 2012 17:30:20 +0000
+Reviewed-on: https://review.openstack.org/8779
+Project: openstack/openstack-ci-puppet
+Branch: refs/heads/master
