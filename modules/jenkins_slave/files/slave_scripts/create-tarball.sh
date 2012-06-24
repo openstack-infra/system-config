@@ -49,14 +49,22 @@ find_next_version() {
     printf "%s" "$version"
 }
 
-snapshotversion=$(find_next_version)
 
 rm -f dist/*.tar.gz
 if [ -f setup.py ] ; then
     tox -evenv python setup.py sdist
     # There should only be one, so this should be safe.
     tarball=$(echo dist/*.tar.gz)
+    # If our tarball includes a versioninfo file, use that version
+    snapshotversion=`tar --wildcards -O -z -xf $tarball *versioninfo 2>/dev/null`
+    if [ "x${snapshotversion}" = "x" ] ; then
+        snapshotversion=$(find_next_version)
+        echo mv "$tarball" "dist/$(basename $tarball .tar.gz)${SEPARATOR}${snapshotversion}.tar.gz"
+        mv "$tarball" "dist/$(basename $tarball .tar.gz)${SEPARATOR}${snapshotversion}.tar.gz"
+    else
+        projectname=`tar --wildcards -O -z -xf $tarball *PKG-INFO 2>/dev/null | grep Name: | awk '{print $2}'`
+        echo mv "$tarball" "dist/${projectname}-${snapshotversion}.tar.gz"
+        mv "$tarball" "dist/${projectname}-${snapshotversion}.tar.gz"
 
-    echo mv "$tarball" "dist/$(basename $tarball .tar.gz)${SEPARATOR}${snapshotversion}.tar.gz"
-    mv "$tarball" "dist/$(basename $tarball .tar.gz)${SEPARATOR}${snapshotversion}.tar.gz"
+    fi
 fi
