@@ -1,5 +1,5 @@
 project:
-  template: 'python_jobs'
+  template: 'pypi_jobs'
 
 values:
   name: 'python-keystoneclient'

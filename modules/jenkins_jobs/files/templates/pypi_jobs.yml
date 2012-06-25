@@ -1,0 +1,35 @@
+project:
+  template: 'python_jobs'
+
+values:
+  name: '@NAME@'
+  disabled: '@DISABLED@'
+  github_org: '@GITHUB_ORG@'
+  review_site: '@REVIEW_SITE@'
+  publisher_site: '@PUBLISHER_SITE@'
+  tarball_project: '@TARBALL_PROJECT@'
+  doc_publisher_site: '@DOC_PUBLISHER_SITE@'
+  node: '@NODE@'
+
+---
+# pypi-upload
+main:
+  name: '@NAME@-pypi'
+  review_site: '@REVIEW_SITE@'
+  github_org: '@GITHUB_ORG@'
+  project: '@NAME@'
+  authenticatedBuild: 'true'
+  concurrent: 'true'
+
+triggers:
+  - zuul
+
+builders:
+  - gerrit_git_prep
+  - shell: tox -v -evenv python setup.py sdist upload
+
+scm:
+  scm: 'false'
+
+assignednode:
+  node: 'master'
