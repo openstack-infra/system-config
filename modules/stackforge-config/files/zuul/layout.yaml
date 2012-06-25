@@ -37,15 +37,11 @@ projects:
         - gate-ceilometer-pep8
         - gate-ceilometer-python26
         - gate-ceilometer-python27
-        - gate-ceilometer-python26-essex
-        - gate-ceilometer-python27-essex
     gate:
       - gate-ceilometer-merge:
         - gate-ceilometer-pep8
         - gate-ceilometer-python26
         - gate-ceilometer-python27
-        - gate-ceilometer-python26-essex
-        - gate-ceilometer-python27-essex
 
   - name: heat-api/heat
     check:
