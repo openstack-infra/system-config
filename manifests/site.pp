@@ -256,7 +256,9 @@ node "gerrit-dev.openstack.org", "review-dev.openstack.org" {
     war => 'http://ci.openstack.org/tarballs/test/gerrit-2.4.1-10-g98fd9d8.war',
     script_user => 'update',
     script_key_file => '/home/gerrit2/.ssh/id_rsa',
-    script_site => 'openstack'
+    script_site => 'openstack',
+    enable_melody => 'true',
+    melody_session => 'true'
   }
 }
 
