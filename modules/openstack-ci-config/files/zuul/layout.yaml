@@ -162,6 +162,24 @@ projects:
     silent:
       - gate-tempest-devstack-vm
 
+  - name: openstack/openstack-common
+    check:
+      - gate-openstack-common-merge:
+        - gate-openstack-common-pep8
+        - gate-openstack-common-python26
+        - gate-openstack-common-python27
+        - gate-integration-tests-devstack-vm
+    gate:
+      - gate-openstack-common-merge:
+        - gate-openstack-common-pep8
+        - gate-openstack-common-python26
+        - gate-openstack-common-python27
+        - gate-integration-tests-devstack-vm
+    post:
+      - openstack-common-tarball
+    silent:
+      - gate-tempest-devstack-vm
+
   - name: openstack/quantum
     check:
       - gate-quantum-merge:
