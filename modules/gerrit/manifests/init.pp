@@ -85,7 +85,9 @@ class gerrit($virtual_hostname='',
       $war,
       $script_user,
       $script_key_file,
-      $script_site
+      $script_site,
+      $enable_melody = 'false',
+      $melody_session = 'false'
   ) {
 
   # Set this to true to disable cron jobs and replication, which can
