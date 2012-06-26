@@ -1,3 +1,4 @@
 #!/bin/sh
 
 python /usr/local/gerrit/scripts/update_bug.py change-merged "$@"
+python /usr/local/gerrit/scripts/notify_doc_impact.py change-merged "$@"
