@@ -1,0 +1,38 @@
+mount {
+	cpu = /cgroup/cpu;
+	cpuacct = /cgroup/cpuacct;
+	devices = /cgroup/devices;
+	memory = /cgroup/memory;
+	freezer = /cgroup/freezer;
+}
+
+group jenkins {
+	perm {
+		task {
+			uid = jenkins;
+			gid = jenkins;
+		}
+		admin {
+			uid = root;
+			gid = root;
+		}
+	}
+}
+
+group jenkins/children {
+	perm {
+		task {
+			uid = jenkins;
+			gid = jenkins;
+		}
+		admin {
+			uid = root;
+			gid = root;
+		}
+	}
+	memory {
+		memory.soft_limit_in_bytes = 512MB;
+		memory.limit_in_bytes = <%= (memorytotalbytes * 0.75).to_i %>;
+		memory.memsw.limit_in_bytes = <%= (memorytotalbytes * 0.75).to_i %>;
+	}
+}
