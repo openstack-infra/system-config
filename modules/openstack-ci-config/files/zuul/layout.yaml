@@ -28,6 +28,12 @@ queues:
       - event: ref-updated
         ref: ^(?!refs/).*$
 
+  - name: publish
+    manager: IndependentQueueManager
+    trigger:
+      - event: ref-updated
+        ref: ^refs/tags/.*$
+
   - name: silent
     manager: IndependentQueueManager
     trigger:
@@ -203,6 +209,8 @@ projects:
         - gate-python-cinderclient-python27
     post:
       - python-cinderclient-tarball
+    publish:
+      - python-cinderclient-pypi
     silent:
       - gate-tempest-devstack-vm
 
@@ -221,6 +229,8 @@ projects:
         - gate-integration-tests-devstack-vm
     post:
       - python-glanceclient-tarball
+    publish:
+      - python-glanceclient-pypi
     silent:
       - gate-tempest-devstack-vm
 
@@ -239,6 +249,8 @@ projects:
         - gate-integration-tests-devstack-vm
     post:
       - python-keystoneclient-tarball
+    publish:
+      - python-keystoneclient-pypi
     silent:
       - gate-tempest-devstack-vm
 
@@ -257,6 +269,8 @@ projects:
         - gate-integration-tests-devstack-vm
     post:
       - python-novaclient-tarball
+    publish:
+      - python-novaclient-pypi
     silent:
       - gate-tempest-devstack-vm
 
@@ -273,6 +287,8 @@ projects:
         - gate-python-openstackclient-python27
     post:
       - python-openstackclient-tarball
+    publish:
+      - python-openstackclient-pypi
 
   - name: openstack/python-quantumclient
     check:
@@ -289,6 +305,8 @@ projects:
         - gate-integration-tests-devstack-vm
     post:
       - python-quantumclient-tarball
+    publish:
+      - python-quantumclient-pypi
     silent:
       - gate-tempest-devstack-vm
 
@@ -305,6 +323,8 @@ projects:
         - gate-python-swiftclient-python27
     post:
       - python-swiftclient-tarball
+    publish:
+      - python-swiftclient-pypi
 
   - name: openstack-dev/devstack
     check:
