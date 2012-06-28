@@ -62,9 +62,8 @@ if [ -f setup.py ] ; then
         echo mv "$tarball" "dist/$(basename $tarball .tar.gz)${SEPARATOR}${snapshotversion}.tar.gz"
         mv "$tarball" "dist/$(basename $tarball .tar.gz)${SEPARATOR}${snapshotversion}.tar.gz"
     else
-        projectname=`tar --wildcards -O -z -xf $tarball *PKG-INFO 2>/dev/null | grep Name: | awk '{print $2}'`
-        echo mv "$tarball" "dist/${projectname}-${snapshotversion}.tar.gz"
-        mv "$tarball" "dist/${projectname}-${snapshotversion}.tar.gz"
+        echo mv "$tarball" "dist/${PROJECT}-${snapshotversion}.tar.gz"
+        mv "$tarball" "dist/${PROJECT}-${snapshotversion}.tar.gz"
 
     fi
 fi
