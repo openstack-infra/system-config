@@ -62,8 +62,9 @@ if [ -f setup.py ] ; then
         echo mv "$tarball" "dist/$(basename $tarball .tar.gz)${SEPARATOR}${snapshotversion}.tar.gz"
         mv "$tarball" "dist/$(basename $tarball .tar.gz)${SEPARATOR}${snapshotversion}.tar.gz"
     else
-        echo mv "$tarball" "dist/${PROJECT}-${snapshotversion}.tar.gz"
-        mv "$tarball" "dist/${PROJECT}-${snapshotversion}.tar.gz"
-
+        if [ "$tarball" != "dist/${PROJECT}-${snapshotversion}.tar.gz" ] ; then
+          echo mv "$tarball" "dist/${PROJECT}-${snapshotversion}.tar.gz"
+          mv "$tarball" "dist/${PROJECT}-${snapshotversion}.tar.gz"
+        fi
     fi
 fi
