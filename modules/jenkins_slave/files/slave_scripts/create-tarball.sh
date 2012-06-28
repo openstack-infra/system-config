@@ -61,9 +61,8 @@ if [ -f setup.py ] ; then
         snapshotversion=$(find_next_version)
         echo mv "$tarball" "dist/$(basename $tarball .tar.gz)${SEPARATOR}${snapshotversion}.tar.gz"
         mv "$tarball" "dist/$(basename $tarball .tar.gz)${SEPARATOR}${snapshotversion}.tar.gz"
-    else
+    elif [ "$tarball" != "dist/${PROJECT}-${snapshotversion}.tar.gz" ] ; then
         echo mv "$tarball" "dist/${PROJECT}-${snapshotversion}.tar.gz"
         mv "$tarball" "dist/${PROJECT}-${snapshotversion}.tar.gz"
-
     fi
 fi
