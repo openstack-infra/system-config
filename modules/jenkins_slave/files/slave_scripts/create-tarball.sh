@@ -56,7 +56,7 @@ if [ -f setup.py ] ; then
     # There should only be one, so this should be safe.
     tarball=$(echo dist/*.tar.gz)
     # If our tarball includes a versioninfo file, use that version
-    snapshotversion=`tar --wildcards -O -z -xf $tarball *versioninfo 2>/dev/null`
+    snapshotversion=`tar --wildcards -O -z -xf $tarball *versioninfo 2>/dev/null || true`
     if [ "x${snapshotversion}" = "x" ] ; then
         snapshotversion=$(find_next_version)
         echo mv "$tarball" "dist/$(basename $tarball .tar.gz)${SEPARATOR}${snapshotversion}.tar.gz"
