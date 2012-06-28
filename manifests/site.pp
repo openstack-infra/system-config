@@ -228,10 +228,12 @@ node "review.openstack.org" {
                          remote => 'https://gerrit.googlesource.com/gerrit'
                          } ],
     logo => 'openstack.png',
-    war => 'http://ci.openstack.org/tarballs/gerrit-2.4.1-8-g5bbcc7f.war',
+    war => 'http://ci.openstack.org/tarballs/gerrit-2.4.1-10-g63110fd.war',
     script_user => 'launchpadsync',
     script_key_file => '/home/gerrit2/.ssh/launchpadsync_rsa',
-    script_site => 'openstack'
+    script_site => 'openstack',
+    enable_melody => 'true',
+    melody_session => 'true'
   }
 }
 
