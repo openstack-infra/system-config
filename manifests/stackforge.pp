@@ -54,7 +54,7 @@ node "review.stackforge.org" {
                          close_pull => 'true'
                          } ],
     logo => 'stackforge.png',
-    war => 'http://ci.openstack.org/tarballs/gerrit-2.3-5-gaec571e.war',
+    war => 'http://ci.openstack.org/tarballs/gerrit-2.4.1-9-g8b48c79.war',
     script_user => 'update',
     script_key_file => '/home/gerrit2/.ssh/id_rsa',
     script_site => 'stackforge'
