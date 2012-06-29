@@ -124,6 +124,12 @@ class jenkins_master($site, $serveradmin, $logo,
     require => Package[python-pip]
   }
 
+  package { "tox":
+    ensure => latest,  # okay to use latest for pip
+    provider => pip,
+    require => Package[python-pip],
+  }
+
   exec { "update apt cache":
     subscribe => [ File["/etc/apt/sources.list.d/jenkins.list"]],
     refreshonly => true,
