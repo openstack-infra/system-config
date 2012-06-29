@@ -40,6 +40,7 @@ node "review.stackforge.org" {
     ssl_key_file => '/etc/ssl/private/review.stackforge.org.key',
     ssl_chain_file => '/etc/ssl/certs/intermediate.crt',
     email => "review@stackforge.org",
+    sshd_threads => '100',
     github_projects => [ {
                          name => 'stackforge/MRaaS',
                          close_pull => 'true'
@@ -54,7 +55,7 @@ node "review.stackforge.org" {
                          close_pull => 'true'
                          } ],
     logo => 'stackforge.png',
-    war => 'http://ci.openstack.org/tarballs/gerrit-2.4.1-8-g5bbcc7f.war',
+    war => 'http://ci.openstack.org/tarballs/gerrit-2.4.1-10-g63110fd.war',
     script_user => 'update',
     script_key_file => '/home/gerrit2/.ssh/id_rsa',
     script_site => 'stackforge'
