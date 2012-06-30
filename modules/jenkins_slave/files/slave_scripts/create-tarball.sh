@@ -3,6 +3,7 @@
 # In case we start doing something more sophisticated with other refs
 # later (such as tags).
 BRANCH=$GERRIT_REFNAME
+BRANCH_PATH=`echo $BRANCH | tr / -`
 
 if [ $BRANCH == "milestone-proposed" ]
 then
@@ -61,8 +62,10 @@ if [ -f setup.py ] ; then
         snapshotversion=$(find_next_version)
         echo mv "$tarball" "dist/$(basename $tarball .tar.gz)${SEPARATOR}${snapshotversion}.tar.gz"
         mv "$tarball" "dist/$(basename $tarball .tar.gz)${SEPARATOR}${snapshotversion}.tar.gz"
+        cp "dist/$(basename $tarball .tar.gz)${SEPARATOR}${snapshotversion}.tar.gz" "dist/${PROJECT}-${BRANCH_PATH}.tar.gz"
     elif [ "$tarball" != "dist/${PROJECT}-${snapshotversion}.tar.gz" ] ; then
         echo mv "$tarball" "dist/${PROJECT}-${snapshotversion}.tar.gz"
         mv "$tarball" "dist/${PROJECT}-${snapshotversion}.tar.gz"
+        cp "dist/${PROJECT}-${snapshotversion}.tar.gz" "dist/${PROJECT}-${BRANCH_PATH}.tar.gz"
     fi
 fi
