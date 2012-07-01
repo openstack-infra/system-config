@@ -80,6 +80,12 @@ class jenkins_slave($ssh_key, $sudo = false, $bare = false, $user = true) {
       ensure => present,
     }
 
+    package { "setuptools-git":
+      ensure => latest,  # okay to use latest for pip
+      provider => pip,
+      require => Package[python-pip],
+    }
+
     package { "git-review":
       ensure => latest,  # okay to use latest for pip
       provider => pip,
