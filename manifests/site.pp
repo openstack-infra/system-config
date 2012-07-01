@@ -277,6 +277,11 @@ node "jenkins.openstack.org" {
     ssl_key_file => '/etc/ssl/private/jenkins.openstack.org.key',
     ssl_chain_file => '/etc/ssl/certs/intermediate.pem',
   }
+  # include jenkins slave so that build deps are there for the pip download
+  class { 'jenkins_slave':
+    ssh_key => "",
+    user => false
+  }
   class { "jenkins_jobs":
     site => "openstack",
     projects => [
@@ -329,6 +334,11 @@ node "jenkins-dev.openstack.org" {
     ssl_cert_file => '/etc/ssl/certs/ssl-cert-snakeoil.pem',
     ssl_key_file => '/etc/ssl/private/ssl-cert-snakeoil.key',
     ssl_chain_file => '',
+  }
+  # include jenkins slave so that build deps are there for the pip download
+  class { 'jenkins_slave':
+    ssh_key => "",
+    user => false
   }
 }
 
