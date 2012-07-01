@@ -6,7 +6,7 @@ export PIP_DOWNLOAD_CACHE=${PIP_DOWNLOAD_CACHE:-/var/cache/pip}
 export PIP_TEMP_DOWNLOAD=${PIP_TEMP_DOWNLOAD:-/var/lib/pip-download}
 
 project=$1
-pip_command='pip install -M -U -I --exists-action=w --no-install'
+pip_command='/usr/local/bin/pip install -M -U -I --exists-action=w --no-install'
 
 cd ${PIP_TEMP_DOWNLOAD}
 if [ ! -d ${project} ] ; then
