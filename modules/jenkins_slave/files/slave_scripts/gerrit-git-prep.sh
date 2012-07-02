@@ -38,12 +38,32 @@ fi
 function merge_change {
     PROJECT=$1
     REFSPEC=$2
-    
-    git fetch https://$SITE/p/$PROJECT $REFSPEC
-    # This should be equivalent to what gerrit does if a repo is
-    # set to "merge commits when necessary" and "automatically resolve
-    # conflicts" is set to true:
-    git merge -s resolve FETCH_HEAD
+    MAX_ATTEMPTS=${3:-3}
+    COUNT=0
+
+    until git fetch https://$SITE/p/$PROJECT $REFSPEC
+    do
+        COUNT=$(($COUNT + 1))
+        if [ $COUNT -eq $MAX_ATTEMPTS ]
+        then
+            break
+        fi
+        SLEEP_TIME=$((30 + $RANDOM % 60))
+        sleep $SLEEP_TIME
+    done
+
+    if [ $COUNT -lt $MAX_ATTEMPTS ]
+    then
+        # This should be equivalent to what gerrit does if a repo is
+        # set to "merge commits when necessary" and "automatically resolve
+        # conflicts" is set to true:
+        git merge -s resolve FETCH_HEAD
+    else
+        # Failed to fetch too many times. Notify jenkins of the failure.
+        # This is necessary because set -e does not apply to the condition of
+        # until.
+        exit 1
+    fi
 }
 
 function merge_changes {
