@@ -107,6 +107,15 @@ node default {
 # sshd.threads:
 # http://groups.google.com/group/repo-discuss/browse_thread/thread/b91491c185295a71
 
+# httpd.maxWait:
+# 12:07 <@spearce> httpd.maxwait defaults to 5 minutes and is how long gerrit
+#                  waits for an idle sshd.thread before aboring the http request
+# 12:08 <@spearce> ironically
+# 12:08 <@spearce> ProjectQosFilter passes this value as minutes
+# 12:08 <@spearce> to a method that accepts milliseconds
+# 12:09 <@spearce> so. you get 5 milliseconds before aborting
+# thus, set it to 5000minutes until the bug is fixed.
+
 node "review.openstack.org" {
   include openstack_cron
   class { 'openstack_server':
@@ -125,6 +134,7 @@ node "review.openstack.org" {
     core_packedgitlimit => '400m',
     core_packedgitwindowsize => '16k',
     sshd_threads => '100',
+    httpd_maxwait => '5000min',
     github_projects => [ {
                          name => 'openstack/keystone',
                          close_pull => 'true'

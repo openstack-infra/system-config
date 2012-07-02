@@ -40,6 +40,7 @@ node "review.stackforge.org" {
     ssl_key_file => '/etc/ssl/private/review.stackforge.org.key',
     ssl_chain_file => '/etc/ssl/certs/intermediate.crt',
     email => "review@stackforge.org",
+    httpd_maxwait => '5000min',
     sshd_threads => '100',
     github_projects => [ {
                          name => 'stackforge/MRaaS',

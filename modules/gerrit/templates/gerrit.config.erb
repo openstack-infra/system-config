@@ -43,6 +43,9 @@
 <% end -%>
 [httpd]
 	listenUrl = proxy-https://*:8081/
+<% if httpd_maxwait != "" -%>
+	maxWait = <%= httpd_maxwait %>
+<% end -%>
 <% if httpd_acceptorthreads != "" -%>
 	acceptorThreads = <%= httpd_acceptorthreads %>
 <% end -%>
