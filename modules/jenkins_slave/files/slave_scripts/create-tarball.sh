@@ -9,14 +9,6 @@ if [ $BRANCH == "milestone-proposed" ]
 then
     REVNOPREFIX="r"
 fi
-if [[ $BRANCH =~ ^stable/.*$ ]]
-then
-    NOMILESTONE="true"
-fi
-
-# Should be ~ if tarball version is the one we're working *toward*. (By far preferred!)
-# Should be + if tarball version is already released and we're moving forward after it.
-SEPARATOR=${SEPARATOR:-'~'}
 
 if [ -z "$1" ]
 then
@@ -28,13 +20,13 @@ PROJECT=$1
 find_next_version() {
     datestamp="${datestamp:-$(date +%Y%m%d)}"
     git fetch origin +refs/meta/*:refs/remotes/meta/*
-    milestonever="$(git show meta/openstack/release:${BRANCH})"
-    if [ $? != 0 ]
+    if [[ $BRANCH =~ ^stable/.*$ ]]
     then
-        if [ "$NOMILESTONE" = "true" ]
+        milestonever=""
+    else
+        milestonever="$(git show meta/openstack/release:${BRANCH})"
+        if [ $? != 0 ]
         then
-            milestonever=""
-        else
             echo "Milestone file ${BRANCH} not found. Bailing out." >&2
             exit 1
         fi
@@ -60,9 +52,9 @@ if [ -f setup.py ] ; then
     snapshotversion=`tar --wildcards -O -z -xf $tarball *versioninfo 2>/dev/null || true`
     if [ "x${snapshotversion}" = "x" ] ; then
         snapshotversion=$(find_next_version)
-        echo mv "$tarball" "dist/$(basename $tarball .tar.gz)${SEPARATOR}${snapshotversion}.tar.gz"
-        mv "$tarball" "dist/$(basename $tarball .tar.gz)${SEPARATOR}${snapshotversion}.tar.gz"
-        cp "dist/$(basename $tarball .tar.gz)${SEPARATOR}${snapshotversion}.tar.gz" "dist/${PROJECT}-${BRANCH_PATH}.tar.gz"
+        echo mv "$tarball" "dist/$(basename $tarball .tar.gz)~${snapshotversion}.tar.gz"
+        mv "$tarball" "dist/$(basename $tarball .tar.gz)~${snapshotversion}.tar.gz"
+        cp "dist/$(basename $tarball .tar.gz)~${snapshotversion}.tar.gz" "dist/${PROJECT}-${BRANCH_PATH}.tar.gz"
     elif [ "$tarball" != "dist/${PROJECT}-${snapshotversion}.tar.gz" ] ; then
         echo mv "$tarball" "dist/${PROJECT}-${snapshotversion}.tar.gz"
         mv "$tarball" "dist/${PROJECT}-${snapshotversion}.tar.gz"
