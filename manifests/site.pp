@@ -35,6 +35,8 @@ class backup ($backup_user) {
 /var/spool/exim/*
 /media/*
 /mnt/*
+/var/agentx/*
+/run/*
 "
   }
 
