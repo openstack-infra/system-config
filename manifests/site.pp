@@ -289,6 +289,7 @@ node "jenkins.openstack.org" {
       'keystone',
       'nova',
       'openstack-ci-puppet',
+      'openstack-common',
       'pypi-mirror',
       'python-cinderclient',
       'python-glanceclient',
