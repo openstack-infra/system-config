@@ -3,6 +3,8 @@ queues:
     manager: IndependentQueueManager
     trigger:
       - event: patchset-created
+      - event: comment-added
+        comment_filter: (?i)^\s*recheck\.?\s*$
     success:
       verified: 1
     failure:
@@ -14,6 +16,8 @@ queues:
       - event: comment-added
         approval:
           - approved: 1
+      - event: comment-added
+        comment_filter: (?i)^\s*reverify\.?\s*$
     start:
       verified: 0
     success:
