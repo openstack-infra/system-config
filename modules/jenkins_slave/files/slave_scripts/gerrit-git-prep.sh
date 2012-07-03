@@ -44,11 +44,13 @@ function merge_change {
     until git fetch https://$SITE/p/$PROJECT $REFSPEC
     do
         COUNT=$(($COUNT + 1))
+        logger -p user.warning -t 'gerrit-git-prep' FAILED: git fetch https://$SITE/p/$PROJECT $REFSPEC COUNT: $COUNT
         if [ $COUNT -eq $MAX_ATTEMPTS ]
         then
             break
         fi
         SLEEP_TIME=$((30 + $RANDOM % 60))
+        logger -p user.warning -t 'gerrit-git-prep' sleep $SLEEP_TIME
         sleep $SLEEP_TIME
     done
 
