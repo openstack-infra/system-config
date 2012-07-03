@@ -22,6 +22,7 @@
 #   httpd_acceptorthreads:
 #   httpd_minthreads:
 #   httpd_maxthreads:
+#   httpd_maxwait:
 #     Gerrit configuration options; see Gerrit docs.
 #   commentlinks:
 #     A list of regexes Gerrit should hyperlink.
@@ -67,6 +68,7 @@ class gerrit($virtual_hostname='',
       $httpd_acceptorthreads='',
       $httpd_minthreads='',
       $httpd_maxthreads='',
+      $httpd_maxwait='',
       $github_projects = [],
       $upstream_projects = [],
       $commentlinks = [ { name => 'changeid',
