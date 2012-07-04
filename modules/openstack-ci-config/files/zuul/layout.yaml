@@ -226,7 +226,6 @@ projects:
     post:
       - python-cinderclient-tarball
     publish:
-      - python-cinderclient-tarball
       - python-cinderclient-pypi
     silent:
       - gate-tempest-devstack-vm
@@ -247,7 +246,6 @@ projects:
     post:
       - python-glanceclient-tarball
     publish:
-      - python-glanceclient-tarball
       - python-glanceclient-pypi
     silent:
       - gate-tempest-devstack-vm
@@ -268,7 +266,6 @@ projects:
     post:
       - python-keystoneclient-tarball
     publish:
-      - python-keystoneclient-tarball
       - python-keystoneclient-pypi
     silent:
       - gate-tempest-devstack-vm
@@ -289,7 +286,6 @@ projects:
     post:
       - python-novaclient-tarball
     publish:
-      - python-novaclient-tarball
       - python-novaclient-pypi
     silent:
       - gate-tempest-devstack-vm
@@ -308,7 +304,6 @@ projects:
     post:
       - python-openstackclient-tarball
     publish:
-      - python-openstackclient-tarball
       - python-openstackclient-pypi
 
   - name: openstack/python-quantumclient
@@ -327,7 +322,6 @@ projects:
     post:
       - python-quantumclient-tarball
     publish:
-      - python-quantumclient-tarball
       - python-quantumclient-pypi
     silent:
       - gate-tempest-devstack-vm
@@ -346,7 +340,6 @@ projects:
     post:
       - python-swiftclient-tarball
     publish:
-      - python-swiftclient-tarball
       - python-swiftclient-pypi
 
   - name: openstack-dev/devstack
