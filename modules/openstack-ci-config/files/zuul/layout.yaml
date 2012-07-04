@@ -378,3 +378,42 @@ projects:
         - gate-tempest-pep8
     silent:
       - gate-tempest-devstack-vm
+
+  - name: stackforge/ceilometer
+    check:
+      - gate-ceilometer-merge:
+        - gate-ceilometer-pep8
+        - gate-ceilometer-python26
+        - gate-ceilometer-python27
+        - gate-ceilometer-python26-essex
+        - gate-ceilometer-python27-essex
+    gate:
+      - gate-ceilometer-merge:
+        - gate-ceilometer-pep8
+        - gate-ceilometer-python26
+        - gate-ceilometer-python27
+
+  - name: heat-api/heat
+    check:
+      - gate-heat-merge:
+        - gate-heat-pep8
+        - gate-heat-python26
+        - gate-heat-python27
+    gate:
+      - gate-heat-merge:
+        - gate-heat-pep8
+        - gate-heat-python26
+        - gate-heat-python27
+
+  - name: stackforge/reddwarf
+    check:
+      - gate-reddwarf-merge:
+        - gate-reddwarf-pep8
+        - gate-reddwarf-python26
+        - gate-reddwarf-python27
+    gate:
+      - gate-reddwarf-merge:
+        - gate-reddwarf-pep8
+        - gate-reddwarf-python26
+        - gate-reddwarf-python27
+

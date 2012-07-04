@@ -234,6 +234,18 @@ node "review.openstack.org" {
                          }, {
                          name => 'openstack/python-swiftclient',
                          close_pull => 'true'
+                         }, {
+                         name => 'stackforge/MRaaS',
+                         close_pull => 'true'
+                         }, {
+                         name => 'stackforge/reddwarf',
+                         close_pull => 'true'
+                         }, {
+                         name => 'stackforge/ceilometer',
+                         close_pull => 'true'
+                         }, {
+                         name => 'heat-api/heat',
+                         close_pull => 'true'
                          } ],
     upstream_projects => [ {
                          name => 'openstack-ci/gerrit',
@@ -314,6 +326,9 @@ node "jenkins.openstack.org" {
       'swift',
       'tempest',
       'zuul',
+      'reddwarf',
+      'ceilometer',
+      'heat'
     ]
   }
   class { 'zuul': }
