@@ -61,6 +61,7 @@ class mailman($mailman_host='') {
   service { 'mailman':
     ensure          => running,
     hasrestart      => true,
+    hasstatus       => false,
     subscribe       => File['/etc/mailman/mm_cfg.py'],
     require         => Package["mailman"]
   }
