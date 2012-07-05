@@ -30,6 +30,7 @@ class openstack_base {
     User::Virtual::Localuser["soren"],
     User::Virtual::Localuser["linuxjedi"],
     User::Virtual::Localuser["devananda"],
+    User::Virtual::Localuser["clarkb"],
   )
 }
 
