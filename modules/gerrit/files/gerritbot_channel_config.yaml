@@ -1,0 +1,26 @@
+openstack-infra:
+    events:
+      - patchset-created
+      - change-merged
+    projects:
+      - openstack/openstack-ci-puppet
+      - openstack-ci/gerrit
+      - openstack-ci/git-review
+      - openstack-ci/zuul
+    branches:
+      - master
+
+openstack-dev:
+    events:
+      - change-merged
+    projects:
+      - openstack/cinder
+      - openstack/glance
+      - openstack/horizon
+      - openstack/keystone
+      - openstack/nova
+      - openstack/openstack-common
+      - openstack/quantum
+      - openstack/swift
+    branches:
+      - master
