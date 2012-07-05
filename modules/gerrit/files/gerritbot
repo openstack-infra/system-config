@@ -5,17 +5,28 @@
 [ircbot]
 nick=NICKNAME
 pass=PASSWORD
-channel=CHANNEL
 server=irc.freenode.net
 port=6667
+channel_config=/path/to/yaml/config
 
 [gerrit]
 user=gerrit2
 key=/path/to/id_rsa
 host=review.example.com
 port=29418
-events=patchset-created, change-merged
-branches=master
+"""
+
+# The yaml channel config should look like:
+"""
+openstack-dev:
+    events:
+      - patchset-created
+      - change-merged
+    projects:
+      - openstack/nova
+      - openstack/swift
+    branches:
+      - master
 """
 
 import ircbot
@@ -25,17 +36,18 @@ import threading
 import select
 import json
 import sys
+import os
 import ConfigParser
 import daemon, daemon.pidlockfile
 import traceback
+import yaml
 
 class GerritBot(ircbot.SingleServerIRCBot):
-    def __init__(self, channel, nickname, password, server, port=6667):
-        if channel[0] != '#': channel = '#'+channel
+    def __init__(self, channels, nickname, password, server, port=6667):
         ircbot.SingleServerIRCBot.__init__(self, 
                                            [(server, port)], 
                                            nickname, nickname)
-        self.channel = channel
+        self.channel_list = channels
         self.nickname = nickname
         self.password = password
 
@@ -49,19 +61,19 @@ class GerritBot(ircbot.SingleServerIRCBot):
 
     def on_welcome(self, c, e):
         c.privmsg("nickserv", "identify %s "% self.password)
-        c.join(self.channel)
+        for channel in self.channel_list:
+            c.join(channel)
 
-    def send(self, msg):
-        self.connection.privmsg(self.channel, msg)
+    def send(self, channel, msg):
+        self.connection.privmsg(channel, msg)
         time.sleep(0.5)
 
 class Gerrit(threading.Thread):
-    def __init__(self, ircbot, events, branches,
+    def __init__(self, ircbot, channel_config,
                  username, keyfile, server, port=29418):
         threading.Thread.__init__(self)
         self.ircbot = ircbot
-        self.events = events
-        self.branches = branches
+        self.channel_config = channel_config
         self.username = username
         self.keyfile = keyfile
         self.server = server
@@ -70,7 +82,7 @@ class Gerrit(threading.Thread):
         self.poll = select.poll()
 
     def _open(self):
-        self.proc = subprocess.Popen(['/usr/bin/ssh', '-p', str(self.port), 
+        self.proc = subprocess.Popen(['/usr/bin/ssh', '-p', str(self.port),
                                       '-i', self.keyfile,
                                       '-l', self.username, self.server,
                                       'gerrit', 'stream-events'],
@@ -92,76 +104,81 @@ class Gerrit(threading.Thread):
             pass
         self.proc = None
 
-    def patchset_created(self, data):
-        if 'patchset-created' in self.events:
-            msg = '%s proposed a change to %s: %s  %s' % (
-                data['patchSet']['uploader']['name'], 
-                data['change']['project'], 
-                data['change']['subject'],
-                data['change']['url'])
-            self.ircbot.send(msg)
+    def patchset_created(self, channel, data):
+        msg = '%s proposed a change to %s: %s  %s' % (
+            data['patchSet']['uploader']['name'],
+            data['change']['project'],
+            data['change']['subject'],
+            data['change']['url'])
+        self.ircbot.send(channel, msg)
 
-    def comment_added(self, data):
-        if 'comment-added' in self.events:
-            msg = 'A comment has been added to a proposed change to %s: %s  %s' % (
-                data['change']['project'], 
-                data['change']['subject'],
-                data['change']['url'])
-            self.ircbot.send(msg)
+    def comment_added(self, channel, data):
+        msg = 'A comment has been added to a proposed change to %s: %s  %s' % (
+            data['change']['project'],
+            data['change']['subject'],
+            data['change']['url'])
+        self.ircbot.send(channel, msg)
         
         for approval in data.get('approvals', []):
             if (approval['type'] == 'VRIF' and approval['value'] == '-2' and
-                'x-vrif-minus-2' in self.events):
+                                channel in self.channel_config.events.get(
+                                                    'x-vrif-minus-2', set())):
                 msg = 'Verification of a change to %s failed: %s  %s' % (
-                    data['change']['project'], 
+                    data['change']['project'],
                     data['change']['subject'],
                     data['change']['url'])
-                self.ircbot.send(msg)
+                self.ircbot.send(channel, msg)
 
             if (approval['type'] == 'VRIF' and approval['value'] == '2' and
-                'x-vrif-plus-2' in self.events):
+                                channel in self.channel_config.events.get(
+                                                    'x-vrif-plus-2', set())):
                 msg = 'Verification of a change to %s succeeded: %s  %s' % (
-                    data['change']['project'], 
+                    data['change']['project'],
                     data['change']['subject'],
                     data['change']['url'])
-                self.ircbot.send(msg)
+                self.ircbot.send(channel, msg)
 
             if (approval['type'] == 'CRVW' and approval['value'] == '-2' and
-                'x-crvw-minus-2' in self.events):
+                                channel in self.channel_config.events.get(
+                                                    'x-crvw-minus-2', set())):
                 msg = 'A change to %s has been rejected: %s  %s' % (
-                    data['change']['project'], 
+                    data['change']['project'],
                     data['change']['subject'],
                     data['change']['url'])
-                self.ircbot.send(msg)
+                self.ircbot.send(channel, msg)
 
             if (approval['type'] == 'CRVW' and approval['value'] == '2' and
-                'x-crvw-plus-2' in self.events):
+                                channel in self.channel_config.events.get(
+                                                    'x-crvw-plus-2', set())):
                 msg = 'A change to %s has been approved: %s  %s' % (
-                    data['change']['project'], 
+                    data['change']['project'],
                     data['change']['subject'],
                     data['change']['url'])
-                self.ircbot.send(msg)
+                self.ircbot.send(channel, msg)
 
-    def change_merged(self, data):
-        if 'change-merged' in self.events:
-            msg = 'A change was merged to %s: %s  %s' % (
-                data['change']['project'], 
-                data['change']['subject'],
-                data['change']['url'])
-            self.ircbot.send(msg)
+    def change_merged(self, channel, data):
+        msg = 'A change was merged to %s: %s  %s' % (
+            data['change']['project'],
+            data['change']['subject'],
+            data['change']['url'])
+        self.ircbot.send(channel, msg)
 
     def _read(self):
         l = self.proc.stdout.readline()
         data = json.loads(l)
-        # If branches is specified, ignore notifications for other branches
-        if self.branches and data['change']['branch'] not in self.branches:
-            return
-        if data['type'] == 'comment-added':
-            self.comment_added(data)
-        elif data['type'] == 'patchset-created':
-            self.patchset_created(data)
-        elif data['type'] == 'change-merged':
-            self.change_merged(data)
+        channel_set = (self.channel_config.projects.get(
+                            data['change']['project'], set()) &
+                       self.channel_config.events.get(
+                            data['type'], set()) &
+                       self.channel_config.branches.get(
+                            data['change']['branch'], set()))
+        for channel in channel_set:
+            if data['type'] == 'comment-added':
+                self.comment_added(channel, data)
+            elif data['type'] == 'patchset-created':
+                self.patchset_created(channel, data)
+            elif data['type'] == 'change-merged':
+                self.change_merged(channel, data)
 
     def _listen(self):
         while True:
@@ -188,18 +205,52 @@ class Gerrit(threading.Thread):
         while True:
             self._run()
             
+class ChannelConfig(object):
+    def __init__(self, data):
+        self.data = data
+        keys = data.keys()
+        for key in keys:
+            if key[0] != '#':
+                data['#'+key] = data.pop(key)
+        self.channels = data.keys()
+        self.projects = {}
+        self.events = {}
+        self.branches = {}
+        for channel, val in self.data.iteritems():
+            for event in val['events']:
+                event_set = self.events.get(event, set())
+                event_set.add(channel)
+                self.events[event] = event_set
+            for project in val['projects']:
+                project_set = self.projects.get(project, set())
+                project_set.add(channel)
+                self.projects[project] = project_set
+            for branch in val['branches']:
+                branch_set = self.branches.get(branch, set())
+                branch_set.add(channel)
+                self.branches[branch] = branch_set
+
 def _main():
     config=ConfigParser.ConfigParser()
     config.read(sys.argv[1])
 
-    bot = GerritBot(config.get('ircbot', 'channel'), 
+    fp = config.get('ircbot', 'channel_config')
+    if fp:
+        fp = os.path.expanduser(fp)
+        if not os.path.exists(fp):
+            raise Exception("Unable to read layout config file at %s" % fp)
+    else:
+        raise Exception("Channel Config must be specified in config file.")
+
+    channel_config = ChannelConfig(yaml.load(open(fp)))
+
+    bot = GerritBot(channel_config.channels,
                     config.get('ircbot', 'nick'),
                     config.get('ircbot', 'pass'),
                     config.get('ircbot', 'server'),
                     config.getint('ircbot', 'port'))
     g = Gerrit(bot, 
-               config.get('gerrit', 'events'),
-               config.get('gerrit', 'branches'),
+               channel_config,
                config.get('gerrit', 'user'),
                config.get('gerrit', 'key'),
                config.get('gerrit', 'host'),
@@ -212,7 +263,8 @@ def main():
         print "Usage: %s CONFIGFILE" % sys.argv[0]
         sys.exit(1)
 
-    pid = daemon.pidlockfile.TimeoutPIDLockFile("/var/run/gerritbot/gerritbot.pid", 10)
+    pid = daemon.pidlockfile.TimeoutPIDLockFile(
+            "/var/run/gerritbot/gerritbot.pid", 10)
     with daemon.DaemonContext(pidfile=pid):
         _main()
 

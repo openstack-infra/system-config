@@ -1,0 +1,45 @@
+openstack-infra:
+    events:
+      - patchset-created
+      - change-merged
+      - x-vrif-minus-1
+    projects:
+      - openstack/openstack-ci-puppet
+      - openstack-ci/git-review
+      - openstack-ci/zuul
+    branches:
+      - master
+
+openstack-dev:
+    events:
+      - change-merged
+      - x-vrif-minus-1
+    projects:
+      - openstack/cinder
+      - openstack/glance
+      - openstack/horizon
+      - openstack/keystone
+      - openstack/nova
+      - openstack/openstack-common
+      - openstack/python-cinderclient
+      - openstack/python-glanceclient
+      - openstack/python-keystoneclient
+      - openstack/python-novaclient
+      - openstack/python-openstackclient
+      - openstack/python-quantumclient
+      - openstack/python-swiftclient
+      - openstack/quantum
+      - openstack/swift
+    branches:
+      - master
+
+stackforge-dev:
+    events:
+      - patchset-created
+      - change-merged
+      - x-vrif-minus-1
+    projects:
+      - stackforge/ceilometer
+      - stackforge/heat
+    branches:
+      - master
