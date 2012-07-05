@@ -1,5 +1,16 @@
 project:
-  template: 'python_library_jobs'
+  template: 'python_jobs'
+
+values:
+  name: 'python-cinderclient'
+  disabled: 'false'
+  github_org: 'openstack'
+  review_site: 'review.openstack.org'
+  node: 'precise'
+
+---
+project:
+  template: 'pypi_jobs'
 
 values:
   name: 'python-cinderclient'
@@ -10,3 +21,4 @@ values:
   tarball_project: 'python-cinderclient'
   doc_publisher_site: 'docs.openstack.org'
   node: 'precise'
+
