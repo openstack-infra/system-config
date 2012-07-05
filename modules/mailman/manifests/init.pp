@@ -8,6 +8,12 @@ class mailman($mailman_host='') {
     ensure => installed,
   }
 
+  file { '/etc/apache2/mods-enabled/rewrite.load':
+    target => '/etc/apache2/mods-available/rewrite.load',
+    ensure => link,
+    require => Package['apache2'],
+  }
+
   file { "/var/www/index.html":
     source => 'puppet:///modules/mailman/index.html',
     owner => 'root',
@@ -43,6 +49,7 @@ class mailman($mailman_host='') {
     target => '/etc/apache2/sites-available/mailman',
     require => [
       File['/etc/apache2/sites-available/mailman'],
+      File['/etc/apache2/mods-enabled/rewrite.load'],
     ],
   }
 

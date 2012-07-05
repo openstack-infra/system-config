@@ -11,6 +11,9 @@
 
 	DocumentRoot /var/www
 
+RewriteEngine on
+RewriteRule ^/$ /cgi-bin/mailman/listinfo [R]
+
 # We can find mailman here:
 ScriptAlias /cgi-bin/mailman/ /usr/lib/cgi-bin/mailman/
 # And the public archives:
