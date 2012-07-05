@@ -89,16 +89,23 @@ projects:
   - name: openstack/cinder
     check:
       - gate-cinder-merge:
+        - gate-cinder-docs
         - gate-cinder-pep8
         - gate-cinder-python26
         - gate-cinder-python27
     gate:
       - gate-cinder-merge:
+        - gate-cinder-docs
         - gate-cinder-pep8
         - gate-cinder-python26
         - gate-cinder-python27
     post:
       - cinder-tarball
+      - cinder-coverage
+      - cinder-docs
+    publish:
+      - cinder-tarball
+      - cinder-docs
 
   - name: openstack/glance
     check:
@@ -115,62 +122,85 @@ projects:
         - gate-integration-tests-devstack-vm
     post:
       - glance-tarball
+      - glance-coverage
+      - glance-docs
     silent:
       - gate-tempest-devstack-vm
+    publish:
+      - glance-tarball
+      - glance-docs
 
   - name: openstack/horizon
     check:
       - gate-horizon-merge:
+        - gate-horizon-docs
         - gate-horizon-pep8
         - gate-horizon-python26
         - gate-horizon-python27
         - gate-integration-tests-devstack-vm
     gate:
       - gate-horizon-merge:
+        - gate-horizon-docs
         - gate-horizon-pep8
         - gate-horizon-python26
         - gate-horizon-python27
         - gate-integration-tests-devstack-vm
     post:
       - horizon-tarball
+      - horizon-coverage
+      - horizon-docs
     silent:
       - gate-tempest-devstack-vm
+    publish:
+      - horizon-tarball
+      - horizon-docs
 
   - name: openstack/keystone
     check:
       - gate-keystone-merge:
+        - gate-keystone-docs
         - gate-keystone-pep8
         - gate-keystone-python26
         - gate-keystone-python27
         - gate-integration-tests-devstack-vm
     gate:
       - gate-keystone-merge:
+        - gate-keystone-docs
         - gate-keystone-pep8
         - gate-keystone-python26
         - gate-keystone-python27
         - gate-integration-tests-devstack-vm
     post:
       - keystone-tarball
+      - keystone-coverage
+      - keystone-docs
     silent:
       - gate-tempest-devstack-vm
 
   - name: openstack/nova
     check:
       - gate-nova-merge:
+        - gate-nova-docs
         - gate-nova-pep8
         - gate-nova-python26
         - gate-nova-python27
         - gate-integration-tests-devstack-vm
     gate:
       - gate-nova-merge:
+        - gate-nova-docs
         - gate-nova-pep8
         - gate-nova-python26
         - gate-nova-python27
         - gate-integration-tests-devstack-vm
     post:
       - nova-tarball
+      - nova-coverage
+      - nova-docs
     silent:
       - gate-tempest-devstack-vm
+    publish:
+      - nova-tarball
+      - nova-docs
 
   - name: openstack/openstack-common
     check:
@@ -187,160 +217,209 @@ projects:
   - name: openstack/quantum
     check:
       - gate-quantum-merge:
+        - gate-quantum-docs
         - gate-quantum-pep8
         - gate-quantum-python26
         - gate-quantum-python27
     gate:
       - gate-quantum-merge:
+        - gate-quantum-docs
         - gate-quantum-pep8
         - gate-quantum-python26
         - gate-quantum-python27
     post:
       - quantum-tarball
+      - quantum-coverage
+      - quantum-docs
+    publish:
+      - quantum-tarball
+      - quantum-docs
 
   - name: openstack/swift
     check:
       - gate-swift-merge:
+        - gate-swift-docs
         - gate-swift-pep8
         - gate-swift-python26
         - gate-swift-python27
     gate:
       - gate-swift-merge:
+        - gate-swift-docs
         - gate-swift-pep8
         - gate-swift-python26
         - gate-swift-python27
     post:
       - swift-tarball
+      - swift-coverage
+      - swift-docs
+    publish:
+      - swift-tarball
+      - swift-docs
 
   - name: openstack/python-cinderclient
     check:
       - gate-python-cinderclient-merge:
+        - gate-python-cinderclient-docs
         - gate-python-cinderclient-pep8
         - gate-python-cinderclient-python26
         - gate-python-cinderclient-python27
     gate:
       - gate-python-cinderclient-merge:
+        - gate-python-cinderclient-docs
         - gate-python-cinderclient-pep8
         - gate-python-cinderclient-python26
         - gate-python-cinderclient-python27
     post:
       - python-cinderclient-tarball
+      - python-cinderclient-coverage
+      - python-cinderclient-docs
     publish:
       - python-cinderclient-pypi
+      - python-cinderclient-docs
     silent:
       - gate-tempest-devstack-vm
 
   - name: openstack/python-glanceclient
     check:
       - gate-python-glanceclient-merge:
+        - gate-python-glanceclient-docs
         - gate-python-glanceclient-pep8
         - gate-python-glanceclient-python26
         - gate-python-glanceclient-python27
         - gate-integration-tests-devstack-vm
     gate:
       - gate-python-glanceclient-merge:
+        - gate-python-glanceclient-docs
         - gate-python-glanceclient-pep8
         - gate-python-glanceclient-python26
         - gate-python-glanceclient-python27
         - gate-integration-tests-devstack-vm
     post:
       - python-glanceclient-tarball
+      - python-glanceclient-coverage
+      - python-glanceclient-docs
     publish:
       - python-glanceclient-pypi
+      - python-glanceclient-docs
     silent:
       - gate-tempest-devstack-vm
 
   - name: openstack/python-keystoneclient
     check:
       - gate-python-keystoneclient-merge:
+        - gate-python-keystoneclient-docs
         - gate-python-keystoneclient-pep8
         - gate-python-keystoneclient-python26
         - gate-python-keystoneclient-python27
         - gate-integration-tests-devstack-vm
     gate:
       - gate-python-keystoneclient-merge:
+        - gate-python-keystoneclient-docs
         - gate-python-keystoneclient-pep8
         - gate-python-keystoneclient-python26
         - gate-python-keystoneclient-python27
         - gate-integration-tests-devstack-vm
     post:
       - python-keystoneclient-tarball
+      - python-keystoneclient-coverage
+      - python-keystoneclient-docs
     publish:
       - python-keystoneclient-pypi
+      - python-keystoneclient-docs
     silent:
       - gate-tempest-devstack-vm
 
   - name: openstack/python-novaclient
     check:
       - gate-python-novaclient-merge:
+        - gate-python-novaclient-docs
         - gate-python-novaclient-pep8
         - gate-python-novaclient-python26
         - gate-python-novaclient-python27
         - gate-integration-tests-devstack-vm
     gate:
       - gate-python-novaclient-merge:
+        - gate-python-novaclient-docs
         - gate-python-novaclient-pep8
         - gate-python-novaclient-python26
         - gate-python-novaclient-python27
         - gate-integration-tests-devstack-vm
     post:
       - python-novaclient-tarball
+      - python-novaclient-coverage
+      - python-novaclient-docs
     publish:
       - python-novaclient-pypi
+      - python-novaclient-docs
     silent:
       - gate-tempest-devstack-vm
 
   - name: openstack/python-openstackclient
     check:
       - gate-python-openstackclient-merge:
+        - gate-python-openstackclient-docs
         - gate-python-openstackclient-pep8
         - gate-python-openstackclient-python26
         - gate-python-openstackclient-python27
     gate:
       - gate-python-openstackclient-merge:
+        - gate-python-openstackclient-docs
         - gate-python-openstackclient-pep8
         - gate-python-openstackclient-python26
         - gate-python-openstackclient-python27
     post:
       - python-openstackclient-tarball
+      - python-openstackclient-coverage
+      - python-openstackclient-docs
     publish:
       - python-openstackclient-pypi
+      - python-openstackclient-docs
 
   - name: openstack/python-quantumclient
     check:
       - gate-python-quantumclient-merge:
+        - gate-python-quantumclient-docs
         - gate-python-quantumclient-pep8
         - gate-python-quantumclient-python26
         - gate-python-quantumclient-python27
         - gate-integration-tests-devstack-vm
     gate:
       - gate-python-quantumclient-merge:
+        - gate-python-quantumclient-docs
         - gate-python-quantumclient-pep8
         - gate-python-quantumclient-python26
         - gate-python-quantumclient-python27
         - gate-integration-tests-devstack-vm
     post:
       - python-quantumclient-tarball
+      - python-quantumclient-coverage
+      - python-quantumclient-docs
     publish:
       - python-quantumclient-pypi
+      - python-quantumclient-docs
     silent:
       - gate-tempest-devstack-vm
 
   - name: openstack/python-swiftclient
     check:
       - gate-python-swiftclient-merge:
+        - gate-python-swiftclient-docs
         - gate-python-swiftclient-pep8
         - gate-python-swiftclient-python26
         - gate-python-swiftclient-python27
     gate:
       - gate-python-swiftclient-merge:
+        - gate-python-swiftclient-docs
         - gate-python-swiftclient-pep8
         - gate-python-swiftclient-python26
         - gate-python-swiftclient-python27
     post:
       - python-swiftclient-tarball
+      - python-swiftclient-coverage
+      - python-swiftclient-docs
     publish:
       - python-swiftclient-pypi
+      - python-swiftclient-docs
 
   - name: openstack-dev/devstack
     check:
