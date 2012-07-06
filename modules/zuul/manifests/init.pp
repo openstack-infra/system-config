@@ -47,6 +47,11 @@ class zuul ()
     owner => 'jenkins'
   }
 
+  file { "/var/lib/zuul":
+    ensure => "directory",
+    owner => 'jenkins'
+  }
+
   file { "/etc/init.d/zuul/":
     owner => 'root',
     group => 'root',
