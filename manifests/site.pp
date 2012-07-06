@@ -252,7 +252,7 @@ node "review.openstack.org" {
                          remote => 'https://gerrit.googlesource.com/gerrit'
                          } ],
     logo => 'openstack.png',
-    war => 'http://ci.openstack.org/tarballs/gerrit-2.4.1-10-g63110fd.war',
+    war => 'http://tarballs.openstack.org/ci/gerrit-2.4.1-10-g63110fd.war',
     script_user => 'launchpadsync',
     script_key_file => '/home/gerrit2/.ssh/launchpadsync_rsa',
     script_site => 'openstack',
@@ -279,7 +279,7 @@ node "gerrit-dev.openstack.org", "review-dev.openstack.org" {
                          close_pull => 'true'
                          } ],
     logo => 'openstack.png',
-    war => 'http://ci.openstack.org/tarballs/gerrit-2.4.1-10-g63110fd.war',
+    war => 'http://tarballs.openstack.org/ci/gerrit-2.4.1-10-g63110fd.war',
     script_user => 'update',
     script_key_file => '/home/gerrit2/.ssh/id_rsa',
     script_site => 'openstack',

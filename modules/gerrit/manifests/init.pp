@@ -33,16 +33,16 @@
 #     Note that only the final component is used for comparing to the most
 #     recently installed WAR.  In other words, if you update the war from:
 #
-#       http://ci.openstack.org/tarballs/gerrit.war
+#       http://tarballs.openstack.org/ci/gerrit.war
 #     to:
 #       http://somewhereelse.example.com/gerrit.war
 #
 #     Gerrit won't be updated unless you delete gerrit.war from
 #     ~gerrit2/gerrit-wars.  But if you change the URL from:
 #
-#       http://ci.openstack.org/tarballs/gerrit-2.2.2.war
+#       http://tarballs.openstack.org/ci/gerrit-2.2.2.war
 #     to:
-#       http://ci.openstack.org/tarballs/gerrit-2.3.0.war
+#       http://tarballs.openstack.org/ci/gerrit-2.3.0.war
 #     Gerrit will be upgraded on the next puppet run.
 
 # TODO: move closing github pull requests to another module
@@ -493,7 +493,7 @@ class gerrit($virtual_hostname='',
 
   # Install Gerrit itself.
 
-  # The Gerrit WAR is specified as a url like 'http://ci.openstack.org/tarballs/gerrit-2.2.2-363-gd0a67ce.war'
+  # The Gerrit WAR is specified as a url like 'http://tarballs.openstack.org/ci/gerrit-2.2.2-363-gd0a67ce.war'
   # Set $basewar so that we can work with filenames like gerrit-2.2.2-363-gd0a67ce.war'.
 
   if $war =~ /.*\/(.*)/ {
