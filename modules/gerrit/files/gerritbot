@@ -31,7 +31,7 @@ openstack-dev:
 
 import ircbot
 import time
-import subprocess
+import paramiko
 import threading
 import select
 import json
@@ -82,20 +82,18 @@ class Gerrit(threading.Thread):
         self.poll = select.poll()
 
     def _open(self):
-        self.proc = subprocess.Popen(['/usr/bin/ssh', '-p', str(self.port),
-                                      '-i', self.keyfile,
-                                      '-l', self.username, self.server,
-                                      'gerrit', 'stream-events'],
-                                     bufsize=1, 
-                                     stdin=None,
-                                     stdout=subprocess.PIPE,
-                                     stderr=None,
-                                     )
-        self.poll.register(self.proc.stdout)
+        client = paramiko.SSHClient()
+        client.load_system_host_keys()
+        client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+        client.connect(self.server, self.port, self.username, key_filename=self.keyfile, timeout=60)
+        client.get_transport().set_keepalive(60)
+        stdin, self.stdout, stderr = client.exec_command("gerrit stream-events")
+
+        self.poll.register(self.stdout)
 
     def _close(self):
         try:
-            self.poll.unregister(self.proc.stdout)
+            self.poll.unregister(self.stdout)
         except:
             pass
         try:
