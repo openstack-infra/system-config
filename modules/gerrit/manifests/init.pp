@@ -140,7 +140,7 @@ class gerrit($virtual_hostname='',
     cron { "gerritsyncusers":
       user => gerrit2,
       minute => "*/15",
-      command => "sleep $((RANDOM\%60+60)) && python /usr/local/gerrit/scripts/update_gerrit_users.py ${script_user} ${script_key_file} ${script_site}",
+      command => "sleep $((RANDOM\\%60+60)) && python /usr/local/gerrit/scripts/update_gerrit_users.py ${script_user} ${script_key_file} ${script_site}",
       require => File['/usr/local/gerrit/scripts'],
     }
 
@@ -192,11 +192,15 @@ class gerrit($virtual_hostname='',
     }
 
     file { "/etc/init.d/gerritbot":
+      ensure => 'absent'
+    }
+
+    file { "/etc/init/gerritbot.conf":
       owner => 'root',
       group => 'root',
       mode => 555,
       ensure => 'present',
-      source => 'puppet:///modules/gerrit/gerritbot.init',
+      source => 'puppet:///modules/gerrit/gerritbot.upstart',
       require => File['/usr/local/gerrit/gerritbot'],
     }
 
@@ -210,12 +214,23 @@ class gerrit($virtual_hostname='',
       require => User['gerrit2']
     }
 
+    package { 'pyyaml':
+      ensure => present,
+      require => Package[python-pip]
+    }
+
+    file { '/var/run/gerritbot':
+      ensure => directory
+    }
+
     service { 'gerritbot':
       name       => 'gerritbot',
       ensure     => running,
       enable     => true,
       hasrestart => true,
-      require => File['/etc/init.d/gerritbot'],
+      require => [File['/etc/init/gerritbot.conf'],
+                  File['/var/run/gerritbot'],
+                  Package['pyyaml']],
       subscribe => [File["/usr/local/gerrit/gerritbot"],
                     File["/home/gerrit2/gerritbot_channel_config.yaml"]],
     }
