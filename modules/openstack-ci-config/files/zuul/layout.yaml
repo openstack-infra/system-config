@@ -78,6 +78,12 @@ projects:
     post:
       - gerrit-package
 
+  - name: openstack-ci/gerrit-verification-status-plugin
+    check:
+      - gate-gerrit-verification-status-plugin-merge
+    gate:
+      - gate-gerrit-verification-status-plugin-merge
+
   - name: openstack/openstack-ci-puppet
     check:
       - gate-ci-puppet-merge:
