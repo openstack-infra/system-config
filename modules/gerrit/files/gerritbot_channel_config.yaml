@@ -40,6 +40,6 @@ stackforge-dev:
       - x-vrif-minus-1
     projects:
       - stackforge/ceilometer
-      - stackforge/heat
+      - heat-api/heat
     branches:
       - master
