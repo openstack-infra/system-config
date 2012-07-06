@@ -73,6 +73,27 @@ do_stop()
 }
 
 #
+# Function that stops the daemon/service
+#
+do_graceful_stop()
+{
+	PID=`cat $PIDFILE`
+	kill -10 $PID
+
+        # wait until really stopped
+        if [ -n "${PID:-}" ]; then
+                while kill -0 "${PID:-}" 2> /dev/null;  do
+                        if [ $i = '0' ]; then
+                            echo -n " ... waiting "
+                        else
+                            echo -n "."
+                        fi
+                        sleep 1
+                 done
+        fi
+}
+
+#
 # Function that sends a SIGHUP to the daemon/service
 #
 do_reload() {
@@ -120,21 +141,8 @@ case "$1" in
 	# 'force-reload' alias
 	#
 	log_daemon_msg "Restarting $DESC" "$NAME"
-	do_stop
-	case "$?" in
-	  0|1)
-		do_start
-		case "$?" in
-			0) log_end_msg 0 ;;
-			1) log_end_msg 1 ;; # Old process is still running
-			*) log_end_msg 1 ;; # Failed to start
-		esac
-		;;
-	  *)
-	  	# Failed to stop
-		log_end_msg 1
-		;;
-	esac
+	do_graceful_stop
+	do_start
 	;;
   *)
 	#echo "Usage: $SCRIPTNAME {start|stop|restart|reload|force-reload}" >&2
