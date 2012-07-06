@@ -17,7 +17,7 @@
 PATH=/sbin:/usr/sbin:/bin:/usr/bin
 DESC="GerritBot"
 NAME=gerritbot
-DAEMON=/home/gerrit2/$NAME
+DAEMON=/usr/local/gerrit/$NAME
 DAEMON_ARGS="/home/gerrit2/gerritbot.config"
 PIDFILE=/var/run/$NAME/$NAME.pid
 SCRIPTNAME=/etc/init.d/$NAME
