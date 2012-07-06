@@ -2,7 +2,7 @@ openstack-infra:
     events:
       - patchset-created
       - change-merged
-      - x-vrif-minus-1
+      - x-vrif-minus-2
     projects:
       - openstack/openstack-ci-puppet
       - openstack-ci/git-review
@@ -13,7 +13,7 @@ openstack-infra:
 openstack-dev:
     events:
       - change-merged
-      - x-vrif-minus-1
+      - x-vrif-minus-2
     projects:
       - openstack/cinder
       - openstack/glance
@@ -37,9 +37,9 @@ stackforge-dev:
     events:
       - patchset-created
       - change-merged
-      - x-vrif-minus-1
+      - x-vrif-minus-2
     projects:
       - stackforge/ceilometer
-      - stackforge/heat
+      - heat-api/heat
     branches:
       - master
