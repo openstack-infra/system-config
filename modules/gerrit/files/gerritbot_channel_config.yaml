@@ -7,6 +7,9 @@ openstack-infra:
       - openstack/openstack-ci-puppet
       - openstack-ci/git-review
       - openstack-ci/zuul
+      - openstack-ci/gerrit
+      - openstack-ci/gerrit-trigger-plugin
+      - openstack-ci/gerrit-verification-status-plugin
     branches:
       - master
 
