@@ -43,13 +43,22 @@
   RewriteEngine on
   RewriteCond %{HTTP_HOST} !<%= virtual_hostname %>
   RewriteRule ^.*$ <%= canonicalweburl %>
+  RewriteCond %{REQUEST_URI} !^/p/
+  RewriteRule ^/(.*)$ http://localhost:8081/$1 [P]
 
-      ProxyPassReverse / http://localhost:8081/
-      <Location />
-        Order allow,deny
-        Allow from all
-        ProxyPass http://localhost:8081/ retry=0
-      </Location>
+  ProxyPassReverse / http://localhost:8081/
+
+  SetEnv GIT_PROJECT_ROOT /var/lib/git/
+  SetEnv GIT_HTTP_EXPORT_ALL
+
+  AliasMatch ^/p/(.*/objects/[0-9a-f]{2}/[0-9a-f]{38})$ /var/lib/git/$1
+  AliasMatch ^/p/(.*/objects/pack/pack-[0-9a-f]{40}.(pack|idx))$ /var/lib/git/$1
+  ScriptAlias /p/ /usr/lib/git-core/git-http-backend/
+
+  <Directory /home/gerrit2/review_site/git/>
+    Order allow,deny
+    Allow from all
+  </Directory>
 
 
 </VirtualHost>
