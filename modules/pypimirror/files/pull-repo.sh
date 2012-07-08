@@ -13,6 +13,7 @@ if [ ! -d ${project} ] ; then
   git clone git://github.com/openstack/${project}.git ${project} >/dev/null 2>&1
 fi
 cd ${project}
+$pip_command pip
 git fetch origin
 for branch in `git branch -a | grep remotes.origin | grep -v origin.HEAD | awk '{print $1}' ` ; do
     git reset --hard $branch
