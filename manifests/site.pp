@@ -308,6 +308,7 @@ node "jenkins.openstack.org" {
       'devstack',
       'devstack-gate',
       'gerrit',
+      'gerrit-verification-status-plugin',
       'glance',
       'horizon',
       'keystone',
