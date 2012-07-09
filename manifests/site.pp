@@ -308,6 +308,8 @@ node "jenkins.openstack.org" {
       'devstack',
       'devstack-gate',
       'gerrit',
+      'gerritbot',
+      'gerritlib',
       'gerrit-verification-status-plugin',
       'glance',
       'horizon',

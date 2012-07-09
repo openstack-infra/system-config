@@ -78,6 +78,28 @@ projects:
     post:
       - gerrit-package
 
+  - name: openstack-ci/gerritbot
+    check:
+      - gate-gerritbot-merge:
+        - gate-gerritbot-pep8
+        - gate-gerritbot-pyflakes
+    gate:
+      - gate-gerritbot-merge:
+        - gate-gerritbot-pep8
+        - gate-gerritbot-pyflakes
+
+  - name: openstack-ci/gerritlib
+    check:
+      - gate-gerritlib-merge:
+        - gate-gerritlib-pep8
+        - gate-gerritlib-pyflakes
+    gate:
+      - gate-gerritlib-merge:
+        - gate-gerritlib-pep8
+        - gate-gerritlib-pyflakes
+    publish:
+      - gerritlib-pypi
+
   - name: openstack-ci/gerrit-verification-status-plugin
     check:
       - gate-gerrit-verification-status-plugin-merge
