@@ -119,19 +119,17 @@ projects:
         - gate-glance-pep8
         - gate-glance-python26
         - gate-glance-python27
-        - gate-integration-tests-devstack-vm
+        - gate-tempest-devstack-vm
     gate:
       - gate-glance-merge:
         - gate-glance-pep8
         - gate-glance-python26
         - gate-glance-python27
-        - gate-integration-tests-devstack-vm
+        - gate-tempest-devstack-vm
     post:
       - glance-tarball
       - glance-coverage
       - glance-docs
-    silent:
-      - gate-tempest-devstack-vm
     publish:
       - glance-tarball
       - glance-docs
@@ -143,20 +141,18 @@ projects:
         - gate-horizon-pep8
         - gate-horizon-python26
         - gate-horizon-python27
-        - gate-integration-tests-devstack-vm
+        - gate-tempest-devstack-vm
     gate:
       - gate-horizon-merge:
         - gate-horizon-docs
         - gate-horizon-pep8
         - gate-horizon-python26
         - gate-horizon-python27
-        - gate-integration-tests-devstack-vm
+        - gate-tempest-devstack-vm
     post:
       - horizon-tarball
       - horizon-coverage
       - horizon-docs
-    silent:
-      - gate-tempest-devstack-vm
     publish:
       - horizon-tarball
       - horizon-docs
@@ -168,20 +164,18 @@ projects:
         - gate-keystone-pep8
         - gate-keystone-python26
         - gate-keystone-python27
-        - gate-integration-tests-devstack-vm
+        - gate-tempest-devstack-vm
     gate:
       - gate-keystone-merge:
         - gate-keystone-docs
         - gate-keystone-pep8
         - gate-keystone-python26
         - gate-keystone-python27
-        - gate-integration-tests-devstack-vm
+        - gate-tempest-devstack-vm
     post:
       - keystone-tarball
       - keystone-coverage
       - keystone-docs
-    silent:
-      - gate-tempest-devstack-vm
 
   - name: openstack/nova
     check:
@@ -190,20 +184,18 @@ projects:
         - gate-nova-pep8
         - gate-nova-python26
         - gate-nova-python27
-        - gate-integration-tests-devstack-vm
+        - gate-tempest-devstack-vm
     gate:
       - gate-nova-merge:
         - gate-nova-docs
         - gate-nova-pep8
         - gate-nova-python26
         - gate-nova-python27
-        - gate-integration-tests-devstack-vm
+        - gate-tempest-devstack-vm
     post:
       - nova-tarball
       - nova-coverage
       - nova-docs
-    silent:
-      - gate-tempest-devstack-vm
     publish:
       - nova-tarball
       - nova-docs
@@ -282,8 +274,6 @@ projects:
     publish:
       - python-cinderclient-pypi
       - python-cinderclient-docs
-    silent:
-      - gate-tempest-devstack-vm
 
   - name: openstack/python-glanceclient
     check:
@@ -292,14 +282,14 @@ projects:
         - gate-python-glanceclient-pep8
         - gate-python-glanceclient-python26
         - gate-python-glanceclient-python27
-        - gate-integration-tests-devstack-vm
+        - gate-tempest-devstack-vm
     gate:
       - gate-python-glanceclient-merge:
         - gate-python-glanceclient-docs
         - gate-python-glanceclient-pep8
         - gate-python-glanceclient-python26
         - gate-python-glanceclient-python27
-        - gate-integration-tests-devstack-vm
+        - gate-tempest-devstack-vm
     post:
       - python-glanceclient-tarball
       - python-glanceclient-coverage
@@ -307,8 +297,6 @@ projects:
     publish:
       - python-glanceclient-pypi
       - python-glanceclient-docs
-    silent:
-      - gate-tempest-devstack-vm
 
   - name: openstack/python-keystoneclient
     check:
@@ -317,14 +305,14 @@ projects:
         - gate-python-keystoneclient-pep8
         - gate-python-keystoneclient-python26
         - gate-python-keystoneclient-python27
-        - gate-integration-tests-devstack-vm
+        - gate-tempest-devstack-vm
     gate:
       - gate-python-keystoneclient-merge:
         - gate-python-keystoneclient-docs
         - gate-python-keystoneclient-pep8
         - gate-python-keystoneclient-python26
         - gate-python-keystoneclient-python27
-        - gate-integration-tests-devstack-vm
+        - gate-tempest-devstack-vm
     post:
       - python-keystoneclient-tarball
       - python-keystoneclient-coverage
@@ -332,8 +320,6 @@ projects:
     publish:
       - python-keystoneclient-pypi
       - python-keystoneclient-docs
-    silent:
-      - gate-tempest-devstack-vm
 
   - name: openstack/python-novaclient
     check:
@@ -342,14 +328,14 @@ projects:
         - gate-python-novaclient-pep8
         - gate-python-novaclient-python26
         - gate-python-novaclient-python27
-        - gate-integration-tests-devstack-vm
+        - gate-tempest-devstack-vm
     gate:
       - gate-python-novaclient-merge:
         - gate-python-novaclient-docs
         - gate-python-novaclient-pep8
         - gate-python-novaclient-python26
         - gate-python-novaclient-python27
-        - gate-integration-tests-devstack-vm
+        - gate-tempest-devstack-vm
     post:
       - python-novaclient-tarball
       - python-novaclient-coverage
@@ -357,8 +343,6 @@ projects:
     publish:
       - python-novaclient-pypi
       - python-novaclient-docs
-    silent:
-      - gate-tempest-devstack-vm
 
   - name: openstack/python-openstackclient
     check:
@@ -388,14 +372,14 @@ projects:
         - gate-python-quantumclient-pep8
         - gate-python-quantumclient-python26
         - gate-python-quantumclient-python27
-        - gate-integration-tests-devstack-vm
+        - gate-tempest-devstack-vm
     gate:
       - gate-python-quantumclient-merge:
         - gate-python-quantumclient-docs
         - gate-python-quantumclient-pep8
         - gate-python-quantumclient-python26
         - gate-python-quantumclient-python27
-        - gate-integration-tests-devstack-vm
+        - gate-tempest-devstack-vm
     post:
       - python-quantumclient-tarball
       - python-quantumclient-coverage
@@ -403,8 +387,6 @@ projects:
     publish:
       - python-quantumclient-pypi
       - python-quantumclient-docs
-    silent:
-      - gate-tempest-devstack-vm
 
   - name: openstack/python-swiftclient
     check:
@@ -430,32 +412,28 @@ projects:
   - name: openstack-dev/devstack
     check:
       - gate-devstack-merge:
-        - gate-integration-tests-devstack-vm
+        - gate-tempest-devstack-vm
     gate:
       - gate-devstack-merge:
-        - gate-integration-tests-devstack-vm
-    silent:
-      - gate-tempest-devstack-vm
+        - gate-tempest-devstack-vm
 
   - name: openstack-ci/devstack-gate
     check:
       - gate-devstack-gate-merge:
-        - gate-integration-tests-devstack-vm
+        - gate-tempest-devstack-vm
     gate:
       - gate-devstack-gate-merge:
-        - gate-integration-tests-devstack-vm
-    silent:
-      - gate-tempest-devstack-vm
+        - gate-tempest-devstack-vm
 
   - name: openstack/tempest
     check:
       - gate-tempest-merge:
         - gate-tempest-pep8
+        - gate-tempest-devstack-vm
     gate:
       - gate-tempest-merge:
         - gate-tempest-pep8
-    silent:
-      - gate-tempest-devstack-vm
+        - gate-tempest-devstack-vm
 
   - name: stackforge/ceilometer
     check:
