@@ -545,12 +545,6 @@ node 'precise8.slave.openstack.org' {
   include openstack_cron
   include openstack_jenkins_slave
 
-  package { "tox":
-    ensure => latest,  # okay to use latest for pip
-    provider => pip,
-    require => Package[python-pip],
-  }
-
   include ulimit
   ulimit::conf { 'limit_jenkins_procs':
     limit_domain => 'jenkins',
@@ -565,11 +559,6 @@ node /^.*\.slave\.openstack\.org$/ {
   include openstack_cron
   include openstack_jenkins_slave
 
-  package { "tox":
-    ensure => latest,  # okay to use latest for pip
-    provider => pip,
-    require => Package[python-pip],
-  }
 }
 
 # bare-bones slaves spun up by jclouds. Specifically need to not set ssh
