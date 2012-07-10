@@ -10,12 +10,6 @@ class pypimirror ( $base_url,
     ensure => present,
   }
 
-  package { 'pip':
-    ensure => latest,  # okay to use latest for pip
-    provider => 'pip',
-    require => Package['python-pip'],
-  }
-
   file { '/usr/local/mirror_scripts':
     ensure => 'directory',
     mode => 755,

@@ -80,16 +80,22 @@ class jenkins_slave($ssh_key, $sudo = false, $bare = false, $user = true) {
       ensure => present,
     }
 
-    package { "setuptools-git":
+    package { 'pip':
       ensure => latest,  # okay to use latest for pip
-      provider => pip,
-      require => Package[python-pip],
+      provider => 'pip',
+      require => Package['python-pip'],
     }
 
-    package { "git-review":
-      ensure => latest,  # okay to use latest for pip
+    # Packages that need to be installed from pip
+    $pip_packages = [
+                 "git-review",
+                 "setuptools-git",
+                 "tox"]
+
+    package { $pip_packages:
+      ensure => latest,  # we want the latest from these
       provider => pip,
-      require => Package[python-pip],
+      require => Package[pip],
     }
 
     file { 'profilerubygems':
