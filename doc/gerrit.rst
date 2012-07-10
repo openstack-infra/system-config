@@ -713,6 +713,18 @@ with instructions to use Gerrit.
 and add the project to the list of github projects in the gerrit class
 for the gerrit.openstack.org node.
 
+Adding Local Git Replica
+========================
+
+Gerrit replicates all repos to a local directory so that Apache can
+serve the anonymous http requests out directly.
+
+On the gerrit host::
+
+  sudo git --bare init --shared=group /var/lib/git/openstack/PROJECT
+  sudo chgrp -R gerrit2 /var/lib/git/openstack/PROJECT
+
+
 Migrating a Project from bzr
 ============================
 
@@ -928,7 +940,9 @@ Adding A New Project On The Command Line
 
 All of the steps involved in adding a new project to Gerrit can be
 accomplished via the commandline, with the exception of creating a new repo
-on github and adding the jenkins jobs.
+on github and adding the jenkins jobs. Creating the local project
+replication repo on the gerrit host can be done on the command line too,
+but the process is the same as above.
 
 First of all, add the .gitreview file to the repo that will be added. Then,
 assuming an ssh config alias of `review` for the gerrit instance, as a person
