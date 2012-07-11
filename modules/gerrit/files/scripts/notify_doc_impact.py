@@ -33,7 +33,7 @@ documentation impact.
 Log:
 %s
 """
-DEST_ADDRESS = 'openstack-doc-core@lists.launchpad.net'
+DEST_ADDRESS = 'openstack-docs@lists.openstack.org'
 
 def process_impact(git_log, args):
     """Notify doc team of doc impact"""
