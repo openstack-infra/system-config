@@ -1,3 +1,6 @@
+includes:
+  - python-file: openstack_functions.py
+
 queues:
   - name: check
     manager: IndependentQueueManager
@@ -47,6 +50,8 @@ queues:
 jobs:
   - name: ^.*-merge$
     failure-message: This change was unable to be automatically merged with the current state of the repository. Please rebase your change and upload a new patchset.
+  - name: gate-tempest-devstack-vm
+    parameter-function: devstack_params
 
 
 projects:

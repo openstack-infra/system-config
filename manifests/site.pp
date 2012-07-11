@@ -339,6 +339,10 @@ node "jenkins.openstack.org" {
     ensure => 'present',
     source => 'puppet:///modules/openstack-ci-config/zuul/layout.yaml'
   }
+  file { "/etc/zuul/openstack_functions.py":
+    ensure => 'present',
+    source => 'puppet:///modules/openstack-ci-config/zuul/openstack_functions.py'
+  }
   file { "/etc/zuul/logging.conf":
     ensure => 'present',
     source => 'puppet:///modules/openstack-ci-config/zuul/logging.conf'
