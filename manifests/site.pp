@@ -196,6 +196,9 @@ node "review.openstack.org" {
                          name => 'openstack-dev/openstack-qa',
                          close_pull => 'true'
                          }, {
+                         name => 'openstack-dev/pbr',
+                         close_pull => 'true'
+                         }, {
                          name => 'openstack/python-novaclient',
                          close_pull => 'true'
                          }, {

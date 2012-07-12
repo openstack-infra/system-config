@@ -452,6 +452,27 @@ projects:
       - gate-devstack-gate-merge:
         - gate-tempest-devstack-vm
 
+  - name: openstack-dev/pbr
+    check:
+      - gate-pbr-merge:
+        - gate-pbr-docs
+        - gate-pbr-pep8
+        - gate-pbr-python26
+        - gate-pbr-python27
+    gate:
+      - gate-pbr-merge:
+        - gate-pbr-docs
+        - gate-pbr-pep8
+        - gate-pbr-python26
+        - gate-pbr-python27
+    post:
+      - pbr-tarball
+      - pbr-coverage
+      - pbr-docs
+    publish:
+      - pbr-pypi
+      - pbr-docs
+
   - name: openstack/tempest
     check:
       - gate-tempest-merge:
