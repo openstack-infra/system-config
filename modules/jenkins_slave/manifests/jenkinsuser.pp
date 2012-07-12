@@ -53,6 +53,16 @@ define jenkinsuser($ensure = present, $sudo = false, $ssh_key) {
     ensure => 'absent',
     require => File['jenkinshome'],
   }
+
+  file { 'jenkinsgitconfig':
+    name => '/home/jenkins/.gitconfig',
+    owner => 'jenkins',
+    group => 'jenkins',
+    mode => 640,
+    ensure => 'present',
+    source => "puppet:///modules/jenkins_slave/gitconfig",
+    require => File['jenkinshome'],
+  }
    
   file { 'jenkinssshdir':
     name => '/home/jenkins/.ssh',
