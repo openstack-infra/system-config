@@ -127,12 +127,14 @@ projects:
         - gate-cinder-pep8
         - gate-cinder-python26
         - gate-cinder-python27
+        - gate-tempest-devstack-vm
     gate:
       - gate-cinder-merge:
         - gate-cinder-docs
         - gate-cinder-pep8
         - gate-cinder-python26
         - gate-cinder-python27
+        - gate-tempest-devstack-vm
     post:
       - cinder-tarball
       - cinder-coverage
