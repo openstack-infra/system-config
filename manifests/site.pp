@@ -320,6 +320,7 @@ node "jenkins.openstack.org" {
       'nova',
       'openstack-ci-puppet',
       'openstack-common',
+      'pbr',
       'pypi-mirror',
       'python-cinderclient',
       'python-glanceclient',
