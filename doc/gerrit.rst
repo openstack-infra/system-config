@@ -513,7 +513,7 @@ Ensure there is an up-to-date checkout of openstack-ci in ~gerrit2.
 
 ::
 
-  apt-get install python-irclib python-daemon
+  apt-get install python-irclib python-daemon python-yaml
   cp ~gerrit2/openstack-ci/gerritbot.init /etc/init.d
   chmod a+x /etc/init.d/gerritbot
   update-rc.d gerritbot defaults
