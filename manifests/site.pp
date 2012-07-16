@@ -527,6 +527,17 @@ node 'etherpad.openstack.org' {
   include etherpad_lite::backup
 }
 
+node 'wiki.openstack.org' {
+  include openstack_cron
+  class { 'openstack_server':
+    iptables_public_tcp_ports => [80, 443]
+  }
+
+  realize (
+    User::Virtual::Localuser["rlane"],
+  )
+}
+
 # A bare machine, but with a jenkins user
 node /^.*\.template\.openstack\.org$/ {
   class { 'openstack_template':
