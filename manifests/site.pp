@@ -351,6 +351,10 @@ node "jenkins.openstack.org" {
     ensure => 'present',
     source => 'puppet:///modules/openstack-ci-config/zuul/logging.conf'
   }
+  file { "/etc/default/jenkins":
+    ensure => 'present',
+    source => 'puppet:///modules/openstack-ci-config/jenkins/jenkins.default'
+  }
 }
 
 node "jenkins-dev.openstack.org" {
