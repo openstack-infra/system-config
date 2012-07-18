@@ -50,6 +50,7 @@ queues:
 jobs:
   - name: ^.*-merge$
     failure-message: This change was unable to be automatically merged with the current state of the repository. Please rebase your change and upload a new patchset.
+    hold-following-changes: true
   - name: gate-tempest-devstack-vm
     parameter-function: devstack_params
 
