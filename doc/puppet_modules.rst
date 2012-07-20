@@ -179,16 +179,16 @@ manifest:
 .. code-block:: ruby
 
   class { 'gerrit':
-    canonicalweburl => "https://review.stackforge.org/",
-    email => "review@stackforge.org",
-    github_projects => [ {
-                         name => 'stackforge/MRaaS',
-                         close_pull => 'true'
-                         } ],
-    logo => 'stackforge.png'
+    canonicalweburl => "https://review.openstack.org/",
+    email => "review@openstack.org",
+    github_projects => [
+      'openstack/nova',
+      'stackforge/MRaaS',
+      ],
+    logo => 'openstack.png'
   }
 
-Most of these options are self-explanitory.  The github_projects is a list of
+Most of these options are self-explanitory.  The ``github_projects`` is a list of
 all projects in GitHub which are managed by the gerrit server.
 
 Skinning

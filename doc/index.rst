@@ -23,7 +23,6 @@ Howtos:
    :maxdepth: 2
 
    third_party
-   stackforge
 
 Contents:
 
