@@ -1,2 +1,3 @@
 *.pyc
 doc/html/
+manifests/secrets.pp

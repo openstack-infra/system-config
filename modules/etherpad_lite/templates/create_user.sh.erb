@@ -1,0 +1,3 @@
+#!/bin/bash
+
+mysql --defaults-file=/etc/mysql/debian.cnf -e 'grant all on `<%= database_name %>`.* to "<%= database_user %>"@"localhost" identified by "<%= database_password %>";'
