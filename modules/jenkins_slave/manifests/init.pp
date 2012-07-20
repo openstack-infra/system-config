@@ -27,6 +27,9 @@ class jenkins_slave($ssh_key, $sudo = false, $bare = false, $user = true) {
                  "curl",
                  "debootstrap",
                  "dnsmasq-base",
+                 "docbook-xml",
+                 "docbook5-xml",
+                 "docbook-xsl",
                  "ebtables",
                  "gawk",
                  "graphviz",
@@ -62,12 +65,14 @@ class jenkins_slave($ssh_key, $sudo = false, $bare = false, $user = true) {
                  "python-zmq", # zeromq unittests (not pip installable)
                  "python3-all-dev",
                  "screen",
+                 "sgml-data",
                  "socat",
                  "sqlite3",
                  "swig",
                  "unzip",
                  "vlan",
                  "wget",
+                 "xsltproc",
                  "pyflakes"]
 
     if ($bare == false) {
