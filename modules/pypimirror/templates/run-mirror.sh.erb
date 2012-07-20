@@ -7,6 +7,6 @@ export PIP_TEMP_DOWNLOAD=<%= pip_download %>
 export MIRROR_FILE_PATH=<%= mirror_file_path %>
 export LOG_FILENAME=<%= log_filename %>
 <% projects.each do |project| -%>
-/usr/local/mirror_scripts/pull-repo.sh <%= project %> >>$LOG_FILENAME
+/usr/local/mirror_scripts/pull-repo.sh <%= project['name'] %> >>$LOG_FILENAME
 <% end -%>
 python /usr/local/mirror_scripts/process_cache.py ${PIP_DOWNLOAD_CACHE} ${MIRROR_FILE_PATH}
