@@ -393,7 +393,7 @@ node "ci-puppetmaster.openstack.org" {
   cron { "updatepuppetmaster":
     user => root,
     minute => "*/15",
-    command => 'sleep $((RANDOM\%600)) && cd /opt/openstack-ci-puppet && /usr/bin/git pull -q',
+    command => 'sleep $((RANDOM\%600)) && cd /opt/openstack-ci-puppet/production && /usr/bin/git pull -q',
     environment => "PATH=/var/lib/gems/1.8/bin:/usr/bin:/bin:/usr/sbin:/sbin",
   }
 
