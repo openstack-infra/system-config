@@ -1,4 +1,5 @@
-class jenkins_jobs($site, $projects) {
+class jenkins_jobs($url, $username, $password, $site, $projects) {
+
   package { 'python-yaml':
     ensure => 'present'
   }
@@ -18,7 +19,7 @@ class jenkins_jobs($site, $projects) {
     group => 'root',
     mode => 440,
     ensure => 'present',
-    source => 'file:///root/secret-files/jenkins_jobs.ini',
+    content => template('jenkins_jobs/jenkins_jobs.ini.erb'),
     replace => 'true',
     require => File['/usr/local/jenkins_jobs']
   }
