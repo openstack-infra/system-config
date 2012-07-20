@@ -87,11 +87,6 @@ define buildsource(
 # include etherpad_lite::nginx # will add reverse proxy on localhost
 # The defaults for all the classes should just work (tm)
 #
-# You will need to have a file at
-# /root/secret-files/etherpad-lite_settings.json on the host that is puppet
-# master or running puppet apply. This file should contain the settings for
-# etherpad-lite. A template for that settings file can be found at:
-# https://raw.github.com/Pita/etherpad-lite/master/settings.json.template
 #
 class etherpad_lite (
   $ep_user          = 'eplite',
