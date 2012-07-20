@@ -135,121 +135,7 @@ node "review.openstack.org" {
     core_packedgitwindowsize => '16k',
     sshd_threads => '100',
     httpd_maxwait => '5000min',
-    github_projects => [ {
-                         name => 'openstack/keystone',
-                         close_pull => 'true'
-                         }, {
-                         name => 'openstack/glance',
-                         close_pull => 'true'
-                         }, {
-                         name => 'openstack/swift',
-                         close_pull => 'true'
-                         }, {
-                         name => 'openstack/nova',
-                         close_pull => 'true'
-                         }, {
-                         name => 'openstack/horizon',
-                         close_pull => 'true'
-                         }, {
-                         name => 'openstack/quantum',
-                         close_pull => 'true'
-                         }, {
-                         name => 'openstack/melange',
-                         close_pull => 'true'
-                         }, {
-                         name => 'openstack/tempest',
-                         close_pull => 'true'
-                         }, {
-                         name => 'openstack/openstack-ci',
-                         close_pull => 'true'
-                         }, {
-                         name => 'openstack/openstack-ci-puppet',
-                         close_pull => 'true'
-                         }, {
-                         name => 'openstack/openstack-puppet',
-                         close_pull => 'true'
-                         }, {
-                         name => 'openstack/openstack-chef',
-                         close_pull => 'true'
-                         }, {
-                         name => 'openstack/openstack-manuals',
-                         close_pull => 'true'
-                         }, {
-                         name => 'openstack/compute-api',
-                         close_pull => 'true'
-                         }, {
-                         name => 'openstack/image-api',
-                         close_pull => 'true'
-                         }, {
-                         name => 'openstack/identity-api',
-                         close_pull => 'true'
-                         }, {
-                         name => 'openstack/object-api',
-                         close_pull => 'true'
-                         }, {
-                         name => 'openstack/netconn-api',
-                         close_pull => 'true'
-                         }, {
-                         name => 'openstack-dev/devstack',
-                         close_pull => 'true'
-                         }, {
-                         name => 'openstack-dev/openstack-qa',
-                         close_pull => 'true'
-                         }, {
-                         name => 'openstack-dev/pbr',
-                         close_pull => 'true'
-                         }, {
-                         name => 'openstack/python-novaclient',
-                         close_pull => 'true'
-                         }, {
-                         name => 'openstack/python-glanceclient',
-                         close_pull => 'true'
-                         }, {
-                         name => 'openstack-ci/git-review',
-                         close_pull => 'true'
-                         }, {
-                         name => 'openstack-ci/lodgeit',
-                         close_pull => 'true'
-                         }, {
-                         name => 'openstack-ci/meetbot',
-                         close_pull => 'true'
-                         }, {
-                         name => 'openstack-ci/zuul',
-                         close_pull => 'true'
-                         }, {
-                         name => 'openstack-ci/pypi-mirror',
-                         close_pull => 'true'
-                         }, {
-                         name => 'openstack/openstack-common',
-                         close_pull => 'true'
-                         }, {
-                         name => 'openstack/cinder',
-                         close_pull => 'true'
-                         }, {
-                         name => 'openstack/python-openstackclient',
-                         close_pull => 'true'
-                         }, {
-                         name => 'openstack-dev/openstack-nose',
-                         close_pull => 'true'
-                         }, {
-                         name => 'openstack/python-cinderclient',
-                         close_pull => 'true'
-                         }, {
-                         name => 'openstack/python-swiftclient',
-                         close_pull => 'true'
-                         }, {
-                         name => 'stackforge/MRaaS',
-                         close_pull => 'true'
-                         }, {
-                         name => 'stackforge/reddwarf',
-                         close_pull => 'true'
-                         }, {
-                         name => 'stackforge/ceilometer',
-                         close_pull => 'true'
-                         }, {
-                         name => 'heat-api/heat',
-                         close_pull => 'true'
-                         } ],
+    github_projects => $openstack_project_list,
     upstream_projects => [ {
                          name => 'openstack-ci/gerrit',
                          remote => 'https://gerrit.googlesource.com/gerrit'
@@ -285,10 +171,7 @@ node "gerrit-dev.openstack.org", "review-dev.openstack.org" {
     ssl_key_file => '/etc/ssl/private/ssl-cert-snakeoil.key',
     ssl_chain_file => '',
     email => "review-dev@openstack.org",
-    github_projects => [ {
-                         name => 'gtest-org/test',
-                         close_pull => 'true'
-                         } ],
+    github_projects => [ 'gtest-org/test' ],
     logo => 'openstack.png',
     war => 'http://tarballs.openstack.org/ci/gerrit-2.4.2-10-g93ffc27.war',
     script_user => 'update',
@@ -317,37 +200,6 @@ node "jenkins.openstack.org" {
     username => "gerrig",
     password => hiera('jenkins_jobs_password'),
     site => "openstack",
-    projects => [
-      'cinder',
-      'devstack',
-      'devstack-gate',
-      'gerrit',
-      'gerritbot',
-      'gerritlib',
-      'gerrit-verification-status-plugin',
-      'glance',
-      'horizon',
-      'keystone',
-      'nova',
-      'openstack-ci-puppet',
-      'openstack-common',
-      'pbr',
-      'pypi-mirror',
-      'python-cinderclient',
-      'python-glanceclient',
-      'python-keystoneclient',
-      'python-novaclient',
-      'python-openstackclient',
-      'python-quantumclient',
-      'python-swiftclient',
-      'quantum',
-      'swift',
-      'tempest',
-      'zuul',
-      'reddwarf',
-      'ceilometer',
-      'heat'
-    ]
   }
   class { 'zuul': }
   file { "/etc/zuul/layout.yaml":
@@ -508,23 +360,7 @@ node "pypi.openstack.org" {
 
   class { "pypimirror":
     base_url => "http://pypi.openstack.org",
-    projects => [
-      'cinder',
-      'glance',
-      'horizon',
-      'keystone',
-      'nova',
-      'openstack-common',
-      'python-cinderclient',
-      'python-glanceclient',
-      'python-keystoneclient',
-      'python-novaclient',
-      'python-openstackclient',
-      'python-quantumclient',
-      'python-swiftclient',
-      'quantum',
-      'swift'
-      ]
+    projects => $openstack_project_list,
   }
 }
 
