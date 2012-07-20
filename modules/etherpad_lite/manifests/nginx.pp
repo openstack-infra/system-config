@@ -1,6 +1,6 @@
 class etherpad_lite::nginx (
   $default_server = 'default_server',
-  $server_name    = 'localhost'
+  $server_name    = $fqdn
 ) {
 
   package { 'nginx':
@@ -38,7 +38,7 @@ class etherpad_lite::nginx (
     replace => true,
     owner   => 'root',
     mode    => 0600,
-    source  => 'file:///root/secret-files/eplite.crt',
+    content => template('etherpad_lite/eplite.crt.erb'),
     require => Package['nginx'],
   }
 
@@ -47,7 +47,7 @@ class etherpad_lite::nginx (
     replace => true,
     owner   => 'root',
     mode    => 0600,
-    source  => 'file:///root/secret-files/eplite.key',
+    content => template('etherpad_lite/eplite.key.erb'),
     require => Package['nginx'],
   }
 
