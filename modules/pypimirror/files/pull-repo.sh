@@ -9,10 +9,11 @@ project=$1
 pip_command='/usr/local/bin/pip install -M -U -I --exists-action=w --no-install'
 
 cd ${PIP_TEMP_DOWNLOAD}
-if [ ! -d ${project} ] ; then
-  git clone git://github.com/openstack/${project}.git ${project} >/dev/null 2>&1
+short_project=`echo ${project} | cut -f2 -d/`
+if [ ! -d ${short_project} ] ; then
+  git clone git://github.com/${project}.git ${short_project} >/dev/null 2>&1
 fi
-cd ${project}
+cd ${short_project}
 $pip_command pip
 git fetch origin
 for branch in `git branch -a | grep remotes.origin | grep -v origin.HEAD | awk '{print $1}' ` ; do
