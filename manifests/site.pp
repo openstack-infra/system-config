@@ -117,7 +117,7 @@ node default {
 # thus, set it to 5000minutes until the bug is fixed.
 
 node "review.openstack.org" {
-  include openstack_cron
+  include remove_openstack_cron
   class { 'openstack_server':
     iptables_public_tcp_ports => [80, 443, 29418]
   }
@@ -273,7 +273,7 @@ node "review.openstack.org" {
 }
 
 node "gerrit-dev.openstack.org", "review-dev.openstack.org" {
-  include openstack_cron
+  include remove_openstack_cron
   class { 'openstack_server':
     iptables_public_tcp_ports => [80, 443, 29418]
   }
@@ -300,7 +300,7 @@ node "gerrit-dev.openstack.org", "review-dev.openstack.org" {
 }
 
 node "jenkins.openstack.org" {
-  include openstack_cron
+  include remove_openstack_cron
   class { 'openstack_server':
     iptables_public_tcp_ports => [80, 443, 4155]
   }
@@ -369,7 +369,7 @@ node "jenkins.openstack.org" {
 }
 
 node "jenkins-dev.openstack.org" {
-  include openstack_cron
+  include remove_openstack_cron
   class { 'openstack_server':
     iptables_public_tcp_ports => [80, 443, 4155]
   } 
@@ -387,7 +387,7 @@ node "jenkins-dev.openstack.org" {
 }
 
 node "community.openstack.org" {
-  include openstack_cron
+  include remove_openstack_cron
   class { 'openstack_server':
     iptables_public_tcp_ports => [80, 443, 8099, 8080]
   }
@@ -411,7 +411,7 @@ node "ci-puppetmaster.openstack.org" {
 }
 
 node "lists.openstack.org" {
-  include openstack_cron
+  include remove_openstack_cron
 
   # Using openstack_template instead of openstack_server
   # because the exim config on this machine is almost certainly
@@ -439,7 +439,7 @@ node "lists.openstack.org" {
 }
 
 node "docs.openstack.org" {
-  include openstack_cron
+  include remove_openstack_cron
   class { 'openstack_server':
     iptables_public_tcp_ports => []
   }
@@ -494,7 +494,7 @@ node "eavesdrop.openstack.org" {
 }
 
 node "pypi.openstack.org" {
-  include openstack_cron
+  include remove_openstack_cron
 
   # include jenkins slave so that build deps are there for the pip download
   class { 'jenkins_slave':
@@ -529,7 +529,7 @@ node "pypi.openstack.org" {
 }
 
 node 'etherpad.openstack.org' {
-  include openstack_cron
+  include remove_openstack_cron
   class { 'openstack_server':
     iptables_public_tcp_ports => [22, 80, 443]
   }
@@ -546,7 +546,7 @@ node 'etherpad.openstack.org' {
 }
 
 node 'wiki.openstack.org' {
-  include openstack_cron
+  include renmove_openstack_cron
   class { 'openstack_server':
     iptables_public_tcp_ports => [80, 443]
   }
