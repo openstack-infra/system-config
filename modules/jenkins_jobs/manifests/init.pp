@@ -1,4 +1,4 @@
-class jenkins_jobs($url, $username, $password, $site, $projects) {
+class jenkins_jobs($url, $username, $password, $site) {
 
   package { 'python-yaml':
     ensure => 'present'
@@ -24,8 +24,10 @@ class jenkins_jobs($url, $username, $password, $site, $projects) {
     require => File['/usr/local/jenkins_jobs']
   }
 
-  process_projects { $projects:
-    site => $site,
+  exec { "jenkins_job_${site}":
+    command => "python /usr/local/jenkins_jobs/jenkins_jobs.py update /usr/local/jenkins_jobs/projects/${site}",
+    cwd => '/usr/local/jenkins_jobs/',
+    path => '/bin:/usr/bin',
     require => [
       File['/usr/local/jenkins_jobs/jenkins_jobs.ini'],
       Package['python-jenkins']

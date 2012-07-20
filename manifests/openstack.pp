@@ -1,4 +1,46 @@
 import "users"
+
+$openstack_project_list = [
+  'heat-api/heat',
+  'openstack-ci/git-review',
+  'openstack-ci/lodgeit',
+  'openstack-ci/meetbot',
+  'openstack-ci/pypi-mirror',
+  'openstack-ci/zuul',
+  'openstack-dev/devstack',
+  'openstack-dev/openstack-nose',
+  'openstack-dev/openstack-qa',
+  'openstack-dev/pbr',
+  'openstack/cinder',
+  'openstack/compute-api',
+  'openstack/glance',
+  'openstack/horizon',
+  'openstack/identity-api',
+  'openstack/image-api',
+  'openstack/keystone',
+  'openstack/melange',
+  'openstack/netconn-api',
+  'openstack/nova',
+  'openstack/object-api',
+  'openstack/openstack-chef',
+  'openstack/openstack-ci',
+  'openstack/openstack-ci-puppet',
+  'openstack/openstack-common',
+  'openstack/openstack-manuals',
+  'openstack/openstack-puppet',
+  'openstack/python-cinderclient',
+  'openstack/python-glanceclient',
+  'openstack/python-novaclient',
+  'openstack/python-openstackclient',
+  'openstack/python-swiftclient',
+  'openstack/quantum',
+  'openstack/swift',
+  'openstack/tempest',
+  'stackforge/MRaaS',
+  'stackforge/ceilometer',
+  'stackforge/reddwarf',
+  ]
+
 #
 # Abstract classes:
 #
