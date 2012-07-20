@@ -260,7 +260,15 @@ node "review.openstack.org" {
     script_key_file => '/home/gerrit2/.ssh/launchpadsync_rsa',
     script_site => 'openstack',
     enable_melody => 'true',
-    melody_session => 'true'
+    melody_session => 'true',
+    gerritbot_nick => 'openstackgerrit',
+    gerritbot_password => hiera('gerrit_gerritbot_password'),
+    gerritbot_server => 'irc.freenode.net',
+    gerritbot_user => 'gerritbot',
+    github_user => 'openstack-gerrit',
+    github_token => hiera('gerrit_github_token'),
+    mysql_password => hiera('gerrit_mysql_password'),
+    email_private_key => hiera('gerrit_email_private_key'),
   }
 }
 
@@ -305,6 +313,9 @@ node "jenkins.openstack.org" {
     ssl_chain_file => '/etc/ssl/certs/intermediate.pem',
   }
   class { "jenkins_jobs":
+    url => "https://jenkins.openstack.org/",
+    username => "gerrig",
+    password => hiera('jenkins_jobs_password'),
     site => "openstack",
     projects => [
       'cinder',
@@ -473,6 +484,7 @@ node "eavesdrop.openstack.org" {
 
   meetbot::site { "openstack":
     nick => "openstack",
+    nickpass => hiera('openstack_meetbot_password'),
     network => "FreeNode",
     server => "chat.us.freenode.net:7000",
     url => "eavesdrop.openstack.org",
@@ -523,11 +535,13 @@ node 'etherpad.openstack.org' {
   }
 
   include etherpad_lite
-  class { 'etherpad_lite::nginx':
-    server_name => 'etherpad.openstack.org'
+  include etherpad_list::nginx
+  class { 'etherpad_lite::site':
+    database_password => hiera('etherpad_db_password'),
   }
-  include etherpad_lite::site
-  include etherpad_lite::mysql
+  class { 'etherpad_lite::mysql':
+    database_password => hiera('etherpad_db_password'),
+  }
   include etherpad_lite::backup
 }
 
