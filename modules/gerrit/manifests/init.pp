@@ -89,7 +89,15 @@ class gerrit($virtual_hostname='',
       $script_key_file,
       $script_site,
       $enable_melody = 'false',
-      $melody_session = 'false'
+      $melody_session = 'false',
+      $gerritbot_nick,
+      $gerritbot_password,
+      $gerritbot_server,
+      $gerritbot_user,
+      $github_user,
+      $github_token,
+      $mysql_password,
+      $email_private_key
   ) {
 
   # Set this to true to disable cron jobs and replication, which can
@@ -140,7 +148,7 @@ class gerrit($virtual_hostname='',
     cron { "gerritsyncusers":
       user => gerrit2,
       minute => "*/15",
-      command => "sleep $((RANDOM\%60+60)) && python /usr/local/gerrit/scripts/update_gerrit_users.py ${script_user} ${script_key_file} ${script_site}",
+      command => "sleep $((RANDOM\\%60+60)) && python /usr/local/gerrit/scripts/update_gerrit_users.py ${script_user} ${script_key_file} ${script_site}",
       require => File['/usr/local/gerrit/scripts'],
     }
 
@@ -357,14 +365,13 @@ class gerrit($virtual_hostname='',
 
   # Secret files.
   # TODO: move the first two into other modules since they aren't for gerrit.
-  # TODO: move secure.config to a puppet master
 
   file { '/home/gerrit2/github.secure.config':
     owner => 'root',
     group => 'gerrit2',
     mode => 440,
     ensure => 'present',
-    source => 'file:///root/secret-files/github.secure.config',
+    content => template('gerrit/github.secure.config.erb'),
     replace => 'true',
     require => User['gerrit2']
   }
@@ -374,7 +381,7 @@ class gerrit($virtual_hostname='',
     group => 'gerrit2',
     mode => 440,
     ensure => 'present',
-    source => 'file:///root/secret-files/gerritbot.config',
+    content => template('gerrit/gerritbot.config.erb'),
     replace => 'true',
     require => User['gerrit2']
   }
@@ -387,7 +394,7 @@ class gerrit($virtual_hostname='',
     group => 'gerrit2',
     mode => 600,
     ensure => 'present',
-    source => 'file:///root/secret-files/secure.config',
+    content => template('gerrit/secure.config.erb'),
     replace => 'true',
     require => File["/home/gerrit2/review_site/etc"]
   }

@@ -1,5 +1,8 @@
 class etherpad_lite::site (
-  $dbType = 'mysql'
+  $dbType = 'mysql',
+  $database_user = 'eplite',
+  $database_name = 'etherpad-lite',
+  $database_password,
 ) {
 
   include etherpad_lite
@@ -22,7 +25,7 @@ class etherpad_lite::site (
 
   file { "${etherpad_lite::base_install_dir}/etherpad-lite/settings.json":
     ensure  => 'present',
-    source  => 'file:///root/secret-files/etherpad-lite_settings.json',
+    content => template('etherpad_lite/etherpad-lite_settings.json.erb'),
     replace => true,
     owner   => $etherpad_lite::ep_user,
     group   => $etherpad_lite::ep_user,

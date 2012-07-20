@@ -1,4 +1,5 @@
 import "openstack"
+import "secrets"
 
 $jenkins_ssh_key = 'ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAtioTW2wh3mBRuj+R0Jyb/mLt5sjJ8dEvYyA8zfur1dnqEt5uQNLacW4fHBDFWJoLHfhdfbvray5wWMAcIuGEiAA2WEH23YzgIbyArCSI+z7gB3SET8zgff25ukXlN+1mBSrKWxIza+tB3NU62WbtO6hmelwvSkZ3d7SDfHxrc4zEpmHDuMhxALl8e1idqYzNA+1EhZpbcaf720mX+KD3oszmY2lqD1OkKMquRSD0USXPGlH3HK11MTeCArKRHMgTdIlVeqvYH0v0Wd1w/8mbXgHxfGzMYS1Ej0fzzJ0PC5z5rOqsMqY1X2aC1KlHIFLAeSf4Cx0JNlSpYSrlZ/RoiQ== hudson@hudson'
 
@@ -260,7 +261,15 @@ node "review.openstack.org" {
     script_key_file => '/home/gerrit2/.ssh/launchpadsync_rsa',
     script_site => 'openstack',
     enable_melody => 'true',
-    melody_session => 'true'
+    melody_session => 'true',
+    gerritbot_nick => 'openstackgerrit',
+    gerritbot_password => $secrets::gerrit_gerritbot_password,
+    gerritbot_server => 'irc.freenode.net',
+    gerritbot_user => 'gerritbot',
+    github_user => 'openstack-gerrit',
+    github_token => $secrets::gerrit_github_token,
+    mysql_password => $secrets::gerrit_mysql_password,
+    email_private_key => $secrets::gerrit_email_private_key,
   }
 }
 
@@ -305,6 +314,9 @@ node "jenkins.openstack.org" {
     ssl_chain_file => '/etc/ssl/certs/intermediate.pem',
   }
   class { "jenkins_jobs":
+    url => "https://jenkins.openstack.org/",
+    username => "gerrig",
+    password => $secrets::jenkins_jobs_password,
     site => "openstack",
     projects => [
       'cinder',
@@ -473,6 +485,7 @@ node "eavesdrop.openstack.org" {
 
   meetbot::site { "openstack":
     nick => "openstack",
+    nickpass => $secrets::openstack_meetbot_password,
     network => "FreeNode",
     server => "chat.us.freenode.net:7000",
     url => "eavesdrop.openstack.org",
@@ -523,11 +536,13 @@ node 'etherpad.openstack.org' {
   }
 
   include etherpad_lite
-  class { 'etherpad_lite::nginx':
-    server_name => 'etherpad.openstack.org'
+  include etherpad_list::nginx
+  class { 'etherpad_lite::site':
+    database_password => $secrets::etherpad_db_password,
   }
-  include etherpad_lite::site
-  include etherpad_lite::mysql
+  class { 'etherpad_lite::mysql':
+    database_password => $secrets::etherpad_db_password,
+  }
   include etherpad_lite::backup
 }
 
