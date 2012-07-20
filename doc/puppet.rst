@@ -4,9 +4,10 @@ Puppet Master
 Overview
 --------
 
-Instead of using a cron job, StackForge uses a puppet master to host the puppet
-manifests and modules.  The other nodes then connect to this as puppet agents
-to get their configuration.
+Puppet agent is a mechanism use to pull puppet manifests and configuration
+from a centralized master. This means there is only one place that needs to
+hold secure information such as passwords, and only one location for the git
+repo holding the modules.
 
 Puppet Master
 -------------
@@ -19,12 +20,12 @@ ship the data to the clients.  To install this:
   sudo apt-get install puppet puppetmaster-passenger
 
 Files for puppet master are stored in a git repo clone at
-``/opt/openstack-ci-puppet``.  In StackForge we have a ``root`` cron job that
+``/opt/openstack-ci-puppet``.  We have a ``root`` cron job that
 automatically populates these from our puppet git repository as follows:
 
 .. code-block:: bash
 
-  */15 * * * * sleep $((RANDOM\%600)) && cd /opt/openstack-ci-puppet && /usr/bin/git pull -q
+  \*/15 * * * * sleep $((RANDOM\%600)) && cd /opt/openstack-ci-puppet && /usr/bin/git pull -q
 
 The ``/etc/puppet/puppet.conf`` file then needs updating to point to the
 manifest and modules as follows:
@@ -38,8 +39,44 @@ manifest and modules as follows:
    ssl_client_verify_header = SSL_CLIENT_VERIFY
    manifestdir=/opt/openstack-ci-puppet/manifests
    modulepath=/opt/openstack-ci-puppet/modules
-   manifest=$manifestdir/stackforge.pp
+   manifest=$manifestdir/site.pp
 
+Hiera
+-----
+
+Hiera is used to maintain secret information on the puppetmaster.
+
+We want to install hiera from puppetlabs' apt repo, but we don't want to get
+on the puppet upgrade train - so the process is as follows:
+
+.. code-block:: bash
+
+    echo "deb http://apt.puppetlabs.com precise devel" > /etc/apt/sources.list.d/puppetlabs.list
+    apt-get update
+    apt-get install hiera hiera-puppet
+    rm /etc/apt/sources.list.d/puppetlabs.list
+    apt-get update
+
+Hiera uses a systemwide configuration file in ``/etc/puppet/hiera.yaml``
+which tells is where to find subsequent configuration files.
+
+.. code-block:: yaml
+
+    ---
+    :hierarchy:
+      - %{operatingsystem}
+      - common
+    :backends:
+      - yaml
+    :yaml:
+      :datadir: '/etc/puppet/hieradata/%{environment}'
+
+This setup supports multiple configuration. The two sets of environments
+that OpenStack CI users are ``production`` and ``development``. ``production``
+is the default is and the environment used when nothing else is specified.
+Then the configuration needs to be placed into common.yaml in
+``/etc/puppet/hieradata/production`` and ``/etc/puppet/hieradata/development``.
+The values are simple key-value pairs in yaml format.
 
 Adding a node
 -------------
