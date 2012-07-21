@@ -1,88 +1,9 @@
-import "openstack"
-
-$jenkins_ssh_key = 'ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAtioTW2wh3mBRuj+R0Jyb/mLt5sjJ8dEvYyA8zfur1dnqEt5uQNLacW4fHBDFWJoLHfhdfbvray5wWMAcIuGEiAA2WEH23YzgIbyArCSI+z7gB3SET8zgff25ukXlN+1mBSrKWxIza+tB3NU62WbtO6hmelwvSkZ3d7SDfHxrc4zEpmHDuMhxALl8e1idqYzNA+1EhZpbcaf720mX+KD3oszmY2lqD1OkKMquRSD0USXPGlH3HK11MTeCArKRHMgTdIlVeqvYH0v0Wd1w/8mbXgHxfGzMYS1Ej0fzzJ0PC5z5rOqsMqY1X2aC1KlHIFLAeSf4Cx0JNlSpYSrlZ/RoiQ== hudson@hudson'
-
-class openstack_cron {
-  include logrotate
-  include puppetboot
-  cron { "updatepuppet":
-    user => root,
-    minute => "*/15",
-    command => 'apt-get update >/dev/null 2>&1 ; sleep $((RANDOM\%600)) && cd /root/openstack-ci-puppet && /usr/bin/git pull -q && puppet apply -l /var/log/manifest.log --modulepath=/root/openstack-ci-puppet/modules manifests/site.pp',
-    environment => "PATH=/var/lib/gems/1.8/bin:/usr/bin:/bin:/usr/sbin:/sbin",
-  }
-  logrotate::file { 'updatepuppet':
-    log => '/var/log/manifest.log',
-    options => ['compress', 'delaycompress', 'missingok', 'rotate 7', 'daily', 'notifempty'],
-    require => Cron['updatepuppet'],
-  }
-}
-
-class backup ($backup_user) {
-  package { "bup":
-    ensure => present
-  }
-
-  file { "/etc/bup-excludes":
-    ensure => present,
-    content => "/proc/*
-/sys/*
-/dev/*
-/tmp/*
-/floppy/*
-/cdrom/*
-/var/spool/squid/*
-/var/spool/exim/*
-/media/*
-/mnt/*
-/var/agentx/*
-/run/*
-"
-  }
-
-  cron { "bup-rs-ord":
-    user => root,
-    hour => "5",
-    minute => "37",
-    command => "tar -X /etc/bup-excludes -cPf - / | bup split -r $backup_user@ci-backup-rs-ord.openstack.org: -n root -q",
-  }
-}
-
-class remove_openstack_cron {
-  cron { "updatepuppet":
-    ensure => absent
-  }
-
-  file { '/etc/init/puppetboot.conf':
-    ensure => absent
-  }
-
-  file { "/etc/logrotate.d/updatepuppet":
-    ensure => absent
-  }
-}
-
-class openstack_jenkins_slave {
-  include openstack_cron
-  include tmpreaper
-  include apt::unattended-upgrades
-  class { 'openstack_server':
-    iptables_public_tcp_ports => []
-  }
-  class { 'jenkins_slave':
-    ssh_key => $jenkins_ssh_key
-  }
-}
-
 #
 # Default: should at least behave like an openstack server
 #
-
 node default {
-  include openstack_cron
-  class { 'openstack_server':
-    iptables_public_tcp_ports => []
-  }
+  include openstack_project::puppet_cron
+  include openstack_project::server
 }
 
 #
@@ -117,8 +38,8 @@ node default {
 # thus, set it to 5000minutes until the bug is fixed.
 
 node "review.openstack.org" {
-  include remove_openstack_cron
-  class { 'openstack_server':
+  include openstack_project::remove_cron
+  class { 'openstack_project::server':
     iptables_public_tcp_ports => [80, 443, 29418]
   }
   class { 'gerrit':
@@ -135,7 +56,7 @@ node "review.openstack.org" {
     core_packedgitwindowsize => '16k',
     sshd_threads => '100',
     httpd_maxwait => '5000min',
-    github_projects => $openstack_project_list,
+    github_projects => $openstack_project::project_list,
     upstream_projects => [ {
                          name => 'openstack-ci/gerrit',
                          remote => 'https://gerrit.googlesource.com/gerrit'
@@ -159,8 +80,8 @@ node "review.openstack.org" {
 }
 
 node "gerrit-dev.openstack.org", "review-dev.openstack.org" {
-  include remove_openstack_cron
-  class { 'openstack_server':
+  include openstack_project::remove_cron
+  class { 'openstack_project::server':
     iptables_public_tcp_ports => [80, 443, 29418]
   }
 
@@ -183,8 +104,8 @@ node "gerrit-dev.openstack.org", "review-dev.openstack.org" {
 }
 
 node "jenkins.openstack.org" {
-  include remove_openstack_cron
-  class { 'openstack_server':
+  include openstack_project::remove_cron
+  class { 'openstack_project::server':
     iptables_public_tcp_ports => [80, 443, 4155]
   }
   class { 'jenkins_master':
@@ -201,32 +122,17 @@ node "jenkins.openstack.org" {
     password => hiera('jenkins_jobs_password'),
     site => "openstack",
   }
-  class { 'zuul': }
-  file { "/etc/zuul/layout.yaml":
-    ensure => 'present',
-    source => 'puppet:///modules/openstack-ci-config/zuul/layout.yaml'
-  }
-  file { "/etc/zuul/openstack_functions.py":
-    ensure => 'present',
-    source => 'puppet:///modules/openstack-ci-config/zuul/openstack_functions.py'
-  }
-  file { "/etc/zuul/logging.conf":
-    ensure => 'present',
-    source => 'puppet:///modules/openstack-ci-config/zuul/logging.conf'
-  }
-  file { "/etc/default/jenkins":
-    ensure => 'present',
-    source => 'puppet:///modules/openstack-ci-config/jenkins/jenkins.default'
-  }
+  class { "openstack_project::zuul": }
 }
 
 node "jenkins-dev.openstack.org" {
-  include remove_openstack_cron
-  class { 'openstack_server':
+  include openstack_project::remove_cron
+  class { 'openstack_project::server':
     iptables_public_tcp_ports => [80, 443, 4155]
   } 
   class { 'backup':
-    backup_user => 'bup-jenkins-dev'
+    backup_user => 'bup-jenkins-dev',
+    backup_server => 'ci-backup-rs-ord.openstack.org'
   }
   class { 'jenkins_master':
     site => 'jenkins-dev.openstack.org',
@@ -239,8 +145,8 @@ node "jenkins-dev.openstack.org" {
 }
 
 node "community.openstack.org" {
-  include remove_openstack_cron
-  class { 'openstack_server':
+  include openstack_project::remove_cron
+  class { 'openstack_project::server':
     iptables_public_tcp_ports => [80, 443, 8099, 8080]
   }
 
@@ -250,7 +156,7 @@ node "community.openstack.org" {
 }
 
 node "ci-puppetmaster.openstack.org" {
-  class { 'openstack_server':
+  class { 'openstack_project::server':
     iptables_public_tcp_ports => [8140]
   }
   cron { "updatepuppetmaster":
@@ -262,22 +168,21 @@ node "ci-puppetmaster.openstack.org" {
 
 }
 
-node "lists.openstack.org" {
-  include remove_openstack_cron
+$sysadmins = $openstack_project::sysadmins
 
-  # Using openstack_template instead of openstack_server
+node "lists.openstack.org" {
+  include openstack_project::remove_cron
+
+  # Using openstack_project::template instead of openstack_project::server
   # because the exim config on this machine is almost certainly
   # going to be more complicated than normal.
-  class { 'openstack_template':
+  class { 'openstack_project::template':
     iptables_public_tcp_ports => [25, 80, 465]
   }
 
+  sysadmins += ['duncan@dreamhost.com']
   class { 'exim':
-    sysadmin => ['corvus@inaugust.com',
-                 'mordred@inaugust.com',
-                 'andrew@linuxjedi.co.uk',
-                 'devananda.vdv@gmail.com',
-                 'duncan@dreamhost.com'],
+    sysadmin => $sysadmins
     mailman_domains => ['lists.openstack.org'],
   }
 
@@ -291,16 +196,14 @@ node "lists.openstack.org" {
 }
 
 node "docs.openstack.org" {
-  include remove_openstack_cron
-  class { 'openstack_server':
-    iptables_public_tcp_ports => []
-  }
+  include openstack_project::remove_cron
+  include openstack_project::server
   include doc_server
 }
 
 node "paste.openstack.org" {
-  include remove_openstack_cron
-  class { 'openstack_server':
+  include openstack_project::remove_cron
+  class { 'openstack_project::server':
     iptables_public_tcp_ports => [80]
   }
   include lodgeit
@@ -316,8 +219,8 @@ node "paste.openstack.org" {
 }
 
 node "planet.openstack.org" {
-  include remove_openstack_cron
-  class { 'openstack_server':
+  include openstack_project::remove_cron
+  class { 'openstack_project::server':
     iptables_public_tcp_ports => [80]
   }
   include planet
@@ -328,8 +231,8 @@ node "planet.openstack.org" {
 }
 
 node "eavesdrop.openstack.org" {
-  include remove_openstack_cron
-  class { 'openstack_server':
+  include openstack_project::remove_cron
+  class { 'openstack_project::server':
     iptables_public_tcp_ports => [80]
   }
   include meetbot
@@ -346,7 +249,7 @@ node "eavesdrop.openstack.org" {
 }
 
 node "pypi.openstack.org" {
-  include remove_openstack_cron
+  include openstack_project::remove_cron
 
   # include jenkins slave so that build deps are there for the pip download
   class { 'jenkins_slave':
@@ -354,19 +257,19 @@ node "pypi.openstack.org" {
     user => false
   }
 
-  class { 'openstack_server':
+  class { 'openstack_project::server':
     iptables_public_tcp_ports => [80]
   }
 
   class { "pypimirror":
     base_url => "http://pypi.openstack.org",
-    projects => $openstack_project_list,
+    projects => $openstack_project::project_list,
   }
 }
 
 node 'etherpad.openstack.org' {
-  include remove_openstack_cron
-  class { 'openstack_server':
+  include openstack_project::remove_cron
+  class { 'openstack_project::server':
     iptables_public_tcp_ports => [22, 80, 443]
   }
 
@@ -382,8 +285,8 @@ node 'etherpad.openstack.org' {
 }
 
 node 'wiki.openstack.org' {
-  include renmove_openstack_cron
-  class { 'openstack_server':
+  include openstack_project::remove_cron
+  class { 'openstack_project::server':
     iptables_public_tcp_ports => [80, 443]
   }
 
@@ -394,11 +297,11 @@ node 'wiki.openstack.org' {
 
 # A bare machine, but with a jenkins user
 node /^.*\.template\.openstack\.org$/ {
-  class { 'openstack_template':
+  class { 'openstack_project::template':
     iptables_public_tcp_ports => []
   }
   class { 'jenkins_slave':
-    ssh_key => $jenkins_ssh_key,
+    ssh_key => $openstack_project::jenkins_ssh_key,
     sudo => true,
     bare => true
   }
@@ -406,7 +309,7 @@ node /^.*\.template\.openstack\.org$/ {
 
 # A backup machine.  Don't run cron or puppet agent on it.
 node /^ci-backup-.*\.openstack\.org$/ {
-  class { 'openstack_template':
+  class { 'openstack_project::template':
     iptables_public_tcp_ports => []
   }
 }
@@ -417,8 +320,8 @@ node /^ci-backup-.*\.openstack\.org$/ {
 
 # Test cgroups and ulimits on precise8
 node 'precise8.slave.openstack.org' {
-  include openstack_cron
-  include openstack_jenkins_slave
+  include openstack_project::puppet_cron
+  include openstack_project::jenkins_slave
 
   include ulimit
   ulimit::conf { 'limit_jenkins_procs':
@@ -431,16 +334,15 @@ node 'precise8.slave.openstack.org' {
 }
 
 node /^.*\.slave\.openstack\.org$/ {
-  include openstack_cron
-  include openstack_jenkins_slave
-
+  include openstack_project::puppet_cron
+  include openstack_project::jenkins_slave
 }
 
 # bare-bones slaves spun up by jclouds. Specifically need to not set ssh
 # login limits, because it screws up jclouds provisioning
 node /^.*\.jclouds\.openstack\.org$/ {
 
-  include openstack_base
+  include openstack_project::base
 
   class { 'jenkins_slave':
     ssh_key => "",
