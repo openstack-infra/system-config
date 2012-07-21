@@ -1,4 +1,4 @@
-define meetbot::site($nick, $nickpass, $network, $server, $url, $channels, $use_ssl) {
+define meetbot::site($nick, $nickpass, $network, $server, $url=$fqdn, $channels, $use_ssl) {
 
   file { "/etc/nginx/sites-available/${name}-meetbot":
     ensure => 'present',
