@@ -25,12 +25,7 @@
 # 12:09 <@spearce> so. you get 5 milliseconds before aborting
 # thus, set it to 5000minutes until the bug is fixed.
 class openstack_project::review {
-  class { 'openstack_project::server':
-    iptables_public_tcp_ports => [80, 443, 29418]
-  }
-  class { 'gerrit':
-    virtual_hostname => 'review.openstack.org',
-    canonicalweburl => "https://review.openstack.org/",
+  class { 'openstack_project::gerrit':
     ssl_cert_file => '/etc/ssl/certs/review.openstack.org.pem',
     ssl_key_file => '/etc/ssl/private/review.openstack.org.key',
     ssl_chain_file => '/etc/ssl/certs/intermediate.pem',
@@ -47,13 +42,9 @@ class openstack_project::review {
                          name => 'openstack-ci/gerrit',
                          remote => 'https://gerrit.googlesource.com/gerrit'
                          } ],
-    logo => 'openstack.png',
     war => 'http://tarballs.openstack.org/ci/gerrit-2.4.1-10-g63110fd.war',
     script_user => 'launchpadsync',
     script_key_file => '/home/gerrit2/.ssh/launchpadsync_rsa',
-    script_site => 'openstack',
-    enable_melody => 'true',
-    melody_session => 'true',
     gerritbot_nick => 'openstackgerrit',
     gerritbot_password => hiera('gerrit_gerritbot_password'),
     gerritbot_server => 'irc.freenode.net',
