@@ -1,6 +1,14 @@
-import "users"
+class openstack_project {
 
-$openstack_project_list = [ {
+  $jenkins_ssh_key = 'ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAtioTW2wh3mBRuj+R0Jyb/mLt5sjJ8dEvYyA8zfur1dnqEt5uQNLacW4fHBDFWJoLHfhdfbvray5wWMAcIuGEiAA2WEH23YzgIbyArCSI+z7gB3SET8zgff25ukXlN+1mBSrKWxIza+tB3NU62WbtO6hmelwvSkZ3d7SDfHxrc4zEpmHDuMhxALl8e1idqYzNA+1EhZpbcaf720mX+KD3oszmY2lqD1OkKMquRSD0USXPGlH3HK11MTeCArKRHMgTdIlVeqvYH0v0Wd1w/8mbXgHxfGzMYS1Ej0fzzJ0PC5z5rOqsMqY1X2aC1KlHIFLAeSf4Cx0JNlSpYSrlZ/RoiQ== hudson@hudson'
+
+  $sysadmin = ['corvus@inaugust.com',
+               'mordred@inaugust.com',
+               'andrew@linuxjedi.co.uk',
+               'devananda.vdv@gmail.com',
+               'clark.boylan@gmail.com']
+
+  $project_list = [ {
      name => 'openstack/keystone',
      close_pull => 'true'
      }, {
@@ -116,76 +124,4 @@ $openstack_project_list = [ {
      close_pull => 'true'
      }
   ]
-
-#
-# Abstract classes:
-#
-class openstack_base {
-  include openstack_project::users
-  include sudoers
-
-  file { '/etc/profile.d/Z98-byobu.sh':
-    ensure => 'absent'
-  }
-
-  package { "popularity-contest":
-    ensure => purged
-  }
-
-  $packages = ["puppet",
-               "git",
-               "python-setuptools",
-               "python-virtualenv",
-               "python-software-properties",
-               "bzr",
-               "byobu",
-               "emacs23-nox"]
-  package { $packages: ensure => "present" }
-
-  realize (
-    User::Virtual::Localuser["mordred"],
-    User::Virtual::Localuser["corvus"],
-    User::Virtual::Localuser["soren"],
-    User::Virtual::Localuser["linuxjedi"],
-    User::Virtual::Localuser["devananda"],
-    User::Virtual::Localuser["clarkb"],
-  )
-}
-
-# A template host with no running services
-class openstack_template ($iptables_public_tcp_ports) {
-  include openstack_base
-  include ssh
-  include snmpd
-  include apt::unattended-upgrades
-  
-  class { 'iptables':
-    public_tcp_ports => $iptables_public_tcp_ports,
-  }
-
-  package { "ntp":
-    ensure => installed
-  }
-
-  service { 'ntpd':
-    name       => 'ntp',
-    ensure     => running,
-    enable     => true,
-    hasrestart => true,
-    require => Package['ntp'],
-  }
-}
-
-# A server that we expect to run for some time
-class openstack_server ($iptables_public_tcp_ports) {
-  class { 'openstack_template':
-    iptables_public_tcp_ports => $iptables_public_tcp_ports
-  }
-  class { 'exim':
-    sysadmin => ['corvus@inaugust.com',
-                 'mordred@inaugust.com',
-                 'andrew@linuxjedi.co.uk',
-                 'devananda.vdv@gmail.com',
-                 'clark.boylan@gmail.com']
-  }
 }
