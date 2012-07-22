@@ -295,7 +295,15 @@ node "gerrit-dev.openstack.org", "review-dev.openstack.org" {
     script_key_file => '/home/gerrit2/.ssh/id_rsa',
     script_site => 'openstack',
     enable_melody => 'true',
-    melody_session => 'true'
+    melody_session => 'true',
+    gerritbot_nick => '',
+    gerritbot_password => '',
+    gerritbot_server => '',
+    gerritbot_user => '',
+    github_user => 'openstack-gerrit-dev',
+    github_token => hiera('gerrit_dev_github_token'),
+    mysql_password => hiera('gerrit_dev_mysql_password'),
+    email_private_key => hiera('gerrit_email_private_key'),
   }
 }
 
