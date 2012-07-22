@@ -303,7 +303,7 @@ node "gerrit-dev.openstack.org", "review-dev.openstack.org" {
     github_user => 'openstack-gerrit-dev',
     github_token => hiera('gerrit_dev_github_token'),
     mysql_password => hiera('gerrit_dev_mysql_password'),
-    email_private_key => hiera('gerrit_email_private_key'),
+    email_private_key => hiera('gerrit_dev_email_private_key'),
   }
 }
 
