@@ -38,10 +38,6 @@ class openstack_project::review {
     sshd_threads => '100',
     httpd_maxwait => '5000min',
     github_projects => $openstack_project::project_list,
-    upstream_projects => [ {
-                         name => 'openstack-ci/gerrit',
-                         remote => 'https://gerrit.googlesource.com/gerrit'
-                         } ],
     war => 'http://tarballs.openstack.org/ci/gerrit-2.4.1-10-g63110fd.war',
     script_user => 'launchpadsync',
     script_key_file => '/home/gerrit2/.ssh/launchpadsync_rsa',
@@ -55,5 +51,11 @@ class openstack_project::review {
     gerritbot_password => hiera('gerrit_gerritbot_password'),
     gerritbot_server => 'irc.freenode.net',
     gerritbot_user => 'gerritbot'
+  }
+  class { 'gerrit::remotes':
+    upstream_projects => [ {
+                         name => 'openstack-ci/gerrit',
+                         remote => 'https://gerrit.googlesource.com/gerrit'
+                         } ],
   }
 }
