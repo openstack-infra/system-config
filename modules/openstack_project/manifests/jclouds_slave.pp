@@ -3,7 +3,7 @@
 class openstack_project::jclouds_slave {
   include openstack_project::base
 
-  class { '::jenkins_slave':
+  class { 'jenkins_slave':
     ssh_key => "",
     user => false
   }
