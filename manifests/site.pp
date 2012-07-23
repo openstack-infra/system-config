@@ -91,7 +91,7 @@ node /^ci-backup-.*\.openstack\.org$/ {
 # Test cgroups and ulimits on precise8
 node 'precise8.slave.openstack.org' {
   include openstack_project::puppet_cron
-  include openstack_project::jenkins_slave
+  include openstack_project::slave
 
   include ulimit
   ulimit::conf { 'limit_jenkins_procs':
@@ -105,7 +105,7 @@ node 'precise8.slave.openstack.org' {
 
 node /^.*\.slave\.openstack\.org$/ {
   include openstack_project::puppet_cron
-  include openstack_project::jenkins_slave
+  include openstack_project::slave
 }
 
 node /^.*\.jclouds\.openstack\.org$/ {
