@@ -16,5 +16,5 @@ class openstack_project::jenkins {
     password => hiera('jenkins_jobs_password'),
     site => "openstack",
   }
-  class { "openstack_project::zuul": }
+  class { "openstack_project::zuul_config": }
 }
