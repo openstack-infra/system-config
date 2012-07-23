@@ -1,5 +1,3 @@
-$sysadmins = $openstack_project::sysadmins
-
 class openstack_project::lists {
   # Using openstack_project::template instead of openstack_project::server
   # because the exim config on this machine is almost certainly
@@ -8,9 +6,8 @@ class openstack_project::lists {
     iptables_public_tcp_ports => [25, 80, 465]
   }
 
-  $sysadmins += ['duncan@dreamhost.com']
   class { 'exim':
-    sysadmin => $sysadmins,
+    sysadmin => hiera('listadmins'),
     mailman_domains => ['lists.openstack.org'],
   }
 
