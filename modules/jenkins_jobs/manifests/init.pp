@@ -34,10 +34,12 @@ class jenkins_jobs($url, $username, $password, $site) {
       ]
   }
 
+  class {"pip": }
+
   package { "python-jenkins":
     ensure => latest,  # okay to use latest for pip
     provider => pip,
-    require => Package[python-pip],
+    require => Class[pip]
   }
 
 }
