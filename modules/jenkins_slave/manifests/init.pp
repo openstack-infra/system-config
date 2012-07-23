@@ -32,6 +32,7 @@ class jenkins_slave($ssh_key, $sudo = false, $bare = false, $user = true) {
                  "docbook5-xml", # for building openstack docs
                  "docbook-xsl", # for building openstack docs
                  "ebtables",
+                 "firefox", # for selenium tests
                  "gawk",
                  "graphviz",
                  "iptables",
@@ -73,6 +74,7 @@ class jenkins_slave($ssh_key, $sudo = false, $bare = false, $user = true) {
                  "vlan",
                  "wget",
                  "xsltproc", # for building openstack docs
+                 "xvfb", # for selenium tests
                  "pyflakes"]
 
     if ($bare == false) {
