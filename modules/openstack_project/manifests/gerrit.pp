@@ -1,3 +1,8 @@
+# A wrapper class around the main gerrit class that sets gerrit
+# up for launchpad single sign on, bug/blueprint links and user
+# import and sync
+# TODO: launchpadlib creds for user sync script
+
 class openstack_project::gerrit (
       $ssl_cert_file='',
       $ssl_key_file='',
@@ -13,25 +18,32 @@ class openstack_project::gerrit (
       $httpd_minthreads='',
       $httpd_maxthreads='',
       $httpd_maxwait='',
-      $github_projects = [],
       $war,
       $script_user,
       $script_key_file,
+      $github_projects = [],
       $github_user,
       $github_token,
       $mysql_password,
-      $email_private_key
+      $email_private_key,
+      $testmode=false,
 ) {
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [80, 443, 29418]
   }
 
+  $packages = [
+               "python-mysqldb",      # for launchpad sync script
+	       "python-openid",       # for launchpad sync script
+	       "python-launchpadlib", # for launchpad sync script
+               ]
+
+  package { $packages:
+    ensure => present,
+  }
+
   class { 'gerrit':
     # opinions
-    virtual_hostname => $fqdn,
-    canonicalweburl => "https://$fqdn/",
-    logo => 'openstack.png',
-    script_site => 'openstack',
     enable_melody => 'true',
     melody_session => 'true',
     # passthrough
@@ -39,6 +51,7 @@ class openstack_project::gerrit (
     ssl_key_file => $ssl_key_file,
     ssl_chain_file => $ssl_chain_file,
     email => $email,
+    openidssourl => "https://login.launchpad.net/+openid",
     database_poollimit => $database_poollimit,
     container_heaplimit => $container_heaplimit,
     core_packedgitopenfiles => $core_packedgitopenfiles,
@@ -64,16 +77,93 @@ class openstack_project::gerrit (
     war => $war,
     script_user => $script_user,
     script_key_file => $script_key_file,
+    script_site => 'openstack',
     mysql_password => $mysql_password,
-    email_private_key => $email_private_key
+    email_private_key => $email_private_key,
+    testmode => $testmode,
   }
-  class { 'gerrit::cron':
-    script_user => $script_user,
-    script_key_file => $script_key_file,
+  if ($testmode == false) {
+    class { 'gerrit::cron':
+      script_user => $script_user,
+      script_key_file => $script_key_file,
+    }
+    class { 'github':
+      github_projects => $github_projects,
+      github_user => $github_username,
+      github_token => $github_oauth_token,
+    }
   }
-  class { 'github':
-    github_projects => $github_projects,
-    github_user => $github_username,
-    github_token => $github_oauth_token,
+
+  file { '/home/gerrit2/review_site/static/echosign-cla.html':
+    owner => 'root',
+    group => 'root',
+    mode => 444,
+    ensure => 'present',
+    source => 'puppet:///modules/openstack_project/gerrit/echosign-cla.html',
+    replace => 'true',
+    require => Class['gerrit::launchpad'],
+  }
+
+  file { '/home/gerrit2/review_site/static/title.png':
+    ensure => 'present',
+    source => "puppet:///modules/openstack_project/openstack.png",
+    require => Class['gerrit::launchpad'],
+  }
+
+  file { '/home/gerrit2/review_site/static/openstack-page-bkg.jpg':
+    ensure => 'present',
+    source => 'puppet:///modules/openstack_project/openstack-page-bkg.jpg',
+    require => Class['gerrit::launchpad'],
+  }
+
+  file { '/home/gerrit2/review_site/etc/GerritSite.css':
+    ensure => 'present',
+    source => 'puppet:///modules/openstack_project/gerrit/GerritSite.css',
+    require => Class['gerrit::launchpad'],
+  }
+
+  file { '/home/gerrit2/review_site/etc/GerritSiteHeader.html':
+    ensure => 'present',
+    source => 'puppet:///modules/openstack_project/GerritSiteHeader.html',
+    require => Class['gerrit::launchpad'],
+  }
+
+  cron { "gerritsyncusers":
+    user => gerrit2,
+    minute => "*/15",
+    command => "sleep $((RANDOM\\%60+60)) && python /usr/local/gerrit/scripts/update_gerrit_users.py ${script_user} ${script_key_file} ${script_site}",
+    require => File['/usr/local/gerrit/scripts'],
+  }
+
+  file { '/usr/local/gerrit/scripts':
+    owner => 'root',
+    group => 'root',
+    mode => 755,
+    ensure => 'directory',
+    recurse => true,
+    require => Class['gerrit'],
+    source => [
+                "puppet:///modules/openstack_project/gerrit/scripts",
+              ],
+  }
+
+  file { '/home/gerrit2/review_site/hooks/change-merged':
+    owner => 'root',
+    group => 'root',
+    mode => 555,
+    ensure => 'present',
+    source => 'puppet:///modules/gerrit/change-merged',
+    replace => 'true',
+    require => Class['gerrit']
+  }
+
+  file { '/home/gerrit2/review_site/hooks/patchset-created':
+    owner => 'root',
+    group => 'root',
+    mode => 555,
+    ensure => 'present',
+    source => 'puppet:///modules/gerrit/patchset-created',
+    replace => 'true',
+    require => Class['gerrit']
   }
 }

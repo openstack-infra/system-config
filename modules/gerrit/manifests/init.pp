@@ -26,8 +26,6 @@
 #     Gerrit configuration options; see Gerrit docs.
 #   commentlinks:
 #     A list of regexes Gerrit should hyperlink.
-#   logo:
-#     The name of the image file for the site header.
 #   war:
 #     The URL of the Gerrit WAR that should be downloaded and installed.
 #     Note that only the final component is used for comparing to the most
@@ -44,13 +42,15 @@
 #     to:
 #       http://tarballs.openstack.org/ci/gerrit-2.3.0.war
 #     Gerrit will be upgraded on the next puppet run.
-
+#   testmode:
+#     Set this to true to disable cron jobs and replication,
+#     which can interfere with testing.
 # TODO: move apache configuration to another module
 # TODO: move mysql configuration to another module
 # TODO: make more gerrit options configurable here
-# TODO: launchpadlib creds for user sync script
 
-class gerrit($virtual_hostname='',
+class gerrit($virtual_hostname=$fqdn,
+      $canonicalweburl="https://$fqdn/",
       $canonicalweburl='',
       $ssl_cert_file='',
       $ssl_key_file='',
@@ -68,20 +68,15 @@ class gerrit($virtual_hostname='',
       $httpd_maxthreads='',
       $httpd_maxwait='',
       $commentlinks = [],
-      $logo,
       $war,
       $script_user,
       $script_key_file,
-      $script_site,
       $enable_melody = 'false',
       $melody_session = 'false',
       $mysql_password,
-      $email_private_key
-  ) {
-
-  # Set this to true to disable cron jobs and replication, which can
-  # interfere with testing.
-  $testmode = false
+      $email_private_key,
+      $testmode=false
+      ) {
 
   user { "gerrit2":
     ensure => present,
@@ -100,26 +95,11 @@ class gerrit($virtual_hostname='',
   $packages = ["gitweb",
 	       "openjdk-6-jre-headless",
 	       "mysql-server",
-	       "python-mysqldb",      # for launchpad sync script
-	       "python-openid",       # for launchpad sync script
-	       "python-launchpadlib", # for launchpad sync script
 	       "apache2"]
 
   package { $packages:
     ensure => present,
   }
-
-  # Skip cron jobs if we're in test mode
-  if ($testmode == false) {
-
-    cron { "gerritsyncusers":
-      user => gerrit2,
-      minute => "*/15",
-      command => "sleep $((RANDOM\\%60+60)) && python /usr/local/gerrit/scripts/update_gerrit_users.py ${script_user} ${script_key_file} ${script_site}",
-      require => File['/usr/local/gerrit/scripts'],
-    }
-
-  } # testmode==false
 
   file { "/var/log/gerrit":
     ensure => "directory",
@@ -148,40 +128,23 @@ class gerrit($virtual_hostname='',
     require => File["/home/gerrit2/review_site"]
   }
 
-  file { "/home/gerrit2/review_site/hooks":
-    ensure => "directory",
-    owner => "gerrit2",
-    require => File["/home/gerrit2/review_site"]
-  }
-
   file { "/home/gerrit2/review_site/static":
     ensure => "directory",
     owner => "gerrit2",
     require => File["/home/gerrit2/review_site"]
   }
 
-  file { '/home/gerrit2/review_site/static/title.png':
-    ensure => 'present',
-    source => "puppet:///modules/gerrit/${logo}",
-  }
-
-  file { '/home/gerrit2/review_site/static/openstack-page-bkg.jpg':
-    ensure => 'present',
-    source => 'puppet:///modules/gerrit/openstack-page-bkg.jpg'
-  }
-
-  file { '/home/gerrit2/review_site/etc/GerritSite.css':
-    ensure => 'present',
-    source => 'puppet:///modules/gerrit/GerritSite.css'
-  }
-
-  file { '/home/gerrit2/review_site/etc/GerritSiteHeader.html':
-    ensure => 'present',
-    source => 'puppet:///modules/gerrit/GerritSiteHeader.html'
+  file { "/home/gerrit2/review_site/hooks":
+    ensure => "directory",
+    owner => "gerrit2",
+    require => File["/home/gerrit2/review_site"]
   }
 
   # Skip replication if we're in test mode
   if ($testmode == false) {
+# TODO: This file needs to be templated with a boolean around
+# enabling replication to github. Also, the local repos need
+# to be managed in here when we get project creation handled
     file { '/home/gerrit2/review_site/etc/replication.config':
       owner => 'root',
       group => 'root',
@@ -202,36 +165,6 @@ class gerrit($virtual_hostname='',
     content => template('gerrit/gerrit.config.erb'),
     replace => 'true',
     require => File["/home/gerrit2/review_site/etc"]
-  }
-
-  file { '/home/gerrit2/review_site/hooks/change-merged':
-    owner => 'root',
-    group => 'root',
-    mode => 555,
-    ensure => 'present',
-    source => 'puppet:///modules/gerrit/change-merged',
-    replace => 'true',
-    require => File["/home/gerrit2/review_site/hooks"]
-  }
-
-  file { '/home/gerrit2/review_site/hooks/patchset-created':
-    owner => 'root',
-    group => 'root',
-    mode => 555,
-    ensure => 'present',
-    source => 'puppet:///modules/gerrit/patchset-created',
-    replace => 'true',
-    require => File["/home/gerrit2/review_site/hooks"]
-  }
-
-  file { '/home/gerrit2/review_site/static/echosign-cla.html':
-    owner => 'root',
-    group => 'root',
-    mode => 444,
-    ensure => 'present',
-    source => 'puppet:///modules/gerrit/echosign-cla.html',
-    replace => 'true',
-    require => File["/home/gerrit2/review_site/static"]
   }
 
   # Secret files.
