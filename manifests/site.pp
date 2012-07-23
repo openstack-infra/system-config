@@ -88,8 +88,8 @@ node /^ci-backup-.*\.openstack\.org$/ {
 # Jenkins slaves:
 #
 
-# Test cgroups and ulimits on precise8
-node 'precise8.slave.openstack.org' {
+# Rollout cgroups to precise slaves.
+node /^precise.*\.slave\.openstack\.org$/ {
   include openstack_project::puppet_cron
   include openstack_project::slave
 
