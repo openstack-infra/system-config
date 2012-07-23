@@ -13,25 +13,22 @@ class openstack_project::gerrit (
       $httpd_minthreads='',
       $httpd_maxthreads='',
       $httpd_maxwait='',
-      $github_projects = [],
       $war,
       $script_user,
       $script_key_file,
+      $github_projects = [],
       $github_user,
       $github_token,
       $mysql_password,
-      $email_private_key
+      $email_private_key,
+      $testmode=false,
 ) {
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [80, 443, 29418]
   }
 
-  class { 'gerrit':
+  class { 'gerrit::launchpad':
     # opinions
-    virtual_hostname => $fqdn,
-    canonicalweburl => "https://$fqdn/",
-    logo => 'openstack.png',
-    script_site => 'openstack',
     enable_melody => 'true',
     melody_session => 'true',
     # passthrough
@@ -49,31 +46,57 @@ class openstack_project::gerrit (
     httpd_minthreads => $httpd_minthreads,
     httpd_maxthreads => $httpd_maxthreads,
     httpd_maxwait => $httpd_maxwait,
-    commentlinks => [ { name => 'changeid',
-                        match => '(I[0-9a-f]{8,40})',
-                        link => '#q,$1,n,z' },
-
-                      { name => 'launchpad',
-                        match => '([Bb]ug|[Ll][Pp])[\\s#:]*(\\d+)',
-                        link => 'https://code.launchpad.net/bugs/$2' },
-
-                      { name => 'blueprint',
-                       match => '([Bb]lue[Pp]rint|[Bb][Pp])[\\s#:]*([A-Za-z0-9\\-]+)',
-                       link => 'https://blueprints.launchpad.net/openstack/?searchtext=$2' },
-                  ],
     war => $war,
     script_user => $script_user,
     script_key_file => $script_key_file,
     mysql_password => $mysql_password,
-    email_private_key => $email_private_key
+    email_private_key => $email_private_key,
+    testmode => $testmode,
   }
-  class { 'gerrit::cron':
-    script_user => $script_user,
-    script_key_file => $script_key_file,
+  if ($testmode == false) {
+    class { 'gerrit::cron':
+      script_user => $script_user,
+      script_key_file => $script_key_file,
+    }
+    class { 'github':
+      github_projects => $github_projects,
+      github_user => $github_username,
+      github_token => $github_oauth_token,
+    }
   }
-  class { 'github':
-    github_projects => $github_projects,
-    github_user => $github_username,
-    github_token => $github_oauth_token,
+
+  file { '/home/gerrit2/review_site/static/echosign-cla.html':
+    owner => 'root',
+    group => 'root',
+    mode => 444,
+    ensure => 'present',
+    source => 'puppet:///modules/openstack_project/gerrit/echosign-cla.html',
+    replace => 'true',
+    require => Class['gerrit::launchpad'],
   }
+
+  file { '/home/gerrit2/review_site/static/title.png':
+    ensure => 'present',
+    source => "puppet:///modules/openstack_project/openstack.png",
+    require => Class['gerrit::launchpad'],
+  }
+
+  file { '/home/gerrit2/review_site/static/openstack-page-bkg.jpg':
+    ensure => 'present',
+    source => 'puppet:///modules/openstack_project/openstack-page-bkg.jpg',
+    require => Class['gerrit::launchpad'],
+  }
+
+  file { '/home/gerrit2/review_site/etc/GerritSite.css':
+    ensure => 'present',
+    source => 'puppet:///modules/openstack_project/gerrit/GerritSite.css',
+    require => Class['gerrit::launchpad'],
+  }
+
+  file { '/home/gerrit2/review_site/etc/GerritSiteHeader.html':
+    ensure => 'present',
+    source => 'puppet:///modules/openstack_project/GerritSiteHeader.html',
+    require => Class['gerrit::launchpad'],
+  }
+
 }
