@@ -36,7 +36,7 @@ class openstack_project::base {
   }
   exec { "dpkg:puppetlabs-release-${lsbdistcodename}.deb":
     command => "/usr/bin/dpkg -i /root/puppetlabs-release-${lsbdistcodename}.deb",
-    onlyif => "test ! -f /etc/apt/sources.list.d/puppetlabs.list",
+    onlyif => "/usr/bin/test ! -f /etc/apt/sources.list.d/puppetlabs.list",
     require => Exec["download:puppetlabs-release-${lsbdistcodename}.deb"],
   }
 }
