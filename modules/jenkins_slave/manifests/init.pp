@@ -28,6 +28,7 @@ class jenkins_slave($ssh_key, $sudo = false, $bare = false, $user = true) {
                  "debootstrap",
                  "dnsmasq-base",
                  "ebtables",
+                 "firefox", # for selenium tests
                  "gawk",
                  "graphviz",
                  "iptables",
@@ -68,6 +69,7 @@ class jenkins_slave($ssh_key, $sudo = false, $bare = false, $user = true) {
                  "unzip",
                  "vlan",
                  "wget",
+                 "xvfb", # for selenium tests
                  "pyflakes"]
 
     if ($bare == false) {
