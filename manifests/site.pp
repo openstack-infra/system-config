@@ -543,7 +543,10 @@ node 'etherpad.openstack.org' {
   }
 
   include etherpad_lite
-  include etherpad_lite::nginx
+  class { 'etherpad_lite::nginx':
+    etherpad_crt => hiera('etherpad_crt'),
+    etherpad_key => hiera('etherpad_key')
+  }
   class { 'etherpad_lite::site':
     database_password => hiera('etherpad_db_password'),
   }

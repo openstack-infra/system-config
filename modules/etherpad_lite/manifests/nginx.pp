@@ -1,6 +1,8 @@
 class etherpad_lite::nginx (
   $default_server = 'default_server',
-  $server_name    = $fqdn
+  $server_name    = $fqdn,
+  $etherpad_crt,
+  $etherpad_key
 ) {
 
   package { 'nginx':
