@@ -85,9 +85,10 @@ class jenkins_master($site, $serveradmin, $logo,
     require => Package['apache2'],
   }
 
+  class {'pip': }
+
   $packages = [
     "jenkins",
-    "python-pip",
     "python-babel",
     "apache2"
   ]
@@ -115,19 +116,19 @@ class jenkins_master($site, $serveradmin, $logo,
   package { "apache-libcloud":
     ensure => present,
     provider => pip,
-    require => Package[python-pip]
+    require => Class[pip]
   }
 
   package { "git-review":
     ensure => latest,
     provider => pip,
-    require => Package[python-pip]
+    require => Class[pip]
   }
 
   package { "tox":
     ensure => latest,  # okay to use latest for pip
     provider => pip,
-    require => Package[python-pip],
+    require => Class[pip],
   }
 
   exec { "update apt cache":
