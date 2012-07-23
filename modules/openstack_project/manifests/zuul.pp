@@ -1,5 +1,5 @@
 class openstack_project::zuul {
-  class { 'zuul': }
+  class { '::zuul': }
   file { "/etc/zuul/layout.yaml":
     ensure => 'present',
     source => 'puppet:///modules/openstack_ci/zuul/layout.yaml'
