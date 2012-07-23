@@ -28,4 +28,15 @@ class openstack_project::base {
     User::Virtual::Localuser["devananda"],
     User::Virtual::Localuser["clarkb"],
   )
+
+  # Download and set up puppet apt repo
+  exec { "download:puppetlabs-release-${lsbcodename}.deb":
+    command => "/usr/bin/wget http://apt.puppetlabs.com/puppetlabs-release-${lsbcodename}.deb -O /root/puppetlabs-release-${lsbcodename}.deb",
+    creates => "/root/puppetlabs-release-${lsbcodename}.deb",
+  }
+  exec { "dpkg:puppetlabs-release-${lsbcodename}.deb":
+    command => "/usr/bin/dpkg -i /root/puppetlabs-release-${lsbcodename}.deb",
+    onlyif => "test ! -f /etc/apt/sources.list.d/puppetlabs.list",
+    require => Exec["download:puppetlabs-release-${lsbcodename}.deb"],
+  }
 }
