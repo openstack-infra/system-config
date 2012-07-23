@@ -4,19 +4,12 @@ class github (
               $projects = []
              ) {
 
-  package { "python-dev":
-    ensure => present,
-  }
-
-  package { "python-pip":
-    ensure => present,
-    require => Package[python-dev]
-  }
+  include pip
 
   package { "PyGithub":
     ensure => latest,  # okay to use latest for pip
     provider => pip,
-    require => Package[python-pip]
+    require => Class[pip]
   }
 
   group { "github":

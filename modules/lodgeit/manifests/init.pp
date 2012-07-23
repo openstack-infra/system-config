@@ -1,7 +1,6 @@
 class lodgeit {
   $packages = [ "nginx",
                 "python-imaging",
-                "python-pip",
                 "python-jinja2",
                 "python-pybabel",
                 "python-werkzeug",
@@ -11,12 +10,14 @@ class lodgeit {
                 "drizzle",
                 "python-mysqldb" ]
 
+  include pip
+
   package { $packages: ensure => present }
 
   package { 'SQLAlchemy':
     provider => pip,
     ensure => present,
-    require => Package[python-pip]
+    require => Class[pip]
   }
 
   file { '/srv/lodgeit':

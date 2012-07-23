@@ -1,5 +1,7 @@
 class jenkins_slave($ssh_key, $sudo = false, $bare = false, $user = true) {
 
+    include pip
+
     if ($user == true) {
       jenkinsuser { "jenkins":
         ensure => present,
@@ -16,7 +18,6 @@ class jenkins_slave($ssh_key, $sudo = false, $bare = false, $user = true) {
                  "automake",
                  "ccache",
                  "devscripts",
-                 "python-pip",
       		 ]
 
     # Packages that most jenkins slaves (eg, unit test runners) need
@@ -52,7 +53,6 @@ class jenkins_slave($ssh_key, $sudo = false, $bare = false, $user = true) {
                  "pep8",
                  "psmisc",
                  "pylint",
-                 "python-all-dev",
                  "python-cheetah",
                  "python-libvirt",
                  "python-libxml2",
@@ -89,7 +89,7 @@ class jenkins_slave($ssh_key, $sudo = false, $bare = false, $user = true) {
     package { $pip_packages:
       ensure => latest,  # we want the latest from these
       provider => pip,
-      require => Package[python-pip],
+      require => Class[pip]
     }
 
     file { 'profilerubygems':

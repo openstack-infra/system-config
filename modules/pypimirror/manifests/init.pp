@@ -6,6 +6,8 @@ class pypimirror ( $base_url,
                    $projects = [] )
 {
 
+  include pip
+
   package { 'nginx':
     ensure => present,
   }
@@ -13,7 +15,7 @@ class pypimirror ( $base_url,
   package { 'pip':
     ensure => latest,  # okay to use latest for pip
     provider => 'pip',
-    require => Package['python-pip'],
+    require => Class[pip]
   }
 
   file { '/usr/local/mirror_scripts':

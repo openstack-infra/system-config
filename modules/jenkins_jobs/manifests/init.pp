@@ -1,5 +1,7 @@
 class jenkins_jobs($url, $username, $password, $site) {
 
+  include pip
+
   package { 'python-yaml':
     ensure => 'present'
   }
@@ -37,7 +39,7 @@ class jenkins_jobs($url, $username, $password, $site) {
   package { "python-jenkins":
     ensure => latest,  # okay to use latest for pip
     provider => pip,
-    require => Package[python-pip],
+    require => Class[pip]
   }
 
 }

@@ -4,6 +4,8 @@ class jenkins_master($site, $serveradmin, $logo,
       $ssl_chain_file=''
   ) {
 
+  include pip
+
   #This key is at http://pkg.jenkins-ci.org/debian/jenkins-ci.org.key
   apt::key { "D50582E6":
     keyid  => "D50582E6",
@@ -87,7 +89,6 @@ class jenkins_master($site, $serveradmin, $logo,
 
   $packages = [
     "jenkins",
-    "python-pip",
     "python-babel",
     "apache2"
   ]
@@ -115,19 +116,19 @@ class jenkins_master($site, $serveradmin, $logo,
   package { "apache-libcloud":
     ensure => present,
     provider => pip,
-    require => Package[python-pip]
+    require => Class[pip]
   }
 
   package { "git-review":
     ensure => latest,
     provider => pip,
-    require => Package[python-pip]
+    require => Class[pip]
   }
 
   package { "tox":
     ensure => latest,  # okay to use latest for pip
     provider => pip,
-    require => Package[python-pip],
+    require => Class[pip],
   }
 
   exec { "update apt cache":
