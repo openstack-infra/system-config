@@ -22,8 +22,8 @@ class openstack_project::gerrit (
       $script_user,
       $script_key_file,
       $github_projects = [],
-      $github_user,
-      $github_token,
+      $github_username,
+      $github_oauth_token,
       $mysql_password,
       $email_private_key,
       $testmode=false,
@@ -89,8 +89,8 @@ class openstack_project::gerrit (
     }
     class { 'github':
       github_projects => $github_projects,
-      github_user => $github_username,
-      github_token => $github_oauth_token,
+      github_username => $github_username,
+      github_oauth_token => $github_oauth_token,
     }
   }
 
