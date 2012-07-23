@@ -4,15 +4,15 @@ class openstack_project::review_dev {
     ssl_key_file => '/etc/ssl/private/ssl-cert-snakeoil.key',
     ssl_chain_file => '',
     email => "review-dev@openstack.org",
+    war => 'http://tarballs.openstack.org/ci/gerrit-2.4.2-10-g93ffc27.war',
+    script_user => 'update',
+    script_key_file => '/home/gerrit2/.ssh/id_rsa',
     github_projects => [ {
                          name => 'gtest-org/test',
                          close_pull => 'true'
                          } ],
-    war => 'http://tarballs.openstack.org/ci/gerrit-2.4.2-10-g93ffc27.war',
-    script_user => 'update',
-    script_key_file => '/home/gerrit2/.ssh/id_rsa',
-    github_user => 'openstack-gerrit-dev',
-    github_token => hiera('gerrit_dev_github_token'),
+    github_username => 'openstack-gerrit-dev',
+    github_oauth_token => hiera('gerrit_dev_github_token'),
     mysql_password => hiera('gerrit_dev_mysql_password'),
     email_private_key => hiera('gerrit_dev_email_private_key')
   }

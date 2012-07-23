@@ -45,7 +45,6 @@
 #       http://tarballs.openstack.org/ci/gerrit-2.3.0.war
 #     Gerrit will be upgraded on the next puppet run.
 
-# TODO: move closing github pull requests to another module
 # TODO: move apache configuration to another module
 # TODO: move mysql configuration to another module
 # TODO: make more gerrit options configurable here
@@ -68,7 +67,6 @@ class gerrit($virtual_hostname='',
       $httpd_minthreads='',
       $httpd_maxthreads='',
       $httpd_maxwait='',
-      $github_projects = [],
       $commentlinks = [],
       $logo,
       $war,
@@ -77,8 +75,6 @@ class gerrit($virtual_hostname='',
       $script_site,
       $enable_melody = 'false',
       $melody_session = 'false',
-      $github_user,
-      $github_token,
       $mysql_password,
       $email_private_key
   ) {
@@ -102,7 +98,6 @@ class gerrit($virtual_hostname='',
   }
 
   $packages = ["gitweb",
-               "python-dev",
 	       "openjdk-6-jre-headless",
 	       "mysql-server",
 	       "python-mysqldb",      # for launchpad sync script
@@ -114,17 +109,6 @@ class gerrit($virtual_hostname='',
     ensure => present,
   }
 
-  package { "python-pip":
-    ensure => present,
-    require => Package[python-dev]
-  }
-
-  package { "PyGithub":
-    ensure => latest,  # okay to use latest for pip
-    provider => pip,
-    require => Package[python-pip]
-  }
-
   # Skip cron jobs if we're in test mode
   if ($testmode == false) {
 
@@ -132,13 +116,6 @@ class gerrit($virtual_hostname='',
       user => gerrit2,
       minute => "*/15",
       command => "sleep $((RANDOM\\%60+60)) && python /usr/local/gerrit/scripts/update_gerrit_users.py ${script_user} ${script_key_file} ${script_site}",
-      require => File['/usr/local/gerrit/scripts'],
-    }
-
-    cron { "gerritclosepull":
-      user => gerrit2,
-      minute => "*/5",
-      command => 'sleep $((RANDOM\%60+90)) && python /usr/local/gerrit/scripts/close_pull_requests.py',
       require => File['/usr/local/gerrit/scripts'],
     }
 
@@ -207,16 +184,6 @@ class gerrit($virtual_hostname='',
     ensure => "directory",
     owner => "gerrit2",
     require => File["/home/gerrit2/review_site"]
-  }
-
-  file { '/home/gerrit2/github.config':
-    owner => 'root',
-    group => 'root',
-    mode => 444,
-    ensure => 'present',
-    content => template('gerrit/github.config.erb'),
-    replace => 'true',
-    require => User["gerrit2"]
   }
 
   file { '/home/gerrit2/review_site/static/title.png':
@@ -294,17 +261,6 @@ class gerrit($virtual_hostname='',
   }
 
   # Secret files.
-  # TODO: move the first two into other modules since they aren't for gerrit.
-
-  file { '/home/gerrit2/github.secure.config':
-    owner => 'root',
-    group => 'gerrit2',
-    mode => 440,
-    ensure => 'present',
-    content => template('gerrit/github.secure.config.erb'),
-    replace => 'true',
-    require => User['gerrit2']
-  }
 
   # Gerrit sets these permissions in 'init'; don't fight them.  If
   # these permissions aren't set correctly, gerrit init will write a

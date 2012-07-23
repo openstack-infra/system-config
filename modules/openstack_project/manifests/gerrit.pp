@@ -49,7 +49,6 @@ class openstack_project::gerrit (
     httpd_minthreads => $httpd_minthreads,
     httpd_maxthreads => $httpd_maxthreads,
     httpd_maxwait => $httpd_maxwait,
-    github_projects => $github_projects,
     commentlinks => [ { name => 'changeid',
                         match => '(I[0-9a-f]{8,40})',
                         link => '#q,$1,n,z' },
@@ -65,9 +64,12 @@ class openstack_project::gerrit (
     war => $war,
     script_user => $script_user,
     script_key_file => $script_key_file,
-    github_user => $github_user,
-    github_token => $github_token,
     mysql_password => $mysql_password,
     email_private_key => $email_private_key
+  }
+  class { 'github':
+    github_projects => $github_projects,
+    github_user => $github_username,
+    github_token => $github_oauth_token,
   }
 }
