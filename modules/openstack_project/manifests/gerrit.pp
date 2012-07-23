@@ -67,6 +67,10 @@ class openstack_project::gerrit (
     mysql_password => $mysql_password,
     email_private_key => $email_private_key
   }
+  class { 'gerrit::cron':
+    script_user => $script_user,
+    script_key_file => $script_key_file,
+  }
   class { 'github':
     github_projects => $github_projects,
     github_user => $github_username,
