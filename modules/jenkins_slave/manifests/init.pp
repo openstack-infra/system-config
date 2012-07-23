@@ -23,11 +23,14 @@ class jenkins_slave($ssh_key, $sudo = false, $bare = false, $user = true) {
     # Packages that most jenkins slaves (eg, unit test runners) need
     $standard_packages = [
     		 "apache2",
-                 "asciidoc", # for building gerrit
+                 "asciidoc", # for building gerrit/building openstack docs
                  "cdbs",
                  "curl",
                  "debootstrap",
                  "dnsmasq-base",
+                 "docbook-xml", # for building openstack docs
+                 "docbook5-xml", # for building openstack docs
+                 "docbook-xsl", # for building openstack docs
                  "ebtables",
                  "gawk",
                  "graphviz",
@@ -62,12 +65,14 @@ class jenkins_slave($ssh_key, $sudo = false, $bare = false, $user = true) {
                  "python-zmq", # zeromq unittests (not pip installable)
                  "python3-all-dev",
                  "screen",
+                 "sgml-data",
                  "socat",
                  "sqlite3",
                  "swig",
                  "unzip",
                  "vlan",
                  "wget",
+                 "xsltproc", # for building openstack docs
                  "pyflakes"]
 
     if ($bare == false) {
