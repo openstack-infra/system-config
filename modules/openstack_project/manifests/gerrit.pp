@@ -42,7 +42,7 @@ class openstack_project::gerrit (
     ensure => present,
   }
 
-  class { 'gerrit':
+  class { '::gerrit':
     # opinions
     enable_melody => 'true',
     melody_session => 'true',
