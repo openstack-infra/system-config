@@ -1,6 +1,6 @@
 class openstack_project::pypi {
   # include jenkins slave so that build deps are there for the pip download
-  class { 'jenkins_slave':
+  class { '::jenkins_slave':
     ssh_key => "",
     user => false
   }
