@@ -45,13 +45,15 @@ class openstack_project::review {
     war => 'http://tarballs.openstack.org/ci/gerrit-2.4.1-10-g63110fd.war',
     script_user => 'launchpadsync',
     script_key_file => '/home/gerrit2/.ssh/launchpadsync_rsa',
-    gerritbot_nick => 'openstackgerrit',
-    gerritbot_password => hiera('gerrit_gerritbot_password'),
-    gerritbot_server => 'irc.freenode.net',
-    gerritbot_user => 'gerritbot',
     github_user => 'openstack-gerrit',
     github_token => hiera('gerrit_github_token'),
     mysql_password => hiera('gerrit_mysql_password'),
     email_private_key => hiera('gerrit_email_private_key'),
+  }
+  class { 'gerritbot':
+    gerritbot_nick => 'openstackgerrit',
+    gerritbot_password => hiera('gerrit_gerritbot_password'),
+    gerritbot_server => 'irc.freenode.net',
+    gerritbot_user => 'gerritbot'
   }
 }

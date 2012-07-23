@@ -1,13 +1,13 @@
 [ircbot]
-nick=<%= gerritbot_nick %>
-pass=<%= gerritbot_password %>
-server=<%= gerritbot_server %>
+nick=<%= nick %>
+pass=<%= password %>
+server=<%= server %>
 port=6667
 channel_config=/home/gerrit2/gerritbot_channel_config.yaml
 lockfile=/var/run/gerritbot/gerritbot.pid
 
 [gerrit]
-user=<%= gerritbot_user %>
+user=<%= user %>
 key=/home/gerrit2/.ssh/gerritbot_rsa
 host=<%= virtual_hostname %>
 port=29418

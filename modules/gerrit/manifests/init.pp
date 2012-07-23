@@ -46,7 +46,6 @@
 #     Gerrit will be upgraded on the next puppet run.
 
 # TODO: move closing github pull requests to another module
-# TODO: move gerritbot configuration to another module
 # TODO: move apache configuration to another module
 # TODO: move mysql configuration to another module
 # TODO: make more gerrit options configurable here
@@ -90,10 +89,6 @@ class gerrit($virtual_hostname='',
       $script_site,
       $enable_melody = 'false',
       $melody_session = 'false',
-      $gerritbot_nick,
-      $gerritbot_password,
-      $gerritbot_server,
-      $gerritbot_user,
       $github_user,
       $github_token,
       $mysql_password,
@@ -189,43 +184,6 @@ class gerrit($virtual_hostname='',
       minute => "*/30",
       command => 'sleep $((RANDOM\%60+90)) && python /usr/local/gerrit/scripts/fetch_remotes.py',
       require => File['/usr/local/gerrit/scripts'],
-    }
-
-    file { "/usr/local/gerrit/gerritbot":
-      owner => 'root',
-      group => 'root',
-      mode => 555,
-      ensure => 'present',
-      source => 'puppet:///modules/gerrit/gerritbot',
-    }
-
-    file { "/etc/init.d/gerritbot":
-      owner => 'root',
-      group => 'root',
-      mode => 555,
-      ensure => 'present',
-      source => 'puppet:///modules/gerrit/gerritbot.init',
-      require => File['/usr/local/gerrit/gerritbot'],
-    }
-
-    file { "/home/gerrit2/gerritbot_channel_config.yaml":
-      owner   => 'root',
-      group   => 'gerrit2',
-      mode    => 440,
-      ensure  => 'present',
-      source  => 'puppet:///modules/gerrit/gerritbot_channel_config.yaml',
-      replace => true,
-      require => User['gerrit2']
-    }
-
-    service { 'gerritbot':
-      name       => 'gerritbot',
-      ensure     => running,
-      enable     => true,
-      hasrestart => true,
-      require => File['/etc/init.d/gerritbot'],
-      subscribe => [File["/usr/local/gerrit/gerritbot"],
-                    File["/home/gerrit2/gerritbot_channel_config.yaml"]],
     }
 
   } # testmode==false
@@ -372,16 +330,6 @@ class gerrit($virtual_hostname='',
     mode => 440,
     ensure => 'present',
     content => template('gerrit/github.secure.config.erb'),
-    replace => 'true',
-    require => User['gerrit2']
-  }
-
-  file { '/home/gerrit2/gerritbot.config':
-    owner => 'root',
-    group => 'gerrit2',
-    mode => 440,
-    ensure => 'present',
-    content => template('gerrit/gerritbot.config.erb'),
     replace => 'true',
     require => User['gerrit2']
   }
