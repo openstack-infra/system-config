@@ -4,7 +4,7 @@ class openstack_project::review_dev {
     ssl_key_file => '/etc/ssl/private/ssl-cert-snakeoil.key',
     ssl_chain_file => '',
     email => "review-dev@openstack.org",
-    war => 'http://tarballs.openstack.org/ci/gerrit-2.4.2-10-g93ffc27.war',
+    war => 'http://tarballs.openstack.org/ci/gerrit-2.4.2-11-gb5a28fb.war',
     script_user => 'update',
     script_key_file => '/home/gerrit2/.ssh/id_rsa',
     github_projects => [ {
