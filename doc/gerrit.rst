@@ -43,7 +43,7 @@ host for use by the OpenStack project.
   sudo apt-get install puppet git openjdk-6-jre-headless mysql-server
   git clone git://github.com/openstack/openstack-ci-puppet.git
   cd openstack-ci-puppet/
-  sudo puppet apply --modulepath=modules manifests/site.pp
+  sudo bash run_puppet.sh
 
 Install MySQL
 -------------
