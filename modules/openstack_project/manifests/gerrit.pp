@@ -88,9 +88,9 @@ class openstack_project::gerrit (
       script_key_file => $script_key_file,
     }
     class { 'github':
-      github_projects => $github_projects,
-      github_username => $github_username,
-      github_oauth_token => $github_oauth_token,
+      projects => $github_projects,
+      username => $github_username,
+      oauth_token => $github_oauth_token,
     }
   }
 
