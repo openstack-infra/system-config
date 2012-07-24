@@ -25,6 +25,7 @@
 # 12:09 <@spearce> so. you get 5 milliseconds before aborting
 # thus, set it to 5000minutes until the bug is fixed.
 class openstack_project::review {
+  include openstack_project
   class { 'openstack_project::gerrit':
     ssl_cert_file => '/etc/ssl/certs/review.openstack.org.pem',
     ssl_key_file => '/etc/ssl/private/review.openstack.org.key',

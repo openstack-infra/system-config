@@ -1,4 +1,5 @@
 class openstack_project::slave_template {
+  include openstack_project
   class { 'openstack_project::template':
     iptables_public_tcp_ports => []
   }

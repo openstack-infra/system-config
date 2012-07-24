@@ -1,6 +1,7 @@
 class openstack_project::pypi {
   include tmpreaper
   include apt::unattended-upgrades
+  include openstack_project
 
   # include jenkins slave so that build deps are there for the pip download
   class { 'jenkins_slave':

@@ -1,4 +1,5 @@
 class openstack_project::slave {
+  include openstack_project
   include tmpreaper
   include apt::unattended-upgrades
   class { 'openstack_project::server':
