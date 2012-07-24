@@ -2,7 +2,8 @@ class gerritbot(
       $nick,
       $password,
       $server,
-      $user
+      $user,
+      $virtual_hostname
       ) {
 
     file { "/usr/local/gerrit/gerritbot":
@@ -10,7 +11,7 @@ class gerritbot(
       group => 'root',
       mode => 555,
       ensure => 'present',
-      source => 'puppet:///modules/gerrit/gerritbot',
+      source => 'puppet:///modules/gerritbot/gerritbot',
       require => File['/usr/local/gerrit'],
     }
 
@@ -19,7 +20,7 @@ class gerritbot(
       group => 'root',
       mode => 555,
       ensure => 'present',
-      source => 'puppet:///modules/gerrit/gerritbot.init',
+      source => 'puppet:///modules/gerritbot/gerritbot.init',
       require => File['/usr/local/gerrit/gerritbot'],
     }
 
@@ -28,7 +29,7 @@ class gerritbot(
       group   => 'gerrit2',
       mode    => 440,
       ensure  => 'present',
-      source  => 'puppet:///modules/gerrit/gerritbot_channel_config.yaml',
+      source  => 'puppet:///modules/gerritbot/gerritbot_channel_config.yaml',
       replace => true,
       require => User['gerrit2'],
     }
@@ -48,7 +49,7 @@ class gerritbot(
       group => 'gerrit2',
       mode => 440,
       ensure => 'present',
-      content => template('gerrit/gerritbot.config.erb'),
+      content => template('gerritbot/gerritbot.config.erb'),
       replace => 'true',
       require => User['gerrit2']
     }

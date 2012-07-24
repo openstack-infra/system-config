@@ -48,10 +48,11 @@ class openstack_project::review {
     email_private_key => hiera('gerrit_email_private_key'),
   }
   class { 'gerritbot':
-    gerritbot_nick => 'openstackgerrit',
-    gerritbot_password => hiera('gerrit_gerritbot_password'),
-    gerritbot_server => 'irc.freenode.net',
-    gerritbot_user => 'gerritbot'
+    nick => 'openstackgerrit',
+    password => hiera('gerrit_gerritbot_password'),
+    server => 'irc.freenode.net',
+    user => 'gerritbot',
+    virtual_hostname => $fqdn
   }
   class { 'gerrit::remotes':
     upstream_projects => [ {
