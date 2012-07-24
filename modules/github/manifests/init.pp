@@ -46,7 +46,7 @@ class github (
     group => 'github',
     mode => 440,
     ensure => 'present',
-    content => template('gerrit/github.secure.config.erb'),
+    content => template('github/github.secure.config.erb'),
     replace => 'true',
     require => [Group['github'], File['/etc/github']],
   }

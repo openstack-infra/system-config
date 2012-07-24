@@ -101,50 +101,38 @@ class openstack_project::gerrit (
     ensure => 'present',
     source => 'puppet:///modules/openstack_project/gerrit/echosign-cla.html',
     replace => 'true',
-    require => Class['gerrit::launchpad'],
+    require => Class['::gerrit'],
   }
 
   file { '/home/gerrit2/review_site/static/title.png':
     ensure => 'present',
     source => "puppet:///modules/openstack_project/openstack.png",
-    require => Class['gerrit::launchpad'],
+    require => Class['::gerrit'],
   }
 
   file { '/home/gerrit2/review_site/static/openstack-page-bkg.jpg':
     ensure => 'present',
     source => 'puppet:///modules/openstack_project/openstack-page-bkg.jpg',
-    require => Class['gerrit::launchpad'],
+    require => Class['::gerrit'],
   }
 
   file { '/home/gerrit2/review_site/etc/GerritSite.css':
     ensure => 'present',
     source => 'puppet:///modules/openstack_project/gerrit/GerritSite.css',
-    require => Class['gerrit::launchpad'],
+    require => Class['::gerrit'],
   }
 
   file { '/home/gerrit2/review_site/etc/GerritSiteHeader.html':
     ensure => 'present',
-    source => 'puppet:///modules/openstack_project/GerritSiteHeader.html',
-    require => Class['gerrit::launchpad'],
+    source => 'puppet:///modules/openstack_project/gerrit/GerritSiteHeader.html',
+    require => Class['::gerrit'],
   }
 
   cron { "gerritsyncusers":
     user => gerrit2,
     minute => "*/15",
     command => "sleep $((RANDOM\\%60+60)) && python /usr/local/gerrit/scripts/update_gerrit_users.py ${script_user} ${script_key_file} ${script_site}",
-    require => File['/usr/local/gerrit/scripts'],
-  }
-
-  file { '/usr/local/gerrit/scripts':
-    owner => 'root',
-    group => 'root',
-    mode => 755,
-    ensure => 'directory',
-    recurse => true,
-    require => Class['gerrit'],
-    source => [
-                "puppet:///modules/openstack_project/gerrit/scripts",
-              ],
+    require => Class['::gerrit'],
   }
 
   file { '/home/gerrit2/review_site/hooks/change-merged':
@@ -154,7 +142,7 @@ class openstack_project::gerrit (
     ensure => 'present',
     source => 'puppet:///modules/gerrit/change-merged',
     replace => 'true',
-    require => Class['gerrit']
+    require => Class['::gerrit']
   }
 
   file { '/home/gerrit2/review_site/hooks/patchset-created':
@@ -164,6 +152,6 @@ class openstack_project::gerrit (
     ensure => 'present',
     source => 'puppet:///modules/gerrit/patchset-created',
     replace => 'true',
-    require => Class['gerrit']
+    require => Class['::gerrit']
   }
 }
