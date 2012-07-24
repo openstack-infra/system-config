@@ -10,7 +10,7 @@ class openstack_project::eavesdrop {
     nickpass => hiera('openstack_meetbot_password'),
     network => "FreeNode",
     server => "chat.us.freenode.net:7000",
-    channels => "#openstack #openstack-dev #openstack-meeting",
+    channels => "#openstack #openstack-dev #openstack-meeting #openstack-hyper-v",
     use_ssl => "True"
   }
 }
