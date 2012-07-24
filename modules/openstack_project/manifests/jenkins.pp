@@ -1,4 +1,6 @@
 class openstack_project::jenkins {
+  include openstack_project::zuul_config
+
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [80, 443, 4155]
   }
@@ -16,5 +18,8 @@ class openstack_project::jenkins {
     password => hiera('jenkins_jobs_password'),
     site => "openstack",
   }
-  class { "openstack_project::zuul_config": }
+  file { "/etc/default/jenkins":
+    ensure => 'present',
+    source => 'puppet:///modules/openstack_project/jenkins/jenkins.default'
+  }
 }
