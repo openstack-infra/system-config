@@ -107,37 +107,22 @@ class jenkins_slave($ssh_key, $sudo = false, $bare = false, $user = true) {
 
 
     if ($bare == false) {
-         exec { "jenins-slave-mysql":
-          creates => "/var/lib/mysql/openstack_citest/",
-       	  command => "/usr/bin/mysql --defaults-file=/etc/mysql/debian.cnf -e \"\
-       	    CREATE USER 'openstack_citest'@'localhost' IDENTIFIED BY 'openstack_citest';\
-            CREATE DATABASE openstack_citest;\
-            GRANT ALL ON openstack_citest.* TO 'openstack_citest'@'localhost';\
-            FLUSH PRIVILEGES;\"",
-          require => [
-            File["/etc/mysql/my.cnf"],  # For myisam default tables
-            Package["mysql-server"],
-            Service["mysql"]
-          ]
+
+        class {'mysql::server':
+            config_hash =>  {
+                'root_password' => 'insecure_slave',
+                'default_engine' => 'MyISAM',
+                'bind_address' => '127.0.0.1',
+            }
         }
 
-        file { "/etc/mysql/my.cnf":
-          source => 'puppet:///modules/jenkins_slave/my.cnf',
-          owner => 'root',
-          group => 'root',
-          ensure => 'present',
-          replace => 'true',
-          mode => 444,
-          require => Package["mysql-server"],
+        mysql::db { 'openstack_citest':
+            user     => 'openstack_citest',
+                     password => 'openstack_citest',
+                     host     => 'localhost',
+                     grant    => ['all'],
         }
 
-        service { "mysql":
-          name => "mysql",
-          ensure    => running,
-          enable    => true,
-          subscribe => File["/etc/mysql/my.cnf"],
-          require => [File["/etc/mysql/my.cnf"], Package["mysql-server"]]
-        }
     }
 
     file { '/usr/local/jenkins':
