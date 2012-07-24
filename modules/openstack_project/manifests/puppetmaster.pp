@@ -5,7 +5,7 @@ class openstack_project::puppetmaster {
   cron { "updatepuppetmaster":
     user => root,
     minute => "*/15",
-    command => 'sleep $((RANDOM\%600)) && cd /opt/openstack-ci-puppet/production && /usr/bin/git pull -q',
+    command => 'sleep $((RANDOM\%600)) && cd /opt/openstack-ci-puppet/production && /usr/bin/git pull -q && /bin/bash install_modules.sh',
     environment => "PATH=/var/lib/gems/1.8/bin:/usr/bin:/bin:/usr/sbin:/sbin",
   }
 }

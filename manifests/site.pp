@@ -35,7 +35,7 @@ node "community.openstack.org" {
 }
 
 node "ci-puppetmaster.openstack.org" {
-  include openstack_project::puppet_cron
+  include openstack_project::remove_cron
   include openstack_project::puppetmaster
 }
 
