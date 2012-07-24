@@ -21,6 +21,14 @@ if `echo $GERRIT_REFNAME | grep refs/tags/ >/dev/null` ; then
         mv doc/build/html/* doc/build/$TAG
         mv doc/build/$TAG doc/build/html/$TAG
     fi
+elif `echo $GERRIT_REFNAME | grep stable/ >/dev/null` ; then
+    BRANCH=`echo $GERRIT_REFNAME | sed 's/stable.//'`
+    if [ ! -z $BRANCH ] ; then
+        # Move the docs into a subdir if this is a stable branch build
+        mkdir doc/build/$BRANCH
+        mv doc/build/html/* doc/build/$BRANCH
+        mv doc/build/$BRANCH doc/build/html/$BRANCH
+    fi
 fi
 
 echo "Begin pip freeze output from test virtualenv:"
