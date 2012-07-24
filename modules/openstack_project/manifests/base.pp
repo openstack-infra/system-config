@@ -39,4 +39,13 @@ class openstack_project::base {
     onlyif => "/usr/bin/test ! -f /etc/apt/sources.list.d/puppetlabs.list",
     require => Exec["download:puppetlabs-release-${lsbdistcodename}.deb"],
   }
+
+  file { '/etc/puppet/puppet.conf':
+      owner => 'root',
+      group => 'root',
+      mode => 444,
+      ensure => 'present',
+      content => template('openstack_project/puppet.conf.erb'),
+      replace => 'true',
+  }
 }
