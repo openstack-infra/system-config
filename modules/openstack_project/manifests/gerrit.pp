@@ -81,7 +81,6 @@ class openstack_project::gerrit (
     war => $war,
     script_user => $script_user,
     script_key_file => $script_key_file,
-    script_site => 'openstack',
     mysql_password => $mysql_password,
     email_private_key => $email_private_key,
     testmode => $testmode,
@@ -135,7 +134,7 @@ class openstack_project::gerrit (
   cron { "gerritsyncusers":
     user => gerrit2,
     minute => "*/15",
-    command => "sleep $((RANDOM\\%60+60)) && python /usr/local/gerrit/scripts/update_gerrit_users.py ${script_user} ${script_key_file} ${script_site}",
+    command => "sleep $((RANDOM\\%60+60)) && python /usr/local/gerrit/scripts/update_gerrit_users.py ${script_user} ${script_key_file} openstack",
     require => Class['::gerrit'],
   }
 
