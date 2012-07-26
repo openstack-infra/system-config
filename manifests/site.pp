@@ -11,17 +11,28 @@ node default {
 #
 node "review.openstack.org" {
   include openstack_project::remove_cron
-  include openstack_project::review
+  class { 'openstack_project::review':
+    github_oauth_token => hiera('gerrit_github_token'),
+    mysql_password => hiera('gerrit_mysql_password'),
+    email_private_key => hiera('gerrit_email_private_key'),
+    gerritbot_password => hiera('gerrit_gerritbot_password'),
+  }
 }
 
 node "gerrit-dev.openstack.org", "review-dev.openstack.org" {
   include openstack_project::remove_cron
-  include openstack_project::review_dev
+  class { 'openstack_project::review_dev':
+    github_oauth_token => hiera('gerrit_dev_github_token'),
+    mysql_password => hiera('gerrit_dev_mysql_password'),
+    email_private_key => hiera('gerrit_dev_email_private_key')
+  }
 }
 
 node "jenkins.openstack.org" {
   include openstack_project::remove_cron
-  include openstack_project::jenkins
+  class { 'openstack_project::jenkins':
+    jenkins_jobs_password => hiera('jenkins_jobs_password'),
+  }
 }
 
 node "jenkins-dev.openstack.org" {
@@ -41,7 +52,9 @@ node "ci-puppetmaster.openstack.org" {
 
 node "lists.openstack.org" {
   include openstack_project::remove_cron
-  include openstack_project::lists
+  class { 'openstack_project::lists':
+    listadmins => hiera('listadmins'),
+  }
 }
 
 node "paste.openstack.org" {
@@ -56,7 +69,9 @@ node "planet.openstack.org" {
 
 node "eavesdrop.openstack.org" {
   include openstack_project::remove_cron
-  include openstack_project::eavesdrop
+  class { 'openstack_project::eavesdrop':
+    nickpass => hiera('openstack_meetbot_password'),
+  }
 }
 
 node "pypi.openstack.org" {
@@ -66,7 +81,11 @@ node "pypi.openstack.org" {
 
 node 'etherpad.openstack.org' {
   include openstack_project::remove_cron
-  include openstack_project::etherpad
+  class { 'openstack_project::etherpad':
+    etherpad_crt => hiera('etherpad_crt'),
+    etherpad_key => hiera('etherpad_key'),
+    database_password => hiera('etherpad_db_password'),
+  }
 }
 
 node 'wiki.openstack.org' {

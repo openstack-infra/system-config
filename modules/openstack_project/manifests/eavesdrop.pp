@@ -1,4 +1,4 @@
-class openstack_project::eavesdrop {
+class openstack_project::eavesdrop($nickpass) {
   class { 'openstack_project::server':
 
     iptables_public_tcp_ports => [80]
@@ -7,7 +7,7 @@ class openstack_project::eavesdrop {
 
   meetbot::site { "openstack":
     nick => "openstack",
-    nickpass => hiera('openstack_meetbot_password'),
+    nickpass => $nickpass,
     network => "FreeNode",
     server => "chat.us.freenode.net:7000",
     channels => "#openstack #openstack-dev #openstack-meeting",

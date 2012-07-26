@@ -24,7 +24,11 @@
 # 12:08 <@spearce> to a method that accepts milliseconds
 # 12:09 <@spearce> so. you get 5 milliseconds before aborting
 # thus, set it to 5000minutes until the bug is fixed.
-class openstack_project::review {
+class openstack_project::review(
+  $github_auth_token,
+  $mysql_password,
+  $email_private_key,
+  $gerritbot_password) {
   include openstack_project
   class { 'openstack_project::gerrit':
     ssl_cert_file => '/etc/ssl/certs/review.openstack.org.pem',
@@ -43,13 +47,13 @@ class openstack_project::review {
     script_key_file => '/home/gerrit2/.ssh/launchpadsync_rsa',
     github_projects => $openstack_project::project_list,
     github_username => 'openstack-gerrit',
-    github_oauth_token => hiera('gerrit_github_token'),
-    mysql_password => hiera('gerrit_mysql_password'),
-    email_private_key => hiera('gerrit_email_private_key'),
+    github_oauth_token => $github_oauth_token,
+    mysql_password => $mysql_password,
+    email_private_key => $email_private_key,
   }
   class { 'gerritbot':
     nick => 'openstackgerrit',
-    password => hiera('gerrit_gerritbot_password'),
+    password => $gerritbot_password,
     server => 'irc.freenode.net',
     user => 'gerritbot',
     virtual_hostname => $fqdn

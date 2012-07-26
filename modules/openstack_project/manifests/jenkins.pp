@@ -1,4 +1,4 @@
-class openstack_project::jenkins {
+class openstack_project::jenkins($jenkins_jobs_password) {
   include openstack_project::zuul_config
 
   class { 'openstack_project::server':
@@ -15,7 +15,7 @@ class openstack_project::jenkins {
   class { "jenkins_jobs":
     url => "https://jenkins.openstack.org/",
     username => "gerrig",
-    password => hiera('jenkins_jobs_password'),
+    password => $jenkins_jobs_password,
     site => "openstack",
   }
   file { "/etc/default/jenkins":

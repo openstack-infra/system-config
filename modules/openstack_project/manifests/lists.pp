@@ -1,4 +1,4 @@
-class openstack_project::lists {
+class openstack_project::lists($listadmins) {
   # Using openstack_project::template instead of openstack_project::server
   # because the exim config on this machine is almost certainly
   # going to be more complicated than normal.
@@ -7,7 +7,7 @@ class openstack_project::lists {
   }
 
   class { 'exim':
-    sysadmin => hiera('listadmins'),
+    sysadmin => $listadmins,
     mailman_domains => ['lists.openstack.org'],
   }
 

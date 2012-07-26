@@ -1,4 +1,7 @@
-class openstack_project::review_dev {
+class openstack_project::review_dev(
+  $github_auth_token,
+  $mysql_password,
+  $email_private_key) {
   class { 'openstack_project::gerrit':
     virtual_hostname => 'review-dev.openstack.org',
     canonicalweburl => "https://review-dev.openstack.org/",
@@ -14,8 +17,8 @@ class openstack_project::review_dev {
                          close_pull => 'true'
                          } ],
     github_username => 'openstack-gerrit-dev',
-    github_oauth_token => hiera('gerrit_dev_github_token'),
-    mysql_password => hiera('gerrit_dev_mysql_password'),
-    email_private_key => hiera('gerrit_dev_email_private_key')
+    github_oauth_token => $github_oauth_token,
+    mysql_password => $mysql_password,
+    email_private_key => $email_private_key,
   }
 }
