@@ -179,6 +179,7 @@ projects:
         - gate-horizon-pep8
         - gate-horizon-python26
         - gate-horizon-python27
+        - gate-horizon-selenium
         - gate-tempest-devstack-vm
     post:
       - horizon-tarball
