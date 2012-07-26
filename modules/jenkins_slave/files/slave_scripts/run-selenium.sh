@@ -14,7 +14,8 @@ DIMENSIONS='1280x1024x24'
 /usr/bin/Xvfb :${VDISPLAY} -screen 0 ${DIMENSIONS} 2>&1 > /dev/null &
 
 set +e
-DISPLAY=:${VDISPLAY} tox -e$venv -- /bin/bash run_tests.sh -N --with-selenium
+DISPLAY=:${VDISPLAY} NOSE_WITH_XUNIT=1 tox -e$venv -- \
+    /bin/bash run_tests.sh -N --only-selenium
 result=$?
 
 pkill Xvfb 2>&1 > /dev/null
