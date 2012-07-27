@@ -1,5 +1,5 @@
 class openstack_project::review_dev(
-  $github_auth_token,
+  $github_oauth_token,
   $mysql_password,
   $email_private_key) {
   class { 'openstack_project::gerrit':
