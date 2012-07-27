@@ -27,6 +27,7 @@
 class openstack_project::review(
   $github_oauth_token,
   $mysql_password,
+  $mysql_root_password,
   $email_private_key,
   $gerritbot_password) {
   include openstack_project
@@ -49,6 +50,7 @@ class openstack_project::review(
     github_username => 'openstack-gerrit',
     github_oauth_token => $github_oauth_token,
     mysql_password => $mysql_password,
+    mysql_root_password => $mysql_root_password,
     email_private_key => $email_private_key,
   }
   class { 'gerritbot':

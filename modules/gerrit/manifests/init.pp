@@ -73,9 +73,18 @@ class gerrit($virtual_hostname=$fqdn,
       $enable_melody = 'false',
       $melody_session = 'false',
       $mysql_password,
+      $mysql_root_password,
       $email_private_key,
       $testmode=false
       ) {
+
+  include apache
+  require apache::dev
+
+  $java_home = $lsbdistcodename ? {
+      "precise" => "/usr/lib/jvm/java-6-openjdk-amd64/jre",
+      default => "/usr/lib/jvm/java-6-openjdk/jre",
+    }
 
   user { "gerrit2":
     ensure => present,
@@ -92,9 +101,7 @@ class gerrit($virtual_hostname=$fqdn,
   }
 
   $packages = ["gitweb",
-	       "openjdk-6-jre-headless",
-	       "mysql-server",
-	       "apache2"]
+	       "openjdk-6-jre-headless"]
 
   package { $packages:
     ensure => present,
@@ -182,102 +189,40 @@ class gerrit($virtual_hostname=$fqdn,
   }
 
 # Set up MySQL.
-# We should probably have or use a puppet module to manage mysql, and then
-# use that to satisfy the requirements that gerrit has.
 
-  exec { "gerrit-mysql":
-    creates => "/var/lib/mysql/reviewdb/",
-    command => "/usr/bin/mysql --defaults-file=/etc/mysql/debian.cnf -e \"\
-      CREATE USER 'gerrit2'@'localhost' IDENTIFIED BY '${mysql_password}';\
-      CREATE DATABASE reviewdb;\
-      ALTER DATABASE reviewdb charset=latin1;\
-      GRANT ALL ON reviewdb.* TO 'gerrit2'@'localhost';\
-      FLUSH PRIVILEGES;\"",
-    require => Package["mysql-server"],
+  class {"mysql::server":
+    config_hash => {
+      'root_password' => "${mysql_root_password}",
+      'default_engine' => 'InnoDB',
+      'bind_address' => '127.0.0.1',
+    }
   }
 
-  file { "/etc/mysql/my.cnf":
-    source => 'puppet:///modules/gerrit/my.cnf',
-    owner => 'root',
-    group => 'root',
-    ensure => 'present',
-    replace => 'true',
-    mode => 444,
-    require => Package["mysql-server"],
+  mysql::db { "reviewdb":
+    user => "gerrit2",
+    password => "${mysql_password}",
+    host => "localhost",
+    grant => "all",
+    charset => "latin1",
   }
 
-# Set up apache.  This should also be a separate, generalized module.
+# Set up apache.
 
-  file { "/etc/apache2/sites-available/gerrit":
-    content => template('gerrit/gerrit.vhost.erb'),
-    owner => 'root',
-    group => 'root',
-    ensure => 'present',
-    replace => 'true',
-    mode => 444,
-    require => Package["apache2"],
+  apache::vhost { $virtual_hostname:
+    port => 443,
+    docroot => 'MEANINGLESS ARGUMENT',
+    priority => '50',
+    template => 'gerrit/gerrit.vhost.erb',
+    ssl => true,
   }
-
-  file { "/etc/apache2/sites-enabled/gerrit":
-    ensure => link,
-    target => '/etc/apache2/sites-available/gerrit',
-    require => [
-      File['/etc/apache2/sites-available/gerrit'],
-      File['/etc/apache2/mods-enabled/ssl.conf'],
-      File['/etc/apache2/mods-enabled/ssl.load'],
-      File['/etc/apache2/mods-enabled/rewrite.load'],
-      File['/etc/apache2/mods-enabled/proxy.conf'],
-      File['/etc/apache2/mods-enabled/proxy.load'],
-      File['/etc/apache2/mods-enabled/proxy_http.load'],
-    ],
+  a2mod { 'rewrite':
+    ensure => present
   }
-
-  file { '/etc/apache2/sites-enabled/000-default':
-    require => File['/etc/apache2/sites-available/gerrit'],
-    ensure => absent,
+  a2mod { 'proxy':
+    ensure => present
   }
-
-  file { '/etc/apache2/mods-enabled/ssl.conf':
-    target => '/etc/apache2/mods-available/ssl.conf',
-    ensure => link,
-    require => Package['apache2'],
-  }
-
-  file { '/etc/apache2/mods-enabled/ssl.load':
-    target => '/etc/apache2/mods-available/ssl.load',
-    ensure => link,
-    require => Package['apache2'],
-  }
-
-  file { '/etc/apache2/mods-enabled/rewrite.load':
-    target => '/etc/apache2/mods-available/rewrite.load',
-    ensure => link,
-    require => Package['apache2'],
-  }
-
-  file { '/etc/apache2/mods-enabled/proxy.conf':
-    target => '/etc/apache2/mods-available/proxy.conf',
-    ensure => link,
-    require => Package['apache2'],
-  }
-
-  file { '/etc/apache2/mods-enabled/proxy.load':
-    target => '/etc/apache2/mods-available/proxy.load',
-    ensure => link,
-    require => Package['apache2'],
-  }
-
-  file { '/etc/apache2/mods-enabled/proxy_http.load':
-    target => '/etc/apache2/mods-available/proxy_http.load',
-    ensure => link,
-    require => Package['apache2'],
-  }
-
-  exec { "gracefully restart apache":
-    subscribe => [ File["/etc/apache2/sites-available/gerrit"]],
-    refreshonly => true,
-    path => "/bin:/usr/bin:/usr/sbin",
-    command => "apache2ctl graceful",
+  a2mod { 'proxy_http':
+    ensure => present
   }
 
   # Install Gerrit itself.
@@ -329,8 +274,7 @@ class gerrit($virtual_hostname=$fqdn,
     refreshonly => true,
     require => [Package["openjdk-6-jre-headless"],
                 User["gerrit2"],
-		Exec["gerrit-mysql"],
-                File["/etc/mysql/my.cnf"],  # For innodb default tables
+                Mysql::Db["reviewdb"],
                 File["/home/gerrit2/review_site/etc/gerrit.config"],
                 File["/home/gerrit2/review_site/etc/secure.config"]],
     notify => Exec["gerrit-start"],

@@ -5,13 +5,13 @@
 
   CustomLog ${APACHE_LOG_DIR}/gerrit-access.log combined
 
-  Redirect / <%= canonicalweburl %>
+  Redirect / <%= scope.lookupvar("gerrit::canonicalweburl") %>
 
 </VirtualHost>
 
 <IfModule mod_ssl.c>
 <VirtualHost _default_:443>
-  ServerName <%= virtual_hostname %>
+  ServerName <%= scope.lookupvar("gerrit::virtual_hostname") %>
 
   ErrorLog ${APACHE_LOG_DIR}/gerrit-ssl-error.log
 
@@ -21,10 +21,10 @@
 
   SSLEngine on
 
-  SSLCertificateFile      <%= ssl_cert_file %>
-  SSLCertificateKeyFile   <%= ssl_key_file %>
-<% if ssl_chain_file != "" %>
-  SSLCertificateChainFile <%= ssl_chain_file %>
+  SSLCertificateFile      <%= scope.lookupvar("gerrit::ssl_cert_file") %>
+  SSLCertificateKeyFile   <%= scope.lookupvar("gerrit::ssl_key_file") %>
+<% if scope.lookupvar("gerrit::ssl_chain_file") != "" %>
+  SSLCertificateChainFile <%= scope.lookupvar("gerrit::ssl_chain_file") %>
 <% end %>
 
   <FilesMatch "\.(cgi|shtml|phtml|php)$">
@@ -41,8 +41,8 @@
   BrowserMatch "MSIE [17-9]" ssl-unclean-shutdown
 
   RewriteEngine on
-  RewriteCond %{HTTP_HOST} !<%= virtual_hostname %>
-  RewriteRule ^.*$ <%= canonicalweburl %>
+  RewriteCond %{HTTP_HOST} !<%= scope.lookupvar("gerrit::virtual_hostname") %>
+  RewriteRule ^.*$ <%= scope.lookupvar("gerrit::canonicalweburl") %>
   RewriteCond %{REQUEST_URI} !^/p/
   RewriteRule ^/(.*)$ http://localhost:8081/$1 [P]
 
