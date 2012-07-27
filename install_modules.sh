@@ -1,6 +1,6 @@
 #!/bin/bash
 
-MODULES="puppetlabs-mysql"
+MODULES="puppetlabs-mysql puppetlabs-dashboard"
 MODULE_LIST=`puppet module list`
 
 for MOD in $MODULES ; do
@@ -9,3 +9,24 @@ for MOD in $MODULES ; do
     puppet module install $MOD >/dev/null
   fi
 done
+
+# Fix a problem with the released verison of the dashboard module
+if grep scope.lookupvar /etc/puppet/modules/dashboard/templates/passenger-vhost.erb | grep dashboard_port >/dev/null 2>&1 ; then
+
+  cd /etc/puppet/modules/dashboard
+  echo | patch -p1 <<'EOD'
+diff --git a/templates/passenger-vhost.erb b/templates/passenger-vhost.erb
+index a2f6d16..de7dd0a 100644
+--- a/templates/passenger-vhost.erb
++++ b/templates/passenger-vhost.erb
+@@ -1,6 +1,6 @@
+-Listen <%= scope.lookupvar("dashboard::params::dashboard_port") %>
++Listen <%= dashboard_port %>
+ 
+-<VirtualHost *:<%= scope.lookupvar("dashboard::params::dashboard_port") %>>
++<VirtualHost *:<%= dashboard_port %>>
+   ServerName <%= name %>
+   DocumentRoot <%= docroot %>
+   RailsBaseURI <%= rails_base_uri %>
+EOD
+fi
