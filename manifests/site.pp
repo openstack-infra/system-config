@@ -93,6 +93,13 @@ node 'wiki.openstack.org' {
   include openstack_project::wiki
 }
 
+node 'puppet-dashboard.openstack.org' {
+  class { 'openstack_project::dashboard':
+    password => hiera('dashboard_password'),
+    mysql_password => hiera('dashboard_mysql_password'),
+  }
+}
+
 # A bare machine, but with a jenkins user
 node /^.*\.template\.openstack\.org$/ {
   include openstack_project::slave_template
