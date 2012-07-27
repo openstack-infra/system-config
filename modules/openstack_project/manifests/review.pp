@@ -25,7 +25,7 @@
 # 12:09 <@spearce> so. you get 5 milliseconds before aborting
 # thus, set it to 5000minutes until the bug is fixed.
 class openstack_project::review(
-  $github_auth_token,
+  $github_oauth_token,
   $mysql_password,
   $email_private_key,
   $gerritbot_password) {
