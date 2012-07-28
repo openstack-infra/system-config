@@ -32,6 +32,13 @@ node "jenkins.openstack.org" {
   class { 'openstack_project::jenkins':
     jenkins_jobs_password => hiera('jenkins_jobs_password'),
   }
+  class { "openstack_project::zuul":
+    jenkins_server => "https://$fqdn",
+    jenkins_user => 'hudson-openstack',
+    jenkins_apikey => hiera('zuul_jenkins_apikey'),
+    gerrit_server => 'gerrit.openstack.org',
+    gerrit_user => 'jenkins',
+  }
 }
 
 node "jenkins-dev.openstack.org" {
