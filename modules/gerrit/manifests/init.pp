@@ -82,6 +82,7 @@ class gerrit($virtual_hostname=$fqdn,
   $java_home = $lsbdistcodename ? {
       "precise" => "/usr/lib/jvm/java-6-openjdk-amd64/jre",
       "oneiric" => "/usr/lib/jvm/java-6-openjdk/jre",
+      "natty" => "/usr/lib/jvm/java-6-openjdk/jre",
     }
 
   user { "gerrit2":
