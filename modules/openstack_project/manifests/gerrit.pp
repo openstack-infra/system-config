@@ -134,10 +134,15 @@ class openstack_project::gerrit (
   }
 
   cron { "gerritsyncusers":
-    user => gerrit2,
-    minute => "*/15",
-    command => "sleep $((RANDOM\\%60+60)) && python /usr/local/gerrit/scripts/update_gerrit_users.py ${script_user} ${script_key_file} openstack",
-    require => Class['::gerrit'],
+    ensure => absent,
+  }
+
+  class { "launchpad_sync":
+    user => "gerrit2",
+    script_user => $script_user,
+    script_key_file => $script_key_file,
+    site => "openstack",
+    root_team => "openstack",
   }
 
   file { '/home/gerrit2/review_site/hooks/change-merged':
@@ -145,7 +150,7 @@ class openstack_project::gerrit (
     group => 'root',
     mode => 555,
     ensure => 'present',
-    source => 'puppet:///modules/gerrit/change-merged',
+    source => 'puppet:///modules/openstack_project/gerrit/change-merged',
     replace => 'true',
     require => Class['::gerrit']
   }
@@ -155,7 +160,7 @@ class openstack_project::gerrit (
     group => 'root',
     mode => 555,
     ensure => 'present',
-    source => 'puppet:///modules/gerrit/patchset-created',
+    source => 'puppet:///modules/openstack_project/gerrit/patchset-created',
     replace => 'true',
     require => Class['::gerrit']
   }
