@@ -84,6 +84,8 @@ class gerrit($virtual_hostname=$fqdn,
       $replicate_github=false,
       $replicate_local=true,
       $replication_targets=[],
+      $local_git_target='/var/lib/git',
+      $project_list=[],
       $testmode=false
       ) {
 
@@ -168,6 +170,21 @@ class gerrit($virtual_hostname=$fqdn,
       content => template('gerrit/replication.config'),
       replace => 'true',
       require => File["/home/gerrit2/review_site/etc"]
+    }
+    if ($replicate_local == true) {
+    file { $local_git_target:
+      ensure => "directory",
+      owner => "gerrit2",
+    }
+    vcsrepo { $project_list:
+      ensure => bare,
+      provider => git,
+      path => "$local_git_target/$name",
+      user => "gerrit2",
+    }
+  } else {
+    file { '/home/gerrit2/review_site/etc/replication.config':
+      ensure => 'absent'
     }
   }
 
