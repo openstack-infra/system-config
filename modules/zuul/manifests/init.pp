@@ -64,7 +64,6 @@ class zuul ()
       command => '/etc/init.d/zuul reload',
       require => File['/etc/init.d/zuul'],
       refreshonly => true,
-      subscribe => [ File["/etc/zuul/layout.yaml"], File["/etc/zuul/logging.conf"], ],
   }
 
   service { 'zuul':
