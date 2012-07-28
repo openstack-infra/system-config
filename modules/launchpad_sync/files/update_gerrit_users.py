@@ -56,6 +56,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument('user', help='The gerrit admin user')
 parser.add_argument('ssh_key', help='The gerrit admin SSH key file')
 parser.add_argument('site', help='The site in use (typically openstack or stackforge)')
+parser.add_argument('root_team', help='The root launchpad team to pull from')
 options = parser.parse_args()
 
 GERRIT_USER = options.user
@@ -126,7 +127,7 @@ def get_sub_teams(team, have_teams):
     return have_teams
 
 
-teams_todo = get_sub_teams('openstack', [])
+teams_todo = get_sub_teams(options.root_team, [])
 
 users={}
 groups={}
