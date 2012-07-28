@@ -2,6 +2,6 @@
 # https://github.com/openstack/openstack-ci-puppet
 
 <% projects.each do |project| -%>
-[project "<%= project['name'] %>"]
-close_pull = <%= project['close_pull'] %>
+[project "<%= project %>"]
+close_pull = true
 <% end -%>

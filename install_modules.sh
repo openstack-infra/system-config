@@ -1,6 +1,6 @@
 #!/bin/bash
 
-MODULES="puppetlabs-mysql"
+MODULES="puppetlabs-mysql puppetlabs-vcsrepo"
 MODULE_LIST=`puppet module list`
 
 for MOD in $MODULES ; do
