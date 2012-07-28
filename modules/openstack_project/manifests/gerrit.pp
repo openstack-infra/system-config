@@ -21,8 +21,8 @@ class openstack_project::gerrit (
       $httpd_maxthreads='',
       $httpd_maxwait='',
       $war,
-      $script_user,
-      $script_key_file,
+      $script_user='update',
+      $script_key_file='/home/gerrit2/.ssh/id_rsa',
       $github_projects = [],
       $github_username,
       $github_oauth_token,
@@ -30,20 +30,8 @@ class openstack_project::gerrit (
       $mysql_root_password,
       $email_private_key,
       $testmode=false,
+      $replicate_github=true,
 ) {
-  class { 'openstack_project::server':
-    iptables_public_tcp_ports => [80, 443, 29418]
-  }
-
-  $packages = [
-               "python-mysqldb",      # for launchpad sync script
-	       "python-openid",       # for launchpad sync script
-	       "python-launchpadlib", # for launchpad sync script
-               ]
-
-  package { $packages:
-    ensure => present,
-  }
 
   class { '::gerrit':
     virtual_hostname => $virtual_hostname,
@@ -63,6 +51,8 @@ class openstack_project::gerrit (
     core_packedgitlimit => $core_packedgitlimit,
     core_packedgitwindowsize => $core_packedgitwindowsize,
     sshd_threads => $sshd_threads,
+    war => 'http://tarballs.openstack.org/ci/gerrit-2.4.2-11-gb5a28fb.war',
+    logo_file => "puppet:///modules/openstack_project/openstack.png",
     httpd_acceptorthreads => $httpd_acceptorthreads,
     httpd_minthreads => $httpd_minthreads,
     httpd_maxthreads => $httpd_maxthreads,
@@ -87,6 +77,8 @@ class openstack_project::gerrit (
     email_private_key => $email_private_key,
     replicate_github => true,
     testmode => $testmode,
+    replicate_github => $replicate_github,
+    require => Class[openstack_project::server],
   }
   if ($testmode == false) {
     class { 'gerrit::cron':
@@ -112,7 +104,7 @@ class openstack_project::gerrit (
 
   file { '/home/gerrit2/review_site/static/title.png':
     ensure => 'present',
-    source => "puppet:///modules/openstack_project/openstack.png",
+    source => $logo_file,
     require => Class['::gerrit'],
   }
 

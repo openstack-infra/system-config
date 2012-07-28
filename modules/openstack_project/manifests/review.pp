@@ -31,6 +31,9 @@ class openstack_project::review(
   $email_private_key,
   $gerritbot_password) {
   include openstack_project
+  class { 'openstack_project::server':
+    iptables_public_tcp_ports => [80, 443, 29418],
+  }
   class { 'openstack_project::gerrit':
     ssl_cert_file => '/etc/ssl/certs/review.openstack.org.pem',
     ssl_key_file => '/etc/ssl/private/review.openstack.org.key',
@@ -43,7 +46,6 @@ class openstack_project::review(
     core_packedgitwindowsize => '16k',
     sshd_threads => '100',
     httpd_maxwait => '5000min',
-    war => 'http://tarballs.openstack.org/ci/gerrit-2.4.2-11-gb5a28fb.war',
     script_user => 'launchpadsync',
     script_key_file => '/home/gerrit2/.ssh/launchpadsync_rsa',
     github_projects => $openstack_project::project_list,
