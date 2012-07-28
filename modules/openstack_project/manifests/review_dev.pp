@@ -11,8 +11,6 @@ class openstack_project::review_dev(
     ssl_chain_file => '',
     email => "review-dev@openstack.org",
     war => 'http://tarballs.openstack.org/ci/gerrit-2.4.2-11-gb5a28fb.war',
-    script_user => 'update',
-    script_key_file => '/home/gerrit2/.ssh/id_rsa',
     github_projects => [ {
                          name => 'gtest-org/test',
                          close_pull => 'true'
