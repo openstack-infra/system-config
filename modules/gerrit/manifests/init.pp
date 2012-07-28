@@ -42,6 +42,10 @@
 #     to:
 #       http://tarballs.openstack.org/ci/gerrit-2.3.0.war
 #     Gerrit will be upgraded on the next puppet run.
+#   replicate_github:
+#     A boolean enabling replication to github
+#   replicate_local:
+#     A boolean enabling local replication for apache acceleration
 #   testmode:
 #     Set this to true to disable cron jobs and replication,
 #     which can interfere with testing.
@@ -73,6 +77,9 @@ class gerrit($virtual_hostname=$fqdn,
       $mysql_password,
       $mysql_root_password,
       $email_private_key,
+      $replicate_github=false,
+      $replicate_local=true,
+      $replication_targets=[],
       $testmode=false
       ) {
 
@@ -147,15 +154,14 @@ class gerrit($virtual_hostname=$fqdn,
 
   # Skip replication if we're in test mode
   if ($testmode == false) {
-# TODO: This file needs to be templated with a boolean around
-# enabling replication to github. Also, the local repos need
+# TODO: The local repos need
 # to be managed in here when we get project creation handled
     file { '/home/gerrit2/review_site/etc/replication.config':
       owner => 'root',
       group => 'root',
       mode => 444,
       ensure => 'present',
-      source => 'puppet:///modules/gerrit/replication.config',
+      content => template('gerrit/replication.config.erb'),
       replace => 'true',
       require => File["/home/gerrit2/review_site/etc"]
     }
