@@ -1,6 +1,6 @@
 class gerrit::cron(
-    $script_user,
-    $script_key_file
+    $script_user='update',
+    $script_key_file='/home/gerrit2/.ssh/id_rsa'
     ) {
 
     cron { "expireoldreviews":

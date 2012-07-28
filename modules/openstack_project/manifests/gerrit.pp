@@ -21,8 +21,8 @@ class openstack_project::gerrit (
       $httpd_maxthreads='',
       $httpd_maxwait='',
       $war,
-      $script_user,
-      $script_key_file,
+      $script_user='update',
+      $script_key_file='/home/gerrit2/.ssh/id_rsa',
       $github_projects = [],
       $github_username,
       $github_oauth_token,
@@ -31,19 +31,6 @@ class openstack_project::gerrit (
       $email_private_key,
       $testmode=false,
 ) {
-  class { 'openstack_project::server':
-    iptables_public_tcp_ports => [80, 443, 29418]
-  }
-
-  $packages = [
-               "python-mysqldb",      # for launchpad sync script
-	       "python-openid",       # for launchpad sync script
-	       "python-launchpadlib", # for launchpad sync script
-               ]
-
-  package { $packages:
-    ensure => present,
-  }
 
   class { '::gerrit':
     virtual_hostname => $virtual_hostname,
@@ -80,13 +67,12 @@ class openstack_project::gerrit (
                        link => 'https://blueprints.launchpad.net/openstack/?searchtext=$2' },
                   ],
     war => $war,
-    script_user => $script_user,
-    script_key_file => $script_key_file,
     mysql_password => $mysql_password,
     mysql_root_password => $mysql_root_password,
     email_private_key => $email_private_key,
     replicate_github => true,
     testmode => $testmode,
+    require => Class[openstack_project::server],
   }
   if ($testmode == false) {
     class { 'gerrit::cron':
