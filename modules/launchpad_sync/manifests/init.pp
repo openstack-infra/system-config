@@ -1,10 +1,22 @@
 class launchpad_sync(
-  $user,
-  $script_user,
-  $script_key_file,
+  $user='gerrit2',
+  $script_user='update',
+  $script_key_file='/home/gerrit2/.ssh/id_rsa',
   $site,
   $root_team
 ) {
+
+  include mysql
+  include mysql::python
+
+  $packages = [
+	       "python-openid",       # for launchpad sync script
+	       "python-launchpadlib", # for launchpad sync script
+               ]
+
+  package { $packages:
+    ensure => present,
+  }
 
   file { '/usr/local/bin/update_gerrit_users.py':
     owner => 'root',

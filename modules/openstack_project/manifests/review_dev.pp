@@ -3,6 +3,10 @@ class openstack_project::review_dev(
   $mysql_password,
   $mysql_root_password,
   $email_private_key) {
+  class { 'openstack_project::server':
+    iptables_public_tcp_ports => [80, 443, 29418]
+  }
+
   class { 'openstack_project::gerrit':
     virtual_hostname => 'review-dev.openstack.org',
     canonicalweburl => "https://review-dev.openstack.org/",
@@ -11,8 +15,6 @@ class openstack_project::review_dev(
     ssl_chain_file => '',
     email => "review-dev@openstack.org",
     war => 'http://tarballs.openstack.org/ci/gerrit-2.4.2-11-gb5a28fb.war',
-    script_user => 'update',
-    script_key_file => '/home/gerrit2/.ssh/id_rsa',
     github_projects => [ 'gtest-org/test' ],
     github_username => 'openstack-gerrit-dev',
     github_oauth_token => $github_oauth_token,
