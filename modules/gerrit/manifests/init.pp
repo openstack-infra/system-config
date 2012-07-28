@@ -45,8 +45,6 @@
 #   testmode:
 #     Set this to true to disable cron jobs and replication,
 #     which can interfere with testing.
-# TODO: move apache configuration to another module
-# TODO: move mysql configuration to another module
 # TODO: make more gerrit options configurable here
 
 class gerrit($virtual_hostname=$fqdn,
@@ -83,7 +81,7 @@ class gerrit($virtual_hostname=$fqdn,
 
   $java_home = $lsbdistcodename ? {
       "precise" => "/usr/lib/jvm/java-6-openjdk-amd64/jre",
-      default => "/usr/lib/jvm/java-6-openjdk/jre",
+      "oneiric" => "/usr/lib/jvm/java-6-openjdk/jre",
     }
 
   user { "gerrit2":

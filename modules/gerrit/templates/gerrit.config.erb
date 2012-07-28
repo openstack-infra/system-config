@@ -22,7 +22,7 @@
 	smtpServer = localhost
 [container]
 	user = gerrit2
-	javaHome = <% java_home %>
+	javaHome = <%= java_home %>
 <% if container_heaplimit != "" -%>
 	heapLimit = <%= container_heaplimit %>
 <% end -%>
