@@ -85,6 +85,7 @@ class openstack_project::gerrit (
     mysql_password => $mysql_password,
     mysql_root_password => $mysql_root_password,
     email_private_key => $email_private_key,
+    replicate_github => true,
     testmode => $testmode,
   }
   if ($testmode == false) {
