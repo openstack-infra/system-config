@@ -1,5 +1,10 @@
-class zuul ()
-{
+class zuul (
+    $jenkins_server,
+    $jenkins_user,
+    $jenkins_apikey,
+    $gerrit_server,
+    $gerrit_user
+) {
   $packages = ["python-webob",
                "python-daemon",
                "python-paste"]
@@ -35,6 +40,17 @@ class zuul ()
 
   file { "/etc/zuul":
     ensure => "directory",
+  }
+
+# TODO: We should put in  notify either Service['zuul'] or Exec['zuul-reload']
+#       at some point, but that still has some problems.
+  file { "/etc/zuul/zuul.conf":
+    owner => 'jenkins',
+    group => 'jenkins',
+    mode => 400,
+    ensure => 'present',
+    content => template('zuul/zuul.conf.erb'),
+    require => File["/etc/zuul"],
   }
 
   file { "/var/log/zuul":
