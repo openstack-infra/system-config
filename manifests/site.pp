@@ -14,6 +14,7 @@ node "review.openstack.org" {
   class { 'openstack_project::review':
     github_oauth_token => hiera('gerrit_github_token'),
     mysql_password => hiera('gerrit_mysql_password'),
+    mysql_root_password => hiera('gerrit_mysql_root_password'),
     email_private_key => hiera('gerrit_email_private_key'),
     gerritbot_password => hiera('gerrit_gerritbot_password'),
   }
@@ -24,6 +25,7 @@ node "gerrit-dev.openstack.org", "review-dev.openstack.org" {
   class { 'openstack_project::review_dev':
     github_oauth_token => hiera('gerrit_dev_github_token'),
     mysql_password => hiera('gerrit_dev_mysql_password'),
+    mysql_root_password => hiera('gerrit_dev_mysql_root_password'),
     email_private_key => hiera('gerrit_dev_email_private_key')
   }
 }

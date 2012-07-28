@@ -1,6 +1,7 @@
 class openstack_project::review_dev(
   $github_oauth_token,
   $mysql_password,
+  $mysql_root_password,
   $email_private_key) {
   class { 'openstack_project::gerrit':
     virtual_hostname => 'review-dev.openstack.org',
@@ -19,6 +20,7 @@ class openstack_project::review_dev(
     github_username => 'openstack-gerrit-dev',
     github_oauth_token => $github_oauth_token,
     mysql_password => $mysql_password,
+    mysql_root_password => $mysql_root_password,
     email_private_key => $email_private_key,
   }
 }

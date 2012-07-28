@@ -27,6 +27,7 @@ class openstack_project::gerrit (
       $github_username,
       $github_oauth_token,
       $mysql_password,
+      $mysql_root_password,
       $email_private_key,
       $testmode=false,
 ) {
@@ -82,6 +83,7 @@ class openstack_project::gerrit (
     script_user => $script_user,
     script_key_file => $script_key_file,
     mysql_password => $mysql_password,
+    mysql_root_password => $mysql_root_password,
     email_private_key => $email_private_key,
     testmode => $testmode,
   }
