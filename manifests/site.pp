@@ -34,6 +34,10 @@ node "jenkins.openstack.org" {
   include openstack_project::remove_cron
   class { 'openstack_project::jenkins':
     jenkins_jobs_password => hiera('jenkins_jobs_password'),
+    zuul_user => 'hudson-openstack',
+    zuul_apikey => hiera('zuul_jenkins_apikey'),
+    gerrit_server => 'gerrit.openstack.org',
+    gerrit_user => 'jenkins',
   }
 }
 
