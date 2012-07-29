@@ -11,10 +11,7 @@ class openstack_project::review_dev(
     ssl_chain_file => '',
     email => "review-dev@openstack.org",
     war => 'http://tarballs.openstack.org/ci/gerrit-2.4.2-11-gb5a28fb.war',
-    github_projects => [ {
-                         name => 'gtest-org/test',
-                         close_pull => 'true'
-                         } ],
+    projects_file => 'puppet:///openstack_project/review-dev.projects.yaml',
     github_username => 'openstack-gerrit-dev',
     github_oauth_token => $github_oauth_token,
     mysql_password => $mysql_password,

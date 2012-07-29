@@ -32,13 +32,7 @@ class github (
   }
 
   file { '/etc/github/github.config':
-    owner => 'root',
-    group => 'root',
-    mode => 444,
-    ensure => 'present',
-    content => template('github/github.config.erb'),
-    replace => 'true',
-    require => File['/etc/github'],
+    ensure => absent
   }
 
   file { '/etc/github/github.secure.config':
