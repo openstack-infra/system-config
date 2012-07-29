@@ -23,7 +23,7 @@ class openstack_project::gerrit (
       $war,
       $script_user='update',
       $script_key_file='/home/gerrit2/.ssh/id_rsa',
-      $github_projects = [],
+      $projects_file='UNDEF',
       $github_username,
       $github_oauth_token,
       $mysql_password,
@@ -70,6 +70,7 @@ class openstack_project::gerrit (
     mysql_password => $mysql_password,
     mysql_root_password => $mysql_root_password,
     email_private_key => $email_private_key,
+    projects_file => $projects_file,
     replicate_github => true,
     testmode => $testmode,
     require => Class[openstack_project::server],
@@ -80,9 +81,9 @@ class openstack_project::gerrit (
       script_key_file => $script_key_file,
     }
     class { 'github':
-      projects => $github_projects,
       username => $github_username,
       oauth_token => $github_oauth_token,
+      require => Class['::gerrit']
     }
   }
 

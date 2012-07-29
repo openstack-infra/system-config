@@ -70,6 +70,7 @@ class gerrit($virtual_hostname=$fqdn,
       $httpd_maxwait='',
       $commentlinks = [],
       $war,
+      $projects_file = 'UNDEF',
       $enable_melody = 'false',
       $melody_session = 'false',
       $mysql_password,
@@ -77,6 +78,7 @@ class gerrit($virtual_hostname=$fqdn,
       $email_private_key,
       $replicate_github=false,
       $replicate_local=true,
+      $local_git_dir='/var/lib/git',
       $replication_targets=[],
       $testmode=false
       ) {
@@ -163,6 +165,27 @@ class gerrit($virtual_hostname=$fqdn,
       replace => 'true',
       require => File["/home/gerrit2/review_site/etc"]
     }
+  }
+
+  if ($projects_file != 'UNDEF') {
+
+      file { '/home/gerrit2/projects.yaml':
+        owner => 'gerrit2',
+        group => 'gerrit2',
+        mode => 444,
+        ensure => 'present',
+        source => $projects_file,
+        replace => true,
+      }
+
+      exec { "make_local_repos":
+        user => 'gerrit2',
+        command => "/usr/local/gerrit/scripts/make_local_repos.py $local_git_dir",
+        subscribe => File["/home/gerrit2/projects.yaml"],
+        refreshonly => true,
+        require => File["/home/gerrit2/projects.yaml"]
+      }
+
   }
 
   # Gerrit sets these permissions in 'init'; don't fight them.
