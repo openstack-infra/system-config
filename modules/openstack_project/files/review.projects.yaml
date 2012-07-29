@@ -1,0 +1,145 @@
+- project: heat-api/heat
+  options:
+  - close-pull
+- project: openstack-ci/devstack-gate
+  options:
+  - close-pull
+- project: openstack-ci/gerrit
+  options:
+  - close-pull
+  remote: https://gerrit.googlesource.com/gerrit 
+- project: openstack-ci/gerrit-verification-status-plugin
+  options:
+  - close-pull
+- project: openstack-ci/gerritbot
+  options:
+  - close-pull
+- project: openstack-ci/gerritlib
+  options:
+  - close-pull
+- project: openstack-ci/git-review
+  options:
+  - close-pull
+- project: openstack-ci/lodgeit
+  options:
+  - close-pull
+- project: openstack-ci/meetbot
+  options:
+  - close-pull
+- project: openstack-ci/pypi-mirror
+  options:
+  - close-pull
+- project: openstack-ci/zuul
+  options:
+  - close-pull
+- project: openstack-dev/devstack
+  options:
+  - close-pull
+- project: openstack-dev/openstack-nose
+  options:
+  - close-pull
+- project: openstack-dev/openstack-qa
+  options:
+  - close-pull
+- project: openstack-dev/pbr
+  options:
+  - close-pull
+- project: openstack-dev/sandbox
+  options:
+  - close-pull
+- project: openstack/cinder
+  options:
+  - close-pull
+- project: openstack/compute-api
+  options:
+  - close-pull
+- project: openstack/glance
+  options:
+  - close-pull
+- project: openstack/horizon
+  options:
+  - close-pull
+- project: openstack/identity-api
+  options:
+  - close-pull
+- project: openstack/image-api
+  options:
+  - close-pull
+- project: openstack/keystone
+  options:
+  - close-pull
+- project: openstack/melange
+  options:
+  - close-pull
+- project: openstack/netconn-api
+  options:
+  - close-pull
+- project: openstack/nova
+  options:
+  - close-pull
+- project: openstack/object-api
+  options:
+  - close-pull
+- project: openstack/openstack-chef
+  options:
+  - close-pull
+- project: openstack/openstack-ci
+  options:
+  - close-pull
+- project: openstack/openstack-ci-puppet
+  options:
+  - close-pull
+- project: openstack/openstack-common
+  options:
+  - close-pull
+- project: openstack/openstack-manuals
+  options:
+  - close-pull
+- project: openstack/openstack-planet
+  options:
+  - close-pull
+- project: openstack/openstack-puppet
+  options:
+  - close-pull
+- project: openstack/python-cinderclient
+  options:
+  - close-pull
+- project: openstack/python-glanceclient
+  options:
+  - close-pull
+- project: openstack/python-keystoneclient
+  options:
+  - close-pull
+- project: openstack/python-melangeclient
+  options:
+  - close-pull
+- project: openstack/python-novaclient
+  options:
+  - close-pull
+- project: openstack/python-openstackclient
+  options:
+  - close-pull
+- project: openstack/python-quantumclient
+  options:
+  - close-pull
+- project: openstack/python-swiftclient
+  options:
+  - close-pull
+- project: openstack/quantum
+  options:
+  - close-pull
+- project: openstack/swift
+  options:
+  - close-pull
+- project: openstack/tempest
+  options:
+  - close-pull
+- project: stackforge/MRaaS
+  options:
+  - close-pull
+- project: stackforge/ceilometer
+  options:
+  - close-pull
+- project: stackforge/reddwarf
+  options:
+  - close-pull
