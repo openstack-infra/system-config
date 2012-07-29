@@ -13,17 +13,21 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 
-# Fetch remotes reads a project config file called projects.yaml
+# Make local repos reads a project config file called projects.yaml
 # It should look like:
 
 # - project: PROJECT_NAME
 #   options:
-#   - remote: https://gerrit.googlesource.com/gerrit
+#   - close-pull
+#   remote: https://gerrit.googlesource.com/gerrit
 
+# TODO: add support for
+#         ssh -p 29418 localhost gerrit -name create-project PROJECT
 
 import logging
 import os
 import subprocess
+import sys
 import shlex
 import yaml
 
@@ -45,8 +49,7 @@ def run_command_status(cmd, env={}):
 
 logging.basicConfig(level=logging.ERROR)
 
-REPO_ROOT = os.environ.get('REPO_ROOT',
-                           '/home/gerrit2/review_site/git')
+REPO_ROOT = sys.argv[1]
 PROJECTS_YAML = os.environ.get('PROJECTS_YAML',
                                '/home/gerrit2/projects.yaml')
 
@@ -55,16 +58,10 @@ config = yaml.load(open(PROJECTS_YAML))
 for section in config:
     project = section['project']
 
-    if 'remote' not in section:
+    project_git = "%s.git" % project
+    project_dir = os.path.join(REPO_ROOT, project_git)
+
+    if os.path.exists(project_dir):
         continue
 
-    project_git = "%s.git" % project
-    os.chdir(os.path.join(REPO_ROOT, project_git))
-
-    # Make sure that the specified remote exists
-    remote_url = section['remote']
-    # We could check if it exists first, but we're ignoring output anyway
-    # So just try to make it, and it'll either make a new one or do nothing
-    run_command("git remote add -f upstream %s" % remote_url)
-    # Fetch new revs from it
-    run_command("git remote update upstream")
+    run_command("git --bare init --shared=group %s" % project_dir)
