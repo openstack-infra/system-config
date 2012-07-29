@@ -46,7 +46,7 @@ class openstack_project::review(
     war => 'http://tarballs.openstack.org/ci/gerrit-2.4.2-11-gb5a28fb.war',
     script_user => 'launchpadsync',
     script_key_file => '/home/gerrit2/.ssh/launchpadsync_rsa',
-    github_projects => $openstack_project::project_list,
+    projects_file => 'puppet:///openstack_project/review.projects.yaml',
     github_username => 'openstack-gerrit',
     github_oauth_token => $github_oauth_token,
     mysql_password => $mysql_password,
@@ -60,10 +60,5 @@ class openstack_project::review(
     user => 'gerritbot',
     virtual_hostname => $fqdn
   }
-  class { 'gerrit::remotes':
-    upstream_projects => [ {
-                         name => 'openstack-ci/gerrit',
-                         remote => 'https://gerrit.googlesource.com/gerrit'
-                         } ],
-  }
+  include gerrit::remotes
 }
