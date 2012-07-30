@@ -1,9 +1,8 @@
 class mediawiki::app {
-  include git
 
-  git::clone { "mediawiki":
-    directory => "/srv/mediawiki/w",
-    branch => "master",
-    origin => "https://gerrit.wikimedia.org/r/p/mediawiki/core.git";
+  vcsrepo { "/srv/mediawiki/w":
+    ensure => latest,
+    source => "https://gerrit.wikimedia.org/r/p/mediawiki/core.git",
+    revision => "origin/master",
   }
 }
