@@ -107,7 +107,6 @@ node /^ci-backup-.*\.openstack\.org$/ {
 node /^precise.*\.slave\.openstack\.org$/ {
   include openstack_project::puppet_cron
   include openstack_project::slave
-
   include ulimit
   ulimit::conf { 'limit_jenkins_procs':
     limit_domain => 'jenkins',

@@ -41,3 +41,25 @@ scm:
 
 assignednode:
   node: 'precise'
+
+---
+# silent-ci-puppet-apply
+main:
+  name: 'silent-ci-puppet-apply'
+  review_site: 'review.openstack.org'
+  github_org: 'openstack'
+  project: 'openstack-ci-puppet'
+  concurrent: 'true'
+
+triggers:
+  - zuul
+
+builders:
+  - gerrit_git_prep
+  - puppetapply
+
+scm:
+  scm: 'false'
+
+assignednode:
+  node: 'precise'

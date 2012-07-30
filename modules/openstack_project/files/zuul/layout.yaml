@@ -119,6 +119,9 @@ projects:
     gate:
       - gate-ci-puppet-merge:
         - gate-ci-puppet-syntax
+    silent:
+      - gate-zuul-merge:
+        - silent-ci-puppet-apply
 
   - name: openstack/cinder
     check:

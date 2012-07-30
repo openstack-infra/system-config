@@ -64,6 +64,9 @@ class Builders(object):
     def _builder_docs(self, xml_parent):
         self._add_script(xml_parent, '/usr/local/jenkins/slave_scripts/run-docs.sh')
 
+    def _builder_puppetapply(self, xml_parent):
+        self._add_script(xml_parent, '/usr/local/jenkins/slave_scripts/run-puppetapply.sh')
+
     def _builder_gerrit_git_prep(self, xml_parent):
         self._add_script(xml_parent, '/usr/local/jenkins/slave_scripts/gerrit-git-prep.sh {site}'.format(site=self.data['main']['review_site']))
 
