@@ -86,22 +86,8 @@ node 'etherpad.openstack.org' {
 }
 
 node 'wiki.openstack.org' {
-  include openstack_project::wiki,
-          openssl,
-          subversion
-
-  class { 'openstack_server':
-    iptables_public_tcp_ports => [80, 443]
-  }
-  class { 'mediawiki':
-    role => 'all',
-    mediawiki_location => '/srv/mediawiki/w',
-    site_hostname => $fqdn;
-  }
-  class { 'memcached':
-    memcached_ip => '127.0.0.1';
-  }
-  class { 'mysql::server':
+  class { 'openstack_project::wiki':
+    mysql_root_password => hiera('wiki_db_password'),
   }
 }
 
