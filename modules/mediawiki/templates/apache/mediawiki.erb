@@ -6,7 +6,7 @@
 
 <VirtualHost *:80>
         ServerAdmin noc@openstack.org
-        ServerName <%= site_hostname %>
+        ServerName <%= scope.lookupvar("mediawiki::site_hostname") %>
 
         DocumentRoot /var/www
         <Directory />
@@ -22,27 +22,27 @@
 
         RewriteEngine on
         RewriteCond %{SERVER_PORT} !^443$
-        RewriteRule ^/(.*)$ https://<%= site_hostname %>/$1 [L,R]
+        RewriteRule ^/(.*)$ https://<%= scope.lookupvar("mediawiki::site_hostname") %>/$1 [L,R]
 
-        ErrorLog /var/log/apache2/error.log
+        ErrorLog /var/log/apache2/mediawiki-error.log
 
         # Possible values include: debug, info, notice, warn, error, crit,
         # alert, emerg.
         LogLevel warn
 
-        CustomLog /var/log/apache2/access.log combined
+        CustomLog /var/log/apache2/mediawiki-access.log combined
         ServerSignature Off
 
 </VirtualHost>
 <VirtualHost *:443>
         ServerAdmin noc@openstack.org
-        ServerName <%= site_hostname %>
+        ServerName <%= scope.lookupvar("mediawiki::site_hostname") %>
 
         SSLEngine on
         SSLCertificateFile /etc/ssl/certs/<%= fqdn %>.pem
         SSLCertificateKeyFile /etc/ssl/private/<%= fqdn %>.key
 
-        RedirectMatch ^/$ http://<%= site_hostname %>/wiki/
+        RedirectMatch ^/$ http://<%= scope.lookupvar("mediawiki::site_hostname") %>/wiki/
 
         DocumentRoot /var/www
         <Directory />
@@ -55,7 +55,7 @@
                 Order allow,deny
                 allow from all
         </Directory>
-	<Directory "<%= mediawiki_location %>/images">
+	<Directory "<%= scope.lookupvar('mediawiki::mediawiki_location') %>/images">
 		# Ignore .htaccess files
 		AllowOverride None
  
@@ -67,7 +67,7 @@
 	</Directory>
 	<IfModule mod_expires.c>
 		ExpiresActive On
-		<Directory "<%= mediawiki_location %>">
+		<Directory "<%= scope.lookupvar('mediawiki::mediawiki_location') %>">
 			<FilesMatch "\.(gif|jpe?g|png|css|js|woff|svg|eot|ttf)$">
 				ExpiresByType image/gif A2592000
 				ExpiresByType image/png A2592000
@@ -91,8 +91,8 @@
 	# TTF doesn't have an official MIME type, but I really don't want to use application/octet-stream for it
 	AddType application/x-font-ttf .ttf
 
-        Alias /w <%= mediawiki_location %>
-        Alias /wiki <%= mediawiki_location %>/index.php
+        Alias /w <%= scope.lookupvar('mediawiki::mediawiki_location') %>
+        Alias /wiki <%= scope.lookupvar('mediawiki::mediawiki_location') %>/index.php
 
         ErrorLog /var/log/apache2/error.log
 
