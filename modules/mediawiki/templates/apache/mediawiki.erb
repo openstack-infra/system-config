@@ -1,0 +1,106 @@
+#####################################################################
+### THIS FILE IS MANAGED BY PUPPET
+### puppet:///files/apache/sites/labconsole.wikimedia.org
+#####################################################################
+# vim: filetype=apache
+
+<VirtualHost *:80>
+        ServerAdmin noc@openstack.org
+        ServerName <%= scope.lookupvar("mediawiki::site_hostname") %>
+
+        DocumentRoot /var/www
+        <Directory />
+                Options FollowSymLinks
+                AllowOverride None
+        </Directory>
+        <Directory /var/www/>
+                Options Indexes FollowSymLinks MultiViews
+                AllowOverride None
+                Order allow,deny
+                allow from all
+        </Directory>
+
+        RewriteEngine on
+        RewriteCond %{SERVER_PORT} !^443$
+        RewriteRule ^/(.*)$ https://<%= scope.lookupvar("mediawiki::site_hostname") %>/$1 [L,R]
+
+        ErrorLog /var/log/apache2/mediawiki-error.log
+
+        # Possible values include: debug, info, notice, warn, error, crit,
+        # alert, emerg.
+        LogLevel warn
+
+        CustomLog /var/log/apache2/mediawiki-access.log combined
+        ServerSignature Off
+
+</VirtualHost>
+<VirtualHost *:443>
+        ServerAdmin noc@openstack.org
+        ServerName <%= scope.lookupvar("mediawiki::site_hostname") %>
+
+        SSLEngine on
+        SSLCertificateFile /etc/ssl/certs/<%= fqdn %>.pem
+        SSLCertificateKeyFile /etc/ssl/private/<%= fqdn %>.key
+
+        RedirectMatch ^/$ http://<%= scope.lookupvar("mediawiki::site_hostname") %>/wiki/
+
+        DocumentRoot /var/www
+        <Directory />
+                Options FollowSymLinks
+                AllowOverride None
+        </Directory>
+        <Directory /var/www/>
+                Options Indexes FollowSymLinks MultiViews
+                AllowOverride None
+                Order allow,deny
+                allow from all
+        </Directory>
+	<Directory "<%= scope.lookupvar('mediawiki::mediawiki_location') %>/images">
+		# Ignore .htaccess files
+		AllowOverride None
+ 
+		# Serve HTML as plaintext, don't execute SHTML
+		AddType text/plain .html .htm .shtml .php
+ 
+		# Don't run arbitrary PHP code.
+		php_admin_flag engine off
+	</Directory>
+	<IfModule mod_expires.c>
+		ExpiresActive On
+		<Directory "<%= scope.lookupvar('mediawiki::mediawiki_location') %>">
+			<FilesMatch "\.(gif|jpe?g|png|css|js|woff|svg|eot|ttf)$">
+				ExpiresByType image/gif A2592000
+				ExpiresByType image/png A2592000
+				ExpiresByType image/jpeg A2592000
+				ExpiresByType text/css A2592000
+				ExpiresByType text/javascript A2592000
+				ExpiresByType application/x-javascript A2592000
+				ExpiresByType application/x-font-woff A2592000
+				ExpiresByType image/svg+xml A2592000
+				ExpiresByType application/vnd.ms-fontobject A2592000
+				ExpiresByType application/x-font-ttf A2592000
+				## I think it's likely dangerous to enable this for the entire domain.
+				## I'm nearly positive we only need to do so for the WebFonts.
+				## For now I'm going to keep this disabled.
+				#Header add Access-Control-Allow-Origin "*"
+			</FilesMatch>
+		</Directory>
+	</IfModule>
+	AddType application/x-font-woff .woff
+	AddType application/vnd.ms-fontobject .eot
+	# TTF doesn't have an official MIME type, but I really don't want to use application/octet-stream for it
+	AddType application/x-font-ttf .ttf
+
+        Alias /w <%= scope.lookupvar('mediawiki::mediawiki_location') %>
+        Alias /wiki <%= scope.lookupvar('mediawiki::mediawiki_location') %>/index.php
+
+        ErrorLog /var/log/apache2/error.log
+
+        # Possible values include: debug, info, notice, warn, error, crit,
+        # alert, emerg.
+        LogLevel warn
+
+        CustomLog /var/log/apache2/access.log combined
+        ServerSignature Off
+
+</VirtualHost>
