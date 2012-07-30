@@ -86,7 +86,9 @@ node 'etherpad.openstack.org' {
 }
 
 node 'wiki.openstack.org' {
-  include openstack_project::wiki
+  class { 'openstack_project::wiki':
+    mysql_root_password => hiera('wiki_db_password'),
+  }
 }
 
 node 'puppet-dashboard.openstack.org' {
