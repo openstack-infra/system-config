@@ -8,8 +8,8 @@ class mysql::server(
   $datadir                        = "/var/lib/mysql",
   $port                           = 3306,
   $bind_address                   = "127.0.0.1",
-  $socket                         = false,
-  $pid_file                       = false,
+  $socket                         = "/var/run/mysqld/mysqld.sock",
+  $pid                            = "/var/run/mysqld/mysqld.pid",
   # logging
   $log_error                      = "/var/log/mysql/mysql.err",
   $slow_query_log_file            = false,
@@ -39,9 +39,16 @@ class mysql::server(
   $tmp_table_size                 = '16M',
   $read_rnd_buffer_size           = '256K',
 
+  $default_engine                 = 'UNSET',
+
+  $ssl_ca
+  $ssl_cert
+  $ssl_key
+
   $key_buffer_size                = '16M',
   $myisam_sort_buffer_size        = '8M',
   $myisam_max_sort_file_size      = '512M',
+  $myisam_recover                 = 'BACKUP',
 
   # Networking
   $max_allowed_packet             = "16M",
@@ -69,6 +76,7 @@ class mysql::server(
   # These settings won't matter if replication_enabled is false.
 
   $expire_logs_days               = '10',
+  $max_binlog_size                = '100M',
   $replicate_ignore_table         = [],
   $replicate_ignore_db            = [],
   $replicate_do_table             = [],
@@ -83,23 +91,6 @@ class mysql::server(
   class { "mysql::packages::server": version => $version }
   class { "mysql::packages::client": version => $version }
   include apparmor
-
-  # if $socket was not manually specified,
-  # assume that the socket file should live in
-  # $/run/mysqld/mysqld.sock, otherwise
-  # just use the path that was given.
-  $socket_path = $socket ? {
-    false   => "/run/mysqld/mysqld.sock",
-    default => $socket,
-  }
-  # if $pid_file was not manually specified,
-  # assume that the pid file should live in
-  # /run/mysqld/mysqld.sock, otherwise
-  # just use the path that was given.
-  $pid_path = $pid_file ? {
-    false   => "/run/mysqld/mysqld.pid",
-    default => $pid_file,
-  }
 
   # ensure the datadir exists
   file { $datadir:

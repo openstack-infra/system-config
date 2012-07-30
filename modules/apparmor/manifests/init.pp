@@ -5,6 +5,9 @@
 # class, so if you need to notify this
 # service make sure you include it.
 class apparmor {
+  package { "apparmor":
+    ensure => present
+  }
   service { "apparmor":
     ensure => 'running';
   }

@@ -3,10 +3,24 @@ class mediawiki($role, $site_hostname, $mediawiki_location='') {
     include mediawiki::php,
             mediawiki::app
 
-    class { 'mediawiki::apache':
-      site_hostname => $site_hostname,
-      mediawiki_location => $mediawiki_location;
+    package { 'libapache2-mod-php5':
+      ensure => present
     }
+
+    apache::vhost { $virtual_hostname:
+      port => 443,
+      docroot => 'MEANINGLESS ARGUMENT',
+      priority => '50',
+      template => 'mediawiki/apache/mediawiki.erb',
+      ssl => true,
+    }
+    a2mod { 'rewrite':
+      ensure => present
+    }
+    a2mod { 'expires':
+      ensure => present
+    }
+
   }
   if ($role == "image-scaler" or $role == "all") {
     include mediawiki::"image-scaler",
