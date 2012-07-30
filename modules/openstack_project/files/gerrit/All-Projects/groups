@@ -1,0 +1,13 @@
+# UUID                                  	Group Name
+#
+2c6802522201d0091571720a39b3851e0cc805d5	Administrators
+4f5e60d90859c1449cc0ad0a7e26347d385882d4	Continuous Integration Tools
+5c75219bf2ace95cdea009c82df26ca199e04d59	Release Managers
+5ebcbd5ffce95bd1d8eb9ac279cc930d5e6fc6f9	Non-Interactive Users
+61bc46d043652f3b423d7dd5ac81d9da7cbdc9dc	Project Bootstrappers
+71daa221ae838a9136845185b9fb15a160042e40	External Testing Tools
+93f27461ddfd11b9fd18da4c34e6a63b025419c1	openstack-release
+d33d35479a6f444f8c38fc06f80b5a0c0e6f599a	openstack-stable-maint
+global:Anonymous-Users                  	Anonymous Users
+global:Project-Owners                   	Project Owners
+global:Registered-Users                 	Registered Users

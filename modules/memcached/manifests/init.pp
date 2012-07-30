@@ -9,7 +9,7 @@ class memcached($memcached_size = '2000', $memcached_port = '11000', $memcached_
   }
   file {
     "/etc/memcached.conf":
-      content => template("memcached/memcached.conf"),
+      content => template("memcached/memcached.conf.erb"),
       owner => root,
       group => root,
       mode => 444,
