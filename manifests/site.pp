@@ -124,5 +124,5 @@ node /^.*\.slave\.openstack\.org$/ {
 }
 
 node /^.*\.jclouds\.openstack\.org$/ {
-  include openstack_project::jclouds_slave
+  include openstack_project::bare_slave
 } 
