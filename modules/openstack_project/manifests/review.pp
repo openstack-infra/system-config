@@ -58,7 +58,8 @@ class openstack_project::review(
     password => $gerritbot_password,
     server => 'irc.freenode.net',
     user => 'gerritbot',
-    virtual_hostname => $fqdn
+    virtual_hostname => $fqdn,
+    repo_dir => '/home/gerrit2/repos'
   }
   class { 'gerrit::remotes':
     upstream_projects => [ {
