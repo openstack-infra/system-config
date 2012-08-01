@@ -795,6 +795,9 @@ High level goals:
 #. Full code review of stable branches should be available to the
    -core group of the project as well as the openstack-stable-maint
    group.
+#. Drivers (PTL and delegates) of client library projects should be
+   able to add tags (which are automatically used to trigger
+   releases).
 
 To manage API project permissions collectively across projects, API
 projects are reparented to the "API-Projects" meta-project instead of
@@ -855,6 +858,8 @@ These permissions try to achieve the high level goals::
   project foo:
     refs/*
       owner: Administrators
+      create reference: foo-drivers  [client library only]
+      push annotated tag: foo-drivers  [client library only]
 
     refs/heads/*
       label code review -2/+2: foo-core
@@ -984,6 +989,14 @@ And make entries in `groups` for each one of them. Next, edit
       [access "refs/heads/milestone-proposed"]
               label-Code-Review = -2..+2 group $PROJECT-drivers
               label-Approved = +0..+1 group $PROJECT-drivers
+
+If the project is for a client library, the `refs/*` section of
+`project.config` should look like::
+
+      [access "refs/*"]
+              owner = group Administrators
+              create = group $PROJECT-drivers
+              pushTag = group $PROJECT-drivers
 
 Replace $PROJECT with the name of the project.
 
