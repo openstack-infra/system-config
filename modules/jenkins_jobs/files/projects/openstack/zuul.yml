@@ -1,3 +1,13 @@
+project:
+  template: 'python_jobs'
+
+values:
+  name: 'zuul'
+  disabled: 'false'
+  github_org: 'openstack-ci'
+  review_site: 'review.openstack.org'
+  node: 'precise'
+
 ---
 # pyflakes-gate
 main:
@@ -19,50 +29,3 @@ scm:
 
 assignednode:
   node: 'precise'
-
----
-# pep8-gate
-main:
-  name: 'gate-zuul-pep8'
-  review_site: 'review.openstack.org'
-  github_org: 'openstack-ci'
-  project: 'zuul'
-  concurrent: 'true'
-
-triggers:
-  - zuul
-
-builders:
-  - gerrit_git_prep
-  - pep8
-
-post_build_actions:
-  - pep8
-
-scm:
-  scm: 'false'
-
-assignednode:
-  node: 'precise'
-
----
-# merge-gate
-main:
-  name: 'gate-zuul-merge'
-  review_site: 'review.openstack.org'
-  github_org: 'openstack-ci'
-  project: 'zuul'
-  concurrent: 'true'
-
-triggers:
-  - zuul
-
-builders:
-  - gerrit_git_prep
-
-scm:
-  scm: 'false'
-
-assignednode:
-  node: 'precise'
-
