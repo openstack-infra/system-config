@@ -1,4 +1,4 @@
-class openstack_project::base {
+class openstack_project::base($install_users=true) {
   include openstack_project::users
   include sudoers
 
@@ -20,14 +20,16 @@ class openstack_project::base {
                "emacs23-nox"]
   package { $packages: ensure => "present" }
 
-  realize (
-    User::Virtual::Localuser["mordred"],
-    User::Virtual::Localuser["corvus"],
-    User::Virtual::Localuser["soren"],
-    User::Virtual::Localuser["linuxjedi"],
-    User::Virtual::Localuser["devananda"],
-    User::Virtual::Localuser["clarkb"],
-  )
+  if ($install_useres) {
+      realize (
+        User::Virtual::Localuser["mordred"],
+        User::Virtual::Localuser["corvus"],
+        User::Virtual::Localuser["soren"],
+        User::Virtual::Localuser["linuxjedi"],
+        User::Virtual::Localuser["devananda"],
+        User::Virtual::Localuser["clarkb"],
+      )
+  }
 
   # Download and set up puppet apt repo
   exec { "download:puppetlabs-release-${lsbdistcodename}.deb":
