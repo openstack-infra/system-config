@@ -721,8 +721,8 @@ serve the anonymous http requests out directly.
 
 On the gerrit host::
 
-  sudo git --bare init --shared=group /var/lib/git/openstack/PROJECT
-  sudo chgrp -R gerrit2 /var/lib/git/openstack/PROJECT
+  sudo git --bare init --shared=group /var/lib/git/openstack/PROJECT.git
+  sudo chgrp -R gerrit2 /var/lib/git/openstack/PROJECT.git
 
 
 Migrating a Project from bzr
