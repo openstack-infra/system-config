@@ -59,12 +59,23 @@ projects:
   - name: openstack-ci/zuul
     check:
       - gate-zuul-merge:
+        - gate-zuul-docs
         - gate-zuul-pep8
         - gate-zuul-pyflakes
+        - gate-zuul-python26
+        - gate-zuul-python27
     gate:
       - gate-zuul-merge:
+        - gate-zuul-docs
         - gate-zuul-pep8
         - gate-zuul-pyflakes
+        - gate-zuul-python26
+        - gate-zuul-python27
+    post:
+      - zuul-coverage
+      - zuul-docs
+    publish:
+      - zuul-docs
 
   - name: openstack-ci/pypi-mirror
     check:
