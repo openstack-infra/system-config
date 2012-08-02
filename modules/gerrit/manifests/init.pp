@@ -46,6 +46,8 @@
 #     A boolean enabling replication to github
 #   replicate_local:
 #     A boolean enabling local replication for apache acceleration
+#   gitweb:
+#     A boolean enabling gitweb
 #   testmode:
 #     Set this to true to disable cron jobs and replication,
 #     which can interfere with testing.
@@ -80,6 +82,7 @@ class gerrit($virtual_hostname=$fqdn,
       $replicate_local=true,
       $local_git_dir='/var/lib/git',
       $replication_targets=[],
+      $gitweb=true,
       $testmode=false
       ) {
 
@@ -106,8 +109,13 @@ class gerrit($virtual_hostname=$fqdn,
     ensure => present
   }
 
-  $packages = ["gitweb",
-	       "openjdk-6-jre-headless"]
+  if ($gitweb) {
+      package { "gitweb":
+          ensure => present
+      }
+  }
+
+  $packages = ["openjdk-6-jre-headless"]
 
   package { $packages:
     ensure => present,
