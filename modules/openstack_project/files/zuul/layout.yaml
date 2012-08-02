@@ -53,6 +53,8 @@ jobs:
     hold-following-changes: true
   - name: gate-tempest-devstack-vm
     parameter-function: devstack_params
+  - name: ^.*-python27$
+    parameter-function: python27_params
 
 
 projects:
