@@ -1,7 +1,9 @@
 # bare-bones slaves spun up by jclouds. Specifically need to not set ssh
 # login limits, because it screws up jclouds provisioning
-class openstack_project::jclouds_slave {
-  include openstack_project::base
+class openstack_project::bare_slave($install_users=true) {
+  class { 'openstack_project::base':
+    install_users => $install_users
+  }
 
   class { 'jenkins_slave':
     ssh_key => "",
