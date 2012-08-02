@@ -1,14 +1,18 @@
 # This file is managed by puppet.
 # https://github.com/openstack/openstack-ci-puppet
 
+<% if replicate_github -%>
 [remote "github"]
 url = git@github.com:${name}.git
 authGroup = Anonymous Users
 replicatePermissions = false
 mirror = true
+<% end -%>
 
+<% if replicate_local -%>
 [remote "local"]
 url = file:///var/lib/git/${name}.git
 replicationDelay = 0
 threads = 4
 mirror = true
+<% end -%>
