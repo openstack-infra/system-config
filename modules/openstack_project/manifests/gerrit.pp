@@ -31,6 +31,9 @@ class openstack_project::gerrit (
       $email_private_key,
       $testmode=false,
 ) {
+  class { 'openstack_project::server':
+    iptables_public_tcp_ports => [80, 443, 29418]
+  }
 
   class { '::gerrit':
     virtual_hostname => $virtual_hostname,
