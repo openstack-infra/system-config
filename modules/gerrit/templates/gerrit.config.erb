@@ -78,5 +78,7 @@
 [melody]
 	monitoring = <%= enable_melody %>
 	session = <%= melody_session %>
+<% if gitweb -%>
 [gitweb]
 	revision = "?p=${project}.git;a=commitdiff;h=${commit}"
+<% end -%>
