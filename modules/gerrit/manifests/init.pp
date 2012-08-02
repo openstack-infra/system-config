@@ -162,8 +162,6 @@ class gerrit($virtual_hostname=$fqdn,
 
   # Skip replication if we're in test mode
   if ($testmode == false) {
-# TODO: The local repos need
-# to be managed in here when we get project creation handled
     file { '/home/gerrit2/review_site/etc/replication.config':
       owner => 'root',
       group => 'root',
@@ -176,6 +174,13 @@ class gerrit($virtual_hostname=$fqdn,
   }
 
   if ($projects_file != 'UNDEF') {
+
+      if ($replicate_local) {
+        file { $local_git_dir:
+          ensure => "directory",
+          owner => "gerrit2",
+        }
+      }
 
       file { '/home/gerrit2/projects.yaml':
         owner => 'gerrit2',
@@ -297,7 +302,22 @@ class gerrit($virtual_hostname=$fqdn,
     mode => 644,
   }
 
+
   # If gerrit.war was just installed, run the Gerrit "init" command.
+  exec { "gerrit-initial-init":
+    user => 'gerrit2',
+    command => "/usr/bin/java -jar /home/gerrit2/review_site/bin/gerrit.war init -d /home/gerrit2/review_site --batch --no-auto-start",
+    subscribe => File["/home/gerrit2/review_site/bin/gerrit.war"],
+    require => [Package["openjdk-6-jre-headless"],
+                User["gerrit2"],
+                Mysql::Db["reviewdb"],
+                File["/home/gerrit2/review_site/etc/gerrit.config"],
+                File["/home/gerrit2/review_site/etc/secure.config"]],
+    notify => Exec["gerrit-start"],
+    unless => "/usr/bin/test -f /etc/init.d/gerrit",
+  }
+
+  # If a new gerrit.war was just installed, run the Gerrit "init" command.
   # Stop is included here because it may not be running or the init
   # script may not exist, and in those cases, we don't care if it fails.
   # Running the init script as the gerrit2 user _does_ work.
@@ -312,13 +332,14 @@ class gerrit($virtual_hostname=$fqdn,
                 File["/home/gerrit2/review_site/etc/gerrit.config"],
                 File["/home/gerrit2/review_site/etc/secure.config"]],
     notify => Exec["gerrit-start"],
+    onlyif => "/usr/bin/test -f /etc/init.d/gerrit",
   }
 
   # Symlink the init script.
   file { "/etc/init.d/gerrit":
     ensure => link,
     target => '/home/gerrit2/review_site/bin/gerrit.sh',
-    require => Exec['gerrit-init'],
+    require => Exec['gerrit-initial-init'],
   }
 
   # The init script requires the path to gerrit to be set.
