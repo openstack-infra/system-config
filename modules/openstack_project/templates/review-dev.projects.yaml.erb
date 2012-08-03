@@ -1,5 +1,6 @@
 - homepage: http://openstack.org
   local-git-dir: <%= local_git_dir %>
+  gerrit-host: <%= fqdn %>
   gerrit-user: openstack-dev-project-creator
   gerrit-key: <%= ssh_project_key %>
   github-config: /etc/github/github-projects.secure.config
@@ -7,4 +8,4 @@
   has-issues: False
   has-downloads: False
 ---
-- project: gtest-org/test
+- project: gtest-org/gtest
