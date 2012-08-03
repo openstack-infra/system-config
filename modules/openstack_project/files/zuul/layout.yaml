@@ -125,6 +125,12 @@ projects:
     gate:
       - gate-gerrit-verification-status-plugin-merge
 
+  - name: openstack-ci/jenkins-job-builder
+    check:
+      - gate-jenkins-job-builder-merge
+    gate:
+      - gate-jenkins-job-builder-merge
+
   - name: openstack/openstack-ci-puppet
     check:
       - gate-ci-puppet-merge:
