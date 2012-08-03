@@ -229,6 +229,17 @@ class openstack_project::gerrit (
       require => Class['::gerrit'],
     }
 
+    file { '/home/gerrit2/acls':
+      ensure  => directory,
+      owner   => 'gerrit2',
+      group   => 'gerrit2',
+      mode    => '0555',
+      recurse => true,
+      replace => true,
+      source  => 'puppet:///modules/openstack_project/gerrit/acls',
+      require => Class['::gerrit']
+    }
+
     exec { 'manage_projects':
       command     => "/usr/local/gerrit/scripts/manage_projects.py",
       subscribe   => File['/home/gerrit2/projects.yaml'],
