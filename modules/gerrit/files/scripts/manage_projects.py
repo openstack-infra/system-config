@@ -58,6 +58,53 @@ def run_command_status(cmd, env={}):
     return run_command(cmd, True, env)
 
 
+def git_command(repo_dir, sub_cmd, env={}):
+    git_dir = os.path.join(repo_dir, '.git')
+    cmd = "git --git-dir=%s --work-tree=%s %s" % (git_dir, repo_dir, sub_cmd)
+    status, _ = run_command(cmd, True, env)
+    return status
+
+
+def update_repo(project, repo_path):
+    status = git_command(repo_path, "fetch origin +refs/meta/config:"
+                            "refs/remotes/gerrit-meta/config")
+    if status != 0:
+        print "Failed to fetch refs/meta/config for project: %s" % project
+        return False
+    status = git_command(repo_path, "checkout -b config "
+                            "remotes/gerrit-meta/config")
+    if status != 0:
+        print "Failed to checkout config for project: %s" % project
+        return False
+
+    return True
+
+
+def copy_acl_config(project, repo_path, acl_config):
+    if not os.path.exists(acl_config):
+        return False
+
+    status, _ = run_command("cp %s %s" %
+                            (acl_config, repo_path), status=True)
+    if status == 0:
+       status = git_command(repo_path, "diff-index --quiet HEAD --")
+       if status != 0:
+           return True
+    return False
+
+
+def push_acl_config(project, repo_path):
+    status = git_command(repo_path, "commit -a -m'Update project config.'")
+    if status != 0:
+        print "Failed to commit config for project: %s" % project
+        return False
+    status = git_command(repo_path, "push origin HEAD:refs/meta/config")
+    if status != 0:
+        print "Failed to push config for project: %s" % project
+        return False
+    return True
+
+
 logging.basicConfig(level=logging.ERROR)
 
 REPO_ROOT = sys.argv[1]
@@ -127,6 +174,7 @@ for section in config:
         run_command("git --bare init %s" % project_dir)
         run_command("chown -R gerrit2:gerrit2 %s" % project_dir)
 
+    remote_url = "ssh://localhost:29418/%s" % project
     if project not in project_list:
         tmpdir = tempfile.mkdtemp()
         try:
@@ -138,11 +186,28 @@ for section in config:
                 run_command("git init %s" % repo_path)
             os.chdir(repo_path)
             gerrit.createProject(project)
-            remote_url = "ssh://localhost:29418/%s" % project
             ssh_env = dict(GIT_SSH='ssh -i %s -o "StrictHostKeyChecking no"' %
                            GERRIT_KEY)
             run_command("git push %s HEAD:refs/heads/master" % remote_url,
                         env=ssh_env)
             run_command("git push --tags %s" % remote_url, env=ssh_env)
+        finally:
+            os.removedirs(tmpdir)
+
+    if acl_config in section:
+        tmpdir = tempfile.mkdtemp()
+        try:
+            # Do we need to cache these repos instead of dealing with tmp dirs?
+            # Cloning may be slow depending on the project.
+            repo_path = os.path.join(tmpdir, 'repo')
+            ret, out = run_command_status("git clone {remote_url} "
+                "{repo_path}".format(remote_url=remote_url,
+                                     repo_path=repo_path))
+            if ret != 0:
+                continue
+            if (update_repo(project, repo_path) and
+                #TODO: Copy group file?
+                copy_acl_config(project, repo_path, section['acl_config'])):
+                push_acl_config(project, repo_path)
         finally:
             os.removedirs(tmpdir)
