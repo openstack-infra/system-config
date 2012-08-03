@@ -41,6 +41,7 @@
 import ConfigParser
 import logging
 import os
+import re
 import shlex
 import subprocess
 import tempfile
@@ -64,6 +65,83 @@ def run_command(cmd, status=False, env={}):
 
 def run_command_status(cmd, env={}):
     return run_command(cmd, True, env)
+
+
+def git_command(repo_dir, sub_cmd, env={}):
+    git_dir = os.path.join(repo_dir, '.git')
+    cmd = "git --git-dir=%s --work-tree=%s %s" % (git_dir, repo_dir, sub_cmd)
+    status, _ = run_command(cmd, True, env)
+    return status
+
+
+def fetch_config(project, remote_url, repo_path):
+    status = git_command(repo_path, "fetch %s +refs/meta/config:"
+                         "refs/remotes/gerrit-meta/config" % remote_url)
+    if status != 0:
+        print "Failed to fetch refs/meta/config for project: %s" % project
+        return False
+    # Because the following fails if executed more than once you should only
+    # run fetch_config once in each repo.
+    status = git_command(repo_path, "checkout -b config "
+                            "remotes/gerrit-meta/config")
+    if status != 0:
+        print "Failed to checkout config for project: %s" % project
+        return False
+
+    return True
+
+
+def copy_acl_config(project, repo_path, acl_config):
+    if not os.path.exists(acl_config):
+        return False
+
+    acl_dest = os.path.join(repo_path, "project.config")
+    status, _ = run_command("cp %s %s" %
+                            (acl_config, acl_dest), status=True)
+    if status == 0:
+       status = git_command(repo_path, "diff-index --quiet HEAD --")
+       if status != 0:
+           return True
+    return False
+
+
+def push_acl_config(project, remote_url, repo_path):
+    status = git_command(repo_path, "commit -a -m'Update project config.'")
+    if status != 0:
+        print "Failed to commit config for project: %s" % project
+        return False
+    status = git_command(repo_path, "push %s HEAD:refs/meta/config" %
+                                                            remote_url)
+    if status != 0:
+        print "Failed to push config for project: %s" % project
+        return False
+    return True
+
+
+def create_groups_file(project, gerrit, repo_path):
+    acl_config = os.path.join(repo_path, "project.config")
+    group_file = os.path.join(repo_path, "groups")
+    uuids = {}
+    for line in open(acl_config, 'r'):
+        r = re.match(r'^\t.*group\s(.*)$', line)
+        if r:
+            group = r.group(1)
+            query = "select group_uuid from " \
+                    "account_groups where name = '%s'" % group
+            data = gerrit.dbQuery(query)
+            if data:
+                for row in data:
+                    if row["type"] == "row":
+                        uuids[group] = row["columns"]["group_uuid"]
+                        break
+            else:
+                return False
+    if uuids:
+        fp = open(group_file, 'w')
+        for group, uuid in uuids.items():
+            fp.write("%s\t%s\n"% (uuid, group))
+        fp.close()
+    return True
 
 
 logging.basicConfig(level=logging.ERROR)
@@ -138,6 +216,7 @@ for section in configs[1]:
         run_command("git --bare init %s" % project_dir)
         run_command("chown -R gerrit2:gerrit2 %s" % project_dir)
 
+    remote_url = "ssh://localhost:29418/%s" % project
     if project not in project_list:
         tmpdir = tempfile.mkdtemp()
         try:
@@ -149,11 +228,24 @@ for section in configs[1]:
                 run_command("git init %s" % repo_path)
             os.chdir(repo_path)
             gerrit.createProject(project)
-            remote_url = "ssh://localhost:29418/%s" % project
             ssh_env = dict(GIT_SSH='ssh -i %s -o "StrictHostKeyChecking no"' %
                            GERRIT_KEY)
             run_command("git push %s HEAD:refs/heads/master" % remote_url,
                         env=ssh_env)
             run_command("git push --tags %s" % remote_url, env=ssh_env)
+        finally:
+            os.removedirs(tmpdir)
+
+    if 'acl_config' in section:
+        tmpdir = tempfile.mkdtemp()
+        try:
+            repo_path = os.path.join(tmpdir, 'repo')
+            ret, _  = run_command_status("git init %s" % repo_path)
+            if ret != 0:
+                continue
+            if (fetch_config(project, remote_url, repo_path) and
+                copy_acl_config(project, repo_path, section['acl_config']) and
+                create_groups_file(project, gerrit, repo_path)):
+                push_acl_config(project, remote_url, repo_path)
         finally:
             os.removedirs(tmpdir)
