@@ -1,0 +1,22 @@
+---
+# merge-gate
+main:
+  name: 'gate-jenkins-job-builder-merge'
+  review_site: 'review.openstack.org'
+  github_org: 'openstack-ci'
+  project: 'jenkins-job-builder'
+  concurrent: 'true'
+  timeout: 20
+  timeout_fail: true
+
+triggers:
+  - zuul
+
+builders:
+  - gerrit_git_prep
+
+scm:
+  scm: 'false'
+
+assignednode:
+  node: 'precise'

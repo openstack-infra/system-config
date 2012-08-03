@@ -20,6 +20,9 @@
 - project: openstack-ci/git-review
   options:
   - close-pull
+- project: openstack-ci/jenkins-job-builder
+  options:
+  - close-pull
 - project: openstack-ci/lodgeit
   options:
   - close-pull
