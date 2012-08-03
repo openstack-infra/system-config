@@ -227,6 +227,17 @@ class openstack_project::gerrit (
       replace => true,
     }
 
+    file { '/home/gerrit2/ACLs':
+      ensure  => directory,
+      owner   => 'gerrit2',
+      group   => 'gerrit2',
+      mode    => '0555',
+      source  => 'puppet:///modules/openstack_project/gerrit/ACLs'
+      recurse => true,
+      replace => true,
+      require => Class['::gerrit']
+    }
+
     exec { 'manage_projects':
       user        => 'gerrit2',
       command     => "/usr/local/gerrit/scripts/manage_projects.py \
