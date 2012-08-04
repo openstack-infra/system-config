@@ -14,13 +14,15 @@ class openstack_project::base($install_users=true) {
                "git",
                "python-setuptools",
                "python-virtualenv",
-               "python-software-properties",
-               "bzr",
-               "byobu",
-               "emacs23-nox"]
+               "python-software-properties"]
   package { $packages: ensure => "present" }
 
   if ($install_users) {
+
+      package { ["byobu", "emacs23-nox"]:
+          ensure => "present"
+      }
+
       realize (
         User::Virtual::Localuser["mordred"],
         User::Virtual::Localuser["corvus"],
