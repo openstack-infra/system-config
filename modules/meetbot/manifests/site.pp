@@ -1,17 +1,11 @@
-define meetbot::site($nick, $nickpass, $network, $server, $url=$fqdn, $channels, $use_ssl) {
+define meetbot::site($nick, $nickpass, $network, $server, $vhost_name=$fqdn, $channels, $use_ssl) {
 
-  file { "/etc/nginx/sites-available/${name}-meetbot":
-    ensure => 'present',
-    content => template("meetbot/nginx.erb"),
-    replace => 'true',
-    require => Package[nginx],
-    notify => Service[nginx]
-  }
+  include remove_nginx
 
-  file { "/etc/nginx/sites-enabled/${name}-meetbot":
-    ensure => link,
-    target => "/etc/nginx/sites-available/${name}-meetbot",
-    require => Package[nginx]
+  apache::vhost { $vhost_name:
+    port => 80,
+    docroot => "/srv/meetbot-$name",
+    priority => '50',
   }
 
   file { "/var/lib/meetbot/${name}":

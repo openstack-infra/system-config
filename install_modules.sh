@@ -22,7 +22,7 @@ if ! puppet help module >/dev/null 2>&1 ; then
     apt-get install -y -o Dpkg::Options::="--force-confold" puppet facter
 fi
 
-MODULES="puppetlabs-apt puppetlabs-mysql puppetlabs-dashboard"
+MODULES="puppetlabs-apt puppetlabs-apache puppetlabs-mysql puppetlabs-dashboard"
 MODULE_LIST=`puppet module list`
 
 for MOD in $MODULES ; do

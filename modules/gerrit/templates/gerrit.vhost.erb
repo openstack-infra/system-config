@@ -1,17 +1,20 @@
-<VirtualHost *:80>
+<VirtualHost <%= scope.lookupvar("gerrit::vhost_name") %>:80>
+  ServerAdmin <%= scope.lookupvar("gerrit::serveradmin") %>
+
   ErrorLog ${APACHE_LOG_DIR}/gerrit-error.log
 
   LogLevel warn
 
   CustomLog ${APACHE_LOG_DIR}/gerrit-access.log combined
 
-  Redirect / <%= scope.lookupvar("gerrit::canonicalweburl") %>
+  Redirect / https://<%= scope.lookupvar("gerrit::vhost_name") %>/
 
 </VirtualHost>
 
 <IfModule mod_ssl.c>
-<VirtualHost _default_:443>
-  ServerName <%= scope.lookupvar("gerrit::virtual_hostname") %>
+<VirtualHost <%= scope.lookupvar("gerrit::vhost_name") %>:443>
+  ServerName <%= scope.lookupvar("gerrit::vhost_name") %>
+  ServerAdmin <%= scope.lookupvar("gerrit::serveradmin") %>
 
   ErrorLog ${APACHE_LOG_DIR}/gerrit-ssl-error.log
 
@@ -41,7 +44,7 @@
   BrowserMatch "MSIE [17-9]" ssl-unclean-shutdown
 
   RewriteEngine on
-  RewriteCond %{HTTP_HOST} !<%= scope.lookupvar("gerrit::virtual_hostname") %>
+  RewriteCond %{HTTP_HOST} !<%= scope.lookupvar("gerrit::vhost_name") %>
   RewriteRule ^.*$ <%= scope.lookupvar("gerrit::canonicalweburl") %>
 <% if scope.lookupvar("gerrit::replicate_local") -%>
   RewriteCond %{REQUEST_URI} !^/p/
