@@ -1,6 +1,6 @@
 find . -iname '*.pp' | xargs puppet parser validate --modulepath=`pwd`/modules
 for f in `find . -iname *.erb` ; do
-    erb -x -T '-' $f | ruby -c
+    erb -x -T '-' $f | ruby -c >/dev/null || echo "Error in $f"
 done
 
 if [ ! -d applytest ] ; then

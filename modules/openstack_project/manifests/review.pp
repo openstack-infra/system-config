@@ -58,7 +58,7 @@ class openstack_project::review(
     password => $gerritbot_password,
     server => 'irc.freenode.net',
     user => 'gerritbot',
-    virtual_hostname => $fqdn
+    vhost_name => $fqdn
   }
   include gerrit::remotes
 }

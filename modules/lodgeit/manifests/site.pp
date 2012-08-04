@@ -1,17 +1,11 @@
-define lodgeit::site($port, $image="") {
+define lodgeit::site($vhost_name="paste.$name.org", $port, $image="") {
 
-  file { "/etc/nginx/sites-available/${name}":
-    ensure => 'present',
-    content => template("lodgeit/nginx.erb"),
-    replace => 'true',
-    require => Package[nginx],
-    notify => Service[nginx]
-  }
+  include remove_nginx
 
-  file { "/etc/nginx/sites-enabled/${name}":
-    ensure => link,
-    target => "/etc/nginx/sites-available/${name}",
-    require => Package[nginx]
+  apache::vhost::proxy { $vhost_name:
+    port => 80,
+    dest => "http://localhost:$port",
+    require => File["/srv/lodgeit/${name}"],
   }
 
   file { "/etc/init/${name}-paste.conf":

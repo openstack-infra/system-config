@@ -1,6 +1,5 @@
 class lodgeit {
-  $packages = [ "nginx",
-                "python-imaging",
+  $packages = [ "python-imaging",
                 "python-jinja2",
                 "python-pybabel",
                 "python-werkzeug",
@@ -9,7 +8,16 @@ class lodgeit {
                 "drizzle",
                 "python-mysqldb" ]
 
+  include apache
+  require apache::dev
+
   include pip
+  a2mod { 'proxy':
+    ensure => present
+  }
+  a2mod { 'proxy_http':
+    ensure => present
+  }
 
   package { $packages: ensure => present }
 

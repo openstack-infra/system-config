@@ -7,7 +7,7 @@ class openstack_project::etherpad(
   }
 
   include etherpad_lite
-  class { 'etherpad_lite::nginx':
+  class { 'etherpad_lite::apache':
     etherpad_crt => $etherpad_crt,
     etherpad_key => $etherpad_key,
   }
