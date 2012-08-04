@@ -1,49 +1,3 @@
-# define to manage a git repo (should replace with vcsrepo module)
-define git_repo (
-  $repo,
-  $dest,
-  $user   = 'root',
-  $branch = 'master',
-  $clone_only = undef
-) {
-
-  if $clone_only == 'true' {
-    $checkout_condition = "false"
-  }
-  else {
-    $checkout_condition = "test -d ${dest}"
-  }
-
-# if we already have the git repo the pull updates
-  exec { "update_${title}":
-    command => "git pull --ff-only origin ${branch}",
-    cwd     => $dest,
-    path    => '/bin:/usr/bin',
-    user    => $user,
-    onlyif  => $checkout_condition,
-    before  => Exec["clone_${title}"],
-  }
-
-# otherwise get a new clone of it
-  exec { "clone_${title}":
-    command => "git clone ${repo} ${dest}",
-    path    => '/bin:/usr/bin',
-    user    => $user,
-    onlyif  => "test ! -d ${dest}",
-  } ->
-
-  exec { "checkout_${title}_${branch}":
-    command => "git checkout ${branch}",
-    path    => '/bin:/usr/bin',
-    cwd     => $dest,
-    user    => $user,
-    subscribe => Exec["clone_${title}"],
-    refreshonly => true,
-    onlyif  => "test -d ${dest}"
-  }
-
-}
-
 # define to build from source using ./configure && make && make install.
 define buildsource(
   $dir     = $title,
@@ -114,11 +68,11 @@ class etherpad_lite (
     mode   => 0664,
   }
 
-  git_repo { 'nodejs_repo':
-    repo       => 'https://github.com/joyent/node.git',
-    dest       => "${base_install_dir}/nodejs",
-    branch     => 'v0.6.16-release',
-    clone_only => 'true',
+  vcsrepo { "${base_install_dir}/nodejs":
+    ensure => present,
+    provider => git,
+    source => 'https://github.com/joyent/node.git',
+    revision => 'origin/v0.6.16-release',
     require    => Package['git']
   }
 
@@ -144,15 +98,15 @@ class etherpad_lite (
                 Package['libssl-dev'],
                 Package['pkg-config'],
                 Package['build-essential'],
-                Git_repo['nodejs_repo']]
+                Vcsrepo["${base_install_dir}/nodejs"]]
   }
 
-  git_repo { 'etherpad_repo':
-    repo       => 'https://github.com/Pita/etherpad-lite.git',
-    dest       => "${base_install_dir}/etherpad-lite",
-    user       => $ep_user,
-    clone_only => 'true',
-    require    => Package['git']
+  vcsrepo { "${base_install_dir}/etherpad-lite":
+    ensure => present,
+    provider => git,
+    source => "https://github.com/Pita/etherpad-lite.git",
+    owner => $ep_user,
+    require    => Package['git'],
   }
 
   exec { 'install_etherpad_dependencies':
@@ -161,7 +115,7 @@ class etherpad_lite (
     user        => $ep_user,
     cwd         => "${base_install_dir}/etherpad-lite",
     environment => "HOME=${base_log_dir}/${ep_user}",
-    require     => [Git_repo['etherpad_repo'],
+    require     => [Vcsrepo["${base_install_dir}/etherpad-lite"],
                     Buildsource["${base_install_dir}/nodejs"]],
     before      => File["${base_install_dir}/etherpad-lite/settings.json"],
     creates     => "${base_install_dir}/etherpad-lite/node_modules"
