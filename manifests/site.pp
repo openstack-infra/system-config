@@ -122,7 +122,7 @@ node /^precise.*\.slave\.openstack\.org$/ {
     limit_item   => 'nproc',
     limit_value  => '256'
   }
-  include jenkins_slave::cgroups
+  include jenkins::cgroups
 }
 
 node /^.*\.slave\.openstack\.org$/ {
