@@ -4,7 +4,7 @@ class openstack_project::jenkins($jenkins_jobs_password) {
     iptables_public_tcp_ports => [80, 443, 4155]
   }
 
-  class { 'jenkins_master':
+  class { '::jenkins::master':
     vhost_name => 'jenkins.openstack.org',
     serveradmin => 'webmaster@openstack.org',
     logo => 'openstack.png',
@@ -13,7 +13,7 @@ class openstack_project::jenkins($jenkins_jobs_password) {
     ssl_chain_file => '/etc/ssl/certs/intermediate.pem',
   }
 
-  class { "jenkins_job_builder":
+  class { "::jenkins::job_builder":
     url => "https://jenkins.openstack.org/",
     username => "gerrig",
     password => $jenkins_jobs_password,
