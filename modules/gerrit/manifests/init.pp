@@ -1,6 +1,6 @@
 # Install and maintain Gerrit Code Review.
 # params:
-#   virtual_hostname:
+#   vhost_name:
 #     used in the Apache virtual host, eg., review.example.com
 #   canonicalweburl:
 #     Used in the Gerrit config to generate links, eg., https://review.example.com/
@@ -53,8 +53,9 @@
 #     which can interfere with testing.
 # TODO: make more gerrit options configurable here
 
-class gerrit($virtual_hostname=$fqdn,
+class gerrit($vhost_name=$fqdn,
       $canonicalweburl="https://$fqdn/",
+      $serveradmin="webmaster@$fqdn",
       $ssl_cert_file='/etc/ssl/certs/ssl-cert-snakeoil.pem',
       $ssl_key_file='/etc/ssl/private/ssl-cert-snakeoil.key',
       $ssl_chain_file='',
@@ -87,7 +88,6 @@ class gerrit($virtual_hostname=$fqdn,
       ) {
 
   include apache
-  require apache::dev
 
   $java_home = $lsbdistcodename ? {
       "precise" => "/usr/lib/jvm/java-6-openjdk-amd64/jre",
@@ -248,7 +248,7 @@ class gerrit($virtual_hostname=$fqdn,
 
 # Set up apache.
 
-  apache::vhost { $virtual_hostname:
+  apache::vhost { $vhost_name:
     port => 443,
     docroot => 'MEANINGLESS ARGUMENT',
     priority => '50',

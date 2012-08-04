@@ -4,7 +4,7 @@ class openstack_project::review_dev(
   $mysql_root_password,
   $email_private_key) {
   class { 'openstack_project::gerrit':
-    virtual_hostname => 'review-dev.openstack.org',
+    vhost_name => 'review-dev.openstack.org',
     canonicalweburl => "https://review-dev.openstack.org/",
     ssl_cert_file => '/etc/ssl/certs/ssl-cert-snakeoil.pem',
     ssl_key_file => '/etc/ssl/private/ssl-cert-snakeoil.key',

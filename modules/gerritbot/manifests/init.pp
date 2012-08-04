@@ -3,7 +3,7 @@ class gerritbot(
       $password,
       $server,
       $user,
-      $virtual_hostname
+      $vhost_name
       ) {
 
     file { "/usr/local/gerrit/gerritbot":

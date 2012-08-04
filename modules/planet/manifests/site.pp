@@ -1,17 +1,13 @@
-define planet::site($git_url) {
+define planet::site($git_url, $vhost_name="planet.${name}.org") {
 
-  file { "/etc/nginx/sites-available/planet-${name}":
-    ensure => present,
-    content => template("planet/nginx.erb"),
-    replace => true,
-    require => Package[nginx],
-    notify => Service[nginx]
-  }
+  include apache
+  include remove_nginx
 
-  file { "/etc/nginx/sites-enabled/planet-${name}":
-    ensure => link,
-    target => "/etc/nginx/sites-available/planet-${name}",
-    require => Package[nginx],
+  apache::vhost { $vhost_name:
+    port => 80,
+    priority => '50',
+    docroot => "/srv/planet/${name}",
+    require => File["/srv/planet"],
   }
 
   vcsrepo { "/var/lib/planet/${name}":
