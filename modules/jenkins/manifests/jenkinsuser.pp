@@ -1,4 +1,4 @@
-define jenkinsuser($ensure = present, $sudo = false, $ssh_key) {
+define jenkins::jenkinsuser($ensure = present, $sudo = false, $ssh_key) {
 
   group { 'jenkins':
     ensure => 'present'
@@ -44,7 +44,7 @@ define jenkinsuser($ensure = present, $sudo = false, $ssh_key) {
     group => 'jenkins',
     mode => 640,
     ensure => 'present',
-    source => "puppet:///modules/jenkins_slave/pip.conf",
+    source => "puppet:///modules/jenkins/pip.conf",
     require => File['jenkinspipdir'],
   }
 
@@ -60,7 +60,7 @@ define jenkinsuser($ensure = present, $sudo = false, $ssh_key) {
     group => 'jenkins',
     mode => 640,
     ensure => 'present',
-    source => "puppet:///modules/jenkins_slave/gitconfig",
+    source => "puppet:///modules/jenkins/gitconfig",
     require => File['jenkinshome'],
   }
    
@@ -113,39 +113,6 @@ define jenkinsuser($ensure = present, $sudo = false, $ssh_key) {
     ensure => 'present',
   }
 
-  file { 'jenkinsbazaardir':
-    name => '/home/jenkins/.bazaar',
-    owner => 'jenkins',
-    group => 'jenkins',
-    mode => 755,
-    ensure => 'directory',
-    require => File['jenkinshome'],
-  }
-
-  file { 'jenkinsbazaarwhoami':
-    name => '/home/jenkins/.bazaar/bazaar.conf',
-    owner => 'jenkins',
-    group => 'jenkins',
-    mode => 640,
-    ensure => 'present',
-    require => File['jenkinsbazaardir'],
-    source => [
-                "puppet:///modules/jenkins_slave/bazaar.conf",
-              ],
-  }
-
-  file { 'jenkinsbazaarauth':
-    name => '/home/jenkins/.bazaar/authentication.conf',
-    owner => 'jenkins',
-    group => 'jenkins',
-    mode => 640,
-    ensure => 'present',
-    require => File['jenkinsbazaardir'],
-    source => [
-                "puppet:///modules/jenkins_slave/authentication.conf",
-              ],
-  }
-
   file { 'jenkinssshconfig':
     name => '/home/jenkins/.ssh/config',
     owner => 'jenkins',
@@ -154,7 +121,7 @@ define jenkinsuser($ensure = present, $sudo = false, $ssh_key) {
     ensure => 'present',
     require => File['jenkinssshdir'],
     source => [
-                "puppet:///modules/jenkins_slave/ssh_config",
+                "puppet:///modules/jenkins/ssh_config",
               ],
   }
 
@@ -166,7 +133,7 @@ define jenkinsuser($ensure = present, $sudo = false, $ssh_key) {
     ensure => 'present',
     require => File['jenkinssshdir'],
     source => [
-                "puppet:///modules/jenkins_slave/slave_private_key",
+                "puppet:///modules/jenkins/slave_private_key",
               ],
   }
 
@@ -187,7 +154,7 @@ define jenkinsuser($ensure = present, $sudo = false, $ssh_key) {
     ensure => 'present',
     require => File['jenkinsgpgdir'],
     source => [
-                "puppet:///modules/jenkins_slave/pubring.gpg",
+                "puppet:///modules/jenkins/pubring.gpg",
               ],
   }
 
@@ -199,7 +166,7 @@ define jenkinsuser($ensure = present, $sudo = false, $ssh_key) {
     ensure => 'present',
     require => File['jenkinsgpgdir'],
     source => [
-                "puppet:///modules/jenkins_slave/slave_gpg_key",
+                "puppet:///modules/jenkins/slave_gpg_key",
               ],
   }
 
@@ -229,7 +196,7 @@ define jenkinsuser($ensure = present, $sudo = false, $ssh_key) {
     ensure => 'present',
     require => File['jenkinsglanceconfigdir'],
     source => [
-                "puppet:///modules/jenkins_slave/glance_s3.conf",
+                "puppet:///modules/jenkins/glance_s3.conf",
               ],
   }
 
@@ -241,7 +208,7 @@ define jenkinsuser($ensure = present, $sudo = false, $ssh_key) {
     ensure => 'present',
     require => File['jenkinsglanceconfigdir'],
     source => [
-                "puppet:///modules/jenkins_slave/glance_swift.conf",
+                "puppet:///modules/jenkins/glance_swift.conf",
               ],
   }
 

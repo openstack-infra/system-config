@@ -1,9 +1,9 @@
-class jenkins_slave($ssh_key, $sudo = false, $bare = false, $user = true) {
+class jenkins::slave($ssh_key, $sudo = false, $bare = false, $user = true) {
 
     include pip
 
     if ($user == true) {
-      jenkinsuser { "jenkins":
+      jenkins::jenkinsuser { "jenkins":
         ensure => present,
         sudo => $sudo,
         ssh_key => "${ssh_key}"
@@ -73,7 +73,7 @@ class jenkins_slave($ssh_key, $sudo = false, $bare = false, $user = true) {
       mode => 644,
       ensure => 'present',
       source => [
-         "puppet:///modules/jenkins_slave/rubygems.sh",
+         "puppet:///modules/jenkins/rubygems.sh",
        ],
     }
 
@@ -143,7 +143,7 @@ class jenkins_slave($ssh_key, $sudo = false, $bare = false, $user = true) {
       recurse => true,
       require => File['/usr/local/jenkins'],
       source => [
-                  "puppet:///modules/jenkins_slave/slave_scripts",
+                  "puppet:///modules/jenkins/slave_scripts",
                 ],
     }
 
@@ -151,7 +151,7 @@ class jenkins_slave($ssh_key, $sudo = false, $bare = false, $user = true) {
     # https://lists.launchpad.net/openstack/msg13381.html
     file { '/etc/sysctl.d/10-ptrace.conf':
       ensure => present,
-      source => "puppet:///modules/jenkins_slave/10-ptrace.conf",
+      source => "puppet:///modules/jenkins/10-ptrace.conf",
       owner => 'root',
       group => 'root',
       mode => 444,
