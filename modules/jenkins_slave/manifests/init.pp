@@ -22,7 +22,6 @@ class jenkins_slave($ssh_key, $sudo = false, $bare = false, $user = true) {
 
     # Packages that most jenkins slaves (eg, unit test runners) need
     $standard_packages = [
-    		 "apache2",
                  "asciidoc", # for building gerrit/building openstack docs
                  "cdbs",
                  "curl",

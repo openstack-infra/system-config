@@ -4,10 +4,6 @@ class planet {
     ensure => present
   }
 
-  package { 'nginx':
-    ensure => present
-  }
-
   file { '/srv/planet':
     ensure => directory
   }
@@ -18,11 +14,6 @@ class planet {
 
   file { '/var/log/planet':
     ensure => directory
-  }
-
-  service { "nginx":
-    ensure => running,
-    hasrestart => true
   }
 
 }
