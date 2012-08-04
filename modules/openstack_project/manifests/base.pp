@@ -10,17 +10,30 @@ class openstack_project::base($install_users=true) {
     ensure => purged
   }
 
+  if ( $lsbdistcodename == "oneiric" ) {
+    include apt
+    apt::ppa { 'ppa:git-core/ppa': }
+    package { "git":
+      ensure => latest,
+      require => Apt::Ppa['ppa:git-core/ppa']
+    }
+  } else {
+    package { "git":
+      ensure => present,
+    }
+  }
+
   $packages = ["puppet",
-               "git",
                "python-setuptools",
-               "python-virtualenv",
-               "python-software-properties",
-               "bzr",
-               "byobu",
-               "emacs23-nox"]
+               "python-virtualenv"]
   package { $packages: ensure => "present" }
 
   if ($install_users) {
+
+      package { ["byobu", "emacs23-nox"]:
+          ensure => "present"
+      }
+
       realize (
         User::Virtual::Localuser["mordred"],
         User::Virtual::Localuser["corvus"],
