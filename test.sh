@@ -9,4 +9,7 @@ fi
 
 csplit -sf applytest/puppetapplytest manifests/site.pp '/^$/' {*}
 sed -i -e 's/^[^[:space:]]/#&/g' applytest/puppetapplytest*
-find applytest -name 'puppetapplytest*' -print -exec cat {} \; -exec puppet apply --modulepath=./modules:/etc/puppet/modules -v --noop --debug {} \; >/dev/null
+for f in `find applytest -name 'puppetapplytest*' -print` ; do
+    echo testing $f
+    puppet apply --modulepath=./modules:/etc/puppet/modules -v --noop --debug $f >/dev/null
+done
