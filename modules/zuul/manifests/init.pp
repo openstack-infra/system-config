@@ -46,7 +46,6 @@ class zuul (
 #       at some point, but that still has some problems.
   file { "/etc/zuul/zuul.conf":
     owner => 'jenkins',
-    group => 'jenkins',
     mode => 400,
     ensure => 'present',
     content => template('zuul/zuul.conf.erb'),
