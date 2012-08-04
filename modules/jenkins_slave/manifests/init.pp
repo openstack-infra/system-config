@@ -14,64 +14,31 @@ class jenkins_slave($ssh_key, $sudo = false, $bare = false, $user = true) {
     $common_packages = [
 	         "default-jdk", # jdk for building java jobs
                  "build-essential",
-                 "autoconf",
-                 "automake",
                  "ccache",
-                 "devscripts",
       		 ]
 
     # Packages that most jenkins slaves (eg, unit test runners) need
     $standard_packages = [
-    		 "apache2",
                  "asciidoc", # for building gerrit/building openstack docs
-                 "cdbs",
                  "curl",
-                 "debootstrap",
-                 "dnsmasq-base",
                  "docbook-xml", # for building openstack docs
                  "docbook5-xml", # for building openstack docs
                  "docbook-xsl", # for building openstack docs
-                 "ebtables",
                  "firefox", # for selenium tests
-                 "gawk",
-                 "graphviz",
-                 "iptables",
-                 "kpartx",
-                 "kvm",
                  "libapache2-mod-wsgi",
                  "libcurl4-gnutls-dev",
                  "libldap2-dev",
                  "libmysqlclient-dev",
-                 "libsasl2-dev",
                  "libsqlite3-dev",
-                 "libtool",
-                 "libvirt-bin",
                  "libxml2-dev",
                  "libxslt1-dev",
-                 "lxc",
                  "maven2",
-		 "mercurial", # needed by pip bundle
-		 "mysql-server",
-		 "pandoc", #for docs, markdown->docbook, bug 924507
-                 "parted",
-                 "pep8",
-                 "psmisc",
-                 "pylint",
-                 "python-cheetah",
+                 "pandoc", #for docs, markdown->docbook, bug 924507
                  "python-libvirt",
-                 "python-libxml2",
-                 "python-sphinx",
-                 "python-unittest2",
-                 "python-vm-builder",
                  "python-zmq", # zeromq unittests (not pip installable)
                  "python3-all-dev",
-                 "screen",
-                 "sgml-data",
-                 "socat",
                  "sqlite3",
-                 "swig",
                  "unzip",
-                 "vlan",
                  "wget",
                  "xsltproc", # for building openstack docs
                  "xvfb", # for selenium tests
