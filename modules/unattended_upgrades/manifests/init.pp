@@ -1,18 +1,18 @@
-class apt::unattended-upgrades($email='') {
+class unattended_upgrades($ensure = present) {
   package { 'unattended-upgrades':
-    ensure => present;
+    ensure => $ensure;
   }
 
   package { 'mailutils':
-    ensure => present;
+    ensure => $ensure;
   }
 
   file { '/etc/apt/apt.conf.d/10periodic':
     owner => 'root',
     group => 'root',
     mode => 444,
-    ensure => 'present',
-    source => "puppet:///modules/apt/10periodic",
+    ensure => $ensure,
+    source => "puppet:///modules/unattended_upgrades/10periodic",
     replace => 'true',
   }
 
@@ -20,8 +20,8 @@ class apt::unattended-upgrades($email='') {
     owner => 'root',
     group => 'root',
     mode => 444,
-    ensure => 'present',
-    source => "puppet:///modules/apt/50unattended-upgrades",
+    ensure => $ensure,
+    source => "puppet:///modules/unattended_upgrades/50unattended-upgrades",
     replace => 'true',
   }
   

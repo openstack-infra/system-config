@@ -4,7 +4,7 @@ class openstack_project::template ($iptables_public_tcp_ports) {
   include ntp
   include ssh
   include snmpd
-  include apt::unattended-upgrades
+  include unattended_upgrades
   
   class { 'iptables':
     public_tcp_ports => $iptables_public_tcp_ports,
