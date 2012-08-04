@@ -1,0 +1,46 @@
+<VirtualHost <%= scope.lookupvar("::jenkins::master::vhost_name") %>:80>
+             ServerAdmin <%= scope.lookupvar("::jenkins::master::serveradmin") %>
+
+             ErrorLog ${APACHE_LOG_DIR}/<%= scope.lookupvar("::jenkins::master::vhost_name") %>-error.log
+
+             LogLevel warn
+
+             CustomLog ${APACHE_LOG_DIR}/<%= scope.lookupvar("::jenkins::master::vhost_name") %>-access.log combined
+
+             Redirect / https://<%= scope.lookupvar("::jenkins::master::vhost_name") %>/
+
+</VirtualHost>
+
+<VirtualHost <%= scope.lookupvar("::jenkins::master::vhost_name") %>:443>
+             ServerName <%= scope.lookupvar("::jenkins::master::vhost_name") %>
+             ServerAdmin <%= scope.lookupvar("::jenkins::master::serveradmin") %>
+
+             ErrorLog ${APACHE_LOG_DIR}/<%= scope.lookupvar("::jenkins::master::vhost_name") %>-ssl-error.log
+
+             LogLevel warn
+
+             CustomLog ${APACHE_LOG_DIR}/<%= scope.lookupvar("::jenkins::master::vhost_name") %>-ssl-access.log combined
+
+             SSLEngine on
+
+             SSLCertificateFile      <%= scope.lookupvar("::jenkins::master::ssl_cert_file") %>
+             SSLCertificateKeyFile   <%= scope.lookupvar("::jenkins::master::ssl_key_file") %>
+             <% if scope.lookupvar("::jenkins::master::ssl_chain_file") != "" %>
+               SSLCertificateChainFile <%= scope.lookupvar("::jenkins::master::ssl_chain_file") %>
+             <% end %>
+
+             BrowserMatch "MSIE [2-6]" \
+                     nokeepalive ssl-unclean-shutdown \
+                     downgrade-1.0 force-response-1.0
+             # MSIE 7 and newer should be able to use keepalive
+             BrowserMatch "MSIE [17-9]" ssl-unclean-shutdown
+
+             RewriteEngine on
+             RewriteCond %{HTTP_HOST} !<%= scope.lookupvar("::jenkins::master::vhost_name") %>
+             RewriteRule ^.*$ https://<%= scope.lookupvar("::jenkins::master::vhost_name") %>/
+
+             RewriteRule /zuul/status http://127.0.0.1:8001/status [P]
+
+             ProxyPass / http://127.0.0.1:8080/ retry=0
+             ProxyPassReverse / http://127.0.0.1:8080/
+</VirtualHost>
