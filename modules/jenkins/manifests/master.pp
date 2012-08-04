@@ -139,7 +139,7 @@ class jenkins::master($vhost_name=$fqdn,
     recurse => true,
     require => File['/usr/local/jenkins'],
     source => [
-                "puppet:///modules/jenkins_slave/slave_scripts",
+                "puppet:///modules/jenkins/slave_scripts",
               ],
   }
 }
