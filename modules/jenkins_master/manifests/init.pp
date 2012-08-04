@@ -5,21 +5,21 @@ class jenkins_master($site, $serveradmin, $logo,
   ) {
 
   include pip
+  include apt
 
   #This key is at http://pkg.jenkins-ci.org/debian/jenkins-ci.org.key
-  apt::key { "D50582E6":
-    keyid  => "D50582E6",
-    ensure => present,
+  apt::key { "jenkins":
+    key        => "D50582E6",
+    key_source => "http://pkg.jenkins-ci.org/debian/jenkins-ci.org.key",
+    require    => Package["wget"]
   }
 
-  file { '/etc/apt/sources.list.d/jenkins.list':
-    owner => 'root',
-    group => 'root',
-    mode => 444,
-    ensure => 'present',
-    content => "deb http://pkg.jenkins-ci.org/debian binary/",
-    replace => 'true',
-    require => Apt::Key['D50582E6'],
+  apt::source { 'jenkins':
+    location => "http://pkg.jenkins-ci.org/debian",
+    release => "binary/",
+    repos => "",
+    require => Apt::Key['jenkins'],
+    notify => Class['Apt::Update']
   }
 
   file { '/etc/apache2/sites-available/jenkins':
@@ -88,14 +88,18 @@ class jenkins_master($site, $serveradmin, $logo,
   }
 
   $packages = [
-    "jenkins",
     "python-babel",
-    "apache2"
+    "apache2",
+    "wget",
   ]
 
   package { $packages:
     ensure => "present",
-    require => [File['/etc/apt/sources.list.d/jenkins.list'], Exec["update apt cache"]],
+  }
+
+  package { "jenkins":
+    ensure => "present",
+    require => Apt::Source['jenkins'],
   }
 
   service { "versions":

@@ -1,7 +1,7 @@
 class openstack_project::slave {
   include openstack_project
   include tmpreaper
-  include apt::unattended-upgrades
+  include unattended_upgrades
   class { 'openstack_project::server':
     iptables_public_tcp_ports => []
   }
