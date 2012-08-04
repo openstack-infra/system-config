@@ -1,37 +1,32 @@
-<VirtualHost _default_:80>
-             ServerAdmin <%= serveradmin %>
+<VirtualHost <%= scope.lookupvar("jenkins::vhost_name") %>:80>
+             ServerAdmin <%= scope.lookupvar("jenkins::serveradmin") %>
 
              ErrorLog ${APACHE_LOG_DIR}/jenkins-error.log
 
-             # Possible values include: debug, info, notice, warn, error, crit,
-             # alert, emerg.
              LogLevel warn
 
              CustomLog ${APACHE_LOG_DIR}/jenkins-access.log combined
 
-             Redirect / https://<%= site %>/
+             Redirect / https://<%= scope.lookupvar("jenkins::vhost_name") %>/
 
 </VirtualHost>
 
-<VirtualHost _default_:443>
-             ServerAdmin <%= serveradmin %>
+<VirtualHost <%= scope.lookupvar("jenkins::vhost_name") %>:443>
+             ServerName <%= scope.lookupvar("jenkins::vhost_name") %>
+             ServerAdmin <%= scope.lookupvar("jenkins::serveradmin") %>
 
              ErrorLog ${APACHE_LOG_DIR}/jenkins-ssl-error.log
 
-             # Possible values include: debug, info, notice, warn, error, crit,
-             # alert, emerg.
              LogLevel warn
 
              CustomLog ${APACHE_LOG_DIR}/jenkins-ssl-access.log combined
 
-             #   SSL Engine Switch:
-             #   Enable/Disable SSL for this virtual host.
              SSLEngine on
 
-             SSLCertificateFile      <%= ssl_cert_file %>
-             SSLCertificateKeyFile   <%= ssl_key_file %>
-             <% if ssl_chain_file != "" %>
-               SSLCertificateChainFile <%= ssl_chain_file %>
+             SSLCertificateFile      <%= scope.lookupvar("jenkins::ssl_cert_file") %>
+             SSLCertificateKeyFile   <%= scope.lookupvar("jenkins::ssl_key_file") %>
+             <% if scope.lookupvar("jenkins::ssl_chain_file") != "" %>
+               SSLCertificateChainFile <%= scope.lookupvar("jenkins::ssl_chain_file") %>
              <% end %>
 
              BrowserMatch "MSIE [2-6]" \
@@ -41,8 +36,8 @@
              BrowserMatch "MSIE [17-9]" ssl-unclean-shutdown
 
              RewriteEngine on
-             RewriteCond %{HTTP_HOST} !<%= site %>
-             RewriteRule ^.*$ https://<%= site %>/
+             RewriteCond %{HTTP_HOST} !<%= scope.lookupvar("jenkins::vhost_name") %>
+             RewriteRule ^.*$ https://<%= scope.lookupvar("jenkins::vhost_name") %>/
 
              RewriteRule /zuul/status http://127.0.0.1:8001/status [P]
 

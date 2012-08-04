@@ -1,13 +1,13 @@
 <VirtualHost *:80>
-	ServerName <%= mailman_host %>
+	ServerName <%= scope.lookupvar("mailman::vhost_name") %>
 
-	ErrorLog ${APACHE_LOG_DIR}/mailman-error.log
+	ErrorLog ${APACHE_LOG_DIR}/<%= scope.lookupvar("mailman::vhost_name") %>-error.log
 
 	# Possible values include: debug, info, notice, warn, error, crit,
 	# alert, emerg.
 	LogLevel warn
 
-	CustomLog ${APACHE_LOG_DIR}/mailman-access.log combined
+	CustomLog ${APACHE_LOG_DIR}/<%= scope.lookupvar("mailman::vhost_name") %>-access.log combined
 
 	DocumentRoot /var/www
 
