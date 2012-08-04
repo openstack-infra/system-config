@@ -14,12 +14,11 @@ define planet::site($git_url) {
     require => Package[nginx],
   }
 
-# otherwise get a new clone of it
-
-  exec { "create_${name}_planet":
-    command => "git clone ${git_url} /var/lib/planet/${name}",
-    path => "/bin:/usr/bin",
-    onlyif => "test ! -d /var/lib/planet/${name}"
+  vcsrepo { "/var/lib/planet/${name}":
+    ensure => present,
+    provider => git,
+    source => $git_url,
+    require => File['/var/lib/planet'],
   }
 
   cron { "update_planet_${name}":

@@ -88,7 +88,8 @@ define meetbot::site($nick, $nickpass, $network, $server, $url=$fqdn, $channels,
     recurse => true,
     source => "/opt/meetbot/ircmeeting",
     owner => 'meetbot',
-    require => File["/var/lib/meetbot/${name}"]
+    require => [Vcsrepo["/opt/meetbot"],
+                File["/var/lib/meetbot/${name}"]]
   }
 
   file { "/var/lib/meetbot/${name}/ircmeeting/meetingLocalConfig.py":
@@ -114,7 +115,9 @@ define meetbot::site($nick, $nickpass, $network, $server, $url=$fqdn, $channels,
   service { "${name}-meetbot":
     provider => upstart,
     ensure => running,
-    require => File["/etc/init/${name}-meetbot.conf"],
-    subscribe => [File["/usr/share/pyshared/supybot/plugins/MeetBot"], File["/var/lib/meetbot/${name}/ircmeeting"]]
+    require => [Vcsrepo["/opt/meetbot"],
+                File["/etc/init/${name}-meetbot.conf"]],
+    subscribe => [File["/usr/share/pyshared/supybot/plugins/MeetBot"],
+                  File["/var/lib/meetbot/${name}/ircmeeting"]]
   }
 }

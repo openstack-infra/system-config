@@ -1,26 +1,9 @@
-class vcs {
-# if we already have the git repo the pull updates
-
-  exec { "update_meetbot_repo":
-    command => "git pull --ff-only",
-    cwd => "/opt/meetbot",
-    path => "/bin:/usr/bin",
-    onlyif => "test -d /opt/meetbot"
-  }
-
-# otherwise get a new clone of it
-
-  exec { "clone_meebot_repo":
-    command => "git clone https://github.com/openstack-ci/meetbot.git /opt/meetbot",
-    path => "/bin:/usr/bin",
-    onlyif => "test ! -d /opt/meetbot"
-  }
-}
-
 class meetbot {
-  stage { 'first': before => Stage['main'] }
-  class { 'vcs':
-    stage => 'first'
+
+  vcsrepo { "/opt/meetbot":
+    ensure => latest,
+    provider => git,
+    source => "https://github.com/openstack-ci/meetbot.git",
   }
 
   user { "meetbot":
@@ -41,7 +24,7 @@ class meetbot {
 
   service { "nginx":
     ensure => running,
-    hasrestart => true
+    hasrestart => true,
   }
 
   file { "/var/lib/meetbot":
@@ -54,7 +37,8 @@ class meetbot {
     ensure => directory,
     recurse => true,
     source => "/opt/meetbot/MeetBot",
-    require => Package["supybot"]
+    require => [Package["supybot"],
+                Vcsrepo["/opt/meetbot"]]
   }
 
   file { "/etc/nginx/sites-enabled/default":

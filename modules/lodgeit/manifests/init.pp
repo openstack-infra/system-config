@@ -6,7 +6,6 @@ class lodgeit {
                 "python-werkzeug",
                 "python-simplejson",
                 "python-pygments",
-                "mercurial",
                 "drizzle",
                 "python-mysqldb" ]
 
@@ -34,21 +33,10 @@ class lodgeit {
     hasrestart => true
   }
 
-# if we already have the git repo the pull updates
-
-  exec { "update_lodgeit":
-    command => "git pull --ff-only",
-    cwd => "/tmp/lodgeit-main",
-    path => "/bin:/usr/bin",
-    onlyif => "test -d /tmp/lodgeit-main"
-  }
-
-# otherwise get a new clone of it
-
-  exec { "get_lodgeit":
-    command => "git clone git://github.com/openstack-ci/lodgeit.git /tmp/lodgeit-main",
-    path => "/bin:/usr/bin",
-    onlyif => "test ! -d /tmp/lodgeit-main"
+  vcsrepo { "/tmp/lodgeit-main":
+    ensure => latest,
+    provider => git,
+    source => "https://github.com/openstack-ci/lodgeit.git",
   }
 
 # create initial git DB backup location
