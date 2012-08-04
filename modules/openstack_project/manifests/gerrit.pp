@@ -4,8 +4,9 @@
 # TODO: launchpadlib creds for user sync script
 
 class openstack_project::gerrit (
-      $virtual_hostname=$fqdn,
+      $vhost_name=$fqdn,
       $canonicalweburl="https://$fqdn/",
+      $serveradmin='webmaster@openstack.org',
       $ssl_cert_file='',
       $ssl_key_file='',
       $ssl_chain_file='',
@@ -36,7 +37,7 @@ class openstack_project::gerrit (
   }
 
   class { '::gerrit':
-    virtual_hostname => $virtual_hostname,
+    vhost_name => $vhost_name,
     canonicalweburl => $canonicalweburl,
     # opinions
     enable_melody => 'true',

@@ -1,4 +1,6 @@
-class jenkins_master($site, $serveradmin, $logo,
+class jenkins_master($vhost_name=$fqdn,
+      $serveradmin="webmaster@$fqdn",
+      $logo,
       $ssl_cert_file='',
       $ssl_key_file='',
       $ssl_chain_file=''
@@ -6,6 +8,7 @@ class jenkins_master($site, $serveradmin, $logo,
 
   include pip
   include apt
+  include apache
 
   #This key is at http://pkg.jenkins-ci.org/debian/jenkins-ci.org.key
   apt::key { "jenkins":
@@ -22,74 +25,25 @@ class jenkins_master($site, $serveradmin, $logo,
     include_src => false,
   }
 
-  file { '/etc/apache2/sites-available/jenkins':
-    owner => 'root',
-    group => 'root',
-    mode => 444,
-    ensure => 'present',
-    content => template("jenkins_master/jenkins.vhost.erb"),
-    replace => 'true',
-    require => Package['apache2'],
+  apache::vhost { $vhost_name:
+    port => 443,
+    docroot => 'MEANINGLESS ARGUMENT',
+    priority => '50',
+    template => 'jenkins_master/jenkins.vhost.erb',
+    ssl => true,
   }
-
-  file { '/etc/apache2/sites-enabled/jenkins':
-    target => '/etc/apache2/sites-available/jenkins',
-    ensure => link,
-    require => [
-      File['/etc/apache2/sites-available/jenkins'],
-      File['/etc/apache2/mods-enabled/ssl.conf'],
-      File['/etc/apache2/mods-enabled/ssl.load'],
-      File['/etc/apache2/mods-enabled/rewrite.load'],
-      File['/etc/apache2/mods-enabled/proxy.conf'],
-      File['/etc/apache2/mods-enabled/proxy.load'],
-      File['/etc/apache2/mods-enabled/proxy_http.load'],
-    ],
+  a2mod { 'rewrite':
+    ensure => present
   }
-
-  file { '/etc/apache2/sites-enabled/000-default':
-    require => File['/etc/apache2/sites-available/jenkins'],
-    ensure => absent,
+  a2mod { 'proxy':
+    ensure => present
   }
-
-  file { '/etc/apache2/mods-enabled/ssl.conf':
-    target => '/etc/apache2/mods-available/ssl.conf',
-    ensure => link,
-    require => Package['apache2'],
-  }
-
-  file { '/etc/apache2/mods-enabled/ssl.load':
-    target => '/etc/apache2/mods-available/ssl.load',
-    ensure => link,
-    require => Package['apache2'],
-  }
-
-  file { '/etc/apache2/mods-enabled/rewrite.load':
-    target => '/etc/apache2/mods-available/rewrite.load',
-    ensure => link,
-    require => Package['apache2'],
-  }
-
-  file { '/etc/apache2/mods-enabled/proxy.conf':
-    target => '/etc/apache2/mods-available/proxy.conf',
-    ensure => link,
-    require => Package['apache2'],
-  }
-
-  file { '/etc/apache2/mods-enabled/proxy.load':
-    target => '/etc/apache2/mods-available/proxy.load',
-    ensure => link,
-    require => Package['apache2'],
-  }
-
-  file { '/etc/apache2/mods-enabled/proxy_http.load':
-    target => '/etc/apache2/mods-available/proxy_http.load',
-    ensure => link,
-    require => Package['apache2'],
+  a2mod { 'proxy_http':
+    ensure => present
   }
 
   $packages = [
     "python-babel",
-    "apache2",
     "wget",
   ]
 
@@ -140,13 +94,6 @@ class jenkins_master($site, $serveradmin, $logo,
     refreshonly => true,
     path => "/bin:/usr/bin",
     command => "apt-get update",
-  }
-
-  exec { "gracefully restart apache":
-    subscribe => [ File["/etc/apache2/sites-available/jenkins"]],
-    refreshonly => true,
-    path => "/bin:/usr/bin:/usr/sbin",
-    command => "apache2ctl graceful",
   }
 
   file { "/var/lib/jenkins/plugins/simple-theme-plugin":

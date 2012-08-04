@@ -1,4 +1,4 @@
-class pypimirror ( $base_url,
+class pypimirror ( $vhost_name = $fqdn,
                    $log_filename = "/var/log/pypimirror.log",
                    $mirror_file_path = "/var/lib/pypimirror",
                    $pip_download = "/var/lib/pip-download",
@@ -7,14 +7,12 @@ class pypimirror ( $base_url,
                    $projects = [] )
 {
 
+  include apache
   include pip
+  include remove_nginx
 
   package { 'python-yaml':
     ensure => 'present'
-  }
-
-  package { 'nginx':
-    ensure => present,
   }
 
   package { 'pip':
@@ -112,20 +110,9 @@ class pypimirror ( $base_url,
     require => Cron["update_mirror"],
   }
 
-  # Setup the web server
-
-  service { "nginx":
-    ensure => running,
-    hasrestart => true
-  }
-
-  file { "/etc/nginx/sites-available/default":
-    ensure => present,
-    content => template('pypimirror/nginx_default.erb'),
-    replace => true,
-    owner => "root",
-    group => "root",
-    require => Package["nginx"],
-    notify => Service["nginx"],
+  apache::vhost { $vhost_name:
+    port => 80,
+    docroot => $mirror_file_path,
+    priority => 50,
   }
 }
