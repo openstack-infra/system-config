@@ -125,18 +125,6 @@ class jenkins::jenkinsuser($ensure = present, $sudo = false, $ssh_key) {
               ],
   }
 
-  file { 'jenkinssshkey':
-    name => '/home/jenkins/.ssh/id_rsa',
-    owner => 'jenkins',
-    group => 'jenkins',
-    mode => 600,
-    ensure => 'present',
-    require => File['jenkinssshdir'],
-    source => [
-                "puppet:///modules/jenkins/slave_private_key",
-              ],
-  }
-
   file { 'jenkinsgpgdir':
     name => '/home/jenkins/.gnupg',
     owner => 'jenkins',
@@ -158,18 +146,6 @@ class jenkins::jenkinsuser($ensure = present, $sudo = false, $ssh_key) {
               ],
   }
 
-  file { 'jenkinssecring':
-    name => '/home/jenkins/.gnupg/secring.gpg',
-    owner => 'jenkins',
-    group => 'jenkins',
-    mode => 600,
-    ensure => 'present',
-    require => File['jenkinsgpgdir'],
-    source => [
-                "puppet:///modules/jenkins/slave_gpg_key",
-              ],
-  }
-
   file { 'jenkinsconfigdir':
     name => '/home/jenkins/.config',
     owner => 'jenkins',
@@ -177,39 +153,6 @@ class jenkins::jenkinsuser($ensure = present, $sudo = false, $ssh_key) {
     mode => 755,
     ensure => 'directory',
     require => File['jenkinshome'],
-  }
-
-  file { 'jenkinsglanceconfigdir':
-    name => '/home/jenkins/.config/glance',
-    owner => 'jenkins',
-    group => 'jenkins',
-    mode => 700,
-    ensure => 'directory',
-    require => File['jenkinsconfigdir'],
-  }
-
-  file { 'glances3conf':
-    name => '/home/jenkins/.config/glance/s3.conf',
-    owner => 'jenkins',
-    group => 'jenkins',
-    mode => 400,
-    ensure => 'present',
-    require => File['jenkinsglanceconfigdir'],
-    source => [
-                "puppet:///modules/jenkins/glance_s3.conf",
-              ],
-  }
-
-  file { 'glanceswiftconf':
-    name => '/home/jenkins/.config/glance/swift.conf',
-    owner => 'jenkins',
-    group => 'jenkins',
-    mode => 400,
-    ensure => 'present',
-    require => File['jenkinsglanceconfigdir'],
-    source => [
-                "puppet:///modules/jenkins/glance_swift.conf",
-              ],
   }
 
 

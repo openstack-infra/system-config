@@ -1,0 +1,49 @@
+[DEFAULT]
+# Which backend store should Glance use by default is not specified
+# in a request to add a new image to Glance? Default: 'file'
+# Available choices are 'file', 'swift', and 's3'
+default_store = s3
+
+# ============ S3 Store Options =============================
+
+# Address where the S3 authentication service lives
+s3_store_host = <%= s3_store_host %>
+
+# User to authenticate against the S3 authentication service
+s3_store_access_key = <%= s3_store_access_key %>
+
+# Auth key for the user authenticating against the
+# S3 authentication service
+s3_store_secret_key = <%= s3_store_secret_key %>
+
+# Container within the account that the account should use
+# for storing images in S3. Note that S3 has a flat namespace,
+# so you need a unique bucket name for your glance images. An
+# easy way to do this is append your AWS access key to "glance".
+# S3 buckets in AWS *must* be lowercased, so remember to lowercase
+# your AWS access key if you use it in your bucket name below!
+s3_store_bucket = <%= s3_store_bucket %>
+
+# Do we create the bucket if it does not exist?
+s3_store_create_bucket_on_put = True
+
+[pipeline:glance-api]
+pipeline = versionnegotiation context apiv1app
+
+[pipeline:versions]
+pipeline = versionsapp
+
+[app:versionsapp]
+paste.app_factory = glance.api.versions:app_factory
+
+[app:apiv1app]
+paste.app_factory = glance.api.v1:app_factory
+
+[filter:versionnegotiation]
+paste.filter_factory = glance.api.middleware.version_negotiation:filter_factory
+
+[filter:imagecache]
+paste.filter_factory = glance.api.middleware.image_cache:filter_factory
+
+[filter:context]
+paste.filter_factory = glance.common.context:filter_factory

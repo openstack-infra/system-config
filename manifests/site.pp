@@ -120,7 +120,17 @@ node /^ci-backup-.*\.openstack\.org$/ {
 # Rollout cgroups to precise slaves.
 node /^precise.*\.slave\.openstack\.org$/ {
   include openstack_project::puppet_cron
-  include openstack_project::slave
+  class { 'openstack_project::slave':
+    certname => 'precise.slave.openstack.org',
+  }
+  class { 'openstack_project::glancetest':
+    s3_store_access_key => hiera('s3_store_access_key'),
+    s3_store_secret_key => hiera('s3_store_secret_key'),
+    s3_store_secret_key => hiera('s3_store_bucket'),
+    swift_store_user => hiera('swift_store_user'),
+    swift_store_key => hiera('swift_store_key'),
+    swift_store_container => hiera('swift_store_container'),
+  }
 
   include ulimit
   ulimit::conf { 'limit_jenkins_procs':
@@ -132,11 +142,23 @@ node /^precise.*\.slave\.openstack\.org$/ {
   include jenkins::cgroups
 }
 
-node /^.*\.slave\.openstack\.org$/ {
+node /^oneiric.*\.slave\.openstack\.org$/ {
   include openstack_project::puppet_cron
-  include openstack_project::slave
+  class { 'openstack_project::slave':
+    certname => 'oneiric.slave.openstack.org',
+  }
+  class { 'openstack_project::glancetest':
+    s3_store_access_key => hiera('s3_store_access_key'),
+    s3_store_secret_key => hiera('s3_store_secret_key'),
+    s3_store_secret_key => hiera('s3_store_bucket'),
+    swift_store_user => hiera('swift_store_user'),
+    swift_store_key => hiera('swift_store_key'),
+    swift_store_container => hiera('swift_store_container'),
+  }
 }
 
 node /^.*\.jclouds\.openstack\.org$/ {
-  include openstack_project::bare_slave
+  class { 'openstack_project::bare_slave':
+    certname => 'jclouds.openstack.org',
+  }
 } 
