@@ -1,4 +1,4 @@
-class openstack_project::base($install_users=true) {
+class openstack_project::base($install_users=true, $certname=$fqdn) {
   include openstack_project::users
   include sudoers
 
