@@ -36,6 +36,17 @@ USER=gerrit2
 # Depend on lsb-base (>= 3.0-6) to ensure that this file is present.
 . /lib/lsb/init-functions
 
+pidof_gerritbot() {
+	# if there is actually an gerritbot process whose pid is in PIDFILE,
+	# print it and return 0.
+	if [ -e "$PIDFILE" ]; then
+		if ps -ef | grep gerrit[b]ot | grep python | awk '{print $2}' | grep -w $(cat $PIDFILE); then
+			return 0
+		fi
+	fi
+	return 1
+}
+
 #
 # Function that starts the daemon/service
 #
@@ -106,8 +117,19 @@ case "$1" in
 	esac
 	;;
   status)
-       status_of_proc "$DAEMON" "$NAME" && exit 0 || exit $?
-       ;;
+        PID=$(pidof_gerritbot) || true
+        if [ -n "$PID" ]; then
+                log_daemon_msg "$DESC is running (pid $PID)."
+                exit 0
+        else
+                log_daemon_msg "$DESC is NOT running."
+                if [ -e "$PIDFILE" ]; then
+                        exit 1
+                else
+                        exit 3
+                fi
+        fi
+	;;
   #reload|force-reload)
 	#
 	# If do_reload() is not implemented then leave this commented out
