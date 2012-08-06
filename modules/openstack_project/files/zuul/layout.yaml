@@ -106,6 +106,10 @@ projects:
       - gate-gerritbot-merge:
         - gate-gerritbot-pep8
         - gate-gerritbot-pyflakes
+    post:
+      - python-glanceclient-tarball
+    publish:
+      - python-glanceclient-pypi
 
   - name: openstack-ci/gerritlib
     check:
