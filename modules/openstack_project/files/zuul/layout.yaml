@@ -464,6 +464,12 @@ projects:
       - python-swiftclient-pypi
       - python-swiftclient-docs
 
+  - name: openstack/requirements
+    check:
+      - gate-requirements-merge
+    gate:
+      - gate-requirements-merge
+
   - name: openstack-dev/devstack
     check:
       - gate-devstack-merge:
