@@ -2,7 +2,8 @@ class openstack_project::jenkins_dev {
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [80, 443, 4155]
   } 
-  class { 'backup':
+  include bup
+  bup::site { 'rs-ord':
     backup_user => 'bup-jenkins-dev',
     backup_server => 'ci-backup-rs-ord.openstack.org'
   }
