@@ -46,7 +46,7 @@ class openstack_project::review(
     war => 'http://tarballs.openstack.org/ci/gerrit-2.4.2-11-gb5a28fb.war',
     script_user => 'launchpadsync',
     script_key_file => '/home/gerrit2/.ssh/launchpadsync_rsa',
-    projects_file => 'puppet:///openstack_project/review.projects.yaml',
+    projects_file => 'puppet:///openstack_project/projects.yaml',
     github_username => 'openstack-gerrit',
     github_oauth_token => $github_oauth_token,
     mysql_password => $mysql_password,
