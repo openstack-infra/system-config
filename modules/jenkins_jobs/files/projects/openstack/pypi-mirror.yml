@@ -8,6 +8,8 @@ main:
   concurrent: 'true'
   timeout: 20
   timeout_fail: true
+  timestamps: true
+  ansicolor: true
 
 triggers:
   - zuul
@@ -32,6 +34,8 @@ main:
   concurrent: 'true'
   timeout: 20
   timeout_fail: true
+  timestamps: true
+  ansicolor: true
 
 triggers:
   - zuul

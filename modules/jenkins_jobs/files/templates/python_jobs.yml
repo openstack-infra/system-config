@@ -10,6 +10,8 @@ main:
   concurrent: 'true'
   timeout: 20
   timeout_fail: true
+  timestamps: true
+  ansicolor: true
 
 logrotate:
   daysToKeep: 28
@@ -45,6 +47,8 @@ main:
   concurrent: 'true'
   timeout: 20
   timeout_fail: true
+  timestamps: true
+  ansicolor: true
 
 logrotate:
   daysToKeep: 28
@@ -80,6 +84,8 @@ main:
   concurrent: 'true'
   timeout: 20
   timeout_fail: true
+  timestamps: true
+  ansicolor: true
 
 logrotate:
   daysToKeep: 28
@@ -117,6 +123,8 @@ main:
   concurrent: 'true'
   timeout: 20
   timeout_fail: true
+  timestamps: true
+  ansicolor: true
 
 logrotate:
   daysToKeep: 28
@@ -159,6 +167,8 @@ main:
   concurrent: 'true'
   timeout: 20
   timeout_fail: true
+  timestamps: true
+  ansicolor: true
 
 logrotate:
   daysToKeep: 28
@@ -190,6 +200,8 @@ main:
   concurrent: 'true'
   timeout: 20
   timeout_fail: true
+  timestamps: true
+  ansicolor: true
 
 logrotate:
   daysToKeep: 28

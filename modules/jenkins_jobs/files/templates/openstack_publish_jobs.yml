@@ -10,6 +10,8 @@ main:
   concurrent: 'true'
   timeout: 20
   timeout_fail: true
+  timestamps: true
+  ansicolor: true
 
 triggers:
   - zuul_post
@@ -50,6 +52,8 @@ main:
   concurrent: 'true'
   timeout: 20
   timeout_fail: true
+  timestamps: true
+  ansicolor: true
 
 logrotate:
   daysToKeep: 28
