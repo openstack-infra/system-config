@@ -7,6 +7,8 @@ main:
   authenticatedBuild: 'false'
   timeout: 20
   timeout_fail: true
+  timestamps: true
+  ansicolor: true
 
 triggers:
   - gerrit:
@@ -41,6 +43,8 @@ main:
   authenticatedBuild: 'false'
   timeout: 20
   timeout_fail: true
+  timestamps: true
+  ansicolor: true
 
 triggers:
   - gerrit:
