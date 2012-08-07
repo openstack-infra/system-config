@@ -13,7 +13,7 @@ class pypimirror ( $base_url,
   }
 
   package { 'pip':
-    ensure => latest,  # okay to use latest for pip
+    ensure => present,
     provider => 'pip',
     require => Class[pip]
   }
