@@ -1,9 +1,9 @@
 includes:
   - python-file: openstack_functions.py
 
-queues:
+pipelines:
   - name: check
-    manager: IndependentQueueManager
+    manager: IndependentPipelineManager
     trigger:
       - event: patchset-created
       - event: comment-added
@@ -14,7 +14,7 @@ queues:
       verified: -1
 
   - name: gate
-    manager: DependentQueueManager
+    manager: DependentPipelineManager
     trigger:
       - event: comment-added
         approval:
@@ -30,19 +30,19 @@ queues:
       verified: -2
 
   - name: post
-    manager: IndependentQueueManager
+    manager: IndependentPipelineManager
     trigger:
       - event: ref-updated
         ref: ^(?!refs/).*$
 
   - name: publish
-    manager: IndependentQueueManager
+    manager: IndependentPipelineManager
     trigger:
       - event: ref-updated
         ref: ^refs/tags/.*$
 
   - name: silent
-    manager: IndependentQueueManager
+    manager: IndependentPipelineManager
     trigger:
       - event: patchset-created
 
