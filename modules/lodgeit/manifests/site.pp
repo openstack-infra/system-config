@@ -50,6 +50,7 @@ define lodgeit::site($port, $image="") {
   exec { "create_database_${name}":
     command => "drizzle --user=root -e \"create database if not exists ${name};\"",
     path => "/bin:/usr/bin",
+    unless => "drizzle --disable-column-names -r --batch -e \"show databases like 'openstack'\" | grep openstack >/dev/null",
     require => Service["drizzle"]
   }
 
