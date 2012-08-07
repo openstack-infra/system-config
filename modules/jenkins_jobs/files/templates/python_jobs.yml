@@ -97,10 +97,6 @@ builders:
   - gerrit_git_prep
   - python26
 
-post_build_actions:
-  - junit:
-      results: '**/nosetests.xml'
-
 scm:
   scm: 'false'
 
@@ -140,10 +136,6 @@ triggers:
 builders:
   - gerrit_git_prep
   - python27
-
-post_build_actions:
-  - junit:
-      results: '**/nosetests.xml'
 
 scm:
   scm: 'false'

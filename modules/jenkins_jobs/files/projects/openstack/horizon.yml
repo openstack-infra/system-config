@@ -47,10 +47,6 @@ builders:
   - gerrit_git_prep
   - selenium
 
-post_build_actions:
-  - junit:
-      results: '**/nosetests.xml'
-
 scm:
   scm: 'false'
 
