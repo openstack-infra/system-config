@@ -16,6 +16,7 @@ class zuul (
   vcsrepo { "/opt/zuul":
     ensure => latest,
     provider => git,
+    revision => "master",
     source => "https://github.com/openstack-ci/zuul.git",
   }
 
