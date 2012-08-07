@@ -13,9 +13,13 @@ function clone_git() {
     if [ ! -d $MODULE_PATH/$REPO ] ; then
         git clone $REMOTE_URL $MODULE_PATH/$REPO
     fi
-    (cd $MODULE_PATH/$REPO &&
-      git fetch origin &&
-      git reset --hard $REV >/dev/null )
+    OLDDIR=`pwd`
+    cd $MODULE_PATH/$REPO
+    if ! git rev-parse HEAD | grep "^$REV" >/dev/null; then
+      git fetch origin
+      git reset --hard $REV >/dev/null
+    fi
+    cd $OLDDIR
 }
 
 if ! puppet help module >/dev/null 2>&1 ; then
