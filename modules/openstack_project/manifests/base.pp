@@ -20,7 +20,7 @@ class openstack_project::base($install_users=true) {
                "emacs23-nox"]
   package { $packages: ensure => "present" }
 
-  if ($install_useres) {
+  if ($install_users) {
       realize (
         User::Virtual::Localuser["mordred"],
         User::Virtual::Localuser["corvus"],
