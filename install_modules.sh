@@ -15,7 +15,7 @@ function clone_git() {
     fi
     (cd $MODULE_PATH/$REPO &&
       git fetch origin &&
-      git reset --hard $REV )
+      git reset --hard $REV >/dev/null )
 }
 
 if ! puppet help module >/dev/null 2>&1 ; then
