@@ -19,6 +19,7 @@ class jenkins_master($site, $serveradmin, $logo,
     release => "binary/",
     repos => "",
     require => Apt::Key['jenkins'],
+    include_src => false,
   }
 
   file { '/etc/apache2/sites-available/jenkins':
