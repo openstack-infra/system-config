@@ -24,10 +24,6 @@ triggers:
 builders:
   - python26
 
-post_build_actions:
-  - junit:
-      results: '**/nosetests.xml'
-
 scm:
   scm: 'true'
   branches: 
@@ -62,10 +58,6 @@ triggers:
 
 builders:
   - python27
-
-post_build_actions:
-  - junit:
-      results: '**/nosetests.xml'
 
 scm:
   scm: 'true'
