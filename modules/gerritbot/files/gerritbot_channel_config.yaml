@@ -5,11 +5,19 @@ openstack-infra:
       - x-vrif-minus-2
     projects:
       - openstack/openstack-ci-puppet
-      - openstack-ci/git-review
-      - openstack-ci/zuul
+      - openstack-ci/config
+      - openstack-ci/devstack-gate
       - openstack-ci/gerrit
       - openstack-ci/gerrit-trigger-plugin
       - openstack-ci/gerrit-verification-status-plugin
+      - openstack-ci/gerritbot
+      - openstack-ci/gerritlib
+      - openstack-ci/git-review
+      - openstack-ci/jenkins-job-builder
+      - openstack-ci/lodgeit
+      - openstack-ci/meetbot
+      - openstack-ci/pypi-mirror
+      - openstack-ci/zuul
     branches:
       - master
 
