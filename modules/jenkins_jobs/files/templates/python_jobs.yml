@@ -8,10 +8,9 @@ main:
   authenticatedBuild: 'false'
   disabled: @DISABLED@
   concurrent: 'true'
-  timeout: 20
+  timeout: 30
   timeout_fail: true
   timestamps: true
-  ansicolor: true
 
 logrotate:
   daysToKeep: 28
@@ -45,10 +44,9 @@ main:
   authenticatedBuild: 'false'
   disabled: @DISABLED@
   concurrent: 'true'
-  timeout: 20
+  timeout: 30
   timeout_fail: true
   timestamps: true
-  ansicolor: true
 
 logrotate:
   daysToKeep: 28
@@ -82,10 +80,9 @@ main:
   authenticatedBuild: 'false'
   disabled: @DISABLED@
   concurrent: 'true'
-  timeout: 20
+  timeout: 30
   timeout_fail: true
   timestamps: true
-  ansicolor: true
 
 logrotate:
   daysToKeep: 28
@@ -121,10 +118,9 @@ main:
   authenticatedBuild: 'false'
   disabled: @DISABLED@
   concurrent: 'true'
-  timeout: 20
+  timeout: 30
   timeout_fail: true
   timestamps: true
-  ansicolor: true
 
 logrotate:
   daysToKeep: 28
@@ -165,10 +161,9 @@ main:
   authenticatedBuild: 'false'
   disabled: @DISABLED@
   concurrent: 'true'
-  timeout: 20
+  timeout: 30
   timeout_fail: true
   timestamps: true
-  ansicolor: true
 
 logrotate:
   daysToKeep: 28
@@ -198,10 +193,9 @@ main:
   authenticatedBuild: 'false'
   disabled: @DISABLED@
   concurrent: 'true'
-  timeout: 20
+  timeout: 30
   timeout_fail: true
   timestamps: true
-  ansicolor: true
 
 logrotate:
   daysToKeep: 28

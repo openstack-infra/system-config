@@ -5,10 +5,9 @@ main:
   review_site: 'review.openstack.org'
   project: 'MRaaS'
   authenticatedBuild: 'false'
-  timeout: 20
+  timeout: 30
   timeout_fail: true
   timestamps: true
-  ansicolor: true
 
 triggers:
   - gerrit:
@@ -41,10 +40,9 @@ main:
   review_site: 'review.openstack.org'
   project: 'MRaaS'
   authenticatedBuild: 'false'
-  timeout: 20
+  timeout: 30
   timeout_fail: true
   timestamps: true
-  ansicolor: true
 
 triggers:
   - gerrit:

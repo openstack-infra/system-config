@@ -6,10 +6,9 @@ main:
   github_org: 'openstack-ci'
   project: 'gerritbot'
   concurrent: 'true'
-  timeout: 20
+  timeout: 30
   timeout_fail: true
   timestamps: true
-  ansicolor: true
 
 logrotate:
   daysToKeep: 28
@@ -38,10 +37,9 @@ main:
   github_org: 'openstack-ci'
   project: 'gerritbot'
   concurrent: 'true'
-  timeout: 20
+  timeout: 30
   timeout_fail: true
   timestamps: true
-  ansicolor: true
 
 logrotate:
   daysToKeep: 28
@@ -73,10 +71,9 @@ main:
   github_org: 'openstack-ci'
   project: 'gerritbot'
   concurrent: 'true'
-  timeout: 20
+  timeout: 30
   timeout_fail: true
   timestamps: true
-  ansicolor: true
 
 logrotate:
   daysToKeep: 28
@@ -104,7 +101,7 @@ main:
   github_org: 'openstack-ci'
   project: 'gerritbot'
   concurrent: 'true'
-  timeout: 20
+  timeout: 30
   timeout_fail: true
 
 logrotate:
@@ -145,7 +142,7 @@ main:
   github_org: 'openstack-ci'
   project: 'gerritbot'
   concurrent: 'true'
-  timeout: 20
+  timeout: 30
   timeout_fail: true
 
 triggers:
