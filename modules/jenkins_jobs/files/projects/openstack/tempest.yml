@@ -6,10 +6,9 @@ main:
   github_org: 'openstack-ci'
   project: 'tempest'
   concurrent: 'true'
-  timeout: 20
+  timeout: 30
   timeout_fail: true
   timestamps: true
-  ansicolor: true
 
 triggers:
   - zuul
@@ -35,10 +34,9 @@ main:
   github_org: 'openstack-ci'
   project: 'tempest'
   concurrent: 'true'
-  timeout: 20
+  timeout: 30
   timeout_fail: true
   timestamps: true
-  ansicolor: true
 
 triggers:
   - zuul

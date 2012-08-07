@@ -16,10 +16,9 @@ main:
   github_org: 'openstack-ci'
   project: 'zuul'
   concurrent: 'true'
-  timeout: 20
+  timeout: 30
   timeout_fail: true
   timestamps: true
-  ansicolor: true
 
 triggers:
   - zuul
@@ -43,10 +42,9 @@ main:
   project: 'zuul'
   authenticatedBuild: 'false'
   concurrent: 'true'
-  timeout: 20
+  timeout: 30
   timeout_fail: true
   timestamps: true
-  ansicolor: true
 
 triggers:
   - zuul_post
