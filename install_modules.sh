@@ -1,5 +1,23 @@
 #!/bin/bash
 
+MODULE_PATH=/etc/puppet/modules
+
+function clone_git() {
+    REMOTE_URL=$1
+    REPO=$2
+    REV=$3
+
+    if [ -d $MODULE_PATH/$REPO -a ! -d $MODULE_PATH/$REPO/.git ] ; then
+        rm -rf $MODULE_PATH/$REPO
+    fi
+    if [ ! -d $MODULE_PATH/$REPO ] ; then
+        git clone $REMOTE_URL $MODULE_PATH/$REPO
+    fi
+    (cd $MODULE_PATH/$REPO &&
+      git fetch origin &&
+      git reset --hard $REV )
+}
+
 if ! puppet help module >/dev/null 2>&1 ; then
     apt-get install -y -o Dpkg::Options::="--force-confold" puppet facter
 fi
@@ -14,10 +32,13 @@ for MOD in $MODULES ; do
   fi
 done
 
-# Fix a problem with the released verison of the dashboard module
-if grep scope.lookupvar /etc/puppet/modules/dashboard/templates/passenger-vhost.erb | grep dashboard_port >/dev/null 2>&1 ; then
+# Install vcsrepo from git
+clone_git git://github.com/puppetlabs/puppetlabs-vcsrepo.git vcsrepo f3acccdf
 
-  cd /etc/puppet/modules/dashboard
+# Fix a problem with the released verison of the dashboard module
+if grep scope.lookupvar ${MODULE_PATH}/dashboard/templates/passenger-vhost.erb | grep dashboard_port >/dev/null 2>&1 ; then
+
+  cd ${MODULE_PATH}/dashboard
   echo | patch -p1 <<'EOD'
 diff --git a/templates/passenger-vhost.erb b/templates/passenger-vhost.erb
 index a2f6d16..de7dd0a 100644
