@@ -236,6 +236,7 @@ class gerrit($virtual_hostname=$fqdn,
       'bind_address' => '127.0.0.1',
     }
   }
+  include mysql::server::account_security
 
   mysql::db { "reviewdb":
     user => "gerrit2",
