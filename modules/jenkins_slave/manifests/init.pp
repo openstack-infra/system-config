@@ -115,6 +115,7 @@ class jenkins_slave($ssh_key, $sudo = false, $bare = false, $user = true) {
                 'bind_address' => '127.0.0.1',
             }
         }
+        include mysql::server::account_security
 
         mysql::db { 'openstack_citest':
             user     => 'openstack_citest',
