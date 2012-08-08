@@ -26,6 +26,13 @@ builders:
   - coverage
 
 post_build_actions:
+  - scp:
+      site: '173.203.107.207'
+      source: 'build-results/*.html'
+      target_path: 'build-results/@NAME@-coverage/'
+      keep_heirarchy: 'false'
+
+post_build_actions:
   - coverage
 
 scm:
@@ -97,6 +104,13 @@ builders:
   - gerrit_git_prep
   - python26
 
+post_build_actions:
+  - scp:
+      site: '173.203.107.207'
+      source: 'build-results/*.html'
+      target_path: 'build-results/gate-@NAME@-python26/'
+      keep_heirarchy: 'false'
+
 scm:
   scm: 'false'
 
@@ -136,6 +150,13 @@ triggers:
 builders:
   - gerrit_git_prep
   - python27
+
+post_build_actions:
+  - scp:
+      site: '173.203.107.207'
+      source: 'build-results/*.html'
+      target_path: 'build-results/gate-@NAME@-python27/'
+      keep_heirarchy: 'false'
 
 scm:
   scm: 'false'
