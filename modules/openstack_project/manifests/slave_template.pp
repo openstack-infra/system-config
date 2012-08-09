@@ -1,10 +1,14 @@
-class openstack_project::slave_template {
+class openstack_project::slave_template(
+  $install_users=true,
+  $ssh_key=$openstack_project::jenkins_ssh_key
+  ) {
   include openstack_project
   class { 'openstack_project::template':
-    iptables_public_tcp_ports => []
+    iptables_public_tcp_ports => [],
+    install_users => $install_users,
   }
   class { 'jenkins_slave':
-    ssh_key => $openstack_project::jenkins_ssh_key,
+    ssh_key => $ssh_key,
     sudo => true,
     bare => true
   }
