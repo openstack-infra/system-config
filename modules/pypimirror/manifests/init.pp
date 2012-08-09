@@ -3,6 +3,7 @@ class pypimirror ( $base_url,
                    $mirror_file_path = "/var/lib/pypimirror",
                    $pip_download = "/var/lib/pip-download",
                    $pip_cache = "/var/cache/pip",
+                   $git_source = "https://github.com",
                    $projects = [] )
 {
 
@@ -39,6 +40,20 @@ class pypimirror ( $base_url,
     group => 'root',
   }
     
+  file { '/etc/openstackci':
+    ensure => "directory",
+    owner => "root",
+  }
+
+  file { '/home/gerrit2/projects.yaml':
+    owner => 'root',
+    group => 'root',
+    mode => 444,
+    ensure => 'present',
+    source => 'puppet:///openstack_project/review.projects.yaml',
+    replace => true,
+  }
+
   file { '/usr/local/mirror_scripts/run-mirror.sh':
     ensure => present,
     mode => 755,
