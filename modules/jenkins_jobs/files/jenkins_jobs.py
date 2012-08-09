@@ -257,7 +257,9 @@ def update_job(test = False):
                 xml = yparse.get_next_xml()
                 job = yparse.get_name()
                 if test:
-                    print xml.output()
+                    f = open('/tmp/jenkins_jobs_test/saved/%s' % job,
+                             'w')
+                    f.write(xml.output())
                     continue
                 md5 = xml.md5()
                 if remote_jenkins.is_job(job) and not cache.is_cached(job):

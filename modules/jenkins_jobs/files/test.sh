@@ -13,7 +13,7 @@ then
     do
 	echo $x
 	BASENAME=`basename $x`
-	python jenkins_jobs.py test $x > /tmp/jenkins_jobs_test/saved/$BASENAME.xml
+	python jenkins_jobs.py test $x #> /tmp/jenkins_jobs_test/saved/$BASENAME.xml
     done
 else
     for x in `find projects/ -name *.yml`

@@ -107,7 +107,7 @@ projects:
         - gate-gerritbot-pep8
         - gate-gerritbot-pyflakes
     post:
-      - gerritbot-tarball
+      - gerritbot-sdist-tarball
     publish:
       - gerritbot-pypi
 
@@ -323,7 +323,7 @@ projects:
         - gate-python-cinderclient-python26
         - gate-python-cinderclient-python27
     post:
-      - python-cinderclient-tarball
+      - python-cinderclient-sdist-tarball
       - python-cinderclient-coverage
       - python-cinderclient-docs
     publish:
@@ -346,7 +346,7 @@ projects:
         - gate-python-glanceclient-python27
         - gate-tempest-devstack-vm
     post:
-      - python-glanceclient-tarball
+      - python-glanceclient-sdist-tarball
       - python-glanceclient-coverage
       - python-glanceclient-docs
     publish:
@@ -369,7 +369,7 @@ projects:
         - gate-python-keystoneclient-python27
         - gate-tempest-devstack-vm
     post:
-      - python-keystoneclient-tarball
+      - python-keystoneclient-sdist-tarball
       - python-keystoneclient-coverage
       - python-keystoneclient-docs
     publish:
@@ -392,7 +392,7 @@ projects:
         - gate-python-novaclient-python27
         - gate-tempest-devstack-vm
     post:
-      - python-novaclient-tarball
+      - python-novaclient-sdist-tarball
       - python-novaclient-coverage
       - python-novaclient-docs
     publish:
@@ -413,7 +413,7 @@ projects:
         - gate-python-openstackclient-python26
         - gate-python-openstackclient-python27
     post:
-      - python-openstackclient-tarball
+      - python-openstackclient-sdist-tarball
       - python-openstackclient-coverage
       - python-openstackclient-docs
     publish:
@@ -436,7 +436,7 @@ projects:
         - gate-python-quantumclient-python27
         - gate-tempest-devstack-vm
     post:
-      - python-quantumclient-tarball
+      - python-quantumclient-sdist-tarball
       - python-quantumclient-coverage
       - python-quantumclient-docs
     publish:
@@ -457,7 +457,7 @@ projects:
         - gate-python-swiftclient-python26
         - gate-python-swiftclient-python27
     post:
-      - python-swiftclient-tarball
+      - python-swiftclient-sdist-tarball
       - python-swiftclient-coverage
       - python-swiftclient-docs
     publish:
@@ -500,7 +500,7 @@ projects:
         - gate-pbr-python26
         - gate-pbr-python27
     post:
-      - pbr-tarball
+      - pbr-sdist-tarball
       - pbr-coverage
       - pbr-docs
     publish:
