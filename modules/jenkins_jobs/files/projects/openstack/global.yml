@@ -1,0 +1,43 @@
+---
+# publish-console-logs
+main:
+  name: 'publish-console-logs'
+  review_site: 'review.openstack.org'
+  github_org: 'openstack-ci'
+  project: 'global'
+  authenticatedBuild: 'false'
+  concurrent: 'true'
+  timeout: 10
+  timeout_fail: true
+  timestamps: true
+
+logrotate:
+  daysToKeep: 3
+  numToKeep: -1
+  artifactDaysToKeep: -1
+  artifactNumToKeep: -1
+
+builders:
+  - shell: |
+      #!/bin/bash -xe
+      # Error out if source file does not exist.
+      [ -f /var/lib/jenkins/jobs/${PREVIOUS_JOB_NAME}/builds/${PREVIOUS_BUILD_NUMBER}/log ]
+      # Clean workspace.
+      rm -rf *
+      # Create directory for copy of source file.
+      mkdir ${PREVIOUS_JOB_NAME}
+      # Copy source file because SCP plugin cannot copy files from outside the workspace.
+      cp /var/lib/jenkins/jobs/${PREVIOUS_JOB_NAME}/builds/${PREVIOUS_BUILD_NUMBER}/log ${PREVIOUS_JOB_NAME}/${PREVIOUS_BUILD_NUMBER}.log
+
+post_build_actions:
+  - scp:
+      site: '173.203.107.207'
+      source: '**/*.log'
+      target_path: 'build-logs/'
+      keep_heirarchy: 'true'
+
+scm:
+  scm: 'false'
+
+assignednode:
+  node: 'master'
