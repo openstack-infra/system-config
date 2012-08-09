@@ -3,7 +3,7 @@ project:
 
 values:
   name: 'reddwarf'
-  disabled: 'true'
+  disabled: 'false'
   github_org: 'stackforge'
   review_site: 'review.openstack.org'
   node: 'oneiric'
