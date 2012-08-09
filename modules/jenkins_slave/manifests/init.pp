@@ -119,9 +119,11 @@ class jenkins_slave($ssh_key, $sudo = false, $bare = false, $user = true) {
 
         mysql::db { 'openstack_citest':
             user     => 'openstack_citest',
-                     password => 'openstack_citest',
-                     host     => 'localhost',
-                     grant    => ['all'],
+            password => 'openstack_citest',
+            host     => 'localhost',
+            grant    => ['all'],
+            require  => [Class['mysql::server'],
+                         Class['mysql::server::account_security']]
         }
 
     }
