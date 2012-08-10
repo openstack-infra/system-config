@@ -50,7 +50,7 @@ class jenkins_job_builder (
     owner => 'jenkins',
     mode => 400,
     ensure => 'present',
-    content => template('jenkins_jobs/jenkins_jobs.ini.erb'),
+    content => template('jenkins_job_builder/jenkins_jobs.ini.erb'),
     require => File["/etc/jenkins_jobs"],
   }
 
