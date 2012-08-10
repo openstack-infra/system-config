@@ -9,6 +9,10 @@ class pypimirror ( $base_url,
 
   include pip
 
+  package { 'python-yaml':
+    ensure => 'present'
+  }
+
   package { 'nginx':
     ensure => present,
   }
