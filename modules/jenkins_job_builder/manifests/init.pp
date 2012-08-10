@@ -18,7 +18,7 @@ class jenkins_job_builder (
     ensure => latest,
     provider => git,
     revision => "master",
-    source => "https://github.com/openstack-ci/jenkins_job_builder.git",
+    source => "https://github.com/openstack-ci/jenkins-job-builder.git",
   }
 
   exec { "install_jenkins_job_builder":
