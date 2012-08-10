@@ -1,14 +1,3 @@
-- project:
-    name: horizon
-    github-org: openstack
-    node: precise
-    tarball-publisher-site: nova.openstack.org
-    doc-publisher-site: docs.openstack.org
-    
-    jobs:
-      - python-jobs
-      - openstack-publish-jobs
-
 - job:
     name: gate-horizon-selenium
     concurrent: true

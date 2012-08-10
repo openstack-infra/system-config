@@ -1,8 +1,3 @@
-- project:
-    name: MRaaS
-    github-org: stackforge
-    node: precise
-
 - job:
     name: gate-MRaaS-merge
     concurrent: false

@@ -1,11 +1,3 @@
-- project:
-    name: ci-puppet
-    github-org: openstack
-    node: precise
-    
-    jobs:
-      - gate-{name}-merge
-
 - job:
     name: gate-ci-puppet-syntax
     concurrent: true
