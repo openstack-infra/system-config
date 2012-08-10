@@ -13,13 +13,6 @@
     concurrent: true
     node: devstack-precise
 
-    properties:
-      - throttle:
-          max-per-node: 0
-          max-total: 0
-          option: project
-          enabled: false
-
     logrotate:
       daysToKeep: 28
       numToKeep: -1
@@ -87,13 +80,6 @@
     project-type: freestyle
     concurrent: true
     node: devstack-precise
-
-    properties:
-      - throttle:
-          max-per-node: 0
-          max-total: 0
-          option: project
-          enabled: false
 
     logrotate:
       daysToKeep: 28
@@ -166,13 +152,6 @@
     concurrent: false
     node: master
 
-    properties:
-      - throttle:
-          max-per-node: 0
-          max-total: 0
-          option: project
-          enabled: false
-
     logrotate:
       daysToKeep: 28
       numToKeep: 100
@@ -210,13 +189,6 @@
     project-type: freestyle
     concurrent: false
     node: master
-
-    properties:
-      - throttle:
-          max-per-node: 0
-          max-total: 0
-          option: project
-          enabled: false
 
     logrotate:
       daysToKeep: 28

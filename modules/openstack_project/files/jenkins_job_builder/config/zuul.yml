@@ -14,15 +14,6 @@
     concurrent: true
     node: precise
 
-    properties:
-      - github:
-          url: https://github.com/openstack-ci/zuul
-      - throttle:
-          max-per-node: 0
-          max-total: 0
-          option: project
-          enabled: false
-
     wrappers:
       - timeout:
           timeout: 30

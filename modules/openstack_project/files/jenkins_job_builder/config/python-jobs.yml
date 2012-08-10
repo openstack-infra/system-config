@@ -8,15 +8,6 @@
           fail: true
       - timestamps
 
-    properties:
-      - github:
-          url: 'https://github.com/{github-org}/{name}'
-      - throttle:
-          max-per-node: 0
-          max-total: 0
-          option: project
-          enabled: false
-
     logrotate:
       daysToKeep: 28
       numToKeep: -1
@@ -45,15 +36,6 @@
           timeout: 30
           fail: true
       - timestamps
-
-    properties:
-      - github:
-          url: 'https://github.com/{github-org}/{name}'
-      - throttle:
-          max-per-node: 0
-          max-total: 0
-          option: project
-          enabled: false
 
     logrotate:
       daysToKeep: 28
@@ -84,15 +66,6 @@
           fail: true
       - timestamps
 
-    properties:
-      - github:
-          url: 'https://github.com/{github-org}/{name}'
-      - throttle:
-          max-per-node: 0
-          max-total: 0
-          option: project
-          enabled: false
-
     logrotate:
       daysToKeep: 28
       numToKeep: -1
@@ -119,15 +92,6 @@
           timeout: 30
           fail: true
       - timestamps
-
-    properties:
-      - github:
-          url: 'https://github.com/{github-org}/{name}'
-      - throttle:
-          max-per-node: 0
-          max-total: 0
-          option: project
-          enabled: false
 
     logrotate:
       daysToKeep: 28
@@ -161,15 +125,6 @@
           fail: true
       - timestamps
 
-    properties:
-      - github:
-          url: 'https://github.com/{github-org}/{name}'
-      - throttle:
-          max-per-node: 0
-          max-total: 0
-          option: project
-          enabled: false
-
     logrotate:
       daysToKeep: 28
       numToKeep: -1
@@ -195,15 +150,6 @@
           fail: true
       - timestamps
 
-    properties:
-      - github:
-          url: 'https://github.com/{github-org}/{name}'
-      - throttle:
-          max-per-node: 0
-          max-total: 0
-          option: project
-          enabled: false
-
     logrotate:
       daysToKeep: 28
       numToKeep: -1
@@ -225,15 +171,6 @@
     project-type: freestyle
     concurrent: true
     node: precise
-
-    properties:
-      - github:
-          url: 'https://github.com/{github-org}/{name}'
-      - throttle:
-          max-per-node: 0
-          max-total: 0
-          option: project
-          enabled: false
 
     logrotate:
       daysToKeep: 28
