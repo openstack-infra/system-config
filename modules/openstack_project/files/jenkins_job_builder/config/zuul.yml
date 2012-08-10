@@ -4,37 +4,9 @@
     node: precise
     jobs:
       - python-jobs
-      # TODO: standardize these
-      #- gate-{name}-pyflakes
+      - gate-{name}-pyflakes
+      # TODO: standardize this
       #- '{name}-docs
-
-- job:
-    name: gate-zuul-pyflakes
-    project-type: freestyle
-    concurrent: true
-    node: precise
-
-    properties:
-      - github:
-          url: https://github.com/openstack-ci/zuul
-      - throttle:
-          max-per-node: 0
-          max-total: 0
-          option: project
-          enabled: false
-
-    wrappers:
-      - timeout:
-          timeout: 30
-          fail: true
-      - timestamps
-
-    triggers:
-      - zuul
-
-    builders:
-      - gerrit_git_prep
-      - pyflakes
 
 
 - job:
@@ -59,7 +31,7 @@
       - timestamps
 
     triggers:
-      - zuul_post
+      - zuul-post
 
     logrotate:
       daysToKeep: 28
@@ -68,7 +40,7 @@
       artifactNumToKeep: -1
 
     builders:
-      - gerrit_git_prep
+      - gerrit-git-prep
       - docs
 
     publishers:

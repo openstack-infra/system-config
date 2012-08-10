@@ -1,35 +1,10 @@
-- job:
-    name: gate-devstack-gate-merge
-    project-type: freestyle
-    concurrent: true
+- project:
+    name: devstack-gate
+    github-org: openstack-ci
     node: precise
-
-    properties:
-      - github:
-          url: https://github.com/openstack-ci/devstack-gate
-      - throttle:
-          max-per-node: 0
-          max-total: 0
-          option: project
-          enabled: false
-
-    logrotate:
-      daysToKeep: 28
-      numToKeep: -1
-      artifactDaysToKeep: -1
-      artifactNumToKeep: -1
-
-    wrappers:
-      - timeout:
-          timeout: 30
-          fail: true
-      - timestamps
-
-    triggers:
-      - zuul
-
-    builders:
-      - gerrit_git_prep
+    
+    jobs:
+      - gate-{name}-merge
 
 
 - job:
@@ -69,7 +44,7 @@
     builders:
       - trigger-builds:
           - project: devstack-update-inprogress
-            predefined_parameters:
+            predefined-parameters:
               DEVSTACK_NODE_NAME=${NODE_NAME}
       - shell: |
           #!/bin/bash -xe
@@ -103,7 +78,7 @@
       - trigger-parameterized-builds:
           - project: devstack-update-complete
             when: complete
-            predefined_parameters:
+            predefined-parameters:
               DEVSTACK_NODE_NAME=${NODE_NAME}
 
 
@@ -144,7 +119,7 @@
     builders:
       - trigger-builds:
           - project: devstack-update-inprogress
-            predefined_parameters:
+            predefined-parameters:
               DEVSTACK_NODE_NAME=${NODE_NAME}
       - shell: |
           #!/bin/bash -xe
@@ -179,7 +154,7 @@
       - trigger-parameterized-builds:
           - project: devstack-update-complete
             when: complete
-            predefined_parameters:
+            predefined-parameters:
               DEVSTACK_NODE_NAME=${NODE_NAME}
 
 
