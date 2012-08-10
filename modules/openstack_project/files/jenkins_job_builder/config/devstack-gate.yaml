@@ -1,12 +1,3 @@
-- project:
-    name: devstack-gate
-    github-org: openstack-ci
-    node: precise
-    
-    jobs:
-      - gate-{name}-merge
-
-
 - job:
     name: gate-integration-tests-devstack-vm
     project-type: freestyle

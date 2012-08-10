@@ -1,12 +1,3 @@
-- project:
-    name: gerrit
-    github-org: openstack-ci
-    node: precise
-    
-    jobs:
-      - gate-{name}-merge
-
-
 - job:
     name: check-gerrit-unittests
     project-type: maven
