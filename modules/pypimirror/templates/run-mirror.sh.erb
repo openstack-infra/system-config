@@ -6,5 +6,5 @@ export PIP_DOWNLOAD_CACHE=<%= pip_cache %>
 export PIP_TEMP_DOWNLOAD=<%= pip_download %>
 export MIRROR_FILE_PATH=<%= mirror_file_path %>
 export LOG_FILENAME=<%= log_filename %>
-python /usr/local/mirror_scripts/run-mirror.py <%= git_source %> >>$LOG_FILENAME
+python /usr/local/mirror_scripts/run_mirror.py <%= git_source %> >>$LOG_FILENAME
 python /usr/local/mirror_scripts/process_cache.py ${PIP_DOWNLOAD_CACHE} ${MIRROR_FILE_PATH}

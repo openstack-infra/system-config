@@ -45,7 +45,7 @@ class pypimirror ( $base_url,
     owner => "root",
   }
 
-  file { '/home/gerrit2/projects.yaml':
+  file { '/etc/openstackci/projects.yaml':
     owner => 'root',
     group => 'root',
     mode => 444,
