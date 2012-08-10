@@ -4,15 +4,6 @@
     concurrent: true
     node: precise
 
-    properties:
-      - github:
-          url: 'https://github.com/{github-org}/{name}'
-      - throttle:
-          max-per-node: 0
-          max-total: 0
-          option: project
-          enabled: false
-
     wrappers:
       - timeout:
           timeout: 30
@@ -46,15 +37,6 @@
     project-type: freestyle
     concurrent: true
     node: precise
-
-    properties:
-      - github:
-          url: 'https://github.com/{github-org}/{name}'
-      - throttle:
-          max-per-node: 0
-          max-total: 0
-          option: project
-          enabled: false
 
     wrappers:
       - timeout:
