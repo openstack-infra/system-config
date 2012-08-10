@@ -5,10 +5,9 @@
     jobs:
       - python-jobs
       - gate-{name}-pyflakes
-      # TODO: standardize this
-      #- '{name}-docs
 
 
+# This is a non-standard docs job because it uses SCP instead of FTP
 - job:
     name: zuul-docs
     project-type: freestyle
