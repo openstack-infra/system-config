@@ -1,12 +1,3 @@
-- project:
-    name: ceilometer
-    github-org: stackforge
-    node: oneiric
-    
-    jobs:
-      - python-jobs
-
-
 - job:
     name: 'gate-ceilometer-python26-essex'
     concurrent: true

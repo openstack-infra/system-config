@@ -1,0 +1,346 @@
+- project:
+    name: ceilometer
+    github-org: stackforge
+    node: oneiric
+    
+    jobs:
+      - python-jobs
+
+
+- project:
+    name: cinder
+    github-org: openstack
+    node: precise
+    tarball-publisher-site: nova.openstack.org
+    doc-publisher-site: docs.openstack.org
+    
+    jobs:
+      - python-jobs
+      - openstack-publish-jobs
+
+
+- project:
+    name: devstack-gate
+    github-org: openstack-ci
+    node: precise
+    
+    jobs:
+      - gate-{name}-merge
+
+
+- project:
+    name: devstack
+    github-org: openstack-dev
+    node: precise
+    
+    jobs:
+      - gate-{name}-merge
+
+
+- project:
+    name: gerrit-verification-status-plugin
+    github-org: openstack-ci
+    node: precise
+    
+    jobs:
+      - gate-{name}-merge
+
+
+- project:
+    name: gerrit
+    github-org: openstack-ci
+    node: precise
+    
+    jobs:
+      - gate-{name}-merge
+
+
+- project:
+    name: gerritbot
+    github-org: openstack-ci
+    node: precise
+    doc-publisher-site: ci.openstack.org
+    tarball-publisher-site: ci.openstack.org
+    
+    jobs:
+      - gate-{name}-merge
+      - gate-{name}-pep8
+      - gate-{name}-pyflakes
+      - '{name}-sdist-tarball'
+      - '{name}-pypi'
+
+
+- project:
+    name: gerritlib
+    github-org: openstack-ci
+    node: precise
+    doc-publisher-site: ci.openstack.org
+    tarball-publisher-site: nova.openstack.org
+    
+    jobs:
+      - gate-{name}-merge
+      - gate-{name}-pep8
+      - gate-{name}-pyflakes
+      - '{name}-pypi'
+
+
+- project:
+    name: glance
+    github-org: openstack
+    node: precise
+    tarball-publisher-site: nova.openstack.org
+    doc-publisher-site: docs.openstack.org
+    
+    jobs:
+      - python-jobs
+      - openstack-publish-jobs
+
+
+- project:
+    name: heat
+    github-org: heat-api
+    node: oneiric
+    
+    jobs:
+      - python-jobs
+
+
+- project:
+    name: horizon
+    github-org: openstack
+    node: precise
+    tarball-publisher-site: nova.openstack.org
+    doc-publisher-site: docs.openstack.org
+    
+    jobs:
+      - python-jobs
+      - openstack-publish-jobs
+
+
+- project:
+    name: jenkins-job-builder
+    github-org: openstack-ci
+    node: precise
+    
+    jobs:
+      - gate-{name}-merge
+
+
+- project:
+    name: keystone
+    github-org: openstack
+    node: precise
+    tarball-publisher-site: nova.openstack.org
+    doc-publisher-site: docs.openstack.org
+    
+    jobs:
+      - python-jobs
+      - openstack-publish-jobs
+
+
+- project:
+    name: MRaaS
+    github-org: stackforge
+    node: precise
+
+
+- project:
+    name: nova
+    github-org: openstack
+    node: precise
+    tarball-publisher-site: nova.openstack.org
+    doc-publisher-site: docs.openstack.org
+    
+    jobs:
+      - python-jobs
+      - python-diablo-bitrot-jobs
+      - python-essex-bitrot-jobs
+      - openstack-publish-jobs
+
+
+- project:
+    name: ci-puppet
+    github-org: openstack
+    node: precise
+    
+    jobs:
+      - gate-{name}-merge
+
+
+- project:
+    name: openstack-common
+    github-org: openstack
+    node: precise
+    tarball-publisher-site: nova.openstack.org
+    doc-publisher-site: docs.openstack.org
+    
+    jobs:
+      - python-jobs
+      - openstack-publish-jobs
+
+
+- project:
+    name: pbr
+    github-org: openstack-dev
+    node: precise
+    tarball-publisher-site: nova.openstack.org
+    doc-publisher-site: docs.openstack.org
+    
+    jobs:
+      - python-jobs
+      - pypi-jobs
+
+
+- project:
+    name: pypi-mirror
+    github-org: openstack-ci
+    node: precise
+    
+    jobs:
+      - gate-{name}-merge
+      - gate-{name}-pyflakes
+
+
+- project:
+    name: python-cinderclient
+    github-org: openstack
+    node: precise
+    tarball-publisher-site: nova.openstack.org
+    doc-publisher-site: docs.openstack.org
+    
+    jobs:
+      - python-jobs
+      - pypi-jobs
+
+
+- project:
+    name: python-glanceclient
+    github-org: openstack
+    node: precise
+    tarball-publisher-site: nova.openstack.org
+    doc-publisher-site: docs.openstack.org
+    
+    jobs:
+      - python-jobs
+      - pypi-jobs
+
+
+- project:
+    name: python-keystoneclient
+    github-org: openstack
+    node: precise
+    tarball-publisher-site: nova.openstack.org
+    doc-publisher-site: docs.openstack.org
+    
+    jobs:
+      - python-jobs
+      - pypi-jobs
+
+
+- project:
+    name: python-novaclient
+    github-org: openstack
+    node: precise
+    tarball-publisher-site: nova.openstack.org
+    doc-publisher-site: docs.openstack.org
+    
+    jobs:
+      - python-jobs
+      - pypi-jobs
+
+
+- project:
+    name: python-openstackclient
+    github-org: openstack
+    node: precise
+    tarball-publisher-site: nova.openstack.org
+    doc-publisher-site: docs.openstack.org
+    
+    jobs:
+      - python-jobs
+      - pypi-jobs
+
+
+- project:
+    name: python-quantumclient
+    github-org: openstack
+    node: precise
+    tarball-publisher-site: nova.openstack.org
+    doc-publisher-site: docs.openstack.org
+    
+    jobs:
+      - python-jobs
+      - pypi-jobs
+
+
+- project:
+    name: python-swiftclient
+    github-org: openstack
+    node: precise
+    tarball-publisher-site: swift.openstack.org
+    doc-publisher-site: docs.openstack.org
+    
+    jobs:
+      - python-jobs
+      - pypi-jobs
+
+
+- project:
+    name: quantum
+    github-org: openstack
+    node: precise
+    tarball-publisher-site: nova.openstack.org
+    doc-publisher-site: docs.openstack.org
+    
+    jobs:
+      - python-jobs
+      - openstack-publish-jobs
+
+
+- project:
+    name: reddwarf
+    github-org: stackforge
+    node: oneiric
+    
+    jobs:
+      - python-jobs
+
+
+- project:
+    name: requirements
+    github-org: openstack
+    node: precise
+    
+    jobs:
+      - gate-{name}-merge
+
+
+- project:
+    name: swift
+    github-org: openstack
+    node: precise
+    tarball-publisher-site: nova.openstack.org
+    doc-publisher-site: docs.openstack.org
+    
+    jobs:
+      - python-jobs
+      - openstack-publish-jobs
+
+
+- project:
+    name: tempest
+    github-org: openstack-ci
+    node: precise
+    
+    jobs:
+      - gate-{name}-merge
+      - gate-{name}-pep8
+
+
+- project:
+    name: zuul
+    github-org: openstack-ci
+    node: precise
+    jobs:
+      - python-jobs
+      - gate-{name}-pyflakes
