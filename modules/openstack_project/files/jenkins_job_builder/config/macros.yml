@@ -30,9 +30,12 @@
 
 - builder:
     name: gerrit-preclean
-    #TODO: multiline:
     builders:
-      - shell: "#!/bin/bash -xe\nrm -fr ~/.m2\nrm -fr ~/.java\n./tools/version.sh --release"
+      - shell: |
+          #!/bin/bash -xe
+          rm -fr ~/.m2
+          rm -fr ~/.java
+          ./tools/version.sh --release
 
 - builder:
     name: gerrit-postrun
@@ -52,9 +55,7 @@
 - builder:
     name: puppet-syntax
     builders:
-      # TODO: remove blank line
       - shell: |
-
           find . -iname *.pp | xargs puppet parser validate --modulepath=`pwd`/modules
           for f in `find . -iname *.erb` ; do
             erb -x -T '-' $f | ruby -c
