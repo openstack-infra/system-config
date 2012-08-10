@@ -20,7 +20,7 @@
       - timestamps
 
     triggers:
-      - zuul_post
+      - zuul-post
 
     logrotate:
       daysToKeep: 28
@@ -29,7 +29,7 @@
       artifactNumToKeep: -1
 
     builders:
-      - gerrit_git_prep
+      - gerrit-git-prep
       - docs
 
     publishers:
@@ -39,6 +39,7 @@
           target: 'developer/{name}'
           remove-prefix: 'doc/build/html'
           excludes: ''
+
 
 - job-template:
     name: '{name}-tarball'
@@ -62,7 +63,7 @@
       - timestamps
 
     triggers:
-      - zuul_post
+      - zuul-post
 
     logrotate:
       daysToKeep: 28
@@ -71,7 +72,7 @@
       artifactNumToKeep: -1
 
     builders:
-      - gerrit_git_prep
+      - gerrit-git-prep
       - tarball:
           project: '{name}'
 
@@ -79,6 +80,7 @@
       - tarball:
           project: '{name}'
           site: '{tarball-publisher-site}'
+
 
 - job-group:
     name: openstack-publish-jobs
