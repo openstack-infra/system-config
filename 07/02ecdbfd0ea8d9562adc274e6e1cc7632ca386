@@ -1,0 +1,8 @@
+Approved+1: James E. Blair <corvus@inaugust.com>
+Code-Review+2: James E. Blair <corvus@inaugust.com>
+Verified+2: James E. Blair <corvus@inaugust.com>
+Submitted-by: James E. Blair <corvus@inaugust.com>
+Submitted-at: Fri, 10 Aug 2012 16:43:44 +0000
+Reviewed-on: https://review.openstack.org/11115
+Project: openstack/openstack-ci-puppet
+Branch: refs/meta/config
