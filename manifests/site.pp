@@ -96,6 +96,11 @@ node 'puppet-dashboard.openstack.org' {
   }
 }
 
+# A machine to serve static content.
+node 'static.openstack.org' {
+  include openstack_project::static
+}
+
 # A bare machine, but with a jenkins user
 node /^.*\.template\.openstack\.org$/ {
   include openstack_project::slave_template
