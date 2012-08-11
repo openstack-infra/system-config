@@ -124,6 +124,8 @@
     
     jobs:
       - gate-{name}-merge
+      - gate-{name}-pep8
+      - gate-{name}-pyflakes
 
 
 - project:
