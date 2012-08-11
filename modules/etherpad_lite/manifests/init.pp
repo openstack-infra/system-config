@@ -72,7 +72,7 @@ class etherpad_lite (
     ensure => present,
     provider => git,
     source => 'https://github.com/joyent/node.git',
-    revision => 'v0.6.16-release',
+    revision => 'v0.6.16',
     require    => Package['git']
   }
 
