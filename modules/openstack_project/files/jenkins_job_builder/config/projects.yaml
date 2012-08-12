@@ -194,6 +194,33 @@
 
 
 - project:
+    name: puppet-apparmor
+    github-org: openstack-ci
+    node: precise
+
+    jobs:
+      - gate-{name}-merge
+
+
+- project:
+    name: puppet-dashboard
+    github-org: openstack-ci
+    node: precise
+
+    jobs:
+      - gate-{name}-merge
+
+
+- project:
+    name: puppet-vcsrepo
+    github-org: openstack-ci
+    node: precise
+
+    jobs:
+      - gate-{name}-merge
+
+
+- project:
     name: pypi-mirror
     github-org: openstack-ci
     node: precise
