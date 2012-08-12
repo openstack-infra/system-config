@@ -26,7 +26,7 @@ if ! puppet help module >/dev/null 2>&1 ; then
     apt-get install -y -o Dpkg::Options::="--force-confold" puppet facter
 fi
 
-MODULES="puppetlabs-apt puppetlabs-mysql openstackci-dashboard openstackci-vcsrepo"
+MODULES="puppetlabs-apt puppetlabs-mysql openstackci-dashboard openstackci-vcsrepo rodjek-logrotate"
 MODULE_LIST=`puppet module list`
 
 # Transition away from old things

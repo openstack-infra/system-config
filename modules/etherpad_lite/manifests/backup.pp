@@ -3,7 +3,7 @@ class etherpad_lite::backup (
   $hour        = '0',
   $day         = '*',
   $dest        = "${etherpad_lite::base_log_dir}/${etherpad_lite::ep_user}/db.sql.gz",
-  $rotation    = 'daily',
+  $rotation    = 'day',
   $num_backups = '30'
 ) {
 
@@ -16,10 +16,11 @@ class etherpad_lite::backup (
     require => Package['mysql-server']
   }
 
-  include logrotate
-  logrotate::file { 'eplitedb':
-    log     => $dest,
-    options => ['nocompress', "rotate ${num_backups}", $rotation],
+  logrotate::rule { 'eplitedb':
+    path => $dest,
+    compress => false,
+    rotate => $num_backups,
+    rotate_every => 'day',
     require => Cron['eplitedbbackup']
   }
 
