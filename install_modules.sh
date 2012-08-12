@@ -16,7 +16,7 @@ function clone_git() {
     OLDDIR=`pwd`
     cd $MODULE_PATH/$REPO
     if ! git rev-parse HEAD | grep "^$REV" >/dev/null; then
-      git fetch origin
+      git fetch $REMOVE_URL
       git reset --hard $REV >/dev/null
     fi
     cd $OLDDIR
