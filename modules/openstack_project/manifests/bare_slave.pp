@@ -5,7 +5,7 @@ class openstack_project::bare_slave($install_users=true) {
     install_users => $install_users
   }
 
-  class { 'jenkins::slave':
+  class { 'jenkins_slave':
     ssh_key => "",
     user => false
   }

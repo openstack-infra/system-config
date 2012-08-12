@@ -1,4 +1,4 @@
-class jenkins::master($vhost_name=$fqdn,
+class jenkins_master($vhost_name=$fqdn,
       $serveradmin="webmaster@$fqdn",
       $logo,
       $ssl_cert_file='',
@@ -29,7 +29,7 @@ class jenkins::master($vhost_name=$fqdn,
     port => 443,
     docroot => 'MEANINGLESS ARGUMENT',
     priority => '50',
-    template => 'jenkins/jenkins.vhost.erb',
+    template => 'jenkins_master/jenkins.vhost.erb',
     ssl => true,
   }
   a2mod { 'rewrite':
@@ -66,7 +66,7 @@ class jenkins::master($vhost_name=$fqdn,
     group => 'root',
     mode => 444,
     ensure => 'present',
-    source => "puppet:///modules/jenkins/versions.conf",
+    source => "puppet:///modules/jenkins_master/versions.conf",
     replace => 'true',
     notify => Service["versions"]
   }
@@ -104,25 +104,25 @@ class jenkins::master($vhost_name=$fqdn,
 
   file { "/var/lib/jenkins/plugins/simple-theme-plugin/openstack.css":
     ensure => present,
-    source => "puppet:///modules/jenkins/openstack.css",
+    source => "puppet:///modules/jenkins_master/openstack.css",
     require => File["/var/lib/jenkins/plugins/simple-theme-plugin"]
   }
 
   file { "/var/lib/jenkins/plugins/simple-theme-plugin/openstack.js":
     ensure => present,
-    content => template("jenkins/openstack.js.erb"),
+    content => template("jenkins_master/openstack.js.erb"),
     require => File["/var/lib/jenkins/plugins/simple-theme-plugin"]
   }
 
   file { "/var/lib/jenkins/plugins/simple-theme-plugin/openstack-page-bkg.jpg":
     ensure => present,
-    source => "puppet:///modules/jenkins/openstack-page-bkg.jpg",
+    source => "puppet:///modules/jenkins_master/openstack-page-bkg.jpg",
     require => File["/var/lib/jenkins/plugins/simple-theme-plugin"]
   }
 
   file { "/var/lib/jenkins/plugins/simple-theme-plugin/title.png":
     ensure => present,
-    source => "puppet:///modules/jenkins/${logo}",
+    source => "puppet:///modules/jenkins_master/${logo}",
     require => File["/var/lib/jenkins/plugins/simple-theme-plugin"]
   }
 
@@ -141,7 +141,7 @@ class jenkins::master($vhost_name=$fqdn,
     recurse => true,
     require => File['/usr/local/jenkins'],
     source => [
-                "puppet:///modules/jenkins/slave_scripts",
+                "puppet:///modules/jenkins_slave/slave_scripts",
               ],
   }
 }

@@ -7,7 +7,7 @@ class openstack_project::jenkins_dev {
     backup_user => 'bup-jenkins-dev',
     backup_server => 'ci-backup-rs-ord.openstack.org'
   }
-  class { '::jenkins::master':
+  class { 'jenkins_master':
     vhost_name => 'jenkins-dev.openstack.org',
     serveradmin => 'webmaster@openstack.org',
     logo => 'openstack.png',

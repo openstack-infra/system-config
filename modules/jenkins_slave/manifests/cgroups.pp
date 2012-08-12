@@ -1,4 +1,4 @@
-class jenkins::cgroups {
+class jenkins_slave::cgroups {
 
   package { 'cgroup-bin':
     ensure => present
@@ -9,7 +9,7 @@ class jenkins::cgroups {
     replace => true,
     owner   => root,
     mode    => 0644,
-    content => template('jenkins/cgconfig.erb')
+    content => template('jenkins_slave/cgconfig.erb')
   }
 
   file { '/etc/cgrules.conf':
@@ -17,7 +17,7 @@ class jenkins::cgroups {
     replace => true,
     owner   => root,
     mode    => 0644,
-    source  => 'puppet:///modules/jenkins/cgroups/cgrules.conf'
+    source  => 'puppet:///modules/jenkins_slave/cgroups/cgrules.conf'
   }
 
   service { 'cgconfig':
