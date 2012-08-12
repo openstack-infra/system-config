@@ -5,4 +5,7 @@ class remove_nginx {
   file { "/etc/nginx/sites-available/default":
     ensure => absent,
   }
+  service { 'nginx':
+    ensure => stopped
+  }
 }
