@@ -102,11 +102,14 @@ class pypimirror ( $vhost_name = $fqdn,
   }
 
   # Rotate the mirror log file
-
-  include logrotate
-  logrotate::file {"pypimirror":
-    log => $log_filename,
-    options => ["compress", "delaycompress", "missingok", "rotate 7", "daily", "notifempty"],
+  logrotate::rule {'pypimirror':
+    path => $log_filename,
+    rotate => 7,
+    compress => true,
+    missingok => true,
+    delaycompress => true,
+    rotate_every => 'day',
+    ifempty => false,
     require => Cron["update_mirror"],
   }
 

@@ -32,6 +32,7 @@ MODULES="
   puppetlabs-apache
   puppetlabs-apt
   puppetlabs-mysql
+  rodjek-logrotate
   saz-memcached
   "
 MODULE_LIST=`puppet module list`
