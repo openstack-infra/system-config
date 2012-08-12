@@ -37,7 +37,7 @@ for MOD in $MODULES ; do
 done
 
 # Install vcsrepo from git
-clone_git git://github.com/emonty/puppetlabs-vcsrepo.git vcsrepo 44eb9ad8
+clone_git git://github.com/openstack-ci/puppet-vcsrepo.git vcsrepo 44eb9ad8
 
 # Fix a problem with the released verison of the dashboard module
 if grep scope.lookupvar ${MODULE_PATH}/dashboard/templates/passenger-vhost.erb | grep dashboard_port >/dev/null 2>&1 ; then
