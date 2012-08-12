@@ -224,7 +224,7 @@ adding the class call below:
 
 .. code-block:: ruby
 
-   class { 'jenkins::master':
+   class { 'jenkins_master':
      site => 'jenkins.openstack.org',
      serveradmin => 'webmaster@openstack.org',
      logo => 'openstack.png'
@@ -252,12 +252,12 @@ In the site.pp file the ``logo`` parameter is important:
 
 .. code-block:: ruby
 
-   class { 'jenkins::master':
+   class { 'jenkins_master':
      ...
      logo => 'openstack.png'
    }
 
-This relates to a PNG file that must be in the ``modules/jenkins/files/``
+This relates to a PNG file that must be in the ``modules/jenkins_master/files/``
 directory.
 
 Once puppet installs this and the plugin is installed you need to go into

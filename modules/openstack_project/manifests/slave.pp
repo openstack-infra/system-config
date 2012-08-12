@@ -5,7 +5,7 @@ class openstack_project::slave {
   class { 'openstack_project::server':
     iptables_public_tcp_ports => []
   }
-  class { 'jenkins::slave':
+  class { 'jenkins_slave':
     ssh_key => $openstack_project::jenkins_ssh_key
   }
 }
