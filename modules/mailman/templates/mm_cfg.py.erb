@@ -63,10 +63,10 @@ IMAGE_LOGOS         = '/images/mailman/'
 
 #-------------------------------------------------------------
 # Default domain for email addresses of newly created MLs
-DEFAULT_EMAIL_HOST = '<%= mailman_host %>'
+DEFAULT_EMAIL_HOST = '<%= vhost_name %>'
 #-------------------------------------------------------------
 # Default host for web interface of newly created MLs
-DEFAULT_URL_HOST   = '<%= mailman_host %>'
+DEFAULT_URL_HOST   = '<%= vhost_name %>'
 #-------------------------------------------------------------
 # Required when setting any of its arguments.
 add_virtualhost(DEFAULT_URL_HOST, DEFAULT_EMAIL_HOST)

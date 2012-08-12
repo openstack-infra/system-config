@@ -20,13 +20,8 @@ class meetbot {
     ensure => present
   }
 
-  package { ['supybot', 'nginx', 'python-twisted']:
+  package { ['supybot', 'python-twisted']:
     ensure => present
-  }
-
-  service { "nginx":
-    ensure => running,
-    hasrestart => true,
   }
 
   file { "/var/lib/meetbot":

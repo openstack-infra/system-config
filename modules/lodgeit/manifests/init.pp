@@ -35,11 +35,6 @@ class lodgeit {
     hasrestart => true
   }
 
-  service { "nginx":
-    ensure => running,
-    hasrestart => true
-  }
-
   vcsrepo { "/tmp/lodgeit-main":
     ensure => latest,
     provider => git,
