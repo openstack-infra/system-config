@@ -12,7 +12,7 @@ class openstack_project::lists($listadmins) {
   }
 
   class { 'mailman':
-    mailman_host => 'lists.openstack.org'
+    vhost_name => 'lists.openstack.org'
   }
 
   realize (

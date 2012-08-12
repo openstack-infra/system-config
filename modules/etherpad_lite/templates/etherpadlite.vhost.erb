@@ -1,31 +1,31 @@
-<VirtualHost <%= scope.lookupvar("etherpad_lite::vhost_name") %>:80>
-  ServerAdmin <%= scope.lookupvar("etherpad_lite::serveradmin") %>
+<VirtualHost <%= scope.lookupvar("etherpad_lite::apache::vhost_name") %>:80>
+  ServerAdmin <%= scope.lookupvar("etherpad_lite::apache::serveradmin") %>
 
-  ErrorLog ${APACHE_LOG_DIR}/<%= scope.lookupvar("etherpad_lite::vhost_name") %>-error.log
+  ErrorLog ${APACHE_LOG_DIR}/<%= scope.lookupvar("etherpad_lite::apache::vhost_name") %>-error.log
 
   LogLevel warn
 
-  CustomLog ${APACHE_LOG_DIR}/<%= scope.lookupvar("etherpad_lite::vhost_name") %>-access.log combined
+  CustomLog ${APACHE_LOG_DIR}/<%= scope.lookupvar("etherpad_lite::apache::vhost_name") %>-access.log combined
 
-  Redirect / https://<%= scope.lookupvar("etherpad_lite::vhost_name") %>/
+  Redirect / https://<%= scope.lookupvar("etherpad_lite::apache::vhost_name") %>/
 
 </VirtualHost>
 
 <IfModule mod_ssl.c>
-<VirtualHost <%= scope.lookupvar("etherpad_lite::vhost_name") %>:443>
-  ServerName <%= scope.lookupvar("etherpad_lite::vhost_name") %>
-  ServerAdmin <%= scope.lookupvar("etherpad_lite::serveradmin") %>
+<VirtualHost <%= scope.lookupvar("etherpad_lite::apache::vhost_name") %>:443>
+  ServerName <%= scope.lookupvar("etherpad_lite::apache::vhost_name") %>
+  ServerAdmin <%= scope.lookupvar("etherpad_lite::apache::serveradmin") %>
 
-  ErrorLog ${APACHE_LOG_DIR}/<%= scope.lookupvar("etherpad_lite::vhost_name") %>-ssl-error.log
+  ErrorLog ${APACHE_LOG_DIR}/<%= scope.lookupvar("etherpad_lite::apache::vhost_name") %>-ssl-error.log
 
   LogLevel warn
 
-  CustomLog ${APACHE_LOG_DIR}/<%= scope.lookupvar("etherpad_lite::vhost_name") %>-ssl-access.log combined
+  CustomLog ${APACHE_LOG_DIR}/<%= scope.lookupvar("etherpad_lite::apache::vhost_name") %>-ssl-access.log combined
 
   SSLEngine on
 
-  SSLCertificateFile /etc/ssl/certs/<%= scope.lookupvar("etherpad_lite::vhost_name") %>.pem
-  SSLCertificateKeyFile /etc/ssl/private/<%= scope.lookupvar("etherpad_lite::vhost_name") %>.key
+  SSLCertificateFile /etc/ssl/certs/<%= scope.lookupvar("etherpad_lite::apache::vhost_name") %>.pem
+  SSLCertificateKeyFile /etc/ssl/private/<%= scope.lookupvar("etherpad_lite::apache::vhost_name") %>.key
 
   BrowserMatch "MSIE [2-6]" \
       nokeepalive ssl-unclean-shutdown \
@@ -34,8 +34,8 @@
   BrowserMatch "MSIE [17-9]" ssl-unclean-shutdown
 
   RewriteEngine on
-  RewriteCond %{HTTP_HOST} !<%= scope.lookupvar("etherpad_lite::vhost_name") %>
-  RewriteRule ^.*$ https://<%= scope.lookupvar("etherpad_lite::vhost_name") %>
+  RewriteCond %{HTTP_HOST} !<%= scope.lookupvar("etherpad_lite::apache::vhost_name") %>
+  RewriteRule ^.*$ https://<%= scope.lookupvar("etherpad_lite::apache::vhost_name") %>
   RewriteRule ^/(.*)$ http://localhost:9001/$1 [P]
 
   ProxyPassReverse / http://localhost:9001/
