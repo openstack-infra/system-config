@@ -1,32 +1,32 @@
-<VirtualHost <%= scope.lookupvar("jenkins::vhost_name") %>:80>
-             ServerAdmin <%= scope.lookupvar("jenkins::serveradmin") %>
+<VirtualHost <%= scope.lookupvar("jenkins_master::vhost_name") %>:80>
+             ServerAdmin <%= scope.lookupvar("jenkins_master::serveradmin") %>
 
-             ErrorLog ${APACHE_LOG_DIR}/jenkins-error.log
+             ErrorLog ${APACHE_LOG_DIR}/jenkins_master-error.log
 
              LogLevel warn
 
-             CustomLog ${APACHE_LOG_DIR}/jenkins-access.log combined
+             CustomLog ${APACHE_LOG_DIR}/jenkins_master-access.log combined
 
-             Redirect / https://<%= scope.lookupvar("jenkins::vhost_name") %>/
+             Redirect / https://<%= scope.lookupvar("jenkins_master::vhost_name") %>/
 
 </VirtualHost>
 
-<VirtualHost <%= scope.lookupvar("jenkins::vhost_name") %>:443>
-             ServerName <%= scope.lookupvar("jenkins::vhost_name") %>
-             ServerAdmin <%= scope.lookupvar("jenkins::serveradmin") %>
+<VirtualHost <%= scope.lookupvar("jenkins_master::vhost_name") %>:443>
+             ServerName <%= scope.lookupvar("jenkins_master::vhost_name") %>
+             ServerAdmin <%= scope.lookupvar("jenkins_master::serveradmin") %>
 
-             ErrorLog ${APACHE_LOG_DIR}/jenkins-ssl-error.log
+             ErrorLog ${APACHE_LOG_DIR}/jenkins_master-ssl-error.log
 
              LogLevel warn
 
-             CustomLog ${APACHE_LOG_DIR}/jenkins-ssl-access.log combined
+             CustomLog ${APACHE_LOG_DIR}/jenkins_master-ssl-access.log combined
 
              SSLEngine on
 
-             SSLCertificateFile      <%= scope.lookupvar("jenkins::ssl_cert_file") %>
-             SSLCertificateKeyFile   <%= scope.lookupvar("jenkins::ssl_key_file") %>
-             <% if scope.lookupvar("jenkins::ssl_chain_file") != "" %>
-               SSLCertificateChainFile <%= scope.lookupvar("jenkins::ssl_chain_file") %>
+             SSLCertificateFile      <%= scope.lookupvar("jenkins_master::ssl_cert_file") %>
+             SSLCertificateKeyFile   <%= scope.lookupvar("jenkins_master::ssl_key_file") %>
+             <% if scope.lookupvar("jenkins_master::ssl_chain_file") != "" %>
+               SSLCertificateChainFile <%= scope.lookupvar("jenkins_master::ssl_chain_file") %>
              <% end %>
 
              BrowserMatch "MSIE [2-6]" \
@@ -36,8 +36,8 @@
              BrowserMatch "MSIE [17-9]" ssl-unclean-shutdown
 
              RewriteEngine on
-             RewriteCond %{HTTP_HOST} !<%= scope.lookupvar("jenkins::vhost_name") %>
-             RewriteRule ^.*$ https://<%= scope.lookupvar("jenkins::vhost_name") %>/
+             RewriteCond %{HTTP_HOST} !<%= scope.lookupvar("jenkins_master::vhost_name") %>
+             RewriteRule ^.*$ https://<%= scope.lookupvar("jenkins_master::vhost_name") %>/
 
              RewriteRule /zuul/status http://127.0.0.1:8001/status [P]
 

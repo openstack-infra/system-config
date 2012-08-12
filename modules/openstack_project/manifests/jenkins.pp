@@ -5,7 +5,7 @@ class openstack_project::jenkins($jenkins_jobs_password) {
   }
 
   class { 'jenkins_master':
-    site => 'jenkins.openstack.org',
+    vhost_name => 'jenkins.openstack.org',
     serveradmin => 'webmaster@openstack.org',
     logo => 'openstack.png',
     ssl_cert_file => '/etc/ssl/certs/jenkins.openstack.org.pem',

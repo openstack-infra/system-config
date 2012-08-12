@@ -7,10 +7,10 @@ class etherpad_lite::apache (
   include remove_nginx
 
   apache::vhost { $vhost_name:
-    post => 443,
+    port => 443,
     docroot => 'MEANINGLESS ARGUMENT',
     priority => '50',
-    template => 'etherpadlite/etherpadlite.vhost.erb',
+    template => 'etherpad_lite/etherpadlite.vhost.erb',
     require => File["/etc/ssl/certs/${vhost_name}.pem",
                     "/etc/ssl/private/${vhost_name}.key"],
     ssl => true,
@@ -37,22 +37,22 @@ class etherpad_lite::apache (
     mode   => 0700,
   }
 
-  file { "/etc/ssl/cert/${vhost_name}.pem":
+  file { "/etc/ssl/certs/${vhost_name}.pem":
     ensure  => present,
     replace => true,
     owner   => 'root',
     mode    => 0600,
     content => template('etherpad_lite/eplite.crt.erb'),
-    require => Apache::Vhost[$vhost_name],
+    require => File['/etc/ssl/certs'],
   }
 
-  file { '/etc/ssl/private/${vhost_name}.key':
+  file { "/etc/ssl/private/${vhost_name}.key":
     ensure  => present,
     replace => true,
     owner   => 'root',
     mode    => 0600,
     content => template('etherpad_lite/eplite.key.erb'),
-    require => Apache::Vhost[$vhost_name],
+    require => File['/etc/ssl/private'],
   }
 
 }
