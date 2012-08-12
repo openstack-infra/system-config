@@ -143,6 +143,24 @@ projects:
       - gate-ci-puppet-merge:
         - gate-ci-puppet-syntax
 
+  - name: openstack-ci/puppet-apparmor
+    check:
+      - gate-puppet-apparmor-merge
+    gate:
+      - gate-puppet-apparmor-merge
+
+  - name: openstack-ci/puppet-dashboard
+    check:
+      - gate-puppet-dashboard-merge
+    gate:
+      - gate-puppet-dashboard-merge
+
+  - name: openstack-ci/puppet-vcsrepo
+    check:
+      - gate-puppet-vcsrepo-merge
+    gate:
+      - gate-puppet-vcsrepo-merge
+
   - name: openstack/cinder
     check:
       - gate-cinder-merge:
