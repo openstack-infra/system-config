@@ -93,6 +93,8 @@
     
     jobs:
       - python-jobs
+      - python-diablo-bitrot-jobs
+      - python-essex-bitrot-jobs
       - openstack-publish-jobs
 
 
@@ -114,6 +116,8 @@
     
     jobs:
       - python-jobs
+      - python-diablo-bitrot-jobs
+      - python-essex-bitrot-jobs
       - openstack-publish-jobs
 
 
@@ -137,6 +141,8 @@
     
     jobs:
       - python-jobs
+      - python-diablo-bitrot-jobs
+      - python-essex-bitrot-jobs
       - openstack-publish-jobs
 
 
@@ -353,6 +359,8 @@
     
     jobs:
       - python-jobs
+      - python-diablo-bitrot-jobs
+      - python-essex-bitrot-jobs
       - openstack-publish-jobs
 
 
