@@ -199,6 +199,7 @@
       - python-essex-bitrot-jobs
       - openstack-publish-jobs
       - gate-{name}-pylint
+      - translation-jobs
 
 
 - project:

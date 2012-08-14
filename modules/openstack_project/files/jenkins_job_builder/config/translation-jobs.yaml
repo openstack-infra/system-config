@@ -1,0 +1,47 @@
+- job-template:
+    name: '{name}-upstream-translation-update'
+    concurrent: false
+
+    triggers:
+      - zuul-post
+
+    builders:
+      - gerrit-git-prep
+      - shell: |
+          #!/bin/bash -xe
+          /usr/local/jenkins/slave_scripts/upstream_translation_update.sh {name}
+
+    publishers:
+      - console-log-post
+
+    node: 'tx'
+
+- job-template:
+    name: '{name}-propose-translation-update'
+    concurrent: false
+
+    triggers:
+      - timed: '@daily'
+
+    builders:
+      - shell: |
+          #!/bin/bash -xe
+          /usr/local/jenkins/slave_scripts/propose_translation_update.sh {name}
+
+    publishers:
+      - console-log-periodic
+
+    scm:
+      - git:
+          url: 'git://github.com/{github-org}/{name}.git'
+          branches:
+            - 'origin/master'
+
+    node: 'tx'
+
+
+- job-group:
+    name: translation-jobs
+    jobs:
+      - '{name}-upstream-translation-update'
+      - '{name}-propose-translation-update'
