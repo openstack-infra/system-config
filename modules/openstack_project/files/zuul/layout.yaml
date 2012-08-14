@@ -269,6 +269,7 @@ projects:
       - nova-tarball
       - nova-coverage
       - nova-docs
+      - nova-pot-translation-update
     publish:
       - nova-tarball
       - nova-docs

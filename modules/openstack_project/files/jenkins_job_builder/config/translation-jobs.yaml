@@ -1,0 +1,28 @@
+- job-template:
+    name: '{name}-pot-translation-update'
+    concurrent: true
+
+    wrappers:
+      - timeout:
+          timeout: 30
+          fail: true
+      - timestamps
+
+    logrotate:
+      daysToKeep: 28
+      numToKeep: -1
+      artifactDaysToKeep: -1
+      artifactNumToKeep: -1
+
+    triggers:
+      - zuul-post
+
+    builders:
+      - gerrit-git-prep
+      - shell: |
+          #!/bin/bash -xe
+          tx init
+          tx set --auto-local -r {name}.{name}-translations '{name}/locale/<lang>/LC_MESSAGES/{name}.po' --source-lang en --source-file {name}/locale/{name}.pot --execute
+          /usr/local/jenkins/slave_scripts/propose_transifex_translations.sh
+
+    node: 'translation-slave'
