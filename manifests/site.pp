@@ -141,6 +141,13 @@ node /^ci-backup-.*\.openstack\.org$/ {
 # Jenkins slaves:
 #
 
+node 'tx.slave.openstack.org' {
+  class { 'openstack_project::translation_slave':
+    transifex_username => 'openstackjenkins',
+    transifex_password => hiera('transifex_password')
+  }
+}
+
 # Rollout cgroups to precise slaves.
 node /^precise.*\.slave\.openstack\.org$/ {
   include openstack_project::puppet_cron

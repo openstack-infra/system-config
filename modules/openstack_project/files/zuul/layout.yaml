@@ -313,6 +313,7 @@ projects:
       - nova-tarball
       - nova-coverage
       - nova-docs
+      - nova-upstream-translation-update
     publish:
       - nova-tarball
       - nova-docs
