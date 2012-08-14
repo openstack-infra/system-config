@@ -1,0 +1,75 @@
+- job-template:
+    name: '{name}-pot-update'
+    concurrent: true
+
+    wrappers:
+      - timeout:
+          timeout: 30
+          fail: true
+      - timestamps
+
+    logrotate:
+      daysToKeep: 28
+      numToKeep: -1
+      artifactDaysToKeep: -1
+      artifactNumToKeep: -1
+
+    triggers:
+      - zuul-post
+
+    builders:
+      - gerrit-git-prep
+      - shell: |
+          #!/bin/bash -xe
+          tx init
+          tx set --auto-local -r {name}.{name}-translations '{name}/locale/<lang>/LC_MESSAGES/{name}.po' --source-lang en --source-file {name}/locale/{name}.pot --execute
+      - shell: |
+          #!/bin/bash -xe
+          git checkout -b new_pot_file
+          python setup.py extract_messages
+          git add {name}/locale/{name}.pot
+          if [ ! `git diff-index --quiet HEAD --` ]
+          then
+                  git commit -m 'New .pot file.'
+          fi
+          git review
+
+    node: 'translation-slave'
+
+- job-template:
+    name: '{name}-translations-update'
+    concurrent: true
+
+    wrappers:
+      - timeout:
+          timeout: 30
+          fail: true
+      - timestamps
+
+    logrotate:
+      daysToKeep: 28
+      numToKeep: -1
+      artifactDaysToKeep: -1
+      artifactNumToKeep: -1
+
+    triggers:
+      - Should trigger daily.
+
+    builders:
+      - gerrit-git-prep
+      - shell: |
+          #!/bin/bash -xe
+          tx init
+          tx set --auto-local -r {name}.{name}-translations '{name}/locale/<lang>/LC_MESSAGES/{name}.po' --source-lang en --source-file {name}/locale/{name}.pot --execute
+      - shell: |
+          #!/bin/bash -xe
+          git checkout -b new_translations
+          tx pull -a
+          git add {name}/locale/*
+          if [ ! `git diff-index --quiet HEAD --` ]
+          then
+                  git commit -m 'New translations.'
+          fi
+          git review
+
+    node: 'translation-slave'
