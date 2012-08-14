@@ -313,12 +313,14 @@ projects:
         - gate-swift-pep8
         - gate-swift-python26
         - gate-swift-python27
+        - gate-tempest-devstack-vm
     gate:
       - gate-swift-merge:
         - gate-swift-docs
         - gate-swift-pep8
         - gate-swift-python26
         - gate-swift-python27
+        - gate-tempest-devstack-vm
     post:
       - swift-tarball
       - swift-coverage
