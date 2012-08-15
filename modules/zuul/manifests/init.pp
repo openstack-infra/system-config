@@ -13,6 +13,15 @@ class zuul (
     ensure => "present",
   }
 
+  # Packages that need to be installed from pip
+  $pip_packages = ["GitPython"]
+
+  package { $pip_packages:
+    ensure => latest,  # we want the latest from these
+    provider => pip,
+    require => Class[pip]
+  }
+
   vcsrepo { "/opt/zuul":
     ensure => latest,
     provider => git,
@@ -53,6 +62,11 @@ class zuul (
   }
 
   file { "/var/lib/zuul":
+    ensure => "directory",
+    owner => 'jenkins'
+  }
+
+  file { "/var/lib/zuul/git":
     ensure => "directory",
     owner => 'jenkins'
   }
