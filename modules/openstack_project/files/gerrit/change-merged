@@ -1,3 +1,4 @@
 #!/bin/sh
 
-python /usr/local/gerrit/scripts/update_bug.py change-merged "$@"
+# Use timeout to kill any process running longer than 10 minutes.
+timeout -k 2m 10m python /usr/local/gerrit/scripts/update_bug.py change-merged "$@"
