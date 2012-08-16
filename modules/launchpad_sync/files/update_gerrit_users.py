@@ -117,7 +117,8 @@ cur = conn.cursor()
 
 launchpad = Launchpad.login_with('Gerrit User Sync', LPNET_SERVICE_ROOT,
                                  GERRIT_CACHE_DIR,
-                                 credentials_file = GERRIT_CREDENTIALS)
+                                 credentials_file = GERRIT_CREDENTIALS,
+                                 version='devel')
 
 def get_sub_teams(team, have_teams):
     for sub_team in launchpad.people[team].sub_teams:

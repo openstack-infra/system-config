@@ -47,7 +47,8 @@ for line in urllib.urlopen('http://wiki.openstack.org/Contributors?action=raw'):
 
 launchpad = Launchpad.login_with('CLA Team Sync', LPNET_SERVICE_ROOT,
                                  LP_CACHE_DIR,
-                                 credentials_file = LP_CREDENTIALS)
+                                 credentials_file = LP_CREDENTIALS,
+                                 version='devel')
 
 lp_members = []
 
