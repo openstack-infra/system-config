@@ -187,12 +187,14 @@ projects:
   - name: openstack/glance
     check:
       - gate-glance-merge:
+        - gate-glance-docs
         - gate-glance-pep8
         - gate-glance-python26
         - gate-glance-python27
         - gate-tempest-devstack-vm
     gate:
       - gate-glance-merge:
+        - gate-glance-docs
         - gate-glance-pep8
         - gate-glance-python26
         - gate-glance-python27
