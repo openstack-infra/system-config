@@ -3,7 +3,7 @@ class jenkins::slave($ssh_key, $sudo = false, $bare = false, $user = true) {
     include pip
 
     if ($user == true) {
-      jenkins::jenkinsuser { "jenkins":
+      class { 'jenkins::jenkinsuser':
         ensure => present,
         sudo => $sudo,
         ssh_key => "${ssh_key}"
