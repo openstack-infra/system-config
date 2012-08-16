@@ -1,4 +1,4 @@
-define jenkins::jenkinsuser($ensure = present, $sudo = false, $ssh_key) {
+class jenkins::jenkinsuser($ensure = present, $sudo = false, $ssh_key) {
 
   group { 'jenkins':
     ensure => 'present'

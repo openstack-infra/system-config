@@ -1,13 +1,11 @@
-class openstack_project::static(
-  $ssh_key=$openstack_project::jenkins_ssh_key
-  ) {
+class openstack_project::static() {
 
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [22, 80, 443]
   }
 
   class { 'jenkins::jenkinsuser':
-    ssh_key => $ssh_key
+    ssh_key => $openstack_project::jenkins_ssh_key
   }
 
   include apache
