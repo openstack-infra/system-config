@@ -57,6 +57,35 @@
   
 
 - job-template:
+    name: 'gate-{name}-pylint'
+    concurrent: true
+
+    wrappers:
+      - timeout:
+          timeout: 120
+          fail: true
+      - timestamps
+
+    logrotate:
+      daysToKeep: 28
+      numToKeep: -1
+      artifactDaysToKeep: -1
+      artifactNumToKeep: -1
+
+    triggers:
+      - zuul
+
+    builders:
+      - gerrit-git-prep
+      - pylint
+
+    publishers:
+      - pylint
+
+    node: '{node}'
+
+
+- job-template:
     name: 'gate-{name}-python26'
     concurrent: true
 
