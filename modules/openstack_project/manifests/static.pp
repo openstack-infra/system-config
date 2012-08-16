@@ -7,7 +7,7 @@ class openstack_project::static(
   }
 
   class { 'jenkins::jenkinsuser':
-    ssh_key => $ssh_key
+    ssh_key => "${ssh_key}"
   }
 
   include apache
