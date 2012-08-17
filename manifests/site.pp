@@ -132,11 +132,22 @@ node /^precise.*\.slave\.openstack\.org$/ {
   include jenkins::cgroups
 }
 
-node /^.*\.slave\.openstack\.org$/ {
+node /^precise.*\.slave\.openstack\.org$/ {
   include openstack_project::puppet_cron
-  include openstack_project::slave
+  class { 'openstack_project::slave':
+    certname => 'precise.slave.openstack.org',
+  }
+}
+
+node /^oneiric.*\.slave\.openstack\.org$/ {
+  include openstack_project::puppet_cron
+  class { 'openstack_project::slave':
+    certname => 'oneiric.slave.openstack.org',
+  }
 }
 
 node /^.*\.jclouds\.openstack\.org$/ {
-  include openstack_project::bare_slave
+  class { 'openstack_project::bare_slave':
+    certname => 'jclouds.openstack.org',
+  }
 } 
