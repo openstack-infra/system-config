@@ -181,7 +181,6 @@ projects:
       - cinder-coverage
       - cinder-docs
     publish:
-      - cinder-tarball
       - cinder-docs
 
   - name: openstack/glance
@@ -204,7 +203,6 @@ projects:
       - glance-coverage
       - glance-docs
     publish:
-      - glance-tarball
       - glance-docs
 
   - name: openstack/horizon
@@ -229,7 +227,6 @@ projects:
       - horizon-coverage
       - horizon-docs
     publish:
-      - horizon-tarball
       - horizon-docs
 
   - name: openstack/keystone
@@ -250,6 +247,8 @@ projects:
     post:
       - keystone-tarball
       - keystone-coverage
+      - keystone-docs
+    publish:
       - keystone-docs
 
   - name: openstack/nova
@@ -272,7 +271,6 @@ projects:
       - nova-coverage
       - nova-docs
     publish:
-      - nova-tarball
       - nova-docs
 
   - name: openstack/openstack-common
@@ -305,7 +303,6 @@ projects:
       - quantum-coverage
       - quantum-docs
     publish:
-      - quantum-tarball
       - quantum-docs
 
   - name: openstack/swift
@@ -328,7 +325,6 @@ projects:
       - swift-coverage
       - swift-docs
     publish:
-      - swift-tarball
       - swift-docs
 
   - name: openstack/python-cinderclient
