@@ -6,7 +6,7 @@ class openstack_project::slave(
   include unattended_upgrades
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [],
-    certname => $cername,
+    certname => $certname,
   }
   class { 'jenkins::slave':
     ssh_key => $openstack_project::jenkins_ssh_key

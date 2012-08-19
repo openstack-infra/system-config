@@ -150,7 +150,7 @@ node /^oneiric.*\.slave\.openstack\.org$/ {
   class { 'openstack_project::glancetest':
     s3_store_access_key => hiera('s3_store_access_key'),
     s3_store_secret_key => hiera('s3_store_secret_key'),
-    s3_store_secret_key => hiera('s3_store_bucket'),
+    s3_store_bucket => hiera('s3_store_bucket'),
     swift_store_user => hiera('swift_store_user'),
     swift_store_key => hiera('swift_store_key'),
     swift_store_container => hiera('swift_store_container'),

@@ -25,7 +25,7 @@ class openstack_project::glancetest(
     mode => 400,
     ensure => 'present',
     require => File['jenkinsglanceconfigdir'],
-    content => template('jenkins/glance_s3.conf.erb'),
+    content => template('openstack_project/glance_s3.conf.erb'),
   }
 
   file { 'glanceswiftconf':
@@ -35,7 +35,7 @@ class openstack_project::glancetest(
     mode => 400,
     ensure => 'present',
     require => File['jenkinsglanceconfigdir'],
-    content => template('jenkins/glance_swift.conf.erb'),
+    content => template('openstack_project/glance_swift.conf.erb'),
   }
 
 }
