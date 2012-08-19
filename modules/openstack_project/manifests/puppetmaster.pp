@@ -1,6 +1,11 @@
-class openstack_project::puppetmaster {
+class openstack_project::puppetmaster(
+  $port
+  ) {
   class { 'openstack_project::server':
-    iptables_public_tcp_ports => [8140]
+    iptables_public_tcp_ports => [$port]
+  }
+  package {"puppetmaster-passenger":
+    ensure => present,
   }
   cron { "updatepuppetmaster":
     user => root,
@@ -17,5 +22,13 @@ class openstack_project::puppetmaster {
     source => 'puppet:///modules/openstack_project/puppetmaster/hiera.yaml',
     replace => 'true',
     require => Class['openstack_project::server']
+  }
+
+  apache::vhost { $fqdn:
+    port => $port,
+    docroot => 'MEANINGLESS ARGUMENT',
+    priority => '50',
+    template => 'openstack_project/puppetmasterr/vhost.erb',
+    ssl => true,
   }
 }
