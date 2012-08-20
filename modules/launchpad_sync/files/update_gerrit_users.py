@@ -20,6 +20,8 @@ import sys
 import fcntl
 import uuid
 import subprocess
+import logging
+import logging.config
 
 from datetime import datetime
 
@@ -52,15 +54,12 @@ except IOError:
     # another instance is running
     sys.exit(0)
 
-log_file = '/home/gerrit2/lp_sync_log'
-log_fp = open(log_file, 'a')
-log_fp.write('sync start ' + str(datetime.now()) + '\n')
-
 parser = argparse.ArgumentParser()
 parser.add_argument('user', help='The gerrit admin user')
 parser.add_argument('ssh_key', help='The gerrit admin SSH key file')
 parser.add_argument('site', help='The site in use (typically openstack or stackforge)')
 parser.add_argument('root_team', help='The root launchpad team to pull from')
+parser.add_argument('log_config', default=None, help='Path to file containing logging config')
 options = parser.parse_args()
 
 GERRIT_USER = options.user
@@ -76,10 +75,24 @@ GERRIT_CREDENTIALS = os.path.expanduser(os.environ.get('GERRIT_CREDENTIALS',
 GERRIT_BACKUP_PATH = os.environ.get('GERRIT_BACKUP_PATH',
                                 '/home/gerrit2/dbupdates')
 
+def setup_logging():
+  if options.log_config:
+    fp = os.path.expanduser(options.log_config)
+    if not os.path.exists(fp):
+      raise Exception("Unable to read logging config file at %s" % fp)
+    logging.config.fileConfig(fp)
+  else:
+    logging.basicConfig(filename='/home/gerrit2/gerrit_user_sync.log', level=logging.INFO)
+
+setup_logging()
+log = logging.getLogger('gerrit_user_sync')
+log.info('Gerrit user sync start ' + str(datetime.now()))
+
 for check_path in (os.path.dirname(GERRIT_CACHE_DIR),
                    os.path.dirname(GERRIT_CREDENTIALS),
                    GERRIT_BACKUP_PATH):
   if not os.path.exists(check_path):
+    log.info('mkdir ' + check_path)
     os.makedirs(check_path)
 
 def get_broken_config(filename):
@@ -109,16 +122,18 @@ DB_DB = gerrit_config.get("database","database")
 
 db_backup_file = "%s.%s.sql" % (DB_DB, datetime.isoformat(datetime.now()))
 db_backup_path = os.path.join(GERRIT_BACKUP_PATH, db_backup_file)
+log.info('Backup mysql DB to ' + db_backup_path)
 retval = os.system("mysqldump --opt -u%s -p%s %s | gzip -9 > %s.gz" %
                      (DB_USER, DB_PASS, DB_DB, db_backup_path))
 if retval != 0:
   print "Problem taking a db dump, aborting db update"
   sys.exit(retval)
 
+log.info('Connect to mysql DB')
 conn = MySQLdb.connect(user = DB_USER, passwd = DB_PASS, db = DB_DB)
 cur = conn.cursor()
 
-
+log.info('Connect to launchpad')
 launchpad = Launchpad.login_with('Gerrit User Sync', LPNET_SERVICE_ROOT,
                                  GERRIT_CACHE_DIR,
                                  credentials_file = GERRIT_CREDENTIALS,
@@ -266,6 +281,7 @@ if DEBUG:
       print "\t", new_groups
 
 for (username, user_details) in users.items():
+  log.info('Syncing user: %s' % username)
   member = launchpad.people[username]
   # accounts
   account_id = None
@@ -299,7 +315,7 @@ for (username, user_details) in users.items():
           pass
         user_details['email'] = email
 
-
+        log.info('Add %s to Gerrit DB.' % username)
         cur.execute("""insert into account_id (s) values (NULL)""");
         cur.execute("select max(s) from account_id")
         account_id = cur.fetchall()[0][0]
@@ -335,6 +351,7 @@ for (username, user_details) in users.items():
 
   if account_id is not None:
     # account_ssh_keys
+    log.info('Add ssh keys for %s' % username)
     user_details['ssh_keys'] = ["%s %s %s" % (get_type(key.keytype), key.keytext, key.comment) for key in member.sshkeys]
 
     for key in user_details['ssh_keys']:
@@ -381,6 +398,7 @@ for (username, user_details) in users.items():
           groups_to_rm[group_ids[group]] = group
 
     for group_id in groups_to_add:
+      log.info('Add %s to group %s' % (username, group_id))
       if not cur.execute("""select account_id from account_group_members
                             where account_id = %s and group_id = %s""",
                          (account_id, group_id)):
@@ -414,5 +432,4 @@ os.system("ssh -i %s -p29418 %s@localhost gerrit flush-caches" %
 
 conn.commit()
 
-log_fp.write('sync stop ' + str(datetime.now()) + '\n')
-log_fp.close()
+log.info('Gerrit user sync stop ' + str(datetime.now()))
