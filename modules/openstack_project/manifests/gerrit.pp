@@ -24,6 +24,7 @@ class openstack_project::gerrit (
       $war,
       $script_user='update',
       $script_key_file='/home/gerrit2/.ssh/id_rsa',
+      $script_logging_conf='/home/gerrit2/.sync_logging.conf',
       $projects_file='UNDEF',
       $github_username,
       $github_oauth_token,
@@ -133,6 +134,7 @@ class openstack_project::gerrit (
     user => "gerrit2",
     script_user => $script_user,
     script_key_file => $script_key_file,
+    script_logging_conf => $script_logging_conf,
     site => "openstack",
     root_team => "openstack",
   }
