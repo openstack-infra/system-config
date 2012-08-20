@@ -52,6 +52,10 @@ except IOError:
     # another instance is running
     sys.exit(0)
 
+log_file = '/home/gerrit2/lp_sync_log'
+log_fp = open(log_file, 'a')
+log_fp.write('sync start ' + str(datetime.now()) + '\n')
+
 parser = argparse.ArgumentParser()
 parser.add_argument('user', help='The gerrit admin user')
 parser.add_argument('ssh_key', help='The gerrit admin SSH key file')
@@ -409,3 +413,6 @@ os.system("ssh -i %s -p29418 %s@localhost gerrit flush-caches" %
           (GERRIT_SSH_KEY, GERRIT_USER))
 
 conn.commit()
+
+log_fp.write('sync stop ' + str(datetime.now()) + '\n')
+log_fp.close()
