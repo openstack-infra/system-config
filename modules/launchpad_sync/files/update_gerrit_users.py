@@ -20,6 +20,8 @@ import sys
 import fcntl
 import uuid
 import subprocess
+import logging
+import logging.config
 
 from datetime import datetime
 
@@ -52,15 +54,12 @@ except IOError:
     # another instance is running
     sys.exit(0)
 
-log_file = '/home/gerrit2/lp_sync_log'
-log_fp = open(log_file, 'a')
-log_fp.write('sync start ' + str(datetime.now()) + '\n')
-
 parser = argparse.ArgumentParser()
 parser.add_argument('user', help='The gerrit admin user')
 parser.add_argument('ssh_key', help='The gerrit admin SSH key file')
 parser.add_argument('site', help='The site in use (typically openstack or stackforge)')
 parser.add_argument('root_team', help='The root launchpad team to pull from')
+parser.add_argument('log_config', default=None, help='Path to file containing logging config')
 options = parser.parse_args()
 
 GERRIT_USER = options.user
@@ -76,10 +75,24 @@ GERRIT_CREDENTIALS = os.path.expanduser(os.environ.get('GERRIT_CREDENTIALS',
 GERRIT_BACKUP_PATH = os.environ.get('GERRIT_BACKUP_PATH',
                                 '/home/gerrit2/dbupdates')
 
+def setup_logging():
+  if options.log_config:
+    fp = os.path.expanduser(options.log_config)
+    if not os.path.exists(fp):
+      raise Exception("Unable to read logging config file at %s" % fp)
+    logging.config.fileConfig(fp)
+  else:
+    logging.basicConfig(filename='/home/gerrit2/gerrit_user_sync.log', level=logging.DEBUG)
+
+setup_logging()
+log = logging.getLogger('gerrit_user_sync')
+log.info('Gerrit user sync start ' + str(datetime.now()))
+
 for check_path in (os.path.dirname(GERRIT_CACHE_DIR),
                    os.path.dirname(GERRIT_CREDENTIALS),
                    GERRIT_BACKUP_PATH):
   if not os.path.exists(check_path):
+    log.info('mkdir ' + check_path)
     os.makedirs(check_path)
 
 def get_broken_config(filename):
@@ -109,20 +122,23 @@ DB_DB = gerrit_config.get("database","database")
 
 db_backup_file = "%s.%s.sql" % (DB_DB, datetime.isoformat(datetime.now()))
 db_backup_path = os.path.join(GERRIT_BACKUP_PATH, db_backup_file)
+log.info('Backup mysql DB to ' + db_backup_path)
 retval = os.system("mysqldump --opt -u%s -p%s %s | gzip -9 > %s.gz" %
                      (DB_USER, DB_PASS, DB_DB, db_backup_path))
 if retval != 0:
   print "Problem taking a db dump, aborting db update"
   sys.exit(retval)
 
+log.info('Connect to mysql DB')
 conn = MySQLdb.connect(user = DB_USER, passwd = DB_PASS, db = DB_DB)
 cur = conn.cursor()
 
-
+log.info('Connecting to launchpad')
 launchpad = Launchpad.login_with('Gerrit User Sync', LPNET_SERVICE_ROOT,
                                  GERRIT_CACHE_DIR,
                                  credentials_file = GERRIT_CREDENTIALS,
                                  version='devel')
+log.info('Connected to launchpad')
 
 def get_sub_teams(team, have_teams):
     for sub_team in launchpad.people[team].sub_teams:
@@ -132,8 +148,10 @@ def get_sub_teams(team, have_teams):
     return have_teams
 
 
+log.info('Getting teams')
 teams_todo = get_sub_teams(options.root_team, [])
 
+log.info('Listing projects')
 users={}
 groups={}
 groups_in_groups={}
@@ -144,6 +162,7 @@ projects = subprocess.check_output(['/usr/bin/ssh', '-p', '29418',
     '-l', GERRIT_USER, 'localhost',
     'gerrit', 'ls-projects']).split('\n')
 
+log.info('Examining teams')
 for team_todo in teams_todo:
 
   team = launchpad.people[team_todo]
@@ -184,6 +203,7 @@ for (supergroup, subgroups) in groups_in_groups.items():
     if group not in groups.keys():
       groups[group] = None
 
+log.info('Examining groups')
 # account_groups
 # groups is a dict of team name to team display name
 # here, for every group we have in that dict, we're building another dict of
@@ -203,6 +223,7 @@ for (group_name, group_display_name) in groups.items():
     second_uuid = uuid.uuid4()
     full_uuid = "%s%s" % (group_uuid.hex, second_uuid.hex[:8])
 
+    log.info('Adding group %s' % group_name)
     cur.execute("""insert into account_groups
                    (group_id, group_type, owner_group_id,
                     name, description, group_uuid)
@@ -222,6 +243,7 @@ for (group_name, group_display_name) in groups.items():
 for (group_name, subgroups) in groups_in_groups.items():
   for subgroup_name in subgroups.keys():
     try:
+      log.info('Adding included group %s' % group_name)
       cur.execute("""insert into account_group_includes
                        (group_id, include_id)
                       values (%s, %s)""",
@@ -266,6 +288,7 @@ if DEBUG:
       print "\t", new_groups
 
 for (username, user_details) in users.items():
+  log.info('Syncing user: %s' % username)
   member = launchpad.people[username]
   # accounts
   account_id = None
@@ -286,6 +309,7 @@ for (username, user_details) in users.items():
       if cur.execute("""select account_id from account_external_ids where
         external_id in (%s)""", user_details['openid_external_id']):
         account_id = cur.fetchall()[0][0]
+        log.info('Handling username change id %s to %s' % (account_id, username))
         cur.execute("""update account_external_ids
                           set external_id=%s
                         where external_id like 'username%%'
@@ -299,7 +323,7 @@ for (username, user_details) in users.items():
           pass
         user_details['email'] = email
 
-
+        log.info('Add %s to Gerrit DB.' % username)
         cur.execute("""insert into account_id (s) values (NULL)""");
         cur.execute("select max(s) from account_id")
         account_id = cur.fetchall()[0][0]
@@ -335,6 +359,7 @@ for (username, user_details) in users.items():
 
   if account_id is not None:
     # account_ssh_keys
+    log.info('Add ssh keys for %s' % username)
     user_details['ssh_keys'] = ["%s %s %s" % (get_type(key.keytype), key.keytext, key.comment) for key in member.sshkeys]
 
     for key in user_details['ssh_keys']:
@@ -381,6 +406,7 @@ for (username, user_details) in users.items():
           groups_to_rm[group_ids[group]] = group
 
     for group_id in groups_to_add:
+      log.info('Add %s to group %s' % (username, group_id))
       if not cur.execute("""select account_id from account_group_members
                             where account_id = %s and group_id = %s""",
                          (account_id, group_id)):
@@ -414,5 +440,4 @@ os.system("ssh -i %s -p29418 %s@localhost gerrit flush-caches" %
 
 conn.commit()
 
-log_fp.write('sync stop ' + str(datetime.now()) + '\n')
-log_fp.close()
+log.info('Gerrit user sync stop ' + str(datetime.now()))
