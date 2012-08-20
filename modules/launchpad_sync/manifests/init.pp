@@ -29,7 +29,7 @@ class launchpad_sync(
   cron { "sync_launchpad_users":
     user => $user,
     minute => "*/15",
-    command => "sleep $((RANDOM\\%60+60)) && timeout -k 5m 65m python /usr/local/bin/update_gerrit_users.py ${script_user} ${script_key_file} ${site} ${root_team}",
+    command => "sleep $((RANDOM\\%60+60)) && timeout -k 5m 8h python /usr/local/bin/update_gerrit_users.py ${script_user} ${script_key_file} ${site} ${root_team}",
     require => File['/usr/local/bin/update_gerrit_users.py'],
   }
 
