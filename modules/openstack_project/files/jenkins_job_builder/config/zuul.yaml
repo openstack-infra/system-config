@@ -27,6 +27,8 @@
     publishers:
       - scp:
           site: '173.203.107.207'
-          source: 'doc/build/html/**/*'
-          target: 'ci/zuul'
-          keep-hierarchy: true
+          files:
+            - target: 'ci/zuul'
+              source: 'doc/build/html/**/*'
+              keep-hierarchy: true
+      - console-log

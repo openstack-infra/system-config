@@ -59,6 +59,16 @@
     publishers:
       - archive: 
           artifacts: logs/*
+      - scp:
+          site: 'static.openstack.org'
+          files:
+            - target: 'logs/$ZUUL_CHANGE/$ZUUL_PATCHSET/$ZUUL_PIPELINE/$JOB_NAME/$BUILD_NUMBER'
+              source: 'logs/*'
+              keep-hierarchy: true
+              copy-after-failure: true
+            - target: 'logs/$ZUUL_CHANGE/$ZUUL_PATCHSET/$ZUUL_PIPELINE/$JOB_NAME/$BUILD_NUMBER'
+              copy-console: true
+              copy-after-failure: true
       - trigger-parameterized-builds:
           - project: devstack-update-complete
             when: complete
@@ -128,6 +138,16 @@
     publishers:
       - archive: 
           artifacts: logs/*
+      - scp:
+          site: 'static.openstack.org'
+          files:
+            - target: 'logs/$ZUUL_CHANGE/$ZUUL_PATCHSET/$ZUUL_PIPELINE/$JOB_NAME/$BUILD_NUMBER'
+              source: 'logs/*'
+              keep-hierarchy: true
+              copy-after-failure: true
+            - target: 'logs/$ZUUL_CHANGE/$ZUUL_PATCHSET/$ZUUL_PIPELINE/$JOB_NAME/$BUILD_NUMBER'
+              copy-console: true
+              copy-after-failure: true
       - trigger-parameterized-builds:
           - project: devstack-update-complete
             when: complete
@@ -192,6 +212,16 @@
     publishers:
       - archive: 
           artifacts: logs/*
+      - scp:
+          site: 'static.openstack.org'
+          files:
+            - target: 'logs/periodic/$JOB_NAME/$BUILD_NUMBER'
+              source: 'logs/*'
+              keep-hierarchy: true
+              copy-after-failure: true
+            - target: 'logs/periodic/$JOB_NAME/$BUILD_NUMBER'
+              copy-console: true
+              copy-after-failure: true
       - trigger-parameterized-builds:
           - project: devstack-update-complete
             when: complete
@@ -256,6 +286,16 @@
     publishers:
       - archive: 
           artifacts: logs/*
+      - scp:
+          site: 'static.openstack.org'
+          files:
+            - target: 'logs/periodic/$JOB_NAME/$BUILD_NUMBER'
+              source: 'logs/*'
+              keep-hierarchy: true
+              copy-after-failure: true
+            - target: 'logs/periodic/$JOB_NAME/$BUILD_NUMBER'
+              copy-console: true
+              copy-after-failure: true
       - trigger-parameterized-builds:
           - project: devstack-update-complete
             when: complete
