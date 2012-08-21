@@ -274,6 +274,8 @@ projects:
     publish:
       - nova-tarball
       - nova-docs
+    silent:
+      - gate-nova-pylint
 
   - name: openstack/openstack-common
     check:
