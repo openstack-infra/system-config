@@ -95,4 +95,4 @@
           site: 'nova.openstack.org'
           warfile: 'gerrit-war/target/gerrit*.war'
           target: 'tarballs/ci/'
-      - console-log
+      - console-log-post

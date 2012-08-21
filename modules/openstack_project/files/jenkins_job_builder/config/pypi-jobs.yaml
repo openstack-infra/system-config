@@ -33,7 +33,7 @@
       - tarball:
           project: '{name}'
           site: '{tarball-publisher-site}'
-      - console-log
+      - console-log-post
 
 
 - job-template:
@@ -59,7 +59,7 @@
       - tarball:
           project: '{name}'
           site: '{tarball-publisher-site}'
-      - console-log
+      - console-log-post
 
 
 - job-group:
