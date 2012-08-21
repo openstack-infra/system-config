@@ -79,6 +79,16 @@ projects:
     publish:
       - zuul-docs
 
+  - name: openstack-ci/nose-html-output
+    check:
+      - gate-nose-html-output-merge
+    gate:
+      - gate-nose-html-output-merge
+    post:
+      - nose-html-output-sdist-tarball
+    publish:
+      - nose-html-output-pypi
+
   - name: openstack-ci/pypi-mirror
     check:
       - gate-pypi-mirror-merge:
