@@ -31,4 +31,4 @@
             - target: 'ci/zuul'
               source: 'doc/build/html/**/*'
               keep-hierarchy: true
-      - console-log
+      - console-log-post

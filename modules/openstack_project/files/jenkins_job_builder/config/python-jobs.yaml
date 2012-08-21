@@ -23,7 +23,7 @@
 
     publishers:
       - coverage
-      - console-log
+      - console-log-post
 
     node: '{node}'
   

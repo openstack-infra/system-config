@@ -152,6 +152,15 @@
               copy-console: true
               copy-after-failure: true
 
+- publisher:
+    name: console-log-post
+    publishers:
+      - scp:
+          site: 'static.openstack.org'
+          files:
+            - target: 'logs/$ZUUL_SHORT_NEWREV/$ZUUL_PIPELINE/$JOB_NAME/$BUILD_NUMBER'
+              copy-console: true
+              copy-after-failure: true
 
 - publisher:
     name: console-log-periodic
