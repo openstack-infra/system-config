@@ -147,6 +147,15 @@
 
 
 - project:
+    name: meetbot
+    github-org: openstack-ci
+    node: precise
+
+    jobs:
+      - gate-{name}-merge
+
+
+- project:
     name: MRaaS
     github-org: stackforge
     node: precise
