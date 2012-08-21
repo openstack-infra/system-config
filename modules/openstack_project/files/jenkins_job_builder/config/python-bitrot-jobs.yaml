@@ -21,7 +21,16 @@
       - python26
 
     publishers:
-      - console-log-periodic
+      - scp:
+          site: 'static.openstack.org'
+          files:
+            - target: 'logs/periodic/$JOB_NAME/$BUILD_NUMBER'
+              source: '**/*results.html'
+              keep-hierarchy: false
+              copy-after-failure: true
+            - target: 'logs/periodic/$JOB_NAME/$BUILD_NUMBER'
+              copy-console: true
+              copy-after-failure: true
 
     scm:
       - git: 
@@ -56,7 +65,16 @@
       - python27
 
     publishers:
-      - console-log-periodic
+      - scp:
+          site: 'static.openstack.org'
+          files:
+            - target: 'logs/periodic/$JOB_NAME/$BUILD_NUMBER'
+              source: '**/*results.html'
+              keep-hierarchy: false
+              copy-after-failure: true
+            - target: 'logs/periodic/$JOB_NAME/$BUILD_NUMBER'
+              copy-console: true
+              copy-after-failure: true
 
     scm:
       - git: 
