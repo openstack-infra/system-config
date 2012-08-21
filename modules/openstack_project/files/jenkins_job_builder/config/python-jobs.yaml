@@ -22,7 +22,8 @@
       - coverage
 
     publishers:
-       - coverage
+      - coverage
+      - console-log
 
     node: '{node}'
   
@@ -52,6 +53,7 @@
 
     publishers:
       - pep8
+      - console-log
 
     node: '{node}'
   
@@ -81,6 +83,7 @@
 
     publishers:
       - pylint
+      - console-log
 
     node: '{node}'
 
@@ -107,6 +110,9 @@
     builders:
       - gerrit-git-prep
       - python26
+
+    publishers:
+      - console-log
 
     # >= precise does not have python2.6
     node: oneiric
@@ -141,6 +147,9 @@
       - gerrit-git-prep
       - python27
 
+    publishers:
+      - console-log
+
     node: '{node}'
   
 
@@ -165,6 +174,9 @@
 
     builders:
       - gerrit-git-prep
+
+    publishers:
+      - console-log
 
     node: '{node}'
 
@@ -191,6 +203,9 @@
     builders:
       - gerrit-git-prep
       - docs
+
+    publishers:
+      - console-log
 
     node: '{node}'
 
@@ -220,6 +235,9 @@
       - gerrit-git-prep
       - pyflakes
 
+    publishers:
+      - console-log
+
 
 - job-group:
     name: python-jobs
@@ -231,3 +249,4 @@
       - 'gate-{name}-python27'
       - 'gate-{name}-docs'
       # pyflakes isn't standard
+      # pylint isn't standard
