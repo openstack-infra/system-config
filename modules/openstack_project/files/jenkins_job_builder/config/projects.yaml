@@ -153,6 +153,15 @@
 
 
 - project:
+    name: nose-html-output
+    github-org: openstack-ci
+    node: precise
+    
+    jobs:
+      - gate-{name}-merge
+
+
+- project:
     name: nova
     github-org: openstack
     node: precise
