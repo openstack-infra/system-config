@@ -112,7 +112,16 @@
       - python26
 
     publishers:
-      - console-log
+      - scp:
+          site: 'static.openstack.org'
+          files:
+            - target: 'logs/$ZUUL_CHANGE/$ZUUL_PATCHSET/$ZUUL_PIPELINE/$JOB_NAME/$BUILD_NUMBER'
+              source: 'results.html'
+              keep-hierarchy: true
+              copy-after-failure: true
+            - target: 'logs/$ZUUL_CHANGE/$ZUUL_PATCHSET/$ZUUL_PIPELINE/$JOB_NAME/$BUILD_NUMBER'
+              copy-console: true
+              copy-after-failure: true
 
     # >= precise does not have python2.6
     node: oneiric
@@ -135,7 +144,7 @@
       artifactNumToKeep: -1
 
     parameters:
-      - label: 
+      - label:
           name: NODE_LABEL
           description: Label of node to use for this build
           default: '{node}'
@@ -148,7 +157,16 @@
       - python27
 
     publishers:
-      - console-log
+      - scp:
+          site: 'static.openstack.org'
+          files:
+            - target: 'logs/$ZUUL_CHANGE/$ZUUL_PATCHSET/$ZUUL_PIPELINE/$JOB_NAME/$BUILD_NUMBER'
+              source: 'results.html'
+              keep-hierarchy: true
+              copy-after-failure: true
+            - target: 'logs/$ZUUL_CHANGE/$ZUUL_PATCHSET/$ZUUL_PIPELINE/$JOB_NAME/$BUILD_NUMBER'
+              copy-console: true
+              copy-after-failure: true
 
     node: '{node}'
   
