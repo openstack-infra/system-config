@@ -156,6 +156,8 @@
     name: nose-html-output
     github-org: openstack-ci
     node: precise
+    doc-publisher-site: ci.openstack.org
+    tarball-publisher-site: 173.203.107.207
 
     jobs:
       - gate-{name}-merge
