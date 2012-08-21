@@ -145,6 +145,12 @@ projects:
     gate:
       - gate-jenkins-job-builder-merge
 
+  - name: openstack-ci/meetbot
+    check:
+      - gate-meetbot-merge
+    gate:
+      - gate-meetbot-merge
+
   - name: openstack/openstack-ci-puppet
     check:
       - gate-ci-puppet-merge:
