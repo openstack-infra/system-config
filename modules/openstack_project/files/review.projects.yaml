@@ -29,6 +29,9 @@
 - project: openstack-ci/meetbot
   options:
   - close-pull
+- project: openstack-ci/nose-html-output
+  options:
+  - close-pull
 - project: openstack-ci/puppet-apparmor
   options:
   - close-pull
