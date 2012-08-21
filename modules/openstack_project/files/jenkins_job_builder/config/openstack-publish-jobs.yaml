@@ -30,6 +30,7 @@
           target: 'developer/{name}'
           remove-prefix: 'doc/build/html'
           excludes: ''
+      - console-log
 
 
 - job-template:
@@ -62,6 +63,7 @@
       - tarball:
           project: '{name}'
           site: '{tarball-publisher-site}'
+      - console-log
 
 
 - job-group:

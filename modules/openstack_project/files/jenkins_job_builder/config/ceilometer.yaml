@@ -21,6 +21,9 @@
       - gerrit-git-prep
       - python26-essex
 
+    publishers:
+      - console-log
+
     # >= precise does not have python2.6
     node: oneiric
   
@@ -47,5 +50,8 @@
     builders:
       - gerrit-git-prep
       - python27-essex
+
+    publishers:
+      - console-log
 
     node: oneiric

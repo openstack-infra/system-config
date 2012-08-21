@@ -16,3 +16,6 @@
       - gerrit-git-prep
       - puppet-syntax
       - pyflakes
+
+    publishers:
+      - console-log

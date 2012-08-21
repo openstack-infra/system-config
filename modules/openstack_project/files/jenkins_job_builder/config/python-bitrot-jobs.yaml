@@ -20,6 +20,9 @@
     builders:
       - python26
 
+    publishers:
+      - console-log-periodic
+
     scm:
       - git: 
           url: 'git://github.com/{github-org}/{name}.git'
@@ -52,6 +55,9 @@
     builders:
       - python27
 
+    publishers:
+      - console-log-periodic
+
     scm:
       - git: 
           url: 'git://github.com/{github-org}/{name}.git'
@@ -82,6 +88,9 @@
 
     builders:
       - docs
+
+    publishers:
+      - console-log-periodic
 
     scm:
       - git: 

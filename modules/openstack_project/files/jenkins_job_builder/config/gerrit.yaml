@@ -30,6 +30,7 @@
           site: 'nova.openstack.org'
           warfile: 'gerrit-war/target/gerrit*.war'
           target: 'tarballs/ci/test/'
+      - console-log
 
 
 - job:
@@ -59,6 +60,8 @@
     postbuilders:
       - gerrit-postrun
 
+    publishers:
+      - console-log
 
 - job:
     name: gerrit-package
@@ -92,3 +95,4 @@
           site: 'nova.openstack.org'
           warfile: 'gerrit-war/target/gerrit*.war'
           target: 'tarballs/ci/'
+      - console-log

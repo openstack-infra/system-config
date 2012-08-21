@@ -21,3 +21,6 @@
     builders:
       - gerrit-git-prep
       - selenium
+
+    publishers:
+      - console-log

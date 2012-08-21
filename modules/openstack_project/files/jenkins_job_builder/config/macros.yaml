@@ -107,8 +107,9 @@
           artifacts: 'dist/*.tar.gz'
       - scp:
           site: '{site}'
-          source: 'dist/*.tar.gz'
-          target: 'tarballs/{project}/'
+          files:
+            - target: 'tarballs/{project}/'
+              source: 'dist/*.tar.gz'
 
 - publisher:
     name: war
@@ -117,8 +118,9 @@
           artifacts: '{warfile}'
       - scp:
           site: '{site}'
-          source: '{warfile}'
-          target: '{target}'
+          files:
+            - target: '{target}'
+              source: '{warfile}'
 
 - publisher:
     name: pep8
@@ -139,3 +141,24 @@
             max: 1
             unstable: 1
             pattern: '**/pylint.txt'
+
+- publisher:
+    name: console-log
+    publishers:
+      - scp:
+          site: 'static.openstack.org'
+          files:
+            - target: 'logs/$ZUUL_CHANGE/$ZUUL_PATCHSET/$ZUUL_PIPELINE/$JOB_NAME/$BUILD_NUMBER'
+              copy-console: true
+              copy-after-failure: true
+
+
+- publisher:
+    name: console-log-periodic
+    publishers:
+      - scp:
+          site: 'static.openstack.org'
+          files:
+            - target: 'logs/periodic/$JOB_NAME/$BUILD_NUMBER'
+              copy-console: true
+              copy-after-failure: true
