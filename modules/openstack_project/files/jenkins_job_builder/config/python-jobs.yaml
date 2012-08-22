@@ -116,7 +116,7 @@
           site: 'static.openstack.org'
           files:
             - target: 'logs/$ZUUL_CHANGE/$ZUUL_PATCHSET/$ZUUL_PIPELINE/$JOB_NAME/$BUILD_NUMBER'
-              source: '**/*results.html'
+              source: '**/*nose_results.html'
               keep-hierarchy: false
               copy-after-failure: true
             - target: 'logs/$ZUUL_CHANGE/$ZUUL_PATCHSET/$ZUUL_PIPELINE/$JOB_NAME/$BUILD_NUMBER'
@@ -161,7 +161,7 @@
           site: 'static.openstack.org'
           files:
             - target: 'logs/$ZUUL_CHANGE/$ZUUL_PATCHSET/$ZUUL_PIPELINE/$JOB_NAME/$BUILD_NUMBER'
-              source: '**/*results.html'
+              source: '**/*nose_results.html'
               keep-hierarchy: false
               copy-after-failure: true
             - target: 'logs/$ZUUL_CHANGE/$ZUUL_PATCHSET/$ZUUL_PIPELINE/$JOB_NAME/$BUILD_NUMBER'
