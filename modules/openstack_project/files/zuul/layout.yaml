@@ -571,6 +571,12 @@ projects:
         - gate-ceilometer-python26
         - gate-ceilometer-python27
 
+  - name: stackforge/MRaaS
+    check:
+      - gate-MRaaS-merge
+    gate:
+      - gate-MRaaS-merge
+
   - name: heat-api/heat
     check:
       - gate-heat-merge:

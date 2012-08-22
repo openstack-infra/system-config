@@ -160,6 +160,9 @@
     github-org: stackforge
     node: precise
 
+    jobs:
+      - gate-{name}-merge
+
 
 - project:
     name: nose-html-output
