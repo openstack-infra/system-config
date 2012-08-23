@@ -7,6 +7,8 @@
 # what packages we ended up testing.
 #
 
+export NOSE_COVER_HTML=1
+
 venv=cover
 
 tox -e$venv
