@@ -22,8 +22,16 @@
       - coverage
 
     publishers:
-      - coverage
-      - console-log-post
+      - scp:
+          site: 'static.openstack.org'
+          files:
+            - target: 'logs/periodic/$JOB_NAME/$BUILD_NUMBER'
+              source: 'cover/**'
+              keep-hierarchy: true
+              copy-after-failure: true
+            - target: 'logs/periodic/$JOB_NAME/$BUILD_NUMBER'
+              copy-console: true
+              copy-after-failure: true
 
     node: '{node}'
   
