@@ -30,7 +30,7 @@ class gerritbot(
     hasrestart => true,
     require    => File['/etc/init.d/gerritbot'],
     subscribe  => [Package['gerritbot'],
-                   File['/etc/gerritbot/gerritbot.confg'],
+                   File['/etc/gerritbot/gerritbot.config'],
                    File['/etc/gerritbot/channel_config.yaml']],
   }
 
