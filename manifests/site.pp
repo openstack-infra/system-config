@@ -38,6 +38,7 @@ node "jenkins.openstack.org" {
     jenkins_apikey => hiera('zuul_jenkins_apikey'),
     gerrit_server => 'review.openstack.org',
     gerrit_user => 'jenkins',
+    url_pattern => 'http://logs.openstack.org/{change.number}/{change.patchset}/{pipeline.name}/{job.name}/{build.number}'
   }
 }
 
