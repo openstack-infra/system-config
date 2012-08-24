@@ -3,7 +3,8 @@ class zuul (
     $jenkins_user,
     $jenkins_apikey,
     $gerrit_server,
-    $gerrit_user
+    $gerrit_user,
+    $url_pattern
 ) {
   $packages = ["python-webob",
                "python-daemon",
