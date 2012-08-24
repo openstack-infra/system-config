@@ -38,12 +38,29 @@ class gerritbot(
     ensure => directory
   }
 
+  file { '/var/log/gerritbot':
+    ensure => directory,
+    owner  => 'root',
+    group  => 'gerrit2',
+    mode    => 0775,
+  }
+
   file { '/etc/gerritbot/channel_config.yaml':
     owner   => 'root',
     group   => 'gerrit2',
     mode    => 440,
     ensure  => 'present',
     source  => 'puppet:///modules/gerritbot/gerritbot_channel_config.yaml',
+    replace => true,
+    require => User['gerrit2'],
+  }
+
+  file { '/etc/gerritbot/logging.config':
+    owner   => 'root',
+    group   => 'gerrit2',
+    mode    => 440,
+    ensure  => 'present',
+    source  => 'puppet:///modules/gerritbot/logging.config',
     replace => true,
     require => User['gerrit2'],
   }
