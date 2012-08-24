@@ -1,0 +1,32 @@
+- job:
+    name: openstack-cli-guide
+    project-type: maven
+    concurrent: true
+    node: precise
+
+    wrappers:
+      - timeout:
+          timeout: 40
+          fail: true
+
+    triggers:
+      - zuul-post
+
+    prebuilders:
+      - gerrit-git-prep
+
+    maven:
+      root-module:
+        group-id: org.openstack.docs
+        artifact-id: openstack-guide
+      root-pom: doc/src/docbkx/cli-guide/pom.xml
+      goals: 'clean generate-sources'
+
+    publishers:
+      - console-log-post
+      - ftp:
+          site: docs.openstack.org
+          source: 'doc/src/docbkx/cli-guide/target/docbkx/webhelp/bk-cli-guide/**'
+          target: 'cli/quick-start'
+          remove-prefix: 'doc/src/docbkx/cli-guide/target/docbkx/webhelp/bk-cli-guide/'
+          excludes: '**/*.xml,**/null*'
