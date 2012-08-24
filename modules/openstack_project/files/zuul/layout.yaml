@@ -595,3 +595,6 @@ projects:
         - gate-reddwarf-python26
         - gate-reddwarf-python27
 
+  - name: openstack/openstack-manuals
+    post:
+      - openstack-cli-guide
