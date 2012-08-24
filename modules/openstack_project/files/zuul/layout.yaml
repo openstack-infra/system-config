@@ -55,6 +55,10 @@ jobs:
     parameter-function: devstack_params
   - name: ^.*-python27$
     parameter-function: python27_params
+  - name: gate-nova-pylint
+    voting: false
+  - name: ^.*-coverage$
+    voting: false
 
 
 projects:
@@ -66,6 +70,7 @@ projects:
         - gate-zuul-pyflakes
         - gate-zuul-python26
         - gate-zuul-python27
+        - zuul-coverage
     gate:
       - gate-zuul-merge:
         - gate-zuul-docs
@@ -74,7 +79,6 @@ projects:
         - gate-zuul-python26
         - gate-zuul-python27
     post:
-      - zuul-coverage
       - zuul-docs
     publish:
       - zuul-docs
@@ -276,6 +280,7 @@ projects:
         - gate-nova-python26
         - gate-nova-python27
         - gate-tempest-devstack-vm
+        - gate-nova-pylint
     gate:
       - gate-nova-merge:
         - gate-nova-docs
@@ -290,8 +295,6 @@ projects:
     publish:
       - nova-tarball
       - nova-docs
-    silent:
-      - gate-nova-pylint
 
   - name: openstack/openstack-common
     check:
