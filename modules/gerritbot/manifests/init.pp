@@ -9,7 +9,7 @@ class gerritbot(
   include pip
 
   package { 'gerritbot':
-    ensure   => latest,  # we want the latest from pip
+    ensure   => present,  # Pip upgrade is not working
     provider => pip,
     require  => Class[pip]
   }
