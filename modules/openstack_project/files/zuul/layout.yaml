@@ -607,3 +607,7 @@ projects:
   - name: openstack/openstack-manuals
     post:
       - openstack-cli-guide
+
+  - name: openstack/netconn-api
+    post:
+      - netconn-api-v20
