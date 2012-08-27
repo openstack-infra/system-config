@@ -57,7 +57,7 @@ jobs:
     parameter-function: python27_params
   - name: gate-nova-pylint
     voting: false
-  - name: ^.*-coverage$
+  - name: dev-zuul-coverage
     voting: false
 
 
@@ -70,7 +70,7 @@ projects:
         - gate-zuul-pyflakes
         - gate-zuul-python26
         - gate-zuul-python27
-        - zuul-coverage
+        - dev-zuul-coverage
     gate:
       - gate-zuul-merge:
         - gate-zuul-docs
@@ -80,6 +80,7 @@ projects:
         - gate-zuul-python27
     post:
       - zuul-docs
+      - zuul-coverage
     publish:
       - zuul-docs
 
