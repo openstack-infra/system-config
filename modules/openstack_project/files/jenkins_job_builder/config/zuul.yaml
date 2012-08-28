@@ -33,7 +33,7 @@
               keep-hierarchy: true
       - console-log-post
 
-- job-template:
+- job:
     name: 'dev-zuul-coverage'
     concurrent: true
 
@@ -68,4 +68,4 @@
               copy-console: true
               copy-after-failure: true
 
-    node: '{node}'
+    node: 'precise'
