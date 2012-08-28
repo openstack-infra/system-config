@@ -16,6 +16,7 @@ openstack-infra:
       - openstack-ci/jenkins-job-builder
       - openstack-ci/lodgeit
       - openstack-ci/meetbot
+      - openstack-ci/nose-html-output
       - openstack-ci/pypi-mirror
       - openstack-ci/zuul
     branches:
