@@ -59,8 +59,6 @@ jobs:
     voting: false
   - name: dev-zuul-coverage
     voting: false
-  - name: gate-tempest-devstack-vm
-    voting: false
 
 
 projects:
