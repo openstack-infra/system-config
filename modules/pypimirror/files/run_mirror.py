@@ -78,4 +78,3 @@ for section in config:
             if os.path.exists(requires_file):
                 stanza = "-r %s" % requires_file
                 run_command(pip_command % stanza)
-

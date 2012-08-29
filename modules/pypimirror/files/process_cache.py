@@ -42,7 +42,7 @@ for filename in os.listdir(source_cache):
         continue
     package_name = name_match.group(1)
 
-    version_list = packages.get(package_name,{})
+    version_list = packages.get(package_name, {})
     version_list[tarball] = filename
     packages[package_name] = version_list
     package_count = package_count + 1

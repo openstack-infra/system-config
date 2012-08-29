@@ -31,16 +31,20 @@ options = parser.parse_args()
 GERRIT_USER = options.user
 GERRIT_SSH_KEY = options.ssh_key
 
-logging.basicConfig(format='%(asctime)-6s: %(name)s - %(levelname)s - %(message)s', filename='/var/log/gerrit/expire_reviews.log')
-logger= logging.getLogger('expire_reviews')
+logging.basicConfig(format='%(asctime)-6s: %(name)s - %(levelname)s - %(message)s',
+        filename='/var/log/gerrit/expire_reviews.log')
+logger = logging.getLogger('expire_reviews')
 logger.setLevel(logging.INFO)
-
 logger.info('Starting expire reviews')
 logger.info('Connecting to Gerrit')
 
 ssh = paramiko.SSHClient()
 ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-ssh.connect('localhost', username=GERRIT_USER, key_filename=GERRIT_SSH_KEY, port=29418)
+ssh.connect('localhost',
+        username=GERRIT_USER,
+        key_filename=GERRIT_SSH_KEY,
+        port=29418)
+
 
 def expire_patch_set(patch_id, patch_subject, has_negative):
   if has_negative:

@@ -61,7 +61,7 @@ for check_path in (os.path.dirname(GERRIT_CACHE_DIR),
 def get_broken_config(filename):
   """ gerrit config ini files are broken and have leading tabs """
   text = ""
-  with open(filename,"r") as conf:
+  with open(filename, "r") as conf:
     for line in conf.readlines():
       text = "%s%s" % (text, line.lstrip())
 
@@ -74,8 +74,8 @@ gerrit_config = get_broken_config(GERRIT_CONFIG)
 secure_config = get_broken_config(GERRIT_SECURE_CONFIG)
 
 DB_USER = gerrit_config.get("database", "username")
-DB_PASS = secure_config.get("database","password")
-DB_DB = gerrit_config.get("database","database")
+DB_PASS = secure_config.get("database", "password")
+DB_DB = gerrit_config.get("database", "database")
 
 def make_db_backup():
   db_backup_file = "%s.%s.sql" % (DB_DB, datetime.isoformat(datetime.now()))
@@ -202,7 +202,7 @@ class GerritAction(object):
     for line in stdout:
       row= json.loads(line)
       if row['type'] == 'row':
-        user= row['columns']['external_id'].replace('username:','')
+        user= row['columns']['external_id'].replace('username:', '')
         users.append(user)
     return users
 
@@ -233,7 +233,7 @@ class GerritAction(object):
     for line in stdout:
       row= json.loads(line)
       if row['type'] == 'row':
-        user= row['columns']['external_id'].replace('username:','')
+        user= row['columns']['external_id'].replace('username:', '')
         users.append(user)
     return users
 
@@ -249,10 +249,9 @@ class GerritAction(object):
     for line in stdout:
       row= json.loads(line)
       if row['type'] == 'row':
-        user= row['columns']['external_id'].replace('username:','')
+        user= row['columns']['external_id'].replace('username:', '')
         users.append(user)
     return users
-
 
   def get_implied_groups(self, group_name):
     gid= self.get_group_id(group_name)
@@ -344,7 +343,6 @@ class GerritAction(object):
     group_name = "openstack/{0}".format(group_name)
     query= "insert into account_project_watches VALUES ('Y', 'N', 'N', {0}, '{1}', '*')". format(uid, group_name)
     self.run_query(query)
-
 
   def del_user_from_group(self, user_name, group_name):
     logger.info("Deleting Gerrit user %s from group %s", user_name, group_name)
