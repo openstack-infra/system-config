@@ -35,6 +35,7 @@ Log:
 """
 DEST_ADDRESS = 'openstack-docs@lists.openstack.org'
 
+
 def process_impact(git_log, args):
     """Notify doc team of doc impact"""
     email_content = EMAIL_TEMPLATE % (args.change_url, git_log)
@@ -47,10 +48,12 @@ def process_impact(git_log, args):
     s.sendmail('gerrit2@review.openstack.org', DEST_ADDRESS, msg.as_string())
     s.quit()
 
+
 def docs_impacted(git_log):
     """Determine if a changes log indicates there is a doc impact"""
     impact_regexp = r'DocImpact'
     return re.search(impact_regexp, git_log, re.IGNORECASE)
+
 
 def extract_git_log(args):
     """Extract git log of all merged commits"""
