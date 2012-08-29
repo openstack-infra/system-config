@@ -39,7 +39,8 @@ for line in urllib.urlopen('http://wiki.openstack.org/Contributors?action=raw'):
     m = CONTRIBUTOR_RE.match(line)
     if m and m.group('login') and m.group('trans'):
         login = m.group('login')
-        if login=="<#c0c0c0>'''Launchpad ID'''": continue
+        if login=="<#c0c0c0>'''Launchpad ID'''":
+            continue
         l = LINK_RE.match(login)
         if l:
             login = l.group('name')
