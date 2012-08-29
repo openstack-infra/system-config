@@ -75,6 +75,7 @@ GERRIT_CREDENTIALS = os.path.expanduser(os.environ.get('GERRIT_CREDENTIALS',
 GERRIT_BACKUP_PATH = os.environ.get('GERRIT_BACKUP_PATH',
                                 '/home/gerrit2/dbupdates')
 
+
 def setup_logging():
   if options.log_config:
     fp = os.path.expanduser(options.log_config)
@@ -95,10 +96,11 @@ for check_path in (os.path.dirname(GERRIT_CACHE_DIR),
     log.info('mkdir ' + check_path)
     os.makedirs(check_path)
 
+
 def get_broken_config(filename):
   """ gerrit config ini files are broken and have leading tabs """
   text = ""
-  with open(filename,"r") as conf:
+  with open(filename, "r") as conf:
     for line in conf.readlines():
       text = "%s%s" % (text, line.lstrip())
 
@@ -106,6 +108,7 @@ def get_broken_config(filename):
   c=ConfigParser.ConfigParser()
   c.readfp(fp)
   return c
+
 
 def get_type(in_type):
   if in_type == "RSA":
@@ -117,8 +120,8 @@ gerrit_config = get_broken_config(GERRIT_CONFIG)
 secure_config = get_broken_config(GERRIT_SECURE_CONFIG)
 
 DB_USER = gerrit_config.get("database", "username")
-DB_PASS = secure_config.get("database","password")
-DB_DB = gerrit_config.get("database","database")
+DB_PASS = secure_config.get("database", "password")
+DB_DB = gerrit_config.get("database", "database")
 
 db_backup_file = "%s.%s.sql" % (DB_DB, datetime.isoformat(datetime.now()))
 db_backup_path = os.path.join(GERRIT_BACKUP_PATH, db_backup_file)
@@ -139,6 +142,7 @@ launchpad = Launchpad.login_with('Gerrit User Sync', LPNET_SERVICE_ROOT,
                                  credentials_file = GERRIT_CREDENTIALS,
                                  version='devel')
 log.info('Connected to launchpad')
+
 
 def get_sub_teams(team, have_teams):
     for sub_team in launchpad.people[team].sub_teams:
@@ -276,7 +280,7 @@ if DEBUG:
           return group_name
 
     print "groups in groups"
-    for (k,v) in groups_in_groups.items():
+    for (k, v) in groups_in_groups.items():
       print k, v
 
     print "group_imples_groups"
