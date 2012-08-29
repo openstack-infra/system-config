@@ -1,82 +1,4 @@
 - job:
-    name: gate-integration-tests-devstack-vm
-    project-type: freestyle
-    concurrent: true
-    node: devstack-precise
-
-    logrotate:
-      daysToKeep: 28
-      numToKeep: -1
-      artifactDaysToKeep: -1
-      artifactNumToKeep: -1
-
-    parameters:
-      - label:
-          name: NODE_LABEL
-          description: Label of node to use for this build
-          default: devstack-precise
-
-    wrappers:
-      - timeout:
-          timeout: 40
-          fail: true
-      - timestamps
-
-    triggers:
-      - zuul
-
-    builders:
-      - trigger-builds:
-          - project: devstack-update-inprogress
-            predefined-parameters:
-              DEVSTACK_NODE_NAME=${NODE_NAME}
-      - shell: |
-          #!/bin/bash -xe
-          #
-          # This job also gates devstack-gate, but in case a previous run fails,
-          # we need to always make sure that we're starting with the latest copy
-          # from master, before we start applying changes to it.  If a previous run
-          # leaves a bad copy of the gate script, we may get stuck.
-          #
-          if [[ ! -e devstack-gate ]]; then
-              git clone https://review.openstack.org/p/openstack-ci/devstack-gate
-          else
-              cd devstack-gate
-              git remote update
-              git reset --hard
-              git clean -x -f
-              git checkout master
-              git reset --hard remotes/origin/master
-              git clean -x -f
-              cd ..
-          fi
-      - shell: |
-          #!/bin/bash -xe
-          export PYTHONUNBUFFERED=true
-          cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
-          ./safe-devstack-vm-gate-wrap.sh
-
-    publishers:
-      - archive: 
-          artifacts: logs/*
-      - scp:
-          site: 'static.openstack.org'
-          files:
-            - target: 'logs/$ZUUL_CHANGE/$ZUUL_PATCHSET/$ZUUL_PIPELINE/$JOB_NAME/$BUILD_NUMBER'
-              source: 'logs/*'
-              keep-hierarchy: true
-              copy-after-failure: true
-            - target: 'logs/$ZUUL_CHANGE/$ZUUL_PATCHSET/$ZUUL_PIPELINE/$JOB_NAME/$BUILD_NUMBER'
-              copy-console: true
-              copy-after-failure: true
-      - trigger-parameterized-builds:
-          - project: devstack-update-complete
-            when: complete
-            predefined-parameters:
-              DEVSTACK_NODE_NAME=${NODE_NAME}
-
-
-- job:
     name: gate-tempest-devstack-vm
     project-type: freestyle
     concurrent: true
@@ -132,6 +54,86 @@
           #!/bin/bash -xe
           export PYTHONUNBUFFERED=true
           export DEVSTACK_GATE_TEMPEST=1
+          cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
+          ./safe-devstack-vm-gate-wrap.sh
+
+    publishers:
+      - archive: 
+          artifacts: logs/*
+      - scp:
+          site: 'static.openstack.org'
+          files:
+            - target: 'logs/$ZUUL_CHANGE/$ZUUL_PATCHSET/$ZUUL_PIPELINE/$JOB_NAME/$BUILD_NUMBER'
+              source: 'logs/*'
+              keep-hierarchy: true
+              copy-after-failure: true
+            - target: 'logs/$ZUUL_CHANGE/$ZUUL_PATCHSET/$ZUUL_PIPELINE/$JOB_NAME/$BUILD_NUMBER'
+              copy-console: true
+              copy-after-failure: true
+      - trigger-parameterized-builds:
+          - project: devstack-update-complete
+            when: complete
+            predefined-parameters:
+              DEVSTACK_NODE_NAME=${NODE_NAME}
+
+
+- job:
+    name: gate-tempest-devstack-vm-cinder
+    project-type: freestyle
+    concurrent: true
+    node: devstack-precise
+
+    logrotate:
+      daysToKeep: 28
+      numToKeep: -1
+      artifactDaysToKeep: -1
+      artifactNumToKeep: -1
+
+    parameters:
+      - label:
+          name: NODE_LABEL
+          description: Label of node to use for this build
+          default: devstack-precise
+
+    wrappers:
+      - timeout:
+          timeout: 90
+          fail: true
+      - timestamps
+
+    triggers:
+      - zuul
+
+    builders:
+      - trigger-builds:
+          - project: devstack-update-inprogress
+            predefined-parameters:
+              DEVSTACK_NODE_NAME=${NODE_NAME}
+      - shell: |
+          #!/bin/bash -xe
+          #
+          # This job also gates devstack-gate, but in case a previous run fails,
+          # we need to always make sure that we're starting with the latest copy
+          # from master, before we start applying changes to it.  If a previous run
+          # leaves a bad copy of the gate script, we may get stuck.
+          #
+          if [[ ! -e devstack-gate ]]; then
+              git clone https://review.openstack.org/p/openstack-ci/devstack-gate
+          else
+              cd devstack-gate
+              git remote update
+              git reset --hard
+              git clean -x -f
+              git checkout master
+              git reset --hard remotes/origin/master
+              git clean -x -f
+              cd ..
+          fi
+      - shell: |
+          #!/bin/bash -xe
+          export PYTHONUNBUFFERED=true
+          export DEVSTACK_GATE_TEMPEST=1
+          export DEVSTACK_GATE_CINDER=1
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
 
