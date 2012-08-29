@@ -40,10 +40,11 @@ GERRIT_SECURE_CONFIG = os.environ.get('GERRIT_SECURE_CONFIG',
 SPEC_RE = re.compile(r'(blueprint|bp)\s*[#:]?\s*(\S+)', re.I)
 BODY_RE = re.compile(r'^\s+.*$')
 
+
 def get_broken_config(filename):
     """ gerrit config ini files are broken and have leading tabs """
     text = ""
-    with open(filename,"r") as conf:
+    with open(filename, "r") as conf:
         for line in conf.readlines():
             text = "%s%s" % (text, line.lstrip())
 
@@ -55,8 +56,9 @@ def get_broken_config(filename):
 GERRIT_CONFIG = get_broken_config(GERRIT_CONFIG)
 SECURE_CONFIG = get_broken_config(GERRIT_SECURE_CONFIG)
 DB_USER = GERRIT_CONFIG.get("database", "username")
-DB_PASS = SECURE_CONFIG.get("database","password")
-DB_DB = GERRIT_CONFIG.get("database","database")
+DB_PASS = SECURE_CONFIG.get("database", "password")
+DB_DB = GERRIT_CONFIG.get("database", "database")
+
 
 def update_spec(launchpad, project, name, subject, link, topic=None):
     # For testing, if a project doesn't match openstack/foo, use
@@ -66,7 +68,8 @@ def update_spec(launchpad, project, name, subject, link, topic=None):
         project = 'openstack-ci'
 
     spec = launchpad.projects[project].getSpecification(name=name)
-    if not spec: return
+    if not spec:
+        return
 
     if spec.whiteboard:
         wb = spec.whiteboard.strip()
@@ -74,7 +77,7 @@ def update_spec(launchpad, project, name, subject, link, topic=None):
         wb = ''
     changed = False
     if topic:
-        topiclink = '%s/#q,topic:%s,n,z' % (link[:link.find('/',8)],
+        topiclink = '%s/#q,topic:%s,n,z' % (link[:link.find('/', 8)],
                                             topic)
         if topiclink not in wb:
             wb += "\n\n\nGerrit topic: %(link)s" % dict(link=topiclink)
@@ -88,6 +91,7 @@ def update_spec(launchpad, project, name, subject, link, topic=None):
     if changed:
         spec.whiteboard = wb
         spec.lp_save()
+
 
 def find_specs(launchpad, dbconn, args):
     git_log = subprocess.Popen(['git',
@@ -109,6 +113,7 @@ def find_specs(launchpad, dbconn, args):
         update_spec(launchpad, args.project, spec, subject,
                     args.change_url, topic)
 
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('hook')
@@ -127,9 +132,9 @@ def main():
     args = parser.parse_args()
 
     launchpad = Launchpad.login_with('Gerrit User Sync', LPNET_SERVICE_ROOT,
-                                     GERRIT_CACHE_DIR,
-                                     credentials_file = GERRIT_CREDENTIALS,
-                                     version='devel')
+            GERRIT_CACHE_DIR,
+            credentials_file = GERRIT_CREDENTIALS,
+            version = 'devel')
 
     conn = MySQLdb.connect(user = DB_USER, passwd = DB_PASS, db = DB_DB)
 
