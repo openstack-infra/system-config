@@ -51,7 +51,7 @@ jobs:
   - name: ^.*-merge$
     failure-message: This change was unable to be automatically merged with the current state of the repository. Please rebase your change and upload a new patchset.
     hold-following-changes: true
-  - name: gate-tempest-devstack-vm
+  - name: gate-tempest-devstack-vm-cinder
     parameter-function: devstack_params
   - name: ^.*-python27$
     parameter-function: python27_params
@@ -189,14 +189,14 @@ projects:
         - gate-cinder-pep8
         - gate-cinder-python26
         - gate-cinder-python27
-        - gate-tempest-devstack-vm
+        - gate-tempest-devstack-vm-cinder
     gate:
       - gate-cinder-merge:
         - gate-cinder-docs
         - gate-cinder-pep8
         - gate-cinder-python26
         - gate-cinder-python27
-        - gate-tempest-devstack-vm
+        - gate-tempest-devstack-vm-cinder
     post:
       - cinder-tarball
       - cinder-coverage
@@ -212,14 +212,14 @@ projects:
         - gate-glance-pep8
         - gate-glance-python26
         - gate-glance-python27
-        - gate-tempest-devstack-vm
+        - gate-tempest-devstack-vm-cinder
     gate:
       - gate-glance-merge:
         - gate-glance-docs
         - gate-glance-pep8
         - gate-glance-python26
         - gate-glance-python27
-        - gate-tempest-devstack-vm
+        - gate-tempest-devstack-vm-cinder
     post:
       - glance-tarball
       - glance-coverage
@@ -236,7 +236,7 @@ projects:
         - gate-horizon-python26
         - gate-horizon-python27
         - gate-horizon-selenium
-        - gate-tempest-devstack-vm
+        - gate-tempest-devstack-vm-cinder
     gate:
       - gate-horizon-merge:
         - gate-horizon-docs
@@ -244,7 +244,7 @@ projects:
         - gate-horizon-python26
         - gate-horizon-python27
         - gate-horizon-selenium
-        - gate-tempest-devstack-vm
+        - gate-tempest-devstack-vm-cinder
     post:
       - horizon-tarball
       - horizon-coverage
@@ -260,14 +260,14 @@ projects:
         - gate-keystone-pep8
         - gate-keystone-python26
         - gate-keystone-python27
-        - gate-tempest-devstack-vm
+        - gate-tempest-devstack-vm-cinder
     gate:
       - gate-keystone-merge:
         - gate-keystone-docs
         - gate-keystone-pep8
         - gate-keystone-python26
         - gate-keystone-python27
-        - gate-tempest-devstack-vm
+        - gate-tempest-devstack-vm-cinder
     post:
       - keystone-tarball
       - keystone-coverage
@@ -280,7 +280,7 @@ projects:
         - gate-nova-pep8
         - gate-nova-python26
         - gate-nova-python27
-        - gate-tempest-devstack-vm
+        - gate-tempest-devstack-vm-cinder
         - gate-nova-pylint
     gate:
       - gate-nova-merge:
@@ -288,7 +288,7 @@ projects:
         - gate-nova-pep8
         - gate-nova-python26
         - gate-nova-python27
-        - gate-tempest-devstack-vm
+        - gate-tempest-devstack-vm-cinder
     post:
       - nova-tarball
       - nova-coverage
@@ -337,14 +337,14 @@ projects:
         - gate-swift-pep8
         - gate-swift-python26
         - gate-swift-python27
-        - gate-tempest-devstack-vm
+        - gate-tempest-devstack-vm-cinder
     gate:
       - gate-swift-merge:
         - gate-swift-docs
         - gate-swift-pep8
         - gate-swift-python26
         - gate-swift-python27
-        - gate-tempest-devstack-vm
+        - gate-tempest-devstack-vm-cinder
     post:
       - swift-tarball
       - swift-coverage
@@ -381,14 +381,14 @@ projects:
         - gate-python-glanceclient-pep8
         - gate-python-glanceclient-python26
         - gate-python-glanceclient-python27
-        - gate-tempest-devstack-vm
+        - gate-tempest-devstack-vm-cinder
     gate:
       - gate-python-glanceclient-merge:
         - gate-python-glanceclient-docs
         - gate-python-glanceclient-pep8
         - gate-python-glanceclient-python26
         - gate-python-glanceclient-python27
-        - gate-tempest-devstack-vm
+        - gate-tempest-devstack-vm-cinder
     post:
       - python-glanceclient-sdist-tarball
       - python-glanceclient-coverage
@@ -404,14 +404,14 @@ projects:
         - gate-python-keystoneclient-pep8
         - gate-python-keystoneclient-python26
         - gate-python-keystoneclient-python27
-        - gate-tempest-devstack-vm
+        - gate-tempest-devstack-vm-cinder
     gate:
       - gate-python-keystoneclient-merge:
         - gate-python-keystoneclient-docs
         - gate-python-keystoneclient-pep8
         - gate-python-keystoneclient-python26
         - gate-python-keystoneclient-python27
-        - gate-tempest-devstack-vm
+        - gate-tempest-devstack-vm-cinder
     post:
       - python-keystoneclient-sdist-tarball
       - python-keystoneclient-coverage
@@ -427,14 +427,14 @@ projects:
         - gate-python-novaclient-pep8
         - gate-python-novaclient-python26
         - gate-python-novaclient-python27
-        - gate-tempest-devstack-vm
+        - gate-tempest-devstack-vm-cinder
     gate:
       - gate-python-novaclient-merge:
         - gate-python-novaclient-docs
         - gate-python-novaclient-pep8
         - gate-python-novaclient-python26
         - gate-python-novaclient-python27
-        - gate-tempest-devstack-vm
+        - gate-tempest-devstack-vm-cinder
     post:
       - python-novaclient-sdist-tarball
       - python-novaclient-coverage
@@ -471,14 +471,14 @@ projects:
         - gate-python-quantumclient-pep8
         - gate-python-quantumclient-python26
         - gate-python-quantumclient-python27
-        - gate-tempest-devstack-vm
+        - gate-tempest-devstack-vm-cinder
     gate:
       - gate-python-quantumclient-merge:
         - gate-python-quantumclient-docs
         - gate-python-quantumclient-pep8
         - gate-python-quantumclient-python26
         - gate-python-quantumclient-python27
-        - gate-tempest-devstack-vm
+        - gate-tempest-devstack-vm-cinder
     post:
       - python-quantumclient-sdist-tarball
       - python-quantumclient-coverage
@@ -517,18 +517,18 @@ projects:
   - name: openstack-dev/devstack
     check:
       - gate-devstack-merge:
-        - gate-tempest-devstack-vm
+        - gate-tempest-devstack-vm-cinder
     gate:
       - gate-devstack-merge:
-        - gate-tempest-devstack-vm
+        - gate-tempest-devstack-vm-cinder
 
   - name: openstack-ci/devstack-gate
     check:
       - gate-devstack-gate-merge:
-        - gate-tempest-devstack-vm
+        - gate-tempest-devstack-vm-cinder
     gate:
       - gate-devstack-gate-merge:
-        - gate-tempest-devstack-vm
+        - gate-tempest-devstack-vm-cinder
 
   - name: openstack-dev/pbr
     check:
@@ -555,11 +555,11 @@ projects:
     check:
       - gate-tempest-merge:
         - gate-tempest-pep8
-        - gate-tempest-devstack-vm
+        - gate-tempest-devstack-vm-cinder
     gate:
       - gate-tempest-merge:
         - gate-tempest-pep8
-        - gate-tempest-devstack-vm
+        - gate-tempest-devstack-vm-cinder
 
   - name: stackforge/ceilometer
     check:
