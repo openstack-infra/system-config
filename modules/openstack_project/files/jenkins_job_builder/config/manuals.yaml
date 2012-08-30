@@ -63,3 +63,71 @@
           target: 'api/openstack-network/2.0/'
           remove-prefix: 'doc/target/docbkx/webhelp/quantum-api-2.0/quantum-api-guide/'
           excludes: '**/*.xml,**/null*'
+
+- job:
+    name: images-api-v2.0
+    project-type: maven
+    concurrent: true
+    node: precise
+
+    wrappers:
+      - timeout:
+          timeout: 40
+          fail: true
+
+    triggers:
+      - zuul-post
+
+    prebuilders:
+      - gerrit-git-prep
+      - markdown-docbook
+
+    maven:
+      root-module:
+        group-id: org.openstack.docs
+        artifact-id: openstack-guide
+      root-pom: openstack-image-service-api/pom.xml
+      goals: 'clean generate-sources'
+
+    publishers:
+      - console-log-post
+      - ftp:
+          site: docs.openstack.org
+          source: 'doc/target/docbkx/webhelp/images-api-2.0/**'
+          target: 'api/openstack-image-service/2.0/'
+          remove-prefix: 'doc/target/docbkx/webhelp/images-api-2.0/'
+          excludes: '**/*.xml,**/null*'
+          
+- job:
+    name: openstackapi-programming
+    project-type: maven
+    concurrent: true
+    node: precise
+
+    wrappers:
+      - timeout:
+          timeout: 40
+          fail: true
+
+    triggers:
+      - zuul-post
+
+    prebuilders:
+      - gerrit-git-prep
+      - markdown-docbook
+
+    maven:
+      root-module:
+        group-id: org.openstack.docs
+        artifact-id: openstack-guide
+      root-pom: doc/src/docbkx/openstack-api-programming/pom.xml
+      goals: 'clean generate-sources'
+
+    publishers:
+      - console-log-post
+      - ftp:
+          site: docs.openstack.org
+          source: 'doc/target/docbkx/webhelp/openstack-api-programming/**'
+          target: 'api/openstack-compute/programmer/'
+          remove-prefix: 'doc/target/docbkx/webhelp/openstack-api-programming/'
+          excludes: '**/*.xml,**/null*'          
