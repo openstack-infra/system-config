@@ -1,4 +1,4 @@
-includes:
+	includes:
   - python-file: openstack_functions.py
 
 pipelines:
@@ -663,3 +663,8 @@ projects:
       - gate-volume-api-merge
     post:
       - volume-api
+
+  - name: openstack/image-api
+    post:
+      - images-api-v20
+
