@@ -663,3 +663,8 @@ projects:
       - gate-volume-api-merge
     post:
       - volume-api
+
+  - name: openstack/image-api
+    post:
+      - images-api-v20
+
