@@ -24,6 +24,16 @@
       - shell: "mvn package"
 
 - builder:
+    name: docbook-properties
+    builders:
+      - shell: "/usr/local/jenkins/slave_scripts/docbook-properties.sh"
+
+- builder:
+    name: markdown-docbook
+    builders:
+      - shell: "/usr/local/jenkins/slave_scripts/markdown-docbook.sh {filename}"
+
+- builder:
     name: gerrit-package
     builders:
       - shell: "/usr/local/jenkins/slave_scripts/package-gerrit.sh"
