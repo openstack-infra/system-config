@@ -61,7 +61,10 @@ jobs:
     voting: false
   - name: gate-tempest-devstack-vm
     voting: false
-
+  - name: jenkins-job-builder-compare-xml
+    voting: false
+    failure-message: XML output has changed.
+    success-message: XML output is unchanged.
 
 projects:
   - name: openstack-ci/zuul
@@ -149,6 +152,7 @@ projects:
   - name: openstack-ci/jenkins-job-builder
     check:
       - gate-jenkins-job-builder-merge
+      - jenkins-job-builder-compare-xml
     gate:
       - gate-jenkins-job-builder-merge
 
