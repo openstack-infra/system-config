@@ -59,6 +59,10 @@ jobs:
     voting: false
   - name: dev-zuul-coverage
     voting: false
+  - name: jenkins-job-builder-compare-xml
+    voting: false
+    failure-message: XML output has changed.
+    success-message: XML output is unchanged.
 
 
 projects:
@@ -147,6 +151,7 @@ projects:
   - name: openstack-ci/jenkins-job-builder
     check:
       - gate-jenkins-job-builder-merge
+      - jenkins-job-builder-compare-xml
     gate:
       - gate-jenkins-job-builder-merge
 
