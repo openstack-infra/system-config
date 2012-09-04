@@ -7,6 +7,7 @@ class openstack_project::gerrit (
       $vhost_name=$fqdn,
       $canonicalweburl="https://$fqdn/",
       $serveradmin='webmaster@openstack.org',
+      $ssh_host_key,
       $ssl_cert_file='',
       $ssl_key_file='',
       $ssl_chain_file='',
@@ -30,6 +31,7 @@ class openstack_project::gerrit (
       $github_oauth_token,
       $mysql_password,
       $mysql_root_password,
+      $trivial_rebase_role_id,
       $email_private_key,
       $testmode=false,
 ) {
@@ -43,6 +45,7 @@ class openstack_project::gerrit (
     # opinions
     enable_melody => 'true',
     melody_session => 'true',
+    ssh_host_key => '/home/gerrit2/review_site/etc/ssh_host_rsa_key',
     # passthrough
     ssl_cert_file => $ssl_cert_file,
     ssl_key_file => $ssl_key_file,
@@ -74,6 +77,7 @@ class openstack_project::gerrit (
     war => $war,
     mysql_password => $mysql_password,
     mysql_root_password => $mysql_root_password,
+    trivial_rebase_role_id => 'trivial-rebase@review-dev.openstack.org',
     email_private_key => $email_private_key,
     projects_file => $projects_file,
     replicate_github => true,
@@ -154,7 +158,7 @@ class openstack_project::gerrit (
     group => 'root',
     mode => 555,
     ensure => 'present',
-    source => 'puppet:///modules/openstack_project/gerrit/patchset-created',
+    content => template('openstack/gerrit_patchset-created.erb'),
     replace => 'true',
     require => Class['::gerrit']
   }

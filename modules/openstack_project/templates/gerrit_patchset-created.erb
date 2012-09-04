@@ -4,3 +4,7 @@
 timeout -k 2m 10m python /usr/local/gerrit/scripts/update_blueprint.py patchset-created "$@"
 timeout -k 2m 10m python /usr/local/gerrit/scripts/update_bug.py patchset-created "$@"
 timeout -k 2m 10m python /usr/local/gerrit/scripts/notify_doc_impact.py patchset-created "$@"
+timeout -k 2m 10m python /usr/local/gerrit/scripts/trivial_rebase.py \
+    patchset-created \
+    --private-key-path=<%= ssh_host_key %> \
+    --role-user=<%= trivial_rebase_role_id %> "$@"
