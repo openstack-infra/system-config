@@ -522,7 +522,7 @@ Ensure there is an up-to-date checkout of openstack-ci in ~gerrit2.
 
 As a Gerrit admin, create a user for gerritbot::
 
-  cat ~gerrit2/.ssh/gerritbot_rsa | ssh -p29418 gerrit.openstack.org gerrit create-account --ssh-key - --full-name GerritBot gerritbot
+  cat ~gerrit2/.ssh/gerritbot_rsa | ssh -p29418 review.openstack.org gerrit create-account --ssh-key - --full-name GerritBot gerritbot
 
 Configure gerritbot, including which events should be announced in the
 gerritbot.config file:
@@ -649,7 +649,7 @@ OpenStack documentation coordinators can approve changes, see
 :ref:`acl`).  Run the following command to reparent the project if it
 is an API project::
 
-  ssh -p 29418 gerrit.openstack.org gerrit set-project-parent --parent API-Projects openstack/PROJECT
+  ssh -p 29418 review.openstack.org gerrit set-project-parent --parent API-Projects openstack/PROJECT
 
 Add yourself to the "Project Bootstrappers" group in Gerrit which will
 give you permissions to push to the repo bypassing code review.
@@ -662,37 +662,78 @@ Do the initial push of the project with::
 Remove yourself from the "Project Bootstrappers" group, and then set
 the access controls as specified in :ref:`acl`.
 
-Have Jenkins Monitor a Gerrit Project
+Have Zuul Monitor a Gerrit Project
 =====================================
 
-In jenkins, under source code management:
+Define the required jenkins jobs for this project using the Jenkins Job
+Builder. Edit openstack/openstack-ci-puppet:modules/openstack_project/files/jenkins_jobs/config/projects.yaml
+and add the desired jobs. Most projects will use the python jobs template.
 
-* select git
+A minimum config::
+  - project:
+      name: PROJECT
+      github-org: openstack
+      node: precise
+      tarball-publisher-site: nova.openstack.org
+      doc-publisher-site: docs.openstack.org
 
-  * url: ssh://jenkins@review.openstack.org:29418/openstack/project.git
-  * click "advanced"
+      jobs:
+        - python-jobs
 
-    * refspec: $GERRIT_REFSPEC
-    * branches: origin/$GERRIT_BRANCH
-    * click "advanced"
+Full example config for nova::
+  - project:
+      name: nova
+      github-org: openstack
+      node: precise
+      tarball-publisher-site: nova.openstack.org
+      doc-publisher-site: docs.openstack.org
 
-      * choosing stragety: gerrit trigger
+      jobs:
+        - python-jobs
+        - python-diablo-bitrot-jobs
+        - python-essex-bitrot-jobs
+        - openstack-publish-jobs
+        - gate-{name}-pylint
 
-* select gerrit event under build triggers:
+Edit openstack/openstack-ci-puppet:modules/openstack_project/files/zuul/layout.yaml
+and add the required jenkins jobs to this project. At a minimum you will
+probably need the gate-PROJECT-merge test in the check and gate queues.
 
-  * Trigger on Comment Added
+A minimum config::
 
-    * Approval Category: APRV
-    * Approval Value: 1
+  - name: openstack/PROJECT
+      check:
+        - gate-PROJECT-merge:
+      gate:
+        - gate-PROJECT-merge:
 
-  * plain openstack/project
-  * path **
+Full example config for nova::
 
-* Select "Add build step" under "Build"
-
-  * select "Use builders from another project"
-  * Template Project: "Gerrit Git Prep"
-  * make sure this build step is the first in the sequence
+  - name: openstack/nova
+      check:
+        - gate-nova-merge:
+        - gate-nova-docs
+        - gate-nova-pep8
+        - gate-nova-python26
+        - gate-nova-python27
+        - gate-tempest-devstack-vm
+        - gate-tempest-devstack-vm-cinder
+        - gate-nova-pylint
+      gate:
+        - gate-nova-merge:
+        - gate-nova-docs
+        - gate-nova-pep8
+        - gate-nova-python26
+        - gate-nova-python27
+        - gate-tempest-devstack-vm
+        - gate-tempest-devstack-vm-cinder
+      post:
+        - nova-tarball
+        - nova-coverage
+        - nova-docs
+      publish:
+        - nova-tarball
+        - nova-docs
 
 Create a Project in GitHub
 ==========================
@@ -708,10 +749,16 @@ Pull requests can not be disabled for a project in Github, so instead
 we have a script that runs from cron to close any open pull requests
 with instructions to use Gerrit.
 
-* Edit openstack/openstack-ci-puppet:manifests/site.pp
+* Edit openstack/openstack-ci-puppet:modules/openstack_project/files/review.projects.yaml
 
-and add the project to the list of github projects in the gerrit class
-for the gerrit.openstack.org node.
+and add the project to the list of projects in the yaml file with the
+'close-pull' option.
+
+For example::
+
+  - project: openstack/PROJECT
+    options:
+    - close-pull
 
 Adding Local Git Replica
 ========================
@@ -721,7 +768,7 @@ serve the anonymous http requests out directly.
 
 On the gerrit host::
 
-  sudo git --bare init --shared=group /var/lib/git/openstack/PROJECT.git
+  sudo git --bare init /var/lib/git/openstack/PROJECT.git
   sudo chgrp -R gerrit2 /var/lib/git/openstack/PROJECT.git
 
 
