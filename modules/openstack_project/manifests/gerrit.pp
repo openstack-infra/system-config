@@ -7,6 +7,7 @@ class openstack_project::gerrit (
       $vhost_name=$fqdn,
       $canonicalweburl="https://$fqdn/",
       $serveradmin='webmaster@openstack.org',
+      $ssh_host_key='/home/gerrit2/review_site/etc/ssh_host_rsa_key',
       $ssl_cert_file='',
       $ssl_key_file='',
       $ssl_chain_file='',
@@ -25,6 +26,7 @@ class openstack_project::gerrit (
       $script_user='update',
       $script_key_file='/home/gerrit2/.ssh/id_rsa',
       $script_logging_conf='/home/gerrit2/.sync_logging.conf',
+      $trivial_rebase_role_id='9999',
       $projects_file='UNDEF',
       $github_username,
       $github_oauth_token,
@@ -154,7 +156,7 @@ class openstack_project::gerrit (
     group => 'root',
     mode => 555,
     ensure => 'present',
-    source => 'puppet:///modules/openstack_project/gerrit/patchset-created',
+    content => template('gerrit/patchset-created.erb'),
     replace => 'true',
     require => Class['::gerrit']
   }
