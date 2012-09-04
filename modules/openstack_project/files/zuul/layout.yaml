@@ -648,5 +648,17 @@ projects:
       - openstack-cli-guide
 
   - name: openstack/netconn-api
+    check:
+      - gate-netconn-api-merge
+    gate:
+      - gate-netconn-api-merge
     post:
       - netconn-api-v20
+
+  - name: openstack/volume-api
+    check:
+      - gate-volume-api-merge
+    gate:
+      - gate-volume-api-merge
+    post:
+      - volume-api

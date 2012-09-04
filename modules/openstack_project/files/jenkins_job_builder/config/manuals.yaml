@@ -51,3 +51,36 @@
           target: 'api/openstack-network/2.0/'
           remove-prefix: 'doc/target/docbkx/webhelp/quantum-api-2.0/quantum-api-guide/'
           excludes: '**/*.xml,**/null*'
+
+- job:
+    name: volume-api
+    project-type: maven
+    concurrent: true
+    node: precise
+
+    wrappers:
+      - timeout:
+          timeout: 40
+          fail: true
+
+    triggers:
+      - zuul-post
+
+    prebuilders:
+      - gerrit-git-prep
+
+    maven:
+      root-module:
+        group-id: org.openstack.docs
+        artifact-id: openstack-guide
+      root-pom: doc/pom.xml
+      goals: 'clean generate-sources'
+
+    publishers:
+      - console-log-post
+      - ftp:
+          site: docs.openstack.org
+          source: 'doc/target/docbkx/webhelp/volume-api-1.0/volume-api-guide/**'
+          target: 'api/openstack-volume/1.0/'
+          remove-prefix: 'doc/target/docbkx/webhelp/volume-api-1.0/volume-api-guide/'
+          excludes: '**/*.xml,**/null*'

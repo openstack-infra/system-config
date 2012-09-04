@@ -165,6 +165,15 @@
 
 
 - project:
+    name: netconn-api-v20
+    github-org: openstack
+    node: precise
+
+    jobs:
+      - gate-{name}-merge
+
+
+- project:
     name: nose-html-output
     github-org: openstack-ci
     node: precise
@@ -398,6 +407,15 @@
     jobs:
       - gate-{name}-merge
       - gate-{name}-pep8
+
+
+- project:
+    name: volume-api
+    github-org: openstack
+    node: precise
+
+    jobs:
+      - gate-{name}-merge
 
 
 - project:
