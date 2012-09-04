@@ -152,6 +152,9 @@
 - project: openstack/tempest
   options:
   - close-pull
+- project: openstack/volume-api
+  options:
+  - close-pull
 - project: stackforge/MRaaS
   options:
   - close-pull
