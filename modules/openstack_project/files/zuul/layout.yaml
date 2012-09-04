@@ -643,3 +643,7 @@ projects:
   - name: openstack/netconn-api
     post:
       - netconn-api-v20
+
+  - name: openstack/volume-api
+    post:
+      - volume-api
