@@ -1,0 +1,1 @@
+jenkins	ALL = NOPASSWD:/usr/local/jenkins/slave_scripts/jenkins-sudo-grep.sh
