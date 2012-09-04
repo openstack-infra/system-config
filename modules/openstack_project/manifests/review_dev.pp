@@ -6,6 +6,7 @@ class openstack_project::review_dev(
   class { 'openstack_project::gerrit':
     vhost_name => 'review-dev.openstack.org',
     canonicalweburl => "https://review-dev.openstack.org/",
+    ssh_host_key='/home/gerrit2/review_site/etc/ssh_host_rsa_key',
     ssl_cert_file => '/etc/ssl/certs/ssl-cert-snakeoil.pem',
     ssl_key_file => '/etc/ssl/private/ssl-cert-snakeoil.key',
     ssl_chain_file => '',
@@ -17,5 +18,15 @@ class openstack_project::review_dev(
     mysql_password => $mysql_password,
     mysql_root_password => $mysql_root_password,
     email_private_key => $email_private_key,
+    trivial_rebase_role_id='trivial-rebase@review-dev.openstack.org'
+  }
+  file { '/home/gerrit2/review_site/hooks/patchset-created':
+    owner => 'root',
+    group => 'root',
+    mode => 555,
+    ensure => 'present',
+    content => template('gerrit/patchset-created.erb'),
+    replace => 'true',
+    require => Class['::review_dev']
   }
 }
