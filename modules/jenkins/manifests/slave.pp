@@ -147,6 +147,14 @@ class jenkins::slave($ssh_key, $sudo = false, $bare = false, $user = true) {
                 ],
     }
 
+    file { '/etc/sudoers.d/jenkins-sudo-grep':
+      ensure => present,
+      source => "puppet:///modules/jenkins/jenkins-sudo-grep.sudo",
+      owner => 'root',
+      group => 'root',
+      mode => 440,
+    }
+
     # Temporary for debugging glance launch problem
     # https://lists.launchpad.net/openstack/msg13381.html
     file { '/etc/sysctl.d/10-ptrace.conf':
