@@ -63,6 +63,10 @@ jobs:
     voting: false
     failure-message: XML output has changed.
     success-message: XML output is unchanged.
+  - name: ci-puppet-compare-xml
+    voting: false
+    failure-message: Jenkins XML output has changed.
+    success-message: Jenkins XML output is unchanged.
 
 
 projects:
@@ -165,6 +169,7 @@ projects:
     check:
       - gate-ci-puppet-merge:
         - gate-ci-puppet-syntax
+        - ci-puppet-compare-xml
     gate:
       - gate-ci-puppet-merge:
         - gate-ci-puppet-syntax
