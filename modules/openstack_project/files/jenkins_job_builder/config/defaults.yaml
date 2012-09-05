@@ -1,0 +1,18 @@
+- defaults:
+    name: global
+    description: "THIS JOB IS MANAGED BY PUPPET AND WILL BE OVERWRITTEN.\n
+
+DON'T EDIT THIS JOB THROUGH THE WEB\n
+
+If you would like to make changes to this job, please see:\n
+
+https://github.com/openstack/openstack-ci-puppet\n
+
+In modules/jenkins_jobs"
+    concurrent: false
+
+    wrappers:
+      - timeout:
+          timeout: 30
+          fail: true
+      - timestamps
