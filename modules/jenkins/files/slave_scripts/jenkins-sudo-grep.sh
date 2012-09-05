@@ -32,6 +32,7 @@ case "$1" in
 	    echo "0" > /tmp/jenkins-sudo-log/mtime-pre
 	fi
 	grep -h "$PATTERN" $LOGFILE > /tmp/jenkins-sudo-log/pre
+	exit 0
 	;;
     post)
 	if [ -f $OLDLOGFILE ]
