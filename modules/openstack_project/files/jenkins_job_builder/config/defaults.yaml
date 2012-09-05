@@ -1,14 +1,18 @@
 - defaults:
     name: global
-    description: "THIS JOB IS MANAGED BY PUPPET AND WILL BE OVERWRITTEN.\n
+    description: |
+      <p><b>This job is managed by puppet and will be overwritten.</b></p>
 
-DON'T EDIT THIS JOB THROUGH THE WEB\n
+      <p><b>Do not edit this job through the web</b></p>
 
-If you would like to make changes to this job, please see:\n
+      <p>If you would like to make changes to this job, please see:
 
-https://github.com/openstack/openstack-ci-puppet\n
+        <a href="https://github.com/openstack/openstack-ci-puppet">
+          https://github.com/openstack/openstack-ci-puppet
+        </a>
 
-In modules/jenkins_jobs"
+      In modules/openstack_project/files/jenkins_jobs
+      </p>
     concurrent: false
 
     wrappers:
