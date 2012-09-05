@@ -21,6 +21,7 @@ class openstack_project::review_dev (
     github_oauth_token => $github_oauth_token,
     mysql_password => $mysql_password,
     mysql_root_password => $mysql_root_password,
+    trivial_rebase_role_id => 'trivial-rebase@review-dev.openstack.org',
     email_private_key => $email_private_key,
     sysadmins => $sysadmins
   }
