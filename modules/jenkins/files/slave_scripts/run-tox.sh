@@ -26,8 +26,6 @@ export NOSE_WITH_XUNIT=1
 export NOSE_WITH_HTML_OUTPUT=1
 export NOSE_HTML_OUT_FILE='nose_results.html'
 
-sudo /usr/local/jenkins/slave_scripts/jenkins-sudo-grep.sh pre
-
 tox -e$venv
 result=$?
 
@@ -35,17 +33,5 @@ echo "Begin pip freeze output from test virtualenv:"
 echo "======================================================================"
 .tox/$venv/bin/pip freeze
 echo "======================================================================"
-
-sudo /usr/local/jenkins/slave_scripts/jenkins-sudo-grep.sh post
-sudoresult=$?
-
-if [ $sudoresult -ne "0" ]
-then
-    echo
-    echo "This test has failed because it attempted to execute commands"
-    echo "with sudo.  See above for the exact commands used."
-    echo
-    exit 1
-fi
 
 exit $result
