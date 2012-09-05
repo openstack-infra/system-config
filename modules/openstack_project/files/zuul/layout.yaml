@@ -437,9 +437,6 @@ projects:
       - python-keystoneclient-sdist-tarball
       - python-keystoneclient-coverage
       - python-keystoneclient-docs
-    publish:
-      - python-keystoneclient-pypi
-      - python-keystoneclient-docs
 
   - name: openstack/python-novaclient
     check:
