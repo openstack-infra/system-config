@@ -27,7 +27,7 @@ class tmpreaper() {
     user    => 'root',
     minute  => '42',
     hour    => '*/6',
-    command => 'sleep $((RANDOM\\%60+60)) && /usr/local/bin/tmpreaper.sh',
+    command => 'sleep $((RANDOM\%60+60)) && /usr/local/bin/tmpreaper.sh',
     require => File['/usr/local/bin/tmpreaper.sh'],
   }
 }
