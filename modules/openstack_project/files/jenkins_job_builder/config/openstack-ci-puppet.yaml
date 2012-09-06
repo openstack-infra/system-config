@@ -1,13 +1,6 @@
 - job:
     name: gate-ci-puppet-syntax
-    concurrent: true
     node: precise
-
-    wrappers:
-      - timeout:
-          timeout: 30
-          fail: true
-      - timestamps
 
     triggers:
       - zuul
@@ -23,24 +16,10 @@
 
 - job:
     name: ci-puppet-compare-xml
-    project-type: freestyle
-    concurrent: true
     node: precise
-
-    wrappers:
-      - timeout:
-          timeout: 30
-          fail: true
-      - timestamps
 
     triggers:
       - zuul
-
-    logrotate:
-      daysToKeep: 1
-      numToKeep: -1
-      artifactDaysToKeep: -1
-      artifactNumToKeep: -1
 
     builders:
       - gerrit-git-prep

@@ -1,18 +1,5 @@
 - job:
     name: 'gate-ceilometer-python26-essex'
-    concurrent: true
-
-    wrappers:
-      - timeout:
-          timeout: 30
-          fail: true
-      - timestamps
-
-    logrotate:
-      daysToKeep: 28
-      numToKeep: -1
-      artifactDaysToKeep: -1
-      artifactNumToKeep: -1
 
     triggers:
       - zuul
@@ -30,19 +17,6 @@
 
 - job:
     name: 'gate-ceilometer-python27-essex'
-    concurrent: true
-
-    wrappers:
-      - timeout:
-          timeout: 30
-          fail: true
-      - timestamps
-
-    logrotate:
-      daysToKeep: 28
-      numToKeep: -1
-      artifactDaysToKeep: -1
-      artifactNumToKeep: -1
 
     triggers:
       - zuul

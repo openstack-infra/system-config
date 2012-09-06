@@ -1,7 +1,6 @@
 - job:
     name: check-gerrit-unittests
     project-type: maven
-    concurrent: true
     node: precise
 
     wrappers:
@@ -36,7 +35,6 @@
 - job:
     name: gate-gerrit-unittests
     project-type: maven
-    concurrent: true
     node: precise
 
     wrappers:
@@ -66,7 +64,6 @@
 - job:
     name: gerrit-package
     project-type: maven
-    concurrent: true
     node: precise
 
     wrappers:

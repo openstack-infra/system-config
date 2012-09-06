@@ -1,23 +1,9 @@
 - job-template:
     name: '{name}-docs'
-    project-type: freestyle
-    concurrent: true
     node: precise
-
-    wrappers:
-      - timeout:
-          timeout: 30
-          fail: true
-      - timestamps
 
     triggers:
       - zuul-post
-
-    logrotate:
-      daysToKeep: 28
-      numToKeep: -1
-      artifactDaysToKeep: -1
-      artifactNumToKeep: -1
 
     builders:
       - gerrit-git-prep
@@ -35,24 +21,10 @@
 
 - job-template:
     name: '{name}-tarball'
-    project-type: freestyle
-    concurrent: true
     node: precise
-
-    wrappers:
-      - timeout:
-          timeout: 30
-          fail: true
-      - timestamps
 
     triggers:
       - zuul-post
-
-    logrotate:
-      daysToKeep: 28
-      numToKeep: -1
-      artifactDaysToKeep: -1
-      artifactNumToKeep: -1
 
     builders:
       - gerrit-git-prep

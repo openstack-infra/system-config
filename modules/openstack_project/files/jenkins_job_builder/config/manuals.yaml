@@ -1,13 +1,7 @@
 - job:
     name: openstack-cli-guide
     project-type: maven
-    concurrent: true
     node: precise
-
-    wrappers:
-      - timeout:
-          timeout: 40
-          fail: true
 
     triggers:
       - zuul-post
@@ -34,13 +28,7 @@
 - job:
     name: netconn-api-v20
     project-type: maven
-    concurrent: true
     node: precise
-
-    wrappers:
-      - timeout:
-          timeout: 40
-          fail: true
 
     triggers:
       - zuul-post
