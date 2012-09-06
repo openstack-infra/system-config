@@ -1,7 +1,10 @@
-class openstack_project::static() {
+class openstack_project::static (
+  $sysadmins = []
+) {
 
   class { 'openstack_project::server':
-    iptables_public_tcp_ports => [22, 80, 443]
+    iptables_public_tcp_ports => [22, 80, 443],
+    sysadmins => $sysadmins
   }
 
   class { 'jenkins::jenkinsuser':

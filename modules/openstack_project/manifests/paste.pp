@@ -1,6 +1,9 @@
-class openstack_project::paste {
+class openstack_project::paste (
+  $sysadmins = []
+) {
   class { 'openstack_project::server':
-    iptables_public_tcp_ports => [80]
+    iptables_public_tcp_ports => [80],
+    sysadmins => $sysadmins
   }
   include lodgeit
   lodgeit::site { "openstack":

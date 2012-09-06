@@ -1,8 +1,10 @@
-class openstack_project::review_dev(
+class openstack_project::review_dev (
   $github_oauth_token,
   $mysql_password,
   $mysql_root_password,
-  $email_private_key) {
+  $email_private_key,
+  $sysadmins = []
+) {
   class { 'openstack_project::gerrit':
     vhost_name => 'review-dev.openstack.org',
     canonicalweburl => "https://review-dev.openstack.org/",
@@ -20,6 +22,7 @@ class openstack_project::review_dev(
     mysql_password => $mysql_password,
     mysql_root_password => $mysql_root_password,
     email_private_key => $email_private_key,
+    sysadmins => $sysadmins
   }
 
   file { '/var/log/gerrit_user_sync':

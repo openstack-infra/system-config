@@ -1,9 +1,12 @@
-class openstack_project::etherpad(
+class openstack_project::etherpad (
   $etherpad_crt,
   $etherpad_key,
-  $database_password) {
+  $database_password,
+  $sysadmins = []
+) {
   class { 'openstack_project::server':
-    iptables_public_tcp_ports => [22, 80, 443]
+    iptables_public_tcp_ports => [22, 80, 443],
+    sysadmins => $sysadmins
   }
 
   include etherpad_lite

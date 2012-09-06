@@ -1,7 +1,10 @@
-class openstack_project::eavesdrop($nickpass) {
+class openstack_project::eavesdrop (
+  $nickpass,
+  $sysadmins = []
+) {
   class { 'openstack_project::server':
-
-    iptables_public_tcp_ports => [80]
+    iptables_public_tcp_ports => [80],
+    sysadmins => $sysadmins
   }
   include meetbot
 

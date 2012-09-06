@@ -32,9 +32,11 @@ class openstack_project::gerrit (
       $mysql_root_password,
       $email_private_key,
       $testmode=false,
+      $sysadmins=[]
 ) {
   class { 'openstack_project::server':
-    iptables_public_tcp_ports => [80, 443, 29418]
+    iptables_public_tcp_ports => [80, 443, 29418],
+    sysadmins => $sysadmins
   }
 
   class { '::gerrit':
