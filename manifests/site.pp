@@ -3,7 +3,9 @@
 #
 node default {
   include openstack_project::puppet_cron
-  include openstack_project::server
+  class { 'openstack_project::server':
+    sysadmins => hiera('sysadmins'),
+  }
 }
 
 #
@@ -16,6 +18,7 @@ node "review.openstack.org" {
     mysql_root_password => hiera('gerrit_mysql_root_password'),
     email_private_key => hiera('gerrit_email_private_key'),
     gerritbot_password => hiera('gerrit_gerritbot_password'),
+    sysadmins => hiera('sysadmins'),
   }
 }
 
@@ -24,7 +27,8 @@ node "gerrit-dev.openstack.org", "review-dev.openstack.org" {
     github_oauth_token => hiera('gerrit_dev_github_token'),
     mysql_password => hiera('gerrit_dev_mysql_password'),
     mysql_root_password => hiera('gerrit_dev_mysql_root_password'),
-    email_private_key => hiera('gerrit_dev_email_private_key')
+    email_private_key => hiera('gerrit_dev_email_private_key'),
+    sysadmins => hiera('sysadmins'),
   }
 }
 
@@ -38,20 +42,27 @@ node "jenkins.openstack.org" {
     jenkins_apikey => hiera('zuul_jenkins_apikey'),
     gerrit_server => 'review.openstack.org',
     gerrit_user => 'jenkins',
-    url_pattern => 'http://logs.openstack.org/{change.number}/{change.patchset}/{pipeline.name}/{job.name}/{build.number}'
+    url_pattern => 'http://logs.openstack.org/{change.number}/{change.patchset}/{pipeline.name}/{job.name}/{build.number}',
+    sysadmins => hiera('sysadmins'),
   }
 }
 
 node "jenkins-dev.openstack.org" {
-  include openstack_project::jenkins_dev
+  class { 'openstack_project::jenkins_dev':
+    sysadmins => hiera('sysadmins'),
+  }
 }
 
 node "community.openstack.org" {
-  include openstack_project::community
+  class { 'openstack_project::community':
+    sysadmins => hiera('sysadmins'),
+  }
 }
 
 node "ci-puppetmaster.openstack.org" {
-  include openstack_project::puppetmaster
+  class { 'openstack_project::puppetmaster':
+    sysadmins => hiera('sysadmins'),
+  }
 }
 
 node "lists.openstack.org" {
@@ -61,21 +72,28 @@ node "lists.openstack.org" {
 }
 
 node "paste.openstack.org" {
-  include openstack_project::paste
+  class { 'openstack_project::paste':
+    sysadmins => hiera('sysadmins'),
+  }
 }
 
 node "planet.openstack.org" {
-  include openstack_project::planet
+  class { 'openstack_project::planet':
+    sysadmins => hiera('sysadmins'),
+  }
 }
 
 node "eavesdrop.openstack.org" {
   class { 'openstack_project::eavesdrop':
     nickpass => hiera('openstack_meetbot_password'),
+    sysadmins => hiera('sysadmins'),
   }
 }
 
 node "pypi.openstack.org" {
-  include openstack_project::pypi
+  class { 'openstack_project::pypi':
+    sysadmins => hiera('sysadmins'),
+  }
 }
 
 node 'etherpad.openstack.org' {
@@ -83,12 +101,14 @@ node 'etherpad.openstack.org' {
     etherpad_crt => hiera('etherpad_crt'),
     etherpad_key => hiera('etherpad_key'),
     database_password => hiera('etherpad_db_password'),
+    sysadmins => hiera('sysadmins'),
   }
 }
 
 node 'wiki.openstack.org' {
   class { 'openstack_project::wiki':
     mysql_root_password => hiera('wiki_db_password'),
+    sysadmins => hiera('sysadmins'),
   }
 }
 
@@ -96,12 +116,15 @@ node 'puppet-dashboard.openstack.org' {
   class { 'openstack_project::dashboard':
     password => hiera('dashboard_password'),
     mysql_password => hiera('dashboard_mysql_password'),
+    sysadmins => hiera('sysadmins'),
   }
 }
 
 # A machine to serve static content.
 node 'static.openstack.org' {
-  include openstack_project::static
+  class { 'openstack_project::static':
+    sysadmins => hiera('sysadmins'),
+  }
 }
 
 # A bare machine, but with a jenkins user
@@ -123,6 +146,7 @@ node /^precise.*\.slave\.openstack\.org$/ {
   include openstack_project::puppet_cron
   class { 'openstack_project::slave':
     certname => 'precise.slave.openstack.org',
+    sysadmins => hiera('sysadmins'),
   }
   class { 'openstack_project::glancetest':
     s3_store_access_key => hiera('s3_store_access_key'),
@@ -147,6 +171,7 @@ node /^oneiric.*\.slave\.openstack\.org$/ {
   include openstack_project::puppet_cron
   class { 'openstack_project::slave':
     certname => 'oneiric.slave.openstack.org',
+    sysadmins => hiera('sysadmins'),
   }
   class { 'openstack_project::glancetest':
     s3_store_access_key => hiera('s3_store_access_key'),
@@ -162,4 +187,4 @@ node /^.*\.jclouds\.openstack\.org$/ {
   class { 'openstack_project::bare_slave':
     certname => 'jclouds.openstack.org',
   }
-} 
+}

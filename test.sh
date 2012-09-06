@@ -9,6 +9,7 @@ fi
 
 csplit -sf applytest/puppetapplytest manifests/site.pp '/^$/' {*}
 sed -i -e 's/^[^[:space:]]/#&/g' applytest/puppetapplytest*
+sed -i -e 's/hiera..sysadmins../["admin"]/' applytest/puppetapplytest*
 sed -i -e 's/hiera..listadmins../["admin"]/' applytest/puppetapplytest*
 sed -i -e 's/hiera.*/PASSWORD,/' applytest/puppetapplytest*
 for f in `find applytest -name 'puppetapplytest*' -print` ; do
