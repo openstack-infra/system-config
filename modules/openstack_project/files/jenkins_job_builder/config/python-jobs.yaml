@@ -12,13 +12,11 @@
       - scp:
           site: 'static.openstack.org'
           files:
-            - target: 'logs/periodic/$JOB_NAME/$BUILD_NUMBER'
+            - target: 'logs/$ZUUL_SHORT_NEWREV/$ZUUL_PIPELINE/$JOB_NAME/$BUILD_NUMBER'
               source: 'cover/**'
               keep-hierarchy: true
               copy-after-failure: true
-            - target: 'logs/periodic/$JOB_NAME/$BUILD_NUMBER'
-              copy-console: true
-              copy-after-failure: true
+      - console-log-post
 
     node: '{node}'
   
@@ -75,9 +73,7 @@
               source: '**/*nose_results.html'
               keep-hierarchy: false
               copy-after-failure: true
-            - target: 'logs/$ZUUL_CHANGE/$ZUUL_PATCHSET/$ZUUL_PIPELINE/$JOB_NAME/$BUILD_NUMBER'
-              copy-console: true
-              copy-after-failure: true
+      - console-log
 
     # >= precise does not have python2.6
     node: oneiric
@@ -107,9 +103,7 @@
               source: '**/*nose_results.html'
               keep-hierarchy: false
               copy-after-failure: true
-            - target: 'logs/$ZUUL_CHANGE/$ZUUL_PATCHSET/$ZUUL_PIPELINE/$JOB_NAME/$BUILD_NUMBER'
-              copy-console: true
-              copy-after-failure: true
+      - console-log
 
     node: '{node}'
   
