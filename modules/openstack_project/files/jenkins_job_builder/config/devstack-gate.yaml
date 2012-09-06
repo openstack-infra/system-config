@@ -1,26 +1,18 @@
 - job:
     name: gate-tempest-devstack-vm
-    project-type: freestyle
-    concurrent: true
     node: devstack-precise
-
-    logrotate:
-      daysToKeep: 28
-      numToKeep: -1
-      artifactDaysToKeep: -1
-      artifactNumToKeep: -1
-
-    parameters:
-      - label:
-          name: NODE_LABEL
-          description: Label of node to use for this build
-          default: devstack-precise
 
     wrappers:
       - timeout:
           timeout: 90
           fail: true
       - timestamps
+
+    parameters:
+      - label:
+          name: NODE_LABEL
+          description: Label of node to use for this build
+          default: devstack-precise
 
     triggers:
       - zuul
@@ -80,27 +72,19 @@
 
 - job:
     name: gate-tempest-devstack-vm-cinder
-    project-type: freestyle
-    concurrent: true
     node: devstack-precise
-
-    logrotate:
-      daysToKeep: 28
-      numToKeep: -1
-      artifactDaysToKeep: -1
-      artifactNumToKeep: -1
-
-    parameters:
-      - label:
-          name: NODE_LABEL
-          description: Label of node to use for this build
-          default: devstack-precise
 
     wrappers:
       - timeout:
           timeout: 90
           fail: true
       - timestamps
+
+    parameters:
+      - label:
+          name: NODE_LABEL
+          description: Label of node to use for this build
+          default: devstack-precise
 
     triggers:
       - zuul
@@ -160,15 +144,7 @@
 
 - job:
     name: periodic-tempest-devstack-vm-stable-diablo
-    project-type: freestyle
-    concurrent: true
     node: devstack-oneiric
-
-    logrotate:
-      daysToKeep: 28
-      numToKeep: -1
-      artifactDaysToKeep: -1
-      artifactNumToKeep: -1
 
     wrappers:
       - timeout:
@@ -234,15 +210,7 @@
 
 - job:
     name: periodic-tempest-devstack-vm-stable-essex
-    project-type: freestyle
-    concurrent: true
     node: devstack-precise
-
-    logrotate:
-      daysToKeep: 28
-      numToKeep: -1
-      artifactDaysToKeep: -1
-      artifactNumToKeep: -1
 
     wrappers:
       - timeout:
@@ -310,15 +278,8 @@
 # jenkins slave they are running on can be disabled.
 - job:
     name: devstack-update-inprogress
-    project-type: freestyle
     concurrent: false
     node: master
-
-    logrotate:
-      daysToKeep: 28
-      numToKeep: 100
-      artifactDaysToKeep: -1
-      artifactNumToKeep: -1
 
     wrappers:
       - timeout:
@@ -348,15 +309,8 @@
 # jenkins slave may be deleted.
 - job:
     name: devstack-update-complete
-    project-type: freestyle
     concurrent: false
     node: master
-
-    logrotate:
-      daysToKeep: 28
-      numToKeep: 100
-      artifactDaysToKeep: -1
-      artifactNumToKeep: -1
 
     wrappers:
       - timeout:

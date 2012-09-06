@@ -13,10 +13,17 @@
 
       In modules/openstack_project/files/jenkins_jobs
       </p>
-    concurrent: false
+    project-type: freestyle
+    concurrent: true
 
     wrappers:
       - timeout:
           timeout: 30
           fail: true
       - timestamps
+
+    logrotate:
+      daysToKeep: 1
+      numToKeep: -1
+      artifactDaysToKeep: -1
+      artifactNumToKeep: -1

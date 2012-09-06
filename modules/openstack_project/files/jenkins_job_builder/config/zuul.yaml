@@ -1,24 +1,10 @@
 # This is a non-standard docs job because it uses SCP instead of FTP
 - job:
     name: zuul-docs
-    project-type: freestyle
-    concurrent: true
     node: precise
-
-    wrappers:
-      - timeout:
-          timeout: 30
-          fail: true
-      - timestamps
 
     triggers:
       - zuul-post
-
-    logrotate:
-      daysToKeep: 28
-      numToKeep: -1
-      artifactDaysToKeep: -1
-      artifactNumToKeep: -1
 
     builders:
       - gerrit-git-prep
@@ -35,19 +21,7 @@
 
 - job:
     name: 'dev-zuul-coverage'
-    concurrent: true
-
-    wrappers:
-      - timeout:
-          timeout: 30
-          fail: true
-      - timestamps
-
-    logrotate:
-      daysToKeep: 28
-      numToKeep: -1
-      artifactDaysToKeep: -1
-      artifactNumToKeep: -1
+    node: 'precise'
 
     triggers:
       - zuul
@@ -67,5 +41,3 @@
             - target: 'logs/$ZUUL_CHANGE/$ZUUL_PATCHSET/$ZUUL_PIPELINE/$JOB_NAME/$BUILD_NUMBER'
               copy-console: true
               copy-after-failure: true
-
-    node: 'precise'

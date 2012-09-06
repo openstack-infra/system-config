@@ -1,18 +1,5 @@
 - job-template:
     name: 'periodic-{name}-python26-{branch-name}'
-    concurrent: true
-
-    wrappers:
-      - timeout:
-          timeout: 30
-          fail: true
-      - timestamps
-
-    logrotate:
-      daysToKeep: 28
-      numToKeep: -1
-      artifactDaysToKeep: -1
-      artifactNumToKeep: -1
 
     triggers:
       - timed: '@daily'
@@ -44,19 +31,6 @@
 
 - job-template:
     name: 'periodic-{name}-python27-{branch-name}'
-    concurrent: true
-
-    wrappers:
-      - timeout:
-          timeout: 30
-          fail: true
-      - timestamps
-
-    logrotate:
-      daysToKeep: 28
-      numToKeep: -1
-      artifactDaysToKeep: -1
-      artifactNumToKeep: -1
 
     triggers:
       - timed: '@daily'
@@ -87,19 +61,6 @@
 
 - job-template:
     name: 'periodic-{name}-docs-{branch-name}'
-    concurrent: true
-
-    wrappers:
-      - timeout:
-          timeout: 30
-          fail: true
-      - timestamps
-
-    logrotate:
-      daysToKeep: 28
-      numToKeep: -1
-      artifactDaysToKeep: -1
-      artifactNumToKeep: -1
 
     triggers:
       - timed: '@daily'
