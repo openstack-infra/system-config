@@ -628,6 +628,8 @@ projects:
         - gate-heat-pep8
         - gate-heat-python26
         - gate-heat-python27
+    post:
+      - heat-coverage
 
   - name: stackforge/reddwarf
     check:
