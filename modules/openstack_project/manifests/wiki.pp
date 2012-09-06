@@ -1,10 +1,14 @@
-class openstack_project::wiki($mysql_root_password) {
+class openstack_project::wiki (
+  $mysql_root_password,
+  $sysadmins = []
+) {
 
   include openssl
   include subversion
 
   class { 'openstack_project::server':
-    iptables_public_tcp_ports => [80, 443]
+    iptables_public_tcp_ports => [80, 443],
+    sysadmins => $sysadmins
   }
 
   realize (
