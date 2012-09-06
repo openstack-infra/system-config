@@ -15,9 +15,7 @@
               source: '**/*nose_results.html'
               keep-hierarchy: false
               copy-after-failure: true
-            - target: 'logs/periodic/$JOB_NAME/$BUILD_NUMBER'
-              copy-console: true
-              copy-after-failure: true
+      - console-log-periodic
 
     scm:
       - git: 
@@ -46,9 +44,7 @@
               source: '**/*nose_results.html'
               keep-hierarchy: false
               copy-after-failure: true
-            - target: 'logs/periodic/$JOB_NAME/$BUILD_NUMBER'
-              copy-console: true
-              copy-after-failure: true
+      - console-log-periodic
 
     scm:
       - git: 

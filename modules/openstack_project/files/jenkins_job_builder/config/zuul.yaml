@@ -38,6 +38,4 @@
               source: 'cover/**'
               keep-hierarchy: true
               copy-after-failure: true
-            - target: 'logs/$ZUUL_CHANGE/$ZUUL_PATCHSET/$ZUUL_PIPELINE/$JOB_NAME/$BUILD_NUMBER'
-              copy-console: true
-              copy-after-failure: true
+      - console-log-post
