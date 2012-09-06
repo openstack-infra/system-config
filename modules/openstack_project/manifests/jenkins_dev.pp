@@ -1,7 +1,10 @@
-class openstack_project::jenkins_dev {
+class openstack_project::jenkins_dev (
+  $sysadmins = []
+) {
   class { 'openstack_project::server':
-    iptables_public_tcp_ports => [80, 443, 4155]
-  } 
+    iptables_public_tcp_ports => [80, 443, 4155],
+    sysadmins => $sysadmins
+  }
   include bup
   bup::site { 'rs-ord':
     backup_user => 'bup-jenkins-dev',
