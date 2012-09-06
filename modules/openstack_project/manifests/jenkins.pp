@@ -1,7 +1,11 @@
-class openstack_project::jenkins($jenkins_jobs_password) {
+class openstack_project::jenkins (
+  $jenkins_jobs_password,
+  $sysadmins = []
+) {
 
   class { 'openstack_project::server':
-    iptables_public_tcp_ports => [80, 443, 4155]
+    iptables_public_tcp_ports => [80, 443, 4155],
+    sysadmins => $sysadmins
   }
 
   class { '::jenkins::master':

@@ -1,7 +1,8 @@
-class openstack_project::pypi {
+class openstack_project::pypi (
+  $sysadmins = []
+) {
   include tmpreaper
   include unattended_upgrades
-  include openstack_project
 
   # include jenkins slave so that build deps are there for the pip download
   class { 'jenkins::slave':
@@ -10,7 +11,8 @@ class openstack_project::pypi {
   }
 
   class { 'openstack_project::server':
-    iptables_public_tcp_ports => [80]
+    iptables_public_tcp_ports => [80],
+    sysadmins => $sysadmins
   }
 
   class { "pypimirror":

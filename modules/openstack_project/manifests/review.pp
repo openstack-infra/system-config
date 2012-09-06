@@ -24,13 +24,14 @@
 # 12:08 <@spearce> to a method that accepts milliseconds
 # 12:09 <@spearce> so. you get 5 milliseconds before aborting
 # thus, set it to 5000minutes until the bug is fixed.
-class openstack_project::review(
+class openstack_project::review (
   $github_oauth_token,
   $mysql_password,
   $mysql_root_password,
   $email_private_key,
-  $gerritbot_password) {
-  include openstack_project
+  $gerritbot_password,
+  $sysadmins = []
+) {
   class { 'openstack_project::gerrit':
     ssl_cert_file => '/etc/ssl/certs/review.openstack.org.pem',
     ssl_key_file => '/etc/ssl/private/review.openstack.org.key',
@@ -53,6 +54,7 @@ class openstack_project::review(
     mysql_password => $mysql_password,
     mysql_root_password => $mysql_root_password,
     email_private_key => $email_private_key,
+    sysadmins => $sysadmins
   }
   class { 'gerritbot':
     nick => 'openstackgerrit',

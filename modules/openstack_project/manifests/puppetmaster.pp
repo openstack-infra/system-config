@@ -1,6 +1,9 @@
-class openstack_project::puppetmaster {
+class openstack_project::puppetmaster (
+  $sysadmins = []
+) {
   class { 'openstack_project::server':
-    iptables_public_tcp_ports => [8140]
+    iptables_public_tcp_ports => [8140],
+    sysadmins => $sysadmins
   }
   cron { "updatepuppetmaster":
     user => root,
