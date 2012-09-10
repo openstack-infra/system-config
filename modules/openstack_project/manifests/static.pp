@@ -7,6 +7,7 @@ class openstack_project::static (
     sysadmins => $sysadmins
   }
 
+  include openstack_project
   class { 'jenkins::jenkinsuser':
     ssh_key => $openstack_project::jenkins_ssh_key
   }
