@@ -22,28 +22,37 @@ function clone_git() {
     cd $OLDDIR
 }
 
-if ! puppet help module >/dev/null 2>&1 ; then
+if ! puppet help module >/dev/null 2>&1
+then
     apt-get install -y -o Dpkg::Options::="--force-confold" puppet facter
 fi
 
-MODULES="
-  openstackci-dashboard
-  openstackci-vcsrepo
-  puppetlabs-apache
-  puppetlabs-apt
-  puppetlabs-mysql
-  saz-memcached
-  "
+# Array of modules to be installed key:value is module:version.
+declare -A MODULES
+MODULES["openstackci-dashboard"]="0.0.4"
+MODULES["openstackci-vcsrepo"]="0.0.6"
+MODULES["puppetlabs-apache"]="0.4.0"
+MODULES["puppetlabs-apt"]="0.0.4"
+MODULES["puppetlabs-mysql"]="0.5.0"
+MODULES["saz-memcached"]="2.0.2"
+
 MODULE_LIST=`puppet module list`
 
 # Transition away from old things
-if [ -d /etc/puppet/modules/vcsrepo/.git ] ; then
+if [ -d /etc/puppet/modules/vcsrepo/.git ]
+then
     rm -rf /etc/puppet/modules/vcsrepo
 fi
 
-for MOD in $MODULES ; do
-  if ! echo $MODULE_LIST | grep $MOD >/dev/null 2>&1 ; then
-    # This will get run in cron, so silence non-error output
-    puppet module install --force $MOD >/dev/null
+for MOD in ${!MODULES[*]} ; do
+  # If the module at the current version does not exist upgrade or install it.
+  if ! echo $MODULE_LIST | grep "$MOD.*${MODULES[$MOD]}" >/dev/null 2>&1
+  then
+    # Attempt module upgrade. If that fails try installing the module.
+    if ! puppet module upgrade $MOD --version ${MODULES[$MOD]} >/dev/null 2>&1
+    then
+      # This will get run in cron, so silence non-error output
+      puppet module install $MOD --version ${MODULES[$MOD]} >/dev/null
+    fi
   fi
 done
