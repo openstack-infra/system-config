@@ -35,6 +35,7 @@ node "gerrit-dev.openstack.org", "review-dev.openstack.org" {
 node "jenkins.openstack.org" {
   class { 'openstack_project::jenkins':
     jenkins_jobs_password => hiera('jenkins_jobs_password'),
+    sysadmins => hiera('sysadmins'),
   }
   class { "openstack_project::zuul":
     jenkins_server => "https://$fqdn",
@@ -43,7 +44,6 @@ node "jenkins.openstack.org" {
     gerrit_server => 'review.openstack.org',
     gerrit_user => 'jenkins',
     url_pattern => 'http://logs.openstack.org/{change.number}/{change.patchset}/{pipeline.name}/{job.name}/{build.number}',
-    sysadmins => hiera('sysadmins'),
   }
 }
 
