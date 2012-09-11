@@ -1,0 +1,9 @@
+Code-Review+2: James E. Blair <corvus@inaugust.com>
+Approved+1: Monty Taylor <mordred@inaugust.com>
+Code-Review+2: Monty Taylor <mordred@inaugust.com>
+Verified+2: Jenkins
+Submitted-by: Jenkins
+Submitted-at: Tue, 11 Sep 2012 13:37:50 +0000
+Reviewed-on: https://review.openstack.org/11369
+Project: openstack/openstack-ci-puppet
+Branch: refs/heads/master
