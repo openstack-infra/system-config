@@ -26,5 +26,5 @@ git add $PROJECT/locale/*
 if [ ! `git diff-index --quiet HEAD --` ]
 then
     # Push changes to transifex
-    tx push -st
+    tx --debug --traceback push -st
 fi

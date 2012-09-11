@@ -33,5 +33,5 @@ then
     git review -t transifex/translations
 
     # Push changes to transifex
-    tx push -st
+    tx --debug --traceback push -st
 fi
