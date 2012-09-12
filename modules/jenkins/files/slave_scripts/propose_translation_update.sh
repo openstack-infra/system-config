@@ -4,6 +4,9 @@ PROJECT=$1
 
 git config user.name "OpenStack Jenkins"
 git config user.email "jenkins@openstack.org"
+git config gitreview.username "jenkins"
+
+git review -s
 
 # See if there is an open change in the transifex/translations topic
 # If so, amend the commit with new changes since then
