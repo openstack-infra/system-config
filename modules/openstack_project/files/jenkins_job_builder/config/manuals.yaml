@@ -101,7 +101,7 @@
 
     prebuilders:
       - gerrit-git-prep
-      - markdown-docbook
+      - markdown-docbook:
           filename: "images-api-v2.0"
 
     properties:
@@ -141,7 +141,7 @@
 
     prebuilders:
       - gerrit-git-prep
-      - markdown-docbook
+      - markdown-docbook:
           filename: "openstackapi-programming"
 
     properties:
