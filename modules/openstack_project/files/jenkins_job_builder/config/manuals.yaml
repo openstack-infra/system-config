@@ -163,4 +163,31 @@
           source: 'doc/target/docbkx/webhelp/openstack-api-programming/**'
           target: 'api/openstack-compute/programmer/'
           remove-prefix: 'doc/target/docbkx/webhelp/openstack-api-programming/'
-          excludes: '**/*.xml,**/null*'          
+          excludes: '**/*.xml,**/null*'
+
+- job:
+    name: openstack-glossary
+    project-type: maven
+    node: precise
+
+    triggers:
+      - zuul-post
+
+    prebuilders:
+      - gerrit-git-prep
+
+    maven:
+      root-module:
+        group-id: org.openstack.docs
+        artifact-id: openstack-guide
+      root-pom: doc/src/docbkx/common/glossary/pom.xml
+      goals: 'clean generate-sources'
+
+    publishers:
+      - console-log-post
+      - ftp:
+          site: docs.openstack.org
+          source: 'doc/src/docbkx/common/glossary/target/docbkx/webhelp/openstack-glossary/**'
+          target: 'glossary'
+          remove-prefix: 'doc/src/docbkx/common/glossary/target/docbkx/webhelp/openstack-glossary/'
+          excludes: '**/*.xml,**/null*'    

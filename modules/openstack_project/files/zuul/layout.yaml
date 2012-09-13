@@ -642,7 +642,8 @@ projects:
   - name: openstack/openstack-manuals
     post:
       - openstack-cli-guide
-
+      - openstack-glossary
+      
   - name: openstack/netconn-api
     check:
       - gate-netconn-api-merge
