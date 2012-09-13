@@ -7,5 +7,5 @@ approval:
 At your convenience, visit:
 
     %(admindb_url)s
-	
+
 to process the request.

@@ -9,5 +9,5 @@ This is a Mailman mailing list bounce action notice:
 %(reenable)s
 The triggering bounce notice is attached below.
 
-Questions?  
+Questions?
 Contact the Mailman site administrator at %(owneraddr)s.

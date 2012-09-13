@@ -13,7 +13,7 @@ You can configure your mailing list at the following web page:
 
     %(admin_url)s
 
-The web page for users of your mailing list is: 
+The web page for users of your mailing list is:
 
     %(listinfo_url)s
 

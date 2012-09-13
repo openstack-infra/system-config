@@ -9,5 +9,5 @@ following mailing list posting:
 At your convenience, visit:
 
     %(admindb_url)s
-        
+
 to approve or deny the request.

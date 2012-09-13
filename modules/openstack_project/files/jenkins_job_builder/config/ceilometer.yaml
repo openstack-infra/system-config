@@ -13,7 +13,7 @@
 
     # >= precise does not have python2.6
     node: oneiric
-  
+
 
 - job:
     name: 'gate-ceilometer-python27-essex'

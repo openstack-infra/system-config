@@ -261,7 +261,7 @@ Here are the SQL commands to set it up:
   'OpenStack CLA via Echosign', 'static/echosign-cla.html', 1);
 
   insert into account_group_agreements values (
-  now(), 'V', 1, now(), NULL, 
+  now(), 'V', 1, now(), NULL,
   (select group_id from account_group_names where name='openstack-cla'),
   1);
 
@@ -278,58 +278,58 @@ Create: /etc/apache2/sites-available/gerrit:
 
   <VirtualHost *:80>
     ServerAdmin webmaster@localhost
-  
+
     ErrorLog ${APACHE_LOG_DIR}/gerrit-error.log
-  
+
     LogLevel warn
-  
+
     CustomLog ${APACHE_LOG_DIR}/gerrit-access.log combined
-  
+
     Redirect / https://review-dev.openstack.org/
-  
+
   </VirtualHost>
-  
+
   <IfModule mod_ssl.c>
   <VirtualHost _default_:443>
     ServerAdmin webmaster@localhost
-  
+
     ErrorLog ${APACHE_LOG_DIR}/gerrit-ssl-error.log
-  
+
     LogLevel warn
-  
+
     CustomLog ${APACHE_LOG_DIR}/gerrit-ssl-access.log combined
-  
+
     SSLEngine on
-  
+
     SSLCertificateFile    /etc/ssl/certs/ssl-cert-snakeoil.pem
     SSLCertificateKeyFile /etc/ssl/private/ssl-cert-snakeoil.key
     #SSLCertificateChainFile /etc/apache2/ssl.crt/server-ca.crt
-  
+
     <FilesMatch "\.(cgi|shtml|phtml|php)$">
         SSLOptions +StdEnvVars
     </FilesMatch>
     <Directory /usr/lib/cgi-bin>
         SSLOptions +StdEnvVars
     </Directory>
-  
+
     BrowserMatch "MSIE [2-6]" \
         nokeepalive ssl-unclean-shutdown \
         downgrade-1.0 force-response-1.0
     # MSIE 7 and newer should be able to use keepalive
     BrowserMatch "MSIE [17-9]" ssl-unclean-shutdown
-  
+
     RewriteEngine on
     RewriteCond %{HTTP_HOST} !review-dev.openstack.org
     RewriteRule ^.*$ https://review-dev.openstack.org/
-  
+
         ProxyPassReverse / http://localhost:8081/
         <Location />
           Order allow,deny
           Allow from all
           ProxyPass http://localhost:8081/ retry=0
         </Location>
-  
-  
+
+
   </VirtualHost>
   </IfModule>
 

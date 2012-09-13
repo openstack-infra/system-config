@@ -2,7 +2,7 @@
     name: ceilometer
     github-org: stackforge
     node: oneiric
-    
+
     jobs:
       - python-jobs
 
@@ -13,7 +13,7 @@
     node: precise
     tarball-publisher-site: nova.openstack.org
     doc-publisher-site: docs.openstack.org
-    
+
     jobs:
       - python-jobs
       - openstack-publish-jobs
@@ -23,7 +23,7 @@
     name: devstack-gate
     github-org: openstack-ci
     node: precise
-    
+
     jobs:
       - gate-{name}-merge
 
@@ -32,7 +32,7 @@
     name: devstack
     github-org: openstack-dev
     node: precise
-    
+
     jobs:
       - gate-{name}-merge
 
@@ -41,7 +41,7 @@
     name: gerrit-verification-status-plugin
     github-org: openstack-ci
     node: precise
-    
+
     jobs:
       - gate-{name}-merge
 
@@ -50,7 +50,7 @@
     name: gerrit
     github-org: openstack-ci
     node: precise
-    
+
     jobs:
       - gate-{name}-merge
 
@@ -61,7 +61,7 @@
     node: precise
     doc-publisher-site: ci.openstack.org
     tarball-publisher-site: 173.203.107.207
-    
+
     jobs:
       - gate-{name}-merge
       - gate-{name}-pep8
@@ -76,7 +76,7 @@
     node: precise
     doc-publisher-site: ci.openstack.org
     tarball-publisher-site: nova.openstack.org
-    
+
     jobs:
       - gate-{name}-merge
       - gate-{name}-pep8
@@ -90,7 +90,7 @@
     node: precise
     tarball-publisher-site: nova.openstack.org
     doc-publisher-site: docs.openstack.org
-    
+
     jobs:
       - python-jobs
       - python-diablo-bitrot-jobs
@@ -102,7 +102,7 @@
     name: heat
     github-org: heat-api
     node: oneiric
-    
+
     jobs:
       - python-jobs
 
@@ -113,7 +113,7 @@
     node: precise
     tarball-publisher-site: nova.openstack.org
     doc-publisher-site: docs.openstack.org
-    
+
     jobs:
       - python-jobs
       - python-diablo-bitrot-jobs
@@ -126,7 +126,7 @@
     name: jenkins-job-builder
     github-org: openstack-ci
     node: precise
-    
+
     jobs:
       - gate-{name}-merge
       - gate-{name}-pep8
@@ -139,7 +139,7 @@
     node: precise
     tarball-publisher-site: nova.openstack.org
     doc-publisher-site: docs.openstack.org
-    
+
     jobs:
       - python-jobs
       - python-diablo-bitrot-jobs
@@ -193,7 +193,7 @@
     node: precise
     tarball-publisher-site: nova.openstack.org
     doc-publisher-site: docs.openstack.org
-    
+
     jobs:
       - python-jobs
       - python-diablo-bitrot-jobs
@@ -207,7 +207,7 @@
     name: ci-puppet
     github-org: openstack
     node: precise
-    
+
     jobs:
       - gate-{name}-merge
 
@@ -218,7 +218,7 @@
     node: precise
     tarball-publisher-site: nova.openstack.org
     doc-publisher-site: docs.openstack.org
-    
+
     jobs:
       - python-jobs
       - openstack-publish-jobs
@@ -230,7 +230,7 @@
     node: precise
     tarball-publisher-site: nova.openstack.org
     doc-publisher-site: docs.openstack.org
-    
+
     jobs:
       - python-jobs
       - pypi-jobs
@@ -267,7 +267,7 @@
     name: pypi-mirror
     github-org: openstack-ci
     node: precise
-    
+
     jobs:
       - gate-{name}-merge
       - gate-{name}-pyflakes
@@ -279,7 +279,7 @@
     node: precise
     tarball-publisher-site: nova.openstack.org
     doc-publisher-site: docs.openstack.org
-    
+
     jobs:
       - python-jobs
       - pypi-jobs
@@ -291,7 +291,7 @@
     node: precise
     tarball-publisher-site: nova.openstack.org
     doc-publisher-site: docs.openstack.org
-    
+
     jobs:
       - python-jobs
       - pypi-jobs
@@ -303,7 +303,7 @@
     node: precise
     tarball-publisher-site: nova.openstack.org
     doc-publisher-site: docs.openstack.org
-    
+
     jobs:
       - python-jobs
       - pypi-jobs
@@ -315,7 +315,7 @@
     node: precise
     tarball-publisher-site: nova.openstack.org
     doc-publisher-site: docs.openstack.org
-    
+
     jobs:
       - python-jobs
       - pypi-jobs
@@ -327,7 +327,7 @@
     node: precise
     tarball-publisher-site: nova.openstack.org
     doc-publisher-site: docs.openstack.org
-    
+
     jobs:
       - python-jobs
       - pypi-jobs
@@ -339,7 +339,7 @@
     node: precise
     tarball-publisher-site: nova.openstack.org
     doc-publisher-site: docs.openstack.org
-    
+
     jobs:
       - python-jobs
       - pypi-jobs
@@ -351,7 +351,7 @@
     node: precise
     tarball-publisher-site: swift.openstack.org
     doc-publisher-site: docs.openstack.org
-    
+
     jobs:
       - python-jobs
       - pypi-jobs
@@ -363,7 +363,7 @@
     node: precise
     tarball-publisher-site: nova.openstack.org
     doc-publisher-site: docs.openstack.org
-    
+
     jobs:
       - python-jobs
       - openstack-publish-jobs
@@ -373,7 +373,7 @@
     name: reddwarf
     github-org: stackforge
     node: oneiric
-    
+
     jobs:
       - python-jobs
 
@@ -382,7 +382,7 @@
     name: requirements
     github-org: openstack
     node: precise
-    
+
     jobs:
       - gate-{name}-merge
 
@@ -393,7 +393,7 @@
     node: precise
     tarball-publisher-site: nova.openstack.org
     doc-publisher-site: docs.openstack.org
-    
+
     jobs:
       - python-jobs
       - python-diablo-bitrot-jobs
@@ -405,7 +405,7 @@
     name: tempest
     github-org: openstack-ci
     node: precise
-    
+
     jobs:
       - gate-{name}-merge
       - gate-{name}-pep8

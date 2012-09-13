@@ -29,7 +29,7 @@ class jenkins::jenkinsuser($ensure = present, $sudo = false, $ssh_key) {
     ensure => 'directory',
     require => User['jenkins']
   }
-    
+
   file { 'jenkinspipdir':
     name => '/home/jenkins/.pip',
     owner => 'jenkins',
@@ -63,7 +63,7 @@ class jenkins::jenkinsuser($ensure = present, $sudo = false, $ssh_key) {
     source => "puppet:///modules/jenkins/gitconfig",
     require => File['jenkinshome'],
   }
-   
+
   file { 'jenkinssshdir':
     name => '/home/jenkins/.ssh',
     owner => 'jenkins',

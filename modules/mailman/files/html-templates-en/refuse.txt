@@ -7,7 +7,7 @@ following reason for rejecting your request:
 
 "%(reason)s"
 
-Any questions or comments should be directed to the list administrator 
+Any questions or comments should be directed to the list administrator
 at:
 
     %(adminaddr)s

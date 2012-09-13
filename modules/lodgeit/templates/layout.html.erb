@@ -55,7 +55,7 @@
             {% for paste in new_replies %}
             <p>{% trans date=paste.pub_date|datetimeformat, parent=paste.parent.paste_id,
                         paste=paste.paste_id, paste_url=paste.url|e, parent_url=paste.parent.url|e %}
-              on {{ date }} someone replied to your paste 
+              on {{ date }} someone replied to your paste
               <a href="{{ parent_url }}">#{{ parent }}</a>,
               in paste <a href="{{ paste_url }}">#{{ paste }}</a>. Click here to {% endtrans %}
               <a href="{{ url_for('pastes/compare_paste', new_id=paste.paste_id, old_id=paste.parent.paste_id) }}">

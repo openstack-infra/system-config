@@ -124,7 +124,7 @@
           target: 'api/openstack-image-service/2.0/'
           remove-prefix: 'doc/target/docbkx/webhelp/images-api-2.0/'
           excludes: '**/*.xml,**/null*'
-          
+
 - job:
     name: openstackapi-programming
     project-type: maven
@@ -163,4 +163,4 @@
           source: 'doc/target/docbkx/webhelp/openstack-api-programming/**'
           target: 'api/openstack-compute/programmer/'
           remove-prefix: 'doc/target/docbkx/webhelp/openstack-api-programming/'
-          excludes: '**/*.xml,**/null*'          
+          excludes: '**/*.xml,**/null*'

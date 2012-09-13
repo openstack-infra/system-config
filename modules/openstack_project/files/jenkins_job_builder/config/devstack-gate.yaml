@@ -51,7 +51,7 @@
           ./safe-devstack-vm-gate-wrap.sh
 
     publishers:
-      - archive: 
+      - archive:
           artifacts: logs/*
       - scp:
           site: 'static.openstack.org'
@@ -121,7 +121,7 @@
           ./safe-devstack-vm-gate-wrap.sh
 
     publishers:
-      - archive: 
+      - archive:
           artifacts: logs/*
       - scp:
           site: 'static.openstack.org'
@@ -185,7 +185,7 @@
           ./safe-devstack-vm-gate-wrap.sh
 
     publishers:
-      - archive: 
+      - archive:
           artifacts: logs/*
       - scp:
           site: 'static.openstack.org'
@@ -249,7 +249,7 @@
           ./safe-devstack-vm-gate-wrap.sh
 
     publishers:
-      - archive: 
+      - archive:
           artifacts: logs/*
       - scp:
           site: 'static.openstack.org'

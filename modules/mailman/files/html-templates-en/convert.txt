@@ -8,8 +8,8 @@ How does this affect you?
 1) Mail intended for the whole list should be sent to: %(listaddr)s.
 
 2) You have been given an arbitrary password to prevent others from
-unsubscribing you without your knowledge.  It will be mailed to you in 
-a separate email, which you may have already received.  Don't worry if 
+unsubscribing you without your knowledge.  It will be mailed to you in
+a separate email, which you may have already received.  Don't worry if
 you forget this password; a reminder will be sent to you via email
 every month.
 
@@ -22,7 +22,7 @@ these resources is:
     %(listinfo_url)s
 
 4) If you do not have WWW access, you can do these same things via
-email.  Send mail to %(requestaddr)s with a subject or body containing 
+email.  Send mail to %(requestaddr)s with a subject or body containing
 just the word "help" (without the quotes).  You will receive an
 automated reply giving you further directions.
 
