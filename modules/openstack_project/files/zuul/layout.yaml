@@ -59,6 +59,8 @@ jobs:
     voting: false
   - name: dev-zuul-coverage
     voting: false
+  - name: heat-coverage
+    voting: false
   - name: jenkins-job-builder-compare-xml
     voting: false
     failure-message: XML output has changed.
@@ -624,13 +626,12 @@ projects:
         - gate-heat-pep8
         - gate-heat-python26
         - gate-heat-python27
+        - heat-coverage
     gate:
       - gate-heat-merge:
         - gate-heat-pep8
         - gate-heat-python26
         - gate-heat-python27
-    post:
-      - heat-coverage
 
   - name: stackforge/reddwarf
     check:
