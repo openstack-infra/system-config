@@ -56,12 +56,17 @@ class jenkins::slave($ssh_key, $sudo = false, $bare = false, $user = true) {
 
     # Packages that need to be installed from pip
     $pip_packages = [
-                 "git-review",
                  "setuptools-git",
                  "tox"]
 
     package { $pip_packages:
       ensure => latest,  # we want the latest from these
+      provider => pip,
+      require => Class[pip]
+    }
+
+    package { 'git-review':
+      ensure => '1.17',
       provider => pip,
       require => Class[pip]
     }
