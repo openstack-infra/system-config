@@ -47,9 +47,9 @@
       - console-log-post
       - ftp:
           site: docs.openstack.org
-          source: 'doc/target/docbkx/webhelp/quantum-api-2.0/quantum-api-guide/**'
+          source: 'doc/target/docbkx/webhelp/api/openstack-network/2.0/**'
           target: 'api/openstack-network/2.0/'
-          remove-prefix: 'doc/target/docbkx/webhelp/quantum-api-2.0/quantum-api-guide/'
+          remove-prefix: 'doc/target/docbkx/webhelp/api/openstack-network/2.0/'
           excludes: '**/*.xml,**/null*'
 
 - job:
