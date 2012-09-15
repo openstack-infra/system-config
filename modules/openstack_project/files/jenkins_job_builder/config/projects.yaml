@@ -119,7 +119,6 @@
       - python-diablo-bitrot-jobs
       - python-essex-bitrot-jobs
       - openstack-publish-jobs
-      - translation-jobs
 
 
 - project:
