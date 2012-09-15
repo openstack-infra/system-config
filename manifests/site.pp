@@ -28,6 +28,8 @@ node "gerrit-dev.openstack.org", "review-dev.openstack.org" {
     mysql_password => hiera('gerrit_dev_mysql_password'),
     mysql_root_password => hiera('gerrit_dev_mysql_root_password'),
     email_private_key => hiera('gerrit_dev_email_private_key'),
+    contactstore_appsec => hiera('gerrit_contactstore_appsec'),
+    contactstore_pubkey => hiera('gerrit_contactstore_pubkey'),
     sysadmins => hiera('sysadmins'),
   }
 }
