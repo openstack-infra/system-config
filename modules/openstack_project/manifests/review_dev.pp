@@ -3,6 +3,8 @@ class openstack_project::review_dev (
   $mysql_password,
   $mysql_root_password,
   $email_private_key,
+  $contactstore_appsec,
+  $contactstore_pubkey,
   $sysadmins = []
 ) {
   class { 'openstack_project::gerrit':
@@ -12,7 +14,11 @@ class openstack_project::review_dev (
     ssl_key_file => '/etc/ssl/private/ssl-cert-snakeoil.key',
     ssl_chain_file => '',
     email => "review-dev@openstack.org",
-    war => 'http://tarballs.openstack.org/ci/gerrit-2.4.2-11-gb5a28fb.war',
+    war => 'http://tarballs.openstack.org/ci/test/gerrit-2.4.2-13-g69c8fa6.war',
+    contactstore => true,
+    contactstore_appsec => $contactstore_appsec,
+    contactstore_pubkey => $contactstore_pubkey,
+    contactstore_url => 'https://www.yuggoth.org/gerrit_test',
     script_user => 'launchpadsync',
     script_key_file => '/home/gerrit2/.ssh/launchpadsync_rsa',
     script_logging_conf => '/home/gerrit2/.sync_logging.conf',
@@ -40,5 +46,20 @@ class openstack_project::review_dev (
     mode => 0644,
     source => 'puppet:///modules/openstack_project/gerrit/launchpad_sync_logging.conf',
     require => User['gerrit2']
+  }
+  file { '/home/gerrit2/review_site/bin/set_agreements.sh':
+    ensure => present,
+    owner => root,
+    group => root,
+    mode => 0755,
+    content => template('openstack_project/gerrit_set_agreements.sh.erb'),
+    replace => 'true',
+    require => Class['::gerrit']
+  }
+  exec { 'set_contributor_agreements':
+    path    => ['/bin', '/usr/bin'],
+    command => '/home/gerrit2/review_site/bin/set_agreements.sh',
+    require => [Class['mysql'],
+                File['/home/gerrit2/review_site/bin/set_agreements.sh']]
   }
 }

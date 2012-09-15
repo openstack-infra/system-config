@@ -42,6 +42,14 @@
 #     to:
 #       http://tarballs.openstack.org/ci/gerrit-2.3.0.war
 #     Gerrit will be upgraded on the next puppet run.
+#   contactstore:
+#     A boolean enabling the contact store feature
+#   contactstore_appsec:
+#     An application shared secret for the contact store protocol
+#   contactstore_pubkey:
+#     A public key with which to encrypt contact information
+#   contactstore_url:
+#     A URL for the remote contact store application
 #   replicate_github:
 #     A boolean enabling replication to github
 #   replicate_local:
@@ -73,6 +81,10 @@ class gerrit($vhost_name=$fqdn,
       $httpd_maxwait='',
       $commentlinks = [],
       $war,
+      $contactstore=false,
+      $contactstore_appsec='',
+      $contactstore_pubkey='',
+      $contactstore_url='',
       $projects_file = 'UNDEF',
       $enable_melody = 'false',
       $melody_session = 'false',
@@ -389,5 +401,27 @@ class gerrit($vhost_name=$fqdn,
     source => [
                 "puppet:///modules/gerrit/scripts",
               ],
+  }
+
+  # Install Bouncy Castle's OpenPGP plugin and populate the contact store
+  # public key file if we're using that feature.
+  if ($contactstore == true) {
+    package { "libbcpg-java":
+      ensure => installed,
+    }
+    file { "/home/gerrit2/review_site/lib/bcpg.jar":
+      ensure => link,
+      target => "/usr/share/java/bcpg.jar",
+      require => File["/usr/share/java/bcpg.jar"],
+    }
+    file { '/home/gerrit2/review_site/etc/contact_information.pub':
+      owner => 'root',
+      group => 'root',
+      mode => 444,
+      ensure => 'present',
+      content => template('gerrit/contact_information.pub.erb'),
+      replace => 'true',
+      require => File["/home/gerrit2/review_site/etc"],
+    }
   }
 }
