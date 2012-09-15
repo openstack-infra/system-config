@@ -82,3 +82,8 @@
 [gitweb]
 	revision = "?p=${project}.git;a=commitdiff;h=${commit}"
 <% end -%>
+<% if contactstore == true -%>
+[contactstore]
+	appsec = <%= contactstore_appsec %>
+	url = <%= contactstore_url %>
+<% end -%>
