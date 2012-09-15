@@ -42,6 +42,12 @@
 #     to:
 #       http://tarballs.openstack.org/ci/gerrit-2.3.0.war
 #     Gerrit will be upgraded on the next puppet run.
+#   contactstore:
+#     A boolean enabling the contact store feature
+#   contactstore_appsec:
+#     An application shared secret for the contact store protocol
+#   contactstore_url:
+#     A URL for the remote contact store application
 #   replicate_github:
 #     A boolean enabling replication to github
 #   replicate_local:
@@ -73,6 +79,9 @@ class gerrit($vhost_name=$fqdn,
       $httpd_maxwait='',
       $commentlinks = [],
       $war,
+      $contactstore=false,
+      $contactstore_appsec,
+      $contactstore_url,
       $projects_file = 'UNDEF',
       $enable_melody = 'false',
       $melody_session = 'false',
