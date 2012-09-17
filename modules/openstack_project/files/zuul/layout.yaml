@@ -57,6 +57,7 @@ jobs:
     parameter-function: python27_params
   - name: gate-nova-pylint
     voting: false
+    branch: ^(?!stable/(diablo|essex)).*$
   - name: dev-zuul-coverage
     voting: false
   - name: heat-coverage
