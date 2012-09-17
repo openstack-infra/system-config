@@ -1,3 +1,24 @@
+# This is a non-standard docs job because it uses SCP instead of FTP
+- job:
+    name: jenkins-job-builder-docs
+    node: precise
+
+    triggers:
+      - zuul-post
+
+    builders:
+      - gerrit-git-prep
+      - docs
+
+    publishers:
+      - scp:
+          site: '173.203.107.207'
+          files:
+            - target: 'ci/jenkins-job-builder'
+              source: 'doc/build/html/**/*'
+              keep-hierarchy: true
+      - console-log-post
+
 - job:
     name: jenkins-job-builder-compare-xml
     node: precise
