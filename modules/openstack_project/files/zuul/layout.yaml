@@ -160,6 +160,8 @@ projects:
       - jenkins-job-builder-compare-xml
     gate:
       - gate-jenkins-job-builder-merge
+    post:
+      - jenkins-job-builder-docs
 
   - name: openstack-ci/meetbot
     check:
