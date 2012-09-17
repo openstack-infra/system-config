@@ -158,9 +158,15 @@ projects:
   - name: openstack-ci/jenkins-job-builder
     check:
       - gate-jenkins-job-builder-merge
+      - gate-jenkins-job-builder-docs
+      - gate-jenkins-job-builder-pep8
+      - gate-jenkins-job-builder-pyflakes
       - jenkins-job-builder-compare-xml
     gate:
       - gate-jenkins-job-builder-merge
+      - gate-jenkins-job-builder-docs
+      - gate-jenkins-job-builder-pep8
+      - gate-jenkins-job-builder-pyflakes
     post:
       - jenkins-job-builder-docs
 

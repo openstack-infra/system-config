@@ -130,7 +130,7 @@
       - gate-{name}-merge
       - gate-{name}-pep8
       - gate-{name}-pyflakes
-
+      - gate-{name}-docs
 
 - project:
     name: keystone
