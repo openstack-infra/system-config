@@ -17,4 +17,4 @@
               source: 'cover/**'
               keep-hierarchy: true
               copy-after-failure: true
-      - console-log-post
+      - console-log
