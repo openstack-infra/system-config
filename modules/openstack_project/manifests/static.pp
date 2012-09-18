@@ -33,6 +33,7 @@ class openstack_project::static (
     priority => '50',
     docroot  => '/srv/static/logs',
     require  => File['/srv/static/logs'],
+    template => 'openstack_project/logs.vhost.erb',
   }
 
   file { '/srv/static':
