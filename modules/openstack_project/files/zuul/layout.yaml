@@ -60,7 +60,7 @@ jobs:
     branch: ^(?!stable/(diablo|essex)).*$
   - name: dev-zuul-coverage
     voting: false
-  - name: heat-coverage
+  - name: dev-heat-coverage
     voting: false
   - name: jenkins-job-builder-compare-xml
     voting: false
@@ -629,7 +629,7 @@ projects:
         - gate-heat-pep8
         - gate-heat-python26
         - gate-heat-python27
-        - heat-coverage
+        - dev-heat-coverage
     gate:
       - gate-heat-merge:
         - gate-heat-pep8
