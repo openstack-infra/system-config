@@ -1,6 +1,7 @@
 #!/bin/bash -xe
 
 PROJECT=$1
+COMMIT_MSG="Imported Translations from Transifex"
 
 git config user.name "OpenStack Jenkins"
 git config user.email "jenkins@openstack.org"
@@ -9,11 +10,16 @@ git config gitreview.username "jenkins"
 git review -s
 
 # See if there is an open change in the transifex/translations topic
-# If so, amend the commit with new changes since then
-previous=`ssh -p 29418 review.openstack.org gerrit query --current-patch-set status:open project:openstack/$PROJECT topic:transifex/translations | grep "^  number:" | awk '{print $2}'`
+# If so, get the change id for the existing change for use in the commit msg.
+change_info=`ssh -p 29418 review.openstack.org gerrit query --current-patch-set status:open project:openstack/$PROJECT topic:transifex/translations owner:jenkins`
+previous=`echo "$change_info" | grep "^  number:" | awk '{print $2}'`
 if [ "x${previous}" != "x" ] ; then
-    git review -d ${previous}
-    amend="--amend"
+    change_id=`echo "$change_info" | grep "^change" | awk '{print $2}'`
+    read -d '' COMMIT_MSG <<EOF
+Imported Translations from Transifex
+
+Change-Id: $change_id
+EOF
 fi
 
 # initialize transifex client
@@ -32,7 +38,9 @@ git add $PROJECT/locale/*
 if [ ! `git diff-index --quiet HEAD --` ]
 then
     # Commit and review
-    git commit ${amend} -m "Imported Translations from Transifex"
+    git commit -F- <<EOF
+$COMMIT_MSG
+EOF
     git review -t transifex/translations
 
     # Push changes to transifex
