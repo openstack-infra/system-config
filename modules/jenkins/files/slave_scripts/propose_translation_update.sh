@@ -15,11 +15,16 @@ change_info=`ssh -p 29418 review.openstack.org gerrit query --current-patch-set 
 previous=`echo "$change_info" | grep "^  number:" | awk '{print $2}'`
 if [ "x${previous}" != "x" ] ; then
     change_id=`echo "$change_info" | grep "^change" | awk '{print $2}'`
+    # read return a non zero value when it reaches EOF. Because we use a
+    # heredoc here it will always reach EOF and return a nonzero value.
+    # Disable -e temporarily to get around the read.
+    set +e
     read -d '' COMMIT_MSG <<EOF
 Imported Translations from Transifex
 
 Change-Id: $change_id
 EOF
+    set -e
 fi
 
 # initialize transifex client
