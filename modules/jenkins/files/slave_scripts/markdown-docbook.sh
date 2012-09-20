@@ -14,6 +14,7 @@ shopt -s extglob
 # and images-api-v2.0.md and openstackapi-programming and images-api-v2.0 are the names
 # for the ID and xml filename.
 FILENAME=$1
-pandoc -f markdown -t docbook -s ${FILENAME}.@(md|mdown) |  xsltproc -o - /usr/share/xml/docbook/stylesheet/docbook5/db4-upgrade.xsl - |  xmllint  --format - | sed -e 's,<article,<book xml:id="$FILENAME",' | sed -e 's,</article>,</book> > $FILENAME.xml'
+FILEPATH=`find ./ -regextype posix-extended -regex ".*${FILENAME}\.(md|markdown)"`
+pandoc -f markdown -t docbook -s ${FILEPATH} |  xsltproc -o - /usr/share/xml/docbook/stylesheet/docbook5/db4-upgrade.xsl - |  xmllint  --format - | sed -e 's,<article,<book xml:id="$FILENAME",' | sed -e 's,</article>,</book>,' > src/markdown/$FILENAME.xml
 
 pwd
