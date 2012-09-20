@@ -5,6 +5,10 @@ class openstack_project::review_dev (
   $email_private_key,
   $contactstore_appsec,
   $contactstore_pubkey,
+  $cla_description=$gerrit::cla_description,
+  $cla_file=$gerrit::cla_file,
+  $cla_id=$gerrit::cla_id,
+  $cla_name=$gerrit::cla_name,
   $sysadmins = []
 ) {
   class { 'openstack_project::gerrit':
