@@ -6,128 +6,222 @@ Overview
 
 In order to make the process of managing hundreds of Jenkins Jobs easier a
 Python based utility was designed to take YAML based configurations and convert
-those into jobs that are injected into Jenkins.
+those into jobs that are injected into Jenkins. The source for this utility can
+be found on `github <https://github.com/openstack-ci/jenkins-job-builder>`_ and
+it comes with its own
+`documentation <http://ci.openstack.org/jenkins-job-builder/>`_.
 
-Adding a project
-----------------
+The documentation below describes how the OpenStack CI team uses the Jenkins
+Job Builder in their environment.
+
+Configuring Projects
+--------------------
 
 The YAML scripts to make this work are stored in the ``openstack-ci-puppet``
-repository in the ``modules/jenkins_jobs/files/projects/site/project.yaml``
-directory.  Where ``site`` is either `openstack` or `stackforge` and ``project``
-is the name of the project the YAML file is for.
+repository in the
+``modules/openstack_project/files/jenkins_job_builder/config/`` directory.
+In this directory you can have four different types of yaml config files:
 
-Once the YAML file is added the puppet module needs to be told that the project
-is there.  For example:
-
-.. code-block:: ruby
-   :linenos:
-
-   class { "jenkins_jobs":
-     site => "stackforge",
-     projects => ['reddwarf', 'ceilometer']
-   }
-
-In this example the YAML files for `reddwarf` and `ceilometer` in the
-`stackforge` projects directory will be executed.
+* Jenkins Jobs Defaults in ``defaults.yaml``.
+* Jenkins Jobs Macros to give larger config sections meaningful names in
+  ``macros.yaml``.
+* Project specific configurations in ``project_name.yaml``.
+* Job template configurations. Need a ``projects.yaml`` file to specify how
+  the templates should be filled out and templates go in ``template_name.yaml``.
 
 YAML Format
 -----------
 
-The bare minimum YAML needs to look like this:
+Defaults
+^^^^^^^^
+
+Example defaults config:
 
 .. code-block:: yaml
    :linenos:
 
-   ---
-   modules:
-     - properties
-     - scm
-     - assignednode
-     - trigger_none
-     - builders
-     - publisher_none
+   - defaults:
+       name: global
+       description: |
+         <p><b>This job is managed by puppet and will be overwritten.</b></p>
 
-   main:
-     name: 'job-name'
-     review_site: 'review.stackforge.org'
-     github_org: 'stackforge'
-     project: 'project'
-     authenticatedBuild: 'false'
-     disabled: 'false'
+         <p><b>Do not edit this job through the web</b></p>
 
-or for a templated project:
+         <p>If you would like to make changes to this job, please see:
+
+           <a href="https://github.com/openstack/openstack-ci-puppet">
+             https://github.com/openstack/openstack-ci-puppet
+           </a>
+
+         In modules/openstack_project/files/jenkins_jobs
+         </p>
+       project-type: freestyle
+       concurrent: true
+
+       wrappers:
+         - timeout:
+             timeout: 30
+             fail: true
+         - timestamps
+
+       logrotate:
+         daysToKeep: 1
+         numToKeep: -1
+         artifactDaysToKeep: -1
+         artifactNumToKeep: -1
+
+This config starts with the ``- defaults::`` line. This specifies that this
+section contains default values rather than job specifications. In this
+section we specify a useful set of defaults including a default description
+indicating Puppet manages these jobs, jobs are allowed to run concurrently,
+and a thirty minute job timeout.
+
+Macros
+^^^^^^
+
+Macros exist to give meaningful names to blocks of configuration that can be
+used in job configs in place of the blocks they name. For example:
 
 .. code-block:: yaml
    :linenos:
 
-   project:
-     template: 'python_jobs'
+   - builder:
+       name: git-prep
+       builders:
+         - shell: "/slave_scripts/git-prep.sh"
 
-   values:
-     name: 'cinder'
-     disabled: 'false'
-     github_org: 'openstack'
-     review_site: 'review.openstack.org'
-     publisher_site: 'nova.openstack.org'
+   - builder:
+       name: docs
+       builders:
+         - shell: "/slave_scripts/run-docs.sh"
 
+   - publisher:
+       name: console-log
+       publishers:
+         - scp:
+             site: 'scp-server'
+             files:
+               - target: 'logs/$JOB_NAME/$BUILD_NUMBER'
+                 copy-console: true
+                 copy-after-failure: true
 
-The first example starts with ``---``, this signifies the start of a job, there
-can be multiple jobs per project file.  The file does not need to start with the
-``---`` but jobs do need to be separated by it.  Each YAML file can contain any
-combination of templated or normal jobs.
+In this block of code we define two builder macros and one publisher macro.
+Each macro has a name and using that name in a job config is equivalent to
+having the yaml below the name in place of the name in the job config. The next
+section shows how you can use these macros.
 
-In the first example the ``modules`` entry is an array of modules that should be
-loaded for this job.  Modules are located in the
-``modules/jenkins_jobs/files/modules/`` directory and are python scripts to
-generate the required XML.  Each module has a comment near the top showing the
-required YAML to support that module.  The follow modules are required to
-generate a correct XML that Jenkins will support:
+Job Config
+^^^^^^^^^^
 
-* properties (supplies the <properties> XML data)
-* scm (supplies the <scm> XML data, required even is scm is not used
-* trigger_* (a trigger module is required)
-* builders
-* publisher_* (a publisher module is required)
-
-Each module also requires a ``main`` section which has the main data for the
-modules, inside this there is:
-
-* name - the name of the job
-* review_site - review.openstack.org or review.stackforge.org
-* github_org - the parent of the github branch for the project (typically `openstack` or `stackforge`
-* project - the name of the project
-* authenticatedBuild - whether or not you need to be authenticated to hit the
-  build button
-* disabled - whether or not this job should be disabled
-
-In the templated example there is the ``project`` tag to specify that this is
-a templated project.  The ``template`` value specified a template file found in
-the ``modules/jenkins_jobs/files/templates`` directory.  The template will look
-like a regular set of jobs but contain values in caps surrounded by '@' symbols.
-The template process takes the parameters specified in the ``values`` section
-and replaces the values surrounded by the '@' symbol.
-
-As an example in the template:
+Example job config:
 
 .. code-block:: yaml
+   :linenos:
 
-   main:
-     name: 'gate-@NAME@-pep8'
+   - job:
+       name: example-docs
+       node: node-label
 
-Using the above example of a templated job the ``@NAME@`` would be replaced with
-``cinder``.
+       triggers:
+         - zuul
 
-Testing a Job
--------------
+       builders:
+         - git-prep
+         - docs
 
-Once a new YAML file has been created its output can be tested by using the
-``jenkins_jobs.py`` script directly.  For example:
+       publishers:
+         - scp:
+             site: 'scp-server'
+             files:
+               - target: 'dir/ectory'
+                 source: 'build/html/foo'
+                 keep-hierarchy: true
+         - console-log
 
-.. code-block:: bash
+Each job specification begins with ``-job:``. Under this section you can
+specify the job details like name, node, etc. Any detail defined in the
+defaults section that is not defined under this job will be included as well.
+In addition to attribute details you can also specify how jenkins should
+perform this job. What trigger methods should be used, the build steps,
+jenkins publishing steps and so on. The macros defined earlier make this easy
+and simple.
 
-   $ python jenkins_jobs.py test projects/openstack/cinder.yml
+Job Templates
+^^^^^^^^^^^^^
 
-This will spit out the XML that would normally be sent directly to Jenkins.
+Job templates allow you to specify a job config once with arguments that are
+replaced with the values specified in ``projects.yaml``. This allows you to
+reuse job configs across many projects. First you need a templated job config:
+
+.. code-block:: yaml
+   :linenos:
+
+   - job-template:
+       name: '{name}-docs'
+
+       triggers:
+         - zuul
+
+       builders:
+         - git-prep
+         - docs
+
+       publishers:
+         - scp:
+             site: 'scp-server'
+             files:
+               - target: 'dir/ectory'
+                 source: 'build/html/foo'
+                 keep-hierarchy: true
+         - console-log
+
+       node: '{node}'
+
+
+   - job-group:
+       name: python-jobs
+       jobs:
+         - '{name}-docs'
+
+This takes the previous ``example-docs`` job and templatizes it. This will
+allow us to easily create ``example1-docs`` and ``example2-docs`` jobs.
+Each job template begins with ``- job-template:`` and the job specification is
+identical to the previous one, but we have introduced variable arguments. In
+this case ``{name}`` is a variable value that will be replaced. The values for
+name will be defined in the ``projects.yaml`` file.
+
+The ``- job-group:`` section is not strictly necessary but allows you to group
+many job templates with the same variable arguments under one name.
+
+The ``projects.yaml`` pulls all of the magic together. It specifies the
+arguemnts to and instantiates the job templates as real jobs. For example:
+
+.. code-block:: yaml
+   :linenos:
+
+   - project:
+       name: example1
+       node: precise
+
+       jobs:
+         - python-jobs
+
+   - project:
+       name: example2
+       node: oneiric
+
+       jobs:
+         - {name}-docs
+
+Each project using templated jobs should have its own ``- project:`` section.
+Under this sections there should be a ``jobs:`` section with a list of job
+templates or job groups to be used by this project. Other values under the
+``- project:`` section define the arguments to the templates lised under
+``jobs:``. In this case we are giving the docs template ``name`` and ``node``
+values.
+
+Notice that example1 makes use of the job group and example2 makes use of the
+job template.
 
 Job Caching
 -----------
@@ -146,39 +240,22 @@ that it can create and modify jobs directly without the need to restart or
 reload the Jenkins server.  It also means that Jenkins will verify the XML and
 cause the Jenkins Jobs builder to fail if there is a problem.
 
-For this to work a configuration file is needed.  This needs to be stored in
-``/root/secret-files/jenkins_jobs.ini`` and puppet will automatically put it in
-the right place.  The format for this file is as follows:
+For this to work a configuration file is needed.  There is an erb template for
+this configuration file at ``modules/jenkins/templates/jenkins_jobs.ini.erb``.
+The contents of this erb are:
 
 .. code-block:: ini
 
    [jenkins]
-   user=username
-   password=password
-   url=jenkins_url
+   user=<%= username %>
+   password=<%= password %>
+   url=<%= url %>
+
+The values for user and url are hardcoded in the Puppet repo in
+`modules/openstack_project/manifests/jenkins.pp <https://github.com/openstack/openstack-ci-puppet/blob/master/modules/openstack_project/manifests/jenkins.pp>`_,
+but the password is stored in hiera. Make sure you have it defined as
+``jenkins_jobs_password`` in the hiera DB.
 
 The password can be obtained by logging into the Jenkins user, clicking on your
 username in the top-right, clicking on `Configure` and then `Show API Token`.
 This API Token is your password for the API.
-
-Adding a Module
----------------
-
-Modules need to contain a class with the same name as the filename.  The basic
-layout is:
-
-.. code-block:: python
-
-   import xml.etree.ElementTree as XML
-
-   class my_module(object):
-       def __init__(self, data):
-           self.data = data
-
-       def gen_xml(self, xml_parent):
-
-The ``__init__`` function will be provided with ``data`` which is a Python
-dictionary representing the YAML data for the job.
-
-The ``gen_xml`` function will be provided with ``xml_parent`` which is an
-XML ElementTree object to be modified.
