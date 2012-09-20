@@ -5,10 +5,10 @@ class openstack_project::review_dev (
   $email_private_key,
   $contactstore_appsec,
   $contactstore_pubkey,
-  $cla_description=$openstack_project::gerrit::cla_description,
-  $cla_file=$openstack_project::gerrit::cla_file,
-  $cla_id=$openstack_project::gerrit::cla_id,
-  $cla_name=$openstack_project::gerrit::cla_name,
+  $cla_description='OpenStack Individual Contributor License Agreement',
+  $cla_file='static/cla.html',
+  $cla_id='2',
+  $cla_name='ICLA',
   $sysadmins = []
 ) {
   class { 'openstack_project::gerrit':
