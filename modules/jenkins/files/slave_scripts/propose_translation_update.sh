@@ -48,6 +48,13 @@ $COMMIT_MSG
 EOF
     git review -t transifex/translations
 
-    # Push changes to transifex
-    tx --debug --traceback push -st
+    # Push .pot changes to transifex
+    tx --debug --traceback push -s
+    # Push translation changes to transifex
+    # Disable -e as we can live with failed translation pushes (failures
+    # occur when a translation file has no translations in it not really
+    # error worthy but they occur)
+    set +e
+    tx --debug --traceback push -t --skip
+    set -e
 fi
