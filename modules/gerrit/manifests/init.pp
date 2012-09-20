@@ -412,7 +412,7 @@ class gerrit($vhost_name=$fqdn,
     file { "/home/gerrit2/review_site/lib/bcpg.jar":
       ensure => link,
       target => "/usr/share/java/bcpg.jar",
-      require => File["/usr/share/java/bcpg.jar"],
+      require => Package["libbcpg-java"],
     }
     file { '/home/gerrit2/review_site/etc/contact_information.pub':
       owner => 'root',
