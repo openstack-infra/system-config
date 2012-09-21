@@ -26,6 +26,8 @@ export NOSE_WITH_XUNIT=1
 export NOSE_WITH_HTML_OUTPUT=1
 export NOSE_HTML_OUT_FILE='nose_results.html'
 
+/usr/local/jenkins/slave_scripts/jenkins-oom-grep.sh pre
+
 sudo /usr/local/jenkins/slave_scripts/jenkins-sudo-grep.sh pre
 
 tox -e$venv
@@ -44,6 +46,19 @@ then
     echo
     echo "This test has failed because it attempted to execute commands"
     echo "with sudo.  See above for the exact commands used."
+    echo
+    exit 1
+fi
+
+/usr/local/jenkins/slave_scripts/jenkins-oom-grep.sh post
+oomresult=$?
+
+if [ $oomresult -ne "0" ]
+then
+    echo
+    echo "This test has failed because it attempted to exceed configured"
+    echo "memory limits and was killed prior to completion.  See above"
+    echo "for related kernel messages."
     echo
     exit 1
 fi
