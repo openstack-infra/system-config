@@ -29,6 +29,7 @@ fi
 
 # Array of modules to be installed key:value is module:version.
 declare -A MODULES
+MODULES["kickstandproject-ntp"]="0.0.1"
 MODULES["openstackci-dashboard"]="0.0.4"
 MODULES["openstackci-vcsrepo"]="0.0.6"
 MODULES["puppetlabs-apache"]="0.0.4"

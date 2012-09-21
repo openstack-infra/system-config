@@ -4,7 +4,6 @@ class openstack_project::template (
   $install_users = true,
   $certname = $fqdn
   ) {
-  include ntp
   include ssh
   include snmpd
   include unattended_upgrades
@@ -12,6 +11,11 @@ class openstack_project::template (
   class { 'iptables':
     public_tcp_ports => $iptables_public_tcp_ports,
   }
+
+  class { 'ntp::server':
+    monitor => false,
+  }
+
   class { 'openstack_project::base':
     install_users => $install_users,
     certname => $certname,
