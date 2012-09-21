@@ -29,11 +29,13 @@ fi
 
 # Array of modules to be installed key:value is module:version.
 declare -A MODULES
+MODULES["kickstandproject-ntp"]="0.0.1"
 MODULES["openstackci-dashboard"]="0.0.4"
 MODULES["openstackci-vcsrepo"]="0.0.6"
 MODULES["puppetlabs-apache"]="0.0.4"
 MODULES["puppetlabs-apt"]="0.0.4"
 MODULES["puppetlabs-mysql"]="0.5.0"
+MODULEs["puppetlabs-stdlib"]="2.3.3"
 MODULES["saz-memcached"]="2.0.2"
 
 MODULE_LIST=`puppet module list`

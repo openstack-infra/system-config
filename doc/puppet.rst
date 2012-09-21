@@ -13,10 +13,19 @@ Puppet Master
 -------------
 
 The puppet master is setup using a combination of Apache and mod passenger to
-ship the data to the clients.  To install this:
+ship the data to the clients.
+
+Since we rely on upstream, puppetlabs, for packages we need to add their GPG
+key and repository information:
 
 .. code-block:: bash
+  wget http://apt.puppetlabs.com/pubkey.gpg -O - | sudo apt-key add -
+  sudo apt-add-repository "deb http://apt.puppetlabs.com precise main"
+  sudo apt-get update
 
+Next we need to install the puppet packages:
+
+.. code-block:: bash
   sudo apt-get install puppet puppetmaster-passenger
 
 Files for puppet master are stored in a git repo clone at
@@ -51,11 +60,11 @@ on the puppet upgrade train - so the process is as follows:
 
 .. code-block:: bash
 
-    echo "deb http://apt.puppetlabs.com precise devel" > /etc/apt/sources.list.d/puppetlabs.list
-    apt-get update
-    apt-get install hiera hiera-puppet
-    rm /etc/apt/sources.list.d/puppetlabs.list
-    apt-get update
+  echo "deb http://apt.puppetlabs.com precise devel" | sudo tee /etc/apt/sources.list.d/puppetlabs.list
+  sudo apt-get update
+  sudo apt-get install hiera hiera-puppet
+  sudo rm /etc/apt/sources.list.d/puppetlabs.list
+  sudo apt-get update
 
 Hiera uses a systemwide configuration file in ``/etc/puppet/hiera.yaml``
 which tells is where to find subsequent configuration files.
