@@ -12,10 +12,11 @@ class jenkins::slave($ssh_key, $sudo = false, $bare = false, $user = true) {
 
     # Packages that all jenkins slaves need
     $common_packages = [
-	         "default-jdk", # jdk for building java jobs
+                 "default-jdk", # jdk for building java jobs
                  "build-essential",
                  "ccache",
-      		 ]
+                 "python-netaddr", # Needed for devstack address_in_net()
+                 ]
 
     # Packages that most jenkins slaves (eg, unit test runners) need
     $standard_packages = [
