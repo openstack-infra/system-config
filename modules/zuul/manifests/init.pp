@@ -8,7 +8,10 @@ class zuul (
 ) {
   $packages = ["python-webob",
                "python-daemon",
-               "python-paste"]
+               "python-lockfile",
+               "python-paramiko",
+               "python-paste",
+               "python-yaml"]
 
   package { $packages:
     ensure => "present",
