@@ -1,7 +1,0 @@
-<%
-import orchestra.utils.cloudinit
-script = 'echo "  pre-up sleep 60" >> /etc/network/interfaces'
-
-networksleep = orchestra.utils.cloudinit._KSMETA_LATE_COMMAND_TEMPLATE % (orchestra.utils.cloudinit.base64_gzip(script), "network-sleep")
-%> \
-$networksleep \

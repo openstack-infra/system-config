@@ -17,5 +17,6 @@ class openstack_project::lists($listadmins) {
 
   realize (
     User::Virtual::Localuser["oubiwann"],
+    User::Virtual::Localuser["smaffulli"],
   )
 }
