@@ -18,7 +18,7 @@ class openstack_project::review_dev (
     ssl_key_file => '/etc/ssl/private/ssl-cert-snakeoil.key',
     ssl_chain_file => '',
     email => "review-dev@openstack.org",
-    war => 'http://tarballs.openstack.org/ci/test/gerrit-2.4.2-13-g69c8fa6.war',
+    war => 'http://tarballs.openstack.org/ci/test/gerrit-2.4.2-14-gd77b4cd.war',
     contactstore => true,
     contactstore_appsec => $contactstore_appsec,
     contactstore_pubkey => $contactstore_pubkey,
