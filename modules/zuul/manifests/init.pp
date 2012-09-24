@@ -4,6 +4,7 @@ class zuul (
     $jenkins_apikey,
     $gerrit_server,
     $gerrit_user,
+    $git_source_repo='https://github.com/openstack-ci/zuul.git',
     $url_pattern
 ) {
   $packages = ["python-webob",
@@ -27,7 +28,7 @@ class zuul (
     ensure => latest,
     provider => git,
     revision => "master",
-    source => "https://github.com/openstack-ci/zuul.git",
+    source => $git_source_repo,
   }
 
   exec { "install_zuul":
