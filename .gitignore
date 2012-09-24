@@ -2,5 +2,7 @@
 *~
 *.pyc
 applytest
+build/
 doc/html/
 manifests/secrets.pp
+
