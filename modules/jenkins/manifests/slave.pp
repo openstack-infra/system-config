@@ -65,6 +65,16 @@ class jenkins::slave($ssh_key, $sudo = false, $bare = false, $user = true) {
       require => Class[pip]
     }
 
+    $gem_packages = [
+      'puppet-lint',
+      'puppetlabs_spec_helper',
+    ]
+
+    package { $gem_packages:
+      ensure => latest,
+      provider => gem,
+    }
+
     package { 'git-review':
       ensure => '1.17',
       provider => pip,
