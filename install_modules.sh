@@ -30,7 +30,19 @@ fi
 # Array of modules to be installed key:value is module:version.
 declare -A MODULES
 MODULES["openstackci-dashboard"]="0.0.4"
+
+# freenode #puppet 2012-09-25:
+# 18:25 < jeblair> i would like to use some code that someone wrote,
+# but it's important that i understand how the author wants me to use
+# it...
+# 18:25 < jeblair> in the case of the vcsrepo module, there is
+# ambiguity, and so we are trying to determine what the author(s)
+# intent is
+# 18:30 < jamesturnbull> jeblair: since we - being PL - are the author
+# - our intent was not to limit it's use and it should be Apache
+# licensed
 MODULES["openstackci-vcsrepo"]="0.0.6"
+
 MODULES["puppetlabs-apache"]="0.0.4"
 MODULES["puppetlabs-apt"]="0.0.4"
 MODULES["puppetlabs-mysql"]="0.5.0"
