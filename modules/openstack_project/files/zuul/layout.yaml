@@ -70,6 +70,8 @@ jobs:
     voting: false
     failure-message: Jenkins XML output has changed.
     success-message: Jenkins XML output is unchanged.
+  - name: gate-ci-puppet-lint
+    voting: false
 
 
 projects:
@@ -180,10 +182,12 @@ projects:
     check:
       - gate-ci-puppet-merge:
         - gate-ci-puppet-syntax
+        - gate-ci-puppet-lint
         - ci-puppet-compare-xml
     gate:
       - gate-ci-puppet-merge:
         - gate-ci-puppet-syntax
+        - gate-ci-puppet-lint
 
   - name: openstack-ci/puppet-apparmor
     check:
