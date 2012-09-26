@@ -12,10 +12,18 @@ class zuul (
                "python-lockfile",
                "python-paramiko",
                "python-paste",
-               "python-yaml"]
+              ]
 
   package { $packages:
     ensure => "present",
+  }
+
+  # A lot of things need yaml, be conservative requiring this package to avoid
+  # conflicts with other modules.
+  if ! defined(Package['python-yaml']) {
+    package { 'python-yaml':
+      ensure => "present",
+    }
   }
 
   # Packages that need to be installed from pip

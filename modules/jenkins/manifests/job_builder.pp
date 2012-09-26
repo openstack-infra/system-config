@@ -4,8 +4,12 @@ class jenkins::job_builder (
     $password,
 ) {
 
-  package { 'python-yaml':
-    ensure => "present",
+  # A lot of things need yaml, be conservative requiring this package to avoid
+  # conflicts with other modules.
+  if ! defined(Package['python-yaml']) {
+    package { 'python-yaml':
+      ensure => "present",
+    }
   }
 
   package { "python-jenkins":
