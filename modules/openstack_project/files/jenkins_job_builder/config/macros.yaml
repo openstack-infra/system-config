@@ -14,6 +14,11 @@
       - shell: "/usr/local/jenkins/slave_scripts/run-docs.sh"
 
 - builder:
+    name: docs-conditional-publish
+    builders:
+      - shell: "/usr/local/jenkins/slave_scripts/run-docs.sh --conditional-publish"
+
+- builder:
     name: maven-test
     builders:
       - shell: "mvn test"
