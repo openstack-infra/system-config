@@ -42,3 +42,25 @@
 
     publishers:
       - console-log
+
+
+# This is a non-standard docs job because it uses SCP instead of FTP
+- job:
+    name: ci-docs
+    node: precise
+
+    triggers:
+      - zuul-post
+
+    builders:
+      - gerrit-git-prep
+      - docs
+
+    publishers:
+      - scp:
+          site: '173.203.107.207'
+          files:
+            - target: 'ci'
+              source: 'doc/build/html/**/*'
+              keep-hierarchy: true
+      - console-log-post

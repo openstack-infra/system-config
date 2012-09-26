@@ -16,7 +16,7 @@ try:
 except Exception:
     pass
 
-setup(name='nova',
+setup(name='openstack-ci-puppet',
       version="%d.%02d" % (datetime.datetime.now().year,
                            datetime.datetime.now().month),
       description="OpenStack Continuous Integration Scripts",
