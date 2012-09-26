@@ -7,7 +7,7 @@
 
     builders:
       - gerrit-git-prep
-      - docs
+      - docs-conditional-publish
 
     publishers:
       - ftp:
