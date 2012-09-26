@@ -1,4 +1,25 @@
 - job-template:
+    name: '{name}-docs'
+    node: precise
+
+    triggers:
+      - zuul-post
+
+    builders:
+      - gerrit-git-prep
+      - docs-conditional-publish
+
+    publishers:
+      - ftp:
+          site: '{doc-publisher-site}'
+          source: 'doc/build/html/**'
+          target: 'developer/{name}'
+          remove-prefix: 'doc/build/html'
+          excludes: ''
+      - console-log-post
+
+
+- job-template:
     name: '{name}-sdist-tarball'
     node: precise
 
