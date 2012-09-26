@@ -401,7 +401,6 @@ projects:
     post:
       - python-cinderclient-sdist-tarball
       - python-cinderclient-coverage
-      - python-cinderclient-docs
     publish:
       - python-cinderclient-pypi
       - python-cinderclient-docs
@@ -426,7 +425,6 @@ projects:
     post:
       - python-glanceclient-sdist-tarball
       - python-glanceclient-coverage
-      - python-glanceclient-docs
     publish:
       - python-glanceclient-pypi
       - python-glanceclient-docs
@@ -451,7 +449,6 @@ projects:
     post:
       - python-keystoneclient-sdist-tarball
       - python-keystoneclient-coverage
-      - python-keystoneclient-docs
     publish:
       - python-keystoneclient-pypi
       - python-keystoneclient-docs
@@ -476,7 +473,6 @@ projects:
     post:
       - python-novaclient-sdist-tarball
       - python-novaclient-coverage
-      - python-novaclient-docs
     publish:
       - python-novaclient-pypi
       - python-novaclient-docs
@@ -497,7 +493,6 @@ projects:
     post:
       - python-openstackclient-sdist-tarball
       - python-openstackclient-coverage
-      - python-openstackclient-docs
     publish:
       - python-openstackclient-pypi
       - python-openstackclient-docs
@@ -522,7 +517,6 @@ projects:
     post:
       - python-quantumclient-sdist-tarball
       - python-quantumclient-coverage
-      - python-quantumclient-docs
     publish:
       - python-quantumclient-pypi
       - python-quantumclient-docs
@@ -543,7 +537,6 @@ projects:
     post:
       - python-swiftclient-sdist-tarball
       - python-swiftclient-coverage
-      - python-swiftclient-docs
     publish:
       - python-swiftclient-pypi
       - python-swiftclient-docs
