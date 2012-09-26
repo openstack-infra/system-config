@@ -33,7 +33,7 @@ pipelines:
     manager: IndependentPipelineManager
     trigger:
       - event: ref-updated
-        ref: ^(?!refs/).*$
+        ref: ^(?!(devnull|refs/.*)).*$
 
   - name: publish
     manager: IndependentPipelineManager
