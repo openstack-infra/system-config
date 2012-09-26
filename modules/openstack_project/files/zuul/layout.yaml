@@ -184,6 +184,8 @@ projects:
     gate:
       - gate-ci-puppet-merge:
         - gate-ci-puppet-syntax
+    post:
+      - ci-docs
 
   - name: openstack-ci/puppet-apparmor
     check:
