@@ -3,10 +3,12 @@ class openstack_project::community (
 ) {
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [80, 443, 8099, 8080],
-    sysadmins => $sysadmins
+    sysadmins                 => $sysadmins
   }
 
   realize (
-    User::Virtual::Localuser["smaffulli"],
+    User::Virtual::Localuser['smaffulli'],
   )
 }
+
+# vim:sw=2:ts=2:expandtab:textwidth=79
