@@ -1,15 +1,18 @@
 # bare-bones slaves spun up by jclouds. Specifically need to not set ssh
 # login limits, because it screws up jclouds provisioning
 class openstack_project::bare_slave(
-  $install_users=true,
-  $certname=$fqdn) {
+  $certname = $::fqdn,
+  $install_users = true
+) {
   class { 'openstack_project::base':
+    certname      => $certname,
     install_users => $install_users,
-    certname => $certname,
   }
 
   class { 'jenkins::slave':
-    ssh_key => "",
-    user => false
+    ssh_key => '',
+    user    => false
   }
 }
+
+# vim:sw=2:ts=2:expandtab:textwidth=79
