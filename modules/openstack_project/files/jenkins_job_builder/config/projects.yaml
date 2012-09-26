@@ -282,6 +282,7 @@
     jobs:
       - python-jobs
       - pypi-jobs
+      - {name}-docs
 
 
 - project:
@@ -294,6 +295,7 @@
     jobs:
       - python-jobs
       - pypi-jobs
+      - {name}-docs
 
 
 - project:
@@ -306,6 +308,7 @@
     jobs:
       - python-jobs
       - pypi-jobs
+      - {name}-docs
 
 
 - project:
@@ -318,6 +321,7 @@
     jobs:
       - python-jobs
       - pypi-jobs
+      - {name}-docs
 
 
 - project:
@@ -330,6 +334,7 @@
     jobs:
       - python-jobs
       - pypi-jobs
+      - {name}-docs
 
 
 - project:
@@ -342,6 +347,7 @@
     jobs:
       - python-jobs
       - pypi-jobs
+      - {name}-docs
 
 
 - project:
@@ -354,6 +360,7 @@
     jobs:
       - python-jobs
       - pypi-jobs
+      - {name}-docs
 
 
 - project:

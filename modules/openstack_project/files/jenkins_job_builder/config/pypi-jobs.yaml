@@ -43,6 +43,5 @@
 - job-group:
     name: pypi-jobs
     jobs:
-      - '{name}-docs'
       - '{name}-sdist-tarball'
       - '{name}-pypi'
