@@ -698,6 +698,12 @@ projects:
     gate:
       - gate-openstack-chef-merge
 
+  - name: openstack-dev/openstack-nose
+    check:
+      - gate-openstack-nose-merge
+    gate:
+      - gate-openstack-nose-merge
+
   - name: openstack-dev/openstack-qa
     check:
       - gate-openstack-qa-merge
