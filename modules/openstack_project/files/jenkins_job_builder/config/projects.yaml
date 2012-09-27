@@ -115,6 +115,7 @@
       - python-jobs
       - python-diablo-bitrot-jobs
       - python-essex-bitrot-jobs
+      - python-folsom-bitrot-jobs
       - openstack-publish-jobs
 
 
@@ -138,6 +139,7 @@
       - python-jobs
       - python-diablo-bitrot-jobs
       - python-essex-bitrot-jobs
+      - python-folsom-bitrot-jobs
       - openstack-publish-jobs
 
 
@@ -185,6 +187,7 @@
       - python-jobs
       - python-diablo-bitrot-jobs
       - python-essex-bitrot-jobs
+      - python-folsom-bitrot-jobs
       - openstack-publish-jobs
 
 
@@ -252,6 +255,7 @@
       - python-jobs
       - python-diablo-bitrot-jobs
       - python-essex-bitrot-jobs
+      - python-folsom-bitrot-jobs
       - openstack-publish-jobs
       - gate-{name}-pylint
       - translation-jobs
@@ -512,6 +516,7 @@
       - python-jobs
       - python-diablo-bitrot-jobs
       - python-essex-bitrot-jobs
+      - python-folsom-bitrot-jobs
       - openstack-publish-jobs
 
 
