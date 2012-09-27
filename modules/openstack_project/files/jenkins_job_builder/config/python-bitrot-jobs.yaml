@@ -75,7 +75,7 @@
 
     node: '{node}'
 
-  
+
 - job-group:
     name: python-diablo-bitrot-jobs
     branch: 'stable/diablo'
@@ -91,6 +91,17 @@
     name: python-essex-bitrot-jobs
     branch: 'stable/essex'
     branch-name: 'stable-essex'
+    node: precise
+    jobs:
+      - 'periodic-{name}-python26-{branch-name}'
+      - 'periodic-{name}-python27-{branch-name}'
+      - 'periodic-{name}-docs-{branch-name}'
+
+
+- job-group:
+    name: python-folsom-bitrot-jobs
+    branch: 'stable/folsom'
+    branch-name: 'stable-folsom'
     node: precise
     jobs:
       - 'periodic-{name}-python26-{branch-name}'
