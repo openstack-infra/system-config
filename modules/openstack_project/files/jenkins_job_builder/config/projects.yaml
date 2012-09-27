@@ -85,6 +85,15 @@
 
 
 - project:
+    name: git-review
+    github-org: openstack-ci
+    node: precise
+    jobs:
+      - gate-{name}-merge
+      - gate-{name}-pep8
+
+
+- project:
     name: glance
     github-org: openstack
     node: precise
@@ -221,6 +230,14 @@
     jobs:
       - python-jobs
       - openstack-publish-jobs
+
+
+- project:
+    name: openstack-qa
+    github-org: openstack-dev
+    node: precise
+    jobs:
+      - gate-{name}-merge
 
 
 - project:
