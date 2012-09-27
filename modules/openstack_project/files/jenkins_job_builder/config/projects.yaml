@@ -434,3 +434,31 @@
     node: precise
     jobs:
       - gate-{name}-merge
+
+
+- project:
+    name: devstack-node-provider-rackspace
+    provider: rackspace
+    jobs:
+      - devstack-node-provider-jobs
+
+
+- project:
+    name: devstack-node-provider-rackspace-nova
+    provider: rackspace-nova
+    jobs:
+      - devstack-node-provider-jobs
+
+
+- project:
+    name: devstack-node-provider-hpcloud-az1
+    provider: hpcloud-az1
+    jobs:
+      - devstack-node-provider-jobs
+
+
+- project:
+    name: devstack-node-provider-hpcloud-az2
+    provider: hpcloud-az2
+    jobs:
+      - devstack-node-provider-jobs
