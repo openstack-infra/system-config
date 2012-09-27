@@ -315,6 +315,16 @@
     name: openstack-qa
     github-org: openstack-dev
     node: precise
+
+    jobs:
+      - gate-{name}-merge
+
+
+- project:
+    name: openstack-planet
+    github-org: openstack
+    node: precise
+
     jobs:
       - gate-{name}-merge
 
