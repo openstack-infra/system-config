@@ -58,6 +58,11 @@
       - shell: "set -o pipefail ; tox -v -epylint | tee pylint.txt ; set +o pipefail"
 
 - builder:
+    name: full
+    builders:
+      - shell: "tox -v -efull"
+
+- builder:
     name: pyflakes
     builders:
       - shell: "tox -v -epyflakes"

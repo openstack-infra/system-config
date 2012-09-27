@@ -39,6 +39,22 @@
   
 
 - job-template:
+    name: 'gate-{name}-full'
+
+    triggers:
+      - zuul
+
+    builders:
+      - gerrit-git-prep
+      - full
+
+    publishers:
+      - console-log
+
+    node: '{node}'
+
+
+- job-template:
     name: 'gate-{name}-pylint'
 
     triggers:

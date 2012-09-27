@@ -306,6 +306,7 @@ projects:
         - gate-nova-pep8
         - gate-nova-python26
         - gate-nova-python27
+        - gate-nova-full
         - gate-tempest-devstack-vm
         - gate-tempest-devstack-vm-cinder
         - gate-nova-pylint
@@ -315,6 +316,7 @@ projects:
         - gate-nova-pep8
         - gate-nova-python26
         - gate-nova-python27
+        - gate-nova-full
         - gate-tempest-devstack-vm
         - gate-tempest-devstack-vm-cinder
     post:
