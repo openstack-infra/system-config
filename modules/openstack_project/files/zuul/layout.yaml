@@ -679,3 +679,11 @@ projects:
       - openstack-qa-docs
     publish:
       - openstack-qa-docs
+
+  - name: openstack/openstack-planet
+    check:
+      - gate-openstack-planet-merge:
+        - gate-openstack-planet-unittest
+    gate:
+      - gate-openstack-planet-merge:
+        - gate-openstack-planet-unittest

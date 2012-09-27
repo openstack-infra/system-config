@@ -224,6 +224,14 @@
 
 
 - project:
+    name: openstack-planet
+    github-org: openstack
+    node: precise
+    jobs:
+      - gate-{name}-merge
+
+
+- project:
     name: pbr
     github-org: openstack-dev
     node: precise
