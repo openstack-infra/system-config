@@ -15,23 +15,24 @@ class gerritbot(
   }
 
   file { '/etc/init.d/gerritbot':
-    owner   => 'root',
+    ensure  => present,
     group   => 'root',
-    mode    => 555,
-    ensure  => 'present',
-    source  => 'puppet:///modules/gerritbot/gerritbot.init',
+    mode    => '0555',
+    owner   => 'root',
     require => Package['gerritbot'],
+    source  => 'puppet:///modules/gerritbot/gerritbot.init',
   }
 
   service { 'gerritbot':
-    name       => 'gerritbot',
     ensure     => running,
     enable     => true,
     hasrestart => true,
     require    => File['/etc/init.d/gerritbot'],
-    subscribe  => [Package['gerritbot'],
-                   File['/etc/gerritbot/gerritbot.config'],
-                   File['/etc/gerritbot/channel_config.yaml']],
+    subscribe  => [
+      Package['gerritbot'],
+      File['/etc/gerritbot/gerritbot.config'],
+      File['/etc/gerritbot/channel_config.yaml']
+    ],
   }
 
   file { '/etc/gerritbot':
@@ -40,39 +41,40 @@ class gerritbot(
 
   file { '/var/log/gerritbot':
     ensure => directory,
-    owner  => 'root',
     group  => 'gerrit2',
-    mode    => 0775,
+    mode   => '0775',
+    owner  => 'root',
   }
 
   file { '/etc/gerritbot/channel_config.yaml':
-    owner   => 'root',
+    ensure  => present,
     group   => 'gerrit2',
-    mode    => 440,
-    ensure  => 'present',
-    source  => 'puppet:///modules/gerritbot/gerritbot_channel_config.yaml',
+    mode    => '0440',
+    owner   => 'root',
     replace => true,
     require => User['gerrit2'],
+    source  => 'puppet:///modules/gerritbot/gerritbot_channel_config.yaml',
   }
 
   file { '/etc/gerritbot/logging.config':
-    owner   => 'root',
+    ensure  => present,
     group   => 'gerrit2',
-    mode    => 440,
-    ensure  => 'present',
-    source  => 'puppet:///modules/gerritbot/logging.config',
+    mode    => '0440',
+    owner   => 'root',
     replace => true,
     require => User['gerrit2'],
+    source  => 'puppet:///modules/gerritbot/logging.config',
   }
 
   file { '/etc/gerritbot/gerritbot.config':
-    owner   => 'root',
-    group   => 'gerrit2',
-    mode    => 440,
-    ensure  => 'present',
+    ensure  => present,
     content => template('gerritbot/gerritbot.config.erb'),
-    replace => 'true',
+    group   => 'gerrit2',
+    mode    => '0440',
+    owner   => 'root',
+    replace => true,
     require => User['gerrit2']
   }
-
 }
+
+# vim:sw=2:ts=2:expandtab:textwidth=79
