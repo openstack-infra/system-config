@@ -646,7 +646,16 @@ projects:
         - gate-reddwarf-python27
 
   - name: openstack/openstack-manuals
+    check:
+      - gate-openstack-manuals-merge
+    gate:
+      - gate-openstack-manuals-merge
     post:
+      - openstack-admin-manual-compute
+      - openstack-admin-manual-keystone-diablo
+      - openstack-admin-manual-netconn
+      - openstack-admin-manual-object
+      - openstack-admin-manuals-diablo
       - openstack-cli-guide
       - openstack-glossary
       
