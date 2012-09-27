@@ -692,6 +692,12 @@ projects:
     post:
       - volume-api
 
+  - name: openstack/openstack-chef
+    check:
+      - gate-openstack-chef-merge
+    gate:
+      - gate-openstack-chef-merge
+
   - name: openstack-dev/openstack-qa
     check:
       - gate-openstack-qa-merge

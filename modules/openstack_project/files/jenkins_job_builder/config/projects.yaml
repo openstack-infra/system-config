@@ -290,6 +290,17 @@
 
 
 - project:
+    name: openstack-chef
+    github-org: openstack
+    node: precise
+    tarball-publisher-site: nova.openstack.org
+    doc-publisher-site: docs.openstack.org
+    
+    jobs:
+      - gate-{name}-merge
+
+
+- project:
     name: openstack-qa
     github-org: openstack-dev
     node: precise
