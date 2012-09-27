@@ -540,6 +540,15 @@
 
 
 - project:
+    name: openstack-manuals
+    github-org: openstack
+    node: precise
+
+    jobs:
+      - gate-{name}-merge
+
+
+- project:
     name: zuul
     github-org: openstack-ci
     node: precise
