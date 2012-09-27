@@ -721,3 +721,11 @@ projects:
     gate:
       - gate-git-review-merge:
         - gate-git-review-pep8
+
+  - name: openstack/openstack-planet
+    check:
+      - gate-openstack-planet-merge:
+        - gate-openstack-planet-unittest
+    gate:
+      - gate-openstack-planet-merge:
+        - gate-openstack-planet-unittest
