@@ -38,6 +38,7 @@ class jenkins::slave($ssh_key, $sudo = false, $bare = false, $user = true) {
                  "python-libvirt",
                  "python-zmq", # zeromq unittests (not pip installable)
                  "python3-all-dev",
+                 "rubygems",
                  "sqlite3",
                  "unzip",
                  "wget",
@@ -72,8 +73,9 @@ class jenkins::slave($ssh_key, $sudo = false, $bare = false, $user = true) {
     ]
 
     package { $gem_packages:
-      ensure => latest,
+      ensure   => latest,
       provider => gem,
+      require  => Package['rubygems'],
     }
 
     package { 'git-review':
