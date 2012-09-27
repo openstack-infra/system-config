@@ -22,26 +22,7 @@
           - project: devstack-update-inprogress
             predefined-parameters:
               DEVSTACK_NODE_NAME=${NODE_NAME}
-      - shell: |
-          #!/bin/bash -xe
-          #
-          # This job also gates devstack-gate, but in case a previous run fails,
-          # we need to always make sure that we're starting with the latest copy
-          # from master, before we start applying changes to it.  If a previous run
-          # leaves a bad copy of the gate script, we may get stuck.
-          #
-          if [[ ! -e devstack-gate ]]; then
-              git clone https://review.openstack.org/p/openstack-ci/devstack-gate
-          else
-              cd devstack-gate
-              git remote update
-              git reset --hard
-              git clean -x -f
-              git checkout master
-              git reset --hard remotes/origin/master
-              git clean -x -f
-              cd ..
-          fi
+      - devstack-checkout
       - shell: |
           #!/bin/bash -xe
           export PYTHONUNBUFFERED=true
@@ -90,26 +71,7 @@
           - project: devstack-update-inprogress
             predefined-parameters:
               DEVSTACK_NODE_NAME=${NODE_NAME}
-      - shell: |
-          #!/bin/bash -xe
-          #
-          # This job also gates devstack-gate, but in case a previous run fails,
-          # we need to always make sure that we're starting with the latest copy
-          # from master, before we start applying changes to it.  If a previous run
-          # leaves a bad copy of the gate script, we may get stuck.
-          #
-          if [[ ! -e devstack-gate ]]; then
-              git clone https://review.openstack.org/p/openstack-ci/devstack-gate
-          else
-              cd devstack-gate
-              git remote update
-              git reset --hard
-              git clean -x -f
-              git checkout master
-              git reset --hard remotes/origin/master
-              git clean -x -f
-              cd ..
-          fi
+      - devstack-checkout
       - shell: |
           #!/bin/bash -xe
           export PYTHONUNBUFFERED=true
@@ -152,26 +114,7 @@
           - project: devstack-update-inprogress
             predefined-parameters:
               DEVSTACK_NODE_NAME=${NODE_NAME}
-      - shell: |
-          #!/bin/bash -xe
-          #
-          # This job also gates devstack-gate, but in case a previous run fails,
-          # we need to always make sure that we're starting with the latest copy
-          # from master, before we start applying changes to it.  If a previous run
-          # leaves a bad copy of the gate script, we may get stuck.
-          #
-          if [[ ! -e devstack-gate ]]; then
-              git clone https://review.openstack.org/p/openstack-ci/devstack-gate
-          else
-              cd devstack-gate
-              git remote update
-              git reset --hard
-              git clean -x -f
-              git checkout master
-              git reset --hard remotes/origin/master
-              git clean -x -f
-              cd ..
-          fi
+      - devstack-checkout
       - shell: |
           #!/bin/bash -xe
           export PYTHONUNBUFFERED=true
@@ -214,26 +157,7 @@
           - project: devstack-update-inprogress
             predefined-parameters:
               DEVSTACK_NODE_NAME=${NODE_NAME}
-      - shell: |
-          #!/bin/bash -xe
-          #
-          # This job also gates devstack-gate, but in case a previous run fails,
-          # we need to always make sure that we're starting with the latest copy
-          # from master, before we start applying changes to it.  If a previous run
-          # leaves a bad copy of the gate script, we may get stuck.
-          #
-          if [[ ! -e devstack-gate ]]; then
-              git clone https://review.openstack.org/p/openstack-ci/devstack-gate
-          else
-              cd devstack-gate
-              git remote update
-              git reset --hard
-              git clean -x -f
-              git checkout master
-              git reset --hard remotes/origin/master
-              git clean -x -f
-              cd ..
-          fi
+      - devstack-checkout
       - shell: |
           #!/bin/bash -xe
           export PYTHONUNBUFFERED=true
@@ -272,17 +196,7 @@
       - timestamps
 
     builders:
-      - shell: |
-          #!/bin/bash -xe
-
-          if [[ ! -e devstack-gate ]]; then
-              git clone https://review.openstack.org/p/openstack-ci/devstack-gate
-          else
-              cd devstack-gate
-              git remote update
-              git pull --ff-only origin
-              cd ..
-          fi
+      - devstack-checkout
       - shell: |
           #!/bin/bash -xe
           export PYTHONUNBUFFERED=true
@@ -303,18 +217,105 @@
       - timestamps
 
     builders:
-      - shell: |
-          #!/bin/bash -xe
-
-          if [[ ! -e devstack-gate ]]; then
-              git clone https://review.openstack.org/p/openstack-ci/devstack-gate
-          else
-              cd devstack-gate
-              git remote update
-              git pull --ff-only origin
-              cd ..
-          fi
+      - devstack-checkout
       - shell: |
           #!/bin/bash -xe
           export PYTHONUNBUFFERED=true
           $WORKSPACE/devstack-gate/devstack-vm-delete.py $DEVSTACK_NODE_NAME
+
+
+- job-template:
+    name: devstack-launch-vms-{provider}
+    concurrent: false
+    node: master
+
+    wrappers:
+      - timeout:
+          timeout: 10
+          fail: true
+      - timestamps
+
+    triggers:
+      - timed: '*/10 * * * *'
+
+    builders:
+      - devstack-checkout
+      - shell: |
+          #!/bin/bash -xe
+          export PYTHONUNBUFFERED=true
+          $WORKSPACE/devstack-gate/devstack-vm-launch.py {provider}
+
+
+- job-template:
+    name: devstack-reap-vms-{provider}
+    concurrent: false
+    node: master
+
+    wrappers:
+      - timeout:
+          timeout: 10
+          fail: true
+      - timestamps
+
+    parameters:
+      - bool:
+          name: ALL_SERVERS
+          description: Delete all servers?
+          default: false
+      - bool:
+          name: ALL_IMAGES
+          description: Delete all images?
+          default: false
+
+    triggers:
+      - timed: '*/15 * * * *'
+
+    builders:
+      - devstack-checkout
+      - shell: |
+          #!/bin/bash -xe
+
+          if [ "$ALL_SERVERS" == 'true' ]; then
+            ALL_SERVERS="--all-servers"
+          else
+            ALL_SERVERS=""
+          fi
+
+          if [ "$ALL_IMAGES" == 'true' ]; then
+            ALL_IMAGES="--all-images"
+          else
+            ALL_IMAGES=""
+          fi
+
+          export PYTHONUNBUFFERED=true
+          $WORKSPACE/devstack-gate/devstack-vm-reap.py {provider} $ALL_SERVERS $ALL_IMAGES
+
+
+- job-template:
+    name: devstack-update-vm-image-{provider}
+    concurrent: false
+    node: master
+
+    wrappers:
+      - timeout:
+          timeout: 360
+          fail: true
+      - timestamps
+
+    triggers:
+      - timed: '3 5 * * *'
+
+    builders:
+      - devstack-checkout
+      - shell: |
+          #!/bin/bash -xe
+          export PYTHONUNBUFFERED=true
+          $WORKSPACE/devstack-gate/devstack-vm-update-image.sh {provider}
+
+
+- job-group:
+    name: devstack-node-provider-jobs
+    jobs:
+      - devstack-launch-vms-{provider}
+      - devstack-reap-vms-{provider}
+      - devstack-update-vm-image-{provider}

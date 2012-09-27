@@ -93,6 +93,25 @@
     builders:
       - shell: "/usr/local/jenkins/slave_scripts/create-tarball.sh {project}"
 
+- builder:
+    name: devstack-checkout
+    builders:
+      - shell: |
+          #!/bin/bash -xe
+          if [[ ! -e devstack-gate ]]; then
+              git clone https://review.openstack.org/p/openstack-ci/devstack-gate
+          else
+              cd devstack-gate
+              git remote update
+              git reset --hard
+              git clean -x -f
+              git checkout master
+              git reset --hard remotes/origin/master
+              git clean -x -f
+              cd ..
+          fi
+
+
 # ======================================================================
 
 - publisher:
