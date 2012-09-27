@@ -20,6 +20,17 @@
 
 
 - project:
+    name: compute-api
+    github-org: openstack
+    node: precise
+    tarball-publisher-site: nova.openstack.org
+    doc-publisher-site: docs.openstack.org
+    
+    jobs:
+      - api-jobs
+
+
+- project:
     name: devstack-gate
     github-org: openstack-ci
     node: precise
@@ -131,6 +142,28 @@
 
 
 - project:
+    name: identity-api
+    github-org: openstack
+    node: precise
+    tarball-publisher-site: nova.openstack.org
+    doc-publisher-site: docs.openstack.org
+    
+    jobs:
+      - api-jobs
+
+
+- project:
+    name: image-api
+    github-org: openstack
+    node: precise
+    tarball-publisher-site: nova.openstack.org
+    doc-publisher-site: docs.openstack.org
+    
+    jobs:
+      - api-jobs
+
+
+- project:
     name: jenkins-job-builder
     github-org: openstack-ci
     node: precise
@@ -174,12 +207,25 @@
 
 
 - project:
+    name: netconn-api
+    github-org: openstack
+    node: precise
+    tarball-publisher-site: nova.openstack.org
+    doc-publisher-site: docs.openstack.org
+    
+    jobs:
+      - api-jobs
+
+
+- project:
     name: netconn-api-v20
     github-org: openstack
     node: precise
+    tarball-publisher-site: nova.openstack.org
+    doc-publisher-site: docs.openstack.org
 
     jobs:
-      - gate-{name}-merge
+      - api-jobs
 
 
 - project:
@@ -218,6 +264,17 @@
     
     jobs:
       - gate-{name}-merge
+
+
+- project:
+    name: object-api
+    github-org: openstack
+    node: precise
+    tarball-publisher-site: nova.openstack.org
+    doc-publisher-site: docs.openstack.org
+    
+    jobs:
+      - api-jobs
 
 
 - project:
