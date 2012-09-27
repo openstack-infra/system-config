@@ -721,3 +721,9 @@ projects:
     gate:
       - gate-git-review-merge:
         - gate-git-review-pep8
+
+  - name: openstack-dev/sandbox
+    check:
+      - gate-sandbox-merge
+    gate:
+      - gate-sandbox-merge
