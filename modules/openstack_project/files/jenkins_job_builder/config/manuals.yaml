@@ -191,3 +191,153 @@
           target: 'glossary'
           remove-prefix: 'doc/src/docbkx/common/glossary/target/docbkx/webhelp/openstack-glossary/'
           excludes: '**/*.xml,**/null*'    
+
+- job:
+    name: openstack-admin-manual-compute
+    project-type: maven
+    concurrent: false
+    node: precise
+
+    triggers:
+      - zuul-post
+
+    prebuilders:
+      - gerrit-git-prep
+
+    properties:
+      - inject:
+          script-file: /usr/local/jenkins/slave_scripts/docbook-properties.sh
+          properties-file: gerrit-doc.properties
+
+    maven:
+      root-module:
+        group-id: org.openstack.docs
+        artifact-id: openstack-guide
+      root-pom: doc/src/docbkx/openstack-compute-admin/pom.xml
+      goals: '-Drelease.path.name=${DOC_RELEASE_PATH} -Dcomments.enabled=${DOC_COMMENTS_ENABLED} clean generate-sources'
+
+    publishers:
+      - console-log-post
+      - ftp:
+          site: docs.openstack.org
+          source: 'doc/src/docbkx/openstack-compute-admin/target/docbkx/webhelp/**'
+          target: '/'
+          remove-prefix: 'doc/src/docbkx/openstack-compute-admin/target/docbkx/webhelp/'
+          excludes: '**/*.xml,**/null*'
+
+- job:
+    name: openstack-admin-manual-keystone-diablo
+    project-type: maven
+    concurrent: false
+    node: precise
+
+    triggers:
+      - zuul-post
+
+    maven:
+      root-module:
+        group-id: org.openstack.docs
+        artifact-id: openstack-guide
+      root-pom: doc/src/docbkx/openstack-identity-service-starter/pom.xml
+      goals: 'clean generate-sources'
+
+    publishers:
+      - console-log-post
+      - ftp:
+          site: docs.openstack.org
+          source: 'doc/src/docbkx/openstack-identity-service-starter/target/docbkx/webhelp/trunk/**'
+          target: 'diablo'
+          remove-prefix: 'doc/src/docbkx/openstack-identity-service-starter/target/docbkx/webhelp/trunk/'
+          excludes: '**/*.xml,**/null*'
+
+- job:
+    name: openstack-admin-manual-netconn
+    project-type: maven
+    concurrent: false
+    node: precise
+
+    triggers:
+      - zuul-post
+
+    prebuilders:
+      - gerrit-git-prep
+
+    properties:
+      - inject:
+          script-file: /usr/local/jenkins/slave_scripts/docbook-properties.sh
+          properties-file: gerrit-doc.properties
+
+    maven:
+      root-module:
+        group-id: org.openstack.docs
+        artifact-id: openstack-guide
+      root-pom: doc/src/docbkx/openstack-network-connectivity-admin/pom.xml
+      goals: '-Drelease.path.name=${DOC_RELEASE_PATH} -Dcomments.enabled=${DOC_COMMENTS_ENABLED} clean generate-sources'
+
+    publishers:
+      - console-log-post
+      - ftp:
+          site: docs.openstack.org
+          source: 'doc/src/docbkx/openstack-network-connectivity-admin/target/docbkx/webhelp/**'
+          target: '/'
+          remove-prefix: 'doc/src/docbkx/openstack-network-connectivity-admin/target/docbkx/webhelp/'
+          excludes: '**/*.xml,**/null*'
+
+- job:
+    name: openstack-admin-manual-object
+    project-type: maven
+    concurrent: false
+    node: precise
+
+    triggers:
+      - zuul-post
+
+    prebuilders:
+      - gerrit-git-prep
+
+    properties:
+      - inject:
+          script-file: /usr/local/jenkins/slave_scripts/docbook-properties.sh
+          properties-file: gerrit-doc.properties
+
+    maven:
+      root-module:
+        group-id: org.openstack.docs
+        artifact-id: openstack-guide
+      root-pom: doc/src/docbkx/openstack-object-storage-admin/pom.xml
+      goals: '-Drelease.path.name=${DOC_RELEASE_PATH} -Dcomments.enabled=${DOC_COMMENTS_ENABLED} clean generate-sources'
+
+    publishers:
+      - console-log-post
+      - ftp:
+          site: docs.openstack.org
+          source: 'doc/src/docbkx/openstack-object-storage-admin/target/docbkx/webhelp/**'
+          target: '/'
+          remove-prefix: 'doc/src/docbkx/openstack-object-storage-admin/target/docbkx/webhelp/'
+          excludes: '**/*.xml,**/null*'
+
+- job:
+    name: openstack-admin-manuals-diablo
+    project-type: maven
+    concurrent: false
+    node: precise
+
+    triggers:
+      - zuul-post
+
+    maven:
+      root-module:
+        group-id: org.openstack.docs
+        artifact-id: openstack-guide
+      root-pom: doc/pom.xml
+      goals: 'clean generate-sources'
+
+    publishers:
+      - console-log-post
+      - ftp:
+          site: docs.openstack.org
+          source: 'doc/target/docbkx/webhelp/trunk/**'
+          target: 'diablo'
+          remove-prefix: 'doc/target/docbkx/webhelp/trunk/'
+          excludes: '**/*.xml,**/null*'
+
