@@ -647,6 +647,7 @@ projects:
 
   - name: openstack/openstack-manuals
     post:
+      - openstack-admin-manual-compute
       - openstack-cli-guide
       - openstack-glossary
       
