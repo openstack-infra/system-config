@@ -679,3 +679,11 @@ projects:
       - openstack-qa-docs
     publish:
       - openstack-qa-docs
+
+  - name: openstack-ci/git-review
+    check:
+      - gate-git-review-merge:
+        - gate-git-review-pep8
+    gate:
+      - gate-git-review-merge:
+        - gate-git-review-pep8
