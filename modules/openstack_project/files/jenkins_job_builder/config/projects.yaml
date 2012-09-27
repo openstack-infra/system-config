@@ -426,3 +426,11 @@
     jobs:
       - python-jobs
       - gate-{name}-pyflakes
+
+
+- project:
+    name: openstack-qa
+    github-org: openstack-dev
+    node: precise
+    jobs:
+      - gate-{name}-merge

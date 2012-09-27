@@ -1,0 +1,23 @@
+# This is a non-standard docs job because it uses SCP instead of FTP.
+# It also uses a non standard build script.
+- job:
+    name: openstack-qa-docs
+    node: precise
+
+    triggers:
+      - zuul-post
+
+    builders:
+      - gerrit-git-prep
+      - shell: |
+          export HUDSON_PUBLISH_DOCS=1
+          python setup.py build_sphinx
+
+    publishers:
+      - scp:
+          site: '173.203.107.207'
+          files:
+            - target: 'qa'
+              source: 'build/sphinx/html/**/*'
+              keep-hierarchy: true
+      - console-log-post
