@@ -124,13 +124,25 @@ def GetApprovals(options):
       approvals.append(dict["columns"])
   return approvals
 
-def GetPatchId(revision):
+def GetPatchId(revision, consider_whitespace=False):
   git_show_cmd = ['git', 'show', revision]
   patch_id_cmd = ['git', 'patch-id']
   patch_id_process = subprocess.Popen(patch_id_cmd, stdout=subprocess.PIPE,
                                       stdin=subprocess.PIPE)
   git_show_process = subprocess.Popen(git_show_cmd, stdout=subprocess.PIPE)
-  return patch_id_process.communicate(git_show_process.communicate()[0])[0]
+  if consider_whitespace:
+    # This matches on change lines in the patch (those starting with "+"
+    # or "-" but not followed by another of the same), then replaces any
+    # space or tab characters with "%" before calculating a patch-id.
+    replace_ws_cmd = ['sed', r'/^\(+[^+]\|-[^-]\)/y/ \t/%%/']
+    replace_ws_process = subprocess.Popen(replace_ws_cmd,
+                                          stdout=subprocess.PIPE,
+                                          stdin=subprocess.PIPE)
+    return patch_id_process.communicate(
+        replace_ws_process.communicate(git_show_process.communicate()[0])[0]
+        )[0]
+  else:
+    return patch_id_process.communicate(git_show_process.communicate()[0])[0]
 
 def SuExec(options, as_user, cmd):
   suexec_cmd = "suexec --as %s -- %s"%(as_user, cmd)
@@ -164,6 +176,8 @@ def Main():
   parser.add_option("--server", dest="server", default="localhost",
                     help="Server name/address for Gerrit's SSH daemon "
                          "[default: %default]")
+  parser.add_option("--whitespace", action="store_true",
+                    help="Treat whitespace as significant")
 
   (options, args) = parser.parse_args()
 
@@ -185,8 +199,25 @@ def Main():
     # patch-ids don't match
     exit(0)
   # Patch ids match. This is a trivial rebase.
-  # In addition to patch-id we should check if the commit message changed. Most
-  # approvers would want to re-review changes when the commit message changes.
+  # In addition to patch-id we should check if whitespace content changed. Some
+  # languages are more sensitive to whitespace than others, and some changes
+  # may either introduce or be intended to fix style problems specifically
+  # involving whitespace as well.
+  if options.whitespace:
+    prev_patch_ws = GetPatchId(prev_revision, consider_whitespace=True)
+    cur_patch_ws = GetPatchId(options.commit, consider_whitespace=True)
+    if cur_patch_ws.split()[0] != prev_patch_ws.split()[0]:
+      # Insert a comment into the change letting the approvers know only the
+      # whitespace changed
+      comment_msg = "\"New patchset patch-id matches previous patchset, " \
+                     "but whitespace content has changed.\""
+      comment_cmd = ['gerrit', 'approve', '--project', options.project,
+                     '--message', comment_msg, options.commit]
+      SuExec(options, options.role_user, ' '.join(comment_cmd))
+      exit(0)
+
+  # We should also check if the commit message changed. Most approvers would
+  # want to re-review changes when the commit message changes.
   changed = DiffCommitMessages(prev_revision, options.commit)
   if changed:
     # Insert a comment into the change letting the approvers know only the
