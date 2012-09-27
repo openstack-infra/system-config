@@ -670,3 +670,12 @@ projects:
     post:
       - images-api-v20
 
+  - name: openstack-dev/openstack-qa
+    check:
+      - gate-openstack-qa-merge
+    gate:
+      - gate-openstack-qa-merge
+    post:
+      - openstack-qa-docs
+    publish:
+      - openstack-qa-docs
