@@ -493,6 +493,15 @@
 
 
 - project:
+    name: sandbox
+    github-org: openstack-dev
+    node: precise
+    
+    jobs:
+      - gate-{name}-merge
+
+
+- project:
     name: swift
     github-org: openstack
     node: precise
