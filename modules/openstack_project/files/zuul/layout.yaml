@@ -729,3 +729,9 @@ projects:
     gate:
       - gate-openstack-planet-merge:
         - gate-openstack-planet-unittest
+
+  - name: openstack-dev/sandbox
+    check:
+      - gate-sandbox-merge
+    gate:
+      - gate-sandbox-merge
