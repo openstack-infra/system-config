@@ -126,6 +126,7 @@ def is_direct_release(full_project_name):
         'openstack/openstack-ci',
         'openstack/openstack-ci-puppet',
         'openstack/openstack-manuals',
+        'openstack/tempest',
         ]
 
 
