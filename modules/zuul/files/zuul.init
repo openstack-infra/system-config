@@ -83,7 +83,7 @@ do_graceful_stop()
         # wait until really stopped
         if [ -n "${PID:-}" ]; then
                 while kill -0 "${PID:-}" 2> /dev/null;  do
-                        if [ $i = '0' ]; then
+                        if [ $? = '0' ]; then
                             echo -n " ... waiting "
                         else
                             echo -n "."
