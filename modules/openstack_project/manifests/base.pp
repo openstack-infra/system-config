@@ -29,11 +29,17 @@ class openstack_project::base(
   $packages = [
     'puppet',
     'python-setuptools',
-    'python-virtualenv'
   ]
 
   package { $packages:
     ensure => 'present'
+  }
+
+  include pip
+  package { 'virtualenv':
+    ensure => latest,
+    provider => pip,
+    require => Class[pip]
   }
 
   if ($install_users) {
