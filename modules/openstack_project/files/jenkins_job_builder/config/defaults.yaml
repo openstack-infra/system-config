@@ -11,7 +11,7 @@
           https://github.com/openstack/openstack-ci-puppet
         </a>
 
-      In modules/openstack_project/files/jenkins_jobs
+      In modules/openstack_project/files/jenkins_job_builder/config
       </p>
     project-type: freestyle
     concurrent: true
