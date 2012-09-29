@@ -78,19 +78,23 @@ do_stop()
 do_graceful_stop()
 {
 	PID=`cat $PIDFILE`
-	kill -10 $PID
+	kill -USR1 $PID
 
-        # wait until really stopped
-        if [ -n "${PID:-}" ]; then
-                while kill -0 "${PID:-}" 2> /dev/null;  do
-                        if [ $i = '0' ]; then
-                            echo -n " ... waiting "
-                        else
-                            echo -n "."
-                        fi
-                        sleep 1
-                 done
-        fi
+	# wait until really stopped
+	if [ -n "${PID:-}" ]; then
+		i=0
+		while kill -0 "${PID:-}" 2> /dev/null;  do
+			if [ $i -eq '0' ]; then
+				echo -n " ... waiting "
+			else
+				echo -n "."
+			fi
+			i=$(($i+1))
+			sleep 1
+		done
+	fi
+
+	rm -f /var/run/$NAME/*
 }
 
 #
