@@ -62,27 +62,31 @@ class zuul (
     mode => 400,
     ensure => 'present',
     content => template('zuul/zuul.conf.erb'),
-    require => File["/etc/zuul"],
+    require => [File["/etc/zuul"], User['jenkins']]
   }
 
   file { "/var/log/zuul":
     ensure => "directory",
-    owner => 'jenkins'
+    owner => 'jenkins',
+    require => User['jenkins']
   }
 
   file { "/var/run/zuul":
     ensure => "directory",
-    owner => 'jenkins'
+    owner => 'jenkins',
+    require => User['jenkins']
   }
 
   file { "/var/lib/zuul":
     ensure => "directory",
-    owner => 'jenkins'
+    owner => 'jenkins',
+    require => User['jenkins']
   }
 
   file { "/var/lib/zuul/git":
     ensure => "directory",
-    owner => 'jenkins'
+    owner => 'jenkins',
+    require => User['jenkins']
   }
 
   file { "/etc/init.d/zuul/":
