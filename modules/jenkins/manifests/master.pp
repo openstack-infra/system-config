@@ -4,7 +4,19 @@ class jenkins::master($vhost_name=$fqdn,
       $ssl_cert_file='',
       $ssl_key_file='',
       $ssl_chain_file=''
-  ) {
+) {
+  group { 'jenkins':
+    ensure => 'present'
+  }
+
+  user { 'jenkins':
+    ensure  => present,
+    comment => 'Jenkins User',
+    home    => '/var/lib/jenkins',
+    gid     => 'jenkins',
+    shell   => '/bin/bash',
+    require => Group['jenkins']
+  }
 
   include pip
   include apt
@@ -43,8 +55,9 @@ class jenkins::master($vhost_name=$fqdn,
   }
 
   $packages = [
-    "python-babel",
-    "wget",
+    'python-babel',
+    'wget',
+    'bzr'
   ]
 
   package { $packages:
@@ -59,6 +72,7 @@ class jenkins::master($vhost_name=$fqdn,
   service { "versions":
     provider => upstart,
     ensure => running,
+    require => [File['/etc/init/versions.conf'], Package['bzr']]
   }
 
   file { '/etc/init/versions.conf':
