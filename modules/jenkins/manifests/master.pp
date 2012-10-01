@@ -4,8 +4,7 @@ class jenkins::master($vhost_name=$fqdn,
       $ssl_cert_file='',
       $ssl_key_file='',
       $ssl_chain_file=''
-  ) {
-
+) {
   include pip
   include apt
   include apache
@@ -43,8 +42,8 @@ class jenkins::master($vhost_name=$fqdn,
   }
 
   $packages = [
-    "python-babel",
-    "wget",
+    'python-babel',
+    'wget',
   ]
 
   package { $packages:
@@ -54,21 +53,6 @@ class jenkins::master($vhost_name=$fqdn,
   package { "jenkins":
     ensure => "present",
     require => Apt::Source['jenkins'],
-  }
-
-  service { "versions":
-    provider => upstart,
-    ensure => running,
-  }
-
-  file { '/etc/init/versions.conf':
-    owner => 'root',
-    group => 'root',
-    mode => 444,
-    ensure => 'present',
-    source => "puppet:///modules/jenkins/versions.conf",
-    replace => 'true',
-    notify => Service["versions"]
   }
 
   package { "apache-libcloud":
