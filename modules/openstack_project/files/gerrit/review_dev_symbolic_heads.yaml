@@ -1,0 +1,14 @@
+defaults: &defaults
+  path: /home/gerrit2/review_site/git
+  symbols:
+    xyzzy: master
+
+test.git:
+  <<: *defaults
+  symbols:
+    plover: br1
+    plugh: br2
+    xyzzy: master
+
+test2.git:
+  <<: *defaults

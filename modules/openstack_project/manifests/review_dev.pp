@@ -66,4 +66,42 @@ class openstack_project::review_dev (
     require => [Class['mysql'],
                 File['/home/gerrit2/review_site/bin/set_agreements.sh']]
   }
+  # A lot of things need yaml, be conservative requiring this package to avoid
+  # conflicts with other modules.
+  if ! defined(Package['python-yaml']) {
+    package { 'python-yaml':
+      ensure => "present",
+    }
+  }
+  package { 'python-git':
+    ensure => "present",
+  }
+  file { '/home/gerrit2/review_site/bin/symbolic_heads.py':
+    ensure => present,
+    owner => root,
+    group => root,
+    mode => 0755,
+    source =>
+      'puppet:///modules/openstack_project/gerrit/scripts/symbolic_heads.py',
+    replace => 'true',
+    require => Class['::gerrit']
+  }
+  file { '/home/gerrit2/review_site/etc/symbolic_heads.yaml':
+    ensure => present,
+    owner => root,
+    group => root,
+    mode => 0755,
+    source => 'puppet:///modules/openstack_project/gerrit/scripts/review_dev_symbolic_heads.yaml',
+    replace => 'true',
+    require => Class['::gerrit']
+  }
+  exec { 'set_symbolic_heads':
+    path => ['/bin', '/usr/bin'],
+    command => '/home/gerrit2/review_site/bin/symbolic_heads.py \
+                /home/gerrit2/review_site/etc/symbolic_heads.yaml',
+    require => [File['/home/gerrit2/review_site/bin/symbolic_heads.py'],
+                File['/home/gerrit2/review_site/etc/symbolic_heads.yaml'],
+                Package['python-git'],
+                Package['python-yaml']]
+  }
 }
