@@ -1,9 +1,13 @@
-class jenkins::master($vhost_name=$fqdn,
-      $serveradmin="webmaster@$fqdn",
-      $logo,
-      $ssl_cert_file='',
-      $ssl_key_file='',
-      $ssl_chain_file=''
+class jenkins::master(
+  $vhost_name=$fqdn,
+  $serveradmin="webmaster@$fqdn",
+  $logo,
+  $ssl_cert_file='',
+  $ssl_key_file='',
+  $ssl_chain_file='',
+  $ssl_cert_file_contents='', # If left empty puppet will not create file.
+  $ssl_key_file_contents='', # If left empty puppet will not create file.
+  $ssl_chain_file_contents='' # If left empty puppet will not create file.
 ) {
   include pip
   include apt
@@ -39,6 +43,39 @@ class jenkins::master($vhost_name=$fqdn,
   }
   a2mod { 'proxy_http':
     ensure => present
+  }
+
+  if $ssl_cert_file_contents != '' {
+    file { $ssl_cert_file:
+      owner   => 'root',
+      group   => 'root',
+      mode    => '0640',
+      content => $ssl_cert_file_contents,
+      require => Class[apache],
+      before  => Apache::Vhost[$vhost_name],
+    }
+  }
+
+  if $ssl_key_file_contents != '' {
+    file { $ssl_key_file:
+      owner   => 'root',
+      group   => 'root',
+      mode    => '0640',
+      content => $ssl_key_file_contents,
+      require => Class[apache],
+      before  => Apache::Vhost[$vhost_name],
+    }
+  }
+
+  if $ssl_chain_file_contents != '' {
+    file { $ssl_chain_file:
+      owner   => 'root',
+      group   => 'root',
+      mode    => '0640',
+      content => $ssl_chain_file_contents,
+      require => Class[apache],
+      before  => Apache::Vhost[$vhost_name],
+    }
   }
 
   $packages = [
