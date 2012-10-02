@@ -3,8 +3,11 @@ class jenkins::master($vhost_name=$fqdn,
       $logo,
       $ssl_cert_file='',
       $ssl_key_file='',
-      $ssl_chain_file=''
-  ) {
+      $ssl_chain_file='',
+      $ssl_cert_file_contents='',
+      $ssl_key_file_contents='',
+      $ssl_chain_file_contents='',
+) {
 
   include pip
   include apt
@@ -40,6 +43,33 @@ class jenkins::master($vhost_name=$fqdn,
   }
   a2mod { 'proxy_http':
     ensure => present
+  }
+
+  file { "$ssl_cert_file":
+    owner   => 'root',
+    group   => 'root',
+    mode    => 0640,
+    content => "$ssl_cert_file_contents",
+    require => Class[apache],
+    before  => Apache::Vhost["$vhost_name"],
+  }
+
+  file { "$ssl_key_file":
+    owner   => 'root',
+    group   => 'root',
+    mode    => 0640,
+    content => "$ssl_key_file_contents",
+    require => Class[apache],
+    before  => Apache::Vhost["$vhost_name"],
+  }
+
+  file { "$ssl_chain_file":
+    owner   => 'root',
+    group   => 'root',
+    mode    => 0640,
+    content => "$ssl_chain_file_contents",
+    require => Class[apache],
+    before  => Apache::Vhost["$vhost_name"],
   }
 
   $packages = [
