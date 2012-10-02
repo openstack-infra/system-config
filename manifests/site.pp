@@ -36,8 +36,11 @@ node 'gerrit-dev.openstack.org', 'review-dev.openstack.org' {
 
 node 'jenkins.openstack.org' {
   class { 'openstack_project::jenkins':
-    jenkins_jobs_password => hiera('jenkins_jobs_password'),
-    sysadmins             => hiera('sysadmins'),
+    jenkins_jobs_password   => hiera('jenkins_jobs_password'),
+    ssl_cert_file_contents  => hiera('jenkins_ssl_cert_file_contents'),
+    ssl_key_file_contents   => hiera('jenkins_ssl_key_file_contents'),
+    ssl_chain_file_contents => hiera('jenkins_ssl_chain_file_contents'),
+    sysadmins               => hiera('sysadmins'),
   }
   class { 'openstack_project::zuul':
     jenkins_server  => "https://${::fqdn}",
