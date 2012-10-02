@@ -13,12 +13,15 @@ node default {
 #
 node 'review.openstack.org' {
   class { 'openstack_project::review':
-    github_oauth_token  => hiera('gerrit_github_token'),
-    mysql_password      => hiera('gerrit_mysql_password'),
-    mysql_root_password => hiera('gerrit_mysql_root_password'),
-    email_private_key   => hiera('gerrit_email_private_key'),
-    gerritbot_password  => hiera('gerrit_gerritbot_password'),
-    sysadmins           => hiera('sysadmins'),
+    github_oauth_token      => hiera('gerrit_github_token'),
+    mysql_password          => hiera('gerrit_mysql_password'),
+    mysql_root_password     => hiera('gerrit_mysql_root_password'),
+    email_private_key       => hiera('gerrit_email_private_key'),
+    gerritbot_password      => hiera('gerrit_gerritbot_password'),
+    ssl_cert_file_contents  => hiera('gerrit_ssl_cert_file_contents'),
+    ssl_key_file_contents   => hiera('gerrit_ssl_key_file_contents'),
+    ssl_chain_file_contents => hiera('gerrit_ssl_chain_file_contents'),
+    sysadmins               => hiera('sysadmins'),
   }
 }
 

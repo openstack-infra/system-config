@@ -9,6 +9,10 @@
 #     Used in the Apache virtual host to specify the SSL cert and key files.
 #   ssl_chain_file:
 #     Optional, if you have an intermediate cert Apache should serve.
+#   ssl_*_file_contents:
+#     Optional, the contents of the respective cert files as a string. Will be
+#     used to have Puppet ensure the contents of these files. Default value of
+#     '' means Puppet should not manage these files.
 #   openidssourl:
 #     The URL to use for OpenID in SSO mode.
 #   email:
@@ -62,42 +66,45 @@
 # TODO: make more gerrit options configurable here
 
 class gerrit($vhost_name=$fqdn,
-      $canonicalweburl="https://$fqdn/",
-      $serveradmin="webmaster@$fqdn",
-      $ssl_cert_file='/etc/ssl/certs/ssl-cert-snakeoil.pem',
-      $ssl_key_file='/etc/ssl/private/ssl-cert-snakeoil.key',
-      $ssl_chain_file='',
-      $openidssourl="https://login.launchpad.net/+openid",
-      $email='',
-      $database_poollimit='',
-      $container_heaplimit='',
-      $core_packedgitopenfiles='',
-      $core_packedgitlimit='',
-      $core_packedgitwindowsize='',
-      $sshd_threads='',
-      $httpd_acceptorthreads='',
-      $httpd_minthreads='',
-      $httpd_maxthreads='',
-      $httpd_maxwait='',
-      $commentlinks = [],
-      $war,
-      $contactstore=false,
-      $contactstore_appsec='',
-      $contactstore_pubkey='',
-      $contactstore_url='',
-      $projects_file = 'UNDEF',
-      $enable_melody = 'false',
-      $melody_session = 'false',
-      $mysql_password,
-      $mysql_root_password,
-      $email_private_key,
-      $replicate_github=false,
-      $replicate_local=true,
-      $local_git_dir='/var/lib/git',
-      $replication_targets=[],
-      $gitweb=true,
-      $testmode=false
-      ) {
+  $canonicalweburl="https://$fqdn/",
+  $serveradmin="webmaster@$fqdn",
+  $ssl_cert_file='/etc/ssl/certs/ssl-cert-snakeoil.pem',
+  $ssl_key_file='/etc/ssl/private/ssl-cert-snakeoil.key',
+  $ssl_chain_file='',
+  $ssl_cert_file_contents='', # If left empty puppet will not create file.
+  $ssl_key_file_contents='', # If left empty puppet will not create file.
+  $ssl_chain_file_contents='', # If left empty puppet will not create file.
+  $openidssourl="https://login.launchpad.net/+openid",
+  $email='',
+  $database_poollimit='',
+  $container_heaplimit='',
+  $core_packedgitopenfiles='',
+  $core_packedgitlimit='',
+  $core_packedgitwindowsize='',
+  $sshd_threads='',
+  $httpd_acceptorthreads='',
+  $httpd_minthreads='',
+  $httpd_maxthreads='',
+  $httpd_maxwait='',
+  $commentlinks = [],
+  $war,
+  $contactstore=false,
+  $contactstore_appsec='',
+  $contactstore_pubkey='',
+  $contactstore_url='',
+  $projects_file = 'UNDEF',
+  $enable_melody = 'false',
+  $melody_session = 'false',
+  $mysql_password,
+  $mysql_root_password,
+  $email_private_key,
+  $replicate_github=false,
+  $replicate_local=true,
+  $local_git_dir='/var/lib/git',
+  $replication_targets=[],
+  $gitweb=true,
+  $testmode=false
+) {
 
   include apache
 
@@ -239,7 +246,7 @@ class gerrit($vhost_name=$fqdn,
     require => File["/home/gerrit2/review_site/etc"]
   }
 
-# Set up MySQL.
+  # Set up MySQL.
 
   class {"mysql::server":
     config_hash => {
@@ -258,14 +265,14 @@ class gerrit($vhost_name=$fqdn,
     charset => "latin1",
   }
 
-# Set up apache.
+  # Set up apache.
 
   apache::vhost { $vhost_name:
-    port => 443,
-    docroot => 'MEANINGLESS ARGUMENT',
+    port     => 443,
+    docroot  => 'MEANINGLESS ARGUMENT',
     priority => '50',
     template => 'gerrit/gerrit.vhost.erb',
-    ssl => true,
+    ssl      => true,
   }
   a2mod { 'rewrite':
     ensure => present
@@ -275,6 +282,36 @@ class gerrit($vhost_name=$fqdn,
   }
   a2mod { 'proxy_http':
     ensure => present
+  }
+
+  if $ssl_cert_file_contents != '' {
+    file { $ssl_cert_file:
+      owner   => 'root',
+      group   => 'root',
+      mode    => '0640',
+      content => $ssl_cert_file_contents,
+      before  => Apache::Vhost[$vhost_name],
+    }
+  }
+
+  if $ssl_key_file_contents != '' {
+    file { $ssl_key_file:
+      owner   => 'root',
+      group   => 'root',
+      mode    => '0640',
+      content => $ssl_key_file_contents,
+      before  => Apache::Vhost[$vhost_name],
+    }
+  }
+
+  if $ssl_chain_file_contents != '' {
+    file { $ssl_chain_file:
+      owner   => 'root',
+      group   => 'root',
+      mode    => '0640',
+      content => $ssl_chain_file_contents,
+      before  => Apache::Vhost[$vhost_name],
+    }
   }
 
   # Install Gerrit itself.
