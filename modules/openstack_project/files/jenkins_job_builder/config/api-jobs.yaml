@@ -2,3 +2,150 @@
     name: api-jobs
     jobs:
       - gate-{name}-merge
+
+- job:
+    name: openstack-netconn-api-doc
+    project-type: maven
+    concurrent: false
+    node: precise
+
+    triggers:
+      - zuul-post
+
+    prebuilders:
+      - gerrit-git-prep
+
+    maven:
+      root-module:
+        group-id: org.openstack.docs
+        artifact-id: openstack-guide
+      root-pom: doc/pom.xml
+      goals: 'clean generate-sources'
+
+    publishers:
+      - console-log-post
+      - ftp:
+          site: docs.openstack.org
+          source: 'doc/target/docbkx/webhelp/api/openstack-network/1.0/**'
+          target: ''
+          remove-prefix: 'doc/target/docbkx/webhelp'
+          excludes: '**/*.xml,**/null*'
+
+- job:
+    name: openstack-object-api-doc
+    project-type: maven
+    concurrent: false
+    node: precise
+
+    triggers:
+      - zuul-post
+
+    prebuilders:
+      - gerrit-git-prep
+
+    maven:
+      root-module:
+        group-id: org.openstack.docs
+        artifact-id: openstack-object-api-guide
+      root-pom: openstack-object-storage-dev/pom.xml
+      goals: 'clean generate-sources'
+
+    publishers:
+      - console-log-post
+      - ftp:
+          site: docs.openstack.org
+          source: 'openstack-object-storage-dev/target/docbkx/webhelp/**'
+          target: ''
+          remove-prefix: 'openstack-object-storage-dev/target/docbkx/webhelp/'
+          excludes: '**/*.xml,**/null*'
+
+- job:
+    name: openstack-compute-api-doc
+    project-type: maven
+    concurrent: false
+    node: precise
+
+    wrappers:
+      - timeout:
+          timeout: 40
+          fail: true
+
+    triggers:
+      - zuul-post
+
+    prebuilders:
+      - gerrit-git-prep
+
+    maven:
+      root-module:
+        group-id: org.openstack.docs
+        artifact-id: openstack-guide
+      root-pom: openstack-compute-api-2/pom.xml
+      goals: 'clean generate-sources'
+
+    publishers:
+      - console-log-post
+      - ftp:
+          site: docs.openstack.org
+          source: 'openstack-compute-api-2/target/docbkx/webhelp/api/openstack-compute/2/**'
+          target: ''
+          remove-prefix: 'openstack-compute-api-2/target/docbkx/webhelp'
+          excludes: '**/*.xml,**/null*'
+
+- job:
+    name: openstack-identity-api-doc
+    project-type: maven
+    concurrent: false
+    node: precise
+
+    wrappers:
+      - timeout:
+          timeout: 40
+          fail: true
+
+    triggers:
+      - zuul-post
+
+    prebuilders:
+      - gerrit-git-prep
+
+    maven:
+      root-module:
+        group-id: org.openstack.identity
+        artifact-id: docs
+      root-pom: openstack-identity-api/pom.xml
+      goals: 'clean generate-sources'
+
+    publishers:
+      - console-log-post
+      - ftp:
+          site: docs.openstack.org
+          source: 'openstack-identity-api/target/docbkx/webhelp/api/openstack-identity-service/2.0/**'
+          target: ''
+          remove-prefix: 'openstack-identity-api/target/docbkx/webhelp/
+          excludes: '**/*.xml,**/null*'
+
+- job:
+    name: openstack-image-api-doc
+    project-type: maven
+    concurrent: false
+    node: precise
+
+    triggers:
+      - zuul-post
+
+    maven:
+      root-module:
+        group-id: org.openstack.docs
+        artifact-id: openstack-guide
+      root-pom: openstack-image-service-api/pom.xml
+      goals: 'clean generate-sources'
+
+    publishers:
+      - console-log-post
+      - ftp:
+          site: docs.openstack.org
+          source: 'openstack-image-service-api/target/docbkx/webhelp/api/openstack-image-service/1.1/**'
+          target: ''
+          remove-prefix: 'openstack-image-service-api/target/docbkx/webhelp'
+          excludes: '**/*.xml,**/null*'
