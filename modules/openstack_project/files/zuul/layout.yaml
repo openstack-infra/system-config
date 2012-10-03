@@ -74,6 +74,8 @@ jobs:
     voting: false
   - name: openstack-docs-site
     branch: ^master$
+  - name: openstack-ha-guide
+    branch: ^master$
 
 
 projects:
@@ -661,6 +663,9 @@ projects:
       - openstack-cli-guide
       - openstack-glossary
       - openstack-docs-site
+      - openstack-ha-guide
+      - openstack-install-deploy-guide-apt-fedora
+      - openstack-install-deploy-guide-ubuntu
 
   - name: openstack/compute-api
     check:
