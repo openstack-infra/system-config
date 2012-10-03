@@ -341,3 +341,22 @@
           remove-prefix: 'doc/target/docbkx/webhelp/trunk/'
           excludes: '**/*.xml,**/null*'
 
+# in zuul/layout.yaml specified to only run against master branch.
+- job:
+    name: 'openstack-docs-site'
+    node: precise
+
+    triggers:
+      - zuul-post
+
+    builders:
+      - gerrit-git-prep
+
+    publishers:
+      - ftp:
+          site: 'docs.openstack.org'
+          source: 'www/**'
+          target: ''
+          remove-prefix: 'www/'
+          excludes: ''
+      - console-log-post
