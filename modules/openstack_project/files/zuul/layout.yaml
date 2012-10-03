@@ -72,6 +72,8 @@ jobs:
     success-message: Jenkins XML output is unchanged.
   - name: gate-ci-puppet-lint
     voting: false
+  - name: openstack-docs-site
+    branch: ^master$
 
 
 projects:
@@ -658,7 +660,8 @@ projects:
       - openstack-admin-manuals-diablo
       - openstack-cli-guide
       - openstack-glossary
-      
+      - openstack-docs-site
+
   - name: openstack/compute-api
     check:
       - gate-compute-api-merge
