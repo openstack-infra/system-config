@@ -28,6 +28,7 @@
     
     jobs:
       - api-jobs
+      - openstack-compute-api-doc
 
 
 - project:
@@ -152,6 +153,7 @@
     
     jobs:
       - api-jobs
+      - identity-api-v20
 
 
 - project:
@@ -163,6 +165,7 @@
     
     jobs:
       - api-jobs
+      - image-api-v11
 
 
 - project:
@@ -218,6 +221,7 @@
     
     jobs:
       - api-jobs
+      - network-api-v10
 
 
 - project:
@@ -279,6 +283,7 @@
     
     jobs:
       - api-jobs
+      - openstack-object-api-doc
 
 
 - project:
