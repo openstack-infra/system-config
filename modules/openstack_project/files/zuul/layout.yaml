@@ -667,12 +667,16 @@ projects:
       - gate-compute-api-merge
     gate:
       - gate-compute-api-merge
+    post:
+      - openstack-compute-api-doc
 
   - name: openstack/identity-api
     check:
       - gate-identity-api-merge
     gate:
       - gate-identity-api-merge
+    post:
+      - identity-api-v20
 
   - name: openstack/image-api
     check:
@@ -680,6 +684,7 @@ projects:
     gate:
       - gate-image-api-merge
     post:
+      - image-api-v11
       - images-api-v20
 
   - name: openstack/netconn-api
@@ -688,6 +693,7 @@ projects:
     gate:
       - gate-netconn-api-merge
     post:
+      - network-api-v10
       - netconn-api-v20
 
   - name: openstack/object-api
@@ -695,6 +701,8 @@ projects:
       - gate-object-api-merge
     gate:
       - gate-object-api-merge
+    post:
+      - openstack-object-api-doc
 
   - name: openstack/volume-api
     check:
