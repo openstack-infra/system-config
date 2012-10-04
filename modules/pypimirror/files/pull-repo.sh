@@ -23,7 +23,7 @@ for branch in `git branch -a | grep remotes.origin | grep -v origin.HEAD | awk '
     echo "Fetching pip requires for $project:$branch"
     for requires_file in tools/pip-requires tools/test-requires ; do
         if [ -f ${requires_file} ] ; then
-            $pip_command -r $requires_file 
+            $pip_command -r $requires_file
         fi
     done
 done

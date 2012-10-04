@@ -58,10 +58,10 @@
 	<Directory "<%= scope.lookupvar('mediawiki::mediawiki_location') %>/images">
 		# Ignore .htaccess files
 		AllowOverride None
- 
+
 		# Serve HTML as plaintext, don't execute SHTML
 		AddType text/plain .html .htm .shtml .php
- 
+
 		# Don't run arbitrary PHP code.
 		php_admin_flag engine off
 	</Directory>

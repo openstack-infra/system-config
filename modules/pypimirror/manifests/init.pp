@@ -27,21 +27,21 @@ class pypimirror ( $vhost_name = $fqdn,
     owner => 'root',
     group => 'root',
   }
-    
+
   file { $pip_download:
     ensure => 'directory',
     mode => 755,
     owner => 'root',
     group => 'root',
   }
-    
+
   file { $pip_cache:
     ensure => 'directory',
     mode => 755,
     owner => 'root',
     group => 'root',
   }
-    
+
   file { '/etc/openstackci':
     ensure => "directory",
     owner => "root",

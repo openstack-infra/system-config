@@ -7,7 +7,7 @@
 - project: openstack-ci/gerrit
   options:
   - close-pull
-  remote: https://gerrit.googlesource.com/gerrit 
+  remote: https://gerrit.googlesource.com/gerrit
 - project: openstack-ci/gerrit-verification-status-plugin
   options:
   - close-pull

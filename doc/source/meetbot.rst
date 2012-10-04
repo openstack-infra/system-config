@@ -28,7 +28,7 @@ a configuration and documentation for that module is at
 One important config setting is ``supybot.reply.whenAddressedBy.chars``, which
 sets the prefix character for this bot. This should be set to something other
 than ``#`` as ``#`` will conflict with Meetbot (you can leave the setting blank
-if you don't want a prefix character). 
+if you don't want a prefix character).
 
 Meetbot
 -------

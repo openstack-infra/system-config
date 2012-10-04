@@ -124,7 +124,7 @@
           target: 'api/openstack-image-service/2.0/'
           remove-prefix: 'doc/target/docbkx/webhelp/images-api-2.0/'
           excludes: '**/*.xml,**/null*'
-          
+
 - job:
     name: openstackapi-programming
     project-type: maven
@@ -190,7 +190,7 @@
           source: 'doc/src/docbkx/common/glossary/target/docbkx/webhelp/openstack-glossary/**'
           target: 'glossary'
           remove-prefix: 'doc/src/docbkx/common/glossary/target/docbkx/webhelp/openstack-glossary/'
-          excludes: '**/*.xml,**/null*'    
+          excludes: '**/*.xml,**/null*'
 
 - job:
     name: openstack-admin-manual-compute

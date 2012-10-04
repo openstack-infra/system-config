@@ -1,6 +1,6 @@
 class snmpd {
     package { snmpd: ensure => present }
-    service { snmpd: 
+    service { snmpd:
       ensure          => running,
       hasrestart      => true,
       require => [File["/etc/snmp/snmpd.conf"],

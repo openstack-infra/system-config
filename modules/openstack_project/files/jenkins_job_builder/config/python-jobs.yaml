@@ -19,7 +19,7 @@
       - console-log-post
 
     node: '{node}'
-  
+
 
 - job-template:
     name: 'gate-{name}-pep8'
@@ -36,7 +36,7 @@
       - console-log
 
     node: '{node}'
-  
+
 
 - job-template:
     name: 'gate-{name}-pylint'
@@ -77,7 +77,7 @@
 
     # >= precise does not have python2.6
     node: oneiric
-  
+
 
 - job-template:
     name: 'gate-{name}-python27'
@@ -106,7 +106,7 @@
       - console-log
 
     node: '{node}'
-  
+
 
 - job-template:
     name: 'gate-{name}-merge'
@@ -138,7 +138,7 @@
 
     node: '{node}'
 
-  
+
 - job-template:
     name: 'gate-{name}-pyflakes'
     node: precise

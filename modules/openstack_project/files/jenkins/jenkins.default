@@ -44,7 +44,7 @@ HTTP_PORT=8080
 # port for AJP connector (disabled by default)
 AJP_PORT=-1
 
-# servlet context, important if you want to use apache proxying  
+# servlet context, important if you want to use apache proxying
 PREFIX=/jenkins
 
 # arguments to pass to jenkins.
