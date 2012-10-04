@@ -78,7 +78,7 @@ function merge_changes {
 	IFS=':'
 	change_array=($change)
 	IFS=$OIFS2
-   
+
 	CHANGE_PROJECT=${change_array[0]}
 	CHANGE_BRANCH=${change_array[1]}
 	CHANGE_REFSPEC=${change_array[2]}
@@ -109,7 +109,7 @@ then
     git reset --hard remotes/origin/$GERRIT_BRANCH
     git clean -x -f -d -q
 
-    if [ ! -z "$GERRIT_REFSPEC" ]    
+    if [ ! -z "$GERRIT_REFSPEC" ]
     then
         merge_change $GERRIT_PROJECT $GERRIT_REFSPEC
     else

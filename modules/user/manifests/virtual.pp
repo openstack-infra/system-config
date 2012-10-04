@@ -15,7 +15,7 @@ class user::virtual {
       managehome => true,  # creates the home directory (does not actually manage it)
       require => Group[$title],
     }
-    
+
     file { "${title}_sshdir":
       name => "/home/$title/.ssh",
       owner => $title,

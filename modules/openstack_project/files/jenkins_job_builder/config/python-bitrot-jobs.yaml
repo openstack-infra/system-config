@@ -18,14 +18,14 @@
       - console-log-periodic
 
     scm:
-      - git: 
+      - git:
           url: 'git://github.com/{github-org}/{name}.git'
           branches:
             - 'origin/{branch}'
 
     # >= precise does not have python2.6
     node: oneiric
-  
+
 
 - job-template:
     name: 'periodic-{name}-python27-{branch-name}'
@@ -47,13 +47,13 @@
       - console-log-periodic
 
     scm:
-      - git: 
+      - git:
           url: 'git://github.com/{github-org}/{name}.git'
           branches:
             - 'origin/{branch}'
 
     node: '{node}'
-  
+
 
 - job-template:
     name: 'periodic-{name}-docs-{branch-name}'
@@ -68,7 +68,7 @@
       - console-log-periodic
 
     scm:
-      - git: 
+      - git:
           url: 'git://github.com/{github-org}/{name}.git'
           branches:
             - 'origin/{branch}'

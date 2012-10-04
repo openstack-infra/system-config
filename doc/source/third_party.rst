@@ -141,7 +141,7 @@ should configure as follows::
 
   Trigger on Patchset Uploaded: ticked
   (the rest unticked)
-  
+
   Type: Plain
   Pattern: openstack/project-name (where project-name is the name of the project)
   Branches:
