@@ -4,7 +4,7 @@
 # This limit must be several units higher than the total number of
 # httpd and sshd threads as some request processing code paths may need
 # multiple connections.
-# database.poolLimit = 1 + max(sshd.threads,sshd.batchThreads) + sshd.streamThreads + sshd.commandStartThreads + httpd.acceptorThreads + httpd.maxThreads 
+# database.poolLimit = 1 + max(sshd.threads,sshd.batchThreads) + sshd.streamThreads + sshd.commandStartThreads + httpd.acceptorThreads + httpd.maxThreads
 # http://groups.google.com/group/repo-discuss/msg/4c2809310cd27255
 # or "2x sshd.threads"
 # http://groups.google.com/group/repo-discuss/msg/269024c966e05d6a

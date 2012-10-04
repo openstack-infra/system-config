@@ -23,7 +23,7 @@ follows:
    doc_server::site { "swift": }
 
 In this example nginx will be configured to serve ``swift.openstack.org``
-from ``/srv/docs/swift`` and ``swift.openstack.org/tarballs/`` from 
+from ``/srv/docs/swift`` and ``swift.openstack.org/tarballs/`` from
 ``/srv/tarballs/swift``
 
 Lodgeit
@@ -302,55 +302,55 @@ master (if running in master/agent setup) or on the server itself if running
 MySQL will be configured by Puppet to listen on TCP 3306 of localhost and a
 database called ``etherpad-lite`` will be created for user ``eplite``. Also,
 this module does install the Abiword package. Knowing this, a good template for
-your config is: 
+your config is:
 
 ::
 
   /*
     This file must be valid JSON. But comments are allowed
-  
+
     Please edit settings.json, not settings.json.template
   */
   {
     //Ip and port which etherpad should bind at
     "ip": "127.0.0.1",
     "port" : 9001,
-    
+
     //The Type of the database. You can choose between dirty, sqlite and mysql
     //You should use mysql or sqlite for anything else than testing or development
     "dbType" : "mysql",
     //the database specific settings
     "dbSettings" : {
-                     "user"    : "eplite", 
-                     "host"    : "localhost", 
-                     "password": "changeme", 
+                     "user"    : "eplite",
+                     "host"    : "localhost",
+                     "password": "changeme",
                      "database": "etherpad-lite"
                    },
-    
+
     //the default text of a pad
     "defaultPadText" : "Welcome to Etherpad Lite!\n\nThis pad text is synchronized as you type, so that everyone viewing this page sees the same text. This allows you to collaborate seamlessly on documents!\n\nEtherpad Lite on Github: http:\/\/j.mp/ep-lite\n",
-    
+
     /* Users must have a session to access pads. This effectively allows only group pads to be accessed. */
     "requireSession" : false,
-  
+
     /* Users may edit pads but not create new ones. Pad creation is only via the API. This applies both to group pads and regular pads. */
     "editOnly" : false,
-    
-    /* if true, all css & js will be minified before sending to the client. This will improve the loading performance massivly, 
+
+    /* if true, all css & js will be minified before sending to the client. This will improve the loading performance massivly,
        but makes it impossible to debug the javascript/css */
     "minify" : true,
-  
+
     /* How long may clients use served javascript code? Without versioning this
       is may cause problems during deployment. */
     "maxAge" : 21600000, // 6 hours
-    
+
     /* This is the path to the Abiword executable. Setting it to null, disables abiword.
-       Abiword is needed to enable the import/export of pads*/  
+       Abiword is needed to enable the import/export of pads*/
     "abiword" : "/usr/bin/abiword",
-    
+
     /* This setting is used if you need http basic auth */
     // "httpAuth" : "user:pass",
-  
+
     /* The log level we are using, can be: DEBUG, INFO, WARN, ERROR */
     "loglevel": "INFO"
   }
@@ -366,7 +366,7 @@ The reverse proxy is configured to talk to Etherpad Lite over localhost:9001.
 Nginx listens on TCP 443 for HTTPS connections. Because HTTPS is used you will
 need SSL certificates. These files are not directly managed by Puppet (again
 because of the sensitive nature of these files), but Puppet will look for
-``/root/secret-files/eplite.crt`` and ``/root/secret-files/eplite.key`` and 
+``/root/secret-files/eplite.crt`` and ``/root/secret-files/eplite.key`` and
 copy them to ``/etc/nginx/ssl/eplite.crt`` and ``/etc/nginx/ssl/eplite.key``,
 which is where Nginx expects them to be.
 

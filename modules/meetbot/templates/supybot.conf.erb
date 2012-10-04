@@ -29,14 +29,14 @@ supybot.ident: <%= nick %>
 # the current version of the bot will be generated if this is left
 # empty.
 #
-# Default value: 
+# Default value:
 ###
 supybot.user: <%= nick %>
 
 ###
 # Determines what networks the bot will connect to.
 #
-# Default value:  
+# Default value:
 ###
 supybot.networks: <%= network %>
 
@@ -45,32 +45,32 @@ supybot.networks: <%= network %>
 # technically passwords are server-specific and not network-specific,
 # but this is the best we can do right now.
 #
-# Default value: 
+# Default value:
 ###
-supybot.networks.<%= network %>.password: 
+supybot.networks.<%= network %>.password:
 
 ###
 # Determines what servers the bot will connect to for FreeNode. Each
 # will be tried in order, wrapping back to the first when the cycle is
 # completed.
 #
-# Default value: 
+# Default value:
 ###
 supybot.networks.<%= network %>.servers: <%= server %>
 
 ###
 # Determines what channels the bot will join only on network.
 #
-# Default value:  
+# Default value:
 ###
 supybot.networks.<%= network %>.channels: <%= channels %>
 
 ###
 # Determines what key (if any) will be used to join the channel.
 #
-# Default value: 
+# Default value:
 ###
-supybot.networks.<%= network %>.channels.key: 
+supybot.networks.<%= network %>.channels.key:
 
 ###
 # Determines whether the bot will attempt to connect with SSL sockets to
@@ -273,7 +273,7 @@ supybot.reply.showSimpleSyntax: False
 # simultaneously, and if any one of them is used as a prefix the bot
 # will assume it is being addressed.
 #
-# Default value: 
+# Default value:
 ###
 supybot.reply.whenAddressedBy.chars: !
 
@@ -284,9 +284,9 @@ supybot.reply.whenAddressedBy.chars: !
 # space-separated list of strings, so you can set something like '@@ ??'
 # and the bot will reply when a message is prefixed by either @@ or ??.
 #
-# Default value:  
+# Default value:
 ###
-supybot.reply.whenAddressedBy.strings:  
+supybot.reply.whenAddressedBy.strings:
 
 ###
 # Determines whether the bot will reply when people address it by its
@@ -308,9 +308,9 @@ supybot.reply.whenAddressedBy.nick.atEnd: False
 # Determines what extra nicks the bot will always respond to when
 # addressed by, even if its current nick is something else.
 #
-# Default value:  
+# Default value:
 ###
-supybot.reply.whenAddressedBy.nicks:  
+supybot.reply.whenAddressedBy.nicks:
 
 ###
 # Determines whether the bot will unidentify someone when that person
@@ -526,9 +526,9 @@ supybot.commands.defaultPlugins.unignore: Admin
 # Determines what commands are currently disabled. Such commands will
 # not appear in command lists, etc. They will appear not even to exist.
 #
-# Default value:  
+# Default value:
 ###
-supybot.commands.disabled:  
+supybot.commands.disabled:
 
 ###
 # Determines whether the bot will defend itself against command-
@@ -649,7 +649,7 @@ supybot.directories.backup: /var/lib/meetbot/<%= name %>/backup
 # can say: bot: 'config supybot.directories.plugins [config
 # supybot.directories.plugins], newPluginDirectory'.
 #
-# Default value:  
+# Default value:
 ###
 supybot.directories.plugins: /usr/share/pyshared/supybot/plugins
 
@@ -663,7 +663,7 @@ supybot.directories.log: /var/lib/meetbot/<%= name %>/logs
 ###
 # Determines what plugins will be loaded.
 #
-# Default value:  
+# Default value:
 ###
 supybot.plugins: MeetBot Admin ChannelLogger Misc Owner User Services Config Channel
 
@@ -911,9 +911,9 @@ supybot.plugins.Owner.public: True
 # value is empty, the nick of the person giving the quit command will be
 # used.
 #
-# Default value: 
+# Default value:
 ###
-supybot.plugins.Owner.quitMsg: 
+supybot.plugins.Owner.quitMsg:
 
 ###
 # Determines whether this plugin is loaded by default.
@@ -930,7 +930,7 @@ supybot.plugins.Services.public: True
 ###
 # Determines what nicks the bot will use with services.
 #
-# Default value:  
+# Default value:
 ###
 supybot.plugins.Services.nicks: <%= nick %>
 
@@ -962,31 +962,31 @@ supybot.plugins.Services.ghostDelay: 60
 ###
 # Determines what nick the 'NickServ' service has.
 #
-# Default value: 
+# Default value:
 ###
 supybot.plugins.Services.NickServ: NickServ
 
 ###
 # Determines what password the bot will use with NickServ.
 #
-# Default value: 
+# Default value:
 ###
-supybot.plugins.Services.NickServ.password: 
+supybot.plugins.Services.NickServ.password:
 supybot.plugins.Services.NickServ.password.<%= nick %>: <%= nickpass %>
 
 ###
 # Determines what nick the 'ChanServ' service has.
 #
-# Default value: 
+# Default value:
 ###
 supybot.plugins.Services.ChanServ: ChanServ
 
 ###
 # Determines what password the bot will use with ChanServ.
 #
-# Default value: 
+# Default value:
 ###
-supybot.plugins.Services.ChanServ.password: 
+supybot.plugins.Services.ChanServ.password:
 
 ###
 # Determines whether the bot will request to get opped by the ChanServ
@@ -1043,7 +1043,7 @@ supybot.plugins.alwaysLoadImportant: True
 #
 # Default value: anydbm cdb flat pickle
 ###
-supybot.databases: 
+supybot.databases:
 
 ###
 # Determines what filename will be used for the users database. This
@@ -1169,17 +1169,17 @@ supybot.protocols.irc.strictRfc: False
 # +x, which indicates to the auth services on those networks that you
 # should be given a fake host.
 #
-# Default value: 
+# Default value:
 ###
-supybot.protocols.irc.umodes: 
+supybot.protocols.irc.umodes:
 
 ###
 # Determines what vhost the bot will bind to before connecting to the
 # IRC server.
 #
-# Default value: 
+# Default value:
 ###
-supybot.protocols.irc.vhost: 
+supybot.protocols.irc.vhost:
 
 ###
 # Determines how many old messages the bot will keep around in its
@@ -1251,9 +1251,9 @@ supybot.protocols.http.peekSize: 4096
 # Determines what proxy all HTTP requests should go through. The value
 # should be of the form 'host:port'.
 #
-# Default value: 
+# Default value:
 ###
-supybot.protocols.http.proxy: 
+supybot.protocols.http.proxy:
 
 ###
 # Determines whether the bot will ignore unregistered users by default.
@@ -1269,9 +1269,9 @@ supybot.defaultIgnore: False
 # string, the bot will attempt to find out its IP dynamically (though
 # sometimes that doesn't work, hence this variable).
 #
-# Default value: 
+# Default value:
 ###
-supybot.externalIP: 
+supybot.externalIP:
 
 ###
 # Determines what the default timeout for socket objects will be. This
@@ -1289,9 +1289,9 @@ supybot.defaultSocketTimeout: 10
 # then no PID file will be written. A restart is required for changes to
 # this variable to take effect.
 #
-# Default value: 
+# Default value:
 ###
-supybot.pidFile: 
+supybot.pidFile:
 
 ###
 # Determines whether the bot will automatically thread all commands.

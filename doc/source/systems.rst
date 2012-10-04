@@ -78,7 +78,7 @@ On the backup servers::
 
   sudo su -
   BUPUSER=bup-<short-servername>  # eg, bup-jenkins-dev
-  useradd -r $BUPUSER -s /bin/bash -m 
+  useradd -r $BUPUSER -s /bin/bash -m
   cd /home/$BUPUSER
   mkdir .ssh
   cat >.ssh/authorized_keys

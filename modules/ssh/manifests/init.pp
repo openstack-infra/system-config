@@ -1,6 +1,6 @@
 class ssh {
     package { openssh-server: ensure => present }
-    service { ssh: 
+    service { ssh:
       ensure          => running,
       hasrestart      => true,
       subscribe       => File["/etc/ssh/sshd_config"],

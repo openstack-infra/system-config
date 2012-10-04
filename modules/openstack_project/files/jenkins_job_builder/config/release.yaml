@@ -31,6 +31,6 @@
       - string:
           name: VALUE
           description: 'The milestone value to set for this branch.  E.g., "e4" or "rc1".'
-          
+
     builders:
       - shell: "/usr/local/jenkins/slave_scripts/bump-milestone.sh"

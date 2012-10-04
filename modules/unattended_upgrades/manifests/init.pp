@@ -24,5 +24,5 @@ class unattended_upgrades($ensure = present) {
     source => "puppet:///modules/unattended_upgrades/50unattended-upgrades",
     replace => 'true',
   }
-  
+
 }
