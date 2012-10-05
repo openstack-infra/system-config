@@ -1,9 +1,7 @@
 # == Class: openstack_project::gerrit
 #
 # A wrapper class around the main gerrit class that sets gerrit
-# up for launchpad single sign on, bug/blueprint links and user
-# import and sync
-# TODO: launchpadlib creds for user sync script
+# up for launchpad single sign on and bug/blueprint links
 
 class openstack_project::gerrit (
   $vhost_name = $::fqdn,
@@ -54,6 +52,10 @@ class openstack_project::gerrit (
   $replicate_github = true,
   $replicate_local = true,
   $local_git_dir = '/var/lib/git',
+  $cla_description = 'OpenStack Individual Contributor License Agreement',
+  $cla_file = 'static/cla.html',
+  $cla_id = '2',
+  $cla_name = 'ICLA',
   $testmode = false,
   $sysadmins = []
 ) {
@@ -185,11 +187,8 @@ class openstack_project::gerrit (
     ensure => absent,
   }
 
-  class { 'launchpad_sync':
-    user                => 'gerrit2',
-    script_user         => $script_user,
-    script_key_file     => $script_key_file,
-    script_logging_conf => $script_logging_conf,
+  cron { 'sync_launchpad_users':
+    ensure => absent,
   }
 
   file { '/home/gerrit2/review_site/hooks/change-merged':
@@ -263,5 +262,20 @@ class openstack_project::gerrit (
           Class['jeepyb'],
         ],
     }
+  }
+  file { '/home/gerrit2/review_site/bin/set_agreements.sh':
+    ensure  => present,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0755',
+    content => template('openstack_project/gerrit_set_agreements.sh.erb'),
+    replace => true,
+    require => Class['::gerrit']
+  }
+  exec { 'set_contributor_agreements':
+    path    => ['/bin', '/usr/bin'],
+    command => '/home/gerrit2/review_site/bin/set_agreements.sh',
+    require => [Class['mysql'],
+                File['/home/gerrit2/review_site/bin/set_agreements.sh']]
   }
 }
