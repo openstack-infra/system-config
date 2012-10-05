@@ -21,6 +21,8 @@ node 'review.openstack.org' {
     ssl_cert_file_contents  => hiera('gerrit_ssl_cert_file_contents'),
     ssl_key_file_contents   => hiera('gerrit_ssl_key_file_contents'),
     ssl_chain_file_contents => hiera('gerrit_ssl_chain_file_contents'),
+    contactstore_appsec     => hiera('gerrit_contactstore_appsec'),
+    contactstore_pubkey     => hiera('gerrit_contactstore_pubkey'),
     sysadmins               => hiera('sysadmins'),
   }
 }

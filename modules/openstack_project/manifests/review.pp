@@ -33,6 +33,8 @@ class openstack_project::review (
   $ssl_cert_file_contents = '',
   $ssl_key_file_contents = '',
   $ssl_chain_file_contents = '',
+  $contactstore_appsec,
+  $contactstore_pubkey,
   $sysadmins = []
 ) {
   class { 'openstack_project::gerrit':
@@ -50,7 +52,11 @@ class openstack_project::review (
     core_packedgitwindowsize => '16k',
     sshd_threads             => '100',
     httpd_maxwait            => '5000min',
-    war                      => 'http://tarballs.openstack.org/ci/gerrit-2.4.2-11-gb5a28fb.war',
+    war                      => 'http://tarballs.openstack.org/ci/gerrit-!!!PATCHED VERSION!!!.war',
+    contactstore             => true,
+    contactstore_appsec      => $contactstore_appsec,
+    contactstore_pubkey      => $contactstore_pubkey,
+    contactstore_url         => '!!!PROD CONTACT SERVER URL!!!',
     script_user              => 'launchpadsync',
     script_key_file          => '/home/gerrit2/.ssh/launchpadsync_rsa',
     script_logging_conf      => '/home/gerrit2/.sync_logging.conf',
