@@ -5,10 +5,6 @@ class openstack_project::review_dev (
   $email_private_key,
   $contactstore_appsec,
   $contactstore_pubkey,
-  $cla_description='OpenStack Individual Contributor License Agreement',
-  $cla_file='static/cla.html',
-  $cla_id='2',
-  $cla_name='ICLA',
   $sysadmins = []
 ) {
   class { 'openstack_project::gerrit':
@@ -50,20 +46,5 @@ class openstack_project::review_dev (
     mode => 0644,
     source => 'puppet:///modules/openstack_project/gerrit/launchpad_sync_logging.conf',
     require => User['gerrit2']
-  }
-  file { '/home/gerrit2/review_site/bin/set_agreements.sh':
-    ensure => present,
-    owner => root,
-    group => root,
-    mode => 0755,
-    content => template('openstack_project/gerrit_set_agreements.sh.erb'),
-    replace => 'true',
-    require => Class['::gerrit']
-  }
-  exec { 'set_contributor_agreements':
-    path    => ['/bin', '/usr/bin'],
-    command => '/home/gerrit2/review_site/bin/set_agreements.sh',
-    require => [Class['mysql'],
-                File['/home/gerrit2/review_site/bin/set_agreements.sh']]
   }
 }

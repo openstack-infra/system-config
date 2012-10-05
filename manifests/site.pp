@@ -18,6 +18,8 @@ node 'review.openstack.org' {
     mysql_root_password => hiera('gerrit_mysql_root_password'),
     email_private_key   => hiera('gerrit_email_private_key'),
     gerritbot_password  => hiera('gerrit_gerritbot_password'),
+    contactstore_appsec => hiera('gerrit_contactstore_appsec'),
+    contactstore_pubkey => hiera('gerrit_contactstore_pubkey'),
     sysadmins           => hiera('sysadmins'),
   }
 }
