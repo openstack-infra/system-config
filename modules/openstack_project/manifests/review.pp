@@ -51,6 +51,8 @@ class openstack_project::review (
   $lp_sync_consumer_key='',
   $lp_sync_token='',
   $lp_sync_secret='',
+  $contactstore_appsec='',
+  $contactstore_pubkey='',
   $replicate_github=true,
   $sysadmins = []
 ) {
@@ -79,7 +81,12 @@ class openstack_project::review (
     sshd_threads                    => '100',
     httpd_maxwait                   => '5000min',
     war                             =>
-      'http://tarballs.openstack.org/ci/gerrit-2.4.2-11-gb5a28fb.war',
+      'http://tarballs.openstack.org/ci/gerrit-2.4.2-16-g27644a5.war',
+    contactstore                    => true,
+    contactstore_appsec             => $contactstore_appsec,
+    contactstore_pubkey             => $contactstore_pubkey,
+    contactstore_url                =>
+      'http://www.openstack.org/verify/member/',
     script_user                     => 'launchpadsync',
     script_key_file                 => '/home/gerrit2/.ssh/launchpadsync_rsa',
     script_logging_conf             => '/home/gerrit2/.sync_logging.conf',

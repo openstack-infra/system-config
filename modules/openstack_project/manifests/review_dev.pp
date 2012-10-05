@@ -15,10 +15,6 @@ class openstack_project::review_dev (
   $ssh_rsa_pubkey_contents = '',
   $ssh_project_rsa_key_contents = '',
   $ssh_project_rsa_pubkey_contents = '',
-  $cla_description = 'OpenStack Individual Contributor License Agreement',
-  $cla_file = 'static/cla.html',
-  $cla_id = '2',
-  $cla_name = 'ICLA',
   $lp_sync_key = '', # If left empty puppet will not create file.
   $lp_sync_pubkey = '', # If left empty puppet will not create file.
   $lp_sync_consumer_key = '',
@@ -81,15 +77,6 @@ class openstack_project::review_dev (
       'puppet:///modules/openstack_project/gerrit/launchpad_sync_logging.conf',
     require => User['gerrit2'],
   }
-  file { '/home/gerrit2/review_site/bin/set_agreements.sh':
-    ensure  => present,
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0755',
-    content => template('openstack_project/gerrit_set_agreements.sh.erb'),
-    replace => true,
-    require => Class['::gerrit'],
-  }
   file { '/home/gerrit2/.ssh':
     ensure  => directory,
     owner   => 'gerrit2',
@@ -134,14 +121,5 @@ class openstack_project::review_dev (
     content => template('openstack_project/gerrit_lp_creds.erb'),
     replace => true,
     require => User['gerrit2'],
-  }
-
-  exec { 'set_contributor_agreements':
-    path    => ['/bin', '/usr/bin'],
-    command => '/home/gerrit2/review_site/bin/set_agreements.sh',
-    require => [
-      Class['mysql'],
-      File['/home/gerrit2/review_site/bin/set_agreements.sh'],
-    ],
   }
 }
