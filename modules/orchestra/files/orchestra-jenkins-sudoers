@@ -1,1 +1,0 @@
-jenkins ALL = NOPASSWD: /usr/bin/cobbler, /sbin/restart rsyslog, /bin/rm -f /var/log/orchestra/rsyslog/*
