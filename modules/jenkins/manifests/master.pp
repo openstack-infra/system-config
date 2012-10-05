@@ -58,7 +58,7 @@ class jenkins::master(
   if $ssl_key_file_contents != '' {
     file { $ssl_key_file:
       owner   => 'root',
-      group   => 'root',
+      group   => 'ssl-cert',
       mode    => '0640',
       content => $ssl_key_file_contents,
       before  => Apache::Vhost[$vhost_name],
