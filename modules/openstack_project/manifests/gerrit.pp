@@ -45,6 +45,10 @@ class openstack_project::gerrit (
   $trivial_rebase_role_id,
   $email_private_key,
   $replicate_github=true,
+  $cla_description='OpenStack Individual Contributor License Agreement',
+  $cla_file='static/cla.html',
+  $cla_id='2',
+  $cla_name='ICLA',
   $testmode=false,
   $sysadmins=[]
 ) {
@@ -206,5 +210,20 @@ class openstack_project::gerrit (
       'puppet:///modules/openstack_project/gerrit/scripts/trivial_rebase.py',
     replace => 'true',
     require => Class['::gerrit']
+  }
+  file { '/home/gerrit2/review_site/bin/set_agreements.sh':
+    ensure  => present,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0755',
+    content => template('openstack_project/gerrit_set_agreements.sh.erb'),
+    replace => true,
+    require => Class['::gerrit']
+  }
+  exec { 'set_contributor_agreements':
+    path    => ['/bin', '/usr/bin'],
+    command => '/home/gerrit2/review_site/bin/set_agreements.sh',
+    require => [Class['mysql'],
+                File['/home/gerrit2/review_site/bin/set_agreements.sh']]
   }
 }
