@@ -30,6 +30,8 @@ node 'review.openstack.org' {
     lp_sync_consumer_key    => hiera('gerrit_lp_consumer_key'),
     lp_sync_token           => hiera('gerrit_lp_access_token'),
     lp_sync_secret          => hiera('gerrit_lp_access_secret'),
+    contactstore_appsec     => hiera('gerrit_contactstore_appsec'),
+    contactstore_pubkey     => hiera('gerrit_contactstore_pubkey'),
     sysadmins               => hiera('sysadmins'),
   }
 }
