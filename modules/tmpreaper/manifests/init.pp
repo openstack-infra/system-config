@@ -11,7 +11,7 @@ class tmpreaper() {
     ensure => 'present',
     owner  => 'root',
     group  => 'root',
-    mode   => 755,
+    mode   => '0755',
     source => 'puppet:///modules/tmpreaper/tmpreaper.sh',
   }
 
@@ -19,7 +19,7 @@ class tmpreaper() {
     ensure => 'present',
     owner  => 'root',
     group  => 'root',
-    mode   => 644,
+    mode   => '0644',
     source => 'puppet:///modules/tmpreaper/tmpreaper.conf',
   }
 
