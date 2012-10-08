@@ -2,15 +2,15 @@
 
 class logrotate {
 
-  package { "logrotate":
+  package { 'logrotate':
     ensure => present,
   }
 
-  file { "/etc/logrotate.d":
-    ensure => directory,
-    owner => root,
-    group => root,
-    mode => 755,
-    require => Package["logrotate"],
+  file { '/etc/logrotate.d':
+    ensure  => directory,
+    owner   => root,
+    group   => root,
+    mode    => '0755',
+    require => Package['logrotate'],
   }
 }
