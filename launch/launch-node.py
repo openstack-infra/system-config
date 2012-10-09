@@ -1,0 +1,267 @@
+#!/usr/bin/env python
+
+# Launch a new OpenStack project infrastructure node.
+
+# Copyright (C) 2011-2012 OpenStack LLC.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#    http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
+# implied.
+#
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import sys
+import os
+import commands
+import time
+import subprocess
+import traceback
+import socket
+import argparse
+import utils
+import tempfile
+
+NOVA_USERNAME=os.environ['OS_USERNAME']
+NOVA_PASSWORD=os.environ['OS_PASSWORD']
+NOVA_URL=os.environ['OS_AUTH_URL']
+NOVA_PROJECT_ID=os.environ['OS_TENANT_NAME']
+NOVA_REGION_NAME=os.environ['OS_REGION_NAME']
+
+def run_local(cmd, status=False, cwd='.', env={}):
+    print "Running:", cmd
+    newenv = os.environ
+    newenv.update(env)
+    p = subprocess.Popen(cmd, stdout=subprocess.PIPE, cwd=cwd,
+                         stderr=subprocess.STDOUT, env=newenv)
+    (out, nothing) = p.communicate()
+    if status:
+        return (p.returncode, out.strip())
+    return out.strip()
+
+def get_client():
+    args = [NOVA_USERNAME, NOVA_PASSWORD, NOVA_PROJECT_ID, NOVA_URL]
+    kwargs = {}
+    kwargs['region_name'] = NOVA_REGION_NAME
+    kwargs['service_type'] = 'compute'
+    from novaclient.v1_1.client import Client
+    client = Client(*args, **kwargs)
+    return client
+
+def bootstrap_server(server, admin_pass, key, cert):
+    client = server.manager.api
+    ip = utils.get_public_ip(server)
+    if not ip:
+        raise Exception("Unable to find public ip of server")
+
+    ssh_kwargs = {}
+    if key:
+        ssh_kwargs['pkey'] = key
+    else:
+        ssh_kwargs['password'] = admin_pass
+
+    for username in ['root', 'ubuntu']:
+        ssh_client = utils.ssh_connect(ip, username, ssh_kwargs, timeout=600)
+        if ssh_client: break
+
+    if not ssh_client:
+        raise Exception("Unable to log in via SSH")
+
+    if username != 'root':
+        ssh_client.ssh("sudo cp ~/.ssh/authorized_keys"
+                       " ~root/.ssh/authorized_keys")
+        ssh_client.ssh("sudo chmod 644 ~root/.ssh/authorized_keys")
+        ssh_client.ssh("sudo chown root.root ~root/.ssh/authorized_keys")
+
+    ssh_client = utils.ssh_connect(ip, 'root', ssh_kwargs, timeout=600)
+
+    ssh_client.ssh("/usr/bin/wget http://apt.puppetlabs.com/"
+                   "puppetlabs-release-`lsb_release -c -s`.deb")
+    ssh_client.ssh("dpkg -i puppetlabs-release-`lsb_release -c -s`.deb")
+
+    tmp = tempfile.NamedTemporaryFile(delete=False)
+    try:
+        tmp.write("""Package: puppet puppet-common
+Pin: version 2.7*
+Pin-Priority: 501
+""")
+        tmp.close()
+        ssh_client.scp(tmp.name, "/etc/apt/preferences.d/00-puppet.pref")
+    finally:
+        os.unlink(tmp.name)
+
+    ssh_client.ssh("apt-get update")
+    ssh_client.ssh("DEBIAN_FRONTEND=noninteractive apt-get --option"
+                   " 'Dpkg::Options::=--force-confold'"
+                   " --assume-yes upgrade")
+    ssh_client.ssh("apt-get install -y --force-yes puppet")
+
+    tmp = tempfile.NamedTemporaryFile(delete=False)
+    try:
+        tmp.write("""# Defaults for puppet - sourced by /etc/init.d/puppet
+
+# Start puppet on boot?
+START=yes
+
+# Startup options
+DAEMON_OPTS=""
+""")
+        tmp.close()
+        ssh_client.scp(tmp.name, "/etc/default/puppet")
+    finally:
+        os.unlink(tmp.name)
+
+    certname = cert[:0-len('.pem')]
+    tmp = tempfile.NamedTemporaryFile(delete=False)
+    try:
+        tmp.write("""[main]
+logdir=/var/log/puppet
+vardir=/var/lib/puppet
+ssldir=/var/lib/puppet/ssl
+rundir=/var/run/puppet
+factpath=$vardir/lib/facter
+templatedir=$confdir/templates
+server=ci-puppetmaster.openstack.org
+certname={certname}
+pluginsync=true
+
+[master]
+# These are needed when the puppetmaster is run by passenger
+# and can safely be removed if webrick is used.
+ssl_client_header = SSL_CLIENT_S_DN
+ssl_client_verify_header = SSL_CLIENT_VERIFY
+manifestdir=/opt/openstack-ci-puppet/$environment/manifests
+modulepath=/opt/openstack-ci-puppet/$environment/modules:/etc/puppet/modules
+manifest=$manifestdir/site.pp
+reports=store, http
+reporturl=http://puppet-dashboard.openstack.org:3000/reports/upload
+
+[agent]
+report=true
+splay=true
+runinterval=600
+""".format(certname=certname))
+        tmp.close()
+        ssh_client.scp(tmp.name, "/etc/puppet/puppet.conf")
+    finally:
+        os.unlink(tmp.name)
+
+    ssh_client.ssh("mkdir -p /var/lib/puppet/ssl/certs")
+    ssh_client.ssh("mkdir -p /var/lib/puppet/ssl/private_keys")
+    ssh_client.ssh("mkdir -p /var/lib/puppet/ssl/public_keys")
+    ssh_client.ssh("chown -R puppet:root /var/lib/puppet/ssl")
+    ssh_client.ssh("chmod 0771 /var/lib/puppet/ssl")
+    ssh_client.ssh("chmod 0755 /var/lib/puppet/ssl/certs")
+    ssh_client.ssh("chmod 0750 /var/lib/puppet/ssl/private_keys")
+    ssh_client.ssh("chmod 0755 /var/lib/puppet/ssl/public_keys")
+
+    for ssldir in ['/var/lib/puppet/ssl/certs/',
+                   '/var/lib/puppet/ssl/private_keys/',
+                   '/var/lib/puppet/ssl/public_keys/']:
+        ssh_client.scp(os.path.join(ssldir, cert),
+                       os.path.join(ssldir, cert))
+
+    ssh_client.scp("/var/lib/puppet/ssl/crl.pem",
+                   "/var/lib/puppet/ssl/crl.pem")
+    ssh_client.scp("/var/lib/puppet/ssl/certs/ca.pem",
+                   "/var/lib/puppet/ssl/certs/ca.pem")
+
+    ssh_client.ssh("facter")
+    ret, out = ssh_client.ssh("puppet agent --test"
+                              " --server=ci-puppetmaster.openstack.org",
+                              error_ok=True)
+    if ret > 2:
+        raise Exception("Puppet encountered an error")
+
+def build_server(client, name, image, flavor, cert):
+    key = None
+    server = None
+
+    create_kwargs = dict(image=image, flavor=flavor, name=name)
+
+    key_name = 'launch-%i' % (time.time())
+    if 'os-keypairs' in utils.get_extensions(client):
+        print "Adding keypair"
+        key, kp = utils.add_keypair(client, key_name)
+        create_kwargs['key_name'] = key_name
+    try:
+        server = client.servers.create(**create_kwargs)
+    except Exception, real_error:
+        try:
+            kp.delete()
+        except Exception, delete_error:
+            print "Exception encountered deleting keypair:"
+            traceback.print_exc()
+        raise
+
+    try:
+        admin_pass = server.adminPass
+        server = utils.wait_for_resource(server)
+        bootstrap_server(server, admin_pass, key, cert)
+        if key:
+            kp.delete()
+    except Exception, real_error:
+        try:
+            utils.delete_server(server)
+        except Exception, delete_error:
+            print "Exception encountered deleting server:"
+            traceback.print_exc()
+        # Raise the important exception that started this
+        raise
+
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("name", help="server name")
+    parser.add_argument("--ram", dest="ram", default=1024, type=int,
+                        help="minimum amount of ram")
+    parser.add_argument("--image", dest="image",
+                        default="Ubuntu 12.04 LTS (Precise Pangolin)",
+                        help="image name")
+    parser.add_argument("--cert", dest="cert", required=True,
+                        help="name of signed puppet certificate file (e.g., "
+                        "hostname.example.com.pem)")
+    options = parser.parse_args()
+
+    client = get_client()
+
+    if not os.path.exists(os.path.join("/var/lib/puppet/ssl/private_keys",
+                                       options.cert)):
+        raise Exception("Please specify the name of a signed puppet cert.")
+
+    flavors = [f for f in client.flavors.list() if f.ram >= options.ram]
+    flavors.sort(lambda a, b: cmp(a.ram, b.ram))
+    flavor = flavors[0]
+    print "Found flavor", flavor
+
+    images = [i for i in client.images.list()
+              if (options.image.lower() in i.name.lower() and
+                not i.name.endswith('(Kernel)') and
+                not i.name.endswith('(Ramdisk)'))]
+
+    if len(images) > 1:
+        print "Ambiguous image name; matches:"
+        for i in images:
+            print i.name
+        sys.exit(1)
+
+    if len(images) == 0:
+        print "Unable to find matching image; image list:"
+        for i in client.images.list():
+            print i.name
+        sys.exit(1)
+
+    image = images[0]
+    print "Found image", image
+
+    build_server(client, options.name, image, flavor, options.cert)
+
+if __name__ == '__main__':
+    main()
