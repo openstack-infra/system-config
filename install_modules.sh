@@ -59,7 +59,7 @@ fi
 
 for MOD in ${!MODULES[*]} ; do
   # If the module at the current version does not exist upgrade or install it.
-  if ! echo $MODULE_LIST | grep "$MOD.*${MODULES[$MOD]}" >/dev/null 2>&1
+  if ! echo $MODULE_LIST | grep "$MOD ([^v]*v${MODULES[$MOD]}" >/dev/null 2>&1
   then
     # Attempt module upgrade. If that fails try installing the module.
     if ! puppet module upgrade $MOD --version ${MODULES[$MOD]} >/dev/null 2>&1
