@@ -2,6 +2,7 @@ class openstack_project::base(
   $certname = $::fqdn,
   $install_users = true
 ) {
+  include apt
   include openstack_project::users
   include sudoers
 
@@ -14,7 +15,6 @@ class openstack_project::base(
   }
 
   if ($::lsbdistcodename == 'oneiric') {
-    include apt
     apt::ppa { 'ppa:git-core/ppa': }
     package { 'git':
       ensure  => latest,
@@ -29,6 +29,7 @@ class openstack_project::base(
   $packages = [
     'puppet',
     'python-setuptools',
+    'wget',
   ]
 
   package { $packages:
@@ -57,15 +58,21 @@ class openstack_project::base(
     )
   }
 
-  # Download and set up puppet apt repo
-  exec { "download:puppetlabs-release-$::{lsbdistcodename}.deb":
-    command => "/usr/bin/wget http://apt.puppetlabs.com/puppetlabs-release-$::{lsbdistcodename}.deb -O /root/puppetlabs-release-$::{lsbdistcodename}.deb",
-    creates => "/root/puppetlabs-release-$::{lsbdistcodename}.deb",
+  # Use upstream puppet and pin to version 2.7.*
+  apt::source { 'puppetlabs':
+    location   => 'http://apt.puppetlabs.com',
+    repos      => 'main',
+    key        => '4BD6EC30',
+    key_server => 'pgp.mit.edu',
   }
-  exec { "dpkg:puppetlabs-release-$::{lsbdistcodename}.deb":
-    command => "/usr/bin/dpkg -i /root/puppetlabs-release-$::{lsbdistcodename}.deb",
-    onlyif  => '/usr/bin/test ! -f /etc/apt/sources.list.d/puppetlabs.list',
-    require => Exec["download:puppetlabs-release-$::{lsbdistcodename}.deb"],
+
+  file { '/etc/apt/preferences.d/00-puppet.pref':
+    ensure  => present,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0444',
+    source  => 'puppet:///modules/openstack_project/00-puppet.pref',
+    replace => true,
   }
 
   file { '/etc/puppet/puppet.conf':

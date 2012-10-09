@@ -41,7 +41,6 @@ class jenkins::slave($ssh_key, $sudo = false, $bare = false, $user = true) {
                  "rubygems",
                  "sqlite3",
                  "unzip",
-                 "wget",
                  "xsltproc", # for building openstack docs
                  "xvfb", # for selenium tests
                  "pyflakes"]
