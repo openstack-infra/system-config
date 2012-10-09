@@ -55,6 +55,19 @@ class jenkins::slave($ssh_key, $sudo = false, $bare = false, $user = true) {
       ensure => present,
     }
 
+    if ($bare == false) {
+      $gem_packages = [
+        'puppet-lint',
+        'puppetlabs_spec_helper',
+      ]
+
+      package { $gem_packages:
+        ensure   => latest,
+        provider => gem,
+        require  => Package['rubygems'],
+      }
+    }
+
     # Packages that need to be installed from pip
     $pip_packages = [
                  "setuptools-git",
@@ -64,17 +77,6 @@ class jenkins::slave($ssh_key, $sudo = false, $bare = false, $user = true) {
       ensure => latest,  # we want the latest from these
       provider => pip,
       require => Class[pip]
-    }
-
-    $gem_packages = [
-      'puppet-lint',
-      'puppetlabs_spec_helper',
-    ]
-
-    package { $gem_packages:
-      ensure   => latest,
-      provider => gem,
-      require  => Package['rubygems'],
     }
 
     package { 'git-review':
