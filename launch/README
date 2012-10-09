@@ -1,0 +1,21 @@
+To launch a node in the OpenStack CI account (production servers)::
+
+  . openstackci-rs-nova.sh
+
+To launch a node in the OpenStack Jenkins account (slave nodes)::
+
+  . openstackjenkins-rs-nova.sh
+
+Then::
+
+  puppet cert generate servername.openstack.org
+  ./launch-node.py servername.openstack.org --cert servername.openstack.org.pem
+
+If you are launching a replacement server, you may skip the generate
+step and specify the name of an existing puppet cert (as long as the
+private key is on this host).
+
+The server name and cert names may be different.
+
+Manually add the hostname to DNS (the launch script does not do so
+automatically).
