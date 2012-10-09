@@ -57,17 +57,6 @@ class openstack_project::base(
     )
   }
 
-  # Download and set up puppet apt repo
-  exec { "download:puppetlabs-release-$::{lsbdistcodename}.deb":
-    command => "/usr/bin/wget http://apt.puppetlabs.com/puppetlabs-release-$::{lsbdistcodename}.deb -O /root/puppetlabs-release-$::{lsbdistcodename}.deb",
-    creates => "/root/puppetlabs-release-$::{lsbdistcodename}.deb",
-  }
-  exec { "dpkg:puppetlabs-release-$::{lsbdistcodename}.deb":
-    command => "/usr/bin/dpkg -i /root/puppetlabs-release-$::{lsbdistcodename}.deb",
-    onlyif  => '/usr/bin/test ! -f /etc/apt/sources.list.d/puppetlabs.list',
-    require => Exec["download:puppetlabs-release-$::{lsbdistcodename}.deb"],
-  }
-
   file { '/etc/puppet/puppet.conf':
     ensure  => 'present',
     owner   => 'root',
