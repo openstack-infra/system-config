@@ -30,7 +30,7 @@ fi
 # Array of modules to be installed key:value is module:version.
 declare -A MODULES
 MODULES["kickstandproject-ntp"]="0.0.3"
-MODULES["openstackci-dashboard"]="0.0.5"
+MODULES["openstackci-dashboard"]="0.0.6"
 
 # freenode #puppet 2012-09-25:
 # 18:25 < jeblair> i would like to use some code that someone wrote,
