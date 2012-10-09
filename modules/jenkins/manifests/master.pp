@@ -77,7 +77,6 @@ class jenkins::master(
 
   $packages = [
     'python-babel',
-    'wget',
   ]
 
   package { $packages:
