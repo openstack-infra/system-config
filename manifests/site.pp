@@ -41,6 +41,22 @@ node 'gerrit-dev.openstack.org', 'review-dev.openstack.org' {
   }
 }
 
+node 'review-dev2.openstack.org' {
+  class { 'openstack_project::review_dev2':
+    github_oauth_token  => hiera('gerrit_dev_github_token'),
+    mysql_password      => hiera('gerrit_dev_mysql_password'),
+    mysql_root_password => hiera('gerrit_dev_mysql_root_password'),
+    email_private_key   => hiera('gerrit_dev_email_private_key'),
+    contactstore_appsec => hiera('gerrit_dev_contactstore_appsec'),
+    contactstore_pubkey => hiera('gerrit_dev_contactstore_pubkey'),
+    lp_sync_key         => hiera('gerrit_dev_lp_sync_key'),
+    lp_sync_pubkey      => hiera('gerrit_dev_lp_sync_pubkey'),
+    lp_sync_token       => hiera('gerrit_dev_lp_access_token'),
+    lp_sync_secret      => hiera('gerrit_dev_lp_access_secret'),
+    sysadmins           => hiera('sysadmins'),
+  }
+}
+
 node 'jenkins.openstack.org' {
   class { 'openstack_project::jenkins':
     jenkins_jobs_password   => hiera('jenkins_jobs_password'),
