@@ -2,7 +2,7 @@ class openstack_project::puppetmaster (
   $sysadmins = []
 ) {
   class { 'openstack_project::server':
-    iptables_public_tcp_ports => [8140],
+    iptables_public_tcp_ports => [4505, 4506, 8140],
     sysadmins                 => $sysadmins
   }
 
@@ -30,4 +30,6 @@ class openstack_project::puppetmaster (
     replace => true,
     require => Class['openstack_project::server']
   }
+
+  class { 'salt::master': }
 }
