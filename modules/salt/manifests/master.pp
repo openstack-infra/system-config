@@ -18,6 +18,27 @@ class salt::master {
     require => Apt::Ppa['ppa:saltstack/salt'],
   }
 
+  group { 'salt':
+    ensure => present,
+    system => true,
+  }
+
+  user { 'salt':
+    ensure => present,
+    gid    => 'salt',
+    home   => '/home/salt',
+    shell  => '/bin/bash',
+    system => true,
+  }
+
+  file { '/home/salt':
+    ensure  => directory,
+    owner   => 'salt',
+    group   => 'salt',
+    mode    => '0755',
+    require => User['salt'],
+  }
+
   file { '/etc/salt/master':
     ensure => present,
     owner   => 'root',
@@ -31,7 +52,10 @@ class salt::master {
   service { 'salt-master':
     ensure    => running,
     enable    => true,
-    require   => File['/etc/salt/master'],
+    require   => [
+      User['salt'],
+      File['/etc/salt/master'],
+    ],
     subscribe => [
       Package['salt-master'],
       File['/etc/salt/master'],
