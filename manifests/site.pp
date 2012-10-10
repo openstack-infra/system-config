@@ -33,6 +33,10 @@ node 'gerrit-dev.openstack.org', 'review-dev.openstack.org' {
     email_private_key   => hiera('gerrit_dev_email_private_key'),
     contactstore_appsec => hiera('gerrit_dev_contactstore_appsec'),
     contactstore_pubkey => hiera('gerrit_dev_contactstore_pubkey'),
+    lp_sync_key         => hiera('gerrit_dev_lp_sync_key'),
+    lp_sync_pubkey      => hiera('gerrit_dev_lp_sync_pubkey'),
+    lp_sync_token       => hiera('gerrit_dev_lp_access_token'),
+    lp_sync_secret      => hiera('gerrit_dev_lp_access_secret'),
     sysadmins           => hiera('sysadmins'),
   }
 }

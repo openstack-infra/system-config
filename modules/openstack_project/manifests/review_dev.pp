@@ -9,6 +9,10 @@ class openstack_project::review_dev (
   $cla_file='static/cla.html',
   $cla_id='2',
   $cla_name='ICLA',
+  $lp_sync_key='', # If left empty puppet will not create file.
+  $lp_sync_pubkey='', # If left empty puppet will not create file.
+  $lp_sync_token='',
+  $lp_sync_secret='',
   $sysadmins = []
 ) {
   class { 'openstack_project::gerrit':
@@ -60,6 +64,52 @@ class openstack_project::review_dev (
     replace => 'true',
     require => Class['::gerrit']
   }
+  file { '/home/gerrit2/.ssh':
+    ensure  => directory,
+    owner   => 'gerrit2',
+    group   => 'gerrit2',
+    mode    => '0700',
+    require => User['gerrit2'],
+  }
+  if $lp_sync_key != '' {
+    file { '/home/gerrit2/.ssh/launchpadsync_rsa':
+      ensure  => present,
+      owner   => 'gerrit2',
+      group   => 'gerrit2',
+      mode    => '0600',
+      content => $lp_sync_key,
+      replace => true,
+      require => User['gerrit2'],
+    }
+  }
+  if $lp_sync_pubkey != '' {
+    file { '/home/gerrit2/.ssh/launchpadsync_rsa.pub':
+      ensure  => present,
+      owner   => 'gerrit2',
+      group   => 'gerrit2',
+      mode    => '0644',
+      content => $lp_sync_pubkey,
+      replace => true,
+      require => User['gerrit2'],
+    }
+  }
+  file { '/home/gerrit2/.launchpadlib':
+    ensure  => directory,
+    owner   => 'gerrit2',
+    group   => 'gerrit2',
+    mode    => '0775',
+    require => User['gerrit2'],
+  }
+  file { '/home/gerrit2/.launchpadlib/creds':
+    ensure  => present,
+    owner   => 'gerrit2',
+    group   => 'gerrit2',
+    mode    => '0600',
+    content => template('openstack_project/gerrit_dev_lp_creds.erb'),
+    replace => true,
+    require => User['gerrit2'],
+  }
+
   exec { 'set_contributor_agreements':
     path    => ['/bin', '/usr/bin'],
     command => '/home/gerrit2/review_site/bin/set_agreements.sh',
