@@ -13,6 +13,7 @@ class openstack_project::review_dev (
   $lp_sync_pubkey='', # If left empty puppet will not create file.
   $lp_sync_token='',
   $lp_sync_secret='',
+  $replicate_github=true,
   $sysadmins = []
 ) {
   class { 'openstack_project::gerrit':
@@ -37,6 +38,7 @@ class openstack_project::review_dev (
     mysql_root_password => $mysql_root_password,
     trivial_rebase_role_id => 'trivial-rebase@review-dev.openstack.org',
     email_private_key => $email_private_key,
+    replicate_github => $replicate_github,
     sysadmins => $sysadmins
   }
 

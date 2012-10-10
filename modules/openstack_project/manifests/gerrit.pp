@@ -40,6 +40,7 @@ class openstack_project::gerrit (
   $mysql_root_password,
   $trivial_rebase_role_id,
   $email_private_key,
+  $replicate_github=true,
   $testmode=false,
   $sysadmins=[]
 ) {
@@ -95,7 +96,7 @@ class openstack_project::gerrit (
     mysql_root_password      => $mysql_root_password,
     email_private_key        => $email_private_key,
     projects_file            => $projects_file,
-    replicate_github         => true,
+    replicate_github         => $replicate_github,
     testmode                 => $testmode,
     require                  => Class[openstack_project::server],
   }
