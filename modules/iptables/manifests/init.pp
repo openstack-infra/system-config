@@ -23,28 +23,37 @@ class iptables($rules='', $public_tcp_ports=[], $public_udp_ports=[]) {
   }
 
   file { '/etc/iptables':
-      ensure => directory,
+    ensure => directory,
   }
 
   file { '/etc/iptables/rules':
-      owner   => 'root',
-      group   => 'root',
-      mode    => '0640',
-      content => template('iptables/rules.erb'),
-      require => [Package['iptables-persistent'], File['/etc/iptables']],
-
-      # When this file is updated, make sure the rules get reloaded.
-      notify  => Service['iptables-persistent'],
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0640',
+    content => template('iptables/rules.erb'),
+    require => [Package['iptables-persistent'], File['/etc/iptables']],
+    # When this file is updated, make sure the rules get reloaded.
+    notify  => Service['iptables-persistent'],
   }
 
   file { '/etc/iptables/rules.v4':
-      ensure  => link,
-      owner   => 'root',
-      group   => 'root',
-      mode    => '0640',
-      target  => '/etc/iptables/rules',
-      require => File['/etc/iptables/rules'],
-      notify  => Service['iptables-persistent'],
+    ensure  => link,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0640',
+    target  => '/etc/iptables/rules',
+    require => File['/etc/iptables/rules'],
+    notify  => Service['iptables-persistent'],
   }
 
+  file { '/etc/iptables/rules.v6':
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0640',
+    content => template('iptables/rules.v6.erb'),
+    require => [Package['iptables-persistent'], File['/etc/iptables']],
+    # When this file is updated, make sure the rules get reloaded.
+    notify  => Service['iptables-persistent'],
+    replace => true,
+  }
 }
