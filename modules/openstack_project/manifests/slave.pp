@@ -13,4 +13,7 @@ class openstack_project::slave (
   class { 'jenkins::slave':
     ssh_key => $openstack_project::jenkins_ssh_key
   }
+  class { 'salt':
+    salt_master => 'ci-puppetmaster.openstack.org',
+  }
 }
