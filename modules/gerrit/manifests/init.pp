@@ -74,6 +74,10 @@ class gerrit($vhost_name=$fqdn,
   $ssl_cert_file_contents='', # If left empty puppet will not create file.
   $ssl_key_file_contents='', # If left empty puppet will not create file.
   $ssl_chain_file_contents='', # If left empty puppet will not create file.
+  $ssh_dsa_key_contents='', # If left empty puppet will not create file.
+  $ssh_dsa_pubkey_contents='', # If left empty puppet will not create file.
+  $ssh_rsa_key_contents='', # If left empty puppet will not create file.
+  $ssh_rsa_pubkey_contents='', # If left empty puppet will not create file.
   $openidssourl='https://login.launchpad.net/+openid',
   $email='',
   $database_poollimit='',
@@ -320,6 +324,50 @@ class gerrit($vhost_name=$fqdn,
       mode    => '0640',
       content => $ssl_chain_file_contents,
       before  => Apache::Vhost[$vhost_name],
+    }
+  }
+
+  if $ssh_dsa_key_contents != '' {
+    file { '/home/gerrit2/review_site/etc/ssh_host_dsa_key':
+      owner   => 'gerrit2',
+      group   => 'gerrit2',
+      mode    => '0600',
+      content => $ssh_dsa_key_contents,
+      replace => true,
+      require => File['/home/gerrit2/review_site/etc']
+    }
+  }
+
+  if $ssh_dsa_pubkey_contents != '' {
+    file { '/home/gerrit2/review_site/etc/ssh_host_dsa_key.pub':
+      owner   => 'gerrit2',
+      group   => 'gerrit2',
+      mode    => '0644',
+      content => $ssh_dsa_pubkey_contents,
+      replace => true,
+      require => File['/home/gerrit2/review_site/etc']
+    }
+  }
+
+  if $ssh_rsa_key_contents != '' {
+    file { '/home/gerrit2/review_site/etc/ssh_host_rsa_key':
+      owner   => 'gerrit2',
+      group   => 'gerrit2',
+      mode    => '0600',
+      content => $ssh_rsa_key_contents,
+      replace => true,
+      require => File['/home/gerrit2/review_site/etc']
+    }
+  }
+
+  if $ssh_rsa_pubkey_contents != '' {
+    file { '/home/gerrit2/review_site/etc/ssh_host_rsa_key.pub':
+      owner   => 'gerrit2',
+      group   => 'gerrit2',
+      mode    => '0644',
+      content => $ssh_rsa_pubkey_contents,
+      replace => true,
+      require => File['/home/gerrit2/review_site/etc']
     }
   }
 
