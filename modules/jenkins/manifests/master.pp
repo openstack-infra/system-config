@@ -113,10 +113,26 @@ class jenkins::master(
     command => "apt-get update",
   }
 
-  file { "/var/lib/jenkins/plugins/simple-theme-plugin":
+  file { '/var/lib/jenkins':
     ensure => directory,
     owner => 'jenkins',
-    group => 'nogroup'
+    group => 'adm',
+    require => Package['jenkins'],
+  }
+
+  file { '/var/lib/jenkins/plugins':
+    ensure  => directory,
+    owner   => 'jenkins',
+    group   => 'nogroup',
+    mode    => '0750',
+    require => File['/var/lib/jenkins'],
+  }
+
+  file { '/var/lib/jenkins/plugins/simple-theme-plugin':
+    ensure  => directory,
+    owner   => 'jenkins',
+    group   => 'nogroup',
+    require => File['/var/lib/jenkins/plugins'],
   }
 
   file { "/var/lib/jenkins/plugins/simple-theme-plugin/openstack.css":
