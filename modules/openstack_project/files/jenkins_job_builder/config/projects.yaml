@@ -2,9 +2,11 @@
     name: ceilometer
     github-org: stackforge
     node: oneiric
+    tarball-publisher-site: nova.openstack.org
 
     jobs:
       - python-jobs
+      - '{name}-sdist-tarball'
 
 
 - project:
