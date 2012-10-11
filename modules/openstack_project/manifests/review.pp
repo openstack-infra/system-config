@@ -37,6 +37,12 @@ class openstack_project::review (
   $ssh_dsa_pubkey_contents='',
   $ssh_rsa_key_contents='',
   $ssh_rsa_pubkey_contents='',
+  $lp_sync_key='', # If left empty puppet will not create file.
+  $lp_sync_pubkey='', # If left empty puppet will not create file.
+  $lp_sync_consumer_key='',
+  $lp_sync_token='',
+  $lp_sync_secret='',
+  $replicate_github=true,
   $sysadmins = []
 ) {
   class { 'openstack_project::gerrit':
@@ -69,6 +75,7 @@ class openstack_project::review (
     mysql_root_password      => $mysql_root_password,
     trivial_rebase_role_id   => 'trivial-rebase@review.openstack.org',
     email_private_key        => $email_private_key,
+    replicate_github         => $replicate_github,
     sysadmins                => $sysadmins
   }
   class { 'gerritbot':
@@ -94,5 +101,50 @@ class openstack_project::review (
     mode => 0644,
     source => 'puppet:///modules/openstack_project/gerrit/launchpad_sync_logging.conf',
     require => User['gerrit2']
+  }
+  file { '/home/gerrit2/.ssh':
+    ensure  => directory,
+    owner   => 'gerrit2',
+    group   => 'gerrit2',
+    mode    => '0700',
+    require => User['gerrit2'],
+  }
+  if $lp_sync_key != '' {
+    file { '/home/gerrit2/.ssh/launchpadsync_rsa':
+      ensure  => present,
+      owner   => 'gerrit2',
+      group   => 'gerrit2',
+      mode    => '0600',
+      content => $lp_sync_key,
+      replace => true,
+      require => User['gerrit2'],
+    }
+  }
+  if $lp_sync_pubkey != '' {
+    file { '/home/gerrit2/.ssh/launchpadsync_rsa.pub':
+      ensure  => present,
+      owner   => 'gerrit2',
+      group   => 'gerrit2',
+      mode    => '0644',
+      content => $lp_sync_pubkey,
+      replace => true,
+      require => User['gerrit2'],
+    }
+  }
+  file { '/home/gerrit2/.launchpadlib':
+    ensure  => directory,
+    owner   => 'gerrit2',
+    group   => 'gerrit2',
+    mode    => '0775',
+    require => User['gerrit2'],
+  }
+  file { '/home/gerrit2/.launchpadlib/creds':
+    ensure  => present,
+    owner   => 'gerrit2',
+    group   => 'gerrit2',
+    mode    => '0600',
+    content => template('openstack_project/gerrit_lp_creds.erb'),
+    replace => true,
+    require => User['gerrit2'],
   }
 }
