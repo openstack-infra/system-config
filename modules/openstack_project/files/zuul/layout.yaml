@@ -617,6 +617,8 @@ projects:
         - gate-ceilometer-pep8
         - gate-ceilometer-python26
         - gate-ceilometer-python27
+    post:
+      - ceilometer-sdist-tarball
 
   - name: stackforge/MRaaS
     check:
