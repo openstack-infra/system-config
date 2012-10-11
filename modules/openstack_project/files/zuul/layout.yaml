@@ -96,8 +96,9 @@ projects:
         - gate-zuul-python26
         - gate-zuul-python27
     post:
-      - zuul-docs
+      - zuul-sdist-tarball
       - zuul-coverage
+      - zuul-docs
     publish:
       - zuul-docs
 
