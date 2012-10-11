@@ -15,6 +15,7 @@ class openstack_project::review_dev (
   $cla_name='ICLA',
   $lp_sync_key='', # If left empty puppet will not create file.
   $lp_sync_pubkey='', # If left empty puppet will not create file.
+  $lp_sync_consumer_key='',
   $lp_sync_token='',
   $lp_sync_secret='',
   $replicate_github=true,
@@ -115,7 +116,7 @@ class openstack_project::review_dev (
     owner   => 'gerrit2',
     group   => 'gerrit2',
     mode    => '0600',
-    content => template('openstack_project/gerrit_dev_lp_creds.erb'),
+    content => template('openstack_project/gerrit_lp_creds.erb'),
     replace => true,
     require => User['gerrit2'],
   }
