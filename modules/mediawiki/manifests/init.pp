@@ -1,5 +1,5 @@
 class mediawiki($role, $site_hostname, $mediawiki_location='') {
-  if ($role == "app" or $role == "all") {
+  if ($role == 'app' or $role == 'all') {
     include apache
     require apache::dev
     include mediawiki::php,
@@ -10,11 +10,11 @@ class mediawiki($role, $site_hostname, $mediawiki_location='') {
     }
 
     apache::vhost { $site_hostname:
-      port => 443,
-      docroot => 'MEANINGLESS ARGUMENT',
+      port     => 443,
+      docroot  => 'MEANINGLESS ARGUMENT',
       priority => '50',
       template => 'mediawiki/apache/mediawiki.erb',
-      ssl => true,
+      ssl      => true,
     }
     a2mod { 'rewrite':
       ensure => present
@@ -24,12 +24,12 @@ class mediawiki($role, $site_hostname, $mediawiki_location='') {
     }
 
   }
-  if ($role == "image-scaler" or $role == "all") {
+  if ($role == 'image-scaler' or $role == 'all') {
     include mediawiki::image_scaler,
             mediawiki::php,
             mediawiki::app
   }
-  if ($role == "search" or $role == "all") {
+  if ($role == 'search' or $role == 'all') {
     include mediawiki::search
   }
 }
