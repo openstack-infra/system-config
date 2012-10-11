@@ -33,6 +33,10 @@ class openstack_project::review (
   $ssl_cert_file_contents = '',
   $ssl_key_file_contents = '',
   $ssl_chain_file_contents = '',
+  $ssh_dsa_key_contents='',
+  $ssh_dsa_pubkey_contents='',
+  $ssh_rsa_key_contents='',
+  $ssh_rsa_pubkey_contents='',
   $sysadmins = []
 ) {
   class { 'openstack_project::gerrit':
@@ -42,6 +46,10 @@ class openstack_project::review (
     ssl_cert_file_contents   => $ssl_cert_file_contents,
     ssl_key_file_contents    => $ssl_key_file_contents,
     ssl_chain_file_contents  => $ssl_chain_file_contents,
+    ssh_dsa_key_contents     => $ssh_dsa_key_contents,
+    ssh_dsa_pubkey_contents  => $ssh_dsa_pubkey_contents,
+    ssh_rsa_key_contents     => $ssh_rsa_key_contents,
+    ssh_rsa_pubkey_contents  => $ssh_rsa_pubkey_contents,
     email                    => 'review@openstack.org',
     database_poollimit       => '150',    # 1 + 100 + 9 + 2 + 2 + 25 = 139(rounded up)
     container_heaplimit      => '8g',

@@ -14,6 +14,10 @@ class openstack_project::gerrit (
   $ssl_cert_file_contents='',
   $ssl_key_file_contents='',
   $ssl_chain_file_contents='',
+  $ssh_dsa_key_contents='', # If left empty puppet will not create file.
+  $ssh_dsa_pubkey_contents='', # If left empty puppet will not create file.
+  $ssh_rsa_key_contents='', # If left empty puppet will not create file.
+  $ssh_rsa_pubkey_contents='', # If left empty puppet will not create file.
   $email='',
   $database_poollimit='',
   $container_heaplimit='',
@@ -62,6 +66,10 @@ class openstack_project::gerrit (
     ssl_cert_file_contents   => $ssl_cert_file_contents,
     ssl_key_file_contents    => $ssl_key_file_contents,
     ssl_chain_file_contents  => $ssl_chain_file_contents,
+    ssh_dsa_key_contents     => $ssh_dsa_key_contents,
+    ssh_dsa_pubkey_contents  => $ssh_dsa_pubkey_contents,
+    ssh_rsa_key_contents     => $ssh_rsa_key_contents,
+    ssh_rsa_pubkey_contents  => $ssh_rsa_pubkey_contents,
     email                    => $email,
     openidssourl             => "https://login.launchpad.net/+openid",
     database_poollimit       => $database_poollimit,
