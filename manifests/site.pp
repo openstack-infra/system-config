@@ -13,31 +13,39 @@ node default {
 #
 node 'review.openstack.org' {
   class { 'openstack_project::review':
-    github_oauth_token      => hiera('gerrit_github_token'),
-    mysql_password          => hiera('gerrit_mysql_password'),
-    mysql_root_password     => hiera('gerrit_mysql_root_password'),
-    email_private_key       => hiera('gerrit_email_private_key'),
-    gerritbot_password      => hiera('gerrit_gerritbot_password'),
-    ssl_cert_file_contents  => hiera('gerrit_ssl_cert_file_contents'),
-    ssl_key_file_contents   => hiera('gerrit_ssl_key_file_contents'),
-    ssl_chain_file_contents => hiera('gerrit_ssl_chain_file_contents'),
-    sysadmins               => hiera('sysadmins'),
+    github_oauth_token       => hiera('gerrit_github_token'),
+    mysql_password           => hiera('gerrit_mysql_password'),
+    mysql_root_password      => hiera('gerrit_mysql_root_password'),
+    email_private_key        => hiera('gerrit_email_private_key'),
+    gerritbot_password       => hiera('gerrit_gerritbot_password'),
+    ssl_cert_file_contents   => hiera('gerrit_ssl_cert_file_contents'),
+    ssl_key_file_contents    => hiera('gerrit_ssl_key_file_contents'),
+    ssl_chain_file_contents  => hiera('gerrit_ssl_chain_file_contents'),
+    $ssh_dsa_key_contents    => hiera('gerrit_ssh_dsa_key_contents'),
+    $ssh_dsa_pubkey_contents => hiera('gerrit_ssh_dsa_pubkey_contents'),
+    $ssh_rsa_key_contents    => hiera('gerrit_ssh_rsa_key_contents'),
+    $ssh_rsa_pubkey_contents => hiera('gerrit_ssh_rsa_pubkey_contents'),
+    sysadmins                => hiera('sysadmins'),
   }
 }
 
 node 'gerrit-dev.openstack.org', 'review-dev.openstack.org' {
   class { 'openstack_project::review_dev':
-    github_oauth_token  => hiera('gerrit_dev_github_token'),
-    mysql_password      => hiera('gerrit_dev_mysql_password'),
-    mysql_root_password => hiera('gerrit_dev_mysql_root_password'),
-    email_private_key   => hiera('gerrit_dev_email_private_key'),
-    contactstore_appsec => hiera('gerrit_dev_contactstore_appsec'),
-    contactstore_pubkey => hiera('gerrit_dev_contactstore_pubkey'),
-    lp_sync_key         => hiera('gerrit_dev_lp_sync_key'),
-    lp_sync_pubkey      => hiera('gerrit_dev_lp_sync_pubkey'),
-    lp_sync_token       => hiera('gerrit_dev_lp_access_token'),
-    lp_sync_secret      => hiera('gerrit_dev_lp_access_secret'),
-    sysadmins           => hiera('sysadmins'),
+    github_oauth_token       => hiera('gerrit_dev_github_token'),
+    mysql_password           => hiera('gerrit_dev_mysql_password'),
+    mysql_root_password      => hiera('gerrit_dev_mysql_root_password'),
+    email_private_key        => hiera('gerrit_dev_email_private_key'),
+    contactstore_appsec      => hiera('gerrit_dev_contactstore_appsec'),
+    contactstore_pubkey      => hiera('gerrit_dev_contactstore_pubkey'),
+    $ssh_dsa_key_contents    => hiera('gerrit_dev_ssh_dsa_key_contents'),
+    $ssh_dsa_pubkey_contents => hiera('gerrit_dev_ssh_dsa_pubkey_contents'),
+    $ssh_rsa_key_contents    => hiera('gerrit_dev_ssh_rsa_key_contents'),
+    $ssh_rsa_pubkey_contents => hiera('gerrit_dev_ssh_rsa_pubkey_contents'),
+    lp_sync_key              => hiera('gerrit_dev_lp_sync_key'),
+    lp_sync_pubkey           => hiera('gerrit_dev_lp_sync_pubkey'),
+    lp_sync_token            => hiera('gerrit_dev_lp_access_token'),
+    lp_sync_secret           => hiera('gerrit_dev_lp_access_secret'),
+    sysadmins                => hiera('sysadmins'),
   }
 }
 
