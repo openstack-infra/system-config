@@ -178,6 +178,12 @@ class gerrit($vhost_name=$fqdn,
     require => File['/home/gerrit2/review_site'],
   }
 
+  file { '/home/gerrit2/review_site/lib':
+    ensure  => directory,
+    owner   => 'gerrit2',
+    require => File['/home/gerrit2/review_site'],
+  }
+
   # Skip replication if we're in test mode
   if ($testmode == false) {
     file { '/home/gerrit2/review_site/etc/replication.config':
@@ -446,7 +452,10 @@ class gerrit($vhost_name=$fqdn,
     file { '/home/gerrit2/review_site/lib/bcpg.jar':
       ensure  => link,
       target  => '/usr/share/java/bcpg.jar',
-      require => Package['libbcpg-java'],
+      require => [
+        Package['libbcpg-java'],
+        File['/home/gerrit2/review_site/lib'],
+      ],
     }
     file { '/home/gerrit2/review_site/etc/contact_information.pub':
       ensure  => present,
