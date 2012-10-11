@@ -266,8 +266,12 @@ class gerrit($vhost_name=$fqdn,
     user     => 'gerrit2',
     password => $mysql_password,
     host     => 'localhost',
-    grant    => 'all',
+    grant    => ['all'],
     charset  => 'latin1',
+    require  => [
+      Class['mysql::server'],
+      Class['mysql::server::account_security'],
+    ],
   }
 
   # Set up apache.
