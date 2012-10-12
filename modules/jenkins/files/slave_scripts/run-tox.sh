@@ -63,4 +63,14 @@ then
     exit 1
 fi
 
+passcount=$(grep -c 'tr class=.passClass' $NOSE_HTML_OUT_FILE)
+if [ $passcount -eq "0" ]
+then
+    echo
+    echo "Zero tests passed, which probably means there was an error"
+    echo "parsing one of the python files, or that some other failure"
+    echo "during test setup prevented a sane run."
+    exit 1
+fi
+
 exit $result
