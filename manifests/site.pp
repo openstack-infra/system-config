@@ -84,6 +84,18 @@ node 'jenkins.openstack.org' {
   }
 }
 
+node 'jenkins2.openstack.org' {
+  class { 'openstack_project::jenkins':
+    # Explicitly disable Jenkins Job Builder
+    jenkins_jobs_password   => '',
+    manage_jenkins_jobs     => false,
+    ssl_cert_file_contents  => hiera('jenkins_ssl_cert_file_contents'),
+    ssl_key_file_contents   => hiera('jenkins_ssl_key_file_contents'),
+    ssl_chain_file_contents => hiera('jenkins_ssl_chain_file_contents'),
+    sysadmins               => hiera('safesysadmins'),
+  }
+}
+
 node 'jenkins-dev.openstack.org' {
   class { 'openstack_project::jenkins_dev':
     sysadmins => hiera('sysadmins'),
