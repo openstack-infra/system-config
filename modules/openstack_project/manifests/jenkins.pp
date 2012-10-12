@@ -1,11 +1,11 @@
 class openstack_project::jenkins (
   $jenkins_jobs_password,
+  $manage_jenkins_jobs = true,
   $ssl_cert_file_contents = '',
   $ssl_key_file_contents = '',
   $ssl_chain_file_contents = '',
   $sysadmins = [],
 ) {
-
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [80, 443, 4155],
     sysadmins                 => $sysadmins
@@ -24,25 +24,26 @@ class openstack_project::jenkins (
     ssl_chain_file_contents => $ssl_chain_file_contents,
   }
 
-  class { '::jenkins::job_builder':
-    url      => "https://${vhost_name}/",
-    username => 'gerrig',
-    password => $jenkins_jobs_password,
-  }
+  if manage_jenkins_jobs == true {
+    class { '::jenkins::job_builder':
+      url      => "https://${vhost_name}/",
+      username => 'gerrig',
+      password => $jenkins_jobs_password,
+    }
 
-  file { '/etc/jenkins_jobs/config':
-    ensure  => directory,
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0755',
-    recurse => true,
-    source  => ['puppet:///modules/openstack_project/jenkins_job_builder/config'],
-    notify  => Exec['jenkins_jobs_update']
-  }
+    file { '/etc/jenkins_jobs/config':
+      ensure  => directory,
+      owner   => 'root',
+      group   => 'root',
+      mode    => '0755',
+      recurse => true,
+      source  => ['puppet:///modules/openstack_project/jenkins_job_builder/config'],
+      notify  => Exec['jenkins_jobs_update']
+    }
 
-  file { '/etc/default/jenkins':
-    ensure => present,
-    source => 'puppet:///modules/openstack_project/jenkins/jenkins.default'
+    file { '/etc/default/jenkins':
+      ensure => present,
+      source => 'puppet:///modules/openstack_project/jenkins/jenkins.default'
+    }
   }
-
 }
