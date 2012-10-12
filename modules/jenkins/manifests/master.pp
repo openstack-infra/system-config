@@ -61,6 +61,7 @@ class jenkins::master(
       group   => 'ssl-cert',
       mode    => '0640',
       content => $ssl_key_file_contents,
+      require => Package['ssl-cert'],
       before  => Apache::Vhost[$vhost_name],
     }
   }
@@ -77,6 +78,7 @@ class jenkins::master(
 
   $packages = [
     'python-babel',
+    'ssl-cert',
   ]
 
   package { $packages:
