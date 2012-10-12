@@ -12,6 +12,14 @@ class github (
     require => Class[pip]
   }
 
+  # A lot of things need yaml, be conservative requiring this package to avoid
+  # conflicts with other modules.
+  if ! defined(Package['python-yaml']) {
+    package { 'python-yaml':
+      ensure => present,
+    }
+  }
+
   group { "github":
     ensure => present
   }
@@ -68,7 +76,10 @@ class github (
     user => github,
     minute => "*/5",
     command => 'sleep $((RANDOM\%60+90)) && python /usr/local/github/scripts/close_pull_requests.py',
-    require => File['/usr/local/github/scripts'],
+    require => [
+                 File['/usr/local/github/scripts'],
+                 Package['python-yaml'],
+                 Package['PyGithub'],
+               ],
   }
-
 }
