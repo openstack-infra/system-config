@@ -8,7 +8,7 @@ class openstack_project::jenkins (
 ) {
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [80, 443, 4155],
-    sysadmins                 => $sysadmins
+    sysadmins                 => $sysadmins,
   }
 
   $vhost_name = 'jenkins.openstack.org'
@@ -27,7 +27,7 @@ class openstack_project::jenkins (
   if manage_jenkins_jobs == true {
     class { '::jenkins::job_builder':
       url      => "https://${vhost_name}/",
-      username => 'gerrig',
+      username => 'gerrig', # This is not a typo, well it isn't anymore.
       password => $jenkins_jobs_password,
     }
 
@@ -37,13 +37,13 @@ class openstack_project::jenkins (
       group   => 'root',
       mode    => '0755',
       recurse => true,
-      source  => ['puppet:///modules/openstack_project/jenkins_job_builder/config'],
-      notify  => Exec['jenkins_jobs_update']
+      source  => 'puppet:///modules/openstack_project/jenkins_job_builder/config',
+      notify  => Exec['jenkins_jobs_update'],
     }
 
     file { '/etc/default/jenkins':
       ensure => present,
-      source => 'puppet:///modules/openstack_project/jenkins/jenkins.default'
+      source => 'puppet:///modules/openstack_project/jenkins/jenkins.default',
     }
   }
 }
