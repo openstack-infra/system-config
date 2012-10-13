@@ -24,8 +24,11 @@
 
   SSLEngine on
 
-  SSLCertificateFile /etc/ssl/certs/<%= scope.lookupvar("etherpad_lite::apache::vhost_name") %>.pem
-  SSLCertificateKeyFile /etc/ssl/private/<%= scope.lookupvar("etherpad_lite::apache::vhost_name") %>.key
+  SSLCertificateFile      <%= scope.lookupvar("etherpad_lite::apache::ssl_cert_file") %>
+  SSLCertificateKeyFile   <%= scope.lookupvar("etherpad_lite::apache::ssl_key_file") %>
+  <% if scope.lookupvar("etherpad_lite::apache::ssl_chain_file") != "" %>
+    SSLCertificateChainFile <%= scope.lookupvar("etherpad_lite::apache::ssl_chain_file") %>
+  <% end %>
 
   BrowserMatch "MSIE [2-6]" \
       nokeepalive ssl-unclean-shutdown \
