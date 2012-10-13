@@ -160,8 +160,9 @@ node 'pypi.openstack.org' {
 
 node 'etherpad.openstack.org' {
   class { 'openstack_project::etherpad':
-    etherpad_crt      => hiera('etherpad_crt'),
-    etherpad_key      => hiera('etherpad_key'),
+    ssl_cert_file_contents  => hiera('etherpad_ssl_cert_file_contents'),
+    ssl_key_file_contents   => hiera('etherpad_ssl_key_file_contents'),
+    ssl_chain_file_contents => hiera('etherpad_ssl_chain_file_contents'),
     database_password => hiera('etherpad_db_password'),
     sysadmins         => hiera('sysadmins'),
   }

@@ -1,6 +1,7 @@
 class openstack_project::etherpad (
-  $etherpad_crt,
-  $etherpad_key,
+  $ssl_cert_file_contents = '',
+  $ssl_key_file_contents = '',
+  $ssl_chain_file_contents = '',
   $database_password,
   $sysadmins = []
 ) {
@@ -13,8 +14,12 @@ class openstack_project::etherpad (
   include etherpad_lite::backup
 
   class { 'etherpad_lite::apache':
-    etherpad_crt  => $etherpad_crt,
-    etherpad_key  => $etherpad_key,
+    ssl_cert_file           => '/etc/ssl/certs/etherpad.openstack.org.pem',
+    ssl_key_file            => '/etc/ssl/private/etherpad.openstack.org.key',
+    ssl_chain_file          => '/etc/ssl/certs/intermediate.pem',
+    ssl_cert_file_contents  => $ssl_cert_file_contents,
+    ssl_key_file_contents   => $ssl_key_file_contents,
+    ssl_chain_file_contents => $ssl_chain_file_contents,
   }
 
   class { 'etherpad_lite::site':
