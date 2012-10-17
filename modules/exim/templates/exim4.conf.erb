@@ -317,6 +317,11 @@ MM_WRAP=MM_HOME/mail/mailman
 MM_LISTCHK=MM_HOME/lists/${lc::$local_part}/config.pck
 <% end -%>
 
+# Google is way behind the times on IPv6 and tends to reject mail from
+# new v6 addrs:
+
+dns_ipv4_lookup = *.gmail.com : *.google.com
+
 ######################################################################
 #                       ACL CONFIGURATION                            #
 #         Specifies access control lists for incoming SMTP mail      #
