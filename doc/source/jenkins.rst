@@ -46,8 +46,25 @@ Integration Testing
 TODO: How others can get involved in testing and integrating with
 OpenStack Jenkins.
 
+Devstack Gate
+=============
+
+Currently OpenStack integration testing is performed by the devstack
+gate test framework. This framework runs the devstack exercises and
+Tempest smoketests against a devstack install on single use cloud
+servers. The devstack gate source can be found on
+`Github <https://github.com/openstack-ci/devstack-gate>`_ and the
+`Readme <https://github.com/openstack-ci/devstack-gate/blob/master/README.md>`_
+describes the process of using devstack gate to run your own devstack
+based tests.
+
 Rackspace Bare-Metal Testing Cluster
 ====================================
+
+The Rackspace Bare-Metal Testing Cluster is no longer in place and is
+not used for OpenStack integration testing. The following documentation
+is retained as it is potentially useful should you want to do something
+similar and it is historically significant.
 
 The CI team mantains a cluster of machines supplied by Rackspace to
 perform bare-metal deployment and testing of OpenStack as a whole.
