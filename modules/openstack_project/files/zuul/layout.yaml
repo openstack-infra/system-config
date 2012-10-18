@@ -563,6 +563,9 @@ projects:
       - gate-devstack-merge:
         - gate-tempest-devstack-vm
         - gate-tempest-devstack-vm-cinder
+    silent:
+      - gate-devstack-merge:
+        - gate-tempest-devstack-vm-quantum
 
   - name: openstack-ci/devstack-gate
     check:
