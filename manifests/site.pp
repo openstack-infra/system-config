@@ -115,6 +115,12 @@ node 'jenkins-dev.openstack.org' {
   }
 }
 
+node 'cacti.openstack.org' {
+  class { 'openstack_project::cacti':
+    sysadmins => hiera('sysadmins'),
+  }
+}
+
 node 'community.openstack.org' {
   class { 'openstack_project::community':
     sysadmins => hiera('sysadmins'),
