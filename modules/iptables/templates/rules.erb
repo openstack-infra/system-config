@@ -13,6 +13,7 @@
 -A openstack-INPUT -m state --state NEW -m tcp -p tcp --dport 22 -j ACCEPT
 # SNMP from openstack cacti
 -A openstack-INPUT -m udp -p udp --dport 161 -s 50.57.120.246 -j ACCEPT
+-A openstack-INPUT -m udp -p udp --dport 161 -s 198.61.215.188 -j ACCEPT
 # Public TCP ports
 <% public_tcp_ports.each do |port| -%>
 -A openstack-INPUT -m state --state NEW -m tcp -p tcp --dport <%= port %> -j ACCEPT
