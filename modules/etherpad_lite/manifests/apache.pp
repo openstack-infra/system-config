@@ -8,6 +8,10 @@ class etherpad_lite::apache (
   $ssl_chain_file_contents='' # If left empty puppet will not create file.
 ) {
 
+  package { 'ssl-cert':
+    ensure => present,
+  }
+
   apache::vhost { $vhost_name:
     port => 443,
     docroot => 'MEANINGLESS ARGUMENT',
