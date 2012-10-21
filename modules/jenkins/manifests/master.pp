@@ -78,6 +78,8 @@ class jenkins::master(
 
   $packages = [
     'python-babel',
+    'python-jenkins',     # devstack-gate
+    'python-sqlalchemy',  # devstack-gate
     'ssl-cert',
   ]
 
