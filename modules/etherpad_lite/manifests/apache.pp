@@ -13,8 +13,6 @@ class etherpad_lite::apache (
     docroot => 'MEANINGLESS ARGUMENT',
     priority => '50',
     template => 'etherpad_lite/etherpadlite.vhost.erb',
-    require => File["/etc/ssl/certs/${vhost_name}.pem",
-                    "/etc/ssl/private/${vhost_name}.key"],
     ssl => true,
   }
   a2mod { 'rewrite':
@@ -38,25 +36,6 @@ class etherpad_lite::apache (
     owner  => 'root',
     mode   => 0700,
   }
-
-  file { "/etc/ssl/certs/${vhost_name}.pem":
-    ensure  => present,
-    replace => true,
-    owner   => 'root',
-    mode    => 0600,
-    content => template('etherpad_lite/eplite.crt.erb'),
-    require => File['/etc/ssl/certs'],
-  }
-
-  file { "/etc/ssl/private/${vhost_name}.key":
-    ensure  => present,
-    replace => true,
-    owner   => 'root',
-    mode    => 0600,
-    content => template('etherpad_lite/eplite.key.erb'),
-    require => File['/etc/ssl/private'],
-  }
-
 
   if $ssl_cert_file_contents != '' {
     file { $ssl_cert_file:
@@ -88,6 +67,4 @@ class etherpad_lite::apache (
       before  => Apache::Vhost[$vhost_name],
     }
   }
-
-
 }
