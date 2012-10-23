@@ -1,0 +1,7 @@
+#!/bin/sh
+
+# Use timeout to kill any process running longer than 10 minutes.
+<% if nametags != "" %>
+timeout -k 2m 10m python /usr/local/gerrit/scripts/update_nametags.py \
+    ref-updated --description=<%= nametags %> "$@"
+<% end %>

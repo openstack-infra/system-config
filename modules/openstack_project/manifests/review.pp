@@ -92,6 +92,7 @@ class openstack_project::review (
     mysql_password                  => $mysql_password,
     mysql_root_password             => $mysql_root_password,
     trivial_rebase_role_id          => 'trivial-rebase@review.openstack.org',
+    nametags                        => '',
     email_private_key               => $email_private_key,
     replicate_github                => $replicate_github,
     sysadmins                       => $sysadmins,

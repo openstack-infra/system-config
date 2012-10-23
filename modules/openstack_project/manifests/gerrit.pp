@@ -50,6 +50,7 @@ class openstack_project::gerrit (
   $mysql_password = '',
   $mysql_root_password = '',
   $trivial_rebase_role_id = '',
+  $nametags = '',
   $email_private_key = '',
   $replicate_github = true,
   $replicate_local = true,
@@ -212,6 +213,16 @@ class openstack_project::gerrit (
     require => Class['::gerrit'],
   }
 
+  file { '/home/gerrit2/review_site/hooks/ref-updated':
+    ensure  => present,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0555',
+    content => template('openstack_project/gerrit_ref-updated.erb'),
+    replace => true,
+    require => Class['::gerrit']
+  }
+
   if ($projects_file != 'UNDEF') {
     if ($replicate_local) {
       file { $local_git_dir:
@@ -263,5 +274,16 @@ class openstack_project::gerrit (
           Class['jeepyb'],
         ],
     }
+  }
+
+  file { '/usr/local/gerrit/scripts/update_nametags.py':
+    ensure  => present,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0444',
+    source  =>
+      'puppet:///modules/openstack_project/gerrit/scripts/update_nametags.py',
+    replace => true,
+    require => Class['::gerrit'],
   }
 }

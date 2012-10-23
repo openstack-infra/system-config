@@ -1,4 +1,43 @@
 - job:
+    name: common-adjust-nametag
+    concurrent: false
+    node: master
+
+    parameters:
+      - choice:
+          name: PROJECT
+          description: On what project to run?
+          choices:
+            - nova
+            - glance
+            - keystone
+            - horizon
+            - quantum
+            - melange
+            - cinder
+            - python-cinderclient
+            - python-novaclient
+            - python-openstackclient
+            - python-glanceclient
+            - python-keystoneclient
+            - python-quantumclient
+            - python-swiftclient
+      - choice:
+          name: NAMETAG
+          description: The nametag to update.
+          choices:
+            - essex
+            - diablo
+            - folsom
+            - grizzly
+      - string:
+          name: BRANCH
+          description: 'The branch to track with this tag.  E.g., "master", "milestone-proposed" or "stable/xyzzy".'
+
+    builders:
+      - shell: "/usr/local/jenkins/slave_scripts/adjust-nametag.sh"
+
+- job:
     name: common-bump-milestone
     concurrent: false
     node: master

@@ -60,6 +60,7 @@ class openstack_project::review_dev (
     mysql_root_password             => $mysql_root_password,
     trivial_rebase_role_id          =>
       'trivial-rebase@review-dev.openstack.org',
+    nametags                        => 'openstack/release:nametags.yaml',
     email_private_key               => $email_private_key,
     replicate_github                => $replicate_github,
     sysadmins                       => $sysadmins,
