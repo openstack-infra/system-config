@@ -49,12 +49,14 @@ class openstack_project::cacti (
   }
 
   class {'cacti_device': hostname=> "etherpad.openstack.org"}
+  class {'cacti_device': hostname=> "jenkins.openstack.org"}
+  class {'cacti_device': hostname=> "review.openstack.org"}
 }
 
 class cacti_device(
   $hostname
 ){
-  exec { "/var/lib/cacti/linux_host.xml":
+  exec { "cacti_create_$hostname":
     command      => "/usr/local/bin/create_graphs.sh $hostname",
     require      => Exec["cacti_import_xml"]
   }
