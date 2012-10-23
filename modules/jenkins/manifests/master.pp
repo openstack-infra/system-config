@@ -78,13 +78,19 @@ class jenkins::master(
 
   $packages = [
     'python-babel',
-    'python-jenkins',     # devstack-gate
     'python-sqlalchemy',  # devstack-gate
     'ssl-cert',
   ]
 
   package { $packages:
     ensure => "present",
+  }
+
+  # devstack-gate
+  if ! defined(Package['python-jenkins']) {
+    package { "python-jenkins":
+      ensure => present,
+    }
   }
 
   package { "jenkins":

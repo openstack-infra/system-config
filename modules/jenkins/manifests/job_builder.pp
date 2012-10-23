@@ -12,10 +12,10 @@ class jenkins::job_builder (
     }
   }
 
-  package { "python-jenkins":
-    ensure => latest,  # okay to use latest for pip
-    provider => pip,
-    require => Class[pip]
+  if ! defined(Package['python-jenkins']) {
+    package { "python-jenkins":
+      ensure => present,
+    }
   }
 
   vcsrepo { "/opt/jenkins_job_builder":
