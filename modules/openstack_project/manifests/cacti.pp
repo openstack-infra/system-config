@@ -48,9 +48,19 @@ class openstack_project::cacti (
     require      => File["/var/lib/cacti/linux_host.xml"],
   }
 
-  class {'cacti_device': hostname=> "etherpad.openstack.org"}
-  class {'cacti_device': hostname=> "jenkins.openstack.org"}
-  class {'cacti_device': hostname=> "review.openstack.org"}
+  class {'cacti_device': hostname=> 'community.openstack.org'}
+  class {'cacti_device': hostname=> 'eavesdrop.openstack.org'}
+  class {'cacti_device': hostname=> 'etherpad.openstack.org'}
+  class {'cacti_device': hostname=> 'jenkins-dev.openstack.org'}
+  class {'cacti_device': hostname=> 'jenkins.openstack.org'}
+  class {'cacti_device': hostname=> 'lists.openstack.org'}
+  class {'cacti_device': hostname=> 'paste.openstack.org'}
+  class {'cacti_device': hostname=> 'planet.openstack.org'}
+  class {'cacti_device': hostname=> 'pypi.openstack.org'}
+  class {'cacti_device': hostname=> 'review-dev.openstack.org'}
+  class {'cacti_device': hostname=> 'review.openstack.org'}
+  class {'cacti_device': hostname=> 'static.openstack.org'}
+  class {'cacti_device': hostname=> 'wiki.openstack.org'}
 }
 
 class cacti_device(
