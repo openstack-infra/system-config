@@ -24,7 +24,7 @@ class openstack_project::jenkins (
     ssl_chain_file_contents => $ssl_chain_file_contents,
   }
 
-  if manage_jenkins_jobs == true {
+  if $manage_jenkins_jobs == true {
     class { '::jenkins::job_builder':
       url      => "https://${vhost_name}/",
       username => 'gerrig', # This is not a typo, well it isn't anymore.
