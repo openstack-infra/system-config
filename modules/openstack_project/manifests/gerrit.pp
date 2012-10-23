@@ -43,6 +43,7 @@ class openstack_project::gerrit (
   $mysql_password,
   $mysql_root_password,
   $trivial_rebase_role_id,
+  $nametags,
   $email_private_key,
   $replicate_github=true,
   $testmode=false,
@@ -197,6 +198,16 @@ class openstack_project::gerrit (
     require => Class['::gerrit']
   }
 
+  file { '/home/gerrit2/review_site/hooks/ref-updated':
+    ensure  => present,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0555',
+    content => template('openstack_project/gerrit_ref-updated.erb'),
+    replace => true,
+    require => Class['::gerrit']
+  }
+
   file { '/usr/local/gerrit/scripts/trivial_rebase.py':
     owner => 'root',
     group => 'root',
@@ -206,5 +217,16 @@ class openstack_project::gerrit (
       'puppet:///modules/openstack_project/gerrit/scripts/trivial_rebase.py',
     replace => 'true',
     require => Class['::gerrit']
+  }
+
+  file { '/usr/local/gerrit/scripts/update_nametags.py':
+    ensure  => present,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0444',
+    source  =>
+      'puppet:///modules/openstack_project/gerrit/scripts/update_nametags.py',
+    replace => true,
+    require => Class['::gerrit'],
   }
 }
