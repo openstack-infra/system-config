@@ -1,0 +1,20 @@
+# This file contains a mapping of project->tag->branch, used to configure
+# lightweight tags which get automatically updated so that they always follow
+# the tip of the specified branch for that project.
+
+# The "defaults" metaproject contains a set of common default tag:branch pairs
+# which can be included and overridden in actual individual projects.
+defaults: &defaults
+  xyzzy: master
+
+# The test project gets the default tags, but adds a plover tag following the
+# br1 branch and a plugh tag following the br2 branch.
+test:
+  <<: *defaults
+  plover: br1
+  plugh: br2
+
+# The test2 project only inherits the defaults (a xyzzy tag following the
+# master branch).
+test2:
+  <<: *defaults

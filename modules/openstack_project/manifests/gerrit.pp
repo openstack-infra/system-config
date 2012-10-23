@@ -43,6 +43,7 @@ class openstack_project::gerrit (
   $mysql_password,
   $mysql_root_password,
   $trivial_rebase_role_id,
+  $nametags_file,
   $email_private_key,
   $replicate_github=true,
   $testmode=false,
@@ -182,7 +183,7 @@ class openstack_project::gerrit (
     group => 'root',
     mode => 555,
     ensure => 'present',
-    source => 'puppet:///modules/openstack_project/gerrit/change-merged',
+    source => template('openstack_project/gerrit_change-merged.erb'),
     replace => 'true',
     require => Class['::gerrit']
   }
@@ -206,5 +207,27 @@ class openstack_project::gerrit (
       'puppet:///modules/openstack_project/gerrit/scripts/trivial_rebase.py',
     replace => 'true',
     require => Class['::gerrit']
+  }
+
+  file { '/usr/local/gerrit/scripts/update_nametags.py':
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0444',
+    ensure  => present,
+    source  =>
+      'puppet:///modules/openstack_project/gerrit/scripts/update_nametags.py',
+    replace => true,
+    require => Class['::gerrit'],
+  }
+
+  file { "$nametags_file":
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0444',
+    ensure  => present,
+    source  =>
+      'puppet:///modules/openstack_project/gerrit/nametags.yaml',
+    replace => true,
+    require => Class['::gerrit'],
   }
 }
