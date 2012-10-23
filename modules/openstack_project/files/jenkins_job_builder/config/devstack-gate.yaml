@@ -36,7 +36,7 @@
           site: 'static.openstack.org'
           files:
             - target: 'logs/$ZUUL_CHANGE/$ZUUL_PATCHSET/$ZUUL_PIPELINE/$JOB_NAME/$BUILD_NUMBER'
-              source: 'logs/*'
+              source: 'logs/**'
               keep-hierarchy: true
               copy-after-failure: true
       - console-log
@@ -85,7 +85,7 @@
           site: 'static.openstack.org'
           files:
             - target: 'logs/$ZUUL_CHANGE/$ZUUL_PATCHSET/$ZUUL_PIPELINE/$JOB_NAME/$BUILD_NUMBER'
-              source: 'logs/*'
+              source: 'logs/**'
               keep-hierarchy: true
               copy-after-failure: true
       - console-log
@@ -134,7 +134,7 @@
           site: 'static.openstack.org'
           files:
             - target: 'logs/$ZUUL_CHANGE/$ZUUL_PATCHSET/$ZUUL_PIPELINE/$JOB_NAME/$BUILD_NUMBER'
-              source: 'logs/*'
+              source: 'logs/**'
               keep-hierarchy: true
               copy-after-failure: true
       - console-log
@@ -177,7 +177,7 @@
           site: 'static.openstack.org'
           files:
             - target: 'logs/periodic/$JOB_NAME/$BUILD_NUMBER'
-              source: 'logs/*'
+              source: 'logs/**'
               keep-hierarchy: true
               copy-after-failure: true
       - console-log-periodic
@@ -221,7 +221,7 @@
           site: 'static.openstack.org'
           files:
             - target: 'logs/periodic/$JOB_NAME/$BUILD_NUMBER'
-              source: 'logs/*'
+              source: 'logs/**'
               keep-hierarchy: true
               copy-after-failure: true
       - console-log-periodic
@@ -265,7 +265,7 @@
           site: 'static.openstack.org'
           files:
             - target: 'logs/periodic/$JOB_NAME/$BUILD_NUMBER'
-              source: 'logs/*'
+              source: 'logs/**'
               keep-hierarchy: true
               copy-after-failure: true
       - console-log-periodic
@@ -309,7 +309,7 @@
           site: 'static.openstack.org'
           files:
             - target: 'logs/periodic/$JOB_NAME/$BUILD_NUMBER'
-              source: 'logs/*'
+              source: 'logs/**'
               keep-hierarchy: true
               copy-after-failure: true
       - console-log-periodic
@@ -353,7 +353,7 @@
           site: 'static.openstack.org'
           files:
             - target: 'logs/periodic/$JOB_NAME/$BUILD_NUMBER'
-              source: 'logs/*'
+              source: 'logs/**'
               keep-hierarchy: true
               copy-after-failure: true
       - console-log-periodic
