@@ -53,7 +53,6 @@ class openstack_project::base(
       User::Virtual::Localuser['corvus'],
       User::Virtual::Localuser['soren'],
       User::Virtual::Localuser['linuxjedi'],
-      User::Virtual::Localuser['devananda'],
       User::Virtual::Localuser['clarkb'],
     )
   }
