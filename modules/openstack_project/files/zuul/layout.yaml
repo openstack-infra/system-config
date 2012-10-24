@@ -311,6 +311,7 @@ projects:
       - keystone-tarball
       - keystone-coverage
       - keystone-docs
+      - keystone-upstream-translation-update
 
   - name: openstack/nova
     check:
