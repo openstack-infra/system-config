@@ -53,6 +53,8 @@ jobs:
     hold-following-changes: true
   - name: ^gate-tempest-devstack-vm.*$
     parameter-function: devstack_params
+  - name: gate-tempest-devstack-vm-cinder
+    branch: stable/folsom
   - name: ^.*-python27$
     parameter-function: python27_params
   - name: gate-nova-pylint
