@@ -116,6 +116,12 @@ class jenkins::master(
     require => Class[pip],
   }
 
+  package { "statsd":
+    ensure   => latest,  # okay to use latest for pip
+    provider => pip,
+    require  => Class[pip],
+  }
+
   exec { "update apt cache":
     subscribe => [ File["/etc/apt/sources.list.d/jenkins.list"]],
     refreshonly => true,
