@@ -13,7 +13,7 @@ class openstack_project::users {
 
   @user::virtual::localuser { 'soren':
     realname => 'Soren Hansen',
-    sshkeys  => "ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAyAtAccJ8ndh6wzq3vY1izHTdPh3kAKtjBK6P390ClIRBA3CfjKS6KaKSeGs1xZ4WZhOk9oz4d/+Ep7iOXLpUnYYjHm5bLD8o6jKAhKohoABzCyj3ONPNxvxvsvdahSPLONC6H1PlbhvTbn9UwEtZ//migJTATdLQEjXHaNhNJ8UZz9XtCf1Qv4YiYmyRId6h5N+OPNU4OmqlCZyanBXKN5jK1Kubq6SseY++74Y54ZPXVccGmJDTOfNBfM1nR0+f2Mq2iHR0a3PuJcGXFx/P4mIA0Knyh98W6esB9fG7/JVID2bGpJ6c91+AkL9fmwOpfWrk7rr13+iGiH2RTcmd0w== soren@lenny\nssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCsyOiibrrRfTohhS2+lwsIIV66/AS+iZZrv02tVfdUG/XHDECrvgrnW+FdQ+642X/WW5SllxIvDCsc4pxQS0lWgg0wLg6ATRNbwPz9NPTqbYS5bgoMvVWP6e9qOKTWJAo4TKgNrsgGahilwJUOn0KiWe8pLBCrgkAbPNY7uiZHrn5t/GsIgQIXX9Pzdw2wn9oB+q5hAaYODLYlEl+lfDv45/10DQOO6cqsvi0et/S7094eji9MdK8YUmEdBNg+lP8DI2jo4/sQDxM+QCaBlzEeM9wNQEbc53lxtZOWkjz3Td/lglXk6MDwV9Ar6kIZ/x4Tr08Tp37ZtSl2CozBFdvV soren@francisco\nssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC/COCZmvgUVmhF+c/qyu7ZSBBOs/zO5ddYtEjRLFFHwSB87kSgN53G0Wb55LmyHqLwkuOCcP4C73eZeKAxby4ipyu3ig2jTO7BSbvbp/tFna0qNDejnvVJWuad7znhinfHbxDJ6tiPxVjyYvqD91L32yj38Eg/WAVbFOkj1vChFfMlXbfGmspC+7ioiqP91N82JESZLu2PraZtMSYmOb61ZbwZjbp0UG1vmp0MzAHR+TMTCedn0XKKyEeaPnUKhRzruTwBwIMSSPItNNwKz/86BxAaIUXXdB0rHctbP/iuIvTClqPDd4DrgcPSCV9MhFzsdC35yHD83npPC5MHzQqcJJt2+8YzEOwYRWtTwPujsRyPHrktSGSSIyFzEM06onp0qJAwYQ3EvzKjmCll3NrsWeaImwetpJrvWYbNV6K4YzarJBwNnEuB85G0hbrczu3QFu8YhwmPKoiHQaCZfwFAQWYUs+QAhsDsM/CODMP8wrhWt0e0T5A7S3phf5LW/K8= cardno:00050000034B",
+    sshkeys  => "",
   }
 
   @user::virtual::localuser { 'smaffulli':
@@ -23,11 +23,6 @@ class openstack_project::users {
 
   @user::virtual::localuser { 'linuxjedi':
     realname => 'Andrew Hutchings',
-    sshkeys => "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDWd+45ODB7c9YbNtIc8iVYioT1sPY7Gob9bm/WiiBA0CWLdaD8TzX1htBMYJeszdvDkThhdwVt4EyJIFuSc7MEQUEfDB/VyYAOJKNOb2Q9uC+INgdigQ03gxL2sTV6loTkHXdOpCQN7CD642IctS94VGDxJhGVSrzoJvMuJJDqDuI7xl37aIRAS7Ehh+B71p4gbLKvwrXDPEZL2FnpmevFQmhnq11/U1wK0864r+FjyNiDekwDSBSqtI5Ic5VoNWuCDW74/mlKrfaylfvr5/tDp9iJYixzH2PP6X+EHU3qfWNrABBJC3RG+KcQzqD8a+r+iE5UTEG2ISqjA0j6LR6b linuxjedi@linuxjedi-laptop\n",
-  }
-
-  @user::virtual::localuser { 'devananda':
-    realname => 'Devananda van der Veen',
     sshkeys => "",
   }
 
