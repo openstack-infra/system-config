@@ -45,7 +45,9 @@ define buildsource(
 class etherpad_lite (
   $ep_user          = 'eplite',
   $base_log_dir     = '/var/log',
-  $base_install_dir = '/opt/etherpad-lite'
+  $base_install_dir = '/opt/etherpad-lite',
+  $nodejs_version   = 'v0.6.16',
+  $eplite_version   = '',
 ) {
 
   user { $ep_user:
@@ -69,11 +71,11 @@ class etherpad_lite (
   }
 
   vcsrepo { "${base_install_dir}/nodejs":
-    ensure => present,
+    ensure   => present,
     provider => git,
-    source => 'https://github.com/joyent/node.git',
-    revision => 'v0.6.16',
-    require    => Package['git']
+    source   => 'https://github.com/joyent/node.git',
+    revision => $nodejs_version,
+    require  => Package['git']
   }
 
   package { ['gzip',
@@ -101,12 +103,25 @@ class etherpad_lite (
                 Vcsrepo["${base_install_dir}/nodejs"]]
   }
 
-  vcsrepo { "${base_install_dir}/etherpad-lite":
-    ensure => present,
-    provider => git,
-    source => "https://github.com/Pita/etherpad-lite.git",
-    owner => $ep_user,
-    require    => Package['git'],
+  # Allow existing install to exist without modifying its git repo.
+  # But give the option to specify versions for new installs.
+  if $eplite_version != '' {
+    vcsrepo { "${base_install_dir}/etherpad-lite":
+      ensure   => present,
+      provider => git,
+      source   => 'https://github.com/Pita/etherpad-lite.git',
+      owner    => $ep_user,
+      revision => $eplite_version,
+      require  => Package['git'],
+    }
+  } else {
+    vcsrepo { "${base_install_dir}/etherpad-lite":
+      ensure   => present,
+      provider => git,
+      source   => 'https://github.com/Pita/etherpad-lite.git',
+      owner    => $ep_user,
+      require  => Package['git'],
+    }
   }
 
   exec { 'install_etherpad_dependencies':

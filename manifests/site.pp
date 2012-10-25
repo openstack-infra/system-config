@@ -162,6 +162,13 @@ node 'etherpad.openstack.org' {
   }
 }
 
+node 'etherpad-dev.openstack.org' {
+  class { 'openstack_project::etherpad_dev':
+    database_password       => hiera('etherpad-dev_db_password'),
+    sysadmins               => hiera('sysadmins'),
+  }
+}
+
 node 'wiki.openstack.org' {
   class { 'openstack_project::wiki':
     mysql_root_password => hiera('wiki_db_password'),
