@@ -1,74 +1,76 @@
+# Class to configure cacti on a node.
+# Takes a list of sysadmin email addresses as a parameter. Exim will be
+# configured to email cron spam and other alerts to this list of admins.
 class openstack_project::cacti (
   $sysadmins = []
 ) {
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [80, 443],
-    sysadmins => $sysadmins
+    sysadmins                 => $sysadmins,
   }
 
   include apache
 
   package { 'cacti':
-    ensure => present
+    ensure => present,
   }
 
-  file { "/usr/local/share/cacti/resource/snmp_queries":
+  file { '/usr/local/share/cacti/resource/snmp_queries':
     ensure => directory,
-    owner  => "root",
-  }	
-
-  file { "/usr/local/share/cacti/resource/snmp_queries/net-snmp_devio.xml":
-    source  => "puppet:///modules/openstack_project/cacti/net-snmp_devio.xml",
-    mode    => 644,
-    owner   => "root",
-    group   => "root",
-    require => File["/usr/local/share/cacti/resource/snmp_queries"],
+    owner  => 'root',
   }
 
-  file { "/var/lib/cacti/linux_host.xml":
-    source  => "puppet:///modules/openstack_project/cacti/linux_host.xml",
-    mode    => 644,
-    owner   => "root",
-    group   => "root",
-    require => File["/usr/local/share/cacti/resource/snmp_queries/net-snmp_devio.xml"],
+  file { '/usr/local/share/cacti/resource/snmp_queries/net-snmp_devio.xml':
+    ensure  => present,
+    source  => 'puppet:///modules/openstack_project/cacti/net-snmp_devio.xml',
+    mode    => '0644',
+    owner   => 'root',
+    group   => 'root',
+    require => File['/usr/local/share/cacti/resource/snmp_queries'],
   }
 
-  file { "/usr/local/bin/create_graphs.sh":
-    source  => "puppet:///modules/openstack_project/cacti/create_graphs.sh",
-    mode    => 744,
-    owner   => "root",
-    group   => "root",
+  file { '/var/lib/cacti/linux_host.xml':
+    ensure  => present,
+    source  => 'puppet:///modules/openstack_project/cacti/linux_host.xml',
+    mode    => '0644',
+    owner   => 'root',
+    group   => 'root',
+    require => File[
+        '/usr/local/share/cacti/resource/snmp_queries/net-snmp_devio.xml'
+      ],
   }
 
-  exec { "cacti_import_xml":
-    command      => "/usr/bin/php -q /usr/share/cacti/cli/import_template.php \
-                       --filename=/var/lib/cacti/linux_host.xml \
-                       --with-template-rras",
-    cwd          => "/usr/share/cacti/cli",
-    require      => File["/var/lib/cacti/linux_host.xml"],
+  file { '/usr/local/bin/create_graphs.sh':
+    ensure => present,
+    source => 'puppet:///modules/openstack_project/cacti/create_graphs.sh',
+    mode   => '0744',
+    owner  => 'root',
+    group  => 'root',
   }
 
-  class {'cacti_device': hostname=> 'community.openstack.org'}
-  class {'cacti_device': hostname=> 'eavesdrop.openstack.org'}
-  class {'cacti_device': hostname=> 'etherpad.openstack.org'}
-  class {'cacti_device': hostname=> 'jenkins-dev.openstack.org'}
-  class {'cacti_device': hostname=> 'jenkins.openstack.org'}
-  class {'cacti_device': hostname=> 'lists.openstack.org'}
-  class {'cacti_device': hostname=> 'paste.openstack.org'}
-  class {'cacti_device': hostname=> 'planet.openstack.org'}
-  class {'cacti_device': hostname=> 'pypi.openstack.org'}
-  class {'cacti_device': hostname=> 'review-dev.openstack.org'}
-  class {'cacti_device': hostname=> 'review.openstack.org'}
-  class {'cacti_device': hostname=> 'static.openstack.org'}
-  class {'cacti_device': hostname=> 'wiki.openstack.org'}
+  exec { 'cacti_import_xml':
+    command => '/usr/bin/php -q /usr/share/cacti/cli/import_template.php \
+                  --filename=/var/lib/cacti/linux_host.xml \
+                  --with-template-rras',
+    cwd     => 'usr/share/cacti/cli',
+    require => File['/var/lib/cacti/linux_host.xml'],
+  }
+
+  $cacti_hosts = [
+    'community.openstack.org',
+    'eavesdrop.openstack.org',
+    'etherpad.openstack.org',
+    'jenkins.openstack.org',
+    'jenkins-dev.openstack.org',
+    'lists.openstack.org',
+    'paste.openstack.org',
+    'planet.openstack.org',
+    'pypi.openstack.org',
+    'review.openstack.org',
+    'review-dev.openstack.org',
+    'static.openstack.org',
+    'wiki.openstack.org',
+  ]
+
+  openstack_project::cacti_device { $cacti_hosts: }
 }
-
-class cacti_device(
-  $hostname
-){
-  exec { "cacti_create_$hostname":
-    command      => "/usr/local/bin/create_graphs.sh $hostname",
-    require      => Exec["cacti_import_xml"]
-  }
-}
-
