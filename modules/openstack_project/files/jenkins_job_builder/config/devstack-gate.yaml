@@ -382,6 +382,7 @@
       - shell: |
           #!/bin/bash -xe
           export STATSD_HOST="graphite.openstack.org"
+          export STATSD_PORT=8125
           export PYTHONUNBUFFERED=true
           $WORKSPACE/devstack-gate/devstack-vm-inprogress.py $DEVSTACK_NODE_NAME
 
@@ -404,6 +405,7 @@
       - shell: |
           #!/bin/bash -xe
           export STATSD_HOST="graphite.openstack.org"
+          export STATSD_PORT=8125
           export PYTHONUNBUFFERED=true
           $WORKSPACE/devstack-gate/devstack-vm-delete.py $DEVSTACK_NODE_NAME
 
@@ -427,6 +429,7 @@
       - shell: |
           #!/bin/bash -xe
           export STATSD_HOST="graphite.openstack.org"
+          export STATSD_PORT=8125
           export PYTHONUNBUFFERED=true
           $WORKSPACE/devstack-gate/devstack-vm-launch.py {provider}
 
@@ -473,6 +476,7 @@
           fi
 
           export STATSD_HOST="graphite.openstack.org"
+          export STATSD_PORT=8125
           export PYTHONUNBUFFERED=true
           $WORKSPACE/devstack-gate/devstack-vm-reap.py {provider} $ALL_SERVERS $ALL_IMAGES
 
