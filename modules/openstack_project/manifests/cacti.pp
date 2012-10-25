@@ -15,7 +15,7 @@ class openstack_project::cacti (
   file { "/usr/local/share/cacti/resource/snmp_queries":
     ensure => directory,
     owner  => "root",
-  }	
+  }
 
   file { "/usr/local/share/cacti/resource/snmp_queries/net-snmp_devio.xml":
     source  => "puppet:///modules/openstack_project/cacti/net-snmp_devio.xml",
@@ -48,27 +48,26 @@ class openstack_project::cacti (
     require      => File["/var/lib/cacti/linux_host.xml"],
   }
 
-  class {'cacti_device': hostname=> 'community.openstack.org'}
-  class {'cacti_device': hostname=> 'eavesdrop.openstack.org'}
-  class {'cacti_device': hostname=> 'etherpad.openstack.org'}
-  class {'cacti_device': hostname=> 'jenkins-dev.openstack.org'}
-  class {'cacti_device': hostname=> 'jenkins.openstack.org'}
-  class {'cacti_device': hostname=> 'lists.openstack.org'}
-  class {'cacti_device': hostname=> 'paste.openstack.org'}
-  class {'cacti_device': hostname=> 'planet.openstack.org'}
-  class {'cacti_device': hostname=> 'pypi.openstack.org'}
-  class {'cacti_device': hostname=> 'review-dev.openstack.org'}
-  class {'cacti_device': hostname=> 'review.openstack.org'}
-  class {'cacti_device': hostname=> 'static.openstack.org'}
-  class {'cacti_device': hostname=> 'wiki.openstack.org'}
+  cacti_device { 'cacti_community': hostname=> 'community.openstack.org' }
+  cacti_device { 'cacti_eavesdrop': hostname=> 'eavesdrop.openstack.org' }
+  cacti_device { 'cacti_etherpad': hostname=> 'etherpad.openstack.org' }
+  cacti_device { 'cacti_jenkins': hostname=> 'jenkins.openstack.org' }
+  cacti_device { 'cacti_jenkins-dev': hostname=> 'jenkins-dev.openstack.org' }
+  cacti_device { 'cacti_lists': hostname=> 'lists.openstack.org' }
+  cacti_device { 'cacti_paste': hostname=> 'paste.openstack.org' }
+  cacti_device { 'cacti_planet': hostname=> 'planet.openstack.org' }
+  cacti_device { 'cacti_pypi': hostname=> 'pypi.openstack.org' }
+  cacti_device { 'cacti_review': hostname=> 'review.openstack.org' }
+  cacti_device { 'cacti_review-dev': hostname=> 'review-dev.openstack.org' }
+  cacti_device { 'cacti_static': hostname=> 'static.openstack.org' }
+  cacti_device { 'cacti_wiki': hostname=> 'wiki.openstack.org' }
 }
 
-class cacti_device(
+define cacti_device(
   $hostname
 ){
   exec { "cacti_create_$hostname":
-    command      => "/usr/local/bin/create_graphs.sh $hostname",
-    require      => Exec["cacti_import_xml"]
+    command => "/usr/local/bin/create_graphs.sh $hostname",
+    require => Exec['cacti_import_xml']
   }
 }
-
