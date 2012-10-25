@@ -174,11 +174,13 @@
     name: jenkins-job-builder
     github-org: openstack-ci
     node: precise
+    tarball-publisher-site: nova.openstack.org
 
     jobs:
       - gate-{name}-merge
       - gate-{name}-pep8
       - gate-{name}-pyflakes
+      - '{name}-sdist-tarball'
       - gate-{name}-docs
 
 - project:

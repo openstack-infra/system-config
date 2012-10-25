@@ -177,6 +177,7 @@ projects:
       - gate-jenkins-job-builder-pep8
       - gate-jenkins-job-builder-pyflakes
     post:
+      - jenkins-job-builder-sdist-tarball
       - jenkins-job-builder-docs
 
   - name: openstack-ci/meetbot
