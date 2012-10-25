@@ -40,4 +40,9 @@ class openstack_project::users {
     realname => 'Ryan Lane',
     sshkeys  => "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCdtI7H+fsgSrjrdG8aGVcrN0GFW3XqLVsLG4n7JW4qH2W//hqgdL7A7cNVQNPoB9I1jAqvnO2Ct6wrVSh84QU89Uufw412M3qNSNeiGgv2c2KdxP2XBrnsLYAaJRbgOWJX7nty1jpO0xwF503ky2W3OMUsCXMAbYmYNSod6gAdzf5Xgo/3+eXRh7NbV1eKPrzwWoMOYh9T0Mvmokon/GXV5PiAA2bIaQvCy4BH/BzWiQwRM7KtiEt5lHahY172aEu+dcWxciuxHqkYqlKhbU+x1fwZJ+MpXSj5KBU+L0yf3iKySob7g6DZDST/Ylcm4MMjpOy8/9Cc6Xgpx77E/Pvd laner@Free-Public-Wifi.local\n",
   }
+
+  @user::virtual::localuser { 'fungi':
+    realname => 'Jeremy Stanley',
+    sshkeys  => "ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAzKUUBTKJf6CGyz96JbmVSOSzf6LgXRmbyvSkSnD8EnBPFugWF5h/pPmLTVRfUzuR8p1CAR8ziNv0kJZexHvRbp0n06HWERWdK9AXr4utlJr9oc3b50Mmd5GHQp2QLd2sQrMx8G0pimPVoKPTVNvrlwrY1hjHldugX9IqD2QWIYsQEnqXHiVrCCiIcJFe/Gr/Qmz9nWTXN0fEQ7wsmrHAQtAs7YHJ/fNuS4JOtBTXS5trs9tcIBtPFyB2OeyOq85Wvg/IyHBv9Va2Zjccmu8+cedOsrz0YtOSb++uFAyeAe8BFEKD0EmHwhXVrG9UTWdNgQgL+YzdPPifjEbEh3HQoQ== fungi@yuggoth.org\n",
+  }
 }
