@@ -164,3 +164,9 @@
 - project: stackforge/reddwarf
   options:
   - close-pull
+- project: stackforge/python-reddwarfclient
+  options:
+  - close-pull
+- project: stackforge/libra
+  options:
+    - close-pull

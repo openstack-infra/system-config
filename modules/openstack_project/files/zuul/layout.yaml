@@ -633,6 +633,19 @@ projects:
     gate:
       - gate-MRaaS-merge
 
+  - name: stackforge/libra
+    check:
+      - gate-libra-merge:
+        - gate-libra-pep8
+        - gate-libra-python26
+        - gate-libra-python27
+    gate:
+      - gate-libra-merge:
+        - gate-libra-pep8
+        - gate-libra-python26
+        - gate-libra-python27
+
+
   - name: heat-api/heat
     check:
       - gate-heat-merge:
@@ -657,6 +670,18 @@ projects:
         - gate-reddwarf-pep8
         - gate-reddwarf-python26
         - gate-reddwarf-python27
+
+  - name: stackforge/python-reddwarfclient
+    check:
+      - gate-python-reddwarfclient-merge:
+        - gate-python-reddwarfclient-pep8
+        - gate-python-reddwarfclient-python26
+        - gate-python-reddwarfclient-python27
+    gate:
+      - gate-python-reddwarfclient-merge:
+        - gate-python-reddwarfclient-pep8
+        - gate-python-reddwarfclient-python26
+        - gate-python-reddwarfclient-python27
 
   - name: openstack/openstack-manuals
     check:
