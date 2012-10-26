@@ -1,61 +1,62 @@
+# == Class: jenkins::job_builder
+#
 class jenkins::job_builder (
-    $url,
-    $username,
-    $password,
+  $url,
+  $username,
+  $password,
 ) {
 
   # A lot of things need yaml, be conservative requiring this package to avoid
   # conflicts with other modules.
   if ! defined(Package['python-yaml']) {
     package { 'python-yaml':
-      ensure => "present",
-    }
-  }
-
-  if ! defined(Package['python-jenkins']) {
-    package { "python-jenkins":
       ensure => present,
     }
   }
 
-  vcsrepo { "/opt/jenkins_job_builder":
-    ensure => latest,
+  if ! defined(Package['python-jenkins']) {
+    package { 'python-jenkins':
+      ensure => present,
+    }
+  }
+
+  vcsrepo { '/opt/jenkins_job_builder':
+    ensure   => latest,
     provider => git,
-    revision => "master",
-    source => "https://github.com/openstack-ci/jenkins-job-builder.git",
+    revision => 'master',
+    source   => 'https://github.com/openstack-ci/jenkins-job-builder.git',
   }
 
-  exec { "install_jenkins_job_builder":
-    command => "python setup.py install",
-    cwd => "/opt/jenkins_job_builder",
-    path => "/bin:/usr/bin",
+  exec { 'install_jenkins_job_builder':
+    command     => 'python setup.py install',
+    cwd         => '/opt/jenkins_job_builder',
+    path        => '/bin:/usr/bin',
     refreshonly => true,
-    subscribe => Vcsrepo["/opt/jenkins_job_builder"],
+    subscribe   => Vcsrepo['/opt/jenkins_job_builder'],
   }
 
-  file { "/etc/jenkins_jobs":
-    ensure => "directory",
+  file { '/etc/jenkins_jobs':
+    ensure => directory,
   }
 
-  exec { "jenkins_jobs_update":
-    command => "jenkins-jobs update /etc/jenkins_jobs/config",
-    path => '/bin:/usr/bin:/usr/local/bin',
+  exec { 'jenkins_jobs_update':
+    command     => 'jenkins-jobs update /etc/jenkins_jobs/config',
+    path        => '/bin:/usr/bin:/usr/local/bin',
     refreshonly => true,
-    require => [
+    require     => [
       File['/etc/jenkins_jobs/jenkins_jobs.ini'],
       Package['python-jenkins'],
-      Package['python-yaml']
-      ]
+      Package['python-yaml'],
+    ]
   }
 
 # TODO: We should put in  notify Exec['jenkins_jobs_update']
 #       at some point, but that still has some problems.
-  file { "/etc/jenkins_jobs/jenkins_jobs.ini":
-    owner => 'jenkins',
-    mode => 400,
-    ensure => 'present',
+  file { '/etc/jenkins_jobs/jenkins_jobs.ini':
+    ensure  => present,
+    owner   => 'jenkins',
+    mode    => '0400',
     content => template('jenkins/jenkins_jobs.ini.erb'),
-    require => File["/etc/jenkins_jobs"],
+    require => File['/etc/jenkins_jobs'],
   }
-
 }
