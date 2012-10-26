@@ -489,7 +489,25 @@
 - project:
     name: reddwarf
     github-org: stackforge
-    node: oneiric
+    node: precise
+
+    jobs:
+      - python-jobs
+
+
+- project:
+    name: python-reddwarfclient
+    github-org: stackforge
+    node: precise
+
+    jobs:
+      - python-jobs
+
+
+- project:
+    name: libra
+    github-org: stackforge
+    node: precise
 
     jobs:
       - python-jobs
