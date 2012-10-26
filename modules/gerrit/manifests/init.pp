@@ -3,7 +3,8 @@
 #   vhost_name:
 #     used in the Apache virtual host, eg., review.example.com
 #   canonicalweburl:
-#     Used in the Gerrit config to generate links, eg., https://review.example.com/
+#     Used in the Gerrit config to generate links,
+#       eg., https://review.example.com/
 #   ssl_cert_file:
 #   ssl_key_file:
 #     Used in the Apache virtual host to specify the SSL cert and key files.
@@ -65,49 +66,50 @@
 #     which can interfere with testing.
 # TODO: make more gerrit options configurable here
 
-class gerrit($vhost_name=$fqdn,
-  $canonicalweburl="https://${fqdn}/",
-  $serveradmin="webmaster@${fqdn}",
-  $ssl_cert_file='/etc/ssl/certs/ssl-cert-snakeoil.pem',
-  $ssl_key_file='/etc/ssl/private/ssl-cert-snakeoil.key',
-  $ssl_chain_file='',
-  $ssl_cert_file_contents='', # If left empty puppet will not create file.
-  $ssl_key_file_contents='', # If left empty puppet will not create file.
-  $ssl_chain_file_contents='', # If left empty puppet will not create file.
-  $ssh_dsa_key_contents='', # If left empty puppet will not create file.
-  $ssh_dsa_pubkey_contents='', # If left empty puppet will not create file.
-  $ssh_rsa_key_contents='', # If left empty puppet will not create file.
-  $ssh_rsa_pubkey_contents='', # If left empty puppet will not create file.
-  $openidssourl='https://login.launchpad.net/+openid',
-  $email='',
-  $database_poollimit='',
-  $container_heaplimit='',
-  $core_packedgitopenfiles='',
-  $core_packedgitlimit='',
-  $core_packedgitwindowsize='',
-  $sshd_threads='',
-  $httpd_acceptorthreads='',
-  $httpd_minthreads='',
-  $httpd_maxthreads='',
-  $httpd_maxwait='',
-  $commentlinks = [],
+class gerrit(
   $war,
-  $contactstore=false,
-  $contactstore_appsec='',
-  $contactstore_pubkey='',
-  $contactstore_url='',
-  $projects_file = 'UNDEF',
-  $enable_melody = 'false',
-  $melody_session = 'false',
   $mysql_password,
   $mysql_root_password,
   $email_private_key,
-  $replicate_github=false,
-  $replicate_local=true,
-  $local_git_dir='/var/lib/git',
-  $replication_targets=[],
-  $gitweb=true,
-  $testmode=false
+  $vhost_name = $::fqdn,
+  $canonicalweburl = "https://${::fqdn}/",
+  $serveradmin = "webmaster@${::fqdn}",
+  $ssl_cert_file = '/etc/ssl/certs/ssl-cert-snakeoil.pem',
+  $ssl_key_file = '/etc/ssl/private/ssl-cert-snakeoil.key',
+  $ssl_chain_file = '',
+  $ssl_cert_file_contents = '', # If left empty puppet will not create file.
+  $ssl_key_file_contents = '', # If left empty puppet will not create file.
+  $ssl_chain_file_contents = '', # If left empty puppet will not create file.
+  $ssh_dsa_key_contents = '', # If left empty puppet will not create file.
+  $ssh_dsa_pubkey_contents = '', # If left empty puppet will not create file.
+  $ssh_rsa_key_contents = '', # If left empty puppet will not create file.
+  $ssh_rsa_pubkey_contents = '', # If left empty puppet will not create file.
+  $openidssourl = 'https://login.launchpad.net/+openid',
+  $email = '',
+  $database_poollimit = '',
+  $container_heaplimit = '',
+  $core_packedgitopenfiles = '',
+  $core_packedgitlimit = '',
+  $core_packedgitwindowsize = '',
+  $sshd_threads = '',
+  $httpd_acceptorthreads = '',
+  $httpd_minthreads = '',
+  $httpd_maxthreads = '',
+  $httpd_maxwait = '',
+  $commentlinks = [],
+  $contactstore = false,
+  $contactstore_appsec = '',
+  $contactstore_pubkey = '',
+  $contactstore_url = '',
+  $projects_file = 'UNDEF',
+  $enable_melody = false,
+  $melody_session = false,
+  $replicate_github = false,
+  $replicate_local = true,
+  $local_git_dir = '/var/lib/git',
+  $replication_targets = [],
+  $gitweb = true,
+  $testmode = false
 ) {
   include apache
 
@@ -221,7 +223,8 @@ class gerrit($vhost_name=$fqdn,
 
     exec { 'make_local_repos':
       user        => 'gerrit2',
-      command     => "/usr/local/gerrit/scripts/make_local_repos.py ${local_git_dir}",
+      command     => "/usr/local/gerrit/scripts/make_local_repos.py \
+        ${local_git_dir}",
       subscribe   => File['/home/gerrit2/projects.yaml'],
       refreshonly => true,
       require     => File['/home/gerrit2/projects.yaml'],
@@ -373,8 +376,10 @@ class gerrit($vhost_name=$fqdn,
 
   # Install Gerrit itself.
 
-  # The Gerrit WAR is specified as a url like 'http://tarballs.openstack.org/ci/gerrit-2.2.2-363-gd0a67ce.war'
-  # Set $basewar so that we can work with filenames like gerrit-2.2.2-363-gd0a67ce.war'.
+  # The Gerrit WAR is specified as a url like
+  #   'http://tarballs.openstack.org/ci/gerrit-2.2.2-363-gd0a67ce.war'
+  # Set $basewar so that we can work with filenames like
+  #   gerrit-2.2.2-363-gd0a67ce.war'.
 
   if $war =~ /.*\/(.*)/ {
     $basewar = $1
@@ -402,8 +407,8 @@ class gerrit($vhost_name=$fqdn,
     source  => "file:///home/gerrit2/gerrit-wars/${basewar}",
     require => Exec["download:${war}"],
     replace => true,
-    # user, group, and mode have to be set this way to avoid retriggering gerrit-init on every run
-    # because gerrit init sets them this way
+    # user, group, and mode have to be set this way to avoid retriggering
+    # gerrit-init on every run because gerrit init sets them this way
     owner   => 'gerrit2',
     group   => 'gerrit2',
     mode    => '0644',
@@ -413,7 +418,8 @@ class gerrit($vhost_name=$fqdn,
   # If gerrit.war was just installed, run the Gerrit "init" command.
   exec { 'gerrit-initial-init':
     user      => 'gerrit2',
-    command   => '/usr/bin/java -jar /home/gerrit2/review_site/bin/gerrit.war init -d /home/gerrit2/review_site --batch --no-auto-start',
+    command   => '/usr/bin/java -jar /home/gerrit2/review_site/bin/gerrit.war \
+      init -d /home/gerrit2/review_site --batch --no-auto-start',
     subscribe => File['/home/gerrit2/review_site/bin/gerrit.war'],
     require   => [Package['openjdk-6-jre-headless'],
                   User['gerrit2'],
@@ -430,7 +436,9 @@ class gerrit($vhost_name=$fqdn,
   # Running the init script as the gerrit2 user _does_ work.
   exec { 'gerrit-init':
     user        => 'gerrit2',
-    command     => '/etc/init.d/gerrit stop; /usr/bin/java -jar /home/gerrit2/review_site/bin/gerrit.war init -d /home/gerrit2/review_site --batch --no-auto-start',
+    command     => '/etc/init.d/gerrit stop; /usr/bin/java -jar \
+      /home/gerrit2/review_site/bin/gerrit.war init \
+      -d /home/gerrit2/review_site --batch --no-auto-start',
     subscribe   => File['/home/gerrit2/review_site/bin/gerrit.war'],
     refreshonly => true,
     require     => [Package['openjdk-6-jre-headless'],
