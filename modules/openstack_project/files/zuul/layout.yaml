@@ -633,6 +633,13 @@ projects:
     gate:
       - gate-MRaaS-merge
 
+  - name: stackforge/libra
+    check:
+      - gate-libra-merge
+    gate:
+      - gate-libra-merge
+
+
   - name: heat-api/heat
     check:
       - gate-heat-merge:
