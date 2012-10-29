@@ -12,7 +12,7 @@ class openstack_project::eavesdrop (
     nick      => 'openstack',
     nickpass  => $nickpass,
     network   => 'FreeNode',
-    server    => 'chat.us.freenode.net:7000',
+    server    => 'niven.freenode.net:7000',
     channels  => '#openstack #openstack-dev #openstack-meeting',
     use_ssl   => 'True'
   }
