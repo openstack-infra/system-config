@@ -1,15 +1,14 @@
-class github (
-              $username,
-              $oauth_token,
-              $projects = []
-             ) {
-
+class github(
+  $username,
+  $oauth_token,
+  $projects = []
+) {
   include pip
 
-  package { "PyGithub":
-    ensure => latest,  # okay to use latest for pip
+  package { 'PyGithub':
+    ensure   => latest,  # okay to use latest for pip
     provider => pip,
-    require => Class[pip]
+    require  => Class['pip'],
   }
 
   # A lot of things need yaml, be conservative requiring this package to avoid
@@ -20,66 +19,69 @@ class github (
     }
   }
 
-  group { "github":
-    ensure => present
+  group { 'github':
+    ensure => present,
   }
 
-  user { "github":
-    ensure => present,
-    comment => "Github API User",
-    shell => "/bin/bash",
-    gid => "github",
-    require => Group["github"]
+  user { 'github':
+    ensure  => present,
+    comment => 'Github API User',
+    shell   => '/bin/bash',
+    gid     => 'github',
+    require => Group['github'],
   }
 
   file { '/etc/github':
-    owner => 'root',
-    group => 'root',
-    mode => 755,
-    ensure => 'directory',
+    ensure => directory,
+    group  => 'root',
+    mode   => '0755',
+    owner  => 'root',
   }
 
   file { '/etc/github/github.config':
-    ensure => absent
+    ensure => absent,
   }
 
   file { '/etc/github/github.secure.config':
-    owner => 'root',
-    group => 'github',
-    mode => 440,
-    ensure => 'present',
+    ensure  => present,
     content => template('github/github.secure.config.erb'),
-    replace => 'true',
-    require => [Group['github'], File['/etc/github']],
+    group   => 'github',
+    mode    => '0440',
+    owner   => 'root',
+    replace => true,
+    require => [
+      Group['github'],
+      File['/etc/github']
+    ],
   }
 
   file { '/usr/local/github':
-    owner => 'root',
-    group => 'root',
-    mode => 755,
-    ensure => 'directory',
+    ensure => directory,
+    group  => 'root',
+    mode   => '0755',
+    owner  => 'root',
   }
 
   file { '/usr/local/github/scripts':
-    owner => 'root',
-    group => 'root',
-    mode => 755,
-    ensure => 'directory',
+    ensure  => directory,
+    group   => 'root',
+    mode    => '0755',
+    owner   => 'root',
     recurse => true,
     require => File['/usr/local/github'],
-    source => [
-                "puppet:///modules/github/scripts",
-              ],
+    source  => 'puppet:///modules/github/scripts',
   }
 
-  cron { "githubclosepull":
-    user => github,
-    minute => "*/5",
+  cron { 'githubclosepull':
     command => 'sleep $((RANDOM\%60+90)) && python /usr/local/github/scripts/close_pull_requests.py',
+    minute  => '*/5',
     require => [
-                 File['/usr/local/github/scripts'],
-                 Package['python-yaml'],
-                 Package['PyGithub'],
-               ],
+      File['/usr/local/github/scripts'],
+      Package['python-yaml'],
+      Package['PyGithub'],
+    ],
+    user    => github,
   }
 }
+
+# vim:sw=2:ts=2:expandtab:textwidth=79

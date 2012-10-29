@@ -5,13 +5,12 @@ class gerritbot(
   $user,
   $vhost_name
 ) {
-
   include pip
 
   package { 'gerritbot':
     ensure   => present,  # Pip upgrade is not working
     provider => pip,
-    require  => Class[pip]
+    require  => Class['pip']
   }
 
   file { '/etc/init.d/gerritbot':
@@ -36,7 +35,7 @@ class gerritbot(
   }
 
   file { '/etc/gerritbot':
-    ensure => directory
+    ensure => directory,
   }
 
   file { '/var/log/gerritbot':
@@ -73,7 +72,7 @@ class gerritbot(
     mode    => '0440',
     owner   => 'root',
     replace => true,
-    require => User['gerrit2']
+    require => User['gerrit2'],
   }
 }
 
