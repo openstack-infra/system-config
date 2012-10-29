@@ -80,6 +80,7 @@ class jenkins::master(
     'python-babel',
     'python-sqlalchemy',  # devstack-gate
     'ssl-cert',
+    'sqlite3', # interact with devstack-gate DB
   ]
 
   package { $packages:
