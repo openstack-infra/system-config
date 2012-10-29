@@ -1,3 +1,5 @@
+# Class: mediawiki::image_scaler
+#
 class mediawiki::image_scaler {
   package { [ 'djvulibre-bin',
     'ffmpeg',
@@ -52,7 +54,7 @@ class mediawiki::image_scaler {
     'xfonts-base',
     'xfonts-mplus',
     'xfonts-scalable']:
-    ensure => present;
+    ensure => present,
   }
   include tmpreaper
 }

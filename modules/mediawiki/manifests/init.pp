@@ -1,12 +1,18 @@
-class mediawiki($role, $site_hostname, $mediawiki_location='') {
+# Class: mediawiki
+#
+class mediawiki(
+  $role,
+  $site_hostname,
+  $mediawiki_location = ''
+) {
   if ($role == 'app' or $role == 'all') {
-    include apache
     require apache::dev
-    include mediawiki::php,
-            mediawiki::app
+    include apache
+    include mediawiki::php
+    include mediawiki::app
 
     package { 'libapache2-mod-php5':
-      ensure => present
+      ensure => present,
     }
 
     apache::vhost { $site_hostname:
@@ -17,19 +23,17 @@ class mediawiki($role, $site_hostname, $mediawiki_location='') {
       ssl      => true,
     }
     a2mod { 'rewrite':
-      ensure => present
+      ensure => present,
     }
     a2mod { 'expires':
-      ensure => present
+      ensure => present,
     }
-
   }
   if ($role == 'image-scaler' or $role == 'all') {
-    include mediawiki::image_scaler,
-            mediawiki::php,
-            mediawiki::app
-  }
-  if ($role == 'search' or $role == 'all') {
-    include mediawiki::search
+    include mediawiki::image_scaler
+    include mediawiki::php
+    include mediawiki::app
   }
 }
+
+# vim:sw=2:ts=2:expandtab:textwidth=79
