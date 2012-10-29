@@ -638,12 +638,10 @@ projects:
     check:
       - gate-libra-merge:
         - gate-libra-pep8
-        - gate-libra-python26
         - gate-libra-python27
     gate:
       - gate-libra-merge:
         - gate-libra-pep8
-        - gate-libra-python26
         - gate-libra-python27
 
 
