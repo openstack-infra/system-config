@@ -1,3 +1,5 @@
+# == Class: etherpad_lite::mysql
+#
 class etherpad_lite::mysql(
   $database_password,
   $dbType = 'mysql',
@@ -31,7 +33,7 @@ class etherpad_lite::mysql(
     mode    => '0755',
     owner   => $etherpad_lite::ep_user,
     replace => true,
-    require => Class['etherpad_lite']
+    require => Class['etherpad_lite'],
   }
 
   file { "${etherpad_lite::base_install_dir}/etherpad-lite/create_user.sh":
@@ -41,7 +43,7 @@ class etherpad_lite::mysql(
     mode    => '0755',
     owner   => $etherpad_lite::ep_user,
     replace => true,
-    require => Class['etherpad_lite']
+    require => Class['etherpad_lite'],
   }
 
   exec { 'create-etherpad-lite-db':
@@ -49,26 +51,31 @@ class etherpad_lite::mysql(
     path    => [
       '/bin', '/usr/bin'
     ],
-    command => "${etherpad_lite::base_install_dir}/etherpad-lite/create_database.sh",
+    command =>
+      "${etherpad_lite::base_install_dir}/etherpad-lite/create_database.sh",
     require => [
       Service['mysql'],
       File["${etherpad_lite::base_install_dir}/etherpad-lite/settings.json"],
-      File["${etherpad_lite::base_install_dir}/etherpad-lite/create_database.sh"]
+      File[
+        "${etherpad_lite::base_install_dir}/etherpad-lite/create_database.sh"
+      ],
     ],
     before  => Exec['grant-etherpad-lite-db'],
   }
 
   exec { 'grant-etherpad-lite-db':
-    unless  => "mysql -u${database_user} -p${database_password} ${database_name}",
+    unless  =>
+      "mysql -u${database_user} -p${database_password} ${database_name}",
     path    => [
       '/bin',
       '/usr/bin'
     ],
-    command => "${etherpad_lite::base_install_dir}/etherpad-lite/create_user.sh",
+    command =>
+      "${etherpad_lite::base_install_dir}/etherpad-lite/create_user.sh",
     require => [
       Service['mysql'],
       File["${etherpad_lite::base_install_dir}/etherpad-lite/settings.json"],
-      File["${etherpad_lite::base_install_dir}/etherpad-lite/create_user.sh"]
+      File["${etherpad_lite::base_install_dir}/etherpad-lite/create_user.sh"],
     ],
   }
 }
