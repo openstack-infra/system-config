@@ -12,8 +12,8 @@ class jenkins::slave(
   if ($user == true) {
     class { 'jenkins::jenkinsuser':
       ensure  => present,
-      sudo    => $::sudo,
-      ssh_key => $::ssh_key,
+      sudo    => $sudo,
+      ssh_key => $ssh_key,
     }
   }
 
