@@ -1,8 +1,11 @@
+# == Class: openstack_project::template
+#
 # A template host with no running services
+#
 class openstack_project::template (
   $iptables_public_tcp_ports,
   $install_users = true,
-  $certname = $fqdn
+  $certname = $::fqdn
   ) {
   include ssh
   include snmpd
@@ -16,6 +19,6 @@ class openstack_project::template (
 
   class { 'openstack_project::base':
     install_users => $install_users,
-    certname => $certname,
+    certname      => $certname,
   }
 }
