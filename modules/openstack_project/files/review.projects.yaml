@@ -1,6 +1,9 @@
 - project: heat-api/heat
   options:
   - close-pull
+- project: heat-api/python-heatclient
+  options:
+  - close-pull
 - project: openstack-ci/devstack-gate
   options:
   - close-pull

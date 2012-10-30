@@ -658,6 +658,19 @@ projects:
         - gate-heat-python26
         - gate-heat-python27
 
+  - name: heat-api/python-heatclient
+    check:
+      - gate-python-heatclient-merge:
+        - gate-python-heatclient-pep8
+        - gate-python-heatclient-python26
+        - gate-python-heatclient-python27
+        - dev-python-heatclient-coverage
+    gate:
+      - gate-python-heatclient-merge:
+        - gate-python-heatclient-pep8
+        - gate-python-heatclient-python26
+        - gate-python-heatclient-python27
+
   - name: stackforge/reddwarf
     check:
       - gate-reddwarf-merge:
