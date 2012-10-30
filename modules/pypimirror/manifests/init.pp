@@ -16,12 +16,6 @@ class pypimirror(
     ensure => 'present'
   }
 
-  package { 'pip':
-    ensure   => present,
-    provider => 'pip',
-    require  => Class[pip]
-  }
-
   file { '/usr/local/mirror_scripts':
     ensure => directory,
     mode   => '0755',
@@ -63,7 +57,8 @@ class pypimirror(
     owner   => 'root',
     group   => 'root',
     content => template('pypimirror/run-mirror.sh.erb'),
-    require => File['/usr/local/mirror_scripts'],
+    require => [File['/usr/local/mirror_scripts'],
+                Class[pip]],
   }
 
   file { '/usr/local/mirror_scripts/run_mirror.py':
