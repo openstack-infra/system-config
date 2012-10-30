@@ -13,7 +13,7 @@ class jenkins::slave(
     class { 'jenkins::jenkinsuser':
       ensure  => present,
       sudo    => $::sudo,
-      ssh_key => $::ssh_key,
+      ssh_key => $ssh_key,
     }
   }
 
