@@ -1,10 +1,14 @@
+# == Class: openstack_project::review
+
 # Current thinking on Gerrit tuning parameters:
 
 # database.poolLimit:
 # This limit must be several units higher than the total number of
 # httpd and sshd threads as some request processing code paths may need
 # multiple connections.
-# database.poolLimit = 1 + max(sshd.threads,sshd.batchThreads) + sshd.streamThreads + sshd.commandStartThreads + httpd.acceptorThreads + httpd.maxThreads
+# database.poolLimit = 1 + max(sshd.threads,sshd.batchThreads)
+#   + sshd.streamThreads + sshd.commandStartThreads
+#   + httpd.acceptorThreads + httpd.maxThreads
 # http://groups.google.com/group/repo-discuss/msg/4c2809310cd27255
 # or "2x sshd.threads"
 # http://groups.google.com/group/repo-discuss/msg/269024c966e05d6a
@@ -14,7 +18,8 @@
 # http://groups.google.com/group/repo-discuss/msg/269024c966e05d6a
 
 # sshd.threads:
-# http://groups.google.com/group/repo-discuss/browse_thread/thread/b91491c185295a71
+# http:
+#  //groups.google.com/group/repo-discuss/browse_thread/thread/b91491c185295a71
 
 # httpd.maxWait:
 # 12:07 <@spearce> httpd.maxwait defaults to 5 minutes and is how long gerrit
@@ -33,16 +38,16 @@ class openstack_project::review (
   $ssl_cert_file_contents = '',
   $ssl_key_file_contents = '',
   $ssl_chain_file_contents = '',
-  $ssh_dsa_key_contents='',
-  $ssh_dsa_pubkey_contents='',
-  $ssh_rsa_key_contents='',
+  $ssh_dsa_key_contents = '',
+  $ssh_dsa_pubkey_contents = '',
+  $ssh_rsa_key_contents = '',
   $ssh_rsa_pubkey_contents='',
-  $lp_sync_key='', # If left empty puppet will not create file.
-  $lp_sync_pubkey='', # If left empty puppet will not create file.
-  $lp_sync_consumer_key='',
-  $lp_sync_token='',
-  $lp_sync_secret='',
-  $replicate_github=true,
+  $lp_sync_key = '', # If left empty puppet will not create file.
+  $lp_sync_pubkey = '', # If left empty puppet will not create file.
+  $lp_sync_consumer_key = '',
+  $lp_sync_token = '',
+  $lp_sync_secret = '',
+  $replicate_github = true,
   $sysadmins = []
 ) {
   class { 'openstack_project::gerrit':
@@ -57,18 +62,21 @@ class openstack_project::review (
     ssh_rsa_key_contents     => $ssh_rsa_key_contents,
     ssh_rsa_pubkey_contents  => $ssh_rsa_pubkey_contents,
     email                    => 'review@openstack.org',
-    database_poollimit       => '150',    # 1 + 100 + 9 + 2 + 2 + 25 = 139(rounded up)
+      # 1 + 100 + 9 + 2 + 2 + 25 = 139(rounded up)
+    database_poollimit       => '150',
     container_heaplimit      => '8g',
     core_packedgitopenfiles  => '4096',
     core_packedgitlimit      => '400m',
     core_packedgitwindowsize => '16k',
     sshd_threads             => '100',
     httpd_maxwait            => '5000min',
-    war                      => 'http://tarballs.openstack.org/ci/gerrit-2.4.2-11-gb5a28fb.war',
+    war                      =>
+      'http://tarballs.openstack.org/ci/gerrit-2.4.2-11-gb5a28fb.war',
     script_user              => 'launchpadsync',
     script_key_file          => '/home/gerrit2/.ssh/launchpadsync_rsa',
     script_logging_conf      => '/home/gerrit2/.sync_logging.conf',
-    projects_file            => 'puppet:///openstack_project/review.projects.yaml',
+    projects_file            =>
+      'puppet:///openstack_project/review.projects.yaml',
     github_username          => 'openstack-gerrit',
     github_oauth_token       => $github_oauth_token,
     mysql_password           => $mysql_password,
@@ -76,31 +84,32 @@ class openstack_project::review (
     trivial_rebase_role_id   => 'trivial-rebase@review.openstack.org',
     email_private_key        => $email_private_key,
     replicate_github         => $replicate_github,
-    sysadmins                => $sysadmins
+    sysadmins                => $sysadmins,
   }
   class { 'gerritbot':
-    nick => 'openstackgerrit',
-    password => $gerritbot_password,
-    server => 'irc.freenode.net',
-    user => 'gerritbot',
-    vhost_name => $fqdn
+    nick       => 'openstackgerrit',
+    password   => $gerritbot_password,
+    server     => 'irc.freenode.net',
+    user       => 'gerritbot',
+    vhost_name => $::fqdn,
   }
   include gerrit::remotes
 
   file { '/var/log/gerrit_user_sync':
-    ensure => directory,
-    owner => root,
-    group => gerrit2,
-    mode => 0775,
-    require => User['gerrit2']
+    ensure  => directory,
+    owner   => 'root',
+    group   => 'gerrit2',
+    mode    => '0775',
+    require => User['gerrit2'],
   }
   file { '/home/gerrit2/.sync_logging.conf':
-    ensure => present,
-    owner => root,
-    group => gerrit2,
-    mode => 0644,
-    source => 'puppet:///modules/openstack_project/gerrit/launchpad_sync_logging.conf',
-    require => User['gerrit2']
+    ensure  => present,
+    owner   => 'root',
+    group   => 'gerrit2',
+    mode    => '0644',
+    source  =>
+      'puppet:///modules/openstack_project/gerrit/launchpad_sync_logging.conf',
+    require => User['gerrit2'],
   }
   file { '/home/gerrit2/.ssh':
     ensure  => directory,
