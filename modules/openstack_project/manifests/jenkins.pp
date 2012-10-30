@@ -1,3 +1,5 @@
+# == Class: openstack_project::jenkins
+#
 class openstack_project::jenkins (
   $jenkins_jobs_password,
   $manage_jenkins_jobs = true,
@@ -37,7 +39,8 @@ class openstack_project::jenkins (
       group   => 'root',
       mode    => '0755',
       recurse => true,
-      source  => 'puppet:///modules/openstack_project/jenkins_job_builder/config',
+      source  =>
+        'puppet:///modules/openstack_project/jenkins_job_builder/config',
       notify  => Exec['jenkins_jobs_update'],
     }
 
