@@ -1,3 +1,5 @@
+# == Class: etherpad_lite::mysql
+#
 class etherpad_lite::mysql(
   $database_password,
   $dbType = 'mysql',
@@ -5,6 +7,8 @@ class etherpad_lite::mysql(
   $database_name = 'etherpad-lite'
 ) {
   include etherpad_lite
+
+  $base = "${etherpad_lite::base_install_dir}/etherpad-lite"
 
   package { 'mysql-server':
     ensure => present,
@@ -20,55 +24,57 @@ class etherpad_lite::mysql(
     hasrestart => true,
     require    => [
       Package['mysql-server'],
-      Package['mysql-client']
+      Package['mysql-client'],
     ],
   }
 
-  file { "${etherpad_lite::base_install_dir}/etherpad-lite/create_database.sh":
+  file { "${base}/create_database.sh":
     ensure  => present,
     content => template('etherpad_lite/create_database.sh.erb'),
     group   => $etherpad_lite::ep_user,
     mode    => '0755',
     owner   => $etherpad_lite::ep_user,
     replace => true,
-    require => Class['etherpad_lite']
+    require => Class['etherpad_lite'],
   }
 
-  file { "${etherpad_lite::base_install_dir}/etherpad-lite/create_user.sh":
+  file { "${base}/create_user.sh":
     ensure  => present,
     content => template('etherpad_lite/create_user.sh.erb'),
     group   => $etherpad_lite::ep_user,
     mode    => '0755',
     owner   => $etherpad_lite::ep_user,
     replace => true,
-    require => Class['etherpad_lite']
+    require => Class['etherpad_lite'],
   }
 
   exec { 'create-etherpad-lite-db':
     unless  => "mysql --defaults-file=/etc/mysql/debian.cnf ${database_name}",
     path    => [
-      '/bin', '/usr/bin'
+      '/bin',
+      '/usr/bin',
     ],
-    command => "${etherpad_lite::base_install_dir}/etherpad-lite/create_database.sh",
+    command => "${base}/create_database.sh",
     require => [
       Service['mysql'],
-      File["${etherpad_lite::base_install_dir}/etherpad-lite/settings.json"],
-      File["${etherpad_lite::base_install_dir}/etherpad-lite/create_database.sh"]
+      File["${base}/settings.json"],
+      File["${base}/create_database.sh"],
     ],
     before  => Exec['grant-etherpad-lite-db'],
   }
 
   exec { 'grant-etherpad-lite-db':
-    unless  => "mysql -u${database_user} -p${database_password} ${database_name}",
+    unless  =>
+      "mysql -u${database_user} -p${database_password} ${database_name}",
     path    => [
       '/bin',
       '/usr/bin'
     ],
-    command => "${etherpad_lite::base_install_dir}/etherpad-lite/create_user.sh",
+    command => "${base}/create_user.sh",
     require => [
       Service['mysql'],
-      File["${etherpad_lite::base_install_dir}/etherpad-lite/settings.json"],
-      File["${etherpad_lite::base_install_dir}/etherpad-lite/create_user.sh"]
+      File["${base}/settings.json"],
+      File["${base}/create_user.sh"],
     ],
   }
 }
