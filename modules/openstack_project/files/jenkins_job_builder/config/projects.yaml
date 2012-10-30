@@ -132,6 +132,15 @@
 
 
 - project:
+    name: python-heatclient
+    github-org: heat-api
+    node: precise
+
+    jobs:
+      - python-jobs
+
+
+- project:
     name: horizon
     github-org: openstack
     node: precise

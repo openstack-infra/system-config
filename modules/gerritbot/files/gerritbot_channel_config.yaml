@@ -52,7 +52,11 @@ stackforge-dev:
       - x-vrif-minus-2
     projects:
       - stackforge/ceilometer
+      - stackforge/libra
+      - stackforge/python-reddwarfclient
+      - stackforge/reddwarf
       - heat-api/heat
+      - heat-api/python-heatclient
     branches:
       - master
 
