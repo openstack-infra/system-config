@@ -3,6 +3,88 @@
     jobs:
       - gate-{name}-merge
 
+# in zuul/layout.yaml specified to only run against master branch.
+# this copies static files from www
+- job:
+    name: openstack-api-site
+    concurrent: false
+    node: precise
+
+    triggers:
+      - zuul-post
+
+    builders:
+      - gerrit-git-prep
+
+    publishers:
+      - ftp:
+          site: api.openstack.org
+          source: 'www/**'
+          target: ''
+          remove-prefix: 'www/'
+          excludes: ''
+      - console-log-post
+
+# this replaces the old openstack-api-site job in Jenkins
+- job:
+    name: openstack-api-ref
+    project-type: maven
+    concurrent: false
+    node: precise
+
+    triggers:
+      - zuul-post
+
+    prebuilders:
+      - gerrit-git-prep
+
+    maven:
+      root-module:
+        group-id: org.openstack.docs
+        artifact-id: openstack-guide
+      root-pom: api-ref/pom.xml
+      goals: 'clean generate-sources'
+
+    publishers:
+      - console-log-post
+      - ftp:
+          site: api.openstack.org
+          source: 'api-ref/target/docbkx/html/api-ref/**'
+          target: ''
+          remove-prefix: 'api-ref/target/docbkx/html/api-ref/'
+          excludes: '**/*.xml,**/null*'
+          remote-directory: ''
+
+# this replaces the old openstack-api-quick-start job
+- job:
+    name: openstack-api-quick-start
+    project-type: maven
+    concurrent: false
+    node: precise
+
+    triggers:
+      - zuul-post
+
+    prebuilders:
+      - gerrit-git-prep
+
+    maven:
+      root-module:
+        group-id: org.openstack.docs
+        artifact-id: openstack-guide
+      root-pom: api-quick-start/pom.xml
+      goals: 'clean generate-sources'
+
+    publishers:
+      - console-log-post
+      - ftp:
+          site: api.openstack.org
+          source: 'doc/target/docbkx/webhelp/api-quick-start-onepager/**'
+          target: ''
+          remove-prefix: 'doc/target/docbkx/webhelp/api-quick-start-onepager/'
+          excludes: '**/*.xml,**/null*'
+          remote-directory: 'api/quick-start'
+
 # this replaces the old openstack-netconn-api-doc job
 - job:
     name: network-api-v10
