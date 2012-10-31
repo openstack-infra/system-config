@@ -713,6 +713,14 @@ projects:
       - openstack-install-deploy-guide-apt-fedora
       - openstack-install-deploy-guide-ubuntu
 
+  - name: openstack/api-site
+    check:
+      - gate-api-merge
+    gate:
+      - gate-api-merge
+    post:
+      - openstack-api-quick-start
+
   - name: openstack/compute-api
     check:
       - gate-compute-api-merge
