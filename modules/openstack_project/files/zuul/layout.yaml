@@ -720,6 +720,7 @@ projects:
       - gate-api-site-merge
     post:
       - openstack-api-quick-start
+      - openstack-api-programming-guide
 
   - name: openstack/compute-api
     check:
