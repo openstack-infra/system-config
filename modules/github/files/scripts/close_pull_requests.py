@@ -43,7 +43,7 @@ logging.basicConfig(level=logging.ERROR)
 PROJECTS_YAML = os.environ.get('PROJECTS_YAML',
                                '/home/gerrit2/projects.yaml')
 GITHUB_SECURE_CONFIG = os.environ.get('GITHUB_SECURE_CONFIG',
-                                      '/home/gerrit2/github.secure.config')
+                                      '/etc/github/github.secure.config')
 
 MESSAGE = """Thank you for contributing to OpenStack!
 
