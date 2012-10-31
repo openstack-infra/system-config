@@ -2,7 +2,7 @@
     name: api-site
     github-org: openstack
     node: precise
-    doc-publisher-site: docs.openstack.org
+    doc-publisher-site: api.openstack.org
 
     jobs:
       - gate-{name}-merge

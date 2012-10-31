@@ -47,7 +47,7 @@
     publishers:
       - console-log-post
       - ftp:
-          site: docs.openstack.org
+          site: api.openstack.org
           source: 'doc/target/docbkx/webhelp/api-quick-start-onepager/**'
           target: ''
           remove-prefix: 'doc/target/docbkx/webhelp/api-quick-start-onepager/'

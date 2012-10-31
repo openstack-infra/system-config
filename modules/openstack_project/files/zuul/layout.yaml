@@ -715,9 +715,9 @@ projects:
 
   - name: openstack/api-site
     check:
-      - gate-api-merge
+      - gate-api-site-merge
     gate:
-      - gate-api-merge
+      - gate-api-site-merge
     post:
       - openstack-api-quick-start
 
