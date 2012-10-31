@@ -753,6 +753,16 @@ projects:
       - openstack-install-deploy-guide-apt-fedora
       - openstack-install-deploy-guide-ubuntu
 
+  - name: openstack/api-site
+    check:
+      - gate-api-site-merge
+    gate:
+      - gate-api-site-merge
+    post:
+      - openstack-api-quick-start
+      - openstack-api-site
+      - openstack-api-ref
+
   - name: openstack/compute-api
     check:
       - gate-compute-api-merge

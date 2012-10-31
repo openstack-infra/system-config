@@ -1,4 +1,13 @@
 - project:
+    name: api-site
+    github-org: openstack
+    node: precise
+    doc-publisher-site: api.openstack.org
+
+    jobs:
+      - gate-{name}-merge
+
+- project:
     name: ceilometer
     github-org: stackforge
     node: oneiric
