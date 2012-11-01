@@ -123,7 +123,8 @@ node 'ci-puppetmaster.openstack.org' {
 
 node 'lists.openstack.org' {
   class { 'openstack_project::lists':
-    listadmins => hiera('listadmins'),
+    listadmins   => hiera('listadmins'),
+    listpassword => hiera('listpassword'),
   }
 }
 
