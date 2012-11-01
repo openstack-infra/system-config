@@ -525,6 +525,15 @@
 
 
 - project:
+    name: marconi
+    github-org: stackforge
+    node: precise
+
+    jobs:
+      - python-jobs
+
+
+- project:
     name: moniker
     github-org: stackforge
     node: precise

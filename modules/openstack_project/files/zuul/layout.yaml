@@ -695,6 +695,18 @@ projects:
         - gate-python-reddwarfclient-python26
         - gate-python-reddwarfclient-python27
 
+  - name: stackforge/marconi
+    check:
+      - gate-marconi-merge:
+        - gate-marconi-pep8
+        - gate-marconi-python26
+        - gate-marconi-python27
+    gate:
+      - gate-marconi-merge:
+        - gate-marconi-pep8
+        - gate-marconi-python26
+        - gate-marconi-python27
+
   - name: stackforge/moniker
     check:
       - gate-moniker-merge:
