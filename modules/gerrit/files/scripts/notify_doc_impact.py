@@ -39,7 +39,8 @@ def process_impact(git_log, args):
     """Notify doc team of doc impact"""
     email_content = EMAIL_TEMPLATE % (args.change_url, git_log)
     msg = MIMEText(email_content)
-    msg['Subject'] = '[%s] DocImpact review request' % args.project
+    msg['Subject'] = '[%s] DocImpact review request change %s' % \
+        (args.project, args.change)
     msg['From'] = 'gerrit2@review.openstack.org'
     msg['To'] = DEST_ADDRESS
 
