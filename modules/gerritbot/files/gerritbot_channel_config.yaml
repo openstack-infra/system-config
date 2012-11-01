@@ -69,3 +69,14 @@ openstack-metering:
       - stackforge/ceilometer
     branches:
       - master
+
+openstack-dns:
+    events:
+      - patchset-created
+      - change-merged
+      - x-vrif-minus-2
+    projects:
+      - stackforge/moniker
+      - stackforge/python-monikerclient
+    branches:
+      - master
