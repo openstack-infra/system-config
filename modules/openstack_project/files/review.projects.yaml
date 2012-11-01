@@ -173,3 +173,9 @@
 - project: stackforge/libra
   options:
     - close-pull
+- project: stackforge/moniker
+  options:
+  - close-pull
+- project: stackforge/python-monikerclient
+  options:
+  - close-pull

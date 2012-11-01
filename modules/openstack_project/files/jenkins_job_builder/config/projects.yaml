@@ -525,6 +525,24 @@
 
 
 - project:
+    name: moniker
+    github-org: stackforge
+    node: precise
+
+    jobs:
+      - python-jobs
+
+
+- project:
+    name: python-monikerclient
+    github-org: stackforge
+    node: precise
+
+    jobs:
+      - python-jobs
+
+
+- project:
     name: requirements
     github-org: openstack
     node: precise

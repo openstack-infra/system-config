@@ -695,6 +695,30 @@ projects:
         - gate-python-reddwarfclient-python26
         - gate-python-reddwarfclient-python27
 
+  - name: stackforge/moniker
+    check:
+      - gate-moniker-merge:
+        - gate-moniker-pep8
+        - gate-moniker-python26
+        - gate-moniker-python27
+    gate:
+      - gate-moniker-merge:
+        - gate-moniker-pep8
+        - gate-moniker-python26
+        - gate-moniker-python27
+
+  - name: stackforge/python-monikerclient
+    check:
+      - gate-python-monikerclient-merge:
+        - gate-python-monikerclient-pep8
+        - gate-python-monikerclient-python26
+        - gate-python-monikerclient-python27
+    gate:
+      - gate-python-monikerclient-merge:
+        - gate-python-monikerclient-pep8
+        - gate-python-monikerclient-python26
+        - gate-python-monikerclient-python27
+
   - name: openstack/openstack-manuals
     check:
       - gate-openstack-manuals-merge
