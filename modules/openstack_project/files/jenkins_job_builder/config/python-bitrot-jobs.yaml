@@ -16,6 +16,8 @@
               keep-hierarchy: false
               copy-after-failure: true
       - console-log-periodic
+      - email:
+          recipients: openstack-stable-maint@lists.openstack.org
 
     scm:
       - git:
@@ -45,6 +47,8 @@
               keep-hierarchy: false
               copy-after-failure: true
       - console-log-periodic
+      - email:
+          recipients: openstack-stable-maint@lists.openstack.org
 
     scm:
       - git:
@@ -66,6 +70,8 @@
 
     publishers:
       - console-log-periodic
+      - email:
+          recipients: openstack-stable-maint@lists.openstack.org
 
     scm:
       - git:
