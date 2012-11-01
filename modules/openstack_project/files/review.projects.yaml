@@ -173,6 +173,9 @@
 - project: stackforge/libra
   options:
     - close-pull
+- project: stackforge/marconi
+  options:
+  - close-pull
 - project: stackforge/moniker
   options:
   - close-pull
