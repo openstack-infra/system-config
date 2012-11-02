@@ -403,12 +403,16 @@ projects:
         - gate-python-cinderclient-pep8
         - gate-python-cinderclient-python26
         - gate-python-cinderclient-python27
+        - gate-tempest-devstack-vm
+        - gate-tempest-devstack-vm-cinder
     gate:
       - gate-python-cinderclient-merge:
         - gate-python-cinderclient-docs
         - gate-python-cinderclient-pep8
         - gate-python-cinderclient-python26
         - gate-python-cinderclient-python27
+        - gate-tempest-devstack-vm
+        - gate-tempest-devstack-vm-cinder
     post:
       - python-cinderclient-sdist-tarball
       - python-cinderclient-coverage
