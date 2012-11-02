@@ -532,7 +532,7 @@ gerritbot.config file:
   [ircbot]
   nick=NICNAME
   pass=PASSWORD
-  server=irc.freenode.net
+  server=chat.freenode.net
   channel=openstack-dev
   port=6667
 
