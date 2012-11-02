@@ -25,18 +25,31 @@
           excludes: ''
       - console-log-post
 
-# this replaces the old openstack-api-site job in Jenkins
+# this moves the openstack-api-programming job from manuals.yaml and adjusts target
+# and publishers accordingly
 - job:
-    name: openstack-api-ref
+    name: openstack-api-programming
     project-type: maven
-    concurrent: false
+    concurrent: true
     node: precise
+
+    wrappers:
+      - timeout:
+          timeout: 40
+          fail: true
 
     triggers:
       - zuul-post
 
     prebuilders:
       - gerrit-git-prep
+      - markdown-docbook:
+          filename: "openstack-api-programming"
+
+    properties:
+      - inject:
+          script-file: /usr/local/jenkins/slave_scripts/docbook-properties.sh
+          properties-file: gerrit-doc.properties
 
     maven:
       root-module:
