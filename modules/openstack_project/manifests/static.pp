@@ -36,6 +36,13 @@ class openstack_project::static (
     template => 'openstack_project/logs.vhost.erb',
   }
 
+  apache::vhost { 'docs-draft.openstack.org':
+    port     => 80,
+    priority => '50',
+    docroot  => '/srv/static/docs-draft',
+    require  => File['/srv/static/docs-draft'],
+  }
+
   file { '/srv/static':
     ensure => directory
   }
@@ -49,6 +56,10 @@ class openstack_project::static (
   }
 
   file { '/srv/static/logs':
+    ensure => directory
+  }
+
+  file { '/srv/static/docs-draft':
     ensure => directory
   }
 
