@@ -108,7 +108,7 @@ class jenkins::master(
   }
 
   package { 'git-review':
-    ensure   => latest,
+    ensure   => '1.18',
     provider => pip,
     require  => Class[pip],
   }
