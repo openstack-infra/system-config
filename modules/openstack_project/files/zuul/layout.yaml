@@ -762,6 +762,7 @@ projects:
       - openstack-api-quick-start
       - openstack-api-site
       - openstack-api-ref
+      - openstack-api-programming
 
   - name: openstack/compute-api
     check:

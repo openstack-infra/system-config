@@ -3,27 +3,77 @@
     jobs:
       - gate-{name}-merge
 
-# in zuul/layout.yaml specified to only run against master branch.
-# this copies static files from www
+# this moves the openstack-api-programming job from manuals.yaml and adjusts target
+# and publishers accordingly
 - job:
-    name: openstack-api-site
+    name: openstack-api-programming
+    project-type: maven
+    concurrent: true
+    node: precise
+
+    wrappers:
+      - timeout:
+          timeout: 40
+          fail: true
+
+    triggers:
+      - zuul-post
+
+    prebuilders:
+      - gerrit-git-prep
+      - markdown-docbook:
+          filename: "openstack-api-programming"
+
+    properties:
+      - inject:
+          script-file: /usr/local/jenkins/slave_scripts/docbook-properties.sh
+          properties-file: gerrit-doc.properties
+
+    maven:
+      root-module:
+        group-id: org.openstack.docs
+        artifact-id: openstack-guide
+      root-pom: openstack-api-programming/pom.xml
+      goals: 'clean generate-sources'
+
+    publishers:
+      - console-log-post
+      - ftp:
+          site: api.openstack.org
+          source: 'doc/target/docbkx/webhelp/openstack-api-programming/**'
+          target: 'openstack-compute/programmer/'
+          remove-prefix: 'doc/target/docbkx/webhelp/openstack-api-programming/'
+          excludes: '**/*.xml,**/null*'
+
+# this replaces the old openstack-api-quick-start job
+- job:
+    name: openstack-api-quick-start
+    project-type: maven
     concurrent: false
     node: precise
 
     triggers:
       - zuul-post
 
-    builders:
+    prebuilders:
       - gerrit-git-prep
 
+    maven:
+      root-module:
+        group-id: org.openstack.docs
+        artifact-id: openstack-guide
+      root-pom: api-quick-start/pom.xml
+      goals: 'clean generate-sources'
+
     publishers:
+      - console-log-post
       - ftp:
           site: api.openstack.org
-          source: 'www/**'
+          source: 'doc/target/docbkx/webhelp/api-quick-start-onepager/**'
           target: ''
-          remove-prefix: 'www/'
-          excludes: ''
-      - console-log-post
+          remove-prefix: 'doc/target/docbkx/webhelp/api-quick-start-onepager/'
+          excludes: '**/*.xml,**/null*'
+          remote-directory: 'api/quick-start'
 
 # this replaces the old openstack-api-site job in Jenkins
 - job:
@@ -55,35 +105,28 @@
           excludes: '**/*.xml,**/null*'
           remote-directory: ''
 
-# this replaces the old openstack-api-quick-start job
+
+# in zuul/layout.yaml specified to only run against master branch.
+# this copies static files from www
 - job:
-    name: openstack-api-quick-start
-    project-type: maven
+    name: openstack-api-site
     concurrent: false
     node: precise
 
     triggers:
       - zuul-post
 
-    prebuilders:
+    builders:
       - gerrit-git-prep
 
-    maven:
-      root-module:
-        group-id: org.openstack.docs
-        artifact-id: openstack-guide
-      root-pom: api-quick-start/pom.xml
-      goals: 'clean generate-sources'
-
     publishers:
-      - console-log-post
       - ftp:
           site: api.openstack.org
-          source: 'doc/target/docbkx/webhelp/api-quick-start-onepager/**'
+          source: 'www/**'
           target: ''
-          remove-prefix: 'doc/target/docbkx/webhelp/api-quick-start-onepager/'
-          excludes: '**/*.xml,**/null*'
-          remote-directory: 'api/quick-start'
+          remove-prefix: 'www/'
+          excludes: ''
+      - console-log-post
 
 # this replaces the old openstack-netconn-api-doc job
 - job:
