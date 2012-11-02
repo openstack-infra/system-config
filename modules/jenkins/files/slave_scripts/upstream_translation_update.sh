@@ -12,7 +12,7 @@ git config user.email "jenkins@openstack.org"
 
 # initialize transifex client
 tx init --host=https://www.transifex.com
-tx set --auto-local -r ${PROJECT}.${PROJECT}-translations "${PROJECT}/locale/<lang>/LC_MESSAGES/${PROJECT}.po" --source-lang en --source-file ${PROJECT}/locale/${PROJECT}.pot --execute
+tx set --auto-local -r ${PROJECT}.${PROJECT}-translations "${PROJECT}/locale/<lang>/LC_MESSAGES/${PROJECT}.po" --source-lang en --source-file ${PROJECT}/locale/${PROJECT}.pot -t PO --execute
 
 # Pull all upstream translations
 tx pull -a
