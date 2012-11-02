@@ -81,7 +81,7 @@ class openstack_project::review (
   class { 'gerritbot':
     nick => 'openstackgerrit',
     password => $gerritbot_password,
-    server => 'irc.freenode.net',
+    server => 'chat.freenode.net',
     user => 'gerritbot',
     vhost_name => $fqdn
   }

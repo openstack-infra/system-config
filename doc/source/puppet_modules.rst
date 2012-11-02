@@ -145,7 +145,7 @@ To use this module simply add a section to the site manifest as follows:
      meetbot::site { "openstack":
        nick => "openstack",
        network => "FreeNode",
-       server => "chat.us.freenode.net:7000",
+       server => "chat.freenode.net:7000",
        url => "eavesdrop.openstack.org",
        channels => "#openstack #openstack-dev #openstack-meeting",
        use_ssl => "True"
