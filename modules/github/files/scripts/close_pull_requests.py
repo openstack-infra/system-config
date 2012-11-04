@@ -16,6 +16,12 @@
 # Github pull requests closer reads a project config file called projects.yaml
 # It should look like:
 
+# - homepage: http://openstack.org
+#   team-id: 153703
+#   has-wiki: False
+#   has-issues: False
+#   has-downloads: False
+# ---
 # - project: PROJECT_NAME
 #   options:
 #   - has-pull-requests
@@ -54,7 +60,7 @@ Please visit http://wiki.openstack.org/GerritWorkflow and follow the instruction
 
 secure_config = ConfigParser.ConfigParser()
 secure_config.read(GITHUB_SECURE_CONFIG)
-config = yaml.load(open(PROJECTS_YAML))
+(defaults, config) = [config for config in yaml.load_all(open(PROJECTS_YAML))]
 
 if secure_config.has_option("github", "oauth_token"):
     ghub = github.Github(secure_config.get("github", "oauth_token"))
