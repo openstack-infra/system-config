@@ -45,6 +45,8 @@ class openstack_project::gerrit (
   $trivial_rebase_role_id,
   $email_private_key,
   $replicate_github=true,
+  $replicate_local=true,
+  $local_git_dir='/var/lib/git',
   $testmode=false,
   $sysadmins=[]
 ) {
@@ -206,5 +208,32 @@ class openstack_project::gerrit (
       'puppet:///modules/openstack_project/gerrit/scripts/trivial_rebase.py',
     replace => 'true',
     require => Class['::gerrit']
+  }
+
+  if ($projects_file != 'UNDEF') {
+    if ($replicate_local) {
+      file { $local_git_dir:
+        ensure  => directory,
+        owner   => 'gerrit2',
+        require => Class['::gerrit'],
+      }
+    }
+
+    file { '/home/gerrit2/projects.yaml':
+      ensure  => present,
+      owner   => 'gerrit2',
+      group   => 'gerrit2',
+      mode    => '0444',
+      content => template($projects_file),
+      replace => true,
+      require => Class['::gerrit'],
+    }
+
+    exec { 'manage_projects':
+      command     => "/usr/local/gerrit/scripts/manage_projects.py",
+      subscribe   => File['/home/gerrit2/projects.yaml'],
+      refreshonly => true,
+      require     => File['/home/gerrit2/projects.yaml'],
+    }
   }
 }
