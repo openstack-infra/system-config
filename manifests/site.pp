@@ -14,6 +14,8 @@ node default {
 node 'review.openstack.org' {
   class { 'openstack_project::review':
     github_oauth_token      => hiera('gerrit_github_token'),
+    github_project_username => hiera('github_project_username'),
+    github_project_password => hiera('github_project_password'),
     mysql_password          => hiera('gerrit_mysql_password'),
     mysql_root_password     => hiera('gerrit_mysql_root_password'),
     email_private_key       => hiera('gerrit_email_private_key'),
@@ -25,6 +27,8 @@ node 'review.openstack.org' {
     ssh_dsa_pubkey_contents => hiera('gerrit_ssh_dsa_pubkey_contents'),
     ssh_rsa_key_contents    => hiera('gerrit_ssh_rsa_key_contents'),
     ssh_rsa_pubkey_contents => hiera('gerrit_ssh_rsa_pubkey_contents'),
+    ssh_rsa_project_key_contents    => hiera('gerrit_ssh_rsa_key_contents'),
+    ssh_rsa_project_pubkey_contents => hiera('gerrit_ssh_rsa_pubkey_contents'),
     lp_sync_key             => hiera('gerrit_lp_sync_key'),
     lp_sync_pubkey          => hiera('gerrit_lp_sync_pubkey'),
     lp_sync_consumer_key    => hiera('gerrit_lp_consumer_key'),
@@ -37,6 +41,8 @@ node 'review.openstack.org' {
 node 'review2.openstack.org' {
   class { 'openstack_project::review':
     github_oauth_token      => hiera('gerrit_github_token'),
+    github_project_username => hiera('github_project_username'),
+    github_project_password => hiera('github_project_password'),
     mysql_password          => hiera('gerrit_mysql_password'),
     mysql_root_password     => hiera('gerrit_mysql_root_password'),
     email_private_key       => hiera('gerrit_email_private_key'),
@@ -48,6 +54,8 @@ node 'review2.openstack.org' {
     ssh_dsa_pubkey_contents => hiera('gerrit_ssh_dsa_pubkey_contents'),
     ssh_rsa_key_contents    => hiera('gerrit_ssh_rsa_key_contents'),
     ssh_rsa_pubkey_contents => hiera('gerrit_ssh_rsa_pubkey_contents'),
+    ssh_project_rsa_key_contents    => hiera('gerrit_project_ssh_rsa_key_contents'),
+    ssh_project_rsa_pubkey_contents => hiera('gerrit_project_ssh_rsa_pubkey_contents'),
     lp_sync_key             => hiera('gerrit_lp_sync_key'),
     lp_sync_pubkey          => hiera('gerrit_lp_sync_pubkey'),
     lp_sync_consumer_key    => hiera('gerrit_lp_consumer_key'),
@@ -61,6 +69,8 @@ node 'review2.openstack.org' {
 node 'review-dev.openstack.org' {
   class { 'openstack_project::review_dev':
     github_oauth_token      => hiera('gerrit_dev_github_token'),
+    github_project_username => hiera('github_dev_project_username'),
+    github_project_password => hiera('github_dev_project_password'),
     mysql_password          => hiera('gerrit_dev_mysql_password'),
     mysql_root_password     => hiera('gerrit_dev_mysql_root_password'),
     email_private_key       => hiera('gerrit_dev_email_private_key'),
@@ -70,6 +80,8 @@ node 'review-dev.openstack.org' {
     ssh_dsa_pubkey_contents => hiera('gerrit_dev_ssh_dsa_pubkey_contents'),
     ssh_rsa_key_contents    => hiera('gerrit_dev_ssh_rsa_key_contents'),
     ssh_rsa_pubkey_contents => hiera('gerrit_dev_ssh_rsa_pubkey_contents'),
+    ssh_project_rsa_key_contents    => hiera('gerrit_dev_project_ssh_rsa_key_contents'),
+    ssh_project_rsa_pubkey_contents => hiera('gerrit_dev_project_ssh_rsa_pubkey_contents'),
     lp_sync_key             => hiera('gerrit_dev_lp_sync_key'),
     lp_sync_pubkey          => hiera('gerrit_dev_lp_sync_pubkey'),
     lp_sync_consumer_key    => hiera('gerrit_dev_lp_consumer_key'),
