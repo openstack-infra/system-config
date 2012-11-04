@@ -1,6 +1,8 @@
 - project: heat-api/heat
   options:
   - close-pull
+  - has-wiki
+  description: "Heat" keeps the clouds up ;)
 - project: heat-api/python-heatclient
   options:
   - close-pull
@@ -10,6 +12,7 @@
 - project: openstack-ci/gerrit
   options:
   - close-pull
+  description: Fork of Gerrit used by OpenStack
   remote: https://gerrit.googlesource.com/gerrit
 - project: openstack-ci/gerrit-verification-status-plugin
   options:
