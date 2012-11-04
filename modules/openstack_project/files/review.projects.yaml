@@ -1,7 +1,11 @@
 - project: heat-api/heat
+  options:
+  - has-wiki
+  description: "Heat" keeps the clouds up ;)
 - project: heat-api/python-heatclient
 - project: openstack-ci/devstack-gate
 - project: openstack-ci/gerrit
+  description: Fork of Gerrit used by OpenStack
   remote: https://gerrit.googlesource.com/gerrit
 - project: openstack-ci/gerrit-verification-status-plugin
 - project: openstack-ci/gerritbot
