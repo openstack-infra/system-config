@@ -749,7 +749,7 @@ Pull requests can not be disabled for a project in Github, so instead
 we have a script that runs from cron to close any open pull requests
 with instructions to use Gerrit.
 
-* Edit openstack/openstack-ci-puppet:modules/openstack_project/files/review.projects.yaml
+* Edit openstack/openstack-ci-puppet:modules/openstack_project/templates/review.projects.yaml.erb
 
 and add the project to the list of projects in the yaml file
 

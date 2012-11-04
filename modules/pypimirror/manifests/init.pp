@@ -47,7 +47,7 @@ class pypimirror(
     owner   => 'root',
     group   => 'root',
     mode    => '0444',
-    source  => 'puppet:///openstack_project/review.projects.yaml',
+    content => template('openstack_project/review.projects.yaml.erb'),
     replace => true,
   }
 
