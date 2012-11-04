@@ -5,6 +5,8 @@ class pypimirror(
   $pip_download = '/var/lib/pip-download',
   $pip_cache = '/var/cache/pip',
   $git_source = 'https://github.com',
+  $local_git_dir = '/var/lib/git',
+  $ssh_project_key = 'UNDEF',
   $projects = [] )
 {
 
@@ -47,7 +49,7 @@ class pypimirror(
     owner   => 'root',
     group   => 'root',
     mode    => '0444',
-    source  => 'puppet:///openstack_project/review.projects.yaml',
+    content => template('openstack_project/review.projects.yaml.erb'),
     replace => true,
   }
 
