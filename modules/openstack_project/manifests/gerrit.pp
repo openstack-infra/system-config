@@ -8,6 +8,7 @@ class openstack_project::gerrit (
   $canonicalweburl="https://$fqdn/",
   $serveradmin='webmaster@openstack.org',
   $ssh_host_key='/home/gerrit2/review_site/etc/ssh_host_rsa_key',
+  $ssh_project_key='/home/gerrit2/review_site/etc/ssh_project_rsa_key',
   $ssl_cert_file='',
   $ssl_key_file='',
   $ssl_chain_file='',
@@ -18,6 +19,8 @@ class openstack_project::gerrit (
   $ssh_dsa_pubkey_contents='', # If left empty puppet will not create file.
   $ssh_rsa_key_contents='', # If left empty puppet will not create file.
   $ssh_rsa_pubkey_contents='', # If left empty puppet will not create file.
+  $ssh_project_rsa_key_contents='', # If left empty puppet will not create file.
+  $ssh_project_rsa_pubkey_contents='', # If left empty puppet will not create file.
   $email='',
   $database_poollimit='',
   $container_heaplimit='',
@@ -40,11 +43,15 @@ class openstack_project::gerrit (
   $projects_file='UNDEF',
   $github_username,
   $github_oauth_token,
+  $github_project_username,
+  $github_project_password,
   $mysql_password,
   $mysql_root_password,
   $trivial_rebase_role_id,
   $email_private_key,
   $replicate_github=true,
+  $replicate_local=true,
+  $local_git_dir='/var/lib/git',
   $testmode=false,
   $sysadmins=[]
 ) {
@@ -54,69 +61,72 @@ class openstack_project::gerrit (
   }
 
   class { '::gerrit':
-    vhost_name               => $vhost_name,
-    canonicalweburl          => $canonicalweburl,
+    vhost_name                      => $vhost_name,
+    canonicalweburl                 => $canonicalweburl,
     # opinions
-    enable_melody            => 'true',
-    melody_session           => 'true',
+    enable_melody                   => 'true',
+    melody_session                  => 'true',
     # passthrough
-    ssl_cert_file            => $ssl_cert_file,
-    ssl_key_file             => $ssl_key_file,
-    ssl_chain_file           => $ssl_chain_file,
-    ssl_cert_file_contents   => $ssl_cert_file_contents,
-    ssl_key_file_contents    => $ssl_key_file_contents,
-    ssl_chain_file_contents  => $ssl_chain_file_contents,
-    ssh_dsa_key_contents     => $ssh_dsa_key_contents,
-    ssh_dsa_pubkey_contents  => $ssh_dsa_pubkey_contents,
-    ssh_rsa_key_contents     => $ssh_rsa_key_contents,
-    ssh_rsa_pubkey_contents  => $ssh_rsa_pubkey_contents,
-    email                    => $email,
-    openidssourl             => "https://login.launchpad.net/+openid",
-    database_poollimit       => $database_poollimit,
-    container_heaplimit      => $container_heaplimit,
-    core_packedgitopenfiles  => $core_packedgitopenfiles,
-    core_packedgitlimit      => $core_packedgitlimit,
-    core_packedgitwindowsize => $core_packedgitwindowsize,
-    sshd_threads             => $sshd_threads,
-    httpd_acceptorthreads    => $httpd_acceptorthreads,
-    httpd_minthreads         => $httpd_minthreads,
-    httpd_maxthreads         => $httpd_maxthreads,
-    httpd_maxwait            => $httpd_maxwait,
-    commentlinks             => [{ name  => 'changeid',
-                                   match => '(I[0-9a-f]{8,40})',
-                                   link => '#q,$1,n,z'
-                                 },
-                                 { name  => 'launchpad',
-                                   match => '([Bb]ug|[Ll][Pp])[\\s#:]*(\\d+)',
-                                   link  => 'https://code.launchpad.net/bugs/$2'
-                                 },
-                                 { name  => 'blueprint',
-                                   match => '([Bb]lue[Pp]rint|[Bb][Pp])[\\s#:]*([A-Za-z0-9\\-]+)',
-                                   link => 'https://blueprints.launchpad.net/openstack/?searchtext=$2'
-                                 },
-                                ],
-    war                      => $war,
-    contactstore             => $contactstore,
-    contactstore_appsec      => $contactstore_appsec,
-    contactstore_pubkey      => $contactstore_pubkey,
-    contactstore_url         => $contactstore_url,
-    mysql_password           => $mysql_password,
-    mysql_root_password      => $mysql_root_password,
-    email_private_key        => $email_private_key,
-    projects_file            => $projects_file,
-    replicate_github         => $replicate_github,
-    testmode                 => $testmode,
-    require                  => Class[openstack_project::server],
+    ssl_cert_file                   => $ssl_cert_file,
+    ssl_key_file                    => $ssl_key_file,
+    ssl_chain_file                  => $ssl_chain_file,
+    ssl_cert_file_contents          => $ssl_cert_file_contents,
+    ssl_key_file_contents           => $ssl_key_file_contents,
+    ssl_chain_file_contents         => $ssl_chain_file_contents,
+    ssh_dsa_key_contents            => $ssh_dsa_key_contents,
+    ssh_dsa_pubkey_contents         => $ssh_dsa_pubkey_contents,
+    ssh_rsa_key_contents            => $ssh_rsa_key_contents,
+    ssh_rsa_pubkey_contents         => $ssh_rsa_pubkey_contents,
+    ssh_project_rsa_key_contents    => $ssh_project_rsa_key_contents,
+    ssh_project_rsa_pubkey_contents => $ssh_project_rsa_pubkey_contents,
+    email                           => $email,
+    openidssourl                    => "https://login.launchpad.net/+openid",
+    database_poollimit              => $database_poollimit,
+    container_heaplimit             => $container_heaplimit,
+    core_packedgitopenfiles         => $core_packedgitopenfiles,
+    core_packedgitlimit             => $core_packedgitlimit,
+    core_packedgitwindowsize        => $core_packedgitwindowsize,
+    sshd_threads                    => $sshd_threads,
+    httpd_acceptorthreads           => $httpd_acceptorthreads,
+    httpd_minthreads                => $httpd_minthreads,
+    httpd_maxthreads                => $httpd_maxthreads,
+    httpd_maxwait                   => $httpd_maxwait,
+    commentlinks                    => [{ name  => 'changeid',
+                                          match => '(I[0-9a-f]{8,40})',
+                                          link => '#q,$1,n,z'
+                                        },
+                                        { name  => 'launchpad',
+                                          match => '([Bb]ug|[Ll][Pp])[\\s#:]*(\\d+)',
+                                          link  => 'https://code.launchpad.net/bugs/$2'
+                                        },
+                                        { name  => 'blueprint',
+                                          match => '([Bb]lue[Pp]rint|[Bb][Pp])[\\s#:]*([A-Za-z0-9\\-]+)',
+                                          link => 'https://blueprints.launchpad.net/openstack/?searchtext=$2'
+                                        },
+                                       ],
+    war                             => $war,
+    contactstore                    => $contactstore,
+    contactstore_appsec             => $contactstore_appsec,
+    contactstore_pubkey             => $contactstore_pubkey,
+    contactstore_url                => $contactstore_url,
+    mysql_password                  => $mysql_password,
+    mysql_root_password             => $mysql_root_password,
+    email_private_key               => $email_private_key,
+    replicate_github                => $replicate_github,
+    testmode                        => $testmode,
+    require                         => Class[openstack_project::server],
   }
   if ($testmode == false) {
     class { 'gerrit::cron':
-      script_user => $script_user,
+      script_user     => $script_user,
       script_key_file => $script_key_file,
     }
     class { 'github':
-      username => $github_username,
-      oauth_token => $github_oauth_token,
-      require => Class['::gerrit']
+      username         => $github_username,
+      project_username => $github_project_username,
+      project_password => $github_project_password,
+      oauth_token      => $github_oauth_token,
+      require          => Class['::gerrit']
     }
   }
 
@@ -206,5 +216,49 @@ class openstack_project::gerrit (
       'puppet:///modules/openstack_project/gerrit/scripts/trivial_rebase.py',
     replace => 'true',
     require => Class['::gerrit']
+  }
+
+  if ($projects_file != 'UNDEF') {
+    if ($replicate_local) {
+      file { $local_git_dir:
+        ensure  => directory,
+        owner   => 'gerrit2',
+        require => Class['::gerrit'],
+      }
+    }
+
+    file { '/home/gerrit2/projects.yaml':
+      ensure  => present,
+      owner   => 'gerrit2',
+      group   => 'gerrit2',
+      mode    => '0444',
+      content => template($projects_file),
+      replace => true,
+      require => Class['::gerrit'],
+    }
+
+    file { '/home/gerrit2/acls':
+      ensure  => directory,
+      owner   => 'gerrit2',
+      group   => 'gerrit2',
+      mode    => '0444',
+      recurse => true,
+      replace => true,
+      source  => 'puppet:///modules/openstack_project/gerrit/acls',
+      require => Class['::gerrit']
+    }
+
+    exec { 'manage_projects':
+      command     => '/usr/local/gerrit/scripts/manage_projects.py',
+      subscribe   => [
+          File['/home/gerrit2/projects.yaml'],
+          File['/home/gerrit2/acls'],
+        ],
+      refreshonly => true,
+      require     => [
+          File['/home/gerrit2/projects.yaml'],
+          File['/home/gerrit2/acls'],
+        ],
+    }
   }
 }
