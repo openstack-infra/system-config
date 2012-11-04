@@ -1,7 +1,22 @@
+- homepage: http://openstack.org
+  local-git-dir: <%= local_git_dir %>
+  gerrit-host: <%= fqdn %>
+  gerrit-user: openstack-project-creator
+  gerrit-key: <%= ssh_project_key %>
+  github-config: /etc/github/github-projects.secure.config
+  has-wiki: False
+  has-issues: False
+  has-pull-requests: False
+  has-downloads: False
+---
 - project: heat-api/heat
+  options:
+  - has-wiki
+  description: '"Heat" keeps the clouds up ;)'
 - project: heat-api/python-heatclient
 - project: openstack-ci/devstack-gate
 - project: openstack-ci/gerrit
+  description: Fork of Gerrit used by OpenStack
   remote: https://gerrit.googlesource.com/gerrit
 - project: openstack-ci/gerrit-verification-status-plugin
 - project: openstack-ci/gerritbot
@@ -36,6 +51,7 @@
 - project: openstack/openstack-chef
 - project: openstack/openstack-ci
 - project: openstack/openstack-ci-puppet
+  acl_config: /home/gerrit2/acls/openstack-ci-puppet.config
 - project: openstack/openstack-manuals
 - project: openstack/openstack-planet
 - project: openstack/openstack-puppet
