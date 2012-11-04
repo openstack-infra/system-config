@@ -52,7 +52,7 @@ pip_command = '/usr/local/bin/pip install -M -U -I --exists-action=w ' \
 
 run_command(pip_command % "pip")
 
-config = yaml.load(open(PROJECTS_YAML))
+(defaults, config) = [config for config in yaml.load_all(open(PROJECTS_YAML))]
 
 for section in config:
     project = section['project']
