@@ -68,7 +68,7 @@ class openstack_project::review (
     script_user              => 'launchpadsync',
     script_key_file          => '/home/gerrit2/.ssh/launchpadsync_rsa',
     script_logging_conf      => '/home/gerrit2/.sync_logging.conf',
-    projects_file            => 'puppet:///openstack_project/review.projects.yaml',
+    projects_file            => 'openstack_project/review.projects.yaml.erb',
     github_username          => 'openstack-gerrit',
     github_oauth_token       => $github_oauth_token,
     mysql_password           => $mysql_password,
