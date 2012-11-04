@@ -10,6 +10,7 @@
 - project: openstack-ci/gerrit
   options:
   - close-pull
+  description: "Foo"
   remote: https://gerrit.googlesource.com/gerrit
 - project: openstack-ci/gerrit-verification-status-plugin
   options:
