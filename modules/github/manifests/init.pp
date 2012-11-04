@@ -1,6 +1,8 @@
 class github(
   $username,
   $oauth_token,
+  $project_username,
+  $project_password,
   $projects = []
 ) {
   include pip
@@ -45,6 +47,19 @@ class github(
   file { '/etc/github/github.secure.config':
     ensure  => present,
     content => template('github/github.secure.config.erb'),
+    group   => 'github',
+    mode    => '0440',
+    owner   => 'root',
+    replace => true,
+    require => [
+      Group['github'],
+      File['/etc/github']
+    ],
+  }
+
+  file { '/etc/github/github-projects.secure.config':
+    ensure  => present,
+    content => template('github/github-projects.secure.config.erb'),
     group   => 'github',
     mode    => '0440',
     owner   => 'root',
