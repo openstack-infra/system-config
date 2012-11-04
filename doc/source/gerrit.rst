@@ -636,31 +636,96 @@ Log into the Launchpad account and add the GPG key to the account.
 Adding New Projects
 *******************
 
-Creating a Project in Gerrit
-============================
+Creating a new Gerrit Project with Puppet
+=========================================
 
-Using ssh key of a gerrit admin (you)::
+Gerrit project creation is now managed through changes to the
+openstack-ci-puppet repository. The old manual processes are documented
+below as the processes are still valid and documentation of them may
+still be useful when dealing with corner cases. That said, you should
+use this method whenever possible.
 
-  ssh -p 29418 review.openstack.org gerrit create-project --name openstack/PROJECT
+Puppet and its related scripts are able to create the new project in
+Gerrit, create the new project on Github, create a local git replica on
+the Gerrit host, configure the project Access Controls, and create new
+groups in Gerrit that are mentioned in the Access Controls. The only
+potential piece missing from this process is the management of group
+membership, which is currently performed through launchpad. You might
+also want to configure Zuul and Jenkins to run tests on the new project.
+The details for that process are in the next section.
 
-If the project is an API project (eg, image-api), we want it to share
-some extra permissions that are common to all API projects (eg, the
-OpenStack documentation coordinators can approve changes, see
-:ref:`acl`).  Run the following command to reparent the project if it
-is an API project::
+Gerrit projects are configured in the
+``openstack-ci-puppet/modules/openstack_project/templates/review.projects.yaml.erb``.
+file. This file contains two sections, the first is a set of default
+config values that each project can override, and the second is a list
+of projects (each may contain their own overrides).
 
-  ssh -p 29418 review.openstack.org gerrit set-project-parent --parent API-Projects openstack/PROJECT
+#. Config default values::
 
-Add yourself to the "Project Bootstrappers" group in Gerrit which will
-give you permissions to push to the repo bypassing code review.
+     - homepage: http://example.org
+       local-git-dir: /var/lib/git
+       gerrit-host: review.example.org
+       gerrit-user: example-project-creator
+       gerrit-key: /home/gerrit2/.ssh/example_project_id_rsa
+       github-config: /etc/github/github-projects.secure.config
+       has-wiki: False
+       has-issues: False
+       has-pull-requests: False
+       has-downloads: False
 
-Do the initial push of the project with::
+#. Project definition::
 
-  git push ssh://USERNAME@review.openstack.org:29418/openstack/PROJECT.git HEAD:refs/heads/master
-  git push --tags ssh://USERNAME@review.openstack.org:29418/openstack/PROJECT.git
+     - project: example/gerrit
+       description: Fork of Gerrit used by Example
+       remote: https://gerrit.googlesource.com/gerrit
+     - project: example/project1
+       description: Best project ever.
+       has-wiki: True
+       acl_config: /path/to/acl/file
 
-Remove yourself from the "Project Bootstrappers" group, and then set
-the access controls as specified in :ref:`acl`.
+The above config gives puppet and its related scripts enough information
+to create new projects, but not enough to add access controls to each
+project. To add access control you need to have have an ``acl_config``
+option for the project in ``review.projects.yaml.erb`` file. That option
+should have a value that is a path to the project.config for that
+project.
+
+That is the high level view of how we can configure projects using the
+pupppet repository. To create an actual change that does all of this for
+a single project you will want to do the following:
+
+#. Add a ``modules/openstack_project/files/gerrit/acls/project-name.config``
+   file to the repo. The contents will probably end up looking like::
+
+     [access "refs/*"]
+     	owner = group Administrators
+     [receive]
+     	requireChangeId = true
+     	requireContributorAgreement = true
+     [submit]
+     	mergeContent = true
+     [access "refs/heads/*"]
+     	label-Code-Review = -2..+2 group project-name-core
+     	label-Approved = +0..+1 group project-name-core
+     	workInProgress = group project-name-core
+     [access "refs/heads/milestone-proposed"]
+     	label-Code-Review = -2..+2 group project-name-drivers
+     	label-Approved = +0..+1 group project-name-drivers
+     [project]
+     	state = active
+
+You can refer to the :ref:`project-config` section below if you need
+more details on writing the project.config file.
+
+#. Add a project entry for the project in
+   ``openstack-ci-puppet/modules/openstack_project/templates/review.projects.yaml.erb``.::
+
+     - project: openstack/project-name
+       acl_config: /home/gerrit2/acls/project-name.config
+
+That is all you need to do. Push the change to gerrit and if necessary
+modify group membership for the groups you configured in the
+``project.config`` through Launchpad.
 
 Have Zuul Monitor a Gerrit Project
 =====================================
@@ -670,6 +735,7 @@ Builder. Edit openstack/openstack-ci-puppet:modules/openstack_project/files/jenk
 and add the desired jobs. Most projects will use the python jobs template.
 
 A minimum config::
+
   - project:
       name: PROJECT
       github-org: openstack
@@ -681,6 +747,7 @@ A minimum config::
         - python-jobs
 
 Full example config for nova::
+
   - project:
       name: nova
       github-org: openstack
@@ -735,6 +802,32 @@ Full example config for nova::
         - nova-tarball
         - nova-docs
 
+Creating a Project in Gerrit
+============================
+
+Using ssh key of a gerrit admin (you)::
+
+  ssh -p 29418 review.openstack.org gerrit create-project --name openstack/PROJECT
+
+If the project is an API project (eg, image-api), we want it to share
+some extra permissions that are common to all API projects (eg, the
+OpenStack documentation coordinators can approve changes, see
+:ref:`acl`).  Run the following command to reparent the project if it
+is an API project::
+
+  ssh -p 29418 review.openstack.org gerrit set-project-parent --parent API-Projects openstack/PROJECT
+
+Add yourself to the "Project Bootstrappers" group in Gerrit which will
+give you permissions to push to the repo bypassing code review.
+
+Do the initial push of the project with::
+
+  git push ssh://USERNAME@review.openstack.org:29418/openstack/PROJECT.git HEAD:refs/heads/master
+  git push --tags ssh://USERNAME@review.openstack.org:29418/openstack/PROJECT.git
+
+Remove yourself from the "Project Bootstrappers" group, and then set
+the access controls as specified in :ref:`acl`.
+
 Create a Project in GitHub
 ==========================
 
@@ -749,7 +842,7 @@ Pull requests can not be disabled for a project in Github, so instead
 we have a script that runs from cron to close any open pull requests
 with instructions to use Gerrit.
 
-* Edit openstack/openstack-ci-puppet:modules/openstack_project/files/review.projects.yaml
+* Edit openstack/openstack-ci-puppet:modules/openstack_project/templates/review.projects.yaml.erb
 
 and add the project to the list of projects in the yaml file
 
@@ -768,6 +861,71 @@ On the gerrit host::
   sudo git --bare init /var/lib/git/openstack/PROJECT.git
   sudo chown -R gerrit2:gerrit2 /var/lib/git/openstack/PROJECT.git
 
+Adding A New Project On The Command Line
+****************************************
+
+All of the steps involved in adding a new project to Gerrit can be
+accomplished via the commandline, with the exception of creating a new repo
+on github.
+
+First of all, add the .gitreview file to the repo that will be added. Then,
+assuming an ssh config alias of `review` for the gerrit instance, as a person
+in the Project Bootstrappers group::
+
+     ssh review gerrit create-project --name openstack/$PROJECT
+     git review -s
+     git push gerrit HEAD:refs/heads/master
+     git push --tags gerrit
+
+At this point, the branch contents will be in gerrit, and the project config
+settings and ACLs need to be set. These are maintained in a special branch
+inside of git in gerrit. Check out the branch from git::
+
+     git fetch gerrit +refs/meta/*:refs/remotes/gerrit-meta/*
+     git checkout -b config remotes/gerrit-meta/config
+
+There will be two interesting files, `groups` and `project.config`. `groups`
+contains UUIDs and names of groups that will be referenced in
+`project.config`. There is a helper script in the openstack-ci repo called
+`get_group_uuid.py` which will fetch the UUID for a given group. For
+$PROJECT-core and $PROJECT-drivers::
+
+      openstack-ci/gerrit/get_group_uuid.py $GROUP_NAME
+
+And make entries in `groups` for each one of them. Next, edit
+`project.config` to look like::
+
+      [access "refs/*"]
+              owner = group Administrators
+      [receive]
+              requireChangeId = true
+              requireContributorAgreement = true
+      [submit]
+              mergeContent = true
+      [access "refs/heads/*"]
+              label-Code-Review = -2..+2 group $PROJECT-core
+              label-Approved = +0..+1 group $PROJECT-core
+      [access "refs/heads/milestone-proposed"]
+              label-Code-Review = -2..+2 group $PROJECT-drivers
+              label-Approved = +0..+1 group $PROJECT-drivers
+
+If the project is for a client library, the `refs/*` section of
+`project.config` should look like::
+
+      [access "refs/*"]
+              owner = group Administrators
+              create = group $PROJECT-drivers
+              pushTag = group $PROJECT-drivers
+
+Replace $PROJECT with the name of the project.
+
+Finally, commit the changes and push the config back up to Gerrit::
+
+      git commit -m "Initial project config"
+      git push gerrit HEAD:refs/meta/config
+
+At this point you can follow the steps above for creating the project's github
+replica, the local git replica, and zuul monitoring/jenkins jobs.
 
 Migrating a Project from bzr
 ============================
@@ -797,8 +955,10 @@ So, for instance, to do glance, you would do:
 And you will then have a git repo of glance in the glance dir. This git repo
 is now suitable for uploading in to gerrit to become the new master repo.
 
+.. _project-config:
+
 Project Config
-==============
+**************
 
 There are a few options which need to be enabled on the project in the Admin
 interface.
@@ -816,7 +976,7 @@ Optionally, if the PTL agrees to it:
 .. _acl:
 
 Access Controls
-***************
+===============
 
 High level goals:
 
@@ -984,68 +1144,3 @@ completely delete an account from Gerrit, here's how:
 
   ssh review.openstack.org -p29418 gerrit flush-caches --all
 
-Adding A New Project On The Command Line
-****************************************
-
-All of the steps involved in adding a new project to Gerrit can be
-accomplished via the commandline, with the exception of creating a new repo
-on github.
-
-First of all, add the .gitreview file to the repo that will be added. Then,
-assuming an ssh config alias of `review` for the gerrit instance, as a person
-in the Project Bootstrappers group::
-
-     ssh review gerrit create-project --name openstack/$PROJECT
-     git review -s
-     git push gerrit HEAD:refs/heads/master
-     git push --tags gerrit
-
-At this point, the branch contents will be in gerrit, and the project config
-settings and ACLs need to be set. These are maintained in a special branch
-inside of git in gerrit. Check out the branch from git::
-
-     git fetch gerrit +refs/meta/*:refs/remotes/gerrit-meta/*
-     git checkout -b config remotes/gerrit-meta/config
-
-There will be two interesting files, `groups` and `project.config`. `groups`
-contains UUIDs and names of groups that will be referenced in
-`project.config`. There is a helper script in the openstack-ci repo called
-`get_group_uuid.py` which will fetch the UUID for a given group. For
-$PROJECT-core and $PROJECT-drivers::
-
-      openstack-ci/gerrit/get_group_uuid.py $GROUP_NAME
-
-And make entries in `groups` for each one of them. Next, edit
-`project.config` to look like::
-
-      [access "refs/*"]
-              owner = group Administrators
-      [receive]
-              requireChangeId = true
-              requireContributorAgreement = true
-      [submit]
-              mergeContent = true
-      [access "refs/heads/*"]
-              label-Code-Review = -2..+2 group $PROJECT-core
-              label-Approved = +0..+1 group $PROJECT-core
-      [access "refs/heads/milestone-proposed"]
-              label-Code-Review = -2..+2 group $PROJECT-drivers
-              label-Approved = +0..+1 group $PROJECT-drivers
-
-If the project is for a client library, the `refs/*` section of
-`project.config` should look like::
-
-      [access "refs/*"]
-              owner = group Administrators
-              create = group $PROJECT-drivers
-              pushTag = group $PROJECT-drivers
-
-Replace $PROJECT with the name of the project.
-
-Finally, commit the changes and push the config back up to Gerrit::
-
-      git commit -m "Initial project config"
-      git push gerrit HEAD:refs/meta/config
-
-At this point you can follow the steps above for creating the project's github
-replica, the local git replica, and zuul monitoring/jenkins jobs.

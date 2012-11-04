@@ -84,6 +84,8 @@ class gerrit(
   $ssh_dsa_pubkey_contents = '', # If left empty puppet will not create file.
   $ssh_rsa_key_contents = '', # If left empty puppet will not create file.
   $ssh_rsa_pubkey_contents = '', # If left empty puppet will not create file.
+  $ssh_project_rsa_key_contents = '', # If left empty puppet will not create file.
+  $ssh_project_rsa_pubkey_contents = '', # If left empty puppet will not create file.
   $openidssourl = 'https://login.launchpad.net/+openid',
   $email = '',
   $database_poollimit = '',
@@ -101,17 +103,15 @@ class gerrit(
   $contactstore_appsec = '',
   $contactstore_pubkey = '',
   $contactstore_url = '',
-  $projects_file = 'UNDEF',
   $enable_melody = false,
   $melody_session = false,
   $replicate_github = false,
-  $replicate_local = true,
-  $local_git_dir = '/var/lib/git',
   $replication_targets = [],
   $gitweb = true,
   $testmode = false
 ) {
   include apache
+  include pip
 
   $java_home = $::lsbdistcodename ? {
     'precise' => '/usr/lib/jvm/java-6-openjdk-amd64/jre',
@@ -143,6 +143,12 @@ class gerrit(
 
   package { $packages:
     ensure => present,
+  }
+
+  package { 'gerritlib':
+    ensure   => latest,
+    provider => 'pip',
+    require  => Class[pip],
   }
 
   file { '/var/log/gerrit':
@@ -201,34 +207,6 @@ class gerrit(
       replace => true,
       require => File['/home/gerrit2/review_site/etc'],
     }
-  }
-
-  if ($projects_file != 'UNDEF') {
-
-    if ($replicate_local) {
-      file { $local_git_dir:
-        ensure => directory,
-        owner  => 'gerrit2',
-      }
-    }
-
-    file { '/home/gerrit2/projects.yaml':
-      ensure  => present,
-      owner   => 'gerrit2',
-      group   => 'gerrit2',
-      mode    => '0444',
-      source  => $projects_file,
-      replace => true,
-    }
-
-    exec { 'make_local_repos':
-      user        => 'gerrit2',
-      command     => "/usr/local/gerrit/scripts/make_local_repos.py ${local_git_dir}",
-      subscribe   => File['/home/gerrit2/projects.yaml'],
-      refreshonly => true,
-      require     => File['/home/gerrit2/projects.yaml'],
-    }
-
   }
 
   # Gerrit sets these permissions in 'init'; don't fight them.
@@ -368,6 +346,28 @@ class gerrit(
       group   => 'gerrit2',
       mode    => '0644',
       content => $ssh_rsa_pubkey_contents,
+      replace => true,
+      require => File['/home/gerrit2/review_site/etc']
+    }
+  }
+
+  if $ssh_project_rsa_key_contents != '' {
+    file { '/home/gerrit2/review_site/etc/ssh_project_rsa_key':
+      owner   => 'gerrit2',
+      group   => 'gerrit2',
+      mode    => '0600',
+      content => $ssh_project_rsa_key_contents,
+      replace => true,
+      require => File['/home/gerrit2/review_site/etc']
+    }
+  }
+
+  if $ssh_project_rsa_pubkey_contents != '' {
+    file { '/home/gerrit2/review_site/etc/ssh_project_rsa_key.pub':
+      owner   => 'gerrit2',
+      group   => 'gerrit2',
+      mode    => '0644',
+      content => $ssh_rsa_project_pubkey_contents,
       replace => true,
       require => File['/home/gerrit2/review_site/etc']
     }

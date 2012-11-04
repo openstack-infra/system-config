@@ -26,6 +26,8 @@
 # thus, set it to 5000minutes until the bug is fixed.
 class openstack_project::review (
   $github_oauth_token,
+  $github_project_username,
+  $github_project_password,
   $mysql_password,
   $mysql_root_password,
   $email_private_key,
@@ -37,6 +39,8 @@ class openstack_project::review (
   $ssh_dsa_pubkey_contents='',
   $ssh_rsa_key_contents='',
   $ssh_rsa_pubkey_contents='',
+  $ssh_project_rsa_key_contents='',
+  $ssh_project_rsa_pubkey_contents='',
   $lp_sync_key='', # If left empty puppet will not create file.
   $lp_sync_pubkey='', # If left empty puppet will not create file.
   $lp_sync_consumer_key='',
@@ -56,6 +60,8 @@ class openstack_project::review (
     ssh_dsa_pubkey_contents  => $ssh_dsa_pubkey_contents,
     ssh_rsa_key_contents     => $ssh_rsa_key_contents,
     ssh_rsa_pubkey_contents  => $ssh_rsa_pubkey_contents,
+    ssh_project_rsa_key_contents     => $ssh_project_rsa_key_contents,
+    ssh_project_rsa_pubkey_contents  => $ssh_project_rsa_pubkey_contents,
     email                    => 'review@openstack.org',
     database_poollimit       => '150',    # 1 + 100 + 9 + 2 + 2 + 25 = 139(rounded up)
     container_heaplimit      => '8g',
@@ -68,9 +74,11 @@ class openstack_project::review (
     script_user              => 'launchpadsync',
     script_key_file          => '/home/gerrit2/.ssh/launchpadsync_rsa',
     script_logging_conf      => '/home/gerrit2/.sync_logging.conf',
-    projects_file            => 'puppet:///openstack_project/review.projects.yaml',
+    projects_file            => 'openstack_project/review.projects.yaml.erb',
     github_username          => 'openstack-gerrit',
     github_oauth_token       => $github_oauth_token,
+    github_project_username  => $github_project_username,
+    github_project_password  => $github_project_password,
     mysql_password           => $mysql_password,
     mysql_root_password      => $mysql_root_password,
     trivial_rebase_role_id   => 'trivial-rebase@review.openstack.org',
