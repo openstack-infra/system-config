@@ -4,12 +4,8 @@ Infrastructure Systems
 ######################
 
 The OpenStack CI team maintains a number of systems that are critical
-to the operation of the OpenStack project.  At the time of writing,
-these include:
-
- * Gerrit (review.openstack.org)
- * Jenkins (jenkins.openstack.org)
- * community.openstack.org
+to the operation of the OpenStack project, such as gerrit, jenkins,
+mailman, meetbot, etherpad, paste, and others.
 
 Additionally the team maintains the project sites on Launchpad and
 GitHub.  The following policies have been adopted to ensure the
@@ -51,6 +47,58 @@ must be observed for SSH access:
    During rotation, a new key can be added to puppet for a time, and
    then the old one removed.  Be sure to run puppet on the backup
    servers to make sure they are updated.
+
+Servers
+*******
+
+Because the configuration of servers is managed in puppet, anyone may
+propose changes to existing servers, or propose that new servers be
+created by editing the puppet configuration and uploading a change for
+review in Gerrit.  The installation and maintenance of software on
+project infrastructure servers should be carried out entirely through
+puppet so that anyone can contribute.
+
+The Git repository with the puppet configuration may be cloned from
+https://github.com/openstack/openstack-ci-puppet and changes submitted
+with `git-review`.
+
+In order to ensure that it is easy for both the OpenStack project as
+well as others to re-use the configuration in that repository, server
+definitions are split into two levels of abstraction: first, a class
+is created that defines the configuration of the server, but without
+specifics such as hostnames and passwords.  Then a node definition is
+created that uses that class, passing in any specific information
+needed for that node.
+
+For instance, `modules/openstack_project/manifests/gerrit.pp` defines a
+class which specifies how the OpenStack project configures a gerrit
+server, and then `manifests/site.pp` defines a node that uses that
+class, passing in passwords and other information specific to that
+node obtained from puppet's hiera.
+
+To create a new server, do the following:
+
+ * Add a file in `modules/openstack_project/manifests/` that defines a
+   class which specifies the configuration of the server.
+
+ * Add a node entry in `manifests/site.pp` for the server that uses that
+   class.
+
+ * If your server needs private information such as password,s use
+   hiera calls in the site manifest, and ask an infra-core team member
+   to manually add the private information to hiera.
+
+ * You should be able to install and configure most software only with
+   puppet.  Nonetheless, if you need SSH access to the host, add your
+   public key to `modules/openstack_project/manifests/users.pp` and
+   include a stanza like this in your server class::
+
+     realize (
+        User::Virtual::Localuser['USERNAME'],
+     )
+
+ * Add an RST file with documentation about the server in `doc/source`
+   and add it to the index in that directory.
 
 Backups
 *******
