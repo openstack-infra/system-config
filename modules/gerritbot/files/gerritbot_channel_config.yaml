@@ -53,7 +53,6 @@ stackforge-dev:
     projects:
       - stackforge/ceilometer
       - stackforge/libra
-      - stackforge/python-reddwarfclient
       - stackforge/reddwarf
       - heat-api/heat
       - heat-api/python-heatclient
@@ -78,5 +77,16 @@ openstack-dns:
     projects:
       - stackforge/moniker
       - stackforge/python-monikerclient
+    branches:
+      - master
+
+reddwarf:
+    events:
+      - patchset-created
+      - change-merged
+      - x-vrif-minus-2
+    projects:
+      - stackforge/reddwarf
+      - stackforge/python-reddwarfclient
     branches:
       - master
