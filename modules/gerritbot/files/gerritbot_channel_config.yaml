@@ -80,3 +80,14 @@ openstack-dns:
       - stackforge/python-monikerclient
     branches:
       - master
+
+reddwarf:
+    events:
+      - patchset-created
+      - change-merged
+      - x-vrif-minus-2
+    projects:
+      - stackforge/reddwarf
+      - stackforge/python-reddwarfclient
+    branches:
+      - master
