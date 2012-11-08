@@ -15,6 +15,7 @@
             - quantum
             - melange
             - cinder
+            - ceilometer
             - python-cinderclient
             - python-novaclient
             - python-openstackclient
