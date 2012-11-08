@@ -751,14 +751,11 @@ with instructions to use Gerrit.
 
 * Edit openstack/openstack-ci-puppet:modules/openstack_project/files/review.projects.yaml
 
-and add the project to the list of projects in the yaml file with the
-'close-pull' option.
+and add the project to the list of projects in the yaml file
 
 For example::
 
   - project: openstack/PROJECT
-    options:
-    - close-pull
 
 Adding Local Git Replica
 ========================
