@@ -17,8 +17,6 @@
 # It should look like:
 
 # - project: PROJECT_NAME
-#   options:
-#   - close-pull
 #   remote: https://gerrit.googlesource.com/gerrit
 
 # TODO: add support for
