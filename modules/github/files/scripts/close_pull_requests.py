@@ -18,7 +18,7 @@
 
 # - project: PROJECT_NAME
 #   options:
-#   - close-pull
+#   - has-pull-requests
 
 # Github authentication information is read from github.secure.config,
 # which should look like:
@@ -68,7 +68,7 @@ for section in config:
     project = section['project']
 
     # Make sure we're supposed to close pull requests for this project:
-    if 'options' not in section or 'close-pull' not in section['options']:
+    if 'options' in section and 'has-pull-requests' in section['options']:
         continue
 
     # Find the project's repo
