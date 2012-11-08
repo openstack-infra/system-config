@@ -133,6 +133,12 @@ node 'ci-puppetmaster.openstack.org' {
   }
 }
 
+node 'groups.openstack.org' {
+  class { 'openstack_project::groups':
+    sysadmins => hiera('sysadmins'),
+  }
+}
+
 node 'lists.openstack.org' {
   class { 'openstack_project::lists':
     listadmins => hiera('listadmins'),
