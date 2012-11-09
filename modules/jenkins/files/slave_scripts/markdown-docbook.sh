@@ -1,4 +1,4 @@
-#!/bin/bash -e
+#!/bin/bash -ex
 
 # Documentation can be submitted in markdown and then converted to docbook
 # so it can be built with the maven plugin. This is used by Jenkins when
