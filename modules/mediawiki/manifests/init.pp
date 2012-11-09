@@ -1,11 +1,19 @@
 # Class: mediawiki
 #
 class mediawiki(
-  $role,
-  $site_hostname,
+  $role = 'UNSET',
+  $site_hostname = '',
   $mediawiki_location = ''
 ) {
-  if ($role == 'app' or $role == 'all') {
+
+  include mediawiki::params
+
+  $role_real = $role ? {
+    'UNSET' => $::mediawiki::params::server,
+    default => $role,
+  }
+
+  if ($role_real == 'app' or $role_real == 'all') {
     require apache::dev
     include apache
     include mediawiki::php
@@ -29,7 +37,7 @@ class mediawiki(
       ensure => present,
     }
   }
-  if ($role == 'image-scaler' or $role == 'all') {
+  if ($role_real == 'image-scaler' or $role_real == 'all') {
     include mediawiki::image_scaler
     include mediawiki::php
     include mediawiki::app
