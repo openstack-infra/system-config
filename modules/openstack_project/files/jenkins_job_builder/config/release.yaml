@@ -3,6 +3,11 @@
     concurrent: false
     node: master
 
+    properties:
+      - authorization:
+          openstack-release:
+            - job-build
+
     parameters:
       - choice:
           name: PROJECT
