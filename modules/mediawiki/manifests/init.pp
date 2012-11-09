@@ -1,10 +1,11 @@
 # Class: mediawiki
 #
 class mediawiki(
-  $role,
-  $site_hostname,
+  $role = '',
+  $site_hostname = '',
   $mediawiki_location = ''
 ) {
+
   if ($role == 'app' or $role == 'all') {
     require apache::dev
     include apache
