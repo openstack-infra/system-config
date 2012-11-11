@@ -310,7 +310,7 @@
 
 
 - project:
-    name: oslo
+    name: oslo-incubator
     github-org: openstack
     node: precise
     tarball-publisher-site: nova.openstack.org
