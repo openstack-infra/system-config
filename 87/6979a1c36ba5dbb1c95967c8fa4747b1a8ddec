@@ -1,0 +1,9 @@
+Verified+2: Jenkins
+Code-Review+2: Clark Boylan <clark.boylan@gmail.com>
+Approved+1: Jeremy Stanley <fungi@yuggoth.org>
+Code-Review+2: Jeremy Stanley <fungi@yuggoth.org>
+Submitted-by: Jenkins
+Submitted-at: Sun, 11 Nov 2012 18:58:11 +0000
+Reviewed-on: https://review.openstack.org/15837
+Project: openstack/openstack-ci-puppet
+Branch: refs/heads/master
