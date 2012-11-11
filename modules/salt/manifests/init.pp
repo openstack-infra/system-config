@@ -1,3 +1,5 @@
+# Class salt
+#
 class salt (
   $salt_master = $::fqdn
 ) {
