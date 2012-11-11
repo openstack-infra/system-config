@@ -1,5 +1,12 @@
+# Class: openssl
+#
 class openssl {
-  package { ["openssl", "ssl-cert"]:
+  $packages = [
+    'openssl',
+    'ssl-cert',
+  ]
+
+  package { $packages:
     ensure => present;
   }
 }
