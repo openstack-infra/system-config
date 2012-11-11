@@ -5,8 +5,7 @@ class gerrit::remotes($ensure=present) {
       ensure  => $ensure,
       user    => 'gerrit2',
       minute  => '*/30',
-      command => 'sleep $((RANDOM\%60+90)) && python \
-        /usr/local/gerrit/scripts/fetch_remotes.py',
+      command => 'sleep $((RANDOM\%60+90)) && python /usr/local/gerrit/scripts/fetch_remotes.py',
       require => File['/usr/local/gerrit/scripts'],
     }
 

@@ -49,9 +49,7 @@ class openstack_project::cacti (
   }
 
   exec { 'cacti_import_xml':
-    command => '/usr/bin/php -q /usr/share/cacti/cli/import_template.php \
-                  --filename=/var/lib/cacti/linux_host.xml \
-                  --with-template-rras',
+    command => '/usr/bin/php -q /usr/share/cacti/cli/import_template.php --filename=/var/lib/cacti/linux_host.xml --with-template-rras',
     cwd     => '/usr/share/cacti/cli',
     require => File['/var/lib/cacti/linux_host.xml'],
   }

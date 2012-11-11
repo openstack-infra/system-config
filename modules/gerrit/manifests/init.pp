@@ -223,8 +223,7 @@ class gerrit(
 
     exec { 'make_local_repos':
       user        => 'gerrit2',
-      command     => "/usr/local/gerrit/scripts/make_local_repos.py \
-        ${local_git_dir}",
+      command     => "/usr/local/gerrit/scripts/make_local_repos.py ${local_git_dir}",
       subscribe   => File['/home/gerrit2/projects.yaml'],
       refreshonly => true,
       require     => File['/home/gerrit2/projects.yaml'],
@@ -418,8 +417,7 @@ class gerrit(
   # If gerrit.war was just installed, run the Gerrit "init" command.
   exec { 'gerrit-initial-init':
     user      => 'gerrit2',
-    command   => '/usr/bin/java -jar /home/gerrit2/review_site/bin/gerrit.war \
-      init -d /home/gerrit2/review_site --batch --no-auto-start',
+    command   => '/usr/bin/java -jar /home/gerrit2/review_site/bin/gerrit.war init -d /home/gerrit2/review_site --batch --no-auto-start',
     subscribe => File['/home/gerrit2/review_site/bin/gerrit.war'],
     require   => [Package['openjdk-6-jre-headless'],
                   User['gerrit2'],
@@ -436,9 +434,7 @@ class gerrit(
   # Running the init script as the gerrit2 user _does_ work.
   exec { 'gerrit-init':
     user        => 'gerrit2',
-    command     => '/etc/init.d/gerrit stop; /usr/bin/java -jar \
-      /home/gerrit2/review_site/bin/gerrit.war init \
-      -d /home/gerrit2/review_site --batch --no-auto-start',
+    command     => '/etc/init.d/gerrit stop; /usr/bin/java -jar /home/gerrit2/review_site/bin/gerrit.war init -d /home/gerrit2/review_site --batch --no-auto-start',
     subscribe   => File['/home/gerrit2/review_site/bin/gerrit.war'],
     refreshonly => true,
     require     => [Package['openjdk-6-jre-headless'],
