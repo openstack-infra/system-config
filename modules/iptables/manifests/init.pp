@@ -1,13 +1,18 @@
-#http://projects.puppetlabs.com/projects/1/wiki/Module_Iptables_Patterns
-
-class iptables($rules='', $public_tcp_ports=[], $public_udp_ports=[]) {
+# Class: iptables
+#
+# http://projects.puppetlabs.com/projects/1/wiki/Module_Iptables_Patterns
+#
+class iptables(
+  $rules = '',
+  $public_tcp_ports = [],
+  $public_udp_ports = []
+) {
   package { 'iptables-persistent':
     ensure => present,
   }
 
   service { 'iptables-persistent':
-    require => Package['iptables-persistent'],
-
+    require    => Package['iptables-persistent'],
     # Because there is no running process for this service, the normal status
     # checks fail.  Because puppet then thinks the service has been manually
     # stopped, it won't restart it.  This fake status command will trick puppet
@@ -15,11 +20,9 @@ class iptables($rules='', $public_tcp_ports=[], $public_udp_ports=[]) {
     # iptables is part of the kernel.)
     hasstatus  => true,
     status     => true,
-
     # Under Debian, the "restart" parameter does not reload the rules, so tell
     # Puppet to fall back to stop/start, which does work.
     hasrestart => false,
-
   }
 
   file { '/etc/iptables':
@@ -27,11 +30,15 @@ class iptables($rules='', $public_tcp_ports=[], $public_udp_ports=[]) {
   }
 
   file { '/etc/iptables/rules':
+    ensure  => present,
     owner   => 'root',
     group   => 'root',
     mode    => '0640',
     content => template('iptables/rules.erb'),
-    require => [Package['iptables-persistent'], File['/etc/iptables']],
+    require => [
+      Package['iptables-persistent'],
+      File['/etc/iptables'],
+    ],
     # When this file is updated, make sure the rules get reloaded.
     notify  => Service['iptables-persistent'],
   }
@@ -47,11 +54,15 @@ class iptables($rules='', $public_tcp_ports=[], $public_udp_ports=[]) {
   }
 
   file { '/etc/iptables/rules.v6':
+    ensure  => present,
     owner   => 'root',
     group   => 'root',
     mode    => '0640',
     content => template('iptables/rules.v6.erb'),
-    require => [Package['iptables-persistent'], File['/etc/iptables']],
+    require => [
+      Package['iptables-persistent'],
+      File['/etc/iptables'],
+    ],
     # When this file is updated, make sure the rules get reloaded.
     notify  => Service['iptables-persistent'],
     replace => true,
