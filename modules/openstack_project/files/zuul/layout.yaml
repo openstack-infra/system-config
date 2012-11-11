@@ -340,17 +340,17 @@ projects:
     publish:
       - nova-docs
 
-  - name: openstack/oslo
+  - name: openstack/oslo-incubator
     check:
-      - gate-oslo-merge:
-        - gate-oslo-pep8
-        - gate-oslo-python26
-        - gate-oslo-python27
+      - gate-oslo-incubator-merge:
+        - gate-oslo-incubator-pep8
+        - gate-oslo-incubator-python26
+        - gate-oslo-incubator-python27
     gate:
-      - gate-oslo-merge:
-        - gate-oslo-pep8
-        - gate-oslo-python26
-        - gate-oslo-python27
+      - gate-oslo-incubator-merge:
+        - gate-oslo-incubator-pep8
+        - gate-oslo-incubator-python26
+        - gate-oslo-incubator-python27
 
   - name: openstack/quantum
     check:

@@ -36,10 +36,10 @@
 - project: openstack/openstack-chef
 - project: openstack/openstack-ci
 - project: openstack/openstack-ci-puppet
-- project: openstack/oslo
 - project: openstack/openstack-manuals
 - project: openstack/openstack-planet
 - project: openstack/openstack-puppet
+- project: openstack/oslo-incubator
 - project: openstack/python-cinderclient
 - project: openstack/python-glanceclient
 - project: openstack/python-keystoneclient
