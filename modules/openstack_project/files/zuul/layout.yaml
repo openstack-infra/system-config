@@ -340,17 +340,17 @@ projects:
     publish:
       - nova-docs
 
-  - name: openstack/openstack-common
+  - name: openstack/oslo
     check:
-      - gate-openstack-common-merge:
-        - gate-openstack-common-pep8
-        - gate-openstack-common-python26
-        - gate-openstack-common-python27
+      - gate-oslo-merge:
+        - gate-oslo-pep8
+        - gate-oslo-python26
+        - gate-oslo-python27
     gate:
-      - gate-openstack-common-merge:
-        - gate-openstack-common-pep8
-        - gate-openstack-common-python26
-        - gate-openstack-common-python27
+      - gate-oslo-merge:
+        - gate-oslo-pep8
+        - gate-oslo-python26
+        - gate-oslo-python27
 
   - name: openstack/quantum
     check:

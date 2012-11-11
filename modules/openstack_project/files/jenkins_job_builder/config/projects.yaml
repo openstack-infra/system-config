@@ -310,7 +310,7 @@
 
 
 - project:
-    name: openstack-common
+    name: oslo
     github-org: openstack
     node: precise
     tarball-publisher-site: nova.openstack.org

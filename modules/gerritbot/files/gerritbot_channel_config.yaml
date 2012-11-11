@@ -32,7 +32,7 @@ openstack-dev:
       - openstack/horizon
       - openstack/keystone
       - openstack/nova
-      - openstack/openstack-common
+      - openstack/oslo
       - openstack/python-cinderclient
       - openstack/python-glanceclient
       - openstack/python-keystoneclient
