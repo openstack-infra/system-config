@@ -199,6 +199,7 @@
       - gate-{name}-pep8
       - gate-{name}-pyflakes
       - '{name}-sdist-tarball'
+      - '{name}-pypi'
       - gate-{name}-docs
 
 - project:

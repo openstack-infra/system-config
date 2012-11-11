@@ -179,6 +179,8 @@ projects:
     post:
       - jenkins-job-builder-sdist-tarball
       - jenkins-job-builder-docs
+    publish:
+      - jenkins-job-builder-pypi
 
   - name: openstack-ci/meetbot
     check:
