@@ -9,7 +9,7 @@ class gerrit::cron(
     user    => 'gerrit2',
     hour    => '6',
     minute  => '3',
-    command => "python /usr/local/gerrit/scripts/expire_old_reviews.py \
+    command => "python /usr/local/gerrit/scripts/expire_old_reviews.py \\\
       ${script_user} ${script_key_file}",
     require => File['/usr/local/gerrit/scripts'],
   }
@@ -19,7 +19,7 @@ class gerrit::cron(
     weekday => '0',
     hour    => '4',
     minute  => '7',
-    command => 'find /home/gerrit2/review_site/git/ -type d -name "*.git" \
+    command => 'find /home/gerrit2/review_site/git/ -type d -name "*.git" \\\
       -print -exec git --git-dir="{}" repack -afd \;',
     environment => 'PATH=/usr/bin:/bin:/usr/sbin:/sbin',
   }
@@ -28,7 +28,7 @@ class gerrit::cron(
     user    => 'gerrit2',
     hour    => '5',
     minute  => '1',
-    command => 'find /home/gerrit2/dbupdates/ -name "*.sql.gz" -mtime +30 \
+    command => 'find /home/gerrit2/dbupdates/ -name "*.sql.gz" -mtime +30 \\\
       -exec rm -f {} \;',
     environment => 'PATH=/usr/bin:/bin:/usr/sbin:/sbin',
   }
