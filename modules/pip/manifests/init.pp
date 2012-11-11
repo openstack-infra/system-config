@@ -1,12 +1,11 @@
+# Class pip
+#
 class pip {
-
-  package { "python-all-dev":
-    ensure => present
-  }
-
-  package { "python-pip":
+  $packages = [
+    'python-all-dev',
+    'python-pip',
+  ]
+  package { $packages:
     ensure => present,
-    require => Package[python-all-dev]
   }
-
 }
