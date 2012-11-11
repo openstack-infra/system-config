@@ -1,3 +1,5 @@
+# Class salt::master
+#
 class salt::master {
   include apt
 
@@ -40,7 +42,7 @@ class salt::master {
   }
 
   file { '/etc/salt/master':
-    ensure => present,
+    ensure  => present,
     owner   => 'root',
     group   => 'root',
     mode    => '0644',
