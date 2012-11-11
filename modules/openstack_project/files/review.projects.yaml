@@ -21,6 +21,7 @@
 - project: openstack-dev/openstack-qa
 - project: openstack-dev/pbr
 - project: openstack-dev/sandbox
+- project: openstack/ceilometer
 - project: openstack/cinder
 - project: openstack/compute-api
 - project: openstack/glance
@@ -53,7 +54,6 @@
 - project: openstack/tempest
 - project: openstack/volume-api
 - project: stackforge/MRaaS
-- project: stackforge/ceilometer
 - project: stackforge/libra
 - project: stackforge/marconi
 - project: stackforge/moniker

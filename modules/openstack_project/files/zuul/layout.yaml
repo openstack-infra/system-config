@@ -618,7 +618,7 @@ projects:
         - gate-tempest-devstack-vm
         - gate-tempest-devstack-vm-cinder
 
-  - name: stackforge/ceilometer
+  - name: openstack/ceilometer
     check:
       - gate-ceilometer-merge:
         - gate-ceilometer-pep8

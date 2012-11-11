@@ -9,7 +9,7 @@
 
 - project:
     name: ceilometer
-    github-org: stackforge
+    github-org: openstack
     node: oneiric
     tarball-publisher-site: nova.openstack.org
 
