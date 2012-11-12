@@ -251,7 +251,7 @@ node /^oneiric.*\.slave\.openstack\.org$/ {
     swift_store_key       => hiera('swift_store_key'),
     swift_store_container => hiera('swift_store_container'),
   }
-  if $::hostname == 'oneiric1.slave.openstack.org' {
+  if $::fqdn == 'oneiric1.slave.openstack.org' {
     include jenkins::cgroups
     include ulimit
     ulimit::conf { 'limit_jenkins_procs':
