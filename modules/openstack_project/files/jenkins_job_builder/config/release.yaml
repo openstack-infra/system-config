@@ -7,6 +7,8 @@
       - authorization:
           openstack-release:
             - job-build
+          ttx:
+            - job-build
 
     parameters:
       - choice:
