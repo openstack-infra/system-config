@@ -2,6 +2,7 @@
 define buildsource(
   $dir     = $title,
   $user    = 'root',
+  $timeout = 300,
   $creates = '/nonexistant/file'
 ) {
 
@@ -18,6 +19,7 @@ define buildsource(
     path    => '/usr/bin:/bin',
     user    => $user,
     cwd     => $dir,
+    timeout => $timeout,
     creates => $creates
   } ->
 
@@ -75,7 +77,10 @@ class etherpad_lite (
     provider => git,
     source   => 'https://github.com/joyent/node.git',
     revision => $nodejs_version,
-    require  => Package['git']
+    require  => [
+        Package['git'],
+        File["${base_install_dir}"],
+      ],
   }
 
   package { ['gzip',
@@ -93,6 +98,7 @@ class etherpad_lite (
   }
 
   buildsource { "${base_install_dir}/nodejs":
+    timeout => 900, # 15 minutes
     creates => '/usr/local/bin/node',
     require => [Package['gzip'],
                 Package['curl'],
