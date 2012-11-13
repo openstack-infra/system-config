@@ -1,3 +1,8 @@
+Note that these instructions assume commands will be run in a full
+root environment::
+
+  sudo su -
+
 To launch a node in the OpenStack CI account (production servers)::
 
   . openstackci-rs-nova.sh
@@ -26,16 +31,23 @@ DNS
 There are no scripts to handle DNS at the moment due to a lack of
 library support for the new Rackspace Cloud DNS (with IPv6).  To
 manually update DNS, you will need the hostname, v4 and v6 addresses
-of the host, as well as the UUID.  The environment variables used in
-the URL should be satisfied by sourcing the "openstackci-rs-nova.sh"
+of the host, as well as the UUID (these can all be found by running
+the ''nova list'' command).  The environment variables used in the
+URL should be satisfied by sourcing the "openstackci-rs-nova.sh"
 script (or jenkins, as appropriate).
 
   . ~/rackdns-venv/bin/activate
   . openstackci-rs-nova.sh
 
-  rackdns rdns-create --name HOSTNAME.openstack.org --data IPV6ADDR --server-href https://$OS_REGION_NAME.servers.api.rackspacecloud.com/v2/$OS_TENANT_NAME/servers/UUID --ttl 300
-  rackdns rdns-create --name HOSTNAME.openstack.org --data IPV4ADDR --server-href https://$OS_REGION_NAME.servers.api.rackspacecloud.com/v2/$OS_TENANT_NAME/servers/UUID --ttl 300
+  export SERVERNAME=server
+  nova list | grep "| $SERVERNAME\.openstack\.org "
+  export IPV6ADDR=dead:beef::cafe
+  export IPV4ADDR=123.45.67.89
+  export UUID=fedcba98-7654-3210-0123-456789abcdef
+
+  rackdns rdns-create --name $SERVERNAME.openstack.org --data $IPV6ADDR --server-href https://$os_region_name.servers.api.rackspacecloud.com/v2/$OS_TENANT_NAME/servers/$UUID --ttl 300
+  rackdns rdns-create --name $SERVERNAME.openstack.org --data $IPV4ADDR --server-href https://$os_region_name.servers.api.rackspacecloud.com/v2/$OS_TENANT_NAME/servers/$UUID --ttl 300
 
   . openstack-rs-nova.sh
-  rackdns record-create --name HOSTNAME.openstack.org --type AAAA --data IPV6ADDR --ttl 300 openstack.org
-  rackdns record-create --name HOSTNAME.openstack.org --type A --data IPV4ADDR --ttl 300 openstack.org
+  rackdns record-create --name $SERVERNAME.openstack.org --type AAAA --data $IPV6ADDR --ttl 300 openstack.org
+  rackdns record-create --name $SERVERNAME.openstack.org --type A --data $IPV4ADDR --ttl 300 openstack.org
