@@ -55,8 +55,6 @@ stackforge-dev:
       - stackforge/libra
       - stackforge/python-reddwarfclient
       - stackforge/reddwarf
-      - heat-api/heat
-      - heat-api/python-heatclient
     branches:
       - master
 
@@ -89,5 +87,16 @@ reddwarf:
     projects:
       - stackforge/reddwarf
       - stackforge/python-reddwarfclient
+    branches:
+      - master
+
+heat:
+    events:
+      - patchset-created
+      - change-merged
+      - x-vrif-minus-2
+    projects:
+      - heat-api/heat
+      - heat-api/python-heatclient
     branches:
       - master
