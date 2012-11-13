@@ -18,3 +18,23 @@
               keep-hierarchy: true
               copy-after-failure: true
       - console-log
+- job:
+    name: 'dev-python-heatclient-coverage'
+    node: 'oneiric'
+
+    triggers:
+      - zuul
+
+    builders:
+      - gerrit-git-prep
+      - coverage
+
+    publishers:
+      - scp:
+          site: 'static.openstack.org'
+          files:
+            - target: 'logs/$ZUUL_CHANGE/$ZUUL_PATCHSET/$ZUUL_PIPELINE/$JOB_NAME/$BUILD_NUMBER'
+              source: 'cover/**'
+              keep-hierarchy: true
+              copy-after-failure: true
+      - console-log
