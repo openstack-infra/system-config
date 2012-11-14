@@ -237,7 +237,11 @@ try:
         has_issues = 'has-issues' in options or default_has_issues
         has_downloads = 'has-downloads' in options or default_has_downloads
         has_wiki = 'has-wiki' in options or default_has_wiki
-        org = orgs_dict[project_split[0].lower()]
+        try:
+            org = orgs_dict[project_split[0].lower()]
+        except KeyError:
+            # We do not have control of this github org ignore the project.
+            continue
         try:
             repo = org.get_repo(repo_name)
         except github.GithubException:
