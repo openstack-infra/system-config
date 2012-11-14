@@ -695,7 +695,9 @@ pupppet repository. To create an actual change that does all of this for
 a single project you will want to do the following:
 
 #. Add a ``modules/openstack_project/files/gerrit/acls/project-name.config``
-   file to the repo. The contents will probably end up looking like::
+   file to the repo. You can refer to the :ref:`project-config` section
+   below if you need more details on writing the project.config file,
+   but contents will probably end up looking like::
 
      [access "refs/*"]
      	owner = group Administrators
@@ -714,14 +716,20 @@ a single project you will want to do the following:
      [project]
      	state = active
 
-You can refer to the :ref:`project-config` section below if you need
-more details on writing the project.config file.
-
 #. Add a project entry for the project in
    ``openstack-ci-puppet/modules/openstack_project/templates/review.projects.yaml.erb``.::
 
      - project: openstack/project-name
        acl_config: /home/gerrit2/acls/project-name.config
+
+#. If there is an existing repo that is being replaced by this new
+   project you can set the upstream value for the project. When an
+   upstream is set that upstream will be cloned and pushed into Gerrit
+   instead of an empty repository. eg::
+
+     - project: openstack/project-name
+       acl_config: /home/gerrit2/acls/project-name.config
+       upstream: git://github.com/awesumsauce/project-name.git
 
 That is all you need to do. Push the change to gerrit and if necessary
 modify group membership for the groups you configured in the
