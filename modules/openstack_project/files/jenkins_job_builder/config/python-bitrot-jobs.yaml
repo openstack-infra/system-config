@@ -17,7 +17,7 @@
               copy-after-failure: true
       - console-log-periodic
       - email:
-          recipients: openstack-stable-maint@lists.openstack.org
+          recipients: '{email}'
 
     scm:
       - git:
@@ -48,7 +48,7 @@
               copy-after-failure: true
       - console-log-periodic
       - email:
-          recipients: openstack-stable-maint@lists.openstack.org
+          recipients: '{email}'
 
     scm:
       - git:
@@ -71,7 +71,7 @@
     publishers:
       - console-log-periodic
       - email:
-          recipients: openstack-stable-maint@lists.openstack.org
+          recipients: '{email}'
 
     scm:
       - git:
@@ -86,6 +86,7 @@
     name: python-diablo-bitrot-jobs
     branch: 'stable/diablo'
     branch-name: 'stable-diablo'
+    email: openstack-diablo-maint@lists.launchpad.net
     node: oneiric
     jobs:
       - 'periodic-{name}-python26-{branch-name}'
@@ -97,6 +98,7 @@
     name: python-essex-bitrot-jobs
     branch: 'stable/essex'
     branch-name: 'stable-essex'
+    email: openstack-essex-maint@lists.launchpad.net
     node: precise
     jobs:
       - 'periodic-{name}-python26-{branch-name}'
@@ -108,6 +110,7 @@
     name: python-folsom-bitrot-jobs
     branch: 'stable/folsom'
     branch-name: 'stable-folsom'
+    email: openstack-stable-maint@lists.openstack.org
     node: precise
     jobs:
       - 'periodic-{name}-python26-{branch-name}'
