@@ -33,6 +33,7 @@ class jenkins::slave(
     'docbook5-xml', # for building openstack docs
     'docbook-xsl', # for building openstack docs
     'firefox', # for selenium tests
+    'gettext', # for translation jobs
     'libapache2-mod-wsgi',
     'libcurl4-gnutls-dev',
     'libldap2-dev',
