@@ -15,6 +15,7 @@
 
 # Synchronize Gerrit users from Launchpad.
 
+
 import fcntl
 import logging
 import logging.config
@@ -22,6 +23,7 @@ import os
 import subprocess
 import sys
 import uuid
+import cPickle as pickle
 
 from datetime import datetime
 
@@ -41,8 +43,6 @@ from launchpadlib.uris import LPNET_SERVICE_ROOT
 from openid.consumer import consumer
 from openid.cryptutil import randomString
 
-DEBUG = False
-
 # suppress pyflakes
 pkg_resources.get_supported_platform()
 
@@ -57,12 +57,13 @@ except IOError:
 parser = argparse.ArgumentParser()
 parser.add_argument('user', help='The gerrit admin user')
 parser.add_argument('ssh_key', help='The gerrit admin SSH key file')
-parser.add_argument('site',
-                    help='The site in use (typically openstack or stackforge)')
-parser.add_argument('root_team', help='The root launchpad team to pull from')
-parser.add_argument('log_config',
-                    default=None,
+parser.add_argument('log_config', default=None, nargs='?',
                     help='Path to file containing logging config')
+parser.add_argument('--prep-only', action='store_true')
+parser.add_argument('--skip-prep', action='store_true')
+parser.add_argument('--skip-dump', action='store_true')
+parser.add_argument('-d', action='store_true')
+
 options = parser.parse_args()
 
 GERRIT_USER = options.user
@@ -88,19 +89,22 @@ def setup_logging():
             raise Exception("Unable to read logging config file at %s" % fp)
         logging.config.fileConfig(fp)
     else:
-        logging.basicConfig(filename='/home/gerrit2/gerrit_user_sync.log',
-                            level=logging.DEBUG)
+        if options.d:
+            logging.basicConfig(level=logging.DEBUG)
+        else:
+            logging.basicConfig(level=logging.INFO)
 
 setup_logging()
 log = logging.getLogger('gerrit_user_sync')
 log.info('Gerrit user sync start ' + str(datetime.now()))
 
-for check_path in (os.path.dirname(GERRIT_CACHE_DIR),
-                   os.path.dirname(GERRIT_CREDENTIALS),
-                   GERRIT_BACKUP_PATH):
-    if not os.path.exists(check_path):
-        log.info('mkdir ' + check_path)
-        os.makedirs(check_path)
+if not options.skip_dump:
+    for check_path in (os.path.dirname(GERRIT_CACHE_DIR),
+                       os.path.dirname(GERRIT_CREDENTIALS),
+                       GERRIT_BACKUP_PATH):
+        if not os.path.exists(check_path):
+            log.info('mkdir ' + check_path)
+            os.makedirs(check_path)
 
 
 def get_broken_config(filename):
@@ -131,12 +135,13 @@ DB_DB = gerrit_config.get("database", "database")
 
 db_backup_file = "%s.%s.sql" % (DB_DB, datetime.isoformat(datetime.now()))
 db_backup_path = os.path.join(GERRIT_BACKUP_PATH, db_backup_file)
-log.info('Backup mysql DB to ' + db_backup_path)
-retval = os.system("mysqldump --opt -u%s -p%s %s | gzip -9 > %s.gz" %
-                    (DB_USER, DB_PASS, DB_DB, db_backup_path))
-if retval != 0:
-    print "Problem taking a db dump, aborting db update"
-    sys.exit(retval)
+if not options.skip_dump:
+    log.info('Backup mysql DB to ' + db_backup_path)
+    retval = os.system("mysqldump --opt -u%s -p%s %s | gzip -9 > %s.gz" %
+                       (DB_USER, DB_PASS, DB_DB, db_backup_path))
+    if retval != 0:
+        print "Problem taking a db dump, aborting db update"
+        sys.exit(retval)
 
 log.info('Connect to mysql DB')
 conn = MySQLdb.connect(user=DB_USER, passwd=DB_PASS, db=DB_DB)
@@ -145,83 +150,341 @@ cur = conn.cursor()
 log.info('Connecting to launchpad')
 launchpad = Launchpad.login_with('Gerrit User Sync', LPNET_SERVICE_ROOT,
                                  GERRIT_CACHE_DIR,
-                                 credentials_file=GERRIT_CREDENTIALS)
+                                 credentials_file=GERRIT_CREDENTIALS,
+                                 version='devel')
 log.info('Connected to launchpad')
 
 
-def get_sub_teams(team, have_teams):
-    for sub_team in launchpad.people[team].sub_teams:
-        if sub_team.name not in have_teams:
-            have_teams = get_sub_teams(sub_team.name, have_teams)
-    have_teams.append(team)
-    return have_teams
+class Group(object):
+    def __init__(self, name, id):
+        self.name = name
+        self.id = id
 
+class Team(object):
+    def __init__(self, name, display_name):
+        self.name = name
+        self.display_name = display_name
+        self.members = []
+        self.sub_teams = []
 
-log.info('Getting teams')
-teams_todo = get_sub_teams(options.root_team, [])
+class LPUser(object):
+    def __init__(self, name):
+        self.name = name
+        self.display_name = None
+        self.email = None
+        self.ssh_keys = []
+        self.teams = []
+        self.openids = []
 
-log.info('Listing projects')
-users = {}
-groups = {}
-groups_in_groups = {}
-group_implies_groups = {}
-group_ids = {}
-projects = subprocess.check_output(['/usr/bin/ssh', '-p', '29418',
-                                    '-i', GERRIT_SSH_KEY,
-                                    '-l', GERRIT_USER, 'localhost',
-                                    'gerrit', 'ls-projects']).split('\n')
+class GerritUser(object):
+    def __init__(self, id):
+        self.id = id
+        self.name = None
+        self.emails = []
+        self.openids = []
 
-log.info('Examining teams')
-for team_todo in teams_todo:
-    team = launchpad.people[team_todo]
-    groups[team.name] = team.display_name
+class Sync(object):
+    def __init__(self):
+        self.log = logging.getLogger('sync')
+        self.cursor = cur
+        self.teams = {}
+        self.lp_users = {}
+        self.openids = {}
+        self.gerrit_users = {}
+        self.groups = {}
 
-    # Attempt to get nested group memberships. ~nova-core, for instance, is a
-    # member of ~nova, so membership in ~nova-core should imply membership in
-    # ~nova
-    group_in_group = groups_in_groups.get(team.name, {})
-    for subgroup in team.sub_teams:
-        group_in_group[subgroup.name] = 1
-    # We should now have a dictionary of the form {'nova': {'nova-core': 1}}
-    groups_in_groups[team.name] = group_in_group
+    def __getstate__(self):
+        d = self.__dict__.copy()
+        del d['log']
+        del d['cursor']
+        return d
 
-    for detail in team.members_details:
-        user = None
+    def __setstate__(self, state):
+        self.__dict__ = state
+        self.log = logging.getLogger('sync')
+        self.cursor = cur
 
-        # detail.self_link ==
-        # 'https://api.launchpad.net/1.0/~team/+member/${username}'
-        login = detail.self_link.split('/')[-1]
-
-        if users.has_key(login):
-            user = users[login]
+    def getProjectList(self):
+        self.log.info('Listing projects')
+        if options.skip_dump:
+            projects = [
+                'heat-api/heat',
+                'heat-api/python-heatclient',
+                'openstack-ci/devstack-gate',
+                'openstack-ci/gerrit',
+                'openstack-ci/gerrit-verification-status-plugin',
+                'openstack-ci/gerritbot',
+                'openstack-ci/gerritlib',
+                'openstack-ci/git-review',
+                'openstack-ci/jeepyb',
+                'openstack-ci/jenkins-job-builder',
+                'openstack-ci/lodgeit',
+                'openstack-ci/meetbot',
+                'openstack-ci/nose-html-output',
+                'openstack-ci/puppet-apparmor',
+                'openstack-ci/puppet-dashboard',
+                'openstack-ci/puppet-vcsrepo',
+                'openstack-ci/pypi-mirror',
+                'openstack-ci/zuul',
+                'openstack-dev/devstack',
+                'openstack-dev/openstack-nose',
+                'openstack-dev/openstack-qa',
+                'openstack-dev/pbr',
+                'openstack-dev/sandbox',
+                'openstack/api-site',
+                'openstack/ceilometer',
+                'openstack/cinder',
+                'openstack/compute-api',
+                'openstack/glance',
+                'openstack/horizon',
+                'openstack/identity-api',
+                'openstack/image-api',
+                'openstack/keystone',
+                'openstack/melange',
+                'openstack/netconn-api',
+                'openstack/nova',
+                'openstack/object-api',
+                'openstack/openstack-chef',
+                'openstack/openstack-ci',
+                'openstack/openstack-ci-puppet',
+                'openstack/openstack-manuals',
+                'openstack/openstack-planet',
+                'openstack/openstack-puppet',
+                'openstack/oslo-incubator',
+                'openstack/python-cinderclient',
+                'openstack/python-glanceclient',
+                'openstack/python-keystoneclient',
+                'openstack/python-melangeclient',
+                'openstack/python-novaclient',
+                'openstack/python-openstackclient',
+                'openstack/python-quantumclient',
+                'openstack/python-swiftclient',
+                'openstack/quantum',
+                'openstack/requirements',
+                'openstack/swift',
+                'openstack/tempest',
+                'openstack/volume-api',
+                'stackforge/MRaaS',
+                'stackforge/bufunfa',
+                'stackforge/diskimage-builder',
+                'stackforge/libra',
+                'stackforge/marconi',
+                'stackforge/moniker',
+                'stackforge/python-monikerclient',
+                'stackforge/python-reddwarfclient',
+                'stackforge/reddwarf',
+                'stackforge/reddwarf-integration',
+                ]
         else:
-            user = dict(add_groups=[])
+            projects = subprocess.check_output(['/usr/bin/ssh', '-p', '29418',
+                                                '-i', GERRIT_SSH_KEY,
+                                                '-l', GERRIT_USER, 'localhost',
+                                                'gerrit', 'ls-projects'])
+            projects = projects.split('\n')
+        self.projects = projects
 
-        status = detail.status
-        if (status == "Approved" or status == "Administrator"):
-            user['add_groups'].append(team.name)
-        users[login] = user
+    def getGroups(self):
+        self.log.info('Listing groups')
+        self.groups = {}
+        self.cursor.execute("select group_id, name from account_groups")
+        for row in self.cursor.fetchall():
+            id, name = row
+            self.groups[name] = Group(name, id)
 
-# If we picked up subgroups that were not in our original list of groups
-# make sure they get added
-for (supergroup, subgroups) in groups_in_groups.items():
-    for group in subgroups.keys():
-        if group not in groups.keys():
-            groups[group] = None
+    def getOpenID(self, openid):
+        person = launchpad.people.getByOpenIDIdentifier(identifier=openid)
+        if not person:
+            return
+        lp_user = self.lp_users.get(person)
+        if not lp_user:
+            lp_user = LPUser(person.name)
+            self.lp_users[person.name] = lp_user
+        if openid not in lp_user.openids:
+            lp_user.openids.append(openid)
+        self.openids[openid] = lp_user
 
-log.info('Examining groups')
-# account_groups
-# groups is a dict of team name to team display name
-# here, for every group we have in that dict, we're building another dict of
-# group_name to group_id - and if the database doesn't already have the
-# group, we're adding it
-for (group_name, group_display_name) in groups.items():
-    if cur.execute("select group_id from account_groups where name = %s",
-                   group_name):
-        group_ids[group_name] = cur.fetchall()[0][0]
-    else:
-        cur.execute("""insert into account_group_id (s) values (NULL)""")
-        cur.execute("select max(s) from account_group_id")
+    def getGerritUsers(self):
+        # Get a list of gerrit users and external ids
+        log.info('Getting gerrit users')
+        cur.execute("""select account_id, external_id
+                       from account_external_ids""")
+        rows = cur.fetchall()
+        for i, row in enumerate(rows):
+            account_id = row[0]
+            if account_id in self.gerrit_users:
+                g_user = self.gerrit_users[account_id]
+            else:
+                g_user = GerritUser(account_id)
+                self.gerrit_users[account_id] = g_user
+            if row[1].startswith('mailto:'):
+                g_user.emails.append(row[1][len('mailto:'):])
+            elif row[1].startswith('username:'):
+                g_user.name = row[1][len('username:'):]
+            else:
+                g_user.openids.append(row[1])
+                self.getOpenID(row[1])
+
+    def prep(self):
+        self.getProjectList()
+        self.getGroups()
+        self.getTeams()
+        self.getLPUsers()
+        self.getGerritUsers()
+
+    def fixOpenIDs(self):
+        for g_user in self.gerrit_users.values()[:]:
+            account_names = {}
+            for openid in g_user.openids:
+                lp_user = self.openids.get(openid)
+                if not lp_user:
+                    continue
+                account_names[lp_user.name] = openid
+            if len(account_names.keys()) == 0:
+                continue
+            elif len(account_names.keys()) == 1:
+                if account_names.keys()[0] != g_user.name:
+                    self.renameAccount(g_user, account_names.keys()[0])
+            else:
+                for openid in g_user.openids:
+                    lp_user = self.openids[openid]
+                    if lp_user.name != g_user.name:
+                        other_id = self.getGerritAccountID(lp_user.name)
+                        other_g_user = self.gerrit_users.get(other_id)
+                        if other_g_user:
+                            self.moveOpenID(g_user, other_g_user, openid)
+                        else:
+                            self.removeOpenID(g_user, openid)
+
+    def getGerritAccountID(self, name):
+        if self.cursor.execute("""select account_id from account_external_ids
+            where external_id=%s""",
+                            ("username:%s" % name)):
+            return self.cursor.fetchall()[0][0]
+        return None
+
+    def renameAccount(self, g_user, name):
+        log.info('Rename %s %s to %s' % (g_user.name, g_user.id, name))
+        # if other account exists, move openids and delete username
+        # else, change username
+        other_id = self.getGerritAccountID(name)
+        if not other_id:
+            # update external ids username:
+            if g_user.name:
+                log.debug('Update external_id %s: %s -> %s' % (
+                        g_user.id, name, g_user.name))
+                self.cursor.execute("""update account_external_ids
+                set external_id=%s where account_id=%s and external_id=%s""",
+                                    ("username:%s" % name,
+                                     g_user.id,
+                                     "username:%s" % g_user.name))
+            else:
+                log.debug('Insert external_id %s: %s' % (
+                        g_user.id, g_user.name))
+                self.cursor.execute("""insert into account_external_ids
+                               (account_id, external_id)
+                               values (%s, %s)""",
+                                    (g_user.id, "username:%s" % name))
+            g_user.name = name
+        else:
+            log.debug('Rename %s by moving openid' % g_user.id)
+            other_g_user = self.gerrit_users.get(other_id)
+            for openid in g_user.openids:
+                self.moveOpenID(g_user, other_g_user, openid)
+
+    def removeOpenID(self, g_user, openid):
+        log.info('Remove openid %s from %s' % (openid, g_user.name))
+        self.cursor.execute("""delete from account_external_ids
+            where account_id=%s and external_id=%s""",
+                    (g_user.id, openid))
+
+    def moveOpenID(self, src_user, dest_user, openid):
+        log.info('Move openid %s from %s to %s ' % (openid, src_user.name,
+                                                    dest_user.name))
+        self.cursor.execute("""select email_address from account_external_ids
+            where account_id=%s and external_id=%s""",
+                    (src_user.id, openid))
+        email = self.cursor.fetchall()[0][0]
+
+        self.removeOpenID(src_user, openid)
+        self.cursor.execute("""insert into account_external_ids
+                               (account_id, email_address, external_id)
+                               values (%s, %s, %s)""",
+                    (dest_user.id, email, openid))
+
+    def sync(self):
+        self.fixOpenIDs()
+        self.addSubGroups()
+        self.syncUsers()
+
+    def getTeams(self):
+        log.info('Getting teams')
+        for group in self.groups.values():
+            self.getTeam(group.name)
+
+    def getTeam(self, name):
+        if name in self.teams:
+            return
+        log.debug('Getting team %s' % name)
+        try:
+            lpteam = launchpad.people[name]
+        except:
+            return
+        team = Team(lpteam.name, lpteam.display_name)
+        self.teams[team.name] = team
+
+        sub_team_names = [sub_team.name for sub_team in lpteam.sub_teams]
+
+        for detail in lpteam.members_details:
+            if detail.status not in ["Approved", "Administrator"]:
+                continue
+
+            # detail.self_link ==
+            # 'https://api.launchpad.net/1.0/~team/+member/${username}'
+            login = detail.self_link.split('/')[-1]
+
+            if login in sub_team_names:
+                continue
+
+            user = self.lp_users.get(login)
+            if not user:
+                user = LPUser(login)
+                self.lp_users[login] = user
+
+            user.teams.append(team)
+            team.members.append(user)
+
+        for sub_team in lpteam.sub_teams:
+            self.getTeam(sub_team.name)
+            team.sub_teams.append(self.teams[sub_team.name])
+
+    def addGroupToGroup(self, child_group, parent_group):
+        try:
+            log.info('Adding group %s to %s' % (child_group.name,
+                                                parent_group.name))
+            cur.execute("""insert into account_group_includes
+                           (group_id, include_id)
+                           values (%s, %s)""",
+                        (parent_group.id, child_group.id))
+        except MySQLdb.IntegrityError:
+            pass
+
+    def addSubGroups(self):
+        log.info('Add subgroups')
+        for team in self.teams.values():
+            group = self.groups.get(team.name)
+            if not group:
+                continue
+            for sub_team in team.sub_teams:
+                sub_group = self.groups.get(sub_team.name)
+                if not sub_group:
+                    sub_group = self.createGroup(sub_team)
+                self.addGroupToGroup(sub_group, group)
+
+    def createGroup(self, team):
+        log.info('Create group %s' % team.name)
+        self.cursor.execute(
+            """insert into account_group_id (s) values (NULL)""")
+        self.cursor.execute("select max(s) from account_group_id")
         group_id = cur.fetchall()[0][0]
 
         # Match the 40-char 'uuid' that java is producing
@@ -229,169 +492,115 @@ for (group_name, group_display_name) in groups.items():
         second_uuid = uuid.uuid4()
         full_uuid = "%s%s" % (group_uuid.hex, second_uuid.hex[:8])
 
-        log.info('Adding group %s' % group_name)
-        cur.execute("""insert into account_groups
+        log.debug('Adding group %s' % team.name)
+        self.cursor.execute("""insert into account_groups
                        (group_id, group_type, owner_group_id,
                         name, description, group_uuid)
                        values
                        (%s, 'INTERNAL', 1, %s, %s, %s)""",
-                    (group_id, group_name, group_display_name, full_uuid))
-        cur.execute("""insert into account_group_names (group_id, name) values
-                       (%s, %s)""",
-                    (group_id, group_name))
+                            (group_id, team.name, team.display_name,
+                             full_uuid))
+        self.cursor.execute("""insert into account_group_names
+                       (group_id, name) values (%s, %s)""",
+                            (group_id, team.name))
+        group = Group(team.name, group_id)
+        self.groups[team.name] = group
+        return group
 
-        group_ids[group_name] = group_id
+    def getGerritAccountId(self, username):
+        if cur.execute("""select account_id from account_external_ids where
+                          external_id in (%s)""",
+                       "username:%s" % username):
+            return cur.fetchall()[0][0]
+        return None
 
-# account_group_includes
-# groups_in_groups should be a dict of dicts, where the key is the larger
-# group and the inner dict is a list of groups that are members of the
-# larger group. So {'nova': {'nova-core': 1}}
-for (group_name, subgroups) in groups_in_groups.items():
-    for subgroup_name in subgroups.keys():
+    def getLPUsers(self):
+        log.info('Getting LP users')
+        # Get info about all of the LP team members who are not already
+        # in the db
+        for lp_user in self.lp_users.values():
+            account_id = self.getGerritAccountId(lp_user.name)
+            if not account_id:
+                self.getLPUser(lp_user)
+
+    def getLPUser(self, lp_user):
+        log.debug('Getting info about %s' % lp_user.name)
+        # only call this if we have no info for a user
+        member = launchpad.people[lp_user.name]
+
+        openid_consumer = consumer.Consumer(
+                            dict(id=randomString(16, '0123456789abcdef')),
+                            None)
+        openid_request = openid_consumer.begin(
+                            "https://launchpad.net/~%s" % member.name)
+
+        openid = openid_request.endpoint.getLocalID()
+        lp_user.openids.append(openid)
+        self.openids[openid] = lp_user
+
         try:
-            log.info('Adding included group %s' % group_name)
-            cur.execute("""insert into account_group_includes
-                           (group_id, include_id)
-                           values (%s, %s)""",
-                        (group_ids[group_name], group_ids[subgroup_name]))
-        except MySQLdb.IntegrityError:
+            lp_user.email = member.preferred_email_address.email
+        except ValueError:
             pass
 
-# Make a list of implied group membership
-# building a list which is the opposite of groups_in_group. Here
-# group_implies_groups is a dict keyed by group_id containing a list of
-# group_ids of implied membership. SO: if nova is 1 and nova-core is 2:
-# {'2': [1]}
-for group_id in group_ids.values():
-    total_groups = []
-    groups_todo = [group_id]
-    while len(groups_todo) > 0:
-        current_group = groups_todo.pop()
-        total_groups.append(current_group)
-        cur.execute("""select group_id from account_group_includes
-                       where include_id = %s""", (current_group))
-        for row in cur.fetchall():
-            if row[0] != 1 and row[0] not in total_groups:
-                groups_todo.append(row[0])
-    group_implies_groups[group_id] = total_groups
+        for key in member.sshkeys:
+            lp_user.ssh_keys.append("%s %s %s" %
+                                    (get_type(key.keytype),
+                                     key.keytext, key.comment))
 
-if DEBUG:
-    def get_group_name(in_group_id):
-        for (group_name, group_id) in group_ids.items():
-            if group_id == in_group_id:
-                return group_name
-
-    print "groups in groups"
-    for (k, v) in groups_in_groups.items():
-        print k, v
-
-    print "group_imples_groups"
-    for (k, v) in group_implies_groups.items():
-        print get_group_name(k)
-        new_groups = []
-        for val in v:
-            new_groups.append(get_group_name(val))
-        print "\t", new_groups
-
-for (username, user_details) in users.items():
-    log.info('Syncing user: %s' % username)
-    member = launchpad.people[username]
-    # accounts
-    account_id = None
-    if cur.execute("""select account_id from account_external_ids where
-                      external_id in (%s)""", ("username:%s" % username)):
+    def createGerritUser(self, lp_user, skip_openids=False):
+        log.info('Add %s to Gerrit DB.' % lp_user.name)
+        cur.execute("""insert into account_id (s) values (NULL)""")
+        cur.execute("select max(s) from account_id")
         account_id = cur.fetchall()[0][0]
-        # We have this bad boy
-        # all we need to do is update his group membership
-    else:
-        # We need details
-        if not member.is_team:
 
-            openid_consumer = consumer.Consumer(
-                                dict(id=randomString(16, '0123456789abcdef')),
-                                None)
-            openid_request = openid_consumer.begin(
-                                "https://launchpad.net/~%s" % member.name)
-            user_details['openid_external_id'] = \
-                                        openid_request.endpoint.getLocalID()
+        cur.execute("""insert into accounts
+                       (account_id, full_name, preferred_email)
+                       values (%s, %s, %s)""",
+                    (account_id, lp_user.name, lp_user.email))
 
-            # Handle username change
-            if cur.execute("""select account_id from account_external_ids where
-                              external_id in (%s)""",
-                           user_details['openid_external_id']):
-                account_id = cur.fetchall()[0][0]
-                log.info('Handling username change id %s to %s' %
-                            (account_id, username))
-                cur.execute("""update account_external_ids
-                               set external_id = %s
-                               where external_id like 'username%%'
-                               and account_id = %s""",
-                            ('username:%s' % username, account_id))
-            else:
-                email = None
-                try:
-                    email = member.preferred_email_address.email
-                except ValueError:
-                    pass
-                user_details['email'] = email
+        g_user = GerritUser(account_id)
+        g_user.name = lp_user.name
+        g_user.emails.append(lp_user.email)
+        self.gerrit_users[account_id] = g_user
 
-                log.info('Add %s to Gerrit DB.' % username)
-                cur.execute("""insert into account_id (s) values (NULL)""")
-                cur.execute("select max(s) from account_id")
-                account_id = cur.fetchall()[0][0]
+        # account_external_ids
+        ## external_id
+        if not skip_openids:
+            for openid in lp_user.openids:
+                if not cur.execute("""select account_id
+                                  from account_external_ids
+                                  where account_id = %s
+                                  and external_id = %s""",
+                                   (account_id, openid)):
+                    cur.execute("""insert into account_external_ids
+                                 (account_id, email_address, external_id)
+                                 values (%s, %s, %s)""",
+                                (account_id, lp_user.email, openid))
 
-                cur.execute("""insert into accounts
-                               (account_id, full_name, preferred_email)
+        if not cur.execute("""select account_id
+                              from account_external_ids
+                              where account_id = %s
+                              and external_id = %s""",
+                           (account_id, "username:%s" % lp_user.name)):
+            cur.execute("""insert into account_external_ids
+                           (account_id, external_id)
+                           values (%s, %s)""",
+                        (account_id, "username:%s" % lp_user.name))
+
+        if lp_user.email:
+            if not cur.execute("""select account_id
+                                  from account_external_ids
+                                  where account_id = %s
+                                  and external_id = %s""",
+                               (account_id, "mailto:%s" % lp_user.email)):
+                cur.execute("""insert into account_external_ids
+                               (account_id, email_address, external_id)
                                values (%s, %s, %s)""",
-                            (account_id, username, user_details['email']))
+                            (account_id, lp_user.email,
+                             "mailto:%s" % lp_user.email))
 
-                # account_external_ids
-                ## external_id
-                if not cur.execute("""select account_id
-                                      from account_external_ids
-                                      where account_id = %s
-                                      and external_id = %s""",
-                                   (account_id,
-                                    user_details['openid_external_id'])):
-                    cur.execute("""insert into account_external_ids
-                                   (account_id, email_address, external_id)
-                                   values (%s, %s, %s)""",
-                                (account_id, user_details['email'],
-                                 user_details['openid_external_id']))
-                if not cur.execute("""select account_id
-                                      from account_external_ids
-                                      where account_id = %s
-                                      and external_id = %s""",
-                                   (account_id, "username:%s" % username)):
-                    cur.execute("""insert into account_external_ids
-                                   (account_id, external_id)
-                                   values (%s, %s)""",
-                                (account_id, "username:%s" % username))
-                if user_details.get('email', None) is not None:
-                    if not cur.execute("""select account_id
-                                          from account_external_ids
-                                          where account_id = %s
-                                          and external_id = %s""",
-                                       (account_id, "mailto:%s" %
-                                            user_details['email'])):
-                        cur.execute("""insert into account_external_ids
-                                       (account_id, email_address, external_id)
-                                       values (%s, %s, %s)""",
-                                    (account_id,
-                                     user_details['email'],
-                                     "mailto:%s" %
-                                        user_details['email']))
-
-    if account_id is not None:
-        # account_ssh_keys
-        log.info('Add ssh keys for %s' % username)
-        user_details['ssh_keys'] = ["%s %s %s" %
-                                        (get_type(key.keytype),
-                                         key.keytext,
-                                         key.comment)
-                                            for key in member.sshkeys]
-
-        for key in user_details['ssh_keys']:
+        for key in lp_user.ssh_keys:
             cur.execute("""select ssh_public_key from account_ssh_keys where
                            account_id = %s""", account_id)
             db_keys = [r[0].strip() for r in cur.fetchall()]
@@ -406,67 +615,95 @@ for (username, user_details) in users.items():
                                values
                                (%s, 'Y', %s, %s)""",
                             (key.strip(), account_id, seq))
+        return g_user
+
+    def addWatch(self, gerrit_user, group):
+        watch_name = group.name
+        if group.name.endswith("-core"):
+            watch_name = group.name[:-5]
+        if group.name.endswith("-drivers"):
+            watch_name = group.name[:-5]
+        for p in self.projects:
+            if watch_name in p:
+                watch_name = p
+                break
+        print watch_name
+        if watch_name in self.projects:
+            if not cur.execute("""select account_id
+                                  from account_project_watches
+                                  where account_id = %s
+                                  and project_name = %s""",
+                               (gerrit_user.id, watch_name)):
+                cur.execute("""insert into account_project_watches
+                               VALUES
+                               ("Y", "N", "N", %s, %s, "*")""",
+                            (gerrit_user.id, watch_name))
+
+    def syncUsers(self):
+        for lp_user in self.lp_users.values():
+            g_id = self.getGerritAccountID(lp_user.name)
+            g_user = self.gerrit_users.get(g_id)
+            if not g_user:
+                g_user = self.createGerritUser(lp_user)
+            self.syncUser(lp_user, g_user)
+
+    def syncUser(self, lp_user, g_user):
+        log.debug('Syncing user: %s' % lp_user.name)
 
         # account_group_members
         # user_details['add_groups'] is a list of group names for which the
         # user is either "Approved" or "Administrator"
-
         groups_to_add = []
-        groups_to_watch = {}
-        groups_to_rm = {}
+        groups_to_rm = []
 
-        for group in user_details['add_groups']:
-            # if you are in the group nova-core, that should also put you
-            # in nova
-            add_groups = group_implies_groups[group_ids[group]]
-            add_groups.append(group_ids[group])
-            for add_group in add_groups:
-                if add_group not in groups_to_add:
-                    groups_to_add.append(add_group)
-            # We only want to add watches for direct project membership groups
-            groups_to_watch[group_ids[group]] = group
+        for team in lp_user.teams:
+            groups_to_add.append(self.groups[team.name])
 
         # groups_to_add is now the full list of all groups we think the user
         # should belong to. we want to limit the users groups to this list
-        for group in groups:
-            if group_ids[group] not in groups_to_add:
-                if group not in groups_to_rm.values():
-                    groups_to_rm[group_ids[group]] = group
+        for group in self.groups.values():
+            if group not in groups_to_add:
+                if group not in groups_to_rm:
+                    groups_to_rm.append(group)
 
-        for group_id in groups_to_add:
-            log.info('Add %s to group %s' % (username, group_id))
+        for group in groups_to_add:
+            log.info('Add %s to group %s' % (lp_user.name, group.name))
             if not cur.execute("""select account_id from account_group_members
                                   where account_id = %s and group_id = %s""",
-                               (account_id, group_id)):
+                               (g_user.id, group.id)):
                 # The current user does not exist in the group. Add it.
                 cur.execute("""insert into account_group_members
                                (account_id, group_id)
-                               values (%s, %s)""", (account_id, group_id))
-                os_project_name = groups_to_watch.get(group_id, None)
-                if os_project_name is not None:
-                    if os_project_name.endswith("-core"):
-                        os_project_name = os_project_name[:-5]
-                    os_project_name = \
-                            "{site}/{project}".format(site=options.site,
-                                                      project=os_project_name)
-                    if os_project_name in projects:
-                        if not cur.execute("""select account_id
-                                              from account_project_watches
-                                              where account_id = %s
-                                              and project_name = %s""",
-                                           (account_id, os_project_name)):
-                            cur.execute("""insert into account_project_watches
-                                           VALUES
-                                           ("Y", "N", "N", %s, %s, "*")""",
-                                        (account_id, os_project_name))
+                               values (%s, %s)""", (g_user.id, group.id))
+                self.addWatch(g_user, group)
 
-        for (group_id, group_name) in groups_to_rm.items():
+        for group in groups_to_rm:
             cur.execute("""delete from account_group_members
                            where account_id = %s and group_id = %s""",
-                        (account_id, group_id))
+                        (g_user.id, group.id))
 
-os.system("ssh -i %s -p29418 %s@localhost gerrit flush-caches" %
-                                                (GERRIT_SSH_KEY, GERRIT_USER))
+
+if options.skip_prep and os.path.exists('/tmp/lpcache.pickle'):
+    log.info('Loading pickle')
+    out = open('/tmp/lpcache.pickle', 'rb')
+    sync = pickle.load(out)
+    out.close()
+else:
+    log.info('Initializing')
+    sync = Sync()
+    sync.prep()
+    log.info('Saving pickle')
+    out = open('/tmp/lpcache.pickle', 'wb')
+    pickle.dump(sync, out, -1)
+    out.close()
+
+if not options.prep_only:
+    log.info('Syncing')
+    sync.sync()
+
+if not options.skip_dump:
+    os.system("ssh -i %s -p29418 %s@localhost gerrit flush-caches" %
+              (GERRIT_SSH_KEY, GERRIT_USER))
 
 conn.commit()
 
