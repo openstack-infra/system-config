@@ -16,6 +16,12 @@
 # Fetch remotes reads a project config file called projects.yaml
 # It should look like:
 
+# - homepage: http://openstack.org
+#   team-id: 153703
+#   has-wiki: False
+#   has-issues: False
+#   has-downloads: False
+# ---
 # - project: PROJECT_NAME
 #   options:
 #   - remote: https://gerrit.googlesource.com/gerrit
@@ -50,7 +56,7 @@ REPO_ROOT = os.environ.get('REPO_ROOT',
 PROJECTS_YAML = os.environ.get('PROJECTS_YAML',
                                '/home/gerrit2/projects.yaml')
 
-config = yaml.load(open(PROJECTS_YAML))
+(defaults, config) = [config for config in yaml.load_all(open(PROJECTS_YAML))]
 
 for section in config:
     project = section['project']
