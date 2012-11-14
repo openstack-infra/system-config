@@ -279,7 +279,10 @@ port=29418
 project=%s
 """ % (GERRIT_HOST, project_git))
                     git_command(repo_path, "add .gitreview")
-                    git_command(repo_path, "commit -a -m'Added .gitreview'")
+                    cmd = "commit -a -m'Added .gitreview' --author=" \
+                            "'Openstack Project Creator " \
+                            "<openstack-infra@lists.openstack.org>'"
+                    git_command(repo_path, cmd)
                 gerrit.createProject(project)
 
                 if not os.path.exists(project_dir):
