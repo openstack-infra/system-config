@@ -1,0 +1,47 @@
+- job:
+    name: horizon-upstream-translation-update
+    concurrent: false
+
+    triggers:
+      - zuul-post
+
+    builders:
+      - gerrit-git-prep
+      - shell: |
+          #!/bin/bash -xe
+          /usr/local/jenkins/slave_scripts/horizon_upstream_translation_update.sh
+
+    publishers:
+      - console-log-post
+
+    node: 'tx'
+
+- job:
+    name: horizon-propose-translation-update
+    concurrent: false
+
+    triggers:
+      - timed: '@daily'
+
+    builders:
+      - shell: |
+          #!/bin/bash -xe
+          /usr/local/jenkins/slave_scripts/horizon_propose_translation_update.sh
+
+    publishers:
+      - console-log-periodic
+
+    scm:
+      - git:
+          url: 'git://github.com/{github-org}/{name}.git'
+          branches:
+            - 'origin/master'
+
+    node: 'tx'
+
+
+- job-group:
+    name: horizon-translation-jobs
+    jobs:
+      - horizon-upstream-translation-update
+      - horizon-propose-translation-update

@@ -193,7 +193,7 @@
       - python-essex-bitrot-jobs
       - python-folsom-bitrot-jobs
       - openstack-publish-jobs
-
+      - horizon-translation-jobs
 
 - project:
     name: identity-api
