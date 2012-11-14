@@ -282,7 +282,7 @@
             predefined-parameters:
               DEVSTACK_NODE_NAME=${NODE_NAME}
       - email:
-          recipients: openstack-stable-maint@lists.openstack.org
+          recipients: openstack-diablo-maint@lists.launchpad.net
 
 
 - job:
@@ -328,7 +328,7 @@
             predefined-parameters:
               DEVSTACK_NODE_NAME=${NODE_NAME}
       - email:
-          recipients: openstack-stable-maint@lists.openstack.org
+          recipients: openstack-essex-maint@lists.launchpad.net
 
 
 - job:
