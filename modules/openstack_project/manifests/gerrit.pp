@@ -190,8 +190,6 @@ class openstack_project::gerrit (
     script_user         => $script_user,
     script_key_file     => $script_key_file,
     script_logging_conf => $script_logging_conf,
-    site                => 'openstack',
-    root_team           => 'openstack',
   }
 
   file { '/home/gerrit2/review_site/hooks/change-merged':

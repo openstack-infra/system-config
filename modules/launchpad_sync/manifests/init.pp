@@ -1,9 +1,7 @@
 # == Class: launchpad_sync
 #
 class launchpad_sync(
-  $root_team = '',
   $script_logging_conf = '',
-  $site = '',
   $script_key_file = '/home/gerrit2/.ssh/id_rsa',
   $script_user = 'update',
   $user = 'gerrit2'
@@ -31,7 +29,7 @@ class launchpad_sync(
   cron { 'sync_launchpad_users':
     user    => $user,
     minute  => '*/15',
-    command => "sleep $((RANDOM\\%60+60)) && timeout -k 5m 8h python /usr/local/bin/update_gerrit_users.py ${script_user} ${script_key_file} ${site} ${root_team} ${script_logging_conf}",
+    command => "sleep $((RANDOM\\%60+60)) && timeout -k 5m 8h python /usr/local/bin/update_gerrit_users.py ${script_user} ${script_key_file} ${script_logging_conf}",
     require => File['/usr/local/bin/update_gerrit_users.py'],
   }
 }
