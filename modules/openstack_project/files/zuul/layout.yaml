@@ -275,6 +275,7 @@ projects:
       - horizon-tarball
       - horizon-coverage
       - horizon-docs
+      - horizon-upstream-translation-update
     publish:
       - horizon-docs
 

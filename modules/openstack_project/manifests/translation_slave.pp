@@ -7,7 +7,7 @@ class openstack_project::translation_slave (
 
   include openstack_project::slave
 
-  package { ['transifex-client', 'Babel']:
+  package { ['transifex-client', 'Babel', 'gettext']:
     ensure   => latest,
     provider => pip,
     require  => Class['pip'],
