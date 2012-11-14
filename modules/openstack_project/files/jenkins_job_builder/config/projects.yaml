@@ -190,7 +190,8 @@
       - python-essex-bitrot-jobs
       - python-folsom-bitrot-jobs
       - openstack-publish-jobs
-
+      - 'horizon_propose_translation_update'
+      - 'horizon_upstream_translation_update'
 
 - project:
     name: identity-api
