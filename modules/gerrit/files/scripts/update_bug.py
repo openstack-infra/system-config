@@ -138,14 +138,16 @@ def process_bugtask(launchpad, bugtask, git_log, args):
             if is_direct_release(args.project):
                 set_fix_released(bugtask)
             else:
-                set_fix_committed(bugtask)
+                if bugtask.status != u'Fix Released':
+                    set_fix_committed(bugtask)
         elif args.branch == 'milestone-proposed':
             release_fixcommitted(bugtask)
         elif args.branch.startswith('stable/'):
             series = args.branch[7:]
             # Look for a related task matching the series
             for reltask in bugtask.related_tasks:
-                if reltask.bug_target_name.endswith("/" + series):
+                if (reltask.bug_target_name.endswith("/" + series) and
+                    reltask.status != u'Fix Released'):
                     # Use fixcommitted if there is any
                     set_fix_committed(reltask)
                     break
@@ -159,11 +161,14 @@ def process_bugtask(launchpad, bugtask, git_log, args):
 
     if args.hook == "patchset-created":
         if args.branch == 'master':
-            set_in_progress(bugtask, launchpad, args.uploader, args.change_url)
+            if bugtask.status not in [u'Fix Committed', u'Fix Released']:
+                set_in_progress(bugtask, launchpad, args.uploader,
+                                args.change_url)
         elif args.branch.startswith('stable/'):
             series = args.branch[7:]
             for reltask in bugtask.related_tasks:
-                if reltask.bug_target_name.endswith("/" + series):
+                if (reltask.bug_target_name.endswith("/" + series) and
+                    reltask.status not in [u'Fix Committed', u'Fix Released']):
                     set_in_progress(reltask, launchpad,
                                     args.uploader, args.change_url)
                     break
