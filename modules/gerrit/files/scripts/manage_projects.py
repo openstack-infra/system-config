@@ -81,6 +81,13 @@ def git_command(repo_dir, sub_cmd, env={}):
     return status
 
 
+def git_command_output(repo_dir, sub_cmd, env={}):
+    git_dir = os.path.join(repo_dir, '.git')
+    cmd = "git --git-dir=%s --work-tree=%s %s" % (git_dir, repo_dir, sub_cmd)
+    status, out = run_command(cmd, True, env)
+    return (status, out)
+
+
 def fetch_config(project, remote_url, repo_path, env={}):
     status = git_command(repo_path, "fetch %s +refs/meta/config:"
                          "refs/remotes/gerrit-meta/config" % remote_url, env)
@@ -119,11 +126,12 @@ def push_acl_config(project, remote_url, repo_path, env={}):
     if status != 0:
         print "Failed to commit config for project: %s" % project
         return False
-    status = git_command(repo_path,
+    status, out = git_command_output(repo_path,
                          "push %s HEAD:refs/meta/config" %
                          remote_url, env)
     if status != 0:
         print "Failed to push config for project: %s" % project
+        print out
         return False
     return True
 
