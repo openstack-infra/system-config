@@ -302,7 +302,7 @@ project=%s
                     run_command("chown -R gerrit2:gerrit2 %s" % project_dir)
 
                 git_command(repo_path,
-                            "push %s HEAD:refs/heads/master" % remote_url,
+                            "push --all %s" % remote_url,
                             env=ssh_env)
                 git_command(repo_path,
                             "push --tags %s" % remote_url, env=ssh_env)
