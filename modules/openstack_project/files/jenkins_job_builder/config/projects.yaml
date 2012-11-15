@@ -15,8 +15,7 @@
 
     jobs:
       - python-jobs
-      - '{name}-sdist-tarball'
-
+      - openstack-publish-jobs
 
 - project:
     name: cinder

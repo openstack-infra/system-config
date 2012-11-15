@@ -638,7 +638,11 @@ projects:
         - gate-ceilometer-python26
         - gate-ceilometer-python27
     post:
-      - ceilometer-sdist-tarball
+      - ceilometer-tarball
+      - ceilometer-coverage
+      - ceilometer-docs
+    publish:
+      - ceilometer-docs
 
   - name: stackforge/MRaaS
     check:
@@ -655,7 +659,6 @@ projects:
       - gate-libra-merge:
         - gate-libra-pep8
         - gate-libra-python27
-
 
   - name: heat-api/heat
     check:
