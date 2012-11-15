@@ -749,6 +749,18 @@ projects:
         - gate-python-monikerclient-python26
         - gate-python-monikerclient-python27
 
+  - name: stackforge/bufunfa
+    check:
+      - gate-bufunfa-merge:
+        - gate-bufunfa-pep8
+        - gate-bufunfa-python26
+        - gate-bufunfa-python27
+    gate:
+      - gate-bufunfa-merge:
+        - gate-bufunfa-pep8
+        - gate-bufunfa-python26
+        - gate-bufunfa-python27
+
   - name: openstack/openstack-manuals
     check:
       - gate-openstack-manuals-merge
