@@ -1,5 +1,5 @@
 class openstack_project::etherpad_dev (
-  $database_password,
+  $database_password = '',
   $sysadmins = []
 ) {
   class { 'openstack_project::server':
@@ -21,8 +21,8 @@ class openstack_project::etherpad_dev (
   include etherpad_lite::backup
 
   class { 'etherpad_lite::apache':
-    ssl_cert_file => '/etc/ssl/certs/ssl-cert-snakeoil.pem',
-    ssl_key_file => '/etc/ssl/private/ssl-cert-snakeoil.key',
+    ssl_cert_file  => '/etc/ssl/certs/ssl-cert-snakeoil.pem',
+    ssl_key_file   => '/etc/ssl/private/ssl-cert-snakeoil.key',
     ssl_chain_file => '',
   }
 
