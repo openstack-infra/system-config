@@ -691,6 +691,12 @@ projects:
         - gate-reddwarf-python26
         - gate-reddwarf-python27
 
+  - name: stackforge/reddwarf-integration
+    check:
+      - gate-reddwarf-integration-merge
+    gate:
+      - gate-reddwarf-integration-merge
+
   - name: stackforge/python-reddwarfclient
     check:
       - gate-python-reddwarfclient-merge:
