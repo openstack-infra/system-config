@@ -903,3 +903,9 @@ projects:
       - gate-sandbox-merge
     gate:
       - gate-sandbox-merge
+
+  - name: stackforge/diskimage-builder
+    check:
+      - gate-diskimage-builder-merge
+    gate:
+      - gate-diskimage-builder-merge
