@@ -1,9 +1,11 @@
+# == Class: openstack_project::puppetmaster
+#
 class openstack_project::puppetmaster (
   $sysadmins = []
 ) {
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [4505, 4506, 8140],
-    sysadmins                 => $sysadmins
+    sysadmins                 => $sysadmins,
   }
 
   class { 'salt::master': }
@@ -30,6 +32,6 @@ class openstack_project::puppetmaster (
     mode    => '0555',
     source  => 'puppet:///modules/openstack_project/puppetmaster/hiera.yaml',
     replace => true,
-    require => Class['openstack_project::server']
+    require => Class['openstack_project::server'],
   }
 }
