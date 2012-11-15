@@ -1,3 +1,5 @@
+# == Class: openstack_project::gerrit
+#
 # A wrapper class around the main gerrit class that sets gerrit
 # up for launchpad single sign on, bug/blueprint links and user
 # import and sync
@@ -57,7 +59,7 @@ class openstack_project::gerrit (
 ) {
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [80, 443, 29418],
-    sysadmins => $sysadmins
+    sysadmins                 => $sysadmins,
   }
 
   class { '::gerrit':
@@ -131,91 +133,92 @@ class openstack_project::gerrit (
   }
 
   file { '/home/gerrit2/review_site/static/echosign-cla.html':
-    owner => 'root',
-    group => 'root',
-    mode => 444,
-    ensure => 'present',
-    source => 'puppet:///modules/openstack_project/gerrit/echosign-cla.html',
-    replace => 'true',
+    ensure  => present,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0444',
+    source  => 'puppet:///modules/openstack_project/gerrit/echosign-cla.html',
+    replace => true,
     require => Class['::gerrit'],
   }
 
   file { '/home/gerrit2/review_site/static/cla.html':
-    owner => 'root',
-    group => 'root',
-    mode => 444,
-    ensure => 'present',
-    source => 'puppet:///modules/openstack_project/gerrit/cla.html',
-    replace => 'true',
+    ensure  => present,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0444',
+    source  => 'puppet:///modules/openstack_project/gerrit/cla.html',
+    replace => true,
     require => Class['::gerrit'],
   }
 
   file { '/home/gerrit2/review_site/static/title.png':
-    ensure => 'present',
-    source => "puppet:///modules/openstack_project/openstack.png",
+    ensure  => present,
+    source  => 'puppet:///modules/openstack_project/openstack.png',
     require => Class['::gerrit'],
   }
 
   file { '/home/gerrit2/review_site/static/openstack-page-bkg.jpg':
-    ensure => 'present',
-    source => 'puppet:///modules/openstack_project/openstack-page-bkg.jpg',
+    ensure  => present,
+    source  => 'puppet:///modules/openstack_project/openstack-page-bkg.jpg',
     require => Class['::gerrit'],
   }
 
   file { '/home/gerrit2/review_site/etc/GerritSite.css':
-    ensure => 'present',
-    source => 'puppet:///modules/openstack_project/gerrit/GerritSite.css',
+    ensure  => present,
+    source  => 'puppet:///modules/openstack_project/gerrit/GerritSite.css',
     require => Class['::gerrit'],
   }
 
   file { '/home/gerrit2/review_site/etc/GerritSiteHeader.html':
-    ensure => 'present',
-    source => 'puppet:///modules/openstack_project/gerrit/GerritSiteHeader.html',
+    ensure  => present,
+    source  =>
+      'puppet:///modules/openstack_project/gerrit/GerritSiteHeader.html',
     require => Class['::gerrit'],
   }
 
-  cron { "gerritsyncusers":
+  cron { 'gerritsyncusers':
     ensure => absent,
   }
 
-  class { "launchpad_sync":
-    user => "gerrit2",
-    script_user => $script_user,
-    script_key_file => $script_key_file,
+  class { 'launchpad_sync':
+    user                => 'gerrit2',
+    script_user         => $script_user,
+    script_key_file     => $script_key_file,
     script_logging_conf => $script_logging_conf,
-    site => "openstack",
-    root_team => "openstack",
+    site                => 'openstack',
+    root_team           => 'openstack',
   }
 
   file { '/home/gerrit2/review_site/hooks/change-merged':
-    owner => 'root',
-    group => 'root',
-    mode => 555,
-    ensure => 'present',
-    source => 'puppet:///modules/openstack_project/gerrit/change-merged',
-    replace => 'true',
-    require => Class['::gerrit']
+    ensure  => present,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0555',
+    source  => 'puppet:///modules/openstack_project/gerrit/change-merged',
+    replace => true,
+    require => Class['::gerrit'],
   }
 
   file { '/home/gerrit2/review_site/hooks/patchset-created':
-    owner => 'root',
-    group => 'root',
-    mode => 555,
-    ensure => 'present',
+    ensure  => present,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0555',
     content => template('openstack_project/gerrit_patchset-created.erb'),
-    replace => 'true',
-    require => Class['::gerrit']
+    replace => true,
+    require => Class['::gerrit'],
   }
 
   file { '/usr/local/gerrit/scripts/trivial_rebase.py':
-    owner => 'root',
-    group => 'root',
-    mode => 444,
-    ensure => 'present',
-    source =>
+    ensure  => present,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0444',
+    source  =>
       'puppet:///modules/openstack_project/gerrit/scripts/trivial_rebase.py',
-    replace => 'true',
-    require => Class['::gerrit']
+    replace => true,
+    require => Class['::gerrit'],
   }
 
   if ($projects_file != 'UNDEF') {

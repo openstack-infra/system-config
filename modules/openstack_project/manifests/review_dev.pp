@@ -1,3 +1,5 @@
+# == Class: openstack_project::review_dev
+#
 class openstack_project::review_dev (
   $github_oauth_token,
   $github_project_username,
@@ -60,28 +62,29 @@ class openstack_project::review_dev (
   }
 
   file { '/var/log/gerrit_user_sync':
-    ensure => directory,
-    owner => root,
-    group => gerrit2,
-    mode => 0775,
-    require => User['gerrit2']
+    ensure  => directory,
+    owner   => 'root',
+    group   => 'gerrit2',
+    mode    => '0775',
+    require => User['gerrit2'],
   }
   file { '/home/gerrit2/.sync_logging.conf':
-    ensure => present,
-    owner => root,
-    group => gerrit2,
-    mode => 0644,
-    source => 'puppet:///modules/openstack_project/gerrit/launchpad_sync_logging.conf',
-    require => User['gerrit2']
+    ensure  => present,
+    owner   => 'root',
+    group   => 'gerrit2',
+    mode    => '0644',
+    source  =>
+      'puppet:///modules/openstack_project/gerrit/launchpad_sync_logging.conf',
+    require => User['gerrit2'],
   }
   file { '/home/gerrit2/review_site/bin/set_agreements.sh':
-    ensure => present,
-    owner => root,
-    group => root,
-    mode => 0755,
+    ensure  => present,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0755',
     content => template('openstack_project/gerrit_set_agreements.sh.erb'),
-    replace => 'true',
-    require => Class['::gerrit']
+    replace => true,
+    require => Class['::gerrit'],
   }
   file { '/home/gerrit2/.ssh':
     ensure  => directory,
@@ -132,7 +135,9 @@ class openstack_project::review_dev (
   exec { 'set_contributor_agreements':
     path    => ['/bin', '/usr/bin'],
     command => '/home/gerrit2/review_site/bin/set_agreements.sh',
-    require => [Class['mysql'],
-                File['/home/gerrit2/review_site/bin/set_agreements.sh']]
+    require => [
+      Class['mysql'],
+      File['/home/gerrit2/review_site/bin/set_agreements.sh'],
+    ],
   }
 }
