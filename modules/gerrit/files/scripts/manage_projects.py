@@ -162,7 +162,7 @@ def create_groups_file(project, gerrit, repo_path):
     group_file = os.path.join(repo_path, "groups")
     uuids = {}
     for line in open(acl_config, 'r'):
-        r = re.match(r'^\t.*group\s(.*)$', line)
+        r = re.match(r'^\s+.*group\s+(.*)$', line)
         if r:
             group = r.group(1)
             if group in uuids.keys():
@@ -278,7 +278,7 @@ try:
             try:
                 repo_path = os.path.join(tmpdir, 'repo')
                 if upstream:
-                    run_command("git clone %(upstream)s %(repo_path)" %
+                    run_command("git clone %(upstream)s %(repo_path)s" %
                                 dict(upstream=upstream, repo_path=repo_path))
                 else:
                     run_command("git init %s" % repo_path)
