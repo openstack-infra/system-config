@@ -1,15 +1,17 @@
+# == Class: openstack_project::static
+#
 class openstack_project::static (
   $sysadmins = []
 ) {
 
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [22, 80, 443],
-    sysadmins => $sysadmins
+    sysadmins                 => $sysadmins,
   }
 
   include openstack_project
   class { 'jenkins::jenkinsuser':
-    ssh_key => $openstack_project::jenkins_ssh_key
+    ssh_key => $openstack_project::jenkins_ssh_key,
   }
 
   include apache
@@ -44,30 +46,29 @@ class openstack_project::static (
   }
 
   file { '/srv/static':
-    ensure => directory
+    ensure => directory,
   }
 
   file { '/srv/static/tarballs':
-    ensure => directory
+    ensure => directory,
   }
 
   file { '/srv/static/ci':
-    ensure => directory
+    ensure => directory,
   }
 
   file { '/srv/static/logs':
-    ensure => directory
+    ensure => directory,
   }
 
   file { '/srv/static/docs-draft':
-    ensure => directory
+    ensure => directory,
   }
 
-  cron { "gziplogs":
-    user => root,
-    hour => "*/6",
-    command => 'sleep $((RANDOM\%600)) && flock -n /var/run/gziplogs.lock find /srv/static/logs/ \( -name \*.txt -or -name \*.html \) -exec gzip \{\} \;',
-    environment => "PATH=/var/lib/gems/1.8/bin:/usr/bin:/bin:/usr/sbin:/sbin",
+  cron { 'gziplogs':
+    user        => 'root',
+    hour        => '*/6',
+    command     => 'sleep $((RANDOM\%600)) && flock -n /var/run/gziplogs.lock find /srv/static/logs/ \( -name \*.txt -or -name \*.html \) -exec gzip \{\} \;',
+    environment => 'PATH=/var/lib/gems/1.8/bin:/usr/bin:/bin:/usr/sbin:/sbin',
   }
-
 }
