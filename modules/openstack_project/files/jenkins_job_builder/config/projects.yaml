@@ -571,6 +571,15 @@
 
 
 - project:
+    name: bufunfa
+    github-org: stackforge
+    node: precise
+
+    jobs:
+      - gate-{name}-merge
+
+
+- project:
     name: requirements
     github-org: openstack
     node: precise
