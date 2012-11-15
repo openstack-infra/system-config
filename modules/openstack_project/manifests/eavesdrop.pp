@@ -1,5 +1,5 @@
 class openstack_project::eavesdrop (
-  $nickpass,
+  $nickpass = '',
   $sysadmins = []
 ) {
   class { 'openstack_project::server':

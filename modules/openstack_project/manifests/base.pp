@@ -1,3 +1,5 @@
+# == Class: openstack_project::base
+#
 class openstack_project::base(
   $certname = $::fqdn,
   $install_users = true
@@ -7,18 +9,18 @@ class openstack_project::base(
   include sudoers
 
   file { '/etc/profile.d/Z98-byobu.sh':
-    ensure => 'absent'
+    ensure => absent,
   }
 
   package { 'popularity-contest':
-    ensure => purged
+    ensure => purged,
   }
 
   if ($::lsbdistcodename == 'oneiric') {
     apt::ppa { 'ppa:git-core/ppa': }
     package { 'git':
       ensure  => latest,
-      require => Apt::Ppa['ppa:git-core/ppa']
+      require => Apt::Ppa['ppa:git-core/ppa'],
     }
   } else {
     package { 'git':
@@ -33,19 +35,19 @@ class openstack_project::base(
   ]
 
   package { $packages:
-    ensure => 'present'
+    ensure => present,
   }
 
   include pip
   package { 'virtualenv':
-    ensure => latest,
+    ensure   => latest,
     provider => pip,
-    require => Class[pip]
+    require  => Class['pip'],
   }
 
   if ($install_users) {
     package { ['byobu', 'emacs23-nox']:
-      ensure => 'present'
+      ensure => present,
     }
 
     realize (
@@ -76,7 +78,7 @@ class openstack_project::base(
   }
 
   file { '/etc/puppet/puppet.conf':
-    ensure  => 'present',
+    ensure  => present,
     owner   => 'root',
     group   => 'root',
     mode    => '0444',
