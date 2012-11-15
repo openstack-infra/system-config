@@ -86,6 +86,7 @@ reddwarf:
       - x-vrif-minus-2
     projects:
       - stackforge/reddwarf
+      - stackforge/reddwarf-integration
       - stackforge/python-reddwarfclient
     branches:
       - master
