@@ -578,6 +578,7 @@ projects:
     silent:
       - gate-devstack-merge:
         - gate-tempest-devstack-vm-quantum
+        - gate-tempest-devstack-vm-postgres
 
   - name: openstack-ci/devstack-gate
     check:
@@ -588,6 +589,9 @@ projects:
       - gate-devstack-gate-merge:
         - gate-tempest-devstack-vm
         - gate-tempest-devstack-vm-cinder
+    silent:
+      - gate-devstack-gate-merge:
+        - gate-tempest-devstack-vm-postgres
 
   - name: openstack-dev/pbr
     check:
