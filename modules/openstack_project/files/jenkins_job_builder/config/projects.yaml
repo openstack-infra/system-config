@@ -517,6 +517,15 @@
 
 
 - project:
+    name: reddwarf-integration
+    github-org: stackforge
+    node: precise
+
+    jobs:
+      - gate-{name}-merge
+
+
+- project:
     name: python-reddwarfclient
     github-org: stackforge
     node: precise
