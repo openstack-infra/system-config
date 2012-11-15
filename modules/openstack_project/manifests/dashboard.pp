@@ -1,6 +1,6 @@
 class openstack_project::dashboard(
-    $password,
-    $mysql_password,
+    $password = '',
+    $mysql_password = '',
     $sysadmins = []
 ) {
 

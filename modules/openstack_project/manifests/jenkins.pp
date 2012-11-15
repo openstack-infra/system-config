@@ -1,10 +1,12 @@
+# == Class: openstack_project::jenkins
+#
 class openstack_project::jenkins (
-  $jenkins_jobs_password,
+  $jenkins_jobs_password = '',
   $manage_jenkins_jobs = true,
   $ssl_cert_file_contents = '',
   $ssl_key_file_contents = '',
   $ssl_chain_file_contents = '',
-  $sysadmins = [],
+  $sysadmins = []
 ) {
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [80, 443, 4155],
@@ -37,7 +39,8 @@ class openstack_project::jenkins (
       group   => 'root',
       mode    => '0755',
       recurse => true,
-      source  => 'puppet:///modules/openstack_project/jenkins_job_builder/config',
+      source  =>
+        'puppet:///modules/openstack_project/jenkins_job_builder/config',
       notify  => Exec['jenkins_jobs_update'],
     }
 

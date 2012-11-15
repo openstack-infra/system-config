@@ -1,3 +1,5 @@
+# == Class: openstack_project::users
+#
 class openstack_project::users {
   @user::virtual::localuser { 'mordred':
     realname => 'Monty Taylor',
@@ -11,7 +13,7 @@ class openstack_project::users {
 
   @user::virtual::localuser { 'soren':
     realname => 'Soren Hansen',
-    sshkeys  => "",
+    sshkeys  => '',
   }
 
   @user::virtual::localuser { 'smaffulli':
@@ -21,7 +23,7 @@ class openstack_project::users {
 
   @user::virtual::localuser { 'linuxjedi':
     realname => 'Andrew Hutchings',
-    sshkeys => "",
+    sshkeys  => '',
   }
 
   @user::virtual::localuser { 'oubiwann':

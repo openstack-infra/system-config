@@ -2,7 +2,7 @@ class openstack_project::etherpad (
   $ssl_cert_file_contents = '',
   $ssl_key_file_contents = '',
   $ssl_chain_file_contents = '',
-  $database_password,
+  $database_password = '',
   $sysadmins = []
 ) {
   class { 'openstack_project::server':
