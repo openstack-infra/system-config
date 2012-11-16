@@ -99,9 +99,9 @@
       - console-log-post
       - ftp:
           site: api.openstack.org
-          source: 'api-ref/target/docbkx/html/api-ref/**'
+          source: 'api-ref/target/docbkx/html/**'
           target: ''
-          remove-prefix: 'api-ref/target/docbkx/html/api-ref/'
+          remove-prefix: 'api-ref/target/docbkx/html/'
           excludes: '**/*.xml,**/null*'
           remote-directory: ''
 
