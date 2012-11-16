@@ -24,19 +24,42 @@
 
 - job-template:
     name: '{name}-pypi'
-    node: pypi
+    concurrent: false
+    block-downstream: true
+    node: precise
 
     triggers:
       - zuul-post
 
     builders:
       - gerrit-git-prep
-      - shell: tox -v -evenv python setup.py sdist upload
+      - shell: tox -v -evenv python setup.py sdist
 
     publishers:
+      - archive:
+          artifacts: 'dist/{name}*.tar.gz'
+          latest_only: true
       - tarball:
           project: '{name}'
           site: '{tarball-publisher-site}'
+      - trigger:
+          project: '{name}-pypi-upload'
+      - console-log-post
+
+
+- job-template:
+    name: '{name}-pypi-upload'
+    concurrent: false
+    node: pypi
+
+    builders:
+      - copyartifact:
+          project: '{name}-pypi'
+          filter: '{name}*.tar.gz'
+      - shell: |
+          # TODO but should upload to pypi
+
+    publishers:
       - console-log-post
 
 
