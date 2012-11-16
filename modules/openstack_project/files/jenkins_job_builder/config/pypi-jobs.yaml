@@ -24,19 +24,56 @@
 
 - job-template:
     name: '{name}-pypi'
-    node: pypi
+    concurrent: false
+    block-downstream: true
+    node: precise
 
     triggers:
       - zuul-post
 
     builders:
       - gerrit-git-prep
-      - shell: tox -v -evenv python setup.py sdist upload
+      - shell: tox -v -evenv python setup.py sdist
 
     publishers:
+      - archive:
+          artifacts: 'dist/{name}*.tar.gz'
+          latest_only: true
       - tarball:
           project: '{name}'
           site: '{tarball-publisher-site}'
+      - trigger:
+          project: '{name}-pypi-upload'
+      - console-log-post
+
+
+- job-template:
+    name: '{name}-pypi-upload'
+    concurrent: false
+    node: pypi
+
+    builders:
+      - copyartifact:
+          project: '{name}-pypi'
+          filter: '{name}*.tar.gz'
+      - shell: |
+          # TODO get and use password safely.
+          UNAME='openstackci'
+          PASSWD='sekret'
+          FILENAME=`ls {name}*.tar.gz`
+          # Strip project name and extension leaving only the version.
+          VERSION=`echo ${FILENAME} | sed -n 's/{name}-\(.*\).tar.gz/\1/p'`
+          MD5_DIGEST=`openssl dgst -md5 ${FILENAME} | cut -d'=' -f2 | tr -d '[:space:]'`
+          curl -u ${UNAME}:${PASSWD} \
+              -F "content=@${FILENAME};filename=${FILENAME}" \
+              -F ":action=file_upload" \
+              -F "protocol_version=1" \
+              -F "name={name}" \
+              -F "version=${VERSION}" \
+              -F "file_type=sdist" \
+              -F "md5_digest=${MD5_DIGEST}"
+
+    publishers:
       - console-log-post
 
 
@@ -46,3 +83,4 @@
       - '{name}-docs'
       - '{name}-sdist-tarball'
       - '{name}-pypi'
+      - '{name}-pypi-upload'
