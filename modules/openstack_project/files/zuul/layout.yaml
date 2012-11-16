@@ -804,6 +804,7 @@ projects:
       - gate-compute-api-merge
     post:
       - openstack-compute-api-doc
+      - openstack-compute-api-v20-wadl
 
   - name: openstack/identity-api
     check:
