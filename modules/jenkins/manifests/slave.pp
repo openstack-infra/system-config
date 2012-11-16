@@ -39,6 +39,7 @@ class jenkins::slave(
     'libmysqlclient-dev',
     'libsqlite3-dev',
     'libxml2-dev',
+    'libxml2-utils', # for xmllint, need for wadl
     'libxslt1-dev',
     'maven2',
     'pandoc', #for docs, markdown->docbook, bug 924507
