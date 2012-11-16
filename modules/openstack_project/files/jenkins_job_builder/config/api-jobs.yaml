@@ -213,6 +213,31 @@
           remove-prefix: 'openstack-compute-api-2/target/docbkx/webhelp'
           excludes: '**/*.xml,**/null*'
 
+- job:
+    name: compute-api-v20-wadl
+    project-type: maven
+    concurrent: false
+    node: precise
+
+    triggers:
+      - zuul-post
+
+    prebuilders:
+      - gerrit-git-prep
+
+    properties:
+      - inject:
+          script-file: /usr/local/jenkins/slave_scripts/run-xmllint.sh
+
+    publishers:
+      - console-log-post
+      - ftp:
+          site: docs.openstack.org
+          source: 'openstack-compute-api-2/target/2/**'
+          target: ''
+          remove-prefix: 'openstack-compute-api-2/target/docbkx/webhelp/2'
+          excludes: '**/*.xml,**/null*'
+
 # this replaces the old openstack-identity-api-doc job
 - job:
     name: identity-api-v20
