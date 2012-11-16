@@ -146,7 +146,7 @@ projects:
     post:
       - gerritbot-sdist-tarball
     publish:
-      - gerritbot-pypi
+      - gerritbot-pypi-sdist
 
   - name: openstack-ci/gerritlib
     check:
@@ -158,7 +158,7 @@ projects:
         - gate-gerritlib-pep8
         - gate-gerritlib-pyflakes
     publish:
-      - gerritlib-pypi
+      - gerritlib-pypi-sdist
 
   - name: openstack-ci/gerrit-verification-status-plugin
     check:
@@ -182,7 +182,7 @@ projects:
       - jenkins-job-builder-sdist-tarball
       - jenkins-job-builder-docs
     publish:
-      - jenkins-job-builder-pypi
+      - jenkins-job-builder-pypi-sdist
 
   - name: openstack-ci/meetbot
     check:

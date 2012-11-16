@@ -21,7 +21,6 @@
           site: '{tarball-publisher-site}'
       - console-log-post
 
-
 - job-template:
     name: '{name}-pypi'
     node: pypi
@@ -37,6 +36,48 @@
       - tarball:
           project: '{name}'
           site: '{tarball-publisher-site}'
+
+
+- job-template:
+    name: '{name}-pypi-sdist'
+    concurrent: false
+    block-downstream: true
+    node: precise
+
+    triggers:
+      - zuul-post
+
+    builders:
+      - gerrit-git-prep
+      - shell: tox -v -evenv python setup.py sdist
+
+    publishers:
+      - archive:
+          artifacts: 'dist/{name}*.tar.gz'
+          latest_only: true
+      - tarball:
+          project: '{name}'
+          site: '{tarball-publisher-site}'
+      - trigger:
+          project: '{name}-pypi-upload'
+      - console-log-post
+
+
+- job-template:
+    name: '{name}-pypi-upload'
+    concurrent: false
+    node: pypi
+
+    builders:
+      - copyartifact:
+          project: '{name}-pypi'
+          filter: '{name}*.tar.gz'
+      - shell: |
+          /usr/local/jenkins/slave_scripts/pypi-upload.sh {name}
+          # Remove copied artifact
+          rm -rf {name}*.tar.gz
+
+    publishers:
       - console-log-post
 
 
@@ -46,3 +87,5 @@
       - '{name}-docs'
       - '{name}-sdist-tarball'
       - '{name}-pypi'
+      - '{name}-pypi-sdist'
+      - '{name}-pypi-upload'
