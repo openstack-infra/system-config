@@ -224,6 +224,13 @@ node 'tx.slave.openstack.org' {
   }
 }
 
+node 'pypi.slave.openstack.org' {
+  class { 'openstack_project::pypi_slave':
+    pypi_username => 'openstackci',
+    pypi_password => hiera('pypi_password')
+  }
+}
+
 # Rollout cgroups to precise slaves.
 node /^precise.*\.slave\.openstack\.org$/ {
   include jenkins::cgroups
