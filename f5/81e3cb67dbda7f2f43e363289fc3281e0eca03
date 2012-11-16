@@ -1,0 +1,11 @@
+Approved+1: James E. Blair <corvus@inaugust.com>
+Verified+2: Jenkins
+Code-Review+1: Nick Barcet <nicolas@barcet.com>
+Code-Review+1: Julien Danjou <julien@danjou.info>
+Code-Review+1: Doug Hellmann <doug.hellmann@dreamhost.com>
+Code-Review+2: Clark Boylan <clark.boylan@gmail.com>
+Submitted-by: Jenkins
+Submitted-at: Fri, 16 Nov 2012 18:14:14 +0000
+Reviewed-on: https://review.openstack.org/16197
+Project: openstack/openstack-ci-puppet
+Branch: refs/heads/master
