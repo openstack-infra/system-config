@@ -557,8 +557,11 @@
     github-org: stackforge
     node: precise
 
+    rtfd-id: 5190
+
     jobs:
       - python-jobs
+      - {name}-rtfd
 
 
 - project:
@@ -575,8 +578,11 @@
     github-org: stackforge
     node: precise
 
+    rtfd-id: 5216
+
     jobs:
       - python-jobs
+      - {name}-rtfd
 
 
 - project:
