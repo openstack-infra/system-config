@@ -739,6 +739,9 @@ projects:
         - gate-moniker-pep8
         - gate-moniker-python26
         - gate-moniker-python27
+    post:
+      - bufunfa-rtfd:
+        rtfd_id: 5190
 
   - name: stackforge/python-monikerclient
     check:
