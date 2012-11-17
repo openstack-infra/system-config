@@ -556,9 +556,11 @@
     name: moniker
     github-org: stackforge
     node: precise
+    rtfd-id: 5190
 
     jobs:
       - python-jobs
+      - hook-{name}-rtfd
 
 
 - project:
@@ -574,9 +576,11 @@
     name: bufunfa
     github-org: stackforge
     node: precise
+    rtfd-id: 5216
 
     jobs:
       - python-jobs
+      - hook-{name}-rtfd
 
 
 - project:
