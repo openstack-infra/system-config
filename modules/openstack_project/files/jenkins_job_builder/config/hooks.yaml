@@ -1,0 +1,8 @@
+job-template:
+  name: '{name}-rtfd'
+  node: precise
+
+  triggers:
+    - zuul-post
+
+  shell: 'curl -X POST https://readthedocs.org/build/{rtfd-id}'
