@@ -739,6 +739,8 @@ projects:
         - gate-moniker-pep8
         - gate-moniker-python26
         - gate-moniker-python27
+    post:
+      - hook-moniker-rtfd
 
   - name: stackforge/python-monikerclient
     check:
@@ -763,6 +765,8 @@ projects:
         - gate-bufunfa-pep8
         - gate-bufunfa-python26
         - gate-bufunfa-python27
+    post:
+      - hook-bufunfa-rtfd
 
   - name: openstack/openstack-manuals
     check:
