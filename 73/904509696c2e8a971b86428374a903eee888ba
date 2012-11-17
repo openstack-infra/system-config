@@ -1,0 +1,10 @@
+Approved+1: Monty Taylor <mordred@inaugust.com>
+Code-Review+2: Monty Taylor <mordred@inaugust.com>
+Verified+2: Jenkins
+Code-Review+1: Paul Belanger <paul.belanger@polybeacon.com>
+Code-Review+2: Jeremy Stanley <fungi@yuggoth.org>
+Submitted-by: Jenkins
+Submitted-at: Sat, 17 Nov 2012 01:30:36 +0000
+Reviewed-on: https://review.openstack.org/15061
+Project: openstack/openstack-ci-puppet
+Branch: refs/heads/master
