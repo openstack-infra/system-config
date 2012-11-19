@@ -780,6 +780,7 @@ projects:
       - openstack-admin-manual-object
       - openstack-admin-manuals-diablo
       - openstack-cli-guide
+      - openstack-basic-install
       - openstack-glossary
       - openstack-docs-site
       - openstack-ha-guide

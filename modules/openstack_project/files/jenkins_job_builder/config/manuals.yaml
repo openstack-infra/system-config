@@ -26,6 +26,33 @@
           excludes: '**/*.xml,**/null*'
 
 - job:
+    name: openstack-basic-install
+    project-type: maven
+    node: precise
+
+    triggers:
+      - zuul-post
+
+    prebuilders:
+      - gerrit-git-prep
+
+    maven:
+      root-module:
+        group-id: org.openstack.docs
+        artifact-id: openstack-guide
+      root-pom: doc/src/docbkx/basic-install/pom.xml
+      goals: 'clean generate-sources'
+
+    publishers:
+      - console-log-post
+      - ftp:
+          site: docs.openstack.org
+          source: 'doc/src/docbkx/basic-install/target/docbkx/webhelp/**'
+          target: '/'
+          remove-prefix: 'doc/src/docbkx/basic-install/target/docbkx/webhelp/'
+          excludes: '**/*.xml,**/null*'
+
+- job:
     name: netconn-api-v20
     project-type: maven
     node: precise
