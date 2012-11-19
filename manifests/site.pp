@@ -72,12 +72,13 @@ node 'jenkins.openstack.org' {
     sysadmins               => hiera('sysadmins'),
   }
   class { 'openstack_project::zuul':
-    jenkins_server  => "https://${::fqdn}",
-    jenkins_user    => 'hudson-openstack',
-    jenkins_apikey  => hiera('zuul_jenkins_apikey'),
-    gerrit_server   => 'review.openstack.org',
-    gerrit_user     => 'jenkins',
-    url_pattern     => 'http://logs.openstack.org/{change.number}/{change.patchset}/{pipeline.name}/{job.name}/{build.number}',
+    jenkins_server   => "https://${::fqdn}",
+    jenkins_user     => 'hudson-openstack',
+    jenkins_apikey   => hiera('zuul_jenkins_apikey'),
+    gerrit_server    => 'review.openstack.org',
+    gerrit_user      => 'jenkins',
+    url_pattern      => 'http://logs.openstack.org/{change.number}/{change.patchset}/{pipeline.name}/{job.name}/{build.number}',
+    push_change_refs => true,
   }
 }
 

@@ -4,7 +4,8 @@ class openstack_project::zuul(
   $jenkins_apikey,
   $gerrit_server,
   $gerrit_user,
-  $url_pattern
+  $url_pattern,
+  $push_change_refs
   ) {
 
   class { "::zuul":
@@ -13,7 +14,8 @@ class openstack_project::zuul(
     jenkins_apikey => $jenkins_apikey,
     gerrit_server => $gerrit_server,
     gerrit_user => $gerrit_user,
-    url_pattern => $url_pattern
+    url_pattern => $url_pattern,
+    push_change_refs => $push_change_refs
   }
 
   file { "/etc/zuul/layout.yaml":
