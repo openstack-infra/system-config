@@ -10,12 +10,13 @@ class openstack_project::zuul(
 ) {
 
   class { '::zuul':
-    jenkins_server => $jenkins_server,
-    jenkins_user   => $jenkins_user,
-    jenkins_apikey => $jenkins_apikey,
-    gerrit_server  => $gerrit_server,
-    gerrit_user    => $gerrit_user,
-    url_pattern    => $url_pattern,
+    jenkins_server   => $jenkins_server,
+    jenkins_user     => $jenkins_user,
+    jenkins_apikey   => $jenkins_apikey,
+    gerrit_server    => $gerrit_server,
+    gerrit_user      => $gerrit_user,
+    url_pattern      => $url_pattern,
+    push_change_refs => true
   }
 
   file { '/etc/zuul/layout.yaml':
