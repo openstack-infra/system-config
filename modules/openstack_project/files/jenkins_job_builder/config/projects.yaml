@@ -90,7 +90,8 @@
       - gate-{name}-pep8
       - gate-{name}-pyflakes
       - '{name}-sdist-tarball'
-      - '{name}-pypi'
+      - '{name}-pypi-sdist'
+      - '{name}-pypi-upload'
 
 
 - project:
@@ -104,7 +105,8 @@
       - gate-{name}-merge
       - gate-{name}-pep8
       - gate-{name}-pyflakes
-      - '{name}-pypi'
+      - '{name}-pypi-sdist'
+      - '{name}-pypi-upload'
 
 
 - project:
@@ -199,7 +201,8 @@
       - gate-{name}-pep8
       - gate-{name}-pyflakes
       - '{name}-sdist-tarball'
-      - '{name}-pypi'
+      - '{name}-pypi-sdist'
+      - '{name}-pypi-upload'
       - gate-{name}-docs
 
 - project:
