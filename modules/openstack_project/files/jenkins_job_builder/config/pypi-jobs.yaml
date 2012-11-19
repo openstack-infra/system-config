@@ -70,7 +70,7 @@
 
     builders:
       - copyartifact:
-          project: '{name}-pypi'
+          project: '{name}-pypi-sdist'
           filter: '{name}*.tar.gz'
       - shell: |
           /usr/local/jenkins/slave_scripts/pypi-upload.sh {name}
