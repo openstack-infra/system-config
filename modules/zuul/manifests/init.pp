@@ -7,7 +7,8 @@ class zuul (
   $gerrit_user,
   $url_pattern,
   $status_url = "https://${::fqdn}/zuul/status",
-  $git_source_repo = 'https://github.com/openstack-ci/zuul.git'
+  $git_source_repo = 'https://github.com/openstack-ci/zuul.git',
+  $push_change_refs = false
 ) {
   $packages = [
     'python-webob',
