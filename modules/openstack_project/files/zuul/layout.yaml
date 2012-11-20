@@ -640,11 +640,15 @@ projects:
         - gate-ceilometer-pep8
         - gate-ceilometer-python26
         - gate-ceilometer-python27
+        - gate-ceilometer-python26-folsom
+        - gate-ceilometer-python27-folsom
     gate:
       - gate-ceilometer-merge:
         - gate-ceilometer-pep8
         - gate-ceilometer-python26
         - gate-ceilometer-python27
+        - gate-ceilometer-python26-folsom
+        - gate-ceilometer-python27-folsom
     post:
       - ceilometer-tarball
       - ceilometer-coverage

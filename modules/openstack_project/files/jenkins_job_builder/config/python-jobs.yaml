@@ -78,6 +78,29 @@
     # >= precise does not have python2.6
     node: oneiric
 
+- job-template:
+    name: 'gate-{name}-python26-folsom'
+
+    triggers:
+      - zuul
+
+    builders:
+      - gerrit-git-prep
+      - python26-folsom
+
+    publishers:
+      - scp:
+          site: 'static.openstack.org'
+          files:
+            - target: 'logs/$ZUUL_CHANGE/$ZUUL_PATCHSET/$ZUUL_PIPELINE/$JOB_NAME/$BUILD_NUMBER'
+              source: '**/*nose_results.html'
+              keep-hierarchy: false
+              copy-after-failure: true
+      - console-log
+
+    # >= precise does not have python2.6
+    node: oneiric
+
 
 - job-template:
     name: 'gate-{name}-python27'
@@ -107,6 +130,33 @@
 
     node: '{node}'
 
+- job-template:
+    name: 'gate-{name}-python27-folsom'
+
+    parameters:
+      - label:
+          name: NODE_LABEL
+          description: Label of node to use for this build
+          default: '{node}'
+
+    triggers:
+      - zuul
+
+    builders:
+      - gerrit-git-prep
+      - python27-folsom
+
+    publishers:
+      - scp:
+          site: 'static.openstack.org'
+          files:
+            - target: 'logs/$ZUUL_CHANGE/$ZUUL_PATCHSET/$ZUUL_PIPELINE/$JOB_NAME/$BUILD_NUMBER'
+              source: '**/*nose_results.html'
+              keep-hierarchy: false
+              copy-after-failure: true
+      - console-log
+
+    node: '{node}'
 
 - job-template:
     name: 'gate-{name}-merge'
