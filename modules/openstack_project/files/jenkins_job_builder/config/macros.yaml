@@ -89,6 +89,16 @@
       - shell: "/usr/local/jenkins/slave_scripts/run-tox.sh 27"
 
 - builder:
+    name: python26-folsom
+    builders:
+      - shell: "/usr/local/jenkins/slave_scripts/run-tox.sh 26-folsom"
+
+- builder:
+    name: python27-folsom
+    builders:
+      - shell: "/usr/local/jenkins/slave_scripts/run-tox.sh 27-folsom"
+
+- builder:
     name: tarball
     builders:
       - shell: "/usr/local/jenkins/slave_scripts/create-tarball.sh {project}"
