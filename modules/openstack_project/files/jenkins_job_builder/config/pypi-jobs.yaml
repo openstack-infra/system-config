@@ -76,7 +76,8 @@
           cd dist
           /usr/local/jenkins/slave_scripts/pypi-upload.sh {name}
           # Remove copied artifact
-          rm -rf {name}*.tar.gz
+          cd ..
+          rm -rf dist
 
     publishers:
       - console-log-post
