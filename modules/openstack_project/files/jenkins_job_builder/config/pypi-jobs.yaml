@@ -69,14 +69,17 @@
     node: pypi
 
     builders:
+      - shell: |
+          if [ -e dist ]
+          then
+              rm -rf dist
+          fi
       - copyartifact:
           project: '{name}-pypi-sdist'
           filter: 'dist/{name}*.tar.gz'
       - shell: |
           cd dist
           /usr/local/jenkins/slave_scripts/pypi-upload.sh {name}
-          # Remove copied artifact
-          rm -rf {name}*.tar.gz
 
     publishers:
       - console-log-post
