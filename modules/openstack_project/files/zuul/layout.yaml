@@ -348,11 +348,13 @@ projects:
     check:
       - gate-oslo-incubator-merge:
         - gate-oslo-incubator-pep8
+        - gate-oslo-incubator-pyflakes
         - gate-oslo-incubator-python26
         - gate-oslo-incubator-python27
     gate:
       - gate-oslo-incubator-merge:
         - gate-oslo-incubator-pep8
+        - gate-oslo-incubator-pyflakes
         - gate-oslo-incubator-python26
         - gate-oslo-incubator-python27
 

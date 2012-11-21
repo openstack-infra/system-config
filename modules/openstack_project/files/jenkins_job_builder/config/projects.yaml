@@ -323,6 +323,7 @@
     jobs:
       - python-jobs
       - openstack-publish-jobs
+      - gate-{name}-pyflakes
 
 
 - project:
