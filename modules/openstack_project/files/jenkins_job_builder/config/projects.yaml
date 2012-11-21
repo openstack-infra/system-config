@@ -135,7 +135,7 @@
 
 - project:
     name: heat
-    github-org: heat-api
+    github-org: openstack
     node: oneiric
 
     jobs:
@@ -144,7 +144,7 @@
 
 - project:
     name: python-heatclient
-    github-org: heat-api
+    github-org: openstack
     node: precise
 
     jobs:
