@@ -1,3 +1,5 @@
+# == Class: pypimorror
+#
 class pypimirror(
   $vhost_name = $::fqdn,
   $log_filename = '/var/log/pypimirror.log',
@@ -7,15 +9,15 @@ class pypimirror(
   $git_source = 'https://github.com',
   $local_git_dir = '/var/lib/git',
   $ssh_project_key = 'UNDEF',
-  $projects = [] )
-{
+  $projects = []
+) {
 
   include apache
   include pip
   include remove_nginx
 
   package { 'python-yaml':
-    ensure => 'present'
+    ensure => present,
   }
 
   file { '/usr/local/mirror_scripts':
@@ -59,8 +61,10 @@ class pypimirror(
     owner   => 'root',
     group   => 'root',
     content => template('pypimirror/run-mirror.sh.erb'),
-    require => [File['/usr/local/mirror_scripts'],
-                Class[pip]],
+    require => [
+      File['/usr/local/mirror_scripts'],
+      Class[pip],
+    ],
   }
 
   file { '/usr/local/mirror_scripts/run_mirror.py':
@@ -104,8 +108,14 @@ class pypimirror(
   include logrotate
   logrotate::file { 'pypimirror':
     log     => $log_filename,
-    options => ['compress', 'delaycompress', 'missingok', 'rotate 7',
-      'daily', 'notifempty'],
+    options => [
+      'compress',
+      'delaycompress',
+      'missingok',
+      'rotate 7',
+      'daily',
+      'notifempty',
+    ],
     require => Cron['update_mirror'],
   }
 

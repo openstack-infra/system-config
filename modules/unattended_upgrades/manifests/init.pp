@@ -1,3 +1,5 @@
+# == Class: unattended_upgrades
+#
 class unattended_upgrades($ensure = present) {
   package { 'unattended-upgrades':
     ensure => $ensure,
