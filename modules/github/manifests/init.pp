@@ -1,8 +1,10 @@
+# == Class: github
+#
 class github(
-  $username,
-  $oauth_token,
-  $project_username,
-  $project_password,
+  $username = '',
+  $oauth_token = '',
+  $project_username = '',
+  $project_password = '',
   $projects = []
 ) {
   include pip
@@ -53,7 +55,7 @@ class github(
     replace => true,
     require => [
       Group['github'],
-      File['/etc/github']
+      File['/etc/github'],
     ],
   }
 
@@ -66,7 +68,7 @@ class github(
     replace => true,
     require => [
       Group['github'],
-      File['/etc/github']
+      File['/etc/github'],
     ],
   }
 

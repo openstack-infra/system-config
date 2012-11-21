@@ -67,10 +67,10 @@
 # TODO: make more gerrit options configurable here
 
 class gerrit(
-  $war,
-  $mysql_password,
-  $mysql_root_password,
-  $email_private_key,
+  $war = '',
+  $mysql_password = '',
+  $mysql_root_password = '',
+  $email_private_key = '',
   $vhost_name = $::fqdn,
   $canonicalweburl = "https://${::fqdn}/",
   $serveradmin = "webmaster@${::fqdn}",
@@ -84,8 +84,8 @@ class gerrit(
   $ssh_dsa_pubkey_contents = '', # If left empty puppet will not create file.
   $ssh_rsa_key_contents = '', # If left empty puppet will not create file.
   $ssh_rsa_pubkey_contents = '', # If left empty puppet will not create file.
-  $ssh_project_rsa_key_contents = '', # If left empty puppet will not create file.
-  $ssh_project_rsa_pubkey_contents = '', # If left empty puppet will not create file.
+  $ssh_project_rsa_key_contents = '', # If left empty will not create file.
+  $ssh_project_rsa_pubkey_contents = '', # If left empty will not create file.
   $openidssourl = 'https://login.launchpad.net/+openid',
   $email = '',
   $database_poollimit = '',
@@ -367,7 +367,7 @@ class gerrit(
       owner   => 'gerrit2',
       group   => 'gerrit2',
       mode    => '0644',
-      content => $ssh_rsa_project_pubkey_contents,
+      content => $ssh_project_rsa_pubkey_contents,
       replace => true,
       require => File['/home/gerrit2/review_site/etc']
     }

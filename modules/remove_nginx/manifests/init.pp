@@ -1,3 +1,5 @@
+# == Class: remove_nginx
+#
 class remove_nginx {
   package { 'nginx':
     ensure => absent,

@@ -1,14 +1,16 @@
+# == Class: tmpreaper
+#
 class tmpreaper() {
   package { 'tmpreaper':
     ensure => present,
   }
 
   file { '/etc/cron.daily/tmpreaper':
-    ensure => absent
+    ensure => absent,
   }
 
   file { '/usr/local/bin/tmpreaper.sh':
-    ensure => 'present',
+    ensure => present,
     owner  => 'root',
     group  => 'root',
     mode   => '0755',
@@ -16,7 +18,7 @@ class tmpreaper() {
   }
 
   file { '/etc/tmpreaper.conf':
-    ensure => 'present',
+    ensure => present,
     owner  => 'root',
     group  => 'root',
     mode   => '0644',

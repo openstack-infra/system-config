@@ -1,7 +1,7 @@
 # == Class: jenkins::slave
 #
 class jenkins::slave(
-  $ssh_key,
+  $ssh_key = '',
   $sudo = false,
   $bare = false,
   $user = true,
@@ -145,7 +145,7 @@ class jenkins::slave(
       require  => [
         Class['mysql::server'],
         Class['mysql::server::account_security'],
-      ]
+      ],
     }
   }
 
