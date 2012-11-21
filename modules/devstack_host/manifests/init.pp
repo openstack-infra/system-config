@@ -1,3 +1,5 @@
+# == Class: devstack_host
+#
 # A machine ready to run devstack
 class devstack_host {
   package { 'linux-headers-virtual':
@@ -9,7 +11,7 @@ class devstack_host {
   }
 
   package { 'rabbitmq-server':
-    ensure => present,
+    ensure  => present,
     require => File['/etc/rabbitmq/rabbitmq-env.conf'],
   }
 

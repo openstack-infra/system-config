@@ -1,9 +1,9 @@
 # == Class: jenkins::job_builder
 #
 class jenkins::job_builder (
-  $url,
-  $username,
-  $password,
+  $url = '',
+  $username = '',
+  $password = '',
 ) {
 
   # A lot of things need yaml, be conservative requiring this package to avoid
@@ -47,7 +47,7 @@ class jenkins::job_builder (
       File['/etc/jenkins_jobs/jenkins_jobs.ini'],
       Package['python-jenkins'],
       Package['python-yaml'],
-    ]
+    ],
   }
 
 # TODO: We should put in  notify Exec['jenkins_jobs_update']

@@ -1,7 +1,7 @@
 # == Class: jenkins::jenkinsuser
 #
 class jenkins::jenkinsuser(
-  $ssh_key,
+  $ssh_key = '',
   $ensure = present,
   $sudo = false,
 ) {

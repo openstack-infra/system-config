@@ -1,7 +1,7 @@
 # == Class: jenkins::master
 #
 class jenkins::master(
-  $logo,
+  $logo = '',
   $vhost_name = $::fqdn,
   $serveradmin = "webmaster@${::fqdn}",
   $ssl_cert_file = '',
