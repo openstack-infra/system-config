@@ -121,6 +121,21 @@
 
 
 - project:
+    name: jeepyb
+    github-org: openstack-ci
+    node: precise
+    doc-publisher-site: ci.openstack.org
+    tarball-publisher-site: nova.openstack.org
+
+    jobs:
+      - gate-{name}-merge
+      - gate-{name}-pep8
+      - gate-{name}-pyflakes
+      - '{name}-pypi-sdist'
+      - '{name}-pypi-upload'
+
+
+- project:
     name: git-review
     github-org: openstack-ci
     node: precise

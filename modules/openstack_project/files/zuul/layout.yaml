@@ -160,6 +160,18 @@ projects:
     publish:
       - gerritlib-pypi-sdist
 
+  - name: openstack-ci/jeepyb
+    check:
+      - gate-jeepyb-merge:
+        - gate-jeepyb-pep8
+        - gate-jeepyb-pyflakes
+    gate:
+      - gate-jeepyb-merge:
+        - gate-jeepyb-pep8
+        - gate-jeepyb-pyflakes
+    publish:
+      - jeepyb-pypi-sdist
+
   - name: openstack-ci/gerrit-verification-status-plugin
     check:
       - gate-gerrit-verification-status-plugin-merge
