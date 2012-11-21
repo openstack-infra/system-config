@@ -160,6 +160,18 @@ projects:
     publish:
       - gerritlib-pypi-sdist
 
+  - name: openstack-ci/gerritx
+    check:
+      - gate-gerritx-merge:
+        - gate-gerritx-pep8
+        - gate-gerritx-pyflakes
+    gate:
+      - gate-gerritx-merge:
+        - gate-gerritx-pep8
+        - gate-gerritx-pyflakes
+    publish:
+      - gerritx-pypi-sdist
+
   - name: openstack-ci/gerrit-verification-status-plugin
     check:
       - gate-gerrit-verification-status-plugin-merge
