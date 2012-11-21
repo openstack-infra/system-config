@@ -688,7 +688,7 @@ projects:
         - gate-libra-pep8
         - gate-libra-python27
 
-  - name: heat-api/heat
+  - name: openstack/heat
     check:
       - gate-heat-merge:
         - gate-heat-pep8
@@ -701,7 +701,7 @@ projects:
         - gate-heat-python26
         - gate-heat-python27
 
-  - name: heat-api/python-heatclient
+  - name: openstack/python-heatclient
     check:
       - gate-python-heatclient-merge:
         - gate-python-heatclient-pep8

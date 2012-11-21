@@ -9,13 +9,10 @@
   has-pull-requests: False
   has-downloads: False
 ---
-- project: heat-api/heat
-  options:
-  - has-wiki
-  description: '"Heat" keeps the clouds up ;)'
-  acl_config: /home/gerrit2/acls/heat-api/heat.config
-- project: heat-api/python-heatclient
-  acl_config: /home/gerrit2/acls/heat-api/python-heatclient.config
+- project: openstack/heat
+  acl_config: /home/gerrit2/acls/openstack/heat.config
+- project: openstack/python-heatclient
+  acl_config: /home/gerrit2/acls/openstack/python-heatclient.config
 - project: openstack-ci/devstack-gate
   acl_config: /home/gerrit2/acls/openstack-ci/devstack-gate.config
 - project: openstack-ci/gerrit

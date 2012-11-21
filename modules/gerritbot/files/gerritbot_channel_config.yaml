@@ -108,7 +108,7 @@ heat:
       - change-merged
       - x-vrif-minus-2
     projects:
-      - heat-api/heat
-      - heat-api/python-heatclient
+      - openstack/heat
+      - openstack/python-heatclient
     branches:
       - master
