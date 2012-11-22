@@ -9,8 +9,8 @@ class gerrit::cron(
     user    => 'gerrit2',
     hour    => '6',
     minute  => '3',
-    command => "python /usr/local/gerrit/scripts/expire_old_reviews.py ${script_user} ${script_key_file}",
-    require => File['/usr/local/gerrit/scripts'],
+    command => "python /usr/local/bin/expire-old-reviews ${script_user} ${script_key_file}",
+    require => Class['jeepyb'],
   }
 
   cron { 'gerrit_repack':

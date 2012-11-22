@@ -7,6 +7,7 @@ class github(
   $project_password = '',
   $projects = []
 ) {
+  include jeepyb
   include pip
 
   package { 'PyGithub':
@@ -80,20 +81,14 @@ class github(
   }
 
   file { '/usr/local/github/scripts':
-    ensure  => directory,
-    group   => 'root',
-    mode    => '0755',
-    owner   => 'root',
-    recurse => true,
-    require => File['/usr/local/github'],
-    source  => 'puppet:///modules/github/scripts',
+    ensure  => absent,
   }
 
   cron { 'githubclosepull':
-    command => 'sleep $((RANDOM\%60+90)) && python /usr/local/github/scripts/close_pull_requests.py',
+    command => 'sleep $((RANDOM\%60+90)) && /usr/local/bin/close-pull-requests',
     minute  => '*/5',
     require => [
-      File['/usr/local/github/scripts'],
+      Class['jeepyb'],
       Package['python-yaml'],
       Package['PyGithub'],
     ],
