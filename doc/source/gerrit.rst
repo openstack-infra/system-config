@@ -452,7 +452,7 @@ to use this build step.
 Auto Review Expiry
 ==================
 
-Puppet automatically installs a daily cron job called ``expire_old_reviews.py``
+Puppet automatically installs a daily cron job called ``expire-old-reviews``
 onto the gerrit servers.  This script follows two rules:
 
  #. If the review hasn't been touched in 2 weeks, mark as abandoned.

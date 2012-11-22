@@ -18,6 +18,8 @@ class pypimirror(
     ensure => 'present'
   }
 
+
+
   file { '/usr/local/mirror_scripts':
     ensure => directory,
     mode   => '0755',
@@ -64,30 +66,15 @@ class pypimirror(
   }
 
   file { '/usr/local/mirror_scripts/run_mirror.py':
-    ensure  => present,
-    mode    => '0755',
-    owner   => 'root',
-    group   => 'root',
-    source  => 'puppet:///modules/pypimirror/run_mirror.py',
-    require => File['/usr/local/mirror_scripts'],
+    ensure  => absent,
   }
 
   file { '/usr/local/mirror_scripts/pull-repo.sh':
-    ensure  => present,
-    mode    => '0755',
-    owner   => 'root',
-    group   => 'root',
-    source  => 'puppet:///modules/pypimirror/pull-repo.sh',
-    require => File['/usr/local/mirror_scripts'],
+    ensure  => absent,
   }
 
   file { '/usr/local/mirror_scripts/process_cache.py':
-    ensure  => present,
-    mode    => '0755',
-    owner   => 'root',
-    group   => 'root',
-    source  => 'puppet:///modules/pypimirror/process_cache.py',
-    require => File['/usr/local/mirror_scripts'],
+    ensure  => absent,
   }
 
   # Add cron job to update the mirror

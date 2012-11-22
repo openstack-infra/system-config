@@ -145,7 +145,12 @@ class gerrit(
     ensure => present,
   }
 
-  package { 'gerritlib':
+  $pip_packages = [
+      'gerritlib',
+      'gerritx',
+      ]
+
+  package { $pip_packages:
     ensure   => latest,
     provider => 'pip',
     require  => Class[pip],
@@ -490,13 +495,7 @@ class gerrit(
   }
 
   file { '/usr/local/gerrit/scripts':
-    ensure  => directory,
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0755',
-    recurse => true,
-    require => File['/usr/local/gerrit'],
-    source  => 'puppet:///modules/gerrit/scripts',
+    ensure  => absent,
   }
 
   # Install Bouncy Castle's OpenPGP plugin and populate the contact store
