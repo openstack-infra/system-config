@@ -111,6 +111,7 @@ class gerrit(
   $testmode = false
 ) {
   include apache
+  include jeepyb
   include pip
 
   $java_home = $::lsbdistcodename ? {
@@ -490,13 +491,7 @@ class gerrit(
   }
 
   file { '/usr/local/gerrit/scripts':
-    ensure  => directory,
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0755',
-    recurse => true,
-    require => File['/usr/local/gerrit'],
-    source  => 'puppet:///modules/gerrit/scripts',
+    ensure  => absent,
   }
 
   # Install Bouncy Castle's OpenPGP plugin and populate the contact store
