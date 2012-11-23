@@ -105,6 +105,7 @@ projects:
       - zuul-docs
     publish:
       - zuul-docs
+      - zuul-pypi-sdist
 
   - name: openstack-ci/nose-html-output
     check:
