@@ -688,10 +688,13 @@
     github-org: openstack-ci
     node: precise
     tarball-publisher-site: nova.openstack.org
+
     jobs:
       - python-jobs
       - gate-{name}-pyflakes
       - '{name}-sdist-tarball'
+      - '{name}-pypi-sdist'
+      - '{name}-pypi-upload'
 
 
 - project:
