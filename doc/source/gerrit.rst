@@ -388,13 +388,13 @@ GitHub Configuration
   Warning: Permanently added 'github.com,207.97.227.239' (RSA) to the list of known hosts.
   PTY allocation request failed on channel 0
 
-You will also need to create the file ``github.secure.config`` in the gerrit2 user's home directory.  The contents of this are as follows:
+You will also need to create the file ``github-projects.secure.config`` in the ``/etc/github/`` directory.  The contents of this are as follows:
 
 .. code-block:: ini
 
   [github]
   username = guthub-user
-  api_token = hexstring
+  password = string
 
 The username should be the github username for gerrit to use when communicating
 with github.  The api_token can be found in github's account setting for the
@@ -419,7 +419,7 @@ Create a Jenkins User in Gerrit
 
 With the jenkins public key, as a gerrit admin user::
 
-  cat jenkins.pub | ssh -p29418 review.openstack.org gerrit create-account --ssh-key - --full-name Jenkins jenkins
+  cat jenkins.pub | ssh -p29418 review.openstack.org gerrit create-account --ssh-key - --full-name Jenkins --email jenkins@openstack.org jenkins
 
 Create "CI Systems" group in gerrit, make jenkins a member
 
@@ -660,6 +660,10 @@ file. This file contains two sections, the first is a set of default
 config values that each project can override, and the second is a list
 of projects (each may contain their own overrides).
 
+As a Gerrit admin, create a user for example-project-create::
+
+  cat ~gerrit2/.ssh/example_project._id_rsa | ssh -p29418 review.openstack.org gerrit create-account --ssh-key - --full-name "Example Project Creator" --email example-project-creator@example.org example-project-creator
+
 #. Config default values::
 
      - homepage: http://example.org
@@ -672,6 +676,9 @@ of projects (each may contain their own overrides).
        has-issues: False
        has-pull-requests: False
        has-downloads: False
+
+Note The gerrit-user 'example-project-creator' should be added to the
+"Project Bootstrapers" group in :ref:`acl`.
 
 #. Project definition::
 
@@ -730,6 +737,8 @@ a single project you will want to do the following:
      - project: openstack/project-name
        acl_config: /home/gerrit2/acls/project-name.config
        upstream: git://github.com/awesumsauce/project-name.git
+
+Note 
 
 That is all you need to do. Push the change to gerrit and if necessary
 modify group membership for the groups you configured in the
@@ -1056,7 +1065,11 @@ These permissions try to achieve the high level goals::
         -1/+1 registered users
       label approved (exclusive): 0/+1: opestack-stable-maint
 
+    refs/meta/*
+      push: project bootstrappers
+
     refs/meta/config
+      read: project bootstrappers
       read: project owners
 
   API Projects (metaproject):
