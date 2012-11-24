@@ -13,8 +13,14 @@
 SITE=$1
 if [ -z "$SITE" ]
 then
-  echo "The site name (eg 'review.openstack.org') must be the first argument."
+  echo "The site URL (eg 'https://review.openstack.org') must be the first argument."
   exit 1
+fi
+
+# TODO: Once all our nodes are updated via puppet, this logic can be removed.
+if [ "${SITE:0:8}" != "https://" ]
+then
+  SITE="https://$SITE"
 fi
 
 if [ -z "$GERRIT_NEWREV" ] && [ -z "$GERRIT_REFSPEC" ] && [ -z "$GERRIT_CHANGES" ]
@@ -26,13 +32,13 @@ fi
 if [ ! -z "$GERRIT_CHANGES" ]
 then
     CHANGE_NUMBER=`echo $GERRIT_CHANGES|grep -Po ".*/\K\d+(?=/\d+)"`
-    echo "Triggered by: https://$SITE/$CHANGE_NUMBER"
+    echo "Triggered by: $SITE/$CHANGE_NUMBER"
 fi
 
 if [ ! -z "$GERRIT_REFSPEC" ]
 then
     CHANGE_NUMBER=`echo $GERRIT_REFSPEC|grep -Po ".*/\K\d+(?=/\d+)"`
-    echo "Triggered by: https://$SITE/$CHANGE_NUMBER"
+    echo "Triggered by: $SITE/$CHANGE_NUMBER"
 fi
 
 function merge_change {
@@ -41,10 +47,10 @@ function merge_change {
     MAX_ATTEMPTS=${3:-3}
     COUNT=0
 
-    until git fetch https://$SITE/p/$PROJECT $REFSPEC
+    until git fetch $SITE/p/$PROJECT $REFSPEC
     do
         COUNT=$(($COUNT + 1))
-        logger -p user.warning -t 'gerrit-git-prep' FAILED: git fetch https://$SITE/p/$PROJECT $REFSPEC COUNT: $COUNT
+        logger -p user.warning -t 'gerrit-git-prep' FAILED: git fetch $SITE/p/$PROJECT $REFSPEC COUNT: $COUNT
         if [ $COUNT -eq $MAX_ATTEMPTS ]
         then
             break
@@ -97,7 +103,7 @@ function merge_changes {
 set -x
 if [[ ! -e .git ]]
 then
-    git clone https://$SITE/p/$GERRIT_PROJECT .
+    git clone $SITE/p/$GERRIT_PROJECT .
 fi
 git remote update || git remote update # attempt to work around bug #925790
 git reset --hard
