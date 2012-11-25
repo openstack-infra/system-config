@@ -140,7 +140,7 @@
       root-module:
         group-id: org.openstack.docs
         artifact-id: openstack-guide
-      root-pom: openstack-image-service-api/pom.xml
+      root-pom: openstack-image-service-api/src/markdown/pom.xml
       goals: 'clean generate-sources'
 
     publishers:
