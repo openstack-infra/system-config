@@ -1,8 +1,10 @@
+# == Class: gerritbot
+#
 class gerritbot(
-  $nick,
-  $password,
-  $server,
-  $user,
+  $nick = '',
+  $password = '',
+  $server = '',
+  $user = '',
   $vhost_name
 ) {
   include pip
@@ -10,7 +12,7 @@ class gerritbot(
   package { 'gerritbot':
     ensure   => present,  # Pip upgrade is not working
     provider => pip,
-    require  => Class['pip']
+    require  => Class['pip'],
   }
 
   file { '/etc/init.d/gerritbot':
@@ -30,7 +32,7 @@ class gerritbot(
     subscribe  => [
       Package['gerritbot'],
       File['/etc/gerritbot/gerritbot.config'],
-      File['/etc/gerritbot/channel_config.yaml']
+      File['/etc/gerritbot/channel_config.yaml'],
     ],
   }
 

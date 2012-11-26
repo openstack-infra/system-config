@@ -1,3 +1,5 @@
+# == Define: file
+#
 define logrotate::file( $log,
   $options,
   $ensure=present,

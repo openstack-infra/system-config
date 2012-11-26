@@ -1,7 +1,9 @@
+# == Class: launchpad_sync
+#
 class launchpad_sync(
-  $root_team,
-  $script_logging_conf,
-  $site,
+  $root_team = '',
+  $script_logging_conf = '',
+  $site = '',
   $script_key_file = '/home/gerrit2/.ssh/id_rsa',
   $script_user = 'update',
   $user = 'gerrit2'

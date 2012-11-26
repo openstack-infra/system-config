@@ -1,13 +1,14 @@
+# == Class: ulimit
+#
 class ulimit {
 
   package { ['libpam-modules', 'libpam-modules-bin']:
-    ensure => present
+    ensure => present,
   }
 
   file { '/etc/security/limits.d':
     ensure => directory,
     owner  => 'root',
-    mode   => 0755
+    mode   => '0755',
   }
-
 }

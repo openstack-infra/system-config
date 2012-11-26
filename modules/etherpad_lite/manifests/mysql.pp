@@ -1,7 +1,7 @@
 # == Class: etherpad_lite::mysql
 #
 class etherpad_lite::mysql(
-  $database_password,
+  $database_password = '',
   $dbType = 'mysql',
   $database_user = 'eplite',
   $database_name = 'etherpad-lite'
