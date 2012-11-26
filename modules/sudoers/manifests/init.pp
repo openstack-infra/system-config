@@ -1,3 +1,5 @@
+# == Class: sudoers
+#
 class sudoers {
   group { 'sudo':
     ensure => present,
