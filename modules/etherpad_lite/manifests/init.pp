@@ -47,7 +47,7 @@ class etherpad_lite (
     require  => [
         Package['git'],
         File["${base_install_dir}"],
-      ],
+    ],
   }
 
   package { [

@@ -1,5 +1,7 @@
+# == Class: logrotate
+#
 # Adapted from http://projects.puppetlabs.com/projects/1/wiki/Logrotate_Patterns
-
+#
 class logrotate {
   package { 'logrotate':
     ensure => present,

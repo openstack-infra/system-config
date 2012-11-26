@@ -1,3 +1,5 @@
+# == Define: ulimit::conf
+#
 define ulimit::conf (
   $limit_domain,
   $limit_item,
@@ -10,8 +12,7 @@ define ulimit::conf (
     content => template('ulimit/limits.erb'),
     replace => true,
     owner   => 'root',
-    mode    => 0644,
-    require => File['/etc/security/limits.d']
+    mode    => '0644',
+    require => File['/etc/security/limits.d'],
   }
-
 }
