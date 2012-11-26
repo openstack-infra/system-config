@@ -222,6 +222,15 @@
 
 
 - project:
+    name: lodgeit
+    github-org: openstack-ci
+    node: precise
+
+    jobs:
+      - gate-{name}-merge
+
+
+- project:
     name: meetbot
     github-org: openstack-ci
     node: precise

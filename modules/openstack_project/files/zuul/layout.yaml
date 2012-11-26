@@ -184,6 +184,12 @@ projects:
     publish:
       - jenkins-job-builder-pypi-sdist
 
+  - name: openstack-ci/lodgeit
+    check:
+      - gate-lodgeit-merge
+    gate:
+      - gate-lodgeit-merge
+
   - name: openstack-ci/meetbot
     check:
       - gate-meetbot-merge
