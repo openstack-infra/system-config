@@ -113,7 +113,7 @@
           excludes: '**/*.xml,**/null*'
 
 - job:
-    name: images-api-v20
+    name: image-api-v20
     project-type: maven
     concurrent: true
     node: precise
@@ -129,7 +129,7 @@
     prebuilders:
       - gerrit-git-prep
       - markdown-docbook:
-          filename: "images-api-v2.0"
+          filename: "image-api-v2.0"
 
     properties:
       - inject:
@@ -147,9 +147,9 @@
       - console-log-post
       - ftp:
           site: docs.openstack.org
-          source: 'doc/target/docbkx/webhelp/images-api-2.0/**'
+          source: 'doc/target/docbkx/webhelp/image-api-2.0/**'
           target: 'api/openstack-image-service/2.0/'
-          remove-prefix: 'doc/target/docbkx/webhelp/images-api-2.0/'
+          remove-prefix: 'doc/target/docbkx/webhelp/image-api-2.0/'
           excludes: '**/*.xml,**/null*'
 
 - job:

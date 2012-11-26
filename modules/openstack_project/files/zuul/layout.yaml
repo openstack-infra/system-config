@@ -834,7 +834,7 @@ projects:
       - gate-image-api-merge
     post:
       - image-api-v11
-      - images-api-v20
+      - image-api-v20
 
   - name: openstack/netconn-api
     check:
