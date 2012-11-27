@@ -147,9 +147,9 @@
       - console-log-post
       - ftp:
           site: docs.openstack.org
-          source: 'doc/target/docbkx/webhelp/image-api-2.0/**'
-          target: 'api/openstack-image-service/2.0/'
-          remove-prefix: 'doc/target/docbkx/webhelp/image-api-2.0/'
+          source: 'openstack-image-service-api/src/markdown/target/docbkx/webhelp/api/openstack-image-service/2.0/**'
+          target: '/'
+          remove-prefix: 'openstack-image-service-api/src/markdown/target/docbkx/webhelp/'
           excludes: '**/*.xml,**/null*'
 
 - job:
