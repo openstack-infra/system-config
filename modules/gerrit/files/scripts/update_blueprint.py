@@ -59,12 +59,7 @@ DB_PASS = SECURE_CONFIG.get("database","password")
 DB_DB = GERRIT_CONFIG.get("database","database")
 
 def update_spec(launchpad, project, name, subject, link, topic=None):
-    # For testing, if a project doesn't match openstack/foo, use
-    # the openstack-ci project instead.
     group, project = project.split('/')
-    if group != 'openstack':
-        project = 'openstack-ci'
-
     spec = launchpad.projects[project].getSpecification(name=name)
     if not spec: return
 
