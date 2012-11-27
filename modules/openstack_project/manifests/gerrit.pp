@@ -232,6 +232,14 @@ class openstack_project::gerrit (
         owner   => 'gerrit2',
         require => Class['::gerrit'],
       }
+      cron { 'mirror_repack':
+        user        => 'gerrit2',
+        weekday     => '0',
+        hour        => '4',
+        minute      => '7',
+        command     => 'find /var/lib/git/ -type d -name "*.git" -print -exec git --git-dir="{}" repack -afd \;',
+        environment => 'PATH=/usr/bin:/bin:/usr/sbin:/sbin',
+      }
     }
 
     file { '/home/gerrit2/projects.yaml':
