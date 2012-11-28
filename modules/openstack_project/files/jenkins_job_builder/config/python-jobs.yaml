@@ -215,3 +215,9 @@
       - 'gate-{name}-docs'
       # pyflakes isn't standard
       # pylint isn't standard
+
+- job-group:
+    name: python-jobs-folsom
+    jobs:
+      - 'gate-{name}-python26-folsom'
+      - 'gate-{name}-python27-folsom'
