@@ -1,0 +1,2 @@
+DAEMON_ARGS="/opt/statsd/stats.js /etc/statsd/config.js"
+CHDIR="/opt/statsd"
