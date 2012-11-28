@@ -4,6 +4,7 @@
 #
 class openstack_project::template (
   $iptables_public_tcp_ports = [],
+  $iptables_rules            = [],
   $install_users = true,
   $certname = $::fqdn
 ) {
@@ -13,6 +14,7 @@ class openstack_project::template (
 
   class { 'iptables':
     public_tcp_ports => $iptables_public_tcp_ports,
+    rules            => $iptables_rules,
   }
 
   class { 'ntp::server': }
