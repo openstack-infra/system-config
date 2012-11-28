@@ -3,7 +3,7 @@
 # http://projects.puppetlabs.com/projects/1/wiki/Module_Iptables_Patterns
 #
 class iptables(
-  $rules = '',
+  $rules = [],
   $public_tcp_ports = [],
   $public_udp_ports = []
 ) {

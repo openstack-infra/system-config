@@ -105,6 +105,16 @@ node 'ci-puppetmaster.openstack.org' {
   }
 }
 
+node 'graphite.openstack.org' {
+  class { 'openstack_project::graphite':
+    sysadmins               => hiera('sysadmins'),
+    graphite_admin_user     => hiera('graphite_admin_user'),
+    graphite_admin_email    => hiera('graphite_admin_email'),
+    graphite_admin_password => hiera('graphite_admin_password'),
+    statsd_hosts	    => ['jenkins.openstack.org'],
+  }
+}
+
 node 'groups.openstack.org' {
   class { 'openstack_project::groups':
     sysadmins => hiera('sysadmins'),
