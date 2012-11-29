@@ -3,13 +3,17 @@
 class jeepyb (
   $git_source_repo = 'https://github.com/openstack-ci/jeepyb.git',
 ) {
-  $packages = [
-    'python-mysqldb',
-    'python-paramiko',
-  ]
 
-  package { $packages:
-    ensure => present,
+  if ! defined(Package['python-mysqldb']) {
+    package { 'python-mysqldb':
+      ensure   => present,
+    }
+  }
+
+  if ! defined(Package['python-paramiko']) {
+    package { 'python-paramiko':
+      ensure   => present,
+    }
   }
 
   if ! defined(Package['Pygithub']) {

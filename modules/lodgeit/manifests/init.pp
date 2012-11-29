@@ -7,8 +7,7 @@ class lodgeit {
                 'python-werkzeug',
                 'python-simplejson',
                 'python-pygments',
-                'drizzle',
-                'python-mysqldb' ]
+                'drizzle']
 
   include apache
 
@@ -22,6 +21,12 @@ class lodgeit {
 
   package { $packages:
     ensure => present,
+  }
+
+  if ! defined(Package['python-mysqldb']) {
+    package { 'python-mysqldb':
+      ensure   => present,
+    }
   }
 
   package { 'SQLAlchemy':
