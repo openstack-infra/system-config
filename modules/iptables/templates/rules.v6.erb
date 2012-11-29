@@ -21,6 +21,8 @@
 -A openstack-INPUT -m udp -p udp --dport <%= port %> -j ACCEPT
 <% end -%>
 # Per-host rules
-<%= rules %>
+<% rules6.each do |rule| -%>
+-A openstack-INPUT <%= rule %>
+<% end -%>
 -A openstack-INPUT -j REJECT --reject-with icmp6-adm-prohibited
 COMMIT
