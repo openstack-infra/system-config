@@ -72,7 +72,7 @@ node 'jenkins.openstack.org' {
     sysadmins               => hiera('sysadmins'),
   }
   class { 'openstack_project::zuul':
-    jenkins_server  => "https://${::fqdn}",
+    jenkins_url     => "https://${::fqdn}",
     jenkins_user    => 'hudson-openstack',
     jenkins_apikey  => hiera('zuul_jenkins_apikey'),
     gerrit_server   => 'review.openstack.org',
@@ -188,6 +188,19 @@ node 'puppet-dashboard.openstack.org' {
 node 'static.openstack.org' {
   class { 'openstack_project::static':
     sysadmins => hiera('sysadmins'),
+  }
+}
+
+node 'zuul.openstack.org' {
+  class { 'openstack_project::zuul':
+    jenkins_host    => 'jenkins.openstack.org',
+    jenkins_url     => "https://${::fqdn}",
+    jenkins_user    => 'hudson-openstack',
+    jenkins_apikey  => hiera('zuul_jenkins_apikey'),
+    gerrit_server   => 'review.openstack.org',
+    gerrit_user     => 'jenkins',
+    url_pattern     => 'http://logs.openstack.org/{change.number}/{change.patchset}/{pipeline.name}/{job.name}/{build.number}',
+    sysadmins       => hiera('sysadmins'),
   }
 }
 
