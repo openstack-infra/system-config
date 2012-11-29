@@ -229,7 +229,7 @@
       - ftp:
           site: docs.openstack.org
           source: 'target/**'
-          target: 'openstack-compute/2/wadl/'
+          target: 'api/openstack-compute/2/wadl/'
           remove-prefix: 'target/'
           excludes: '**/*.xml,**/null*'
       - console-log-post
