@@ -2,8 +2,13 @@
 #
 # http://projects.puppetlabs.com/projects/1/wiki/Module_Iptables_Patterns
 #
+# params:
+#   rules: A list of additional iptables rules; must be valid v4 and v6 syntax
+#          eg: [ '-m udp -p udp -s 127.0.0.1--dport 8125 -j ACCEPT' ]
+#   public_tcp_ports: List of integer TCP ports on which to allow all traffic
+#   public_udp_ports: List of integer UDP ports on which to allow all traffic
 class iptables(
-  $rules = '',
+  $rules = [],
   $public_tcp_ports = [],
   $public_udp_ports = []
 ) {
