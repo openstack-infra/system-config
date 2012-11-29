@@ -15,7 +15,6 @@ class zuul (
     'python-webob',
     'python-daemon',
     'python-lockfile',
-    'python-paramiko',
     'python-paste',
   ]
 
@@ -28,6 +27,12 @@ class zuul (
   if ! defined(Package['python-yaml']) {
     package { 'python-yaml':
       ensure => present,
+    }
+  }
+
+  if ! defined(Package['python-paramiko']) {
+    package { 'python-paramiko':
+      ensure   => present,
     }
   }
 
