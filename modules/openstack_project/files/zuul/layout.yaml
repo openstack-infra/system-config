@@ -677,12 +677,22 @@ projects:
   - name: stackforge/libra
     check:
       - gate-libra-merge:
-        - gate-libra-pep8
+        - gate-libra-python26
         - gate-libra-python27
     gate:
       - gate-libra-merge:
-        - gate-libra-pep8
+        - gate-libra-python26
         - gate-libra-python27
+
+  - name: stackforge/healthnmon
+    check:
+      - gate-healthnmon-merge:
+        - gate-healthnmon-pep8
+        - gate-healthnmon-python27
+    gate:
+      - gate-healthnmon-merge:
+        - gate-healthnmon-pep8
+        - gate-healthnmon-python27
 
   - name: heat-api/heat
     check:
