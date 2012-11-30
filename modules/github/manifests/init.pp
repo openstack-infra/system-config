@@ -10,10 +10,12 @@ class github(
   include jeepyb
   include pip
 
-  package { 'PyGithub':
-    ensure   => latest,  # okay to use latest for pip
-    provider => pip,
-    require  => Class['pip'],
+  if ! defined(Package['Pygithub']) {
+    package { 'PyGithub':
+      ensure   => latest,  # okay to use latest for pip
+      provider => pip,
+      require  => Class['pip'],
+    }
   }
 
   # A lot of things need yaml, be conservative requiring this package to avoid
