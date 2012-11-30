@@ -13,6 +13,7 @@ openstack-infra:
       - openstack-ci/gerritbot
       - openstack-ci/gerritlib
       - openstack-ci/git-review
+      - openstack-ci/jeepyb
       - openstack-ci/jenkins-job-builder
       - openstack-ci/lodgeit
       - openstack-ci/meetbot
