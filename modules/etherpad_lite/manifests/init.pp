@@ -46,7 +46,7 @@ class etherpad_lite (
     revision => $nodejs_version,
     require  => [
         Package['git'],
-        File["${base_install_dir}"],
+        File[$base_install_dir],
     ],
   }
 
