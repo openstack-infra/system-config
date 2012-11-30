@@ -599,6 +599,15 @@
 
 
 - project:
+    name: healthnmon
+    github-org: stackforge
+    node: precise
+
+    jobs:
+      - python-jobs
+
+
+- project:
     name: marconi
     github-org: stackforge
     node: precise

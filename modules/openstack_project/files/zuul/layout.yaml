@@ -708,6 +708,16 @@ projects:
         - gate-libra-pep8
         - gate-libra-python27
 
+  - name: stackforge/healthnmon
+    check:
+      - gate-healthnmon-merge:
+        - gate-healthnmon-pep8
+        - gate-healthnmon-python27
+    gate:
+      - gate-healthnmon-merge:
+        - gate-healthnmon-pep8
+        - gate-healthnmon-python27
+
   - name: openstack/heat
     check:
       - gate-heat-merge:
