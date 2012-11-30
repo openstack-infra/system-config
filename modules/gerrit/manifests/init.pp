@@ -65,7 +65,7 @@
 #     Set this to true to disable cron jobs and replication,
 #     which can interfere with testing.
 # TODO: make more gerrit options configurable here
-
+#
 class gerrit(
   $war = '',
   $mysql_password = '',

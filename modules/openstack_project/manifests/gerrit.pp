@@ -66,8 +66,8 @@ class openstack_project::gerrit (
     vhost_name                      => $vhost_name,
     canonicalweburl                 => $canonicalweburl,
     # opinions
-    enable_melody                   => 'true',
-    melody_session                  => 'true',
+    enable_melody                   => true,
+    melody_session                  => true,
     # passthrough
     ssl_cert_file                   => $ssl_cert_file,
     ssl_key_file                    => $ssl_key_file,
