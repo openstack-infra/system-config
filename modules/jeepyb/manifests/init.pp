@@ -3,10 +3,13 @@
 class jeepyb (
   $git_source_repo = 'https://github.com/openstack-ci/jeepyb.git',
 ) {
+  include pip
 
-  if ! defined(Package['python-mysqldb']) {
-    package { 'python-mysqldb':
-      ensure   => present,
+  if ! defined(Package['MySQL-python']) {
+    package { 'MySQL-python':
+      ensure   => latest,
+      provider => pip,
+      require  => Class['pip'],
     }
   }
 
@@ -54,5 +57,4 @@ class jeepyb (
     refreshonly => true,
     subscribe   => Vcsrepo['/opt/jeepyb'],
   }
-
 }

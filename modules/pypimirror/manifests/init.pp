@@ -17,8 +17,12 @@ class pypimirror(
   include remove_nginx
   include jeepyb
 
-  package { 'python-yaml':
-    ensure => present,
+  # A lot of things need yaml, be conservative requiring this package to avoid
+  # conflicts with other modules.
+  if ! defined(Package['python-yaml']) {
+    package { 'python-yaml':
+      ensure => present,
+    }
   }
 
   file { '/usr/local/mirror_scripts':
