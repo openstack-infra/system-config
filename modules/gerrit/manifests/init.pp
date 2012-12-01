@@ -146,10 +146,12 @@ class gerrit(
     ensure => present,
   }
 
-  package { 'gerritlib':
-    ensure   => latest,
-    provider => 'pip',
-    require  => Class[pip],
+  if ! defined(Package['gerritlib']) {
+    package { 'gerritlib':
+      ensure   => latest,
+      provider => 'pip',
+      require  => Class[pip],
+    }
   }
 
   file { '/var/log/gerrit':
