@@ -10,7 +10,7 @@ class github(
   include jeepyb
   include pip
 
-  if ! defined(Package['Pygithub']) {
+  if ! defined(Package['PyGithub']) {
     package { 'PyGithub':
       ensure   => latest,  # okay to use latest for pip
       provider => pip,

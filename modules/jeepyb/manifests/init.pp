@@ -16,7 +16,7 @@ class jeepyb (
     }
   }
 
-  if ! defined(Package['Pygithub']) {
+  if ! defined(Package['PyGithub']) {
     package { 'PyGithub':
       ensure   => latest,
       provider => pip,
