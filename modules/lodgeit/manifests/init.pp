@@ -10,8 +10,9 @@ class lodgeit {
                 'drizzle']
 
   include apache
-
+  include mysql::python
   include pip
+
   a2mod { 'proxy':
     ensure => present,
   }
@@ -21,12 +22,6 @@ class lodgeit {
 
   package { $packages:
     ensure => present,
-  }
-
-  if ! defined(Package['python-mysqldb']) {
-    package { 'python-mysqldb':
-      ensure   => present,
-    }
   }
 
   package { 'SQLAlchemy':
