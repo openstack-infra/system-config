@@ -92,6 +92,16 @@ reddwarf:
     branches:
       - master
 
+tripleo:
+    events:
+      - patchset-created
+      - change-merged
+      - x-vrif-minus-2
+    projects:
+      - stackforge/diskimage-builder
+    branches:
+      - master
+
 heat:
     events:
       - patchset-created
