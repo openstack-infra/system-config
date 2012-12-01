@@ -13,6 +13,7 @@ openstack-infra:
       - openstack-ci/gerritbot
       - openstack-ci/gerritlib
       - openstack-ci/git-review
+      - openstack-ci/jeepyb
       - openstack-ci/jenkins-job-builder
       - openstack-ci/lodgeit
       - openstack-ci/meetbot
@@ -88,6 +89,16 @@ reddwarf:
       - stackforge/reddwarf
       - stackforge/reddwarf-integration
       - stackforge/python-reddwarfclient
+    branches:
+      - master
+
+tripleo:
+    events:
+      - patchset-created
+      - change-merged
+      - x-vrif-minus-2
+    projects:
+      - stackforge/diskimage-builder
     branches:
       - master
 
