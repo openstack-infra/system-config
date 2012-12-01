@@ -4,12 +4,6 @@ class jeepyb (
   $git_source_repo = 'https://github.com/openstack-ci/jeepyb.git',
 ) {
 
-  if ! defined(Package['python-mysqldb']) {
-    package { 'python-mysqldb':
-      ensure   => present,
-    }
-  }
-
   if ! defined(Package['python-paramiko']) {
     package { 'python-paramiko':
       ensure   => present,
@@ -52,6 +46,7 @@ class jeepyb (
     cwd         => '/opt/jeepyb',
     path        => '/bin:/usr/bin',
     refreshonly => true,
+    require     => Class['mysql::python'],
     subscribe   => Vcsrepo['/opt/jeepyb'],
   }
 
