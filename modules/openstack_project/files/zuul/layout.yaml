@@ -72,7 +72,7 @@ jobs:
     voting: false
     failure-message: XML output has changed.
     success-message: XML output is unchanged.
-  - name: ci-puppet-compare-xml
+  - name: openstack-infra-config-compare-xml
     voting: false
     failure-message: Jenkins XML output has changed.
     success-message: Jenkins XML output is unchanged.
@@ -83,7 +83,7 @@ jobs:
 
 
 projects:
-  - name: openstack-ci/zuul
+  - name: openstack-infra/zuul
     check:
       - gate-zuul-merge:
         - gate-zuul-docs
@@ -107,7 +107,7 @@ projects:
       - zuul-docs
       - zuul-pypi-sdist
 
-  - name: openstack-ci/nose-html-output
+  - name: openstack-infra/nose-html-output
     check:
       - gate-nose-html-output-merge
     gate:
@@ -117,7 +117,7 @@ projects:
     publish:
       - nose-html-output-pypi-sdist
 
-  - name: openstack-ci/pypi-mirror
+  - name: openstack-infra/pypi-mirror
     check:
       - gate-pypi-mirror-merge:
         - gate-pypi-mirror-pyflakes
@@ -125,7 +125,7 @@ projects:
       - gate-pypi-mirror-merge:
         - gate-pypi-mirror-pyflakes
 
-  - name: openstack-ci/gerrit
+  - name: openstack-infra/gerrit
     check:
       - gate-gerrit-merge:
         - check-gerrit-unittests
@@ -135,7 +135,7 @@ projects:
     post:
       - gerrit-package
 
-  - name: openstack-ci/gerritbot
+  - name: openstack-infra/gerritbot
     check:
       - gate-gerritbot-merge:
         - gate-gerritbot-pep8
@@ -149,7 +149,7 @@ projects:
     publish:
       - gerritbot-pypi-sdist
 
-  - name: openstack-ci/gerritlib
+  - name: openstack-infra/gerritlib
     check:
       - gate-gerritlib-merge:
         - gate-gerritlib-pep8
@@ -161,7 +161,7 @@ projects:
     publish:
       - gerritlib-pypi-sdist
 
-  - name: openstack-ci/jeepyb
+  - name: openstack-infra/jeepyb
     check:
       - gate-jeepyb-merge:
         - gate-jeepyb-pep8
@@ -173,13 +173,13 @@ projects:
     publish:
       - jeepyb-pypi-sdist
 
-  - name: openstack-ci/gerrit-verification-status-plugin
+  - name: openstack-infra/gerrit-verification-status-plugin
     check:
       - gate-gerrit-verification-status-plugin-merge
     gate:
       - gate-gerrit-verification-status-plugin-merge
 
-  - name: openstack-ci/jenkins-job-builder
+  - name: openstack-infra/jenkins-job-builder
     check:
       - gate-jenkins-job-builder-merge
       - gate-jenkins-job-builder-docs
@@ -197,44 +197,44 @@ projects:
     publish:
       - jenkins-job-builder-pypi-sdist
 
-  - name: openstack-ci/lodgeit
+  - name: openstack-infra/lodgeit
     check:
       - gate-lodgeit-merge
     gate:
       - gate-lodgeit-merge
 
-  - name: openstack-ci/meetbot
+  - name: openstack-infra/meetbot
     check:
       - gate-meetbot-merge
     gate:
       - gate-meetbot-merge
 
-  - name: openstack/openstack-ci-puppet
+  - name: openstack-infra/config
     check:
-      - gate-ci-puppet-merge:
-        - gate-ci-puppet-syntax
-        - gate-ci-puppet-lint
-        - ci-puppet-compare-xml
+      - gate-openstack-infra-config-merge:
+        - gate-openstack-infra-config-syntax
+        - gate-openstack-infra-config-lint
+        - openstack-infra-config-compare-xml
     gate:
-      - gate-ci-puppet-merge:
-        - gate-ci-puppet-syntax
-        - gate-ci-puppet-lint
+      - gate-openstack-infra-config-merge:
+        - gate-openstack-infra-config-syntax
+        - gate-openstack-infra-config-lint
     post:
       - ci-docs
 
-  - name: openstack-ci/puppet-apparmor
+  - name: openstack-infra/puppet-apparmor
     check:
       - gate-puppet-apparmor-merge
     gate:
       - gate-puppet-apparmor-merge
 
-  - name: openstack-ci/puppet-dashboard
+  - name: openstack-infra/puppet-dashboard
     check:
       - gate-puppet-dashboard-merge
     gate:
       - gate-puppet-dashboard-merge
 
-  - name: openstack-ci/puppet-vcsrepo
+  - name: openstack-infra/puppet-vcsrepo
     check:
       - gate-puppet-vcsrepo-merge
     gate:
@@ -626,7 +626,7 @@ projects:
         - gate-tempest-devstack-vm-quantum
         - gate-tempest-devstack-vm-postgres
 
-  - name: openstack-ci/devstack-gate
+  - name: openstack-infra/devstack-gate
     check:
       - gate-devstack-gate-merge:
         - gate-tempest-devstack-vm
@@ -947,7 +947,7 @@ projects:
     publish:
       - openstack-qa-docs
 
-  - name: openstack-ci/git-review
+  - name: openstack-infra/git-review
     check:
       - gate-git-review-merge:
         - gate-git-review-pep8

@@ -40,13 +40,13 @@ Create a new StackForge Project with Puppet
 ===========================================
 
 OpenStack uses Puppet and a management script to create Gerrit projects
-with simple changes to the openstack-ci-puppet repository. To start make
-sure you have cloned the openstack-ci-puppet repository
-``git clone https://github.com/openstack/openstack-ci-puppet``.
+with simple changes to the openstack-infra/config repository. To start make
+sure you have cloned the openstack-infra/config repository
+``git clone https://github.com/openstack-infra/config``.
 
 First you need to add your StackForge project to the master project
 list. Edit
-``openstack-ci-puppet/modules/openstack_project/templates/review.projects.yaml.erb``
+``openstack-infra/config/modules/openstack_project/templates/review.projects.yaml.erb``
 and add a new section for your project at the end of the file. It should
 look something like::
 
@@ -62,7 +62,7 @@ are optional, but you must have an acl_config. Note that the current
 tools assume that the upstream repo will have a master branch.
 
 The next step is to add a Gerrit ACL config file. Edit
-``openstack-ci-puppet/modules/openstack_project/files/gerrit/acls/stackforge/project-name.config``
+``openstack-infra/config/modules/openstack_project/files/gerrit/acls/stackforge/project-name.config``
 and make it look like::
 
   [access "refs/heads/*"]
@@ -85,12 +85,12 @@ these additional tools.
 Add Jenkins Jobs to StackForge Projects
 =======================================
 
-In the same openstack-ci-puppet repository (and in the same change if
+In the same openstack-infra/config repository (and in the same change if
 you like) we need to edit two additional files to setup Jenkins jobs
 and Zuul for the new StackForge project.
 
 Edit
-``openstack-ci-puppet/modules/openstack_project/files/jenkins_job_builder/config/projects.yaml``
+``openstack-infra/config/modules/openstack_project/files/jenkins_job_builder/config/projects.yaml``
 and add a new section for your project at the end of the file. It should
 look something like::
 
@@ -124,7 +124,7 @@ python 2.6 and 2.7 unittests, and coverage) your entry in
 
 Now that we have a Jenkins job we need to tell Zuul to run that job when
 appropriate. Edit
-``openstack-ci-puppet/modules/openstack_project/files/zuul/layout.yaml``
+``openstack-infra/config/modules/openstack_project/files/zuul/layout.yaml``
 and add a new section for your project at the end of the file. It should
 look something like::
 
@@ -160,7 +160,7 @@ look like this instead::
     publish:
       - project-name-docs
 
-That concludes the bare minimum openstack-ci-puppet changes necessary to
+That concludes the bare minimum openstack-infra/config changes necessary to
 add a project to StackForge. You can commit these changes and submit
 them to review.openstack.org at this point, or you can wait a little
 longer and add your project to GerritBot first.
@@ -170,7 +170,7 @@ Configure StackForge Project to use GerritBot
 
 To have GerritBot send Gerrit events for your project to a Freenode IRC
 channel edit
-``openstack-ci-puppet/modules/gerritbot/files/gerritbot_channel_config.yaml``.
+``openstack-infra/config/modules/gerritbot/files/gerritbot_channel_config.yaml``.
 If you want to configure GerritBot to leave alerts in a channel
 GerritBot has always joined just add your project to the project list
 for that channel::

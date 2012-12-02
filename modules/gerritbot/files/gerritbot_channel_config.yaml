@@ -4,22 +4,21 @@ openstack-infra:
       - change-merged
       - x-vrif-minus-2
     projects:
-      - openstack/openstack-ci-puppet
-      - openstack-ci/config
-      - openstack-ci/devstack-gate
-      - openstack-ci/gerrit
-      - openstack-ci/gerrit-trigger-plugin
-      - openstack-ci/gerrit-verification-status-plugin
-      - openstack-ci/gerritbot
-      - openstack-ci/gerritlib
-      - openstack-ci/git-review
-      - openstack-ci/jeepyb
-      - openstack-ci/jenkins-job-builder
-      - openstack-ci/lodgeit
-      - openstack-ci/meetbot
-      - openstack-ci/nose-html-output
-      - openstack-ci/pypi-mirror
-      - openstack-ci/zuul
+      - openstack-infra/config
+      - openstack-infra/devstack-gate
+      - openstack-infra/gerrit
+      - openstack-infra/gerrit-trigger-plugin
+      - openstack-infra/gerrit-verification-status-plugin
+      - openstack-infra/gerritbot
+      - openstack-infra/gerritlib
+      - openstack-infra/git-review
+      - openstack-infra/jeepyb
+      - openstack-infra/jenkins-job-builder
+      - openstack-infra/lodgeit
+      - openstack-infra/meetbot
+      - openstack-infra/nose-html-output
+      - openstack-infra/pypi-mirror
+      - openstack-infra/zuul
     branches:
       - master
 

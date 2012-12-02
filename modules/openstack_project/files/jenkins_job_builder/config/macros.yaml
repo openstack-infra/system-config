@@ -109,7 +109,7 @@
       - shell: |
           #!/bin/bash -xe
           if [[ ! -e devstack-gate ]]; then
-              git clone http://zuul.openstack.org/p/openstack-ci/devstack-gate
+              git clone http://zuul.openstack.org/p/openstack-infra/devstack-gate
           else
               cd devstack-gate
               git remote update

@@ -1,5 +1,5 @@
 - job:
-    name: gate-ci-puppet-syntax
+    name: gate-openstack-infra-config-syntax
     node: precise
 
     triggers:
@@ -15,7 +15,7 @@
 
 
 - job:
-    name: gate-ci-puppet-lint
+    name: gate-openstack-infra-config-lint
     node: precise
 
     triggers:
@@ -30,7 +30,7 @@
 
 
 - job:
-    name: ci-puppet-compare-xml
+    name: openstack-infra-config-compare-xml
     node: precise
 
     triggers:

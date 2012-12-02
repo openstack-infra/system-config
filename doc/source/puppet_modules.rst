@@ -6,13 +6,13 @@ Overview
 
 Much of the OpenStack project infrastructure is deployed and managed using
 puppet.
-The OpenStack CI team manage a number of custom puppet modules outlined in this
-document.
+The OpenStack Infrastructure team manages a number of custom puppet modules
+outlined in this document.
 
 Doc Server
 ----------
 
-The doc_server module configures nginx [3]_ to serve the documentation for
+The doc_server module configures apache to serve the documentation for
 several specified OpenStack projects.  At the moment to add a site to this
 you need to edit ``modules/doc_server/manifests/init.pp`` and add a line as
 follows:
@@ -31,13 +31,13 @@ Lodgeit
 
 The lodgeit module installs and configures lodgeit [1]_ on required servers to
 be used as paste installations.  For OpenStack we use
-`a fork <https://github.com/openstack-ci/lodgeit>`_ of this which is based on
+`a fork <https://github.com/openstack-infra/lodgeit>`_ of this which is based on
 one with bugfixes maintained by
 `dcolish <https://bitbucket.org/dcolish/lodgeit-main>`_ but adds back missing
 anti-spam features required by Openstack.
 
 Puppet will configure lodgeit to use drizzle [2]_ as a database backend,
-nginx [3]_ as a front-end proxy and upstart scripts to run the lodgeit
+apache as a front-end proxy and upstart scripts to run the lodgeit
 instances.  It will store and maintain local branch of the the mercurial
 repository for lodgeit in ``/tmp/lodgeit-main``.
 
@@ -92,7 +92,7 @@ The planet module installs Planet Venus [4]_ along with required dependancies
 on a server.  It also configures specified planets based on options given.
 
 Planet Venus works by having a cron job which creates static files.  In this
-module the static files are served using nginx [3]_.
+module the static files are served using apache.
 
 To use this module you need to add something similar to the following into the
 main ``site.pp`` manifest:
@@ -125,9 +125,10 @@ Meetbot
 
 The meetbot module installs and configures meetbot [5]_ on a server.  The
 meetbot version installed by this module is pulled from the
-`Openstack CI fork <https://github.com/openstack-ci/meetbot/>`_ of the project.
+`OpenStack Infrastructure fork <https://github.com/openstack-infra/meetbot/>`_
+of the project.
 
-It also configures nginix [3]_ to be used for accessing the public IRC logs of
+It also configures apache to be used for accessing the public IRC logs of
 the meetings.
 
 To use this module simply add a section to the site manifest as follows:
@@ -271,7 +272,7 @@ in the ``JS`` box enter
 Etherpad Lite
 -------------
 
-This Puppet module installs Etherpad Lite [6]_ and its dependencies (including
+This Puppet module installs Etherpad Lite [3]_ and its dependencies (including
 node.js). This Puppet module also configures Etherpad Lite to be started at
 boot with Nginx running in front of it as a reverse proxy and MySQL running as
 the database backend.
@@ -381,7 +382,6 @@ the ``etherpad-lite`` DB daily and keep a rotation of 30 days of backups.
 .. rubric:: Footnotes
 .. [1] `Lodgeit homepage <http://www.pocoo.org/projects/lodgeit/>`_
 .. [2] `Drizzle homepage <http://www.drizzle.org/>`_
-.. [3] `nginx homepage <http://nginx.org/en/>`_
+.. [3] `Etherpad Lite homepage <https://github.com/Pita/etherpad-lite>`_
 .. [4] `Planet Venus homepage <http://intertwingly.net/code/venus/docs/index.html>`_
 .. [5] `Meetbot homepage <http://wiki.debian.org/MeetBot>`_
-.. [6] `Etherpad Lite homepage <https://github.com/Pita/etherpad-lite>`_

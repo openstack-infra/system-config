@@ -11,7 +11,7 @@ class zuul (
   $zuul_ssh_private_key = '',
   $url_pattern = '',
   $status_url = "https://${::fqdn}/",
-  $git_source_repo = 'https://github.com/openstack-ci/zuul.git',
+  $git_source_repo = 'https://github.com/openstack-infra/zuul.git',
   $push_change_refs = false
 ) {
   include apache
