@@ -109,7 +109,7 @@ follow the instructions below.
 
 The CI team's Orchestra configuration module is at:
 
-https://github.com/openstack/openstack-ci-puppet/tree/master/modules/orchestra
+https://github.com/openstack-infra/config/tree/master/modules/orchestra
 
 Install Orchestra
 """""""""""""""""
@@ -133,7 +133,7 @@ We update the dnsmasq.conf cobbler template to add
 "dhcp-ignore=tag:!known", and some site-specific network
 configuration::
 
-  wget https://raw.github.com/openstack/openstack-ci-puppet/master/modules/orchestra/files/dnsmasq.template \
+  wget https://raw.github.com/openstack-infra/config/master/modules/orchestra/files/dnsmasq.template \
   -O /etc/cobbler/dnsmasq.template
 
 Our servers need a kernel module blacklisted in order to boot
@@ -141,14 +141,14 @@ correctly.  If you don't need to blacklist any modules, you should
 either create an empty file here, or remove the reference to this file
 from the preseed file later::
 
-  wget https://raw.github.com/openstack/openstack-ci-puppet/master/modules/orchestra/files/openstack_module_blacklist \
+  wget https://raw.github.com/openstack-infra/config/master/modules/orchestra/files/openstack_module_blacklist \
   -O /var/lib/cobbler/snippets/openstack_module_blacklist
 
 This cobbler snippet uses cloud-init to set up the LVM/kexec
 environment and configures TCP syslogging to the installation
 server/Jenkins slave::
 
-  wget https://raw.github.com/openstack/openstack-ci-puppet/master/modules/orchestra/files/openstack_cloud_init \
+  wget https://raw.github.com/openstack-infra/config/master/modules/orchestra/files/openstack_cloud_init \
   -O /var/lib/cobbler/snippets/openstack_cloud_init
 
 This snippet holds the mysql root password that will be configured at
@@ -156,25 +156,25 @@ install time.  It's currently a static string, but you could
 dynamically write this file, or simply replace it with something more
 secure::
 
-  wget https://raw.github.com/openstack/openstack-ci-puppet/master/modules/orchestra/files/openstack_mysql_password \
+  wget https://raw.github.com/openstack-infra/config/master/modules/orchestra/files/openstack_mysql_password \
   -O /var/lib/cobbler/snippets/openstack_mysql_password
 
 This preseed file manages the OS install on the test nodes.  It
 includes the snippets installed above::
 
-  wget https://raw.github.com/openstack/openstack-ci-puppet/master/modules/orchestra/files/openstack-test.preseed \
+  wget https://raw.github.com/openstack-infra/config/master/modules/orchestra/files/openstack-test.preseed \
   -O /var/lib/cobbler/kickstarts/openstack-test.preseed
 
 The following sudoers configuration is needed to allow Jenkins to
 control cobbler, remove syslog files from the test hosts before
 starting new tests, and restart rsyslog::
 
-  wget https://raw.github.com/openstack/openstack-ci-puppet/master/modules/orchestra/files/orchestra-jenkins-sudoers -O /etc/sudoers.d/orchestra-jenkins
+  wget https://raw.github.com/openstack-infra/config/master/modules/orchestra/files/orchestra-jenkins-sudoers -O /etc/sudoers.d/orchestra-jenkins
 
 Replace the Orchestra rsyslog config file with a simpler one that logs
 all information from remote hosts in one file per host::
 
-  wget https://raw.github.com/openstack/openstack-ci-puppet/master/modules/orchestra/files/99-orchestra.conf -O /etc/rsyslog.d/99-orchestra.conf
+  wget https://raw.github.com/openstack-infra/config/master/modules/orchestra/files/99-orchestra.conf -O /etc/rsyslog.d/99-orchestra.conf
 
 Make sure the syslog directories exist and restart rsyslog::
 

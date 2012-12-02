@@ -16,11 +16,11 @@ try:
 except Exception:
     pass
 
-setup(name='openstack-ci-puppet',
+setup(name='openstack-infra-config',
       version="%d.%02d" % (datetime.datetime.now().year,
                            datetime.datetime.now().month),
-      description="OpenStack Continuous Integration Scripts",
-      author="OpenStack CI Team",
+      description="OpenStack Infrastructure Config",
+      author="OpenStack Infrastructure Team",
       author_email="openstack-ci@lists.launchpad.net",
-      url="http://launchpad.net/openstack-ci",
+      url="http://ci.openstack.org",
       cmdclass=ci_cmdclass)

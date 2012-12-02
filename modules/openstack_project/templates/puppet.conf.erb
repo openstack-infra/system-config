@@ -14,8 +14,8 @@ pluginsync=true
 # and can safely be removed if webrick is used.
 ssl_client_header = SSL_CLIENT_S_DN
 ssl_client_verify_header = SSL_CLIENT_VERIFY
-manifestdir=/opt/openstack-ci-puppet/$environment/manifests
-modulepath=/opt/openstack-ci-puppet/$environment/modules:/etc/puppet/modules
+manifestdir=/opt/openstack-infra/config/$environment/manifests
+modulepath=/opt/openstack-infra/config/$environment/modules:/etc/puppet/modules
 manifest=$manifestdir/site.pp
 reports=store, http
 reporturl=http://puppet-dashboard.openstack.org:3000/reports/upload

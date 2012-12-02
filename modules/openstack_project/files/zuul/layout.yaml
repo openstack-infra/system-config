@@ -207,7 +207,7 @@ projects:
     gate:
       - gate-meetbot-merge
 
-  - name: openstack/openstack-ci-puppet
+  - name: openstack-infra/config
     check:
       - gate-ci-puppet-merge:
         - gate-ci-puppet-syntax

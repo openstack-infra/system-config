@@ -4,7 +4,7 @@ openstack-infra:
       - change-merged
       - x-vrif-minus-2
     projects:
-      - openstack/openstack-ci-puppet
+      - openstack-infra/config
       - openstack-ci/config
       - openstack-ci/devstack-gate
       - openstack-ci/gerrit

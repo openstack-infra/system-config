@@ -41,8 +41,8 @@ host for use by the OpenStack project.
 .. code-block:: bash
 
   sudo apt-get install puppet git openjdk-6-jre-headless mysql-server
-  git clone git://github.com/openstack/openstack-ci-puppet.git
-  cd openstack-ci-puppet/
+  git clone git://github.com/openstack-infra/config.git
+  cd config/
   sudo bash run_puppet.sh
 
 Install MySQL
@@ -640,7 +640,7 @@ Creating a new Gerrit Project with Puppet
 =========================================
 
 Gerrit project creation is now managed through changes to the
-openstack-ci-puppet repository. The old manual processes are documented
+openstack-infra/config repository. The old manual processes are documented
 below as the processes are still valid and documentation of them may
 still be useful when dealing with corner cases. That said, you should
 use this method whenever possible.
@@ -655,7 +655,7 @@ also want to configure Zuul and Jenkins to run tests on the new project.
 The details for that process are in the next section.
 
 Gerrit projects are configured in the
-``openstack-ci-puppet/modules/openstack_project/templates/review.projects.yaml.erb``.
+``openstack-infra/config:modules/openstack_project/templates/review.projects.yaml.erb``.
 file. This file contains two sections, the first is a set of default
 config values that each project can override, and the second is a list
 of projects (each may contain their own overrides).
@@ -717,7 +717,7 @@ a single project you will want to do the following:
              mergeContent = true
 
 #. Add a project entry for the project in
-   ``openstack-ci-puppet/modules/openstack_project/templates/review.projects.yaml.erb``.::
+   ``openstack-infra/config:modules/openstack_project/templates/review.projects.yaml.erb``.::
 
      - project: openstack/project-name
        acl_config: /home/gerrit2/acls/project-name.config
@@ -739,7 +739,7 @@ Have Zuul Monitor a Gerrit Project
 =====================================
 
 Define the required jenkins jobs for this project using the Jenkins Job
-Builder. Edit openstack/openstack-ci-puppet:modules/openstack_project/files/jenkins_jobs/config/projects.yaml
+Builder. Edit openstack-infra/config:modules/openstack_project/files/jenkins_jobs/config/projects.yaml
 and add the desired jobs. Most projects will use the python jobs template.
 
 A minimum config::
@@ -770,7 +770,7 @@ Full example config for nova::
         - openstack-publish-jobs
         - gate-{name}-pylint
 
-Edit openstack/openstack-ci-puppet:modules/openstack_project/files/zuul/layout.yaml
+Edit openstack-infra/config:modules/openstack_project/files/zuul/layout.yaml
 and add the required jenkins jobs to this project. At a minimum you will
 probably need the gate-PROJECT-merge test in the check and gate queues.
 
@@ -850,7 +850,7 @@ Pull requests can not be disabled for a project in Github, so instead
 we have a script that runs from cron to close any open pull requests
 with instructions to use Gerrit.
 
-* Edit openstack/openstack-ci-puppet:modules/openstack_project/templates/review.projects.yaml.erb
+* Edit openstack-infra/config:modules/openstack_project/templates/review.projects.yaml.erb
 
 and add the project to the list of projects in the yaml file
 

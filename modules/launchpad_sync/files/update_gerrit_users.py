@@ -246,7 +246,7 @@ class Sync(object):
                 'openstack/object-api',
                 'openstack/openstack-chef',
                 'openstack/openstack-ci',
-                'openstack/openstack-ci-puppet',
+                'openstack-infra/config',
                 'openstack/openstack-manuals',
                 'openstack/openstack-planet',
                 'openstack/openstack-puppet',
