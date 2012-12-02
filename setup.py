@@ -16,11 +16,11 @@ try:
 except Exception:
     pass
 
-setup(name='openstack-infra-config',
+setup(name='openstack-ci-config',
       version="%d.%02d" % (datetime.datetime.now().year,
                            datetime.datetime.now().month),
       description="OpenStack Infrastructure Config",
       author="OpenStack Infrastructure Team",
-      author_email="openstack-ci@lists.launchpad.net",
+      author_email="openstack-infra@lists.launchpad.net",
       url="http://ci.openstack.org",
       cmdclass=ci_cmdclass)

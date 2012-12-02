@@ -7,12 +7,12 @@ Overview
 In order to make the process of managing hundreds of Jenkins Jobs easier a
 Python based utility was designed to take YAML based configurations and convert
 those into jobs that are injected into Jenkins. The source for this utility can
-be found on `github <https://github.com/openstack-ci/jenkins-job-builder>`_ and
+be found on `github <https://github.com/openstack-infra/jenkins-job-builder>`_ and
 it comes with its own
 `documentation <http://ci.openstack.org/jenkins-job-builder/>`_.
 
-The documentation below describes how the OpenStack CI team uses the Jenkins
-Job Builder in their environment.
+The documentation below describes how the OpenStack Infrastructure team uses
+the Jenkins Job Builder in their environment.
 
 Configuring Projects
 --------------------

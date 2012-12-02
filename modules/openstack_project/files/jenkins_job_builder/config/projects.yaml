@@ -45,7 +45,7 @@
 
 - project:
     name: devstack-gate
-    github-org: openstack-ci
+    github-org: openstack-infra
     node: precise
 
     jobs:
@@ -73,7 +73,7 @@
 
 - project:
     name: gerrit-verification-status-plugin
-    github-org: openstack-ci
+    github-org: openstack-infra
     node: precise
 
     jobs:
@@ -82,7 +82,7 @@
 
 - project:
     name: gerrit
-    github-org: openstack-ci
+    github-org: openstack-infra
     node: precise
 
     jobs:
@@ -91,7 +91,7 @@
 
 - project:
     name: gerritbot
-    github-org: openstack-ci
+    github-org: openstack-infra
     node: precise
     doc-publisher-site: ci.openstack.org
     tarball-publisher-site: 173.203.107.207
@@ -107,7 +107,7 @@
 
 - project:
     name: gerritlib
-    github-org: openstack-ci
+    github-org: openstack-infra
     node: precise
     doc-publisher-site: ci.openstack.org
     tarball-publisher-site: nova.openstack.org
@@ -122,7 +122,7 @@
 
 - project:
     name: jeepyb
-    github-org: openstack-ci
+    github-org: openstack-infra
     node: precise
     doc-publisher-site: ci.openstack.org
     tarball-publisher-site: nova.openstack.org
@@ -137,7 +137,7 @@
 
 - project:
     name: git-review
-    github-org: openstack-ci
+    github-org: openstack-infra
     node: precise
     jobs:
       - gate-{name}-merge
@@ -218,7 +218,7 @@
 
 - project:
     name: jenkins-job-builder
-    github-org: openstack-ci
+    github-org: openstack-infra
     node: precise
     tarball-publisher-site: nova.openstack.org
 
@@ -249,7 +249,7 @@
 
 - project:
     name: lodgeit
-    github-org: openstack-ci
+    github-org: openstack-infra
     node: precise
 
     jobs:
@@ -258,7 +258,7 @@
 
 - project:
     name: meetbot
-    github-org: openstack-ci
+    github-org: openstack-infra
     node: precise
 
     jobs:
@@ -299,7 +299,7 @@
 
 - project:
     name: nose-html-output
-    github-org: openstack-ci
+    github-org: openstack-infra
     node: precise
     doc-publisher-site: ci.openstack.org
     tarball-publisher-site: 173.203.107.207
@@ -415,7 +415,7 @@
 
 - project:
     name: puppet-apparmor
-    github-org: openstack-ci
+    github-org: openstack-infra
     node: precise
 
     jobs:
@@ -424,7 +424,7 @@
 
 - project:
     name: puppet-dashboard
-    github-org: openstack-ci
+    github-org: openstack-infra
     node: precise
 
     jobs:
@@ -433,7 +433,7 @@
 
 - project:
     name: puppet-vcsrepo
-    github-org: openstack-ci
+    github-org: openstack-infra
     node: precise
 
     jobs:
@@ -442,7 +442,7 @@
 
 - project:
     name: pypi-mirror
-    github-org: openstack-ci
+    github-org: openstack-infra
     node: precise
 
     jobs:
@@ -657,7 +657,7 @@
 
 - project:
     name: tempest
-    github-org: openstack-ci
+    github-org: openstack-infra
     node: precise
 
     jobs:
@@ -685,7 +685,7 @@
 
 - project:
     name: zuul
-    github-org: openstack-ci
+    github-org: openstack-infra
     node: precise
     tarball-publisher-site: nova.openstack.org
 

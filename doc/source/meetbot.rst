@@ -4,7 +4,7 @@ Meetbot
 Overview
 --------
 
-The OpenStack CI team run a slightly modified
+The OpenStack Infrastructure team run a slightly modified
 `Meetbot <http://wiki.debian.org/MeetBot>`_ to log IRC channel activity and
 meeting minutes. Meetbot is a plugin for
 `Supybot <http://sourceforge.net/projects/supybot/>`_ which adds meeting
@@ -21,8 +21,8 @@ get you going, but there are other goodies in ``doc/``.
 
 Once you have Supybot installed you will need to configure a bot. The
 ``supybot-wizard`` command can get you started with a basic config, or you can
-have Puppet do the heavy lifting. The OpenStack CI Meetbot Puppet module creates
-a configuration and documentation for that module is at
+have Puppet do the heavy lifting. The OpenStack Infrastructure Meetbot Puppet
+module creates a configuration and documentation for that module is at
 :ref:`Meetbot_Puppet_Module`.
 
 One important config setting is ``supybot.reply.whenAddressedBy.chars``, which
@@ -33,20 +33,21 @@ if you don't want a prefix character).
 Meetbot
 -------
 
-The OpenStack CI Meetbot fork can be found at
-https://github.com/openstack-ci/meetbot. Manual installation of the Meetbot
+The OpenStack Infrastructure Meetbot fork can be found at
+https://github.com/openstack-infra/meetbot. Manual installation of the Meetbot
 plugin is straightforward and documented in that repository's README.
-OpenStack CI installs and configures Meetbot through Puppet. Documentation for
-the Puppet module that does that can be found at :ref:`Meetbot_Puppet_Module`.
+OpenStack Infrastructure installs and configures Meetbot through Puppet.
+Documentation for the Puppet module that does that can be found at
+:ref:`Meetbot_Puppet_Module`.
 
 Voting
 ^^^^^^
 
-The OpenStack CI Meetbot fork adds simple voting features. After a meeting has
-been started a meeting chair can begin a voting block with the ``#startvote``
-command. The command takes two arguments, a question posed to voters (ending
-with a ``?``), and the valid voting options. If the second argument is missing
-the default options are "Yes" and "No". For example:
+The OpenStack Infrastructure Meetbot fork adds simple voting features. After
+a meeting has been started a meeting chair can begin a voting block with the
+``#startvote`` command. The command takes two arguments, a question posed to
+voters (ending with a ``?``), and the valid voting options. If the second
+argument is missing the default options are "Yes" and "No". For example:
 
 ``#startvote Should we vote now? Yes, No, Maybe``
 
