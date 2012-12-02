@@ -19,7 +19,7 @@
 rm -fr .test
 mkdir .test
 cd .test
-git clone https://review.openstack.org/p/openstack-ci/jenkins-job-builder --depth 1
+git clone https://review.openstack.org/p/openstack-infra/jenkins-job-builder --depth 1
 cd jenkins-job-builder
 # These are $WORKSPACE/.test/jenkins-job-builder/.test/...
 mkdir -p .test/old/config

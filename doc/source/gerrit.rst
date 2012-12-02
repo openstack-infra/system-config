@@ -462,59 +462,18 @@ onto the gerrit servers.  This script follows two rules:
 If your review gets touched by either of these rules it is possible to
 unabandon a review on the gerrit web interface.
 
-Launchpad Sync
-==============
-
-The launchpad user sync process consists of two scripts which are in
-openstack/openstack-ci on github: sync_launchpad_gerrit.py and
-insert_gerrit.py.
-
-Both scripts should be run as gerrit2 on review.openstack.org
-
-sync_launchpad_users.py runs and creates a python pickle file, users.pickle,
-with all of the user and group information. This is a long process. (12
-minutes)
-
-insert_gerrit.py reads the pickle file and applies it to the MySQL database.
-The gerrit caches must then be flushed.
-
-Depends
--------
-::
-
-  apt-get install python-mysqldb python-openid python-launchpadlib
-
-Keys
-----
-
-The key for the launchpad sync user is in ~/.ssh/launchpad_rsa. Connecting
-to Launchpad requires oauth authentication - so the first time
-sync_launchpad_gerrit.py is run, it will display a URL. Open this URL in a
-browser and log in to launchpad as the hudson-openstack user. Subsequent
-runs will run with cached credentials.
-
-Running
--------
-::
-
-  cd openstack-ci
-  git pull
-  python sync_launchpad_gerrit.py
-  python insert_gerrit.py
-  ssh -i /home/gerrit2/.ssh/launchpadsync_rsa -p29418 review.openstack.org gerrit flush-caches
-
 Gerrit IRC Bot
 ==============
 
 Installation
 ------------
 
-Ensure there is an up-to-date checkout of openstack-ci in ~gerrit2.
+Ensure there is an up-to-date checkout of openstack-infra/config in ~gerrit2.
 
 ::
 
   apt-get install python-irclib python-daemon python-yaml
-  cp ~gerrit2/openstack-ci/gerritbot.init /etc/init.d
+  cp ~gerrit2/openstack-infra/config/gerritbot.init /etc/init.d
   chmod a+x /etc/init.d/gerritbot
   update-rc.d gerritbot defaults
   su - gerrit2
@@ -560,7 +519,7 @@ them are applied.
 Installation
 ------------
 
-Ensure an up-to-date checkout of openstack-ci is in ~gerrit2.
+Ensure an up-to-date checkout of openstack-infra/config is in ~gerrit2.
 
 ::
 
@@ -894,14 +853,8 @@ inside of git in gerrit. Check out the branch from git::
 
 There will be two interesting files, `groups` and `project.config`. `groups`
 contains UUIDs and names of groups that will be referenced in
-`project.config`. There is a helper script in the openstack-ci repo called
-`get_group_uuid.py` which will fetch the UUID for a given group. For
-$PROJECT-core and $PROJECT-drivers::
-
-      openstack-ci/gerrit/get_group_uuid.py $GROUP_NAME
-
-And make entries in `groups` for each one of them. Next, edit
-`project.config` to look like::
+`project.config`. UUIDs can be found on the group page in gerrit.
+Next, edit `project.config` to look like::
 
       [access "refs/*"]
               owner = group Administrators

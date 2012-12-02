@@ -72,9 +72,9 @@ which tells is where to find subsequent configuration files.
       :datadir: '/etc/puppet/hieradata/%{environment}'
 
 This setup supports multiple configuration. The two sets of environments
-that OpenStack CI users are ``production`` and ``development``. ``production``
-is the default is and the environment used when nothing else is specified.
-Then the configuration needs to be placed into common.yaml in
+that OpenStack Infrastructure uses are ``production`` and ``development``.
+``production`` is the default is and the environment used when nothing else
+is specified. Then the configuration needs to be placed into common.yaml in
 ``/etc/puppet/hieradata/production`` and ``/etc/puppet/hieradata/development``.
 The values are simple key-value pairs in yaml format.
 

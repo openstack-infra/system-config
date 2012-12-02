@@ -21,6 +21,6 @@ setup(name='openstack-infra-config',
                            datetime.datetime.now().month),
       description="OpenStack Infrastructure Config",
       author="OpenStack Infrastructure Team",
-      author_email="openstack-ci@lists.launchpad.net",
+      author_email="openstack-infra@lists.launchpad.net",
       url="http://ci.openstack.org",
       cmdclass=ci_cmdclass)
