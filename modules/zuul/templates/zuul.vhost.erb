@@ -1,0 +1,20 @@
+<VirtualHost <%= scope.lookupvar("::zuul::vhost_name") %>:80>
+  ServerAdmin <%= scope.lookupvar("::zuul::serveradmin") %>
+
+  ErrorLog ${APACHE_LOG_DIR}/<%= scope.lookupvar("::zuul::vhost_name") %>-error.log
+
+  LogLevel warn
+
+  CustomLog ${APACHE_LOG_DIR}/<%= scope.lookupvar("::zuul::vhost_name") %>-access.log combined
+
+  RewriteEngine on
+  RewriteRule /zuul/status http://127.0.0.1:8001/status [P]
+  RewriteRule / http://127.0.0.1:8001/status [P]
+
+  SetEnv GIT_PROJECT_ROOT /var/lib/zuul/git/
+  SetEnv GIT_HTTP_EXPORT_ALL
+
+  AliasMatch ^/p/(.*/objects/[0-9a-f]{2}/[0-9a-f]{38})$ /var/lib/zuul/git/$1
+  AliasMatch ^/p/(.*/objects/pack/pack-[0-9a-f]{40}.(pack|idx))$ /var/lib/zuul/git/$1
+  ScriptAlias /p/ /usr/lib/git-core/git-http-backend/
+</VirtualHost>

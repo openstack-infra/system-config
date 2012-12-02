@@ -10,10 +10,17 @@
 # GERRIT_CHANGES="gtest-org/test:master:refs/changes/21/421/1"
 # GERRIT_CHANGES=""
 
-SITE=$1
-if [ -z "$SITE" ]
+REVIEW_SITE=$1
+if [ -z "$REVIEW_SITE" ]
 then
-  echo "The site name (eg 'review.openstack.org') must be the first argument."
+  echo "The git site name (eg 'https://review.openstack.org') must be the first argument."
+  exit 1
+fi
+
+GIT_SITE=$2
+if [ -z "$GIT_SITE" ]
+then
+  echo "The git site name (eg 'http://zuul.openstack.org') must be the second argument."
   exit 1
 fi
 
@@ -26,13 +33,13 @@ fi
 if [ ! -z "$GERRIT_CHANGES" ]
 then
     CHANGE_NUMBER=`echo $GERRIT_CHANGES|grep -Po ".*/\K\d+(?=/\d+)"`
-    echo "Triggered by: https://$SITE/$CHANGE_NUMBER"
+    echo "Triggered by: $REVIEW_SITE/$CHANGE_NUMBER"
 fi
 
 if [ ! -z "$GERRIT_REFSPEC" ]
 then
     CHANGE_NUMBER=`echo $GERRIT_REFSPEC|grep -Po ".*/\K\d+(?=/\d+)"`
-    echo "Triggered by: https://$SITE/$CHANGE_NUMBER"
+    echo "Triggered by: $REVIEW_SITE/$CHANGE_NUMBER"
 fi
 
 function merge_change {
@@ -41,10 +48,10 @@ function merge_change {
     MAX_ATTEMPTS=${3:-3}
     COUNT=0
 
-    until git fetch https://$SITE/p/$PROJECT $REFSPEC
+    until git fetch $GIT_SITE/p/$PROJECT $REFSPEC
     do
         COUNT=$(($COUNT + 1))
-        logger -p user.warning -t 'gerrit-git-prep' FAILED: git fetch https://$SITE/p/$PROJECT $REFSPEC COUNT: $COUNT
+        logger -p user.warning -t 'gerrit-git-prep' FAILED: git fetch $GIT_SITE/p/$PROJECT $REFSPEC COUNT: $COUNT
         if [ $COUNT -eq $MAX_ATTEMPTS ]
         then
             break
@@ -97,7 +104,7 @@ function merge_changes {
 set -x
 if [[ ! -e .git ]]
 then
-    git clone https://$SITE/p/$GERRIT_PROJECT .
+    git clone $GIT_SITE/p/$GERRIT_PROJECT .
 fi
 git remote update || git remote update # attempt to work around bug #925790
 git reset --hard

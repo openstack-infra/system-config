@@ -71,14 +71,6 @@ node 'jenkins.openstack.org' {
     ssl_chain_file_contents => hiera('jenkins_ssl_chain_file_contents'),
     sysadmins               => hiera('sysadmins'),
   }
-  class { 'openstack_project::zuul':
-    jenkins_url     => "https://${::fqdn}",
-    jenkins_user    => 'hudson-openstack',
-    jenkins_apikey  => hiera('zuul_jenkins_apikey'),
-    gerrit_server   => 'review.openstack.org',
-    gerrit_user     => 'jenkins',
-    url_pattern     => 'http://logs.openstack.org/{change.number}/{change.patchset}/{pipeline.name}/{job.name}/{build.number}',
-  }
 }
 
 node 'jenkins-dev.openstack.org' {
@@ -193,14 +185,15 @@ node 'static.openstack.org' {
 
 node 'zuul.openstack.org' {
   class { 'openstack_project::zuul':
-    jenkins_host    => 'jenkins.openstack.org',
-    jenkins_url     => 'https://jenkins.openstack.org',
-    jenkins_user    => 'hudson-openstack',
-    jenkins_apikey  => hiera('zuul_jenkins_apikey'),
-    gerrit_server   => 'review.openstack.org',
-    gerrit_user     => 'jenkins',
-    url_pattern     => 'http://logs.openstack.org/{change.number}/{change.patchset}/{pipeline.name}/{job.name}/{build.number}',
-    sysadmins       => hiera('sysadmins'),
+    jenkins_host         => 'jenkins.openstack.org',
+    jenkins_url          => 'https://jenkins.openstack.org',
+    jenkins_user         => 'hudson-openstack',
+    jenkins_apikey       => hiera('zuul_jenkins_apikey'),
+    gerrit_server        => 'review.openstack.org',
+    gerrit_user          => 'jenkins',
+    zuul_ssh_private_key => hiera('jenkins_ssh_private_key_contents'),
+    url_pattern          => 'http://logs.openstack.org/{change.number}/{change.patchset}/{pipeline.name}/{job.name}/{build.number}',
+    sysadmins            => hiera('sysadmins'),
   }
 }
 
