@@ -184,6 +184,17 @@ class GerritUser(object):
         self.openids = []
 
 class Sync(object):
+    never_sync_list = ['Administrators',
+                       'Anonymous Users',
+                       'Project Owners',
+                       'Registered Users',
+                       'Non-Interactive Users',
+                       'Project Bootstrappers',
+                       'Continuous Integration Tools',
+                       'External Testing Tools',
+                       'Release Managers',
+                       ]
+
     def __init__(self):
         self.log = logging.getLogger('sync')
         self.cursor = cur
@@ -289,13 +300,17 @@ class Sync(object):
         self.cursor.execute("select group_id, name from account_groups")
         for row in self.cursor.fetchall():
             id, name = row
+            if name in self.never_sync_list:
+                continue
+            if name[0] >= 'A' and name[0] <= 'Z':
+                continue
             self.groups[name] = Group(name, id)
 
     def getOpenID(self, openid):
         person = launchpad.people.getByOpenIDIdentifier(identifier=openid)
         if not person:
             return
-        lp_user = self.lp_users.get(person)
+        lp_user = self.lp_users.get(person.name)
         if not lp_user:
             lp_user = LPUser(person.name)
             self.lp_users[person.name] = lp_user
@@ -656,11 +671,20 @@ class Sync(object):
         groups_to_rm = []
 
         for team in lp_user.teams:
+            if team.name in self.never_sync_list:
+                continue
             groups_to_add.append(self.groups[team.name])
 
         # groups_to_add is now the full list of all groups we think the user
         # should belong to. we want to limit the users groups to this list
         for group in self.groups.values():
+            if group.name in self.never_sync_list:
+                continue
+            team = self.teams.get(group.name)
+            if not team:
+                # There is no corresponding LP team, so this may be
+                # a gerrit-only group
+                continue
             if group not in groups_to_add:
                 if group not in groups_to_rm:
                     groups_to_rm.append(group)
