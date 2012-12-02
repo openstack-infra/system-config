@@ -20,12 +20,12 @@ ship the data to the clients.  To install this:
   sudo apt-get install puppet puppetmaster-passenger
 
 Files for puppet master are stored in a git repo clone at
-``/opt/openstack-ci-puppet``.  We have a ``root`` cron job that
+``/opt/openstack-infra/config``.  We have a ``root`` cron job that
 automatically populates these from our puppet git repository as follows:
 
 .. code-block:: bash
 
-  \*/15 * * * * sleep $((RANDOM\%600)) && cd /opt/openstack-ci-puppet && /usr/bin/git pull -q
+  \*/15 * * * * sleep $((RANDOM\%600)) && cd /opt/openstack-infra/config && /usr/bin/git pull -q
 
 The ``/etc/puppet/puppet.conf`` file then needs updating to point to the
 manifest and modules as follows:
@@ -37,8 +37,8 @@ manifest and modules as follows:
    # and can safely be removed if webrick is used.
    ssl_client_header = SSL_CLIENT_S_DN
    ssl_client_verify_header = SSL_CLIENT_VERIFY
-   manifestdir=/opt/openstack-ci-puppet/manifests
-   modulepath=/opt/openstack-ci-puppet/modules
+   manifestdir=/opt/openstack-infra/config/manifests
+   modulepath=/opt/openstack-infra/config/modules
    manifest=$manifestdir/site.pp
 
 Hiera
@@ -72,9 +72,9 @@ which tells is where to find subsequent configuration files.
       :datadir: '/etc/puppet/hieradata/%{environment}'
 
 This setup supports multiple configuration. The two sets of environments
-that OpenStack CI users are ``production`` and ``development``. ``production``
-is the default is and the environment used when nothing else is specified.
-Then the configuration needs to be placed into common.yaml in
+that OpenStack Infrastructure uses are ``production`` and ``development``.
+``production`` is the default is and the environment used when nothing else
+is specified. Then the configuration needs to be placed into common.yaml in
 ``/etc/puppet/hieradata/production`` and ``/etc/puppet/hieradata/development``.
 The values are simple key-value pairs in yaml format.
 

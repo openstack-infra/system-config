@@ -4,7 +4,7 @@ class meetbot {
   vcsrepo { '/opt/meetbot':
     ensure   => latest,
     provider => git,
-    source   => 'https://github.com/openstack-ci/meetbot.git',
+    source   => 'https://github.com/openstack-infra/meetbot.git',
   }
 
   user { 'meetbot':

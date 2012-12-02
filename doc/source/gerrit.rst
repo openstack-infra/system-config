@@ -41,8 +41,8 @@ host for use by the OpenStack project.
 .. code-block:: bash
 
   sudo apt-get install puppet git openjdk-6-jre-headless mysql-server
-  git clone git://github.com/openstack/openstack-ci-puppet.git
-  cd openstack-ci-puppet/
+  git clone git://github.com/openstack-infra/config.git
+  cd config/
   sudo bash run_puppet.sh
 
 Install MySQL
@@ -462,59 +462,18 @@ onto the gerrit servers.  This script follows two rules:
 If your review gets touched by either of these rules it is possible to
 unabandon a review on the gerrit web interface.
 
-Launchpad Sync
-==============
-
-The launchpad user sync process consists of two scripts which are in
-openstack/openstack-ci on github: sync_launchpad_gerrit.py and
-insert_gerrit.py.
-
-Both scripts should be run as gerrit2 on review.openstack.org
-
-sync_launchpad_users.py runs and creates a python pickle file, users.pickle,
-with all of the user and group information. This is a long process. (12
-minutes)
-
-insert_gerrit.py reads the pickle file and applies it to the MySQL database.
-The gerrit caches must then be flushed.
-
-Depends
--------
-::
-
-  apt-get install python-mysqldb python-openid python-launchpadlib
-
-Keys
-----
-
-The key for the launchpad sync user is in ~/.ssh/launchpad_rsa. Connecting
-to Launchpad requires oauth authentication - so the first time
-sync_launchpad_gerrit.py is run, it will display a URL. Open this URL in a
-browser and log in to launchpad as the hudson-openstack user. Subsequent
-runs will run with cached credentials.
-
-Running
--------
-::
-
-  cd openstack-ci
-  git pull
-  python sync_launchpad_gerrit.py
-  python insert_gerrit.py
-  ssh -i /home/gerrit2/.ssh/launchpadsync_rsa -p29418 review.openstack.org gerrit flush-caches
-
 Gerrit IRC Bot
 ==============
 
 Installation
 ------------
 
-Ensure there is an up-to-date checkout of openstack-ci in ~gerrit2.
+Ensure there is an up-to-date checkout of openstack-infra/config in ~gerrit2.
 
 ::
 
   apt-get install python-irclib python-daemon python-yaml
-  cp ~gerrit2/openstack-ci/gerritbot.init /etc/init.d
+  cp ~gerrit2/openstack-infra/config/gerritbot.init /etc/init.d
   chmod a+x /etc/init.d/gerritbot
   update-rc.d gerritbot defaults
   su - gerrit2
@@ -560,7 +519,7 @@ them are applied.
 Installation
 ------------
 
-Ensure an up-to-date checkout of openstack-ci is in ~gerrit2.
+Ensure an up-to-date checkout of openstack-infra/config is in ~gerrit2.
 
 ::
 
@@ -650,7 +609,7 @@ Creating a new Gerrit Project with Puppet
 =========================================
 
 Gerrit project creation is now managed through changes to the
-openstack-ci-puppet repository. The old manual processes are documented
+openstack-infra/config repository. The old manual processes are documented
 below as the processes are still valid and documentation of them may
 still be useful when dealing with corner cases. That said, you should
 use this method whenever possible.
@@ -665,7 +624,7 @@ also want to configure Zuul and Jenkins to run tests on the new project.
 The details for that process are in the next section.
 
 Gerrit projects are configured in the
-``openstack-ci-puppet/modules/openstack_project/templates/review.projects.yaml.erb``.
+``openstack-infra/config:modules/openstack_project/templates/review.projects.yaml.erb``.
 file. This file contains two sections, the first is a set of default
 config values that each project can override, and the second is a list
 of projects (each may contain their own overrides).
@@ -734,7 +693,7 @@ a single project you will want to do the following:
              mergeContent = true
 
 #. Add a project entry for the project in
-   ``openstack-ci-puppet/modules/openstack_project/templates/review.projects.yaml.erb``.::
+   ``openstack-infra/config:modules/openstack_project/templates/review.projects.yaml.erb``.::
 
      - project: openstack/project-name
        acl_config: /home/gerrit2/acls/project-name.config
@@ -756,7 +715,7 @@ Have Zuul Monitor a Gerrit Project
 =====================================
 
 Define the required jenkins jobs for this project using the Jenkins Job
-Builder. Edit openstack/openstack-ci-puppet:modules/openstack_project/files/jenkins_jobs/config/projects.yaml
+Builder. Edit openstack-infra/config:modules/openstack_project/files/jenkins_jobs/config/projects.yaml
 and add the desired jobs. Most projects will use the python jobs template.
 
 A minimum config::
@@ -787,7 +746,7 @@ Full example config for nova::
         - openstack-publish-jobs
         - gate-{name}-pylint
 
-Edit openstack/openstack-ci-puppet:modules/openstack_project/files/zuul/layout.yaml
+Edit openstack-infra/config:modules/openstack_project/files/zuul/layout.yaml
 and add the required jenkins jobs to this project. At a minimum you will
 probably need the gate-PROJECT-merge test in the check and gate queues.
 
@@ -867,7 +826,7 @@ Pull requests can not be disabled for a project in Github, so instead
 we have a script that runs from cron to close any open pull requests
 with instructions to use Gerrit.
 
-* Edit openstack/openstack-ci-puppet:modules/openstack_project/templates/review.projects.yaml.erb
+* Edit openstack-infra/config:modules/openstack_project/templates/review.projects.yaml.erb
 
 and add the project to the list of projects in the yaml file
 
@@ -911,14 +870,8 @@ inside of git in gerrit. Check out the branch from git::
 
 There will be two interesting files, `groups` and `project.config`. `groups`
 contains UUIDs and names of groups that will be referenced in
-`project.config`. There is a helper script in the openstack-ci repo called
-`get_group_uuid.py` which will fetch the UUID for a given group. For
-$PROJECT-core and $PROJECT-drivers::
-
-      openstack-ci/gerrit/get_group_uuid.py $GROUP_NAME
-
-And make entries in `groups` for each one of them. Next, edit
-`project.config` to look like::
+`project.config`. UUIDs can be found on the group page in gerrit.
+Next, edit `project.config` to look like::
 
       [access "refs/*"]
               owner = group Administrators

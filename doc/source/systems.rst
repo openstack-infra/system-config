@@ -3,8 +3,8 @@
 Infrastructure Systems
 ######################
 
-The OpenStack CI team maintains a number of systems that are critical
-to the operation of the OpenStack project, such as gerrit, jenkins,
+The OpenStack Infrastructure team maintains a number of systems that are
+critical to the operation of the OpenStack project, such as gerrit, jenkins,
 mailman, meetbot, etherpad, paste, and others.
 
 Additionally the team maintains the project sites on Launchpad and
@@ -14,8 +14,8 @@ continued and secure operation of the project.
 SSH Access
 **********
 
-For any of the systems managed by the CI team, the following practices
-must be observed for SSH access:
+For any of the systems managed by the OpenStack Infrastructure team, the
+following practices must be observed for SSH access:
 
  * SSH access is only permitted with SSH public/private key
    authentication.
@@ -40,9 +40,9 @@ must be observed for SSH access:
    the confirmation constraint ('ssh-add -c').
  * The number of SSH keys that are configured to permit access to
    OpenStack machines should be kept to a minimum.
- * OpenStack CI machines must use puppet to centrally manage and
+ * OpenStack Infrastructure machines must use puppet to centrally manage and
    configure user accounts, and the SSH authorized_keys files from the
-   openstack-ci-puppet repository.
+   openstack-infra/config repository.
  * SSH keys should be periodically rotated (at least once per year).
    During rotation, a new key can be added to puppet for a time, and
    then the old one removed.  Be sure to run puppet on the backup
@@ -59,7 +59,7 @@ project infrastructure servers should be carried out entirely through
 puppet so that anyone can contribute.
 
 The Git repository with the puppet configuration may be cloned from
-https://github.com/openstack/openstack-ci-puppet and changes submitted
+https://github.com/openstack-infra/config and changes submitted
 with `git-review`.
 
 In order to ensure that it is easy for both the OpenStack project as
