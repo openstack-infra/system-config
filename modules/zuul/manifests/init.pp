@@ -1,16 +1,21 @@
 # == Class: zuul
 #
 class zuul (
+  $vhost_name = $::fqdn,
+  $serveradmin = "webmaster@${::fqdn}",
   $jenkins_server = '',
   $jenkins_user = '',
   $jenkins_apikey = '',
   $gerrit_server = '',
   $gerrit_user = '',
+  $zuul_ssh_private_key = '',
   $url_pattern = '',
-  $status_url = "https://${::fqdn}/zuul/status",
+  $status_url = "https://${::fqdn}/",
   $git_source_repo = 'https://github.com/openstack-ci/zuul.git',
   $push_change_refs = false
 ) {
+  include apache
+
   $packages = [
     'python-webob',
     'python-daemon',
@@ -19,6 +24,19 @@ class zuul (
   ]
 
   package { $packages:
+    ensure => present,
+  }
+
+  user { 'zuul':
+    ensure     => present,
+    home       => '/home/zuul',
+    shell      => '/bin/bash',
+    gid        => 'zuul',
+    managehome => true,
+    require    => Group['zuul'],
+  }
+
+  group { 'zuul':
     ensure => present,
   }
 
@@ -71,40 +89,56 @@ class zuul (
 #       at some point, but that still has some problems.
   file { '/etc/zuul/zuul.conf':
     ensure  => present,
-    owner   => 'jenkins',
+    owner   => 'zuul',
     mode    => '0400',
     content => template('zuul/zuul.conf.erb'),
     require => [
       File['/etc/zuul'],
-      Package['jenkins'],
+      User['zuul'],
     ],
   }
 
   file { '/var/log/zuul':
     ensure  => directory,
-    owner   => 'jenkins',
-    require => Package['jenkins'],
+    owner   => 'zuul',
+    require => User['zuul'],
   }
 
   file { '/var/run/zuul':
     ensure  => directory,
-    owner   => 'jenkins',
-    require => Package['jenkins'],
+    owner   => 'zuul',
+    require => User['zuul'],
   }
 
   file { '/var/lib/zuul':
     ensure  => directory,
-    owner   => 'jenkins',
-    require => Package['jenkins'],
+    owner   => 'zuul',
+    require => User['zuul'],
   }
 
   file { '/var/lib/zuul/git':
     ensure  => directory,
-    owner   => 'jenkins',
-    require => Package['jenkins'],
+    owner   => 'zuul',
+    require => User['zuul'],
   }
 
-  file { '/etc/init.d/zuul/':
+  file { '/var/lib/zuul/ssh':
+    ensure  => directory,
+    owner   => 'zuul',
+    group   => 'zuul',
+    mode    => '0500',
+    require => File['/var/lib/zuul'],
+  }
+
+  file { '/var/lib/zuul/ssh/id_rsa':
+    owner   => 'zuul',
+    group   => 'zuul',
+    mode    => '0400',
+    require => File['/var/lib/zuul/ssh'],
+    content => $zuul_ssh_private_key,
+  }
+
+  file { '/etc/init.d/zuul':
     ensure => present,
     owner  => 'root',
     group  => 'root',
@@ -124,4 +158,21 @@ class zuul (
     hasrestart => true,
     require    => File['/etc/init.d/zuul'],
   }
+
+  apache::vhost { $vhost_name:
+    port     => 443,
+    docroot  => 'MEANINGLESS ARGUMENT',
+    priority => '50',
+    template => 'zuul/zuul.vhost.erb',
+  }
+  a2mod { 'rewrite':
+    ensure => present,
+  }
+  a2mod { 'proxy':
+    ensure => present,
+  }
+  a2mod { 'proxy_http':
+    ensure => present,
+  }
+
 }
