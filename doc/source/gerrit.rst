@@ -1085,47 +1085,79 @@ Renaming a Project
 ******************
 
 Renaming a project is not automated and is disruptive to developers,
-so it should be avoided.  Allow for an hour of downtime for the
+so it should be avoided. Allow for an hour of downtime for the
 project in question, and about 10 minutes of downtime for all of
-Gerrit.  All Gerrit changes, merged and open, will carry over, so
+Gerrit. All Gerrit changes, merged and open, will carry over, so
 in-progress changes do not need to be merged before the move.
 
 To rename a project:
 
-#. Make it inacessible by editing the Access pane.  Add a "read" ACL
-   for "Administrators", and mark it "exclusive".  Be sure to save
-   changes.
+#. Prepare a change to the Puppet configuration which updates
+   projects.yaml/ACLs and jenkins-job-builder for the new name.
 
-#. Update the database::
+#. Stop puppet on review.openstack.org to prevent your interim
+   configuration changes from being reset by the project management
+   routines::
+
+     sudo puppetd --disable
+
+#. Make the project inacessible by editing the Access pane. Add a
+   "read" ACL for "Administrators", and mark it "exclusive". Be sure
+   to save changes.
+
+#. Update the database on review.openstack.org::
+
+     sudo mysql --defaults-file=/etc/mysql/debian.cnf reviewdb
 
      update account_project_watches
-     set project_name = "openstack/OLD"
-     where project_name = "openstack/NEW";
+     set project_name = "openstack/NEW"
+     where project_name = "openstack/OLD";
 
      update changes
-     set dest_project_name = "openstack/OLD"
-     where dest_project_name = "openstack/NEW";
+     set dest_project_name = "openstack/NEW"
+     where dest_project_name = "openstack/OLD";
 
-#. Wait for Jenkins to be idle (or take it offline)
+#. Take Jenkins offline through its WebUI.
 
-#. Stop Gerrit and move the Git repository::
+#. Stop Gerrit on review.openstack.org and move both the Git
+   repository and the mirror::
 
-     /etc/init.d/gerrit stop
-     cd /home/gerrit2/review_site/git/openstack/
-     mv OLD.git/ NEW.git
-     /etc/init.d/gerrit start
+     sudo invoke-rc.d gerrit stop
+     sudo mv ~gerrit2/review_site/git/openstack/{OLD,NEW}.git
+     sudo mv /var/lib/git/openstack/{OLD,NEW}.git
+     sudo invoke-rc.d gerrit start
 
-#. (Bring Jenkins online if need be)
+#. Bring Jenkins online through its WebUI.
 
-#. Rename the project in GitHub
+#. Merge the prepared Puppet configuration change, removing the
+   original Jenkins jobs via the Jenkins WebUI later if needed.
 
-#. Update Jenkins jobs te reference the new name.  Rename the jobs
-   themselves as appropriate
+#. Start puppet again on review.openstack.org::
 
-#. Remove the read access ACL you set in the first step from project
+     sudo puppetd --enable
+
+#. Rename the project in GitHub or, if this is a move to a new org, let
+   the project management run create it for you and then remove the
+   original later (assuming you have sufficient permissions).
+
+#. If this is an org move and the project name itself is not
+   changing, gate jobs may fail due to outdated remote URLs. Clear
+   the workspaces on persistent Jenkins slaves to mitigate this::
+
+     ssh -t $h.slave.openstack.org 'sudo rm -rf ~jenkins/workspace/*PROJECT*'
+
+#. Again, if this is an org move rather than a rename and the GitHub
+   project has been created but is empty, trigger replication to
+   populate it::
+
+     ssh -p 29418 review.openstack.org gerrit replicate --all
+
+#. Wait for puppet changes to be applied so that the earlier
+   restrictive ACL will be reset for you (ending the outage for this
+   project).
 
 #. Submit a change that updates .gitreview with the new location of the
-   project
+   project.
 
 Developers will either need to re-clone a new copy of the repository,
 or manually update their remotes.
