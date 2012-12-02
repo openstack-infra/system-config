@@ -7,17 +7,17 @@ Overview
 In order to make the process of managing hundreds of Jenkins Jobs easier a
 Python based utility was designed to take YAML based configurations and convert
 those into jobs that are injected into Jenkins. The source for this utility can
-be found on `github <https://github.com/openstack-ci/jenkins-job-builder>`_ and
+be found on `github <https://github.com/openstack-infra/jenkins-job-builder>`_ and
 it comes with its own
 `documentation <http://ci.openstack.org/jenkins-job-builder/>`_.
 
-The documentation below describes how the OpenStack CI team uses the Jenkins
-Job Builder in their environment.
+The documentation below describes how the OpenStack Infrastructure team uses
+the Jenkins Job Builder in their environment.
 
 Configuring Projects
 --------------------
 
-The YAML scripts to make this work are stored in the ``openstack-ci-puppet``
+The YAML scripts to make this work are stored in the ``openstack-infra/config``
 repository in the
 ``modules/openstack_project/files/jenkins_job_builder/config/`` directory.
 In this directory you can have four different types of yaml config files:
@@ -49,8 +49,8 @@ Example defaults config:
 
          <p>If you would like to make changes to this job, please see:
 
-           <a href="https://github.com/openstack/openstack-ci-puppet">
-             https://github.com/openstack/openstack-ci-puppet
+           <a href="https://github.com/openstack-infra/config">
+             https://github.com/openstack-infra/config
            </a>
 
          In modules/openstack_project/files/jenkins_jobs
@@ -252,7 +252,7 @@ The contents of this erb are:
    url=<%= url %>
 
 The values for user and url are hardcoded in the Puppet repo in
-`modules/openstack_project/manifests/jenkins.pp <https://github.com/openstack/openstack-ci-puppet/blob/master/modules/openstack_project/manifests/jenkins.pp>`_,
+`modules/openstack_project/manifests/jenkins.pp <https://github.com/openstack-infra/config/blob/master/modules/openstack_project/manifests/jenkins.pp>`_,
 but the password is stored in hiera. Make sure you have it defined as
 ``jenkins_jobs_password`` in the hiera DB.
 

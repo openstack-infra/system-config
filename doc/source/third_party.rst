@@ -84,12 +84,14 @@ To request a sevice acconut for your system you first need to create a new
 account in LaunchPad.  This account needs to be joined to the
 `OpenStack Team <https://launchpad.net/~openstack>`_ or one of the related teams
 so that Gerrit can pick it up.  You can then contact the
-OpenStack CI Admins via `email <mailto:openstack-ci-admins@lists.launchpad.net>`_
+OpenStack Infrastructure Team via
+`email <mailto:openstack-infra@lists.openstack.org>`_
 or the #openstack-infra IRC channel.  We will set things up on Gerrit to
 receive your system's votes.
 
-Feel free to contact the CI team to arrange setting up a dedicated user so your
-system can post reviews up using a system name rather than your user name.
+Feel free to contact the Infrastructure team to arrange setting up a dedicated
+user so your system can post reviews up using a system name rather than your
+user name.
 
 The Jenkins Gerrit Trigger Plugin Way
 -------------------------------------

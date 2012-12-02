@@ -7,8 +7,8 @@
 
       <p>If you would like to make changes to this job, please see:
 
-        <a href="https://github.com/openstack/openstack-ci-puppet">
-          https://github.com/openstack/openstack-ci-puppet
+        <a href="https://github.com/openstack-infra/config">
+          https://github.com/openstack-infra/config
         </a>
 
       In modules/openstack_project/files/jenkins_job_builder/config

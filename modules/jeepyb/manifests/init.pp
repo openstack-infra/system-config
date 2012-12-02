@@ -1,7 +1,7 @@
 # == Class: jeepyb
 #
 class jeepyb (
-  $git_source_repo = 'https://github.com/openstack-ci/jeepyb.git',
+  $git_source_repo = 'https://github.com/openstack-infra/jeepyb.git',
 ) {
   include mysql::python
 
