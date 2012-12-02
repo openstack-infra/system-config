@@ -627,7 +627,6 @@ class Sync(object):
             if watch_name in p:
                 watch_name = p
                 break
-        print watch_name
         if watch_name in self.projects:
             if not cur.execute("""select account_id
                                   from account_project_watches
