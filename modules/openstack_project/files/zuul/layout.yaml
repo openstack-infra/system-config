@@ -78,6 +78,8 @@ jobs:
     branch: ^master$
   - name: openstack-ha-guide
     branch: ^master$
+  - name: gate-moniker-pyflakes
+    voting: false
 
 
 projects:
@@ -760,11 +762,13 @@ projects:
     check:
       - gate-moniker-merge:
         - gate-moniker-pep8
+        - gate-moniker-pyflakes
         - gate-moniker-python26
         - gate-moniker-python27
     gate:
       - gate-moniker-merge:
         - gate-moniker-pep8
+        - gate-moniker-pyflakes
         - gate-moniker-python26
         - gate-moniker-python27
     post:
@@ -774,13 +778,17 @@ projects:
     check:
       - gate-python-monikerclient-merge:
         - gate-python-monikerclient-pep8
+        - gate-python-monikerclient-pyflakes
         - gate-python-monikerclient-python26
         - gate-python-monikerclient-python27
     gate:
       - gate-python-monikerclient-merge:
         - gate-python-monikerclient-pep8
+        - gate-python-monikerclient-pyflakes
         - gate-python-monikerclient-python26
         - gate-python-monikerclient-python27
+    post:
+      - hook-python-monikerclient-rtfd
 
   - name: stackforge/bufunfa
     check:
