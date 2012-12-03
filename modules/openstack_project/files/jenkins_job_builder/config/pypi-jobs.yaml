@@ -90,6 +90,5 @@
     jobs:
       - '{name}-docs'
       - '{name}-sdist-tarball'
-      - '{name}-pypi'
       - '{name}-pypi-sdist'
       - '{name}-pypi-upload'

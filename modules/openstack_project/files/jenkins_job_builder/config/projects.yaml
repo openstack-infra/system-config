@@ -307,7 +307,8 @@
     jobs:
       - gate-{name}-merge
       - '{name}-sdist-tarball'
-      - '{name}-pypi'
+      - '{name}-pypi-sdist'
+      - '{name}-pypi-upload'
 
 
 - project:
