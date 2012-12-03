@@ -724,10 +724,10 @@ if not options.prep_only:
     log.info('Syncing')
     sync.sync()
 
+conn.commit()
+
 if not options.skip_dump:
     os.system("ssh -i %s -p29418 %s@localhost gerrit flush-caches" %
               (GERRIT_SSH_KEY, GERRIT_USER))
-
-conn.commit()
 
 log.info('Gerrit user sync stop ' + str(datetime.now()))
