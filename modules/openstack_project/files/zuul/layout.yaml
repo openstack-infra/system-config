@@ -113,7 +113,7 @@ projects:
     post:
       - nose-html-output-sdist-tarball
     publish:
-      - nose-html-output-pypi
+      - nose-html-output-pypi-sdist
 
   - name: openstack-ci/pypi-mirror
     check:
@@ -445,7 +445,7 @@ projects:
       - python-cinderclient-sdist-tarball
       - python-cinderclient-coverage
     publish:
-      - python-cinderclient-pypi
+      - python-cinderclient-pypi-sdist
       - python-cinderclient-docs
 
   - name: openstack/python-glanceclient
@@ -469,7 +469,7 @@ projects:
       - python-glanceclient-sdist-tarball
       - python-glanceclient-coverage
     publish:
-      - python-glanceclient-pypi
+      - python-glanceclient-pypi-sdist
       - python-glanceclient-docs
 
   - name: openstack/python-keystoneclient
@@ -493,7 +493,7 @@ projects:
       - python-keystoneclient-sdist-tarball
       - python-keystoneclient-coverage
     publish:
-      - python-keystoneclient-pypi
+      - python-keystoneclient-pypi-sdist
       - python-keystoneclient-docs
 
   - name: openstack/python-novaclient
@@ -517,7 +517,7 @@ projects:
       - python-novaclient-sdist-tarball
       - python-novaclient-coverage
     publish:
-      - python-novaclient-pypi
+      - python-novaclient-pypi-sdist
       - python-novaclient-docs
 
   - name: openstack/python-openstackclient
@@ -537,7 +537,7 @@ projects:
       - python-openstackclient-sdist-tarball
       - python-openstackclient-coverage
     publish:
-      - python-openstackclient-pypi
+      - python-openstackclient-pypi-sdist
       - python-openstackclient-docs
 
   - name: openstack/python-quantumclient
@@ -561,7 +561,7 @@ projects:
       - python-quantumclient-sdist-tarball
       - python-quantumclient-coverage
     publish:
-      - python-quantumclient-pypi
+      - python-quantumclient-pypi-sdist
       - python-quantumclient-docs
 
   - name: openstack/python-swiftclient
@@ -581,7 +581,7 @@ projects:
       - python-swiftclient-sdist-tarball
       - python-swiftclient-coverage
     publish:
-      - python-swiftclient-pypi
+      - python-swiftclient-pypi-sdist
       - python-swiftclient-docs
 
   - name: openstack/requirements
@@ -635,7 +635,7 @@ projects:
       - pbr-coverage
       - pbr-docs
     publish:
-      - pbr-pypi
+      - pbr-pypi-sdist
       - pbr-docs
 
   - name: openstack/tempest
