@@ -600,15 +600,19 @@
     jobs:
       - python-jobs
       - hook-{name}-rtfd
+      - gate-{name}-pyflakes
 
 
 - project:
     name: python-monikerclient
     github-org: stackforge
     node: precise
+    rtfd-id: 5366
 
     jobs:
       - python-jobs
+      - hook-{name}-rtfd
+      - gate-{name}-pyflakes
 
 
 - project:
