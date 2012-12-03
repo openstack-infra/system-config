@@ -3,6 +3,7 @@
 class jeepyb (
   $git_source_repo = 'https://github.com/openstack-ci/jeepyb.git',
 ) {
+  include mysql::python
 
   if ! defined(Package['python-paramiko']) {
     package { 'python-paramiko':
@@ -49,5 +50,4 @@ class jeepyb (
     require     => Class['mysql::python'],
     subscribe   => Vcsrepo['/opt/jeepyb'],
   }
-
 }
