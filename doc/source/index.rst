@@ -36,6 +36,7 @@ Contents:
    puppet_modules
    jenkins_jobs
    meetbot
+   stackforge
 
 Indices and tables
 ==================
