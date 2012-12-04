@@ -78,8 +78,6 @@ jobs:
     branch: ^master$
   - name: openstack-ha-guide
     branch: ^master$
-  - name: gate-moniker-pyflakes
-    voting: false
 
 
 projects:
