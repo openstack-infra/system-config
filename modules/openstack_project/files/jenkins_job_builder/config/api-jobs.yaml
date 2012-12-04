@@ -69,9 +69,9 @@
       - console-log-post
       - ftp:
           site: api.openstack.org
-          source: 'doc/target/docbkx/webhelp/api-quick-start-onepager/**'
+          source: 'api-quick-start/target/docbkx/webhelp/api-quick-start-onepager/**'
           target: ''
-          remove-prefix: 'doc/target/docbkx/webhelp/api-quick-start-onepager/'
+          remove-prefix: 'api-quick-start/target/docbkx/webhelp/api-quick-start-onepager/'
           excludes: '**/*.xml,**/null*'
           remote-directory: 'api/quick-start'
 
