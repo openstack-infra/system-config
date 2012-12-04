@@ -39,10 +39,10 @@
     publishers:
       - console-log-post
       - ftp:
-          site: api.openstack.org
-          source: 'doc/target/docbkx/webhelp/openstack-api-programming/**'
-          target: 'openstack-compute/programmer/'
-          remove-prefix: 'doc/target/docbkx/webhelp/openstack-api-programming/'
+          site: docs.openstack.org
+          source: 'openstack-api-programming/target/docbkx/webhelp/api/openstack-compute/programmer/**'
+          target: '/'
+          remove-prefix: 'openstack-api-programming/target/docbkx/webhelp/'
           excludes: '**/*.xml,**/null*'
 
 # this replaces the old openstack-api-quick-start job
@@ -68,7 +68,7 @@
     publishers:
       - console-log-post
       - ftp:
-          site: api.openstack.org
+          site: docs.openstack.org
           source: 'api-quick-start/target/docbkx/webhelp/api-quick-start-onepager/**'
           target: ''
           remove-prefix: 'api-quick-start/target/docbkx/webhelp/api-quick-start-onepager/'
