@@ -70,7 +70,7 @@
       - ftp:
           site: docs.openstack.org
           source: 'api-quick-start/target/docbkx/webhelp/api-quick-start-onepager/**'
-          target: ''
+          target: 'api/quick-start/'
           remove-prefix: 'api-quick-start/target/docbkx/webhelp/api-quick-start-onepager/'
           excludes: '**/*.xml,**/null*'
           remote-directory: 'api/quick-start'
