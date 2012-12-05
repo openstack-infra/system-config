@@ -23,6 +23,7 @@
             - melange
             - cinder
             - ceilometer
+            - python-ceilometerclient
             - python-cinderclient
             - python-novaclient
             - python-openstackclient

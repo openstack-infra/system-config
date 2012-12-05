@@ -66,6 +66,7 @@ openstack-metering:
       - x-vrif-minus-2
     projects:
       - openstack/ceilometer
+      - openstack/python-ceilometerclient
     branches:
       - master
 

@@ -452,6 +452,18 @@
 
 
 - project:
+    name: python-ceilometerclient
+    github-org: openstack
+    node: precise
+    tarball-publisher-site: nova.openstack.org
+    doc-publisher-site: docs.openstack.org
+
+    jobs:
+      - python-jobs
+      - pypi-jobs
+
+
+- project:
     name: python-cinderclient
     github-org: openstack
     node: precise
