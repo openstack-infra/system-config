@@ -86,7 +86,7 @@ class etherpad_lite (
     vcsrepo { "${base_install_dir}/etherpad-lite":
       ensure   => present,
       provider => git,
-      source   => 'https://github.com/Pita/etherpad-lite.git',
+      source   => 'https://github.com/ether/etherpad-lite.git',
       owner    => $ep_user,
       revision => $eplite_version,
       require  => Package['git'],
