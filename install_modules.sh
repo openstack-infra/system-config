@@ -42,7 +42,7 @@ MODULES["openstackci-dashboard"]="0.0.6"
 # 18:30 < jamesturnbull> jeblair: since we - being PL - are the author
 # - our intent was not to limit it's use and it should be Apache
 # licensed
-MODULES["openstackci-vcsrepo"]="0.0.6"
+MODULES["openstackci-vcsrepo"]="0.0.7"
 
 MODULES["puppetlabs-apache"]="0.0.4"
 MODULES["puppetlabs-apt"]="0.0.4"
