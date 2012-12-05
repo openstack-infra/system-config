@@ -424,6 +424,26 @@ projects:
     publish:
       - swift-docs
 
+  - name: openstack/python-ceilometerclient
+    check:
+      - gate-python-ceilometerclient-merge:
+        - gate-python-ceilometerclient-docs
+        - gate-python-ceilometerclient-pep8
+        - gate-python-ceilometerclient-python26
+        - gate-python-ceilometerclient-python27
+    gate:
+      - gate-python-ceilometerclient-merge:
+        - gate-python-ceilometerclient-docs
+        - gate-python-ceilometerclient-pep8
+        - gate-python-ceilometerclient-python26
+        - gate-python-ceilometerclient-python27
+    post:
+      - python-ceilometerclient-sdist-tarball
+      - python-ceilometerclient-coverage
+    publish:
+      - python-ceilometerclient-pypi-sdist
+      - python-ceilometerclient-docs
+
   - name: openstack/python-cinderclient
     check:
       - gate-python-cinderclient-merge:
