@@ -18,9 +18,10 @@ class openstack_project::wiki (
   )
 
   class { 'mediawiki':
-    role               => 'all',
-    mediawiki_location => '/srv/mediawiki/w',
-    site_hostname      => $::fqdn,
+    role                      => 'all',
+    mediawiki_location        => '/srv/mediawiki/w',
+    mediawiki_images_location => '/srv/mediawiki/images',
+    site_hostname             => $::fqdn,
   }
   class { 'memcached':
     max_memory => 2048,

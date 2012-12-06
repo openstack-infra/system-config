@@ -4,6 +4,7 @@ class mediawiki(
   $role = '',
   $site_hostname = '',
   $mediawiki_location = ''
+  $mediawiki_images_location = ''
 ) {
 
   if ($role == 'app' or $role == 'all') {
