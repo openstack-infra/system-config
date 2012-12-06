@@ -31,7 +31,8 @@ class graphite(
     path        => '/bin:/usr/bin',
     refreshonly => true,
     subscribe   => Vcsrepo['/opt/graphite-web'],
-    require     => Exec['install_carbon'],
+    require     => [Exec['install_carbon'],
+                    File['/var/lib/graphite/storage']]
   }
 
   vcsrepo { '/opt/carbon':
@@ -47,7 +48,8 @@ class graphite(
     path        => '/bin:/usr/bin',
     refreshonly => true,
     subscribe   => Vcsrepo['/opt/carbon'],
-    require     => Exec['install_whisper'],
+    require     => [Exec['install_whisper'],
+                    File['/var/lib/graphite/storage']]
   }
 
   vcsrepo { '/opt/whisper':
@@ -80,9 +82,14 @@ class graphite(
 
   file { '/var/lib/graphite':
     ensure  => directory,
+  }
+
+  file { '/var/lib/graphite/storage':
+    ensure  => directory,
     owner   => 'www-data',
     group   => 'www-data',
-    require => Package['apache2'],
+    require => [Package['apache2'],
+                File['/var/lib/graphite']]
   }
 
   file { '/var/log/graphite':
@@ -188,46 +195,22 @@ class graphite(
     source  => 'puppet:///modules/graphite/statsd.default'
   }
 
-  file { ['/etc/rc0.d/K10carbon-cache',
-          '/etc/rc1.d/K10carbon-cache',
-          '/etc/rc2.d/S90carbon-cache',
-          '/etc/rc3.d/S90carbon-cache',
-          '/etc/rc4.d/S90carbon-cache',
-          '/etc/rc5.d/S90carbon-cache',
-          '/etc/rc6.d/K10carbon-cache']:
-    ensure  => link,
-    target  => '/etc/init.d/carbon-cache',
-    require => File['/etc/init.d/carbon-cache'],
-  }
-
-  exec { 'carbon-cache-start':
-    command     => '/etc/init.d/carbon-cache start',
-    require     => [File['/etc/init.d/carbon-cache'],
+  service { 'carbon-cache':
+    name       => 'carbon-cache',
+    enable     => true,
+    hasrestart => true,
+    require    => [File['/etc/init.d/carbon-cache'],
                     File['/etc/graphite/carbon.conf'],
                     Exec['install_carbon']],
-    subscribe   => File['/etc/init.d/carbon-cache'],
-    refreshonly => true,
   }
 
-  file { ['/etc/rc0.d/K10statsd',
-          '/etc/rc1.d/K10statsd',
-          '/etc/rc2.d/S90statsd',
-          '/etc/rc3.d/S90statsd',
-          '/etc/rc4.d/S90statsd',
-          '/etc/rc5.d/S90statsd',
-          '/etc/rc6.d/K10statsd']:
-    ensure  => link,
-    target  => '/etc/init.d/statsd',
-    require => File['/etc/init.d/statsd'],
-  }
-
-  exec { 'statsd-start':
-    command     => '/etc/init.d/statsd start',
-    require     => [File['/etc/init.d/statsd'],
+  service { 'statsd':
+    name       => 'statsd',
+    enable     => true,
+    hasrestart => true,
+    require    => [File['/etc/init.d/statsd'],
                     File['/etc/statsd/config.js'],
                     Vcsrepo['/opt/statsd']],
-    subscribe   => File['/etc/init.d/statsd'],
-    refreshonly => true,
   }
 
 }
