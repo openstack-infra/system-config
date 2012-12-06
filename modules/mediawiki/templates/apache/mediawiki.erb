@@ -96,6 +96,7 @@
 
         Alias /w <%= scope.lookupvar('mediawiki::mediawiki_location') %>
         Alias /wiki <%= scope.lookupvar('mediawiki::mediawiki_location') %>/index.php
+        Alias /images <%= scope.lookupvar('mediawiki::mediawiki_images_location') %>
 
         ErrorLog /var/log/apache2/error.log
 
