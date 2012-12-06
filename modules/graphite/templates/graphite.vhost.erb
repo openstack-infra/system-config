@@ -25,7 +25,7 @@
         WSGIDaemonProcess graphite processes=5 threads=5 display-name='%{GROUP}' inactivity-timeout=120
         WSGIProcessGroup graphite
         WSGIApplicationGroup %{GLOBAL}
-        SetEnv GRAPHITE_STORAGE_DIR /var/lib/graphite
+        SetEnv GRAPHITE_STORAGE_DIR /var/lib/graphite/storage
         WSGIImportScript /etc/graphite/graphite.wsgi process-group=graphite application-group=%{GLOBAL}
 
         # XXX You will need to create this file! There is a graphite.wsgi.example
