@@ -4,12 +4,13 @@ class mediawiki(
   $role = '',
   $site_hostname = '',
   $mediawiki_location = '',
+  $mediawiki_images_location = '',
   $ssl_cert_file = "/etc/ssl/certs/${::fqdn}.pem",
   $ssl_key_file = "/etc/ssl/private/${::fqdn}.key",
   $ssl_chain_file = '',
-  $ssl_cert_file_contents = '',  # If left empty puppet will not create file.
-  $ssl_key_file_contents = '',   # If left empty puppet will not create file.
-  $ssl_chain_file_contents = '', # If left empty puppet will not create file.
+  $ssl_cert_file_contents = '', # If left empty puppet will not create file.
+  $ssl_key_file_contents = '',  # If left empty puppet will not create file.
+  $ssl_chain_file_contents = '' # If left empty puppet will not create file.
 ) {
 
   if ($role == 'app' or $role == 'all') {

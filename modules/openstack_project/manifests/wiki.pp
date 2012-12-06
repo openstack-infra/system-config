@@ -5,7 +5,7 @@ class openstack_project::wiki (
   $sysadmins = [],
   $ssl_cert_file_contents = '',
   $ssl_key_file_contents = '',
-  $ssl_chain_file_contents = '',
+  $ssl_chain_file_contents = ''
 ) {
 
   include openssl
@@ -21,15 +21,16 @@ class openstack_project::wiki (
   )
 
   class { 'mediawiki':
-    role                    => 'all',
-    mediawiki_location      => '/srv/mediawiki/w',
-    site_hostname           => $::fqdn,
-    ssl_cert_file           => "/etc/ssl/certs/${::fqdn}.pem",
-    ssl_key_file            => "/etc/ssl/private/${::fqdn}.key",
-    ssl_chain_file          => '/etc/ssl/certs/intermediate.pem',
-    ssl_cert_file_contents  => $ssl_cert_file_contents,
-    ssl_key_file_contents   => $ssl_key_file_contents,
-    ssl_chain_file_contents => $ssl_chain_file_contents,
+    role                      => 'all',
+    mediawiki_location        => '/srv/mediawiki/w',
+    mediawiki_images_location => '/srv/mediawiki/images',
+    site_hostname             => $::fqdn,
+    ssl_cert_file             => "/etc/ssl/certs/${::fqdn}.pem",
+    ssl_key_file              => "/etc/ssl/private/${::fqdn}.key",
+    ssl_chain_file            => '/etc/ssl/certs/intermediate.pem',
+    ssl_cert_file_contents    => $ssl_cert_file_contents,
+    ssl_key_file_contents     => $ssl_key_file_contents,
+    ssl_chain_file_contents   => $ssl_chain_file_contents,
   }
   class { 'memcached':
     max_memory => 2048,
