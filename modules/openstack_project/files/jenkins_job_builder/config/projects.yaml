@@ -608,6 +608,7 @@
     name: moniker
     github-org: stackforge
     node: precise
+    tarball-publisher-site: nova.openstack.org
     rtfd-id: 5190
 
     jobs:
@@ -622,6 +623,7 @@
     name: python-monikerclient
     github-org: stackforge
     node: precise
+    tarball-publisher-site: nova.openstack.org
     rtfd-id: 5366
 
     jobs:
