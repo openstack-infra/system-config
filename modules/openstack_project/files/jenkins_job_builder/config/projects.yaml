@@ -614,6 +614,8 @@
       - python-jobs
       - hook-{name}-rtfd
       - gate-{name}-pyflakes
+      - '{name}-pypi-sdist'
+      - '{name}-pypi-upload'
 
 
 - project:
@@ -626,6 +628,8 @@
       - python-jobs
       - hook-{name}-rtfd
       - gate-{name}-pyflakes
+      - '{name}-pypi-sdist'
+      - '{name}-pypi-upload'
 
 
 - project:

@@ -791,6 +791,8 @@ projects:
         - gate-moniker-python27
     post:
       - hook-moniker-rtfd
+    publish:
+      - moniker-pypi-sdist
 
   - name: stackforge/python-monikerclient
     check:
@@ -807,6 +809,8 @@ projects:
         - gate-python-monikerclient-python27
     post:
       - hook-python-monikerclient-rtfd
+    publish:
+      - python-monikerclient-pypi-sdist
 
   - name: stackforge/bufunfa
     check:
