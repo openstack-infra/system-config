@@ -670,6 +670,12 @@ projects:
       - gate-python-heatclient-pep8
       - gate-python-heatclient-python26
       - gate-python-heatclient-python27
+    post:
+      - python-heatclient-sdist-tarball
+      - python-heatclient-coverage
+    publish:
+      - python-heatclient-pypi-sdist
+      - python-heatclient-docs
 
   - name: stackforge/reddwarf
     check:
