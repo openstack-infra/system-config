@@ -235,35 +235,17 @@ we're not happy with people for submitting the patch in the first place:
     set name="I would prefer that you didn't merge this"
     where category_id='CRVW' and value=-1;
 
-OpenStack currently uses a hybrid approach for CLA enforcement.  We
-use Gerrit's built in CLA system to ensure that contributors have
-signed the CLA, but contributors don't actually use Gerrit to sign it.
-Instead, developers use an external service (Echosign) to agree to the
-CLA, and then request membership in a Launchpad group called
-"openstack-cla".  The moderators of that group (core members of any
-OpenStack project) approve membership requests after verifying that
-new contributors have signed the CLA at Echosign.  The openstack-cla
-group is kept synchronized with Gerrit.  Gerrit is then configured
-with a "dummy" CLA (which users are not expected to see), and the
-administrator indicates to Gerrit that the entire openstack-cla group
-has agreed to the CLA.  This lets Gerrit enforce that the CLA has been
-signed while the actual facility to sign it in Gerrit is disabled via
-a source patch.
-
-This configuration is not recommended for new projects and is merely
-an artifact of legal requirements placed on the OpenStack project.
-Here are the SQL commands to set it up:
+OpenStack currently uses Gerrit's built in CLA system. This
+configuration is not recommended for new projects and is merely an
+artifact of legal requirements placed on the OpenStack project. Here are
+the SQL commands to set it up:
 
 .. code-block:: mysql
 
-  insert into contributor_agreement_id values (NULL);
-  insert into contributor_agreements values ('Y', 'N', 'N', 'CLA (Echosign)',
-  'OpenStack CLA via Echosign', 'static/echosign-cla.html', 1);
-
-  insert into account_group_agreements values (
-  now(), 'V', 1, now(), NULL,
-  (select group_id from account_group_names where name='openstack-cla'),
-  1);
+  insert into contributor_agreements values (
+  'Y', 'Y', 'Y', 'ICLA',
+  'OpenStack Individual Contributor License Agreement',
+  'static/cla.html', 2);
 
 
 Install Apache
@@ -462,6 +444,17 @@ onto the gerrit servers.  This script follows two rules:
 If your review gets touched by either of these rules it is possible to
 unabandon a review on the gerrit web interface.
 
+Launchpad Integration
+=====================
+
+Keys
+----
+
+The key for the launchpad account is in ~/.ssh/launchpad_rsa. Connecting
+to Launchpad requires oauth authentication - so open the URL in a
+browser and log in to launchpad as the hudson-openstack user. Subsequent
+runs will use the cached credentials.
+
 Gerrit IRC Bot
 ==============
 
@@ -617,9 +610,7 @@ use this method whenever possible.
 Puppet and its related scripts are able to create the new project in
 Gerrit, create the new project on Github, create a local git replica on
 the Gerrit host, configure the project Access Controls, and create new
-groups in Gerrit that are mentioned in the Access Controls. The only
-potential piece missing from this process is the management of group
-membership, which is currently performed through launchpad. You might
+groups in Gerrit that are mentioned in the Access Controls. You might
 also want to configure Zuul and Jenkins to run tests on the new project.
 The details for that process are in the next section.
 
