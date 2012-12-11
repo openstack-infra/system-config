@@ -231,6 +231,7 @@
               copy-after-failure: true
       - console-log-periodic
       - trigger-parameterized-builds:
+          - condition: SUCCESS
           - project: devstack-update-complete
             when: complete
             predefined-parameters:
