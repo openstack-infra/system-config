@@ -161,8 +161,6 @@ Launchpad Teams
 
 Each OpenStack project should have the following teams on Launchpad:
 
- * foo -- contributors to project 'foo'
- * foo-core -- core developers
  * foo-bugs -- people interested in receieving bug reports
  * foo-drivers -- people who may approve and target blueprints
 

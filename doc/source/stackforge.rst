@@ -26,15 +26,18 @@ What StackForge is not:
 Add a Project to StackForge
 ***************************
 
-Create Core Group in Launchpad
+Request a Core Group in Gerrit
 ==============================
 
-StackForge uses Launchpad for group management. The first step in
-creating a StackForge project is to create a team on Launchpad called
+StackForge uses Gerrit for group management. The first step in
+creating a StackForge project is to request a group in Gerrit called
 ``your-project-name-core``. Members of this team will have permissions
-to approve code changes to your project.
+to approve code changes to your project, and to add other Gerrit users
+to the group.
 
-You can create launchpad teams at https://launchpad.net/people/+newteam.
+You can request Gerrit groups by opening a bug at
+https://bugs.launchpad.net/openstack-ci/+filebug (make sure to mention
+the Gerrit name or E-mail address of at least one initial member).
 
 Create a new StackForge Project with Puppet
 ===========================================
