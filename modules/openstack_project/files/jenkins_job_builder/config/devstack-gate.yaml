@@ -230,11 +230,6 @@
               keep-hierarchy: true
               copy-after-failure: true
       - console-log-periodic
-      - trigger-parameterized-builds:
-          - project: devstack-update-complete
-            when: complete
-            predefined-parameters:
-              DEVSTACK_NODE_NAME=${NODE_NAME}
       - email:
           recipients: david.kranz@qrclab.com sdague@linux.vnet.ibm.com
 
