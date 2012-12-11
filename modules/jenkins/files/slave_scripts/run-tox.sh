@@ -25,6 +25,7 @@ venv=py$version
 export NOSE_WITH_XUNIT=1
 export NOSE_WITH_HTML_OUTPUT=1
 export NOSE_HTML_OUT_FILE='nose_results.html'
+TMPDIR=`/bin/mktemp`
 
 /usr/local/jenkins/slave_scripts/jenkins-oom-grep.sh pre
 
@@ -82,4 +83,5 @@ else
     echo
 fi
 
+trap "rm -rf $TMPDIR" EXIT
 exit $result
