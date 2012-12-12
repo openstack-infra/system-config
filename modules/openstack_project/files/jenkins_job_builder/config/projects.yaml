@@ -163,9 +163,12 @@
     name: heat
     github-org: openstack
     node: oneiric
+    tarball-publisher-site: nova.openstack.org
+    doc-publisher-site: docs.openstack.org
 
     jobs:
       - python-jobs
+      - openstack-publish-jobs
 
 
 - project:
