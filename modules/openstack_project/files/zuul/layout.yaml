@@ -720,6 +720,12 @@ projects:
         - gate-heat-pep8
         - gate-heat-python26
         - gate-heat-python27
+    post:
+      - heat-tarball
+      - heat-coverage
+      - heat-docs
+    publish:
+      - heat-docs
 
   - name: openstack/python-heatclient
     check:
