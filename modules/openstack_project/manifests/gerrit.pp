@@ -101,12 +101,12 @@ class openstack_project::gerrit (
       },
       {
         name  => 'launchpad',
-        match => '([Bb]ug|[Ll][Pp])[\\s#:]*(\\d+)',
+        match => '(\\b[Bb]ug|[Ll][Pp]\\b)[ \\t#:]*(\\d+)',
         link  => 'https://code.launchpad.net/bugs/$2',
       },
       {
         name  => 'blueprint',
-        match => '([Bb]lue[Pp]rint|[Bb][Pp])[\\s#:]*([A-Za-z0-9\\-]+)',
+        match => '(\\b[Bb]lue[Pp]rint|[Bb][Pp]\\b)[ \\t#:]*([A-Za-z0-9\\-]+)',
         link  => 'https://blueprints.launchpad.net/openstack/?searchtext=$2',
       },
     ],
