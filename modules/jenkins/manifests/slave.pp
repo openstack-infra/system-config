@@ -45,6 +45,7 @@ class jenkins::slave(
     'pandoc', #for docs, markdown->docbook, bug 924507
     'pyflakes',
     'python-libvirt',
+    'python-subunit', # for subunit2html.py
     'python-zmq', # zeromq unittests (not pip installable)
     'python3-all-dev',
     'rubygems',
