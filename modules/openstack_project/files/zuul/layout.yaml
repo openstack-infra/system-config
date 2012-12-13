@@ -66,6 +66,8 @@ jobs:
     voting: false
   - name: dev-python-heatclient-coverage
     voting: false
+  - name: gate-healthnmon-python27
+    voting: false
   - name: jenkins-job-builder-compare-xml
     voting: false
     failure-message: XML output has changed.
