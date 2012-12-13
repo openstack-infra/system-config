@@ -30,6 +30,7 @@
           export DEVSTACK_GATE_CINDER=0
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
+      - link-logs
 
     publishers:
       - scp:
@@ -79,6 +80,7 @@
           export DEVSTACK_GATE_CINDER=1
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
+      - link-logs
 
     publishers:
       - scp:
@@ -128,6 +130,7 @@
           export DEVSTACK_GATE_QUANTUM=1
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
+      - link-logs
 
     publishers:
       - scp:
@@ -173,6 +176,7 @@
           export ZUUL_BRANCH=master
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
+      - link-logs
 
     publishers:
       - scp:
@@ -220,6 +224,7 @@
           export ZUUL_BRANCH=master
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
+      - link-logs
 
     publishers:
       - scp:
@@ -267,6 +272,7 @@
           export ZUUL_BRANCH=stable/diablo
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
+      - link-logs
 
     publishers:
       - scp:
@@ -313,6 +319,7 @@
           export ZUUL_BRANCH=stable/essex
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
+      - link-logs
 
     publishers:
       - scp:
@@ -359,6 +366,7 @@
           export ZUUL_BRANCH=stable/folsom
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
+      - link-logs
 
     publishers:
       - scp:
@@ -405,6 +413,7 @@
           export ZUUL_BRANCH=stable/folsom
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
+      - link-logs
 
     publishers:
       - scp:
@@ -453,6 +462,7 @@
           export ZUUL_BRANCH=master
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
+      - link-logs
 
     publishers:
       - scp:
@@ -505,6 +515,7 @@
           export DEVSTACK_GATE_CINDER=1
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
+      - link-logs
 
     publishers:
       - scp:
