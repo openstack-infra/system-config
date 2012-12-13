@@ -121,6 +121,19 @@
               cd ..
           fi
 
+- builder:
+    name: link-logs
+    builders:
+      - shell: |
+          #!/bin/sh
+          if test "$ZUUL_CHANGE" ; then
+              echo "Detailed logs: http://logs.openstack.org/$ZUUL_CHANGE/$ZUUL_PATCHSET/$ZUUL_PIPELINE/$JOB_NAME/$BUILD_NUMBER/"
+          elif test "$ZUUL_SHORT_NEWREV" ; then
+              echo "Detailed logs: http://logs.openstack.org/$ZUUL_SHORT_NEWREV/$ZUUL_PIPELINE/$JOB_NAME/$BUILD_NUMBER/"
+          else
+              echo "Detailed logs: http://logs.openstack.org/periodic/$JOB_NAME/$BUILD_NUMBER/"
+          fi
+
 
 # ======================================================================
 
