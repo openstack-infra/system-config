@@ -39,7 +39,7 @@ pipelines:
     manager: IndependentPipelineManager
     trigger:
       - event: ref-updated
-        ref: ^refs/tags/.*$
+        ref: ^refs/tags/.*(?!-(alpha|beta|rc).*)$
 
   - name: silent
     manager: IndependentPipelineManager
