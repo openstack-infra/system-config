@@ -72,7 +72,7 @@ jobs:
     voting: false
     failure-message: XML output has changed.
     success-message: XML output is unchanged.
-  - name: openstack-infra-config-compare-xml
+  - name: config-compare-xml
     voting: false
     failure-message: Jenkins XML output has changed.
     success-message: Jenkins XML output is unchanged.
@@ -211,14 +211,14 @@ projects:
 
   - name: openstack-infra/config
     check:
-      - gate-openstack-infra-config-merge:
-        - gate-openstack-infra-config-syntax
-        - gate-openstack-infra-config-lint
-        - openstack-infra-config-compare-xml
+      - gate-config-merge:
+        - gate-config-syntax
+        - gate-config-lint
+        - config-compare-xml
     gate:
-      - gate-openstack-infra-config-merge:
-        - gate-openstack-infra-config-syntax
-        - gate-openstack-infra-config-lint
+      - gate-config-merge:
+        - gate-config-syntax
+        - gate-config-lint
     post:
       - ci-docs
 

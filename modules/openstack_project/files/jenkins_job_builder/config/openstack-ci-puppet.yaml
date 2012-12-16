@@ -1,5 +1,5 @@
 - job:
-    name: gate-openstack-infra-config-syntax
+    name: gate-config-syntax
     node: precise
 
     triggers:
@@ -15,7 +15,7 @@
 
 
 - job:
-    name: gate-openstack-infra-config-lint
+    name: gate-config-lint
     node: precise
 
     triggers:
@@ -30,7 +30,7 @@
 
 
 - job:
-    name: openstack-infra-config-compare-xml
+    name: config-compare-xml
     node: precise
 
     triggers:
