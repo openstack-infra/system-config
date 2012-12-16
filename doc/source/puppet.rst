@@ -20,12 +20,12 @@ ship the data to the clients.  To install this:
   sudo apt-get install puppet puppetmaster-passenger
 
 Files for puppet master are stored in a git repo clone at
-``/opt/openstack-infra/config``.  We have a ``root`` cron job that
-automatically populates these from our puppet git repository as follows:
+``/opt/config``.  We have a ``root`` cron job that automatically
+populates these from our puppet git repository as follows:
 
 .. code-block:: bash
 
-  \*/15 * * * * sleep $((RANDOM\%600)) && cd /opt/openstack-infra/config && /usr/bin/git pull -q
+  \*/15 * * * * sleep $((RANDOM\%600)) && cd /opt/config && /usr/bin/git pull -q
 
 The ``/etc/puppet/puppet.conf`` file then needs updating to point to the
 manifest and modules as follows:
@@ -37,8 +37,8 @@ manifest and modules as follows:
    # and can safely be removed if webrick is used.
    ssl_client_header = SSL_CLIENT_S_DN
    ssl_client_verify_header = SSL_CLIENT_VERIFY
-   manifestdir=/opt/openstack-infra/config/manifests
-   modulepath=/opt/openstack-infra/config/modules
+   manifestdir=/opt/config/manifests
+   modulepath=/opt/config/modules
    manifest=$manifestdir/site.pp
 
 Hiera
