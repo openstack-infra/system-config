@@ -38,12 +38,19 @@ pipelines:
       - event: ref-updated
         ref: ^(?!(devnull|refs/.*)).*$
 
-  - name: publish
-    description: When a commit is tagged, this pipeline runs jobs that operate on tags, such as uploading releases.
+  - name: pre-release
+    description: This pipeline runs jobs on projects in response to pre-release tags.
     manager: IndependentPipelineManager
     trigger:
       - event: ref-updated
-        ref: ^refs/tags/.*$
+        ref: ^refs/tags/([0-9]+\.)+[0-9]*(alpha|beta|candidate|rc|a|b|c|r)[0-9]*$
+
+  - name: publish
+    description: When a commit is tagged with a release tag, this pipeline runs jobs that operate on tags, such as uploading releases.
+    manager: IndependentPipelineManager
+    trigger:
+      - event: ref-updated
+        ref: ^refs/tags/([0-9]+\.)+[0-9]+$
 
   - name: silent
     description: This pipeline is used for silently testing new jobs.
@@ -108,9 +115,12 @@ projects:
       - gate-zuul-python26
       - gate-zuul-python27
     post:
-      - zuul-sdist-tarball
+      - zuul-branch-tarball
       - zuul-coverage
       - zuul-docs
+    pre-release:
+      - zuul-docs
+      - zuul-tarball-upload
     publish:
       - zuul-docs
       - zuul-pypi-sdist
@@ -121,7 +131,9 @@ projects:
     gate:
       - gate-noop
     post:
-      - nose-html-output-sdist-tarball
+      - nose-html-output-branch-tarball
+    pre-release:
+      - nose-html-output-tarball-upload
     publish:
       - nose-html-output-pypi-sdist
 
@@ -141,7 +153,9 @@ projects:
       - gate-gerritbot-pep8
       - gate-gerritbot-pyflakes
     post:
-      - gerritbot-sdist-tarball
+      - gerritbot-branch-tarball
+    pre-release:
+      - gerritbot-tarball-upload
     publish:
       - gerritbot-pypi-sdist
 
@@ -152,6 +166,8 @@ projects:
     gate:
       - gate-gerritlib-pep8
       - gate-gerritlib-pyflakes
+    pre-release:
+      - gerritlib-tarball-upload
     publish:
       - gerritlib-pypi-sdist
 
@@ -162,6 +178,8 @@ projects:
     gate:
       - gate-jeepyb-pep8
       - gate-jeepyb-pyflakes
+    pre-release:
+      - jeepyb-tarball-upload
     publish:
       - jeepyb-pypi-sdist
 
@@ -176,8 +194,10 @@ projects:
       - gate-jenkins-job-builder-pep8
       - gate-jenkins-job-builder-pyflakes
     post:
-      - jenkins-job-builder-sdist-tarball
+      - jenkins-job-builder-branch-tarball
       - jenkins-job-builder-docs
+    pre-release:
+      - jenkins-job-builder-tarball-upload
     publish:
       - jenkins-job-builder-pypi-sdist
 
@@ -421,8 +441,10 @@ projects:
       - gate-python-ceilometerclient-python26
       - gate-python-ceilometerclient-python27
     post:
-      - python-ceilometerclient-sdist-tarball
+      - python-ceilometerclient-branch-tarball
       - python-ceilometerclient-coverage
+    pre-release:
+      - python-ceilometerclient-tarball-upload
     publish:
       - python-ceilometerclient-pypi-sdist
       - python-ceilometerclient-docs
@@ -445,8 +467,10 @@ projects:
       - gate-tempest-devstack-vm-cinder
       - gate-devstack-vm-quantum
     post:
-      - python-cinderclient-sdist-tarball
+      - python-cinderclient-branch-tarball
       - python-cinderclient-coverage
+    pre-release:
+      - python-cinderclient-tarball-upload
     publish:
       - python-cinderclient-pypi-sdist
       - python-cinderclient-docs
@@ -469,8 +493,10 @@ projects:
       - gate-tempest-devstack-vm-cinder
       - gate-devstack-vm-quantum
     post:
-      - python-glanceclient-sdist-tarball
+      - python-glanceclient-branch-tarball
       - python-glanceclient-coverage
+    pre-release:
+      - python-glanceclient-tarball-upload
     publish:
       - python-glanceclient-pypi-sdist
       - python-glanceclient-docs
@@ -493,8 +519,10 @@ projects:
       - gate-tempest-devstack-vm-cinder
       - gate-devstack-vm-quantum
     post:
-      - python-keystoneclient-sdist-tarball
+      - python-keystoneclient-branch-tarball
       - python-keystoneclient-coverage
+    pre-release:
+      - python-keystoneclient-tarball-upload
     publish:
       - python-keystoneclient-pypi-sdist
       - python-keystoneclient-docs
@@ -517,8 +545,10 @@ projects:
       - gate-tempest-devstack-vm-cinder
       - gate-devstack-vm-quantum
     post:
-      - python-novaclient-sdist-tarball
+      - python-novaclient-branch-tarball
       - python-novaclient-coverage
+    pre-release:
+      - python-novaclient-tarball-upload
     publish:
       - python-novaclient-pypi-sdist
       - python-novaclient-docs
@@ -535,8 +565,10 @@ projects:
       - gate-python-openstackclient-python26
       - gate-python-openstackclient-python27
     post:
-      - python-openstackclient-sdist-tarball
+      - python-openstackclient-branch-tarball
       - python-openstackclient-coverage
+    pre-release:
+      - python-openstackclient-tarball-upload
     publish:
       - python-openstackclient-pypi-sdist
       - python-openstackclient-docs
@@ -559,8 +591,10 @@ projects:
       - gate-tempest-devstack-vm-cinder
       - gate-devstack-vm-quantum
     post:
-      - python-quantumclient-sdist-tarball
+      - python-quantumclient-branch-tarball
       - python-quantumclient-coverage
+    pre-release:
+      - python-quantumclient-tarball-upload
     publish:
       - python-quantumclient-pypi-sdist
       - python-quantumclient-docs
@@ -577,8 +611,10 @@ projects:
       - gate-python-swiftclient-python26
       - gate-python-swiftclient-python27
     post:
-      - python-swiftclient-sdist-tarball
+      - python-swiftclient-branch-tarball
       - python-swiftclient-coverage
+    pre-release:
+      - python-swiftclient-tarball-upload
     publish:
       - python-swiftclient-pypi-sdist
       - python-swiftclient-docs
@@ -616,25 +652,6 @@ projects:
       - gate-devstack-vm-quantum
     silent:
       - gate-tempest-devstack-vm-postgres
-
-  - name: openstack-dev/pbr
-    check:
-      - gate-pbr-docs
-      - gate-pbr-pep8
-      - gate-pbr-python26
-      - gate-pbr-python27
-    gate:
-      - gate-pbr-docs
-      - gate-pbr-pep8
-      - gate-pbr-python26
-      - gate-pbr-python27
-    post:
-      - pbr-sdist-tarball
-      - pbr-coverage
-      - pbr-docs
-    publish:
-      - pbr-pypi-sdist
-      - pbr-docs
 
   - name: openstack/tempest
     check:
@@ -775,6 +792,8 @@ projects:
       - gate-moniker-python27
     post:
       - hook-moniker-rtfd
+    pre-release:
+      - moniker-tarball-upload
     publish:
       - moniker-pypi-sdist
 
@@ -791,6 +810,8 @@ projects:
       - gate-python-monikerclient-python27
     post:
       - hook-python-monikerclient-rtfd
+    pre-release:
+      - python-monikerclient-tarball-upload
     publish:
       - python-monikerclient-pypi-sdist
 
