@@ -1,5 +1,6 @@
 - defaults:
     name: global
+    zuul-url: http://zuul.openstack.org:8001/jenkins_endpoint
     description: |
       <p><b>This job is managed by puppet and will be overwritten.</b></p>
 
