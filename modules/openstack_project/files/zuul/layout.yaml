@@ -117,14 +117,6 @@ projects:
     publish:
       - nose-html-output-pypi-sdist
 
-  - name: openstack-infra/pypi-mirror
-    check:
-      - gate-pypi-mirror-merge:
-        - gate-pypi-mirror-pyflakes
-    gate:
-      - gate-pypi-mirror-merge:
-        - gate-pypi-mirror-pyflakes
-
   - name: openstack-infra/gerrit
     check:
       - gate-gerrit-merge:

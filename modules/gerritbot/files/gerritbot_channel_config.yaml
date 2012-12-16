@@ -8,7 +8,6 @@ openstack-infra:
       - openstack-infra/devstack-gate
       - openstack-infra/gerrit
       - openstack-infra/gerrit-trigger-plugin
-      - openstack-infra/gerrit-verification-status-plugin
       - openstack-infra/gerritbot
       - openstack-infra/gerritlib
       - openstack-infra/git-review
@@ -17,7 +16,6 @@ openstack-infra:
       - openstack-infra/lodgeit
       - openstack-infra/meetbot
       - openstack-infra/nose-html-output
-      - openstack-infra/pypi-mirror
       - openstack-infra/zuul
     branches:
       - master

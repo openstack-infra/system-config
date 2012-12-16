@@ -72,15 +72,6 @@
 
 
 - project:
-    name: gerrit-verification-status-plugin
-    github-org: openstack-infra
-    node: precise
-
-    jobs:
-      - gate-{name}-merge
-
-
-- project:
     name: gerrit
     github-org: openstack-infra
     node: precise
@@ -442,16 +433,6 @@
 
     jobs:
       - gate-{name}-merge
-
-
-- project:
-    name: pypi-mirror
-    github-org: openstack-infra
-    node: precise
-
-    jobs:
-      - gate-{name}-merge
-      - gate-{name}-pyflakes
 
 
 - project:
