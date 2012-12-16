@@ -9,6 +9,7 @@
 
   RewriteEngine on
   RewriteRule /zuul/status http://127.0.0.1:8001/status [P]
+  RewriteCond %{REQUEST_URI} !^/p/
   RewriteRule / http://127.0.0.1:8001/status [P]
 
   SetEnv GIT_PROJECT_ROOT /var/lib/zuul/git/

@@ -30,7 +30,8 @@ class openstack_project::zuul(
     gerrit_user          => $gerrit_user,
     zuul_ssh_private_key => $zuul_ssh_private_key,
     url_pattern          => $url_pattern,
-    push_change_refs     => true
+    push_change_refs     => false,
+    status_url           => "http://${::fqdn}/",
   }
 
   file { '/etc/zuul/layout.yaml':
