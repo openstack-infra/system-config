@@ -752,9 +752,9 @@ projects:
 
   - name: openstack/openstack-manuals
     check:
-      - gate-noop
+      - gate-openstack-cli-guide
     gate:
-      - gate-noop
+      - gate-openstack-cli-guide
     post:
       - openstack-admin-manual-compute
       - openstack-admin-manual-keystone-diablo

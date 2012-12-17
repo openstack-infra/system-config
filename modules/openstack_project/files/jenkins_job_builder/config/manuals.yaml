@@ -1,4 +1,31 @@
 - job:
+    name: gate-openstack-cli-guide
+    project-type: maven
+    node: precise
+
+    triggers:
+      - zuul
+
+    prebuilders:
+      - gerrit-git-prep
+
+    maven:
+      root-module:
+        group-id: org.openstack.docs
+        artifact-id: openstack-guide
+      root-pom: doc/src/docbkx/cli-guide/pom.xml
+      goals: 'clean generate-sources'
+
+    publishers:
+      - console-log
+      - scp:
+          site: 'static.openstack.org'
+          files:
+            - target: 'docs-draft/$JOB_NAME/$ZUUL_PIPELINE/$BUILD_NUMBER/cli/quick-start'
+              source: 'doc/src/docbkx/cli-guide/target/docbkx/webhelp/cli-guide/**'
+              copy-after-failure: true
+
+- job:
     name: openstack-cli-guide
     project-type: maven
     node: precise
