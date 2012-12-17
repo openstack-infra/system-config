@@ -81,6 +81,7 @@ jobs:
 
 projects:
   - name: openstack-infra/zuul
+    merge-mode: cherry-pick
     check:
       - gate-zuul-docs
       - gate-zuul-pep8
@@ -103,6 +104,7 @@ projects:
       - zuul-pypi-sdist
 
   - name: openstack-infra/nose-html-output
+    merge-mode: cherry-pick
     check:
       - gate-noop
     gate:
@@ -113,6 +115,7 @@ projects:
       - nose-html-output-pypi-sdist
 
   - name: openstack-infra/gerrit
+    merge-mode: cherry-pick
     check:
       - check-gerrit-unittests
     gate:
@@ -121,6 +124,7 @@ projects:
       - gerrit-package
 
   - name: openstack-infra/gerritbot
+    merge-mode: cherry-pick
     check:
       - gate-gerritbot-pep8
       - gate-gerritbot-pyflakes
@@ -133,6 +137,7 @@ projects:
       - gerritbot-pypi-sdist
 
   - name: openstack-infra/gerritlib
+    merge-mode: cherry-pick
     check:
       - gate-gerritlib-pep8
       - gate-gerritlib-pyflakes
@@ -143,6 +148,7 @@ projects:
       - gerritlib-pypi-sdist
 
   - name: openstack-infra/jeepyb
+    merge-mode: cherry-pick
     check:
       - gate-jeepyb-pep8
       - gate-jeepyb-pyflakes
@@ -153,6 +159,7 @@ projects:
       - jeepyb-pypi-sdist
 
   - name: openstack-infra/jenkins-job-builder
+    merge-mode: cherry-pick
     check:
       - gate-jenkins-job-builder-docs
       - gate-jenkins-job-builder-pep8
@@ -169,12 +176,14 @@ projects:
       - jenkins-job-builder-pypi-sdist
 
   - name: openstack-infra/lodgeit
+    merge-mode: cherry-pick
     check:
       - gate-noop
     gate:
       - gate-noop
 
   - name: openstack-infra/meetbot
+    merge-mode: cherry-pick
     check:
       - gate-noop
     gate:
@@ -193,18 +202,21 @@ projects:
       - ci-docs
 
   - name: openstack-infra/puppet-apparmor
+    merge-mode: cherry-pick
     check:
       - gate-noop
     gate:
       - gate-noop
 
   - name: openstack-infra/puppet-dashboard
+    merge-mode: cherry-pick
     check:
       - gate-noop
     gate:
       - gate-noop
 
   - name: openstack-infra/puppet-vcsrepo
+    merge-mode: cherry-pick
     check:
       - gate-noop
     gate:
@@ -562,6 +574,7 @@ projects:
       - gate-tempest-devstack-vm-postgres
 
   - name: openstack-infra/devstack-gate
+    merge-mode: cherry-pick
     check:
       - gate-tempest-devstack-vm
       - gate-tempest-devstack-vm-cinder
@@ -854,6 +867,7 @@ projects:
       - openstack-qa-docs
 
   - name: openstack-infra/git-review
+    merge-mode: cherry-pick
     check:
       - gate-git-review-pep8
     gate:
