@@ -1134,7 +1134,9 @@ To rename a project:
    project.
 
 Developers will either need to re-clone a new copy of the repository,
-or manually update their remotes.
+or manually update their remotes with something like::
+
+  git remote set-url origin https://github.com/$ORG/$PROJECT.git
 
 Deleting a User from Gerrit
 ***************************
