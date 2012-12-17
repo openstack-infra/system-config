@@ -152,12 +152,6 @@ projects:
     publish:
       - jeepyb-pypi-sdist
 
-  - name: openstack-infra/gerrit-verification-status-plugin
-    check:
-      - gate-gerrit-verification-status-plugin-merge
-    gate:
-      - gate-gerrit-verification-status-plugin-merge
-
   - name: openstack-infra/jenkins-job-builder
     check:
       - gate-jenkins-job-builder-docs
