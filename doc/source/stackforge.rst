@@ -85,80 +85,58 @@ these additional tools.
 Add Jenkins Jobs to StackForge Projects
 =======================================
 
-In the same openstack-infra/config repository (and in the same change if
-you like) we need to edit two additional files to setup Jenkins jobs
+In the same openstack-infra/config repository (and in the same change
+if you like) we need to edit additional files to setup Jenkins jobs
 and Zuul for the new StackForge project.
 
-Edit
+If you are interested in using the standard python Jenkins jobs (docs,
+pep8, python 2.6 and 2.7 unittests, and coverage), edit
 ``openstack-infra/config/modules/openstack_project/files/jenkins_job_builder/config/projects.yaml``
-and add a new section for your project at the end of the file. It should
-look something like::
+and add a new section for your project at the end of the file. It
+should look something like::
 
   - project:
       name: project-name
       github-org: stackforge
-      node: precise
-
-      jobs:
-        - gate-{name}-merge
-
-This will add a single Jenkins job for your project called
-gate-project-name-merge. This job will return success if the submitted
-change can be merged into the current state of your project's master
-branch and failure otherwise.
-
-The above config is the bare minimum Jenkins job config needed. If you
-are interested in using the standard python Jenkins jobs (docs, pep8,
-python 2.6 and 2.7 unittests, and coverage) your entry in
-``projects.yaml`` should look like this instead::
-
-  - project:
-      name: project-name
-      github-org: stackforge
-      # Requires additional config please discuss docs with infra team.
-      doc-publisher-site: some.ftp.host
       node: precise
 
       jobs:
         - python-jobs
 
-Now that we have a Jenkins job we need to tell Zuul to run that job when
+If you aren't ready to run any gate tests yet, you don't need to edit
+``projects.yaml``.
+
+Now that we have Jenkins jobs we need to tell Zuul to run them when
 appropriate. Edit
 ``openstack-infra/config/modules/openstack_project/files/zuul/layout.yaml``
-and add a new section for your project at the end of the file. It should
-look something like::
+and add a new section for your project at the end of the file. It
+should look something like::
 
   - name: stackforge/project-name
     check:
-      - gate-project-name-merge
+      - gate-project-name-docs
+      - gate-project-name-pep8
+      - gate-project-name-python26
+      - gate-project-name-python27
     gate:
-      - gate-project-name-merge
-
-This configures zuul to check if change patchsets can merge on every
-submission to Gerrit and will check that the change can merge before
-attempting to merge approved changes.
-
-If you configured the ``python-jobs`` your ``zuul/layout.yaml`` should
-look like this instead::
-
-  - name: stackforge/project-name
-    check:
-      - gate-project-name-merge
-        - gate-project-name-docs
-        - gate-project-name-pep8
-        - gate-project-name-python26
-        - gate-project-name-python27
-    gate:
-      - gate-project-name-merge
-        - gate-project-name-docs
-        - gate-project-name-pep8
-        - gate-project-name-python26
-        - gate-project-name-python27
+      - gate-project-name-docs
+      - gate-project-name-pep8
+      - gate-project-name-python26
+      - gate-project-name-python27
     post:
       - project-name-coverage
       - project-name-docs
     publish:
       - project-name-docs
+
+If you aren't ready to run any gate tests yet and did not configure
+python-jobs in project.yaml, it should look like this instead::
+
+  - name: stackforge/project-name
+    check:
+      - gate-noop
+    gate:
+      - gate-noop
 
 That concludes the bare minimum openstack-infra/config changes necessary to
 add a project to StackForge. You can commit these changes and submit
