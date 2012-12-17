@@ -77,6 +77,8 @@ jobs:
     branch: ^master$
   - name: openstack-ha-guide
     branch: ^master$
+  - name: gate-openstack-cli-guide
+    success-pattern: http://docs-draft.openstack.org/{job.name}/{pipeline.name}/{build.number}/cli/quick-start
 
 
 projects:
@@ -759,9 +761,9 @@ projects:
 
   - name: openstack/openstack-manuals
     check:
-      - gate-noop
+      - gate-openstack-cli-guide
     gate:
-      - gate-noop
+      - gate-openstack-cli-guide
     post:
       - openstack-admin-manual-compute
       - openstack-admin-manual-keystone-diablo
