@@ -174,20 +174,6 @@
 
     node: '{node}'
 
-- job-template:
-    name: 'gate-{name}-merge'
-
-    triggers:
-      - zuul
-
-    builders:
-      - gerrit-git-prep
-
-    publishers:
-      - console-log
-
-    node: '{node}'
-
 
 - job-template:
     name: 'gate-{name}-docs'
@@ -224,7 +210,6 @@
     name: python-jobs
     jobs:
       - '{name}-coverage'
-      - 'gate-{name}-merge'
       - 'gate-{name}-pep8'
       - 'gate-{name}-python26'
       - 'gate-{name}-python27'

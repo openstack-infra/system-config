@@ -1,13 +1,4 @@
 - project:
-    name: api-site
-    github-org: openstack
-    node: precise
-    doc-publisher-site: api.openstack.org
-
-    jobs:
-      - gate-{name}-merge
-
-- project:
     name: ceilometer
     github-org: openstack
     node: oneiric
@@ -44,43 +35,6 @@
 
 
 - project:
-    name: devstack-gate
-    github-org: openstack-infra
-    node: precise
-
-    jobs:
-      - gate-{name}-merge
-
-
-- project:
-    name: devstack
-    github-org: openstack-dev
-    node: precise
-
-    jobs:
-      - gate-{name}-merge
-
-
-- project:
-    name: diskimage-builder
-    github-org: stackforge
-    node: precise
-    tarball-publisher-site: 173.203.107.207
-
-    jobs:
-      - gate-{name}-merge
-
-
-- project:
-    name: gerrit
-    github-org: openstack-infra
-    node: precise
-
-    jobs:
-      - gate-{name}-merge
-
-
-- project:
     name: gerritbot
     github-org: openstack-infra
     node: precise
@@ -88,7 +42,6 @@
     tarball-publisher-site: 173.203.107.207
 
     jobs:
-      - gate-{name}-merge
       - gate-{name}-pep8
       - gate-{name}-pyflakes
       - '{name}-sdist-tarball'
@@ -104,7 +57,6 @@
     tarball-publisher-site: nova.openstack.org
 
     jobs:
-      - gate-{name}-merge
       - gate-{name}-pep8
       - gate-{name}-pyflakes
       - '{name}-pypi-sdist'
@@ -119,7 +71,6 @@
     tarball-publisher-site: nova.openstack.org
 
     jobs:
-      - gate-{name}-merge
       - gate-{name}-pep8
       - gate-{name}-pyflakes
       - '{name}-pypi-sdist'
@@ -131,7 +82,6 @@
     github-org: openstack-infra
     node: precise
     jobs:
-      - gate-{name}-merge
       - gate-{name}-pep8
 
 
@@ -217,7 +167,6 @@
     tarball-publisher-site: nova.openstack.org
 
     jobs:
-      - gate-{name}-merge
       - gate-{name}-pep8
       - gate-{name}-pyflakes
       - '{name}-sdist-tarball'
@@ -239,33 +188,6 @@
       - python-folsom-bitrot-jobs
       - openstack-publish-jobs
       - translation-jobs
-
-
-- project:
-    name: lodgeit
-    github-org: openstack-infra
-    node: precise
-
-    jobs:
-      - gate-{name}-merge
-
-
-- project:
-    name: meetbot
-    github-org: openstack-infra
-    node: precise
-
-    jobs:
-      - gate-{name}-merge
-
-
-- project:
-    name: MRaaS
-    github-org: stackforge
-    node: precise
-
-    jobs:
-      - gate-{name}-merge
 
 
 - project:
@@ -299,7 +221,6 @@
     tarball-publisher-site: 173.203.107.207
 
     jobs:
-      - gate-{name}-merge
       - '{name}-sdist-tarball'
       - '{name}-pypi-sdist'
       - '{name}-pypi-upload'
@@ -320,15 +241,6 @@
       - openstack-publish-jobs
       - gate-{name}-pylint
       - translation-jobs
-
-
-- project:
-    name: config
-    github-org: openstack-infra
-    node: precise
-
-    jobs:
-      - gate-{name}-merge
 
 
 - project:
@@ -357,46 +269,6 @@
 
 
 - project:
-    name: openstack-nose
-    github-org: openstack-dev
-    node: precise
-    tarball-publisher-site: nova.openstack.org
-    doc-publisher-site: docs.openstack.org
-
-    jobs:
-      - gate-{name}-merge
-
-
-- project:
-    name: openstack-chef
-    github-org: openstack
-    node: precise
-    tarball-publisher-site: nova.openstack.org
-    doc-publisher-site: docs.openstack.org
-
-    jobs:
-      - gate-{name}-merge
-
-
-- project:
-    name: openstack-qa
-    github-org: openstack-dev
-    node: precise
-
-    jobs:
-      - gate-{name}-merge
-
-
-- project:
-    name: openstack-planet
-    github-org: openstack
-    node: precise
-
-    jobs:
-      - gate-{name}-merge
-
-
-- project:
     name: pbr
     github-org: openstack-dev
     node: precise
@@ -406,33 +278,6 @@
     jobs:
       - python-jobs
       - pypi-jobs
-
-
-- project:
-    name: puppet-apparmor
-    github-org: openstack-infra
-    node: precise
-
-    jobs:
-      - gate-{name}-merge
-
-
-- project:
-    name: puppet-dashboard
-    github-org: openstack-infra
-    node: precise
-
-    jobs:
-      - gate-{name}-merge
-
-
-- project:
-    name: puppet-vcsrepo
-    github-org: openstack-infra
-    node: precise
-
-    jobs:
-      - gate-{name}-merge
 
 
 - project:
@@ -553,15 +398,6 @@
 
 
 - project:
-    name: reddwarf-integration
-    github-org: stackforge
-    node: precise
-
-    jobs:
-      - gate-{name}-merge
-
-
-- project:
     name: python-reddwarfclient
     github-org: stackforge
     node: precise
@@ -639,24 +475,6 @@
 
 
 - project:
-    name: requirements
-    github-org: openstack
-    node: precise
-
-    jobs:
-      - gate-{name}-merge
-
-
-- project:
-    name: sandbox
-    github-org: openstack-dev
-    node: precise
-
-    jobs:
-      - gate-{name}-merge
-
-
-- project:
     name: swift
     github-org: openstack
     node: precise
@@ -677,26 +495,7 @@
     node: precise
 
     jobs:
-      - gate-{name}-merge
       - gate-{name}-pep8
-
-
-- project:
-    name: volume-api
-    github-org: openstack
-    node: precise
-
-    jobs:
-      - gate-{name}-merge
-
-
-- project:
-    name: openstack-manuals
-    github-org: openstack
-    node: precise
-
-    jobs:
-      - gate-{name}-merge
 
 
 - project:
@@ -711,14 +510,6 @@
       - '{name}-sdist-tarball'
       - '{name}-pypi-sdist'
       - '{name}-pypi-upload'
-
-
-- project:
-    name: openstack-qa
-    github-org: openstack-dev
-    node: precise
-    jobs:
-      - gate-{name}-merge
 
 
 - project:
