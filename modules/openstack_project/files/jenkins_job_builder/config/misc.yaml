@@ -1,0 +1,7 @@
+- job:
+    name: gate-noop
+
+    triggers:
+      - zuul
+
+    node: precise
