@@ -202,6 +202,7 @@ projects:
       - gate-meetbot-merge
 
   - name: openstack-infra/config
+    merge-mode: cherry-pick
     check:
       - gate-config-merge:
         - gate-config-syntax
