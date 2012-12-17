@@ -61,8 +61,26 @@ class openstack_project::static (
     ensure => directory,
   }
 
+  file { '/srv/static/logs/robots.txt':
+    ensure  => present,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0444',
+    source  => 'puppet:///modules/openstack_project/disallow_robots.txt',
+    require => File['/srv/static/logs'],
+  }
+
   file { '/srv/static/docs-draft':
     ensure => directory,
+  }
+
+  file { '/srv/static/docs-draft/robots.txt':
+    ensure  => present,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0444',
+    source  => 'puppet:///modules/openstack_project/disallow_robots.txt',
+    require => File['/srv/static/docs-draft'],
   }
 
   cron { 'gziplogs':
