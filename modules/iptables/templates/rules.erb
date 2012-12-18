@@ -4,7 +4,6 @@
 :OUTPUT ACCEPT [0:0]
 :openstack-INPUT - [0:0]
 -A INPUT -j openstack-INPUT
--A FORWARD -j openstack-INPUT
 -A openstack-INPUT -i lo -j ACCEPT
 -A openstack-INPUT -p icmp --icmp-type any -j ACCEPT
 #-A openstack-INPUT -p udp --dport 5353 -d 224.0.0.251 -j ACCEPT
