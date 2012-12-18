@@ -2,8 +2,9 @@
 
 # In case we start doing something more sophisticated with other refs
 # later (such as tags).
-BRANCH=$GERRIT_REFNAME
+BRANCH=$ZUUL_REF
 BRANCH_PATH=`echo $BRANCH | tr / -`
+META_URL="https://review.openstack.org/p"
 
 if [ $BRANCH == "milestone-proposed" ]
 then
@@ -19,7 +20,7 @@ PROJECT=$1
 
 find_next_version() {
     datestamp="${datestamp:-$(date +%Y%m%d)}"
-    git fetch origin +refs/meta/*:refs/remotes/meta/*
+    git fetch $META_URL/$ZUUL_PROJECT +refs/meta/*:refs/remotes/meta/*
     if [[ $BRANCH =~ ^stable/.*$ ]]
     then
         milestonever=""
