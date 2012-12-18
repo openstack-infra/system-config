@@ -39,8 +39,11 @@
         ServerName <%= scope.lookupvar("mediawiki::site_hostname") %>
 
         SSLEngine on
-        SSLCertificateFile /etc/ssl/certs/<%= fqdn %>.pem
-        SSLCertificateKeyFile /etc/ssl/private/<%= fqdn %>.key
+        SSLCertificateFile      <%= scope.lookupvar("mediawiki::ssl_cert_file") %>
+        SSLCertificateKeyFile   <%= scope.lookupvar("mediawiki::ssl_key_file") %>
+        <% if scope.lookupvar("mediawiki::ssl_chain_file") != "" %>
+          SSLCertificateChainFile <%= scope.lookupvar("mediawiki::ssl_chain_file") %>
+        <% end %>
 
         RedirectMatch ^/$ http://<%= scope.lookupvar("mediawiki::site_hostname") %>/wiki/
 
