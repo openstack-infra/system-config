@@ -20,17 +20,9 @@
             - keystone
             - horizon
             - quantum
-            - melange
             - cinder
             - ceilometer
-            - python-ceilometerclient
-            - python-cinderclient
-            - python-novaclient
-            - python-openstackclient
-            - python-glanceclient
-            - python-keystoneclient
-            - python-quantumclient
-            - python-swiftclient
+            - heat
       - choice:
           name: BRANCH
           description: The branch to update.
