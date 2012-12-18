@@ -569,6 +569,7 @@ projects:
       - gate-tempest-devstack-vm
       - gate-tempest-devstack-vm-cinder
     silent:
+      - gate-tempest-devstack-vm-quantum
       - gate-tempest-devstack-vm-postgres
 
   - name: openstack-dev/pbr
