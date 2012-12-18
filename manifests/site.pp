@@ -163,8 +163,11 @@ node 'etherpad-dev.openstack.org' {
 
 node 'wiki.openstack.org' {
   class { 'openstack_project::wiki':
-    mysql_root_password => hiera('wiki_db_password'),
-    sysadmins           => hiera('sysadmins'),
+    mysql_root_password     => hiera('wiki_db_password'),
+    sysadmins               => hiera('sysadmins'),
+    ssl_cert_file_contents  => hiera('wiki_ssl_cert_file_contents'),
+    ssl_key_file_contents   => hiera('wiki_ssl_key_file_contents'),
+    ssl_chain_file_contents => hiera('wiki_ssl_chain_file_contents'),
   }
 }
 
