@@ -4,7 +4,6 @@
 :OUTPUT ACCEPT [0:0]
 :openstack-INPUT - [0:0]
 -A INPUT -j openstack-INPUT
--A FORWARD -j openstack-INPUT
 -A openstack-INPUT -i lo -j ACCEPT
 -A openstack-INPUT -p icmpv6 -j ACCEPT
 -A openstack-INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
