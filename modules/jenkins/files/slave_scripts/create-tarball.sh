@@ -20,7 +20,6 @@ PROJECT=$1
 
 find_next_version() {
     datestamp="${datestamp:-$(date +%Y%m%d)}"
-    git fetch $META_URL/$ZUUL_PROJECT +refs/meta/*:refs/remotes/meta/*
     if [[ $BRANCH =~ ^stable/.*$ ]]
     then
         milestonever=""
@@ -44,6 +43,7 @@ find_next_version() {
 }
 
 
+git fetch $META_URL/$ZUUL_PROJECT +refs/meta/*:refs/remotes/meta/*
 rm -f dist/*.tar.gz
 if [ -f setup.py ] ; then
     tox -evenv python setup.py sdist
