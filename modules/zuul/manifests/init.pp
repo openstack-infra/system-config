@@ -18,25 +18,11 @@ class zuul (
 
   $packages = [
     'python-webob',
-    'python-daemon',
     'python-lockfile',
     'python-paste',
   ]
 
   package { $packages:
-    ensure => present,
-  }
-
-  user { 'zuul':
-    ensure     => present,
-    home       => '/home/zuul',
-    shell      => '/bin/bash',
-    gid        => 'zuul',
-    managehome => true,
-    require    => Group['zuul'],
-  }
-
-  group { 'zuul':
     ensure => present,
   }
 
@@ -52,6 +38,25 @@ class zuul (
     package { 'python-paramiko':
       ensure   => present,
     }
+  }
+
+  if ! defined(Package['python-daemon']) {
+    package { 'python-daemon':
+      ensure => present,
+    }
+  }
+
+  user { 'zuul':
+    ensure     => present,
+    home       => '/home/zuul',
+    shell      => '/bin/bash',
+    gid        => 'zuul',
+    managehome => true,
+    require    => Group['zuul'],
+  }
+
+  group { 'zuul':
+    ensure => present,
   }
 
   # Packages that need to be installed from pip
