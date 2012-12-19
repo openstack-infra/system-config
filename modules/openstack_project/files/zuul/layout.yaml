@@ -7,7 +7,7 @@ pipelines:
     trigger:
       - event: patchset-created
       - event: comment-added
-        comment_filter: (?i)^\s*recheck\.?\s*$
+        comment_filter: (?i)^\s*recheck( (?:bug|lp)[\s#:]*(\d+))?\s*$
     success:
       verified: 1
     failure:
@@ -20,7 +20,7 @@ pipelines:
         approval:
           - approved: 1
       - event: comment-added
-        comment_filter: (?i)^\s*reverify\.?\s*$
+        comment_filter: (?i)^\s*reverify( (?:bug|lp)[\s#:]*(\d+))?\s*$
     start:
       verified: 0
     success:
@@ -45,6 +45,7 @@ pipelines:
     manager: IndependentPipelineManager
     trigger:
       - event: patchset-created
+        comment_filter: (?i)^\s*recheck( (?:bug|lp)[\s#:]*(\d+))?\s*$
 
 
 jobs:
