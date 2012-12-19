@@ -1,0 +1,171 @@
+#!/usr/bin/env python
+# Copyright 2012 OpenStack Foundation
+#
+# Licensed under the Apache License, Version 2.0 (the "License"); you may
+# not use this file except in compliance with the License. You may obtain
+# a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+# WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+# License for the specific language governing permissions and limitations
+# under the License.
+
+import ConfigParser
+import datetime
+import re
+import sys
+import threading
+import traceback
+import cPickle as pickle
+import os
+
+from genshi.template import TemplateLoader
+from launchpadlib.launchpad import Launchpad
+from launchpadlib.uris import LPNET_SERVICE_ROOT
+import daemon
+
+try:
+    import daemon.pidlockfile
+    pid_file_module = daemon.pidlockfile
+except:
+    # as of python-daemon 1.6 it doesn't bundle pidlockfile anymore
+    # instead it depends on lockfile-0.9.1
+    import daemon.pidfile
+    pid_file_module = daemon.pidfile
+
+
+class Hit(object):
+    def __init__(self, project, change):
+        self.project = project
+        self.change = change
+        self.ts = datetime.datetime.utcnow()
+
+class Bug(object):
+    def __init__(self, number):
+        self.number = number
+        self.hits = []
+        self.projects = []
+        self.changes = []
+        self.last_seen = None
+        self.first_seen = None
+        launchpad = Launchpad.login_anonymously('recheckwatch',
+                                                'production')
+        self.title = launchpad.bugs[number].title
+
+    def addHit(self, hit):
+        self.hits.append(hit)
+        if not self.first_seen:
+            self.first_seen = hit.ts
+        if hit.project not in self.projects:
+            self.projects.append(hit.project)
+        if hit.change not in self.changes:
+            self.changes.append(hit.change)
+        self.last_seen = hit.ts
+
+class Scoreboard(threading.Thread):
+    def __init__(self, config):
+        threading.Thread.__init__(self)
+        self.scores = {}
+
+        server = config.get('gerrit', 'host')
+        username = config.get('gerrit', 'user')
+        port = config.getint('gerrit', 'port')
+        keyfile = config.get('gerrit', 'key', None)
+
+        self.pickle_dir = config.get('recheckwatch', 'pickle_dir')
+        self.pickle_file = os.path.join(self.pickle_dir, 'scoreboard.pickle')
+        self.template_dir = config.get('recheckwatch', 'template_dir')
+        self.output_file = config.get('recheckwatch', 'output_file')
+        self.age = config.getint('recheckwatch', 'age')
+        self.regex = re.compile(config.get('recheckwatch', 'regex'))
+
+        if os.path.exists(self.pickle_file):
+            out = open(self.pickle_file, 'rb')
+            self.scores = pickle.load(out)
+            out.close()
+
+        # Import here because it needs to happen after daemonization
+        import gerritlib.gerrit
+        self.gerrit = gerritlib.gerrit.Gerrit(server, username, port, keyfile)
+        self.update()
+
+    def _read(self, data):
+        if data.get('type', '') != 'comment-added':
+            return
+        comment = data.get('comment', '')
+        m = self.regex.match(comment.strip())
+        if not m:
+            return
+        change_record = data.get('change', {})
+        change = change_record.get('number')
+        project = change_record.get('project')
+        bugno = int(m.group('bugno'))
+        hit = Hit(project, change)
+        bug = self.scores.get(bugno)
+        if not bug:
+            bug = Bug(bugno)
+        bug.addHit(hit)
+        self.scores[bugno] = bug
+        self.update()
+
+    def update(self):
+        # Remove bugs that haven't been seen in ages
+        to_remove = []
+        now = datetime.datetime.utcnow()
+        for bugno, bug in self.scores.items():
+            if bug.last_seen < now-datetime.timedelta(days=self.age):
+                to_remove.append(bugno)
+        for bugno in to_remove:
+            del self.scores[bug]
+
+        def impact(bug):
+            "This ranks more recent bugs higher"
+            return (len(bug.hits) * (5.0 / ((bug.last_seen-now).days)))
+
+        # Get the bugs reverse sorted by impact
+        bugs = self.scores.values()
+        bugs.sort(lambda a,b: cmp(impact(a), impact(b)))
+        bugs.reverse()
+        loader = TemplateLoader([self.template_dir], auto_reload=True)
+        tmpl = loader.load('scoreboard.html')
+        out = open(self.output_file, 'w')
+        out.write(tmpl.generate(bugs = bugs).render('html', doctype='html'))
+
+        out = open(self.pickle_file, 'wb')
+        pickle.dump(self.scores, out, -1)
+        out.close()
+
+    def run(self):
+        self.gerrit.startWatching()
+        while True:
+            event = self.gerrit.getEvent()
+            try:
+                self._read(event)
+            except:
+                traceback.print_exc()
+
+def _main():
+    config = ConfigParser.ConfigParser()
+    config.read(sys.argv[1])
+
+    s = Scoreboard(config)
+    s.start()
+
+def main():
+    if len(sys.argv) < 2:
+        print "Usage: %s CONFIGFILE" % sys.argv[0]
+        sys.exit(1)
+
+    if '-d' not in sys.argv:
+        pid = pid_file_module.TimeoutPIDLockFile(
+            "/var/run/recheckwatch/recheckwatch.pid", 10)
+        with daemon.DaemonContext(pidfile=pid):
+            _main()
+    else:
+        _main()
+
+if __name__ == "__main__":
+    main()

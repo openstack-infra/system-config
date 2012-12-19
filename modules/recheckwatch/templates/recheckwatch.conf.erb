@@ -1,0 +1,12 @@
+[recheckwatch]
+pickle_dir=/var/lib/recheckwatch
+template_dir=/var/lib/recheckwatch
+output_file=/var/www/recheckwatch/rechecks.html
+age=30 ; days
+regex=(?i)^(?P<verb>recheck|reverify) (?:bug|lp)[\s#:]*(?P<bugno>\d+)$
+
+[gerrit]
+server=<%= gerrit_server %>
+user=<%= gerrit_user %>
+sshkey=/var/lib/recheckwatch/ssh/id_rsa
+port=29418
