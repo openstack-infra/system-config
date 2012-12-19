@@ -49,4 +49,16 @@ class openstack_project::zuul(
     source => 'puppet:///modules/openstack_project/zuul/logging.conf',
     notify => Exec['zuul-reload'],
   }
+
+  class { '::recheckwatch':
+    gerrit_server                => $gerrit_server,
+    gerrit_user                  => $gerrit_user,
+    recheckwatch_ssh_private_key => $zuul_ssh_private_key,
+  }
+
+  file { '/var/lib/recheckwatch/scoreboard.html':
+    ensure  => present,
+    source  => 'puppet:///modules/openstack_project/zuul/scoreboard.html',
+    require => File['/var/lib/recheckwatch'],
+  }
 }
