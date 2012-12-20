@@ -45,6 +45,7 @@ pipelines:
     manager: IndependentPipelineManager
     trigger:
       - event: patchset-created
+      - event: comment-added
         comment_filter: (?i)^\s*recheck( (?:bug|lp)[\s#:]*(\d+))?\s*$
 
 
