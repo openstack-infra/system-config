@@ -1,0 +1,51 @@
+# This needs to be in your server's config somewhere, probably
+# the main httpd.conf
+# NameVirtualHost *:80
+
+# This line also needs to be in your server's config.
+# LoadModule wsgi_module modules/mod_wsgi.so
+
+# You need to manually edit this file to fit your needs.
+# This configuration assumes the default installation prefix
+# of /opt/askbot/, if you installed askbot somewhere else
+# you will need to change all the occurances of /opt/askbot/
+# in this file to your chosen install location.
+
+# XXX You need to set this up!
+# Read http://code.google.com/p/modwsgi/wiki/ConfigurationDirectives#WSGISocketPrefix
+#WSGISocketPrefix /var/run/apache2/wsgi
+
+<VirtualHost ask-secondary.openstack.org:80>
+        DocumentRoot "/opt/askbot/askbotsitetwo"
+        ErrorLog /var/log/apache2/askbotsitetwo-error.log
+        CustomLog /var/log/apache2/askbotsitetwo-access.log common
+        LogLevel debug
+
+        #aliases to serve static media directly
+        #will probably need adjustment
+        Alias /static/ /opt/askbot/askbotsitetwo/static/
+        Alias /upfiles/ /opt/askbot/askbotsitetwo/askbot/upfiles/
+        <DirectoryMatch "/opt/askbot/askbotsitetwo/askbot/skins/([^/]+)/media">
+            Order deny,allow
+            Allow from all
+        </DirectoryMatch>
+        <Directory "/opt/askbot/askbotsitetwo/askbot/upfiles">
+            Order deny,allow
+            Allow from all
+        </Directory>
+
+        # XXX In order for the django admin site media to work you
+        # must change @DJANGO_ROOT@ to be the path to your django
+        # installation, which is probably something like:
+        # /usr/lib/python2.6/site-packages/django
+        Alias /media/ "/usr/lib/python2.7/dist-packages/django/contrib/admin/media/"
+        <Location "/media/">
+                SetHandler None
+        </Location>
+
+        WSGIDaemonProcess askbotsitetwo processes=5 threads=5 display-name='%{GROUP}' inactivity-timeout=120
+        WSGIProcessGroup askbotsitetwo
+        WSGIApplicationGroup %{GLOBAL}
+        WSGIScriptAlias / /opt/askbot/askbotsitetwo/django.wsgi
+
+</VirtualHost>
