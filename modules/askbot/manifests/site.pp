@@ -1,0 +1,71 @@
+define askbot::site (
+  $mysql_password,
+  $mysql_root_password,
+) {
+  # Configure askbot site
+  file { "/opt/askbot/askbotsite${name}":
+    ensure  => directory,
+    owner   => 'askbot',
+    mode    => '0640',
+    require => File['/opt/askbot'],
+  }
+
+  file { "/opt/askbot/askbotsite${name}/django.wsgi":
+    owner   => 'askbot',
+    mode    => '0640',
+    source  => 'puppet:///modules/askbot/django.wsgi',
+    require => File["/opt/askbot/askbotsite${name}"],
+  }
+
+  file { "/opt/askbot/askbotsite${name}/__init__.py":
+    owner   => 'askbot',
+    mode    => '0640',
+    content => '',
+    require => File["/opt/askbot/askbotsite${name}"],
+  }
+
+  file { "/opt/askbot/askbotsite${name}/manage.py":
+    owner   => 'askbot',
+    mode    => '0640',
+    source  => 'puppet:///modules/askbot/manage.py',
+    require => File["/opt/askbot/askbotsite${name}"],
+  }
+
+  file { "/opt/askbot/askbotsite${name}/settings.py":
+    owner    => 'askbot',
+    mode     => '0640',
+    template => 'askbot/askbot_settings.erb',
+    require  => File["/opt/askbot/askbotsite${name}"],
+  }
+
+  file { "/opt/askbot/askbotsite${name}/urls.py":
+    owner   => 'askbot',
+    mode    => '0640',
+    source  => 'puppet:///modules/askbot/urls.py',
+    require => File["/opt/askbot/askbotsite${name}"],
+  }
+
+  file { "/opt/askbot/askbotsite${name}/log":
+    ensure  => directory,
+    owner   => 'askbot',
+    group   => 'www',
+    mode    => '0660',
+    require => File["/opt/askbot/askbotsite${name}"],
+  }
+
+  file { "/opt/askbot/askbotsite${name}/askbot":
+    ensure  => directory,
+    owner   => 'askbot',
+    group   => 'www',
+    mode    => '0660',
+    require => File["/opt/askbot/askbotsite${name}"],
+  }
+
+  file { "/opt/askbot/askbotsite${name}/askbot/upfiles":
+    ensure  => directory,
+    owner   => 'askbot',
+    group   => 'www',
+    mode    => '0660',
+    require => File["/opt/askbot/askbotsite${name}/askbot"],
+  }
+}
