@@ -200,6 +200,15 @@ node 'zuul.openstack.org' {
   }
 }
 
+# Node to host askbot.
+node 'ask.openstack.org' {
+  class { 'openstack_project::askbot':
+    mysql_password      => hiera('askbot_db_password'),
+    mysql_root_password => hiera('askbot_root_db_password'),
+    sysadmins           => hiera('sysadmins'),
+  }
+}
+
 # A bare machine, but with a jenkins user
 node /^.*\.template\.openstack\.org$/ {
   include openstack_project::slave_template
