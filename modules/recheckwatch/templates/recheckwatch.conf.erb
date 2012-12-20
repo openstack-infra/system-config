@@ -6,7 +6,7 @@ age=30 ; days
 regex=(?i)^(?P<verb>recheck|reverify) (?:bug|lp)[\s#:]*(?P<bugno>\d+)$
 
 [gerrit]
-server=<%= gerrit_server %>
+host=<%= gerrit_server %>
 user=<%= gerrit_user %>
-sshkey=/var/lib/recheckwatch/ssh/id_rsa
+key=/var/lib/recheckwatch/ssh/id_rsa
 port=29418
