@@ -35,7 +35,14 @@ git remote update || git remote update # attempt to work around bug #925790
 git reset --hard
 git clean -x -f -d -q
 
-git fetch $GIT_SITE/p/$ZUUL_PROJECT $ZUUL_REF
-git checkout FETCH_HEAD
-git reset --hard FETCH_HEAD
-git clean -x -f -d -q
+if [ -z "$ZUUL_NEWREV" ]
+then
+    git fetch $GIT_SITE/p/$ZUUL_PROJECT $ZUUL_REF
+    git checkout FETCH_HEAD
+    git reset --hard FETCH_HEAD
+    git clean -x -f -d -q
+else
+    git checkout $ZUUL_NEWREV
+    git reset --hard $ZUUL_NEWREV
+    git clean -x -f -d -q
+fi
