@@ -50,15 +50,24 @@ class openstack_project::static (
   }
 
   file { '/srv/static/tarballs':
-    ensure => directory,
+    ensure  => directory,
+    owner   => 'jenkins',
+    group   => 'jenkins',
+    require => User['jenkins'],
   }
 
   file { '/srv/static/ci':
-    ensure => directory,
+    ensure  => directory,
+    owner   => 'jenkins',
+    group   => 'jenkins',
+    require => User['jenkins'],
   }
 
   file { '/srv/static/logs':
-    ensure => directory,
+    ensure  => directory,
+    owner   => 'jenkins',
+    group   => 'jenkins',
+    require => User['jenkins'],
   }
 
   file { '/srv/static/logs/robots.txt':
