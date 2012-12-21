@@ -15,7 +15,7 @@ all code should be reviewed and tested before being merged in to trunk,
 and that as many tasks around review, testing, merging and release that
 can be automated should be.
 
-Jenkis is essentially a job queing system, and everything that is done
+Jenkins is essentially a job queing system, and everything that is done
 through Jenkins can be thought of as having a few discreet components:
 
 * Triggers - What causes a job to be run
