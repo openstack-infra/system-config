@@ -23,6 +23,7 @@
           files:
             - target: 'docs-draft/$JOB_NAME/$ZUUL_PIPELINE/$BUILD_NUMBER/cli/quick-start'
               source: 'doc/src/docbkx/cli-guide/target/docbkx/webhelp/cli-guide/**'
+              keep-hierarchy: true
               copy-after-failure: true
 
 - job:
