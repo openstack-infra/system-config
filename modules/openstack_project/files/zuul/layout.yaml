@@ -84,6 +84,10 @@ jobs:
     branch: ^master$
   - name: gate-openstack-cli-guide
     success-pattern: http://docs-draft.openstack.org/{job.name}/{pipeline.name}/{build.number}/cli/quick-start
+  - name: gate-tempest-devstack-vm-quantum
+    voting: false
+  - name: gate-devstack-vm-quantum
+    voting: false
 
 
 projects:
@@ -225,6 +229,7 @@ projects:
       - gate-cinder-python27
       - gate-tempest-devstack-vm
       - gate-tempest-devstack-vm-cinder
+      - gate-devstack-vm-quantum
     gate:
       - gate-cinder-docs
       - gate-cinder-pep8
@@ -232,6 +237,7 @@ projects:
       - gate-cinder-python27
       - gate-tempest-devstack-vm
       - gate-tempest-devstack-vm-cinder
+      - gate-devstack-vm-quantum
     post:
       - cinder-tarball
       - cinder-coverage
@@ -247,6 +253,7 @@ projects:
       - gate-glance-python27
       - gate-tempest-devstack-vm
       - gate-tempest-devstack-vm-cinder
+      - gate-devstack-vm-quantum
     gate:
       - gate-glance-docs
       - gate-glance-pep8
@@ -254,6 +261,7 @@ projects:
       - gate-glance-python27
       - gate-tempest-devstack-vm
       - gate-tempest-devstack-vm-cinder
+      - gate-devstack-vm-quantum
     post:
       - glance-tarball
       - glance-coverage
@@ -270,6 +278,7 @@ projects:
       - gate-horizon-selenium
       - gate-tempest-devstack-vm
       - gate-tempest-devstack-vm-cinder
+      - gate-devstack-vm-quantum
     gate:
       - gate-horizon-docs
       - gate-horizon-pep8
@@ -278,6 +287,7 @@ projects:
       - gate-horizon-selenium
       - gate-tempest-devstack-vm
       - gate-tempest-devstack-vm-cinder
+      - gate-devstack-vm-quantum
     post:
       - horizon-tarball
       - horizon-coverage
@@ -293,6 +303,7 @@ projects:
       - gate-keystone-python27
       - gate-tempest-devstack-vm
       - gate-tempest-devstack-vm-cinder
+      - gate-devstack-vm-quantum
     gate:
       - gate-keystone-docs
       - gate-keystone-pep8
@@ -300,6 +311,7 @@ projects:
       - gate-keystone-python27
       - gate-tempest-devstack-vm
       - gate-tempest-devstack-vm-cinder
+      - gate-devstack-vm-quantum
     post:
       - keystone-tarball
       - keystone-coverage
@@ -314,6 +326,7 @@ projects:
       - gate-nova-python27
       - gate-tempest-devstack-vm
       - gate-tempest-devstack-vm-cinder
+      - gate-devstack-vm-quantum
       - gate-nova-pylint
     gate:
       - gate-nova-docs
@@ -322,6 +335,7 @@ projects:
       - gate-nova-python27
       - gate-tempest-devstack-vm
       - gate-tempest-devstack-vm-cinder
+      - gate-devstack-vm-quantum
     post:
       - nova-tarball
       - nova-coverage
@@ -353,11 +367,15 @@ projects:
       - gate-quantum-pep8
       - gate-quantum-python26
       - gate-quantum-python27
+      - gate-tempest-devstack-vm-quantum
+      - gate-devstack-vm-quantum
     gate:
       - gate-quantum-docs
       - gate-quantum-pep8
       - gate-quantum-python26
       - gate-quantum-python27
+      - gate-tempest-devstack-vm-quantum
+      - gate-devstack-vm-quantum
     post:
       - quantum-tarball
       - quantum-coverage
@@ -373,6 +391,7 @@ projects:
       - gate-swift-python27
       - gate-tempest-devstack-vm
       - gate-tempest-devstack-vm-cinder
+      - gate-devstack-vm-quantum
     gate:
       - gate-swift-docs
       - gate-swift-pep8
@@ -380,6 +399,7 @@ projects:
       - gate-swift-python27
       - gate-tempest-devstack-vm
       - gate-tempest-devstack-vm-cinder
+      - gate-devstack-vm-quantum
     post:
       - swift-tarball
       - swift-coverage
@@ -413,6 +433,7 @@ projects:
       - gate-python-cinderclient-python27
       - gate-tempest-devstack-vm
       - gate-tempest-devstack-vm-cinder
+      - gate-devstack-vm-quantum
     gate:
       - gate-python-cinderclient-docs
       - gate-python-cinderclient-pep8
@@ -420,6 +441,7 @@ projects:
       - gate-python-cinderclient-python27
       - gate-tempest-devstack-vm
       - gate-tempest-devstack-vm-cinder
+      - gate-devstack-vm-quantum
     post:
       - python-cinderclient-sdist-tarball
       - python-cinderclient-coverage
@@ -435,6 +457,7 @@ projects:
       - gate-python-glanceclient-python27
       - gate-tempest-devstack-vm
       - gate-tempest-devstack-vm-cinder
+      - gate-devstack-vm-quantum
     gate:
       - gate-python-glanceclient-docs
       - gate-python-glanceclient-pep8
@@ -442,6 +465,7 @@ projects:
       - gate-python-glanceclient-python27
       - gate-tempest-devstack-vm
       - gate-tempest-devstack-vm-cinder
+      - gate-devstack-vm-quantum
     post:
       - python-glanceclient-sdist-tarball
       - python-glanceclient-coverage
@@ -457,6 +481,7 @@ projects:
       - gate-python-keystoneclient-python27
       - gate-tempest-devstack-vm
       - gate-tempest-devstack-vm-cinder
+      - gate-devstack-vm-quantum
     gate:
       - gate-python-keystoneclient-docs
       - gate-python-keystoneclient-pep8
@@ -464,6 +489,7 @@ projects:
       - gate-python-keystoneclient-python27
       - gate-tempest-devstack-vm
       - gate-tempest-devstack-vm-cinder
+      - gate-devstack-vm-quantum
     post:
       - python-keystoneclient-sdist-tarball
       - python-keystoneclient-coverage
@@ -479,6 +505,7 @@ projects:
       - gate-python-novaclient-python27
       - gate-tempest-devstack-vm
       - gate-tempest-devstack-vm-cinder
+      - gate-devstack-vm-quantum
     gate:
       - gate-python-novaclient-docs
       - gate-python-novaclient-pep8
@@ -486,6 +513,7 @@ projects:
       - gate-python-novaclient-python27
       - gate-tempest-devstack-vm
       - gate-tempest-devstack-vm-cinder
+      - gate-devstack-vm-quantum
     post:
       - python-novaclient-sdist-tarball
       - python-novaclient-coverage
@@ -519,6 +547,7 @@ projects:
       - gate-python-quantumclient-python27
       - gate-tempest-devstack-vm
       - gate-tempest-devstack-vm-cinder
+      - gate-devstack-vm-quantum
     gate:
       - gate-python-quantumclient-docs
       - gate-python-quantumclient-pep8
@@ -526,6 +555,7 @@ projects:
       - gate-python-quantumclient-python27
       - gate-tempest-devstack-vm
       - gate-tempest-devstack-vm-cinder
+      - gate-devstack-vm-quantum
     post:
       - python-quantumclient-sdist-tarball
       - python-quantumclient-coverage
@@ -561,22 +591,28 @@ projects:
     check:
       - gate-tempest-devstack-vm
       - gate-tempest-devstack-vm-cinder
+      - gate-tempest-devstack-vm-quantum
+      - gate-devstack-vm-quantum
     gate:
       - gate-tempest-devstack-vm
       - gate-tempest-devstack-vm-cinder
-    silent:
       - gate-tempest-devstack-vm-quantum
+      - gate-devstack-vm-quantum
+    silent:
       - gate-tempest-devstack-vm-postgres
 
   - name: openstack-infra/devstack-gate
     check:
       - gate-tempest-devstack-vm
       - gate-tempest-devstack-vm-cinder
+      - gate-tempest-devstack-vm-quantum
+      - gate-devstack-vm-quantum
     gate:
       - gate-tempest-devstack-vm
       - gate-tempest-devstack-vm-cinder
-    silent:
       - gate-tempest-devstack-vm-quantum
+      - gate-devstack-vm-quantum
+    silent:
       - gate-tempest-devstack-vm-postgres
 
   - name: openstack-dev/pbr
@@ -603,10 +639,14 @@ projects:
       - gate-tempest-pep8
       - gate-tempest-devstack-vm
       - gate-tempest-devstack-vm-cinder
+      - gate-tempest-devstack-vm-quantum
+      - gate-devstack-vm-quantum
     gate:
       - gate-tempest-pep8
       - gate-tempest-devstack-vm
       - gate-tempest-devstack-vm-cinder
+      - gate-tempest-devstack-vm-quantum
+      - gate-devstack-vm-quantum
 
   - name: openstack/ceilometer
     check:
