@@ -13,6 +13,7 @@
   RewriteRule ^/status.json$ http://127.0.0.1:8001/status.json [P]
 
   Alias /rechecks.html /var/www/recheckwatch/rechecks.html
+  Alias /rechecks /var/www/recheckwatch/rechecks.html
 
   SetEnv GIT_PROJECT_ROOT /var/lib/zuul/git/
   SetEnv GIT_HTTP_EXPORT_ALL
