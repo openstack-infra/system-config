@@ -185,9 +185,9 @@ change to review.openstack.org.
 Add .gitreview file to project
 ==============================
 
-Once the change created following the above steps is merged and applied
-to Gerrit, Jenkins, et al you will want to add a ``.gitreview`` file to
-your repository in order to use the ``git review`` tool.
+If the new project you have added has a specified upstream you will need
+a ``.gitreview`` file to the project once it has been created. This new
+file will allow you to use ``git review``.
 
 The basic process is clone from stackforge, add file, push to Gerrit,
 review and approve.::
