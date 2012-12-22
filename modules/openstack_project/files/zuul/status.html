@@ -1,0 +1,166 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:py="http://genshi.edgewall.org/"
+      lang="en">
+  <HEAD>
+<style type="text/css">
+.pipeline-wrap {
+    float: left;
+    position: relative;
+    left: 50%;
+}
+.pipeline-container {
+    float: left;
+    position: relative;
+    left: -50%;
+}
+.change {
+    border: 1px solid #95c7db;
+    margin-top: 10px;
+    padding: 2px;
+}
+.change > .header {
+    background: #E2ECEF;
+    color: black;
+    margin: -2px -2px 2px -2px;
+    padding: 4px;
+}
+.change > .header > .changeid {
+    float: right;
+}
+.job {
+    display: block;
+}
+.pipeline {
+    float: left;
+    width: 25em;
+    padding: 4px;
+}
+.pipeline > .header {
+    background: #0000cc;
+    color: white;
+}
+.arrow {
+    text-align: center;
+    font-size: 16pt;
+    line-height: 1.0;
+}
+</style>
+
+    <TITLE>Zuul Status</TITLE>
+
+<script type="text/javascript" src="jquery.min.js"></script>
+<script type="text/javascript" src="status.js"></script>
+
+    
+    <!-- Google Fonts -->
+    <link href='http://fonts.googleapis.com/css?family=PT+Sans&amp;subset=latin' rel='stylesheet' type='text/css'/>
+    
+    <!-- Framework CSS -->
+    <link rel="stylesheet" href="http://www.openstack.org/themes/openstack/css/blueprint/screen.css" type="text/css" media="screen, projection"/>
+    <link rel="stylesheet" href="http://www.openstack.org/themes/openstack/css/blueprint/print.css" type="text/css" media="print"/>
+    
+    <!-- IE CSS -->
+    <!--[if lt IE 8]><link rel="stylesheet" href="http://www.openstack.org/blueprint/ie.css" type="text/css" media="screen, projection"><![endif]-->
+    
+    <!-- OpenStack Specific CSS -->
+    
+    <link rel="stylesheet" href="http://www.openstack.org/themes/openstack/css/dropdown.css" type="text/css" media="screen, projection, print"/>
+
+    <!-- Page Specific CSS -->
+    <link rel="stylesheet" href="http://www.openstack.org/themes/openstack/css/home.css" type="text/css" media="screen, projection, print"/>
+	
+    <link rel="stylesheet" type="text/css" href="http://www.openstack.org/themes/openstack/css/main.css" />
+  </HEAD>
+
+  <BODY>
+    <div id="message-container">
+      <div class="container">
+	<div class="span-24 last">
+	  <p id="message"/>
+	</div>
+      </div>
+    </div>
+    <div class="container">
+      <div id="header">
+	<div class="span-5">
+	  <h1 id="logo"><a href="/">Open Stack</a></h1>
+	</div>
+	<div class="span-19 last blueLine">
+	  
+	  <div id="navigation" class="span-19">
+	    <ul id="Menu1">
+	      <li><a href="http://www.openstack.org/" title="Go to the Home page" class="link" >Home</a></li>
+   		  
+  	      <li><a href="http://www.openstack.org/projects/" title="Go to the OpenStack Projects page" class="link">Projects</a></li>
+   		  
+  	      <li><a href="http://www.openstack.org/user-stories/" title="Go to the User Stories page" class="link">User Stories</a></li>
+   		  
+  	      <li><a href="http://www.openstack.org/community/" title="Go to the Community page" class="current">Community</a></li>
+   	
+	      <li><a href="http://www.openstack.org/blog/" title="Go to the OpenStack Blog">Blog</a></li>
+	      <li><a href="http://wiki.openstack.org/" title="Go to the OpenStack Wiki">Wiki</a></li>
+	      <li><a href="http://docs.openstack.org/" title="Go to OpenStack Documentation">Documentation</a></li>
+ 	    </ul>
+	  </div>
+	</div>
+      </div>
+    </div>
+
+    <div class="container">
+      <h1> Zuul Status </h1>
+      <p> Zuul is a pipeline oriented project gating and automation
+	system.  Each of the sections below is a separate pipeline
+	configured to automate some portion of the testing or
+	operation of the OpenStack project.  For more information, please see
+	<a href="http://ci.openstack.org/zuul">the Zuul reference manual.</a>
+      </p>
+
+    </div>
+    <div class="pipeline-wrap">
+      <div id="pipeline-container" class="pipeline-container">
+      </div> <!--pipeline-container-->
+    </div> <!--pipeline-wrap-->
+
+    <div class="container">
+      <hr />
+      <div id="footer">
+	<div class="span-4">
+	  <h3>OpenStack</h3>
+	  <ul>
+	    <li><a href="http://www.openstack.org/projects/">Projects</a></li>
+	    <li><a href="http://www.openstack.org/openstack-security/">OpenStack Security</a></li>
+	    <li><a href="http://www.openstack.org/projects/openstack-faq/">Common Questions</a></li>
+	    <li><a href="http://www.openstack.org/blog/">Blog</a></li>
+	  </ul>
+	</div>
+	<div class="span-4">
+	  <h3>Community</h3>
+	  <ul>
+	    <li><a href="http://www.openstack.org/community/">User Groups</a></li>
+	    <li><a href="http://www.openstack.org/events/">Events</a></li>
+	    <li><a href="http://www.openstack.org/jobs/">Jobs</a></li>
+	    <li><a href="http://www.openstack.org/companies/">Companies</a></li>
+	    <li><a href="http://wiki.openstack.org/HowToContribute">Contribute</a></li>
+	  </ul>
+	</div>
+	<div class="span-4">
+	  <h3>Documentation</h3>
+	  <ul>
+	    <li><a href="http://docs.openstack.org/">OpenStack Manuals</a></li>
+	    <li><a href="http://docs.openstack.org/diablo/openstack-compute/starter/content/">Getting Started</a></li>
+	    <li><a href="http://wiki.openstack.org/">Wiki</a></li>
+	  </ul>
+	</div>
+	<div class="span-4 last">
+	  <h3>Branding &amp; Legal</h3>
+	  <ul>
+	    <li><a href="http://www.openstack.org/brand/">Logos &amp; Guidelines</a></li>
+	    <li><a href="http://www.openstack.org/brand/openstack-trademark-policy/">Trademark Policy</a></li>
+	    <li><a href="http://www.openstack.org/privacy/">Privacy Policy</a></li>
+	    <li><a href="http://wiki.openstack.org/CLA">OpenStack CLA</a></li>
+	  </ul>
+	</div>
+      </div>
+    </div>
+  </BODY>
+</html>

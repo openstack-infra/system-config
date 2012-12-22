@@ -3,6 +3,7 @@ includes:
 
 pipelines:
   - name: check
+    description: Newly uploaded patchsets enter this pipeline to receive an initial +/-1 Verified vote from Jenkins.
     manager: IndependentPipelineManager
     trigger:
       - event: patchset-created
@@ -14,6 +15,7 @@ pipelines:
       verified: -1
 
   - name: gate
+    description: Changes that have been approved by core developers are enqueued in order in this pipeline, and if they pass tests in Jenkins, will be merged.
     manager: DependentPipelineManager
     trigger:
       - event: comment-added
@@ -30,18 +32,21 @@ pipelines:
       verified: -2
 
   - name: post
+    description: This pipeline runs jobs that operate after each change is merged.
     manager: IndependentPipelineManager
     trigger:
       - event: ref-updated
         ref: ^(?!(devnull|refs/.*)).*$
 
   - name: publish
+    description: When a commit is tagged, this pipeline runs jobs that operate on tags, such as uploading releases.
     manager: IndependentPipelineManager
     trigger:
       - event: ref-updated
         ref: ^refs/tags/.*$
 
   - name: silent
+    description: This pipeline is used for silently testing new jobs.
     manager: IndependentPipelineManager
     trigger:
       - event: patchset-created
