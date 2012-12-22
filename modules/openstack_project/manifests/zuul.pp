@@ -61,4 +61,27 @@ class openstack_project::zuul(
     source  => 'puppet:///modules/openstack_project/zuul/scoreboard.html',
     require => File['/var/lib/recheckwatch'],
   }
+
+  file { '/var/lib/zuul/www':
+    ensure  => directory,
+    require => File['/var/lib/zuul'],
+  }
+
+  file { '/var/lib/zuul/www/index.html':
+    ensure  => present,
+    source  => 'puppet:///modules/openstack_project/zuul/status.html',
+    require => File['/var/lib/zuul/www'],
+  }
+
+  file { '/var/lib/zuul/www/jquery-1.8.3.min.js':
+    ensure  => present,
+    source  => 'puppet:///modules/openstack_project/zuul/jquery-1.8.3.min.js',
+    require => File['/var/lib/zuul/www'],
+  }
+
+  file { '/var/lib/zuul/www/status.js':
+    ensure  => present,
+    source  => 'puppet:///modules/openstack_project/zuul/status.js',
+    require => File['/var/lib/zuul/www'],
+  }
 }

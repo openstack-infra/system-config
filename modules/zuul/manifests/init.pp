@@ -124,7 +124,7 @@ class zuul (
   file { '/var/lib/zuul/git':
     ensure  => directory,
     owner   => 'zuul',
-    require => User['zuul'],
+    require => File['/var/lib/zuul'],
   }
 
   file { '/var/lib/zuul/ssh':
