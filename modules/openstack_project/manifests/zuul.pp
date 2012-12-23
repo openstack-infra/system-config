@@ -80,12 +80,26 @@ class openstack_project::zuul(
   file { '/var/lib/zuul/www/jquery.min.js':
     ensure  => link,
     target  => '/usr/share/javascript/jquery/jquery.min.js',
-    require => Package['libjs-jquery'],
+    require => [File['/var/lib/zuul/www'],
+                Package['libjs-jquery']],
   }
 
   file { '/var/lib/zuul/www/status.js':
     ensure  => present,
     source  => 'puppet:///modules/openstack_project/zuul/status.js',
+    require => File['/var/lib/zuul/www'],
+  }
+
+  vcsrepo { '/opt/jquery-visibility':
+    ensure   => latest,
+    provider => git,
+    revision => 'master',
+    source   => 'https://github.com/mathiasbynens/jquery-visibility.git',
+  }
+
+  file { '/var/lib/zuul/www/jquery-visibility.min.js':
+    ensure  => link,
+    target  => '/opt/jquery-visibility/jquery-visibility.min.js',
     require => File['/var/lib/zuul/www'],
   }
 }
