@@ -12,6 +12,8 @@
 // License for the specific language governing permissions and limitations
 // under the License.
 
+window.zuul_enable_status_updates = true;
+
 function format_pipeline(data) {
     var html = '<div class="pipeline"><h3 class="subhead">'+
         data['name']+'</h3>';
@@ -90,6 +92,11 @@ function format_change(change) {
 function update() {
     var html = '';
 
+    if (!window.zuul_enable_status_updates) {
+        setTimeout(update, 5000);
+        return;
+    }
+
     $.getJSON('http://zuul.openstack.org/status.json', function(data) {
         if ('message' in data) {
             $("#message-container").attr('class', 'topMessage');
@@ -113,4 +120,14 @@ function update() {
 
 $(function() {
     update();
+
+    $(document).on({
+        'show.visibility': function() {
+            window.zuul_enable_status_updates = true;
+        },
+        'hide.visibility': function() {
+            window.zuul_enable_status_updates = false;
+        }
+    });
+
 });
