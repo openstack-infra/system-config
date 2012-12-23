@@ -93,9 +93,10 @@ function update() {
     $.getJSON('http://zuul.openstack.org/status.json', function(data) {
         if ('message' in data) {
             $("#message-container").attr('class', 'topMessage');
-            $("#message").html('<b>'+data['message']+'</b>');
+            $("#message").html(data['message']);
         } else {
             $("#message-container").removeClass('topMessage');
+            $("#message").html('');
         }
 
         html += '<br style="clear:both"/>';
