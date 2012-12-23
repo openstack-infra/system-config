@@ -51,15 +51,18 @@ function format_change(change) {
     var id = change['id'];
     var url = change['url'];
     if (id.length == 40) {
-        url = 'https://review.openstack.org/gitweb?p='+change['project']+
-            '.git;a=commitdiff;h='+id;
         id = id.substr(0,7);
     }
-    html += '<span class="changeid"><a href="'+url+'">';
+    html += '<span class="changeid">';
+    if (url != null) {
+        html += '<a href="'+url+'">';
+    }
+    html += id;
+    if (url != null) {
+        html += '</a>';
+    }
+    html += '</span></div><div class="jobs">';
 
-    html += id+'</a></span></div>';
-
-    html += '<div class="jobs">';
     $.each(change['jobs'], function(i, job) {
         result = job['result'];
         if (result == null) {
