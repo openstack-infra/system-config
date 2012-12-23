@@ -21,14 +21,14 @@ function format_pipeline(data) {
 
     $.each(data['change_queues'], function(change_queue_i, change_queue) {
         if (data['change_queues'].length > 1) {
-            html += '<span> Change queue: ';
+            html += '<div> Change queue: ';
 
             var name = change_queue['name'];
             html += '<a title="' + name + '">';
             if (name.length > 32) {
                 name = name.substr(0,32) + '...';
             }
-            html += name + '</a></span>'
+            html += name + '</a></div>'
         }
         $.each(change_queue['heads'], function(head_i, head) {
             $.each(head, function(change_i, change) {
