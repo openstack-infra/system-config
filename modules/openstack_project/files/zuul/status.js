@@ -20,17 +20,17 @@ function format_pipeline(data) {
     }
 
     $.each(data['change_queues'], function(change_queue_i, change_queue) {
-        if (data['change_queues'].length > 1) {
-            html += '<div> Change queue: ';
-
-            var name = change_queue['name'];
-            html += '<a title="' + name + '">';
-            if (name.length > 32) {
-                name = name.substr(0,32) + '...';
-            }
-            html += name + '</a></div>'
-        }
         $.each(change_queue['heads'], function(head_i, head) {
+            if (data['change_queues'].length > 1 && head_i == 0) {
+                html += '<div> Change queue: ';
+
+                var name = change_queue['name'];
+                html += '<a title="' + name + '">';
+                if (name.length > 32) {
+                    name = name.substr(0,32) + '...';
+                }
+                html += name + '</a></div>'
+            }
             $.each(head, function(change_i, change) {
                 if (change_i > 0) {
                     html += '<div class="arrow">&uarr;</div>'
@@ -79,7 +79,7 @@ function format_change(change) {
 function update() {
     var html = '';
 
-    $.getJSON('/status.json', function(data) {
+    $.getJSON('http://zuul.openstack.org/status.json', function(data) {
         if ('message' in data) {
             $("#message-container").attr('class', 'topMessage');
             $("#message").html('<b>'+data['message']+'</b>');
