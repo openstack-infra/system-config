@@ -65,10 +65,11 @@ function format_change(change) {
         if (job['url'] != null) {
             html += '</a>';
         }
-        html += ': '+result+'</span>';
+        html += ': '+result;
         if (job['voting'] == false) {
             html += ' (non-voting)';
         }
+        html += '</span>';
     });
 
     html += '</div></div>';
