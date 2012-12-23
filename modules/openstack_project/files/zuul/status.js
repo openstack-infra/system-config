@@ -48,8 +48,16 @@ function format_change(change) {
     var html = '<div class="change"><div class="header">';
 
     html += '<span class="project">'+change['project']+'</span>';
-    html += '<span class="changeid"><a href="'+change['url']+'">';
-    html += change['id']+'</a></span></div>';
+    var id = change['id'];
+    var url = change['url'];
+    if (id.length == 40) {
+        url = 'https://review.openstack.org/gitweb?p='+change['project']+
+            '.git;a=commitdiff;h='+id;
+        id = id.substr(0,7);
+    }
+    html += '<span class="changeid"><a href="'+url+'">';
+
+    html += id+'</a></span></div>';
 
     html += '<div class="jobs">';
     $.each(change['jobs'], function(i, job) {
