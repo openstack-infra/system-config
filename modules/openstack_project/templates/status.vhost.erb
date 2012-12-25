@@ -1,0 +1,62 @@
+# ************************************
+# Managed by Puppet
+# ************************************
+
+NameVirtualHost <%= vhost_name %>:<%= port %>
+<VirtualHost <%= vhost_name %>:<%= port %>>
+  ServerName <%= srvname %>
+<% if serveraliases.is_a? Array -%>
+<% serveraliases.each do |name| -%><%= " ServerAlias #{name}\n" %><% end -%>
+<% elsif serveraliases != '' -%>
+<%= " ServerAlias #{serveraliases}" %>
+<% end -%>
+  DocumentRoot <%= docroot %>
+
+  RewriteEngine on
+
+  RewriteRule ^/rechecks$ /rechecks/ [R]
+  RewriteRule ^/rechecks/$ http://zuul.openstack.org/rechecks.html [P]
+  <Location /rechecks/>
+    Order allow,deny
+    Allow from all
+  </Location>
+
+  RewriteRule ^/zuul$ /zuul/ [R]
+  RewriteRule ^/zuul/(.*)$ http://zuul.openstack.org/$1 [P]
+  <Location /zuul/>
+    Order allow,deny
+    Allow from all
+  </Location>
+
+  RewriteRule ^/release$ /release/ [R]
+  RewriteRule ^/release/$ http://old-wiki.openstack.org/release/ [P]
+  <Location /release/>
+    Order allow,deny
+    Allow from all
+  </Location>
+
+  RewriteRule ^/reviews$ /reviews/ [R]
+  RewriteRule ^/reviews/$ http://old-wiki.openstack.org/reviews/ [P]
+  <Location /reviews/>
+    Order allow,deny
+    Allow from all
+  </Location>
+
+  RewriteRule ^/bugday$ /bugday/ [R]
+  RewriteRule ^/bugday/$ http://old-wiki.openstack.org/bugday/ [P]
+  <Location /bugday/>
+    Order allow,deny
+    Allow from all
+  </Location>
+
+  <Directory <%= docroot %>>
+    Options <%= options %>
+    AllowOverride None
+    Order allow,deny
+    allow from all
+  </Directory>
+  ErrorLog /var/log/apache2/<%= name %>_error.log
+  LogLevel warn
+  CustomLog /var/log/apache2/<%= name %>_access.log combined
+  ServerSignature Off
+</VirtualHost>

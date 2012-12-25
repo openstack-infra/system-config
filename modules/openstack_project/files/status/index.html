@@ -1,0 +1,161 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:py="http://genshi.edgewall.org/"
+      lang="en">
+  <HEAD>
+<style type="text/css">
+#blurb-container {
+    max-width: 950px;
+    margin: 0 auto;
+}
+.blurb {
+    float: left;
+    width: 25em;
+    height: 22ex;
+    padding: 4px;
+}
+</style>
+
+    <TITLE>OpenStack Project Status</TITLE>
+
+<script type="text/javascript" src="jquery.min.js"></script>
+<script type="text/javascript" src="jquery-visibility.min.js"></script>
+<script type="text/javascript" src="status.js"></script>
+
+    
+    <!-- Google Fonts -->
+    <link href='http://fonts.googleapis.com/css?family=PT+Sans&amp;subset=latin' rel='stylesheet' type='text/css'/>
+    
+    <!-- Framework CSS -->
+    <link rel="stylesheet" href="http://www.openstack.org/themes/openstack/css/blueprint/screen.css" type="text/css" media="screen, projection"/>
+    <link rel="stylesheet" href="http://www.openstack.org/themes/openstack/css/blueprint/print.css" type="text/css" media="print"/>
+    
+    <!-- IE CSS -->
+    <!--[if lt IE 8]><link rel="stylesheet" href="http://www.openstack.org/blueprint/ie.css" type="text/css" media="screen, projection"><![endif]-->
+    
+    <!-- OpenStack Specific CSS -->
+    
+    <link rel="stylesheet" href="http://www.openstack.org/themes/openstack/css/dropdown.css" type="text/css" media="screen, projection, print"/>
+
+    <!-- Page Specific CSS -->
+    <link rel="stylesheet" href="http://www.openstack.org/themes/openstack/css/home.css" type="text/css" media="screen, projection, print"/>
+	
+    <link rel="stylesheet" type="text/css" href="http://www.openstack.org/themes/openstack/css/main.css" />
+  </HEAD>
+
+  <BODY>
+    <div id="message-container">
+      <div class="container">
+	<div class="span-24 last">
+	  <p id="message"/>
+	</div>
+      </div>
+    </div>
+    <div class="container">
+      <div id="header">
+	<div class="span-5">
+	  <h1 id="logo"><a href="/">Open Stack</a></h1>
+	</div>
+	<div class="span-19 last blueLine">
+	  
+	  <div id="navigation" class="span-19">
+	    <ul id="Menu1">
+	      <li><a href="/" class="current" >Status</a></li>
+  	      <li><a href="/zuul/">Zuul</a></li>
+  	      <li><a href="/rechecks/">Rechecks</a></li>
+  	      <li><a href="/release/">Release</a></li>
+	      <li><a href="/reviews/">Reviews</a></li>
+	      <li><a href="/bugday/">Bugday</a></li>
+ 	    </ul>
+	  </div>
+	</div>
+      </div>
+    </div>
+
+    <div id="blurb-container">
+      <h1>OpenStack Infrastructure and Project Status</h1>
+
+      <div class="blurb">
+	<h2 class="subhead"><a href="/zuul/">Zuul</a></h2>
+	<p>
+	  Zuul is the project gating and automation system that tests
+	  and merges changes as well as publishing releases and
+	  documentation.
+	  </p>
+      </div>
+      <div class="blurb">
+	<h2 class="subhead"><a href="/rechecks/">Rechecks</a></h2>
+	<p>
+	  When the cause of a test failure is nondeterministic,
+	  developers can request that it be retested by leaving a
+	  comment in Gerrit of the form "recheck bug #".  This page
+	  collects those comments and displays the most commonly seen
+	  bugs.
+	</p>
+      </div>
+      <div class="blurb">
+	<h2 class="subhead"><a href="/release/">Release</a></h2>
+	<p>
+	  Blueprints targeted for the next release are tracked on this
+	  page along with overall progress toward completion.
+	</p>
+      </div>
+      <div class="blurb">
+	<h2 class="subhead"><a href="/reviews/">Reviews</a></h2>
+	<p>
+	  Important reviews are ranked according to blueprint and bug
+	  priority.
+	</p>
+      </div>
+      <div class="blurb">
+	<h2 class="subhead"><a href="/bugday/">Bugday</a></h2>
+	<p>
+	  During official bug days, this page is updated with real-time
+	  stats.
+	</p>
+      </div>
+
+    </div>
+
+    <div class="container">
+      <hr />
+      <div id="footer">
+	<div class="span-4">
+	  <h3>OpenStack</h3>
+	  <ul>
+	    <li><a href="http://www.openstack.org/projects/">Projects</a></li>
+	    <li><a href="http://www.openstack.org/openstack-security/">OpenStack Security</a></li>
+	    <li><a href="http://www.openstack.org/projects/openstack-faq/">Common Questions</a></li>
+	    <li><a href="http://www.openstack.org/blog/">Blog</a></li>
+	  </ul>
+	</div>
+	<div class="span-4">
+	  <h3>Community</h3>
+	  <ul>
+	    <li><a href="http://www.openstack.org/community/">User Groups</a></li>
+	    <li><a href="http://www.openstack.org/events/">Events</a></li>
+	    <li><a href="http://www.openstack.org/jobs/">Jobs</a></li>
+	    <li><a href="http://www.openstack.org/companies/">Companies</a></li>
+	    <li><a href="http://wiki.openstack.org/HowToContribute">Contribute</a></li>
+	  </ul>
+	</div>
+	<div class="span-4">
+	  <h3>Documentation</h3>
+	  <ul>
+	    <li><a href="http://docs.openstack.org/">OpenStack Manuals</a></li>
+	    <li><a href="http://docs.openstack.org/diablo/openstack-compute/starter/content/">Getting Started</a></li>
+	    <li><a href="http://wiki.openstack.org/">Wiki</a></li>
+	  </ul>
+	</div>
+	<div class="span-4 last">
+	  <h3>Branding &amp; Legal</h3>
+	  <ul>
+	    <li><a href="http://www.openstack.org/brand/">Logos &amp; Guidelines</a></li>
+	    <li><a href="http://www.openstack.org/brand/openstack-trademark-policy/">Trademark Policy</a></li>
+	    <li><a href="http://www.openstack.org/privacy/">Privacy Policy</a></li>
+	    <li><a href="http://wiki.openstack.org/CLA">OpenStack CLA</a></li>
+	  </ul>
+	</div>
+      </div>
+    </div>
+  </BODY>
+</html>
