@@ -45,6 +45,14 @@ class openstack_project::static (
     require  => File['/srv/static/docs-draft'],
   }
 
+  apache::vhost { 'status.openstack.org':
+    port     => 80,
+    priority => '50',
+    docroot  => '/srv/static/status',
+    template => 'openstack_project/status.vhost.erb',
+    require  => File['/srv/static/status'],
+  }
+
   file { '/srv/static':
     ensure => directory,
   }
@@ -90,6 +98,16 @@ class openstack_project::static (
     mode    => '0444',
     source  => 'puppet:///modules/openstack_project/disallow_robots.txt',
     require => File['/srv/static/docs-draft'],
+  }
+
+  file { '/srv/static/status':
+    ensure => directory,
+  }
+
+  file { '/srv/static/status/index.html':
+    ensure  => present,
+    source  => 'puppet:///modules/openstack_project/status/index.html',
+    require => File['/srv/static/status'],
   }
 
   cron { 'gziplogs':
