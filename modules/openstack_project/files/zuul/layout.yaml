@@ -85,8 +85,10 @@ jobs:
   - name: gate-openstack-cli-guide
     success-pattern: http://docs-draft.openstack.org/{job.name}/{pipeline.name}/{build.number}/cli/quick-start
   - name: gate-tempest-devstack-vm-quantum
+    branch: ^(?!stable/(diablo|essex|folsom)).*$
     voting: false
   - name: gate-devstack-vm-quantum
+    branch: ^(?!stable/(diablo|essex|folsom)).*$
     voting: false
 
 
