@@ -103,7 +103,8 @@ node 'graphite.openstack.org' {
     graphite_admin_user     => hiera('graphite_admin_user'),
     graphite_admin_email    => hiera('graphite_admin_email'),
     graphite_admin_password => hiera('graphite_admin_password'),
-    statsd_hosts            => ['jenkins.openstack.org'],
+    statsd_hosts            => ['jenkins.openstack.org',
+                                'zuul.openstack.org'],
   }
 }
 
@@ -197,6 +198,7 @@ node 'zuul.openstack.org' {
     zuul_ssh_private_key => hiera('jenkins_ssh_private_key_contents'),
     url_pattern          => 'http://logs.openstack.org/{change.number}/{change.patchset}/{pipeline.name}/{job.name}/{build.number}',
     sysadmins            => hiera('sysadmins'),
+    statsd_host          => 'graphite.openstack.org',
   }
 }
 
