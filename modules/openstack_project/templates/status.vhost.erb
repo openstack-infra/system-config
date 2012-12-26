@@ -29,21 +29,21 @@ NameVirtualHost <%= vhost_name %>:<%= port %>
   </Location>
 
   RewriteRule ^/release$ /release/ [R]
-  RewriteRule ^/release/$ http://old-wiki.openstack.org/release/ [P]
+  RewriteRule ^/release/(.*)$ http://old-wiki.openstack.org/release/$1 [P]
   <Location /release/>
     Order allow,deny
     Allow from all
   </Location>
 
   RewriteRule ^/reviews$ /reviews/ [R]
-  RewriteRule ^/reviews/$ http://old-wiki.openstack.org/reviews/ [P]
+  RewriteRule ^/reviews/(.*)$ http://old-wiki.openstack.org/reviews/$1 [P]
   <Location /reviews/>
     Order allow,deny
     Allow from all
   </Location>
 
   RewriteRule ^/bugday$ /bugday/ [R]
-  RewriteRule ^/bugday/$ http://old-wiki.openstack.org/bugday/ [P]
+  RewriteRule ^/bugday/(.*)$ http://old-wiki.openstack.org/bugday/$1 [P]
   <Location /bugday/>
     Order allow,deny
     Allow from all
