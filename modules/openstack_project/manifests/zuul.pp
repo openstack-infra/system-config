@@ -10,7 +10,8 @@ class openstack_project::zuul(
   $gerrit_user = '',
   $zuul_ssh_private_key = '',
   $url_pattern = '',
-  $sysadmins = []
+  $sysadmins = [],
+  $statsd_host = ''
 ) {
 
   $rules = [ "-m state --state NEW -m tcp -p tcp --dport 8001 -s ${jenkins_host} -j ACCEPT" ]

@@ -12,7 +12,8 @@ class zuul (
   $url_pattern = '',
   $status_url = "https://${::fqdn}/",
   $git_source_repo = 'https://github.com/openstack-infra/zuul.git',
-  $push_change_refs = false
+  $push_change_refs = false,
+  $statsd_host = ''
 ) {
   include apache
 
@@ -44,6 +45,12 @@ class zuul (
     package { 'python-daemon':
       ensure => present,
     }
+  }
+
+  package { 'statsd':
+    ensure   => latest,  # okay to use latest for pip
+    provider => pip,
+    require  => Class[pip],
   }
 
   user { 'zuul':
@@ -101,6 +108,12 @@ class zuul (
       File['/etc/zuul'],
       User['zuul'],
     ],
+  }
+
+  file { '/etc/default/zuul':
+    ensure  => present,
+    mode    => '0444',
+    content => template('zuul/zuul.default.erb'),
   }
 
   file { '/var/log/zuul':
