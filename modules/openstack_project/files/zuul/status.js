@@ -89,13 +89,26 @@ function format_change(change) {
     return html;
 }
 
-function update() {
-    var html = '';
-
+function update_timeout() {
     if (!window.zuul_enable_status_updates) {
-        setTimeout(update, 5000);
+        setTimeout(update_timeout, 5000);
         return;
     }
+
+    window.zuul_graph_update_count += 1;
+
+    update();
+    /* Only update graphs every minute */
+    if (window.zuul_graph_update_count > 11) {
+        window.zuul_graph_update_count = 0;
+        update_graphs();
+    }
+
+    setTimeout(update_timeout, 5000);
+}
+
+function update() {
+    var html = '';
 
     $.getJSON('http://zuul.openstack.org/status.json', function(data) {
         if ('message' in data) {
@@ -115,15 +128,28 @@ function update() {
         html += '<br style="clear:both"/>';
         $("#pipeline-container").html(html);
     });
-    setTimeout(update, 5000);
+}
+
+function update_graphs() {
+    $('.graphite').each(function(i, img) {
+        var newimg = new Image()
+        var parts = img.src.split('#');
+        newimg.src = parts[0] + '#' + new Date().getTime();
+        $(newimg).load(function (x) {
+            img.src = newimg.src;
+        });
+    });
 }
 
 $(function() {
-    update();
+    window.zuul_graph_update_count = 0;
+    update_timeout();
 
     $(document).on({
         'show.visibility': function() {
             window.zuul_enable_status_updates = true;
+            update();
+            update_graphs();
         },
         'hide.visibility': function() {
             window.zuul_enable_status_updates = false;

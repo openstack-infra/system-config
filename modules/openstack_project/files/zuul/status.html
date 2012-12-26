@@ -84,17 +84,12 @@
 	  
 	  <div id="navigation" class="span-19">
 	    <ul id="Menu1">
-	      <li><a href="http://www.openstack.org/" title="Go to the Home page" class="link" >Home</a></li>
-   		  
-  	      <li><a href="http://www.openstack.org/projects/" title="Go to the OpenStack Projects page" class="link">Projects</a></li>
-   		  
-  	      <li><a href="http://www.openstack.org/user-stories/" title="Go to the User Stories page" class="link">User Stories</a></li>
-   		  
-  	      <li><a href="http://www.openstack.org/community/" title="Go to the Community page" class="current">Community</a></li>
-   	
-	      <li><a href="http://www.openstack.org/blog/" title="Go to the OpenStack Blog">Blog</a></li>
-	      <li><a href="http://wiki.openstack.org/" title="Go to the OpenStack Wiki">Wiki</a></li>
-	      <li><a href="http://docs.openstack.org/" title="Go to OpenStack Documentation">Documentation</a></li>
+	      <li><a href="/">Status</a></li>
+  	      <li><a href="/zuul/" class="current">Zuul</a></li>
+  	      <li><a href="/rechecks/">Rechecks</a></li>
+  	      <li><a href="/release/">Release</a></li>
+	      <li><a href="/reviews/">Reviews</a></li>
+	      <li><a href="/bugday/">Bugday</a></li>
  	    </ul>
 	  </div>
 	</div>
@@ -116,7 +111,7 @@
 
     <div class="container">
       <h2> Job Stats </h2>
-      <img src="http://graphite.openstack.org/render/?width=310&height=170&_salt=1356393274.997&graphOnly=false&title=Ready%20Devstack%20Jenkins%20Nodes&hideGrid=false&vtitle=&bgcolor=FFFFFF&fgcolor=000000&target=alias(sumSeries(stats.gauges.devstack.pool.*.oneiric.ready)%2C%22Oneiric%22)&target=alias(sumSeries(stats.gauges.devstack.pool.*.precise.ready)%2C%22Precise%22)"/>
+      <img class="graphite" src="http://graphite.openstack.org/render/?width=310&height=170&_salt=1356393274.997&graphOnly=false&title=Ready%20Devstack%20Jenkins%20Nodes&hideGrid=false&vtitle=&bgcolor=FFFFFF&fgcolor=000000&target=alias(sumSeries(stats.gauges.devstack.pool.*.oneiric.ready)%2C%22Oneiric%22)&target=alias(sumSeries(stats.gauges.devstack.pool.*.precise.ready)%2C%22Precise%22)"/>
     </div>
 
     <div class="container">
