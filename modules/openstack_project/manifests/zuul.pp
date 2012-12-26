@@ -33,6 +33,7 @@ class openstack_project::zuul(
     url_pattern          => $url_pattern,
     push_change_refs     => false,
     status_url           => "http://${::fqdn}/",
+    statsd_host          => $statsd_host,
   }
 
   file { '/etc/zuul/layout.yaml':
