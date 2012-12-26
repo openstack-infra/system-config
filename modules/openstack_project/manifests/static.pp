@@ -16,6 +16,16 @@ class openstack_project::static (
 
   include apache
 
+  a2mod { 'rewrite':
+    ensure => present,
+  }
+  a2mod { 'proxy':
+    ensure => present,
+  }
+  a2mod { 'proxy_http':
+    ensure => present,
+  }
+
   apache::vhost { 'tarballs.openstack.org':
     port     => 80,
     priority => '50',
