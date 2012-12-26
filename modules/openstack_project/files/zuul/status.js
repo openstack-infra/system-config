@@ -131,7 +131,7 @@ function update() {
 }
 
 function update_graphs() {
-    $('.graphite').each(function(i, img) {
+    $('.graph').each(function(i, img) {
         var newimg = new Image()
         var parts = img.src.split('#');
         newimg.src = parts[0] + '#' + new Date().getTime();

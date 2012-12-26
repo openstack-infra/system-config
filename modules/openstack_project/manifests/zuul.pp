@@ -104,4 +104,17 @@ class openstack_project::zuul(
     target  => '/opt/jquery-visibility/jquery-visibility.min.js',
     require => File['/var/lib/zuul/www'],
   }
+
+  vcsrepo { '/opt/jquery-graphite':
+    ensure   => latest,
+    provider => git,
+    revision => 'master',
+    source   => 'https://github.com/prestontimmons/graphitejs.git',
+  }
+
+  file { '/var/lib/zuul/www/jquery.graphite.js':
+    ensure  => link,
+    target  => '/opt/jquery-visibility/jquery-graphite.js',
+    require => File['/var/lib/zuul/www'],
+  }
 }
