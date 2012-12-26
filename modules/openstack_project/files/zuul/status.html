@@ -44,6 +44,7 @@
 
 <script type="text/javascript" src="jquery.min.js"></script>
 <script type="text/javascript" src="jquery-visibility.min.js"></script>
+<script type="text/javascript" src="jquery-graphite.js"></script>
 <script type="text/javascript" src="status.js"></script>
 
     
@@ -109,9 +110,25 @@
     <div id="pipeline-container">
     </div>
 
-    <div class="container">
+    <div class="container" id="graph-container">
       <h2> Job Stats </h2>
-      <img class="graphite" src="http://graphite.openstack.org/render/?width=310&height=170&_salt=1356393274.997&graphOnly=false&title=Ready%20Devstack%20Jenkins%20Nodes&hideGrid=false&vtitle=&bgcolor=FFFFFF&fgcolor=000000&target=alias(sumSeries(stats.gauges.devstack.pool.*.oneiric.ready)%2C%22Oneiric%22)&target=alias(sumSeries(stats.gauges.devstack.pool.*.precise.ready)%2C%22Precise%22)"/>
+
+      <script type="text/javascript">
+$.fn.graphite.defaults.url = "http://graphite.openstack.org/render/";
+
+$("#graph-container").append($(new Image()).addClass('graph').graphite({
+    from: "-24hours",
+    width: 310,
+    height: 170,
+    bgcolor: 'ffffff',
+    fgcolor: '000000',
+    target: [
+        "alias(sumSeries(stats.gauges.devstack.pool.*.oneiric.ready), 'Oneiric')",
+        "alias(sumSeries(stats.gauges.devstack.pool.*.precise.ready), 'Precise')"
+    ],
+    title: "Ready Devstack Jenkins Nodes"
+}));
+      </script>
     </div>
 
     <div class="container">
