@@ -11,6 +11,10 @@
 pattern = ^carbon\.
 retentions = 60:90d
 
-[default_1min_for_3years]
+[default]
 pattern = .*
-retentions = 60s:3y
+retentions = 60:90d
+
+[stats]
+pattern = ^stats.*
+retentions = 10:2160,60:10080,600:262974
