@@ -112,9 +112,9 @@ class openstack_project::zuul(
     source   => 'https://github.com/prestontimmons/graphitejs.git',
   }
 
-  file { '/var/lib/zuul/www/jquery.graphite.js':
+  file { '/var/lib/zuul/www/jquery-graphite.js':
     ensure  => link,
-    target  => '/opt/jquery-graphite/jquery-graphite.js',
+    target  => '/opt/jquery-graphite/jquery.graphite.js',
     require => File['/var/lib/zuul/www'],
   }
 }
