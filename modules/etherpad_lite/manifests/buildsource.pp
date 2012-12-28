@@ -15,7 +15,7 @@ define etherpad_lite::buildsource(
     user    => $user,
     cwd     => $dir,
     creates => $creates,
-    before  => exec["make in ${dir}"],
+    before  => Exec["make in ${dir}"],
   }
 
   exec { "make in ${dir}":
@@ -25,7 +25,7 @@ define etherpad_lite::buildsource(
     cwd     => $dir,
     timeout => $timeout,
     creates => $creates,
-    before  => exec["make install in ${dir}"],
+    before  => Exec["make install in ${dir}"],
   }
 
   exec { "make install in ${dir}":

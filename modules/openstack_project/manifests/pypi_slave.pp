@@ -15,8 +15,8 @@
 # Class to install dependencies for uploading python packages to pypi.
 #
 class openstack_project::pypi_slave (
-  pypi_password,
-  pypi_username = 'openstackci'
+  $pypi_password,
+  $pypi_username = 'openstackci'
 ) {
   include openstack_project::slave
   include pip
