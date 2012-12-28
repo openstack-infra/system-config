@@ -160,6 +160,12 @@ class graphite(
     require => File['/etc/graphite'],
   }
 
+  file { '/etc/graphite/storage-aggregation.conf':
+    mode    => '0444',
+    content => template('graphite/storage-aggregation.conf.erb'),
+    require => File['/etc/graphite'],
+  }
+
   file { '/usr/local/lib/python2.7/dist-packages/graphite/local_settings.py':
     mode    => '0444',
     content => template('graphite/local_settings.py.erb'),
