@@ -37,12 +37,14 @@ class jenkins::slave(
     'libcurl4-gnutls-dev',
     'libldap2-dev',
     'libmysqlclient-dev',
+    'libnspr4-dev', # for spidermonkey, used by ceilometer
     'libsqlite3-dev',
     'libxml2-dev',
     'libxml2-utils', # for xmllint, need for wadl
     'libxslt1-dev',
     'maven2',
     'pandoc', #for docs, markdown->docbook, bug 924507
+    'pkg-config', # for spidermonkey, used by ceilometer
     'pyflakes',
     'python-libvirt',
     'python-subunit', # for subunit2html.py
