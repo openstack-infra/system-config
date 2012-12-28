@@ -114,7 +114,7 @@ class openstack_project::zuul(
 
   file { '/var/lib/zuul/www/jquery.graphite.js':
     ensure  => link,
-    target  => '/opt/jquery-visibility/jquery-graphite.js',
+    target  => '/opt/jquery-graphite/jquery-graphite.js',
     require => File['/var/lib/zuul/www'],
   }
 }
