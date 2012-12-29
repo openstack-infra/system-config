@@ -13,11 +13,11 @@ pattern = \.count$
 xFilesFactor = 0
 aggregationMethod = sum
 
+[stats_counts]
+pattern = ^stats_counts\..*
+aggregationMethod = sum
+
 [default_average]
 pattern = .*
 xFilesFactor = 0.3
 aggregationMethod = average
-
-[stats_counts]
-pattern = ^stats_counts\..*
-aggregationMethod = sum
