@@ -78,7 +78,7 @@
               keep-hierarchy: false
               copy-after-failure: true
             - target: 'logs/$ZUUL_CHANGE/$ZUUL_PATCHSET/$ZUUL_PIPELINE/$JOB_NAME/$BUILD_NUMBER'
-              source: '**/*subunit_log.txt'
+              source: '.testrepository/0'
               keep-hierarchy: false
               copy-after-failure: true
       - console-log
@@ -139,7 +139,7 @@
               keep-hierarchy: false
               copy-after-failure: true
             - target: 'logs/$ZUUL_CHANGE/$ZUUL_PATCHSET/$ZUUL_PIPELINE/$JOB_NAME/$BUILD_NUMBER'
-              source: '**/*subunit_log.txt'
+              source: '.testrepository/0'
               keep-hierarchy: false
               copy-after-failure: true
       - console-log

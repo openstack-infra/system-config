@@ -42,8 +42,7 @@ echo "======================================================================"
 
 if [ -f ".testrepository/0" ]
 then
-    cp .testrepository/0 ./subunit_log.txt
-    /usr/local/jenkins/slave_scripts/subunit2html.py ./subunit_log.txt testr_results.html
+    /usr/local/jenkins/slave_scripts/subunit2html.py .testrepository/0 testr_results.html
 fi
 
 sudo /usr/local/jenkins/slave_scripts/jenkins-sudo-grep.sh post
