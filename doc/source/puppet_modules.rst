@@ -109,7 +109,7 @@ main ``site.pp`` manifest:
    }
 
 In this example the name "openstack" is used to create the site
-``paste.openstack.org``.  The site will be served from
+``planet.openstack.org``.  The site will be served from
 ``/srv/planet/openstack/`` and the checkout of the ``git_url`` supplied will
 be maintained in ``/var/lib/planet/openstack/``.
 
