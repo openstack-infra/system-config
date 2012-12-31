@@ -792,6 +792,7 @@ projects:
       - gate-moniker-python27
     post:
       - hook-moniker-rtfd
+      - moniker-coverage
     pre-release:
       - moniker-tarball-upload
     publish:
@@ -814,6 +815,7 @@ projects:
       - python-monikerclient-tarball-upload
     publish:
       - python-monikerclient-pypi-sdist
+      - python-monikerclient-docs
 
   - name: stackforge/bufunfa
     check:
