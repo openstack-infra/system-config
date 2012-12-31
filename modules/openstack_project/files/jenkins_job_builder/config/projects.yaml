@@ -441,6 +441,7 @@
     github-org: stackforge
     node: precise
     tarball-publisher-site: nova.openstack.org
+    doc-publisher-site: docs.openstack.org
     rtfd-id: 5190
 
     jobs:
@@ -456,6 +457,7 @@
     github-org: stackforge
     node: precise
     tarball-publisher-site: nova.openstack.org
+    doc-publisher-site: docs.openstack.org
     rtfd-id: 5366
 
     jobs:
