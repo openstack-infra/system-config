@@ -792,7 +792,6 @@ projects:
       - gate-moniker-python27
     post:
       - hook-moniker-rtfd
-      - moniker-coverage
     pre-release:
       - moniker-tarball-upload
     publish:
