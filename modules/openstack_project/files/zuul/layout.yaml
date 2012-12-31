@@ -808,8 +808,6 @@ projects:
       - gate-moniker-python27
     post:
       - hook-moniker-rtfd
-    pre-release:
-      - moniker-tarball-upload
     publish:
       - moniker-pypi-sdist
 
@@ -826,8 +824,6 @@ projects:
       - gate-python-monikerclient-python27
     post:
       - hook-python-monikerclient-rtfd
-    pre-release:
-      - python-monikerclient-tarball-upload
     publish:
       - python-monikerclient-pypi-sdist
 
