@@ -48,6 +48,5 @@
 - job-group:
     name: pypi-jobs
     jobs:
-      - '{name}-docs'
       - '{name}-pypi-sdist'
       - '{name}-pypi-upload'

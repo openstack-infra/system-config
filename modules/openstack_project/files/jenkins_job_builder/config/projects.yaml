@@ -44,9 +44,7 @@
     jobs:
       - gate-{name}-pep8
       - gate-{name}-pyflakes
-      - '{name}-sdist-tarball'
-      - '{name}-pypi-sdist'
-      - '{name}-pypi-upload'
+      - pypi-jobs
 
 
 - project:
@@ -59,8 +57,7 @@
     jobs:
       - gate-{name}-pep8
       - gate-{name}-pyflakes
-      - '{name}-pypi-sdist'
-      - '{name}-pypi-upload'
+      - pypi-jobs
 
 
 - project:
@@ -73,8 +70,7 @@
     jobs:
       - gate-{name}-pep8
       - gate-{name}-pyflakes
-      - '{name}-pypi-sdist'
-      - '{name}-pypi-upload'
+      - pypi-jobs
 
 
 - project:
@@ -121,6 +117,7 @@
 
     jobs:
       - python-jobs
+      - openstack-publish-jobs
       - pypi-jobs
 
 
@@ -172,10 +169,8 @@
     jobs:
       - gate-{name}-pep8
       - gate-{name}-pyflakes
-      - '{name}-sdist-tarball'
-      - '{name}-pypi-sdist'
-      - '{name}-pypi-upload'
       - gate-{name}-docs
+      - pypi-jobs
 
 - project:
     name: keystone
@@ -224,9 +219,7 @@
     tarball-publisher-site: 173.203.107.207
 
     jobs:
-      - '{name}-sdist-tarball'
-      - '{name}-pypi-sdist'
-      - '{name}-pypi-upload'
+      - pypi-jobs
 
 
 - project:
@@ -272,18 +265,6 @@
 
 
 - project:
-    name: pbr
-    github-org: openstack-dev
-    node: precise
-    tarball-publisher-site: nova.openstack.org
-    doc-publisher-site: docs.openstack.org
-
-    jobs:
-      - python-jobs
-      - pypi-jobs
-
-
-- project:
     name: python-ceilometerclient
     github-org: openstack
     node: precise
@@ -292,6 +273,7 @@
 
     jobs:
       - python-jobs
+      - openstack-publish-jobs
       - pypi-jobs
 
 
@@ -304,6 +286,7 @@
 
     jobs:
       - python-jobs
+      - openstack-publish-jobs
       - pypi-jobs
 
 
@@ -316,6 +299,7 @@
 
     jobs:
       - python-jobs
+      - openstack-publish-jobs
       - pypi-jobs
 
 
@@ -328,6 +312,7 @@
 
     jobs:
       - python-jobs
+      - openstack-publish-jobs
       - pypi-jobs
 
 
@@ -340,6 +325,7 @@
 
     jobs:
       - python-jobs
+      - openstack-publish-jobs
       - pypi-jobs
 
 
@@ -352,6 +338,7 @@
 
     jobs:
       - python-jobs
+      - openstack-publish-jobs
       - pypi-jobs
 
 
@@ -364,6 +351,7 @@
 
     jobs:
       - python-jobs
+      - openstack-publish-jobs
       - pypi-jobs
 
 
@@ -376,6 +364,7 @@
 
     jobs:
       - python-jobs
+      - openstack-publish-jobs
       - pypi-jobs
 
 
@@ -440,30 +429,26 @@
     name: moniker
     github-org: stackforge
     node: precise
-    tarball-publisher-site: nova.openstack.org
     rtfd-id: 5190
 
     jobs:
       - python-jobs
       - hook-{name}-rtfd
       - gate-{name}-pyflakes
-      - '{name}-pypi-sdist'
-      - '{name}-pypi-upload'
+      - pypi-jobs
 
 
 - project:
     name: python-monikerclient
     github-org: stackforge
     node: precise
-    tarball-publisher-site: nova.openstack.org
     rtfd-id: 5366
 
     jobs:
       - python-jobs
       - hook-{name}-rtfd
       - gate-{name}-pyflakes
-      - '{name}-pypi-sdist'
-      - '{name}-pypi-upload'
+      - pypi-jobs
 
 
 - project:
@@ -510,9 +495,7 @@
     jobs:
       - python-jobs
       - gate-{name}-pyflakes
-      - '{name}-sdist-tarball'
-      - '{name}-pypi-sdist'
-      - '{name}-pypi-upload'
+      - pypi-jobs
 
 
 - project:

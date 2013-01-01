@@ -737,8 +737,10 @@ projects:
       - gate-python-heatclient-python26
       - gate-python-heatclient-python27
     post:
-      - python-heatclient-sdist-tarball
+      - python-heatclient-branch-tarball
       - python-heatclient-coverage
+    pre-release:
+      - python-heatclient-tarball-upload
     publish:
       - python-heatclient-pypi-sdist
       - python-heatclient-docs
@@ -792,8 +794,7 @@ projects:
       - gate-moniker-python27
     post:
       - hook-moniker-rtfd
-    pre-release:
-      - moniker-tarball-upload
+      - moniker-coverage
     publish:
       - moniker-pypi-sdist
 
@@ -810,8 +811,7 @@ projects:
       - gate-python-monikerclient-python27
     post:
       - hook-python-monikerclient-rtfd
-    pre-release:
-      - python-monikerclient-tarball-upload
+      - python-monikerclient-coverage
     publish:
       - python-monikerclient-pypi-sdist
 
