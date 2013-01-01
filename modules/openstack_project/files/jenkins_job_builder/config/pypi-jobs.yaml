@@ -1,44 +1,17 @@
 - job-template:
-    name: '{name}-pypi-sdist'
-    concurrent: false
-    block-downstream: true
-    node: precise
-
-    triggers:
-      - zuul-post
-
-    builders:
-      - gerrit-git-prep
-      - shell: tox -v -evenv python setup.py sdist
-
-    publishers:
-      - archive:
-          artifacts: 'dist/{name}*.tar.gz'
-          latest_only: true
-      - tarball:
-          project: '{name}'
-          site: '{tarball-publisher-site}'
-      - trigger:
-          project: '{name}-pypi-upload'
-      - console-log-post
-
-
-- job-template:
     name: '{name}-pypi-upload'
-    concurrent: false
     node: pypi
 
     builders:
       - shell: |
-          if [ -e dist ]
-          then
-              rm -rf dist
-          fi
-      - copyartifact:
-          project: '{name}-pypi-sdist'
-          filter: 'dist/{name}*.tar.gz'
+          #!bin/bash -xe
+          TAG=`echo $ZUUL_REF | sed 's/^refs.tags.//'`
+          FILENAME="{name}-$TAG.tar.gz"
+
+          rm -rf *tar.gz
+          curl -o $FILENAME http://{tarball-site}/{name}/$FILENAME
+
       - shell: |
-          cd dist
           /usr/local/jenkins/slave_scripts/pypi-upload.sh {name}
 
     publishers:
@@ -48,6 +21,4 @@
 - job-group:
     name: pypi-jobs
     jobs:
-      - '{name}-docs'
-      - '{name}-pypi-sdist'
       - '{name}-pypi-upload'

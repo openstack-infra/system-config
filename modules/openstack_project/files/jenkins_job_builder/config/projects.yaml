@@ -2,7 +2,7 @@
     name: ceilometer
     github-org: openstack
     node: oneiric
-    tarball-publisher-site: nova.openstack.org
+    tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
 
     jobs:
@@ -14,7 +14,7 @@
     name: cinder
     github-org: openstack
     node: precise
-    tarball-publisher-site: nova.openstack.org
+    tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
 
     jobs:
@@ -26,7 +26,7 @@
     name: compute-api
     github-org: openstack
     node: precise
-    tarball-publisher-site: nova.openstack.org
+    tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
 
     jobs:
@@ -39,14 +39,12 @@
     github-org: openstack-infra
     node: precise
     doc-publisher-site: ci.openstack.org
-    tarball-publisher-site: 173.203.107.207
+    tarball-site: tarballs.openstack.org
 
     jobs:
       - gate-{name}-pep8
       - gate-{name}-pyflakes
-      - '{name}-sdist-tarball'
-      - '{name}-pypi-sdist'
-      - '{name}-pypi-upload'
+      - pypi-jobs
 
 
 - project:
@@ -54,13 +52,12 @@
     github-org: openstack-infra
     node: precise
     doc-publisher-site: ci.openstack.org
-    tarball-publisher-site: nova.openstack.org
+    tarball-site: tarballs.openstack.org
 
     jobs:
       - gate-{name}-pep8
       - gate-{name}-pyflakes
-      - '{name}-pypi-sdist'
-      - '{name}-pypi-upload'
+      - pypi-jobs
 
 
 - project:
@@ -68,13 +65,12 @@
     github-org: openstack-infra
     node: precise
     doc-publisher-site: ci.openstack.org
-    tarball-publisher-site: nova.openstack.org
+    tarball-site: tarballs.openstack.org
 
     jobs:
       - gate-{name}-pep8
       - gate-{name}-pyflakes
-      - '{name}-pypi-sdist'
-      - '{name}-pypi-upload'
+      - pypi-jobs
 
 
 - project:
@@ -89,7 +85,7 @@
     name: glance
     github-org: openstack
     node: precise
-    tarball-publisher-site: nova.openstack.org
+    tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
 
     jobs:
@@ -104,7 +100,7 @@
     name: heat
     github-org: openstack
     node: oneiric
-    tarball-publisher-site: nova.openstack.org
+    tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
 
     jobs:
@@ -116,11 +112,12 @@
     name: python-heatclient
     github-org: openstack
     node: precise
-    tarball-publisher-site: nova.openstack.org
+    tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
 
     jobs:
       - python-jobs
+      - openstack-publish-jobs
       - pypi-jobs
 
 
@@ -128,7 +125,7 @@
     name: horizon
     github-org: openstack
     node: precise
-    tarball-publisher-site: nova.openstack.org
+    tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
 
     jobs:
@@ -143,7 +140,7 @@
     name: identity-api
     github-org: openstack
     node: precise
-    tarball-publisher-site: nova.openstack.org
+    tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
 
     jobs:
@@ -155,7 +152,7 @@
     name: image-api
     github-org: openstack
     node: precise
-    tarball-publisher-site: nova.openstack.org
+    tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
 
     jobs:
@@ -167,21 +164,19 @@
     name: jenkins-job-builder
     github-org: openstack-infra
     node: precise
-    tarball-publisher-site: nova.openstack.org
+    tarball-site: tarballs.openstack.org
 
     jobs:
       - gate-{name}-pep8
       - gate-{name}-pyflakes
-      - '{name}-sdist-tarball'
-      - '{name}-pypi-sdist'
-      - '{name}-pypi-upload'
       - gate-{name}-docs
+      - pypi-jobs
 
 - project:
     name: keystone
     github-org: openstack
     node: precise
-    tarball-publisher-site: nova.openstack.org
+    tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
 
     jobs:
@@ -197,7 +192,7 @@
     name: netconn-api
     github-org: openstack
     node: precise
-    tarball-publisher-site: nova.openstack.org
+    tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
 
     jobs:
@@ -209,7 +204,7 @@
     name: netconn-api-v20
     github-org: openstack
     node: precise
-    tarball-publisher-site: nova.openstack.org
+    tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
 
     jobs:
@@ -221,19 +216,17 @@
     github-org: openstack-infra
     node: precise
     doc-publisher-site: ci.openstack.org
-    tarball-publisher-site: 173.203.107.207
+    tarball-site: tarballs.openstack.org
 
     jobs:
-      - '{name}-sdist-tarball'
-      - '{name}-pypi-sdist'
-      - '{name}-pypi-upload'
+      - pypi-jobs
 
 
 - project:
     name: nova
     github-org: openstack
     node: precise
-    tarball-publisher-site: nova.openstack.org
+    tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
 
     jobs:
@@ -250,7 +243,7 @@
     name: object-api
     github-org: openstack
     node: precise
-    tarball-publisher-site: nova.openstack.org
+    tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
 
     jobs:
@@ -262,7 +255,7 @@
     name: oslo-incubator
     github-org: openstack
     node: precise
-    tarball-publisher-site: nova.openstack.org
+    tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
 
     jobs:
@@ -272,26 +265,15 @@
 
 
 - project:
-    name: pbr
-    github-org: openstack-dev
-    node: precise
-    tarball-publisher-site: nova.openstack.org
-    doc-publisher-site: docs.openstack.org
-
-    jobs:
-      - python-jobs
-      - pypi-jobs
-
-
-- project:
     name: python-ceilometerclient
     github-org: openstack
     node: precise
-    tarball-publisher-site: nova.openstack.org
+    tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
 
     jobs:
       - python-jobs
+      - openstack-publish-jobs
       - pypi-jobs
 
 
@@ -299,11 +281,12 @@
     name: python-cinderclient
     github-org: openstack
     node: precise
-    tarball-publisher-site: nova.openstack.org
+    tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
 
     jobs:
       - python-jobs
+      - openstack-publish-jobs
       - pypi-jobs
 
 
@@ -311,11 +294,12 @@
     name: python-glanceclient
     github-org: openstack
     node: precise
-    tarball-publisher-site: nova.openstack.org
+    tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
 
     jobs:
       - python-jobs
+      - openstack-publish-jobs
       - pypi-jobs
 
 
@@ -323,11 +307,12 @@
     name: python-keystoneclient
     github-org: openstack
     node: precise
-    tarball-publisher-site: nova.openstack.org
+    tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
 
     jobs:
       - python-jobs
+      - openstack-publish-jobs
       - pypi-jobs
 
 
@@ -335,11 +320,12 @@
     name: python-novaclient
     github-org: openstack
     node: precise
-    tarball-publisher-site: nova.openstack.org
+    tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
 
     jobs:
       - python-jobs
+      - openstack-publish-jobs
       - pypi-jobs
 
 
@@ -347,11 +333,12 @@
     name: python-openstackclient
     github-org: openstack
     node: precise
-    tarball-publisher-site: nova.openstack.org
+    tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
 
     jobs:
       - python-jobs
+      - openstack-publish-jobs
       - pypi-jobs
 
 
@@ -359,11 +346,12 @@
     name: python-quantumclient
     github-org: openstack
     node: precise
-    tarball-publisher-site: nova.openstack.org
+    tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
 
     jobs:
       - python-jobs
+      - openstack-publish-jobs
       - pypi-jobs
 
 
@@ -371,11 +359,12 @@
     name: python-swiftclient
     github-org: openstack
     node: precise
-    tarball-publisher-site: swift.openstack.org
+    tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
 
     jobs:
       - python-jobs
+      - openstack-publish-jobs
       - pypi-jobs
 
 
@@ -383,7 +372,7 @@
     name: quantum
     github-org: openstack
     node: precise
-    tarball-publisher-site: nova.openstack.org
+    tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
 
     jobs:
@@ -394,6 +383,7 @@
 - project:
     name: reddwarf
     github-org: stackforge
+    tarball-site: tarballs.openstack.org
     node: precise
 
     jobs:
@@ -403,6 +393,7 @@
 - project:
     name: python-reddwarfclient
     github-org: stackforge
+    tarball-site: tarballs.openstack.org
     node: precise
 
     jobs:
@@ -412,6 +403,7 @@
 - project:
     name: libra
     github-org: stackforge
+    tarball-site: tarballs.openstack.org
     node: precise
 
     jobs:
@@ -428,6 +420,7 @@
 - project:
     name: healthnmon
     github-org: stackforge
+    tarball-site: tarballs.openstack.org
     node: precise
 
     jobs:
@@ -437,6 +430,7 @@
 - project:
     name: marconi
     github-org: stackforge
+    tarball-site: tarballs.openstack.org
     node: precise
 
     jobs:
@@ -447,36 +441,35 @@
     name: moniker
     github-org: stackforge
     node: precise
-    tarball-publisher-site: nova.openstack.org
+    tarball-site: tarballs.openstack.org
     rtfd-id: 5190
 
     jobs:
       - python-jobs
       - hook-{name}-rtfd
       - gate-{name}-pyflakes
-      - '{name}-pypi-sdist'
-      - '{name}-pypi-upload'
+      - pypi-jobs
 
 
 - project:
     name: python-monikerclient
     github-org: stackforge
     node: precise
-    tarball-publisher-site: nova.openstack.org
+    tarball-site: tarballs.openstack.org
     rtfd-id: 5366
 
     jobs:
       - python-jobs
       - hook-{name}-rtfd
       - gate-{name}-pyflakes
-      - '{name}-pypi-sdist'
-      - '{name}-pypi-upload'
+      - pypi-jobs
 
 
 - project:
     name: bufunfa
     github-org: stackforge
     node: precise
+    tarball-site: tarballs.openstack.org
     rtfd-id: 5216
 
     jobs:
@@ -488,7 +481,7 @@
     name: swift
     github-org: openstack
     node: precise
-    tarball-publisher-site: nova.openstack.org
+    tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
 
     jobs:
@@ -510,14 +503,12 @@
     name: zuul
     github-org: openstack-infra
     node: precise
-    tarball-publisher-site: nova.openstack.org
+    tarball-site: tarballs.openstack.org
 
     jobs:
       - python-jobs
       - gate-{name}-pyflakes
-      - '{name}-sdist-tarball'
-      - '{name}-pypi-sdist'
-      - '{name}-pypi-upload'
+      - pypi-jobs
 
 
 - project:

@@ -26,7 +26,7 @@
 
     publishers:
       - war:
-          site: 'nova.openstack.org'
+          site: 'tarballs.openstack.org'
           warfile: 'gerrit-war/target/gerrit*.war'
           target: 'tarballs/ci/test/'
       - console-log
@@ -89,7 +89,7 @@
 
     publishers:
       - war:
-          site: 'nova.openstack.org'
+          site: 'tarballs.openstack.org'
           warfile: 'gerrit-war/target/gerrit*.war'
           target: 'tarballs/ci/'
       - console-log-post

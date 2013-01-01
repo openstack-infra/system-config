@@ -9,23 +9,6 @@ puppet.
 The OpenStack Infrastructure team manages a number of custom puppet modules
 outlined in this document.
 
-Doc Server
-----------
-
-The doc_server module configures apache to serve the documentation for
-several specified OpenStack projects.  At the moment to add a site to this
-you need to edit ``modules/doc_server/manifests/init.pp`` and add a line as
-follows:
-
-.. code-block:: ruby
-   :linenos:
-
-   doc_server::site { "swift": }
-
-In this example nginx will be configured to serve ``swift.openstack.org``
-from ``/srv/docs/swift`` and ``swift.openstack.org/tarballs/`` from
-``/srv/tarballs/swift``
-
 Lodgeit
 -------
 

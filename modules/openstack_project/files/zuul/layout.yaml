@@ -123,10 +123,11 @@ projects:
       - zuul-docs
     pre-release:
       - zuul-docs
-      - zuul-tarball-upload
+      - zuul-tarball
     publish:
       - zuul-docs
-      - zuul-pypi-sdist
+      - zuul-tarball:
+        - zuul-pypi-upload
 
   - name: openstack-infra/nose-html-output
     check:
@@ -136,9 +137,10 @@ projects:
     post:
       - nose-html-output-branch-tarball
     pre-release:
-      - nose-html-output-tarball-upload
+      - nose-html-output-tarball
     publish:
-      - nose-html-output-pypi-sdist
+      - nose-html-output-tarball:
+        - nose-html-output-pypi-upload
 
   - name: openstack-infra/gerrit
     check:
@@ -158,9 +160,10 @@ projects:
     post:
       - gerritbot-branch-tarball
     pre-release:
-      - gerritbot-tarball-upload
+      - gerritbot-tarball
     publish:
-      - gerritbot-pypi-sdist
+      - gerritbot-tarball:
+        - gerritbot-pypi-upload
 
   - name: openstack-infra/gerritlib
     check:
@@ -170,9 +173,10 @@ projects:
       - gate-gerritlib-pep8
       - gate-gerritlib-pyflakes
     pre-release:
-      - gerritlib-tarball-upload
+      - gerritlib-tarball
     publish:
-      - gerritlib-pypi-sdist
+      - gerritlib-tarball:
+        - gerritlib-pypi-upload
 
   - name: openstack-infra/jeepyb
     check:
@@ -182,9 +186,10 @@ projects:
       - gate-jeepyb-pep8
       - gate-jeepyb-pyflakes
     pre-release:
-      - jeepyb-tarball-upload
+      - jeepyb-tarball
     publish:
-      - jeepyb-pypi-sdist
+      - jeepyb-tarball:
+        - jeepyb-pypi-upload
 
   - name: openstack-infra/jenkins-job-builder
     check:
@@ -200,9 +205,10 @@ projects:
       - jenkins-job-builder-branch-tarball
       - jenkins-job-builder-docs
     pre-release:
-      - jenkins-job-builder-tarball-upload
+      - jenkins-job-builder-tarball
     publish:
-      - jenkins-job-builder-pypi-sdist
+      - jenkins-job-builder-tarball:
+        - jenkins-job-builder-pypi-upload
 
   - name: openstack-infra/lodgeit
     check:
@@ -264,10 +270,13 @@ projects:
       - gate-tempest-devstack-vm-cinder
       - gate-devstack-vm-quantum
     post:
-      - cinder-tarball
+      - cinder-branch-tarball
       - cinder-coverage
       - cinder-docs
+    pre-release:
+      - cinder-tarball
     publish:
+      - cinder-tarball
       - cinder-docs
 
   - name: openstack/glance
@@ -288,10 +297,13 @@ projects:
       - gate-tempest-devstack-vm-cinder
       - gate-devstack-vm-quantum
     post:
-      - glance-tarball
+      - glance-branch-tarball
       - glance-coverage
       - glance-docs
+    pre-release:
+      - glance-tarball
     publish:
+      - glance-tarball
       - glance-docs
 
   - name: openstack/horizon
@@ -314,10 +326,13 @@ projects:
       - gate-tempest-devstack-vm-cinder
       - gate-devstack-vm-quantum
     post:
-      - horizon-tarball
+      - horizon-branch-tarball
       - horizon-coverage
       - horizon-docs
+    pre-release:
+      - horizon-tarball
     publish:
+      - horizon-tarball
       - horizon-docs
 
   - name: openstack/keystone
@@ -338,10 +353,16 @@ projects:
       - gate-tempest-devstack-vm-cinder
       - gate-devstack-vm-quantum
     post:
-      - keystone-tarball
+      - keystone-branch-tarball
       - keystone-coverage
       - keystone-docs
       - keystone-upstream-translation-update
+    pre-release:
+      - keystone-tarball
+    publish:
+      - keystone-tarball
+      - keystone-docs
+
 
   - name: openstack/nova
     check:
@@ -362,11 +383,14 @@ projects:
       - gate-tempest-devstack-vm-cinder
       - gate-devstack-vm-quantum
     post:
-      - nova-tarball
+      - nova-branch-tarball
       - nova-coverage
       - nova-docs
       - nova-upstream-translation-update
+    pre-release:
+      - nova-tarball
     publish:
+      - nova-tarball
       - nova-docs
 
   - name: openstack/oslo-incubator
@@ -402,10 +426,13 @@ projects:
       - gate-tempest-devstack-vm-quantum
       - gate-devstack-vm-quantum
     post:
-      - quantum-tarball
+      - quantum-branch-tarball
       - quantum-coverage
       - quantum-docs
+    pre-release:
+      - quantum-tarball
     publish:
+      - quantum-tarball
       - quantum-docs
 
   - name: openstack/swift
@@ -426,10 +453,13 @@ projects:
       - gate-tempest-devstack-vm-cinder
       - gate-devstack-vm-quantum
     post:
-      - swift-tarball
+      - swift-branch-tarball
       - swift-coverage
       - swift-docs
+    pre-release:
+      - swift-tarball
     publish:
+      - swift-tarball
       - swift-docs
 
   - name: openstack/python-ceilometerclient
@@ -447,9 +477,10 @@ projects:
       - python-ceilometerclient-branch-tarball
       - python-ceilometerclient-coverage
     pre-release:
-      - python-ceilometerclient-tarball-upload
+      - python-ceilometerclient-tarball
     publish:
-      - python-ceilometerclient-pypi-sdist
+      - python-ceilometerclient-tarball:
+        - python-ceilometerclient-pypi-upload
       - python-ceilometerclient-docs
 
   - name: openstack/python-cinderclient
@@ -473,9 +504,10 @@ projects:
       - python-cinderclient-branch-tarball
       - python-cinderclient-coverage
     pre-release:
-      - python-cinderclient-tarball-upload
+      - python-cinderclient-tarball
     publish:
-      - python-cinderclient-pypi-sdist
+      - python-cinderclient-tarball:
+        - python-cinderclient-pypi-upload
       - python-cinderclient-docs
 
   - name: openstack/python-glanceclient
@@ -499,9 +531,10 @@ projects:
       - python-glanceclient-branch-tarball
       - python-glanceclient-coverage
     pre-release:
-      - python-glanceclient-tarball-upload
+      - python-glanceclient-tarball
     publish:
-      - python-glanceclient-pypi-sdist
+      - python-glanceclient-tarball:
+        - python-glanceclient-pypi-upload
       - python-glanceclient-docs
 
   - name: openstack/python-keystoneclient
@@ -525,9 +558,10 @@ projects:
       - python-keystoneclient-branch-tarball
       - python-keystoneclient-coverage
     pre-release:
-      - python-keystoneclient-tarball-upload
+      - python-keystoneclient-tarball
     publish:
-      - python-keystoneclient-pypi-sdist
+      - python-keystoneclient-tarball:
+        - python-keystoneclient-pypi-upload
       - python-keystoneclient-docs
 
   - name: openstack/python-novaclient
@@ -551,9 +585,10 @@ projects:
       - python-novaclient-branch-tarball
       - python-novaclient-coverage
     pre-release:
-      - python-novaclient-tarball-upload
+      - python-novaclient-tarball
     publish:
-      - python-novaclient-pypi-sdist
+      - python-novaclient-tarball:
+        - python-novaclient-pypi-upload
       - python-novaclient-docs
 
   - name: openstack/python-openstackclient
@@ -571,9 +606,10 @@ projects:
       - python-openstackclient-branch-tarball
       - python-openstackclient-coverage
     pre-release:
-      - python-openstackclient-tarball-upload
+      - python-openstackclient-tarball
     publish:
-      - python-openstackclient-pypi-sdist
+      - python-openstackclient-tarball:
+        - python-openstackclient-pypi-upload
       - python-openstackclient-docs
 
   - name: openstack/python-quantumclient
@@ -597,9 +633,10 @@ projects:
       - python-quantumclient-branch-tarball
       - python-quantumclient-coverage
     pre-release:
-      - python-quantumclient-tarball-upload
+      - python-quantumclient-tarball
     publish:
-      - python-quantumclient-pypi-sdist
+      - python-quantumclient-tarball:
+        - python-quantumclient-pypi-upload
       - python-quantumclient-docs
 
   - name: openstack/python-swiftclient
@@ -617,9 +654,10 @@ projects:
       - python-swiftclient-branch-tarball
       - python-swiftclient-coverage
     pre-release:
-      - python-swiftclient-tarball-upload
+      - python-swiftclient-tarball
     publish:
-      - python-swiftclient-pypi-sdist
+      - python-swiftclient-tarball:
+        - python-swiftclient-pypi-upload
       - python-swiftclient-docs
 
   - name: openstack/requirements
@@ -688,11 +726,14 @@ projects:
       - gate-ceilometer-python26-folsom
       - gate-ceilometer-python27-folsom
     post:
-      - ceilometer-tarball
+      - ceilometer-branch-tarball
       - ceilometer-coverage
       - ceilometer-docs
+    pre-release:
+      - ceilometer-tarball
     publish:
       - ceilometer-docs
+      - ceilometer-tarball
 
   - name: stackforge/MRaaS
     check:
@@ -739,7 +780,10 @@ projects:
       - heat-tarball
       - heat-coverage
       - heat-docs
+    pre-release:
+      - heat-tarball
     publish:
+      - heat-tarball
       - heat-docs
 
   - name: openstack/python-heatclient
@@ -753,10 +797,13 @@ projects:
       - gate-python-heatclient-python26
       - gate-python-heatclient-python27
     post:
-      - python-heatclient-sdist-tarball
+      - python-heatclient-branch-tarball
       - python-heatclient-coverage
+    pre-release:
+      - python-heatclient-tarball
     publish:
-      - python-heatclient-pypi-sdist
+      - python-heatclient-tarball:
+        - python-heatclient-pypi-upload
       - python-heatclient-docs
 
   - name: stackforge/reddwarf
@@ -808,10 +855,13 @@ projects:
       - gate-moniker-python27
     post:
       - hook-moniker-rtfd
+      - moniker-coverage
+      - moniker-branch-tarball
     pre-release:
-      - moniker-tarball-upload
+      - moniker-tarball
     publish:
-      - moniker-pypi-sdist
+      - moniker-tarball:
+        - moniker-pypi-upload
 
   - name: stackforge/python-monikerclient
     check:
@@ -826,10 +876,13 @@ projects:
       - gate-python-monikerclient-python27
     post:
       - hook-python-monikerclient-rtfd
+      - python-monikerclient-coverage
+      - python-monikerclient-branch-tarball
     pre-release:
-      - python-monikerclient-tarball-upload
+      - python-monikerclient-tarball
     publish:
-      - python-monikerclient-pypi-sdist
+      - python-monikerclient-tarball:
+        - python-monikerclient-pypi-upload
 
   - name: stackforge/bufunfa
     check:
