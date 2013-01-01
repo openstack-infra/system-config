@@ -724,7 +724,7 @@ A minimum config::
       name: PROJECT
       github-org: openstack
       node: precise
-      tarball-publisher-site: nova.openstack.org
+      tarball-site: tarballs.openstack.org
       doc-publisher-site: docs.openstack.org
 
       jobs:
@@ -736,7 +736,7 @@ Full example config for nova::
       name: nova
       github-org: openstack
       node: precise
-      tarball-publisher-site: nova.openstack.org
+      tarball-site: tarballs.openstack.org
       doc-publisher-site: docs.openstack.org
 
       jobs:
@@ -779,9 +779,11 @@ Full example config for nova::
         - gate-tempest-devstack-vm
         - gate-tempest-devstack-vm-cinder
       post:
-        - nova-tarball
+        - nova-branch-tarball
         - nova-coverage
         - nova-docs
+      pre-release:
+        - nova-tarball
       publish:
         - nova-tarball
         - nova-docs
