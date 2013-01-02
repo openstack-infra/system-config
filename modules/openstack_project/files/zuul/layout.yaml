@@ -701,6 +701,15 @@ projects:
       - gate-libra-pep8
       - gate-libra-python27
 
+  - name: stackforge/python-libraclient
+    check:
+      - gate-python-libraclient-pep8
+      - gate-python-libraclient-python27
+    gate:
+      - gate-python-libraclient-pep8
+      - gate-python-libraclient-python27
+
+
   - name: stackforge/healthnmon
     check:
       - gate-healthnmon-pep8
