@@ -43,7 +43,9 @@ fi
 # Add all changed files to git
 git add $PROJECT/locale/*
 
-if [ ! `git diff-index --quiet HEAD --` ]
+# Don't send a review if the only things which have changed are the creation
+# date or comments.
+if [ `git diff --cached | egrep -v "(POT-Creation-Date|^[\+\-]#|^\+{3}|^\-{3})" | egrep -c "^[\-\+]"` -gt 0 ]
 then
     # Commit and review
     git commit -F- <<EOF
