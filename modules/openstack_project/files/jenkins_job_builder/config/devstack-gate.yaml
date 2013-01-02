@@ -538,7 +538,7 @@
 
     wrappers:
       - timeout:
-          timeout: 90
+          timeout: 120
           fail: true
       - timestamps
 
@@ -562,7 +562,6 @@
           export PYTHONUNBUFFERED=true
           export DEVSTACK_GATE_TEMPEST=1
           export DEVSTACK_GATE_POSTGRES=1
-          export DEVSTACK_GATE_CINDER=1
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
       - link-logs
