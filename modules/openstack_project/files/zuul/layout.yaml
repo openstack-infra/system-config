@@ -97,6 +97,9 @@ jobs:
   - name: gate-devstack-vm-quantum
     branch: ^(?!stable/(diablo|essex|folsom)).*$
     voting: false
+  - name: gate-tempest-devstack-vm-postgres
+    branch: ^(?!stable/(diablo|essex|folsom)).*$
+    voting: false
 
 
 projects:
@@ -629,40 +632,42 @@ projects:
     check:
       - gate-tempest-devstack-vm
       - gate-tempest-devstack-vm-cinder
+      - gate-tempest-devstack-vm-postgres
       - gate-tempest-devstack-vm-quantum
       - gate-devstack-vm-quantum
     gate:
       - gate-tempest-devstack-vm
       - gate-tempest-devstack-vm-cinder
+      - gate-tempest-devstack-vm-postgres
       - gate-tempest-devstack-vm-quantum
       - gate-devstack-vm-quantum
-    silent:
-      - gate-tempest-devstack-vm-postgres
 
   - name: openstack-infra/devstack-gate
     check:
       - gate-tempest-devstack-vm
       - gate-tempest-devstack-vm-cinder
+      - gate-tempest-devstack-vm-postgres
       - gate-tempest-devstack-vm-quantum
       - gate-devstack-vm-quantum
     gate:
       - gate-tempest-devstack-vm
       - gate-tempest-devstack-vm-cinder
+      - gate-tempest-devstack-vm-postgres
       - gate-tempest-devstack-vm-quantum
       - gate-devstack-vm-quantum
-    silent:
-      - gate-tempest-devstack-vm-postgres
 
   - name: openstack/tempest
     check:
       - gate-tempest-pep8
       - gate-tempest-devstack-vm
+      - gate-tempest-devstack-vm-postgres
       - gate-tempest-devstack-vm-cinder
       - gate-tempest-devstack-vm-quantum
       - gate-devstack-vm-quantum
     gate:
       - gate-tempest-pep8
       - gate-tempest-devstack-vm
+      - gate-tempest-devstack-vm-postgres
       - gate-tempest-devstack-vm-cinder
       - gate-tempest-devstack-vm-quantum
       - gate-devstack-vm-quantum
