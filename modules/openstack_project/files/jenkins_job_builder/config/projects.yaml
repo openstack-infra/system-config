@@ -417,6 +417,13 @@
     jobs:
       - python-jobs
 
+- project:
+    name: python-libraclient
+    github-org: stackforge
+    node: precise
+
+    jobs:
+      - python-jobs
 
 - project:
     name: healthnmon

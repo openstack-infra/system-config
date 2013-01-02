@@ -51,6 +51,7 @@ stackforge-dev:
       - x-vrif-minus-2
     projects:
       - stackforge/libra
+      - stackforge/python-libraclient
       - stackforge/python-reddwarfclient
       - stackforge/reddwarf
     branches:
