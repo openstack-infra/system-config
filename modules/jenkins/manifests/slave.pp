@@ -8,6 +8,7 @@ class jenkins::slave(
 ) {
 
   include pip
+  include jenkins::params
 
   if ($user == true) {
     class { 'jenkins::jenkinsuser':
@@ -19,44 +20,39 @@ class jenkins::slave(
 
   # Packages that all jenkins slaves need
   $common_packages = [
-    'default-jdk', # jdk for building java jobs
-    'build-essential',
-    'ccache',
-    'python-netaddr', # Needed for devstack address_in_net()
+    $::jenkins::params::jdk_package, # jdk for building java jobs
+    $::jenkins::params::ccache_package,
+    $::jenkins::params::python_netaddr_package, # Needed for devstack address_in_net()
   ]
 
   # Packages that most jenkins slaves (eg, unit test runners) need
   $standard_packages = [
-    'asciidoc', # for building gerrit/building openstack docs
-    'curl',
-    'docbook-xml', # for building openstack docs
-    'docbook5-xml', # for building openstack docs
-    'docbook-xsl', # for building openstack docs
-    'firefox', # for selenium tests
-    'libapache2-mod-wsgi',
-    'libcurl4-gnutls-dev',
-    'libldap2-dev',
-    'libmysqlclient-dev',
-    'libnspr4-dev', # for spidermonkey, used by ceilometer
-    'libsasl2-dev', # for keystone ldap auth integration
-    'libsqlite3-dev',
-    'libxml2-dev',
-    'libxml2-utils', # for xmllint, need for wadl
-    'libxslt1-dev',
-    'maven2',
-    'mercurial',
-    'pandoc', #for docs, markdown->docbook, bug 924507
-    'pkg-config', # for spidermonkey, used by ceilometer
-    'pyflakes',
-    'python-libvirt',
-    'python-subunit', # for subunit2html.py
-    'python-zmq', # zeromq unittests (not pip installable)
-    'python3-all-dev',
-    'rubygems',
-    'sqlite3',
-    'unzip',
-    'xsltproc', # for building openstack docs
-    'xvfb', # for selenium tests
+    $::jenkins::params::asciidoc_package, # for building gerrit/building openstack docs
+    $::jenkins::params::curl_package,
+    $::jenkins::params::docbook_xml_package, # for building openstack docs
+    $::jenkins::params::docbook5_xml_package, # for building openstack docs
+    $::jenkins::params::docbook5_xsl_package, # for building openstack docs
+    $::jenkins::params::firefox_package, # for selenium tests
+    $::jenkins::params::mod_wsgi_package,
+    $::jenkins::params::libcurl_dev_package,
+    $::jenkins::params::ldap_dev_package,
+    $::jenkins::params::libsasl_dev, # for keystone ldap auth integration
+    $::jenkins::params::mysql_dev_package,
+    $::jenkins::params::nspr_dev_package, # for spidermonkey, used by ceilometer
+    $::jenkins::params::sqlite_dev_package,
+    $::jenkins::params::libxml2_package,
+    $::jenkins::params::libxml2_dev_package, # for xmllint, need for wadl
+    $::jenkins::params::libxslt_dev_package,
+    $::jenkins::params::pandoc_package, #for docs, markdown->docbook, bug 924507
+    $::jenkins::params::pkgconfig_package, # for spidermonkey, used by ceilometer
+    $::jenkins::params::pyflakes_package,
+    $::jenkins::params::python_libvirt_package,
+    $::jenkins::params::python_zmq_package, # zeromq unittests (not pip installable)
+    $::jenkins::params::rubygems_package,
+    $::jenkins::params::sqlite_package,
+    $::jenkins::params::unzip_package,
+    $::jenkins::params::xslt_package, # for building openstack docs
+    $::jenkins::params::xvfb_package, # for selenium tests
   ]
 
   if ($bare == false) {
@@ -67,6 +63,31 @@ class jenkins::slave(
 
   package { $packages:
     ensure => present,
+  }
+
+  if ($::operatingsystem == 'Redhat') {
+
+    exec { 'yum Group Install':
+      unless  => '/usr/bin/yum grouplist "Development tools" | /bin/grep "^Installed Groups"',
+      command => '/usr/bin/yum -y groupinstall "Development tools"',
+    }
+
+  }
+  if ($::operatingsystem == 'Ubuntu') {
+
+    # install build-essential package group
+    package { 'build-essential':
+      ensure => present,
+    }
+
+    package { $::jenkins::params::maven_package:
+      ensure => present,
+    }
+
+    package { $::jenkins::params::python3_dev_package:
+      ensure => present,
+    }
+
   }
 
   if ($bare == false) {
@@ -84,6 +105,7 @@ class jenkins::slave(
 
   # Packages that need to be installed from pip
   $pip_packages = [
+    'python-subunit',
     'setuptools-git',
     'tox',
   ]
@@ -181,17 +203,23 @@ class jenkins::slave(
 
   # Temporary for debugging glance launch problem
   # https://lists.launchpad.net/openstack/msg13381.html
-  file { '/etc/sysctl.d/10-ptrace.conf':
-    ensure => present,
-    source => 'puppet:///modules/jenkins/10-ptrace.conf',
-    owner  => 'root',
-    group  => 'root',
-    mode   => '0444',
+  # NOTE(dprince): ubuntu only as RHEL6 doesn't have sysctl.d yet
+  if ($::operatingsystem == 'Ubuntu') {
+
+    file { '/etc/sysctl.d/10-ptrace.conf':
+      ensure => present,
+      source => 'puppet:///modules/jenkins/10-ptrace.conf',
+      owner  => 'root',
+      group  => 'root',
+      mode   => '0444',
+    }
+
+    exec { 'ptrace sysctl':
+      subscribe   => File['/etc/sysctl.d/10-ptrace.conf'],
+      refreshonly => true,
+      command     => '/sbin/sysctl -p /etc/sysctl.d/10-ptrace.conf',
+    }
+
   }
 
-  exec { 'ptrace sysctl':
-    subscribe   => File['/etc/sysctl.d/10-ptrace.conf'],
-    refreshonly => true,
-    command     => '/sbin/sysctl -p /etc/sysctl.d/10-ptrace.conf',
-  }
 }
