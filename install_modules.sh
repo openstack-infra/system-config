@@ -22,11 +22,6 @@ function clone_git() {
     cd $OLDDIR
 }
 
-if ! puppet help module >/dev/null 2>&1
-then
-    apt-get install -y -o Dpkg::Options::="--force-confold" puppet facter
-fi
-
 # Array of modules to be installed key:value is module:version.
 declare -A MODULES
 MODULES["kickstandproject-ntp"]="0.0.3"
