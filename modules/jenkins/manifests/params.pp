@@ -20,6 +20,8 @@ class jenkins::params {
       $mod_wsgi_package = 'mod_wsgi'
       $libcurl_dev_package = 'libcurl-devel'
       $ldap_dev_package = 'openldap-devel'
+      # for keystone ldap auth integration
+      $libsasl_dev = 'cyrus-sasl-devel'
       $mysql_dev_package = 'mysql-devel'
       $nspr_dev_package = 'nspr-devel'
       $sqlite_dev_package = 'sqlite-devel'
@@ -56,6 +58,8 @@ class jenkins::params {
       $mod_wsgi_package = 'libapache2-mod-wsgi'
       $libcurl_dev_package = 'libcurl4-gnutls-dev'
       $ldap_dev_package = 'libldap2-dev'
+      # for keystone ldap auth integration
+      $libsasl_dev = 'libsasl2-dev'
       $mysql_dev_package = 'libmysqlclient-dev'
       $nspr_dev_package = 'libnspr4-dev'
       $sqlite_dev_package = 'libsqlite3-dev'
