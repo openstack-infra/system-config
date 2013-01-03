@@ -17,6 +17,7 @@ openstack-infra:
       - openstack-infra/meetbot
       - openstack-infra/nose-html-output
       - openstack-infra/zuul
+      - openstack-infra/gearman-plugin
     branches:
       - master
 
