@@ -942,8 +942,10 @@ projects:
   - name: openstack-infra/git-review
     check:
       - gate-git-review-pep8
+      - gate-git-review-pyflakes
     gate:
       - gate-git-review-pep8
+      - gate-git-review-pyflakes
 
   - name: openstack/openstack-planet
     check:
