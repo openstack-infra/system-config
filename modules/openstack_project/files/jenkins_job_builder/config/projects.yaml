@@ -493,10 +493,8 @@
 
     jobs:
       - python-jobs
-      - python-diablo-bitrot-jobs
-      - python-essex-bitrot-jobs
-      - python-folsom-bitrot-jobs
       - openstack-publish-jobs
+# No one is interested in stable/ branches on swift, so don't run bitrot jobs
 
 
 - project:
