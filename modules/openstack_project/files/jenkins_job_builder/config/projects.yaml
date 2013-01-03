@@ -553,3 +553,9 @@
     provider: hpcloud-az2
     jobs:
       - devstack-node-provider-jobs
+
+- project:
+    name: gearman-plugin
+    github-org: openstack-infra
+    node: precise
+    tarball-publisher-site: nova.openstack.org
