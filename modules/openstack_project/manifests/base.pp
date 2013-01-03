@@ -4,7 +4,9 @@ class openstack_project::base(
   $certname = $::fqdn,
   $install_users = true
 ) {
-  include apt
+  if ($::operatingsystem == 'Ubuntu') {
+    include apt
+  }
   include openstack_project::users
   include sudoers
 
@@ -61,30 +63,34 @@ class openstack_project::base(
   }
 
   # Use upstream puppet and pin to version 2.7.*
-  apt::source { 'puppetlabs':
-    location   => 'http://apt.puppetlabs.com',
-    repos      => 'main',
-    key        => '4BD6EC30',
-    key_server => 'pgp.mit.edu',
+  if ($::operatingsystem == 'Ubuntu') {
+    apt::source { 'puppetlabs':
+      location   => 'http://apt.puppetlabs.com',
+      repos      => 'main',
+      key        => '4BD6EC30',
+      key_server => 'pgp.mit.edu',
+    }
+
+    file { '/etc/apt/preferences.d/00-puppet.pref':
+      ensure  => present,
+      owner   => 'root',
+      group   => 'root',
+      mode    => '0444',
+      source  => 'puppet:///modules/openstack_project/00-puppet.pref',
+      replace => true,
+    }
+
+    file { '/etc/puppet/puppet.conf':
+      ensure  => present,
+      owner   => 'root',
+      group   => 'root',
+      mode    => '0444',
+      content => template('openstack_project/puppet.conf.erb'),
+      replace => true,
+    }
+
   }
 
-  file { '/etc/apt/preferences.d/00-puppet.pref':
-    ensure  => present,
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0444',
-    source  => 'puppet:///modules/openstack_project/00-puppet.pref',
-    replace => true,
-  }
-
-  file { '/etc/puppet/puppet.conf':
-    ensure  => present,
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0444',
-    content => template('openstack_project/puppet.conf.erb'),
-    replace => true,
-  }
 }
 
 # vim:sw=2:ts=2:expandtab:textwidth=79
