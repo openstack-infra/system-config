@@ -2,26 +2,6 @@
 
 MODULE_PATH=/etc/puppet/modules
 
-function clone_git() {
-    REMOTE_URL=$1
-    REPO=$2
-    REV=$3
-
-    if [ -d $MODULE_PATH/$REPO -a ! -d $MODULE_PATH/$REPO/.git ] ; then
-        rm -rf $MODULE_PATH/$REPO
-    fi
-    if [ ! -d $MODULE_PATH/$REPO ] ; then
-        git clone $REMOTE_URL $MODULE_PATH/$REPO
-    fi
-    OLDDIR=`pwd`
-    cd $MODULE_PATH/$REPO
-    if ! git rev-parse HEAD | grep "^$REV" >/dev/null; then
-      git fetch $REMOTE_URL
-      git reset --hard $REV >/dev/null
-    fi
-    cd $OLDDIR
-}
-
 # Array of modules to be installed key:value is module:version.
 declare -A MODULES
 MODULES["kickstandproject-ntp"]="0.0.3"
