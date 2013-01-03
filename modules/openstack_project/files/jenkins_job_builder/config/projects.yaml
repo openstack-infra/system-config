@@ -74,6 +74,13 @@
 
 
 - project:
+    name: gearman-plugin
+    github-org: openstack-infra
+    node: precise
+    tarball-site: tarballs.openstack.org
+
+
+- project:
     name: git-review
     github-org: openstack-infra
     node: precise
