@@ -1028,3 +1028,9 @@ projects:
       - gate-noop
     gate:
       - gate-noop
+
+  - name: openstack-infra/gearman-plugin
+    check:
+      - gate-noop
+    gate:
+      - gate-noop
