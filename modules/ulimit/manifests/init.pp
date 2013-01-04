@@ -2,7 +2,9 @@
 #
 class ulimit {
 
-  package { ['libpam-modules', 'libpam-modules-bin']:
+  include ulimit::params
+
+  package { $::ulimit::params::pam_packages:
     ensure => present,
   }
 
@@ -11,4 +13,5 @@ class ulimit {
     owner  => 'root',
     mode   => '0755',
   }
+
 }
