@@ -34,6 +34,8 @@ NOVA_URL=os.environ['OS_AUTH_URL']
 NOVA_PROJECT_ID=os.environ['OS_TENANT_NAME']
 NOVA_REGION_NAME=os.environ['OS_REGION_NAME']
 
+SCRIPT_DIR = os.path.dirname(sys.argv[0])        
+
 def get_client():
     args = [NOVA_USERNAME, NOVA_PASSWORD, NOVA_PROJECT_ID, NOVA_URL]
     kwargs = {}
@@ -43,7 +45,7 @@ def get_client():
     client = Client(*args, **kwargs)
     return client
 
-def bootstrap_server(server, admin_pass, key, cert):
+def bootstrap_server(server, admin_pass, key, cert, environment):
     client = server.manager.api
     ip = utils.get_public_ip(server)
     if not ip:
@@ -70,14 +72,11 @@ def bootstrap_server(server, admin_pass, key, cert):
 
     ssh_client = utils.ssh_connect(ip, 'root', ssh_kwargs, timeout=600)
 
-    ssh_client.ssh("apt-get update")
-    ssh_client.ssh("DEBIAN_FRONTEND=noninteractive apt-get --option"
-                   " 'Dpkg::Options::=--force-confold'"
-                   " --assume-yes upgrade")
-    ssh_client.ssh("apt-get install -y --force-yes puppet")
+    ssh_client.scp(os.path.join(SCRIPT_DIR, '..', 'install_puppet.sh'),
+                   'install_puppet.sh')
+    ssh_client.ssh('bash -x install_puppet.sh')
 
     certname = cert[:0-len('.pem')]
-
     ssh_client.ssh("mkdir -p /var/lib/puppet/ssl/certs")
     ssh_client.ssh("mkdir -p /var/lib/puppet/ssl/private_keys")
     ssh_client.ssh("mkdir -p /var/lib/puppet/ssl/public_keys")
@@ -99,11 +98,12 @@ def bootstrap_server(server, admin_pass, key, cert):
                    "/var/lib/puppet/ssl/certs/ca.pem")
 
     ssh_client.ssh("puppet agent "
+                   "--environment %s "
                    "--server ci-puppetmaster.openstack.org "
-                   "--no-daemonize --verbose --onetime "
-                   "--certname %s" % certname)
+                   "--no-daemonize --verbose --onetime --pluginsync true "
+                   "--certname %s" % (environment, certname))
 
-def build_server(client, name, image, flavor, cert):
+def build_server(client, name, image, flavor, cert, environment):
     key = None
     server = None
 
@@ -127,7 +127,7 @@ def build_server(client, name, image, flavor, cert):
     try:
         admin_pass = server.adminPass
         server = utils.wait_for_resource(server)
-        bootstrap_server(server, admin_pass, key, cert)
+        bootstrap_server(server, admin_pass, key, cert, environment)
         if key:
             kp.delete()
     except Exception, real_error:
@@ -148,6 +148,9 @@ def main():
     parser.add_argument("--image", dest="image",
                         default="Ubuntu 12.04 LTS (Precise Pangolin)",
                         help="image name")
+    parser.add_argument("--environment", dest="environment",
+                        default="production",
+                        help="puppet environment name")
     parser.add_argument("--cert", dest="cert", required=True,
                         help="name of signed puppet certificate file (e.g., "
                         "hostname.example.com.pem)")
@@ -184,7 +187,7 @@ def main():
     image = images[0]
     print "Found image", image
 
-    build_server(client, options.name, image, flavor, options.cert)
+    build_server(client, options.name, image, flavor, options.cert, options.environment)
 
 if __name__ == '__main__':
     main()
