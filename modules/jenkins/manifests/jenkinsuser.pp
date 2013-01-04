@@ -82,34 +82,39 @@ class jenkins::jenkinsuser(
     require => File['/home/jenkins/.ssh'],
   }
 
-  file { '/home/jenkins/.bashrc':
-    ensure  => present,
-    owner   => 'jenkins',
-    group   => 'jenkins',
-    mode    => '0640',
-    source  => '/etc/skel/.bashrc',
-    replace => false,
-    require => File['/home/jenkins'],
-  }
+  #NOTE: not all distributions have default bash files in /etc/skel
+  if ($::operatingsystem == 'Ubuntu') {
 
-  file { '/home/jenkins/.bash_logout':
-    ensure  => present,
-    source  => '/etc/skel/.bash_logout',
-    owner   => 'jenkins',
-    group   => 'jenkins',
-    mode    => '0640',
-    replace => false,
-    require => File['/home/jenkins'],
-  }
+    file { '/home/jenkins/.bashrc':
+      ensure  => present,
+      owner   => 'jenkins',
+      group   => 'jenkins',
+      mode    => '0640',
+      source  => '/etc/skel/.bashrc',
+      replace => false,
+      require => File['/home/jenkins'],
+    }
 
-  file { '/home/jenkins/.profile':
-    ensure  => present,
-    source  => '/etc/skel/.profile',
-    owner   => 'jenkins',
-    group   => 'jenkins',
-    mode    => '0640',
-    replace => false,
-    require => File['/home/jenkins'],
+    file { '/home/jenkins/.bash_logout':
+      ensure  => present,
+      source  => '/etc/skel/.bash_logout',
+      owner   => 'jenkins',
+      group   => 'jenkins',
+      mode    => '0640',
+      replace => false,
+      require => File['/home/jenkins'],
+    }
+
+    file { '/home/jenkins/.profile':
+      ensure  => present,
+      source  => '/etc/skel/.profile',
+      owner   => 'jenkins',
+      group   => 'jenkins',
+      mode    => '0640',
+      replace => false,
+      require => File['/home/jenkins'],
+    }
+
   }
 
   file { '/home/jenkins/.ssh/config':
