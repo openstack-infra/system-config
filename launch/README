@@ -5,11 +5,11 @@ root environment::
 
 To launch a node in the OpenStack CI account (production servers)::
 
-  . openstackci-rs-nova.sh
+  . ~root/ci-launch/openstackci-rs-nova.sh
 
 To launch a node in the OpenStack Jenkins account (slave nodes)::
 
-  . openstackjenkins-rs-nova.sh
+  . ~root/ci-launch/openstackjenkins-rs-nova.sh
 
 Then::
 
@@ -36,8 +36,8 @@ the ''nova list'' command).  The environment variables used in the
 URL should be satisfied by sourcing the "openstackci-rs-nova.sh"
 script (or jenkins, as appropriate).
 
-  . ~/rackdns-venv/bin/activate
-  . openstackci-rs-nova.sh
+  . ~root/rackdns-venv/bin/activate
+  . ~root/openstackci-rs-nova.sh
 
   export SERVERNAME=server
   nova list | grep "| $SERVERNAME\.openstack\.org "
