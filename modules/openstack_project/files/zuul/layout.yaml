@@ -674,12 +674,14 @@ projects:
 
   - name: openstack/ceilometer
     check:
+      - gate-ceilometer-docs
       - gate-ceilometer-pep8
       - gate-ceilometer-python26
       - gate-ceilometer-python27
       - gate-ceilometer-python26-folsom
       - gate-ceilometer-python27-folsom
     gate:
+      - gate-ceilometer-docs
       - gate-ceilometer-pep8
       - gate-ceilometer-python26
       - gate-ceilometer-python27
