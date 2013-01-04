@@ -2,7 +2,10 @@
 #
 class jenkins::cgroups {
 
-  package { 'cgroup-bin':
+  include jenkins::params
+
+  package { 'cgroups':
+    name => $::jenkins::params::cgroups_package,
     ensure => present,
   }
 
@@ -27,14 +30,14 @@ class jenkins::cgroups {
   service { 'cgconfig':
     ensure    => running,
     enable    => true,
-    require   => Package['cgroup-bin'],
+    require   => Package['cgroups'],
     subscribe => File['/etc/cgconfig.conf'],
   }
 
   service { 'cgred':
     ensure    => running,
     enable    => true,
-    require   => Package['cgroup-bin'],
+    require   => Package['cgroups'],
     subscribe => File['/etc/cgrules.conf'],
   }
 }

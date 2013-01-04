@@ -1,3 +1,17 @@
+<% if osfamily == "RedHat" then %>
+
+mount {
+        cpuset  = /cgroup/cpuset;
+        cpu     = /cgroup/cpu;
+        cpuacct = /cgroup/cpuacct;
+        memory  = /cgroup/memory;
+        devices = /cgroup/devices;
+        freezer = /cgroup/freezer;
+        net_cls = /cgroup/net_cls;
+        blkio   = /cgroup/blkio;
+}
+
+<% else %>
 mount {
         cpu = /sys/fs/cgroup/cpu;
         cpuacct = /sys/fs/cgroup/cpuacct;
@@ -5,6 +19,7 @@ mount {
         memory = /sys/fs/cgroup/memory;
         freezer = /sys/fs/cgroup/freezer;
 }
+<% end %>
 
 group jenkins {
 	perm {
