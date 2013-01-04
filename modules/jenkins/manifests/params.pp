@@ -42,6 +42,7 @@ class jenkins::params {
       $unzip_package = 'unzip'
       $xslt_package = 'libxslt'
       $xvfb_package = 'xorg-x11-server-Xvfb'
+      $cgroups_package = 'libcgroup'
     }
     'Debian', 'Ubuntu': {
       # common packages
@@ -78,6 +79,7 @@ class jenkins::params {
       $unzip_package = 'unzip'
       $xslt_package = 'xsltproc'
       $xvfb_package = 'xvfb'
+      $cgroups_package = 'cgroup-bin'
     }
     default: {
       fail("Unsupported osfamily: ${::osfamily} The 'jenkins' module only supports osfamily Ubuntu or Redhat(slaves only).")
