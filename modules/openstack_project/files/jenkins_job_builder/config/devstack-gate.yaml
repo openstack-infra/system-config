@@ -533,6 +533,54 @@
 
 
 - job:
+    name: periodic-tempest-devstack-coverage-vm-full
+    node: devstack-precise
+
+    wrappers:
+      - timeout:
+          timeout: 180
+          fail: true
+      - timestamps
+
+    triggers:
+      - timed: '@daily'
+
+    builders:
+      - trigger-builds:
+          - project: devstack-update-inprogress
+            predefined-parameters:
+              DEVSTACK_NODE_NAME=${NODE_NAME}
+      - devstack-checkout
+      - shell: |
+          #!/bin/bash -xe
+          export PYTHONUNBUFFERED=true
+          export DEVSTACK_GATE_TEMPEST=1
+          export DEVSTACK_GATE_TEMPEST_FULL=1
+          export DEVSTACK_GATE_TEMPEST_COVERAGE=1
+          export ZUUL_BRANCH=master
+          cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
+          ./safe-devstack-vm-gate-wrap.sh
+      - link-logs
+
+    publishers:
+      - scp:
+          site: 'static.openstack.org'
+          files:
+            - target: 'logs/periodic/$JOB_NAME/$BUILD_NUMBER'
+              source: 'logs/**'
+              keep-hierarchy: true
+              copy-after-failure: true
+      - console-log-periodic
+      - trigger-parameterized-builds:
+          - project: devstack-update-complete
+            when: complete
+            predefined-parameters:
+              DEVSTACK_NODE_NAME=${NODE_NAME}
+      - email:
+          recipients: openstack-qa@lists.openstack.org
+
+
+- job:
     name: gate-tempest-devstack-vm-postgres
     node: devstack-precise
 
