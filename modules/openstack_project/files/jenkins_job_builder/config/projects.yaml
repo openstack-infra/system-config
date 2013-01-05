@@ -9,6 +9,7 @@
       - python-jobs
       - python-jobs-folsom
       - openstack-publish-jobs
+      - translation-jobs
 
 - project:
     name: cinder

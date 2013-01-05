@@ -691,6 +691,7 @@ projects:
       - ceilometer-tarball
       - ceilometer-coverage
       - ceilometer-docs
+      - ceilometer-upstream-translation-update
     publish:
       - ceilometer-docs
 
