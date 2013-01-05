@@ -43,6 +43,7 @@ class jenkins::slave(
     'libxml2-utils', # for xmllint, need for wadl
     'libxslt1-dev',
     'maven2',
+    'mercurial',
     'pandoc', #for docs, markdown->docbook, bug 924507
     'pkg-config', # for spidermonkey, used by ceilometer
     'pyflakes',
