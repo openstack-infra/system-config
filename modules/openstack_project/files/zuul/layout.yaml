@@ -1022,3 +1022,9 @@ projects:
       - gate-noop
     gate:
       - gate-noop
+
+  - name: stackforge/kwapi
+    check:
+      - gate-noop
+    gate:
+      - gate-noop
