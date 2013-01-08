@@ -412,6 +412,7 @@
 - project:
     name: python-libraclient
     github-org: stackforge
+    tarball-site: tarballs.openstack.org
     node: precise
 
     jobs:
