@@ -38,6 +38,7 @@ class jenkins::slave(
     'libldap2-dev',
     'libmysqlclient-dev',
     'libnspr4-dev', # for spidermonkey, used by ceilometer
+    'libsasl2-dev', # for keystone ldap auth integration
     'libsqlite3-dev',
     'libxml2-dev',
     'libxml2-utils', # for xmllint, need for wadl
