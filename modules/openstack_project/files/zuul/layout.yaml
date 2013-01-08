@@ -96,7 +96,6 @@ jobs:
     voting: false
   - name: gate-devstack-vm-quantum
     branch: ^(?!stable/(diablo|essex|folsom)).*$
-    voting: false
   - name: gate-tempest-devstack-vm-postgres
     branch: ^(?!stable/(diablo|essex|folsom)).*$
     voting: false
