@@ -16,6 +16,7 @@ openstack-infra:
       - openstack-infra/lodgeit
       - openstack-infra/meetbot
       - openstack-infra/nose-html-output
+      - openstack-infra/reviewday
       - openstack-infra/zuul
       - openstack-infra/gearman-plugin
     branches:
