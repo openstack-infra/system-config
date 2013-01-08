@@ -494,6 +494,18 @@
 
 
 - project:
+    name: reviewday
+    github-org: openstack-infra
+    node: precise
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - python-jobs
+      - gate-{name}-pyflakes
+      - pypi-jobs
+
+
+- project:
     name: swift
     github-org: openstack
     node: precise

@@ -252,6 +252,22 @@ projects:
     gate:
       - gate-noop
 
+  - name: openstack-infra/reviewday
+    check:
+      - gate-reviewday-pep8
+      - gate-reviewday-pyflakes
+    gate:
+      - gate-reviewday-pep8
+      - gate-reviewday-pyflakes
+    post:
+      - reviewday-branch-tarball
+      - reviewday-coverage
+    pre-release:
+      - reviewday-tarball
+    publish:
+      - reviewday-tarball:
+        - reviewday-pypi-upload
+
   - name: openstack/cinder
     check:
       - gate-cinder-docs
