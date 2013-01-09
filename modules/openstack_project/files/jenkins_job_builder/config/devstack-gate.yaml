@@ -31,6 +31,9 @@
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
       - link-logs
+      - shell: |
+          # Give the various logs a change to be flushed.
+          sleep 2
 
     publishers:
       - scp:
@@ -81,6 +84,9 @@
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
       - link-logs
+      - shell: |
+          # Give the various logs a change to be flushed.
+          sleep 2
 
     publishers:
       - scp:
@@ -131,6 +137,9 @@
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
       - link-logs
+      - shell: |
+          # Give the various logs a change to be flushed.
+          sleep 2
 
     publishers:
       - scp:
@@ -181,6 +190,9 @@
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
       - link-logs
+      - shell: |
+          # Give the various logs a change to be flushed.
+          sleep 2
 
     publishers:
       - scp:
@@ -227,6 +239,9 @@
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
       - link-logs
+      - shell: |
+          # Give the various logs a change to be flushed.
+          sleep 2
 
     publishers:
       - scp:
@@ -275,6 +290,9 @@
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
       - link-logs
+      - shell: |
+          # Give the various logs a change to be flushed.
+          sleep 2
 
     publishers:
       - scp:
@@ -323,6 +341,9 @@
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
       - link-logs
+      - shell: |
+          # Give the various logs a change to be flushed.
+          sleep 2
 
     publishers:
       - scp:
@@ -370,6 +391,9 @@
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
       - link-logs
+      - shell: |
+          # Give the various logs a change to be flushed.
+          sleep 2
 
     publishers:
       - scp:
@@ -417,6 +441,9 @@
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
       - link-logs
+      - shell: |
+          # Give the various logs a change to be flushed.
+          sleep 2
 
     publishers:
       - scp:
@@ -464,6 +491,9 @@
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
       - link-logs
+      - shell: |
+          # Give the various logs a change to be flushed.
+          sleep 2
 
     publishers:
       - scp:
@@ -513,6 +543,9 @@
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
       - link-logs
+      - shell: |
+          # Give the various logs a change to be flushed.
+          sleep 2
 
     publishers:
       - scp:
@@ -561,6 +594,9 @@
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
       - link-logs
+      - shell: |
+          # Give the various logs a change to be flushed.
+          sleep 2
 
     publishers:
       - scp:
@@ -613,6 +649,9 @@
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
       - link-logs
+      - shell: |
+          # Give the various logs a change to be flushed.
+          sleep 2
 
     publishers:
       - scp:
