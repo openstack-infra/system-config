@@ -47,34 +47,8 @@ host for use by the OpenStack project.
 
 Install MySQL
 -------------
-You should setup MySQL as follows, changing 'secret' to a suitable password:
 
-.. code-block:: bash
-
-  mysql -u root -p
-
-.. code-block:: mysql
-
-  CREATE USER 'gerrit2'@'localhost' IDENTIFIED BY 'secret';
-  CREATE DATABASE reviewdb;
-  ALTER DATABASE reviewdb charset=latin1;
-  GRANT ALL ON reviewdb.* TO 'gerrit2'@'localhost';
-  FLUSH PRIVILEGES;
-
-Then create the gerrit2 system user as follows:
-
-.. code-block:: bash
-
-  sudo useradd -mr gerrit2
-  sudo chsh gerrit2 -s /bin/bash
-  sudo su - gerrit2
-
-With Gerrit 2.2.2 onwards edit /etc/mysql/my.cnf with the following:
-
-.. code-block:: ini
-
-   [mysqld]
-   default-storage-engine=INNODB
+Basic configuration of MySQL is handled via puppet.
 
 Install Gerrit
 --------------
