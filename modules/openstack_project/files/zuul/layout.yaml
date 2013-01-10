@@ -1025,6 +1025,6 @@ projects:
 
   - name: stackforge/kwapi
     check:
-      - gate-noop
+      - gate-kwapi-pep8
     gate:
-      - gate-noop
+      - gate-kwapi-pep8
