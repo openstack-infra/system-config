@@ -2,7 +2,7 @@
     name: 'periodic-{name}-python26-{branch-name}'
 
     triggers:
-      - timed: '@daily'
+      - timed: '0 6 * * *'
 
     builders:
       - python26
@@ -33,7 +33,7 @@
     name: 'periodic-{name}-python27-{branch-name}'
 
     triggers:
-      - timed: '@daily'
+      - timed: '0 6 * * *'
 
     builders:
       - python27
@@ -63,7 +63,7 @@
     name: 'periodic-{name}-docs-{branch-name}'
 
     triggers:
-      - timed: '@daily'
+      - timed: '0 6 * * *'
 
     builders:
       - docs
