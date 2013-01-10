@@ -32,7 +32,7 @@ class openstack_project::zuul(
     zuul_ssh_private_key => $zuul_ssh_private_key,
     url_pattern          => $url_pattern,
     push_change_refs     => false,
-    status_url           => "http://${::fqdn}/",
+    status_url           => 'http://status.openstack.org/zuul/',
     statsd_host          => $statsd_host,
   }
 
