@@ -710,17 +710,33 @@ projects:
       - gate-tempest-devstack-vm-quantum
       - gate-devstack-vm-quantum
 
+  # This is not strictly necessary; there is currently a transitive
+  # relationship between g-t-devstack-vm,
+  # g-t-devstack-vm-{postgres,cinder,quantum} and g-t-devstack-vm-full
+  # that will ensure that these projects end up in the same shared
+  # change queue, however, this fake project makes it explicit that
+  # g-t-devstack-vm and g-t-devstack-vm-full must share a change
+  # queue, which should protect against accidental queue divorce in
+  # case jobs get moved around.  Since g-t-devstack-vm-full is a
+  # superset of g-t-devstack-vm, the whole set of projects is still
+  # gated on g-t-devstack-vm.
+
+  - name: null/tempest
+    gate:
+      - gate-tempest-devstack-vm
+      - gate-tempest-devstack-vm-full
+
   - name: openstack/tempest
     check:
       - gate-tempest-pep8
-      - gate-tempest-devstack-vm
+      - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-postgres
       - gate-tempest-devstack-vm-cinder
       - gate-tempest-devstack-vm-quantum
       - gate-devstack-vm-quantum
     gate:
       - gate-tempest-pep8
-      - gate-tempest-devstack-vm
+      - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-postgres
       - gate-tempest-devstack-vm-cinder
       - gate-tempest-devstack-vm-quantum
