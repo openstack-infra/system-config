@@ -209,7 +209,7 @@
       - timestamps
 
     triggers:
-      - timed: '@daily'
+      - timed: '0 6 * * *'
 
     builders:
       - trigger-builds:
@@ -306,7 +306,7 @@
       - timestamps
 
     triggers:
-      - timed: '@daily'
+      - timed: '0 6 * * *'
 
     builders:
       - trigger-builds:
@@ -353,7 +353,7 @@
       - timestamps
 
     triggers:
-      - timed: '@daily'
+      - timed: '0 6 * * *'
 
     builders:
       - trigger-builds:
@@ -400,7 +400,7 @@
       - timestamps
 
     triggers:
-      - timed: '@daily'
+      - timed: '0 6 * * *'
 
     builders:
       - trigger-builds:
@@ -447,7 +447,7 @@
       - timestamps
 
     triggers:
-      - timed: '@daily'
+      - timed: '0 6 * * *'
 
     builders:
       - trigger-builds:
@@ -494,7 +494,7 @@
       - timestamps
 
     triggers:
-      - timed: '@daily'
+      - timed: '0 6 * * *'
 
     builders:
       - trigger-builds:
@@ -543,7 +543,7 @@
       - timestamps
 
     triggers:
-      - timed: '@daily'
+      - timed: '0 6 * * *'
 
     builders:
       - trigger-builds:
