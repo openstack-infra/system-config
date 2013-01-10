@@ -1,4 +1,12 @@
 - project:
+    name: kwapi
+    github-org: stackforge
+    node: precise
+
+    jobs:
+      - gate-{name}-pep8
+
+- project:
     name: ceilometer
     github-org: openstack
     node: oneiric
