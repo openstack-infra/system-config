@@ -62,3 +62,8 @@ if [ -f setup.py ] ; then
         cp "dist/${PROJECT}-${snapshotversion}.tar.gz" "dist/${PROJECT}-${BRANCH_PATH}.tar.gz"
     fi
 fi
+
+echo -n "SHA1sum: "
+sha1sum "dist/${PROJECT}-${BRANCH_PATH}.tar.gz"
+echo -n "MD5sum: "
+md5sum "dist/${PROJECT}-${BRANCH_PATH}.tar.gz"
