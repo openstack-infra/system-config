@@ -67,8 +67,21 @@ function format_change(change) {
 
     $.each(change['jobs'], function(i, job) {
         result = job['result'];
+        var result_class = "result";
         if (result == null) {
-            result = 'unknown';
+            if (job['url'] != null) {
+                result = 'in progress';
+            } else {
+                result = 'queued';
+            }
+        } else if (result == 'SUCCESS') {
+            result_class += " result_success";
+        } else if (result == 'FAILURE') {
+            result_class += " result_failure";
+        } else if (result == 'LOST') {
+            result_class += " result_unstable";
+        } else if (result == 'UNSTABLE') {
+            result_class += " result_unstable";
         }
         html += '<span class="job">';
         if (job['url'] != null) {
@@ -78,7 +91,7 @@ function format_change(change) {
         if (job['url'] != null) {
             html += '</a>';
         }
-        html += ': '+result;
+        html += ': <span class="'+result_class+'">'+result+'</span>';
         if (job['voting'] == false) {
             html += ' (non-voting)';
         }
