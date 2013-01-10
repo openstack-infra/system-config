@@ -1,4 +1,12 @@
 - project:
+    name: kwapi
+    github-org: stackforge
+    node: precise
+
+    jobs:
+      - python-jobs
+
+- project:
     name: ceilometer
     github-org: openstack
     node: oneiric
