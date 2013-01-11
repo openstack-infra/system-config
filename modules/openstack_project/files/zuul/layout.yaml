@@ -1050,3 +1050,9 @@ projects:
       - gate-noop
     gate:
       - gate-noop
+
+  - name: stackforge/packstack
+    check:
+      - gate-noop
+    gate:
+      - gate-noop
