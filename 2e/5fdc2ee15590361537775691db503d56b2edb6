@@ -1,0 +1,13 @@
+Approved+1: James E. Blair <corvus@inaugust.com>
+Code-Review+2: James E. Blair <corvus@inaugust.com>
+Verified+2: James E. Blair <corvus@inaugust.com>
+Verified+1: Jenkins
+Code-Review+1: David Kranz <david.kranz@qrclab.com>
+Code-Review+1: Sean Dague <sdague@linux.vnet.ibm.com>
+Code-Review+2: Clark Boylan <clark.boylan@gmail.com>
+Code-Review+1: Matthew Treinish <treinish@linux.vnet.ibm.com>
+Submitted-by: James E. Blair <corvus@inaugust.com>
+Submitted-at: Fri, 11 Jan 2013 22:44:12 +0000
+Reviewed-on: https://review.openstack.org/19427
+Project: openstack-infra/config
+Branch: refs/heads/master
