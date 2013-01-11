@@ -9,7 +9,7 @@
 - project:
     name: ceilometer
     github-org: openstack
-    node: oneiric
+    node: precise
     tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
 
@@ -118,7 +118,7 @@
 - project:
     name: heat
     github-org: openstack
-    node: oneiric
+    node: precise
     tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
 
