@@ -52,6 +52,7 @@
     jobs:
       - gate-{name}-pep8
       - gate-{name}-pyflakes
+      - '{name}-tarball'
       - pypi-jobs
 
 
@@ -65,6 +66,7 @@
     jobs:
       - gate-{name}-pep8
       - gate-{name}-pyflakes
+      - '{name}-tarball'
       - pypi-jobs
 
 
@@ -78,6 +80,7 @@
     jobs:
       - gate-{name}-pep8
       - gate-{name}-pyflakes
+      - '{name}-tarball'
       - pypi-jobs
 
 
@@ -185,6 +188,7 @@
       - gate-{name}-pep8
       - gate-{name}-pyflakes
       - gate-{name}-docs
+      - '{name}-tarball'
       - pypi-jobs
 
 - project:
@@ -234,6 +238,7 @@
     tarball-site: tarballs.openstack.org
 
     jobs:
+      - '{name}-tarball'
       - pypi-jobs
 
 
