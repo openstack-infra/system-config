@@ -1,11 +1,8 @@
 #!/bin/bash -xe
 
-# If a bundle file is present, call tox with the jenkins version of
-# the test environment so it is used.  Otherwise, use the normal
-# (non-bundle) test environment.  Also, run pip freeze on the
+# Run coverage via tox. Also, run pip freeze on the
 # resulting environment at the end so that we have a record of exactly
 # what packages we ended up testing.
-#
 
 export NOSE_COVER_HTML=1
 
@@ -13,7 +10,6 @@ venv=cover
 
 tox -e$venv
 result=$?
-.tox/$venv/bin/coverage xml
 
 echo "Begin pip freeze output from test virtualenv:"
 echo "======================================================================"
