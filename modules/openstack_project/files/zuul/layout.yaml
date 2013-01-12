@@ -1063,9 +1063,9 @@ projects:
 
   - name: openstack-infra/gearman-plugin
     check:
-      - gate-noop
+      - gate-gearman-plugin-build
     gate:
-      - gate-noop
+      - gate-gearman-plugin-build
 
   - name: stackforge/packstack
     check:

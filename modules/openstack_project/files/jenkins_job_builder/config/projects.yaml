@@ -87,6 +87,9 @@
     node: precise
     tarball-site: tarballs.openstack.org
 
+    jobs:
+      - gate-gearman-plugin-build
+
 
 - project:
     name: git-review
