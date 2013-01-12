@@ -1,0 +1,20 @@
+- job:
+    name: gate-gearman-plugin-build
+    project-type: maven
+    node: precise
+
+    triggers:
+      - zuul
+
+    prebuilders:
+      - gerrit-git-prep
+
+    maven:
+      root-module:
+        group-id: org.jenkins-ci.plugins
+        artifact-id: gearman-plugin
+      root-pom: pom.xml
+      goals: 'clean package'
+
+    publishers:
+      - console-log
