@@ -18,10 +18,7 @@
       - zuul
 
     builders:
-      - trigger-builds:
-          - project: devstack-update-inprogress
-            predefined-parameters:
-              DEVSTACK_NODE_NAME=${NODE_NAME}
+      - devstack-inprogress
       - devstack-checkout
       - shell: |
           #!/bin/bash -xe
@@ -32,19 +29,9 @@
       - link-logs
 
     publishers:
-      - scp:
-          site: 'static.openstack.org'
-          files:
-            - target: 'logs/$ZUUL_CHANGE/$ZUUL_PATCHSET/$ZUUL_PIPELINE/$JOB_NAME/$BUILD_NUMBER'
-              source: 'logs/**'
-              keep-hierarchy: true
-              copy-after-failure: true
+      - devstack-logs
       - console-log
-      - trigger-parameterized-builds:
-          - project: devstack-update-complete
-            when: complete
-            predefined-parameters:
-              DEVSTACK_NODE_NAME=${NODE_NAME}
+      - devstack-complete
 
 
 - job:
@@ -67,10 +54,7 @@
       - zuul
 
     builders:
-      - trigger-builds:
-          - project: devstack-update-inprogress
-            predefined-parameters:
-              DEVSTACK_NODE_NAME=${NODE_NAME}
+      - devstack-inprogress
       - devstack-checkout
       - shell: |
           #!/bin/bash -xe
@@ -82,19 +66,9 @@
       - link-logs
 
     publishers:
-      - scp:
-          site: 'static.openstack.org'
-          files:
-            - target: 'logs/$ZUUL_CHANGE/$ZUUL_PATCHSET/$ZUUL_PIPELINE/$JOB_NAME/$BUILD_NUMBER'
-              source: 'logs/**'
-              keep-hierarchy: true
-              copy-after-failure: true
+      - devstack-logs
       - console-log
-      - trigger-parameterized-builds:
-          - project: devstack-update-complete
-            when: complete
-            predefined-parameters:
-              DEVSTACK_NODE_NAME=${NODE_NAME}
+      - devstack-complete
 
 
 - job:
@@ -117,10 +91,7 @@
       - zuul
 
     builders:
-      - trigger-builds:
-          - project: devstack-update-inprogress
-            predefined-parameters:
-              DEVSTACK_NODE_NAME=${NODE_NAME}
+      - devstack-inprogress
       - devstack-checkout
       - shell: |
           #!/bin/bash -xe
@@ -132,19 +103,9 @@
       - link-logs
 
     publishers:
-      - scp:
-          site: 'static.openstack.org'
-          files:
-            - target: 'logs/$ZUUL_CHANGE/$ZUUL_PATCHSET/$ZUUL_PIPELINE/$JOB_NAME/$BUILD_NUMBER'
-              source: 'logs/**'
-              keep-hierarchy: true
-              copy-after-failure: true
+      - devstack-logs
       - console-log
-      - trigger-parameterized-builds:
-          - project: devstack-update-complete
-            when: complete
-            predefined-parameters:
-              DEVSTACK_NODE_NAME=${NODE_NAME}
+      - devstack-complete
 
 
 - job:
@@ -167,10 +128,7 @@
       - zuul
 
     builders:
-      - trigger-builds:
-          - project: devstack-update-inprogress
-            predefined-parameters:
-              DEVSTACK_NODE_NAME=${NODE_NAME}
+      - devstack-inprogress
       - devstack-checkout
       - shell: |
           #!/bin/bash -xe
@@ -182,19 +140,9 @@
       - link-logs
 
     publishers:
-      - scp:
-          site: 'static.openstack.org'
-          files:
-            - target: 'logs/$ZUUL_CHANGE/$ZUUL_PATCHSET/$ZUUL_PIPELINE/$JOB_NAME/$BUILD_NUMBER'
-              source: 'logs/**'
-              keep-hierarchy: true
-              copy-after-failure: true
+      - devstack-logs
       - console-log
-      - trigger-parameterized-builds:
-          - project: devstack-update-complete
-            when: complete
-            predefined-parameters:
-              DEVSTACK_NODE_NAME=${NODE_NAME}
+      - devstack-complete
 
 
 - job:
@@ -217,10 +165,7 @@
       - zuul
 
     builders:
-      - trigger-builds:
-          - project: devstack-update-inprogress
-            predefined-parameters:
-              DEVSTACK_NODE_NAME=${NODE_NAME}
+      - devstack-inprogress
       - devstack-checkout
       - shell: |
           #!/bin/bash -xe
@@ -232,19 +177,9 @@
       - link-logs
 
     publishers:
-      - scp:
-          site: 'static.openstack.org'
-          files:
-            - target: 'logs/$ZUUL_CHANGE/$ZUUL_PATCHSET/$ZUUL_PIPELINE/$JOB_NAME/$BUILD_NUMBER'
-              source: 'logs/**'
-              keep-hierarchy: true
-              copy-after-failure: true
+      - devstack-logs
       - console-log
-      - trigger-parameterized-builds:
-          - project: devstack-update-complete
-            when: complete
-            predefined-parameters:
-              DEVSTACK_NODE_NAME=${NODE_NAME}
+      - devstack-complete
 
 
 - job:
@@ -261,10 +196,7 @@
       - timed: '0 6 * * *'
 
     builders:
-      - trigger-builds:
-          - project: devstack-update-inprogress
-            predefined-parameters:
-              DEVSTACK_NODE_NAME=${NODE_NAME}
+      - devstack-inprogress
       - devstack-checkout
       - shell: |
           #!/bin/bash -xe
@@ -277,19 +209,9 @@
       - link-logs
 
     publishers:
-      - scp:
-          site: 'static.openstack.org'
-          files:
-            - target: 'logs/periodic/$JOB_NAME/$BUILD_NUMBER'
-              source: 'logs/**'
-              keep-hierarchy: true
-              copy-after-failure: true
+      - devstack-logs-periodic
       - console-log-periodic
-      - trigger-parameterized-builds:
-          - project: devstack-update-complete
-            when: complete
-            predefined-parameters:
-              DEVSTACK_NODE_NAME=${NODE_NAME}
+      - devstack-complete
       - email:
           recipients: openstack-qa@lists.openstack.org
 
@@ -308,10 +230,7 @@
       - timed: '@hourly'
 
     builders:
-      - trigger-builds:
-          - project: devstack-update-inprogress
-            predefined-parameters:
-              DEVSTACK_NODE_NAME=${NODE_NAME}
+      - devstack-inprogress
       - devstack-checkout
       - shell: |
           #!/bin/bash -xe
@@ -325,20 +244,9 @@
       - link-logs
 
     publishers:
-      - scp:
-          site: 'static.openstack.org'
-          files:
-            - target: 'logs/periodic/$JOB_NAME/$BUILD_NUMBER'
-              source: 'logs/**'
-              keep-hierarchy: true
-              copy-after-failure: true
+      - devstack-logs-periodic
       - console-log-periodic
-      - trigger-parameterized-builds:
-          - project: devstack-update-complete
-            when: complete
-            condition: SUCCESS
-            predefined-parameters:
-              DEVSTACK_NODE_NAME=${NODE_NAME}
+      - devstack-complete
       - email:
           recipients: david.kranz@qrclab.com sdague@linux.vnet.ibm.com
 
@@ -357,10 +265,7 @@
       - timed: '0 6 * * *'
 
     builders:
-      - trigger-builds:
-          - project: devstack-update-inprogress
-            predefined-parameters:
-              DEVSTACK_NODE_NAME=${NODE_NAME}
+      - devstack-inprogress
       - devstack-checkout
       - shell: |
           #!/bin/bash -xe
@@ -372,19 +277,9 @@
       - link-logs
 
     publishers:
-      - scp:
-          site: 'static.openstack.org'
-          files:
-            - target: 'logs/periodic/$JOB_NAME/$BUILD_NUMBER'
-              source: 'logs/**'
-              keep-hierarchy: true
-              copy-after-failure: true
+      - devstack-logs-periodic
       - console-log-periodic
-      - trigger-parameterized-builds:
-          - project: devstack-update-complete
-            when: complete
-            predefined-parameters:
-              DEVSTACK_NODE_NAME=${NODE_NAME}
+      - devstack-complete
       - email:
           recipients: openstack-diablo-maint@lists.launchpad.net
 
@@ -403,10 +298,7 @@
       - timed: '0 6 * * *'
 
     builders:
-      - trigger-builds:
-          - project: devstack-update-inprogress
-            predefined-parameters:
-              DEVSTACK_NODE_NAME=${NODE_NAME}
+      - devstack-inprogress
       - devstack-checkout
       - shell: |
           #!/bin/bash -xe
@@ -418,19 +310,9 @@
       - link-logs
 
     publishers:
-      - scp:
-          site: 'static.openstack.org'
-          files:
-            - target: 'logs/periodic/$JOB_NAME/$BUILD_NUMBER'
-              source: 'logs/**'
-              keep-hierarchy: true
-              copy-after-failure: true
+      - devstack-logs-periodic
       - console-log-periodic
-      - trigger-parameterized-builds:
-          - project: devstack-update-complete
-            when: complete
-            predefined-parameters:
-              DEVSTACK_NODE_NAME=${NODE_NAME}
+      - devstack-complete
       - email:
           recipients: openstack-essex-maint@lists.launchpad.net
 
@@ -449,10 +331,7 @@
       - timed: '0 6 * * *'
 
     builders:
-      - trigger-builds:
-          - project: devstack-update-inprogress
-            predefined-parameters:
-              DEVSTACK_NODE_NAME=${NODE_NAME}
+      - devstack-inprogress
       - devstack-checkout
       - shell: |
           #!/bin/bash -xe
@@ -464,19 +343,9 @@
       - link-logs
 
     publishers:
-      - scp:
-          site: 'static.openstack.org'
-          files:
-            - target: 'logs/periodic/$JOB_NAME/$BUILD_NUMBER'
-              source: 'logs/**'
-              keep-hierarchy: true
-              copy-after-failure: true
+      - devstack-logs-periodic
       - console-log-periodic
-      - trigger-parameterized-builds:
-          - project: devstack-update-complete
-            when: complete
-            predefined-parameters:
-              DEVSTACK_NODE_NAME=${NODE_NAME}
+      - devstack-complete
       - email:
           recipients: openstack-stable-maint@lists.openstack.org
 
@@ -495,10 +364,7 @@
       - timed: '0 6 * * *'
 
     builders:
-      - trigger-builds:
-          - project: devstack-update-inprogress
-            predefined-parameters:
-              DEVSTACK_NODE_NAME=${NODE_NAME}
+      - devstack-inprogress
       - devstack-checkout
       - shell: |
           #!/bin/bash -xe
@@ -511,19 +377,9 @@
       - link-logs
 
     publishers:
-      - scp:
-          site: 'static.openstack.org'
-          files:
-            - target: 'logs/periodic/$JOB_NAME/$BUILD_NUMBER'
-              source: 'logs/**'
-              keep-hierarchy: true
-              copy-after-failure: true
+      - devstack-logs-periodic
       - console-log-periodic
-      - trigger-parameterized-builds:
-          - project: devstack-update-complete
-            when: complete
-            predefined-parameters:
-              DEVSTACK_NODE_NAME=${NODE_NAME}
+      - devstack-complete
       - email:
           recipients: openstack-stable-maint@lists.openstack.org
 
@@ -542,10 +398,7 @@
       - timed: '0 6 * * *'
 
     builders:
-      - trigger-builds:
-          - project: devstack-update-inprogress
-            predefined-parameters:
-              DEVSTACK_NODE_NAME=${NODE_NAME}
+      - devstack-inprogress
       - devstack-checkout
       - shell: |
           #!/bin/bash -xe
@@ -560,19 +413,9 @@
       - link-logs
 
     publishers:
-      - scp:
-          site: 'static.openstack.org'
-          files:
-            - target: 'logs/periodic/$JOB_NAME/$BUILD_NUMBER'
-              source: 'logs/**'
-              keep-hierarchy: true
-              copy-after-failure: true
+      - devstack-logs-periodic
       - console-log-periodic
-      - trigger-parameterized-builds:
-          - project: devstack-update-complete
-            when: complete
-            predefined-parameters:
-              DEVSTACK_NODE_NAME=${NODE_NAME}
+      - devstack-complete
       - email:
           recipients: openstack-qa@lists.openstack.org
 
@@ -591,10 +434,7 @@
       - timed: '0 6 * * *'
 
     builders:
-      - trigger-builds:
-          - project: devstack-update-inprogress
-            predefined-parameters:
-              DEVSTACK_NODE_NAME=${NODE_NAME}
+      - devstack-inprogress
       - devstack-checkout
       - shell: |
           #!/bin/bash -xe
@@ -608,19 +448,9 @@
       - link-logs
 
     publishers:
-      - scp:
-          site: 'static.openstack.org'
-          files:
-            - target: 'logs/periodic/$JOB_NAME/$BUILD_NUMBER'
-              source: 'logs/**'
-              keep-hierarchy: true
-              copy-after-failure: true
+      - devstack-logs-periodic
       - console-log-periodic
-      - trigger-parameterized-builds:
-          - project: devstack-update-complete
-            when: complete
-            predefined-parameters:
-              DEVSTACK_NODE_NAME=${NODE_NAME}
+      - devstack-complete
       - email:
           recipients: openstack-qa@lists.openstack.org
 
@@ -645,10 +475,7 @@
       - zuul
 
     builders:
-      - trigger-builds:
-          - project: devstack-update-inprogress
-            predefined-parameters:
-              DEVSTACK_NODE_NAME=${NODE_NAME}
+      - devstack-inprogress
       - devstack-checkout
       - shell: |
           #!/bin/bash -xe
@@ -660,19 +487,9 @@
       - link-logs
 
     publishers:
-      - scp:
-          site: 'static.openstack.org'
-          files:
-            - target: 'logs/$ZUUL_CHANGE/$ZUUL_PATCHSET/$ZUUL_PIPELINE/$JOB_NAME/$BUILD_NUMBER'
-              source: 'logs/**'
-              keep-hierarchy: true
-              copy-after-failure: true
+      - devstack-logs
       - console-log
-      - trigger-parameterized-builds:
-          - project: devstack-update-complete
-            when: complete
-            predefined-parameters:
-              DEVSTACK_NODE_NAME=${NODE_NAME}
+      - devstack-complete
 
 
 # Called by devstack jobs to alert that they have started so that the
