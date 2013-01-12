@@ -547,8 +547,8 @@
 
 
 - project:
-    name: devstack-node-provider-rackspace-nova
-    provider: rackspace-nova
+    name: devstack-node-provider-rackspace-dfw
+    provider: rackspace-dfw
     jobs:
       - devstack-node-provider-jobs
 
