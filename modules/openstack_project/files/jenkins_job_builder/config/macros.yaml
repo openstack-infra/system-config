@@ -218,7 +218,6 @@
               copy-console: true
               copy-after-failure: true
 
-
 - publisher:
     name: devstack-logs
     publishers:
@@ -241,7 +240,6 @@
               keep-hierarchy: true
               copy-after-failure: true
 
-
 - publisher:
     name: devstack-complete
     publishers:
@@ -253,3 +251,25 @@
               UPSTREAM_BUILD_URL=${BUILD_URL}
               UPSTREAM_JOB_NAME=${JOB_NAME}
               UPSTREAM_BRANCH=${ZUUL_BRANCH}
+
+- publisher:
+    name: coverage-log
+    publishers:
+      - scp:
+          site: 'static.openstack.org'
+          files:
+            - target: 'logs/$ZUUL_CHANGE/$ZUUL_PATCHSET/$ZUUL_PIPELINE/$JOB_NAME/$BUILD_NUMBER'
+              source: 'cover/**'
+              keep-hierarchy: true
+              copy-after-failure: true
+
+- publisher:
+    name: coverage-log-post
+    publishers:
+      - scp:
+          site: 'static.openstack.org'
+          files:
+            - target: 'logs/$ZUUL_SHORT_NEWREV/$ZUUL_PIPELINE/$JOB_NAME/$BUILD_NUMBER'
+              source: 'cover/**'
+              keep-hierarchy: true
+              copy-after-failure: true
