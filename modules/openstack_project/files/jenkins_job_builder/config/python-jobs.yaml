@@ -9,13 +9,7 @@
       - coverage
 
     publishers:
-      - scp:
-          site: 'static.openstack.org'
-          files:
-            - target: 'logs/$ZUUL_SHORT_NEWREV/$ZUUL_PIPELINE/$JOB_NAME/$BUILD_NUMBER'
-              source: 'cover/**'
-              keep-hierarchy: true
-              copy-after-failure: true
+      - coverage-log-post
       - console-log-post
 
     node: '{node}'
