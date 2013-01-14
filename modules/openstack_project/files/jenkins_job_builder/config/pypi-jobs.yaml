@@ -7,7 +7,7 @@
 
     builders:
       - shell: |
-          #!bin/bash -xe
+          #!/bin/bash -xe
           TAG=`echo $ZUUL_REF | sed 's/^refs.tags.//'`
           FILENAME="{name}-$TAG.tar.gz"
 
