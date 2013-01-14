@@ -90,6 +90,7 @@ reddwarf:
       - stackforge/reddwarf
       - stackforge/reddwarf-integration
       - stackforge/python-reddwarfclient
+      - stackforge/database-api
     branches:
       - master
 

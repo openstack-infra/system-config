@@ -1072,3 +1072,9 @@ projects:
       - gate-noop
     gate:
       - gate-noop
+
+  - name: stackforge/database-api
+    check:
+      - gate-noop
+    gate:
+      - gate-noop
