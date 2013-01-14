@@ -63,7 +63,7 @@ if [ -f setup.py ] ; then
     fi
 fi
 
-echo -n "SHA1sum: "
-sha1sum "dist/${PROJECT}-${BRANCH_PATH}.tar.gz"
-echo -n "MD5sum: "
-md5sum "dist/${PROJECT}-${BRANCH_PATH}.tar.gz"
+echo "SHA1sum: "
+sha1sum dist/*
+echo "MD5sum: "
+md5sum dist/*
