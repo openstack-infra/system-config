@@ -45,8 +45,8 @@ pipelines:
       - event: ref-updated
         ref: ^refs/tags/([0-9]+\.)+[0-9]*(alpha|beta|candidate|rc|a|b|c|r)[0-9]*$
 
-  - name: publish
-    description: When a commit is tagged with a release tag, this pipeline runs jobs that operate on tags, such as uploading releases.
+  - name: release
+    description: When a commit is tagged as a release, this pipeline runs jobs that publish archives and documentation.
     manager: IndependentPipelineManager
     trigger:
       - event: ref-updated
@@ -124,7 +124,7 @@ projects:
     pre-release:
       - zuul-docs
       - zuul-tarball
-    publish:
+    release:
       - zuul-docs
       - zuul-tarball:
         - zuul-pypi-upload
@@ -138,7 +138,7 @@ projects:
       - nose-html-output-branch-tarball
     pre-release:
       - nose-html-output-tarball
-    publish:
+    release:
       - nose-html-output-tarball:
         - nose-html-output-pypi-upload
 
@@ -161,7 +161,7 @@ projects:
       - gerritbot-branch-tarball
     pre-release:
       - gerritbot-tarball
-    publish:
+    release:
       - gerritbot-tarball:
         - gerritbot-pypi-upload
 
@@ -174,7 +174,7 @@ projects:
       - gate-gerritlib-pyflakes
     pre-release:
       - gerritlib-tarball
-    publish:
+    release:
       - gerritlib-tarball:
         - gerritlib-pypi-upload
 
@@ -187,7 +187,7 @@ projects:
       - gate-jeepyb-pyflakes
     pre-release:
       - jeepyb-tarball
-    publish:
+    release:
       - jeepyb-tarball:
         - jeepyb-pypi-upload
 
@@ -206,7 +206,7 @@ projects:
       - jenkins-job-builder-docs
     pre-release:
       - jenkins-job-builder-tarball
-    publish:
+    release:
       - jenkins-job-builder-tarball:
         - jenkins-job-builder-pypi-upload
 
@@ -264,7 +264,7 @@ projects:
       - reviewday-coverage
     pre-release:
       - reviewday-tarball
-    publish:
+    release:
       - reviewday-tarball:
         - reviewday-pypi-upload
 
@@ -291,7 +291,7 @@ projects:
       - cinder-docs
     pre-release:
       - cinder-tarball
-    publish:
+    release:
       - cinder-tarball
       - cinder-docs
 
@@ -318,7 +318,7 @@ projects:
       - glance-docs
     pre-release:
       - glance-tarball
-    publish:
+    release:
       - glance-tarball
       - glance-docs
 
@@ -347,7 +347,7 @@ projects:
       - horizon-docs
     pre-release:
       - horizon-tarball
-    publish:
+    release:
       - horizon-tarball
       - horizon-docs
 
@@ -375,7 +375,7 @@ projects:
       - keystone-upstream-translation-update
     pre-release:
       - keystone-tarball
-    publish:
+    release:
       - keystone-tarball
       - keystone-docs
 
@@ -405,7 +405,7 @@ projects:
       - nova-upstream-translation-update
     pre-release:
       - nova-tarball
-    publish:
+    release:
       - nova-tarball
       - nova-docs
 
@@ -423,7 +423,7 @@ projects:
       - gate-oslo-incubator-python27
     post:
       - oslo-incubator-docs
-    publish:
+    release:
       - oslo-incubator-docs
 
   - name: openstack/quantum
@@ -447,7 +447,7 @@ projects:
       - quantum-docs
     pre-release:
       - quantum-tarball
-    publish:
+    release:
       - quantum-tarball
       - quantum-docs
 
@@ -474,7 +474,7 @@ projects:
       - swift-docs
     pre-release:
       - swift-tarball
-    publish:
+    release:
       - swift-tarball
       - swift-docs
 
@@ -494,7 +494,7 @@ projects:
       - python-ceilometerclient-coverage
     pre-release:
       - python-ceilometerclient-tarball
-    publish:
+    release:
       - python-ceilometerclient-tarball:
         - python-ceilometerclient-pypi-upload
       - python-ceilometerclient-docs
@@ -521,7 +521,7 @@ projects:
       - python-cinderclient-coverage
     pre-release:
       - python-cinderclient-tarball
-    publish:
+    release:
       - python-cinderclient-tarball:
         - python-cinderclient-pypi-upload
       - python-cinderclient-docs
@@ -548,7 +548,7 @@ projects:
       - python-glanceclient-coverage
     pre-release:
       - python-glanceclient-tarball
-    publish:
+    release:
       - python-glanceclient-tarball:
         - python-glanceclient-pypi-upload
       - python-glanceclient-docs
@@ -575,7 +575,7 @@ projects:
       - python-keystoneclient-coverage
     pre-release:
       - python-keystoneclient-tarball
-    publish:
+    release:
       - python-keystoneclient-tarball:
         - python-keystoneclient-pypi-upload
       - python-keystoneclient-docs
@@ -602,7 +602,7 @@ projects:
       - python-novaclient-coverage
     pre-release:
       - python-novaclient-tarball
-    publish:
+    release:
       - python-novaclient-tarball:
         - python-novaclient-pypi-upload
       - python-novaclient-docs
@@ -623,7 +623,7 @@ projects:
       - python-openstackclient-coverage
     pre-release:
       - python-openstackclient-tarball
-    publish:
+    release:
       - python-openstackclient-tarball:
         - python-openstackclient-pypi-upload
       - python-openstackclient-docs
@@ -650,7 +650,7 @@ projects:
       - python-quantumclient-coverage
     pre-release:
       - python-quantumclient-tarball
-    publish:
+    release:
       - python-quantumclient-tarball:
         - python-quantumclient-pypi-upload
       - python-quantumclient-docs
@@ -671,7 +671,7 @@ projects:
       - python-swiftclient-coverage
     pre-release:
       - python-swiftclient-tarball
-    publish:
+    release:
       - python-swiftclient-tarball:
         - python-swiftclient-pypi-upload
       - python-swiftclient-docs
@@ -721,7 +721,7 @@ projects:
   # superset of g-t-devstack-vm, the whole set of projects is still
   # gated on g-t-devstack-vm.
 
-  - name: null/tempest
+  - name: z/tempest
     gate:
       - gate-tempest-devstack-vm
       - gate-tempest-devstack-vm-full
@@ -764,7 +764,7 @@ projects:
       - ceilometer-upstream-translation-update
     pre-release:
       - ceilometer-tarball
-    publish:
+    release:
       - ceilometer-docs
       - ceilometer-tarball
 
@@ -815,7 +815,7 @@ projects:
       - heat-docs
     pre-release:
       - heat-tarball
-    publish:
+    release:
       - heat-tarball
       - heat-docs
 
@@ -834,7 +834,7 @@ projects:
       - python-heatclient-coverage
     pre-release:
       - python-heatclient-tarball
-    publish:
+    release:
       - python-heatclient-tarball:
         - python-heatclient-pypi-upload
       - python-heatclient-docs
@@ -892,7 +892,7 @@ projects:
       - moniker-branch-tarball
     pre-release:
       - moniker-tarball
-    publish:
+    release:
       - moniker-tarball:
         - moniker-pypi-upload
 
@@ -913,7 +913,7 @@ projects:
       - python-monikerclient-branch-tarball
     pre-release:
       - python-monikerclient-tarball
-    publish:
+    release:
       - python-monikerclient-tarball:
         - python-monikerclient-pypi-upload
 
@@ -1029,7 +1029,7 @@ projects:
       - gate-noop
     post:
       - openstack-qa-docs
-    publish:
+    release:
       - openstack-qa-docs
 
   - name: openstack-infra/git-review
