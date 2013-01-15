@@ -578,3 +578,12 @@
     provider: hpcloud-az2
     jobs:
       - devstack-node-provider-jobs
+
+
+- project:
+    name: packstack
+    github-org: stackforge
+    node: precise
+
+    jobs:
+      - python-jobs

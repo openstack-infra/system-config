@@ -1076,6 +1076,10 @@ projects:
 
   - name: stackforge/database-api
     check:
-      - gate-noop
+      - gate-packstack-pep8
+      - gate-packstack-python26
+      - gate-packstack-python27
     gate:
-      - gate-noop
+      - gate-packstack-pep8
+      - gate-packstack-python26
+      - gate-packstack-python27
