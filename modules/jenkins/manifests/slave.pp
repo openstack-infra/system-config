@@ -36,6 +36,7 @@ class jenkins::slave(
     $::jenkins::params::mod_wsgi_package,
     $::jenkins::params::libcurl_dev_package,
     $::jenkins::params::ldap_dev_package,
+    $::jenkins::params::librrd_dev_package, # for py-rrdtool, used by kwapi
     $::jenkins::params::libsasl_dev, # for keystone ldap auth integration
     $::jenkins::params::mysql_dev_package,
     $::jenkins::params::nspr_dev_package, # for spidermonkey, used by ceilometer
