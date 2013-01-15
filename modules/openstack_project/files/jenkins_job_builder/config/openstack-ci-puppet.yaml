@@ -44,6 +44,21 @@
       - console-log
 
 
+- job:
+    name: gate-config-layout
+    node: precise
+
+    triggers:
+      - zuul
+
+    builders:
+      - gerrit-git-prep
+      - shell: "./tools/run-layout.sh"
+
+    publishers:
+      - console-log
+
+
 # This is a non-standard docs job because it uses SCP instead of FTP
 - job:
     name: ci-docs
