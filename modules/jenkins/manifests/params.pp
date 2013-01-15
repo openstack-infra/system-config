@@ -21,6 +21,7 @@ class jenkins::params {
       $libcurl_dev_package = 'libcurl-devel'
       $ldap_dev_package = 'openldap-devel'
       # for keystone ldap auth integration
+      $librrd_dev_package = 'rrdtool-devel'
       $libsasl_dev = 'cyrus-sasl-devel'
       $mysql_dev_package = 'mysql-devel'
       $nspr_dev_package = 'nspr-devel'
@@ -60,6 +61,7 @@ class jenkins::params {
       $libcurl_dev_package = 'libcurl4-gnutls-dev'
       $ldap_dev_package = 'libldap2-dev'
       # for keystone ldap auth integration
+      $librrd_dev_package = 'librrd-dev'
       $libsasl_dev = 'libsasl2-dev'
       $mysql_dev_package = 'libmysqlclient-dev'
       $nspr_dev_package = 'libnspr4-dev'
