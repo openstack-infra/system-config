@@ -25,6 +25,7 @@
           properties-file: gerrit-doc.properties
 
     maven:
+      maven-name: Maven3
       root-module:
         group-id: org.openstack.docs
         artifact-id: openstack-guide
@@ -54,6 +55,7 @@
       - gerrit-git-prep
 
     maven:
+      maven-name: Maven3
       root-module:
         group-id: org.openstack.docs
         artifact-id: openstack-guide
@@ -84,6 +86,7 @@
       - gerrit-git-prep
 
     maven:
+      maven-name: Maven3
       root-module:
         group-id: org.openstack.docs
         artifact-id: openstack-guide
@@ -137,6 +140,7 @@
       - gerrit-git-prep
 
     maven:
+      maven-name: Maven3
       root-module:
         group-id: org.openstack.docs
         artifact-id: openstack-guide
@@ -165,6 +169,7 @@
       - gerrit-git-prep
 
     maven:
+      maven-name: Maven3
       root-module:
         group-id: org.openstack.docs
         artifact-id: openstack-object-api-guide
@@ -193,6 +198,7 @@
       - gerrit-git-prep
 
     maven:
+      maven-name: Maven3
       root-module:
         group-id: org.openstack.docs
         artifact-id: openstack-guide
@@ -243,6 +249,7 @@
       - gerrit-git-prep
 
     maven:
+      maven-name: Maven3
       root-module:
         group-id: org.openstack.identity
         artifact-id: docs
@@ -269,6 +276,7 @@
       - zuul-post
 
     maven:
+      maven-name: Maven3
       root-module:
         group-id: org.openstack.docs
         artifact-id: openstack-guide

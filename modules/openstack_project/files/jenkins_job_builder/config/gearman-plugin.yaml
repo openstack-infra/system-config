@@ -10,6 +10,7 @@
       - gerrit-git-prep
 
     maven:
+      maven-name: Maven2
       root-module:
         group-id: org.jenkins-ci.plugins
         artifact-id: gearman-plugin

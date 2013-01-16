@@ -16,6 +16,7 @@
       - gerrit-preclean
 
     maven:
+      maven-name: Maven3
       root-module:
         group-id: com.google.gerrit
         artifact-id: gerrit-parent
@@ -50,6 +51,7 @@
       - gerrit-preclean
 
     maven:
+      maven-name: Maven3
       root-module:
         group-id: com.google.gerrit
         artifact-id: gerrit-parent
@@ -79,6 +81,7 @@
       - gerrit-preclean
 
     maven:
+      maven-name: Maven3
       root-module:
         group-id: com.google.gerrit
         artifact-id: gerrit-parent

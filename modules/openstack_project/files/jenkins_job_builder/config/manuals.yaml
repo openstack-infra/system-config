@@ -10,6 +10,7 @@
       - gerrit-git-prep
 
     maven:
+      maven-name: Maven3
       root-module:
         group-id: org.openstack.docs
         artifact-id: openstack-guide
@@ -38,6 +39,7 @@
       - gerrit-git-prep
 
     maven:
+      maven-name: Maven3
       root-module:
         group-id: org.openstack.docs
         artifact-id: openstack-guide
@@ -65,6 +67,7 @@
       - gerrit-git-prep
 
     maven:
+      maven-name: Maven3
       root-module:
         group-id: org.openstack.docs
         artifact-id: openstack-guide
@@ -92,6 +95,7 @@
       - gerrit-git-prep
 
     maven:
+      maven-name: Maven3
       root-module:
         group-id: org.openstack.docs
         artifact-id: openstack-guide
@@ -125,6 +129,7 @@
       - gerrit-git-prep
 
     maven:
+      maven-name: Maven3
       root-module:
         group-id: org.openstack.docs
         artifact-id: openstack-guide
@@ -165,6 +170,7 @@
           properties-file: gerrit-doc.properties
 
     maven:
+      maven-name: Maven3
       root-module:
         group-id: org.openstack.docs
         artifact-id: openstack-guide
@@ -192,6 +198,7 @@
       - gerrit-git-prep
 
     maven:
+      maven-name: Maven3
       root-module:
         group-id: org.openstack.docs
         artifact-id: openstack-guide
@@ -225,6 +232,7 @@
           properties-file: gerrit-doc.properties
 
     maven:
+      maven-name: Maven3
       root-module:
         group-id: org.openstack.docs
         artifact-id: openstack-guide
@@ -250,6 +258,7 @@
       - zuul-post
 
     maven:
+      maven-name: Maven3
       root-module:
         group-id: org.openstack.docs
         artifact-id: openstack-guide
@@ -283,6 +292,7 @@
           properties-file: gerrit-doc.properties
 
     maven:
+      maven-name: Maven3
       root-module:
         group-id: org.openstack.docs
         artifact-id: openstack-guide
@@ -316,6 +326,7 @@
           properties-file: gerrit-doc.properties
 
     maven:
+      maven-name: Maven3
       root-module:
         group-id: org.openstack.docs
         artifact-id: openstack-guide
@@ -341,6 +352,7 @@
       - zuul-post
 
     maven:
+      maven-name: Maven3
       root-module:
         group-id: org.openstack.docs
         artifact-id: openstack-guide
@@ -403,6 +415,7 @@
           asciidoc -b docbook -d book -o - doc/src/docbkx/openstack-ha/ha-guide.txt |  xsltproc -o - /usr/share/xml/docbook/stylesheet/docbook5/db4-upgrade.xsl - |  xmllint  --format - | sed -e 's,<book,<book xml:id="bk-ha-guide",' > doc/src/docbkx/openstack-ha/bk-ha-guide.xml
 
     maven:
+      maven-name: Maven3
       root-module:
         group-id: org.openstack.docs
         artifact-id: openstack-guide
@@ -436,6 +449,7 @@
       - gerrit-git-prep
 
     maven:
+      maven-name: Maven3
       root-module:
         group-id: org.openstack.docs
         artifact-id: openstack-guide
@@ -469,6 +483,7 @@
       - gerrit-git-prep
 
     maven:
+      maven-name: Maven3
       root-module:
         group-id: org.openstack.docs
         artifact-id: openstack-guide
