@@ -43,6 +43,9 @@ openstack-dev:
       - openstack/python-swiftclient
       - openstack/quantum
       - openstack/swift
+      - openstack/tempest
+      - openstack-dev/devstack
+      - openstack-infra/devstack-gate
     branches:
       - master
 
