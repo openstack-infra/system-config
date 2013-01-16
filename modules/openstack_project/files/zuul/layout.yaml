@@ -102,8 +102,6 @@ jobs:
   - name: gate-tempest-devstack-vm-postgres
     branch: ^(?!stable/(diablo|essex|folsom)).*$
     voting: false
-  - name: gate-config-layout
-    voting: false
 
 
 projects:
