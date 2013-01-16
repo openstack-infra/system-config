@@ -46,29 +46,13 @@ above.
 Add DNS Records
 ===============
 
-There are no scripts to handle DNS at the moment due to a lack of
-library support for the new Rackspace Cloud DNS (with IPv6).  To
-manually update DNS, you will need the hostname, v4 and v6 addresses
-of the host, as well as the UUID (these can all be found by running
-the ''nova list'' command).  The environment variables used in the
-URL should be satisfied by sourcing the "openstackci-rs-nova.sh"
-script (or jenkins, as appropriate). Also the above launch script
-should output some environment variable assignments for UUID, IPV4
-and IPV6 you can cut and paste as needed, or you can fill them in
-yourself::
+There are no scripts to automatically handle DNS at the moment due to
+a lack of library support for the new Rackspace Cloud DNS (with IPv6).
+However, the launch-node script will print the commands needed to be
+run to configure DNS for a newly launched server.  To see the commands
+for an existing server, run:
 
-  . ~root/rackdns-venv/bin/activate
-
-  UUID=01234567-89ab-cdef-fedc-ba9876543210
-  IPV4=123.45.67.89
-  IPV6=fedc:ba98:7654:3210:dead:beef:cafe:feed
-
-  rackdns rdns-create --name $FQDN --data "$IPV6" --server-href https://$os_region_name.servers.api.rackspacecloud.com/v2/$OS_TENANT_NAME/servers/"$UUID" --ttl 300
-  rackdns rdns-create --name $FQDN --data "$IPV4" --server-href https://$os_region_name.servers.api.rackspacecloud.com/v2/$OS_TENANT_NAME/servers/"$UUID" --ttl 300
-
-  . ~root/ci-launch/openstack-rs-nova.sh
-  rackdns record-create --name $FQDN --type AAAA --data "$IPV6" --ttl 300 openstack.org
-  rackdns record-create --name $FQDN --type A --data "$IPV4" --ttl 300 openstack.org
+  ./dns.py $FQDN
 
 Activate Puppet Agent
 =====================

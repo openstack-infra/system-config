@@ -84,14 +84,9 @@ def get_flavor(client, min_ram):
 
 def get_public_ip(server, version=4):
     if 'os-floating-ips' in get_extensions(server.manager.api):
-        print 'using floating ips'
         for addr in server.manager.api.floating_ips.list():
-            print 'checking addr', addr
             if addr.instance_id == server.id:
-                print 'found addr', addr
                 return addr.ip
-    print 'no floating ip, addresses:'
-    print server.addresses
     for addr in server.addresses.get('public', []):
         if type(addr) == type(u''): # Rackspace/openstack 1.0
             return addr
@@ -102,9 +97,13 @@ def get_public_ip(server, version=4):
             return addr['addr']
     return None
 
+def get_href(server):
+    for link in server.links:
+        if link['rel'] == 'self':
+            return link['href']
+
 def add_public_ip(server):
     ip = server.manager.api.floating_ips.create()
-    print "created floating ip", ip
     server.add_floating_ip(ip)
     for count in iterate_timeout(600, "ip to be added"):
         try:
