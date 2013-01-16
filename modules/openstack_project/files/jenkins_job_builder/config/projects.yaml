@@ -474,6 +474,16 @@
 
 
 - project:
+    name: packstack
+    github-org: stackforge
+    node: precise
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - python-jobs
+
+
+- project:
     name: python-monikerclient
     github-org: stackforge
     node: precise
@@ -578,12 +588,3 @@
     provider: hpcloud-az2
     jobs:
       - devstack-node-provider-jobs
-
-
-- project:
-    name: packstack
-    github-org: stackforge
-    node: precise
-
-    jobs:
-      - python-jobs
