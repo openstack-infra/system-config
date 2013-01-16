@@ -180,6 +180,12 @@ node 'puppet-dashboard.openstack.org' {
   }
 }
 
+node 'logstash.openstack.org' {
+  class { 'openstack_project::logstash':
+    sysadmins       => hiera('sysadmins'),
+  }
+}
+
 # A machine to serve static content.
 node 'static.openstack.org' {
   class { 'openstack_project::static':
