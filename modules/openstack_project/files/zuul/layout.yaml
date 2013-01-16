@@ -4,6 +4,7 @@ includes:
 pipelines:
   - name: check
     description: Newly uploaded patchsets enter this pipeline to receive an initial +/-1 Verified vote from Jenkins.
+    failure-message: Build failed.  For information on how to proceed, see http://wiki.openstack.org/GerritJenkinsGithub#Test_Failures
     manager: IndependentPipelineManager
     trigger:
       - event: patchset-created
@@ -16,6 +17,7 @@ pipelines:
 
   - name: gate
     description: Changes that have been approved by core developers are enqueued in order in this pipeline, and if they pass tests in Jenkins, will be merged.
+    failure-message: Build failed.  For information on how to proceed, see http://wiki.openstack.org/GerritJenkinsGithub#Test_Failures
     manager: DependentPipelineManager
     trigger:
       - event: comment-added
