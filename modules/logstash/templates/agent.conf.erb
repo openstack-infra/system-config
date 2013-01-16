@@ -1,0 +1,9 @@
+input {
+  stdin {
+    type => "stdin-type"
+  }
+}
+
+output {
+  redis { host => "127.0.0.1" data_type => "list" key => "logstash" }
+}
