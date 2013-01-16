@@ -196,7 +196,7 @@
       - timed: '0 6 * * *'
 
     parameters:
-      - label:
+      - string:
           name: ZUUL_BRANCH
           description: The branch to build
           default: master
@@ -235,7 +235,7 @@
       - timed: '@hourly'
 
     parameters:
-      - label:
+      - string:
           name: ZUUL_BRANCH
           description: The branch to build
           default: master
@@ -275,7 +275,7 @@
       - timed: '0 6 * * *'
 
     parameters:
-      - label:
+      - string:
           name: ZUUL_BRANCH
           description: The branch to build
           default: stable/diablo
@@ -313,7 +313,7 @@
       - timed: '0 6 * * *'
 
     parameters:
-      - label:
+      - string:
           name: ZUUL_BRANCH
           description: The branch to build
           default: stable/essex
@@ -351,7 +351,7 @@
       - timed: '0 6 * * *'
 
     parameters:
-      - label:
+      - string:
           name: ZUUL_BRANCH
           description: The branch to build
           default: stable/folsom
@@ -389,7 +389,7 @@
       - timed: '0 6 * * *'
 
     parameters:
-      - label:
+      - string:
           name: ZUUL_BRANCH
           description: The branch to build
           default: stable/folsom
@@ -428,7 +428,7 @@
       - timed: '0 6 * * *'
 
     parameters:
-      - label:
+      - string:
           name: ZUUL_BRANCH
           description: The branch to build
           default: master
@@ -469,7 +469,7 @@
       - timed: '0 6 * * *'
 
     parameters:
-      - label:
+      - string:
           name: ZUUL_BRANCH
           description: The branch to build
           default: master
