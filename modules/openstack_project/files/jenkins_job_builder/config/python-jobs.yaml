@@ -60,25 +60,7 @@
       - python26
 
     publishers:
-      - scp:
-          site: 'static.openstack.org'
-          files:
-            - target: 'logs/$ZUUL_CHANGE/$ZUUL_PATCHSET/$ZUUL_PIPELINE/$JOB_NAME/$BUILD_NUMBER'
-              source: '**/*nose_results.html'
-              keep-hierarchy: false
-              copy-after-failure: true
-            - target: 'logs/$ZUUL_CHANGE/$ZUUL_PATCHSET/$ZUUL_PIPELINE/$JOB_NAME/$BUILD_NUMBER'
-              source: '**/*testr_results.html'
-              keep-hierarchy: false
-              copy-after-failure: true
-            - target: 'logs/$ZUUL_CHANGE/$ZUUL_PATCHSET/$ZUUL_PIPELINE/$JOB_NAME/$BUILD_NUMBER'
-              source: '.testrepository/tmp*'
-              keep-hierarchy: false
-              copy-after-failure: true
-            - target: 'logs/$ZUUL_CHANGE/$ZUUL_PATCHSET/$ZUUL_PIPELINE/$JOB_NAME/$BUILD_NUMBER'
-              source: '**/*subunit_log.txt'
-              keep-hierarchy: false
-              copy-after-failure: true
+      - unittest-log
       - console-log
 
     # >= precise does not have python2.6
@@ -95,13 +77,7 @@
       - python26-folsom
 
     publishers:
-      - scp:
-          site: 'static.openstack.org'
-          files:
-            - target: 'logs/$ZUUL_CHANGE/$ZUUL_PATCHSET/$ZUUL_PIPELINE/$JOB_NAME/$BUILD_NUMBER'
-              source: '**/*nose_results.html'
-              keep-hierarchy: false
-              copy-after-failure: true
+      - nose-log
       - console-log
 
     # >= precise does not have python2.6
@@ -125,25 +101,7 @@
       - python27
 
     publishers:
-      - scp:
-          site: 'static.openstack.org'
-          files:
-            - target: 'logs/$ZUUL_CHANGE/$ZUUL_PATCHSET/$ZUUL_PIPELINE/$JOB_NAME/$BUILD_NUMBER'
-              source: '**/*nose_results.html'
-              keep-hierarchy: false
-              copy-after-failure: true
-            - target: 'logs/$ZUUL_CHANGE/$ZUUL_PATCHSET/$ZUUL_PIPELINE/$JOB_NAME/$BUILD_NUMBER'
-              source: '**/*testr_results.html'
-              keep-hierarchy: false
-              copy-after-failure: true
-            - target: 'logs/$ZUUL_CHANGE/$ZUUL_PATCHSET/$ZUUL_PIPELINE/$JOB_NAME/$BUILD_NUMBER'
-              source: '.testrepository/tmp*'
-              keep-hierarchy: false
-              copy-after-failure: true
-            - target: 'logs/$ZUUL_CHANGE/$ZUUL_PATCHSET/$ZUUL_PIPELINE/$JOB_NAME/$BUILD_NUMBER'
-              source: '**/*subunit_log.txt'
-              keep-hierarchy: false
-              copy-after-failure: true
+      - unittest-log
       - console-log
 
     node: '{node}'
@@ -165,13 +123,7 @@
       - python27-folsom
 
     publishers:
-      - scp:
-          site: 'static.openstack.org'
-          files:
-            - target: 'logs/$ZUUL_CHANGE/$ZUUL_PATCHSET/$ZUUL_PIPELINE/$JOB_NAME/$BUILD_NUMBER'
-              source: '**/*nose_results.html'
-              keep-hierarchy: false
-              copy-after-failure: true
+      - nose-log
       - console-log
 
     node: '{node}'
