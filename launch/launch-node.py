@@ -27,6 +27,7 @@ import traceback
 import socket
 import argparse
 import utils
+import dns
 
 NOVA_USERNAME=os.environ['OS_USERNAME']
 NOVA_PASSWORD=os.environ['OS_PASSWORD']
@@ -142,7 +143,6 @@ def build_server(client, name, image, flavor, cert, environment):
         # Raise the important exception that started this
         raise
 
-
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("name", help="server name")
@@ -196,6 +196,7 @@ def main():
     print "Found image", image
 
     build_server(client, options.name, image, flavor, cert, options.environment)
+    dns.print_dns(client, options.name)
 
 if __name__ == '__main__':
     main()
