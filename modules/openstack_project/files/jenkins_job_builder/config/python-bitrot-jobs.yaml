@@ -8,13 +8,7 @@
       - python26
 
     publishers:
-      - scp:
-          site: 'static.openstack.org'
-          files:
-            - target: 'logs/periodic/$JOB_NAME/$BUILD_NUMBER'
-              source: '**/*nose_results.html'
-              keep-hierarchy: false
-              copy-after-failure: true
+      - unittest-log-periodic
       - console-log-periodic
       - email:
           recipients: '{email}'
@@ -39,13 +33,7 @@
       - python27
 
     publishers:
-      - scp:
-          site: 'static.openstack.org'
-          files:
-            - target: 'logs/periodic/$JOB_NAME/$BUILD_NUMBER'
-              source: '**/*nose_results.html'
-              keep-hierarchy: false
-              copy-after-failure: true
+      - unittest-log-periodic
       - console-log-periodic
       - email:
           recipients: '{email}'
