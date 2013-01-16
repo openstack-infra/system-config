@@ -46,4 +46,10 @@ class openstack_project::wiki (
     }
   }
   include mysql::server::account_security
+
+  include bup
+  bup::site { 'rs-ord':
+    backup_user   => 'bup-wiki',
+    backup_server => 'ci-backup-rs-ord.openstack.org',
+  }
 }
