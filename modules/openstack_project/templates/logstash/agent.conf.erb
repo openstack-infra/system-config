@@ -1,0 +1,8 @@
+input {
+  syslog {
+    type => syslog
+    port => 5514
+  }
+}
+
+<%= scope.function_template(['openstack_project/logstash/redis-output.conf.erb']) %>
