@@ -1072,13 +1072,13 @@ projects:
     gate:
       - gate-gearman-plugin-build
 
-  - name: stackforge/packstack
+  - name: stackforge/database-api
     check:
       - gate-noop
     gate:
       - gate-noop
 
-  - name: stackforge/database-api
+  - name: stackforge/packstack
     check:
       - gate-packstack-pep8
       - gate-packstack-python26
