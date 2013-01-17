@@ -62,6 +62,10 @@
   ScriptAlias /p/ /usr/lib/git-core/git-http-backend/
 <% end -%>
 
+<% if scope.lookupvar("gerrit::contactstore") == true -%>
+  ScriptAlias /fakestore /home/gerrit2/review_site/lib/fakestore.cgi
+<% end -%>
+
   <Directory /home/gerrit2/review_site/git/>
     Order allow,deny
     Allow from all
