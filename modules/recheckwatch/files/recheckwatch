@@ -123,12 +123,14 @@ class Scoreboard(threading.Thread):
 
         def impact(bug):
             "This ranks more recent bugs higher"
-            return (len(bug.hits) * (5.0 / ((bug.last_seen-now).days)))
+            age = (bug.last_seen-now).days
+            if not age:
+                age = -1
+            return (len(bug.hits) * (5.0 / age))
 
         # Get the bugs reverse sorted by impact
         bugs = self.scores.values()
         bugs.sort(lambda a,b: cmp(impact(a), impact(b)))
-        bugs.reverse()
         loader = TemplateLoader([self.template_dir], auto_reload=True)
         tmpl = loader.load('scoreboard.html')
         out = open(self.output_file, 'w')
