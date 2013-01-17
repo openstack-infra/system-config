@@ -519,5 +519,13 @@ class gerrit(
       replace => true,
       require => File['/home/gerrit2/review_site/etc'],
     }
+    file { '/home/gerrit2/review_site/lib/fakestore.cgi':
+      ensure  => present,
+      owner   => 'root',
+      group   => 'root',
+      mode    => '0555',
+      source  => 'puppet:///modules/gerrit/fakestore.cgi',
+      require => File['/home/gerrit2/review_site/lib'],
+    }
   }
 }
