@@ -99,6 +99,21 @@
       - shell: "/usr/local/jenkins/slave_scripts/run-tox.sh 27-folsom"
 
 - builder:
+    name: assert-no-extra-files
+    builders:
+      - shell: |
+          #!/bin/bash
+          OUT=`git ls-files --other --exclude-standard --directory`
+          if [ -z "$OUT" ]; then
+              echo "No extra files created during test."
+              exit 0
+          else
+              echo "The following un-ignored files were created during the test:"
+              echo "$OUT"
+              exit 0  # TODO: change to 1 to fail tests.
+          fi
+
+- builder:
     name: tarball
     builders:
       - shell: "/usr/local/jenkins/slave_scripts/create-tarball.sh {project}"

@@ -58,6 +58,7 @@
     builders:
       - gerrit-git-prep
       - python26
+      - assert-no-extra-files
 
     publishers:
       - scp:
@@ -93,6 +94,7 @@
     builders:
       - gerrit-git-prep
       - python26-folsom
+      - assert-no-extra-files
 
     publishers:
       - scp:
@@ -123,6 +125,7 @@
     builders:
       - gerrit-git-prep
       - python27
+      - assert-no-extra-files
 
     publishers:
       - scp:
@@ -163,6 +166,7 @@
     builders:
       - gerrit-git-prep
       - python27-folsom
+      - assert-no-extra-files
 
     publishers:
       - scp:
