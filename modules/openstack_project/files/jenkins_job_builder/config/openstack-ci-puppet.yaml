@@ -59,6 +59,21 @@
       - console-log
 
 
+- job:
+    name: config-dry
+    node: precise
+
+    triggers:
+      - zuul
+
+    builders:
+      - gerrit-git-prep
+      - shell: "./tools/run-dry.sh"
+
+    publishers:
+      - console-log
+
+
 # This is a non-standard docs job because it uses SCP instead of FTP
 - job:
     name: ci-docs
