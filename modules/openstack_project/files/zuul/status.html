@@ -50,6 +50,18 @@
 a:link {
     color: #204A87;
 }
+#message {
+    margin: 0;
+}
+.alertbox {
+    border: 1px solid #e5574d;
+    background: #ffaba5;
+    color: black;
+    padding: 1em;
+    font-size: 12pt;
+    margin: 0pt;
+}
+
 </style>
 
     <TITLE>Zuul Status</TITLE>
@@ -81,13 +93,6 @@ a:link {
   </HEAD>
 
   <BODY>
-    <div id="message-container">
-      <div class="container">
-	<div class="span-24 last">
-	  <p id="message"/>
-	</div>
-      </div>
-    </div>
     <div class="container">
       <div id="header">
 	<div class="span-5">
@@ -117,6 +122,12 @@ a:link {
 	operation of the OpenStack project.  For more information, please see
 	<a href="http://ci.openstack.org/zuul">the Zuul reference manual.</a>
       </p>
+    </div>
+
+    <div id="message-container">
+      <div class="container">
+	<p id="message"/>
+      </div>
     </div>
 
     <div id="pipeline-container">

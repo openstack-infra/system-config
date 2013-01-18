@@ -125,10 +125,10 @@ function update() {
 
     $.getJSON('http://zuul.openstack.org/status.json', function(data) {
         if ('message' in data) {
-            $("#message-container").attr('class', 'topMessage');
+            $("#message").attr('class', 'alertbox');
             $("#message").html(data['message']);
         } else {
-            $("#message-container").removeClass('topMessage');
+            $("#message").removeClass('alertbox');
             $("#message").html('');
         }
 
