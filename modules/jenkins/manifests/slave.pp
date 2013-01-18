@@ -53,6 +53,7 @@ class jenkins::slave(
     $::jenkins::params::unzip_package,
     $::jenkins::params::xslt_package, # for building openstack docs
     $::jenkins::params::xvfb_package, # for selenium tests
+    $::jenkins::params::guile_package, # for dry tests
   ]
 
   if ($bare == false) {
