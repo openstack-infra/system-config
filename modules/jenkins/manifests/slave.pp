@@ -174,6 +174,22 @@ class jenkins::slave(
         Class['mysql::server::account_security'],
       ],
     }
+
+    class { 'postgresql::server':
+      config_hash => {
+        'postgres_password'      => 'insecure_slave',
+        'manage_redhat_firewall' => false,
+        'listen_addresses'       => '127.0.0.1',
+      },
+    }
+    include postgresql::devel
+
+    postgresql::db { 'openstack_citest':
+      user     => 'openstack_citest',
+      password => 'openstack_citest',
+      grant    => 'all',
+      require  => Class['postgresql::server'],
+    }
   }
 
   file { '/usr/local/jenkins':
