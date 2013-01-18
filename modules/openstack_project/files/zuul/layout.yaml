@@ -68,9 +68,16 @@ jobs:
     parameter-function: devstack_params
   - name: gate-tempest-devstack-vm-cinder
     branch: stable/folsom
+  - name: gate-tempest-devstack-vm-cinder-xml
+    branch: stable/folsom
   - name: gate-tempest-devstack-vm-quantum
     branch: ^(?!stable/(diablo|essex|folsom)).*$
+  - name: gate-tempest-devstack-vm-quantum-xml
+    branch: ^(?!stable/(diablo|essex|folsom)).*$
   - name: gate-tempest-devstack-vm-postgres
+    branch: ^(?!stable/(diablo|essex|folsom)).*$
+    voting: false
+  - name: gate-tempest-devstack-vm-postgres-xml
     branch: ^(?!stable/(diablo|essex|folsom)).*$
     voting: false
   - name: ^.*-python27$
@@ -275,16 +282,22 @@ projects:
       - gate-cinder-python26
       - gate-cinder-python27
       - gate-tempest-devstack-vm
+      - gate-tempest-devstack-vm-xml
       - gate-tempest-devstack-vm-cinder
+      - gate-tempest-devstack-vm-cinder-xml
       - gate-tempest-devstack-vm-quantum
+      - gate-tempest-devstack-vm-quantum-xml
     gate:
       - gate-cinder-docs
       - gate-cinder-pep8
       - gate-cinder-python26
       - gate-cinder-python27
       - gate-tempest-devstack-vm
+      - gate-tempest-devstack-vm-xml
       - gate-tempest-devstack-vm-cinder
+      - gate-tempest-devstack-vm-cinder-xml
       - gate-tempest-devstack-vm-quantum
+      - gate-tempest-devstack-vm-quantum-xml
     post:
       - cinder-branch-tarball
       - cinder-coverage
@@ -302,16 +315,22 @@ projects:
       - gate-glance-python26
       - gate-glance-python27
       - gate-tempest-devstack-vm
+      - gate-tempest-devstack-vm-xml
       - gate-tempest-devstack-vm-cinder
+      - gate-tempest-devstack-vm-cinder-xml
       - gate-tempest-devstack-vm-quantum
+      - gate-tempest-devstack-vm-quantum-xml
     gate:
       - gate-glance-docs
       - gate-glance-pep8
       - gate-glance-python26
       - gate-glance-python27
       - gate-tempest-devstack-vm
+      - gate-tempest-devstack-vm-xml
       - gate-tempest-devstack-vm-cinder
+      - gate-tempest-devstack-vm-cinder-xml
       - gate-tempest-devstack-vm-quantum
+      - gate-tempest-devstack-vm-quantum-xml
     post:
       - glance-branch-tarball
       - glance-coverage
@@ -330,8 +349,11 @@ projects:
       - gate-horizon-python27
       - gate-horizon-selenium
       - gate-tempest-devstack-vm
+      - gate-tempest-devstack-vm-xml
       - gate-tempest-devstack-vm-cinder
+      - gate-tempest-devstack-vm-cinder-xml
       - gate-tempest-devstack-vm-quantum
+      - gate-tempest-devstack-vm-quantum-xml
     gate:
       - gate-horizon-docs
       - gate-horizon-pep8
@@ -339,8 +361,11 @@ projects:
       - gate-horizon-python27
       - gate-horizon-selenium
       - gate-tempest-devstack-vm
+      - gate-tempest-devstack-vm-xml
       - gate-tempest-devstack-vm-cinder
+      - gate-tempest-devstack-vm-cinder-xml
       - gate-tempest-devstack-vm-quantum
+      - gate-tempest-devstack-vm-quantum-xml
     post:
       - horizon-branch-tarball
       - horizon-coverage
@@ -358,16 +383,22 @@ projects:
       - gate-keystone-python26
       - gate-keystone-python27
       - gate-tempest-devstack-vm
+      - gate-tempest-devstack-xml
       - gate-tempest-devstack-vm-cinder
+      - gate-tempest-devstack-vm-cinder-xml
       - gate-tempest-devstack-vm-quantum
+      - gate-tempest-devstack-vm-quantum-xml
     gate:
       - gate-keystone-docs
       - gate-keystone-pep8
       - gate-keystone-python26
       - gate-keystone-python27
       - gate-tempest-devstack-vm
+      - gate-tempest-devstack-vm-xml
       - gate-tempest-devstack-vm-cinder
+      - gate-tempest-devstack-vm-cinder-xml
       - gate-tempest-devstack-vm-quantum
+      - gate-tempest-devstack-vm-quantum-xml
     post:
       - keystone-branch-tarball
       - keystone-coverage
@@ -387,8 +418,11 @@ projects:
       - gate-nova-python26
       - gate-nova-python27
       - gate-tempest-devstack-vm
+      - gate-tempest-devstack-vm-xml
       - gate-tempest-devstack-vm-cinder
+      - gate-tempest-devstack-vm-cinder-xml
       - gate-tempest-devstack-vm-quantum
+      - gate-tempest-devstack-vm-quantum-xml
       - gate-nova-pylint
     gate:
       - gate-nova-docs
@@ -396,8 +430,11 @@ projects:
       - gate-nova-python26
       - gate-nova-python27
       - gate-tempest-devstack-vm
+      - gate-tempest-devstack-vm-xml
       - gate-tempest-devstack-vm-cinder
+      - gate-tempest-devstack-vm-cinder-xml
       - gate-tempest-devstack-vm-quantum
+      - gate-tempest-devstack-vm-quantum-xml
     post:
       - nova-branch-tarball
       - nova-coverage
@@ -433,12 +470,14 @@ projects:
       - gate-quantum-python26
       - gate-quantum-python27
       - gate-tempest-devstack-vm-quantum
+      - gate-tempest-devstack-vm-quantum-xml
     gate:
       - gate-quantum-docs
       - gate-quantum-pep8
       - gate-quantum-python26
       - gate-quantum-python27
       - gate-tempest-devstack-vm-quantum
+      - gate-tempest-devstack-vm-quantum-xml
     post:
       - quantum-branch-tarball
       - quantum-coverage
@@ -456,16 +495,22 @@ projects:
       - gate-swift-python26
       - gate-swift-python27
       - gate-tempest-devstack-vm
+      - gate-tempest-devstack-vm-xml
       - gate-tempest-devstack-vm-cinder
+      - gate-tempest-devstack-vm-cinder-xml
       - gate-tempest-devstack-vm-quantum
+      - gate-tempest-devstack-vm-quantum-xml
     gate:
       - gate-swift-docs
       - gate-swift-pep8
       - gate-swift-python26
       - gate-swift-python27
       - gate-tempest-devstack-vm
+      - gate-tempest-devstack-vm-xml
       - gate-tempest-devstack-vm-cinder
+      - gate-tempest-devstack-vm-cinder-xml
       - gate-tempest-devstack-vm-quantum
+      - gate-tempest-devstack-vm-quantum-xml
     post:
       - swift-branch-tarball
       - swift-coverage
@@ -504,16 +549,22 @@ projects:
       - gate-python-cinderclient-python26
       - gate-python-cinderclient-python27
       - gate-tempest-devstack-vm
+      - gate-tempest-devstack-vm-xml
       - gate-tempest-devstack-vm-cinder
+      - gate-tempest-devstack-vm-cinder-xml
       - gate-tempest-devstack-vm-quantum
+      - gate-tempest-devstack-vm-quantum-xml
     gate:
       - gate-python-cinderclient-docs
       - gate-python-cinderclient-pep8
       - gate-python-cinderclient-python26
       - gate-python-cinderclient-python27
       - gate-tempest-devstack-vm
+      - gate-tempest-devstack-vm-xml
       - gate-tempest-devstack-vm-cinder
+      - gate-tempest-devstack-vm-cinder-xml
       - gate-tempest-devstack-vm-quantum
+      - gate-tempest-devstack-vm-quantum-xml
     post:
       - python-cinderclient-branch-tarball
       - python-cinderclient-coverage
@@ -531,16 +582,22 @@ projects:
       - gate-python-glanceclient-python26
       - gate-python-glanceclient-python27
       - gate-tempest-devstack-vm
+      - gate-tempest-devstack-vm-xml
       - gate-tempest-devstack-vm-cinder
+      - gate-tempest-devstack-vm-cinder-xml
       - gate-tempest-devstack-vm-quantum
+      - gate-tempest-devstack-vm-quantum-xml
     gate:
       - gate-python-glanceclient-docs
       - gate-python-glanceclient-pep8
       - gate-python-glanceclient-python26
       - gate-python-glanceclient-python27
       - gate-tempest-devstack-vm
+      - gate-tempest-devstack-vm-xml
       - gate-tempest-devstack-vm-cinder
+      - gate-tempest-devstack-vm-cinder-xml
       - gate-tempest-devstack-vm-quantum
+      - gate-tempest-devstack-vm-quantum-xml
     post:
       - python-glanceclient-branch-tarball
       - python-glanceclient-coverage
@@ -558,16 +615,22 @@ projects:
       - gate-python-keystoneclient-python26
       - gate-python-keystoneclient-python27
       - gate-tempest-devstack-vm
+      - gate-tempest-devstack-vm-xml
       - gate-tempest-devstack-vm-cinder
+      - gate-tempest-devstack-vm-cinder-xml
       - gate-tempest-devstack-vm-quantum
+      - gate-tempest-devstack-vm-quantum-xml
     gate:
       - gate-python-keystoneclient-docs
       - gate-python-keystoneclient-pep8
       - gate-python-keystoneclient-python26
       - gate-python-keystoneclient-python27
       - gate-tempest-devstack-vm
+      - gate-tempest-devstack-vm-xml
       - gate-tempest-devstack-vm-cinder
+      - gate-tempest-devstack-vm-cinder-xml
       - gate-tempest-devstack-vm-quantum
+      - gate-tempest-devstack-vm-quantum-xml
     post:
       - python-keystoneclient-branch-tarball
       - python-keystoneclient-coverage
@@ -585,16 +648,22 @@ projects:
       - gate-python-novaclient-python26
       - gate-python-novaclient-python27
       - gate-tempest-devstack-vm
+      - gate-tempest-devstack-vm-xml
       - gate-tempest-devstack-vm-cinder
+      - gate-tempest-devstack-vm-cinder-xml
       - gate-tempest-devstack-vm-quantum
+      - gate-tempest-devstack-vm-quantum-xml
     gate:
       - gate-python-novaclient-docs
       - gate-python-novaclient-pep8
       - gate-python-novaclient-python26
       - gate-python-novaclient-python27
       - gate-tempest-devstack-vm
+      - gate-tempest-devstack-vm-xml
       - gate-tempest-devstack-vm-cinder
+      - gate-tempest-devstack-vm-cinder-xml
       - gate-tempest-devstack-vm-quantum
+      - gate-tempest-devstack-vm-quantum-xml
     post:
       - python-novaclient-branch-tarball
       - python-novaclient-coverage
@@ -633,16 +702,22 @@ projects:
       - gate-python-quantumclient-python26
       - gate-python-quantumclient-python27
       - gate-tempest-devstack-vm
+      - gate-tempest-devstack-vm-xml
       - gate-tempest-devstack-vm-cinder
+      - gate-tempest-devstack-vm-cinder-xml
       - gate-tempest-devstack-vm-quantum
+      - gate-tempest-devstack-vm-quantum-xml
     gate:
       - gate-python-quantumclient-docs
       - gate-python-quantumclient-pep8
       - gate-python-quantumclient-python26
       - gate-python-quantumclient-python27
       - gate-tempest-devstack-vm
+      - gate-tempest-devstack-vm-xml
       - gate-tempest-devstack-vm-cinder
+      - gate-tempest-devstack-vm-cinder-xml
       - gate-tempest-devstack-vm-quantum
+      - gate-tempest-devstack-vm-quantum-xml
     post:
       - python-quantumclient-branch-tarball
       - python-quantumclient-coverage
@@ -683,26 +758,42 @@ projects:
   - name: openstack-dev/devstack
     check:
       - gate-tempest-devstack-vm
+      - gate-tempest-devstack-vm-xml
       - gate-tempest-devstack-vm-cinder
+      - gate-tempest-devstack-vm-cinder-xml
       - gate-tempest-devstack-vm-postgres
+      - gate-tempest-devstack-vm-postgres-xml
       - gate-tempest-devstack-vm-quantum
+      - gate-tempest-devstack-vm-quantum-xml
     gate:
       - gate-tempest-devstack-vm
+      - gate-tempest-devstack-vm-xml
       - gate-tempest-devstack-vm-cinder
+      - gate-tempest-devstack-vm-cinder-xml
       - gate-tempest-devstack-vm-postgres
+      - gate-tempest-devstack-vm-postgres-xml
       - gate-tempest-devstack-vm-quantum
+      - gate-tempest-devstack-vm-quantum-xml
 
   - name: openstack-infra/devstack-gate
     check:
       - gate-tempest-devstack-vm
+      - gate-tempest-devstack-vm-xml
       - gate-tempest-devstack-vm-cinder
+      - gate-tempest-devstack-vm-cinder-xml
       - gate-tempest-devstack-vm-postgres
+      - gate-tempest-devstack-vm-postgres-xml
       - gate-tempest-devstack-vm-quantum
+      - gate-tempest-devstack-vm-quantum-xml
     gate:
       - gate-tempest-devstack-vm
+      - gate-tempest-devstack-vm-xml
       - gate-tempest-devstack-vm-cinder
+      - gate-tempest-devstack-vm-cinder-xml
       - gate-tempest-devstack-vm-postgres
+      - gate-tempest-devstack-vm-postgres-xml
       - gate-tempest-devstack-vm-quantum
+      - gate-tempest-devstack-vm-quantum-xml
 
   # This is not strictly necessary; there is currently a transitive
   # relationship between g-t-devstack-vm,
@@ -718,21 +809,31 @@ projects:
   - name: z/tempest
     gate:
       - gate-tempest-devstack-vm
+      - gate-tempest-devstack-vm-xml
       - gate-tempest-devstack-vm-full
+      - gate-tempest-devstack-vm-full-xml
 
   - name: openstack/tempest
     check:
       - gate-tempest-pep8
       - gate-tempest-devstack-vm-full
+      - gate-tempest-devstack-vm-full-xml
       - gate-tempest-devstack-vm-postgres
+      - gate-tempest-devstack-vm-postgres-xml
       - gate-tempest-devstack-vm-cinder
+      - gate-tempest-devstack-vm-cinder-xml
       - gate-tempest-devstack-vm-quantum
+      - gate-tempest-devstack-vm-quantum-xml
     gate:
       - gate-tempest-pep8
       - gate-tempest-devstack-vm-full
+      - gate-tempest-devstack-vm-full-xml
       - gate-tempest-devstack-vm-postgres
+      - gate-tempest-devstack-vm-postgres-xml
       - gate-tempest-devstack-vm-cinder
+      - gate-tempest-devstack-vm-cinder-xml
       - gate-tempest-devstack-vm-quantum
+      - gate-tempest-devstack-vm-quantum-xml
 
   - name: openstack/ceilometer
     check:

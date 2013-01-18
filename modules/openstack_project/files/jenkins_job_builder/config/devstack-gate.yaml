@@ -35,6 +35,43 @@
 
 
 - job:
+    name: gate-tempest-devstack-vm-xml
+    node: devstack-precise
+
+    wrappers:
+      - timeout:
+          timeout: 120
+          fail: true
+      - timestamps
+
+    parameters:
+      - label:
+          name: NODE_LABEL
+          description: Label of node to use for this build
+          default: devstack-precise
+
+    triggers:
+      - zuul
+
+    builders:
+      - devstack-inprogress
+      - devstack-checkout
+      - shell: |
+          #!/bin/bash -xe
+          export PYTHONUNBUFFERED=true
+          export DEVSTACK_GATE_TEMPEST=1
+          export DEVSTACK_GATE_TEMPEST_XML=1
+          cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
+          ./safe-devstack-vm-gate-wrap.sh
+      - link-logs
+
+    publishers:
+      - devstack-logs
+      - console-log
+      - devstack-complete
+
+
+- job:
     name: gate-tempest-devstack-vm-full
     node: devstack-precise
 
@@ -61,6 +98,44 @@
           export PYTHONUNBUFFERED=true
           export DEVSTACK_GATE_TEMPEST=1
           export DEVSTACK_GATE_TEMPEST_FULL=1
+          cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
+          ./safe-devstack-vm-gate-wrap.sh
+      - link-logs
+
+    publishers:
+      - devstack-logs
+      - console-log
+      - devstack-complete
+
+
+- job:
+    name: gate-tempest-devstack-vm-full-xml
+    node: devstack-precise
+
+    wrappers:
+      - timeout:
+          timeout: 180
+          fail: true
+      - timestamps
+
+    parameters:
+      - label:
+          name: NODE_LABEL
+          description: Label of node to use for this build
+          default: devstack-precise
+
+    triggers:
+      - zuul
+
+    builders:
+      - devstack-inprogress
+      - devstack-checkout
+      - shell: |
+          #!/bin/bash -xe
+          export PYTHONUNBUFFERED=true
+          export DEVSTACK_GATE_TEMPEST=1
+          export DEVSTACK_GATE_TEMPEST_FULL=1
+          export DEVSTACK_GATE_TEMPEST_XML=1
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
       - link-logs
@@ -109,6 +184,44 @@
 
 
 - job:
+    name: gate-tempest-devstack-vm-cinder-xml
+    node: devstack-precise
+
+    wrappers:
+      - timeout:
+          timeout: 90
+          fail: true
+      - timestamps
+
+    parameters:
+      - label:
+          name: NODE_LABEL
+          description: Label of node to use for this build
+          default: devstack-precise
+
+    triggers:
+      - zuul
+
+    builders:
+      - devstack-inprogress
+      - devstack-checkout
+      - shell: |
+          #!/bin/bash -xe
+          export PYTHONUNBUFFERED=true
+          export DEVSTACK_GATE_TEMPEST=1
+          export DEVSTACK_GATE_CINDER=1
+          export DEVSTACK_GATE_TEMPEST_XML=1
+          cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
+          ./safe-devstack-vm-gate-wrap.sh
+      - link-logs
+
+    publishers:
+      - devstack-logs
+      - console-log
+      - devstack-complete
+
+
+- job:
     name: gate-tempest-devstack-vm-quantum
     node: devstack-precise
 
@@ -146,6 +259,44 @@
 
 
 - job:
+    name: gate-tempest-devstack-vm-quantum-xml
+    node: devstack-precise
+
+    wrappers:
+      - timeout:
+          timeout: 90
+          fail: true
+      - timestamps
+
+    parameters:
+      - label:
+          name: NODE_LABEL
+          description: Label of node to use for this build
+          default: devstack-precise
+
+    triggers:
+      - zuul
+
+    builders:
+      - devstack-inprogress
+      - devstack-checkout
+      - shell: |
+          #!/bin/bash -xe
+          export PYTHONUNBUFFERED=true
+          export DEVSTACK_GATE_TEMPEST=1
+          export DEVSTACK_GATE_QUANTUM=1
+          export DEVSTACK_GATE_TEMPEST_XML=1
+          cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
+          ./safe-devstack-vm-gate-wrap.sh
+      - link-logs
+
+    publishers:
+      - devstack-logs
+      - console-log
+      - devstack-complete
+
+
+- job:
     name: periodic-tempest-devstack-vm-full
     node: devstack-precise
 
@@ -172,6 +323,46 @@
           export PYTHONUNBUFFERED=true
           export DEVSTACK_GATE_TEMPEST=1
           export DEVSTACK_GATE_TEMPEST_FULL=1
+          cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
+          ./safe-devstack-vm-gate-wrap.sh
+      - link-logs
+
+    publishers:
+      - devstack-logs-periodic
+      - console-log-periodic
+      - devstack-complete
+      - email:
+          recipients: openstack-qa@lists.openstack.org
+
+
+- job:
+    name: periodic-tempest-devstack-vm-full-xml
+    node: devstack-precise
+
+    wrappers:
+      - timeout:
+          timeout: 180
+          fail: true
+      - timestamps
+
+    triggers:
+      - timed: '0 6 * * *'
+
+    parameters:
+      - string:
+          name: ZUUL_BRANCH
+          description: The branch to build
+          default: master
+
+    builders:
+      - devstack-inprogress
+      - devstack-checkout
+      - shell: |
+          #!/bin/bash -xe
+          export PYTHONUNBUFFERED=true
+          export DEVSTACK_GATE_TEMPEST=1
+          export DEVSTACK_GATE_TEMPEST_FULL=1
+          export DEVSTACK_GATE_TEMPEST_XML=1
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
       - link-logs
@@ -225,6 +416,47 @@
 
 
 - job:
+    name: periodic-tempest-devstack-vm-check-hourly-xml
+    node: devstack-precise
+
+    wrappers:
+      - timeout:
+          timeout: 180
+          fail: true
+      - timestamps
+
+    triggers:
+      - timed: '@hourly'
+
+    parameters:
+      - string:
+          name: ZUUL_BRANCH
+          description: The branch to build
+          default: master
+
+    builders:
+      - devstack-inprogress
+      - devstack-checkout
+      - shell: |
+          #!/bin/bash -xe
+          export PYTHONUNBUFFERED=true
+          export DEVSTACK_GATE_TEMPEST=1
+          export DEVSTACK_GATE_CINDER=1
+          export DEVSTACK_GATE_TEMPEST_FULL=1
+          export DEVSTACK_GATE_TEMPEST_XML=1
+          cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
+          ./safe-devstack-vm-gate-wrap.sh
+      - link-logs
+
+    publishers:
+      - devstack-logs-periodic
+      - console-log-periodic
+      - devstack-complete
+      - email:
+          recipients: david.kranz@qrclab.com sdague@linux.vnet.ibm.com
+
+
+- job:
     name: periodic-tempest-devstack-vm-stable-diablo
     node: devstack-oneiric
 
@@ -250,6 +482,45 @@
           #!/bin/bash -xe
           export PYTHONUNBUFFERED=true
           export DEVSTACK_GATE_TEMPEST=1
+          cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
+          ./safe-devstack-vm-gate-wrap.sh
+      - link-logs
+
+    publishers:
+      - devstack-logs-periodic
+      - console-log-periodic
+      - devstack-complete
+      - email:
+          recipients: openstack-diablo-maint@lists.launchpad.net
+
+
+- job:
+    name: periodic-tempest-devstack-vm-stable-diablo-xml
+    node: devstack-oneiric
+
+    wrappers:
+      - timeout:
+          timeout: 90
+          fail: true
+      - timestamps
+
+    triggers:
+      - timed: '0 6 * * *'
+
+    parameters:
+      - string:
+          name: ZUUL_BRANCH
+          description: The branch to build
+          default: stable/diablo
+
+    builders:
+      - devstack-inprogress
+      - devstack-checkout
+      - shell: |
+          #!/bin/bash -xe
+          export PYTHONUNBUFFERED=true
+          export DEVSTACK_GATE_TEMPEST=1
+          export DEVSTACK_GATE_TEMPEST_XML=1
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
       - link-logs
@@ -301,6 +572,45 @@
 
 
 - job:
+    name: periodic-tempest-devstack-vm-stable-essex-xml
+    node: devstack-precise
+
+    wrappers:
+      - timeout:
+          timeout: 90
+          fail: true
+      - timestamps
+
+    triggers:
+      - timed: '0 6 * * *'
+
+    parameters:
+      - string:
+          name: ZUUL_BRANCH
+          description: The branch to build
+          default: stable/essex
+
+    builders:
+      - devstack-inprogress
+      - devstack-checkout
+      - shell: |
+          #!/bin/bash -xe
+          export PYTHONUNBUFFERED=true
+          export DEVSTACK_GATE_TEMPEST=1
+          export DEVSTACK_GATE_TEMPEST_XML=1
+          cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
+          ./safe-devstack-vm-gate-wrap.sh
+      - link-logs
+
+    publishers:
+      - devstack-logs-periodic
+      - console-log-periodic
+      - devstack-complete
+      - email:
+          recipients: openstack-essex-maint@lists.launchpad.net
+
+
+- job:
     name: periodic-tempest-devstack-vm-stable-folsom
     node: devstack-precise
 
@@ -326,6 +636,45 @@
           #!/bin/bash -xe
           export PYTHONUNBUFFERED=true
           export DEVSTACK_GATE_TEMPEST=1
+          cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
+          ./safe-devstack-vm-gate-wrap.sh
+      - link-logs
+
+    publishers:
+      - devstack-logs-periodic
+      - console-log-periodic
+      - devstack-complete
+      - email:
+          recipients: openstack-stable-maint@lists.openstack.org
+
+
+- job:
+    name: periodic-tempest-devstack-vm-stable-folsom-xml
+    node: devstack-precise
+
+    wrappers:
+      - timeout:
+          timeout: 90
+          fail: true
+      - timestamps
+
+    triggers:
+      - timed: '0 6 * * *'
+
+    parameters:
+      - string:
+          name: ZUUL_BRANCH
+          description: The branch to build
+          default: stable/folsom
+
+    builders:
+      - devstack-inprogress
+      - devstack-checkout
+      - shell: |
+          #!/bin/bash -xe
+          export PYTHONUNBUFFERED=true
+          export DEVSTACK_GATE_TEMPEST=1
+          export DEVSTACK_GATE_TEMPEST_XML=1
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
       - link-logs
@@ -378,6 +727,46 @@
 
 
 - job:
+    name: periodic-tempest-devstack-vm-cinder-stable-folsom-xml
+    node: devstack-precise
+
+    wrappers:
+      - timeout:
+          timeout: 90
+          fail: true
+      - timestamps
+
+    triggers:
+      - timed: '0 6 * * *'
+
+    parameters:
+      - string:
+          name: ZUUL_BRANCH
+          description: The branch to build
+          default: stable/folsom
+
+    builders:
+      - devstack-inprogress
+      - devstack-checkout
+      - shell: |
+          #!/bin/bash -xe
+          export PYTHONUNBUFFERED=true
+          export DEVSTACK_GATE_TEMPEST=1
+          export DEVSTACK_GATE_CINDER=1
+          export DEVSTACK_GATE_TEMPEST_XML=1
+          cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
+          ./safe-devstack-vm-gate-wrap.sh
+      - link-logs
+
+    publishers:
+      - devstack-logs-periodic
+      - console-log-periodic
+      - devstack-complete
+      - email:
+          recipients: openstack-stable-maint@lists.openstack.org
+
+
+- job:
     name: periodic-tempest-devstack-postgres-vm-full
     node: devstack-precise
 
@@ -406,6 +795,48 @@
           export DEVSTACK_GATE_POSTGRES=1
           export DEVSTACK_GATE_CINDER=1
           export DEVSTACK_GATE_TEMPEST_FULL=1
+          cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
+          ./safe-devstack-vm-gate-wrap.sh
+      - link-logs
+
+    publishers:
+      - devstack-logs-periodic
+      - console-log-periodic
+      - devstack-complete
+      - email:
+          recipients: openstack-qa@lists.openstack.org
+
+
+- job:
+    name: periodic-tempest-devstack-postgres-vm-full-xml
+    node: devstack-precise
+
+    wrappers:
+      - timeout:
+          timeout: 180
+          fail: true
+      - timestamps
+
+    triggers:
+      - timed: '0 6 * * *'
+
+    parameters:
+      - string:
+          name: ZUUL_BRANCH
+          description: The branch to build
+          default: master
+
+    builders:
+      - devstack-inprogress
+      - devstack-checkout
+      - shell: |
+          #!/bin/bash -xe
+          export PYTHONUNBUFFERED=true
+          export DEVSTACK_GATE_TEMPEST=1
+          export DEVSTACK_GATE_POSTGRES=1
+          export DEVSTACK_GATE_CINDER=1
+          export DEVSTACK_GATE_TEMPEST_FULL=1
+          export DEVSTACK_GATE_TEMPEST_XML=1
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
       - link-logs
@@ -485,6 +916,44 @@
           export PYTHONUNBUFFERED=true
           export DEVSTACK_GATE_TEMPEST=1
           export DEVSTACK_GATE_POSTGRES=1
+          cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
+          ./safe-devstack-vm-gate-wrap.sh
+      - link-logs
+
+    publishers:
+      - devstack-logs
+      - console-log
+      - devstack-complete
+
+
+- job:
+    name: gate-tempest-devstack-vm-postgres-xml
+    node: devstack-precise
+
+    wrappers:
+      - timeout:
+          timeout: 120
+          fail: true
+      - timestamps
+
+    parameters:
+      - label:
+          name: NODE_LABEL
+          description: Label of node to use for this build
+          default: devstack-precise
+
+    triggers:
+      - zuul
+
+    builders:
+      - devstack-inprogress
+      - devstack-checkout
+      - shell: |
+          #!/bin/bash -xe
+          export PYTHONUNBUFFERED=true
+          export DEVSTACK_GATE_TEMPEST=1
+          export DEVSTACK_GATE_POSTGRES=1
+          export DEVSTACK_GATE_TEMPEST_XML=1
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
       - link-logs
