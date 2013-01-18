@@ -45,6 +45,7 @@ class jenkins::params {
       $cgroups_package = 'libcgroup'
       $cgconfig_require = Package['cgroups']
       $cgred_require = Package['cgroups']
+      $guile_package = 'guile'
     }
     'Debian', 'Ubuntu': {
       # common packages
@@ -90,6 +91,7 @@ class jenkins::params {
         Package['cgroups'],
         File['/etc/init/cgred.conf'],
       ]
+      $guile_package = 'guile-2.0'
     }
     default: {
       fail("Unsupported osfamily: ${::osfamily} The 'jenkins' module only supports osfamily Ubuntu or Redhat(slaves only).")

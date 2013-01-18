@@ -99,6 +99,10 @@ jobs:
     voting: false
     failure-message: Jenkins XML output has changed.
     success-message: Jenkins XML output is unchanged.
+  - name: config-dry
+    voting: false
+    failure-message: Duplicate code block has been found.
+    success-message: Duplicate code block is not found.
   - name: openstack-docs-site
     branch: ^master$
   - name: openstack-ha-guide
@@ -235,6 +239,7 @@ projects:
       - gate-config-lint
       - gate-config-layout
       - config-compare-xml
+      - config-dry
     gate:
       - gate-config-syntax
       - gate-config-lint
