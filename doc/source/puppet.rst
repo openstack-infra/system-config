@@ -13,33 +13,42 @@ Puppet Master
 -------------
 
 The puppet master is setup using a combination of Apache and mod passenger to
-ship the data to the clients.  To install this:
+ship the data to the clients.
+
+The cron jobs, current configuration files and more can be done with ``puppet
+apply`` but first some bootstrapping needs to be done.
+
+First want to install these from puppetlabs' apt repo, but we don't want to
+move beyond version 2.7.x yet, so first create an ``/etc/apt/preferences`` file
+with the following:
 
 .. code-block:: bash
 
-  sudo apt-get install puppet puppetmaster-passenger
+   Package: puppet puppet-common puppetmaster puppetmaster-common puppetmaster-passenger
+   Pin: version 2.7*
+   Pin-Priority: 501
+
+Then we can add the repo and install the packages:
+
+.. code-block:: bash
+
+    echo "deb http://apt.puppetlabs.com precise devel" > /etc/apt/sources.list.d/puppetlabs.list
+    apt-get update
+    apt-get install puppet puppetmaster-passenger
 
 Files for puppet master are stored in a git repo clone at
-``/opt/config``.  We have a ``root`` cron job that automatically
-populates these from our puppet git repository as follows:
+``/opt/config/production``:
 
 .. code-block:: bash
 
-  \*/15 * * * * sleep $((RANDOM\%600)) && cd /opt/config && /usr/bin/git pull -q
+   git clone git://github.com/openstack-infra/config.git /opt/config/production
 
-The ``/etc/puppet/puppet.conf`` file then needs updating to point to the
-manifest and modules as follows:
+Finally, install the modules and use ``puppet apply`` to finish configuration:
 
-.. code-block:: ini
+.. code-block:: bash
 
-   [master]
-   # These are needed when the puppetmaster is run by passenger
-   # and can safely be removed if webrick is used.
-   ssl_client_header = SSL_CLIENT_S_DN
-   ssl_client_verify_header = SSL_CLIENT_VERIFY
-   manifestdir=/opt/config/manifests
-   modulepath=/opt/config/modules
-   manifest=$manifestdir/site.pp
+   bash /opt/config/production/install_modules.sh
+   puppet apply --modulepath='/opt/config/production/modules:/etc/puppet/modules' -e 'include openstack_project::puppetmaster'
 
 Hiera
 -----
