@@ -49,6 +49,9 @@
 <% if scope.lookupvar("gerrit::replicate_local") -%>
   RewriteCond %{REQUEST_URI} !^/p/
 <% end -%>
+<% if scope.lookupvar("gerrit::contactstore") == true -%>
+  RewriteCond %{REQUEST_URI} !^/fakestore$
+<% end -%>
   RewriteRule ^/(.*)$ http://localhost:8081/$1 [P]
 
   ProxyPassReverse / http://localhost:8081/
