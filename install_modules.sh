@@ -22,6 +22,7 @@ MODULES["openstackci-vcsrepo"]="0.0.8"
 MODULES["puppetlabs-apache"]="0.0.4"
 MODULES["puppetlabs-apt"]="0.0.4"
 MODULES["puppetlabs-mysql"]="0.5.0"
+MODULES["puppetlabs-postgresql"]="2.0.1"
 MODULES["saz-memcached"]="2.0.2"
 
 MODULE_LIST=`puppet module list`
