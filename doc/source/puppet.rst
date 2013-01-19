@@ -49,30 +49,15 @@ Hiera
 
 Hiera is used to maintain secret information on the puppetmaster.
 
-We want to install hiera from puppetlabs' apt repo, but we don't want to get
-on the puppet upgrade train - so the process is as follows:
+We want to install hiera from puppetlabs' apt repo which was added in the step
+above.
 
 .. code-block:: bash
 
-    echo "deb http://apt.puppetlabs.com precise devel" > /etc/apt/sources.list.d/puppetlabs.list
-    apt-get update
     apt-get install hiera hiera-puppet
-    rm /etc/apt/sources.list.d/puppetlabs.list
-    apt-get update
 
-Hiera uses a systemwide configuration file in ``/etc/puppet/hiera.yaml``
-which tells is where to find subsequent configuration files.
-
-.. code-block:: yaml
-
-    ---
-    :hierarchy:
-      - %{operatingsystem}
-      - common
-    :backends:
-      - yaml
-    :yaml:
-      :datadir: '/etc/puppet/hieradata/%{environment}'
+Hiera uses a systemwide configuration file in ``/etc/puppet/hiera.yaml`` which
+was pulled in during the ``puppet apply`` in the puppetmaser configuration.
 
 This setup supports multiple configuration. The two sets of environments
 that OpenStack Infrastructure uses are ``production`` and ``development``.
