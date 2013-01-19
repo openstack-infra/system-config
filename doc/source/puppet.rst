@@ -29,13 +29,16 @@ over the preferences file:
    git clone git://github.com/openstack-infra/config.git /opt/config/production
    cp /opt/config/production/modules/openstack_project/files/00-puppet.pref /etc/apt/preferences.d/
 
-Then we can add the repo and install the packages:
+Then we can add the repo and install the packages, we'll also install the hiera
+packages here which are used to maintain secret information on the
+puppetmaster:
 
 .. code-block:: bash
 
-    echo "deb http://apt.puppetlabs.com precise devel" > /etc/apt/sources.list.d/puppetlabs.list
+    apt-add-repository "deb http://apt.puppetlabs.com `lsb_release -cs` devel
+    apt-key adv --keyserver pool.sks-keyservers.net --recv <KEY_ID>
     apt-get update
-    apt-get install puppet puppetmaster-passenger
+    apt-get install puppet puppetmaster-passenger hiera hiera-puppet
 
 Finally, install the modules and use ``puppet apply`` to finish configuration:
 
@@ -44,40 +47,11 @@ Finally, install the modules and use ``puppet apply`` to finish configuration:
    bash /opt/config/production/install_modules.sh
    puppet apply --modulepath='/opt/config/production/modules:/etc/puppet/modules' -e 'include openstack_project::puppetmaster'
 
-Hiera
------
-
-Hiera is used to maintain secret information on the puppetmaster.
-
-We want to install hiera from puppetlabs' apt repo, but we don't want to get
-on the puppet upgrade train - so the process is as follows:
-
-.. code-block:: bash
-
-    echo "deb http://apt.puppetlabs.com precise devel" > /etc/apt/sources.list.d/puppetlabs.list
-    apt-get update
-    apt-get install hiera hiera-puppet
-    rm /etc/apt/sources.list.d/puppetlabs.list
-    apt-get update
-
-Hiera uses a systemwide configuration file in ``/etc/puppet/hiera.yaml``
-which tells is where to find subsequent configuration files.
-
-.. code-block:: yaml
-
-    ---
-    :hierarchy:
-      - %{operatingsystem}
-      - common
-    :backends:
-      - yaml
-    :yaml:
-      :datadir: '/etc/puppet/hieradata/%{environment}'
-
-This setup supports multiple configuration. The two sets of environments
+Note: Hiera uses a systemwide configuration file in ``/etc/puppet/hiera.yaml``
+and this setup supports multiple configurations. The two sets of environments
 that OpenStack Infrastructure uses are ``production`` and ``development``.
-``production`` is the default is and the environment used when nothing else
-is specified. Then the configuration needs to be placed into common.yaml in
+``production`` is the default is and the environment used when nothing else is
+specified. Then the configuration needs to be placed into common.yaml in
 ``/etc/puppet/hieradata/production`` and ``/etc/puppet/hieradata/development``.
 The values are simple key-value pairs in yaml format.
 
