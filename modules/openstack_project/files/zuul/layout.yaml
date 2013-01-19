@@ -73,6 +73,9 @@ jobs:
   - name: gate-tempest-devstack-vm-postgres
     branch: ^(?!stable/(diablo|essex|folsom)).*$
     voting: false
+  - name: gate-tempest-devstack-vm-postgres-full
+    branch: ^(?!stable/(diablo|essex|folsom)).*$
+    voting: false
   - name: ^.*-python27$
     parameter-function: python27_params
   - name: gate-nova-pylint
@@ -719,18 +722,19 @@ projects:
     gate:
       - gate-tempest-devstack-vm
       - gate-tempest-devstack-vm-full
+      - gate-tempest-devstack-vm-postgres-full
 
   - name: openstack/tempest
     check:
       - gate-tempest-pep8
       - gate-tempest-devstack-vm-full
-      - gate-tempest-devstack-vm-postgres
+      - gate-tempest-devstack-vm-postgres-full
       - gate-tempest-devstack-vm-cinder
       - gate-tempest-devstack-vm-quantum
     gate:
       - gate-tempest-pep8
       - gate-tempest-devstack-vm-full
-      - gate-tempest-devstack-vm-postgres
+      - gate-tempest-devstack-vm-postgres-full
       - gate-tempest-devstack-vm-cinder
       - gate-tempest-devstack-vm-quantum
 
