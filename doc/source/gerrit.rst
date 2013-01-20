@@ -609,28 +609,30 @@ As a Gerrit admin, create a user for example-project-creator::
 
 #. Config default values::
 
-     - homepage: http://example.org
-       local-git-dir: /var/lib/git
-       gerrit-host: review.example.org
-       gerrit-user: example-project-creator
-       gerrit-key: /home/gerrit2/.ssh/example_project_id_rsa
-       github-config: /etc/github/github-projects.secure.config
-       has-wiki: False
-       has-issues: False
-       has-pull-requests: False
-       has-downloads: False
+    gerrit-defaults:
+      host: review.example.org
+      key: /home/gerrit2/.ssh/example_project_id_rsa
+      local-git-dir: /var/lib/git
+      user: example-project-creator
+    github-defaults:
+      config: /etc/github/github-projects.secure.config
+    project-defaults:
+      homepage: http://example.org
+      options: []
 
 Note The gerrit-user 'example-project-creator' should be added to the
 "Project Bootstrapers" group in :ref:`acl`.
 
 #. Project definition::
 
-     - project: example/gerrit
+     example/gerrit:
        description: Fork of Gerrit used by Example
        remote: https://gerrit.googlesource.com/gerrit
-     - project: example/project1
+     example/project1:
+       options:
+        - release-on-merge
        description: Best project ever.
-       has-wiki: True
+       launchpad: awesomeproject
        acl_config: /path/to/acl/file
 
 The above config gives puppet and its related scripts enough information

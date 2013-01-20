@@ -50,7 +50,7 @@ list. Edit
 and add a new section for your project at the end of the file. It should
 look something like::
 
-  - project: stackforge/project-name
+  stackforge/project-name:
     description: Latest and greatest cloud stuff.
     acl_config: /home/gerrit2/acls/stackforge/project-name.config
     upstream: git://github.com/awesumsauce/project-name.git
@@ -60,6 +60,13 @@ StackForge mirror, and the upstream should point at an existing
 repository that should be used to preseed Gerrit. Both of these options
 are optional, but you must have an acl_config. Note that the current
 tools assume that the upstream repo will have a master branch.
+
+In addition, you can specify a ``launchpad`` parameter if your project
+name on Launchpad differs from ``project-name`` (or use the
+``no-lp-bugs`` option if you have no corresponding project there). If
+you want Launchpad bugs to be marked ``Fix Released`` automatically
+after merging commits which address them, you can add the
+``release-on-merge`` option as well.
 
 The next step is to add a Gerrit ACL config file. Edit
 ``openstack-infra/config/modules/openstack_project/files/gerrit/acls/stackforge/project-name.config``

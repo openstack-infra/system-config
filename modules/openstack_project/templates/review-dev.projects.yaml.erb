@@ -1,17 +1,18 @@
-- homepage: http://openstack.org
+gerrit-defaults:
+  host: <%= fqdn %>
+  key: <%= ssh_project_key %>
   local-git-dir: <%= local_git_dir %>
-  gerrit-host: <%= fqdn %>
-  gerrit-user: openstack-dev-project-creator
-  gerrit-key: <%= ssh_project_key %>
-  github-config: /etc/github/github-projects.secure.config
-  has-wiki: False
-  has-issues: False
-  has-downloads: False
+  user: openstack-dev-project-creator
+github-defaults:
+  config: /etc/github/github-projects.secure.config
+project-defaults:
+  homepage: http://openstack.org
+  options: []
 ---
-- project: gtest-org/gtest
-- project: completely-bogus-org/test
-- project: gtest-org/test
-- project: gtest-org/test2
-- project: gtest-org/test3
-- project: gtest-org/test-manage-project
+gtest-org/gtest:
+completely-bogus-org/test:
+gtest-org/test:
+gtest-org/test2:
+gtest-org/test3:
+gtest-org/test-manage-project:
   acl_config: /home/gerrit2/acls/test-manage-project.config

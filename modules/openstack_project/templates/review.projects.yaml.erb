@@ -1,171 +1,224 @@
-- homepage: http://openstack.org
+gerrit-defaults:
+  host: <%= fqdn %>
+  key: <%= ssh_project_key %>
   local-git-dir: <%= local_git_dir %>
-  gerrit-host: <%= fqdn %>
-  gerrit-user: openstack-project-creator
-  gerrit-key: <%= ssh_project_key %>
-  github-config: /etc/github/github-projects.secure.config
-  has-wiki: False
-  has-issues: False
-  has-pull-requests: False
-  has-downloads: False
+  user: openstack-project-creator
+github-defaults:
+  config: /etc/github/github-projects.secure.config
+project-defaults:
+  homepage: http://openstack.org
+  options: []
 ---
-- project: openstack/heat
+openstack/heat:
   acl_config: /home/gerrit2/acls/openstack/heat.config
-- project: openstack/python-heatclient
+openstack/python-heatclient:
   acl_config: /home/gerrit2/acls/openstack/python-heatclient.config
-- project: openstack-infra/devstack-gate
+openstack-infra/devstack-gate:
+  options:
+   - release-on-merge
   acl_config: /home/gerrit2/acls/openstack-infra/devstack-gate.config
-- project: openstack-infra/gerrit
+  launchpad: openstack-ci
+openstack-infra/gerrit:
   description: Fork of Gerrit used by OpenStack
   remote: https://gerrit.googlesource.com/gerrit
   acl_config: /home/gerrit2/acls/openstack-infra/gerrit.config
-- project: openstack-infra/gerritbot
+  launchpad: openstack-ci
+openstack-infra/gerritbot:
   acl_config: /home/gerrit2/acls/openstack-infra/gerritbot.config
-- project: openstack-infra/gerritlib
+  launchpad: openstack-ci
+openstack-infra/gerritlib:
   acl_config: /home/gerrit2/acls/openstack-infra/gerritlib.config
-- project: openstack-infra/jeepyb
+  launchpad: openstack-ci
+openstack-infra/jeepyb:
+  options:
+   - release-on-merge
   acl_config: /home/gerrit2/acls/openstack-infra/jeepyb.config
   upstream: git://github.com/emonty/gerritx.git
   description: Gerrit Project Builder Tools
-- project: openstack-infra/git-review
+  launchpad: openstack-ci
+openstack-infra/git-review:
   acl_config: /home/gerrit2/acls/openstack-infra/git-review.config
-- project: openstack-infra/jenkins-job-builder
+openstack-infra/jenkins-job-builder:
   acl_config: /home/gerrit2/acls/openstack-infra/jenkins-job-builder.config
-- project: openstack-infra/lodgeit
+  launchpad: openstack-ci
+openstack-infra/lodgeit:
+  options:
+   - release-on-merge
   acl_config: /home/gerrit2/acls/openstack-infra/lodgeit.config
-- project: openstack-infra/meetbot
+  launchpad: openstack-ci
+openstack-infra/meetbot:
+  options:
+   - release-on-merge
   acl_config: /home/gerrit2/acls/openstack-infra/meetbot.config
-- project: openstack-infra/nose-html-output
+  launchpad: openstack-ci
+openstack-infra/nose-html-output:
   acl_config: /home/gerrit2/acls/openstack-infra/nose-html-output.config
-- project: openstack-infra/puppet-apparmor
+  launchpad: openstack-ci
+openstack-infra/puppet-apparmor:
   acl_config: /home/gerrit2/acls/openstack-infra/puppet-apparmor.config
-- project: openstack-infra/puppet-dashboard
+  launchpad: openstack-ci
+openstack-infra/puppet-dashboard:
   acl_config: /home/gerrit2/acls/openstack-infra/puppet-dashboard.config
-- project: openstack-infra/puppet-vcsrepo
+  launchpad: openstack-ci
+openstack-infra/puppet-vcsrepo:
   acl_config: /home/gerrit2/acls/openstack-infra/puppet-vcsrepo.config
-- project: openstack-infra/reviewday
+  launchpad: openstack-ci
+openstack-infra/reviewday:
   acl_config: /home/gerrit2/acls/openstack-infra/reviewday.config
   upstream: git://github.com/dprince/reviewday.git
   description: OpenStack code review report generator
-- project: openstack-infra/zuul
+  launchpad: openstack-ci
+openstack-infra/zuul:
   acl_config: /home/gerrit2/acls/openstack-infra/zuul.config
-- project: openstack-dev/devstack
+openstack-dev/devstack:
+  options:
+   - release-on-merge
   acl_config: /home/gerrit2/acls/openstack-dev/devstack.config
-- project: openstack-dev/openstack-nose
+openstack-dev/openstack-nose:
   acl_config: /home/gerrit2/acls/openstack-dev/openstack-nose.config
-- project: openstack-dev/openstack-qa
+openstack-dev/openstack-qa:
   acl_config: /home/gerrit2/acls/openstack-dev/openstack-qa.config
-- project: openstack-dev/pbr
+openstack-dev/pbr:
   acl_config: /home/gerrit2/acls/openstack-dev/pbr.config
-- project: openstack-dev/sandbox
+openstack-dev/sandbox:
   acl_config: /home/gerrit2/acls/openstack-dev/sandbox.config
-- project: openstack/api-site
+  launchpad: openstack-ci
+openstack/api-site:
+  options:
+   - release-on-merge
   acl_config: /home/gerrit2/acls/openstack/api-site.config
-- project: openstack/ceilometer
+  launchpad: openstack-manuals
+openstack/ceilometer:
   acl_config: /home/gerrit2/acls/openstack/ceilometer.config
-- project: openstack/cinder
+openstack/cinder:
   acl_config: /home/gerrit2/acls/openstack/cinder.config
-- project: openstack/compute-api
+openstack/compute-api:
   acl_config: /home/gerrit2/acls/openstack/compute-api.config
-- project: openstack/glance
+  launchpad: openstack-manuals
+openstack/glance:
   acl_config: /home/gerrit2/acls/openstack/glance.config
-- project: openstack/horizon
+openstack/horizon:
   acl_config: /home/gerrit2/acls/openstack/horizon.config
-- project: openstack/identity-api
+openstack/identity-api:
   acl_config: /home/gerrit2/acls/openstack/identity-api.config
-- project: openstack/image-api
+  launchpad: openstack-manuals
+openstack/image-api:
   acl_config: /home/gerrit2/acls/openstack/image-api.config
-- project: openstack/keystone
+  launchpad: openstack-manuals
+openstack/keystone:
   acl_config: /home/gerrit2/acls/openstack/keystone.config
-- project: openstack/melange
+openstack/melange:
   acl_config: /home/gerrit2/acls/openstack/melange.config
-- project: openstack/netconn-api
+openstack/netconn-api:
   acl_config: /home/gerrit2/acls/openstack/netconn-api.config
-- project: openstack/nova
+  launchpad: openstack-manuals
+openstack/nova:
   acl_config: /home/gerrit2/acls/openstack/nova.config
-- project: openstack/object-api
+openstack/object-api:
   acl_config: /home/gerrit2/acls/openstack/object-api.config
-- project: openstack/openstack-chef
+  launchpad: openstack-manuals
+openstack/openstack-chef:
   acl_config: /home/gerrit2/acls/openstack/openstack-chef.config
-- project: openstack-infra/config
+  launchpad: openstack-ci
+openstack-infra/config:
+  options:
+   - release-on-merge
   acl_config: /home/gerrit2/acls/openstack-infra/config.config
-- project: openstack/openstack-manuals
+  launchpad: openstack-ci
+openstack/openstack-manuals:
+  options:
+   - release-on-merge
   acl_config: /home/gerrit2/acls/openstack/openstack-manuals.config
-- project: openstack/openstack-planet
+openstack/openstack-planet:
   acl_config: /home/gerrit2/acls/openstack/openstack-planet.config
-- project: openstack/oslo-incubator
+  launchpad: openstack
+openstack/oslo-incubator:
   acl_config: /home/gerrit2/acls/openstack/oslo-incubator.config
   description: "Part of OpenStack's Oslo project. New Oslo APIs go through an incubation phase in this repository before being released as part of a proper Python library."
-- project: openstack/python-ceilometerclient
+  launchpad: oslo
+openstack/python-ceilometerclient:
   acl_config: /home/gerrit2/acls/openstack/python-ceilometerclient.config
   upstream: git://github.com/asalkeld/python-ceilometerclient.git
-- project: openstack/python-cinderclient
+openstack/python-cinderclient:
   acl_config: /home/gerrit2/acls/openstack/python-cinderclient.config
-- project: openstack/python-glanceclient
+openstack/python-glanceclient:
   acl_config: /home/gerrit2/acls/openstack/python-glanceclient.config
-- project: openstack/python-keystoneclient
+openstack/python-keystoneclient:
   acl_config: /home/gerrit2/acls/openstack/python-keystoneclient.config
-- project: openstack/python-melangeclient
+openstack/python-melangeclient:
   acl_config: /home/gerrit2/acls/openstack/python-melangeclient.config
-- project: openstack/python-novaclient
+  launchpad: melange
+openstack/python-novaclient:
   acl_config: /home/gerrit2/acls/openstack/python-novaclient.config
-- project: openstack/python-openstackclient
+openstack/python-openstackclient:
   acl_config: /home/gerrit2/acls/openstack/python-openstackclient.config
-- project: openstack/python-quantumclient
+openstack/python-quantumclient:
   acl_config: /home/gerrit2/acls/openstack/python-quantumclient.config
-- project: openstack/python-swiftclient
+openstack/python-swiftclient:
   acl_config: /home/gerrit2/acls/openstack/python-swiftclient.config
-- project: openstack/quantum
+openstack/quantum:
   acl_config: /home/gerrit2/acls/openstack/quantum.config
-- project: openstack/requirements
+openstack/requirements:
   acl_config: /home/gerrit2/acls/openstack/requirements.config
-- project: openstack/swift
+  launchpad: oslo
+openstack/swift:
   acl_config: /home/gerrit2/acls/openstack/swift.config
-- project: openstack/tempest
+openstack/tempest:
+  options:
+   - release-on-merge
   acl_config: /home/gerrit2/acls/openstack/tempest.config
-- project: openstack/volume-api
+openstack/volume-api:
   acl_config: /home/gerrit2/acls/openstack/volume-api.config
-- project: stackforge/MRaaS
+  launchpad: openstack-manuals
+stackforge/MRaaS:
   acl_config: /home/gerrit2/acls/stackforge/MRaaS.config
-- project: stackforge/diskimage-builder
+  launchpad: mraas
+stackforge/diskimage-builder:
   acl_config: /home/gerrit2/acls/stackforge/diskimage-builder.config
   description: "Image building tools for Openstack"
   upstream: git://github.com/tripleo/baremetal-initrd-builder.git
-- project: stackforge/healthnmon
+stackforge/healthnmon:
   acl_config: /home/gerrit2/acls/stackforge/healthnmon.config
   description: "Healthnmon aims to deliver 'Cloud Resource Monitor', an extensible service to OpenStack Cloud Operating system by providing monitoring service for Cloud Resources and Infrastructure with a pluggable framework for 'Inventory Management', 'Alerts and notifications' and 'Utilization Data."
   upstream: git://github.com/healthnmon/healthnmon.git
-- project: stackforge/libra
+stackforge/libra:
   acl_config: /home/gerrit2/acls/stackforge/libra.config
-- project: stackforge/python-libraclient
+stackforge/python-libraclient:
   acl_config: /home/gerrit2/acls/stackforge/python-libraclient.config
-- project: stackforge/marconi
+  launchpad: libra
+stackforge/marconi:
   acl_config: /home/gerrit2/acls/stackforge/marconi.config
-- project: stackforge/moniker
+stackforge/moniker:
   acl_config: /home/gerrit2/acls/stackforge/moniker.config
-- project: stackforge/python-monikerclient
+stackforge/python-monikerclient:
   acl_config: /home/gerrit2/acls/stackforge/python-monikerclient.config
-- project: stackforge/python-reddwarfclient
+stackforge/python-reddwarfclient:
   acl_config: /home/gerrit2/acls/stackforge/python-reddwarfclient.config
-- project: stackforge/reddwarf
+stackforge/reddwarf:
   acl_config: /home/gerrit2/acls/stackforge/reddwarf.config
-- project: stackforge/reddwarf-integration
+stackforge/reddwarf-integration:
   acl_config: /home/gerrit2/acls/stackforge/reddwarf-integration.config
   upstream: git://github.com/hub-cap/reddwarf_lite-integration.git
-- project: stackforge/bufunfa
+stackforge/bufunfa:
   acl_config: /home/gerrit2/acls/stackforge/bufunfa.config
   upstream: git://github.com/ekarlso/bufunfa.git
-- project: stackforge/kwapi
+stackforge/kwapi:
+  options:
+   - no-lp-bugs
   description: Energy Efficiency Monitoring
   acl_config: /home/gerrit2/acls/stackforge/kwapi.config
   upstream: git://github.com/frossigneux/kwapi.git
-- project: openstack-infra/gearman-plugin
+openstack-infra/gearman-plugin:
   description: The jenkins gearman plugin
   acl_config: /home/gerrit2/acls/openstack-infra/gearman-plugin.config
-- project: stackforge/packstack
+  launchpad: openstack-ci
+stackforge/packstack:
+  options:
+   - no-lp-bugs
   description: Install utility to deploy openstack on multiple hosts.
   acl_config: /home/gerrit2/acls/stackforge/packstack.config
   upstream: git://github.com/fedora-openstack/packstack.git
-- project: stackforge/database-api
+stackforge/database-api:
   description: Doc repo for reddwarf project
   acl_config: /home/gerrit2/acls/stackforge/database-api.config
+  launchpad: reddwarf
