@@ -6,7 +6,7 @@ class bup {
   }
 
   file { '/etc/bup-excludes':
-    ensure  => present,
-    content => 'puppet:///modules/bup/etc/bup-exculdes',
+    ensure => present,
+    source => 'puppet:///modules/bup/etc/bup-excludes',
   }
 }
