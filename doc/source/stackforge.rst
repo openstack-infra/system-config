@@ -61,6 +61,13 @@ repository that should be used to preseed Gerrit. Both of these options
 are optional, but you must have an acl_config. Note that the current
 tools assume that the upstream repo will have a master branch.
 
+In addition, you can specify a ``launchpad`` parameter if your project
+name on Launchpad differs from ``project-name`` (or use the
+``no-lp-bugs`` option if you have no corresponding project there). If
+you want Launchpad bugs to be marked ``Fix Released`` automatically
+after merging commits which address them, you can add the
+``release-on-merge`` option as well.
+
 The next step is to add a Gerrit ACL config file. Edit
 ``openstack-infra/config/modules/openstack_project/files/gerrit/acls/stackforge/project-name.config``
 and make it look like::

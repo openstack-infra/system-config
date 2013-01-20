@@ -619,6 +619,8 @@ As a Gerrit admin, create a user for example-project-creator::
        has-issues: False
        has-pull-requests: False
        has-downloads: False
+       no-lp-bugs: False
+       release-on-merge: False
 
 Note The gerrit-user 'example-project-creator' should be added to the
 "Project Bootstrapers" group in :ref:`acl`.
@@ -629,8 +631,10 @@ Note The gerrit-user 'example-project-creator' should be added to the
        description: Fork of Gerrit used by Example
        remote: https://gerrit.googlesource.com/gerrit
      - project: example/project1
+       options:
+        - release-on-merge
        description: Best project ever.
-       has-wiki: True
+       launchpad: awesomeproject
        acl_config: /path/to/acl/file
 
 The above config gives puppet and its related scripts enough information
