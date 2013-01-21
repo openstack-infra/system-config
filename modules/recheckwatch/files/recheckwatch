@@ -119,7 +119,7 @@ class Scoreboard(threading.Thread):
             if bug.last_seen < now-datetime.timedelta(days=self.age):
                 to_remove.append(bugno)
         for bugno in to_remove:
-            del self.scores[bug]
+            del self.scores[bugno]
 
         def impact(bug):
             "This ranks more recent bugs higher"
