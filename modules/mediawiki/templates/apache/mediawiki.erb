@@ -58,7 +58,7 @@
                 Order allow,deny
                 allow from all
         </Directory>
-	<Directory "<%= scope.lookupvar('mediawiki::mediawiki_location') %>/images">
+	<Directory "<%= scope.lookupvar('mediawiki::mediawiki_images_location') %>">
 		# Ignore .htaccess files
 		AllowOverride None
 
@@ -96,7 +96,13 @@
 
         Alias /w <%= scope.lookupvar('mediawiki::mediawiki_location') %>
         Alias /wiki <%= scope.lookupvar('mediawiki::mediawiki_location') %>/index.php
-        Alias /images <%= scope.lookupvar('mediawiki::mediawiki_images_location') %>
+        Alias /w/images <%= scope.lookupvar('mediawiki::mediawiki_images_location') %>
+
+        # Redirect old /Article_Name urls
+        RewriteEngine on
+        RewriteCond %{REQUEST_URI} !^/w/
+        RewriteCond %{REQUEST_URI} !^/wiki/
+        RewriteRule ^/(.*)$ https://<%= scope.lookupvar("mediawiki::site_hostname") %>/wiki/$1 [L,R]
 
         ErrorLog /var/log/apache2/error.log
 
