@@ -101,6 +101,7 @@ jobs:
     branch: ^master$
   - name: gate-openstack-cli-guide
     success-pattern: http://docs-draft.openstack.org/{job.name}/{pipeline.name}/{build.number}/cli/quick-start
+    branch: ^(?!stable/(diablo|essex)).*$
 
 
 projects:
