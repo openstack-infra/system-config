@@ -433,6 +433,23 @@ projects:
     release:
       - oslo-incubator-docs
 
+  - name: openstack/oslo-config
+    check:
+      - gate-oslo-config-docs
+      - gate-oslo-config-pep8
+      - gate-oslo-config-pyflakes
+      - gate-oslo-config-python26
+      - gate-oslo-config-python27
+    gate:
+      - gate-oslo-config-docs
+      - gate-oslo-config-pep8
+      - gate-oslo-config-python26
+      - gate-oslo-config-python27
+    post:
+      - oslo-config-docs
+    release:
+      - oslo-config-docs
+
   - name: openstack/quantum
     check:
       - gate-quantum-docs

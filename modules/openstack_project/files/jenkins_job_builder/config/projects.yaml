@@ -273,6 +273,19 @@
 
 
 - project:
+    name: oslo-config
+    github-org: openstack
+    node: precise
+    tarball-site: tarballs.openstack.org
+    doc-publisher-site: docs.openstack.org
+
+    jobs:
+      - python-jobs
+      - openstack-publish-jobs
+      - gate-{name}-pyflakes
+
+
+- project:
     name: oslo-incubator
     github-org: openstack
     node: precise
