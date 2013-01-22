@@ -228,8 +228,8 @@ function showOutput(id, name) {
 <style type="text/css" media="screen">
 body        { font-family: verdana, arial, helvetica, sans-serif;
     font-size: 80%; }
-table       { font-size: 100%; }
-pre         { }
+table       { font-size: 100%; width: 100%;}
+pre         { font-size: 80%; }
 
 /* -- heading -------------------------------------------------------------- */
 h1 {
@@ -261,16 +261,13 @@ a.popup_link:hover {
 
 .popup_window {
     display: none;
-    position: relative;
-    left: 0px;
-    top: 0px;
+    overflow-x: scroll;
     /*border: solid #627173 1px; */
     padding: 10px;
     background-color: #E6E6D6;
-    font-family: "Lucida Console", "Courier New", Courier, monospace;
+    font-family: "Ubuntu Mono", "Lucida Console", "Courier New", monospace;
     text-align: left;
     font-size: 8pt;
-    width: 90%;
 }
 
 }
@@ -280,7 +277,7 @@ a.popup_link:hover {
     margin-bottom: 1ex;
 }
 #result_table {
-    width: 80%;
+    width: 100%;
     border-collapse: collapse;
     border: 1px solid #777;
 }
@@ -302,7 +299,8 @@ a.popup_link:hover {
 .errorCase  { color: #c00; font-weight: bold; }
 .hiddenRow  { display: none; }
 .testcase   { margin-left: 2em; }
-
+td.testname {width: 40%}
+td.small {width: 40px}
 
 /* -- ending --------------------------------------------------------------- */
 #ending {
@@ -346,6 +344,7 @@ a.popup_link:hover {
 <col align='right' />
 <col align='right' />
 <col align='right' />
+<col align='right' />
 </colgroup>
 <tr id='header_row'>
     <td>Test Group/Test case</td>
@@ -355,6 +354,7 @@ a.popup_link:hover {
     <td>Error</td>
     <td>Skip</td>
     <td>View</td>
+    <td> </td>
 </tr>
 %(test_list)s
 <tr id='total_row'>
@@ -365,27 +365,29 @@ a.popup_link:hover {
     <td>%(error)s</td>
     <td>%(skip)s</td>
     <td>&nbsp;</td>
+    <td>&nbsp;</td>
 </tr>
 </table>
 """  # variables: (test_list, count, Pass, fail, error)
 
     REPORT_CLASS_TMPL = r"""
 <tr class='%(style)s'>
-    <td>%(desc)s</td>
-    <td>%(count)s</td>
-    <td>%(Pass)s</td>
-    <td>%(fail)s</td>
-    <td>%(error)s</td>
-    <td>%(skip)s</td>
-    <td><a href="javascript:showClassDetail('%(cid)s',%(count)s)"
+    <td class="testname">%(desc)s</td>
+    <td class="small">%(count)s</td>
+    <td class="small">%(Pass)s</td>
+    <td class="small">%(fail)s</td>
+    <td class="small">%(error)s</td>
+    <td class="small">%(skip)s</td>
+    <td class="small"><a href="javascript:showClassDetail('%(cid)s',%(count)s)"
 >Detail</a></td>
+    <td> </td>
 </tr>
 """  # variables: (style, desc, count, Pass, fail, error, cid)
 
     REPORT_TEST_WITH_OUTPUT_TMPL = r"""
 <tr id='%(tid)s' class='%(Class)s'>
     <td class='%(style)s'><div class='testcase'>%(desc)s</div></td>
-    <td colspan='6' align='center'>
+    <td colspan='7' align='left'>
 
     <!--css div popup start-->
     <a class="popup_link" onfocus='this.blur();'
@@ -632,7 +634,11 @@ class HtmlOutput(unittest.TestResult):
         tid = ((n == 0 or n == 3) and
                'p' or 'f') + 't%s.%s' % (cid + 1, tid + 1)
         name = t.id().split('.')[-1]
-        doc = t.shortDescription() or ""
+        # if shortDescription is not the function name, use it
+        if t.shortDescription().find(name) == -1:
+            doc = t.shortDescription()
+        else:
+            doc = None
         desc = doc and ('%s: %s' % (name, doc)) or name
         tmpl = (has_output and TemplateData.REPORT_TEST_WITH_OUTPUT_TMPL
                 or TemplateData.REPORT_TEST_NO_OUTPUT_TMPL)
