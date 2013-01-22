@@ -48,6 +48,7 @@ from xml.sax import saxutils
 
 __version__ = '0.1'
 
+
 class TemplateData(object):
     """
     Define a HTML template for report customerization and generation.
@@ -102,7 +103,8 @@ class TemplateData(object):
     # HTML Template
 
     HTML_TMPL = r"""<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title>%(title)s</title>
@@ -215,7 +217,6 @@ function showOutput(id, name) {
 """
     # variables: (title, generator, stylesheet, heading, report, ending)
 
-
     # ------------------------------------------------------------------------
     # Stylesheet
     #
@@ -224,14 +225,15 @@ function showOutput(id, name) {
 
     STYLESHEET_TMPL = """
 <style type="text/css" media="screen">
-body        { font-family: verdana, arial, helvetica, sans-serif; font-size: 80%; }
+body        { font-family: verdana, arial, helvetica, sans-serif;
+    font-size: 80%; }
 table       { font-size: 100%; }
 pre         { }
 
-/* -- heading ---------------------------------------------------------------------- */
+/* -- heading -------------------------------------------------------------- */
 h1 {
-	font-size: 16pt;
-	color: gray;
+        font-size: 16pt;
+        color: gray;
 }
 .heading {
     margin-top: 0ex;
@@ -248,7 +250,7 @@ h1 {
     margin-bottom: 6ex;
 }
 
-/* -- css div popup ------------------------------------------------------------------------ */
+/* -- css div popup -------------------------------------------------------- */
 a.popup_link {
 }
 
@@ -271,7 +273,7 @@ a.popup_link:hover {
 }
 
 }
-/* -- report ------------------------------------------------------------------------ */
+/* -- report --------------------------------------------------------------- */
 #show_detail_line {
     margin-top: 3ex;
     margin-bottom: 1ex;
@@ -301,14 +303,12 @@ a.popup_link:hover {
 .testcase   { margin-left: 2em; }
 
 
-/* -- ending ---------------------------------------------------------------------- */
+/* -- ending --------------------------------------------------------------- */
 #ending {
 }
 
 </style>
 """
-
-
 
     # ------------------------------------------------------------------------
     # Heading
@@ -320,12 +320,11 @@ a.popup_link:hover {
 <p class='description'>%(description)s</p>
 </div>
 
-""" # variables: (title, parameters, description)
+"""  # variables: (title, parameters, description)
 
-    HEADING_ATTRIBUTE_TMPL = """<p class='attribute'><strong>%(name)s:</strong> %(value)s</p>
-""" # variables: (name, value)
-
-
+    HEADING_ATTRIBUTE_TMPL = """
+<p class='attribute'><strong>%(name)s:</strong> %(value)s</p>
+"""  # variables: (name, value)
 
     # ------------------------------------------------------------------------
     # Report
@@ -367,7 +366,7 @@ a.popup_link:hover {
     <td>&nbsp;</td>
 </tr>
 </table>
-""" # variables: (test_list, count, Pass, fail, error)
+"""  # variables: (test_list, count, Pass, fail, error)
 
     REPORT_CLASS_TMPL = r"""
 <tr class='%(style)s'>
@@ -377,10 +376,10 @@ a.popup_link:hover {
     <td>%(fail)s</td>
     <td>%(error)s</td>
     <td>%(skip)s</td>
-    <td><a href="javascript:showClassDetail('%(cid)s',%(count)s)">Detail</a></td>
+    <td><a href="javascript:showClassDetail('%(cid)s',%(count)s)"
+>Detail</a></td>
 </tr>
-""" # variables: (style, desc, count, Pass, fail, error, cid)
-
+"""  # variables: (style, desc, count, Pass, fail, error, cid)
 
     REPORT_TEST_WITH_OUTPUT_TMPL = r"""
 <tr id='%(tid)s' class='%(Class)s'>
@@ -388,12 +387,14 @@ a.popup_link:hover {
     <td colspan='6' align='center'>
 
     <!--css div popup start-->
-    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_%(tid)s')" >
+    <a class="popup_link" onfocus='this.blur();'
+    href="javascript:showTestDetail('div_%(tid)s')" >
         %(status)s</a>
 
     <div id='div_%(tid)s' class="popup_window">
         <div style='text-align: right; color:red;cursor:pointer'>
-        <a onfocus='this.blur();' onclick="document.getElementById('div_%(tid)s').style.display = 'none' " >
+        <a onfocus='this.blur();'
+onclick="document.getElementById('div_%(tid)s').style.display = 'none' " >
            [x]</a>
         </div>
         <pre>
@@ -404,22 +405,18 @@ a.popup_link:hover {
 
     </td>
 </tr>
-""" # variables: (tid, Class, style, desc, status)
-
+"""  # variables: (tid, Class, style, desc, status)
 
     REPORT_TEST_NO_OUTPUT_TMPL = r"""
 <tr id='%(tid)s' class='%(Class)s'>
     <td class='%(style)s'><div class='testcase'>%(desc)s</div></td>
     <td colspan='6' align='center'>%(status)s</td>
 </tr>
-""" # variables: (tid, Class, style, desc, status)
-
+"""  # variables: (tid, Class, style, desc, status)
 
     REPORT_TEST_OUTPUT_TMPL = r"""
 %(id)s: %(output)s
-""" # variables: (id, output)
-
-
+"""  # variables: (id, output)
 
     # ------------------------------------------------------------------------
     # ENDING
@@ -499,12 +496,12 @@ class HtmlOutput(unittest.TestResult):
         report = self._generate_report()
         ending = self._generate_ending()
         output = TemplateData.HTML_TMPL % dict(
-            title = saxutils.escape(TemplateData.DEFAULT_TITLE),
-            generator = generator,
-            stylesheet = TemplateData.STYLESHEET_TMPL,
-            heading = heading,
-            report = report,
-            ending = ending,
+            title=saxutils.escape(TemplateData.DEFAULT_TITLE),
+            generator=generator,
+            stylesheet=TemplateData.STYLESHEET_TMPL,
+            heading=heading,
+            report=report,
+            ending=ending,
         )
         if self.html_file:
             html_file = open(self.html_file, 'w')
@@ -533,14 +530,14 @@ class HtmlOutput(unittest.TestResult):
         a_lines = []
         for name, value in report_attrs:
             line = TemplateData.HEADING_ATTRIBUTE_TMPL % dict(
-                    name = saxutils.escape(name),
-                    value = saxutils.escape(value),
+                    name=saxutils.escape(name),
+                    value=saxutils.escape(value),
                 )
             a_lines.append(line)
         heading = TemplateData.HEADING_TMPL % dict(
-            title = saxutils.escape(TemplateData.DEFAULT_TITLE),
-            parameters = ''.join(a_lines),
-            description = saxutils.escape(TemplateData.DEFAULT_DESCRIPTION),
+            title=saxutils.escape(TemplateData.DEFAULT_TITLE),
+            parameters=''.join(a_lines),
+            description=saxutils.escape(TemplateData.DEFAULT_DESCRIPTION),
         )
         return heading
 
@@ -550,11 +547,15 @@ class HtmlOutput(unittest.TestResult):
         for cid, (cls, cls_results) in enumerate(sortedResult):
             # subtotal for a class
             np = nf = ne = ns = 0
-            for n,t,o,e in cls_results:
-                if n == 0: np += 1
-                elif n == 1: nf += 1
-                elif n == 2: ne += 1
-                else: ns += 1
+            for n, t, o, e in cls_results:
+                if n == 0:
+                    np += 1
+                elif n == 1:
+                    nf += 1
+                elif n == 2:
+                    ne += 1
+                else:
+                    ns += 1
 
             # format class description
             if cls.mod == "__main__":
@@ -565,28 +566,29 @@ class HtmlOutput(unittest.TestResult):
             desc = doc and '%s: %s' % (name, doc) or name
 
             row = TemplateData.REPORT_CLASS_TMPL % dict(
-                style = ne > 0 and 'errorClass' or nf > 0 and 'failClass' or 'passClass',
+                style=(ne > 0 and 'errorClass' or nf > 0
+                       and 'failClass' or 'passClass'),
                 desc = desc,
                 count = np + nf + ne + ns,
                 Pass = np,
                 fail = nf,
                 error = ne,
                 skip = ns,
-                cid = 'c%s' % (cid+1),
+                cid = 'c%s' % (cid + 1),
             )
             rows.append(row)
 
-            for tid, (n,t,o,e) in enumerate(cls_results):
+            for tid, (n, t, o, e) in enumerate(cls_results):
                 self._generate_report_test(rows, cid, tid, n, t, o, e)
 
         report = TemplateData.REPORT_TMPL % dict(
-            test_list = ''.join(rows),
-            count = str(self.success_count + self.failure_count +
+            test_list=''.join(rows),
+            count=str(self.success_count + self.failure_count +
                         self.error_count + self.skip_count),
-            Pass = str(self.success_count),
-            fail = str(self.failure_count),
-            error = str(self.error_count),
-            skip = str(self.skip_count),
+            Pass=str(self.success_count),
+            fail=str(self.failure_count),
+            error=str(self.error_count),
+            skip=str(self.skip_count),
         )
         return report
 
@@ -595,12 +597,13 @@ class HtmlOutput(unittest.TestResult):
         # Here at least we want to group them together by class.
         rmap = {}
         classes = []
-        for n,t,o,e in result_list:
+        for n, t, o, e in result_list:
             if hasattr(t, '_tests'):
                 for inner_test in t._tests:
-                    self._add_cls(rmap, classes, inner_test, (n,inner_test,o,e))
+                    self._add_cls(rmap, classes, inner_test,
+                                  (n, inner_test, o, e))
             else:
-                self._add_cls(rmap, classes, t, (n,t,o,e))
+                self._add_cls(rmap, classes, t, (n, t, o, e))
         r = [(cls, rmap[str(cls)]) for cls in classes]
         return r
 
@@ -614,7 +617,7 @@ class HtmlOutput(unittest.TestResult):
             cls = ClassInfoWrapper(cl, mod)
         else:
             cls = ClassInfoWrapper(str(test.__class__), str(test.__module__))
-        if not rmap.has_key(str(cls)):
+        if not str(cls) in rmap:
             rmap[str(cls)] = []
             classes.append(cls)
         rmap[str(cls)].append(data_tuple)
@@ -623,40 +626,46 @@ class HtmlOutput(unittest.TestResult):
         # e.g. 'pt1.1', 'ft1.1', etc
         # ptx.x for passed/skipped tests and ftx.x for failed/errored tests.
         has_output = bool(o or e)
-        tid = ((n == 0 or n == 3) and 'p' or 'f') + 't%s.%s' % (cid+1,tid+1)
+        tid = ((n == 0 or n == 3) and
+               'p' or 'f') + 't%s.%s' % (cid + 1, tid + 1)
         name = t.id().split('.')[-1]
         doc = t.shortDescription() or ""
         desc = doc and ('%s: %s' % (name, doc)) or name
-        tmpl = has_output and TemplateData.REPORT_TEST_WITH_OUTPUT_TMPL or TemplateData.REPORT_TEST_NO_OUTPUT_TMPL
+        tmpl = (has_output and TemplateData.REPORT_TEST_WITH_OUTPUT_TMPL
+                or TemplateData.REPORT_TEST_NO_OUTPUT_TMPL)
 
         # Comments below from the original source project.
         # TODO: clean this up within the context of a nose plugin.
-        # o and e should be byte string because they are collected from stdout and stderr?
-        if isinstance(o,str):
-            # TODO: some problem with 'string_escape': it escape \n and mess up formating
+        # o and e should be byte string because they are collected
+        # from stdout and stderr?
+        if isinstance(o, str):
+            # TODO: some problem with 'string_escape': it escape \n
+            # and mess up formating
             # uo = unicode(o.encode('string_escape'))
             uo = o.decode('latin-1')
         else:
             uo = o
-        if isinstance(e,str):
-            # TODO: some problem with 'string_escape': it escape \n and mess up formating
+        if isinstance(e, str):
+            # TODO: some problem with 'string_escape':
+            # it escape \n and mess up formating
             # ue = unicode(e.encode('string_escape'))
             ue = e.decode('latin-1')
         else:
             ue = e
 
         script = TemplateData.REPORT_TEST_OUTPUT_TMPL % dict(
-            id = tid,
-            output = saxutils.escape(uo+ue),
+            id=tid,
+            output=saxutils.escape(uo + ue),
         )
 
         row = tmpl % dict(
-            tid = tid,
-            Class = ((n == 0 or n == 3) and 'hiddenRow' or 'none'),
-            style = n == 2 and 'errorCase' or (n == 1 and 'failCase' or 'none'),
-            desc = desc,
-            script = script,
-            status = TemplateData.STATUS[n],
+            tid=tid,
+            Class=((n == 0 or n == 3) and 'hiddenRow' or 'none'),
+            style=(n == 2 and 'errorCase' or
+                   (n == 1 and 'failCase' or 'none')),
+            desc=desc,
+            script=script,
+            status=TemplateData.STATUS[n],
         )
         rows.append(row)
         if not has_output:
@@ -664,6 +673,7 @@ class HtmlOutput(unittest.TestResult):
 
     def _generate_ending(self):
         return TemplateData.ENDING_TMPL
+
 
 def main():
     if len(sys.argv) < 2:
