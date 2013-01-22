@@ -175,14 +175,31 @@ class jenkins::slave(
       ],
     }
 
+    $no_postgresql_version = 'Unsupported OS!  Please check `postgres_default_version` fact.'
+    if $::postgres_default_version == $no_postgresql_version {
+      # Have a default postgres version if the postgresql module can't decide
+      # on a sane default for itself.
+      $postgresql_version = '9.1'
+    }
+    else {
+      $postgresql_version = $::postgres_default_version
+    }
+    class { 'postgresql::params':
+      version => $postgresql_version,
+    }
+
     class { 'postgresql::server':
       config_hash => {
         'postgres_password'      => 'insecure_slave',
         'manage_redhat_firewall' => false,
         'listen_addresses'       => '127.0.0.1',
       },
+      require     => Class['postgresql::params'],
     }
-    include postgresql::devel
+
+    class { 'postgresql::devel':
+      require => Class['postgresql::params'],
+    }
 
     postgresql::db { 'openstack_citest':
       user     => 'openstack_citest',
