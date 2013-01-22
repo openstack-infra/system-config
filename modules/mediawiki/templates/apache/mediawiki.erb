@@ -94,9 +94,9 @@
 	# TTF doesn't have an official MIME type, but I really don't want to use application/octet-stream for it
 	AddType application/x-font-ttf .ttf
 
+        Alias /w/images <%= scope.lookupvar('mediawiki::mediawiki_images_location') %>
         Alias /w <%= scope.lookupvar('mediawiki::mediawiki_location') %>
         Alias /wiki <%= scope.lookupvar('mediawiki::mediawiki_location') %>/index.php
-        Alias /w/images <%= scope.lookupvar('mediawiki::mediawiki_images_location') %>
 
         # Redirect old /Article_Name urls
         RewriteEngine on
