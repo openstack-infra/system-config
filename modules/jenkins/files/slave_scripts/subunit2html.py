@@ -605,7 +605,9 @@ class HtmlOutput(unittest.TestResult):
                                   (n, inner_test, o, e))
             else:
                 self._add_cls(rmap, classes, t, (n, t, o, e))
-        r = [(cls, rmap[str(cls)]) for cls in classes]
+        classort = lambda s: str(s)
+        sortedclasses = sorted(classes, key=classort)
+        r = [(cls, rmap[str(cls)]) for cls in sortedclasses]
         return r
 
     def _add_cls(self, rmap, classes, test, data_tuple):
