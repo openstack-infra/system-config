@@ -175,14 +175,22 @@ class jenkins::slave(
       ],
     }
 
+    class { 'postgresql::params':
+      version => '9.1',
+    }
+
     class { 'postgresql::server':
       config_hash => {
         'postgres_password'      => 'insecure_slave',
         'manage_redhat_firewall' => false,
         'listen_addresses'       => '127.0.0.1',
       },
+      require     => Class['postgresql::params'],
     }
-    include postgresql::devel
+
+    class { 'postgresql::devel':
+      require => Class['postgresql::params'],
+    }
 
     postgresql::db { 'openstack_citest':
       user     => 'openstack_citest',
