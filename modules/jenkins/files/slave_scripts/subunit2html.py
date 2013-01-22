@@ -562,7 +562,7 @@ class HtmlOutput(unittest.TestResult):
             if cls.mod == "__main__":
                 name = cls.name
             else:
-                name = "%s.%s" % (cls.mod, cls.name)
+                name = "%s" % (cls.name)
             doc = cls.__doc__ and cls.__doc__.split("\n")[0] or ""
             desc = doc and '%s: %s' % (name, doc) or name
 
