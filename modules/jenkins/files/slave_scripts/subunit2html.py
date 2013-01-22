@@ -46,6 +46,7 @@ import traceback
 import unittest
 from xml.sax import saxutils
 
+
 __version__ = '0.1'
 
 
@@ -433,7 +434,7 @@ class ClassInfoWrapper(object):
         self.mod = mod
 
     def __repr__(self):
-        return "%s.%s" % (self.name, self.mod)
+        return "%s" % (self.name)
 
 
 class HtmlOutput(unittest.TestResult):
