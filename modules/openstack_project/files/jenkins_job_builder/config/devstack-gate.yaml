@@ -146,6 +146,44 @@
 
 
 - job:
+    name: gate-tempest-devstack-vm-quantum-full
+    node: devstack-precise
+
+    wrappers:
+      - timeout:
+          timeout: 180
+          fail: true
+      - timestamps
+
+    parameters:
+      - label:
+          name: NODE_LABEL
+          description: Label of node to use for this build
+          default: devstack-precise
+
+    triggers:
+      - zuul
+
+    builders:
+      - devstack-inprogress
+      - devstack-checkout
+      - shell: |
+          #!/bin/bash -xe
+          export PYTHONUNBUFFERED=true
+          export DEVSTACK_GATE_TEMPEST=1
+          export DEVSTACK_GATE_TEMPEST_FULL=1
+          export DEVSTACK_GATE_QUANTUM=1
+          cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
+          ./safe-devstack-vm-gate-wrap.sh
+      - link-logs
+
+    publishers:
+      - devstack-logs
+      - console-log
+      - devstack-complete
+
+
+- job:
     name: periodic-tempest-devstack-vm-full
     node: devstack-precise
 

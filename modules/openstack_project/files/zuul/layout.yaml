@@ -723,20 +723,21 @@ projects:
       - gate-tempest-devstack-vm
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-postgres-full
+      - gate-tempest-devstack-vm-quantum-full
 
   - name: openstack/tempest
     check:
       - gate-tempest-pep8
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-postgres-full
+      - gate-tempest-devstack-vm-quantum-full
       - gate-tempest-devstack-vm-cinder
-      - gate-tempest-devstack-vm-quantum
     gate:
       - gate-tempest-pep8
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-postgres-full
+      - gate-tempest-devstack-vm-quantum-full
       - gate-tempest-devstack-vm-cinder
-      - gate-tempest-devstack-vm-quantum
 
   - name: openstack/ceilometer
     check:
