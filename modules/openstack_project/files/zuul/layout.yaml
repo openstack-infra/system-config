@@ -70,6 +70,9 @@ jobs:
     branch: stable/folsom
   - name: gate-tempest-devstack-vm-quantum
     branch: ^(?!stable/(diablo|essex|folsom)).*$
+  - name: gate-tempest-devstack-vm-quantum-full
+    branch: ^(?!stable/(diablo|essex|folsom)).*$
+    voting: false
   - name: gate-tempest-devstack-vm-postgres
     branch: ^(?!stable/(diablo|essex|folsom)).*$
     voting: false
@@ -724,6 +727,7 @@ projects:
       - gate-tempest-devstack-vm
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-postgres-full
+      - gate-tempest-devstack-vm-quantum-full
 
   - name: openstack/tempest
     check:
@@ -732,12 +736,14 @@ projects:
       - gate-tempest-devstack-vm-postgres-full
       - gate-tempest-devstack-vm-cinder
       - gate-tempest-devstack-vm-quantum
+      - gate-tempest-devstack-vm-quantum-full
     gate:
       - gate-tempest-pep8
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-postgres-full
       - gate-tempest-devstack-vm-cinder
       - gate-tempest-devstack-vm-quantum
+      - gate-tempest-devstack-vm-quantum-full
 
   - name: openstack/ceilometer
     check:
