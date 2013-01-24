@@ -37,7 +37,7 @@ URL should be satisfied by sourcing the "openstackci-rs-nova.sh"
 script (or jenkins, as appropriate).
 
   . ~root/rackdns-venv/bin/activate
-  . ~root/openstackci-rs-nova.sh
+  . ~root/ci-launch/openstackci-rs-nova.sh
 
   export SERVERNAME=server
   nova list | grep "| $SERVERNAME\.openstack\.org "
