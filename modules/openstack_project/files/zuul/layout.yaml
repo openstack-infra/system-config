@@ -467,6 +467,7 @@ projects:
       - quantum-branch-tarball
       - quantum-coverage
       - quantum-docs
+      - quantum-upstream-translation-update
     pre-release:
       - quantum-tarball
     release:
