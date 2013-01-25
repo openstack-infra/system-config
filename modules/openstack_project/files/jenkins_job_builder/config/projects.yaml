@@ -399,6 +399,7 @@
     jobs:
       - python-jobs
       - openstack-publish-jobs
+      - translation-jobs
 
 
 - project:
