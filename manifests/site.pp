@@ -230,7 +230,30 @@ node 'pypi.slave.openstack.org' {
   }
 }
 
-# Rollout cgroups to precise slaves.
+node /^quantal.*\.slave\.openstack\.org$/ {
+  include jenkins::cgroups
+  include openstack_project::puppet_cron
+  include ulimit
+  class { 'openstack_project::slave':
+    certname  => $::fqdn,
+    sysadmins => hiera('sysadmins'),
+  }
+  class { 'openstack_project::glancetest':
+    s3_store_access_key   => hiera('s3_store_access_key'),
+    s3_store_secret_key   => hiera('s3_store_secret_key'),
+    s3_store_bucket       => hiera('s3_store_bucket'),
+    swift_store_user      => hiera('swift_store_user'),
+    swift_store_key       => hiera('swift_store_key'),
+    swift_store_container => hiera('swift_store_container'),
+  }
+  ulimit::conf { 'limit_jenkins_procs':
+    limit_domain => 'jenkins',
+    limit_type   => 'hard',
+    limit_item   => 'nproc',
+    limit_value  => '256'
+  }
+}
+
 node /^precise.*\.slave\.openstack\.org$/ {
   include jenkins::cgroups
   include openstack_project::puppet_cron
