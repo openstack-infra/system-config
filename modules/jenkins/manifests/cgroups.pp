@@ -27,11 +27,35 @@ class jenkins::cgroups {
     source  => 'puppet:///modules/jenkins/cgroups/cgrules.conf',
   }
 
+  # Starting with Ubuntu Quantal (12.10) cgroup-bin dropped its upstart jobs.
+  if $::operatingsystem == 'Ubuntu' and $::operatingsystemrelease >= 12.10 {
+
+    file { '/etc/init/cgconfig.conf':
+      ensure  => present,
+      replace => true,
+      owner   => 'root',
+      group   => 'root',
+      mode    => '0644',
+      source  => 'puppet:///modules/jenkins/cgroups/upstart_cgconfig',
+    }
+
+    file { '/etc/init/cgred.conf':
+      ensure  => present,
+      replace => true,
+      owner   => 'root',
+      group   => 'root',
+      mode    => '0644',
+      source  => 'puppet:///modules/jenkins/cgroups/upstart_cgred',
+    }
+
+  }
+
   service { 'cgconfig':
     ensure    => running,
     enable    => true,
     require   => Package['cgroups'],
     subscribe => File['/etc/cgconfig.conf'],
+    require   => File['/etc/init/cgconfig.conf'],
   }
 
   service { 'cgred':
@@ -39,5 +63,6 @@ class jenkins::cgroups {
     enable    => true,
     require   => Package['cgroups'],
     subscribe => File['/etc/cgrules.conf'],
+    require   => File['/etc/init/cgred.conf'],
   }
 }
