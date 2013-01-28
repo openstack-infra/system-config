@@ -1,0 +1,6 @@
+description "load legacy cgconfig files"
+author "Jeremy Stanley <fungi@yuggoth.org>"
+start on started cgroup-lite
+pre-start script
+	/usr/sbin/cgconfigparser -l /etc/cgconfig.conf
+end script
