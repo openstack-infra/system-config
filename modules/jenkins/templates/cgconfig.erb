@@ -11,7 +11,7 @@ mount {
         blkio   = /cgroup/blkio;
 }
 
-<% else %>
+<% elsif ( operatingsystemrelease < '12.10' ) or ( operatingsystem != 'Ubuntu' ) then %>
 mount {
         cpu = /sys/fs/cgroup/cpu;
         cpuacct = /sys/fs/cgroup/cpuacct;
