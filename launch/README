@@ -1,29 +1,42 @@
-Note that these instructions assume commands will be run in a full
-root environment::
+Note that these instructions assume you're working from this
+directory on an updated local clone of the repository, and that
+your account is a member of the puppet group for access to the
+puppet keys::
 
-  sudo su -
+  sudo adduser YOURUSER puppet
+
+(Remember to log out and back into your shell if you add yourself
+to a group.)
 
 To launch a node in the OpenStack CI account (production servers)::
 
+  export FQDN=servername.openstack.org
   . ~root/ci-launch/openstackci-rs-nova.sh
+  sudo puppet cert generate $FQDN
+  ./launch-node.py servername.openstack.org
 
 To launch a node in the OpenStack Jenkins account (slave nodes)::
 
+  export FQDN=slavename.slave.openstack.org
+  export CERT=slavetype.slave.openstack.org
+  export IMAGE='Ubuntu 12.10 (Quantal Quetzal)'
+  export RAM=2048
   . ~root/ci-launch/openstackjenkins-rs-nova.sh
-
-Then::
-
-  puppet cert generate servername.openstack.org
-  ./launch-node.py servername.openstack.org --cert servername.openstack.org.pem
+  sudo puppet cert generate $CERT
+  ./launch-node.py $FQDN --cert $CERT.pem --image "$IMAGE" --ram $RAM
 
 If you are launching a replacement server, you may skip the generate
 step and specify the name of an existing puppet cert (as long as the
 private key is on this host).
 
-The server name and cert names may be different.
+The server name and cert names may be different (as in the Jenkins
+slave example), but launch-node.py will assume they are the same
+unless specified.
 
 Manually add the hostname to DNS (the launch script does not do so
-automatically).
+automatically). Note that this example assumes you've already
+exported a relevant FQDN and sourced the appropriate API credentials
+above.
 
 DNS
 ===
@@ -37,17 +50,15 @@ URL should be satisfied by sourcing the "openstackci-rs-nova.sh"
 script (or jenkins, as appropriate).
 
   . ~root/rackdns-venv/bin/activate
-  . ~root/ci-launch/openstackci-rs-nova.sh
 
-  export SERVERNAME=server
-  nova list | grep "| $SERVERNAME\.openstack\.org "
-  export IPV6ADDR=dead:beef::cafe
-  export IPV4ADDR=123.45.67.89
-  export UUID=fedcba98-7654-3210-0123-456789abcdef
+  TEMPFILE=$(tempfile)
+  nova list | grep "| $FQDN " | sed 's/^| \([0-9a-f-]\+\) .* public=\([0-9a-f:]\+\), \([0-9\.]\+\);.*/export UUID="\1"\nexport IPV6="\2"\nexport IPV4="\3"/' > $TEMPFILE
+  . $TEMPFILE
+  rm $TEMPFILE
 
-  rackdns rdns-create --name $SERVERNAME.openstack.org --data $IPV6ADDR --server-href https://$os_region_name.servers.api.rackspacecloud.com/v2/$OS_TENANT_NAME/servers/$UUID --ttl 300
-  rackdns rdns-create --name $SERVERNAME.openstack.org --data $IPV4ADDR --server-href https://$os_region_name.servers.api.rackspacecloud.com/v2/$OS_TENANT_NAME/servers/$UUID --ttl 300
+  rackdns rdns-create --name $FQDN --data "$IPV6" --server-href https://$os_region_name.servers.api.rackspacecloud.com/v2/$OS_TENANT_NAME/servers/"$UUID" --ttl 300
+  rackdns rdns-create --name $FQDN --data "$IPV4" --server-href https://$os_region_name.servers.api.rackspacecloud.com/v2/$OS_TENANT_NAME/servers/"$UUID" --ttl 300
 
-  . openstack-rs-nova.sh
-  rackdns record-create --name $SERVERNAME.openstack.org --type AAAA --data $IPV6ADDR --ttl 300 openstack.org
-  rackdns record-create --name $SERVERNAME.openstack.org --type A --data $IPV4ADDR --ttl 300 openstack.org
+  . ~root/ci-launch/openstack-rs-nova.sh
+  rackdns record-create --name $FQDN --type AAAA --data "$IPV6" --ttl 300 openstack.org
+  rackdns record-create --name $FQDN --type A --data "$IPV4" --ttl 300 openstack.org
