@@ -151,15 +151,20 @@ def main():
     parser.add_argument("--environment", dest="environment",
                         default="production",
                         help="puppet environment name")
-    parser.add_argument("--cert", dest="cert", required=True,
+    parser.add_argument("--cert", dest="cert",
                         help="name of signed puppet certificate file (e.g., "
                         "hostname.example.com.pem)")
     options = parser.parse_args()
 
     client = get_client()
 
+    if options.cert:
+        cert = options.cert
+    else:
+        cert = options.name + ".pem"
+
     if not os.path.exists(os.path.join("/var/lib/puppet/ssl/private_keys",
-                                       options.cert)):
+                                       cert)):
         raise Exception("Please specify the name of a signed puppet cert.")
 
     flavors = [f for f in client.flavors.list() if f.ram >= options.ram]
@@ -187,7 +192,7 @@ def main():
     image = images[0]
     print "Found image", image
 
-    build_server(client, options.name, image, flavor, options.cert, options.environment)
+    build_server(client, options.name, image, flavor, cert, options.environment)
 
 if __name__ == '__main__':
     main()
