@@ -40,7 +40,7 @@
 
     wrappers:
       - timeout:
-          timeout: 180
+          timeout: 120
           fail: true
       - timestamps
 
