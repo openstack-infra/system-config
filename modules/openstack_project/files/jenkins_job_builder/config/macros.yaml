@@ -116,7 +116,16 @@
 - builder:
     name: tarball
     builders:
-      - shell: "/usr/local/jenkins/slave_scripts/create-tarball.sh {project}"
+      - shell: |
+          #!/bin/bash -xe
+
+          rm -f dist/*.tar.gz
+          tox -evenv python setup.py sdist
+
+          echo "SHA1sum: "
+          sha1sum dist/*
+          echo "MD5sum: "
+          md5sum dist/*
 
 - builder:
     name: devstack-checkout
