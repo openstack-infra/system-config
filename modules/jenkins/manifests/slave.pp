@@ -208,6 +208,13 @@ class jenkins::slave(
       grant    => 'all',
       require  => Class['postgresql::server'],
     }
+
+    postgresql::database_grant { 'grant_openstack_citest_privs':
+      privelege => 'ALL',
+      db        => 'openstack_citest',
+      role      => 'openstack_citest',
+      require   => Postgresql::Db['openstack_citest'],
+    }
   }
 
   file { '/usr/local/jenkins':
