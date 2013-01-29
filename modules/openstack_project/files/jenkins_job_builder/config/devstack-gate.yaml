@@ -1,5 +1,5 @@
 - job:
-    name: gate-tempest-devstack-vm
+    name: gate-tempest-devstack-vm-smoke
     node: devstack-precise
 
     wrappers:
