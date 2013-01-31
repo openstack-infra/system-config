@@ -128,6 +128,9 @@ def build_server(client, name, image, flavor, cert, environment):
         admin_pass = server.adminPass
         server = utils.wait_for_resource(server)
         bootstrap_server(server, admin_pass, key, cert, environment)
+        print('UUID=%s\nIPV4=%s\nIPV6=%s\n' % (server.id,
+                                               server.accessIPv4,
+                                               server.accessIPv6))
         if key:
             kp.delete()
     except Exception, real_error:
