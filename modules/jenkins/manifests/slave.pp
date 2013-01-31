@@ -201,18 +201,19 @@ class jenkins::slave(
       require => Class['postgresql::params'],
     }
 
+    postgresql::database_user { 'openstack_citest':
+      password_hash => 'openstack_citest',
+      superuser     => true,
+    }
+
     postgresql::db { 'openstack_citest':
       user     => 'openstack_citest',
       password => 'openstack_citest',
       grant    => 'all',
-      require  => Class['postgresql::server'],
-    }
-
-    postgresql::database_grant { 'grant_openstack_citest_privs':
-      privilege => 'ALL',
-      db        => 'openstack_citest',
-      role      => 'openstack_citest',
-      require   => Postgresql::Db['openstack_citest'],
+      require  => [
+        Class['postgresql::server'],
+        Postgresql::Database_user['openstack_citest'],
+      ],
     }
   }
 
