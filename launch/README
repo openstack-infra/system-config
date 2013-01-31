@@ -10,18 +10,20 @@ to a group.)
 
 To launch a node in the OpenStack CI account (production servers)::
 
-  export FQDN=servername.openstack.org
   . ~root/ci-launch/openstackci-rs-nova.sh
+  export FQDN=servername.openstack.org
   sudo puppet cert generate $FQDN
   ./launch-node.py $FQDN
 
 To launch a node in the OpenStack Jenkins account (slave nodes)::
 
+  . ~root/ci-launch/openstackjenkins-rs-nova.sh
   export FQDN=slavename.slave.openstack.org
   export CERT=slavetype.slave.openstack.org
+  nova image-list
   export IMAGE='Ubuntu 12.10 (Quantal Quetzal)'
+  nova flavor-list
   export RAM=2048
-  . ~root/ci-launch/openstackjenkins-rs-nova.sh
   sudo puppet cert generate $CERT
   ./launch-node.py $FQDN --cert $CERT.pem --image "$IMAGE" --ram $RAM
 
@@ -47,15 +49,16 @@ manually update DNS, you will need the hostname, v4 and v6 addresses
 of the host, as well as the UUID (these can all be found by running
 the ''nova list'' command).  The environment variables used in the
 URL should be satisfied by sourcing the "openstackci-rs-nova.sh"
-script (or jenkins, as appropriate).
+script (or jenkins, as appropriate). Also the above launch script
+should output some environment variable assignments for UUID, IPV4
+and IPV6 you can cut and paste as needed, or you can fill them in
+yourself::
 
   . ~root/rackdns-venv/bin/activate
 
-  TEMPFILE=$(tempfile)
-  nova list | grep "| $FQDN " | sed 's/^| \([0-9a-f-]\+\) .* public=\([0-9a-f:]\+\), \([0-9\.]\+\);.*/export UUID="\1"\nexport IPV6="\2"\nexport IPV4="\3"/' > $TEMPFILE
-  cat $TEMPFILE
-  . $TEMPFILE
-  rm $TEMPFILE
+  UUID=?
+  IPV4=?
+  IPV6=?
 
   rackdns rdns-create --name $FQDN --data "$IPV6" --server-href https://$os_region_name.servers.api.rackspacecloud.com/v2/$OS_TENANT_NAME/servers/"$UUID" --ttl 300
   rackdns rdns-create --name $FQDN --data "$IPV4" --server-href https://$os_region_name.servers.api.rackspacecloud.com/v2/$OS_TENANT_NAME/servers/"$UUID" --ttl 300
