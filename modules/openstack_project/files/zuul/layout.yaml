@@ -409,6 +409,7 @@ projects:
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-cinder
       - gate-tempest-devstack-vm-quantum
+      - gate-tempest-devstack-vm-postgres-full
       - gate-nova-pylint
     gate:
       - gate-nova-docs
