@@ -192,13 +192,19 @@ class jenkins::slave(
       config_hash => {
         'postgres_password'      => 'insecure_slave',
         'manage_redhat_firewall' => false,
-        'listen_addresses'       => '127.0.0.1',
+        'listen_addresses'       => '*', 
       },
       require     => Class['postgresql::params'],
     }
 
     class { 'postgresql::devel':
       require => Class['postgresql::params'],
+    }
+
+    if ($::operatingsystem == 'Ubuntu') {
+      exec { 'yum Group Install':
+        command => 'sudo sed -i "s/peer/password/" /etc/postgresql/9.1/main/pg_hba.conf',
+      }
     }
 
     postgresql::database_user { 'openstack_citest':
@@ -214,6 +220,11 @@ class jenkins::slave(
         Class['postgresql::server'],
         Postgresql::Database_user['openstack_citest'],
       ],
+    }
+    postgresql::db { 'openstack_citest':
+      privilege => 'ALL',
+      db        => 'openstack_citest',
+      role      => 'openstack_citest',
     }
   }
 
