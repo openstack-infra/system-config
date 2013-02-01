@@ -201,9 +201,10 @@ class jenkins::slave(
       require => Class['postgresql::params'],
     }
 
+    # Create DB user and explicitly make it non superuser.
     postgresql::database_user { 'openstack_citest':
       password_hash => 'openstack_citest',
-      superuser     => true,
+      superuser     => false,
     }
 
     postgresql::db { 'openstack_citest':
@@ -214,6 +215,14 @@ class jenkins::slave(
         Class['postgresql::server'],
         Postgresql::Database_user['openstack_citest'],
       ],
+    }
+
+    # Alter the new database giving the test DB user ownership of the DB.
+    # This is necessary to make the nova unittests run properly.
+    postgresql_psql { 'ALTER DATABASE openstack_citest OWNER TO openstack_citest':
+      db          => 'postgres',
+      refreshonly => true,
+      subscribe   => Postgresql::Db['openstack_citest'],
     }
   }
 
