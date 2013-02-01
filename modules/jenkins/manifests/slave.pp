@@ -190,9 +190,10 @@ class jenkins::slave(
 
     class { 'postgresql::server':
       config_hash => {
-        'postgres_password'      => 'insecure_slave',
-        'manage_redhat_firewall' => false,
-        'listen_addresses'       => '127.0.0.1',
+        'postgres_password'       => 'insecure_slave',
+        'manage_redhat_firewall'  => false,
+        'listen_addresses'        => '*',
+        'ip_mask_allow_all_users' => '0.0.0.0/0'
       },
       require     => Class['postgresql::params'],
     }
