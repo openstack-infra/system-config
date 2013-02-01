@@ -201,9 +201,11 @@ class jenkins::slave(
       require => Class['postgresql::params'],
     }
 
-    # Create DB user and explicitly make it non superuser.
+    # Create DB user and explicitly make it non superuser
+    # that can create databases.
     postgresql::database_user { 'openstack_citest':
       password_hash => 'openstack_citest',
+      createdb      => true,
       superuser     => false,
     }
 
