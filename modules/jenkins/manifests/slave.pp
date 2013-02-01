@@ -203,7 +203,7 @@ class jenkins::slave(
 
     postgresql::database_user { 'openstack_citest':
       password_hash => 'openstack_citest',
-      superuser     => true,
+      superuser     => false,
     }
 
     postgresql::db { 'openstack_citest':
@@ -214,6 +214,12 @@ class jenkins::slave(
         Class['postgresql::server'],
         Postgresql::Database_user['openstack_citest'],
       ],
+    }
+
+    postgresql_psql { 'ALTER DATABASE openstack_citest OWNER TO openstack_citest':
+      db          => 'postgres',
+      refreshonly => true,
+      subscribe   => Postgresql::Db['openstack_citest'],
     }
   }
 
