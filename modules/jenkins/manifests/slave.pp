@@ -207,6 +207,7 @@ class jenkins::slave(
       password_hash => 'openstack_citest',
       createdb      => true,
       superuser     => false,
+      require       => Class['postgresql::server'],
     }
 
     postgresql::db { 'openstack_citest':
