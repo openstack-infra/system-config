@@ -79,7 +79,6 @@ jobs:
     voting: false
   - name: gate-tempest-devstack-vm-postgres-full
     branch: ^(?!stable/(diablo|essex|folsom)).*$
-    voting: false
   - name: ^.*-python27$
     parameter-function: python27_params
   - name: gate-nova-pylint
