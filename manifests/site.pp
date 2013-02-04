@@ -199,7 +199,10 @@ node 'summit.openstack.org' {
 # A machine to serve static content.
 node 'static.openstack.org' {
   class { 'openstack_project::static':
-    sysadmins => hiera('sysadmins'),
+    sysadmins                     => hiera('sysadmins'),
+    reviewday_rsa_key_contents    => hiera('reviewday_rsa_key_contents'),
+    reviewday_rsa_pubkey_contents => hiera('reviewday_rsa_pubkey_contents'),
+    reviewday_gerrit_ssh_key      => hiera('gerrit_ssh_rsa_pubkey_contents'),
   }
 }
 
