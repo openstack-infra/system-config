@@ -193,6 +193,12 @@ node 'summit.openstack.org' {
   }
 }
 
+node 'reviewday.openstack.org' {
+  class { 'openstack_project::reviewday':
+    sysadmins => hiera('sysadmins'),
+  }
+}
+
 # A machine to serve static content.
 node 'static.openstack.org' {
   class { 'openstack_project::static':
