@@ -8,6 +8,7 @@ input {
 
     # We use json_event here since the sender is a logstash agent
     format => "json_event"
+    password => "<%= scope.lookupvar("::logstash::indexer::redis_password") %>"
   }
 }
 

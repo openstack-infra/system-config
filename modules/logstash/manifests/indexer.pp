@@ -16,6 +16,7 @@
 # conf_template accepts path to indexer config template.
 #
 class logstash::indexer (
+  $redis_password,
   $conf_template = 'logstash/indexer.conf.erb'
 ) {
   include logstash

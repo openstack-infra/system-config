@@ -182,7 +182,8 @@ node 'puppet-dashboard.openstack.org' {
 
 node 'logstash.openstack.org' {
   class { 'openstack_project::logstash':
-    sysadmins => hiera('sysadmins'),
+    redis_password => hiera('logstash_redis_password'),
+    sysadmins      => hiera('sysadmins'),
   }
 }
 

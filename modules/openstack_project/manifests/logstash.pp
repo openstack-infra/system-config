@@ -15,20 +15,33 @@
 # Logstash indexer server glue class.
 #
 class openstack_project::logstash (
+  $redis_password,
   $sysadmins = []
 ) {
+  # List of rules allowing logstash agents to communicate with redis on
+  # logstash.openstack.org.
+  $ip_rules = [
+    '-m state --state NEW -m tcp -p tcp --dport 6379 -s logstash.openstack.org -j ACCEPT',
+  ]
+
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [22, 80],
+    iptables_rules4           => $ip_rules,
+    iptables_rules6           => $ip_rules,
     sysadmins                 => $sysadmins,
   }
 
   class { 'logstash::agent':
-    conf_template => 'openstack_project/logstash/agent.conf.erb',
+    conf_template  => 'openstack_project/logstash/agent.conf.erb',
+    redis_password => $redis_password,
   }
   class { 'logstash::indexer':
-    conf_template => 'openstack_project/logstash/indexer.conf.erb',
+    conf_template  => 'openstack_project/logstash/indexer.conf.erb',
+    redis_password => $redis_password,
   }
-  include logstash::redis
+  class { 'logstash::redis':
+    redis_password => $redis_password,
+  }
   include logstash::elasticsearch
   include logstash::web
 }

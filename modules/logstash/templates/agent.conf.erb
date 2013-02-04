@@ -5,5 +5,10 @@ input {
 }
 
 output {
-  redis { host => "127.0.0.1" data_type => "list" key => "logstash" }
+  redis {
+    host => "127.0.0.1"
+    data_type => "list"
+    key => "logstash"
+    password => "<%= scope.lookupvar("::logstash::agent::redis_password") %>"
+  }
 }

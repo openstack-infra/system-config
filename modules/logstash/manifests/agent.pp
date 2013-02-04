@@ -16,6 +16,7 @@
 # conf_template accepts path to agent config template.
 #
 class logstash::agent (
+  $redis_password,
   $conf_template = 'logstash/agent.conf.erb'
 ) {
   include logstash

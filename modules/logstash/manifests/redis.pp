@@ -14,7 +14,9 @@
 #
 # Class to install redis.
 #
-class logstash::redis {
+class logstash::redis (
+  $redis_password
+) {
   # TODO(clarkb): Access to redis should be controlled at a network level
   # (with iptables) and with client authentication. Put this in place before
   # opening redis to external clients.
@@ -25,7 +27,7 @@ class logstash::redis {
 
   file { '/etc/redis/redis.conf':
     ensure  => present,
-    source  => 'puppet:///modules/logstash/redis.conf',
+    content => template('logstash/redis.conf.erb'),
     replace => true,
     owner   => 'root',
     group   => 'root',
