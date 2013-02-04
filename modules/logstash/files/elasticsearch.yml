@@ -135,6 +135,10 @@
 # Use the Index Status API (<http://localhost:9200/A/_status>) to inspect
 # the index status.
 
+# Compress stored fields and term vector.
+index.store.compress.stored: true
+index.store.compress.tv: true
+
 
 #################################### Paths ####################################
 
