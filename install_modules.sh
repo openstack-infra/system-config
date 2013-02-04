@@ -24,6 +24,7 @@ MODULES["puppetlabs-apt"]="1.1.0"
 MODULES["puppetlabs-mysql"]="0.5.0"
 MODULES["puppetlabs-postgresql"]="2.0.1"
 MODULES["saz-memcached"]="2.0.2"
+MODULES["saz-gearman"]="2.0.1"
 
 MODULE_LIST=`puppet module list`
 
