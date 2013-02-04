@@ -1,0 +1,10 @@
+<VirtualHost <%= name %>:80>
+  ServerAdmin <%= serveradmin %>
+  DocumentRoot <%= httproot %>
+
+  ErrorLog ${APACHE_LOG_DIR}/<%= name %>-error.log
+
+  LogLevel warn
+
+  CustomLog ${APACHE_LOG_DIR}/<%= name %>-access.log combined
+</VirtualHost>
