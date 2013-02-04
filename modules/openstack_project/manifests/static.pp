@@ -127,4 +127,15 @@ class openstack_project::static (
     command     => 'sleep $((RANDOM\%600)) && flock -n /var/run/gziplogs.lock find /srv/static/logs/ -type f -not -name robots.txt \( -name \*.txt -or -name \*.html \) -exec gzip \{\} \;',
     environment => 'PATH=/var/lib/gems/1.8/bin:/usr/bin:/bin:/usr/sbin:/sbin',
   }
+
+  include ::reviewday
+
+  reviewday::site { 'reviewday.openstack.org':
+    git_url     => 'https://github.com/openstack-infra/reviewday.git',
+    serveradmin => 'webmaster@openstack.org',
+    httproot    => "/srv/static/${name}",
+    gerrit_url  => 'review.openstack.org',
+    gerrit_port => '29418',
+    gerrit_user => 'reviewday',
+  }
 }
