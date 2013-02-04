@@ -1,0 +1,10 @@
+<VirtualHost <%= scope.lookupvar("::reviewday::vhost_name") %>:80>
+  ServerAdmin <%= scope.lookupvar("::reviewday::serveradmin") %>
+  DocumentRoot /srv/static/reviewday
+
+  ErrorLog ${APACHE_LOG_DIR}/<%= scope.lookupvar("::reviewday::vhost_name") %>-error.log
+
+  LogLevel warn
+
+  CustomLog ${APACHE_LOG_DIR}/<%= scope.lookupvar("::reviewday::vhost_name") %>-access.log combined
+</VirtualHost>
