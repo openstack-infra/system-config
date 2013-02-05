@@ -1123,9 +1123,15 @@ projects:
 
   - name: stackforge/diskimage-builder
     check:
-      - gate-noop
+      - gate-diskimage-builder-pep8
+      - gate-diskimage-builder-python26
+      - gate-diskimage-builder-python27
     gate:
-      - gate-noop
+      - gate-diskimage-builder-pep8
+      - gate-diskimage-builder-python26
+      - gate-diskimage-builder-python27
+    post:
+      - diskimage-builder-coverage
 
   - name: stackforge/kwapi
     check:
