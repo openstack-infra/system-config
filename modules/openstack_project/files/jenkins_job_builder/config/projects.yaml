@@ -602,3 +602,11 @@
     provider: hpcloud-az2
     jobs:
       - devstack-node-provider-jobs
+
+- project:
+    name: diskimage-builder
+    github-org: stackforge
+    node: quantal
+
+    jobs:
+      - python-jobs
