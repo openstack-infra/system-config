@@ -186,6 +186,13 @@ node 'logstash.openstack.org' {
   }
 }
 
+# A machine to run ODSREG in preparation for summits.
+node 'summit.openstack.org' {
+  class { 'openstack_project::server':
+    sysadmins => hiera('sysadmins'),
+  }
+}
+
 # A machine to serve static content.
 node 'static.openstack.org' {
   class { 'openstack_project::static':
