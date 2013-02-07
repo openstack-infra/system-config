@@ -188,7 +188,7 @@ node 'logstash.openstack.org' {
 
 # A machine to run ODSREG in preparation for summits.
 node 'summit.openstack.org' {
-  class { 'openstack_project::server':
+  class { 'openstack_project::summit':
     sysadmins => hiera('sysadmins'),
   }
 }

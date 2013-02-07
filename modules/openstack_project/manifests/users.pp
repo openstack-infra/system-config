@@ -45,4 +45,9 @@ class openstack_project::users {
     realname => 'Jeremy Stanley',
     sshkeys  => "ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAzKUUBTKJf6CGyz96JbmVSOSzf6LgXRmbyvSkSnD8EnBPFugWF5h/pPmLTVRfUzuR8p1CAR8ziNv0kJZexHvRbp0n06HWERWdK9AXr4utlJr9oc3b50Mmd5GHQp2QLd2sQrMx8G0pimPVoKPTVNvrlwrY1hjHldugX9IqD2QWIYsQEnqXHiVrCCiIcJFe/Gr/Qmz9nWTXN0fEQ7wsmrHAQtAs7YHJ/fNuS4JOtBTXS5trs9tcIBtPFyB2OeyOq85Wvg/IyHBv9Va2Zjccmu8+cedOsrz0YtOSb++uFAyeAe8BFEKD0EmHwhXVrG9UTWdNgQgL+YzdPPifjEbEh3HQoQ== fungi@yuggoth.org\n",
   }
+
+  @user::virtual::localuser { 'ttx':
+    realname => 'Thierry Carrez',
+    sshkeys  => "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDIF2INBeJdT3nT3+3yac+DGRQVN7wPv/GTb/OPDocQhfGMeQP7JwSURiv1nrXGbbjzuip7l7vRJs4u4NqXkUi0GFj1aLBpUm2Z1NFFDn4cuZ5KCYX6rjVrDYIpj4OlOyzt9YGONvvH/dB2GHw8kYbN50OalFWQCS0TVzj9SQbO47B/TPdtLnh116yEP5AXZZUGgl+q533/x8+nxAxJKA9iAk3mSswl67gXc4pRo84pjwpx+R/52ha6RfmLkoNAEOqtr5MGx5gyW+WXsoLJBl2bjcfzYoQI7gPWRIn+rtCnDFi762TS54zstXxR1ww+ppmqHk04l2oprNoI0wr00Fsl ttx@stardust\n",
+  }
 }
