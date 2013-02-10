@@ -466,8 +466,12 @@ projects:
       - gate-oslo-config-python26
       - gate-oslo-config-python27
     post:
+      - oslo-config-branch-tarball
       - oslo-config-docs
+    pre-release:
+      - oslo-config-tarball
     release:
+      - oslo-config-tarball
       - oslo-config-docs
 
   - name: openstack/quantum
