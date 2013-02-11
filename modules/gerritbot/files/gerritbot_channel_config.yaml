@@ -50,6 +50,17 @@ openstack-dev:
     branches:
       - master
 
+openstack-doc:
+    events:
+      - patchset-created
+      - change-merged
+      - x-vrif-minus-2
+    projects:
+      - openstack/openstack-manuals
+      - openstack/api-site
+    branches:
+      - master
+
 stackforge-dev:
     events:
       - patchset-created
