@@ -604,6 +604,12 @@
       - devstack-node-provider-jobs
 
 - project:
+    name: devstack-node-provider-hpcloud-az3
+    provider: hpcloud-az3
+    jobs:
+      - devstack-node-provider-jobs
+
+- project:
     name: diskimage-builder
     github-org: stackforge
     node: quantal
