@@ -91,6 +91,12 @@ node 'community.openstack.org' {
   }
 }
 
+node 'ask.openstack.org' {
+  class { 'openstack_project::ask':
+    sysadmins => hiera('sysadmins'),
+  }
+}
+
 node 'ci-puppetmaster.openstack.org' {
   class { 'openstack_project::puppetmaster':
     sysadmins => hiera('sysadmins'),
