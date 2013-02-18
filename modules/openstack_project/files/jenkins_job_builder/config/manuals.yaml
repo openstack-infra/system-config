@@ -28,6 +28,20 @@
               copy-after-failure: true
 
 - job:
+    name: gate-openstack-manuals-validate
+    node: precise
+
+    triggers:
+      - zuul
+
+    builders:
+      - gerrit-git-prep
+      - shell: "./tools/validate.py"
+
+    publishers:
+      - console-log
+
+- job:
     name: openstack-cli-guide
     project-type: maven
     node: precise
