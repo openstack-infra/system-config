@@ -88,6 +88,21 @@ class jenkins::slave(
       ensure => present,
     }
 
+    if $::operatingsystemrelease >= '12.04' {
+
+      apt::source { 'ubuntu-cloud-archive':
+        location => 'http://ubuntu-cloud.archive.canonical.com/ubuntu',
+        release  => "${::lsbdistcodename}-updates/grizzly",
+        repos    => 'main',
+        require  => Package['ubuntu-cloud-keyring'],
+      }
+
+      package { 'ubuntu-cloud-keyring':
+        ensure => present,
+      }
+
+    }
+
   }
 
   if ($bare == false) {
