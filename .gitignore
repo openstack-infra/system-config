@@ -6,5 +6,5 @@ applytest
 doc/build/
 manifests/secrets.pp
 .tox/
-openstack_ci_puppet.egg-info/
-
+.test/
+openstack_infra_config.egg-info/
