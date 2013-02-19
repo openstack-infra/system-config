@@ -235,6 +235,11 @@ node /^ci-backup-.*\.openstack\.org$/ {
 # Jenkins slaves:
 #
 
+node 'devstack-launch.slave.openstack.org' {
+  class { 'openstack_project::devstack_launch_slave':
+  }
+}
+
 node 'tx.slave.openstack.org' {
   class { 'openstack_project::translation_slave':
     transifex_username => 'openstackjenkins',
