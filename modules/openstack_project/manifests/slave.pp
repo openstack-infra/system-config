@@ -1,6 +1,7 @@
 # == Class: openstack_project::slave
 #
 class openstack_project::slave (
+  $bare = false,
   $certname = $::fqdn,
   $sysadmins = []
 ) {
@@ -13,6 +14,7 @@ class openstack_project::slave (
     sysadmins                 => $sysadmins,
   }
   class { 'jenkins::slave':
+    bare    => $bare,
     ssh_key => $openstack_project::jenkins_ssh_key,
   }
   class { 'salt':
