@@ -175,15 +175,24 @@ class jenkins::slave(
       ],
     }
 
-    mysql::db { 'openstack_baremetal_citest':
-      user     => 'openstack_citest',
-      password => 'openstack_citest',
-      host     => 'localhost',
-      grant    => ['all'],
+    # mysql::db is too dumb to realize that the same user can have
+    # access to multiple databases and will fail if you try creating
+    # a second DB with the same user. Create the DB directly as mysql::db
+    # above is creating the user for us.
+    database { 'openstack_baremetal_citest':
+      ensure   => present,
+      charset  => 'utf8',
+      provider => 'mysql',
       require  => [
         Class['mysql::server'],
         Class['mysql::server::account_security'],
       ],
+    }
+
+    database_grant { 'openstack_citest@localhost/openstack_baremetal_citest':
+      privileges => ['all'],
+      provider   => 'mysql',
+      require    => Database_user['openstack_citest@localhost'],
     }
 
     $no_postgresql_version = 'Unsupported OS!  Please check `postgres_default_version` fact.'
