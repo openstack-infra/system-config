@@ -1,6 +1,12 @@
 - job-template:
     name: '{name}-coverage'
 
+    wrappers:
+      - timeout:
+          timeout: 40
+          fail: true
+      - timestamps
+
     triggers:
       - zuul-post
 
@@ -51,6 +57,12 @@
 
 - job-template:
     name: 'gate-{name}-python26'
+
+    wrappers:
+      - timeout:
+          timeout: 40
+          fail: true
+      - timestamps
 
     triggers:
       - zuul
@@ -112,6 +124,12 @@
 
 - job-template:
     name: 'gate-{name}-python27'
+
+    wrappers:
+      - timeout:
+          timeout: 40
+          fail: true
+      - timestamps
 
     parameters:
       - label:
