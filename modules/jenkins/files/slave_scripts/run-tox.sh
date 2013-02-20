@@ -90,4 +90,20 @@ else
     echo
 fi
 
+if [ -d ".testrepository" ]
+then
+    source .tox/$venv/bin/activate
+    foundcount=$(testr list-tests | sed -e '1d' | wc -l)
+    rancount=$(testr last | sed -ne 's/Ran \([0-9]\+\) .* tests in .*/\1/p')
+    if [ "$foundcount" -ne "$rancount" ]
+    then
+        echo
+        echo "The number of tests found did not match the number of tests"
+        echo "that were run. This indicates a fatal error occured while"
+        echo "running the tests."
+        echo
+        exit 1
+    fi
+fi
+
 exit $result
