@@ -175,6 +175,17 @@ class jenkins::slave(
       ],
     }
 
+    mysql::db { 'openstack_baremetal_citest':
+      user     => 'openstack_citest',
+      password => 'openstack_citest',
+      host     => 'localhost',
+      grant    => ['all'],
+      require  => [
+        Class['mysql::server'],
+        Class['mysql::server::account_security'],
+      ],
+    }
+
     $no_postgresql_version = 'Unsupported OS!  Please check `postgres_default_version` fact.'
     if $::postgres_default_version == $no_postgresql_version {
       # Have a default postgres version if the postgresql module can't decide
