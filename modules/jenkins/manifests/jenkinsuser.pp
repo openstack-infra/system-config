@@ -52,7 +52,11 @@ class jenkins::jenkinsuser(
   }
 
   file { '/home/jenkins/.pydistutils.cfg':
-    ensure  => absent,
+    ensure  => present,
+    owner   => 'jenkins',
+    group   => 'jenkins',
+    mode    => '0640',
+    source  => 'puppet:///modules/jenkins/pydistutils.cfg',
     require => File['/home/jenkins'],
   }
 
