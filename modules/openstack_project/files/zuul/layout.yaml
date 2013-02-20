@@ -885,7 +885,7 @@ projects:
       - gate-heat-python26
       - gate-heat-python27
     post:
-      - heat-tarball
+      - heat-branch-tarball
       - heat-coverage
       - heat-docs
     pre-release:
