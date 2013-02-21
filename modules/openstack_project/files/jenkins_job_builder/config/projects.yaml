@@ -433,6 +433,7 @@
 
     jobs:
       - python-jobs
+      - pypi-jobs
 
 
 - project:

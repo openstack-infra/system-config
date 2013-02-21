@@ -943,6 +943,11 @@ projects:
       - gate-python-reddwarfclient-pep8
       - gate-python-reddwarfclient-python26
       - gate-python-reddwarfclient-python27
+    pre-release:
+      - python-reddwarfclient-tarball
+    release:
+      - python-reddwarfclient-tarball:
+        - python-reddwarfclient-pypi-upload
 
   - name: stackforge/marconi
     check:
