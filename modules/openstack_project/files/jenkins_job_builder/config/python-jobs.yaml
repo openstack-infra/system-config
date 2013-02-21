@@ -81,7 +81,7 @@
               keep-hierarchy: false
               copy-after-failure: true
             - target: 'logs/$ZUUL_CHANGE/$ZUUL_PATCHSET/$ZUUL_PIPELINE/$JOB_NAME/$BUILD_NUMBER'
-              source: '**/*testr_results.html'
+              source: '**/*testr_results.html.gz'
               keep-hierarchy: false
               copy-after-failure: true
             - target: 'logs/$ZUUL_CHANGE/$ZUUL_PATCHSET/$ZUUL_PIPELINE/$JOB_NAME/$BUILD_NUMBER'
@@ -89,7 +89,7 @@
               keep-hierarchy: false
               copy-after-failure: true
             - target: 'logs/$ZUUL_CHANGE/$ZUUL_PATCHSET/$ZUUL_PIPELINE/$JOB_NAME/$BUILD_NUMBER'
-              source: '**/*subunit_log.txt'
+              source: '**/*subunit_log.txt.gz'
               keep-hierarchy: false
               copy-after-failure: true
       - console-log
@@ -154,7 +154,7 @@
               keep-hierarchy: false
               copy-after-failure: true
             - target: 'logs/$ZUUL_CHANGE/$ZUUL_PATCHSET/$ZUUL_PIPELINE/$JOB_NAME/$BUILD_NUMBER'
-              source: '**/*testr_results.html'
+              source: '**/*testr_results.html.gz'
               keep-hierarchy: false
               copy-after-failure: true
             - target: 'logs/$ZUUL_CHANGE/$ZUUL_PATCHSET/$ZUUL_PIPELINE/$JOB_NAME/$BUILD_NUMBER'
@@ -162,7 +162,7 @@
               keep-hierarchy: false
               copy-after-failure: true
             - target: 'logs/$ZUUL_CHANGE/$ZUUL_PATCHSET/$ZUUL_PIPELINE/$JOB_NAME/$BUILD_NUMBER'
-              source: '**/*subunit_log.txt'
+              source: '**/*subunit_log.txt.gz'
               keep-hierarchy: false
               copy-after-failure: true
       - console-log
