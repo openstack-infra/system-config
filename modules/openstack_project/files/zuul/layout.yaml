@@ -925,6 +925,8 @@ projects:
       - gate-reddwarf-pep8
       - gate-reddwarf-python26
       - gate-reddwarf-python27
+    post:
+      - reddwarf-coverage
 
   - name: stackforge/reddwarf-integration
     check:
