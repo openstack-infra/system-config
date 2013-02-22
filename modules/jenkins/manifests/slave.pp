@@ -292,23 +292,9 @@ class jenkins::slave(
       refreshonly => true,
       command     => '/sbin/sysctl -p /etc/sysctl.d/10-ptrace.conf',
     }
-
   }
 
-  # Increase syslog message size in order to capture
-  # python tracebacks with syslog.
   file { '/etc/rsyslog.d/99-maxsize.conf':
-    ensure  => present,
-    # Note MaxMessageSize is not a puppet variable.
-    content => '$MaxMessageSize 64k',
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0644',
-  }
-
-  service { 'rsyslog':
-    ensure    => running,
-    enable    => true,
-    subscribe => File['/etc/rsyslog.d/99-maxsize.conf'],
+    ensure => absent,
   }
 }
