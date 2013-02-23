@@ -107,6 +107,24 @@ jobs:
     branch: ^(?!stable/(diablo|essex)).*$
   - name: gate-openstack-manuals-validate
     voting: false
+  - name: gate-openstack-basic-install
+    success-pattern: http://docs-draft.openstack.org/{job.name}/{pipeline.name}/{build.number}/basic-install
+    branch: ^(?!stable/(diablo|essex)).*$
+  - name: gate-openstack-compute-admin
+    success-pattern: http://docs-draft.openstack.org/{job.name}/{pipeline.name}/{build.number}/openstack-compute-admin
+    branch: ^(?!stable/(diablo|essex)).*$
+  - name: gate-openstack-install
+    success-pattern: http://docs-draft.openstack.org/{job.name}/{pipeline.name}/{build.number}/openstack-install
+    branch: ^(?!stable/(diablo|essex)).*$
+  - name: gate-openstack-network-connectivity-admin
+    success-pattern: http://docs-draft.openstack.org/{job.name}/{pipeline.name}/{build.number}/openstack-network-connectivity-admin
+    branch: ^(?!stable/(diablo|essex)).*$
+  - name: gate-openstack-object-storage-admin
+    success-pattern: http://docs-draft.openstack.org/{job.name}/{pipeline.name}/{build.number}/openstack-object-storage-admin
+    branch: ^(?!stable/(diablo|essex)).*$
+  - name: gate-openstack-ops
+    success-pattern: http://docs-draft.openstack.org/{job.name}/{pipeline.name}/{build.number}/openstack-ops
+    branch: ^(?!stable/(diablo|essex)).*$
 
 
 projects:
@@ -1017,9 +1035,22 @@ projects:
     check:
       - gate-openstack-cli-guide
       - gate-openstack-manuals-validate
+      - gate-openstack-basic-install
+      - gate-openstack-compute-admin
+      - gate-openstack-install
+      - gate-openstack-network-connectivity-admin
+      - gate-openstack-object-storage-admin
+      - gate-openstack-ops
     gate:
       - gate-openstack-cli-guide
       - gate-openstack-manuals-validate
+      - gate-openstack-cli-guide
+      - gate-openstack-basic-install
+      - gate-openstack-compute-admin
+      - gate-openstack-install
+      - gate-openstack-network-connectivity-admin
+      - gate-openstack-object-storage-admin
+      - gate-openstack-ops
     post:
       - openstack-admin-manual-compute
       - openstack-admin-manual-keystone-diablo

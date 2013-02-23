@@ -1,4 +1,37 @@
 - job:
+    name: gate-openstack-basic-install
+    project-type: maven
+    node: precise
+
+    triggers:
+      - zuul
+
+    properties:
+      - inject:
+          script-file: /usr/local/jenkins/slave_scripts/docbook-properties.sh
+          properties-file: gerrit-doc.properties
+
+    prebuilders:
+      - gerrit-git-prep
+
+    maven:
+      maven-name: Maven3
+      root-module:
+        group-id: org.openstack.docs
+        artifact-id: openstack-guide
+      root-pom: doc/src/docbkx/basic-install/pom.xml
+      goals: 'clean generate-sources'
+
+    publishers:
+      - console-log
+      - scp:
+          site: 'static.openstack.org'
+          files:
+            - target: 'docs-draft/$JOB_NAME/$ZUUL_PIPELINE/$BUILD_NUMBER/basic-install'
+              source: 'doc/src/docbkx/basic-install/target/docbkx/webhelp/$DOC_RELEASE_PATH/basic-install/**'
+              keep-hierarchy: true
+              copy-after-failure: true
+- job:
     name: gate-openstack-cli-guide
     project-type: maven
     node: precise
@@ -69,6 +102,172 @@
           remove-prefix: 'doc/src/docbkx/cli-guide/target/docbkx/webhelp/cli-guide/'
           excludes: '**/*.xml,**/null*'
 
+- job:
+    name: gate-openstack-compute-admin
+    project-type: maven
+    node: precise
+
+    triggers:
+      - zuul
+
+    properties:
+      - inject:
+          script-file: /usr/local/jenkins/slave_scripts/docbook-properties.sh
+          properties-file: gerrit-doc.properties
+
+    prebuilders:
+      - gerrit-git-prep
+
+    maven:
+      maven-name: Maven3
+      root-module:
+        group-id: org.openstack.docs
+        artifact-id: openstack-guide
+      root-pom: doc/src/docbkx/openstack-compute-admin/pom.xml
+      goals: 'clean generate-sources'
+
+    publishers:
+      - console-log
+      - scp:
+          site: 'static.openstack.org'
+          files:
+            - target: 'docs-draft/$JOB_NAME/$ZUUL_PIPELINE/$BUILD_NUMBER/openstack-compute-admin'
+              source: 'doc/src/docbkx/openstack-compute-admin/target/docbkx/webhelp/local/openstack-compute/admin/**'
+              keep-hierarchy: true
+              copy-after-failure: true
+#this is the latest target path from testing Maven 1.7.1
+- job:
+    name: gate-openstack-install
+    project-type: maven
+    node: precise
+
+    triggers:
+      - zuul
+
+    properties:
+      - inject:
+          script-file: /usr/local/jenkins/slave_scripts/docbook-properties.sh
+          properties-file: gerrit-doc.properties
+
+    prebuilders:
+      - gerrit-git-prep
+
+    maven:
+      maven-name: Maven3
+      root-module:
+        group-id: org.openstack.docs
+        artifact-id: openstack-guide
+      root-pom: doc/src/docbkx/openstack-install/pom.xml
+      goals: 'clean generate-sources'
+
+    publishers:
+      - console-log
+      - scp:
+          site: 'static.openstack.org'
+          files:
+            - target: 'docs-draft/$JOB_NAME/$ZUUL_PIPELINE/$BUILD_NUMBER/openstack-install'
+              source: 'doc/src/docbkx/openstack-install/target/docbkx/webhelp/local/openstack-compute/install/apt/**'
+              keep-hierarchy: true
+              copy-after-failure: true
+- job:
+    name: gate-openstack-network-connectivity-admin
+    project-type: maven
+    node: precise
+
+    triggers:
+      - zuul
+
+    properties:
+      - inject:
+          script-file: /usr/local/jenkins/slave_scripts/docbook-properties.sh
+          properties-file: gerrit-doc.properties
+
+    prebuilders:
+      - gerrit-git-prep
+
+    maven:
+      maven-name: Maven3
+      root-module:
+        group-id: org.openstack.docs
+        artifact-id: openstack-guide
+      root-pom: doc/src/docbkx/openstack-network-connectivity-admin/pom.xml
+      goals: 'clean generate-sources'
+
+    publishers:
+      - console-log
+      - scp:
+          site: 'static.openstack.org'
+          files:
+            - target: 'docs-draft/$JOB_NAME/$ZUUL_PIPELINE/$BUILD_NUMBER/openstack-network-connectivity-admin'
+              source: 'doc/src/docbkx/openstack-network-connectivity-admin/target/docbkx/webhelp/local/openstack-network/admin/**'
+              keep-hierarchy: true
+              copy-after-failure: true
+- job:
+    name: gate-openstack-object-storage-admin
+    project-type: maven
+    node: precise
+
+    triggers:
+      - zuul
+
+    properties:
+      - inject:
+          script-file: /usr/local/jenkins/slave_scripts/docbook-properties.sh
+          properties-file: gerrit-doc.properties
+
+    prebuilders:
+      - gerrit-git-prep
+
+    maven:
+      maven-name: Maven3
+      root-module:
+        group-id: org.openstack.docs
+        artifact-id: openstack-guide
+      root-pom: doc/src/docbkx/openstack-object-storage-admin/pom.xml
+      goals: 'clean generate-sources'
+
+    publishers:
+      - console-log
+      - scp:
+          site: 'static.openstack.org'
+          files:
+            - target: 'docs-draft/$JOB_NAME/$ZUUL_PIPELINE/$BUILD_NUMBER/openstack-object-storage-admin'
+              source: 'doc/src/docbkx/penstack-object-storage-admin/target/docbkx/webhelp/unknown/openstack-object-storage/admin/**'
+              keep-hierarchy: true
+              copy-after-failure: true
+- job:
+    name: gate-openstack-ops
+    project-type: maven
+    node: precise
+
+    triggers:
+      - zuul
+
+    properties:
+      - inject:
+          script-file: /usr/local/jenkins/slave_scripts/docbook-properties.sh
+          properties-file: gerrit-doc.properties
+
+    prebuilders:
+      - gerrit-git-prep
+
+    maven:
+      maven-name: Maven3
+      root-module:
+        group-id: org.openstack.docs
+        artifact-id: openstack-guide
+      root-pom: doc/src/docbkx/openstack-ops/pom.xml
+      goals: 'clean generate-sources'
+
+    publishers:
+      - console-log
+      - scp:
+          site: 'static.openstack.org'
+          files:
+            - target: 'docs-draft/$JOB_NAME/$ZUUL_PIPELINE/$BUILD_NUMBER/openstack-ops'
+              source: 'doc/src/docbkx/openstack-ops/target/docbkx/webhelp/local/openstack-ops/yum/**'
+              keep-hierarchy: true
+              copy-after-failure: true
 - job:
     name: openstack-basic-install
     project-type: maven
