@@ -22,10 +22,6 @@ fi
 
 venv=py$version
 
-# ensure our auto skipping of database tests is not allowed to happen
-export NOVA_TEST_MYSQL_PRESENT="True"
-export NOVA_TEST_POSTGRESQL_PRESENT="True"
-
 export NOSE_WITH_XUNIT=1
 export NOSE_WITH_HTML_OUTPUT=1
 export NOSE_HTML_OUT_FILE='nose_results.html'
