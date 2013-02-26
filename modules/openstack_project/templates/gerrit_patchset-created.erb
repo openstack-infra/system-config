@@ -3,7 +3,7 @@
 # Use timeout to kill any process running longer than 10 minutes.
 timeout -k 2m 10m /usr/local/bin/update-blueprint patchset-created "$@"
 timeout -k 2m 10m /usr/local/bin/update-bug patchset-created "$@"
-timeout -k 2m 10m /usr/local/bin/notify-impact patchset-created "$@" --impact DocImpact --dest-address 'openstack-docs@lists.openstack.org'
+timeout -k 2m 10m /usr/local/bin/notify-impact patchset-created "$@" --impact DocImpact --dest-address 'openstack-doc-core@lists.launchpad.net'
 timeout -k 2m 10m /usr/local/bin/notify-impact patchset-created "$@" --impact SecurityImpact --dest-address 'openstack-ossg@lists.launchpad.net'
 timeout -k 2m 10m /usr/local/bin/trivial-rebase \
     patchset-created \
