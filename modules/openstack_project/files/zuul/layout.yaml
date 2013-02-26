@@ -1094,7 +1094,7 @@ projects:
     gate:
       - gate-noop
     post:
-      - volume-api
+      - openstack-block-api-doc
 
   - name: openstack/openstack-chef
     check:
