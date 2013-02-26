@@ -127,5 +127,6 @@ heat:
     projects:
       - openstack/heat
       - openstack/python-heatclient
+      - heat-api/heat-cfntools
     branches:
       - master
