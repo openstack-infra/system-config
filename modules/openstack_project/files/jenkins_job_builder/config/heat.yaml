@@ -26,3 +26,18 @@
     publishers:
       - coverage-log
       - console-log
+- job:
+    name: 'dev-heat-cfntools-coverage'
+    node: 'precise'
+
+    triggers:
+      - zuul
+
+    builders:
+      - gerrit-git-prep
+      - coverage
+
+    publishers:
+      - coverage-log
+      - console-log
+

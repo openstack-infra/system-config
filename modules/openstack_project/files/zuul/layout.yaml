@@ -92,6 +92,8 @@ jobs:
     voting: false
   - name: dev-python-heatclient-coverage
     voting: false
+  - name: dev-heat-cfntools-coverage
+    voting: false
   - name: jenkins-job-builder-compare-xml
     voting: false
     failure-message: XML output has changed.
@@ -918,6 +920,26 @@ projects:
       - python-heatclient-tarball:
         - python-heatclient-pypi-upload
       - python-heatclient-docs
+
+  - name: openstack/heat-cfntools
+    check:
+      - gate-heat-cfntools-pep8:
+        - gate-heat-cfntools-python26
+        - gate-heat-cfntools-python27
+        - dev-heat-cfntools-coverage
+    gate:
+      - gate-heat-cfntools-pep8
+      - gate-heat-cfntools-python26
+      - gate-heat-cfntools-python27
+    post:
+      - heat-cfntools-branch-tarball
+      - heat-cfntools-coverage
+    pre-release:
+      - heat-cfntools-tarball
+    release:
+      - heat-cfntools-tarball:
+        - heat-cfntools-pypi-upload
+      - heat-cfntools-docs
 
   - name: stackforge/reddwarf
     check:
