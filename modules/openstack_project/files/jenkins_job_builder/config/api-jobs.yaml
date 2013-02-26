@@ -235,6 +235,35 @@
           excludes: '**/*.xml,**/null*'
       - console-log-post
 
+- job:
+    name: openstack-block-api-doc
+    project-type: maven
+    concurrent: false
+    node: precise && !jclouds
+
+    triggers:
+      - zuul-post
+
+    prebuilders:
+      - gerrit-git-prep
+
+    maven:
+      maven-name: Maven3
+      root-module:
+        group-id: org.openstack.docs
+        artifact-id: openstack-guide
+      root-pom: v2/pom.xml
+      goals: 'clean generate-sources'
+
+    publishers:
+      - console-log-post
+      - ftp:
+          site: docs.openstack.org
+          source: 'v2/target/docbkx/webhelp/api/openstack-block-storage/2.0/**'
+          target: ''
+          remove-prefix: 'v2/target/docbkx/webhelp'
+          excludes: '**/*.xml,**/null*'
+
 # this replaces the old openstack-identity-api-doc job
 - job:
     name: identity-api-v20
