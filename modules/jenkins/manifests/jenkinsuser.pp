@@ -150,4 +150,22 @@ class jenkins::jenkinsuser(
     mode    => '0755',
     require => File['/home/jenkins'],
   }
+
+  file { '/home/jenkins/.m2':
+    ensure  => directory,
+    owner   => 'jenkins',
+    group   => 'jenkins',
+    mode    => '0755',
+    require => File['/home/jenkins'],
+  }
+
+  file { '/home/jenkins/.m2/settings.xml':
+    ensure  => present,
+    owner   => 'jenkins',
+    group   => 'jenkins',
+    mode    => '0644',
+    require => File['/home/jenkins/.m2'],
+    source  => 'puppet:///modules/jenkins/settings.xml',
+  }
+
 }
