@@ -23,8 +23,10 @@ if cat /etc/*release | grep "Red Hat" &> /dev/null; then
 	# NOTE: enable the optional-rpms channel (if not already enabled)
 	# yum-config-manager --enable rhel-6-server-optional-rpms
 
-        # NOTE: we preinstall lsb_release to ensure facter sets lsbdistcodename
-	yum install -y redhat-lsb-core git puppet
+	# NOTE: we preinstall lsb_release to ensure facter sets lsbdistcodename,
+	# unfortunately this means redhat-lsb at least until 6.4:
+	# https://bugzilla.redhat.com/show_bug.cgi?id=835919
+	yum install -y redhat-lsb git puppet
 
 else #defaults to Ubuntu
 
