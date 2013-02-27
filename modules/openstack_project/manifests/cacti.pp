@@ -57,6 +57,7 @@ class openstack_project::cacti (
   $cacti_hosts = [
     # community is currently not running puppet.
     #'community.openstack.org',
+    'ci-puppetmaster.openstack.org',
     'eavesdrop.openstack.org',
     'etherpad.openstack.org',
     'jenkins.openstack.org',
@@ -64,12 +65,12 @@ class openstack_project::cacti (
     'lists.openstack.org',
     'paste.openstack.org',
     'planet.openstack.org',
+    'puppet-dashboard.openstack.org',
     'pypi.openstack.org',
     'review.openstack.org',
     'review-dev.openstack.org',
     'static.openstack.org',
-    # wiki.o.o DNS still points at the Moin wiki.
-    #'wiki.openstack.org',
+    'wiki.openstack.org',
   ]
 
   openstack_project::cacti_device { $cacti_hosts: }
