@@ -249,9 +249,7 @@ node 'pypi.slave.openstack.org' {
 }
 
 node /^quantal.*\.slave\.openstack\.org$/ {
-  include jenkins::cgroups
   include openstack_project::puppet_cron
-  include ulimit
   class { 'openstack_project::slave':
     certname  => 'quantal.slave.openstack.org',
     sysadmins => hiera('sysadmins'),
@@ -264,6 +262,8 @@ node /^quantal.*\.slave\.openstack\.org$/ {
     swift_store_key       => hiera('swift_store_key'),
     swift_store_container => hiera('swift_store_container'),
   }
+  include jenkins::cgroups
+  include ulimit
   ulimit::conf { 'limit_jenkins_procs':
     limit_domain => 'jenkins',
     limit_type   => 'hard',
@@ -273,9 +273,7 @@ node /^quantal.*\.slave\.openstack\.org$/ {
 }
 
 node /^precise.*\.slave\.openstack\.org$/ {
-  include jenkins::cgroups
   include openstack_project::puppet_cron
-  include ulimit
   class { 'openstack_project::slave':
     certname  => 'precise.slave.openstack.org',
     sysadmins => hiera('sysadmins'),
@@ -288,6 +286,8 @@ node /^precise.*\.slave\.openstack\.org$/ {
     swift_store_key       => hiera('swift_store_key'),
     swift_store_container => hiera('swift_store_container'),
   }
+  include jenkins::cgroups
+  include ulimit
   ulimit::conf { 'limit_jenkins_procs':
     limit_domain => 'jenkins',
     limit_type   => 'hard',
@@ -310,15 +310,13 @@ node /^oneiric.*\.slave\.openstack\.org$/ {
     swift_store_key       => hiera('swift_store_key'),
     swift_store_container => hiera('swift_store_container'),
   }
-  if $::fqdn == 'oneiric1.slave.openstack.org' {
-    include jenkins::cgroups
-    include ulimit
-    ulimit::conf { 'limit_jenkins_procs':
-      limit_domain => 'jenkins',
-      limit_type   => 'hard',
-      limit_item   => 'nproc',
-      limit_value  => '256'
-    }
+  include jenkins::cgroups
+  include ulimit
+  ulimit::conf { 'limit_jenkins_procs':
+    limit_domain => 'jenkins',
+    limit_type   => 'hard',
+    limit_item   => 'nproc',
+    limit_value  => '256'
   }
 }
 
