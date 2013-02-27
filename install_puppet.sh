@@ -26,7 +26,9 @@ if cat /etc/*release | grep "Red Hat" &> /dev/null; then
     yum update -y
     # NOTE: enable the optional-rpms channel (if not already enabled)
     # yum-config-manager --enable rhel-6-server-optional-rpms
-    yum install -y git puppet-2.7.20-1.el6.noarch
+
+    # NOTE: we preinstall lsb_release to ensure factor sets lsbdistcodename
+    yum install -y redhat-lsb-core git puppet-2.7.20-1.el6.noarch
 else
     #defaults to Ubuntu
     cat > /etc/apt/preferences.d/00-puppet.pref <<EOF
