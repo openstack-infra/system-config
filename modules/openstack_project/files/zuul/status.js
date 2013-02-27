@@ -140,6 +140,12 @@ function update() {
 
         html += '<br style="clear:both"/>';
         $("#pipeline-container").html(html);
+
+        $("#trigger_event_queue_length").html(
+            data['trigger_event_queue']['length']);
+        $("#result_event_queue_length").html(
+            data['result_event_queue']['length']);
+
     });
 }
 
