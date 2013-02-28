@@ -11,7 +11,7 @@ class openstack_project::template (
 ) {
   include ssh
   include snmpd
-  include unattended_upgrades
+  include openstack_project::automatic_upgrades
 
   class { 'iptables':
     public_tcp_ports => $iptables_public_tcp_ports,

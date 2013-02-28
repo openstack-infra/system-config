@@ -6,8 +6,8 @@ class openstack_project::slave (
   $sysadmins = []
 ) {
   include openstack_project
-  include tmpreaper
-  include unattended_upgrades
+  include openstack_project::tmpcleanup
+  include openstack_project::automatic_upgrades
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [],
     certname                  => $certname,
