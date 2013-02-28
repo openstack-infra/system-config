@@ -19,7 +19,7 @@ class openstack_project::template (
     rules6           => $iptables_rules6,
   }
 
-  class { 'ntp::server': }
+  class { 'ntp': }
 
   class { 'openstack_project::base':
     install_users => $install_users,
