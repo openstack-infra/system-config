@@ -46,6 +46,7 @@ openstack-dev:
       - openstack/swift
       - openstack/tempest
       - openstack-dev/devstack
+      - openstack-dev/grenade
       - openstack-infra/devstack-gate
     branches:
       - master

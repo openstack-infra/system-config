@@ -51,6 +51,10 @@
   acl_config: /home/gerrit2/acls/openstack-infra/zuul.config
 - project: openstack-dev/devstack
   acl_config: /home/gerrit2/acls/openstack-dev/devstack.config
+- project: openstack-dev/grenade
+  acl_config: /home/gerrit2/acls/openstack-dev/grenade.config
+  upstream: git://github.com/nebula/grenade
+  description: OpenStack upgrade testing tool
 - project: openstack-dev/openstack-nose
   acl_config: /home/gerrit2/acls/openstack-dev/openstack-nose.config
 - project: openstack-dev/openstack-qa
