@@ -79,6 +79,8 @@ jobs:
     voting: false
   - name: gate-tempest-devstack-vm-postgres-full
     branch: ^(?!stable/(diablo|essex|folsom)).*$
+  - name: gate-grenade-devstack-vm
+    voting: false
   - name: ^.*-python27$
     parameter-function: python27_params
   - name: gate-nova-pylint
@@ -760,6 +762,13 @@ projects:
     gate:
       - gate-noop
 
+  - name: openstack-dev/grenade
+    check:
+      - gate-noop
+      - gate-grenade-devstack-vm
+    gate:
+      - gate-noop
+
   - name: openstack-dev/devstack
     check:
       - gate-tempest-devstack-vm-smoke
@@ -767,6 +776,7 @@ projects:
       - gate-tempest-devstack-vm-cinder
       - gate-tempest-devstack-vm-postgres-full
       - gate-tempest-devstack-vm-quantum
+      - gate-grenade-devstack-vm
     gate:
       - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
@@ -781,6 +791,7 @@ projects:
       - gate-tempest-devstack-vm-cinder
       - gate-tempest-devstack-vm-postgres-full
       - gate-tempest-devstack-vm-quantum
+      - gate-grenade-devstack-vm
     gate:
       - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
