@@ -218,6 +218,7 @@ node 'zuul.openstack.org' {
 # A bare machine, but with a jenkins user
 node /^.*\.template\.openstack\.org$/ {
   include openstack_project::slave_template
+  include unattended_upgrades
 }
 
 # A backup machine.  Don't run cron or puppet agent on it.
@@ -242,6 +243,7 @@ node 'tx.slave.openstack.org' {
 }
 
 node 'pypi.slave.openstack.org' {
+  include unattended_upgrades
   class { 'openstack_project::pypi_slave':
     pypi_username => 'openstackci',
     pypi_password => hiera('pypi_password')
@@ -250,6 +252,7 @@ node 'pypi.slave.openstack.org' {
 
 node /^quantal.*\.slave\.openstack\.org$/ {
   include openstack_project::puppet_cron
+  include unattended_upgrades
   class { 'openstack_project::slave':
     certname  => 'quantal.slave.openstack.org',
     sysadmins => hiera('sysadmins'),
@@ -274,6 +277,7 @@ node /^quantal.*\.slave\.openstack\.org$/ {
 
 node /^precise.*\.slave\.openstack\.org$/ {
   include openstack_project::puppet_cron
+  include unattended_upgrades
   class { 'openstack_project::slave':
     certname  => 'precise.slave.openstack.org',
     sysadmins => hiera('sysadmins'),
@@ -298,6 +302,7 @@ node /^precise.*\.slave\.openstack\.org$/ {
 
 node /^oneiric.*\.slave\.openstack\.org$/ {
   include openstack_project::puppet_cron
+  include unattended_upgrades
   class { 'openstack_project::slave':
     certname  => 'oneiric.slave.openstack.org',
     sysadmins => hiera('sysadmins'),
