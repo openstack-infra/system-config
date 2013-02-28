@@ -6,6 +6,11 @@ node default {
   class { 'openstack_project::server':
     sysadmins => hiera('sysadmins'),
   }
+
+  if ($::operatingsystem == 'Ubuntu') {
+    include unattended_upgrades
+  }
+
 }
 
 #
