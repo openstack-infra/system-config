@@ -1,23 +1,28 @@
 # Class salt::master
 #
 class salt::master {
-  include apt
 
-  # Wrap in ! defined checks to allow minion and master installs on the
-  # same host.
-  if ! defined(Apt::Ppa['ppa:saltstack/salt']) {
-    apt::ppa { 'ppa:saltstack/salt': }
-  }
+  if ($::operatingsystem == 'Ubuntu') {
+    include apt
 
-  if ! defined(Package['python-software-properties']) {
-    package { 'python-software-properties':
-      ensure => present,
+    # Wrap in ! defined checks to allow minion and master installs on the
+    # same host.
+    if ! defined(Apt::Ppa['ppa:saltstack/salt']) {
+      apt::ppa { 'ppa:saltstack/salt': }
     }
+
+    if ! defined(Package['python-software-properties']) {
+      package { 'python-software-properties':
+        ensure => present,
+      }
+    }
+
+    Apt::Ppa['ppa:saltstack/salt'] -> Package['salt-master']
+
   }
 
   package { 'salt-master':
-    ensure  => present,
-    require => Apt::Ppa['ppa:saltstack/salt'],
+    ensure  => present
   }
 
   group { 'salt':
