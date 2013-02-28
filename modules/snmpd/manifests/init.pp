@@ -1,7 +1,11 @@
 # == Class: snmpd
 #
 class snmpd {
+
+  include snmpd::params
+
   package { 'snmpd':
+    name => $::snmpd::params::package_name,
     ensure => present,
   }
   service { 'snmpd':
