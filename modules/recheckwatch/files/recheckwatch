@@ -27,6 +27,8 @@ from launchpadlib.launchpad import Launchpad
 from launchpadlib.uris import LPNET_SERVICE_ROOT
 import daemon
 
+CLOSED_STATUSES = ['Fix Released', 'Invalid', 'Fix Committed']
+
 try:
     import daemon.pidlockfile
     pid_file_module = daemon.pidlockfile
@@ -51,9 +53,22 @@ class Bug(object):
         self.changes = []
         self.last_seen = None
         self.first_seen = None
+        self.update()
+
+    def update(self):
         launchpad = Launchpad.login_anonymously('recheckwatch',
                                                 'production')
-        self.title = launchpad.bugs[number].title
+        lpitem = launchpad.bugs[self.number]
+        self.title = lpitem.title
+        self.status = map(lambda x: x.status,
+                          lpitem.bug_tasks)
+
+    def is_closed(self):
+        closed = True
+        for status in self.status:
+            if status not in CLOSED_STATUSES:
+                closed = False
+        return closed
 
     def addHit(self, hit):
         self.hits.append(hit)
@@ -122,15 +137,24 @@ class Scoreboard(threading.Thread):
             del self.scores[bugno]
 
         def impact(bug):
-            "This ranks more recent bugs higher"
-            age = (bug.last_seen-now).days
+            """Golf rules for bugs, smaller the more urgent."""
+            age = (now - bug.last_seen).days
+
             if not age:
-                age = -1
-            return (len(bug.hits) * (5.0 / age))
+                age = 0.1
+
+            if bug.is_closed():
+                age = age + 5.0
+
+            return age
 
         # Get the bugs reverse sorted by impact
         bugs = self.scores.values()
+        # freshen to get lp bug status
+        for bug in bugs:
+            bug.update()
         bugs.sort(lambda a,b: cmp(impact(a), impact(b)))
+
         loader = TemplateLoader([self.template_dir], auto_reload=True)
         tmpl = loader.load('scoreboard.html')
         out = open(self.output_file, 'w')
