@@ -15,64 +15,65 @@ class iptables(
   $public_tcp_ports = [],
   $public_udp_ports = []
 ) {
-  package { 'iptables-persistent':
+
+  include iptables::params
+
+  package { 'iptables':
     ensure => present,
+    name   => $::iptables::params::package_name,
   }
 
-  service { 'iptables-persistent':
-    require    => Package['iptables-persistent'],
-    # Because there is no running process for this service, the normal status
-    # checks fail.  Because puppet then thinks the service has been manually
-    # stopped, it won't restart it.  This fake status command will trick puppet
-    # into thinking the service is *always* running (which in a way it is, as
-    # iptables is part of the kernel.)
-    hasstatus  => true,
-    status     => true,
-    # Under Debian, the "restart" parameter does not reload the rules, so tell
-    # Puppet to fall back to stop/start, which does work.
-    hasrestart => false,
+  service { 'iptables':
+    name       => $::iptables::params::service_name,
+    require    => Package['iptables'],
+    hasstatus  => $::iptables::params::service_has_status,
+    status     => $::iptables::params::service_status_cmd,
+    hasrestart => $::iptables::params::service_has_restart,
   }
 
-  file { '/etc/iptables':
-    ensure => directory,
+  file { $::iptables::params::rules_dir:
+    ensure     => directory,
+    require    => Package['iptables'],
   }
 
-  file { '/etc/iptables/rules':
+  # This file is not required on Red Hat distros... but it
+  # won't hurt to softlink to it either
+  file { "${::iptables::params::rules_dir}/rules":
     ensure  => present,
     owner   => 'root',
     group   => 'root',
     mode    => '0640',
     content => template('iptables/rules.erb'),
     require => [
-      Package['iptables-persistent'],
-      File['/etc/iptables'],
+      Package['iptables'],
+      File[$::iptables::params::rules_dir],
     ],
     # When this file is updated, make sure the rules get reloaded.
-    notify  => Service['iptables-persistent'],
+    notify  => Service['iptables'],
   }
 
-  file { '/etc/iptables/rules.v4':
+  file { $::iptables::params::ipv4_rules:
     ensure  => link,
     owner   => 'root',
     group   => 'root',
     mode    => '0640',
-    target  => '/etc/iptables/rules',
-    require => File['/etc/iptables/rules'],
-    notify  => Service['iptables-persistent'],
+    target  => "${::iptables::params::rules_dir}/rules",
+    require => File["${::iptables::params::rules_dir}/rules"],
+    notify  => Service['iptables'],
   }
 
-  file { '/etc/iptables/rules.v6':
+  file { $::iptables::params::ipv6_rules:
     ensure  => present,
     owner   => 'root',
     group   => 'root',
     mode    => '0640',
     content => template('iptables/rules.v6.erb'),
     require => [
-      Package['iptables-persistent'],
-      File['/etc/iptables'],
+      Package['iptables'],
+      File[$::iptables::params::rules_dir],
     ],
     # When this file is updated, make sure the rules get reloaded.
-    notify  => Service['iptables-persistent'],
+    notify  => Service['iptables'],
     replace => true,
   }
 }
