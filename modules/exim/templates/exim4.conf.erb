@@ -37,7 +37,8 @@
 #                                                                          #
 ########### IMPORTANT ########## IMPORTANT ########### IMPORTANT ###########
 
-CONFDIR = /etc/exim4
+CONFDIR = <%= scope.lookupvar('exim::params::conf_dir') %>
+
 
 ######################################################################
 #                    MAIN CONFIGURATION SETTINGS                     #
