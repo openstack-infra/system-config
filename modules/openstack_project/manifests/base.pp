@@ -7,6 +7,7 @@ class openstack_project::base(
   if ($::operatingsystem == 'Ubuntu') {
     include apt
   }
+  include openstack_project::params
   include openstack_project::users
   include sudoers
 
@@ -30,14 +31,8 @@ class openstack_project::base(
     }
   }
 
-  $packages = [
-    'puppet',
-    'python-setuptools',
-    'wget',
-  ]
-
-  package { $packages:
-    ensure => present,
+  package { $::openstack_project::params::packages:
+    ensure => present
   }
 
   include pip
@@ -48,8 +43,8 @@ class openstack_project::base(
   }
 
   if ($install_users) {
-    package { ['byobu', 'emacs23-nox']:
-      ensure => present,
+    package { $::openstack_project::params::user_packages:
+      ensure => present
     }
 
     realize (
