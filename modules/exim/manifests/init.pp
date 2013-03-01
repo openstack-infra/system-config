@@ -2,31 +2,29 @@ class exim(
   $mailman_domains = [],
   $sysadmin = []
 ) {
-  package { 'exim4-base':
+
+  include exim::params
+
+  package { $::exim::params::package:
     ensure => present,
   }
 
-  package { 'exim4-config':
-    ensure => present,
+  if ($::operatingsystem == 'Redhat') {
+    service { 'postfix':
+      ensure      => stopped
+    }
   }
 
-  package { 'exim4-daemon-light':
-    ensure  => present,
-    require => [
-      Package[exim4-base],
-      Package[exim4-config]
-    ],
-  }
-
-  service { 'exim4':
+  service { 'exim':
     ensure      => running,
+    name        => $::exim::params::service_name,
     hasrestart  => true,
-    subscribe   => File['/etc/exim4/exim4.conf'],
+    subscribe   => File[$::exim::params::config_file],
   }
 
-  file { '/etc/exim4/exim4.conf':
+  file { $::exim::params::config_file:
     ensure  => present,
-    content => template('exim/exim4.conf.erb'),
+    content => template("${module_name}/exim4.conf.erb"),
     group   => 'root',
     mode    => '0444',
     owner   => 'root',
@@ -35,7 +33,7 @@ class exim(
 
   file { '/etc/aliases':
     ensure  => present,
-    content => template('exim/aliases.erb'),
+    content => template("${module_name}/aliases.erb"),
     group   => 'root',
     mode    => '0444',
     owner   => 'root',
