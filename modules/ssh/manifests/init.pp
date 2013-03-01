@@ -1,10 +1,11 @@
 # == Class: ssh
 #
 class ssh {
-    package { 'openssh-server':
+    include ssh::params
+    package { $::ssh::params::package_name:
       ensure => present,
     }
-    service { 'ssh':
+    service { $::ssh::params::service_name:
       ensure     => running,
       hasrestart => true,
       subscribe  => File['/etc/ssh/sshd_config'],
