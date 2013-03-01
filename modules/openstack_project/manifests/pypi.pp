@@ -3,7 +3,6 @@
 class openstack_project::pypi (
   $sysadmins = []
 ) {
-  include tmpreaper
 
   # include jenkins slave so that build deps are there for the pip download
   class { 'jenkins::slave':

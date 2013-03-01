@@ -6,7 +6,6 @@ class openstack_project::slave (
   $sysadmins = []
 ) {
   include openstack_project
-  include tmpreaper
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [],
     certname                  => $certname,

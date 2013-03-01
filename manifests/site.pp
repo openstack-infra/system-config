@@ -231,11 +231,13 @@ node /^ci-backup-.*\.openstack\.org$/ {
 #
 
 node 'devstack-launch.slave.openstack.org' {
+  include tmpreaper
   class { 'openstack_project::devstack_launch_slave':
   }
 }
 
 node 'tx.slave.openstack.org' {
+  include tmpreaper
   class { 'openstack_project::translation_slave':
     transifex_username => 'openstackjenkins',
     transifex_password => hiera('transifex_password')
@@ -244,6 +246,7 @@ node 'tx.slave.openstack.org' {
 
 node 'pypi.slave.openstack.org' {
   include unattended_upgrades
+  include tmpreaper
   class { 'openstack_project::pypi_slave':
     pypi_username => 'openstackci',
     pypi_password => hiera('pypi_password')
@@ -253,6 +256,7 @@ node 'pypi.slave.openstack.org' {
 node /^quantal.*\.slave\.openstack\.org$/ {
   include openstack_project::puppet_cron
   include unattended_upgrades
+  include tmpreaper
   class { 'openstack_project::slave':
     certname  => 'quantal.slave.openstack.org',
     sysadmins => hiera('sysadmins'),
@@ -278,6 +282,7 @@ node /^quantal.*\.slave\.openstack\.org$/ {
 node /^precise.*\.slave\.openstack\.org$/ {
   include openstack_project::puppet_cron
   include unattended_upgrades
+  include tmpreaper
   class { 'openstack_project::slave':
     certname  => 'precise.slave.openstack.org',
     sysadmins => hiera('sysadmins'),
@@ -303,6 +308,7 @@ node /^precise.*\.slave\.openstack\.org$/ {
 node /^oneiric.*\.slave\.openstack\.org$/ {
   include openstack_project::puppet_cron
   include unattended_upgrades
+  include tmpreaper
   class { 'openstack_project::slave':
     certname  => 'oneiric.slave.openstack.org',
     sysadmins => hiera('sysadmins'),
