@@ -149,25 +149,28 @@ class Scoreboard(threading.Thread):
             except:
                 traceback.print_exc()
 
-def _main():
+def _main(daemonize=True):
     config = ConfigParser.ConfigParser()
     config.read(sys.argv[1])
 
     s = Scoreboard(config)
-    s.start()
+    if daemonize:
+        s.start()
 
 def main():
     if len(sys.argv) < 2:
         print "Usage: %s CONFIGFILE" % sys.argv[0]
         sys.exit(1)
 
-    if '-d' not in sys.argv:
+    if '-n' in sys.argv:
+        _main(daemonize=False)
+    elif '-d' in sys.argv:
+        _main()
+    else:
         pid = pid_file_module.TimeoutPIDLockFile(
             "/var/run/recheckwatch/recheckwatch.pid", 10)
         with daemon.DaemonContext(pidfile=pid):
             _main()
-    else:
-        _main()
 
 if __name__ == "__main__":
     main()
