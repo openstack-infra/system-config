@@ -3,26 +3,34 @@
       lang="en">
   <HEAD>
     <TITLE></TITLE>
-    
+
     <!-- Google Fonts -->
     <link href='http://fonts.googleapis.com/css?family=PT+Sans&amp;subset=latin' rel='stylesheet' type='text/css'/>
-    
+
     <!-- Framework CSS -->
     <link rel="stylesheet" href="http://openstack.org/themes/openstack/css/blueprint/screen.css" type="text/css" media="screen, projection"/>
     <link rel="stylesheet" href="http://openstack.org/themes/openstack/css/blueprint/print.css" type="text/css" media="print"/>
-    
+
     <!-- IE CSS -->
     <!--[if lt IE 8]><link rel="stylesheet" href="http://openstack.org/blueprint/ie.css" type="text/css" media="screen, projection"><![endif]-->
-    
+
     <!-- OpenStack Specific CSS -->
-    
+
     <link rel="stylesheet" href="http://openstack.org/themes/openstack/css/dropdown.css" type="text/css" media="screen, projection, print"/>
 
     <!-- Page Specific CSS -->
     <link rel="stylesheet" href="http://openstack.org/themes/openstack/css/home.css" type="text/css" media="screen, projection, print"/>
-	
+
     <link rel="stylesheet" type="text/css" href="http://openstack.org/themes/openstack/css/main.css" />
-  </HEAD>
+    <style type="text/css">
+      h3.subhead {
+          border: none;
+          margin-bottom: 0.2em;
+          padding-top: 1.5em;
+      }
+    </style>
+
+ </HEAD>
 
   <BODY>
     <div class="container">
@@ -31,7 +39,7 @@
 	  <h1 id="logo"><a href="/">Open Stack</a></h1>
 	</div>
 	<div class="span-19 last blueLine">
-	  
+
 	  <div id="navigation" class="span-19">
 	    <ul id="Menu1">
 	      <li><a href="/">Status</a></li>
@@ -49,27 +57,21 @@
 
     <div class="container">
     <h1>Bugs Causing Rechecks</h1>
-    <br/>
     <div py:for="bug in bugs">
       <h3 class="subhead">
 	<a href="https://code.launchpad.net/bugs/${bug['number']}">
 	  Bug ${bug.number}: ${bug.title}</a>
+         <py:if test="bug.is_closed()">(closed)</py:if>
       </h3>
       First seen: ${bug.first_seen.strftime("%Y-%m-%d %H:%M:%S")} UTC<br/>
       Last seen: ${bug.last_seen.strftime("%Y-%m-%d %H:%M:%S")} UTC<br/>
       Rechecks: ${len(bug.hits)}<br/>
-      Affecting projects:
-      <ul>
-	<li py:for="project in bug.projects">
-	  ${project}
-	</li>
-      </ul>
+      Affecting projects: ${', '.join(bug.projects)}<br/>
       Affecting changes:
-      <ul>
-	<li py:for="change in bug.changes">
-	  <a href="https://review.openstack.org/${change}"> ${change} </a>
-	</li>
-      </ul>
+      <span py:for="i, change in enumerate(bug.changes)">
+        <a href="https://review.openstack.org/${change}"
+           >${change}</a><span py:if="i+1 != len(bug.changes)" py:replace="','"/>
+      </span>
     </div>
     </div>
 
@@ -116,4 +118,3 @@
     </div>
   </BODY>
 </html>
-
