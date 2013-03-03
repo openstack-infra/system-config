@@ -158,6 +158,26 @@ class openstack_project::gerrit (
     require => Class['::gerrit'],
   }
 
+  file { '/home/gerrit2/review_site/static/usg-cla.html':
+    ensure  => present,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0444',
+    source  => 'puppet:///modules/openstack_project/gerrit/usg-cla.html',
+    replace => true,
+    require => Class['::gerrit'],
+  }
+
+  file { '/home/gerrit2/review_site/static/system-cla.html':
+    ensure  => present,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0444',
+    source  => 'puppet:///modules/openstack_project/gerrit/system-cla.html',
+    replace => true,
+    require => Class['::gerrit'],
+  }
+
   file { '/home/gerrit2/review_site/static/title.png':
     ensure  => present,
     source  => 'puppet:///modules/openstack_project/openstack.png',
