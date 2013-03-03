@@ -275,7 +275,6 @@ class openstack_project::gerrit (
   exec { 'set_contributor_agreements':
     path    => ['/bin', '/usr/bin'],
     command => '/home/gerrit2/review_site/bin/set_agreements.sh',
-    require => [Class['mysql'],
-                File['/home/gerrit2/review_site/bin/set_agreements.sh']]
+    require => File['/home/gerrit2/review_site/bin/set_agreements.sh']
   }
 }
