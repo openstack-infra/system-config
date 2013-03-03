@@ -11,6 +11,7 @@
   has-downloads: False
 ---
 - project: openstack/heat
+  acl-append: stable-branches.config
 - project: openstack/python-heatclient
 - project: openstack-infra/devstack-gate
 - project: openstack-infra/gerrit
@@ -34,20 +35,27 @@
   description: OpenStack code review report generator
 - project: openstack-infra/zuul
 - project: openstack-dev/devstack
+  acl-append: stable-branches.config
 - project: openstack-dev/openstack-nose
 - project: openstack-dev/openstack-qa
 - project: openstack-dev/sandbox
 - project: openstack/api-site
 - project: openstack/ceilometer
+  acl-append: stable-branches.config
 - project: openstack/cinder
+  acl-append: stable-branches.config
 - project: openstack/compute-api
 - project: openstack/glance
+  acl-append: stable-branches.config
 - project: openstack/horizon
+  acl-append: stable-branches.config
 - project: openstack/identity-api
 - project: openstack/image-api
 - project: openstack/keystone
+  acl-append: stable-branches.config
 - project: openstack/netconn-api
 - project: openstack/nova
+  acl-append: stable-branches.config
 - project: openstack/object-api
 - project: openstack/openstack-chef
 - project: openstack-infra/config
@@ -55,21 +63,40 @@
 - project: openstack/openstack-planet
 - project: openstack/oslo-incubator
   description: "Part of OpenStack's Oslo project. New Oslo APIs go through an incubation phase in this repository before being released as part of a proper Python library."
+  acl-append: stable-branches.config
 - project: openstack/oslo-config
   upstream: git://github.com/markmc/oslo-config.git
+  acl-append: stable-branches.config
 - project: openstack/python-ceilometerclient
+  super-project: ceilometer
   upstream: git://github.com/asalkeld/python-ceilometerclient.git
 - project: openstack/python-cinderclient
+  acl-append: tag-project.config
+  super-project: cinder
 - project: openstack/python-glanceclient
+  acl-append: tag-project.config
+  super-project: glance
 - project: openstack/python-keystoneclient
+  acl-append: tag-project.config
+  super-project: keystone
 - project: openstack/python-novaclient
+  acl-append: tag-project.config
+  super-project: nova
 - project: openstack/python-openstackclient
+  acl-append: tag-project.config
 - project: openstack/python-quantumclient
+  acl-append: tag-project.config
+  super-project: quantum
 - project: openstack/python-swiftclient
+  acl-append: tag-project.config
+  super-project: swift
 - project: openstack/quantum
+  acl-append: stable-branches.config
 - project: openstack/requirements
 - project: openstack/swift
+  acl-append: stable-branches.config
 - project: openstack/tempest
+  acl-append: stable-branches.config
 - project: openstack/volume-api
 - project: stackforge/MRaaS
 - project: stackforge/diskimage-builder
