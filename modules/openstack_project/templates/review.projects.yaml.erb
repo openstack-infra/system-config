@@ -21,7 +21,6 @@
 - project: openstack-infra/gerritbot
 - project: openstack-infra/gerritlib
 - project: openstack-infra/jeepyb
-  upstream: git://github.com/emonty/gerritx.git
   description: Gerrit Project Builder Tools
 - project: openstack-infra/git-review
 - project: openstack-infra/jenkins-job-builder
@@ -32,7 +31,6 @@
 - project: openstack-infra/puppet-dashboard
 - project: openstack-infra/puppet-vcsrepo
 - project: openstack-infra/reviewday
-  upstream: git://github.com/dprince/reviewday.git
   description: OpenStack code review report generator
 - project: openstack-infra/zuul
 - project: openstack-dev/devstack
@@ -66,11 +64,9 @@
   description: "Part of OpenStack's Oslo project. New Oslo APIs go through an incubation phase in this repository before being released as part of a proper Python library."
   acl-append: stable-branches.config
 - project: openstack/oslo-config
-  upstream: git://github.com/markmc/oslo-config.git
   acl-append: stable-branches.config
 - project: openstack/python-ceilometerclient
   super-project: ceilometer
-  upstream: git://github.com/asalkeld/python-ceilometerclient.git
 - project: openstack/python-cinderclient
   acl-append: tag-project.config
   super-project: cinder
@@ -102,10 +98,8 @@
 - project: stackforge/MRaaS
 - project: stackforge/diskimage-builder
   description: "Image building tools for Openstack"
-  upstream: git://github.com/tripleo/baremetal-initrd-builder.git
 - project: stackforge/healthnmon
   description: "Healthnmon aims to deliver 'Cloud Resource Monitor', an extensible service to OpenStack Cloud Operating system by providing monitoring service for Cloud Resources and Infrastructure with a pluggable framework for 'Inventory Management', 'Alerts and notifications' and 'Utilization Data."
-  upstream: git://github.com/healthnmon/healthnmon.git
 - project: stackforge/libra
 - project: stackforge/python-libraclient
 - project: stackforge/marconi
@@ -114,16 +108,12 @@
 - project: stackforge/python-reddwarfclient
 - project: stackforge/reddwarf
 - project: stackforge/reddwarf-integration
-  upstream: git://github.com/hub-cap/reddwarf_lite-integration.git
 - project: stackforge/bufunfa
-  upstream: git://github.com/ekarlso/bufunfa.git
 - project: stackforge/kwapi
   description: Energy Efficiency Monitoring
-  upstream: git://github.com/frossigneux/kwapi.git
 - project: openstack-infra/gearman-plugin
   description: The jenkins gearman plugin
 - project: stackforge/packstack
   description: Install utility to deploy openstack on multiple hosts.
-  upstream: git://github.com/fedora-openstack/packstack.git
 - project: stackforge/database-api
   description: Doc repo for reddwarf project
