@@ -11,10 +11,7 @@ class snmpd {
   service { 'snmpd':
     ensure     => running,
     hasrestart => true,
-    require    => [
-      File['/etc/snmp/snmpd.conf'],
-      File['/etc/init.d/snmpd'],
-    ],
+    require    => File['/etc/snmp/snmpd.conf']
   }
 
   if ($::operatingsystem == 'Ubuntu') {
