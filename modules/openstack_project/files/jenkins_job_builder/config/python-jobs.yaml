@@ -69,7 +69,9 @@
 
     builders:
       - gerrit-git-prep
-      - python26
+      - python26:
+          github-org: '{github-org}'
+          project: '{name}'
       - assert-no-extra-files
 
     publishers:
@@ -105,7 +107,9 @@
 
     builders:
       - gerrit-git-prep
-      - python26-folsom
+      - python26-folsom:
+          github-org: '{github-org}'
+          project: '{name}'
       - assert-no-extra-files
 
     publishers:
@@ -142,7 +146,9 @@
 
     builders:
       - gerrit-git-prep
-      - python27
+      - python27:
+          github-org: '{github-org}'
+          project: '{name}'
       - assert-no-extra-files
 
     publishers:
@@ -183,7 +189,9 @@
 
     builders:
       - gerrit-git-prep
-      - python27-folsom
+      - python27-folsom:
+          github-org: '{github-org}'
+          project: '{name}'
       - assert-no-extra-files
 
     publishers:
