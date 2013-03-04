@@ -5,7 +5,9 @@
       - timed: '0 6 * * *'
 
     builders:
-      - python26
+      - python26:
+          github-org: '{github-org}'
+          project: '{name}'
 
     publishers:
       - scp:
@@ -36,7 +38,9 @@
       - timed: '0 6 * * *'
 
     builders:
-      - python27
+      - python27:
+          github-org: '{github-org}'
+          project: '{name}'
 
     publishers:
       - scp:
