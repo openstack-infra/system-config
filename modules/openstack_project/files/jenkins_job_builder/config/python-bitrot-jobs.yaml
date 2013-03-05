@@ -70,7 +70,9 @@
       - timed: '0 6 * * *'
 
     builders:
-      - docs
+      - docs:
+          github-org: '{github-org}'
+          project: '{name}'
 
     publishers:
       - console-log-periodic

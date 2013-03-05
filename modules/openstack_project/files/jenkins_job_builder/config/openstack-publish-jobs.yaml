@@ -7,7 +7,9 @@
 
     builders:
       - gerrit-git-prep
-      - docs
+      - docs:
+          github-org: '{github-org}'
+          project: '{name}'
 
     publishers:
       - ftp:

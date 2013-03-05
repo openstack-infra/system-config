@@ -1,4 +1,4 @@
-#!/bin/bash -e
+#!/bin/bash -xe
 
 # Copyright 2013 OpenStack Foundation
 #
@@ -23,14 +23,15 @@ then
   echo
   echo "ORG: The project organization (eg 'openstack')"
   echo "PROJECT: The project name (eg 'nova')"
-  #TODO: make fatal in subsequent change: exit 1
-else
-  /usr/local/jenkins/slave_scripts/select-mirror.sh $org $project
+  exit 1
 fi
 
-rm -fr .test
-mkdir .test
-cd .test
-git clone https://review.openstack.org/p/openstack-infra/zuul --depth 1
-cd zuul
-tox -e validate-layout ../../modules/openstack_project/files/zuul/layout.yaml
+/usr/local/jenkins/slave_scripts/select-mirror.sh $org $project
+
+rm -f dist/*.tar.gz
+tox -evenv python setup.py sdist
+
+echo "SHA1sum: "
+sha1sum dist/*
+echo "MD5sum: "
+md5sum dist/*

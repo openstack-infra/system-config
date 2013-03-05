@@ -13,10 +13,16 @@
 # "py27"/"jenkins27" respectively.
 
 version=$1
+org=$2
+project=$3
 
-if [ -z "$version" ]
+if [[ -z "$version" || -z "$org" || -z "$project" ]]
 then
-  echo "The tox environment python version (eg '27') must be the first argument."
+  echo "Usage: $? VERSION ORG PROJECT"
+  echo
+  echo "VERSION: The tox environment python version (eg '27')"
+  echo "ORG: The project organization (eg 'openstack')"
+  echo "PROJECT: The project name (eg 'nova')"
   exit 1
 fi
 
@@ -31,6 +37,8 @@ trap "rm -rf $TMPDIR" EXIT
 /usr/local/jenkins/slave_scripts/jenkins-oom-grep.sh pre
 
 sudo /usr/local/jenkins/slave_scripts/jenkins-sudo-grep.sh pre
+
+/usr/local/jenkins/slave_scripts/select-mirror.sh $org $project
 
 tox -e$venv
 result=$?
