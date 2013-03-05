@@ -13,6 +13,14 @@ class gerrit::cron(
     require => Class['jeepyb'],
   }
 
+  cron { 'openstackwatch':
+    user    => 'gerrit2',
+    hour    => '5',
+    minute  => '27',
+    command => "",
+    require => Class['jeepyb'],
+  }
+
   cron { 'gerrit_repack':
     user        => 'gerrit2',
     weekday     => '0',
