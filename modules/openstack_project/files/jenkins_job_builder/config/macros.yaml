@@ -6,12 +6,12 @@
 - builder:
     name: coverage
     builders:
-      - shell: "/usr/local/jenkins/slave_scripts/run-cover.sh"
+      - shell: "/usr/local/jenkins/slave_scripts/run-cover.sh {github-org} {project}"
 
 - builder:
     name: docs
     builders:
-      - shell: "/usr/local/jenkins/slave_scripts/run-docs.sh"
+      - shell: "/usr/local/jenkins/slave_scripts/run-docs.sh {github-org} {project}"
 
 - builder:
     name: maven-test
@@ -50,17 +50,17 @@
 - builder:
     name: pep8
     builders:
-      - shell: "set -o pipefail ; tox -v -epep8 | tee pep8.txt ; set +o pipefail"
+      - shell: "/usr/local/jenkins/slave_scripts/run-pep8.sh {github-org} {project}"
 
 - builder:
     name: pylint
     builders:
-      - shell: "set -o pipefail ; tox -v -epylint | tee pylint.txt ; set +o pipefail"
+      - shell: "/usr/local/jenkins/slave_scripts/run-pylint.sh {github-org} {project}"
 
 - builder:
     name: pyflakes
     builders:
-      - shell: "tox -v -epyflakes"
+      - shell: "/usr/local/jenkins/slave_scripts/run-pyflakes.sh {github-org} {project}"
 
 - builder:
     name: puppet-syntax
@@ -74,7 +74,7 @@
 - builder:
     name: selenium
     builders:
-      - shell: "/usr/local/jenkins/slave_scripts/run-selenium.sh"
+      - shell: "/usr/local/jenkins/slave_scripts/run-selenium.sh {github-org} {project}"
 
 - builder:
     name: python26
@@ -114,16 +114,7 @@
 - builder:
     name: tarball
     builders:
-      - shell: |
-          #!/bin/bash -xe
-
-          rm -f dist/*.tar.gz
-          tox -evenv python setup.py sdist
-
-          echo "SHA1sum: "
-          sha1sum dist/*
-          echo "MD5sum: "
-          md5sum dist/*
+      - shell: "/usr/local/jenkins/slave_scripts/run-tarball.sh {github-org} {project}"
 
 - builder:
     name: devstack-checkout

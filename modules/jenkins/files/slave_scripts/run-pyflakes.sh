@@ -1,4 +1,4 @@
-#!/bin/bash -e
+#!/bin/bash -x
 
 # Copyright 2013 OpenStack Foundation
 #
@@ -28,9 +28,4 @@ fi
 
 /usr/local/jenkins/slave_scripts/select-mirror.sh $org $project
 
-rm -fr .test
-mkdir .test
-cd .test
-git clone https://review.openstack.org/p/openstack-infra/zuul --depth 1
-cd zuul
-tox -e validate-layout ../../modules/openstack_project/files/zuul/layout.yaml
+tox -v -epyflakes

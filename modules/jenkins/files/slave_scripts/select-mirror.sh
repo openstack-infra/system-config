@@ -1,4 +1,4 @@
-#!/bin/bash -e
+#!/bin/bash -x
 
 # Copyright 2013 OpenStack Foundation
 #
@@ -26,11 +26,26 @@ then
   exit 1
 fi
 
-/usr/local/jenkins/slave_scripts/select-mirror.sh $org $project
+rm -f ~/.pydistutils.cfg
+mkdir -p ~/.pip
+rm -f ~/.pip/pip.conf
 
-rm -fr .test
-mkdir .test
-cd .test
-git clone https://review.openstack.org/p/openstack-infra/zuul --depth 1
-cd zuul
-tox -e validate-layout ../../modules/openstack_project/files/zuul/layout.yaml
+# For OpenStack projects, use the pypi.openstack.org mirror exclusively
+if [ "$org" == "openstack" ]
+then
+echo $org
+    cat <<EOF > ~/.pydistutils.cfg
+[easy_install]
+index_url = http://pypi.openstack.org
+EOF
+    cat <<EOF > ~/.pip/pip.conf
+[global]
+index-url = http://pypi.openstack.org
+EOF
+else
+    cat <<EOF > ~/.pip/pip.conf
+[global]
+index-url = http://pypi.openstack.org
+extra-index-url = http://pypi.python.org/simple
+EOF
+fi

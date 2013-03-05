@@ -16,6 +16,20 @@
 #    License for the specific language governing permissions and limitations
 #    under the License.
 
+org=$1
+project=$2
+
+if [[ -z "$org" || -z "$project" ]]
+then
+  echo "Usage: $0 ORG PROJECT"
+  echo
+  echo "ORG: The project organization (eg 'openstack')"
+  echo "PROJECT: The project name (eg 'nova')"
+  exit 1
+fi
+
+/usr/local/jenkins/slave_scripts/select-mirror.sh $org $project
+
 rm -fr .test
 mkdir .test
 cd .test
