@@ -64,6 +64,10 @@ class openstack_project::gerrit (
     sysadmins                 => $sysadmins,
   }
 
+  class { 'openstackwatch':
+
+  }
+
   class { '::gerrit':
     vhost_name                      => $vhost_name,
     canonicalweburl                 => $canonicalweburl,
