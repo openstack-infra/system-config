@@ -1,0 +1,39 @@
+# -*- Mode: conf -*-
+
+[general]
+# only show certain projects (don't forget the openstack/ as start)
+projects = <%= projects.join(", ") %>
+
+# The Json URL where is the gerrit system.
+json_url = <%= json_url %>
+
+# Allow different mode to output to swift, by default 'combined' will
+# combined all rss in one and 'multiple' will upload all the projects
+# in each rss file.
+mode = <%= mode %>
+
+# username to your swift cluster
+[swift]
+# username/tenant for swift with 2.0 or just username with 1.0 (i.e:
+# RAX).
+# username =
+
+# passowrd or api key
+# password =
+
+# container to upload (probably want to be public)
+container = <%= container %>
+
+# auth_url of the cluster, for Rackspace this is :
+# https://auth.api.rackspacecloud.com/v1.0
+# or Rackspace UK :
+# https://lon.auth.api.rackspacecloud.com/v1.0
+# auth_url = https://lon.auth.api.rackspacecloud.com/v1.0
+
+# auth version (1.0 for Rackspace clouds, 2.0 for keystone backend clusters)
+# auth_version = 1.0
+
+# the object name where to store the combined rss
+uploaded_file = <%= feed %>
+
+# vim: ft=dosini
