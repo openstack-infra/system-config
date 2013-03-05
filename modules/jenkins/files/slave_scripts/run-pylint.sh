@@ -1,4 +1,4 @@
-#!/bin/bash -e
+#!/bin/bash -x
 
 # Copyright 2013 OpenStack Foundation
 #
@@ -23,14 +23,12 @@ then
   echo
   echo "ORG: The project organization (eg 'openstack')"
   echo "PROJECT: The project name (eg 'nova')"
-  #TODO: make fatal in subsequent change: exit 1
-else
-  /usr/local/jenkins/slave_scripts/select-mirror.sh $org $project
+  exit 1
 fi
 
-rm -fr .test
-mkdir .test
-cd .test
-git clone https://review.openstack.org/p/openstack-infra/zuul --depth 1
-cd zuul
-tox -e validate-layout ../../modules/openstack_project/files/zuul/layout.yaml
+/usr/local/jenkins/slave_scripts/select-mirror.sh $org $project
+
+set -o pipefail
+tox -v -epylint | tee pylint.txt
+set +o pipefail
+

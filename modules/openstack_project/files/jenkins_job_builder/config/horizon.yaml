@@ -7,7 +7,9 @@
 
     builders:
       - gerrit-git-prep
-      - selenium
+      - selenium:
+          github-org: openstack
+          project: horizon
 
     publishers:
       - console-log
