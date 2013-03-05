@@ -7,11 +7,14 @@
 
     builders:
       - gerrit-git-prep
-      - coverage
+      - coverage:
+          github-org: openstack
+          project: heat
 
     publishers:
       - coverage-log
       - console-log
+
 - job:
     name: 'dev-python-heatclient-coverage'
     node: 'oneiric'
@@ -21,7 +24,9 @@
 
     builders:
       - gerrit-git-prep
-      - coverage
+      - coverage:
+          github-org: openstack
+          project: python-heatclient
 
     publishers:
       - coverage-log

@@ -8,7 +8,9 @@
 
     builders:
       - gerrit-git-prep
-      - docs
+      - docs:
+          github-org: openstack-infra
+          project: jenkins-job-builder
 
     publishers:
       - scp:

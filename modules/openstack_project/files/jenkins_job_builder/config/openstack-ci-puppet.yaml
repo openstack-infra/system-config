@@ -8,7 +8,9 @@
     builders:
       - gerrit-git-prep
       - puppet-syntax
-      - pyflakes
+      - pyflakes:
+          github-org: openstack-infra
+          project: config
 
     publishers:
       - console-log
@@ -38,7 +40,7 @@
 
     builders:
       - gerrit-git-prep
-      - shell: "./tools/run-compare-xml.sh"
+      - shell: "./tools/run-compare-xml.sh openstack-infra config"
 
     publishers:
       - console-log
@@ -53,7 +55,7 @@
 
     builders:
       - gerrit-git-prep
-      - shell: "./tools/run-layout.sh"
+      - shell: "./tools/run-layout.sh openstack-infra config"
 
     publishers:
       - console-log
@@ -69,7 +71,9 @@
 
     builders:
       - gerrit-git-prep
-      - docs
+      - docs:
+          github-org: openstack-infra
+          project: config
 
     publishers:
       - scp:
