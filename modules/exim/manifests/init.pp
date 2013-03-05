@@ -20,6 +20,7 @@ class exim(
     name        => $::exim::params::service_name,
     hasrestart  => true,
     subscribe   => File[$::exim::params::config_file],
+    require     => Package[$::exim::params::package],
   }
 
   file { $::exim::params::config_file:
@@ -29,6 +30,7 @@ class exim(
     mode    => '0444',
     owner   => 'root',
     replace => true,
+    require => Package[$::exim::params::package],
   }
 
   file { '/etc/aliases':
