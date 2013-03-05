@@ -8,7 +8,9 @@
 
     builders:
       - gerrit-git-prep
-      - docs
+      - docs:
+          github-org: openstack-infra
+          project: zuul
 
     publishers:
       - scp:
@@ -28,7 +30,9 @@
 
     builders:
       - gerrit-git-prep
-      - coverage
+      - coverage:
+          github-org: openstack-infra
+          project: zuul
 
     publishers:
       - coverage-log
