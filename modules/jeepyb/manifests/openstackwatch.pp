@@ -1,0 +1,5 @@
+class openstackwatch(
+
+) {
+  include jeepyb
+}
