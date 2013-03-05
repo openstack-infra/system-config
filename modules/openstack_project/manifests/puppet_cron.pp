@@ -11,7 +11,7 @@ class openstack_project::puppet_cron($ensure = present)
     ensure      => $ensure,
     user        => 'root',
     minute      => '*/15',
-    command     => 'apt-get update >/dev/null 2>&1 ; sleep $((RANDOM\%600)) && puppet agent --test >>/var/log/manifest.log',
+    command     => "${::openstack_project::params::update_pkg_list_cmd}sleep $((RANDOM\%600)) && puppet agent --test >>/var/log/manifest.log",
     environment => 'PATH=/var/lib/gems/1.8/bin:/usr/bin:/bin:/usr/sbin:/sbin',
   }
   logrotate::file { 'updatepuppet':
