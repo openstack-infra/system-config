@@ -64,6 +64,17 @@ class openstack_project::gerrit (
     sysadmins                 => $sysadmins,
   }
 
+  class { 'jeepyb::openstackwatch':
+    projects  => [
+      'openstack/cinder',
+      'openstack/keystone',
+      'openstack-dev/devstack',
+    ],
+    container => 'rss',
+    feed      => 'openstackwatch.xml',
+    json_url  => 'https://review.openstack.org/query?q=status:open',
+  }
+
   class { '::gerrit':
     vhost_name                      => $vhost_name,
     canonicalweburl                 => $canonicalweburl,
