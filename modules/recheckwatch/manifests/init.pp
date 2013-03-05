@@ -58,6 +58,7 @@ class recheckwatch (
       File['/etc/recheckwatch'],
       User['recheckwatch'],
     ],
+    notify  => Service['recheckwatch'],
   }
 
   file { '/var/run/recheckwatch':
@@ -114,5 +115,6 @@ class recheckwatch (
     ensure  => present,
     mode    => '0555',
     source  => 'puppet:///modules/recheckwatch/recheckwatch',
+    notify  => Service['recheckwatch'],
   }
 }
