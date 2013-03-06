@@ -841,9 +841,9 @@ projects:
 
   - name: openstack/requirements
     check:
-      - gate-noop
+      - gate-requirements-install
     gate:
-      - gate-noop
+      - gate-requirements-install
     post:
       - periodic-mirror-python26
       - periodic-mirror-python27
