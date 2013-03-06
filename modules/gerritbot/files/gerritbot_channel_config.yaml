@@ -130,3 +130,14 @@ heat:
       - openstack/heat-cfntools
     branches:
       - master
+
+openstack-quantum:
+    events:
+      - patchset-created
+      - change-merged
+      - x-vrif-minus-2
+    projects:
+      - openstack/quantum
+      - openstack/python-quantumclient
+    branches:
+      - master
