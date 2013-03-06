@@ -30,8 +30,13 @@ rm -f ~/.pydistutils.cfg
 mkdir -p ~/.pip
 rm -f ~/.pip/pip.conf
 
+# Noop, do not setup any mirrors to allow requirements to talk to the
+# outside world.
+if [ "$org" == "openstack" ] && [ "$project" == "requirements" ]
+then
+    exit 0
 # For OpenStack projects, use the pypi.openstack.org mirror exclusively
-if [ "$org" == "openstack" ]
+elif [ "$org" == "openstack" ]
 then
 echo $org
     cat <<EOF > ~/.pydistutils.cfg
