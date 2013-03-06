@@ -1,0 +1,17 @@
+- job:
+    name: gate-requirements-install
+    node: precise
+
+    triggers:
+      - zuul
+
+    builders:
+      - gerrit-git-prep
+      - shell: |
+          #!/bin/bash -xe
+          virtualenv .venv
+          # Run the same basic pip command that the mirror script runs.
+          .venv/bin/pip install -M -U --exists-action=w -r tools/pip-requires -r tools/test-requires
+
+    publishers:
+      - console-log
