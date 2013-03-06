@@ -40,12 +40,13 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 """
 
 import datetime
-import subunit
 import sys
 import traceback
 import unittest
 from xml.sax import saxutils
 
+import subunit
+import testtools
 
 __version__ = '0.1'
 
@@ -491,7 +492,8 @@ class HtmlOutput(unittest.TestResult):
         exctype, value, tb = err
         return ''.join(traceback.format_exception(exctype, value, tb))
 
-    def report(self):
+    def stopTestRun(self):
+        super(HtmlOutput, self).stopTestRun()
         self.stopTime = datetime.datetime.now()
         report_attrs = self._getReportAttributes()
         generator = 'subunit2html %s' % __version__
@@ -683,6 +685,9 @@ class HtmlOutput(unittest.TestResult):
     def _generate_ending(self):
         return TemplateData.ENDING_TMPL
 
+    def startTestRun(self):
+        super(HtmlOutput, self).startTestRun()
+
 
 def main():
     if len(sys.argv) < 2:
@@ -694,11 +699,20 @@ def main():
     else:
         html_file = 'results.html'
 
-    stream = open(subunit_file, 'rb')
-    suite = subunit.ProtocolTestCase(stream)
     result = HtmlOutput(html_file)
+    stream = open(subunit_file, 'rb')
+    try:
+        # Use subunit v2 if the library supports it.
+        # NB: This trivial config will not passthrough non-test output
+        # - a difference to subunit v1's default.
+        suite = subunit.ByteStreamToStreamResult(
+            stream, non_subunit_input='stdout')
+        result = testtools.StreamToExtendedDecorator(result)
+    except AttributeError:
+        suite = subunit.ProtocolTestCase(stream)
+    result.startTestRun()
     suite.run(result)
-    result.report()
+    result.stopTestRun()
 
 
 if __name__ == '__main__':
