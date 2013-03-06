@@ -206,8 +206,8 @@ node 'zuul.openstack.org' {
   class { 'openstack_project::zuul':
     jenkins_host         => 'jenkins.openstack.org',
     jenkins_url          => 'https://jenkins.openstack.org',
-    jenkins_user         => 'hudson-openstack',
-    jenkins_apikey       => hiera('zuul_jenkins_apikey'),
+    jenkins_user         => hiera('jenkins_api_user'),
+    jenkins_apikey       => hiera('jenkins_api_key'),
     gerrit_server        => 'review.openstack.org',
     gerrit_user          => 'jenkins',
     zuul_ssh_private_key => hiera('jenkins_ssh_private_key_contents'),
@@ -233,6 +233,8 @@ node /^ci-backup-.*\.openstack\.org$/ {
 
 node 'devstack-launch.slave.openstack.org' {
   class { 'openstack_project::devstack_launch_slave':
+    jenkins_api_user => hiera('jenkins_api_user'),
+    jenkins_api_key  => hiera('jenkins_api_key')
   }
 }
 
