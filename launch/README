@@ -26,7 +26,7 @@ To launch a node in the OpenStack Jenkins account (slave nodes)::
   nova image-list
   export IMAGE='Ubuntu 12.10 (Quantal Quetzal)'
   nova flavor-list
-  export RAM=2048
+  export RAM=8192
   sudo puppet cert generate $CERT
   ./launch-node.py $FQDN --cert $CERT.pem --image "$IMAGE" --ram $RAM
 
