@@ -18,6 +18,19 @@ class openstack_project::pypi (
   }
 
   class { 'pypimirror':
-    projects => $openstack_project::project_list,
+    mirror_config => '/etc/openstackci/pypi-mirror.yaml',
   }
+
+  file { '/etc/openstackci':
+    ensure  => directory,
+    mode    => '0755',
+    owner   => 'root',
+    group   => 'root',
+  }
+
+  file { '/etc/openstackci/pypi-mirror.yaml':
+    ensure => present,
+    source => 'puppet:///modules/openstack_project/pypi-mirror.yaml',
+  }
+
 }
