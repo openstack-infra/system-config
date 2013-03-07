@@ -55,13 +55,13 @@ look something like::
 
   - project: stackforge/project-name
     description: Latest and greatest cloud stuff.
-    acl_config: /home/gerrit2/acls/stackforge/project-name.config
+    acl-config: /home/gerrit2/acls/stackforge/project-name.config
     upstream: git://github.com/awesumsauce/project-name.git
 
 The description will set the project description on the GitHub
 StackForge mirror, and the upstream should point at an existing
 repository that should be used to preseed Gerrit. Both of these options
-are optional, but you must have an acl_config. Note that the current
+are optional, but you must have an acl-config. Note that the current
 tools assume that the upstream repo will have a master branch.
 
 The next step is to add a Gerrit ACL config file. Edit

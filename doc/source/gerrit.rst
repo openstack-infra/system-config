@@ -622,11 +622,11 @@ Note The gerrit-user 'example-project-creator' should be added to the
      - project: example/project1
        description: Best project ever.
        has-wiki: True
-       acl_config: /path/to/acl/file
+       acl-config: /path/to/acl/file
 
 The above config gives puppet and its related scripts enough information
 to create new projects, but not enough to add access controls to each
-project. To add access control you need to have have an ``acl_config``
+project. To add access control you need to have have an ``acl-config``
 option for the project in ``review.projects.yaml.erb`` file. That option
 should have a value that is a path to the project.config for that
 project.
@@ -661,7 +661,7 @@ a single project you will want to do the following:
    ``openstack-infra/config:modules/openstack_project/templates/review.projects.yaml.erb``.::
 
      - project: openstack/project-name
-       acl_config: /home/gerrit2/acls/project-name.config
+       acl-config: /home/gerrit2/acls/project-name.config
 
 #. If there is an existing repo that is being replaced by this new
    project you can set the upstream value for the project. When an
@@ -669,7 +669,7 @@ a single project you will want to do the following:
    instead of an empty repository. eg::
 
      - project: openstack/project-name
-       acl_config: /home/gerrit2/acls/project-name.config
+       acl-config: /home/gerrit2/acls/project-name.config
        upstream: git://github.com/awesumsauce/project-name.git
 
 That is all you need to do. Push the change to gerrit and if necessary
