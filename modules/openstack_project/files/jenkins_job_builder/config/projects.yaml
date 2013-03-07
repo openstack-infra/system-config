@@ -46,7 +46,7 @@
 - project:
     name: gerritbot
     github-org: openstack-infra
-    node: precise
+    node: quantal
     doc-publisher-site: ci.openstack.org
     tarball-site: tarballs.openstack.org
 
@@ -60,7 +60,7 @@
 - project:
     name: gerritlib
     github-org: openstack-infra
-    node: precise
+    node: quantal
     doc-publisher-site: ci.openstack.org
     tarball-site: tarballs.openstack.org
 
@@ -74,7 +74,7 @@
 - project:
     name: jeepyb
     github-org: openstack-infra
-    node: precise
+    node: quantal
     doc-publisher-site: ci.openstack.org
     tarball-site: tarballs.openstack.org
 
@@ -95,7 +95,7 @@
 - project:
     name: git-review
     github-org: openstack-infra
-    node: precise
+    node: quantal
     jobs:
       - gate-{name}-pep8
 
@@ -195,7 +195,7 @@
 - project:
     name: jenkins-job-builder
     github-org: openstack-infra
-    node: precise
+    node: quantal
     tarball-site: tarballs.openstack.org
 
     jobs:
@@ -540,7 +540,7 @@
 - project:
     name: reviewday
     github-org: openstack-infra
-    node: precise
+    node: quantal
     tarball-site: tarballs.openstack.org
 
     jobs:
@@ -574,7 +574,7 @@
 - project:
     name: zuul
     github-org: openstack-infra
-    node: precise
+    node: quantal
     tarball-site: tarballs.openstack.org
 
     jobs:
