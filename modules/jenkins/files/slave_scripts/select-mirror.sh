@@ -30,19 +30,26 @@ rm -f ~/.pydistutils.cfg
 mkdir -p ~/.pip
 rm -f ~/.pip/pip.conf
 
-# For OpenStack projects, use the pypi.openstack.org mirror exclusively
-if [ "$org" == "openstack" ]
+# Noop, do not setup any mirrors to allow requirements to talk to the
+# outside world.
+if [ "$org" == "openstack" ] && [ "$project" == "requirements" ]
 then
-echo $org
+    exit 0
+# For OpenStack projects, use the pypi.openstack.org mirror exclusively
+elif [ "$org" == "openstack" ]
+then
+    cat <<EOF > ~/.pydistutils.cfg
+[easy_install]
+index_url = http://pypi.openstack.org/openstack
+EOF
     cat <<EOF > ~/.pip/pip.conf
 [global]
-index-url = http://pypi.openstack.org
-extra-index-url = http://pypi.python.org/simple
+index-url = http://pypi.openstack.org/openstack
 EOF
 else
     cat <<EOF > ~/.pip/pip.conf
 [global]
-index-url = http://pypi.openstack.org
+index-url = http://pypi.openstack.org/openstack
 extra-index-url = http://pypi.python.org/simple
 EOF
 fi
