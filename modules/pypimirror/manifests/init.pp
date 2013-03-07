@@ -2,20 +2,16 @@
 #
 class pypimirror(
   $vhost_name = $::fqdn,
-  $log_filename = '/var/log/pypimirror.log',
-  $mirror_file_path = '/var/lib/pypimirror',
-  $pip_download = '/var/lib/pip-download',
-  $pip_cache = '/var/cache/pip',
-  $git_source = 'https://github.com',
-  $local_git_dir = '/var/lib/git',
-  $ssh_project_key = 'UNDEF',
-  $projects = []
+  $mirror_config = '',
+  $mirror_root = '/var/lib/pypimirror',
 ) {
 
   include apache
   include pip
-  include remove_nginx
   include jeepyb
+
+  $log_filename = '/var/log/pypimirror/pypimirror.log'
+  $cache_root = '/var/cache/pypimirror'
 
   if ! defined(Package['python-yaml']) {
     package { 'python-yaml':
@@ -23,42 +19,44 @@ class pypimirror(
     }
   }
 
-  file { '/usr/local/mirror_scripts':
-    ensure => directory,
-    mode   => '0755',
-    owner  => 'root',
-    group  => 'root',
+  user { 'mirror':
+    ensure     => present,
+    home       => '/home/mirror',
+    shell      => '/bin/bash',
+    gid        => 'mirror',
+    managehome => true,
+    require    => Group['mirror'],
   }
 
-  file { $pip_download:
-    ensure => directory,
-    mode   => '0755',
-    owner  => 'root',
-    group  => 'root',
+  group { 'mirror':
+    ensure => present,
   }
 
-  file { $pip_cache:
-    ensure => directory,
-    mode   => '0755',
-    owner  => 'root',
-    group  => 'root',
+  file { '/var/log/pypimirror':
+    ensure  => directory,
+    mode    => '0755',
+    owner   => 'mirror',
+    group   => 'mirror',
+    require => User['mirror'],
   }
 
-  file { '/etc/openstackci':
-    ensure => directory,
-    owner  => 'root',
+  file { '/var/cache/pypimirror':
+    ensure  => directory,
+    mode    => '0755',
+    owner   => 'mirror',
+    group   => 'mirror',
+    require => User['mirror'],
   }
 
-  file { '/etc/openstackci/projects.yaml':
-    ensure  => present,
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0444',
-    content => template('openstack_project/review.projects.yaml.erb'),
-    replace => true,
+  file { '/var/lib/pypimirror':
+    ensure  => directory,
+    mode    => '0755',
+    owner   => 'mirror',
+    group   => 'mirror',
+    require => User['mirror'],
   }
 
-  file { '/usr/local/mirror_scripts/run-mirror.sh':
+  file { '/usr/local/bin/run-mirror.sh':
     ensure  => present,
     mode    => '0755',
     owner   => 'root',
@@ -70,24 +68,20 @@ class pypimirror(
     ],
   }
 
-  file { '/usr/local/mirror_scripts/run_mirror.py':
-    ensure  => absent,
-  }
-
-  file { '/usr/local/mirror_scripts/pull-repo.sh':
-    ensure  => absent,
-  }
-
-  file { '/usr/local/mirror_scripts/process_cache.py':
-    ensure  => absent,
-  }
-
   # Add cron job to update the mirror
 
   cron { 'update_mirror':
+    ensure  => absent,
     user    => 'root',
     hour    => '0',
-    command => '/usr/local/mirror_scripts/run-mirror.sh',
+    command => '/usr/local/bin/run-mirror.sh',
+    require => File['/usr/local/mirror_scripts/run-mirror.sh'],
+  }
+
+  cron { 'update_pypi_mirror':
+    user    => 'mirror',
+    hour    => '0',
+    command => '/usr/local/bin/run-mirror.sh',
     require => File['/usr/local/mirror_scripts/run-mirror.sh'],
   }
 
@@ -109,7 +103,7 @@ class pypimirror(
 
   apache::vhost { $vhost_name:
     port     => 80,
-    docroot  => $mirror_file_path,
+    docroot  => $mirror_root,
     priority => 50,
   }
 }
