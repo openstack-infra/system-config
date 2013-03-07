@@ -41,16 +41,16 @@ then
 echo $org
     cat <<EOF > ~/.pydistutils.cfg
 [easy_install]
-index_url = http://pypi.openstack.org
+index_url = http://pypi.openstack.org/openstack
 EOF
     cat <<EOF > ~/.pip/pip.conf
 [global]
-index-url = http://pypi.openstack.org
+index-url = http://pypi.openstack.org/openstack
 EOF
 else
     cat <<EOF > ~/.pip/pip.conf
 [global]
-index-url = http://pypi.openstack.org
+index-url = http://pypi.openstack.org/openstack
 extra-index-url = http://pypi.python.org/simple
 EOF
 fi
