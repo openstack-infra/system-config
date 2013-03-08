@@ -1200,3 +1200,9 @@ projects:
       - gate-packstack-pep8
       - gate-packstack-python26
       - gate-packstack-python27
+
+  - name: stackforge/anvil
+    check:
+      - gate-noop
+    gate:
+      - gate-noop
