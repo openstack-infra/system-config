@@ -946,28 +946,34 @@ projects:
       - gate-reddwarf-pep8:
         - gate-reddwarf-python26
         - gate-reddwarf-python27
+        - gate-devstack-vm-reddwarf
     gate:
       - gate-reddwarf-pep8
       - gate-reddwarf-python26
       - gate-reddwarf-python27
+      - gate-devstack-vm-reddwarf
     post:
       - reddwarf-coverage
 
   - name: stackforge/reddwarf-integration
     check:
       - gate-noop
+      - gate-devstack-vm-reddwarf
     gate:
       - gate-noop
+      - gate-devstack-vm-reddwarf
 
   - name: stackforge/python-reddwarfclient
     check:
       - gate-python-reddwarfclient-pep8:
         - gate-python-reddwarfclient-python26
         - gate-python-reddwarfclient-python27
+        - gate-devstack-vm-reddwarf
     gate:
       - gate-python-reddwarfclient-pep8
       - gate-python-reddwarfclient-python26
       - gate-python-reddwarfclient-python27
+      - gate-devstack-vm-reddwarf
     pre-release:
       - python-reddwarfclient-tarball
     release:

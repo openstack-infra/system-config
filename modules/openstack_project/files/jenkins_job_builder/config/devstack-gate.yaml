@@ -497,6 +497,91 @@
           $WORKSPACE/devstack-gate/devstack-vm-delete.py $DEVSTACK_NODE_NAME
 
 
+- job:
+    name: gate-devstack-vm-reddwarf
+    node: devstack-precise
+
+    wrappers:
+      - timeout:
+          timeout: 90
+          fail: true
+      - timestamps
+
+    parameters:
+      - label:
+          name: NODE_LABEL
+          description: Label of node to use for this build
+          default: devstack-precise
+
+    triggers:
+      - zuul
+
+    builders:
+      - devstack-inprogress
+      - devstack-checkout
+      - shell: |
+          #!/bin/bash -xe
+          BASE=/opt/stack
+          DEST=$BASE/new
+          export PYTHONUNBUFFERED=true
+          export DEVSTACK_GATE_TEMPEST=0
+          export DEVSTACK_GATE_PRE_DEVSTACK_HOOK=1
+          export DEVSTACK_GATE_POST_DEVSTACK_HOOK=1
+          export PROJECTS="stackforge/reddwarf stackforge/python-reddwarfclient stackforge/reddwarf-integration"
+          export ENABLED_SERVICES=reddwarf
+          export KEEP_LOCALRC=1
+          export REDDWARF_DIR=$DEST/reddwarf/
+          export REDDWARFCLIENT_DIR=$DEST/python-reddwarfclient/
+          export REDDWARF_INTEGRATION_CONF_DIR=$DEST/reddwarf-integration/
+          function run_pre_devstack_hook {
+            cp $REDDWARF_INTEGRATION_CONF_DIR/scripts/local.sh $DEST/devstack/local.sh
+            cat <<EOF >$DEST/localrc
+          echo "DATABASE_USER=root" >>localrc
+          echo "FLAT_INTERFACE=br100" >>localrc
+          EOF
+          }
+
+          function run_post_devstack_hook {
+            echo "Configuring reddwarf for redstack testing"
+            cd $REDDWARF_INTEGRATION_CONF_DIR/scripts
+            export PATH_DEVSTACK_SRC="$DEST/devstack"
+            export DEST="$DEST"
+
+            # Setup iptables to enable reddwarf guest connectivity
+            fixip=`grep FIXED_RANGE $PATH_DEVSTACK_SRC/localrc | \
+                   awk '{split($0, a, "="); print a[2];}'`
+            eport=`grep PUBLIC_INTERFACE $PATH_DEVSTACK_SRC/localrc | \
+                   awk '{split($0, a, "="); print a[2];}'`
+            if [ -z "$eport" ]; then
+                eport="eth0"
+            fi
+            sudo iptables -t nat -A POSTROUTING -s $fixip -o $eport -j MASQUERADE
+
+            # Update the test confs and create the guest image
+            sudo -H -E -u stack \
+                $REDDWARF_INTEGRATION_CONF_DIR/scripts/redstack post-devstack mysql
+            RETVAL=$?
+            if [ $RETVAL -ne 0 ] ; then
+                return $RETVAL
+            fi
+
+            echo "Running redstack tests suite."
+            sudo -H -E -u stack \
+                $REDDWARF_INTEGRATION_CONF_DIR/scripts/redstack simple-tests
+          }
+
+          # Run devstack
+          cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
+          ./safe-devstack-vm-gate-wrap.sh
+
+      - link-logs
+
+    publishers:
+      - devstack-logs
+      - console-log
+      - devstack-complete
+
+
 - job-template:
     name: devstack-launch-vms-{provider}
     concurrent: false
