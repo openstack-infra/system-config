@@ -481,6 +481,27 @@ projects:
       - oslo-config-tarball
       - oslo-config-docs
 
+  - name: openstack/oslo.packaging
+    check:
+      - gate-oslo.packaging-pyflakes:
+        - gate-oslo.packaging-docs
+        - gate-oslo.packaging-pep8
+        - gate-oslo.packaging-python26
+        - gate-oslo.packaging-python27
+    gate:
+      - gate-oslo.packaging-docs
+      - gate-oslo.packaging-pep8
+      - gate-oslo.packaging-python26
+      - gate-oslo.packaging-python27
+    post:
+      - oslo.packaging-branch-tarball
+      - oslo.packaging-docs
+    pre-release:
+      - oslo.packaging-tarball
+    release:
+      - oslo.packaging-tarball
+      - oslo.packaging-docs
+
   - name: openstack/quantum
     check:
       - gate-quantum-pep8:
