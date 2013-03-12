@@ -9,13 +9,13 @@
       - shell: |
           #!/bin/bash -xe
           TAG=`echo $ZUUL_REF | sed 's/^refs.tags.//'`
-          FILENAME="{name}-$TAG.tar.gz"
+          FILENAME="{pypi-name}-$TAG.tar.gz"
 
           rm -rf *tar.gz
           curl -o $FILENAME http://{tarball-site}/{name}/$FILENAME
 
       - shell: |
-          /usr/local/jenkins/slave_scripts/pypi-upload.sh {name}
+          /usr/local/jenkins/slave_scripts/pypi-upload.sh {pypi-name}
 
     publishers:
       - console-log-post

@@ -49,6 +49,7 @@
     node: quantal
     doc-publisher-site: ci.openstack.org
     tarball-site: tarballs.openstack.org
+    pypi-name: gerritbot
 
     jobs:
       - gate-{name}-pep8
@@ -63,6 +64,7 @@
     node: quantal
     doc-publisher-site: ci.openstack.org
     tarball-site: tarballs.openstack.org
+    pypi-name: gerritlib
 
     jobs:
       - gate-{name}-pep8
@@ -77,6 +79,7 @@
     node: quantal
     doc-publisher-site: ci.openstack.org
     tarball-site: tarballs.openstack.org
+    pypi-name: jeepyb
 
     jobs:
       - gate-{name}-pep8
@@ -133,6 +136,7 @@
     node: precise
     tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
+    pypi-name: python-heatclient
 
     jobs:
       - python-jobs
@@ -146,6 +150,7 @@
     node: precise
     tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
+    pypi-name: heat-cfntools
 
     jobs:
       - python-jobs
@@ -197,6 +202,7 @@
     github-org: openstack-infra
     node: quantal
     tarball-site: tarballs.openstack.org
+    pypi-name: jenkins-job-builder
 
     jobs:
       - gate-{name}-pep8
@@ -250,6 +256,7 @@
     node: precise
     doc-publisher-site: ci.openstack.org
     tarball-site: tarballs.openstack.org
+    pypi-name: nose-html-output
 
     jobs:
       - '{name}-tarball'
@@ -317,6 +324,7 @@
     node: precise
     tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
+    pypi-name: python-ceilometerclient
 
     jobs:
       - python-jobs
@@ -330,6 +338,7 @@
     node: precise
     tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
+    pypi-name: python-cinderclient
 
     jobs:
       - python-jobs
@@ -343,6 +352,7 @@
     node: precise
     tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
+    pypi-name: python-glanceclient
 
     jobs:
       - python-jobs
@@ -356,6 +366,7 @@
     node: precise
     tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
+    pypi-name: python-keystoneclient
 
     jobs:
       - python-jobs
@@ -369,6 +380,7 @@
     node: precise
     tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
+    pypi-name: python-novaclient
 
     jobs:
       - python-jobs
@@ -382,6 +394,7 @@
     node: precise
     tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
+    pypi-name: python-openstackclient
 
     jobs:
       - python-jobs
@@ -395,6 +408,7 @@
     node: precise
     tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
+    pypi-name: python-quantumclient
 
     jobs:
       - python-jobs
@@ -408,6 +422,7 @@
     node: precise
     tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
+    pypi-name: python-swiftclient
 
     jobs:
       - python-jobs
@@ -443,6 +458,7 @@
     github-org: stackforge
     tarball-site: tarballs.openstack.org
     node: precise
+    pypi-name: python-reddwarfclient
 
     jobs:
       - python-jobs
@@ -493,6 +509,7 @@
     node: precise
     tarball-site: tarballs.openstack.org
     rtfd-id: 5190
+    pypi-name: moniker
 
     jobs:
       - python-jobs
@@ -517,6 +534,7 @@
     node: precise
     tarball-site: tarballs.openstack.org
     rtfd-id: 5366
+    pypi-name: python-monikerclient
 
     jobs:
       - python-jobs
@@ -542,6 +560,7 @@
     github-org: openstack-infra
     node: quantal
     tarball-site: tarballs.openstack.org
+    pypi-name: reviewday
 
     jobs:
       - python-jobs
@@ -576,6 +595,7 @@
     github-org: openstack-infra
     node: quantal
     tarball-site: tarballs.openstack.org
+    pypi-name: zuul
 
     jobs:
       - python-jobs
