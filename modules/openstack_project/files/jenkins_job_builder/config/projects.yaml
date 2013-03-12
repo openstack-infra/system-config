@@ -298,10 +298,12 @@
     node: precise
     tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
+    pypi-name: oslo.config
 
     jobs:
       - python-jobs
       - openstack-publish-jobs
+      - pypi-jobs
       - gate-{name}-pyflakes
 
 
