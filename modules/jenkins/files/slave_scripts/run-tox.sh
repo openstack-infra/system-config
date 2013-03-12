@@ -32,7 +32,7 @@ trap "rm -rf $TMPDIR" EXIT
 
 sudo /usr/local/jenkins/slave_scripts/jenkins-sudo-grep.sh pre
 
-tox -e$venv
+$PYTHON `which tox` -e$venv
 result=$?
 
 echo "Begin pip freeze output from test virtualenv:"
