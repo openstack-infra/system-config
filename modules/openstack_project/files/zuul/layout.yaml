@@ -479,6 +479,7 @@ projects:
       - oslo-config-tarball
     release:
       - oslo-config-tarball
+        - oslo-config-pypi-upload
       - oslo-config-docs
 
   - name: openstack/quantum
