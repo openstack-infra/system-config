@@ -21,6 +21,11 @@ class openstack_project::dashboard(
     mysql_root_pw       => $mysql_password,
     passenger           => true,
   }
+
+  file { '/etc/mysql/conf.d/50_innodb_file_per_table':
+    ensure => present,
+    content => '::dashboard/mysql_innodb_file_per_table',
+  }
 }
 
 # vim:sw=2:ts=2:expandtab:textwidth=79
