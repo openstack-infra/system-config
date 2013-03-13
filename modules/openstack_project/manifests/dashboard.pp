@@ -20,6 +20,7 @@ class openstack_project::dashboard(
     dashboard_port      => '3000',
     mysql_root_pw       => $mysql_password,
     passenger           => true,
+    dashboard_config    => 'echo "innodb_file_per_table=1" >> /etc/my.cnf'
   }
 }
 
