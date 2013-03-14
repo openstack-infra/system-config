@@ -261,7 +261,7 @@ class Sync(object):
                 'openstack/openstack-planet',
                 'openstack/openstack-puppet',
                 'openstack/oslo-incubator',
-                'openstack/oslo-config',
+                'openstack/oslo.config',
                 'openstack/python-ceilometerclient',
                 'openstack/python-cinderclient',
                 'openstack/python-glanceclient',
