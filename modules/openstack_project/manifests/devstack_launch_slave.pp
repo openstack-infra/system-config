@@ -29,6 +29,10 @@ class openstack_project::devstack_launch_slave (
     require  => Class['pip'],
   }
 
+  package { 'python-sqlalchemy':
+    ensure   => present,
+  }
+
   file { '/home/jenkins/devstack-gate-secure.conf':
     ensure  => present,
     owner   => 'jenkins',
