@@ -1,7 +1,7 @@
 # Not using the template because openstack-planet does not use tox.
 - job:
     name: 'gate-openstack-planet-unittest'
-    node: 'precise'
+    node: quantal
 
     triggers:
       - zuul

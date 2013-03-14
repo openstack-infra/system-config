@@ -1,7 +1,7 @@
 - project:
     name: kwapi
     github-org: stackforge
-    node: precise
+    node: quantal
 
     jobs:
       - gate-{name}-pep8
@@ -34,7 +34,7 @@
 - project:
     name: compute-api
     github-org: openstack
-    node: precise
+    node: quantal
     tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
 
@@ -88,7 +88,7 @@
 - project:
     name: gearman-plugin
     github-org: openstack-infra
-    node: precise
+    node: quantal
     tarball-site: tarballs.openstack.org
 
 
@@ -171,7 +171,7 @@
 - project:
     name: identity-api
     github-org: openstack
-    node: precise
+    node: quantal
     tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
 
@@ -183,7 +183,7 @@
 - project:
     name: image-api
     github-org: openstack
-    node: precise
+    node: quantal
     tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
 
@@ -224,7 +224,7 @@
 - project:
     name: netconn-api
     github-org: openstack
-    node: precise
+    node: quantal
     tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
 
@@ -236,7 +236,7 @@
 - project:
     name: netconn-api-v20
     github-org: openstack
-    node: precise
+    node: quantal
     tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
 
@@ -247,7 +247,7 @@
 - project:
     name: nose-html-output
     github-org: openstack-infra
-    node: precise
+    node: quantal
     doc-publisher-site: ci.openstack.org
     tarball-site: tarballs.openstack.org
 
@@ -276,7 +276,7 @@
 - project:
     name: object-api
     github-org: openstack
-    node: precise
+    node: quantal
     tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
 
@@ -432,7 +432,7 @@
     name: reddwarf
     github-org: stackforge
     tarball-site: tarballs.openstack.org
-    node: precise
+    node: quantal
 
     jobs:
       - python-jobs
@@ -442,7 +442,7 @@
     name: python-reddwarfclient
     github-org: stackforge
     tarball-site: tarballs.openstack.org
-    node: precise
+    node: quantal
 
     jobs:
       - python-jobs
@@ -453,7 +453,7 @@
     name: libra
     github-org: stackforge
     tarball-site: tarballs.openstack.org
-    node: precise
+    node: quantal
 
     jobs:
       - python-jobs
@@ -462,7 +462,7 @@
     name: python-libraclient
     github-org: stackforge
     tarball-site: tarballs.openstack.org
-    node: precise
+    node: quantal
 
     jobs:
       - python-jobs
@@ -471,7 +471,7 @@
     name: healthnmon
     github-org: stackforge
     tarball-site: tarballs.openstack.org
-    node: precise
+    node: quantal
 
     jobs:
       - python-jobs
@@ -481,7 +481,7 @@
     name: marconi
     github-org: stackforge
     tarball-site: tarballs.openstack.org
-    node: precise
+    node: quantal
 
     jobs:
       - python-jobs
@@ -490,7 +490,7 @@
 - project:
     name: moniker
     github-org: stackforge
-    node: precise
+    node: quantal
     tarball-site: tarballs.openstack.org
     rtfd-id: 5190
 
@@ -504,7 +504,7 @@
 - project:
     name: packstack
     github-org: stackforge
-    node: precise
+    node: quantal
     tarball-site: tarballs.openstack.org
 
     jobs:
@@ -514,7 +514,7 @@
 - project:
     name: python-monikerclient
     github-org: stackforge
-    node: precise
+    node: quantal
     tarball-site: tarballs.openstack.org
     rtfd-id: 5366
 
@@ -528,7 +528,7 @@
 - project:
     name: bufunfa
     github-org: stackforge
-    node: precise
+    node: quantal
     tarball-site: tarballs.openstack.org
     rtfd-id: 5216
 

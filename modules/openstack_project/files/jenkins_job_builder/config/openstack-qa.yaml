@@ -2,7 +2,7 @@
 # It also uses a non standard build script.
 - job:
     name: openstack-qa-docs
-    node: precise
+    node: quantal
 
     triggers:
       - zuul-post

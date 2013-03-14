@@ -1,7 +1,7 @@
 - job:
     name: gate-openstack-cli-guide
     project-type: maven
-    node: precise && !jclouds
+    node: quantal && !jclouds
 
     triggers:
       - zuul
@@ -29,7 +29,7 @@
 
 - job:
     name: gate-openstack-manuals-validate
-    node: precise
+    node: quantal
 
     triggers:
       - zuul
@@ -44,7 +44,7 @@
 - job:
     name: openstack-cli-guide
     project-type: maven
-    node: precise && !jclouds
+    node: quantal && !jclouds
 
     triggers:
       - zuul-post
@@ -72,7 +72,7 @@
 - job:
     name: openstack-basic-install
     project-type: maven
-    node: precise && !jclouds
+    node: quantal && !jclouds
 
     triggers:
       - zuul-post
@@ -100,7 +100,7 @@
 - job:
     name: netconn-api-v20
     project-type: maven
-    node: precise && !jclouds
+    node: quantal && !jclouds
 
     triggers:
       - zuul-post
@@ -129,7 +129,7 @@
     name: volume-api
     project-type: maven
     concurrent: true
-    node: precise && !jclouds
+    node: quantal && !jclouds
 
     wrappers:
       - timeout:
@@ -163,7 +163,7 @@
     name: image-api-v20
     project-type: maven
     concurrent: true
-    node: precise && !jclouds
+    node: quantal && !jclouds
 
     wrappers:
       - timeout:
@@ -203,7 +203,7 @@
 - job:
     name: openstack-glossary
     project-type: maven
-    node: precise && !jclouds
+    node: quantal && !jclouds
 
     triggers:
       - zuul-post
@@ -232,7 +232,7 @@
     name: openstack-admin-manual-compute
     project-type: maven
     concurrent: false
-    node: precise && !jclouds
+    node: quantal && !jclouds
 
     triggers:
       - zuul-post
@@ -266,7 +266,7 @@
     name: openstack-admin-manual-keystone-diablo
     project-type: maven
     concurrent: false
-    node: precise && !jclouds
+    node: quantal && !jclouds
 
     triggers:
       - zuul-post
@@ -292,7 +292,7 @@
     name: openstack-admin-manual-netconn
     project-type: maven
     concurrent: false
-    node: precise && !jclouds
+    node: quantal && !jclouds
 
     triggers:
       - zuul-post
@@ -326,7 +326,7 @@
     name: openstack-admin-manual-object
     project-type: maven
     concurrent: false
-    node: precise && !jclouds
+    node: quantal && !jclouds
 
     triggers:
       - zuul-post
@@ -360,7 +360,7 @@
     name: openstack-admin-manuals-diablo
     project-type: maven
     concurrent: false
-    node: precise && !jclouds
+    node: quantal && !jclouds
 
     triggers:
       - zuul-post
@@ -386,7 +386,7 @@
 - job:
     name: openstack-docs-site
     concurrent: false
-    node: precise && !jclouds
+    node: quantal && !jclouds
 
     triggers:
       - zuul-post
@@ -413,7 +413,7 @@
     name: openstack-ha-guide
     project-type: maven
     concurrent: false
-    node: precise && !jclouds
+    node: quantal && !jclouds
 
     triggers:
       - zuul-post
@@ -449,7 +449,7 @@
     name: openstack-install-deploy-guide-apt-fedora
     project-type: maven
     concurrent: false
-    node: precise && !jclouds
+    node: quantal && !jclouds
 
     triggers:
       - zuul-post
@@ -483,7 +483,7 @@
     name: openstack-install-deploy-guide-ubuntu
     project-type: maven
     concurrent: false
-    node: precise && !jclouds
+    node: quantal && !jclouds
 
     triggers:
       - zuul-post
