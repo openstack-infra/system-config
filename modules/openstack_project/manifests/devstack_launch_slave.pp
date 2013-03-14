@@ -23,13 +23,17 @@ class openstack_project::devstack_launch_slave (
     bare => true,
   }
 
-  package { ['python-novaclient', 'statsd', 'paramiko']:
+  package { [ 'python-novaclient',
+              'rackspace-auth-openstack',
+              'statsd',
+              'paramiko']:
     ensure   => latest,
     provider => pip,
     require  => Class['pip'],
   }
 
-  package { 'python-sqlalchemy':
+  package { [ 'python-sqlalchemy',
+              'sqlite3']:
     ensure   => present,
   }
 
