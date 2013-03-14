@@ -1,6 +1,6 @@
 - job-template:
     name: 'hook-{name}-rtfd'
-    node: precise
+    node: quantal
 
     triggers:
       - zuul-post

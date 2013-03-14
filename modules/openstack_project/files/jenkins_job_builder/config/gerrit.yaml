@@ -1,7 +1,7 @@
 - job:
     name: check-gerrit-unittests
     project-type: maven
-    node: precise && !jclouds
+    node: quantal && !jclouds
 
     wrappers:
       - timeout:
