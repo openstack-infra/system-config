@@ -462,26 +462,26 @@ projects:
     release:
       - oslo-incubator-docs
 
-  - name: openstack/oslo-config
+  - name: openstack/oslo.config
     check:
-      - gate-oslo-config-pyflakes:
-        - gate-oslo-config-docs
-        - gate-oslo-config-pep8
-        - gate-oslo-config-python26
-        - gate-oslo-config-python27
+      - gate-oslo.config-pyflakes:
+        - gate-oslo.config-docs
+        - gate-oslo.config-pep8
+        - gate-oslo.config-python26
+        - gate-oslo.config-python27
     gate:
-      - gate-oslo-config-docs
-      - gate-oslo-config-pep8
-      - gate-oslo-config-python26
-      - gate-oslo-config-python27
+      - gate-oslo.config-docs
+      - gate-oslo.config-pep8
+      - gate-oslo.config-python26
+      - gate-oslo.config-python27
     post:
-      - oslo-config-branch-tarball
-      - oslo-config-docs
+      - oslo.config-branch-tarball
+      - oslo.config-docs
     pre-release:
-      - oslo-config-tarball
+      - oslo.config-tarball
     release:
-      - oslo-config-tarball
-      - oslo-config-docs
+      - oslo.config-tarball
+      - oslo.config-docs
 
   - name: openstack/quantum
     check:
