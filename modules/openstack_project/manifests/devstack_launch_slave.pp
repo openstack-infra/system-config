@@ -34,7 +34,7 @@ class openstack_project::devstack_launch_slave (
     owner   => 'jenkins',
     group   => 'jenkins',
     mode    => '0600',
-    content => template('openstack_project/devstack-gate-secure.erb'),
+    content => template('openstack_project/devstack-gate-secure.conf.erb'),
     require => File['/home/jenkins'],
   }
 }
