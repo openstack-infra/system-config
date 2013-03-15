@@ -79,22 +79,22 @@
 - builder:
     name: python26
     builders:
-      - shell: "/usr/local/jenkins/slave_scripts/run-tox.sh 26 {github-org} {project}"
+      - shell: "PYTHON=python2.6 /usr/local/jenkins/slave_scripts/run-tox.sh 26 {github-org} {project}"
 
 - builder:
     name: python27
     builders:
-      - shell: "/usr/local/jenkins/slave_scripts/run-tox.sh 27 {github-org} {project}"
+      - shell: "PYTHON=python2.7 /usr/local/jenkins/slave_scripts/run-tox.sh 27 {github-org} {project}"
 
 - builder:
     name: python26-folsom
     builders:
-      - shell: "/usr/local/jenkins/slave_scripts/run-tox.sh 26-folsom {github-org} {project}"
+      - shell: "PYTHON=python2.6 /usr/local/jenkins/slave_scripts/run-tox.sh 26-folsom {github-org} {project}"
 
 - builder:
     name: python27-folsom
     builders:
-      - shell: "/usr/local/jenkins/slave_scripts/run-tox.sh 27-folsom {github-org} {project}"
+      - shell: "PYTHON=python2.7 /usr/local/jenkins/slave_scripts/run-tox.sh 27-folsom {github-org} {project}"
 
 - builder:
     name: assert-no-extra-files
