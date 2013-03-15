@@ -234,8 +234,9 @@ node /^ci-backup-.*\.openstack\.org$/ {
 
 node 'devstack-launch.slave.openstack.org' {
   class { 'openstack_project::devstack_launch_slave':
-    jenkins_api_user => hiera('jenkins_api_user'),
-    jenkins_api_key  => hiera('jenkins_api_key')
+    jenkins_api_user        => hiera('jenkins_api_user'),
+    jenkins_api_key         => hiera('jenkins_api_key'),
+    jenkins_ssh_private_key => hiera('jenkins_ssh_private_key_contents')
   }
 }
 
