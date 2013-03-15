@@ -106,6 +106,7 @@ node 'graphite.openstack.org' {
     graphite_admin_email    => hiera('graphite_admin_email'),
     graphite_admin_password => hiera('graphite_admin_password'),
     statsd_hosts            => ['jenkins.openstack.org',
+                                'devstack-launch.slave.openstack.org',
                                 'zuul.openstack.org'],
   }
 }
