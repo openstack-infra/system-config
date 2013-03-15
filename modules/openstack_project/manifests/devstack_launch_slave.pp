@@ -16,7 +16,8 @@
 
 class openstack_project::devstack_launch_slave (
   $jenkins_api_user,
-  $jenkins_api_key
+  $jenkins_api_key,
+  $jenkins_ssh_private_key,
 ) {
 
   class { 'openstack_project::slave':
@@ -45,5 +46,13 @@ class openstack_project::devstack_launch_slave (
     mode    => '0600',
     content => template('openstack_project/devstack-gate-secure.conf.erb'),
     require => File['/home/jenkins'],
+  }
+
+  file { '/home/jenkins/.ssh/id_rsa':
+    owner   => 'jenkins',
+    group   => 'jenkins',
+    mode    => '0400',
+    require => File['/home/jenkins/.ssh'],
+    content => $jenkins_ssh_private_key,
   }
 }
