@@ -493,7 +493,7 @@
 - job:
     name: devstack-update-inprogress
     concurrent: false
-    node: master
+    node: devstack-launch
 
     wrappers:
       - timeout:
@@ -516,7 +516,7 @@
 - job:
     name: devstack-update-complete
     concurrent: false
-    node: master
+    node: devstack-launch
 
     wrappers:
       - timeout:
@@ -537,7 +537,7 @@
 - job-template:
     name: devstack-launch-vms-{provider}
     concurrent: false
-    node: master
+    node: devstack-launch
 
     wrappers:
       - timeout:
@@ -561,7 +561,7 @@
 - job-template:
     name: devstack-reap-vms-{provider}
     concurrent: false
-    node: master
+    node: devstack-launch
 
     wrappers:
       - timeout:
@@ -608,7 +608,7 @@
 - job-template:
     name: devstack-update-vm-image-{provider}
     concurrent: false
-    node: master
+    node: devstack-launch
 
     wrappers:
       - timeout:
