@@ -24,6 +24,7 @@ class openstack_project::devstack_launch_slave (
   }
 
   package { [ 'python-novaclient',
+              'python-jenkins',
               'rackspace-auth-openstack',
               'statsd',
               'paramiko']:
