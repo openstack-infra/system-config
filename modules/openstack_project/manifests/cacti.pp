@@ -71,6 +71,7 @@ class openstack_project::cacti (
     'review-dev.openstack.org',
     'static.openstack.org',
     'wiki.openstack.org',
+    'zuul.openstack.org',
   ]
 
   openstack_project::cacti_device { $cacti_hosts: }
