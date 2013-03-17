@@ -16,11 +16,12 @@ class jeepyb::openstackwatch(
   }
 
   user { 'openstackwatch':
-    ensure  => present,
-    comment => 'OpenStackWatch User',
-    shell   => '/bin/bash',
-    gid     => 'openstackwatch',
-    require => Group['openstackwatch'],
+    ensure     => present,
+    managehome => true,
+    comment    => 'OpenStackWatch User',
+    shell      => '/bin/bash',
+    gid        => 'openstackwatch',
+    require    => Group['openstackwatch'],
   }
 
   cron { 'openstackwatch':
