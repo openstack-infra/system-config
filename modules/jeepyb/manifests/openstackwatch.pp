@@ -51,4 +51,12 @@ class jeepyb::openstackwatch(
       ensure => present,
     }
   }
+
+  if ! defined(Package['python-swiftclient']) {
+    package { 'python-swiftclient':
+      ensure   => latest,
+      provider => pip,
+      require  => Class['pip'],
+    }
+  }
 }
