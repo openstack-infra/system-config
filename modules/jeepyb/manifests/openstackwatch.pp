@@ -33,7 +33,7 @@ class jeepyb::openstackwatch(
 
   file { '/home/openstackwatch/openstackwatch.ini':
     ensure  => present,
-    content => template('openstackwatch.ini.erb'),
+    content => template('jeepyb/openstackwatch.ini.erb'),
     owner   => 'root',
     group   => 'openstackwatch',
     mode    => '0640',
