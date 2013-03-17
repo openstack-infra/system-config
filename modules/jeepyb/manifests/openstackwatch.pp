@@ -43,6 +43,6 @@ class jeepyb::openstackwatch(
     owner   => 'root',
     group   => 'openstackwatch',
     mode    => '0640',
-    require => Group['openstackwatch'],
+    require => User['openstackwatch'],
   }
 }
