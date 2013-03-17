@@ -45,4 +45,10 @@ class jeepyb::openstackwatch(
     mode    => '0640',
     require => User['openstackwatch'],
   }
+
+  if ! defined(Package['python-pyrss2gen']) {
+    package { 'python-pyrss2gen':
+      ensure => present,
+    }
+  }
 }
