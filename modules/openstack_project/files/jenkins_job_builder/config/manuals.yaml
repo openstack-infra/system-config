@@ -28,6 +28,35 @@
               copy-after-failure: true
 
 - job:
+    name: gate-openstack-operations-guide
+    project-type: maven
+    node: quantal && !jclouds
+
+    triggers:
+      - zuul
+
+    prebuilders:
+      - gerrit-git-prep
+
+    maven:
+      maven-name: Maven3
+      root-module:
+        group-id: org.openstack.docs
+        artifact-id: openstack-guide
+      root-pom: doc/src/docbkx/openstack-ops/pom.xml
+      goals: 'clean generate-sources'
+
+    publishers:
+      - console-log
+      - scp:
+          site: 'static.openstack.org'
+          files:
+            - target: 'docs-draft/$JOB_NAME/$ZUUL_PIPELINE/$BUILD_NUMBER/ops/'
+              source: 'doc/src/docbkx/openstack-ops/target/docbkx/webhelp/**'
+              keep-hierarchy: true
+              copy-after-failure: true
+
+- job:
     name: gate-openstack-manuals-validate
     node: quantal
 
@@ -479,3 +508,36 @@
           remove-prefix: 'doc/src/docbkx/openstack-install/target/docbkx/webhelp/'
           excludes: '**/*.xml,**/null*'
 
+- job:
+    name: openstack-operations-guide
+    project-type: maven
+    concurrent: false
+    node: quantal && !jclouds
+
+    triggers:
+      - zuul-post
+
+    properties:
+      - inject:
+          script-file: /usr/local/jenkins/slave_scripts/docbook-properties.sh
+          properties-file: gerrit-doc.properties
+
+    prebuilders:
+      - gerrit-git-prep
+
+    maven:
+      maven-name: Maven3
+      root-module:
+        group-id: org.openstack.docs
+        artifact-id: openstack-guide
+      root-pom: doc/src/docbkx/openstack-ops/pom.xml
+      goals: '-Doperating.system=apt -Dprofile.os=ubuntu -Drelease.path.name=${DOC_RELEASE_PATH} -Dcomments.enabled=${DOC_COMMENTS_ENABLED} clean generate-sources'
+
+    publishers:
+      - console-log-post
+      - ftp:
+          site: docs.openstack.org
+          source: 'doc/src/docbkx/openstack-ops/target/docbkx/webhelp/**'
+          target: '/'
+          remove-prefix: 'doc/src/docbkx/openstack-ops/target/docbkx/webhelp/'
+          excludes: '**/*.xml,**/null*'
