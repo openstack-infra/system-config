@@ -45,4 +45,10 @@ class jeepyb::openstackwatch(
     mode    => '0640',
     require => User['openstackwatch'],
   }
+
+  if ! defined(Package['PyRSS2Gen']) {
+    package { 'PyRSS2Gen':
+      ensure => present,
+    }
+  }
 }
