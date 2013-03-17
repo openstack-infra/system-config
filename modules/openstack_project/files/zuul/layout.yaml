@@ -1052,9 +1052,11 @@ projects:
   - name: openstack/openstack-manuals
     check:
       - gate-openstack-cli-guide
+      - gate-openstack-operations-guide
       - gate-openstack-manuals-validate
     gate:
       - gate-openstack-cli-guide
+      - gate-openstack-operations-guide
       - gate-openstack-manuals-validate
     post:
       - openstack-admin-manual-compute
@@ -1069,6 +1071,7 @@ projects:
       - openstack-ha-guide
       - openstack-install-deploy-guide-apt-fedora
       - openstack-install-deploy-guide-ubuntu
+      - openstack-operations-guide
 
   - name: openstack/api-site
     check:
