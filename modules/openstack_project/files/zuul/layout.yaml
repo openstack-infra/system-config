@@ -1069,6 +1069,7 @@ projects:
       - openstack-ha-guide
       - openstack-install-deploy-guide-apt-fedora
       - openstack-install-deploy-guide-ubuntu
+      - openstack-operations-guide
 
   - name: openstack/api-site
     check:
