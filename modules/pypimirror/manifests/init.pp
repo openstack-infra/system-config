@@ -72,7 +72,6 @@ class pypimirror(
     user    => 'root',
     hour    => '0',
     command => '/usr/local/bin/run-mirror.sh',
-    require => File['/usr/local/mirror_scripts/run-mirror.sh'],
   }
 
   cron { 'update_pypi_mirror':
