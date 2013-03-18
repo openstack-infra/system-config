@@ -124,7 +124,7 @@ class openstack_project::static (
     user        => 'root',
     minute      => '0',
     hour        => '*/6',
-    command     => 'sleep $((RANDOM\%600)) && flock -n /var/run/gziplogs.lock find /srv/static/logs/ -type f -not -name robots.txt \( -name \*.txt -or -name \*.html \) -exec gzip \{\} \;',
+    command     => 'sleep $((RANDOM\%600)) && flock -n /var/run/gziplogs.lock find /srv/static/logs/ -type f -not -name robots.txt -not -name \*.gz \( -name \*.txt -or -name \*.html -or -name tmp\* \) -exec gzip \{\} \;',
     environment => 'PATH=/var/lib/gems/1.8/bin:/usr/bin:/bin:/usr/sbin:/sbin',
   }
 }
