@@ -19,3 +19,29 @@
 
     publishers:
       - console-log
+
+- job:
+    name: gearman-plugin-tarball
+    project-type: maven
+    node: quantal && !jclouds
+
+    triggers:
+      - zuul-post
+
+    prebuilders:
+      - gerrit-git-prep
+
+    maven:
+      maven-name: Maven3
+      root-module:
+        group-id: org.jenkins-ci.plugins
+        artifact-id: gearman-plugin
+      root-pom: pom.xml
+      goals: 'clean package -Dmaven.test.skip=true'
+
+    publishers:
+      - war:
+          site: 'tarballs.openstack.org'
+          warfile: 'target/gearman-plugin.hpi'
+          target: 'tarballs/ci/'
+      - console-log-post
