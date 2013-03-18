@@ -1230,6 +1230,8 @@ projects:
       - gate-gearman-plugin-build
     gate:
       - gate-gearman-plugin-build
+    post:
+      - gearman-plugin-tarball
 
   - name: stackforge/database-api
     check:
