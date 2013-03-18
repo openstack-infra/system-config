@@ -48,6 +48,11 @@ then
     gzip -9 ./testr_results.html
 fi
 
+if [ -f .testrepository/tmp* ]
+then
+  gzip -9 .testrepository/tmp*
+fi
+
 sudo /usr/local/jenkins/slave_scripts/jenkins-sudo-grep.sh post
 sudoresult=$?
 
