@@ -19,6 +19,7 @@ openstack-infra:
       - openstack-infra/reviewday
       - openstack-infra/zuul
       - openstack-infra/gearman-plugin
+      - openstack/requirements
     branches:
       - master
 
