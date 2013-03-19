@@ -219,6 +219,8 @@ node 'zuul.openstack.org' {
     sysadmins            => hiera('sysadmins'),
     statsd_host          => 'graphite.openstack.org',
   }
+  # co-host gearman-job-server
+  include gearman
 }
 
 # A bare machine, but with a jenkins user
