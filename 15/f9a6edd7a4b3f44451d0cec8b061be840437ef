@@ -1,0 +1,9 @@
+Verified+2: Jenkins
+Approved+1: Jeremy Stanley <fungi@yuggoth.org>
+Code-Review+2: Jeremy Stanley <fungi@yuggoth.org>
+Code-Review+1: Anita Kuno <akuno@lavabit.com>
+Submitted-by: Jenkins
+Submitted-at: Tue, 19 Mar 2013 22:44:41 +0000
+Reviewed-on: https://review.openstack.org/24850
+Project: openstack-infra/config
+Branch: refs/heads/master
