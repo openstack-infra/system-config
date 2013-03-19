@@ -16,10 +16,10 @@ mode = <%= mode %>
 [swift]
 # username/tenant for swift with 2.0 or just username with 1.0 (i.e:
 # RAX).
-# username =
+username = <%= swift_username %>
 
-# passowrd or api key
-# password =
+# password or api key
+password = <%= swift_password %>
 
 # container to upload (probably want to be public)
 container = <%= container %>
@@ -28,10 +28,10 @@ container = <%= container %>
 # https://auth.api.rackspacecloud.com/v1.0
 # or Rackspace UK :
 # https://lon.auth.api.rackspacecloud.com/v1.0
-# auth_url = https://lon.auth.api.rackspacecloud.com/v1.0
+auth_url = <%= swift_auth_url %>
 
 # auth version (1.0 for Rackspace clouds, 2.0 for keystone backend clusters)
-# auth_version = 1.0
+auth_version = <%= auth_version %>
 
 # the object name where to store the combined rss
 uploaded_file = <%= feed %>

@@ -37,6 +37,9 @@ node 'review.openstack.org' {
     contactstore_appsec             => hiera('gerrit_contactstore_appsec'),
     contactstore_pubkey             => hiera('gerrit_contactstore_pubkey'),
     sysadmins                       => hiera('sysadmins'),
+    swift_username                  => hiera('openstackwatch_swift_username'),
+    swift_password                  => hiera('openstackwatch_swift_password'),
+    swift_auth_url                  => hiera('openstackwatch_swift_auth_url'),
   }
 }
 

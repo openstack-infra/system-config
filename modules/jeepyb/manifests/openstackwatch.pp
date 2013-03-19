@@ -1,6 +1,10 @@
 # == Class: jeepyb::openstackwatch
 
 class jeepyb::openstackwatch(
+  $swift_username = '',
+  $swift_password = '',
+  $swift_auth_url = '',
+  $auth_version = '1.0',
   $projects = [],
   $mode = 'multiple',
   $container = 'rss',
