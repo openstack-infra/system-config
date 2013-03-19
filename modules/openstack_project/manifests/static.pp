@@ -131,7 +131,7 @@ class openstack_project::static (
     environment => 'PATH=/var/lib/gems/1.8/bin:/usr/bin:/bin:/usr/sbin:/sbin',
   }
 
-  include ::reviewday
+  include reviewday
 
   reviewday::site { 'reviewday.openstack.org':
     git_url     => 'https://github.com/openstack-infra/reviewday.git',
