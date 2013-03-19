@@ -65,14 +65,16 @@ class openstack_project::gerrit (
   }
 
   class { 'jeepyb::openstackwatch':
-    projects  => [
+    projects       => [
       'openstack/cinder',
       'openstack/keystone',
       'openstack-dev/devstack',
     ],
-    container => 'rss',
-    feed      => 'openstackwatch.xml',
-    json_url  => 'https://review.openstack.org/query?q=status:open',
+    container      => 'rss',
+    feed           => 'openstackwatch.xml',
+    json_url       => 'https://review.openstack.org/query?q=status:open',
+    swift_auth_url => 'https://swift_auth_url_goes_here',
+    auth_version   => '1.0',
   }
 
   class { '::gerrit':
