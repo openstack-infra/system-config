@@ -1,7 +1,10 @@
 # == Class: openstack_project::static
 #
 class openstack_project::static (
-  $sysadmins = []
+  $sysadmins = [],
+  $reviewday_gerrit_ssh_key = '',
+  $reviewday_rsa_pubkey_contents = '',
+  $reviewday_rsa_key_contents = ''
 ) {
 
   class { 'openstack_project::server':
@@ -139,5 +142,8 @@ class openstack_project::static (
     gerrit_url  => 'review.openstack.org',
     gerrit_port => '29418',
     gerrit_user => 'reviewday',
+    reviewday_gerrit_ssh_key => $reviewday_gerrit_ssh_key,
+    reviewday_rsa_pubkey_contents => $reviewday_rsa_pubkey_contents,
+    reviewday_rsa_key_content => $reviewday_rsa_key_content,
   }
 }
