@@ -1,6 +1,10 @@
 # == Class: jeepyb::openstackwatch
 
 class jeepyb::openstackwatch(
+  $swift_username = '',
+  $swift_password = '',
+  $swift_auth_url = '',
+  $auth_version = '',
   $projects = [],
   $mode = 'multiple',
   $container = 'rss',
@@ -24,17 +28,19 @@ class jeepyb::openstackwatch(
     require    => Group['openstackwatch'],
   }
 
-  cron { 'openstackwatch':
-    ensure  => present,
-    command => '/usr/local/bin/openstackwatch /home/openstackwatch/openstackwatch.ini',
-    minute  => $minute,
-    hour    => $hour,
-    user    => 'openstackwatch',
-    require => [
-      File['/home/openstackwatch/openstackwatch.ini'],
-      User['openstackwatch'],
-      Class['jeepyb'],
-    ],
+  if $swift_password != '' {
+    cron { 'openstackwatch':
+      ensure  => present,
+      command => '/usr/local/bin/openstackwatch /home/openstackwatch/openstackwatch.ini',
+      minute  => $minute,
+      hour    => $hour,
+      user    => 'openstackwatch',
+      require => [
+        File['/home/openstackwatch/openstackwatch.ini'],
+        User['openstackwatch'],
+        Class['jeepyb'],
+      ],
+    }
   }
 
   file { '/home/openstackwatch/openstackwatch.ini':

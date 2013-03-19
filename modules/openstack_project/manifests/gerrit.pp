@@ -57,7 +57,9 @@ class openstack_project::gerrit (
   $cla_id = '2',
   $cla_name = 'ICLA',
   $testmode = false,
-  $sysadmins = []
+  $sysadmins = [],
+  $swift_username = '',
+  $swift_password = '',
 ) {
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [80, 443, 29418],
@@ -65,14 +67,18 @@ class openstack_project::gerrit (
   }
 
   class { 'jeepyb::openstackwatch':
-    projects  => [
+    projects       => [
       'openstack/cinder',
       'openstack/keystone',
       'openstack-dev/devstack',
     ],
-    container => 'rss',
-    feed      => 'openstackwatch.xml',
-    json_url  => 'https://review.openstack.org/query?q=status:open',
+    container      => 'rss',
+    feed           => 'openstackwatch.xml',
+    json_url       => 'https://review.openstack.org/query?q=status:open',
+    swift_username => $swift_username,
+    swift_password => $swift_password,
+    swift_auth_url => 'https://auth.api.rackspacecloud.com/v1.0',
+    auth_version   => '1.0',
   }
 
   class { '::gerrit':
