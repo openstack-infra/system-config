@@ -796,6 +796,52 @@ projects:
     gate:
       - gate-noop
 
+  - name: openstack-dev/hacking
+    check:
+      - gate-hacking-pep8:
+        - gate-hacking-docs
+        - gate-hacking-python26
+        - gate-hacking-python27
+    gate:
+      - gate-hacking-docs
+      - gate-hacking-pep8
+      - gate-hacking-python26
+      - gate-hacking-python27
+    post:
+      - hacking-branch-tarball
+      - hacking-coverage
+      - hacking-docs
+    pre-release:
+      - hacking-docs
+      - hacking-tarball
+    release:
+      - hacking-docs
+      - hacking-tarball:
+        - hacking-pypi-upload
+
+  - name: openstack-dev/pbr
+    check:
+      - gate-pbr-pep8:
+        - gate-pbr-docs
+        - gate-pbr-python26
+        - gate-pbr-python27
+    gate:
+      - gate-pbr-docs
+      - gate-pbr-pep8
+      - gate-pbr-python26
+      - gate-pbr-python27
+    post:
+      - pbr-branch-tarball
+      - pbr-coverage
+      - pbr-docs
+    pre-release:
+      - pbr-docs
+      - pbr-tarball
+    release:
+      - pbr-docs
+      - pbr-tarball:
+        - pbr-pypi-upload
+
   - name: openstack-dev/devstack
     check:
       - gate-tempest-devstack-vm-smoke
