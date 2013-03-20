@@ -64,6 +64,32 @@
 
 
 - project:
+    name: hacking
+    github-org: openstack-dev
+    node: quantal
+    doc-publisher-site: ci.openstack.org
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - python-jobs
+      - '{name}-tarball'
+      - pypi-jobs
+
+
+- project:
+    name: pbr
+    github-org: openstack-dev
+    node: quantal
+    doc-publisher-site: ci.openstack.org
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - python-jobs
+      - '{name}-tarball'
+      - pypi-jobs
+
+
+- project:
     name: gerritbot
     github-org: openstack-infra
     node: quantal
