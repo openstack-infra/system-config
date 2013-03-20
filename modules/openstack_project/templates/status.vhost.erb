@@ -49,12 +49,15 @@ NameVirtualHost <%= vhost_name %>:<%= port %>
     Allow from all
   </Location>
 
+  Alias /reviewday <%= $reviewday::site::httproot %>
+
   <Directory <%= docroot %>>
     Options <%= options %>
     AllowOverride None
     Order allow,deny
     allow from all
   </Directory>
+
   ErrorLog /var/log/apache2/<%= name %>_error.log
   LogLevel warn
   CustomLog /var/log/apache2/<%= name %>_access.log combined

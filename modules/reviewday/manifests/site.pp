@@ -15,24 +15,62 @@
 # == Define: reviewday
 #
 define reviewday::site(
+  $gerrit_url = '',
+  $gerrit_port = '',
+  $gerrit_user = '',
+  $reviewday_rsa_key_contents = '',
+  $reviewday_rsa_pubkey_contents = '',
+  $reviewday_gerrit_ssh_key = '',
   $git_url = '',
   $httproot = '',
-  $serveradmin = '',
+  $serveradmin = ''
 ) {
-  include apache
 
-  vcsrepo { "/var/lib/${name}/reviewday":
+  file { '/var/lib/reviewday/.ssh/':
+    ensure  => directory,
+    owner   => 'reviewday',
+    group   => 'reviewday',
+    mode    => '0700',
+    require => User['reviewday'],
+  }
+
+  if $reviewday_rsa_key_contents != '' {
+    file { '/var/lib/reviewday/.ssh/id_rsa':
+      owner   => 'reviewday',
+      group   => 'reviewday',
+      mode    => '0600',
+      content => $reviewday_rsa_key_contents,
+      replace => true,
+      require => File['/var/lib/reviewday/.ssh/']
+    }
+  }
+
+  if $reviewday_rsa_pubkey_contents != '' {
+    file { '/var/lib/reviewday/.ssh/id_rsa.pub':
+      owner   => 'reviewday',
+      group   => 'reviewday',
+      mode    => '0600',
+      content => $reviewday_rsa_pubkey_contents,
+      replace => true,
+      require => File['/var/lib/reviewday/.ssh/']
+    }
+  }
+
+  if $reviewday_gerrit_ssh_key != '' {
+    file { '/var/lib/reviewday/.ssh/known_hosts':
+      owner   => 'reviewday',
+      group   => 'reviewday',
+      mode    => '0600',
+      content => $reviewday_gerrit_ssh_key,
+      replace => true,
+      require => File['/var/lib/reviewday/.ssh/']
+    }
+  }
+
+  vcsrepo { '/var/lib/reviewday/reviewday':
     ensure   => present,
     provider => git,
     source   => $git_url,
-  }
-
-  apache::vhost { $name:
-    docroot  => $httproot,
-    port     => 80,
-    priority => '50',
-    require  => File[$httproot],
-    template => 'reviewday.vhost.erb',
   }
 
   file { $httproot:
@@ -42,19 +80,20 @@ define reviewday::site(
     mode   => '0644',
   }
 
-  file { "/var/lib/${name}/.ssh/config":
+  file { '/var/lib/reviewday/.ssh/config':
     ensure   => present,
     content  => template('ssh_config.erb'),
-    owner    => reviewday,
-    group    => reviewday,
+    owner    => 'reviewday',
+    group    => 'reviewday',
     mode     => '0644',
   }
 
-  cron { "update ${name} reviewday":
-    command => "cd /var/lib/${name}/reviewday && PYTHONPATH=\$PWD python bin/reviewday -o /${httproot}",
+  cron { 'update reviewday':
+    command => "cd /var/lib/reviewday/reviewday && PYTHONPATH=\$PWD python bin/reviewday -o ${httproot}",
     minute  => '*/15',
     user    => 'reviewday',
   }
+
 }
 
 # vim:sw=2:ts=2:expandtab:textwidth=79
