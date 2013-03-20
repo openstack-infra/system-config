@@ -156,12 +156,10 @@ class openstack_project::static (
 
   include reviewday
 
-  reviewday::site { 'reviewday.openstack.org':
-    git_url     => 'https://github.com/openstack-infra/reviewday.git',
-    serveradmin => 'webmaster@openstack.org',
-    httproot    => "/srv/static/${name}",
-  }
-  reviewday::init { 'reviewday.openstack.org':
+  reviewday::site { 'reviewday':
+    git_url                       => 'https://github.com/openstack-infra/reviewday.git',
+    serveradmin                   => 'webmaster@openstack.org',
+    httproot                      => '/srv/static/reviewday',
     gerrit_url                    => 'review.openstack.org',
     gerrit_port                   => '29418',
     gerrit_user                   => 'reviewday',
