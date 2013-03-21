@@ -257,6 +257,13 @@ node 'pypi.slave.openstack.org' {
   }
 }
 
+node 'salt.slave.openstack.org' {
+  class { 'openstack_project::salt_slave':
+    salt_username => 'openstackci',
+    salt_password => hiera('salt_password'),
+  }
+}
+
 node /^quantal.*\.slave\.openstack\.org$/ {
   include openstack_project::puppet_cron
   class { 'openstack_project::slave':
