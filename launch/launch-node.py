@@ -104,6 +104,10 @@ def bootstrap_server(server, admin_pass, key, cert, environment):
                    "--no-daemonize --verbose --onetime --pluginsync true "
                    "--certname %s" % (environment, certname))
 
+# somewhere in this file, perhaps here, I plan on adding code
+# that generates salt-keys and loads public on master
+# and public and private on minion
+
 def build_server(client, name, image, flavor, cert, environment):
     key = None
     server = None
