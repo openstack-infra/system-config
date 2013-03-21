@@ -143,3 +143,13 @@ openstack-quantum:
       - openstack/python-quantumclient
     branches:
       - master
+
+savanna:
+    events:
+      - patchset-created
+      - change-merged
+      - x-vrif-minus-2
+    projects:
+      - openstack/savanna
+    branches:
+      - master
