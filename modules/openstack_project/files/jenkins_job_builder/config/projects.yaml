@@ -1,4 +1,14 @@
 - project:
+    name: climate
+    github-org: stackforge
+    node: quantal
+
+    jobs:
+      - gate-{name}-pep8
+      - gate-{name}-python26
+      - gate-{name}-python27
+
+- project:
     name: kwapi
     github-org: stackforge
     node: quantal

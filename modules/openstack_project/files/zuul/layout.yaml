@@ -1219,6 +1219,16 @@ projects:
     post:
       - diskimage-builder-coverage
 
+  - name: stackforge/climate
+    check:
+      - gate-climate-pep8:
+        - gate-climate-python26
+        - gate-climate-python27
+    gate:
+      - gate-climate-pep8
+      - gate-climate-python26
+      - gate-climate-python27
+
   - name: stackforge/kwapi
     check:
       - gate-kwapi-pep8
