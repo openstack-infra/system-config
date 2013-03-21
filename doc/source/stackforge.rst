@@ -55,14 +55,13 @@ look something like::
 
   - project: stackforge/project-name
     description: Latest and greatest cloud stuff.
-    acl-config: /home/gerrit2/acls/stackforge/project-name.config
     upstream: git://github.com/awesumsauce/project-name.git
 
 The description will set the project description on the GitHub
 StackForge mirror, and the upstream should point at an existing
-repository that should be used to preseed Gerrit. Both of these options
-are optional, but you must have an acl-config. Note that the current
-tools assume that the upstream repo will have a master branch.
+repository which can be used to preseed Gerrit with an initial commit
+history. Both of these are optional. Note that the current tools
+assume that the upstream repo will have a master branch.
 
 The next step is to add a Gerrit ACL config file. Edit
 ``openstack-infra/config/modules/openstack_project/files/gerrit/acls/stackforge/project-name.config``
@@ -72,13 +71,24 @@ and make it look like::
           label-Code-Review = -2..+2 group project-name-core
           label-Approved = +0..+1 group project-name-core
           workInProgress = group project-name-core
-  [project]
-          state = active
+  [access "refs/tags/*"]
+          create = group project-name-core
+          pushTag = group project-name-core
   [receive]
           requireChangeId = true
           requireContributorAgreement = true
   [submit]
           mergeContent = true
+
+The access sections in the example ACL grant the project's core group
+approval privileges and the ability so set/un-set WIP status on
+changes, as well as the ability to push tags. The other sections set
+some required options for Gerrit to function normally (enforcing
+presence of a Change-Id in commits and allowing changes to be merged).
+This example also expects contributors to agree to a standard
+OpenStack CLA, join the OpenStack Foundation and submit contact
+information (this feature can be disabled by setting
+requireContributorAgreement to false).
 
 That is all that is necessary to add a StackForge project to Gerrit;
 however, this project isn't very useful until we setup Jenkins jobs for
