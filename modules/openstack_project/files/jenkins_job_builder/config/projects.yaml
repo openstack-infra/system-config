@@ -9,6 +9,15 @@
       - gate-{name}-python27
 
 - project:
+    name: savanna
+    github-org: stackforge
+    node: quantal
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - python-jobs
+
+- project:
     name: kwapi
     github-org: stackforge
     node: quantal

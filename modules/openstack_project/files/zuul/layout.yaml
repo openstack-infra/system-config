@@ -1265,3 +1265,14 @@ projects:
       - gate-noop
     gate:
       - gate-noop
+
+  - name: stackforge/savanna
+    check:
+      - gate-savanna-pep8:
+        - gate-savanna-python26
+        - gate-savanna-python26-rhel6
+        - gate-savanna-python27
+    gate:
+      - gate-savanna-pep8
+      - gate-savanna-python26
+      - gate-savanna-python27
