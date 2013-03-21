@@ -1,0 +1,11 @@
+Code-Review+2: James E. Blair <corvus@inaugust.com>
+Verified+2: Jenkins
+Code-Review+1: Dan Prince <dprince@redhat.com>
+Approved+1: Jeremy Stanley <fungi@yuggoth.org>
+Code-Review+2: Jeremy Stanley <fungi@yuggoth.org>
+Code-Review+1: Anita Kuno <akuno@lavabit.com>
+Submitted-by: Jenkins
+Submitted-at: Thu, 21 Mar 2013 13:34:30 +0000
+Reviewed-on: https://review.openstack.org/24364
+Project: openstack-infra/config
+Branch: refs/heads/master
