@@ -9,6 +9,14 @@
       - gate-{name}-python27
 
 - project:
+    name: savanna
+    github-org: stackforge
+    node: quantal
+
+    jobs:
+      - python-jobs
+
+- project:
     name: kwapi
     github-org: stackforge
     node: quantal
