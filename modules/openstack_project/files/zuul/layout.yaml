@@ -146,6 +146,12 @@ projects:
       - zuul-tarball:
         - zuul-pypi-upload
 
+  - name: openstack-infra/askbot-theme
+    check:
+      - gate-noop
+    gate:
+      - gate-noop
+
   - name: openstack-infra/nose-html-output
     check:
       - gate-noop
