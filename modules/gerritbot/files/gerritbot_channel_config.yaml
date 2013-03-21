@@ -4,6 +4,7 @@ openstack-infra:
       - change-merged
       - x-vrif-minus-2
     projects:
+      - openstack-infra/askbot-theme
       - openstack-infra/config
       - openstack-infra/devstack-gate
       - openstack-infra/gerrit
