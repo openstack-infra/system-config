@@ -111,7 +111,8 @@ should look something like::
   - project:
       name: project-name
       github-org: stackforge
-      node: precise
+      node: quantal
+      tarball-site: tarballs.openstack.org
 
       jobs:
         - python-jobs
