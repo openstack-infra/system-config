@@ -106,6 +106,7 @@ class gerrit(
   $enable_melody = false,
   $melody_session = false,
   $replicate_github = false,
+  $replicate_local = false,
   $replication_targets = [],
   $gitweb = true,
   $testmode = false
