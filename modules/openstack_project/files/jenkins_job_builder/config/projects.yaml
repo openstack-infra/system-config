@@ -16,6 +16,7 @@
 
     jobs:
       - python-jobs
+      - gate-{name}-pyflakes
 
 - project:
     name: kwapi

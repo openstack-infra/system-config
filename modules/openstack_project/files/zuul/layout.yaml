@@ -1268,11 +1268,15 @@ projects:
 
   - name: stackforge/savanna
     check:
-      - gate-savanna-pep8:
+      - gate-savanna-pyflakes:
+        - gate-savanna-pep8
         - gate-savanna-python26
         - gate-savanna-python26-rhel6
         - gate-savanna-python27
     gate:
       - gate-savanna-pep8
+      - gate-savanna-pyflakes
       - gate-savanna-python26
       - gate-savanna-python27
+    post:
+      - savanna-branch-tarball
