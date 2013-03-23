@@ -112,9 +112,23 @@ should look something like::
       name: project-name
       github-org: stackforge
       node: precise
+      tarball-site: tarballs.openstack.org
 
       jobs:
         - python-jobs
+        - gate-{name}-pyflakes
+        - gate-{name}-pylint
+
+The ``python-jobs`` group consists of the following jobs:
+
+    project-name-coverage
+    gate-project-name-pep8
+    gate-project-name-python26
+    gate-project-name-python26-rhel6
+    gate-project-name-python27
+    gate-project-name-docs
+    project-name-tarball
+    project-name-branch-tarball
 
 If you aren't ready to run any gate tests yet, you don't need to edit
 ``projects.yaml``.
@@ -127,18 +141,21 @@ should look something like::
 
   - name: stackforge/project-name
     check:
-      - gate-project-name-docs
-      - gate-project-name-pep8
-      - gate-project-name-python26
-      - gate-project-name-python27
+      - gate-project-name-pyflakes
+        - gate-project-name-pep8
+        - gate-project-name-docs
+        - gate-project-name-python26
+        - gate-project-name-python27
     gate:
-      - gate-project-name-docs
       - gate-project-name-pep8
+      - gate-project-name-pyflakes
+      - gate-project-name-docs
       - gate-project-name-python26
       - gate-project-name-python27
     post:
       - project-name-coverage
       - project-name-docs
+      - project-name-branch-tarball
     publish:
       - project-name-docs
 
