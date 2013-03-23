@@ -1276,3 +1276,25 @@ projects:
       - gate-savanna-pep8
       - gate-savanna-python26
       - gate-savanna-python27
+
+  - name: stackforge/billingstack
+    check:
+      - gate-billingstack-pep8:
+        - gate-billingstack-python26
+        - gate-billingstack-python26-rhel6
+        - gate-billingstack-python27
+    gate:
+      - gate-billingstack-pep8
+      - gate-billingstack-python26
+      - gate-billingstack-python27
+
+  - name: stackforge/billingstack-braintree
+    check:
+      - gate-billingstack-braintree-pep8:
+        - gate-billingstack-braintree-python26
+        - gate-billingstack-braintree-python26-rhel6
+        - gate-billingstack-braintree-python27
+    gate:
+      - gate-billingstack-braintree-pep8
+      - gate-billingstack-braintree-python26
+      - gate-billingstack-braintree-python27
