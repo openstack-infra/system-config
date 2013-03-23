@@ -116,6 +116,11 @@ should look something like::
 
       jobs:
         - python-jobs
+        - gate-{name}-pyflakes
+        - gate-{name}-pylint
+
+List of jobs included to the ``python-jobs`` jobs group is located in
+``openstack-infra/config/modules/openstack_project/files/jenkins_job_builder/config/python-jobs.yaml``.
 
 If you aren't ready to run any gate tests yet, you don't need to edit
 ``projects.yaml``.
@@ -128,18 +133,21 @@ should look something like::
 
   - name: stackforge/project-name
     check:
-      - gate-project-name-docs
-      - gate-project-name-pep8
-      - gate-project-name-python26
-      - gate-project-name-python27
+      - gate-project-name-pyflakes
+        - gate-project-name-pep8
+        - gate-project-name-docs
+        - gate-project-name-python26
+        - gate-project-name-python27
     gate:
-      - gate-project-name-docs
       - gate-project-name-pep8
+      - gate-project-name-pyflakes
+      - gate-project-name-docs
       - gate-project-name-python26
       - gate-project-name-python27
     post:
       - project-name-coverage
       - project-name-docs
+      - project-name-branch-tarball
     publish:
       - project-name-docs
 
