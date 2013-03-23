@@ -306,6 +306,7 @@
       - python-jobs
       - openstack-publish-jobs
       - gate-{name}-pyflakes
+      - gate-{name}-pylint
 
 
 - project:
@@ -319,6 +320,7 @@
       - python-jobs
       - openstack-publish-jobs
       - gate-{name}-pyflakes
+      - gate-{name}-pylint
 
 
 - project:

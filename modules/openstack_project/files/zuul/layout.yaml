@@ -91,6 +91,10 @@ jobs:
     branch: ^(?!stable/(diablo|essex)).*$
   - name: gate-oslo-incubator-pyflakes
     branch: ^(?!stable|(diablo|essex|folsom)).*$
+  - name: gate-oslo-incubator-pylint
+    voting: false
+  - name: gate-oslo.config-pylint
+    voting: false
   - name: dev-zuul-coverage
     voting: false
   - name: dev-heat-coverage
@@ -458,6 +462,7 @@ projects:
       - gate-oslo-incubator-pep8:
         - gate-oslo-incubator-docs
         - gate-oslo-incubator-pyflakes
+        - gate-oslo-incubator-pylint
         - gate-oslo-incubator-python26
         - gate-oslo-incubator-python26-rhel6
         - gate-oslo-incubator-python27
@@ -465,6 +470,7 @@ projects:
       - gate-oslo-incubator-docs
       - gate-oslo-incubator-pep8
       - gate-oslo-incubator-pyflakes
+      - gate-oslo-incubator-pylint
       - gate-oslo-incubator-python26
       - gate-oslo-incubator-python27
     post:
@@ -475,6 +481,7 @@ projects:
   - name: openstack/oslo.config
     check:
       - gate-oslo.config-pyflakes:
+        - gate-oslo.config-pylint
         - gate-oslo.config-docs
         - gate-oslo.config-pep8
         - gate-oslo.config-python26
