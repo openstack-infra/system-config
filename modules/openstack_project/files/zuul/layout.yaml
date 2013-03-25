@@ -1280,3 +1280,18 @@ projects:
       - gate-savanna-python27
     post:
       - savanna-branch-tarball
+ 
+  - name: stackforge/python-savannaclient
+    check:
+      - gate-python-savannaclient-pyflakes:
+        - gate-python-savannaclient-pep8
+        - gate-python-savannaclient-python26
+        - gate-python-savannaclient-python26-rhel6
+        - gate-python-savannaclient-python27
+    gate:
+      - gate-python-savannaclient-pep8
+      - gate-python-savannaclient-pyflakes
+      - gate-python-savannaclient-python26
+      - gate-python-savannaclient-python27
+    post:
+      - python-savannaclient-branch-tarball
