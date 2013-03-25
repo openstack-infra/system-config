@@ -239,6 +239,18 @@ node /^ci-backup-.*\.openstack\.org$/ {
 # Jenkins slaves:
 #
 
+node 'mirror26.slave.openstack.org' {
+  class { 'openstack_project::mirror26_slave':
+    jenkins_ssh_private_key => hiera('jenkins_ssh_private_key_contents')
+  }
+}
+
+node 'mirror27.slave.openstack.org' {
+  class { 'openstack_project::mirror27_slave':
+    jenkins_ssh_private_key => hiera('jenkins_ssh_private_key_contents')
+  }
+}
+
 node 'devstack-launch.slave.openstack.org' {
   class { 'openstack_project::devstack_launch_slave':
     jenkins_api_user        => hiera('jenkins_api_user'),
