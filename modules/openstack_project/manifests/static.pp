@@ -51,6 +51,13 @@ class openstack_project::static (
     template => 'openstack_project/logs.vhost.erb',
   }
 
+  apache::vhost { 'pypi.openstack.org':
+    port     => 80,
+    priority => '50',
+    docroot  => '/srv/static/pypi',
+    require  => File['/srv/static/pypi'],
+  }
+
   apache::vhost { 'docs-draft.openstack.org':
     port     => 80,
     priority => '50',
@@ -91,6 +98,13 @@ class openstack_project::static (
     require => User['jenkins'],
   }
 
+  file { '/srv/static/pypi':
+    ensure  => directory,
+    owner   => 'jenkins',
+    group   => 'jenkins',
+    require => User['jenkins'],
+  }
+
   file { '/srv/static/logs/robots.txt':
     ensure  => present,
     owner   => 'root',
@@ -98,6 +112,15 @@ class openstack_project::static (
     mode    => '0444',
     source  => 'puppet:///modules/openstack_project/disallow_robots.txt',
     require => File['/srv/static/logs'],
+  }
+
+  file { '/srv/static/pypi/robots.txt':
+    ensure  => present,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0444',
+    source  => 'puppet:///modules/openstack_project/disallow_robots.txt',
+    require => File['/srv/static/pypi'],
   }
 
   file { '/srv/static/docs-draft':
