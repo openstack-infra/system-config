@@ -151,6 +151,7 @@ savanna:
       - change-merged
       - x-vrif-minus-2
     projects:
-      - openstack/savanna
+      - stackforge/savanna
+      - stackforge/python-savannaclient
     branches:
       - master

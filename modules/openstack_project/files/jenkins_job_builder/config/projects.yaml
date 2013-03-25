@@ -19,6 +19,16 @@
       - gate-{name}-pyflakes
 
 - project:
+    name: python-savannaclient
+    github-org: stackforge
+    node: quantal
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - python-jobs
+      - gate-{name}-pyflakes
+
+- project:
     name: kwapi
     github-org: stackforge
     node: quantal
