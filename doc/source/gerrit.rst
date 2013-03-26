@@ -647,8 +647,8 @@ a single project you will want to do the following:
              label-Approved = +0..+1 group project-name-core
              workInProgress = group project-name-core
      [access "refs/heads/milestone-proposed"]
-             label-Code-Review = -2..+2 group project-name-drivers
-             label-Approved = +0..+1 group project-name-drivers
+             label-Code-Review = -2..+2 group project-name-milestone
+             label-Approved = +0..+1 group project-name-milestone
      [project]
              state = active
      [receive]
@@ -851,16 +851,16 @@ Next, edit `project.config` to look like::
               label-Code-Review = -2..+2 group $PROJECT-core
               label-Approved = +0..+1 group $PROJECT-core
       [access "refs/heads/milestone-proposed"]
-              label-Code-Review = -2..+2 group $PROJECT-drivers
-              label-Approved = +0..+1 group $PROJECT-drivers
+              label-Code-Review = -2..+2 group $PROJECT-milestone
+              label-Approved = +0..+1 group $PROJECT-milestone
 
 If the project is for a client library, the `refs/*` section of
 `project.config` should look like::
 
       [access "refs/*"]
               owner = group Administrators
-              create = group $PROJECT-drivers
-              pushTag = group $PROJECT-drivers
+              create = group $PROJECT-milestone
+              pushTag = group $PROJECT-milestone
 
 Replace $PROJECT with the name of the project.
 
@@ -935,7 +935,7 @@ High level goals:
 #. Members of $PROJECT-core group can perform full code review
    (blocking or approving: +/- 2), and submit changes to be merged.
 #. Members of openstack-release (Release Manager and PTLs), and
-   $PROJECT-drivers (PTL and release minded people) exclusively can
+   $PROJECT-milestone (PTL and release minded people) exclusively can
    perform full code review (blocking or approving: +/- 2), and submit
    changes to be merged on milestone-proposed branches.
 #. Full code review (+/- 2) of API projects should be available to the
@@ -1011,16 +1011,16 @@ These permissions try to achieve the high level goals::
   project foo:
     refs/*
       owner: Administrators
-      create reference: foo-drivers  [client library only]
-      push annotated tag: foo-drivers  [client library only]
+      create reference: foo-milestone  [client library only]
+      push annotated tag: foo-milestone  [client library only]
 
     refs/heads/*
       label code review -2/+2: foo-core
       label approved 0/+1: foo-core
 
     refs/heads/milestone-proposed
-      label code review -2/+2: foo-drivers
-      label approved 0/+1: foo-drivers
+      label code review -2/+2: foo-milestone
+      label approved 0/+1: foo-milestone
 
 Renaming a Project
 ******************
