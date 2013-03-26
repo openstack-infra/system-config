@@ -1097,10 +1097,9 @@ projects:
       - gate-openstack-manuals-validate
     post:
       - openstack-admin-manual-compute
-      - openstack-admin-manual-keystone-diablo
       - openstack-admin-manual-netconn
       - openstack-admin-manual-object
-      - openstack-admin-manuals-diablo
+      - openstack-admin-manual-block
       - openstack-cli-guide
       - openstack-basic-install
       - openstack-glossary

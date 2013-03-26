@@ -127,6 +127,34 @@
           excludes: '**/*.xml,**/null*'
 
 - job:
+    name: openstack-admin-manual-block
+    project-type: maven
+    node: quantal && !jclouds
+
+    triggers:
+      - zuul-post
+
+    prebuilders:
+      - gerrit-git-prep
+
+    maven:
+      maven-name: Maven3
+      root-module:
+        group-id: org.openstack.docs
+        artifact-id: openstack-guide
+      root-pom: doc/src/docbkx/openstack-block-storage-admin/pom.xml
+      goals: 'clean generate-sources'
+
+    publishers:
+      - console-log-post
+      - ftp:
+          site: docs.openstack.org
+          source: 'doc/src/docbkx/openstack-block-storage-admin/target/docbkx/webhelp/**'
+          target: '/'
+          remove-prefix: 'doc/src/docbkx/openstack-block-storage-admin/target/docbkx/webhelp/'
+          excludes: '**/*.xml,**/null*'
+
+- job:
     name: openstack-glossary
     project-type: maven
     node: quantal && !jclouds
