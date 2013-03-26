@@ -82,7 +82,7 @@ define reviewday::site(
 
   file { '/var/lib/reviewday/.ssh/config':
     ensure   => present,
-    content  => template('ssh_config.erb'),
+    content  => template('reviewday/ssh_config.erb'),
     owner    => 'reviewday',
     group    => 'reviewday',
     mode     => '0644',

@@ -42,7 +42,7 @@ NameVirtualHost <%= vhost_name %>:<%= port %>
     Allow from all
   </Location>
 
-  Alias /reviews <%= $reviewday::site::httproot %>
+  Alias /reviews /srv/static/reviewday
 
   <Directory <%= docroot %>>
     Options <%= options %>
