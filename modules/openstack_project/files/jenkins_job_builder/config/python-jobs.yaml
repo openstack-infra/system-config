@@ -338,6 +338,23 @@
       - console-log-post
 
 
+- job-template:
+    name: 'gate-{name}-requirements'
+    node: precise
+
+    triggers:
+      - zuul
+
+    builders:
+      - gerrit-git-prep
+      - shell: |
+          #!/bin/bash -xe
+          /usr/local/jenkins/slave_scripts/project-requirements-change.py $ZUUL_BRANCH
+
+    publishers:
+      - console-log
+
+
 - job-group:
     name: python-jobs
     jobs:
@@ -347,6 +364,7 @@
       - 'gate-{name}-python26-rhel6'
       - 'gate-{name}-python27'
       - 'gate-{name}-docs'
+      - 'gate-{name}-requirements'
       - '{name}-tarball'
       - '{name}-branch-tarball'
       # pyflakes isn't standard
