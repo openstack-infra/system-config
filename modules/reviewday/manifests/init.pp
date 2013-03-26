@@ -24,6 +24,13 @@ class reviewday {
     ensure => present,
   }
 
+  file {'/var/lib/reviewday':
+    ensure => directory,
+    owner  => 'reviewday',
+    group  => 'reviewday',
+    mode   => '0755',
+  }
+
   group { 'reviewday':
     ensure => present,
   }
