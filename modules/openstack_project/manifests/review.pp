@@ -54,7 +54,9 @@ class openstack_project::review (
   $contactstore_appsec='',
   $contactstore_pubkey='',
   $replicate_github=true,
-  $sysadmins = []
+  $sysadmins = [],
+  $swift_username = '',
+  $swift_password = ''
 ) {
   class { 'openstack_project::gerrit':
     ssl_cert_file                   =>
@@ -102,6 +104,8 @@ class openstack_project::review (
     email_private_key               => $email_private_key,
     replicate_github                => $replicate_github,
     sysadmins                       => $sysadmins,
+    swift_username                  => $swift_username,
+    swift_password                  => $swift_password,
   }
   class { 'gerritbot':
     nick       => 'openstackgerrit',

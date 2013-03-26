@@ -21,7 +21,9 @@ class openstack_project::review_dev (
   $lp_sync_token = '',
   $lp_sync_secret = '',
   $replicate_github = true,
-  $sysadmins = []
+  $sysadmins = [],
+  $swift_username = '',
+  $swift_password = ''
 ) {
   class { 'openstack_project::gerrit':
     vhost_name                      => 'review-dev.openstack.org',
@@ -59,6 +61,8 @@ class openstack_project::review_dev (
     email_private_key               => $email_private_key,
     replicate_github                => $replicate_github,
     sysadmins                       => $sysadmins,
+    swift_username                  => $swift_username,
+    swift_password                  => $swift_password,
   }
 
   file { '/var/log/gerrit_user_sync':
