@@ -67,6 +67,14 @@ define reviewday::site(
     }
   }
 
+  file {'/var/lib/reviewday/reviewday':
+    ensure  => directory,
+    owner   => 'reviewday',
+    group   => 'reviewday',
+    mode    => '0755',
+    require => File['/var/lib/reviewday/'],
+  }
+
   vcsrepo { '/var/lib/reviewday/reviewday':
     ensure   => present,
     provider => git,
@@ -77,7 +85,7 @@ define reviewday::site(
     ensure => directory,
     owner  => 'reviewday',
     group  => 'reviewday',
-    mode   => '0644',
+    mode   => '0755',
   }
 
   file { '/var/lib/reviewday/.ssh/config':
