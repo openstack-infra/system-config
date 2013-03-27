@@ -76,9 +76,10 @@ define reviewday::site(
   }
 
   vcsrepo { '/var/lib/reviewday/reviewday':
-    ensure   => present,
+    ensure   => latest,
     provider => git,
     source   => $git_url,
+    revision => 'master',
   }
 
   file { $httproot:
