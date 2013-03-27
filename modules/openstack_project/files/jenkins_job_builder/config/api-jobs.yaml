@@ -390,3 +390,308 @@
           target: ''
           remove-prefix: 'openstack-image-service-api/target/docbkx/webhelp'
           excludes: '**/*.xml,**/null*'
+
+# the following jobs will build doc drafts for review before merging
+- job:
+    name: gate-openstack-api-programming
+    project-type: maven
+    node: quantal && !jclouds
+
+    triggers:
+      - zuul
+
+    prebuilders:
+      - gerrit-git-prep
+      - markdown-docbook:
+          filename: "openstack-api-programming"
+
+    properties:
+      - inject:
+          script-file: /usr/local/jenkins/slave_scripts/docbook-properties.sh
+          properties-file: gerrit-doc.properties
+
+    maven:
+      maven-name: Maven3
+      root-module:
+        group-id: org.openstack.docs
+        artifact-id: openstack-guide
+      root-pom: openstack-api-programming/pom.xml
+      goals: 'clean generate-sources'
+
+    publishers:
+      - console-log
+      - scp:
+          site: 'static.openstack.org'
+          files:
+            - target: 'docs-draft/$JOB_NAME/$ZUUL_PIPELINE/$BUILD_NUMBER/openstack-compute/programmer/'
+              source: 'openstack-api-programming/target/docbkx/webhelp/**'
+              keep-hierarchy: true
+              copy-after-failure: true
+
+- job:
+    name: gate-openstack-api-quick-start
+    project-type: maven
+    node: quantal && !jclouds
+
+    triggers:
+      - zuul
+
+    prebuilders:
+      - gerrit-git-prep
+
+    maven:
+      maven-name: Maven3
+      root-module:
+        group-id: org.openstack.docs
+        artifact-id: openstack-guide
+      root-pom: api-quick-start/pom.xml
+      goals: 'clean generate-sources'
+
+    publishers:
+      - console-log
+      - scp:
+          site: 'static.openstack.org'
+          files:
+            - target: 'docs-draft/$JOB_NAME/$ZUUL_PIPELINE/$BUILD_NUMBER/api-quick-start-onepager/'
+              source: 'api-quick-start/target/docbkx/webhelp/**'
+              keep-hierarchy: true
+              copy-after-failure: true
+
+- job:
+    name: gate-openstack-api-ref
+    project-type: maven
+    node: quantal && !jclouds
+
+    triggers:
+      - zuul
+
+    prebuilders:
+      - gerrit-git-prep
+
+    maven:
+      maven-name: Maven3
+      root-module:
+        group-id: org.openstack.docs
+        artifact-id: openstack-guide
+      root-pom: api-ref/pom.xml
+      goals: 'clean generate-sources'
+
+    publishers:
+      - console-log
+      - scp:
+          site: 'static.openstack.org'
+          files:
+            - target: 'docs-draft/$JOB_NAME/$ZUUL_PIPELINE/$BUILD_NUMBER/api-ref/'
+              source: 'api-ref/target/docbkx/html/**'
+              keep-hierarchy: true
+              copy-after-failure: true
+
+- job:
+    name: gate-openstack-compute-api-2
+    project-type: maven
+    node: quantal && !jclouds
+
+    triggers:
+      - zuul
+
+    prebuilders:
+      - gerrit-git-prep
+
+    maven:
+      maven-name: Maven3
+      root-module:
+        group-id: org.openstack.docs
+        artifact-id: openstack-guide
+      root-pom: openstack-compute-api-2/pom.xml
+      goals: 'clean generate-sources'
+
+    publishers:
+      - console-log
+      - scp:
+          site: 'static.openstack.org'
+          files:
+            - target: 'docs-draft/$JOB_NAME/$ZUUL_PIPELINE/$BUILD_NUMBER/openstack-compute-api/2/'
+              source: 'openstack-compute-api-2/target/docbkx/webhelp/**'
+              keep-hierarchy: true
+              copy-after-failure: true
+
+- job:
+    name: gate-openstack-netconn-api-v20
+    project-type: maven
+    node: quantal && !jclouds
+
+    triggers:
+      - zuul
+
+    prebuilders:
+      - gerrit-git-prep
+
+    maven:
+      maven-name: Maven3
+      root-module:
+        group-id: org.openstack.docs
+        artifact-id: openstack-guide
+      root-pom: doc/pom.xml
+      goals: 'clean generate-sources'
+
+    publishers:
+      - console-log
+      - scp:
+          site: 'static.openstack.org'
+          files:
+            - target: 'docs-draft/$JOB_NAME/$ZUUL_PIPELINE/$BUILD_NUMBER/openstack-network/2.0/'
+              source: 'doc/target/docbkx/webhelp/**'
+              keep-hierarchy: true
+              copy-after-failure: true
+
+- job:
+    name: gate-openstack-object-api-v1
+    project-type: maven
+    node: quantal && !jclouds
+
+    triggers:
+      - zuul
+
+    prebuilders:
+      - gerrit-git-prep
+
+    maven:
+      maven-name: Maven3
+      root-module:
+        group-id: org.openstack.docs
+        artifact-id: openstack-guide
+      root-pom: openstack-object-storage-dev/pom.xml
+      goals: 'clean generate-sources'
+
+    publishers:
+      - console-log
+      - scp:
+          site: 'static.openstack.org'
+          files:
+            - target: 'docs-draft/$JOB_NAME/$ZUUL_PIPELINE/$BUILD_NUMBER/openstack-object-storage/1.0/'
+              source: 'openstack-object-storage-dev/target/docbkx/webhelp/**'
+              keep-hierarchy: true
+              copy-after-failure: true
+
+- job:
+    name: gate-openstack-block-api-v2
+    project-type: maven
+    node: quantal && !jclouds
+
+    triggers:
+      - zuul
+
+    prebuilders:
+      - gerrit-git-prep
+
+    maven:
+      maven-name: Maven3
+      root-module:
+        group-id: org.openstack.docs
+        artifact-id: openstack-guide
+      root-pom: v2/pom.xml
+      goals: 'clean generate-sources'
+
+    publishers:
+      - console-log
+      - scp:
+          site: 'static.openstack.org'
+          files:
+            - target: 'docs-draft/$JOB_NAME/$ZUUL_PIPELINE/$BUILD_NUMBER/openstack-block-storage/2.0/'
+              source: 'v2/target/docbkx/webhelp/**'
+              keep-hierarchy: true
+              copy-after-failure: true
+
+- job:
+    name: gate-openstack-identity-api-v2
+    project-type: maven
+    node: quantal && !jclouds
+
+    triggers:
+      - zuul
+
+    prebuilders:
+      - gerrit-git-prep
+
+    maven:
+      maven-name: Maven3
+      root-module:
+        group-id: org.openstack.docs
+        artifact-id: openstack-guide
+      root-pom: openstack-identity-api/pom.xml
+      goals: 'clean generate-sources'
+
+    publishers:
+      - console-log
+      - scp:
+          site: 'static.openstack.org'
+          files:
+            - target: 'docs-draft/$JOB_NAME/$ZUUL_PIPELINE/$BUILD_NUMBER/openstack-identity-service/2.0/'
+              source: 'openstack-identity-api/target/docbkx/webhelp/**'
+              keep-hierarchy: true
+              copy-after-failure: true
+
+- job:
+    name: gate-openstack-image-api-v20
+    project-type: maven
+    node: quantal && !jclouds
+
+    triggers:
+      - zuul
+
+    prebuilders:
+      - gerrit-git-prep
+      - markdown-docbook:
+          filename: "image-api-v2.0"
+
+    properties:
+      - inject:
+          script-file: /usr/local/jenkins/slave_scripts/docbook-properties.sh
+          properties-file: gerrit-doc.properties
+
+    maven:
+      maven-name: Maven3
+      root-module:
+        group-id: org.openstack.docs
+        artifact-id: openstack-guide
+      root-pom: openstack-image-service-api/src/markdown/pom.xml
+      goals: 'clean generate-sources'
+
+    publishers:
+      - console-log
+      - scp:
+          site: 'static.openstack.org'
+          files:
+            - target: 'docs-draft/$JOB_NAME/$ZUUL_PIPELINE/$BUILD_NUMBER/openstack-image-service/2.0/'
+              source: 'openstack-image-service-api/src/markdown/target/docbkx/webhelp/**'
+              keep-hierarchy: true
+              copy-after-failure: true
+
+- job:
+    name: gate-openstack-image-api-v1.1
+    project-type: maven
+    node: quantal && !jclouds
+
+    triggers:
+      - zuul
+
+    prebuilders:
+      - gerrit-git-prep
+
+    maven:
+      maven-name: Maven3
+      root-module:
+        group-id: org.openstack.docs
+        artifact-id: openstack-guide
+      root-pom: openstack-image-service-api/pom.xml
+      goals: 'clean generate-sources'
+
+    publishers:
+      - console-log
+      - scp:
+          site: 'static.openstack.org'
+          files:
+            - target: 'docs-draft/$JOB_NAME/$ZUUL_PIPELINE/$BUILD_NUMBER/openstack-image-service/1.1/'
+              source: 'openstack-image-service-api/target/docbkx/webhelp/**'
+              keep-hierarchy: true
+              copy-after-failure: true

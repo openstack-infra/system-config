@@ -114,6 +114,33 @@ jobs:
   - name: gate-openstack-cli-guide
     success-pattern: http://docs-draft.openstack.org/{job.name}/{pipeline.name}/{build.number}/cli/quick-start
     branch: ^(?!stable/(diablo|essex)).*$
+  - name: gate-openstack-basic-install
+    success-pattern: http://docs-draft.openstack.org/{job.name}/{pipeline.name}/{build.number}/basic-install
+    branch: ^(?!stable/(diablo|essex)).*$
+  - name: gate-openstack-admin-manual-block
+    success-pattern: http://docs-draft.openstack.org/{job.name}/{pipeline.name}/{build.number}/openstack-block-storage-admin
+    branch: ^(?!stable/(diablo|essex)).*$
+  - name: gate-openstack-admin-manual-compute
+    success-pattern: http://docs-draft.openstack.org/{job.name}/{pipeline.name}/{build.number}/openstack-compute-admin
+    branch: ^(stable/diablo).*$
+  - name: gate-openstack-ha-guide
+    success-pattern: http://docs-draft.openstack.org/{job.name}/{pipeline.name}/{build.number}/openstack-ha-guide
+    branch: ^(?!stable/(diablo|essex)).*$
+  - name: gate-openstack-install-deploy-guide-ubuntu
+    success-pattern: http://docs-draft.openstack.org/{job.name}/{pipeline.name}/{build.number}/openstack-install
+    branch: ^(?!stable/(diablo|essex)).*$
+  - name: gate-openstack-install-deploy-guide-apt-fedora
+    success-pattern: http://docs-draft.openstack.org/{job.name}/{pipeline.name}/{build.number}/openstack-install
+    branch: ^(?!stable/(diablo|essex)).*$
+  - name: gate-openstack-admin-manual-netconn
+    success-pattern: http://docs-draft.openstack.org/{job.name}/{pipeline.name}/{build.number}/openstack-network-connectivity-admin
+    branch: ^(stable/diablo).*$
+  - name: gate-admin-manual-object
+    success-pattern: http://docs-draft.openstack.org/{job.name}/{pipeline.name}/{build.number}/openstack-object-storage-admin
+    branch: ^(stable/diablo).*$
+  - name: gate-openstack-glossary
+    success-pattern: http://docs-draft.openstack.org/{job.name}/{pipeline.name}/{build.number}/common/glossary
+    branch: ^(?!stable/(diablo|essex)).*$
   - name: gate-openstack-manuals-validate
     voting: false
 
@@ -1134,13 +1161,31 @@ projects:
 
   - name: openstack/openstack-manuals
     check:
+      - gate-openstack-admin-manual-compute
+      - gate-openstack-admin-manual-netconn
+      - gate-openstack-admin-manual-object
+      - gate-openstack-admin-manual-block
       - gate-openstack-cli-guide
+      - gate-openstack-basic-install
+      - gate-openstack-glossary
+      - gate-openstack-ha-guide
+      - gate-openstack-install-deploy-guide-apt-fedora
+      - gate-openstack-install-deploy-guide-ubuntu
       - gate-openstack-operations-guide
       - gate-openstack-manuals-validate
     gate:
+      - gate-openstack-admin-manual-compute
+      - gate-openstack-admin-manual-netconn
+      - gate-openstack-admin-manual-object
+      - gate-openstack-admin-manual-block
       - gate-openstack-cli-guide
+      - gate-openstack-basic-install
+      - gate-openstack-glossary
+      - gate-openstack-ha-guide
+      - gate-openstack-install-deploy-guide-apt-fedora
+      - gate-openstack-install-deploy-guide-ubuntu
       - gate-openstack-operations-guide
-      - gate-openstack-manuals-validate
+      - gate-openstack-manuals-validatee
     post:
       - openstack-admin-manual-compute
       - openstack-admin-manual-netconn
@@ -1157,9 +1202,13 @@ projects:
 
   - name: openstack/api-site
     check:
-      - gate-noop
+      - gate-openstack-api-quick-start
+      - gate-openstack-api-ref
+      - gate-openstack-api-programming
     gate:
-      - gate-noop
+      - gate-openstack-api-quick-start
+      - gate-openstack-api-ref
+      - gate-openstack-api-programming
     post:
       - openstack-api-quick-start
       - openstack-api-site
@@ -1168,52 +1217,55 @@ projects:
 
   - name: openstack/compute-api
     check:
-      - gate-noop
+      - gate-openstack-compute-api-2
     gate:
-      - gate-noop
+      - gate-openstack-compute-api-2
     post:
       - openstack-compute-api-doc
       - openstack-compute-api-v20-wadl
 
   - name: openstack/identity-api
     check:
-      - gate-noop
+      - gate-openstack-identity-api-v2
     gate:
-      - gate-noop
+      - gate-openstack-identity-api-v2
     post:
       - identity-api-v20
 
   - name: openstack/image-api
     check:
-      - gate-noop
+      - gate-openstack-image-api-v1.1
+      - gate-openstack-image-api-v20
+
     gate:
-      - gate-noop
+      - gate-openstack-image-api-v1.1
+      - gate-openstack-image-api-v20
     post:
       - image-api-v11
       - image-api-v20
 
   - name: openstack/netconn-api
     check:
-      - gate-noop
+      - gate-openstack-netconn-api-v20
     gate:
-      - gate-noop
+      - gate-openstack-netconn-api-v20
     post:
       - network-api-v10
       - netconn-api-v20
 
   - name: openstack/object-api
     check:
-      - gate-noop
+      - gate-openstack-object-api-v1
     gate:
-      - gate-noop
+      - gate-openstack-object-api-v1
     post:
       - openstack-object-api-doc
 
   - name: openstack/volume-api
     check:
-      - gate-noop
+      - gate-openstack-block-api-v2
     gate:
-      - gate-noop
+      - gate-openstack-block-api-v2
     post:
       - openstack-block-api-doc
 
