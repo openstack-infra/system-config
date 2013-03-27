@@ -146,6 +146,18 @@ class openstack_project::static (
     require => File['/srv/static/status'],
   }
 
+  file { '/srv/static/status/header.js':
+    ensure  => present,
+    source  => 'puppet:///modules/openstack_project/status/header.js',
+    require => File['/srv/static/status'],
+  }
+
+  file { '/srv/static/status/footer.js':
+    ensure  => present,
+    source  => 'puppet:///modules/openstack_project/status/footer.js',
+    require => File['/srv/static/status'],
+  }
+
   cron { 'gziplogs':
     user        => 'root',
     minute      => '0',
