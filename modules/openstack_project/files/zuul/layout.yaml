@@ -1438,3 +1438,51 @@ projects:
     release:
        - python-savannaclient-tarball:
          - python-savannaclient-pypi-upload
+
+  - name: stackforge/puppet-cinder
+    check:
+      - gate-noop
+    gate:
+      - gate-noop
+
+  - name: stackforge/puppet-glance
+    check:
+      - gate-noop
+    gate:
+      - gate-noop
+
+  - name: stackforge/puppet-horizon
+    check:
+      - gate-noop
+    gate:
+      - gate-noop
+
+  - name: stackforge/puppet-keystone
+    check:
+      - gate-noop
+    gate:
+      - gate-noop
+
+  - name: stackforge/puppet-nova
+    check:
+      - gate-noop
+    gate:
+      - gate-noop
+
+  - name: stackforge/puppet-openstack
+    check:
+      - gate-noop
+    gate:
+      - gate-noop
+
+  - name: stackforge/puppet-openstack_dev_env
+    check:
+      - gate-noop
+    gate:
+      - gate-noop
+
+  - name: stackforge/puppet-swift
+    check:
+      - gate-noop
+    gate:
+      - gate-noop

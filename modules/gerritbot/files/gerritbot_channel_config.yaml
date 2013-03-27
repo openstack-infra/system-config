@@ -181,3 +181,20 @@ openstack-qa:
       - openstack-infra/devstack-gate
     branches:
       - master
+
+puppet-openstack:
+    events:
+      - patchset-created
+      - change-merged
+      - x-vrif-minus-2
+    projects:
+      - stackforge/puppet-cinder
+      - stackforge/puppet-glance
+      - stackforge/puppet-horizon
+      - stackforge/puppet-keystone
+      - stackforge/puppet-nova
+      - stackforge/puppet-openstack
+      - stackforge/puppet-openstack_dev_env
+      - stackforge/puppet-swift
+    branches:
+      - master
