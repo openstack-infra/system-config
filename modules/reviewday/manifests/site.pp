@@ -61,7 +61,7 @@ define reviewday::site(
       owner   => 'reviewday',
       group   => 'reviewday',
       mode    => '0600',
-      content => $reviewday_gerrit_ssh_key,
+      content => "${gerrit_url} ${reviewday_gerrit_ssh_key}",
       replace => true,
       require => File['/var/lib/reviewday/.ssh/']
     }
