@@ -828,6 +828,9 @@ projects:
       - gate-noop
     gate:
       - gate-noop
+    post:
+      - periodic-mirror-python26
+      - periodic-mirror-python27
 
   - name: openstack-dev/grenade
     check:
