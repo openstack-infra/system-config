@@ -47,12 +47,6 @@ class zuul (
     }
   }
 
-  package { 'statsd':
-    ensure   => latest,  # okay to use latest for pip
-    provider => pip,
-    require  => Class[pip],
-  }
-
   user { 'zuul':
     ensure     => present,
     home       => '/home/zuul',
@@ -64,18 +58,6 @@ class zuul (
 
   group { 'zuul':
     ensure => present,
-  }
-
-  # Packages that need to be installed from pip
-  $pip_packages = [
-    'GitPython',
-    'extras'
-  ]
-
-  package { $pip_packages:
-    ensure   => latest,  # we want the latest from these
-    provider => pip,
-    require  => Class['pip'],
   }
 
   vcsrepo { '/opt/zuul':
