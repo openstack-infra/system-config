@@ -57,6 +57,260 @@
               copy-after-failure: true
 
 - job:
+    name: gate-openstack-basic-install
+    project-type: maven
+    node: quantal && !jclouds
+
+    triggers:
+      - zuul
+
+    prebuilders:
+      - gerrit-git-prep
+
+    maven:
+      maven-name: Maven3
+      root-module:
+        group-id: org.openstack.docs
+        artifact-id: openstack-guide
+      root-pom: doc/src/docbkx/openstack-basic-install/pom.xml
+      goals: 'clean generate-sources'
+
+    publishers:
+      - console-log
+      - scp:
+          site: 'static.openstack.org'
+          files:
+            - target: 'docs-draft/$JOB_NAME/$ZUUL_PIPELINE/$BUILD_NUMBER/basic-install/'
+              source: 'doc/src/docbkx/basic-install/target/docbkx/webhelp/**'
+              keep-hierarchy: true
+              copy-after-failure: true
+
+- job:
+    name: gate-openstack-admin-manual-block
+    project-type: maven
+    node: quantal && !jclouds
+
+    triggers:
+      - zuul
+
+    prebuilders:
+      - gerrit-git-prep
+
+    maven:
+      maven-name: Maven3
+      root-module:
+        group-id: org.openstack.docs
+        artifact-id: openstack-guide
+      root-pom: doc/src/docbkx/openstack-block-storage-admin/pom.xml
+      goals: 'clean generate-sources'
+
+    publishers:
+      - console-log
+      - scp:
+          site: 'static.openstack.org'
+          files:
+            - target: 'docs-draft/$JOB_NAME/$ZUUL_PIPELINE/$BUILD_NUMBER/openstack-block-storage-admin/'
+              source: 'doc/src/docbkx/openstack-block-storage-admin/target/docbkx/webhelp/**'
+              keep-hierarchy: true
+              copy-after-failure: true
+
+- job:
+    name: gate-openstack-admin-manual-compute
+    project-type: maven
+    node: quantal && !jclouds
+
+    triggers:
+      - zuul
+
+    prebuilders:
+      - gerrit-git-prep
+
+    maven:
+      maven-name: Maven3
+      root-module:
+        group-id: org.openstack.docs
+        artifact-id: openstack-guide
+      root-pom: doc/src/docbkx/openstack-compute-admin/pom.xml
+      goals: 'clean generate-sources'
+
+    publishers:
+      - console-log
+      - scp:
+          site: 'static.openstack.org'
+          files:
+            - target: 'docs-draft/$JOB_NAME/$ZUUL_PIPELINE/$BUILD_NUMBER/openstack-compute-admin/'
+              source: 'doc/src/docbkx/openstack-compute-admin/target/docbkx/webhelp/**'
+              keep-hierarchy: true
+              copy-after-failure: true
+
+- job:
+    name: gate-openstack-ha-guide
+    project-type: maven
+    node: quantal && !jclouds
+
+    triggers:
+      - zuul
+
+    properties:
+      - inject:
+          script-file: /usr/local/jenkins/slave_scripts/docbook-properties.sh
+          properties-file: gerrit-doc.properties
+
+    prebuilders:
+      - gerrit-git-prep
+      - shell: |
+          asciidoc -b docbook -d book -o - doc/src/docbkx/openstack-ha/ha-guide.txt | xsltproc -o - /usr/share/xml/docbook/stylesheet/docbook5/db4-upgrade.xsl - | xmllint --format - | sed -e 's,<book,<book xml:id="bk-ha-guide",' | sed -e 's,<info,<?rax pdf.url="../openstack-ha-guide-trunk.pdf"?><info,' > doc/src/docbkx/openstack-ha/bk-ha-guide.xml
+
+    maven:
+      maven-name: Maven3
+      root-module:
+        group-id: org.openstack.docs
+        artifact-id: openstack-guide
+      root-pom: doc/src/docbkx/openstack-ha/pom.xml
+      goals: 'clean generate-sources'
+
+    publishers:
+      - console-log
+      - scp:
+          site: 'static.openstack.org'
+          files:
+            - target: 'docs-draft/$JOB_NAME/$ZUUL_PIPELINE/$BUILD_NUMBER/openstack-ha-guide/'
+              source: 'doc/src/docbkx/openstack-ha/target/docbkx/webhelp/**'
+              keep-hierarchy: true
+              copy-after-failure: true
+
+- job:
+    name: gate-openstack-install-deploy-guide-ubuntu-fedora
+    project-type: maven
+    node: quantal && !jclouds
+
+    triggers:
+      - zuul
+
+    properties:
+      - inject:
+          script-file: /usr/local/jenkins/slave_scripts/docbook-properties.sh
+          properties-file: gerrit-doc.properties
+
+    prebuilders:
+      - gerrit-git-prep
+
+    maven:
+      maven-name: Maven3
+      root-module:
+        group-id: org.openstack.docs
+        artifact-id: openstack-guide
+      root-pom: doc/src/docbkx/openstack-install/pom.xml
+      goals: '-Doperating.system=apt -Dprofile.os=ubuntu -Drelease.path.name=${DOC_RELEASE_PATH} -Dcomments.enabled=${DOC_COMMENTS_ENABLED} clean generate-sources'
+
+    publishers:
+      - console-log
+      - scp:
+          site: 'static.openstack.org'
+          files:
+            - target: 'docs-draft/$JOB_NAME/$ZUUL_PIPELINE/$BUILD_NUMBER/openstack-install/'
+              source: 'doc/src/docbkx/openstack-install/target/docbkx/webhelp/**'
+              keep-hierarchy: true
+              copy-after-failure: true
+
+- job:
+    name: gate-openstack-admin-manual-netconn
+    project-type: maven
+    node: quantal && !jclouds
+
+    triggers:
+      - zuul
+
+    prebuilders:
+      - gerrit-git-prep
+
+    properties:
+      - inject:
+          script-file: /usr/local/jenkins/slave_scripts/docbook-properties.sh
+          properties-file: gerrit-doc.properties
+
+    maven:
+      maven-name: Maven3
+      root-module:
+        group-id: org.openstack.docs
+        artifact-id: openstack-guide
+      root-pom: doc/src/docbkx/openstack-network-connectivity-admin/pom.xml
+      goals: '-Drelease.path.name=${DOC_RELEASE_PATH} -Dcomments.enabled=${DOC_COMMENTS_ENABLED} clean generate-sources'
+
+    publishers:
+      - console-log
+      - scp:
+          site: 'static.openstack.org'
+          files:
+            - target: 'docs-draft/$JOB_NAME/$ZUUL_PIPELINE/$BUILD_NUMBER/openstack-network-connectivity-admin/'
+              source: 'doc/src/docbkx/openstack-network-connectivity-admin/target/docbkx/webhelp/**'
+              keep-hierarchy: true
+              copy-after-failure: true
+
+- job:
+    name: gate-admin-manual-object
+    project-type: maven
+    node: quantal && !jclouds
+
+    triggers:
+      - zuul
+
+    prebuilders:
+      - gerrit-git-prep
+
+    properties:
+      - inject:
+          script-file: /usr/local/jenkins/slave_scripts/docbook-properties.sh
+          properties-file: gerrit-doc.properties
+
+    maven:
+      maven-name: Maven3
+      root-module:
+        group-id: org.openstack.docs
+        artifact-id: openstack-guide
+      root-pom: doc/src/docbkx/openstack-object-storage-admin/pom.xml
+      goals: '-Drelease.path.name=${DOC_RELEASE_PATH} -Dcomments.enabled=${DOC_COMMENTS_ENABLED} clean generate-sources'
+
+    publishers:
+      - console-log
+      - scp:
+          site: 'static.openstack.org'
+          files:
+            - target: 'docs-draft/$JOB_NAME/$ZUUL_PIPELINE/$BUILD_NUMBER/openstack-object-storage-admin/'
+              source: 'doc/src/docbkx/openstack-object-storage-admin/target/docbkx/webhelp/**'
+              keep-hierarchy: true
+              copy-after-failure: true
+
+- job:
+    name: gate-openstack-glossary
+    project-type: maven
+    node: quantal && !jclouds
+
+    triggers:
+      - zuul
+
+    prebuilders:
+      - gerrit-git-prep
+
+    maven:
+      maven-name: Maven3
+      root-module:
+        group-id: org.openstack.docs
+        artifact-id: openstack-guide
+      root-pom: doc/src/docbkx/common/glossary/pom.xml
+      goals: 'clean generate-sources'
+
+    publishers:
+      - console-log
+      - scp:
+          site: 'static.openstack.org'
+          files:
+            - target: 'docs-draft/$JOB_NAME/$ZUUL_PIPELINE/$BUILD_NUMBER/common/glossary/'
+              source: 'doc/src/docbkx/common/glossary/target/docbkx/webhelp/**'
+              keep-hierarchy: true
+              copy-after-failure: true
+
+- job:
     name: gate-openstack-manuals-validate
     node: quantal
 
