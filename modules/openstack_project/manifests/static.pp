@@ -29,52 +29,18 @@ class openstack_project::static (
     ensure => present,
   }
 
+  file { '/srv/static':
+    ensure => directory,
+  }
+
+  ###########################################################
+  # Tarballs
+
   apache::vhost { 'tarballs.openstack.org':
     port     => 80,
     priority => '50',
     docroot  => '/srv/static/tarballs',
     require  => File['/srv/static/tarballs'],
-  }
-
-  apache::vhost { 'ci.openstack.org':
-    port     => 80,
-    priority => '50',
-    docroot  => '/srv/static/ci',
-    require  => File['/srv/static/ci'],
-  }
-
-  apache::vhost { 'logs.openstack.org':
-    port     => 80,
-    priority => '50',
-    docroot  => '/srv/static/logs',
-    require  => File['/srv/static/logs'],
-    template => 'openstack_project/logs.vhost.erb',
-  }
-
-  apache::vhost { 'pypi.openstack.org':
-    port     => 80,
-    priority => '50',
-    docroot  => '/srv/static/pypi',
-    require  => File['/srv/static/pypi'],
-  }
-
-  apache::vhost { 'docs-draft.openstack.org':
-    port     => 80,
-    priority => '50',
-    docroot  => '/srv/static/docs-draft',
-    require  => File['/srv/static/docs-draft'],
-  }
-
-  apache::vhost { 'status.openstack.org':
-    port     => 80,
-    priority => '50',
-    docroot  => '/srv/static/status',
-    template => 'openstack_project/status.vhost.erb',
-    require  => File['/srv/static/status'],
-  }
-
-  file { '/srv/static':
-    ensure => directory,
   }
 
   file { '/srv/static/tarballs':
@@ -84,6 +50,16 @@ class openstack_project::static (
     require => User['jenkins'],
   }
 
+  ###########################################################
+  # CI
+
+  apache::vhost { 'ci.openstack.org':
+    port     => 80,
+    priority => '50',
+    docroot  => '/srv/static/ci',
+    require  => File['/srv/static/ci'],
+  }
+
   file { '/srv/static/ci':
     ensure  => directory,
     owner   => 'jenkins',
@@ -91,14 +67,18 @@ class openstack_project::static (
     require => User['jenkins'],
   }
 
-  file { '/srv/static/logs':
-    ensure  => directory,
-    owner   => 'jenkins',
-    group   => 'jenkins',
-    require => User['jenkins'],
+  ###########################################################
+  # Logs
+
+  apache::vhost { 'logs.openstack.org':
+    port     => 80,
+    priority => '50',
+    docroot  => '/srv/static/logs',
+    require  => File['/srv/static/logs'],
+    template => 'openstack_project/logs.vhost.erb',
   }
 
-  file { '/srv/static/pypi':
+  file { '/srv/static/logs':
     ensure  => directory,
     owner   => 'jenkins',
     group   => 'jenkins',
@@ -114,17 +94,29 @@ class openstack_project::static (
     require => File['/srv/static/logs'],
   }
 
-  file { '/srv/static/pypi/robots.txt':
-    ensure  => present,
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0444',
-    source  => 'puppet:///modules/openstack_project/disallow_robots.txt',
-    require => File['/srv/static/pypi'],
+  cron { 'gziplogs':
+    user        => 'root',
+    minute      => '0',
+    hour        => '*/6',
+    command     => 'sleep $((RANDOM\%600)) && flock -n /var/run/gziplogs.lock find /srv/static/logs/ -type f -not -name robots.txt -not -name \*.gz \( -name \*.txt -or -name \*.html -or -name tmp\* \) -exec gzip \{\} \;',
+    environment => 'PATH=/var/lib/gems/1.8/bin:/usr/bin:/bin:/usr/sbin:/sbin',
+  }
+
+  ###########################################################
+  # Docs-draft
+
+  apache::vhost { 'docs-draft.openstack.org':
+    port     => 80,
+    priority => '50',
+    docroot  => '/srv/static/docs-draft',
+    require  => File['/srv/static/docs-draft'],
   }
 
   file { '/srv/static/docs-draft':
-    ensure => directory,
+    ensure  => directory,
+    owner   => 'jenkins',
+    group   => 'jenkins',
+    require => User['jenkins'],
   }
 
   file { '/srv/static/docs-draft/robots.txt':
@@ -134,6 +126,43 @@ class openstack_project::static (
     mode    => '0444',
     source  => 'puppet:///modules/openstack_project/disallow_robots.txt',
     require => File['/srv/static/docs-draft'],
+  }
+
+  ###########################################################
+  # Pypi Mirror
+
+  apache::vhost { 'pypi.openstack.org':
+    port     => 80,
+    priority => '50',
+    docroot  => '/srv/static/pypi',
+    require  => File['/srv/static/pypi'],
+  }
+
+  file { '/srv/static/pypi':
+    ensure  => directory,
+    owner   => 'jenkins',
+    group   => 'jenkins',
+    require => User['jenkins'],
+  }
+
+  file { '/srv/static/pypi/robots.txt':
+    ensure  => present,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0444',
+    source  => 'puppet:///modules/openstack_project/disallow_robots.txt',
+    require => File['/srv/static/pypi'],
+  }
+
+  ###########################################################
+  # Status
+
+  apache::vhost { 'status.openstack.org':
+    port     => 80,
+    priority => '50',
+    docroot  => '/srv/static/status',
+    template => 'openstack_project/status.vhost.erb',
+    require  => File['/srv/static/status'],
   }
 
   file { '/srv/static/status':
@@ -150,14 +179,6 @@ class openstack_project::static (
     ensure  => present,
     source  => 'puppet:///modules/openstack_project/status/common.js',
     require => File['/srv/static/status'],
-  }
-
-  cron { 'gziplogs':
-    user        => 'root',
-    minute      => '0',
-    hour        => '*/6',
-    command     => 'sleep $((RANDOM\%600)) && flock -n /var/run/gziplogs.lock find /srv/static/logs/ -type f -not -name robots.txt -not -name \*.gz \( -name \*.txt -or -name \*.html -or -name tmp\* \) -exec gzip \{\} \;',
-    environment => 'PATH=/var/lib/gems/1.8/bin:/usr/bin:/bin:/usr/sbin:/sbin',
   }
 
   include reviewday
