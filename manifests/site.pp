@@ -220,9 +220,14 @@ node 'zuul.openstack.org' {
     url_pattern          => 'http://logs.openstack.org/{change.number}/{change.patchset}/{pipeline.name}/{job.name}/{build.number}',
     sysadmins            => hiera('sysadmins'),
     statsd_host          => 'graphite.openstack.org',
+    gearman_workers      => ['jenkins.openstack.org',
+                             'jenkins-dev.openstack.org'],
   }
   # co-host gearman-job-server
   include gearman
+  class { 'gearman':
+    listen => '::',
+  }
 }
 
 # A bare machine, but with a jenkins user
