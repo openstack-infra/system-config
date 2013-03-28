@@ -119,6 +119,7 @@ tripleo:
       - x-vrif-minus-2
     projects:
       - stackforge/diskimage-builder
+      - stackforge/os-config-applier
     branches:
       - master
 
