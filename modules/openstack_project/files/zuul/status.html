@@ -66,11 +66,16 @@ a:link {
 
     <TITLE>Zuul Status</TITLE>
 
-<script type="text/javascript" src="jquery.min.js"></script>
-<script type="text/javascript" src="jquery-visibility.min.js"></script>
-<script type="text/javascript" src="jquery-graphite.js"></script>
-<script type="text/javascript" src="status.js"></script>
-
+<script type="text/javascript"
+	src="http://status.openstack.org/jquery.min.js"></script>
+<script type="text/javascript"
+	src="http://status.openstack.org/jquery-visibility.min.js"></script>
+<script type="text/javascript"
+	src="http://status.openstack.org/jquery-graphite.js"></script>
+<script type="text/javascript"
+	src="http://status.openstack.org/common.js"></script>
+<script type="text/javascript"
+	src="status.js"></script>
     
     <!-- Google Fonts -->
     <link href='http://fonts.googleapis.com/css?family=PT+Sans&amp;subset=latin' rel='stylesheet' type='text/css'/>
@@ -93,26 +98,7 @@ a:link {
   </HEAD>
 
   <BODY>
-    <div class="container">
-      <div id="header">
-	<div class="span-5">
-	  <h1 id="logo"><a href="/">Open Stack</a></h1>
-	</div>
-	<div class="span-19 last blueLine">
-	  
-	  <div id="navigation" class="span-19">
-	    <ul id="Menu1">
-	      <li><a href="/">Status</a></li>
-  	      <li><a href="/zuul/" class="current">Zuul</a></li>
-  	      <li><a href="/rechecks/">Rechecks</a></li>
-  	      <li><a href="/release/">Release</a></li>
-	      <li><a href="/reviews/">Reviews</a></li>
-	      <li><a href="/bugday/">Bugday</a></li>
- 	    </ul>
-	  </div>
-	</div>
-      </div>
-    </div>
+    <script type="text/javascript">header('Zuul');</script>
 
     <div class="container">
       <h1> Zuul Status </h1>
@@ -183,46 +169,6 @@ $("#graph-container").append($(new Image()).addClass('graph').graphite({
       </script>
     </div>
 
-    <div class="container">
-      <hr />
-      <div id="footer">
-	<div class="span-4">
-	  <h3>OpenStack</h3>
-	  <ul>
-	    <li><a href="http://www.openstack.org/projects/">Projects</a></li>
-	    <li><a href="http://www.openstack.org/openstack-security/">OpenStack Security</a></li>
-	    <li><a href="http://www.openstack.org/projects/openstack-faq/">Common Questions</a></li>
-	    <li><a href="http://www.openstack.org/blog/">Blog</a></li>
-	  </ul>
-	</div>
-	<div class="span-4">
-	  <h3>Community</h3>
-	  <ul>
-	    <li><a href="http://www.openstack.org/community/">User Groups</a></li>
-	    <li><a href="http://www.openstack.org/events/">Events</a></li>
-	    <li><a href="http://www.openstack.org/jobs/">Jobs</a></li>
-	    <li><a href="http://www.openstack.org/companies/">Companies</a></li>
-	    <li><a href="http://wiki.openstack.org/HowToContribute">Contribute</a></li>
-	  </ul>
-	</div>
-	<div class="span-4">
-	  <h3>Documentation</h3>
-	  <ul>
-	    <li><a href="http://docs.openstack.org/">OpenStack Manuals</a></li>
-	    <li><a href="http://docs.openstack.org/diablo/openstack-compute/starter/content/">Getting Started</a></li>
-	    <li><a href="http://wiki.openstack.org/">Wiki</a></li>
-	  </ul>
-	</div>
-	<div class="span-4 last">
-	  <h3>Branding &amp; Legal</h3>
-	  <ul>
-	    <li><a href="http://www.openstack.org/brand/">Logos &amp; Guidelines</a></li>
-	    <li><a href="http://www.openstack.org/brand/openstack-trademark-policy/">Trademark Policy</a></li>
-	    <li><a href="http://www.openstack.org/privacy/">Privacy Policy</a></li>
-	    <li><a href="http://wiki.openstack.org/CLA">OpenStack CLA</a></li>
-	  </ul>
-	</div>
-      </div>
-    </div>
+    <script type="text/javascript">footer();</script>
   </BODY>
 </html>
