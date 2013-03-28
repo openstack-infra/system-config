@@ -688,3 +688,12 @@
 
     jobs:
       - python-jobs
+
+- project:
+    name: os-config-applier
+    github-org: stackforge
+    node: quantal
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - python-jobs
