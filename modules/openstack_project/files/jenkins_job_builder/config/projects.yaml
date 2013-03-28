@@ -114,6 +114,20 @@
 
 
 - project:
+    name: statusbot
+    github-org: openstack-infra
+    node: quantal
+    doc-publisher-site: ci.openstack.org
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - gate-{name}-pep8
+      - gate-{name}-pyflakes
+      - '{name}-tarball'
+      - pypi-jobs
+
+
+- project:
     name: gerritlib
     github-org: openstack-infra
     node: quantal
