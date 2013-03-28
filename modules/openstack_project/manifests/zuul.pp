@@ -65,56 +65,38 @@ class openstack_project::zuul(
   }
 
   file { '/var/lib/zuul/www':
-    ensure  => directory,
-    require => File['/var/lib/zuul'],
+    ensure  => absent,
   }
 
   file { '/var/lib/zuul/www/index.html':
-    ensure  => present,
-    source  => 'puppet:///modules/openstack_project/zuul/status.html',
-    require => File['/var/lib/zuul/www'],
+    ensure  => absent,
   }
 
   package { 'libjs-jquery':
-    ensure => present,
+    ensure => absent,
   }
 
   file { '/var/lib/zuul/www/jquery.min.js':
-    ensure  => link,
-    target  => '/usr/share/javascript/jquery/jquery.min.js',
-    require => [File['/var/lib/zuul/www'],
-                Package['libjs-jquery']],
+    ensure  => absent,
   }
 
   file { '/var/lib/zuul/www/status.js':
-    ensure  => present,
-    source  => 'puppet:///modules/openstack_project/zuul/status.js',
-    require => File['/var/lib/zuul/www'],
+    ensure  => absent,
   }
 
-  vcsrepo { '/opt/jquery-visibility':
-    ensure   => latest,
-    provider => git,
-    revision => 'master',
-    source   => 'https://github.com/mathiasbynens/jquery-visibility.git',
+  file { '/opt/jquery-visibility':
+    ensure   => absent,
   }
 
   file { '/var/lib/zuul/www/jquery-visibility.min.js':
-    ensure  => link,
-    target  => '/opt/jquery-visibility/jquery-visibility.min.js',
-    require => File['/var/lib/zuul/www'],
+    ensure   => absent,
   }
 
-  vcsrepo { '/opt/jquery-graphite':
-    ensure   => latest,
-    provider => git,
-    revision => 'master',
-    source   => 'https://github.com/prestontimmons/graphitejs.git',
+  file { '/opt/jquery-graphite':
+    ensure   => absent,
   }
 
   file { '/var/lib/zuul/www/jquery-graphite.js':
-    ensure  => link,
-    target  => '/opt/jquery-graphite/jquery.graphite.js',
-    require => File['/var/lib/zuul/www'],
+    ensure   => absent,
   }
 }
