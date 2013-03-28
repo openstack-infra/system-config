@@ -169,6 +169,10 @@ class openstack_project::static (
     ensure => directory,
   }
 
+  package { 'libjs-jquery':
+    ensure => present,
+  }
+
   file { '/srv/static/status/index.html':
     ensure  => present,
     source  => 'puppet:///modules/openstack_project/status/index.html',
@@ -180,6 +184,63 @@ class openstack_project::static (
     source  => 'puppet:///modules/openstack_project/status/common.js',
     require => File['/srv/static/status'],
   }
+
+  file { '/srv/static/status/jquery.min.js':
+    ensure  => link,
+    target  => '/usr/share/javascript/jquery/jquery.min.js',
+    require => [File['/srv/static/status'],
+                Package['libjs-jquery']],
+  }
+
+  vcsrepo { '/opt/jquery-visibility':
+    ensure   => latest,
+    provider => git,
+    revision => 'master',
+    source   => 'https://github.com/mathiasbynens/jquery-visibility.git',
+  }
+
+  file { '/srv/static/status/jquery-visibility.min.js':
+    ensure  => link,
+    target  => '/opt/jquery-visibility/jquery-visibility.min.js',
+    require => [File['/srv/static/status'],
+                Vcsrepo['/opt/jquery-visibility']],
+  }
+
+  vcsrepo { '/opt/jquery-graphite':
+    ensure   => latest,
+    provider => git,
+    revision => 'master',
+    source   => 'https://github.com/prestontimmons/graphitejs.git',
+  }
+
+  file { '/srv/static/status/jquery-graphite.js':
+    ensure  => link,
+    target  => '/opt/jquery-graphite/jquery.graphite.js',
+    require => [File['/srv/static/status'],
+                Vcsrepo['/opt/jquery-graphite']],
+  }
+
+  ###########################################################
+  # Status - zuul
+
+  file { '/srv/static/status/zuul':
+    ensure => directory,
+  }
+
+  file { '/srv/static/status/zuul/index.html':
+    ensure  => present,
+    source  => 'puppet:///modules/openstack_project/zuul/status.html',
+    require => File['/srv/static/status/zuul'],
+  }
+
+  file { '/srv/static/status/zuul/status.js':
+    ensure  => present,
+    source  => 'puppet:///modules/openstack_project/zuul/status.js',
+    require => File['/srv/static/status/zuul'],
+  }
+
+  ###########################################################
+  # Status - reviewday
 
   include reviewday
 
