@@ -21,13 +21,6 @@ NameVirtualHost <%= vhost_name %>:<%= port %>
     Allow from all
   </Location>
 
-  RewriteRule ^/zuul$ /zuul/ [R]
-  RewriteRule ^/zuul/(.*)$ http://zuul.openstack.org/$1 [P]
-  <Location /zuul/>
-    Order allow,deny
-    Allow from all
-  </Location>
-
   RewriteRule ^/release$ /release/ [R]
   RewriteRule ^/release/(.*)$ http://old-wiki.openstack.org/release/$1 [P]
   <Location /release/>
