@@ -299,6 +299,21 @@ projects:
       - reviewday-tarball:
         - reviewday-pypi-upload
 
+  - name: openstack-infra/statusbot
+    check:
+      - gate-statusbot-pep8
+      - gate-statusbot-pyflakes
+    gate:
+      - gate-statusbot-pep8
+      - gate-statusbot-pyflakes
+    post:
+      - statusbot-branch-tarball
+    pre-release:
+      - statusbot-tarball
+    release:
+      - statusbot-tarball:
+        - statusbot-pypi-upload
+
   - name: openstack/cinder
     check:
       - gate-cinder-pep8:

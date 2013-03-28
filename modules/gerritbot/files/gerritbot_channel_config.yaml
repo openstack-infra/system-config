@@ -18,6 +18,7 @@ openstack-infra:
       - openstack-infra/meetbot
       - openstack-infra/nose-html-output
       - openstack-infra/reviewday
+      - openstack-infra/statusbot
       - openstack-infra/zuul
       - openstack-infra/gearman-plugin
       - openstack/requirements
