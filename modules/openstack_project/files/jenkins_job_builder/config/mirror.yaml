@@ -1,9 +1,11 @@
 - job:
     name: 'periodic-mirror-python26'
     node: mirror26
+    concurrent: false
 
     triggers:
       - timed: '4 21 * * *'
+      - zuul
 
     builders:
       - shell: |
@@ -20,9 +22,11 @@
 - job:
     name: 'periodic-mirror-python27'
     node: mirror27
+    concurrent: false
 
     triggers:
       - timed: '12 21 * * *'
+      - zuul
 
     builders:
       - shell: |
