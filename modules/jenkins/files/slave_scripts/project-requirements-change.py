@@ -46,11 +46,11 @@ class RequirementsList(object):
             if line.startswith('-e'):
                 continue
             req = pkg_resources.Requirement.parse(line)
-            if req.project_name in self.reqs:
+            if req.project_name.lower() in self.reqs:
                 print("Duplicate requirement in %s: %s" %
                       (self.name, str(req)))
                 self.failed = True
-            self.reqs[req.project_name] = req
+            self.reqs[req.project_name.lower()] = req
 
     def read_all_requirements(self):
         for fn in ['tools/pip-requires',
@@ -84,7 +84,7 @@ def main():
 
     failed = False
     for req in head_reqs.reqs.values():
-        name = req.project_name
+        name = req.project_name.lower()
         if name in branch_reqs.reqs and req == branch_reqs.reqs[name]:
             continue
         if name not in os_reqs.reqs:
