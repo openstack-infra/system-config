@@ -44,7 +44,7 @@ class statusbot(
     group   => 'root',
     mode    => '0555',
     owner   => 'root',
-    require => Vcsrepo['statusbot'],
+    require => Vcsrepo['/opt/statusbot'],
     source  => 'puppet:///modules/statusbot/statusbot.init',
   }
 
@@ -54,7 +54,7 @@ class statusbot(
     hasrestart => true,
     require    => File['/etc/init.d/statusbot'],
     subscribe  => [
-      Vcsrepo['statusbot'],
+      Vcsrepo['/opt/statusbot'],
       File['/etc/statusbot/statusbot.config'],
     ],
   }
