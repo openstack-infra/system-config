@@ -66,18 +66,16 @@ class statusbot(
 
   file { '/var/log/statusbot':
     ensure => directory,
-    user   => 'statusbot',
+    owner  => 'statusbot',
     group  => 'statusbot',
     mode   => '0775',
-    owner  => 'root',
   }
 
   file { '/var/run/statusbot':
     ensure => directory,
-    user   => 'statusbot',
+    owner  => 'statusbot',
     group  => 'statusbot',
     mode   => '0775',
-    owner  => 'root',
   }
 
   file { '/etc/statusbot/logging.config':
