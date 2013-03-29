@@ -145,6 +145,7 @@ node 'eavesdrop.openstack.org' {
     statusbot_password      => hiera('statusbot_nick_password'),
     statusbot_server        => 'chat.freenode.net',
     statusbot_channels      => 'openstack-infra',
+    statusbot_auth_nicks    => 'jeblair, ttx, fungi, mordred, clarkb, sdague',
     statusbot_wiki_user     => hiera('statusbot_wiki_username'),
     statusbot_wiki_password => hiera('statusbot_wiki_password'),
     statusbot_wiki_url      => 'https://wiki.openstack.org/w/api.php',
