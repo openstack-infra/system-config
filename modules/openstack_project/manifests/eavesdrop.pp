@@ -1,6 +1,14 @@
 class openstack_project::eavesdrop (
   $nickpass = '',
-  $sysadmins = []
+  $sysadmins = [],
+  $statusbot_nick = '',
+  $statusbot_password = '',
+  $statusbot_server = '',
+  $statusbot_channels = '',
+  $statusbot_wiki_user = '',
+  $statusbot_wiki_password = '',
+  $statusbot_wiki_url = '',
+  $statusbot_wiki_pageid = '',
 ) {
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [80],
@@ -15,6 +23,17 @@ class openstack_project::eavesdrop (
     server    => 'chat.freenode.net:7000',
     channels  => '#openstack #openstack-dev #openstack-meeting #openstack-meeting-alt',
     use_ssl   => 'True'
+  }
+
+  class { 'statusbot':
+    nick          => $statusbot_nick,
+    password      => $statusbot_password,
+    server        => $statusbot_server,
+    channels      => $statusbot_channels,
+    wiki_user     => $statusbot_wiki_user,
+    wiki_password => $statusbot_wiki_password,
+    wiki_url      => $statusbot_wiki_url,
+    wiki_pageid   => $statusbot_wiki_pageid,
   }
 }
 
