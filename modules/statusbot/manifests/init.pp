@@ -65,6 +65,7 @@ class statusbot(
 
   file { '/var/log/statusbot':
     ensure => directory,
+    user   => 'statusbot',
     group  => 'statusbot',
     mode   => '0775',
     owner  => 'root',
@@ -72,6 +73,7 @@ class statusbot(
 
   file { '/var/run/statusbot':
     ensure => directory,
+    user   => 'statusbot',
     group  => 'statusbot',
     mode   => '0775',
     owner  => 'root',
