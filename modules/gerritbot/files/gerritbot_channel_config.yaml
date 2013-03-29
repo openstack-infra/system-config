@@ -157,3 +157,14 @@ savanna:
       - stackforge/python-savannaclient
     branches:
       - master
+
+openstack-nova:
+    events:
+      - patchset-created
+      - change-merged
+      - x-vrif-minus-2
+    projects:
+      - openstack/nova
+      - openstack/python-novaclient
+    branches:
+      - master
