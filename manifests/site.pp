@@ -139,8 +139,16 @@ node 'planet.openstack.org' {
 
 node 'eavesdrop.openstack.org' {
   class { 'openstack_project::eavesdrop':
-    nickpass  => hiera('openstack_meetbot_password'),
-    sysadmins => hiera('sysadmins'),
+    nickpass                => hiera('openstack_meetbot_password'),
+    sysadmins               => hiera('sysadmins'),
+    statusbot_nick          => hiera('statusbot_nick'),
+    statusbot_password      => hiera('statusbot_nick_password'),
+    statusbot_server        => 'chat.freenode.net',
+    statusbot_channels      => 'openstack-infra, openstack-dev, openstack',
+    statusbot_wiki_user     => hiera('statusbot_wiki_username'),
+    statusbot_wiki_password => hiera('statusbot_wiki_password'),
+    statusbot_wiki_url      => 'https://wiki.openstack.org/w/api.php',
+    statusbot_wiki_pageid   => '1781',
   }
 }
 
