@@ -176,5 +176,8 @@ openstack-qa:
       - x-vrif-minus-2
     projects:
       - openstack/tempest
+      - openstack-dev/devstack
+      - openstack-dev/grenade
+      - openstack-infra/devstack-gate
     branches:
       - master
