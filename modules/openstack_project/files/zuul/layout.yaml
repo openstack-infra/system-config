@@ -1465,3 +1465,23 @@ projects:
     release:
        - python-savannaclient-tarball:
          - python-savannaclient-pypi-upload
+
+  - name: stackforge/opencafe
+    check:
+      - gate-noop
+    gate:
+      - gate-noop
+
+  - name: stackforge/cloudcafe
+    check:
+      - gate-noop
+    gate:
+      - gate-noop
+
+  - name: stackforge/cloudroast
+    check:
+      - gate-noop
+    gate:
+      - gate-noop
+
+
