@@ -1486,3 +1486,21 @@ projects:
       - gate-noop
     gate:
       - gate-noop
+
+  - name: stackforge/opencafe
+    check:
+      - gate-noop
+    gate:
+      - gate-noop
+
+  - name: stackforge/cloudcafe
+    check:
+      - gate-noop
+    gate:
+      - gate-noop
+
+  - name: stackforge/cloudroast
+    check:
+      - gate-noop
+    gate:
+      - gate-noop
