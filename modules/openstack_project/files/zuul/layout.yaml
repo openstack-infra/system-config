@@ -124,6 +124,8 @@ jobs:
     files:
       - '^tools/.*-requires$'
       - '^.*requirements.txt$'
+  - name: manuals-upstream-translation-update
+    branch: ^master$
 
 
 projects:
@@ -1259,6 +1261,7 @@ projects:
       - openstack-install-deploy-guide-apt-fedora
       - openstack-install-deploy-guide-ubuntu
       - openstack-operations-guide
+      - manuals-upstream-translation-update
 
   - name: openstack/api-site
     check:
