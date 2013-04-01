@@ -70,43 +70,25 @@ jobs:
     branch: stable/folsom
   - name: gate-tempest-devstack-vm-smoke
     branch: ^(stable/(diablo|essex|folsom)).*$
-    failure-message: FAILURE The smoke tests caught something!
-    success-message: SUCCESS This code is good enough to pass the smoke tests. Quick run more tests.
   - name: gate-tempest-devstack-vm-full
     branch: ^(?!stable/(diablo|essex|folsom)).*$
-    failure-message: FAILURE Quick, to the logs!
-    success-message: SUCCESS As best as we can tell this change works.
   - name: gate-tempest-devstack-vm-quantum
     branch: ^(?!stable/(diablo|essex|folsom)).*$
-    failure-message: FAILURE Networking is hard.
-    success-message: SUCCESS The bits must flow.
   - name: gate-tempest-devstack-vm-quantum-full
     branch: ^(?!stable/(diablo|essex|folsom)).*$
     voting: false
-    failure-message: FAILURE Networking is hard.
-    success-message: SUCCESS The bits must flow.
   - name: gate-tempest-devstack-vm-postgres-full
     branch: ^(?!stable/(diablo|essex|folsom)).*$
-    failure-message: FAILURE Postgres does not approve.
-    success-message: SUCCESS Postgres users everywhere thank you.
   - name: gate-grenade-devstack-vm
     voting: false
-    failure-message: FAILURE ... maybe horse shoes is more up your alley
-    success-message: SUCCESS BOOM!
   - name: ^.*-python27$
     parameter-function: python27_params
-    failure-message: FAILURE Jenkins has detected you trying to sneak by, roll initiative.
-    success-message: SUCCESS
   - name: ^gate-.*-python26-rhel6$
     voting: false
     branch: ^(?!stable/(diablo|essex)).*$
-    failure-message: FAILURE RHEL would like a word with you.
-    success-message: SUCCESS Hopefully it works on Ubuntu too.
   - name: gate-nova-pylint
     voting: false
     branch: ^(?!stable/(diablo|essex)).*$
-    failure-message: FAILURE More lint than a college laundromat.
-    success-message: SUCCESS No lint fires here, not today.
   - name: gate-oslo-incubator-pyflakes
     branch: ^(?!stable|(diablo|essex|folsom)).*$
   - name: dev-zuul-coverage
@@ -140,15 +122,6 @@ jobs:
     files:
       - '^tools/.*-requires$'
       - '^.*requirements.txt$'
-  - name: ^.*-pep8$
-    failure-message: FAILURE This isn't Gangnam style.
-    success-message: SUCCESS Guido approves.
-  - name: ^.*-docs$
-    failure-message: FAILURE It is a good thing no one reads the docs because these docs do not build.
-    success-message: SUCCESS Extra! Extra! Read all about it!
-  - name: ^.*-python26$
-    failure-message: FAILURE Python 2.6 is not end of life. Yet.
-    success-message: SUCCESS Is RHEL working?
 
 
 projects:
