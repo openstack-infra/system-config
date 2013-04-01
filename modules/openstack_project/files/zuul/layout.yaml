@@ -1218,6 +1218,7 @@ projects:
       - openstack-install-deploy-guide-apt-fedora
       - openstack-install-deploy-guide-ubuntu
       - openstack-operations-guide
+      - manuals-upstream-translation-update
 
   - name: openstack/api-site
     check:
