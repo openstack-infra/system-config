@@ -9,7 +9,9 @@ JAVA=/usr/bin/java
 # arguments to pass to java
 #JAVA_ARGS="-Xmx256m"
 #JAVA_ARGS="-Djava.net.preferIPv4Stack=true" # make jenkins listen on IPv4 address
-JAVA_ARGS="-Xloggc:/var/log/jenkins/gc.log -XX:+PrintGCDetails -Xmx12g"
+# Disable compression as zip deflation threads eat CPU time.
+# https://issues.jenkins-ci.org/browse/JENKINS-14362
+JAVA_ARGS="-Xloggc:/var/log/jenkins/gc.log -XX:+PrintGCDetails -Xmx12g -Dorg.kohsuke.stapler.compression.CompressionFilter.disabled=true"
 
 PIDFILE=/var/run/jenkins/jenkins.pid
 
