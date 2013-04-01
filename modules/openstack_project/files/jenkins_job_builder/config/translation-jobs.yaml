@@ -39,6 +39,23 @@
 
     node: 'tx'
 
+- job-template:
+    name: '{name}-manuals-upstream-translation-update'
+    concurrent: false
+
+    triggers:
+      - zuul-post
+
+    builders:
+      - gerrit-git-prep
+      - shell: |
+          #!/bin/bash -xe
+          /usr/local/jenkins/slave_scripts/upstream_translation_update_manuals.sh {name}
+
+    publishers:
+      - console-log-post
+
+    node: 'tx'
 
 - job-group:
     name: translation-jobs
