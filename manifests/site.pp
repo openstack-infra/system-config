@@ -288,10 +288,9 @@ node /^quantal.*\.slave\.openstack\.org$/ {
     certname  => 'quantal.slave.openstack.org',
     sysadmins => hiera('sysadmins'),
   }
-  class { 'openstack_project::glancetest':
-    s3_store_access_key   => hiera('s3_store_access_key'),
-    s3_store_secret_key   => hiera('s3_store_secret_key'),
-    s3_store_bucket       => hiera('s3_store_bucket'),
+  file { '/home/jenkins/.config/glance':
+    ensure  => absent,
+    recurse => true,
   }
   include jenkins::cgroups
   include ulimit
@@ -309,10 +308,9 @@ node /^precise.*\.slave\.openstack\.org$/ {
     certname  => 'precise.slave.openstack.org',
     sysadmins => hiera('sysadmins'),
   }
-  class { 'openstack_project::glancetest':
-    s3_store_access_key   => hiera('s3_store_access_key'),
-    s3_store_secret_key   => hiera('s3_store_secret_key'),
-    s3_store_bucket       => hiera('s3_store_bucket'),
+  file { '/home/jenkins/.config/glance':
+    ensure  => absent,
+    recurse => true,
   }
   include jenkins::cgroups
   include ulimit
@@ -330,10 +328,9 @@ node /^oneiric.*\.slave\.openstack\.org$/ {
     certname  => 'oneiric.slave.openstack.org',
     sysadmins => hiera('sysadmins'),
   }
-  class { 'openstack_project::glancetest':
-    s3_store_access_key   => hiera('s3_store_access_key'),
-    s3_store_secret_key   => hiera('s3_store_secret_key'),
-    s3_store_bucket       => hiera('s3_store_bucket'),
+  file { '/home/jenkins/.config/glance':
+    ensure  => absent,
+    recurse => true,
   }
   include jenkins::cgroups
   include ulimit
@@ -352,10 +349,9 @@ node /^rhel6.*\.slave\.openstack\.org$/ {
     certname  => 'rhel6.slave.openstack.org',
     sysadmins => hiera('sysadmins'),
   }
-  class { 'openstack_project::glancetest':
-    s3_store_access_key   => hiera('s3_store_access_key'),
-    s3_store_secret_key   => hiera('s3_store_secret_key'),
-    s3_store_bucket       => hiera('s3_store_bucket'),
+  file { '/home/jenkins/.config/glance':
+    ensure  => absent,
+    recurse => true,
   }
   include jenkins::cgroups
   include ulimit
