@@ -292,9 +292,6 @@ node /^quantal.*\.slave\.openstack\.org$/ {
     s3_store_access_key   => hiera('s3_store_access_key'),
     s3_store_secret_key   => hiera('s3_store_secret_key'),
     s3_store_bucket       => hiera('s3_store_bucket'),
-    swift_store_user      => hiera('swift_store_user'),
-    swift_store_key       => hiera('swift_store_key'),
-    swift_store_container => hiera('swift_store_container'),
   }
   include jenkins::cgroups
   include ulimit
@@ -316,9 +313,6 @@ node /^precise.*\.slave\.openstack\.org$/ {
     s3_store_access_key   => hiera('s3_store_access_key'),
     s3_store_secret_key   => hiera('s3_store_secret_key'),
     s3_store_bucket       => hiera('s3_store_bucket'),
-    swift_store_user      => hiera('swift_store_user'),
-    swift_store_key       => hiera('swift_store_key'),
-    swift_store_container => hiera('swift_store_container'),
   }
   include jenkins::cgroups
   include ulimit
@@ -340,9 +334,6 @@ node /^oneiric.*\.slave\.openstack\.org$/ {
     s3_store_access_key   => hiera('s3_store_access_key'),
     s3_store_secret_key   => hiera('s3_store_secret_key'),
     s3_store_bucket       => hiera('s3_store_bucket'),
-    swift_store_user      => hiera('swift_store_user'),
-    swift_store_key       => hiera('swift_store_key'),
-    swift_store_container => hiera('swift_store_container'),
   }
   include jenkins::cgroups
   include ulimit
@@ -365,9 +356,6 @@ node /^rhel6.*\.slave\.openstack\.org$/ {
     s3_store_access_key   => hiera('s3_store_access_key'),
     s3_store_secret_key   => hiera('s3_store_secret_key'),
     s3_store_bucket       => hiera('s3_store_bucket'),
-    swift_store_user      => hiera('swift_store_user'),
-    swift_store_key       => hiera('swift_store_key'),
-    swift_store_container => hiera('swift_store_container'),
   }
   include jenkins::cgroups
   include ulimit
