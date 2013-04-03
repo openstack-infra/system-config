@@ -272,6 +272,7 @@
       - gate-{name}-pep8
       - gate-{name}-pyflakes
       - gate-{name}-docs
+      - '{name}-branch-tarball'
       - '{name}-tarball'
       - pypi-jobs
 
