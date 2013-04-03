@@ -31,4 +31,27 @@ class openstack_project::logstash (
   include logstash::redis
   include logstash::elasticsearch
   include logstash::web
+
+  package { 'python3':
+    ensure => 'present',
+  }
+
+  file { '/usr/local/jenkins_logs':
+    ensure => directory,
+    owner  => 'root',
+    group  => 'root',
+    mode   => '0755',
+  }
+
+  file { '/usr/local/jenkins_logs/log-pusher.py':
+    ensure  => present,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0755',
+    source  => 'puppet://modules/openstack_project/logstash/log-pusher.py',
+    require => [
+      File['/usr/local/jenkins_logs'],
+      Package['python3'],
+    ],
+  }
 }
