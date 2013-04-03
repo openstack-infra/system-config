@@ -29,6 +29,7 @@ import os
 import traceback
 import paramiko
 import socket
+import salt.crypt
 from sshclient import SSHClient
 
 
@@ -123,6 +124,13 @@ def add_keypair(client, name):
     public_key = key.get_name() + ' ' + key.get_base64()
     kp = client.keypairs.create(name, public_key)
     return key, kp
+
+def add_salt_keypair(keydir, keyname, keysize=2048):
+    '''
+    Generate a key pair for use with Salt
+    '''
+    priv_key = salt.crypt.gen_keys(keydir, keyname, keysize)
+    return priv_key
 
 def wait_for_resource(wait_resource):
     last_progress = None
