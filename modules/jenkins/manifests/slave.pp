@@ -93,6 +93,7 @@ class jenkins::slave(
 
   if ($bare == false) {
     $gem_packages = [
+      'bundler',
       'puppet-lint',
       'puppetlabs_spec_helper',
     ]
