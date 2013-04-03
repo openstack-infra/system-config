@@ -102,6 +102,14 @@ class openstack_project::static (
     environment => 'PATH=/var/lib/gems/1.8/bin:/usr/bin:/bin:/usr/sbin:/sbin',
   }
 
+  cron { 'rmlogs':
+    user        => 'root',
+    minute      => '0',
+    hour        => '3',
+    command     => 'sleep $((RANDOM\%600)) && flock -n /var/run/gziplogs.lock find /srv/static/logs/ \( -type f -mtime +183 -name \*.gz -execdir rm \{\} \; \) -o \( -type d -empty -mtime +1 -execdir rmdir {} \; \)',
+    environment => 'PATH=/usr/bin:/bin:/usr/sbin:/sbin',
+  }
+
   ###########################################################
   # Docs-draft
 
