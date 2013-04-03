@@ -19,5 +19,6 @@ class openstack_project::slave (
   }
   class { 'salt':
     salt_master => 'ci-puppetmaster.openstack.org',
+    minion_id   => $::fqdn,
   }
 }
