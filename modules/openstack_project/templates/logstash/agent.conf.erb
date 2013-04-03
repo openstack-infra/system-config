@@ -1,7 +1,9 @@
 input {
-  syslog {
-    type => syslog
-    port => 5514
+  pipe {
+    command => "python3 /usr/local/bin/log-pusher.py -r -z tcp://jenkins.openstack.org:8888 -l http://logs.openstack.org -f console.html"
+    format => "json"
+    tags => ["jenkins", "console"]
+    type => "jenkins_console"
   }
 }
 

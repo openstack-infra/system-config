@@ -31,4 +31,17 @@ class openstack_project::logstash (
   include logstash::redis
   include logstash::elasticsearch
   include logstash::web
+
+  package { 'python3':
+    ensure => 'present',
+  }
+
+  file { '/usr/local/bin/log-pusher.py':
+    ensure  => present,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0755',
+    source  => 'puppet://modules/openstack_project/logstash/log-pusher.py',
+    require => Package['python3'],
+  }
 }
