@@ -90,7 +90,10 @@ def main():
         if name not in os_reqs.reqs:
             print("Requirement %s not in openstack/requirements" % str(req))
             failed = True
-        if req != os_reqs.reqs[name]:
+        # pkg_resources.Requirement implements __eq__() but not __ne__().
+        # There is no implied relationship between __eq__() and __ne__()
+        # so we must negate the result of == here instead of using !=.
+        if not (req == os_reqs.reqs[name]):
             print("Requirement %s does not match openstack/requirements "
                   "value %s" % (str(req), str(os_reqs.reqs[name])))
             failed = True
