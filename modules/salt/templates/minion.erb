@@ -30,6 +30,7 @@ master: <%= salt_master %>
 # same machine but with different ids, this can be useful for salt compute
 # clusters.
 #id:
+id: <%= minion_id %>
 
 # Append a domain to a hostname in the event that it does not exist.  This is
 # useful for systems where socket.getfqdn() does not actually result in a
