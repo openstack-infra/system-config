@@ -36,6 +36,9 @@ NOVA_PROJECT_ID=os.environ['OS_TENANT_NAME']
 NOVA_REGION_NAME=os.environ['OS_REGION_NAME']
 
 SCRIPT_DIR = os.path.dirname(sys.argv[0])        
+# TODO: Get Salt pki dirs from running Salt Master
+SALT_MASTER_PKI = '/etc/salt/pki/master'
+SALT_MINION_PKI = '/etc/salt/pki/minion'
 
 def get_client():
     args = [NOVA_USERNAME, NOVA_PASSWORD, NOVA_PROJECT_ID, NOVA_URL]
@@ -125,6 +128,9 @@ def build_server(client, name, image, flavor, cert, environment):
             traceback.print_exc()
         raise
 
+    saltkey = ''.join([name, '.pem'])
+    if not os.path.exists(os.path.join(SALT_MASTER_PKI, saltkey):
+        utils.add_salt_keypair(SALT_MASTER_PKI, name, 2048)
     try:
         admin_pass = server.adminPass
         server = utils.wait_for_resource(server)
