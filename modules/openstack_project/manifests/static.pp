@@ -94,12 +94,21 @@ class openstack_project::static (
     require => File['/srv/static/logs'],
   }
 
-  cron { 'gziplogs':
+  file { '/usr/local/sbin/log_archive_maintenance.sh':
+    ensure => present,
+    owner  => 'root',
+    group  => 'root',
+    mode   => '0744',
+    source => 'puppet:///modules/openstack_project/log_archive_maintenance.sh',
+  }
+
+  cron { 'gziprmlogs':
     user        => 'root',
     minute      => '0',
     hour        => '*/6',
-    command     => 'sleep $((RANDOM\%600)) && flock -n /var/run/gziplogs.lock find /srv/static/logs/ -type f -not -name robots.txt -not -name \*.gz \( -name \*.txt -or -name \*.html -or -name tmp\* \) -exec gzip \{\} \;',
-    environment => 'PATH=/var/lib/gems/1.8/bin:/usr/bin:/bin:/usr/sbin:/sbin',
+    command     => 'bash /usr/local/sbin/log_archive_maintenance.sh',
+    environment => 'PATH=/usr/bin:/bin:/usr/sbin:/sbin',
+    require     => File['/usr/local/sbin/log_archive_maintenance.sh'],
   }
 
   ###########################################################
