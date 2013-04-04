@@ -1,0 +1,23 @@
+- job:
+    name: puppet_module_unit_test
+    project-type: matrix
+    defaults: global
+    disabled: false
+    concurrent: true
+    quiet-period: 0
+    block-downstream: false
+    block-upstream: false
+    axes:
+      - axis:
+         type: label-expression
+         name: PUPPET_GEM_VERSION
+         values:
+          - 2.6
+          - 2.7
+          - 3.0
+          - 3.1
+    builders:
+      - shell: |
+          bundle install
+          echo $PUPPET_GEM_VERSION | grep '2.6' && git clone git://github.com/puppetlabs/puppetlabs-create_resources.git spec/fixtures/modules/create_resources || true
+          bundle exec rake spec SPEC_OPTS='--format documentation'
