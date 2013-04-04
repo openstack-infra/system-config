@@ -4,4 +4,4 @@
     triggers:
       - zuul
 
-    node: precise
+    node: quantal

@@ -309,7 +309,7 @@
     name: openstack-block-api-doc
     project-type: maven
     concurrent: false
-    node: precise && !jclouds
+    node: quantal && !jclouds
 
     triggers:
       - zuul-post

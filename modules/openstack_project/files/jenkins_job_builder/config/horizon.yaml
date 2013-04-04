@@ -1,6 +1,6 @@
 - job:
     name: gate-horizon-selenium
-    node: precise
+    node: quantal
 
     triggers:
       - zuul

@@ -33,7 +33,7 @@
       - console-log
 - job:
     name: 'dev-heat-cfntools-coverage'
-    node: 'precise'
+    node: quantal
 
     triggers:
       - zuul
