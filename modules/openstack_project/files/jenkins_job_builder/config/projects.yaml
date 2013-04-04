@@ -738,3 +738,72 @@
     jobs:
       - python-jobs
 
+
+- project:
+    name: puppet-glance
+    github-org: stackforge
+    node: quantal
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - puppet-module-unit
+
+
+- project:
+    name: puppet-keystone
+    github-org: stackforge
+    node: quantal
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - puppet-module-unit
+
+
+- project:
+    name: puppet-cinder
+    github-org: stackforge
+    node: quantal
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - puppet-module-unit
+
+
+- project:
+    name: puppet-nova
+    github-org: stackforge
+    node: quantal
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - puppet-module-unit
+
+
+- project:
+    name: puppet-horizon
+    github-org: stackforge
+    node: quantal
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - puppet-module-unit
+
+
+- project:
+    name: puppet-openstack
+    github-org: stackforge
+    node: quantal
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - puppet-module-unit
+
+
+- project:
+    name: puppet-swift
+    github-org: stackforge
+    node: quantal
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - puppet-module-unit

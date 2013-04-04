@@ -1,0 +1,21 @@
+- job-template:
+    name: 'gate-{name}-puppet-unit-{puppet_version}'
+    node: '{node}'
+
+    builders:
+      - shell: |
+          export PUPPET_GEM_VERSION={puppet_version}
+          bundle install
+          echo {puppet_version} | grep '2.6' && git clone git://github.com/puppetlabs/puppetlabs-create_resources.git spec/fixtures/modules/create_resources || true
+          bundle exec rake spec SPEC_OPTS='--format documentation'
+
+
+- job-group:
+    name: 'puppet-module-unit'
+    puppet_version:
+      - 2.6
+      - 2.7
+      - 3.0
+      - 3.1
+    jobs:
+      - 'gate-{name}-puppet-unit-{puppet_version}'
