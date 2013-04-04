@@ -49,7 +49,7 @@ sure you have cloned the openstack-infra/config repository
 
 First you need to add your StackForge project to the master project
 list. Edit
-``openstack-infra/config/modules/openstack_project/templates/review.projects.yaml.erb``
+``modules/openstack_project/templates/review.projects.yaml.erb``
 and add a new section for your project at the end of the file. It should
 look something like::
 
@@ -64,7 +64,7 @@ history. Both of these are optional. Note that the current tools
 assume that the upstream repo will have a master branch.
 
 The next step is to add a Gerrit ACL config file. Edit
-``openstack-infra/config/modules/openstack_project/files/gerrit/acls/stackforge/project-name.config``
+``modules/openstack_project/files/gerrit/acls/stackforge/project-name.config``
 and make it look like::
 
   [access "refs/heads/*"]
@@ -104,7 +104,7 @@ and Zuul for the new StackForge project.
 
 If you are interested in using the standard python Jenkins jobs (docs,
 pep8, python 2.6 and 2.7 unittests, and coverage), edit
-``openstack-infra/config/modules/openstack_project/files/jenkins_job_builder/config/projects.yaml``
+``modules/openstack_project/files/jenkins_job_builder/config/projects.yaml``
 and add a new section for your project at the end of the file. It
 should look something like::
 
@@ -120,14 +120,14 @@ should look something like::
         - gate-{name}-pylint
 
 List of jobs included to the ``python-jobs`` jobs group is located in
-``openstack-infra/config/modules/openstack_project/files/jenkins_job_builder/config/python-jobs.yaml``.
+``modules/openstack_project/files/jenkins_job_builder/config/python-jobs.yaml``.
 
 If you aren't ready to run any gate tests yet, you don't need to edit
 ``projects.yaml``.
 
 Now that we have Jenkins jobs we need to tell Zuul to run them when
 appropriate. Edit
-``openstack-infra/config/modules/openstack_project/files/zuul/layout.yaml``
+``modules/openstack_project/files/zuul/layout.yaml``
 and add a new section for your project at the end of the file. It
 should look something like::
 
@@ -170,7 +170,7 @@ Configure StackForge Project to use GerritBot
 
 To have GerritBot send Gerrit events for your project to a Freenode IRC
 channel edit
-``openstack-infra/config/modules/gerritbot/files/gerritbot_channel_config.yaml``.
+``modules/gerritbot/files/gerritbot_channel_config.yaml``.
 If you want to configure GerritBot to leave alerts in a channel
 GerritBot has always joined just add your project to the project list
 for that channel::
