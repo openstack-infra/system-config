@@ -68,8 +68,18 @@ class openstack_project::gerrit (
 
   class { 'jeepyb::openstackwatch':
     projects       => [
+      'openstack/ceilometer',
       'openstack/cinder',
+      'openstack/glance',
+      'openstack/heat',
+      'openstack/horizon',
+      'openstack/infra',
       'openstack/keystone',
+      'openstack/nova',
+      'openstack/oslo',
+      'openstack/quantum',
+      'openstack/swift',
+      'openstack/tempest',
       'openstack-dev/devstack',
     ],
     container      => 'rss',
