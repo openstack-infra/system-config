@@ -298,6 +298,7 @@ class openstack_project::gerrit (
 
     exec { 'manage_projects':
       command     => '/usr/local/bin/manage-projects',
+      timeout     => 900, # 15 minutes
       subscribe   => [
           File['/home/gerrit2/projects.yaml'],
           File['/home/gerrit2/acls'],
