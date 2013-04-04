@@ -39,7 +39,7 @@
 - project:
     name: ceilometer
     github-org: openstack
-    node: precise
+    node: quantal
     tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
 
@@ -51,7 +51,7 @@
 - project:
     name: cinder
     github-org: openstack
-    node: precise
+    node: quantal
     tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
 
@@ -188,7 +188,7 @@
 - project:
     name: glance
     github-org: openstack
-    node: precise
+    node: quantal
     tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
 
@@ -203,7 +203,7 @@
 - project:
     name: heat
     github-org: openstack
-    node: precise
+    node: quantal
     tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
 
@@ -215,7 +215,7 @@
 - project:
     name: python-heatclient
     github-org: openstack
-    node: precise
+    node: quantal
     tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
 
@@ -228,7 +228,7 @@
 - project:
     name: heat-cfntools
     github-org: openstack
-    node: precise
+    node: quantal
     tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
 
@@ -241,7 +241,7 @@
 - project:
     name: horizon
     github-org: openstack
-    node: precise
+    node: quantal
     tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
 
@@ -294,7 +294,7 @@
 - project:
     name: keystone
     github-org: openstack
-    node: precise
+    node: quantal
     tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
 
@@ -345,7 +345,7 @@
 - project:
     name: nova
     github-org: openstack
-    node: precise
+    node: quantal
     tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
 
@@ -374,7 +374,7 @@
 - project:
     name: oslo.config
     github-org: openstack
-    node: precise
+    node: quantal
     tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
 
@@ -388,7 +388,7 @@
 - project:
     name: oslo-incubator
     github-org: openstack
-    node: precise
+    node: quantal
     tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
 
@@ -401,7 +401,7 @@
 - project:
     name: python-ceilometerclient
     github-org: openstack
-    node: precise
+    node: quantal
     tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
 
@@ -414,7 +414,7 @@
 - project:
     name: python-cinderclient
     github-org: openstack
-    node: precise
+    node: quantal
     tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
 
@@ -427,7 +427,7 @@
 - project:
     name: python-glanceclient
     github-org: openstack
-    node: precise
+    node: quantal
     tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
 
@@ -440,7 +440,7 @@
 - project:
     name: python-keystoneclient
     github-org: openstack
-    node: precise
+    node: quantal
     tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
 
@@ -453,7 +453,7 @@
 - project:
     name: python-novaclient
     github-org: openstack
-    node: precise
+    node: quantal
     tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
 
@@ -466,7 +466,7 @@
 - project:
     name: python-openstackclient
     github-org: openstack
-    node: precise
+    node: quantal
     tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
 
@@ -479,7 +479,7 @@
 - project:
     name: python-quantumclient
     github-org: openstack
-    node: precise
+    node: quantal
     tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
 
@@ -492,7 +492,7 @@
 - project:
     name: python-swiftclient
     github-org: openstack
-    node: precise
+    node: quantal
     tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
 
@@ -505,7 +505,7 @@
 - project:
     name: quantum
     github-org: openstack
-    node: precise
+    node: quantal
     tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
 
@@ -639,7 +639,7 @@
 - project:
     name: swift
     github-org: openstack
-    node: precise
+    node: quantal
     tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
 
@@ -652,7 +652,7 @@
 - project:
     name: tempest
     github-org: openstack-infra
-    node: precise
+    node: quantal
 
     jobs:
       - gate-{name}-pep8

@@ -1,6 +1,6 @@
 - job-template:
     name: '{name}-docs'
-    node: precise
+    node: quantal
 
     triggers:
       - zuul-post

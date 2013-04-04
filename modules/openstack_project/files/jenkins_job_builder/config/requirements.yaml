@@ -1,6 +1,6 @@
 - job:
     name: gate-requirements-install
-    node: precise
+    node: quantal
 
     triggers:
       - zuul

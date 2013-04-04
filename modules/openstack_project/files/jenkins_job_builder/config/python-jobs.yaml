@@ -218,7 +218,7 @@
 
 - job-template:
     name: 'gate-{name}-pyflakes'
-    node: precise
+    node: quantal
 
     triggers:
       - zuul
@@ -235,7 +235,7 @@
 
 - job-template:
     name: '{name}-tarball'
-    node: precise
+    node: quantal
 
     triggers:
       - zuul-post
@@ -256,7 +256,7 @@
 - job-template:
     name: '{name}-branch-tarball'
     concurrent: false
-    node: precise
+    node: quantal
 
     triggers:
       - zuul-post
@@ -281,7 +281,7 @@
 
 - job-template:
     name: 'gate-{name}-requirements'
-    node: precise
+    node: quantal
 
     triggers:
       - zuul
