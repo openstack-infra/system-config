@@ -121,6 +121,7 @@ tripleo:
     projects:
       - stackforge/diskimage-builder
       - stackforge/os-config-applier
+      - stackforge/tripleo-image-elements
     branches:
       - master
 

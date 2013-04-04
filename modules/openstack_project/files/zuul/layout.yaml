@@ -1352,6 +1352,19 @@ projects:
     post:
       - os-config-applier-coverage
 
+  - name: stackforge/tripleo-image-elements
+    check:
+      - gate-tripleo-image-elements-pep8:
+        - gate-tripleo-image-elements-python26
+        - gate-tripleo-image-elements-python26-rhel6
+        - gate-tripleo-image-elements-python27
+    gate:
+      - gate-tripleo-image-elements-pep8
+      - gate-tripleo-image-elements-python26
+      - gate-tripleo-image-elements-python27
+    post:
+      - tripleo-image-elements-coverage
+
   - name: stackforge/climate
     check:
       - gate-climate-pep8:

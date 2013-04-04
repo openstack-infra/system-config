@@ -713,3 +713,13 @@
 
     jobs:
       - python-jobs
+
+- project:
+    name: tripleo-image-elements
+    github-org: stackforge
+    node: quantal
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - python-jobs
+
