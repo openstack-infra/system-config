@@ -1454,47 +1454,89 @@ projects:
 
   - name: stackforge/puppet-cinder
     check:
-      - gate-noop
+      - puppet-cinder-2.6-unit
+      - puppet-cinder-2.7-unit
+      - puppet-cinder-3.0-unit
+      - puppet-cinder-3.1-unit
     gate:
-      - gate-noop
+      - puppet-cinder-2.6-unit
+      - puppet-cinder-2.7-unit
+      - puppet-cinder-3.0-unit
+      - puppet-cinder-3.1-unit
 
   - name: stackforge/puppet-glance
     check:
-      - gate-noop
+      - puppet-glance-2.6-unit
+      - puppet-glance-2.7-unit
+      - puppet-glance-3.0-unit
+      - puppet-glance-3.1-unit
     gate:
-      - gate-noop
+      - puppet-glance-2.6-unit
+      - puppet-glance-2.7-unit
+      - puppet-glance-3.0-unit
+      - puppet-glance-3.1-unit
 
   - name: stackforge/puppet-horizon
     check:
-      - gate-noop
+      - puppet-horizon-2.6-unit
+      - puppet-horizon-2.7-unit
+      - puppet-horizon-3.0-unit
+      - puppet-horizon-3.1-unit
     gate:
-      - gate-noop
+      - puppet-horizon-2.6-unit
+      - puppet-horizon-2.7-unit
+      - puppet-horizon-3.0-unit
+      - puppet-horizon-3.1-unit
 
   - name: stackforge/puppet-keystone
     check:
-      - gate-noop
+      - puppet-keystone-2.6-unit
+      - puppet-keystone-2.7-unit
+      - puppet-keystone-3.0-unit
+      - puppet-keystone-3.1-unit
     gate:
-      - gate-noop
+      - puppet-keystone-2.6-unit
+      - puppet-keystone-2.7-unit
+      - puppet-keystone-3.0-unit
+      - puppet-keystone-3.1-unit
 
   - name: stackforge/puppet-nova
     check:
-      - gate-noop
+      - puppet-nova-2.6-unit
+      - puppet-nova-2.7-unit
+      - puppet-nova-3.0-unit
+      - puppet-nova-3.1-unit
     gate:
-      - gate-noop
+      - puppet-nova-2.6-unit
+      - puppet-nova-2.7-unit
+      - puppet-nova-3.0-unit
+      - puppet-nova-3.1-unit
 
   - name: stackforge/puppet-openstack
     check:
-      - gate-noop
+      - puppet-openstack-2.6-unit
+      - puppet-openstack-2.7-unit
+      - puppet-openstack-3.0-unit
+      - puppet-openstack-3.1-unit
     gate:
-      - gate-noop
-
-  - name: stackforge/puppet-openstack_dev_env
-    check:
-      - gate-noop
-    gate:
-      - gate-noop
+      - puppet-openstack-2.6-unit
+      - puppet-openstack-2.7-unit
+      - puppet-openstack-3.0-unit
+      - puppet-openstack-3.1-unit
 
   - name: stackforge/puppet-swift
+    check:
+      - puppet-swift-2.6-unit
+      - puppet-swift-2.7-unit
+      - puppet-swift-3.0-unit
+      - puppet-swift-3.1-unit
+    gate:
+      - puppet-swift-2.6-unit
+      - puppet-swift-2.7-unit
+      - puppet-swift-3.0-unit
+      - puppet-swift-3.1-unit
+
+  - name: stackforge/puppet-openstack_dev_env
     check:
       - gate-noop
     gate:

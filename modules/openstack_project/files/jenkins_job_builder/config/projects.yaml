@@ -723,3 +723,7 @@
     jobs:
       - python-jobs
 
+    name: puppet-module-unit
+
+    jobs:
+      - puppet-module-unit
