@@ -137,6 +137,11 @@
     prebuilders:
       - gerrit-git-prep
 
+    properties:
+      - inject:
+          script-file: /usr/local/jenkins/slave_scripts/docbook-properties.sh
+          properties-file: gerrit-doc.properties
+
     maven:
       maven-name: Maven3
       root-module:
