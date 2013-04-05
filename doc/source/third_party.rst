@@ -18,7 +18,7 @@ Reading the Event Stream
 ------------------------
 
 It is possible to use ssh to connect to ``review.openstack.org`` on port 29418
-with your ssh key if you are signed up as an OpenStack developer on Launchpad.
+with your ssh key if you have a normal reviewer account in Gerrit.
 
 This will give you a real-time JSON stream of events happening inside Gerrit.
 For example:
@@ -80,18 +80,14 @@ advisable during initial testing of the setup.
 Requesting a Service Account
 ----------------------------
 
-To request a sevice acconut for your system you first need to create a new
-account in LaunchPad.  This account needs to be joined to the
-`OpenStack Team <https://launchpad.net/~openstack>`_ or one of the related teams
-so that Gerrit can pick it up.  You can then contact the
-OpenStack Infrastructure Team via
-`email <mailto:openstack-infra@lists.openstack.org>`_
-or the #openstack-infra IRC channel.  We will set things up on Gerrit to
-receive your system's votes.
-
-Feel free to contact the Infrastructure team to arrange setting up a dedicated
-user so your system can post reviews up using a system name rather than your
-user name.
+Feel free to contact the OpenStack Infrastructure Team via
+`email <mailto:openstack-infra@lists.openstack.org>`_,
+`bug report <https://bugs.launchpad.net/openstack-ci/>`_
+or in the #openstack-infra IRC channel to arrange setting up a dedicated user
+(so your system can post reviews and vote using a system name rather than your
+user name). You should provide a preferred account name, SSH public key and if
+possible a unique contact email address for that system, though it should not
+be an address used by any existing Gerrit account.
 
 The Jenkins Gerrit Trigger Plugin Way
 -------------------------------------
@@ -111,7 +107,7 @@ Jenkins` menu.  This should be given the following options::
   Hostname: review.openstack.org
   Frontend URL: https://review.openstack.org/
   SSH Port: 29418
-  Username: (the Launchpad user)
+  Username: (the Gerrit user)
   SSH Key File: (path to the user SSH key)
 
   Verify
