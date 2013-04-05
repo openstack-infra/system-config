@@ -69,11 +69,12 @@ class openstack_project::zuul(
   }
 
   file { '/var/lib/zuul/www':
-    ensure  => absent,
+    ensure => absent,
+    force  => true,
   }
 
   file { '/var/lib/zuul/www/index.html':
-    ensure  => absent,
+    ensure => absent,
   }
 
   package { 'libjs-jquery':
@@ -81,26 +82,28 @@ class openstack_project::zuul(
   }
 
   file { '/var/lib/zuul/www/jquery.min.js':
-    ensure  => absent,
+    ensure => absent,
   }
 
   file { '/var/lib/zuul/www/status.js':
-    ensure  => absent,
+    ensure => absent,
   }
 
   file { '/opt/jquery-visibility':
-    ensure   => absent,
+    ensure => absent,
+    force  => true,
   }
 
   file { '/var/lib/zuul/www/jquery-visibility.min.js':
-    ensure   => absent,
+    ensure => absent,
   }
 
   file { '/opt/jquery-graphite':
-    ensure   => absent,
+    ensure => absent,
+    force  => true,
   }
 
   file { '/var/lib/zuul/www/jquery-graphite.js':
-    ensure   => absent,
+    ensure => absent,
   }
 }
