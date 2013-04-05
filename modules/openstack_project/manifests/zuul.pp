@@ -11,20 +11,14 @@ class openstack_project::zuul(
   $zuul_ssh_private_key = '',
   $url_pattern = '',
   $sysadmins = [],
-  $statsd_host = '',
-  $gearman_workers = []
+  $statsd_host = ''
 ) {
 
-  # Turn a list of hostnames into a list of iptables rules
-  $iptables_rules6 = regsubst ($gearman_workers, '^(.*)$', '-m state --state NEW -m tcp -p tcp --dport 4730 -s \1 -j ACCEPT')
-  $iptables_rules4 = $iptables_rules6
-
-  $iptables_rules4 += [ "-m state --state NEW -m tcp -p tcp --dport 8001 -s ${jenkins_host} -j ACCEPT" ]
+  $rules = [ "-m state --state NEW -m tcp -p tcp --dport 8001 -s ${jenkins_host} -j ACCEPT" ]
 
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [80],
-    iptables_rules6           => $iptables_rules6,
-    iptables_rules4           => $iptables_rules4,
+    iptables_rules4           => $rules,
     sysadmins                 => $sysadmins,
   }
 
