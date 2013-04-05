@@ -1313,6 +1313,13 @@ projects:
       - gate-git-review-pep8
     gate:
       - gate-git-review-pep8
+    post:
+      - git-review-branch-tarball
+    pre-release:
+      - git-review-tarball
+    release:
+      - git-review-tarball:
+        - git-review-pypi-upload
 
   - name: openstack/openstack-planet
     check:
