@@ -178,8 +178,12 @@
     name: git-review
     github-org: openstack-infra
     node: quantal
+    tarball-site: tarballs.openstack.org
     jobs:
       - gate-{name}-pep8
+      - '{name}-branch-tarball'
+      - '{name}-tarball'
+      - pypi-jobs
 
 
 - project:
