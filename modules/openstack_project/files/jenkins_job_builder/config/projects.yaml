@@ -156,6 +156,18 @@
 
 
 - project:
+    name: gear
+    github-org: openstack-infra
+    node: quantal
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - gate-{name}-pep8
+      - '{name}-tarball'
+      - pypi-jobs
+
+
+- project:
     name: gearman-plugin
     github-org: openstack-infra
     node: quantal
