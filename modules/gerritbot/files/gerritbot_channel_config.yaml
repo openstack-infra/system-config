@@ -7,6 +7,8 @@ openstack-infra:
       - openstack-infra/askbot-theme
       - openstack-infra/config
       - openstack-infra/devstack-gate
+      - openstack-infra/gear
+      - openstack-infra/gearman-plugin
       - openstack-infra/gerrit
       - openstack-infra/gerrit-trigger-plugin
       - openstack-infra/gerritbot
@@ -20,7 +22,6 @@ openstack-infra:
       - openstack-infra/reviewday
       - openstack-infra/statusbot
       - openstack-infra/zuul
-      - openstack-infra/gearman-plugin
       - openstack/requirements
     branches:
       - master

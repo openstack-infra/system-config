@@ -1381,6 +1381,12 @@ projects:
     gate:
       - gate-kwapi-pep8
 
+  - name: openstack-infra/gear
+    check:
+      - gate-noop
+    gate:
+      - gate-noop
+
   - name: openstack-infra/gearman-plugin
     check:
       - gate-gearman-plugin-build
