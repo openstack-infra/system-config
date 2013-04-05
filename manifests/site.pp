@@ -234,11 +234,6 @@ node 'zuul.openstack.org' {
       'jenkins-dev.openstack.org',
     ],
   }
-  # co-host gearman-job-server
-  include gearman
-  class { 'gearman':
-    listen => '::',
-  }
 }
 
 # A bare machine, but with a jenkins user

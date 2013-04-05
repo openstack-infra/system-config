@@ -26,6 +26,11 @@ class openstack_project::zuul(
     sysadmins                 => $sysadmins,
   }
 
+  # co-host gearman-job-server
+  class { 'gearman':
+    listen => '::',
+  }
+
   class { '::zuul':
     vhost_name           => $vhost_name,
     jenkins_server       => $jenkins_url,
