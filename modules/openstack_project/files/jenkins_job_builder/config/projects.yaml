@@ -45,7 +45,6 @@
 
     jobs:
       - python-jobs
-      - python-jobs-folsom
       - openstack-publish-jobs
       - translation-jobs
 

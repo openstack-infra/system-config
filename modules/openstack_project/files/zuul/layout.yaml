@@ -977,16 +977,12 @@ projects:
         - gate-ceilometer-python26
         - gate-ceilometer-python26-rhel6
         - gate-ceilometer-python27
-        - gate-ceilometer-python26-folsom
-        - gate-ceilometer-python27-folsom
     gate:
       - gate-ceilometer-requirements
       - gate-ceilometer-docs
       - gate-ceilometer-pep8
       - gate-ceilometer-python26
       - gate-ceilometer-python27
-      - gate-ceilometer-python26-folsom
-      - gate-ceilometer-python27-folsom
     post:
       - ceilometer-branch-tarball
       - ceilometer-coverage
