@@ -513,10 +513,9 @@ projects:
 
   - name: openstack/oslo.config
     check:
-      - gate-oslo.config-pyflakes:
+      - gate-oslo.config-pep8:
         - gate-oslo.config-requirements
         - gate-oslo.config-docs
-        - gate-oslo.config-pep8
         - gate-oslo.config-python26
         - gate-oslo.config-python26-rhel6
         - gate-oslo.config-python27
