@@ -1,0 +1,11 @@
+Code-Review+2: James E. Blair <corvus@inaugust.com>
+Code-Review+2: Monty Taylor <mordred@inaugust.com>
+Verified+2: Jenkins
+Approved+1: Jeremy Stanley <fungi@yuggoth.org>
+Code-Review+2: Jeremy Stanley <fungi@yuggoth.org>
+Code-Review+1: matthew-wagoner <matthew.wagoner@hp.com>
+Submitted-by: Jenkins
+Submitted-at: Sat, 06 Apr 2013 01:28:27 +0000
+Reviewed-on: https://review.openstack.org/26084
+Project: openstack-infra/config
+Branch: refs/heads/master
