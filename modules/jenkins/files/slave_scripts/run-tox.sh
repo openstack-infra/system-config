@@ -51,7 +51,7 @@ echo "======================================================================"
 if [ -f ".testrepository/0" ]
 then
     cp .testrepository/0 ./subunit_log.txt
-    /usr/local/jenkins/slave_scripts/subunit2html.py ./subunit_log.txt testr_results.html
+    .tox/$venv/bin/python /usr/local/jenkins/slave_scripts/subunit2html.py ./subunit_log.txt testr_results.html
     gzip -9 ./subunit_log.txt
     gzip -9 ./testr_results.html
 fi
