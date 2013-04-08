@@ -16,6 +16,7 @@ class openstack_project::etherpad_dev (
     # the following to test automated upgrade by puppet.
     # eplite_version => '1.1.4',
     # nodejs_version => 'v0.8.14',
+    ep_headings    => true
   }
 
   include etherpad_lite::backup

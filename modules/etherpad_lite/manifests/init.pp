@@ -16,8 +16,13 @@ class etherpad_lite (
   $base_log_dir     = '/var/log',
   $base_install_dir = '/opt/etherpad-lite',
   $nodejs_version   = 'v0.6.16',
-  $eplite_version   = ''
+  $eplite_version   = '',
+  $ep_headings = false
 ) {
+
+  # where the modules are, needed to easily install modules later
+  $modules_dir = "${base_install_dir}/etherpad-lite/node_modules"
+  $path = "/usr/bin:/bin:/usr/local/bin:${base_install_dir}/etherpad-lite"
 
   user { $ep_user:
     shell   => '/sbin/nologin',
@@ -103,8 +108,7 @@ class etherpad_lite (
 
   exec { 'install_etherpad_dependencies':
     command     => './bin/installDeps.sh',
-    path        =>
-      "/usr/bin:/bin:/usr/local/bin:${base_install_dir}/etherpad-lite",
+    path        => $path,
     user        => $ep_user,
     cwd         => "${base_install_dir}/etherpad-lite",
     environment => "HOME=${base_log_dir}/${ep_user}",
@@ -114,6 +118,16 @@ class etherpad_lite (
     ],
     before      => File["${base_install_dir}/etherpad-lite/settings.json"],
     creates     => "${base_install_dir}/etherpad-lite/node_modules",
+  }
+
+  if $ep_headings == true {
+    # install the headings plugin
+    exec {'npm install ep_headings':
+      cwd     => $modules_dir,
+      path    => $path,
+      creates => "${modules_dir}/ep_headings",
+      require => Exec['install_etherpad_dependencies']
+    }
   }
 
   file { '/etc/init/etherpad-lite.conf':
