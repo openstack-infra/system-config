@@ -121,6 +121,15 @@ class etherpad_lite (
   }
 
   if $ep_headings == true {
+    # install the test install plugin
+    # This seesm to be needed to get
+    exec {'npm install ep_fintest':
+      cwd     => $modules_dir,
+      path    => $path,
+      creates => "${modules_dir}/ep_fintest",
+      require => Exec['install_etherpad_dependencies']
+    } ->
+
     # install the headings plugin
     exec {'npm install ep_headings':
       cwd     => $modules_dir,
