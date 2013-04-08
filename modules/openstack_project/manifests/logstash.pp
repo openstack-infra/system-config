@@ -36,6 +36,10 @@ class openstack_project::logstash (
     ensure => 'present',
   }
 
+  package { 'python3-zmq':
+    ensure => 'present',
+  }
+
   file { '/usr/local/bin/log-pusher.py':
     ensure  => present,
     owner   => 'root',
