@@ -2,12 +2,22 @@
     name: 'gate-{name}-puppet-unit-{puppet_version}'
     node: '{node}'
 
+    triggers:
+      - zuul
+
     builders:
+      - gerrit-git-prep
       - shell: |
           export PUPPET_GEM_VERSION={puppet_version}
+          mkdir .bundled_gems
+          export GEM_HOME=`pwd`/.bundled_gems
           bundle install
           echo {puppet_version} | grep '2.6' && git clone git://github.com/puppetlabs/puppetlabs-create_resources.git spec/fixtures/modules/create_resources || true
           bundle exec rake spec SPEC_OPTS='--format documentation'
+
+    publishers:
+      - console-log
+
 
 
 - job-group:
