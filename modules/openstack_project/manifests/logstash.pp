@@ -41,7 +41,7 @@ class openstack_project::logstash (
     owner   => 'root',
     group   => 'root',
     mode    => '0755',
-    source  => 'puppet://modules/openstack_project/logstash/log-pusher.py',
+    source  => 'puppet:///modules/openstack_project/logstash/log-pusher.py',
     require => Package['python3'],
   }
 }
