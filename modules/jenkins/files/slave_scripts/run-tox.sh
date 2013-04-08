@@ -53,12 +53,27 @@ echo "======================================================================"
 .tox/$venv/bin/pip freeze
 echo "======================================================================"
 
-if [ -f ".testrepository/0" ]
-then
-    cp .testrepository/0 ./subunit_log.txt
+if [ -d ".testrepository" ] ; then
+    if [ -f ".testrepository/0.2" ] ; then
+        cp .testrepository/0.2 ./subunit_log.txt
+    elif [ -f ".testrepository/0" ] ; then
+        cp .testrepository/0 ./subunit_log.txt
+    fi
     .tox/$venv/bin/python /usr/local/jenkins/slave_scripts/subunit2html.py ./subunit_log.txt testr_results.html
     gzip -9 ./subunit_log.txt
     gzip -9 ./testr_results.html
+
+    foundcount=$(.tox/$venv/bin/python testr list-tests | sed -e '1d' | wc -l)
+    rancount=$(.tox/$venv/bin/python testr last | sed -ne 's/Ran \([0-9]\+\).*tests in.*/\1/p')
+    if [ "$foundcount" -ne "$rancount" ] ; then
+        echo
+        echo "The number of tests found did not match the number of tests"
+        echo "that were run. This indicates a fatal error occured while"
+        echo "running the tests."
+        echo "Tests found: $foundcount Tests ran: $rancount"
+        echo
+        exit 1
+    fi
 fi
 
 sudo /usr/local/jenkins/slave_scripts/jenkins-sudo-grep.sh post
@@ -103,23 +118,6 @@ else
     echo
     echo "WARNING: Unable to find $NOST_HTML_OUT_FILE to confirm results!"
     echo
-fi
-
-if [ -d ".testrepository" ]
-then
-    source .tox/$venv/bin/activate
-    foundcount=$(testr list-tests | sed -e '1d' | wc -l)
-    rancount=$(testr last | sed -ne 's/Ran \([0-9]\+\).*tests in.*/\1/p')
-    if [ "$foundcount" -ne "$rancount" ]
-    then
-        echo
-        echo "The number of tests found did not match the number of tests"
-        echo "that were run. This indicates a fatal error occured while"
-        echo "running the tests."
-        echo "Tests found: $foundcount Tests ran: $rancount"
-        echo
-        exit 1
-    fi
 fi
 
 exit $result
