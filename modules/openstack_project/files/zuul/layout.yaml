@@ -1385,9 +1385,13 @@ projects:
 
   - name: openstack-infra/gear
     check:
-      - gate-noop
+      - gate-gear-pep8:
+        - gate-gear-python26
+        - gate-gear-python27
     gate:
-      - gate-noop
+      - gate-gear-pep8
+      - gate-gear-python26
+      - gate-gear-python27
 
   - name: openstack-infra/gearman-plugin
     check:
