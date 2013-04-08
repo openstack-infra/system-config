@@ -35,7 +35,7 @@ tx set --auto-local -r ${PROJECT}.${PROJECT}-translations "${PROJECT}/locale/<la
 tx pull -a
 # Update the .pot file
 python setup.py extract_messages
-if [ find ${PROJECT}/locale -name '*.po' ]
+if [ -n `find ${PROJECT}/locale -name '*.po'` ]
 then
     # Use updated .pot file to update translations
     python setup.py update_catalog
