@@ -92,7 +92,7 @@ class LogRetriever(threading.Thread):
             for line in log_lines:
                 out_event = {}
                 out_event["@fields"] = fields
-                out_event["@message"] = line
+                out_event["event_message"] = line
                 self.logq.put(out_event)
 
     def _parse_fields(self, event):

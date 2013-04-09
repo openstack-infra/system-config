@@ -2,7 +2,7 @@ input {
   pipe {
     command => "python3 /usr/local/bin/log-pusher.py -r -z tcp://jenkins.openstack.org:8888 -l http://logs.openstack.org -f console.html"
     format => "json"
-    message_format => "%{@message}"
+    message_format => "%{event_message}"
     tags => ["jenkins", "console"]
     type => "jenkins_console"
   }
@@ -10,6 +10,12 @@ input {
 
 # You can check grok patterns at http://grokdebug.herokuapp.com/
 filter {
+  grep {
+    type => "jenkins_console"
+    # Drop matches.
+    negate => true
+    match => ["@message", "^</?pre>$"]
+  }
   grok {
     type => "jenkins_console"
     pattern => [ "%{DATESTAMP:logdate} \| %{GREEDYDATA:logmessage}" ]
