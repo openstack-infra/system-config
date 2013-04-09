@@ -1568,3 +1568,104 @@ projects:
       - gate-noop
     gate:
       - gate-noop
+
+- name: stackforge/glazier-agent
+    check:
+      - gate-noop
+    gate:
+      - gate-noop
+
+  - name: stackforge/glazier-api
+      check:
+        - gate-glazier-api-pyflakes:
+          - gate-glazier-api-pep8
+          - gate-glazier-api-python26
+          - gate-glazier-api-python26-rhel6
+          - gate-glazier-api-python27
+      gate:
+        - gate-glazier-api-pep8
+        - gate-glazier-api-pyflakes
+        - gate-glazier-api-python26
+        - gate-glazier-api-python27
+      post:
+        - glazier-api-branch-tarball
+      pre-release:
+        - glazier-api-tarball
+      release:
+        - glazier-api-tarball
+
+  - name: stackforge/glazier-conductor
+      check:
+        - gate-glazier-conductor-pyflakes:
+          - gate-glazier-conductor-pep8
+          - gate-glazier-conductor-python26
+          - gate-glazier-conductor-python26-rhel6
+          - gate-glazier-conductor-python27
+      gate:
+        - gate-glazier-conductor-pep8
+        - gate-glazier-conductor-pyflakes
+        - gate-glazier-conductor-python26
+        - gate-glazier-conductor-python27
+      post:
+        - glazier-conductor-branch-tarball
+      pre-release:
+        - glazier-conductor-tarball
+      release:
+        - glazier-conductor-tarball
+
+  - name: stackforge/glazier-dashboard
+      check:
+        - gate-glazier-dashboard-pyflakes:
+          - gate-glazier-dashboard-pep8
+          - gate-glazier-dashboard-python26
+          - gate-glazier-dashboard-python26-rhel6
+          - gate-glazier-dashboard-python27
+      gate:
+        - gate-glazier-dashboard-pep8
+        - gate-glazier-dashboard-pyflakes
+        - gate-glazier-dashboard-python26
+        - gate-glazier-dashboard-python27
+      post:
+        - glazier-dashboard-branch-tarball
+      pre-release:
+        - glazier-dashboard-tarball
+      release:
+        - glazier-dashboard-tarball
+
+  - name: stackforge/glazier-deployment
+      check:
+        - gate-noop
+      gate:
+        - gate-noop
+
+  - name: stackforge/glazier-docs
+      check:
+        - gate-noop
+      gate:
+        - gate-noop
+
+  - name: stackforge/glazier-tests
+      check:
+        - gate-noop
+      gate:
+        - gate-noop
+
+  - name: stackforge/python-glazierclient
+      check:
+        - gate-python-glazierclient-pyflakes:
+          - gate-python-glazierclient-pep8
+          - gate-python-glazierclient-python26
+          - gate-python-glazierclient-python26-rhel6
+          - gate-python-glazierclient-python27
+      gate:
+        - gate-python-glazierclient-pep8
+        - gate-python-glazierclient-pyflakes
+        - gate-python-glazierclient-python26
+        - gate-python-glazierclient-python27
+      post:
+        - python-glazierclient-branch-tarball
+      pre-release:
+        - python-glazierclient-tarball
+      release:
+        - python-glazierclient-tarball:
+          - python-glazierclient-pypi-upload
