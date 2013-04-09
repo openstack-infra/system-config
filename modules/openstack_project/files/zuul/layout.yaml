@@ -117,7 +117,6 @@ jobs:
   - name: gate-openstack-manuals-validate
     voting: false
   - name: ^gate-.*-requirements$
-    voting: false
     failure-message: Incompatible requirement found; see https://wiki.openstack.org/wiki/Requirements
     files:
       - '^tools/.*-requires$'
@@ -127,13 +126,13 @@ jobs:
 projects:
   - name: openstack-infra/zuul
     check:
-      - gate-zuul-pep8:
-        - gate-zuul-docs
-        - gate-zuul-pyflakes
-        - gate-zuul-python26
-        - gate-zuul-python26-rhel6
-        - gate-zuul-python27
-        - dev-zuul-coverage
+      - gate-zuul-pep8
+      - gate-zuul-docs
+      - gate-zuul-pyflakes
+      - gate-zuul-python26
+      - gate-zuul-python26-rhel6
+      - gate-zuul-python27
+      - dev-zuul-coverage
     gate:
       - gate-zuul-docs
       - gate-zuul-pep8
@@ -316,17 +315,17 @@ projects:
 
   - name: openstack/cinder
     check:
-      - gate-cinder-pep8:
-        - gate-cinder-requirements
-        - gate-cinder-docs
-        - gate-cinder-python26
-        - gate-cinder-python26-rhel6
-        - gate-cinder-python27
-        - gate-tempest-devstack-vm-smoke
-        - gate-tempest-devstack-vm-full
-        - gate-tempest-devstack-vm-cinder
-        - gate-tempest-devstack-vm-postgres-full
-        - gate-tempest-devstack-vm-quantum
+      - gate-cinder-requirements
+      - gate-cinder-pep8
+      - gate-cinder-docs
+      - gate-cinder-python26
+      - gate-cinder-python26-rhel6
+      - gate-cinder-python27
+      - gate-tempest-devstack-vm-smoke
+      - gate-tempest-devstack-vm-full
+      - gate-tempest-devstack-vm-cinder
+      - gate-tempest-devstack-vm-postgres-full
+      - gate-tempest-devstack-vm-quantum
     gate:
       - gate-cinder-requirements
       - gate-cinder-docs
@@ -350,17 +349,17 @@ projects:
 
   - name: openstack/glance
     check:
-      - gate-glance-pep8:
-        - gate-glance-requirements
-        - gate-glance-docs
-        - gate-glance-python26
-        - gate-glance-python26-rhel6
-        - gate-glance-python27
-        - gate-tempest-devstack-vm-smoke
-        - gate-tempest-devstack-vm-full
-        - gate-tempest-devstack-vm-cinder
-        - gate-tempest-devstack-vm-postgres-full
-        - gate-tempest-devstack-vm-quantum
+      - gate-glance-requirements
+      - gate-glance-pep8
+      - gate-glance-docs
+      - gate-glance-python26
+      - gate-glance-python26-rhel6
+      - gate-glance-python27
+      - gate-tempest-devstack-vm-smoke
+      - gate-tempest-devstack-vm-full
+      - gate-tempest-devstack-vm-cinder
+      - gate-tempest-devstack-vm-postgres-full
+      - gate-tempest-devstack-vm-quantum
     gate:
       - gate-glance-requirements
       - gate-glance-docs
@@ -384,18 +383,18 @@ projects:
 
   - name: openstack/horizon
     check:
-      - gate-horizon-pep8:
-        - gate-horizon-requirements
-        - gate-horizon-docs
-        - gate-horizon-python26
-        - gate-horizon-python26-rhel6
-        - gate-horizon-python27
-        - gate-horizon-selenium
-        - gate-tempest-devstack-vm-smoke
-        - gate-tempest-devstack-vm-full
-        - gate-tempest-devstack-vm-cinder
-        - gate-tempest-devstack-vm-postgres-full
-        - gate-tempest-devstack-vm-quantum
+      - gate-horizon-requirements
+      - gate-horizon-pep8
+      - gate-horizon-docs
+      - gate-horizon-python26
+      - gate-horizon-python26-rhel6
+      - gate-horizon-python27
+      - gate-horizon-selenium
+      - gate-tempest-devstack-vm-smoke
+      - gate-tempest-devstack-vm-full
+      - gate-tempest-devstack-vm-cinder
+      - gate-tempest-devstack-vm-postgres-full
+      - gate-tempest-devstack-vm-quantum
     gate:
       - gate-horizon-requirements
       - gate-horizon-docs
@@ -420,17 +419,17 @@ projects:
 
   - name: openstack/keystone
     check:
-      - gate-keystone-pep8:
-        - gate-keystone-requirements
-        - gate-keystone-docs
-        - gate-keystone-python26
-        - gate-keystone-python26-rhel6
-        - gate-keystone-python27
-        - gate-tempest-devstack-vm-smoke
-        - gate-tempest-devstack-vm-full
-        - gate-tempest-devstack-vm-cinder
-        - gate-tempest-devstack-vm-postgres-full
-        - gate-tempest-devstack-vm-quantum
+      - gate-keystone-requirements
+      - gate-keystone-pep8
+      - gate-keystone-docs
+      - gate-keystone-python26
+      - gate-keystone-python26-rhel6
+      - gate-keystone-python27
+      - gate-tempest-devstack-vm-smoke
+      - gate-tempest-devstack-vm-full
+      - gate-tempest-devstack-vm-cinder
+      - gate-tempest-devstack-vm-postgres-full
+      - gate-tempest-devstack-vm-quantum
     gate:
       - gate-keystone-requirements
       - gate-keystone-docs
@@ -456,18 +455,18 @@ projects:
 
   - name: openstack/nova
     check:
-      - gate-nova-pep8:
-        - gate-nova-requirements
-        - gate-nova-docs
-        - gate-nova-python26
-        - gate-nova-python26-rhel6
-        - gate-nova-python27
-        - gate-tempest-devstack-vm-smoke
-        - gate-tempest-devstack-vm-full
-        - gate-tempest-devstack-vm-cinder
-        - gate-tempest-devstack-vm-postgres-full
-        - gate-tempest-devstack-vm-quantum
-        - gate-nova-pylint
+      - gate-nova-requirements
+      - gate-nova-pep8
+      - gate-nova-docs
+      - gate-nova-python26
+      - gate-nova-python26-rhel6
+      - gate-nova-python27
+      - gate-tempest-devstack-vm-smoke
+      - gate-tempest-devstack-vm-full
+      - gate-tempest-devstack-vm-cinder
+      - gate-tempest-devstack-vm-postgres-full
+      - gate-tempest-devstack-vm-quantum
+      - gate-nova-pylint
     gate:
       - gate-nova-requirements
       - gate-nova-docs
@@ -492,13 +491,13 @@ projects:
 
   - name: openstack/oslo-incubator
     check:
-      - gate-oslo-incubator-pep8:
-        - gate-oslo-incubator-requirements
-        - gate-oslo-incubator-docs
-        - gate-oslo-incubator-pyflakes
-        - gate-oslo-incubator-python26
-        - gate-oslo-incubator-python26-rhel6
-        - gate-oslo-incubator-python27
+      - gate-oslo-incubator-requirements
+      - gate-oslo-incubator-pep8
+      - gate-oslo-incubator-docs
+      - gate-oslo-incubator-pyflakes
+      - gate-oslo-incubator-python26
+      - gate-oslo-incubator-python26-rhel6
+      - gate-oslo-incubator-python27
     gate:
       - gate-oslo-incubator-requirements
       - gate-oslo-incubator-docs
@@ -513,12 +512,12 @@ projects:
 
   - name: openstack/oslo.config
     check:
-      - gate-oslo.config-pep8:
-        - gate-oslo.config-requirements
-        - gate-oslo.config-docs
-        - gate-oslo.config-python26
-        - gate-oslo.config-python26-rhel6
-        - gate-oslo.config-python27
+      - gate-oslo.config-requirements
+      - gate-oslo.config-pep8
+      - gate-oslo.config-docs
+      - gate-oslo.config-python26
+      - gate-oslo.config-python26-rhel6
+      - gate-oslo.config-python27
     gate:
       - gate-oslo.config-requirements
       - gate-oslo.config-docs
@@ -537,13 +536,13 @@ projects:
 
   - name: openstack/quantum
     check:
-      - gate-quantum-pep8:
-        - gate-quantum-requirements
-        - gate-quantum-docs
-        - gate-quantum-python26
-        - gate-quantum-python26-rhel6
-        - gate-quantum-python27
-        - gate-tempest-devstack-vm-quantum
+      - gate-quantum-requirements
+      - gate-quantum-pep8
+      - gate-quantum-docs
+      - gate-quantum-python26
+      - gate-quantum-python26-rhel6
+      - gate-quantum-python27
+      - gate-tempest-devstack-vm-quantum
     gate:
       - gate-quantum-requirements
       - gate-quantum-docs
@@ -564,17 +563,17 @@ projects:
 
   - name: openstack/swift
     check:
-      - gate-swift-pep8:
-        - gate-swift-requirements
-        - gate-swift-docs
-        - gate-swift-python26
-        - gate-swift-python26-rhel6
-        - gate-swift-python27
-        - gate-tempest-devstack-vm-smoke
-        - gate-tempest-devstack-vm-full
-        - gate-tempest-devstack-vm-cinder
-        - gate-tempest-devstack-vm-quantum
-        - gate-tempest-devstack-vm-postgres-full
+      - gate-swift-requirements
+      - gate-swift-pep8
+      - gate-swift-docs
+      - gate-swift-python26
+      - gate-swift-python26-rhel6
+      - gate-swift-python27
+      - gate-tempest-devstack-vm-smoke
+      - gate-tempest-devstack-vm-full
+      - gate-tempest-devstack-vm-cinder
+      - gate-tempest-devstack-vm-quantum
+      - gate-tempest-devstack-vm-postgres-full
     gate:
       - gate-swift-requirements
       - gate-swift-docs
@@ -598,12 +597,12 @@ projects:
 
   - name: openstack/python-ceilometerclient
     check:
-      - gate-python-ceilometerclient-pep8:
-        - gate-python-ceilometerclient-requirements
-        - gate-python-ceilometerclient-docs
-        - gate-python-ceilometerclient-python26
-        - gate-python-ceilometerclient-python26-rhel6
-        - gate-python-ceilometerclient-python27
+      - gate-python-ceilometerclient-requirements
+      - gate-python-ceilometerclient-pep8
+      - gate-python-ceilometerclient-docs
+      - gate-python-ceilometerclient-python26
+      - gate-python-ceilometerclient-python26-rhel6
+      - gate-python-ceilometerclient-python27
     gate:
       - gate-python-ceilometerclient-requirements
       - gate-python-ceilometerclient-docs
@@ -622,17 +621,17 @@ projects:
 
   - name: openstack/python-cinderclient
     check:
-      - gate-python-cinderclient-pep8:
-        - gate-python-cinderclient-requirements
-        - gate-python-cinderclient-docs
-        - gate-python-cinderclient-python26
-        - gate-python-cinderclient-python26-rhel6
-        - gate-python-cinderclient-python27
-        - gate-tempest-devstack-vm-smoke
-        - gate-tempest-devstack-vm-full
-        - gate-tempest-devstack-vm-postgres-full
-        - gate-tempest-devstack-vm-cinder
-        - gate-tempest-devstack-vm-quantum
+      - gate-python-cinderclient-requirements
+      - gate-python-cinderclient-pep8
+      - gate-python-cinderclient-docs
+      - gate-python-cinderclient-python26
+      - gate-python-cinderclient-python26-rhel6
+      - gate-python-cinderclient-python27
+      - gate-tempest-devstack-vm-smoke
+      - gate-tempest-devstack-vm-full
+      - gate-tempest-devstack-vm-postgres-full
+      - gate-tempest-devstack-vm-cinder
+      - gate-tempest-devstack-vm-quantum
     gate:
       - gate-python-cinderclient-requirements
       - gate-python-cinderclient-docs
@@ -656,17 +655,17 @@ projects:
 
   - name: openstack/python-glanceclient
     check:
-      - gate-python-glanceclient-pep8:
-        - gate-python-glanceclient-requirements
-        - gate-python-glanceclient-docs
-        - gate-python-glanceclient-python26
-        - gate-python-glanceclient-python26-rhel6
-        - gate-python-glanceclient-python27
-        - gate-tempest-devstack-vm-smoke
-        - gate-tempest-devstack-vm-full
-        - gate-tempest-devstack-vm-postgres-full
-        - gate-tempest-devstack-vm-cinder
-        - gate-tempest-devstack-vm-quantum
+      - gate-python-glanceclient-requirements
+      - gate-python-glanceclient-pep8
+      - gate-python-glanceclient-docs
+      - gate-python-glanceclient-python26
+      - gate-python-glanceclient-python26-rhel6
+      - gate-python-glanceclient-python27
+      - gate-tempest-devstack-vm-smoke
+      - gate-tempest-devstack-vm-full
+      - gate-tempest-devstack-vm-postgres-full
+      - gate-tempest-devstack-vm-cinder
+      - gate-tempest-devstack-vm-quantum
     gate:
       - gate-python-glanceclient-requirements
       - gate-python-glanceclient-docs
@@ -690,17 +689,17 @@ projects:
 
   - name: openstack/python-keystoneclient
     check:
-      - gate-python-keystoneclient-pep8:
-        - gate-python-keystoneclient-requirements
-        - gate-python-keystoneclient-docs
-        - gate-python-keystoneclient-python26
-        - gate-python-keystoneclient-python26-rhel6
-        - gate-python-keystoneclient-python27
-        - gate-tempest-devstack-vm-smoke
-        - gate-tempest-devstack-vm-full
-        - gate-tempest-devstack-vm-postgres-full
-        - gate-tempest-devstack-vm-cinder
-        - gate-tempest-devstack-vm-quantum
+      - gate-python-keystoneclient-requirements
+      - gate-python-keystoneclient-pep8
+      - gate-python-keystoneclient-docs
+      - gate-python-keystoneclient-python26
+      - gate-python-keystoneclient-python26-rhel6
+      - gate-python-keystoneclient-python27
+      - gate-tempest-devstack-vm-smoke
+      - gate-tempest-devstack-vm-full
+      - gate-tempest-devstack-vm-postgres-full
+      - gate-tempest-devstack-vm-cinder
+      - gate-tempest-devstack-vm-quantum
     gate:
       - gate-python-keystoneclient-requirements
       - gate-python-keystoneclient-docs
@@ -724,17 +723,17 @@ projects:
 
   - name: openstack/python-novaclient
     check:
-      - gate-python-novaclient-pep8:
-        - gate-python-novaclient-requirements
-        - gate-python-novaclient-docs
-        - gate-python-novaclient-python26
-        - gate-python-novaclient-python26-rhel6
-        - gate-python-novaclient-python27
-        - gate-tempest-devstack-vm-smoke
-        - gate-tempest-devstack-vm-full
-        - gate-tempest-devstack-vm-postgres-full
-        - gate-tempest-devstack-vm-cinder
-        - gate-tempest-devstack-vm-quantum
+      - gate-python-novaclient-requirements
+      - gate-python-novaclient-pep8
+      - gate-python-novaclient-docs
+      - gate-python-novaclient-python26
+      - gate-python-novaclient-python26-rhel6
+      - gate-python-novaclient-python27
+      - gate-tempest-devstack-vm-smoke
+      - gate-tempest-devstack-vm-full
+      - gate-tempest-devstack-vm-postgres-full
+      - gate-tempest-devstack-vm-cinder
+      - gate-tempest-devstack-vm-quantum
     gate:
       - gate-python-novaclient-requirements
       - gate-python-novaclient-docs
@@ -758,12 +757,12 @@ projects:
 
   - name: openstack/python-openstackclient
     check:
-      - gate-python-openstackclient-pep8:
-        - gate-python-openstackclient-requirements
-        - gate-python-openstackclient-docs
-        - gate-python-openstackclient-python26
-        - gate-python-openstackclient-python26-rhel6
-        - gate-python-openstackclient-python27
+      - gate-python-openstackclient-requirements
+      - gate-python-openstackclient-pep8
+      - gate-python-openstackclient-docs
+      - gate-python-openstackclient-python26
+      - gate-python-openstackclient-python26-rhel6
+      - gate-python-openstackclient-python27
     gate:
       - gate-python-openstackclient-requirements
       - gate-python-openstackclient-docs
@@ -782,17 +781,17 @@ projects:
 
   - name: openstack/python-quantumclient
     check:
-      - gate-python-quantumclient-pep8:
-        - gate-python-quantumclient-requirements
-        - gate-python-quantumclient-docs
-        - gate-python-quantumclient-python26
-        - gate-python-quantumclient-python26-rhel6
-        - gate-python-quantumclient-python27
-        - gate-tempest-devstack-vm-smoke
-        - gate-tempest-devstack-vm-full
-        - gate-tempest-devstack-vm-postgres-full
-        - gate-tempest-devstack-vm-cinder
-        - gate-tempest-devstack-vm-quantum
+      - gate-python-quantumclient-requirements
+      - gate-python-quantumclient-pep8
+      - gate-python-quantumclient-docs
+      - gate-python-quantumclient-python26
+      - gate-python-quantumclient-python26-rhel6
+      - gate-python-quantumclient-python27
+      - gate-tempest-devstack-vm-smoke
+      - gate-tempest-devstack-vm-full
+      - gate-tempest-devstack-vm-postgres-full
+      - gate-tempest-devstack-vm-cinder
+      - gate-tempest-devstack-vm-quantum
     gate:
       - gate-python-quantumclient-requirements
       - gate-python-quantumclient-docs
@@ -816,12 +815,12 @@ projects:
 
   - name: openstack/python-swiftclient
     check:
-      - gate-python-swiftclient-pep8:
-        - gate-python-swiftclient-requirements
-        - gate-python-swiftclient-docs
-        - gate-python-swiftclient-python26
-        - gate-python-swiftclient-python26-rhel6
-        - gate-python-swiftclient-python27
+      - gate-python-swiftclient-requirements
+      - gate-python-swiftclient-pep8
+      - gate-python-swiftclient-docs
+      - gate-python-swiftclient-python26
+      - gate-python-swiftclient-python26-rhel6
+      - gate-python-swiftclient-python27
     gate:
       - gate-python-swiftclient-requirements
       - gate-python-swiftclient-docs
@@ -856,10 +855,10 @@ projects:
 
   - name: openstack-dev/hacking
     check:
-      - gate-hacking-pep8:
-        - gate-hacking-docs
-        - gate-hacking-python26
-        - gate-hacking-python27
+      - gate-hacking-pep8
+      - gate-hacking-docs
+      - gate-hacking-python26
+      - gate-hacking-python27
     gate:
       - gate-hacking-docs
       - gate-hacking-pep8
@@ -879,10 +878,10 @@ projects:
 
   - name: openstack-dev/pbr
     check:
-      - gate-pbr-pep8:
-        - gate-pbr-docs
-        - gate-pbr-python26
-        - gate-pbr-python27
+      - gate-pbr-pep8
+      - gate-pbr-docs
+      - gate-pbr-python26
+      - gate-pbr-python27
     gate:
       - gate-pbr-docs
       - gate-pbr-pep8
@@ -950,17 +949,17 @@ projects:
 
   - name: openstack/tempest
     check:
-      - gate-tempest-pep8:
-        - gate-tempest-requirements
-        - gate-tempest-devstack-vm-smoke
-        - gate-tempest-devstack-vm-full
-        - gate-tempest-devstack-vm-postgres-full
-        - gate-tempest-devstack-vm-cinder
-        - gate-tempest-devstack-vm-quantum
-        - gate-tempest-devstack-vm-quantum-full
-    gate:
-      - gate-tempest-pep8
       - gate-tempest-requirements
+      - gate-tempest-pep8
+      - gate-tempest-devstack-vm-smoke
+      - gate-tempest-devstack-vm-full
+      - gate-tempest-devstack-vm-postgres-full
+      - gate-tempest-devstack-vm-cinder
+      - gate-tempest-devstack-vm-quantum
+      - gate-tempest-devstack-vm-quantum-full
+    gate:
+      - gate-tempest-requirements
+      - gate-tempest-pep8
       - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-postgres-full
@@ -970,12 +969,12 @@ projects:
 
   - name: openstack/ceilometer
     check:
-      - gate-ceilometer-pep8:
-        - gate-ceilometer-requirements
-        - gate-ceilometer-docs
-        - gate-ceilometer-python26
-        - gate-ceilometer-python26-rhel6
-        - gate-ceilometer-python27
+      - gate-ceilometer-requirements
+      - gate-ceilometer-pep8
+      - gate-ceilometer-docs
+      - gate-ceilometer-python26
+      - gate-ceilometer-python26-rhel6
+      - gate-ceilometer-python27
     gate:
       - gate-ceilometer-requirements
       - gate-ceilometer-docs
@@ -1001,16 +1000,16 @@ projects:
 
   - name: stackforge/libra
     check:
-      - gate-libra-pep8:
-        - gate-libra-python27
+      - gate-libra-pep8
+      - gate-libra-python27
     gate:
       - gate-libra-pep8
       - gate-libra-python27
 
   - name: stackforge/python-libraclient
     check:
-      - gate-python-libraclient-pep8:
-        - gate-python-libraclient-python27
+      - gate-python-libraclient-pep8
+      - gate-python-libraclient-python27
     gate:
       - gate-python-libraclient-pep8
       - gate-python-libraclient-python27
@@ -1018,20 +1017,20 @@ projects:
 
   - name: stackforge/healthnmon
     check:
-      - gate-healthnmon-pep8:
-        - gate-healthnmon-python27
+      - gate-healthnmon-pep8
+      - gate-healthnmon-python27
     gate:
       - gate-healthnmon-pep8
       - gate-healthnmon-python27
 
   - name: openstack/heat
     check:
-      - gate-heat-pep8:
-        - gate-heat-requirements
-        - gate-heat-python26
-        - gate-heat-python26-rhel6
-        - gate-heat-python27
-        - dev-heat-coverage
+      - gate-heat-requirements
+      - gate-heat-pep8
+      - gate-heat-python26
+      - gate-heat-python26-rhel6
+      - gate-heat-python27
+      - dev-heat-coverage
     gate:
       - gate-heat-requirements
       - gate-heat-pep8
@@ -1049,12 +1048,12 @@ projects:
 
   - name: openstack/python-heatclient
     check:
-      - gate-python-heatclient-pep8:
-        - gate-python-heatclient-requirements
-        - gate-python-heatclient-python26
-        - gate-python-heatclient-python26-rhel6
-        - gate-python-heatclient-python27
-        - dev-python-heatclient-coverage
+      - gate-python-heatclient-requirements
+      - gate-python-heatclient-pep8
+      - gate-python-heatclient-python26
+      - gate-python-heatclient-python26-rhel6
+      - gate-python-heatclient-python27
+      - dev-python-heatclient-coverage
     gate:
       - gate-python-heatclient-requirements
       - gate-python-heatclient-pep8
@@ -1072,12 +1071,12 @@ projects:
 
   - name: openstack/heat-cfntools
     check:
-      - gate-heat-cfntools-pep8:
-        - gate-heat-cfntools-requirements
-        - gate-heat-cfntools-python26
-        - gate-heat-cfntools-python26-rhel6
-        - gate-heat-cfntools-python27
-        - dev-heat-cfntools-coverage
+      - gate-heat-cfntools-requirements
+      - gate-heat-cfntools-pep8
+      - gate-heat-cfntools-python26
+      - gate-heat-cfntools-python26-rhel6
+      - gate-heat-cfntools-python27
+      - dev-heat-cfntools-coverage
     gate:
       - gate-heat-cfntools-requirements
       - gate-heat-cfntools-pep8
@@ -1095,10 +1094,10 @@ projects:
 
   - name: stackforge/reddwarf
     check:
-      - gate-reddwarf-pep8:
-        - gate-reddwarf-python26
-        - gate-reddwarf-python26-rhel6
-        - gate-reddwarf-python27
+      - gate-reddwarf-pep8
+      - gate-reddwarf-python26
+      - gate-reddwarf-python26-rhel6
+      - gate-reddwarf-python27
     gate:
       - gate-reddwarf-pep8
       - gate-reddwarf-python26
@@ -1114,10 +1113,10 @@ projects:
 
   - name: stackforge/python-reddwarfclient
     check:
-      - gate-python-reddwarfclient-pep8:
-        - gate-python-reddwarfclient-python26
-        - gate-python-reddwarfclient-python26-rhel6
-        - gate-python-reddwarfclient-python27
+      - gate-python-reddwarfclient-pep8
+      - gate-python-reddwarfclient-python26
+      - gate-python-reddwarfclient-python26-rhel6
+      - gate-python-reddwarfclient-python27
     gate:
       - gate-python-reddwarfclient-pep8
       - gate-python-reddwarfclient-python26
@@ -1130,10 +1129,10 @@ projects:
 
   - name: stackforge/marconi
     check:
-      - gate-marconi-pep8:
-        - gate-marconi-python26
-        - gate-marconi-python26-rhel6
-        - gate-marconi-python27
+      - gate-marconi-pep8
+      - gate-marconi-python26
+      - gate-marconi-python26-rhel6
+      - gate-marconi-python27
     gate:
       - gate-marconi-pep8
       - gate-marconi-python26
@@ -1141,11 +1140,11 @@ projects:
 
   - name: stackforge/moniker
     check:
-      - gate-moniker-pyflakes:
-        - gate-moniker-pep8
-        - gate-moniker-python26
-        - gate-moniker-python26-rhel6
-        - gate-moniker-python27
+      - gate-moniker-pyflakes
+      - gate-moniker-pep8
+      - gate-moniker-python26
+      - gate-moniker-python26-rhel6
+      - gate-moniker-python27
     gate:
       - gate-moniker-pep8
       - gate-moniker-pyflakes
@@ -1163,11 +1162,11 @@ projects:
 
   - name: stackforge/python-monikerclient
     check:
-      - gate-python-monikerclient-pyflakes:
-        - gate-python-monikerclient-pep8
-        - gate-python-monikerclient-python26
-        - gate-python-monikerclient-python26-rhel6
-        - gate-python-monikerclient-python27
+      - gate-python-monikerclient-pyflakes
+      - gate-python-monikerclient-pep8
+      - gate-python-monikerclient-python26
+      - gate-python-monikerclient-python26-rhel6
+      - gate-python-monikerclient-python27
     gate:
       - gate-python-monikerclient-pep8
       - gate-python-monikerclient-pyflakes
@@ -1185,10 +1184,10 @@ projects:
 
   - name: stackforge/bufunfa
     check:
-      - gate-bufunfa-pep8:
-        - gate-bufunfa-python26
-        - gate-bufunfa-python26-rhel6
-        - gate-bufunfa-python27
+      - gate-bufunfa-pep8
+      - gate-bufunfa-python26
+      - gate-bufunfa-python26-rhel6
+      - gate-bufunfa-python27
     gate:
       - gate-bufunfa-pep8
       - gate-bufunfa-python26
@@ -1330,10 +1329,10 @@ projects:
 
   - name: stackforge/diskimage-builder
     check:
-      - gate-diskimage-builder-pep8:
-        - gate-diskimage-builder-python26
-        - gate-diskimage-builder-python26-rhel6
-        - gate-diskimage-builder-python27
+      - gate-diskimage-builder-pep8
+      - gate-diskimage-builder-python26
+      - gate-diskimage-builder-python26-rhel6
+      - gate-diskimage-builder-python27
     gate:
       - gate-diskimage-builder-pep8
       - gate-diskimage-builder-python26
@@ -1343,10 +1342,10 @@ projects:
 
   - name: stackforge/os-config-applier
     check:
-      - gate-os-config-applier-pep8:
-        - gate-os-config-applier-python26
-        - gate-os-config-applier-python26-rhel6
-        - gate-os-config-applier-python27
+      - gate-os-config-applier-pep8
+      - gate-os-config-applier-python26
+      - gate-os-config-applier-python26-rhel6
+      - gate-os-config-applier-python27
     gate:
       - gate-os-config-applier-pep8
       - gate-os-config-applier-python26
@@ -1356,10 +1355,10 @@ projects:
 
   - name: stackforge/tripleo-image-elements
     check:
-      - gate-tripleo-image-elements-pep8:
-        - gate-tripleo-image-elements-python26
-        - gate-tripleo-image-elements-python26-rhel6
-        - gate-tripleo-image-elements-python27
+      - gate-tripleo-image-elements-pep8
+      - gate-tripleo-image-elements-python26
+      - gate-tripleo-image-elements-python26-rhel6
+      - gate-tripleo-image-elements-python27
     gate:
       - gate-tripleo-image-elements-pep8
       - gate-tripleo-image-elements-python26
@@ -1369,9 +1368,9 @@ projects:
 
   - name: stackforge/climate
     check:
-      - gate-climate-pep8:
-        - gate-climate-python26
-        - gate-climate-python27
+      - gate-climate-pep8
+      - gate-climate-python26
+      - gate-climate-python27
     gate:
       - gate-climate-pep8
       - gate-climate-python26
@@ -1385,9 +1384,9 @@ projects:
 
   - name: openstack-infra/gear
     check:
-      - gate-gear-pep8:
-        - gate-gear-python26
-        - gate-gear-python27
+      - gate-gear-pep8
+      - gate-gear-python26
+      - gate-gear-python27
     gate:
       - gate-gear-pep8
       - gate-gear-python26
@@ -1409,10 +1408,10 @@ projects:
 
   - name: stackforge/packstack
     check:
-      - gate-packstack-pep8:
-        - gate-packstack-python26
-        - gate-packstack-python26-rhel6
-        - gate-packstack-python27
+      - gate-packstack-pep8
+      - gate-packstack-python26
+      - gate-packstack-python26-rhel6
+      - gate-packstack-python27
     gate:
       - gate-packstack-pep8
       - gate-packstack-python26
@@ -1426,11 +1425,11 @@ projects:
 
   - name: stackforge/savanna
     check:
-      - gate-savanna-pyflakes:
-        - gate-savanna-pep8
-        - gate-savanna-python26
-        - gate-savanna-python26-rhel6
-        - gate-savanna-python27
+      - gate-savanna-pyflakes
+      - gate-savanna-pep8
+      - gate-savanna-python26
+      - gate-savanna-python26-rhel6
+      - gate-savanna-python27
     gate:
       - gate-savanna-pep8
       - gate-savanna-pyflakes
@@ -1446,11 +1445,11 @@ projects:
 
   - name: stackforge/python-savannaclient
     check:
-      - gate-python-savannaclient-pyflakes:
-        - gate-python-savannaclient-pep8
-        - gate-python-savannaclient-python26
-        - gate-python-savannaclient-python26-rhel6
-        - gate-python-savannaclient-python27
+      - gate-python-savannaclient-pyflakes
+      - gate-python-savannaclient-pep8
+      - gate-python-savannaclient-python26
+      - gate-python-savannaclient-python26-rhel6
+      - gate-python-savannaclient-python27
     gate:
       - gate-python-savannaclient-pep8
       - gate-python-savannaclient-pyflakes
