@@ -16,6 +16,16 @@ filter {
     negate => true
     match => ["@message", "^</?pre>$"]
   }
+  multiline {
+    type => "jenkins_console"
+    pattern => "^\"'$"
+    what => "previous"
+  }
+  multiline {
+    type => "jenkins_console"
+    pattern => "^Extracting templates from packages"
+    what => "previous"
+  }
   grok {
     type => "jenkins_console"
     pattern => [ "%{DATESTAMP:logdate} \| %{GREEDYDATA:logmessage}" ]
