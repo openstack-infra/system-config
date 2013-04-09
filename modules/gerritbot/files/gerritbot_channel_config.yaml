@@ -200,3 +200,20 @@ puppet-openstack:
       - stackforge/puppet-swift
     branches:
       - master
+
+glazier:
+    events:
+      - patchset-created
+      - change-merged
+      - x-vrif-minus-2
+    projects:
+      - stackforge/glazier-agent
+      - stackforge/glazier-api
+      - stackforge/glazier-conductor
+      - stackforge/glazier-dashboard
+      - stackforge/glazier-deployment
+      - stackforge/glazier-docs
+      - stackforge/glazier-tests
+      - stackforge/python-glazierclient
+    branches:
+      - master
