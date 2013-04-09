@@ -41,6 +41,11 @@ filter {
     exclude_tags => "_grokparsefailure"
     replace => [ "@message", "%{logmessage}" ]
   }
+  mutate {
+    type => "jenkins_console"
+    exclude_tags => "_grokparsefailure"
+    remove => [ "logdate", "logmessage" ]
+  }
 }
 
 <%= scope.function_template(['openstack_project/logstash/redis-output.conf.erb']) %>
