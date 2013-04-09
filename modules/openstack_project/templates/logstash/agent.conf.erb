@@ -21,6 +21,16 @@ filter {
     pattern => [ "%{DATESTAMP:logdate} \| %{GREEDYDATA:logmessage}" ]
     add_field => [ "received_at", "%{@timestamp}" ]
   }
+  multiline {
+    type => "jenkins_console"
+    pattern => "^\"'$"
+    what => "previous"
+  }
+  multiline {
+    type => "jenkins_console"
+    pattern => "^Extracting templates from packages"
+    what => "previous"
+  }
   date {
     type => "jenkins_console"
     exclude_tags => "_grokparsefailure"
