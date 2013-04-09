@@ -706,7 +706,7 @@ def main():
         # NB: This trivial config will not passthrough non-test output
         # - a difference to subunit v1's default.
         suite = subunit.ByteStreamToStreamResult(
-            stream, non_subunit_input='stdout')
+            stream, non_subunit_name='stdout')
         result = testtools.StreamToExtendedDecorator(result)
     except AttributeError:
         suite = subunit.ProtocolTestCase(stream)
