@@ -541,6 +541,7 @@
 
     jobs:
       - python-jobs
+      - gate-{name}-pyflakes
 
 - project:
     name: python-libraclient

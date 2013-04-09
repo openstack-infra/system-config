@@ -1002,10 +1002,18 @@ projects:
   - name: stackforge/libra
     check:
       - gate-libra-pep8:
+        - gate-libra-pyflakes
         - gate-libra-python27
     gate:
       - gate-libra-pep8
+      - gate-libra-pyflakes
       - gate-libra-python27
+    post:
+      - libra-branch-tarball
+    pre-release:
+      - libra-tarball
+    release:
+      - libra-tarball
 
   - name: stackforge/python-libraclient
     check:
