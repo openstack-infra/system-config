@@ -39,8 +39,8 @@ NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 """
 
+import argparse
 import datetime
-import sys
 import traceback
 import unittest
 from xml.sax import saxutils
@@ -690,25 +690,28 @@ class HtmlOutput(unittest.TestResult):
 
 
 def main():
-    if len(sys.argv) < 2:
-        print "Need at least one argument: path to subunit log."
-        exit(1)
-    subunit_file = sys.argv[1]
-    if len(sys.argv) > 2:
-        html_file = sys.argv[2]
-    else:
-        html_file = 'results.html'
+    parser = argparse.ArgumentParser()
+    parser.add_argument("subunit_file",
+                        help="Path to input subunit file.")
+    parser.add_argument("html_file",
+                        help="Path to output html file.")
+    parser.add_argument("-2", "--subunitv2", action="store_true",
+                        help="Input log file is in subunit version 2 format.")
+    args = parser.parse_args()
 
-    result = HtmlOutput(html_file)
-    stream = open(subunit_file, 'rb')
-    try:
-        # Use subunit v2 if the library supports it.
-        # NB: This trivial config will not passthrough non-test output
-        # - a difference to subunit v1's default.
-        suite = subunit.ByteStreamToStreamResult(
-            stream, non_subunit_input='stdout')
-        result = testtools.StreamToExtendedDecorator(result)
-    except AttributeError:
+    result = HtmlOutput(args.html_file)
+    stream = open(args.subunit_file, 'rb')
+    if args.subunitv2:
+        try:
+            # Use subunit v2 if the library supports it.
+            # NB: This trivial config will not passthrough non-test output
+            # - a difference to subunit v1's default.
+            suite = subunit.ByteStreamToStreamResult(
+                stream, non_subunit_name='stdout')
+            result = testtools.StreamToExtendedDecorator(result)
+        except AttributeError:
+            suite = subunit.ProtocolTestCase(stream)
+    else:
         suite = subunit.ProtocolTestCase(stream)
     result.startTestRun()
     suite.run(result)
