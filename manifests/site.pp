@@ -292,6 +292,7 @@ node /^quantal.*\.slave\.openstack\.org$/ {
   }
   file { '/home/jenkins/.config/glance':
     ensure  => absent,
+    force   => true,
     recurse => true,
   }
   include jenkins::cgroups
@@ -312,6 +313,7 @@ node /^precise.*\.slave\.openstack\.org$/ {
   }
   file { '/home/jenkins/.config/glance':
     ensure  => absent,
+    force   => true,
     recurse => true,
   }
   include jenkins::cgroups
@@ -332,6 +334,7 @@ node /^oneiric.*\.slave\.openstack\.org$/ {
   }
   file { '/home/jenkins/.config/glance':
     ensure  => absent,
+    force   => true,
     recurse => true,
   }
   include jenkins::cgroups
@@ -353,6 +356,7 @@ node /^rhel6.*\.slave\.openstack\.org$/ {
   }
   file { '/home/jenkins/.config/glance':
     ensure  => absent,
+    force   => true,
     recurse => true,
   }
   include jenkins::cgroups
