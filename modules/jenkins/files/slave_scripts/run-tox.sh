@@ -40,6 +40,11 @@ sudo /usr/local/jenkins/slave_scripts/jenkins-sudo-grep.sh pre
 
 /usr/local/jenkins/slave_scripts/select-mirror.sh $org $project
 
+# Workaround the combo of tox running setup.py outside of virtualenv
+# and RHEL having an old distribute. The next line can be removed
+# when either get fixed.
+python setup.py --version 2>/dev/null
+
 tox -e$venv
 result=$?
 
