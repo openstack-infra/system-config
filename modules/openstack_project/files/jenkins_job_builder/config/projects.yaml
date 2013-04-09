@@ -17,6 +17,7 @@
     jobs:
       - python-jobs
       - gate-{name}-pyflakes
+      - pypi-jobs
 
 - project:
     name: python-savannaclient
@@ -27,6 +28,7 @@
     jobs:
       - python-jobs
       - gate-{name}-pyflakes
+      - pypi-jobs
 
 - project:
     name: kwapi
