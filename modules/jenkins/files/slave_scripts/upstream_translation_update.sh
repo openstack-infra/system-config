@@ -7,9 +7,6 @@ then
     exit 0
 fi
 
-git config user.name "OpenStack Jenkins"
-git config user.email "jenkins@openstack.org"
-
 # initialize transifex client
 tx init --host=https://www.transifex.com
 tx set --auto-local -r ${PROJECT}.${PROJECT}-translations "${PROJECT}/locale/<lang>/LC_MESSAGES/${PROJECT}.po" --source-lang en --source-file ${PROJECT}/locale/${PROJECT}.pot -t PO --execute
@@ -24,10 +21,8 @@ then
     # Use updated .pot file to update translations
     python setup.py update_catalog
 fi
-# Add all changed files to git
-git add $PROJECT/locale/*
 
-if [ ! `git diff-index --quiet HEAD --` ]
+if [ ! `git diff --quiet` ]
 then
     # Push .pot changes to transifex
     tx --debug --traceback push -s
