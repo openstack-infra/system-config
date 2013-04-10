@@ -65,9 +65,9 @@ if [ -d ".testrepository" ] ; then
 
     foundcount=$(.tox/$venv/bin/python testr list-tests | sed -e '1d' | wc -l)
     rancount=$(.tox/$venv/bin/python testr last | sed -ne 's/Ran \([0-9]\+\).*tests in.*/\1/p')
-    if [ "$foundcount" -ne "$rancount" ] ; then
+    if [ "$rancount" -lt "$foundcount" ] ; then
         echo
-        echo "The number of tests found did not match the number of tests"
+        echo "The number of tests found was greater than the number of tests"
         echo "that were run. This indicates a fatal error occured while"
         echo "running the tests."
         echo "Tests found: $foundcount Tests ran: $rancount"
