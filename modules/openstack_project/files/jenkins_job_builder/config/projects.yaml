@@ -47,6 +47,7 @@
 
     jobs:
       - python-jobs
+      - python-grizzly-bitrot-jobs
       - openstack-publish-jobs
       - translation-jobs
 
@@ -59,6 +60,7 @@
 
     jobs:
       - python-jobs
+      - python-grizzly-bitrot-jobs
       - openstack-publish-jobs
 
 
@@ -198,6 +200,7 @@
       - python-diablo-bitrot-jobs
       - python-essex-bitrot-jobs
       - python-folsom-bitrot-jobs
+      - python-grizzly-bitrot-jobs
       - openstack-publish-jobs
 
 
@@ -210,6 +213,7 @@
 
     jobs:
       - python-jobs
+      - python-grizzly-bitrot-jobs
       - openstack-publish-jobs
 
 
@@ -251,6 +255,7 @@
       - python-diablo-bitrot-jobs
       - python-essex-bitrot-jobs
       - python-folsom-bitrot-jobs
+      - python-grizzly-bitrot-jobs
       - openstack-publish-jobs
 
 
@@ -304,6 +309,7 @@
       - python-diablo-bitrot-jobs
       - python-essex-bitrot-jobs
       - python-folsom-bitrot-jobs
+      - python-grizzly-bitrot-jobs
       - openstack-publish-jobs
       - translation-jobs
 
@@ -355,6 +361,7 @@
       - python-diablo-bitrot-jobs
       - python-essex-bitrot-jobs
       - python-folsom-bitrot-jobs
+      - python-grizzly-bitrot-jobs
       - openstack-publish-jobs
       - gate-{name}-pylint
       - translation-jobs
@@ -512,6 +519,7 @@
 
     jobs:
       - python-jobs
+      - python-grizzly-bitrot-jobs
       - openstack-publish-jobs
       - translation-jobs
 
