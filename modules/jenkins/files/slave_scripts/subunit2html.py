@@ -40,7 +40,9 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 """
 
 import argparse
+import collections
 import datetime
+import io
 import traceback
 import unittest
 from xml.sax import saxutils
@@ -689,32 +691,53 @@ class HtmlOutput(unittest.TestResult):
         super(HtmlOutput, self).startTestRun()
 
 
+class FileAccumulator(testtools.StreamResult):
+
+    def __init__(self):
+        super(FileAccumulator, self).__init__()
+        self.route_codes = collections.defaultdict(io.BytesIO)
+
+    def status(self, **kwargs):
+        if kwargs.get('file_name') != 'stdout':
+            return
+        file_bytes = kwargs.get('file_bytes')
+        if not file_bytes:
+            return
+        route_code = kwargs.get('route_code')
+        stream = self.route_codes[route_code]
+        stream.write(file_bytes)
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("subunit_file",
                         help="Path to input subunit file.")
     parser.add_argument("html_file",
                         help="Path to output html file.")
-    parser.add_argument("-2", "--subunitv2", action="store_true",
-                        help="Input log file is in subunit version 2 format.")
     args = parser.parse_args()
 
-    result = HtmlOutput(args.html_file)
+    html_result = HtmlOutput(args.html_file)
     stream = open(args.subunit_file, 'rb')
-    if args.subunitv2:
-        try:
-            # Use subunit v2 if the library supports it.
-            # NB: This trivial config will not passthrough non-test output
-            # - a difference to subunit v1's default.
-            suite = subunit.ByteStreamToStreamResult(
-                stream, non_subunit_name='stdout')
-            result = testtools.StreamToExtendedDecorator(result)
-        except AttributeError:
-            suite = subunit.ProtocolTestCase(stream)
-    else:
-        suite = subunit.ProtocolTestCase(stream)
+    
+    # Feed the subunit stream through both a V1 and V2 parser.
+    # Depends on having the v2 capable libraries installed.
+    # First V2.
+    # Non-v2 content and captured non-test output will be presented as file
+    # segments called stdout.
+    suite = subunit.ByteStreamToStreamResult(stream, non_subunit_name='stdout')
+    # The HTML output code is in legacy mode.
+    result = testtools.StreamToExtendedDecorator(html_result)
+    # Divert non-test output
+    accumulator = FileAccumulator()
+    result = testtools.StreamResultRouter(result)
+    result.add_rule(accumulator, 'test_id', test_id=None)
     result.startTestRun()
     suite.run(result)
+    # Now reprocess any found stdout content as V1 subunit
+    for bytes_io in accumulator.route_codes.values():
+        bytes_io.seek(0)
+        suite = subunit.ProtocolTestCase(bytes_io)
+        suite.run(html_result)
     result.stopTestRun()
 
 
