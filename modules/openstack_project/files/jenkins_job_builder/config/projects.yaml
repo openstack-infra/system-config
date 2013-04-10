@@ -159,10 +159,12 @@
     github-org: openstack-infra
     node: quantal
     tarball-site: tarballs.openstack.org
+    rtfd-id: 6926
 
     jobs:
       - python-jobs
       - pypi-jobs
+      - hook-{name}-rtfd
 
 
 - project:
