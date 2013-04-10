@@ -157,7 +157,7 @@ class LogRetriever(threading.Thread):
                 # Try for up to 60 seconds to retrieve the complete log file.
                 try:
                     req = urllib.request.Request(source_url)
-                    req.add_header('bytes', str(content_len) + '-')
+                    req.add_header('Range', 'bytes=' + str(content_len) + '-')
                     r = urllib.request.urlopen(req)
                     raw_buf += r.read()
                     content_len = len(raw_buf)
