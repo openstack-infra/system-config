@@ -115,7 +115,7 @@ jobs:
     success-pattern: http://docs-draft.openstack.org/{job.name}/{pipeline.name}/{build.number}/cli/quick-start
     branch: ^(?!stable/(diablo|essex)).*$
   - name: ^gate-.*-docs$
-    success-pattern: http://docs-draft.openstack.org/{change.number}/{change.patchset}/{pipeline.name}/{job.name}/{build.number}/
+    success-pattern: http://docs-draft.openstack.org/{change.number}/{change.patchset}/{pipeline.name}/{job.name}/{build.number}/doc/build/html/
   - name: gate-openstack-manuals-validate
     voting: false
   - name: ^gate-.*-requirements$
