@@ -48,4 +48,20 @@ class openstack_project::logstash (
     source  => 'puppet:///modules/openstack_project/logstash/log-pusher.py',
     require => Package['python3'],
   }
+
+  cron { 'delete_old_es_indices':
+    user => 'root',
+    hour => '5',
+    minute => '0',
+    command => 'DEL_DATE=`date -d \'last week\' +%Y.%m.%d` ; curl -XDELETE "http://localhost:9200/logstash-${DEL_DATE}/"',
+    environment => 'PATH=/usr/bin:/bin:/usr/sbin:/sbin',
+  }
+
+  cron { 'optimize_old_es_indices':
+    user => 'root',
+    hour => '5',
+    minute => '0',
+    command => 'OPT_DATE=`date -d yesterday +%Y.%m.%d` ; curl -XPOST "http://localhost:9200/logstash-${OPT_DATE}/_optimize" -d \'max_num_segments=1\'',
+    environment => 'PATH=/usr/bin:/bin:/usr/sbin:/sbin',
+  }
 }
