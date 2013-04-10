@@ -1395,6 +1395,17 @@ projects:
       - gate-gear-docs
       - gate-gear-python26
       - gate-gear-python27
+    post:
+      - gear-branch-tarball
+      - gear-coverage
+      - hook-gear-rtfd
+    pre-release:
+      - gear-tarball
+      - hook-gear-rtfd
+    release:
+      - hook-gear-rtfd
+      - gear-tarball:
+        - gear-pypi-upload
 
   - name: openstack-infra/gearman-plugin
     check:
