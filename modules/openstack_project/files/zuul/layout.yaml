@@ -1305,7 +1305,8 @@ projects:
     gate:
       - gate-noop
     post:
-      - openstack-block-api-doc
+      - openstack-block-api-doc-v1
+      - openstack-block-api-doc-v2
 
   - name: openstack/openstack-chef
     check:
