@@ -39,12 +39,11 @@ NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 """
 
-import argparse
 import collections
 import datetime
 import io
+import sys
 import traceback
-import unittest
 from xml.sax import saxutils
 
 import subunit
@@ -442,7 +441,7 @@ class ClassInfoWrapper(object):
         return "%s" % (self.name)
 
 
-class HtmlOutput(unittest.TestResult):
+class HtmlOutput(testtools.TestResult):
     """Output test results in html."""
 
     def __init__(self, html_file='result.html'):
@@ -709,16 +708,18 @@ class FileAccumulator(testtools.StreamResult):
 
 
 def main():
-    parser = argparse.ArgumentParser()
-    parser.add_argument("subunit_file",
-                        help="Path to input subunit file.")
-    parser.add_argument("html_file",
-                        help="Path to output html file.")
-    args = parser.parse_args()
+    if len(sys.argv) < 2:
+        print "Need at least one argument: path to subunit log."
+        exit(1)
+    subunit_file = sys.argv[1]
+    if len(sys.argv) > 2:
+        html_file = sys.argv[2]
+    else:
+        html_file = 'results.html'
 
-    html_result = HtmlOutput(args.html_file)
-    stream = open(args.subunit_file, 'rb')
-    
+    html_result = HtmlOutput(html_file)
+    stream = open(subunit_file, 'rb')
+
     # Feed the subunit stream through both a V1 and V2 parser.
     # Depends on having the v2 capable libraries installed.
     # First V2.
