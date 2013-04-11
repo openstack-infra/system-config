@@ -18,17 +18,13 @@ filter {
   }
   multiline {
     type => "jenkins_console"
-    pattern => "^\"'$"
-    what => "previous"
-  }
-  multiline {
-    type => "jenkins_console"
-    pattern => "^Extracting templates from packages"
+    negate => true
+    pattern => "^%{DATESTAMP} \|"
     what => "previous"
   }
   grok {
     type => "jenkins_console"
-    pattern => [ "%{DATESTAMP:logdate} \| %{GREEDYDATA:logmessage}" ]
+    pattern => [ "^%{DATESTAMP:logdate} \| %{GREEDYDATA:logmessage}" ]
     add_field => [ "received_at", "%{@timestamp}" ]
   }
   date {
