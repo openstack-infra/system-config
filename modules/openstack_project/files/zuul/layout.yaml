@@ -121,6 +121,7 @@ jobs:
     voting: false
   - name: ^gate-.*-requirements$
     failure-message: Incompatible requirement found; see https://wiki.openstack.org/wiki/Requirements
+    branch: ^(?!stable/(diablo|essex|folsom|grizzly)).*$
     files:
       - '^tools/.*-requires$'
       - '^.*requirements.txt$'
