@@ -15,11 +15,13 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 
-import subprocess
-import shlex
-import sys
-import pkg_resources
 import os
+import pkg_resources
+import shlex
+import shutil
+import subprocess
+import sys
+import tempfile
 
 def run_command(cmd):
     print(cmd)
@@ -75,10 +77,14 @@ def main():
 
     run_command("git checkout %s" % head)
 
+    reqroot = tempfile.mkdtemp()
+    reqdir = os.path.join(reqroot, "requirements")
     run_command("git clone https://review.openstack.org/p/openstack/"
-                "requirements --depth 1 .openstack-requirements")
-    os.chdir('.openstack-requirements')
+                "requirements --depth 1 %s" % reqdir)
+    os.chdir(reqdir)
     run_command("git checkout remotes/origin/%s" % branch)
+    print "requirements git sha: %s" % run_command(
+        "git rev-parse HEAD").strip()
     os_reqs = RequirementsList('openstack/requirements')
     os_reqs.read_all_requirements()
 
@@ -90,6 +96,7 @@ def main():
         if name not in os_reqs.reqs:
             print("Requirement %s not in openstack/requirements" % str(req))
             failed = True
+            continue
         # pkg_resources.Requirement implements __eq__() but not __ne__().
         # There is no implied relationship between __eq__() and __ne__()
         # so we must negate the result of == here instead of using !=.
@@ -98,6 +105,7 @@ def main():
                   "value %s" % (str(req), str(os_reqs.reqs[name])))
             failed = True
 
+    shutil.rmtree(reqroot)
     if failed or os_reqs.failed or head_reqs.failed or branch_reqs.failed:
         sys.exit(1)
     print("Updated requirements match openstack/requirements.")
