@@ -42,7 +42,6 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 import argparse
 import datetime
 import traceback
-import unittest
 from xml.sax import saxutils
 
 import subunit
@@ -440,7 +439,7 @@ class ClassInfoWrapper(object):
         return "%s" % (self.name)
 
 
-class HtmlOutput(unittest.TestResult):
+class HtmlOutput(testtools.TestResult):
     """Output test results in html."""
 
     def __init__(self, html_file='result.html'):
