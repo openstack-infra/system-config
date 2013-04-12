@@ -171,9 +171,24 @@
 
 - project:
     name: gearman-plugin
+    group-id: org.jenkins-ci.plugins
     github-org: openstack-infra
     node: quantal
     tarball-site: tarballs.openstack.org
+
+    jobs:
+      - jenkins-plugin
+
+
+- project:
+    name: zmq-event-publisher
+    group-id: org.jenkins-ci.plugins
+    github-org: openstack-infra
+    node: quantal
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - jenkins-plugin
 
 
 - project:

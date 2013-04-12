@@ -1460,6 +1460,14 @@ projects:
     post:
       - gearman-plugin-tarball
 
+  - name: openstack-infra/zmq-event-publisher
+    check:
+      - gate-zmq-event-publisher-build
+    gate:
+      - gate-zmq-event-publisher-build
+    post:
+      - zmq-event-publisher-tarball
+
   - name: stackforge/database-api
     check:
       - gate-noop
