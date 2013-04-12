@@ -1,4 +1,4 @@
-#!/bin/bash -e
+#!/bin/bash -ex
 
 # Documentation is published to a URL depending on the branch of the
 # openstack-manuals project.  This script determines what that location
