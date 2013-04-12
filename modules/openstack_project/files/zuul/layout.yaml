@@ -1465,7 +1465,15 @@ projects:
     gate:
       - gate-gearman-plugin-build
     post:
-      - gearman-plugin-tarball
+      - gearman-plugin-hpi-artifact
+
+  - name: openstack-infra/zmq-event-publisher
+    check:
+      - gate-zmq-event-publisher-build
+    gate:
+      - gate-zmq-event-publisher-build
+    post:
+      - zmq-event-publisher-hpi-artifact
 
   - name: stackforge/database-api
     check:
