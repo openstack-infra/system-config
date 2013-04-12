@@ -1381,6 +1381,19 @@ projects:
     post:
       - os-config-applier-coverage
 
+  - name: stackforge/os-refresh-config
+    check:
+      - gate-os-refresh-config-pep8
+      - gate-os-refresh-config-python26
+      - gate-os-refresh-config-python26-rhel6
+      - gate-os-refresh-config-python27
+    gate:
+      - gate-os-refresh-config-pep8
+      - gate-os-refresh-config-python26
+      - gate-os-refresh-config-python27
+    post:
+      - os-refresh-config-coverage
+
   - name: stackforge/tripleo-image-elements
     check:
       - gate-tripleo-image-elements-pep8
