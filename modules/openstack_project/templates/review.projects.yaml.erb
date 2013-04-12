@@ -129,8 +129,10 @@
   upstream: git://github.com/Mirantis/savanna.git
 - project: stackforge/python-savannaclient
 - project: stackforge/os-config-applier
-  upstream: git://github.com/tripleo/os-config-applier.git
   description: "Apply configuration from cloud metadata"
+- project: stackforge/os-refresh-config
+  upstream: git://github.com/tripleo/os-refresh-config.git
+  description: "Restart services and coordinate data migration on Heat config changes."
 - project: stackforge/puppet-cinder
   description: OpenStack Cinder Puppet Module
   acl-config: /home/gerrit2/acls/stackforge/puppet-modules.config
