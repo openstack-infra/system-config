@@ -120,7 +120,7 @@
         group-id: org.openstack.docs
         artifact-id: openstack-guide
       root-pom: doc/src/docbkx/basic-install/pom.xml
-      goals: 'clean generate-sources'
+      goals: '-Drelease.path.name=${DOC_RELEASE_PATH} -Dcomments.enabled=${DOC_COMMENTS_ENABLED} clean generate-sources'
 
     publishers:
       - console-log-post
