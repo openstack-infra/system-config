@@ -63,6 +63,7 @@ class openstack_project::cacti (
     'jenkins.openstack.org',
     'jenkins-dev.openstack.org',
     'lists.openstack.org',
+    'logstash.openstack.org',
     'paste.openstack.org',
     'planet.openstack.org',
     'puppet-dashboard.openstack.org',
