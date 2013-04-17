@@ -16,15 +16,10 @@
 #
 class logstash::web (
   $vhost_name = $::fqdn,
-  $serveradmin = "webmaster@${::fqdn}"
+  $serveradmin = "webmaster@${::fqdn}",
+  $frontend = 'internal'
 ) {
   include apache
-  apache::vhost { $vhost_name:
-    port     => 80,
-    docroot  => 'MEANINGLESS ARGUMENT',
-    priority => '50',
-    template => 'logstash/logstash.vhost.erb',
-  }
   a2mod { 'rewrite':
     ensure => present,
   }
@@ -37,19 +32,41 @@ class logstash::web (
 
   include logstash
 
-  file { '/etc/init/logstash-web.conf':
-    ensure  => present,
-    source  => 'puppet:///modules/logstash/logstash-web.conf',
-    replace => true,
-    owner   => 'root',
+  case $frontend {
+    'internal': {
+      file { '/etc/init/logstash-web.conf':
+        ensure  => present,
+        source  => 'puppet:///modules/logstash/logstash-web.conf',
+        replace => true,
+        owner   => 'root',
+      }
+
+      service { 'logstash-web':
+        ensure    => running,
+        enable    => true,
+        require   => [
+          Class['logstash'],
+          File['/etc/init/logstash-web.conf'],
+        ],
+      }
+
+      $vhost = 'logstash/logstash.vhost.erb'
+    }
+
+    'kibana': {
+      include kibana
+      $vhost = 'logstash/kibana.vhost.erb'
+    }
+
+    default: {
+      fail("Unknown frontend to logstash: ${frontend}.")
+    }
   }
 
-  service { 'logstash-web':
-    ensure    => running,
-    enable    => true,
-    require   => [
-      Class['logstash'],
-      File['/etc/init/logstash-web.conf'],
-    ]
+  apache::vhost { $vhost_name:
+    port     => 80,
+    docroot  => 'MEANINGLESS ARGUMENT',
+    priority => '50',
+    template => $vhost,
   }
 }
