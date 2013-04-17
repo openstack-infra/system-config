@@ -1,0 +1,22 @@
+# kibana - web instance
+#
+# Copied from http://cookbook.logstash.net/recipes/using-upstart/
+
+description     "kibana web instance"
+
+start on virtual-filesystems
+stop on runlevel [06]
+
+# Respawn it if the process exits
+respawn
+respawn limit 5 30
+expect fork
+
+chdir /opt/kibana/kibana
+
+script
+
+  su -s /bin/sh -c 'exec "$0" "$@"' kibana -- /usr/bin/ruby /opt/kibana/kibana/kibana.rb &
+  emit kibana-running
+end script
+
