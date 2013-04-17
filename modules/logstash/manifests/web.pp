@@ -23,7 +23,7 @@ class logstash::web (
     port     => 80,
     docroot  => 'MEANINGLESS ARGUMENT',
     priority => '50',
-    template => 'logstash/logstash.vhost.erb',
+    template => 'logstash/kibana.vhost.erb',
   }
   a2mod { 'rewrite':
     ensure => present,
@@ -45,11 +45,11 @@ class logstash::web (
   }
 
   service { 'logstash-web':
-    ensure    => running,
-    enable    => true,
+    ensure    => stopped,
     require   => [
-      Class['logstash'],
       File['/etc/init/logstash-web.conf'],
     ]
   }
+
+  include kibana
 }
