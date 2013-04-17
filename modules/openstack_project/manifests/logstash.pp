@@ -25,8 +25,10 @@ class openstack_project::logstash (
   class { 'logstash::indexer':
     conf_template => 'openstack_project/logstash/indexer.conf.erb',
   }
+  class { 'logstash::web':
+    frontend => 'kibana',
+  }
   include logstash::elasticsearch
-  include logstash::web
 
   package { 'redis-server':
     ensure => 'absent',
