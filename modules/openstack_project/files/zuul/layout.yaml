@@ -81,7 +81,6 @@ jobs:
     branch: ^(?!stable/(diablo|essex|folsom)).*$
   - name: gate-grenade-devstack-vm
     branch: ^(?!stable/(diablo|essex|folsom)).*$
-    voting: false
   - name: ^.*-python27$
     parameter-function: python27_params
   - name: ^gate-.*-python26-rhel6$
