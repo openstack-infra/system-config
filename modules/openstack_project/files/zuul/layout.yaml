@@ -1486,14 +1486,12 @@ projects:
 
   - name: stackforge/savanna
     check:
-      - gate-savanna-pyflakes
       - gate-savanna-pep8
       - gate-savanna-python26
       - gate-savanna-python26-rhel6
       - gate-savanna-python27
     gate:
       - gate-savanna-pep8
-      - gate-savanna-pyflakes
       - gate-savanna-python26
       - gate-savanna-python27
     post:
@@ -1506,14 +1504,12 @@ projects:
 
   - name: stackforge/python-savannaclient
     check:
-      - gate-python-savannaclient-pyflakes
       - gate-python-savannaclient-pep8
       - gate-python-savannaclient-python26
       - gate-python-savannaclient-python26-rhel6
       - gate-python-savannaclient-python27
     gate:
       - gate-python-savannaclient-pep8
-      - gate-python-savannaclient-pyflakes
       - gate-python-savannaclient-python26
       - gate-python-savannaclient-python27
     post:
