@@ -17,6 +17,15 @@ class openstack_project::lists($listadmins = '') {
     vhost_name => 'lists.openstack.org',
   }
 
+  maillist { 'footest':
+    ensure      => present,
+    admin       => 'foo@openstack.org',
+    password    => $listpassword,
+    description => 'Foo Testing Bar',
+    webserver   => $listdomain,
+    mailserver  => $listdomain,
+  }
+
   realize (
     User::Virtual::Localuser['oubiwann'],
     User::Virtual::Localuser['smaffulli'],
