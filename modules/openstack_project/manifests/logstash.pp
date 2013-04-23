@@ -53,7 +53,7 @@ class openstack_project::logstash (
     user        => 'root',
     hour        => '5',
     minute      => '0',
-    command     => 'curl -XDELETE "http://localhost:9200/logstash-`date -d \'last week\' +\%Y.\%m.\%d`/"',
+    command     => 'curl -sS -XDELETE "http://localhost:9200/logstash-`date -d \'last week\' +\%Y.\%m.\%d`/"',
     environment => 'PATH=/usr/bin:/bin:/usr/sbin:/sbin',
   }
 
@@ -61,7 +61,7 @@ class openstack_project::logstash (
     user        => 'root',
     hour        => '5',
     minute      => '0',
-    command     => 'curl -XPOST "http://localhost:9200/logstash-`date -d yesterday +\%Y.\%m.\%d`/_optimize" -d \'max_num_segments=1\'',
+    command     => 'curl -sS -XPOST "http://localhost:9200/logstash-`date -d yesterday +\%Y.\%m.\%d`/_optimize" -d \'max_num_segments=1\'',
     environment => 'PATH=/usr/bin:/bin:/usr/sbin:/sbin',
   }
 }
