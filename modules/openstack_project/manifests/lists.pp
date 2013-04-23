@@ -17,6 +17,16 @@ class openstack_project::lists($listadmins = '') {
     vhost_name => 'lists.openstack.org',
   }
 
+maillist { 'legal-discuss':
+    ensure      => present,
+    admin       => 'stefano@openstack.org, markmc@redhat.com',
+    description => 'The place to discuss legal matter, like choice of licenses',
+    mailserver  => 'lists.openstack.org',
+    name        => 'legal-discuss',
+    password    => '1234',
+    webserver   => 'lists.openstack.org',
+}
+
   realize (
     User::Virtual::Localuser['oubiwann'],
     User::Virtual::Localuser['smaffulli'],
