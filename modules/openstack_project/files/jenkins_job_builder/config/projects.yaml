@@ -841,3 +841,12 @@
 
     jobs:
       - puppet-module-unit
+
+- project:
+    name: puppet-quantum
+    github-org: stackforge
+    node: quantal
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - puppet-module-unit

@@ -1594,6 +1594,18 @@ projects:
       - gate-puppet-nova-puppet-unit-3.0
       - gate-puppet-nova-puppet-unit-3.1
 
+  - name: stackforge/puppet-quantum
+    check:
+      - gate-puppet-quantum-puppet-unit-2.6
+      - gate-puppet-quantum-puppet-unit-2.7
+      - gate-puppet-quantum-puppet-unit-3.0
+      - gate-puppet-quantum-puppet-unit-3.1
+    gate:
+      - gate-puppet-quantum-puppet-unit-2.6
+      - gate-puppet-quantum-puppet-unit-2.7
+      - gate-puppet-quantum-puppet-unit-3.0
+      - gate-puppet-quantum-puppet-unit-3.1
+
   - name: stackforge/puppet-openstack
     check:
       - gate-puppet-openstack-puppet-unit-2.6

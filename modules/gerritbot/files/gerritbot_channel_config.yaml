@@ -199,6 +199,7 @@ puppet-openstack:
       - stackforge/puppet-nova
       - stackforge/puppet-openstack
       - stackforge/puppet-openstack_dev_env
+      - stackforge/puppet-quantum
       - stackforge/puppet-swift
     branches:
       - master
