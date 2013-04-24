@@ -69,7 +69,7 @@ class jenkins::jenkinsuser(
   }
 
   #NOTE: not all distributions have default bash files in /etc/skel
-  if ($::operatingsystem == 'Ubuntu') {
+  if ($::osfamily == 'Debian') {
 
     file { '/home/jenkins/.bashrc':
       ensure  => present,

@@ -3,7 +3,7 @@
 class openstack_project::automatic_upgrades (
 ) {
 
-  if $::operatingsystem == 'Ubuntu' {
+  if $::osfamily == 'Debian' {
     include unattended_upgrades
   }
 

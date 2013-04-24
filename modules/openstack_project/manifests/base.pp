@@ -4,7 +4,7 @@ class openstack_project::base(
   $certname = $::fqdn,
   $install_users = true
 ) {
-  if ($::operatingsystem == 'Ubuntu') {
+  if ($::osfamily == 'Debian') {
     include apt
   }
   include openstack_project::params
@@ -56,7 +56,7 @@ class openstack_project::base(
   }
 
   # Use upstream puppet and pin to version 2.7.*
-  if ($::operatingsystem == 'Ubuntu') {
+  if ($::osfamily == 'Debian') {
     apt::source { 'puppetlabs':
       location   => 'http://apt.puppetlabs.com',
       repos      => 'main',

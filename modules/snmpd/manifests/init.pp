@@ -14,7 +14,7 @@ class snmpd {
     require    => File['/etc/snmp/snmpd.conf']
   }
 
-  if ($::operatingsystem == 'Ubuntu') {
+  if ($::osfamily == 'Debian') {
     # This file is only needed on machines pre-precise. There is a bug in
     # the previous init script versions which causes them to attempt
     # snmptrapd even if it's configured not to run, and then to report

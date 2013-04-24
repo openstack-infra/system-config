@@ -16,7 +16,7 @@ class ssh {
       group   => 'root',
       mode    => '0444',
       source  => [
-        "puppet:///modules/ssh/sshd_config.${::operatingsystem}",
+        "puppet:///modules/ssh/sshd_config.${::osfamily}",
         'puppet:///modules/ssh/sshd_config',
       ],
       replace => true,

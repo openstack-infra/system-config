@@ -3,7 +3,7 @@
 class openstack_project::tmpcleanup (
 ) {
 
-  if $::operatingsystem == 'Ubuntu' {
+  if $::osfamily == 'Debian' {
     include tmpreaper
   }
 

@@ -2,7 +2,7 @@
 #
 class salt::master {
 
-  if ($::operatingsystem == 'Ubuntu') {
+  if ($::osfamily == 'Debian') {
     include apt
 
     # Wrap in ! defined checks to allow minion and master installs on the

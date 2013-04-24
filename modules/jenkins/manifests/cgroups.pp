@@ -28,9 +28,9 @@ class jenkins::cgroups {
   }
 
   # Starting with Ubuntu Quantal (12.10) cgroup-bin dropped its upstart jobs.
-  if $::operatingsystem == 'Ubuntu' {
+  if $::osfamily == 'Debian' {
 
-    if $::operatingsystemrelease >= '12.10' {
+    if $::operatingsystem == 'Ubuntu' and $::operatingsystemrelease >= '12.10' {
 
       file { '/etc/init/cgconfig.conf':
         ensure  => present,
