@@ -1337,6 +1337,12 @@ projects:
     release:
       - openstack-qa-docs
 
+  - name: openstack-infra/gitdm
+    check:
+      - gate-noop
+    gate:
+      - gate-noop
+
   - name: openstack-infra/git-review
     check:
       - gate-git-review-pep8
