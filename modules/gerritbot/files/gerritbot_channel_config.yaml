@@ -196,6 +196,7 @@ puppet-openstack:
       - stackforge/puppet-horizon
       - stackforge/puppet-keystone
       - stackforge/puppet-nova
+      - stackforge/puppet-quantum
       - stackforge/puppet-openstack
       - stackforge/puppet-openstack_dev_env
       - stackforge/puppet-swift
