@@ -1127,6 +1127,12 @@ projects:
         - heat-cfntools-pypi-upload
       - heat-cfntools-docs
 
+  - name: openstack/heat-templates
+    check:
+      - gate-noop
+    gate:
+      - gate-noop
+
   - name: stackforge/reddwarf
     check:
       - gate-reddwarf-pep8
