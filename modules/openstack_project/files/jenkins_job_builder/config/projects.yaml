@@ -850,3 +850,10 @@
 
     jobs:
       - puppet-module-unit
+
+- project:
+    name: openvz-nova-driver
+    check:
+      - gate-noop
+    gate:
+      - gate-noop
