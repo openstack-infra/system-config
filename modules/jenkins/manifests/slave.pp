@@ -66,29 +66,34 @@ class jenkins::slave(
     ensure => present,
   }
 
-  if ($::osfamily == 'RedHat') {
+  case $::osfamily {
+    'RedHat': {
 
-    exec { 'yum Group Install':
-      unless  => '/usr/bin/yum grouplist "Development tools" | /bin/grep "^Installed Groups"',
-      command => '/usr/bin/yum -y groupinstall "Development tools"',
+      exec { 'yum Group Install':
+        unless  => '/usr/bin/yum grouplist "Development tools" | /bin/grep "^Installed Groups"',
+        command => '/usr/bin/yum -y groupinstall "Development tools"',
+      }
+
     }
+    'Debian': {
 
-  }
-  if ($::operatingsystem == 'Ubuntu') {
+      # install build-essential package group
+      package { 'build-essential':
+        ensure => present,
+      }
 
-    # install build-essential package group
-    package { 'build-essential':
-      ensure => present,
+      package { $::jenkins::params::maven_package:
+        ensure => present,
+      }
+
+      package { $::jenkins::params::python3_dev_package:
+        ensure => present,
+      }
+
     }
-
-    package { $::jenkins::params::maven_package:
-      ensure => present,
+    default: {
+      fail("Unsupported osfamily: ${::osfamily} The 'jenkins' module only supports osfamily Debian or RedHat (slaves only).")
     }
-
-    package { $::jenkins::params::python3_dev_package:
-      ensure => present,
-    }
-
   }
 
   if ($bare == false) {

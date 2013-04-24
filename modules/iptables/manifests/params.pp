@@ -14,7 +14,7 @@ class iptables::params {
       $service_status_cmd = undef
       $service_has_restart = false
     }
-    'Debian', 'Ubuntu': {
+    'Debian': {
       $package_name = 'iptables-persistent'
       $service_name = 'iptables-persistent'
       $rules_dir = '/etc/iptables'
@@ -32,7 +32,7 @@ class iptables::params {
       $service_has_restart = false
     }
     default: {
-      fail("Unsupported osfamily: ${::osfamily} The 'iptables' module only supports osfamily Ubuntu or Redhat(slaves only).")
+      fail("Unsupported osfamily: ${::osfamily} The 'iptables' module only supports osfamily Debian or RedHat (slaves only).")
     }
   }
 }

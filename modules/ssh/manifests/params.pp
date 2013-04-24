@@ -8,12 +8,12 @@ class ssh::params {
       $package_name = 'openssh-server'
       $service_name = 'sshd'
     }
-    'Debian', 'Ubuntu': {
+    'Debian': {
       $package_name = 'openssh-server'
       $service_name = 'ssh'
     }
     default: {
-      fail("Unsupported osfamily: ${::osfamily} The 'ssh' module only supports osfamily Ubuntu or Redhat(slaves only).")
+      fail("Unsupported osfamily: ${::osfamily} The 'ssh' module only supports osfamily Debian or RedHat (slaves only).")
     }
   }
 }

@@ -8,12 +8,12 @@ class pip::params {
       $python_devel_package = 'python-devel'
       $python_pip_package   = 'python-pip'
     }
-    'Debian', 'Ubuntu': {
+    'Debian': {
       $python_devel_package = 'python-all-dev'
       $python_pip_package   = 'python-pip'
     }
     default: {
-      fail("Unsupported osfamily: ${::osfamily} The 'pip' module only supports osfamily Fedora, Redhat, Debian, or Ubuntu.")
+      fail("Unsupported osfamily: ${::osfamily} The 'pip' module only supports osfamily Debian or RedHat.")
     }
   }
 }
