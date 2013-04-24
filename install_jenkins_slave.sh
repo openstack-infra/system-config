@@ -5,7 +5,7 @@ if [[ $EUID -ne 0 ]]; then
    exit 1
 fi
 
-if cat /etc/*release | grep "Red Hat" &> /dev/null; then
+if cat /etc/*release | grep -e "CentOS" -e "Red Hat" &> /dev/null; then
 
 	rpm -qi epel-release &> /dev/null || rpm -Uvh http://download.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm
         #installing this package gives use the key

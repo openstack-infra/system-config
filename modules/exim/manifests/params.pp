@@ -4,7 +4,7 @@
 # accessed by other classes.
 class exim::params {
   case $::osfamily {
-    'Redhat': {
+    'RedHat': {
       $package = 'exim'
       $service_name = 'exim'
       $config_file = '/etc/exim/exim.conf'

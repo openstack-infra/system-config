@@ -9,7 +9,7 @@ class exim(
     ensure => present,
   }
 
-  if ($::operatingsystem == 'Redhat') {
+  if ($::osfamily == 'RedHat') {
     service { 'postfix':
       ensure      => stopped
     }

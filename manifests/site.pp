@@ -348,6 +348,28 @@ node /^oneiric.*\.slave\.openstack\.org$/ {
 }
 
 
+node /^centos6.*\.slave\.openstack\.org$/ {
+  include openstack_project::puppet_cron
+  class { 'openstack_project::slave':
+    certname  => 'centos6.slave.openstack.org',
+    sysadmins => hiera('sysadmins'),
+  }
+  file { '/home/jenkins/.config/glance':
+    ensure  => absent,
+    force   => true,
+    recurse => true,
+  }
+  include jenkins::cgroups
+  include ulimit
+  ulimit::conf { 'limit_jenkins_procs':
+    limit_domain => 'jenkins',
+    limit_type   => 'hard',
+    limit_item   => 'nproc',
+    limit_value  => '256'
+  }
+}
+
+
 node /^rhel6.*\.slave\.openstack\.org$/ {
   include openstack_project::puppet_cron
   class { 'openstack_project::slave':

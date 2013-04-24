@@ -4,7 +4,7 @@
 # accessed by other classes.
 class ssh::params {
   case $::osfamily {
-    'Redhat': {
+    'RedHat': {
       $package_name = 'openssh-server'
       $service_name = 'sshd'
     }

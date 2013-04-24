@@ -4,7 +4,7 @@
 # accessed by other classes.
 class openstack_project::params {
   case $::osfamily {
-    'Redhat': {
+    'RedHat': {
       $packages = ['puppet', 'python-setuptools', 'wget']
       $user_packages = ['byobu', 'emacs-nox']
       $update_pkg_list_cmd = ''
