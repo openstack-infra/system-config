@@ -1249,7 +1249,8 @@ projects:
       - openstack-admin-manual-object
       - openstack-admin-manual-block
       - openstack-cli-guide
-      - openstack-basic-install
+      - openstack-basic-install-fedora
+      - openstack-basic-install-ubuntu
       - openstack-glossary
       - openstack-docs-site
       - openstack-ha-guide

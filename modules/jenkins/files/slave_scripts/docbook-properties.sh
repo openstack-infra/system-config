@@ -16,7 +16,7 @@ then
     DOC_COMMENTS_ENABLED=0
 fi
 
-# The stable/<releasename> branch should get published to /releasename, such as folsom or essex
+# The stable/<releasename> branch should get published to /releasename, such as grizzly or folsom
 if [[ $BRANCH =~ ^stable/(.*)$ ]]
 then
     DOC_RELEASE_PATH=${BASH_REMATCH[1]}
