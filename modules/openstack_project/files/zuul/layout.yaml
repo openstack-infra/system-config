@@ -1627,3 +1627,16 @@ projects:
       - gate-noop
     gate:
       - gate-noop
+
+  - name: stackforge/openvz-nova-driver
+    check:
+      - gate-reddwarf-pep8
+      - gate-reddwarf-python26
+      - gate-reddwarf-python27
+    gate:
+      - gate-reddwarf-pep8
+      - gate-reddwarf-python26
+      - gate-reddwarf-python27
+    post:
+      - reddwarf-coverage
+

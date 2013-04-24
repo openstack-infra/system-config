@@ -826,3 +826,14 @@
 
     jobs:
       - puppet-module-unit
+
+
+- project:
+    name: openvz-nova-driver
+    github-org: stackforge
+    node: quantal
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - python-jobs
+      - gate-{name}-pylint
