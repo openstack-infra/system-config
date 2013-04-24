@@ -289,7 +289,7 @@ class jenkins::slave(
   # Temporary for debugging glance launch problem
   # https://lists.launchpad.net/openstack/msg13381.html
   # NOTE(dprince): ubuntu only as RHEL6 doesn't have sysctl.d yet
-  if ($::operatingsystem == 'Ubuntu') {
+  if ($::osfamily == 'Debian') {
 
     file { '/etc/sysctl.d/10-ptrace.conf':
       ensure => present,

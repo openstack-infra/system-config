@@ -18,8 +18,8 @@ class openstack_project::server (
     sysadmin => $sysadmins,
   }
 
-  # Custom rsyslog config to disable /dev/xconsole noise on Ubuntu servers
-  if $::operatingsystem == 'Ubuntu' {
+  # Custom rsyslog config to disable /dev/xconsole noise on Debuntu servers
+  if $::osfamily == 'Debian' {
     file { '/etc/rsyslog.d/50-default.conf':
       ensure  => present,
       owner   => 'root',
