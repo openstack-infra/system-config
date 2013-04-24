@@ -7,11 +7,11 @@ class snmpd::params {
     'RedHat': {
       $package_name = 'net-snmp'
     }
-    'Debian', 'Ubuntu': {
+    'Debian': {
       $package_name = 'snmpd'
     }
     default: {
-      fail("Unsupported osfamily: ${::osfamily} The 'snmpd' module only supports osfamily Ubuntu or Redhat(slaves only).")
+      fail("Unsupported osfamily: ${::osfamily} The 'snmpd' module only supports osfamily Debian or RedHat (slaves only).")
     }
   }
 }

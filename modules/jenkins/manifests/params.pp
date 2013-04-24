@@ -47,7 +47,7 @@ class jenkins::params {
       $cgconfig_require = Package['cgroups']
       $cgred_require = Package['cgroups']
     }
-    'Debian', 'Ubuntu': {
+    'Debian': {
       # common packages
       $jdk_package = 'default-jdk'
       $ccache_package = 'ccache'
@@ -94,7 +94,7 @@ class jenkins::params {
       ]
     }
     default: {
-      fail("Unsupported osfamily: ${::osfamily} The 'jenkins' module only supports osfamily Ubuntu or Redhat(slaves only).")
+      fail("Unsupported osfamily: ${::osfamily} The 'jenkins' module only supports osfamily Debian or RedHat (slaves only).")
     }
   }
 }
