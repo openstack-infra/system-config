@@ -22,15 +22,15 @@ class openstack_project::logstash (
     sysadmins                 => $sysadmins,
   }
 
-  class { 'logstash::agent':
-    conf_template => 'openstack_project/logstash/agent.conf.erb',
-  }
   class { 'logstash::indexer':
     conf_template => 'openstack_project/logstash/indexer.conf.erb',
   }
-  include logstash::redis
   include logstash::elasticsearch
   include logstash::web
+
+  package { 'redis-server':
+    ensure => 'absent',
+  }
 
   package { 'python3':
     ensure => 'present',

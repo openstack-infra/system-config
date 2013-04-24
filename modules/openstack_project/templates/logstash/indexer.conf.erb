@@ -1,13 +1,46 @@
 input {
-  redis {
-    host => "127.0.0.1"
-    type => "redis-input"
-    # these settings should match the output of the agent
-    data_type => "list"
-    key => "logstash"
+  pipe {
+    command => "python3 /usr/local/bin/log-pusher.py -r -z tcp://jenkins.openstack.org:8888 -l http://logs.openstack.org -f console.html"
+    format => "json"
+    message_format => "%{event_message}"
+    tags => ["jenkins", "console"]
+    type => "jenkins_console"
+  }
+}
 
-    # We use json_event here since the sender is a logstash agent
-    format => "json_event"
+# You can check grok patterns at http://grokdebug.herokuapp.com/
+filter {
+  grep {
+    type => "jenkins_console"
+    # Drop matches.
+    negate => true
+    match => ["@message", "^</?pre>$"]
+  }
+  multiline {
+    type => "jenkins_console"
+    negate => true
+    pattern => "^%{DATESTAMP} \|"
+    what => "previous"
+  }
+  grok {
+    type => "jenkins_console"
+    pattern => [ "^%{DATESTAMP:logdate} \| %{GREEDYDATA:logmessage}" ]
+    add_field => [ "received_at", "%{@timestamp}" ]
+  }
+  date {
+    type => "jenkins_console"
+    exclude_tags => "_grokparsefailure"
+    match => [ "logdate", "yyyy-MM-dd HH:mm:ss.SSS" ]
+  }
+  mutate {
+    type => "jenkins_console"
+    exclude_tags => "_grokparsefailure"
+    replace => [ "@message", "%{logmessage}" ]
+  }
+  mutate {
+    type => "jenkins_console"
+    exclude_tags => "_grokparsefailure"
+    remove => [ "logdate", "logmessage" ]
   }
 }
 
