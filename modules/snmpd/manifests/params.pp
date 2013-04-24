@@ -4,7 +4,7 @@
 # accessed by other classes.
 class snmpd::params {
   case $::osfamily {
-    'Redhat': {
+    'RedHat': {
       $package_name = 'net-snmp'
     }
     'Debian', 'Ubuntu': {

@@ -4,7 +4,7 @@
 # accessed by other classes.
 class iptables::params {
   case $::osfamily {
-    'Redhat': {
+    'RedHat': {
       $package_name = 'iptables'
       $service_name = 'iptables'
       $rules_dir = '/etc/sysconfig'

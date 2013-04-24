@@ -66,7 +66,7 @@ class jenkins::slave(
     ensure => present,
   }
 
-  if ($::operatingsystem == 'Redhat') {
+  if ($::osfamily == 'RedHat') {
 
     exec { 'yum Group Install':
       unless  => '/usr/bin/yum grouplist "Development tools" | /bin/grep "^Installed Groups"',

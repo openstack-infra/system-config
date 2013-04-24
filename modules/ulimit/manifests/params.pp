@@ -4,7 +4,7 @@
 # accessed by other classes.
 class ulimit::params {
   case $::osfamily {
-    'Fedora', 'Redhat': {
+    'RedHat': {
       $pam_packages = ['pam']
     }
     'Debian', 'Ubuntu': {

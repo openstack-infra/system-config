@@ -4,7 +4,7 @@
 # accessed by other classes.
 class jenkins::params {
   case $::osfamily {
-    'Redhat': {
+    'RedHat': {
       #yum groupinstall "Development Tools"
       # common packages
       $jdk_package = 'java-1.7.0-openjdk'
