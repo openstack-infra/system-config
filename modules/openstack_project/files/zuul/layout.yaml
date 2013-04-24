@@ -1664,3 +1664,9 @@ projects:
       - gate-noop
     gate:
       - gate-noop
+
+  - name: stackforge/openvz-nova-driver
+    check:
+      - gate-noop
+    gate:
+      - gate-noop
