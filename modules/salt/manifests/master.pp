@@ -31,11 +31,12 @@ class salt::master {
   }
 
   user { 'salt':
-    ensure => present,
-    gid    => 'salt',
-    home   => '/home/salt',
-    shell  => '/bin/bash',
-    system => true,
+    ensure  => present,
+    gid     => 'salt',
+    home    => '/home/salt',
+    shell   => '/bin/bash',
+    system  => true,
+    require => Group['salt'],
   }
 
   file { '/home/salt':
@@ -54,6 +55,33 @@ class salt::master {
     content => template('salt/master.erb'),
     replace => true,
     require => Package['salt-master'],
+  }
+
+  file { '/etc/salt/pki':
+    ensure  => directory,
+    owner   => 'salt',
+    group   => 'salt',
+    mode    => '0710',
+    require => [
+      Package['salt-master'],
+      User['salt'],
+    ],
+  }
+
+  file { '/etc/salt/pki/master':
+    ensure  => directory,
+    owner   => 'salt',
+    group   => 'salt',
+    mode    => '0770',
+    require => File['/etc/salt/pki'],
+  }
+
+  file { '/etc/salt/pki/master/minions':
+    ensure  => directory,
+    owner   => 'salt',
+    group   => 'salt',
+    mode    => '0775',
+    require => File['/etc/salt/pki/master'],
   }
 
   service { 'salt-master':
