@@ -119,7 +119,7 @@ jobs:
   - name: ^gate-.*-docs$
     success-pattern: http://docs-draft.openstack.org/{change.number}/{change.patchset}/{pipeline.name}/{job.name}/{build.number}/doc/build/html/
   - name: gate-openstack-manuals-validate
-    voting: false
+    voting: true
   - name: ^gate-.*-requirements$
     failure-message: Incompatible requirement found; see https://wiki.openstack.org/wiki/Requirements
     branch: ^(?!stable/(diablo|essex|folsom|grizzly)).*$
