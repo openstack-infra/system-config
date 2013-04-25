@@ -1,4 +1,49 @@
 - project:
+    name: murano-api
+    github-org: stackforge
+    node: quantal
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - python-jobs
+      - gate-{name}-pyflakes
+      - gate-{name}-docs
+
+- project:
+    name: murano-conductor
+    github-org: stackforge
+    node: quantal
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - python-jobs
+      - gate-{name}-pyflakes
+      - gate-{name}-docs
+
+- project:
+    name: murano-dashboard
+    github-org: stackforge
+    node: quantal
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - python-jobs
+      - gate-{name}-pyflakes
+      - gate-{name}-docs
+
+- project:
+    name: python-muranoclient
+    github-org: stackforge
+    node: quantal
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - python-jobs
+      - pypi-jobs
+      - gate-{name}-pyflakes
+      - gate-{name}-docs
+
+- project:
     name: climate
     github-org: stackforge
     node: quantal
