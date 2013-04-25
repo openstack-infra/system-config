@@ -206,3 +206,20 @@ puppet-openstack:
       - stackforge/puppet-swift
     branches:
       - master
+
+murano:
+    events:
+      - patchset-created
+      - change-merged
+      - x-vrif-minus-2
+    projects:
+      - stackforge/murano-agent
+      - stackforge/murano-api
+      - stackforge/murano-conductor
+      - stackforge/murano-dashboard
+      - stackforge/murano-deployment
+      - stackforge/murano-docs
+      - stackforge/murano-tests
+      - stackforge/python-muranoclient
+    branches:
+      - master
