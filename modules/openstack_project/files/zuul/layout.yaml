@@ -1644,6 +1644,107 @@ projects:
     gate:
       - gate-noop
 
+  - name: stackforge/murano-agent
+    check:
+      - gate-noop
+    gate:
+      - gate-noop
+
+  - name: stackforge/murano-api
+    check:
+      - gate-murano-api-pyflakes
+      - gate-murano-api-pep8
+      - gate-murano-api-python26
+      - gate-murano-api-python26-rhel6
+      - gate-murano-api-python27
+    gate:
+      - gate-murano-api-pep8
+      - gate-murano-api-pyflakes
+      - gate-murano-api-python26
+      - gate-murano-api-python27
+    post:
+      - murano-api-branch-tarball
+    pre-release:
+      - murano-api-tarball
+    release:
+      - murano-api-tarball
+
+  - name: stackforge/murano-conductor
+    check:
+      - gate-murano-conductor-pyflakes
+      - gate-murano-conductor-pep8
+      - gate-murano-conductor-python26
+      - gate-murano-conductor-python26-rhel6
+      - gate-murano-conductor-python27
+    gate:
+      - gate-murano-conductor-pep8
+      - gate-murano-conductor-pyflakes
+      - gate-murano-conductor-python26
+      - gate-murano-conductor-python27
+    post:
+      - murano-conductor-branch-tarball
+    pre-release:
+      - murano-conductor-tarball
+    release:
+      - murano-conductor-tarball
+
+  - name: stackforge/murano-dashboard
+    check:
+      - gate-murano-dashboard-pyflakes
+      - gate-murano-dashboard-pep8
+      - gate-murano-dashboard-python26
+      - gate-murano-dashboard-python26-rhel6
+      - gate-murano-dashboard-python27
+    gate:
+      - gate-murano-dashboard-pep8
+      - gate-murano-dashboard-pyflakes
+      - gate-murano-dashboard-python26
+      - gate-murano-dashboard-python27
+    post:
+      - murano-dashboard-branch-tarball
+    pre-release:
+      - murano-dashboard-tarball
+    release:
+      - murano-dashboard-tarball
+
+  - name: stackforge/murano-deployment
+    check:
+      - gate-noop
+    gate:
+      - gate-noop
+
+  - name: stackforge/murano-docs
+    check:
+      - gate-noop
+    gate:
+      - gate-noop
+
+  - name: stackforge/murano-tests
+    check:
+      - gate-noop
+    gate:
+      - gate-noop
+
+  - name: stackforge/python-muranoclient
+    check:
+      - gate-python-muranoclient-pyflakes
+      - gate-python-muranoclient-pep8
+      - gate-python-muranoclient-python26
+      - gate-python-muranoclient-python26-rhel6
+      - gate-python-muranoclient-python27
+    gate:
+      - gate-python-muranoclient-pep8
+      - gate-python-muranoclient-pyflakes
+      - gate-python-muranoclient-python26
+      - gate-python-muranoclient-python27
+    post:
+      - python-muranoclient-branch-tarball
+    pre-release:
+      - python-muranoclient-tarball
+    release:
+      - python-muranoclient-tarball:
+        - python-muranoclient-pypi-upload
+
   - name: stackforge/opencafe
     check:
       - gate-noop
