@@ -60,6 +60,7 @@ class openstack_project::cacti (
     'ci-puppetmaster.openstack.org',
     'eavesdrop.openstack.org',
     'etherpad.openstack.org',
+    'graphite.openstack.org',
     'jenkins.openstack.org',
     'jenkins-dev.openstack.org',
     'lists.openstack.org',
