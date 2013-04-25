@@ -23,8 +23,12 @@ class openstack_project::dashboard(
     passenger           => true,
   }
 
-  mysql::server::config { '50_innodb_file_per_table':
-    settings => '[mysqld]\ninnodb_file_per_table\n',
+  file { '/etc/mysql/conf.d/mysqld_innodb_fpt.cnf':
+    ensure  => present,
+    source  =>
+      'puppet://modules/openstack_project/dashboard/mysqld_innodb_fpt.cnf',
+    require => Class['mysql::server'],
+    notify  => Service['mysql'],
   }
 }
 
