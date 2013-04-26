@@ -17,6 +17,7 @@
 import argparse
 import gzip
 import json
+import logging
 import threading
 import time
 import queue
@@ -40,9 +41,11 @@ class EventCatcher(threading.Thread):
             except:
                 # Assume that an error reading data from zmq or deserializing
                 # data received from zmq indicates a zmq error and reconnect.
+                logging.exception("ZMQ exception.")
                 self._connect_zmq()
 
     def _connect_zmq(self):
+        logging.debug("Connecting to zmq endpoint.")
         self.context = zmq.Context()
         self.socket = self.context.socket(zmq.SUB)
         event_filter = b"onFinalized"
@@ -52,6 +55,7 @@ class EventCatcher(threading.Thread):
     def _read_event(self):
         string = self.socket.recv().decode('utf-8')
         event = json.loads(string.split(None, 1)[1])
+        logging.debug("Jenkins event received: " + json.dumps(event))
         self.eventq.put(event)
 
 
@@ -84,12 +88,14 @@ class LogRetriever(threading.Thread):
 
     def _handle_event(self):
         event = self.eventq.get()
+        logging.debug("Handling event: " + json.dumps(event))
         fields = self._parse_fields(event)
         if fields['build_status'] != 'ABORTED':
             # Handle events ignoring aborted builds. These builds are
             # discarded by zuul.
             log_lines = self._retrieve_log(fields)
 
+            logging.debug("Pushing " + str(len(log_lines)) + " log lines.")
             for line in log_lines:
                 out_event = {}
                 out_event["@fields"] = fields
@@ -125,10 +131,12 @@ class LogRetriever(threading.Thread):
             # Silently drop fatal errors when retrieving logs.
             # TODO (clarkb): Handle these errors.
             # Perhaps simply add a log message to raw_buf?
-            pass
+            logging.exception("Unable to get log data.")
         if gzipped:
+            logging.debug("Decompressing gzipped source file.")
             buf = gzip.decompress(raw_buf).decode('utf-8')
         else:
+            logging.debug("Decoding source file.")
             buf = raw_buf.decode('utf-8')
         return buf.splitlines()
 
@@ -136,14 +144,18 @@ class LogRetriever(threading.Thread):
         gzipped = False
         source_url = log_address + log_dir + filename
         try:
+            logging.debug("Retrieving: " + source_url)
             r = urllib.request.urlopen(source_url)
         except urllib.error.URLError:
             try:
+                logging.debug("Retrieving: " + source_url + ".gz")
                 r = urllib.request.urlopen(source_url + ".gz")
                 gzipped = True
             except:
+                logging.exception("Unable to retrieve source file.")
                 raise
         except:
+            logging.exception("Unable to retrieve source file.")
             raise
 
         raw_buf = r.read()
@@ -157,6 +169,7 @@ class LogRetriever(threading.Thread):
             for i in range(60):
                 # Try for up to 60 seconds to retrieve the complete log file.
                 try:
+                    logging.debug(str(i) + " Retrying fetch of: " + source_url)
                     req = urllib.request.Request(source_url)
                     req.add_header('Range', 'bytes=' + str(content_len) + '-')
                     r = urllib.request.urlopen(req)
@@ -209,8 +222,18 @@ def main():
                         help="Print pretty json.")
     parser.add_argument("-r", "--retry", action="store_true",
                         help="Retry until full console log is retrieved.")
+    parser.add_argument("-d", "--debuglog",
+                        help="Enable debug log. "
+                             "Specifies file to write log to.")
     args = parser.parse_args()
 
+    if args.debuglog:
+        logging.basicConfig(format='%(asctime)s %(message)s',
+                            filename=args.debuglog, level=logging.DEBUG)
+    else:
+        # Prevent leakage into the logstash log stream.
+        logging.basicConfig(level=logging.CRITICAL)
+    logging.debug("Log pusher starting.")
     eventqueue = queue.Queue()
     logqueue = queue.Queue()
     catcher = EventCatcher(eventqueue, args.zmqaddress)
