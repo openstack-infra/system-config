@@ -170,11 +170,17 @@ class LogRetriever(threading.Thread):
                 # Try for up to 60 seconds to retrieve the complete log file.
                 try:
                     logging.debug(str(i) + " Retrying fetch of: " + source_url)
+                    logging.debug("Fetching bytes="  + str(content_len) + '-')
                     req = urllib.request.Request(source_url)
                     req.add_header('Range', 'bytes=' + str(content_len) + '-')
                     r = urllib.request.urlopen(req)
                     raw_buf += r.read()
                     content_len = len(raw_buf)
+                except urllib.error.HTTPError as e:
+                    if e.code == 416:
+                        logging.exception("Index out of range.")
+                    else:
+                        raise
                 finally:
                     if raw_buf[-8:].decode('utf-8') == '\n</pre>\n':
                         break
