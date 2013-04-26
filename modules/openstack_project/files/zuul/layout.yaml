@@ -1514,11 +1514,14 @@ projects:
       - gate-savanna-python27
     post:
       - savanna-branch-tarball
+      - hook-savanna-rtfd
     pre-release:
       - savanna-tarball
+      - hook-savanna-rtfd
     release:
       - savanna-tarball:
         - savanna-pypi-upload
+      - hook-savanna-rtfd
 
   - name: stackforge/python-savannaclient
     check:
@@ -1532,11 +1535,14 @@ projects:
       - gate-python-savannaclient-python27
     post:
       - python-savannaclient-branch-tarball
+      - hook-python-savannaclient-rtfd
     pre-release:
        - python-savannaclient-tarball
+       - hook-python-savannaclient-rtfd
     release:
        - python-savannaclient-tarball:
          - python-savannaclient-pypi-upload
+       - hook-python-savannaclient-rtfd
 
   - name: stackforge/puppet-cinder
     check:

@@ -12,22 +12,26 @@
     name: savanna
     github-org: stackforge
     node: quantal
+    rtfd-id: 7095
     tarball-site: tarballs.openstack.org
 
     jobs:
       - python-jobs
       - gate-{name}-pyflakes
+      - hook-{name}-rtfd
       - pypi-jobs
 
 - project:
     name: python-savannaclient
     github-org: stackforge
     node: quantal
+    rtfd-id: 7106
     tarball-site: tarballs.openstack.org
 
     jobs:
       - python-jobs
       - gate-{name}-pyflakes
+      - hook-{name}-rtfd
       - pypi-jobs
 
 - project:
