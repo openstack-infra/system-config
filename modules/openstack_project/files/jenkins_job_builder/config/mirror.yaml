@@ -13,15 +13,32 @@
       - zuul
 
     builders:
-      - shell: |
-          #!/bin/bash -xe
-          /usr/local/bin/run-mirror -c /home/jenkins/pypimirror/etc/pypi-mirror.yaml
-          find /home/jenkins/pypimirror/mirror/ \( -name index.html -or -name full.html \) -delete
-          rsync -a --ignore-existing /home/jenkins/pypimirror/mirror/ jenkins@static.openstack.org:/srv/static/pypi/
+      - update-pypi-mirror
 
     publishers:
       - link-logs
       - console-log-periodic
+
+
+- job:
+    name: 'post-mirror-python26'
+    node: mirror26
+    concurrent: false
+
+    wrappers:
+      - timeout:
+          timeout: 45
+          fail: true
+
+    triggers:
+      - zuul
+
+    builders:
+      - update-pypi-mirror
+
+    publishers:
+      - link-logs
+      - console-log-post
 
 
 - job:
@@ -39,12 +56,29 @@
       - zuul
 
     builders:
-      - shell: |
-          #!/bin/bash -xe
-          /usr/local/bin/run-mirror -c /home/jenkins/pypimirror/etc/pypi-mirror.yaml
-          find /home/jenkins/pypimirror/mirror/ \( -name index.html -or -name full.html \) -delete
-          rsync -a --ignore-existing /home/jenkins/pypimirror/mirror/ jenkins@static.openstack.org:/srv/static/pypi/
+      - update-pypi-mirror
 
     publishers:
       - link-logs
       - console-log-periodic
+
+
+- job:
+    name: 'post-mirror-python27'
+    node: mirror27
+    concurrent: false
+
+    wrappers:
+      - timeout:
+          timeout: 45
+          fail: true
+
+    triggers:
+      - zuul
+
+    builders:
+      - update-pypi-mirror
+
+    publishers:
+      - link-logs
+      - console-log-post
