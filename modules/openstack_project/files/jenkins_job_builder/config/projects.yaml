@@ -89,6 +89,17 @@
 
 
 - project:
+    name: gitdm
+    github-org: openstack-infra
+    node: quantal
+    doc-publisher-site: ci.openstack.org
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - '{name}-noop'
+
+
+- project:
     name: pbr
     github-org: openstack-dev
     node: quantal
