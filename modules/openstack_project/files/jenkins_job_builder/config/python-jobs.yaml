@@ -105,9 +105,9 @@
     # >= precise does not have python2.6
     node: oneiric
 
-# temporary/non-voting while we burn in rhel6 slaves for havana
+# temporary/non-voting while we burn in centos6 slaves for havana
 - job-template:
-    name: 'gate-{name}-python26-rhel6'
+    name: 'gate-{name}-python26-centos6'
 
     wrappers:
       - timeout:
@@ -147,7 +147,7 @@
               copy-after-failure: true
       - console-log
 
-    node: rhel6
+    node: centos6
 
 - job-template:
     name: 'gate-{name}-python27'
@@ -309,7 +309,7 @@
       - '{name}-coverage'
       - 'gate-{name}-pep8'
       - 'gate-{name}-python26'
-      - 'gate-{name}-python26-rhel6'
+      - 'gate-{name}-python26-centos6'
       - 'gate-{name}-python27'
       - 'gate-{name}-docs'
       - 'gate-{name}-requirements'
