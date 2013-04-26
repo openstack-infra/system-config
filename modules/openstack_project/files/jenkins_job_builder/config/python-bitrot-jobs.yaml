@@ -31,6 +31,39 @@
     node: oneiric
 
 
+# temporary while we burn in centos6 slaves for havana
+- job-template:
+    name: 'periodic-{name}-python26-{branch-name}-centos6'
+
+    triggers:
+      - timed: '0 6 * * *'
+
+    builders:
+      - python26:
+          github-org: '{github-org}'
+          project: '{name}'
+
+    publishers:
+      - scp:
+          site: 'static.openstack.org'
+          files:
+            - target: 'logs/periodic/$JOB_NAME/$BUILD_NUMBER'
+              source: '**/*nose_results.html'
+              keep-hierarchy: false
+              copy-after-failure: true
+      - console-log-periodic
+      - email:
+          recipients: '{email}'
+
+    scm:
+      - git:
+          url: 'git://github.com/{github-org}/{name}.git'
+          branches:
+            - 'origin/{branch}'
+
+    node: centos6
+
+
 - job-template:
     name: 'periodic-{name}-python27-{branch-name}'
 
@@ -120,6 +153,7 @@
     node: quantal
     jobs:
       - 'periodic-{name}-python26-{branch-name}'
+      - 'periodic-{name}-python26-{branch-name}-centos6'
       - 'periodic-{name}-python27-{branch-name}'
       - 'periodic-{name}-docs-{branch-name}'
 
@@ -132,5 +166,6 @@
     node: quantal
     jobs:
       - 'periodic-{name}-python26-{branch-name}'
+      - 'periodic-{name}-python26-{branch-name}-centos6'
       - 'periodic-{name}-python27-{branch-name}'
       - 'periodic-{name}-docs-{branch-name}'
