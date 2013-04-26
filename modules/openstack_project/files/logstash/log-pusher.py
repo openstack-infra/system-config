@@ -20,6 +20,7 @@ import json
 import threading
 import time
 import queue
+import sys
 import urllib.error
 import urllib.request
 import zmq
@@ -164,9 +165,20 @@ class LogRetriever(threading.Thread):
                 finally:
                     if raw_buf[-8:].decode('utf-8') == '\n</pre>\n':
                         break
-                    time.sleep(1)
+                    self._semi_busy_wait(1)
 
         return gzipped, raw_buf
+
+    def _semi_busy_wait(self, seconds):
+        # time.sleep() may return early. If it does sleep() again and repeat
+        # until at least the number of seconds specified has elapsed.
+        start_time = time.time()
+        while True:
+            time.sleep(seconds)
+            cur_time = time.time()
+            seconds = seconds - (cur_time - start_time)
+            if seconds <= 0.0:
+                return
 
 
 class LogProcessor(object):
@@ -181,6 +193,8 @@ class LogProcessor(object):
                   indent=4, separators=(',', ': ')))
         else:
             print(json.dumps(log))
+        # Push each log event through to keep logstash up to date.
+        sys.stdout.flush()
 
 
 def main():
