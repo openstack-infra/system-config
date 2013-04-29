@@ -36,7 +36,7 @@ module KibanaConfig
   # Format for timestamps. Defaults to mm/dd HH:MM:ss.
   # For syntax see: http://blog.stevenlevithan.com/archives/date-time-format
   # Time_format = 'isoDateTime'
-  Time_format = 'isoDateTime'
+  Time_format = 'yyyy-mm-dd\'T\'HH:MM:ss.l'
 
   # Change which fields are shown by default. Must be set as an array
   # Default_fields = ['@fields.vhost','@fields.response','@fields.request']
