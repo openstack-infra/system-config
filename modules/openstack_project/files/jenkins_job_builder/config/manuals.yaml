@@ -127,7 +127,7 @@
       - ftp:
           site: docs.openstack.org
           source: 'doc/src/docbkx/basic-install/target/docbkx/webhelp/**'
-          target: '/yum'
+          target: ''
           remove-prefix: 'doc/src/docbkx/basic-install/target/docbkx/webhelp/'
           excludes: '**/*.xml,**/null*'
 
@@ -163,7 +163,7 @@
       - ftp:
           site: docs.openstack.org
           source: 'doc/src/docbkx/basic-install/target/docbkx/webhelp/**'
-          target: '/apt'
+          target: ''
           remove-prefix: 'doc/src/docbkx/basic-install/target/docbkx/webhelp/'
           excludes: '**/*.xml,**/null*'
 
