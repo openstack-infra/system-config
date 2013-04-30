@@ -19,7 +19,8 @@ class mediawiki(
     include mediawiki::php
     include mediawiki::app
 
-    package { 'libapache2-mod-php5':
+    package { ['libapache2-mod-php5',
+      'lua5.2']:
       ensure => present,
     }
 
