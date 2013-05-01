@@ -256,14 +256,16 @@ projects:
   - name: openstack-infra/config
     merge-mode: cherry-pick
     check:
-      - gate-config-syntax
-      - gate-config-lint
-      - gate-config-layout
       - config-compare-xml
-    gate:
-      - gate-config-syntax
-      - gate-config-lint
       - gate-config-layout
+      - gate-config-puppet-lint
+      - gate-config-puppet-syntax
+      - gate-config-pyflakes
+    gate:
+      - gate-config-layout
+      - gate-config-puppet-lint
+      - gate-config-puppet-syntax
+      - gate-config-pyflakes
     post:
       - ci-docs
 

@@ -1,37 +1,4 @@
 - job:
-    name: gate-config-syntax
-    node: quantal
-
-    triggers:
-      - zuul
-
-    builders:
-      - gerrit-git-prep
-      - puppet-syntax
-      - pyflakes:
-          github-org: openstack-infra
-          project: config
-
-    publishers:
-      - console-log
-
-
-- job:
-    name: gate-config-lint
-    node: quantal
-
-    triggers:
-      - zuul
-
-    builders:
-      - gerrit-git-prep
-      - shell: "rake lint"
-
-    publishers:
-      - console-log
-
-
-- job:
     name: config-compare-xml
     node: quantal
 
