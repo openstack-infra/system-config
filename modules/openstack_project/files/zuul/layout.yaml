@@ -1832,3 +1832,27 @@ projects:
       - gate-noop
     gate:
       - gate-noop
+
+  - name: openstack/ironic
+    check:
+      - gate-ironic-pep8
+      - gate-ironic-python26
+      - gate-ironic-python27
+    gate:
+      - gate-ironic-pep8
+      - gate-ironic-python26
+      - gate-ironic-python27
+    post:
+      - ironic-coverage
+
+  - name: openstack/python-ironicclient
+    check:
+      - gate-python-ironicclient-pep8
+      - gate-python-ironicclient-python26
+      - gate-python-ironicclient-python27
+    gate:
+      - gate-python-ironicclient-pep8
+      - gate-python-ironicclient-python26
+      - gate-python-ironicclient-python27
+    post:
+      - python-ironicclient-coverage

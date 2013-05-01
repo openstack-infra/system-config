@@ -251,3 +251,14 @@ billingstack:
       - stackforge/billingstack
     branches:
       - master
+
+openstack-ironic:
+    events:
+      - patchset-created
+      - change-merged
+      - x-vrif-minus-2
+    projects:
+      - openstack/ironic
+      - openstack/python-ironicclient
+    branches:
+      - master
