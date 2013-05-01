@@ -17,7 +17,7 @@
 
 
 - job:
-    name: gate-config-lint
+    name: gate-puppet-config-lint
     node: quantal
 
     triggers:
@@ -25,7 +25,7 @@
 
     builders:
       - gerrit-git-prep
-      - shell: "rake lint"
+      - puppet-lint
 
     publishers:
       - console-log
