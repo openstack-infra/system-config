@@ -1,6 +1,6 @@
 input {
   pipe {
-    command => "python3 /usr/local/bin/log-pusher.py -r -z tcp://jenkins.openstack.org:8888 -l http://logs.openstack.org -f console.html"
+    command => "python3 /usr/local/bin/log-pusher.py -r -z tcp://jenkins.openstack.org:8888 -l http://logs.openstack.org -f console.html -d /var/log/logstash/indexer-debug.log"
     format => "json"
     message_format => "%{event_message}"
     tags => ["jenkins", "console"]
