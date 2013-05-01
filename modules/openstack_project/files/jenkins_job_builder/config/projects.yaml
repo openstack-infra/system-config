@@ -932,3 +932,22 @@
     jobs:
       - gate-{name}-chef-lint
       - gate-{name}-chef-unit
+
+- project:
+    name: ironic
+    github-org: openstack
+    node: precise
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - python-jobs
+
+- project:
+    name: python-ironicclient
+    github-org: openstack
+    node: precise
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - python-jobs
+
