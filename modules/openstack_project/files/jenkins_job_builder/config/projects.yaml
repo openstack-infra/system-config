@@ -854,3 +854,22 @@
 
     jobs:
       - puppet-module-unit
+
+
+- project:
+    name: ironic
+    github-org: stackforge
+    node: quantal
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - python-jobs
+
+- project:
+    name: python-ironicclient
+    github-org: stackforge
+    node: quantal
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - python-jobs

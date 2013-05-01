@@ -206,3 +206,14 @@ puppet-openstack:
       - stackforge/puppet-swift
     branches:
       - master
+
+openstack-ironic:
+    events:
+      - patchset-created
+      - change-merged
+      - x-vrif-minus-2
+    projects:
+      - stackforge/ironic
+      - stackforge/python-ironicclient
+    branches:
+      - master
