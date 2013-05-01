@@ -18,7 +18,33 @@
     publishers:
       - console-log
 
+- job-template:
+    name: 'gate-{name}-puppet-lint'
+    node: '{node}'
 
+    triggers:
+      - zuul
+
+    builders:
+      - gerrit-git-prep
+      - puppet-lint
+
+    publishers:
+      - console-log
+
+- job-template:
+    name: 'gate-{name}-puppet-syntax'
+    node: '{node}'
+
+    triggers:
+      - zuul
+
+    builders:
+      - gerrit-git-prep
+      - puppet-syntax
+
+    publishers:
+      - console-log
 
 - job-group:
     name: 'puppet-module-unit'
