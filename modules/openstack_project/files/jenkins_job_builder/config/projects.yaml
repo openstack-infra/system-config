@@ -625,6 +625,7 @@
 
     jobs:
       - python-jobs
+      - gate-{name}-puppet-lint
 
 
 - project:

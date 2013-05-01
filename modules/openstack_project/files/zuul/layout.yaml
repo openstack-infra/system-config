@@ -93,6 +93,8 @@ jobs:
     branch: ^(?!stable/(diablo|essex)).*$
   - name: gate-oslo-incubator-pyflakes
     branch: ^(?!stable|(diablo|essex|folsom)).*$
+  - name: gate-packstack-puppet-lint
+    voting: false
   - name: dev-zuul-coverage
     voting: false
   - name: dev-heat-coverage
@@ -257,12 +259,12 @@ projects:
     merge-mode: cherry-pick
     check:
       - gate-config-syntax
-      - gate-config-lint
+      - gate-config-puppet-lint
       - gate-config-layout
       - config-compare-xml
     gate:
       - gate-config-syntax
-      - gate-config-lint
+      - gate-config-puppet-lint
       - gate-config-layout
     post:
       - ci-docs
@@ -1492,10 +1494,12 @@ projects:
       - gate-packstack-python26
       - gate-packstack-python26-centos6
       - gate-packstack-python27
+      - gate-packstack-puppet-lint
     gate:
       - gate-packstack-pep8
       - gate-packstack-python26
       - gate-packstack-python27
+      - gate-packstack-puppet-lint
 
   - name: stackforge/anvil
     check:
