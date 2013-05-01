@@ -84,7 +84,10 @@ class LogRetriever(threading.Thread):
 
     def run(self):
         while True:
-            self._handle_event()
+            try:
+                self._handle_event()
+            except:
+                logging.exception("Exception retrieving log event.")
 
     def _handle_event(self):
         event = self.eventq.get()
@@ -252,7 +255,11 @@ def main():
     retriever.daemon = True
     retriever.start()
     while True:
-        processor.handle_log_event()
+        try:
+            processor.handle_log_event()
+        except:
+            logging.exception("Exception processing log event.")
+            raise
 
 
 if __name__ == '__main__':
