@@ -47,9 +47,22 @@ class logstash::elasticsearch {
     require => Package['elasticsearch'],
   }
 
+  file { '/etc/default/elasticsearch':
+    ensure  => present,
+    source  => 'puppet:///modules/logstash/elasticsearch.default',
+    replace => true,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0644',
+    require => Package['elasticsearch'],
+  }
+
   service { 'elasticsearch':
     ensure    => running,
     require   => Package['elasticsearch'],
-    subscribe => File['/etc/elasticsearch/elasticsearch.yml'],
+    subscribe => [
+      File['/etc/elasticsearch/elasticsearch.yml'],
+      File['/etc/default/elasticsearch'],
+    ],
   }
 }
