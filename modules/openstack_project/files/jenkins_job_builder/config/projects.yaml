@@ -9,6 +9,16 @@
       - gate-{name}-python27
 
 - project:
+    name: config
+    github-org: openstack-infra
+    node: quantal
+
+    jobs:
+      - gate-{name}-puppet-lint
+      - gate-{name}-puppet-syntax
+      - gate-{name}-pyflakes
+
+- project:
     name: savanna
     github-org: stackforge
     node: quantal

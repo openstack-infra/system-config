@@ -63,6 +63,11 @@
       - shell: "/usr/local/jenkins/slave_scripts/run-pyflakes.sh {github-org} {project}"
 
 - builder:
+    name: puppet-lint
+    builders:
+      - shell: "rake lint"
+
+- builder:
     name: puppet-syntax
     builders:
       - shell: |
