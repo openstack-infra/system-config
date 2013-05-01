@@ -3,6 +3,11 @@
     node: mirror26
     concurrent: false
 
+    wrappers:
+      - timeout:
+          timeout: 45
+          fail: true
+
     triggers:
       - timed: '4 21 * * *'
       - zuul
@@ -23,6 +28,11 @@
     name: 'periodic-mirror-python27'
     node: mirror27
     concurrent: false
+
+    wrappers:
+      - timeout:
+          timeout: 45
+          fail: true
 
     triggers:
       - timed: '12 21 * * *'
