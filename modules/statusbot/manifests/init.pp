@@ -50,7 +50,6 @@ class statusbot(
   }
 
   service { 'statusbot':
-    ensure     => running,
     enable     => true,
     hasrestart => true,
     require    => File['/etc/init.d/statusbot'],
