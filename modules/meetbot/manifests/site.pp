@@ -104,7 +104,6 @@ define meetbot::site(
   }
 
   service { "${name}-meetbot":
-    ensure    => running,
     provider  => upstart,
     require   => [
       Vcsrepo['/opt/meetbot'],
