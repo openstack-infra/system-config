@@ -42,6 +42,10 @@ class openstack_project::logstash (
     ensure => 'present',
   }
 
+  package { 'python3-yaml':
+    ensure => 'present',
+  }
+
   file { '/usr/local/bin/log-pusher.py':
     ensure  => present,
     owner   => 'root',
@@ -51,13 +55,25 @@ class openstack_project::logstash (
     require => Package['python3'],
   }
 
+  file { '/etc/logstash/jenkins-log-pusher.yaml':
+    ensure  => present,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0555',
+    source  => 'puppet:///modules/openstack_project/logstash/jenkins-log-pusher.yaml',
+    require => Class['logstash::indexer'],
+  }
+
   file { '/etc/init.d/jenkins-log-pusher':
     ensure  => present,
     owner   => 'root',
     group   => 'root',
     mode    => '0555',
     source  => 'puppet:///modules/openstack_project/logstash/jenkins-log-pusher.init',
-    require => File['/usr/local/bin/log-pusher.py'],
+    require => [
+      File['/usr/local/bin/log-pusher.py'],
+      File['/etc/logstash/jenkins-log-pusher.yaml'],
+    ],
   }
 
   service { 'jenkins-log-pusher':
