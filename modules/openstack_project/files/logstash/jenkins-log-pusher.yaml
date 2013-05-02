@@ -1,0 +1,16 @@
+# Defaults
+source-defaults:
+  source-url: http://logs.openstack.org
+  output-host: localhost
+  output-port: 9999
+  output-mode: tcp
+  retry-get: False
+
+# List of zmq event inputs.
+zmq-publishers:
+  - tcp://jenkins.openstack.org:8888
+
+# List of files to source logs from.
+source-files:
+  - name: console.html
+    retry-get: True
