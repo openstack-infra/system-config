@@ -51,6 +51,21 @@ class openstack_project::logstash (
     require => Package['python3'],
   }
 
+  file { '/etc/init.d/jenkins-log-pusher':
+    ensure  => present,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0555',
+    source  => 'puppet:///modules/openstack_project/logstash/jenkins-log-pusher.init',
+    require => File['/usr/local/bin/log-pusher.py'],
+  }
+
+  service { 'jenkins-log-pusher':
+    enable     => true,
+    hasrestart => true,
+    require    => File['/etc/init.d/jenkins-log-pusher'],
+  }
+
   cron { 'delete_old_es_indices':
     user        => 'root',
     hour        => '5',
