@@ -47,6 +47,16 @@ class logstash::elasticsearch {
     require => Package['elasticsearch'],
   }
 
+  file { '/etc/elasticsearch/default_mapping.json':
+    ensure  => present,
+    source  => 'puppet:///modules/logstash/elasticsearch.mapping.json',
+    replace => true,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0644',
+    require => Package['elasticsearch'],
+  }
+
   file { '/etc/default/elasticsearch':
     ensure  => present,
     source  => 'puppet:///modules/logstash/elasticsearch.default',
@@ -62,6 +72,7 @@ class logstash::elasticsearch {
     require   => Package['elasticsearch'],
     subscribe => [
       File['/etc/elasticsearch/elasticsearch.yml'],
+      File['/etc/elasticsearch/default_mapping.json'],
       File['/etc/default/elasticsearch'],
     ],
   }
