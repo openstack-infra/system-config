@@ -112,3 +112,8 @@ VERP_PASSWORD_REMINDERS      = 1
 VERP_PERSONALIZED_DELIVERIES = 1
 VERP_CONFIRMATIONS           = 1
 VERP_DELIVERY_INTERVAL       = 0
+
+# Make membership viewable by admin only by default (lp bug 1021493)
+# Private_roster == 0: anyone can see, 1: members only, 2: admin only.
+DEFAULT_PRIVATE_ROSTER = 2
+
