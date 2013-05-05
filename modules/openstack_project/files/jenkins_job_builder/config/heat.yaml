@@ -1,6 +1,6 @@
 - job:
     name: 'dev-heat-coverage'
-    node: 'oneiric'
+    node: 'centos6'
 
     triggers:
       - zuul
@@ -17,7 +17,7 @@
 
 - job:
     name: 'dev-python-heatclient-coverage'
-    node: 'oneiric'
+    node: 'centos6'
 
     triggers:
       - zuul
