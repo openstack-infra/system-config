@@ -81,10 +81,10 @@ jobs:
   - name: gate-grenade-devstack-vm
     branch: ^(?!stable/folsom).*$
     voting: false
-  - name: ^gate-.*-python26-centos6$
-    voting: false
   - name: gate-nova-pylint
     voting: false
+  - name: gate-nova-python26
+    branch: ^(?!stable/folsom).*$
   - name: gate-oslo-incubator-pyflakes
     branch: ^(?!stable/folsom).*$
   - name: dev-zuul-coverage
@@ -128,7 +128,6 @@ projects:
       - gate-zuul-docs
       - gate-zuul-pyflakes
       - gate-zuul-python26
-      - gate-zuul-python26-centos6
       - gate-zuul-python27
       - dev-zuul-coverage
     gate:
@@ -319,7 +318,6 @@ projects:
       - gate-cinder-pep8
       - gate-cinder-docs
       - gate-cinder-python26
-      - gate-cinder-python26-centos6
       - gate-cinder-python27
       - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
@@ -355,7 +353,6 @@ projects:
       - gate-glance-pep8
       - gate-glance-docs
       - gate-glance-python26
-      - gate-glance-python26-centos6
       - gate-glance-python27
       - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
@@ -391,7 +388,6 @@ projects:
       - gate-horizon-pep8
       - gate-horizon-docs
       - gate-horizon-python26
-      - gate-horizon-python26-centos6
       - gate-horizon-python27
       - gate-horizon-selenium
       - gate-tempest-devstack-vm-smoke
@@ -429,7 +425,6 @@ projects:
       - gate-keystone-pep8
       - gate-keystone-docs
       - gate-keystone-python26
-      - gate-keystone-python26-centos6
       - gate-keystone-python27
       - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
@@ -467,7 +462,6 @@ projects:
       - gate-nova-pep8
       - gate-nova-docs
       - gate-nova-python26
-      - gate-nova-python26-centos6
       - gate-nova-python27
       - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
@@ -506,7 +500,6 @@ projects:
       - gate-oslo-incubator-docs
       - gate-oslo-incubator-pyflakes
       - gate-oslo-incubator-python26
-      - gate-oslo-incubator-python26-centos6
       - gate-oslo-incubator-python27
     gate:
       - gate-oslo-incubator-requirements
@@ -526,7 +519,6 @@ projects:
       - gate-oslo.config-pep8
       - gate-oslo.config-docs
       - gate-oslo.config-python26
-      - gate-oslo.config-python26-centos6
       - gate-oslo.config-python27
     gate:
       - gate-oslo.config-requirements
@@ -550,7 +542,6 @@ projects:
       - gate-quantum-pep8
       - gate-quantum-docs
       - gate-quantum-python26
-      - gate-quantum-python26-centos6
       - gate-quantum-python27
       - gate-tempest-devstack-vm-quantum
     gate:
@@ -577,7 +568,6 @@ projects:
       - gate-swift-pep8
       - gate-swift-docs
       - gate-swift-python26
-      - gate-swift-python26-centos6
       - gate-swift-python27
       - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
@@ -613,7 +603,6 @@ projects:
       - gate-python-ceilometerclient-pep8
       - gate-python-ceilometerclient-docs
       - gate-python-ceilometerclient-python26
-      - gate-python-ceilometerclient-python26-centos6
       - gate-python-ceilometerclient-python27
     gate:
       - gate-python-ceilometerclient-requirements
@@ -637,7 +626,6 @@ projects:
       - gate-python-cinderclient-pep8
       - gate-python-cinderclient-docs
       - gate-python-cinderclient-python26
-      - gate-python-cinderclient-python26-centos6
       - gate-python-cinderclient-python27
       - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
@@ -673,7 +661,6 @@ projects:
       - gate-python-glanceclient-pep8
       - gate-python-glanceclient-docs
       - gate-python-glanceclient-python26
-      - gate-python-glanceclient-python26-centos6
       - gate-python-glanceclient-python27
       - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
@@ -709,7 +696,6 @@ projects:
       - gate-python-keystoneclient-pep8
       - gate-python-keystoneclient-docs
       - gate-python-keystoneclient-python26
-      - gate-python-keystoneclient-python26-centos6
       - gate-python-keystoneclient-python27
       - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
@@ -745,7 +731,6 @@ projects:
       - gate-python-novaclient-pep8
       - gate-python-novaclient-docs
       - gate-python-novaclient-python26
-      - gate-python-novaclient-python26-centos6
       - gate-python-novaclient-python27
       - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
@@ -781,7 +766,6 @@ projects:
       - gate-python-openstackclient-pep8
       - gate-python-openstackclient-docs
       - gate-python-openstackclient-python26
-      - gate-python-openstackclient-python26-centos6
       - gate-python-openstackclient-python27
     gate:
       - gate-python-openstackclient-requirements
@@ -805,7 +789,6 @@ projects:
       - gate-python-quantumclient-pep8
       - gate-python-quantumclient-docs
       - gate-python-quantumclient-python26
-      - gate-python-quantumclient-python26-centos6
       - gate-python-quantumclient-python27
       - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
@@ -841,7 +824,6 @@ projects:
       - gate-python-swiftclient-pep8
       - gate-python-swiftclient-docs
       - gate-python-swiftclient-python26
-      - gate-python-swiftclient-python26-centos6
       - gate-python-swiftclient-python27
     gate:
       - gate-python-swiftclient-requirements
@@ -997,7 +979,6 @@ projects:
       - gate-ceilometer-pep8
       - gate-ceilometer-docs
       - gate-ceilometer-python26
-      - gate-ceilometer-python26-centos6
       - gate-ceilometer-python27
     gate:
       - gate-ceilometer-requirements
@@ -1058,7 +1039,6 @@ projects:
       - gate-heat-requirements
       - gate-heat-pep8
       - gate-heat-python26
-      - gate-heat-python26-centos6
       - gate-heat-python27
       - dev-heat-coverage
     gate:
@@ -1081,7 +1061,6 @@ projects:
       - gate-python-heatclient-requirements
       - gate-python-heatclient-pep8
       - gate-python-heatclient-python26
-      - gate-python-heatclient-python26-centos6
       - gate-python-heatclient-python27
       - dev-python-heatclient-coverage
     gate:
@@ -1104,7 +1083,6 @@ projects:
       - gate-heat-cfntools-requirements
       - gate-heat-cfntools-pep8
       - gate-heat-cfntools-python26
-      - gate-heat-cfntools-python26-centos6
       - gate-heat-cfntools-python27
       - dev-heat-cfntools-coverage
     gate:
@@ -1132,7 +1110,6 @@ projects:
     check:
       - gate-reddwarf-pep8
       - gate-reddwarf-python26
-      - gate-reddwarf-python26-centos6
       - gate-reddwarf-python27
     gate:
       - gate-reddwarf-pep8
@@ -1151,7 +1128,6 @@ projects:
     check:
       - gate-python-reddwarfclient-pep8
       - gate-python-reddwarfclient-python26
-      - gate-python-reddwarfclient-python26-centos6
       - gate-python-reddwarfclient-python27
     gate:
       - gate-python-reddwarfclient-pep8
@@ -1167,7 +1143,6 @@ projects:
     check:
       - gate-marconi-pep8
       - gate-marconi-python26
-      - gate-marconi-python26-centos6
       - gate-marconi-python27
     gate:
       - gate-marconi-pep8
@@ -1179,7 +1154,6 @@ projects:
       - gate-moniker-pyflakes
       - gate-moniker-pep8
       - gate-moniker-python26
-      - gate-moniker-python26-centos6
       - gate-moniker-python27
     gate:
       - gate-moniker-pep8
@@ -1201,7 +1175,6 @@ projects:
       - gate-python-monikerclient-pyflakes
       - gate-python-monikerclient-pep8
       - gate-python-monikerclient-python26
-      - gate-python-monikerclient-python26-centos6
       - gate-python-monikerclient-python27
     gate:
       - gate-python-monikerclient-pep8
@@ -1244,7 +1217,6 @@ projects:
     check:
       - gate-bufunfa-pep8
       - gate-bufunfa-python26
-      - gate-bufunfa-python26-centos6
       - gate-bufunfa-python27
     gate:
       - gate-bufunfa-pep8
@@ -1397,7 +1369,6 @@ projects:
     check:
       - gate-diskimage-builder-pep8
       - gate-diskimage-builder-python26
-      - gate-diskimage-builder-python26-centos6
       - gate-diskimage-builder-python27
     gate:
       - gate-diskimage-builder-pep8
@@ -1410,7 +1381,6 @@ projects:
     check:
       - gate-os-config-applier-pep8
       - gate-os-config-applier-python26
-      - gate-os-config-applier-python26-centos6
       - gate-os-config-applier-python27
     gate:
       - gate-os-config-applier-pep8
@@ -1423,7 +1393,6 @@ projects:
     check:
       - gate-os-refresh-config-pep8
       - gate-os-refresh-config-python26
-      - gate-os-refresh-config-python26-centos6
       - gate-os-refresh-config-python27
     gate:
       - gate-os-refresh-config-pep8
@@ -1436,7 +1405,6 @@ projects:
     check:
       - gate-tripleo-image-elements-pep8
       - gate-tripleo-image-elements-python26
-      - gate-tripleo-image-elements-python26-centos6
       - gate-tripleo-image-elements-python27
     gate:
       - gate-tripleo-image-elements-pep8
@@ -1510,7 +1478,6 @@ projects:
     check:
       - gate-packstack-pep8
       - gate-packstack-python26
-      - gate-packstack-python26-centos6
       - gate-packstack-python27
     gate:
       - gate-packstack-pep8
@@ -1527,7 +1494,6 @@ projects:
     check:
       - gate-savanna-pep8
       - gate-savanna-python26
-      - gate-savanna-python26-centos6
       - gate-savanna-python27
     gate:
       - gate-savanna-pep8
@@ -1548,7 +1514,6 @@ projects:
     check:
       - gate-python-savannaclient-pep8
       - gate-python-savannaclient-python26
-      - gate-python-savannaclient-python26-centos6
       - gate-python-savannaclient-python27
     gate:
       - gate-python-savannaclient-pep8
