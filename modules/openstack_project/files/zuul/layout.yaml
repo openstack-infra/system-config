@@ -1668,3 +1668,13 @@ projects:
       - gate-noop
     gate:
       - gate-noop
+
+  - name: stackforge/python-marconiclient
+    check:
+      - gate-python-marconiclient-pep8
+      - gate-python-marconiclient-python26
+      - gate-python-marconiclient-python27
+    gate:
+      - gate-python-marconiclient-pep8
+      - gate-python-marconiclient-python26
+      - gate-python-marconiclient-python27

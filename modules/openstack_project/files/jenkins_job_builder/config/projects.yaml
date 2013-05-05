@@ -856,3 +856,12 @@
 
     jobs:
       - puppet-module-unit
+
+- project:
+    name: python-marconiclient
+    github-org: stackforge
+    tarball-site: tarballs.openstack.org
+    node: quantal
+
+    jobs:
+      - python-jobs
