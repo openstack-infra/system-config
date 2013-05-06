@@ -206,3 +206,21 @@ puppet-openstack:
       - stackforge/puppet-swift
     branches:
       - master
+
+chef-openstack:
+    events:
+      - patchset-created
+      - change-merged
+      - x-vrif-minus-2
+    projects:
+      - stackforge/cookbook-openstack-block-storage
+      - stackforge/cookbook-openstack-image
+      - stackforge/cookbook-openstack-dashboard
+      - stackforge/cookbook-openstack-identity
+      - stackforge/cookbook-openstack-compute
+      - stackforge/cookbook-openstack-common
+      - stackforge/cookbook-openstack-metering
+      - stackforge/cookbook-openstack-network
+      - stackforge/cookbook-openstack-object-storage
+    branches:
+      - master
