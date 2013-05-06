@@ -98,8 +98,8 @@ define reviewday::site(
   }
 
   cron { 'update reviewday':
-    command => "cd /var/lib/reviewday/reviewday && PYTHONPATH=\$PWD python bin/reviewday -o ${httproot}",
-    minute  => '*/15',
+    command => "cd /var/lib/reviewday/reviewday && PYTHONPATH=\$PWD flock -n /var/lib/reviewday/update.lock python bin/reviewday -o ${httproot}",
+    minute  => '*/30',
     user    => 'reviewday',
   }
 
