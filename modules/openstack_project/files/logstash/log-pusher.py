@@ -30,6 +30,18 @@ import yaml
 import zmq
 
 
+def semi_busy_wait(seconds):
+    # time.sleep() may return early. If it does sleep() again and repeat
+    # until at least the number of seconds specified has elapsed.
+    start_time = time.time()
+    while True:
+        time.sleep(seconds)
+        cur_time = time.time()
+        seconds = seconds - (cur_time - start_time)
+        if seconds <= 0.0:
+            return
+
+
 class EventCatcher(threading.Thread):
     def __init__(self, eventqs, zmq_address):
         threading.Thread.__init__(self)
@@ -196,20 +208,9 @@ class LogRetriever(threading.Thread):
                 finally:
                     if raw_buf[-8:].decode('utf-8') == '\n</pre>\n':
                         break
-                    self._semi_busy_wait(1)
+                    semi_busy_wait(1)
 
         return gzipped, raw_buf
-
-    def _semi_busy_wait(self, seconds):
-        # time.sleep() may return early. If it does sleep() again and repeat
-        # until at least the number of seconds specified has elapsed.
-        start_time = time.time()
-        while True:
-            time.sleep(seconds)
-            cur_time = time.time()
-            seconds = seconds - (cur_time - start_time)
-            if seconds <= 0.0:
-                return
 
 
 class StdOutLogProcessor(object):
@@ -248,7 +249,13 @@ class INETLogProcessor(object):
             self.socket.sendall((json.dumps(log) + '\n').encode('utf-8'))
         except:
             logging.exception("Exception sending INET event.")
+            # Logstash seems to take about a minute to start again. Wait 90
+            # seconds before attempting to reconnect. If logstash is not
+            # available after 90 seconds we will throw another exception and
+            # die.
+            semi_busy_wait(90)
             self._connect_socket()
+            self.socket.sendall((json.dumps(log) + '\n').encode('utf-8'))
 
 
 class UDPLogProcessor(INETLogProcessor):
