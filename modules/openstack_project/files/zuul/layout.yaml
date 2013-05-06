@@ -1678,3 +1678,57 @@ projects:
       - gate-python-marconiclient-pep8
       - gate-python-marconiclient-python26
       - gate-python-marconiclient-python27
+
+  - name: stackforge/cookbook-openstack-common
+    check:
+      - gate-noop
+    gate:
+      - gate-noop
+
+  - name: stackforge/cookbook-openstack-compute
+    check:
+      - gate-noop
+    gate:
+      - gate-noop
+
+  - name: stackforge/cookbook-openstack-image
+    check:
+      - gate-noop
+    gate:
+      - gate-noop
+
+  - name: stackforge/cookbook-openstack-identity
+    check:
+      - gate-noop
+    gate:
+      - gate-noop
+
+  - name: stackforge/cookbook-openstack-network
+    check:
+      - gate-noop
+    gate:
+      - gate-noop
+
+  - name: stackforge/cookbook-openstack-object-storage
+    check:
+      - gate-noop
+    gate:
+      - gate-noop
+
+  - name: stackforge/cookbook-openstack-block-storage
+    check:
+      - gate-noop
+    gate:
+      - gate-noop
+
+  - name: stackforge/cookbook-openstack-metering
+    check:
+      - gate-noop
+    gate:
+      - gate-noop
+
+  - name: stackforge/cookbook-openstack-dashboard
+    check:
+      - gate-noop
+    gate:
+      - gate-noop
