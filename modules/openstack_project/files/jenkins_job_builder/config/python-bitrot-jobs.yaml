@@ -122,30 +122,6 @@
 
 
 - job-group:
-    name: python-diablo-bitrot-jobs
-    branch: 'stable/diablo'
-    branch-name: 'stable-diablo'
-    email: openstack-diablo-maint@lists.launchpad.net
-    node: oneiric
-    jobs:
-      - 'periodic-{name}-python26-{branch-name}'
-      - 'periodic-{name}-python27-{branch-name}'
-      - 'periodic-{name}-docs-{branch-name}'
-
-
-- job-group:
-    name: python-essex-bitrot-jobs
-    branch: 'stable/essex'
-    branch-name: 'stable-essex'
-    email: openstack-essex-maint@lists.launchpad.net
-    node: quantal
-    jobs:
-      - 'periodic-{name}-python26-{branch-name}'
-      - 'periodic-{name}-python27-{branch-name}'
-      - 'periodic-{name}-docs-{branch-name}'
-
-
-- job-group:
     name: python-folsom-bitrot-jobs
     branch: 'stable/folsom'
     branch-name: 'stable-folsom'

@@ -263,32 +263,6 @@
           excludes: '**/*.xml,**/null*'
 
 - job:
-    name: openstack-admin-manual-keystone-diablo
-    project-type: maven
-    concurrent: false
-    node: quantal && !jclouds
-
-    triggers:
-      - zuul-post
-
-    maven:
-      maven-name: Maven3
-      root-module:
-        group-id: org.openstack.docs
-        artifact-id: openstack-guide
-      root-pom: doc/src/docbkx/openstack-identity-service-starter/pom.xml
-      goals: 'clean generate-sources'
-
-    publishers:
-      - console-log-post
-      - ftp:
-          site: docs.openstack.org
-          source: 'doc/src/docbkx/openstack-identity-service-starter/target/docbkx/webhelp/trunk/**'
-          target: 'diablo'
-          remove-prefix: 'doc/src/docbkx/openstack-identity-service-starter/target/docbkx/webhelp/trunk/'
-          excludes: '**/*.xml,**/null*'
-
-- job:
     name: openstack-admin-manual-netconn
     project-type: maven
     concurrent: false
@@ -354,32 +328,6 @@
           source: 'doc/src/docbkx/openstack-object-storage-admin/target/docbkx/webhelp/**'
           target: '/'
           remove-prefix: 'doc/src/docbkx/openstack-object-storage-admin/target/docbkx/webhelp/'
-          excludes: '**/*.xml,**/null*'
-
-- job:
-    name: openstack-admin-manuals-diablo
-    project-type: maven
-    concurrent: false
-    node: quantal && !jclouds
-
-    triggers:
-      - zuul-post
-
-    maven:
-      maven-name: Maven3
-      root-module:
-        group-id: org.openstack.docs
-        artifact-id: openstack-guide
-      root-pom: doc/pom.xml
-      goals: 'clean generate-sources'
-
-    publishers:
-      - console-log-post
-      - ftp:
-          site: docs.openstack.org
-          source: 'doc/target/docbkx/webhelp/trunk/**'
-          target: 'diablo'
-          remove-prefix: 'doc/target/docbkx/webhelp/trunk/'
           excludes: '**/*.xml,**/null*'
 
 # in zuul/layout.yaml specified to only run against master branch.
