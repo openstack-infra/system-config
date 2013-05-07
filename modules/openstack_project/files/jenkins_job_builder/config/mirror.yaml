@@ -7,6 +7,7 @@
       - timeout:
           timeout: 45
           fail: true
+      - timestamps
 
     triggers:
       - timed: '4 21 * * *'
@@ -29,6 +30,7 @@
       - timeout:
           timeout: 45
           fail: true
+      - timestamps
 
     triggers:
       - zuul
@@ -50,6 +52,7 @@
       - timeout:
           timeout: 45
           fail: true
+      - timestamps
 
     triggers:
       - timed: '12 21 * * *'
@@ -72,6 +75,7 @@
       - timeout:
           timeout: 45
           fail: true
+      - timestamps
 
     triggers:
       - zuul
