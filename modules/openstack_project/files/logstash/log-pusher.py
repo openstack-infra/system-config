@@ -15,15 +15,18 @@
 # under the License.
 
 import argparse
+import fcntl
 import gzip
 import json
 import logging
-import threading
-import time
+import os
 import queue
 import re
+import resource
 import socket
 import sys
+import threading
+import time
 import urllib.error
 import urllib.request
 import yaml
@@ -324,6 +327,8 @@ class Server(object):
                                              self.default_output_host,
                                              self.default_output_port)
         else:
+            # Note this processor will not work if the process is run as a
+            # daemon. You must use the --foreground option.
             self.processor = StdOutLogProcessor(self.logqueue)
 
     def main(self):
@@ -347,21 +352,78 @@ class Server(object):
 
 
 class DaemonContext(object):
-    def __init__(self):
-        # Set pidfile path.
-        pass
+    def __init__(self, pidfile_path):
+        self.pidfile_path = pidfile_path
+        self.pidfile = None
+        self.pidlocked = False
 
     def __enter__(self):
-        # change umask
-        # chdir
-        # double fork
-        # redirect stdin, stdout, stderr to /dev/null
-        # lock pidfile
-        pass
+        # Perform Sys V daemonization steps as defined by
+        # http://www.freedesktop.org/software/systemd/man/daemon.html
+        # Close all open file descriptors but std*
+        _, max_fds = resource.getrlimit(resource.RLIMIT_NOFILE)
+        if max_fds == resource.RLIM_INFINITY:
+            max_fds = 4096
+        for fd in range(3, max_fds):
+            try:
+                os.close(fd)
+            except OSError:
+                # TODO(clarkb) check e.errno.
+                # fd not open.
+                pass
+
+        # TODO(clarkb) reset all signal handlers to their default
+        # TODO(clarkb) reset signal mask
+        # TODO(clarkb) sanitize environment block
+
+        # Fork to create background process
+        # TODO(clarkb) pass in read end of pipe and have parent wait for
+        # bytes on the pipe before exiting.
+        self._fork_exit_parent()
+        # setsid() to detach from terminal and create independent session.
+        os.setsid()
+        # Fork again to prevent reaquisition of terminal
+        self._fork_exit_parent()
+
+        # Hook std* to /dev/null.
+        devnull = os.open(os.devnull, os.O_RDWR)
+        os.dup2(devnull, 0)
+        os.dup2(devnull, 1)
+        os.dup2(devnull, 2)
+
+        # Set umask to 0
+        os.umask(0)
+        # chdir to root of filesystem.
+        os.chdir(os.sep)
+
+        # Lock pidfile.
+        self.pidfile = open(self.pidfile_path, 'w')
+        try:
+            fcntl.lockf(self.pidfile, fcntl.LOCK_EX | fcntl.LOCK_NB)
+            self.pidlocked = True
+        except IOError:
+            # another instance is running
+            sys.exit(0)
+        # TODO(clarkb) write pid to pidfile
 
     def __exit__(self, exc_type, exc_value, traceback):
         # remove pidfile
-        pass
+        if self.pidlocked:
+            os.unlink(self.pidfile_path)
+        if self.pidfile:
+            self.pidfile.close()
+        # TODO(clarkb) write to then close parent signal pipe if not
+        # already done.
+
+    def _fork_exit_parent(self, read_pipe=None):
+        if os.fork():
+            # Parent
+            if read_pipe:
+                os.fdopen(read_pipe).read()
+            sys.exit()
+        else:
+            # Child
+            return
 
 
 def main():
@@ -373,6 +435,10 @@ def main():
                              "Specifies file to write log to.")
     parser.add_argument("--foreground", action='store_true',
                         help="Run in the foreground.")
+    parser.add_argument("-p", "--pidfile",
+                        default="/var/run/jenkins-log-pusher/"
+                                "jenkins-log-pusher.pid",
+                        help="PID file to lock during daemonization.")
     args = parser.parse_args()
 
     with open(args.config, 'r') as config_stream:
@@ -383,7 +449,7 @@ def main():
         server.setup_logging()
         server.main()
     else:
-        with DaemonContext():
+        with DaemonContext(args.pidfile):
             server.setup_logging()
             server.main()
 
