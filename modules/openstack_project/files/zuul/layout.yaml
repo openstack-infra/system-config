@@ -1218,6 +1218,28 @@ projects:
       - python-monikerclient-tarball:
         - python-monikerclient-pypi-upload
 
+  - name: stackforge/billingstack
+    check:
+      - gate-billingstack-pyflakes
+      - gate-billingstack-pep8
+      - gate-billingstack-python26
+      - gate-billingstack-python27
+    gate:
+      - gate-billingstack-pep8
+      - gate-billingstack-pyflakes
+      - gate-billingstack-python26
+      - gate-billingstack-python27
+    post:
+      - hook-billingstack-rtfd
+      - billingstack-coverage
+      - billingstack-branch-tarball
+    pre-release:
+      - billingstack-tarball
+    release:
+      - billingstack-tarball:
+        - billingstack-pypi-upload
+
+
   - name: stackforge/bufunfa
     check:
       - gate-bufunfa-pep8
