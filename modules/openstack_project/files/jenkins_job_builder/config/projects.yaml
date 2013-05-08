@@ -879,3 +879,12 @@
 
     jobs:
       - python-jobs
+
+- project:
+    name: cookbook-openstack-common
+    github-org: stackforge
+    node: quantal
+
+    jobs:
+      - gate-{name}-chef-lint
+      - gate-{name}-chef-unit

@@ -1668,9 +1668,11 @@ projects:
 
   - name: stackforge/cookbook-openstack-common
     check:
-      - gate-noop
+      - gate-cookbook-openstack-common-chef-lint
+      - gate-cookbook-openstack-common-chef-unit
     gate:
-      - gate-noop
+      - gate-cookbook-openstack-common-chef-lint
+      - gate-cookbook-openstack-common-chef-unit
 
   - name: stackforge/cookbook-openstack-compute
     check:
