@@ -620,6 +620,20 @@
 
 
 - project:
+    name: billingstack
+    github-org: stackforge
+    node: quantal
+    tarball-site: tarballs.openstack.org
+    rtfd-id: 6367
+
+    jobs:
+      - python-jobs
+      - hook-{name}-rtfd
+      - gate-{name}-pyflakes
+      - pypi-jobs
+
+
+- project:
     name: packstack
     github-org: stackforge
     node: quantal
