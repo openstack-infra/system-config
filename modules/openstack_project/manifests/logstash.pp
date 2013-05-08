@@ -94,7 +94,7 @@ class openstack_project::logstash (
     user        => 'root',
     hour        => '5',
     minute      => '0',
-    command     => 'curl -sS -XPOST "http://localhost:9200/logstash-`date -d yesterday +\%Y.\%m.\%d`/_optimize" -d \'max_num_segments=1\'',
+    command     => 'curl -sS -XPOST "http://localhost:9200/logstash-`date -d yesterday +\%Y.\%m.\%d`/_optimize?max_num_segments=2"',
     environment => 'PATH=/usr/bin:/bin:/usr/sbin:/sbin',
   }
 }
