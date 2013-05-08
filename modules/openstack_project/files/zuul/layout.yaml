@@ -886,11 +886,23 @@ projects:
       - gate-pbr-docs
       - gate-pbr-python26
       - gate-pbr-python27
+      - gate-tempest-devstack-vm-smoke
+      - gate-tempest-devstack-vm-full
+      - gate-tempest-devstack-vm-cinder
+      - gate-tempest-devstack-vm-postgres-full
+      - gate-tempest-devstack-vm-quantum
+      - gate-grenade-devstack-vm
     gate:
       - gate-pbr-docs
       - gate-pbr-pep8
       - gate-pbr-python26
       - gate-pbr-python27
+      - gate-tempest-devstack-vm-smoke
+      - gate-tempest-devstack-vm-full
+      - gate-tempest-devstack-vm-cinder
+      - gate-tempest-devstack-vm-postgres-full
+      - gate-tempest-devstack-vm-quantum
+      - gate-grenade-devstack-vm
     post:
       - pbr-branch-tarball
       - pbr-coverage
