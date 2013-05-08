@@ -343,6 +343,7 @@ projects:
       - cinder-branch-tarball
       - cinder-coverage
       - cinder-docs
+      - cinder-upstream-translation-update
     pre-release:
       - cinder-tarball
     release:
