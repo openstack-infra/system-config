@@ -1,0 +1,29 @@
+- job-template:
+    name: 'gate-{name}-chef-unit'
+    node: '{node}'
+
+    triggers:
+      - zuul
+
+    builders:
+      - gerrit-git-prep
+      - chef-cookbook-prep
+      - chef-cookbook-rspec
+
+    publishers:
+      - console-log
+
+- job-template:
+    name: 'gate-{name}-chef-lint'
+    node: '{node}'
+
+    triggers:
+      - zuul
+
+    builders:
+      - gerrit-git-prep
+      - chef-cookbook-prep
+      - chef-cookbook-lint
+
+    publishers:
+      - console-log

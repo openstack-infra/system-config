@@ -680,7 +680,7 @@ Have Zuul Monitor a Gerrit Project
 =====================================
 
 Define the required jenkins jobs for this project using the Jenkins Job
-Builder. Edit openstack-infra/config:modules/openstack_project/files/jenkins_jobs/config/projects.yaml
+Builder. Edit openstack-infra/config:modules/openstack_project/files/jenkins_job_builder/config/projects.yaml
 and add the desired jobs. Most projects will use the python jobs template.
 
 A minimum config::
