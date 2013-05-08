@@ -122,6 +122,7 @@
       - python-grizzly-bitrot-jobs
       - openstack-publish-jobs
       - gate-{name}-pylint
+      - translation-jobs
 
 
 - project:
