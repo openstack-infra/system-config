@@ -11,11 +11,19 @@
           #!/bin/bash -xe
           /usr/local/jenkins/slave_scripts/select-mirror.sh openstack requirements
           virtualenv --clear --distribute .venv
-          # Ignore lines beginning with https?:// just as the mirror script does.
-          sed -e '/https\?:\/\//d' tools/pip-requires > tools/pip-requires.clean
-          sed -e '/https\?:\/\//d' tools/test-requires > tools/test-requires.clean
+          PIP_ARGS=""
+          REQ_FILES="tools/pip-requires tools/test-requires requirements.txt test-requirements.txt"
+          for FILE in $REQ_FILES
+          do
+            if [ -e $FILE ]
+            then
+              # Ignore lines beginning with https?:// just as the mirror script does.
+              sed -e '/https\?:\/\//d' $FILE > $FILE.clean
+              PIP_ARGS="$PIP_ARGS -r $FILE.clean"
+            fi
+          done
           # Run the same basic pip command that the mirror script runs.
-          .venv/bin/pip install -M -U --exists-action=w -r tools/pip-requires.clean -r tools/test-requires.clean
+          .venv/bin/pip install -M -U --exists-action=w $PIP_ARGS
 
     publishers:
       - console-log
