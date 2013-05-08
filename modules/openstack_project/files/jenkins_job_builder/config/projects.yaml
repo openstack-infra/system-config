@@ -865,3 +865,13 @@
 
     jobs:
       - python-jobs
+
+- project:
+    name: cookbook-openstack-common
+    github-org: stackforge
+    node: precise
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - gate-{name}-chef-cookbook-lint
+      - gate-{name}-chef-cookbook-unit
