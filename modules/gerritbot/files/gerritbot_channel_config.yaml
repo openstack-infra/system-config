@@ -224,3 +224,14 @@ chef-openstack:
       - stackforge/cookbook-openstack-object-storage
     branches:
       - master
+
+
+billingstack:
+    events:
+      - patchset-created
+      - change-merged
+      - x-vrif-minus-2
+    projects:
+      - stackforge/billingstack
+    branches:
+      - master
