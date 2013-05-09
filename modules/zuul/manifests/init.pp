@@ -20,6 +20,7 @@
 class zuul (
   $vhost_name = $::fqdn,
   $serveradmin = "webmaster@${::fqdn}",
+  $gearman_server = '127.0.0.1',
   $jenkins_server = '',
   $jenkins_user = '',
   $jenkins_apikey = '',
@@ -30,6 +31,7 @@ class zuul (
   $status_url = "https://${::fqdn}/",
   $git_source_repo = 'https://github.com/openstack-infra/zuul.git',
   $push_change_refs = false,
+  $revision = 'master',
   $statsd_host = ''
 ) {
   include apache
@@ -80,7 +82,7 @@ class zuul (
   vcsrepo { '/opt/zuul':
     ensure   => latest,
     provider => git,
-    revision => 'master',
+    revision => $revision,
     source   => $git_source_repo,
   }
 
