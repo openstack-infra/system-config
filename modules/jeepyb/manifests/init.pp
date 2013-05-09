@@ -37,9 +37,23 @@ class jeepyb (
 
   # A lot of things need yaml, be conservative requiring this package to avoid
   # conflicts with other modules.
-  if ! defined(Package['python-yaml']) {
-    package { 'python-yaml':
-      ensure => present,
+  case $::osfamily {
+    'Debian': {
+      if ! defined(Package['python-yaml']) {
+        package { 'python-yaml':
+          ensure => present,
+        }
+      }
+    }
+    'RedHat': {
+      if ! defined(Package['PyYAML']) {
+        package { 'PyYAML':
+          ensure => present,
+        }
+      }
+    }
+    default: {
+      fail("Unsupported osfamily: ${::osfamily} The 'jeepyb' module only supports osfamily Debian or RedHat.")
     }
   }
 
