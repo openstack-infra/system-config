@@ -21,12 +21,6 @@ class openstack_project::mirror_slave (
   include openstack_project::slave
   include jeepyb
 
-  if ! defined(Package['python-yaml']) {
-    package { 'python-yaml':
-      ensure => present,
-    }
-  }
-
   file { '/home/jenkins/.ssh/id_rsa':
     owner   => 'jenkins',
     group   => 'jenkins',
