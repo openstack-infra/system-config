@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # Copyright 2012 Hewlett-Packard Development Company, L.P.
+# Copyright 2013 OpenStack Foundation
 #
 # Licensed under the Apache License, Version 2.0 (the "License"); you may
 # not use this file except in compliance with the License. You may obtain
@@ -15,11 +16,20 @@
 # under the License.
 
 # Find out if jenkins has attempted to run any sudo commands by checking
-# the auth.log file before and after a test run.
+# the auth.log or secure log files before and after a test run.
 
-PATTERN="sudo.*jenkins.*:.*incorrect password attempts"
-OLDLOGFILE=/var/log/auth.log.1
-LOGFILE=/var/log/auth.log
+case $( facter osfamily ) in
+    Debian)
+	PATTERN="sudo.*jenkins.*:.*incorrect password attempts"
+	OLDLOGFILE=/var/log/auth.log.1
+	LOGFILE=/var/log/auth.log
+	;;
+    RedHat)
+	PATTERN="sudo.*jenkins.*:.*command not allowed"
+	OLDLOGFILE=$( ls /var/log/secure-* | sort | tail -n1 )
+	LOGFILE=/var/log/secure
+	;;
+esac
 
 case "$1" in
     pre)
