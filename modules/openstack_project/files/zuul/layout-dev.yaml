@@ -1,0 +1,765 @@
+includes:
+  - python-file: openstack_functions.py
+
+pipelines:
+  - name: check
+    description: This pipeline is used for silently testing new jobs.
+    manager: IndependentPipelineManager
+    trigger:
+      - event: patchset-created
+      - event: comment-added
+        comment_filter: (?i)^\s*recheck(( (?:bug|lp)[\s#:]*(\d+))|( no bug))\s*$
+
+
+jobs:
+  - name: gate-tempest-devstack-vm-cinder
+    branch: stable/folsom
+  - name: gate-tempest-devstack-vm-smoke
+    branch: stable/folsom
+  - name: gate-tempest-devstack-vm-full
+    branch: ^(?!stable/folsom).*$
+  - name: gate-tempest-devstack-vm-quantum
+    branch: ^(?!stable/folsom).*$
+  - name: gate-tempest-devstack-vm-quantum-full
+    branch: ^(?!stable/(folsom|grizzly)).*$
+    voting: false
+  - name: gate-tempest-devstack-vm-postgres-full
+    branch: ^(?!stable/folsom).*$
+    voting: false
+  - name: gate-grenade-devstack-vm
+    branch: ^(?!stable/folsom).*$
+    voting: false
+  - name: gate-nova-pylint
+    voting: false
+  - name: gate-nova-python26
+    branch: ^(?!stable/folsom).*$
+  - name: gate-oslo-incubator-pyflakes
+    branch: ^(?!stable/folsom).*$
+  - name: dev-zuul-coverage
+    voting: false
+  - name: dev-heat-coverage
+    voting: false
+  - name: dev-python-heatclient-coverage
+    voting: false
+  - name: dev-heat-cfntools-coverage
+    voting: false
+  - name: jenkins-job-builder-compare-xml
+    voting: false
+    failure-message: XML output has changed.
+    success-message: XML output is unchanged.
+  - name: config-compare-xml
+    voting: false
+    failure-message: Jenkins XML output has changed.
+    success-message: Jenkins XML output is unchanged.
+  - name: openstack-docs-site
+    branch: ^master$
+  - name: openstack-ha-guide
+    branch: ^master$
+  - name: gate-openstack-cli-guide
+    success-pattern: http://docs-draft.openstack.org/{job.name}/{pipeline.name}/{build.number}/cli/quick-start
+  - name: ^gate-.*-docs$
+    success-pattern: http://docs-draft.openstack.org/{change.number}/{change.patchset}/{pipeline.name}/{job.name}/{build.number}/doc/build/html/
+  - name: ^gate-.*-requirements$
+    failure-message: Incompatible requirement found; see https://wiki.openstack.org/wiki/Requirements
+    branch: ^(?!stable/(folsom|grizzly)).*$
+    files:
+      - '^tools/.*-requires$'
+      - '^.*requirements.txt$'
+  - name: manuals-upstream-translation-update
+    branch: ^master$
+
+
+projects:
+  - name: openstack-infra/zuul
+    check:
+      - gate-zuul-pep8
+      - gate-zuul-docs
+      - gate-zuul-pyflakes
+      - gate-zuul-python26
+      - gate-zuul-python27
+      - dev-zuul-coverage
+
+  - name: openstack-infra/askbot-theme
+    check:
+      - gate-noop
+
+  - name: openstack-infra/nose-html-output
+    check:
+      - gate-noop
+
+  - name: openstack-infra/gerrit
+    check:
+      - check-gerrit-unittests
+
+  - name: openstack-infra/gerritbot
+    check:
+      - gate-gerritbot-pep8
+      - gate-gerritbot-pyflakes
+
+  - name: openstack-infra/gerritlib
+    check:
+      - gate-gerritlib-pep8
+      - gate-gerritlib-pyflakes
+
+  - name: openstack-infra/jeepyb
+    check:
+      - gate-jeepyb-pep8
+      - gate-jeepyb-pyflakes
+
+  - name: openstack-infra/jenkins-job-builder
+    check:
+      - gate-jenkins-job-builder-docs
+      - gate-jenkins-job-builder-pep8
+      - gate-jenkins-job-builder-pyflakes
+      - jenkins-job-builder-compare-xml
+
+  - name: openstack-infra/lodgeit
+    check:
+      - gate-noop
+
+  - name: openstack-infra/meetbot
+    check:
+      - gate-noop
+
+  - name: openstack-infra/config
+    merge-mode: cherry-pick
+    check:
+      - config-compare-xml
+      - gate-config-layout
+      - gate-config-puppet-lint
+      - gate-config-puppet-syntax
+      - gate-config-pyflakes
+
+  - name: openstack-infra/puppet-apparmor
+    check:
+      - gate-noop
+
+  - name: openstack-infra/puppet-dashboard
+    check:
+      - gate-noop
+
+  - name: openstack-infra/puppet-vcsrepo
+    check:
+      - gate-noop
+
+  - name: openstack-infra/reviewday
+    check:
+      - gate-reviewday-pep8
+      - gate-reviewday-pyflakes
+
+  - name: openstack-infra/statusbot
+    check:
+      - gate-statusbot-pep8
+      - gate-statusbot-pyflakes
+
+  - name: openstack/cinder
+    check:
+      - gate-cinder-requirements
+      - gate-cinder-pep8
+      - gate-cinder-docs
+      - gate-cinder-python26
+      - gate-cinder-python27
+      - gate-tempest-devstack-vm-smoke
+      - gate-tempest-devstack-vm-full
+      - gate-tempest-devstack-vm-cinder
+      - gate-tempest-devstack-vm-postgres-full
+      - gate-tempest-devstack-vm-quantum
+      - gate-grenade-devstack-vm
+
+  - name: openstack/glance
+    check:
+      - gate-glance-requirements
+      - gate-glance-pep8
+      - gate-glance-docs
+      - gate-glance-python26
+      - gate-glance-python27
+      - gate-tempest-devstack-vm-smoke
+      - gate-tempest-devstack-vm-full
+      - gate-tempest-devstack-vm-cinder
+      - gate-tempest-devstack-vm-postgres-full
+      - gate-tempest-devstack-vm-quantum
+      - gate-grenade-devstack-vm
+
+  - name: openstack/horizon
+    check:
+      - gate-horizon-requirements
+      - gate-horizon-pep8
+      - gate-horizon-docs
+      - gate-horizon-python26
+      - gate-horizon-python27
+      - gate-horizon-selenium
+      - gate-tempest-devstack-vm-smoke
+      - gate-tempest-devstack-vm-full
+      - gate-tempest-devstack-vm-cinder
+      - gate-tempest-devstack-vm-postgres-full
+      - gate-tempest-devstack-vm-quantum
+      - gate-grenade-devstack-vm
+
+  - name: openstack/keystone
+    check:
+      - gate-keystone-requirements
+      - gate-keystone-pep8
+      - gate-keystone-docs
+      - gate-keystone-python26
+      - gate-keystone-python27
+      - gate-tempest-devstack-vm-smoke
+      - gate-tempest-devstack-vm-full
+      - gate-tempest-devstack-vm-cinder
+      - gate-tempest-devstack-vm-postgres-full
+      - gate-tempest-devstack-vm-quantum
+      - gate-grenade-devstack-vm
+
+  - name: openstack/nova
+    check:
+      - gate-nova-requirements
+      - gate-nova-pep8
+      - gate-nova-docs
+      - gate-nova-python26
+      - gate-nova-python27
+      - gate-tempest-devstack-vm-smoke
+      - gate-tempest-devstack-vm-full
+      - gate-tempest-devstack-vm-cinder
+      - gate-tempest-devstack-vm-postgres-full
+      - gate-tempest-devstack-vm-quantum
+      - gate-grenade-devstack-vm
+      - gate-nova-pylint
+
+  - name: openstack/oslo-incubator
+    check:
+      - gate-oslo-incubator-requirements
+      - gate-oslo-incubator-pep8
+      - gate-oslo-incubator-docs
+      - gate-oslo-incubator-pyflakes
+      - gate-oslo-incubator-python26
+      - gate-oslo-incubator-python27
+
+  - name: openstack/oslo.config
+    check:
+      - gate-oslo.config-requirements
+      - gate-oslo.config-pep8
+      - gate-oslo.config-docs
+      - gate-oslo.config-python26
+      - gate-oslo.config-python27
+
+  - name: openstack/quantum
+    check:
+      - gate-quantum-requirements
+      - gate-quantum-pep8
+      - gate-quantum-docs
+      - gate-quantum-python26
+      - gate-quantum-python27
+      - gate-tempest-devstack-vm-quantum
+
+  - name: openstack/swift
+    check:
+      - gate-swift-requirements
+      - gate-swift-pep8
+      - gate-swift-docs
+      - gate-swift-python26
+      - gate-swift-python27
+      - gate-tempest-devstack-vm-smoke
+      - gate-tempest-devstack-vm-full
+      - gate-tempest-devstack-vm-cinder
+      - gate-tempest-devstack-vm-quantum
+      - gate-tempest-devstack-vm-postgres-full
+      - gate-grenade-devstack-vm
+
+  - name: openstack/python-ceilometerclient
+    check:
+      - gate-python-ceilometerclient-requirements
+      - gate-python-ceilometerclient-pep8
+      - gate-python-ceilometerclient-docs
+      - gate-python-ceilometerclient-python26
+      - gate-python-ceilometerclient-python27
+
+  - name: openstack/python-cinderclient
+    check:
+      - gate-python-cinderclient-requirements
+      - gate-python-cinderclient-pep8
+      - gate-python-cinderclient-docs
+      - gate-python-cinderclient-python26
+      - gate-python-cinderclient-python27
+      - gate-tempest-devstack-vm-smoke
+      - gate-tempest-devstack-vm-full
+      - gate-tempest-devstack-vm-postgres-full
+      - gate-tempest-devstack-vm-cinder
+      - gate-tempest-devstack-vm-quantum
+      - gate-grenade-devstack-vm
+
+  - name: openstack/python-glanceclient
+    check:
+      - gate-python-glanceclient-requirements
+      - gate-python-glanceclient-pep8
+      - gate-python-glanceclient-docs
+      - gate-python-glanceclient-python26
+      - gate-python-glanceclient-python27
+      - gate-tempest-devstack-vm-smoke
+      - gate-tempest-devstack-vm-full
+      - gate-tempest-devstack-vm-postgres-full
+      - gate-tempest-devstack-vm-cinder
+      - gate-tempest-devstack-vm-quantum
+      - gate-grenade-devstack-vm
+
+  - name: openstack/python-keystoneclient
+    check:
+      - gate-python-keystoneclient-requirements
+      - gate-python-keystoneclient-pep8
+      - gate-python-keystoneclient-docs
+      - gate-python-keystoneclient-python26
+      - gate-python-keystoneclient-python27
+      - gate-tempest-devstack-vm-smoke
+      - gate-tempest-devstack-vm-full
+      - gate-tempest-devstack-vm-postgres-full
+      - gate-tempest-devstack-vm-cinder
+      - gate-tempest-devstack-vm-quantum
+      - gate-grenade-devstack-vm
+
+  - name: openstack/python-novaclient
+    check:
+      - gate-python-novaclient-requirements
+      - gate-python-novaclient-pep8
+      - gate-python-novaclient-docs
+      - gate-python-novaclient-python26
+      - gate-python-novaclient-python27
+      - gate-tempest-devstack-vm-smoke
+      - gate-tempest-devstack-vm-full
+      - gate-tempest-devstack-vm-postgres-full
+      - gate-tempest-devstack-vm-cinder
+      - gate-tempest-devstack-vm-quantum
+      - gate-grenade-devstack-vm
+
+  - name: openstack/python-openstackclient
+    check:
+      - gate-python-openstackclient-requirements
+      - gate-python-openstackclient-pep8
+      - gate-python-openstackclient-docs
+      - gate-python-openstackclient-python26
+      - gate-python-openstackclient-python27
+
+  - name: openstack/python-quantumclient
+    check:
+      - gate-python-quantumclient-requirements
+      - gate-python-quantumclient-pep8
+      - gate-python-quantumclient-docs
+      - gate-python-quantumclient-python26
+      - gate-python-quantumclient-python27
+      - gate-tempest-devstack-vm-smoke
+      - gate-tempest-devstack-vm-full
+      - gate-tempest-devstack-vm-postgres-full
+      - gate-tempest-devstack-vm-cinder
+      - gate-tempest-devstack-vm-quantum
+      - gate-grenade-devstack-vm
+
+  - name: openstack/python-swiftclient
+    check:
+      - gate-python-swiftclient-requirements
+      - gate-python-swiftclient-pep8
+      - gate-python-swiftclient-docs
+      - gate-python-swiftclient-python26
+      - gate-python-swiftclient-python27
+
+  - name: openstack/requirements
+    check:
+      - gate-requirements-install
+
+  - name: openstack-dev/grenade
+    check:
+      - gate-noop
+      - gate-grenade-devstack-vm
+
+  - name: openstack-dev/hacking
+    check:
+      - gate-hacking-pep8
+      - gate-hacking-docs
+      - gate-hacking-python26
+      - gate-hacking-python27
+
+  - name: openstack-dev/pbr
+    check:
+      - gate-pbr-pep8
+      - gate-pbr-docs
+      - gate-pbr-python26
+      - gate-pbr-python27
+
+  - name: openstack-dev/devstack
+    check:
+      - gate-tempest-devstack-vm-smoke
+      - gate-tempest-devstack-vm-full
+      - gate-tempest-devstack-vm-cinder
+      - gate-tempest-devstack-vm-postgres-full
+      - gate-tempest-devstack-vm-quantum
+      - gate-grenade-devstack-vm
+
+  - name: openstack-infra/devstack-gate
+    check:
+      - gate-tempest-devstack-vm-smoke
+      - gate-tempest-devstack-vm-full
+      - gate-tempest-devstack-vm-cinder
+      - gate-tempest-devstack-vm-postgres-full
+      - gate-tempest-devstack-vm-quantum
+      - gate-grenade-devstack-vm
+
+  - name: z/tempest
+
+  - name: openstack/tempest
+    check:
+      - gate-tempest-requirements
+      - gate-tempest-pep8
+      - gate-tempest-devstack-vm-smoke
+      - gate-tempest-devstack-vm-full
+      - gate-tempest-devstack-vm-postgres-full
+      - gate-tempest-devstack-vm-cinder
+      - gate-tempest-devstack-vm-quantum
+      - gate-tempest-devstack-vm-quantum-full
+
+  - name: openstack/ceilometer
+    check:
+      - gate-ceilometer-requirements
+      - gate-ceilometer-pep8
+      - gate-ceilometer-docs
+      - gate-ceilometer-python26
+      - gate-ceilometer-python27
+
+  - name: stackforge/MRaaS
+    check:
+      - gate-noop
+
+  - name: stackforge/libra
+    check:
+      - gate-libra-pep8
+      - gate-libra-python27
+
+  - name: stackforge/python-libraclient
+    check:
+      - gate-python-libraclient-pep8
+      - gate-python-libraclient-python27
+
+  - name: stackforge/healthnmon
+    check:
+      - gate-healthnmon-pep8
+      - gate-healthnmon-python27
+
+  - name: openstack/heat
+    check:
+      - gate-heat-requirements
+      - gate-heat-pep8
+      - gate-heat-python26
+      - gate-heat-python27
+      - dev-heat-coverage
+
+  - name: openstack/python-heatclient
+    check:
+      - gate-python-heatclient-requirements
+      - gate-python-heatclient-pep8
+      - gate-python-heatclient-python26
+      - gate-python-heatclient-python27
+      - dev-python-heatclient-coverage
+
+  - name: openstack/heat-cfntools
+    check:
+      - gate-heat-cfntools-requirements
+      - gate-heat-cfntools-pep8
+      - gate-heat-cfntools-python26
+      - gate-heat-cfntools-python27
+      - dev-heat-cfntools-coverage
+
+  - name: openstack/heat-templates
+    check:
+      - gate-noop
+
+  - name: stackforge/reddwarf
+    check:
+      - gate-reddwarf-pep8
+      - gate-reddwarf-python26
+      - gate-reddwarf-python27
+
+  - name: stackforge/reddwarf-integration
+    check:
+      - gate-noop
+
+  - name: stackforge/python-reddwarfclient
+    check:
+      - gate-python-reddwarfclient-pep8
+      - gate-python-reddwarfclient-python26
+      - gate-python-reddwarfclient-python27
+
+  - name: stackforge/marconi
+    check:
+      - gate-marconi-pep8
+      - gate-marconi-python26
+      - gate-marconi-python27
+
+  - name: stackforge/moniker
+    check:
+      - gate-moniker-pyflakes
+      - gate-moniker-pep8
+      - gate-moniker-python26
+      - gate-moniker-python27
+
+  - name: stackforge/python-monikerclient
+    check:
+      - gate-python-monikerclient-pyflakes
+      - gate-python-monikerclient-pep8
+      - gate-python-monikerclient-python26
+      - gate-python-monikerclient-python27
+
+  - name: stackforge/bufunfa
+    check:
+      - gate-bufunfa-pep8
+      - gate-bufunfa-python26
+      - gate-bufunfa-python27
+
+  - name: openstack/openstack-manuals
+    check:
+      - gate-openstack-cli-guide
+      - gate-openstack-operations-guide
+      - gate-openstack-manuals-validate
+
+  - name: openstack/api-site
+    check:
+      - gate-noop
+
+  - name: openstack/compute-api
+    check:
+      - gate-noop
+
+  - name: openstack/identity-api
+    check:
+      - gate-noop
+
+  - name: openstack/image-api
+    check:
+      - gate-noop
+
+  - name: openstack/netconn-api
+    check:
+      - gate-noop
+
+  - name: openstack/object-api
+    check:
+      - gate-noop
+
+  - name: openstack/volume-api
+    check:
+      - gate-noop
+
+  - name: openstack/openstack-chef
+    check:
+      - gate-noop
+
+  - name: openstack-dev/openstack-nose
+    check:
+      - gate-noop
+
+  - name: openstack-dev/openstack-qa
+    check:
+      - gate-noop
+
+  - name: openstack-infra/gitdm
+    check:
+      - gate-noop
+
+  - name: openstack-infra/git-review
+    check:
+      - gate-git-review-pep8
+
+  - name: openstack/openstack-planet
+    check:
+      - gate-openstack-planet-unittest
+
+  - name: openstack-dev/sandbox
+    check:
+      - gate-noop
+
+  - name: stackforge/diskimage-builder
+    check:
+      - gate-diskimage-builder-pep8
+      - gate-diskimage-builder-python26
+      - gate-diskimage-builder-python27
+
+  - name: stackforge/os-config-applier
+    check:
+      - gate-os-config-applier-pep8
+      - gate-os-config-applier-python26
+      - gate-os-config-applier-python27
+
+  - name: stackforge/os-refresh-config
+    check:
+      - gate-os-refresh-config-pep8
+      - gate-os-refresh-config-python26
+      - gate-os-refresh-config-python27
+
+  - name: stackforge/tripleo-image-elements
+    check:
+      - gate-tripleo-image-elements-pep8
+      - gate-tripleo-image-elements-python26
+      - gate-tripleo-image-elements-python27
+
+  - name: stackforge/climate
+    check:
+      - gate-climate-pep8
+      - gate-climate-python26
+      - gate-climate-python27
+
+  - name: stackforge/kwapi
+    check:
+      - gate-kwapi-pep8
+
+  - name: openstack-infra/gear
+    check:
+      - gate-gear-pep8
+      - gate-gear-docs
+      - gate-gear-python26
+      - gate-gear-python27
+
+  - name: openstack-infra/gearman-plugin
+    check:
+      - gate-gearman-plugin-build
+
+  - name: openstack-infra/zmq-event-publisher
+    check:
+      - gate-zmq-event-publisher-build
+
+  - name: stackforge/database-api
+    check:
+      - gate-noop
+
+  - name: stackforge/packstack
+    check:
+      - gate-packstack-pep8
+      - gate-packstack-python26
+      - gate-packstack-python27
+
+  - name: stackforge/anvil
+    check:
+      - gate-noop
+
+  - name: stackforge/savanna
+    check:
+      - gate-savanna-pep8
+      - gate-savanna-python26
+      - gate-savanna-python27
+
+  - name: stackforge/python-savannaclient
+    check:
+      - gate-python-savannaclient-pep8
+      - gate-python-savannaclient-python26
+      - gate-python-savannaclient-python27
+
+  - name: stackforge/puppet-cinder
+    check:
+      - gate-puppet-cinder-puppet-unit-2.6
+      - gate-puppet-cinder-puppet-unit-2.7
+      - gate-puppet-cinder-puppet-unit-3.0
+      - gate-puppet-cinder-puppet-unit-3.1
+
+  - name: stackforge/puppet-glance
+    check:
+      - gate-puppet-glance-puppet-unit-2.6
+      - gate-puppet-glance-puppet-unit-2.7
+      - gate-puppet-glance-puppet-unit-3.0
+      - gate-puppet-glance-puppet-unit-3.1
+
+  - name: stackforge/puppet-horizon
+    check:
+      - gate-puppet-horizon-puppet-unit-2.6
+      - gate-puppet-horizon-puppet-unit-2.7
+      - gate-puppet-horizon-puppet-unit-3.0
+      - gate-puppet-horizon-puppet-unit-3.1
+
+  - name: stackforge/puppet-keystone
+    check:
+      - gate-puppet-keystone-puppet-unit-2.6
+      - gate-puppet-keystone-puppet-unit-2.7
+      - gate-puppet-keystone-puppet-unit-3.0
+      - gate-puppet-keystone-puppet-unit-3.1
+
+  - name: stackforge/puppet-nova
+    check:
+      - gate-puppet-nova-puppet-unit-2.6
+      - gate-puppet-nova-puppet-unit-2.7
+      - gate-puppet-nova-puppet-unit-3.0
+      - gate-puppet-nova-puppet-unit-3.1
+
+  - name: stackforge/puppet-quantum
+    check:
+      - gate-puppet-quantum-puppet-unit-2.6
+      - gate-puppet-quantum-puppet-unit-2.7
+      - gate-puppet-quantum-puppet-unit-3.0
+      - gate-puppet-quantum-puppet-unit-3.1
+
+  - name: stackforge/puppet-openstack
+    check:
+      - gate-puppet-openstack-puppet-unit-2.6
+      - gate-puppet-openstack-puppet-unit-2.7
+      - gate-puppet-openstack-puppet-unit-3.0
+      - gate-puppet-openstack-puppet-unit-3.1
+
+  - name: stackforge/puppet-swift
+    check:
+      - gate-puppet-swift-puppet-unit-2.6
+      - gate-puppet-swift-puppet-unit-2.7
+      - gate-puppet-swift-puppet-unit-3.0
+      - gate-puppet-swift-puppet-unit-3.1
+
+  - name: stackforge/puppet-openstack_dev_env
+    check:
+      - gate-noop
+
+  - name: stackforge/opencafe
+    check:
+      - gate-noop
+
+  - name: stackforge/cloudcafe
+    check:
+      - gate-noop
+
+  - name: stackforge/cloudroast
+    check:
+      - gate-noop
+
+  - name: stackforge/openvz-nova-driver
+    check:
+      - gate-noop
+
+  - name: stackforge/python-marconiclient
+    check:
+      - gate-python-marconiclient-pep8
+      - gate-python-marconiclient-python26
+      - gate-python-marconiclient-python27
+
+  - name: stackforge/cookbook-openstack-common
+    check:
+      - gate-noop
+
+  - name: stackforge/cookbook-openstack-compute
+    check:
+      - gate-noop
+
+  - name: stackforge/cookbook-openstack-image
+    check:
+      - gate-noop
+
+  - name: stackforge/cookbook-openstack-identity
+    check:
+      - gate-noop
+
+  - name: stackforge/cookbook-openstack-network
+    check:
+      - gate-noop
+
+  - name: stackforge/cookbook-openstack-object-storage
+    check:
+      - gate-noop
+
+  - name: stackforge/cookbook-openstack-block-storage
+    check:
+      - gate-noop
+
+  - name: stackforge/cookbook-openstack-metering
+    check:
+      - gate-noop
+
+  - name: stackforge/cookbook-openstack-dashboard
+    check:
+      - gate-noop
