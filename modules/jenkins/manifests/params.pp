@@ -79,6 +79,8 @@ class jenkins::params {
       $python_zmq_package = 'python-zmq'
       $python3_dev_package = 'python3-all-dev'
       $rubygems_package = 'rubygems'
+      $ruby1_9_1_package = 'ruby1.9.1',
+      $ruby1_9_1_dev_package = 'ruby1.9.1-dev',
       $sqlite_package = 'sqlite3'
       $unzip_package = 'unzip'
       $xslt_package = 'xsltproc'
