@@ -50,6 +50,8 @@ class jenkins::slave(
     $::jenkins::params::python_lxml_package, # for validating openstack manuals
     $::jenkins::params::python_zmq_package, # zeromq unittests (not pip installable)
     $::jenkins::params::rubygems_package,
+    $::jenkins::params::ruby_1.9.1_package,
+    $::jenkins::params::ruby_1.9.1_dev_package,
     $::jenkins::params::sqlite_package,
     $::jenkins::params::unzip_package,
     $::jenkins::params::xslt_package, # for building openstack docs
