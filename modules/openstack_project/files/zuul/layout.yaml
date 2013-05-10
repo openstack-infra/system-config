@@ -83,6 +83,9 @@ jobs:
     voting: false
   - name: gate-nova-pylint
     voting: false
+  - name: gate-cinder-pylint
+    branch: ^(?!stable/(folsom|grizzly)).*$
+    voting: false
   - name: gate-nova-python26
     branch: ^(?!stable/folsom).*$
   - name: gate-oslo-incubator-pyflakes
@@ -319,6 +322,7 @@ projects:
       - gate-cinder-docs
       - gate-cinder-python26
       - gate-cinder-python27
+      - gate-cinder-pylint
       - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-cinder
