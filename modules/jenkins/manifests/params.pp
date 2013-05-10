@@ -23,6 +23,7 @@ class jenkins::params {
       # for keystone ldap auth integration
       $libsasl_dev = 'cyrus-sasl-devel'
       $mysql_dev_package = 'mysql-devel'
+      $postgres_dev_package = 'postgresql-devel'
       $nspr_dev_package = 'nspr-devel'
       $sqlite_dev_package = 'sqlite-devel'
       $libxml2_package = 'libxml2'
@@ -65,6 +66,7 @@ class jenkins::params {
       # for keystone ldap auth integration
       $libsasl_dev = 'libsasl2-dev'
       $mysql_dev_package = 'libmysqlclient-dev'
+      $postgres_dev_package = 'libpq-dev'
       $nspr_dev_package = 'libnspr4-dev'
       $sqlite_dev_package = 'libsqlite3-dev'
       $libxml2_package = 'libxml2-utils'

@@ -23,6 +23,8 @@ class jenkins::slave(
     $::jenkins::params::jdk_package, # jdk for building java jobs
     $::jenkins::params::ccache_package,
     $::jenkins::params::python_netaddr_package, # Needed for devstack address_in_net()
+    $::jenkins::params::mysql_dev_package, # Needed for mysql python clients
+    $::jenkins::params::postgres_dev_package, # Needed for postgres python clients
   ]
 
   # Packages that most jenkins slaves (eg, unit test runners) need
@@ -37,7 +39,6 @@ class jenkins::slave(
     $::jenkins::params::libcurl_dev_package,
     $::jenkins::params::ldap_dev_package,
     $::jenkins::params::libsasl_dev, # for keystone ldap auth integration
-    $::jenkins::params::mysql_dev_package,
     $::jenkins::params::nspr_dev_package, # for spidermonkey, used by ceilometer
     $::jenkins::params::sqlite_dev_package,
     $::jenkins::params::libxml2_package,
@@ -227,10 +228,6 @@ class jenkins::slave(
         'listen_addresses'       => '127.0.0.1',
       },
       require     => Class['postgresql::params'],
-    }
-
-    class { 'postgresql::devel':
-      require => Class['postgresql::params'],
     }
 
     # Create DB user and explicitly make it non superuser
