@@ -90,6 +90,19 @@ class jenkins::slave(
         ensure => present,
       }
 
+      package { $::jenkins::params::ruby1_9_1_package:
+        ensure => present,
+      }
+
+      package { $::jenkins::params::ruby1_9_1_dev_package:
+        ensure => present,
+      }
+
+      exec { 'install bundler for ruby1.9.1':
+        command => '/usr/bin/gem1.9.1 install bundler --no-ri --no-rdoc --format-executable --bindir /usr/local/bin',
+        creates => '/usr/local/bin/bundle1.9.1'
+      }
+
     }
     default: {
       fail("Unsupported osfamily: ${::osfamily} The 'jenkins' module only supports osfamily Debian or RedHat (slaves only).")
