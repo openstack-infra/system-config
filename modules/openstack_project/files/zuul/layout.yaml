@@ -1205,13 +1205,11 @@ projects:
 
   - name: stackforge/billingstack
     check:
-      - gate-billingstack-pyflakes
       - gate-billingstack-pep8
       - gate-billingstack-python26
       - gate-billingstack-python27
     gate:
       - gate-billingstack-pep8
-      - gate-billingstack-pyflakes
       - gate-billingstack-python26
       - gate-billingstack-python27
     post:
