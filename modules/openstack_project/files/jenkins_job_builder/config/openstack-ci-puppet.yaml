@@ -1,6 +1,6 @@
 - job:
     name: config-compare-xml
-    node: quantal
+    node: precise
 
     triggers:
       - zuul
@@ -15,7 +15,7 @@
 
 - job:
     name: gate-config-layout
-    node: quantal
+    node: precise
 
     triggers:
       - zuul
@@ -31,7 +31,7 @@
 # This is a non-standard docs job because it uses SCP instead of FTP
 - job:
     name: ci-docs
-    node: quantal
+    node: precise
 
     triggers:
       - zuul-post

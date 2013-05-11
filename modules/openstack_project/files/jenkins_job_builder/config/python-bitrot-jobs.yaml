@@ -92,7 +92,7 @@
     branch: 'stable/folsom'
     branch-name: 'stable-folsom'
     email: openstack-stable-maint@lists.openstack.org
-    node: quantal
+    node: precise
     jobs:
       - 'periodic-{name}-python26-{branch-name}'
       - 'periodic-{name}-python27-{branch-name}'
@@ -104,7 +104,7 @@
     branch: 'stable/grizzly'
     branch-name: 'stable-grizzly'
     email: openstack-stable-maint@lists.openstack.org
-    node: quantal
+    node: precise
     jobs:
       - 'periodic-{name}-python26-{branch-name}'
       - 'periodic-{name}-python27-{branch-name}'
