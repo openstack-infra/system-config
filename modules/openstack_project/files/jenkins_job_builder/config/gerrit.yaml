@@ -1,7 +1,7 @@
 - job:
     name: check-gerrit-unittests
     project-type: maven
-    node: quantal && !jclouds
+    node: precise && !jclouds
 
     wrappers:
       - timeout:
@@ -36,7 +36,7 @@
 - job:
     name: gate-gerrit-unittests
     project-type: maven
-    node: quantal && !jclouds
+    node: precise && !jclouds
 
     wrappers:
       - timeout:
@@ -66,7 +66,7 @@
 - job:
     name: gerrit-package
     project-type: maven
-    node: quantal && !jclouds
+    node: precise && !jclouds
 
     wrappers:
       - timeout:

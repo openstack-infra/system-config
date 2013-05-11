@@ -4,7 +4,7 @@
     name: openstack-api-programming
     project-type: maven
     concurrent: true
-    node: quantal && !jclouds
+    node: precise && !jclouds
 
     wrappers:
       - timeout:
@@ -46,7 +46,7 @@
     name: openstack-api-quick-start
     project-type: maven
     concurrent: false
-    node: quantal && !jclouds
+    node: precise && !jclouds
 
     triggers:
       - zuul-post
@@ -77,7 +77,7 @@
     name: openstack-api-ref
     project-type: maven
     concurrent: false
-    node: quantal && !jclouds
+    node: precise && !jclouds
 
     triggers:
       - zuul-post
@@ -109,7 +109,7 @@
 - job:
     name: openstack-api-site
     concurrent: false
-    node: quantal
+    node: precise
 
     triggers:
       - zuul-post
@@ -130,7 +130,7 @@
     name: image-api-v20
     project-type: maven
     concurrent: true
-    node: quantal && !jclouds
+    node: precise && !jclouds
 
     wrappers:
       - timeout:
@@ -173,7 +173,7 @@
     name: network-api-v10
     project-type: maven
     concurrent: false
-    node: quantal && !jclouds
+    node: precise && !jclouds
 
     triggers:
       - zuul-post
@@ -201,7 +201,7 @@
 - job:
     name: netconn-api-v20
     project-type: maven
-    node: quantal && !jclouds
+    node: precise && !jclouds
 
     triggers:
       - zuul-post
@@ -230,7 +230,7 @@
     name: openstack-object-api-doc
     project-type: maven
     concurrent: false
-    node: quantal && !jclouds
+    node: precise && !jclouds
 
     triggers:
       - zuul-post
@@ -259,7 +259,7 @@
     name: openstack-compute-api-doc
     project-type: maven
     concurrent: false
-    node: quantal && !jclouds
+    node: precise && !jclouds
 
     triggers:
       - zuul-post
@@ -287,7 +287,7 @@
 - job:
     name: openstack-compute-api-v20-wadl
     concurrent: false
-    node: quantal
+    node: precise
 
     triggers:
       - zuul-post
@@ -309,7 +309,7 @@
     name: openstack-block-api-doc
     project-type: maven
     concurrent: false
-    node: quantal && !jclouds
+    node: precise && !jclouds
 
     triggers:
       - zuul-post
@@ -339,7 +339,7 @@
     name: identity-api-v20
     project-type: maven
     concurrent: false
-    node: quantal && !jclouds
+    node: precise && !jclouds
 
     triggers:
       - zuul-post
@@ -369,7 +369,7 @@
     name: image-api-v11
     project-type: maven
     concurrent: false
-    node: quantal && !jclouds
+    node: precise && !jclouds
 
     triggers:
       - zuul-post

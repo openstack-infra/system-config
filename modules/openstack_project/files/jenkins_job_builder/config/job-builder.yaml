@@ -1,7 +1,7 @@
 # This is a non-standard docs job because it uses SCP instead of FTP
 - job:
     name: jenkins-job-builder-docs
-    node: quantal
+    node: precise
 
     triggers:
       - zuul-post
@@ -23,7 +23,7 @@
 
 - job:
     name: jenkins-job-builder-compare-xml
-    node: quantal
+    node: precise
 
     triggers:
       - zuul
