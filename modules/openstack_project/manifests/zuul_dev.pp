@@ -1,4 +1,4 @@
-# == Class: openstack_project::zuul
+# == Class: openstack_project::zuul_dev
 #
 class openstack_project::zuul_dev(
   $vhost_name = $::fqdn,
