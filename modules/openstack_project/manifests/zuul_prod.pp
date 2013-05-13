@@ -1,6 +1,6 @@
-# == Class: openstack_project::zuul
+# == Class: openstack_project::zuul_prod
 #
-class openstack_project::zuul(
+class openstack_project::zuul_prod(
   $vhost_name = $::fqdn,
   $jenkins_host = '',
   $jenkins_url = '',

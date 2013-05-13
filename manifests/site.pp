@@ -218,7 +218,7 @@ node 'static.openstack.org' {
 }
 
 node 'zuul.openstack.org' {
-  class { 'openstack_project::zuul':
+  class { 'openstack_project::zuul_prod':
     jenkins_host         => 'jenkins.openstack.org',
     jenkins_url          => 'https://jenkins.openstack.org',
     jenkins_user         => hiera('jenkins_api_user'),
