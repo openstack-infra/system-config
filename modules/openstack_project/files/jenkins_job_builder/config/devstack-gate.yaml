@@ -1,18 +1,12 @@
 - job:
     name: gate-tempest-devstack-vm-smoke
-    node: devstack-precise
+    node: devstack-precise && !(rackspace-dfw || rackspace-ord || rackspace)
 
     wrappers:
       - timeout:
           timeout: 120
           fail: true
       - timestamps
-
-    parameters:
-      - label:
-          name: NODE_LABEL
-          description: Label of node to use for this build
-          default: devstack-precise
 
     triggers:
       - zuul
@@ -36,19 +30,13 @@
 
 - job:
     name: gate-tempest-devstack-vm-full
-    node: devstack-precise
+    node: devstack-precise && !(rackspace-dfw || rackspace-ord || rackspace)
 
     wrappers:
       - timeout:
           timeout: 180
           fail: true
       - timestamps
-
-    parameters:
-      - label:
-          name: NODE_LABEL
-          description: Label of node to use for this build
-          default: devstack-precise
 
     triggers:
       - zuul
@@ -73,19 +61,13 @@
 
 - job:
     name: gate-tempest-devstack-vm-cinder
-    node: devstack-precise
+    node: devstack-precise && !(rackspace-dfw || rackspace-ord || rackspace)
 
     wrappers:
       - timeout:
           timeout: 90
           fail: true
       - timestamps
-
-    parameters:
-      - label:
-          name: NODE_LABEL
-          description: Label of node to use for this build
-          default: devstack-precise
 
     triggers:
       - zuul
@@ -110,19 +92,13 @@
 
 - job:
     name: gate-tempest-devstack-vm-quantum
-    node: devstack-precise
+    node: devstack-precise && !(rackspace-dfw || rackspace-ord || rackspace)
 
     wrappers:
       - timeout:
           timeout: 90
           fail: true
       - timestamps
-
-    parameters:
-      - label:
-          name: NODE_LABEL
-          description: Label of node to use for this build
-          default: devstack-precise
 
     triggers:
       - zuul
@@ -147,19 +123,13 @@
 
 - job:
     name: gate-tempest-devstack-vm-quantum-full
-    node: devstack-precise
+    node: devstack-precise && !(rackspace-dfw || rackspace-ord || rackspace)
 
     wrappers:
       - timeout:
           timeout: 180
           fail: true
       - timestamps
-
-    parameters:
-      - label:
-          name: NODE_LABEL
-          description: Label of node to use for this build
-          default: devstack-precise
 
     triggers:
       - zuul
@@ -420,19 +390,13 @@
 
 - job:
     name: gate-tempest-devstack-vm-postgres
-    node: devstack-precise
+    node: devstack-precise && !(rackspace-dfw || rackspace-ord || rackspace)
 
     wrappers:
       - timeout:
           timeout: 120
           fail: true
       - timestamps
-
-    parameters:
-      - label:
-          name: NODE_LABEL
-          description: Label of node to use for this build
-          default: devstack-precise
 
     triggers:
       - zuul
@@ -457,19 +421,13 @@
 
 - job:
     name: gate-tempest-devstack-vm-postgres-full
-    node: devstack-precise
+    node: devstack-precise && !(rackspace-dfw || rackspace-ord || rackspace)
 
     wrappers:
       - timeout:
           timeout: 180
           fail: true
       - timestamps
-
-    parameters:
-      - label:
-          name: NODE_LABEL
-          description: Label of node to use for this build
-          default: devstack-precise
 
     triggers:
       - zuul
@@ -495,19 +453,13 @@
 
 - job:
     name: gate-grenade-devstack-vm
-    node: devstack-precise
+    node: devstack-precise && !(rackspace-dfw || rackspace-ord || rackspace)
 
     wrappers:
       - timeout:
           timeout: 180
           fail: true
       - timestamps
-
-    parameters:
-      - label:
-          name: NODE_LABEL
-          description: Label of node to use for this build
-          default: devstack-precise
 
     triggers:
       - zuul
