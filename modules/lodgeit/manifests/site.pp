@@ -6,7 +6,7 @@ define lodgeit::site(
   $vhost_name="paste.${name}.org",
   $image='') {
 
-  include remove_nginx
+  include apache
 
   apache::vhost::proxy { $vhost_name:
     port    => 80,
@@ -18,7 +18,7 @@ define lodgeit::site(
     ensure  => present,
     content => template('lodgeit/upstart.erb'),
     replace => true,
-    require => Package['nginx'],
+    require => Package['apache2'],
     notify  => Service["${name}-paste"],
   }
 
@@ -77,6 +77,6 @@ define lodgeit::site(
   service { "${name}-paste":
     ensure   => running,
     provider => upstart,
-    require  => [Service['drizzle', 'nginx'], Exec["create_database_${name}"]],
+    require  => [Service['drizzle', 'apache2'], Exec["create_database_${name}"]],
   }
 }
