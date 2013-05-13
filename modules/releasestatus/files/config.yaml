@@ -1,0 +1,26 @@
+# Name of the series
+series: havana
+
+# Final release date
+releasedate: 2013-10-17
+
+# Short milestone codes, with number of weeks leading to them
+# The last one should be the release date
+milestones:
+ - [6, h1]
+ - [6, h2]
+ - [6, h3]
+ - [5, Oct 17]
+
+# Set of projects to consider in the report
+products:
+ - nova
+ - glance
+ - swift
+ - keystone
+ - horizon
+ - quantum
+ - cinder
+ - oslo
+ - ceilometer
+ - heat
