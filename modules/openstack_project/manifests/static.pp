@@ -264,4 +264,14 @@ class openstack_project::static (
     reviewday_rsa_pubkey_contents => $reviewday_rsa_pubkey_contents,
     reviewday_rsa_key_contents    => $reviewday_rsa_key_contents,
   }
+
+  ###########################################################
+  # Status - releasestatus
+
+  include releasestatus
+
+  releasestatus::site { 'releasestatus':
+    configfile => 'integrated.yaml',
+    httproot   => '/srv/static/release.new',
+  }
 }
