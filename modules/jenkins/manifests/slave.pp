@@ -18,48 +18,13 @@ class jenkins::slave(
     }
   }
 
-  # Packages that all jenkins slaves need
-  $common_packages = [
-    $::jenkins::params::jdk_package, # jdk for building java jobs
-    $::jenkins::params::ccache_package,
-    $::jenkins::params::python_netaddr_package, # Needed for devstack address_in_net()
-  ]
-
-  # Packages that most jenkins slaves (eg, unit test runners) need
-  $standard_packages = [
-    $::jenkins::params::asciidoc_package, # for building gerrit/building openstack docs
-    $::jenkins::params::curl_package,
-    $::jenkins::params::docbook_xml_package, # for building openstack docs
-    $::jenkins::params::docbook5_xml_package, # for building openstack docs
-    $::jenkins::params::docbook5_xsl_package, # for building openstack docs
-    $::jenkins::params::firefox_package, # for selenium tests
-    $::jenkins::params::mod_wsgi_package,
-    $::jenkins::params::libcurl_dev_package,
-    $::jenkins::params::ldap_dev_package,
-    $::jenkins::params::libsasl_dev, # for keystone ldap auth integration
-    $::jenkins::params::mysql_dev_package,
-    $::jenkins::params::nspr_dev_package, # for spidermonkey, used by ceilometer
-    $::jenkins::params::sqlite_dev_package,
-    $::jenkins::params::libxml2_package,
-    $::jenkins::params::libxml2_dev_package, # for xmllint, need for wadl
-    $::jenkins::params::libxslt_dev_package,
-    $::jenkins::params::pandoc_package, #for docs, markdown->docbook, bug 924507
-    $::jenkins::params::pkgconfig_package, # for spidermonkey, used by ceilometer
-    $::jenkins::params::pyflakes_package,
-    $::jenkins::params::python_libvirt_package,
-    $::jenkins::params::python_lxml_package, # for validating openstack manuals
-    $::jenkins::params::python_zmq_package, # zeromq unittests (not pip installable)
-    $::jenkins::params::rubygems_package,
-    $::jenkins::params::sqlite_package,
-    $::jenkins::params::unzip_package,
-    $::jenkins::params::xslt_package, # for building openstack docs
-    $::jenkins::params::xvfb_package, # for selenium tests
-  ]
-
   if ($bare == false) {
-    $packages = [$common_packages, $standard_packages]
+    $packages = [
+      $::jenkins::params::common_packages,
+      $::jenkins::params::slave_packages
+    ]
   } else {
-    $packages = $common_packages
+    $packages = $::jenkins::params::common_packages
   }
 
   package { $packages:
@@ -76,31 +41,6 @@ class jenkins::slave(
 
     }
     'Debian': {
-
-      # install build-essential package group
-      package { 'build-essential':
-        ensure => present,
-      }
-
-      package { $::jenkins::params::maven_package:
-        ensure => present,
-      }
-
-      package { $::jenkins::params::python3_dev_package:
-        ensure => present,
-      }
-
-      package { $::jenkins::params::ruby1_9_1_package:
-        ensure => present,
-      }
-
-      package { $::jenkins::params::ruby1_9_1_dev_package:
-        ensure => present,
-      }
-
-      package { $::jenkins::params::ruby_bundler_package:
-        ensure => present,
-      }
 
     }
     default: {

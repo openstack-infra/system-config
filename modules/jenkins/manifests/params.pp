@@ -5,87 +5,89 @@
 class jenkins::params {
   case $::osfamily {
     'RedHat': {
-      #yum groupinstall "Development Tools"
-      # common packages
-      $jdk_package = 'java-1.7.0-openjdk'
-      $ccache_package = 'ccache'
-      $python_netaddr_package = 'python-netaddr'
-      # packages needed by slaves
-      $asciidoc_package = 'asciidoc'
-      $curl_package = 'curl'
-      $docbook_xml_package = 'docbook-style-xsl'
-      $docbook5_xml_package = 'docbook5-schemas'
-      $docbook5_xsl_package = 'docbook5-style-xsl'
-      $firefox_package = 'firefox'
-      $mod_wsgi_package = 'mod_wsgi'
-      $libcurl_dev_package = 'libcurl-devel'
-      $ldap_dev_package = 'openldap-devel'
-      # for keystone ldap auth integration
-      $libsasl_dev = 'cyrus-sasl-devel'
-      $mysql_dev_package = 'mysql-devel'
-      $nspr_dev_package = 'nspr-devel'
-      $sqlite_dev_package = 'sqlite-devel'
-      $libxml2_package = 'libxml2'
-      $libxml2_dev_package = 'libxml2-devel'
-      $libxslt_dev_package = 'libxslt-devel'
-      # FIXME: No Maven packages on RHEL
-      #$maven_package = 'maven'
-      $pandoc_package = 'pandoc'
-      $pkgconfig_package = 'pkgconfig'
-      $pyflakes_package = 'pyflakes'
-      $python_libvirt_package = 'libvirt-python'
-      $python_lxml_package = 'python-lxml'
-      $python_zmq_package = 'python-zmq'
-      # FIXME: No Python3 packages on RHEL
-      #$python3_dev_package = 'python3-devel'
-      $rubygems_package = 'rubygems'
-      $sqlite_package = 'sqlite'
-      $unzip_package = 'unzip'
-      $xslt_package = 'libxslt'
-      $xvfb_package = 'xorg-x11-server-Xvfb'
+      $common_packages = [
+        'java-1.7.0-openjdk',
+        'ccache',
+        'python-netaddr'
+      ]
+      $slave_packages = [
+        'asciidoc', # for building gerrit/building openstack docs
+        'curl',
+        'docbook-style-xsl', # for building openstack docs
+        'docbook5-schemas', # for building openstack docs
+        'docbook5-style-xsl', # for building openstack docs
+        'firefox', # for selenium tests
+        'mod_wsgi',
+        'libcurl-devel',
+        'openldap-devel', # for keystone ldap auth integration
+        'cyrus-sasl-devel',
+        'mysql-devel',
+        'nspr-devel', # for spidermonkey, used by ceilometer
+        'sqlite-devel',
+        'libxml2',
+        'libxml2-devel', # for xmllint, need for wadl
+        'libxslt-devel',
+        # FIXME: No Maven packages on RHEL
+        #$maven_package = 'maven'
+        'pandoc', # for docs, markdown->docbook, bug 924507
+        'pkgconfig', # for spidermonkey, used by ceilometer
+        'pyflakes',
+        'libvirt-python',
+        'python-lxml', # for validating openstack manuals
+        'python-zmq', # zeromq unittests (not pip installable)
+        # FIXME: No Python3 packages on RHEL
+        #$python3_dev_package = 'python3-devel'
+        'rubygems',
+        'sqlite',
+        'unzip',
+        'libxslt', # for building openstack docs
+        'xorg-x11-server-Xvfb' # for selenium tests
+      ]
       $cgroups_package = 'libcgroup'
       $cgconfig_require = Package['cgroups']
       $cgred_require = Package['cgroups']
     }
     'Debian': {
-      # common packages
-      $jdk_package = 'default-jdk'
-      $ccache_package = 'ccache'
-      $python_netaddr_package = 'python-netaddr'
-      # packages needed by slaves
-      $asciidoc_package = 'asciidoc'
-      $curl_package = 'curl'
-      $docbook_xml_package = 'docbook-xml'
-      $docbook5_xml_package = 'docbook5-xml'
-      $docbook5_xsl_package = 'docbook-xsl'
-      $firefox_package = 'firefox'
-      $mod_wsgi_package = 'libapache2-mod-wsgi'
-      $libcurl_dev_package = 'libcurl4-gnutls-dev'
-      $ldap_dev_package = 'libldap2-dev'
-      # for keystone ldap auth integration
-      $libsasl_dev = 'libsasl2-dev'
-      $mysql_dev_package = 'libmysqlclient-dev'
-      $nspr_dev_package = 'libnspr4-dev'
-      $sqlite_dev_package = 'libsqlite3-dev'
-      $libxml2_package = 'libxml2-utils'
-      $libxml2_dev_package = 'libxml2-dev'
-      $libxslt_dev_package = 'libxslt1-dev'
-      $maven_package = 'maven2'
-      $pandoc_package = 'pandoc'
-      $pkgconfig_package = 'pkg-config'
-      $pyflakes_package = 'pyflakes'
-      $python_libvirt_package = 'python-libvirt'
-      $python_lxml_package = 'python-lxml'
-      $python_zmq_package = 'python-zmq'
-      $python3_dev_package = 'python3-all-dev'
-      $rubygems_package = 'rubygems'
-      $ruby1_9_1_package = 'ruby1.9.1'
-      $ruby1_9_1_dev_package = 'ruby1.9.1-dev'
-      $ruby_bundler_package = 'ruby-bundler'
-      $sqlite_package = 'sqlite3'
-      $unzip_package = 'unzip'
-      $xslt_package = 'xsltproc'
-      $xvfb_package = 'xvfb'
+      $common_packages = [
+        'default-jdk',
+        'ccache',
+        'python-netaddr'
+      ]
+      $slave_packages = [
+        'asciidoc', # for building gerrit/building openstack docs
+        'build-essential',
+        'curl',
+        'docbook-xml', # for building openstack docs
+        'docbook5-xml', # for building openstack docs
+        'docbook-xsl', # for building openstack docs
+        'firefox', # for selenium tests
+        'libapache2-mod-wsgi',
+        'libcurl4-gnutls-dev',
+        'libldap2-dev',
+        'libsasl2-dev', # for keystone ldap auth integration
+        'libmysqlclient-dev',
+        'libnspr4-dev', # for spidermonkey, used by ceilometer
+        'libsqlite3-dev',
+        'libxml2-utils',
+        'libxml2-dev', # for xmllint, need for wadl
+        'libxslt1-dev',
+        'maven2',
+        'pandoc', # for docs, markdown->docbook, bug 924507
+        'pkg-config', # for spidermonkey, used by ceilometer
+        'pyflakes',
+        'python3-all-dev',
+        'python-libvirt',
+        'python-lxml', # for validating openstack manuals
+        'python-zmq', # zeromq unittests (not pip installable)
+        'rubygems',
+        'ruby1.9.1',
+        'ruby1.9.1-dev',
+        'ruby-bundler',
+        'sqlite3',
+        'unzip',
+        'xsltproc', # for building openstack docs
+        'xvfb' # for selenium tests
+      ]
       $cgroups_package = 'cgroup-bin'
       $cgconfig_require = [
         Package['cgroups'],
