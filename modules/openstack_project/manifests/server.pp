@@ -18,8 +18,8 @@ class openstack_project::server (
     sysadmin => $sysadmins,
   }
 
-  # Custom rsyslog config to disable /dev/xconsole noise on Debuntu servers
   if $::osfamily == 'Debian' {
+    # Custom rsyslog config to disable /dev/xconsole noise on Debuntu servers
     file { '/etc/rsyslog.d/50-default.conf':
       ensure  => present,
       owner   => 'root',
@@ -33,6 +33,12 @@ class openstack_project::server (
       ensure      => running,
       hasrestart  => true,
       subscribe   => File['/etc/rsyslog.d/50-default.conf'],
+    }
+
+    # Ubuntu installs their whoopsie package by default, but it eats through
+    # memory and we don't need it on servers
+    package { 'whoopsie':
+      ensure => absent,
     }
   }
 }
