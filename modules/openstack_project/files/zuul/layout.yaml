@@ -1241,12 +1241,12 @@ projects:
 
   - name: openstack/openstack-manuals
     check:
-      - gate-openstack-cli-guide
-      - gate-openstack-operations-guide
+      - gate-openstack-manuals-cli-guide
+      - gate-openstack-manuals-operations-guide
       - gate-openstack-manuals-validate
     gate:
-      - gate-openstack-cli-guide
-      - gate-openstack-operations-guide
+      - gate-openstack-manuals-cli-guide
+      - gate-openstack-manuals-operations-guide
       - gate-openstack-manuals-validate
     post:
       - openstack-admin-manual-compute
@@ -1281,8 +1281,8 @@ projects:
     gate:
       - gate-noop
     post:
-      - openstack-compute-api-doc
-      - openstack-compute-api-v20-wadl
+      - compute-api-v2.0
+      - compute-api-v2.0-wadl
 
   - name: openstack/identity-api
     check:
@@ -1290,7 +1290,7 @@ projects:
     gate:
       - gate-noop
     post:
-      - identity-api-v20
+      - identity-api-v2.0
 
   - name: openstack/image-api
     check:
@@ -1298,8 +1298,8 @@ projects:
     gate:
       - gate-noop
     post:
-      - image-api-v11
-      - image-api-v20
+      - image-api-v1.1
+      - image-api-v2.0
 
   - name: openstack/netconn-api
     check:
@@ -1307,8 +1307,8 @@ projects:
     gate:
       - gate-noop
     post:
-      - network-api-v10
-      - netconn-api-v20
+      - network-api-v1.0
+      - netconn-api-v2.0
 
   - name: openstack/object-api
     check:
@@ -1316,7 +1316,7 @@ projects:
     gate:
       - gate-noop
     post:
-      - openstack-object-api-doc
+      - object-api-v1.0
 
   - name: openstack/volume-api
     check:
@@ -1324,7 +1324,7 @@ projects:
     gate:
       - gate-noop
     post:
-      - openstack-block-api-doc
+      - block-api-v2.0
 
   - name: openstack/openstack-chef
     check:

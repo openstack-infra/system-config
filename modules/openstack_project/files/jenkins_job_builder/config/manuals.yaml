@@ -1,5 +1,5 @@
 - job:
-    name: gate-openstack-cli-guide
+    name: gate-openstack-manuals-cli-guide
     project-type: maven
     node: precise && !jclouds
 
@@ -28,7 +28,7 @@
               copy-after-failure: true
 
 - job:
-    name: gate-openstack-operations-guide
+    name: gate-openstack-manuals-operations-guide
     project-type: maven
     node: precise && !jclouds
 

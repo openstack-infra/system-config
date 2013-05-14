@@ -127,7 +127,7 @@
       - console-log-post
 
 - job:
-    name: image-api-v20
+    name: image-api-v2.0
     project-type: maven
     concurrent: true
     node: precise && !jclouds
@@ -170,7 +170,7 @@
 
 # this replaces the old openstack-netconn-api-doc job
 - job:
-    name: network-api-v10
+    name: network-api-v1.0
     project-type: maven
     concurrent: false
     node: precise && !jclouds
@@ -199,7 +199,7 @@
           excludes: '**/*.xml,**/null*'
 
 - job:
-    name: netconn-api-v20
+    name: netconn-api-v2.0
     project-type: maven
     node: precise && !jclouds
 
@@ -227,7 +227,7 @@
           excludes: '**/*.xml,**/null*'
 
 - job:
-    name: openstack-object-api-doc
+    name: object-api-v1.0
     project-type: maven
     concurrent: false
     node: precise && !jclouds
@@ -256,7 +256,7 @@
           excludes: '**/*.xml,**/null*'
 
 - job:
-    name: openstack-compute-api-doc
+    name: compute-api-v2.0
     project-type: maven
     concurrent: false
     node: precise && !jclouds
@@ -285,7 +285,7 @@
           excludes: '**/*.xml,**/null*'
 
 - job:
-    name: openstack-compute-api-v20-wadl
+    name: compute-api-v2.0-wadl
     concurrent: false
     node: precise
 
@@ -306,7 +306,7 @@
       - console-log-post
 
 - job:
-    name: openstack-block-api-doc
+    name: block-api-v2.0
     project-type: maven
     concurrent: false
     node: precise && !jclouds
@@ -336,7 +336,7 @@
 
 # this replaces the old openstack-identity-api-doc job
 - job:
-    name: identity-api-v20
+    name: identity-api-v2.0
     project-type: maven
     concurrent: false
     node: precise && !jclouds
@@ -366,7 +366,7 @@
 
 # this replaces the old openstack-image-api-doc job
 - job:
-    name: image-api-v11
+    name: image-api-v1.1
     project-type: maven
     concurrent: false
     node: precise && !jclouds
