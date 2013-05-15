@@ -72,24 +72,4 @@ class openstack_project::zuul_prod(
     source  => 'puppet:///modules/openstack_project/zuul/scoreboard.html',
     require => File['/var/lib/recheckwatch'],
   }
-
-  file { '/var/lib/zuul/www':
-    ensure  => absent,
-    recurse => true,
-    force   => true,
-  }
-
-  package { 'libjs-jquery':
-    ensure => absent,
-  }
-
-  file { '/opt/jquery-visibility':
-    ensure => absent,
-    force  => true,
-  }
-
-  file { '/opt/jquery-graphite':
-    ensure => absent,
-    force  => true,
-  }
 }
