@@ -90,6 +90,19 @@
       - pypi-jobs
 
 - project:
+    name: savanna-dashboard
+    github-org: stackforge
+    node: precise
+    rtfd-id: 7335
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - python-jobs
+      - gate-{name}-pyflakes
+      - hook-{name}-rtfd
+      - pypi-jobs
+
+- project:
     name: kwapi
     github-org: stackforge
     node: precise
