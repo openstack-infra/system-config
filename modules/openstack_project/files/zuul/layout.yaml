@@ -1551,6 +1551,26 @@ projects:
          - python-savannaclient-pypi-upload
        - hook-python-savannaclient-rtfd
 
+  - name: stackforge/savanna-dashboard
+    check:
+      - gate-savanna-dashboard-pep8
+      - gate-savanna-dashboard-python26
+      - gate-savanna-dashboard-python27
+    gate:
+      - gate-savanna-dashboard-pep8
+      - gate-savanna-dashboard-python26
+      - gate-savanna-dashboard-python27
+    post:
+      - savanna-dashboard-branch-tarball
+      - hook-savanna-dashboard-rtfd
+    pre-release:
+      - savanna-dashboard-tarball
+      - hook-savanna-dashboard-rtfd
+    release:
+      - savanna-dashboard-tarball:
+        - savanna-dashboard-pypi-upload
+      - hook-savanna-dashboard-rtfd
+
   - name: stackforge/puppet-ceilometer
     check:
       - gate-puppet-ceilometer-puppet-unit-2.6
@@ -1562,7 +1582,6 @@ projects:
       - gate-puppet-ceilometer-puppet-unit-2.7
       - gate-puppet-ceilometer-puppet-unit-3.0
       - gate-puppet-ceilometer-puppet-unit-3.1
-
 
   - name: stackforge/puppet-cinder
     check:
