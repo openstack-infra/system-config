@@ -6,6 +6,7 @@ class openstack_project::jenkins (
   $ssl_cert_file_contents = '',
   $ssl_key_file_contents = '',
   $ssl_chain_file_contents = '',
+  $jenkins_ssh_private_key = '',
   $sysadmins = []
 ) {
   $iptables_rule = '-m state --state NEW -m tcp -p tcp --dport 8888 -s logstash.openstack.org -j ACCEPT'
@@ -27,6 +28,8 @@ class openstack_project::jenkins (
     ssl_cert_file_contents  => $ssl_cert_file_contents,
     ssl_key_file_contents   => $ssl_key_file_contents,
     ssl_chain_file_contents => $ssl_chain_file_contents,
+    jenkins_ssh_private_key => $jenkins_ssh_private_key,
+    jenkins_ssh_public_key  => $openstack_project::jenkins_dev_ssh_key,
   }
 
   if $manage_jenkins_jobs == true {
