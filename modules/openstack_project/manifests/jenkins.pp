@@ -6,8 +6,11 @@ class openstack_project::jenkins (
   $ssl_cert_file_contents = '',
   $ssl_key_file_contents = '',
   $ssl_chain_file_contents = '',
+  $jenkins_ssh_private_key = '',
   $sysadmins = []
 ) {
+  include openstack_project
+
   $iptables_rule = '-m state --state NEW -m tcp -p tcp --dport 8888 -s logstash.openstack.org -j ACCEPT'
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [80, 443],
@@ -27,6 +30,8 @@ class openstack_project::jenkins (
     ssl_cert_file_contents  => $ssl_cert_file_contents,
     ssl_key_file_contents   => $ssl_key_file_contents,
     ssl_chain_file_contents => $ssl_chain_file_contents,
+    jenkins_ssh_private_key => $jenkins_ssh_private_key,
+    jenkins_ssh_public_key  => $openstack_project::jenkins_ssh_key,
   }
 
   if $manage_jenkins_jobs == true {
@@ -49,6 +54,9 @@ class openstack_project::jenkins (
 
     file { '/etc/default/jenkins':
       ensure => present,
+      owner  => 'root',
+      group  => 'root',
+      mode   => '0644',
       source => 'puppet:///modules/openstack_project/jenkins/jenkins.default',
     }
   }
