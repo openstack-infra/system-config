@@ -1,6 +1,6 @@
 <VirtualHost <%= scope.lookupvar("::zuul::vhost_name") %>:80>
   ServerAdmin <%= scope.lookupvar("::zuul::serveradmin") %>
-  DocumentRoot /var/www
+  DocumentRoot /var/lib/zuul/www
 
   ErrorLog ${APACHE_LOG_DIR}/<%= scope.lookupvar("::zuul::vhost_name") %>-error.log
 
@@ -9,8 +9,6 @@
   CustomLog ${APACHE_LOG_DIR}/<%= scope.lookupvar("::zuul::vhost_name") %>-access.log combined
 
   RewriteEngine on
-  RewriteRule ^/$ http://status.openstack.org/zuul/ [R]
-  RewriteRule ^/zuul/status$ http://status.openstack.org/zuul/ [R]
   RewriteRule ^/status.json$ http://127.0.0.1:8001/status.json [P]
 
   Alias /rechecks.html /var/www/recheckwatch/rechecks.html

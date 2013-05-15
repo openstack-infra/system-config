@@ -131,8 +131,6 @@ class zuul (
 
   file { '/var/lib/zuul':
     ensure  => directory,
-    owner   => 'zuul',
-    require => User['zuul'],
   }
 
   file { '/var/lib/zuul/git':
@@ -155,6 +153,48 @@ class zuul (
     mode    => '0400',
     require => File['/var/lib/zuul/ssh'],
     content => $zuul_ssh_private_key,
+  }
+
+  file { '/var/lib/zuul/www':
+    ensure  => directory,
+    require => File['/var/lib/zuul'],
+  }
+
+  package { 'libjs-jquery':
+    ensure => present,
+  }
+
+  file { '/var/lib/zuul/www/jquery.min.js':
+    ensure  => link,
+    target  => '/usr/share/javascript/jquery/jquery.min.js',
+    require => [File['/var/lib/zuul/www'],
+                Package['libjs-jquery']],
+  }
+
+  vcsrepo { '/opt/jquery-visibility':
+    ensure   => latest,
+    provider => git,
+    revision => 'master',
+    source   => 'https://github.com/mathiasbynens/jquery-visibility.git',
+  }
+
+  file { '/var/lib/zuul/www/jquery-visibility.min.js':
+    ensure  => link,
+    target  => '/opt/jquery-visibility/jquery-visibility.min.js',
+    require => [File['/var/lib/zuul/www'],
+                Vcsrepo['/opt/jquery-visibility']],
+  }
+
+  file { '/var/lib/zuul/www/index.html':
+    ensure  => link,
+    target  => '/opt/zuul/etc/status/public_html/index.html',
+    require => File['/var/lib/zuul/www'],
+  }
+
+  file { '/var/lib/zuul/www/app.js':
+    ensure  => link,
+    target  => '/opt/zuul/etc/status/public_html/app.js',
+    require => File['/var/lib/zuul/www'],
   }
 
   file { '/etc/init.d/zuul':
