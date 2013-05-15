@@ -935,6 +935,51 @@
       - gate-{name}-chef-unit
 
 - project:
+    name: cookbook-openstack-compute
+    github-org: stackforge
+    node: precise
+
+    jobs:
+      - gate-{name}-chef-lint
+      - gate-{name}-chef-unit
+
+- project:
+    name: cookbook-openstack-block-storage
+    github-org: stackforge
+    node: precise
+
+    jobs:
+      - gate-{name}-chef-lint
+      - gate-{name}-chef-unit
+
+- project:
+    name: cookbook-openstack-dashboard
+    github-org: stackforge
+    node: precise
+
+    jobs:
+      - gate-{name}-chef-lint
+      - gate-{name}-chef-unit
+
+- project:
+    name: cookbook-openstack-image
+    github-org: stackforge
+    node: precise
+
+    jobs:
+      - gate-{name}-chef-lint
+      - gate-{name}-chef-unit
+
+- project:
+    name: cookbook-openstack-identity
+    github-org: stackforge
+    node: precise
+
+    jobs:
+      - gate-{name}-chef-lint
+      - gate-{name}-chef-unit
+
+- project:
     name: ironic
     github-org: openstack
     node: precise

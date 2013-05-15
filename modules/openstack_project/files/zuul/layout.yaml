@@ -1781,6 +1781,14 @@ projects:
       - gate-python-marconiclient-python26
       - gate-python-marconiclient-python27
 
+  - name: stackforge/cookbook-openstack-block-storage
+    check:
+      - gate-cookbook-openstack-block-storage-chef-lint
+      - gate-cookbook-openstack-block-storage-chef-unit
+    gate:
+      - gate-cookbook-openstack-block-storage-chef-lint
+      - gate-cookbook-openstack-block-storage-chef-unit
+
   - name: stackforge/cookbook-openstack-common
     check:
       - gate-cookbook-openstack-common-chef-lint
@@ -1791,17 +1799,37 @@ projects:
 
   - name: stackforge/cookbook-openstack-compute
     check:
-      - gate-noop
+      - gate-cookbook-openstack-compute-chef-lint
+      - gate-cookbook-openstack-compute-chef-unit
     gate:
-      - gate-noop
+      - gate-cookbook-openstack-compute-chef-lint
+      - gate-cookbook-openstack-compute-chef-unit
+
+  - name: stackforge/cookbook-openstack-dashboard
+    check:
+      - gate-cookbook-openstack-dashboard-chef-lint
+      - gate-cookbook-openstack-dashboard-chef-unit
+    gate:
+      - gate-cookbook-openstack-dashboard-chef-lint
+      - gate-cookbook-openstack-dashboard-chef-unit
+
+  - name: stackforge/cookbook-openstack-identity
+    check:
+      - gate-cookbook-openstack-identity-chef-lint
+      - gate-cookbook-openstack-identity-chef-unit
+    gate:
+      - gate-cookbook-openstack-identity-chef-lint
+      - gate-cookbook-openstack-identity-chef-unit
 
   - name: stackforge/cookbook-openstack-image
     check:
-      - gate-noop
+      - gate-cookbook-openstack-image-chef-lint
+      - gate-cookbook-openstack-image-chef-unit
     gate:
-      - gate-noop
+      - gate-cookbook-openstack-image-chef-lint
+      - gate-cookbook-openstack-image-chef-unit
 
-  - name: stackforge/cookbook-openstack-identity
+  - name: stackforge/cookbook-openstack-metering
     check:
       - gate-noop
     gate:
@@ -1814,24 +1842,6 @@ projects:
       - gate-noop
 
   - name: stackforge/cookbook-openstack-object-storage
-    check:
-      - gate-noop
-    gate:
-      - gate-noop
-
-  - name: stackforge/cookbook-openstack-block-storage
-    check:
-      - gate-noop
-    gate:
-      - gate-noop
-
-  - name: stackforge/cookbook-openstack-metering
-    check:
-      - gate-noop
-    gate:
-      - gate-noop
-
-  - name: stackforge/cookbook-openstack-dashboard
     check:
       - gate-noop
     gate:
