@@ -70,6 +70,7 @@ node 'review-dev.openstack.org' {
 node 'jenkins.openstack.org' {
   class { 'openstack_project::jenkins':
     jenkins_jobs_password   => hiera('jenkins_jobs_password'),
+    jenkins_ssh_private_key => hiera('jenkins_ssh_private_key_contents'),
     ssl_cert_file_contents  => hiera('jenkins_ssl_cert_file_contents'),
     ssl_key_file_contents   => hiera('jenkins_ssl_key_file_contents'),
     ssl_chain_file_contents => hiera('jenkins_ssl_chain_file_contents'),
@@ -79,7 +80,8 @@ node 'jenkins.openstack.org' {
 
 node 'jenkins-dev.openstack.org' {
   class { 'openstack_project::jenkins_dev':
-    sysadmins => hiera('sysadmins'),
+    jenkins_ssh_private_key => hiera('jenkins_dev_ssh_private_key_contents'),
+    sysadmins               => hiera('sysadmins'),
   }
 }
 
@@ -256,6 +258,11 @@ node /^.*\.template\.openstack\.org$/ {
   include openstack_project::slave_template
 }
 
+# A bare machine, but with a jenkins user
+node /^.*dev-.*\.template\.openstack\.org$/ {
+  include openstack_project::dev_slave_template
+}
+
 # A backup machine.  Don't run cron or puppet agent on it.
 node /^ci-backup-.*\.openstack\.org$/ {
   include openstack_project::backup_server
@@ -299,113 +306,43 @@ node 'pypi.slave.openstack.org' {
   }
 }
 
-node /^quantal.*\.slave\.openstack\.org$/ {
-  include openstack_project::puppet_cron
-  class { 'openstack_project::slave':
-    certname  => 'quantal.slave.openstack.org',
-    sysadmins => hiera('sysadmins'),
-  }
-  file { '/home/jenkins/.config/glance':
-    ensure  => absent,
-    force   => true,
-    recurse => true,
-  }
-  include jenkins::cgroups
-  include ulimit
-  ulimit::conf { 'limit_jenkins_procs':
-    limit_domain => 'jenkins',
-    limit_type   => 'hard',
-    limit_item   => 'nproc',
-    limit_value  => '256'
-  }
-}
-
-node /^precise.*\.slave\.openstack\.org$/ {
+node /^precise-?\d+.*\.slave\.openstack\.org$/ {
+  include openstack_project
   include openstack_project::puppet_cron
   class { 'openstack_project::slave':
     certname  => 'precise.slave.openstack.org',
+    ssh_key   => $openstack_project::jenkins_ssh_key,
     sysadmins => hiera('sysadmins'),
-  }
-  file { '/home/jenkins/.config/glance':
-    ensure  => absent,
-    force   => true,
-    recurse => true,
-  }
-  include jenkins::cgroups
-  include ulimit
-  ulimit::conf { 'limit_jenkins_procs':
-    limit_domain => 'jenkins',
-    limit_type   => 'hard',
-    limit_item   => 'nproc',
-    limit_value  => '256'
   }
 }
 
-node /^oneiric.*\.slave\.openstack\.org$/ {
+node /^precise-dev\d+.*\.slave\.openstack\.org$/ {
+  include openstack_project
   include openstack_project::puppet_cron
   class { 'openstack_project::slave':
-    certname  => 'oneiric.slave.openstack.org',
+    ssh_key   => $openstack_project::jenkins_dev_ssh_key,
     sysadmins => hiera('sysadmins'),
-  }
-  file { '/home/jenkins/.config/glance':
-    ensure  => absent,
-    force   => true,
-    recurse => true,
-  }
-  include jenkins::cgroups
-  include ulimit
-  ulimit::conf { 'limit_jenkins_procs':
-    limit_domain => 'jenkins',
-    limit_type   => 'hard',
-    limit_item   => 'nproc',
-    limit_value  => '256'
   }
 }
 
-
-node /^centos6.*\.slave\.openstack\.org$/ {
+node /^centos6-?\d+\.slave\.openstack\.org$/ {
+  include openstack_project
   include openstack_project::puppet_cron
   class { 'openstack_project::slave':
     certname  => 'centos6.slave.openstack.org',
+    ssh_key   => $openstack_project::jenkins_ssh_key,
     sysadmins => hiera('sysadmins'),
-  }
-  file { '/home/jenkins/.config/glance':
-    ensure  => absent,
-    force   => true,
-    recurse => true,
-  }
-  include jenkins::cgroups
-  include ulimit
-  ulimit::conf { 'limit_jenkins_procs':
-    limit_domain => 'jenkins',
-    limit_type   => 'hard',
-    limit_item   => 'nproc',
-    limit_value  => '256'
   }
 }
 
-
-node /^rhel6.*\.slave\.openstack\.org$/ {
+node /^centos6-dev\d+\.slave\.openstack\.org$/ {
+  include openstack_project
   include openstack_project::puppet_cron
   class { 'openstack_project::slave':
-    certname  => 'rhel6.slave.openstack.org',
+    ssh_key   => $openstack_project::jenkins_dev_ssh_key,
     sysadmins => hiera('sysadmins'),
   }
-  file { '/home/jenkins/.config/glance':
-    ensure  => absent,
-    force   => true,
-    recurse => true,
-  }
-  include jenkins::cgroups
-  include ulimit
-  ulimit::conf { 'limit_jenkins_procs':
-    limit_domain => 'jenkins',
-    limit_type   => 'hard',
-    limit_item   => 'nproc',
-    limit_value  => '256'
-  }
 }
-
 
 node /^.*\.jclouds\.openstack\.org$/ {
   class { 'openstack_project::bare_slave':
