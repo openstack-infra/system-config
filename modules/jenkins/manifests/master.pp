@@ -10,6 +10,8 @@ class jenkins::master(
   $ssl_cert_file_contents = '', # If left empty puppet will not create file.
   $ssl_key_file_contents = '', # If left empty puppet will not create file.
   $ssl_chain_file_contents = '', # If left empty puppet will not create file.
+  $jenkins_ssh_private_key = '',
+  $jenkins_ssh_public_key = '',
 ) {
   include pip
   include apt
@@ -89,40 +91,9 @@ class jenkins::master(
     ensure => present,
   }
 
-  # devstack-gate
-  if ! defined(Package['python-jenkins']) {
-    package { 'python-jenkins':
-      ensure => present,
-    }
-  }
-
   package { 'jenkins':
     ensure  => present,
     require => Apt::Source['jenkins'],
-  }
-
-  package { 'apache-libcloud':
-    ensure   => present,
-    provider => pip,
-    require  => Class[pip],
-  }
-
-  package { 'git-review':
-    ensure   => '1.18',
-    provider => pip,
-    require  => Class[pip],
-  }
-
-  package { 'tox':
-    ensure   => latest,  # okay to use latest for pip
-    provider => pip,
-    require  => Class[pip],
-  }
-
-  package { 'statsd':
-    ensure   => latest,  # okay to use latest for pip
-    provider => pip,
-    require  => Class[pip],
   }
 
   exec { 'update apt cache':
@@ -137,6 +108,32 @@ class jenkins::master(
     owner   => 'jenkins',
     group   => 'adm',
     require => Package['jenkins'],
+  }
+
+  file { '/var/lib/jenkins/.ssh/':
+    ensure  => directory,
+    owner   => 'jenkins',
+    group   => 'nogroup',
+    mode    => '0700',
+    require => File['/var/lib/jenkins'],
+  }
+
+  file { '/var/lib/jenkins/.ssh/id_rsa':
+    owner   => 'jenkins',
+    group   => 'nogroup',
+    mode    => '0600',
+    content => $jenkins_ssh_private_key,
+    replace => true,
+    require => File['/var/lib/jenkins/.ssh/'],
+  }
+
+  file { '/var/lib/jenkins/.ssh/id_rsa.pub':
+    owner   => 'jenkins',
+    group   => 'nogroup',
+    mode    => '0644',
+    content => $jenkins_ssh_public_key,
+    replace => true,
+    require => File['/var/lib/jenkins/.ssh/'],
   }
 
   file { '/var/lib/jenkins/plugins':
@@ -156,24 +153,32 @@ class jenkins::master(
 
   file { '/var/lib/jenkins/plugins/simple-theme-plugin/openstack.css':
     ensure  => present,
+    owner   => 'jenkins',
+    group   => 'nogroup',
     source  => 'puppet:///modules/jenkins/openstack.css',
     require => File['/var/lib/jenkins/plugins/simple-theme-plugin'],
   }
 
   file { '/var/lib/jenkins/plugins/simple-theme-plugin/openstack.js':
     ensure  => present,
+    owner   => 'jenkins',
+    group   => 'nogroup',
     content => template('jenkins/openstack.js.erb'),
     require => File['/var/lib/jenkins/plugins/simple-theme-plugin'],
   }
 
   file { '/var/lib/jenkins/plugins/simple-theme-plugin/openstack-page-bkg.jpg':
     ensure  => present,
+    owner   => 'jenkins',
+    group   => 'nogroup',
     source  => 'puppet:///modules/jenkins/openstack-page-bkg.jpg',
     require => File['/var/lib/jenkins/plugins/simple-theme-plugin'],
   }
 
   file { '/var/lib/jenkins/plugins/simple-theme-plugin/title.png':
     ensure  => present,
+    owner   => 'jenkins',
+    group   => 'nogroup',
     source  => "puppet:///modules/jenkins/${logo}",
     require => File['/var/lib/jenkins/plugins/simple-theme-plugin'],
   }

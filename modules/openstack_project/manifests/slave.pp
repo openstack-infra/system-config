@@ -3,6 +3,7 @@
 class openstack_project::slave (
   $bare = false,
   $certname = $::fqdn,
+  $ssh_key = '',
   $sysadmins = []
 ) {
   include openstack_project
@@ -15,9 +16,17 @@ class openstack_project::slave (
   }
   class { 'jenkins::slave':
     bare    => $bare,
-    ssh_key => $openstack_project::jenkins_ssh_key,
+    ssh_key => $ssh_key,
   }
   class { 'salt':
     salt_master => 'ci-puppetmaster.openstack.org',
+  }
+  include jenkins::cgroups
+  include ulimit
+  ulimit::conf { 'limit_jenkins_procs':
+    limit_domain => 'jenkins',
+    limit_type   => 'hard',
+    limit_item   => 'nproc',
+    limit_value  => '256'
   }
 }
