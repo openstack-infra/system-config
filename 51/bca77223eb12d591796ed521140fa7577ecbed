@@ -1,0 +1,11 @@
+Code-Review+2: James E. Blair <corvus@inaugust.com>
+Verified+2: Jenkins
+Approved+1: Clark Boylan <clark.boylan@gmail.com>
+Code-Review+2: Clark Boylan <clark.boylan@gmail.com>
+Code-Review+1: Paul Belanger <paul.belanger@polybeacon.com>
+Code-Review+2: Jeremy Stanley <fungi@yuggoth.org>
+Submitted-by: Jenkins
+Submitted-at: Wed, 15 May 2013 20:19:26 +0000
+Reviewed-on: https://review.openstack.org/29037
+Project: openstack-infra/config
+Branch: refs/heads/master
