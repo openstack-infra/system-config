@@ -1877,3 +1877,10 @@ projects:
       - gate-python-ironicclient-python27
     post:
       - python-ironicclient-coverage
+
+  - name: stackforge/inception
+    check:
+      - gate-inception-pep8
+    gate:
+      - gate-inception-pep8
+

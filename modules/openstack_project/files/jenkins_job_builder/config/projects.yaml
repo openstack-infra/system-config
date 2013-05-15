@@ -998,3 +998,11 @@
     jobs:
       - python-jobs
 
+- project:
+    name: inception
+    github-org: stackforge
+    node: precise
+
+    jobs:
+      - gate-{name}-pep8
+
