@@ -198,6 +198,7 @@ puppet-openstack:
       - change-merged
       - x-vrif-minus-2
     projects:
+      - stackforge/puppet-ceilometer
       - stackforge/puppet-cinder
       - stackforge/puppet-glance
       - stackforge/puppet-horizon
