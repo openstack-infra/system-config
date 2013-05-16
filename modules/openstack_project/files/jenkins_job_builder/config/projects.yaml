@@ -860,6 +860,16 @@
 
 
 - project:
+    name: puppet-ceilometer
+    github-org: stackforge
+    node: precise
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - puppet-module-unit
+
+
+- project:
     name: puppet-cinder
     github-org: stackforge
     node: precise
