@@ -38,7 +38,7 @@ class logstash {
   }
 
   exec { 'get_logstash_jar':
-    command => 'wget http://logstash.objects.dreamhost.com/release/logstash-1.1.9-monolithic.jar -O /opt/logstash/logstash.jar',
+    command => 'wget http://logstash.objects.dreamhost.com/release/logstash-1.1.12-monolithic.jar -O /opt/logstash/logstash.jar',
     path    => '/bin:/usr/bin',
     creates => '/opt/logstash/logstash.jar',
     require => File['/opt/logstash'],
