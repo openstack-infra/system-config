@@ -1,0 +1,17 @@
+# should we attempt to do this? (valid: yes|no)
+ENABLED=<%= enabled %>
+
+# don't install, just check (valid: yes|no)
+CHECK_ONLY=<%= check_only %>
+
+# if MAILTO is set, the mail command is used to deliver PackageKit output
+# by default MAILTO is unset, so crond mails the output by itself
+<% if mailto then %>
+MAILTO=<%= mailto %>
+<% end %>
+
+# you may set SYSTEMNAME if you want your PackageKit emails tagged differently
+# default is output of hostname command
+<% if system_name then %>
+SYSTEM_NAME=<%= system_name %>
+<% end %>
