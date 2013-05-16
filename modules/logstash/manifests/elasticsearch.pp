@@ -21,17 +21,18 @@ class logstash::elasticsearch {
   }
 
   exec { 'get_elasticsearch_deb':
-    command => 'wget http://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-0.20.2.deb -O /tmp/elasticsearch-0.20.2.deb',
+    command => 'wget http://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-0.20.5.deb -O /tmp/elasticsearch-0.20.5.deb',
     path    => '/bin:/usr/bin',
-    creates => '/tmp/elasticsearch-0.20.2.deb',
+    creates => '/tmp/elasticsearch-0.20.5.deb',
   }
 
   # install elastic search
   package { 'elasticsearch':
-    ensure   => present,
-    source   => '/tmp/elasticsearch-0.20.2.deb',
-    provider => 'dpkg',
-    require  => [
+    ensure    => latest,
+    source    => '/tmp/elasticsearch-0.20.5.deb',
+    provider  => 'dpkg',
+    subscribe => Exec['get_elasticsearch_deb'],
+    require   => [
       Package['java7-runtime-headless'],
       Exec['get_elasticsearch_deb'],
     ]

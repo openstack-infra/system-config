@@ -114,12 +114,6 @@
 # index.number_of_shards: 1
 # index.number_of_replicas: 0
 
-# Set number of shards to 1 and replicas to 0 as we are not running an elastic
-# search cluster and https://github.com/logstash/logstash/wiki/Elasticsearch-Storage-Optimization
-# recommends this configuration.
-index.number_of_shards: 1
-index.number_of_replicas: 0
-
 # These settings directly affect the performance of index and search operations
 # in your cluster. Assuming you have enough machines to hold shards and
 # replicas, the rule of thumb is:
