@@ -397,14 +397,16 @@ class DaemonContext(object):
         os.chdir(os.sep)
 
         # Lock pidfile.
-        self.pidfile = open(self.pidfile_path, 'w')
+        self.pidfile = open(self.pidfile_path, 'a')
         try:
             fcntl.lockf(self.pidfile, fcntl.LOCK_EX | fcntl.LOCK_NB)
             self.pidlocked = True
         except IOError:
             # another instance is running
             sys.exit(0)
-        # TODO(clarkb) write pid to pidfile
+        self.pidfile.truncate(0)
+        self.pidfile.write(str(os.getpid()))
+        self.pidfile.flush()
 
     def __exit__(self, exc_type, exc_value, traceback):
         # remove pidfile
