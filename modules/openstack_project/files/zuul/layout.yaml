@@ -1271,6 +1271,12 @@ projects:
       - openstack-operations-guide
       - manuals-upstream-translation-update
 
+  - name: openstack/openstack-ops
+    check:
+      - gate-noop
+    gate:
+      - gate-noop
+
   - name: openstack/api-site
     check:
       - gate-noop
