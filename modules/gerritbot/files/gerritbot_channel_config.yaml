@@ -66,6 +66,7 @@ openstack-doc:
       - x-vrif-minus-2
     projects:
       - openstack/openstack-manuals
+      - openstack/operations-guide
       - openstack/api-site
     branches:
       - master
