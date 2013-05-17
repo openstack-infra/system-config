@@ -1867,6 +1867,22 @@ projects:
     gate:
       - gate-noop
 
+  - name: stackforge/cookbook-openstack-ops-database
+    check:
+      - gate-cookbook-openstack-ops-database-chef-lint
+      - gate-cookbook-openstack-ops-database-chef-unit
+    gate:
+      - gate-cookbook-openstack-ops-database-chef-lint
+      - gate-cookbook-openstack-ops-database-chef-unit
+
+  - name: stackforge/cookbook-openstack-ops-messaging
+    check:
+      - gate-cookbook-openstack-ops-messaging-chef-lint
+      - gate-cookbook-openstack-ops-messaging-chef-unit
+    gate:
+      - gate-cookbook-openstack-ops-messaging-chef-lint
+      - gate-cookbook-openstack-ops-messaging-chef-unit
+
   - name: openstack/ironic
     check:
       - gate-ironic-pep8
