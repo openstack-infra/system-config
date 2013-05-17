@@ -23,8 +23,7 @@ function header(activeTabName) {
   tabsName[5] = 'Bugday'; tabsLink[5] = 'http://status.openstack.org/bugday/';
 
   document.write(
-   '<div class="container">'+
-   '<div id="header">'+
+   '<div id="header" class="container">'+
    '<div class="span-5">'+
    ' <h1 id="logo"><a href="http://status.openstack.org/">Open Stack</a></h1>'+
    '</div>\n'+
