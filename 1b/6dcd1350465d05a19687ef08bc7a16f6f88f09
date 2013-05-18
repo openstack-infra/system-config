@@ -1,0 +1,14 @@
+Code-Review+2: James E. Blair <corvus@inaugust.com>
+Verified+2: Jenkins
+Code-Review+1: Dan Prince <dprince@redhat.com>
+Code-Review+1: Yu Xingchao <yuxcer@gmail.com>
+Code-Review+1: Dan Bode <bodepd@gmail.com>
+Code-Review+1: Mehdi Abaakouk <mehdi.abaakouk@enovance.com>
+Code-Review+1: Paul Belanger <paul.belanger@polybeacon.com>
+Approved+1: Jeremy Stanley <fungi@yuggoth.org>
+Code-Review+2: Jeremy Stanley <fungi@yuggoth.org>
+Submitted-by: Jenkins
+Submitted-at: Sat, 18 May 2013 15:35:18 +0000
+Reviewed-on: https://review.openstack.org/29406
+Project: openstack-infra/config
+Branch: refs/heads/master
