@@ -3,7 +3,6 @@ class openstack_project::dashboard(
     $mysql_password = '',
     $sysadmins = []
 ) {
-  include mysql::server
 
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [80, 443, 3000],
@@ -26,9 +25,8 @@ class openstack_project::dashboard(
   file { '/etc/mysql/conf.d/mysqld_innodb_fpt.cnf':
     ensure  => present,
     source  =>
-      'puppet://modules/openstack_project/dashboard/mysqld_innodb_fpt.cnf',
+      'puppet:///modules/openstack_project/dashboard/mysqld_innodb_fpt.cnf',
     require => Class['mysql::server'],
-    notify  => Service['mysql'],
   }
 }
 
