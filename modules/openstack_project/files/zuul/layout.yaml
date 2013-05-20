@@ -1694,7 +1694,6 @@ projects:
       - gate-murano-api-pyflakes
       - gate-murano-api-pep8
       - gate-murano-api-python26
-      - gate-murano-api-python26-rhel6
       - gate-murano-api-python27
     gate:
       - gate-murano-api-pep8
@@ -1713,7 +1712,6 @@ projects:
       - gate-murano-conductor-pyflakes
       - gate-murano-conductor-pep8
       - gate-murano-conductor-python26
-      - gate-murano-conductor-python26-rhel6
       - gate-murano-conductor-python27
     gate:
       - gate-murano-conductor-pep8
@@ -1732,7 +1730,6 @@ projects:
       - gate-murano-dashboard-pyflakes
       - gate-murano-dashboard-pep8
       - gate-murano-dashboard-python26
-      - gate-murano-dashboard-python26-rhel6
       - gate-murano-dashboard-python27
     gate:
       - gate-murano-dashboard-pep8
@@ -1769,7 +1766,6 @@ projects:
       - gate-python-muranoclient-pyflakes
       - gate-python-muranoclient-pep8
       - gate-python-muranoclient-python26
-      - gate-python-muranoclient-python26-rhel6
       - gate-python-muranoclient-python27
     gate:
       - gate-python-muranoclient-pep8
