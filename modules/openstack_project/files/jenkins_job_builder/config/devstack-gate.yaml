@@ -573,6 +573,9 @@
           export STATSD_HOST="graphite.openstack.org"
           export STATSD_PORT=8125
           export PYTHONUNBUFFERED=true
+          set +e
+          $WORKSPACE/devstack-gate/devstack-vm-inprogress.py $DEVSTACK_NODE_NAME
+          set -e
           $WORKSPACE/devstack-gate/devstack-vm-delete.py $DEVSTACK_NODE_NAME
 
 
