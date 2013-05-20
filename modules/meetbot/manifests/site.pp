@@ -7,7 +7,6 @@ define meetbot::site(
   $use_ssl,
   $vhost_name = $::fqdn
 ) {
-  include remove_nginx
 
   $varlib = "/var/lib/meetbot/${name}"
   $meetbot = "/srv/meetbot-${name}"
