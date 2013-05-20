@@ -55,20 +55,16 @@ class releasestatus {
   }
 
   file { '/var/lib/releasestatus/releasestatus':
-    ensure  => directory,
-    owner   => 'releasestatus',
-    group   => 'releasestatus',
-    mode    => '0755',
-    require => File['/var/lib/releasestatus/'],
+    ensure  => absent,
   }
 
-  vcsrepo { '/var/lib/releasestatus/releasestatus':
-    ensure   => latest,
-    provider => git,
-    source   => 'https://github.com/openstack-infra/releasestatus.git',
-    revision => 'master',
-    require  => File['/var/lib/releasestatus'],
-  }
+#  vcsrepo { '/var/lib/releasestatus/releasestatus':
+#    ensure   => latest,
+#    provider => git,
+#    source   => 'https://github.com/openstack-infra/releasestatus.git',
+#    revision => 'master',
+#    require  => File['/var/lib/releasestatus'],
+#  }
 }
 
 # vim:sw=2:ts=2:expandtab:textwidth=79
