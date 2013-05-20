@@ -94,7 +94,7 @@ class LogRetriever(threading.Thread):
     }
 
     def __init__(self, eventq, logq, log_address,
-                 filename, retry=False, job_filter=''):
+                 filename, retry=False, job_filter='', tags=None):
         threading.Thread.__init__(self)
         self.eventq = eventq
         self.logq = logq
@@ -102,7 +102,9 @@ class LogRetriever(threading.Thread):
         self.log_address = log_address
         self.filename = filename
         self.job_filter = job_filter
-        self.tag = [self.filename]
+        self.tags = [self.filename]
+        if tags:
+            self.tags.extend(tags)
 
     def run(self):
         while True:
@@ -125,7 +127,7 @@ class LogRetriever(threading.Thread):
             for line in log_lines:
                 out_event = {}
                 out_event["@fields"] = fields
-                out_event["@tags"] = self.tag
+                out_event["@tags"] = self.tags
                 out_event["event_message"] = line
                 self.logq.put(out_event)
 
@@ -308,8 +310,8 @@ class Server(object):
                                      source_file['name'],
                                      retry=source_file.get('retry-get',
                                                            self.default_retry),
-                                     job_filter=source_file.get('filter',
-                                                                ''))
+                                     job_filter=source_file.get('filter', ''),
+                                     tags=source_file.get('tags', []))
             self.retrievers.append(retriever)
 
     def setup_catchers(self):
