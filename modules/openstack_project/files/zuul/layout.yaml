@@ -1913,3 +1913,8 @@ projects:
     gate:
       - gate-inception-pep8
 
+  - name: stackforge/taskflow
+    check:
+      - gate-noop
+    gate:
+      - gate-noop
