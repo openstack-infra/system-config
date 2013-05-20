@@ -1264,6 +1264,7 @@ projects:
       - openstack-basic-install-fedora
       - openstack-basic-install-ubuntu
       - openstack-glossary
+      - openstack-image-guide
       - openstack-docs-site
       - openstack-ha-guide
       - openstack-install-deploy-guide-apt-fedora
