@@ -3,7 +3,6 @@ define planet::site(
   $vhost_name = "planet.${name}.org"
 ) {
   include apache
-  include remove_nginx
 
   apache::vhost { $vhost_name:
     docroot  => "/srv/planet/${name}",
