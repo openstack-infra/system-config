@@ -223,9 +223,9 @@
       - console-log-post
       - ftp:
           site: docs.openstack.org
-          source: 'doc/src/docbkx/common/glossary/target/docbkx/webhelp/openstack-glossary/**'
+          source: 'doc/src/docbkx/common/glossary/target/docbkx/webhelp/openstack-glossary-external/**'
           target: 'glossary'
-          remove-prefix: 'doc/src/docbkx/common/glossary/target/docbkx/webhelp/openstack-glossary/'
+          remove-prefix: 'doc/src/docbkx/common/glossary/target/docbkx/webhelp/openstack-glossary-external/'
           excludes: '**/*.xml,**/null*'
 
 - job:
