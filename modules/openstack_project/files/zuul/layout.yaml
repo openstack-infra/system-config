@@ -1829,6 +1829,12 @@ projects:
       - gate-cookbook-openstack-block-storage-chef-lint
       - gate-cookbook-openstack-block-storage-chef-unit
 
+  - name: stackforge/openstack-chef-repo
+    check:
+      - gate-noop
+    gate:
+      - gate-noop
+
   - name: stackforge/cookbook-openstack-common
     check:
       - gate-cookbook-openstack-common-chef-lint
