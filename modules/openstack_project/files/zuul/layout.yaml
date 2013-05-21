@@ -1893,6 +1893,14 @@ projects:
     gate:
       - gate-noop
 
+  - name: stackforge/cookbook-openstack-orchestration
+    check:
+      - gate-cookbook-openstack-orchestration-chef-lint
+      - gate-cookbook-openstack-orchestration-chef-unit
+    gate:
+      - gate-cookbook-openstack-orchestration-chef-lint
+      - gate-cookbook-openstack-orchestration-chef-unit
+
   - name: stackforge/cookbook-openstack-ops-database
     check:
       - gate-cookbook-openstack-ops-database-chef-lint
