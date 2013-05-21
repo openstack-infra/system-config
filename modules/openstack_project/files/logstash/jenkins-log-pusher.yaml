@@ -14,3 +14,18 @@ zmq-publishers:
 source-files:
   - name: console.html
     retry-get: True
+  - name: logs/screen-c-api.txt
+    filter: gate-tempest-devstack-vm
+    tags:
+      - screen
+      - nova
+  - name: logs/screen-c-sch.txt
+    filter: gate-tempest-devstack-vm
+    tags:
+      - screen
+      - nova
+  - name: logs/screen-c-vol.txt
+    filter: gate-tempest-devstack-vm
+    tags:
+      - screen
+      - nova
