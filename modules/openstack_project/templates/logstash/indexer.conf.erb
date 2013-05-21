@@ -27,7 +27,9 @@ filter {
   grok {
     type => "jenkins"
     tags => ["console.html"]
-    pattern => [ "^%{DATESTAMP:logdate} \| %{GREEDYDATA:logmessage}" ]
+    # Do multiline matching as the above mutliline filter may add newlines
+    # to the log messages.
+    pattern => [ "(?m)^%{DATESTAMP:logdate} \| %{GREEDYDATA:logmessage}" ]
     add_field => [ "received_at", "%{@timestamp}" ]
   }
   date {
