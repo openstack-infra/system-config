@@ -758,6 +758,8 @@
     jobs:
       - gate-{name}-pep8
       - gate-{name}-requirements
+      - gate-{name}-docs
+      - openstack-publish-jobs
 
 
 - project:
