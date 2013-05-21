@@ -266,3 +266,14 @@ openstack-ironic:
       - openstack/python-ironicclient
     branches:
       - master
+
+openstack-swift
+    events:
+      - patchset-created
+      - change-merged
+      - x-vrif-minus-2
+    projects:
+      - openstack/swift
+      - openstack/python-swiftclient
+    branches:
+      - master
