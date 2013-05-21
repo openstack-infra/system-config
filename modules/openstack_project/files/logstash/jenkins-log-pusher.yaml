@@ -14,3 +14,15 @@ zmq-publishers:
 source-files:
   - name: console.html
     retry-get: True
+  - name: logs/screen-c-api.txt
+    tags:
+      - screen
+      - nova
+  - name: logs/screen-c-sch.txt
+    tags:
+      - screen
+      - nova
+  - name: logs/screen-c-vol.txt
+    tags:
+      - screen
+      - nova
