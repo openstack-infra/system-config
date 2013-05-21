@@ -85,6 +85,8 @@ jobs:
     branch: ^(?!stable/(folsom|grizzly)).*$
   - name: tempest-docs
     branch: ^(?!stable/(folsom|grizzly)).*$
+  - name: gate-toci-devstack-vm
+    voting: false
   - name: gate-nova-pylint
     voting: false
   - name: gate-cinder-pylint
@@ -1402,10 +1404,12 @@ projects:
       - gate-diskimage-builder-pep8
       - gate-diskimage-builder-python26
       - gate-diskimage-builder-python27
+      - gate-toci-devstack-vm
     gate:
       - gate-diskimage-builder-pep8
       - gate-diskimage-builder-python26
       - gate-diskimage-builder-python27
+      - gate-toci-devstack-vm
     post:
       - diskimage-builder-coverage
 
@@ -1438,10 +1442,12 @@ projects:
       - gate-tripleo-image-elements-pep8
       - gate-tripleo-image-elements-python26
       - gate-tripleo-image-elements-python27
+      - gate-toci-devstack-vm
     gate:
       - gate-tripleo-image-elements-pep8
       - gate-tripleo-image-elements-python26
       - gate-tripleo-image-elements-python27
+      - gate-toci-devstack-vm
     post:
       - tripleo-image-elements-coverage
 
