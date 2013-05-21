@@ -7,6 +7,7 @@
       - timeout:
           timeout: 40
           fail: true
+      - timestamps
 
     triggers:
       - zuul
@@ -42,6 +43,7 @@
       - timeout:
           timeout: 40
           fail: true
+      - timestamps
 
     triggers:
       - zuul
@@ -72,6 +74,7 @@
       - timeout:
           timeout: 40
           fail: true
+      - timestamps
 
     triggers:
       - zuul-post
