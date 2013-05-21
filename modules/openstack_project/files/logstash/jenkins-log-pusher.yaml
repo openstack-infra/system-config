@@ -14,3 +14,35 @@ zmq-publishers:
 source-files:
   - name: console.html
     retry-get: True
+  - name: logs/screen-c-api.txt
+    tags:
+      - screen
+      - oslofmt
+  - name: logs/screen-c-sch.txt
+    tags:
+      - screen
+      - oslofmt
+  - name: logs/screen-c-vol.txt
+    tags:
+      - screen
+      - oslofmt
+  - name: logs/screen-q-agt.txt
+    tags:
+      - screen
+      - oslofmt
+  - name: logs/screen-q-dhcp.txt
+    tags:
+      - screen
+      - oslofmt
+  - name: logs/screen-q-l3.txt
+    tags:
+      - screen
+      - oslofmt
+  - name: logs/screen-q-meta.txt
+    tags:
+      - screen
+      - oslofmt
+  - name: logs/screen-q-svc.txt
+    tags:
+      - screen
+      - oslofmt
