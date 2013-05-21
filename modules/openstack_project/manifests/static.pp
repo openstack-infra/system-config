@@ -272,6 +272,6 @@ class openstack_project::static (
 
   releasestatus::site { 'releasestatus':
     configfile => 'integrated.yaml',
-    httproot   => '/srv/static/release.new',
+    httproot   => '/srv/static/release',
   }
 }
