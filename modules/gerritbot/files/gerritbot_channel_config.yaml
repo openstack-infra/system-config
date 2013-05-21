@@ -267,7 +267,7 @@ openstack-ironic:
     branches:
       - master
 
-openstack-swift
+openstack-swift:
     events:
       - patchset-created
       - change-merged
