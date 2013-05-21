@@ -11,17 +11,33 @@ input {
 # You can check grok patterns at http://grokdebug.herokuapp.com/
 filter {
   grep {
+    # Remove unneeded html tags.
     type => "jenkins"
     tags => ["console.html"]
     # Drop matches.
     negate => true
     match => ["@message", "^</?pre>$"]
   }
+  grep {
+    # Remove screen log headers.
+    type => "jenkins"
+    tags => ["screen"]
+    # Drop matches.
+    negate => true
+    match => ["@message", "^\+ "]
+  }
   multiline {
     type => "jenkins"
     tags => ["console.html"]
     negate => true
     pattern => "^%{DATESTAMP} \|"
+    what => "previous"
+  }
+  multiline {
+    type => "jenkins"
+    tags => ["oslofmt"]
+    negate => true
+    pattern => "^%{DATESTAMP} "
     what => "previous"
   }
   grok {
@@ -32,10 +48,19 @@ filter {
     pattern => [ "(?m)^%{DATESTAMP:logdate} \| %{GREEDYDATA:logmessage}" ]
     add_field => [ "received_at", "%{@timestamp}" ]
   }
+  grok {
+    type => "jenkins"
+    tags => ["oslofmt"]
+    # Do multiline matching as the above mutliline filter may add newlines
+    # to the log messages.
+    # TODO move the LOGLEVELs into a proper grok pattern.
+    pattern => [ "(?m)^%{DATESTAMP:logdate}%{SPACE}%{NUMBER:pid}?%{SPACE}?(?<loglevel>AUDIT|CRITICAL|DEBUG|INFO|WARNING|ERROR) \[?\b%{NOTSPACE:module}\b\]?%{SPACE}?%{GREEDYDATA:logmessage}?" ]
+    add_field => [ "received_at", "%{@timestamp}" ]
+  }
   date {
     type => "jenkins"
     exclude_tags => "_grokparsefailure"
-    match => [ "logdate", "yyyy-MM-dd HH:mm:ss.SSS" ]
+    match => [ "logdate", "yyyy-MM-dd HH:mm:ss.SSS", "yyyy-MM-dd HH:mm:ss" ]
   }
   mutate {
     type => "jenkins"
@@ -45,7 +70,7 @@ filter {
   mutate {
     type => "jenkins"
     exclude_tags => "_grokparsefailure"
-    remove => [ "logdate", "logmessage" ]
+    remove => [ "logdate", "logmessage", "event_message" ]
   }
 }
 
