@@ -79,6 +79,7 @@ class openstack_project::logstash (
   service { 'jenkins-log-pusher':
     enable     => true,
     hasrestart => true,
+    subscribe  => File['/etc/logstash/jenkins-log-pusher.yaml'],
     require    => File['/etc/init.d/jenkins-log-pusher'],
   }
 
