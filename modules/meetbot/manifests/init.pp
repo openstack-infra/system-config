@@ -43,12 +43,6 @@ class meetbot {
     ],
     source  => '/opt/meetbot/MeetBot',
   }
-
-  file { '/etc/nginx/sites-enabled/default':
-    ensure  => absent,
-    notify  => Service['nginx'],
-    require => Package['nginx'],
-  }
 }
 
 # vim:sw=2:ts=2:expandtab:textwidth=79
