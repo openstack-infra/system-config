@@ -261,6 +261,63 @@
 
 
 - job:
+    name: gate-toci-devstack-vm
+    node: devstack-precise
+
+    wrappers:
+      - timeout:
+          timeout: 90
+          fail: true
+      - timestamps
+
+    parameters:
+      - label:
+          name: NODE_LABEL
+          description: Label of node to use for this build
+          default: devstack-precise
+
+    triggers:
+      - zuul
+
+    builders:
+      - devstack-inprogress
+      - devstack-checkout
+      - shell: |
+          #!/bin/bash -xe
+          BASE=/opt/stack
+          DEST=$BASE/new
+          export PYTHONUNBUFFERED=true
+          export PROJECTS="tripleo/incubator tripleo/bm_poseur stackforge/diskimage-builder stackforge/tripleo-image-elements toci-dev/toci"
+          export TOCI_DIR=$DEST/toci/
+          # we aren't uploading results from toci (just keeping logs)
+          export TOCI_UPLOAD=0
+          export TOCI_REMOVE=0
+          export TOCI_CLEANUP=0
+          export TOCI_GIT_CHECKOUT=0
+          export TOCI_WORKING_DIR=$DEST
+          export TOCI_LOG_DIR=$BASE/logs
+
+          function pre_test_hook {
+            touch ~/.toci
+          }
+
+          function gate_hook {
+            cd $TOCI_DIR
+            bash toci.sh
+          }
+
+          cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
+          ./safe-devstack-vm-gate-wrap.sh
+
+      - link-logs
+
+    publishers:
+      - console-log
+      - devstack-logs
+      - devstack-complete
+
+
+- job:
     name: periodic-tempest-devstack-vm-stable-grizzly
     node: devstack-precise
 
