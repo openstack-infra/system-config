@@ -11,11 +11,20 @@ input {
 # You can check grok patterns at http://grokdebug.herokuapp.com/
 filter {
   grep {
+    # Remove unneeded html tags.
     type => "jenkins"
     tags => ["console.html"]
     # Drop matches.
     negate => true
     match => ["@message", "^</?pre>$"]
+  }
+  grep {
+    # Remove screen log headers.
+    type => "jenkins"
+    tags => ["screen"]
+    # Drop matches.
+    negate => true
+    match => ["@message", "^\+ "]
   }
   multiline {
     type => "jenkins"
@@ -24,12 +33,28 @@ filter {
     pattern => "^%{DATESTAMP} \|"
     what => "previous"
   }
+  multiline {
+    type => "jenkins"
+    tags => ["nova"]
+    negate => true
+    pattern => "^%{DATESTAMP} "
+    what => "previous"
+  }
   grok {
     type => "jenkins"
     tags => ["console.html"]
     # Do multiline matching as the above mutliline filter may add newlines
     # to the log messages.
     pattern => [ "(?m)^%{DATESTAMP:logdate} \| %{GREEDYDATA:logmessage}" ]
+    add_field => [ "received_at", "%{@timestamp}" ]
+  }
+  grok {
+    type => "jenkins"
+    tags => ["nova"]
+    # Do multiline matching as the above mutliline filter may add newlines
+    # to the log messages.
+    # TODO move the LOGLEVELs into a proper grok pattern.
+    pattern => [ "(?m)^%{DATESTAMP:logdate}%{SPACE}(?<loglevel>AUDIT|CRITICAL|DEBUG|INFO|WARNING|ERROR) \[?\b%{NOTSPACE:module}\b\]? %{GREEDYDATA:logmessage}" ]
     add_field => [ "received_at", "%{@timestamp}" ]
   }
   date {
