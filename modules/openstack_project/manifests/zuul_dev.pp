@@ -24,11 +24,6 @@ class openstack_project::zuul_dev(
     sysadmins                 => $sysadmins,
   }
 
-  # co-host gearman-job-server
-  class { 'gearman':
-    listen => '::',
-  }
-
   class { '::zuul':
     vhost_name           => $vhost_name,
     gerrit_server        => $gerrit_server,
@@ -56,6 +51,12 @@ class openstack_project::zuul_dev(
   file { '/etc/zuul/logging.conf':
     ensure => present,
     source => 'puppet:///modules/openstack_project/zuul/logging.conf',
+    notify => Exec['zuul-reload'],
+  }
+
+  file { '/etc/zuul/gearman-logging.conf':
+    ensure => present,
+    source => 'puppet:///modules/openstack_project/zuul/gearman-logging.conf',
     notify => Exec['zuul-reload'],
   }
 
