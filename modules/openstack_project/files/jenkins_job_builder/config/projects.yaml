@@ -754,6 +754,7 @@
     name: tempest
     github-org: openstack-infra
     node: precise
+    doc-publisher-site: docs.openstack.org
 
     jobs:
       - gate-{name}-pep8
