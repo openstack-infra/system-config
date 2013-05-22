@@ -29,6 +29,7 @@ openstack-infra:
       - openstack/requirements
     branches:
       - master
+      - feature/gearman
 
 openstack-dev:
     events:

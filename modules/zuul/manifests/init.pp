@@ -21,6 +21,7 @@ class zuul (
   $vhost_name = $::fqdn,
   $serveradmin = "webmaster@${::fqdn}",
   $gearman_server = '127.0.0.1',
+  $internal_gearman = true,
   $jenkins_server = '',
   $jenkins_user = '',
   $jenkins_apikey = '',
