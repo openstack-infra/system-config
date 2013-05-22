@@ -21,13 +21,6 @@ NameVirtualHost <%= vhost_name %>:<%= port %>
     Allow from all
   </Location>
 
-  RewriteRule ^/release$ /release/ [R]
-  RewriteRule ^/release/(.*)$ http://old-wiki.openstack.org/release/$1 [P]
-  <Location /release/>
-    Order allow,deny
-    Allow from all
-  </Location>
-
   RewriteRule ^/bugday$ /bugday/ [R]
   RewriteRule ^/bugday/(.*)$ http://old-wiki.openstack.org/bugday/$1 [P]
   <Location /bugday/>
@@ -36,7 +29,7 @@ NameVirtualHost <%= vhost_name %>:<%= port %>
   </Location>
 
   Alias /reviews /srv/static/reviewday
-  Alias /release.new /srv/static/release
+  Alias /release /srv/static/release
 
   <Directory <%= docroot %>>
     Options <%= options %>
