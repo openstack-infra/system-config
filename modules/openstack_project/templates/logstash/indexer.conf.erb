@@ -35,7 +35,7 @@ filter {
   }
   multiline {
     type => "jenkins"
-    tags => ["nova"]
+    tags => ["cinder"]
     negate => true
     pattern => "^%{DATESTAMP} "
     what => "previous"
@@ -50,11 +50,11 @@ filter {
   }
   grok {
     type => "jenkins"
-    tags => ["nova"]
+    tags => ["cinder"]
     # Do multiline matching as the above mutliline filter may add newlines
     # to the log messages.
     # TODO move the LOGLEVELs into a proper grok pattern.
-    pattern => [ "(?m)^%{DATESTAMP:logdate}%{SPACE}(?<loglevel>AUDIT|CRITICAL|DEBUG|INFO|WARNING|ERROR) \[?\b%{NOTSPACE:module}\b\]? %{GREEDYDATA:logmessage}" ]
+    pattern => [ "(?m)^%{DATESTAMP:logdate}%{SPACE}(?<loglevel>AUDIT|CRITICAL|DEBUG|INFO|WARNING|ERROR) \[?\b%{NOTSPACE:module}\b\]?%{SPACE}?%{GREEDYDATA:logmessage}?" ]
     add_field => [ "received_at", "%{@timestamp}" ]
   }
   date {

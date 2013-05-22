@@ -18,14 +18,39 @@ source-files:
     filter: gate-tempest-devstack-vm
     tags:
       - screen
-      - nova
+      - cinder
   - name: logs/screen-c-sch.txt
     filter: gate-tempest-devstack-vm
     tags:
       - screen
-      - nova
+      - cinder
   - name: logs/screen-c-vol.txt
     filter: gate-tempest-devstack-vm
     tags:
       - screen
-      - nova
+      - cinder
+  - name: logs/screen-q-agt.txt
+    filter: gate-tempest-devstack-vm-quantum
+    tags:
+      - screen
+      - cinder
+  - name: logs/screen-q-dhcp.txt
+    filter: gate-tempest-devstack-vm-quantum
+    tags:
+      - screen
+      - cinder
+  - name: logs/screen-q-l3.txt
+    filter: gate-tempest-devstack-vm-quantum
+    tags:
+      - screen
+      - cinder
+  - name: logs/screen-q-meta.txt
+    filter: gate-tempest-devstack-vm-quantum
+    tags:
+      - screen
+      - cinder
+  - name: logs/screen-q-svc.txt
+    filter: gate-tempest-devstack-vm-quantum
+    tags:
+      - screen
+      - cinder
