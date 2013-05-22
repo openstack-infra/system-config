@@ -8,7 +8,7 @@
     builders:
       - gerrit-git-prep
       - shell: |
-          export PUPPET_GEM_VERSION='~> {puppet_version}'
+          export PUPPET_GEM_VERSION='~> {puppet_version}.0'
           mkdir .bundled_gems
           export GEM_HOME=`pwd`/.bundled_gems
           bundle install
