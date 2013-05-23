@@ -14,7 +14,9 @@
 #
 # Class to install kibana frontend to logstash.
 #
-class kibana {
+class kibana (
+  $elasticsearch_host = 'localhost'
+) {
 
   group { 'kibana':
     ensure => present,
@@ -67,7 +69,8 @@ class kibana {
 
   file { '/opt/kibana/kibana/KibanaConfig.rb':
     ensure  => present,
-    source  => 'puppet:///modules/kibana/config.rb',
+    content => template('kibana/config.rb.erb'),
+    replace => true,
     owner   => 'kibana',
     group   => 'kibana',
     require => Vcsrepo['/opt/kibana/kibana'],
