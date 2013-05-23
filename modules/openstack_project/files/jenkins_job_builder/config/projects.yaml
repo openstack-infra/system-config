@@ -672,7 +672,6 @@
     jobs:
       - python-jobs
       - hook-{name}-rtfd
-      - gate-{name}-pyflakes
       - pypi-jobs
 
 
@@ -709,7 +708,6 @@
     jobs:
       - python-jobs
       - hook-{name}-rtfd
-      - gate-{name}-pyflakes
       - pypi-jobs
 
 
