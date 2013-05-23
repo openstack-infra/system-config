@@ -1175,13 +1175,11 @@ projects:
 
   - name: stackforge/moniker
     check:
-      - gate-moniker-pyflakes
       - gate-moniker-pep8
       - gate-moniker-python26
       - gate-moniker-python27
     gate:
       - gate-moniker-pep8
-      - gate-moniker-pyflakes
       - gate-moniker-python26
       - gate-moniker-python27
     post:
@@ -1196,13 +1194,11 @@ projects:
 
   - name: stackforge/python-monikerclient
     check:
-      - gate-python-monikerclient-pyflakes
       - gate-python-monikerclient-pep8
       - gate-python-monikerclient-python26
       - gate-python-monikerclient-python27
     gate:
       - gate-python-monikerclient-pep8
-      - gate-python-monikerclient-pyflakes
       - gate-python-monikerclient-python26
       - gate-python-monikerclient-python27
     post:
