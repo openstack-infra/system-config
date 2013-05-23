@@ -17,7 +17,8 @@
 class logstash::web (
   $vhost_name = $::fqdn,
   $serveradmin = "webmaster@${::fqdn}",
-  $frontend = 'internal'
+  $frontend = 'internal',
+  $elasticsearch_host = 'localhost',
 ) {
   include apache
   a2mod { 'rewrite':
@@ -54,7 +55,9 @@ class logstash::web (
     }
 
     'kibana': {
-      include kibana
+      class { 'kibana':
+        elasticsearch_host => $elasticsearch_host,
+      }
       $vhost = 'logstash/kibana.vhost.erb'
     }
 
