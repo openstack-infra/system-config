@@ -1937,3 +1937,8 @@ projects:
     gate:
       - gate-inception-pep8
 
+  - name: stackforge/occi-os
+    check:
+      - gate-noop
+    gate:
+      - gate-noop
