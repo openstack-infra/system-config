@@ -37,4 +37,12 @@ class openstack_project::lists(
     mailserver  => $listdomain,
   }
 
+  maillist { 'openstack-vi':
+    ensure      => present,
+    admin       => 'hang.tran@dtt.vn',
+    password    => $listpassword,
+    description => 'Discussions in Vietnamese - please add Vietnamese translation here',
+    webserver   => $listdomain,
+    mailserver  => $listdomain,
+  }
 }
