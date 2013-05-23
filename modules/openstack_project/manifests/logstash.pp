@@ -17,8 +17,11 @@
 class openstack_project::logstash (
   $sysadmins = []
 ) {
+  $iptables_rule = '-m state --state NEW -m tcp -p tcp --dport 9200:9400 -s elasticsearch.openstack.org -j ACCEPT'
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [22, 80],
+    iptables_rules6           => $iptables_rule,
+    iptables_rules4           => $iptables_rule,
     sysadmins                 => $sysadmins,
   }
 
