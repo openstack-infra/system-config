@@ -1680,6 +1680,18 @@ projects:
       - gate-puppet-swift-puppet-unit-3.0
       - gate-puppet-swift-puppet-unit-3.1
 
+  - name: stackforge/puppet-tempest
+    check:
+      - gate-puppet-tempest-puppet-unit-2.6
+      - gate-puppet-tempest-puppet-unit-2.7
+      - gate-puppet-tempest-puppet-unit-3.0
+      - gate-puppet-tempest-puppet-unit-3.1
+    gate:
+      - gate-puppet-tempest-puppet-unit-2.6
+      - gate-puppet-tempest-puppet-unit-2.7
+      - gate-puppet-tempest-puppet-unit-3.0
+      - gate-puppet-tempest-puppet-unit-3.1
+
   - name: stackforge/puppet-openstack_dev_env
     check:
       - gate-noop

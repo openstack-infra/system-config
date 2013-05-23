@@ -849,7 +849,6 @@
     jobs:
       - python-jobs
 
-
 - project:
     name: puppet-glance
     github-org: stackforge
@@ -858,7 +857,6 @@
 
     jobs:
       - puppet-module-unit
-
 
 - project:
     name: puppet-keystone
@@ -869,7 +867,6 @@
     jobs:
       - puppet-module-unit
 
-
 - project:
     name: puppet-ceilometer
     github-org: stackforge
@@ -878,7 +875,6 @@
 
     jobs:
       - puppet-module-unit
-
 
 - project:
     name: puppet-cinder
@@ -889,7 +885,6 @@
     jobs:
       - puppet-module-unit
 
-
 - project:
     name: puppet-nova
     github-org: stackforge
@@ -898,7 +893,6 @@
 
     jobs:
       - puppet-module-unit
-
 
 - project:
     name: puppet-horizon
@@ -909,7 +903,6 @@
     jobs:
       - puppet-module-unit
 
-
 - project:
     name: puppet-openstack
     github-org: stackforge
@@ -919,9 +912,17 @@
     jobs:
       - puppet-module-unit
 
-
 - project:
     name: puppet-swift
+    github-org: stackforge
+    node: precise
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - puppet-module-unit
+
+- project:
+    name: puppet-tempest
     github-org: stackforge
     node: precise
     tarball-site: tarballs.openstack.org
