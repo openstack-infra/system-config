@@ -990,12 +990,15 @@ projects:
     gate:
       - gate-tempest-requirements
       - gate-tempest-pep8
+      - gate-tempest-docs
       - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-postgres-full
       - gate-tempest-devstack-vm-cinder
       - gate-tempest-devstack-vm-quantum
       - gate-tempest-devstack-vm-quantum-full
+    post:
+      - tempest-docs
 
   - name: openstack/ceilometer
     check:
