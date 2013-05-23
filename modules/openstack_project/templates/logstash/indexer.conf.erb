@@ -54,7 +54,7 @@ filter {
     # Do multiline matching as the above mutliline filter may add newlines
     # to the log messages.
     # TODO move the LOGLEVELs into a proper grok pattern.
-    pattern => [ "(?m)^%{DATESTAMP:logdate}%{SPACE}%{NUMBER:pid}?%{SPACE}?(?<loglevel>AUDIT|CRITICAL|DEBUG|INFO|WARNING|ERROR) \[?\b%{NOTSPACE:module}\b\]?%{SPACE}?%{GREEDYDATA:logmessage}?" ]
+    pattern => [ "(?m)^%{DATESTAMP:logdate}%{SPACE}%{NUMBER:pid}?%{SPACE}?(?<loglevel>AUDIT|CRITICAL|DEBUG|INFO|TRACE|WARNING|ERROR) \[?\b%{NOTSPACE:module}\b\]?%{SPACE}?%{GREEDYDATA:logmessage}?" ]
     add_field => [ "received_at", "%{@timestamp}" ]
   }
   date {
