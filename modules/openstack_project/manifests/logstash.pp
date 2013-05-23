@@ -28,11 +28,6 @@ class openstack_project::logstash (
   class { 'logstash::web':
     frontend => 'kibana',
   }
-  include logstash::elasticsearch
-
-  package { 'redis-server':
-    ensure => 'absent',
-  }
 
   package { 'python3':
     ensure => 'present',
@@ -81,21 +76,5 @@ class openstack_project::logstash (
     hasrestart => true,
     subscribe  => File['/etc/logstash/jenkins-log-pusher.yaml'],
     require    => File['/etc/init.d/jenkins-log-pusher'],
-  }
-
-  cron { 'delete_old_es_indices':
-    user        => 'root',
-    hour        => '5',
-    minute      => '0',
-    command     => 'curl -sS -XDELETE "http://localhost:9200/logstash-`date -d \'last week\' +\%Y.\%m.\%d`/"',
-    environment => 'PATH=/usr/bin:/bin:/usr/sbin:/sbin',
-  }
-
-  cron { 'optimize_old_es_indices':
-    user        => 'root',
-    hour        => '5',
-    minute      => '0',
-    command     => 'curl -sS -XPOST "http://localhost:9200/logstash-`date -d yesterday +\%Y.\%m.\%d`/_optimize?max_num_segments=2"',
-    environment => 'PATH=/usr/bin:/bin:/usr/sbin:/sbin',
   }
 }
