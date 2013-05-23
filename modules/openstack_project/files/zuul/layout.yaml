@@ -1947,4 +1947,8 @@ projects:
       - gate-inception-pep8
     gate:
       - gate-inception-pep8
-
+  - name: stackforge/occi-os
+    check:
+      - gate-noop
+    gate:
+      - gate-noop
