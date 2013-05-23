@@ -208,6 +208,7 @@ puppet-openstack:
       - stackforge/puppet-openstack_dev_env
       - stackforge/puppet-quantum
       - stackforge/puppet-swift
+      - stackforge/puppet-tempest
     branches:
       - master
 
