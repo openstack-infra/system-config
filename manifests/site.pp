@@ -203,6 +203,12 @@ node 'logstash.openstack.org' {
   }
 }
 
+node 'elasticsearch.openstack.org' {
+  class { 'openstack_project::elasticsearch':
+    sysadmins => hiera('sysadmins'),
+  }
+}
+
 # A machine to run ODSREG in preparation for summits.
 node 'summit.openstack.org' {
   class { 'openstack_project::summit':
