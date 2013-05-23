@@ -51,6 +51,7 @@ filter {
 
 output {
   elasticsearch {
-    host => "127.0.0.1"
+    host => "elasticsearch.openstack.org"
+    node_name => "logstash-indexer"
   }
 }
