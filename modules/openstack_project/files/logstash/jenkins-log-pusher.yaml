@@ -26,6 +26,38 @@ source-files:
     tags:
       - screen
       - oslofmt
+  - name: logs/screen-g-api.txt
+    tags:
+      - screen
+      - oslofmt
+  - name: logs/screen-g-reg.txt
+    tags:
+      - screen
+      - oslofmt
+  - name: logs/screen-n-api.txt
+    tags:
+      - screen
+      - oslofmt
+  - name: logs/screen-n-cond.txt
+    tags:
+      - screen
+      - oslofmt
+  - name: logs/screen-n-cpu.txt
+    tags:
+      - screen
+      - oslofmt
+  - name: logs/screen-n-crt.txt
+    tags:
+      - screen
+      - oslofmt
+  - name: logs/screen-n-obj.txt
+    tags:
+      - screen
+      - oslofmt
+  - name: logs/screen-n-sch.txt
+    tags:
+      - screen
+      - oslofmt
   - name: logs/screen-q-agt.txt
     tags:
       - screen
