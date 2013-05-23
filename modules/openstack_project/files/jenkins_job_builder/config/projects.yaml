@@ -752,7 +752,7 @@
 
 - project:
     name: tempest
-    github-org: openstack-infra
+    github-org: openstack
     node: precise
     doc-publisher-site: docs.openstack.org
 
