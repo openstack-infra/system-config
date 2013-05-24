@@ -1,26 +1,48 @@
+:title: Jenkins Job Builder
+
+.. _jjb:
+
 Jenkins Job Builder
-===================
+###################
+
+Jenkins Job Builder is a system for configuring Jenkins jobs using
+simple YAML files stored in Git.
+
+At a Glance
+===========
+
+:Hosts:
+  * http://jenkins.openstack.org
+  * http://jenkins-dev.openstack.org
+:Puppet:
+  * :file:`modules/jenkins/manifests/job_builder.pp`
+:Configuration:
+  * :file:`modules/openstack_project/files/jenkins_job_builder/config/`
+:Projects:
+  * http://github.com/openstack-infra/jenkins-job-builder
+:Bugs:
+  * http://bugs.launchpad.net/openstack-ci
+:Resources:
+  * `Reference Manual <http://ci.openstack.org/jenkins-job-builder>`_
 
 Overview
---------
+========
 
-In order to make the process of managing hundreds of Jenkins Jobs easier a
-Python based utility was designed to take YAML based configurations and convert
-those into jobs that are injected into Jenkins. The source for this utility can
-be found on `github <https://github.com/openstack-infra/jenkins-job-builder>`_ and
-it comes with its own
-`documentation <http://ci.openstack.org/jenkins-job-builder/>`_.
+In order to make the process of managing hundreds of Jenkins jobs
+easier, Jenkins Job Builder was designed to take YAML based
+configurations and convert those into jobs that are injected into
+Jenkins.
 
-The documentation below describes how the OpenStack Infrastructure team uses
-the Jenkins Job Builder in their environment.
+The documentation below describes how the OpenStack Infrastructure
+team uses the Jenkins Job Builder in our environment.
 
 Configuring Projects
---------------------
+====================
 
-The YAML scripts to make this work are stored in the ``openstack-infra/config``
-repository in the
-``modules/openstack_project/files/jenkins_job_builder/config/`` directory.
-In this directory you can have four different types of yaml config files:
+The YAML scripts to make this work are stored in the
+:file:`modules/openstack_project/files/jenkins_job_builder/config/`
+directory.  In this directory you can have four different types of
+yaml config files:
 
 * Jenkins Jobs Defaults in ``defaults.yaml``.
 * Jenkins Jobs Macros to give larger config sections meaningful names in
@@ -30,15 +52,14 @@ In this directory you can have four different types of yaml config files:
   the templates should be filled out and templates go in ``template_name.yaml``.
 
 YAML Format
------------
+===========
 
 Defaults
-^^^^^^^^
+--------
 
 Example defaults config:
 
 .. code-block:: yaml
-   :linenos:
 
    - defaults:
        name: global
@@ -77,13 +98,12 @@ indicating Puppet manages these jobs, jobs are allowed to run concurrently,
 and a thirty minute job timeout.
 
 Macros
-^^^^^^
+------
 
 Macros exist to give meaningful names to blocks of configuration that can be
 used in job configs in place of the blocks they name. For example:
 
 .. code-block:: yaml
-   :linenos:
 
    - builder:
        name: git-prep
@@ -111,12 +131,11 @@ having the yaml below the name in place of the name in the job config. The next
 section shows how you can use these macros.
 
 Job Config
-^^^^^^^^^^
+----------
 
 Example job config:
 
 .. code-block:: yaml
-   :linenos:
 
    - job:
        name: example-docs
@@ -147,14 +166,13 @@ jenkins publishing steps and so on. The macros defined earlier make this easy
 and simple.
 
 Job Templates
-^^^^^^^^^^^^^
+-------------
 
 Job templates allow you to specify a job config once with arguments that are
 replaced with the values specified in ``projects.yaml``. This allows you to
 reuse job configs across many projects. First you need a templated job config:
 
 .. code-block:: yaml
-   :linenos:
 
    - job-template:
        name: '{name}-docs'
@@ -197,7 +215,6 @@ The ``projects.yaml`` pulls all of the magic together. It specifies the
 arguemnts to and instantiates the job templates as real jobs. For example:
 
 .. code-block:: yaml
-   :linenos:
 
    - project:
        name: example1
@@ -235,14 +252,16 @@ file should be modified or removed.
 Sending a Job to Jenkins
 ------------------------
 
-The Jenkins Jobs builder talks to Jenkins using the Jenkins API.  This means
-that it can create and modify jobs directly without the need to restart or
-reload the Jenkins server.  It also means that Jenkins will verify the XML and
-cause the Jenkins Jobs builder to fail if there is a problem.
+The Jenkins Jobs builder talks to Jenkins using the Jenkins API.  This
+means that it can create and modify jobs directly without the need to
+restart or reload the Jenkins server.  It also means that Jenkins will
+verify the XML and cause the Jenkins Jobs builder to fail if there is
+a problem.
 
-For this to work a configuration file is needed.  There is an erb template for
-this configuration file at ``modules/jenkins/templates/jenkins_jobs.ini.erb``.
-The contents of this erb are:
+For this to work a configuration file is needed.  There is an erb
+template for this configuration file at
+:file:`modules/jenkins/templates/jenkins_jobs.ini.erb`.  The contents
+of this template are:
 
 .. code-block:: ini
 
@@ -252,10 +271,11 @@ The contents of this erb are:
    url=<%= url %>
 
 The values for user and url are hardcoded in the Puppet repo in
-`modules/openstack_project/manifests/jenkins.pp <https://github.com/openstack-infra/config/blob/master/modules/openstack_project/manifests/jenkins.pp>`_,
-but the password is stored in hiera. Make sure you have it defined as
+:file:`modules/openstack_project/manifests/jenkins.pp`, but the
+password is stored in hiera. Make sure you have it defined as
 ``jenkins_jobs_password`` in the hiera DB.
 
-The password can be obtained by logging into the Jenkins user, clicking on your
-username in the top-right, clicking on `Configure` and then `Show API Token`.
-This API Token is your password for the API.
+The password can be obtained by logging into the Jenkins user,
+clicking on your username in the top-right, clicking on `Configure`
+and then `Show API Token`.  This API Token is your password for the
+API.

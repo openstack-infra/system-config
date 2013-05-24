@@ -1,35 +1,72 @@
-:title: Jenkins Configuration
+:title: Jenkins
+
+.. _jenkins:
 
 Jenkins
 #######
 
+Jenkins is a Continuous Integration system that runs tests and
+automates some parts of project operations.  It is controlled for the
+most part by :ref:`zuul` which determines what jobs are run when.
+
+At a Glance
+===========
+
+:Hosts:
+  * http://jenkins.openstack.org
+  * http://jenkins-dev.openstack.org
+:Puppet:
+  * :file:`modules/jenkins`
+  * :file:`modules/openstack_project/manifests/jenkins.pp`
+  * :file:`modules/openstack_project/manifests/jenkins_dev.pp`
+:Configuration:
+  * :file:`modules/openstack_project/files/jenkins_job_builder/config/`
+:Projects:
+  * http://jenkins-ci.org/
+  * :ref:`zuul`
+  * :ref:`jjb`
+:Bugs:
+  * http://bugs.launchpad.net/openstack-ci
+  * https://wiki.jenkins-ci.org/display/JENKINS/Issue+Tracking
+:Resources:
+  * :ref:`zuul`
+  * :ref:`jjb`
+
 Overview
-********
+========
 
-Jenkins is a Continuous Integration system and the central control
-system for the orchestration of both pre-merge testing and post-merge
-actions such as packaging and publishing of documentation.
+A large number and variety of jobs are defined in Jenkins.  The
+configuration of all of those jobs is stored in git in the
+openstack-infra/config repository.  They are defined in YAML files
+that are read by :ref:`jjb` which configures the actual jobs in
+Jenkins.
 
-The overall design that Jenkins is a key part of implementing is that
-all code should be reviewed and tested before being merged in to trunk,
-and that as many tasks around review, testing, merging and release that
-can be automated should be.
+Anyone may submit a change to the openstack-infra/config repository
+that defines a new job or alters an existing job by editing the
+appropriate YAML files.  See :ref:`jjb` for more information.
 
-Jenkins is essentially a job queing system, and everything that is done
-through Jenkins can be thought of as having a few discreet components:
+Because of the large number of builds that Jenkins executes, the
+OpenStack project favors the following approach in configuring Jenkins
+jobs:
 
-* Triggers - What causes a job to be run
-* Location - Where do we run a job
-* Steps - What actions are taken when the job runs
-* Results - What is the outcome of the job
-
-The OpenStack Jenkins can be found at http://jenkins.openstack.org
-
-OpenStack uses :doc:`gerrit` to manage code reviews, which in turns calls
-Jenkins to test those reviews.
+  * Minimal use of plugins: the more post-processing work that Jenkins
+    needs to perform on a job, the more likely we are to run into
+    compatibility problems among plugins, and contention for shared
+    resources on the Jenkins master.  A number of popuplar plugins
+    will cause all builds of a job to be serialized even if the jobs
+    otherwise run in parallel.
+  * Minimal build history: Jenkins stores build history in individual
+    XML files on disk, and accessing a large build history can cause
+    the Jenkins master to be unresponsive for a significant time while
+    loading them.  It also increases memory usage.  Instead, we
+    generally keep no more than a day's worth of builds.
+  * Move artifacts off of Jenkins: Jenkins is not efficient at serving
+    static information such as build artifacts (e.g., tarballs) or
+    logs.  Instead, we copy them to a static webserver which is far
+    more efficient.
 
 Authorization
-*************
+=============
 
 Jenkins is set up to use OpenID in a Single Sign On mode with Launchpad.
 This means that all of the user and group information is managed via
@@ -40,20 +77,18 @@ user will need to re-log in upon changing either team membership on
 Launchpad, or changing that team's authorization in Jenkins for the new
 privileges to take effect.
 
-Integration Testing
-*******************
-
-TODO: How others can get involved in testing and integrating with
-OpenStack Jenkins.
-
 Devstack Gate
 =============
 
-Currently OpenStack integration testing is performed by the devstack
-gate test framework. This framework runs the devstack exercises and
-Tempest smoketests against a devstack install on single use cloud
-servers. The devstack gate source can be found on
-`Github <https://github.com/openstack-infra/devstack-gate>`_ and the
-`Readme <https://github.com/openstack-infra/devstack-gate/blob/master/README.md>`_
+OpenStack integration testing is performed by the devstack gate test
+framework. This framework runs the devstack exercises and Tempest
+smoketests against a devstack install on single use cloud servers. The
+devstack gate source can be found on `Github
+<https://github.com/openstack-infra/devstack-gate>`_ and the `Readme
+<https://github.com/openstack-infra/devstack-gate/blob/master/README.md>`_
 describes the process of using devstack gate to run your own devstack
 based tests.
+
+The :ref:`devstack-gate` project is used to maintain a pool of Jenkins
+slaves that are used to run these tests.  Devstack-gate jobs create
+and delete Jenkins slaves as needed in order to maintain the pool.
