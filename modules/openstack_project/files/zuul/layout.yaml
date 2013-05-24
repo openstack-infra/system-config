@@ -81,6 +81,10 @@ jobs:
   - name: gate-grenade-devstack-vm
     branch: ^(?!stable/folsom).*$
     voting: false
+  - name: gate-tempest-docs
+    branch: ^(?!stable/(folsom|grizzly)).*$
+  - name: tempest-docs
+    branch: ^(?!stable/(folsom|grizzly)).*$
   - name: gate-nova-pylint
     voting: false
   - name: gate-cinder-pylint
