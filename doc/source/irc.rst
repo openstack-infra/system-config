@@ -1,8 +1,38 @@
-Meetbot
-==============
+:title: IRC Services
 
-Overview
---------
+.. _irc:
+
+IRC Services
+############
+
+The infrastructure team runs a number of IRC bots that are active on
+OpenStack related channels.
+
+At a Glance
+===========
+
+:Hosts:
+  * http://eavesdrop.openstack.org/
+  * http://review.openstack.org/
+  * https://wiki.openstack.org/wiki/Infrastructure_Status
+:Puppet:
+  * :file:`modules/meetbot`
+  * :file:`modules/statusbot`
+  * :file:`modules/gerritbot`
+  * :file:`modules/openstack_project/manifests/eavesdrop.pp`
+  * :file:`modules/openstack_project/manifests/review.pp`
+:Configuration:
+  * :file:`modules/gerritbot/files/gerritbot_channel_config.yaml`
+:Projects:
+  * http://wiki.debian.org/MeetBot
+  * http://sourceforge.net/projects/supybot/
+  * https://github.com/openstack-infra/gerritbot
+  * https://github.com/openstack-infra/statusbot
+:Bugs:
+  * http://bugs.launchpad.net/openstack-ci
+
+Meetbot
+=======
 
 The OpenStack Infrastructure team run a slightly modified
 `Meetbot <http://wiki.debian.org/MeetBot>`_ to log IRC channel activity and
@@ -21,9 +51,7 @@ get you going, but there are other goodies in ``doc/``.
 
 Once you have Supybot installed you will need to configure a bot. The
 ``supybot-wizard`` command can get you started with a basic config, or you can
-have Puppet do the heavy lifting. The OpenStack Infrastructure Meetbot Puppet
-module creates a configuration and documentation for that module is at
-:ref:`Meetbot_Puppet_Module`.
+have the OpenStack meetbot puppet module do the heavy lifting.
 
 One important config setting is ``supybot.reply.whenAddressedBy.chars``, which
 sets the prefix character for this bot. This should be set to something other
@@ -37,8 +65,6 @@ The OpenStack Infrastructure Meetbot fork can be found at
 https://github.com/openstack-infra/meetbot. Manual installation of the Meetbot
 plugin is straightforward and documented in that repository's README.
 OpenStack Infrastructure installs and configures Meetbot through Puppet.
-Documentation for the Puppet module that does that can be found at
-:ref:`Meetbot_Puppet_Module`.
 
 Voting
 ^^^^^^
@@ -88,3 +114,49 @@ A somewhat contrived voting example:
   meetbot | Voted on "Should we vote now?" Results are
   meetbot | Yes (1): bar
   meetbot | No (1): foo
+
+
+.. _statusbot:
+
+Statusbot
+=========
+
+Statusbot is used to distribute urgent information from the
+Infrastructure team to OpenStack channels.  It updates the
+`Infrastructure Status wiki page
+<https://wiki.openstack.org/wiki/Infrastructure_Status>`_.  It
+supports the following commands when issued by authenticated and
+whitelisted users:
+
+#status log MESSAGE
+  Log a message to the wiki page.
+
+#status notice MESSAGE
+  Broadcast a message to all OpenStack channels, and log to the wiki
+  page.
+
+#status alert MESSAGE
+  Broadcast a message to all OpenStack channels and change their
+  topics, log to the wiki page, and set an alert box on the wiki
+  page (eventually include this alert box on status.openstack.org
+  pages).
+
+#status ok [MESSAGE]
+  Remove alert box and restore channel topics, optionally announcing
+  and logging an "okay" message.
+
+
+.. _gerritbot:
+
+Gerritbot
+=========
+
+Gerritbot watches the Gerrit event stream (using the "stream-events"
+Gerrit command) and announces events (such as patchset-created, or
+change-merged) to relevant IRC channels.
+
+Gerritbot's configuration is in
+:file:`modules/gerritbot/files/gerritbot_channel_config.yaml`.
+
+The configuration is organized by channel, with each project that a
+channel is interested in listed under the channel.

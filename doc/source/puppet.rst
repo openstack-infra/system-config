@@ -1,13 +1,30 @@
-Puppet Master
-=============
+:title: Puppet Master
 
-Overview
---------
+.. _puppet-master:
+
+Puppet Master
+#############
 
 Puppet agent is a mechanism use to pull puppet manifests and configuration
 from a centralized master. This means there is only one place that needs to
 hold secure information such as passwords, and only one location for the git
 repo holding the modules.
+
+At a Glance
+===========
+
+:Hosts:
+  * ci-puppetmaster.openstack.org
+  * http://puppet-dashboard.openstack.org:3000/
+:Puppet:
+  * :file:`modules/openstack_project/manifests/puppetmaster.pp`
+:Projects:
+  * https://puppetlabs.com/
+:Bugs:
+  * http://bugs.launchpad.net/openstack-ci
+  * http://projects.puppetlabs.com/
+:Resources:
+  * `Puppet Language Reference <http://docs.puppetlabs.com/references/2.7.latest/type.html>`_
 
 Puppet Master
 -------------
