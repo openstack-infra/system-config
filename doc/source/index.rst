@@ -7,36 +7,33 @@ OpenStack Project Infrastructure
 ================================
 
 This documentation covers the installation and maintenance of the
-project infrastructure used by OpenStack.  It
-may be of interest to people who may want to help develop this
-infrastructure or integrate their tools into it.  Some instructions
-may be useful to other projects that want to set up similar infrastrucutre
-systems for their developers.
+project infrastructure used by OpenStack.  It may be of interest to
+people who may want to help develop this infrastructure or integrate
+their tools into it.  Some instructions may be useful to other
+projects that want to set up similar infrastrucutre systems for their
+developers.
 
 OpenStack developers or users do not need to read this documentation.
 Instead, see http://wiki.openstack.org/ to learn how contribute to or
 use OpenStack.
 
-Howtos:
+.. sidebar:: HOWTOs
 
-.. toctree::
-   :maxdepth: 2
+   .. toctree::
+      :maxdepth: 1
 
-   third_party
+      third_party
+      stackforge
 
 Contents:
 
 .. toctree::
    :maxdepth: 2
 
+   project
+   sysadmin
    systems
-   jenkins
-   gerrit
-   puppet
-   puppet_modules
-   jenkins_jobs
-   meetbot
-   stackforge
+
 
 Indices and tables
 ==================
