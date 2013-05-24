@@ -1574,108 +1574,90 @@ projects:
 
   - name: stackforge/puppet-ceilometer
     check:
-      - gate-puppet-ceilometer-puppet-unit-2.6
       - gate-puppet-ceilometer-puppet-unit-2.7
       - gate-puppet-ceilometer-puppet-unit-3.0
       - gate-puppet-ceilometer-puppet-unit-3.1
     gate:
-      - gate-puppet-ceilometer-puppet-unit-2.6
       - gate-puppet-ceilometer-puppet-unit-2.7
       - gate-puppet-ceilometer-puppet-unit-3.0
       - gate-puppet-ceilometer-puppet-unit-3.1
 
   - name: stackforge/puppet-cinder
     check:
-      - gate-puppet-cinder-puppet-unit-2.6
       - gate-puppet-cinder-puppet-unit-2.7
       - gate-puppet-cinder-puppet-unit-3.0
       - gate-puppet-cinder-puppet-unit-3.1
     gate:
-      - gate-puppet-cinder-puppet-unit-2.6
       - gate-puppet-cinder-puppet-unit-2.7
       - gate-puppet-cinder-puppet-unit-3.0
       - gate-puppet-cinder-puppet-unit-3.1
 
   - name: stackforge/puppet-glance
     check:
-      - gate-puppet-glance-puppet-unit-2.6
       - gate-puppet-glance-puppet-unit-2.7
       - gate-puppet-glance-puppet-unit-3.0
       - gate-puppet-glance-puppet-unit-3.1
     gate:
-      - gate-puppet-glance-puppet-unit-2.6
       - gate-puppet-glance-puppet-unit-2.7
       - gate-puppet-glance-puppet-unit-3.0
       - gate-puppet-glance-puppet-unit-3.1
 
   - name: stackforge/puppet-horizon
     check:
-      - gate-puppet-horizon-puppet-unit-2.6
       - gate-puppet-horizon-puppet-unit-2.7
       - gate-puppet-horizon-puppet-unit-3.0
       - gate-puppet-horizon-puppet-unit-3.1
     gate:
-      - gate-puppet-horizon-puppet-unit-2.6
       - gate-puppet-horizon-puppet-unit-2.7
       - gate-puppet-horizon-puppet-unit-3.0
       - gate-puppet-horizon-puppet-unit-3.1
 
   - name: stackforge/puppet-keystone
     check:
-      - gate-puppet-keystone-puppet-unit-2.6
       - gate-puppet-keystone-puppet-unit-2.7
       - gate-puppet-keystone-puppet-unit-3.0
       - gate-puppet-keystone-puppet-unit-3.1
     gate:
-      - gate-puppet-keystone-puppet-unit-2.6
       - gate-puppet-keystone-puppet-unit-2.7
       - gate-puppet-keystone-puppet-unit-3.0
       - gate-puppet-keystone-puppet-unit-3.1
 
   - name: stackforge/puppet-nova
     check:
-      - gate-puppet-nova-puppet-unit-2.6
       - gate-puppet-nova-puppet-unit-2.7
       - gate-puppet-nova-puppet-unit-3.0
       - gate-puppet-nova-puppet-unit-3.1
     gate:
-      - gate-puppet-nova-puppet-unit-2.6
       - gate-puppet-nova-puppet-unit-2.7
       - gate-puppet-nova-puppet-unit-3.0
       - gate-puppet-nova-puppet-unit-3.1
 
   - name: stackforge/puppet-quantum
     check:
-      - gate-puppet-quantum-puppet-unit-2.6
       - gate-puppet-quantum-puppet-unit-2.7
       - gate-puppet-quantum-puppet-unit-3.0
       - gate-puppet-quantum-puppet-unit-3.1
     gate:
-      - gate-puppet-quantum-puppet-unit-2.6
       - gate-puppet-quantum-puppet-unit-2.7
       - gate-puppet-quantum-puppet-unit-3.0
       - gate-puppet-quantum-puppet-unit-3.1
 
   - name: stackforge/puppet-openstack
     check:
-      - gate-puppet-openstack-puppet-unit-2.6
       - gate-puppet-openstack-puppet-unit-2.7
       - gate-puppet-openstack-puppet-unit-3.0
       - gate-puppet-openstack-puppet-unit-3.1
     gate:
-      - gate-puppet-openstack-puppet-unit-2.6
       - gate-puppet-openstack-puppet-unit-2.7
       - gate-puppet-openstack-puppet-unit-3.0
       - gate-puppet-openstack-puppet-unit-3.1
 
   - name: stackforge/puppet-swift
     check:
-      - gate-puppet-swift-puppet-unit-2.6
       - gate-puppet-swift-puppet-unit-2.7
       - gate-puppet-swift-puppet-unit-3.0
       - gate-puppet-swift-puppet-unit-3.1
     gate:
-      - gate-puppet-swift-puppet-unit-2.6
       - gate-puppet-swift-puppet-unit-2.7
       - gate-puppet-swift-puppet-unit-3.0
       - gate-puppet-swift-puppet-unit-3.1
