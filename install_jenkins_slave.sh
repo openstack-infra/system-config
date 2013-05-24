@@ -40,6 +40,7 @@ else #defaults to Ubuntu
 	dpkg -i $puppet_deb
 
 	apt-get update
+	apt-get dist-upgrade
 	apt-get install -y puppet git rubygems
 
 fi

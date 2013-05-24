@@ -56,7 +56,7 @@ EOF
 
     apt-get update
     DEBIAN_FRONTEND=noninteractive apt-get --option 'Dpkg::Options::=--force-confold' \
-        --assume-yes upgrade
+        --assume-yes dist-upgrade
     DEBIAN_FRONTEND=noninteractive apt-get --option 'Dpkg::Options::=--force-confold' \
         --assume-yes install -y --force-yes puppet git rubygems
 fi
