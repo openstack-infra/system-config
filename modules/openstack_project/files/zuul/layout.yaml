@@ -981,6 +981,7 @@ projects:
       - gate-tempest-requirements
       - gate-tempest-pep8
       - gate-tempest-docs
+		branch: ^master$
       - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-postgres-full
@@ -991,6 +992,7 @@ projects:
       - gate-tempest-requirements
       - gate-tempest-pep8
       - gate-tempest-docs
+		branch: ^master$
       - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-postgres-full
