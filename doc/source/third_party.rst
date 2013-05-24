@@ -1,5 +1,5 @@
-HOWTO: Third Party Testing
-==========================
+Third Party Testing
+===================
 
 Overview
 --------

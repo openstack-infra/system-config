@@ -1,21 +1,23 @@
+:title: Zuul
+
 Jenkins Job Builder
-===================
+###################
 
 Overview
---------
+========
 
 In order to make the process of managing hundreds of Jenkins Jobs easier a
 Python based utility was designed to take YAML based configurations and convert
 those into jobs that are injected into Jenkins. The source for this utility can
-be found on `github <https://github.com/openstack-infra/jenkins-job-builder>`_ and
+be found at `<https://github.com/openstack-infra/jenkins-job-builder>`_ and
 it comes with its own
 `documentation <http://ci.openstack.org/jenkins-job-builder/>`_.
 
-The documentation below describes how the OpenStack Infrastructure team uses
-the Jenkins Job Builder in their environment.
+The documentation below describes how the OpenStack Infrastructure
+team uses the Jenkins Job Builder in our environment.
 
 Configuring Projects
---------------------
+====================
 
 The YAML scripts to make this work are stored in the ``openstack-infra/config``
 repository in the
@@ -30,10 +32,10 @@ In this directory you can have four different types of yaml config files:
   the templates should be filled out and templates go in ``template_name.yaml``.
 
 YAML Format
------------
+===========
 
 Defaults
-^^^^^^^^
+--------
 
 Example defaults config:
 
@@ -77,7 +79,7 @@ indicating Puppet manages these jobs, jobs are allowed to run concurrently,
 and a thirty minute job timeout.
 
 Macros
-^^^^^^
+------
 
 Macros exist to give meaningful names to blocks of configuration that can be
 used in job configs in place of the blocks they name. For example:
@@ -111,7 +113,7 @@ having the yaml below the name in place of the name in the job config. The next
 section shows how you can use these macros.
 
 Job Config
-^^^^^^^^^^
+----------
 
 Example job config:
 
@@ -147,7 +149,7 @@ jenkins publishing steps and so on. The macros defined earlier make this easy
 and simple.
 
 Job Templates
-^^^^^^^^^^^^^
+-------------
 
 Job templates allow you to specify a job config once with arguments that are
 replaced with the values specified in ``projects.yaml``. This allows you to

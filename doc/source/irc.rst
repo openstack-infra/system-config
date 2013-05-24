@@ -1,8 +1,13 @@
-Meetbot
-==============
+:title: IRC Services
 
-Overview
---------
+IRC Services
+############
+
+The infrastructure team runs a number of IRC bots that are active on
+OpenStack related channels.
+
+Meetbot
+=======
 
 The OpenStack Infrastructure team run a slightly modified
 `Meetbot <http://wiki.debian.org/MeetBot>`_ to log IRC channel activity and
@@ -88,3 +93,46 @@ A somewhat contrived voting example:
   meetbot | Voted on "Should we vote now?" Results are
   meetbot | Yes (1): bar
   meetbot | No (1): foo
+
+
+Statusbot
+=========
+
+Statusbot is used to distribute urgent information from the
+Infrastructure team to OpenStack channels.  It updates the
+`Infrastructure Status wiki page
+<https://wiki.openstack.org/wiki/Infrastructure_Status>`_.  It
+supports the following commands when issued by authenticated and
+whitelisted users:
+
+#status log MESSAGE
+  Log a message to the wiki page.
+
+#status notice MESSAGE
+  Broadcast a message to all OpenStack channels, and log to the wiki
+  page.
+
+#status alert MESSAGE 
+  Broadcast a message to all OpenStack channels and change their
+  topics, log to the wiki page, and set an alert box on the wiki
+  page (eventually include this alert box on status.openstack.org
+  pages).
+
+#status ok [MESSAGE]
+  Remove alert box and restore channel topics, optionally announcing
+  and logging an "okay" message.
+
+
+Gerritbot
+=========
+
+Gerritbot watches the Gerrit event stream (using the "stream-events"
+Gerrit command) and announces events (such as patchset-created, or
+change-merged) to relevant IRC channels.
+
+Gerritbot's configuration is in the ``openstack-infra/config``
+repository in
+``modules/gerritbot/files/gerritbot_channel_config.yaml``.
+
+The configuration is organized by channel, with each project that a
+channel is interested in listed under the channel.
