@@ -45,4 +45,13 @@ class openstack_project::lists(
     webserver   => $listdomain,
     mailserver  => $listdomain,
   }
+
+  maillist { 'openstack-es':
+    ensure      => present,
+    admin       => 'flavio@redhat.com',
+    password    => $listpassword,
+    description => 'Lista de correo acerca de OpenStack en español',
+    webserver   => $listdomain,
+    mailserver  => $listdomain,
+  }
 }
