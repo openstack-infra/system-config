@@ -218,12 +218,13 @@ class LogRetriever(threading.Thread):
         return gzipped, raw_buf
 
 
-class StdOutLogProcessor(object):
+class StdOutLogProcessor(threading.Thread):
     def __init__(self, logq, pretty_print=False):
+        threading.Thread.__init__(self)
         self.logq = logq
         self.pretty_print = pretty_print
 
-    def handle_log_event(self):
+    def _handle_log_event(self):
         log = self.logq.get()
         if self.pretty_print:
             print(json.dumps(log, sort_keys=True,
@@ -233,11 +234,20 @@ class StdOutLogProcessor(object):
         # Push each log event through to keep logstash up to date.
         sys.stdout.flush()
 
+    def run(self):
+        while True:
+            try:
+                self._handle_log_event()
+            except:
+                logging.exception("Exception processing log event.")
+                os._exit(1)
 
-class INETLogProcessor(object):
+
+class INETLogProcessor(threading.Thread):
     socket_type = None
 
     def __init__(self, logq, host, port):
+        threading.Thread.__init__(self)
         self.logq = logq
         self.host = host
         self.port = port
@@ -248,7 +258,7 @@ class INETLogProcessor(object):
         self.socket = socket.socket(socket.AF_INET, self.socket_type)
         self.socket.connect((self.host, self.port))
 
-    def handle_log_event(self):
+    def _handle_log_event(self):
         log = self.logq.get()
         try:
             self.socket.sendall((json.dumps(log) + '\n').encode('utf-8'))
@@ -261,6 +271,15 @@ class INETLogProcessor(object):
             semi_busy_wait(90)
             self._connect_socket()
             self.socket.sendall((json.dumps(log) + '\n').encode('utf-8'))
+        log.clear()
+
+    def run(self):
+        while True:
+            try:
+                self._handle_log_event()
+            except:
+                logging.exception("Exception processing log event.")
+                os._exit(1)
 
 
 class UDPLogProcessor(INETLogProcessor):
@@ -287,9 +306,8 @@ class Server(object):
         self.catchers = []
         self.event_queues = []
         self.retrievers = []
-        # TODO(clarkb) support multiple outputs
-        self.logqueue = queue.Queue()
-        self.processor = None
+        self.output_queues = []
+        self.processors = []
 
     def setup_logging(self):
         if self.debuglog:
@@ -300,11 +318,32 @@ class Server(object):
             logging.basicConfig(level=logging.CRITICAL)
         logging.debug("Log pusher starting.")
 
-    def setup_retrievers(self):
+    def setup_processors(self):
         for source_file in self.config['source-files']:
+            output_queue = queue.Queue()
+            self.output_queues.append(output_queue)
+            if self.default_output_mode == "tcp":
+                processor = TCPLogProcessor(output_queue,
+                                            self.default_output_host,
+                                            self.default_output_port)
+            elif self.default_output_mode == "udp":
+                processor = UDPLogProcessor(output_queue,
+                                            self.default_output_host,
+                                            self.default_output_port)
+            else:
+                # Note this processor will not work if the process is run as a
+                # daemon or if you have multiple source files. You must use
+                # the --foreground option. And specify a single source file.
+                processor = StdOutLogProcessor(output_queue)
+
+            self.processors.append(processor)
+
+    def setup_retrievers(self):
+        for source_file, output_queue in \
+            zip(self.config['source-files'], self.output_queues):
             eventqueue = queue.Queue()
             self.event_queues.append(eventqueue)
-            retriever = LogRetriever(eventqueue, self.logqueue,
+            retriever = LogRetriever(eventqueue, output_queue,
                                      source_file.get('source-url',
                                                      self.default_source_url),
                                      source_file['name'],
@@ -319,24 +358,10 @@ class Server(object):
             catcher = EventCatcher(self.event_queues, zmq_publisher)
             self.catchers.append(catcher)
 
-    def setup_processor(self):
-        if self.default_output_mode == "tcp":
-            self.processor = TCPLogProcessor(self.logqueue,
-                                             self.default_output_host,
-                                             self.default_output_port)
-        elif self.default_output_mode == "udp":
-            self.processor = UDPLogProcessor(self.logqueue,
-                                             self.default_output_host,
-                                             self.default_output_port)
-        else:
-            # Note this processor will not work if the process is run as a
-            # daemon. You must use the --foreground option.
-            self.processor = StdOutLogProcessor(self.logqueue)
-
     def main(self):
+        self.setup_processors()
         self.setup_retrievers()
         self.setup_catchers()
-        self.setup_processor()
 
         for catcher in self.catchers:
             catcher.daemon = True
@@ -344,13 +369,12 @@ class Server(object):
         for retriever in self.retrievers:
             retriever.daemon = True
             retriever.start()
+        for processor in self.processors:
+            processor.daemon = True
+            processor.start()
 
         while True:
-            try:
-                self.processor.handle_log_event()
-            except:
-                logging.exception("Exception processing log event.")
-                raise
+            time.sleep(5)
 
 
 class DaemonContext(object):
