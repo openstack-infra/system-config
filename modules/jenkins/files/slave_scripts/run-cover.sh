@@ -25,7 +25,7 @@ venv=cover
 # Workaround the combo of tox running setup.py outside of virtualenv
 # and RHEL having an old distribute. The next line can be removed
 # when either get fixed.
-python setup.py --version 2>/dev/null
+python setup.py --version
 
 tox -e$venv
 result=$?
