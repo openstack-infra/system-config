@@ -188,6 +188,12 @@ class openstack_project::static (
     require => File['/srv/static/status'],
   }
 
+  file { '/srv/static/status/favicon.ico':
+    ensure  => present,
+    source  => 'puppet:///modules/openstack_project/status/favicon.ico',
+    require => File['/srv/static/status'],
+  }
+
   file { '/srv/static/status/common.js':
     ensure  => present,
     source  => 'puppet:///modules/openstack_project/status/common.js',
