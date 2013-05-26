@@ -12,12 +12,13 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 #
-# Logstash indexer server glue class.
+# Logstash web frontend glue class.
 #
 class openstack_project::logstash (
+  $elasticsearch_masters = [],
   $sysadmins = []
 ) {
-  $iptables_rule = '-m state --state NEW -m tcp -p tcp --dport 9200:9400 -s elasticsearch.openstack.org -j ACCEPT'
+  $iptables_rule = regsubst ($elasticsearch_masters, '^(.*)$', '-m state --state NEW -m tcp -p tcp --dport 9200:9400 -s \1 -j ACCEPT')
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [22, 80],
     iptables_rules6           => $iptables_rule,
@@ -25,60 +26,8 @@ class openstack_project::logstash (
     sysadmins                 => $sysadmins,
   }
 
-  class { 'logstash::indexer':
-    conf_template => 'openstack_project/logstash/indexer.conf.erb',
-  }
   class { 'logstash::web':
     frontend           => 'kibana',
     elasticsearch_host => 'elasticsearch.openstack.org',
-  }
-
-  package { 'python3':
-    ensure => 'present',
-  }
-
-  package { 'python3-zmq':
-    ensure => 'present',
-  }
-
-  package { 'python3-yaml':
-    ensure => 'present',
-  }
-
-  file { '/usr/local/bin/log-pusher.py':
-    ensure  => present,
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0755',
-    source  => 'puppet:///modules/openstack_project/logstash/log-pusher.py',
-    require => Package['python3'],
-  }
-
-  file { '/etc/logstash/jenkins-log-pusher.yaml':
-    ensure  => present,
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0555',
-    source  => 'puppet:///modules/openstack_project/logstash/jenkins-log-pusher.yaml',
-    require => Class['logstash::indexer'],
-  }
-
-  file { '/etc/init.d/jenkins-log-pusher':
-    ensure  => present,
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0555',
-    source  => 'puppet:///modules/openstack_project/logstash/jenkins-log-pusher.init',
-    require => [
-      File['/usr/local/bin/log-pusher.py'],
-      File['/etc/logstash/jenkins-log-pusher.yaml'],
-    ],
-  }
-
-  service { 'jenkins-log-pusher':
-    enable     => true,
-    hasrestart => true,
-    subscribe  => File['/etc/logstash/jenkins-log-pusher.yaml'],
-    require    => File['/etc/init.d/jenkins-log-pusher'],
   }
 }
