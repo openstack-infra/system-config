@@ -1969,3 +1969,9 @@ projects:
       - gate-noop
     gate:
       - gate-noop
+
+  - name: stackforge/golang-client
+    check:
+      - gate-noop
+    gate:
+      - gate-noop
