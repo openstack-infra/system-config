@@ -12,49 +12,11 @@ zmq-publishers:
 
 # List of files to source logs from.
 source-files:
-  - name: console.html
-    retry-get: True
-  - name: logs/screen-c-api.txt
-    tags:
-      - screen
-      - oslofmt
-  - name: logs/screen-c-sch.txt
-    tags:
-      - screen
-      - oslofmt
-  - name: logs/screen-c-vol.txt
-    tags:
-      - screen
-      - oslofmt
   - name: logs/screen-g-api.txt
     tags:
       - screen
       - oslofmt
   - name: logs/screen-g-reg.txt
-    tags:
-      - screen
-      - oslofmt
-  - name: logs/screen-n-api.txt
-    tags:
-      - screen
-      - oslofmt
-  - name: logs/screen-n-cond.txt
-    tags:
-      - screen
-      - oslofmt
-  - name: logs/screen-n-cpu.txt
-    tags:
-      - screen
-      - oslofmt
-  - name: logs/screen-n-crt.txt
-    tags:
-      - screen
-      - oslofmt
-  - name: logs/screen-n-obj.txt
-    tags:
-      - screen
-      - oslofmt
-  - name: logs/screen-n-sch.txt
     tags:
       - screen
       - oslofmt

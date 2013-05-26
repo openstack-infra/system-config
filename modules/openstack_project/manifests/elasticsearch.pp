@@ -15,9 +15,10 @@
 # Elasticsearch server glue class.
 #
 class openstack_project::elasticsearch (
+  $logstash_workers = [],
   $sysadmins = []
 ) {
-  $iptables_rule = '-m state --state NEW -m tcp -p tcp --dport 9200:9400 -s logstash.openstack.org -j ACCEPT'
+  $iptables_rule = regsubst ($logstash_workers, '^(.*)$', '-m state --state NEW -m tcp -p tcp --dport 9200:9400 -s \1 -j ACCEPT')
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [22],
     iptables_rules6           => $iptables_rule,
