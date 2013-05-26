@@ -75,6 +75,9 @@ node 'jenkins.openstack.org' {
     ssl_key_file_contents   => hiera('jenkins_ssl_key_file_contents'),
     ssl_chain_file_contents => hiera('jenkins_ssl_chain_file_contents'),
     sysadmins               => hiera('sysadmins'),
+    zmq_event_receivers     => ['logstash-worker1.openstack.org',
+                                'logstash-worker2.openstack.org',
+                                'logstash-worker3.openstack.org',],
   }
 }
 
@@ -200,13 +203,25 @@ node 'puppet-dashboard.openstack.org' {
 
 node 'logstash.openstack.org' {
   class { 'openstack_project::logstash':
-    sysadmins => hiera('sysadmins'),
+    sysadmins             => hiera('sysadmins'),
+    elasticsearch_masters => ['elasticsearch.openstack.org'],
+  }
+}
+
+node /^logstash-worker\d+\.openstack\.org$/ {
+  class { 'openstack_project::logstash_worker':
+    sysadmins             => hiera('sysadmins'),
+    elasticsearch_masters => ['elasticsearch.openstack.org'],
   }
 }
 
 node 'elasticsearch.openstack.org' {
   class { 'openstack_project::elasticsearch':
-    sysadmins => hiera('sysadmins'),
+    sysadmins        => hiera('sysadmins'),
+    logstash_workers => ['logstash.openstack.org',
+                         'logstash-worker1.openstack.org',
+                         'logstash-worker2.openstack.org',
+                         'logstash-worker3.openstack.org',],
   }
 }
 
