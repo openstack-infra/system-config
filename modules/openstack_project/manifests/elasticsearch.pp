@@ -17,7 +17,13 @@
 class openstack_project::elasticsearch (
   $sysadmins = []
 ) {
-  $iptables_rule = '-m state --state NEW -m tcp -p tcp --dport 9200:9400 -s logstash.openstack.org -j ACCEPT'
+  $logstash_workers = [
+    'logstash.openstack.org',
+    'logstash-worker1.openstack.org',
+    'logstash-worker2.openstack.org',
+    'logstash-worker3.openstack.org',
+  ]
+  $iptables_rule = regsubst ($logstash_workers, '^(.*)$', '-m state --state NEW -m tcp -p tcp --dport 9200:9400 -s \1 -j ACCEPT')
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [22],
     iptables_rules6           => $iptables_rule,

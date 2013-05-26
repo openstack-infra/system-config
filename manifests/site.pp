@@ -204,6 +204,12 @@ node 'logstash.openstack.org' {
   }
 }
 
+node /^logstash-worker\d+\.openstack\.org$/ {
+  class { 'openstack_project::logstash_worker':
+    sysadmins => hiera('sysadmins'),
+  }
+}
+
 node 'elasticsearch.openstack.org' {
   class { 'openstack_project::elasticsearch':
     sysadmins => hiera('sysadmins'),
