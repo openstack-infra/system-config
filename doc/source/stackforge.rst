@@ -23,21 +23,23 @@ What StackForge is not:
   first step in that process as it exposes the project to the OpenStack
   way of doing things).
 
+Audience
+********
+
+The focus of StackForge is to provide a place for OpenStack contributors
+to maintain related unofficial projects using the same tools and
+procedures as they employ when working on official OpenStack projects,
+to make it easier for other OpenStack developers to contribute effort to
+those projects and in some cases to ease a project's path to incubation
+and official integration. As such, the target audience for this document
+is current OpenStack developers who are assumed to already be familiar
+with how changes are uploaded and reviewed within OpenStack projects. As
+an introduction to OpenStack contribution, it is recommend to first read
+https://wiki.openstack.org/wiki/How_To_Contribute and in particular the
+https://wiki.openstack.org/wiki/Gerrit_Workflow article linked from it.
+
 Add a Project to StackForge
 ***************************
-
-Request a Core Group in Gerrit
-==============================
-
-StackForge uses Gerrit for group management. The first step in
-creating a StackForge project is to request a group in Gerrit called
-``your-project-name-core``. Members of this team will have permissions
-to approve code changes to your project, and to add other Gerrit users
-to the group.
-
-You can request Gerrit groups by opening a bug at
-https://bugs.launchpad.net/openstack-ci/+filebug (make sure to mention
-the Gerrit name or E-mail address of at least one initial member).
 
 Create a new StackForge Project with Puppet
 ===========================================
@@ -227,3 +229,19 @@ review and approve.::
   git add .gitreview
   git commit -m 'Add .gitreview file.'
   git review
+
+Request an Initial Gerrit Core Group Member
+===========================================
+
+StackForge uses Gerrit for group management. After the change to create
+your StackForge project has merged, request an initial member for the
+Gerrit group configured in your ACL (probably something like
+``your-project-name-core``). Members of this team will have permissions
+to approve code changes to your project as defined in your ACL, and to
+add other Gerrit users to the group.
+
+You can request an initial Gerrit group member by opening a bug at
+https://bugs.launchpad.net/openstack-ci/+filebug (make sure to mention
+the Gerrit full name or E-mail address of your initial member). See
+https://wiki.openstack.org/wiki/Project_Group_Management for details on
+project group management.
