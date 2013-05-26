@@ -288,7 +288,10 @@ class Server(object):
         self.event_queues = []
         self.retrievers = []
         # TODO(clarkb) support multiple outputs
-        self.logqueue = queue.Queue()
+        # Logstash queues are small. Set an upper bound to our queue
+        # so that this doesn't turn into an unbounded cache prone to
+        # OOMing. But set it to a reasonable size to provide some caching.
+        self.logqueue = queue.Queue(16384)
         self.processor = None
 
     def setup_logging(self):
