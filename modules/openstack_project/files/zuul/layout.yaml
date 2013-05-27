@@ -1582,6 +1582,12 @@ projects:
         - savanna-dashboard-pypi-upload
       - hook-savanna-dashboard-rtfd
 
+  - name: stackforge/savanna-extra
+    check:
+      - gate-noop
+    gate:
+      - gate-noop
+
   - name: stackforge/puppet-ceilometer
     check:
       - gate-puppet-ceilometer-puppet-unit-2.7
