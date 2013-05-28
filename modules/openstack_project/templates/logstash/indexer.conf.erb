@@ -78,5 +78,6 @@ output {
   elasticsearch {
     host => "elasticsearch.openstack.org"
     node_name => "logstash-indexer"
+    max_inflight_requests => 512
   }
 }
