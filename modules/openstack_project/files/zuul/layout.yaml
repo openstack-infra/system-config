@@ -1975,3 +1975,9 @@ projects:
       - gate-noop
     gate:
       - gate-noop
+
+  - name: stackforge/taskflow
+    check:
+      - gate-noop
+    gate:
+      - gate-noop
