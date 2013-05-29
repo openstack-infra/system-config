@@ -14,7 +14,11 @@
 #
 # Class: releasestatus
 #
-class releasestatus {
+class releasestatus (
+  $releasestatus_prvkey_contents = '',
+  $releasestatus_pubkey_contents = '',
+  $releasestatus_gerrit_ssh_key = '',
+) {
   if ! defined(Package['python-launchpadlib']) {
     package { 'python-launchpadlib':
       ensure => present,
@@ -52,6 +56,47 @@ class releasestatus {
     group   => 'releasestatus',
     mode    => '0755',
     require => User['releasestatus'],
+  }
+
+  file { '/var/lib/releasestatus/.ssh/':
+    ensure  => directory,
+    owner   => 'releasestatus',
+    group   => 'releasestatus',
+    mode    => '0700',
+    require => File['/var/lib/releasestatus'],
+  }
+
+  if $releasestatus_prvkey_contents != '' {
+    file { '/var/lib/releasestatus/.ssh/id_rsa':
+      owner   => 'releasestatus',
+      group   => 'releasestatus',
+      mode    => '0600',
+      content => $releasestatus_prvkey_contents,
+      replace => true,
+      require => File['/var/lib/releasestatus/.ssh/']
+    }
+  }
+
+  if $releasestatus_pubkey_contents != '' {
+    file { '/var/lib/releasestatus/.ssh/id_rsa.pub':
+      owner   => 'releasestatus',
+      group   => 'releasestatus',
+      mode    => '0600',
+      content => $releasestatus_pubkey_contents,
+      replace => true,
+      require => File['/var/lib/releasestatus/.ssh/']
+    }
+  }
+
+  if $releasestatus_gerrit_ssh_key != '' {
+    file { '/var/lib/releasestatus/.ssh/known_hosts':
+      owner   => 'releasestatus',
+      group   => 'releasestatus',
+      mode    => '0600',
+      content => "review.openstack.org ${releasestatus_gerrit_ssh_key}",
+      replace => true,
+      require => File['/var/lib/releasestatus/.ssh/']
+    }
   }
 
   vcsrepo { '/var/lib/releasestatus/releasestatus':
