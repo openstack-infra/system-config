@@ -964,6 +964,7 @@
 
     jobs:
       - gate-{name}-chef-lint
+      - gate-{name}-chef-style
       - gate-{name}-chef-unit
 
 - project:

@@ -90,6 +90,13 @@
           fi
 
 - builder:
+    name: chef-cookbook-style
+    builders:
+      - shell: |
+          COOKBOOK=$(awk '/^name/ {print $NF}' metadata.rb |tr -d \"\')
+          ruby1.9.1 /usr/bin/bundle exec tailor
+
+- builder:
     name: chef-cookbook-lint
     builders:
       - shell: |
