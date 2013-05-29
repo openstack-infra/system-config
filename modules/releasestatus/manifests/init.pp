@@ -99,6 +99,15 @@ class releasestatus (
     }
   }
 
+  file { '/var/lib/releasestatus/.ssh/config':
+    owner   => 'releasestatus',
+    group   => 'releasestatus',
+    mode    => '0600',
+    source  => 'puppet:///modules/releasestatus/ssh_config',
+    replace => true,
+    require => File['/var/lib/releasestatus/.ssh/']
+  }
+
   vcsrepo { '/var/lib/releasestatus/releasestatus':
     ensure   => latest,
     provider => git,
