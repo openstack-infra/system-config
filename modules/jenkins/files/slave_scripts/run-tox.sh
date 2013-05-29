@@ -63,6 +63,7 @@ if [ -d ".testrepository" ] ; then
     gzip -9 ./subunit_log.txt
     gzip -9 ./testr_results.html
 
+    set -e
     foundcount=$(.tox/$venv/bin/python .tox/$venv/bin/testr list-tests | sed -e '1d' | wc -l)
     rancount=$(.tox/$venv/bin/python .tox/$venv/bin/testr last | sed -ne 's/Ran \([0-9]\+\).*tests in.*/\1/p')
     if [ "$rancount" -lt "$foundcount" ] ; then
@@ -74,6 +75,7 @@ if [ -d ".testrepository" ] ; then
         echo
         exit 1
     fi
+    set +e
 fi
 
 sudo /usr/local/jenkins/slave_scripts/jenkins-sudo-grep.sh post
