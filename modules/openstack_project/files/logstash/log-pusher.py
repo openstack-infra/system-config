@@ -133,6 +133,7 @@ class LogRetriever(threading.Thread):
 
     def _parse_fields(self, event):
         fields = {}
+        fields["filename"] = self.filename
         fields["build_name"] = event.get("name", "UNKNOWN")
         fields["build_status"] = event["build"].get("status", "UNKNOWN")
         fields["build_number"] = event["build"].get("number", "UNKNOWN")
