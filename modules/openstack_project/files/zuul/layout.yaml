@@ -1925,15 +1925,26 @@ projects:
 
   - name: openstack/ironic
     check:
+      - gate-ironic-requirements
+      - gate-ironic-docs
       - gate-ironic-pep8
       - gate-ironic-python26
       - gate-ironic-python27
     gate:
+      - gate-ironic-requirements
+      - gate-ironic-docs
       - gate-ironic-pep8
       - gate-ironic-python26
       - gate-ironic-python27
     post:
+      - ironic-branch-tarball
       - ironic-coverage
+      - ironic-docs
+    pre-release:
+      - ironic-tarball
+    release:
+      - ironic-tarball
+      - ironic-docs
 
   - name: openstack/python-ironicclient
     check:

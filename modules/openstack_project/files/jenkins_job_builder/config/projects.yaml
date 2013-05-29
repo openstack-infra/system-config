@@ -1037,6 +1037,7 @@
 
     jobs:
       - python-jobs
+      - openstack-publish-jobs
 
 - project:
     name: python-ironicclient
