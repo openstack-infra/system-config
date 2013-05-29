@@ -32,6 +32,7 @@ filter {
     negate => true
     pattern => "^%{DATESTAMP} \|"
     what => "previous"
+    stream_identity => "%{@source_host}.%{filename}"
   }
   multiline {
     type => "jenkins"
@@ -39,6 +40,7 @@ filter {
     negate => true
     pattern => "^%{DATESTAMP} "
     what => "previous"
+    stream_identity => "%{@source_host}.%{filename}"
   }
   grok {
     type => "jenkins"
