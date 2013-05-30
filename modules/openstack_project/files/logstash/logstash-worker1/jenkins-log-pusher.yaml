@@ -30,7 +30,19 @@ source-files:
     tags:
       - screen
       - keystonefmt
+  - name: logs/screen-s-account.txt
+    tags:
+      - screen
+      - apachecombined
+  - name: logs/screen-s-container.txt
+    tags:
+      - screen
+      - apachecombined
+  - name: logs/screen-s-object.txt
+    tags:
+      - screen
+      - apachecombined
+# TODO(clarkb) Add swift proxy logs here.
   - name: logs/syslog.txt
     tags:
       - syslog
-# TODO(clarkb) Add swift logs here.
