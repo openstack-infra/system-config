@@ -84,12 +84,20 @@ filter {
     pattern => [ "(?m)^\(\b%{NOTSPACE:module}\b\):%{SPACE}%{DATESTAMP:logdate}%{SPACE}(?<loglevel>AUDIT|CRITICAL|DEBUG|INFO|TRACE|WARNING|ERROR)%{SPACE}%{GREEDYDATA:logmessage}" ]
     add_field => [ "received_at", "%{@timestamp}" ]
   }
+  grok {
+    type => "jenkins"
+    tags => ["syslog"]
+    # Syslog grok filter adapted from
+    # http://cookbook.logstash.net/recipes/syslog-pri/syslog.conf
+    pattern => [ "%{SYSLOGTIMESTAMP:logdate}%{SPACE}%{SYSLOGHOST:syslog_host}?%{SPACE}%{DATA:syslog_program}(?:\[%{POSINT:syslog_pid}\])?:? %{GREEDYDATA:logmessage}" ]
+    add_field => [ "received_at", "%{@timestamp}" ]
+  }
 
   # Filters below here should be consistent for all Jenkins log formats.
   date {
     type => "jenkins"
     exclude_tags => "_grokparsefailure"
-    match => [ "logdate", "yyyy-MM-dd HH:mm:ss.SSS", "yyyy-MM-dd HH:mm:ss,SSS", "yyyy-MM-dd HH:mm:ss" ]
+    match => [ "logdate", "yyyy-MM-dd HH:mm:ss.SSS", "yyyy-MM-dd HH:mm:ss,SSS", "yyyy-MM-dd HH:mm:ss", "MMM  d HH:mm:ss", "MMM dd HH:mm:ss" ]
   }
   mutate {
     type => "jenkins"
