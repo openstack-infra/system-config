@@ -1,0 +1,10 @@
+Verified+2: Jenkins
+Approved+1: Clark Boylan <clark.boylan@gmail.com>
+Code-Review+2: Clark Boylan <clark.boylan@gmail.com>
+Code-Review+2: Jeremy Stanley <fungi@yuggoth.org>
+Code-Review+1: Elizabeth Krumbach Joseph <lyz@princessleia.com>
+Submitted-by: Jenkins
+Submitted-at: Thu, 30 May 2013 17:17:24 +0000
+Reviewed-on: https://review.openstack.org/30925
+Project: openstack-infra/config
+Branch: refs/heads/master
