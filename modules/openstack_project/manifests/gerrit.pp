@@ -148,6 +148,8 @@ class openstack_project::gerrit (
     mysql_root_password             => $mysql_root_password,
     email_private_key               => $email_private_key,
     replicate_github                => $replicate_github,
+    replicate_local                 => $replicate_local,
+    local_git_dir                   => $local_git_dir,
     testmode                        => $testmode,
     require                         => Class[openstack_project::server],
   }
