@@ -26,6 +26,14 @@ filter {
     negate => true
     match => ["@message", "^\+ "]
   }
+  grep {
+    # Remove blank lines.
+    type => "jenkins"
+    tags => ["keystonefmt"]
+    # Drop matches.
+    negate => true
+    match => ["@message", "^$"]
+  }
   multiline {
     type => "jenkins"
     tags => ["console.html"]
@@ -39,6 +47,14 @@ filter {
     tags => ["oslofmt"]
     negate => true
     pattern => "^%{DATESTAMP} "
+    what => "previous"
+    stream_identity => "%{@source_host}.%{filename}"
+  }
+  multiline {
+    type => "jenkins"
+    tags => ["keystonefmt"]
+    negate => true
+    pattern => "^\(\b%{NOTSPACE}\b\):"
     what => "previous"
     stream_identity => "%{@source_host}.%{filename}"
   }
@@ -59,10 +75,21 @@ filter {
     pattern => [ "(?m)^%{DATESTAMP:logdate}%{SPACE}%{NUMBER:pid}?%{SPACE}?(?<loglevel>AUDIT|CRITICAL|DEBUG|INFO|TRACE|WARNING|ERROR) \[?\b%{NOTSPACE:module}\b\]?%{SPACE}?%{GREEDYDATA:logmessage}?" ]
     add_field => [ "received_at", "%{@timestamp}" ]
   }
+  grok {
+    type => "jenkins"
+    tags => ["keystonefmt"]
+    # Do multiline matching as the above mutliline filter may add newlines
+    # to the log messages.
+    # TODO move the LOGLEVELs into a proper grok pattern.
+    pattern => [ "(?m)^\(\b%{NOTSPACE:module}\b\):%{SPACE}%{DATESTAMP:logdate}%{SPACE}(?<loglevel>AUDIT|CRITICAL|DEBUG|INFO|TRACE|WARNING|ERROR)%{SPACE}%{GREEDYDATA:logmessage}" ]
+    add_field => [ "received_at", "%{@timestamp}" ]
+  }
+
+  # Filters below here should be consistent for all Jenkins log formats.
   date {
     type => "jenkins"
     exclude_tags => "_grokparsefailure"
-    match => [ "logdate", "yyyy-MM-dd HH:mm:ss.SSS", "yyyy-MM-dd HH:mm:ss" ]
+    match => [ "logdate", "yyyy-MM-dd HH:mm:ss.SSS", "yyyy-MM-dd HH:mm:ss,SSS", "yyyy-MM-dd HH:mm:ss" ]
   }
   mutate {
     type => "jenkins"

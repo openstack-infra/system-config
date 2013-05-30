@@ -26,4 +26,8 @@ source-files:
     tags:
       - screen
       - oslofmt
-# TODO(clarkb) Add keystone, swift, and syslog logs here.
+  - name: logs/screen-key.txt
+    tags:
+      - screen
+      - keystonefmt
+# TODO(clarkb) Add swift and syslog logs here.
