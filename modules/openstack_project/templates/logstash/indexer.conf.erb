@@ -86,6 +86,12 @@ filter {
   }
   grok {
     type => "jenkins"
+    tags => ["apachecombined"]
+    pattern => [ "%{COMBINEDAPACHELOG}" ]
+    add_field => [ "received_at", "%{@timestamp}", "logdate", "%{timestamp}", "logmessage", "%{verb} %{request} %{response}" ]
+  }
+  grok {
+    type => "jenkins"
     tags => ["syslog"]
     # Syslog grok filter adapted from
     # http://cookbook.logstash.net/recipes/syslog-pri/syslog.conf
@@ -97,7 +103,7 @@ filter {
   date {
     type => "jenkins"
     exclude_tags => "_grokparsefailure"
-    match => [ "logdate", "yyyy-MM-dd HH:mm:ss.SSS", "yyyy-MM-dd HH:mm:ss,SSS", "yyyy-MM-dd HH:mm:ss", "MMM  d HH:mm:ss", "MMM dd HH:mm:ss" ]
+    match => [ "logdate", "yyyy-MM-dd HH:mm:ss.SSS", "yyyy-MM-dd HH:mm:ss,SSS", "yyyy-MM-dd HH:mm:ss", "MMM  d HH:mm:ss", "MMM dd HH:mm:ss", "dd/MMM/yyyy:HH:mm:ss Z" ]
   }
   mutate {
     type => "jenkins"
