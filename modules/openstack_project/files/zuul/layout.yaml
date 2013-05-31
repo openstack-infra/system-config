@@ -96,12 +96,6 @@ jobs:
     branch: ^(?!stable/folsom).*$
   - name: dev-zuul-coverage
     voting: false
-  - name: dev-heat-coverage
-    voting: false
-  - name: dev-python-heatclient-coverage
-    voting: false
-  - name: dev-heat-cfntools-coverage
-    voting: false
   - name: jenkins-job-builder-compare-xml
     voting: false
     failure-message: XML output has changed.
@@ -1071,7 +1065,6 @@ projects:
       - gate-heat-pep8
       - gate-heat-python26
       - gate-heat-python27
-      - dev-heat-coverage
     gate:
       - gate-heat-requirements
       - gate-heat-pep8
@@ -1093,7 +1086,6 @@ projects:
       - gate-python-heatclient-pep8
       - gate-python-heatclient-python26
       - gate-python-heatclient-python27
-      - dev-python-heatclient-coverage
     gate:
       - gate-python-heatclient-requirements
       - gate-python-heatclient-pep8
@@ -1115,7 +1107,6 @@ projects:
       - gate-heat-cfntools-pep8
       - gate-heat-cfntools-python26
       - gate-heat-cfntools-python27
-      - dev-heat-cfntools-coverage
     gate:
       - gate-heat-cfntools-requirements
       - gate-heat-cfntools-pep8
