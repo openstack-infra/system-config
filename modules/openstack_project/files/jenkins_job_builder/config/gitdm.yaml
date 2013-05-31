@@ -1,0 +1,38 @@
+- job:
+    name: gate-gitdm
+    node: precise
+
+    triggers:
+      - zuul
+
+    builders:
+      - shell: |
+          #!/bin/bash -xe
+          export TEMPDIR=${TEMPDIR:-$(mktemp -d $(pwd)/dmtmp-XXXXXX)}
+          export GITBASE=${TEMPDIR}/git
+          export LP_STATS=n
+          bash ./do-it.sh
+      - link-logs
+
+    publishers:
+      - console-log
+
+
+- job:
+    name: periodic-gitdm
+    node: precise
+
+    triggers:
+      - timed: '0 6 * * *'
+
+    builders:
+      - shell: |
+          #!/bin/bash -xe
+          export TEMPDIR=${TEMPDIR:-$(mktemp -d $(pwd)/dmtmp-XXXXXX)}
+          export GITBASE=${TEMPDIR}/git
+          export LP_STATS=n
+          bash ./do-it.sh
+      - link-logs
+
+    publishers:
+      - console-log-periodic

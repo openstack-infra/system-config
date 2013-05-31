@@ -1368,9 +1368,9 @@ projects:
 
   - name: openstack-infra/gitdm
     check:
-      - gate-noop
+      - gate-gitdm
     gate:
-      - gate-noop
+      - gate-gitdm
 
   - name: openstack-infra/git-review
     check:
