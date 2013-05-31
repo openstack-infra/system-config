@@ -164,8 +164,11 @@ savanna:
     projects:
       - stackforge/savanna
       - stackforge/python-savannaclient
+      - stackforge/savanna-dashboard
+      - stackforge/savanna-extra
     branches:
       - master
+      - stable/0.1
 
 openstack-nova:
     events:
