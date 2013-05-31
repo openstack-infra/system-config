@@ -27,7 +27,10 @@ mkdir -p doc/build
 export HUDSON_PUBLISH_DOCS=1
 tox -e$venv -- python setup.py build_sphinx
 result=$?
-if `echo $ZUUL_REFNAME | grep refs/tags/ >/dev/null` ; then
+
+if [ $ZUUL_REFNAME == "master" ] ; then
+    : # Leave the docs where they are.
+elif `echo $ZUUL_REFNAME | grep refs/tags/ >/dev/null` ; then
     # Put tagged releases in proper location. All tagged builds get copied to
     # BUILD_DIR/tagname. If this is the latest tagged release the copy of files
     # at BUILD_DIR remains. When Jenkins copies this file the root developer
@@ -67,6 +70,16 @@ elif `echo $ZUUL_REFNAME | grep stable/ >/dev/null` ; then
         mv doc/build/html/* doc/build/$BRANCH
         mv doc/build/$BRANCH doc/build/html/$BRANCH
     fi
+else
+    # Put other branch changes in dir named after branch under the
+    # build dir. When Jenkins copies these files they will be
+    # accessible under the developer docs root using the branch name.
+    # EG: feature/foo or milestone-proposed
+    BRANCH=$ZUUL_REFNAME
+    mkdir doc/build/tmp
+    mv doc/build/html/* doc/build/tmp
+    mkdir -p doc/build/html/$BRANCH
+    mv doc/build/tmp/* doc/build/html/$BRANCH
 fi
 
 echo "Begin pip freeze output from test virtualenv:"
