@@ -1,0 +1,16 @@
+- job-template:
+    name: gate-hacking-integration-{target-project}
+    node: precise
+
+    triggers:
+      - zuul
+
+    builders:
+      - gerrit-git-prep
+      - shell: |
+          #!/bin/bash -xe
+          /usr/local/jenkins/slave_scripts/select-mirror.sh openstack-dev hacking
+          tox -e integration {target-org} {target-project}
+
+    publishers:
+      - console-log
