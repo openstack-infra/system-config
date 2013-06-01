@@ -136,6 +136,7 @@ projects:
       - gate-zuul-pyflakes
       - gate-zuul-python26
       - gate-zuul-python27
+      - gate-zuul-integration
       - dev-zuul-coverage
     gate:
       - gate-zuul-docs

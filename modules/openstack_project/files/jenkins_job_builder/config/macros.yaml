@@ -48,6 +48,12 @@
       - shell: "./tools/version.sh --reset"
 
 - builder:
+    name: hacking-integration
+    builders:
+      - shell: "/usr/local/jenkins/slave_scripts/run-hacking-integration.sh {target} {github-org} {project}"
+
+
+- builder:
     name: pep8
     builders:
       - shell: "/usr/local/jenkins/slave_scripts/run-pep8.sh {github-org} {project}"
