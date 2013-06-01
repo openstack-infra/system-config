@@ -157,6 +157,9 @@
     jobs:
       - python-jobs
       - pypi-jobs
+      - gate-hacking-integration-{target-project}:
+          target-org: openstack
+          target-project: nova
 
 
 - project:

@@ -120,6 +120,8 @@ jobs:
       - '^.*requirements.txt$'
   - name: manuals-upstream-translation-update
     branch: ^master$
+  - name: gate-hacking-integration-nova
+    voting: false
 
 
 projects:
@@ -872,11 +874,13 @@ projects:
       - gate-hacking-docs
       - gate-hacking-python26
       - gate-hacking-python27
+      - gate-hacking-integration-nova
     gate:
       - gate-hacking-docs
       - gate-hacking-pep8
       - gate-hacking-python26
       - gate-hacking-python27
+      - gate-hacking-integration-nova
     post:
       - hacking-branch-tarball
       - hacking-coverage
