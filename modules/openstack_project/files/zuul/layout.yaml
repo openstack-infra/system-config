@@ -81,6 +81,8 @@ jobs:
   - name: gate-grenade-devstack-vm
     branch: ^(?!stable/folsom).*$
     voting: false
+  - name: gate-.*-python33
+    voting: false
   - name: gate-tempest-docs
     branch: ^(?!stable/(folsom|grizzly)).*$
   - name: tempest-docs
@@ -136,6 +138,7 @@ projects:
       - gate-zuul-pyflakes
       - gate-zuul-python26
       - gate-zuul-python27
+      - gate-zuul-python33
       - dev-zuul-coverage
     gate:
       - gate-zuul-docs
@@ -143,6 +146,7 @@ projects:
       - gate-zuul-pyflakes
       - gate-zuul-python26
       - gate-zuul-python27
+      - gate-zuul-python33
     post:
       - zuul-branch-tarball
       - zuul-coverage
@@ -332,6 +336,7 @@ projects:
       - gate-cinder-docs
       - gate-cinder-python26
       - gate-cinder-python27
+      - gate-cinder-python33
       - gate-cinder-pylint
       - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
@@ -345,6 +350,7 @@ projects:
       - gate-cinder-pep8
       - gate-cinder-python26
       - gate-cinder-python27
+      - gate-cinder-python33
       - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-cinder
@@ -369,6 +375,7 @@ projects:
       - gate-glance-docs
       - gate-glance-python26
       - gate-glance-python27
+      - gate-glance-python33
       - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-cinder
@@ -381,6 +388,7 @@ projects:
       - gate-glance-pep8
       - gate-glance-python26
       - gate-glance-python27
+      - gate-glance-python33
       - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-cinder
@@ -404,6 +412,7 @@ projects:
       - gate-horizon-docs
       - gate-horizon-python26
       - gate-horizon-python27
+      - gate-horizon-python33
       - gate-horizon-selenium
       - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
@@ -417,6 +426,7 @@ projects:
       - gate-horizon-pep8
       - gate-horizon-python26
       - gate-horizon-python27
+      - gate-horizon-python33
       - gate-horizon-selenium
       - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
@@ -441,6 +451,7 @@ projects:
       - gate-keystone-docs
       - gate-keystone-python26
       - gate-keystone-python27
+      - gate-keystone-python33
       - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-cinder
@@ -453,6 +464,7 @@ projects:
       - gate-keystone-pep8
       - gate-keystone-python26
       - gate-keystone-python27
+      - gate-keystone-python33
       - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-cinder
@@ -478,6 +490,7 @@ projects:
       - gate-nova-docs
       - gate-nova-python26
       - gate-nova-python27
+      - gate-nova-python33
       - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-cinder
@@ -491,6 +504,7 @@ projects:
       - gate-nova-pep8
       - gate-nova-python26
       - gate-nova-python27
+      - gate-nova-python33
       - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-cinder
@@ -516,6 +530,7 @@ projects:
       - gate-oslo-incubator-pyflakes
       - gate-oslo-incubator-python26
       - gate-oslo-incubator-python27
+      - gate-oslo-incubator-python33
     gate:
       - gate-oslo-incubator-requirements
       - gate-oslo-incubator-docs
@@ -523,6 +538,7 @@ projects:
       - gate-oslo-incubator-pyflakes
       - gate-oslo-incubator-python26
       - gate-oslo-incubator-python27
+      - gate-oslo-incubator-python33
     post:
       - oslo-incubator-docs
     release:
@@ -534,13 +550,15 @@ projects:
       - gate-oslo.config-pep8
       - gate-oslo.config-docs
       - gate-oslo.config-python26
-      - gate-oslo.config-python27
+	  - gate-oslo.config-python27
+      - gate-oslo.config-python33
     gate:
       - gate-oslo.config-requirements
       - gate-oslo.config-docs
       - gate-oslo.config-pep8
       - gate-oslo.config-python26
       - gate-oslo.config-python27
+      - gate-oslo.config-python33
     post:
       - oslo.config-branch-tarball
       - oslo.config-docs
@@ -558,6 +576,7 @@ projects:
       - gate-quantum-docs
       - gate-quantum-python26
       - gate-quantum-python27
+      - gate-quantum-python33
       - gate-tempest-devstack-vm-quantum
     gate:
       - gate-quantum-requirements
@@ -565,6 +584,7 @@ projects:
       - gate-quantum-pep8
       - gate-quantum-python26
       - gate-quantum-python27
+      - gate-quantum-python33
       - gate-tempest-devstack-vm-quantum
     post:
       - quantum-branch-tarball
@@ -584,6 +604,7 @@ projects:
       - gate-swift-docs
       - gate-swift-python26
       - gate-swift-python27
+      - gate-swift-python33
       - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-cinder
@@ -596,6 +617,7 @@ projects:
       - gate-swift-pep8
       - gate-swift-python26
       - gate-swift-python27
+      - gate-swift-python33
       - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-cinder
@@ -619,12 +641,14 @@ projects:
       - gate-python-ceilometerclient-docs
       - gate-python-ceilometerclient-python26
       - gate-python-ceilometerclient-python27
+      - gate-python-ceilometerclient-python33
     gate:
       - gate-python-ceilometerclient-requirements
       - gate-python-ceilometerclient-docs
       - gate-python-ceilometerclient-pep8
       - gate-python-ceilometerclient-python26
       - gate-python-ceilometerclient-python27
+      - gate-python-ceilometerclient-python33
     post:
       - python-ceilometerclient-branch-tarball
       - python-ceilometerclient-coverage
@@ -642,6 +666,7 @@ projects:
       - gate-python-cinderclient-docs
       - gate-python-cinderclient-python26
       - gate-python-cinderclient-python27
+      - gate-python-cinderclient-python33
       - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-postgres-full
@@ -654,6 +679,7 @@ projects:
       - gate-python-cinderclient-pep8
       - gate-python-cinderclient-python26
       - gate-python-cinderclient-python27
+      - gate-python-cinderclient-python33
       - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-postgres-full
@@ -677,6 +703,7 @@ projects:
       - gate-python-glanceclient-docs
       - gate-python-glanceclient-python26
       - gate-python-glanceclient-python27
+      - gate-python-glanceclient-python33
       - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-postgres-full
@@ -689,6 +716,7 @@ projects:
       - gate-python-glanceclient-pep8
       - gate-python-glanceclient-python26
       - gate-python-glanceclient-python27
+      - gate-python-glanceclient-python33
       - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-postgres-full
@@ -712,6 +740,7 @@ projects:
       - gate-python-keystoneclient-docs
       - gate-python-keystoneclient-python26
       - gate-python-keystoneclient-python27
+      - gate-python-keystoneclient-python33
       - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-postgres-full
@@ -724,6 +753,7 @@ projects:
       - gate-python-keystoneclient-pep8
       - gate-python-keystoneclient-python26
       - gate-python-keystoneclient-python27
+      - gate-python-keystoneclient-python33
       - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-postgres-full
@@ -747,6 +777,7 @@ projects:
       - gate-python-novaclient-docs
       - gate-python-novaclient-python26
       - gate-python-novaclient-python27
+      - gate-python-novaclient-python33
       - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-postgres-full
@@ -759,6 +790,7 @@ projects:
       - gate-python-novaclient-pep8
       - gate-python-novaclient-python26
       - gate-python-novaclient-python27
+      - gate-python-novaclient-python33
       - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-postgres-full
@@ -781,13 +813,15 @@ projects:
       - gate-python-openstackclient-pep8
       - gate-python-openstackclient-docs
       - gate-python-openstackclient-python26
-      - gate-python-openstackclient-python27
+	  - gate-python-openstackclient-python27
+      - gate-python-openstackclient-python33
     gate:
       - gate-python-openstackclient-requirements
       - gate-python-openstackclient-docs
       - gate-python-openstackclient-pep8
       - gate-python-openstackclient-python26
       - gate-python-openstackclient-python27
+      - gate-python-openstackclient-python33
     post:
       - python-openstackclient-branch-tarball
       - python-openstackclient-coverage
@@ -805,6 +839,7 @@ projects:
       - gate-python-quantumclient-docs
       - gate-python-quantumclient-python26
       - gate-python-quantumclient-python27
+      - gate-python-quantumclient-python33
       - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-postgres-full
@@ -817,6 +852,7 @@ projects:
       - gate-python-quantumclient-pep8
       - gate-python-quantumclient-python26
       - gate-python-quantumclient-python27
+      - gate-python-quantumclient-python33
       - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-postgres-full
@@ -840,12 +876,14 @@ projects:
       - gate-python-swiftclient-docs
       - gate-python-swiftclient-python26
       - gate-python-swiftclient-python27
+      - gate-python-swiftclient-python33
     gate:
       - gate-python-swiftclient-requirements
       - gate-python-swiftclient-docs
       - gate-python-swiftclient-pep8
       - gate-python-swiftclient-python26
       - gate-python-swiftclient-python27
+      - gate-python-swiftclient-python33
     post:
       - python-swiftclient-branch-tarball
       - python-swiftclient-coverage
@@ -864,6 +902,7 @@ projects:
     post:
       - post-mirror-python26
       - post-mirror-python27
+      - post-mirror-python33
 
   - name: openstack-dev/grenade
     check:
@@ -878,11 +917,13 @@ projects:
       - gate-hacking-docs
       - gate-hacking-python26
       - gate-hacking-python27
+      - gate-hacking-python33
     gate:
       - gate-hacking-docs
       - gate-hacking-pep8
       - gate-hacking-python26
       - gate-hacking-python27
+      - gate-hacking-python33
     post:
       - hacking-branch-tarball
       - hacking-coverage
@@ -1011,12 +1052,14 @@ projects:
       - gate-ceilometer-docs
       - gate-ceilometer-python26
       - gate-ceilometer-python27
+      - gate-ceilometer-python33
     gate:
       - gate-ceilometer-requirements
       - gate-ceilometer-docs
       - gate-ceilometer-pep8
       - gate-ceilometer-python26
       - gate-ceilometer-python27
+      - gate-ceilometer-python33
     post:
       - ceilometer-branch-tarball
       - ceilometer-coverage
@@ -1071,12 +1114,14 @@ projects:
       - gate-heat-pep8
       - gate-heat-python26
       - gate-heat-python27
+      - gate-heat-python33
       - dev-heat-coverage
     gate:
       - gate-heat-requirements
       - gate-heat-pep8
       - gate-heat-python26
       - gate-heat-python27
+      - gate-heat-python33
     post:
       - heat-branch-tarball
       - heat-coverage
@@ -1093,12 +1138,14 @@ projects:
       - gate-python-heatclient-pep8
       - gate-python-heatclient-python26
       - gate-python-heatclient-python27
+      - gate-python-heatclient-python33
       - dev-python-heatclient-coverage
     gate:
       - gate-python-heatclient-requirements
       - gate-python-heatclient-pep8
       - gate-python-heatclient-python26
       - gate-python-heatclient-python27
+      - gate-python-heatclient-python33
     post:
       - python-heatclient-branch-tarball
       - python-heatclient-coverage
@@ -1115,12 +1162,14 @@ projects:
       - gate-heat-cfntools-pep8
       - gate-heat-cfntools-python26
       - gate-heat-cfntools-python27
+      - gate-heat-cfntools-python33
       - dev-heat-cfntools-coverage
     gate:
       - gate-heat-cfntools-requirements
       - gate-heat-cfntools-pep8
       - gate-heat-cfntools-python26
       - gate-heat-cfntools-python27
+      - gate-heat-cfntools-python33
     post:
       - heat-cfntools-branch-tarball
       - heat-cfntools-coverage

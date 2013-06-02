@@ -154,6 +154,55 @@
     node: '{node}'
 
 - job-template:
+    name: 'gate-{name}-python33'
+
+    wrappers:
+      - timeout:
+          timeout: 40
+          fail: true
+      - timestamps
+
+    parameters:
+      - label:
+          name: NODE_LABEL
+          description: Label of node to use for this build
+          default: '{node}'
+
+    triggers:
+      - zuul
+
+    builders:
+      - gerrit-git-prep
+      - python33:
+          github-org: '{github-org}'
+          project: '{name}'
+      - assert-no-extra-files
+
+    publishers:
+      - scp:
+          site: 'static.openstack.org'
+          files:
+            - target: 'logs/$ZUUL_CHANGE/$ZUUL_PATCHSET/$ZUUL_PIPELINE/$JOB_NAME/$BUILD_NUMBER'
+              source: '**/*nose_results.html'
+              keep-hierarchy: false
+              copy-after-failure: true
+            - target: 'logs/$ZUUL_CHANGE/$ZUUL_PATCHSET/$ZUUL_PIPELINE/$JOB_NAME/$BUILD_NUMBER'
+              source: '**/*testr_results.html.gz'
+              keep-hierarchy: false
+              copy-after-failure: true
+            - target: 'logs/$ZUUL_CHANGE/$ZUUL_PATCHSET/$ZUUL_PIPELINE/$JOB_NAME/$BUILD_NUMBER'
+              source: '.testrepository/tmp*'
+              keep-hierarchy: false
+              copy-after-failure: true
+            - target: 'logs/$ZUUL_CHANGE/$ZUUL_PATCHSET/$ZUUL_PIPELINE/$JOB_NAME/$BUILD_NUMBER'
+              source: '**/*subunit_log.txt.gz'
+              keep-hierarchy: false
+              copy-after-failure: true
+      - console-log
+
+    node: '{node}'
+
+- job-template:
     name: 'gate-{name}-docs'
 
     triggers:
@@ -265,6 +314,7 @@
       - 'gate-{name}-pep8'
       - 'gate-{name}-python26'
       - 'gate-{name}-python27'
+      - 'gate-{name}-python33'
       - 'gate-{name}-docs'
       - 'gate-{name}-requirements'
       - '{name}-tarball'
