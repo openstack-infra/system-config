@@ -156,6 +156,7 @@
 
     jobs:
       - python-jobs
+      - gate-{name}-python32
       - pypi-jobs
 
 
@@ -168,6 +169,7 @@
 
     jobs:
       - python-jobs
+      - gate-{name}-python32
       - pypi-jobs
 
 

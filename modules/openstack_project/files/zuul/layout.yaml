@@ -85,6 +85,10 @@ jobs:
     branch: ^(?!stable/(folsom|grizzly)).*$
   - name: tempest-docs
     branch: ^(?!stable/(folsom|grizzly)).*$
+  - name: gate-pbr-python32
+    voting: false
+  - name: gate-hacking-python32
+    voting: false
   - name: gate-nova-pylint
     voting: false
   - name: gate-cinder-pylint
@@ -878,11 +882,13 @@ projects:
       - gate-hacking-docs
       - gate-hacking-python26
       - gate-hacking-python27
+      - gate-hacking-python32
     gate:
       - gate-hacking-docs
       - gate-hacking-pep8
       - gate-hacking-python26
       - gate-hacking-python27
+      - gate-hacking-python32
     post:
       - hacking-branch-tarball
       - hacking-coverage
@@ -901,6 +907,7 @@ projects:
       - gate-pbr-docs
       - gate-pbr-python26
       - gate-pbr-python27
+      - gate-pbr-python32
       - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-cinder
@@ -912,6 +919,7 @@ projects:
       - gate-pbr-pep8
       - gate-pbr-python26
       - gate-pbr-python27
+      - gate-pbr-python32
       - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-cinder
