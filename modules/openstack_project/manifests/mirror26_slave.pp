@@ -15,10 +15,12 @@
 # Install a python26 mirror building slave.
 
 class openstack_project::mirror26_slave (
+  $jenkins_ssh_public_key,
   $jenkins_ssh_private_key,
 ) {
 
   class { 'openstack_project::mirror_slave':
+    jenkins_ssh_public_key  => $jenkins_ssh_public_key,
     jenkins_ssh_private_key => $jenkins_ssh_private_key,
   }
 }

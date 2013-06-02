@@ -15,10 +15,14 @@
 # Install a python mirror building slave.
 
 class openstack_project::mirror_slave (
+  $jenkins_ssh_public_key,
   $jenkins_ssh_private_key,
 ) {
 
-  include openstack_project::slave
+  class { 'openstack_project::slave':
+    ssh_key => $jenkins_ssh_public_key,
+  }
+
   include jeepyb
 
   file { '/home/jenkins/.ssh/id_rsa':

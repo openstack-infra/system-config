@@ -16,9 +16,13 @@
 #
 class openstack_project::pypi_slave (
   $pypi_password,
+  $jenkins_ssh_public_key,
   $pypi_username = 'openstackci'
 ) {
-  include openstack_project::slave
+  class { 'openstack_project::slave':
+    ssh_key => $jenkins_ssh_public_key,
+  }
+
   include pip
 
   package { 'pkginfo':

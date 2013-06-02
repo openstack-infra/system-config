@@ -17,11 +17,13 @@
 class openstack_project::devstack_launch_slave (
   $jenkins_api_user,
   $jenkins_api_key,
+  $jenkins_ssh_public_key,
   $jenkins_ssh_private_key,
 ) {
 
   class { 'openstack_project::slave':
-    bare => true,
+    bare    => true,
+    ssh_key => $jenkins_ssh_public_key,
   }
 
   package { [ 'python-novaclient',
