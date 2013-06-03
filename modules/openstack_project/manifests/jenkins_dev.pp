@@ -4,6 +4,8 @@ class openstack_project::jenkins_dev (
   $jenkins_ssh_private_key = '',
   $sysadmins = []
 ) {
+  include openstack_project
+
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [80, 443],
     sysadmins                 => $sysadmins,
