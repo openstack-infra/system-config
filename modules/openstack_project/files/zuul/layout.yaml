@@ -1886,9 +1886,11 @@ projects:
 
   - name: stackforge/cookbook-openstack-object-storage
     check:
-      - gate-noop
+      - gate-cookbook-openstack-object-storage-chef-lint
+      - gate-cookbook-openstack-object-storage-chef-unit
     gate:
-      - gate-noop
+      - gate-cookbook-openstack-object-storage-chef-lint
+      - gate-cookbook-openstack-object-storage-chef-unit
 
   - name: stackforge/cookbook-openstack-orchestration
     check:
