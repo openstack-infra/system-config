@@ -303,6 +303,7 @@ node /^ci-backup-.*\.openstack\.org$/ {
 #
 
 node 'mirror26.slave.openstack.org' {
+  include openstack_project
   class { 'openstack_project::mirror26_slave':
     jenkins_ssh_public_key  => $openstack_project::jenkins_ssh_key,
     jenkins_ssh_private_key => hiera('jenkins_ssh_private_key_contents')
@@ -310,6 +311,7 @@ node 'mirror26.slave.openstack.org' {
 }
 
 node 'mirror27.slave.openstack.org' {
+  include openstack_project
   class { 'openstack_project::mirror27_slave':
     jenkins_ssh_public_key  => $openstack_project::jenkins_ssh_key,
     jenkins_ssh_private_key => hiera('jenkins_ssh_private_key_contents')
@@ -317,6 +319,7 @@ node 'mirror27.slave.openstack.org' {
 }
 
 node 'devstack-launch.slave.openstack.org' {
+  include openstack_project
   class { 'openstack_project::devstack_launch_slave':
     jenkins_api_user        => hiera('jenkins_api_user'),
     jenkins_api_key         => hiera('jenkins_api_key'),
@@ -326,6 +329,7 @@ node 'devstack-launch.slave.openstack.org' {
 }
 
 node 'tx.slave.openstack.org' {
+  include openstack_project
   class { 'openstack_project::translation_slave':
     transifex_username     => 'openstackjenkins',
     transifex_password     => hiera('transifex_password'),
@@ -334,6 +338,7 @@ node 'tx.slave.openstack.org' {
 }
 
 node 'pypi.slave.openstack.org' {
+  include openstack_project
   class { 'openstack_project::pypi_slave':
     pypi_username          => 'openstackci',
     pypi_password          => hiera('pypi_password'),
