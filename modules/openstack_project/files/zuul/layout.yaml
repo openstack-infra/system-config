@@ -70,6 +70,10 @@ jobs:
     branch: stable/folsom
   - name: gate-tempest-devstack-vm-full
     branch: ^(?!stable/folsom).*$
+  - name: gate-tempest-devstack-vm-heat
+    branch: ^master$
+  - name: gate-tempest-devstack-vm-heat-full
+    branch: ^master$
   - name: gate-tempest-devstack-vm-quantum
     branch: ^(?!stable/folsom).*$
   - name: gate-tempest-devstack-vm-quantum-full
@@ -1072,11 +1076,13 @@ projects:
       - gate-heat-python26
       - gate-heat-python27
       - dev-heat-coverage
+      - gate-tempest-devstack-vm-heat
     gate:
       - gate-heat-requirements
       - gate-heat-pep8
       - gate-heat-python26
       - gate-heat-python27
+      - gate-tempest-devstack-vm-heat
     post:
       - heat-branch-tarball
       - heat-coverage
