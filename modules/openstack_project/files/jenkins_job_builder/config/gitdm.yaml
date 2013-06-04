@@ -6,6 +6,7 @@
       - zuul
 
     builders:
+      - gerrit-git-prep
       - shell: |
           #!/bin/bash -xe
           export TEMPDIR=${TEMPDIR:-$(mktemp -d $(pwd)/dmtmp-XXXXXX)}
@@ -26,6 +27,7 @@
       - timed: '0 6 * * *'
 
     builders:
+      - gerrit-git-prep
       - shell: |
           #!/bin/bash -xe
           export TEMPDIR=${TEMPDIR:-$(mktemp -d $(pwd)/dmtmp-XXXXXX)}
