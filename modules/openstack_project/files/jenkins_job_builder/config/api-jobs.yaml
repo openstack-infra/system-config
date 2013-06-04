@@ -37,7 +37,7 @@
       - console-log-post
       - ftp:
           site: docs.openstack.org
-          source: 'openstack-api-programming/target/docbkx/webhelp/api/openstack-compute/programmer/**'
+          source: 'openstack-api-programming/target/docbkx/webhelp/openstack-api-programming/admin/**'
           target: '/'
           remove-prefix: 'openstack-api-programming/target/docbkx/webhelp/'
           excludes: '**/*.xml,**/null*'
