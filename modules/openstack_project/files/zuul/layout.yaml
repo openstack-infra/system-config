@@ -265,6 +265,14 @@ projects:
     post:
       - ci-docs
 
+  - name: openstack-infra/publications
+    check:
+      - gate-noop
+    gate:
+      - gate-noop
+    post:
+      - infra-publications-publish
+
   - name: openstack-infra/puppet-apparmor
     check:
       - gate-noop

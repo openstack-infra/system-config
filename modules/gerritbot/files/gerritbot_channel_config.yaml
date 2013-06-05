@@ -22,6 +22,7 @@ openstack-infra:
       - openstack-infra/lodgeit
       - openstack-infra/meetbot
       - openstack-infra/nose-html-output
+      - openstack-infra/publications
       - openstack-infra/releasestatus
       - openstack-infra/reviewday
       - openstack-infra/statusbot
