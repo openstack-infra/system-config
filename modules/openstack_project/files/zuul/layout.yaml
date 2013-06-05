@@ -1065,11 +1065,13 @@ projects:
       - gate-heat-pep8
       - gate-heat-python26
       - gate-heat-python27
+      - gate-tempest-devstack-vm-full
     gate:
       - gate-heat-requirements
       - gate-heat-pep8
       - gate-heat-python26
       - gate-heat-python27
+      - gate-tempest-devstack-vm-full
     post:
       - heat-branch-tarball
       - heat-coverage
