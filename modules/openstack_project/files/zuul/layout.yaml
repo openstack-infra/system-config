@@ -1482,6 +1482,8 @@ projects:
       - gate-gearman-plugin-build
     post:
       - gearman-plugin-hpi-artifact
+    release:
+      - gearman-plugin-release-artifact
 
   - name: openstack-infra/zmq-event-publisher
     check:
