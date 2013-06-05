@@ -46,8 +46,40 @@
           target: 'tarballs/ci/'
       - console-log-post
 
+- job-template:
+    name: '{name}-release-artifact'
+    project-type: maven
+    node: pypi
+
+    triggers:
+      - zuul-post
+
+    properties:
+      - inject:
+          script-file: /usr/local/jenkins/slave_scripts/maven-properties.sh
+          properties-file: maven.properties
+
+    prebuilders:
+      - gerrit-git-prep
+
+    maven:
+      maven-name: Maven3
+      root-module:
+        group-id: '{maven-group-id}'
+        artifact-id: '{name}'
+      root-pom: pom.xml
+      goals: 'clean deploy -Dmaven.test.skip=true -Dproject-version=$SCM_TAG'
+
+    publishers:
+      - war:
+          site: 'tarballs.openstack.org'
+          warfile: 'target/{name}.hpi'
+          target: 'tarballs/ci/{name}-$SCM_TAG.hpi'
+      - console-log-post
+
 - job-group:
     name: jenkins-plugin-jobs
     jobs:
       - 'gate-{name}-build'
       - '{name}-hpi-artifact'
+      - '{name}-release-artifact'

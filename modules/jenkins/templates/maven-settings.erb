@@ -1,4 +1,13 @@
 <settings>
+
+  <servers>
+    <server>
+      <id>maven.jenkins-ci.org</id> <!-- For parent 1.397 or newer; before this use id java.net-m2-repository -->
+      <username><%= jenkinsci_username %></username>
+      <password><%= jenkinsci_password %></password>
+    </server>
+  </servers>
+
   <pluginGroups>
     <pluginGroup>org.jenkins-ci.tools</pluginGroup>
   </pluginGroups>
