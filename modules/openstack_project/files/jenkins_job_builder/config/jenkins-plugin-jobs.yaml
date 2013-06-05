@@ -59,7 +59,7 @@
 - job-template:
     name: '{name}-release-artifact'
     project-type: maven
-    node: quantal && !jclouds
+    node: pypi
 
     triggers:
       - zuul-post

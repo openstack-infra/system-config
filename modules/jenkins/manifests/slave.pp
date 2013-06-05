@@ -5,6 +5,9 @@ class jenkins::slave(
   $sudo = false,
   $bare = false,
   $user = true,
+  $jenkinsci_username = '',
+  $jenkinsci_password = ''
+  
 ) {
 
   include pip
@@ -12,9 +15,11 @@ class jenkins::slave(
 
   if ($user == true) {
     class { 'jenkins::jenkinsuser':
-      ensure  => present,
-      sudo    => $sudo,
-      ssh_key => $ssh_key,
+      ensure             => present,
+      sudo               => $sudo,
+      ssh_key            => $ssh_key,
+      jenkinsci_password => $jenkinsci_username,
+      jenkinsci_password => $jenkinsci_password,
     }
   }
 

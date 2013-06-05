@@ -4,6 +4,8 @@ class jenkins::jenkinsuser(
   $ssh_key = '',
   $ensure = present,
   $sudo = false,
+  $jenkinsci_username = '',
+  $jenkinsci_password = ''
 ) {
 
   group { 'jenkins':
@@ -151,7 +153,7 @@ class jenkins::jenkinsuser(
     group   => 'jenkins',
     mode    => '0644',
     require => File['/home/jenkins/.m2'],
-    source  => 'puppet:///modules/jenkins/settings.xml',
+    content => template('jenkins/maven-settings.erb'),
   }
 
 }
