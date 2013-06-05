@@ -1,0 +1,20 @@
+# simply copy the contents of the repository to the server, no building needed
+- job:
+    name: infra-publications-publish
+    concurrent: false
+    node: precise
+
+    triggers:
+      - zuul-post
+
+    builders:
+      - gerrit-git-prep
+
+    publishers:
+      - ftp:
+          site: docs.openstack.org
+          source: '**'
+          target: 'www/infra/publications/'
+          remove-prefix: ''
+          excludes: ''
+      - console-log-post
