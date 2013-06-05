@@ -283,3 +283,13 @@ openstack-swift:
       - openstack/python-swiftclient
     branches:
       - master
+
+openstack-state-management:
+    events:
+      - patchset-created
+      - change-merged
+      - x-vrif-minus-2
+    projects:
+      - stackforge/taskflow
+    branches:
+      - master
