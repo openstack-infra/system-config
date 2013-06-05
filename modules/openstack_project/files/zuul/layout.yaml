@@ -77,7 +77,6 @@ jobs:
     voting: false
   - name: gate-tempest-devstack-vm-postgres-full
     branch: ^(?!stable/folsom).*$
-    voting: false
   - name: gate-grenade-devstack-vm
     branch: ^(?!stable/folsom).*$
     voting: false
