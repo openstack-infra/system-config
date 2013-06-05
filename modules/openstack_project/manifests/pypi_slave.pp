@@ -12,12 +12,15 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 #
-# Class to install dependencies for uploading python packages to pypi.
+# Class to install dependencies for uploading python packages to pypi and
+# repo.jenkins-ci.org
 #
 class openstack_project::pypi_slave (
   $pypi_password,
   $jenkins_ssh_public_key,
-  $pypi_username = 'openstackci'
+  $pypi_username = 'openstackci',
+  $jenkinsci_username,
+  $jenkinsci_password
 ) {
   class { 'openstack_project::slave':
     ssh_key => $jenkins_ssh_public_key,
