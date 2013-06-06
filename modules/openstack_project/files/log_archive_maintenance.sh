@@ -9,3 +9,8 @@ find /srv/static/logs/ -depth \
       -o \( -type f -mtime +183 -name \*.gz -execdir rm \{\} \; \) \
       -o \( -type d -empty -mtime +1 -execdir rmdir {} \; \) \
     \)
+find /srv/static/docs-draft/ -depth \
+    \( \
+      \( -type f -mtime +30 -name \*.gz -execdir rm \{\} \; \) \
+      -o \( -type d -empty -mtime +1 -execdir rmdir {} \; \) \
+    \)
