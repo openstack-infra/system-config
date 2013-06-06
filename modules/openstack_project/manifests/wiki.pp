@@ -51,5 +51,6 @@ class openstack_project::wiki (
   bup::site { 'rs-ord':
     backup_user   => 'bup-wiki',
     backup_server => 'ci-backup-rs-ord.openstack.org',
+    backup_db     => true,
   }
 }

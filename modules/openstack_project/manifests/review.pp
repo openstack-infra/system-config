@@ -116,6 +116,12 @@ class openstack_project::review (
   }
   include gerrit::remotes
 
+  include bup
+  bup::site { 'rs-ord':
+    backup_user   => 'bup-wiki',
+    backup_server => 'ci-backup-rs-ord.openstack.org',
+    backup_db     => true,
+  }
   file { '/var/log/gerrit_user_sync':
     ensure  => directory,
     owner   => 'root',
