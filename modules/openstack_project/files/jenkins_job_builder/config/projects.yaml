@@ -1087,3 +1087,13 @@
 
     jobs:
       - gate-{name}-pep8
+
+- project:
+    name: barbican
+    github-org: stackforge
+    node: precise
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - python-jobs
+      - gate-{name}-pyflakes

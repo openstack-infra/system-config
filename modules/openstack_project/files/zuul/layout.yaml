@@ -2024,3 +2024,15 @@ projects:
       - gate-noop
     gate:
       - gate-noop
+
+  - name: stackforge/barbican
+    check:
+      - gate-barbican-pyflakes
+      - gate-barbican-pep8
+      - gate-barbican-python27
+    gate:
+      - gate-barbican-pyflakes
+      - gate-barbican-pep8
+      - gate-barbican-python27
+    post:
+      - barbican-branch-tarball
