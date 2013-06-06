@@ -389,6 +389,6 @@
       - ftp:
           site: docs.openstack.org
           source: 'openstack-image-service-api/target/docbkx/webhelp/api/openstack-image-service/1.1/**'
-          target: ''
-          remove-prefix: 'openstack-image-service-api/target/docbkx/webhelp'
+          target: '/'
+          remove-prefix: 'openstack-image-service-api/target/docbkx/webhelp/'
           excludes: '**/*.xml,**/null*'
