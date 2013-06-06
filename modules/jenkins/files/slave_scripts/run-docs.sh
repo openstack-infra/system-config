@@ -28,7 +28,7 @@ export HUDSON_PUBLISH_DOCS=1
 tox -e$venv -- python setup.py build_sphinx
 result=$?
 
-if [ $ZUUL_REFNAME == "master" ] ; then
+if [ -z "$ZUUL_REFNAME" ] || [ "$ZUUL_REFNAME" == "master" ] ; then
     : # Leave the docs where they are.
 elif `echo $ZUUL_REFNAME | grep refs/tags/ >/dev/null` ; then
     # Put tagged releases in proper location. All tagged builds get copied to
