@@ -85,6 +85,9 @@ jobs:
     branch: ^(?!stable/(folsom|grizzly)).*$
   - name: tempest-docs
     branch: ^(?!stable/(folsom|grizzly)).*$
+  - name: gate-swift-devstack-vm-functional
+    voting: false
+    branch: ^(?!stable/(folsom|grizzly)).*$
   - name: gate-nova-pylint
     voting: false
   - name: gate-cinder-pylint
@@ -649,6 +652,7 @@ projects:
       - gate-swift-docs
       - gate-swift-python26
       - gate-swift-python27
+      - gate-swift-devstack-vm-functional
       - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-cinder
