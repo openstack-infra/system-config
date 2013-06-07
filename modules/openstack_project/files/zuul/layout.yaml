@@ -313,6 +313,12 @@ projects:
     gate:
       - gate-noop
 
+  - name: openstack-infra/odsreg
+    check:
+      - gate-noop
+    gate:
+      - gate-noop
+
   - name: openstack-infra/statusbot
     check:
       - gate-statusbot-pep8
