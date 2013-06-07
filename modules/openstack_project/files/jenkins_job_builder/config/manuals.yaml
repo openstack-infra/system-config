@@ -1,10 +1,7 @@
 - job:
     name: gate-openstack-manuals-cli-guide
     project-type: maven
-    node: precise && !jclouds
-
-    triggers:
-      - zuul
+    node: precise
 
     prebuilders:
       - gerrit-git-prep
@@ -30,10 +27,7 @@
 - job:
     name: gate-openstack-manuals-operations-guide
     project-type: maven
-    node: precise && !jclouds
-
-    triggers:
-      - zuul
+    node: precise
 
     prebuilders:
       - gerrit-git-prep
@@ -60,9 +54,6 @@
     name: gate-openstack-manuals-validate
     node: precise
 
-    triggers:
-      - zuul
-
     builders:
       - gerrit-git-prep
       - shell: "./tools/validate.py"
@@ -73,10 +64,7 @@
 - job:
     name: openstack-cli-guide
     project-type: maven
-    node: precise && !jclouds
-
-    triggers:
-      - zuul-post
+    node: precise
 
     prebuilders:
       - gerrit-git-prep
@@ -101,10 +89,7 @@
 - job:
     name: openstack-basic-install-fedora
     project-type: maven
-    node: precise && !jclouds
-
-    triggers:
-      - zuul-post
+    node: precise
 
     properties:
       - inject:
@@ -134,10 +119,7 @@
 - job:
     name: openstack-basic-install-ubuntu
     project-type: maven
-    node: precise && !jclouds
-
-    triggers:
-      - zuul-post
+    node: precise
 
     prebuilders:
       - gerrit-git-prep
@@ -170,10 +152,7 @@
 - job:
     name: openstack-admin-manual-block
     project-type: maven
-    node: precise && !jclouds
-
-    triggers:
-      - zuul-post
+    node: precise
 
     prebuilders:
       - gerrit-git-prep
@@ -203,10 +182,7 @@
 - job:
     name: openstack-glossary
     project-type: maven
-    node: precise && !jclouds
-
-    triggers:
-      - zuul-post
+    node: precise
 
     prebuilders:
       - gerrit-git-prep
@@ -232,10 +208,7 @@
     name: openstack-image-guide
     project-type: maven
     concurrent: false
-    node: precise && !jclouds
-
-    triggers:
-      - zuul-post
+    node: precise
 
     prebuilders:
       - gerrit-git-prep
@@ -266,10 +239,7 @@
     name: openstack-admin-manual-compute
     project-type: maven
     concurrent: false
-    node: precise && !jclouds
-
-    triggers:
-      - zuul-post
+    node: precise
 
     prebuilders:
       - gerrit-git-prep
@@ -300,10 +270,7 @@
     name: openstack-admin-manual-netconn
     project-type: maven
     concurrent: false
-    node: precise && !jclouds
-
-    triggers:
-      - zuul-post
+    node: precise
 
     prebuilders:
       - gerrit-git-prep
@@ -334,10 +301,7 @@
     name: openstack-admin-manual-object
     project-type: maven
     concurrent: false
-    node: precise && !jclouds
-
-    triggers:
-      - zuul-post
+    node: precise
 
     prebuilders:
       - gerrit-git-prep
@@ -368,10 +332,7 @@
 - job:
     name: openstack-docs-site
     concurrent: false
-    node: precise && !jclouds
-
-    triggers:
-      - zuul-post
+    node: precise
 
     builders:
       - gerrit-git-prep
@@ -395,10 +356,7 @@
     name: openstack-ha-guide
     project-type: maven
     concurrent: false
-    node: precise && !jclouds
-
-    triggers:
-      - zuul-post
+    node: precise
 
     properties:
       - inject:
@@ -431,10 +389,7 @@
     name: openstack-install-deploy-guide-apt-fedora
     project-type: maven
     concurrent: false
-    node: precise && !jclouds
-
-    triggers:
-      - zuul-post
+    node: precise
 
     properties:
       - inject:
@@ -465,10 +420,7 @@
     name: openstack-install-deploy-guide-ubuntu
     project-type: maven
     concurrent: false
-    node: precise && !jclouds
-
-    triggers:
-      - zuul-post
+    node: precise
 
     properties:
       - inject:
@@ -499,10 +451,7 @@
     name: openstack-operations-guide
     project-type: maven
     concurrent: false
-    node: precise && !jclouds
-
-    triggers:
-      - zuul-post
+    node: precise
 
     properties:
       - inject:

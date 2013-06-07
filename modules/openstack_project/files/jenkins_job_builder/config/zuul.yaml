@@ -3,9 +3,6 @@
     name: zuul-docs
     node: precise
 
-    triggers:
-      - zuul-post
-
     builders:
       - gerrit-git-prep
       - docs:
@@ -24,9 +21,6 @@
 - job:
     name: 'dev-zuul-coverage'
     node: precise
-
-    triggers:
-      - zuul
 
     builders:
       - gerrit-git-prep

@@ -2,9 +2,6 @@
     name: 'gate-{name}-chef-unit'
     node: '{node}'
 
-    triggers:
-      - zuul
-
     builders:
       - gerrit-git-prep
       - chef-cookbook-prep
@@ -17,9 +14,6 @@
     name: 'gate-{name}-chef-lint'
     node: '{node}'
 
-    triggers:
-      - zuul
-
     builders:
       - gerrit-git-prep
       - chef-cookbook-prep
@@ -31,9 +25,6 @@
 - job-template:
     name: 'gate-{name}-chef-style'
     node: '{node}'
-
-    triggers:
-      - zuul
 
     builders:
       - gerrit-git-prep
