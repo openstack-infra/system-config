@@ -84,6 +84,8 @@ jobs:
     branch: ^(?!stable/(folsom|grizzly)).*$
   - name: tempest-docs
     branch: ^(?!stable/(folsom|grizzly)).*$
+  - name: gate-pbr-devstack-vm-rawinstall
+    vote: false
   - name: gate-nova-pylint
     voting: false
   - name: gate-cinder-pylint
@@ -906,6 +908,7 @@ projects:
       - gate-pbr-docs
       - gate-pbr-python26
       - gate-pbr-python27
+      - gate-pbr-devstack-vm-rawinstall
       - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-cinder
