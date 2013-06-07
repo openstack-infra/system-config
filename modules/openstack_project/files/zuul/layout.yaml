@@ -578,6 +578,7 @@ projects:
       - gate-swift-docs
       - gate-swift-python26
       - gate-swift-python27
+      - gate-swift-devstack-vm-functional
       - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-cinder
