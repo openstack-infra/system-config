@@ -3,9 +3,6 @@
     name: 'gate-openstack-planet-unittest'
     node: precise
 
-    triggers:
-      - zuul
-
     builders:
       - gerrit-git-prep
       - shell: |

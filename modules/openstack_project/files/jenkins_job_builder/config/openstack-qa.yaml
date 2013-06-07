@@ -4,9 +4,6 @@
     name: openstack-qa-docs
     node: precise
 
-    triggers:
-      - zuul-post
-
     builders:
       - gerrit-git-prep
       - shell: |

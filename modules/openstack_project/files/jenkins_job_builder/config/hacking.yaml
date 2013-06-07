@@ -2,9 +2,6 @@
     name: gate-hacking-integration-{target-project}
     node: precise
 
-    triggers:
-      - zuul
-
     builders:
       - gerrit-git-prep
       - shell: |

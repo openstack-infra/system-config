@@ -2,9 +2,6 @@
     name: '{name}-upstream-translation-update'
     concurrent: false
 
-    triggers:
-      - zuul-post
-
     builders:
       - gerrit-git-prep
       - shell: |
@@ -42,9 +39,6 @@
 - job:
     name: manuals-upstream-translation-update
     concurrent: false
-
-    triggers:
-      - zuul-post
 
     builders:
       - gerrit-git-prep

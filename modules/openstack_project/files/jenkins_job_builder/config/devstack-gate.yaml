@@ -14,9 +14,6 @@
           description: Label of node to use for this build
           default: devstack-precise
 
-    triggers:
-      - zuul
-
     builders:
       - devstack-inprogress
       - devstack-checkout
@@ -49,9 +46,6 @@
           name: NODE_LABEL
           description: Label of node to use for this build
           default: devstack-precise
-
-    triggers:
-      - zuul
 
     builders:
       - devstack-inprogress
@@ -87,9 +81,6 @@
           description: Label of node to use for this build
           default: devstack-precise
 
-    triggers:
-      - zuul
-
     builders:
       - devstack-inprogress
       - devstack-checkout
@@ -124,9 +115,6 @@
           description: Label of node to use for this build
           default: devstack-precise
 
-    triggers:
-      - zuul
-
     builders:
       - devstack-inprogress
       - devstack-checkout
@@ -160,9 +148,6 @@
           name: NODE_LABEL
           description: Label of node to use for this build
           default: devstack-precise
-
-    triggers:
-      - zuul
 
     builders:
       - devstack-inprogress
@@ -473,9 +458,6 @@
           description: Label of node to use for this build
           default: devstack-precise
 
-    triggers:
-      - zuul
-
     builders:
       - devstack-inprogress
       - devstack-checkout
@@ -512,9 +494,6 @@
           description: Label of node to use for this build
           default: devstack-precise
 
-    triggers:
-      - zuul
-
     builders:
       - devstack-inprogress
       - devstack-checkout
@@ -548,9 +527,6 @@
           name: NODE_LABEL
           description: Label of node to use for this build
           default: devstack-precise
-
-    triggers:
-      - zuul
 
     builders:
       - devstack-inprogress
@@ -586,9 +562,6 @@
           name: NODE_LABEL
           description: Label of node to use for this build
           default: devstack-precise
-
-    triggers:
-      - zuul
 
     builders:
       - devstack-inprogress
