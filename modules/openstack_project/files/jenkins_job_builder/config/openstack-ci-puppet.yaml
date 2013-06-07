@@ -2,9 +2,6 @@
     name: config-compare-xml
     node: precise
 
-    triggers:
-      - zuul
-
     builders:
       - gerrit-git-prep
       - shell: "./tools/run-compare-xml.sh openstack-infra config"
@@ -16,9 +13,6 @@
 - job:
     name: gate-config-layout
     node: precise
-
-    triggers:
-      - zuul
 
     builders:
       - gerrit-git-prep
@@ -32,9 +26,6 @@
 - job:
     name: ci-docs
     node: precise
-
-    triggers:
-      - zuul-post
 
     builders:
       - gerrit-git-prep

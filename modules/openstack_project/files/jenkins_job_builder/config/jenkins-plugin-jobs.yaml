@@ -1,10 +1,7 @@
 - job-template:
     name: 'gate-{name}-build'
     project-type: maven
-    node: precise && !jclouds
-
-    triggers:
-      - zuul
+    node: precise
 
     prebuilders:
       - gerrit-git-prep
@@ -23,10 +20,7 @@
 - job-template:
     name: '{name}-hpi-artifact'
     project-type: maven
-    node: precise && !jclouds
-
-    triggers:
-      - zuul-post
+    node: precise
 
     prebuilders:
       - gerrit-git-prep
