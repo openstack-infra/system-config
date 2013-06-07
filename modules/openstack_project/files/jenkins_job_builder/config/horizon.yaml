@@ -2,9 +2,6 @@
     name: gate-horizon-selenium
     node: precise
 
-    triggers:
-      - zuul
-
     builders:
       - gerrit-git-prep
       - selenium:

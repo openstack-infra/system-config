@@ -4,9 +4,6 @@
     concurrent: false
     node: precise
 
-    triggers:
-      - zuul-post
-
     builders:
       - gerrit-git-prep
 

@@ -2,9 +2,6 @@
     name: '{name}-pypi-upload'
     node: pypi
 
-    triggers:
-      - zuul-post
-
     builders:
       - shell: |
           #!/bin/bash -xe

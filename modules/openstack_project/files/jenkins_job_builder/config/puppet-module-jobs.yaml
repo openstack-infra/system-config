@@ -2,9 +2,6 @@
     name: 'gate-{name}-puppet-unit-{puppet_version}'
     node: '{node}'
 
-    triggers:
-      - zuul
-
     builders:
       - gerrit-git-prep
       - shell: |
@@ -21,9 +18,6 @@
     name: 'gate-{name}-puppet-lint'
     node: '{node}'
 
-    triggers:
-      - zuul
-
     builders:
       - gerrit-git-prep
       - puppet-lint
@@ -34,9 +28,6 @@
 - job-template:
     name: 'gate-{name}-puppet-syntax'
     node: '{node}'
-
-    triggers:
-      - zuul
 
     builders:
       - gerrit-git-prep

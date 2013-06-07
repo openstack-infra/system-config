@@ -3,9 +3,6 @@
     name: jenkins-job-builder-docs
     node: precise
 
-    triggers:
-      - zuul-post
-
     builders:
       - gerrit-git-prep
       - docs:
@@ -24,9 +21,6 @@
 - job:
     name: jenkins-job-builder-compare-xml
     node: precise
-
-    triggers:
-      - zuul
 
     builders:
       - gerrit-git-prep

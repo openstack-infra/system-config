@@ -4,16 +4,13 @@
     name: openstack-api-programming
     project-type: maven
     concurrent: true
-    node: precise && !jclouds
+    node: precise
 
     wrappers:
       - timeout:
           timeout: 40
           fail: true
       - timestamps
-
-    triggers:
-      - zuul-post
 
     prebuilders:
       - gerrit-git-prep
@@ -47,10 +44,7 @@
     name: openstack-api-quick-start
     project-type: maven
     concurrent: false
-    node: precise && !jclouds
-
-    triggers:
-      - zuul-post
+    node: precise
 
     prebuilders:
       - gerrit-git-prep
@@ -78,10 +72,7 @@
     name: openstack-api-ref
     project-type: maven
     concurrent: false
-    node: precise && !jclouds
-
-    triggers:
-      - zuul-post
+    node: precise
 
     prebuilders:
       - gerrit-git-prep
@@ -112,9 +103,6 @@
     concurrent: false
     node: precise
 
-    triggers:
-      - zuul-post
-
     builders:
       - gerrit-git-prep
 
@@ -131,16 +119,13 @@
     name: image-api-v2.0
     project-type: maven
     concurrent: true
-    node: precise && !jclouds
+    node: precise
 
     wrappers:
       - timeout:
           timeout: 40
           fail: true
       - timestamps
-
-    triggers:
-      - zuul-post
 
     prebuilders:
       - gerrit-git-prep
@@ -175,10 +160,7 @@
     name: network-api-v1.0
     project-type: maven
     concurrent: false
-    node: precise && !jclouds
-
-    triggers:
-      - zuul-post
+    node: precise
 
     prebuilders:
       - gerrit-git-prep
@@ -203,10 +185,7 @@
 - job:
     name: netconn-api-v2.0
     project-type: maven
-    node: precise && !jclouds
-
-    triggers:
-      - zuul-post
+    node: precise
 
     prebuilders:
       - gerrit-git-prep
@@ -232,10 +211,7 @@
     name: object-api-v1.0
     project-type: maven
     concurrent: false
-    node: precise && !jclouds
-
-    triggers:
-      - zuul-post
+    node: precise
 
     prebuilders:
       - gerrit-git-prep
@@ -261,10 +237,7 @@
     name: compute-api-v2.0
     project-type: maven
     concurrent: false
-    node: precise && !jclouds
-
-    triggers:
-      - zuul-post
+    node: precise
 
     prebuilders:
       - gerrit-git-prep
@@ -291,9 +264,6 @@
     concurrent: false
     node: precise
 
-    triggers:
-      - zuul-post
-
     builders:
       - gerrit-git-prep
       - shell: /usr/local/jenkins/slave_scripts/run-xmllint.sh openstack-compute-api-2/src/os-compute-2.wadl
@@ -311,10 +281,7 @@
     name: block-api-v2.0
     project-type: maven
     concurrent: false
-    node: precise && !jclouds
-
-    triggers:
-      - zuul-post
+    node: precise
 
     prebuilders:
       - gerrit-git-prep
@@ -341,10 +308,7 @@
     name: identity-api-v2.0
     project-type: maven
     concurrent: false
-    node: precise && !jclouds
-
-    triggers:
-      - zuul-post
+    node: precise
 
     prebuilders:
       - gerrit-git-prep
@@ -371,10 +335,7 @@
     name: image-api-v1.1
     project-type: maven
     concurrent: false
-    node: precise && !jclouds
-
-    triggers:
-      - zuul-post
+    node: precise
 
     prebuilders:
       - gerrit-git-prep
