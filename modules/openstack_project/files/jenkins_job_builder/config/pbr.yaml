@@ -1,0 +1,93 @@
+- job:
+    name: gate-pbr-devstack-vm-rawinstall
+    node: devstack-precise
+
+    wrappers:
+      - timeout:
+          timeout: 120
+          fail: true
+      - timestamps
+
+    parameters:
+      - label:
+          name: NODE_LABEL
+          description: Label of node to use for this build
+          default: devstack-precise
+
+    triggers:
+      - zuul
+
+    builders:
+      - devstack-inprogress
+      - devstack-checkout
+      - shell: |
+          #!/bin/bash -xe
+          export PYTHONUNBUFFERED=true
+          export DEVSTACK_GATE_TEMPEST=0
+          function gate_hook {
+              cd $BASE/new/pbr
+              rm -rf getnames download dist
+              mkdir download
+              virtualenv --distribute getnames
+              getnames/bin/python setup.py install
+              getnames/bin/python setup.py sdist
+              getnames/bin/pip install -d download -r requirements.txt
+              cp dist/* download
+              for name in `getnames/bin/pip freeze | awk 'BEGIN {FS="=="} {print $1}'` ; do
+                  if [ -f download/$name*.tar.gz ] ; then
+                      mkdir download/$name
+                      mv download/$name*.tar.gz download/$name
+                      tarball_name=`echo download/$name/*tar.gz | sed "s/download.$name.//"`
+                      md5=`md5sum download/$name/*tar.gz | awk '{print $1}'`
+                      echo "<html><body><a href='$tarball_name#md5=$md5'>$tarball_name</a></body></html>" >download/$name/index.html
+                  fi
+              done
+  
+              # Test with the released version of pbr
+              for PROJ in $PROJECTS ; do
+                  cd $BASE/new/$PROJ
+                  rm -rf testrawinstall *.egg
+                  virtualenv testrawinstall
+                  testrawinstall/bin/python setup.py install
+                  testrawinstall/bin/python setup.py sdist
+                  rm -rf testrawinstall *.egg
+                  virtualenv testrawinstall
+                  testrawinstall/bin/pip install dist/*
+              done
+
+              cat <<EOF > /tmp/pydistutils.cfg
+          [easy_install]
+          index_url = file://$BASE/new/pbr/download
+          file_links = http://pypi.openstack.org/openstack
+          EOF
+              cat <<EOF > /tmp/pip.conf
+          [global]
+          index-url = file://$BASE/new/pbr/download
+          extra-index-url = http://pypi.openstack.org/openstack
+          EOF
+              cp /tmp/pydistutils.cfg ~/.pydistutils.cfg
+              cp /tmp/pydistutils.cfg ~stack/.pydistutils.cfg
+              sudo cp /tmp/pydistutils.cfg ~root/.pydistutils.cfg
+              cp /tmp/pip.conf ~/.pip/pip.conf
+              cp /tmp/pip.conf ~stack/.pip/pip.conf
+              sudo -u root cp /tmp/pip.conf ~root/.pip/pip.conf
+
+              # Test with the candidate version of pbr
+              for PROJ in $PROJECTS ; do
+                  cd $BASE/new/$PROJ
+                  rm -rf testrawinstall *.egg
+                  virtualenv testrawinstall
+                  testrawinstall/bin/python setup.py install
+                  testrawinstall/bin/python setup.py sdist
+                  rm -rf testrawinstall *.egg
+                  virtualenv testrawinstall
+                  testrawinstall/bin/pip install dist/*
+              done
+          }
+          cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
+          ./safe-devstack-vm-gate-wrap.sh
+      - link-logs
+
+    publishers:
+      - console-log
+      - devstack-complete
