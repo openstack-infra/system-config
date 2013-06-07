@@ -1,16 +1,13 @@
 - job:
     name: check-gerrit-unittests
     project-type: maven
-    node: precise && !jclouds
+    node: precise
 
     wrappers:
       - timeout:
           timeout: 40
           fail: true
       - timestamps
-
-    triggers:
-      - zuul
 
     prebuilders:
       - gerrit-git-prep
@@ -37,16 +34,13 @@
 - job:
     name: gate-gerrit-unittests
     project-type: maven
-    node: precise && !jclouds
+    node: precise
 
     wrappers:
       - timeout:
           timeout: 40
           fail: true
       - timestamps
-
-    triggers:
-      - zuul
 
     prebuilders:
       - gerrit-git-prep
@@ -68,16 +62,13 @@
 - job:
     name: gerrit-package
     project-type: maven
-    node: precise && !jclouds
+    node: precise
 
     wrappers:
       - timeout:
           timeout: 40
           fail: true
       - timestamps
-
-    triggers:
-      - zuul-post
 
     prebuilders:
       - gerrit-git-prep

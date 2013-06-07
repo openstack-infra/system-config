@@ -2,9 +2,6 @@
     name: gate-requirements-install
     node: precise
 
-    triggers:
-      - zuul
-
     builders:
       - gerrit-git-prep
       - shell: |
