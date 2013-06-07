@@ -914,6 +914,7 @@ projects:
       - gate-pbr-docs
       - gate-pbr-python26
       - gate-pbr-python27
+      - gate-pbr-devstack-vm-rawinstall
       - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-cinder
@@ -925,6 +926,7 @@ projects:
       - gate-pbr-pep8
       - gate-pbr-python26
       - gate-pbr-python27
+      - gate-pbr-devstack-vm-rawinstall
       - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-cinder
