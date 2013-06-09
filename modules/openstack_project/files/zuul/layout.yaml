@@ -121,6 +121,8 @@ jobs:
     branch: ^master$
   - name: gate-hacking-integration-nova
     voting: false
+  - name: gate-savanna-pylint
+    voting: false
 
 
 projects:
@@ -1539,6 +1541,7 @@ projects:
   - name: stackforge/savanna
     check:
       - gate-savanna-pep8
+      - gate-savanna-pylint
       - gate-savanna-python26
       - gate-savanna-python27
     gate:
