@@ -72,6 +72,7 @@
 
     jobs:
       - python-jobs
+      - gate-{name}-pylint
       - hook-{name}-rtfd
       - pypi-jobs
 
