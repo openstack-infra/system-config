@@ -1070,3 +1070,12 @@
 
     jobs:
       - gate-{name}-pep8
+
+- project:
+    name: taskflow
+    github-org: stackforge
+    node: precise
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - python-jobs

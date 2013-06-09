@@ -1988,6 +1988,10 @@ projects:
 
   - name: stackforge/taskflow
     check:
-      - gate-noop
+      - gate-taskflow-pep8
+      - gate-taskflow-python27
+      - gate-taskflow-python26
     gate:
-      - gate-noop
+      - gate-taskflow-pep8
+      - gate-taskflow-python27
+      - gate-taskflow-python26
