@@ -80,6 +80,7 @@
     name: chef-cookbook-prep
     builders:
       - shell: |
+          rm -rf .cookbooks # cleanup cookbooks
           mkdir -p .cookbooks .bundle
           ruby1.9.1 /usr/bin/bundle install --path=.bundle
           ruby1.9.1 /usr/bin/bundle exec berks install --path=.cookbooks
