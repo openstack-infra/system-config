@@ -80,6 +80,13 @@
     name: chef-cookbook-prep
     builders:
       - shell: |
+          # Temporary until berkshelf supports the `--vendor` option.
+          # Currently berkshelf installs cookbooks into ~/.berkshelf/,
+          # then copies them out to the directory specified by `--path`.
+          (
+            cd ~/.berkshelf/
+            rm -rf cookbooks/openstack-*
+          )
           mkdir -p .cookbooks .bundle
           ruby1.9.1 /usr/bin/bundle install --path=.bundle
           ruby1.9.1 /usr/bin/bundle exec berks install --path=.cookbooks
