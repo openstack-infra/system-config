@@ -376,6 +376,9 @@
     triggers:
       - zuul-post
 
+    prebuilders:
+      - gerrit-git-prep
+
     maven:
       maven-name: Maven3
       root-module:
