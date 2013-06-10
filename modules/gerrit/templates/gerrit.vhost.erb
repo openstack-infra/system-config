@@ -56,6 +56,10 @@
 
   ProxyPassReverse / http://localhost:8081/
 
+<% if scope.lookupvar("gerrit::robots_txt_source") != "" %>
+  Alias /robots.txt /home/gerrit2/review_site/static/robots.txt
+<% end -%>
+
 <% if scope.lookupvar("gerrit::replicate_local") -%>
   SetEnv GIT_PROJECT_ROOT /var/lib/git/
   SetEnv GIT_HTTP_EXPORT_ALL
