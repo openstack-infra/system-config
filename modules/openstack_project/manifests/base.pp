@@ -31,6 +31,21 @@ class openstack_project::base(
     }
   }
 
+  if ($::operatingsystem == 'Fedora') {
+
+    package { 'hiera':
+      ensure   => latest,
+      provider => 'gem',
+    }
+
+    exec { 'symlink hiera modules' :
+      command     => 'ln -s /usr/local/share/gems/gems/hiera-puppet-* /etc/puppet/modules/',
+      subscribe   => Package['hiera'],
+      refreshonly => true,
+    }
+
+  }
+
   package { $::openstack_project::params::packages:
     ensure => present
   }
