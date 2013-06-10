@@ -97,6 +97,7 @@ class openstack_project::gerrit (
     # opinions
     enable_melody                   => true,
     melody_session                  => true,
+    robots_txt_source               => 'puppet:///modules/openstack_project/gerrit/robots.txt',
     # passthrough
     ssl_cert_file                   => $ssl_cert_file,
     ssl_key_file                    => $ssl_key_file,
