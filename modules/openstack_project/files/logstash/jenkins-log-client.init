@@ -1,11 +1,11 @@
 #! /bin/sh
 ### BEGIN INIT INFO
-# Provides:          jenkins-log-pusher
+# Provides:          jenkins-log-client
 # Required-Start:    $remote_fs $syslog
 # Required-Stop:     $remote_fs $syslog
 # Default-Start:     2 3 4 5
 # Default-Stop:      0 1 6
-# Short-Description: Jenkins Log Pusher
+# Short-Description: Jenkins Log Client
 # Description:       Service to push Jenkins logs into logstash.
 ### END INIT INFO
 
@@ -13,10 +13,10 @@
 
 # PATH should only include /usr/* if it runs after the mountnfs.sh script
 PATH=/sbin:/usr/sbin:/bin:/usr/bin
-DESC="Jenkins Log Pusher"
-NAME=jenkins-log-pusher
-DAEMON=/usr/local/bin/log-pusher.py
-DAEMON_ARGS='-c /etc/logstash/jenkins-log-pusher.yaml -d /var/log/logstash/pusher-debug.log'
+DESC="Jenkins Log Client"
+NAME=jenkins-log-client
+DAEMON=/usr/local/bin/log-gearman-client.py
+DAEMON_ARGS='-c /etc/logstash/jenkins-log-client.yaml -d /var/log/logstash/log-client-debug.log'
 PIDFILE=/var/run/$NAME/$NAME.pid
 SCRIPTNAME=/etc/init.d/$NAME
 USER=logstash
@@ -48,7 +48,6 @@ do_start()
 	chown $USER /var/run/$NAME
 	start-stop-daemon --start --quiet --pidfile $PIDFILE -c $USER --exec $DAEMON --test > /dev/null \
 		|| return 1
-	# Note using --background as log-pusher.py cannot daemonize itself yet.
 	start-stop-daemon --start --quiet --pidfile $PIDFILE -c $USER --exec $DAEMON -- \
 		$DAEMON_ARGS \
 		|| return 2

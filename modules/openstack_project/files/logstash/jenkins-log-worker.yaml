@@ -1,0 +1,5 @@
+gearman-host: localhost
+gearman-port: 4730
+output-host: localhost
+output-port: 9999
+output-mode: tcp
