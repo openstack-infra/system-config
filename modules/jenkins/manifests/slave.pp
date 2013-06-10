@@ -5,6 +5,7 @@ class jenkins::slave(
   $sudo = false,
   $bare = false,
   $user = true,
+  $python3 = false,
 ) {
 
   include pip
@@ -132,10 +133,19 @@ class jenkins::slave(
     'tox',
   ]
 
-  package { $pip_packages:
-    ensure   => latest,  # we want the latest from these
-    provider => pip,
-    require  => Class[pip],
+  if $python3 {
+    include pip::python3
+    package { $pip_packages:
+      ensure   => latest,  # we want the latest from these
+      provider => pip3,
+      require  => Class[pip::python3],
+    }
+  } else {
+    package { $pip_packages:
+      ensure   => latest,  # we want the latest from these
+      provider => pip,
+      require  => Class[pip],
+    }
   }
 
   package { 'python-subunit':
