@@ -20,7 +20,19 @@
 # The repo and preferences files are also managed by puppet, so be sure
 # to keep them in sync with this file.
 
-if cat /etc/*release | grep -e "CentOS" -e "Red Hat" &> /dev/null; then
+if cat /etc/*release | grep -e "Fedora" &> /dev/null; then
+
+    yum update -y
+
+    # NOTE: we preinstall lsb_release to ensure facter sets lsbdistcodename
+    yum install -y redhat-lsb-core git puppet
+
+    gem install hiera hiera-puppet
+
+    mkdir -p /etc/puppet/modules/
+    ln -s /usr/local/share/gems/gems/hiera-puppet-* /etc/puppet/modules/
+
+elif cat /etc/*release | grep -e "CentOS" -e "Red Hat" &> /dev/null; then
     rpm -qi epel-release &> /dev/null || rpm -Uvh http://download.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm
     rpm -ivh http://yum.puppetlabs.com/el/6/products/x86_64/puppetlabs-release-6-6.noarch.rpm
 
