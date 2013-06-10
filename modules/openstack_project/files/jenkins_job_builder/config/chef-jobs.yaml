@@ -42,3 +42,18 @@
 
     publishers:
       - console-log
+
+- job-template:
+    name: 'gate-{name}-chef-syntax'
+    node: '{node}'
+
+    triggers:
+      - zuul
+
+    builders:
+      - gerrit-git-prep
+      - chef-cookbook-prep
+      - chef-cookbook-syntax
+
+    publishers:
+      - console-log

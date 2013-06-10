@@ -957,6 +957,8 @@
     node: precise
 
     jobs:
+      - gate-{name}-chef-style
+      - gate-{name}-chef-syntax
       - gate-{name}-chef-lint
       - gate-{name}-chef-unit
 
@@ -966,8 +968,9 @@
     node: precise
 
     jobs:
-      - gate-{name}-chef-lint
       - gate-{name}-chef-style
+      - gate-{name}-chef-syntax
+      - gate-{name}-chef-lint
       - gate-{name}-chef-unit
 
 - project:
@@ -976,6 +979,8 @@
     node: precise
 
     jobs:
+      - gate-{name}-chef-style
+      - gate-{name}-chef-syntax
       - gate-{name}-chef-lint
       - gate-{name}-chef-unit
 
@@ -985,6 +990,8 @@
     node: precise
 
     jobs:
+      - gate-{name}-chef-style
+      - gate-{name}-chef-syntax
       - gate-{name}-chef-lint
       - gate-{name}-chef-unit
 
@@ -994,6 +1001,8 @@
     node: precise
 
     jobs:
+      - gate-{name}-chef-style
+      - gate-{name}-chef-syntax
       - gate-{name}-chef-lint
       - gate-{name}-chef-unit
 
@@ -1003,6 +1012,8 @@
     node: precise
 
     jobs:
+      - gate-{name}-chef-style
+      - gate-{name}-chef-syntax
       - gate-{name}-chef-lint
       - gate-{name}-chef-unit
 
@@ -1012,6 +1023,8 @@
     node: precise
 
     jobs:
+      - gate-{name}-chef-style
+      - gate-{name}-chef-syntax
       - gate-{name}-chef-lint
       - gate-{name}-chef-unit
 
@@ -1021,6 +1034,8 @@
     node: precise
 
     jobs:
+      - gate-{name}-chef-style
+      - gate-{name}-chef-syntax
       - gate-{name}-chef-lint
       - gate-{name}-chef-unit
 
@@ -1030,6 +1045,8 @@
     node: precise
 
     jobs:
+      - gate-{name}-chef-style
+      - gate-{name}-chef-syntax
       - gate-{name}-chef-lint
       - gate-{name}-chef-unit
 
@@ -1039,6 +1056,30 @@
     node: precise
 
     jobs:
+      - gate-{name}-chef-style
+      - gate-{name}-chef-syntax
+      - gate-{name}-chef-lint
+      - gate-{name}-chef-unit
+
+- project:
+    name: cookbook-openstack-metering
+    github-org: stackforge
+    node: precise
+
+    jobs:
+      - gate-{name}-chef-style
+      - gate-{name}-chef-syntax
+      - gate-{name}-chef-lint
+      - gate-{name}-chef-unit
+
+- project:
+    name: cookbook-openstack-network
+    github-org: stackforge
+    node: precise
+
+    jobs:
+      - gate-{name}-chef-style
+      - gate-{name}-chef-syntax
       - gate-{name}-chef-lint
       - gate-{name}-chef-unit
 

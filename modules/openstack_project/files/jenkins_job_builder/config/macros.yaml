@@ -80,35 +80,32 @@
     name: chef-cookbook-prep
     builders:
       - shell: |
-          mkdir -p .cookbooks .bundle
-          ruby1.9.1 /usr/bin/bundle install --path=.bundle
-          ruby1.9.1 /usr/bin/bundle exec berks install --path=.cookbooks
-          COOKBOOK=$(awk '/^name/ {print $NF}' metadata.rb |tr -d \"\')
-          if [ -z $COOKBOOK ]; then
-              echo "Cookbook name not defined in metadata.rb"
-              exit 1
-          fi
+          ruby1.9.1 /usr/bin/bundle install
+          ruby1.9.1 /usr/bin/bundle exec berks install
 
 - builder:
     name: chef-cookbook-style
     builders:
       - shell: |
-          COOKBOOK=$(awk '/^name/ {print $NF}' metadata.rb |tr -d \"\')
-          ruby1.9.1 /usr/bin/bundle exec tailor
+          ruby1.9.1 /usr/bin/bundle exec strainer test -o tailor
 
 - builder:
     name: chef-cookbook-lint
     builders:
       - shell: |
-          COOKBOOK=$(awk '/^name/ {print $NF}' metadata.rb |tr -d \"\')
-          ruby1.9.1 /usr/bin/bundle exec foodcritic -f any -t ~FC003 -t ~FC023 .cookbooks/$COOKBOOK
+          ruby1.9.1 /usr/bin/bundle exec strainer test -o foodcritic
 
 - builder:
     name: chef-cookbook-rspec
     builders:
       - shell: |
-          COOKBOOK=$(awk '/^name/ {print $NF}' metadata.rb |tr -d \"\')
-          ruby1.9.1 /usr/bin/bundle exec rspec .cookbooks/$COOKBOOK
+          ruby1.9.1 /usr/bin/bundle exec strainer test -o chefspec
+
+- builder:
+    name: chef-cookbook-syntax
+    builders:
+      - shell: |
+          ruby1.9.1 /usr/bin/bundle exec strainer test -o "knife test"
 
 - builder:
     name: selenium
