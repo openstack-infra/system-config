@@ -30,52 +30,58 @@ class openstack_project::logstash_worker (
     conf_template => 'openstack_project/logstash/indexer.conf.erb',
   }
 
-  package { 'python3':
-    ensure => 'present',
+  package { 'python-daemon':
+    ensure => present,
   }
 
-  package { 'python3-zmq':
-    ensure => 'present',
+  package { 'python-zmq':
+    ensure => present,
   }
 
-  package { 'python3-yaml':
-    ensure => 'present',
+  package { 'python-yaml':
+    ensure => present,
   }
 
-  file { '/usr/local/bin/log-pusher.py':
+  include pip
+  package { 'gear':
+    ensure   => latest,
+    provider => 'pip',
+    require  => Class['pip'],
+  }
+
+  file { '/usr/local/bin/log-gearman-worker.py':
     ensure  => present,
     owner   => 'root',
     group   => 'root',
     mode    => '0755',
-    source  => 'puppet:///modules/openstack_project/logstash/log-pusher.py',
-    require => Package['python3'],
+    source  => 'puppet:///modules/openstack_project/logstash/log-gearman-worker.py',
   }
 
-  file { '/etc/logstash/jenkins-log-pusher.yaml':
+  file { '/etc/logstash/jenkins-log-worker.yaml':
     ensure  => present,
     owner   => 'root',
     group   => 'root',
     mode    => '0555',
-    source  => "puppet:///modules/openstack_project/logstash/${::hostname}/jenkins-log-pusher.yaml",
+    source  => 'puppet:///modules/openstack_project/logstash/jenkins-log-worker.yaml',
     require => Class['logstash::indexer'],
   }
 
-  file { '/etc/init.d/jenkins-log-pusher':
+  file { '/etc/init.d/jenkins-log-worker':
     ensure  => present,
     owner   => 'root',
     group   => 'root',
     mode    => '0555',
-    source  => 'puppet:///modules/openstack_project/logstash/jenkins-log-pusher.init',
+    source  => 'puppet:///modules/openstack_project/logstash/jenkins-log-worker.init',
     require => [
-      File['/usr/local/bin/log-pusher.py'],
-      File['/etc/logstash/jenkins-log-pusher.yaml'],
+      File['/usr/local/bin/log-worker.py'],
+      File['/etc/logstash/jenkins-log-worker.yaml'],
     ],
   }
 
-  service { 'jenkins-log-pusher':
+  service { 'jenkins-log-worker':
     enable     => true,
     hasrestart => true,
-    subscribe  => File['/etc/logstash/jenkins-log-pusher.yaml'],
-    require    => File['/etc/init.d/jenkins-log-pusher'],
+    subscribe  => File['/etc/logstash/jenkins-log-worker.yaml'],
+    require    => File['/etc/init.d/jenkins-log-worker'],
   }
 }
