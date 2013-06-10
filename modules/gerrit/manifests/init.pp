@@ -73,6 +73,7 @@ class gerrit(
   $email_private_key = '',
   $vhost_name = $::fqdn,
   $canonicalweburl = "https://${::fqdn}/",
+  $robots_txt_source = '', # If left empty, the gerrit default will be used.
   $serveradmin = "webmaster@${::fqdn}",
   $ssl_cert_file = '/etc/ssl/certs/ssl-cert-snakeoil.pem',
   $ssl_key_file = '/etc/ssl/private/ssl-cert-snakeoil.key',
@@ -308,6 +309,16 @@ class gerrit(
       mode    => '0640',
       content => $ssl_chain_file_contents,
       before  => Apache::Vhost[$vhost_name],
+    }
+  }
+
+  if $robots_txt_source != '' {
+    file { '/home/gerrit2/review_site/static/robots.txt':
+      owner    => 'root',
+      group    => 'root',
+      mode     => '0444',
+      source   => $robots_txt_source,
+      require  => File['/home/gerrit2/review_site/static'],
     }
   }
 
