@@ -1,0 +1,98 @@
+source-url: http://logs.openstack.org
+
+# List of zmq event inputs.
+zmq-publishers:
+  - tcp://jenkins.openstack.org:8888
+
+# List of files to source logs from.
+source-files:
+  - name: console.html
+    retry-get: True
+  - name: logs/screen-c-api.txt
+    tags:
+      - screen
+      - oslofmt
+  - name: logs/screen-c-sch.txt
+    tags:
+      - screen
+      - oslofmt
+  - name: logs/screen-c-vol.txt
+    tags:
+      - screen
+      - oslofmt
+  - name: logs/screen-g-api.txt
+    tags:
+      - screen
+      - oslofmt
+  - name: logs/screen-g-reg.txt
+    tags:
+      - screen
+      - oslofmt
+  - name: logs/screen-key.txt
+    tags:
+      - screen
+      - keystonefmt
+  - name: logs/screen-n-api.txt
+    tags:
+      - screen
+      - oslofmt
+  - name: logs/screen-n-cond.txt
+    tags:
+      - screen
+      - oslofmt
+  - name: logs/screen-n-cpu.txt
+    tags:
+      - screen
+      - oslofmt
+  - name: logs/screen-n-crt.txt
+    tags:
+      - screen
+      - oslofmt
+  - name: logs/screen-n-net.txt
+    tags:
+      - screen
+      - oslofmt
+  - name: logs/screen-n-obj.txt
+    tags:
+      - screen
+      - oslofmt
+  - name: logs/screen-n-sch.txt
+    tags:
+      - screen
+      - oslofmt
+  - name: logs/screen-q-agt.txt
+    tags:
+      - screen
+      - oslofmt
+  - name: logs/screen-q-dhcp.txt
+    tags:
+      - screen
+      - oslofmt
+  - name: logs/screen-q-l3.txt
+    tags:
+      - screen
+      - oslofmt
+  - name: logs/screen-q-meta.txt
+    tags:
+      - screen
+      - oslofmt
+  - name: logs/screen-q-svc.txt
+    tags:
+      - screen
+      - oslofmt
+  - name: logs/screen-s-account.txt
+    tags:
+      - screen
+      - apachecombined
+  - name: logs/screen-s-container.txt
+    tags:
+      - screen
+      - apachecombined
+  - name: logs/screen-s-object.txt
+    tags:
+      - screen
+      - apachecombined
+# TODO(clarkb) Add swift proxy logs here.
+  - name: logs/syslog.txt
+    tags:
+      - syslog
