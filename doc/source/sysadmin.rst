@@ -97,7 +97,7 @@ To create a new server, do the following:
  * Add a node entry in :file:`manifests/site.pp` for the server that uses that
    class.
 
- * If your server needs private information such as password,s use
+ * If your server needs private information such as passwords, use
    hiera calls in the site manifest, and ask an infra-core team member
    to manually add the private information to hiera.
 
