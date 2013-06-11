@@ -212,7 +212,7 @@ The ``- job-group:`` section is not strictly necessary but allows you to group
 many job templates with the same variable arguments under one name.
 
 The ``projects.yaml`` pulls all of the magic together. It specifies the
-arguemnts to and instantiates the job templates as real jobs. For example:
+arguments to and instantiates the job templates as real jobs. For example:
 
 .. code-block:: yaml
 

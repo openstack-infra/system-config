@@ -187,7 +187,7 @@ last 15 minutes, change the dropdown in the top left from ``Last 15m``
 to ``Last 60m`` to get a better window on the logs. At this point you
 should see a list of logs, if you click on a log event it will expand
 and show you all of the fields associated with that event and their
-values (not Chromium and Kibana seem to have trouble with this at times
+values (note Chromium and Kibana seem to have trouble with this at times
 and some fields end up without values, use Firefox if this happens).
 You can search based on all of these fields and if you click the
 magnifying glass next to a field in the expanded event view it will add
