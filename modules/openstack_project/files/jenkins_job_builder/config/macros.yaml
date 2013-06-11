@@ -79,6 +79,8 @@
 - builder:
     name: chef-cookbook-prep
     builders:
+      - inject:
+          properties-content: BUNDLE_PATH=$HOME/bundle-ruby-19
       - shell: |
           ruby1.9.1 /usr/bin/bundle install
           ruby1.9.1 /usr/bin/bundle exec berks install
@@ -86,24 +88,32 @@
 - builder:
     name: chef-cookbook-style
     builders:
+      - inject:
+          properties-content: BUNDLE_PATH=$HOME/bundle-ruby-19
       - shell: |
           ruby1.9.1 /usr/bin/bundle exec strainer test -o tailor
 
 - builder:
     name: chef-cookbook-lint
     builders:
+      - inject:
+          properties-content: BUNDLE_PATH=$HOME/bundle-ruby-19
       - shell: |
           ruby1.9.1 /usr/bin/bundle exec strainer test -o foodcritic
 
 - builder:
     name: chef-cookbook-rspec
     builders:
+      - inject:
+          properties-content: BUNDLE_PATH=$HOME/bundle-ruby-19
       - shell: |
           ruby1.9.1 /usr/bin/bundle exec strainer test -o chefspec
 
 - builder:
     name: chef-cookbook-syntax
     builders:
+      - inject:
+          properties-content: BUNDLE_PATH=$HOME/bundle-ruby-19
       - shell: |
           ruby1.9.1 /usr/bin/bundle exec strainer test -o "knife test"
 
