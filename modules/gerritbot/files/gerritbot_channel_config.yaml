@@ -109,7 +109,7 @@ openstack-dns:
     branches:
       - master
 
-reddwarf:
+openstack-trove:
     events:
       - patchset-created
       - change-merged
