@@ -1234,6 +1234,24 @@ projects:
       - python-monikerclient-tarball:
         - python-monikerclient-pypi-upload
 
+  - name: stackforge/bindep
+    check:
+      - gate-bindep-pep8
+      - gate-bindep-python26
+      - gate-bindep-python27
+    gate:
+      - gate-bindep-pep8
+      - gate-bindep-python26
+      - gate-bindep-python27
+    post:
+      - bindep-branch-tarball
+      - bindep-coverage
+    pre-release:
+      - bindep-tarball
+    release:
+      - bindep-tarball:
+        - bindep-pypi-upload
+
   - name: stackforge/billingstack
     check:
       - gate-billingstack-pep8
