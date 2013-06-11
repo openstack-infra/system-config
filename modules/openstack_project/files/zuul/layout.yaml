@@ -1449,6 +1449,12 @@ projects:
     post:
       - os-refresh-config-coverage
 
+  - name: stackforge/tripleo-heat-elements
+    check:
+      - gate-noop
+    gate:
+      - gate-noop
+
   - name: stackforge/tripleo-image-elements
     check:
       - gate-tripleo-image-elements-pep8
