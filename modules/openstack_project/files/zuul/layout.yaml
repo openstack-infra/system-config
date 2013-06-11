@@ -1991,3 +1991,9 @@ projects:
       - gate-noop
     gate:
       - gate-noop
+
+  - name: stackforge/novaimagebuilder
+    check:
+      - gate-noop
+    gate:
+      - gate-noop
