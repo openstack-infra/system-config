@@ -2084,3 +2084,9 @@ projects:
       - gate-taskflow-pep8
       - gate-taskflow-python27
       - gate-taskflow-python26
+
+  - name: stackforge/novaimagebuilder
+    check:
+      - gate-noop
+    gate:
+      - gate-noop
