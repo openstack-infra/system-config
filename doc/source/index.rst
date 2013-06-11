@@ -17,15 +17,12 @@ OpenStack developers or users do not need to read this documentation.
 Instead, see http://wiki.openstack.org/ to learn how contribute to or
 use OpenStack.
 
+Contents:
+
 .. sidebar:: HOWTOs
 
-   .. toctree::
-      :maxdepth: 1
-
-      third_party
-      stackforge
-
-Contents:
+   * :doc:`third_party`
+   * :doc:`stackforge`
 
 .. toctree::
    :maxdepth: 2
@@ -33,6 +30,12 @@ Contents:
    project
    sysadmin
    systems
+
+.. toctree::
+   :hidden:
+
+   third_party
+   stackforge
 
 
 Indices and tables
