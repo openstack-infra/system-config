@@ -1,0 +1,28 @@
+- job-template:
+    name: '{name}-jenkinsci-upload'
+    node: pypi
+
+    triggers:
+      - zuul-post
+
+    builders:
+      - shell: |
+          #!/bin/bash -xe
+          TAG=`echo $ZUUL_REF | sed 's/^refs.tags.//'`
+          FILENAME="{name}-$TAG.hpi"
+
+          # copy plugin plugin artifacts from tarballs to local workspace
+          rm -rf *.hpi
+          curl -o $FILENAME http://{tarball-site}/{name}/$FILENAME
+
+          # copy plugin artifacts from workspace to remote repo
+          /usr/local/jenkins/slave_scripts/jenkinsci-upload.sh {name} $TAG
+
+    publishers:
+      - console-log-post
+
+
+- job-group:
+    name: jenkinsci-jobs
+    jobs:
+      - '{name}-jenkinsci-upload'
