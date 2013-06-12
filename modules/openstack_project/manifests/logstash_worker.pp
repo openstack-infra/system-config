@@ -55,6 +55,12 @@ class openstack_project::logstash_worker (
     group   => 'root',
     mode    => '0755',
     source  => 'puppet:///modules/openstack_project/logstash/log-gearman-worker.py',
+    require => [
+      Package['python-daemon'],
+      Package['python-zmq'],
+      Package['python-yaml'],
+      Package['gear'],
+    ],
   }
 
   file { '/etc/logstash/jenkins-log-worker.yaml':
@@ -63,7 +69,6 @@ class openstack_project::logstash_worker (
     group   => 'root',
     mode    => '0555',
     source  => 'puppet:///modules/openstack_project/logstash/jenkins-log-worker.yaml',
-    require => Class['logstash::indexer'],
   }
 
   file { '/etc/init.d/jenkins-log-worker':
@@ -73,7 +78,7 @@ class openstack_project::logstash_worker (
     mode    => '0555',
     source  => 'puppet:///modules/openstack_project/logstash/jenkins-log-worker.init',
     require => [
-      File['/usr/local/bin/log-worker.py'],
+      File['/usr/local/bin/log-gearman-worker.py'],
       File['/etc/logstash/jenkins-log-worker.yaml'],
     ],
   }
@@ -82,6 +87,9 @@ class openstack_project::logstash_worker (
     enable     => true,
     hasrestart => true,
     subscribe  => File['/etc/logstash/jenkins-log-worker.yaml'],
-    require    => File['/etc/init.d/jenkins-log-worker'],
+    require    => [
+      Class['logstash::indexer'],
+      File['/etc/init.d/jenkins-log-worker'],
+    ],
   }
 }

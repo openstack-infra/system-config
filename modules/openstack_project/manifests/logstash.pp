@@ -21,7 +21,7 @@ class openstack_project::logstash (
 ) {
   $iptables_es_rule = regsubst ($elasticsearch_masters, '^(.*)$', '-m state --state NEW -m tcp -p tcp --dport 9200:9400 -s \1 -j ACCEPT')
   $iptables_gm_rule = regsubst ($gearman_workers, '^(.*)$', '-m state --state NEW -m tcp -p tcp --dport 4730 -s \1 -j ACCEPT')
-  $iptables_rule = concat($iptables_es_rule, $iptables_gm_rule)
+  $iptables_rule = flatten([$iptables_es_rule, $iptables_gm_rule])
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [22, 80],
     iptables_rules6           => $iptables_rule,
@@ -59,6 +59,12 @@ class openstack_project::logstash (
     group   => 'root',
     mode    => '0755',
     source  => 'puppet:///modules/openstack_project/logstash/log-gearman-client.py',
+    require => [
+      Package['python-daemon'],
+      Package['python-zmq'],
+      Package['python-yaml'],
+      Package['gear'],
+    ],
   }
 
   file { '/etc/logstash/jenkins-log-client.yaml':
@@ -67,7 +73,6 @@ class openstack_project::logstash (
     group   => 'root',
     mode    => '0555',
     source  => 'puppet:///modules/openstack_project/logstash/jenkins-log-client.yaml',
-    require => Class['logstash::indexer'],
   }
 
   file { '/etc/init.d/jenkins-log-client':
@@ -77,7 +82,7 @@ class openstack_project::logstash (
     mode    => '0555',
     source  => 'puppet:///modules/openstack_project/logstash/jenkins-log-client.init',
     require => [
-      File['/usr/local/bin/log-client.py'],
+      File['/usr/local/bin/log-gearman-client.py'],
       File['/etc/logstash/jenkins-log-client.yaml'],
     ],
   }
