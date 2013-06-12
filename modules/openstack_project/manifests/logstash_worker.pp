@@ -73,7 +73,7 @@ class openstack_project::logstash_worker (
     mode    => '0555',
     source  => 'puppet:///modules/openstack_project/logstash/jenkins-log-worker.init',
     require => [
-      File['/usr/local/bin/log-worker.py'],
+      File['/usr/local/bin/log-gearman-worker.py'],
       File['/etc/logstash/jenkins-log-worker.yaml'],
     ],
   }
