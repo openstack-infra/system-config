@@ -43,7 +43,7 @@
       - war:
           site: 'tarballs.openstack.org'
           warfile: 'target/{name}.hpi'
-          target: 'tarballs/ci/'
+          target: 'tarballs/{name}/'
       - console-log-post
 
 - job-group:

@@ -39,4 +39,14 @@ class openstack_project::pypi_slave (
     content => template('openstack_project/pypicurl.erb'),
     require => File['/home/jenkins'],
   }
+
+  file { '/home/jenkins/.jenkinsci-curl':
+    ensure  => present,
+    owner   => 'jenkins',
+    group   => 'jenkins',
+    mode    => '0600',
+    content => template('openstack_project/jenkinsci-curl.erb'),
+    require => File['/home/jenkins'],
+  }
+
 }
