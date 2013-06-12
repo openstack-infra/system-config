@@ -1,0 +1,26 @@
+- job-template:
+    name: '{name}-jenkinsci-upload'
+    node: pypi
+
+    triggers:
+      - zuul-post
+
+    builders:
+      - shell: |
+          #!/bin/bash -xe
+          TAG=`echo $ZUUL_REF | sed 's/^refs.tags.//'`
+          FILENAME="target/{name}-$TAG.hpi"
+
+          curl -o $FILENAME http://{tarball-site}/{name}/$FILENAME
+
+      - shell: |
+          /usr/local/jenkins/slave_scripts/jenkinsci-upload.sh {name} $TAG
+
+    publishers:
+      - console-log-post
+
+
+- job-group:
+    name: jenkins-plugin-jobs
+    jobs:
+      - '{name}-jenkinsci-upload'
