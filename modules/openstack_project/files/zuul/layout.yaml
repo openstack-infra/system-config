@@ -1467,7 +1467,7 @@ projects:
     post:
       - os-refresh-config-coverage
 
-  - name: stackforge/tripleo-heat-elements
+  - name: stackforge/tripleo-heat-templates
     check:
       - gate-noop
     gate:
