@@ -16,8 +16,8 @@ PATH=/sbin:/usr/sbin:/bin:/usr/bin
 DESC="Jenkins Log Worker"
 NAME=jenkins-log-worker
 DAEMON=/usr/local/bin/log-gearman-worker.py
-DAEMON_ARGS='-c /etc/logstash/jenkins-log-worker.yaml -d /var/log/logstash/log-worker-debug.log'
 PIDFILE=/var/run/$NAME/$NAME.pid
+DAEMON_ARGS="-c /etc/logstash/jenkins-log-worker.yaml -d /var/log/logstash/log-worker-debug.log -p $PIDFILE"
 SCRIPTNAME=/etc/init.d/$NAME
 USER=logstash
 
