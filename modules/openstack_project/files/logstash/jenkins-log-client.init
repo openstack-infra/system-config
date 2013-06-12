@@ -16,8 +16,8 @@ PATH=/sbin:/usr/sbin:/bin:/usr/bin
 DESC="Jenkins Log Client"
 NAME=jenkins-log-client
 DAEMON=/usr/local/bin/log-gearman-client.py
-DAEMON_ARGS='-c /etc/logstash/jenkins-log-client.yaml -d /var/log/logstash/log-client-debug.log'
 PIDFILE=/var/run/$NAME/$NAME.pid
+DAEMON_ARGS="-c /etc/logstash/jenkins-log-client.yaml -d /var/log/logstash/log-client-debug.log -p $PIDFILE"
 SCRIPTNAME=/etc/init.d/$NAME
 USER=logstash
 
