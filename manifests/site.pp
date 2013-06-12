@@ -343,6 +343,8 @@ node 'pypi.slave.openstack.org' {
     pypi_username          => 'openstackci',
     pypi_password          => hiera('pypi_password'),
     jenkins_ssh_public_key => $openstack_project::jenkins_ssh_key,
+    jenkinsci_username     => 'openstackjenkins',
+    jenkinsci_password     => hiera('transifex_password'),
   }
 }
 
