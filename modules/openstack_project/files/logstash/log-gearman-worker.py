@@ -15,6 +15,7 @@
 # under the License.
 
 import argparse
+import cStringIO
 import daemon
 import gear
 import gzip
@@ -83,8 +84,9 @@ class LogRetriever(threading.Thread):
                     out_event["event_message"] = line
                     self.logq.put(out_event)
             job.sendWorkComplete()
-        except:
-            job.sendWorkFail()
+        except Exception as e:
+            logging.exception("Exception handling log event.")
+            job.sendWorkException(str(e).encode('utf-8'))
 
     def _retrieve_log(self, source_url, retry):
         # TODO (clarkb): This should check the content type instead of file
@@ -100,7 +102,11 @@ class LogRetriever(threading.Thread):
             logging.exception("Unable to get log data.")
         if gzipped:
             logging.debug("Decompressing gzipped source file.")
-            buf = gzip.decompress(raw_buf).decode('utf-8')
+            raw_strIO = cStringIO.StringIO(raw_buf)
+            f = gzip.GzipFile(fileobj=raw_strIO)
+            buf = f.read().decode('utf-8')
+            raw_strIO.close()
+            f.close()
         else:
             logging.debug("Decoding source file.")
             buf = raw_buf.decode('utf-8')
