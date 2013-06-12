@@ -3,6 +3,11 @@
     project-type: maven
     node: precise
 
+    properties:
+      - inject:
+          script-file: /usr/local/jenkins/slave_scripts/maven-properties.sh
+          properties-file: maven.properties
+
     prebuilders:
       - gerrit-git-prep
 
@@ -12,7 +17,7 @@
         group-id: '{maven-group-id}'
         artifact-id: '{name}'
       root-pom: pom.xml
-      goals: 'clean package'
+      goals: 'clean package -Dproject-version=$PROJECT_VER'
 
     publishers:
       - console-log
@@ -22,6 +27,11 @@
     project-type: maven
     node: precise
 
+    properties:
+      - inject:
+          script-file: /usr/local/jenkins/slave_scripts/maven-properties.sh
+          properties-file: maven.properties
+
     prebuilders:
       - gerrit-git-prep
 
@@ -31,13 +41,35 @@
         group-id: '{maven-group-id}'
         artifact-id: '{name}'
       root-pom: pom.xml
-      goals: 'clean package -Dmaven.test.skip=true'
+      goals: 'clean package -Dmaven.test.skip=true -Dproject-version=$PROJECT_VER'
 
     publishers:
       - war:
           site: 'tarballs.openstack.org'
           warfile: 'target/{name}.hpi'
-          target: 'tarballs/ci/'
+          target: 'tarballs/ci/{name}/{name}-$PROJECT_VER.hpi'
+      - console-log-post
+
+- job-template:
+    name: '{name}-jenkinsci-upload'
+    node: pypi
+
+    builders:
+      - shell: |
+          #!/bin/bash -xe
+          TAG=`echo $ZUUL_REF | sed 's/^refs.tags.//'`
+          FILENAME="{name}-$TAG.hpi"
+
+          # copy plugin plugin artifacts from tarballs to local workspace
+          rm -rf *.hpi
+          curl -o $FILENAME http://{tarball-site}/ci/{name}/$FILENAME
+
+          # deploy plugin artifacts from workspace to repo.jenkins-ci.org
+          JENKINSCI_REPO="http://repo.jenkins-ci.org/list/releases/org/jenkins-ci/plugins"
+          JENKINSCI_REPO_CREDS="/home/jenkins/.jenkinsci-curl"
+          /usr/local/jenkins/slave_scripts/maven-upload.sh {name} $JENKINSCI_REPO $JENKINSCI_REPO_CREDS
+
+    publishers:
       - console-log-post
 
 - job-group:
@@ -45,3 +77,4 @@
     jobs:
       - 'gate-{name}-build'
       - '{name}-hpi-artifact'
+      - '{name}-jenkinsci-upload'
