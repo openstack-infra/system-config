@@ -9,3 +9,4 @@ manifests/secrets.pp
 .test/
 openstack_infra_config.egg-info/
 /.project
+/.pydevproject
