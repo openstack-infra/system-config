@@ -608,23 +608,27 @@
 
 
 - project:
-    name: reddwarf
-    github-org: stackforge
+    name: trove
+    github-org: openstack
     tarball-site: tarballs.openstack.org
+    doc-publisher-site: docs.openstack.org
     node: precise
 
     jobs:
       - python-jobs
+      - openstack-publish-jobs
 
 
 - project:
-    name: python-reddwarfclient
-    github-org: stackforge
+    name: python-troveclient
+    github-org: openstack
     tarball-site: tarballs.openstack.org
+    doc-publisher-site: docs.openstack.org
     node: precise
 
     jobs:
       - python-jobs
+      - openstack-publish-jobs
       - pypi-jobs
 
 

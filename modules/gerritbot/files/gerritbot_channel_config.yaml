@@ -53,9 +53,12 @@ openstack-dev:
       - openstack/python-openstackclient
       - openstack/python-quantumclient
       - openstack/python-swiftclient
+      - openstack/python-troveclient
       - openstack/quantum
       - openstack/swift
       - openstack/tempest
+      - openstack/trove
+      - openstack/trove-integration
       - openstack-dev/devstack
       - openstack-dev/grenade
       - openstack-infra/devstack-gate
@@ -82,8 +85,6 @@ stackforge-dev:
     projects:
       - stackforge/libra
       - stackforge/python-libraclient
-      - stackforge/python-reddwarfclient
-      - stackforge/reddwarf
     branches:
       - master
 
@@ -115,10 +116,10 @@ openstack-trove:
       - change-merged
       - x-vrif-minus-2
     projects:
-      - stackforge/reddwarf
-      - stackforge/reddwarf-integration
-      - stackforge/python-reddwarfclient
-      - stackforge/database-api
+      - openstack/trove
+      - openstack/trove-integration
+      - openstack/python-troveclient
+      - openstack/database-api
     branches:
       - master
 
