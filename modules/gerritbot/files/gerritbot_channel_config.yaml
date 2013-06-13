@@ -104,8 +104,8 @@ openstack-dns:
       - change-merged
       - x-vrif-minus-2
     projects:
-      - stackforge/moniker
-      - stackforge/python-monikerclient
+      - stackforge/designate
+      - stackforge/python-designateclient
     branches:
       - master
 

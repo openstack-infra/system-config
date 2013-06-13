@@ -667,7 +667,7 @@
 
 
 - project:
-    name: moniker
+    name: designate
     github-org: stackforge
     node: precise
     tarball-site: tarballs.openstack.org
@@ -714,7 +714,7 @@
 
 
 - project:
-    name: python-monikerclient
+    name: python-designateclient
     github-org: stackforge
     node: precise
     tarball-site: tarballs.openstack.org
