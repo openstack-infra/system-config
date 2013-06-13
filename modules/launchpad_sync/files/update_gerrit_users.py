@@ -283,9 +283,9 @@ class Sync(object):
                 'stackforge/marconi',
                 'stackforge/designate',
                 'stackforge/python-designateclient',
-                'stackforge/python-reddwarfclient',
-                'stackforge/reddwarf',
-                'stackforge/reddwarf-integration',
+                'openstack/python-troveclient',
+                'openstack/trove',
+                'openstack/trove-integration',
                 ]
         else:
             projects = subprocess.check_output(['/usr/bin/ssh', '-p', '29418',
