@@ -52,6 +52,14 @@ filter {
   }
   multiline {
     type => "jenkins"
+    tags => ["oslofmt"]
+    negate => false
+    pattern => "^%{DATESTAMP}%{SPACE}%{NUMBER}?%{SPACE}?TRACE"
+    what => "previous"
+    stream_identity => "%{@source_host}.%{filename}"
+  }
+  multiline {
+    type => "jenkins"
     tags => ["keystonefmt"]
     negate => true
     pattern => "^\(\b%{NOTSPACE}\b\):"
