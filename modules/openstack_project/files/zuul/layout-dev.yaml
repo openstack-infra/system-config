@@ -489,19 +489,19 @@ projects:
       - gate-marconi-python26
       - gate-marconi-python27
 
-  - name: stackforge/moniker
+  - name: stackforge/designate
     check:
-      - gate-moniker-pyflakes
-      - gate-moniker-pep8
-      - gate-moniker-python26
-      - gate-moniker-python27
+      - gate-designate-pyflakes
+      - gate-designate-pep8
+      - gate-designate-python26
+      - gate-designate-python27
 
-  - name: stackforge/python-monikerclient
+  - name: stackforge/python-designateclient
     check:
-      - gate-python-monikerclient-pyflakes
-      - gate-python-monikerclient-pep8
-      - gate-python-monikerclient-python26
-      - gate-python-monikerclient-python27
+      - gate-python-designateclient-pyflakes
+      - gate-python-designateclient-pep8
+      - gate-python-designateclient-python26
+      - gate-python-designateclient-python27
 
   - name: stackforge/bufunfa
     check:
