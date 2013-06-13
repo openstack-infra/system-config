@@ -68,7 +68,7 @@
 
     scm:
       - git:
-          url: 'git://github.com/{github-org}/openstack-manuals.git'
+          url: 'git://github.com/openstack/openstack-manuals.git'
           branches:
             - 'origin/master'
 
