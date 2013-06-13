@@ -89,6 +89,8 @@ jobs:
   - name: gate-cinder-pylint
     branch: ^(?!stable/(folsom|grizzly)).*$
     voting: false
+  - name: gate-horizon-python27-django14
+    branch: ^(?!stable/(folsom|grizzly)).*$
   - name: gate-nova-python26
     branch: ^(?!stable/folsom).*$
   - name: gate-oslo-incubator-pyflakes
@@ -417,6 +419,7 @@ projects:
       - gate-horizon-docs
       - gate-horizon-python26
       - gate-horizon-python27
+      - gate-horizon-python27-django14
       - gate-horizon-selenium
       - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
@@ -430,6 +433,7 @@ projects:
       - gate-horizon-pep8
       - gate-horizon-python26
       - gate-horizon-python27
+      - gate-horizon-python27-django14
       - gate-horizon-selenium
       - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
