@@ -199,9 +199,8 @@ for that channel::
         - change-merged
         - x-vrif-minus-2
       projects:
-        - stackforge/libra
-        - stackforge/python-reddwarfclient
-        - stackforge/reddwarf
+        - stackforge/foo
+        - stackforge/python-fooclient
         - stackforge/project-name
       branches:
         - master

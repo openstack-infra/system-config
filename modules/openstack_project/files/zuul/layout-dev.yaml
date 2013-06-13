@@ -467,21 +467,21 @@ projects:
     check:
       - gate-noop
 
-  - name: stackforge/reddwarf
+  - name: openstack/trove
     check:
-      - gate-reddwarf-pep8
-      - gate-reddwarf-python26
-      - gate-reddwarf-python27
+      - gate-trove-pep8
+      - gate-trove-python26
+      - gate-trove-python27
 
-  - name: stackforge/reddwarf-integration
+  - name: openstack/trove-integration
     check:
       - gate-noop
 
-  - name: stackforge/python-reddwarfclient
+  - name: openstack/python-troveclient
     check:
-      - gate-python-reddwarfclient-pep8
-      - gate-python-reddwarfclient-python26
-      - gate-python-reddwarfclient-python27
+      - gate-python-troveclient-pep8
+      - gate-python-troveclient-python26
+      - gate-python-troveclient-python27
 
   - name: stackforge/marconi
     check:
@@ -620,7 +620,7 @@ projects:
     check:
       - gate-zmq-event-publisher-build
 
-  - name: stackforge/database-api
+  - name: openstack/database-api
     check:
       - gate-noop
 
