@@ -95,7 +95,13 @@ class LogRetriever(threading.Thread):
         raw_buf = b''
         try:
             gzipped, raw_buf = self._get_log_data(source_url, retry)
-        except:
+        except urllib2.HTTPError, e:
+            if e.code == 404:
+                logging.info("Unable to retrieve %s: HTTP error 404" %
+                             source_url)
+            else:
+                logging.exception("Unable to get log data.")
+        except Exception:
             # Silently drop fatal errors when retrieving logs.
             # TODO (clarkb): Handle these errors.
             # Perhaps simply add a log message to raw_buf?
