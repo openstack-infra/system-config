@@ -36,7 +36,6 @@
           project: '{name}'
 
     publishers:
-      - pep8
       - console-log
 
     node: '{node}'
@@ -55,7 +54,6 @@
           project: '{name}'
 
     publishers:
-      - pylint
       - console-log
 
     node: '{node}'
