@@ -2089,3 +2089,9 @@ projects:
       - gate-noop
     gate:
       - gate-noop
+
+  - name: stackforge/cl-openstack-client
+    check:
+      - gate-noop
+    gate:
+      - gate-noop
