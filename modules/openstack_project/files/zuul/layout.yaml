@@ -313,6 +313,12 @@ projects:
       - reviewday-tarball:
         - reviewday-pypi-upload
 
+  - name: openstack-infra/reviewstats
+    check:
+      - gate-noop
+    gate:
+      - gate-noop
+
   - name: openstack-infra/releasestatus
     check:
       - gate-noop
