@@ -755,3 +755,7 @@ projects:
   - name: stackforge/cookbook-openstack-dashboard
     check:
       - gate-noop
+
+  - name: stackforge/cl-openstack-client
+    check:
+      - gate-noop
