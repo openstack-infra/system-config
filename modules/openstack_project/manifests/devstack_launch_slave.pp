@@ -28,12 +28,16 @@ class openstack_project::devstack_launch_slave (
 
   package { [ 'python-novaclient',
               'python-jenkins',
-              'rackspace-auth-openstack',
               'statsd',
               'paramiko']:
     ensure   => latest,
     provider => pip,
     require  => Class['pip'],
+  }
+
+  package { 'rackspace-auth-openstack':
+    ensure   => absent,
+    provider => pip,
   }
 
   package { [ 'python-sqlalchemy',
