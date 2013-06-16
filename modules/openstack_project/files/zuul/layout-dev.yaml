@@ -585,11 +585,11 @@ projects:
       - gate-diskimage-builder-python26
       - gate-diskimage-builder-python27
 
-  - name: stackforge/os-config-applier
+  - name: stackforge/os-apply-config
     check:
-      - gate-os-config-applier-pep8
-      - gate-os-config-applier-python26
-      - gate-os-config-applier-python27
+      - gate-os-apply-config-pep8
+      - gate-os-apply-config-python26
+      - gate-os-apply-config-python27
 
   - name: stackforge/os-refresh-config
     check:
