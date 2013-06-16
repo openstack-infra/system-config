@@ -5,7 +5,6 @@
 #
 # To use etherpad lite you will want the following includes:
 # include etherpad_lite
-# include etherpad_lite::mysql # necessary to use mysql as the backend
 # include etherpad_lite::site # configures etherpad lite instance
 # include etherpad_lite::apache # will add reverse proxy on localhost
 # The defaults for all the classes should just work (tm)

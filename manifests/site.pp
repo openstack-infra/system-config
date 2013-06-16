@@ -169,6 +169,7 @@ node 'etherpad.openstack.org' {
     ssl_cert_file_contents  => hiera('etherpad_ssl_cert_file_contents'),
     ssl_key_file_contents   => hiera('etherpad_ssl_key_file_contents'),
     ssl_chain_file_contents => hiera('etherpad_ssl_chain_file_contents'),
+    database_host           => hiera('etherpad_db_host'),
     database_password       => hiera('etherpad_db_password'),
     sysadmins               => hiera('sysadmins'),
   }
@@ -176,6 +177,7 @@ node 'etherpad.openstack.org' {
 
 node 'etherpad-dev.openstack.org' {
   class { 'openstack_project::etherpad_dev':
+    database_host           => hiera('etherpad-dev_db_host'),
     database_password       => hiera('etherpad-dev_db_password'),
     sysadmins               => hiera('sysadmins'),
   }

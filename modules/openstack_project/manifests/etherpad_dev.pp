@@ -1,4 +1,5 @@
 class openstack_project::etherpad_dev (
+  $database_host = 'localhost',
   $database_password = '',
   $sysadmins = []
 ) {
@@ -28,12 +29,10 @@ class openstack_project::etherpad_dev (
   }
 
   class { 'etherpad_lite::site':
+    database_host => $database_host,
     database_password => $database_password,
   }
 
-  class { 'etherpad_lite::mysql':
-    database_password => $database_password,
-  }
 }
 
 # vim:sw=2:ts=2:expandtab:textwidth=79
