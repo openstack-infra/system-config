@@ -6,9 +6,9 @@
 	canonicalWebUrl = <%= canonicalweburl %>
 [database]
 	type = MYSQL
-	hostname = localhost
-	database = reviewdb
-	username = gerrit2
+    hostname = <%= mysql_host %>
+    database = <%= mysql_db %>
+    username = <%= mysql_username %>
 <% if database_poollimit != "" -%>
 	poolLimit = <%= database_poollimit %>
 <% end -%>
