@@ -4,6 +4,10 @@
 define lodgeit::site(
   $port,
   $vhost_name="paste.${name}.org",
+  $database_host = 'localhost',
+  $database_user = 'openstack',
+  $database_password = '',
+  $database_name = 'openstack',
   $image='') {
 
   include apache
@@ -49,34 +53,13 @@ define lodgeit::site(
     content => template('lodgeit/layout.html.erb'),
   }
 
-  exec { "create_database_${name}":
-    command => "drizzle --user=root -e \"create database if not exists ${name};\"",
-    path    => '/bin:/usr/bin',
-    unless  => 'drizzle --disable-column-names -r --batch -e "show databases like \'openstack\'" | grep -q openstack',
-    require => Service['drizzle'],
-  }
-
-# create a backup .sql file in git
-
-  exec { "create_db_backup_${name}":
-    command => "touch ${name}.sql && git add ${name}.sql && git commit -am \"Initial commit for ${name}\"",
-    cwd     => '/var/backups/lodgeit_db/',
-    path    => '/bin:/usr/bin',
-    onlyif  => "test ! -f /var/backups/lodgeit_db/${name}.sql",
-  }
-
-# cron to take a backup and commit it in git
-
   cron { "update_backup_${name}":
-    user    => root,
-    hour    => 6,
-    minute  => 23,
-    command => "sleep $((RANDOM\\%60+60)) && cd /var/backups/lodgeit_db && drizzledump -uroot ${name} > ${name}.sql && git commit -qam \"Updating DB backup for ${name}\""
+    ensure => absent
   }
 
   service { "${name}-paste":
     ensure   => running,
     provider => upstart,
-    require  => [Service['drizzle', 'apache2'], Exec["create_database_${name}"]],
+    require  => Service['apache2'],
   }
 }
