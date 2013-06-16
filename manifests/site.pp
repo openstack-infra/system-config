@@ -132,7 +132,9 @@ node 'lists.openstack.org' {
 
 node 'paste.openstack.org' {
   class { 'openstack_project::paste':
-    sysadmins => hiera('sysadmins'),
+    sysadmins         => hiera('sysadmins'),
+    database_host     => hiera('paste_db_host'),
+    database_password => hiera('paste_db_password'),
   }
 }
 

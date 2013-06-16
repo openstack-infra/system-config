@@ -39,23 +39,14 @@ class lodgeit {
     ensure => directory,
   }
 
-  service { 'drizzle':
-    ensure     => running,
-    hasrestart => true,
-  }
-
   vcsrepo { '/tmp/lodgeit-main':
     ensure   => latest,
     provider => git,
     source   => 'https://github.com/openstack-infra/lodgeit.git',
   }
 
-# create initial git DB backup location
-
-  exec { 'create_db_backup':
-    command => 'git init /var/backups/lodgeit_db',
-    path    => '/bin:/usr/bin',
-    onlyif  => 'test ! -d /var/backups/lodgeit_db',
+  file { '/var/backups/lodgeit_db':
+    ensure => absent
   }
 
 }
