@@ -133,8 +133,8 @@ tripleo:
       - x-vrif-minus-2
     projects:
       - stackforge/diskimage-builder
-      - stackforge/os-config-applier
       - stackforge/os-collect-config
+      - stackforge/os-apply-config
       - stackforge/os-refresh-config
       - stackforge/tripleo-image-elements
       - stackforge/tripleo-heat-templates
