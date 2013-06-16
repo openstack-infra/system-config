@@ -1,7 +1,6 @@
 # == Class: openstack_project::wiki
 #
 class openstack_project::wiki (
-  $mysql_root_password = '',
   $sysadmins = [],
   $ssl_cert_file_contents = '',
   $ssl_key_file_contents = '',
@@ -38,14 +37,6 @@ class openstack_project::wiki (
     tcp_port   => 11000,
     udp_port   => 11000,
   }
-  class { 'mysql::server':
-    config_hash => {
-      'root_password'  => $mysql_root_password,
-      'default_engine' => 'InnoDB',
-      'bind_address'   => '127.0.0.1',
-    }
-  }
-  include mysql::server::account_security
 
   include bup
   bup::site { 'rs-ord':
