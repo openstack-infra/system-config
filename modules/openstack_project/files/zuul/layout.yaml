@@ -1515,17 +1515,17 @@ projects:
     post:
       - diskimage-builder-coverage
 
-  - name: stackforge/os-config-applier
+  - name: stackforge/os-apply-config
     check:
-      - gate-os-config-applier-pep8
-      - gate-os-config-applier-python26
-      - gate-os-config-applier-python27
+      - gate-os-apply-config-pep8
+      - gate-os-apply-config-python26
+      - gate-os-apply-config-python27
     gate:
-      - gate-os-config-applier-pep8
-      - gate-os-config-applier-python26
-      - gate-os-config-applier-python27
+      - gate-os-apply-config-pep8
+      - gate-os-apply-config-python26
+      - gate-os-apply-config-python27
     post:
-      - os-config-applier-coverage
+      - os-apply-config-coverage
 
   - name: stackforge/os-collect-config
     check:
