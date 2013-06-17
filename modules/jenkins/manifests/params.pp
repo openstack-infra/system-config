@@ -71,6 +71,7 @@ class jenkins::params {
       $libxml2_dev_package = 'libxml2-dev'
       $libxslt_dev_package = 'libxslt1-dev'
       $maven_package = 'maven2'
+      $mongodb_package = 'mongodb'
       $pandoc_package = 'pandoc'
       $pkgconfig_package = 'pkg-config'
       $pyflakes_package = 'pyflakes'
