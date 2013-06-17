@@ -1159,10 +1159,12 @@ projects:
 
   - name: openstack/trove
     check:
+      - gate-trove-requirements
       - gate-trove-pep8
       - gate-trove-python26
       - gate-trove-python27
     gate:
+      - gate-trove-requirements
       - gate-trove-pep8
       - gate-trove-python26
       - gate-trove-python27
@@ -1177,10 +1179,12 @@ projects:
 
   - name: openstack/python-troveclient
     check:
+      - gate-python-troveclient-requirements
       - gate-python-troveclient-pep8
       - gate-python-troveclient-python26
       - gate-python-troveclient-python27
     gate:
+      - gate-python-troveclient-requirements
       - gate-python-troveclient-pep8
       - gate-python-troveclient-python26
       - gate-python-troveclient-python27
