@@ -38,6 +38,7 @@ class jenkins::slave(
     $::jenkins::params::libcurl_dev_package,
     $::jenkins::params::ldap_dev_package,
     $::jenkins::params::libsasl_dev, # for keystone ldap auth integration
+    $::jenkins::params::mongodb_package, # for ceilometer unit tests
     $::jenkins::params::mysql_dev_package,
     $::jenkins::params::nspr_dev_package, # for spidermonkey, used by ceilometer
     $::jenkins::params::sqlite_dev_package,
