@@ -32,6 +32,8 @@ class jenkins::params {
       $libxslt_dev_package = 'libxslt-devel'
       # FIXME: No Maven packages on RHEL
       #$maven_package = 'maven'
+      # For Ceilometer unit tests
+      $mongodb_package = 'mongodb-server'
       $pandoc_package = 'pandoc'
       $pkgconfig_package = 'pkgconfig'
       $pyflakes_package = 'pyflakes'
@@ -75,6 +77,8 @@ class jenkins::params {
       $libxml2_dev_package = 'libxml2-dev'
       $libxslt_dev_package = 'libxslt1-dev'
       $maven_package = 'maven2'
+      # For Ceilometer unit tests
+      $mongodb_package = 'mongodb'
       $pandoc_package = 'pandoc'
       $pkgconfig_package = 'pkg-config'
       $pyflakes_package = 'pyflakes'
