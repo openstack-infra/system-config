@@ -86,6 +86,10 @@ class jenkins::slave(
         ensure => present,
       }
 
+      package { $::jenkins::params::mongodb_package:
+        ensure => present,
+      }
+
       package { $::jenkins::params::python3_dev_package:
         ensure => present,
       }
