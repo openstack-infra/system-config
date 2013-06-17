@@ -19,6 +19,7 @@ class logstash::web (
   $serveradmin = "webmaster@${::fqdn}",
   $frontend = 'internal',
   $elasticsearch_host = 'localhost',
+  $proxy_elasticsearch = false
 ) {
   include apache
   a2mod { 'rewrite':
