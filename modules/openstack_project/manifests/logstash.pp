@@ -30,8 +30,9 @@ class openstack_project::logstash (
   }
 
   class { 'logstash::web':
-    frontend           => 'kibana',
-    elasticsearch_host => 'elasticsearch.openstack.org',
+    frontend            => 'kibana',
+    elasticsearch_host  => 'elasticsearch.openstack.org',
+    proxy_elasticsearch => true,
   }
 
   package { 'python-daemon':

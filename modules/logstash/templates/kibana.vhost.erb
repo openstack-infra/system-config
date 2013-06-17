@@ -8,6 +8,14 @@
 
              CustomLog ${APACHE_LOG_DIR}/<%= scope.lookupvar("::logstash::web::vhost_name") %>-access.log combined
 
+             <% if proxy_elasticsearch == true %>
+             # Proxy for elasticsearch _aliases, .*/_status, and .*/_search.
+             <LocationMatch "^/elasticsearch/(_aliases|.*/_status|.*/_search)$">
+               ProxyPassMatch http://<%= scope.lookupvar("::logstash::web::elasticsearch_host") %>:9200/$1
+             </LocationMatch>
+             ProxyPassReverse /elasticsearch/ http://<%= scope.lookupvar("::logstash::web::elasticsearch_host") %>:9200/
+             <% end %>
+
              ProxyPass / http://127.0.0.1:5601/ retry=0
              ProxyPassReverse / http://127.0.0.1:5601/
 </VirtualHost>
