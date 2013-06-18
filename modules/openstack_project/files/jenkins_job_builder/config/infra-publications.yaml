@@ -11,7 +11,7 @@
       - ftp:
           site: docs.openstack.org
           source: '**'
-          target: 'www/infra/publications/'
+          target: 'www/infra/publications/${ZUUL_BRANCH}/'
           remove-prefix: ''
           excludes: ''
       - console-log-post
