@@ -82,6 +82,10 @@ class jenkins::slave(
         ensure => present,
       }
 
+      package { $::jenkins::params::sbcl:
+        ensure => present,
+      }
+
       package { $::jenkins::params::maven_package:
         ensure => present,
       }
