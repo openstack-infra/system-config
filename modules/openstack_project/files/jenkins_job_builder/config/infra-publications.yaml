@@ -15,3 +15,21 @@
           remove-prefix: ''
           excludes: ''
       - console-log-post
+
+- job:
+    name: infra-publications-publish-index
+    concurrent: false
+    node: precise
+
+    builders:
+      - gerrit-git-prep
+      - shell: "./make-index"
+
+    publishers:
+      - ftp:
+          site: docs.openstack.org
+          source: 'output/**'
+          target: 'www/infra/publications/'
+          remove-prefix: 'output/'
+          excludes: ''
+      - console-log-post
