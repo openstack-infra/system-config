@@ -111,6 +111,11 @@
           ruby1.9.1 /usr/bin/bundle exec rspec .cookbooks/$COOKBOOK
 
 - builder:
+    name: run-tests
+    builders:
+      - shell: "./run-tests.sh {github-org} {project}"
+
+- builder:
     name: selenium
     builders:
       - shell: "/usr/local/jenkins/slave_scripts/run-selenium.sh {github-org} {project}"
