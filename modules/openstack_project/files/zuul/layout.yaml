@@ -577,6 +577,29 @@ projects:
         - oslo.config-pypi-upload
       - oslo.config-docs
 
+  - name: openstack/oslo.messaging
+    check:
+      - gate-oslo.messaging-requirements
+      - gate-oslo.messaging-pep8
+      - gate-oslo.messaging-docs
+      - gate-oslo.messaging-python26
+      - gate-oslo.messaging-python27
+    gate:
+      - gate-oslo.messaging-requirements
+      - gate-oslo.messaging-docs
+      - gate-oslo.messaging-pep8
+      - gate-oslo.messaging-python26
+      - gate-oslo.messaging-python27
+    post:
+      - oslo.messaging-branch-tarball
+      - oslo.messaging-docs
+    pre-release:
+      - oslo.messaging-tarball
+    release:
+      - oslo.messaging-tarball:
+        - oslo.messaging-pypi-upload
+      - oslo.messaging-docs
+
   - name: openstack/quantum
     check:
       - gate-quantum-requirements
