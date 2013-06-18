@@ -97,6 +97,15 @@ class openstack_project::static (
     require => File['/srv/static/logs'],
   }
 
+  file { '/srv/static/logs/help':
+    ensure  => directory,
+    recurse => true,
+    owner   => 'jenkins',
+    group   => 'jenkins',
+    source  => "puppet:///modules/openstack_project/logs/help",
+    require => [User['jenkins'], File['/srv/static/logs']],
+  }
+
   file { '/usr/local/sbin/log_archive_maintenance.sh':
     ensure => present,
     owner  => 'root',
