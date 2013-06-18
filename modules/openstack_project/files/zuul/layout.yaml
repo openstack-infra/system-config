@@ -276,6 +276,7 @@ projects:
       - gate-noop
     post:
       - infra-publications-publish
+      - infra-publications-publish-index
 
   - name: openstack-infra/puppet-apparmor
     check:
