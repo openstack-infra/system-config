@@ -39,6 +39,7 @@ class jenkins::params {
       # FIXME: No Python3 packages on RHEL
       #$python3_dev_package = 'python3-devel'
       $rubygems_package = 'rubygems'
+      $sbcl_package = 'sbcl'
       $sqlite_package = 'sqlite'
       $unzip_package = 'unzip'
       $xslt_package = 'libxslt'
@@ -82,6 +83,7 @@ class jenkins::params {
       $ruby1_9_1_package = 'ruby1.9.1'
       $ruby1_9_1_dev_package = 'ruby1.9.1-dev'
       $ruby_bundler_package = 'ruby-bundler'
+      $sbcl_package = 'sbcl'
       $sqlite_package = 'sqlite3'
       $unzip_package = 'unzip'
       $xslt_package = 'xsltproc'
