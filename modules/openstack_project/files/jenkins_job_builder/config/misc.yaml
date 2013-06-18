@@ -1,3 +1,16 @@
 - job:
     name: gate-noop
     node: precise
+
+- job-template:
+    name: 'gate-{name}-run-tests'
+
+    builders:
+      - run-tests:
+          github-org: '{github-org}'
+          project: '{name}'
+
+    publishers:
+      - console-log
+
+    node: '{node}'
