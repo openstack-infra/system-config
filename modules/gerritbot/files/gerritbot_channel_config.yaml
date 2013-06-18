@@ -46,6 +46,7 @@ openstack-dev:
       - openstack/nova
       - openstack/oslo-incubator
       - openstack/oslo.config
+      - openstack/oslo.messaging
       - openstack/python-cinderclient
       - openstack/python-glanceclient
       - openstack/python-keystoneclient
@@ -185,6 +186,7 @@ openstack-nova:
       - openstack/python-novaclient
       - openstack/oslo-incubator
       - openstack/oslo.config
+      - openstack/oslo.messaging
     branches:
       - master
 
