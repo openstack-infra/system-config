@@ -6,11 +6,11 @@
 # versioned builds within the gerrit workflow.
 
 # get version info from scm
-SCM_TAG=$(git describe --abbrev=0 --tags) || true
-SCM_SHA=$(git rev-parse --short HEAD)
+SCM_TAG=`git describe --abbrev=0 --tags` || true
+SCM_SHA=`git rev-parse --short HEAD` || true
 
 # assumes format is like this  '0.0.4-2-g135721c'
-COMMITS_SINCE_TAG=`git describe | awk '{split($0,a,"-"); print a[2]}'`
+COMMITS_SINCE_TAG=`git describe | awk '{split($0,a,"-"); print a[2]}'` || true
 
 # just use git sha if there is no tag yet.
 if [[ "${SCM_TAG}" == "" ]]; then

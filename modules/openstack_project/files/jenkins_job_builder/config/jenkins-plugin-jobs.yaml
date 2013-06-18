@@ -3,13 +3,11 @@
     project-type: maven
     node: precise
 
-    properties:
-      - inject:
-          script-file: /usr/local/jenkins/slave_scripts/maven-properties.sh
-          properties-file: maven.properties
-
     prebuilders:
       - gerrit-git-prep
+      - shell: "/usr/local/jenkins/slave_scripts/maven-properties.sh"
+      - inject:
+          properties-file: maven.properties
 
     maven:
       maven-name: Maven3
@@ -27,13 +25,11 @@
     project-type: maven
     node: precise
 
-    properties:
-      - inject:
-          script-file: /usr/local/jenkins/slave_scripts/maven-properties.sh
-          properties-file: maven.properties
-
     prebuilders:
       - gerrit-git-prep
+      - shell: "/usr/local/jenkins/slave_scripts/maven-properties.sh"
+      - inject:
+          properties-file: maven.properties
 
     maven:
       maven-name: Maven3
