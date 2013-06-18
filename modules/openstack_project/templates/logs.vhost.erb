@@ -27,6 +27,10 @@ NameVirtualHost <%= vhost_name %>:<%= port %>
     Order allow,deny
     allow from all
   </Directory>
+  <Directory <%= docroot %>/*/*/*/gate-tempest-devstack*/*>
+     ReadmeName /help/tempest-overview.html
+  </Directory>
+
   ErrorLog /var/log/apache2/<%= name %>_error.log
   LogLevel warn
   CustomLog /var/log/apache2/<%= name %>_access.log combined
