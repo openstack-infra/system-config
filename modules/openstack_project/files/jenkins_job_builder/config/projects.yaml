@@ -789,7 +789,6 @@
 
     jobs:
       - python-jobs
-      - gate-{name}-pyflakes
       - pypi-jobs
 
 
