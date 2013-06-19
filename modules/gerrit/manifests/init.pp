@@ -86,7 +86,15 @@ class gerrit(
   $ssh_rsa_pubkey_contents = '', # If left empty puppet will not create file.
   $ssh_project_rsa_key_contents = '', # If left empty will not create file.
   $ssh_project_rsa_pubkey_contents = '', # If left empty will not create file.
+  $gerrit_auth_type = 'OPENID_SSO',
+  $gerrit_contributor_agreement = true,
   $openidssourl = 'https://login.launchpad.net/+openid',
+  $ldap_server = '',
+  $ldap_account_base = '',
+  $ldap_username = '',
+  $ldap_password = '',
+  $ldap_account_pattern = '',
+  $ldap_account_email_address = '',
   $email = '',
   $database_poollimit = '',
   $container_heaplimit = '',
