@@ -15,7 +15,7 @@
         group-id: '{maven-group-id}'
         artifact-id: '{name}'
       root-pom: pom.xml
-      goals: 'clean package -Dproject-version=$PROJECT_VER'
+      goals: 'clean package -Dproject-version=${{PROJECT_VER}}'
 
     publishers:
       - console-log
@@ -37,13 +37,13 @@
         group-id: '{maven-group-id}'
         artifact-id: '{name}'
       root-pom: pom.xml
-      goals: 'clean package -Dmaven.test.skip=true -Dproject-version=$PROJECT_VER'
+      goals: 'clean package -Dmaven.test.skip=true -Dproject-version=${{PROJECT_VER}}'
 
     publishers:
       - war:
           site: 'tarballs.openstack.org'
           warfile: 'target/{name}.hpi'
-          target: 'tarballs/ci/{name}/{name}-$PROJECT_VER.hpi'
+          target: 'tarballs/ci/{name}/{name}-${{PROJECT_VER}}.hpi'
       - console-log-post
 
 - job-template:
