@@ -30,6 +30,9 @@ NameVirtualHost <%= vhost_name %>:<%= port %>
   <Directory <%= docroot %>/*/*/*/gate-tempest-devstack*/*>
      ReadmeName /help/tempest-overview.html
   </Directory>
+  <Directory <%= docroot %>/*/*/*/gate-tempest-devstack*/*/logs/>
+     ReadmeName /help/tempest-logs.html
+  </Directory>
 
   ErrorLog /var/log/apache2/<%= name %>_error.log
   LogLevel warn
