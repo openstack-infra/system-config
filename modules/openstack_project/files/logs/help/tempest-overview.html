@@ -1,9 +1,19 @@
-<h1>Guide to Tempest Results Runs<h1>
+<h1>Guide to Tempest Results Runs</h1>
 <p>
-The directory here contains the full results of a devstack setup and
-tempest run for the OpenStack gate, as well as all the logs of all the
-relevant services that were running during that tempest test run. From
-them you should have enough information to debug.
+  You are looking at the full test results of a devstack setup and
+  tempest run for the OpenStack gate, as well as all the logs of all the
+  relevant services that were running during that tempest test run. From
+  them you should have enough information to debug.
+</p>
+<h2>How To Debug - Quickstart</h2>
+<p>
+  <ol>
+    <li>scroll to the end of console.html
+    <li>work your way backwards until the first failing test
+    <li>copy the timestamp of that failing test
+    <li>go into logs directory and look at that time stamp in related
+    service logs for traces, failures, or other oddities
+  </ol>
 </p>
 <h2>File Overview</h2>
 <h3>console.html</h3>
@@ -33,7 +43,6 @@ job. The basic flow of the file goes as follows:
   The <a href="logs">logs</a> directory contains all the screen logs
   from all the services during the devstack-gate run.
 </p>
-
 <h2>About this Help</h2>
 <p>
   This help file is part of the <a href="https://github.com/openstack-infra/config">openstack-infra/config</a> project, and
