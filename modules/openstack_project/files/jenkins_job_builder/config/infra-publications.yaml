@@ -11,7 +11,7 @@
       - ftp:
           site: docs.openstack.org
           source: '**'
-          target: 'www/infra/publications/${ZUUL_BRANCH}/'
+          target: 'infra/publications/${ZUUL_BRANCH}/'
           remove-prefix: ''
           excludes: ''
       - console-log-post
@@ -33,7 +33,7 @@
       - ftp:
           site: docs.openstack.org
           source: 'output/**'
-          target: 'www/infra/publications/'
+          target: 'infra/publications/'
           remove-prefix: 'output/'
           excludes: ''
       - console-log-post
