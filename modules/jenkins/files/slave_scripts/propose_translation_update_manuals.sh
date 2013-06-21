@@ -12,6 +12,9 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 
+# The script is to pull the translations from Transifex,
+# and push to Gerrit.
+
 PROJECT="openstack-manuals"
 DocNameList="basic-install cli-guide common openstack-block-storage-admin \
 openstack-compute-admin openstack-ha openstack-install \
@@ -51,10 +54,6 @@ fi
 # generate pot one by one
 for DOCNAME in ${DocNameList}
 do
-    tx set --auto-local -r openstack-manuals-i18n.${DOCNAME} \
-"doc/src/docbkx/${DOCNAME}/locale/<lang>.po" --source-lang en \
---source-file doc/src/docbkx/${DOCNAME}/locale/${DOCNAME}.pot \
--t PO --execute
     # openstack-ha needs to create new DocBook files
     if [ "$DOCNAME" == "openstack-ha" ]
     then
@@ -68,6 +67,11 @@ do
     ./tools/generatepot ${DOCNAME}
     # Add all changed files to git
     git add doc/src/docbkx/${DOCNAME}/locale/*
+    # Set auto-local
+    tx set --auto-local -r openstack-manuals-i18n.${DOCNAME} \
+"doc/src/docbkx/${DOCNAME}/locale/<lang>.po" --source-lang en \
+--source-file doc/src/docbkx/${DOCNAME}/locale/${DOCNAME}.pot \
+-t PO --execute
 done
 
 if [ ! `git diff --cached --quiet HEAD --` ]
