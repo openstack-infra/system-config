@@ -2146,3 +2146,19 @@ projects:
       - gate-cl-openstack-client-run-tests
     gate:
       - gate-cl-openstack-client-run-tests
+
+  - name: stackforge/stackalytics
+    check:
+      - gate-stackalytics-pep8
+      - gate-stackalytics-python26
+      - gate-stackalytics-python27
+    gate:
+      - gate-stackalytics-pep8
+      - gate-stackalytics-python26
+      - gate-stackalytics-python27
+    post:
+      - stackalytics-branch-tarball
+    pre-release:
+      - stackalytics-tarball
+    release:
+      - stackalytics-tarball
