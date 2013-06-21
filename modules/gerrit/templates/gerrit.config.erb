@@ -37,7 +37,7 @@
 	packedGitWindowSize = <%= core_packedgitwindowsize %>
 <% end -%>
 [sshd]
-	listenAddress = *:29418
+	listenAddress = <%= sshd_listen_address %>
 <% if sshd_threads != "" -%>
 	threads = <%= sshd_threads %>
 <% end -%>
