@@ -127,7 +127,7 @@ filter {
 
 output {
   elasticsearch {
-    host => "elasticsearch.openstack.org"
+    host => "<%= scope.lookupvar("::openstack_project::logstash_worker::discover_node") %>"
     node_name => "<%= scope.lookupvar("::hostname") %>"
     max_inflight_requests => 512
   }

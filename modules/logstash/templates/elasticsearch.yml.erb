@@ -37,7 +37,7 @@
 # Node names are generated dynamically on startup, so you're relieved
 # from configuring them manually. You can tie this node to a specific name:
 #
-# node.name: "Franz Kafka"
+node.name: "<%= scope.lookupvar("::hostname") %>"
 
 # Every node can be configured to allow or deny being eligible as the master,
 # and to allow or deny to store the data.
@@ -139,7 +139,7 @@
 index.store.compress.stored: true
 index.store.compress.tv: true
 
-indices.memory.index_buffer_size: "40%"
+indices.memory.index_buffer_size: "33%"
 
 #################################### Paths ####################################
 
@@ -184,7 +184,7 @@ indices.memory.index_buffer_size: "40%"
 #
 # Set this property to true to lock the memory:
 #
-# bootstrap.mlockall: true
+bootstrap.mlockall: true
 
 # Make sure that the ES_MIN_MEM and ES_MAX_MEM environment variables are set
 # to the same value, and that the machine has enough memory to allocate
@@ -327,7 +327,7 @@ discovery.zen.ping.multicast.enabled: false
 #    to perform discovery when new nodes (master or data) are started:
 #
 # discovery.zen.ping.unicast.hosts: ["host1", "host2:port", "host3[portX-portY]"]
-discovery.zen.ping.unicast.hosts: ["localhost"]
+discovery.zen.ping.unicast.hosts: ["<%= discover_node %>"]
 
 # EC2 discovery allows to use AWS EC2 API in order to perform discovery.
 #

@@ -15,10 +15,11 @@
 # Logstash indexer worker glue class.
 #
 class openstack_project::logstash_worker (
-  $elasticsearch_masters = [],
+  $elasticsearch_nodes = [],
+  $discover_node = 'elasticsearch.openstack.org',
   $sysadmins = []
 ) {
-  $iptables_rule = regsubst ($elasticsearch_masters, '^(.*)$', '-m state --state NEW -m tcp -p tcp --dport 9200:9400 -s \1 -j ACCEPT')
+  $iptables_rule = regsubst ($elasticsearch_nodes, '^(.*)$', '-m state --state NEW -m tcp -p tcp --dport 9200:9400 -s \1 -j ACCEPT')
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [22],
     iptables_rules6           => $iptables_rule,
