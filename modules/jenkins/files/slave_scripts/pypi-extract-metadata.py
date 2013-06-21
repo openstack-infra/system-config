@@ -48,6 +48,8 @@ for key, value in meta_items.items():
     if not isinstance(value, list):
         value = [value]
     for v in value:
+        v = v.replace('\n', r'\n')
+        v = v.replace('"', r'\"')
         curl_config.write('form = "%s=%s"\n' % (key, v))
 
 curl_config.write('\n')
