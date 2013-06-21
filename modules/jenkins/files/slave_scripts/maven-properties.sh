@@ -5,6 +5,9 @@
 # pass to maven build commands so that we can generate
 # versioned builds within the gerrit workflow.
 
+# work around for jenkins bug: https://issues.jenkins-ci.org/browse/JENKINS-14193
+/usr/local/jenkins/slave_scripts/gerrit-git-prep.sh https://review.openstack.org http://zuul.openstack.org
+
 # get version info from scm
 SCM_TAG=`git describe --abbrev=0 --tags` || true
 SCM_SHA=`git rev-parse --short HEAD` || true
@@ -26,5 +29,5 @@ else
 fi
 
 echo "SCM_SHA=$SCM_SHA" >maven.properties
-echo "COMMITS_SINCE_TAG=$COMMITS_SINCE_TAG" >>maven.properties
 echo "PROJECT_VER=$PROJECT_VER" >>maven.properties
+echo "COMMITS_SINCE_TAG=$COMMITS_SINCE_TAG" >>maven.properties
