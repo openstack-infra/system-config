@@ -1134,3 +1134,12 @@
 
     jobs:
       - gate-{name}-run-tests
+
+- project:
+    name: stackalytics
+    github-org: stackforge
+    node: precise
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - python-jobs
