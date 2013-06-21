@@ -6,7 +6,7 @@ then
 	exit 1
 fi
 
-case "$GERRIT_REFNAME" in
+case "$ZUUL_REFNAME" in
     master)
         export PPAS="ppa:openstack-ppa/bleeding-edge"
         ;;
@@ -14,7 +14,7 @@ case "$GERRIT_REFNAME" in
         export PPAS="ppa:openstack-ppa/milestone-proposed"
         ;;
     *)
-        echo "No PPA defined for branch $GERRIT_REFNAME"
+        echo "No PPA defined for branch $ZUUL_REFNAME"
         exit 0
 esac
 

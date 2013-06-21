@@ -7,7 +7,7 @@
 
 # In case we start doing something more sophisticated with other refs
 # later (such as tags).
-BRANCH=$GERRIT_REFNAME
+BRANCH=$ZUUL_REFNAME
 
 # The master branch should get published to /trunk
 if [ $BRANCH == "master" ]
