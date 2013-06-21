@@ -21,6 +21,7 @@
           #!/bin/bash -xe
           export PYTHONUNBUFFERED=true
           export DEVSTACK_GATE_TEMPEST=0
+          export DEVSTACK_GATE_EXERCISES=0
           function post_test_hook {
               bash -xe $BASE/new/pbr/tools/integration.sh $PROJECTS $BASE
           }
