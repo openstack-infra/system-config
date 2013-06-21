@@ -201,32 +201,48 @@ node 'puppet-dashboard.openstack.org' {
 
 node 'logstash.openstack.org' {
   class { 'openstack_project::logstash':
-    sysadmins             => hiera('sysadmins'),
-    elasticsearch_masters => ['elasticsearch.openstack.org'],
-    gearman_workers       => [
+    sysadmins           => hiera('sysadmins'),
+    elasticsearch_nodes => [
+      'elasticsearch.openstack.org',
+      'elasticsearch2.openstack.org',
+      'elasticsearch3.openstack.org',
+    ],
+    gearman_workers     => [
       'logstash-worker1.openstack.org',
       'logstash-worker2.openstack.org',
       'logstash-worker3.openstack.org',
     ],
+    discover_node       => 'elasticsearch.openstack.org',
   }
 }
 
 node /^logstash-worker\d+\.openstack\.org$/ {
   class { 'openstack_project::logstash_worker':
-    sysadmins             => hiera('sysadmins'),
-    elasticsearch_masters => ['elasticsearch.openstack.org'],
+    sysadmins           => hiera('sysadmins'),
+    elasticsearch_nodes => [
+      'elasticsearch.openstack.org',
+      'elasticsearch2.openstack.org',
+      'elasticsearch3.openstack.org',
+    ],
+    discover_node       => 'elasticsearch.openstack.org',
   }
 }
 
-node 'elasticsearch.openstack.org' {
+node /^elasticsearch\d*\.openstack\.org$/ {
   class { 'openstack_project::elasticsearch':
-    sysadmins        => hiera('sysadmins'),
-    logstash_workers => [
+    sysadmins             => hiera('sysadmins'),
+    elasticsearch_nodes   => [
+      'elasticsearch.openstack.org',
+      'elasticsearch2.openstack.org',
+      'elasticsearch3.openstack.org',
+    ],
+    elasticsearch_clients => [
       'logstash.openstack.org',
       'logstash-worker1.openstack.org',
       'logstash-worker2.openstack.org',
       'logstash-worker3.openstack.org',
     ],
+    discover_node         => 'elasticsearch.openstack.org',
   }
 }
 

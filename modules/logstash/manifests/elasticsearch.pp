@@ -14,7 +14,9 @@
 #
 # Class to install elasticsearch.
 #
-class logstash::elasticsearch {
+class logstash::elasticsearch (
+  discover_node = 'localhost'
+) {
   # install java runtime
   package { 'java7-runtime-headless':
     ensure => present,
@@ -40,7 +42,7 @@ class logstash::elasticsearch {
 
   file { '/etc/elasticsearch/elasticsearch.yml':
     ensure  => present,
-    source  => 'puppet:///modules/logstash/elasticsearch.yml',
+    content => template('logstash/elasticsearch.yml.erb'),
     replace => true,
     owner   => 'root',
     group   => 'root',
