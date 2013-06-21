@@ -1,13 +1,15 @@
+# need to run gerrit-git-prep in maven-properties.sh script to work
+# around jenkins bug: https://issues.jenkins-ci.org/browse/JENKINS-14193
+
 - job-template:
     name: 'gate-{name}-build'
     project-type: maven
     node: precise
 
-    prebuilders:
-      - gerrit-git-prep
-      - shell: "/usr/local/jenkins/slave_scripts/maven-properties.sh"
+    wrappers:
       - inject:
           properties-file: maven.properties
+          script-file: /usr/local/jenkins/slave_scripts/maven-properties.sh
 
     maven:
       maven-name: Maven3
@@ -25,11 +27,10 @@
     project-type: maven
     node: precise
 
-    prebuilders:
-      - gerrit-git-prep
-      - shell: "/usr/local/jenkins/slave_scripts/maven-properties.sh"
+    wrappers:
       - inject:
           properties-file: maven.properties
+          script-file: /usr/local/jenkins/slave_scripts/maven-properties.sh
 
     maven:
       maven-name: Maven3
