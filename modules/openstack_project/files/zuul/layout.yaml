@@ -2024,9 +2024,11 @@ projects:
 
   - name: stackforge/cookbook-openstack-network
     check:
-      - gate-noop
+      - gate-cookbook-openstack-network-chef-lint
+      - gate-cookbook-openstack-network-chef-unit
     gate:
-      - gate-noop
+      - gate-cookbook-openstack-network-chef-lint
+      - gate-cookbook-openstack-network-chef-unit
 
   - name: stackforge/cookbook-openstack-object-storage
     check:
