@@ -15,10 +15,14 @@
 # Elasticsearch server glue class.
 #
 class openstack_project::elasticsearch (
-  $logstash_workers = [],
+  $elasticsearch_nodes = [],
+  $elasticsearch_clients = [],
+  $discover_node = 'localhost',
   $sysadmins = []
 ) {
-  $iptables_rule = regsubst ($logstash_workers, '^(.*)$', '-m state --state NEW -m tcp -p tcp --dport 9200:9400 -s \1 -j ACCEPT')
+  $iptables_nodes_rule = regsubst ($elasticsearch_nodes, '^(.*)$', '-m state --state NEW -m tcp -p tcp --dport 9200:9400 -s \1 -j ACCEPT')
+  $iptables_clients_rule = regsubst ($elasticsearch_clients, '^(.*)$', '-m state --state NEW -m tcp -p tcp --dport 9200:9400 -s \1 -j ACCEPT')
+  $iptables_rule = flatten([$iptables_nodes_rule, $iptables_clients_rule])
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [22],
     iptables_rules6           => $iptables_rule,
@@ -26,7 +30,9 @@ class openstack_project::elasticsearch (
     sysadmins                 => $sysadmins,
   }
 
-  include logstash::elasticsearch
+  class { 'logstash::elasticsearch':
+    discover_node => $discover_node,
+  }
 
   cron { 'delete_old_es_indices':
     user        => 'root',

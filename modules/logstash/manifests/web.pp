@@ -18,7 +18,7 @@ class logstash::web (
   $vhost_name = $::fqdn,
   $serveradmin = "webmaster@${::fqdn}",
   $frontend = 'internal',
-  $elasticsearch_host = 'localhost',
+  $discover_node = 'localhost',
   $proxy_elasticsearch = false
 ) {
   include apache
@@ -57,7 +57,7 @@ class logstash::web (
 
     'kibana': {
       class { 'kibana':
-        elasticsearch_host => $elasticsearch_host,
+        discover_node => $discover_node,
       }
       $vhost = 'logstash/kibana.vhost.erb'
     }
