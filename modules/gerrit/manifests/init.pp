@@ -24,6 +24,7 @@
 #   core_packedgitlimit:
 #   core_packedgitwindowsize:
 #   sshd_threads:
+#   sshd_listen_address:
 #   httpd_acceptorthreads:
 #   httpd_minthreads:
 #   httpd_maxthreads:
@@ -95,6 +96,7 @@ class gerrit(
   $core_packedgitlimit = '',
   $core_packedgitwindowsize = '',
   $sshd_threads = '',
+  $sshd_listen_address = '*:29418',
   $httpd_acceptorthreads = '',
   $httpd_minthreads = '',
   $httpd_maxthreads = '',
