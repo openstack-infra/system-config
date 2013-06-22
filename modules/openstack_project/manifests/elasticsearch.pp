@@ -17,7 +17,7 @@
 class openstack_project::elasticsearch (
   $elasticsearch_nodes = [],
   $elasticsearch_clients = [],
-  $discover_node = 'localhost',
+  $discover_nodes = ['localhost'],
   $sysadmins = []
 ) {
   $iptables_nodes_rule = regsubst ($elasticsearch_nodes, '^(.*)$', '-m state --state NEW -m tcp -p tcp --dport 9200:9400 -s \1 -j ACCEPT')
@@ -31,7 +31,7 @@ class openstack_project::elasticsearch (
   }
 
   class { 'logstash::elasticsearch':
-    discover_node => $discover_node,
+    discover_nodes => $discover_nodes,
   }
 
   cron { 'delete_old_es_indices':

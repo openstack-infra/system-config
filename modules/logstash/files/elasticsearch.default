@@ -17,7 +17,7 @@ ES_HEAP_SIZE=16g
 # Maximum locked memory size. Set to "unlimited" if you use the
 # bootstrap.mlockall option in elasticsearch.yml. You must also set
 # ES_HEAP_SIZE.
-#MAX_LOCKED_MEMORY=unlimited
+MAX_LOCKED_MEMORY=unlimited
 
 # ElasticSearch log directory
 #LOG_DIR=/var/log/elasticsearch

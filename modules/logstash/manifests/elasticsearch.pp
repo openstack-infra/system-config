@@ -15,7 +15,7 @@
 # Class to install elasticsearch.
 #
 class logstash::elasticsearch (
-  discover_node = 'localhost'
+  discover_nodes = ['localhost']
 ) {
   # install java runtime
   package { 'java7-runtime-headless':
