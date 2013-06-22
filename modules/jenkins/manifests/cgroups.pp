@@ -4,6 +4,12 @@ class jenkins::cgroups {
 
   include jenkins::params
 
+  if ($::jenkins::params::cgroups_tools_package != '') {
+    package { 'cgroups-tools':
+      ensure => present,
+      name   => $::jenkins::params::cgroups_tools_package,
+    }
+  }
   package { 'cgroups':
     ensure => present,
     name   => $::jenkins::params::cgroups_package,

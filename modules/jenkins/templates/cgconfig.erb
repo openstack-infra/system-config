@@ -1,4 +1,5 @@
-<% if osfamily == "RedHat" then %>
+<% if operatingsystem == "Fedora" then %>
+<% elsif osfamily == "RedHat" then %>
 
 mount {
         cpuset  = /cgroup/cpuset;
@@ -48,6 +49,8 @@ group jenkins/children {
 	memory {
 		memory.soft_limit_in_bytes = <%= (memorytotalbytes.to_f * 0.75).to_i %>;
 		memory.limit_in_bytes = <%= (memorytotalbytes.to_f * 0.9).to_i %>;
+<% if operatingsystem != "Fedora" then %>
 		memory.memsw.limit_in_bytes = <%= (memorytotalbytes.to_f * 0.9).to_i %>;
+<% end %>
 	}
 }
