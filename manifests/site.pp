@@ -387,6 +387,25 @@ node /^centos6-dev\d+\.slave\.openstack\.org$/ {
   }
 }
 
+node /^fedora18-?\d+\.slave\.openstack\.org$/ {
+  include openstack_project
+  include openstack_project::puppet_cron
+  class { 'openstack_project::slave':
+    certname  => 'fedora18.slave.openstack.org',
+    ssh_key   => $openstack_project::jenkins_ssh_key,
+    sysadmins => hiera('sysadmins'),
+  }
+}
+
+node /^fedora18-dev\d+\.slave\.openstack\.org$/ {
+  include openstack_project
+  include openstack_project::puppet_cron
+  class { 'openstack_project::slave':
+    ssh_key   => $openstack_project::jenkins_dev_ssh_key,
+    sysadmins => hiera('sysadmins'),
+  }
+}
+
 node /^.*\.jclouds\.openstack\.org$/ {
   class { 'openstack_project::bare_slave':
     certname => 'jclouds.openstack.org',
