@@ -135,6 +135,9 @@ class jenkins::slave(
   ]
 
   if $python3 {
+    if ($::lsbdistcodename == 'precise') {
+      apt::ppa { 'ppa:zulcss/py3k': }
+    }
     include pip::python3
     package { $pip_packages:
       ensure   => latest,  # we want the latest from these
