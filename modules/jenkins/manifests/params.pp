@@ -50,8 +50,21 @@ class jenkins::params {
       $xslt_package = 'libxslt'
       $xvfb_package = 'xorg-x11-server-Xvfb'
       $cgroups_package = 'libcgroup'
-      $cgconfig_require = Package['cgroups']
-      $cgred_require = Package['cgroups']
+      if ($::operatingsystem == 'Fedora') {
+        $cgroups_tools_package = 'libcgroup-tools'
+        $cgconfig_require = [
+          Package['cgroups'],
+          Package['cgroups-tools'],
+        ]
+        $cgred_require = [
+          Package['cgroups'],
+          Package['cgroups-tools'],
+        ]
+      } else {
+        $cgroups_tools_package = ''
+        $cgconfig_require = Package['cgroups']
+        $cgred_require = Package['cgroups']
+      }
     }
     'Debian': {
       # common packages
@@ -99,6 +112,7 @@ class jenkins::params {
       $xslt_package = 'xsltproc'
       $xvfb_package = 'xvfb'
       $cgroups_package = 'cgroup-bin'
+      $cgroups_tools_package = ''
       $cgconfig_require = [
         Package['cgroups'],
         File['/etc/init/cgconfig.conf'],
