@@ -17,7 +17,7 @@
 class openstack_project::logstash (
   $elasticsearch_nodes = [],
   $gearman_workers = [],
-  $discover_node = 'elasticsearch.openstack.org',
+  $discover_nodes = ['elasticsearch.openstack.org:9200'],
   $sysadmins = []
 ) {
   $iptables_es_rule = regsubst ($elasticsearch_nodes, '^(.*)$', '-m state --state NEW -m tcp -p tcp --dport 9200:9400 -s \1 -j ACCEPT')
@@ -32,7 +32,7 @@ class openstack_project::logstash (
 
   class { 'logstash::web':
     frontend            => 'kibana',
-    discover_node       => $discover_node,
+    discover_nodes      => $discover_nodes,
     proxy_elasticsearch => true,
   }
 
