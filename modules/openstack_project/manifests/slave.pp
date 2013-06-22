@@ -15,6 +15,9 @@ class openstack_project::slave (
     certname                  => $certname,
     sysadmins                 => $sysadmins,
   }
+  if ($python3 == true and $::lsbdistcodename == 'precise') {
+    apt::ppa { 'ppa:zulcss/py3k': }
+  }
   class { 'jenkins::slave':
     bare    => $bare,
     ssh_key => $ssh_key,
