@@ -39,7 +39,7 @@ class openstack_project::base(
     }
 
     exec { 'symlink hiera modules' :
-      command     => 'ln -s /usr/local/share/gems/gems/hiera-puppet-* /etc/puppet/modules/',
+      command     => '/bin/ln -s /usr/local/share/gems/gems/hiera-puppet-* /etc/puppet/modules/',
       subscribe   => Package['hiera'],
       refreshonly => true,
     }
