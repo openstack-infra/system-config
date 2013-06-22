@@ -12,7 +12,7 @@ class pip {
     require => Package[$::pip::params::python_devel_package]
   }
 
-  if ($::osfamily == 'RedHat') {
+  if ($::operatingsystem in ['CentOS', 'RedHat']) {
 
     file { '/usr/bin/pip':
       ensure => 'link',
