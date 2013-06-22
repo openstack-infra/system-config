@@ -255,18 +255,18 @@ bootstrap.mlockall: true
 
 # Allow recovery process after N nodes in a cluster are up:
 #
-# gateway.recover_after_nodes: 1
+gateway.recover_after_nodes: 2
 
 # Set the timeout to initiate the recovery process, once the N nodes
 # from previous setting are up (accepts time value):
 #
-# gateway.recover_after_time: 5m
+gateway.recover_after_time: 5m
 
 # Set how many nodes are expected in this cluster. Once these N nodes
 # are up (and recover_after_nodes is met), begin recovery process immediately
 # (without waiting for recover_after_time to expire):
 #
-# gateway.expected_nodes: 2
+gateway.expected_nodes: 3
 
 
 ############################# Recovery Throttling #############################
@@ -304,7 +304,7 @@ bootstrap.mlockall: true
 # operational within the cluster. Set this option to a higher value (2-4)
 # for large clusters (>3 nodes):
 #
-# discovery.zen.minimum_master_nodes: 1
+discovery.zen.minimum_master_nodes: 2
 
 # Set the time to wait for ping responses from other nodes when discovering.
 # Set this option to a higher value on a slow or congested network
@@ -327,7 +327,9 @@ discovery.zen.ping.multicast.enabled: false
 #    to perform discovery when new nodes (master or data) are started:
 #
 # discovery.zen.ping.unicast.hosts: ["host1", "host2:port", "host3[portX-portY]"]
-discovery.zen.ping.unicast.hosts: ["<%= discover_node %>"]
+#
+# Make all master eligible nodes discover nodes.
+discovery.zen.ping.unicast.hosts: ["<%= discover_nodes.join("\", \"") %>"]
 
 # EC2 discovery allows to use AWS EC2 API in order to perform discovery.
 #

@@ -15,7 +15,7 @@
 # Class to install kibana frontend to logstash.
 #
 class kibana (
-  $discover_node = 'localhost'
+  $discover_nodes = ['localhost:9200']
 ) {
 
   group { 'kibana':

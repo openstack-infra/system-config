@@ -214,7 +214,11 @@ node 'logstash.openstack.org' {
       'logstash-worker4.openstack.org',
       'logstash-worker5.openstack.org',
     ],
-    discover_node       => 'elasticsearch.openstack.org',
+    discover_nodes      => [
+      'elasticsearch.openstack.org:9200',
+      'elasticsearch2.openstack.org:9200',
+      'elasticsearch3.openstack.org:9200',
+    ],
   }
 }
 
@@ -246,7 +250,11 @@ node /^elasticsearch\d*\.openstack\.org$/ {
       'logstash-worker4.openstack.org',
       'logstash-worker5.openstack.org',
     ],
-    discover_node         => 'elasticsearch.openstack.org',
+    discover_nodes        => [
+      'elasticsearch.openstack.org',
+      'elasticsearch2.openstack.org',
+      'elasticsearch3.openstack.org',
+    ],
   }
 }
 
