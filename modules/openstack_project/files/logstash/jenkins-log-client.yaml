@@ -28,6 +28,22 @@ source-files:
     tags:
       - screen
       - oslofmt
+  - name: logs/screen-h-api-cfn.txt
+    tags:
+      - screen
+      - oslofmt
+  - name: logs/screen-h-api-cw.txt
+    tags:
+      - screen
+      - oslofmt
+  - name: logs/screen-h-api.txt
+    tags:
+      - screen
+      - oslofmt
+  - name: logs/screen-h-eng.txt
+    tags:
+      - screen
+      - oslofmt
   - name: logs/screen-key.txt
     tags:
       - screen
