@@ -10,8 +10,8 @@
 
              <% if proxy_elasticsearch == true %>
              # Proxy for elasticsearch _aliases, .*/_status, and .*/_search.
-             <LocationMatch "^/elasticsearch/(_aliases|.*/_status|.*/_search)$">
-               ProxyPassMatch http://<%= scope.lookupvar("::logstash::web::discover_nodes")[0] %>/$1
+             <LocationMatch "^/elasticsearch/(_aliases|(.*/)?_status|(.*/)?_search)$">
+               ProxyPassMatch http://<%= scope.lookupvar("::logstash::web::discover_nodes")[0] %>/$1 connectiontimeout=5 timeout=120
              </LocationMatch>
              ProxyPassReverse /elasticsearch/ http://<%= scope.lookupvar("::logstash::web::discover_nodes")[0] %>/
              <% end %>
