@@ -276,6 +276,7 @@ openstack-ironic:
     projects:
       - openstack/ironic
       - openstack/python-ironicclient
+      - stackforge/python-ipmi
     branches:
       - master
 
