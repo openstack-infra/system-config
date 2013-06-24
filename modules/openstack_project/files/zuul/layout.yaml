@@ -2110,3 +2110,9 @@ projects:
       - gate-noop
     gate:
       - gate-noop
+
+  - name: stackforge/python-ipmi
+    check:
+      - gate-noop
+    gate:
+      - gate-noop
