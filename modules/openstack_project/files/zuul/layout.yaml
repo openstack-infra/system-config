@@ -2126,3 +2126,9 @@ projects:
       - stackalytics-tarball
     release:
       - stackalytics-tarball
+
+  - name: stackforge/python-ipmi
+    check:
+      - gate-noop
+    gate:
+      - gate-noop
