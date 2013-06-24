@@ -25,4 +25,12 @@ class openstack_project::template (
     install_users => $install_users,
     certname      => $certname,
   }
+
+  package { 'strace':
+    ensure => present,
+  }
+
+  package { 'tcpdump':
+    ensure => present,
+  }
 }
