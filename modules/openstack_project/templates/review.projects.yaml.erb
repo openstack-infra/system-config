@@ -177,6 +177,9 @@
   acl-config: /home/gerrit2/acls/stackforge/savanna.config
 - project: stackforge/os-config-applier
   description: "Apply configuration from cloud metadata"
+- project: stackforge/os-collect-config
+  description: "Collect and cache metadata, run hooks on changes."
+  upstream: git://github.com/SpamapS/os-collect-config.git
 - project: stackforge/os-refresh-config
   upstream: git://github.com/tripleo/os-refresh-config.git
   description: "Restart services and coordinate data migration on Heat config changes."

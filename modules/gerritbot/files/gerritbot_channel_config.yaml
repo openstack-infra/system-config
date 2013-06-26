@@ -134,6 +134,7 @@ tripleo:
     projects:
       - stackforge/diskimage-builder
       - stackforge/os-config-applier
+      - stackforge/os-collect-config
       - stackforge/os-refresh-config
       - stackforge/tripleo-image-elements
       - stackforge/tripleo-heat-templates

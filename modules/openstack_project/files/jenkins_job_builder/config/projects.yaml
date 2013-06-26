@@ -879,6 +879,15 @@
       - python-jobs
 
 - project:
+    name: os-collect-config
+    github-org: stackforge
+    node: precise
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - python-jobs
+
+- project:
     name: os-refresh-config
     github-org: stackforge
     node: precise

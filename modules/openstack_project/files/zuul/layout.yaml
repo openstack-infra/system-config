@@ -1527,6 +1527,18 @@ projects:
     post:
       - os-config-applier-coverage
 
+  - name: stackforge/os-collect-config
+    check:
+      - gate-os-collect-config-pep8
+      - gate-os-collect-config-python26
+      - gate-os-collect-config-python27
+    gate:
+      - gate-os-collect-config-pep8
+      - gate-os-collect-config-python26
+      - gate-os-collect-config-python27
+    post:
+      - os-collect-config-coverage
+
   - name: stackforge/os-refresh-config
     check:
       - gate-os-refresh-config-pep8
