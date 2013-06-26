@@ -1126,3 +1126,11 @@
 
     jobs:
       - python-jobs
+
+- project:
+    name: novaimagebuilder
+    github-org: stackforge
+    node: precise
+
+    jobs:
+      - python-jobs

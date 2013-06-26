@@ -2101,9 +2101,13 @@ projects:
 
   - name: stackforge/novaimagebuilder
     check:
-      - gate-noop
+      - gate-novaimagebuilder-pyflakes
+      - gate-novaimagebuilder-pep8
+      - gate-novaimagebuilder-python26
     gate:
-      - gate-noop
+      - gate-novaimagebuilder-pyflakes
+      - gate-novaimagebuilder-pep8
+      - gate-novaimagebuilder-python26
 
   - name: stackforge/cl-openstack-client
     check:
