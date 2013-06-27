@@ -36,7 +36,7 @@ Overview
 ========
 
 Logs from Jenkins test runs are sent to logstash where they are
-indexed and stored.  Logstash facilitates reviewing logs from mulitple
+indexed and stored.  Logstash facilitates reviewing logs from multiple
 sources in a single test run, searching for errors or particular
 events within a test run, as well as searching for log event trends
 across test runs.
