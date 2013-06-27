@@ -19,7 +19,7 @@ products:
  - swift
  - keystone
  - horizon
- - quantum
+ - neutron
  - cinder
  - oslo
  - ceilometer
