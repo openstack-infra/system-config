@@ -75,8 +75,9 @@ define lodgeit::site(
   }
 
   service { "${name}-paste":
-    ensure   => running,
-    provider => upstart,
-    require  => [Service['drizzle', 'apache2'], Exec["create_database_${name}"]],
+    ensure    => running,
+    provider  => upstart,
+    require   => [Service['drizzle', 'apache2'], Exec["create_database_${name}"]],
+    subscribe => Service['drizzle'],
   }
 }
