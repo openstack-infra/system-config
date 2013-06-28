@@ -42,6 +42,7 @@ class lodgeit {
   service { 'drizzle':
     ensure     => running,
     hasrestart => true,
+    require    => Package['drizzle'],
   }
 
   vcsrepo { '/tmp/lodgeit-main':
