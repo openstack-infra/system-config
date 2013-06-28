@@ -600,6 +600,21 @@ projects:
         - oslo.messaging-pypi-upload
       - oslo.messaging-docs
 
+  - name: openstack/oslo.sphinx
+    check:
+      - gate-oslo.sphinx-requirements
+      - gate-oslo.sphinx-pep8
+    gate:
+      - gate-oslo.sphinx-requirements
+      - gate-oslo.sphinx-pep8
+    post:
+      - oslo.sphinx-branch-tarball
+    pre-release:
+      - oslo.sphinx-tarball
+    release:
+      - oslo.sphinx-tarball:
+        - oslo.sphinx-pypi-upload
+
   - name: openstack/quantum
     check:
       - gate-quantum-requirements
