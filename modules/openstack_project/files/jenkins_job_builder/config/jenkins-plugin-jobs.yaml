@@ -6,10 +6,10 @@
     project-type: maven
     node: precise
 
-    wrappers:
+    properties:
       - inject:
-          properties-file: maven.properties
           script-file: /usr/local/jenkins/slave_scripts/maven-properties.sh
+          properties-file: maven.properties
 
     maven:
       maven-name: Maven3
@@ -27,10 +27,10 @@
     project-type: maven
     node: precise
 
-    wrappers:
+    properties:
       - inject:
-          properties-file: maven.properties
           script-file: /usr/local/jenkins/slave_scripts/maven-properties.sh
+          properties-file: maven.properties
 
     maven:
       maven-name: Maven3
