@@ -54,4 +54,14 @@ class openstack_project::lists(
     webserver   => $listdomain,
     mailserver  => $listdomain,
   }
+
+  maillist { 'openstack-i18n':
+    ensure      => present,
+    admin       => 'guoyingc@cn.ibm.com',
+    password    => $listpassword,
+    description => 'List of the OpenStack Internationalization team.',
+    webserver   => $listdomain,
+    mailserver  => $listdomain,
+  }
+
 }
