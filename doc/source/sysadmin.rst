@@ -55,28 +55,28 @@ This means that you can run the same configuration on your own server
 simply by providing a different manifest file instead of site.pp.
 
 As an example, to run the etherpad configuration on your own server,
-start by cloning the config Git repo::
+start by ensuring git is installed and then cloning the config Git
+repo::
 
+  apt-get install git
   git clone https://github.com/openstack-infra/config
+  cd config
 
 Then copy the etherpad node definition from manifests/site.pp to a new
 file (be sure to specify the FQDN of the host you are working with in
 the node specifier).  It might look something like this::
 
   # local.pp
-  node 'etherpad.example.org' {
-    class { 'openstack_project::etherpad':
-      database_password       => 'badpassword',
-      sysadmins               => 'user@example.org',
-    }
+  class { 'openstack_project::etherpad':
+    database_password       => 'badpassword',
+    sysadmins               => 'user@example.org',
   }
 
 Then to apply that configuration, run the following::
 
-  cd config
   bash install_puppet.sh
   bash install_modules.sh
-  puppet apply -l manifest.log --modulepath=modules:/etc/puppet/modules local.pp
+  puppet apply -l /tmp/manifest.log --modulepath=modules:/etc/puppet/modules local.pp
 
 That should turn the system you are logged into into an etherpad
 server with the same configuration as that used by the OpenStack

@@ -26,6 +26,7 @@ At a Glance
 :Projects:
   * http://wiki.debian.org/MeetBot
   * http://sourceforge.net/projects/supybot/
+  * https://github.com/openstack-infra/meetbot
   * https://github.com/openstack-infra/gerritbot
   * https://github.com/openstack-infra/statusbot
 :Bugs:
