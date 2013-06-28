@@ -318,7 +318,7 @@
       root-module:
         group-id: org.openstack.identity
         artifact-id: docs
-      root-pom: openstack-identity-api/pom.xml
+      root-pom: openstack-identity-api/v2.0/pom.xml
       goals: 'clean generate-sources'
 
     publishers:
