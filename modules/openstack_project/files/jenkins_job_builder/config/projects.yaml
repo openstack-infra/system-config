@@ -490,6 +490,19 @@
       - pypi-jobs
       - gate-{name}-pyflakes
 
+- project:
+    name: oslo.sphinx
+    github-org: openstack
+    node: precise
+    tarball-site: tarballs.openstack.org
+    doc-publisher-site: docs.openstack.org
+
+    jobs:
+      - python-jobs
+      - openstack-publish-jobs
+      - pypi-jobs
+      - gate-{name}-pyflakes
+
 
 - project:
     name: oslo-incubator

@@ -47,6 +47,7 @@ openstack-dev:
       - openstack/oslo-incubator
       - openstack/oslo.config
       - openstack/oslo.messaging
+      - openstack/oslo.sphinx
       - openstack/python-cinderclient
       - openstack/python-glanceclient
       - openstack/python-keystoneclient
