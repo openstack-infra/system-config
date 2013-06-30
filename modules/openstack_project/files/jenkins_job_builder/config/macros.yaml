@@ -65,7 +65,12 @@
 - builder:
     name: puppet-lint
     builders:
-      - shell: "rake lint"
+      - shell: |
+          test -d modules || {
+            ln -s . {project}
+            cd {project}
+          }
+          rake lint
 
 - builder:
     name: puppet-syntax
