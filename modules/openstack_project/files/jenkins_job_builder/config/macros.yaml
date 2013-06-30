@@ -65,7 +65,13 @@
 - builder:
     name: puppet-lint
     builders:
-      - shell: "rake lint"
+      - shell: |
+          test -e modules || {
+            mkdir -p {project}
+            rsync -a --exclude={project} --exclude ".*" . {project}
+            cd {project}
+          }
+          rake lint
 
 - builder:
     name: puppet-syntax
