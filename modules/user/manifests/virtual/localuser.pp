@@ -1,6 +1,7 @@
 define user::virtual::localuser(
   $realname,
   $sshkeys = '',
+  $email = "$title@localhost",
   $shell = '/bin/bash'
 ) {
   group { $title:
@@ -39,6 +40,16 @@ define user::virtual::localuser(
     name    => "/home/${title}/.ssh/authorized_keys",
     owner   => $title,
     require => File["${title}_sshdir"],
+  }
+
+  file { "${title}_gitconfig":
+    ensure  => present,
+    source  => template('modules/user/gitconfig.erb'),
+    group   => $title,
+    mode    => '0400',
+    name    => "/home/${title}/.gitconfig",
+    owner   => $title,
+    require => User[$title],
   }
 }
 

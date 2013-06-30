@@ -3,11 +3,13 @@
 class openstack_project::users {
   @user::virtual::localuser { 'mordred':
     realname => 'Monty Taylor',
+    email    => 'mordred@inaugust.com',
     sshkeys  => "ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAyxfIpVCvZyM8BIy7r7WOSIG6Scxq4afean1Pc/bej5ZWHXCu1QnhGbI7rW3sWciEhi375ILejfODl2TkBpfdJe/DL205lLkTxAa+FUqcZ5Ymwe+jBgCH5XayzyhRPFFLn07IfA/BDAjGPqFLvq6dCEHVNJIui6oEW7OUf6a3376YF55r9bw/8Ct00F9N7zrISeSSeZXbNR+dEqcsBEKBqvZGcLtM4jzDzNXw1ITPPMGaoEIIszLpkkJcy8u/13GIrbAwNrB2wjl6Mzj+N9nTsB4rFtxRXp31ZbytCH5G9CL/mFard7yi8NLVEJPZJvAifNVhooxGN06uAiTFE8EsuQ== mtaylor@qualinost\n",
   }
 
   @user::virtual::localuser { 'corvus':
     realname => 'James E. Blair',
+    email    => 'jeblair@openstack.org',
     sshkeys  => "ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAvKYcWK1T7e3PKSFiqb03EYktnoxVASpPoq2rJw2JvhsP0JfS+lKrPzpUQv7L4JCuQMsPNtZ8LnwVEft39k58Kh8XMebSfaqPYAZS5zCNvQUQIhP9myOevBZf4CDeG+gmssqRFcWEwIllfDuIzKBQGVbomR+Y5QuW0HczIbkoOYI6iyf2jB6xg+bmzR2HViofNrSa62CYmHS6dO04Z95J27w6jGWpEOTBjEQvnb9sdBc4EzaBVmxCpa2EilB1u0th7/DvuH0yP4T+X8G8UjW1gZCTOVw06fqlBCST4KjdWw1F/AuOCT7048klbf4H+mCTaEcPzzu3Fkv8ckMWtS/Z9Q== jeblair@operational-necessity\n",
   }
 
@@ -18,6 +20,7 @@ class openstack_project::users {
 
   @user::virtual::localuser { 'smaffulli':
     realname => 'Stefano Maffulli',
+    email    => 'stefano@openstack.org',
     sshkeys  => "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDD/zAvXaOUXCAT6/B4sCMu/38d/PyOIg/tYsYFAMgfDUzuZwkjZWNGrTpp/HFrOAZISER5KmOg48DKPvm91AeZOHfAXHCP6x9/FcogP9rmc48ym1B5XyIc78QVQjgN6JMSlEZsl0GWzFhQsPDjXundflY07TZfSC1IhpG9UgzamEVFcRjmNztnBuvq2uYVGpdI+ghmqFw9kfvSXJvUbj/F7Pco5XyJBx2e+gofe+X/UNee75xgoU/FyE2a6dSSc4uP4oUBvxDNU3gIsUKrSCmV8NuVQvMB8C9gXYR+JqtcvUSS9DdUAA8StP65woVsvuU+lqb+HVAe71JotDfOBd6f stefano@mattone-E6420\n",
   }
 
@@ -38,6 +41,7 @@ class openstack_project::users {
 
   @user::virtual::localuser { 'clarkb':
     realname => 'Clark Boylan',
+    email    => 'cboylan@gmail.com',
     sshkeys  => "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDlH6SNieyGDWNl4b9TM+zUgk+XTXRtqxyYxNh1p5e00u/ZrZPVrc7buPhnTHzEde0ABX0vgnZI2rC5Hf9cYY0aRgLHDuikQ4CQHPucslgZ5linjtWx5AuURp+oaJRCj00UZubJsatUx5vz+D4MGRLYmL+MErftYdI4sBbolATfLVwjrmxsd6KF1BZ0+9eEv2Xrk+yXN1A5RGPKBiuE6viDMZxrOuy7IW8+TQZW1LrsbTCAD1b+J5Nx0z/Hn3Rz71zEibdwM9xgu5vROu3p9kdaxu+Ndg/SvCCWlzoLQSeIAmcfGUlWg9IjEc3sQexX9BmUAsKQtu3aZFgq2V7aqtDN boylancl@boylancl1\n",
   }
 
@@ -48,11 +52,13 @@ class openstack_project::users {
 
   @user::virtual::localuser { 'fungi':
     realname => 'Jeremy Stanley',
+    email    => 'fungi@yuggoth.org',
     sshkeys  => "ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAzKUUBTKJf6CGyz96JbmVSOSzf6LgXRmbyvSkSnD8EnBPFugWF5h/pPmLTVRfUzuR8p1CAR8ziNv0kJZexHvRbp0n06HWERWdK9AXr4utlJr9oc3b50Mmd5GHQp2QLd2sQrMx8G0pimPVoKPTVNvrlwrY1hjHldugX9IqD2QWIYsQEnqXHiVrCCiIcJFe/Gr/Qmz9nWTXN0fEQ7wsmrHAQtAs7YHJ/fNuS4JOtBTXS5trs9tcIBtPFyB2OeyOq85Wvg/IyHBv9Va2Zjccmu8+cedOsrz0YtOSb++uFAyeAe8BFEKD0EmHwhXVrG9UTWdNgQgL+YzdPPifjEbEh3HQoQ== fungi@yuggoth.org\n",
   }
 
   @user::virtual::localuser { 'ttx':
     realname => 'Thierry Carrez',
+    email    => 'thierry@openstack.org',
     sshkeys  => "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDIF2INBeJdT3nT3+3yac+DGRQVN7wPv/GTb/OPDocQhfGMeQP7JwSURiv1nrXGbbjzuip7l7vRJs4u4NqXkUi0GFj1aLBpUm2Z1NFFDn4cuZ5KCYX6rjVrDYIpj4OlOyzt9YGONvvH/dB2GHw8kYbN50OalFWQCS0TVzj9SQbO47B/TPdtLnh116yEP5AXZZUGgl+q533/x8+nxAxJKA9iAk3mSswl67gXc4pRo84pjwpx+R/52ha6RfmLkoNAEOqtr5MGx5gyW+WXsoLJBl2bjcfzYoQI7gPWRIn+rtCnDFi762TS54zstXxR1ww+ppmqHk04l2oprNoI0wr00Fsl ttx@stardust\n",
   }
 }
