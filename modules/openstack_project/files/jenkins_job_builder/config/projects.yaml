@@ -699,6 +699,17 @@
 
 
 - project:
+    name: staccato
+    github-org: stackforge
+    tarball-site: tarballs.openstack.org
+    node: precise
+
+    jobs:
+      - python-jobs
+      - gate-{name}-pyflakes
+
+
+- project:
     name: designate
     github-org: stackforge
     node: precise

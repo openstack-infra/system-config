@@ -1265,9 +1265,13 @@ projects:
 
   - name: stackforge/staccato
     check:
-      - gate-noop
+      - gate-staccato-pep8
+      - gate-staccato-python26
+      - gate-staccato-python27
     gate:
-      - gate-noop
+      - gate-staccato-pep8
+      - gate-staccato-python26
+      - gate-staccato-python27
 
   - name: stackforge/designate
     check:
