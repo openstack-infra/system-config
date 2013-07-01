@@ -1633,9 +1633,13 @@ projects:
 
   - name: stackforge/anvil
     check:
-      - gate-noop
+      - gate-anvil-pep8
+      - gate-anvil-pylint
+      - gate-anvil-pyflakes
     gate:
-      - gate-noop
+      - gate-anvil-pep8
+      - gate-anvil-pylint
+      - gate-anvil-pyflakes
 
   - name: stackforge/savanna
     check:
