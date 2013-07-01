@@ -1188,3 +1188,13 @@
 
     jobs:
       - python-jobs
+
+- project:
+    name: anvil
+    github-org: stackforge
+    node: precise
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - gate-{name}-pep8
+      - gate-{name}-pylint
