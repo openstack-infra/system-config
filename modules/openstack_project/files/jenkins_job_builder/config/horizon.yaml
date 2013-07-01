@@ -11,7 +11,7 @@
     publishers:
       - console-log
 
-- job-template:
+- job:
     name: gate-horizon-python27-django14
     node: precise
 
