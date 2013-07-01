@@ -23,7 +23,7 @@
 
     builders:
       - gerrit-git-prep
-      - shell: '/usr/local/jenkins/slave_scripts/run-tox.sh py27dj14 openstack horizon'
+      - shell: '/usr/local/jenkins/slave_scripts/run-tox.sh 27dj14 openstack horizon'
       - assert-no-extra-files
 
     publishers:
