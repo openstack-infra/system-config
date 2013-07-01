@@ -6,6 +6,7 @@
     name: 'gate-{name}-run-tests'
 
     builders:
+      - gerrit-git-prep
       - run-tests:
           github-org: '{github-org}'
           project: '{name}'
