@@ -41,11 +41,10 @@ class RequirementsList(object):
         for line in open(fn):
             line = line[:line.find('#')]
             line = line.strip()
-            if not line:
-                continue
-            if line.startswith('http'):
-                continue
-            if line.startswith('-e'):
+            if (not line or
+                line.startswith('http') or
+                line.startswith('-e') or
+                line.startswith('-f')):
                 continue
             req = pkg_resources.Requirement.parse(line)
             if req.project_name.lower() in self.reqs:
