@@ -15,7 +15,7 @@
             if [ -e $FILE ]
             then
               # Ignore lines beginning with https?:// just as the mirror script does.
-              sed -e '/https\?:\/\//d' $FILE > $FILE.clean
+              sed -e '/^https\?:\/\//d' $FILE > $FILE.clean
               PIP_ARGS="$PIP_ARGS -r $FILE.clean"
             fi
           done
