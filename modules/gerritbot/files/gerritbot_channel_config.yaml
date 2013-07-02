@@ -133,6 +133,7 @@ tripleo:
       - stackforge/os-config-applier
       - stackforge/os-refresh-config
       - stackforge/tripleo-image-elements
+      - openstack/tripleo-incubator
       - stackforge/tripleo-heat-templates
     branches:
       - master
