@@ -403,7 +403,7 @@
 
 
 - job:
-    name: periodic-tempest-devstack-coverage-vm-full
+    name: periodic-tempest-devstack-vm-coverage
     node: devstack-precise
 
     wrappers:
@@ -428,7 +428,6 @@
           #!/bin/bash -xe
           export PYTHONUNBUFFERED=true
           export DEVSTACK_GATE_TEMPEST=1
-          export DEVSTACK_GATE_TEMPEST_FULL=1
           export DEVSTACK_GATE_TEMPEST_COVERAGE=1
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
