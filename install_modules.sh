@@ -33,6 +33,10 @@ MODULES["puppetlabs-stdlib"]="3.2.0"
 MODULES["saz-memcached"]="2.0.2"
 MODULES["saz-gearman"]="2.0.1"
 
+if cat /etc/*release | grep -e "CentOS" -e "Red Hat" &> /dev/null; then
+    MODULES["spiette-selinux"]="0.5.0"
+fi
+
 MODULE_LIST=`puppet module list`
 
 # Transition away from old things
