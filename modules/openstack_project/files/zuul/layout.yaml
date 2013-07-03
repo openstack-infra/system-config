@@ -77,6 +77,9 @@ jobs:
     voting: false
   - name: gate-tempest-devstack-vm-postgres-full
     branch: ^(?!stable/folsom).*$
+  - name: gate-tempest-devstack-vm-cells
+    branch: ^(?!stable/folsom).*$
+    voting: false
   - name: gate-grenade-devstack-vm
     branch: ^(?!stable/folsom).*$
     voting: false
@@ -509,6 +512,7 @@ projects:
       - gate-tempest-devstack-vm-cinder
       - gate-tempest-devstack-vm-postgres-full
       - gate-tempest-devstack-vm-quantum
+      - gate-tempest-devstack-vm-cells
       - gate-grenade-devstack-vm
       - gate-nova-pylint
     gate:
@@ -522,6 +526,7 @@ projects:
       - gate-tempest-devstack-vm-cinder
       - gate-tempest-devstack-vm-postgres-full
       - gate-tempest-devstack-vm-quantum
+      - gate-tempest-devstack-vm-cells
       - gate-grenade-devstack-vm
     post:
       - nova-branch-tarball
