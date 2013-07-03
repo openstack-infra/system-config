@@ -32,6 +32,7 @@ MODULES["puppetlabs-postgresql"]="2.3.0"
 MODULES["puppetlabs-stdlib"]="3.2.0"
 MODULES["saz-memcached"]="2.0.2"
 MODULES["saz-gearman"]="2.0.1"
+MODULES["spiette-selinux"]="0.5.0"
 
 MODULE_LIST=`puppet module list`
 
