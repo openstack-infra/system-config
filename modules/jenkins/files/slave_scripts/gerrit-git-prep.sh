@@ -33,6 +33,7 @@ then
 fi
 git remote set-url origin $GERRIT_SITE/p/$ZUUL_PROJECT
 git remote update || git remote update # attempt to work around bug #925790
+git fetch --tags origin
 git reset --hard
 git clean -x -f -d -q
 
