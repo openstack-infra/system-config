@@ -77,6 +77,12 @@ jobs:
     voting: false
   - name: gate-tempest-devstack-vm-postgres-full
     branch: ^(?!stable/folsom).*$
+  - name: gate-tempest-devstack-vm-cells
+    branch: ^(?!stable/folsom).*$
+    voting: false
+  - name: gate-tempest-devstack-vm-cells-full
+    branch: ^(?!stable/folsom).*$
+    voting: false
   - name: gate-grenade-devstack-vm
     branch: ^(?!stable/folsom).*$
     voting: false
@@ -359,6 +365,7 @@ projects:
       - gate-cinder-pylint
       - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
+      - gate-tempest-devstack-vm-cells-full
       - gate-tempest-devstack-vm-cinder
       - gate-tempest-devstack-vm-postgres-full
       - gate-tempest-devstack-vm-quantum
@@ -371,6 +378,7 @@ projects:
       - gate-cinder-python27
       - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
+      - gate-tempest-devstack-vm-cells-full
       - gate-tempest-devstack-vm-cinder
       - gate-tempest-devstack-vm-postgres-full
       - gate-tempest-devstack-vm-quantum
@@ -395,6 +403,7 @@ projects:
       - gate-glance-python27
       - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
+      - gate-tempest-devstack-vm-cells-full
       - gate-tempest-devstack-vm-cinder
       - gate-tempest-devstack-vm-postgres-full
       - gate-tempest-devstack-vm-quantum
@@ -407,6 +416,7 @@ projects:
       - gate-glance-python27
       - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
+      - gate-tempest-devstack-vm-cells-full
       - gate-tempest-devstack-vm-cinder
       - gate-tempest-devstack-vm-postgres-full
       - gate-tempest-devstack-vm-quantum
@@ -432,6 +442,7 @@ projects:
       - gate-horizon-selenium
       - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
+      - gate-tempest-devstack-vm-cells-full
       - gate-tempest-devstack-vm-cinder
       - gate-tempest-devstack-vm-postgres-full
       - gate-tempest-devstack-vm-quantum
@@ -446,6 +457,7 @@ projects:
       - gate-horizon-selenium
       - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
+      - gate-tempest-devstack-vm-cells-full
       - gate-tempest-devstack-vm-cinder
       - gate-tempest-devstack-vm-postgres-full
       - gate-tempest-devstack-vm-quantum
@@ -469,6 +481,7 @@ projects:
       - gate-keystone-python27
       - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
+      - gate-tempest-devstack-vm-cells-full
       - gate-tempest-devstack-vm-cinder
       - gate-tempest-devstack-vm-postgres-full
       - gate-tempest-devstack-vm-quantum
@@ -481,6 +494,7 @@ projects:
       - gate-keystone-python27
       - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
+      - gate-tempest-devstack-vm-cells-full
       - gate-tempest-devstack-vm-cinder
       - gate-tempest-devstack-vm-postgres-full
       - gate-tempest-devstack-vm-quantum
@@ -506,6 +520,7 @@ projects:
       - gate-nova-python27
       - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
+      - gate-tempest-devstack-vm-cells-full
       - gate-tempest-devstack-vm-cinder
       - gate-tempest-devstack-vm-postgres-full
       - gate-tempest-devstack-vm-quantum
@@ -519,6 +534,7 @@ projects:
       - gate-nova-python27
       - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
+      - gate-tempest-devstack-vm-cells-full
       - gate-tempest-devstack-vm-cinder
       - gate-tempest-devstack-vm-postgres-full
       - gate-tempest-devstack-vm-quantum
@@ -650,6 +666,7 @@ projects:
       - gate-swift-python27
       - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
+      - gate-tempest-devstack-vm-cells-full
       - gate-tempest-devstack-vm-cinder
       - gate-tempest-devstack-vm-quantum
       - gate-tempest-devstack-vm-postgres-full
@@ -662,6 +679,7 @@ projects:
       - gate-swift-python27
       - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
+      - gate-tempest-devstack-vm-cells-full
       - gate-tempest-devstack-vm-cinder
       - gate-tempest-devstack-vm-quantum
       - gate-tempest-devstack-vm-postgres-full
@@ -708,6 +726,7 @@ projects:
       - gate-python-cinderclient-python27
       - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
+      - gate-tempest-devstack-vm-cells-full
       - gate-tempest-devstack-vm-postgres-full
       - gate-tempest-devstack-vm-cinder
       - gate-tempest-devstack-vm-quantum
@@ -720,6 +739,7 @@ projects:
       - gate-python-cinderclient-python27
       - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
+      - gate-tempest-devstack-vm-cells-full
       - gate-tempest-devstack-vm-postgres-full
       - gate-tempest-devstack-vm-cinder
       - gate-tempest-devstack-vm-quantum
@@ -743,6 +763,7 @@ projects:
       - gate-python-glanceclient-python27
       - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
+      - gate-tempest-devstack-vm-cells-full
       - gate-tempest-devstack-vm-postgres-full
       - gate-tempest-devstack-vm-cinder
       - gate-tempest-devstack-vm-quantum
@@ -755,6 +776,7 @@ projects:
       - gate-python-glanceclient-python27
       - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
+      - gate-tempest-devstack-vm-cells-full
       - gate-tempest-devstack-vm-postgres-full
       - gate-tempest-devstack-vm-cinder
       - gate-tempest-devstack-vm-quantum
@@ -778,6 +800,7 @@ projects:
       - gate-python-keystoneclient-python27
       - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
+      - gate-tempest-devstack-vm-cells-full
       - gate-tempest-devstack-vm-postgres-full
       - gate-tempest-devstack-vm-cinder
       - gate-tempest-devstack-vm-quantum
@@ -790,6 +813,7 @@ projects:
       - gate-python-keystoneclient-python27
       - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
+      - gate-tempest-devstack-vm-cells-full
       - gate-tempest-devstack-vm-postgres-full
       - gate-tempest-devstack-vm-cinder
       - gate-tempest-devstack-vm-quantum
@@ -813,6 +837,7 @@ projects:
       - gate-python-novaclient-python27
       - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
+      - gate-tempest-devstack-vm-cells-full
       - gate-tempest-devstack-vm-postgres-full
       - gate-tempest-devstack-vm-cinder
       - gate-tempest-devstack-vm-quantum
@@ -825,6 +850,7 @@ projects:
       - gate-python-novaclient-python27
       - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
+      - gate-tempest-devstack-vm-cells-full
       - gate-tempest-devstack-vm-postgres-full
       - gate-tempest-devstack-vm-cinder
       - gate-tempest-devstack-vm-quantum
@@ -871,6 +897,7 @@ projects:
       - gate-python-quantumclient-python27
       - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
+      - gate-tempest-devstack-vm-cells-full
       - gate-tempest-devstack-vm-postgres-full
       - gate-tempest-devstack-vm-cinder
       - gate-tempest-devstack-vm-quantum
@@ -883,6 +910,7 @@ projects:
       - gate-python-quantumclient-python27
       - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
+      - gate-tempest-devstack-vm-cells-full
       - gate-tempest-devstack-vm-postgres-full
       - gate-tempest-devstack-vm-cinder
       - gate-tempest-devstack-vm-quantum
@@ -970,6 +998,7 @@ projects:
       - gate-pbr-devstack-vm-rawinstall
       - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
+      - gate-tempest-devstack-vm-cells-full
       - gate-tempest-devstack-vm-cinder
       - gate-tempest-devstack-vm-postgres-full
       - gate-tempest-devstack-vm-quantum
@@ -982,6 +1011,7 @@ projects:
       - gate-pbr-devstack-vm-rawinstall
       - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
+      - gate-tempest-devstack-vm-cells-full
       - gate-tempest-devstack-vm-cinder
       - gate-tempest-devstack-vm-postgres-full
       - gate-tempest-devstack-vm-quantum
@@ -1002,6 +1032,7 @@ projects:
     check:
       - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
+      - gate-tempest-devstack-vm-cells-full
       - gate-tempest-devstack-vm-cinder
       - gate-tempest-devstack-vm-postgres-full
       - gate-tempest-devstack-vm-quantum
@@ -1009,6 +1040,7 @@ projects:
     gate:
       - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
+      - gate-tempest-devstack-vm-cells-full
       - gate-tempest-devstack-vm-cinder
       - gate-tempest-devstack-vm-postgres-full
       - gate-tempest-devstack-vm-quantum
@@ -1018,6 +1050,7 @@ projects:
     check:
       - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
+      - gate-tempest-devstack-vm-cells-full
       - gate-tempest-devstack-vm-cinder
       - gate-tempest-devstack-vm-postgres-full
       - gate-tempest-devstack-vm-quantum
@@ -1025,6 +1058,7 @@ projects:
     gate:
       - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
+      - gate-tempest-devstack-vm-cells-full
       - gate-tempest-devstack-vm-cinder
       - gate-tempest-devstack-vm-postgres-full
       - gate-tempest-devstack-vm-quantum
@@ -1045,6 +1079,7 @@ projects:
     gate:
       - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
+      - gate-tempest-devstack-vm-cells-full
       - gate-tempest-devstack-vm-postgres-full
       - gate-tempest-devstack-vm-quantum-full
 
@@ -1055,6 +1090,7 @@ projects:
       - gate-tempest-docs
       - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
+      - gate-tempest-devstack-vm-cells-full
       - gate-tempest-devstack-vm-postgres-full
       - gate-tempest-devstack-vm-cinder
       - gate-tempest-devstack-vm-quantum
@@ -1065,6 +1101,7 @@ projects:
       - gate-tempest-docs
       - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
+      - gate-tempest-devstack-vm-cells-full
       - gate-tempest-devstack-vm-postgres-full
       - gate-tempest-devstack-vm-cinder
       - gate-tempest-devstack-vm-quantum
@@ -1140,6 +1177,7 @@ projects:
       - gate-heat-python26
       - gate-heat-python27
       - gate-tempest-devstack-vm-full
+      - gate-tempest-devstack-vm-cells-full
       - gate-tempest-devstack-vm-postgres-full
       - gate-tempest-devstack-vm-quantum
     gate:
@@ -1148,6 +1186,7 @@ projects:
       - gate-heat-python26
       - gate-heat-python27
       - gate-tempest-devstack-vm-full
+      - gate-tempest-devstack-vm-cells-full
       - gate-tempest-devstack-vm-postgres-full
       - gate-tempest-devstack-vm-quantum
     post:
