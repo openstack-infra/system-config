@@ -1983,6 +1983,16 @@ projects:
     gate:
       - gate-noop
 
+  - name: stackforge/python-climateclient
+    check:
+      - gate-climate-pep8
+      - gate-climate-python26
+      - gate-climate-python27
+    gate:
+      - gate-climate-pep8
+      - gate-climate-python26
+      - gate-climate-python27
+
   - name: stackforge/python-marconiclient
     check:
       - gate-python-marconiclient-pep8
