@@ -20,6 +20,7 @@ class jenkins::params {
       $mod_wsgi_package = 'mod_wsgi'
       $libcurl_dev_package = 'libcurl-devel'
       $ldap_dev_package = 'openldap-devel'
+      $librrd_dev_package = 'rrdtool-devel'
       # packages needed by document translation
       $gnome_doc_package = 'gnome-doc-utils'
       # for keystone ldap auth integration
@@ -81,6 +82,7 @@ class jenkins::params {
       $mod_wsgi_package = 'libapache2-mod-wsgi'
       $libcurl_dev_package = 'libcurl4-gnutls-dev'
       $ldap_dev_package = 'libldap2-dev'
+      $librrd_dev_package = 'librrd-dev'
       # packages needed by document translation
       $gnome_doc_package = 'gnome-doc-utils'
       # for keystone ldap auth integration
