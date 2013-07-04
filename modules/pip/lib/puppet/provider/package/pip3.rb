@@ -124,11 +124,15 @@ Puppet::Type.type(:package).provide :pip3,
     pip *args
   end
 
-  def pip3_cmd
+  def self.pip3_cmd
     ['/usr/bin/python3-pip', '/usr/bin/pip3', '/usr/bin/pip-3.2', '/usr/bin/pip-3.3'].each do |p|
       return p if File.exist?(p)
     end
-    raise Puppet::Error, "Unable to fine pip3 binary.";
+    raise Puppet::Error, "Unable to find pip3 binary.";
+  end
+
+  def pip3_cmd
+    return self.class.pip3_cmd
   end
 
 end
