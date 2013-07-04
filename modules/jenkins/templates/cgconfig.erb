@@ -1,6 +1,6 @@
-<% if operatingsystem == "Fedora" then %>
+<% if operatingsystem == "Fedora" then
 # Fedora auto-mounts subsystems under /sys/fs/cgroup/ already, so no
-# mount section is needed.
+# mount section is needed. %>
 <% elsif osfamily == "RedHat" then %>
 
 mount {
@@ -51,9 +51,9 @@ group jenkins/children {
 	memory {
 		memory.soft_limit_in_bytes = <%= (memorytotalbytes.to_f * 0.75).to_i %>;
 		memory.limit_in_bytes = <%= (memorytotalbytes.to_f * 0.9).to_i %>;
-<% if (operatingsystem == "Fedora") and (operatingsystemrelease == "18") then %>
+<% if (operatingsystem == "Fedora") and (operatingsystemrelease == "18") then
 		# Because of Red Hat bug 918951, swap management doesn't
-		# work in Fedora 18 but should be fixed in 19.
+		# work in Fedora 18 but should be fixed in 19. %>
 <% else %>
 		memory.memsw.limit_in_bytes = <%= (memorytotalbytes.to_f * 0.9).to_i %>;
 <% end %>
