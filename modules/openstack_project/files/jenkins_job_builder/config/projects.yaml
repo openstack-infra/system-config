@@ -596,7 +596,7 @@
 
 
 - project:
-    name: python-quantumclient
+    name: python-neutronclient
     github-org: openstack
     node: precise
     tarball-site: tarballs.openstack.org
@@ -622,7 +622,7 @@
 
 
 - project:
-    name: quantum
+    name: neutron
     github-org: openstack
     node: precise
     tarball-site: tarballs.openstack.org
