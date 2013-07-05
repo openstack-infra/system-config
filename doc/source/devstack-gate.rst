@@ -37,7 +37,7 @@ integration test and ensures that a proposed change still enables
 several of the projects to work together. Any proposed change to the
 configured set of projects must pass the devstack gate test:
 
-Obviously we test nova, glance, keystone, horizon, quantum and their
+Obviously we test nova, glance, keystone, horizon, neutron and their
 clients because they all work closely together to form an OpenStack
 system. Changes to devstack itself are also required to pass this test
 so that we can be assured that devstack is always able to produce a

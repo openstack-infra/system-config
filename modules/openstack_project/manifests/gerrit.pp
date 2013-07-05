@@ -77,7 +77,7 @@ class openstack_project::gerrit (
       'openstack/keystone',
       'openstack/nova',
       'openstack/oslo',
-      'openstack/quantum',
+      'openstack/neutron',
       'openstack/swift',
       'openstack/tempest',
       'openstack-dev/devstack',

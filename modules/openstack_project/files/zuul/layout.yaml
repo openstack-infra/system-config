@@ -70,9 +70,9 @@ jobs:
     branch: stable/folsom
   - name: gate-tempest-devstack-vm-full
     branch: ^(?!stable/folsom).*$
-  - name: gate-tempest-devstack-vm-quantum
+  - name: gate-tempest-devstack-vm-neutron
     branch: ^(?!stable/folsom).*$
-  - name: gate-tempest-devstack-vm-quantum-full
+  - name: gate-tempest-devstack-vm-neutron-full
     branch: ^(?!stable/(folsom|grizzly)).*$
     voting: false
   - name: gate-tempest-devstack-vm-postgres-full
@@ -361,7 +361,7 @@ projects:
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-cinder
       - gate-tempest-devstack-vm-postgres-full
-      - gate-tempest-devstack-vm-quantum
+      - gate-tempest-devstack-vm-neutron
       - gate-grenade-devstack-vm
     gate:
       - gate-cinder-requirements
@@ -373,7 +373,7 @@ projects:
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-cinder
       - gate-tempest-devstack-vm-postgres-full
-      - gate-tempest-devstack-vm-quantum
+      - gate-tempest-devstack-vm-neutron
       - gate-grenade-devstack-vm
     post:
       - cinder-branch-tarball
@@ -397,7 +397,7 @@ projects:
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-cinder
       - gate-tempest-devstack-vm-postgres-full
-      - gate-tempest-devstack-vm-quantum
+      - gate-tempest-devstack-vm-neutron
       - gate-grenade-devstack-vm
     gate:
       - gate-glance-requirements
@@ -409,7 +409,7 @@ projects:
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-cinder
       - gate-tempest-devstack-vm-postgres-full
-      - gate-tempest-devstack-vm-quantum
+      - gate-tempest-devstack-vm-neutron
       - gate-grenade-devstack-vm
     post:
       - glance-branch-tarball
@@ -434,7 +434,7 @@ projects:
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-cinder
       - gate-tempest-devstack-vm-postgres-full
-      - gate-tempest-devstack-vm-quantum
+      - gate-tempest-devstack-vm-neutron
       - gate-grenade-devstack-vm
     gate:
       - gate-horizon-requirements
@@ -448,7 +448,7 @@ projects:
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-cinder
       - gate-tempest-devstack-vm-postgres-full
-      - gate-tempest-devstack-vm-quantum
+      - gate-tempest-devstack-vm-neutron
       - gate-grenade-devstack-vm
     post:
       - horizon-branch-tarball
@@ -471,7 +471,7 @@ projects:
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-cinder
       - gate-tempest-devstack-vm-postgres-full
-      - gate-tempest-devstack-vm-quantum
+      - gate-tempest-devstack-vm-neutron
       - gate-grenade-devstack-vm
     gate:
       - gate-keystone-requirements
@@ -483,7 +483,7 @@ projects:
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-cinder
       - gate-tempest-devstack-vm-postgres-full
-      - gate-tempest-devstack-vm-quantum
+      - gate-tempest-devstack-vm-neutron
       - gate-grenade-devstack-vm
     post:
       - keystone-branch-tarball
@@ -508,7 +508,7 @@ projects:
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-cinder
       - gate-tempest-devstack-vm-postgres-full
-      - gate-tempest-devstack-vm-quantum
+      - gate-tempest-devstack-vm-neutron
       - gate-grenade-devstack-vm
       - gate-nova-pylint
     gate:
@@ -521,7 +521,7 @@ projects:
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-cinder
       - gate-tempest-devstack-vm-postgres-full
-      - gate-tempest-devstack-vm-quantum
+      - gate-tempest-devstack-vm-neutron
       - gate-grenade-devstack-vm
     post:
       - nova-branch-tarball
@@ -615,31 +615,31 @@ projects:
       - oslo.sphinx-tarball:
         - oslo.sphinx-pypi-upload
 
-  - name: openstack/quantum
+  - name: openstack/neutron
     check:
-      - gate-quantum-requirements
-      - gate-quantum-pep8
-      - gate-quantum-docs
-      - gate-quantum-python26
-      - gate-quantum-python27
-      - gate-tempest-devstack-vm-quantum
+      - gate-neutron-requirements
+      - gate-neutron-pep8
+      - gate-neutron-docs
+      - gate-neutron-python26
+      - gate-neutron-python27
+      - gate-tempest-devstack-vm-neutron
     gate:
-      - gate-quantum-requirements
-      - gate-quantum-docs
-      - gate-quantum-pep8
-      - gate-quantum-python26
-      - gate-quantum-python27
-      - gate-tempest-devstack-vm-quantum
+      - gate-neutron-requirements
+      - gate-neutron-docs
+      - gate-neutron-pep8
+      - gate-neutron-python26
+      - gate-neutron-python27
+      - gate-tempest-devstack-vm-neutron
     post:
-      - quantum-branch-tarball
-      - quantum-coverage
-      - quantum-docs
-      - quantum-upstream-translation-update
+      - neutron-branch-tarball
+      - neutron-coverage
+      - neutron-docs
+      - neutron-upstream-translation-update
     pre-release:
-      - quantum-tarball
+      - neutron-tarball
     release:
-      - quantum-tarball
-      - quantum-docs
+      - neutron-tarball
+      - neutron-docs
 
   - name: openstack/swift
     check:
@@ -651,7 +651,7 @@ projects:
       - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-cinder
-      - gate-tempest-devstack-vm-quantum
+      - gate-tempest-devstack-vm-neutron
       - gate-tempest-devstack-vm-postgres-full
       - gate-grenade-devstack-vm
     gate:
@@ -663,7 +663,7 @@ projects:
       - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-cinder
-      - gate-tempest-devstack-vm-quantum
+      - gate-tempest-devstack-vm-neutron
       - gate-tempest-devstack-vm-postgres-full
       - gate-grenade-devstack-vm
     post:
@@ -710,7 +710,7 @@ projects:
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-postgres-full
       - gate-tempest-devstack-vm-cinder
-      - gate-tempest-devstack-vm-quantum
+      - gate-tempest-devstack-vm-neutron
       - gate-grenade-devstack-vm
     gate:
       - gate-python-cinderclient-requirements
@@ -722,7 +722,7 @@ projects:
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-postgres-full
       - gate-tempest-devstack-vm-cinder
-      - gate-tempest-devstack-vm-quantum
+      - gate-tempest-devstack-vm-neutron
       - gate-grenade-devstack-vm
     post:
       - python-cinderclient-branch-tarball
@@ -745,7 +745,7 @@ projects:
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-postgres-full
       - gate-tempest-devstack-vm-cinder
-      - gate-tempest-devstack-vm-quantum
+      - gate-tempest-devstack-vm-neutron
       - gate-grenade-devstack-vm
     gate:
       - gate-python-glanceclient-requirements
@@ -757,7 +757,7 @@ projects:
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-postgres-full
       - gate-tempest-devstack-vm-cinder
-      - gate-tempest-devstack-vm-quantum
+      - gate-tempest-devstack-vm-neutron
       - gate-grenade-devstack-vm
     post:
       - python-glanceclient-branch-tarball
@@ -780,7 +780,7 @@ projects:
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-postgres-full
       - gate-tempest-devstack-vm-cinder
-      - gate-tempest-devstack-vm-quantum
+      - gate-tempest-devstack-vm-neutron
       - gate-grenade-devstack-vm
     gate:
       - gate-python-keystoneclient-requirements
@@ -792,7 +792,7 @@ projects:
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-postgres-full
       - gate-tempest-devstack-vm-cinder
-      - gate-tempest-devstack-vm-quantum
+      - gate-tempest-devstack-vm-neutron
       - gate-grenade-devstack-vm
     post:
       - python-keystoneclient-branch-tarball
@@ -815,7 +815,7 @@ projects:
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-postgres-full
       - gate-tempest-devstack-vm-cinder
-      - gate-tempest-devstack-vm-quantum
+      - gate-tempest-devstack-vm-neutron
       - gate-grenade-devstack-vm
     gate:
       - gate-python-novaclient-requirements
@@ -827,7 +827,7 @@ projects:
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-postgres-full
       - gate-tempest-devstack-vm-cinder
-      - gate-tempest-devstack-vm-quantum
+      - gate-tempest-devstack-vm-neutron
       - gate-grenade-devstack-vm
     post:
       - python-novaclient-branch-tarball
@@ -862,40 +862,40 @@ projects:
         - python-openstackclient-pypi-upload
       - python-openstackclient-docs
 
-  - name: openstack/python-quantumclient
+  - name: openstack/python-neutronclient
     check:
-      - gate-python-quantumclient-requirements
-      - gate-python-quantumclient-pep8
-      - gate-python-quantumclient-docs
-      - gate-python-quantumclient-python26
-      - gate-python-quantumclient-python27
+      - gate-python-neutronclient-requirements
+      - gate-python-neutronclient-pep8
+      - gate-python-neutronclient-docs
+      - gate-python-neutronclient-python26
+      - gate-python-neutronclient-python27
       - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-postgres-full
       - gate-tempest-devstack-vm-cinder
-      - gate-tempest-devstack-vm-quantum
+      - gate-tempest-devstack-vm-neutron
       - gate-grenade-devstack-vm
     gate:
-      - gate-python-quantumclient-requirements
-      - gate-python-quantumclient-docs
-      - gate-python-quantumclient-pep8
-      - gate-python-quantumclient-python26
-      - gate-python-quantumclient-python27
+      - gate-python-neutronclient-requirements
+      - gate-python-neutronclient-docs
+      - gate-python-neutronclient-pep8
+      - gate-python-neutronclient-python26
+      - gate-python-neutronclient-python27
       - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-postgres-full
       - gate-tempest-devstack-vm-cinder
-      - gate-tempest-devstack-vm-quantum
+      - gate-tempest-devstack-vm-neutron
       - gate-grenade-devstack-vm
     post:
-      - python-quantumclient-branch-tarball
-      - python-quantumclient-coverage
+      - python-neutronclient-branch-tarball
+      - python-neutronclient-coverage
     pre-release:
-      - python-quantumclient-tarball
+      - python-neutronclient-tarball
     release:
-      - python-quantumclient-tarball:
-        - python-quantumclient-pypi-upload
-      - python-quantumclient-docs
+      - python-neutronclient-tarball:
+        - python-neutronclient-pypi-upload
+      - python-neutronclient-docs
 
   - name: openstack/python-swiftclient
     check:
@@ -972,7 +972,7 @@ projects:
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-cinder
       - gate-tempest-devstack-vm-postgres-full
-      - gate-tempest-devstack-vm-quantum
+      - gate-tempest-devstack-vm-neutron
       - gate-grenade-devstack-vm
     gate:
       - gate-pbr-docs
@@ -984,7 +984,7 @@ projects:
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-cinder
       - gate-tempest-devstack-vm-postgres-full
-      - gate-tempest-devstack-vm-quantum
+      - gate-tempest-devstack-vm-neutron
       - gate-grenade-devstack-vm
     post:
       - pbr-branch-tarball
@@ -1004,14 +1004,14 @@ projects:
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-cinder
       - gate-tempest-devstack-vm-postgres-full
-      - gate-tempest-devstack-vm-quantum
+      - gate-tempest-devstack-vm-neutron
       - gate-grenade-devstack-vm
     gate:
       - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-cinder
       - gate-tempest-devstack-vm-postgres-full
-      - gate-tempest-devstack-vm-quantum
+      - gate-tempest-devstack-vm-neutron
       - gate-grenade-devstack-vm
 
   - name: openstack-infra/devstack-gate
@@ -1020,19 +1020,19 @@ projects:
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-cinder
       - gate-tempest-devstack-vm-postgres-full
-      - gate-tempest-devstack-vm-quantum
+      - gate-tempest-devstack-vm-neutron
       - gate-grenade-devstack-vm
     gate:
       - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-cinder
       - gate-tempest-devstack-vm-postgres-full
-      - gate-tempest-devstack-vm-quantum
+      - gate-tempest-devstack-vm-neutron
       - gate-grenade-devstack-vm
 
   # This is not strictly necessary; there is currently a transitive
   # relationship between g-t-devstack-vm,
-  # g-t-devstack-vm-{postgres,cinder,quantum} and g-t-devstack-vm-full
+  # g-t-devstack-vm-{postgres,cinder,neutron} and g-t-devstack-vm-full
   # that will ensure that these projects end up in the same shared
   # change queue, however, this fake project makes it explicit that
   # g-t-devstack-vm and g-t-devstack-vm-full must share a change
@@ -1046,7 +1046,7 @@ projects:
       - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-postgres-full
-      - gate-tempest-devstack-vm-quantum-full
+      - gate-tempest-devstack-vm-neutron-full
 
   - name: openstack/tempest
     check:
@@ -1057,8 +1057,8 @@ projects:
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-postgres-full
       - gate-tempest-devstack-vm-cinder
-      - gate-tempest-devstack-vm-quantum
-      - gate-tempest-devstack-vm-quantum-full
+      - gate-tempest-devstack-vm-neutron
+      - gate-tempest-devstack-vm-neutron-full
     gate:
       - gate-tempest-requirements
       - gate-tempest-pep8
@@ -1067,8 +1067,8 @@ projects:
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-postgres-full
       - gate-tempest-devstack-vm-cinder
-      - gate-tempest-devstack-vm-quantum
-      - gate-tempest-devstack-vm-quantum-full
+      - gate-tempest-devstack-vm-neutron
+      - gate-tempest-devstack-vm-neutron-full
     post:
       - tempest-docs
 
@@ -1141,7 +1141,7 @@ projects:
       - gate-heat-python27
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-postgres-full
-      - gate-tempest-devstack-vm-quantum
+      - gate-tempest-devstack-vm-neutron
     gate:
       - gate-heat-requirements
       - gate-heat-pep8
@@ -1149,7 +1149,7 @@ projects:
       - gate-heat-python27
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-postgres-full
-      - gate-tempest-devstack-vm-quantum
+      - gate-tempest-devstack-vm-neutron
     post:
       - heat-branch-tarball
       - heat-coverage

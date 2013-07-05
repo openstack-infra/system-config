@@ -54,10 +54,10 @@ openstack-dev:
       - openstack/python-keystoneclient
       - openstack/python-novaclient
       - openstack/python-openstackclient
-      - openstack/python-quantumclient
+      - openstack/python-neutronclient
       - openstack/python-swiftclient
       - openstack/python-troveclient
-      - openstack/quantum
+      - openstack/neutron
       - openstack/swift
       - openstack/tempest
       - openstack/trove
@@ -154,14 +154,14 @@ heat:
     branches:
       - master
 
-openstack-quantum:
+openstack-neutron:
     events:
       - patchset-created
       - change-merged
       - x-vrif-minus-2
     projects:
-      - openstack/quantum
-      - openstack/python-quantumclient
+      - openstack/neutron
+      - openstack/python-neutronclient
     branches:
       - master
 
