@@ -20,7 +20,8 @@
 
     builders:
       - gerrit-git-prep
-      - puppet-lint
+      - puppet-lint:
+          project: '{name}'
 
     publishers:
       - console-log
