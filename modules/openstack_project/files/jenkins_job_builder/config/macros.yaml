@@ -66,10 +66,10 @@
     name: puppet-lint
     builders:
       - shell: |
-          test -d modules || {
+          if [ ! -d modules ]; then
             ln -s . {project}
             cd {project}
-          }
+          fi
           rake lint
 
 - builder:
