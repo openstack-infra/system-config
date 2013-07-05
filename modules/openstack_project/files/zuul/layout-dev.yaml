@@ -18,9 +18,9 @@ jobs:
     branch: stable/folsom
   - name: gate-tempest-devstack-vm-full
     branch: ^(?!stable/folsom).*$
-  - name: gate-tempest-devstack-vm-quantum
+  - name: gate-tempest-devstack-vm-neutron
     branch: ^(?!stable/folsom).*$
-  - name: gate-tempest-devstack-vm-quantum-full
+  - name: gate-tempest-devstack-vm-neutron-full
     branch: ^(?!stable/(folsom|grizzly)).*$
     voting: false
   - name: gate-tempest-devstack-vm-postgres-full
@@ -163,7 +163,7 @@ projects:
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-cinder
       - gate-tempest-devstack-vm-postgres-full
-      - gate-tempest-devstack-vm-quantum
+      - gate-tempest-devstack-vm-neutron
       - gate-grenade-devstack-vm
 
   - name: openstack/glance
@@ -177,7 +177,7 @@ projects:
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-cinder
       - gate-tempest-devstack-vm-postgres-full
-      - gate-tempest-devstack-vm-quantum
+      - gate-tempest-devstack-vm-neutron
       - gate-grenade-devstack-vm
 
   - name: openstack/horizon
@@ -192,7 +192,7 @@ projects:
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-cinder
       - gate-tempest-devstack-vm-postgres-full
-      - gate-tempest-devstack-vm-quantum
+      - gate-tempest-devstack-vm-neutron
       - gate-grenade-devstack-vm
 
   - name: openstack/keystone
@@ -206,7 +206,7 @@ projects:
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-cinder
       - gate-tempest-devstack-vm-postgres-full
-      - gate-tempest-devstack-vm-quantum
+      - gate-tempest-devstack-vm-neutron
       - gate-grenade-devstack-vm
 
   - name: openstack/nova
@@ -220,7 +220,7 @@ projects:
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-cinder
       - gate-tempest-devstack-vm-postgres-full
-      - gate-tempest-devstack-vm-quantum
+      - gate-tempest-devstack-vm-neutron
       - gate-grenade-devstack-vm
       - gate-nova-pylint
 
@@ -249,14 +249,14 @@ projects:
       - gate-oslo.messaging-python26
       - gate-oslo.messaging-python27
 
-  - name: openstack/quantum
+  - name: openstack/neutron
     check:
-      - gate-quantum-requirements
-      - gate-quantum-pep8
-      - gate-quantum-docs
-      - gate-quantum-python26
-      - gate-quantum-python27
-      - gate-tempest-devstack-vm-quantum
+      - gate-neutron-requirements
+      - gate-neutron-pep8
+      - gate-neutron-docs
+      - gate-neutron-python26
+      - gate-neutron-python27
+      - gate-tempest-devstack-vm-neutron
 
   - name: openstack/swift
     check:
@@ -268,7 +268,7 @@ projects:
       - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-cinder
-      - gate-tempest-devstack-vm-quantum
+      - gate-tempest-devstack-vm-neutron
       - gate-tempest-devstack-vm-postgres-full
       - gate-grenade-devstack-vm
 
@@ -291,7 +291,7 @@ projects:
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-postgres-full
       - gate-tempest-devstack-vm-cinder
-      - gate-tempest-devstack-vm-quantum
+      - gate-tempest-devstack-vm-neutron
       - gate-grenade-devstack-vm
 
   - name: openstack/python-glanceclient
@@ -305,7 +305,7 @@ projects:
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-postgres-full
       - gate-tempest-devstack-vm-cinder
-      - gate-tempest-devstack-vm-quantum
+      - gate-tempest-devstack-vm-neutron
       - gate-grenade-devstack-vm
 
   - name: openstack/python-keystoneclient
@@ -319,7 +319,7 @@ projects:
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-postgres-full
       - gate-tempest-devstack-vm-cinder
-      - gate-tempest-devstack-vm-quantum
+      - gate-tempest-devstack-vm-neutron
       - gate-grenade-devstack-vm
 
   - name: openstack/python-novaclient
@@ -333,7 +333,7 @@ projects:
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-postgres-full
       - gate-tempest-devstack-vm-cinder
-      - gate-tempest-devstack-vm-quantum
+      - gate-tempest-devstack-vm-neutron
       - gate-grenade-devstack-vm
 
   - name: openstack/python-openstackclient
@@ -344,18 +344,18 @@ projects:
       - gate-python-openstackclient-python26
       - gate-python-openstackclient-python27
 
-  - name: openstack/python-quantumclient
+  - name: openstack/python-neutronclient
     check:
-      - gate-python-quantumclient-requirements
-      - gate-python-quantumclient-pep8
-      - gate-python-quantumclient-docs
-      - gate-python-quantumclient-python26
-      - gate-python-quantumclient-python27
+      - gate-python-neutronclient-requirements
+      - gate-python-neutronclient-pep8
+      - gate-python-neutronclient-docs
+      - gate-python-neutronclient-python26
+      - gate-python-neutronclient-python27
       - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-postgres-full
       - gate-tempest-devstack-vm-cinder
-      - gate-tempest-devstack-vm-quantum
+      - gate-tempest-devstack-vm-neutron
       - gate-grenade-devstack-vm
 
   - name: openstack/python-swiftclient
@@ -395,7 +395,7 @@ projects:
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-cinder
       - gate-tempest-devstack-vm-postgres-full
-      - gate-tempest-devstack-vm-quantum
+      - gate-tempest-devstack-vm-neutron
       - gate-grenade-devstack-vm
 
   - name: openstack-infra/devstack-gate
@@ -404,7 +404,7 @@ projects:
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-cinder
       - gate-tempest-devstack-vm-postgres-full
-      - gate-tempest-devstack-vm-quantum
+      - gate-tempest-devstack-vm-neutron
       - gate-grenade-devstack-vm
 
   - name: z/tempest
@@ -417,8 +417,8 @@ projects:
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-postgres-full
       - gate-tempest-devstack-vm-cinder
-      - gate-tempest-devstack-vm-quantum
-      - gate-tempest-devstack-vm-quantum-full
+      - gate-tempest-devstack-vm-neutron
+      - gate-tempest-devstack-vm-neutron-full
 
   - name: openstack/ceilometer
     check:

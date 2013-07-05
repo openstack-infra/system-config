@@ -100,7 +100,7 @@
 
 
 - job:
-    name: gate-tempest-devstack-vm-quantum
+    name: gate-tempest-devstack-vm-neutron
     node: devstack-precise
 
     wrappers:
@@ -122,7 +122,7 @@
           #!/bin/bash -xe
           export PYTHONUNBUFFERED=true
           export DEVSTACK_GATE_TEMPEST=1
-          export DEVSTACK_GATE_QUANTUM=1
+          export DEVSTACK_GATE_NEUTRON=1
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
       - link-logs
@@ -134,7 +134,7 @@
 
 
 - job:
-    name: gate-tempest-devstack-vm-quantum-full
+    name: gate-tempest-devstack-vm-neutron-full
     node: devstack-precise
 
     wrappers:
@@ -157,7 +157,7 @@
           export PYTHONUNBUFFERED=true
           export DEVSTACK_GATE_TEMPEST=1
           export DEVSTACK_GATE_TEMPEST_FULL=1
-          export DEVSTACK_GATE_QUANTUM=1
+          export DEVSTACK_GATE_NEUTRON=1
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
       - link-logs
@@ -325,7 +325,7 @@
 
 
 - job:
-    name: periodic-tempest-devstack-vm-quantum-stable-grizzly
+    name: periodic-tempest-devstack-vm-neutron-stable-grizzly
     node: devstack-precise
 
     wrappers:
@@ -350,7 +350,7 @@
           #!/bin/bash -xe
           export PYTHONUNBUFFERED=true
           export DEVSTACK_GATE_TEMPEST=1
-          export DEVSTACK_GATE_QUANTUM=1
+          export DEVSTACK_GATE_NEUTRON=1
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
       - link-logs
