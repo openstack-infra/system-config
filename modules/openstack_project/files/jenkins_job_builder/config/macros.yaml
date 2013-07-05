@@ -66,10 +66,15 @@
     name: puppet-lint
     builders:
       - shell: |
-          test -d modules || {
-            ln -s . {project}
-            cd {project}
-          }
+          if [ -f Modulefile ]; then
+              MODULE=$(awk '/^name/ {print $NF}' Modulefile |tr -d \"\')
+              if [ -z "$MODULE" ]; then
+                  echo "Module name not defined in Modulefile"
+              else
+                  ln -s . $MODULE
+                  cd $MODULE
+              fi
+          fi
           rake lint
 
 - builder:
