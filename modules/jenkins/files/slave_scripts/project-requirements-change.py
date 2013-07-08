@@ -37,7 +37,9 @@ class RequirementsList(object):
         self.reqs = {}
         self.failed = False
 
-    def read_requirements(self, fn):
+    def read_requirements(self, fn, ignore_dups=False):
+        if not os.path.exists(fn):
+            return
         for line in open(fn):
             line = line[:line.find('#')]
             line = line.strip()
@@ -47,21 +49,22 @@ class RequirementsList(object):
                 line.startswith('-f')):
                 continue
             req = pkg_resources.Requirement.parse(line)
-            if req.project_name.lower() in self.reqs:
+            if not ignore_dups and req.project_name.lower() in self.reqs:
                 print("Duplicate requirement in %s: %s" %
                       (self.name, str(req)))
                 self.failed = True
             self.reqs[req.project_name.lower()] = req
 
-    def read_all_requirements(self):
+    def read_all_requirements(self, include_dev=False):
         for fn in ['tools/pip-requires',
                    'tools/test-requires',
                    'requirements.txt',
                    'test-requirements.txt',
                    ]:
-            if os.path.exists(fn):
-                self.read_requirements(fn)
-
+            self.read_requirements(fn)
+        if include_dev:
+            self.read_requirements('dev-requirements.txt',
+                                   ignore_dups=True)
 
 def main():
     branch = sys.argv[1]
@@ -85,7 +88,7 @@ def main():
     print "requirements git sha: %s" % run_command(
         "git rev-parse HEAD").strip()
     os_reqs = RequirementsList('openstack/requirements')
-    os_reqs.read_all_requirements()
+    os_reqs.read_all_requirements(include_dev=(branch=='master'))
 
     failed = False
     for req in head_reqs.reqs.values():
