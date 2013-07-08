@@ -63,6 +63,11 @@
       - shell: "/usr/local/jenkins/slave_scripts/run-pyflakes.sh {github-org} {project}"
 
 - builder:
+    name: check-migration
+    builders:
+      - shell: "/usr/local/jenkins/slave_scripts/run-check-migration.sh {github-org} {project}"
+
+- builder:
     name: puppet-lint
     builders:
       - shell: |

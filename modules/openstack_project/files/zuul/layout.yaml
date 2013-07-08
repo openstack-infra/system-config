@@ -95,6 +95,9 @@ jobs:
     branch: ^(?!stable/folsom).*$
   - name: gate-oslo-incubator-pyflakes
     branch: ^(?!stable/folsom).*$
+  - name: gate-neutron-check-migration
+    branch: ^(?!stable/(folsom)).*$
+    voting: false
   - name: dev-zuul-coverage
     voting: false
   - name: jenkins-job-builder-compare-xml
@@ -623,6 +626,7 @@ projects:
       - gate-neutron-python26
       - gate-neutron-python27
       - gate-tempest-devstack-vm-neutron
+      - gate-neutron-check-migration
     gate:
       - gate-neutron-requirements
       - gate-neutron-docs
@@ -630,6 +634,7 @@ projects:
       - gate-neutron-python26
       - gate-neutron-python27
       - gate-tempest-devstack-vm-neutron
+      - gate-neutron-check-migration
     post:
       - neutron-branch-tarball
       - neutron-coverage

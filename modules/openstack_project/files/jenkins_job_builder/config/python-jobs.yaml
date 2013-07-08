@@ -226,6 +226,21 @@
       - console-log
 
 
+- job-template:
+    name: 'gate-{name}-check-migration'
+
+    builders:
+      - gerrit-git-prep
+      - check-migration:
+          github-org: '{github-org}'
+          project: '{name}'
+
+    publishers:
+      - console-log
+
+    node: '{node}'
+
+
 - job-group:
     name: python-jobs
     jobs:
