@@ -1378,6 +1378,7 @@ projects:
       - openstack-ha-guide
       - openstack-install-deploy-guide-apt-fedora
       - openstack-install-deploy-guide-ubuntu
+      - openstack-security-guide
       - manuals-upstream-translation-update
 
   - name: openstack/operations-guide
