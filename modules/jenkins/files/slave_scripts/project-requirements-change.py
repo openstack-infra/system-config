@@ -42,7 +42,8 @@ class RequirementsList(object):
             line = line[:line.find('#')]
             line = line.strip()
             if (not line or
-                line.startswith('http') or
+                line.startswith('http://') or
+                line.startswith('https://') or
                 line.startswith('-e') or
                 line.startswith('-f')):
                 continue
