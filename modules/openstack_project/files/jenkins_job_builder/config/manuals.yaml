@@ -25,6 +25,32 @@
               copy-after-failure: true
 
 - job:
+    name: openstack-security-guide
+    project-type: maven
+    node: precise
+
+    prebuilders:
+      - gerrit-git-prep
+
+    maven:
+      maven-name: Maven3
+      root-module:
+        group-id: org.openstack.docs
+        artifact-id: openstack-guide
+      root-pom: doc/src/docbkx/openstack-security-guide/pom.xml
+      goals: 'clean generate-sources'
+
+    publishers:
+      - console-log
+      - scp:
+          site: 'static.openstack.org'
+          files:
+            - target: 'docs-draft/$JOB_NAME/$ZUUL_PIPELINE/$BUILD_NUMBER/'
+              source: 'doc/src/docbkx/openstack-security-guide/target/docbkx/webhelp/**'
+              keep-hierarchy: true
+              copy-after-failure: true
+
+- job:
     name: gate-openstack-manuals-operations-guide
     project-type: maven
     node: precise
