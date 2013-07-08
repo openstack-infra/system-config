@@ -10,7 +10,7 @@
       - inject:
           script-file: /usr/local/jenkins/slave_scripts/maven-properties.sh
       - inject:
-          properties-file: ${WORKSPACE}/maven.properties
+          properties-file: maven.properties
 
     maven:
       maven-name: Maven3
@@ -35,7 +35,7 @@
       - inject:
           script-file: /usr/local/jenkins/slave_scripts/maven-properties.sh
       - inject:
-          properties-file: ${WORKSPACE}/maven.properties
+          properties-file: maven.properties
 
     maven:
       maven-name: Maven3
