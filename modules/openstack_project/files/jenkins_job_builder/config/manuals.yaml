@@ -467,7 +467,7 @@
         group-id: org.openstack.docs
         artifact-id: openstack-guide
       root-pom: doc/src/docbkx/openstack-ops/pom.xml
-      goals: '-Doperating.system=apt -Dprofile.os=ubuntu -Drelease.path.name=${DOC_RELEASE_PATH} -Dcomments.enabled=${DOC_COMMENTS_ENABLED} clean generate-sources'
+      goals: '-Drelease.path.name=${DOC_RELEASE_PATH} -Dcomments.enabled=${DOC_COMMENTS_ENABLED} clean generate-sources'
 
     publishers:
       - console-log-post
@@ -476,4 +476,35 @@
           source: 'doc/src/docbkx/openstack-ops/target/docbkx/webhelp/**'
           target: '/'
           remove-prefix: 'doc/src/docbkx/openstack-ops/target/docbkx/webhelp/'
+          excludes: '**/*.xml,**/null*'
+
+- job:
+    name: openstack-security-guide
+    project-type: maven
+    concurrent: false
+    node: precise
+
+    properties:
+      - inject:
+          script-file: /usr/local/jenkins/slave_scripts/docbook-properties.sh
+          properties-file: gerrit-doc.properties
+
+    prebuilders:
+      - gerrit-git-prep
+
+    maven:
+      maven-name: Maven3
+      root-module:
+        group-id: org.openstack.docs
+        artifact-id: openstack-guide
+      root-pom: doc/src/docbkx/openstack-security-guide/pom.xml
+      goals: '-Drelease.path.name=${DOC_RELEASE_PATH} -Dcomments.enabled=${DOC_COMMENTS_ENABLED} clean generate-sources'
+
+    publishers:
+      - console-log-post
+      - ftp:
+          site: docs.openstack.org
+          source: 'doc/src/docbkx/openstack-security-guide/target/docbkx/webhelp/**'
+          target: '/'
+          remove-prefix: 'doc/src/docbkx/openstack-security-guide/target/docbkx/webhelp/'
           excludes: '**/*.xml,**/null*'
