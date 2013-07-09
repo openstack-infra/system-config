@@ -50,7 +50,7 @@
           site: 'tarballs.openstack.org'
           warfile: 'target/{name}.hpi'
           target: 'tarballs/ci/{name}/{name}-${{PROJECT_VER}}.hpi'
-      - console-log-post
+      - console-log
 
 - job-template:
     name: '{name}-jenkinsci-upload'
@@ -72,7 +72,7 @@
           /usr/local/jenkins/slave_scripts/maven-upload.sh {name} $JENKINSCI_REPO $JENKINSCI_REPO_CREDS
 
     publishers:
-      - console-log-post
+      - console-log
 
 - job-group:
     name: jenkins-plugin-jobs
