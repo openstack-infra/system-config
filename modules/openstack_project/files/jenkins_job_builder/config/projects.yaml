@@ -715,7 +715,7 @@
     github-org: stackforge
     node: precise
     tarball-site: tarballs.openstack.org
-    rtfd-id: 5190
+    rtfd-id: 7957
 
     jobs:
       - python-jobs
@@ -762,7 +762,7 @@
     github-org: stackforge
     node: precise
     tarball-site: tarballs.openstack.org
-    rtfd-id: 5366
+    rtfd-id: 7963
 
     jobs:
       - python-jobs
