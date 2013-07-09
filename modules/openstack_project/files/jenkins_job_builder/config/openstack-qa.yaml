@@ -17,4 +17,4 @@
             - target: 'qa'
               source: 'build/sphinx/html/**/*'
               keep-hierarchy: true
-      - console-log-post
+      - console-log

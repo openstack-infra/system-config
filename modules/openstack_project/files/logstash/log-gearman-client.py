@@ -74,19 +74,13 @@ class EventProcessor(threading.Thread):
             except:
                 logging.exception("Exception submitting job to Gearman.")
 
-    log_dirs = {
-        'check': "/{build_change}/{build_patchset}/{build_queue}/"
-                 "{build_name}/{build_number}/",
-        'gate': "/{build_change}/{build_patchset}/{build_queue}/"
-                "{build_name}/{build_number}/",
-        'post': "/{build_shortref}/{build_queue}/{build_name}/"
-                "{build_number}/",
-        'pre-release': "/{build_shortref}/{build_queue}/{build_name}/"
-                       "{build_number}/",
-        'release': "/{build_shortref}/{build_queue}/{build_name}/"
-                   "{build_number}/",
-        'UNKNOWN': "/periodic/{build_name}/{build_number}/",
-    }
+    def _get_log_dir(self, event):
+        parameters = event["build"].get("parameters", {})
+        base = parameters.get('BASE_LOG_PATH', '/periodic')
+        base += '/{name}/{number}/'.format(
+            name=event.get("name", "UNKNOWN"),
+            number=event["build"].get("number", "UNKNOWN"))
+        return base
 
     def _parse_fields(self, event, filename):
         fields = {}
@@ -107,7 +101,7 @@ class EventProcessor(threading.Thread):
 
     def _parse_event(self, event, fileopts):
         fields = self._parse_fields(event, fileopts['name'])
-        log_dir = self.log_dirs.get(fields["build_queue"], "").format(**fields)
+        log_dir = self._get_log_dir(event)
         source_url = fileopts.get('source-url', self.source_url) + \
                 log_dir + fileopts['name']
         out_event = {}

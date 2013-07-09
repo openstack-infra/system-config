@@ -187,10 +187,8 @@
     builders:
       - shell: |
           #!/bin/sh
-          if test "$ZUUL_CHANGE" ; then
-              echo "Detailed logs: http://logs.openstack.org/$ZUUL_CHANGE/$ZUUL_PATCHSET/$ZUUL_PIPELINE/$JOB_NAME/$BUILD_NUMBER/"
-          elif test "$ZUUL_SHORT_NEWREV" ; then
-              echo "Detailed logs: http://logs.openstack.org/$ZUUL_SHORT_NEWREV/$ZUUL_PIPELINE/$JOB_NAME/$BUILD_NUMBER/"
+          if test "$BASE_LOG_PATH" ; then
+              echo "Detailed logs: http://logs.openstack.org/$BASE_LOG_PATH/$JOB_NAME/$BUILD_NUMBER/"
           else
               echo "Detailed logs: http://logs.openstack.org/periodic/$JOB_NAME/$BUILD_NUMBER/"
           fi
@@ -235,17 +233,7 @@
       - scp:
           site: 'static.openstack.org'
           files:
-            - target: 'logs/$ZUUL_CHANGE/$ZUUL_PATCHSET/$ZUUL_PIPELINE/$JOB_NAME/$BUILD_NUMBER'
-              copy-console: true
-              copy-after-failure: true
-
-- publisher:
-    name: console-log-post
-    publishers:
-      - scp:
-          site: 'static.openstack.org'
-          files:
-            - target: 'logs/$ZUUL_SHORT_NEWREV/$ZUUL_PIPELINE/$JOB_NAME/$BUILD_NUMBER'
+            - target: 'logs/$BASE_LOG_PATH/$JOB_NAME/$BUILD_NUMBER'
               copy-console: true
               copy-after-failure: true
 
@@ -265,15 +253,15 @@
       - scp:
           site: 'static.openstack.org'
           files:
-            - target: 'logs/$ZUUL_CHANGE/$ZUUL_PATCHSET/$ZUUL_PIPELINE/$JOB_NAME/$BUILD_NUMBER'
+            - target: 'logs/$BASE_LOG_PATH/$JOB_NAME/$BUILD_NUMBER'
               source: 'logs/**'
               keep-hierarchy: true
               copy-after-failure: true
-            - target: 'logs/$ZUUL_CHANGE/$ZUUL_PATCHSET/$ZUUL_PIPELINE/$JOB_NAME/$BUILD_NUMBER'
+            - target: 'logs/$BASE_LOG_PATH/$JOB_NAME/$BUILD_NUMBER'
               source: '**/testr_results.html.gz'
               keep-hierarchy: false
               copy-after-failure: true
-            - target: 'logs/$ZUUL_CHANGE/$ZUUL_PATCHSET/$ZUUL_PIPELINE/$JOB_NAME/$BUILD_NUMBER'
+            - target: 'logs/$BASE_LOG_PATH/$JOB_NAME/$BUILD_NUMBER'
               source: '**/subunit_log.txt.gz'
               keep-hierarchy: false
               copy-after-failure: true
@@ -315,18 +303,30 @@
       - scp:
           site: 'static.openstack.org'
           files:
-            - target: 'logs/$ZUUL_CHANGE/$ZUUL_PATCHSET/$ZUUL_PIPELINE/$JOB_NAME/$BUILD_NUMBER'
+            - target: 'logs/$BASE_LOG_PATH/$JOB_NAME/$BUILD_NUMBER'
               source: 'cover/**'
               keep-hierarchy: true
               copy-after-failure: true
 
 - publisher:
-    name: coverage-log-post
+    name: test-results
     publishers:
       - scp:
           site: 'static.openstack.org'
           files:
-            - target: 'logs/$ZUUL_SHORT_NEWREV/$ZUUL_PIPELINE/$JOB_NAME/$BUILD_NUMBER'
-              source: 'cover/**'
-              keep-hierarchy: true
+            - target: 'logs/$BASE_LOG_PATH/$JOB_NAME/$BUILD_NUMBER'
+              source: '**/*nose_results.html'
+              keep-hierarchy: false
+              copy-after-failure: true
+            - target: 'logs/$BASE_LOG_PATH/$JOB_NAME/$BUILD_NUMBER'
+              source: '**/*testr_results.html.gz'
+              keep-hierarchy: false
+              copy-after-failure: true
+            - target: 'logs/$BASE_LOG_PATH/$JOB_NAME/$BUILD_NUMBER'
+              source: '.testrepository/tmp*'
+              keep-hierarchy: false
+              copy-after-failure: true
+            - target: 'logs/$BASE_LOG_PATH/$JOB_NAME/$BUILD_NUMBER'
+              source: '**/*subunit_log.txt.gz'
+              keep-hierarchy: false
               copy-after-failure: true
