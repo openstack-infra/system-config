@@ -22,9 +22,14 @@
           export PYTHONUNBUFFERED=true
           export DEVSTACK_GATE_TEMPEST=0
           export DEVSTACK_GATE_EXERCISES=0
-          function post_test_hook {
-              bash -xe $BASE/new/pbr/tools/integration.sh $PROJECTS $BASE
+          function gate_hook {
+              bash -xe $GATE_SCRIPT_DIR/devstack-vm-gate.sh && \
+                       $BASE/new/pbr/tools/integration.sh $PROJECTS $BASE
           }
+          function post_test_hook {
+              cp /home/jenkins/.pip/pip.log ./pip.log
+          }
+          export -f gate_hook
           export -f post_test_hook
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
@@ -35,7 +40,7 @@
           site: 'static.openstack.org'
           files:
             - target: 'logs/$ZUUL_CHANGE/$ZUUL_PATCHSET/$ZUUL_PIPELINE/$JOB_NAME/$BUILD_NUMBER'
-              source: '/home/jenkins/.pip/pip.log'
+              source: '**/pip.log'
               keep-hierarchy: false
               copy-after-failure: true
       - console-log
