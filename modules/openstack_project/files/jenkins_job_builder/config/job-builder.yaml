@@ -16,7 +16,7 @@
             - target: 'ci/jenkins-job-builder'
               source: 'doc/build/html/**/*'
               keep-hierarchy: true
-      - console-log-post
+      - console-log
 
 - job:
     name: jenkins-job-builder-compare-xml

@@ -36,7 +36,7 @@
 
     publishers:
       - link-logs
-      - console-log-post
+      - console-log
 
 
 - job:
@@ -77,4 +77,4 @@
 
     publishers:
       - link-logs
-      - console-log-post
+      - console-log
