@@ -9,7 +9,7 @@
           /usr/local/jenkins/slave_scripts/upstream_translation_update.sh {name}
 
     publishers:
-      - console-log-post
+      - console-log
 
     node: 'tx'
 
@@ -47,7 +47,7 @@
           /usr/local/jenkins/slave_scripts/upstream_translation_update_manuals.sh
 
     publishers:
-      - console-log-post
+      - console-log
 
     node: 'tx'
 
