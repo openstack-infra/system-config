@@ -14,7 +14,7 @@
           target: 'infra/publications/$ZUUL_BRANCH/'
           remove-prefix: ''
           excludes: ''
-      - console-log-post
+      - console-log
 
 - job:
     name: infra-publications-publish-index
@@ -36,4 +36,4 @@
           target: 'infra/publications/'
           remove-prefix: 'output/'
           excludes: ''
-      - console-log-post
+      - console-log
