@@ -139,7 +139,7 @@ node.name: "<%= scope.lookupvar("::hostname") %>"
 index.store.compress.stored: true
 index.store.compress.tv: true
 
-indices.memory.index_buffer_size: "33%"
+indices.memory.index_buffer_size: "40%"
 
 #################################### Paths ####################################
 
@@ -255,7 +255,7 @@ bootstrap.mlockall: true
 
 # Allow recovery process after N nodes in a cluster are up:
 #
-gateway.recover_after_nodes: 2
+gateway.recover_after_nodes: 4
 
 # Set the timeout to initiate the recovery process, once the N nodes
 # from previous setting are up (accepts time value):
@@ -266,7 +266,7 @@ gateway.recover_after_time: 5m
 # are up (and recover_after_nodes is met), begin recovery process immediately
 # (without waiting for recover_after_time to expire):
 #
-gateway.expected_nodes: 3
+gateway.expected_nodes: 5
 
 
 ############################# Recovery Throttling #############################

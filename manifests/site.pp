@@ -206,6 +206,8 @@ node 'logstash.openstack.org' {
       'elasticsearch.openstack.org',
       'elasticsearch2.openstack.org',
       'elasticsearch3.openstack.org',
+      'elasticsearch4.openstack.org',
+      'elasticsearch5.openstack.org',
     ],
     gearman_workers     => [
       'logstash-worker1.openstack.org',
@@ -218,6 +220,8 @@ node 'logstash.openstack.org' {
       'elasticsearch.openstack.org:9200',
       'elasticsearch2.openstack.org:9200',
       'elasticsearch3.openstack.org:9200',
+      'elasticsearch4.openstack.org:9200',
+      'elasticsearch5.openstack.org:9200',
     ],
   }
 }
@@ -229,6 +233,8 @@ node /^logstash-worker\d+\.openstack\.org$/ {
       'elasticsearch.openstack.org',
       'elasticsearch2.openstack.org',
       'elasticsearch3.openstack.org',
+      'elasticsearch4.openstack.org',
+      'elasticsearch5.openstack.org',
     ],
     discover_node       => 'elasticsearch.openstack.org',
   }
@@ -241,6 +247,8 @@ node /^elasticsearch\d*\.openstack\.org$/ {
       'elasticsearch.openstack.org',
       'elasticsearch2.openstack.org',
       'elasticsearch3.openstack.org',
+      'elasticsearch4.openstack.org',
+      'elasticsearch5.openstack.org',
     ],
     elasticsearch_clients => [
       'logstash.openstack.org',
@@ -254,6 +262,8 @@ node /^elasticsearch\d*\.openstack\.org$/ {
       'elasticsearch.openstack.org',
       'elasticsearch2.openstack.org',
       'elasticsearch3.openstack.org',
+      'elasticsearch4.openstack.org',
+      'elasticsearch5.openstack.org',
     ],
   }
 }
