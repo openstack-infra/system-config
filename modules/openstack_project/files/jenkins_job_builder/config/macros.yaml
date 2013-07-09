@@ -330,3 +330,14 @@
               source: '**/*subunit_log.txt.gz'
               keep-hierarchy: false
               copy-after-failure: true
+
+- publisher:
+    name: upload-sphinx-draft
+    publishers:
+      - scp:
+          site: 'static.openstack.org'
+          files:
+            - target: 'docs-draft/$BASE_LOG_PATH/$JOB_NAME/$BUILD_NUMBER/'
+              source: 'doc/build/html/**'
+              keep-hierarchy: true
+              copy-after-failure: true
