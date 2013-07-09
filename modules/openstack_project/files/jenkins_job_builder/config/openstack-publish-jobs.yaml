@@ -15,7 +15,7 @@
           target: 'developer/{name}'
           remove-prefix: 'doc/build/html'
           excludes: ''
-      - console-log-post
+      - console-log
 
 
 - job-group:

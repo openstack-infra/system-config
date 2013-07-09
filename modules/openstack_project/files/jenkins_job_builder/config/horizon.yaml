@@ -27,23 +27,5 @@
       - assert-no-extra-files
 
     publishers:
-      - scp:
-          site: 'static.openstack.org'
-          files:
-            - target: 'logs/$ZUUL_CHANGE/$ZUUL_PATCHSET/$ZUUL_PIPELINE/$JOB_NAME/$BUILD_NUMBER'
-              source: '**/*nose_results.html'
-              keep-hierarchy: false
-              copy-after-failure: true
-            - target: 'logs/$ZUUL_CHANGE/$ZUUL_PATCHSET/$ZUUL_PIPELINE/$JOB_NAME/$BUILD_NUMBER'
-              source: '**/*testr_results.html.gz'
-              keep-hierarchy: false
-              copy-after-failure: true
-            - target: 'logs/$ZUUL_CHANGE/$ZUUL_PATCHSET/$ZUUL_PIPELINE/$JOB_NAME/$BUILD_NUMBER'
-              source: '.testrepository/tmp*'
-              keep-hierarchy: false
-              copy-after-failure: true
-            - target: 'logs/$ZUUL_CHANGE/$ZUUL_PATCHSET/$ZUUL_PIPELINE/$JOB_NAME/$BUILD_NUMBER'
-              source: '**/*subunit_log.txt.gz'
-              keep-hierarchy: false
-              copy-after-failure: true
+      - test-results
       - console-log

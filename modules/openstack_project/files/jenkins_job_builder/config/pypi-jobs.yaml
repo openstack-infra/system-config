@@ -17,7 +17,7 @@
           /usr/local/jenkins/slave_scripts/pypi-upload.sh {name}
 
     publishers:
-      - console-log-post
+      - console-log
 
 
 - job-group:
