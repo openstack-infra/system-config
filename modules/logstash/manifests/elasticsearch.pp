@@ -72,8 +72,8 @@ class logstash::elasticsearch (
 
   service { 'elasticsearch':
     ensure    => running,
-    require   => Package['elasticsearch'],
-    subscribe => [
+    require   => [
+      Package['elasticsearch'],
       File['/etc/elasticsearch/elasticsearch.yml'],
       File['/etc/elasticsearch/default-mapping.json'],
       File['/etc/default/elasticsearch'],
