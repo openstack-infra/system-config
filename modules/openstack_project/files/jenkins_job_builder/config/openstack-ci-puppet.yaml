@@ -41,3 +41,14 @@
               source: 'doc/build/html/**/*'
               keep-hierarchy: true
       - console-log-post
+
+
+- job:
+    name: gate-ci-docs
+    node: precise
+
+    builders:
+      - gerrit-git-prep
+      - docs:
+          github-org: openstack-infra
+          project: config
