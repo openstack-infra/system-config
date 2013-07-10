@@ -67,6 +67,7 @@ openstack-dev:
       - openstack-infra/devstack-gate
     branches:
       - master
+      - feature/ec
 
 openstack-doc:
     events:
@@ -293,6 +294,7 @@ openstack-swift:
       - openstack/python-swiftclient
     branches:
       - master
+      - feature/ec
 
 openstack-state-management:
     events:
