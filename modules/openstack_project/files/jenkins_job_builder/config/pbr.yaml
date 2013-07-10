@@ -23,8 +23,8 @@
           export DEVSTACK_GATE_TEMPEST=0
           export DEVSTACK_GATE_EXERCISES=0
           function gate_hook {
-              bash -xe $GATE_SCRIPT_DIR/devstack-vm-gate.sh && \
-                       $BASE/new/pbr/tools/integration.sh $PROJECTS $BASE
+              bash $GATE_SCRIPT_DIR/devstack-vm-gate.sh && \
+              bash -xe $BASE/new/pbr/tools/integration.sh $PROJECTS $BASE
           }
           function post_test_hook {
               cp /home/jenkins/.pip/pip.log ./pip.log
