@@ -64,4 +64,13 @@ class openstack_project::lists(
     mailserver  => $listdomain,
   }
 
+  maillist { 'openstack-travel-committee':
+    ensure      => present,
+    admin       => 'communitymngr@openstack.org',
+    password    => $listpassword,
+    description => 'Private discussions for the OpenStack Travel Program Committee for Hong Kong Summit 2013.',
+    webserver   => $listdomain,
+    mailserver  => $listdomain,
+  }
+
 }
