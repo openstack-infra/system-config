@@ -119,6 +119,8 @@ jobs:
     branch: ^master$
   - name: openstack-ha-guide
     branch: ^master$
+  - name: openstack-security-guide
+    branch: ^master$
   - name: gate-openstack-cli-guide
     success-pattern: http://docs-draft.openstack.org/{job.name}/{pipeline.name}/{build.number}/cli/quick-start
   - name: ^gate-.*-docs$

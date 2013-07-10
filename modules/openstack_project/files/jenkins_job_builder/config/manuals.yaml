@@ -497,14 +497,14 @@
       root-module:
         group-id: org.openstack.docs
         artifact-id: openstack-guide
-      root-pom: doc/src/docbkx/openstack-security-guide/pom.xml
+      root-pom: doc/src/docbkx/openstack-security/pom.xml
       goals: '-Drelease.path.name=${DOC_RELEASE_PATH} -Dcomments.enabled=${DOC_COMMENTS_ENABLED} clean generate-sources'
 
     publishers:
       - console-log-post
       - ftp:
           site: docs.openstack.org
-          source: 'doc/src/docbkx/openstack-security-guide/target/docbkx/webhelp/**'
+          source: 'doc/src/docbkx/openstack-security/target/docbkx/webhelp/**'
           target: '/'
-          remove-prefix: 'doc/src/docbkx/openstack-security-guide/target/docbkx/webhelp/'
+          remove-prefix: 'doc/src/docbkx/openstack-security/target/docbkx/webhelp/'
           excludes: '**/*.xml,**/null*'
