@@ -52,6 +52,11 @@ class openstack_project::base(
   }
 
   include pip
+  package { 'setuptools':
+    ensure   => latest,
+    provider => pip,
+    require  => Class['pip'],
+  }
   package { 'virtualenv':
     ensure   => latest,
     provider => pip,
