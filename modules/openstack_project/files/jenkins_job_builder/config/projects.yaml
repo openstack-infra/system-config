@@ -101,6 +101,16 @@
       - pypi-jobs
 
 - project:
+    name: savanna-dashboard
+    github-org: stackforge
+    node: precise
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - python-jobs
+      - pypi-jobs
+
+- project:
     name: kwapi
     github-org: stackforge
     node: precise

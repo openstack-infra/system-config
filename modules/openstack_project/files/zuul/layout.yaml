@@ -1720,6 +1720,21 @@ projects:
     gate:
       - gate-noop
 
+  - name: stackforge/sqlalchemy-migrate
+    check:
+      - gate-sqlalchemy-migrate-python26
+      - gate-sqlalchemy-migrate-python27
+    gate:
+      - gate-sqlalchemy-migrate-python26
+      - gate-sqlalchemy-migrate-python27
+    post:
+      - sqlalchemy-migrate-branch-tarball
+    pre-release:
+      - sqlalchemy-migrate-tarball
+    release:
+      - sqlalchemy-migrate-tarball:
+        - sqlalchemy-migrate-pypi-upload
+
   - name: stackforge/puppet-ceilometer
     check:
       - gate-puppet-ceilometer-puppet-lint
