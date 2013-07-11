@@ -71,4 +71,17 @@ class cgit {
     source  => 'puppet:///modules/cgit/cgit.conf',
     mode    => '0644'
   }
+
+  file { '/etc/xinetd.d/git':
+    ensure => present,
+    owner  => 'root',
+    group  => 'root',
+    mode   => '0644',
+    source => 'puppet:///modules/cgit/git.xinetd',
+  }
+
+  service { 'xinetd':
+    ensure    => running,
+    subscribe => File['/etc/xinetd.d/git'],
+  }
 }
