@@ -542,4 +542,22 @@ class gerrit(
       require => File['/home/gerrit2/review_site/lib'],
     }
   }
+
+  package { 'git-daemon-sysvinit':
+    ensure => present,
+  }
+
+  file { '/etc/default/git-daemon':
+    ensure => present,
+    owner  => 'root',
+    group  => 'root',
+    mode   => '0644',
+    source => 'puppet:///modules/gerrit/git-daemon.default',
+  }
+
+  service { 'git-daemon':
+    ensure    => running,
+    require   => Package['git-daemon-sysvinit'],
+    subscribe => File['/etc/default/git-daemon'],
+  }
 }
