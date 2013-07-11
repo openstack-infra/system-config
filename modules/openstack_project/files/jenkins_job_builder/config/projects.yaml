@@ -101,6 +101,18 @@
       - pypi-jobs
 
 - project:
+    name: sqlalchemy-migrate
+    github-org: stackforge
+    node: precise
+    rtfd-id: 1744
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - python-jobs
+      - hook-{name}-rtfd
+      - pypi-jobs
+
+- project:
     name: kwapi
     github-org: stackforge
     node: precise
