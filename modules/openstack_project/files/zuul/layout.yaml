@@ -4580,3 +4580,9 @@ projects:
       - gate-python-openstacksdk-python27
       - gate-python-openstacksdk-python33
       - gate-python-openstacksdk-pypy
+
+  - name: stackforge/kickstack
+    check:
+      - gate-noop
+    gate:
+      - gate-noop
