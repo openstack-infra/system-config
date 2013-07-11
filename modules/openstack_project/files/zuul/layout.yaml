@@ -168,7 +168,9 @@ projects:
     release:
       - zuul-docs
       - zuul-tarball:
-        - zuul-pypi-upload
+        - zuul-pypi-upload:
+          - post-mirror-python26
+          - post-mirror-python27
 
   - name: openstack-infra/askbot-theme
     check:
@@ -187,7 +189,9 @@ projects:
       - nose-html-output-tarball
     release:
       - nose-html-output-tarball:
-        - nose-html-output-pypi-upload
+        - nose-html-output-pypi-upload:
+          - post-mirror-python26
+          - post-mirror-python27
 
   - name: openstack-infra/gerrit
     check:
@@ -210,7 +214,9 @@ projects:
       - gerritbot-tarball
     release:
       - gerritbot-tarball:
-        - gerritbot-pypi-upload
+        - gerritbot-pypi-upload:
+          - post-mirror-python26
+          - post-mirror-python27
 
   - name: openstack-infra/gerritlib
     check:
@@ -223,7 +229,9 @@ projects:
       - gerritlib-tarball
     release:
       - gerritlib-tarball:
-        - gerritlib-pypi-upload
+        - gerritlib-pypi-upload:
+          - post-mirror-python26
+          - post-mirror-python27
 
   - name: openstack-infra/jeepyb
     check:
@@ -236,7 +244,9 @@ projects:
       - jeepyb-tarball
     release:
       - jeepyb-tarball:
-        - jeepyb-pypi-upload
+        - jeepyb-pypi-upload:
+          - post-mirror-python26
+          - post-mirror-python27
 
   - name: openstack-infra/jenkins-job-builder
     check:
@@ -255,7 +265,9 @@ projects:
       - jenkins-job-builder-tarball
     release:
       - jenkins-job-builder-tarball:
-        - jenkins-job-builder-pypi-upload
+        - jenkins-job-builder-pypi-upload:
+          - post-mirror-python26
+          - post-mirror-python27
 
   - name: openstack-infra/lodgeit
     check:
@@ -326,7 +338,9 @@ projects:
       - reviewday-tarball
     release:
       - reviewday-tarball:
-        - reviewday-pypi-upload
+        - reviewday-pypi-upload:
+          - post-mirror-python26
+          - post-mirror-python27
 
   - name: openstack-infra/reviewstats
     check:
@@ -359,7 +373,9 @@ projects:
       - statusbot-tarball
     release:
       - statusbot-tarball:
-        - statusbot-pypi-upload
+        - statusbot-pypi-upload:
+          - post-mirror-python26
+          - post-mirror-python27
 
   - name: openstack/cinder
     check:
@@ -592,7 +608,9 @@ projects:
       - oslo.config-tarball
     release:
       - oslo.config-tarball:
-        - oslo.config-pypi-upload
+        - oslo.config-pypi-upload:
+          - post-mirror-python26
+          - post-mirror-python27
       - oslo.config-docs
 
   - name: openstack/oslo.messaging
@@ -615,7 +633,9 @@ projects:
       - oslo.messaging-tarball
     release:
       - oslo.messaging-tarball:
-        - oslo.messaging-pypi-upload
+        - oslo.messaging-pypi-upload:
+          - post-mirror-python26
+          - post-mirror-python27
       - oslo.messaging-docs
 
   - name: openstack/oslo.sphinx
@@ -631,7 +651,9 @@ projects:
       - oslo.sphinx-tarball
     release:
       - oslo.sphinx-tarball:
-        - oslo.sphinx-pypi-upload
+        - oslo.sphinx-pypi-upload:
+          - post-mirror-python26
+          - post-mirror-python27
 
   - name: openstack/neutron
     check:
@@ -716,7 +738,9 @@ projects:
       - python-ceilometerclient-tarball
     release:
       - python-ceilometerclient-tarball:
-        - python-ceilometerclient-pypi-upload
+        - python-ceilometerclient-pypi-upload:
+          - post-mirror-python26
+          - post-mirror-python27
       - python-ceilometerclient-docs
 
   - name: openstack/python-cinderclient
@@ -752,7 +776,9 @@ projects:
       - python-cinderclient-tarball
     release:
       - python-cinderclient-tarball:
-        - python-cinderclient-pypi-upload
+        - python-cinderclient-pypi-upload:
+          - post-mirror-python26
+          - post-mirror-python27
       - python-cinderclient-docs
 
   - name: openstack/python-glanceclient
@@ -788,7 +814,9 @@ projects:
       - python-glanceclient-tarball
     release:
       - python-glanceclient-tarball:
-        - python-glanceclient-pypi-upload
+        - python-glanceclient-pypi-upload:
+          - post-mirror-python26
+          - post-mirror-python27
       - python-glanceclient-docs
 
   - name: openstack/python-keystoneclient
@@ -824,7 +852,9 @@ projects:
       - python-keystoneclient-tarball
     release:
       - python-keystoneclient-tarball:
-        - python-keystoneclient-pypi-upload
+        - python-keystoneclient-pypi-upload:
+          - post-mirror-python26
+          - post-mirror-python27
       - python-keystoneclient-docs
 
   - name: openstack/python-novaclient
@@ -860,7 +890,9 @@ projects:
       - python-novaclient-tarball
     release:
       - python-novaclient-tarball:
-        - python-novaclient-pypi-upload
+        - python-novaclient-pypi-upload:
+          - post-mirror-python26
+          - post-mirror-python27
       - python-novaclient-docs
 
   - name: openstack/python-openstackclient
@@ -883,7 +915,9 @@ projects:
       - python-openstackclient-tarball
     release:
       - python-openstackclient-tarball:
-        - python-openstackclient-pypi-upload
+        - python-openstackclient-pypi-upload:
+          - post-mirror-python26
+          - post-mirror-python27
       - python-openstackclient-docs
 
   - name: openstack/python-neutronclient
@@ -919,7 +953,9 @@ projects:
       - python-neutronclient-tarball
     release:
       - python-neutronclient-tarball:
-        - python-neutronclient-pypi-upload
+        - python-neutronclient-pypi-upload:
+          - post-mirror-python26
+          - post-mirror-python27
       - python-neutronclient-docs
 
   - name: openstack/python-swiftclient
@@ -942,7 +978,9 @@ projects:
       - python-swiftclient-tarball
     release:
       - python-swiftclient-tarball:
-        - python-swiftclient-pypi-upload
+        - python-swiftclient-pypi-upload:
+          - post-mirror-python26
+          - post-mirror-python27
       - python-swiftclient-docs
 
   - name: openstack/requirements
@@ -984,7 +1022,9 @@ projects:
     release:
       - hacking-docs
       - hacking-tarball:
-        - hacking-pypi-upload
+        - hacking-pypi-upload:
+          - post-mirror-python26
+          - post-mirror-python27
 
   - name: openstack-dev/pbr
     check:
@@ -1022,7 +1062,9 @@ projects:
     release:
       - pbr-docs
       - pbr-tarball:
-        - pbr-pypi-upload
+        - pbr-pypi-upload:
+          - post-mirror-python26
+          - post-mirror-python27
 
   - name: openstack-dev/devstack
     check:
@@ -1208,7 +1250,9 @@ projects:
       - python-heatclient-tarball
     release:
       - python-heatclient-tarball:
-        - python-heatclient-pypi-upload
+        - python-heatclient-pypi-upload:
+          - post-mirror-python26
+          - post-mirror-python27
       - python-heatclient-docs
 
   - name: openstack/heat-cfntools
@@ -1229,7 +1273,9 @@ projects:
       - heat-cfntools-tarball
     release:
       - heat-cfntools-tarball:
-        - heat-cfntools-pypi-upload
+        - heat-cfntools-pypi-upload:
+          - post-mirror-python26
+          - post-mirror-python27
       - heat-cfntools-docs
 
   - name: openstack/heat-templates
@@ -1281,7 +1327,9 @@ projects:
       - python-troveclient-tarball
     release:
       - python-troveclient-tarball:
-        - python-troveclient-pypi-upload
+        - python-troveclient-pypi-upload:
+          - post-mirror-python26
+          - post-mirror-python27
 
   - name: stackforge/marconi
     check:
@@ -1316,7 +1364,9 @@ projects:
       - designate-tarball
     release:
       - designate-tarball:
-        - designate-pypi-upload
+        - designate-pypi-upload:
+          - post-mirror-python26
+          - post-mirror-python27
 
   - name: stackforge/python-designateclient
     check:
@@ -1335,7 +1385,9 @@ projects:
       - python-designateclient-tarball
     release:
       - python-designateclient-tarball:
-        - python-designateclient-pypi-upload
+        - python-designateclient-pypi-upload:
+          - post-mirror-python26
+          - post-mirror-python27
 
   - name: stackforge/bindep
     check:
@@ -1353,7 +1405,9 @@ projects:
       - bindep-tarball
     release:
       - bindep-tarball:
-        - bindep-pypi-upload
+        - bindep-pypi-upload:
+          - post-mirror-python26
+          - post-mirror-python27
 
   - name: stackforge/billingstack
     check:
@@ -1372,7 +1426,9 @@ projects:
       - billingstack-tarball
     release:
       - billingstack-tarball:
-        - billingstack-pypi-upload
+        - billingstack-pypi-upload:
+          - post-mirror-python26
+          - post-mirror-python27
 
 
   - name: stackforge/bufunfa
@@ -1520,7 +1576,9 @@ projects:
       - git-review-tarball
     release:
       - git-review-tarball:
-        - git-review-pypi-upload
+        - git-review-pypi-upload:
+          - post-mirror-python26
+          - post-mirror-python27
 
   - name: openstack/openstack-planet
     check:
@@ -1637,7 +1695,9 @@ projects:
     release:
       - hook-gear-rtfd
       - gear-tarball:
-        - gear-pypi-upload
+        - gear-pypi-upload:
+          - post-mirror-python26
+          - post-mirror-python27
 
   - name: openstack-infra/gearman-plugin
     check:
@@ -1700,7 +1760,9 @@ projects:
       - hook-savanna-rtfd
     release:
       - savanna-tarball:
-        - savanna-pypi-upload
+        - savanna-pypi-upload:
+          - post-mirror-python26
+          - post-mirror-python27
       - hook-savanna-rtfd
 
   - name: stackforge/python-savannaclient
@@ -1720,7 +1782,9 @@ projects:
        - hook-python-savannaclient-rtfd
     release:
        - python-savannaclient-tarball:
-         - python-savannaclient-pypi-upload
+         - python-savannaclient-pypi-upload:
+           - post-mirror-python26
+           - post-mirror-python27
        - hook-python-savannaclient-rtfd
 
   - name: stackforge/savanna-dashboard
@@ -1740,7 +1804,9 @@ projects:
       - hook-savanna-dashboard-rtfd
     release:
       - savanna-dashboard-tarball:
-        - savanna-dashboard-pypi-upload
+        - savanna-dashboard-pypi-upload:
+          - post-mirror-python26
+          - post-mirror-python27
       - hook-savanna-dashboard-rtfd
 
   - name: stackforge/savanna-extra
@@ -2008,7 +2074,9 @@ projects:
       - python-muranoclient-tarball
     release:
       - python-muranoclient-tarball:
-        - python-muranoclient-pypi-upload
+        - python-muranoclient-pypi-upload:
+          - post-mirror-python26
+          - post-mirror-python27
 
   - name: stackforge/opencafe
     check:
