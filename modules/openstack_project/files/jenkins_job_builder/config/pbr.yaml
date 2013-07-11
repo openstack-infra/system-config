@@ -26,11 +26,7 @@
               bash $GATE_SCRIPT_DIR/devstack-vm-gate.sh && \
               bash -xe $BASE/new/pbr/tools/integration.sh $PROJECTS $BASE
           }
-          function post_test_hook {
-              cp /home/jenkins/.pip/pip.log ./pip.log
-          }
           export -f gate_hook
-          export -f post_test_hook
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
       - link-logs
