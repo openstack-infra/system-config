@@ -348,6 +348,19 @@
 
 
 - project:
+    name: django_openstack_auth
+    github-org: openstack
+    node: precise
+    tarball-site: tarballs.openstack.org
+    doc-publisher-site: docs.openstack.org
+
+    jobs:
+      - python-jobs
+      - openstack-publish-jobs
+      - pypi-jobs
+
+
+- project:
     name: identity-api
     github-org: openstack
     node: precise

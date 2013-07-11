@@ -130,6 +130,14 @@ jobs:
     voting: false
   - name: ^gate-puppet-.*-puppet-lint$
     voting: false
+  - name: gate-django_openstack_auth-pep8
+    voting: false
+  - name: gate-django_openstack_auth-docs
+    voting: false
+  - name: gate-django_openstack_auth-python26
+    voting: false
+  - name: gate-django_openstack_auth-python27
+    voting: false
 
 
 projects:
@@ -460,6 +468,31 @@ projects:
     release:
       - horizon-tarball
       - horizon-docs
+
+  - name: openstack/django_openstack_auth
+    check:
+      - gate-django_openstack_auth-requirements
+      - gate-django_openstack_auth-pep8
+      - gate-django_openstack_auth-docs
+      - gate-django_openstack_auth-python26
+      - gate-django_openstack_auth-python27
+      - gate-django_openstack_auth-noop
+    gate:
+      - gate-django_openstack_auth-requirements
+      - gate-django_openstack_auth-pep8
+      - gate-django_openstack_auth-docs
+      - gate-django_openstack_auth-python26
+      - gate-django_openstack_auth-python27
+      - gate-django_openstack_auth-noop
+    post:
+      - python-django_openstack_auth-branch-tarball
+      - python-django_openstack_auth-coverage
+    pre-release:
+      - python-django_openstack_auth-tarball
+    release:
+      - python-django_openstack_auth-tarball:
+        - python-django_openstack_auth-pypi-upload
+      - python-django_openstack_auth-docs
 
   - name: openstack/keystone
     check:

@@ -41,6 +41,7 @@ openstack-dev:
     projects:
       - openstack/ceilometer
       - openstack/cinder
+      - openstack/django_openstack_auth
       - openstack/glance
       - openstack/horizon
       - openstack/keystone
