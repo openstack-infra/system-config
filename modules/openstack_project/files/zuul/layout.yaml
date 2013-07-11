@@ -3470,6 +3470,12 @@ projects:
     gate:
       - gate-kwapi-pep8
 
+  - name: stackforge/kickstack
+    check:
+      - gate-noop
+    gate:
+      - gate-noop
+
   - name: stackforge/libra
     check:
       - gate-libra-pep8
