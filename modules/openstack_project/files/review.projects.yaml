@@ -551,6 +551,9 @@
 - project: stackforge/inception
   description: Inception Cloud Project
   upstream: git://github.com/maoy/inception.git
+- project: stackforge/kickstack
+  description: Rapid OpenStack deployment with puppet-dashboard, The Foreman, or any other Puppet ENC
+  upstream: git://github.com/hastexo/kickstack
 - project: stackforge/kwapi
   description: Energy Efficiency Monitoring
   upstream: git://github.com/frossigneux/kwapi.git
