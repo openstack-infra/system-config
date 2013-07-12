@@ -63,7 +63,7 @@ supybot.networks.<%= network %>.servers: <%= server %>
 #
 # Default value:
 ###
-supybot.networks.<%= network %>.channels: <%= channels %>
+supybot.networks.<%= network %>.channels: <% channels.each do |channel| %> <%= channel %> <% end %>
 
 ###
 # Determines what key (if any) will be used to join the channel.
