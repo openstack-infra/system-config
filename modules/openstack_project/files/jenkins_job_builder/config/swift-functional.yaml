@@ -24,7 +24,7 @@
           export DEVSTACK_GATE_EXERCISES=0
 
           function post_test_hook {
-              cd /opt/stack/swift
+              cd /opt/stack/new/swift
               bash .functests
           }
           export -f post_test_hook
