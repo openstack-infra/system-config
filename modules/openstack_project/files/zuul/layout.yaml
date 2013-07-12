@@ -940,6 +940,7 @@ projects:
       - gate-grenade-devstack-vm
     gate:
       - gate-noop
+      - gate-grenade-devstack-vm
 
   - name: openstack-dev/hacking
     check:
