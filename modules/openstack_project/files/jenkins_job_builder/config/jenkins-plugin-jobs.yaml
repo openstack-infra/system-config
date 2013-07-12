@@ -7,6 +7,10 @@
       - gerrit-git-prep
 
     wrappers:
+      - timeout:
+          timeout: 30
+          fail: true
+      - timestamps
       - inject:
           script-file: /usr/local/jenkins/slave_scripts/maven-properties.sh
       - inject:
@@ -32,6 +36,10 @@
       - gerrit-git-prep
 
     wrappers:
+      - timeout:
+          timeout: 30
+          fail: true
+      - timestamps
       - inject:
           script-file: /usr/local/jenkins/slave_scripts/maven-properties.sh
       - inject:
