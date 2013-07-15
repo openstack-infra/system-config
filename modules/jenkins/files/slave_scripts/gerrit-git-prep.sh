@@ -29,6 +29,8 @@ fi
 set -x
 if [[ ! -e .git ]]
 then
+    ls -a
+    rm -fr .[^.]* *
     git clone $GERRIT_SITE/p/$ZUUL_PROJECT .
 fi
 git remote set-url origin $GERRIT_SITE/p/$ZUUL_PROJECT
