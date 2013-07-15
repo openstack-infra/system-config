@@ -11,10 +11,21 @@ NameVirtualHost <%= vhost_name %>:<%= port %>
 <%= " ServerAlias #{serveraliases}" %>
 <% end -%>
   DocumentRoot <%= docroot %>
+
+  ExtFilterDefine htmlify-source mode=output \
+      intype=text/plain outtype=text/html cmd="/home/sdague/testing/htmlify-screen-log.py"
+
+  ExtFilterDefine gunzip mode=output \
+      intype=text/plain outtype=text/plain cmd="/bin/gzip -d" \
+      ftype=10
+
+
   <FilesMatch \.txt\.gz$>
     ForceType text/plain
     AddDefaultCharset UTF-8
-    AddEncoding x-gzip gz
+    # Chrome blows up apache if this is enabled, not sure why
+    # AddEncoding x-gzip gz
+    SetOutputFilter gunzip;htmlify-source;DEFLATE
   </FilesMatch>
   <FilesMatch \.html\.gz$>
     ForceType text/html

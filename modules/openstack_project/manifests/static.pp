@@ -31,6 +31,9 @@ class openstack_project::static (
   a2mod { 'proxy_http':
     ensure => present,
   }
+  a2mod { 'ext_filter':
+    ensure => present,
+  }
 
   file { '/srv/static':
     ensure => directory,
@@ -95,6 +98,14 @@ class openstack_project::static (
     mode    => '0444',
     source  => 'puppet:///modules/openstack_project/disallow_robots.txt',
     require => File['/srv/static/logs'],
+  }
+
+  file { '/usr/local/bin/htmlify-screen-log.py':
+    ensure  => present,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0755',
+    source  => 'puppet:///modules/openstack_project/logs/htmlify-screen-log.py',
   }
 
   file { '/srv/static/logs/help':
