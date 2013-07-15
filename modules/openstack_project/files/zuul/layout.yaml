@@ -1401,6 +1401,7 @@ projects:
       - openstack-basic-install-ubuntu
       - openstack-glossary
       - openstack-image-guide
+      - openstack-config-ref
       - openstack-docs-site
       - openstack-ha-guide
       - openstack-install-deploy-guide-apt-fedora
