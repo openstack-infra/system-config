@@ -25,7 +25,7 @@
 
           function post_test_hook {
               cd /opt/stack/new/swift
-              bash .functests
+              bash .functests -x
           }
           export -f post_test_hook
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
