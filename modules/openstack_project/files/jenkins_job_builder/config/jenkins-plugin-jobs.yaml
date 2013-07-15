@@ -50,11 +50,15 @@
       root-pom: pom.xml
       goals: 'clean package -Dmaven.test.skip=true -Dproject-version=${{PROJECT_VER}}'
 
+    postbuilders:
+      - shell: |
+            cp ./target/{name}.hpi ./target/{name}-$PROJECT_VER.hpi
+
     publishers:
       - war:
           site: 'tarballs.openstack.org'
-          warfile: 'target/{name}.hpi'
-          target: 'tarballs/ci/{name}/{name}-${{PROJECT_VER}}.hpi'
+          warfile: 'target/{name}-${{PROJECT_VER}}.hpi'
+          target: 'tarballs/ci/{name}'
       - console-log-post
 
 - job-template:
