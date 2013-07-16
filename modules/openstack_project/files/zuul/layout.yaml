@@ -2319,6 +2319,6 @@ projects:
 
   - name: stackforge/python-ipmi
     check:
-      - gate-noop
+      - gate-python-ipmi-pep8
     gate:
-      - gate-noop
+      - gate-python-ipmi-pep8
