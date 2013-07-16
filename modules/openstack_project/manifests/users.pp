@@ -55,4 +55,9 @@ class openstack_project::users {
     realname => 'Thierry Carrez',
     sshkeys  => "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDIF2INBeJdT3nT3+3yac+DGRQVN7wPv/GTb/OPDocQhfGMeQP7JwSURiv1nrXGbbjzuip7l7vRJs4u4NqXkUi0GFj1aLBpUm2Z1NFFDn4cuZ5KCYX6rjVrDYIpj4OlOyzt9YGONvvH/dB2GHw8kYbN50OalFWQCS0TVzj9SQbO47B/TPdtLnh116yEP5AXZZUGgl+q533/x8+nxAxJKA9iAk3mSswl67gXc4pRo84pjwpx+R/52ha6RfmLkoNAEOqtr5MGx5gyW+WXsoLJBl2bjcfzYoQI7gPWRIn+rtCnDFi762TS54zstXxR1ww+ppmqHk04l2oprNoI0wr00Fsl ttx@stardust\n",
   }
+
+  @user::virtual::localuser { 'rbryant':
+    realname => 'Russell Bryant',
+    sshkeys  => "ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAx0vyiGg418eJlUffZRnusr8IAEgnF8Jpymu+//ANz68x+yszNpr5MSSRaRBgDny7XqFAGnuHfDf60EtLHf16PtBpoBo0Ftyjr/8ZhzEHxkLq7KOQ7TrP+GxGypLKUkCD9bZteakp8wqi+NTod7PtQh9SrnxDILcqHxP47UAPTSzzuKQXj6WNA9hoGCIKI/rivUo/4ZY5iUG2tfdJQf0J9dJw2TYQdmygjgEU9K7t+aWEOqIe21vbantZLWkrY7IxBbnNs2DOkmd+pRSprW7vh/p+ivgN4QPB2ZxqdPXeMY2eqpolQXS1wnLjhTsKkRpQP5/af2BcVLbHAlyBc94jKQ== russell@russellbryant.net",
+  }
 }
