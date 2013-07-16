@@ -69,7 +69,7 @@ class jenkins::params {
     }
     'Debian': {
       # common packages
-      $jdk_package = 'default-jdk'
+      $jdk_package = 'openjdk-7-jdk'
       $ccache_package = 'ccache'
       $python_netaddr_package = 'python-netaddr'
       # packages needed by slaves
