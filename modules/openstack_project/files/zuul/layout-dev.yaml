@@ -122,7 +122,6 @@ projects:
       - gate-noop
 
   - name: openstack-infra/config
-    merge-mode: cherry-pick
     check:
       - config-compare-xml
       - gate-config-layout
