@@ -101,6 +101,28 @@
     node: '{node}'
 
 - job-template:
+    name: 'gate-{name}-python33'
+
+    wrappers:
+      - timeout:
+          timeout: 40
+          fail: true
+      - timestamps
+
+    builders:
+      - gerrit-git-prep
+      - python33:
+          github-org: '{github-org}'
+          project: '{name}'
+      - assert-no-extra-files
+
+    publishers:
+      - test-results
+      - console-log
+
+    node: precisepy3k
+
+- job-template:
     name: 'gate-{name}-docs'
 
     builders:
@@ -197,3 +219,4 @@
       - '{name}-branch-tarball'
       # pyflakes isn't standard
       # pylint isn't standard
+      # py33.3 isn't standard
