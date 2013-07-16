@@ -29,4 +29,28 @@ class openstack_project::pbx (
   realize (
     User::Virtual::Localuser['rbryant'],
   )
+
+  yumrepo { "asteriskcurrent":
+    baseurl => "http://packages.asterisk.org/centos/\$releasever/current/\$basearch/",
+    descr => "Asterisk supporting packages produced by Digium",
+    enabled => 1,
+    gpgcheck => 0
+  }
+
+  yumrepo { "asterisk11":
+    baseurl => "http://packages.asterisk.org/centos/\$releasever/asterisk-11/\$basearch/",
+    descr => "Asterisk packages produced by Digium",
+    enabled => 1,
+    gpgcheck => 0
+  }
+
+  package { 'asterisknow-version' :
+    ensure => present,
+    require => Yumrepo["asteriskcurrent"]
+  }
+
+  package { 'asterisk' :
+    ensure => present,
+    require => Yumrepo["asterisk11"]
+  }
 }
