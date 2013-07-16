@@ -795,6 +795,18 @@
 
 
 - project:
+    name: storyboard
+    github-org: openstack-infra
+    node: precise
+    doc-publisher-site: ci.openstack.org
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - python-jobs
+      - pypi-jobs
+
+
+- project:
     name: swift
     github-org: openstack
     node: precise
