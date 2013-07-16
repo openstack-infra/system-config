@@ -101,6 +101,34 @@
     node: '{node}'
 
 - job-template:
+    name: 'gate-{name}-python33'
+
+    wrappers:
+      - timeout:
+          timeout: 40
+          fail: true
+      - timestamps
+
+    parameters:
+      - label:
+          name: NODE_LABEL
+          description: Label of node to use for this build
+          default: '{node}'
+
+    builders:
+      - gerrit-git-prep
+      - python33:
+          github-org: '{github-org}'
+          project: '{name}'
+      - assert-no-extra-files
+
+    publishers:
+      - test-results
+      - console-log
+
+    node: '{node}'
+
+- job-template:
     name: 'gate-{name}-docs'
 
     builders:
