@@ -119,9 +119,7 @@ class gerrit(
   include pip
 
   $java_home = $::lsbdistcodename ? {
-    'precise' => '/usr/lib/jvm/java-6-openjdk-amd64/jre',
-    'oneiric' => '/usr/lib/jvm/java-6-openjdk/jre',
-    'natty'   => '/usr/lib/jvm/java-6-openjdk/jre',
+    'precise' => '/usr/lib/jvm/java-7-openjdk-amd64/jre',
   }
 
   user { 'gerrit2':
@@ -144,10 +142,13 @@ class gerrit(
     }
   }
 
-  $packages = ['openjdk-6-jre-headless']
-
-  package { $packages:
+  package { 'openjdk-7-jre-headless':
     ensure => present,
+  }
+
+  package { 'openjdk-6-jre-headless':
+    ensure  => purged,
+    require => Package['openjdk-7-jre-headless'],
   }
 
   if ! defined(Package['gerritlib']) {
@@ -436,7 +437,7 @@ class gerrit(
     user      => 'gerrit2',
     command   => '/usr/bin/java -jar /home/gerrit2/review_site/bin/gerrit.war init -d /home/gerrit2/review_site --batch --no-auto-start',
     subscribe => File['/home/gerrit2/review_site/bin/gerrit.war'],
-    require   => [Package['openjdk-6-jre-headless'],
+    require   => [Package['openjdk-7-jre-headless'],
                   User['gerrit2'],
                   Mysql::Db['reviewdb'],
                   File['/home/gerrit2/review_site/etc/gerrit.config'],
@@ -454,7 +455,7 @@ class gerrit(
     command     => '/etc/init.d/gerrit stop; /usr/bin/java -jar /home/gerrit2/review_site/bin/gerrit.war init -d /home/gerrit2/review_site --batch --no-auto-start',
     subscribe   => File['/home/gerrit2/review_site/bin/gerrit.war'],
     refreshonly => true,
-    require     => [Package['openjdk-6-jre-headless'],
+    require     => [Package['openjdk-7-jre-headless'],
                     User['gerrit2'],
                     Mysql::Db['reviewdb'],
                     File['/home/gerrit2/review_site/etc/gerrit.config'],
