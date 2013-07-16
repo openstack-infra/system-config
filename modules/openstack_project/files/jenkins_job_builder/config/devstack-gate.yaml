@@ -783,7 +783,7 @@
           default: false
 
     triggers:
-      - timed: '*/15 * * * *'
+      - timed: '*/5 * * * *'
 
     builders:
       - devstack-checkout
