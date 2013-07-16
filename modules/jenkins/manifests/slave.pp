@@ -109,6 +109,10 @@ class jenkins::slave(
         ensure => present,
       }
 
+      package { 'default-jdk':
+        ensure => purged,
+      }
+
     }
     default: {
       fail("Unsupported osfamily: ${::osfamily} The 'jenkins' module only supports osfamily Debian or RedHat (slaves only).")
