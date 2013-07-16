@@ -353,6 +353,24 @@ projects:
     gate:
       - gate-noop
 
+  - name: openstack-infra/storyboard
+    check:
+      - gate-storyboard-pep8
+      - gate-storyboard-python27
+    gate:
+      - gate-storyboard-pep8
+      - gate-storyboard-python27
+    post:
+      - storyboard-branch-tarball
+    pre-release:
+      - storyboard-tarball
+    release:
+      - storyboard-docs
+      - storyboard-tarball:
+        - storyboard-pypi-upload:
+          - post-mirror-python26
+          - post-mirror-python27
+
   - name: openstack-infra/odsreg
     check:
       - gate-noop

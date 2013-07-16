@@ -28,6 +28,7 @@ openstack-infra:
       - openstack-infra/reviewday
       - openstack-infra/reviewstats
       - openstack-infra/statusbot
+      - openstack-infra/storyboard
       - openstack-infra/zuul
       - openstack/requirements
     branches:
