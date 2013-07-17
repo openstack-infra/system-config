@@ -31,5 +31,7 @@ class openstack_project::pbx (
   )
 
   class { 'asterisk':
+    asterisk_conf_source  => 'puppet:///modules/openstack_project/pbx/asterisk/asterisk.conf',
+    modules_conf_source   => 'puppet:///modules/openstack_project/pbx/asterisk/modules.conf',
   }
 }
