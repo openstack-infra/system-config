@@ -88,7 +88,8 @@ class jenkins::slave(
       }
 
       package { $::jenkins::params::maven_package:
-        ensure => present,
+        ensure  => present,
+        require => Package[$::jenkins::params::jdk_package],
       }
 
       if ! defined(Package[$::jenkins::params::python3_dev_package]) {
