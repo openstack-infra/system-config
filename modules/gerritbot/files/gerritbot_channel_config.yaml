@@ -141,6 +141,7 @@ tripleo:
       - stackforge/os-refresh-config
       - stackforge/tripleo-image-elements
       - stackforge/tripleo-heat-templates
+      - openstack-infra/tripleo-ci
     branches:
       - master
 
