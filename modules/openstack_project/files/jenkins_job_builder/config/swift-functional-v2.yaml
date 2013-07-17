@@ -1,5 +1,5 @@
 - job:
-    name: gate-swift-devstack-vm-functional
+    name: gate-swift-devstack-vm-functional-v2
     node: devstack-precise
 
     wrappers:

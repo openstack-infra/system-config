@@ -91,7 +91,10 @@ jobs:
     branch: ^(?!stable/(folsom|grizzly)).*$
   - name: tempest-docs
     branch: ^(?!stable/(folsom|grizzly)).*$
-  - name: gate-swift-devstack-vm-functional
+  - name: gate-swift-devstack-vm-functional-v2
+    voting: false
+    branch: ^(?!stable/(folsom|grizzly)).*$
+  - name: gate-swift-devstack-vm-functional-v1
     voting: false
     branch: ^(?!stable/(folsom|grizzly)).*$
   - name: gate-nova-pylint
@@ -738,7 +741,8 @@ projects:
       - gate-swift-docs
       - gate-swift-python26
       - gate-swift-python27
-      - gate-swift-devstack-vm-functional
+      - gate-swift-devstack-vm-functional-v1
+      - gate-swift-devstack-vm-functional-v2
       - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-cells-full
