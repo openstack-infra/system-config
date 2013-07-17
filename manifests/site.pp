@@ -268,6 +268,14 @@ node /^elasticsearch\d*\.openstack\.org$/ {
   }
 }
 
+# A CentOS machine to run cgit and git daemon.
+node 'git.openstack.org' {
+  class { 'openstack_project::git':
+    sysadmins           => hiera('sysadmins'),
+    git_gerrit_ssh_key  => hiera('gerrit_ssh_rsa_pubkey_contents'),
+  }
+}
+
 # A machine to run ODSREG in preparation for summits.
 node 'summit.openstack.org' {
   class { 'openstack_project::summit':
