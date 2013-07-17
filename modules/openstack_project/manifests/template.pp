@@ -4,6 +4,7 @@
 #
 class openstack_project::template (
   $iptables_public_tcp_ports = [],
+  $iptables_public_udp_ports = [],
   $iptables_rules4           = [],
   $iptables_rules6           = [],
   $install_users = true,
@@ -15,6 +16,7 @@ class openstack_project::template (
 
   class { 'iptables':
     public_tcp_ports => $iptables_public_tcp_ports,
+    public_udp_ports => $iptables_public_udp_ports,
     rules4           => $iptables_rules4,
     rules6           => $iptables_rules6,
   }
