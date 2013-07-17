@@ -109,6 +109,11 @@ class jenkins::slave(
         ensure => present,
       }
 
+      package { 'openjdk-6-jre-headless':
+        ensure  => purged,
+        require => Package[$::jenkins::params::jdk_package],
+      }
+
     }
     default: {
       fail("Unsupported osfamily: ${::osfamily} The 'jenkins' module only supports osfamily Debian or RedHat (slaves only).")
