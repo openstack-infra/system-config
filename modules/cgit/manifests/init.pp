@@ -54,8 +54,10 @@ class cgit {
   }
 
   exec { 'restorecon -R -v /var/lib/git':
-    path      => '/sbin',
-    subscribe => Folder['/var/lib/git']
+    path        => '/sbin',
+    require     => File['/var/lib/git'],
+    subscribe   => File['/var/lib/git'],
+    refreshonly => true,
   }
 
   selboolean { 'httpd_enable_cgi':
