@@ -653,12 +653,14 @@ projects:
       - gate-oslo.config-docs
       - gate-oslo.config-python26
       - gate-oslo.config-python27
+      - gate-oslo.config-python33
     gate:
       - gate-oslo.config-requirements
       - gate-oslo.config-docs
       - gate-oslo.config-pep8
       - gate-oslo.config-python26
       - gate-oslo.config-python27
+      - gate-oslo.config-python33
     post:
       - oslo.config-branch-tarball
       - oslo.config-docs
@@ -1097,6 +1099,7 @@ projects:
       - gate-pbr-docs
       - gate-pbr-python26
       - gate-pbr-python27
+      - gate-pbr-python33
       - gate-pbr-devstack-vm-rawinstall
       - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
@@ -1111,6 +1114,7 @@ projects:
       - gate-pbr-pep8
       - gate-pbr-python26
       - gate-pbr-python27
+      - gate-pbr-python33
       - gate-pbr-devstack-vm-rawinstall
       - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
