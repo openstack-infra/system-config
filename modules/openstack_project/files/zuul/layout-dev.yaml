@@ -387,6 +387,7 @@ projects:
       - gate-pbr-docs
       - gate-pbr-python26
       - gate-pbr-python27
+      - gate-pbr-python33
 
   - name: openstack-dev/devstack
     check:
