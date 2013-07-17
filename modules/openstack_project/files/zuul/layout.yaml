@@ -2434,3 +2434,9 @@ projects:
       - gate-python-ipmi-pep8
     gate:
       - gate-python-ipmi-pep8
+
+  - name: openstack-infra/tripleo-ci
+    check:
+      - gate-noop
+    gate:
+      - gate-noop

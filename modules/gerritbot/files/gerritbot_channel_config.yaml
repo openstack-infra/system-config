@@ -142,6 +142,7 @@ tripleo:
       - stackforge/tripleo-image-elements
       - openstack/tripleo-incubator
       - stackforge/tripleo-heat-templates
+      - openstack-infra/tripleo-ci
     branches:
       - master
 
