@@ -26,6 +26,7 @@ class openstack_project::lists(
     User::Virtual::Localuser['oubiwann'],
     User::Virtual::Localuser['rockstar'],
     User::Virtual::Localuser['smaffulli'],
+    User::Virtual::Localuser['tfheen'],
   )
 
   maillist { 'openstack-it':

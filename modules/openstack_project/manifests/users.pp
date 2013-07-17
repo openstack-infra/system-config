@@ -55,4 +55,9 @@ class openstack_project::users {
     realname => 'Thierry Carrez',
     sshkeys  => "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDIF2INBeJdT3nT3+3yac+DGRQVN7wPv/GTb/OPDocQhfGMeQP7JwSURiv1nrXGbbjzuip7l7vRJs4u4NqXkUi0GFj1aLBpUm2Z1NFFDn4cuZ5KCYX6rjVrDYIpj4OlOyzt9YGONvvH/dB2GHw8kYbN50OalFWQCS0TVzj9SQbO47B/TPdtLnh116yEP5AXZZUGgl+q533/x8+nxAxJKA9iAk3mSswl67gXc4pRo84pjwpx+R/52ha6RfmLkoNAEOqtr5MGx5gyW+WXsoLJBl2bjcfzYoQI7gPWRIn+rtCnDFi762TS54zstXxR1ww+ppmqHk04l2oprNoI0wr00Fsl ttx@stardust\n",
   }
+
+  @user::virtual::localuser { 'tfheen':
+    realname => 'Tollef Fog Heen',
+    sshkeys  => "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCxtw437iq4QEJNBDeBUU1EO5+pcKLXawGteWLVQMmkEE6bXACfGv+6C0/QWpsBICeu7BfJuaHKMC8guZnzMC3Bz1Qi0cLRNuYdJGyNp8m+pjD/b4/s0A/ySzhnMLkOcd/sig3z/Ajn8PiMOkjegOelI37PTgL/l30MH7Uq33boNVkRt+oYrgffB+dEYwsSt67ak5WBcGWc6CahO8FAn8lMNYUVKn6sUyyKflZhY5ZS9Vw/vgE0T2VIc4dpJvFSAAvd+0Il0dq4LHZYPmtvzaEAPh8yaJPWtEhQzEFWdrxV/A5WzfWef1gCI0wAM3KfrXo4SwVJC2ohA0v4IOEhyll5 tfheen@rahvafeir\n",
+  }
 }
