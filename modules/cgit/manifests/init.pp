@@ -25,11 +25,6 @@ class cgit {
     ensure => present,
   }
 
-  service { 'httpd':
-    ensure     => running,
-    require    => Package['httpd'],
-  }
-
   user { 'cgit':
     ensure     => present,
     home       => '/home/cgit',
