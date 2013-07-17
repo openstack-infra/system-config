@@ -44,7 +44,7 @@ class openstack_project::elasticsearch (
 
   cron { 'optimize_old_es_indices':
     user        => 'root',
-    hour        => '5',
+    hour        => '13',
     minute      => '0',
     command     => 'curl -sS -XPOST "http://localhost:9200/logstash-`date -d yesterday +\%Y.\%m.\%d`/_optimize?max_num_segments=2" > /dev/null',
     environment => 'PATH=/usr/bin:/bin:/usr/sbin:/sbin',
