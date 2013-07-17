@@ -46,4 +46,48 @@ class asterisk (
     ensure  => present,
     require => Yumrepo['asteriskcurrent'],
   }
+
+  file {'/etc/asterisk/asterisk.conf':
+    ensure => present,
+    owner  => 'asterisk',
+    group  => 'asterisk',
+    mode   => '0660',
+    source => 'puppet:///modules/asterisk/asterisk.conf'
+  }
+
+  file {'/etc/asterisk/indications.conf':
+    ensure => present,
+    owner  => 'asterisk',
+    group  => 'asterisk',
+    mode   => '0660',
+    source => 'puppet:///modules/asterisk/indications.conf'
+  }
+
+  file {'/etc/asterisk/musiconhold.conf':
+    ensure => present,
+    owner  => 'asterisk',
+    group  => 'asterisk',
+    mode   => '0660',
+    source => 'puppet:///modules/asterisk/musiconhold.conf'
+  }
+
+  file {'/etc/asterisk/modules.conf':
+    ensure => present,
+    owner  => 'asterisk',
+    group  => 'asterisk',
+    mode   => '0660',
+    source => 'puppet:///modules/asterisk/modules.conf'
+  }
+
+  service { 'asterisk':
+    ensure  => running,
+    enable  => true,
+    require => [
+      Package['asterisk'],
+      File['/etc/asterisk/asterisk.conf'],
+      File['/etc/asterisk/indications.conf'],
+      File['/etc/asterisk/musiconhold.conf'],
+      File['/etc/asterisk/modules.conf'],
+    ]
+  }
 }
