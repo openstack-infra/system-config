@@ -1981,6 +1981,20 @@ projects:
       - gate-puppet-quantum-puppet-unit-3.0
       - gate-puppet-quantum-puppet-unit-3.1
 
+  - name: stackforge/puppet-neutron
+    check:
+      - gate-puppet-neutron-puppet-lint
+      - gate-puppet-neutron-puppet-syntax
+      - gate-puppet-neutron-puppet-unit-2.7
+      - gate-puppet-neutron-puppet-unit-3.0
+      - gate-puppet-neutron-puppet-unit-3.1
+    gate:
+      - gate-puppet-neutron-puppet-lint
+      - gate-puppet-neutron-puppet-syntax
+      - gate-puppet-neutron-puppet-unit-2.7
+      - gate-puppet-neutron-puppet-unit-3.0
+      - gate-puppet-neutron-puppet-unit-3.1
+
   - name: stackforge/puppet-openstack
     check:
       - gate-puppet-openstack-puppet-lint

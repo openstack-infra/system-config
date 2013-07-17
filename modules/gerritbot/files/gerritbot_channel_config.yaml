@@ -220,6 +220,7 @@ puppet-openstack:
       - stackforge/puppet-glance
       - stackforge/puppet-horizon
       - stackforge/puppet-keystone
+      - stackforge/puppet-neutron
       - stackforge/puppet-nova
       - stackforge/puppet-openstack
       - stackforge/puppet-openstack_dev_env
