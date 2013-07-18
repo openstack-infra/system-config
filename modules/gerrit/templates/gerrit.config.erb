@@ -19,7 +19,8 @@
 	cookieSecure = true
 	contributorAgreements = true
 [sendemail]
-	smtpServer = localhost
+	smtpServer = <%= smtpserver %>
+	from = <%= sendemail_from %>
 [container]
 	user = gerrit2
 	javaHome = <%= java_home %>
