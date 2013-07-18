@@ -14,8 +14,7 @@
 #
 # Class: cgit
 #
-class cgit {
-
+class cgit{
   include apache
 
   package { [

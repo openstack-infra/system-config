@@ -9,9 +9,10 @@ replicatePermissions = false
 mirror = true
 <% end -%>
 
-<% if replicate_local -%>
-[remote "local"]
-url = file:///var/lib/git/${name}.git
+<% giturl.each do |giturl| -%>
+[remote "<%= giturl['name'] %>"]
+url = "<%= giturl['url'] %>"
+<% end -%>
 replicationDelay = 0
 threads = 4
 mirror = true
