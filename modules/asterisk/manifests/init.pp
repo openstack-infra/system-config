@@ -14,22 +14,26 @@
 #
 # Class to configure asterisk on a CentOS node.
 #
-# == Class: openstack_project::pbx
-class openstack_project::pbx (
-  $sysadmins = [],
+# == Class: asterisk
+class asterisk (
 ) {
-  class { 'openstack_project::server':
-    sysadmins => $sysadmins,
+  yumrepo { 'asteriskcurrent':
+    baseurl  => 'http://packages.asterisk.org/centos/$releasever/current/$basearch/',
+    descr    => 'Asterisk supporting packages produced by Digium',
+    enabled  => 1,
+    gpgcheck => 0,
   }
 
-  class { 'selinux':
-    mode => 'enforcing',
+  yumrepo { 'asterisk11':
+    baseurl  => 'http://packages.asterisk.org/centos/$releasever/asterisk-11/$basearch/',
+    descr    => 'Asterisk packages produced by Digium',
+    enabled  => 1,
+    gpgcheck => 0,
+    require  => Yumrepo['asteriskcurrent'],
   }
 
-  realize (
-    User::Virtual::Localuser['rbryant'],
-  )
-
-  class { 'asterisk':
+  package { 'asterisk' :
+    ensure  => present,
+    require => Yumrepo['asterisk11'],
   }
 }
