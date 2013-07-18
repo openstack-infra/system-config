@@ -1,5 +1,6 @@
 class exim(
   $mailman_domains = [],
+  $smarthost = '',
   $sysadmin = []
 ) {
 
