@@ -120,6 +120,8 @@ def bootstrap_server(server, admin_pass, key, cert, environment, name,
                    "--no-daemonize --verbose --onetime --pluginsync true "
                    "--certname %s" % (environment, certname))
 
+    ssh_client.ssh("reboot")
+
 def build_server(client, name, image, flavor, cert, environment):
     key = None
     server = None
