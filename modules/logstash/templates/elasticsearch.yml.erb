@@ -139,7 +139,11 @@ node.name: "<%= scope.lookupvar("::hostname") %>"
 index.store.compress.stored: true
 index.store.compress.tv: true
 
-indices.memory.index_buffer_size: "40%"
+index.translog.flush_threshold_ops: 50000
+
+index.routing.allocation.total_shards_per_node: 3
+
+indices.memory.index_buffer_size: "33%"
 
 #################################### Paths ####################################
 
