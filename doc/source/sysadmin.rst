@@ -54,13 +54,19 @@ private date from hiera to the more robust manifests in the
 This means that you can run the same configuration on your own server
 simply by providing a different manifest file instead of site.pp.
 
+.. note::
+   The example below is for Debian / Ubuntu systems.  If you are using a
+   RedHat based system be sure to setup sudo or simply run the commands as
+   the root user.
+
 As an example, to run the etherpad configuration on your own server,
 start by ensuring git is installed and then cloning the config Git
 repo::
 
-  apt-get install git
-  git clone https://github.com/openstack-infra/config
-  cd config
+  $ sudo su -
+  # apt-get install git
+  # git clone https://github.com/openstack-infra/config
+  # cd config
 
 Then copy the etherpad node definition from manifests/site.pp to a new
 file (be sure to specify the FQDN of the host you are working with in
@@ -72,11 +78,16 @@ the node specifier).  It might look something like this::
     sysadmins               => 'user@example.org',
   }
 
+.. note::
+   Besure not to use any of the hiera functionality from manifests/site.pp
+   since it is not installed yet. You should be able to comment out the logic
+   safely.
+
 Then to apply that configuration, run the following::
 
-  bash install_puppet.sh
-  bash install_modules.sh
-  puppet apply -l /tmp/manifest.log --modulepath=modules:/etc/puppet/modules local.pp
+  # bash install_puppet.sh
+  # bash install_modules.sh
+  # puppet apply -l /tmp/manifest.log --modulepath=modules:/etc/puppet/modules local.pp
 
 That should turn the system you are logged into into an etherpad
 server with the same configuration as that used by the OpenStack
