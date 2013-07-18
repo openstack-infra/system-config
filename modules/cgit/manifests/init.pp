@@ -14,7 +14,9 @@
 #
 # Class: cgit
 #
-class cgit {
+class cgit(
+  $giturl = [],
+) {
 
   include apache
 

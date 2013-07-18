@@ -32,6 +32,19 @@ class openstack_project::git (
   $local_git_dir = '/var/lib/git'
   $ssh_project_key = ''
 
+  class { 'cgit':
+    giturl => [
+      {
+        name  => 'replicate_local',
+        url   => "git@github.com:${name}.git",
+      },
+      {
+        name  => 'replicate_cgit',
+        url   => "cgit@git.openstack.org:/var/lib/git/${name}.git",
+      },
+    ],
+  }
+
   file { '/etc/cgitrc':
     ensure  => present,
     owner   => 'root',
