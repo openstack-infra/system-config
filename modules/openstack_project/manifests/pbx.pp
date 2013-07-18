@@ -17,6 +17,7 @@
 # == Class: openstack_project::pbx
 class openstack_project::pbx (
   $sysadmins = [],
+  $sip_providers = [],
 ) {
   class { 'openstack_project::server':
     sysadmins                 => $sysadmins,
@@ -46,7 +47,7 @@ class openstack_project::pbx (
     owner   => 'asterisk',
     group   => 'asterisk',
     mode    => '0660',
-    source  => 'puppet:///modules/openstack_project/pbx/asterisk/sip.conf',
+    content => template('openstack_project/pbx/asterisk/sip.conf.erb'),
     require => File['/etc/asterisk/'],
   }
 
