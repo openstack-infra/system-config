@@ -12,8 +12,14 @@ At a Glance
 
 :Hosts:
   * http://pbx.openstack.org
+:Puppet:
+  * :file:`modules/asterisk`
+  * :file:`modules/openstack_project/manifests/pbx.pp`
 :Projects:
   * http://www.asterisk.org
+:Documentation:
+  * https://wiki.openstack.org/wiki/Infrastructure/Conferencing
+  * http://ofps.oreilly.com/titles/9781449332426/
 :Bugs:
   * http://bugs.launchpad.net/openstack-ci
   * http://issues.asterisk.org
