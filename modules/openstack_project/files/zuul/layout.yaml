@@ -1072,11 +1072,9 @@ projects:
 
   - name: openstack-dev/grenade
     check:
-      - gate-noop
       - gate-grenade-devstack-vm
       - gate-grenade-devstack-vm-stable
     gate:
-      - gate-noop
       - gate-grenade-devstack-vm
       - gate-grenade-devstack-vm-stable
 
