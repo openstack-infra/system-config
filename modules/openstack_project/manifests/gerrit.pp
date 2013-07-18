@@ -150,6 +150,16 @@ class openstack_project::gerrit (
     email_private_key               => $email_private_key,
     replicate_github                => $replicate_github,
     replicate_local                 => $replicate_local,
+    giturl                          => [
+      {
+        name  => 'replicate_local',
+        url   => "file:///var/lib/git/",
+      },
+      {
+        name  => 'replicate_cgit',
+        url   => "cgit@git.openstack.org:/var/lib/git/",
+      },
+    ],
     testmode                        => $testmode,
     require                         => Class[openstack_project::server],
   }

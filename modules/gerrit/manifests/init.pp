@@ -110,6 +110,7 @@ class gerrit(
   $melody_session = false,
   $replicate_github = false,
   $replicate_local = false,
+  $giturl = [],
   $replication_targets = [],
   $gitweb = true,
   $testmode = false
