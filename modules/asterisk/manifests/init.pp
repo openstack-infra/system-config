@@ -36,4 +36,14 @@ class asterisk (
     ensure  => present,
     require => Yumrepo['asterisk11'],
   }
+
+  package { 'asterisk-sounds-moh-opsound-ulaw' :
+    ensure  => present,
+    require => Yumrepo['asteriskcurrent'],
+  }
+
+  package { 'asterisk-sounds-core-en-ulaw' :
+    ensure  => present,
+    require => Yumrepo['asteriskcurrent'],
+  }
 }
