@@ -15,7 +15,6 @@
 # Class: cgit
 #
 class cgit {
-
   include apache
 
   package { [
