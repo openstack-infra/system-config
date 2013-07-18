@@ -51,6 +51,7 @@ class openstack_project::gerrit (
   $email_private_key = '',
   $replicate_github = true,
   $replicate_local = true,
+  $replicate_cgit = false,
   $local_git_dir = '/var/lib/git',
   $cla_description = 'OpenStack Individual Contributor License Agreement',
   $cla_file = 'static/cla.html',
@@ -150,6 +151,7 @@ class openstack_project::gerrit (
     email_private_key               => $email_private_key,
     replicate_github                => $replicate_github,
     replicate_local                 => $replicate_local,
+    replicate_cgit                  => $replicate_cgit,
     testmode                        => $testmode,
     require                         => Class[openstack_project::server],
   }
