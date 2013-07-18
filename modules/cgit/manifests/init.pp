@@ -51,11 +51,13 @@ class cgit {
     owner   => 'cgit',
     group   => 'cgit',
     mode    => '0644',
+    require => User['cgit'],
   }
 
   exec { 'restorecon -R -v /var/lib/git':
     path      => '/sbin',
     subscribe => Folder['/var/lib/git']
+    require   => File['/var/lib/git']
   }
 
   selboolean { 'httpd_enable_cgi':
