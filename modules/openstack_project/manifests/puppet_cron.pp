@@ -11,7 +11,7 @@ class openstack_project::puppet_cron($ensure = present)
     ensure      => $ensure,
     user        => 'root',
     minute      => '*/15',
-    command     => "${::openstack_project::params::update_pkg_list_cmd}sleep $((RANDOM\%600)) && puppet agent --test >>/var/log/manifest.log",
+    command     => "${::openstack_project::params::update_pkg_list_cmd}sleep $((RANDOM\%600)) && puppet agent --test 2>&1 >>/var/log/manifest.log | grep -v '\(iconv will be deprecated\|class variable access from toplevel\)'",
     environment => 'PATH=/var/lib/gems/1.8/bin:/usr/bin:/bin:/usr/sbin:/sbin',
   }
   logrotate::file { 'updatepuppet':
