@@ -307,3 +307,13 @@ openstack-state-management:
       - stackforge/taskflow
     branches:
       - master
+
+openstack-cloudkeep:
+    events:
+      - patchset-created
+      - change-merged
+      - x-vrif-minus-2
+    projects:
+      - stackforge/barbican
+    branches:
+      - master
