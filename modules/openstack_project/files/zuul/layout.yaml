@@ -367,10 +367,8 @@ projects:
   - name: openstack-infra/storyboard
     check:
       - gate-storyboard-pep8
-      - gate-storyboard-python27
     gate:
       - gate-storyboard-pep8
-      - gate-storyboard-python27
     post:
       - storyboard-branch-tarball
     pre-release:
