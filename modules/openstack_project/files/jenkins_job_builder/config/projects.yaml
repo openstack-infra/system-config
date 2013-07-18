@@ -1042,7 +1042,7 @@
       - puppet-module-unit
 
 - project:
-    name: puppet-quantum
+    name: puppet-neutron
     github-org: stackforge
     node: precise
     tarball-site: tarballs.openstack.org

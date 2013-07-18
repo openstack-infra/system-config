@@ -683,11 +683,11 @@ projects:
       - gate-puppet-nova-puppet-unit-3.0
       - gate-puppet-nova-puppet-unit-3.1
 
-  - name: stackforge/puppet-quantum
+  - name: stackforge/puppet-neutron
     check:
-      - gate-puppet-quantum-puppet-unit-2.7
-      - gate-puppet-quantum-puppet-unit-3.0
-      - gate-puppet-quantum-puppet-unit-3.1
+      - gate-puppet-neutron-puppet-unit-2.7
+      - gate-puppet-neutron-puppet-unit-3.0
+      - gate-puppet-neutron-puppet-unit-3.1
 
   - name: stackforge/puppet-openstack
     check:
