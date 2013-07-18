@@ -17,8 +17,10 @@
 # == Class: openstack_project::git
 class openstack_project::git (
   $sysadmins = [],
-  $git_gerrit_ssh_key = $git_gerrit_ssh_key,
-  $gerrit_url = 'review.openstack.org'
+  $git_gerrit_ssh_key = '',
+  $gerrit_url = 'review.openstack.org',
+  $local_git_dir = '/var/lib/git',
+  $ssh_project_key = ''
 ) {
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [80, 9418],
@@ -26,6 +28,8 @@ class openstack_project::git (
   }
 
   include cgit
+  include jeepyb
+  include pip
 
   file { '/etc/cgitrc':
     ensure  => present,
@@ -50,6 +54,23 @@ class openstack_project::git (
     content => "${gerrit_url} ${git_gerrit_ssh_key}",
     replace => true,
     require => File['/home/cgit/.ssh/']
+  }
+
+  file { '/home/cgit/projects.yaml':
+    ensure  => present,
+    owner   => 'cgit',
+    group   => 'cgit',
+    mode    => '0444',
+    content => template('openstack_project/review.projects.yaml.erb'),
+    replace => true,
+  }
+
+  exec { 'create_cgitrepos':
+    command     => 'create-cgitrepos',
+    path        => '/bin:/usr/bin:/usr/local/bin',
+    require     => File['/home/cgit/projects.yaml'],
+    subscribe   => File['/home/cgit/projects.yaml'],
+    refreshonly => true,
   }
 
   class { 'selinux':
