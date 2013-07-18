@@ -1197,6 +1197,7 @@ projects:
       - gate-tempest-devstack-vm-cinder
       - gate-tempest-devstack-vm-neutron
       - gate-tempest-devstack-vm-neutron-full
+      - gate-grenade-devstack-vm
     gate:
       - gate-tempest-requirements
       - gate-tempest-pep8
@@ -1207,6 +1208,7 @@ projects:
       - gate-tempest-devstack-vm-cinder
       - gate-tempest-devstack-vm-neutron
       - gate-tempest-devstack-vm-neutron-full
+      - gate-grenade-devstack-vm
     post:
       - tempest-docs
 
