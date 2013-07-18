@@ -53,6 +53,11 @@ class asterisk (
     require => Yumrepo['asteriskcurrent'],
   }
 
+  package { 'asterisk-sounds-extra-en-ulaw' :
+    ensure  => present,
+    require => Yumrepo['asteriskcurrent'],
+  }
+
   file {'/etc/asterisk/asterisk.conf':
     ensure  => present,
     owner   => 'asterisk',
