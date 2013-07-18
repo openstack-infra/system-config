@@ -330,6 +330,12 @@ node 'zuul-dev.openstack.org' {
   }
 }
 
+node 'pbx.openstack.org' {
+  class { 'openstack_project::pbx':
+    sysadmins => hiera('sysadmins'),
+  }
+}
+
 # A bare machine, but with a jenkins user
 node /^.*\.template\.openstack\.org$/ {
   include openstack_project::slave_template
