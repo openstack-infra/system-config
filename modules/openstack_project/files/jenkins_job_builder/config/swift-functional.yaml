@@ -25,7 +25,11 @@
 
           function post_test_hook {
               cd /opt/stack/new/swift
+              # Launch V2 auth tests
               bash .functests
+              # Launch V1 auth tests
+              SWIFT_TEST_CONFIG_FILE=/opt/stack/new/swift/test/sample.conf \
+                  bash .functests
           }
           export -f post_test_hook
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
