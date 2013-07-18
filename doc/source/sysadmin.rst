@@ -54,10 +54,16 @@ private date from hiera to the more robust manifests in the
 This means that you can run the same configuration on your own server
 simply by providing a different manifest file instead of site.pp.
 
+.. note::
+   The example below is for Debian / Ubuntu systems.  If you are using a
+   RedHat based system be sure to setup sudo or simply run the commands as
+   the root user.
+
 As an example, to run the etherpad configuration on your own server,
 start by ensuring git is installed and then cloning the config Git
 repo::
 
+  sudo su -
   apt-get install git
   git clone https://github.com/openstack-infra/config
   cd config
@@ -71,6 +77,11 @@ the node specifier).  It might look something like this::
     database_password       => 'badpassword',
     sysadmins               => 'user@example.org',
   }
+
+.. note::
+   Be sure not to use any of the hiera functionality from manifests/site.pp
+   since it is not installed yet. You should be able to comment out the logic
+   safely.
 
 Then to apply that configuration, run the following::
 
