@@ -53,7 +53,6 @@ class openstack_project::review (
   $lp_sync_secret='',
   $contactstore_appsec='',
   $contactstore_pubkey='',
-  $replicate_github=true,
   $sysadmins = [],
   $swift_username = '',
   $swift_password = ''
@@ -102,7 +101,6 @@ class openstack_project::review (
     mysql_root_password             => $mysql_root_password,
     trivial_rebase_role_id          => 'trivial-rebase@review.openstack.org',
     email_private_key               => $email_private_key,
-    replicate_github                => $replicate_github,
     sysadmins                       => $sysadmins,
     swift_username                  => $swift_username,
     swift_password                  => $swift_password,
