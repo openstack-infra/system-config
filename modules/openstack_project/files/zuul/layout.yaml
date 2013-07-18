@@ -264,11 +264,15 @@ projects:
       - gate-jenkins-job-builder-docs
       - gate-jenkins-job-builder-pep8
       - gate-jenkins-job-builder-pyflakes
+      - gate-jenkins-job-builder-python26
+      - gate-jenkins-job-builder-python27
       - jenkins-job-builder-compare-xml
     gate:
       - gate-jenkins-job-builder-docs
       - gate-jenkins-job-builder-pep8
       - gate-jenkins-job-builder-pyflakes
+      - gate-jenkins-job-builder-python26
+      - gate-jenkins-job-builder-python27
     post:
       - jenkins-job-builder-branch-tarball
       - jenkins-job-builder-docs
