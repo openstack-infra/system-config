@@ -70,6 +70,9 @@ jobs:
     branch: stable/folsom
   - name: gate-tempest-devstack-vm-full
     branch: ^(?!stable/folsom).*$
+  - name: gate-tempest-devstack-vm-testr-full
+    branch: ^(?!stable/(folsom|grizzly)).*$
+    voting: false
   - name: gate-tempest-devstack-vm-neutron
     branch: ^(?!stable/folsom).*$
     voting: false
@@ -413,6 +416,7 @@ projects:
       - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-cells-full
+      - gate-tempest-devstack-vm-testr-full
       - gate-tempest-devstack-vm-cinder
       - gate-tempest-devstack-vm-postgres-full
       - gate-tempest-devstack-vm-neutron
@@ -450,6 +454,7 @@ projects:
       - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-cells-full
+      - gate-tempest-devstack-vm-testr-full
       - gate-tempest-devstack-vm-cinder
       - gate-tempest-devstack-vm-postgres-full
       - gate-tempest-devstack-vm-neutron
@@ -488,6 +493,7 @@ projects:
       - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-cells-full
+      - gate-tempest-devstack-vm-testr-full
       - gate-tempest-devstack-vm-cinder
       - gate-tempest-devstack-vm-postgres-full
       - gate-tempest-devstack-vm-neutron
@@ -551,6 +557,7 @@ projects:
       - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-cells-full
+      - gate-tempest-devstack-vm-testr-full
       - gate-tempest-devstack-vm-cinder
       - gate-tempest-devstack-vm-postgres-full
       - gate-tempest-devstack-vm-neutron
@@ -589,6 +596,7 @@ projects:
       - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-cells-full
+      - gate-tempest-devstack-vm-testr-full
       - gate-tempest-devstack-vm-cinder
       - gate-tempest-devstack-vm-postgres-full
       - gate-tempest-devstack-vm-neutron
@@ -742,6 +750,7 @@ projects:
       - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-cells-full
+      - gate-tempest-devstack-vm-testr-full
       - gate-tempest-devstack-vm-cinder
       - gate-tempest-devstack-vm-neutron
       - gate-tempest-devstack-vm-postgres-full
@@ -803,6 +812,7 @@ projects:
       - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-cells-full
+      - gate-tempest-devstack-vm-testr-full
       - gate-tempest-devstack-vm-postgres-full
       - gate-tempest-devstack-vm-cinder
       - gate-tempest-devstack-vm-neutron
@@ -841,6 +851,7 @@ projects:
       - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-cells-full
+      - gate-tempest-devstack-vm-testr-full
       - gate-tempest-devstack-vm-postgres-full
       - gate-tempest-devstack-vm-cinder
       - gate-tempest-devstack-vm-neutron
@@ -879,6 +890,7 @@ projects:
       - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-cells-full
+      - gate-tempest-devstack-vm-testr-full
       - gate-tempest-devstack-vm-postgres-full
       - gate-tempest-devstack-vm-cinder
       - gate-tempest-devstack-vm-neutron
@@ -917,6 +929,7 @@ projects:
       - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-cells-full
+      - gate-tempest-devstack-vm-testr-full
       - gate-tempest-devstack-vm-postgres-full
       - gate-tempest-devstack-vm-cinder
       - gate-tempest-devstack-vm-neutron
@@ -980,6 +993,7 @@ projects:
       - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-cells-full
+      - gate-tempest-devstack-vm-testr-full
       - gate-tempest-devstack-vm-postgres-full
       - gate-tempest-devstack-vm-cinder
       - gate-tempest-devstack-vm-neutron
@@ -1086,6 +1100,7 @@ projects:
       - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-cells-full
+      - gate-tempest-devstack-vm-testr-full
       - gate-tempest-devstack-vm-cinder
       - gate-tempest-devstack-vm-postgres-full
       - gate-tempest-devstack-vm-neutron
@@ -1121,6 +1136,7 @@ projects:
       - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-cells-full
+      - gate-tempest-devstack-vm-testr-full
       - gate-tempest-devstack-vm-cinder
       - gate-tempest-devstack-vm-postgres-full
       - gate-tempest-devstack-vm-neutron
@@ -1138,6 +1154,7 @@ projects:
       - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-cells-full
+      - gate-tempest-devstack-vm-testr-full
       - gate-tempest-devstack-vm-cinder
       - gate-tempest-devstack-vm-postgres-full
       - gate-tempest-devstack-vm-neutron
@@ -1176,6 +1193,7 @@ projects:
       - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-cells-full
+      - gate-tempest-devstack-vm-testr-full
       - gate-tempest-devstack-vm-postgres-full
       - gate-tempest-devstack-vm-cinder
       - gate-tempest-devstack-vm-neutron
@@ -1262,6 +1280,7 @@ projects:
       - gate-heat-python27
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-cells-full
+      - gate-tempest-devstack-vm-testr-full
       - gate-tempest-devstack-vm-postgres-full
       - gate-tempest-devstack-vm-neutron
     gate:
