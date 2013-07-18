@@ -6,6 +6,7 @@ pipelines:
     description: Newly uploaded patchsets enter this pipeline to receive an initial +/-1 Verified vote from Jenkins.
     failure-message: Build failed.  For information on how to proceed, see https://wiki.openstack.org/wiki/GerritJenkinsGithub#Test_Failures
     manager: IndependentPipelineManager
+    precedence: low
     trigger:
       - event: patchset-created
       - event: comment-added
@@ -19,6 +20,7 @@ pipelines:
     description: Changes that have been approved by core developers are enqueued in order in this pipeline, and if they pass tests in Jenkins, will be merged.
     failure-message: Build failed.  For information on how to proceed, see https://wiki.openstack.org/wiki/GerritJenkinsGithub#Test_Failures
     manager: DependentPipelineManager
+    precedence: high
     trigger:
       - event: comment-added
         approval:
@@ -43,6 +45,7 @@ pipelines:
   - name: pre-release
     description: This pipeline runs jobs on projects in response to pre-release tags.
     manager: IndependentPipelineManager
+    precedence: high
     trigger:
       - event: ref-updated
         ref: ^refs/tags/([0-9]+\.)+[0-9]*(alpha|beta|candidate|rc|a|b|c|r|g)[0-9]*$
@@ -50,6 +53,7 @@ pipelines:
   - name: release
     description: When a commit is tagged as a release, this pipeline runs jobs that publish archives and documentation.
     manager: IndependentPipelineManager
+    precedence: high
     trigger:
       - event: ref-updated
         ref: ^refs/tags/([0-9]+\.)+[0-9]+$
@@ -57,6 +61,7 @@ pipelines:
   - name: silent
     description: This pipeline is used for silently testing new jobs.
     manager: IndependentPipelineManager
+    precedence: low
     trigger:
       - event: patchset-created
       - event: comment-added
