@@ -1,18 +1,22 @@
 # This file is managed by puppet.
 # https://github.com/openstack-infra/config
 
-<% if replicate_github -%>
-[remote "github"]
-url = git@github.com:${name}.git
-authGroup = Anonymous Users
-replicatePermissions = false
-mirror = true
+<% replication.each do |replication| -%>
+[remote "<%= replication['name'] %>"]
+	url = <%= replication['url'] %>${name}.git
+<% if replication['replicationDelay'] != nil -%>
+	replicationDelay = <%= replication['replicationDelay'] %>
 <% end -%>
-
-<% if replicate_local -%>
-[remote "local"]
-url = file:///var/lib/git/${name}.git
-replicationDelay = 0
-threads = 4
-mirror = true
+<% if replication['threads'] != nil -%>
+	threads = <%= replication['threads'] %>
+<% end -%>
+<% if replication['authGroup'] != nil -%>
+	authGroup = <%= replication['authGroup'] %>
+<% end -%>
+<% if replication['replicatePermissions'] != nil -%>
+	replicatePermissions = <%= replication['replicatePermissions'] %>
+<% end -%>
+<% if replication['mirror'] != nil -%>
+	mirror = <%= replication['mirror'] %>
+<% end -%>
 <% end -%>

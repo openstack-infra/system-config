@@ -20,10 +20,10 @@ class openstack_project::review_dev (
   $lp_sync_consumer_key = '',
   $lp_sync_token = '',
   $lp_sync_secret = '',
-  $replicate_github = true,
   $sysadmins = [],
   $swift_username = '',
   $swift_password = ''
+  $replicate = [],
 ) {
   class { 'openstack_project::gerrit':
     vhost_name                      => 'review-dev.openstack.org',
@@ -59,10 +59,25 @@ class openstack_project::review_dev (
     trivial_rebase_role_id          =>
       'trivial-rebase@review-dev.openstack.org',
     email_private_key               => $email_private_key,
-    replicate_github                => $replicate_github,
     sysadmins                       => $sysadmins,
     swift_username                  => $swift_username,
     swift_password                  => $swift_password,
+    replication                     => [
+      {
+        name                 => 'github',
+        url                  => 'git@github.com:',
+        authGroup            => 'Anonymous Users',
+        replicatePermissions => false,
+        mirror               => true,
+      },
+      {
+        name                 => 'local',
+        url                  => 'file:///var/lib/git/',
+        replicationDelay     => '0',
+        threads              => '4',
+        mirror               => true,
+      },
+    ],
   }
 
   file { '/var/log/gerrit_user_sync':

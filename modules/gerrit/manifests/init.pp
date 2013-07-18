@@ -56,8 +56,6 @@
 #     A public key with which to encrypt contact information
 #   contactstore_url:
 #     A URL for the remote contact store application
-#   replicate_github:
-#     A boolean enabling replication to github
 #   replicate_local:
 #     A boolean enabling local replication for apache acceleration
 #   gitweb:
@@ -108,8 +106,8 @@ class gerrit(
   $contactstore_url = '',
   $enable_melody = false,
   $melody_session = false,
-  $replicate_github = false,
   $replicate_local = false,
+  $replication = [],
   $replication_targets = [],
   $gitweb = true,
   $testmode = false
