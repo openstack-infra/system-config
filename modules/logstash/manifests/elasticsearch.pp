@@ -50,6 +50,24 @@ class logstash::elasticsearch (
     require => Package['elasticsearch'],
   }
 
+  file { '/etc/elasticsearch/templates':
+    ensure  => directory,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0755',
+    require => Package['elasticsearch'],
+  }
+
+  file { '/etc/elasticsearch/templates/logstash_settings.json':
+    ensure  => present,
+    source  => 'puppet:///modules/logstash/es-logstash-template.json',
+    replace => true,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0644',
+    require => File['/etc/elasticsearch/templates'],
+  }
+
   file { '/etc/elasticsearch/default-mapping.json':
     ensure  => present,
     source  => 'puppet:///modules/logstash/elasticsearch.mapping.json',

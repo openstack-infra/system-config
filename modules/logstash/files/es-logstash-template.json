@@ -1,0 +1,10 @@
+{
+    "logstash_settings" : {
+        "template" : "logstash*",
+        "settings" : {
+            "index.routing.allocation.total_shards_per_node" : "3",
+            "index.translog.flush_threshold_ops" : "50000",
+            "index.cache.field.type" : "soft"
+        }
+    }
+}
