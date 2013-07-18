@@ -32,9 +32,19 @@ class asterisk (
     require  => Yumrepo['asteriskcurrent'],
   }
 
+  package { 'asterisknow-version' :
+    ensure  => present,
+    require => [
+      Yumrepo['asteriskcurrent'],
+    ],
+  }
+
   package { 'asterisk' :
     ensure  => present,
-    require => Yumrepo['asterisk11'],
+    require => [
+      Yumrepo['asterisk11'],
+      Package['asterisknow-version'],
+    ],
   }
 
   package { 'asterisk-sounds-moh-opsound-ulaw' :
