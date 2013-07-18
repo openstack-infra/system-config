@@ -16,3 +16,12 @@ replicationDelay = 0
 threads = 4
 mirror = true
 <% end -%>
+
+<% if replicate_cgit -%>
+[remote "cgit"]
+url = cgit@git.openstack.org:${name}.git
+authGroup = Anonymous Users
+replicatePermissions = false
+mirror = true
+<% end -%>
+
