@@ -332,7 +332,11 @@ node 'zuul-dev.openstack.org' {
 
 node 'pbx.openstack.org' {
   class { 'openstack_project::pbx':
-    sysadmins => hiera('sysadmins'),
+    sysadmins    => hiera('sysadmins'),
+    sip_username => hiera('voipms_username'),
+    sip_password => hiera('voipms_password'),
+    sip_hostname => 'dallas.voip.ms',
+    sip_provider => 'voipms',
   }
 }
 

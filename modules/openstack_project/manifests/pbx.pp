@@ -26,6 +26,10 @@ class openstack_project::pbx (
     iptables_public_udp_ports => [5060],
     iptables_rules4           => ['-m udp -p udp --dport 10000:20000 -j ACCEPT'],
     iptables_rules6           => ['-m udp -p udp --dport 10000:20000 -j ACCEPT'],
+    sip_username	      => $sip_username,
+    sip_password	      => $sip_password,
+    sip_hostname	      => $sip_hostname,
+    sip_provider	      => $sip_provider,
   }
 
   class { 'selinux':
@@ -46,7 +50,7 @@ class openstack_project::pbx (
     owner   => 'asterisk',
     group   => 'asterisk',
     mode    => '0660',
-    source  => 'puppet:///modules/openstack_project/pbx/asterisk/sip.conf',
+    content => template('openstack_project/pbx/asterisk/sip.conf.erb'),
     require => File['/etc/asterisk/'],
   }
 

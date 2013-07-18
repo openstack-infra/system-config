@@ -1,0 +1,29 @@
+; sip.conf customizations for pbx.openstack.org
+
+[general](+)
+udpbindaddr=::
+tcpenable=yes
+tcpbindaddr=::
+context=public
+allowguest=yes
+disallow=all
+allow=g722
+allow=ulaw
+allow=alaw
+allow=gsm
+videosupport=yes
+<% if sip_username != '' -%>
+register => <%= sip_username %>:<%= sip_password %>@<%= sip_hostname %>:5060
+
+[<%= sip_provider %>]
+canreinvite=no
+context=public
+host=<%= sip_hostname %>
+secret=<%= sip_password %>
+type=peer
+username=<%= sip_username %>
+fromuser=<%= sip_username %>
+trustrpid=yes
+sendrpid=yes
+insecure=invite
+<% end -%>
