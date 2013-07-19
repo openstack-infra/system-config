@@ -29,6 +29,7 @@ class openstack_project::eavesdrop (
         '#openstack-meeting',
         '#openstack-meeting-alt',
         '#openstack-qa',
+        '#savanna',
     ],
     use_ssl   => 'True'
   }
