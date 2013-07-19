@@ -24,15 +24,13 @@ class openstack_project::git (
     sysadmins                 => $sysadmins,
   }
 
-  # We don't actually use these, but jeepyb requires them.
-  class {'jeepyb::git':
-    local_git_dir   => '/var/lib/git',
-    ssh_project_key => '',
-  }
-
   include cgit
   include jeepyb
   include pip
+
+  # We don't actually use these, but jeepyb requires them.
+  $local_git_dir = '/var/lib/git'
+  $ssh_project_key = ''
 
   file { '/etc/cgitrc':
     ensure  => present,
