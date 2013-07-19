@@ -1764,6 +1764,12 @@ projects:
     post:
       - tripleo-image-elements-coverage
 
+  - name: openstack/tripleo-incubator
+    check:
+      - gate-noop
+    gate:
+      - gate-noop
+
   - name: stackforge/climate
     check:
       - gate-climate-pep8
