@@ -31,6 +31,7 @@ class jenkins::params {
       $libxml2_package = 'libxml2'
       $libxml2_dev_package = 'libxml2-devel'
       $libxslt_dev_package = 'libxslt-devel'
+      $libffi_dev_package = 'libffi-devel'
       # FIXME: No Maven packages on RHEL
       #$maven_package = 'maven'
       # For Ceilometer unit tests
@@ -93,6 +94,7 @@ class jenkins::params {
       $libxml2_package = 'libxml2-utils'
       $libxml2_dev_package = 'libxml2-dev'
       $libxslt_dev_package = 'libxslt1-dev'
+      $libffi_dev_package = 'libffi-dev'
       $maven_package = 'maven2'
       # For Ceilometer unit tests
       $mongodb_package = 'mongodb'

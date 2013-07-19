@@ -47,6 +47,7 @@ class jenkins::slave(
     $::jenkins::params::libxml2_package,
     $::jenkins::params::libxml2_dev_package, # for xmllint, need for wadl
     $::jenkins::params::libxslt_dev_package,
+    $::jenkins::params::libffi_dev_package, # xattr's cffi dependency
     $::jenkins::params::pandoc_package, #for docs, markdown->docbook, bug 924507
     $::jenkins::params::pkgconfig_package, # for spidermonkey, used by ceilometer
     $::jenkins::params::pyflakes_package,
