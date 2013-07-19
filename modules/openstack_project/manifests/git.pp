@@ -18,16 +18,13 @@
 class openstack_project::git (
   $sysadmins = [],
   $git_gerrit_ssh_key = '',
+  # We don't actually use these, but jeepyb requires them.
+  local_git_dir   => '/var/lib/git',
+  ssh_project_key => '',
 ) {
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [80, 9418],
     sysadmins                 => $sysadmins,
-  }
-
-  # We don't actually use these, but jeepyb requires them.
-  class {'jeepyb::git':
-    local_git_dir   => '/var/lib/git',
-    ssh_project_key => '',
   }
 
   include cgit
