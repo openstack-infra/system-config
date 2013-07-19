@@ -33,7 +33,6 @@ class openstack_project::zuul_prod(
     push_change_refs     => false,
     status_url           => 'http://status.openstack.org/zuul/',
     statsd_host          => $statsd_host,
-    revision             => 'feature/gearman',
   }
 
   file { '/etc/zuul/layout.yaml':
