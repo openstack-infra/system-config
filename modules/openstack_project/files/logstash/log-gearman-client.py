@@ -76,7 +76,7 @@ class EventProcessor(threading.Thread):
 
     def _get_log_dir(self, event):
         parameters = event["build"].get("parameters", {})
-        base = parameters.get('BASE_LOG_PATH', '/periodic')
+        base = parameters.get('BASE_LOG_PATH', 'periodic')
         base += '/{name}/{number}/'.format(
             name=event.get("name", "UNKNOWN"),
             number=event["build"].get("number", "UNKNOWN"))
@@ -102,7 +102,7 @@ class EventProcessor(threading.Thread):
     def _parse_event(self, event, fileopts):
         fields = self._parse_fields(event, fileopts['name'])
         log_dir = self._get_log_dir(event)
-        source_url = fileopts.get('source-url', self.source_url) + \
+        source_url = fileopts.get('source-url', self.source_url) + '/' + \
                 log_dir + fileopts['name']
         out_event = {}
         out_event["@fields"] = fields
