@@ -31,7 +31,7 @@
       goals: 'clean generate-sources'
 
     publishers:
-      - console-log-post
+      - console-log
       - ftp:
           site: docs.openstack.org
           source: 'openstack-api-programming/target/docbkx/webhelp/openstack-api-programming/admin/**'
@@ -58,7 +58,7 @@
       goals: 'clean generate-sources'
 
     publishers:
-      - console-log-post
+      - console-log
       - ftp:
           site: docs.openstack.org
           source: 'api-quick-start/target/docbkx/webhelp/api-quick-start-onepager/**'
@@ -86,7 +86,7 @@
       goals: 'clean generate-sources'
 
     publishers:
-      - console-log-post
+      - console-log
       - ftp:
           site: api.openstack.org
           source: 'api-ref/target/docbkx/html/**'
@@ -113,7 +113,7 @@
           target: ''
           remove-prefix: 'www/'
           excludes: ''
-      - console-log-post
+      - console-log
 
 - job:
     name: image-api-v2.0
@@ -146,7 +146,7 @@
       goals: 'clean generate-sources'
 
     publishers:
-      - console-log-post
+      - console-log
       - ftp:
           site: docs.openstack.org
           source: 'openstack-image-service-api/src/markdown/target/docbkx/webhelp/api/openstack-image-service/2.0/**'
@@ -174,7 +174,7 @@
       goals: 'clean generate-sources'
 
     publishers:
-      - console-log-post
+      - console-log
       - ftp:
           site: docs.openstack.org
           source: 'doc/target/docbkx/webhelp/api/openstack-network/1.0/**'
@@ -199,7 +199,7 @@
       goals: 'clean generate-sources'
 
     publishers:
-      - console-log-post
+      - console-log
       - ftp:
           site: docs.openstack.org
           source: 'doc/target/docbkx/webhelp/api/openstack-network/2.0/**'
@@ -225,7 +225,7 @@
       goals: 'clean generate-sources'
 
     publishers:
-      - console-log-post
+      - console-log
       - ftp:
           site: docs.openstack.org
           source: 'openstack-object-storage-dev/target/docbkx/webhelp/**'
@@ -251,7 +251,7 @@
       goals: 'clean generate-sources'
 
     publishers:
-      - console-log-post
+      - console-log
       - ftp:
           site: docs.openstack.org
           source: 'openstack-compute-api-2/target/docbkx/webhelp/api/openstack-compute/2/**'
@@ -275,7 +275,7 @@
           target: 'api/openstack-compute/2/wadl/'
           remove-prefix: 'target/'
           excludes: '**/*.xml,**/null*'
-      - console-log-post
+      - console-log
 
 - job:
     name: block-api-v2.0
@@ -295,7 +295,7 @@
       goals: 'clean generate-sources'
 
     publishers:
-      - console-log-post
+      - console-log
       - ftp:
           site: docs.openstack.org
           source: 'v2/target/docbkx/webhelp/api/openstack-block-storage/2.0/**'
@@ -322,7 +322,7 @@
       goals: 'clean generate-sources'
 
     publishers:
-      - console-log-post
+      - console-log
       - ftp:
           site: docs.openstack.org
           source: 'openstack-identity-api/v2.0/target/docbkx/webhelp/api/openstack-identity-service/2.0/**'
@@ -361,7 +361,7 @@
       goals: 'clean generate-sources'
 
     publishers:
-      - console-log-post
+      - console-log
       - ftp:
           site: docs.openstack.org
           source: 'openstack-identity-api/v3/markdown/target/docbkx/webhelp/api/openstack-identity-service/3/**'
@@ -389,7 +389,7 @@
       goals: 'clean generate-sources'
 
     publishers:
-      - console-log-post
+      - console-log
       - ftp:
           site: docs.openstack.org
           source: 'openstack-image-service-api/target/docbkx/webhelp/api/openstack-image-service/1.1/**'

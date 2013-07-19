@@ -19,7 +19,7 @@
       - scp:
           site: 'static.openstack.org'
           files:
-            - target: 'docs-draft/$JOB_NAME/$ZUUL_PIPELINE/$BUILD_NUMBER/cli/quick-start'
+            - target: 'docs-draft/$BASE_LOG_PATH/$JOB_NAME/$BUILD_NUMBER/cli/quick-start'
               source: 'doc/src/docbkx/cli-guide/target/docbkx/webhelp/cli-guide/**'
               keep-hierarchy: true
               copy-after-failure: true
@@ -45,7 +45,7 @@
       - scp:
           site: 'static.openstack.org'
           files:
-            - target: 'docs-draft/$JOB_NAME/$ZUUL_PIPELINE/$BUILD_NUMBER/ops/'
+            - target: 'docs-draft/$BASE_LOG_PATH/$JOB_NAME/$BUILD_NUMBER/ops/'
               source: 'doc/src/docbkx/openstack-ops/target/docbkx/webhelp/**'
               keep-hierarchy: true
               copy-after-failure: true
@@ -78,7 +78,7 @@
       goals: 'clean generate-sources'
 
     publishers:
-      - console-log-post
+      - console-log
       - ftp:
           site: docs.openstack.org
           source: 'doc/src/docbkx/cli-guide/target/docbkx/webhelp/cli-guide/**'
@@ -108,7 +108,7 @@
       goals: '-Doperating.system=yum -Dprofile.os=centos;fedora;rhel -Drelease.path.name=${DOC_RELEASE_PATH} -Dcomments.enabled=${DOC_COMMENTS_ENABLED} clean generate-sources'
 
     publishers:
-      - console-log-post
+      - console-log
       - ftp:
           site: docs.openstack.org
           source: 'doc/src/docbkx/basic-install/target/docbkx/webhelp/**'
@@ -141,7 +141,7 @@
       goals: '-Doperating.system=apt -Dprofile.os=ubuntu;debian -Drelease.path.name=${DOC_RELEASE_PATH} -Dcomments.enabled=${DOC_COMMENTS_ENABLED} clean generate-sources'
 
     publishers:
-      - console-log-post
+      - console-log
       - ftp:
           site: docs.openstack.org
           source: 'doc/src/docbkx/basic-install/target/docbkx/webhelp/**'
@@ -171,7 +171,7 @@
       goals: 'clean generate-sources'
 
     publishers:
-      - console-log-post
+      - console-log
       - ftp:
           site: docs.openstack.org
           source: 'doc/src/docbkx/openstack-block-storage-admin/target/docbkx/webhelp/**'
@@ -196,7 +196,7 @@
       goals: 'clean generate-sources'
 
     publishers:
-      - console-log-post
+      - console-log
       - ftp:
           site: docs.openstack.org
           source: 'doc/src/docbkx/common/glossary/target/docbkx/webhelp/openstack-glossary/**'
@@ -227,7 +227,7 @@
       goals: '-Drelease.path.name=${DOC_RELEASE_PATH} -Dcomments.enabled=${DOC_COMMENTS_ENABLED} clean generate-sources'
 
     publishers:
-      - console-log-post
+      - console-log
       - ftp:
           site: docs.openstack.org
           source: 'doc/src/docbkx/openstack-image/target/docbkx/webhelp/**'
@@ -258,7 +258,7 @@
       goals: '-Drelease.path.name=${DOC_RELEASE_PATH} -Dcomments.enabled=${DOC_COMMENTS_ENABLED} clean generate-sources'
 
     publishers:
-      - console-log-post
+      - console-log
       - ftp:
           site: docs.openstack.org
           source: 'doc/src/docbkx/openstack-compute-admin/target/docbkx/webhelp/**'
@@ -289,7 +289,7 @@
       goals: '-Drelease.path.name=${DOC_RELEASE_PATH} -Dcomments.enabled=${DOC_COMMENTS_ENABLED} clean generate-sources'
 
     publishers:
-      - console-log-post
+      - console-log
       - ftp:
           site: docs.openstack.org
           source: 'doc/src/docbkx/openstack-network-connectivity-admin/target/docbkx/webhelp/**'
@@ -320,7 +320,7 @@
       goals: '-Drelease.path.name=${DOC_RELEASE_PATH} -Dcomments.enabled=${DOC_COMMENTS_ENABLED} clean generate-sources'
 
     publishers:
-      - console-log-post
+      - console-log
       - ftp:
           site: docs.openstack.org
           source: 'doc/src/docbkx/openstack-object-storage-admin/target/docbkx/webhelp/**'
@@ -344,7 +344,7 @@
           target: ''
           remove-prefix: 'www/'
           excludes: ''
-      - console-log-post
+      - console-log
 
 # in zuul/layout.yaml specified to only run against master branch.
 # The old jenkins config polled github every 5 minutes and was also triggered
@@ -377,7 +377,7 @@
       goals: 'clean generate-sources'
 
     publishers:
-      - console-log-post
+      - console-log
       - ftp:
           site: docs.openstack.org
           source: 'doc/src/docbkx/openstack-ha/target/docbkx/webhelp/trunk/**'
@@ -408,7 +408,7 @@
       goals: '-Doperating.system=yum -Dprofile.os=centos;fedora;rhel -Drelease.path.name=${DOC_RELEASE_PATH} -Dcomments.enabled=${DOC_COMMENTS_ENABLED} clean generate-sources'
 
     publishers:
-      - console-log-post
+      - console-log
       - ftp:
           site: docs.openstack.org
           source: 'doc/src/docbkx/openstack-install/target/docbkx/webhelp/**'
@@ -439,7 +439,7 @@
       goals: '-Doperating.system=apt -Dprofile.os=ubuntu -Drelease.path.name=${DOC_RELEASE_PATH} -Dcomments.enabled=${DOC_COMMENTS_ENABLED} clean generate-sources'
 
     publishers:
-      - console-log-post
+      - console-log
       - ftp:
           site: docs.openstack.org
           source: 'doc/src/docbkx/openstack-install/target/docbkx/webhelp/**'
@@ -470,7 +470,7 @@
       goals: '-Drelease.path.name=${DOC_RELEASE_PATH} -Dcomments.enabled=${DOC_COMMENTS_ENABLED} clean generate-sources'
 
     publishers:
-      - console-log-post
+      - console-log
       - ftp:
           site: docs.openstack.org
           source: 'doc/src/docbkx/openstack-ops/target/docbkx/webhelp/**'
@@ -501,7 +501,7 @@
       goals: '-Drelease.path.name=${DOC_RELEASE_PATH} -Dcomments.enabled=${DOC_COMMENTS_ENABLED} clean generate-sources'
 
     publishers:
-      - console-log-post
+      - console-log
       - ftp:
           site: docs.openstack.org
           source: 'doc/src/docbkx/openstack-security/target/docbkx/webhelp/**'
