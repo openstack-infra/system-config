@@ -6,6 +6,10 @@
     name: gate-django_openstack_auth-noop
     node: precise
 
+- job:
+    name: gate-grenade-noop
+    node: precise
+
 - job-template:
     name: 'gate-{name}-run-tests'
 

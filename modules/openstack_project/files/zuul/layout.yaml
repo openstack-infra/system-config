@@ -95,6 +95,10 @@ jobs:
   - name: gate-grenade-devstack-vm-stable
     branch: ^(stable/grizzly).*$
     voting: false
+    # Remove when gate-grenade-devstack-vm-stable is
+    # merged into gate-grenade-devstack-vm
+  - name: gate-grenade-noop
+    branch: ^(stable/(folsom|grizzly)).*$
   - name: gate-tempest-docs
     branch: ^(?!stable/(folsom|grizzly)).*$
   - name: tempest-docs
@@ -1072,11 +1076,11 @@ projects:
 
   - name: openstack-dev/grenade
     check:
-      - gate-noop
+      - gate-grenade-noop
       - gate-grenade-devstack-vm
       - gate-grenade-devstack-vm-stable
     gate:
-      - gate-noop
+      - gate-grenade-noop
       - gate-grenade-devstack-vm
       - gate-grenade-devstack-vm-stable
 
