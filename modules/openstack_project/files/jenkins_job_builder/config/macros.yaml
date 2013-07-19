@@ -269,6 +269,14 @@
               source: 'logs/**'
               keep-hierarchy: true
               copy-after-failure: true
+            - target: 'logs/$ZUUL_CHANGE/$ZUUL_PATCHSET/$ZUUL_PIPELINE/$JOB_NAME/$BUILD_NUMBER'
+              source: '**/testr_results.html.gz'
+              keep-hierarchy: false
+              copy-after-failure: true
+            - target: 'logs/$ZUUL_CHANGE/$ZUUL_PATCHSET/$ZUUL_PIPELINE/$JOB_NAME/$BUILD_NUMBER'
+              source: '**/subunit_log.txt.gz'
+              keep-hierarchy: false
+              copy-after-failure: true
 
 - publisher:
     name: devstack-logs-periodic
@@ -279,6 +287,14 @@
             - target: 'logs/periodic/$JOB_NAME/$BUILD_NUMBER'
               source: 'logs/**'
               keep-hierarchy: true
+              copy-after-failure: true
+            - target: 'logs/periodic/$JOB_NAME/$BUILD_NUMBER'
+              source: '**/testr_results.html.gz'
+              keep-hierarchy: false
+              copy-after-failure: true
+            - target: 'logs/periodic/$JOB_NAME/$BUILD_NUMBER'
+              source: '**/subunit_log.txt.gz'
+              keep-hierarchy: false
               copy-after-failure: true
 
 - publisher:
