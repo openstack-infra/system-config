@@ -14,8 +14,14 @@
 #
 # Class to configure asterisk on a CentOS node.
 #
+# Note that every node must provide its own asterisk.conf and modules.conf files.
+# All other configuration customizations should be done as overrides to the default
+# configuration by dropping files into the appropriate conf.d directory.
+#
 # == Class: asterisk
 class asterisk (
+  $asterisk_conf_source = '',
+  $modules_conf_source  = '',
 ) {
   yumrepo { 'asteriskcurrent':
     baseurl  => 'http://packages.asterisk.org/centos/$releasever/current/$basearch/',
@@ -55,5 +61,40 @@ class asterisk (
   package { 'asterisk-sounds-core-en-ulaw' :
     ensure  => present,
     require => Yumrepo['asteriskcurrent'],
+  }
+
+  file {'/etc/asterisk/asterisk.conf':
+    ensure  => present,
+    owner   => 'asterisk',
+    group   => 'asterisk',
+    mode    => '0660',
+    source  => $asterisk_conf_source,
+  }
+
+  file {'/etc/asterisk/modules.conf':
+    ensure  => present,
+    owner   => 'asterisk',
+    group   => 'asterisk',
+    mode    => '0660',
+    source  => $modules_conf_source,
+  }
+
+  file {'/etc/asterisk/':
+    ensure  => present,
+    recurse => true,
+    owner   => 'asterisk',
+    group   => 'asterisk',
+    mode    => '0660',
+    source  => 'puppet:///modules/asterisk/',
+    require => Package['asterisk'],
+  }
+
+  service { 'asterisk':
+    ensure  => running,
+    enable  => true,
+    require => [
+      Package['asterisk'],
+      File['/etc/asterisk/'],
+    ]
   }
 }
