@@ -41,6 +41,7 @@ class jenkins::params {
       $pyflakes_package = 'pyflakes'
       $python_libvirt_package = 'libvirt-python'
       $python_lxml_package = 'python-lxml'
+      $python_sphinx_package = 'python-sphinx'
       $python_zmq_package = 'python-zmq'
       # FIXME: No Python3 packages on RHEL
       #$python3_dev_package = 'python3-devel'
@@ -103,6 +104,7 @@ class jenkins::params {
       $pyflakes_package = 'pyflakes'
       $python_libvirt_package = 'python-libvirt'
       $python_lxml_package = 'python-lxml'
+      $python_sphinx_package = 'python-sphinx'
       $python_zmq_package = 'python-zmq'
       $python3_dev_package = 'python3-all-dev'
       $rubygems_package = 'rubygems'

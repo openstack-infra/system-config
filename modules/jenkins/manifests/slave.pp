@@ -53,6 +53,7 @@ class jenkins::slave(
     $::jenkins::params::pyflakes_package,
     $::jenkins::params::python_libvirt_package,
     $::jenkins::params::python_lxml_package, # for validating openstack manuals
+    $::jenkins::params::python_sphinxl_package, # for nova+centos, bug 1182271
     $::jenkins::params::python_zmq_package, # zeromq unittests (not pip installable)
     $::jenkins::params::rubygems_package,
     $::jenkins::params::sbcl_package, # cl-openstack-client testing
