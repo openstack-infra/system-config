@@ -420,7 +420,7 @@ node /^precise-dev\d+.*\.slave\.openstack\.org$/ {
   }
 }
 
-node /^precise3k-?\d+.*\.slave\.openstack\.org$/ {
+node /^precisepy3k-?\d+.*\.slave\.openstack\.org$/ {
   include openstack_project
   include openstack_project::puppet_cron
   class { 'openstack_project::slave':
@@ -430,7 +430,7 @@ node /^precise3k-?\d+.*\.slave\.openstack\.org$/ {
   }
 }
 
-node /^precise3k-dev\d+.*\.slave\.openstack\.org$/ {
+node /^precisepy3k-dev\d+.*\.slave\.openstack\.org$/ {
   include openstack_project
   include openstack_project::puppet_cron
   class { 'openstack_project::slave':
