@@ -112,7 +112,6 @@ projects:
     check:
       - gate-jenkins-job-builder-docs
       - gate-jenkins-job-builder-pep8
-      - gate-jenkins-job-builder-pyflakes
       - jenkins-job-builder-compare-xml
 
   - name: openstack-infra/lodgeit

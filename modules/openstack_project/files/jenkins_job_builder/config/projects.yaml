@@ -405,7 +405,6 @@
     jobs:
       - python-jobs
       - pypi-jobs
-      - gate-{name}-pyflakes
 
 - project:
     name: keystone
