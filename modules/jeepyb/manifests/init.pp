@@ -65,7 +65,7 @@ class jeepyb (
   }
 
   exec { 'install_jeepyb' :
-    command     => 'python setup.py install',
+    command     => 'git clean -X; python setup.py install',
     cwd         => '/opt/jeepyb',
     path        => '/bin:/usr/bin',
     refreshonly => true,
