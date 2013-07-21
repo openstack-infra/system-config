@@ -35,6 +35,14 @@ class jeepyb (
     }
   }
 
+  if ! defined(Package['pbr']) {
+    package { 'pbr':
+      ensure   => latest,
+      provider => pip,
+      require  => Class['pip'],
+    }
+  }
+
   # A lot of things need yaml, be conservative requiring this package to avoid
   # conflicts with other modules.
   case $::osfamily {
