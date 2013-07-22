@@ -5,7 +5,7 @@
     builders:
       - gerrit-git-prep
       - docs:
-          github-org: '{github-org}'
+          repo-group: '{repo-group}'
           project: '{name}'
 
     publishers:

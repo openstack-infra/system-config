@@ -112,7 +112,7 @@ should look something like::
 
   - project:
       name: project-name
-      github-org: stackforge
+      repo-group: stackforge
       node: precise
       tarball-site: tarballs.openstack.org
 
@@ -129,7 +129,7 @@ template to the jobs list::
 
   - project:
       name: project-name
-      github-org: stackforge
+      repo-group: stackforge
       node: precise
       rtfd-id: 7095
       tarball-site: tarballs.openstack.org
