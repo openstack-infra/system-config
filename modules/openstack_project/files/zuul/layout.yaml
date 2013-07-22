@@ -264,9 +264,11 @@ projects:
     check:
       - gate-jeepyb-pep8
       - gate-jeepyb-pyflakes
+      - gate-requirements-integration
     gate:
       - gate-jeepyb-pep8
       - gate-jeepyb-pyflakes
+      - gate-requirements-integration
     pre-release:
       - jeepyb-tarball
     release:
@@ -1079,8 +1081,10 @@ projects:
   - name: openstack/requirements
     check:
       - gate-requirements-install
+      - gate-requirements-integration
     gate:
       - gate-requirements-install
+      - gate-requirements-integration
     post:
       - post-mirror-python26
       - post-mirror-python27
@@ -1128,7 +1132,7 @@ projects:
       - gate-pbr-docs
       - gate-pbr-python26
       - gate-pbr-python27
-      - gate-pbr-devstack-vm-rawinstall
+      - gate-requirements-integration
       - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-cells-full
@@ -1142,7 +1146,7 @@ projects:
       - gate-pbr-pep8
       - gate-pbr-python26
       - gate-pbr-python27
-      - gate-pbr-devstack-vm-rawinstall
+      - gate-requirements-integration
       - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-cinder
