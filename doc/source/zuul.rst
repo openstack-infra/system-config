@@ -23,7 +23,7 @@ At a Glance
   * :file:`modules/openstack_project/files/zuul/layout.yaml`
 :Projects:
   * http://launchpad.net/zuul
-  * http://github.com/openstack-infra/zuul
+  * http://git.openstack.org/openstack-infra/zuul
 :Bugs:
   * http://bugs.launchpad.net/zuul
 :Resources:
