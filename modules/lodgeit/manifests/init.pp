@@ -48,7 +48,7 @@ class lodgeit {
   vcsrepo { '/tmp/lodgeit-main':
     ensure   => latest,
     provider => git,
-    source   => 'https://github.com/openstack-infra/lodgeit.git',
+    source   => 'https://git.openstack.org/openstack-infra/lodgeit',
   }
 
 # create initial git DB backup location

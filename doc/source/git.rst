@@ -11,7 +11,7 @@ At a Glance
 ===========
 
 :Hosts:
-  * http://git.openstack.org
+  * https://git.openstack.org
 :Puppet:
   * :file:`modules/cgit`
   * :file:`modules/openstack_project/manifests/git.pp`
