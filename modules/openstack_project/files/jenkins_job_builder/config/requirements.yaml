@@ -1,26 +1,32 @@
-- job:
-    name: gate-requirements-install
-    node: precise
+- job-template:
+    name: '{pipeline}-requirements-integration'
+    node: '{node}'
+
+    wrappers:
+      - timeout:
+          timeout: 120
+          fail: true
+      - timestamps
 
     builders:
-      - gerrit-git-prep
+      - devstack-checkout
       - shell: |
           #!/bin/bash -xe
-          source /usr/local/jenkins/slave_scripts/select-mirror.sh openstack requirements
-          virtualenv --clear .venv
-          FILE="global-requirements.txt"
-          # Ignore lines beginning with https?:// just as the mirror script does.
-          sed -e '/^https\?:\/\//d' $FILE > $FILE.clean
-          # Run the same basic pip command that the mirror script runs.
-          .venv/bin/pip install -M -U --exists-action=w -r $FILE.clean
-          if [ -e dev-requirements.txt ] ; then
-              .venv/bin/pip install -M -U --exists-action=w -r dev-requirements.txt
-          fi
-
-          # Print all installed stuff to demonstrate versions
-          .venv/bin/pip freeze
+          export PYTHONUNBUFFERED=true
+          export DEVSTACK_GATE_TEMPEST=0
+          export DEVSTACK_GATE_EXERCISES=0
+          export DEVSTACK_GATE_REQS_INTEGRATION=1
+          function gate_hook {{
+              bash $GATE_SCRIPT_DIR/devstack-vm-gate.sh && \
+              bash -xe $BASE/new/pbr/tools/integration.sh $PROJECTS
+          }}
+          export -f gate_hook
+          cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
+          ./safe-devstack-vm-gate-wrap.sh
+      - link-logs
 
     publishers:
+      - devstack-logs
       - console-log
 
 - job:
