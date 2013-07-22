@@ -30,7 +30,7 @@
 
     scm:
       - git:
-          url: 'git://github.com/{github-org}/{name}.git'
+          url: 'git://git.openstack.org/{github-org}/{name}.git'
           branches:
             - 'origin/master'
 
@@ -68,7 +68,7 @@
 
     scm:
       - git:
-          url: 'git://github.com/openstack/openstack-manuals.git'
+          url: 'git://git.openstack.org/openstack/openstack-manuals.git'
           branches:
             - 'origin/master'
 

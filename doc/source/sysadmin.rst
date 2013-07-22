@@ -14,7 +14,7 @@ collaborate on code reviews.
 The configuration of every system operated by the infrastructure team
 is managed by Puppet in a single Git repository:
 
-  https://github.com/openstack-infra/config
+  https://git.openstack.org/openstack-infra/config
 
 All system configuration should be encoded in that repository so that
 anyone may propose a change in the running configuration to Gerrit.
@@ -59,7 +59,7 @@ start by ensuring git is installed and then cloning the config Git
 repo::
 
   apt-get install git
-  git clone https://github.com/openstack-infra/config
+  git clone https://git.openstack.org/openstack-infra/config
   cd config
 
 Then copy the etherpad node definition from manifests/site.pp to a new

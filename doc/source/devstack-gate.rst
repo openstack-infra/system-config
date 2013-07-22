@@ -19,11 +19,11 @@ At a Glance
   * :file:`modules/openstack_project/manifests/template.pp`
   * :file:`modules/openstack_project/manifests/devstack_launch_slave.pp`
 :Projects:
-  * http://github.com/openstack-infra/devstack-gate
+  * http://git.openstack.org/openstack-infra/devstack-gate
 :Bugs:
   * http://bugs.launchpad.net/openstack-ci
 :Resources:
-  * `Devstack-gate README <https://github.com/openstack-infra/devstack-gate/blob/master/README.md>`_
+  * `Devstack-gate README <https://git.openstack.org/openstack-infra/devstack-gate/tree/README.md>`_
 
 Overview
 ========

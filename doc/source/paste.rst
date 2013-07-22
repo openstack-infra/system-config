@@ -19,7 +19,7 @@ At a Glance
   * :file:`modules/lodgeit`
   * :file:`modules/openstack_project/manifests/paste.pp`
 :Projects:
-  * http://github.com/openstack-infra/lodgeit
+  * http://git.openstack.org/openstack-infra/lodgeit
   * https://bitbucket.org/dcolish/lodgeit-main
   * http://www.pocoo.org/projects/lodgeit/
 :Bugs:
@@ -29,7 +29,7 @@ Overview
 ========
 
 For OpenStack we use `a fork
-<https://github.com/openstack-infra/lodgeit>`_ of lodgeit which is
+<https://git.openstack.org/openstack-infra/lodgeit>`_ of lodgeit which is
 based on one with bugfixes maintained by `dcolish
 <https://bitbucket.org/dcolish/lodgeit-main>`_ but adds back missing
 anti-spam features required by Openstack.

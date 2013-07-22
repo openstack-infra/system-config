@@ -10,6 +10,6 @@ class openstack_project::planet (
   include ::planet
 
   planet::site { 'openstack':
-    git_url => 'https://github.com/openstack/openstack-planet.git',
+    git_url => 'https://git.openstack.org/openstack/openstack-planet.git',
   }
 }
