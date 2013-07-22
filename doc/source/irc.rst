@@ -26,9 +26,9 @@ At a Glance
 :Projects:
   * http://wiki.debian.org/MeetBot
   * http://sourceforge.net/projects/supybot/
-  * https://github.com/openstack-infra/meetbot
-  * https://github.com/openstack-infra/gerritbot
-  * https://github.com/openstack-infra/statusbot
+  * https://git.openstack.org/cgit/openstack-infra/meetbot
+  * https://git.openstack.org/cgit/openstack-infra/gerritbot
+  * https://git.openstack.org/cgit/openstack-infra/statusbot
 :Bugs:
   * http://bugs.launchpad.net/openstack-ci
 
@@ -63,7 +63,7 @@ Meetbot
 -------
 
 The OpenStack Infrastructure Meetbot fork can be found at
-https://github.com/openstack-infra/meetbot. Manual installation of the Meetbot
+https://git.openstack.org/cgit/openstack-infra/meetbot. Manual installation of the Meetbot
 plugin is straightforward and documented in that repository's README.
 OpenStack Infrastructure installs and configures Meetbot through Puppet.
 

@@ -45,7 +45,7 @@ else #defaults to Ubuntu
 
 fi
 
-git clone https://github.com/openstack-infra/config
+git clone https://git.openstack.org/cgit/openstack-infra/config
 bash config/install_modules.sh
 
 puppet apply --modulepath=`pwd`/config/modules:/etc/puppet/modules -e 'node default {class { "openstack_project::bare_slave": install_users => false }}'

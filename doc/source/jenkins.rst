@@ -83,9 +83,9 @@ Devstack Gate
 OpenStack integration testing is performed by the devstack gate test
 framework. This framework runs the devstack exercises and Tempest
 smoketests against a devstack install on single use cloud servers. The
-devstack gate source can be found on `Github
-<https://github.com/openstack-infra/devstack-gate>`_ and the `Readme
-<https://github.com/openstack-infra/devstack-gate/blob/master/README.md>`_
+devstack gate source can be found on `git.openstack.org
+<https://git.openstack.org/cgit/openstack-infra/devstack-gate>`_ and the `Readme
+<https://git.openstack.org/cgit/openstack-infra/devstack-gate/tree/README.rst>`_
 describes the process of using devstack gate to run your own devstack
 based tests.
 

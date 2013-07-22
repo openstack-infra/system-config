@@ -47,7 +47,7 @@ Create a new StackForge Project with Puppet
 OpenStack uses Puppet and a management script to create Gerrit projects
 with simple changes to the openstack-infra/config repository. To start make
 sure you have cloned the openstack-infra/config repository
-``git clone https://github.com/openstack-infra/config``.
+``git clone git://git.openstack.org/openstack-infra/config.git``.
 
 First you need to add your StackForge project to the master project
 list. Edit
@@ -231,7 +231,7 @@ new file will allow you to use ``git review``.
 The basic process is clone from stackforge, add file, push to Gerrit,
 review and approve.::
 
-  git clone https://github.com/stackforge/project-name
+  git clone git://git.openstack.org/stackforge/project-name
   cd project-name
   git checkout -b add-gitreview
   cat > .gitreview <<EOF
