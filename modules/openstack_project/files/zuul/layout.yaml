@@ -277,9 +277,11 @@ projects:
     check:
       - gate-jeepyb-pep8
       - gate-jeepyb-pyflakes
+      - gate-requirements-integration-mirror
     gate:
       - gate-jeepyb-pep8
       - gate-jeepyb-pyflakes
+      - gate-requirements-integration-mirror
     pre-release:
       - jeepyb-tarball
     release:
@@ -1140,16 +1142,16 @@ projects:
 
   - name: openstack/requirements
     check:
-      - gate-requirements-install
       - gate-requirements-python27
+      - gate-requirements-integration-no-mirror
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-cells-full
       - gate-tempest-devstack-vm-postgres-full
       - gate-tempest-devstack-vm-neutron
       - gate-grenade-devstack-vm
     gate:
-      - gate-requirements-install
       - gate-requirements-python27
+      - gate-requirements-integration-no-mirror
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-postgres-full
       - gate-tempest-devstack-vm-neutron
@@ -1204,7 +1206,7 @@ projects:
       - gate-pbr-python26
       - gate-pbr-python27
       - gate-pbr-python33
-      - gate-pbr-devstack-vm-rawinstall
+      - gate-requirements-integration-mirror
       - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-cells-full
@@ -1219,7 +1221,7 @@ projects:
       - gate-pbr-python26
       - gate-pbr-python27
       - gate-pbr-python33
-      - gate-pbr-devstack-vm-rawinstall
+      - gate-requirements-integration-mirror
       - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-cinder
