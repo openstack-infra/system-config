@@ -42,8 +42,6 @@ class jenkins::params {
       $python_libvirt_package = 'libvirt-python'
       $python_lxml_package = 'python-lxml'
       $python_zmq_package = 'python-zmq'
-      # FIXME: No Python3 packages on RHEL
-      #$python3_dev_package = 'python3-devel'
       $rubygems_package = 'rubygems'
       # Common Lisp interpreter, used for cl-openstack-client
       $sbcl_package = 'sbcl'
@@ -104,7 +102,6 @@ class jenkins::params {
       $python_libvirt_package = 'python-libvirt'
       $python_lxml_package = 'python-lxml'
       $python_zmq_package = 'python-zmq'
-      $python3_dev_package = 'python3-all-dev'
       $rubygems_package = 'rubygems'
       $ruby1_9_1_package = 'ruby1.9.1'
       $ruby1_9_1_dev_package = 'ruby1.9.1-dev'
