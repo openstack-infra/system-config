@@ -19,7 +19,7 @@
 HOSTNAME=$1
 
 sudo hostname $1
-wget https://raw.github.com/openstack-infra/config/master/install_puppet.sh
+wget https://git.openstack.org/cgit/openstack-infra/config/plain/install_puppet.sh
 sudo bash -xe install_puppet.sh
 sudo git clone https://review.openstack.org/p/openstack-infra/config.git \
     /root/config
