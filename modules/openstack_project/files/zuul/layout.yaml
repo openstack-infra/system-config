@@ -319,6 +319,7 @@ projects:
       - gate-config-puppet-lint
       - gate-config-puppet-syntax
       - gate-config-pyflakes
+      - gate-ci-docs
     gate:
       - gate-config-layout
       - gate-config-puppet-lint
