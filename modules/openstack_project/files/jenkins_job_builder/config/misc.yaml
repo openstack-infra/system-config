@@ -16,7 +16,7 @@
     builders:
       - gerrit-git-prep
       - run-tests:
-          github-org: '{github-org}'
+          repo-group: '{repo-group}'
           project: '{name}'
 
     publishers:

@@ -112,7 +112,7 @@ should look something like::
 
   - project:
       name: project-name
-      github-org: stackforge
+      repo-group: stackforge
       node: precise
       tarball-site: tarballs.openstack.org
 

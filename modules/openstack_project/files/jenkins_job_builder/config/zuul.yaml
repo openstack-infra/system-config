@@ -6,7 +6,7 @@
     builders:
       - gerrit-git-prep
       - docs:
-          github-org: openstack-infra
+          repo-group: openstack-infra
           project: zuul
 
     publishers:
@@ -25,7 +25,7 @@
     builders:
       - gerrit-git-prep
       - coverage:
-          github-org: openstack-infra
+          repo-group: openstack-infra
           project: zuul
 
     publishers:
