@@ -1395,16 +1395,19 @@ projects:
     check:
       - gate-trove-requirements
       - gate-trove-pep8
+      - gate-trove-docs
       - gate-trove-python26
       - gate-trove-python27
     gate:
       - gate-trove-requirements
+      - gate-trove-docs
       - gate-trove-pep8
       - gate-trove-python26
       - gate-trove-python27
     post:
       - trove-branch-tarball
       - trove-coverage
+      - trove-docs
     pre-release:
       - trove-tarball
     release:
