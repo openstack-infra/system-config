@@ -1520,6 +1520,16 @@ projects:
           - post-mirror-python33
       - heat-cfntools-docs
 
+  - name: openstack-dev/heat-cfnclient
+    check:
+      - gate-heat-cfnclient-pep8
+      - gate-heat-cfnclient-python26
+      - gate-heat-cfnclient-python27
+    gate:
+      - gate-heat-cfnclient-pep8
+      - gate-heat-cfnclient-python26
+      - gate-heat-cfnclient-python27
+
   - name: openstack/heat-templates
     check:
       - gate-noop
