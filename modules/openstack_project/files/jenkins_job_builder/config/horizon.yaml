@@ -5,7 +5,7 @@
     builders:
       - gerrit-git-prep
       - selenium:
-          github-org: openstack
+          repo-group: openstack
           project: horizon
 
     publishers:

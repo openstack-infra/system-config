@@ -10,7 +10,7 @@
     builders:
       - gerrit-git-prep
       - coverage:
-          github-org: '{github-org}'
+          repo-group: '{repo-group}'
           project: '{name}'
 
     publishers:
@@ -26,7 +26,7 @@
     builders:
       - gerrit-git-prep
       - pep8:
-          github-org: '{github-org}'
+          repo-group: '{repo-group}'
           project: '{name}'
 
     publishers:
@@ -41,7 +41,7 @@
     builders:
       - gerrit-git-prep
       - pylint:
-          github-org: '{github-org}'
+          repo-group: '{repo-group}'
           project: '{name}'
 
     publishers:
@@ -62,7 +62,7 @@
     builders:
       - gerrit-git-prep
       - python26:
-          github-org: '{github-org}'
+          repo-group: '{repo-group}'
           project: '{name}'
       - assert-no-extra-files
 
@@ -90,7 +90,7 @@
     builders:
       - gerrit-git-prep
       - python27:
-          github-org: '{github-org}'
+          repo-group: '{repo-group}'
           project: '{name}'
       - assert-no-extra-files
 
@@ -112,7 +112,7 @@
     builders:
       - gerrit-git-prep
       - python33:
-          github-org: '{github-org}'
+          repo-group: '{repo-group}'
           project: '{name}'
       - assert-no-extra-files
 
@@ -128,7 +128,7 @@
     builders:
       - gerrit-git-prep
       - docs:
-          github-org: '{github-org}'
+          repo-group: '{repo-group}'
           project: '{name}'
 
     publishers:
@@ -145,7 +145,7 @@
     builders:
       - gerrit-git-prep
       - pyflakes:
-          github-org: '{github-org}'
+          repo-group: '{repo-group}'
           project: '{name}'
 
     publishers:
@@ -159,7 +159,7 @@
     builders:
       - gerrit-git-prep
       - tarball:
-          github-org: '{github-org}'
+          repo-group: '{repo-group}'
           project: '{name}'
 
     publishers:
@@ -177,7 +177,7 @@
     builders:
       - gerrit-git-prep
       - tarball:
-          github-org: '{github-org}'
+          repo-group: '{repo-group}'
           project: '{name}'
       - shell: |
           #!/bin/bash -xe

@@ -30,7 +30,7 @@
     builders:
       - gerrit-git-prep
       - docs:
-          github-org: openstack-infra
+          repo-group: openstack-infra
           project: config
 
     publishers:
@@ -50,7 +50,7 @@
     builders:
       - gerrit-git-prep
       - docs:
-          github-org: openstack-infra
+          repo-group: openstack-infra
           project: config
 
     publishers:

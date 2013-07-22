@@ -6,7 +6,7 @@
     builders:
       - gerrit-git-prep
       - docs:
-          github-org: openstack-infra
+          repo-group: openstack-infra
           project: jenkins-job-builder
 
     publishers:

@@ -9,7 +9,7 @@
 
     builders:
       - python26:
-          github-org: '{github-org}'
+          repo-group: '{repo-group}'
           project: '{name}'
 
     publishers:
@@ -26,7 +26,7 @@
 
     scm:
       - git:
-          url: 'git://git.openstack.org/{github-org}/{name}.git'
+          url: 'git://git.openstack.org/{repo-group}/{name}.git'
           branches:
             - 'origin/{branch}'
 
@@ -44,7 +44,7 @@
 
     builders:
       - python27:
-          github-org: '{github-org}'
+          repo-group: '{repo-group}'
           project: '{name}'
 
     publishers:
@@ -61,7 +61,7 @@
 
     scm:
       - git:
-          url: 'git://git.openstack.org/{github-org}/{name}.git'
+          url: 'git://git.openstack.org/{repo-group}/{name}.git'
           branches:
             - 'origin/{branch}'
 
@@ -79,7 +79,7 @@
 
     builders:
       - docs:
-          github-org: '{github-org}'
+          repo-group: '{repo-group}'
           project: '{name}'
 
     publishers:
@@ -89,7 +89,7 @@
 
     scm:
       - git:
-          url: 'git://git.openstack.org/{github-org}/{name}.git'
+          url: 'git://git.openstack.org/{repo-group}/{name}.git'
           branches:
             - 'origin/{branch}'
 
