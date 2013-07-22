@@ -111,7 +111,7 @@ class releasestatus (
   vcsrepo { '/var/lib/releasestatus/releasestatus':
     ensure   => latest,
     provider => git,
-    source   => 'https://github.com/openstack-infra/releasestatus.git',
+    source   => 'https://git.openstack.org/openstack-infra/releasestatus',
     revision => 'master',
     require  => File['/var/lib/releasestatus'],
   }

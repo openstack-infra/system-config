@@ -27,7 +27,7 @@
 
     scm:
       - git:
-          url: 'git://github.com/{github-org}/{name}.git'
+          url: 'git://git.openstack.org/{github-org}/{name}'
           branches:
             - 'origin/master'
 
@@ -62,7 +62,7 @@
 
     scm:
       - git:
-          url: 'git://github.com/openstack/openstack-manuals.git'
+          url: 'git://git.openstack.org/openstack/openstack-manuals'
           branches:
             - 'origin/master'
 

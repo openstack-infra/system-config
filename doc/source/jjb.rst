@@ -19,7 +19,7 @@ At a Glance
 :Configuration:
   * :file:`modules/openstack_project/files/jenkins_job_builder/config/`
 :Projects:
-  * http://github.com/openstack-infra/jenkins-job-builder
+  * https://git.openstack.org/openstack-infra/jenkins-job-builder
 :Bugs:
   * http://bugs.launchpad.net/openstack-ci
 :Resources:
@@ -70,8 +70,8 @@ Example defaults config:
 
          <p>If you would like to make changes to this job, please see:
 
-           <a href="https://github.com/openstack-infra/config">
-             https://github.com/openstack-infra/config
+           <a href="https://git.openstack.org/cgit/openstack-infra/config">
+             https://git.openstack.org/cgit/openstack-infra/config
            </a>
 
          In modules/openstack_project/files/jenkins_jobs
