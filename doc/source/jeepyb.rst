@@ -23,7 +23,7 @@ At a Glance
   * :file:`modules/openstack_project/templates/review.projects.yaml.erb`
   * :file:`modules/openstack_project/files/pypi-mirror.yaml`
 :Projects:
-  * http://github.com/openstack-infra/jeepyb
+  * https://git.openstack.org/openstack-infra/jeepyb
 :Bugs:
   * http://bugs.launchpad.net/openstack-ci
 
