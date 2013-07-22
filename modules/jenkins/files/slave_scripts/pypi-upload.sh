@@ -34,6 +34,6 @@ curl --config /home/jenkins/.pypicurl \
      -F "name=${PROJECT}" \
      -F "version=${VERSION}" \
      -F "md5_digest=${MD5_DIGEST}" \
-     http://pypi.python.org/pypi > /dev/null 2>&1
+     https://pypi.python.org/pypi > /dev/null 2>&1
 
 exit $?
