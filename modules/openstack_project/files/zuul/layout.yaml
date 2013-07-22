@@ -1384,6 +1384,29 @@ projects:
           - post-mirror-python27
       - heat-cfntools-docs
 
+  - name: openstack/heat-cfnclient
+    check:
+      - gate-heat-cfnclient-requirements
+      - gate-heat-cfnclient-pep8
+      - gate-heat-cfnclient-python26
+      - gate-heat-cfnclient-python27
+    gate:
+      - gate-heat-cfnclient-requirements
+      - gate-heat-cfnclient-pep8
+      - gate-heat-cfnclient-python26
+      - gate-heat-cfnclient-python27
+    post:
+      - heat-cfnclient-branch-tarball
+      - heat-cfnclient-coverage
+    pre-release:
+      - heat-cfnclient-tarball
+    release:
+      - heat-cfnclient-tarball:
+        - heat-cfnclient-pypi-upload:
+          - post-mirror-python26
+          - post-mirror-python27
+      - heat-cfnclient-docs
+
   - name: openstack/heat-templates
     check:
       - gate-noop
