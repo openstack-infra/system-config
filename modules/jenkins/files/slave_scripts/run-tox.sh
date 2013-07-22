@@ -6,27 +6,24 @@
 # resulting environment at the end so that we have a record of exactly
 # what packages we ended up testing.
 #
-# Usage: run-tox.sh PYTHONVERSION
+# Usage: run-tox.sh VENVNAME
 #
-# Where PYTHONVERSION is the numeric version identifier used as a suffix
-# in the tox.ini file.  E.g., "26" or "27" for "py26"/"jenkins26" or
-# "py27"/"jenkins27" respectively.
+# Where VENVNAME is the name of the environment in the tox.ini file.
+# E.g., "py26", "py27", or "pep8".
 
-version=$1
+venv=$1
 org=$2
 project=$3
 
 if [[ -z "$version" || -z "$org" || -z "$project" ]]
 then
-  echo "Usage: $? VERSION ORG PROJECT"
+  echo "Usage: $? VENVNAME ORG PROJECT"
   echo
-  echo "VERSION: The tox environment python version (eg '27')"
+  echo "VENVNAME: The tox environment name (eg 'py27')"
   echo "ORG: The project organization (eg 'openstack')"
   echo "PROJECT: The project name (eg 'nova')"
   exit 1
 fi
-
-venv=py$version
 
 export NOSE_WITH_XUNIT=1
 export NOSE_WITH_HTML_OUTPUT=1
