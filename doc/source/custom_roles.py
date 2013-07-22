@@ -21,9 +21,10 @@
 
 from docutils import nodes
 
+
 def file_role(name, rawtext, text, lineno, inliner,
               options={}, content=[]):
-    """Link a local path to a Github file view.
+    """Link a local path to a cgit file view.
 
     Returns 2 part tuple containing list of nodes to insert into the
     document and a list of system messages.  Both are allowed to be
@@ -38,7 +39,8 @@ def file_role(name, rawtext, text, lineno, inliner,
     :param content: The directive content for customization.
     """
 
-    ref = 'https://github.com/openstack-infra/config/blob/master/%s' % text
+    ref = ('https://git.openstack.org/cgit/openstack-infra/config/tree/%s'
+           % text)
     node = nodes.reference(rawtext, text, refuri=ref, **options)
     return [node], []
 

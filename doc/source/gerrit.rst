@@ -361,7 +361,7 @@ To rename a project:
 Developers will either need to re-clone a new copy of the repository,
 or manually update their remotes with something like::
 
-  git remote set-url origin https://github.com/$ORG/$PROJECT.git
+  git remote set-url origin https://git.openstack.org/$ORG/$PROJECT
 
 Deleting a User from Gerrit
 ---------------------------

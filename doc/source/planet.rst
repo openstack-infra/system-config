@@ -18,9 +18,9 @@ At a Glance
   * :file:`modules/planet`
   * :file:`modules/openstack_project/manifests/planet.pp`
 :Configuration:
-  * https://github.com/openstack/openstack-planet/blob/master/planet.ini
+  * https://git.openstack.org/cgit/openstack/openstack-planet/tree/planet.ini
 :Projects:
-  * https://github.com/openstack/openstack-planet
+  * https://git.openstack.org/cgit/openstack/openstack-planet
   * http://www.intertwingly.net/code/venus/
 :Bugs:
   * http://bugs.launchpad.net/openstack-ci

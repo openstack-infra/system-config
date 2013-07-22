@@ -43,7 +43,7 @@ over the preferences file:
 
 .. code-block:: bash
 
-   git clone git://github.com/openstack-infra/config.git /opt/config/production
+   git clone https://git.openstack.org/openstack-infra/config /opt/config/production
    cp /opt/config/production/modules/openstack_project/files/00-puppet.pref /etc/apt/preferences.d/
 
 Then we can add the repo and install the packages, we'll also install the hiera
