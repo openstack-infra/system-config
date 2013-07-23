@@ -1,0 +1,47 @@
+# -*- apache -*-
+# ************************************
+# Managed by Puppet
+# ************************************
+
+NameVirtualHost <%= vhost_name %>:<%= port %>
+<VirtualHost <%= vhost_name %>:<%= port %>>
+  ServerName <%= srvname %>
+<% if serveraliases.is_a? Array -%>
+<% serveraliases.each do |name| -%><%= " ServerAlias #{name}\n" %><% end -%>
+<% elsif serveraliases != '' -%>
+<%= " ServerAlias #{serveraliases}" %>
+<% end -%>
+  DocumentRoot <%= docroot %>
+
+  RewriteEngine On
+  # rewrite all txt.gz files to map to our internal htmlify wsgi app
+  RewriteRule ^/(.*\.txt\.gz)$ /htmlify/$1 [QSA,L,PT]
+  WSGIScriptAlias /htmlify /usr/local/bin/htmlify-screen-log.py
+  # use Apache to compress the results afterwards, to save on the wire
+  # it's approx 18x savings of wire traffic to compress. We need to
+  # compress by content types that htmlify can produce
+  AddOutputFilterByType DEFLATE text/plain text/html
+
+  <FilesMatch \.html\.gz$>
+    ForceType text/html
+    AddDefaultCharset UTF-8
+    AddEncoding x-gzip gz
+  </FilesMatch>
+  <Directory <%= docroot %>>
+    Options <%= options %>
+    AllowOverride None
+    Order allow,deny
+    allow from all
+  </Directory>
+  <Directory <%= docroot %>/*/*/*/gate-tempest-devstack*/*>
+     ReadmeName /help/tempest-overview.html
+  </Directory>
+  <Directory <%= docroot %>/*/*/*/gate-tempest-devstack*/*/logs/>
+     ReadmeName /help/tempest-logs.html
+  </Directory>
+
+  ErrorLog /var/log/apache2/<%= name %>_error.log
+  LogLevel warn
+  CustomLog /var/log/apache2/<%= name %>_access.log combined
+  ServerSignature Off
+</VirtualHost>

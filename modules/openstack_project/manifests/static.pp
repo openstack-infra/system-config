@@ -21,6 +21,7 @@ class openstack_project::static (
   }
 
   include apache
+  include apache::mod::wsgi
 
   a2mod { 'rewrite':
     ensure => present,
@@ -81,6 +82,14 @@ class openstack_project::static (
     template => 'openstack_project/logs.vhost.erb',
   }
 
+  apache::vhost { 'logs-dev.openstack.org':
+    port     => 80,
+    priority => '51',
+    docroot  => '/srv/static/logs',
+    require  => File['/srv/static/logs'],
+    template => 'openstack_project/logs-dev.vhost.erb',
+  }
+
   file { '/srv/static/logs':
     ensure  => directory,
     owner   => 'jenkins',
@@ -95,6 +104,14 @@ class openstack_project::static (
     mode    => '0444',
     source  => 'puppet:///modules/openstack_project/disallow_robots.txt',
     require => File['/srv/static/logs'],
+  }
+
+  file { '/usr/local/bin/htmlify-screen-log.py':
+    ensure  => present,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0755',
+    source  => 'puppet:///modules/openstack_project/logs/htmlify-screen-log.py',
   }
 
   file { '/srv/static/logs/help':
