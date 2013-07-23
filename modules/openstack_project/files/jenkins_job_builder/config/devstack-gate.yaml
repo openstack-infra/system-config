@@ -757,7 +757,6 @@
 # jenkins slave they are running on can be disabled.
 - job:
     name: devstack-update-inprogress
-    concurrent: false
     node: devstack-launch
 
     wrappers:
@@ -780,7 +779,6 @@
 # jenkins slave may be deleted.
 - job:
     name: devstack-update-complete
-    concurrent: false
     node: devstack-launch
 
     wrappers:
