@@ -895,6 +895,15 @@
       - devstack-node-provider-jobs
 
 - project:
+    name: python-ipmi
+    github-org: stackforge
+    node: precise
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - python-jobs
+
+- project:
     name: diskimage-builder
     github-org: stackforge
     node: precise
