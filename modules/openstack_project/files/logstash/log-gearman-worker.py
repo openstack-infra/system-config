@@ -231,7 +231,7 @@ class Server(object):
         # Pythong logging output file.
         self.debuglog = debuglog
         self.retriever = None
-        self.logqueue = Queue.Queue(16384)
+        self.logqueue = Queue.Queue(131072)
         self.processor = None
 
     def setup_logging(self):
