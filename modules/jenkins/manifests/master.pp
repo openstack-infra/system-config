@@ -187,6 +187,14 @@ class jenkins::master(
     require => File['/var/lib/jenkins/plugins/simple-theme-plugin'],
   }
 
+  file { '/var/lib/jenkins/logger.conf':
+    ensure  => present,
+    owner   => 'jenkins',
+    group   => 'nogroup',
+    source  => 'puppet:///modules/jenkins/logger.conf',
+    require => File['/var/lib/jenkins'],
+  }
+
   file { '/var/lib/jenkins/plugins/simple-theme-plugin/title.png':
     ensure  => present,
     owner   => 'jenkins',
