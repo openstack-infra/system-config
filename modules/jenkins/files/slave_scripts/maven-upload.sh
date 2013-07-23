@@ -25,7 +25,7 @@ FILENAME=`ls ${PROJECT}*.hpi`
 VERSION=`echo ${FILENAME} | sed -n "s/${PROJECT}-\(.*\).hpi/\1/p"`
 
 curl -X PUT \
-     -u --config ${REPO_CRED_FILE} \
+     --config ${REPO_CRED_FILE} \
      --data-binary @${FILENAME} \
      -i "${REPO_URL}/${PROJECT}/${VERSION}/${FILENAME}" > /dev/null 2>&1
 
