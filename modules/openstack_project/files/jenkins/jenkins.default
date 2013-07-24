@@ -11,7 +11,7 @@ JAVA=/usr/bin/java
 #JAVA_ARGS="-Djava.net.preferIPv4Stack=true" # make jenkins listen on IPv4 address
 # Disable compression as zip deflation threads eat CPU time.
 # https://issues.jenkins-ci.org/browse/JENKINS-14362
-JAVA_ARGS="-Xloggc:/var/log/jenkins/gc.log -XX:+PrintGCDetails -Xmx12g -Dorg.kohsuke.stapler.compression.CompressionFilter.disabled=true"
+JAVA_ARGS="-Xloggc:/var/log/jenkins/gc.log -XX:+PrintGCDetails -Xmx12g -Dorg.kohsuke.stapler.compression.CompressionFilter.disabled=true -Djava.util.logging.config.file=/var/lib/jenkins/logger.conf"
 
 PIDFILE=/var/run/jenkins/jenkins.pid
 
