@@ -13,7 +13,8 @@
       - timed: '4 21 * * *'
 
     builders:
-      - update-pypi-mirror
+      - update-pypi-mirror:
+          mirror-version: 'py26'
 
     publishers:
       - link-logs
@@ -32,7 +33,8 @@
       - timestamps
 
     builders:
-      - update-pypi-mirror
+      - update-pypi-mirror:
+          mirror-version: 'py26'
 
     publishers:
       - link-logs
@@ -54,7 +56,8 @@
       - timed: '12 21 * * *'
 
     builders:
-      - update-pypi-mirror
+      - update-pypi-mirror:
+          mirror-version: 'py27'
 
     publishers:
       - link-logs
@@ -73,7 +76,8 @@
       - timestamps
 
     builders:
-      - update-pypi-mirror
+      - update-pypi-mirror:
+          mirror-version: 'py27'
 
     publishers:
       - link-logs
