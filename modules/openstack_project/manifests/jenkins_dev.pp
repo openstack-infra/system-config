@@ -25,4 +25,12 @@ class openstack_project::jenkins_dev (
     jenkins_ssh_private_key => $jenkins_ssh_private_key,
     jenkins_ssh_public_key  => $openstack_project::jenkins_dev_ssh_key,
   }
+
+  file { '/etc/default/jenkins':
+    ensure => present,
+    owner  => 'root',
+    group  => 'root',
+    mode   => '0644',
+    source => 'puppet:///modules/openstack_project/jenkins/jenkins.default',
+  }
 }
