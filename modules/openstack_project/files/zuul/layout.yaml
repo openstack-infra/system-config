@@ -1574,6 +1574,7 @@ projects:
       - openstack-install-deploy-guide-ubuntu
       - openstack-security-guide
       - manuals-upstream-translation-update
+      - openstack-training
 
   - name: openstack/operations-guide
     check:
