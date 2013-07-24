@@ -1831,6 +1831,9 @@ projects:
       - gate-zmq-event-publisher-build
     post:
       - zmq-event-publisher-hpi-artifact
+    release:
+      - zmq-event-publisher-hpi-artifact:
+        - zmq-event-publisher-jenkinsci-upload
 
   - name: openstack/database-api
     check:
