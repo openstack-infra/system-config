@@ -540,3 +540,28 @@
           target: '/'
           remove-prefix: 'doc/src/docbkx/openstack-security/target/docbkx/webhelp/'
           excludes: '**/*.xml,**/null*'
+
+- job:
+    name: openstack-training
+    project-type: maven
+    node: precise
+
+    prebuilders:
+      - gerrit-git-prep
+
+    maven:
+      maven-name: Maven3
+      root-module:
+        group-id: org.openstack.docs
+        artifact-id: openstack-guide
+      root-pom: doc/src/docbkx/openstack-training/pom.xml
+      goals: 'clean generate-sources'
+
+    publishers:
+      - console-log-post
+      - ftp:
+          site: docs.openstack.org
+          source: 'doc/src/docbkx/openstack-training/target/docbkx/webhelp/**'
+          target: '/'
+          remove-prefix: 'doc/src/docbkx/openstack-training/target/docbkx/webhelp/'
+          excludes: '**/*.xml,**/null*'
