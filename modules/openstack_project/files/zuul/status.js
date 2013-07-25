@@ -14,6 +14,45 @@
 
 window.zuul_enable_status_updates = true;
 
+function format_time(ms, words) {
+    if (ms == null) {
+        return "unknown";
+    }
+    var seconds = (+ms)/1000;
+    var minutes = Math.floor((seconds/60)%60);
+    var hours = Math.floor(minutes/60);
+    seconds = Math.floor(seconds % 60);
+    r = '';
+    if (words) {
+        if (hours) {
+            r += hours;
+            r += ' hr ';
+        }
+        r += minutes + ' min'
+    } else {
+        if (hours < 10) r += '0';
+        r += hours + ':';
+        if (minutes < 10) r += '0';
+        r += minutes + ':';
+        if (seconds < 10) r += '0';
+        r += seconds;
+    }
+    return r;
+}
+
+function format_progress(elapsed, remaining) {
+    if (remaining != null) {
+        total = elapsed + remaining;
+    } else {
+        total = null;
+    }
+    r = '<progress style="width:6em" title="' +
+        format_time(elapsed, false) + ' elapsed, ' +
+        format_time(remaining, false)+' remaining" ' +
+        'value="'+elapsed+'" max="'+total+'">in progress</progress>';
+    return r;
+}
+
 function format_pipeline(data) {
     var html = '<div class="pipeline"><h3 class="subhead">'+
         data['name']+'</h3>';
@@ -63,6 +102,9 @@ function format_change(change) {
     if (url != null) {
         html += '</a>';
     }
+
+    html += '</span><span class="time">';
+    html += format_time(change['remaining_time'], true);
     html += '</span></div><div class="jobs">';
 
     $.each(change['jobs'], function(i, job) {
@@ -91,7 +133,13 @@ function format_change(change) {
         if (job['url'] != null) {
             html += '</a>';
         }
-        html += ': <span class="'+result_class+'">'+result+'</span>';
+        html += ': ';
+        if (job['result'] == null && job['url'] != null) {
+            html += format_progress(job['elapsed_time'], job['remaining_time']);
+        } else {
+            html += '<span class="'+result_class+'">'+result+'</span>';
+        }
+
         if (job['voting'] == false) {
             html += ' (non-voting)';
         }
