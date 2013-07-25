@@ -18,5 +18,6 @@ Major Systems
    paste
    planet
    puppet
+   static
    lists
    wiki
