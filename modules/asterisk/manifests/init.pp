@@ -23,6 +23,8 @@ class asterisk (
   $asterisk_conf_source = '',
   $modules_conf_source  = '',
 ) {
+  include asterisk::server::command
+
   yumrepo { 'asteriskcurrent':
     baseurl  => 'http://packages.asterisk.org/centos/$releasever/current/$basearch/',
     descr    => 'Asterisk supporting packages produced by Digium',
@@ -69,7 +71,7 @@ class asterisk (
     require => Yumrepo['asteriskcurrent'],
   }
 
-  file {'/etc/asterisk/asterisk.conf':
+  file { '/etc/asterisk/asterisk.conf':
     ensure  => present,
     owner   => 'asterisk',
     group   => 'asterisk',
@@ -77,7 +79,7 @@ class asterisk (
     source  => $asterisk_conf_source,
   }
 
-  file {'/etc/asterisk/modules.conf':
+  file { '/etc/asterisk/modules.conf.d/modules.conf':
     ensure  => present,
     owner   => 'asterisk',
     group   => 'asterisk',
@@ -85,15 +87,34 @@ class asterisk (
     source  => $modules_conf_source,
   }
 
-  file {'/etc/asterisk/':
+  file { '/etc/asterisk':
     ensure  => present,
     recurse => true,
+    purge   => true,
     owner   => 'asterisk',
     group   => 'asterisk',
     mode    => '0660',
     source  => 'puppet:///modules/asterisk/',
     require => Package['asterisk'],
   }
+
+  $files = [
+    'ais.conf', 'amd.conf', 'asterisk.conf', 'calendar.conf', 'ccss.conf',
+    'cdr_adaptive_odbc.conf', 'cdr.conf', 'cdr_custom.conf',
+    'cdr_manager.conf', 'cdr_syslog.conf', 'cel.conf', 'cel_custom.conf',
+    'cel_odbc.conf', 'chan_dahdi.conf', 'cli.conf', 'cli_permissions.conf',
+    'codecs.conf', 'dnsmgr.conf', 'dsp.conf', 'dundi.conf', 'enum.conf',
+    'extconfig.conf', 'extensions.conf', 'features.conf', 'func_odbc.conf',
+    'gtalk.conf', 'http.conf', 'iax.conf', 'iaxprov.conf',
+    'indications.conf', 'jabber.conf', 'logger.conf', 'manager.conf',
+    'meetme.conf', 'modules.conf', 'musiconhold.conf', 'queuerules.conf',
+    'queues.conf', 'res_curl.conf', 'res_fax.conf', 'res_ldap.conf',
+    'res_odbc.conf', 'res_stun_monitor.conf', 'rtp.conf', 'say.conf',
+    'sip.conf', 'sip_notify.conf', 'smdi.conf', 'udptl.conf',
+    'voicemail.conf',
+  ]
+
+  asterisk::function::customdir { $files: }
 
   service { 'asterisk':
     ensure  => running,
