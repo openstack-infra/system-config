@@ -59,4 +59,13 @@ class openstack_project::pbx (
     source  => 'puppet:///modules/openstack_project/pbx/asterisk/extensions.conf',
     require => File['/etc/asterisk/'],
   }
+
+  file {'/etc/asterisk/cdr_custom.conf.d/cdr_custom.conf':
+    ensure  => present,
+    owner   => 'asterisk',
+    group   => 'asterisk',
+    mode    => '0660',
+    source  => 'puppet:///modules/openstack_project/pbx/asterisk/cdr_custom.conf',
+    require => File['/etc/asterisk/'],
+  }
 }
