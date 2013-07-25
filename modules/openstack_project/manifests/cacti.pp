@@ -2,6 +2,8 @@
 # Takes a list of sysadmin email addresses as a parameter. Exim will be
 # configured to email cron spam and other alerts to this list of admins.
 class openstack_project::cacti (
+  $vhost_name = $::fqdn,
+  $serveradmin = "webmaster@${::fqdn}",
   $sysadmins = []
 ) {
   class { 'openstack_project::server':
@@ -10,6 +12,22 @@ class openstack_project::cacti (
   }
 
   include apache
+  apache::vhost { $vhost_name:
+    port     => 80,
+    docroot  => 'MEANINGLESS ARGUMENT',
+    priority => '50',
+    template => 'cacti/cacti.vhost.erb',
+    ssl      => true,
+  }
+  a2mod { 'rewrite':
+    ensure => present,
+  }
+  a2mod { 'proxy':
+    ensure => present,
+  }
+  a2mod { 'proxy_http':
+    ensure => present,
+  }
 
   package { 'cacti':
     ensure => present,
