@@ -9,10 +9,12 @@ find /srv/static/logs/ -depth \
           \( -name \*.txt -or -name \*.html -or -name tmp\* \) \
           -exec gzip \{\} \; \) \
       -o \( -type f -mtime +183 -name \*.gz -execdir rm \{\} \; \) \
-      -o \( -type d -empty -mtime +1 -execdir rmdir {} \; \) \
+      -o \( -type d -not -name lost+found -empty -mtime +1 \
+          -execdir rmdir {} \; \) \
     \)
 find /srv/static/docs-draft/ -depth \
     \( \
       \( -type f -mtime +30 -name \*.gz -execdir rm \{\} \; \) \
-      -o \( -type d -empty -mtime +1 -execdir rmdir {} \; \) \
+      -o \( -type d -not -name lost+found -empty -mtime +1 \
+          -execdir rmdir {} \; \) \
     \)
