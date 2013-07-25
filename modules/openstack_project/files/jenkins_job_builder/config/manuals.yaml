@@ -1,5 +1,5 @@
 - job:
-    name: gate-openstack-manuals-cli-guide
+    name: gate-openstack-manuals-user-guide
     project-type: maven
     node: precise
 
@@ -10,8 +10,8 @@
       maven-name: Maven3
       root-module:
         group-id: org.openstack.docs
-        artifact-id: openstack-guide
-      root-pom: doc/src/docbkx/cli-guide/pom.xml
+        artifact-id: openstack-user-guide
+      root-pom: doc/src/docbkx/openstack-user/pom.xml
       goals: 'clean generate-sources'
 
     publishers:
@@ -19,8 +19,8 @@
       - scp:
           site: 'static.openstack.org'
           files:
-            - target: 'docs-draft/$BASE_LOG_PATH/$JOB_NAME/$BUILD_NUMBER/cli/quick-start'
-              source: 'doc/src/docbkx/cli-guide/target/docbkx/webhelp/cli-guide/**'
+            - target: 'docs-draft/$BASE_LOG_PATH/$JOB_NAME/$BUILD_NUMBER/user-guide/'
+              source: 'doc/src/docbkx/openstack-user/target/docbkx/webhelp/user-guide/**'
               keep-hierarchy: true
               copy-after-failure: true
 
