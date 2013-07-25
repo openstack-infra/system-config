@@ -35,6 +35,7 @@ class openstack_project::pbx (
 
   realize (
     User::Virtual::Localuser['rbryant'],
+    User::Virtual::Localuser['pabelanger'],
   )
 
   class { 'asterisk':
