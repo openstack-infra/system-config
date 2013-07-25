@@ -1,0 +1,8 @@
+Verified+2: Jenkins
+Approved+1: Clark Boylan <clark.boylan@gmail.com>
+Code-Review+2: Clark Boylan <clark.boylan@gmail.com>
+Submitted-by: Jenkins
+Submitted-at: Thu, 25 Jul 2013 21:34:40 +0000
+Reviewed-on: https://review.openstack.org/38502
+Project: openstack-infra/config
+Branch: refs/heads/master
