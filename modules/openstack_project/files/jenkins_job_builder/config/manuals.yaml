@@ -1,30 +1,4 @@
 - job:
-    name: gate-openstack-manuals-cli-guide
-    project-type: maven
-    node: precise
-
-    prebuilders:
-      - gerrit-git-prep
-
-    maven:
-      maven-name: Maven3
-      root-module:
-        group-id: org.openstack.docs
-        artifact-id: openstack-guide
-      root-pom: doc/src/docbkx/cli-guide/pom.xml
-      goals: 'clean generate-sources'
-
-    publishers:
-      - console-log
-      - scp:
-          site: 'static.openstack.org'
-          files:
-            - target: 'docs-draft/$BASE_LOG_PATH/$JOB_NAME/$BUILD_NUMBER/cli/quick-start'
-              source: 'doc/src/docbkx/cli-guide/target/docbkx/webhelp/cli-guide/**'
-              keep-hierarchy: true
-              copy-after-failure: true
-
-- job:
     name: gate-openstack-manuals-operations-guide
     project-type: maven
     node: precise
@@ -62,7 +36,7 @@
       - console-log
 
 - job:
-    name: openstack-cli-guide
+    name: openstack-user-guide
     project-type: maven
     node: precise
 
@@ -74,16 +48,16 @@
       root-module:
         group-id: org.openstack.docs
         artifact-id: openstack-guide
-      root-pom: doc/src/docbkx/cli-guide/pom.xml
+      root-pom: doc/src/docbkx/openstack-user/pom.xml
       goals: 'clean generate-sources'
 
     publishers:
       - console-log
       - ftp:
           site: docs.openstack.org
-          source: 'doc/src/docbkx/cli-guide/target/docbkx/webhelp/cli-guide/**'
-          target: 'cli/quick-start'
-          remove-prefix: 'doc/src/docbkx/cli-guide/target/docbkx/webhelp/cli-guide/'
+          source: 'doc/src/docbkx/openstack-user/target/docbkx/webhelp/user-guide/**'
+          target: ''
+          remove-prefix: 'doc/src/docbkx/openstack-user/target/docbkx/webhelp/'
           excludes: '**/*.xml,**/null*'
 
 - job:
