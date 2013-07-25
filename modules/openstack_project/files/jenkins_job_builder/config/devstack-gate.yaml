@@ -807,7 +807,7 @@
 
     wrappers:
       - timeout:
-          timeout: 10
+          timeout: 20
           fail: true
       - timestamps
 
