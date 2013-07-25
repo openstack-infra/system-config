@@ -17,8 +17,10 @@
 
 import cgi
 import fileinput
+import os.path
 import re
 import sys
+import urllib
 import wsgiref.util
 
 
@@ -67,10 +69,15 @@ def escape_html(line):
 
 
 def link_timestamp(line):
-    return re.sub('^(?P<span><span[^>]*>)?(?P<date>%s)' % DATEFMT,
-                  ('\g<span><a name="\g<date>" class="date" '
-                   'href="#\g<date>">\g<date></a>'),
-                  line)
+    m = re.match(
+        '(?P<span><span[^>]*>)?(?P<date>%s)(?P<rest>.*)' % DATEFMT,
+        line)
+    if m:
+        date = urllib.quote(m.group('date'))
+        return "%s<a name='%s' class='date' href='#%s'>%s</a>%s\n" % (
+            m.group('span'), date, date, m.group('date'), m.group('rest'))
+    else:
+        return line
 
 
 def passthrough_filter(fname):
@@ -104,20 +111,54 @@ def htmlify_stdin():
     out.write(_html_close())
 
 
-def application(environ, start_response):
-    status = '200 OK'
+def safe_path(root, environ):
+    """Pull out a save path from a url.
+
+    Basically we need to ensure that the final computed path
+    remains under the root path. If not, we return None to indicate
+    that we are very sad.
+    """
     path = wsgiref.util.request_uri(environ)
     match = re.search('htmlify/(.*)', path)
-    # TODO(sdague): scrub all .. chars out of the path, for security reasons
-    fname = "/srv/static/logs/%s" % match.groups(1)[0]
-    if 'HTTP_ACCEPT' in environ and 'text/html' in environ['HTTP_ACCEPT']:
-        response_headers = [('Content-type', 'text/html')]
-        start_response(status, response_headers)
-        return html_filter(fname)
+    raw = match.groups(1)[0]
+    newpath = os.path.abspath("%s/%s" % (root, raw))
+    if newpath.find(root) == 0:
+        return newpath
     else:
+        return None
+
+
+def should_be_html(environ):
+    """Simple content negotiation."""
+    return 'HTTP_ACCEPT' in environ and 'text/html' in environ['HTTP_ACCEPT']
+
+
+def application(environ, start_response):
+    status = '200 OK'
+
+    logpath = safe_path('/srv/static/logs/', environ)
+    if not logpath:
+        status = '400 Bad Request'
         response_headers = [('Content-type', 'text/plain')]
         start_response(status, response_headers)
-        return passthrough_filter(fname)
+        return ['Invalid file url']
+
+    try:
+        if should_be_html(environ):
+            response_headers = [('Content-type', 'text/html')]
+            generator = html_filter(logpath)
+            start_response(status, response_headers)
+            return generator
+        else:
+            response_headers = [('Content-type', 'text/plain')]
+            generator = passthrough_filter(logpath)
+            start_response(status, response_headers)
+            return generator
+    except IOError:
+        status = "404 Not Found"
+        response_headers = [('Content-type', 'text/plain')]
+        start_response(status, response_headers)
+        return ['File Not Found']
 
 
 # for development purposes, makes it easy to test the filter output
