@@ -197,9 +197,7 @@
     tarball-site: tarballs.openstack.org
 
     jobs:
-      - gate-{name}-pep8
-      - gate-{name}-pyflakes
-      - '{name}-tarball'
+      - python-jobs
       - pypi-jobs
 
 
@@ -211,9 +209,7 @@
     tarball-site: tarballs.openstack.org
 
     jobs:
-      - gate-{name}-pep8
-      - gate-{name}-pyflakes
-      - '{name}-tarball'
+      - python-jobs
       - pypi-jobs
 
 
@@ -454,7 +450,7 @@
     tarball-site: tarballs.openstack.org
 
     jobs:
-      - '{name}-tarball'
+      - python-jobs
       - pypi-jobs
 
 
