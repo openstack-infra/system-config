@@ -1343,11 +1343,19 @@ projects:
       - gate-python-heatclient-pep8
       - gate-python-heatclient-python26
       - gate-python-heatclient-python27
+      - gate-tempest-devstack-vm-full
+      - gate-tempest-devstack-vm-cells-full
+      - gate-tempest-devstack-vm-testr-full
+      - gate-tempest-devstack-vm-postgres-full
+      - gate-tempest-devstack-vm-neutron
     gate:
       - gate-python-heatclient-requirements
       - gate-python-heatclient-pep8
       - gate-python-heatclient-python26
       - gate-python-heatclient-python27
+      - gate-tempest-devstack-vm-full
+      - gate-tempest-devstack-vm-postgres-full
+      - gate-tempest-devstack-vm-neutron
     post:
       - python-heatclient-branch-tarball
       - python-heatclient-coverage
