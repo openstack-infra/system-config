@@ -319,3 +319,14 @@ openstack-cloudkeep:
       - stackforge/barbican
     branches:
       - master
+
+openstack-glance:
+    events:
+      - patchset-created
+      - change-merged
+      - x-vrif-minus-2
+    projects:
+      - openstack/glance
+      - openstack/python-glanceclient
+    branches:
+      - master
