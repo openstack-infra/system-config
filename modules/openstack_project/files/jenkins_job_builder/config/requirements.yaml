@@ -22,5 +22,8 @@
           # Run the same basic pip command that the mirror script runs.
           .venv/bin/pip install -M -U --exists-action=w $PIP_ARGS
 
+          # Print all installed stuff to demonstrate versions
+          .venv/bin/pip freeze
+
     publishers:
       - console-log
