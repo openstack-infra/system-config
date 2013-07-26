@@ -73,4 +73,13 @@ class openstack_project::lists(
     mailserver  => $listdomain,
   }
 
+  maillist { 'openstack-fr':
+    ensure      => present,
+    admin       => 'erwan.gallen@cloudwatt.com',
+    password    => $listpassword,
+    description => 'List of the OpenStack french user group',
+    webserver   => $listdomain,
+    mailserver  => $listdomain,
+  }
+
 }
