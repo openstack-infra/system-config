@@ -183,8 +183,10 @@ class asterisk::server::command {
     refreshonly => true,
   }
 
+  # Force asterisk to restart to load / unload modules.
   exec { 'asterisk-module-reload-modules.conf':
     command     => '/bin/true',
+    notify      => Service['asterisk'],
     refreshonly => true,
   }
 
