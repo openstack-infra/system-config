@@ -140,7 +140,7 @@ jobs:
     branch: ^master$
   - name: openstack-security-guide
     branch: ^master$
-  - name: gate-openstack-cli-guide
+  - name: gate-openstack-manuals-cli-guide
     success-pattern: http://docs-draft.openstack.org/{build.parameters[BASE_LOG_PATH]}/{job.name}/{build.number}/cli/quick-start
   - name: ^gate-.*-docs$
     success-pattern: http://docs-draft.openstack.org/{build.parameters[BASE_LOG_PATH]}/{job.name}/{build.number}/doc/build/html/
@@ -395,7 +395,6 @@ projects:
     pre-release:
       - storyboard-tarball
     release:
-      - storyboard-docs
       - storyboard-tarball:
         - storyboard-pypi-upload:
           - post-mirror-python26
@@ -560,14 +559,14 @@ projects:
       - gate-django_openstack_auth-python27
       - gate-django_openstack_auth-noop
     post:
-      - python-django_openstack_auth-branch-tarball
-      - python-django_openstack_auth-coverage
+      - django_openstack_auth-branch-tarball
+      - django_openstack_auth-coverage
     pre-release:
-      - python-django_openstack_auth-tarball
+      - django_openstack_auth-tarball
     release:
-      - python-django_openstack_auth-tarball:
-        - python-django_openstack_auth-pypi-upload
-      - python-django_openstack_auth-docs
+      - django_openstack_auth-tarball:
+        - django_openstack_auth-pypi-upload
+      - django_openstack_auth-docs
 
   - name: openstack/keystone
     check:
@@ -1112,12 +1111,9 @@ projects:
     post:
       - hacking-branch-tarball
       - hacking-coverage
-      - hacking-docs
     pre-release:
-      - hacking-docs
       - hacking-tarball
     release:
-      - hacking-docs
       - hacking-tarball:
         - hacking-pypi-upload:
           - post-mirror-python26
