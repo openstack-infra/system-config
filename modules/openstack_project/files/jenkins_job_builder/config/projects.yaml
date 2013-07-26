@@ -1096,6 +1096,15 @@
       - gate-{name}-chef-unit
 
 - project:
+    name: cookbook-openstack-metering
+    github-org: stackforge
+    node: precise
+
+    jobs:
+      - gate-{name}-chef-lint
+      - gate-{name}-chef-unit
+
+- project:
     name: cookbook-openstack-network
     github-org: stackforge
     node: precise
