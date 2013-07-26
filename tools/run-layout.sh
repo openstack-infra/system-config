@@ -23,14 +23,27 @@ then
   echo
   echo "ORG: The project organization (eg 'openstack')"
   echo "PROJECT: The project name (eg 'nova')"
-  #TODO: make fatal in subsequent change: exit 1
+  exit 1
 else
   /usr/local/jenkins/slave_scripts/select-mirror.sh $org $project
 fi
 
-rm -fr .test
-mkdir .test
+mkdir -p .test
 cd .test
-git clone https://review.openstack.org/p/openstack-infra/zuul --depth 1
+[ -d zuul ] || git clone https://review.openstack.org/p/openstack-infra/zuul --depth 1
+[ -d jenkins-job-builder ] || git clone https://review.openstack.org/p/openstack-infra/jenkins-job-builder --depth 1
+cd jenkins-job-builder
+# These are $WORKSPACE/.test/jenkins-job-builder/.test/...
+mkdir -p .test/new/config
+mkdir -p .test/new/out
+cd ../..
+
+cp modules/openstack_project/files/jenkins_job_builder/config/* .test/jenkins-job-builder/.test/new/config
+cd .test/jenkins-job-builder
+tox -e compare-xml-new
+
+cd ..
+find jenkins-job-builder/.test/new/out/ -printf "%f\n" > job-list.txt
+
 cd zuul
-tox -e validate-layout ../../modules/openstack_project/files/zuul/layout.yaml
+tox -e venv -- zuul-server -c etc/zuul.conf-sample -l ../../modules/openstack_project/files/zuul/layout.yaml -t ../job-list.txt
