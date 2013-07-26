@@ -67,6 +67,8 @@ class openstack_project::cacti (
     'etherpad.openstack.org',
     'graphite.openstack.org',
     'jenkins.openstack.org',
+    'jenkins01.openstack.org',
+    'jenkins02.openstack.org',
     'jenkins-dev.openstack.org',
     'lists.openstack.org',
     'logstash.openstack.org',

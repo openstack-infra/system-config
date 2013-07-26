@@ -79,6 +79,30 @@ node 'jenkins.openstack.org' {
   }
 }
 
+node 'jenkins01.openstack.org' {
+  class { 'openstack_project::jenkins':
+    jenkins_jobs_password   => hiera('jenkins_jobs_password'),
+    jenkins_ssh_private_key => hiera('jenkins_ssh_private_key_contents'),
+    ssl_cert_file_contents  => hiera('jenkins01_ssl_cert_file_contents'),
+    ssl_key_file_contents   => hiera('jenkins01_ssl_key_file_contents'),
+    ssl_chain_file_contents => hiera('jenkins01_ssl_chain_file_contents'),
+    sysadmins               => hiera('sysadmins'),
+    zmq_event_receivers     => ['logstash.openstack.org'],
+  }
+}
+
+node 'jenkins02.openstack.org' {
+  class { 'openstack_project::jenkins':
+    jenkins_jobs_password   => hiera('jenkins_jobs_password'),
+    jenkins_ssh_private_key => hiera('jenkins_ssh_private_key_contents'),
+    ssl_cert_file_contents  => hiera('jenkins02_ssl_cert_file_contents'),
+    ssl_key_file_contents   => hiera('jenkins02_ssl_key_file_contents'),
+    ssl_chain_file_contents => hiera('jenkins02_ssl_chain_file_contents'),
+    sysadmins               => hiera('sysadmins'),
+    zmq_event_receivers     => ['logstash.openstack.org'],
+  }
+}
+
 node 'jenkins-dev.openstack.org' {
   class { 'openstack_project::jenkins_dev':
     jenkins_ssh_private_key => hiera('jenkins_dev_ssh_private_key_contents'),
@@ -111,8 +135,9 @@ node 'graphite.openstack.org' {
     graphite_admin_user     => hiera('graphite_admin_user'),
     graphite_admin_email    => hiera('graphite_admin_email'),
     graphite_admin_password => hiera('graphite_admin_password'),
-    statsd_hosts            => ['jenkins.openstack.org',
-                                'devstack-launch.slave.openstack.org',
+    statsd_hosts            => ['devstack-launch.slave.openstack.org',
+                                'devstack-launch01.slave.openstack.org',
+                                'devstack-launch02.slave.openstack.org',
                                 'zuul.openstack.org'],
   }
 }
@@ -387,6 +412,29 @@ node 'devstack-launch.slave.openstack.org' {
     jenkins_api_key         => hiera('jenkins_api_key'),
     jenkins_ssh_public_key  => $openstack_project::jenkins_ssh_key,
     jenkins_ssh_private_key => hiera('jenkins_ssh_private_key_contents'),
+    jenkins_server          => 'jenkins.openstack.org',
+  }
+}
+
+node 'devstack-launch01.slave.openstack.org' {
+  include openstack_project
+  class { 'openstack_project::devstack_launch_slave':
+    jenkins_api_user        => hiera('jenkins_api_user'),
+    jenkins_api_key         => hiera('jenkins_api_key'),
+    jenkins_ssh_public_key  => $openstack_project::jenkins_ssh_key,
+    jenkins_ssh_private_key => hiera('jenkins_ssh_private_key_contents'),
+    jenkins_server          => 'jenkins01.openstack.org',
+  }
+}
+
+node 'devstack-launch02.slave.openstack.org' {
+  include openstack_project
+  class { 'openstack_project::devstack_launch_slave':
+    jenkins_api_user        => hiera('jenkins_api_user'),
+    jenkins_api_key         => hiera('jenkins_api_key'),
+    jenkins_ssh_public_key  => $openstack_project::jenkins_ssh_key,
+    jenkins_ssh_private_key => hiera('jenkins_ssh_private_key_contents'),
+    jenkins_server          => 'jenkins02.openstack.org',
   }
 }
 
