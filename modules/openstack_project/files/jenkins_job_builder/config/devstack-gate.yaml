@@ -872,6 +872,31 @@
 
 
 - job-template:
+    name: devstack-check-vms-{provider}
+    concurrent: false
+    node: devstack-launch
+
+    wrappers:
+      - timeout:
+          timeout: 25
+          fail: true
+      - timestamps
+
+    triggers:
+      - timed: '*/30 * * * *'
+
+    builders:
+      - devstack-checkout
+      - shell: |
+          #!/bin/bash -xe
+
+          export STATSD_HOST="graphite.openstack.org"
+          export STATSD_PORT=8125
+          export PYTHONUNBUFFERED=true
+          $WORKSPACE/devstack-gate/devstack-vm-check.py {provider}
+
+
+- job-template:
     name: devstack-update-vm-image-{provider}
     concurrent: false
     node: devstack-launch
@@ -898,4 +923,5 @@
     jobs:
       - devstack-launch-vms-{provider}
       - devstack-reap-vms-{provider}
+      - devstack-check-vms-{provider}
       - devstack-update-vm-image-{provider}
