@@ -46,7 +46,7 @@ function format_progress(elapsed, remaining) {
     } else {
         total = null;
     }
-    r = '<progress style="width:6em" title="' +
+    r = '<progress class="change_progress" title="' +
         format_time(elapsed, false) + ' elapsed, ' +
         format_time(remaining, false)+' remaining" ' +
         'value="'+elapsed+'" max="'+total+'">in progress</progress>';
@@ -137,7 +137,7 @@ function format_change(change) {
         if (job['result'] == null && job['url'] != null) {
             html += format_progress(job['elapsed_time'], job['remaining_time']);
         } else {
-            html += '<span class="'+result_class+'">'+result+'</span>';
+            html += '<span class="result '+result_class+'">'+result+'</span>';
         }
 
         if (job['voting'] == false) {
