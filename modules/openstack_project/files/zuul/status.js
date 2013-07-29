@@ -46,7 +46,7 @@ function format_progress(elapsed, remaining) {
     } else {
         total = null;
     }
-    r = '<progress style="width:6em" title="' +
+    r = '<progress class="change_progress" title="' +
         format_time(elapsed, false) + ' elapsed, ' +
         format_time(remaining, false)+' remaining" ' +
         'value="'+elapsed+'" max="'+total+'">in progress</progress>';
