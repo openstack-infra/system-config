@@ -93,12 +93,6 @@ class jenkins::slave(
         require => Package[$::jenkins::params::jdk_package],
       }
 
-      if ! defined(Package[$::jenkins::params::python3_dev_package]) {
-        package { $::jenkins::params::python3_dev_package:
-          ensure => present,
-        }
-      }
-
       package { $::jenkins::params::ruby1_9_1_package:
         ensure => present,
       }
