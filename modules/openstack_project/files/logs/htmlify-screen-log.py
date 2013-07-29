@@ -20,7 +20,6 @@ import fileinput
 import os.path
 import re
 import sys
-import urllib
 import wsgiref.util
 
 
@@ -30,7 +29,7 @@ LOGMATCH = '(?P<date>%s)(?P<pid> \d+)? (?P<status>%s)' % (DATEFMT, STATUSFMT)
 
 
 def _html_close():
-    return ("</pre></body></html>\n")
+    return ("</span></pre></body></html>\n")
 
 
 def _css_preamble():
@@ -46,7 +45,7 @@ a:hover {text-decoration: underline}
 .WARN, .WARN a {color: #D89100;  font-weight: bold}
 .INFO, .INFO a {color: #006; font-weight: bold}
 </style>
-<body><pre>\n""")
+<body><pre><span>\n""")
 
 
 def color_by_sev(line):
@@ -70,12 +69,13 @@ def escape_html(line):
 
 def link_timestamp(line):
     m = re.match(
-        '(?P<span><span[^>]*>)?(?P<date>%s)(?P<rest>.*)' % DATEFMT,
+        '(<span class=\'(?P<class>[^\']+)\'>)?(?P<date>%s)(?P<rest>.*)' % DATEFMT,
         line)
     if m:
-        date = urllib.quote(m.group('date'))
-        return "%s<a name='%s' class='date' href='#%s'>%s</a>%s\n" % (
-            m.group('span'), date, date, m.group('date'), m.group('rest'))
+        date = "_" + re.sub('[\s\:\.]', '_', m.group('date'))
+
+        return "</span><span class='%s %s'><a name='%s' class='date' href='#%s'>%s</a>%s\n" % (
+            m.group('class'), date, date, date, m.group('date'), m.group('rest'))
     else:
         return line
 
@@ -112,7 +112,7 @@ def htmlify_stdin():
 
 
 def safe_path(root, environ):
-    """Pull out a save path from a url.
+    """Pull out a safe path from a url.
 
     Basically we need to ensure that the final computed path
     remains under the root path. If not, we return None to indicate
@@ -121,7 +121,7 @@ def safe_path(root, environ):
     path = wsgiref.util.request_uri(environ)
     match = re.search('htmlify/(.*)', path)
     raw = match.groups(1)[0]
-    newpath = os.path.abspath("%s/%s" % (root, raw))
+    newpath = os.path.abspath(os.path.join(root, raw))
     if newpath.find(root) == 0:
         return newpath
     else:
