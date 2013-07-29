@@ -29,10 +29,31 @@ NameVirtualHost <%= vhost_name %>:<%= port %>
     Order allow,deny
     allow from all
   </Directory>
+
+  <Directory <%= docroot %>/*/*/*/*/gate-tempest-devstack*/*>
+     ReadmeName /help/tempest-overview.html
+  </Directory>
+  <Directory <%= docroot %>/periodic/*/periodic-tempest-devstack*/*>
+     ReadmeName /help/tempest-overview.html
+  </Directory>
+  <Directory <%= docroot %>/*/*/*/*/gate-tempest-devstack*/*/logs/>
+     ReadmeName /help/tempest-logs.html
+  </Directory>
+  <Directory <%= docroot %>/periodic/*/periodic-tempest-devstack*/*/logs/>
+     ReadmeName /help/tempest-logs.html
+  </Directory>
+
+  # old patterns, can be removed in February 2014
   <Directory <%= docroot %>/*/*/*/gate-tempest-devstack*/*>
      ReadmeName /help/tempest-overview.html
   </Directory>
+  <Directory <%= docroot %>/periodic/periodic-tempest-devstack*/*>
+     ReadmeName /help/tempest-overview.html
+  </Directory>
   <Directory <%= docroot %>/*/*/*/gate-tempest-devstack*/*/logs/>
+     ReadmeName /help/tempest-logs.html
+  </Directory>
+  <Directory <%= docroot %>/periodic/periodic-tempest-devstack*/*/logs/>
      ReadmeName /help/tempest-logs.html
   </Directory>
 
