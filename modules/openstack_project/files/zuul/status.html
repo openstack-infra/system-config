@@ -41,6 +41,9 @@
     font-size: 16pt;
     line-height: 1.0;
 }
+.result {
+    float: right;
+}
 .result_success {
     color: #007f00;
 }
@@ -64,6 +67,12 @@ a:link {
     font-size: 12pt;
     margin: 0pt;
 }
+.change_progress {
+    width: 5em;
+    float: right;
+    /* because other wise this floats up off the line */
+    margin-top: 0.25em;
+}
 
 </style>
 
@@ -79,24 +88,24 @@ a:link {
 	src="http://status.openstack.org/common.js"></script>
 <script type="text/javascript"
 	src="status.js"></script>
-    
+
     <!-- Google Fonts -->
     <link href='http://fonts.googleapis.com/css?family=PT+Sans&amp;subset=latin' rel='stylesheet' type='text/css'/>
-    
+
     <!-- Framework CSS -->
     <link rel="stylesheet" href="http://www.openstack.org/themes/openstack/css/blueprint/screen.css" type="text/css" media="screen, projection"/>
     <link rel="stylesheet" href="http://www.openstack.org/themes/openstack/css/blueprint/print.css" type="text/css" media="print"/>
-    
+
     <!-- IE CSS -->
     <!--[if lt IE 8]><link rel="stylesheet" href="http://www.openstack.org/blueprint/ie.css" type="text/css" media="screen, projection"><![endif]-->
-    
+
     <!-- OpenStack Specific CSS -->
-    
+
     <link rel="stylesheet" href="http://www.openstack.org/themes/openstack/css/dropdown.css" type="text/css" media="screen, projection, print"/>
 
     <!-- Page Specific CSS -->
     <link rel="stylesheet" href="http://www.openstack.org/themes/openstack/css/home.css" type="text/css" media="screen, projection, print"/>
-	
+
     <link rel="stylesheet" type="text/css" href="http://www.openstack.org/themes/openstack/css/main.css" />
   </HEAD>
 
