@@ -76,10 +76,7 @@ class EventProcessor(threading.Thread):
 
     def _get_log_dir(self, event):
         parameters = event["build"].get("parameters", {})
-        base = parameters.get('BASE_LOG_PATH', 'periodic')
-        base += '/{name}/{number}/'.format(
-            name=event.get("name", "UNKNOWN"),
-            number=event["build"].get("number", "UNKNOWN"))
+        base = parameters.get('LOG_PATH', 'UNKNOWN')
         return base
 
     def _parse_fields(self, event, filename):
@@ -90,13 +87,14 @@ class EventProcessor(threading.Thread):
         fields["build_number"] = event["build"].get("number", "UNKNOWN")
         parameters = event["build"].get("parameters", {})
         fields["build_queue"] = parameters.get("ZUUL_PIPELINE", "UNKNOWN")
-        if fields["build_queue"] in ["check", "gate"]:
+        fields["build_ref"] = parameters.get("ZUUL_REF", "UNKNOWN")
+        if parameters.get("ZUUL_CHANGE"):
             fields["build_change"] = parameters.get("ZUUL_CHANGE", "UNKNOWN")
             fields["build_patchset"] = parameters.get("ZUUL_PATCHSET",
                                                       "UNKNOWN")
-        elif fields["build_queue"] in ["post", "pre-release", "release"]:
-            fields["build_shortref"] = parameters.get("ZUUL_SHORT_NEWREV",
-                                                      "UNKNOWN")
+        elif parameters.get("ZUUL_NEWREV"):
+            fields["build_newrev"] = parameters.get("ZUUL_NEWREV",
+                                                    "UNKNOWN")
         return fields
 
     def _parse_event(self, event, fileopts):
