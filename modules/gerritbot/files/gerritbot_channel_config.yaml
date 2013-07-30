@@ -102,6 +102,7 @@ openstack-metering:
     projects:
       - openstack/ceilometer
       - openstack/python-ceilometerclient
+      - stackforge/pycadf
     branches:
       - master
 
