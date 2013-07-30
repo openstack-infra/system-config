@@ -1936,9 +1936,13 @@ projects:
     check:
       - gate-sqlalchemy-migrate-python26
       - gate-sqlalchemy-migrate-python27
+      - gate-sqlalchemy-migrate-python26-sqlalchemy07
+      - gate-sqlalchemy-migrate-python27-sqlalchemy07
     gate:
       - gate-sqlalchemy-migrate-python26
       - gate-sqlalchemy-migrate-python27
+      - gate-sqlalchemy-migrate-python26-sqlalchemy07
+      - gate-sqlalchemy-migrate-python27-sqlalchemy07
     post:
       - sqlalchemy-migrate-branch-tarball
       - hook-sqlalchemy-migrate-rtfd

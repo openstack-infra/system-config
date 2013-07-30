@@ -1,0 +1,37 @@
+- job:
+    name: gate-sqlalchemy-migrate-python26-sqlalchemy07
+    node: centos6
+
+    wrappers:
+      - timeout:
+          timeout: 40
+          fail: true
+      - timestamps
+
+    builders:
+      - gerrit-git-prep
+      - shell: '/usr/local/jenkins/slave_scripts/run-tox.sh py26sa07'
+      - assert-no-extra-files
+
+    publishers:
+      - test-results
+      - console-log
+
+- job:
+    name: gate-sqlalchemy-migrate-python27-sqlalchemy07
+    node: precise
+
+    wrappers:
+      - timeout:
+          timeout: 40
+          fail: true
+      - timestamps
+
+    builders:
+      - gerrit-git-prep
+      - shell: '/usr/local/jenkins/slave_scripts/run-tox.sh py27sa07'
+      - assert-no-extra-files
+
+    publishers:
+      - test-results
+      - console-log
