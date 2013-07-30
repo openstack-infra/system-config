@@ -1,0 +1,12 @@
+Code-Review+2: James E. Blair <corvus@inaugust.com>
+Verified+2: Jenkins
+Code-Review+1: Chuck Short <chuck.short@canonical.com>
+Code-Review+1: Julien Danjou <julien@danjou.info>
+Code-Review+2: Clark Boylan <clark.boylan@gmail.com>
+Approved+1: Jeremy Stanley <fungi@yuggoth.org>
+Code-Review+2: Jeremy Stanley <fungi@yuggoth.org>
+Submitted-by: Jenkins
+Submitted-at: Tue, 30 Jul 2013 20:06:44 +0000
+Reviewed-on: https://review.openstack.org/39356
+Project: openstack-infra/config
+Branch: refs/heads/master
