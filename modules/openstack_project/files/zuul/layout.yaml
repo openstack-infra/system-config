@@ -2445,3 +2445,22 @@ projects:
       - gate-noop
     gate:
       - gate-noop
+
+  - name: stackforge/pycadf
+    check:
+      - gate-pycadf-pep8
+      - gate-pycadf-python26
+      - gate-pycadf-python27
+    gate:
+      - gate-pycadf-pep8
+      - gate-pycadf-python26
+      - gate-pycadf-python27
+    post:
+      - pycadf-branch-tarball
+    pre-release:
+      - pycadf-tarball
+    release:
+      - pycadf-tarball:
+        - pycadf-pypi-upload:
+          - post-mirror-python26
+          - post-mirror-python27
