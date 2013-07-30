@@ -481,7 +481,7 @@ class HtmlOutput(testtools.TestResult):
             self.result.append((2, test, output, _exc_str))
 
     def addFailure(self, test, err):
-        print test
+        print(test)
         self.failure_count += 1
         _exc_str = self.formatErr(err)
         output = test.shortDescription()
@@ -619,7 +619,7 @@ class HtmlOutput(testtools.TestResult):
         if hasattr(test, 'test'):
             test = test.test
         if test.__class__ == subunit.RemotedTestCase:
-            #print test._RemotedTestCase__description.rsplit('.', 1)[0]
+            #print(test._RemotedTestCase__description.rsplit('.', 1)[0])
             cl = test._RemotedTestCase__description.rsplit('.', 1)[0]
             mod = cl.rsplit('.', 1)[0]
             cls = ClassInfoWrapper(cl, mod)
@@ -709,7 +709,7 @@ class FileAccumulator(testtools.StreamResult):
 
 def main():
     if len(sys.argv) < 2:
-        print "Need at least one argument: path to subunit log."
+        print("Need at least one argument: path to subunit log.")
         exit(1)
     subunit_file = sys.argv[1]
     if len(sys.argv) > 2:
