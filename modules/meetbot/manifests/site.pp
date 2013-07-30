@@ -15,6 +15,7 @@ define meetbot::site(
     port     => 80,
     docroot  => "/srv/meetbot-${name}",
     priority => '50',
+    template => 'meetbot/vhost.erb',
   }
 
   file { $varlib:
