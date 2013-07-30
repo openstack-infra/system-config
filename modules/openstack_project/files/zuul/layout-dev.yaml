@@ -241,6 +241,7 @@ projects:
       - gate-oslo.config-docs
       - gate-oslo.config-python26
       - gate-oslo.config-python27
+      - gate-oslo.config-python33
 
   - name: openstack/oslo.messaging
     check:
@@ -389,6 +390,7 @@ projects:
       - gate-pbr-docs
       - gate-pbr-python26
       - gate-pbr-python27
+      - gate-pbr-python33
 
   - name: openstack-dev/devstack
     check:
