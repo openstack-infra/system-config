@@ -54,7 +54,6 @@ class jenkins::job_builder (
 #       at some point, but that still has some problems.
   file { '/etc/jenkins_jobs/jenkins_jobs.ini':
     ensure  => present,
-    owner   => 'jenkins',
     mode    => '0400',
     content => template('jenkins/jenkins_jobs.ini.erb'),
     require => File['/etc/jenkins_jobs'],
