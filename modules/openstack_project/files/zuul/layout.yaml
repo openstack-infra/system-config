@@ -1271,6 +1271,12 @@ projects:
       - ceilometer-docs
       - ceilometer-tarball
 
+  - name: stackforge/clouddocs-maven-plugin
+    check:
+      - gate-noop
+    gate:
+      - gate-noop
+
   - name: stackforge/MRaaS
     check:
       - gate-noop
