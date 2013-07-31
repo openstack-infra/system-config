@@ -6,9 +6,10 @@ pipelines:
     description: This pipeline is used for silently testing new jobs.
     manager: IndependentPipelineManager
     trigger:
-      - event: patchset-created
-      - event: comment-added
-        comment_filter: (?i)^\s*recheck(( (?:bug|lp)[\s#:]*(\d+))|( no bug))\s*$
+      gerrit:
+        - event: patchset-created
+        - event: comment-added
+          comment_filter: (?i)^\s*recheck(( (?:bug|lp)[\s#:]*(\d+))|( no bug))\s*$
 
 
 jobs:
