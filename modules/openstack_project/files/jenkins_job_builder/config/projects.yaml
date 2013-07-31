@@ -248,6 +248,18 @@
 
 
 - project:
+    name: pypi-mirror
+    github-org: openstack-infra
+    node: precise
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - gate-{name}-pep8
+      - '{name}-tarball'
+      - pypi-jobs
+
+
+- project:
     name: gear
     github-org: openstack-infra
     node: precise

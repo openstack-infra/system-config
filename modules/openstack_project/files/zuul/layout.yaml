@@ -366,6 +366,20 @@ projects:
           - post-mirror-python27
           - post-mirror-python33
 
+  - name: openstack-infra/pypi-mirror
+    check:
+      - gate-pypi-mirror-pep8
+    gate:
+      - gate-pypi-mirror-pep8
+    pre-release:
+      - pypi-mirror-tarball
+    release:
+      - pypi-mirror-tarball:
+        - pypi-mirror-pypi-upload:
+          - post-mirror-python26
+          - post-mirror-python27
+          - post-mirror-python33
+
   - name: openstack-infra/jenkins-job-builder
     check:
       - gate-jenkins-job-builder-docs
