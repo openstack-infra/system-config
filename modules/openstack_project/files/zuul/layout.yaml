@@ -229,10 +229,8 @@ projects:
   - name: openstack-infra/gerritbot
     check:
       - gate-gerritbot-pep8
-      - gate-gerritbot-pyflakes
     gate:
       - gate-gerritbot-pep8
-      - gate-gerritbot-pyflakes
     post:
       - gerritbot-branch-tarball
     pre-release:
@@ -246,10 +244,8 @@ projects:
   - name: openstack-infra/gerritlib
     check:
       - gate-gerritlib-pep8
-      - gate-gerritlib-pyflakes
     gate:
       - gate-gerritlib-pep8
-      - gate-gerritlib-pyflakes
     pre-release:
       - gerritlib-tarball
     release:
@@ -393,7 +389,6 @@ projects:
     pre-release:
       - storyboard-tarball
     release:
-      - storyboard-docs
       - storyboard-tarball:
         - storyboard-pypi-upload:
           - post-mirror-python26
@@ -408,10 +403,8 @@ projects:
   - name: openstack-infra/statusbot
     check:
       - gate-statusbot-pep8
-      - gate-statusbot-pyflakes
     gate:
       - gate-statusbot-pep8
-      - gate-statusbot-pyflakes
     post:
       - statusbot-branch-tarball
     pre-release:
@@ -558,14 +551,14 @@ projects:
       - gate-django_openstack_auth-python27
       - gate-django_openstack_auth-noop
     post:
-      - python-django_openstack_auth-branch-tarball
-      - python-django_openstack_auth-coverage
+      - django_openstack_auth-branch-tarball
+      - django_openstack_auth-coverage
     pre-release:
-      - python-django_openstack_auth-tarball
+      - django_openstack_auth-tarball
     release:
-      - python-django_openstack_auth-tarball:
-        - python-django_openstack_auth-pypi-upload
-      - python-django_openstack_auth-docs
+      - django_openstack_auth-tarball:
+        - django_openstack_auth-pypi-upload
+      - django_openstack_auth-docs
 
   - name: openstack/keystone
     check:
@@ -1112,12 +1105,9 @@ projects:
     post:
       - hacking-branch-tarball
       - hacking-coverage
-      - hacking-docs
     pre-release:
-      - hacking-docs
       - hacking-tarball
     release:
-      - hacking-docs
       - hacking-tarball:
         - hacking-pypi-upload:
           - post-mirror-python26

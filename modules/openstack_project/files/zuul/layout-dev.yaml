@@ -96,12 +96,10 @@ projects:
   - name: openstack-infra/gerritbot
     check:
       - gate-gerritbot-pep8
-      - gate-gerritbot-pyflakes
 
   - name: openstack-infra/gerritlib
     check:
       - gate-gerritlib-pep8
-      - gate-gerritlib-pyflakes
 
   - name: openstack-infra/jeepyb
     check:
@@ -151,7 +149,6 @@ projects:
   - name: openstack-infra/statusbot
     check:
       - gate-statusbot-pep8
-      - gate-statusbot-pyflakes
 
   - name: openstack/cinder
     check:
