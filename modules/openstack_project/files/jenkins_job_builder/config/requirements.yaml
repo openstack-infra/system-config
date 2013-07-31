@@ -9,7 +9,7 @@
           /usr/local/jenkins/slave_scripts/select-mirror.sh openstack requirements
           virtualenv --clear .venv
           PIP_ARGS=""
-          REQ_FILES="tools/pip-requires tools/test-requires requirements.txt test-requirements.txt"
+          REQ_FILES="tools/pip-requires tools/test-requires requirements.txt test-requirements.txt dev-requirements.txt"
           for FILE in $REQ_FILES
           do
             if [ -e $FILE ]
