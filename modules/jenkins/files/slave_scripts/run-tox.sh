@@ -59,13 +59,14 @@ if [ -d ".testrepository" ] ; then
     elif [ -f ".testrepository/0" ] ; then
         cp .testrepository/0 ./subunit_log.txt
     fi
-    .tox/$venv/bin/python /usr/local/jenkins/slave_scripts/subunit2html.py ./subunit_log.txt testr_results.html
+    export PYTHON=.tox/$venv/bin/python
+    /usr/local/jenkins/slave_scripts/subunit2html.py ./subunit_log.txt testr_results.html
     gzip -9 ./subunit_log.txt
     gzip -9 ./testr_results.html
 
     set -e
-    foundcount=$(.tox/$venv/bin/python .tox/$venv/bin/testr list-tests | sed -e '1d' | wc -l)
-    rancount=$(.tox/$venv/bin/python .tox/$venv/bin/testr last | sed -ne 's/Ran \([0-9]\+\).*tests in.*/\1/p')
+    foundcount=$(.tox/$venv/bin/testr list-tests | sed -e '1d' | wc -l)
+    rancount=$(.tox/$venv/bin/testr last | sed -ne 's/Ran \([0-9]\+\).*tests in.*/\1/p')
     if [ "$rancount" -lt "$foundcount" ] ; then
         echo
         echo "The number of tests found was greater than the number of tests"

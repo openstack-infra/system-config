@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 """
 Utility to convert a subunit stream to an html results file.
 Code is adapted from the pyunit Html test runner at
