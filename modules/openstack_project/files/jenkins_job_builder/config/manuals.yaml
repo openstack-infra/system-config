@@ -520,6 +520,11 @@
     project-type: maven
     node: precise
 
+    properties:
+      - inject:
+          script-file: /usr/local/jenkins/slave_scripts/docbook-properties.sh
+          properties-file: gerrit-doc.properties
+
     prebuilders:
       - gerrit-git-prep
 
@@ -529,7 +534,7 @@
         group-id: org.openstack.docs
         artifact-id: openstack-guide
       root-pom: doc/src/docbkx/openstack-training/pom.xml
-      goals: 'clean generate-sources'
+      goals: '-Drelease.path.name=${DOC_RELEASE_PATH} -Dcomments.enabled=${DOC_COMMENTS_ENABLED} clean generate-sources'
 
     publishers:
       - console-log-post
