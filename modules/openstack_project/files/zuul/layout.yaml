@@ -1994,6 +1994,20 @@ projects:
       - gate-puppet-glance-puppet-unit-3.0
       - gate-puppet-glance-puppet-unit-3.1
 
+  - name: stackforge/puppet-heat
+    check:
+      - gate-puppet-heat-puppet-lint
+      - gate-puppet-heat-puppet-syntax
+      - gate-puppet-heat-puppet-unit-2.7
+      - gate-puppet-heat-puppet-unit-3.0
+      - gate-puppet-heat-puppet-unit-3.1
+    gate:
+      - gate-puppet-heat-puppet-lint
+      - gate-puppet-heat-puppet-syntax
+      - gate-puppet-heat-puppet-unit-2.7
+      - gate-puppet-heat-puppet-unit-3.0
+      - gate-puppet-heat-puppet-unit-3.1
+
   - name: stackforge/puppet-horizon
     check:
       - gate-puppet-horizon-puppet-lint

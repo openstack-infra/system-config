@@ -220,6 +220,7 @@ puppet-openstack:
       - stackforge/puppet-ceilometer
       - stackforge/puppet-cinder
       - stackforge/puppet-glance
+      - stackforge/puppet-heat
       - stackforge/puppet-horizon
       - stackforge/puppet-keystone
       - stackforge/puppet-nova
