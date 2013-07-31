@@ -24,6 +24,7 @@ openstack-infra:
       - openstack-infra/nose-html-output
       - openstack-infra/odsreg
       - openstack-infra/publications
+      - openstack-infra/pypi-mirror
       - openstack-infra/releasestatus
       - openstack-infra/reviewday
       - openstack-infra/reviewstats

@@ -273,6 +273,12 @@ projects:
           - post-mirror-python26
           - post-mirror-python27
 
+  - name: openstack-infra/pypi-mirror
+    check:
+      - gate-noop
+    gate:
+      - gate-noop
+
   - name: openstack-infra/jenkins-job-builder
     check:
       - gate-jenkins-job-builder-docs
