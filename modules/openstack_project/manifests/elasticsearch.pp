@@ -36,13 +36,14 @@ class openstack_project::elasticsearch (
 
   cron { 'delete_old_es_indices':
     user        => 'root',
-    hour        => '5',
+    hour        => '2',
     minute      => '0',
     command     => 'curl -sS -XDELETE "http://localhost:9200/logstash-`date -d \'2 weeks ago\' +\%Y.\%m.\%d`/" > /dev/null',
     environment => 'PATH=/usr/bin:/bin:/usr/sbin:/sbin',
   }
 
   cron { 'optimize_old_es_indices':
+    ensure      => absent,
     user        => 'root',
     hour        => '13',
     minute      => '0',
