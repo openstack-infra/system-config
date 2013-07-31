@@ -1,5 +1,6 @@
 class exim(
   $mailman_domains = [],
+  $queue_interval = '30m',
   $sysadmin = []
 ) {
 
@@ -13,13 +14,35 @@ class exim(
     service { 'postfix':
       ensure      => stopped
     }
+    file { $::exim::params::sysdefault_file:
+      ensure  => present,
+      content => template("${module_name}/exim.sysconfig.erb"),
+      group   => 'root',
+      mode    => '0444',
+      owner   => 'root',
+      replace => true,
+      require => Package[$::exim::params::package],
+    }
+  }
+
+  if ($::osfamily == 'Debian') {
+    file { $::exim::params::sysdefault_file:
+      ensure  => present,
+      content => template("${module_name}/exim4.default.erb"),
+      group   => 'root',
+      mode    => '0444',
+      owner   => 'root',
+      replace => true,
+      require => Package[$::exim::params::package],
+    }
   }
 
   service { 'exim':
     ensure      => running,
     name        => $::exim::params::service_name,
     hasrestart  => true,
-    subscribe   => File[$::exim::params::config_file],
+    subscribe   => [File[$::exim::params::config_file],
+                    File[$::exim::params::sysdefault_file]],
     require     => Package[$::exim::params::package],
   }
 
