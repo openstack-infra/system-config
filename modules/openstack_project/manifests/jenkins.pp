@@ -1,6 +1,7 @@
 # == Class: openstack_project::jenkins
 #
 class openstack_project::jenkins (
+  $vhost_name = $::fqdn,
   $jenkins_jobs_password = '',
   $manage_jenkins_jobs = true,
   $ssl_cert_file_contents = '',
@@ -20,13 +21,12 @@ class openstack_project::jenkins (
     sysadmins                 => $sysadmins,
   }
 
-  $vhost_name = 'jenkins.openstack.org'
   class { '::jenkins::master':
     vhost_name              => $vhost_name,
     serveradmin             => 'webmaster@openstack.org',
     logo                    => 'openstack.png',
-    ssl_cert_file           => '/etc/ssl/certs/jenkins.openstack.org.pem',
-    ssl_key_file            => '/etc/ssl/private/jenkins.openstack.org.key',
+    ssl_cert_file           => "/etc/ssl/certs/${vhost_name}.pem",
+    ssl_key_file            => "/etc/ssl/private/${vhost_name}.key",
     ssl_chain_file          => '/etc/ssl/certs/intermediate.pem',
     ssl_cert_file_contents  => $ssl_cert_file_contents,
     ssl_key_file_contents   => $ssl_key_file_contents,
