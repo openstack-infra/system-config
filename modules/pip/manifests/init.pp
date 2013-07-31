@@ -12,6 +12,12 @@ class pip {
     require => Package[$::pip::params::python_devel_package]
   }
 
+  package { 'setuptools':
+    ensure   => latest,
+    provider => pip,
+    require  => Package[$::pip::params::python_pip_package],
+  }
+
   if ($::operatingsystem in ['CentOS', 'RedHat']) {
 
     file { '/usr/bin/pip':
