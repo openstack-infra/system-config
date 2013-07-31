@@ -141,7 +141,7 @@ jobs:
   - name: openstack-security-guide
     branch: ^master$
   - name: ^gate-.*-docs$
-    success-pattern: http://docs-draft.openstack.org/{build.parameters[BASE_LOG_PATH]}/{job.name}/{build.number}/doc/build/html/
+    success-pattern: http://docs-draft.openstack.org/{build.parameters[LOG_PATH]}/doc/build/html/
   - name: infra-publications-publish
     branch: ^(?!master).*$
   - name: ^gate-.*-requirements$

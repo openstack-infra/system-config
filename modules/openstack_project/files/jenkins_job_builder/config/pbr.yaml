@@ -35,7 +35,7 @@
       - scp:
           site: 'static.openstack.org'
           files:
-            - target: 'logs/$BASE_LOG_PATH/$JOB_NAME/$BUILD_NUMBER'
+            - target: 'logs/$LOG_PATH'
               source: '**/pip.log'
               keep-hierarchy: false
               copy-after-failure: true

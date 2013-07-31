@@ -58,9 +58,9 @@ jobs:
   - name: openstack-ha-guide
     branch: ^master$
   - name: gate-openstack-cli-guide
-    success-pattern: http://docs-draft.openstack.org/{build.parameters[BASE_LOG_PATH]}/{build.number}/cli/quick-start
+    success-pattern: http://docs-draft.openstack.org/{build.parameters[LOG_PATH]}/cli/quick-start
   - name: ^gate-.*-docs$
-    success-pattern: http://docs-draft.openstack.org/{build.parameters[BASE_LOG_PATH]}/{job.name}/{build.number}/doc/build/html/
+    success-pattern: http://docs-draft.openstack.org/{build.parameters[LOG_PATH]}/doc/build/html/
   - name: ^gate-.*-requirements$
     failure-message: Incompatible requirement found; see https://wiki.openstack.org/wiki/Requirements
     branch: ^(?!stable/(folsom|grizzly)).*$

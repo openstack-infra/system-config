@@ -19,7 +19,7 @@
       - scp:
           site: 'static.openstack.org'
           files:
-            - target: 'docs-draft/$BASE_LOG_PATH/$JOB_NAME/$BUILD_NUMBER/ops/'
+            - target: 'docs-draft/$LOG_PATH/ops/'
               source: 'doc/src/docbkx/openstack-ops/target/docbkx/webhelp/**'
               keep-hierarchy: true
               copy-after-failure: true
