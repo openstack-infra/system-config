@@ -2281,9 +2281,12 @@ projects:
 
   - name: stackforge/cookbook-openstack-metering
     check:
-      - gate-noop
+      - gate-cookbook-openstack-metering-chef-lint
+      - gate-cookbook-openstack-metering-chef-unit
+
     gate:
-      - gate-noop
+      - gate-cookbook-openstack-metering-chef-lint
+      - gate-cookbook-openstack-metering-chef-unit
 
   - name: stackforge/cookbook-openstack-network
     check:
