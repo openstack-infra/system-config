@@ -28,6 +28,7 @@ openstack-infra:
       - openstack-infra/puppet-apparmor
       - openstack-infra/puppet-dashboard
       - openstack-infra/puppet-vcsrepo
+      - openstack-infra/pypi-mirror
       - openstack-infra/releasestatus
       - openstack-infra/reviewday
       - openstack-infra/reviewstats
