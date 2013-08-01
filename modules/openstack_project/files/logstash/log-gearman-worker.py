@@ -123,6 +123,8 @@ class LogRetriever(threading.Thread):
         try:
             logging.debug("Retrieving: " + source_url)
             r = urllib2.urlopen(source_url)
+            if 'gzip' in r.info().get('Content-Type', ''):
+                gzipped = True
         except urllib2.URLError:
             try:
                 logging.debug("Retrieving: " + source_url + ".gz")
