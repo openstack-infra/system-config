@@ -716,6 +716,7 @@
 
     jobs:
       - python-jobs
+      - gate-{name}-python33
 
 
 - project:
@@ -1066,6 +1067,7 @@
 
     jobs:
       - python-jobs
+      - gate-{name}-python33
 
 - project:
     name: cookbook-openstack-common
