@@ -73,6 +73,14 @@ pipelines:
         - event: comment-added
           comment_filter: (?i)^\s*recheck(( (?:bug|lp)[\s#:]*(\d+))|( no bug))\s*$
 
+  - name: periodic
+    description: Jobs in this queue are triggered on a timer.
+    manager: IndependentPipelineManager
+    precedence: low
+    trigger:
+      timer:
+        - time: '*/5 * * * *'
+
 
 jobs:
   - name: ^.*$
@@ -205,6 +213,8 @@ projects:
         - zuul-pypi-upload:
           - post-mirror-python26
           - post-mirror-python27
+    periodic:
+      - periodic-test
 
   - name: openstack-infra/askbot-theme
     check:
