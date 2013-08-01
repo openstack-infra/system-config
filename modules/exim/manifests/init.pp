@@ -1,6 +1,7 @@
 class exim(
   $mailman_domains = [],
   $queue_interval = '30m',
+  $queue_run_max = '5',
   $sysadmin = []
 ) {
 
