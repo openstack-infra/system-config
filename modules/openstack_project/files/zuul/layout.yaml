@@ -79,7 +79,7 @@ pipelines:
     precedence: low
     trigger:
       timer:
-        - time: '*/5 * * * *'
+        - time: '0 0 * * *'
 
 
 jobs:
