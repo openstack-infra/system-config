@@ -67,6 +67,12 @@ class zuul (
     }
   }
 
+  if ! defined(Package['python-pip']) {
+    package { 'python-pip':
+      ensure => present,
+    }
+  }
+
   user { 'zuul':
     ensure     => present,
     home       => '/home/zuul',
@@ -93,6 +99,7 @@ class zuul (
     path        => '/bin:/usr/bin',
     refreshonly => true,
     subscribe   => Vcsrepo['/opt/zuul'],
+    require     => Package['python-pip'],
   }
 
   file { '/etc/zuul':
