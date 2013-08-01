@@ -13,6 +13,7 @@
 // under the License.
 
 window.zuul_enable_status_updates = true;
+window.zuul_filter = "";
 
 function format_time(ms, words) {
     if (ms == null) {
@@ -53,6 +54,14 @@ function format_progress(elapsed, remaining) {
     return r;
 }
 
+function is_hide_project(project) {
+    var filter = window.zuul_filter;
+    if (filter.length == 0) {
+        return false;
+    }
+    return project.indexOf(filter) == -1;
+}
+
 function format_pipeline(data) {
     var html = '<div class="pipeline"><h3 class="subhead">'+
         data['name']+'</h3>';
@@ -62,6 +71,15 @@ function format_pipeline(data) {
 
     $.each(data['change_queues'], function(change_queue_i, change_queue) {
         $.each(change_queue['heads'], function(head_i, head) {
+            var projects = "";
+            var hide_queue = true;
+            $.each(head, function(change_i, change) {
+                projects += change['project'] + "|";
+                hide_queue &= is_hide_project(change['project']);
+            });
+            html += '<div project="' + projects + '" style="'
+                + (hide_queue ? 'display:none;' : '') + '">';
+
             if (data['change_queues'].length > 1 && head_i == 0) {
                 html += '<div> Change queue: ';
 
@@ -78,6 +96,7 @@ function format_pipeline(data) {
                 }
                 html += format_change(change);
             });
+            html += '</div>'
         });
     });
 
@@ -223,4 +242,16 @@ $(function() {
         }
     });
 
+    $('#projects_filter').live('keyup change', function () {
+        window.zuul_filter = $('#projects_filter').val().trim();
+        $.each($('div[project]'), function (idx, val) {
+            val = $(val);
+            var project = val.attr('project');
+            if (is_hide_project(project)) {
+                val.hide(100);
+            } else {
+                val.show(100);
+            }
+        })
+    });
 });
