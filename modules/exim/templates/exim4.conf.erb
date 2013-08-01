@@ -290,6 +290,33 @@ timeout_frozen_after = 7d
 
 # split_spool_directory = true
 
+# This controls the maximum number of queue runner processes that an
+# Exim daemon can run simultaneously. This does not mean that it
+# starts them all at once, but rather that if the maximum number are
+# still running when the time comes to start another one, it refrains
+# from starting another one. This can happen with very large queues
+# and/or very sluggish deliveries. This option does not, however,
+# interlock with other processes, so additional queue runners can be
+# started by other means, or by killing and restarting the daemon.
+
+queue_run_max = <%= queue_run_max %>
+
+# When this option is set, a delivery process is started whenever a
+# message is received, routing is performed, and local deliveries take
+# place. However, if any SMTP deliveries are required for domains that
+# match queue_smtp_domains, they are not immediately delivered, but
+# instead the message waits on the queue for the next queue run. Since
+# routing of the message has taken place, Exim knows to which remote
+# hosts it must be delivered, and so when the queue run happens,
+# multiple messages for the same host are delivered over a single SMTP
+# connection. The -odqs command line option causes all SMTP deliveries
+# to be queued in this way, and is equivalent to setting
+# queue_smtp_domains to "*". See also hold_domains and queue_domains.
+
+<% if queue_smtp_domains != "" -%>
+queue_smtp_domains = <%= queue_smtp_domains %>
+<% end %>
+
 <% if mailman_domains.length > 0 -%>
 # Home dir for your Mailman installation -- aka Mailman's prefix
 # directory.
