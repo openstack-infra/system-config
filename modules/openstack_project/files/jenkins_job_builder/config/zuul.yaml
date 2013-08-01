@@ -31,3 +31,29 @@
     publishers:
       - coverage-log
       - console-log
+
+- job:
+    name: 'periodic-test'
+
+    wrappers:
+      - timeout:
+          timeout: 40
+          fail: true
+      - timestamps
+
+    builders:
+      - python27:
+          github-org: 'openstack-infra'
+          project: 'zuul'
+
+    publishers:
+      - test-results
+      - console-log
+
+    scm:
+      - git:
+          url: 'git://github.com/openstack-infra/zuul.git'
+          branches:
+            - 'origin/master'
+
+    node: precise
