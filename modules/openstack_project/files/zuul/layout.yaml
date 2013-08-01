@@ -172,7 +172,10 @@ jobs:
     voting: false
   - name: gate-django_openstack_auth-python27
     voting: false
-
+  - name: gate-marconi-python33
+    voting: false
+  - name: gate-python-marconiclient-python33
+    voting: false
 
 projects:
   - name: openstack-infra/zuul
@@ -1453,10 +1456,12 @@ projects:
       - gate-marconi-pep8
       - gate-marconi-python26
       - gate-marconi-python27
+      - gate-marconi-python33
     gate:
       - gate-marconi-pep8
       - gate-marconi-python26
       - gate-marconi-python27
+      - gate-marconi-python33
 
   - name: stackforge/staccato
     check:
@@ -2233,10 +2238,12 @@ projects:
       - gate-python-marconiclient-pep8
       - gate-python-marconiclient-python26
       - gate-python-marconiclient-python27
+      - gate-python-marconiclient-python33
     gate:
       - gate-python-marconiclient-pep8
       - gate-python-marconiclient-python26
       - gate-python-marconiclient-python27
+      - gate-python-marconiclient-python33
 
   - name: stackforge/cookbook-openstack-block-storage
     check:
