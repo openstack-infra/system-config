@@ -12,10 +12,4 @@ class pip::python3 {
     require => Package[$::pip::params::python3_devel_package]
   }
 
-  package { 'setuptools':
-    ensure   => latest,
-    provider => pip3,
-    require  => Package[$::pip::params::python3_pip_package],
-  }
-
 }
