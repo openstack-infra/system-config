@@ -22,7 +22,7 @@
           # Run the same basic pip command that the mirror script runs.
           .venv/bin/pip install -M -U --exists-action=w $PIP_ARGS
           if [ -e dev-requirements.txt ] ; then
-              .venv/bin/pip install -M -U --exists-action=w dev-requirements.txt
+              .venv/bin/pip install -M -U --exists-action=w -r dev-requirements.txt
           fi
 
     publishers:
