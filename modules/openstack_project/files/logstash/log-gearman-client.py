@@ -19,6 +19,7 @@ import daemon
 import gear
 import json
 import logging
+import os
 import signal
 import threading
 import yaml
@@ -101,7 +102,7 @@ class EventProcessor(threading.Thread):
         fields = self._parse_fields(event, fileopts['name'])
         log_dir = self._get_log_dir(event)
         source_url = fileopts.get('source-url', self.source_url) + '/' + \
-                log_dir + fileopts['name']
+                os.path.join(log_dir, fileopts['name'])
         out_event = {}
         out_event["@fields"] = fields
         out_event["@tags"] = [fileopts['name']] + fileopts.get('tags', [])
