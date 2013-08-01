@@ -374,6 +374,12 @@ projects:
     gate:
       - gate-noop
 
+  - name: openstack-infra/puppet-pip
+    check:
+      - gate-config-puppet-syntax
+    gate:
+      - gate-config-puppet-syntax
+
   - name: openstack-infra/reviewday
     check:
       - gate-reviewday-pep8
