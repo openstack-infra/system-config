@@ -1086,8 +1086,17 @@ projects:
   - name: openstack/requirements
     check:
       - gate-requirements-install
+      - gate-tempest-devstack-vm-full
+      - gate-tempest-devstack-vm-cells-full
+      - gate-tempest-devstack-vm-postgres-full
+      - gate-tempest-devstack-vm-neutron
+      - gate-grenade-devstack-vm
     gate:
       - gate-requirements-install
+      - gate-tempest-devstack-vm-full
+      - gate-tempest-devstack-vm-postgres-full
+      - gate-tempest-devstack-vm-neutron
+      - gate-grenade-devstack-vm
     post:
       - post-mirror-python26
       - post-mirror-python27
