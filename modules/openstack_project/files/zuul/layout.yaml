@@ -1240,6 +1240,7 @@ projects:
       - gate-grenade-devstack-vm
     post:
       - tempest-docs
+      - tempest-branch-tarball
 
   - name: openstack/ceilometer
     check:
