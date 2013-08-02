@@ -79,7 +79,7 @@ pipelines:
     precedence: low
     trigger:
       timer:
-        - time: '0 0 * * *'
+        - time: '0 6 * * *'
 
 
 jobs:
@@ -473,6 +473,11 @@ projects:
     release:
       - cinder-tarball
       - cinder-docs
+    periodic:
+      - cinder-propose-translation-update
+      - periodic-cinder-docs-stable-grizzly
+      - periodic-cinder-python26-stable-grizzly
+      - periodic-cinder-python27-stable-grizzly
 
   - name: openstack/glance
     check:
@@ -511,6 +516,14 @@ projects:
     release:
       - glance-tarball
       - glance-docs
+    periodic:
+      - glance-propose-translation-update
+      - periodic-glance-docs-stable-folsom
+      - periodic-glance-python26-stable-folsom
+      - periodic-glance-python27-stable-folsom
+      - periodic-glance-docs-stable-grizzly
+      - periodic-glance-python26-stable-grizzly
+      - periodic-glance-python27-stable-grizzly
 
   - name: openstack/horizon
     check:
@@ -553,6 +566,13 @@ projects:
     release:
       - horizon-tarball
       - horizon-docs
+    periodic:
+      - periodic-horizon-docs-stable-folsom
+      - periodic-horizon-python26-stable-folsom
+      - periodic-horizon-python27-stable-folsom
+      - periodic-horizon-docs-stable-grizzly
+      - periodic-horizon-python26-stable-grizzly
+      - periodic-horizon-python27-stable-grizzly
 
   - name: openstack/django_openstack_auth
     check:
@@ -617,7 +637,14 @@ projects:
     release:
       - keystone-tarball
       - keystone-docs
-
+    periodic:
+      - keystone-propose-translation-update
+      - periodic-keystone-docs-stable-folsom
+      - periodic-keystone-python26-stable-folsom
+      - periodic-keystone-python27-stable-folsom
+      - periodic-keystone-docs-stable-grizzly
+      - periodic-keystone-python26-stable-grizzly
+      - periodic-keystone-python27-stable-grizzly
 
   - name: openstack/nova
     check:
@@ -659,6 +686,14 @@ projects:
     release:
       - nova-tarball
       - nova-docs
+    periodic:
+      - nova-propose-translation-update
+      - periodic-nova-docs-stable-folsom
+      - periodic-nova-python26-stable-folsom
+      - periodic-nova-python27-stable-folsom
+      - periodic-nova-docs-stable-grizzly
+      - periodic-nova-python26-stable-grizzly
+      - periodic-nova-python27-stable-grizzly
 
   - name: openstack/oslo-incubator
     check:
@@ -780,6 +815,11 @@ projects:
     release:
       - neutron-tarball
       - neutron-docs
+    periodic:
+      - neutron-propose-translation-update
+      - periodic-neutron-docs-stable-grizzly
+      - periodic-neutron-python26-stable-grizzly
+      - periodic-neutron-python27-stable-grizzly
 
   - name: openstack/swift
     check:
@@ -1105,6 +1145,9 @@ projects:
     post:
       - post-mirror-python26
       - post-mirror-python27
+    periodic:
+      - periodic-mirror-python26
+      - periodic-mirror-python27
 
   - name: openstack-dev/grenade
     check:
@@ -1268,6 +1311,15 @@ projects:
     post:
       - tempest-docs
       - tempest-branch-tarball
+    periodic:
+      - periodic-tempest-devstack-vm-stable-folsom
+      - periodic-tempest-devstack-vm-cinder-stable-folsom
+      - periodic-tempest-devstack-vm-stable-grizzly
+      - periodic-tempest-devstack-vm-neutron-stable-grizzly
+      - periodic-tempest-devstack-vm-postgres-stable-grizzly
+      - periodic-tempest-devstack-vm-all
+      - periodic-tempest-devstack-vm-coverage
+      - periodic-tempest-devstack-vm-stress
 
   - name: openstack/ceilometer
     check:
@@ -1292,6 +1344,11 @@ projects:
     release:
       - ceilometer-docs
       - ceilometer-tarball
+    periodic:
+      - ceilometer-propose-translation-update
+      - periodic-ceilometer-docs-stable-grizzly
+      - periodic-ceilometer-python26-stable-grizzly
+      - periodic-ceilometer-python27-stable-grizzly
 
   - name: stackforge/MRaaS
     check:
@@ -1358,6 +1415,10 @@ projects:
     release:
       - heat-tarball
       - heat-docs
+    periodic:
+      - periodic-heat-docs-stable-grizzly
+      - periodic-heat-python26-stable-grizzly
+      - periodic-heat-python27-stable-grizzly
 
   - name: openstack/python-heatclient
     check:
@@ -1606,6 +1667,8 @@ projects:
       - openstack-security-guide
       - manuals-upstream-translation-update
       - openstack-training
+    periodic:
+      - manuals-propose-translation-update
 
   - name: openstack/operations-guide
     check:
@@ -1704,6 +1767,8 @@ projects:
       - gate-gitdm
     gate:
       - gate-gitdm
+    periodic:
+      - periodic-gitdm
 
   - name: openstack-infra/git-review
     check:
