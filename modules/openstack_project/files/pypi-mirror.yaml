@@ -9,6 +9,27 @@ mirrors:
       - https://github.com/openstack/requirements
     output: /var/lib/pypimirror/openstack
 
+  - name: openstack-folsom
+    projects:
+      - https://github.com/openstack/requirements
+    branches:
+      - stable/folsom
+    output: /var/lib/pypimirror/openstack-folsom
+
+  - name: openstack-grizzly
+    projects:
+      - https://github.com/openstack/requirements
+    branches:
+      - stable/grizzly
+    output: /var/lib/pypimirror/openstack-grizzly
+
+  - name: openstack-master
+    projects:
+      - https://github.com/openstack/requirements
+    branches:
+      - master
+    output: /var/lib/pypimirror/openstack-master
+
   - name: openstack-infra
     projects:
       - https://github.com/openstack-infra/config

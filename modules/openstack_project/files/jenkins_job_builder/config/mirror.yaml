@@ -18,6 +18,25 @@
 
 
 - job:
+    name: 'periodic-branch-mirror-python26'
+    node: mirror26
+    concurrent: false
+
+    wrappers:
+      - timeout:
+          timeout: 60
+          fail: true
+      - timestamps
+
+    builders:
+      - update-pypi-branch-mirror
+
+    publishers:
+      - link-logs
+      - console-log-periodic
+
+
+- job:
     name: 'post-mirror-python26'
     node: mirror26
     concurrent: false
@@ -30,6 +49,25 @@
 
     builders:
       - update-pypi-mirror
+
+    publishers:
+      - link-logs
+      - console-log
+
+
+- job:
+    name: 'post-branch-mirror-python26'
+    node: mirror26
+    concurrent: false
+
+    wrappers:
+      - timeout:
+          timeout: 60
+          fail: true
+      - timestamps
+
+    builders:
+      - update-pypi-branch-mirror
 
     publishers:
       - link-logs
@@ -56,6 +94,25 @@
 
 
 - job:
+    name: 'periodic-branch-mirror-python27'
+    node: mirror27
+    concurrent: false
+
+    wrappers:
+      - timeout:
+          timeout: 60
+          fail: true
+      - timestamps
+
+    builders:
+      - update-pypi-branch-mirror
+
+    publishers:
+      - link-logs
+      - console-log-periodic
+
+
+- job:
     name: 'post-mirror-python27'
     node: mirror27
     concurrent: false
@@ -68,6 +125,25 @@
 
     builders:
       - update-pypi-mirror
+
+    publishers:
+      - link-logs
+      - console-log
+
+
+- job:
+    name: 'post-branch-mirror-python27'
+    node: mirror27
+    concurrent: false
+
+    wrappers:
+      - timeout:
+          timeout: 60
+          fail: true
+      - timestamps
+
+    builders:
+      - update-pypi-branch-mirror
 
     publishers:
       - link-logs
@@ -94,6 +170,25 @@
 
 
 - job:
+    name: 'periodic-branch-mirror-python33'
+    node: mirror33
+    concurrent: false
+
+    wrappers:
+      - timeout:
+          timeout: 60
+          fail: true
+      - timestamps
+
+    builders:
+      - update-pypi-branch-mirror
+
+    publishers:
+      - link-logs
+      - console-log-periodic
+
+
+- job:
     name: 'post-mirror-python33'
     node: mirror33
     concurrent: false
@@ -110,3 +205,38 @@
     publishers:
       - link-logs
       - console-log
+
+
+- job:
+    name: 'post-branch-mirror-python33'
+    node: mirror33
+    concurrent: false
+
+    wrappers:
+      - timeout:
+          timeout: 60
+          fail: true
+      - timestamps
+
+    builders:
+      - update-pypi-branch-mirror
+
+    publishers:
+      - link-logs
+      - console-log
+
+
+- job-group:
+    name: 'periodic-branch-mirrors'
+    jobs:
+      - 'periodic-branch-mirror-python26'
+      - 'periodic-branch-mirror-python27'
+      - 'periodic-branch-mirror-python33'
+
+
+- job-group:
+    name: 'post-branch-mirrors'
+    jobs:
+      - 'periodic-branch-mirror-python26'
+      - 'periodic-branch-mirror-python27'
+      - 'periodic-branch-mirror-python33'
