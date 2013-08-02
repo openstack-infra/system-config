@@ -65,12 +65,12 @@ and turn on the Puppet agent so it will start checking into the
 master on its own. on Debian/Ubuntu::
 
   sudo sed -i 's/^START=.*/START=yes/' /etc/default/puppet
-  sudo invoke-rc.d puppet start
+  sudo su -c 'invoke-rc.d puppet start'
 
 ...or on CentOS/Fedora/RHEL::
 
   sudo chkconfig puppet on
-  sudo service puppet start
+  sudo su -c 'service puppet start'
 
 You should be able to tell from the Puppet Dashboard when it begins
 to check in, which normally happens at 10-minute intervals.
