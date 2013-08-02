@@ -17,9 +17,6 @@
     name: '{name}-propose-translation-update'
     concurrent: false
 
-    triggers:
-      - timed: '@daily'
-
     builders:
       - shell: |
           #!/bin/bash -xe
@@ -54,9 +51,6 @@
 - job:
     name: manuals-propose-translation-update
     concurrent: false
-
-    triggers:
-      - timed: '@daily'
 
     builders:
       - shell: |

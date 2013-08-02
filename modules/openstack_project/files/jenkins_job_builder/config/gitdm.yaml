@@ -20,9 +20,6 @@
     name: periodic-gitdm
     node: precise
 
-    triggers:
-      - timed: '0 6 * * *'
-
     builders:
       - gerrit-git-prep
       - shell: |

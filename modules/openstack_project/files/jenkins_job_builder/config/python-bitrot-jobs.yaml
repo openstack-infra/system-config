@@ -7,9 +7,6 @@
           fail: true
       - timestamps
 
-    triggers:
-      - timed: '0 6 * * *'
-
     builders:
       - python26:
           github-org: '{github-org}'
@@ -45,9 +42,6 @@
           fail: true
       - timestamps
 
-    triggers:
-      - timed: '0 6 * * *'
-
     builders:
       - python27:
           github-org: '{github-org}'
@@ -82,9 +76,6 @@
           timeout: 40
           fail: true
       - timestamps
-
-    triggers:
-      - timed: '0 6 * * *'
 
     builders:
       - docs:
