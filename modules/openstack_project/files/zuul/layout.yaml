@@ -213,6 +213,7 @@ projects:
         - zuul-pypi-upload:
           - post-mirror-python26
           - post-mirror-python27
+          - post-mirror-python33
     periodic:
       - periodic-test
 
@@ -236,6 +237,7 @@ projects:
         - nose-html-output-pypi-upload:
           - post-mirror-python26
           - post-mirror-python27
+          - post-mirror-python33
 
   - name: openstack-infra/gerrit
     check:
@@ -259,6 +261,7 @@ projects:
         - gerritbot-pypi-upload:
           - post-mirror-python26
           - post-mirror-python27
+          - post-mirror-python33
 
   - name: openstack-infra/gerritlib
     check:
@@ -272,6 +275,7 @@ projects:
         - gerritlib-pypi-upload:
           - post-mirror-python26
           - post-mirror-python27
+          - post-mirror-python33
 
   - name: openstack-infra/jeepyb
     check:
@@ -287,6 +291,7 @@ projects:
         - jeepyb-pypi-upload:
           - post-mirror-python26
           - post-mirror-python27
+          - post-mirror-python33
 
   - name: openstack-infra/jenkins-job-builder
     check:
@@ -312,6 +317,7 @@ projects:
         - jenkins-job-builder-pypi-upload:
           - post-mirror-python26
           - post-mirror-python27
+          - post-mirror-python33
 
   - name: openstack-infra/lodgeit
     check:
@@ -385,6 +391,7 @@ projects:
         - reviewday-pypi-upload:
           - post-mirror-python26
           - post-mirror-python27
+          - post-mirror-python33
 
   - name: openstack-infra/reviewstats
     check:
@@ -412,6 +419,7 @@ projects:
         - storyboard-pypi-upload:
           - post-mirror-python26
           - post-mirror-python27
+          - post-mirror-python33
 
   - name: openstack-infra/odsreg
     check:
@@ -433,6 +441,7 @@ projects:
         - statusbot-pypi-upload:
           - post-mirror-python26
           - post-mirror-python27
+          - post-mirror-python33
 
   - name: openstack/cinder
     check:
@@ -746,6 +755,7 @@ projects:
         - oslo.config-pypi-upload:
           - post-mirror-python26
           - post-mirror-python27
+          - post-mirror-python33
       - oslo.config-docs
 
   - name: openstack/oslo.messaging
@@ -771,6 +781,7 @@ projects:
         - oslo.messaging-pypi-upload:
           - post-mirror-python26
           - post-mirror-python27
+          - post-mirror-python33
       - oslo.messaging-docs
 
   - name: openstack/oslo.sphinx
@@ -789,6 +800,7 @@ projects:
         - oslo.sphinx-pypi-upload:
           - post-mirror-python26
           - post-mirror-python27
+          - post-mirror-python33
 
   - name: openstack/neutron
     check:
@@ -883,6 +895,7 @@ projects:
         - python-ceilometerclient-pypi-upload:
           - post-mirror-python26
           - post-mirror-python27
+          - post-mirror-python33
       - python-ceilometerclient-docs
 
   - name: openstack/python-cinderclient
@@ -923,6 +936,7 @@ projects:
         - python-cinderclient-pypi-upload:
           - post-mirror-python26
           - post-mirror-python27
+          - post-mirror-python33
       - python-cinderclient-docs
 
   - name: openstack/python-glanceclient
@@ -963,6 +977,7 @@ projects:
         - python-glanceclient-pypi-upload:
           - post-mirror-python26
           - post-mirror-python27
+          - post-mirror-python33
       - python-glanceclient-docs
 
   - name: openstack/python-keystoneclient
@@ -1003,6 +1018,7 @@ projects:
         - python-keystoneclient-pypi-upload:
           - post-mirror-python26
           - post-mirror-python27
+          - post-mirror-python33
       - python-keystoneclient-docs
 
   - name: openstack/python-novaclient
@@ -1043,6 +1059,7 @@ projects:
         - python-novaclient-pypi-upload:
           - post-mirror-python26
           - post-mirror-python27
+          - post-mirror-python33
       - python-novaclient-docs
 
   - name: openstack/python-openstackclient
@@ -1068,6 +1085,7 @@ projects:
         - python-openstackclient-pypi-upload:
           - post-mirror-python26
           - post-mirror-python27
+          - post-mirror-python33
       - python-openstackclient-docs
 
   - name: openstack/python-neutronclient
@@ -1108,6 +1126,7 @@ projects:
         - python-neutronclient-pypi-upload:
           - post-mirror-python26
           - post-mirror-python27
+          - post-mirror-python33
       - python-neutronclient-docs
 
   - name: openstack/python-swiftclient
@@ -1133,6 +1152,7 @@ projects:
         - python-swiftclient-pypi-upload:
           - post-mirror-python26
           - post-mirror-python27
+          - post-mirror-python33
       - python-swiftclient-docs
 
   - name: openstack/requirements
@@ -1145,9 +1165,11 @@ projects:
     post:
       - post-mirror-python26
       - post-mirror-python27
+      - post-mirror-python33
     periodic:
       - periodic-mirror-python26
       - periodic-mirror-python27
+      - periodic-mirror-python33
 
   - name: openstack-dev/grenade
     check:
@@ -1182,6 +1204,7 @@ projects:
         - hacking-pypi-upload:
           - post-mirror-python26
           - post-mirror-python27
+          - post-mirror-python33
 
   - name: openstack-dev/pbr
     check:
@@ -1225,6 +1248,7 @@ projects:
         - pbr-pypi-upload:
           - post-mirror-python26
           - post-mirror-python27
+          - post-mirror-python33
 
   - name: openstack-dev/devstack
     check:
@@ -1449,6 +1473,7 @@ projects:
         - python-heatclient-pypi-upload:
           - post-mirror-python26
           - post-mirror-python27
+          - post-mirror-python33
       - python-heatclient-docs
 
   - name: openstack/heat-cfntools
@@ -1472,6 +1497,7 @@ projects:
         - heat-cfntools-pypi-upload:
           - post-mirror-python26
           - post-mirror-python27
+          - post-mirror-python33
       - heat-cfntools-docs
 
   - name: openstack/heat-templates
@@ -1529,6 +1555,7 @@ projects:
         - python-troveclient-pypi-upload:
           - post-mirror-python26
           - post-mirror-python27
+          - post-mirror-python33
 
   - name: stackforge/marconi
     check:
@@ -1568,6 +1595,7 @@ projects:
         - designate-pypi-upload:
           - post-mirror-python26
           - post-mirror-python27
+          - post-mirror-python33
 
   - name: stackforge/python-designateclient
     check:
@@ -1589,6 +1617,7 @@ projects:
         - python-designateclient-pypi-upload:
           - post-mirror-python26
           - post-mirror-python27
+          - post-mirror-python33
 
   - name: stackforge/bindep
     check:
@@ -1609,6 +1638,7 @@ projects:
         - bindep-pypi-upload:
           - post-mirror-python26
           - post-mirror-python27
+          - post-mirror-python33
 
   - name: stackforge/billingstack
     check:
@@ -1630,6 +1660,7 @@ projects:
         - billingstack-pypi-upload:
           - post-mirror-python26
           - post-mirror-python27
+          - post-mirror-python33
 
 
   - name: stackforge/bufunfa
@@ -1784,6 +1815,7 @@ projects:
         - git-review-pypi-upload:
           - post-mirror-python26
           - post-mirror-python27
+          - post-mirror-python33
 
   - name: openstack/openstack-planet
     check:
@@ -1909,6 +1941,7 @@ projects:
         - gear-pypi-upload:
           - post-mirror-python26
           - post-mirror-python27
+          - post-mirror-python33
 
   - name: openstack-infra/gearman-plugin
     check:
@@ -1977,6 +2010,7 @@ projects:
         - savanna-pypi-upload:
           - post-mirror-python26
           - post-mirror-python27
+          - post-mirror-python33
       - hook-savanna-rtfd
 
   - name: stackforge/python-savannaclient
@@ -1999,6 +2033,7 @@ projects:
          - python-savannaclient-pypi-upload:
            - post-mirror-python26
            - post-mirror-python27
+           - post-mirror-python33
        - hook-python-savannaclient-rtfd
 
   - name: stackforge/savanna-dashboard
@@ -2021,6 +2056,7 @@ projects:
         - savanna-dashboard-pypi-upload:
           - post-mirror-python26
           - post-mirror-python27
+          - post-mirror-python33
       - hook-savanna-dashboard-rtfd
 
   - name: stackforge/savanna-extra
@@ -2305,6 +2341,7 @@ projects:
         - python-muranoclient-pypi-upload:
           - post-mirror-python26
           - post-mirror-python27
+          - post-mirror-python33
 
   - name: stackforge/opencafe
     check:
@@ -2580,3 +2617,4 @@ projects:
         - pycadf-pypi-upload:
           - post-mirror-python26
           - post-mirror-python27
+          - post-mirror-python33

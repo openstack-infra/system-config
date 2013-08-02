@@ -72,3 +72,41 @@
     publishers:
       - link-logs
       - console-log
+
+
+- job:
+    name: 'periodic-mirror-python33'
+    node: mirror33
+    concurrent: false
+
+    wrappers:
+      - timeout:
+          timeout: 60
+          fail: true
+      - timestamps
+
+    builders:
+      - update-pypi-mirror
+
+    publishers:
+      - link-logs
+      - console-log-periodic
+
+
+- job:
+    name: 'post-mirror-python33'
+    node: mirror33
+    concurrent: false
+
+    wrappers:
+      - timeout:
+          timeout: 60
+          fail: true
+      - timestamps
+
+    builders:
+      - update-pypi-mirror
+
+    publishers:
+      - link-logs
+      - console-log
