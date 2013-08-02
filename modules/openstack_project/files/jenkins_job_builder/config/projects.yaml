@@ -1263,3 +1263,13 @@
     jobs:
       - gate-{name}-pep8
       - gate-{name}-pylint
+
+- project:
+    name: pycadf
+    github-org: stackforge
+    node: precise
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - python-jobs
+      - pypi-jobs
