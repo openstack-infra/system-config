@@ -21,13 +21,19 @@ class openstack_project::jenkins (
     sysadmins                 => $sysadmins,
   }
 
+  if $ssl_chain_file_contents != '' {
+    $ssl_chain_file = '/etc/ssl/certs/intermediate.pem'
+  } else {
+    $ssl_chain_file = ''
+  }
+
   class { '::jenkins::master':
     vhost_name              => $vhost_name,
     serveradmin             => 'webmaster@openstack.org',
     logo                    => 'openstack.png',
     ssl_cert_file           => "/etc/ssl/certs/${vhost_name}.pem",
     ssl_key_file            => "/etc/ssl/private/${vhost_name}.key",
-    ssl_chain_file          => '/etc/ssl/certs/intermediate.pem',
+    ssl_chain_file          => $ssl_chain_file,
     ssl_cert_file_contents  => $ssl_cert_file_contents,
     ssl_key_file_contents   => $ssl_key_file_contents,
     ssl_chain_file_contents => $ssl_chain_file_contents,
