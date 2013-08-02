@@ -452,9 +452,9 @@ node 'devstack-launch02.slave.openstack.org' {
   }
 }
 
-node 'tx.slave.openstack.org' {
+node 'proposal.slave.openstack.org' {
   include openstack_project
-  class { 'openstack_project::translation_slave':
+  class { 'openstack_project::proposal_slave':
     transifex_username     => 'openstackjenkins',
     transifex_password     => hiera('transifex_password'),
     jenkins_ssh_public_key => $openstack_project::jenkins_ssh_key,
