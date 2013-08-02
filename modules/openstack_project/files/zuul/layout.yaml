@@ -1165,12 +1165,14 @@ projects:
       - gate-hacking-docs
       - gate-hacking-python26
       - gate-hacking-python27
+      - gate-hacking-python33
       - gate-hacking-integration-nova
     gate:
       - gate-hacking-docs
       - gate-hacking-pep8
       - gate-hacking-python26
       - gate-hacking-python27
+      - gate-hacking-python33
       - gate-hacking-integration-nova
     post:
       - hacking-branch-tarball
