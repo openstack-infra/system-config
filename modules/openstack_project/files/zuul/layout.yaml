@@ -688,6 +688,9 @@ projects:
       - gate-oslo.config-python26
       - gate-oslo.config-python27
       - gate-oslo.config-python33
+      - gate-tempest-devstack-vm-full
+      - gate-tempest-devstack-vm-neutron
+      - gate-grenade-devstack-vm
     gate:
       - gate-oslo.config-requirements
       - gate-oslo.config-docs
@@ -695,6 +698,9 @@ projects:
       - gate-oslo.config-python26
       - gate-oslo.config-python27
       - gate-oslo.config-python33
+      - gate-tempest-devstack-vm-full
+      - gate-tempest-devstack-vm-neutron
+      - gate-grenade-devstack-vm
     post:
       - oslo.config-branch-tarball
       - oslo.config-docs
