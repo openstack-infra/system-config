@@ -1,6 +1,9 @@
+# Slave used for automatically proposing changes to Gerrit,
+# Transifex and other tools.
+#
 # == Class: openstack_project::translation_slave
 #
-class openstack_project::translation_slave (
+class openstack_project::proposal_slave (
   $jenkins_ssh_public_key,
   $transifex_password = '',
   $transifex_username = 'openstackci',
