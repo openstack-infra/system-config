@@ -23,6 +23,7 @@ import subprocess
 import sys
 import tempfile
 
+
 def run_command(cmd):
     print(cmd)
     cmd_list = shlex.split(str(cmd))
@@ -30,6 +31,7 @@ def run_command(cmd):
                          stderr=subprocess.STDOUT)
     (out, nothing) = p.communicate()
     return out.strip()
+
 
 class RequirementsList(object):
     def __init__(self, name):
@@ -55,16 +57,30 @@ class RequirementsList(object):
                 self.failed = True
             self.reqs[req.project_name.lower()] = req
 
-    def read_all_requirements(self, include_dev=False):
-        for fn in ['tools/pip-requires',
-                   'tools/test-requires',
-                   'requirements.txt',
-                   'test-requirements.txt',
-                   ]:
-            self.read_requirements(fn)
+    def read_all_requirements(self, global_req=False, include_dev=False):
+        """ Read all the requirements into a list.
+
+        Build ourselves a consolidated list of requirements. If global_req is
+        True then we are parsing the global requirements file only, and
+        ensure that we don't parse it's test-requirements.txt erroneously.
+
+        If include_dev is true allow for development requirements, which
+        may be prereleased versions of libraries that would otherwise be
+        listed. This is most often used for olso prereleases.
+        """
+        if global_req:
+            self.read_requirements('global-requirements.txt')
+        else:
+            for fn in ['tools/pip-requires',
+                       'tools/test-requires',
+                       'requirements.txt',
+                       'test-requirements.txt'
+                       ]:
+                self.read_requirements(fn)
         if include_dev:
             self.read_requirements('dev-requirements.txt',
                                    ignore_dups=True)
+
 
 def main():
     branch = sys.argv[1]
@@ -88,7 +104,8 @@ def main():
     print "requirements git sha: %s" % run_command(
         "git rev-parse HEAD").strip()
     os_reqs = RequirementsList('openstack/requirements')
-    os_reqs.read_all_requirements(include_dev=(branch=='master'))
+    os_reqs.read_all_requirements(include_dev=(branch == 'master'),
+                                  global_req=True)
 
     failed = False
     for req in head_reqs.reqs.values():
