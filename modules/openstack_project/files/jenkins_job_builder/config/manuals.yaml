@@ -544,3 +544,36 @@
           target: '/'
           remove-prefix: 'doc/src/docbkx/openstack-training/target/docbkx/webhelp/'
           excludes: '**/*.xml,**/null*'
+
+- job:
+    name: openstack-operations-guide-ja
+    project-type: maven
+    concurrent: false
+    node: precise
+
+    properties:
+      - inject:
+          script-file: /usr/local/jenkins/slave_scripts/docbook-properties.sh
+          properties-file: gerrit-doc.properties
+
+    prebuilders:
+      - gerrit-git-prep
+      - shell: |
+          ./tools/generatedocbook -l ja -b openstack-ops
+
+    maven:
+      maven-name: Maven3
+      root-module:
+        group-id: org.openstack.docs
+        artifact-id: openstack-guide
+      root-pom: generated/ja/openstack-ops/pom.xml
+      goals: '-Drelease.path.name=${DOC_RELEASE_PATH} -Dcomments.enabled=${DOC_COMMENTS_ENABLED} clean generate-sources'
+
+    publishers:
+      - console-log-post
+      - ftp:
+          site: docs.openstack.org
+          source: 'generated/ja/openstack-ops/target/docbkx/webhelp/**'
+          target: '/ja/'
+          remove-prefix: 'generated/ja/openstack-ops/target/docbkx/webhelp/'
+          excludes: '**/*.xml,**/null*'
