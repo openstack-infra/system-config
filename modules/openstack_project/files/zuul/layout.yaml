@@ -1867,15 +1867,16 @@ projects:
 
   - name: stackforge/tripleo-image-elements
     check:
-      - gate-tripleo-image-elements-pep8
-      - gate-tripleo-image-elements-python26
-      - gate-tripleo-image-elements-python27
+      - gate-noop
     gate:
-      - gate-tripleo-image-elements-pep8
-      - gate-tripleo-image-elements-python26
-      - gate-tripleo-image-elements-python27
+      - gate-noop
     post:
-      - tripleo-image-elements-coverage
+      - tripleo-image-elements-branch-tarball
+    pre-release:
+      - tripleo-image-elements-tarball
+    release:
+      - tripleo-image-elements-tarball:
+        - tripleo-image-elements-pypi-upload
 
   - name: openstack/tripleo-incubator
     check:
