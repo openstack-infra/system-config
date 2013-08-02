@@ -279,9 +279,6 @@
           fail: true
       - timestamps
 
-    triggers:
-      - timed: '0 6 * * *'
-
     parameters:
       - string:
           name: ZUUL_BRANCH
@@ -316,9 +313,6 @@
           timeout: 90
           fail: true
       - timestamps
-
-    triggers:
-      - timed: '0 6 * * *'
 
     parameters:
       - string:
@@ -356,9 +350,6 @@
           fail: true
       - timestamps
 
-    triggers:
-      - timed: '0 6 * * *'
-
     parameters:
       - string:
           name: ZUUL_BRANCH
@@ -394,9 +385,6 @@
           timeout: 90
           fail: true
       - timestamps
-
-    triggers:
-      - timed: '0 6 * * *'
 
     parameters:
       - string:
@@ -435,9 +423,6 @@
           fail: true
       - timestamps
 
-    triggers:
-      - timed: '0 6 * * *'
-
     parameters:
       - string:
           name: ZUUL_BRANCH
@@ -473,9 +458,6 @@
           timeout: 180
           fail: true
       - timestamps
-
-    triggers:
-      - timed: '0 6 * * *'
 
     parameters:
       - string:
@@ -513,9 +495,6 @@
           fail: true
       - timestamps
 
-    triggers:
-      - timed: '0 6 * * *'
-
     parameters:
       - string:
           name: ZUUL_BRANCH
@@ -551,9 +530,6 @@
           timeout: 180
           fail: true
       - timestamps
-
-    triggers:
-      - timed: '0 6 * * *'
 
     parameters:
       - string:

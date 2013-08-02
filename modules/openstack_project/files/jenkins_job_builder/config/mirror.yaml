@@ -9,9 +9,6 @@
           fail: true
       - timestamps
 
-    triggers:
-      - timed: '4 21 * * *'
-
     builders:
       - update-pypi-mirror
 
@@ -49,9 +46,6 @@
           timeout: 60
           fail: true
       - timestamps
-
-    triggers:
-      - timed: '12 21 * * *'
 
     builders:
       - update-pypi-mirror
