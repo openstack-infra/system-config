@@ -1092,8 +1092,10 @@ projects:
   - name: openstack/requirements
     check:
       - gate-requirements-install
+      - gate-requirements-python27
     gate:
       - gate-requirements-install
+      - gate-requirements-python27
     post:
       - post-mirror-python26
       - post-mirror-python27
