@@ -23,6 +23,7 @@ import subprocess
 import sys
 import tempfile
 
+
 def run_command(cmd):
     print(cmd)
     cmd_list = shlex.split(str(cmd))
@@ -30,6 +31,7 @@ def run_command(cmd):
                          stderr=subprocess.STDOUT)
     (out, nothing) = p.communicate()
     return out.strip()
+
 
 class RequirementsList(object):
     def __init__(self, name):
@@ -60,11 +62,13 @@ class RequirementsList(object):
                    'tools/test-requires',
                    'requirements.txt',
                    'test-requirements.txt',
+                   'global-requirements.txt'
                    ]:
             self.read_requirements(fn)
         if include_dev:
             self.read_requirements('dev-requirements.txt',
                                    ignore_dups=True)
+
 
 def main():
     branch = sys.argv[1]
@@ -88,7 +92,7 @@ def main():
     print "requirements git sha: %s" % run_command(
         "git rev-parse HEAD").strip()
     os_reqs = RequirementsList('openstack/requirements')
-    os_reqs.read_all_requirements(include_dev=(branch=='master'))
+    os_reqs.read_all_requirements(include_dev=(branch == 'master'))
 
     failed = False
     for req in head_reqs.reqs.values():
