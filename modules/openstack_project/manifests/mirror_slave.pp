@@ -17,10 +17,12 @@
 class openstack_project::mirror_slave (
   $jenkins_ssh_public_key,
   $jenkins_ssh_private_key,
+  $python3=false,
 ) {
 
   class { 'openstack_project::slave':
     ssh_key => $jenkins_ssh_public_key,
+    python3 => $python3,
   }
 
   include jeepyb
