@@ -1598,6 +1598,7 @@ projects:
       - openstack-security-guide
       - manuals-upstream-translation-update
       - openstack-training
+      - openstack-operations-guide-ja
 
   - name: openstack/operations-guide
     check:
