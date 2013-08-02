@@ -994,6 +994,17 @@
       - puppet-module-unit
 
 - project:
+    name: puppet-heat
+    github-org: stackforge
+    node: precise
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - gate-{name}-puppet-lint
+      - gate-{name}-puppet-syntax
+      - puppet-module-unit
+
+- project:
     name: puppet-nova
     github-org: stackforge
     node: precise
