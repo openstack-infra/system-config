@@ -255,7 +255,7 @@ bootstrap.mlockall: true
 
 # Allow recovery process after N nodes in a cluster are up:
 #
-gateway.recover_after_nodes: 4
+gateway.recover_after_nodes: 5
 
 # Set the timeout to initiate the recovery process, once the N nodes
 # from previous setting are up (accepts time value):
@@ -266,7 +266,7 @@ gateway.recover_after_time: 5m
 # are up (and recover_after_nodes is met), begin recovery process immediately
 # (without waiting for recover_after_time to expire):
 #
-gateway.expected_nodes: 5
+gateway.expected_nodes: 6
 
 
 ############################# Recovery Throttling #############################
@@ -304,7 +304,7 @@ gateway.expected_nodes: 5
 # operational within the cluster. Set this option to a higher value (2-4)
 # for large clusters (>3 nodes):
 #
-discovery.zen.minimum_master_nodes: 2
+discovery.zen.minimum_master_nodes: 4
 
 # Set the time to wait for ping responses from other nodes when discovering.
 # Set this option to a higher value on a slow or congested network
