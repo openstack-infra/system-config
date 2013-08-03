@@ -30,3 +30,16 @@
 
     publishers:
       - console-log
+
+- job:
+    name: propose-requirements-updates
+    node: proposal
+
+    builders:
+      - shell: |
+          #!/bin/bash -xe
+          /usr/local/jenkins/slave_scripts/propose_requirements_update.sh
+      - link-logs
+
+    publishers:
+      - console-log
