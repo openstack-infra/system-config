@@ -1315,6 +1315,7 @@ projects:
     post:
       - tempest-docs
       - tempest-branch-tarball
+      - propose-requirements-updates
     periodic:
       - periodic-tempest-devstack-vm-stable-folsom
       - periodic-tempest-devstack-vm-cinder-stable-folsom
