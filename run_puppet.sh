@@ -3,7 +3,7 @@
 if ! test -z $1 ; then
   BASE_DIR=$1
 else
-  BASE_DIR=`pwd`
+  BASE_DIR=$(pwd)
 fi
 
 MODULE_DIR=${BASE_DIR}/modules

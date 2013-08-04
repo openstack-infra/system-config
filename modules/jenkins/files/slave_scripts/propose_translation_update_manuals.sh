@@ -30,10 +30,10 @@ git review -s
 
 # See if there is an open change in the transifex/translations topic
 # If so, get the change id for the existing change for use in the commit msg.
-change_info=`ssh -p 29418 review.openstack.org gerrit query --current-patch-set status:open project:openstack/$PROJECT topic:transifex/translations owner:jenkins`
-previous=`echo "$change_info" | grep "^  number:" | awk '{print $2}'`
+change_info=$(ssh -p 29418 review.openstack.org gerrit query --current-patch-set status:open project:openstack/$PROJECT topic:transifex/translations owner:jenkins)
+previous=$(echo "$change_info" | grep "^  number:" | awk '{print $2}')
 if [ "x${previous}" != "x" ] ; then
-    change_id=`echo "$change_info" | grep "^change" | awk '{print $2}'`
+    change_id=$(echo "$change_info" | grep "^change" | awk '{print $2}')
     # read return a non zero value when it reaches EOF. Because we use a
     # heredoc here it will always reach EOF and return a nonzero value.
     # Disable -e temporarily to get around the read.
@@ -77,7 +77,7 @@ do
     fi
 done
 
-if [ ! `git diff --cached --quiet HEAD --` ]
+if [ ! $(git diff --cached --quiet HEAD --) ]
 then
     # Push .pot changes to transifex
     tx --debug --traceback push -s
@@ -97,7 +97,7 @@ done
 
 # Don't send a review if the only things which have changed are the creation
 # date or comments.
-if [ `git diff --cached | egrep -v "(POT-Creation-Date|^[\+\-]#|^\+{3}|^\-{3})" | egrep -c "^[\-\+]"` -gt 0 ]
+if [ $(git diff --cached | egrep -v "(POT-Creation-Date|^[\+\-]#|^\+{3}|^\-{3})" | egrep -c "^[\-\+]") -gt 0 ]
 then
     # Commit and review
     git commit -F- <<EOF

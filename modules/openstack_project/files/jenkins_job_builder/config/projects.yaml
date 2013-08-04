@@ -62,6 +62,7 @@
       - gate-{name}-puppet-lint
       - gate-{name}-puppet-syntax
       - gate-{name}-pyflakes
+      - gate-{name}-shell-syntax
 
 - project:
     name: savanna

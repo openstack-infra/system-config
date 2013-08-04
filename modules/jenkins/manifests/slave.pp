@@ -30,24 +30,24 @@ class jenkins::slave(
   $standard_packages = [
     $::jenkins::params::asciidoc_package, # for building gerrit/building openstack docs
     $::jenkins::params::curl_package,
-    $::jenkins::params::docbook_xml_package, # for building openstack docs
     $::jenkins::params::docbook5_xml_package, # for building openstack docs
     $::jenkins::params::docbook5_xsl_package, # for building openstack docs
-    $::jenkins::params::gnome_doc_package, # for generating translation files for docs
+    $::jenkins::params::docbook_xml_package, # for building openstack docs
     $::jenkins::params::firefox_package, # for selenium tests
-    $::jenkins::params::mod_wsgi_package,
-    $::jenkins::params::libcurl_dev_package,
+    $::jenkins::params::gnome_doc_package, # for generating translation files for docs
+    $::jenkins::params::ksh_pacakge, # for doing syntax checks on shell scripts
     $::jenkins::params::ldap_dev_package,
+    $::jenkins::params::libcurl_dev_package,
+    $::jenkins::params::libffi_dev_package, # xattr's cffi dependency
     $::jenkins::params::librrd_dev_package, # for python-rrdtool, used by kwapi
     $::jenkins::params::libsasl_dev, # for keystone ldap auth integration
+    $::jenkins::params::libxml2_dev_package, # for xmllint, need for wadl
+    $::jenkins::params::libxml2_package,
+    $::jenkins::params::libxslt_dev_package,
+    $::jenkins::params::mod_wsgi_package,
     $::jenkins::params::mongodb_package, # for ceilometer unit tests
     $::jenkins::params::mysql_dev_package,
     $::jenkins::params::nspr_dev_package, # for spidermonkey, used by ceilometer
-    $::jenkins::params::sqlite_dev_package,
-    $::jenkins::params::libxml2_package,
-    $::jenkins::params::libxml2_dev_package, # for xmllint, need for wadl
-    $::jenkins::params::libxslt_dev_package,
-    $::jenkins::params::libffi_dev_package, # xattr's cffi dependency
     $::jenkins::params::pandoc_package, #for docs, markdown->docbook, bug 924507
     $::jenkins::params::pkgconfig_package, # for spidermonkey, used by ceilometer
     $::jenkins::params::pyflakes_package,
@@ -56,6 +56,7 @@ class jenkins::slave(
     $::jenkins::params::python_zmq_package, # zeromq unittests (not pip installable)
     $::jenkins::params::rubygems_package,
     $::jenkins::params::sbcl_package, # cl-openstack-client testing
+    $::jenkins::params::sqlite_dev_package,
     $::jenkins::params::sqlite_package,
     $::jenkins::params::unzip_package,
     $::jenkins::params::xslt_package, # for building openstack docs

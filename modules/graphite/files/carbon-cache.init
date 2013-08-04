@@ -22,7 +22,7 @@ NAME="carbon-${CARBON_DAEMON}"
 # Depend on lsb-base (>= 3.0-6) to ensure that this file is present.
 . /lib/lsb/init-functions
 
-INSTANCES=`grep "^\[${CARBON_DAEMON}" /etc/graphite/carbon.conf | cut -d \[ -f 2 | cut -d \] -f 1 | cut -d : -f 2`
+INSTANCES=$(grep "^\[${CARBON_DAEMON}" /etc/graphite/carbon.conf | cut -d \[ -f 2 | cut -d \] -f 1 | cut -d : -f 2)
 
 function die {
   echo $1
@@ -54,7 +54,7 @@ stop(){
         echo "Stopping carbon-${CARBON_DAEMON}:${INSTANCE}..."
         /usr/local/bin/carbon-${CARBON_DAEMON}.py --config /etc/graphite/carbon.conf --instance=${INSTANCE} stop
 
-        if [ `sleep 3; /usr/bin/pgrep -f "carbon-${CARBON_DAEMON}.py --instance=${INSTANCE}" | /usr/bin/wc -l` -gt 0 ]; then
+        if [$(sleep 3; /usr/bin/pgrep -f "carbon-${CARBON_DAEMON}.py --instance=${INSTANCE}" | /usr/bin/wc -l) -gt 0 ]; then
             echo "Carbon did not stop yet. Sleeping longer, then force killing it...";
             sleep 20;
             /usr/bin/pkill -9 -f "carbon-${CARBON_DAEMON}.py --instance=${INSTANCE}";

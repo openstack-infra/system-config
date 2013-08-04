@@ -105,5 +105,5 @@ nice -n10 tmpreaper --delay=$TMPREAPER_DELAY --mtime-dir --symlinks $TMPREAPER_T
   --protect '/tmp/lost+found' \
   --protect '/tmp/journal.dat' \
   --protect '/tmp/quota.{user,group}' \
-  `for i in $TMPREAPER_PROTECT_EXTRA; do echo --protect "$i"; done` \
+  $(for i in $TMPREAPER_PROTECT_EXTRA; do echo --protect "$i"; done) \
   $TMPREAPER_DIRS

@@ -336,11 +336,13 @@ projects:
       - gate-config-puppet-lint
       - gate-config-puppet-syntax
       - gate-config-pyflakes
+      - gate-config-shell-syntax
       - gate-ci-docs
     gate:
       - gate-config-layout
       - gate-config-puppet-lint
       - gate-config-puppet-syntax
+      - gate-config-shell-syntax
       - gate-config-pyflakes
     post:
       - ci-docs

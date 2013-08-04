@@ -14,7 +14,7 @@
 
 PROJECT=$1
 
-if [ ! `echo $ZUUL_REFNAME | grep master` ]
+if [ ! $(echo $ZUUL_REFNAME | grep master) ]
 then
     exit 0
 fi
@@ -30,7 +30,7 @@ tx set --auto-local -r ${PROJECT}.${PROJECT}-translations "${PROJECT}/locale/<la
 tx pull -a
 # Update the .pot file
 python setup.py extract_messages
-PO_FILES=`find ${PROJECT}/locale -name '*.po'`
+PO_FILES=$(find ${PROJECT}/locale -name '*.po')
 if [ -n "$PO_FILES" ]
 then
     # Use updated .pot file to update translations
@@ -39,7 +39,7 @@ fi
 # Add all changed files to git
 git add $PROJECT/locale/*
 
-if [ ! `git diff-index --quiet HEAD --` ]
+if [ ! $(git diff-index --quiet HEAD --) ]
 then
     # Push .pot changes to transifex
     tx --debug --traceback push -s

@@ -23,3 +23,17 @@
       - console-log
 
     node: '{node}'
+
+- job-template:
+    name: 'gate-{name}-shell-syntax'
+
+    builders:
+      - gerrit-git-prep
+      - shell: |
+          #!/bin/bash -e
+          /usr/local/jenkins/slave_scripts/syntax-check-shell.sh
+
+    publishers:
+      - console-log
+
+    node: '{node}'

@@ -37,7 +37,7 @@ fi
 # Normally a branch name will just be a file, but we can have branches
 # like stable/diablo, so in that case, make the "stable/" directory
 # if needed:
-mkdir -p `dirname $BRANCH`
+mkdir -p $(dirname $BRANCH)
 
 # Read and update the value for the branch
 if [ -e "$BRANCH" ]

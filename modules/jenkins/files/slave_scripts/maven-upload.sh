@@ -20,9 +20,9 @@ PROJECT=$1
 REPO_URL=$2
 REPO_CRED_FILE=$3
 
-FILENAME=`ls ${PROJECT}*.hpi`
+FILENAME=$(ls ${PROJECT}*.hpi)
 # Strip project name and extension leaving only the version.
-VERSION=`echo ${FILENAME} | sed -n "s/${PROJECT}-\(.*\).hpi/\1/p"`
+VERSION=$(echo ${FILENAME} | sed -n "s/${PROJECT}-\(.*\).hpi/\1/p")
 
 curl -X PUT \
      --config ${REPO_CRED_FILE} \

@@ -6,7 +6,7 @@ MODULE_PATH=/etc/puppet/modules
 declare -A MODULES
 #NOTE: if we previously installed kickstandproject-ntp we nuke it here
 # since puppetlabs-ntp and kickstandproject-ntp install to the same dir
-if grep kickstandproject-ntp /etc/puppet/modules/ntp/Modulefile &> /dev/null; then
+if grep kickstandproject-ntp /etc/puppet/modules/ntp/Modulefile >/dev/null 2>&1; then
   rm -Rf "/etc/puppet/modules/ntp"
 fi
 MODULES["puppetlabs-ntp"]="0.2.0"
@@ -34,7 +34,7 @@ MODULES["saz-memcached"]="2.0.2"
 MODULES["saz-gearman"]="2.0.1"
 MODULES["spiette-selinux"]="0.5.1"
 
-MODULE_LIST=`puppet module list`
+MODULE_LIST=$(puppet module list)
 
 # Transition away from old things
 if [ -d /etc/puppet/modules/vcsrepo/.git ]

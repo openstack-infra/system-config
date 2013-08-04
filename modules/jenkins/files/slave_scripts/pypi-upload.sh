@@ -18,10 +18,10 @@
 
 PROJECT=$1
 
-FILENAME=`ls ${PROJECT}*.tar.gz`
+FILENAME=$(ls ${PROJECT}*.tar.gz)
 # Strip project name and extension leaving only the version.
-VERSION=`echo ${FILENAME} | sed -n "s/${PROJECT}-\(.*\).tar.gz/\1/p"`
-MD5_DIGEST=`md5sum ${FILENAME} | cut -d' ' -f1`
+VERSION=$(echo ${FILENAME} | sed -n "s/${PROJECT}-\(.*\).tar.gz/\1/p")
+MD5_DIGEST=$(md5sum ${FILENAME} | cut -d' ' -f1)
 
 /usr/local/jenkins/slave_scripts/pypi-extract-metadata.py $FILENAME metadata.curl
 

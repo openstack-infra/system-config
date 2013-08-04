@@ -9,11 +9,11 @@
 /usr/local/jenkins/slave_scripts/gerrit-git-prep.sh https://review.openstack.org http://zuul.openstack.org
 
 # get version info from scm
-SCM_TAG=`git describe --abbrev=0 --tags` || true
-SCM_SHA=`git rev-parse --short HEAD` || true
+SCM_TAG=$(git describe --abbrev=0 --tags) || true
+SCM_SHA=$(git rev-parse --short HEAD) || true
 
 # assumes format is like this  '0.0.4-2-g135721c'
-COMMITS_SINCE_TAG=`git describe | awk '{split($0,a,"-"); print a[2]}'` || true
+COMMITS_SINCE_TAG=$(git describe | awk '{split($0,a,"-"); print a[2]}') || true
 
 # just use git sha if there is no tag yet.
 if [[ "${SCM_TAG}" == "" ]]; then

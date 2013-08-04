@@ -4,15 +4,15 @@ cd /usr/share/cacti/cli
 
 HOST_NAME=$1
 
-HOST_TEMPLATE_ID=`php -q /usr/share/cacti/cli/add_device.php \
-  --list-host-templates |grep "Linux Host"|cut -f 1`
+HOST_TEMPLATE_ID=$(php -q /usr/share/cacti/cli/add_device.php \
+  --list-host-templates |grep "Linux Host"|cut -f 1)
 
 php -q add_device.php --description="$HOST_NAME" --ip="$HOST_NAME" \
   --template=$HOST_TEMPLATE_ID --version=2 --community="public"
 
-HOST_ID=`php -q add_graphs.php --list-hosts |grep $HOST_NAME|cut -f 1`
+HOST_ID=$(php -q add_graphs.php --list-hosts |grep $HOST_NAME|cut -f 1)
 
-TREE_ID=`php -q add_tree.php --list-trees |grep "Default Tree"|cut -f 1`
+TREE_ID=$(php -q add_tree.php --list-trees |grep "Default Tree"|cut -f 1)
 php -q add_tree.php --type=node --node-type=host --tree-id=$TREE_ID \
   --host-id=$HOST_ID
 
@@ -24,7 +24,7 @@ do
   then 
     continue
   fi
-  TEMPLATE_ID=`echo $line | cut -f 1 -d ' '`
+  TEMPLATE_ID=$(echo $line | cut -f 1 -d ' ')
   php -q add_graphs.php --host-id=$HOST_ID --graph-type=cg \
     --graph-template-id=$TEMPLATE_ID
 done 
@@ -35,10 +35,10 @@ function add_ds_graph {
   FIELD_NAME=$3
   FIELD_VALUE=$4
 
-  TEMPLATE_ID=`php -q add_graphs.php --list-graph-templates | \
-    grep "$TEMPLATE_NAME"|cut -f 1`
-  TYPE_ID=`php -q add_graphs.php --snmp-query-id=$SNMP_QUERY_ID \
-    --list-query-types | grep "$TYPE_NAME"|cut -f 1`
+  TEMPLATE_ID=$(php -q add_graphs.php --list-graph-templates | \
+    grep "$TEMPLATE_NAME"|cut -f 1)
+  TYPE_ID=$(php -q add_graphs.php --snmp-query-id=$SNMP_QUERY_ID \
+    --list-query-types | grep "$TYPE_NAME"|cut -f 1)
 
   php -q add_graphs.php --host-id=$HOST_ID --graph-type=ds \
     --graph-template-id=$TEMPLATE_ID --snmp-query-id=$SNMP_QUERY_ID \
@@ -49,14 +49,14 @@ function add_ds_graph {
 # php -q add_graphs.php --list-graph-templates
 # php -q add_graphs.php --snmp-query-id=$SNMP_QUERY_ID --list-query-types
 
-SNMP_QUERY_ID=`php -q add_graphs.php --host-id=$HOST_ID --list-snmp-queries | \
-  grep "SNMP - Get Mounted Partitions"|cut -f 1`
+SNMP_QUERY_ID=$(php -q add_graphs.php --host-id=$HOST_ID --list-snmp-queries | \
+  grep "SNMP - Get Mounted Partitions"|cut -f 1)
 
 add_ds_graph "Host MIB - Available Disk Space" "Available Disk Space" \
   "hrStorageDescr" "/"
 
-SNMP_QUERY_ID=`php -q add_graphs.php --host-id=$HOST_ID --list-snmp-queries | \
-  grep "SNMP - Interface Statistics"|cut -f 1`
+SNMP_QUERY_ID=$(php -q add_graphs.php --host-id=$HOST_ID --list-snmp-queries | \
+  grep "SNMP - Interface Statistics"|cut -f 1)
 
 add_ds_graph "Interface - Traffic (bits/sec)" "In/Out Bits (64-bit Counters)" \
   "ifOperStatus" "Up"
@@ -67,8 +67,8 @@ add_ds_graph "Interface - Unicast Packets" "In/Out Unicast Packets" \
 add_ds_graph "Interface - Non-Unicast Packets" "In/Out Non-Unicast Packets" \
   "ifOperStatus" "Up"
 
-SNMP_QUERY_ID=`php -q add_graphs.php --host-id=$HOST_ID --list-snmp-queries | \
-  grep "ucd/net - Get IO Devices"|cut -f 1`
+SNMP_QUERY_ID=$(php -q add_graphs.php --host-id=$HOST_ID --list-snmp-queries | \
+  grep "ucd/net - Get IO Devices"|cut -f 1)
 
 add_ds_graph "ucd/net - Device IO - Operations" "IO Operations" \
   "diskIODevice" "xvda"

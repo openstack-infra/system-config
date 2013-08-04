@@ -1,9 +1,9 @@
 #!/bin/bash -xe
 
-WORKSPACE=`pwd`
+WORKSPACE=$(pwd)
 mkdir -p logs
 rm -f logs/*
-cd `dirname "$0"`
+cd $(dirname "$0")
 
 echo "Jenkins: resetting hosts..."
 for host in $HEAD_HOST ${COMPUTE_HOSTS//,/ }; do
@@ -33,8 +33,8 @@ cd ~/devstack
 source stackrc
 for image_url in ${IMAGE_URLS//,/ }; do
     # Downloads the image (uec ami+aki style), then extracts it.
-    IMAGE_FNAME=`echo "$image_url" | python -c "import sys; print sys.stdin.read().split('/')[-1]"`
-    IMAGE_NAME=`echo "$IMAGE_FNAME" | python -c "import sys; print sys.stdin.read().split('.tar.gz')[0].split('.tgz')[0]"`
+    IMAGE_FNAME=$(echo "$image_url" | python -c "import sys; print sys.stdin.read().split('/')[-1]")
+    IMAGE_NAME=$(echo "$IMAGE_FNAME" | python -c "import sys; print sys.stdin.read().split('.tar.gz')[0].split('.tgz')[0]")
     if [ ! -f files/$IMAGE_FNAME ]; then
         wget -c $image_url -O files/$IMAGE_FNAME
     fi

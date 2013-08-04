@@ -1,13 +1,13 @@
 #!/bin/bash
 
-if [[ $EUID -ne 0 ]]; then
+if [ $EUID -ne 0 ]; then
    echo "This script must be run as root" 1>&2
    exit 1
 fi
 
-if cat /etc/*release | grep -e "CentOS" -e "Red Hat" &> /dev/null; then
+if cat /etc/*release | grep -e "CentOS" -e "Red Hat" >/dev/null 2>&1; then
 
-	rpm -qi epel-release &> /dev/null || rpm -Uvh http://download.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm
+	rpm -qi epel-release >/dev/null 2>&1 || rpm -Uvh http://download.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm
         #installing this package gives use the key
 	rpm -ivh http://yum.puppetlabs.com/el/6/products/x86_64/puppetlabs-release-6-6.noarch.rpm
 	cat > /etc/yum.repos.d/puppetlabs.repo <<-"EOF"
@@ -34,7 +34,7 @@ else #defaults to Ubuntu
 	Pin-Priority: 501
 	EOF
 
-	lsbdistcodename=`lsb_release -c -s`
+	lsbdistcodename=$(lsb_release -c -s)
 	puppet_deb=puppetlabs-release-${lsbdistcodename}.deb
 	wget http://apt.puppetlabs.com/$puppet_deb -O $puppet_deb
 	dpkg -i $puppet_deb
@@ -48,4 +48,4 @@ fi
 git clone https://github.com/openstack-infra/config
 bash config/install_modules.sh
 
-puppet apply --modulepath=`pwd`/config/modules:/etc/puppet/modules -e 'node default {class { "openstack_project::bare_slave": install_users => false }}'
+puppet apply --modulepath=$(pwd)/config/modules:/etc/puppet/modules -e 'node default {class { "openstack_project::bare_slave": install_users => false }}'

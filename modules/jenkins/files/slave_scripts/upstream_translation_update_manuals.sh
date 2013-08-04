@@ -18,7 +18,7 @@
 
 DocFolder="doc/src/docbkx"
 
-if [ ! `echo $ZUUL_REFNAME | grep master` ]
+if [ ! $(echo $ZUUL_REFNAME | grep master) ]
 then
     exit 0
 fi
@@ -57,7 +57,7 @@ do
     fi
 done
 
-if [ ! `git diff --cached --quiet HEAD --` ]
+if [ ! $(git diff --cached --quiet HEAD --) ]
 then
     # Push .pot changes to transifex
     tx --debug --traceback push -s

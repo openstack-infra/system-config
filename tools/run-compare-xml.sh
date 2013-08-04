@@ -42,7 +42,7 @@ mkdir -p .test/new/config
 mkdir -p .test/new/out
 cd ../..
 
-GITHEAD=`git rev-parse HEAD`
+GITHEAD=$(git rev-parse HEAD)
 
 # First generate output from HEAD~1
 git checkout HEAD~1
@@ -58,7 +58,7 @@ tox -e compare-xml-old
 tox -e compare-xml-new
 
 CHANGED=0
-for x in `(cd .test/old/out && find -type f)`
+for x in $( (cd .test/old/out && find -type f) )
 do
     if ! diff -u .test/old/out/$x .test/new/out/$x >/dev/null 2>&1
     then
