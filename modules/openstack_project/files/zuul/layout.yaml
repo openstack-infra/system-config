@@ -882,6 +882,39 @@ projects:
           - post-mirror-python27
           - post-mirror-python33
 
+  - name: openstack/oslo.version
+    check:
+      - gate-oslo.version-requirements
+      - gate-oslo.version-pep8
+      - gate-oslo.version-docs
+      - gate-oslo.version-python26
+      - gate-oslo.version-python27
+      - gate-oslo.version-python33
+      - gate-tempest-devstack-vm-full
+      - gate-tempest-devstack-vm-neutron
+      - gate-grenade-devstack-vm
+    gate:
+      - gate-oslo.version-requirements
+      - gate-oslo.version-docs
+      - gate-oslo.version-pep8
+      - gate-oslo.version-python26
+      - gate-oslo.version-python27
+      - gate-oslo.version-python33
+      - gate-tempest-devstack-vm-full
+      - gate-tempest-devstack-vm-neutron
+      - gate-grenade-devstack-vm
+    post:
+      - oslo.version-branch-tarball
+      - oslo.version-docs
+    pre-release:
+      - oslo.version-tarball
+    release:
+      - oslo.version-tarball:
+        - oslo.version-pypi-upload:
+          - post-mirror-python26
+          - post-mirror-python27
+      - oslo.version-docs
+
   - name: openstack/neutron
     check:
       - gate-neutron-requirements
