@@ -20,6 +20,7 @@ class openstack_project::devstack_launch_slave (
   $jenkins_ssh_public_key,
   $jenkins_ssh_private_key,
   $jenkins_server,
+  $jenkins_credentials_id = '',
 ) {
 
   class { 'openstack_project::slave':
