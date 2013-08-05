@@ -2,10 +2,6 @@
 #
 class openstack_project::zuul_dev(
   $vhost_name = $::fqdn,
-  $jenkins_host = '',
-  $jenkins_url = '',
-  $jenkins_user = '',
-  $jenkins_apikey = '',
   $gerrit_server = '',
   $gerrit_user = '',
   $zuul_ssh_private_key = '',
