@@ -316,6 +316,8 @@ node 'zuul.openstack.org' {
     statsd_host          => 'graphite.openstack.org',
     gearman_workers      => [
       'jenkins.openstack.org',
+      'jenkins01.openstack.org',
+      'jenkins02.openstack.org',
       'jenkins-dev.openstack.org',
     ],
   }
@@ -331,6 +333,8 @@ node 'zuul-dev.openstack.org' {
     statsd_host          => 'graphite.openstack.org',
     gearman_workers      => [
       'jenkins.openstack.org',
+      'jenkins01.openstack.org',
+      'jenkins02.openstack.org',
       'jenkins-dev.openstack.org',
     ],
   }
