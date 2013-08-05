@@ -279,12 +279,6 @@
           fail: true
       - timestamps
 
-    parameters:
-      - string:
-          name: ZUUL_BRANCH
-          description: The branch to build
-          default: stable/folsom
-
     builders:
       - devstack-inprogress
       - devstack-checkout
@@ -292,6 +286,7 @@
           #!/bin/bash -xe
           export PYTHONUNBUFFERED=true
           export DEVSTACK_GATE_TEMPEST=1
+          export ZUUL_BRANCH=stable/folsom
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
       - link-logs
@@ -314,12 +309,6 @@
           fail: true
       - timestamps
 
-    parameters:
-      - string:
-          name: ZUUL_BRANCH
-          description: The branch to build
-          default: stable/folsom
-
     builders:
       - devstack-inprogress
       - devstack-checkout
@@ -328,6 +317,7 @@
           export PYTHONUNBUFFERED=true
           export DEVSTACK_GATE_TEMPEST=1
           export DEVSTACK_GATE_CINDER=1
+          export ZUUL_BRANCH=stable/folsom
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
       - link-logs
@@ -350,12 +340,6 @@
           fail: true
       - timestamps
 
-    parameters:
-      - string:
-          name: ZUUL_BRANCH
-          description: The branch to build
-          default: stable/grizzly
-
     builders:
       - devstack-inprogress
       - devstack-checkout
@@ -364,6 +348,7 @@
           export PYTHONUNBUFFERED=true
           export DEVSTACK_GATE_TEMPEST=1
           export DEVSTACK_GATE_TEMPEST_FULL=1
+          export ZUUL_BRANCH=stable/grizzly
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
       - link-logs
@@ -386,12 +371,6 @@
           fail: true
       - timestamps
 
-    parameters:
-      - string:
-          name: ZUUL_BRANCH
-          description: The branch to build
-          default: stable/grizzly
-
     builders:
       - devstack-inprogress
       - devstack-checkout
@@ -401,6 +380,7 @@
           export DEVSTACK_GATE_TEMPEST=1
           export DEVSTACK_GATE_POSTGRES=1
           export DEVSTACK_GATE_TEMPEST_FULL=1
+          export ZUUL_BRANCH=stable/grizzly
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
       - link-logs
@@ -423,12 +403,6 @@
           fail: true
       - timestamps
 
-    parameters:
-      - string:
-          name: ZUUL_BRANCH
-          description: The branch to build
-          default: stable/grizzly
-
     builders:
       - devstack-inprogress
       - devstack-checkout
@@ -437,6 +411,7 @@
           export PYTHONUNBUFFERED=true
           export DEVSTACK_GATE_TEMPEST=1
           export DEVSTACK_GATE_NEUTRON=1
+          export ZUUL_BRANCH=stable/grizzly
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
       - link-logs
@@ -459,12 +434,6 @@
           fail: true
       - timestamps
 
-    parameters:
-      - string:
-          name: ZUUL_BRANCH
-          description: The branch to build
-          default: master
-
     builders:
       - devstack-inprogress
       - devstack-checkout
@@ -473,6 +442,7 @@
           export PYTHONUNBUFFERED=true
           export DEVSTACK_GATE_TEMPEST=1
           export DEVSTACK_GATE_TEMPEST_ALL=1
+          export ZUUL_BRANCH=master
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
       - link-logs
@@ -495,12 +465,6 @@
           fail: true
       - timestamps
 
-    parameters:
-      - string:
-          name: ZUUL_BRANCH
-          description: The branch to build
-          default: master
-
     builders:
       - devstack-inprogress
       - devstack-checkout
@@ -509,6 +473,7 @@
           export PYTHONUNBUFFERED=true
           export DEVSTACK_GATE_TEMPEST=1
           export DEVSTACK_GATE_TEMPEST_COVERAGE=1
+          export ZUUL_BRANCH=master
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
       - link-logs
@@ -531,12 +496,6 @@
           fail: true
       - timestamps
 
-    parameters:
-      - string:
-          name: ZUUL_BRANCH
-          description: The branch to build
-          default: master
-
     builders:
       - devstack-inprogress
       - devstack-checkout
@@ -545,6 +504,7 @@
           export PYTHONUNBUFFERED=true
           export DEVSTACK_GATE_TEMPEST=1
           export DEVSTACK_GATE_TEMPEST_STRESS=1
+          export ZUUL_BRANCH=master
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
       - link-logs
