@@ -11,7 +11,7 @@ class openstack_project::static (
 ) {
 
   class { 'openstack_project::server':
-    iptables_public_tcp_ports => [22, 80, 443],
+    iptables_public_tcp_ports => [22, 80, 443, 873],
     sysadmins                 => $sysadmins,
   }
 
@@ -169,6 +169,12 @@ class openstack_project::static (
 
   ###########################################################
   # Pypi Mirror
+
+  include rsync::server
+  rsync::server::module { 'pypi':
+    path    => '/srv/static/pypi',
+    require => File['/srv/static/pypi'],
+  }
 
   apache::vhost { 'pypi.openstack.org':
     port     => 80,
