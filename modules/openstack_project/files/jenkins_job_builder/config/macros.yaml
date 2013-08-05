@@ -66,10 +66,16 @@
     name: puppet-lint
     builders:
       - shell: |
-          test -d modules || {{
-            ln -s . {project}
-            cd {project}
-          }}
+          if [ -f Modulefile ]; then
+            MODULE=$(awk '/^name/ {print $NF}' Modulefile |tr -d \"\')
+            if [ -z "$MODULE" ]; then
+              echo "Module name not defined in Modulefile"
+            else
+              mkdir -p "$MODULE"
+              rsync -a --exclude="$MODULE" --exclude ".*" . "$MODULE"
+              cd "$MODULE"
+            fi
+          fi
           rake lint
 
 - builder:
