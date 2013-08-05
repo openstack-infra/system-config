@@ -417,6 +417,7 @@ node 'devstack-launch01.slave.openstack.org' {
     jenkins_ssh_public_key  => $openstack_project::jenkins_ssh_key,
     jenkins_ssh_private_key => hiera('jenkins_ssh_private_key_contents'),
     jenkins_server          => 'jenkins01.openstack.org',
+    jenkins_credentials_id  => '8bcc2a78-0ce9-4383-aa14-039da7daf335',
   }
 }
 
@@ -428,6 +429,7 @@ node 'devstack-launch02.slave.openstack.org' {
     jenkins_ssh_public_key  => $openstack_project::jenkins_ssh_key,
     jenkins_ssh_private_key => hiera('jenkins_ssh_private_key_contents'),
     jenkins_server          => 'jenkins02.openstack.org',
+    jenkins_credentials_id  => '8bcc2a78-0ce9-4383-aa14-039da7daf335',
   }
 }
 
