@@ -18,15 +18,27 @@
 class openstack_project::git (
   $sysadmins = [],
   $git_gerrit_ssh_key = '',
+  $ssl_cert_file_contents = '',
+  $ssl_key_file_contents = '',
+  $ssl_chain_file_contents = '',
 ) {
   class { 'openstack_project::server':
-    iptables_public_tcp_ports => [80, 9418],
+    iptables_public_tcp_ports => [80, 443, 9418],
     sysadmins                 => $sysadmins,
   }
 
   include cgit
   include jeepyb
   include pip
+
+  class { 'cgit':
+    ssl_cert_file           => '/etc/ssl/certs/git.openstack.org.pem',
+    ssl_key_file            => '/etc/ssl/private/git.openstack.org.key',
+    ssl_chain_file          => '/etc/ssl/certs/intermediate.pem',
+    ssl_cert_file_contents  => $ssl_cert_file_contents,
+    ssl_key_file_contents   => $ssl_key_file_contents,
+    ssl_chain_file_contents => $ssl_chain_file_contents,
+  }
 
   # We don't actually use these, but jeepyb requires them.
   $local_git_dir = '/var/lib/git'

@@ -288,8 +288,11 @@ node /^elasticsearch\d*\.openstack\.org$/ {
 # A CentOS machine to run cgit and git daemon.
 node 'git.openstack.org' {
   class { 'openstack_project::git':
-    sysadmins           => hiera('sysadmins'),
-    git_gerrit_ssh_key  => hiera('gerrit_ssh_rsa_pubkey_contents'),
+    sysadmins               => hiera('sysadmins'),
+    git_gerrit_ssh_key      => hiera('gerrit_ssh_rsa_pubkey_contents'),
+    ssl_cert_file_contents  => hiera('git_ssl_cert_file_contents'),
+    ssl_key_file_contents   => hiera('git_ssl_key_file_contents'),
+    ssl_chain_file_contents => hiera('git_ssl_chain_file_contents'),
   }
 }
 
