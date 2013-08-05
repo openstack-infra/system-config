@@ -1,0 +1,39 @@
+<VirtualHost <%= scope.lookupvar("cgit::vhost_name") %>:80>
+  ServerName <%= scope.lookupvar("cgit::vhost_name") %>
+  ServerAdmin <%= scope.lookupvar("cgit::serveradmin") %>
+
+  ErrorLog ${APACHE_LOG_DIR}/git-error.log
+
+  LogLevel warn
+
+  CustomLog ${APACHE_LOG_DIR}/git-access.log combined
+
+  Redirect / https://<%= scope.lookupvar("cgit::vhost_name") %>/
+
+</VirtualHost>
+
+<IfModule mod_ssl.c>
+<VirtualHost <%= scope.lookupvar("cgit::vhost_name") %>:443>
+  ServerName <%= scope.lookupvar("cgit::vhost_name") %>
+  ServerAdmin <%= scope.lookupvar("cgit::serveradmin") %>
+
+  Alias /cgit-data /usr/share/cgit
+  ScriptAlias /cgit /var/www/cgi-bin/cgit
+  RewriteEngine On
+  RewriteRule ^/$ /cgit [R]
+
+  ErrorLog ${APACHE_LOG_DIR}/git-error.log
+
+  LogLevel warn
+
+  CustomLog ${APACHE_LOG_DIR}/git-access.log combined
+
+  SSLEngine on
+
+  SSLCertificateFile      <%= scope.lookupvar("cgit::ssl_cert_file") %>
+  SSLCertificateKeyFile   <%= scope.lookupvar("cgit::ssl_key_file") %>
+<% if scope.lookupvar("cgit::ssl_chain_file") != "" %>
+  SSLCertificateChainFile <%= scope.lookupvar("cgit::ssl_chain_file") %>
+<% end %>
+</VirtualHost>
+</IfModule>
