@@ -49,7 +49,9 @@ define jenkins::plugin(
     require  => File[$plugin_dir],
     path     => ['/usr/bin', '/usr/sbin',],
     user     => 'jenkins',
-    unless   => "test -d ${plugin_dir}/${name}",
-    notify   => Service['jenkins'],
+    unless   => "test -f ${plugin_dir}/${name}.?pi",
+#    OpenStack modification: don't auto-restart jenkins so we can control
+#    outage timing better.
+#    notify   => Service['jenkins'],
   }
 }
