@@ -799,6 +799,7 @@ projects:
       - gate-neutron-python26
       - gate-neutron-python27
       - gate-tempest-devstack-vm-neutron
+      - gate-tempest-devstack-vm-neutron-full
     gate:
       - gate-neutron-requirements
       - gate-neutron-docs
@@ -806,6 +807,7 @@ projects:
       - gate-neutron-python26
       - gate-neutron-python27
       - gate-tempest-devstack-vm-neutron
+      - gate-tempest-devstack-vm-neutron-full
     post:
       - neutron-branch-tarball
       - neutron-coverage
