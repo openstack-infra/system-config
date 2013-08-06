@@ -182,7 +182,29 @@ jobs:
     voting: false
   - name: gate-marconi-python33
     voting: false
+  - name: gate-python-ceilometerclient-python33
+    voting: false
+  - name: gate-python-cinderclient-python33
+    voting: false
+  - name: gate-python-glanceclient-python33
+    voting: false
+  - name: gate-python-heatclient-python33
+    voting: false
+  - name: gate-python-ironicclient-python33
+    voting: false
+  - name: gate-python-keystoneclient-python33
+    voting: false
   - name: gate-python-marconiclient-python33
+    voting: false
+  - name: gate-python-neutronclient-python33
+    voting: false
+  - name: gate-python-novaclient-python33
+    voting: false
+  - name: gate-python-openstackclient-python33
+    voting: false
+  - name: gate-python-swiftclient-python33
+    voting: false
+  - name: gate-python-troveclient-python33
     voting: false
 
 projects:
@@ -870,6 +892,7 @@ projects:
       - gate-python-ceilometerclient-docs
       - gate-python-ceilometerclient-python26
       - gate-python-ceilometerclient-python27
+      - gate-python-ceilometerclient-python33
     gate:
       - gate-python-ceilometerclient-requirements
       - gate-python-ceilometerclient-docs
@@ -895,6 +918,7 @@ projects:
       - gate-python-cinderclient-docs
       - gate-python-cinderclient-python26
       - gate-python-cinderclient-python27
+      - gate-python-cinderclient-python33
       - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-cells-full
@@ -935,6 +959,7 @@ projects:
       - gate-python-glanceclient-docs
       - gate-python-glanceclient-python26
       - gate-python-glanceclient-python27
+      - gate-python-glanceclient-python33
       - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-cells-full
@@ -975,6 +1000,7 @@ projects:
       - gate-python-keystoneclient-docs
       - gate-python-keystoneclient-python26
       - gate-python-keystoneclient-python27
+      - gate-python-keystoneclient-python33
       - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-cells-full
@@ -1015,6 +1041,7 @@ projects:
       - gate-python-novaclient-docs
       - gate-python-novaclient-python26
       - gate-python-novaclient-python27
+      - gate-python-novaclient-python33
       - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-cells-full
@@ -1055,6 +1082,7 @@ projects:
       - gate-python-openstackclient-docs
       - gate-python-openstackclient-python26
       - gate-python-openstackclient-python27
+      - gate-python-openstackclient-python33
     gate:
       - gate-python-openstackclient-requirements
       - gate-python-openstackclient-docs
@@ -1080,6 +1108,7 @@ projects:
       - gate-python-neutronclient-docs
       - gate-python-neutronclient-python26
       - gate-python-neutronclient-python27
+      - gate-python-neutronclient-python33
       - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-cells-full
@@ -1120,6 +1149,7 @@ projects:
       - gate-python-swiftclient-docs
       - gate-python-swiftclient-python26
       - gate-python-swiftclient-python27
+      - gate-python-swiftclient-python33
     gate:
       - gate-python-swiftclient-requirements
       - gate-python-swiftclient-docs
@@ -1440,6 +1470,7 @@ projects:
       - gate-python-heatclient-pep8
       - gate-python-heatclient-python26
       - gate-python-heatclient-python27
+      - gate-python-heatclient-python33
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-cells-full
       - gate-tempest-devstack-vm-testr-full
@@ -1529,6 +1560,7 @@ projects:
       - gate-python-troveclient-pep8
       - gate-python-troveclient-python26
       - gate-python-troveclient-python27
+      - gate-python-troveclient-python33
     gate:
       - gate-python-troveclient-requirements
       - gate-python-troveclient-pep8
@@ -2490,6 +2522,7 @@ projects:
       - gate-python-ironicclient-pep8
       - gate-python-ironicclient-python26
       - gate-python-ironicclient-python27
+      - gate-python-ironicclient-python33
     gate:
       - gate-python-ironicclient-pep8
       - gate-python-ironicclient-python26
