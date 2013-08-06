@@ -11,7 +11,7 @@ allow=g722
 allow=ulaw
 allow=alaw
 allow=gsm
-videosupport=yes
+nat=force_rport,comedia
 <% sip_providers.each do |provider| -%>
 register => <%= provider['username'] %>:<%= provider['password'] %>@<%= provider['hostname'] %>:5060
 <% end -%>
