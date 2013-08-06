@@ -11,7 +11,7 @@
     publishers:
       - console-log
 
-    node: 'tx'
+    node: 'proposal'
 
 - job-template:
     name: '{name}-propose-translation-update'
@@ -31,7 +31,7 @@
           branches:
             - 'origin/master'
 
-    node: 'tx'
+    node: 'proposal'
 
 - job:
     name: manuals-upstream-translation-update
@@ -46,7 +46,7 @@
     publishers:
       - console-log
 
-    node: 'tx'
+    node: 'proposal'
 
 - job:
     name: manuals-propose-translation-update
@@ -66,7 +66,7 @@
           branches:
             - 'origin/master'
 
-    node: 'tx'
+    node: 'proposal'
 
 - job-group:
     name: translation-jobs
