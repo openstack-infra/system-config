@@ -170,6 +170,12 @@ jobs:
     voting: false
   - name: gate-savanna-pylint
     voting: false
+  - name: gate-savanna-requirements
+    voting: false
+  - name: gate-python-savannaclient-requirements
+    voting: false
+  - name: gate-savanna-dashboard-requirements
+    voting: false
   - name: ^gate-puppet-.*-puppet-lint$
     voting: false
   - name: gate-django_openstack_auth-pep8
@@ -1973,17 +1979,22 @@ projects:
 
   - name: stackforge/savanna
     check:
+      - gate-savanna-docs
       - gate-savanna-pep8
       - gate-savanna-pylint
       - gate-savanna-python26
       - gate-savanna-python27
+      - gate-savanna-requirements
     gate:
+      - gate-savanna-docs
       - gate-savanna-pep8
       - gate-savanna-python26
       - gate-savanna-python27
+      - gate-savanna-requirements
     post:
       - savanna-branch-tarball
       - hook-savanna-rtfd
+      - savanna-coverage
     pre-release:
       - savanna-tarball
       - hook-savanna-rtfd
@@ -1999,13 +2010,16 @@ projects:
       - gate-python-savannaclient-pep8
       - gate-python-savannaclient-python26
       - gate-python-savannaclient-python27
+      - gate-python-savannaclient-requirements
     gate:
       - gate-python-savannaclient-pep8
       - gate-python-savannaclient-python26
       - gate-python-savannaclient-python27
+      - gate-python-savannaclient-requirements
     post:
       - python-savannaclient-branch-tarball
       - hook-python-savannaclient-rtfd
+      - python-savannaclient-coverage
     pre-release:
        - python-savannaclient-tarball
        - hook-python-savannaclient-rtfd
@@ -2021,13 +2035,16 @@ projects:
       - gate-savanna-dashboard-pep8
       - gate-savanna-dashboard-python26
       - gate-savanna-dashboard-python27
+      - gate-savanna-dashboard-requirements
     gate:
       - gate-savanna-dashboard-pep8
       - gate-savanna-dashboard-python26
       - gate-savanna-dashboard-python27
+      - gate-savanna-dashboard-requirements
     post:
       - savanna-dashboard-branch-tarball
       - hook-savanna-dashboard-rtfd
+      - savanna-dashboard-coverage
     pre-release:
       - savanna-dashboard-tarball
       - hook-savanna-dashboard-rtfd
