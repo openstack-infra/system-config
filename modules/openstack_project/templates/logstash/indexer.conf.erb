@@ -106,6 +106,12 @@ filter {
     pattern => [ "%{SYSLOGTIMESTAMP:logdate}%{SPACE}%{SYSLOGHOST:syslog_host}?%{SPACE}%{DATA:syslog_program}(?:\[%{POSINT:syslog_pid}\])?:? %{GREEDYDATA:logmessage}" ]
     add_field => [ "received_at", "%{@timestamp}" ]
   }
+  # Remove DEBUG logs to reduce the amount of data that needs to be processed.
+  grep {
+    type => "jenkins"
+    negate => true
+    match => [ "loglevel", "DEBUG" ]
+  }
 
   # Filters below here should be consistent for all Jenkins log formats.
   date {
