@@ -69,16 +69,31 @@
       - shell: |
           #!/bin/bash -xe
           TAG=`echo $ZUUL_REF | sed 's/^refs.tags.//'`
-          FILENAME="{name}-$TAG.hpi"
+          FILENAME_POM="{name}-$TAG.pom"
+          FILENAME_HPI="{name}-$TAG.hpi"
 
-          # copy plugin plugin artifacts from tarballs to local workspace
+          # copy plugin artifacts from tarballs to local workspace
           rm -rf *.hpi
-          curl -o $FILENAME http://{tarball-site}/ci/{name}/$FILENAME
+          curl -o $FILENAME_HPI http://{tarball-site}/ci/{name}/$FILENAME_HPI
+
+          # generate pom file with version info
+          FILE_IN_ZIP=`unzip -Z -1 $FILENAME|grep pom.xml`
+          unzip -o -j $FILENAME $FILE_IN_ZIP
+          sed "s/\${{project-version}}/$TAG/g" <pom.xml >$FILENAME_POM
 
           # deploy plugin artifacts from workspace to repo.jenkins-ci.org
           JENKINSCI_REPO="http://repo.jenkins-ci.org/list/releases/org/jenkins-ci/plugins"
           JENKINSCI_REPO_CREDS="/home/jenkins/.jenkinsci-curl"
-          /usr/local/jenkins/slave_scripts/maven-upload.sh {name} $JENKINSCI_REPO $JENKINSCI_REPO_CREDS
+
+          curl -X PUT \
+              --config $JENKINSCI_REPO_CREDS \
+              --data-binary @$FILENAME_POM \
+              -i "$JENKINSCI_REPO/{name}/$TAG/$FILENAME_POM" > /dev/null 2>&1
+
+          curl -X PUT \
+              --config $JENKINSCI_REPO_CREDS \
+              --data-binary @$FILENAME_HPI \
+              -i "$JENKINSCI_REPO/{name}/$TAG/$FILENAME_HPI" > /dev/null 2>&1
 
     publishers:
       - console-log
