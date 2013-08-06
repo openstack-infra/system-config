@@ -124,11 +124,14 @@ class zuul (
   file { '/var/run/zuul':
     ensure  => directory,
     owner   => 'zuul',
+    group   => 'zuul',
     require => User['zuul'],
   }
 
   file { '/var/lib/zuul':
     ensure  => directory,
+    owner   => 'zuul',
+    group   => 'zuul',
   }
 
   file { '/var/lib/zuul/git':
