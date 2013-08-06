@@ -1860,6 +1860,12 @@ projects:
       - gate-diskimage-builder-python27
     post:
       - diskimage-builder-coverage
+      - diskimage-builder-branch-tarball
+    pre-release:
+      - diskimage-builder-tarball
+    release:
+      - diskimage-builder-tarball:
+        - diskimage-builder-pypi-upload
 
   - name: stackforge/os-apply-config
     check:
