@@ -69,16 +69,16 @@
       - shell: |
           #!/bin/bash -xe
           TAG=`echo $ZUUL_REF | sed 's/^refs.tags.//'`
-          FILENAME="{name}-$TAG.hpi"
+          FILENAME_HPI="{name}-$TAG.hpi"
 
-          # copy plugin plugin artifacts from tarballs to local workspace
+          # copy plugin artifacts from tarballs to local workspace
           rm -rf *.hpi
-          curl -o $FILENAME http://{tarball-site}/ci/{name}/$FILENAME
+          curl -o $FILENAME_HPI http://{tarball-site}/ci/{name}/$FILENAME_HPI
 
-          # deploy plugin artifacts from workspace to repo.jenkins-ci.org
-          JENKINSCI_REPO="http://repo.jenkins-ci.org/list/releases/org/jenkins-ci/plugins"
-          JENKINSCI_REPO_CREDS="/home/jenkins/.jenkinsci-curl"
-          /usr/local/jenkins/slave_scripts/maven-upload.sh {name} $JENKINSCI_REPO $JENKINSCI_REPO_CREDS
+          # deploy to maven repository
+          FILENAME_POM="{name}-$TAG.pom"
+          /usr/local/jenkins/slave_scripts/jenkinsci-upload.sh {name} $TAG \
+              $FILENAME_POM $FILENAME_HPI
 
     publishers:
       - console-log
