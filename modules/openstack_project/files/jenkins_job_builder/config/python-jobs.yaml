@@ -213,10 +213,10 @@
       - 'gate-{name}-pep8'
       - 'gate-{name}-python26'
       - 'gate-{name}-python27'
+      - 'gate-{name}-python33'
       - 'gate-{name}-docs'
       - 'gate-{name}-requirements'
       - '{name}-tarball'
       - '{name}-branch-tarball'
       # pyflakes isn't standard
       # pylint isn't standard
-      # py33.3 isn't standard
