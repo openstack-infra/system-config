@@ -35,42 +35,6 @@ openstack-infra:
       - master
       - feature/gearman
 
-openstack-dev:
-    events:
-      - change-merged
-      - x-vrif-minus-2
-    projects:
-      - openstack/ceilometer
-      - openstack/cinder
-      - openstack/django_openstack_auth
-      - openstack/glance
-      - openstack/horizon
-      - openstack/keystone
-      - openstack/nova
-      - openstack/oslo-incubator
-      - openstack/oslo.config
-      - openstack/oslo.messaging
-      - openstack/oslo.sphinx
-      - openstack/python-cinderclient
-      - openstack/python-glanceclient
-      - openstack/python-keystoneclient
-      - openstack/python-novaclient
-      - openstack/python-openstackclient
-      - openstack/python-neutronclient
-      - openstack/python-swiftclient
-      - openstack/python-troveclient
-      - openstack/neutron
-      - openstack/swift
-      - openstack/tempest
-      - openstack/trove
-      - openstack/trove-integration
-      - openstack-dev/devstack
-      - openstack-dev/grenade
-      - openstack-infra/devstack-gate
-    branches:
-      - master
-      - feature/ec
-
 openstack-doc:
     events:
       - patchset-created
@@ -188,7 +152,6 @@ savanna:
 openstack-nova:
     events:
       - patchset-created
-      - change-merged
       - x-vrif-minus-2
     projects:
       - openstack/nova
