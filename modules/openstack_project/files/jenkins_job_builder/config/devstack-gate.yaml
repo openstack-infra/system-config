@@ -287,6 +287,7 @@
           export PYTHONUNBUFFERED=true
           export DEVSTACK_GATE_TEMPEST=1
           export ZUUL_BRANCH=stable/folsom
+          unset ZUUL_PROJECT
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
       - link-logs
@@ -318,6 +319,7 @@
           export DEVSTACK_GATE_TEMPEST=1
           export DEVSTACK_GATE_CINDER=1
           export ZUUL_BRANCH=stable/folsom
+          unset ZUUL_PROJECT
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
       - link-logs
@@ -349,6 +351,7 @@
           export DEVSTACK_GATE_TEMPEST=1
           export DEVSTACK_GATE_TEMPEST_FULL=1
           export ZUUL_BRANCH=stable/grizzly
+          unset ZUUL_PROJECT
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
       - link-logs
@@ -381,6 +384,7 @@
           export DEVSTACK_GATE_POSTGRES=1
           export DEVSTACK_GATE_TEMPEST_FULL=1
           export ZUUL_BRANCH=stable/grizzly
+          unset ZUUL_PROJECT
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
       - link-logs
@@ -412,6 +416,7 @@
           export DEVSTACK_GATE_TEMPEST=1
           export DEVSTACK_GATE_NEUTRON=1
           export ZUUL_BRANCH=stable/grizzly
+          unset ZUUL_PROJECT
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
       - link-logs
@@ -443,6 +448,7 @@
           export DEVSTACK_GATE_TEMPEST=1
           export DEVSTACK_GATE_TEMPEST_ALL=1
           export ZUUL_BRANCH=master
+          unset ZUUL_PROJECT
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
       - link-logs
@@ -474,6 +480,7 @@
           export DEVSTACK_GATE_TEMPEST=1
           export DEVSTACK_GATE_TEMPEST_COVERAGE=1
           export ZUUL_BRANCH=master
+          unset ZUUL_PROJECT
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
       - link-logs
@@ -505,6 +512,7 @@
           export DEVSTACK_GATE_TEMPEST=1
           export DEVSTACK_GATE_TEMPEST_STRESS=1
           export ZUUL_BRANCH=master
+          unset ZUUL_PROJECT
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
       - link-logs
