@@ -156,9 +156,6 @@ openstack-nova:
     projects:
       - openstack/nova
       - openstack/python-novaclient
-      - openstack/oslo-incubator
-      - openstack/oslo.config
-      - openstack/oslo.messaging
     branches:
       - master
 
