@@ -1824,8 +1824,14 @@ projects:
   - name: openstack-infra/git-review
     check:
       - gate-git-review-pep8
+      - gate-git-review-python26
+      - gate-git-review-python27
+      - gate-git-review-python33
     gate:
       - gate-git-review-pep8
+      - gate-git-review-python26
+      - gate-git-review-python27
+      - gate-git-review-python33
     post:
       - git-review-branch-tarball
     pre-release:
