@@ -37,7 +37,6 @@ openstack-infra:
 
 openstack-dev:
     events:
-      - change-merged
       - x-vrif-minus-2
     projects:
       - openstack/ceilometer
@@ -188,7 +187,6 @@ savanna:
 openstack-nova:
     events:
       - patchset-created
-      - change-merged
       - x-vrif-minus-2
     projects:
       - openstack/nova
