@@ -808,6 +808,7 @@
     doc-publisher-site: docs.openstack.org
 
     jobs:
+      - gate-{name}-pep8
       - gate-{name}-python27
 
 

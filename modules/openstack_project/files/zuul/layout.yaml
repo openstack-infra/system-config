@@ -1167,6 +1167,7 @@ projects:
   - name: openstack/requirements
     check:
       - gate-requirements-install
+      - gate-requirements-pep8
       - gate-requirements-python27
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-cells-full
@@ -1175,6 +1176,7 @@ projects:
       - gate-grenade-devstack-vm
     gate:
       - gate-requirements-install
+      - gate-requirements-pep8
       - gate-requirements-python27
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-postgres-full
