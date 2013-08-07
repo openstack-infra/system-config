@@ -14,7 +14,16 @@
 #
 # Class: cgit
 #
-class cgit {
+class cgit(
+  $vhost_name = $::fqdn,
+  $serveradmin = "webmaster@${::fqdn}",
+  $ssl_cert_file = '',
+  $ssl_key_file = '',
+  $ssl_chain_file = '',
+  $ssl_cert_file_contents = '', # If left empty puppet will not create file.
+  $ssl_key_file_contents = '', # If left empty puppet will not create file.
+  $ssl_chain_file_contents = '', # If left empty puppet will not create file.
+) {
 
   include apache
 
@@ -66,10 +75,12 @@ class cgit {
     value      => on
   }
 
-  file { '/etc/httpd/conf.d/cgit.conf':
-    ensure  => present,
-    source  => 'puppet:///modules/cgit/cgit.conf',
-    mode    => '0644'
+  apache::vhost { $vhost_name:
+    port     => 443,
+    docroot  => 'MEANINGLESS ARGUMENT',
+    priority => '50',
+    template => 'cgit/git.vhost.erb',
+    ssl      => true,
   }
 
   file { '/etc/xinetd.d/git':
@@ -83,5 +94,35 @@ class cgit {
   service { 'xinetd':
     ensure    => running,
     subscribe => File['/etc/xinetd.d/git'],
+  }
+
+  if $ssl_cert_file_contents != '' {
+    file { $ssl_cert_file:
+      owner   => 'root',
+      group   => 'root',
+      mode    => '0640',
+      content => $ssl_cert_file_contents,
+      before  => Apache::Vhost[$vhost_name],
+    }
+  }
+
+  if $ssl_key_file_contents != '' {
+    file { $ssl_key_file:
+      owner   => 'root',
+      group   => 'root',
+      mode    => '0640',
+      content => $ssl_key_file_contents,
+      before  => Apache::Vhost[$vhost_name],
+    }
+  }
+
+  if $ssl_chain_file_contents != '' {
+    file { $ssl_chain_file:
+      owner   => 'root',
+      group   => 'root',
+      mode    => '0640',
+      content => $ssl_chain_file_contents,
+      before  => Apache::Vhost[$vhost_name],
+    }
   }
 }

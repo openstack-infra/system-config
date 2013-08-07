@@ -6,7 +6,7 @@
 cache-size=0
 
 # Specify some default clone prefixes
-clone-prefix=git://git.openstack.org http://git.openstack.org/cgit
+clone-prefix=git://git.openstack.org https://git.openstack.org/cgit
 
 # Specify the css url
 css=/cgit-data/cgit.css
