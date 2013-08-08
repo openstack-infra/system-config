@@ -27,11 +27,10 @@ class openstack_project::git (
     sysadmins                 => $sysadmins,
   }
 
-  include cgit
   include jeepyb
   include pip
 
-  class { 'cgit':
+  class { '::cgit':
     ssl_cert_file           => '/etc/ssl/certs/git.openstack.org.pem',
     ssl_key_file            => '/etc/ssl/private/git.openstack.org.key',
     ssl_chain_file          => '/etc/ssl/certs/intermediate.pem',
