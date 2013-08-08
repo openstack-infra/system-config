@@ -190,6 +190,22 @@ jobs:
     voting: false
   - name: gate-python-marconiclient-python33
     voting: false
+  - name: gate-python-novaclient-python33
+    voting: false
+  - name: gate-python-swiftclient-python33
+    voting: false
+  - name: gate-python-cinderclient-python33
+    voting: false
+  - name: gate-python-keystoneclient-python33
+    voting: false
+  - name: gate-python-glanceclient-python33
+    voting: false
+  - name: gate-python-neutronclient-python33
+    voting: false
+  - name: gate-python-heatclient-python33
+    voting: false
+  - name: gate-python-ceilometerclient-python33
+    voting: false
 
 projects:
   - name: openstack-infra/zuul
@@ -888,12 +904,14 @@ projects:
       - gate-python-ceilometerclient-docs
       - gate-python-ceilometerclient-python26
       - gate-python-ceilometerclient-python27
+      - gate-python-ceilometerclient-python33
     gate:
       - gate-python-ceilometerclient-requirements
       - gate-python-ceilometerclient-docs
       - gate-python-ceilometerclient-pep8
       - gate-python-ceilometerclient-python26
       - gate-python-ceilometerclient-python27
+      - gate-python-ceilometerclient-python33
     post:
       - python-ceilometerclient-branch-tarball
       - python-ceilometerclient-coverage
@@ -914,6 +932,7 @@ projects:
       - gate-python-cinderclient-docs
       - gate-python-cinderclient-python26
       - gate-python-cinderclient-python27
+      - gate-python-cinderclient-python33
       - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-cells-full
@@ -929,6 +948,7 @@ projects:
       - gate-python-cinderclient-pep8
       - gate-python-cinderclient-python26
       - gate-python-cinderclient-python27
+      - gate-python-cinderclient-python33
       - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-postgres-full
@@ -955,6 +975,7 @@ projects:
       - gate-python-glanceclient-docs
       - gate-python-glanceclient-python26
       - gate-python-glanceclient-python27
+      - gate-python-glanceclient-python33
       - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-cells-full
@@ -970,6 +991,7 @@ projects:
       - gate-python-glanceclient-pep8
       - gate-python-glanceclient-python26
       - gate-python-glanceclient-python27
+      - gate-python-glanceclient-python33
       - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-postgres-full
@@ -996,6 +1018,7 @@ projects:
       - gate-python-keystoneclient-docs
       - gate-python-keystoneclient-python26
       - gate-python-keystoneclient-python27
+      - gate-python-keystoneclient-python33
       - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-cells-full
@@ -1011,6 +1034,7 @@ projects:
       - gate-python-keystoneclient-pep8
       - gate-python-keystoneclient-python26
       - gate-python-keystoneclient-python27
+      - gate-python-keystoneclient-python33
       - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-postgres-full
@@ -1037,6 +1061,7 @@ projects:
       - gate-python-novaclient-docs
       - gate-python-novaclient-python26
       - gate-python-novaclient-python27
+      - gate-python-novaclient-python33
       - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-cells-full
@@ -1052,6 +1077,7 @@ projects:
       - gate-python-novaclient-pep8
       - gate-python-novaclient-python26
       - gate-python-novaclient-python27
+      - gate-python-novaclient-python33
       - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-postgres-full
@@ -1104,6 +1130,7 @@ projects:
       - gate-python-neutronclient-docs
       - gate-python-neutronclient-python26
       - gate-python-neutronclient-python27
+      - gate-python-neutronclient-python33
       - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-cells-full
@@ -1119,6 +1146,7 @@ projects:
       - gate-python-neutronclient-pep8
       - gate-python-neutronclient-python26
       - gate-python-neutronclient-python27
+      - gate-python-neutronclient-python33
       - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-postgres-full
@@ -1145,12 +1173,14 @@ projects:
       - gate-python-swiftclient-docs
       - gate-python-swiftclient-python26
       - gate-python-swiftclient-python27
+      - gate-python-swiftclient-python33
     gate:
       - gate-python-swiftclient-requirements
       - gate-python-swiftclient-docs
       - gate-python-swiftclient-pep8
       - gate-python-swiftclient-python26
       - gate-python-swiftclient-python27
+      - gate-python-swiftclient-python33
     post:
       - python-swiftclient-branch-tarball
       - python-swiftclient-coverage
@@ -1472,6 +1502,7 @@ projects:
       - gate-python-heatclient-pep8
       - gate-python-heatclient-python26
       - gate-python-heatclient-python27
+      - gate-python-heatclient-python33
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-cells-full
       - gate-tempest-devstack-vm-testr-full
@@ -1482,6 +1513,7 @@ projects:
       - gate-python-heatclient-pep8
       - gate-python-heatclient-python26
       - gate-python-heatclient-python27
+      - gate-python-heatclient-python33
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-postgres-full
       - gate-tempest-devstack-vm-neutron
