@@ -2,11 +2,11 @@
   ServerName <%= scope.lookupvar("cgit::vhost_name") %>
   ServerAdmin <%= scope.lookupvar("cgit::serveradmin") %>
 
-  ErrorLog ${APACHE_LOG_DIR}/git-error.log
+  ErrorLog /var/log/httpd/git-error.log
 
   LogLevel warn
 
-  CustomLog ${APACHE_LOG_DIR}/git-access.log combined
+  CustomLog /var/log/httpd/git-access.log combined
 
   Redirect / https://<%= scope.lookupvar("cgit::vhost_name") %>/
 
@@ -22,11 +22,11 @@
   RewriteEngine On
   RewriteRule ^/$ /cgit [R]
 
-  ErrorLog ${APACHE_LOG_DIR}/git-error.log
+  ErrorLog /var/log/httpd/git-error.log
 
   LogLevel warn
 
-  CustomLog ${APACHE_LOG_DIR}/git-access.log combined
+  CustomLog /var/log/httpd/git-access.log combined
 
   SSLEngine on
 
