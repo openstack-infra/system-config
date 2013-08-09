@@ -181,13 +181,11 @@
     node: precise
     doc-publisher-site: docs.openstack.org
     tarball-site: tarballs.openstack.org
-    mirror: mirror
 
     jobs:
       - openstack-publish-jobs
       - python-jobs
       - pypi-jobs
-      - gate-requirements-integration-{mirror}
 
 
 - project:
@@ -230,14 +228,12 @@
     github-org: openstack-infra
     node: precise
     tarball-site: tarballs.openstack.org
-    mirror: mirror
 
     jobs:
       - gate-{name}-pep8
       - gate-{name}-pyflakes
       - '{name}-tarball'
       - pypi-jobs
-      - gate-requirements-integration-{mirror}
 
 
 - project:
@@ -803,12 +799,10 @@
     node: precise
     tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
-    mirror: no-mirror
 
     jobs:
       - gate-{name}-pep8
       - gate-{name}-python27
-      - gate-requirements-integration-{mirror}
 
 
 - project:
