@@ -343,3 +343,13 @@ tuskar:
       - stackforge/python-tuskarclient
     branches:
       - master
+
+tuskar-ui:
+    events:
+      - patchset-created
+      - change-merged
+      - x-vrif-minus-2
+    projects:
+      - stackforge/tuskar-ui
+    branches:
+      - master
