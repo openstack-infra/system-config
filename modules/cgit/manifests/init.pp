@@ -83,6 +83,15 @@ class cgit(
     ssl      => true,
   }
 
+  file { '/etc/httpd/conf.d/ssl.conf':
+    ensure  => present,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0644',
+    source  => 'puppet:///modules/cgit/ssl.conf',
+    require => Package['mod_ssl'],
+  }
+
   file { '/etc/xinetd.d/git':
     ensure => present,
     owner  => 'root',
