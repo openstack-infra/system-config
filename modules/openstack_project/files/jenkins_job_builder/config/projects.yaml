@@ -164,7 +164,7 @@
     name: hacking
     github-org: openstack-dev
     node: precise
-    doc-publisher-site: ci.openstack.org
+    doc-publisher-site: docs.openstack.org
     tarball-site: tarballs.openstack.org
 
     jobs:
@@ -179,7 +179,7 @@
     name: pbr
     github-org: openstack-dev
     node: precise
-    doc-publisher-site: ci.openstack.org
+    doc-publisher-site: docs.openstack.org
     tarball-site: tarballs.openstack.org
 
     jobs:
@@ -192,7 +192,6 @@
     name: gerritbot
     github-org: openstack-infra
     node: precise
-    doc-publisher-site: ci.openstack.org
     tarball-site: tarballs.openstack.org
 
     jobs:
@@ -204,7 +203,6 @@
     name: statusbot
     github-org: openstack-infra
     node: precise
-    doc-publisher-site: ci.openstack.org
     tarball-site: tarballs.openstack.org
 
     jobs:
@@ -216,7 +214,6 @@
     name: gerritlib
     github-org: openstack-infra
     node: precise
-    doc-publisher-site: ci.openstack.org
     tarball-site: tarballs.openstack.org
 
     jobs:
@@ -230,7 +227,6 @@
     name: jeepyb
     github-org: openstack-infra
     node: precise
-    doc-publisher-site: ci.openstack.org
     tarball-site: tarballs.openstack.org
 
     jobs:
@@ -443,7 +439,6 @@
     name: nose-html-output
     github-org: openstack-infra
     node: precise
-    doc-publisher-site: ci.openstack.org
     tarball-site: tarballs.openstack.org
 
     jobs:
@@ -814,7 +809,6 @@
     name: storyboard
     github-org: openstack-infra
     node: precise
-    doc-publisher-site: ci.openstack.org
     tarball-site: tarballs.openstack.org
 
     jobs:
