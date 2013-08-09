@@ -2676,3 +2676,9 @@ projects:
       - gate-noop
     gate:
       - gate-noop
+
+  - name: stackforge/tuskar-ui
+    check:
+      - gate-noop
+    gate:
+      - gate-noop
