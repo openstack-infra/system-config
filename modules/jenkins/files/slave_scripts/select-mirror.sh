@@ -38,13 +38,17 @@ then
 # For OpenStack projects, use the pypi.openstack.org mirror exclusively
 elif [ "$org" == "openstack" ]
 then
+    # wheel mirrors are below a dir level containing distro and release
+    # because the wheel format itself does not distinguish
+    distro=`lsb_release -i -r -s | xargs | tr ' ' '-'`
     cat <<EOF > ~/.pydistutils.cfg
 [easy_install]
 index_url = http://pypi.openstack.org/openstack
 EOF
     cat <<EOF > ~/.pip/pip.conf
 [global]
-index-url = http://pypi.openstack.org/openstack
+index-url = http://pypi.openstack.org/openstack/$distro
+extra-index-url = http://pypi.openstack.org/openstack
 EOF
 else
     cat <<EOF > ~/.pip/pip.conf
