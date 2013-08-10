@@ -12,7 +12,6 @@
 
 </VirtualHost>
 
-<IfModule mod_ssl.c>
 <VirtualHost <%= scope.lookupvar("cgit::vhost_name") %>:443>
   ServerName <%= scope.lookupvar("cgit::vhost_name") %>
   ServerAdmin <%= scope.lookupvar("cgit::serveradmin") %>
@@ -36,4 +35,3 @@
   SSLCertificateChainFile <%= scope.lookupvar("cgit::ssl_chain_file") %>
 <% end %>
 </VirtualHost>
-</IfModule>
