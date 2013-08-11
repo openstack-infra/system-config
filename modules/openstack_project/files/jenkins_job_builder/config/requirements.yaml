@@ -25,5 +25,8 @@
               .venv/bin/pip install -M -U --exists-action=w -r dev-requirements.txt
           fi
 
+          # Print all installed stuff to demonstrate versions
+          .venv/bin/pip freeze
+
     publishers:
       - console-log
