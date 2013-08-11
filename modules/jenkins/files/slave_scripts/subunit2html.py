@@ -510,8 +510,8 @@ class HtmlOutput(testtools.TestResult):
             ending=ending,
         )
         if self.html_file:
-            html_file = open(self.html_file, 'w')
-            html_file.write(output.encode('utf8'))
+            with open(self.html_file, 'wb') as html_file:
+                html_file.write(output.encode('utf8'))
 
     def _getReportAttributes(self):
         """Return report attributes as a list of (name, value)."""
@@ -646,28 +646,9 @@ class HtmlOutput(testtools.TestResult):
         tmpl = (has_output and TemplateData.REPORT_TEST_WITH_OUTPUT_TMPL
                 or TemplateData.REPORT_TEST_NO_OUTPUT_TMPL)
 
-        # Comments below from the original source project.
-        # TODO: clean this up within the context of a nose plugin.
-        # o and e should be byte string because they are collected
-        # from stdout and stderr?
-        if isinstance(o, str):
-            # TODO: some problem with 'string_escape': it escape \n
-            # and mess up formating
-            # uo = unicode(o.encode('string_escape'))
-            uo = o.decode('latin-1')
-        else:
-            uo = o
-        if isinstance(e, str):
-            # TODO: some problem with 'string_escape':
-            # it escape \n and mess up formating
-            # ue = unicode(e.encode('string_escape'))
-            ue = e.decode('latin-1')
-        else:
-            ue = e
-
         script = TemplateData.REPORT_TEST_OUTPUT_TMPL % dict(
             id=tid,
-            output=saxutils.escape(uo + ue),
+            output=saxutils.escape(o + e),
         )
 
         row = tmpl % dict(
