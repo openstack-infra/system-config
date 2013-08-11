@@ -37,10 +37,7 @@ define asterisk::function::customdir(
     notify  => Exec["asterisk-module-reload-${name}"],
     purge   => true,
     recurse => true,
-    require => [
-      File[$basedir],
-      Service['asterisk'],
-    ]
+    require => File[$basedir],
   }
 }
 
