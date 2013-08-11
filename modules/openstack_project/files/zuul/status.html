@@ -74,6 +74,67 @@ a:link {
     margin-top: 0.25em;
 }
 
+/** Theming for the progress bars to get them consisten across browers:
+      referenced from http://www.useragentman.com/blog/2012/01/03/cross-browser-html5-progress-bars-in-depth/
+*/
+
+progress,          /* All HTML5 progress enabled browsers */
+progress[role]     /* polyfill */
+{
+      /* Turns off styling - not usually needed, but good to know. */
+      appearance: none;
+      -moz-appearance: none;
+      -webkit-appearance: none;
+
+      /* gets rid of default border in Firefox and Opera. */
+      border: none;
+
+      /* Needs to be in here for Safari polyfill so background images work as expected. */
+      background-size: auto;
+}
+
+/* Polyfill */
+progress[role]:after {
+      background-image: none; /* removes default background from polyfill */
+}
+
+/* Ensure fallback text doesn't appear in polyfill */
+progress[role] strong {
+      display: none;
+}
+
+/** Background color */
+progress,                          /* Firefox  */
+progress[role][aria-valuenow] {    /* Polyfill */
+   background: #e6e6e6 !important; /* !important is needed by the polyfill */
+}
+
+/* Chrome */
+progress::-webkit-progress-bar {
+    background: #e6e6e6;
+}
+
+/** Foreground color */
+/* IE10 */
+progress {
+    color: #6b81a2;
+}
+
+/* Firefox */
+progress::-moz-progress-bar {
+    background: #6b81a2;
+}
+
+/* Chrome */
+progress::-webkit-progress-value {
+    background: #6b81a2;
+}
+
+/* Polyfill */
+progress[aria-valuenow]:before  {
+    background: #6b81a2;
+}
+
 </style>
 
     <TITLE>Zuul Status</TITLE>
