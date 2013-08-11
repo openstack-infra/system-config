@@ -232,6 +232,7 @@ puppet-openstack:
       - stackforge/puppet-tempest
     branches:
       - master
+      - stable/grizzly
 
 openstack-chef:
     events:
