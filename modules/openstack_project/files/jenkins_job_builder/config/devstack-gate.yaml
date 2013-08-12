@@ -8,12 +8,6 @@
           fail: true
       - timestamps
 
-    parameters:
-      - label:
-          name: NODE_LABEL
-          description: Label of node to use for this build
-          default: devstack-precise
-
     builders:
       - devstack-inprogress
       - devstack-checkout
@@ -40,12 +34,6 @@
           timeout: 180
           fail: true
       - timestamps
-
-    parameters:
-      - label:
-          name: NODE_LABEL
-          description: Label of node to use for this build
-          default: devstack-precise
 
     builders:
       - devstack-inprogress
@@ -74,12 +62,6 @@
           fail: true
       - timestamps
 
-    parameters:
-      - label:
-          name: NODE_LABEL
-          description: Label of node to use for this build
-          default: devstack-precise
-
     builders:
       - devstack-inprogress
       - devstack-checkout
@@ -106,12 +88,6 @@
           timeout: 90
           fail: true
       - timestamps
-
-    parameters:
-      - label:
-          name: NODE_LABEL
-          description: Label of node to use for this build
-          default: devstack-precise
 
     builders:
       - devstack-inprogress
@@ -141,12 +117,6 @@
           fail: true
       - timestamps
 
-    parameters:
-      - label:
-          name: NODE_LABEL
-          description: Label of node to use for this build
-          default: devstack-precise
-
     builders:
       - devstack-inprogress
       - devstack-checkout
@@ -174,12 +144,6 @@
           timeout: 180
           fail: true
       - timestamps
-
-    parameters:
-      - label:
-          name: NODE_LABEL
-          description: Label of node to use for this build
-          default: devstack-precise
 
     builders:
       - devstack-inprogress
@@ -210,12 +174,6 @@
           fail: true
       - timestamps
 
-    parameters:
-      - label:
-          name: NODE_LABEL
-          description: Label of node to use for this build
-          default: devstack-precise
-
     builders:
       - devstack-inprogress
       - devstack-checkout
@@ -243,12 +201,6 @@
           timeout: 180
           fail: true
       - timestamps
-
-    parameters:
-      - label:
-          name: NODE_LABEL
-          description: Label of node to use for this build
-          default: devstack-precise
 
     builders:
       - devstack-inprogress
@@ -535,12 +487,6 @@
           fail: true
       - timestamps
 
-    parameters:
-      - label:
-          name: NODE_LABEL
-          description: Label of node to use for this build
-          default: devstack-precise
-
     builders:
       - devstack-inprogress
       - devstack-checkout
@@ -571,12 +517,6 @@
           fail: true
       - timestamps
 
-    parameters:
-      - label:
-          name: NODE_LABEL
-          description: Label of node to use for this build
-          default: devstack-precise
-
     builders:
       - devstack-inprogress
       - devstack-checkout
@@ -604,12 +544,6 @@
           timeout: 180
           fail: true
       - timestamps
-
-    parameters:
-      - label:
-          name: NODE_LABEL
-          description: Label of node to use for this build
-          default: devstack-precise
 
     builders:
       - devstack-inprogress
@@ -640,12 +574,6 @@
           fail: true
       - timestamps
 
-    parameters:
-      - label:
-          name: NODE_LABEL
-          description: Label of node to use for this build
-          default: devstack-precise
-
     builders:
       - devstack-inprogress
       - devstack-checkout
@@ -672,12 +600,6 @@
           timeout: 180
           fail: true
       - timestamps
-
-    parameters:
-      - label:
-          name: NODE_LABEL
-          description: Label of node to use for this build
-          default: devstack-precise
 
     builders:
       - devstack-inprogress
