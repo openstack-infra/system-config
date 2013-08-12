@@ -446,6 +446,17 @@
 
 
 - project:
+    name: nodepool
+    github-org: openstack-infra
+    node: precise
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - python-jobs
+      - pypi-jobs
+
+
+- project:
     name: nose-html-output
     github-org: openstack-infra
     node: precise
