@@ -85,6 +85,8 @@ pipelines:
 jobs:
   - name: ^.*$
     parameter-function: set_log_url
+  - name: ^.*devstack-vm.*$
+    parameter-function: single_use_node
   - name: gate-tempest-devstack-vm-cinder
     branch: stable/folsom
   - name: gate-tempest-devstack-vm-smoke
