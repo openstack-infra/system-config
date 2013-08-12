@@ -121,6 +121,7 @@ heat:
       - openstack/python-heatclient
       - openstack/heat-cfntools
       - openstack/heat-templates
+      - openstack-dev/heat-cfnclient
     branches:
       - master
 
