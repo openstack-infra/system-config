@@ -85,12 +85,31 @@ def passthrough_filter(fname):
         yield line
 
 
+def does_file_exist(fname):
+    """Figure out if we'll be able to read this file.
+
+    Because we are handling the file streams as generators, we actually raise
+    an exception too late for us to be able to handle it before apache has
+    completely control. This attempts to do the same open outside of the
+    generator to trigger the IOError early enough for us to catch it, without
+    completely changing the logic flow, as we really want the generator
+    pipeline for performance reasons.
+
+    This does open us up to a small chance for a race where the file comes
+    or goes between this call and the next, however that is a vanishingly
+    small possibility.
+    """
+    f = open(fname)
+    f.close()
+
+
 def html_filter(fname):
     """Generator to read logs and output html in a stream.
 
     This produces a stream of the htmlified logs which lets us return
     data quickly to the user, and use minimal memory in the process.
     """
+
     yield _css_preamble()
     for line in fileinput.input(fname, openhook=fileinput.hook_compressed):
         newline = escape_html(line)
@@ -118,7 +137,7 @@ def safe_path(root, environ):
     remains under the root path. If not, we return None to indicate
     that we are very sad.
     """
-    path = wsgiref.util.request_uri(environ)
+    path = wsgiref.util.request_uri(environ, include_query=0)
     match = re.search('htmlify/(.*)', path)
     raw = match.groups(1)[0]
     newpath = os.path.abspath(os.path.join(root, raw))
@@ -129,8 +148,26 @@ def safe_path(root, environ):
 
 
 def should_be_html(environ):
-    """Simple content negotiation."""
-    return 'HTTP_ACCEPT' in environ and 'text/html' in environ['HTTP_ACCEPT']
+    """Simple content negotiation.
+
+    If the client supports content negotiation, and asks for text/html,
+    we give it to them, unless they also specifically want to override
+    by passing ?content-type=text/plain in the query.
+
+    This should be able to handle the case of dumb clients defaulting to
+    html, but also let devs override the text format when 35 MB html
+    log files kill their browser (as per a nova-api log).
+    """
+    text_override = False
+    accepts_html = ('HTTP_ACCEPT' in environ and
+                    'text/html' in environ['HTTP_ACCEPT'])
+    parameters = cgi.parse_qs(environ.get('QUERY_STRING', ''))
+    if 'content-type' in parameters:
+        ct = cgi.escape(parameters['content-type'][0])
+        if ct == 'text/plain':
+            text_override = True
+
+    return accepts_html and not text_override
 
 
 def application(environ, start_response):
@@ -146,11 +183,13 @@ def application(environ, start_response):
     try:
         if should_be_html(environ):
             response_headers = [('Content-type', 'text/html')]
+            does_file_exist(logpath)
             generator = html_filter(logpath)
             start_response(status, response_headers)
             return generator
         else:
             response_headers = [('Content-type', 'text/plain')]
+            does_file_exist(logpath)
             generator = passthrough_filter(logpath)
             start_response(status, response_headers)
             return generator
