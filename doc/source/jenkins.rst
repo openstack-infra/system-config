@@ -85,7 +85,7 @@ framework. This framework runs the devstack exercises and Tempest
 smoketests against a devstack install on single use cloud servers. The
 devstack gate source can be found on `Github
 <https://github.com/openstack-infra/devstack-gate>`_ and the `Readme
-<https://github.com/openstack-infra/devstack-gate/blob/master/README.md>`_
+<https://github.com/openstack-infra/devstack-gate/blob/master/README.rst>`_
 describes the process of using devstack gate to run your own devstack
 based tests.
 
