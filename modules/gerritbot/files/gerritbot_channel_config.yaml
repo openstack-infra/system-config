@@ -21,6 +21,7 @@ openstack-infra:
       - openstack-infra/jenkins-job-builder
       - openstack-infra/lodgeit
       - openstack-infra/meetbot
+      - openstack-infra/nodepool
       - openstack-infra/nose-html-output
       - openstack-infra/odsreg
       - openstack-infra/publications

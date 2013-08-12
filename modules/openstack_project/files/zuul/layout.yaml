@@ -249,6 +249,22 @@ projects:
     gate:
       - gate-noop
 
+  - name: openstack-infra/nodepool
+    check:
+      - gate-noop
+    gate:
+      - gate-noop
+    post:
+      - nodepool-branch-tarball
+    pre-release:
+      - nodepool-tarball
+    release:
+      - nodepool-tarball:
+        - nodepool-pypi-upload:
+          - post-mirror-python26
+          - post-mirror-python27
+          - post-mirror-python33
+
   - name: openstack-infra/nose-html-output
     check:
       - gate-noop
