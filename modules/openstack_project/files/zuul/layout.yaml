@@ -2697,3 +2697,15 @@ projects:
           - post-mirror-python26
           - post-mirror-python27
           - post-mirror-python33
+
+  - name: stackforge/tuskar
+    check:
+      - gate-noop
+    gate:
+      - gate-noop
+
+  - name: stackforge/python-tuskarclient
+    check:
+      - gate-noop
+    gate:
+      - gate-noop
