@@ -304,6 +304,7 @@ tuskar:
       - x-vrif-minus-2
     projects:
       - stackforge/tuskar
+      - stackforge/tuskar-ui
       - stackforge/python-tuskarclient
     branches:
       - master
