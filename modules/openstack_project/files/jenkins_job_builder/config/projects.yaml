@@ -1275,3 +1275,13 @@
     jobs:
       - python-jobs
       - pypi-jobs
+
+- project:
+    name: pecan
+    github-org: stackforge
+    node: precise
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - python-jobs
+      - pypi-jobs
