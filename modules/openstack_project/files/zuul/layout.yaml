@@ -176,8 +176,6 @@ jobs:
     voting: false
   - name: gate-savanna-dashboard-requirements
     voting: false
-  - name: ^gate-puppet-.*-puppet-lint$
-    voting: false
   - name: gate-django_openstack_auth-pep8
     voting: false
   - name: gate-django_openstack_auth-docs
