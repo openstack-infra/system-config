@@ -81,7 +81,7 @@ def link_timestamp(line):
 
 
 def passthrough_filter(fname):
-    for line in fileinput.input(fname, openhook=fileinput.hook_compressed):
+    for line in fileinput.FileInput(fname, openhook=fileinput.hook_compressed):
         yield line
 
 
@@ -111,7 +111,7 @@ def html_filter(fname):
     """
 
     yield _css_preamble()
-    for line in fileinput.input(fname, openhook=fileinput.hook_compressed):
+    for line in fileinput.FileInput(fname, openhook=fileinput.hook_compressed):
         newline = escape_html(line)
         newline = color_by_sev(newline)
         newline = link_timestamp(newline)
@@ -122,7 +122,7 @@ def html_filter(fname):
 def htmlify_stdin():
     out = sys.stdout
     out.write(_css_preamble())
-    for line in fileinput.input():
+    for line in fileinput.FileInput():
         newline = escape_html(line)
         newline = color_by_sev(newline)
         newline = link_timestamp(newline)
