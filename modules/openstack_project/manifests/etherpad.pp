@@ -11,7 +11,10 @@ class openstack_project::etherpad (
   }
 
   include etherpad_lite
-  include etherpad_lite::backup
+  mysql_backup::backup { 'etherpad-lite':
+    dest_dir => "${::etherpad_lite::base_log_dir}/${::etherpad_lite::ep_user}/db.sql.gz",
+    require  => Class['etherpad_lite'],
+  }
 
   class { 'etherpad_lite::apache':
     ssl_cert_file           => '/etc/ssl/certs/etherpad.openstack.org.pem',
