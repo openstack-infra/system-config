@@ -118,14 +118,30 @@ should look something like::
 
       jobs:
         - python-jobs
-        - gate-{name}-pyflakes
-        - gate-{name}-pylint
 
 List of jobs included to the ``python-jobs`` jobs group is located in
 ``modules/openstack_project/files/jenkins_job_builder/config/python-jobs.yaml``.
+For document publication there's also a publisher job template for the
+popular `Read the Docs`_ documentation hosting service, which can be
+used by specifying the ``rtfd-id`` for the project (obtained from your
+readthedocs.org account) and then adding the ``hook-{name}-rtfd``
+template to the jobs list::
 
-If you aren't ready to run any gate tests yet, you don't need to edit
-``projects.yaml``.
+  - project:
+      name: project-name
+      github-org: stackforge
+      node: precise
+      rtfd-id: 7095
+      tarball-site: tarballs.openstack.org
+
+      jobs:
+        - python-jobs
+        - hook-{name}-rtfd
+
+.. _Read the Docs: https://readthedocs.org/
+
+If you aren't ready to run any gate tests or other project-specific
+jobs yet, you don't need to edit ``projects.yaml``.
 
 Now that we have Jenkins jobs we need to tell Zuul to run them when
 appropriate. Edit
@@ -135,23 +151,19 @@ should look something like::
 
   - name: stackforge/project-name
     check:
-      - gate-project-name-pyflakes
-        - gate-project-name-pep8
-        - gate-project-name-docs
-        - gate-project-name-python26
-        - gate-project-name-python27
-    gate:
-      - gate-project-name-pep8
-      - gate-project-name-pyflakes
       - gate-project-name-docs
+      - gate-project-name-pep8
+      - gate-project-name-python26
+      - gate-project-name-python27
+    gate:
+      - gate-project-name-docs
+      - gate-project-name-pep8
       - gate-project-name-python26
       - gate-project-name-python27
     post:
-      - project-name-coverage
-      - project-name-docs
       - project-name-branch-tarball
-    publish:
-      - project-name-docs
+      - project-name-coverage
+      - hook-project-name-rtfd
 
 If you aren't ready to run any gate tests yet and did not configure
 python-jobs in project.yaml, it should look like this instead::
