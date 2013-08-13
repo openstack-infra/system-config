@@ -253,9 +253,9 @@ projects:
 
   - name: openstack-infra/nodepool
     check:
-      - gate-noop
+      - gate-nodepool-pep8
     gate:
-      - gate-noop
+      - gate-nodepool-pep8
     post:
       - nodepool-branch-tarball
     pre-release:
