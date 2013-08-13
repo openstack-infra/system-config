@@ -81,12 +81,6 @@
           fail: true
       - timestamps
 
-    parameters:
-      - label:
-          name: NODE_LABEL
-          description: Label of node to use for this build
-          default: '{node}'
-
     builders:
       - gerrit-git-prep
       - python27:
