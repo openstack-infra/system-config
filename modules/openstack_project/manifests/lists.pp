@@ -30,6 +30,15 @@ class openstack_project::lists(
     User::Virtual::Localuser['smaffulli'],
   )
 
+  maillist { 'marketing-content':
+    ensure      => present,
+    admin       => 'margie@openstack.org',
+    password    => $listpassword,
+    description => 'OpenStack Project Marketing Content Team',
+    webserver   => $listdomain,
+    mailserver  => $listdomain,
+  }
+
   maillist { 'openstack-es':
     ensure      => present,
     admin       => 'flavio@redhat.com',
