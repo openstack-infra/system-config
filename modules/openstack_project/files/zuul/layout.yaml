@@ -2337,13 +2337,11 @@ projects:
 
   - name: stackforge/murano-api
     check:
-      - gate-murano-api-pyflakes
       - gate-murano-api-pep8
       - gate-murano-api-python26
       - gate-murano-api-python27
     gate:
       - gate-murano-api-pep8
-      - gate-murano-api-pyflakes
       - gate-murano-api-python26
       - gate-murano-api-python27
     post:
@@ -2355,13 +2353,11 @@ projects:
 
   - name: stackforge/murano-conductor
     check:
-      - gate-murano-conductor-pyflakes
       - gate-murano-conductor-pep8
       - gate-murano-conductor-python26
       - gate-murano-conductor-python27
     gate:
       - gate-murano-conductor-pep8
-      - gate-murano-conductor-pyflakes
       - gate-murano-conductor-python26
       - gate-murano-conductor-python27
     post:
@@ -2373,13 +2369,11 @@ projects:
 
   - name: stackforge/murano-dashboard
     check:
-      - gate-murano-dashboard-pyflakes
       - gate-murano-dashboard-pep8
       - gate-murano-dashboard-python26
       - gate-murano-dashboard-python27
     gate:
       - gate-murano-dashboard-pep8
-      - gate-murano-dashboard-pyflakes
       - gate-murano-dashboard-python26
       - gate-murano-dashboard-python27
     post:
@@ -2409,13 +2403,11 @@ projects:
 
   - name: stackforge/python-muranoclient
     check:
-      - gate-python-muranoclient-pyflakes
       - gate-python-muranoclient-pep8
       - gate-python-muranoclient-python26
       - gate-python-muranoclient-python27
     gate:
       - gate-python-muranoclient-pep8
-      - gate-python-muranoclient-pyflakes
       - gate-python-muranoclient-python26
       - gate-python-muranoclient-python27
     post:
@@ -2425,6 +2417,26 @@ projects:
     release:
       - python-muranoclient-tarball:
         - python-muranoclient-pypi-upload:
+          - post-mirror-python26
+          - post-mirror-python27
+          - post-mirror-python33
+
+  - name: stackforge/murano-common
+    check:
+      - gate-murano-common-pep8
+      - gate-murano-common-python26
+      - gate-murano-common-python27
+    gate:
+      - gate-murano-common-pep8
+      - gate-murano-common-python26
+      - gate-murano-common-python27
+    post:
+      - murano-common-branch-tarball
+    pre-release:
+      - murano-common-tarball
+    release:
+      - murano-common-tarball:
+        - murano-common-pypi-upload:
           - post-mirror-python26
           - post-mirror-python27
           - post-mirror-python33
