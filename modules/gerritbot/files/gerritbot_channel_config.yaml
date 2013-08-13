@@ -228,6 +228,7 @@ murano:
       - stackforge/murano-docs
       - stackforge/murano-tests
       - stackforge/python-muranoclient
+      - stackforge/murano-common
     branches:
       - master
 
