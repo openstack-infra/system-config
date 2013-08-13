@@ -2741,3 +2741,25 @@ projects:
       - gate-noop
     gate:
       - gate-noop
+
+  - name: stackforge/pecan
+    check:
+      - gate-pecan-pep8
+      - gate-pecan-python26
+      - gate-pecan-python27
+      - gate-pecan-python33
+    gate:
+      - gate-pecan-pep8
+      - gate-pecan-python26
+      - gate-pecan-python27
+      - gate-pecan-python33
+    post:
+      - pecan-branch-tarball
+    pre-release:
+      - pecan-tarball
+    release:
+      - pecan-tarball:
+        - pecan-pypi-upload:
+          - post-mirror-python26
+          - post-mirror-python27
+          - post-mirror-python33
