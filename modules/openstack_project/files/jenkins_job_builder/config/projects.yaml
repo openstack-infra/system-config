@@ -44,6 +44,18 @@
       - gate-{name}-docs
 
 - project:
+    name: murano-common
+    github-org: stackforge
+    node: precise
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - python-jobs
+      - pypi-jobs
+      - gate-{name}-pyflakes
+      - gate-{name}-docs
+
+- project:
     name: climate
     github-org: stackforge
     node: precise
