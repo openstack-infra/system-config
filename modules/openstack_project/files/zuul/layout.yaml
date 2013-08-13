@@ -2723,3 +2723,9 @@ projects:
       - gate-noop
     gate:
       - gate-noop
+      
+  - name: openstack-infra/groups
+    check:
+      - gate-noop
+    gate:
+      - gate-noop
