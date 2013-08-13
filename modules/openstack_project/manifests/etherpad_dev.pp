@@ -19,7 +19,11 @@ class openstack_project::etherpad_dev (
     ep_headings    => true
   }
 
-  include etherpad_lite::backup
+  include mysql_backup
+  mysql_backup::backup { 'etherpad-lite':
+    $dest   => "${::etherpad_lite::base_log_dir}/${::etherpad_lite::ep_user}/db.sql.gz",
+    require => Class['etherpad_lite'],
+  }
 
   class { 'etherpad_lite::apache':
     ssl_cert_file  => '/etc/ssl/certs/ssl-cert-snakeoil.pem',
