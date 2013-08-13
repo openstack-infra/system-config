@@ -2780,3 +2780,9 @@ projects:
           - post-mirror-python26
           - post-mirror-python27
           - post-mirror-python33
+
+  - name: openstack-infra/groups
+    check:
+      - gate-noop
+    gate:
+      - gate-noop
