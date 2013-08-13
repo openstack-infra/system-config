@@ -2429,6 +2429,28 @@ projects:
           - post-mirror-python27
           - post-mirror-python33
 
+  - name: stackforge/murano-common
+    check:
+      - gate-murano-common-pyflakes
+      - gate-murano-common-pep8
+      - gate-murano-common-python26
+      - gate-murano-common-python27
+    gate:
+      - gate-murano-common-pep8
+      - gate-murano-common-pyflakes
+      - gate-murano-common-python26
+      - gate-murano-common-python27
+    post:
+      - murano-common-branch-tarball
+    pre-release:
+      - murano-common-tarball
+    release:
+      - murano-common-tarball:
+        - murano-common-pypi-upload:
+          - post-mirror-python26
+          - post-mirror-python27
+          - post-mirror-python33
+
   - name: stackforge/opencafe
     check:
       - gate-noop
