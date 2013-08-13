@@ -11,7 +11,9 @@ class openstack_project::etherpad (
   }
 
   include etherpad_lite
-  include etherpad_lite::backup
+  mysql_backup::backup { 'etherpad-lite':
+    require  => Class['etherpad_lite'],
+  }
 
   class { 'etherpad_lite::apache':
     ssl_cert_file           => '/etc/ssl/certs/etherpad.openstack.org.pem',
