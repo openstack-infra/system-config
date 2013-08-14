@@ -1050,6 +1050,34 @@
           branch-designator: master
           branch-override: master
           node: devstack-precise
+      - '{pipeline}-tempest-devstack-vm-master-client-{branch-designator}-server':
+          pipeline: check
+          node: 'devstack-precise || devstack-precise-check'
+          branch-designator: stable-grizzly
+          branch-override: stable/grizzly
+      - '{pipeline}-tempest-devstack-vm-master-client-{branch-designator}-server':
+          pipeline: check
+          node: 'devstack-precise || devstack-precise-check'
+          branch-designator: stable-havana
+          branch-override: stable/havana
+      - '{pipeline}-tempest-devstack-vm-master-client-{branch-designator}-server':
+          pipeline: gate
+          node: devstack-precise
+          branch-designator: stable-grizzly
+          branch-override: stable/grizzly
+      - '{pipeline}-tempest-devstack-vm-master-client-{branch-designator}-server':
+          pipeline: gate
+          node: devstack-precise
+          branch-designator: stable-havana
+          branch-override: stable/havana
+      - 'periodic-tempest-devstack-vm-master-client-{branch-designator}-server':
+          node: devstack-precise
+          branch-designator: stable-grizzly
+          branch-override: stable/grizzly
+      - 'periodic-tempest-devstack-vm-master-client-{branch-designator}-server':
+          node: devstack-precise
+          branch-designator: stable-havana
+          branch-override: stable/havana
 
 
 - project:

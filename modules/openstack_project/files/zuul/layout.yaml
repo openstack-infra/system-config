@@ -115,6 +115,8 @@ jobs:
     branch: ^(?!stable/grizzly).*$
   - name: ^(gate|check)-tempest-devstack-vm-neutron-pg-isolated-default$
     branch: ^(?!stable/grizzly).*$
+  - name: ^(gate|check)-tempest-devstack-vm-master-client-stable-(grizzly|havana)-server$
+    voting: false
   - name: ^(gate|check)-tempest-devstack-vm-neutron-full-default$
     branch: ^(?!stable/grizzly).*$
     voting: false
@@ -917,6 +919,8 @@ projects:
       - gate-tempest-devstack-vm-large-ops-default
       - gate-tempest-devstack-vm-neutron-large-ops-default
       - check-grenade-devstack-vm
+      - check-tempest-devstack-vm-master-client-stable-grizzly-server
+      - check-tempest-devstack-vm-master-client-stable-havana-server
     gate:
       - gate-oslo.config-requirements
       - gate-oslo.config-docs
@@ -929,6 +933,8 @@ projects:
       - gate-tempest-devstack-vm-large-ops-default
       - gate-tempest-devstack-vm-neutron-large-ops-default
       - gate-grenade-devstack-vm
+      - gate-tempest-devstack-vm-master-client-stable-grizzly-server
+      - gate-tempest-devstack-vm-master-client-stable-havana-server
     post:
       - oslo.config-branch-tarball
       - oslo.config-docs
@@ -1206,6 +1212,8 @@ projects:
       - gate-tempest-devstack-vm-large-ops-default
       - gate-tempest-devstack-vm-neutron-large-ops-default
       - check-grenade-devstack-vm
+      - check-tempest-devstack-vm-master-client-stable-grizzly-server
+      - check-tempest-devstack-vm-master-client-stable-havana-server
     gate:
       - gate-python-cinderclient-requirements
       - gate-python-cinderclient-docs
@@ -1220,6 +1228,8 @@ projects:
       - gate-tempest-devstack-vm-large-ops-default
       - gate-tempest-devstack-vm-neutron-large-ops-default
       - gate-grenade-devstack-vm
+      - gate-tempest-devstack-vm-master-client-stable-grizzly-server
+      - gate-tempest-devstack-vm-master-client-stable-havana-server
     experimental:
       - gate-grenade-devstack-vm-stable
       - gate-devstack-vm-cells-default
@@ -1250,6 +1260,8 @@ projects:
       - gate-tempest-devstack-vm-large-ops-default
       - gate-tempest-devstack-vm-neutron-large-ops-default
       - check-grenade-devstack-vm
+      - check-tempest-devstack-vm-master-client-stable-grizzly-server
+      - check-tempest-devstack-vm-master-client-stable-havana-server
     gate:
       - gate-python-glanceclient-requirements
       - gate-python-glanceclient-docs
@@ -1262,6 +1274,8 @@ projects:
       - gate-tempest-devstack-vm-large-ops-default
       - gate-tempest-devstack-vm-neutron-large-ops-default
       - gate-grenade-devstack-vm
+      - gate-tempest-devstack-vm-master-client-stable-grizzly-server
+      - gate-tempest-devstack-vm-master-client-stable-havana-server
     experimental:
       - gate-grenade-devstack-vm-stable
       - gate-devstack-vm-cells-default
@@ -1292,6 +1306,8 @@ projects:
       - gate-tempest-devstack-vm-large-ops-default
       - gate-tempest-devstack-vm-neutron-large-ops-default
       - check-grenade-devstack-vm
+      - check-tempest-devstack-vm-master-client-stable-grizzly-server
+      - check-tempest-devstack-vm-master-client-stable-havana-server
     gate:
       - gate-python-keystoneclient-requirements
       - gate-python-keystoneclient-docs
@@ -1304,6 +1320,8 @@ projects:
       - gate-tempest-devstack-vm-large-ops-default
       - gate-tempest-devstack-vm-neutron-large-ops-default
       - gate-grenade-devstack-vm
+      - gate-tempest-devstack-vm-master-client-stable-grizzly-server
+      - gate-tempest-devstack-vm-master-client-stable-havana-server
     experimental:
       - gate-grenade-devstack-vm-stable
       - gate-devstack-vm-cells-default
@@ -1335,6 +1353,8 @@ projects:
       - gate-tempest-devstack-vm-large-ops-default
       - gate-tempest-devstack-vm-neutron-large-ops-default
       - check-grenade-devstack-vm
+      - check-tempest-devstack-vm-master-client-stable-grizzly-server
+      - check-tempest-devstack-vm-master-client-stable-havana-server
     gate:
       - gate-python-novaclient-requirements
       - gate-python-novaclient-docs
@@ -1349,6 +1369,8 @@ projects:
       - gate-tempest-devstack-vm-large-ops-default
       - gate-tempest-devstack-vm-neutron-large-ops-default
       - gate-grenade-devstack-vm
+      - gate-tempest-devstack-vm-master-client-stable-grizzly-server
+      - gate-tempest-devstack-vm-master-client-stable-havana-server
     experimental:
       - gate-grenade-devstack-vm-stable
       - gate-devstack-vm-cells-default
@@ -1410,6 +1432,8 @@ projects:
       - gate-tempest-devstack-vm-large-ops-default
       - gate-tempest-devstack-vm-neutron-large-ops-default
       - check-grenade-devstack-vm
+      - check-tempest-devstack-vm-master-client-stable-grizzly-server
+      - check-tempest-devstack-vm-master-client-stable-havana-server
     gate:
       - gate-python-neutronclient-requirements
       - gate-python-neutronclient-docs
@@ -1426,6 +1450,8 @@ projects:
       - gate-tempest-devstack-vm-large-ops-default
       - gate-tempest-devstack-vm-neutron-large-ops-default
       - gate-grenade-devstack-vm
+      - gate-tempest-devstack-vm-master-client-stable-grizzly-server
+      - gate-tempest-devstack-vm-master-client-stable-havana-server
     experimental:
       - gate-grenade-devstack-vm-stable
       - gate-devstack-vm-cells-default
@@ -1452,6 +1478,8 @@ projects:
       - gate-python-swiftclient-python33
       - gate-python-swiftclient-pypy
       - check-swift-devstack-vm-functional-default
+      - check-tempest-devstack-vm-master-client-stable-grizzly-server
+      - check-tempest-devstack-vm-master-client-stable-havana-server
     gate:
       - gate-python-swiftclient-requirements
       - gate-python-swiftclient-docs
@@ -1460,6 +1488,8 @@ projects:
       - gate-python-swiftclient-python27
       - gate-python-swiftclient-pypy
       - gate-swift-devstack-vm-functional-default
+      - gate-tempest-devstack-vm-master-client-stable-grizzly-server
+      - gate-tempest-devstack-vm-master-client-stable-havana-server
     post:
       - python-swiftclient-branch-tarball
       - python-swiftclient-coverage
@@ -1699,6 +1729,8 @@ projects:
       - gate-tempest-devstack-vm-large-ops-default
       - gate-tempest-devstack-vm-neutron-large-ops-default
       - check-grenade-devstack-vm
+      - check-tempest-devstack-vm-master-client-stable-grizzly-server
+      - check-tempest-devstack-vm-master-client-stable-havana-server
     gate:
       - gate-tempest-requirements
       - gate-tempest-pep8
@@ -1710,6 +1742,8 @@ projects:
       - gate-tempest-devstack-vm-large-ops-default
       - gate-tempest-devstack-vm-neutron-large-ops-default
       - gate-grenade-devstack-vm
+      - gate-tempest-devstack-vm-master-client-stable-grizzly-server
+      - gate-tempest-devstack-vm-master-client-stable-havana-server
     experimental:
       - gate-tempest-devstack-vm-heat-slow-default
       - gate-grenade-devstack-vm-stable
@@ -1732,6 +1766,8 @@ projects:
       - periodic-tempest-devstack-vm-neutron-pg-stable-havana
       - periodic-tempest-devstack-vm-large-ops-stable-havana
       - periodic-tempest-devstack-vm-neutron-large-ops-stable-havana
+      - periodic-tempest-devstack-vm-master-client-stable-grizzly-server
+      - periodic-tempest-devstack-vm-master-client-stable-havana-server
 
   - name: openstack/ceilometer
     check:
