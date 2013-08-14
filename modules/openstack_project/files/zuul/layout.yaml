@@ -73,6 +73,19 @@ pipelines:
         - event: comment-added
           comment_filter: (?i)^\s*recheck(( (?:bug|lp)[\s#:]*(\d+))|( no bug))\s*$
 
+  - name: experimental
+    description: On-demand pipeline for requesting a run against a set of jobs that are not yet gating. Leave review comment of "check experimental" to run jobs in this pipeline.
+    manager: IndependentPipelineManager
+    precedence: low
+    trigger:
+      gerrit:
+        - event: comment-added
+          comment_filter: (?i)^\s*check experimental\s*$
+    success:
+      force-message: true
+    failure:
+      force-message: true
+
   - name: periodic
     description: Jobs in this queue are triggered on a timer.
     manager: IndependentPipelineManager
@@ -513,7 +526,6 @@ projects:
       - gate-tempest-devstack-vm-postgres-full
       - gate-tempest-devstack-vm-neutron
       - gate-grenade-devstack-vm
-      - gate-grenade-devstack-vm-stable
     gate:
       - gate-cinder-requirements
       - gate-cinder-docs
@@ -527,6 +539,9 @@ projects:
       - gate-tempest-devstack-vm-postgres-full
       - gate-tempest-devstack-vm-neutron
       - gate-grenade-devstack-vm
+    experimental:
+      - gate-grenade-devstack-vm-stable
+      - gate-devstack-vm-cells
     post:
       - cinder-branch-tarball
       - cinder-coverage
@@ -557,7 +572,6 @@ projects:
       - gate-tempest-devstack-vm-postgres-full
       - gate-tempest-devstack-vm-neutron
       - gate-grenade-devstack-vm
-      - gate-grenade-devstack-vm-stable
     gate:
       - gate-glance-requirements
       - gate-glance-docs
@@ -571,6 +585,9 @@ projects:
       - gate-tempest-devstack-vm-postgres-full
       - gate-tempest-devstack-vm-neutron
       - gate-grenade-devstack-vm
+    experimental:
+      - gate-grenade-devstack-vm-stable
+      - gate-devstack-vm-cells
     post:
       - glance-branch-tarball
       - glance-coverage
@@ -605,7 +622,6 @@ projects:
       - gate-tempest-devstack-vm-postgres-full
       - gate-tempest-devstack-vm-neutron
       - gate-grenade-devstack-vm
-      - gate-grenade-devstack-vm-stable
     gate:
       - gate-horizon-requirements
       - gate-horizon-docs
@@ -621,6 +637,9 @@ projects:
       - gate-tempest-devstack-vm-postgres-full
       - gate-tempest-devstack-vm-neutron
       - gate-grenade-devstack-vm
+    experimental:
+      - gate-grenade-devstack-vm-stable
+      - gate-devstack-vm-cells
     post:
       - horizon-branch-tarball
       - horizon-coverage
@@ -677,7 +696,6 @@ projects:
       - gate-tempest-devstack-vm-postgres-full
       - gate-tempest-devstack-vm-neutron
       - gate-grenade-devstack-vm
-      - gate-grenade-devstack-vm-stable
     gate:
       - gate-keystone-requirements
       - gate-keystone-docs
@@ -691,6 +709,9 @@ projects:
       - gate-tempest-devstack-vm-postgres-full
       - gate-tempest-devstack-vm-neutron
       - gate-grenade-devstack-vm
+    experimental:
+      - gate-grenade-devstack-vm-stable
+      - gate-devstack-vm-cells
     post:
       - keystone-branch-tarball
       - keystone-coverage
@@ -719,14 +740,11 @@ projects:
       - gate-nova-python27
       - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
-      - gate-devstack-vm-cells
       - gate-tempest-devstack-vm-testr-full
       - gate-tempest-devstack-vm-cinder
       - gate-tempest-devstack-vm-postgres-full
       - gate-tempest-devstack-vm-neutron
-      - gate-tempest-devstack-vm-neutron-full
       - gate-grenade-devstack-vm
-      - gate-grenade-devstack-vm-stable
       - gate-nova-pylint
     gate:
       - gate-nova-requirements
@@ -741,6 +759,10 @@ projects:
       - gate-tempest-devstack-vm-postgres-full
       - gate-tempest-devstack-vm-neutron
       - gate-grenade-devstack-vm
+    experimental:
+      - gate-grenade-devstack-vm-stable
+      - gate-devstack-vm-cells
+      - gate-tempest-devstack-vm-neutron-full
     post:
       - nova-branch-tarball
       - nova-coverage
@@ -872,7 +894,6 @@ projects:
       - gate-neutron-python26
       - gate-neutron-python27
       - gate-tempest-devstack-vm-neutron
-      - gate-tempest-devstack-vm-neutron-full
     gate:
       - gate-neutron-requirements
       - gate-neutron-docs
@@ -880,6 +901,7 @@ projects:
       - gate-neutron-python26
       - gate-neutron-python27
       - gate-tempest-devstack-vm-neutron
+    experimental:
       - gate-tempest-devstack-vm-neutron-full
     post:
       - neutron-branch-tarball
@@ -912,7 +934,6 @@ projects:
       - gate-tempest-devstack-vm-neutron
       - gate-tempest-devstack-vm-postgres-full
       - gate-grenade-devstack-vm
-      - gate-grenade-devstack-vm-stable
     gate:
       - gate-swift-requirements
       - gate-swift-docs
@@ -927,6 +948,9 @@ projects:
       - gate-tempest-devstack-vm-neutron
       - gate-tempest-devstack-vm-postgres-full
       - gate-grenade-devstack-vm
+    experimental:
+      - gate-grenade-devstack-vm-stable
+      - gate-devstack-vm-cells
     post:
       - swift-branch-tarball
       - swift-coverage
@@ -979,7 +1003,6 @@ projects:
       - gate-tempest-devstack-vm-cinder
       - gate-tempest-devstack-vm-neutron
       - gate-grenade-devstack-vm
-      - gate-grenade-devstack-vm-stable
     gate:
       - gate-python-cinderclient-requirements
       - gate-python-cinderclient-docs
@@ -993,6 +1016,9 @@ projects:
       - gate-tempest-devstack-vm-cinder
       - gate-tempest-devstack-vm-neutron
       - gate-grenade-devstack-vm
+    experimental:
+      - gate-grenade-devstack-vm-stable
+      - gate-devstack-vm-cells
     post:
       - python-cinderclient-branch-tarball
       - python-cinderclient-coverage
@@ -1021,7 +1047,6 @@ projects:
       - gate-tempest-devstack-vm-cinder
       - gate-tempest-devstack-vm-neutron
       - gate-grenade-devstack-vm
-      - gate-grenade-devstack-vm-stable
     gate:
       - gate-python-glanceclient-requirements
       - gate-python-glanceclient-docs
@@ -1035,6 +1060,9 @@ projects:
       - gate-tempest-devstack-vm-cinder
       - gate-tempest-devstack-vm-neutron
       - gate-grenade-devstack-vm
+    experimental:
+      - gate-grenade-devstack-vm-stable
+      - gate-devstack-vm-cells
     post:
       - python-glanceclient-branch-tarball
       - python-glanceclient-coverage
@@ -1063,7 +1091,6 @@ projects:
       - gate-tempest-devstack-vm-cinder
       - gate-tempest-devstack-vm-neutron
       - gate-grenade-devstack-vm
-      - gate-grenade-devstack-vm-stable
     gate:
       - gate-python-keystoneclient-requirements
       - gate-python-keystoneclient-docs
@@ -1077,6 +1104,9 @@ projects:
       - gate-tempest-devstack-vm-cinder
       - gate-tempest-devstack-vm-neutron
       - gate-grenade-devstack-vm
+    experimental:
+      - gate-grenade-devstack-vm-stable
+      - gate-devstack-vm-cells
     post:
       - python-keystoneclient-branch-tarball
       - python-keystoneclient-coverage
@@ -1100,13 +1130,11 @@ projects:
       - gate-python-novaclient-python33
       - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
-      - gate-devstack-vm-cells
       - gate-tempest-devstack-vm-testr-full
       - gate-tempest-devstack-vm-postgres-full
       - gate-tempest-devstack-vm-cinder
       - gate-tempest-devstack-vm-neutron
       - gate-grenade-devstack-vm
-      - gate-grenade-devstack-vm-stable
     gate:
       - gate-python-novaclient-requirements
       - gate-python-novaclient-docs
@@ -1120,6 +1148,9 @@ projects:
       - gate-tempest-devstack-vm-cinder
       - gate-tempest-devstack-vm-neutron
       - gate-grenade-devstack-vm
+    experimental:
+      - gate-grenade-devstack-vm-stable
+      - gate-devstack-vm-cells
     post:
       - python-novaclient-branch-tarball
       - python-novaclient-coverage
@@ -1175,7 +1206,6 @@ projects:
       - gate-tempest-devstack-vm-cinder
       - gate-tempest-devstack-vm-neutron
       - gate-grenade-devstack-vm
-      - gate-grenade-devstack-vm-stable
     gate:
       - gate-python-neutronclient-requirements
       - gate-python-neutronclient-docs
@@ -1189,6 +1219,9 @@ projects:
       - gate-tempest-devstack-vm-cinder
       - gate-tempest-devstack-vm-neutron
       - gate-grenade-devstack-vm
+    experimental:
+      - gate-grenade-devstack-vm-stable
+      - gate-devstack-vm-cells
     post:
       - python-neutronclient-branch-tarball
       - python-neutronclient-coverage
@@ -1259,10 +1292,10 @@ projects:
     check:
       - gate-grenade-noop
       - gate-grenade-devstack-vm
-      - gate-grenade-devstack-vm-stable
     gate:
       - gate-grenade-noop
       - gate-grenade-devstack-vm
+    experimental:
       - gate-grenade-devstack-vm-stable
 
   - name: openstack-dev/hacking
@@ -1321,6 +1354,8 @@ projects:
       - gate-tempest-devstack-vm-postgres-full
       - gate-tempest-devstack-vm-neutron
       - gate-grenade-devstack-vm
+    experimental:
+      - gate-devstack-vm-cells
     post:
       - pbr-branch-tarball
       - pbr-coverage
@@ -1340,13 +1375,11 @@ projects:
     check:
       - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
-      - gate-devstack-vm-cells
       - gate-tempest-devstack-vm-testr-full
       - gate-tempest-devstack-vm-cinder
       - gate-tempest-devstack-vm-postgres-full
       - gate-tempest-devstack-vm-neutron
       - gate-grenade-devstack-vm
-      - gate-grenade-devstack-vm-stable
     gate:
       - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
@@ -1355,18 +1388,19 @@ projects:
       - gate-tempest-devstack-vm-postgres-full
       - gate-tempest-devstack-vm-neutron
       - gate-grenade-devstack-vm
+    experimental:
+      - gate-grenade-devstack-vm-stable
+      - gate-devstack-vm-cells
 
   - name: openstack-infra/devstack-gate
     check:
       - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
-      - gate-devstack-vm-cells
       - gate-tempest-devstack-vm-testr-full
       - gate-tempest-devstack-vm-cinder
       - gate-tempest-devstack-vm-postgres-full
       - gate-tempest-devstack-vm-neutron
       - gate-grenade-devstack-vm
-      - gate-grenade-devstack-vm-stable
     gate:
       - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
@@ -1375,6 +1409,9 @@ projects:
       - gate-tempest-devstack-vm-postgres-full
       - gate-tempest-devstack-vm-neutron
       - gate-grenade-devstack-vm
+    experimental:
+      - gate-grenade-devstack-vm-stable
+      - gate-devstack-vm-cells
 
   # This is not strictly necessary; there is currently a transitive
   # relationship between g-t-devstack-vm,
@@ -1405,9 +1442,7 @@ projects:
       - gate-tempest-devstack-vm-postgres-full
       - gate-tempest-devstack-vm-cinder
       - gate-tempest-devstack-vm-neutron
-      - gate-tempest-devstack-vm-neutron-full
       - gate-grenade-devstack-vm
-      - gate-grenade-devstack-vm-stable
     gate:
       - gate-tempest-requirements
       - gate-tempest-pep8
@@ -1418,8 +1453,11 @@ projects:
       - gate-tempest-devstack-vm-postgres-full
       - gate-tempest-devstack-vm-cinder
       - gate-tempest-devstack-vm-neutron
-      - gate-tempest-devstack-vm-neutron-full
       - gate-grenade-devstack-vm
+    experimental:
+      - gate-grenade-devstack-vm-stable
+      - gate-devstack-vm-cells
+      - gate-tempest-devstack-vm-neutron-full
     post:
       - tempest-docs
       - tempest-branch-tarball
@@ -1524,6 +1562,8 @@ projects:
       - gate-tempest-devstack-vm-testr-full
       - gate-tempest-devstack-vm-postgres-full
       - gate-tempest-devstack-vm-neutron
+    experimental:
+      - gate-devstack-vm-cells
     post:
       - heat-branch-tarball
       - heat-coverage
@@ -1558,6 +1598,8 @@ projects:
       - gate-tempest-devstack-vm-testr-full
       - gate-tempest-devstack-vm-postgres-full
       - gate-tempest-devstack-vm-neutron
+    experimental:
+      - gate-devstack-vm-cells
     post:
       - python-heatclient-branch-tarball
       - python-heatclient-coverage
