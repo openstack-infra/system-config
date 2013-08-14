@@ -996,6 +996,18 @@
       - devstack-jobs:
           pipeline: check
           node: 'devstack-precise || devstack-precise-check'
+      - '{pipeline}-tempest-devstack-vm-client-stable-{release}':
+          pipeline: check
+          node: 'devstack-precise || devstack-precise-check'
+          release:
+            - grizzly
+            - havana
+      - '{pipeline}-tempest-devstack-vm-client-stable-{release}':
+          pipeline: gate
+          node: devstack-precise
+          release:
+            - grizzly
+            - havana
       - 'check-devstack-vm-cells-stable-{release}':
           release:
             - grizzly
