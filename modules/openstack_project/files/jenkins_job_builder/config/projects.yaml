@@ -1318,3 +1318,13 @@
       - python-jobs
       - pypi-jobs
       - hook-{name}-rtfd
+
+- project:
+    name: python-tuskarclient
+    github-org: stackforge
+    tarball-site: tarballs.openstack.org
+    node: precise
+
+    jobs:
+      - python-jobs
+      - gate-{name}-pylint

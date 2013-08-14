@@ -2785,9 +2785,19 @@ projects:
 
   - name: stackforge/python-tuskarclient
     check:
-      - gate-noop
+      - gate-python-tuskarclient-pep8
+      - gate-python-tuskarclient-python26
+      - gate-python-tuskarclient-python27
+      - gate-python-tuskarclient-python33
+      - gate-python-tuskarclient-pylint
     gate:
-      - gate-noop
+      - gate-python-tuskarclient-pep8
+      - gate-python-tuskarclient-python26
+      - gate-python-tuskarclient-python27
+      - gate-python-tuskarclient-python33
+      - gate-python-tuskarclient-pylint
+    post:
+      - python-tuskarclient-coverage
 
   - name: stackforge/tuskar-ui
     check:
