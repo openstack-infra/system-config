@@ -1961,6 +1961,12 @@ projects:
       - gate-os-apply-config-python27
     post:
       - os-apply-config-coverage
+      - os-apply-config-branch-tarball
+    pre-release:
+      - os-apply-config-tarball
+    release:
+      - os-apply-config-tarball:
+        - os-apply-config-pypi-upload
 
   - name: stackforge/os-collect-config
     check:
@@ -1973,6 +1979,12 @@ projects:
       - gate-os-collect-config-python27
     post:
       - os-collect-config-coverage
+      - os-collect-config-branch-tarball
+    pre-release:
+      - os-collect-config-tarball
+    release:
+      - os-collect-config-tarball:
+        - os-collect-config-pypi-upload
 
   - name: stackforge/os-refresh-config
     check:
@@ -1985,6 +1997,12 @@ projects:
       - gate-os-refresh-config-python27
     post:
       - os-refresh-config-coverage
+      - os-refresh-config-branch-tarball
+    pre-release:
+      - os-refresh-config-tarball
+    release:
+      - os-refresh-config-tarball:
+        - os-refresh-config-pypi-upload
 
   - name: stackforge/tripleo-heat-templates
     check:
