@@ -92,3 +92,25 @@ based tests.
 The :ref:`devstack-gate` project is used to maintain a pool of Jenkins
 slaves that are used to run these tests.  Devstack-gate jobs create
 and delete Jenkins slaves as needed in order to maintain the pool.
+
+Creating a Jenkins Slave
+========================
+
+Use the install_jenkins_slave.sh script to create a test server when you
+want to test your Jenkins build jobs. Create a server and define a fully
+qualified domain name for it by editing the /etc/hosts file::
+
+127.0.0.1       my.fqdomainname.com
+
+and then running::
+
+sudo hostname my.fqdomainname.com
+
+Lastly, run the install_jenkins_slave.sh script found in the root of the
+config directory::
+
+sudo ./install_jenkins_slave.sh
+
+Once it has completed, you have a working puppet server and access to 
+the script files locally. Verify the installation by looking for 
+the script you'd use in /usr/local/jenkins/slave_scripts/ directory.
