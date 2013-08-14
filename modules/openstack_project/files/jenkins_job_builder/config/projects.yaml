@@ -933,6 +933,7 @@
 
     jobs:
       - python-jobs
+      - pypi-jobs
 
 - project:
     name: os-collect-config
@@ -942,6 +943,7 @@
 
     jobs:
       - python-jobs
+      - pypi-jobs
 
 - project:
     name: os-refresh-config
@@ -951,6 +953,7 @@
 
     jobs:
       - python-jobs
+      - pypi-jobs
 
 - project:
     name: tripleo-image-elements
