@@ -321,7 +321,6 @@
       - openstack-publish-jobs
       - pypi-jobs
 
-
 - project:
     name: heat-cfntools
     github-org: openstack

@@ -784,6 +784,7 @@ projects:
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-neutron
       - gate-grenade-devstack-vm
+      - gate-tempest-devstack-vm-client-stable-grizzly
     gate:
       - gate-oslo.config-requirements
       - gate-oslo.config-docs
@@ -794,6 +795,7 @@ projects:
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-neutron
       - gate-grenade-devstack-vm
+      - gate-tempest-devstack-vm-client-stable-grizzly
     post:
       - oslo.config-branch-tarball
       - oslo.config-docs
@@ -969,6 +971,8 @@ projects:
       - gate-tempest-devstack-vm-neutron
       - gate-grenade-devstack-vm
       - gate-grenade-devstack-vm-stable
+      - gate-tempest-devstack-vm-client-stable-folsom
+      - gate-tempest-devstack-vm-client-stable-grizzly
     gate:
       - gate-python-cinderclient-requirements
       - gate-python-cinderclient-docs
@@ -982,6 +986,8 @@ projects:
       - gate-tempest-devstack-vm-cinder
       - gate-tempest-devstack-vm-neutron
       - gate-grenade-devstack-vm
+      - gate-tempest-devstack-vm-client-stable-folsom
+      - gate-tempest-devstack-vm-client-stable-grizzly
     post:
       - python-cinderclient-branch-tarball
       - python-cinderclient-coverage
@@ -1012,6 +1018,8 @@ projects:
       - gate-tempest-devstack-vm-neutron
       - gate-grenade-devstack-vm
       - gate-grenade-devstack-vm-stable
+      - gate-tempest-devstack-vm-client-stable-folsom
+      - gate-tempest-devstack-vm-client-stable-grizzly
     gate:
       - gate-python-glanceclient-requirements
       - gate-python-glanceclient-docs
@@ -1025,6 +1033,8 @@ projects:
       - gate-tempest-devstack-vm-cinder
       - gate-tempest-devstack-vm-neutron
       - gate-grenade-devstack-vm
+      - gate-tempest-devstack-vm-client-stable-folsom
+      - gate-tempest-devstack-vm-client-stable-grizzly
     post:
       - python-glanceclient-branch-tarball
       - python-glanceclient-coverage
@@ -1055,6 +1065,8 @@ projects:
       - gate-tempest-devstack-vm-neutron
       - gate-grenade-devstack-vm
       - gate-grenade-devstack-vm-stable
+      - gate-tempest-devstack-vm-client-stable-folsom
+      - gate-tempest-devstack-vm-client-stable-grizzly
     gate:
       - gate-python-keystoneclient-requirements
       - gate-python-keystoneclient-docs
@@ -1068,6 +1080,8 @@ projects:
       - gate-tempest-devstack-vm-cinder
       - gate-tempest-devstack-vm-neutron
       - gate-grenade-devstack-vm
+      - gate-tempest-devstack-vm-client-stable-folsom
+      - gate-tempest-devstack-vm-client-stable-grizzly
     post:
       - python-keystoneclient-branch-tarball
       - python-keystoneclient-coverage
@@ -1098,6 +1112,8 @@ projects:
       - gate-tempest-devstack-vm-neutron
       - gate-grenade-devstack-vm
       - gate-grenade-devstack-vm-stable
+      - gate-tempest-devstack-vm-client-stable-folsom
+      - gate-tempest-devstack-vm-client-stable-grizzly
     gate:
       - gate-python-novaclient-requirements
       - gate-python-novaclient-docs
@@ -1111,6 +1127,8 @@ projects:
       - gate-tempest-devstack-vm-cinder
       - gate-tempest-devstack-vm-neutron
       - gate-grenade-devstack-vm
+      - gate-tempest-devstack-vm-client-stable-folsom
+      - gate-tempest-devstack-vm-client-stable-grizzly
     post:
       - python-novaclient-branch-tarball
       - python-novaclient-coverage
@@ -1168,6 +1186,8 @@ projects:
       - gate-tempest-devstack-vm-neutron
       - gate-grenade-devstack-vm
       - gate-grenade-devstack-vm-stable
+      - gate-tempest-devstack-vm-client-stable-folsom
+      - gate-tempest-devstack-vm-client-stable-grizzly
     gate:
       - gate-python-neutronclient-requirements
       - gate-python-neutronclient-docs
@@ -1181,6 +1201,8 @@ projects:
       - gate-tempest-devstack-vm-cinder
       - gate-tempest-devstack-vm-neutron
       - gate-grenade-devstack-vm
+      - gate-tempest-devstack-vm-client-stable-folsom
+      - gate-tempest-devstack-vm-client-stable-grizzly
     post:
       - python-neutronclient-branch-tarball
       - python-neutronclient-coverage
@@ -1202,12 +1224,16 @@ projects:
       - gate-python-swiftclient-python26
       - gate-python-swiftclient-python27
       - gate-python-swiftclient-python33
+      - gate-tempest-devstack-vm-client-stable-folsom
+      - gate-tempest-devstack-vm-client-stable-grizzly
     gate:
       - gate-python-swiftclient-requirements
       - gate-python-swiftclient-docs
       - gate-python-swiftclient-pep8
       - gate-python-swiftclient-python26
       - gate-python-swiftclient-python27
+      - gate-tempest-devstack-vm-client-stable-folsom
+      - gate-tempest-devstack-vm-client-stable-grizzly
     post:
       - python-swiftclient-branch-tarball
       - python-swiftclient-coverage
