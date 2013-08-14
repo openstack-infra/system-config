@@ -18,7 +18,25 @@
       - console-log
 
 
+- job-template:
+    name: '{name}-merge-release-tags'
+    concurrent: false
+
+    builders:
+      - gerrit-git-prep
+      - shell: |
+          #!/bin/bash -xe
+          TAG=`echo $ZUUL_REFNAME | sed 's/refs.tags.//'`
+          /usr/local/jenkins/slave_scripts/merge_tags.sh $TAG
+
+    publishers:
+      - console-log
+
+    node: 'proposal'
+
+
 - job-group:
     name: openstack-publish-jobs
     jobs:
       - '{name}-docs'
+      - '{name}-merge-release-tags'
