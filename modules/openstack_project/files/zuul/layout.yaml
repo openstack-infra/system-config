@@ -122,6 +122,8 @@ jobs:
     branch: ^(?!stable/(folsom|grizzly)).*$
   - name: ^(gate|check)-tempest-devstack-vm-neutron-pg-isolated$
     branch: ^(?!stable/(folsom|grizzly)).*$
+  - name: ^gate-tempest-devstack-vm-client-stable-(folsom|grizzly)$
+    voting: false
   - name: ^(gate|check)-tempest-devstack-vm-neutron-full$
     branch: ^(?!stable/(folsom|grizzly)).*$
     voting: false
@@ -880,6 +882,7 @@ projects:
       - check-tempest-devstack-vm-neutron
       - gate-tempest-devstack-vm-large-ops
       - check-grenade-devstack-vm
+      - gate-tempest-devstack-vm-client-stable-grizzly
     gate:
       - gate-oslo.config-requirements
       - gate-oslo.config-docs
@@ -891,6 +894,7 @@ projects:
       - gate-tempest-devstack-vm-neutron
       - gate-tempest-devstack-vm-large-ops
       - gate-grenade-devstack-vm
+      - gate-tempest-devstack-vm-client-stable-grizzly
     post:
       - oslo.config-branch-tarball
       - oslo.config-docs
@@ -1126,6 +1130,8 @@ projects:
       - check-tempest-devstack-vm-neutron
       - gate-tempest-devstack-vm-large-ops
       - check-grenade-devstack-vm
+      - gate-tempest-devstack-vm-client-stable-folsom
+      - gate-tempest-devstack-vm-client-stable-grizzly
     gate:
       - gate-python-cinderclient-requirements
       - gate-python-cinderclient-docs
@@ -1139,6 +1145,8 @@ projects:
       - gate-tempest-devstack-vm-neutron
       - gate-tempest-devstack-vm-large-ops
       - gate-grenade-devstack-vm
+      - gate-tempest-devstack-vm-client-stable-folsom
+      - gate-tempest-devstack-vm-client-stable-grizzly
     experimental:
       - gate-grenade-devstack-vm-stable
       - gate-devstack-vm-cells
@@ -1170,6 +1178,8 @@ projects:
       - check-tempest-devstack-vm-neutron
       - gate-tempest-devstack-vm-large-ops
       - check-grenade-devstack-vm
+      - gate-tempest-devstack-vm-client-stable-folsom
+      - gate-tempest-devstack-vm-client-stable-grizzly
     gate:
       - gate-python-glanceclient-requirements
       - gate-python-glanceclient-docs
@@ -1183,6 +1193,8 @@ projects:
       - gate-tempest-devstack-vm-neutron
       - gate-tempest-devstack-vm-large-ops
       - gate-grenade-devstack-vm
+      - gate-tempest-devstack-vm-client-stable-folsom
+      - gate-tempest-devstack-vm-client-stable-grizzly
     experimental:
       - gate-grenade-devstack-vm-stable
       - gate-devstack-vm-cells
@@ -1214,6 +1226,8 @@ projects:
       - check-tempest-devstack-vm-neutron
       - gate-tempest-devstack-vm-large-ops
       - check-grenade-devstack-vm
+      - gate-tempest-devstack-vm-client-stable-folsom
+      - gate-tempest-devstack-vm-client-stable-grizzly
     gate:
       - gate-python-keystoneclient-requirements
       - gate-python-keystoneclient-docs
@@ -1227,6 +1241,8 @@ projects:
       - gate-tempest-devstack-vm-neutron
       - gate-tempest-devstack-vm-large-ops
       - gate-grenade-devstack-vm
+      - gate-tempest-devstack-vm-client-stable-folsom
+      - gate-tempest-devstack-vm-client-stable-grizzly
     experimental:
       - gate-grenade-devstack-vm-stable
       - gate-devstack-vm-cells
@@ -1259,6 +1275,8 @@ projects:
       - check-tempest-devstack-vm-neutron
       - gate-tempest-devstack-vm-large-ops
       - check-grenade-devstack-vm
+      - gate-tempest-devstack-vm-client-stable-folsom
+      - gate-tempest-devstack-vm-client-stable-grizzly
     gate:
       - gate-python-novaclient-requirements
       - gate-python-novaclient-docs
@@ -1273,6 +1291,8 @@ projects:
       - gate-tempest-devstack-vm-neutron
       - gate-tempest-devstack-vm-large-ops
       - gate-grenade-devstack-vm
+      - gate-tempest-devstack-vm-client-stable-folsom
+      - gate-tempest-devstack-vm-client-stable-grizzly
     experimental:
       - gate-grenade-devstack-vm-stable
       - gate-devstack-vm-cells
@@ -1335,6 +1355,8 @@ projects:
       - check-tempest-devstack-vm-neutron-pg-isolated
       - gate-tempest-devstack-vm-large-ops
       - check-grenade-devstack-vm
+      - gate-tempest-devstack-vm-client-stable-folsom
+      - gate-tempest-devstack-vm-client-stable-grizzly
     gate:
       - gate-python-neutronclient-requirements
       - gate-python-neutronclient-docs
@@ -1352,6 +1374,8 @@ projects:
       - gate-tempest-devstack-vm-neutron-pg-isolated
       - gate-tempest-devstack-vm-large-ops
       - gate-grenade-devstack-vm
+      - gate-tempest-devstack-vm-client-stable-folsom
+      - gate-tempest-devstack-vm-client-stable-grizzly
     experimental:
       - gate-grenade-devstack-vm-stable
       - gate-devstack-vm-cells
@@ -1378,6 +1402,8 @@ projects:
       - gate-python-swiftclient-python33
       - gate-python-swiftclient-pypy
       - check-swift-devstack-vm-functional
+      - gate-tempest-devstack-vm-client-stable-folsom
+      - gate-tempest-devstack-vm-client-stable-grizzly
     gate:
       - gate-python-swiftclient-requirements
       - gate-python-swiftclient-docs
@@ -1386,6 +1412,8 @@ projects:
       - gate-python-swiftclient-python27
       - gate-python-swiftclient-pypy
       - gate-swift-devstack-vm-functional
+      - gate-tempest-devstack-vm-client-stable-folsom
+      - gate-tempest-devstack-vm-client-stable-grizzly
     post:
       - python-swiftclient-branch-tarball
       - python-swiftclient-coverage
