@@ -228,6 +228,8 @@ jobs:
     branch: ^(?!stable/(folsom|grizzly)).*$
   - name: manuals-upstream-translation-update
     branch: ^master$
+  - name: ^.*-merge-release-tags$
+    branch: milestone-proposed
   - name: gate-hacking-python33
     voting: false
   - name: gate-hacking-integration-nova
@@ -606,6 +608,7 @@ projects:
     release:
       - cinder-tarball
       - cinder-docs
+      - cinder-merge-release-tags
     periodic:
       - cinder-propose-translation-update
       - periodic-cinder-docs-stable-grizzly
@@ -649,6 +652,7 @@ projects:
     release:
       - glance-tarball
       - glance-docs
+      - glance-merge-release-tags
     periodic:
       - glance-propose-translation-update
       - periodic-glance-docs-stable-folsom
@@ -699,6 +703,7 @@ projects:
     release:
       - horizon-tarball
       - horizon-docs
+      - horizon-merge-release-tags
     periodic:
       - periodic-horizon-docs-stable-folsom
       - periodic-horizon-python26-stable-folsom
@@ -770,6 +775,7 @@ projects:
     release:
       - keystone-tarball
       - keystone-docs
+      - keystone-merge-release-tags
     periodic:
       - keystone-propose-translation-update
       - periodic-keystone-docs-stable-folsom
@@ -821,6 +827,7 @@ projects:
     release:
       - nova-tarball
       - nova-docs
+      - nova-merge-release-tags
     periodic:
       - nova-propose-translation-update
       - periodic-nova-docs-stable-folsom
@@ -961,6 +968,7 @@ projects:
     release:
       - neutron-tarball
       - neutron-docs
+      - neutron-merge-release-tags
     periodic:
       - neutron-propose-translation-update
       - periodic-neutron-docs-stable-grizzly
@@ -1006,6 +1014,7 @@ projects:
     release:
       - swift-tarball
       - swift-docs
+      - swift-merge-release-tags
 
   - name: openstack/python-ceilometerclient
     check:
@@ -1558,6 +1567,7 @@ projects:
     release:
       - ceilometer-docs
       - ceilometer-tarball
+      - ceilometer-merge-release-tags
     periodic:
       - ceilometer-propose-translation-update
       - periodic-ceilometer-docs-stable-grizzly
@@ -1639,6 +1649,7 @@ projects:
     release:
       - heat-tarball
       - heat-docs
+      - heat-merge-release-tags
     periodic:
       - periodic-heat-docs-stable-grizzly
       - periodic-heat-python26-stable-grizzly
@@ -1743,6 +1754,7 @@ projects:
     release:
       - trove-tarball
       - trove-docs
+      - trove-merge-release-tags
 
   - name: openstack/trove-integration
     check:
@@ -2820,6 +2832,7 @@ projects:
     release:
       - ironic-tarball
       - ironic-docs
+      - ironic-merge-release-tags
 
   - name: openstack/python-ironicclient
     check:
