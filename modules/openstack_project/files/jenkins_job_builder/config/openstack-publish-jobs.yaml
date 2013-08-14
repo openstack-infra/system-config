@@ -22,3 +22,4 @@
     name: openstack-publish-jobs
     jobs:
       - '{name}-docs'
+      - merge-release-tags
