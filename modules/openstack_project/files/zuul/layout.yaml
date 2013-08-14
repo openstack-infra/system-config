@@ -1224,6 +1224,13 @@ projects:
       - gate-python-swiftclient-python26
       - gate-python-swiftclient-python27
       - gate-python-swiftclient-python33
+      - gate-tempest-devstack-vm-smoke
+      - gate-tempest-devstack-vm-full
+      - gate-tempest-devstack-vm-testr-full
+      - gate-tempest-devstack-vm-postgres-full
+      - gate-tempest-devstack-vm-cinder
+      - gate-tempest-devstack-vm-neutron
+      - gate-grenade-devstack-vm
       - gate-tempest-devstack-vm-client-stable-folsom
       - gate-tempest-devstack-vm-client-stable-grizzly
     gate:
@@ -1232,6 +1239,13 @@ projects:
       - gate-python-swiftclient-pep8
       - gate-python-swiftclient-python26
       - gate-python-swiftclient-python27
+      - gate-tempest-devstack-vm-smoke
+      - gate-tempest-devstack-vm-full
+      - gate-tempest-devstack-vm-testr-full
+      - gate-tempest-devstack-vm-postgres-full
+      - gate-tempest-devstack-vm-cinder
+      - gate-tempest-devstack-vm-neutron
+      - gate-grenade-devstack-vm
       - gate-tempest-devstack-vm-client-stable-folsom
       - gate-tempest-devstack-vm-client-stable-grizzly
     post:
