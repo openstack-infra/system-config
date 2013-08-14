@@ -1304,8 +1304,10 @@
     name: pecan
     github-org: stackforge
     node: precise
+    rtfd-id: 476
     tarball-site: tarballs.openstack.org
 
     jobs:
       - python-jobs
       - pypi-jobs
+      - hook-{name}-rtfd

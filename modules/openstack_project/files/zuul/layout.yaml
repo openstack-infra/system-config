@@ -2792,12 +2792,14 @@ projects:
       - pecan-branch-tarball
     pre-release:
       - pecan-tarball
+      - hook-pecan-rtfd
     release:
       - pecan-tarball:
         - pecan-pypi-upload:
           - post-mirror-python26
           - post-mirror-python27
           - post-mirror-python33
+      - hook-pecan-rtfd
 
   - name: openstack-infra/groups
     check:
