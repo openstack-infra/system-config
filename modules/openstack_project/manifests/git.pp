@@ -88,4 +88,29 @@ class openstack_project::git (
   class { 'selinux':
     mode => 'enforcing'
   }
+
+  file { '/var/www/static/openstack.png':
+    ensure  => present,
+    source  => 'puppet:///modules/openstack_project/openstack.png',
+    require => File['/var/www/static'],
+  }
+
+  file { '/var/www/static/favicon.ico':
+    ensure  => present,
+    source  => 'puppet:///modules/openstack_project/status/favicon.ico',
+    require => File['/var/www/static'],
+  }
+
+  file { '/var/www/static/openstack-page-bkg.jpg':
+    ensure  => present,
+    source  => 'puppet:///modules/openstack_project/openstack-page-bkg.jpg',
+    require => File['/var/www/static'],
+  }
+
+  file { '/var/www/static/openstack.css':
+    ensure  => present,
+    source  => 'puppet:///modules/openstack_project/git/openstack.css',
+    require => File['/var/www/static'],
+  }
+
 }
