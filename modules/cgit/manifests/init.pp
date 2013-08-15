@@ -17,6 +17,8 @@
 class cgit(
   $vhost_name = $::fqdn,
   $serveradmin = "webmaster@${::fqdn}",
+  $cgitdir = '/var/www/cgit',
+  $staticfiles = '/var/www/cgit/static',
   $ssl_cert_file = '',
   $ssl_key_file = '',
   $ssl_chain_file = '',
@@ -81,6 +83,7 @@ class cgit(
     priority => '50',
     template => 'cgit/git.vhost.erb',
     ssl      => true,
+    require  => [ File[$staticfiles], Package['cgit'] ],
   }
 
   file { '/etc/httpd/conf.d/ssl.conf':
@@ -90,6 +93,21 @@ class cgit(
     mode    => '0644',
     source  => 'puppet:///modules/cgit/ssl.conf',
     require => Package['mod_ssl'],
+  }
+
+  file { $cgitdir:
+    ensure => directory,
+    owner  => 'root',
+    group  => 'root',
+    mode   => '0755',
+  }
+
+  file { $staticfiles:
+    ensure  => directory,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0755',
+    require => File[$cgitdir],
   }
 
   file { '/etc/xinetd.d/git':
