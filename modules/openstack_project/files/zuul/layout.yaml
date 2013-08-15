@@ -710,6 +710,8 @@ projects:
       - gate-nova-docs
       - gate-nova-python26
       - gate-nova-python27
+      - gate-nova-dbapi-mysql
+      - gate-nova-dbapi-postgresql
       - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-cells-full
@@ -727,6 +729,8 @@ projects:
       - gate-nova-pep8
       - gate-nova-python26
       - gate-nova-python27
+      - gate-nova-dbapi-mysql
+      - gate-nova-dbapi-postgresql
       - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-testr-full
