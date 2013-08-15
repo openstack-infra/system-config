@@ -64,8 +64,12 @@ function count_changes(pipeline) {
 }
 
 function format_pipeline(data) {
+    var count = count_changes(data);
     var html = '<div class="pipeline"><h3 class="subhead">'+
-        data['name'] + ' (' + count_changes(data) + ')</h3>';
+        data['name'];
+    if (count > 0)
+	html += ' <span class="count">(' + count + ')</span>';
+    html += '</h3>';
     if (data['description'] != null) {
         html += '<p>'+data['description']+'</p>';
     }
