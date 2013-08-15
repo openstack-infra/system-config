@@ -28,6 +28,7 @@ class openstack_project::eavesdrop (
         '#openstack-infra',
         '#openstack-meeting',
         '#openstack-meeting-alt',
+        '#openstack-metering',
         '#openstack-qa',
         '#savanna',
     ],
