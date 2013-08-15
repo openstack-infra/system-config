@@ -30,29 +30,20 @@ class openstack_project::lists(
     User::Virtual::Localuser['smaffulli'],
   )
 
-  maillist { 'openstack-it':
-    ensure      => present,
-    admin       => 'stefano@openstack.org',
-    password    => $listpassword,
-    description => 'Discussioni su OpenStack in italiano',
-    webserver   => $listdomain,
-    mailserver  => $listdomain,
-  }
-
-  maillist { 'openstack-vi':
-    ensure      => present,
-    admin       => 'hang.tran@dtt.vn',
-    password    => $listpassword,
-    description => 'Discussions in Vietnamese - please add Vietnamese translation here',
-    webserver   => $listdomain,
-    mailserver  => $listdomain,
-  }
-
   maillist { 'openstack-es':
     ensure      => present,
     admin       => 'flavio@redhat.com',
     password    => $listpassword,
     description => 'Lista de correo acerca de OpenStack en español',
+    webserver   => $listdomain,
+    mailserver  => $listdomain,
+  }
+
+  maillist { 'openstack-fr':
+    ensure      => present,
+    admin       => 'erwan.gallen@cloudwatt.com',
+    password    => $listpassword,
+    description => 'List of the OpenStack french user group',
     webserver   => $listdomain,
     mailserver  => $listdomain,
   }
@@ -66,6 +57,15 @@ class openstack_project::lists(
     mailserver  => $listdomain,
   }
 
+  maillist { 'openstack-it':
+    ensure      => present,
+    admin       => 'stefano@openstack.org',
+    password    => $listpassword,
+    description => 'Discussioni su OpenStack in italiano',
+    webserver   => $listdomain,
+    mailserver  => $listdomain,
+  }
+
   maillist { 'openstack-travel-committee':
     ensure      => present,
     admin       => 'communitymngr@openstack.org',
@@ -75,11 +75,11 @@ class openstack_project::lists(
     mailserver  => $listdomain,
   }
 
-  maillist { 'openstack-fr':
+  maillist { 'openstack-vi':
     ensure      => present,
-    admin       => 'erwan.gallen@cloudwatt.com',
+    admin       => 'hang.tran@dtt.vn',
     password    => $listpassword,
-    description => 'List of the OpenStack french user group',
+    description => 'Discussions in Vietnamese - please add Vietnamese translation here',
     webserver   => $listdomain,
     mailserver  => $listdomain,
   }
