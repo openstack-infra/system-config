@@ -1,28 +1,31 @@
-# need to run gerrit-git-prep in maven-properties.sh script to work
-# around jenkins bug: https://issues.jenkins-ci.org/browse/JENKINS-14193
+# need to run gerrit-git-prep in maven-properties.sh script
+# because the script queries for git info.
+# usig a freestyle project to work around jenkins bug: 
+# https://issues.jenkins-ci.org/browse/JENKINS-14193
 
 - job-template:
     name: 'gate-{name}-build'
     project-type: maven
     node: precise
 
+    properties:
+      - inject:
+          script-file: /usr/local/jenkins/slave_scripts/maven-properties.sh
+          properties-file: maven.properties
+
     wrappers:
       - timeout:
           timeout: 30
           fail: true
       - timestamps
-      - inject:
-          script-file: /usr/local/jenkins/slave_scripts/maven-properties.sh
-      - inject:
-          properties-file: maven.properties
 
-    maven:
-      maven-name: Maven3
-      root-module:
-        group-id: '{maven-group-id}'
-        artifact-id: '{name}'
-      root-pom: pom.xml
-      goals: 'clean package -Dproject-version=${{PROJECT_VER}}'
+    builders:
+      - maven-target:
+          maven-version: Maven3
+          pom: pom.xml
+          goals: 'clean package'
+          properties:
+            - project-version=${{PROJECT_VER}}
 
     publishers:
       - console-log
@@ -32,23 +35,24 @@
     project-type: maven
     node: precise
 
+    properties:
+      - inject:
+          script-file: /usr/local/jenkins/slave_scripts/maven-properties.sh
+          properties-file: maven.properties
+
     wrappers:
       - timeout:
           timeout: 30
           fail: true
       - timestamps
-      - inject:
-          script-file: /usr/local/jenkins/slave_scripts/maven-properties.sh
-      - inject:
-          properties-file: maven.properties
 
-    maven:
-      maven-name: Maven3
-      root-module:
-        group-id: '{maven-group-id}'
-        artifact-id: '{name}'
-      root-pom: pom.xml
-      goals: 'clean package -Dmaven.test.skip=true -Dproject-version=${{PROJECT_VER}}'
+    builders:
+      - maven-target:
+          maven-version: Maven3
+          pom: pom.xml
+          goals: 'clean package'
+          properties:
+            - project-version=${{PROJECT_VER}}
 
     postbuilders:
       - shell: |
