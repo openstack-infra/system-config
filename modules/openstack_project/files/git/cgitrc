@@ -59,6 +59,10 @@ mimetype.svg=image/svg+xml
 # Enable syntax highlighting (requires the highlight package)
 #source-filter=/usr/libexec/cgit/filters/syntax-highlighting.sh
 
+# Increase the number of entries to list per page on the repository
+# index page (default 50)
+max-repo-count=250
+
 ##
 ## List of repositories.
 ## PS: Any repositories listed when section is unset will not be
