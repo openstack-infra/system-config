@@ -1,0 +1,19 @@
+- job-template:
+    name: gate-nova-dbapi-{backend}
+
+    wrappers:
+      - timeout:
+          timeout: 40
+          fail: true
+      - timestamps
+
+    builders:
+      - gerrit-git-prep
+      - shell: 'OS_TEST_DBAPI_ADMIN_CONNECTION={backend}://openstack_citest:openstack_citest@localhost/openstack_citest /usr/local/jenkins/slave_scripts/run-tox.sh dbapi'
+      - assert-no-extra-files
+
+    publishers:
+      - test-results
+      - console-log
+
+    node: '{node}'

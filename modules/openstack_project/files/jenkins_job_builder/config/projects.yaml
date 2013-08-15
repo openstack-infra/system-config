@@ -473,9 +473,13 @@
     node: precise
     tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
+    backend:
+      - mysql
+      - postgresql
 
     jobs:
       - python-jobs
+      - gate-nova-dbapi-{backend}
       - python-folsom-bitrot-jobs
       - python-grizzly-bitrot-jobs
       - openstack-publish-jobs
