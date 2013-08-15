@@ -1457,6 +1457,12 @@ projects:
       - periodic-ceilometer-python26-stable-grizzly
       - periodic-ceilometer-python27-stable-grizzly
 
+  - name: stackforge/clouddocs-maven-plugin
+    check:
+      - gate-noop
+    gate:
+      - gate-noop
+
   - name: stackforge/MRaaS
     check:
       - gate-noop
