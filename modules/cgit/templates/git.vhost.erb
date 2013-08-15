@@ -18,6 +18,7 @@
 
   Alias /cgit-data /usr/share/cgit
   ScriptAlias /cgit /var/www/cgi-bin/cgit
+  Alias /static <%= scope.lookupvar("cgit::staticfiles") %>
   RewriteEngine On
   RewriteRule ^/$ /cgit [R]
 

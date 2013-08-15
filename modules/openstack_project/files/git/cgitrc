@@ -9,7 +9,7 @@ cache-size=0
 clone-prefix=git://git.openstack.org https://git.openstack.org
 
 # Specify the css url
-css=/cgit-data/cgit.css
+css=/static/openstack.css
 
 # Hide owner for each repository on the index page
 enable-index-owner=0
@@ -18,10 +18,10 @@ enable-index-owner=0
 enable-index-links=1
 
 # Add a cgit favicon
-#favicon=/favicon.ico
+favicon=/static/favicon.ico
 
 # Use a custom logo
-logo=/cgit-data/cgit.png
+logo=/static/openstack.png
 
 # Enable statistics per week, month and quarter
 max-stats=quarter
