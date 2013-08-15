@@ -92,6 +92,13 @@ class cgit(
     require => Package['mod_ssl'],
   }
 
+  file { '/var/www/static':
+    ensure => directory,
+    owner  => 'root',
+    group  => 'root',
+    mode   => '0755',
+  }
+
   file { '/etc/xinetd.d/git':
     ensure => present,
     owner  => 'root',
