@@ -28,7 +28,7 @@ function format_time(ms, words) {
             r += hours;
             r += ' hr ';
         }
-        r += minutes + ' min'
+        r += minutes + ' min';
     } else {
         if (hours < 10) r += '0';
         r += hours + ':';
@@ -53,9 +53,19 @@ function format_progress(elapsed, remaining) {
     return r;
 }
 
+function count_changes(pipeline) {
+    var count = 0;
+    $.each(pipeline['change_queues'], function(change_queue_i, change_queue) {
+        $.each(change_queue['heads'], function(head_i, head) {
+            count += head.length;
+        });
+    });
+    return count;
+}
+
 function format_pipeline(data) {
     var html = '<div class="pipeline"><h3 class="subhead">'+
-        data['name']+'</h3>';
+        data['name'] + ' (' + count_changes(data) + ')</h3>';
     if (data['description'] != null) {
         html += '<p>'+data['description']+'</p>';
     }
@@ -70,11 +80,11 @@ function format_pipeline(data) {
                 if (name.length > 32) {
                     name = name.substr(0,32) + '...';
                 }
-                html += name + '</a></div>'
+                html += name + '</a></div>';
             }
             $.each(head, function(change_i, change) {
                 if (change_i > 0) {
-                    html += '<div class="arrow">&uarr;</div>'
+                    html += '<div class="arrow">&uarr;</div>';
                 }
                 html += format_change(change);
             });
@@ -199,7 +209,7 @@ function update() {
 
 function update_graphs() {
     $('.graph').each(function(i, img) {
-        var newimg = new Image()
+        var newimg = new Image();
         var parts = img.src.split('#');
         newimg.src = parts[0] + '#' + new Date().getTime();
         $(newimg).load(function (x) {
