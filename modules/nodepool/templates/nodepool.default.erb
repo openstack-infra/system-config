@@ -1,0 +1,6 @@
+<% if scope.lookupvar("nodepool::statsd_host") != "" %>
+export STATSD_HOST=<%= scope.lookupvar("nodepool::statsd_host") %>
+export STATSD_PORT=8125
+<% end %>
+DAEMON_ARGS="-c /etc/nodepool/nodepool.yaml -l /etc/nodepool/logging.conf"
+
