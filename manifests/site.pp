@@ -75,7 +75,9 @@ node 'jenkins.openstack.org' {
     ssl_key_file_contents   => hiera('jenkins_ssl_key_file_contents'),
     ssl_chain_file_contents => hiera('jenkins_ssl_chain_file_contents'),
     sysadmins               => hiera('sysadmins'),
-    zmq_event_receivers     => ['logstash.openstack.org'],
+    zmq_event_receivers     => ['logstash.openstack.org',
+                                'nodepool.openstack.org',
+    ],
   }
 }
 
@@ -87,7 +89,9 @@ node 'jenkins01.openstack.org' {
     ssl_key_file_contents   => hiera('jenkins01_ssl_key_file_contents'),
     ssl_chain_file_contents => hiera('jenkins01_ssl_chain_file_contents'),
     sysadmins               => hiera('sysadmins'),
-    zmq_event_receivers     => ['logstash.openstack.org'],
+    zmq_event_receivers     => ['logstash.openstack.org',
+                                'nodepool.openstack.org',
+    ],
   }
 }
 
@@ -99,7 +103,9 @@ node 'jenkins02.openstack.org' {
     ssl_key_file_contents   => hiera('jenkins02_ssl_key_file_contents'),
     ssl_chain_file_contents => hiera('jenkins02_ssl_chain_file_contents'),
     sysadmins               => hiera('sysadmins'),
-    zmq_event_receivers     => ['logstash.openstack.org'],
+    zmq_event_receivers     => ['logstash.openstack.org',
+                                'nodepool.openstack.org',
+    ],
   }
 }
 
@@ -313,6 +319,24 @@ node 'static.openstack.org' {
     releasestatus_prvkey_contents => hiera('releasestatus_rsa_key_contents'),
     releasestatus_pubkey_contents => hiera('releasestatus_rsa_pubkey_contents'),
     releasestatus_gerrit_ssh_key  => hiera('gerrit_ssh_rsa_pubkey_contents'),
+  }
+}
+
+node 'nodepool.openstack.org' {
+  class { 'openstack_project::nodepool':
+    mysql_password           => hiera('nodepool_mysql_password'),
+    mysql_root_password      => hiera('nodepool_mysql_root_password'),
+    nodepool_ssh_private_key => hiera('jenkins_ssh_private_key_contents'),
+    sysadmins                => hiera('sysadmins'),
+    statsd_host              => 'graphite.openstack.org',
+    jenkins_api_user         => hiera('jenkins_api_user'),
+    jenkins_api_key          => hiera('jenkins_api_key'),
+    rackspace_username       => hiera('nodepool_rackspace_username'),
+    rackspace_password       => hiera('nodepool_rackspace_password'),
+    rackspace_project        => hiera('nodepool_rackspace_project'),
+    hpcloud_username         => hiera('nodepool_hpcloud_username'),
+    hpcloud_password         => hiera('nodepool_hpcloud_password'),
+    hpcloud_project          => hiera('nodepool_hpcloud_project'),
   }
 }
 

@@ -1,0 +1,112 @@
+script-dir: /etc/nodepool/scripts
+dburi: 'mysql://nodepool:<%= mysql_password %>@localhost/nodepool'
+
+cron:
+  cleanup: '27 */6 * * *'
+  update-image: '14 2 * * *'
+
+zmq-publishers:
+  - tcp://jenkins01.openstack.org:8888
+  - tcp://jenkins02.openstack.org:8888
+
+providers:
+  - name: rax-dfw
+    region-name: 'DFW'
+    service-type: 'compute'
+    service-name: 'cloudServersOpenStack'
+    username: '<%= rackspace_username %>'
+    password: '<%= rackspace_password %>'
+    project-id: '<%= rackspace_project %>'
+    auth-url: 'https://identity.api.rackspacecloud.com/v2.0/'
+    max-servers: 60
+    images:
+      - name: devstack-precise
+        base-image: 'Ubuntu 12.04 LTS (Precise Pangolin)'
+        min-ram: 8192
+        setup: prepare_node_devstack.sh
+  - name: rax-ord
+    region-name: 'ORD'
+    service-type: 'compute'
+    service-name: 'cloudServersOpenStack'
+    username: '<%= rackspace_username %>'
+    password: '<%= rackspace_password %>'
+    project-id: '<%= rackspace_project %>'
+    auth-url: 'https://identity.api.rackspacecloud.com/v2.0/'
+    max-servers: 60
+    images:
+      - name: devstack-precise
+        base-image: 'Ubuntu 12.04 LTS (Precise Pangolin)'
+        min-ram: 8192
+        setup: prepare_node_devstack.sh
+  - name: hpcloud-az1
+    region-name: 'az-1.region-a.geo-1'
+    service-type: 'compute'
+    service-name: 'Compute'
+    username: '<%= hpcloud_username %>'
+    password: '<%= hpcloud_password %>'
+    project-id: '<%= hpcloud_project %>'
+    auth-url: 'https://region-a.geo-1.identity.hpcloudsvc.com:35357/v2.0'
+    max-servers: 96
+    images:
+      - name: devstack-precise
+        base-image: 'Ubuntu Precise 12.04 LTS Server 64-bit 20121026 (b)'
+        min-ram: 8192
+        setup: prepare_node_devstack.sh
+  - name: hpcloud-az2
+    region-name: 'az-2.region-a.geo-1'
+    service-type: 'compute'
+    service-name: 'Compute'
+    username: '<%= hpcloud_username %>'
+    password: '<%= hpcloud_password %>'
+    project-id: '<%= hpcloud_project %>'
+    auth-url: 'https://region-a.geo-1.identity.hpcloudsvc.com:35357/v2.0'
+    max-servers: 96
+    images:
+      - name: devstack-precise
+        base-image: 'Ubuntu Precise 12.04 LTS Server 64-bit 20121026 (b)'
+        min-ram: 8192
+        setup: prepare_node_devstack.sh
+  - name: hpcloud-az3
+    region-name: 'az-3.region-a.geo-1'
+    service-type: 'compute'
+    service-name: 'Compute'
+    username: '<%= hpcloud_username %>'
+    password: '<%= hpcloud_password %>'
+    project-id: '<%= hpcloud_project %>'
+    auth-url: 'https://region-a.geo-1.identity.hpcloudsvc.com:35357/v2.0'
+    max-servers: 96
+    images:
+      - name: devstack-precise
+        base-image: 'Ubuntu Precise 12.04 LTS Server 64-bit 20121026 (b)'
+        min-ram: 8192
+        setup: prepare_node_devstack.sh
+
+targets:
+  - name: jenkins01
+    jenkins:
+      url: 'https://jenkins01.openstack.org/'
+      user: '<%= jenkins_api_user %>'
+      apikey: '<%= jenkins_api_key %>'
+    images:
+      - name: devstack-precise
+        providers:
+          - name: hpcloud-az1
+            min-ready: 1
+          - name: hpcloud-az2
+            min-ready: 1
+          - name: hpcloud-az3
+            min-ready: 1
+  - name: jenkins02
+    jenkins:
+      url: 'https://jenkins02.openstack.org/'
+      user: '<%= jenkins_api_user %>'
+      apikey: '<%= jenkins_api_key %>'
+    images:
+      - name: devstack-precise
+        providers:
+          - name: hpcloud-az1
+            min-ready: 1
+          - name: hpcloud-az2
+            min-ready: 1
+          - name: hpcloud-az3
+            min-ready: 1
