@@ -11,17 +11,11 @@ clone-prefix=git://git.openstack.org https://git.openstack.org
 # Specify the css url
 css=/cgit-data/cgit.css
 
+# Hide owner for each repository on the index page
+enable-index-owner=0
+
 # Show extra links for each repository on the index page
 enable-index-links=1
-
-# Enable ASCII art commit history graph on the log pages
-enable-commit-graph=1
-
-# Show number of affected files per commit on the log pages
-enable-log-filecount=1
-
-# Show number of added/removed lines per commit on the log pages
-enable-log-linecount=1
 
 # Add a cgit favicon
 #favicon=/favicon.ico
@@ -36,7 +30,7 @@ max-stats=quarter
 root-title=OpenStack git repository browser
 
 # Set a subheading for the repository index page
-#root-desc=tracking the foobar development
+root-desc=
 
 # Include some more info about this site on the index page
 #root-readme=/var/www/html/about.html
