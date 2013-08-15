@@ -21,6 +21,13 @@
   RewriteEngine On
   RewriteRule ^/$ /cgit [R]
 
+  SetEnv GIT_PROJECT_ROOT /var/lib/git/
+  SetEnv GIT_HTTP_EXPORT_ALL
+
+  AliasMatch ^/(.*/objects/[0-9a-f]{2}/[0-9a-f]{38})$ /var/lib/git/$1
+  AliasMatch ^/(.*/objects/pack/pack-[0-9a-f]{40}.(pack|idx))$ /var/lib/git/$1
+  ScriptAlias / /usr/libexec/git-core/git-http-backend/
+
   ErrorLog /var/log/httpd/git-error.log
 
   LogLevel warn
