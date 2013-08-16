@@ -43,6 +43,9 @@ class RequirementsList(object):
         if not os.path.exists(fn):
             return
         for line in open(fn):
+            if '\n' not in line:
+                raise Exception("Requirements file %s does not "
+                                "end with a newline." % fn)
             if '#' in line:
                 line = line[:line.find('#')]
             line = line.strip()
