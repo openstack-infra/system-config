@@ -227,6 +227,27 @@ function update_graphs() {
     });
 }
 
+function save_filter() {
+    var name = 'zuul-project-filter';
+    var value = $('#projects_filter').val().trim();
+    document.cookie = name+"="+value+"; path=/";
+    $('img.filter-saved').removeClass('hidden');
+    window.setTimeout(function(){
+        $('img.filter-saved').addClass('hidden');
+    }, 1500);
+}
+
+function read_cookie(name) {
+    var nameEQ = name + "=";
+    var ca = document.cookie.split(';');
+    for(var i=0;i < ca.length;i++) {
+        var c = ca[i];
+        while (c.charAt(0)==' ') c = c.substring(1,c.length);
+        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+    }
+    return null;
+}
+
 $(function() {
     window.zuul_graph_update_count = 0;
     update_timeout();
@@ -253,5 +274,16 @@ $(function() {
                 val.show(100);
             }
         })
+    }).live('keyup', function () {
+        $('a.save-filter')
+            .removeClass('hidden')
+            .live('click', function(e){
+                e.preventDefault();
+                $(this).addClass('hidden');
+                save_filter();
+            });
     });
+    var cookie = read_cookie('zuul-project-filter');
+    if(cookie)
+        $('#projects_filter').val(cookie).change();
 });
