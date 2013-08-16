@@ -26,7 +26,7 @@ then
   exit 1
 fi
 
-/usr/local/jenkins/slave_scripts/select-mirror.sh $org $project
+source /usr/local/jenkins/slave_scripts/select-mirror.sh $org $project
 
 rm -f dist/*.tar.gz
 tox -evenv python setup.py sdist
