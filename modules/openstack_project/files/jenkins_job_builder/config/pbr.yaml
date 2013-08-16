@@ -9,7 +9,6 @@
       - timestamps
 
     builders:
-      - devstack-inprogress
       - devstack-checkout
       - shell: |
           #!/bin/bash -xe
@@ -34,4 +33,3 @@
               keep-hierarchy: false
               copy-after-failure: true
       - console-log
-      - devstack-complete

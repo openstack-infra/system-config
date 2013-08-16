@@ -9,7 +9,6 @@
       - timestamps
 
     builders:
-      - devstack-inprogress
       - devstack-checkout
       - shell: |
           #!/bin/bash -xe
@@ -22,7 +21,6 @@
     publishers:
       - devstack-logs
       - console-log
-      - devstack-complete
 
 
 - job:
@@ -36,7 +34,6 @@
       - timestamps
 
     builders:
-      - devstack-inprogress
       - devstack-checkout
       - shell: |
           #!/bin/bash -xe
@@ -50,7 +47,7 @@
     publishers:
       - devstack-logs
       - console-log
-      - devstack-complete
+
 
 - job:
     name: gate-tempest-devstack-vm-testr-full
@@ -63,7 +60,6 @@
       - timestamps
 
     builders:
-      - devstack-inprogress
       - devstack-checkout
       - shell: |
           #!/bin/bash -xe
@@ -77,7 +73,7 @@
     publishers:
       - devstack-logs
       - console-log
-      - devstack-complete
+
 
 - job:
     name: gate-tempest-devstack-vm-cinder
@@ -90,7 +86,6 @@
       - timestamps
 
     builders:
-      - devstack-inprogress
       - devstack-checkout
       - shell: |
           #!/bin/bash -xe
@@ -104,7 +99,6 @@
     publishers:
       - devstack-logs
       - console-log
-      - devstack-complete
 
 
 - job:
@@ -118,7 +112,6 @@
       - timestamps
 
     builders:
-      - devstack-inprogress
       - devstack-checkout
       - shell: |
           #!/bin/bash -xe
@@ -132,7 +125,6 @@
     publishers:
       - devstack-logs
       - console-log
-      - devstack-complete
 
 
 - job:
@@ -146,7 +138,6 @@
       - timestamps
 
     builders:
-      - devstack-inprogress
       - devstack-checkout
       - shell: |
           #!/bin/bash -xe
@@ -161,7 +152,6 @@
     publishers:
       - devstack-logs
       - console-log
-      - devstack-complete
 
 
 - job:
@@ -175,7 +165,6 @@
       - timestamps
 
     builders:
-      - devstack-inprogress
       - devstack-checkout
       - shell: |
           #!/bin/bash -xe
@@ -189,7 +178,6 @@
     publishers:
       - devstack-logs
       - console-log
-      - devstack-complete
 
 
 - job:
@@ -203,7 +191,6 @@
       - timestamps
 
     builders:
-      - devstack-inprogress
       - devstack-checkout
       - shell: |
           #!/bin/bash -xe
@@ -218,7 +205,6 @@
     publishers:
       - devstack-logs
       - console-log
-      - devstack-complete
 
 
 - job:
@@ -232,7 +218,6 @@
       - timestamps
 
     builders:
-      - devstack-inprogress
       - devstack-checkout
       - shell: |
           #!/bin/bash -xe
@@ -247,7 +232,6 @@
     publishers:
       - devstack-logs-periodic
       - console-log-periodic
-      - devstack-complete
       - email:
           recipients: openstack-stable-maint@lists.openstack.org
 
@@ -263,7 +247,6 @@
       - timestamps
 
     builders:
-      - devstack-inprogress
       - devstack-checkout
       - shell: |
           #!/bin/bash -xe
@@ -279,7 +262,6 @@
     publishers:
       - devstack-logs-periodic
       - console-log-periodic
-      - devstack-complete
       - email:
           recipients: openstack-stable-maint@lists.openstack.org
 
@@ -295,7 +277,6 @@
       - timestamps
 
     builders:
-      - devstack-inprogress
       - devstack-checkout
       - shell: |
           #!/bin/bash -xe
@@ -311,7 +292,6 @@
     publishers:
       - devstack-logs-periodic
       - console-log-periodic
-      - devstack-complete
       - email:
           recipients: openstack-stable-maint@lists.openstack.org
 
@@ -327,7 +307,6 @@
       - timestamps
 
     builders:
-      - devstack-inprogress
       - devstack-checkout
       - shell: |
           #!/bin/bash -xe
@@ -344,7 +323,6 @@
     publishers:
       - devstack-logs-periodic
       - console-log-periodic
-      - devstack-complete
       - email:
           recipients: openstack-stable-maint@lists.openstack.org
 
@@ -360,7 +338,6 @@
       - timestamps
 
     builders:
-      - devstack-inprogress
       - devstack-checkout
       - shell: |
           #!/bin/bash -xe
@@ -376,7 +353,6 @@
     publishers:
       - devstack-logs-periodic
       - console-log-periodic
-      - devstack-complete
       - email:
           recipients: openstack-stable-maint@lists.openstack.org
 
@@ -392,7 +368,6 @@
       - timestamps
 
     builders:
-      - devstack-inprogress
       - devstack-checkout
       - shell: |
           #!/bin/bash -xe
@@ -408,7 +383,6 @@
     publishers:
       - devstack-logs-periodic
       - console-log-periodic
-      - devstack-complete
       - email:
           recipients: openstack-qa@lists.openstack.org
 
@@ -424,7 +398,6 @@
       - timestamps
 
     builders:
-      - devstack-inprogress
       - devstack-checkout
       - shell: |
           #!/bin/bash -xe
@@ -440,7 +413,6 @@
     publishers:
       - devstack-logs-periodic
       - console-log-periodic
-      - devstack-complete
       - email:
           recipients: openstack-qa@lists.openstack.org
 
@@ -456,7 +428,6 @@
       - timestamps
 
     builders:
-      - devstack-inprogress
       - devstack-checkout
       - shell: |
           #!/bin/bash -xe
@@ -472,7 +443,6 @@
     publishers:
       - devstack-logs-periodic
       - console-log-periodic
-      - devstack-complete
       - email:
           recipients: openstack-qa@lists.openstack.org
 
@@ -488,7 +458,6 @@
       - timestamps
 
     builders:
-      - devstack-inprogress
       - devstack-checkout
       - shell: |
           #!/bin/bash -xe
@@ -504,7 +473,6 @@
     publishers:
       - devstack-logs
       - console-log
-      - devstack-complete
 
 
 - job:
@@ -518,7 +486,6 @@
       - timestamps
 
     builders:
-      - devstack-inprogress
       - devstack-checkout
       - shell: |
           #!/bin/bash -xe
@@ -532,7 +499,6 @@
     publishers:
       - devstack-logs
       - console-log
-      - devstack-complete
 
 
 - job:
@@ -546,7 +512,6 @@
       - timestamps
 
     builders:
-      - devstack-inprogress
       - devstack-checkout
       - shell: |
           #!/bin/bash -xe
@@ -561,7 +526,6 @@
     publishers:
       - devstack-logs
       - console-log
-      - devstack-complete
 
 
 - job:
@@ -575,7 +539,6 @@
       - timestamps
 
     builders:
-      - devstack-inprogress
       - devstack-checkout
       - shell: |
           #!/bin/bash -xe
@@ -589,7 +552,7 @@
     publishers:
       - devstack-logs
       - console-log
-      - devstack-complete
+
 
 - job:
     name: gate-grenade-devstack-vm-stable
@@ -602,7 +565,6 @@
       - timestamps
 
     builders:
-      - devstack-inprogress
       - devstack-checkout
       - shell: |
           #!/bin/bash -xe
@@ -616,178 +578,3 @@
     publishers:
       - devstack-logs
       - console-log
-      - devstack-complete
-
-
-# Called by devstack jobs to alert that they have started so that the
-# jenkins slave they are running on can be disabled.
-- job:
-    name: devstack-update-inprogress
-    node: devstack-launch
-
-    wrappers:
-      - timeout:
-          timeout: 10
-          fail: true
-      - timestamps
-
-    builders:
-      - devstack-checkout
-      - shell: |
-          #!/bin/bash -xe
-          export STATSD_HOST="graphite.openstack.org"
-          export STATSD_PORT=8125
-          export PYTHONUNBUFFERED=true
-          $WORKSPACE/devstack-gate/devstack-vm-inprogress.py $DEVSTACK_NODE_NAME
-
-
-# Called by devstack jobs to alert that they have completed so that the
-# jenkins slave may be deleted.
-- job:
-    name: devstack-update-complete
-    node: devstack-launch
-
-    wrappers:
-      - timeout:
-          timeout: 10
-          fail: true
-      - timestamps
-
-    builders:
-      - devstack-checkout
-      - shell: |
-          #!/bin/bash -xe
-          export STATSD_HOST="graphite.openstack.org"
-          export STATSD_PORT=8125
-          export PYTHONUNBUFFERED=true
-          set +e
-          $WORKSPACE/devstack-gate/devstack-vm-inprogress.py $DEVSTACK_NODE_NAME
-          set -e
-          $WORKSPACE/devstack-gate/devstack-vm-delete.py $DEVSTACK_NODE_NAME
-
-
-- job-template:
-    name: devstack-launch-vms-{provider}
-    concurrent: false
-    node: devstack-launch
-
-    wrappers:
-      - timeout:
-          timeout: 20
-          fail: true
-      - timestamps
-
-    triggers:
-      - timed: '*/10 * * * *'
-
-    builders:
-      - devstack-checkout
-      - shell: |
-          #!/bin/bash -xe
-          export STATSD_HOST="graphite.openstack.org"
-          export STATSD_PORT=8125
-          export PYTHONUNBUFFERED=true
-          $WORKSPACE/devstack-gate/devstack-vm-launch.py {provider}
-
-
-- job-template:
-    name: devstack-reap-vms-{provider}
-    concurrent: false
-    node: devstack-launch
-
-    wrappers:
-      - timeout:
-          timeout: 10
-          fail: true
-      - timestamps
-
-    parameters:
-      - bool:
-          name: ALL_SERVERS
-          description: Delete all servers?
-          default: false
-      - bool:
-          name: ALL_IMAGES
-          description: Delete all images?
-          default: false
-
-    triggers:
-      - timed: '*/5 * * * *'
-
-    builders:
-      - devstack-checkout
-      - shell: |
-          #!/bin/bash -xe
-
-          if [ "$ALL_SERVERS" == 'true' ]; then
-            ALL_SERVERS="--all-servers"
-          else
-            ALL_SERVERS=""
-          fi
-
-          if [ "$ALL_IMAGES" == 'true' ]; then
-            ALL_IMAGES="--all-images"
-          else
-            ALL_IMAGES=""
-          fi
-
-          export STATSD_HOST="graphite.openstack.org"
-          export STATSD_PORT=8125
-          export PYTHONUNBUFFERED=true
-          $WORKSPACE/devstack-gate/devstack-vm-reap.py {provider} $ALL_SERVERS $ALL_IMAGES
-
-
-- job-template:
-    name: devstack-check-vms-{provider}
-    concurrent: false
-    node: devstack-launch
-
-    wrappers:
-      - timeout:
-          timeout: 25
-          fail: true
-      - timestamps
-
-    triggers:
-      - timed: '*/30 * * * *'
-
-    builders:
-      - devstack-checkout
-      - shell: |
-          #!/bin/bash -xe
-
-          export STATSD_HOST="graphite.openstack.org"
-          export STATSD_PORT=8125
-          export PYTHONUNBUFFERED=true
-          $WORKSPACE/devstack-gate/devstack-vm-check.py {provider}
-
-
-- job-template:
-    name: devstack-update-vm-image-{provider}
-    concurrent: false
-    node: devstack-launch
-
-    wrappers:
-      - timeout:
-          timeout: 360
-          fail: true
-      - timestamps
-
-    triggers:
-      - timed: '3 5 * * *'
-
-    builders:
-      - devstack-checkout
-      - shell: |
-          #!/bin/bash -xe
-          export PYTHONUNBUFFERED=true
-          $WORKSPACE/devstack-gate/devstack-vm-update-image.sh {provider}
-
-
-- job-group:
-    name: devstack-node-provider-jobs
-    jobs:
-      - devstack-launch-vms-{provider}
-      - devstack-reap-vms-{provider}
-      - devstack-check-vms-{provider}
-      - devstack-update-vm-image-{provider}
