@@ -43,7 +43,8 @@ class RequirementsList(object):
         if not os.path.exists(fn):
             return
         for line in open(fn):
-            line = line[:line.find('#')]
+            if '#' in line:
+                line = line[:line.find('#')]
             line = line.strip()
             if (not line or
                 line.startswith('http://tarballs.openstack.org/') or
