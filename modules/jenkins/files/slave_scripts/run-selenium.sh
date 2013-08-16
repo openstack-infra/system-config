@@ -19,7 +19,7 @@ then
   exit 1
 fi
 
-/usr/local/jenkins/slave_scripts/select-mirror.sh $org $project
+source /usr/local/jenkins/slave_scripts/select-mirror.sh $org $project
 
 venv=venv
 

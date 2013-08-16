@@ -6,7 +6,7 @@
       - gerrit-git-prep
       - shell: |
           #!/bin/bash -xe
-          /usr/local/jenkins/slave_scripts/select-mirror.sh openstack requirements
+          source /usr/local/jenkins/slave_scripts/select-mirror.sh openstack requirements
           virtualenv --clear .venv
           PIP_ARGS=""
           REQ_FILES="tools/pip-requires tools/test-requires requirements.txt test-requirements.txt"

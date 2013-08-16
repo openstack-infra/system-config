@@ -16,7 +16,7 @@ then
   exit 1
 fi
 
-/usr/local/jenkins/slave_scripts/select-mirror.sh $org $project
+source /usr/local/jenkins/slave_scripts/select-mirror.sh $org $project
 
 export NOSE_COVER_HTML=1
 
