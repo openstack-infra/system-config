@@ -31,6 +31,7 @@ class openstack_project::eavesdrop (
         '#openstack-metering',
         '#openstack-qa',
         '#savanna',
+        '#openstack-dns',
     ],
     use_ssl   => 'True'
   }
