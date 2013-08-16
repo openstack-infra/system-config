@@ -186,15 +186,6 @@
           fi
 
 - builder:
-    name: devstack-inprogress
-    builders:
-      - trigger-builds:
-          - project: devstack-update-inprogress
-            block: true
-            predefined-parameters:
-              DEVSTACK_NODE_NAME=${NODE_NAME}
-
-- builder:
     name: link-logs
     builders:
       - shell: |
@@ -296,18 +287,6 @@
               source: '**/subunit_log.txt.gz'
               keep-hierarchy: false
               copy-after-failure: true
-
-- publisher:
-    name: devstack-complete
-    publishers:
-      - trigger-parameterized-builds:
-          - project: devstack-update-complete
-            when: complete
-            predefined-parameters: |
-              DEVSTACK_NODE_NAME=${NODE_NAME}
-              UPSTREAM_BUILD_URL=${BUILD_URL}
-              UPSTREAM_JOB_NAME=${JOB_NAME}
-              UPSTREAM_BRANCH=${ZUUL_BRANCH}
 
 - publisher:
     name: coverage-log

@@ -889,46 +889,6 @@
 
 
 - project:
-    name: devstack-node-provider-rackspace
-    provider: rackspace
-    jobs:
-      - devstack-node-provider-jobs
-
-
-- project:
-    name: devstack-node-provider-rackspace-dfw
-    provider: rackspace-dfw
-    jobs:
-      - devstack-node-provider-jobs
-
-
-- project:
-    name: devstack-node-provider-rackspace-ord
-    provider: rackspace-ord
-    jobs:
-      - devstack-node-provider-jobs
-
-
-- project:
-    name: devstack-node-provider-hpcloud-az1
-    provider: hpcloud-az1
-    jobs:
-      - devstack-node-provider-jobs
-
-
-- project:
-    name: devstack-node-provider-hpcloud-az2
-    provider: hpcloud-az2
-    jobs:
-      - devstack-node-provider-jobs
-
-- project:
-    name: devstack-node-provider-hpcloud-az3
-    provider: hpcloud-az3
-    jobs:
-      - devstack-node-provider-jobs
-
-- project:
     name: pyghmi
     github-org: stackforge
     node: precise

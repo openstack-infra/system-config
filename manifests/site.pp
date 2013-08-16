@@ -141,9 +141,7 @@ node 'graphite.openstack.org' {
     graphite_admin_user     => hiera('graphite_admin_user'),
     graphite_admin_email    => hiera('graphite_admin_email'),
     graphite_admin_password => hiera('graphite_admin_password'),
-    statsd_hosts            => ['devstack-launch.slave.openstack.org',
-                                'devstack-launch01.slave.openstack.org',
-                                'devstack-launch02.slave.openstack.org',
+    statsd_hosts            => ['nodepool.openstack.org',
                                 'zuul.openstack.org'],
   }
 }
@@ -429,41 +427,6 @@ node 'mirror33.slave.openstack.org' {
   class { 'openstack_project::mirror33_slave':
     jenkins_ssh_public_key  => $openstack_project::jenkins_ssh_key,
     jenkins_ssh_private_key => hiera('jenkins_ssh_private_key_contents')
-  }
-}
-
-node 'devstack-launch.slave.openstack.org' {
-  include openstack_project
-  class { 'openstack_project::devstack_launch_slave':
-    jenkins_api_user        => hiera('jenkins_api_user'),
-    jenkins_api_key         => hiera('jenkins_api_key'),
-    jenkins_ssh_public_key  => $openstack_project::jenkins_ssh_key,
-    jenkins_ssh_private_key => hiera('jenkins_ssh_private_key_contents'),
-    jenkins_server          => 'jenkins.openstack.org',
-  }
-}
-
-node 'devstack-launch01.slave.openstack.org' {
-  include openstack_project
-  class { 'openstack_project::devstack_launch_slave':
-    jenkins_api_user        => hiera('jenkins_api_user'),
-    jenkins_api_key         => hiera('jenkins_api_key'),
-    jenkins_ssh_public_key  => $openstack_project::jenkins_ssh_key,
-    jenkins_ssh_private_key => hiera('jenkins_ssh_private_key_contents'),
-    jenkins_server          => 'jenkins01.openstack.org',
-    jenkins_credentials_id  => '8bcc2a78-0ce9-4383-aa14-039da7daf335',
-  }
-}
-
-node 'devstack-launch02.slave.openstack.org' {
-  include openstack_project
-  class { 'openstack_project::devstack_launch_slave':
-    jenkins_api_user        => hiera('jenkins_api_user'),
-    jenkins_api_key         => hiera('jenkins_api_key'),
-    jenkins_ssh_public_key  => $openstack_project::jenkins_ssh_key,
-    jenkins_ssh_private_key => hiera('jenkins_ssh_private_key_contents'),
-    jenkins_server          => 'jenkins02.openstack.org',
-    jenkins_credentials_id  => '8bcc2a78-0ce9-4383-aa14-039da7daf335',
   }
 }
 

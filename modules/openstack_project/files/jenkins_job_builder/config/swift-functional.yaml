@@ -9,7 +9,6 @@
       - timestamps
 
     builders:
-      - devstack-inprogress
       - devstack-checkout
       - shell: |
           #!/bin/bash -xe
@@ -31,4 +30,3 @@
 
     publishers:
       - console-log
-      - devstack-complete
