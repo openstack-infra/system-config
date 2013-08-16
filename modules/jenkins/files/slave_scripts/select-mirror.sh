@@ -34,10 +34,11 @@ rm -f ~/.pip/pip.conf
 # outside world.
 if [ "$org" == "openstack" ] && [ "$project" == "requirements" ]
 then
-    exit 0
+    echo "Not changing mirror"
 # For OpenStack projects, use the pypi.openstack.org mirror exclusively
 elif [ "$org" == "openstack" ]
 then
+    export TOX_INDEX_URL='http://pypi.openstack.org/openstack'
     cat <<EOF > ~/.pydistutils.cfg
 [easy_install]
 index_url = http://pypi.openstack.org/openstack

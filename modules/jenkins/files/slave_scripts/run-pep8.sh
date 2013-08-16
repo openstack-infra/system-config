@@ -26,7 +26,7 @@ then
   exit 1
 fi
 
-/usr/local/jenkins/slave_scripts/select-mirror.sh $org $project
+source /usr/local/jenkins/slave_scripts/select-mirror.sh $org $project
 
 set -o pipefail
 tox -v -epep8 | tee pep8.txt
