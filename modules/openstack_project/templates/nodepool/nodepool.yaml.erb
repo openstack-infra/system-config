@@ -91,11 +91,11 @@ targets:
       - name: devstack-precise
         providers:
           - name: hpcloud-az1
-            min-ready: 1
+            min-ready: 5
           - name: hpcloud-az2
-            min-ready: 1
+            min-ready: 5
           - name: hpcloud-az3
-            min-ready: 1
+            min-ready: 5
   - name: jenkins02
     jenkins:
       url: 'https://jenkins02.openstack.org/'
@@ -105,8 +105,8 @@ targets:
       - name: devstack-precise
         providers:
           - name: hpcloud-az1
-            min-ready: 1
+            min-ready: 5
           - name: hpcloud-az2
-            min-ready: 1
+            min-ready: 5
           - name: hpcloud-az3
-            min-ready: 1
+            min-ready: 5
