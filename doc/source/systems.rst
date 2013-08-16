@@ -21,3 +21,4 @@ Major Systems
    static
    lists
    wiki
+   git
