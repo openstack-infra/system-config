@@ -51,8 +51,6 @@
           goals: 'clean package'
           properties:
             - project-version=${{PROJECT_VER}}
-
-    postbuilders:
       - shell: |
             cp ./target/{name}.hpi ./target/{name}-$PROJECT_VER.hpi
 
