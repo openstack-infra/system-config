@@ -47,35 +47,35 @@ Log into ci-puppetmaster.openstack.org, su to root and run::
 * Add a new cinder volume (substitute the next number in series for
   NN)::
 
-  cinder create --display-name "static.openstack.org/mainNN" 512
-  nova volume-attach <server id> <volume id> auto
+    cinder create --display-name "static.openstack.org/mainNN" 512
+    nova volume-attach <server id> <volume id> auto
 
 * On static.openstack.org, create the partition table::
 
-  DEVICE=/dev/xvdX
-  parted $DEVICE mklabel msdos mkpart primary 0% 100% set 1 lvm on
-  pvcreate ${DEVICE}1
+    DEVICE=/dev/xvdX
+    parted $DEVICE mklabel msdos mkpart primary 0% 100% set 1 lvm on
+    pvcreate ${DEVICE}1
 
 * It should show up in pvs::
 
-  root@static:/etc/lvm# pvs
-    PV         VG   Fmt  Attr PSize   PFree  
-    /dev/xvdX1      lvm2 a-   512.00g 512.00g
+    root@static:/etc/lvm# pvs
+      PV         VG   Fmt  Attr PSize   PFree
+      /dev/xvdX1      lvm2 a-   512.00g 512.00g
 
 * Add it to the main volume group::
 
-  vgextend main ${DEVICE}1
+    vgextend main ${DEVICE}1
 
 Creating a New Logical Volume
 =============================
 
 Make sure there is enough space in the volume group::
-                    
+
   root@static:~# vgs
-    VG   #PV #LV #SN Attr   VSize VFree  
+    VG   #PV #LV #SN Attr   VSize VFree
     main   4   2   0 wz--n- 2.00t 347.98g
 
-If not, see "Adding a New Device".
+If not, see `Adding a New Device`_.
 
 Create the new logical volume and initialize the filesystem::
 
@@ -91,12 +91,12 @@ Expanding an Existing Logical Volume
 ====================================
 
 Make sure there is enough space in the volume group::
-                    
+
   root@static:~# vgs
-    VG   #PV #LV #SN Attr   VSize VFree  
+    VG   #PV #LV #SN Attr   VSize VFree
     main   4   2   0 wz--n- 2.00t 347.98g
 
-If not, see "Adding a New Device".
+If not, see `Adding a New Device`_.
 
 The following example to increase the size of a volume by 100G is
 untested; please confirm::
