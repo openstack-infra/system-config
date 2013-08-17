@@ -210,10 +210,9 @@ $("#graph-container").append($(new Image()).addClass('graph').graphite({
     bgcolor: 'ffffff',
     fgcolor: '000000',
     target: [
-        "alias(sumSeries(stats.gauges.devstack.pool.*.oneiric.ready), 'Oneiric')",
-        "alias(sumSeries(stats.gauges.devstack.pool.*.precise.ready), 'Precise')"
+        "color(alias(sumSeries(stats.gauges.nodepool.target.*.devstack-precise.*.ready), 'devstack-precise'), 'green')",
     ],
-    title: "Ready Devstack Jenkins Nodes"
+    title: "Available Test Nodes"
 }));
 
 $("#graph-container").append($(new Image()).addClass('graph').graphite({
