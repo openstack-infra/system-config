@@ -92,7 +92,7 @@ class nodepool (
 
   file { '/var/log/nodepool':
     ensure  => directory,
-    mode    => '0555',
+    mode    => '0755',
     owner   => 'nodepool',
     group   => 'nodepool',
     require => User['nodepool'],
@@ -100,7 +100,7 @@ class nodepool (
 
   file { '/var/run/nodepool':
     ensure  => directory,
-    mode    => '0555',
+    mode    => '0755',
     owner   => 'nodepool',
     group   => 'nodepool',
     require => User['nodepool'],
