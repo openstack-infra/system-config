@@ -308,3 +308,14 @@ tuskar:
       - stackforge/python-tuskarclient
     branches:
       - master
+
+stackforge-marconi:
+    events:
+      - patchset-created
+      - change-merged
+      - x-vrif-minus-2
+    projects:
+      - stackforge/marconi
+      - stackforge/python-marconiclient
+    branches:
+      - master
