@@ -300,9 +300,14 @@ To rename a project:
 
      sudo puppetd --disable
 
-#. Make the project inacessible by editing the Access pane. Add a
-   "read" ACL for "Administrators", and mark it "exclusive". Be sure
-   to save changes.
+#. Gracefully stop Zuul on zuul.openstack.org::
+
+     sudo kill -USR1 $(cat /var/run/zuul/zuul.pid)
+     rm -f /var/run/zuul/zuul.pid
+
+#. Stop Gerrit on review.openstack.org::
+
+     sudo invoke-rc.d gerrit stop
 
 #. Update the database on review.openstack.org::
 
@@ -316,17 +321,23 @@ To rename a project:
      set dest_project_name = "openstack/NEW"
      where dest_project_name = "openstack/OLD";
 
-#. Take Jenkins offline through its WebUI.
-
-#. Stop Gerrit on review.openstack.org and move both the Git
-   repository and the mirror::
-
-     sudo invoke-rc.d gerrit stop
+#. Move both the git repository and the mirror on
+   review.openstack.org::
+   
      sudo mv ~gerrit2/review_site/git/openstack/{OLD,NEW}.git
      sudo mv /var/lib/git/openstack/{OLD,NEW}.git
+
+#. Move the git repository on git.openstack.org::
+
+     sudo mv /var/lib/git/openstack/{OLD,NEW}.git
+
+#. Start Gerrit on review.openstack.org::
+
      sudo invoke-rc.d gerrit start
 
-#. Bring Jenkins online through its WebUI.
+#. Start Zuul on zuul.openstack.org::
+
+     sudo invoke-rc.d zuul start
 
 #. Merge the prepared Puppet configuration change, removing the
    original Jenkins jobs via the Jenkins WebUI later if needed.
@@ -350,10 +361,6 @@ To rename a project:
    populate it::
 
      ssh -p 29418 review.openstack.org gerrit replicate --all
-
-#. Wait for puppet changes to be applied so that the earlier
-   restrictive ACL will be reset for you (ending the outage for this
-   project).
 
 #. Submit a change that updates .gitreview with the new location of the
    project.
