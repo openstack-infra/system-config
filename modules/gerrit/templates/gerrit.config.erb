@@ -64,7 +64,12 @@
 <% commentlinks.each do |commentlink| -%>
 [commentlink "<%= commentlink['name'] %>"]
         match = "<%= commentlink['match'] %>"
+<% if commentlink['link'] != "" -%>
         link = "<%= commentlink['link'] %>"
+<% end -%>
+<% if commentlink['html'] != "" -%>
+        html = "<%= commentlink['html'] %>"
+<% end -%>
 <% end -%>
 [theme]
         backgroundColor = ffffff
