@@ -2,7 +2,7 @@ script-dir: /etc/nodepool/scripts
 dburi: 'mysql://nodepool:<%= mysql_password %>@localhost/nodepool'
 
 cron:
-  cleanup: '27 */6 * * *'
+  cleanup: '*/5 * * * *'
   update-image: '14 2 * * *'
 
 zmq-publishers:
