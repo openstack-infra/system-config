@@ -139,6 +139,11 @@ class openstack_project::gerrit (
         match => '(\\b[Bb]lue[Pp]rint\\b|\\b[Bb][Pp]\\b)[ \\t#:]*([A-Za-z0-9\\-]+)',
         link  => 'https://blueprints.launchpad.net/openstack/?searchtext=$2',
       },
+      {
+        name  => 'testresult',
+        match => '<li>([^ ]+) <a href=\"[^\"]+\">([^<]+)</a> : ([^ ]+)([^<]*)</li>',
+        html  => '<li><span class=\"comment_test_name\"><a href=\"$2\">$1</a></span> <span class=\"comment_test_result\"><span class=\"result_$3\">$3</span>$4</span></li>',
+      },
     ],
     war                             => $war,
     contactstore                    => $contactstore,

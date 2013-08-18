@@ -27,6 +27,7 @@ class openstack_project::zuul_dev(
     zuul_ssh_private_key => $zuul_ssh_private_key,
     url_pattern          => $url_pattern,
     push_change_refs     => false,
+    job_name_in_report   => true,
     status_url           => 'http://zuul-dev.openstack.org/',
     statsd_host          => $statsd_host,
   }
