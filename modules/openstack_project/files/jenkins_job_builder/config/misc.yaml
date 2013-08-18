@@ -23,3 +23,17 @@
       - console-log
 
     node: '{node}'
+
+- job-template:
+    name: 'gate-{name}-tox-{env}'
+
+    builders:
+      - gerrit-git-prep
+      - shell: '/usr/local/jenkins/slave_scripts/run-tox.sh {env}'
+      - assert-no-extra-files
+
+    publishers:
+      - test-results
+      - console-log
+
+    node: '{node}'
