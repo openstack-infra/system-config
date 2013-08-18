@@ -101,13 +101,13 @@ tripleo:
       - change-merged
       - x-vrif-minus-2
     projects:
-      - stackforge/diskimage-builder
-      - stackforge/os-collect-config
-      - stackforge/os-apply-config
-      - stackforge/os-refresh-config
-      - stackforge/tripleo-image-elements
+      - openstack/diskimage-builder
+      - openstack/os-collect-config
+      - openstack/os-apply-config
+      - openstack/os-refresh-config
+      - openstack/tripleo-image-elements
       - openstack/tripleo-incubator
-      - stackforge/tripleo-heat-templates
+      - openstack/tripleo-heat-templates
       - openstack-infra/tripleo-ci
     branches:
       - master
@@ -186,10 +186,10 @@ puppet-openstack:
       - stackforge/puppet-heat
       - stackforge/puppet-horizon
       - stackforge/puppet-keystone
+      - stackforge/puppet-neutron
       - stackforge/puppet-nova
       - stackforge/puppet-openstack
       - stackforge/puppet-openstack_dev_env
-      - stackforge/puppet-quantum
       - stackforge/puppet-swift
       - stackforge/puppet-tempest
     branches:
@@ -250,7 +250,7 @@ openstack-ironic:
     projects:
       - openstack/ironic
       - openstack/python-ironicclient
-      - stackforge/python-ipmi
+      - stackforge/pyghmi
     branches:
       - master
 

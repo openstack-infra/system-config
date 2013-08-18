@@ -1938,7 +1938,7 @@ projects:
     gate:
       - gate-noop
 
-  - name: stackforge/diskimage-builder
+  - name: openstack/diskimage-builder
     check:
       - gate-diskimage-builder-pep8
       - gate-diskimage-builder-python26
@@ -1956,7 +1956,7 @@ projects:
       - diskimage-builder-tarball:
         - diskimage-builder-pypi-upload
 
-  - name: stackforge/os-apply-config
+  - name: openstack/os-apply-config
     check:
       - gate-os-apply-config-pep8
       - gate-os-apply-config-python26
@@ -1974,7 +1974,7 @@ projects:
       - os-apply-config-tarball:
         - os-apply-config-pypi-upload
 
-  - name: stackforge/os-collect-config
+  - name: openstack/os-collect-config
     check:
       - gate-os-collect-config-pep8
       - gate-os-collect-config-python26
@@ -1992,7 +1992,7 @@ projects:
       - os-collect-config-tarball:
         - os-collect-config-pypi-upload
 
-  - name: stackforge/os-refresh-config
+  - name: openstack/os-refresh-config
     check:
       - gate-os-refresh-config-pep8
       - gate-os-refresh-config-python26
@@ -2010,13 +2010,13 @@ projects:
       - os-refresh-config-tarball:
         - os-refresh-config-pypi-upload
 
-  - name: stackforge/tripleo-heat-templates
+  - name: openstack/tripleo-heat-templates
     check:
       - gate-noop
     gate:
       - gate-noop
 
-  - name: stackforge/tripleo-image-elements
+  - name: openstack/tripleo-image-elements
     check:
       - gate-noop
     gate:
@@ -2326,19 +2326,19 @@ projects:
       - gate-puppet-nova-puppet-unit-3.0
       - gate-puppet-nova-puppet-unit-3.1
 
-  - name: stackforge/puppet-quantum
+  - name: stackforge/puppet-neutron
     check:
-      - gate-puppet-quantum-puppet-lint
-      - gate-puppet-quantum-puppet-syntax
-      - gate-puppet-quantum-puppet-unit-2.7
-      - gate-puppet-quantum-puppet-unit-3.0
-      - gate-puppet-quantum-puppet-unit-3.1
+      - gate-puppet-neutron-puppet-lint
+      - gate-puppet-neutron-puppet-syntax
+      - gate-puppet-neutron-puppet-unit-2.7
+      - gate-puppet-neutron-puppet-unit-3.0
+      - gate-puppet-neutron-puppet-unit-3.1
     gate:
-      - gate-puppet-quantum-puppet-lint
-      - gate-puppet-quantum-puppet-syntax
-      - gate-puppet-quantum-puppet-unit-2.7
-      - gate-puppet-quantum-puppet-unit-3.0
-      - gate-puppet-quantum-puppet-unit-3.1
+      - gate-puppet-neutron-puppet-lint
+      - gate-puppet-neutron-puppet-syntax
+      - gate-puppet-neutron-puppet-unit-2.7
+      - gate-puppet-neutron-puppet-unit-3.0
+      - gate-puppet-neutron-puppet-unit-3.1
 
   - name: stackforge/puppet-openstack
     check:
@@ -2745,11 +2745,11 @@ projects:
     release:
       - stackalytics-tarball
 
-  - name: stackforge/python-ipmi
+  - name: stackforge/pyghmi
     check:
-      - gate-python-ipmi-pep8
+      - gate-pyghmi-pep8
     gate:
-      - gate-python-ipmi-pep8
+      - gate-pyghmi-pep8
 
   - name: openstack-infra/tripleo-ci
     check:
