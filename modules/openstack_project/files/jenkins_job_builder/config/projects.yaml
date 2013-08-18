@@ -925,7 +925,7 @@
       - devstack-node-provider-jobs
 
 - project:
-    name: python-ipmi
+    name: pyghmi
     github-org: stackforge
     node: precise
     tarball-site: tarballs.openstack.org
@@ -935,7 +935,7 @@
 
 - project:
     name: diskimage-builder
-    github-org: stackforge
+    github-org: openstack
     node: precise
     tarball-site: tarballs.openstack.org
 
@@ -945,7 +945,7 @@
 
 - project:
     name: os-apply-config
-    github-org: stackforge
+    github-org: openstack
     node: precise
     tarball-site: tarballs.openstack.org
 
@@ -955,7 +955,7 @@
 
 - project:
     name: os-collect-config
-    github-org: stackforge
+    github-org: openstack
     node: precise
     tarball-site: tarballs.openstack.org
 
@@ -965,7 +965,7 @@
 
 - project:
     name: os-refresh-config
-    github-org: stackforge
+    github-org: openstack
     node: precise
     tarball-site: tarballs.openstack.org
 
@@ -975,7 +975,7 @@
 
 - project:
     name: tripleo-image-elements
-    github-org: stackforge
+    github-org: openstack
     node: precise
     tarball-site: tarballs.openstack.org
 
@@ -1094,7 +1094,7 @@
       - puppet-module-unit
 
 - project:
-    name: puppet-quantum
+    name: puppet-neutron
     github-org: stackforge
     node: precise
     tarball-site: tarballs.openstack.org

@@ -132,17 +132,14 @@
 - project: stackforge/bindep
   description: "Binary dependency automation"
   upstream: git://github.com/rbtcollins/bindep.git
-- project: stackforge/diskimage-builder
+- project: openstack/diskimage-builder
   description: "Image building tools for OpenStack"
-- project: stackforge/tripleo-heat-templates
+- project: openstack/tripleo-heat-templates
   description: "Heat templates for deploying OpenStack"
-  upstream: git://github.com/openstack-ops/templates.git
-- project: stackforge/tripleo-image-elements
+- project: openstack/tripleo-image-elements
   description: "Disk image elements for deployment images of Openstack"
-  upstream: git://github.com/stackforge/diskimage-builder.git
 - project: openstack/tripleo-incubator
   description: "The TripleO incubator where unformed things are experimented with."
-  upstream: git://github.com/tripleo/incubator.git
 - project: stackforge/healthnmon
   description: "Healthnmon aims to deliver 'Cloud Resource Monitor', an extensible service to OpenStack Cloud Operating system by providing monitoring service for Cloud Resources and Infrastructure with a pluggable framework for 'Inventory Management', 'Alerts and notifications' and 'Utilization Data."
   upstream: git://github.com/healthnmon/healthnmon.git
@@ -191,13 +188,11 @@
 - project: stackforge/savanna-extra
   description: "Repo for Savanna-related utils."
   acl-config: /home/gerrit2/acls/stackforge/savanna.config
-- project: stackforge/os-apply-config
-  description: "Apply configuration from cloud metadata"
-- project: stackforge/os-collect-config
+- project: openstack/os-apply-config
+  description: "Apply configuration from cloud metadata."
+- project: openstack/os-collect-config
   description: "Collect and cache metadata, run hooks on changes."
-  upstream: git://github.com/SpamapS/os-collect-config.git
-- project: stackforge/os-refresh-config
-  upstream: git://github.com/tripleo/os-refresh-config.git
+- project: openstack/os-refresh-config
   description: "Restart services and coordinate data migration on Heat config changes."
 - project: stackforge/puppet-ceilometer
   description: OpenStack Ceilometer Puppet Module
@@ -243,7 +238,7 @@
   description: OpenStack Tempest Puppet Module
   acl-config: /home/gerrit2/acls/stackforge/puppet-modules.config
   upstream: git://github.com/puppetlabs/puppetlabs-tempest.git
-- project: stackforge/puppet-quantum
+- project: stackforge/puppet-neutron
   description: OpenStack Quantum Puppet Module
   acl-config: /home/gerrit2/acls/stackforge/puppet-modules.config
   upstream: git://github.com/bodepd/puppet-quantum.git

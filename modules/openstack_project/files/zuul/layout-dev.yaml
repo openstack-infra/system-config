@@ -580,25 +580,25 @@ projects:
     check:
       - gate-noop
 
-  - name: stackforge/diskimage-builder
+  - name: openstack/diskimage-builder
     check:
       - gate-diskimage-builder-pep8
       - gate-diskimage-builder-python26
       - gate-diskimage-builder-python27
 
-  - name: stackforge/os-apply-config
+  - name: openstack/os-apply-config
     check:
       - gate-os-apply-config-pep8
       - gate-os-apply-config-python26
       - gate-os-apply-config-python27
 
-  - name: stackforge/os-refresh-config
+  - name: openstack/os-refresh-config
     check:
       - gate-os-refresh-config-pep8
       - gate-os-refresh-config-python26
       - gate-os-refresh-config-python27
 
-  - name: stackforge/tripleo-image-elements
+  - name: openstack/tripleo-image-elements
     check:
       - gate-tripleo-image-elements-pep8
       - gate-tripleo-image-elements-python26
@@ -685,11 +685,11 @@ projects:
       - gate-puppet-nova-puppet-unit-3.0
       - gate-puppet-nova-puppet-unit-3.1
 
-  - name: stackforge/puppet-quantum
+  - name: stackforge/puppet-neutron
     check:
-      - gate-puppet-quantum-puppet-unit-2.7
-      - gate-puppet-quantum-puppet-unit-3.0
-      - gate-puppet-quantum-puppet-unit-3.1
+      - gate-puppet-neutron-puppet-unit-2.7
+      - gate-puppet-neutron-puppet-unit-3.0
+      - gate-puppet-neutron-puppet-unit-3.1
 
   - name: stackforge/puppet-openstack
     check:
