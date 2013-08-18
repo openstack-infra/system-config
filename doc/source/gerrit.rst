@@ -303,7 +303,7 @@ To rename a project:
 #. Gracefully stop Zuul on zuul.openstack.org::
 
      sudo kill -USR1 $(cat /var/run/zuul/zuul.pid)
-     rm -f /var/run/zuul/zuul.pid
+     rm -f /var/run/zuul/zuul.pid /var/run/zuul/zuul.lock
 
 #. Stop Gerrit on review.openstack.org::
 
