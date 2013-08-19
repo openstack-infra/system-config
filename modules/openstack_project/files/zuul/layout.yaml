@@ -212,6 +212,10 @@ jobs:
     voting: false
   - name: gate-python-troveclient-python33
     voting: false
+  - name: gate-python-tuskarclient-pylint
+    voting: false
+  - name: gate-python-tuskarclient-python33
+    voting: false
 
 projects:
   - name: openstack-infra/zuul
@@ -2790,16 +2794,14 @@ projects:
   - name: stackforge/python-tuskarclient
     check:
       - gate-python-tuskarclient-pep8
+      - gate-python-tuskarclient-pylint
       - gate-python-tuskarclient-python26
       - gate-python-tuskarclient-python27
       - gate-python-tuskarclient-python33
-      - gate-python-tuskarclient-pylint
     gate:
       - gate-python-tuskarclient-pep8
       - gate-python-tuskarclient-python26
       - gate-python-tuskarclient-python27
-      - gate-python-tuskarclient-python33
-      - gate-python-tuskarclient-pylint
     post:
       - python-tuskarclient-coverage
 
