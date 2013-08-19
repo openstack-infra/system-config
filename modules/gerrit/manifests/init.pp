@@ -60,6 +60,10 @@
 #     A boolean enabling local replication for apache acceleration
 #   gitweb:
 #     A boolean enabling gitweb
+#   cgit:
+#     A boolean enabling cgit
+#   cgit_url:
+#     Url for external cgit
 #   testmode:
 #     Set this to true to disable cron jobs and replication,
 #     which can interfere with testing.
@@ -110,6 +114,8 @@ class gerrit(
   $replication = [],
   $replication_targets = [],
   $gitweb = true,
+  $cgit = false,
+  $cgit_url = '',
   $testmode = false
 ) {
   include apache

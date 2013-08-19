@@ -82,6 +82,13 @@
 [gitweb]
 	revision = "?p=${project}.git;a=commitdiff;h=${commit}"
 <% end -%>
+<% if cgit -%>
+[gitweb]
+    type = cgit
+<% end -%>
+<% if cgit_url -%>
+    url = "<%= cgit_url %>
+<% end -%>
 <% if contactstore == true -%>
 [contactstore]
 	appsec = <%= contactstore_appsec %>
