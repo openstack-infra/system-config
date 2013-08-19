@@ -26,7 +26,12 @@ then
   exit 1
 fi
 
-venv=py$version
+if [ "$version" -eq "pypy" ]
+then
+  venv=$version
+else
+  venv=py$version
+fi
 
 export NOSE_WITH_XUNIT=1
 export NOSE_WITH_HTML_OUTPUT=1

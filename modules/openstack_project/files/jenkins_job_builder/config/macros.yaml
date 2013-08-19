@@ -146,6 +146,11 @@
     builders:
       - shell: "/usr/local/jenkins/slave_scripts/run-tox.sh 33 {github-org} {project}"
 
+- buidler:
+    name: pypy
+    builders:
+      - shell: "/usr/local/jenkins/slave_scripts/run-tox.sh pypy {github-org} {project}"
+
 - builder:
     name: assert-no-extra-files
     builders:
