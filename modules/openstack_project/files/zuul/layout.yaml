@@ -2838,3 +2838,17 @@ projects:
       - gate-noop
     gate:
       - gate-noop
+
+  - name: stackforge/wsme
+    check:
+      - gate-wsme-python27
+    gate:
+      - gate-wsme-python27
+    post:
+      - wsme-branch-tarball
+    pre-release:
+      - wsme-tarball
+    release:
+      - wsme-tarball:
+        - wsme-pypi-upload:
+          - post-mirror-python27
