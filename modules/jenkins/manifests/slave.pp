@@ -6,6 +6,7 @@ class jenkins::slave(
   $bare = false,
   $user = true,
   $python3 = false,
+  $include_pypy = false
 ) {
 
   include pip
@@ -339,6 +340,14 @@ class jenkins::slave(
       subscribe   => File['/etc/sysctl.d/10-ptrace.conf'],
       refreshonly => true,
       command     => '/sbin/sysctl -p /etc/sysctl.d/10-ptrace.conf',
+    }
+
+    if $include_pypy {
+      apt::ppa { 'ppa:pypy/pypy': }
+      package { 'pypy':
+        ensure  => present,
+        require => Apt::Ppa['ppa:pypy/pypy']
+      }
     }
   }
 
