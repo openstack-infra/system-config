@@ -309,7 +309,7 @@ tuskar:
     branches:
       - master
 
-stackforge-marconi:
+openstack-marconi:
     events:
       - patchset-created
       - change-merged
