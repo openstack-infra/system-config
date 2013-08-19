@@ -1674,11 +1674,13 @@ projects:
       - gate-marconi-python26
       - gate-marconi-python27
       - gate-marconi-python33
+      - gate-marconi-pypy
     gate:
       - gate-marconi-pep8
       - gate-marconi-python26
       - gate-marconi-python27
       - gate-marconi-python33
+      - gate-marconi-pypy
 
   - name: stackforge/staccato
     check:
