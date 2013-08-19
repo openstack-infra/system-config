@@ -38,6 +38,20 @@ providers:
         base-image: 'Ubuntu 12.04 LTS (Precise Pangolin)'
         min-ram: 8192
         setup: prepare_node_devstack.sh
+  - name: rax-iad
+    region-name: 'IAD'
+    service-type: 'compute'
+    service-name: 'cloudServersOpenStack'
+    username: '<%= rackspace_username %>'
+    password: '<%= rackspace_password %>'
+    project-id: '<%= rackspace_project %>'
+    auth-url: 'https://identity.api.rackspacecloud.com/v2.0/'
+    max-servers: 60
+    images:
+      - name: devstack-precise
+        base-image: 'Ubuntu 12.04 LTS (Precise Pangolin)'
+        min-ram: 8192
+        setup: prepare_node_devstack.sh
   - name: hpcloud-az1
     region-name: 'az-1.region-a.geo-1'
     service-type: 'compute'
@@ -96,6 +110,8 @@ targets:
             min-ready: 5
           - name: hpcloud-az3
             min-ready: 5
+          - name: rax-iad
+            min-ready: 5
   - name: jenkins02
     jenkins:
       url: 'https://jenkins02.openstack.org/'
@@ -109,4 +125,6 @@ targets:
           - name: hpcloud-az2
             min-ready: 5
           - name: hpcloud-az3
+            min-ready: 5
+          - name: rax-iad
             min-ready: 5
