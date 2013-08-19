@@ -2,6 +2,7 @@
 
 GERRIT_SITE=$1
 ZUUL_SITE=$2
+GIT_ORIGIN=$3
 
 if [ -z "$GERRIT_SITE" ]
 then
@@ -13,6 +14,13 @@ if [ -z "$ZUUL_SITE" ]
 then
   echo "The zuul site name (eg 'http://zuul.openstack.org') must be the second argument."
   exit 1
+fi
+
+if [ -z "$GIT_ORIGIN" ]
+then
+    GIT_ORIGIN="$GERRIT_SITE/p"
+    # git://git.openstack.org/
+    # https://review.openstack.org/p
 fi
 
 if [ -z "$ZUUL_REF" ]
@@ -31,9 +39,9 @@ if [[ ! -e .git ]]
 then
     ls -a
     rm -fr .[^.]* *
-    git clone $GERRIT_SITE/p/$ZUUL_PROJECT .
+    git clone $GIT_ORIGIN/$ZUUL_PROJECT .
 fi
-git remote set-url origin $GERRIT_SITE/p/$ZUUL_PROJECT
+git remote set-url origin $GIT_ORIGIN/$ZUUL_PROJECT
 git remote update || git remote update # attempt to work around bug #925790
 git reset --hard
 git clean -x -f -d -q
