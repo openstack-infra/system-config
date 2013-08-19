@@ -60,6 +60,9 @@ class openstack_project::gerrit (
   $sysadmins = [],
   $swift_username = '',
   $swift_password = '',
+  $gitweb = true,
+  $cgit = false,
+  $web_repo_url = '',
 ) {
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [80, 443, 29418],
@@ -150,6 +153,9 @@ class openstack_project::gerrit (
     email_private_key               => $email_private_key,
     replicate_local                 => $replicate_local,
     replication                     => $replication,
+    gitweb                          => $gitweb,
+    cgit                            => $cgit,
+    web_repo_url                    => $web_repo_url,
     testmode                        => $testmode,
     require                         => Class[openstack_project::server],
   }
