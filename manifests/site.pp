@@ -152,6 +152,15 @@ node 'groups.openstack.org' {
   }
 }
 
+node 'groups-staging.openstack.org' {
+  class { 'openstack_project::groups_staging':
+    sysadmins           => hiera('sysadmins'),
+    mysql_root_password => hiera('groups_staging_mysql_root_password'),
+    site_admin_password => hiera('groups_staging_site_admin_password'),
+    site_mysql_password => hiera('groups_staging_site_mysql_password'),
+  }
+}
+
 node 'lists.openstack.org' {
   class { 'openstack_project::lists':
     listadmins   => hiera('listadmins'),
