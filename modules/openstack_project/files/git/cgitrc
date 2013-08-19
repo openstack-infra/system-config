@@ -3,7 +3,16 @@
 #
 
 # Enable caching of up to 1000 output entries
-cache-size=0
+cache-size=1000
+
+# Cache repository pages without a fixed SHA for one minute.
+cache-dynamic-ttl=1
+
+# Cache repo summary page for one minute.
+cache-repo-ttl=1
+
+# Cache cgit front page for one minute.
+cache-root-ttl=1
 
 # Specify some default clone prefixes
 clone-prefix=git://git.openstack.org https://git.openstack.org
