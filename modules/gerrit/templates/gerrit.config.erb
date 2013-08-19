@@ -78,9 +78,16 @@
 [melody]
 	monitoring = <%= enable_melody %>
 	session = <%= melody_session %>
-<% if gitweb -%>
+<% if gitweb or cgit -%>
 [gitweb]
+<% if gitweb -%>
 	revision = "?p=${project}.git;a=commitdiff;h=${commit}"
+<% else -%>
+	type = cgit
+<% end -%>
+<% if web_repo_url -%>
+	url = "<%= web_repo_url %>"
+<% end -%>
 <% end -%>
 <% if contactstore == true -%>
 [contactstore]
