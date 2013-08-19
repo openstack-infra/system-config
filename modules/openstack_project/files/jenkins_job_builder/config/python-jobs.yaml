@@ -117,6 +117,28 @@
     node: precisepy3k
 
 - job-template:
+    name: 'gate-{name}-pypy'
+
+    wrappers:
+      - timeout:
+          timeout: 40
+          fail: true
+      - timestamps
+
+    builders:
+      - gerrit-git-prep
+      - pypy:
+          github-org: '{github-org}'
+          project: '{name}'
+      - assert-no-extra-files
+
+    publishers:
+      - test-results
+      - console-log
+
+    node: precisepy3k
+
+- job-template:
     name: 'gate-{name}-docs'
 
     builders:
