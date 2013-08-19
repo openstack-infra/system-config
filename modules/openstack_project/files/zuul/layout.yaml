@@ -543,6 +543,7 @@ projects:
       - gate-tempest-devstack-vm-neutron
       - gate-grenade-devstack-vm
     experimental:
+      - gate-tempest-devstack-vm-iad-trial
       - gate-grenade-devstack-vm-stable
       - gate-devstack-vm-cells
     post:
@@ -587,6 +588,7 @@ projects:
       - gate-tempest-devstack-vm-neutron
       - gate-grenade-devstack-vm
     experimental:
+      - gate-tempest-devstack-vm-iad-trial
       - gate-grenade-devstack-vm-stable
       - gate-devstack-vm-cells
     post:
@@ -637,6 +639,7 @@ projects:
       - gate-tempest-devstack-vm-neutron
       - gate-grenade-devstack-vm
     experimental:
+      - gate-tempest-devstack-vm-iad-trial
       - gate-grenade-devstack-vm-stable
       - gate-devstack-vm-cells
     post:
@@ -707,6 +710,7 @@ projects:
       - gate-tempest-devstack-vm-neutron
       - gate-grenade-devstack-vm
     experimental:
+      - gate-tempest-devstack-vm-iad-trial
       - gate-grenade-devstack-vm-stable
       - gate-devstack-vm-cells
     post:
@@ -755,6 +759,7 @@ projects:
       - gate-tempest-devstack-vm-neutron
       - gate-grenade-devstack-vm
     experimental:
+      - gate-tempest-devstack-vm-iad-trial
       - gate-grenade-devstack-vm-stable
       - gate-devstack-vm-cells
       - gate-tempest-devstack-vm-large-ops
@@ -898,6 +903,7 @@ projects:
       - gate-neutron-python27
       - gate-tempest-devstack-vm-neutron
     experimental:
+      - gate-tempest-devstack-vm-iad-trial
       - gate-tempest-devstack-vm-neutron-full
     post:
       - neutron-branch-tarball
@@ -943,6 +949,7 @@ projects:
       - gate-tempest-devstack-vm-postgres-full
       - gate-grenade-devstack-vm
     experimental:
+      - gate-tempest-devstack-vm-iad-trial
       - gate-grenade-devstack-vm-stable
       - gate-devstack-vm-cells
     post:
@@ -1009,6 +1016,7 @@ projects:
       - gate-tempest-devstack-vm-neutron
       - gate-grenade-devstack-vm
     experimental:
+      - gate-tempest-devstack-vm-iad-trial
       - gate-grenade-devstack-vm-stable
       - gate-devstack-vm-cells
     post:
@@ -1051,6 +1059,7 @@ projects:
       - gate-tempest-devstack-vm-neutron
       - gate-grenade-devstack-vm
     experimental:
+      - gate-tempest-devstack-vm-iad-trial
       - gate-grenade-devstack-vm-stable
       - gate-devstack-vm-cells
     post:
@@ -1093,6 +1102,7 @@ projects:
       - gate-tempest-devstack-vm-neutron
       - gate-grenade-devstack-vm
     experimental:
+      - gate-tempest-devstack-vm-iad-trial
       - gate-grenade-devstack-vm-stable
       - gate-devstack-vm-cells
     post:
@@ -1137,6 +1147,7 @@ projects:
       - gate-tempest-devstack-vm-neutron
       - gate-grenade-devstack-vm
     experimental:
+      - gate-tempest-devstack-vm-iad-trial
       - gate-grenade-devstack-vm-stable
       - gate-devstack-vm-cells
       - gate-tempest-devstack-vm-large-ops
@@ -1209,6 +1220,7 @@ projects:
       - gate-tempest-devstack-vm-neutron
       - gate-grenade-devstack-vm
     experimental:
+      - gate-tempest-devstack-vm-iad-trial
       - gate-grenade-devstack-vm-stable
       - gate-devstack-vm-cells
     post:
@@ -1287,6 +1299,7 @@ projects:
       - gate-grenade-noop
       - gate-grenade-devstack-vm
     experimental:
+      - gate-tempest-devstack-vm-iad-trial
       - gate-grenade-devstack-vm-stable
 
   - name: openstack-dev/hacking
@@ -1344,6 +1357,7 @@ projects:
       - gate-tempest-devstack-vm-neutron
       - gate-grenade-devstack-vm
     experimental:
+      - gate-tempest-devstack-vm-iad-trial
       - gate-devstack-vm-cells
     post:
       - pbr-branch-tarball
@@ -1376,6 +1390,7 @@ projects:
       - gate-tempest-devstack-vm-neutron
       - gate-grenade-devstack-vm
     experimental:
+      - gate-tempest-devstack-vm-iad-trial
       - gate-tempest-devstack-vm-heat-slow
       - gate-grenade-devstack-vm-stable
       - gate-devstack-vm-cells
@@ -1397,6 +1412,7 @@ projects:
       - gate-tempest-devstack-vm-neutron
       - gate-grenade-devstack-vm
     experimental:
+      - gate-tempest-devstack-vm-iad-trial
       - gate-grenade-devstack-vm-stable
       - gate-devstack-vm-cells
       - gate-tempest-devstack-vm-large-ops
@@ -1441,6 +1457,7 @@ projects:
       - gate-tempest-devstack-vm-neutron
       - gate-grenade-devstack-vm
     experimental:
+      - gate-tempest-devstack-vm-iad-trial
       - gate-tempest-devstack-vm-heat-slow
       - gate-grenade-devstack-vm-stable
       - gate-devstack-vm-cells
@@ -1551,6 +1568,7 @@ projects:
       - gate-tempest-devstack-vm-postgres-full
       - gate-tempest-devstack-vm-neutron
     experimental:
+      - gate-tempest-devstack-vm-iad-trial
       - gate-devstack-vm-cells
       - gate-tempest-devstack-vm-large-ops
     post:
@@ -1586,6 +1604,7 @@ projects:
       - gate-tempest-devstack-vm-postgres-full
       - gate-tempest-devstack-vm-neutron
     experimental:
+      - gate-tempest-devstack-vm-iad-trial
       - gate-devstack-vm-cells
       - gate-tempest-devstack-vm-large-ops
     post:
