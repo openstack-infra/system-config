@@ -752,6 +752,8 @@ projects:
       - periodic-nova-docs-stable-grizzly
       - periodic-nova-python26-stable-grizzly
       - periodic-nova-python27-stable-grizzly
+    silent:
+      - gate-tempest-devstack-vm-iad-trial
 
   - name: openstack/oslo-incubator
     check:
