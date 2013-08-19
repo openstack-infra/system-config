@@ -497,9 +497,10 @@ node /^precisepy3k-?\d+.*\.slave\.openstack\.org$/ {
   include openstack_project
   include openstack_project::puppet_cron
   class { 'openstack_project::slave':
-    ssh_key   => $openstack_project::jenkins_ssh_key,
-    sysadmins => hiera('sysadmins'),
-    python3   => true,
+    ssh_key      => $openstack_project::jenkins_ssh_key,
+    sysadmins    => hiera('sysadmins'),
+    python3      => true,
+    include_pypy => true,
   }
 }
 
@@ -507,9 +508,10 @@ node /^precisepy3k-dev\d+.*\.slave\.openstack\.org$/ {
   include openstack_project
   include openstack_project::puppet_cron
   class { 'openstack_project::slave':
-    ssh_key   => $openstack_project::jenkins_dev_ssh_key,
-    sysadmins => hiera('sysadmins'),
-    python3   => true,
+    ssh_key      => $openstack_project::jenkins_dev_ssh_key,
+    sysadmins    => hiera('sysadmins'),
+    python3      => true,
+    include_pypy => true,
   }
 }
 

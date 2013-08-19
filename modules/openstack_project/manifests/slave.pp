@@ -5,7 +5,8 @@ class openstack_project::slave (
   $certname = $::fqdn,
   $ssh_key = '',
   $sysadmins = [],
-  $python3 = false
+  $python3 = false,
+  $include_pypy = false
 ) {
   include openstack_project
   include openstack_project::tmpcleanup
@@ -16,9 +17,10 @@ class openstack_project::slave (
     sysadmins                 => $sysadmins,
   }
   class { 'jenkins::slave':
-    bare    => $bare,
-    ssh_key => $ssh_key,
-    python3 => $python3,
+    bare         => $bare,
+    ssh_key      => $ssh_key,
+    python3      => $python3,
+    include_pypy => $include_pypy,
   }
   class { 'salt':
     salt_master => 'ci-puppetmaster.openstack.org',
