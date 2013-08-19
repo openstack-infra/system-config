@@ -814,12 +814,18 @@ projects:
       - gate-oslo.messaging-docs
       - gate-oslo.messaging-python26
       - gate-oslo.messaging-python27
+      - gate-tempest-devstack-vm-full
+      - gate-tempest-devstack-vm-neutron
+      - gate-grenade-devstack-vm
     gate:
       - gate-oslo.messaging-requirements
       - gate-oslo.messaging-docs
       - gate-oslo.messaging-pep8
       - gate-oslo.messaging-python26
       - gate-oslo.messaging-python27
+      - gate-tempest-devstack-vm-full
+      - gate-tempest-devstack-vm-neutron
+      - gate-grenade-devstack-vm
     post:
       - oslo.messaging-branch-tarball
       - oslo.messaging-docs
