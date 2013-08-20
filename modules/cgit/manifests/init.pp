@@ -26,6 +26,10 @@ class cgit(
   $ssl_cert_file_contents = '', # If left empty puppet will not create file.
   $ssl_key_file_contents = '', # If left empty puppet will not create file.
   $ssl_chain_file_contents = '', # If left empty puppet will not create file.
+  $balance_git = false,
+  $proxy_git_daemon = false,
+  $balancer_member_names = [],
+  $balancer_member_ips = []
 ) {
 
   include apache
@@ -164,6 +168,80 @@ class cgit(
       mode    => '0640',
       content => $ssl_chain_file_contents,
       before  => Apache::Vhost[$vhost_name],
+    }
+  }
+
+  if $balance_git == true {
+    include haproxy
+    haproxy::listen { 'balance_git_http':
+      ipaddress        => $::ipaddress,
+      ports            => ['80'],
+      mode             => 'tcp',
+      collect_exported => false,
+      options          => {
+        'redirect' => "location https://${vhost_name}",
+        'option'  => [
+          'tcplog',
+        ],
+      },
+    }
+    haproxy::listen { 'balance_git_https':
+      ipaddress        => $::ipaddress,
+      ports            => ['443'],
+      mode             => 'tcp',
+      collect_exported => false,
+      options          => {
+        'option'  => [
+          'tcplog',
+        ],
+      },
+    }
+    # Warning: git daemon is composed of layers like ogers and onions.
+    haproxy::listen { 'balance_git_daemon':
+      ipaddress        => $::ipaddress,
+      ports            => ['9418'],
+      mode             => 'tcp',
+      collect_exported => false,
+      options          => {
+        'option'  => [
+          'tcplog',
+        ],
+      },
+    }
+    # TODO pass in ipaddresses and server names to balance across.
+    haproxy::balancermember { 'balance_git_https_member':
+      listening_service => 'balance_git_https',
+      server_names      => $balancer_member_names,
+      ipaddresses       => $balancer_memeber_names,
+      ports             => '4443',
+    }
+    haproxy::balancermember { 'balance_git_daemon_member':
+      listening_service => 'balance_git_daemon',
+      server_names      => $balancer_member_names,
+      ipaddresses       => $balancer_memeber_names,
+      ports             => '19418',
+    }
+  }
+  if $proxy_git_daemon == true {
+    include haproxy
+    haproxy::listen { 'gitdaemon':
+      ipaddress        => $::ipaddress,
+      ports            => '19418',
+      mode             => 'tcp',
+      collect_exported => false,
+      options          => {
+        'maxconn' => '32',
+        'backlog' => '512',
+        'option'  => [
+          'tcplog',
+        ],
+      },
+    }
+    haproxy::balancermember { 'proxy_git_daemon_member':
+      listening_service => 'gitdaemon',
+      server_names      => $::hostname,
+      ipaddresses       => '127.0.0.1',
+      ports             => '29418',
     }
   }
 }
