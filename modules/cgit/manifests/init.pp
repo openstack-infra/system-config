@@ -18,6 +18,7 @@ class cgit(
   $vhost_name = $::fqdn,
   $serveradmin = "webmaster@${::fqdn}",
   $cgitdir = '/var/www/cgit',
+  $daemon_port = '29418',
   $staticfiles = '/var/www/cgit/static',
   $ssl_cert_file = '',
   $ssl_key_file = '',
@@ -119,8 +120,21 @@ class cgit(
   }
 
   service { 'xinetd':
-    ensure    => running,
+    ensure    => stopped,
     subscribe => File['/etc/xinetd.d/git'],
+  }
+
+  file { '/etc/init.d/git-daemon':
+    ensure  => present,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0755',
+    content => template('cgit/git-daemon.init.erb'),
+  }
+
+  service { 'git-daemon':
+    ensure    => running,
+    subscribe => File['/etc/init.d/git-daemon'],
   }
 
   if $ssl_cert_file_contents != '' {
