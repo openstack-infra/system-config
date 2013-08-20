@@ -1,4 +1,4 @@
-<VirtualHost <%= scope.lookupvar("cgit::vhost_name") %>:80>
+<VirtualHost <%= scope.lookupvar("cgit::vhost_name") %>:8080>
   ServerName <%= scope.lookupvar("cgit::vhost_name") %>
   ServerAdmin <%= scope.lookupvar("cgit::serveradmin") %>
 
@@ -12,7 +12,7 @@
 
 </VirtualHost>
 
-<VirtualHost <%= scope.lookupvar("cgit::vhost_name") %>:443>
+<VirtualHost <%= scope.lookupvar("cgit::vhost_name") %>:4443>
   ServerName <%= scope.lookupvar("cgit::vhost_name") %>
   ServerAdmin <%= scope.lookupvar("cgit::serveradmin") %>
 
