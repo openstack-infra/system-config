@@ -289,14 +289,46 @@ node /^elasticsearch\d*\.openstack\.org$/ {
   }
 }
 
-# A CentOS machine to run cgit and git daemon.
+# A CentOS machine load balance git access. Will also
+# run local cgit and git daemon.
 node 'git.openstack.org' {
   class { 'openstack_project::git':
+    vhost_name              => 'git.openstack.org',
     sysadmins               => hiera('sysadmins'),
     git_gerrit_ssh_key      => hiera('gerrit_replication_ssh_rsa_pubkey_contents'),
     ssl_cert_file_contents  => hiera('git_ssl_cert_file_contents'),
     ssl_key_file_contents   => hiera('git_ssl_key_file_contents'),
     ssl_chain_file_contents => hiera('git_ssl_chain_file_contents'),
+    balance_git             => true,
+    behind_proxy            => true,
+    balancer_member_names   => [
+      'localhost',
+      'git01.openstack.org',
+      'git02.openstack.org',
+      'git03.openstack.org',
+      'git04.openstack.org',
+    ],
+    balancer_member_ips     => [
+      '127.0.0.1',
+      '192.237.218.169',
+      '192.237.217.253',
+      '192.237.218.239',
+      '192.237.218.34',
+    ],
+  }
+}
+
+# CentOS machines to run cgit and git daemon. Will be
+# load balanced by git.openstack.org.
+node /^git\d+\.openstack\.org$/ {
+  class { 'openstack_project::git':
+    vhost_name              => 'git.openstack.org',
+    sysadmins               => hiera('sysadmins'),
+    git_gerrit_ssh_key      => hiera('gerrit_replication_ssh_rsa_pubkey_contents'),
+    ssl_cert_file_contents  => hiera('git_ssl_cert_file_contents'),
+    ssl_key_file_contents   => hiera('git_ssl_key_file_contents'),
+    ssl_chain_file_contents => hiera('git_ssl_chain_file_contents'),
+    behind_proxy            => true,
   }
 }
 
