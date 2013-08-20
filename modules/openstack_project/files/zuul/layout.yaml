@@ -2854,3 +2854,9 @@ projects:
       - wsme-tarball:
         - wsme-pypi-upload:
           - post-mirror-python27
+
+  - name: openstack/governance
+    check:
+      - gate-noop
+    gate:
+      - gate-noop
