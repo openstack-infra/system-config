@@ -26,6 +26,10 @@ class cgit(
   $ssl_cert_file_contents = '', # If left empty puppet will not create file.
   $ssl_key_file_contents = '', # If left empty puppet will not create file.
   $ssl_chain_file_contents = '', # If left empty puppet will not create file.
+  $balance_git = false,
+  $behind_proxy = false,
+  $balancer_member_names = [],
+  $balancer_member_ips = []
 ) {
 
   include apache
@@ -78,8 +82,16 @@ class cgit(
     value      => on
   }
 
+  if $behind_proxy == true {
+    $http_port = 8080
+    $https_port = 4443
+  }
+  else {
+    $http_port = 80
+    $https_port = 443
+  }
   apache::vhost { $vhost_name:
-    port     => 443,
+    port     => $https_port,
     docroot  => 'MEANINGLESS ARGUMENT',
     priority => '50',
     template => 'cgit/git.vhost.erb',
@@ -87,12 +99,21 @@ class cgit(
     require  => [ File[$staticfiles], Package['cgit'] ],
   }
 
+  file { '/etc/httpd/conf/httpd.conf':
+    ensure  => present,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0644',
+    content => template('cgit/httpd.conf.erb'),
+    require => Class['apache'],
+  }
+
   file { '/etc/httpd/conf.d/ssl.conf':
     ensure  => present,
     owner   => 'root',
     group   => 'root',
     mode    => '0644',
-    source  => 'puppet:///modules/cgit/ssl.conf',
+    content => template('cgit/ssl.conf.erb'),
     require => Package['mod_ssl'],
   }
 
@@ -164,6 +185,60 @@ class cgit(
       mode    => '0640',
       content => $ssl_chain_file_contents,
       before  => Apache::Vhost[$vhost_name],
+    }
+  }
+
+  if $balance_git == true {
+    include haproxy
+    # The three listen defines here are what the world will hit.
+    haproxy::listen { 'balance_git_http':
+      ipaddress        => $::ipaddress,
+      ports            => ['80'],
+      mode             => 'tcp',
+      collect_exported => false,
+      options          => {
+        'redirect' => "location https://${vhost_name}",
+        'option'   => [
+          'tcplog',
+        ],
+      },
+    }
+    haproxy::listen { 'balance_git_https':
+      ipaddress        => $::ipaddress,
+      ports            => ['443'],
+      mode             => 'tcp',
+      collect_exported => false,
+      options          => {
+        'option'  => [
+          'tcplog',
+        ],
+      },
+    }
+    haproxy::listen { 'balance_git_daemon':
+      ipaddress        => $::ipaddress,
+      ports            => ['9418'],
+      mode             => 'tcp',
+      collect_exported => false,
+      options          => {
+        'maxconn'  => '32',
+        'backlog'  => '64',
+        'option'   => [
+          'tcplog',
+        ],
+      },
+    }
+    haproxy::balancermember { 'balance_git_https_member':
+      listening_service => 'balance_git_https',
+      server_names      => $balancer_member_names,
+      ipaddresses       => $balancer_member_ips,
+      ports             => '4443',
+    }
+    haproxy::balancermember { 'balance_git_daemon_member':
+      listening_service => 'balance_git_daemon',
+      server_names      => $balancer_member_names,
+      ipaddresses       => $balancer_member_ips,
+      ports             => '29418',
+      options           => 'maxqueue 512',
     }
   }
 }

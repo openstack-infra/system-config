@@ -126,6 +126,7 @@ class openstack_project::review (
         threads              => '4',
         mirror               => true,
       },
+      # TODO add additional git servers here.
     ],
   }
 
