@@ -37,6 +37,7 @@ class openstack_project::git (
     ssl_cert_file_contents  => $ssl_cert_file_contents,
     ssl_key_file_contents   => $ssl_key_file_contents,
     ssl_chain_file_contents => $ssl_chain_file_contents,
+    proxy_git_daemon        => true,
   }
 
   # We don't actually use these, but jeepyb requires them.
