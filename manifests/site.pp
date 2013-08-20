@@ -292,11 +292,34 @@ node /^elasticsearch\d*\.openstack\.org$/ {
 # A CentOS machine to run cgit and git daemon.
 node 'git.openstack.org' {
   class { 'openstack_project::git':
+    vhost_name              => 'git.openstack.org',
     sysadmins               => hiera('sysadmins'),
     git_gerrit_ssh_key      => hiera('gerrit_replication_ssh_rsa_pubkey_contents'),
     ssl_cert_file_contents  => hiera('git_ssl_cert_file_contents'),
     ssl_key_file_contents   => hiera('git_ssl_key_file_contents'),
     ssl_chain_file_contents => hiera('git_ssl_chain_file_contents'),
+    balance_git             => true,
+    proxy_git_daemon        => true,
+    balancer_member_names   => [
+      'localhost',
+      # TODO add new git nodes
+    ],
+    balancer_member_ips     => [
+      '127.0.0.1',
+      # TODO add new git IPs
+    ],
+  }
+}
+
+node /^git\d+\.openstack\.org$/ {
+  class { 'openstack_project::git':
+    vhost_name              => 'git.openstack.org',
+    sysadmins               => hiera('sysadmins'),
+    git_gerrit_ssh_key      => hiera('gerrit_replication_ssh_rsa_pubkey_contents'),
+    ssl_cert_file_contents  => hiera('git_ssl_cert_file_contents'),
+    ssl_key_file_contents   => hiera('git_ssl_key_file_contents'),
+    ssl_chain_file_contents => hiera('git_ssl_chain_file_contents'),
+    proxy_git_daemon        => true,
   }
 }
 
