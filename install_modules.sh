@@ -27,6 +27,7 @@ MODULES["openstackci-vcsrepo"]="0.0.8"
 
 MODULES["puppetlabs-apache"]="0.0.4"
 MODULES["puppetlabs-apt"]="1.1.0"
+MODULES["puppetlabs-haproxy"]="0.3.0"
 MODULES["puppetlabs-mysql"]="0.5.0"
 MODULES["puppetlabs-postgresql"]="2.3.0"
 MODULES["puppetlabs-stdlib"]="3.2.0"
