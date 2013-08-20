@@ -5,6 +5,7 @@
 service git
 {
         disable         = no
+        port            = 29418
         socket_type     = stream
         wait            = no
         user            = nobody

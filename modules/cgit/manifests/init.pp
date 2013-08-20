@@ -25,6 +25,7 @@ class cgit(
   $ssl_cert_file_contents = '', # If left empty puppet will not create file.
   $ssl_key_file_contents = '', # If left empty puppet will not create file.
   $ssl_chain_file_contents = '', # If left empty puppet will not create file.
+  $proxy_git_daemon = false
 ) {
 
   include apache
@@ -150,6 +151,28 @@ class cgit(
       mode    => '0640',
       content => $ssl_chain_file_contents,
       before  => Apache::Vhost[$vhost_name],
+    }
+  }
+
+  if $proxy_git_daemon == true {
+    include haproxy
+    haproxy::listen { 'gitdaemon':
+      ipaddress        => $::ipaddress,
+      ports            => '9418',
+      mode             => 'tcp',
+      collect_exported => false,
+      options          => {
+        'maxconn' => '32',
+        'option'  => [
+          'tcplog',
+        ],
+      },
+    }
+    haproxy::balancermember { $fqdn:
+      listening_service => 'gitdaemon',
+      server_names      => $::hostname,
+      ipaddresses       => '127.0.0.1',
+      ports             => '29418',
     }
   }
 }
