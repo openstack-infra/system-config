@@ -155,6 +155,32 @@
 
 
 - job:
+    name: gate-devstack-vm-cells
+    node: devstack-precise
+
+    wrappers:
+      - timeout:
+          timeout: 180
+          fail: true
+      - timestamps
+
+    builders:
+      - devstack-checkout
+      - shell: |
+          #!/bin/bash -xe
+          export PYTHONUNBUFFERED=true
+          export DEVSTACK_GATE_CELLS=1
+          export DEVSTACK_GATE_EXERCISES=1
+          cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
+          ./safe-devstack-vm-gate-wrap.sh
+      - link-logs
+
+    publishers:
+      - devstack-logs
+      - console-log
+
+
+- job:
     name: gate-tempest-devstack-vm-cells
     node: devstack-precise
 
