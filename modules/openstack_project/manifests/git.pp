@@ -16,14 +16,19 @@
 #
 # == Class: openstack_project::git
 class openstack_project::git (
+  $vhost_name = $::fqdn,
   $sysadmins = [],
   $git_gerrit_ssh_key = '',
   $ssl_cert_file_contents = '',
   $ssl_key_file_contents = '',
   $ssl_chain_file_contents = '',
+  $balance_git = false,
+  $behind_proxy = false,
+  $balancer_member_names = [],
+  $balancer_member_ips = []
 ) {
   class { 'openstack_project::server':
-    iptables_public_tcp_ports => [80, 443, 9418],
+    iptables_public_tcp_ports => [80, 443, 4443, 8080, 9418, 29418],
     sysadmins                 => $sysadmins,
   }
 
@@ -31,12 +36,17 @@ class openstack_project::git (
   include pip
 
   class { '::cgit':
+    vhost_name              => $vhost_name,
     ssl_cert_file           => '/etc/pki/tls/certs/git.openstack.org.pem',
     ssl_key_file            => '/etc/pki/tls/private/git.openstack.org.key',
     ssl_chain_file          => '/etc/pki/tls/certs/intermediate.pem',
     ssl_cert_file_contents  => $ssl_cert_file_contents,
     ssl_key_file_contents   => $ssl_key_file_contents,
     ssl_chain_file_contents => $ssl_chain_file_contents,
+    balance_git             => $balance_git,
+    behind_proxy            => $behind_proxy,
+    balancer_member_names   => $balancer_member_names,
+    balancer_member_ips     => $balancer_member_ips,
   }
 
   # We don't actually use these, but jeepyb requires them.
