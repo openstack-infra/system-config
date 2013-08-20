@@ -28,7 +28,7 @@ define mysql_backup::backup (
 
   cron { "${name}-backup":
     ensure  => present,
-    command => "/usr/bin/mysqldump --defaults-file=${defaults_file} --opt --all-databases | gzip -9 > ${dest_dir}/${name}.sql.gz",
+    command => "/usr/bin/mysqldump --defaults-file=${defaults_file} --opt --all-databases 2> /dev/null | gzip -9 > ${dest_dir}/${name}.sql.gz",
     minute  => $minute,
     hour    => $hour,
     weekday => $day,
