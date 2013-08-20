@@ -1,0 +1,63 @@
+#!/bin/sh
+#
+#   Startup/shutdown script for the git daemon
+#   chkconfig: 345 56 10
+#
+#   description: Startup/shutdown script for the git daemon
+#
+. /etc/init.d/functions
+
+NAME=git-daemon
+USER=nobody
+DAEMON=/usr/libexec/git-core/git-daemon
+GIT_REPO=/var/lib/git
+PORT=<%= scope.lookupvar("cgit::daemon_port") %>
+ARGS="--base-path=/var/lib/git --user=$USER --export-all --syslog --detach --verbose --port=$PORT $GIT_REPO"
+
+start () {
+    echo -n $"Starting $NAME: "
+
+    # start daemon
+    daemon $DAEMON $ARGS
+        RETVAL=$?
+    echo
+    [ $RETVAL = 0 ] && touch /var/lock/git-daemon
+    return $RETVAL
+}
+
+stop () {
+    # stop daemon
+
+    echo -n $"Stopping $NAME: "
+    killproc $DAEMON
+    RETVAL=$?
+    echo
+    [ $RETVAL = 0 ] && rm -f /var/lock/git-daemon
+}
+
+restart() {
+    stop
+    start
+}
+
+case $1 in
+    start)
+        start
+        ;;
+    stop)
+        stop
+        ;;
+    restart)
+        restart
+        ;;
+    status)
+        status $DAEMON
+        RETVAL=$?
+        ;;
+    *)
+        echo $"Usage: $NAME {start|stop|restart|status}"
+        exit 3
+        ;;
+esac
+
+exit $RETVAL
