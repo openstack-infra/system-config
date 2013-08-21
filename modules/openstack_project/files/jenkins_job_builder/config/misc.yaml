@@ -29,7 +29,7 @@
 
     builders:
       - gerrit-git-prep
-      - shell: '/usr/local/jenkins/slave_scripts/run-tox.sh {env}'
+      - shell: '/usr/local/jenkins/slave_scripts/run-testr.sh {env}'
       - assert-no-extra-files
 
     publishers:
