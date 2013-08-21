@@ -24,7 +24,7 @@ sudo bash -xe install_puppet.sh
 sudo git clone https://review.openstack.org/p/openstack-infra/config.git \
     /root/config
 sudo /bin/bash /root/config/install_modules.sh
-if [ -z $NODEPOOL_SSH_KEY ] ; then
+if [ -z "$NODEPOOL_SSH_KEY" ] ; then
     sudo puppet apply --modulepath=/root/config/modules:/etc/puppet/modules \
 	-e "class {'openstack_project::slave_template': }"
 else

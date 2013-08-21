@@ -329,6 +329,7 @@ node 'nodepool.openstack.org' {
     statsd_host              => 'graphite.openstack.org',
     jenkins_api_user         => hiera('jenkins_api_user'),
     jenkins_api_key          => hiera('jenkins_api_key'),
+    jenkins_credentials_id   => hiera('jenkins_credentials_id'),
     rackspace_username       => hiera('nodepool_rackspace_username'),
     rackspace_password       => hiera('nodepool_rackspace_password'),
     rackspace_project        => hiera('nodepool_rackspace_project'),

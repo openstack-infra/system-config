@@ -8,6 +8,7 @@ class openstack_project::nodepool(
   $statsd_host = '',
   $jenkins_api_user ='',
   $jenkins_api_key ='',
+  $jenkins_credentials_id ='',
   $rackspace_username ='',
   $rackspace_password ='',
   $rackspace_project ='',

@@ -26,7 +26,7 @@ sudo DEBIAN_FRONTEND=noninteractive apt-get \
 rm -rf ~/workspace-cache
 mkdir -p ~/workspace-cache
 
-pushd ~/workspace-cache
+cd ~/workspace-cache
 git clone https://review.openstack.org/p/openstack-dev/devstack
 git clone https://review.openstack.org/p/openstack-dev/grenade
 git clone https://review.openstack.org/p/openstack-dev/pbr
@@ -54,9 +54,9 @@ git clone https://review.openstack.org/p/openstack/python-swiftclient
 git clone https://review.openstack.org/p/openstack/requirements
 git clone https://review.openstack.org/p/openstack/swift
 git clone https://review.openstack.org/p/openstack/tempest
-popd
 
 . /etc/lsb-release
+cd /opt/nodepool-scripts/
 python ./devstack-cache.py $DISTRIB_CODENAME
 
 sync

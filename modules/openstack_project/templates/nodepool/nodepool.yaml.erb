@@ -3,6 +3,7 @@ dburi: 'mysql://nodepool:<%= mysql_password %>@localhost/nodepool'
 
 cron:
   cleanup: '*/5 * * * *'
+  check: '*/15 * * * *'
   update-image: '14 2 * * *'
 
 zmq-publishers:
@@ -46,7 +47,7 @@ providers:
     password: '<%= hpcloud_password %>'
     project-id: '<%= hpcloud_project %>'
     auth-url: 'https://region-a.geo-1.identity.hpcloudsvc.com:35357/v2.0'
-    max-servers: 93
+    max-servers: 83
     images:
       - name: devstack-precise
         base-image: 'Ubuntu Precise 12.04 LTS Server 64-bit 20121026 (b)'
@@ -60,7 +61,7 @@ providers:
     password: '<%= hpcloud_password %>'
     project-id: '<%= hpcloud_project %>'
     auth-url: 'https://region-a.geo-1.identity.hpcloudsvc.com:35357/v2.0'
-    max-servers: 93
+    max-servers: 83
     images:
       - name: devstack-precise
         base-image: 'Ubuntu Precise 12.04 LTS Server 64-bit 20121026 (b)'
@@ -74,7 +75,7 @@ providers:
     password: '<%= hpcloud_password %>'
     project-id: '<%= hpcloud_project %>'
     auth-url: 'https://region-a.geo-1.identity.hpcloudsvc.com:35357/v2.0'
-    max-servers: 93
+    max-servers: 83
     images:
       - name: devstack-precise
         base-image: 'Ubuntu Precise 12.04 LTS Server 64-bit 20121026 (b)'
@@ -87,6 +88,7 @@ targets:
       url: 'https://jenkins01.openstack.org/'
       user: '<%= jenkins_api_user %>'
       apikey: '<%= jenkins_api_key %>'
+      credentials-id: '<%= jenkins_credentials_id %>'
     images:
       - name: devstack-precise
         providers:
@@ -101,6 +103,7 @@ targets:
       url: 'https://jenkins02.openstack.org/'
       user: '<%= jenkins_api_user %>'
       apikey: '<%= jenkins_api_key %>'
+      credentials-id: '<%= jenkins_credentials_id %>'
     images:
       - name: devstack-precise
         providers:
