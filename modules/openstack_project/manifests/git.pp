@@ -89,6 +89,14 @@ class openstack_project::git (
     mode => 'enforcing'
   }
 
+  file { '/usr/local/bin/commit-filter.sh':
+    ensure  => present,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0755',
+    source  => 'puppet:///modules/openstack_project/git/commit-filter.sh',
+  }
+
   file { '/var/www/cgit/static/openstack.png':
     ensure  => present,
     source  => 'puppet:///modules/openstack_project/openstack.png',
