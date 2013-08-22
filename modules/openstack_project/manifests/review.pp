@@ -126,6 +126,34 @@ class openstack_project::review (
         threads              => '4',
         mirror               => true,
       },
+      {
+        name                 => 'git01',
+        url                  => 'cgit@git01.openstack.org:/var/lib/git/',
+        replicationDelay     => '0',
+        threads              => '4',
+        mirror               => true,
+      },
+      {
+        name                 => 'git02',
+        url                  => 'cgit@git02.openstack.org:/var/lib/git/',
+        replicationDelay     => '0',
+        threads              => '4',
+        mirror               => true,
+      },
+      {
+        name                 => 'git03',
+        url                  => 'cgit@git03.openstack.org:/var/lib/git/',
+        replicationDelay     => '0',
+        threads              => '4',
+        mirror               => true,
+      },
+      {
+        name                 => 'git04',
+        url                  => 'cgit@git04.openstack.org:/var/lib/git/',
+        replicationDelay     => '0',
+        threads              => '4',
+        mirror               => true,
+      },
     ],
   }
 
