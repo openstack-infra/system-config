@@ -1,18 +1,28 @@
-<VirtualHost <%= scope.lookupvar("cgit::vhost_name") %>:80>
+<VirtualHost *:<%= scope.lookupvar("cgit::http_port") %>>
   ServerName <%= scope.lookupvar("cgit::vhost_name") %>
   ServerAdmin <%= scope.lookupvar("cgit::serveradmin") %>
+
+  Alias /cgit-data /usr/share/cgit
+  ScriptAlias /cgit /var/www/cgi-bin/cgit
+  Alias /static <%= scope.lookupvar("cgit::staticfiles") %>
+  RewriteEngine On
+  RewriteRule ^/$ /cgit [R]
+
+  SetEnv GIT_PROJECT_ROOT /var/lib/git/
+  SetEnv GIT_HTTP_EXPORT_ALL
+
+  AliasMatch ^/(.*/objects/[0-9a-f]{2}/[0-9a-f]{38})$ /var/lib/git/$1
+  AliasMatch ^/(.*/objects/pack/pack-[0-9a-f]{40}.(pack|idx))$ /var/lib/git/$1
+  ScriptAlias / /usr/libexec/git-core/git-http-backend/
 
   ErrorLog /var/log/httpd/git-error.log
 
   LogLevel warn
 
   CustomLog /var/log/httpd/git-access.log combined
-
-  Redirect / https://<%= scope.lookupvar("cgit::vhost_name") %>/
-
 </VirtualHost>
 
-<VirtualHost <%= scope.lookupvar("cgit::vhost_name") %>:443>
+<VirtualHost *:<%= scope.lookupvar("cgit::https_port") %>>
   ServerName <%= scope.lookupvar("cgit::vhost_name") %>
   ServerAdmin <%= scope.lookupvar("cgit::serveradmin") %>
 
