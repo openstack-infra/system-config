@@ -99,6 +99,16 @@ class openstack_project::git (
     mode => 'enforcing'
   }
 
+  cron { 'mirror_repack':
+    user        => 'cgit',
+    weekday     => '0',
+    hour        => '4',
+    minute      => '7',
+    command     => 'find /var/lib/git/ -type d -name "*.git" -print -exec git --git-dir="{}" repack -afd \; -exec git --git-dir="{}" pack-refs --all \;',
+    environment => 'PATH=/usr/bin:/bin:/usr/sbin:/sbin',
+    require     => User['cgit'],
+  }
+
   file { '/var/www/cgit/static/openstack.png':
     ensure  => present,
     source  => 'puppet:///modules/openstack_project/openstack.png',
