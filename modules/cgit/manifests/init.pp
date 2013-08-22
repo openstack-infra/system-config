@@ -238,7 +238,8 @@ class cgit(
       mode             => 'tcp',
       collect_exported => false,
       options          => {
-        'option'   => [
+        'balance' => 'source',
+        'option'  => [
           'tcplog',
         ],
       },
@@ -249,6 +250,7 @@ class cgit(
       mode             => 'tcp',
       collect_exported => false,
       options          => {
+        'balance' => 'source',
         'option'  => [
           'tcplog',
         ],
@@ -260,9 +262,10 @@ class cgit(
       mode             => 'tcp',
       collect_exported => false,
       options          => {
-        'maxconn'  => '32',
-        'backlog'  => '64',
-        'option'   => [
+        'maxconn' => '32',
+        'backlog' => '64',
+        'balance' => 'source',
+        'option'  => [
           'tcplog',
         ],
       },
