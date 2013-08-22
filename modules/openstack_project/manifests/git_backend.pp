@@ -127,4 +127,11 @@ class openstack_project::git_backend (
     require => File['/var/www/cgit/static'],
   }
 
+  file { '/usr/local/bin/commit-filter.sh':
+    ensure  => present,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0755',
+    source  => 'puppet:///modules/openstack_project/git/commit-filter.sh',
+  }
 }
