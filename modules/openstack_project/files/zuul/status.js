@@ -20,7 +20,8 @@ function format_time(ms, words) {
         return "unknown";
     }
     var seconds = (+ms)/1000;
-    var minutes = Math.floor((seconds/60)%60);
+    var minutes = Math.floor(seconds/60);
+    var display_minutes = Math.floor(minutes%60);
     var hours = Math.floor(minutes/60);
     seconds = Math.floor(seconds % 60);
     r = '';
@@ -29,12 +30,12 @@ function format_time(ms, words) {
             r += hours;
             r += ' hr ';
         }
-        r += minutes + ' min';
+        r += display_minutes + ' min';
     } else {
         if (hours < 10) r += '0';
         r += hours + ':';
-        if (minutes < 10) r += '0';
-        r += minutes + ':';
+        if (display_minutes < 10) r += '0';
+        r += display_minutes + ':';
         if (seconds < 10) r += '0';
         r += seconds;
     }
