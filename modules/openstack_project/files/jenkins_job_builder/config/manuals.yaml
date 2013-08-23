@@ -353,11 +353,11 @@
       - console-log
 
 # in zuul/layout.yaml specified to only run against master branch.
-# The old jenkins config polled github every 5 minutes and was also triggered
+# The old jenkins config polled git every 5 minutes and was also triggered
 # whenever a SNAPSHOT dependency was built. I have not configured that trigger
 # here as being in the Zuul post queue may not play nice with that.
 #
-# We can use the github and snapshot dependency triggers if that is preferable.
+# We can use the git and snapshot dependency triggers if that is preferable.
 - job:
     name: openstack-ha-guide
     project-type: maven

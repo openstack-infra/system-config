@@ -29,7 +29,7 @@ class statusbot(
     ensure   => latest,
     provider => git,
     revision => 'master',
-    source   => 'https://github.com/openstack-infra/statusbot.git',
+    source   => 'https://git.openstack.org/openstack-infra/statusbot',
   }
 
   exec { 'install_statusbot' :
