@@ -135,7 +135,8 @@ class openstack_project::static (
   cron { 'gziprmlogs':
     user        => 'root',
     minute      => '0',
-    hour        => '*/6',
+    hour        => '7',
+    weekday     => '6',
     command     => 'bash /usr/local/sbin/log_archive_maintenance.sh',
     environment => 'PATH=/usr/bin:/bin:/usr/sbin:/sbin',
     require     => File['/usr/local/sbin/log_archive_maintenance.sh'],
