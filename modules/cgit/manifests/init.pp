@@ -37,6 +37,7 @@ class cgit(
   package { [
       'cgit',
       'git-daemon',
+      'socat',
     ]:
     ensure => present,
   }
