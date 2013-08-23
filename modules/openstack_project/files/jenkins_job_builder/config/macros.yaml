@@ -76,7 +76,7 @@
               cd "$MODULE"
             fi
           fi
-          rake lint
+          rake lint 2>&1
 
 - builder:
     name: puppet-syntax
