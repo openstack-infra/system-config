@@ -232,7 +232,7 @@ $("#graph-container").append($(new Image()).addClass('graph').graphite({
     bgcolor: 'ffffff',
     fgcolor: '000000',
     target: [
-        "alias(summarize(sumSeries(stats_counts.zuul.pipeline.*.job.*.*),'1h'),'All Jobs')",
+        "alias(summarize(sumSeries(stats_counts.zuul.pipeline.*.all_jobs),'1h'),'All Jobs')",
     ],
     title: "Zuul Jobs Launched (per Hour)"
 }));
