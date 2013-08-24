@@ -76,10 +76,13 @@ function format_pipeline(data) {
     var count = count_changes(data);
     var html = '<div class="pipeline"><h3 class="subhead">'+
         data['name'];
+
+    html += '<span class="count"><img src="http://graphite.openstack.org/render/?width=100&height=16&target=color(stats.gauges.zuul.pipeline.'+data['name']+'.current_changes, \'6b8182\')&hideLegend=true&hideAxes=true&hideYAxis=true&hideGrid=true&from=-8hours&margin=0" title="8 hour history of changes in pipeline"/>';
+
     if (count > 0) {
-        html += ' <span class="count">(' + count + ')</span>';
+        html += ' (' + count + ')';
     }
-    html += '</h3>';
+    html += '</span></h3>';
     if (data['description'] != null) {
         html += '<p>'+data['description']+'</p>';
     }
