@@ -20,9 +20,10 @@ function format_time(ms, words) {
         return "unknown";
     }
     var seconds = (+ms)/1000;
-    var minutes = Math.floor((seconds/60)%60);
+    var minutes = Math.floor(seconds/60);
     var hours = Math.floor(minutes/60);
     seconds = Math.floor(seconds % 60);
+    minutes = Math.floor(minutes % 60);
     r = '';
     if (words) {
         if (hours) {
