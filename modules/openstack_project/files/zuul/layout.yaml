@@ -164,6 +164,10 @@ jobs:
     files:
       - '^tools/.*-requires$'
       - '^.*requirements.txt$'
+  - name: ^gate-requirements-pep8$
+    branch: ^(?!stable/(folsom|grizzly)).*$
+  - name: ^gate-requirements-python27$
+    branch: ^(?!stable/(folsom|grizzly)).*$
   - name: manuals-upstream-translation-update
     branch: ^master$
   - name: gate-hacking-python33
