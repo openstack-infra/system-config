@@ -10,6 +10,17 @@
     name: gate-grenade-noop
     node: precise
 
+- job:
+    name: node-test
+
+    parameters:
+      - label:
+          name: NODE
+          description: Node to test
+
+    builders:
+      - shell: 'echo ok'
+
 - job-template:
     name: 'gate-{name}-run-tests'
 
