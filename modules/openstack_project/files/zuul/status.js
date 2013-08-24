@@ -72,14 +72,26 @@ function count_changes(pipeline) {
     return count;
 }
 
+function get_sparkline_url(pipeline_name) {
+    if (!(pipeline_name in window.zuul_sparkline_urls)) {
+	window.zuul_sparkline_urls[pipeline_name] =
+	    "http://graphite.openstack.org/render/?width=100&height=16&target=color(stats.gauges.zuul.pipeline."+pipeline_name+".current_changes, '6b8182')&hideLegend=true&hideAxes=true&hideYAxis=true&hideGrid=true&from=-8hours&margin=0#" + new Date().getTime();
+    }
+    return window.zuul_sparkline_urls[pipeline_name];
+}
+
 function format_pipeline(data) {
     var count = count_changes(data);
     var html = '<div class="pipeline"><h3 class="subhead">'+
         data['name'];
+
+    html += '<span class="count"><img src="' + get_sparkline_url(data['name']);
+    html += '" title="8 hour history of changes in pipeline"/>';
+
     if (count > 0) {
-        html += ' <span class="count">(' + count + ')</span>';
+        html += ' (' + count + ')';
     }
-    html += '</h3>';
+    html += '</span></h3>';
     if (data['description'] != null) {
         html += '<p>'+data['description']+'</p>';
     }
@@ -240,10 +252,20 @@ function update_graphs() {
             img.src = newimg.src;
         });
     });
+
+    $.each(window.zuul_sparkline_urls, function(name, url) {
+        var newimg = new Image();
+        var parts = url.split('#');
+        newimg.src = parts[0] + '#' + new Date().getTime();
+        $(newimg).load(function (x) {
+	    window.zuul_sparkline_urls[name] = newimg.src;
+        });
+    });
 }
 
 $(function() {
     window.zuul_graph_update_count = 0;
+    window.zuul_sparkline_urls = {};
     update_timeout();
 
     $(document).on({
