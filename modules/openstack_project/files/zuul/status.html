@@ -215,10 +215,14 @@ $("#graph-container").append($(new Image()).addClass('graph').graphite({
     height: 170,
     bgcolor: 'ffffff',
     fgcolor: '000000',
+    areaMode: 'stacked',
     target: [
-        "color(alias(sumSeries(stats.gauges.nodepool.target.*.devstack-precise.*.ready), 'devstack-precise'), 'green')",
+        "color(alias(sumSeries(stats.gauges.nodepool.target.*.*.*.building), 'Building'), 'ffbf52')",
+        "color(alias(sumSeries(stats.gauges.nodepool.target.*.*.*.ready), 'Available'), '00c868')",
+        "color(alias(sumSeries(stats.gauges.nodepool.target.*.*.*.used), 'In Use'), '6464ff')",
+        "color(alias(sumSeries(stats.gauges.nodepool.target.*.*.*.delete), 'Deleting'), 'c864ff')",
     ],
-    title: "Available Test Nodes"
+    title: "Test Nodes"
 }));
 
 $("#graph-container").append($(new Image()).addClass('graph').graphite({
