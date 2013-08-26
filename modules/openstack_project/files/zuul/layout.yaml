@@ -1804,7 +1804,6 @@ projects:
       - openstack-security-guide
       - manuals-upstream-translation-update
       - openstack-training
-      - openstack-operations-guide-ja
     periodic:
       - manuals-propose-translation-update
 
@@ -1815,6 +1814,7 @@ projects:
       - gate-openstack-manuals-operations-guide
     post:
       - openstack-operations-guide
+      - openstack-operations-guide-ja
 
   - name: openstack/api-site
     check:

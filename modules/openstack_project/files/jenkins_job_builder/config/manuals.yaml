@@ -565,8 +565,8 @@
       maven-name: Maven3
       root-module:
         group-id: org.openstack.docs
-        artifact-id: openstack-guide
-      root-pom: generated/ja/openstack-ops/pom.xml
+        artifact-id: openstack-ops-manual
+      root-pom: doc/src/docbkx/openstack-ops/pom.xml
       goals: '-Drelease.path.name=${DOC_RELEASE_PATH} -Dcomments.enabled=${DOC_COMMENTS_ENABLED} clean generate-sources'
 
     publishers:
