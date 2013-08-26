@@ -99,14 +99,15 @@ def bootstrap_server(server, admin_pass, key, cert, environment, name,
     ssh_client.ssh("chmod 0755 /var/lib/puppet/ssl/public_keys")
 
 
-    # Assuming salt-master is running on the puppetmaster
-    shutil.copyfile(salt_pub,
-                    os.path.join(SALT_MASTER_PKI, 'minions', name))
-    ssh_client.ssh('mkdir -p {0}'.format(SALT_MINION_PKI))
-    ssh_client.scp(salt_pub,
-                   os.path.join(SALT_MINION_PKI, 'minion.pub'))
-    ssh_client.scp(salt_priv,
-                   os.path.join(SALT_MINION_PKI, 'minion.pem'))
+    if salt_pub and salt_priv:
+        # Assuming salt-master is running on the puppetmaster
+        shutil.copyfile(salt_pub,
+                        os.path.join(SALT_MASTER_PKI, 'minions', name))
+        ssh_client.ssh('mkdir -p {0}'.format(SALT_MINION_PKI))
+        ssh_client.scp(salt_pub,
+                       os.path.join(SALT_MINION_PKI, 'minion.pub'))
+        ssh_client.scp(salt_priv,
+                       os.path.join(SALT_MINION_PKI, 'minion.pem'))
 
     for ssldir in ['/var/lib/puppet/ssl/certs/',
                    '/var/lib/puppet/ssl/private_keys/',
@@ -127,7 +128,7 @@ def bootstrap_server(server, admin_pass, key, cert, environment, name,
 
     ssh_client.ssh("reboot")
 
-def build_server(client, name, image, flavor, cert, environment):
+def build_server(client, name, image, flavor, cert, environment, salt):
     key = None
     server = None
 
@@ -148,7 +149,9 @@ def build_server(client, name, image, flavor, cert, environment):
             traceback.print_exc()
         raise
 
-    salt_priv, salt_pub = utils.add_salt_keypair(SALT_MASTER_PKI, name, 2048)
+    salt_priv, salt_pub = (None, None)
+    if salt:
+        salt_priv, salt_pub = utils.add_salt_keypair(SALT_MASTER_PKI, name, 2048)
     try:
         admin_pass = server.adminPass
         server = utils.wait_for_resource(server)
@@ -182,6 +185,8 @@ def main():
     parser.add_argument("--cert", dest="cert",
                         help="name of signed puppet certificate file (e.g., "
                         "hostname.example.com.pem)")
+    parser.add_argument("--salt", dest="salt", action="store_true",
+                        help="Manage salt keys for this host.")
     options = parser.parse_args()
 
     client = get_client()
@@ -220,7 +225,8 @@ def main():
     image = images[0]
     print "Found image", image
 
-    build_server(client, options.name, image, flavor, cert, options.environment)
+    build_server(client, options.name, image, flavor, cert,
+                 options.environment, options.salt)
     dns.print_dns(client, options.name)
 
 if __name__ == '__main__':
