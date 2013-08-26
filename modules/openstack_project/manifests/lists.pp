@@ -84,4 +84,12 @@ class openstack_project::lists(
     mailserver  => $listdomain,
   }
 
+  maillist { 'nov-2013-track-chairs':
+    ensure      => present,
+    admin       => 'claire@openstack.org',
+    password    => $listpassword,
+    description => 'Coordination of tracks at OpenStack Summit April 2013',
+    webserver   => $listdomain,
+    mailserver  => $listdomain,
+  }
 }
