@@ -41,11 +41,11 @@ elif `echo $ZUUL_REFNAME | grep refs/tags/ >/dev/null` ; then
         if echo $ZUUL_PROJECT | grep 'python-.*client' ; then
             # This is a hack to ignore the year.release tags in python-*client
             # projects.
-            LATEST=`git tag | sed -n -e '/^2012\..*$/d' -e '/^\([0-9]\+\.\?\)\+$/p' | sort -n | tail -1`
+            LATEST=`git tag | sed -n -e '/^2012\..*$/d' -e '/^\([0-9]\+\.\?\)\+$/p' | sort -V | tail -1`
         else
             # Take all tags of the form (number.)+, sort them, then take the
             # largest
-            LATEST=`git tag | sed -n '/^\([0-9]\+\.\?\)\+$/p' | sort -n | tail -1`
+            LATEST=`git tag | sed -n '/^\([0-9]\+\.\?\)\+$/p' | sort -V | tail -1`
         fi
         if [ "$TAG" = "$LATEST" ] ; then
             # Copy the docs into a subdir if this is a tagged build
