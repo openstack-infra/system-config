@@ -119,6 +119,9 @@ jobs:
   - name: gate-devstack-vm-cells
     branch: ^(?!stable/folsom).*$
     voting: false
+  - name: gate-tempest-devstack-vm-large-ops
+    branch: ^(?!stable/folsom).*$
+    voting: false
   - name: gate-tempest-devstack-vm-cells
     branch: ^(?!stable/folsom).*$
     voting: false
@@ -542,6 +545,7 @@ projects:
     experimental:
       - gate-grenade-devstack-vm-stable
       - gate-devstack-vm-cells
+      - gate-tempest-devstack-vm-large-ops
     post:
       - cinder-branch-tarball
       - cinder-coverage
@@ -588,6 +592,7 @@ projects:
     experimental:
       - gate-grenade-devstack-vm-stable
       - gate-devstack-vm-cells
+      - gate-tempest-devstack-vm-large-ops
     post:
       - glance-branch-tarball
       - glance-coverage
@@ -640,6 +645,7 @@ projects:
     experimental:
       - gate-grenade-devstack-vm-stable
       - gate-devstack-vm-cells
+      - gate-tempest-devstack-vm-large-ops
     post:
       - horizon-branch-tarball
       - horizon-coverage
@@ -712,6 +718,7 @@ projects:
     experimental:
       - gate-grenade-devstack-vm-stable
       - gate-devstack-vm-cells
+      - gate-tempest-devstack-vm-large-ops
     post:
       - keystone-branch-tarball
       - keystone-coverage
@@ -762,6 +769,7 @@ projects:
     experimental:
       - gate-grenade-devstack-vm-stable
       - gate-devstack-vm-cells
+      - gate-tempest-devstack-vm-large-ops
       - gate-tempest-devstack-vm-neutron-full
     post:
       - nova-branch-tarball
@@ -951,6 +959,7 @@ projects:
     experimental:
       - gate-grenade-devstack-vm-stable
       - gate-devstack-vm-cells
+      - gate-tempest-devstack-vm-large-ops
     post:
       - swift-branch-tarball
       - swift-coverage
@@ -1019,6 +1028,7 @@ projects:
     experimental:
       - gate-grenade-devstack-vm-stable
       - gate-devstack-vm-cells
+      - gate-tempest-devstack-vm-large-ops
     post:
       - python-cinderclient-branch-tarball
       - python-cinderclient-coverage
@@ -1063,6 +1073,7 @@ projects:
     experimental:
       - gate-grenade-devstack-vm-stable
       - gate-devstack-vm-cells
+      - gate-tempest-devstack-vm-large-ops
     post:
       - python-glanceclient-branch-tarball
       - python-glanceclient-coverage
@@ -1107,6 +1118,7 @@ projects:
     experimental:
       - gate-grenade-devstack-vm-stable
       - gate-devstack-vm-cells
+      - gate-tempest-devstack-vm-large-ops
     post:
       - python-keystoneclient-branch-tarball
       - python-keystoneclient-coverage
@@ -1151,6 +1163,7 @@ projects:
     experimental:
       - gate-grenade-devstack-vm-stable
       - gate-devstack-vm-cells
+      - gate-tempest-devstack-vm-large-ops
     post:
       - python-novaclient-branch-tarball
       - python-novaclient-coverage
@@ -1222,6 +1235,7 @@ projects:
     experimental:
       - gate-grenade-devstack-vm-stable
       - gate-devstack-vm-cells
+      - gate-tempest-devstack-vm-large-ops
     post:
       - python-neutronclient-branch-tarball
       - python-neutronclient-coverage
@@ -1356,6 +1370,7 @@ projects:
       - gate-grenade-devstack-vm
     experimental:
       - gate-devstack-vm-cells
+      - gate-tempest-devstack-vm-large-ops
     post:
       - pbr-branch-tarball
       - pbr-coverage
@@ -1391,6 +1406,7 @@ projects:
     experimental:
       - gate-grenade-devstack-vm-stable
       - gate-devstack-vm-cells
+      - gate-tempest-devstack-vm-large-ops
 
   - name: openstack-infra/devstack-gate
     check:
@@ -1412,6 +1428,7 @@ projects:
     experimental:
       - gate-grenade-devstack-vm-stable
       - gate-devstack-vm-cells
+      - gate-tempest-devstack-vm-large-ops
 
   # This is not strictly necessary; there is currently a transitive
   # relationship between g-t-devstack-vm,
@@ -1457,6 +1474,7 @@ projects:
     experimental:
       - gate-grenade-devstack-vm-stable
       - gate-devstack-vm-cells
+      - gate-tempest-devstack-vm-large-ops
       - gate-tempest-devstack-vm-neutron-full
     post:
       - tempest-docs
@@ -1564,6 +1582,7 @@ projects:
       - gate-tempest-devstack-vm-neutron
     experimental:
       - gate-devstack-vm-cells
+      - gate-tempest-devstack-vm-large-ops
     post:
       - heat-branch-tarball
       - heat-coverage
@@ -1600,10 +1619,12 @@ projects:
       - gate-tempest-devstack-vm-neutron
     experimental:
       - gate-devstack-vm-cells
+      - gate-tempest-devstack-vm-large-ops
     post:
       - python-heatclient-branch-tarball
       - python-heatclient-coverage
     pre-release:
+      - gate-tempest-devstack-vm-large-ops
       - python-heatclient-tarball
     release:
       - python-heatclient-tarball:
