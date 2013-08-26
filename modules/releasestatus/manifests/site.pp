@@ -32,7 +32,7 @@ define releasestatus::site(
     mode    => '0755',
     source  => '/var/lib/releasestatus/releasestatus/static',
     recurse => remote,
-    require => File['/var/lib/releasestatus'],
+    require => Vcsrepo['/var/lib/releasestatus/releasestatus'],
   }
 
   cron { "update releasestatus ${configfile}":
