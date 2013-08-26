@@ -12,125 +12,104 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 #
-# Class to configure cgit on a CentOS node.
+# Class to configure haproxy to serve git on a CentOS node.
 #
 # == Class: openstack_project::git
 class openstack_project::git (
-  $vhost_name = $::fqdn,
   $sysadmins = [],
-  $git_gerrit_ssh_key = '',
-  $ssl_cert_file_contents = '',
-  $ssl_key_file_contents = '',
-  $ssl_chain_file_contents = '',
-  $balance_git = false,
-  $behind_proxy = false,
   $balancer_member_names = [],
   $balancer_member_ips = []
 ) {
   class { 'openstack_project::server':
-    iptables_public_tcp_ports => [80, 443, 4443, 8080, 9418, 29418],
+    iptables_public_tcp_ports => [80, 443, 9418],
     sysadmins                 => $sysadmins,
-  }
-
-  include jeepyb
-  include pip
-
-  class { '::cgit':
-    vhost_name              => $vhost_name,
-    ssl_cert_file           => '/etc/pki/tls/certs/git.openstack.org.pem',
-    ssl_key_file            => '/etc/pki/tls/private/git.openstack.org.key',
-    ssl_chain_file          => '/etc/pki/tls/certs/intermediate.pem',
-    ssl_cert_file_contents  => $ssl_cert_file_contents,
-    ssl_key_file_contents   => $ssl_key_file_contents,
-    ssl_chain_file_contents => $ssl_chain_file_contents,
-    balance_git             => $balance_git,
-    behind_proxy            => $behind_proxy,
-    balancer_member_names   => $balancer_member_names,
-    balancer_member_ips     => $balancer_member_ips,
-  }
-
-  # We don't actually use these, but jeepyb requires them.
-  $local_git_dir = '/var/lib/git'
-  $ssh_project_key = ''
-
-  file { '/etc/cgitrc':
-    ensure  => present,
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0644',
-    source  => 'puppet:///modules/openstack_project/git/cgitrc'
-  }
-
-  file { '/home/cgit/.ssh/':
-    ensure  => directory,
-    owner   => 'cgit',
-    group   => 'cgit',
-    mode    => '0700',
-    require => User['cgit'],
-  }
-
-  file { '/home/cgit/.ssh/authorized_keys':
-    owner   => 'cgit',
-    group   => 'cgit',
-    mode    => '0600',
-    content => $git_gerrit_ssh_key,
-    replace => true,
-    require => File['/home/cgit/.ssh/']
-  }
-
-  file { '/home/cgit/projects.yaml':
-    ensure  => present,
-    owner   => 'cgit',
-    group   => 'cgit',
-    mode    => '0444',
-    content => template('openstack_project/review.projects.yaml.erb'),
-    replace => true,
-  }
-
-  exec { 'create_cgitrepos':
-    command     => 'create-cgitrepos',
-    path        => '/bin:/usr/bin:/usr/local/bin',
-    require     => File['/home/cgit/projects.yaml'],
-    subscribe   => File['/home/cgit/projects.yaml'],
-    refreshonly => true,
   }
 
   class { 'selinux':
     mode => 'enforcing'
   }
 
-  cron { 'mirror_repack':
-    user        => 'cgit',
-    weekday     => '0',
-    hour        => '4',
-    minute      => '7',
-    command     => 'find /var/lib/git/ -type d -name "*.git" -print -exec git --git-dir="{}" repack -afd \; -exec git --git-dir="{}" pack-refs --all \;',
-    environment => 'PATH=/usr/bin:/bin:/usr/sbin:/sbin',
-    require     => User['cgit'],
+  class { 'haproxy':
+    enable         => true,
+    global_options => {
+      'log'     => '127.0.0.1 local0',
+      'chroot'  => '/var/lib/haproxy',
+      'pidfile' => '/var/run/haproxy.pid',
+      'maxconn' => '4000',
+      'user'    => 'haproxy',
+      'group'   => 'haproxy',
+      'daemon'  => '',
+      'stats'   => 'socket /var/lib/haproxy/stats'
+    },
+  }
+  # The three listen defines here are what the world will hit.
+  haproxy::listen { 'balance_git_http':
+    ipaddress        => [$::ipaddress, $::ipaddress6],
+    ports            => ['80'],
+    mode             => 'tcp',
+    collect_exported => false,
+    options          => {
+      'balance' => 'source',
+      'option'  => [
+        'tcplog',
+      ],
+    },
+  }
+  haproxy::listen { 'balance_git_https':
+    ipaddress        => [$::ipaddress, $::ipaddress6],
+    ports            => ['443'],
+    mode             => 'tcp',
+    collect_exported => false,
+    options          => {
+      'balance' => 'source',
+      'option'  => [
+        'tcplog',
+      ],
+    },
+  }
+  haproxy::listen { 'balance_git_daemon':
+    ipaddress        => [$::ipaddress, $::ipaddress6],
+    ports            => ['9418'],
+    mode             => 'tcp',
+    collect_exported => false,
+    options          => {
+      'maxconn' => '32',
+      'backlog' => '64',
+      'balance' => 'source',
+      'option'  => [
+        'tcplog',
+      ],
+    },
+  }
+  haproxy::balancermember { 'balance_git_http_member':
+    listening_service => 'balance_git_http',
+    server_names      => $balancer_member_names,
+    ipaddresses       => $balancer_member_ips,
+    ports             => '8080',
+  }
+  haproxy::balancermember { 'balance_git_https_member':
+    listening_service => 'balance_git_https',
+    server_names      => $balancer_member_names,
+    ipaddresses       => $balancer_member_ips,
+    ports             => '4443',
+  }
+  haproxy::balancermember { 'balance_git_daemon_member':
+    listening_service => 'balance_git_daemon',
+    server_names      => $balancer_member_names,
+    ipaddresses       => $balancer_member_ips,
+    ports             => '29418',
+    options           => 'maxqueue 512',
   }
 
-  file { '/var/www/cgit/static/openstack.png':
-    ensure  => present,
-    source  => 'puppet:///modules/openstack_project/openstack.png',
-    require => File['/var/www/cgit/static'],
+  file { '/etc/rsyslog.d/haproxy.conf':
+    ensure => present,
+    owner  => 'root',
+    group  => 'root',
+    mode   => '0644',
+    source => 'puppet:///modules/cgit/rsyslog.haproxy.conf',
   }
-
-  file { '/var/www/cgit/static/favicon.ico':
-    ensure  => present,
-    source  => 'puppet:///modules/openstack_project/status/favicon.ico',
-    require => File['/var/www/cgit/static'],
+  service { 'rsyslog':
+    ensure    => running,
+    subscribe => file['/etc/rsyslog.d/haproxy.conf'],
   }
-
-  file { '/var/www/cgit/static/openstack-page-bkg.jpg':
-    ensure  => present,
-    source  => 'puppet:///modules/openstack_project/openstack-page-bkg.jpg',
-    require => File['/var/www/cgit/static'],
-  }
-
-  file { '/var/www/cgit/static/openstack.css':
-    ensure  => present,
-    source  => 'puppet:///modules/openstack_project/git/openstack.css',
-    require => File['/var/www/cgit/static'],
-  }
-
 }
