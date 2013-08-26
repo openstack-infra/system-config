@@ -13,7 +13,7 @@
 // under the License.
 
 window.zuul_enable_status_updates = true;
-window.zuul_filter = "";
+window.zuul_filter = [];
 
 function format_time(ms, words) {
     if (ms == null) {
@@ -56,11 +56,16 @@ function format_progress(elapsed, remaining) {
 }
 
 function is_hide_project(project) {
-    var filter = window.zuul_filter;
-    if (filter.length == 0) {
+    var filters = window.zuul_filter;
+    if (filters.length == 0) {
         return false;
     }
-    return project.indexOf(filter) == -1;
+    var hide = true;
+    $.each(filters, function(filter_i, filter) {
+        if(project.indexOf(filter) != -1)
+            hide = false;
+    });
+    return hide;
 }
 
 function count_changes(pipeline) {
@@ -259,7 +264,10 @@ $(function() {
     });
 
     $('#projects_filter').live('keyup change', function () {
-        window.zuul_filter = $('#projects_filter').val().trim();
+        window.zuul_filter = $('#projects_filter').val().trim().split(',');
+        window.zuul_filter = window.zuul_filter.filter(function(n){
+            return n;
+        });
         $.each($('div[project]'), function (idx, val) {
             val = $(val);
             var project = val.attr('project');
