@@ -82,6 +82,7 @@
       - gate-{name}-pylint
       - hook-{name}-rtfd
       - pypi-jobs
+      - translation-jobs
 
 - project:
     name: python-savannaclient
