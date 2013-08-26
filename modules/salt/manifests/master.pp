@@ -85,8 +85,8 @@ class salt::master {
   }
 
   service { 'salt-master':
-    ensure    => running,
-    enable    => true,
+    ensure    => stopped,
+    enable    => false,
     require   => [
       User['salt'],
       File['/etc/salt/master'],
