@@ -120,13 +120,6 @@ class openstack_project::review (
         mirror               => true,
       },
       {
-        name                 => 'cgit',
-        url                  => 'cgit@git.openstack.org:/var/lib/git/',
-        replicationDelay     => '0',
-        threads              => '4',
-        mirror               => true,
-      },
-      {
         name                 => 'git01',
         url                  => 'cgit@git01.openstack.org:/var/lib/git/',
         replicationDelay     => '0',
