@@ -2229,13 +2229,12 @@ projects:
     check:
       - gate-sqlalchemy-migrate-python26
       - gate-sqlalchemy-migrate-python27
-      - gate-sqlalchemy-migrate-tox-py26sa07
-      - gate-sqlalchemy-migrate-tox-py27sa07
     gate:
       - gate-sqlalchemy-migrate-python26
       - gate-sqlalchemy-migrate-python27
-      - gate-sqlalchemy-migrate-tox-py26sa07
-      - gate-sqlalchemy-migrate-tox-py27sa07
+    experimental:
+      - gate-sqlalchemy-migrate-tox-26sa07
+      - gate-sqlalchemy-migrate-tox-27sa07
     post:
       - sqlalchemy-migrate-branch-tarball
       - hook-sqlalchemy-migrate-rtfd
