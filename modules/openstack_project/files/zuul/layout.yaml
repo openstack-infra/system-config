@@ -113,6 +113,9 @@ jobs:
     voting: false
   - name: gate-tempest-devstack-vm-postgres-full
     branch: ^(?!stable/folsom).*$
+  - name: gate-tempest-devstack-vm-heat-slow
+    branch: ^(?!stable/(folsom|grizzly)).*$
+    voting: false
   - name: gate-devstack-vm-cells
     branch: ^(?!stable/folsom).*$
     voting: false
@@ -409,6 +412,8 @@ projects:
       - gate-config-puppet-lint
       - gate-config-puppet-syntax
       - gate-config-pyflakes
+    experimental:
+      - gate-tempest-devstack-vm-heat-slow
     post:
       - ci-docs
 
