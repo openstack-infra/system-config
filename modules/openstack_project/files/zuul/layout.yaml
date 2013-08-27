@@ -113,6 +113,9 @@ jobs:
     voting: false
   - name: gate-tempest-devstack-vm-postgres-full
     branch: ^(?!stable/folsom).*$
+  - name: gate-tempest-devstack-vm-heat-slow
+    branch: ^(?!stable/(folsom|grizzly)).*$
+    voting: false
   - name: gate-devstack-vm-cells
     branch: ^(?!stable/folsom).*$
     voting: false
@@ -1422,6 +1425,7 @@ projects:
       - gate-tempest-devstack-vm-neutron
       - gate-grenade-devstack-vm
     experimental:
+      - gate-tempest-devstack-vm-heat-slow
       - gate-grenade-devstack-vm-stable
       - gate-devstack-vm-cells
       - gate-tempest-devstack-vm-neutron-full
