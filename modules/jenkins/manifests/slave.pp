@@ -343,10 +343,10 @@ class jenkins::slave(
     }
 
     if $include_pypy {
-      apt::ppa { 'ppa:pypy/pypy': }
+      apt::ppa { 'ppa:pypy/ppa': }
       package { 'pypy':
         ensure  => present,
-        require => Apt::Ppa['ppa:pypy/pypy']
+        require => Apt::Ppa['ppa:pypy/ppa']
       }
     }
   }
