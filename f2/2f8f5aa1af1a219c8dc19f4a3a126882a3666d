@@ -1,0 +1,8 @@
+Approved+1: James E. Blair <corvus@inaugust.com>
+Code-Review+2: James E. Blair <corvus@inaugust.com>
+Verified+2: Jenkins
+Submitted-by: Jenkins
+Submitted-at: Tue, 27 Aug 2013 00:13:58 +0000
+Reviewed-on: https://review.openstack.org/43743
+Project: openstack-infra/config
+Branch: refs/heads/master
