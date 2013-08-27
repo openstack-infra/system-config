@@ -1363,6 +1363,7 @@ projects:
       - gate-tempest-devstack-vm-neutron
       - gate-grenade-devstack-vm
     experimental:
+      - gate-tempest-devstack-vm-heat-slow
       - gate-grenade-devstack-vm-stable
       - gate-devstack-vm-cells
 
