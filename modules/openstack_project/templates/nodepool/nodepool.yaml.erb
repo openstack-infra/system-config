@@ -25,6 +25,8 @@ providers:
         base-image: 'Ubuntu 12.04 LTS (Precise Pangolin)'
         min-ram: 8192
         setup: prepare_node_devstack.sh
+        username: jenkins
+        private-key: /home/nodepool/.ssh/id_rsa
   - name: rax-ord
     region-name: 'ORD'
     service-type: 'compute'
@@ -39,6 +41,8 @@ providers:
         base-image: 'Ubuntu 12.04 LTS (Precise Pangolin)'
         min-ram: 8192
         setup: prepare_node_devstack.sh
+        username: jenkins
+        private-key: /home/nodepool/.ssh/id_rsa
   - name: hpcloud-az1
     region-name: 'az-1.region-a.geo-1'
     service-type: 'compute'
@@ -53,6 +57,8 @@ providers:
         base-image: 'Ubuntu Precise 12.04 LTS Server 64-bit 20121026 (b)'
         min-ram: 8192
         setup: prepare_node_devstack.sh
+        username: jenkins
+        private-key: /home/nodepool/.ssh/id_rsa
   - name: hpcloud-az2
     region-name: 'az-2.region-a.geo-1'
     service-type: 'compute'
@@ -67,6 +73,8 @@ providers:
         base-image: 'Ubuntu Precise 12.04 LTS Server 64-bit 20121026 (b)'
         min-ram: 8192
         setup: prepare_node_devstack.sh
+        username: jenkins
+        private-key: /home/nodepool/.ssh/id_rsa
   - name: hpcloud-az3
     region-name: 'az-3.region-a.geo-1'
     service-type: 'compute'
@@ -81,6 +89,8 @@ providers:
         base-image: 'Ubuntu Precise 12.04 LTS Server 64-bit 20121026 (b)'
         min-ram: 8192
         setup: prepare_node_devstack.sh
+        username: jenkins
+        private-key: /home/nodepool/.ssh/id_rsa
 
 targets:
   - name: jenkins01
