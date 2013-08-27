@@ -83,11 +83,12 @@ the node specifier).  It might look something like this::
    since it is not installed yet. You should be able to comment out the logic
    safely.
 
-Then to apply that configuration, run the following::
+Then to apply that configuration, run the following from the root of the config
+repository::
 
   bash install_puppet.sh
   bash install_modules.sh
-  puppet apply -l /tmp/manifest.log --modulepath=modules:/etc/puppet/modules local.pp
+  puppet apply -l /tmp/manifest.log --modulepath=modules:/etc/puppet/modules manifests/local.pp
 
 That should turn the system you are logged into into an etherpad
 server with the same configuration as that used by the OpenStack
