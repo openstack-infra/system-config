@@ -1303,3 +1303,12 @@
     jobs:
       - python-jobs
       - pypi-jobs
+
+- project:
+    name: tuskar
+    github-org: stackforge
+    tarball-site: tarballs.openstack.org
+    node: precise
+
+    jobs:
+      - python-jobs
