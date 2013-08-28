@@ -152,6 +152,15 @@ node 'groups.openstack.org' {
   }
 }
 
+node 'groups-dev.openstack.org' {
+  class { 'openstack_project::groups_dev':
+    sysadmins           => hiera('sysadmins'),
+    site_admin_password => hiera('groups_dev_site_admin_password'),
+    site_mysql_host     => hiera('groups_dev_site_mysql_host'),
+    site_mysql_password => hiera('groups_dev_site_mysql_password'),
+  }
+}
+
 node 'lists.openstack.org' {
   class { 'openstack_project::lists':
     listadmins   => hiera('listadmins'),
