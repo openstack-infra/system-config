@@ -1,0 +1,13 @@
+Code-Review+2: James E. Blair <corvus@inaugust.com>
+Verified+2: Jenkins
+Approved+1: Clark Boylan <clark.boylan@gmail.com>
+Code-Review+2: Clark Boylan <clark.boylan@gmail.com>
+Code-Review+1: Flavio Percoco <fpercoco@redhat.com>
+Code-Review+1: Kurt Griffiths <kurt.griffiths@rackspace.com>
+Code-Review+1: Elizabeth Krumbach Joseph <lyz@princessleia.com>
+Code-Review+1: Zhihao Yuan <zhihao.yuan@rackspace.com>
+Submitted-by: Jenkins
+Submitted-at: Wed, 28 Aug 2013 18:41:45 +0000
+Reviewed-on: https://review.openstack.org/42956
+Project: openstack-infra/config
+Branch: refs/heads/master
