@@ -41,6 +41,9 @@ max-stats=quarter
 # Set the title and heading of the repository index page
 root-title=OpenStack git repository browser
 
+# Make side-by-side diffs the default
+side-by-side-diffs=1
+
 # Set a subheading for the repository index page
 root-desc=
 
