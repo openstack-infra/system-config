@@ -79,6 +79,10 @@ class openstack_project::review_dev (
     ],
   }
 
+  mysql_backup::backup { 'review-dev':
+    require => Class['openstack_project::gerrit'],
+  }
+
   file { '/var/log/gerrit_user_sync':
     ensure  => directory,
     owner   => 'root',
