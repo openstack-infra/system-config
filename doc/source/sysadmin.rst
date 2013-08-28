@@ -86,8 +86,8 @@ the node specifier).  It might look something like this::
 Then to apply that configuration, run the following from the root of the config
 repository::
 
-  bash install_puppet.sh
-  bash install_modules.sh
+  ./install_puppet.sh
+  ./install_modules.sh
   puppet apply -l /tmp/manifest.log --modulepath=modules:/etc/puppet/modules manifests/local.pp
 
 That should turn the system you are logged into into an etherpad
