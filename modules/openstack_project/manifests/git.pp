@@ -106,7 +106,7 @@ class openstack_project::git (
     owner  => 'root',
     group  => 'root',
     mode   => '0644',
-    source => 'puppet:///modules/cgit/rsyslog.haproxy.conf',
+    source => 'puppet:///modules/openstack_project/git/rsyslog.haproxy.conf',
   }
   service { 'rsyslog':
     ensure    => running,
