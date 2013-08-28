@@ -225,3 +225,11 @@ Switching back to the server to be backed up, run::
 
 And verify the host key.  Add the "backup" class in puppet to the server
 to be backed up.
+
+Launching new servers 
+=====================
+
+New servers are launched using the launch tool from `the config repository
+<https://git.openstack.org/openstack-infra/config>`_. This tool is run from
+a checkout on the puppetmaster - please see ``launch/README`` for detailed
+instructions.
