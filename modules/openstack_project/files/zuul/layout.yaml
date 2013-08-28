@@ -2871,3 +2871,17 @@ projects:
       - wsme-tarball:
         - wsme-pypi-upload:
           - post-mirror-python27
+
+  - name: stackforge/puppet-cinder
+    check:
+      - gate-puppet-cinder-puppet-lint
+      - gate-puppet-cinder-puppet-syntax
+      - gate-puppet-cinder-puppet-unit-2.7
+      - gate-puppet-cinder-puppet-unit-3.0
+      - gate-puppet-cinder-puppet-unit-3.1
+    gate:
+      - gate-puppet-cinder-puppet-lint
+      - gate-puppet-cinder-puppet-syntax
+      - gate-puppet-cinder-puppet-unit-2.7
+      - gate-puppet-cinder-puppet-unit-3.0
+      - gate-puppet-cinder-puppet-unit-3.1
