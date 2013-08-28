@@ -17,6 +17,9 @@ cache-root-ttl=1
 # Specify some default clone prefixes
 clone-prefix=git://git.openstack.org https://git.openstack.org
 
+# Specify a command which will be invoked to format commit messages
+commit-filter=/usr/local/bin/commit-filter.sh
+
 # Specify the css url
 css=/static/openstack.css
 
