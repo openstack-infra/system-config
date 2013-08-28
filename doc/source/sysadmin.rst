@@ -75,7 +75,7 @@ the node specifier).  It might look something like this::
   # local.pp
   class { 'openstack_project::etherpad':
     database_password       => 'badpassword',
-    sysadmins               => 'user@example.org',
+    sysadmins               => ['user@example.org'],
   }
 
 .. note::
