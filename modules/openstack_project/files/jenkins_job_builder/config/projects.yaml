@@ -1312,3 +1312,14 @@
 
     jobs:
       - python-jobs
+
+- project:
+    name: puppet-pacemaker
+    github-org: stackforge
+    node: precise
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - gate-{name}-puppet-lint
+      - gate-{name}-puppet-syntax
+      - puppet-module-unit

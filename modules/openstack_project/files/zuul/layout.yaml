@@ -2871,3 +2871,17 @@ projects:
       - wsme-tarball:
         - wsme-pypi-upload:
           - post-mirror-python27
+
+  - name: stackforge/puppet-pacemaker
+    check:
+      - gate-puppet-pacemaker-puppet-lint
+      - gate-puppet-pacemaker-puppet-syntax
+      - gate-puppet-pacemaker-puppet-unit-2.7
+      - gate-puppet-pacemaker-puppet-unit-3.0
+      - gate-puppet-pacemaker-puppet-unit-3.1
+    gate:
+      - gate-puppet-pacemaker-puppet-lint
+      - gate-puppet-pacemaker-puppet-syntax
+      - gate-puppet-pacemaker-puppet-unit-2.7
+      - gate-puppet-pacemaker-puppet-unit-3.0
+      - gate-puppet-pacemaker-puppet-unit-3.1
