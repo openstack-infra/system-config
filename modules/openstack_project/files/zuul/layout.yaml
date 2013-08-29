@@ -1310,6 +1310,7 @@ projects:
       - gate-pbr-python26
       - gate-pbr-python27
       - gate-pbr-python33
+      - gate-pbr-pypy
       - gate-pbr-devstack-vm-rawinstall
       - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
@@ -1323,6 +1324,7 @@ projects:
       - gate-pbr-python26
       - gate-pbr-python27
       - gate-pbr-python33
+      - gate-pbr-pypy
       - gate-pbr-devstack-vm-rawinstall
       - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
