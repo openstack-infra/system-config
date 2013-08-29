@@ -1290,6 +1290,7 @@ projects:
       - gate-hacking-python26
       - gate-hacking-python27
       - gate-hacking-python33
+      - gate-hacking-pypy
       - gate-hacking-integration-nova
     gate:
       - gate-hacking-docs
@@ -1297,6 +1298,7 @@ projects:
       - gate-hacking-python26
       - gate-hacking-python27
       - gate-hacking-python33
+      - gate-hacking-pypy
       - gate-hacking-integration-nova
     post:
       - hacking-branch-tarball
@@ -1317,6 +1319,7 @@ projects:
       - gate-pbr-python26
       - gate-pbr-python27
       - gate-pbr-python33
+      - gate-pbr-pypy
       - gate-pbr-devstack-vm-rawinstall
       - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
@@ -1330,6 +1333,7 @@ projects:
       - gate-pbr-python26
       - gate-pbr-python27
       - gate-pbr-python33
+      - gate-pbr-pypy
       - gate-pbr-devstack-vm-rawinstall
       - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
