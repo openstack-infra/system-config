@@ -129,8 +129,8 @@ node 'community.openstack.org' {
   }
 }
 
-node 'ci-puppetmaster.openstack.org' {
-  class { 'openstack_project::puppetmaster':
+node 'ci-puppetmaster.testing-cabal.org' {
+  class { 'testcabal_project::puppetmaster':
     sysadmins => hiera('sysadmins'),
   }
 }
