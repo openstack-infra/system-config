@@ -220,8 +220,8 @@ node 'wiki.openstack.org' {
   }
 }
 
-node 'puppet-dashboard.openstack.org' {
-  class { 'openstack_project::dashboard':
+node 'puppet-dashboard.testing-cabal.org' {
+  class { 'testcabal_project::dashboard':
     password        => hiera('dashboard_password'),
     mysql_password  => hiera('dashboard_mysql_password'),
     sysadmins       => hiera('sysadmins'),
