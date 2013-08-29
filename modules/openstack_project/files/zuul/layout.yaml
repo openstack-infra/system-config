@@ -2225,6 +2225,18 @@ projects:
     gate:
       - gate-noop
 
+  - name: stackforge/savanna-image-elements
+    check:
+      - gate-noop
+    gate:
+      - gate-noop
+
+  - name: stackforge/puppet-savanna
+    check:
+      - gate-noop
+    gate:
+      - gate-noop
+
   - name: stackforge/sqlalchemy-migrate
     check:
       - gate-sqlalchemy-migrate-python26
