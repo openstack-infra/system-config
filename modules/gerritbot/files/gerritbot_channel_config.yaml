@@ -2,6 +2,7 @@ openstack-infra:
     events:
       - patchset-created
       - change-merged
+      - comment-added
       - x-vrif-minus-2
     projects:
       - openstack-dev/hacking
@@ -40,6 +41,7 @@ openstack-doc:
     events:
       - patchset-created
       - change-merged
+      - comment-added
       - x-vrif-minus-2
     projects:
       - openstack/openstack-manuals
@@ -52,6 +54,7 @@ stackforge-dev:
     events:
       - patchset-created
       - change-merged
+      - comment-added
       - x-vrif-minus-2
     projects:
       - stackforge/libra
@@ -63,6 +66,7 @@ openstack-metering:
     events:
       - patchset-created
       - change-merged
+      - comment-added
       - x-vrif-minus-2
     projects:
       - openstack/ceilometer
@@ -75,6 +79,7 @@ openstack-dns:
     events:
       - patchset-created
       - change-merged
+      - comment-added
       - x-vrif-minus-2
     projects:
       - stackforge/designate
@@ -86,6 +91,7 @@ openstack-trove:
     events:
       - patchset-created
       - change-merged
+      - comment-added
       - x-vrif-minus-2
     projects:
       - openstack/trove
@@ -99,6 +105,7 @@ tripleo:
     events:
       - patchset-created
       - change-merged
+      - comment-added
       - x-vrif-minus-2
     projects:
       - openstack/diskimage-builder
@@ -116,6 +123,7 @@ heat:
     events:
       - patchset-created
       - change-merged
+      - comment-added
       - x-vrif-minus-2
     projects:
       - openstack/heat
@@ -130,6 +138,7 @@ openstack-neutron:
     events:
       - patchset-created
       - change-merged
+      - comment-added
       - x-vrif-minus-2
     projects:
       - openstack/neutron
@@ -141,6 +150,7 @@ savanna:
     events:
       - patchset-created
       - change-merged
+      - comment-added
       - x-vrif-minus-2
     projects:
       - stackforge/savanna
@@ -154,6 +164,7 @@ savanna:
 openstack-nova:
     events:
       - patchset-created
+      - comment-added
       - x-vrif-minus-2
     projects:
       - openstack/nova
@@ -165,6 +176,7 @@ openstack-qa:
     events:
       - patchset-created
       - change-merged
+      - comment-added
       - x-vrif-minus-2
     projects:
       - openstack/tempest
@@ -178,6 +190,7 @@ puppet-openstack:
     events:
       - patchset-created
       - change-merged
+      - comment-added
       - x-vrif-minus-2
     projects:
       - stackforge/puppet-ceilometer
@@ -200,6 +213,7 @@ openstack-chef:
     events:
       - patchset-created
       - change-merged
+      - comment-added
       - x-vrif-minus-2
     projects:
       - stackforge/cookbook-openstack-block-storage
@@ -218,6 +232,7 @@ murano:
     events:
       - patchset-created
       - change-merged
+      - comment-added
       - x-vrif-minus-2
     projects:
       - stackforge/murano-agent
@@ -236,6 +251,7 @@ billingstack:
     events:
       - patchset-created
       - change-merged
+      - comment-added
       - x-vrif-minus-2
     projects:
       - stackforge/billingstack
@@ -246,6 +262,7 @@ openstack-ironic:
     events:
       - patchset-created
       - change-merged
+      - comment-added
       - x-vrif-minus-2
     projects:
       - openstack/ironic
@@ -258,6 +275,7 @@ openstack-swift:
     events:
       - patchset-created
       - change-merged
+      - comment-added
       - x-vrif-minus-2
     projects:
       - openstack/swift
@@ -269,6 +287,7 @@ openstack-swift:
 openstack-state-management:
     events:
       - change-merged
+      - comment-added
       - x-vrif-minus-2
     projects:
       - stackforge/taskflow
@@ -279,6 +298,7 @@ openstack-cloudkeep:
     events:
       - patchset-created
       - change-merged
+      - comment-added
       - x-vrif-minus-2
     projects:
       - stackforge/barbican
@@ -289,6 +309,7 @@ openstack-glance:
     events:
       - patchset-created
       - change-merged
+      - comment-added
       - x-vrif-minus-2
     projects:
       - openstack/glance
@@ -300,6 +321,7 @@ tuskar:
     events:
       - patchset-created
       - change-merged
+      - comment-added
       - x-vrif-minus-2
     projects:
       - stackforge/tuskar
@@ -312,6 +334,7 @@ openstack-marconi:
     events:
       - patchset-created
       - change-merged
+      - comment-added
       - x-vrif-minus-2
     projects:
       - stackforge/marconi
