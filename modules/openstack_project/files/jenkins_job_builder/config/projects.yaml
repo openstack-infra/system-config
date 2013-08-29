@@ -739,7 +739,6 @@
 
     jobs:
       - python-jobs
-      - gate-{name}-pypy
 
 
 - project:
