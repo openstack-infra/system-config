@@ -65,7 +65,11 @@ that OpenStack Infrastructure uses are ``production`` and ``development``.
 ``production`` is the default is and the environment used when nothing else is
 specified. Then the configuration needs to be placed into common.yaml in
 ``/etc/puppet/hieradata/production`` and ``/etc/puppet/hieradata/development``.
-The values are simple key-value pairs in yaml format.
+The values are simple key-value pairs in yaml format. The keys needed are the
+keys referenced in your ``site.pp``, their values are typically obvious
+(strings, lists of strings). ``/etc/puppet/hieradata/`` and below should be
+owned by ``puppet:puppet`` and have mode ``0711``. The actual ``production``
+file should have mode 0600.
 
 Adding a node
 -------------
