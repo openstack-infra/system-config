@@ -6,8 +6,8 @@ directory on an updated local clone of the repository on the puppetmaster, and
 that your account is a member of the puppet and salt groups for access
 to their respective keys::
 
-  sudo adduser YOURUSER puppet
-  sudo adduser YOURUSER salt
+  sudo adduser $(whoami) puppet
+  sudo adduser $(whoami) salt
 
 (Remember to log out and back into your shell if you add yourself
 to a group.)
