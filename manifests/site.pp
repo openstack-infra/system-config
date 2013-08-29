@@ -2,7 +2,7 @@
 # Default: should at least behave like an openstack server
 #
 node default {
-  include openstack_project::puppet_cron
+  include testcabal_project::puppet_cron
   class { 'openstack_project::server':
     sysadmins => hiera('sysadmins'),
   }
