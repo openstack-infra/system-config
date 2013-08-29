@@ -1110,6 +1110,7 @@ projects:
       - gate-python-novaclient-python26
       - gate-python-novaclient-python27
       - gate-python-novaclient-python33
+      - gate-python-novaclient-pypy
       - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-postgres-full
@@ -1122,6 +1123,7 @@ projects:
       - gate-python-novaclient-pep8
       - gate-python-novaclient-python26
       - gate-python-novaclient-python27
+      - gate-python-novaclient-pypy
       - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-postgres-full

@@ -230,6 +230,7 @@
       - 'gate-{name}-python26'
       - 'gate-{name}-python27'
       - 'gate-{name}-python33'
+      - 'gate-{name}-pypy'
       - 'gate-{name}-docs'
       - 'gate-{name}-requirements'
       - '{name}-tarball'
