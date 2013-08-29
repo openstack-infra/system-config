@@ -2871,3 +2871,10 @@ projects:
       - wsme-tarball:
         - wsme-pypi-upload:
           - post-mirror-python27
+
+  - name: stackforge/community-metrics-dash
+    check:
+      - gate-noop
+    gate:
+      - gate-noop
+
