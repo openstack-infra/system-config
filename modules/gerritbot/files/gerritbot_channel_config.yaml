@@ -25,6 +25,9 @@ openstack-infra:
       - openstack-infra/nose-html-output
       - openstack-infra/odsreg
       - openstack-infra/publications
+      - openstack-infra/puppet-apparmor
+      - openstack-infra/puppet-dashboard
+      - openstack-infra/puppet-vcsrepo
       - openstack-infra/releasestatus
       - openstack-infra/reviewday
       - openstack-infra/reviewstats
