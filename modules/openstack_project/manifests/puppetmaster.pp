@@ -42,6 +42,14 @@ class openstack_project::puppetmaster (
     mode   => '0750',
     }
 
+# Cloud credentials are stored in this directory for launch-node.py.
+  file { '/root/ci-launch':
+    ensure => directory,
+    owner  => 'root',
+    group  => 'root',
+    mode   => '0750',
+    }
+
 # For launch/launch-node.py.
   package { ['python-cinderclient', 'python-novaclient']:
     ensure   => latest,
