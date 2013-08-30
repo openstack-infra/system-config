@@ -52,11 +52,14 @@ compatible, so be sure to use an older release - e.g. Ubuntu Precise.
    /opt/config/production/install_puppet.sh
    apt-get install puppetmaster-passenger hiera hiera-puppet
 
-Finally, install the modules and use ``puppet apply`` to finish configuration:
+Finally, install the modules, fix your hostname and use ``puppet apply`` to
+finish configuration:
 
 .. code-block:: bash
 
    bash /opt/config/production/install_modules.sh
+   echo $REAL_HOSTNAME > /etc/hostname
+   service hostname restart
    puppet apply --modulepath='/opt/config/production/modules:/etc/puppet/modules' -e 'include openstack_project::puppetmaster'
 
 Note: Hiera uses a systemwide configuration file in ``/etc/puppet/hiera.yaml``
