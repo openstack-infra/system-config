@@ -40,7 +40,7 @@
 
     builders:
       - gerrit-git-prep
-      - shell: '/usr/local/jenkins/slave_scripts/run-tox.sh {env}'
+      - shell: '/usr/local/jenkins/slave_scripts/run-tox.sh {env} {github-org} {name}'
       - assert-no-extra-files
 
     publishers:

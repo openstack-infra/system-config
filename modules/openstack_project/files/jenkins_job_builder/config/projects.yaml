@@ -114,8 +114,8 @@
     rtfd-id: 1744
     tarball-site: tarballs.openstack.org
     env:
-        - py26sa07
-        - py27sa07
+        - 26sa07
+        - 27sa07
 
     jobs:
       - python-jobs
