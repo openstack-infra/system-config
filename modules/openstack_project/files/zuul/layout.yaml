@@ -1230,12 +1230,14 @@ projects:
       - gate-python-swiftclient-python26
       - gate-python-swiftclient-python27
       - gate-python-swiftclient-python33
+      - gate-python-swiftclient-pypy
     gate:
       - gate-python-swiftclient-requirements
       - gate-python-swiftclient-docs
       - gate-python-swiftclient-pep8
       - gate-python-swiftclient-python26
       - gate-python-swiftclient-python27
+      - gate-python-swiftclient-pypy
     post:
       - python-swiftclient-branch-tarball
       - python-swiftclient-coverage
