@@ -7,8 +7,8 @@ Gerrit
 
 Gerrit is the code review system used by the OpenStack project.  For a
 full description of how the system fits into the OpenStack workflow,
-see `the GerritJenkinsGithub wiki article
-<https://wiki.openstack.org/wiki/GerritJenkinsGithub>`_.
+see `the GerritJenkinsGit wiki article
+<https://wiki.openstack.org/wiki/GerritJenkinsGit>`_.
 
 This section describes how Gerrit is configured for use in the
 OpenStack project and the tools used to manage that configuration.
