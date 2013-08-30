@@ -35,6 +35,13 @@ class openstack_project::puppetmaster (
     require => Class['openstack_project::server'],
   }
 
+  file { '/var/lib/puppet/reports':
+    ensure => directory,
+    owner  => 'puppet',
+    group  => 'puppet',
+    mode   => '0750',
+    }
+
 # For launch/launch-node.py.
   package { ['python-cinderclient', 'python-novaclient']:
     ensure   => latest,
