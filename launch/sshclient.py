@@ -18,8 +18,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import paramiko
 import sys
+
+import paramiko
 
 class SSHClient(object):
     def __init__(self, ip, username, password=None, pkey=None):

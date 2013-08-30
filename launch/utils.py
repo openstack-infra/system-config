@@ -18,20 +18,21 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import time
+import os
+import traceback
+import socket
+
 import novaclient
 from novaclient.v1_1 import client as Client11
 try:
     from v1_0 import client as Client10
 except:
     pass
-import time
-import os
-import traceback
 import paramiko
-import socket
 import salt.crypt
-from sshclient import SSHClient
 
+from sshclient import SSHClient
 
 def iterate_timeout(max_seconds, purpose):
     start = time.time()
