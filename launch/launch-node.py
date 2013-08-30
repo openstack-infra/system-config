@@ -53,7 +53,7 @@ def get_client():
     return client
 
 def bootstrap_server(server, admin_pass, key, cert, environment, name,
-                     salt_priv, salt_pub):
+                     salt_priv, salt_pub, puppetmaster):
     client = server.manager.api
     ip = utils.get_public_ip(server)
     if not ip:
@@ -122,13 +122,14 @@ def bootstrap_server(server, admin_pass, key, cert, environment, name,
 
     ssh_client.ssh("puppet agent "
                    "--environment %s "
-                   "--server ci-puppetmaster.openstack.org "
+                   "--server %s "
                    "--no-daemonize --verbose --onetime --pluginsync true "
-                   "--certname %s" % (environment, certname))
+                   "--certname %s" % (environment, puppetmaster, certname))
 
     ssh_client.ssh("reboot")
 
-def build_server(client, name, image, flavor, cert, environment, salt):
+def build_server(
+        client, name, image, flavor, cert, environment, salt, puppetmaster):
     key = None
     server = None
 
@@ -156,7 +157,7 @@ def build_server(client, name, image, flavor, cert, environment, salt):
         admin_pass = server.adminPass
         server = utils.wait_for_resource(server)
         bootstrap_server(server, admin_pass, key, cert, environment, name,
-                         salt_priv, salt_pub)
+                         salt_priv, salt_pub, puppetmaster)
         print('UUID=%s\nIPV4=%s\nIPV6=%s\n' % (server.id,
                                                server.accessIPv4,
                                                server.accessIPv6))
@@ -187,6 +188,8 @@ def main():
                         "hostname.example.com.pem)")
     parser.add_argument("--salt", dest="salt", action="store_true",
                         help="Manage salt keys for this host.")
+    parser.add_argument("--server", dest="server", help="Puppetmaster to use.",
+                        default="ci-puppetmaster.openstack.org")
     options = parser.parse_args()
 
     client = get_client()
@@ -226,7 +229,7 @@ def main():
     print "Found image", image
 
     build_server(client, options.name, image, flavor, cert,
-                 options.environment, options.salt)
+                 options.environment, options.salt, options.server)
     dns.print_dns(client, options.name)
 
 if __name__ == '__main__':
