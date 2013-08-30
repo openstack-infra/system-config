@@ -29,6 +29,7 @@ Contents:
 
    project
    sysadmin
+   running-your-own
    systems
 
 .. toctree::
