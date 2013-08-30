@@ -34,4 +34,9 @@ class openstack_project::puppetmaster (
     replace => true,
     require => Class['openstack_project::server'],
   }
+
+# For launch/launch-node.py.
+  package { 'python-cinderclient': ensure => latest, provider=> pip, }
+  package { 'python-novaclient': ensure => latest, provider=> pip, }
+  package { 'python-paramiko': ensure => latest }
 }
