@@ -26,9 +26,10 @@ import subprocess
 import traceback
 import socket
 import argparse
-import utils
-import dns
 import shutil
+
+import dns
+import utils
 
 NOVA_USERNAME=os.environ['OS_USERNAME']
 NOVA_PASSWORD=os.environ['OS_PASSWORD']
