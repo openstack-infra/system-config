@@ -20,7 +20,7 @@
     builders:
       - shell: |
           #!/bin/bash -xe
-          /usr/local/jenkins/slave_scripts/propose_translation_update.sh {name}
+          /usr/local/jenkins/slave_scripts/propose_translation_update.sh {github-org} {name}
 
     publishers:
       - console-log-periodic
