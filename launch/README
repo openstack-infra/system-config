@@ -44,6 +44,11 @@ automatically). Note that this example assumes you've already
 exported a relevant FQDN and sourced the appropriate API credentials
 above.
 
+When running outside the official OpenStack CI infrastructure, you
+will want to pass --server ci-puppetmaster.example.com otherwise the
+new node wil try to register with ci-puppetmaster.openstack.org - and
+fail hilariously.
+
 Add DNS Records
 ===============
 
