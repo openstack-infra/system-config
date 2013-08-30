@@ -162,6 +162,27 @@ following practices must be observed for SSH access:
    then the old one removed.  Be sure to run puppet on the backup
    servers to make sure they are updated.
 
+
+GitHub Access
+=============
+
+To ensure that code review and testing are not bypassed in the public
+Git repositories, only Gerrit will be permitted to commit code to
+OpenStack repositories.  Because GitHub always allows project
+administrators to commit code, accounts that have access to manage the
+GitHub projects necessarily will have commit access to the
+repositories.  Therefore, to avoid inadvertent commits to the public
+repositories, unique administrative-only accounts must be used to
+manage the OpenStack GitHub organization and projects.  These accounts
+will not be used to check out or commit code for any project.
+
+Root only information
+#####################
+
+Some information is only relevant if you have root access to the system - e.g.
+you are an OpenStack CI root operator, or you are running a clone of the
+OpenStack CI infrastructure for another project.
+
 Backups
 =======
 
@@ -204,16 +225,3 @@ Switching back to the server to be backed up, run::
 
 And verify the host key.  Add the "backup" class in puppet to the server
 to be backed up.
-
-GitHub Access
-=============
-
-To ensure that code review and testing are not bypassed in the public
-Git repositories, only Gerrit will be permitted to commit code to
-OpenStack repositories.  Because GitHub always allows project
-administrators to commit code, accounts that have access to manage the
-GitHub projects necessarily will have commit access to the
-repositories.  Therefore, to avoid inadvertent commits to the public
-repositories, unique administrative-only accounts must be used to
-manage the OpenStack GitHub organization and projects.  These accounts
-will not be used to check out or commit code for any project.
