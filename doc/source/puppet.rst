@@ -35,27 +35,22 @@ ship the data to the clients.
 The cron jobs, current configuration files and more can be done with ``puppet
 apply`` but first some bootstrapping needs to be done.
 
-First want to install these from puppetlabs' apt repo, but we typically pin to
-a specific version, so you'll want to copy in the preferences file from the git
-repository. Configuration files for puppet master are stored in a git repo
-clone at ``/opt/config/production`` so we'll just do this checkout now and copy
-over the preferences file:
+First want to install these from puppetlabs' apt repo. We have not yet migrated
+to puppet 3, so we pin puppet to 2.x. There is a script in the root of the
+config repository that will setup appropriate pinning and install the puppet
+client. After that installing the puppetmaster and hiera (used to maintain
+secrets on the puppet master).
+
+Please note: Fedora F19 and Ubuntu Raring and above cannot successfully run an
+OpenStack-CI puppetmaster due to new Ruby and older Puppet not being
+compatible, so be sure to use an older release - e.g. Ubuntu Precise.
 
 .. code-block:: bash
 
+   sudo su -
    git clone https://git.openstack.org/openstack-infra/config /opt/config/production
-   cp /opt/config/production/modules/openstack_project/files/00-puppet.pref /etc/apt/preferences.d/
-
-Then we can add the repo and install the packages, we'll also install the hiera
-packages here which are used to maintain secret information on the
-puppetmaster:
-
-.. code-block:: bash
-
-    apt-add-repository "deb http://apt.puppetlabs.com `lsb_release -cs` devel"
-    apt-key adv --keyserver pool.sks-keyservers.net --recv <KEY_ID>
-    apt-get update
-    apt-get install puppet puppetmaster-passenger hiera hiera-puppet
+   /opt/config/production/install_puppet.sh
+   apt-get install puppetmaster-passenger hiera hiera-puppet
 
 Finally, install the modules and use ``puppet apply`` to finish configuration:
 

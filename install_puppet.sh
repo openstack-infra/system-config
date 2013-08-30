@@ -54,8 +54,9 @@ EOF
     yum install -y redhat-lsb-core git puppet
 else
     #defaults to Ubuntu
+    # NB: keep in sync with openstack_project/files/00-puppet.pref
     cat > /etc/apt/preferences.d/00-puppet.pref <<EOF
-Package: puppet puppet-common puppetmaster puppetmaster-common
+Package: puppet puppet-common puppetmaster puppetmaster-common puppetmaster-passenger
 Pin: version 2.7*
 Pin-Priority: 501
 EOF
