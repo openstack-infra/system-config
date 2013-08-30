@@ -35,6 +35,13 @@ class openstack_project::puppetmaster (
     require => Class['openstack_project::server'],
   }
 
+  file { '/var/lib/puppet/reports':
+    ensure => directory,
+    owner  => 'puppet',
+    group  => 'puppet',
+    mode   => '0750',
+    }
+
   package { 'python-cinderclient': ensure => latest, provider=> pip, }
   package { 'python-novaclient': ensure => latest, provider=> pip, }
 }
