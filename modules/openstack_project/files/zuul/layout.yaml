@@ -963,12 +963,18 @@ projects:
       - gate-python-ceilometerclient-python26
       - gate-python-ceilometerclient-python27
       - gate-python-ceilometerclient-python33
+      - gate-tempest-devstack-vm-full
+      - gate-tempest-devstack-vm-postgres-full
+      - gate-tempest-devstack-vm-neutron
     gate:
       - gate-python-ceilometerclient-requirements
       - gate-python-ceilometerclient-docs
       - gate-python-ceilometerclient-pep8
       - gate-python-ceilometerclient-python26
       - gate-python-ceilometerclient-python27
+      - gate-tempest-devstack-vm-full
+      - gate-tempest-devstack-vm-postgres-full
+      - gate-tempest-devstack-vm-neutron
     post:
       - python-ceilometerclient-branch-tarball
       - python-ceilometerclient-coverage
@@ -1466,12 +1472,18 @@ projects:
       - gate-ceilometer-docs
       - gate-ceilometer-python26
       - gate-ceilometer-python27
+      - gate-tempest-devstack-vm-full
+      - gate-tempest-devstack-vm-postgres-full
+      - gate-tempest-devstack-vm-neutron
     gate:
       - gate-ceilometer-requirements
       - gate-ceilometer-docs
       - gate-ceilometer-pep8
       - gate-ceilometer-python26
       - gate-ceilometer-python27
+      - gate-tempest-devstack-vm-full
+      - gate-tempest-devstack-vm-postgres-full
+      - gate-tempest-devstack-vm-neutron
     post:
       - ceilometer-branch-tarball
       - ceilometer-coverage
