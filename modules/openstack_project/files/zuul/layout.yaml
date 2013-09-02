@@ -1188,6 +1188,7 @@ projects:
       - gate-python-neutronclient-python26
       - gate-python-neutronclient-python27
       - gate-python-neutronclient-python33
+      - gate-python-neutronclient-pypy
       - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-postgres-full
@@ -1200,6 +1201,7 @@ projects:
       - gate-python-neutronclient-pep8
       - gate-python-neutronclient-python26
       - gate-python-neutronclient-python27
+      - gate-python-neutronclient-pypy
       - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-postgres-full
