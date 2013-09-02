@@ -112,13 +112,14 @@
     node: precise
     rtfd-id: 1744
     tarball-site: tarballs.openstack.org
-    env:
-        - 26sa07
-        - 27sa07
 
     jobs:
       - python-jobs
-      - gate-{name}-unittests-{env}
+      - gate-{name}-tox-{env}:
+          env: py26sa07
+          node: centos6
+      - gate-{name}-tox-{env}:
+          env: py27sa07
       - hook-{name}-rtfd
       - pypi-jobs
 
