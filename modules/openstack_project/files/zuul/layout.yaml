@@ -1464,12 +1464,22 @@ projects:
       - gate-ceilometer-docs
       - gate-ceilometer-python26
       - gate-ceilometer-python27
+      - gate-tempest-devstack-vm-smoke
+      - gate-tempest-devstack-vm-full
+      - gate-tempest-devstack-vm-cinder
+      - gate-tempest-devstack-vm-postgres-full
+      - gate-tempest-devstack-vm-neutron
     gate:
       - gate-ceilometer-requirements
       - gate-ceilometer-docs
       - gate-ceilometer-pep8
       - gate-ceilometer-python26
       - gate-ceilometer-python27
+      - gate-tempest-devstack-vm-smoke
+      - gate-tempest-devstack-vm-full
+      - gate-tempest-devstack-vm-cinder
+      - gate-tempest-devstack-vm-postgres-full
+      - gate-tempest-devstack-vm-neutron
     post:
       - ceilometer-branch-tarball
       - ceilometer-coverage
