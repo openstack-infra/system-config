@@ -1326,3 +1326,12 @@
 
     jobs:
       - python-jobs
+
+- project:
+    name: rally
+    github-org: stackforge
+    node: precise
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - python-jobs
