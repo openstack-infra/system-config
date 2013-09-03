@@ -2896,3 +2896,19 @@ projects:
       - gate-noop
     gate:
       - gate-noop
+
+  - name: stackforge/rally
+    check:
+      - gate-rally-pep8
+      - gate-rally-python26
+      - gate-rally-python27
+    gate:
+      - gate-rally-pep8
+      - gate-rally-python26
+      - gate-rally-python27
+    post:
+      - rally-branch-tarball
+    pre-release:
+      - rally-tarball
+    release:
+      - rally-tarball
