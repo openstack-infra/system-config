@@ -130,3 +130,103 @@ details)::
 
 * ssh into the new node and update its ``/etc/default/puppet`` to autostart
   per the launch README.
+
+Stage 3 - gerrit
+~~~~~~~~~~~~~~~~
+
+Gerrit is combined master repository management and code review system. See
+:file:`doc/source/gerrit.rst` for the common operational tasks for it.
+
+To set it up, you'll need a small png 167px x 56x with a project logo for
+branding and a 485px × 161px png as the top of page background. You can of
+course alter the appearance and css to your hearts content.
+
+In addition you need to set a dozen or so hiera variables (see site.pp), these
+will require manually creating keys and passwords.
+
+Migrate the manifests:
+
+* modules/openstack_project/manifests/gerrit.pp. Note that this is a thin shim
+  over a generic gerrit module: you'll be forking most of this and maintaining
+  it indefinitely. If you don't want a CLA, be sure to elide those portions.
+  Replace the file paths for branding files you've replaced. Many of the
+  scripts can be used from openstack_projects though (which ones is yet to be
+  determined).
+
+  * All the '=> absent' cronjobs can be elided: they are cleanup for older
+    versions of this manifest.
+
+  * the LP links that reference openstack specifically should instead point to
+    your project (or project group) on Launchpad [or wherever you want them].
+
+  * openstackwatch creates an rss feed of the unified changes from many
+    projects - it is entirely optional.
+
+  * The cla files should be skipped or forked; they are specific to OpenStack.
+
+  * The title and page-bkg are OpenStack specific and should be replaced.
+
+  * The GerritSite.css is OpenStack specific - it references the
+    openstack-page-bkg image.
+
+  * The gerritsyncusers cron reference can be dropped.
+
+  * The sync_launchpad_users cron reference can be dropped.
+
+  * You need to modify the puppet path for gerrit acls - they should come from
+    your project - make the directory but you can leave it empty (except for a
+    . file to let git add it).  ``http://ci.openstack.org/stackforge.html``
+    covers how it gets populated when your infrastructure is working.
+
+  * Ditto projects.yaml, which is passed in from your review.pp - something like
+    $PROJECT/templates/review.projects.yaml.erb
+
+  * set_agreements is a database migration tool for gerrit CLAs; not needed
+    unless you have CLAs.
+
+* modules/openstack_project/manifests/review.pp.
+
+  * Contact store should be set to false as at this stage we don't have a
+    secure store setup.
+
+  * Start with just local replication, plus github if you have a github organisation already.
+
+  * Ditto starting without gerritbot.
+
+  * Be sure to update projects_file - that is openstack specific.
+    The defaults at the top all need to be updated. You probably want to start
+    with no initial projects until gerrit is happy for you, and update the
+    defaults to match your project. The gerrit user and commit defaults should
+    be changed, as should the homepage, but the rest should be fine.
+
+Create any acl config files for your project.
+
+Update site.pp to reference the new gerrit manifest. See review.pp for
+documentation on the hiera keys.
+
+SSH keys can be made via ssh-keygen, you will need passwordless keys to be able
+to restart without manual intervention. See the ssh-keygen man page for more
+information. but in short::
+
+  ssh-keygen -t rsa -P '' -f ssh_host_rsa_key
+  ssh-keygen -t dsa -P '' -f ssh_host_dsa_key
+  ssh-keygen -t rsa -P '' -f project_ssh_rsa_key
+
+You will need to get an ssl certificate - if you're testing you may want a self
+signed one (but be sure to set ssl_chain_file to '' in review.pp in that case).
+``http://lmgtfy.com/q=self+signed+certificate``. To put them in hiera you need
+to use ``: |``::
+
+  foo: |
+    literal
+    contents
+    here
+
+Launch a node - be sure to pass --ram 10240 to get a flavor with at least 10G+
+or RAM, as gerrit is configured for 8G of heap.
+
+Follow the :file:`doc/source/gerrit.rst` for instructions on getting gerrit
+configured once installed.
+
+Then log in through the web interface. This will put you in the Administrators
+group.
