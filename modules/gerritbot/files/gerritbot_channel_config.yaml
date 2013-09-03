@@ -164,6 +164,16 @@ openstack-nova:
     branches:
       - master
 
+openstack-cinder:
+    events:
+      - patchset-created
+      - x-vrif-minus-2
+    projects:
+      - openstack/cinder
+      - openstack/python-cinderclient
+    branches:
+      - master
+
 openstack-qa:
     events:
       - patchset-created
