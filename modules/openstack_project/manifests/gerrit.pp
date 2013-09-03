@@ -158,6 +158,11 @@ class openstack_project::gerrit (
     testmode                        => $testmode,
     require                         => Class[openstack_project::server],
   }
+
+  mysql_backup::backup { 'gerrit':
+    require => Class['::gerrit'],
+  }
+
   if ($testmode == false) {
     class { 'gerrit::cron':
       script_user     => $script_user,
