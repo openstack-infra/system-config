@@ -45,9 +45,10 @@ def get_client():
     client = Client(*args, **kwargs)
     return client
 
-def print_dns(client, name):
+def print_dns(client, name, domain):
     for server in client.servers.list():
         if server.name != name: continue
+        domain = server.name.split('.', 1)[1]
         ip4 = utils.get_public_ip(server)
         ip6 = utils.get_public_ip(server, 6)
         href = utils.get_href(server)
@@ -60,26 +61,26 @@ def print_dns(client, name):
         print ("rackdns rdns-create --name %s \\\n"
                "    --data %s \\\n"
                "    --server-href %s \\\n"
-               "    --ttl 3600" % (
-                server.name, ip6, href))
+               "    --ttl 3600 %s" % (
+                server.name, ip6, href, domain))
         print
         print ("rackdns rdns-create --name %s \\\n"
                "    --data %s \\\n"
                "    --server-href %s \\\n"
-               "    --ttl 3600" % (
-                server.name, ip4, href))
+               "    --ttl 3600 %s" % (
+                server.name, ip4, href, domain))
         print
         print ". ~root/ci-launch/openstack-rs-nova.sh"
         print
         print ("rackdns record-create --name %s \\\n"
                "    --type AAAA --data %s \\\n"
-               "    --ttl 3600 openstack.org" % (
-                server.name, ip6))
+               "    --ttl 3600 %s" % (
+                server.name, ip6, domain))
         print
         print ("rackdns record-create --name %s \\\n"
                "    --type A --data %s \\\n"
-               "    --ttl 3600 openstack.org" % (
-                server.name, ip4))
+               "    --ttl 3600 %s" % (
+                server.name, ip4, domain))
 
 def main():
     parser = argparse.ArgumentParser()
