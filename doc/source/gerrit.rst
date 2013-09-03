@@ -370,25 +370,138 @@ or manually update their remotes with something like::
 
   git remote set-url origin https://git.openstack.org/$ORG/$PROJECT
 
-Deleting a User from Gerrit
----------------------------
 
-This isn't normally necessary, but if you find that you need to
-completely delete an account from Gerrit, here's how:
+Resetting a Username in Gerrit
+------------------------------
+
+Initially if a Gerrit username (which is used to associate SSH
+connections to an account) has not yet been set, the user can type
+it into the Gerrit WebUI... but there is no supported way for the
+user to alter or correct it once entered. Further, if a defunct
+account has the desired username, a different one will have to be
+entered.
+
+Because of this, often due to the user ending up with `Duplicate
+Accounts in Gerrit`_, it may be requested to change the SSH username
+of an account. Confirm the account_id number for the account in
+question and remove the existing username external_id for that (it
+may also be necessary to remove any lingering external_id with the
+desired username if confirmed there is a defunct account associated
+with it):
 
 .. code-block:: mysql
 
-  delete from account_agreements where account_id=NNNN;
-  delete from account_diff_preferences where id=NNNN;
-  delete from account_external_ids where account_id=NNNN;
-  delete from account_group_members where account_id=NNNN;
-  delete from account_group_members_audit where account_id=NNNN;
-  delete from account_patch_reviews where account_id=NNNN;
-  delete from account_project_watches where account_id=NNNN;
-  delete from account_ssh_keys where account_id=NNNN;
-  delete from accounts where account_id=NNNN;
+  delete from account_external_ids where account_id=NNNN and external_id like 'username:%';
+
+After this, the user should be able to re-add their username through
+the Gerrit WebUI.
+
+
+Duplicate Accounts in Gerrit
+----------------------------
+
+From time to time, outside events affecting SSO authentication or
+identity changes can result in multiple Gerrit accounts for the same
+user. This frequently causes duplication of preferred E-mail
+addresses, which also renders the accounts unselectable in some
+parts of the WebUI (notably when trying to add reviewers to a change
+or members in a group). Gerrit does not provide a supported
+mechanism for `Combining Gerrit Accounts`_, and doing so manually is
+both time-consuming and error prone. As a result, the OpenStack
+infrastructure team does not combine duplicate accounts for users
+but can clean up these E-mail address issues upon request. To find
+the offending duplicates:
+
+.. code-block:: mysql
+
+  select account_id from accounts where preferred_email='user@example.com';
+
+Find out from the user which account_id is the one they're currently
+using, and then null out the others with:
+
+.. code-block:: mysql
+
+  update accounts set preferred_email=NULL where account_id=OLD;
+
+
+Combining Gerrit Accounts
+-------------------------
+
+While not supported by Gerrit, a fairly thorough account merge is
+documented here (mostly as a demonstration of its unfortunate
+complexity). Please note that the OpenStack infrastructure team does
+not combine duplicate accounts for users upon request, but this
+would be the process to follow if it becomes necessary under some
+extraordinary circumstance.
+
+Collect as much information as possible about all affected accounts,
+and then go poking around in the tables listed below for additional
+ones to determine the account_id number for the current account and
+any former accounts which should be merged into it. Then for each
+old account_id, perform these update and delete queries:
+
+.. code-block:: mysql
+
+  delete from account_agreements where account_id=OLD;
+  delete from account_diff_preferences where id=OLD;
+  delete from account_external_ids where account_id=OLD;
+  delete from account_group_members where account_id=OLD;
+  delete from account_group_members_audit where account_id=OLD;
+  delete from account_project_watches where account_id=OLD;
+  delete from account_ssh_keys where account_id=OLD;
+  delete from accounts where account_id=OLD;
+  update account_patch_reviews set account_id=NEW where account_id=OLD;
+  update starred_changes set account_id=NEW where account_id=OLD;
+  update change_messages set author_id=NEW where author_id=OLD;
+  update changes set owner_account_id=NEW where owner_account_id=OLD;
+  update patch_comments set author_id=NEW where author_id=OLD;
+  update patch_sets set uploader_account_id=NEW where uploader_account_id=OLD;
+  update patch_set_approvals set account_id=NEW where account_id=OLD;
+
+If that last update query results in a collision with an error
+like::
+
+  ERROR 1062 (23000): Duplicate entry 'XXX-YY-NEW' for key 'PRIMARY'
+
+Then you can manually delete the old approval:
+
+.. code-block:: mysql
+
+  delete from patch_set_approvals where account_id=OLD and change_id=XXX and patch_set_id=YY;
+
+And repeat until the update query runs to completion.
+
+After all the described deletes and updates have been applied, flush
+Gerrit's caches so things like authentication will be rechecked
+against the current DB contents:
 
 .. code-block:: bash
 
   ssh review.openstack.org -p29418 gerrit flush-caches --all
 
+Make the user aware that these steps have also removed any group
+memberships, preferences, SSH keys, contact information, CLA
+signatures, and so on associated with the old account so some of
+these may still need to be added to the new one via the Gerrit WebUI
+if they haven't been already. With a careful inspection of all
+accounts involved it is possible to merge some information from the
+old accounts into new ones by performing update queries similar to
+the deletes above, but since this varies on a case-by-case basis
+it's left as an exercise for the reader.
+
+
+Deleting a User from Gerrit
+---------------------------
+
+This isn't normally necessary, but if you find that you need to
+completely delete an account from Gerrit, perform the same delete
+queries mentioned in `Combining Gerrit Accounts`_ and replace the
+update queries for account_patch_reviews and starred_changes with:
+
+.. code-block:: mysql
+
+  delete from account_patch_reviews where account_id=OLD;
+  delete from starred_changes where account_id=OLD;
+
+The other update queries can be ignored, since deleting them in many
+cases would result in loss of legitimate review history.
