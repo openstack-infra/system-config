@@ -2931,3 +2931,33 @@ projects:
     gate:
       - gate-noop
 
+  - name: stackforge/fuel-main
+    check:
+      - gate-noop
+    gate:
+      - gate-noop
+
+  - name: stackforge/fuel-web
+    check:
+      - gate-noop
+    gate:
+      - gate-noop
+
+  - name: stackforge/fuel-astute
+    check:
+      - gate-noop
+    gate:
+      - gate-noop
+
+  - name: stackforge/fuel-ostf-tests
+    check:
+      - gate-noop
+    gate:
+      - gate-noop
+
+  - name: stackforge/fuel-ostf-plugin
+    check:
+      - gate-noop
+    gate:
+      - gate-noop
+
