@@ -1246,10 +1246,12 @@
     name: stackalytics
     github-org: stackforge
     node: precise
+    rtfd-id: 8778
     tarball-site: tarballs.openstack.org
 
     jobs:
       - python-jobs
+      - hook-{name}-rtfd
 
 - project:
     name: anvil
