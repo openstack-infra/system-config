@@ -20,6 +20,7 @@
 
 import sys
 import os
+from textwrap import dedent
 import time
 import traceback
 import argparse
@@ -191,9 +192,20 @@ def main():
                         help="Manage salt keys for this host.")
     parser.add_argument("--server", dest="server", help="Puppetmaster to use.",
                         default="ci-puppetmaster.openstack.org")
+    parser.add_argument(
+        "dnstool", help=dedent("""\
+        command tool to run to create DNS entries.
+
+        This tool should accept two commands:
+          * rdns-create with --name, --data, --server-href, --ttl and a domain parameter.
+          * create with --name, --type, --data --ttl and a domain parameter.
+        """))
     options = parser.parse_args()
 
     client = get_client()
+
+    if options.dnstool is None:
+        raise Exception("Must supply a dns tool name.")
 
     if options.cert:
         cert = options.cert
@@ -231,7 +243,7 @@ def main():
 
     build_server(client, options.name, image, flavor, cert,
                  options.environment, options.salt, options.server)
-    dns.print_dns(client, options.name)
+    dns.print_dns(client, options.name, options.dnstool)
 
 if __name__ == '__main__':
     main()
