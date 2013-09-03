@@ -280,7 +280,7 @@ class Sync(object):
                 'stackforge/bufunfa',
                 'openstack/diskimage-builder',
                 'stackforge/libra',
-                'stackforge/marconi',
+                'openstack/marconi',
                 'stackforge/designate',
                 'stackforge/python-designateclient',
                 'openstack/python-troveclient',

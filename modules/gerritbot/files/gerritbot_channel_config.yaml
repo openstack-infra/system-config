@@ -329,7 +329,7 @@ openstack-marconi:
       - change-merged
       - x-vrif-minus-2
     projects:
-      - stackforge/marconi
-      - stackforge/python-marconiclient
+      - openstack/marconi
+      - openstack/python-marconiclient
     branches:
       - master

@@ -1803,7 +1803,7 @@ projects:
           - post-mirror-python27
           - post-mirror-python33
 
-  - name: stackforge/marconi
+  - name: openstack/marconi
     check:
       - gate-marconi-pep8
       - gate-marconi-python26
@@ -2707,7 +2707,7 @@ projects:
     gate:
       - gate-noop
 
-  - name: stackforge/python-marconiclient
+  - name: openstack/python-marconiclient
     check:
       - gate-python-marconiclient-pep8
       - gate-python-marconiclient-python26

@@ -492,7 +492,7 @@ projects:
       - gate-python-troveclient-python26
       - gate-python-troveclient-python27
 
-  - name: stackforge/marconi
+  - name: openstack/marconi
     check:
       - gate-marconi-pep8
       - gate-marconi-python26
@@ -723,7 +723,7 @@ projects:
     check:
       - gate-noop
 
-  - name: stackforge/python-marconiclient
+  - name: openstack/python-marconiclient
     check:
       - gate-python-marconiclient-pep8
       - gate-python-marconiclient-python26

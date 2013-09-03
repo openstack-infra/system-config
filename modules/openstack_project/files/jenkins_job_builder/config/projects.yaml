@@ -744,16 +744,23 @@
     jobs:
       - python-jobs
 
-
 - project:
     name: marconi
-    github-org: stackforge
+    github-org: openstack
     tarball-site: tarballs.openstack.org
     node: precise
 
     jobs:
       - python-jobs
 
+- project:
+    name: python-marconiclient
+    github-org: openstack
+    tarball-site: tarballs.openstack.org
+    node: precise
+
+    jobs:
+      - python-jobs
 
 - project:
     name: designate
@@ -1081,15 +1088,6 @@
       - gate-{name}-puppet-lint
       - gate-{name}-puppet-syntax
       - puppet-module-unit
-
-- project:
-    name: python-marconiclient
-    github-org: stackforge
-    tarball-site: tarballs.openstack.org
-    node: precise
-
-    jobs:
-      - python-jobs
 
 - project:
     name: cookbook-openstack-common
