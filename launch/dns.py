@@ -18,9 +18,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import sys
-import os
 import argparse
+import os
+import sys
+from textwrap import dedent
+
 import utils
 
 NOVA_USERNAME = os.environ['OS_USERNAME']
@@ -42,10 +44,11 @@ def get_client():
     return client
 
 
-def print_dns(client, name):
+def print_dns(client, name, dns_tool):
     for server in client.servers.list():
         if server.name != name:
             continue
+        domain = server.name.split('.', 1)[1]
         ip4 = utils.get_public_ip(server)
         ip6 = utils.get_public_ip(server, 6)
         href = utils.get_href(server)
@@ -55,42 +58,50 @@ def print_dns(client, name):
         print
         print ". ~root/rackdns-venv/bin/activate"
         print
-        print (
-            "rackdns rdns-create --name %s \\\n"
-            "    --data %s \\\n"
-            "    --server-href %s \\\n"
-            "    --ttl 3600" % (
-                server.name, ip6, href))
+        print ("%s rdns-create --name %s \\\n"
+               "    --data %s \\\n"
+               "    --server-href %s \\\n"
+               "    --ttl 3600 %s" % (
+                dns_tool, server.name, ip6, href, domain))
         print
-        print (
-            "rackdns rdns-create --name %s \\\n"
-            "    --data %s \\\n"
-            "    --server-href %s \\\n"
-            "    --ttl 3600" % (
-                server.name, ip4, href))
+        print ("%s rdns-create --name %s \\\n"
+               "    --data %s \\\n"
+               "    --server-href %s \\\n"
+               "    --ttl 3600 %s" % (
+                dns_tool, server.name, ip4, href, domain))
         print
         print ". ~root/ci-launch/openstack-rs-nova.sh"
         print
-        print (
-            "rackdns record-create --name %s \\\n"
-            "    --type AAAA --data %s \\\n"
-            "    --ttl 3600 openstack.org" % (
-                server.name, ip6))
+        print ("%s record-create --name %s \\\n"
+               "    --type AAAA --data %s \\\n"
+               "    --ttl 3600 %s" % (
+                dns_tool, server.name, ip6, domain))
         print
-        print (
-            "rackdns record-create --name %s \\\n"
-            "    --type A --data %s \\\n"
-            "    --ttl 3600 openstack.org" % (
-                server.name, ip4))
+        print ("%s record-create --name %s \\\n"
+               "    --type A --data %s \\\n"
+               "    --ttl 3600 %s" % (
+                dns_tool, server.name, ip4, domain))
 
 
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("name", help="server name")
+    parser.add_argument(
+        "dnstool", help=dedent("""\
+        command tool to run to create DNS entries.
+
+        This tool should accept two commands:
+          * rdns-create with --name, --data, --server-href, --ttl and a domain parameter.
+          * create with --name, --type, --data --ttl and a domain parameter.
+        """))
     options = parser.parse_args()
+    if options.name is None:
+        raise Exception("Must supply a name.")
+    if options.dnstool is None:
+        raise Exception("Must supply a dns tool name.")
 
     client = get_client()
-    print_dns(client, options.name)
+    print_dns(client, options.name, options.dnstool)
 
 if __name__ == '__main__':
     main()

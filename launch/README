@@ -13,12 +13,17 @@ and salt groups for access to their respective keys::
 (Remember to log out and back into your shell if you add yourself
 to a group.)
 
+You need a DNS API script - launch-node can output the commands you
+will run.
+
+  export DNS=rackdns # or moniker or ...
+
 To launch a node in the OpenStack CI account (production servers)::
 
   . ~root/ci-launch/openstackci-rs-nova.sh
   export FQDN=servername.openstack.org
   sudo puppet cert generate $FQDN
-  ./launch-node.py $FQDN
+  ./launch-node.py $FQDN $DNS
 
 To launch a node in the OpenStack Jenkins account (slave nodes)::
 
@@ -30,6 +35,7 @@ To launch a node in the OpenStack Jenkins account (slave nodes)::
   export RAM=8192
   sudo puppet cert generate $FQDN
   ./launch-node.py $FQDN --image "$IMAGE" --ram $RAM --salt
+  ./launch-node.py $FQDN --image "$IMAGE" --ram $RAM --salt $DNS
 
 The --salt option tells the script to automatically configure and enroll
 the server as a minion on the salt master.
