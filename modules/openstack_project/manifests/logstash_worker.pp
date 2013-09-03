@@ -93,4 +93,18 @@ class openstack_project::logstash_worker (
       File['/etc/init.d/jenkins-log-worker'],
     ],
   }
+
+  include logrotate
+  logrotate::file { 'log-worker-debug.log':
+    log     => '/var/log/logstash/log-worker-debug.log',
+    options => [
+      'compress',
+      'copytruncate',
+      'missingok',
+      'rotate 7',
+      'daily',
+      'notifempty',
+    ],
+    require => Service['jenkins-log-worker'],
+  }
 }
