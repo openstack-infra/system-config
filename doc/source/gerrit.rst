@@ -370,25 +370,71 @@ or manually update their remotes with something like::
 
   git remote set-url origin https://git.openstack.org/$ORG/$PROJECT
 
-Deleting a User from Gerrit
----------------------------
 
-This isn't normally necessary, but if you find that you need to
-completely delete an account from Gerrit, here's how:
+Combining Accounts in Gerrit
+----------------------------
+
+From time to time, outside events affecting SSO authentication or
+identity changes can result in multiple Gerrit accounts with
+activity which needs to be merged. Often multiple accounts will wind
+up with duplicate E-mail addresses this way, which also renders them
+unselectable in some parts of the WebUI.
+
+Collect as much information as possible about all affected accounts,
+and then go poking around in the tables listed below for additional
+ones to determine the account_id number for the current account and
+any former accounts which should be merged into it. Then for each
+old account_id, perform these update and delete queries:
 
 .. code-block:: mysql
 
-  delete from account_agreements where account_id=NNNN;
-  delete from account_diff_preferences where id=NNNN;
-  delete from account_external_ids where account_id=NNNN;
-  delete from account_group_members where account_id=NNNN;
-  delete from account_group_members_audit where account_id=NNNN;
-  delete from account_patch_reviews where account_id=NNNN;
-  delete from account_project_watches where account_id=NNNN;
-  delete from account_ssh_keys where account_id=NNNN;
-  delete from accounts where account_id=NNNN;
+  delete from account_agreements where account_id=OLD;
+  delete from account_diff_preferences where id=OLD;
+  delete from account_external_ids where account_id=OLD;
+  delete from account_group_members where account_id=OLD;
+  delete from account_group_members_audit where account_id=OLD;
+  delete from account_project_watches where account_id=OLD;
+  delete from account_ssh_keys where account_id=OLD;
+  delete from accounts where account_id=OLD;
+  update account_patch_reviews set account_id=NEW where account_id=OLD;
 
 .. code-block:: bash
 
   ssh review.openstack.org -p29418 gerrit flush-caches --all
 
+Make the user aware that these steps have also removed any group
+memberships, preferences, SSH keys, contact information, CLA
+signatures, and so on associated with the old account so some of
+these may still need to be added to the new one via the Gerrit WebUI
+if they haven't been already. With a careful inspection of all
+accounts involved it is possible to merge some information from the
+old accounts into new ones by performing update queries similar to
+the deletes above, but since this varies on a case-by-case basis
+it's left as an exercise for the reader.
+
+
+Changing a Username in Gerrit
+-----------------------------
+
+On occasion, sometimes resulting from an account merge as described
+above, a user may need their Gerrit SSH username changed. If one has
+not been set, the user can enter it into the Gerrit WebUI but if
+there is an incorrect username present it must be updated manually
+in the database:
+
+.. code-block:: mysql
+
+  update account_external_ids set external_id='username:NEW' where external_id='username:OLD';
+
+
+Deleting a User from Gerrit
+---------------------------
+
+This isn't normally necessary, but if you find that you need to
+completely delete an account from Gerrit, perform the same delete
+queries mentioned in `Combining Accounts in Gerrit`_ and replace the
+update query for account_patch_reviews with:
+
+.. code-block:: mysql
+
+  delete from account_patch_reviews where account_id=OLD;
