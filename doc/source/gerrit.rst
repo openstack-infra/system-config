@@ -226,9 +226,10 @@ High level goals:
    $PROJECT-milestone (PTL and release minded people) exclusively can
    perform full code review (blocking or approving: +/- 2), and submit
    changes to be merged on milestone-proposed branches.
-#. Full code review (+/- 2) of API projects should be available to the
-   -core group of the corresponding implementation project as well as to
-   the OpenStack Documentation Coordinators.
+#. Full code review (+/- 2) of API projects (documentation of the API,
+   not implementation of the API) should be available to the -core
+   group of the corresponding implementation project as well as to the
+   OpenStack Documentation Coordinators.
 #. Full code review of stable branches should be available to the
    -core group of the project as well as the Stable Maintainers
    group.
