@@ -2797,19 +2797,24 @@ projects:
 
   - name: stackforge/stackalytics
     check:
+      - gate-stackalytics-docs
       - gate-stackalytics-pep8
       - gate-stackalytics-python26
       - gate-stackalytics-python27
     gate:
+      - gate-stackalytics-docs
       - gate-stackalytics-pep8
       - gate-stackalytics-python26
       - gate-stackalytics-python27
     post:
       - stackalytics-branch-tarball
+      - hook-stackalytics-rtfd
     pre-release:
       - stackalytics-tarball
+      - hook-stackalytics-rtfd
     release:
       - stackalytics-tarball
+      - hook-stackalytics-rtfd
 
   - name: stackforge/pyghmi
     check:
