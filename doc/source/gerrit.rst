@@ -104,16 +104,44 @@ Add information about the CLA:
 Groups
 ------
 
-A number of system-wide groups are configured in Gerrit.  These
-include `Project Bootstrappers` which grants all the permissions
-needed to set up a new project.  Normally the OpenStack Project
-Creater account is the only member of this group, but members of the
-`Administrators` group may temporarily add themselves in order to
-correct problems with automatic project creation.
+A number of system-wide groups are configured in Gerrit (rather than
+via Puppet).  When installing a new Gerrit you should create these by
+hand (and capture their UUID - you will need them to setup the ACLs
+later).
+
+The `Project Bootstrappers` group grants all the permissions needed to
+set up a new project.  Normally the OpenStack Project Creater account
+is the only member of this group, but members of the `Administrators`
+group may temporarily add themselves in order to correct problems with
+automatic project creation.
 
 The `External Testing Tools` group is used to grant +/-1 Verified
 access to external testing tools.
 
+The `Continuous Integration Tools` group contains Jenkins and any
+other CI tools that get +2/-2 access on reviews.
+
+The `Release Managers` group is used for release managers.
+
+The `Stable Maintainers` group is used for people maintaining stable
+branches - often distinct from the folk maintaining projects.
+
+
+Users
+-----
+
+The first user to log in becomes an administrator. Be sure to set an
+account name and add ssh keys - you'll need those.
+
+You should create the ``openstack-project-creator`` account by hand
+(referenced from
+:file:`modules/openstack_project/templates/review.projects.yaml.erb`)
+using::
+
+  cat $pubkey | gerrit create-account --group "'Project Bootstrappers'" \
+    --full-name "'Project Creator'" \
+    --email openstack-infra@lists.openstack.org \
+    --ssh-key - openstack-project-creator
 
 GitHub Integration
 ==================
