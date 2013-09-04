@@ -202,3 +202,9 @@ installed package set, and then downloading all of the second-level
 introspection and contains the full set of depedencies needed whether
 they are explicitly listed or not.
 
+Admin tasks
+-----------
+
+Jeepyb needs to run with the same ssh key registered with gerrit and github
+(and any other ssh services it may be pointed at). Be sure to add your public
+key when creating accounts.
