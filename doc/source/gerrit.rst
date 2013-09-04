@@ -237,7 +237,7 @@ High level goals:
    group of the corresponding implementation project as well as to the
    OpenStack Documentation Coordinators.
 #. Full code review of stable branches should be available to the
-   -core group of the project as well as the openstack-stable-maint
+   -core group of the project as well as the Stable Maintainers
    group.
 #. Drivers (PTL and delegates) of client library projects should be
    able to add tags (which are automatically used to trigger
@@ -248,74 +248,116 @@ projects are reparented to the "API-Projects" meta-project instead of
 "All-Projects".  This causes them to inherit permissions from the
 API-Projects project (which, in turn, inherits from All-Projects).
 
-These permissions try to achieve the high level goals::
+The global gerrit permissions set out the high level goals (and
+manage-projects can then override this on a per project basis as
+needed). To setup the global permissions first create the groups
+covered above under Groups.
 
-  All Projects (metaproject):
-    refs/*
-      read: anonymous
-      push annotated tag: release managers, ci tools, project bootstrappers
-      forge author identity: registered users
-      forge committer identity: project bootstrappers
-      push (w/ force push): project bootstrappers
-      create reference: project bootstrappers, release managers
-      push merge commit: project bootstrappers
+You need to grant yourself enough access to replace the ACLs over ssh (we use
+SSH because it's fast, and it gets syntax checked).
 
-    refs/for/refs/*
-      push: registered users
+#. Visit ``https://$HOST/#/admin/projects/All-Projects,access`` and click on Edit.
 
-    refs/heads/*
-      label code review:
-        -1/+1: registered users
-        -2/+2: project bootstrappers
-      label verified:
-        -2/+2: ci tools
-        -2/+2: project bootstrappers
-        -1/+1: external tools
-      label approved 0/+1: project bootstrappers
-      submit: ci tools
-      submit: project bootstrappers
+#. Look for the reference to 'refs/meta/config', click on the drop-box for 'add permission' and choose 'PUSH'.
 
-    refs/heads/milestone-proposed
-      label code review (exclusive):
-        -2/+2 Release Managers
-        -1/+1 registered users
-      label approved (exclusive): 0/+1: Release Managers
-      owner: Release Managers
+#. Type in Administrators as the group name
 
-    refs/heads/stable/*
-      label code review (exclusive):
-        -2/+2 opestack-stable-maint
-        -1/+1 registered users
-      label approved (exclusive): 0/+1: opestack-stable-maint
+#. Click on Add
 
-    refs/meta/*
-      push: project bootstrappers
+#. Click on Save Changes
 
-    refs/meta/config
-      read: project bootstrappers
-      read: project owners
+Then... we need to fetch the All-Projects ACLs, update them, then push the
+updates back into Gerrit::
 
-  API Projects (metaproject):
-    refs/*
-      owner: Administrators
+  export USER=$your_gerrit_user
+  export HOST=$your_gerrit_hos
+  cd $anywhereyoulike
+  mkdir All-Projects-ACLs
+  cd All-Projects-ACLs
+  git init
+  git remote add gerrit ssh://$USER@$HOST:29418/All-Projects.git
+  git fetch gerrit +refs/meta/*:refs/remotes/gerrit-meta/*
+  git checkout -b config remotes/gerrit-meta/config
 
-    refs/heads/*
-      label code review -2/+2: openstack-doc-core
-      label approved 0/+1: openstack-doc-core
+There will be two interesting files, `groups` and `project.config`.
+`groups` contains UUIDs and names of groups that will be referenced
+in `project.config`. UUIDs can be found on the group page in gerrit.
+Next, edit `project.config` to look like::
 
-  project foo:
-    refs/*
-      owner: Administrators
-      create reference: foo-milestone  [client library only]
-      push annotated tag: foo-milestone  [client library only]
+  [project]
+      description = Rights inherited by all other projects
+      state = active
+  [access "refs/*"]
+      read = group Anonymous Users
+      pushTag = group Continuous Integration Tools
+      pushTag = group Project Bootstrappers
+      pushTag = group Release Managers
+      forgeAuthor = group Registered Users
+      forgeCommitter = group Project Bootstrappers
+      push = +force group Project Bootstrappers
+      create = group Project Bootstrappers
+      create = group Release Managers
+      pushMerge = group Project Bootstrappers
+  [access "refs/heads/*"]
+      label-Code-Review = -2..+2 group Project Bootstrappers
+      label-Code-Review = -1..+1 group Registered Users
+      label-Verified = -2..+2 group Continuous Integration Tools
+      label-Verified = -2..+2 group Project Bootstrappers
+      label-Verified = -1..+1 group External Testing Tools
+      submit = group Continuous Integration Tools
+      submit = group Project Bootstrappers
+      label-Approved = +0..+1 group Project Bootstrappers
+  [access "refs/meta/config"]
+      read = group Project Owners
+  [access "refs/for/refs/*"]
+      push = group Registered Users
+  [access "refs/heads/milestone-proposed"]
+      exclusiveGroupPermissions = label-Approved label-Code-Review
+      label-Code-Review = -2..+2 group Project Bootstrappers
+      label-Code-Review = -2..+2 group Release Managers
+      label-Code-Review = -1..+1 group Registered Users
+      owner = group Release Managers
+      label-Approved = +0..+1 group Project Bootstrappers
+      label-Approved = +0..+1 group Release Managers
+  [access "refs/heads/stable/*"]
+      forgeAuthor = group Stable Maintainers
+      forgeCommitter = group Stable Maintainers
+      exclusiveGroupPermissions = label-Approved label-Code-Review
+      label-Code-Review = -2..+2 group Project Bootstrappers
+      label-Code-Review = -2..+2 group Stable Maintainers
+      label-Code-Review = -1..+1 group Registered Users
+      label-Approved = +0..+1 group Project Bootstrappers
+      label-Approved = +0..+1 group Stable Maintainers
+  [access "refs/meta/openstack/*"]
+      read = group Continuous Integration Tools
+      create = group Continuous Integration Tools
+      push = group Continuous Integration Tools
+  [capability]
+      administrateServer = group Administrators
+      priority = batch group Non-Interactive Users
+      createProject = group Project Bootstrappers
+  [access "refs/zuul/*"]
+      create = group Continuous Integration Tools
+      push = +force group Continuous Integration Tools
+      pushMerge = group Continuous Integration Tools
+  [access "refs/for/refs/zuul/*"]
+      pushMerge = group Continuous Integration Tools
 
-    refs/heads/*
-      label code review -2/+2: foo-core
-      label approved 0/+1: foo-core
+Now edit the groups file. The format is::
 
-    refs/heads/milestone-proposed
-      label code review -2/+2: foo-milestone
-      label approved 0/+1: foo-milestone
+  #UUID  Group Name
+  1234567890123456789012345678901234567890  group-foo
+
+Each of the groups listed above under 'Groups' should have an entry as well as
+the built in groups such as 'Non-Interactive Users' which may or may not be
+present in the initial groups file. You can find the UUID values by navigating
+to Admin -> Groups -> Group Name -> General in the Web UI.
+
+Finally, commit the changes and push the config back up to Gerrit::
+
+  git commit -am "Initial All-Projects config"
+  git push gerrit HEAD:refs/meta/config
+
 
 Manual Administrative Tasks
 ===========================
