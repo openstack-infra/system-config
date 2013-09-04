@@ -2910,3 +2910,10 @@ projects:
       - gate-noop
     gate:
       - gate-noop
+
+  - name: openstack-infra/activity-board
+    check:
+      - gate-noop
+    gate:
+      - gate-noop
+
