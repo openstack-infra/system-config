@@ -348,6 +348,10 @@ class jenkins::slave(
         ensure  => present,
         require => Apt::Ppa['ppa:pypy/ppa']
       }
+      package { 'pypy-dev':
+        ensure  => present,
+        require => Apt::Ppa['ppa:pypy/ppa']
+      }
     }
   }
 
