@@ -52,7 +52,8 @@ Add "Approved" review type to gerrit:
 
 .. code-block:: mysql
 
-  mysql -u root -p
+  sudo -u root
+  mysql
   use reviewdb;
   insert into approval_categories values ('Approved', 'A', 2, 'MaxNoBlock', 'N', 'APRV');
   insert into approval_category_values values ('No score', 'APRV', 0);
@@ -63,7 +64,8 @@ Expand "Verified" review type to -2/+2:
 
 .. code-block:: mysql
 
-  mysql -u root -p
+  sudo -u root
+  mysql
   use reviewdb;
   update approval_category_values set value=2
     where value=1 and category_id='VRIF';
@@ -78,7 +80,8 @@ we're not happy with people for submitting the patch in the first place:
 
 .. code-block:: mysql
 
-  mysql -u root -p
+  sudo -u root
+  mysql
   use reviewdb;
   update approval_category_values set name="Do not merge"
     where category_id='CRVW' and value=-2;
@@ -90,6 +93,9 @@ Add information about the CLA:
 
 .. code-block:: mysql
 
+  sudo -u root
+  mysql
+  use reviewdb;
   insert into contributor_agreements values (
   'Y', 'Y', 'Y', 'ICLA',
   'OpenStack Individual Contributor License Agreement',
