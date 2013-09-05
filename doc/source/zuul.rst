@@ -56,6 +56,13 @@ The OpenStack project uses a number of pipelines in Zuul:
 **silent**
   This pipeline is used for silently testing new jobs.
 
+**experimental**
+  This pipeline is used for on-demand testing of new jobs.
+
+**periodic**
+  This pipeline has jobs triggered on a timer for e.g. testing for
+  environmental changes daily.
+
 Zuul watches events in Gerrit (using the Gerrit "stream-events"
 command) and matches those events to the pipelines above.  If a match
 is found, it adds the change to the pipeline and starts running
@@ -78,3 +85,17 @@ submitting the change to Gerrit for review.
 
 For the full syntax of Zuul's configuration file format, see the `Zuul
 reference manual`_.
+
+Sysadmin
+========
+
+Zuul and gear are lightweight - it should be possible to run both on a
+1G instance for small deployments. OpenStack's deployment requires at
+least a 2G instance at the time of writing.
+
+Zuul is stateless, so the server does not need backing up. However
+zuul talks through git and ssh so you will need to manually check ssh
+host keys as the zuul user. e.g.::
+
+  sudo su - zuul
+  ssh -p 29418 review.openstack.org
