@@ -16,7 +16,7 @@ then
   exit 1
 fi
 
-if [ -z "$GIT_ORIGIN" ]
+if [ -z "$GIT_ORIGIN" ] || [ -n "$ZUUL_NEWREV" ]
 then
     GIT_ORIGIN="$GERRIT_SITE/p"
     # git://git.openstack.org/
