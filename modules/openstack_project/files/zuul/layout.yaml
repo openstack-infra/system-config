@@ -2924,9 +2924,11 @@ projects:
     check:
       - gate-wsme-python27
       - gate-wsme-python33
+      - gate-wsme-pep8
     gate:
       - gate-wsme-python27
       - gate-wsme-python33
+      - gate-wsme-pep8
     post:
       - wsme-branch-tarball
     pre-release:
