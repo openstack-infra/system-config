@@ -230,3 +230,42 @@ configured once installed.
 
 Finally, you should be able to follow :ref:`stackforge` to setup a project at
 this point. (Zuul and Jenkins jobs obviously won't work yet).
+
+Stage 4 - Zuul
+~~~~~~~~~~~~~~
+
+Zuul is the scheduler in the OpenStack CI system queuing and dispatching work
+across multiple CI engines (e.g. via gearman or jenkins). With a working code
+review system we can now set up a scheduler.
+
+#. Create a zuul user (the upstream site.pp uses jenkins for historical reasons)::
+
+  ssh-keygen -t rsa -P '' -f zuul_ssh_key
+
+  cat zuul_ssh_key.pub | ssh -p 29418 $USER@$HOST gerrit create-account \
+    --group "'Continuous Integration Tools'" \
+    --full-name "'Zuul'" \
+    --email zuul@lists.openstack.org \
+    --ssh-key - zuul
+
+#. Add the private key you made to hiera as ``zuul_ssh_private_key_contents``.
+
+#. Migrate modules/openstack_project/zuul/layout.yaml. This file has both
+   broad structure such as pipelines, gates etc which you'll want to preserve
+   as-is, and project specific entries that you'll want to delete. And probably
+   update the error links to point to your own wiki.
+
+   Be sure to keep the ^.*$ job parameter.
+
+#. Migrate modules/openstack_project/manifests/zuul_prod.pp into your project
+   tree.
+
+#. Migrate modules/openstack_project/zuul/scoreboard.html into your tree. This
+   file is used for diagnosing intermittent failures : if you don't have flakey
+   tests you can just trim this from the zuul definition.
+
+#. Migrate the definition in site.pp to your project.
+   Note the jenkins -> zuul user and variable change.
+   You have no gearman workers yet, so make that list be empty.
+
+#. Launch it, using a 1GB node.
