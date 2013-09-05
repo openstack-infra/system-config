@@ -1600,6 +1600,7 @@ projects:
       - gate-python-heatclient-python26
       - gate-python-heatclient-python27
       - gate-python-heatclient-python33
+      - gate-python-heatclient-pypy
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-postgres-full
       - gate-tempest-devstack-vm-neutron
@@ -1608,6 +1609,7 @@ projects:
       - gate-python-heatclient-pep8
       - gate-python-heatclient-python26
       - gate-python-heatclient-python27
+      - gate-python-heatclient-pypy
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-postgres-full
       - gate-tempest-devstack-vm-neutron
