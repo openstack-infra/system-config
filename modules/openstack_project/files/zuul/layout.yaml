@@ -222,7 +222,7 @@ jobs:
   - name: gate-python-heatclient-python33
     voting: false
   - name: gate-python-ironicclient-python33
-    voting: false
+    voting: true
   - name: gate-python-keystoneclient-python33
     voting: false
   - name: gate-python-marconiclient-python33
@@ -2748,10 +2748,13 @@ projects:
       - gate-python-ironicclient-python26
       - gate-python-ironicclient-python27
       - gate-python-ironicclient-python33
+      - gate-python-ironicclient-pypy
     gate:
       - gate-python-ironicclient-pep8
       - gate-python-ironicclient-python26
       - gate-python-ironicclient-python27
+      - gate-python-ironicclient-python33
+      - gate-python-ironicclient-pypy
     post:
       - python-ironicclient-coverage
 
