@@ -46,10 +46,6 @@ class openstack_project::wiki (
     }
   }
   include mysql::server::account_security
-  mysql::database_user { 'root@::1':
-    ensure  => absent,
-    require => Class['mysql::config'],
-  }
 
   mysql_backup::backup { 'wiki':
     require => Class['mysql::server'],

@@ -35,11 +35,6 @@ class nodepool (
   }
 
   include mysql::server::account_security
-  mysql::database_user { 'root@::1':
-    ensure  => absent,
-    require => Class['mysql::config'],
-  }
-
   include mysql::python
 
   mysql::db { 'nodepool':

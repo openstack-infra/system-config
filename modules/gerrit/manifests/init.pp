@@ -251,10 +251,6 @@ class gerrit(
     }
   }
   include mysql::server::account_security
-  mysql::database_user { 'root@::1':
-    ensure  => absent,
-    require => Class['mysql::config'],
-  }
 
   mysql::db { 'reviewdb':
     user     => 'gerrit2',
