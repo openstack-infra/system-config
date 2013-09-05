@@ -61,6 +61,37 @@
           excludes: '**/*.xml,**/null*'
 
 - job:
+    name: openstack-admin-guide-cloud
+    project-type: maven
+    concurrent: false
+    node: precise
+
+    prebuilders:
+      - gerrit-git-prep
+
+    properties:
+      - inject:
+          script-file: /usr/local/jenkins/slave_scripts/docbook-properties.sh
+          properties-file: gerrit-doc.properties
+
+    maven:
+      maven-name: Maven3
+      root-module:
+        group-id: org.openstack.docs
+        artifact-id: openstack-guide
+      root-pom: doc/src/docbkx/admin-guide-cloud/pom.xml
+      goals: '-Dcomments.enabled=${DOC_COMMENTS_ENABLED} clean generate-sources'
+
+    publishers:
+      - console-log
+      - ftp:
+          site: docs.openstack.org
+          source: 'doc/src/docbkx/admin-guide-cloud/target/docbkx/webhelp/**'
+          target: 'cloud-admin'
+          remove-prefix: 'doc/src/docbkx/admin-guide-cloud/target/docbkx/webhelp/'
+          excludes: '**/*.xml,**/null*'
+
+- job:
     name: openstack-basic-install-fedora
     project-type: maven
     node: precise
