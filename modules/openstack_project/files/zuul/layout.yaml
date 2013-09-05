@@ -175,6 +175,8 @@ jobs:
     branch: ^master$
   - name: openstack-basic-install-opensuse
     branch: ^master$
+  - name: openstack-admin-guide-cloud
+    branch: ^master$
   - name: ^gate-.*-docs$
     success-pattern: http://docs-draft.openstack.org/{build.parameters[LOG_PATH]}/doc/build/html/
   - name: infra-publications-publish
@@ -1833,6 +1835,7 @@ projects:
     gate:
       - gate-openstack-manuals-validate
     post:
+      - openstack-admin-guide-cloud
       - openstack-admin-manual-compute
       - openstack-admin-manual-netconn
       - openstack-admin-manual-object
