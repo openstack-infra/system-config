@@ -49,7 +49,8 @@ site.pp
 ~~~~~~~
 
 This file lists the specific servers you are running. Minimally you need a
-ci-puppetmaster, gerrit (review), jenkins, jenkins01, puppet-dashboard,
+ci-puppetmaster, gerrit (review), jenkins (secure jobs such as making
+releases), jenkins01 (untrusted jobs from any code author), puppet-dashboard,
 nodepool, zuul, and then one or more slaves with appropriate distro choices.
 
 A minimal site.pp can be useful to start with to get up and running. E.g.
@@ -236,7 +237,9 @@ Stage 4 - Zuul
 
 Zuul is the scheduler in the OpenStack CI system queuing and dispatching work
 across multiple CI engines (e.g. via gearman or jenkins). With a working code
-review system we can now set up a scheduler.
+review system we can now set up a scheduler. Once setup, new patches uploaded
+to gerrit should be picked up and have a zuul verification fail (with 'LOST'
+which indicates the Jenkins environment is gone).
 
 #. Create a zuul user (the upstream site.pp uses jenkins for historical reasons)::
 
@@ -269,3 +272,58 @@ review system we can now set up a scheduler.
    You have no gearman workers yet, so make that list be empty.
 
 #. Launch it, using a 1GB node.
+
+Stage 5 - Jenkins Master(s)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+For Zuul to schedule work, it needs one or more Gearman connected Jenkins
+masters. See :ref:`jenkins` for details.
+
+The minimum setup is one master, but if you will be permitting any code
+submitter to trigger test runs, we recommend having two: one untrusted and one
+trusted for doing release automation (where the released code integrity is
+important). When doing bring-up, bringing up jenkins01 first is probably
+best as that is the first of the horizontally-scalable untrusted masters,
+which get the most load (as they run jobs from anyone).
+
+#. Make a jenkins master ssh key (shared across all jenkins masters)::
+
+  ssh-keygen -t rsa -P '' -f jenkins_ssh_key
+
+#. Make a self signed certificate for the jenkins site.
+
+#. Migrate modules/openstack_project/manifests/init.pp
+   This gets the public jenkins key embedded in it.
+
+#. Setup an equivalent to modules/openstack_project/files/jenkins_job_builder/config for your project.
+   This is documented in :ref:`stackforge`. You should copy defaults.yaml across as-is, and if you
+   want the stock set of python jobs that OpenStack uses, the python-jobs.yaml
+   and pypi-jobs.yaml files too. Finally setup the list of projects to build in
+   projects.yaml. The ``config`` job  with the puppet-lint/syntax and pyflakes job can be
+   particularly useful for ensuring you can push updates with confidence (which
+   needs puppet-modules-jobs.yaml).
+
+#. Migrate modules/openstack_project/files/jenkins/jenkins.default unless you
+   are happy with a 12G java memory footprint (which only large busy sites will
+   need).
+
+#. Migrate modules/openstack_project/manifests/jenkins.pp
+   Be sure to replace gerrig with your actual service account user.
+
+#. Migrate jenkins01.openstack.org in site.pp. As we don't have zmq setup yet,
+   leave that list blank. Be sure to add this jenkins into the zuul gear list.
+
+#. Update hiera with the relevant parameters.
+   You'll need to get the jenkins_jobs_password from Jenkins (see
+   `http://ci.openstack.org/jenkins-job-builder/installation.html#configuration-file`)
+   after Jenkins is up - start with it set to ''.  You can use your own user or
+   make a dedicated user.
+
+#. Launch the node with a size larger than the jenkins size you specified.
+
+#. Setup Jenkins per :ref:`jenkins`.
+
+At this stage doing a 'recheck no bug' should still report LOST on a change.
+But in the zuul debug.log in /var/log/zuul you should see a 'build xxx not
+registered' being reported from gearman : this indicates you have never had an
+executor register itself for that queue, and it's being ignored.
