@@ -295,13 +295,18 @@ which get the most load (as they run jobs from anyone).
 #. Migrate modules/openstack_project/manifests/init.pp
    This gets the public jenkins key embedded in it.
 
-#. Setup an equivalent to modules/openstack_project/files/jenkins_job_builder/config for your project.
-   This is documented in :ref:`stackforge`. You should copy defaults.yaml across as-is, and if you
-   want the stock set of python jobs that OpenStack uses, the python-jobs.yaml
-   and pypi-jobs.yaml files too. Finally setup the list of projects to build in
-   projects.yaml. The ``config`` job  with the puppet-lint/syntax and pyflakes job can be
-   particularly useful for ensuring you can push updates with confidence (which
-   needs puppet-modules-jobs.yaml).
+#. Setup an equivalent to
+   modules/openstack_project/files/jenkins_job_builder/config for your project.
+   This is documented in :ref:`stackforge`. You should copy hooks.yaml and
+   defaults.yaml across as-is, and if you want the stock set of python jobs
+   that OpenStack uses, the python-jobs.yaml and pypi-jobs.yaml files too.
+   Macros.yaml will need to be copied and customised.  See the
+   jenkins-job-builder docs for information on customisation - failing to
+   customise isn't harmful, but you may find your jobs try to post errors to
+   the OpenStack logging site :).  Finally setup the list of projects to build
+   in projects.yaml.  The ``config`` job  with the puppet-lint/syntax and
+   pyflakes job can be particularly useful for ensuring you can push updates
+   with confidence (which needs puppet-modules-jobs.yaml).
 
 #. Migrate modules/openstack_project/files/jenkins/jenkins.default unless you
    are happy with a 12G java memory footprint (which only large busy sites will
@@ -327,3 +332,39 @@ At this stage doing a 'recheck no bug' should still report LOST on a change.
 But in the zuul debug.log in /var/log/zuul you should see a 'build xxx not
 registered' being reported from gearman : this indicates you have never had an
 executor register itself for that queue, and it's being ignored.
+
+Stage 6 - Static slaves
+~~~~~~~~~~~~~~~~~~~~~~~
+
+The OpenStack CI infrastructure has two sets of Jenkins slaves : dynamically
+managed via nodepool and statically managed by hand. A by-hand slave is easier
+to bring up initially, so that's our next step.
+
+The platform specific slaves are named $platform-serial.slave.$PROJECT in
+site.pp. For instance, Python2.6 is not widely available now, so it runs on
+centos6-xx.slave.$platform nodes. There can be multiple slaves, and each
+gets their own puppet cert. The openstack/site.pp has a legacy setting for
+``certname`` that you should remove.
+
+#. Migrate modules/openstack_project/manifests/slave.pp
+   We reuse tmpcleanup as-is.
+
+#. Convert a slave definition in site.pp. Lets say
+   ``/^centos6-?\d+\.slave\.openstack\.org$/``
+
+#. Remove the certname override - upstream are dropping this gradually.
+
+#. Launch a node, passing in --image and --ram to get a node that you
+   want :). e.g::
+
+     launch-node.py centos6-1.slave.openstack.org --image $IMAGE --ram 1024 \
+       mydns
+
+#. Go into the Jenkins config and press 'test connection' on the gearman config
+   to register the new slave.
+
+Now, if you push a change, zuul should pick it up and run it on jenkins, and you can
+get onto the interesting thing of debugging why it fails.
+
+Later chapters will cover setting up the test storage servers so you can see
+build history without logging into Jenkins.
