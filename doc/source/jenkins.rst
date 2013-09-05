@@ -147,3 +147,21 @@ Quirks
 Note that jenkins talks to it's slaves via ssh, the
 modules/openstack_project/manifests/init.pp file contains the ssh
 public key that puppet installs on the slaves.
+
+Slaves
+------
+
+Statically provisioned slaves have labels assigned by hand. E.g.
+centos6, and are added to a chosen Jenkins master by hand. Adding a
+slave is then:
+
+#. Launch a slave
+
+#. Add it to Jenkins
+   Add your jenkins master key for the credentials (make it global,
+   one-time operation).
+   Set the jenkins home to /home/jenkins
+
+#. Set appropriate labels on it
+
+#. Profit!
