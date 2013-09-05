@@ -318,7 +318,7 @@ To rename a project:
      where project_name = "openstack/OLD";
 
      update changes
-     set dest_project_name = "openstack/NEW"
+     set dest_project_name = "openstack/NEW", created_on = created_on
      where dest_project_name = "openstack/OLD";
 
 #. Move both the git repository and the mirror on
