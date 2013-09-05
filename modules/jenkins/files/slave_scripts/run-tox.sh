@@ -57,7 +57,7 @@ if [ -d ".testrepository" ] ; then
     if [ -f ".testrepository/0.2" ] ; then
         cp .testrepository/0.2 ./subunit_log.txt
     elif [ -f ".testrepository/0" ] ; then
-        cp .testrepository/0 ./subunit_log.txt
+        .tox/$venv/bin/subunit-1to2 < .testrepository/0 > ./subunit_log.txt
     fi
     .tox/$venv/bin/python /usr/local/jenkins/slave_scripts/subunit2html.py ./subunit_log.txt testr_results.html
     gzip -9 ./subunit_log.txt
