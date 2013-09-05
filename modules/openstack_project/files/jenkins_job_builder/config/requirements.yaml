@@ -10,6 +10,26 @@
           virtualenv --clear .venv
           PIP_ARGS=""
           REQ_FILES="tools/pip-requires tools/test-requires requirements.txt test-requirements.txt"
+
+          # Aggregate all requirements into one file (without the version info)
+          ALL_REQUIREMENTS="all_requirements.txt"
+          for FILE in $REQ_FILES
+          do
+              while read line; do
+                    if [[ "$line" == "" ]] || [[ "$line" == \#* ]] || [[ "$line" == \-* ]]; then
+                        continue
+                    elif [[ "$line" == *\>* ]]; then
+                        echo "${line%%>*}" >> $ALL_REQUIREMENTS
+                    elif [[ "$line" == *\=* ]]; then
+                        echo "${line%%=*}" >> $ALL_REQUIREMENTS
+                    elif [[ "$line" == *\<* ]]; then
+                        echo "${line%%<*}" >> $ALL_REQUIREMENTS
+                    else
+                        echo "${line%%#*}" >> $ALL_REQUIREMENTS
+                    fi
+              done < $FILE
+          done
+
           for FILE in $REQ_FILES
           do
             if [ -e $FILE ]
@@ -26,7 +46,18 @@
           fi
 
           # Print all installed stuff to demonstrate versions
+          echo "Pip Installed Packages:"
           .venv/bin/pip freeze
+
+          # Save packages installed by pip to file (without the version info)
+          .venv/bin/pip freeze > pip_installed.txt
+          while read line; do
+              echo "${line%%=*}" >> pip_installed_bare.txt
+          done < pip_installed.txt
+
+          # Compare packages installed by pip with the list of requirements
+          echo "Diff between pip install and requirements:"
+          grep -v -f pip_installed_bare.txt $ALL_REQUIREMENTS
 
     publishers:
       - console-log
