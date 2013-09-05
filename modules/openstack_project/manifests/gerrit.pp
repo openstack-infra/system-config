@@ -47,6 +47,7 @@ class openstack_project::gerrit (
   $github_project_password = '',
   $mysql_password = '',
   $mysql_root_password = '',
+  $mysql_hostname = '127.0.0.1',
   $trivial_rebase_role_id = '',
   $email_private_key = '',
   $replicate_local = true,
@@ -61,6 +62,15 @@ class openstack_project::gerrit (
   $swift_username = '',
   $swift_password = '',
 ) {
+  class { 'mysql::server':
+    config_hash => {
+      'root_password'  => $mysql_root_password,
+      'default_engine' => 'InnoDB',
+      'bind_address'   => $mysql_host,
+    }
+  }
+  include mysql::server::account_security
+
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [80, 443, 29418],
     sysadmins                 => $sysadmins,
@@ -152,11 +162,16 @@ class openstack_project::gerrit (
     contactstore_url                => $contactstore_url,
     mysql_password                  => $mysql_password,
     mysql_root_password             => $mysql_root_password,
+    mysql_host                      => $mysql_host,
     email_private_key               => $email_private_key,
     replicate_local                 => $replicate_local,
     replication                     => $replication,
     testmode                        => $testmode,
-    require                         => Class[openstack_project::server],
+    require                         => [
+        Class['openstack_project::server'],
+        Class['mysql::server'],
+        Class['mysql::server::account_security'],
+    ],
   }
 
   mysql_backup::backup { 'gerrit':
