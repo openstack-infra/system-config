@@ -50,6 +50,34 @@
 
 
 - job:
+    name: gate-tempest-devstack-vm-iad-trial
+    node: devstack-precise-iad
+
+    wrappers:
+      - timeout:
+          timeout: 180
+          fail: true
+      - timestamps
+
+    builders:
+      - devstack-checkout
+      - shell: |
+          #!/bin/bash -xe
+          export PYTHONUNBUFFERED=true
+          export DEVSTACK_GATE_TEMPEST=1
+          export DEVSTACK_GATE_TEMPEST_FULL=1
+          export ZUUL_BRANCH=master
+          unset ZUUL_PROJECT
+          cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
+          ./safe-devstack-vm-gate-wrap.sh
+      - link-logs
+
+    publishers:
+      - devstack-logs-periodic
+      - console-log-periodic
+
+
+- job:
     name: gate-tempest-devstack-vm-heat-slow
     node: devstack-precise
 
