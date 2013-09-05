@@ -121,6 +121,12 @@ with instructions to use Gerrit.
 
 These are both handled automatically by :ref:`jeepyb`.
 
+Note that the user running gerrit will need to accept the github host
+keys. e.g.::
+
+  sudo su - gerrit2
+  ssh github.com
+
 
 Auto Review Expiry
 ==================
