@@ -977,6 +977,7 @@ projects:
       - gate-python-ceilometerclient-python26
       - gate-python-ceilometerclient-python27
       - gate-python-ceilometerclient-python33
+      - gate-python-ceilometerclient-pypy
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-postgres-full
       - gate-tempest-devstack-vm-neutron
@@ -986,6 +987,7 @@ projects:
       - gate-python-ceilometerclient-pep8
       - gate-python-ceilometerclient-python26
       - gate-python-ceilometerclient-python27
+      - gate-python-ceilometerclient-pypy
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-postgres-full
       - gate-tempest-devstack-vm-neutron
