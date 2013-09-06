@@ -59,6 +59,7 @@
           target: ''
           remove-prefix: 'doc/src/docbkx/openstack-user/target/docbkx/webhelp/'
           excludes: '**/*.xml,**/null*'
+          clean-remote: true
 
 - job:
     name: openstack-basic-install-fedora
@@ -89,6 +90,7 @@
           target: ''
           remove-prefix: 'doc/src/docbkx/basic-install/target/docbkx/webhelp/'
           excludes: '**/*.xml,**/null*'
+          clean-remote: true
 
 # in zuul/layout.yaml specified to only run against master branch.
 - job:
@@ -123,6 +125,7 @@
           target: ''
           remove-prefix: 'doc/src/docbkx/basic-install/target/docbkx/webhelp/'
           excludes: '**/*.xml,**/null*'
+          clean-remote: true
 
 - job:
     name: openstack-basic-install-ubuntu
@@ -156,6 +159,7 @@
           target: ''
           remove-prefix: 'doc/src/docbkx/basic-install/target/docbkx/webhelp/'
           excludes: '**/*.xml,**/null*'
+          clean-remote: true
 
 - job:
     name: openstack-admin-manual-block
@@ -186,6 +190,7 @@
           target: '/'
           remove-prefix: 'doc/src/docbkx/openstack-block-storage-admin/target/docbkx/webhelp/'
           excludes: '**/*.xml,**/null*'
+          clean-remote: true
 
 - job:
     name: openstack-glossary
@@ -211,6 +216,7 @@
           target: 'glossary'
           remove-prefix: 'doc/src/docbkx/common/glossary/target/docbkx/webhelp/openstack-glossary/'
           excludes: '**/*.xml,**/null*'
+          clean-remote: true
 
 - job:
     name: openstack-image-guide
@@ -242,6 +248,7 @@
           target: '/'
           remove-prefix: 'doc/src/docbkx/openstack-image/target/docbkx/webhelp/'
           excludes: '**/*.xml,**/null*'
+          clean-remote: true
 
 - job:
     name: openstack-config-ref
@@ -273,6 +280,7 @@
           target: '/'
           remove-prefix: 'doc/src/docbkx/openstack-config/target/docbkx/webhelp/'
           excludes: '**/*.xml,**/null*'
+          clean-remote: true
 
 
 - job:
@@ -305,6 +313,7 @@
           target: '/'
           remove-prefix: 'doc/src/docbkx/openstack-compute-admin/target/docbkx/webhelp/'
           excludes: '**/*.xml,**/null*'
+          clean-remote: true
 
 - job:
     name: openstack-admin-manual-netconn
@@ -336,6 +345,7 @@
           target: '/'
           remove-prefix: 'doc/src/docbkx/openstack-network-connectivity-admin/target/docbkx/webhelp/'
           excludes: '**/*.xml,**/null*'
+          clean-remote: true
 
 # in zuul/layout.yaml specified to only run against master branch.
 - job:
@@ -353,6 +363,7 @@
           target: ''
           remove-prefix: 'www/'
           excludes: ''
+          clean-remote: true
       - console-log
 
 # in zuul/layout.yaml specified to only run against master branch.
@@ -393,6 +404,7 @@
           target: 'trunk'
           remove-prefix: 'doc/src/docbkx/openstack-ha/target/docbkx/webhelp/trunk/'
           excludes: '**/*.xml,**/null*'
+          clean-remote: true
 
 - job:
     name: openstack-install-deploy-guide-apt-fedora
@@ -424,6 +436,7 @@
           target: '/'
           remove-prefix: 'doc/src/docbkx/openstack-install/target/docbkx/webhelp/'
           excludes: '**/*.xml,**/null*'
+          clean-remote: true
 
 - job:
     name: openstack-install-deploy-guide-ubuntu
@@ -455,6 +468,7 @@
           target: '/'
           remove-prefix: 'doc/src/docbkx/openstack-install/target/docbkx/webhelp/'
           excludes: '**/*.xml,**/null*'
+          clean-remote: true
 
 - job:
     name: openstack-operations-guide
@@ -486,6 +500,7 @@
           target: '/'
           remove-prefix: 'doc/src/docbkx/openstack-ops/target/docbkx/webhelp/'
           excludes: '**/*.xml,**/null*'
+          clean-remote: true
 
 - job:
     name: openstack-security-guide
@@ -517,6 +532,7 @@
           target: '/'
           remove-prefix: 'doc/src/docbkx/openstack-security/target/docbkx/webhelp/'
           excludes: '**/*.xml,**/null*'
+          clean-remote: true
 
 - job:
     name: openstack-training
@@ -547,6 +563,7 @@
           target: '/'
           remove-prefix: 'doc/src/docbkx/openstack-training/target/docbkx/webhelp/'
           excludes: '**/*.xml,**/null*'
+          clean-remote: true
 
 - job:
     name: openstack-operations-guide-ja
@@ -580,3 +597,4 @@
           target: '/ja/'
           remove-prefix: 'generated/ja/openstack-ops/target/docbkx/webhelp/'
           excludes: '**/*.xml,**/null*'
+          clean-remote: true
