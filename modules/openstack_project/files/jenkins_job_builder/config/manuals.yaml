@@ -35,6 +35,7 @@
     publishers:
       - console-log
 
+# in zuul/layout.yaml specified to only run against master branch
 - job:
     name: openstack-user-guide
     project-type: maven
@@ -48,17 +49,18 @@
       root-module:
         group-id: org.openstack.docs
         artifact-id: openstack-guide
-      root-pom: doc/src/docbkx/openstack-user/pom.xml
+      root-pom: docbkx/user-guide/pom.xml
       goals: 'clean generate-sources'
 
     publishers:
       - console-log
       - ftp:
           site: docs.openstack.org
-          source: 'doc/src/docbkx/openstack-user/target/docbkx/webhelp/user-guide/**'
+          source: 'docbkx/user-guide/target/docbkx/webhelp/user-guide/**'
           target: ''
-          remove-prefix: 'doc/src/docbkx/openstack-user/target/docbkx/webhelp/'
+          remove-prefix: 'docbkx/user-guide/target/docbkx/webhelp/'
           excludes: '**/*.xml,**/null*'
+
 
 - job:
     name: openstack-admin-guide-cloud
@@ -91,8 +93,10 @@
           remove-prefix: 'doc/src/docbkx/admin-guide-cloud/target/docbkx/webhelp/'
           excludes: '**/*.xml,**/null*'
 
+# in zuul/layout.yaml specified to only run against stable/folsom and grizzly
+# branches.
 - job:
-    name: openstack-basic-install-fedora
+    name: openstack-basic-install-fedora-old
     project-type: maven
     node: precise
 
@@ -118,45 +122,14 @@
           site: docs.openstack.org
           source: 'doc/src/docbkx/basic-install/target/docbkx/webhelp/**'
           target: ''
-          remove-prefix: 'doc/src/docbkx/basic-install/target/docbkx/webhelp/'
+          remove-prefix: 'doc/src/docbkx/install-guide/basic-install/target/docbkx/webhelp/'
           excludes: '**/*.xml,**/null*'
 
-# in zuul/layout.yaml specified to only run against master branch.
+
+# in zuul/layout.yaml specified to only run against stable/folsom and grizzly
+# branches.
 - job:
-    name: openstack-basic-install-opensuse
-    project-type: maven
-    node: precise
-
-    prebuilders:
-      - gerrit-git-prep
-
-    properties:
-      - inject:
-          script-file: /usr/local/jenkins/slave_scripts/docbook-properties.sh
-          properties-file: gerrit-doc.properties
-
-    prebuilders:
-      - gerrit-git-prep
-
-    maven:
-      maven-name: Maven3
-      root-module:
-        group-id: org.openstack.docs
-        artifact-id: openstack-guide
-      root-pom: doc/src/docbkx/basic-install/pom.xml
-      goals: '-Doperating.system=zypper -Dprofile.os=opensuse -Drelease.path.name=${DOC_RELEASE_PATH} -Dcomments.enabled=${DOC_COMMENTS_ENABLED} clean generate-sources'
-
-    publishers:
-      - console-log
-      - ftp:
-          site: docs.openstack.org
-          source: 'doc/src/docbkx/basic-install/target/docbkx/webhelp/**'
-          target: ''
-          remove-prefix: 'doc/src/docbkx/basic-install/target/docbkx/webhelp/'
-          excludes: '**/*.xml,**/null*'
-
-- job:
-    name: openstack-basic-install-ubuntu
+    name: openstack-basic-install-ubuntu-old
     project-type: maven
     node: precise
 
@@ -305,7 +278,6 @@
           remove-prefix: 'doc/src/docbkx/openstack-config/target/docbkx/webhelp/'
           excludes: '**/*.xml,**/null*'
 
-
 - job:
     name: openstack-admin-manual-compute
     project-type: maven
@@ -425,8 +397,42 @@
           remove-prefix: 'doc/src/docbkx/openstack-ha/target/docbkx/webhelp/trunk/'
           excludes: '**/*.xml,**/null*'
 
+# in zuul/layout.yaml specified to only run against master
 - job:
-    name: openstack-install-deploy-guide-apt-fedora
+    name: openstack-install-deploy-guide-fedora
+    project-type: maven
+    concurrent: false
+    node: precise
+
+    properties:
+      - inject:
+          script-file: /usr/local/jenkins/slave_scripts/docbook-properties.sh
+          properties-file: gerrit-doc.properties
+
+    prebuilders:
+      - gerrit-git-prep
+
+    maven:
+      maven-name: Maven3
+      root-module:
+        group-id: org.openstack.docs
+        artifact-id: openstack-guide
+      root-pom: docbkx/install-guide/pom.xml
+      goals: '-Doperating.system=yum -Dprofile.os=centos;fedora;rhel -Drelease.path.name=${DOC_RELEASE_PATH} -Dcomments.enabled=${DOC_COMMENTS_ENABLED} clean generate-sources'
+
+    publishers:
+      - console-log
+      - ftp:
+          site: docs.openstack.org
+          source: 'docbkx/install-guide/target/docbkx/webhelp/**'
+          target: '/'
+          remove-prefix: 'docbkx/install-guide/target/docbkx/webhelp/'
+          excludes: '**/*.xml,**/null*'
+
+# in zuul/layout.yaml specified to only run against stable/folsom and grizzly
+# branches.
+- job:
+    name: openstack-install-deploy-guide-fedora-old
     project-type: maven
     concurrent: false
     node: precise
@@ -456,8 +462,74 @@
           remove-prefix: 'doc/src/docbkx/openstack-install/target/docbkx/webhelp/'
           excludes: '**/*.xml,**/null*'
 
+# in zuul/layout.yaml specified to only run against master
+- job:
+    name: openstack-install-deploy-guide-opensuse
+    project-type: maven
+    concurrent: false
+    node: precise
+
+    properties:
+      - inject:
+          script-file: /usr/local/jenkins/slave_scripts/docbook-properties.sh
+          properties-file: gerrit-doc.properties
+
+    prebuilders:
+      - gerrit-git-prep
+
+    maven:
+      maven-name: Maven3
+      root-module:
+        group-id: org.openstack.docs
+        artifact-id: openstack-guide
+      root-pom: docbkx/install-guide/pom.xml
+      goals: '-Doperating.system=zypper -Dprofile.os=opensuse -Drelease.path.name=${DOC_RELEASE_PATH} -Dcomments.enabled=${DOC_COMMENTS_ENABLED} clean generate-sources'
+
+    publishers:
+      - console-log
+      - ftp:
+          site: docs.openstack.org
+          source: 'docbkx/install-guide/target/docbkx/webhelp/**'
+          target: '/'
+          remove-prefix: 'docbkx/install-guide/target/docbkx/webhelp/'
+          excludes: '**/*.xml,**/null*'
+
+# in zuul/layout.yaml specified to only run against master
 - job:
     name: openstack-install-deploy-guide-ubuntu
+    project-type: maven
+    concurrent: false
+    node: precise
+
+    properties:
+      - inject:
+          script-file: /usr/local/jenkins/slave_scripts/docbook-properties.sh
+          properties-file: gerrit-doc.properties
+
+    prebuilders:
+      - gerrit-git-prep
+
+    maven:
+      maven-name: Maven3
+      root-module:
+        group-id: org.openstack.docs
+        artifact-id: openstack-guide
+      root-pom: docbkx/install-guide/pom.xml
+      goals: '-Doperating.system=apt -Dprofile.os=ubuntu -Drelease.path.name=${DOC_RELEASE_PATH} -Dcomments.enabled=${DOC_COMMENTS_ENABLED} clean generate-sources'
+
+    publishers:
+      - console-log
+      - ftp:
+          site: docs.openstack.org
+          source: 'docbkx/install-guide/target/docbkx/webhelp/**'
+          target: '/'
+          remove-prefix: 'docbkx/install-guide/target/docbkx/webhelp/'
+          excludes: '**/*.xml,**/null*'
+
+# in zuul/layout.yaml specified to only run against stable/folsom and grizzly
+# branches.
+- job:
+    name: openstack-install-deploy-guide-ubuntu-old
     project-type: maven
     concurrent: false
     node: precise
