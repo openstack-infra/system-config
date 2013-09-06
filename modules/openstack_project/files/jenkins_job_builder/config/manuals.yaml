@@ -11,7 +11,7 @@
       root-module:
         group-id: org.openstack.docs
         artifact-id: openstack-guide
-      root-pom: doc/src/docbkx/openstack-ops/pom.xml
+      root-pom: openstack-ops/pom.xml
       goals: 'clean generate-sources'
 
     publishers:
@@ -20,7 +20,7 @@
           site: 'static.openstack.org'
           files:
             - target: 'docs-draft/$LOG_PATH/ops/'
-              source: 'doc/src/docbkx/openstack-ops/target/docbkx/webhelp/**'
+              source: 'openstack-ops/target/docbkx/webhelp/**'
               keep-hierarchy: true
               copy-after-failure: true
 
