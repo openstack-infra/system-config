@@ -2207,6 +2207,7 @@ projects:
       - savanna-branch-tarball
       - hook-savanna-rtfd
       - savanna-coverage
+      - savanna-upstream-translation-update
     pre-release:
       - savanna-tarball
       - hook-savanna-rtfd
@@ -2217,6 +2218,8 @@ projects:
           - post-mirror-python27
           - post-mirror-python33
       - hook-savanna-rtfd
+    periodic:
+      - savanna-propose-translation-update
 
   - name: stackforge/python-savannaclient
     check:
