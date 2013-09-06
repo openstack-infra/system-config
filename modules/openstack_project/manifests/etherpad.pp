@@ -2,7 +2,8 @@ class openstack_project::etherpad (
   $ssl_cert_file_contents = '',
   $ssl_key_file_contents = '',
   $ssl_chain_file_contents = '',
-  $database_password = '',
+  $mysql_password = '',
+  $mysql_root_password = '',
   $sysadmins = []
 ) {
   class { 'openstack_project::server':
@@ -11,9 +12,6 @@ class openstack_project::etherpad (
   }
 
   include etherpad_lite
-  mysql_backup::backup { 'etherpad-lite':
-    require  => Class['etherpad_lite'],
-  }
 
   class { 'etherpad_lite::apache':
     ssl_cert_file           => '/etc/ssl/certs/etherpad.openstack.org.pem',
@@ -25,11 +23,38 @@ class openstack_project::etherpad (
   }
 
   class { 'etherpad_lite::site':
-    database_password => $database_password,
+    database_password => $mysql_password,
+    require           => Mysql::Db['etherpad-lite'],
   }
 
-  class { 'etherpad_lite::mysql':
-    database_password => $database_password,
+  # Set up MySQL.
+  class { 'mysql::server':
+    config_hash => {
+      'root_password'  => $mysql_root_password,
+      'default_engine' => 'InnoDB',
+      'bind_address'   => '127.0.0.1',
+    }
+  }
+  include mysql::server::account_security
+  mysql::database_user { 'root@::1':
+    ensure  => absent,
+    require => Class['mysql::server'],
+  }
+
+  mysql::db { 'etherpad-lite':
+    user     => 'eplite',
+    password => $mysql_password,
+    host     => 'localhost',
+    grant    => ['all'],
+    charset  => 'utf8',
+    require  => [
+      Class['mysql::server'],
+      Class['mysql::server::account_security'],
+    ],
+  }
+
+  mysql_backup::backup { 'etherpad-lite':
+    require  => Class['etherpad_lite'],
   }
 }
 
