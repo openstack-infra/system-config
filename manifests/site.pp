@@ -198,15 +198,17 @@ node 'etherpad.openstack.org' {
     ssl_cert_file_contents  => hiera('etherpad_ssl_cert_file_contents'),
     ssl_key_file_contents   => hiera('etherpad_ssl_key_file_contents'),
     ssl_chain_file_contents => hiera('etherpad_ssl_chain_file_contents'),
-    database_password       => hiera('etherpad_db_password'),
+    mysql_password          => hiera('etherpad_db_password'),
+    mysql_root_password     => hiera('etherpad_root_db_password'),
     sysadmins               => hiera('sysadmins'),
   }
 }
 
 node 'etherpad-dev.openstack.org' {
   class { 'openstack_project::etherpad_dev':
-    database_password       => hiera('etherpad-dev_db_password'),
-    sysadmins               => hiera('sysadmins'),
+    mysql_password      => hiera('etherpad-dev_db_password'),
+    mysql_root_password => hiera('etherpad-dev_root_db_password'),
+    sysadmins           => hiera('sysadmins'),
   }
 }
 

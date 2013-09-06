@@ -1,5 +1,6 @@
 class openstack_project::etherpad_dev (
-  $database_password = '',
+  $mysql_password = '',
+  $mysql_root_password = '',
   $sysadmins = []
 ) {
   class { 'openstack_project::server':
@@ -7,21 +8,7 @@ class openstack_project::etherpad_dev (
     sysadmins                 => $sysadmins
   }
 
-  class { 'etherpad_lite':
-    # Use the version running on the prod server.
-    eplite_version => '4195e11a41c5992bc555cef71246800bceaf1915',
-    # Use the version running on the prod server.
-    nodejs_version => 'v0.6.16',
-    # Once dev install is working replace the above parameters with
-    # the following to test automated upgrade by puppet.
-    # eplite_version => '1.1.4',
-    # nodejs_version => 'v0.8.14',
-    ep_headings    => true
-  }
-
-  mysql_backup::backup { 'etherpad-lite':
-    require  => Class['etherpad_lite'],
-  }
+  include etherpad_lite
 
   class { 'etherpad_lite::apache':
     ssl_cert_file  => '/etc/ssl/certs/ssl-cert-snakeoil.pem',
@@ -30,11 +17,38 @@ class openstack_project::etherpad_dev (
   }
 
   class { 'etherpad_lite::site':
-    database_password => $database_password,
+    database_password => $mysql_password,
+    require           => Mysql::Db['etherpad-lite'],
   }
 
-  class { 'etherpad_lite::mysql':
-    database_password => $database_password,
+  # Set up MySQL.
+  class { 'mysql::server':
+    config_hash => {
+      'root_password'  => $mysql_root_password,
+      'default_engine' => 'InnoDB',
+      'bind_address'   => '127.0.0.1',
+    }
+  }
+  include mysql::server::account_security
+  mysql::database_user { 'root@::1':
+    ensure  => absent,
+    require => Class['mysql::server'],
+  }
+
+  mysql::db { 'etherpad-lite':
+    user     => 'eplite',
+    password => $mysql_password,
+    host     => 'localhost',
+    grant    => ['all'],
+    charset  => 'utf8',
+    require  => [
+      Class['mysql::server'],
+      Class['mysql::server::account_security'],
+    ],
+  }
+
+  mysql_backup::backup { 'etherpad-lite':
+    require  => Class['mysql::server'],
   }
 }
 
