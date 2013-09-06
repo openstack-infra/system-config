@@ -1327,11 +1327,14 @@ projects:
       - gate-hacking-python33
       - gate-hacking-integration-nova
     post:
+      - hacking-docs
       - hacking-branch-tarball
       - hacking-coverage
     pre-release:
+      - hacking-docs
       - hacking-tarball
     release:
+      - hacking-docs
       - hacking-tarball:
         - hacking-pypi-upload:
           - post-mirror-python26
