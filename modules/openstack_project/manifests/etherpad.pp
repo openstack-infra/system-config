@@ -1,8 +1,11 @@
 class openstack_project::etherpad (
+  $mysql_password,
   $ssl_cert_file_contents = '',
   $ssl_key_file_contents = '',
   $ssl_chain_file_contents = '',
-  $database_password = '',
+  $mysql_host = 'localhost',
+  $mysql_user = 'eplite',
+  $mysql_db_name = 'etherpad-lite',
   $sysadmins = []
 ) {
   class { 'openstack_project::server':
@@ -11,9 +14,6 @@ class openstack_project::etherpad (
   }
 
   include etherpad_lite
-  mysql_backup::backup { 'etherpad-lite':
-    require  => Class['etherpad_lite'],
-  }
 
   class { 'etherpad_lite::apache':
     ssl_cert_file           => '/etc/ssl/certs/etherpad.openstack.org.pem',
@@ -25,11 +25,21 @@ class openstack_project::etherpad (
   }
 
   class { 'etherpad_lite::site':
-    database_password => $database_password,
+    database_host     => $mysql_host,
+    database_user     => $mysql_user,
+    database_name     => $mysql_db_name,
+    database_password => $mysql_password,
   }
 
-  class { 'etherpad_lite::mysql':
-    database_password => $database_password,
+  etherpad_lite::plugin { 'ep_headings':
+    require => Class['etherpad_lite'],
+  }
+
+  mysql_backup::backup_remote { 'etherpad-lite':
+    database_host     => $mysql_host,
+    database_user     => $mysql_user,
+    database_password => $mysql_password,
+    require           => Class['etherpad_lite'],
   }
 }
 
