@@ -144,6 +144,11 @@ class openstack_project::gerrit (
         match => '<li>([^ ]+) <a href=\"[^\"]+\">([^<]+)</a> : ([^ ]+)([^<]*)</li>',
         html  => '<li><span class=\"comment_test_name\"><a href=\"$2\">$1</a></span> <span class=\"comment_test_result\"><span class=\"result_$3\">$3</span>$4</span></li>',
       },
+      {
+        name  => 'gitsha',
+        match => '([0-9a-f]{8,40})',
+        link  => '#q,$1,n,z',
+      },
     ],
     war                             => $war,
     contactstore                    => $contactstore,
