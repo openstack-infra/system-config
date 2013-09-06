@@ -34,7 +34,7 @@ class etherpad_lite::apache (
   file { '/etc/ssl/certs':
     ensure => directory,
     owner  => 'root',
-    mode   => '0700',
+    mode   => '0755',
   }
 
   file { '/etc/ssl/private':
