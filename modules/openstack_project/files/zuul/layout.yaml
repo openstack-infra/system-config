@@ -167,16 +167,51 @@ jobs:
     voting: false
     failure-message: Jenkins XML output has changed.
     success-message: Jenkins XML output is unchanged.
+# Continous publishing from master of the following documentation targets:
+  - name: openstack-admin-guide-cloud
+    branch: ^master$
   - name: openstack-docs-site
+    branch: ^master$
+  - name: openstack-glossary
     branch: ^master$
   - name: openstack-ha-guide
     branch: ^master$
+  - name: openstack-image-guide
+    branch: ^master$
+  - name: openstack-user-guide
+    branch: ^master$
+  - name: openstack-user-guide-admin
+    branch: ^master$
   - name: openstack-security-guide
     branch: ^master$
-  - name: openstack-basic-install-opensuse
+  - name: openstack-training
     branch: ^master$
-  - name: openstack-admin-guide-cloud
-    branch: ^master$
+# Documentation targets for master and future stable branches:
+  - name: openstack-admin-manual-network
+    branch: ^(?!stable/(folsom|grizzly)).*$
+  - name: openstack-config-ref
+    branch: ^(?!stable/(folsom|grizzly)).*$
+  - name: openstack-install-deploy-guide-fedora
+    branch: ^(?!stable/(folsom|grizzly)).*$
+  - name: openstack-install-deploy-guide-opensuse
+    branch: ^(?!stable/(folsom|grizzly)).*$
+  - name: openstack-install-deploy-guide-ubuntu
+    branch: ^(?!stable/(folsom|grizzly)).*$
+# Deprecated documentation targets:
+  - name: openstack-admin-manual-block-old
+    branch: stable/(grizzly|folsom)
+  - name: openstack-admin-manual-compute-old
+    branch: stable/(grizzly|folsom)
+  - name: openstack-admin-manual-netconn-old
+    branch: stable/(grizzly|folsom)
+  - name: openstack-basic-install-fedora-old
+    branch: stable/(grizzly|foslom)
+  - name: openstack-basic-install-ubuntu-old
+    branch: stable/(grizzly|folsom)
+  - name: openstack-install-deploy-guide-fedora-old
+    branch: stable/(grizzly|folsom)
+  - name: openstack-install-deploy-guide-ubuntu-old
+    branch: stable/(grizzly|folsom)
   - name: ^gate-.*-docs$
     success-pattern: http://docs-draft.openstack.org/{build.parameters[LOG_PATH]}/doc/build/html/
   - name: infra-publications-publish
@@ -1852,21 +1887,25 @@ projects:
       - gate-openstack-manuals-validate
     post:
       - openstack-admin-guide-cloud
-      - openstack-admin-manual-compute
-      - openstack-admin-manual-netconn
-      - openstack-admin-manual-block
-      - openstack-user-guide
-      - openstack-basic-install-fedora
-      - openstack-basic-install-opensuse
-      - openstack-basic-install-ubuntu
+      - openstack-admin-manual-compute-old
+      - openstack-admin-manual-netconn-old
+      - openstack-admin-manual-block-old
+      - openstack-basic-install-fedora-old
+      - openstack-basic-install-ubuntu-old
+      - openstack-admin-manual-network
       - openstack-glossary
       - openstack-image-guide
       - openstack-config-ref
       - openstack-docs-site
       - openstack-ha-guide
-      - openstack-install-deploy-guide-apt-fedora
+      - openstack-install-deploy-guide-fedora
+      - openstack-install-deploy-guide-fedora-old
+      - openstack-install-deploy-guide-opensuse
       - openstack-install-deploy-guide-ubuntu
+      - openstack-install-deploy-guide-ubuntu-old
       - openstack-security-guide
+      - openstack-user-guide
+      - openstack-user-guide-admin
       - manuals-upstream-translation-update
       - openstack-training
     periodic:
