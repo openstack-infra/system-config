@@ -1,30 +1,22 @@
 # == Class: etherpad_lite::site
 #
 class etherpad_lite::site (
-  $database_password = '',
-  $dbType = 'mysql',
+  $database_password,
+  $sessionKey    = '',
+  $dbType        = 'mysql',
   $database_user = 'eplite',
-  $database_name = 'etherpad-lite'
+  $database_name = 'etherpad-lite',
+  $database_host = 'localhost'
 ) {
 
   include etherpad_lite
 
   $base = $etherpad_lite::base_install_dir
 
-  if $dbType == 'mysql' {
-    service { 'etherpad-lite':
-      ensure    => running,
-      enable    => true,
-      subscribe => File["${base}/etherpad-lite/settings.json"],
-      require   => Class['etherpad_lite::mysql'],
-    }
-  }
-  else {
-    service { 'etherpad-lite':
-      ensure    => running,
-      enable    => true,
-      subscribe => File["${base}/etherpad-lite/settings.json"],
-    }
+  service { 'etherpad-lite':
+    ensure    => running,
+    enable    => true,
+    subscribe => File["${base}/etherpad-lite/settings.json"],
   }
 
   file { "${base}/etherpad-lite/settings.json":
