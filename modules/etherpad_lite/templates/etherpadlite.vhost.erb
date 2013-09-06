@@ -36,28 +36,37 @@
   # MSIE 7 and newer should be able to use keepalive
   BrowserMatch "MSIE [17-9]" ssl-unclean-shutdown
 
-  RewriteEngine on
-  RewriteCond %{HTTP_HOST} !<%= scope.lookupvar("etherpad_lite::apache::vhost_name") %>
-  RewriteRule ^.*$ https://<%= scope.lookupvar("etherpad_lite::apache::vhost_name") %> [L,R=301]
+  <IfModule mod_proxy.c>
+      # The following redirects "nice" urls such as https://etherpad.example.org/padname
+      # to https://etherpad.example.org/p/padname. It was problematic directly
+      # supporting "nice" urls as etherpad hardcodes /p/ in many places.
+      # Adapted from https://github.com/ether/etherpad-lite/wiki/How-to-put-Etherpad-Lite-behind-a-reverse-Proxy
+      RewriteEngine on
+      RewriteCond %{HTTP_HOST} !<%= scope.lookupvar("etherpad_lite::apache::vhost_name") %>
+      RewriteRule ^.*$ https://<%= scope.lookupvar("etherpad_lite::apache::vhost_name") %> [L,R=301]
 
-  RewriteRule ^/p/(.*)$ https://<%= scope.lookupvar("etherpad_lite::apache::vhost_name") %>/$1 [NC,L,R=301]
-  RewriteCond %{REQUEST_URI} !^/p/
-  RewriteCond %{REQUEST_URI} !^/static/
-  RewriteCond %{REQUEST_URI} !^/pluginfw/
-  RewriteCond %{REQUEST_URI} !^/javascripts/
-  RewriteCond %{REQUEST_URI} !^/socket.io/
-  RewriteCond %{REQUEST_URI} !^/ep/
-  RewriteCond %{REQUEST_URI} !^/minified/
-  RewriteCond %{REQUEST_URI} !^/api/
-  RewriteCond %{REQUEST_URI} !^/ro/
-  RewriteCond %{REQUEST_URI} !^/error/
-  RewriteCond %{REQUEST_URI} !^/jserror
-  RewriteCond %{REQUEST_URI} !/favicon.ico
-  RewriteCond %{REQUEST_URI} !/robots.txt
-  RewriteRule ^/+(.+)$ https://<%= scope.lookupvar("etherpad_lite::apache::vhost_name") %>/p/$1
+      RewriteCond %{REQUEST_URI} !^/p/
+      RewriteCond %{REQUEST_URI} !^/locales/
+      RewriteCond %{REQUEST_URI} !^/locales.json
+      RewriteCond %{REQUEST_URI} !^/admin
+      RewriteCond %{REQUEST_URI} !^/p/
+      RewriteCond %{REQUEST_URI} !^/static/
+      RewriteCond %{REQUEST_URI} !^/pluginfw/
+      RewriteCond %{REQUEST_URI} !^/javascripts/
+      RewriteCond %{REQUEST_URI} !^/socket.io/
+      RewriteCond %{REQUEST_URI} !^/ep/
+      RewriteCond %{REQUEST_URI} !^/minified/
+      RewriteCond %{REQUEST_URI} !^/api/
+      RewriteCond %{REQUEST_URI} !^/ro/
+      RewriteCond %{REQUEST_URI} !^/error/
+      RewriteCond %{REQUEST_URI} !^/jserror
+      RewriteCond %{REQUEST_URI} !/favicon.ico
+      RewriteCond %{REQUEST_URI} !/robots.txt
+      RewriteRule ^/+(.+)$ https://<%= scope.lookupvar("etherpad_lite::apache::vhost_name") %>/p/$1 [NC,L,R=301]
 
-  RewriteRule ^/(.*)$ http://localhost:9001/$1 [P]
-  ProxyPassReverse / http://localhost:9001/
+      RewriteRule ^/(.*)$ http://localhost:9001/$1 [P]
+      ProxyPassReverse / http://localhost:9001/
+  </IfModule>
 
 </VirtualHost>
 </IfModule>
