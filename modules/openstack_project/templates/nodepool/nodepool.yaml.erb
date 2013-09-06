@@ -21,7 +21,7 @@ providers:
     auth-url: 'https://identity.api.rackspacecloud.com/v2.0/'
     max-servers: 60
     images:
-      - name: devstack-precise
+      - name: devstack-precise-dfw
         base-image: 'Ubuntu 12.04 LTS (Precise Pangolin)'
         min-ram: 8192
         setup: prepare_node_devstack.sh
@@ -37,7 +37,7 @@ providers:
     auth-url: 'https://identity.api.rackspacecloud.com/v2.0/'
     max-servers: 60
     images:
-      - name: devstack-precise
+      - name: devstack-precise-ord
         base-image: 'Ubuntu 12.04 LTS (Precise Pangolin)'
         min-ram: 8192
         setup: prepare_node_devstack.sh
@@ -127,6 +127,14 @@ targets:
       - name: devstack-precise-iad
         providers:
           - name: rax-iad
+            min-ready: 2
+      - name: devstack-precise-dfw
+        providers:
+          - name: rax-dfw
+            min-ready: 2
+      - name: devstack-precise-ord
+        providers:
+          - name: rax-ord
             min-ready: 2
   - name: jenkins02
     jenkins:
