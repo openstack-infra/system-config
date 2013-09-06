@@ -48,16 +48,16 @@
       root-module:
         group-id: org.openstack.docs
         artifact-id: openstack-guide
-      root-pom: doc/src/docbkx/openstack-user/pom.xml
+      root-pom: /user-guide/pom.xml
       goals: 'clean generate-sources'
 
     publishers:
       - console-log
       - ftp:
           site: docs.openstack.org
-          source: 'doc/src/docbkx/openstack-user/target/docbkx/webhelp/user-guide/**'
+          source: 'user-guide/target/docbkx/webhelp/user-guide/**'
           target: ''
-          remove-prefix: 'doc/src/docbkx/openstack-user/target/docbkx/webhelp/'
+          remove-prefix: 'user-guide/target/docbkx/webhelp/'
           excludes: '**/*.xml,**/null*'
 
 - job:
@@ -78,16 +78,16 @@
       root-module:
         group-id: org.openstack.docs
         artifact-id: openstack-guide
-      root-pom: doc/src/docbkx/basic-install/pom.xml
+      root-pom: install-guide/basic-install/pom.xml
       goals: '-Doperating.system=yum -Dprofile.os=centos;fedora;rhel -Drelease.path.name=${DOC_RELEASE_PATH} -Dcomments.enabled=${DOC_COMMENTS_ENABLED} clean generate-sources'
 
     publishers:
       - console-log
       - ftp:
           site: docs.openstack.org
-          source: 'doc/src/docbkx/basic-install/target/docbkx/webhelp/**'
+          source: 'install-guide/basic-install/target/docbkx/webhelp/**'
           target: ''
-          remove-prefix: 'doc/src/docbkx/basic-install/target/docbkx/webhelp/'
+          remove-prefix: 'install-guide/basic-install/target/docbkx/webhelp/'
           excludes: '**/*.xml,**/null*'
 
 # in zuul/layout.yaml specified to only run against master branch.
@@ -112,16 +112,16 @@
       root-module:
         group-id: org.openstack.docs
         artifact-id: openstack-guide
-      root-pom: doc/src/docbkx/basic-install/pom.xml
+      root-pom: install-guide/basic-install/pom.xml
       goals: '-Doperating.system=zypper -Dprofile.os=opensuse -Drelease.path.name=${DOC_RELEASE_PATH} -Dcomments.enabled=${DOC_COMMENTS_ENABLED} clean generate-sources'
 
     publishers:
       - console-log
       - ftp:
           site: docs.openstack.org
-          source: 'doc/src/docbkx/basic-install/target/docbkx/webhelp/**'
+          source: 'install-guide/basic-install/target/docbkx/webhelp/**'
           target: ''
-          remove-prefix: 'doc/src/docbkx/basic-install/target/docbkx/webhelp/'
+          remove-prefix: 'install-guide/basic-install/target/docbkx/webhelp/'
           excludes: '**/*.xml,**/null*'
 
 - job:
@@ -145,16 +145,16 @@
       root-module:
         group-id: org.openstack.docs
         artifact-id: openstack-guide
-      root-pom: doc/src/docbkx/basic-install/pom.xml
+      root-pom: install-guide/basic-install/pom.xml
       goals: '-Doperating.system=apt -Dprofile.os=ubuntu;debian -Drelease.path.name=${DOC_RELEASE_PATH} -Dcomments.enabled=${DOC_COMMENTS_ENABLED} clean generate-sources'
 
     publishers:
       - console-log
       - ftp:
           site: docs.openstack.org
-          source: 'doc/src/docbkx/basic-install/target/docbkx/webhelp/**'
+          source: 'install-guide/basic-install/target/docbkx/webhelp/**'
           target: ''
-          remove-prefix: 'doc/src/docbkx/basic-install/target/docbkx/webhelp/'
+          remove-prefix: 'install-guide/basic-install/target/docbkx/webhelp/'
           excludes: '**/*.xml,**/null*'
 
 - job:
