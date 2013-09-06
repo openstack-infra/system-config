@@ -1851,7 +1851,6 @@ projects:
     post:
       - openstack-admin-manual-compute
       - openstack-admin-manual-netconn
-      - openstack-admin-manual-object
       - openstack-admin-manual-block
       - openstack-user-guide
       - openstack-basic-install-fedora
