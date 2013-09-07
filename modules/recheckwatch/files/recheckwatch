@@ -53,6 +53,7 @@ class Bug(object):
         self.changes = []
         self.last_seen = None
         self.first_seen = None
+        self.duplicate_of = None
         self.update()
 
     def update(self):
@@ -62,6 +63,8 @@ class Bug(object):
         self.title = lpitem.title
         self.status = map(lambda x: x.status,
                           lpitem.bug_tasks)
+        if lpitem.duplicate_of:
+            self.duplicate_of = lpitem.duplicate_of.id
 
     def is_closed(self):
         closed = True
@@ -79,6 +82,10 @@ class Bug(object):
         if hit.change not in self.changes:
             self.changes.append(hit.change)
         self.last_seen = hit.ts
+
+    def addHits(self, hits):
+        for hit in hits:
+            self.addHit(hit)
 
 class Scoreboard(threading.Thread):
     def __init__(self, config):
@@ -122,11 +129,22 @@ class Scoreboard(threading.Thread):
         bug = self.scores.get(bugno)
         if not bug:
             bug = Bug(bugno)
+        else:
+            bug.update()
         bug.addHit(hit)
         self.scores[bugno] = bug
         self.update()
 
     def update(self):
+        # Check for duplicate bugs
+        dupes = []
+        for bugno, bug in self.scores.items():
+            if bug.duplicate_of:
+                dupes.append(bugno)
+        for bugno in dupes:
+            self.scores[self.scores[bugno].duplicate_of].addHits(self.scores[bugno].hits)
+            del self.scores[bugno]
+
         # Remove bugs that haven't been seen in ages
         to_remove = []
         now = datetime.datetime.utcnow()
