@@ -196,7 +196,7 @@ jobs:
 # Documentation targets for master and future stable branches:
   - name: openstack-admin-manual-network
     branch: ^(?!stable/(folsom|grizzly)).*$
-  - name: openstack-config-ref
+  - name: openstack-config-reference
     branch: ^(?!stable/(folsom|grizzly)).*$
   - name: openstack-install-deploy-guide-fedora
     branch: ^(?!stable/(folsom|grizzly)).*$
@@ -1938,7 +1938,7 @@ projects:
       - openstack-admin-manual-network
       - openstack-glossary
       - openstack-image-guide
-      - openstack-config-ref
+      - openstack-config-reference
       - openstack-docs-site
       - openstack-ha-guide
       - openstack-install-deploy-guide-fedora

@@ -35,33 +35,6 @@
     publishers:
       - console-log
 
-# in zuul/layout.yaml specified to only run against master branch
-- job:
-    name: openstack-user-guide
-    project-type: maven
-    node: precise
-
-    prebuilders:
-      - gerrit-git-prep
-
-    maven:
-      maven-name: Maven3
-      root-module:
-        group-id: org.openstack.docs
-        artifact-id: openstack-guide
-      root-pom: doc/user-guide/pom.xml
-      goals: 'clean generate-sources'
-
-    publishers:
-      - console-log
-      - ftp:
-          site: docs.openstack.org
-          source: 'doc/user-guide/target/docbkx/webhelp/user-guide/**'
-          target: ''
-          remove-prefix: 'doc/user-guide/target/docbkx/webhelp/'
-          excludes: '**/*.xml,**/null*'
-
-
 - job:
     name: openstack-admin-guide-cloud
     project-type: maven
@@ -248,69 +221,6 @@
           remove-prefix: 'doc/glossary/target/docbkx/webhelp/openstack-glossary/'
           excludes: '**/*.xml,**/null*'
 
-# in zuul/layout.yaml specified to only run against master branch
-- job:
-    name: openstack-image-guide
-    project-type: maven
-    concurrent: false
-    node: precise
-
-    prebuilders:
-      - gerrit-git-prep
-
-    properties:
-      - inject:
-          script-file: /usr/local/jenkins/slave_scripts/docbook-properties.sh
-          properties-file: gerrit-doc.properties
-
-    maven:
-      maven-name: Maven3
-      root-module:
-        group-id: org.openstack.docs
-        artifact-id: openstack-guide
-      root-pom: doc/image-guide/pom.xml
-      goals: '-Drelease.path.name=${DOC_RELEASE_PATH} -Dcomments.enabled=${DOC_COMMENTS_ENABLED} clean generate-sources'
-
-    publishers:
-      - console-log
-      - ftp:
-          site: docs.openstack.org
-          source: 'doc/image-guide/target/docbkx/webhelp/**'
-          target: '/'
-          remove-prefix: 'doc/image-guide/target/docbkx/webhelp/'
-          excludes: '**/*.xml,**/null*'
-
-# in zuul/layout.yaml specified to only run against master branch
-- job:
-    name: openstack-config-ref
-    project-type: maven
-    concurrent: false
-    node: precise
-
-    prebuilders:
-      - gerrit-git-prep
-
-    properties:
-      - inject:
-          script-file: /usr/local/jenkins/slave_scripts/docbook-properties.sh
-          properties-file: gerrit-doc.properties
-
-    maven:
-      maven-name: Maven3
-      root-module:
-        group-id: org.openstack.docs
-        artifact-id: openstack-guide
-      root-pom: doc/config-reference/pom.xml
-      goals: '-Drelease.path.name=${DOC_RELEASE_PATH} -Dcomments.enabled=${DOC_COMMENTS_ENABLED} clean generate-sources'
-
-    publishers:
-      - console-log-post
-      - ftp:
-          site: docs.openstack.org
-          source: 'doc/config-reference/target/docbkx/webhelp/**'
-          target: '/'
-          remove-prefix: 'doc/config-reference/target/docbkx/webhelp/'
-          excludes: '**/*.xml,**/null*'
 
 # in zuul/layout.yaml specified to only run against stable/folsom and grizzly
 # branches.
