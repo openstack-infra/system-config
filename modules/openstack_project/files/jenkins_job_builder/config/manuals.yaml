@@ -36,31 +36,6 @@
       - console-log
 
 - job:
-    name: openstack-user-guide
-    project-type: maven
-    node: precise
-
-    prebuilders:
-      - gerrit-git-prep
-
-    maven:
-      maven-name: Maven3
-      root-module:
-        group-id: org.openstack.docs
-        artifact-id: openstack-guide
-      root-pom: doc/src/docbkx/openstack-user/pom.xml
-      goals: 'clean generate-sources'
-
-    publishers:
-      - console-log
-      - ftp:
-          site: docs.openstack.org
-          source: 'doc/src/docbkx/openstack-user/target/docbkx/webhelp/user-guide/**'
-          target: ''
-          remove-prefix: 'doc/src/docbkx/openstack-user/target/docbkx/webhelp/'
-          excludes: '**/*.xml,**/null*'
-
-- job:
     name: openstack-admin-guide-cloud
     project-type: maven
     concurrent: false

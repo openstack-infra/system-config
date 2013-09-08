@@ -1335,3 +1335,10 @@
 
     jobs:
       - python-jobs
+
+- project:
+    name: openstack-user
+    target: ''
+
+    jobs:
+      - '{name}-documentation'
