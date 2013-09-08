@@ -183,9 +183,9 @@ jobs:
     branch: ^master$
   - name: openstack-ha-guide
     branch: ^master$
-  - name: openstack-image-guide
+  - name: openstack-image-guide-manual
     branch: ^master$
-  - name: openstack-user-guide
+  - name: openstack-user-guide-manual
     branch: ^master$
   - name: openstack-user-guide-admin
     branch: ^master$
@@ -196,7 +196,7 @@ jobs:
 # Documentation targets for master and future stable branches:
   - name: openstack-admin-manual-network
     branch: ^(?!stable/(folsom|grizzly)).*$
-  - name: openstack-config-ref
+  - name: openstack-config-reference-manual
     branch: ^(?!stable/(folsom|grizzly)).*$
   - name: openstack-install-deploy-guide-fedora
     branch: ^(?!stable/(folsom|grizzly)).*$
@@ -1937,8 +1937,8 @@ projects:
       - openstack-basic-install-ubuntu-old
       - openstack-admin-manual-network
       - openstack-glossary
-      - openstack-image-guide
-      - openstack-config-ref
+      - openstack-image-guide-manual
+      - openstack-config-reference-manual
       - openstack-docs-site
       - openstack-ha-guide
       - openstack-install-deploy-guide-fedora
@@ -1947,7 +1947,7 @@ projects:
       - openstack-install-deploy-guide-ubuntu
       - openstack-install-deploy-guide-ubuntu-old
       - openstack-security-guide
-      - openstack-user-guide
+      - openstack-user-guide-manual
       - openstack-user-guide-admin
       - manuals-upstream-translation-update
       - openstack-training
