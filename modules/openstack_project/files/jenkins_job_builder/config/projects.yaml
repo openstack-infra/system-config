@@ -1336,3 +1336,18 @@
 
     jobs:
       - python-jobs
+
+- project:
+    name: manuals
+    manual:
+      - admin-guide-cloud
+      - admin-guide-network
+      - config-reference
+      - glossary
+      - image-guide
+      - security-guide
+      - user-guide
+      - user-guide-admin
+
+    jobs:
+      - 'openstack-{manual}'

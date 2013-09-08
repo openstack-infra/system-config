@@ -194,9 +194,9 @@ jobs:
   - name: openstack-training
     branch: ^master$
 # Documentation targets for master and future stable branches:
-  - name: openstack-admin-manual-network
+  - name: openstack-admin-guide-network
     branch: ^(?!stable/(folsom|grizzly)).*$
-  - name: openstack-config-ref
+  - name: openstack-config-reference
     branch: ^(?!stable/(folsom|grizzly)).*$
   - name: openstack-install-deploy-guide-fedora
     branch: ^(?!stable/(folsom|grizzly)).*$
@@ -1930,15 +1930,15 @@ projects:
       - gate-openstack-manuals-validate
     post:
       - openstack-admin-guide-cloud
+      - openstack-admin-guide-network
       - openstack-admin-manual-compute-old
       - openstack-admin-manual-netconn-old
       - openstack-admin-manual-block-old
       - openstack-basic-install-fedora-old
       - openstack-basic-install-ubuntu-old
-      - openstack-admin-manual-network
       - openstack-glossary
       - openstack-image-guide
-      - openstack-config-ref
+      - openstack-config-reference
       - openstack-docs-site
       - openstack-ha-guide
       - openstack-install-deploy-guide-fedora
