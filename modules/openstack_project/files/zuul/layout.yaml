@@ -1855,7 +1855,7 @@ projects:
       - openstack-admin-manual-compute
       - openstack-admin-manual-netconn
       - openstack-admin-manual-block
-      - openstack-user-guide
+      - openstack-user-documentation
       - openstack-basic-install-fedora
       - openstack-basic-install-opensuse
       - openstack-basic-install-ubuntu

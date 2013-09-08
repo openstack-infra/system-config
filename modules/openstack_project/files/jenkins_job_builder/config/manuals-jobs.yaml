@@ -1,0 +1,29 @@
+- job-template:
+    name: {name}-documentation
+    project-type: maven
+    concurrent: false
+
+    prebuilders:
+      - gerrit-git-prep
+
+    properties:
+      - inject:
+          script-file: /usr/local/jenkins/slave_scripts/docbook-properties.sh
+          properties-file: gerrit-doc.properties
+
+    maven:
+      maven-name: Maven3
+      root-module:
+        group-id: org.openstack.docs
+        artifact-id: openstack-guide
+      root-pom: doc/{name}/pom.xml
+      goals: '-Dcomments.enabled=${DOC_COMMENTS_ENABLED} clean generate-sources'
+
+    publishers:
+      - console-log
+      - ftp:
+          site: docs.openstack.org
+          source: 'doc/{name}/target/docbkx/webhelp/**'
+          target: '{target}'
+          remove-prefix: 'doc/{name}/target/docbkx/webhelp/'
+          excludes: '**/*.xml,**/null*'
