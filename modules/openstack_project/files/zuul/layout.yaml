@@ -2673,6 +2673,12 @@ projects:
     gate:
       - gate-noop
 
+  - name: stackforge/python-climateclient
+    check:
+      - gate-noop
+    gate:
+      - gate-noop
+
   - name: stackforge/python-marconiclient
     check:
       - gate-python-marconiclient-pep8
