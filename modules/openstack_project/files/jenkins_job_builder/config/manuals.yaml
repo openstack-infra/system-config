@@ -121,7 +121,7 @@
       - ftp:
           site: docs.openstack.org
           source: 'doc/user-guide-admin/target/docbkx/webhelp/**'
-          target: 'cloud-admin'
+          target: ''
           remove-prefix: 'doc/user-guide-admin/target/docbkx/webhelp/'
           excludes: '**/*.xml,**/null*'
 
