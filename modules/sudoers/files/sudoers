@@ -16,6 +16,9 @@ Defaults	env_reset
 # User privilege specification
 root	ALL=(ALL) ALL
 
+# Allow jenkins user to send Salt messages to the Salt Master
+jenkins  ALL=(ALL) NOPASSWD: /usr/bin/salt-call event.fire_master*
+
 # Allow members of group sudo to execute any command after they have
 # provided their password
 # (Note that later entries override this, so you might need to move
