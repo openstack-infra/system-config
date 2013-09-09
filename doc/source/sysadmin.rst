@@ -226,6 +226,44 @@ Switching back to the server to be backed up, run::
 And verify the host key.  Add the "backup" class in puppet to the server
 to be backed up.
 
+Restore from Backup
+-------------------
+
+On the server that needs items restored from backup become root, start a
+screen session as restoring can take a while, and create a working
+directory to restore the backups into. This allows us to be selective in
+how we restore content from backups::
+
+  sudo su -
+  screen
+  mkdir /root/backup-restore-$DATE
+  cd /root/backup-restore-$DATE
+
+At this point we can join the tar that was split by the backup cron::
+
+  bup join -r bup-<short-servername>@ci-backup-rs-ord.openstack.org: root > backup.tar
+
+At this point you may need to wait a while. These backups are stored on
+servers geographically distant from our normal servers resulting in less
+network throughput between servers than we are used to.
+
+Once the ``bup join`` is complete you will have a tar archive of that
+backup. It may be useful to list the files in the backup
+``tar -tf backup.tar`` to get an idea of what things are available. At
+this point you will probably either want to extract the entire backup::
+
+  tar -xvf backup.tar
+  ls -al
+
+Or selectively extract files::
+
+  # path/to/file needs to match the output given by tar -t
+  tar -xvf backup.tar path/to/file
+
+Note if you created your working directory in a path that is not
+excluded by bup you will want to remove that directory when your work is
+done. /root/backup-restore-* is excluded so the path above is safe.
+
 Launching new servers
 =====================
 

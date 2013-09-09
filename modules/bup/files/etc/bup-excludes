@@ -10,3 +10,4 @@
 /mnt/*
 /var/agentx/*
 /run/*
+/root/backup-restore-*
