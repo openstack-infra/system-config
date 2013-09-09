@@ -180,6 +180,7 @@
     tarball-site: tarballs.openstack.org
 
     jobs:
+      - openstack-publish-jobs
       - python-jobs
       - pypi-jobs
       - gate-hacking-integration-{target-project}:
