@@ -2061,10 +2061,12 @@ projects:
 
   - name: openstack/diskimage-builder
     check:
+      - gate-diskimage-builder-requirements
       - gate-diskimage-builder-pep8
       - gate-diskimage-builder-python26
       - gate-diskimage-builder-python27
     gate:
+      - gate-diskimage-builder-requirements
       - gate-diskimage-builder-pep8
       - gate-diskimage-builder-python26
       - gate-diskimage-builder-python27
@@ -2079,10 +2081,12 @@ projects:
 
   - name: openstack/os-apply-config
     check:
+      - gate-os-apply-config-requirements
       - gate-os-apply-config-pep8
       - gate-os-apply-config-python26
       - gate-os-apply-config-python27
     gate:
+      - gate-os-apply-config-requirements
       - gate-os-apply-config-pep8
       - gate-os-apply-config-python26
       - gate-os-apply-config-python27
@@ -2097,10 +2101,12 @@ projects:
 
   - name: openstack/os-collect-config
     check:
+      - gate-os-collect-config-requirements
       - gate-os-collect-config-pep8
       - gate-os-collect-config-python26
       - gate-os-collect-config-python27
     gate:
+      - gate-os-collect-config-requirements
       - gate-os-collect-config-pep8
       - gate-os-collect-config-python26
       - gate-os-collect-config-python27
@@ -2115,10 +2121,12 @@ projects:
 
   - name: openstack/os-refresh-config
     check:
+      - gate-os-refresh-config-requirements
       - gate-os-refresh-config-pep8
       - gate-os-refresh-config-python26
       - gate-os-refresh-config-python27
     gate:
+      - gate-os-refresh-config-requirements
       - gate-os-refresh-config-pep8
       - gate-os-refresh-config-python26
       - gate-os-refresh-config-python27
@@ -2139,9 +2147,11 @@ projects:
 
   - name: openstack/tripleo-image-elements
     check:
-      - gate-noop
+      - gate-tripleo-image-elements-requirements
+      - gate-tripleo-image-elements-pep8
     gate:
-      - gate-noop
+      - gate-tripleo-image-elements-requirements
+      - gate-tripleo-image-elements-pep8
     post:
       - tripleo-image-elements-branch-tarball
     pre-release:
