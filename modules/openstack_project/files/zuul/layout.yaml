@@ -3004,10 +3004,12 @@ projects:
 
   - name: stackforge/wsme
     check:
+      - gate-wsme-python26
       - gate-wsme-python27
       - gate-wsme-python33
       - gate-wsme-pep8
     gate:
+      - gate-wsme-python26
       - gate-wsme-python27
       - gate-wsme-python33
       - gate-wsme-pep8
@@ -3018,7 +3020,9 @@ projects:
     release:
       - wsme-tarball:
         - wsme-pypi-upload:
+          - post-mirror-python26
           - post-mirror-python27
+          - post-mirror-python33
 
   - name: openstack/governance
     check:
