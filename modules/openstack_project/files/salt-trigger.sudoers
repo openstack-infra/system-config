@@ -1,0 +1,2 @@
+# Allow jenkins user to send Salt messages to the Salt Master
+jenkins  ALL=(ALL) NOPASSWD: /usr/bin/salt-call event.fire_master*

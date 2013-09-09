@@ -344,3 +344,10 @@ user: salt
 # The range server (and optional port) that
 # serves your cluster information
 #range_server: range:80
+
+#####     Salt Reactor settings     #####
+#########################################
+# Execute tests.sls when 'jenkins' tag found
+reactor:
+  - 'jenkins':
+    - /srv/reactor/tests.sls

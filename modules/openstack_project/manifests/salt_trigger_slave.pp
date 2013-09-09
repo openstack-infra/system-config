@@ -10,4 +10,13 @@ class openstack_project::salt_trigger_slave (
     jenkins_ssh_public_key => $jenkins_ssh_public_key,
   }
 
+  file { '/etc/sudoers.d/salt-trigger':
+    ensure  => present,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0440',
+    source  => 'puppet:///modules/openstack_project/salt-trigger.sudoers',
+    replace => true,
+  }
+
 }
