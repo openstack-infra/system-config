@@ -2154,11 +2154,9 @@ projects:
 
   - name: openstack/tripleo-image-elements
     check:
-      - gate-tripleo-image-elements-requirements
-      - gate-tripleo-image-elements-pep8
+      - gate-noop
     gate:
-      - gate-tripleo-image-elements-requirements
-      - gate-tripleo-image-elements-pep8
+      - gate-noop
     post:
       - tripleo-image-elements-branch-tarball
     pre-release:
