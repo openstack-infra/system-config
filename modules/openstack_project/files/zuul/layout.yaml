@@ -808,8 +808,9 @@ projects:
     experimental:
       - gate-grenade-devstack-vm-stable
       - gate-devstack-vm-cells
-      - gate-tempest-devstack-vm-large-ops
       - gate-tempest-devstack-vm-neutron-full
+    silent:
+      - gate-tempest-devstack-vm-large-ops
     post:
       - nova-branch-tarball
       - nova-coverage
@@ -1198,6 +1199,7 @@ projects:
     experimental:
       - gate-grenade-devstack-vm-stable
       - gate-devstack-vm-cells
+    silent:
       - gate-tempest-devstack-vm-large-ops
     post:
       - python-novaclient-branch-tarball
@@ -1444,6 +1446,7 @@ projects:
       - gate-tempest-devstack-vm-heat-slow
       - gate-grenade-devstack-vm-stable
       - gate-devstack-vm-cells
+    silent:
       - gate-tempest-devstack-vm-large-ops
 
   - name: openstack-infra/devstack-gate
@@ -1464,6 +1467,7 @@ projects:
     experimental:
       - gate-grenade-devstack-vm-stable
       - gate-devstack-vm-cells
+    silent:
       - gate-tempest-devstack-vm-large-ops
 
   # This is not strictly necessary; there is currently a transitive
@@ -1509,8 +1513,9 @@ projects:
       - gate-tempest-devstack-vm-heat-slow
       - gate-grenade-devstack-vm-stable
       - gate-devstack-vm-cells
-      - gate-tempest-devstack-vm-large-ops
       - gate-tempest-devstack-vm-neutron-full
+    silent:
+      - gate-tempest-devstack-vm-large-ops
     post:
       - tempest-docs
       - tempest-branch-tarball
@@ -1623,6 +1628,7 @@ projects:
       - gate-tempest-devstack-vm-neutron
     experimental:
       - gate-devstack-vm-cells
+    silent:
       - gate-tempest-devstack-vm-large-ops
     post:
       - heat-branch-tarball
@@ -1660,6 +1666,7 @@ projects:
       - gate-tempest-devstack-vm-neutron
     experimental:
       - gate-devstack-vm-cells
+    silent:
       - gate-tempest-devstack-vm-large-ops
     post:
       - python-heatclient-branch-tarball
