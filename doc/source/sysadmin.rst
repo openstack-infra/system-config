@@ -223,7 +223,9 @@ Switching back to the server to be backed up, run::
   ssh $BUPUSER@ci-backup-rs-ord.openstack.org
   ssh $BUPUSER@ci-backup-hp-az1.openstack.org
 
-And verify the host key.  Add the "backup" class in puppet to the server
+And verify the host key.  Note this will start the bup server on the
+remote end, you will not be given a pty. Use ^D to close the connection
+cleanly.  Add the "backup" class in puppet to the server
 to be backed up.
 
 Restore from Backup
