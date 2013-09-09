@@ -243,8 +243,8 @@ job template.
 Job Caching
 -----------
 
-The Jenkins Jobs builder maintains a special YAML file in
-``~/.jenkins_jobs_cache.yml``.  This contains an MD5 of every generated XML that
+The Jenkins Jobs builder maintains, for each host, a cache [#f1]_ of previously
+configured jobs.  This contains an MD5 of every generated XML that
 it builds.  If it finds the XML is different then it will proceed to send this
 to Jenkins, otherwise it is skipped.  If a job is accidentally deleted then this
 file should be modified or removed.
@@ -279,3 +279,7 @@ The password can be obtained by logging into the Jenkins user,
 clicking on your username in the top-right, clicking on `Configure`
 and then `Show API Token`.  This API Token is your password for the
 API.
+
+.. Job Caching:: Footnotes
+.. [#f1] The cache default location is at ``~/.cache/jenkins_jobs``, which
+         can be overriden by setting the ``XDG_CACHE_HOME`` environment variable.
