@@ -97,9 +97,9 @@ processes described in this document.  So if your testing system is Jenkins
 based you can use it to simplify things.  You will still need an account to do
 this as described in the :ref:`request-account-label` section above.
 
-The OpenStack version of the Gerrit Trigger plugin for Jenkins can be found on
-`the Jenkins packaging job <https://jenkins.openstack.org/view/All/job/gerrit-trigger-plugin-package/lastSuccessfulBuild/artifact/gerrithudsontrigger/target/gerrit-trigger.hpi>`_ for it.  You can install it using the Advanced tab in the
-Jenkins Plugin Manager.
+The Gerrit Trigger plugin for Jenkins can be found on
+`the Jenkins repository <http://repo.jenkins-ci.org/repo/com/sonyericsson/hudson/plugins/gerrit/gerrit-trigger/>`_.
+You can install it using the Advanced tab in the Jenkins Plugin Manager.
 
 Once installed Jenkins will have a new `Gerrit Trigger` option in the `Manage
 Jenkins` menu.  This should be given the following options::
