@@ -243,11 +243,13 @@ job template.
 Job Caching
 -----------
 
-The Jenkins Jobs builder maintains a special YAML file in
-``~/.jenkins_jobs_cache.yml``.  This contains an MD5 of every generated XML that
-it builds.  If it finds the XML is different then it will proceed to send this
+The Jenkins Jobs builder maintains a special `cache`_ that
+contains an MD5 of every generated XML that it builds.  If
+it finds the XML is different then it will proceed to send this
 to Jenkins, otherwise it is skipped.  If a job is accidentally deleted then this
 file should be modified or removed.
+
+.. _cache: http://ci.openstack.org/jenkins-job-builder/installation.html#running
 
 Sending a Job to Jenkins
 ------------------------
