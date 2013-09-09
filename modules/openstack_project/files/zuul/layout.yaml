@@ -1348,6 +1348,12 @@ projects:
     experimental:
       - gate-grenade-devstack-vm-stable
 
+  - name: openstack-dev/cookiecutter
+    check:
+      - gate-noop
+    gate:
+      - gate-noop
+
   - name: openstack-dev/hacking
     check:
       - gate-hacking-pep8
