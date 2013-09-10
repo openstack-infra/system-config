@@ -69,6 +69,15 @@ class jenkins::slave(
     $packages = $common_packages
   }
 
+  if ($::lsbdistcodename == 'precise') {
+    apt::source { 'cloudarchive':
+      location   => 'http://ubuntu-cloud.archive.canonical.com/ubuntu',
+      repos      => 'precise-updates/havana',
+      key        => '5EDB1B62EC4926EA',
+      key_server => 'pgp.mit.edu',
+    }
+  }
+
   package { $packages:
     ensure => present,
   }
