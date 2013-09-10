@@ -1446,6 +1446,7 @@ projects:
       - gate-tempest-devstack-vm-postgres-full
       - gate-tempest-devstack-vm-neutron
       - gate-grenade-devstack-vm
+      - gate-swift-devstack-vm-functional
     gate:
       - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
@@ -1453,6 +1454,7 @@ projects:
       - gate-tempest-devstack-vm-postgres-full
       - gate-tempest-devstack-vm-neutron
       - gate-grenade-devstack-vm
+      - gate-swift-devstack-vm-functional
     experimental:
       - gate-tempest-devstack-vm-heat-slow
       - gate-grenade-devstack-vm-stable
@@ -1468,6 +1470,7 @@ projects:
       - gate-tempest-devstack-vm-postgres-full
       - gate-tempest-devstack-vm-neutron
       - gate-grenade-devstack-vm
+      - gate-swift-devstack-vm-functional
     gate:
       - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
@@ -1475,6 +1478,7 @@ projects:
       - gate-tempest-devstack-vm-postgres-full
       - gate-tempest-devstack-vm-neutron
       - gate-grenade-devstack-vm
+      - gate-swift-devstack-vm-functional
     experimental:
       - gate-grenade-devstack-vm-stable
       - gate-devstack-vm-cells
