@@ -1545,6 +1545,7 @@ projects:
       - gate-ceilometer-python27
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-postgres-full
+      - gate-tempest-devstack-vm-mongodb-full
       - gate-tempest-devstack-vm-neutron
     gate:
       - gate-ceilometer-requirements
@@ -1554,6 +1555,7 @@ projects:
       - gate-ceilometer-python27
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-postgres-full
+      - gate-tempest-devstack-vm-mongodb-full
       - gate-tempest-devstack-vm-neutron
     post:
       - ceilometer-branch-tarball
