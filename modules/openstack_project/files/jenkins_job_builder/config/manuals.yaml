@@ -89,7 +89,7 @@
       - ftp:
           site: docs.openstack.org
           source: 'doc/admin-guide-cloud/target/docbkx/webhelp/**'
-          target: 'cloud-admin'
+          target: '/'
           remove-prefix: 'doc/admin-guide-cloud/target/docbkx/webhelp/'
           excludes: '**/*.xml,**/null*'
 
