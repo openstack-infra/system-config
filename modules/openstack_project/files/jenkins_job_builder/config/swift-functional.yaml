@@ -16,17 +16,18 @@
           export DEVSTACK_GATE_TEMPEST=0
           export DEVSTACK_GATE_EXERCISES=0
 
-          function post_test_hook {
+          function gate_hook {
               cd /opt/stack/new/swift
               # Launch V2 auth tests and v1 tests after.
               bash .functests && \
                   SWIFT_TEST_CONFIG_FILE=/opt/stack/new/swift/test/sample.conf \
                       bash .functests
           }
-          export -f post_test_hook
+          export -f gate_hook
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
       - link-logs
 
     publishers:
+      - devstack-logs
       - console-log
