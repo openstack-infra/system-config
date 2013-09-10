@@ -230,6 +230,8 @@ jobs:
     branch: ^master$
   - name: gate-hacking-python33
     voting: false
+  - name: gate-hacking-pypy
+    voting: false
   - name: gate-hacking-integration-nova
     voting: false
   - name: gate-savanna-pylint
