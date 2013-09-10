@@ -15,7 +15,7 @@
 PATH=/sbin:/usr/sbin:/bin:/usr/bin
 DESC="Nodepool"
 NAME=nodepool
-DAEMON=/usr/local/bin/nodepool
+DAEMON=/usr/local/bin/nodepoold
 PIDFILE=/var/run/$NAME/$NAME.pid
 SCRIPTNAME=/etc/init.d/$NAME
 USER=nodepool
