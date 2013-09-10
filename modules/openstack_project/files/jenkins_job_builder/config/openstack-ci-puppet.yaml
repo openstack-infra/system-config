@@ -16,7 +16,9 @@
 
     builders:
       - gerrit-git-prep
-      - shell: "./tools/run-layout.sh openstack-infra config"
+      - shell: |
+          source /usr/local/jenkins/slave_scripts/select-mirror.sh openstack-infra config
+          ./tools/run-layout.sh openstack-infra config
 
     publishers:
       - console-log

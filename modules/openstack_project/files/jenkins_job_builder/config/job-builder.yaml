@@ -24,7 +24,9 @@
 
     builders:
       - gerrit-git-prep
-      - shell: "./tools/run-compare-xml.sh"
+      - shell: |
+          source /usr/local/jenkins/slave_scripts/select-mirror.sh openstack-infra jenkins-job-builder
+          ./tools/run-compare-xml.sh
 
     publishers:
       - console-log
