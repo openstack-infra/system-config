@@ -1,0 +1,89 @@
+# usig a freestyle project to work around jenkins bug:
+# https://issues.jenkins-ci.org/browse/JENKINS-14193
+
+- job-template:
+    name: 'gate-{name}-build'
+    node: precise
+
+    wrappers:
+      - timeout:
+          timeout: 30
+          fail: true
+      - timestamps
+
+    builders:
+      - gerrit-git-prep
+      - shell: |
+          #!/bin/bash -xe
+          /usr/local/jenkins/slave_scripts/maven-properties.sh
+      - inject:
+          properties-file: maven.properties
+      - maven-target:
+          maven-version: Maven3
+          pom: pom.xml
+          goals: 'clean package'
+          properties:
+            - project-version=${{PROJECT_VER}}
+
+    publishers:
+      - console-log
+
+- job-template:
+    name: '{name}-localrepo-upload'
+    node: precise
+
+    wrappers:
+      - timeout:
+          timeout: 30
+          fail: true
+      - timestamps
+
+    builders:
+      - gerrit-git-prep
+      - shell: |
+          #!/bin/bash -xe
+          /usr/local/jenkins/slave_scripts/maven-properties.sh
+      - inject:
+          properties-file: maven.properties
+      - maven-target:
+          maven-version: Maven3
+          pom: pom.xml
+          goals: 'clean package'
+          properties:
+            - project-version=${{PROJECT_VER}}
+
+    publishers:
+      - war:
+          site: 'tarballs.openstack.org'
+          warfile: 'target/{name}-${{PROJECT_VER}}.jar'
+          target: 'tarballs/ci/{name}'
+      - console-log
+
+- job-template:
+    name: '{name}-mavencentral-upload'
+    node: pypi
+
+    builders:
+      - shell: |
+          #!/bin/bash -xe
+          TAG=`echo $ZUUL_REF | sed 's/^refs.tags.//'`
+          FILENAME_BIN="{name}-$TAG.jar"
+
+          # copy plugin artifacts from tarballs to local workspace
+          rm -rf *.jar
+          curl -o $FILENAME_BIN http://{tarball-site}/ci/{name}/$FILENAME_BIN
+
+          # deploy to maven repository
+          FILENAME_POM="{name}-$TAG.pom"
+          /usr/local/jenkins/slave_scripts/mavencentral-upload.sh {name} $TAG \
+              $FILENAME_POM $FILENAME_BIN
+
+    publishers:
+      - console-log
+
+- job-group:
+    name: maven-plugin-jobs
+    jobs:
+      - 'gate-{name}-build'
+      - '{name}-localrepo-upload'
+      - '{name}-mavencentral-upload'
