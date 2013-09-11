@@ -52,4 +52,13 @@ class openstack_project::pypi_slave (
     require => File['/home/jenkins'],
   }
 
+  file { '/home/jenkins/.mavencentral-curl':
+    ensure  => present,
+    owner   => 'jenkins',
+    group   => 'jenkins',
+    mode    => '0600',
+    content => template('openstack_project/mavencentral-curl.erb'),
+    require => File['/home/jenkins'],
+  }
+
 }
