@@ -1772,11 +1772,13 @@ projects:
       - gate-python-troveclient-python26
       - gate-python-troveclient-python27
       - gate-python-troveclient-python33
+      - gate-python-troveclient-pypy
     gate:
       - gate-python-troveclient-requirements
       - gate-python-troveclient-pep8
       - gate-python-troveclient-python26
       - gate-python-troveclient-python27
+      - gate-python-troveclient-pypy
     post:
       - python-troveclient-branch-tarball
     pre-release:
