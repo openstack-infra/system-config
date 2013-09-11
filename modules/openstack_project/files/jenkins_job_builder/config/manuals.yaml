@@ -12,7 +12,7 @@
         group-id: org.openstack.docs
         artifact-id: openstack-guide
       root-pom: doc/openstack-ops/pom.xml
-      goals: 'clean generate-sources'
+      goals: 'clean generate-sources -B'
 
     publishers:
       - console-log
@@ -50,7 +50,7 @@
         group-id: org.openstack.docs
         artifact-id: openstack-guide
       root-pom: doc/user-guide/pom.xml
-      goals: 'clean generate-sources'
+      goals: 'clean generate-sources -B'
 
     publishers:
       - console-log
@@ -82,7 +82,7 @@
         group-id: org.openstack.docs
         artifact-id: openstack-guide
       root-pom: doc/admin-guide-cloud/pom.xml
-      goals: '-Dcomments.enabled=${DOC_COMMENTS_ENABLED} clean generate-sources'
+      goals: '-Dcomments.enabled=${DOC_COMMENTS_ENABLED} clean generate-sources -B'
 
     publishers:
       - console-log
@@ -114,7 +114,7 @@
         group-id: org.openstack.docs
         artifact-id: openstack-guide
       root-pom: doc/user-guide-admin/pom.xml
-      goals: '-Dcomments.enabled=${DOC_COMMENTS_ENABLED} clean generate-sources'
+      goals: '-Dcomments.enabled=${DOC_COMMENTS_ENABLED} clean generate-sources -B'
 
     publishers:
       - console-log
@@ -146,7 +146,7 @@
         group-id: org.openstack.docs
         artifact-id: openstack-guide
       root-pom: doc/src/docbkx/basic-install/pom.xml
-      goals: '-Doperating.system=yum -Dprofile.os=centos;fedora;rhel -Drelease.path.name=${DOC_RELEASE_PATH} -Dcomments.enabled=${DOC_COMMENTS_ENABLED} clean generate-sources'
+      goals: '-Doperating.system=yum -Dprofile.os=centos;fedora;rhel -Drelease.path.name=${DOC_RELEASE_PATH} -Dcomments.enabled=${DOC_COMMENTS_ENABLED} clean generate-sources -B'
 
     publishers:
       - console-log
@@ -182,7 +182,7 @@
         group-id: org.openstack.docs
         artifact-id: openstack-guide
       root-pom: doc/src/docbkx/basic-install/pom.xml
-      goals: '-Doperating.system=apt -Dprofile.os=ubuntu;debian -Drelease.path.name=${DOC_RELEASE_PATH} -Dcomments.enabled=${DOC_COMMENTS_ENABLED} clean generate-sources'
+      goals: '-Doperating.system=apt -Dprofile.os=ubuntu;debian -Drelease.path.name=${DOC_RELEASE_PATH} -Dcomments.enabled=${DOC_COMMENTS_ENABLED} clean generate-sources -B'
 
     publishers:
       - console-log
@@ -212,7 +212,7 @@
         group-id: org.openstack.docs
         artifact-id: openstack-guide
       root-pom: doc/src/docbkx/openstack-block-storage-admin/pom.xml
-      goals: '-Drelease.path.name=${DOC_RELEASE_PATH} -Dcomments.enabled=${DOC_COMMENTS_ENABLED} clean generate-sources'
+      goals: '-Drelease.path.name=${DOC_RELEASE_PATH} -Dcomments.enabled=${DOC_COMMENTS_ENABLED} clean generate-sources -B'
 
     publishers:
       - console-log
@@ -237,7 +237,7 @@
         group-id: org.openstack.docs
         artifact-id: openstack-guide
       root-pom: doc/glossary/pom.xml
-      goals: 'clean generate-sources'
+      goals: 'clean generate-sources -B'
 
     publishers:
       - console-log
@@ -269,7 +269,7 @@
         group-id: org.openstack.docs
         artifact-id: openstack-guide
       root-pom: doc/image-guide/pom.xml
-      goals: '-Drelease.path.name=${DOC_RELEASE_PATH} -Dcomments.enabled=${DOC_COMMENTS_ENABLED} clean generate-sources'
+      goals: '-Drelease.path.name=${DOC_RELEASE_PATH} -Dcomments.enabled=${DOC_COMMENTS_ENABLED} clean generate-sources -B'
 
     publishers:
       - console-log
@@ -301,7 +301,7 @@
         group-id: org.openstack.docs
         artifact-id: openstack-guide
       root-pom: doc/config-reference/pom.xml
-      goals: '-Drelease.path.name=${DOC_RELEASE_PATH} -Dcomments.enabled=${DOC_COMMENTS_ENABLED} clean generate-sources'
+      goals: '-Drelease.path.name=${DOC_RELEASE_PATH} -Dcomments.enabled=${DOC_COMMENTS_ENABLED} clean generate-sources -B'
 
     publishers:
       - console-log-post
@@ -334,7 +334,7 @@
         group-id: org.openstack.docs
         artifact-id: openstack-guide
       root-pom: doc/src/docbkx/openstack-compute-admin/pom.xml
-      goals: '-Drelease.path.name=${DOC_RELEASE_PATH} -Dcomments.enabled=${DOC_COMMENTS_ENABLED} clean generate-sources'
+      goals: '-Drelease.path.name=${DOC_RELEASE_PATH} -Dcomments.enabled=${DOC_COMMENTS_ENABLED} clean generate-sources -B'
 
     publishers:
       - console-log
@@ -366,7 +366,7 @@
         group-id: org.openstack.docs
         artifact-id: openstack-guide
       root-pom: doc/admin-guide-network/pom.xml
-      goals: '-Drelease.path.name=${DOC_RELEASE_PATH} -Dcomments.enabled=${DOC_COMMENTS_ENABLED} clean generate-sources'
+      goals: '-Drelease.path.name=${DOC_RELEASE_PATH} -Dcomments.enabled=${DOC_COMMENTS_ENABLED} clean generate-sources -B'
 
     publishers:
       - console-log
@@ -399,7 +399,7 @@
         group-id: org.openstack.docs
         artifact-id: openstack-guide
       root-pom: doc/src/docbkx/openstack-network-connectivity-admin/pom.xml
-      goals: '-Drelease.path.name=${DOC_RELEASE_PATH} -Dcomments.enabled=${DOC_COMMENTS_ENABLED} clean generate-sources'
+      goals: '-Drelease.path.name=${DOC_RELEASE_PATH} -Dcomments.enabled=${DOC_COMMENTS_ENABLED} clean generate-sources -B'
 
     publishers:
       - console-log
@@ -456,7 +456,7 @@
         group-id: org.openstack.docs
         artifact-id: openstack-guide
       root-pom: doc/high-availability-guide/pom.xml
-      goals: 'clean generate-sources'
+      goals: 'clean generate-sources -B'
 
     publishers:
       - console-log
@@ -488,7 +488,7 @@
         group-id: org.openstack.docs
         artifact-id: openstack-guide
       root-pom: doc/install-guide/pom.xml
-      goals: '-Doperating.system=yum -Dprofile.os=centos;fedora;rhel -Drelease.path.name=${DOC_RELEASE_PATH} -Dcomments.enabled=${DOC_COMMENTS_ENABLED} clean generate-sources'
+      goals: '-Doperating.system=yum -Dprofile.os=centos;fedora;rhel -Drelease.path.name=${DOC_RELEASE_PATH} -Dcomments.enabled=${DOC_COMMENTS_ENABLED} clean generate-sources -B'
 
     publishers:
       - console-log
@@ -521,7 +521,7 @@
         group-id: org.openstack.docs
         artifact-id: openstack-guide
       root-pom: doc/src/docbkx/openstack-install/pom.xml
-      goals: '-Doperating.system=yum -Dprofile.os=centos;fedora;rhel -Drelease.path.name=${DOC_RELEASE_PATH} -Dcomments.enabled=${DOC_COMMENTS_ENABLED} clean generate-sources'
+      goals: '-Doperating.system=yum -Dprofile.os=centos;fedora;rhel -Drelease.path.name=${DOC_RELEASE_PATH} -Dcomments.enabled=${DOC_COMMENTS_ENABLED} clean generate-sources -B'
 
     publishers:
       - console-log
@@ -553,7 +553,7 @@
         group-id: org.openstack.docs
         artifact-id: openstack-guide
       root-pom: doc/install-guide/pom.xml
-      goals: '-Doperating.system=zypper -Dprofile.os=opensuse -Drelease.path.name=${DOC_RELEASE_PATH} -Dcomments.enabled=${DOC_COMMENTS_ENABLED} clean generate-sources'
+      goals: '-Doperating.system=zypper -Dprofile.os=opensuse -Drelease.path.name=${DOC_RELEASE_PATH} -Dcomments.enabled=${DOC_COMMENTS_ENABLED} clean generate-sources -B'
 
     publishers:
       - console-log
@@ -585,7 +585,7 @@
         group-id: org.openstack.docs
         artifact-id: openstack-guide
       root-pom: doc/install-guide/pom.xml
-      goals: '-Doperating.system=apt -Dprofile.os=ubuntu -Drelease.path.name=${DOC_RELEASE_PATH} -Dcomments.enabled=${DOC_COMMENTS_ENABLED} clean generate-sources'
+      goals: '-Doperating.system=apt -Dprofile.os=ubuntu -Drelease.path.name=${DOC_RELEASE_PATH} -Dcomments.enabled=${DOC_COMMENTS_ENABLED} clean generate-sources -B'
 
     publishers:
       - console-log
@@ -618,7 +618,7 @@
         group-id: org.openstack.docs
         artifact-id: openstack-guide
       root-pom: doc/src/docbkx/openstack-install/pom.xml
-      goals: '-Doperating.system=apt -Dprofile.os=ubuntu -Drelease.path.name=${DOC_RELEASE_PATH} -Dcomments.enabled=${DOC_COMMENTS_ENABLED} clean generate-sources'
+      goals: '-Doperating.system=apt -Dprofile.os=ubuntu -Drelease.path.name=${DOC_RELEASE_PATH} -Dcomments.enabled=${DOC_COMMENTS_ENABLED} clean generate-sources -B'
 
     publishers:
       - console-log
@@ -649,7 +649,7 @@
         group-id: org.openstack.docs
         artifact-id: openstack-guide
       root-pom: doc/openstack-ops/pom.xml
-      goals: '-Drelease.path.name=${DOC_RELEASE_PATH} -Dcomments.enabled=${DOC_COMMENTS_ENABLED} clean generate-sources'
+      goals: '-Drelease.path.name=${DOC_RELEASE_PATH} -Dcomments.enabled=${DOC_COMMENTS_ENABLED} clean generate-sources -B'
 
     publishers:
       - console-log
@@ -680,7 +680,7 @@
         group-id: org.openstack.docs
         artifact-id: openstack-guide
       root-pom: doc/security-guide/pom.xml
-      goals: '-Drelease.path.name=${DOC_RELEASE_PATH} -Dcomments.enabled=${DOC_COMMENTS_ENABLED} clean generate-sources'
+      goals: '-Drelease.path.name=${DOC_RELEASE_PATH} -Dcomments.enabled=${DOC_COMMENTS_ENABLED} clean generate-sources -B'
 
     publishers:
       - console-log
@@ -710,7 +710,7 @@
         group-id: org.openstack.docs
         artifact-id: openstack-guide
       root-pom: doc/training-guide/pom.xml
-      goals: '-Drelease.path.name=${DOC_RELEASE_PATH} -Dcomments.enabled=${DOC_COMMENTS_ENABLED} clean generate-sources'
+      goals: '-Drelease.path.name=${DOC_RELEASE_PATH} -Dcomments.enabled=${DOC_COMMENTS_ENABLED} clean generate-sources -B'
 
     publishers:
       - console-log-post
@@ -743,7 +743,7 @@
         group-id: org.openstack.docs
         artifact-id: openstack-ops-manual
       root-pom: generated/ja/openstack-ops/pom.xml
-      goals: '-Drelease.path.name=${DOC_RELEASE_PATH} -Dcomments.enabled=${DOC_COMMENTS_ENABLED} clean generate-sources'
+      goals: '-Drelease.path.name=${DOC_RELEASE_PATH} -Dcomments.enabled=${DOC_COMMENTS_ENABLED} clean generate-sources -B'
 
     publishers:
       - console-log-post

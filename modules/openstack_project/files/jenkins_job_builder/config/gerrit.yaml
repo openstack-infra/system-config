@@ -18,7 +18,7 @@
       root-module:
         group-id: com.google.gerrit
         artifact-id: gerrit-parent
-      goals: 'clean package -Dgerrit.include-documentation=1 -X'
+      goals: 'clean package -Dgerrit.include-documentation=1 -X -B'
 
     postbuilders:
       - gerrit-postrun
@@ -51,7 +51,7 @@
       root-module:
         group-id: com.google.gerrit
         artifact-id: gerrit-parent
-      goals: 'clean package -Dgerrit.include-documentation=1 -X'
+      goals: 'clean package -Dgerrit.include-documentation=1 -X -B'
 
     postbuilders:
       - gerrit-postrun
@@ -79,7 +79,7 @@
       root-module:
         group-id: com.google.gerrit
         artifact-id: gerrit-parent
-      goals: 'clean package -Dgerrit.include-documentation=1 -X'
+      goals: 'clean package -Dgerrit.include-documentation=1 -X -B'
 
     postbuilders:
       - gerrit-postrun

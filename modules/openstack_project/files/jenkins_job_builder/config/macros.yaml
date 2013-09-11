@@ -16,12 +16,12 @@
 - builder:
     name: maven-test
     builders:
-      - shell: "mvn test"
+      - shell: "mvn test -B"
 
 - builder:
     name: maven-package
     builders:
-      - shell: "mvn package"
+      - shell: "mvn package -B"
 
 - builder:
     name: markdown-docbook
