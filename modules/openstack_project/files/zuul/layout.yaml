@@ -13,9 +13,11 @@ pipelines:
         - event: comment-added
           comment_filter: (?i)^\s*recheck(( (?:bug|lp)[\s#:]*(\d+))|( no bug))\s*$
     success:
-      verified: 1
+      gerrit:
+        verified: 1
     failure:
-      verified: -1
+      gerrit:
+        verified: -1
 
   - name: gate
     description: Changes that have been approved by core developers are enqueued in order in this pipeline, and if they pass tests in Jenkins, will be merged.
@@ -30,12 +32,15 @@ pipelines:
         - event: comment-added
           comment_filter: (?i)^\s*reverify(( (?:bug|lp)[\s#:]*(\d+))|( no bug))\s*$
     start:
-      verified: 0
+      gerrit:
+        verified: 0
     success:
-      verified: 2
-      submit: true
+      gerrit:
+        verified: 2
+        submit: true
     failure:
-      verified: -2
+      gerrit:
+        verified: -2
 
   - name: post
     description: This pipeline runs jobs that operate after each change is merged.
@@ -82,9 +87,11 @@ pipelines:
         - event: comment-added
           comment_filter: (?i)^\s*check experimental\s*$
     success:
-      force-message: true
+      gerrit:
+        force-message: true
     failure:
-      force-message: true
+      gerrit:
+        force-message: true
 
   - name: periodic
     description: Jobs in this queue are triggered on a timer.
