@@ -745,6 +745,7 @@ projects:
       - gate-tempest-devstack-vm-postgres-full
       - gate-tempest-devstack-vm-neutron
       - gate-grenade-devstack-vm
+      - gate-swift-devstack-vm-functional
     gate:
       - gate-keystone-requirements
       - gate-keystone-docs
@@ -757,6 +758,7 @@ projects:
       - gate-tempest-devstack-vm-postgres-full
       - gate-tempest-devstack-vm-neutron
       - gate-grenade-devstack-vm
+      - gate-swift-devstack-vm-functional
     experimental:
       - gate-grenade-devstack-vm-stable
       - gate-devstack-vm-cells
@@ -1407,6 +1409,7 @@ projects:
       - gate-tempest-devstack-vm-postgres-full
       - gate-tempest-devstack-vm-neutron
       - gate-grenade-devstack-vm
+      - gate-swift-devstack-vm-functional
     gate:
       - gate-pbr-docs
       - gate-pbr-pep8
@@ -1421,6 +1424,7 @@ projects:
       - gate-tempest-devstack-vm-postgres-full
       - gate-tempest-devstack-vm-neutron
       - gate-grenade-devstack-vm
+      - gate-swift-devstack-vm-functional
     experimental:
       - gate-devstack-vm-cells
     post:
@@ -1554,6 +1558,7 @@ projects:
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-postgres-full
       - gate-tempest-devstack-vm-neutron
+      - gate-swift-devstack-vm-functional
     gate:
       - gate-ceilometer-requirements
       - gate-ceilometer-docs
@@ -1563,6 +1568,7 @@ projects:
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-postgres-full
       - gate-tempest-devstack-vm-neutron
+      - gate-swift-devstack-vm-functional
     post:
       - ceilometer-branch-tarball
       - ceilometer-coverage
