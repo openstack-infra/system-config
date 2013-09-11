@@ -126,14 +126,19 @@ class Scoreboard(threading.Thread):
         project = change_record.get('project')
         bugno = int(m.group('bugno'))
         hit = Hit(project, change)
+        bug = self._get_bug(bugno)
+        bug.addHit(hit)
+        self.scores[bugno] = bug
+        self.update()
+
+    def _get_bug(self, bugno):
+        """"Get latest bug information and create bug if not in score."""
         bug = self.scores.get(bugno)
         if not bug:
             bug = Bug(bugno)
         else:
             bug.update()
-        bug.addHit(hit)
-        self.scores[bugno] = bug
-        self.update()
+        return bug
 
     def update(self):
         # Check for duplicate bugs
@@ -142,7 +147,10 @@ class Scoreboard(threading.Thread):
             if bug.duplicate_of:
                 dupes.append(bugno)
         for bugno in dupes:
-            self.scores[self.scores[bugno].duplicate_of].addHits(self.scores[bugno].hits)
+            dupno = self.scores[bugno].duplicate_of
+            bug = self._get_bug(dupno)
+            bug.addHits(self.scores[bugno].hits)
+            self.scores[dupno] = bug
             del self.scores[bugno]
 
         # Remove bugs that haven't been seen in ages
