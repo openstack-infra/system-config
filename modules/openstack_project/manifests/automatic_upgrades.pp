@@ -1,10 +1,13 @@
 # == Class: openstack_project::automatic_upgrades
 #
 class openstack_project::automatic_upgrades (
+  $origins = []
 ) {
 
   if $::osfamily == 'Debian' {
-    include unattended_upgrades
+    class { 'unattended_upgrades':
+      origins => [],
+    }
   }
   if $::osfamily == 'RedHat' {
     include packagekit::cron
