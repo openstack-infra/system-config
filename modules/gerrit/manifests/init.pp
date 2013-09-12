@@ -523,6 +523,38 @@ class gerrit(
     ensure  => absent,
   }
 
+  package { 'libmysql-java':
+    ensure => present,
+  }
+  file { '/home/gerrit2/review_site/lib/mysql-connector-java.jar':
+    ensure  => link,
+    target  => '/usr/share/java/mysql-connector-java.jar',
+    require => [
+      package['libmysql-java'],
+      file['/home/gerrit2/review_site/lib'],
+    ],
+  }
+  file { '/home/gerrit2/review_site/lib/mysql-connector-java-5.1.10.jar':
+    ensure  => absent,
+    require => file['/home/gerrit2/review_site/lib/mysql-connector-java.jar'],
+  }
+
+  package { 'libbcprov-java':
+    ensure => present,
+  }
+  file { '/home/gerrit2/review_site/lib/bcprov.jar':
+    ensure  => link,
+    target  => '/usr/share/java/bcprov.jar',
+    require => [
+      package['libbcprov-java'],
+      file['/home/gerrit2/review_site/lib'],
+    ],
+  }
+  file { '/home/gerrit2/review_site/lib/bcprov-jdk16-144.jar':
+    ensure  => absent,
+    require => file['/home/gerrit2/review_site/lib/bcprov.jar'],
+  }
+
   # Install Bouncy Castle's OpenPGP plugin and populate the contact store
   # public key file if we're using that feature.
   if ($contactstore == true) {
