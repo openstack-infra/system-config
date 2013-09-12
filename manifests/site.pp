@@ -474,6 +474,13 @@ node 'pypi.slave.openstack.org' {
   }
 }
 
+node 'salt-trigger.slave.openstack.org' {
+  include openstack_project
+  class { 'openstack_project::salt_trigger_slave':
+    jenkins_ssh_public_key => $openstack_project::jenkins_ssh_key,
+  }
+}
+
 node /^precise-?\d+.*\.slave\.openstack\.org$/ {
   include openstack_project
   include openstack_project::puppet_cron
