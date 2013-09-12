@@ -220,4 +220,10 @@ class openstack_project::review (
     replace => true,
     require => User['gerrit2'],
   }
+
+  include bup
+  bup::site { 'rs-ord':
+    backup_user   => 'bup-review',
+    backup_server => 'ci-backup-rs-ord.openstack.org',
+  }
 }
