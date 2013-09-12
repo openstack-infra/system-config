@@ -38,8 +38,8 @@ class salt (
   }
 
   service { 'salt-minion':
-    ensure    => stopped,
-    enable    => false,
+    ensure    => running,
+    enable    => true,
     require   => File['/etc/salt/minion'],
     subscribe => [
       Package['salt-minion'],
