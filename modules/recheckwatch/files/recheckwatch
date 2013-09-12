@@ -112,7 +112,14 @@ class Scoreboard(threading.Thread):
         # Import here because it needs to happen after daemonization
         import gerritlib.gerrit
         self.gerrit = gerritlib.gerrit.Gerrit(server, username, port, keyfile)
+        self._update_bug_format()
         self.update()
+
+    def _update_bug_format(self):
+        for bugno, bug in self.scores.items():
+            if not hasattr(bug, 'duplicate_of'):
+                bug.duplicate_of = None
+                bug.update()
 
     def _read(self, data):
         if data.get('type', '') != 'comment-added':
