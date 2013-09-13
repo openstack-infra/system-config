@@ -3044,7 +3044,11 @@ projects:
     post:
       - wsme-branch-tarball
     pre-release:
-      - wsme-tarball
+      - wsme-tarball:
+          - wsme-pypi-upload:
+              - post-mirror-python26
+              - post-mirror-python27
+              - post-mirror-python33
     release:
       - wsme-tarball:
         - wsme-pypi-upload:
