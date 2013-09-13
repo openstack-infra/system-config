@@ -28,7 +28,7 @@
         group-id: org.openstack.docs
         artifact-id: openstack-guide
       root-pom: openstack-api-programming/pom.xml
-      goals: 'clean generate-sources'
+      goals: 'clean generate-sources -B'
 
     publishers:
       - console-log
@@ -55,7 +55,7 @@
         group-id: org.openstack.docs
         artifact-id: openstack-guide
       root-pom: api-quick-start/pom.xml
-      goals: 'clean generate-sources'
+      goals: 'clean generate-sources -B'
 
     publishers:
       - console-log
@@ -83,7 +83,7 @@
         group-id: org.openstack.docs
         artifact-id: openstack-guide
       root-pom: api-ref/pom.xml
-      goals: 'clean generate-sources'
+      goals: 'clean generate-sources -B'
 
     publishers:
       - console-log
@@ -143,7 +143,7 @@
         group-id: org.openstack.docs
         artifact-id: openstack-guide
       root-pom: openstack-image-service-api/src/markdown/pom.xml
-      goals: 'clean generate-sources'
+      goals: 'clean generate-sources -B'
 
     publishers:
       - console-log
@@ -171,7 +171,7 @@
         group-id: org.openstack.docs
         artifact-id: openstack-guide
       root-pom: doc/pom.xml
-      goals: 'clean generate-sources'
+      goals: 'clean generate-sources -B'
 
     publishers:
       - console-log
@@ -196,7 +196,7 @@
         group-id: org.openstack.docs
         artifact-id: openstack-guide
       root-pom: doc/pom.xml
-      goals: 'clean generate-sources'
+      goals: 'clean generate-sources -B'
 
     publishers:
       - console-log
@@ -222,7 +222,7 @@
         group-id: org.openstack.docs
         artifact-id: openstack-object-api-guide
       root-pom: openstack-object-storage-dev/pom.xml
-      goals: 'clean generate-sources'
+      goals: 'clean generate-sources -B'
 
     publishers:
       - console-log
@@ -248,7 +248,7 @@
         group-id: org.openstack.docs
         artifact-id: openstack-guide
       root-pom: openstack-compute-api-2/pom.xml
-      goals: 'clean generate-sources'
+      goals: 'clean generate-sources -B'
 
     publishers:
       - console-log
@@ -292,7 +292,7 @@
         group-id: org.openstack.docs
         artifact-id: openstack-guide
       root-pom: v2/pom.xml
-      goals: 'clean generate-sources'
+      goals: 'clean generate-sources -B'
 
     publishers:
       - console-log
@@ -319,7 +319,7 @@
         group-id: org.openstack.identity
         artifact-id: docs
       root-pom: openstack-identity-api/v2.0/pom.xml
-      goals: 'clean generate-sources'
+      goals: 'clean generate-sources -B'
 
     publishers:
       - console-log
@@ -358,7 +358,7 @@
         group-id: org.openstack.docs
         artifact-id: openstack-guide
       root-pom: openstack-identity-api/v3/pom.xml
-      goals: 'clean generate-sources'
+      goals: 'clean generate-sources -B'
 
     publishers:
       - console-log
@@ -386,7 +386,7 @@
         group-id: org.openstack.docs
         artifact-id: openstack-guide
       root-pom: openstack-image-service-api/pom.xml
-      goals: 'clean generate-sources'
+      goals: 'clean generate-sources -B'
 
     publishers:
       - console-log
