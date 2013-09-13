@@ -3,13 +3,31 @@
       lang="en">
   <HEAD>
 <style type="text/css">
+#container {
+    width: 1024px;
+}
 #pipeline-container {
-    max-width: 950px;
+    max-width: 1024px;
     margin: 0 auto;
+}
+.change-container {
+    padding-bottom: 10px;
+}
+.graph-left {
+    background-image: url('line-l.png');
+    background-repeat: repeat-y;
+}
+.graph-right {
+    background-image: url('line-r.png');
+    background-repeat: repeat-y;
+}
+.graph-left-right {
+    background-image: url('line-lr.png');
+    background-repeat: repeat-y;
 }
 .change {
     border: 1px solid #95c7db;
-    margin-top: 10px;
+    margin-left: 36px;
     padding: 2px;
 }
 .change > .header {
@@ -35,17 +53,12 @@
 }
 .pipeline {
     float: left;
-    width: 25em;
+    width: 333px;
     padding: 4px;
 }
 .pipeline > .header {
     background: #0000cc;
     color: white;
-}
-.arrow {
-    text-align: center;
-    font-size: 16pt;
-    line-height: 1.0;
 }
 .result {
     float: right;

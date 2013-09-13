@@ -80,19 +80,19 @@ function count_changes(pipeline) {
 
 function get_sparkline_url(pipeline_name) {
     if (!(pipeline_name in window.zuul_sparkline_urls)) {
-	window.zuul_sparkline_urls[pipeline_name] = $.fn.graphite.geturl({
-	    url: "http://graphite.openstack.org/render/",
-	    from: "-8hours",
-	    width: 100,
-	    height: 16,
-	    margin: 0,
-	    hideLegend: true,
-	    hideAxes: true,
-	    hideGrid: true,
-	    target: [
-		"color(stats.gauges.zuul.pipeline."+pipeline_name+".current_changes, '6b8182')",
-	    ],
-	});
+        window.zuul_sparkline_urls[pipeline_name] = $.fn.graphite.geturl({
+            url: "http://graphite.openstack.org/render/",
+            from: "-8hours",
+            width: 100,
+            height: 16,
+            margin: 0,
+            hideLegend: true,
+            hideAxes: true,
+            hideGrid: true,
+            target: [
+                "color(stats.gauges.zuul.pipeline."+pipeline_name+".current_changes, '6b8182')",
+            ],
+        });
     }
     return window.zuul_sparkline_urls[pipeline_name];
 }
@@ -134,11 +134,9 @@ function format_pipeline(data) {
                 }
                 html += name + '</a></div>';
             }
+            graph = [];
             $.each(head, function(change_i, change) {
-                if (change_i > 0) {
-                    html += '<div class="arrow">&uarr;</div>';
-                }
-                html += format_change(change);
+                html += format_change(head[change_i], head[change_i+1], graph);
             });
             html += '</div>'
         });
@@ -148,8 +146,47 @@ function format_pipeline(data) {
     return html;
 }
 
-function format_change(change) {
-    var html = '<div class="change"><div class="header">';
+function safe_id(id) {
+    return id.replace(',', '_');
+}
+
+function remove(l, value) {
+    l.splice(l.indexOf(value), 1);
+}
+
+function format_change(change, next_change, graph) {
+    var container_class = 'change-container';
+
+    if (next_change) {
+        if (graph.indexOf(change['id']) > -1) {
+            remove(graph, change['id']);
+        }
+        $.each(change['items_behind'], function(i, id) {
+            graph.push(id);
+        });
+        if (graph.length == 1) {
+            if (next_change['failing_reasons'].length > 0) {
+                container_class += ' graph-right';
+            } else {
+                container_class += ' graph-left';
+            }
+        } else if (graph.length == 2) {
+            container_class += ' graph-left-right';
+        }
+    }
+
+    var html = '<div class="'+container_class+'">';
+
+    if (change['failing_reasons'] && change['failing_reasons'].length > 0) {
+        html += '<img src="red.png" style="float:left;"/>';
+    } else {
+        html += '<img src="green.png" style="float:left;"/>';
+        if (graph.length == 2) {
+            html += '<img src="line-angle.png" style="float:left;"/>';
+        }
+    }
+
+    html += '<div class="change" id="'+safe_id(change['id'])+'"><div class="header">';
 
     html += '<span class="project">'+change['project']+'</span>';
     var id = change['id'];
@@ -209,7 +246,7 @@ function format_change(change) {
         html += '</span>';
     });
 
-    html += '</div></div>';
+    html += '</div></div></div>';
     return html;
 }
 
@@ -275,7 +312,7 @@ function update_graphs() {
         var parts = url.split('#');
         newimg.src = parts[0] + '#' + new Date().getTime();
         $(newimg).load(function (x) {
-	    window.zuul_sparkline_urls[name] = newimg.src;
+            window.zuul_sparkline_urls[name] = newimg.src;
         });
     });
 }
