@@ -68,38 +68,86 @@ function is_hide_project(project) {
     return hide;
 }
 
-function count_changes(pipeline) {
+function remove(l, idx) {
+    l[idx] = null;
+    while (l[l.length-1] === null) {
+        l.pop();
+    }
+}
+
+function create_graph(pipeline) {
     var count = 0;
+    var pipeline_max_graph_columns = 1;
     $.each(pipeline['change_queues'], function(change_queue_i, change_queue) {
+        var graph = [];
+        var max_graph_columns = 1;
+        var changes = [];
+        var last_graph_length = 0;
         $.each(change_queue['heads'], function(head_i, head) {
-            count += head.length;
+            $.each(head, function(change_i, change) {
+                changes[change['id']] = change;
+                change['_graph_position'] = change_i;
+            });
         });
+        $.each(change_queue['heads'], function(head_i, head) {
+            $.each(head, function(change_i, change) {
+                count += 1;
+                var idx = graph.indexOf(change['id']);
+                if (idx > -1) {
+                    change['_graph_index'] = idx;
+                    remove(graph, idx);
+                } else {
+                    change['_graph_index'] = 0;
+                }
+                change['_graph_branches'] = [];
+                change['_graph'] = [];
+                change['items_behind'].sort(function(a, b) {
+                    return changes[b]['_graph_position'] - changes[a]['_graph_position'];
+                });
+                $.each(change['items_behind'], function(i, id) {
+                    graph.push(id);
+                    if (last_graph_length>0 && graph.length>last_graph_length)
+                        change['_graph_branches'].push(graph.length-1);
+                });
+                if (graph.length > max_graph_columns) {
+                    max_graph_columns = graph.length;
+                }
+                if (graph.length > pipeline_max_graph_columns) {
+                    pipeline_max_graph_columns = graph.length;
+                }
+                change['_graph'] = graph.slice(0);  // make a copy
+                last_graph_length = graph.length;
+            });
+        });
+        change_queue['_graph_columns'] = max_graph_columns;
     });
+    pipeline['_graph_columns'] = pipeline_max_graph_columns;
     return count;
 }
 
 function get_sparkline_url(pipeline_name) {
     if (!(pipeline_name in window.zuul_sparkline_urls)) {
-	window.zuul_sparkline_urls[pipeline_name] = $.fn.graphite.geturl({
-	    url: "http://graphite.openstack.org/render/",
-	    from: "-8hours",
-	    width: 100,
-	    height: 16,
-	    margin: 0,
-	    hideLegend: true,
-	    hideAxes: true,
-	    hideGrid: true,
-	    target: [
-		"color(stats.gauges.zuul.pipeline."+pipeline_name+".current_changes, '6b8182')",
-	    ],
-	});
+        window.zuul_sparkline_urls[pipeline_name] = $.fn.graphite.geturl({
+            url: "http://graphite.openstack.org/render/",
+            from: "-8hours",
+            width: 100,
+            height: 16,
+            margin: 0,
+            hideLegend: true,
+            hideAxes: true,
+            hideGrid: true,
+            target: [
+                "color(stats.gauges.zuul.pipeline."+pipeline_name+".current_changes, '6b8182')",
+            ],
+        });
     }
     return window.zuul_sparkline_urls[pipeline_name];
 }
 
 function format_pipeline(data) {
-    var count = count_changes(data);
-    var html = '<div class="pipeline"><h3 class="subhead">'+
+    var count = create_graph(data);
+    var width = (16 * data['_graph_columns']) + 300;
+    var html = '<div class="pipeline" style="width:'+width+'"><h3 class="subhead">'+
         data['name'];
 
     html += '<span class="count"><img src="' + get_sparkline_url(data['name']);
@@ -134,13 +182,11 @@ function format_pipeline(data) {
                 }
                 html += name + '</a></div>';
             }
+            html += '<table>'
             $.each(head, function(change_i, change) {
-                if (change_i > 0) {
-                    html += '<div class="arrow">&uarr;</div>';
-                }
-                html += format_change(change);
+                html += format_change(change, change_queue);
             });
-            html += '</div>'
+            html += '</table></div>'
         });
     });
 
@@ -148,8 +194,38 @@ function format_pipeline(data) {
     return html;
 }
 
-function format_change(change) {
-    var html = '<div class="change"><div class="header">';
+function safe_id(id) {
+    return id.replace(',', '_');
+}
+
+function format_change(change, change_queue) {
+    var html = '<tr>';
+
+    for (var i=0; i<change_queue['_graph_columns']; i++) {
+        var cls = 'graph';
+        if (i < change['_graph'].length && change['_graph'][i] !== null) {
+            cls += ' line';
+        }
+        html += '<td class="'+cls+'">';
+        if (i == change['_graph_index']) {
+            if (change['failing_reasons'] && change['failing_reasons'].length > 0) {
+                html += '<img src="red.png" title="Failing because '+
+                    change['failing_reasons'].join(', ')+'"/>';
+            } else {
+                html += '<img src="green.png" title="Succeeding"/>';
+            }
+        }
+        if (change['_graph_branches'].indexOf(i) != -1) {
+            if (change['_graph_branches'].indexOf(i) == change['_graph_branches'].length-1)
+                html += '<img src="line-angle.png"/>';
+            else
+                html += '<img src="line-t.png"/>';
+        }
+        html += '</td>';
+    }
+
+    html += '<td class="change-container">';
+    html += '<div class="change" id="'+safe_id(change['id'])+'"><div class="header">';
 
     html += '<span class="project">'+change['project']+'</span>';
     var id = change['id'];
@@ -209,7 +285,7 @@ function format_change(change) {
         html += '</span>';
     });
 
-    html += '</div></div>';
+    html += '</div></div></td></tr>';
     return html;
 }
 
@@ -275,7 +351,7 @@ function update_graphs() {
         var parts = url.split('#');
         newimg.src = parts[0] + '#' + new Date().getTime();
         $(newimg).load(function (x) {
-	    window.zuul_sparkline_urls[name] = newimg.src;
+            window.zuul_sparkline_urls[name] = newimg.src;
         });
     });
 }
