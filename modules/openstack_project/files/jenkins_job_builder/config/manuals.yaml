@@ -463,7 +463,7 @@
       - ftp:
           site: docs.openstack.org
           source: 'doc/high-availability-guide/target/docbkx/webhelp/**'
-          target: 'trunk'
+          target: ''
           remove-prefix: 'doc/high-availability-guide/target/docbkx/webhelp/'
           excludes: '**/*.xml,**/null*'
 
