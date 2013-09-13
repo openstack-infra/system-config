@@ -102,6 +102,7 @@ class Scoreboard(threading.Thread):
         self.template_dir = config.get('recheckwatch', 'template_dir')
         self.output_file = config.get('recheckwatch', 'output_file')
         self.age = config.getint('recheckwatch', 'age')
+        self.closed_age = config.getint('recheckwatch', 'closed_age')
         self.regex = re.compile(config.get('recheckwatch', 'regex'))
 
         if os.path.exists(self.pickle_file):
@@ -161,10 +162,13 @@ class Scoreboard(threading.Thread):
             del self.scores[bugno]
 
         # Remove bugs that haven't been seen in ages
+        # Or closed bugs older then self.closed_age
         to_remove = []
         now = datetime.datetime.utcnow()
         for bugno, bug in self.scores.items():
-            if bug.last_seen < now-datetime.timedelta(days=self.age):
+            if (bug.last_seen < now-datetime.timedelta(days=self.age) or
+                    (bug.is_closed() and
+                     bug.last_seen < now-datetime.timedelta(days=self.closed_age))):
                 to_remove.append(bugno)
         for bugno in to_remove:
             del self.scores[bugno]
