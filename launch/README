@@ -28,7 +28,10 @@ To launch a node in the OpenStack Jenkins account (slave nodes)::
   nova flavor-list
   export RAM=8192
   sudo puppet cert generate $FQDN
-  ./launch-node.py $FQDN --image "$IMAGE" --ram $RAM
+  ./launch-node.py $FQDN --image "$IMAGE" --ram $RAM --salt
+
+The --salt option tells the script to automatically configure and enroll
+the server as a minion on the salt master.
 
 If you are launching a replacement server, you may skip the generate
 step and specify the name of an existing puppet cert (as long as the
