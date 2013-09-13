@@ -213,6 +213,10 @@ class openstack_project::static (
     ensure => present,
   }
 
+  package { 'yui-compressor':
+    ensure => present,
+  }
+
   file { '/srv/static/status/index.html':
     ensure  => present,
     source  => 'puppet:///modules/openstack_project/status/index.html',
@@ -245,11 +249,13 @@ class openstack_project::static (
     source   => 'https://github.com/mathiasbynens/jquery-visibility.git',
   }
 
-  file { '/srv/static/status/jquery-visibility.min.js':
-    ensure  => link,
-    target  => '/opt/jquery-visibility/jquery-visibility.min.js',
-    require => [File['/srv/static/status'],
-                Vcsrepo['/opt/jquery-visibility']],
+  exec { 'install_jquery-visibility' :
+    command     => 'yui-compressor -o /srv/static/status/jquery-visibility.min.js /opt/jquery-visibility/jquery-visibility.js',
+    path        => '/bin:/usr/bin',
+    refreshonly => true,
+    subscribe   => Vcsrepo['/opt/jquery-visibility'],
+    require     => [File['/srv/static/status'],
+                    Vcsrepo['/opt/jquery-visibility']],
   }
 
   vcsrepo { '/opt/jquery-graphite':
