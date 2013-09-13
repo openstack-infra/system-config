@@ -1,6 +1,9 @@
 # == Class: unattended_upgrades
 #
-class unattended_upgrades($ensure = present) {
+class unattended_upgrades(
+  $ensure = present,
+  $origins = []
+) {
   package { 'unattended-upgrades':
     ensure => $ensure,
   }
@@ -23,7 +26,7 @@ class unattended_upgrades($ensure = present) {
     owner   => 'root',
     group   => 'root',
     mode    => '0444',
-    source  => 'puppet:///modules/unattended_upgrades/50unattended-upgrades',
+    content => template('unattended_upgrades/50unattended-upgrades.erb'),
     replace => true,
   }
 }

@@ -10,7 +10,9 @@ class openstack_project::slave (
 ) {
   include openstack_project
   include openstack_project::tmpcleanup
-  include openstack_project::automatic_upgrades
+  class { 'openstack_project::automatic_upgrades':
+    origins => ['LP-PPA-saltstack-salt precise'],
+  }
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [],
     certname                  => $certname,
