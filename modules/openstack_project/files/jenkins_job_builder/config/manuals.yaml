@@ -243,9 +243,9 @@
       - console-log
       - ftp:
           site: docs.openstack.org
-          source: 'doc/glossary/target/docbkx/webhelp/openstack-glossary/**'
-          target: 'glossary'
-          remove-prefix: 'doc/glossary/target/docbkx/webhelp/openstack-glossary/'
+          source: 'doc/glossary/target/docbkx/webhelp/**'
+          target: '/'
+          remove-prefix: 'doc/glossary/target/docbkx/webhelp/'
           excludes: '**/*.xml,**/null*'
 
 # in zuul/layout.yaml specified to only run against master branch
