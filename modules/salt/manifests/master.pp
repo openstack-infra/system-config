@@ -49,12 +49,36 @@ class salt::master {
 
   file { '/etc/salt/master':
     ensure  => present,
-    owner   => 'root',
-    group   => 'root',
+    owner   => 'salt',
+    group   => 'salt',
     mode    => '0644',
     content => template('salt/master.erb'),
     replace => true,
     require => Package['salt-master'],
+  }
+
+  file { '/srv/reactor':
+    ensure  => directory,
+    owner   => 'salt',
+    group   => 'salt',
+    mode    => '0755',
+    require => [
+      Package['salt-master'],
+      User['salt'],
+    ],
+  }
+
+  file { '/srv/reactor/tests.sls':
+    ensure  => present,
+    owner   => 'salt',
+    group   => 'salt',
+    mode    => '0644',
+    content => template('salt/tests.reactor.erb'),
+    replace => true,
+    require => [
+      Package['salt-master'],
+      File['/srv/reactor'],
+    ],
   }
 
   file { '/etc/salt/pki':
