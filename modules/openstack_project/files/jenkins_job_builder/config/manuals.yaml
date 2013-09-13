@@ -462,9 +462,9 @@
       - console-log
       - ftp:
           site: docs.openstack.org
-          source: 'doc/high-availability-guide/target/docbkx/webhelp/trunk/**'
+          source: 'doc/high-availability-guide/target/docbkx/webhelp/**'
           target: 'trunk'
-          remove-prefix: 'doc/high-availability-guide/target/docbkx/webhelp/trunk/'
+          remove-prefix: 'doc/high-availability-guide/target/docbkx/webhelp/'
           excludes: '**/*.xml,**/null*'
 
 # in zuul/layout.yaml specified to only run against master
