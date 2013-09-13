@@ -7,7 +7,7 @@ class openstack_project::salt_trigger_slave (
 ) {
 
   class { 'openstack_project::slave':
-    jenkins_ssh_public_key => $jenkins_ssh_public_key,
+    ssh_key => $jenkins_ssh_public_key,
   }
 
   file { '/etc/sudoers.d/salt-trigger':
