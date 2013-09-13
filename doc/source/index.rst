@@ -23,13 +23,13 @@ Contents:
 
    * :doc:`third_party`
    * :doc:`stackforge`
+   * :doc:`running-your-own`
 
 .. toctree::
    :maxdepth: 2
 
    project
    sysadmin
-   running-your-own
    systems
 
 .. toctree::
