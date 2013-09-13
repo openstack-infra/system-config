@@ -46,7 +46,7 @@ class openstack_project::puppetmaster (
   file { '/root/ci-launch':
     ensure => directory,
     owner  => 'root',
-    group  => 'root',
+    group  => 'admin',
     mode   => '0750',
     }
 

@@ -2,10 +2,11 @@ Create Server
 =============
 
 Note that these instructions assume you're working from this
-directory on an updated local clone of the repository on the puppetmaster, and
-that your account is a member of the puppet and salt groups for access
-to their respective keys::
+directory on an updated local clone of the repository on the
+puppetmaster, and that your account is a member of the admin, puppet
+and salt groups for access to their respective keys::
 
+  sudo adduser $(whoami) admin
   sudo adduser $(whoami) puppet
   sudo adduser $(whoami) salt
 
