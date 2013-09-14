@@ -151,19 +151,21 @@ function format_pipeline(data) {
 function format_change(change) {
     var html = '<div class="change"><div class="header">';
 
-    html += '<span class="project">'+change['project']+'</span>';
+    html += '<span class="project">' + change['project'] + '</span>';
     var id = change['id'];
     var url = change['url'];
-    if (id.length == 40) {
-        id = id.substr(0,7);
-    }
-    html += '<span class="changeid">';
-    if (url != null) {
-        html += '<a href="'+url+'">';
-    }
-    html += id;
-    if (url != null) {
-        html += '</a>';
+    if (id !== "None") {
+        if (id.length == 40) {
+            id = id.substr(0,7);
+        }
+        html += '<span class="changeid">';
+        if (url !== null) {
+            html += '<a href="'+url+'">';
+        }
+        html += id;
+        if (url !== null) {
+            html += '</a>';
+        }
     }
 
     html += '</span><span class="time">';
@@ -173,8 +175,8 @@ function format_change(change) {
     $.each(change['jobs'], function(i, job) {
         result = job['result'];
         var result_class = "result";
-        if (result == null) {
-            if (job['url'] != null) {
+        if (result === null) {
+            if (job['url'] !== null) {
                 result = 'in progress';
             } else {
                 result = 'queued';
@@ -189,15 +191,15 @@ function format_change(change) {
             result_class += " result_unstable";
         }
         html += '<span class="job">';
-        if (job['url'] != null) {
+        if (job['url'] !== null) {
             html += '<a href="'+job['url']+'">';
         }
         html += job['name'];
-        if (job['url'] != null) {
+        if (job['url'] !== null) {
             html += '</a>';
         }
         html += ': ';
-        if (job['result'] == null && job['url'] != null) {
+        if (job['result'] === null && job['url'] !== null) {
             html += format_progress(job['elapsed_time'], job['remaining_time']);
         } else {
             html += '<span class="result '+result_class+'">'+result+'</span>';
