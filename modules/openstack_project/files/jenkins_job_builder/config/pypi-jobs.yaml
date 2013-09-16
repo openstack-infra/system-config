@@ -3,18 +3,9 @@
     node: pypi
 
     builders:
+      - gerrit-git-prep
       - shell: |
-          #!/bin/bash -xe
-          TAG=`echo $ZUUL_REF | sed 's/^refs.tags.//'`
-          FILENAME="{name}-$TAG.tar.gz"
-
-          rm -rf *tar.gz
-          curl --fail -o $FILENAME http://{tarball-site}/{name}/$FILENAME
-          # Make sure we actually got a gzipped file
-          file -b $FILENAME | grep gzip
-
-      - shell: |
-          /usr/local/jenkins/slave_scripts/pypi-upload.sh {name}
+          /usr/local/jenkins/slave_scripts/pypi-upload.sh {name} {tarball-site}
 
     publishers:
       - console-log
