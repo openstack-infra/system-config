@@ -40,6 +40,10 @@ openstack-infra:
     branches:
       - master
       - feature/gearman
+      - zuul
+      - template
+      - overview
+      - logstash
 
 openstack-doc:
     events:
