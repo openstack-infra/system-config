@@ -800,6 +800,7 @@ projects:
       - gate-tempest-devstack-vm-cinder
       - gate-tempest-devstack-vm-postgres-full
       - gate-tempest-devstack-vm-neutron
+      - gate-tempest-devstack-vm-large-ops
       - gate-grenade-devstack-vm
       - gate-nova-pylint
     gate:
@@ -819,7 +820,6 @@ projects:
       - gate-devstack-vm-cells
       - gate-tempest-devstack-vm-neutron-full
     silent:
-      - gate-tempest-devstack-vm-large-ops
     post:
       - nova-branch-tarball
       - nova-coverage
@@ -1191,6 +1191,7 @@ projects:
       - gate-tempest-devstack-vm-postgres-full
       - gate-tempest-devstack-vm-cinder
       - gate-tempest-devstack-vm-neutron
+      - gate-tempest-devstack-vm-large-ops
       - gate-grenade-devstack-vm
     gate:
       - gate-python-novaclient-requirements
@@ -1209,7 +1210,6 @@ projects:
       - gate-grenade-devstack-vm-stable
       - gate-devstack-vm-cells
     silent:
-      - gate-tempest-devstack-vm-large-ops
     post:
       - python-novaclient-branch-tarball
       - python-novaclient-coverage
@@ -1456,6 +1456,7 @@ projects:
       - gate-tempest-devstack-vm-cinder
       - gate-tempest-devstack-vm-postgres-full
       - gate-tempest-devstack-vm-neutron
+      - gate-tempest-devstack-vm-large-ops
       - gate-grenade-devstack-vm
       - gate-swift-devstack-vm-functional
     gate:
@@ -1471,7 +1472,6 @@ projects:
       - gate-grenade-devstack-vm-stable
       - gate-devstack-vm-cells
     silent:
-      - gate-tempest-devstack-vm-large-ops
 
   - name: openstack-infra/devstack-gate
     check:
@@ -1480,6 +1480,7 @@ projects:
       - gate-tempest-devstack-vm-cinder
       - gate-tempest-devstack-vm-postgres-full
       - gate-tempest-devstack-vm-neutron
+      - gate-tempest-devstack-vm-large-ops
       - gate-grenade-devstack-vm
       - gate-swift-devstack-vm-functional
     gate:
@@ -1494,7 +1495,6 @@ projects:
       - gate-grenade-devstack-vm-stable
       - gate-devstack-vm-cells
     silent:
-      - gate-tempest-devstack-vm-large-ops
 
   # This is not strictly necessary; there is currently a transitive
   # relationship between g-t-devstack-vm,
@@ -1524,6 +1524,7 @@ projects:
       - gate-tempest-devstack-vm-postgres-full
       - gate-tempest-devstack-vm-cinder
       - gate-tempest-devstack-vm-neutron
+      - gate-tempest-devstack-vm-large-ops
       - gate-grenade-devstack-vm
     gate:
       - gate-tempest-requirements
@@ -1541,7 +1542,6 @@ projects:
       - gate-devstack-vm-cells
       - gate-tempest-devstack-vm-neutron-full
     silent:
-      - gate-tempest-devstack-vm-large-ops
     post:
       - tempest-docs
       - tempest-branch-tarball
@@ -1645,6 +1645,7 @@ projects:
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-postgres-full
       - gate-tempest-devstack-vm-neutron
+      - gate-tempest-devstack-vm-large-ops
     gate:
       - gate-heat-requirements
       - gate-heat-pep8
@@ -1657,7 +1658,6 @@ projects:
     experimental:
       - gate-devstack-vm-cells
     silent:
-      - gate-tempest-devstack-vm-large-ops
     post:
       - heat-branch-tarball
       - heat-coverage
@@ -1683,6 +1683,7 @@ projects:
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-postgres-full
       - gate-tempest-devstack-vm-neutron
+      - gate-tempest-devstack-vm-large-ops
     gate:
       - gate-python-heatclient-requirements
       - gate-python-heatclient-pep8
@@ -1695,7 +1696,6 @@ projects:
     experimental:
       - gate-devstack-vm-cells
     silent:
-      - gate-tempest-devstack-vm-large-ops
     post:
       - python-heatclient-branch-tarball
       - python-heatclient-coverage
