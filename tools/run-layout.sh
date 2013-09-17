@@ -44,6 +44,7 @@ tox -e compare-xml-new
 
 cd ..
 find jenkins-job-builder/.test/new/out/ -printf "%f\n" > job-list.txt
+cat ../tools/non-jjb-jobs.txt >> job-list.txt
 
 cd zuul
 tox -e venv -- zuul-server -c etc/zuul.conf-sample -l ../../modules/openstack_project/files/zuul/layout.yaml -t ../job-list.txt

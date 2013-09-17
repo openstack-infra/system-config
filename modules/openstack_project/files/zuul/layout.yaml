@@ -89,9 +89,13 @@ pipelines:
     success:
       gerrit:
         force-message: true
+      smtp:
+        to: joshua.hesketh@gmail.com
     failure:
       gerrit:
         force-message: true
+      smtp:
+        to: joshua.hesketh@gmail.com
 
   - name: periodic
     description: Jobs in this queue are triggered on a timer.
@@ -284,6 +288,8 @@ jobs:
   - name: gate-python-tuskarclient-pylint
     voting: false
   - name: gate-python-tuskarclient-python33
+    voting: false
+  - name: gate-real-db-upgrade_nova_mysql
     voting: false
 
 projects:
@@ -822,6 +828,7 @@ projects:
       - gate-grenade-devstack-vm-stable
       - gate-devstack-vm-cells
       - gate-tempest-devstack-vm-neutron-full
+      - gate-real-db-upgrade_nova_mysql
     post:
       - nova-branch-tarball
       - nova-coverage
