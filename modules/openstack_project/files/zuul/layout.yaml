@@ -77,6 +77,12 @@ pipelines:
         - event: patchset-created
         - event: comment-added
           comment_filter: (?i)^\s*recheck(( (?:bug|lp)[\s#:]*(\d+))|( no bug))\s*$
+    success:
+      smtp:
+        to: joshua.hesketh@gmail.com
+    failure:
+      smtp:
+        to: joshua.hesketh@gmail.com
 
   - name: experimental
     description: On-demand pipeline for requesting a run against a set of jobs that are not yet gating. Leave review comment of "check experimental" to run jobs in this pipeline.
@@ -284,6 +290,8 @@ jobs:
   - name: gate-python-tuskarclient-pylint
     voting: false
   - name: gate-python-tuskarclient-python33
+    voting: false
+  - name: gate-real-db-upgrade_nova_mysql
     voting: false
 
 projects:
@@ -820,6 +828,7 @@ projects:
       - gate-tempest-devstack-vm-neutron-full
     silent:
       - gate-tempest-devstack-vm-large-ops
+      - gate-real-db-upgrade_nova_mysql
     post:
       - nova-branch-tarball
       - nova-coverage
