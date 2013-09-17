@@ -1334,3 +1334,21 @@
 
     jobs:
       - python-jobs
+
+- project:
+    name: manila
+    github-org: stackforge
+    node: precise
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - python-jobs
+
+- project:
+    name: python-manilaclient
+    github-org: stackforge
+    node: precise
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - python-jobs
