@@ -3185,3 +3185,29 @@ projects:
       - rally-tarball
     release:
       - rally-tarball
+
+  - name: stackforge/manila
+    check:
+      - gate-manila-pep8
+      - gate-manila-python26
+      - gate-manila-python27
+    gate:
+      - gate-manila-pep8
+      - gate-manila-python26
+      - gate-manila-python27
+    post:
+      - manila-branch-tarball
+      - manila-coverage
+
+  - name: stackforge/python-manilaclient
+    check:
+      - gate-python-manilaclient-pep8
+      - gate-python-manilaclient-python26
+      - gate-python-manilaclient-python27
+    gate:
+      - gate-python-manilaclient-pep8
+      - gate-python-manilaclient-python26
+      - gate-python-manilaclient-python27
+    post:
+      - python-manilaclient-branch-tarball
+      - python-manilaclient-coverage
