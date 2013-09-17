@@ -6,33 +6,24 @@
 # resulting environment at the end so that we have a record of exactly
 # what packages we ended up testing.
 #
-# Usage: run-tox.sh PYTHONVERSION
+# Usage: run-tox.sh VENV
 #
-# Where PYTHONVERSION is the numeric version identifier used as a suffix
-# in the tox.ini file.  E.g., "26" or "27" for "py26"/"jenkins26" or
-# "py27"/"jenkins27" respectively.
+# Where VENV is the name of the tox environment to run (specified in the
+# project's tox.ini file).
 
-version=$1
+venv=$1
 org=$2
 project=$3
 
-if [[ -z "$version" || -z "$org" || -z "$project" ]]
+if [[ -z "$venv" || -z "$org" || -z "$project" ]]
 then
-  echo "Usage: $? VERSION ORG PROJECT"
+  echo "Usage: $? VENV ORG PROJECT"
   echo
-  echo "VERSION: The tox environment python version (eg '27')"
-  echo "ORG: The project organization (eg 'openstack')"
+  echo "VENV: The tox environment to run (eg 'python27')"
+  echo "ORG: The project organization (eg 'stackforge')"
   echo "PROJECT: The project name (eg 'nova')"
   exit 1
 fi
-
-venv=py$version
-
-export NOSE_WITH_XUNIT=1
-export NOSE_WITH_HTML_OUTPUT=1
-export NOSE_HTML_OUT_FILE='nose_results.html'
-export TMPDIR=`/bin/mktemp -d`
-trap "rm -rf $TMPDIR" EXIT
 
 /usr/local/jenkins/slave_scripts/jenkins-oom-grep.sh pre
 
@@ -40,29 +31,8 @@ sudo /usr/local/jenkins/slave_scripts/jenkins-sudo-grep.sh pre
 
 source /usr/local/jenkins/slave_scripts/select-mirror.sh $org $project
 
-# Workaround the combo of tox running setup.py outside of virtualenv
-# and RHEL having an old distribute. The next line can be removed
-# when either get fixed.
-python setup.py --version 2>/dev/null
-
-tox -e$venv
+tox -v -e$venv
 result=$?
-
-echo "Begin pip freeze output from test virtualenv:"
-echo "======================================================================"
-.tox/$venv/bin/pip freeze
-echo "======================================================================"
-
-if [ -d ".testrepository" ] ; then
-    if [ -f ".testrepository/0.2" ] ; then
-        cp .testrepository/0.2 ./subunit_log.txt
-    elif [ -f ".testrepository/0" ] ; then
-        .tox/$venv/bin/subunit-1to2 < .testrepository/0 > ./subunit_log.txt
-    fi
-    .tox/$venv/bin/python /usr/local/jenkins/slave_scripts/subunit2html.py ./subunit_log.txt testr_results.html
-    gzip -9 ./subunit_log.txt
-    gzip -9 ./testr_results.html
-fi
 
 sudo /usr/local/jenkins/slave_scripts/jenkins-sudo-grep.sh post
 sudoresult=$?
@@ -87,25 +57,6 @@ then
     echo "for related kernel messages."
     echo
     exit 1
-fi
-
-htmlreport=$(find . -name $NOSE_HTML_OUT_FILE)
-if [ -f "$htmlreport" ]
-then
-    passcount=$(grep -c 'tr class=.passClass' $htmlreport)
-    if [ $passcount -eq "0" ]
-    then
-        echo
-        echo "Zero tests passed, which probably means there was an error"
-        echo "parsing one of the python files, or that some other failure"
-        echo "during test setup prevented a sane run."
-        echo
-        exit 1
-    fi
-else
-    echo
-    echo "WARNING: Unable to find $NOST_HTML_OUT_FILE to confirm results!"
-    echo
 fi
 
 exit $result
