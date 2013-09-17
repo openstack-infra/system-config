@@ -25,7 +25,7 @@ then
   echo "PROJECT: The project name (eg 'nova')"
   exit 1
 else
-  /usr/local/jenkins/slave_scripts/select-mirror.sh $org $project
+  echo /usr/local/jenkins/slave_scripts/select-mirror.sh $org $project
 fi
 
 mkdir -p .test
@@ -44,6 +44,7 @@ tox -e compare-xml-new
 
 cd ..
 find jenkins-job-builder/.test/new/out/ -printf "%f\n" > job-list.txt
+cat ../tools/non-jjb-jobs.txt >> job-list.txt
 
 cd zuul
 tox -e venv -- zuul-server -c etc/zuul.conf-sample -l ../../modules/openstack_project/files/zuul/layout.yaml -t ../job-list.txt
