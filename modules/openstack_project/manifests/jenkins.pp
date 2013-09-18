@@ -3,6 +3,7 @@
 class openstack_project::jenkins (
   $vhost_name = $::fqdn,
   $jenkins_jobs_password = '',
+  $jenkins_jobs_username = 'gerrig', # This is not a typo, well it isn't anymore.
   $manage_jenkins_jobs = true,
   $ssl_cert_file_contents = '',
   $ssl_key_file_contents = '',
@@ -140,7 +141,7 @@ class openstack_project::jenkins (
   if $manage_jenkins_jobs == true {
     class { '::jenkins::job_builder':
       url      => "https://${vhost_name}/",
-      username => 'gerrig', # This is not a typo, well it isn't anymore.
+      username => $jenkins_jobs_username,
       password => $jenkins_jobs_password,
     }
 
