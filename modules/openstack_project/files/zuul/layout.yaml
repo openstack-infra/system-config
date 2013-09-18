@@ -257,6 +257,8 @@ jobs:
     voting: false
   - name: gate-marconi-python33
     voting: false
+  - name: gate-oslo-incubator-python33
+    voting: false
   - name: gate-python-ceilometerclient-python33
     voting: false
   - name: gate-python-cinderclient-python33
@@ -854,6 +856,8 @@ projects:
       - gate-oslo-incubator-pyflakes
       - gate-oslo-incubator-python26
       - gate-oslo-incubator-python27
+    experimental:
+      - gate-oslo-incubator-python33
     post:
       - oslo-incubator-docs
     release:
