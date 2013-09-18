@@ -231,6 +231,7 @@ projects:
       - gate-oslo-incubator-pyflakes
       - gate-oslo-incubator-python26
       - gate-oslo-incubator-python27
+      - gate-oslo-incubator-python33
 
   - name: openstack/oslo.config
     check:
