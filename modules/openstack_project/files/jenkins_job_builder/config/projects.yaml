@@ -68,7 +68,7 @@
     jobs:
       - gate-{name}-puppet-lint
       - gate-{name}-puppet-syntax
-      - gate-{name}-pyflakes
+      - gate-{name}-pep8
 
 - project:
     name: savanna
@@ -231,7 +231,6 @@
 
     jobs:
       - gate-{name}-pep8
-      - gate-{name}-pyflakes
       - '{name}-tarball'
       - pypi-jobs
 
@@ -244,7 +243,6 @@
 
     jobs:
       - gate-{name}-pep8
-      - gate-{name}-pyflakes
       - '{name}-tarball'
       - pypi-jobs
 
@@ -430,7 +428,6 @@
     jobs:
       - python-jobs
       - pypi-jobs
-      - gate-{name}-pyflakes
 
 - project:
     name: keystone
@@ -531,7 +528,6 @@
       - python-jobs
       - openstack-publish-jobs
       - pypi-jobs
-      - gate-{name}-pyflakes
 
 
 - project:
@@ -545,7 +541,6 @@
       - python-jobs
       - openstack-publish-jobs
       - pypi-jobs
-      - gate-{name}-pyflakes
 
 - project:
     name: oslo.sphinx
@@ -558,7 +553,6 @@
       - python-jobs
       - openstack-publish-jobs
       - pypi-jobs
-      - gate-{name}-pyflakes
 
 
 - project:
@@ -571,7 +565,6 @@
     jobs:
       - python-jobs
       - openstack-publish-jobs
-      - gate-{name}-pyflakes
 
 
 - project:
@@ -842,7 +835,6 @@
 
     jobs:
       - python-jobs
-      - gate-{name}-pyflakes
       - pypi-jobs
 
 
@@ -905,7 +897,6 @@
 
     jobs:
       - python-jobs
-      - gate-{name}-pyflakes
       - pypi-jobs
 
 
@@ -1235,7 +1226,6 @@
 
     jobs:
       - python-jobs
-      - gate-{name}-pyflakes
 
 - project:
     name: taskflow

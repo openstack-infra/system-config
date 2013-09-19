@@ -155,20 +155,6 @@
 
 
 - job-template:
-    name: 'gate-{name}-pyflakes'
-    node: precise
-
-    builders:
-      - gerrit-git-prep
-      - pyflakes:
-          github-org: '{github-org}'
-          project: '{name}'
-
-    publishers:
-      - console-log
-
-
-- job-template:
     name: '{name}-tarball'
     node: precise
 
@@ -235,5 +221,4 @@
       - 'gate-{name}-requirements'
       - '{name}-tarball'
       - '{name}-branch-tarball'
-      # pyflakes isn't standard
       # pylint isn't standard
