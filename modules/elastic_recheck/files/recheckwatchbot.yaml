@@ -1,0 +1,4 @@
+openstack-qa:
+    events:
+      - positive
+      - negative
