@@ -36,8 +36,6 @@ jobs:
     voting: false
   - name: gate-nova-python26
     branch: ^(?!stable/folsom).*$
-  - name: gate-oslo-incubator-pyflakes
-    branch: ^(?!stable/folsom).*$
   - name: dev-zuul-coverage
     voting: false
   - name: dev-heat-coverage
@@ -77,7 +75,6 @@ projects:
     check:
       - gate-zuul-pep8
       - gate-zuul-docs
-      - gate-zuul-pyflakes
       - gate-zuul-python26
       - gate-zuul-python27
       - dev-zuul-coverage
@@ -105,13 +102,11 @@ projects:
   - name: openstack-infra/jeepyb
     check:
       - gate-jeepyb-pep8
-      - gate-jeepyb-pyflakes
 
   - name: openstack-infra/jenkins-job-builder
     check:
       - gate-jenkins-job-builder-docs
       - gate-jenkins-job-builder-pep8
-      - gate-jenkins-job-builder-pyflakes
       - jenkins-job-builder-compare-xml
 
   - name: openstack-infra/lodgeit
@@ -128,7 +123,7 @@ projects:
       - gate-config-layout
       - gate-config-puppet-lint
       - gate-config-puppet-syntax
-      - gate-config-pyflakes
+      - gate-config-pep8
 
   - name: openstack-infra/puppet-apparmor
     check:
@@ -145,7 +140,6 @@ projects:
   - name: openstack-infra/reviewday
     check:
       - gate-reviewday-pep8
-      - gate-reviewday-pyflakes
 
   - name: openstack-infra/statusbot
     check:
@@ -228,7 +222,6 @@ projects:
       - gate-oslo-incubator-requirements
       - gate-oslo-incubator-pep8
       - gate-oslo-incubator-docs
-      - gate-oslo-incubator-pyflakes
       - gate-oslo-incubator-python26
       - gate-oslo-incubator-python27
       - gate-oslo-incubator-python33
@@ -509,14 +502,12 @@ projects:
 
   - name: stackforge/designate
     check:
-      - gate-designate-pyflakes
       - gate-designate-pep8
       - gate-designate-python26
       - gate-designate-python27
 
   - name: stackforge/python-designateclient
     check:
-      - gate-python-designateclient-pyflakes
       - gate-python-designateclient-pep8
       - gate-python-designateclient-python26
       - gate-python-designateclient-python27

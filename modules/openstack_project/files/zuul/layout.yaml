@@ -162,8 +162,6 @@ jobs:
     branch: ^(?!stable/(folsom|grizzly)).*$
   - name: gate-nova-python26
     branch: ^(?!stable/folsom).*$
-  - name: gate-oslo-incubator-pyflakes
-    branch: ^(?!stable/folsom).*$
   - name: dev-zuul-coverage
     voting: false
   - name: jenkins-job-builder-compare-xml
@@ -291,14 +289,12 @@ projects:
     check:
       - gate-zuul-pep8
       - gate-zuul-docs
-      - gate-zuul-pyflakes
       - gate-zuul-python26
       - gate-zuul-python27
       - dev-zuul-coverage
     gate:
       - gate-zuul-docs
       - gate-zuul-pep8
-      - gate-zuul-pyflakes
       - gate-zuul-python26
       - gate-zuul-python27
     post:
@@ -397,10 +393,8 @@ projects:
   - name: openstack-infra/jeepyb
     check:
       - gate-jeepyb-pep8
-      - gate-jeepyb-pyflakes
     gate:
       - gate-jeepyb-pep8
-      - gate-jeepyb-pyflakes
     pre-release:
       - jeepyb-tarball
     release:
@@ -428,14 +422,12 @@ projects:
     check:
       - gate-jenkins-job-builder-docs
       - gate-jenkins-job-builder-pep8
-      - gate-jenkins-job-builder-pyflakes
       - gate-jenkins-job-builder-python26
       - gate-jenkins-job-builder-python27
       - jenkins-job-builder-compare-xml
     gate:
       - gate-jenkins-job-builder-docs
       - gate-jenkins-job-builder-pep8
-      - gate-jenkins-job-builder-pyflakes
       - gate-jenkins-job-builder-python26
       - gate-jenkins-job-builder-python27
     post:
@@ -468,13 +460,11 @@ projects:
       - gate-config-layout
       - gate-config-puppet-lint
       - gate-config-puppet-syntax
-      - gate-config-pyflakes
       - gate-ci-docs
     gate:
       - gate-config-layout
       - gate-config-puppet-lint
       - gate-config-puppet-syntax
-      - gate-config-pyflakes
     post:
       - ci-docs
 
@@ -508,10 +498,8 @@ projects:
   - name: openstack-infra/reviewday
     check:
       - gate-reviewday-pep8
-      - gate-reviewday-pyflakes
     gate:
       - gate-reviewday-pep8
-      - gate-reviewday-pyflakes
     post:
       - reviewday-branch-tarball
       - reviewday-coverage
@@ -852,14 +840,12 @@ projects:
       - gate-oslo-incubator-requirements
       - gate-oslo-incubator-pep8
       - gate-oslo-incubator-docs
-      - gate-oslo-incubator-pyflakes
       - gate-oslo-incubator-python26
       - gate-oslo-incubator-python27
     gate:
       - gate-oslo-incubator-requirements
       - gate-oslo-incubator-docs
       - gate-oslo-incubator-pep8
-      - gate-oslo-incubator-pyflakes
       - gate-oslo-incubator-python26
       - gate-oslo-incubator-python27
     experimental:
@@ -2959,11 +2945,9 @@ projects:
 
   - name: stackforge/barbican
     check:
-      - gate-barbican-pyflakes
       - gate-barbican-pep8
       - gate-barbican-python27
     gate:
-      - gate-barbican-pyflakes
       - gate-barbican-pep8
       - gate-barbican-python27
     post:
