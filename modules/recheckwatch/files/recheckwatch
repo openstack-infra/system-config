@@ -27,7 +27,7 @@ from launchpadlib.launchpad import Launchpad
 from launchpadlib.uris import LPNET_SERVICE_ROOT
 import daemon
 
-CLOSED_STATUSES = ['Fix Released', 'Invalid', 'Fix Committed']
+CLOSED_STATUSES = ['Fix Released', 'Invalid', 'Fix Committed', 'Won\'t Fix']
 
 try:
     import daemon.pidlockfile
