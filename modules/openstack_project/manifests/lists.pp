@@ -92,4 +92,13 @@ class openstack_project::lists(
     webserver   => $listdomain,
     mailserver  => $listdomain,
   }
+
+  maillist { 'openstack-sos':
+    ensure      => present,
+    admin       => 'dms@danplanet.com',
+    password    => $listpassword,
+    description => 'Coordination of activities for Significant Others at Summits',
+    webserver   => $listdomain,
+    mailserver  => $listdomain,
+  }
 }
