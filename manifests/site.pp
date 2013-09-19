@@ -257,9 +257,9 @@ $elasticsearch_nodes = [
 
 node 'logstash.openstack.org' {
   class { 'openstack_project::logstash':
-    sysadmins           => hiera('sysadmins'),
-    elasticsearch_nodes => $elasticsearch_nodes,
-    gearman_workers     => [
+    sysadmins                       => hiera('sysadmins'),
+    elasticsearch_nodes             => $elasticsearch_nodes,
+    gearman_workers                 => [
       'logstash-worker1.openstack.org',
       'logstash-worker2.openstack.org',
       'logstash-worker3.openstack.org',
@@ -269,7 +269,7 @@ node 'logstash.openstack.org' {
       'logstash-worker7.openstack.org',
       'logstash-worker8.openstack.org',
     ],
-    discover_nodes      => [
+    discover_nodes                  => [
       'elasticsearch.openstack.org:9200',
       'elasticsearch2.openstack.org:9200',
       'elasticsearch3.openstack.org:9200',
@@ -277,6 +277,12 @@ node 'logstash.openstack.org' {
       'elasticsearch5.openstack.org:9200',
       'elasticsearch6.openstack.org:9200',
     ],
+    # Config for elastic-recheck
+    gerrit_ssh_private_key          => '/etc/elastic-recheck/id_rsa',
+    gerrit_ssh_private_key_contents => hiera('elastic-recheck_gerrit_ssh_private_key'),
+    recheck_bot_passwd              => '', # Should be changed.
+    gerrit_host                     => 'review.openstack.org',
+    elasticsearch_url               => 'http://logstash.openstack.org/elasticsearch/',
   }
 }
 
