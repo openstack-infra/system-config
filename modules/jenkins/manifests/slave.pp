@@ -51,7 +51,6 @@ class jenkins::slave(
     $::jenkins::params::libffi_dev_package, # xattr's cffi dependency
     $::jenkins::params::pandoc_package, #for docs, markdown->docbook, bug 924507
     $::jenkins::params::pkgconfig_package, # for spidermonkey, used by ceilometer
-    $::jenkins::params::pyflakes_package,
     $::jenkins::params::python_libvirt_package,
     $::jenkins::params::python_lxml_package, # for validating openstack manuals
     $::jenkins::params::python_zmq_package, # zeromq unittests (not pip installable)
