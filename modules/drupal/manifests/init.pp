@@ -102,7 +102,7 @@ class drupal (
 
   # php packages
   $drupal_related_packages = [ 'unzip', 'php5-mysql', 'php5-gd', 'php5-cli',
-    'libapache2-mod-php5' ]
+    'libapache2-mod-php5', 'mysql-client' ]
 
   package { $drupal_related_packages:
     ensure  => 'installed',
