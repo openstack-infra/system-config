@@ -189,6 +189,7 @@ openstack-qa:
       - openstack/tempest
       - openstack-dev/devstack
       - openstack-dev/grenade
+      - openstack-infra/elastic-recheck
       - openstack-infra/devstack-gate
     branches:
       - master

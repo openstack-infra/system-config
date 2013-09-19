@@ -1522,6 +1522,12 @@ projects:
       - gate-grenade-devstack-vm-stable
       - gate-devstack-vm-cells
 
+  - name: openstack-infra/elastic-recheck
+    check:
+      - gate-elastic-recheck-pep8
+    gate:
+      - gate-elastic-recheck-pep8
+
   - name: openstack-infra/devstack-gate
     check:
       - gate-tempest-devstack-vm-smoke
