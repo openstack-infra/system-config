@@ -277,6 +277,12 @@ node 'logstash.openstack.org' {
       'elasticsearch5.openstack.org:9200',
       'elasticsearch6.openstack.org:9200',
     ],
+    # Config for elastic-recheck
+    gerrit_ssh_private_key          => '/etc/elastic-recheck/id_rsa',
+    gerrit_ssh_private_key_contents => hiera('elastic-recheck_gerrit_ssh_private_key'),
+    recheck_bot_passwd              => '', # Should be changed.
+    gerrit_host                     => 'review.openstack.org',
+    elasticsearch_url               => 'http://logstash.openstack.org/elasticsearch/',
   }
 }
 
