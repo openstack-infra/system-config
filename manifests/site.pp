@@ -298,6 +298,17 @@ node /^elasticsearch\d*\.openstack\.org$/ {
   }
 }
 
+node 'recheck.openstack.org' {
+  class { 'openstack_project::recheck':
+    sysadmins                       => hiera('sysadmins'),
+    gerrit_ssh_private_key          => '/etc/elastic-recheck/id_rsa',
+    gerrit_ssh_private_key_contents => hiera('elastic-recheck_gerrit_ssh_private_key'),
+    recheck_bot_passwd              => hiera('recheck_bot_passwd'),
+    gerrit_host                     => 'review.openstack.org',
+    elasticsearch_url               => 'http://logstash.openstack.org/elasticsearch/',
+  }
+}
+
 # A CentOS machine to load balance git access.
 node 'git.openstack.org' {
   class { 'openstack_project::git':
