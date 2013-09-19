@@ -15,6 +15,13 @@
 # Logstash web frontend glue class.
 #
 class openstack_project::logstash (
+  $gerrit_host,
+  $gerrit_ssh_private_key,
+  $gerrit_ssh_private_key_contents,
+  #not used today, will be used when elastic-recheck supports it.
+  $elasticsearch_url,
+  $recheck_bot_passwd,
+  $recheck_bot_nick = 'openstackrecheck',
   $elasticsearch_nodes = [],
   $gearman_workers = [],
   $discover_nodes = ['elasticsearch.openstack.org:9200'],
@@ -108,5 +115,14 @@ class openstack_project::logstash (
       'notifempty',
     ],
     require => Service['jenkins-log-client'],
+  }
+
+  class { 'elastic_recheck':
+    gerrit_host                     => $gerrit_host,
+    gerrit_ssh_private_key          => $gerrit_ssh_private_key,
+    gerrit_ssh_private_key_contents => $gerrit_ssh_private_key_contents,
+    elasticsearch_url               => $elasticsearch_url,
+    recheck_bot_passwd              => $recheck_bot_passwd,
+    recheck_bot_nick                => $recheck_bot_nick,
   }
 }
