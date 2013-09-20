@@ -15,8 +15,6 @@ class openstack_project::review_dev (
   $ssh_rsa_pubkey_contents = '',
   $ssh_project_rsa_key_contents = '',
   $ssh_project_rsa_pubkey_contents = '',
-  $lp_sync_key = '', # If left empty puppet will not create file.
-  $lp_sync_pubkey = '', # If left empty puppet will not create file.
   $lp_sync_consumer_key = '',
   $lp_sync_token = '',
   $lp_sync_secret = '',
@@ -79,50 +77,12 @@ class openstack_project::review_dev (
     ],
   }
 
-  file { '/var/log/gerrit_user_sync':
-    ensure  => directory,
-    owner   => 'root',
-    group   => 'gerrit2',
-    mode    => '0775',
-    require => User['gerrit2'],
-  }
-  file { '/home/gerrit2/.sync_logging.conf':
-    ensure  => present,
-    owner   => 'root',
-    group   => 'gerrit2',
-    mode    => '0644',
-    source  =>
-      'puppet:///modules/openstack_project/gerrit/launchpad_sync_logging.conf',
-    require => User['gerrit2'],
-  }
   file { '/home/gerrit2/.ssh':
     ensure  => directory,
     owner   => 'gerrit2',
     group   => 'gerrit2',
     mode    => '0700',
     require => User['gerrit2'],
-  }
-  if $lp_sync_key != '' {
-    file { '/home/gerrit2/.ssh/launchpadsync_rsa':
-      ensure  => present,
-      owner   => 'gerrit2',
-      group   => 'gerrit2',
-      mode    => '0600',
-      content => $lp_sync_key,
-      replace => true,
-      require => User['gerrit2'],
-    }
-  }
-  if $lp_sync_pubkey != '' {
-    file { '/home/gerrit2/.ssh/launchpadsync_rsa.pub':
-      ensure  => present,
-      owner   => 'gerrit2',
-      group   => 'gerrit2',
-      mode    => '0644',
-      content => $lp_sync_pubkey,
-      replace => true,
-      require => User['gerrit2'],
-    }
   }
   file { '/home/gerrit2/.launchpadlib':
     ensure  => directory,
