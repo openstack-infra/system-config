@@ -20,21 +20,17 @@
 
 import sys
 import os
-import commands
-import time
-import subprocess
-import traceback
-import socket
 import argparse
 import utils
 
-NOVA_USERNAME=os.environ['OS_USERNAME']
-NOVA_PASSWORD=os.environ['OS_PASSWORD']
-NOVA_URL=os.environ['OS_AUTH_URL']
-NOVA_PROJECT_ID=os.environ['OS_TENANT_NAME']
-NOVA_REGION_NAME=os.environ['OS_REGION_NAME']
+NOVA_USERNAME = os.environ['OS_USERNAME']
+NOVA_PASSWORD = os.environ['OS_PASSWORD']
+NOVA_URL = os.environ['OS_AUTH_URL']
+NOVA_PROJECT_ID = os.environ['OS_TENANT_NAME']
+NOVA_REGION_NAME = os.environ['OS_REGION_NAME']
 
 SCRIPT_DIR = os.path.dirname(sys.argv[0])
+
 
 def get_client():
     args = [NOVA_USERNAME, NOVA_PASSWORD, NOVA_PROJECT_ID, NOVA_URL]
@@ -45,9 +41,11 @@ def get_client():
     client = Client(*args, **kwargs)
     return client
 
+
 def print_dns(client, name):
     for server in client.servers.list():
-        if server.name != name: continue
+        if server.name != name:
+            continue
         ip4 = utils.get_public_ip(server)
         ip6 = utils.get_public_ip(server, 6)
         href = utils.get_href(server)
@@ -57,29 +55,34 @@ def print_dns(client, name):
         print
         print ". ~root/rackdns-venv/bin/activate"
         print
-        print ("rackdns rdns-create --name %s \\\n"
-               "    --data %s \\\n"
-               "    --server-href %s \\\n"
-               "    --ttl 3600" % (
+        print (
+            "rackdns rdns-create --name %s \\\n"
+            "    --data %s \\\n"
+            "    --server-href %s \\\n"
+            "    --ttl 3600" % (
                 server.name, ip6, href))
         print
-        print ("rackdns rdns-create --name %s \\\n"
-               "    --data %s \\\n"
-               "    --server-href %s \\\n"
-               "    --ttl 3600" % (
+        print (
+            "rackdns rdns-create --name %s \\\n"
+            "    --data %s \\\n"
+            "    --server-href %s \\\n"
+            "    --ttl 3600" % (
                 server.name, ip4, href))
         print
         print ". ~root/ci-launch/openstack-rs-nova.sh"
         print
-        print ("rackdns record-create --name %s \\\n"
-               "    --type AAAA --data %s \\\n"
-               "    --ttl 3600 openstack.org" % (
+        print (
+            "rackdns record-create --name %s \\\n"
+            "    --type AAAA --data %s \\\n"
+            "    --ttl 3600 openstack.org" % (
                 server.name, ip6))
         print
-        print ("rackdns record-create --name %s \\\n"
-               "    --type A --data %s \\\n"
-               "    --ttl 3600 openstack.org" % (
+        print (
+            "rackdns record-create --name %s \\\n"
+            "    --type A --data %s \\\n"
+            "    --ttl 3600 openstack.org" % (
                 server.name, ip4))
+
 
 def main():
     parser = argparse.ArgumentParser()

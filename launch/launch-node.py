@@ -20,25 +20,22 @@
 
 import sys
 import os
-import commands
 import time
-import subprocess
 import traceback
-import socket
 import argparse
 import shutil
 
 import dns
 import utils
 
-NOVA_USERNAME=os.environ['OS_USERNAME']
-NOVA_PASSWORD=os.environ['OS_PASSWORD']
-NOVA_URL=os.environ['OS_AUTH_URL']
-NOVA_PROJECT_ID=os.environ['OS_TENANT_NAME']
-NOVA_REGION_NAME=os.environ['OS_REGION_NAME']
-IPV6=os.environ.get('IPV6', '0') is 1
+NOVA_USERNAME = os.environ['OS_USERNAME']
+NOVA_PASSWORD = os.environ['OS_PASSWORD']
+NOVA_URL = os.environ['OS_AUTH_URL']
+NOVA_PROJECT_ID = os.environ['OS_TENANT_NAME']
+NOVA_REGION_NAME = os.environ['OS_REGION_NAME']
+IPV6 = os.environ.get('IPV6', '0') is 1
 
-SCRIPT_DIR = os.path.dirname(sys.argv[0])        
+SCRIPT_DIR = os.path.dirname(sys.argv[0])
 
 SALT_MASTER_PKI = os.environ.get('SALT_MASTER_PKI', '/etc/salt/pki/master')
 SALT_MINION_PKI = os.environ.get('SALT_MINION_PKI', '/etc/salt/pki/minion')
@@ -53,9 +50,9 @@ def get_client():
     client = Client(*args, **kwargs)
     return client
 
+
 def bootstrap_server(server, admin_pass, key, cert, environment, name,
                      salt_priv, salt_pub, puppetmaster):
-    client = server.manager.api
     ip = utils.get_public_ip(server)
     if not ip:
         raise Exception("Unable to find public ip of server")
@@ -68,7 +65,8 @@ def bootstrap_server(server, admin_pass, key, cert, environment, name,
 
     for username in ['root', 'ubuntu']:
         ssh_client = utils.ssh_connect(ip, username, ssh_kwargs, timeout=600)
-        if ssh_client: break
+        if ssh_client:
+            break
 
     if not ssh_client:
         raise Exception("Unable to log in via SSH")
@@ -89,7 +87,7 @@ def bootstrap_server(server, admin_pass, key, cert, environment, name,
                    'install_puppet.sh')
     ssh_client.ssh('bash -x install_puppet.sh')
 
-    certname = cert[:0-len('.pem')]
+    certname = cert[:(0 - len('.pem'))]
     ssh_client.ssh("mkdir -p /var/lib/puppet/ssl/certs")
     ssh_client.ssh("mkdir -p /var/lib/puppet/ssl/private_keys")
     ssh_client.ssh("mkdir -p /var/lib/puppet/ssl/public_keys")
@@ -98,7 +96,6 @@ def bootstrap_server(server, admin_pass, key, cert, environment, name,
     ssh_client.ssh("chmod 0755 /var/lib/puppet/ssl/certs")
     ssh_client.ssh("chmod 0750 /var/lib/puppet/ssl/private_keys")
     ssh_client.ssh("chmod 0755 /var/lib/puppet/ssl/public_keys")
-
 
     if salt_pub and salt_priv:
         # Assuming salt-master is running on the puppetmaster
@@ -129,6 +126,7 @@ def bootstrap_server(server, admin_pass, key, cert, environment, name,
 
     ssh_client.ssh("reboot")
 
+
 def build_server(
         client, name, image, flavor, cert, environment, salt, puppetmaster):
     key = None
@@ -143,17 +141,18 @@ def build_server(
         create_kwargs['key_name'] = key_name
     try:
         server = client.servers.create(**create_kwargs)
-    except Exception, real_error:
+    except Exception:
         try:
             kp.delete()
-        except Exception, delete_error:
+        except Exception:
             print "Exception encountered deleting keypair:"
             traceback.print_exc()
         raise
 
     salt_priv, salt_pub = (None, None)
     if salt:
-        salt_priv, salt_pub = utils.add_salt_keypair(SALT_MASTER_PKI, name, 2048)
+        salt_priv, salt_pub = utils.add_salt_keypair(
+            SALT_MASTER_PKI, name, 2048)
     try:
         admin_pass = server.adminPass
         server = utils.wait_for_resource(server)
@@ -164,14 +163,15 @@ def build_server(
                                                server.accessIPv6))
         if key:
             kp.delete()
-    except Exception, real_error:
+    except Exception:
         try:
             utils.delete_server(server)
-        except Exception, delete_error:
+        except Exception:
             print "Exception encountered deleting server:"
             traceback.print_exc()
         # Raise the important exception that started this
         raise
+
 
 def main():
     parser = argparse.ArgumentParser()
@@ -211,8 +211,8 @@ def main():
 
     images = [i for i in client.images.list()
               if (options.image.lower() in i.name.lower() and
-                not i.name.endswith('(Kernel)') and
-                not i.name.endswith('(Ramdisk)'))]
+                  not i.name.endswith('(Kernel)') and
+                  not i.name.endswith('(Ramdisk)'))]
 
     if len(images) > 1:
         print "Ambiguous image name; matches:"

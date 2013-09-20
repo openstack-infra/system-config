@@ -34,6 +34,7 @@ import salt.crypt
 
 from sshclient import SSHClient
 
+
 def iterate_timeout(max_seconds, purpose):
     start = time.time()
     count = 0
@@ -66,6 +67,8 @@ def get_client(provider):
     return client
 
 extension_cache = {}
+
+
 def get_extensions(client):
     global extension_cache
     cache = extension_cache.get(client)
@@ -79,10 +82,12 @@ def get_extensions(client):
     extension_cache[client] = extensions
     return extensions
 
+
 def get_flavor(client, min_ram):
     flavors = [f for f in client.flavors.list() if f.ram >= min_ram]
     flavors.sort(lambda a, b: cmp(a.ram, b.ram))
     return flavors[0]
+
 
 def get_public_ip(server, version=4):
     if 'os-floating-ips' in get_extensions(server.manager.api):
@@ -90,19 +95,22 @@ def get_public_ip(server, version=4):
             if addr.instance_id == server.id:
                 return addr.ip
     for addr in server.addresses.get('public', []):
-        if type(addr) == type(u''): # Rackspace/openstack 1.0
+        if type(addr) == type(u''):  # Rackspace/openstack 1.0
             return addr
-        if addr['version'] == version: #Rackspace/openstack 1.1
+        if addr['version'] == version:  # Rackspace/openstack 1.1
             return addr['addr']
     for addr in server.addresses.get('private', []):
-        if addr['version'] == version and not addr['addr'].startswith('10.'): #HPcloud
+        # HP Cloud
+        if addr['version'] == version and not addr['addr'].startswith('10.'):
             return addr['addr']
     return None
+
 
 def get_href(server):
     for link in server.links:
         if link['rel'] == 'self':
             return link['href']
+
 
 def add_public_ip(server):
     ip = server.manager.api.floating_ips.create()
@@ -120,11 +128,13 @@ def add_public_ip(server):
             print 'ip has been added'
             return
 
+
 def add_keypair(client, name):
     key = paramiko.RSAKey.generate(2048)
     public_key = key.get_name() + ' ' + key.get_base64()
     kp = client.keypairs.create(name, public_key)
     return key, kp
+
 
 def add_salt_keypair(keydir, keyname, keysize=2048):
     '''
@@ -145,6 +155,7 @@ def add_salt_keypair(keydir, keyname, keysize=2048):
         pub_key = '{0}.pub'.format(path)
     return priv_key, pub_key
 
+
 def wait_for_resource(wait_resource):
     last_progress = None
     last_status = None
@@ -160,7 +171,8 @@ def wait_for_resource(wait_resource):
 
         # In Rackspace v1.0, there is no progress attribute while queued
         if hasattr(resource, 'progress'):
-            if last_progress != resource.progress or last_status != resource.status:
+            if (last_progress != resource.progress
+                    or last_status != resource.status):
                 print resource.status, resource.progress
             last_progress = resource.progress
         elif last_status != resource.status:
@@ -168,6 +180,7 @@ def wait_for_resource(wait_resource):
         last_status = resource.status
         if resource.status == 'ACTIVE':
             return resource
+
 
 def ssh_connect(ip, username, connect_kwargs={}, timeout=60):
     # HPcloud may return errno 111 for about 30 seconds after adding the IP
@@ -183,6 +196,7 @@ def ssh_connect(ip, username, connect_kwargs={}, timeout=60):
     if "access okay" in out:
         return client
     return None
+
 
 def delete_server(server):
     try:
@@ -203,6 +217,6 @@ def delete_server(server):
     except:
         print "Unable to delete keypair"
         traceback.print_exc()
-            
+
     print "Deleting server", server.id
     server.delete()

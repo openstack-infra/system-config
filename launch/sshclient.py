@@ -22,6 +22,7 @@ import sys
 
 import paramiko
 
+
 class SSHClient(object):
     def __init__(self, ip, username, password=None, pkey=None):
         client = paramiko.SSHClient()
@@ -48,5 +49,3 @@ class SSHClient(object):
         ftp = self.client.open_sftp()
         ftp.put(source, dest)
         ftp.close()
-
-
