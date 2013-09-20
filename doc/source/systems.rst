@@ -6,6 +6,7 @@ Major Systems
 .. toctree::
    :maxdepth: 2
 
+   cacti
    gerrit
    jenkins
    zuul
