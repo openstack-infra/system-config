@@ -20,7 +20,8 @@ import os
 import sys
 import subprocess
 
-DEVSTACK='~/workspace-cache/devstack'
+DEVSTACK = '~/workspace-cache/devstack'
+
 
 def run_local(cmd, status=False, cwd='.', env={}):
     print "Running:", cmd
