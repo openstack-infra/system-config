@@ -517,11 +517,13 @@ projects:
     check:
       - config-compare-xml
       - gate-config-layout
+      - gate-config-pep8
       - gate-config-puppet-lint
       - gate-config-puppet-syntax
       - gate-ci-docs
     gate:
       - gate-config-layout
+      - gate-config-pep8
       - gate-config-puppet-lint
       - gate-config-puppet-syntax
     post:

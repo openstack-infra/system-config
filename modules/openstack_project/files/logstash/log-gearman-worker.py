@@ -161,7 +161,7 @@ class LogRetriever(threading.Thread):
                 try:
                     logging.debug(str(backoff) + " Retrying fetch of: " +
                                   source_url + "?level=INFO")
-                    logging.debug("Fetching bytes="  + str(content_len) + '-')
+                    logging.debug("Fetching bytes=" + str(content_len) + '-')
                     req = urllib2.Request(source_url + "?level=INFO")
                     req.add_header('Range', 'bytes=' + str(content_len) + '-')
                     r = urllib2.urlopen(req)

@@ -53,7 +53,8 @@ if __name__ == '__main__':
 
     for committer, code in zip(committers, codes):
         if settings.EMAIL_USE_SSL:
-            session = smtplib.SMTP_SSL(settings.EMAIL_HOST, settings.EMAIL_PORT)
+            session = smtplib.SMTP_SSL(
+                settings.EMAIL_HOST, settings.EMAIL_PORT)
         else:
             session = smtplib.SMTP(settings.EMAIL_HOST, settings.EMAIL_PORT)
         if settings.EMAIL_USE_TLS:
@@ -66,10 +67,8 @@ if __name__ == '__main__':
                                       code=code,
                                       signature=settings.EMAIL_SIGNATURE)
         msg = "From: %s\r\nTo: %s\r\nSubject: %s\r\n\r\n%s" % (
-                  settings.EMAIL_FROM,
-                  ','.join(committer.emails),
-                  settings.EMAIL_SUBJECT,
-                  content)
+            settings.EMAIL_FROM, ','.join(committer.emails),
+            settings.EMAIL_SUBJECT, content)
 
         session.sendmail(settings.EMAIL_FROM, committer.emails, msg)
         print "%s,ATC,%s" % (code, committer.name)

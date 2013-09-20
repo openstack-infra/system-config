@@ -103,7 +103,7 @@ class EventProcessor(threading.Thread):
         fields = self._parse_fields(event, fileopts['name'])
         log_dir = self._get_log_dir(event)
         source_url = fileopts.get('source-url', self.source_url) + '/' + \
-                os.path.join(log_dir, fileopts['name'])
+            os.path.join(log_dir, fileopts['name'])
         fields["log_url"] = source_url
         out_event = {}
         out_event["fields"] = fields
@@ -134,8 +134,9 @@ class Server(object):
             gearclient = gear.Client()
             gearclient.addServer('localhost')
             gearclient.waitForServer()
-            processor = EventProcessor(publisher, gearclient,
-                    self.config['source-files'], self.source_url)
+            processor = EventProcessor(
+                publisher, gearclient,
+                self.config['source-files'], self.source_url)
             self.processors.append(processor)
 
     def main(self):
