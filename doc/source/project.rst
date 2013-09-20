@@ -54,6 +54,10 @@ triage bugs.
 To read about how our systems are managed and how to view or edit
 those configurations, see :ref:`sysadmin`.
 
+We also have a a collection of `OpenStack Project Infrastructure Publications
+<http://docs.openstack.org/infra/publications/>`_ where we host slides for
+presentations team members have given about the infrastructure.
+
 And if you have any questions, please ask.
 
 Team
