@@ -19,13 +19,10 @@
 # Soren Hansen wrote the original version of this script.
 # James Blair hacked it up to include email addresses from gerrit.
 
-import calendar
 import datetime
 import json
 import optparse
 import paramiko
-from pprint import pprint
-import sys
 import csv
 import re
 
@@ -33,12 +30,14 @@ MAILTO_RE = re.compile('mailto:(.*)')
 USERNAME_RE = re.compile('username:(.*)')
 accounts = {}
 
+
 class Account(object):
     def __init__(self, num):
         self.num = num
         self.full_name = ''
         self.emails = []
         self.username = None
+
 
 def get_account(num):
     a = accounts.get(num)
@@ -78,8 +77,10 @@ for a in accounts.values():
 atcs = []
 
 optparser = optparse.OptionParser()
-optparser.add_option('-p', '--project', default='nova', help='Project to generate stats for')
-optparser.add_option('-o', '--output', default='out.csv', help='Output file')
+optparser.add_option(
+    '-p', '--project', default='nova', help='Project to generate stats for')
+optparser.add_option(
+    '-o', '--output', default='out.csv', help='Output file')
 options, args = optparser.parse_args()
 
 QUERY = "project:%s status:merged" % options.project
@@ -87,9 +88,11 @@ QUERY = "project:%s status:merged" % options.project
 client = paramiko.SSHClient()
 client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
 client.load_system_host_keys()
-client.connect('review.openstack.org', port=29418, key_filename='/home/corvus/.ssh/id_rsa', username='CHANGME')
-stdin, stdout, stderr = client.exec_command('gerrit query %s --all-approvals --format JSON' %
-                                            QUERY)
+client.connect(
+    'review.openstack.org', port=29418,
+    key_filename='/home/corvus/.ssh/id_rsa', username='CHANGME')
+stdin, stdout, stderr = client.exec_command(
+    'gerrit query %s --all-approvals --format JSON' % QUERY)
 changes = []
 
 done = False
@@ -130,7 +133,9 @@ while not done:
         if approved and account not in atcs:
             atcs.append(account)
     if not done:
-        stdin, stdout, stderr = client.exec_command('gerrit query %s resume_sortkey:%s --all-approvals --format JSON' % (QUERY, last_sortkey))
+        stdin, stdout, stderr = client.exec_command(
+            'gerrit query %s resume_sortkey:%s --all-approvals'
+            ' --format JSON' % (QUERY, last_sortkey))
 
 print 'project: %s' % options.project
 print 'examined %s changes' % count

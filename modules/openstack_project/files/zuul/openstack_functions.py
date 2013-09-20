@@ -12,6 +12,7 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 
+
 def set_log_url(item, job, params):
     if hasattr(item.change, 'refspec'):
         path = "%s/%s/%s/%s" % (
