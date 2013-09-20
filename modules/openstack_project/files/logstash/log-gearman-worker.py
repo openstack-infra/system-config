@@ -149,7 +149,7 @@ class LogRetriever(threading.Thread):
                 # Try for up to 60 seconds to retrieve the complete log file.
                 try:
                     logging.debug(str(i) + " Retrying fetch of: " + source_url)
-                    logging.debug("Fetching bytes="  + str(content_len) + '-')
+                    logging.debug("Fetching bytes=" + str(content_len) + '-')
                     req = urllib2.Request(source_url)
                     req.add_header('Range', 'bytes=' + str(content_len) + '-')
                     r = urllib2.urlopen(req)
