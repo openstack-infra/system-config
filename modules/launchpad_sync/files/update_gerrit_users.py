@@ -262,6 +262,7 @@ class Sync(object):
                 'openstack/oslo-incubator',
                 'openstack/oslo.config',
                 'openstack/oslo.messaging',
+                'openstack/oslo.version',
                 'openstack/python-ceilometerclient',
                 'openstack/python-cinderclient',
                 'openstack/python-glanceclient',

@@ -249,6 +249,14 @@ projects:
       - gate-oslo.messaging-python26
       - gate-oslo.messaging-python27
 
+  - name: openstack/oslo.version
+    check:
+      - gate-oslo.version-requirements
+      - gate-oslo.version-pep8
+      - gate-oslo.version-docs
+      - gate-oslo.version-python26
+      - gate-oslo.version-python27
+
   - name: openstack/neutron
     check:
       - gate-neutron-requirements
