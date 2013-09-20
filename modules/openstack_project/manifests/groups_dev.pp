@@ -21,10 +21,14 @@ class openstack_project::groups_dev (
   $sysadmins = [],
 ) {
 
+  realize (
+    User::Virtual::Localuser['mkiss'],
+  )
+
 #  include drupal
 
   class { 'openstack_project::server':
-    iptables_public_tcp_ports => [80, 443],
+    iptables_public_tcp_ports => [22, 80, 443],
     sysadmins                 => $sysadmins,
   }
 
