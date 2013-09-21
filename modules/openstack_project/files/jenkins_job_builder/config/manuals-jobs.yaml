@@ -28,3 +28,35 @@
           target: ''
           remove-prefix: 'doc/{manual}/target/docbkx/webhelp/'
           excludes: '**/*.xml,**/null*'
+
+- job-template:
+    name: 'openstack-install-deploy-guide-{distribution}'
+
+    project-type: maven
+    concurrent: false
+    node: precise
+
+    properties:
+      - inject:
+          script-file: /usr/local/jenkins/slave_scripts/docbook-properties.sh
+          properties-file: gerrit-doc.properties
+
+    prebuilders:
+      - gerrit-git-prep
+
+    maven:
+      maven-name: Maven3
+      root-module:
+        group-id: org.openstack.docs
+        artifact-id: openstack-guide
+      root-pom: doc/install-guide/pom.xml
+      goals: '-Doperating.system={system} -Dprofile.os={profileos} -Drelease.path.name=${{DOC_RELEASE_PATH}} -Dcomments.enabled=${{DOC_COMMENTS_ENABLED}} clean generate-sources -B'
+
+    publishers:
+      - console-log
+      - ftp:
+          site: docs.openstack.org
+          source: 'doc/install-guide/target/docbkx/webhelp/**'
+          target: '/'
+          remove-prefix: 'doc/install-guide/target/docbkx/webhelp/'
+          excludes: '**/*.xml,**/null*'

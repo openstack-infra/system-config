@@ -191,7 +191,7 @@ jobs:
     branch: ^master$
   - name: openstack-security-guide
     branch: ^master$
-  - name: openstack-training
+  - name: openstack-training-guide
     branch: ^master$
 # Documentation targets for master and future stable branches:
   - name: openstack-admin-guide-network
@@ -2014,7 +2014,7 @@ projects:
       - openstack-user-guide
       - openstack-user-guide-admin
       - manuals-upstream-translation-update
-      - openstack-training
+      - openstack-training-guide
     periodic:
       - manuals-propose-translation-update
 
