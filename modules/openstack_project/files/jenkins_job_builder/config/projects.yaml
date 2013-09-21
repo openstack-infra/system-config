@@ -1381,3 +1381,43 @@
           distribution: ubuntu
           system: apt
           profileos: "ubuntu"
+
+# in zuul/layout.yaml specified to only run against stable/folsom and grizzly
+# branches.
+- project:
+    name: manuals-old
+    manual:
+	- block-storage-admin
+	- compute-admin
+	- network-connectivity-admin
+    jobs:
+      - 'openstack-{manual}-old'
+
+# in zuul/layout.yaml specified to only run against stable/folsom and grizzly
+# branches.
+- project:
+    name: install-manuals-old
+    jobs:
+      - openstack-{install}-{distribution}-old:
+        install: basic-install
+        distribution: fedora
+        system: yum
+        profileos: "centos;fedora;rhel"
+
+      - openstack-{install}-{distribution}-old:
+        install: basic-install
+        distribution: ubuntu
+        system: apt
+        profileos: "ubuntu;debian"
+
+      - openstack-{install}-{distribution}-old:
+        install: openstack-install
+        distribution: fedora
+        system: yum
+        profileos: "centos;fedora;rhel"
+
+      - openstack-{install}-{distribution}-old:
+        install: openstack-install
+        distribution: ubuntu
+        system: yum
+        profileos: "ubuntu"
