@@ -862,6 +862,8 @@ projects:
       - gate-oslo-incubator-pyflakes
       - gate-oslo-incubator-python26
       - gate-oslo-incubator-python27
+    experimental:
+      - gate-oslo-incubator-python33
     post:
       - oslo-incubator-docs
     release:
