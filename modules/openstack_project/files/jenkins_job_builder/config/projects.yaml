@@ -1407,12 +1407,14 @@
       - user-guide
       - user-guide-admin
 
+    oldmanual:
+        - block-storage-admin
+        - compute-admin
+        - network-connectivity-admin
+
     jobs:
       - 'openstack-{manual}'
 
-- project:
-    name: install-manuals
-    jobs:
       - openstack-install-deploy-guide-{distribution}:
           distribution: fedora
           system: yum
@@ -1426,6 +1428,34 @@
       - openstack-install-deploy-guide-{distribution}:
           distribution: ubuntu
           system: apt
+          profileos: "ubuntu"
+
+      # in zuul/layout.yaml specified to only run against
+      # stable/folsom and grizzly branches.
+      - 'openstack-{oldmanual}-old'
+
+      - openstack-{install}-{distribution}-old:
+          install: basic-install
+          distribution: fedora
+          system: yum
+          profileos: "centos;fedora;rhel"
+
+      - openstack-{install}-{distribution}-old:
+          install: basic-install
+          distribution: ubuntu
+          system: apt
+          profileos: "ubuntu;debian"
+
+      - openstack-{install}-{distribution}-old:
+          install: openstack-install
+          distribution: fedora
+          system: yum
+          profileos: "centos;fedora;rhel"
+
+      - openstack-{install}-{distribution}-old:
+          install: openstack-install
+          distribution: ubuntu
+          system: yum
           profileos: "ubuntu"
 
 - project:
