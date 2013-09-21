@@ -2173,7 +2173,10 @@ projects:
       - diskimage-builder-tarball
     release:
       - diskimage-builder-tarball:
-        - diskimage-builder-pypi-upload
+        - diskimage-builder-pypi-upload:
+          - post-mirror-python26
+          - post-mirror-python27
+          - post-mirror-python33
 
   - name: openstack/os-apply-config
     check:
@@ -2252,7 +2255,10 @@ projects:
       - tripleo-image-elements-tarball
     release:
       - tripleo-image-elements-tarball:
-        - tripleo-image-elements-pypi-upload
+        - tripleo-image-elements-pypi-upload:
+          - post-mirror-python26
+          - post-mirror-python27
+          - post-mirror-python33
 
   - name: openstack/tripleo-incubator
     check:
