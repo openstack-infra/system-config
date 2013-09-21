@@ -19,8 +19,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import jenkins
-import urllib
 import urllib2
 import urlparse
 from pprint import pprint
@@ -39,6 +37,7 @@ from myjenkins import Jenkins as DGJenkins
 
 JOB_NAME = 'test-job'
 NODE_NAME = 'test-node'
+
 
 class JenkinsTest(object):
     def __init__(self):

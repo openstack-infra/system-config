@@ -16,14 +16,13 @@
 
 import argparse
 import os
-import sys
 import yaml
 import tempfile
 import pwd
 import grp
 
 # from:
-# http://stackoverflow.com/questions/8640959/how-can-i-control-what-scalar-form-pyyaml-uses-for-my-data
+# http://stackoverflow.com/questions/8640959/how-can-i-control-what-scalar-form-pyyaml-uses-for-my-data  flake8: noqa
 def should_use_block(value):
     for c in u"\u000a\u000d\u001c\u001d\u001e\u0085\u2028\u2029":
         if c in value:
