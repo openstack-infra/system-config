@@ -86,6 +86,7 @@ class openstack_project::cacti (
     'logstash-worker6.openstack.org',
     'logstash-worker7.openstack.org',
     'logstash-worker8.openstack.org',
+    'nodepool.openstack.org',
     'paste.openstack.org',
     'pbx.openstack.org',
     'planet.openstack.org',
