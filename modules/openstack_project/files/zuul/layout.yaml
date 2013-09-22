@@ -2264,9 +2264,15 @@ projects:
 
   - name: openstack/tripleo-incubator
     check:
-      - gate-noop
+      - gate-tripleo-incubator-docs
     gate:
-      - gate-noop
+      - gate-tripleo-incubator-docs
+    post:
+      - tripleo-incubator-docs
+    pre-release:
+      - tripleo-incubator-docs
+    release:
+      - tripleo-incubator-docs
 
   - name: stackforge/climate
     check:
