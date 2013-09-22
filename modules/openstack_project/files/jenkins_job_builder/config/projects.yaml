@@ -982,6 +982,16 @@
       - pypi-jobs
 
 - project:
+    name: tripleo-incubator
+    github-org: openstack
+    node: precise
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - gate-{name}-docs
+      - openstack-publish-jobs
+
+- project:
     name: puppet-glance
     github-org: stackforge
     node: precise

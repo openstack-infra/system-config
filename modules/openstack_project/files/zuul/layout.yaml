@@ -2262,9 +2262,15 @@ projects:
 
   - name: openstack/tripleo-incubator
     check:
-      - gate-noop
+      - gate-tripleo-incubator-docs
     gate:
-      - gate-noop
+      - gate-tripleo-incubator-docs
+    post:
+      - tripleo-incubator-docs
+    pre-release:
+      - tripleo-incubator-docs
+    release:
+      - tripleo-incubator-docs
 
   - name: stackforge/climate
     check:
@@ -2989,78 +2995,6 @@ projects:
     gate:
       - gate-cl-openstack-client-run-tests
 
-  - name: stackforge/stackalytics
-    check:
-      - gate-stackalytics-docs
-      - gate-stackalytics-pep8
-      - gate-stackalytics-python26
-      - gate-stackalytics-python27
-    gate:
-      - gate-stackalytics-docs
-      - gate-stackalytics-pep8
-      - gate-stackalytics-python26
-      - gate-stackalytics-python27
-    post:
-      - stackalytics-branch-tarball
-      - hook-stackalytics-rtfd
-    pre-release:
-      - stackalytics-tarball
-      - hook-stackalytics-rtfd
-    release:
-      - stackalytics-tarball
-      - hook-stackalytics-rtfd
-
-  - name: stackforge/pyghmi
-    check:
-      - gate-pyghmi-pep8
-    gate:
-      - gate-pyghmi-pep8
-
-  - name: openstack-infra/tripleo-ci
-    check:
-      - gate-noop
-    gate:
-      - gate-noop
-
-  - name: stackforge/pycadf
-    check:
-      - gate-pycadf-pep8
-      - gate-pycadf-python26
-      - gate-pycadf-python27
-    gate:
-      - gate-pycadf-pep8
-      - gate-pycadf-python26
-      - gate-pycadf-python27
-    post:
-      - pycadf-branch-tarball
-    pre-release:
-      - pycadf-tarball
-    release:
-      - pycadf-tarball:
-        - pycadf-pypi-upload:
-          - post-mirror-python26
-          - post-mirror-python27
-          - post-mirror-python33
-
-  - name: stackforge/tuskar
-    check:
-      - gate-tuskar-pep8
-      - gate-tuskar-python26
-      - gate-tuskar-python27
-    gate:
-      - gate-tuskar-pep8
-      - gate-tuskar-python26
-      - gate-tuskar-python27
-
-  - name: stackforge/python-tuskarclient
-    check:
-      - gate-python-tuskarclient-pep8
-      - gate-python-tuskarclient-pylint
-      - gate-python-tuskarclient-python26
-      - gate-python-tuskarclient-python27
-      - gate-python-tuskarclient-python33
-    gate:
-      - gate-python-tuskarclient-pep8
       - gate-python-tuskarclient-python26
       - gate-python-tuskarclient-python27
     post:
@@ -3185,29 +3119,3 @@ projects:
       - rally-tarball
     release:
       - rally-tarball
-
-  - name: stackforge/manila
-    check:
-      - gate-manila-pep8
-      - gate-manila-python26
-      - gate-manila-python27
-    gate:
-      - gate-manila-pep8
-      - gate-manila-python26
-      - gate-manila-python27
-    post:
-      - manila-branch-tarball
-      - manila-coverage
-
-  - name: stackforge/python-manilaclient
-    check:
-      - gate-python-manilaclient-pep8
-      - gate-python-manilaclient-python26
-      - gate-python-manilaclient-python27
-    gate:
-      - gate-python-manilaclient-pep8
-      - gate-python-manilaclient-python26
-      - gate-python-manilaclient-python27
-    post:
-      - python-manilaclient-branch-tarball
-      - python-manilaclient-coverage
