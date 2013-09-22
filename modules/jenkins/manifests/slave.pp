@@ -69,19 +69,6 @@ class jenkins::slave(
     $packages = $common_packages
   }
 
-  if ($::lsbdistcodename == 'precise') {
-    package { 'ubuntu-cloud-keyring':
-      ensure => present,
-    }
-
-    apt::source { 'cloudarchive':
-      location => 'http://ubuntu-cloud.archive.canonical.com/ubuntu',
-      release  => 'precise-updates/havana',
-      repos    => ['main'],
-      require  => Package['ubuntu-cloud-keyring'],
-    }
-  }
-
   package { $packages:
     ensure => present,
   }
