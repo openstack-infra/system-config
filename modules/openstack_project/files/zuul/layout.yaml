@@ -1728,6 +1728,7 @@ projects:
       - heat-branch-tarball
       - heat-coverage
       - heat-docs
+      - heat-upstream-translation-update
     pre-release:
       - heat-tarball
     release:
@@ -1737,6 +1738,7 @@ projects:
       - periodic-heat-docs-stable-grizzly
       - periodic-heat-python26-stable-grizzly
       - periodic-heat-python27-stable-grizzly
+      - heat-propose-translation-update
 
   - name: openstack/python-heatclient
     check:

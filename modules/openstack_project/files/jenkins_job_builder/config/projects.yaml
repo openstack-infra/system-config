@@ -332,6 +332,7 @@
       - python-jobs
       - python-grizzly-bitrot-jobs
       - openstack-publish-jobs
+      - translation-jobs
 
 
 - project:
