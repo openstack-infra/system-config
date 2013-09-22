@@ -231,7 +231,7 @@ jobs:
       - '^.*requirements.txt$'
   - name: ^gate-requirements-pep8$
     branch: ^(?!stable/(folsom|grizzly)).*$
-  - name: ^gate-requirements-python27$
+  - name: ^gate-requirements-(python27|pypy)$
     branch: ^(?!stable/(folsom|grizzly)).*$
   - name: manuals-upstream-translation-update
     branch: ^master$
@@ -1389,6 +1389,7 @@ projects:
       - gate-requirements-install
       - gate-requirements-pep8
       - gate-requirements-python27
+      - gate-requirements-pypy
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-postgres-full
       - gate-tempest-devstack-vm-neutron
@@ -1399,6 +1400,7 @@ projects:
       - gate-requirements-install
       - gate-requirements-pep8
       - gate-requirements-python27
+      - gate-requirements-pypy
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-postgres-full
       - gate-tempest-devstack-vm-neutron
