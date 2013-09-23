@@ -30,7 +30,9 @@ class openstack_project::elasticsearch (
     sysadmins                 => $sysadmins,
   }
 
-  class { 'logstash::elasticsearch':
+  class { 'logstash::elasticsearch': }
+
+  class { '::elasticsearch':
     discover_nodes => $discover_nodes,
   }
 
