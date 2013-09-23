@@ -14,50 +14,7 @@
 #
 # Class to install elasticsearch.
 #
-class logstash::elasticsearch (
-  discover_nodes = ['localhost']
-) {
-  # install java runtime
-  package { 'java7-runtime-headless':
-    ensure => present,
-  }
-
-  exec { 'get_elasticsearch_deb':
-    command => 'wget http://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-0.20.5.deb -O /tmp/elasticsearch-0.20.5.deb',
-    path    => '/bin:/usr/bin',
-    creates => '/tmp/elasticsearch-0.20.5.deb',
-  }
-
-  # install elastic search
-  package { 'elasticsearch':
-    ensure    => latest,
-    source    => '/tmp/elasticsearch-0.20.5.deb',
-    provider  => 'dpkg',
-    subscribe => Exec['get_elasticsearch_deb'],
-    require   => [
-      Package['java7-runtime-headless'],
-      Exec['get_elasticsearch_deb'],
-    ]
-  }
-
-  file { '/etc/elasticsearch/elasticsearch.yml':
-    ensure  => present,
-    content => template('logstash/elasticsearch.yml.erb'),
-    replace => true,
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0644',
-    require => Package['elasticsearch'],
-  }
-
-  file { '/etc/elasticsearch/templates':
-    ensure  => directory,
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0755',
-    require => Package['elasticsearch'],
-  }
-
+class logstash::elasticsearch {
   file { '/etc/elasticsearch/templates/logstash_settings.json':
     ensure  => present,
     source  => 'puppet:///modules/logstash/es-logstash-template.json',
@@ -66,35 +23,5 @@ class logstash::elasticsearch (
     group   => 'root',
     mode    => '0644',
     require => File['/etc/elasticsearch/templates'],
-  }
-
-  file { '/etc/elasticsearch/default-mapping.json':
-    ensure  => present,
-    source  => 'puppet:///modules/logstash/elasticsearch.mapping.json',
-    replace => true,
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0644',
-    require => Package['elasticsearch'],
-  }
-
-  file { '/etc/default/elasticsearch':
-    ensure  => present,
-    source  => 'puppet:///modules/logstash/elasticsearch.default',
-    replace => true,
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0644',
-    require => Package['elasticsearch'],
-  }
-
-  service { 'elasticsearch':
-    ensure    => running,
-    require   => [
-      Package['elasticsearch'],
-      File['/etc/elasticsearch/elasticsearch.yml'],
-      File['/etc/elasticsearch/default-mapping.json'],
-      File['/etc/default/elasticsearch'],
-    ],
   }
 }
