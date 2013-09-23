@@ -56,4 +56,10 @@ class openstack_project::wiki (
     backup_user   => 'bup-wiki',
     backup_server => 'ci-backup-rs-ord.openstack.org',
   }
+
+  class { 'elasticsearch':
+    discover_nodes        => ['localhost'],
+    elasticsearch_version => '0.90.5',
+  }
+
 }
