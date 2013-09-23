@@ -31,6 +31,7 @@ class openstack_project::eavesdrop (
         '#openstack-meeting-alt',
         '#openstack-metering',
         '#openstack-qa',
+        '#openstack-trove',
         '#savanna',
         '#openstack-dns',
     ],
