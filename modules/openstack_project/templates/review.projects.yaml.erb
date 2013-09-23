@@ -11,6 +11,10 @@
   has-pull-requests: False
   has-downloads: False
 ---
+<% if for_security -%>
+- project: All-Projects
+  acl-config: /home/gerrit2/acls/All-Projects-review_security.config
+<% end -%>
 - project: openstack/heat-cfntools
   upstream: git://github.com/heat-api/heat-cfntools.git
 - project: openstack/heat
