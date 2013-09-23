@@ -52,7 +52,7 @@ jobs:
   * Minimal use of plugins: the more post-processing work that Jenkins
     needs to perform on a job, the more likely we are to run into
     compatibility problems among plugins, and contention for shared
-    resources on the Jenkins master.  A number of popuplar plugins
+    resources on the Jenkins master.  A number of popular plugins
     will cause all builds of a job to be serialized even if the jobs
     otherwise run in parallel.
   * Minimal build history: Jenkins stores build history in individual
@@ -92,3 +92,58 @@ based tests.
 The :ref:`devstack-gate` project is used to maintain a pool of Jenkins
 slaves that are used to run these tests.  Devstack-gate jobs create
 and delete Jenkins slaves as needed in order to maintain the pool.
+
+Sysadmin
+========
+
+Jenkins is largely hidden, and has no sensitive data exposed
+publically, so we use self-signed certs for Jenkins masters.
+
+After bringing up a jenkins node (16G memory instance if you use the
+stock jenkins.default) with puppet, log in and configure Jenkins by
+hand:
+
+#. Configure the site so it knows it's correct url.
+   (Jenkins URL in global config). This is needed to complete an SSO
+   sign-in.
+
+#. Configure the OpenID plugin for your SSO site (e.g. Launchpad)
+
+#. Do not set CSRF protection - that breaks Jenkins job builder.
+
+#. Login.
+
+#. Setup matrix security: add the 'authenticated' pseudo user and 
+   grant Admin access to your own user. 
+
+#. Setup one account per `http://ci.openstack.org/jenkins-job-builder/installation.html#configuration-file`
+   and grab the API token for it.
+
+#. Configure the number of executors you want on the Jenkins Master
+   (e.g. 1)
+
+#. Configure a maven environment (if you have Maven projects to test).
+
+#. Enable the gearman plugin globally.  Your gearman server is
+   zuul.$project. If Test Connection fails, do a puppet run (puppet
+   agent --test) on the zuul machine, as gearman wouldn't have started
+   with no workers configured.
+
+#. Configure the timestamper plugin. E.g. to
+   '<b>'yyyy-MM-dd HH:mm:ss'</b> '
+
+#. Enable the zmq plugin globally if it is visible. No settings were
+   visible when writing this doc.
+
+#. You will configure global scp and ftp credentials for static and
+   docs sites respectively later, but as we haven't setup those sites
+   yet, thats not possible :).
+
+Puppet takes care of the rest.
+
+Quirks
+------
+
+Note that jenkins talks to it's slaves via ssh, the
+modules/openstack_project/manifests/init.pp file contains the ssh
+public key that puppet installs on the slaves.
