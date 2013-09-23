@@ -114,7 +114,7 @@ class drupal (
   pear::package { 'PEAR': }
   pear::package { 'Console_Table': }
   pear::package { 'drush':
-      version    => '5.9.0',
+      version    => '6.0.0',
       repository => 'pear.drush.org',
       require    => Pear::Package['PEAR'],
   }
