@@ -30,30 +30,43 @@
 # 12:09 <@spearce> so. you get 5 milliseconds before aborting
 # thus, set it to 5000minutes until the bug is fixed.
 class openstack_project::review (
+  # Created by running jeepyb ?
   $github_oauth_token = '',
+  # Create a dedicated user e.g. openstack-project-creator, put
+  # details here.
   $github_project_username = '',
   $github_project_password = '',
+  # Create arbitrary values and put here, puppet will use during
+  # provisioning.
   $mysql_password = '',
   $mysql_root_password = '',
   $email_private_key = '',
+  # Register an IRC bot and supply it's password here.
   $gerritbot_password = '',
+  # Register SSL keys and pass their contents in.
   $ssl_cert_file_contents = '',
   $ssl_key_file_contents = '',
   $ssl_chain_file_contents = '',
+  # Create SSH server key by hand and supply here.
   $ssh_dsa_key_contents = '',
   $ssh_dsa_pubkey_contents = '',
   $ssh_rsa_key_contents = '',
   $ssh_rsa_pubkey_contents='',
+  # manage-projects's user ssh key.
   $ssh_project_rsa_key_contents='',
   $ssh_project_rsa_pubkey_contents='',
+  # To be deleted.
   $lp_sync_key='', # If left empty puppet will not create file.
   $lp_sync_pubkey='', # If left empty puppet will not create file.
   $lp_sync_consumer_key='',
   $lp_sync_token='',
   $lp_sync_secret='',
+  # For gerrit's contactstore feature
+  # https://review.openstack.org/Documentation/config-contact.html
   $contactstore_appsec='',
   $contactstore_pubkey='',
   $sysadmins = [],
+  # For openstackwatch.
   $swift_username = '',
   $swift_password = ''
 ) {
