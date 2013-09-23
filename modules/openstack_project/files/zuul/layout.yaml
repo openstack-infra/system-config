@@ -2805,9 +2805,9 @@ projects:
 
   - name: stackforge/openstack-chef-repo
     check:
-      - gate-noop
+      - gate-openstack-chef-repo
     gate:
-      - gate-noop
+      - gate-openstack-chef-repo
 
   - name: stackforge/cookbook-openstack-common
     check:
