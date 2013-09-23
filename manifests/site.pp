@@ -42,6 +42,26 @@ node 'review.openstack.org' {
   }
 }
 
+node 'review-security.openstack.org' {
+  class { 'openstack_project::review_security':
+    mysql_password                  => hiera('gerrit_sr_mysql_password'),
+    mysql_root_password             => hiera('gerrit_sr_mysql_root_password'),
+    email_private_key               => hiera('gerrit_sr_email_private_key'),
+    ssl_cert_file_contents          => hiera('gerrit_sr_ssl_cert_file_contents'),
+    ssl_key_file_contents           => hiera('gerrit_sr_ssl_key_file_contents'),
+    ssl_chain_file_contents         => hiera('gerrit_sr_ssl_chain_file_contents'),
+    ssh_dsa_key_contents            => hiera('gerrit_sr_ssh_dsa_key_contents'),
+    ssh_dsa_pubkey_contents         => hiera('gerrit_sr_ssh_dsa_pubkey_contents'),
+    ssh_rsa_key_contents            => hiera('gerrit_sr_ssh_rsa_key_contents'),
+    ssh_rsa_pubkey_contents         => hiera('gerrit_sr_ssh_rsa_pubkey_contents'),
+    ssh_project_rsa_key_contents    => hiera('gerrit_sr_project_ssh_rsa_key_contents'),
+    ssh_project_rsa_pubkey_contents => hiera('gerrit_sr_project_ssh_rsa_pubkey_contents'),
+    contactstore_appsec             => hiera('gerrit_sr_contactstore_appsec'),
+    contactstore_pubkey             => hiera('gerrit_sr_contactstore_pubkey'),
+    sysadmins                       => hiera('sysadmins'),
+  }
+}
+
 node 'review-dev.openstack.org' {
   class { 'openstack_project::review_dev':
     github_oauth_token              => hiera('gerrit_dev_github_token'),
