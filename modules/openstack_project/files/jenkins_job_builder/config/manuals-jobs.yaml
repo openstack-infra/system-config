@@ -28,6 +28,11 @@
           target: ''
           remove-prefix: 'doc/{manual}/target/docbkx/webhelp/'
           excludes: '**/*.xml,**/null*'
+      - ftp:
+          site: docs.openstack.org
+          source: 'doc/{manual}/target/docbkx/webhelp/**/atom.xml'
+          target: ''
+          remove-prefix: 'doc/{manual}/target/docbkx/webhelp/'
 
 - job-template:
     name: 'openstack-install-deploy-guide-{distribution}'
@@ -60,6 +65,11 @@
           target: '/'
           remove-prefix: 'doc/install-guide/target/docbkx/webhelp/'
           excludes: '**/*.xml,**/null*'
+      - ftp:
+          site: docs.openstack.org
+          source: 'doc/install-guide/target/docbkx/webhelp/**/atom.xml'
+          target: '/'
+          remove-prefix: 'doc/install-guide/target/docbkx/webhelp/'
 
 - job-template:
     name: openstack-{oldmanual}-old
@@ -135,4 +145,3 @@
           source: 'doc/src/docbkx/{install}/target/docbkx/webhelp/**/atom.xml'
           target: ''
           remove-prefix: 'doc/src/docbkx/{install}/target/docbkx/webhelp/'
-
