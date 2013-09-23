@@ -1,0 +1,10 @@
+Verified+2: Jenkins
+Code-Review+1: Sean Dague <sean@dague.net>
+Approved+1: Jeremy Stanley <fungi@yuggoth.org>
+Code-Review+2: Jeremy Stanley <fungi@yuggoth.org>
+Code-Review+1: Khai Do <zaro0508@gmail.com>
+Submitted-by: Jenkins
+Submitted-at: Mon, 23 Sep 2013 21:42:02 +0000
+Reviewed-on: https://review.openstack.org/47838
+Project: openstack-infra/config
+Branch: refs/heads/master
