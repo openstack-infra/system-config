@@ -42,7 +42,15 @@ then
     git clone $GIT_ORIGIN/$ZUUL_PROJECT .
 fi
 git remote set-url origin $GIT_ORIGIN/$ZUUL_PROJECT
-git remote update || git remote update # attempt to work around bug #925790
+
+# attempt to work around bugs 925790 and 1229352
+if ! git remote update
+then
+    echo "The remote update failed, so garbage collecting before trying again."
+    git gc
+    git remote update
+fi
+
 git reset --hard
 git clean -x -f -d -q
 
