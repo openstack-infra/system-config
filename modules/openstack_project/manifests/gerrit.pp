@@ -4,6 +4,7 @@
 # up for launchpad single sign on and bug/blueprint links
 
 class openstack_project::gerrit (
+  $for_security = false,
   $vhost_name = $::fqdn,
   $canonicalweburl = "https://${::fqdn}/",
   $serveradmin = 'webmaster@openstack.org',
