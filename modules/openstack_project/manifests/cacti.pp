@@ -71,6 +71,7 @@ class openstack_project::cacti (
     'git02.openstack.org',
     'git03.openstack.org',
     'git04.openstack.org',
+    'review-security.openstack.org',
     'graphite.openstack.org',
     'jenkins.openstack.org',
     'jenkins01.openstack.org',

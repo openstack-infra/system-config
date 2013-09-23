@@ -1,4 +1,4 @@
-# == Class: openstack_project::review
+# == Class: openstack_project::review_security
 
 # Current thinking on Gerrit tuning parameters:
 
@@ -29,7 +29,7 @@
 # 12:08 <@spearce> to a method that accepts milliseconds
 # 12:09 <@spearce> so. you get 5 milliseconds before aborting
 # thus, set it to 5000minutes until the bug is fixed.
-class openstack_project::review (
+class openstack_project::review_security (
   # Created by running jeepyb ?
   $github_oauth_token = '',
   # Create a dedicated user e.g. openstack-project-creator, put
@@ -42,7 +42,6 @@ class openstack_project::review (
   $mysql_root_password = '',
   $email_private_key = '',
   # Register an IRC bot and supply it's password here.
-  $gerritbot_password = '',
   # Register SSL keys and pass their contents in.
   $ssl_cert_file_contents = '',
   $ssl_key_file_contents = '',
@@ -55,12 +54,6 @@ class openstack_project::review (
   # manage-projects's user ssh key.
   $ssh_project_rsa_key_contents='',
   $ssh_project_rsa_pubkey_contents='',
-  # To be deleted.
-  $lp_sync_key='', # If left empty puppet will not create file.
-  $lp_sync_pubkey='', # If left empty puppet will not create file.
-  $lp_sync_consumer_key='',
-  $lp_sync_token='',
-  $lp_sync_secret='',
   # For gerrit's contactstore feature
   # https://review.openstack.org/Documentation/config-contact.html
   $contactstore_appsec='',
@@ -80,6 +73,7 @@ class openstack_project::review (
   }
 
   class { 'openstack_project::gerrit':
+    for_security                    => true,
     ssl_cert_file                   =>
       '/etc/ssl/certs/review.openstack.org.pem',
     ssl_key_file                    =>
@@ -119,21 +113,12 @@ class openstack_project::review (
     github_oauth_token              => $github_oauth_token,
     github_project_username         => $github_project_username,
     github_project_password         => $github_project_password,
-    mysql_password                  => $mysql_password,
-    mysql_root_password             => $mysql_root_password,
-    trivial_rebase_role_id          => 'trivial-rebase@review.openstack.org',
+    trivial_rebase_role_id          => 'trivial-rebase@review-security.openstack.org',
     email_private_key               => $email_private_key,
     sysadmins                       => $sysadmins,
     swift_username                  => $swift_username,
     swift_password                  => $swift_password,
     replication                     => [
-      {
-        name                 => 'github',
-        url                  => 'git@github.com:',
-        authGroup            => 'Anonymous Users',
-        replicatePermissions => false,
-        mirror               => true,
-      },
       {
         name                 => 'local',
         url                  => 'file:///var/lib/git/',
@@ -141,67 +126,14 @@ class openstack_project::review (
         threads              => '4',
         mirror               => true,
       },
-      {
-        name                 => 'git01',
-        url                  => 'cgit@git01.openstack.org:/var/lib/git/',
-        replicationDelay     => '0',
-        threads              => '4',
-        mirror               => true,
-      },
-      {
-        name                 => 'git02',
-        url                  => 'cgit@git02.openstack.org:/var/lib/git/',
-        replicationDelay     => '0',
-        threads              => '4',
-        mirror               => true,
-      },
-      {
-        name                 => 'git03',
-        url                  => 'cgit@git03.openstack.org:/var/lib/git/',
-        replicationDelay     => '0',
-        threads              => '4',
-        mirror               => true,
-      },
-      {
-        name                 => 'git04',
-        url                  => 'cgit@git04.openstack.org:/var/lib/git/',
-        replicationDelay     => '0',
-        threads              => '4',
-        mirror               => true,
-      },
-      {
-        name                 => 'review-security',
-        url                  => 'gerrit2@review-security.openstack.org:/var/lib/git/',
-        replicationDelay     => '0',
-        threads              => '4',
-        mirror               => true,
-      },
     ],
   }
-
-  class { 'gerritbot':
-    nick       => 'openstackgerrit',
-    password   => $gerritbot_password,
-    server     => 'irc.freenode.net',
-    user       => 'gerritbot',
-    vhost_name => $::fqdn,
-  }
-  include gerrit::remotes
 
   file { '/var/log/gerrit_user_sync':
     ensure  => directory,
     owner   => 'root',
     group   => 'gerrit2',
     mode    => '0775',
-    require => User['gerrit2'],
-  }
-  file { '/home/gerrit2/.sync_logging.conf':
-    ensure  => present,
-    owner   => 'root',
-    group   => 'gerrit2',
-    mode    => '0644',
-    source  =>
-      'puppet:///modules/openstack_project/gerrit/launchpad_sync_logging.conf',
     require => User['gerrit2'],
   }
   file { '/home/gerrit2/.ssh':
@@ -211,48 +143,10 @@ class openstack_project::review (
     mode    => '0700',
     require => User['gerrit2'],
   }
-  if $lp_sync_key != '' {
-    file { '/home/gerrit2/.ssh/launchpadsync_rsa':
-      ensure  => present,
-      owner   => 'gerrit2',
-      group   => 'gerrit2',
-      mode    => '0600',
-      content => $lp_sync_key,
-      replace => true,
-      require => User['gerrit2'],
-    }
-  }
-  if $lp_sync_pubkey != '' {
-    file { '/home/gerrit2/.ssh/launchpadsync_rsa.pub':
-      ensure  => present,
-      owner   => 'gerrit2',
-      group   => 'gerrit2',
-      mode    => '0644',
-      content => $lp_sync_pubkey,
-      replace => true,
-      require => User['gerrit2'],
-    }
-  }
-  file { '/home/gerrit2/.launchpadlib':
-    ensure  => directory,
-    owner   => 'gerrit2',
-    group   => 'gerrit2',
-    mode    => '0775',
-    require => User['gerrit2'],
-  }
-  file { '/home/gerrit2/.launchpadlib/creds':
-    ensure  => present,
-    owner   => 'gerrit2',
-    group   => 'gerrit2',
-    mode    => '0600',
-    content => template('openstack_project/gerrit_lp_creds.erb'),
-    replace => true,
-    require => User['gerrit2'],
-  }
 
   include bup
   bup::site { 'rs-ord':
-    backup_user   => 'bup-review',
+    backup_user   => 'bup-review-security',
     backup_server => 'ci-backup-rs-ord.openstack.org',
   }
 }
