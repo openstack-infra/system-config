@@ -11,6 +11,10 @@
   has-pull-requests: False
   has-downloads: False
 ---
+<% if for_security -%>
+- project: All-Projects
+  acl-config: /home/gerrit2/acls/All-Projects-review_security.config
+<% end -%>
 - project: openstack-dev/cookiecutter
   description: Cookiecutter Template for new OpenStack projects
   upstream: git://github.com/emonty/cookiecutter-openstack.git
