@@ -1,4 +1,4 @@
-# == Class: openstack_project::review
+# == Class: openstack_project::review_security
 
 # Current thinking on Gerrit tuning parameters:
 
@@ -29,7 +29,7 @@
 # 12:08 <@spearce> to a method that accepts milliseconds
 # 12:09 <@spearce> so. you get 5 milliseconds before aborting
 # thus, set it to 5000minutes until the bug is fixed.
-class openstack_project::review (
+class openstack_project::review_security (
   # Created by running jeepyb ?
   $github_oauth_token = '',
   # Create a dedicated user e.g. openstack-project-creator, put
@@ -112,19 +112,12 @@ class openstack_project::review (
     github_project_password         => $github_project_password,
     mysql_password                  => $mysql_password,
     mysql_root_password             => $mysql_root_password,
-    trivial_rebase_role_id          => 'trivial-rebase@review.openstack.org',
+    trivial_rebase_role_id          => 'trivial-rebase@review-security.openstack.org',
     email_private_key               => $email_private_key,
     sysadmins                       => $sysadmins,
     swift_username                  => $swift_username,
     swift_password                  => $swift_password,
     replication                     => [
-      {
-        name                 => 'github',
-        url                  => 'git@github.com:',
-        authGroup            => 'Anonymous Users',
-        replicatePermissions => false,
-        mirror               => true,
-      },
       {
         name                 => 'local',
         url                  => 'file:///var/lib/git/',
@@ -132,51 +125,9 @@ class openstack_project::review (
         threads              => '4',
         mirror               => true,
       },
-      {
-        name                 => 'git01',
-        url                  => 'cgit@git01.openstack.org:/var/lib/git/',
-        replicationDelay     => '0',
-        threads              => '4',
-        mirror               => true,
-      },
-      {
-        name                 => 'git02',
-        url                  => 'cgit@git02.openstack.org:/var/lib/git/',
-        replicationDelay     => '0',
-        threads              => '4',
-        mirror               => true,
-      },
-      {
-        name                 => 'git03',
-        url                  => 'cgit@git03.openstack.org:/var/lib/git/',
-        replicationDelay     => '0',
-        threads              => '4',
-        mirror               => true,
-      },
-      {
-        name                 => 'git04',
-        url                  => 'cgit@git04.openstack.org:/var/lib/git/',
-        replicationDelay     => '0',
-        threads              => '4',
-        mirror               => true,
-      },
-      {
-        name                 => 'review-security',
-        url                  => 'cgit@review-security.openstack.org:/var/lib/git/',
-        replicationDelay     => '0',
-        threads              => '4',
-        mirror               => true,
-      },
     ],
   }
 
-  class { 'gerritbot':
-    nick       => 'openstackgerrit',
-    password   => $gerritbot_password,
-    server     => 'irc.freenode.net',
-    user       => 'gerritbot',
-    vhost_name => $::fqdn,
-  }
   include gerrit::remotes
 
   file { '/var/log/gerrit_user_sync':
