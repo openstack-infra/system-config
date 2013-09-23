@@ -11,6 +11,31 @@ node default {
 #
 # Long lived servers:
 #
+node 'review-security.openstack.org' {
+  class { 'openstack_project::review_security':
+    github_oauth_token              => hiera('gerrit_github_token'),
+    github_project_username         => hiera('github_project_username'),
+    github_project_password         => hiera('github_project_password'),
+    mysql_password                  => hiera('gerrit_rs_mysql_password'),
+    mysql_root_password             => hiera('gerrit_rs_mysql_root_password'),
+    email_private_key               => hiera('gerrit_email_private_key'),
+    ssl_cert_file_contents          => hiera('gerrit_rs_ssl_cert_file_contents'),
+    ssl_key_file_contents           => hiera('gerrit_rs_ssl_key_file_contents'),
+    ssl_chain_file_contents         => hiera('gerrit_rs_ssl_chain_file_contents'),
+    ssh_dsa_key_contents            => hiera('gerrit_rs_ssh_dsa_key_contents'),
+    ssh_dsa_pubkey_contents         => hiera('gerrit_rs_ssh_dsa_pubkey_contents'),
+    ssh_rsa_key_contents            => hiera('gerrit_rs_ssh_rsa_key_contents'),
+    ssh_rsa_pubkey_contents         => hiera('gerrit_rs_ssh_rsa_pubkey_contents'),
+    ssh_project_rsa_key_contents    => hiera('gerrit_rs_project_ssh_rsa_key_contents'),
+    ssh_project_rsa_pubkey_contents => hiera('gerrit_rs_project_ssh_rsa_pubkey_contents'),
+    contactstore_appsec             => hiera('gerrit_contactstore_appsec'),
+    contactstore_pubkey             => hiera('gerrit_contactstore_pubkey'),
+    sysadmins                       => hiera('sysadmins'),
+    swift_username                  => hiera('swift_rs_store_user'),
+    swift_password                  => hiera('swift_rs_store_key'),
+  }
+}
+
 node 'review.openstack.org' {
   class { 'openstack_project::review':
     github_oauth_token              => hiera('gerrit_github_token'),
