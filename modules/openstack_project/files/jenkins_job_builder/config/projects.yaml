@@ -1352,7 +1352,6 @@
     name: manuals
     manual:
       - admin-guide-cloud
-      - admin-guide-network
       - config-reference
       - glossary
       - image-guide
