@@ -370,7 +370,7 @@ projects:
 
   - name: openstack/requirements
     check:
-      - gate-requirements-install
+      - gate-noop
 
   - name: openstack-dev/grenade
     check:
