@@ -39,7 +39,18 @@ class openstack_project::activity_dev (
     ensure  => directory,
     owner   => 'www-data',
     group   => 'www-data',
-    require => User['www-data'],
+    mode    => '0775',
+    require => [
+      File['/srv/static'],
+      Package['apache2'],
+    ]
+  }
+
+  file { '/srv/static':
+    ensure  => directory,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0755',
   }
 
 }
