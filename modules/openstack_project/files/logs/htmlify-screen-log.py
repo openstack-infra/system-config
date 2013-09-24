@@ -27,9 +27,19 @@ DATEFMT = '\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}(\.\d{3})?'
 STATUSFMT = '(DEBUG|INFO|WARN|ERROR|TRACE|AUDIT)'
 LOGMATCH = '(?P<date>%s)(?P<pid> \d+)? (?P<status>%s)' % (DATEFMT, STATUSFMT)
 
+SEVS = {
+    'NONE': 0,
+    'DEBUG': 1,
+    'INFO': 2,
+    'AUDIT': 3,
+    'TRACE': 4,
+    'WARN': 5,
+    'ERROR': 6
+    }
+
 
 def _html_close():
-    return ("</span></pre></body></html>\n")
+    return ("</pre></body></html>\n")
 
 
 def _css_preamble():
@@ -45,14 +55,32 @@ a:hover {text-decoration: underline}
 .WARN, .WARN a {color: #D89100;  font-weight: bold}
 .INFO, .INFO a {color: #006; font-weight: bold}
 </style>
-<body><pre><span>\n""")
+<body>
+<p>
+Display level: [ <a href='?'>DEBUG</a> |
+<a href='?level=INFO'>INFO</a> |
+<a href='?level=AUDIT'>AUDIT</a> |
+<a href='?level=TRACE'>TRACE</a> |
+<a href='?level=WARN'>WARN</a> |
+<a href='?level=ERROR'>ERROR</a> ]
+</p>
+
+<pre>\n""")
+
+
+def sev_of_line(line, oldsev=None):
+    m = re.match(LOGMATCH, line)
+    if m:
+        return m.group('status')
+    else:
+        return oldsev
 
 
 def color_by_sev(line):
     """Wrap a line in a span whose class matches it's severity."""
-    m = re.match(LOGMATCH, line)
-    if m:
-        return "<span class='%s'>%s</span>" % (m.group('status'), line)
+    sev = sev_of_line(line)
+    if sev:
+        return "<span class='%s'>%s</span>" % (sev, line)
     else:
         return line
 
@@ -80,8 +108,22 @@ def link_timestamp(line):
         return line
 
 
-def passthrough_filter(fname):
+def skip_line_by_sev(sev, minsev):
+    """should we skip this line?
+
+    If the line severity is less than our minimum severity,
+    yes we should"""
+    return SEVS.get(sev, 0) < SEVS.get(minsev, 0)
+
+
+def passthrough_filter(fname, minsev):
+    sev = None
     for line in fileinput.FileInput(fname, openhook=fileinput.hook_compressed):
+        sev = sev_of_line(line, sev)
+
+        if skip_line_by_sev(sev, minsev):
+            continue
+
         yield line
 
 
@@ -103,7 +145,7 @@ def does_file_exist(fname):
     f.close()
 
 
-def html_filter(fname):
+def html_filter(fname, minsev):
     """Generator to read logs and output html in a stream.
 
     This produces a stream of the htmlified logs which lets us return
@@ -111,8 +153,12 @@ def html_filter(fname):
     """
 
     yield _css_preamble()
+    sev = None
     for line in fileinput.FileInput(fname, openhook=fileinput.hook_compressed):
         newline = escape_html(line)
+        sev = sev_of_line(newline, sev)
+        if skip_line_by_sev(sev, minsev):
+                continue
         newline = color_by_sev(newline)
         newline = link_timestamp(newline)
         yield newline
@@ -170,6 +216,14 @@ def should_be_html(environ):
     return accepts_html and not text_override
 
 
+def get_min_sev(environ):
+    parameters = cgi.parse_qs(environ.get('QUERY_STRING', ''))
+    if 'level' in parameters:
+        return cgi.escape(parameters['level'][0])
+    else:
+        return "DEBUG"
+
+
 def application(environ, start_response):
     status = '200 OK'
 
@@ -181,16 +235,17 @@ def application(environ, start_response):
         return ['Invalid file url']
 
     try:
+        minsev = get_min_sev(environ)
         if should_be_html(environ):
             response_headers = [('Content-type', 'text/html')]
             does_file_exist(logpath)
-            generator = html_filter(logpath)
+            generator = html_filter(logpath, minsev)
             start_response(status, response_headers)
             return generator
         else:
             response_headers = [('Content-type', 'text/plain')]
             does_file_exist(logpath)
-            generator = passthrough_filter(logpath)
+            generator = passthrough_filter(logpath, minsev)
             start_response(status, response_headers)
             return generator
     except IOError:
