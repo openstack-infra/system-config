@@ -11,8 +11,12 @@
           FILE="global-requirements.txt"
           # Ignore lines beginning with https?:// just as the mirror script does.
           sed -e '/^https\?:\/\//d' $FILE > $FILE.clean
+
+          # Ensure we have latest pip
+          .venv/bin/pip install -U pip
+
           # Run the same basic pip command that the mirror script runs.
-          .venv/bin/pip install -M -U --exists-action=w -r $FILE.clean
+          .venv/bin/pip install -U --exists-action=w -r $FILE.clean
           if [ -e dev-requirements.txt ] ; then
               .venv/bin/pip install -M -U --exists-action=w -r dev-requirements.txt
           fi
