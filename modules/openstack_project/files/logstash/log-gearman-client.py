@@ -85,8 +85,9 @@ class EventProcessor(threading.Thread):
         fields["filename"] = filename
         fields["build_name"] = event.get("name", "UNKNOWN")
         fields["build_status"] = event["build"].get("status", "UNKNOWN")
-        fields["build_number"] = event["build"].get("number", "UNKNOWN")
         parameters = event["build"].get("parameters", {})
+        fields["project"] = parameters.get("ZUUL_PROJECT", "UNKNOWN")
+        fields["build_uuid"] = parameters.get("ZUUL_UUID", "UNKNOWN")
         fields["build_queue"] = parameters.get("ZUUL_PIPELINE", "UNKNOWN")
         fields["build_ref"] = parameters.get("ZUUL_REF", "UNKNOWN")
         if parameters.get("ZUUL_CHANGE"):
@@ -103,6 +104,7 @@ class EventProcessor(threading.Thread):
         log_dir = self._get_log_dir(event)
         source_url = fileopts.get('source-url', self.source_url) + '/' + \
                 os.path.join(log_dir, fileopts['name'])
+        fields["log_url"] = source_url
         out_event = {}
         out_event["@fields"] = fields
         out_event["@tags"] = [fileopts['name']] + fileopts.get('tags', [])
