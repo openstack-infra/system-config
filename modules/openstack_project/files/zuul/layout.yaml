@@ -1381,7 +1381,6 @@ projects:
 
   - name: openstack/requirements
     check:
-      - gate-requirements-install
       - gate-requirements-pep8
       - gate-requirements-python27
       - gate-requirements-pypy
@@ -1392,7 +1391,6 @@ projects:
       - gate-grenade-devstack-vm
       - gate-swift-devstack-vm-functional
     gate:
-      - gate-requirements-install
       - gate-requirements-pep8
       - gate-requirements-python27
       - gate-requirements-pypy
