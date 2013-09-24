@@ -1096,6 +1096,14 @@
       - puppet-module-unit
 
 - project:
+    name: openstack-chef-repo
+    github-org: stackforge
+    node: precise
+
+    jobs:
+      - gate-openstack-chef-repo
+
+- project:
     name: cookbook-openstack-common
     github-org: stackforge
     node: precise

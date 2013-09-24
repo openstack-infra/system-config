@@ -33,3 +33,21 @@
 
     publishers:
       - console-log
+
+- job:
+    name: gate-openstack-chef-repo
+    node: precise
+
+    builders:
+      - gerrit-git-prep
+      - shell: |
+          #!/bin/bash -xe
+          mkdir -p .cookbooks .bundle
+          ruby1.9.1 /usr/bin/bundle install --path=.bundle
+          # Validates cookbooks
+          ruby1.9.1 /usr/bin/bundle exec berks install --path=.cookbooks
+          # Validates roles
+          ruby1.9.1 /usr/bin/bundle exec spiceweasel infrastructure.yml --debug
+
+    publishers:
+      - console-log
