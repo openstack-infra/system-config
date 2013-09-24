@@ -1349,6 +1349,17 @@
       - python-jobs
 
 - project:
+    name: gate-openstack-manuals-validation
+    check:
+       - niceness
+       - syntax
+       - delete
+       - build
+
+    jobs:
+      - gate-openstack-manuals-validate-{check}
+
+- project:
     name: manuals
     manual:
       - admin-guide-cloud
