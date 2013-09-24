@@ -1,0 +1,33 @@
+These are the scripts used to create the ATC lists for use in PTL
+elections and Summit invitations.
+
+0) Write a patch to email-stats.py so steps 1-2 are not necessary.
+1) Edit email-stats.py to set your gerrit username.
+2) Edit email-stats.py to set the start_date and end_date.
+3) Run the following queries on review.openstack.org:
+
+  SELECT * FROM accounts
+  INTO OUTFILE '/tmp/accounts.csv'
+  FIELDS TERMINATED BY ','
+  ENCLOSED BY '"'
+  LINES TERMINATED BY '\n';
+
+  SELECT * FROM account_external_ids
+  INTO OUTFILE '/tmp/emails.csv'
+  FIELDS TERMINATED BY ','
+  ENCLOSED BY '"'
+  LINES TERMINATED BY '\n';
+
+4) Copy those files to this directory.
+5) Run:
+
+  mkdir out
+  ./email-stats.sh
+  DATE=`date --iso`
+  mkdir $DATE
+  cat out/*.csv | sort | uniq > $DATE/all.csv
+  mv out/* $DATE/
+
+6) You can use diff.py to get the new ATCs since the previous run:
+
+  ./diff.py $OLD-DATE/all.csv $DATE/all.csv $DATE/new.csv
