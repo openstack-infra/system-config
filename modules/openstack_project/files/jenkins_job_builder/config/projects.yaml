@@ -1397,6 +1397,12 @@
 
 - project:
     name: manuals
+    check:
+       - niceness
+       - syntax
+       - deletions
+       - build
+
     manual:
       - admin-guide-cloud
       - config-reference
@@ -1413,6 +1419,8 @@
         - network-connectivity-admin
 
     jobs:
+      - gate-openstack-manuals-validate-{check}
+
       - 'openstack-{manual}'
 
       - openstack-install-deploy-guide-{distribution}:
