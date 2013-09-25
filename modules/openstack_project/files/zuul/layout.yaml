@@ -1877,17 +1877,26 @@ projects:
 
   - name: openstack/marconi
     check:
+      - gate-marconi-requirements
       - gate-marconi-pep8
       - gate-marconi-python26
       - gate-marconi-python27
       - gate-marconi-python33
       - gate-marconi-pypy
     gate:
+      - gate-marconi-requirements
       - gate-marconi-pep8
       - gate-marconi-python26
       - gate-marconi-python27
       - gate-marconi-python33
       - gate-marconi-pypy
+    post:
+      - marconi-branch-tarball
+    pre-release:
+      - marconi-tarball
+    release:
+      - marconi-tarball
+      - marconi-docs
 
   - name: stackforge/staccato
     check:
@@ -2787,17 +2796,29 @@ projects:
 
   - name: openstack/python-marconiclient
     check:
+      - gate-python-marconiclient-requirements
       - gate-python-marconiclient-pep8
       - gate-python-marconiclient-python26
       - gate-python-marconiclient-python27
       - gate-python-marconiclient-python33
       - gate-python-marconiclient-pypy
     gate:
+      - gate-python-marconiclient-requirements
       - gate-python-marconiclient-pep8
       - gate-python-marconiclient-python26
       - gate-python-marconiclient-python27
       - gate-python-marconiclient-python33
       - gate-python-marconiclient-pypy
+    post:
+      - python-marconiclient-branch-tarball
+    pre-release:
+      - python-marconiclient-tarball
+    release:
+      - python-marconiclient-tarball:
+        - python-marconiclient-pypi-upload:
+          - post-mirror-python26
+          - post-mirror-python27
+          - post-mirror-python33
 
   - name: stackforge/cookbook-openstack-block-storage
     check:

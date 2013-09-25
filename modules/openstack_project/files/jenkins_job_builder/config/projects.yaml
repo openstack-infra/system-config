@@ -764,10 +764,12 @@
     name: marconi
     github-org: openstack
     tarball-site: tarballs.openstack.org
+    doc-publisher-site: docs.openstack.org
     node: precise
 
     jobs:
       - python-jobs
+      - openstack-publish-jobs
 
 - project:
     name: python-marconiclient
@@ -777,6 +779,7 @@
 
     jobs:
       - python-jobs
+      - pypi-jobs
 
 - project:
     name: designate
