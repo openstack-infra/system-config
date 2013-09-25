@@ -127,7 +127,8 @@ Infrastructure team to OpenStack channels.  It updates the
 `Infrastructure Status wiki page
 <https://wiki.openstack.org/wiki/Infrastructure_Status>`_.  It
 supports the following commands when issued by authenticated and
-whitelisted users:
+whitelisted users (public messages on channels the bot is
+listening to, including #openstack-infra):
 
 #status log MESSAGE
   Log a message to the wiki page.
