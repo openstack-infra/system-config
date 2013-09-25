@@ -269,8 +269,6 @@ jobs:
     voting: false
   - name: gate-python-keystoneclient-python33
     voting: false
-  - name: gate-python-marconiclient-python33
-    voting: false
   - name: gate-python-neutronclient-python33
     voting: false
   - name: gate-python-novaclient-python33
