@@ -1,0 +1,11 @@
+Code-Review+2: Monty Taylor <mordred@inaugust.com>
+Verified+2: Jenkins
+Approved+1: Jeremy Stanley <fungi@yuggoth.org>
+Code-Review+2: Jeremy Stanley <fungi@yuggoth.org>
+Code-Review+1: Alejandro Cabrera <alejandro.cabrera@rackspace.com>
+Code-Review+1: Alex Gaynor <alex.gaynor@gmail.com>
+Submitted-by: Jenkins
+Submitted-at: Wed, 25 Sep 2013 13:34:56 +0000
+Reviewed-on: https://review.openstack.org/48089
+Project: openstack-infra/config
+Branch: refs/heads/master
