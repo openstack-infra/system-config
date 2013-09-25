@@ -126,8 +126,9 @@ Statusbot is used to distribute urgent information from the
 Infrastructure team to OpenStack channels.  It updates the
 `Infrastructure Status wiki page
 <https://wiki.openstack.org/wiki/Infrastructure_Status>`_.  It
-supports the following commands when issued by authenticated and
-whitelisted users:
+supports the following public message commands when issued by
+authenticated and whitelisted users from the channels the bot is
+listening to, including #openstack-infra:
 
 #status log MESSAGE
   Log a message to the wiki page.
