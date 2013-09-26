@@ -241,12 +241,6 @@ jobs:
     voting: false
   - name: gate-savanna-pylint
     voting: false
-  - name: gate-savanna-requirements
-    voting: false
-  - name: gate-python-savannaclient-requirements
-    voting: false
-  - name: gate-savanna-dashboard-requirements
-    voting: false
   - name: gate-django_openstack_auth-pep8
     voting: false
   - name: gate-django_openstack_auth-docs
@@ -2369,7 +2363,7 @@ projects:
       - gate-anvil-pep8
       - gate-anvil-pylint
 
-  - name: stackforge/savanna
+  - name: openstack/savanna
     check:
       - gate-savanna-docs
       - gate-savanna-pep8
@@ -2398,10 +2392,11 @@ projects:
           - post-mirror-python27
           - post-mirror-python33
       - hook-savanna-rtfd
+      - savanna-docs
     periodic:
       - savanna-propose-translation-update
 
-  - name: stackforge/python-savannaclient
+  - name: openstack/python-savannaclient
     check:
       - gate-python-savannaclient-pep8
       - gate-python-savannaclient-python26
@@ -2427,7 +2422,7 @@ projects:
            - post-mirror-python33
        - hook-python-savannaclient-rtfd
 
-  - name: stackforge/savanna-dashboard
+  - name: openstack/savanna-dashboard
     check:
       - gate-savanna-dashboard-pep8
       - gate-savanna-dashboard-python26
@@ -2453,19 +2448,19 @@ projects:
           - post-mirror-python33
       - hook-savanna-dashboard-rtfd
 
-  - name: stackforge/savanna-extra
+  - name: openstack/savanna-extra
     check:
       - gate-noop
     gate:
       - gate-noop
 
-  - name: stackforge/savanna-image-elements
+  - name: openstack/savanna-image-elements
     check:
       - gate-noop
     gate:
       - gate-noop
 
-  - name: stackforge/puppet-savanna
+  - name: openstack/puppet-savanna
     check:
       - gate-noop
     gate:
