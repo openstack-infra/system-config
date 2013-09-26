@@ -12,9 +12,7 @@
           curl --fail -o $FILENAME http://{tarball-site}/{name}/$FILENAME
           # Make sure we actually got a gzipped file
           file -b $FILENAME | grep gzip
-
-      - shell: |
-          /usr/local/jenkins/slave_scripts/pypi-upload.sh {name}
+          twine upload $FILENAME
 
     publishers:
       - console-log
