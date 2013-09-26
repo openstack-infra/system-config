@@ -121,21 +121,29 @@ class LogRetriever(threading.Thread):
     def _get_log_data(self, source_url, retry):
         gzipped = False
         try:
-            logging.debug("Retrieving: " + source_url)
-            r = urllib2.urlopen(source_url)
-            if 'gzip' in r.info().get('Content-Type', ''):
-                gzipped = True
+            # TODO(clarkb): We really should be using requests instead
+            # of urllib2. urllib2 will automatically perform a POST
+            # instead of a GET if we provide urlencoded data to urlopen
+            # but we need to do a GET. The parameters are currently
+            # hardcoded so this should be ok for now.
+            logging.debug("Retrieving: " + source_url + ".gz?level=INFO")
+            req = urllib2.Request(source_url + ".gz?level=INFO")
+            req.add_header('Accept-encoding', 'gzip')
+            r = urllib2.urlopen(req)
         except urllib2.URLError:
             try:
-                logging.debug("Retrieving: " + source_url + ".gz")
-                r = urllib2.urlopen(source_url + ".gz")
-                gzipped = True
+                # Fallback on GETting unzipped data.
+                logging.debug("Retrieving: " + source_url + "?level=INFO")
+                r = urllib2.urlopen(source_url + "?level=INFO")
             except:
                 logging.exception("Unable to retrieve source file.")
                 raise
         except:
             logging.exception("Unable to retrieve source file.")
             raise
+        if ('gzip' in r.info().get('Content-Type', '') or
+            'gzip' in r.info().get('Content-Encoding', '')):
+            gzipped = True
 
         raw_buf = r.read()
         # Hack to read all of Jenkins console logs as they upload
@@ -148,9 +156,10 @@ class LogRetriever(threading.Thread):
             for i in range(60):
                 # Try for up to 60 seconds to retrieve the complete log file.
                 try:
-                    logging.debug(str(i) + " Retrying fetch of: " + source_url)
+                    logging.debug(str(i) + " Retrying fetch of: " +
+                                  source_url + "?level=INFO")
                     logging.debug("Fetching bytes="  + str(content_len) + '-')
-                    req = urllib2.Request(source_url)
+                    req = urllib2.Request(source_url + "?level=INFO")
                     req.add_header('Range', 'bytes=' + str(content_len) + '-')
                     r = urllib2.urlopen(req)
                     raw_buf += r.read()
