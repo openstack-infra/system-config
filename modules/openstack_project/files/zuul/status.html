@@ -2,14 +2,81 @@
       xmlns:py="http://genshi.edgewall.org/"
       lang="en">
   <HEAD>
+    <TITLE>Zuul Status</TITLE>
+
+<script type="text/javascript"
+	src="http://status.openstack.org/jquery.min.js"></script>
+<script type="text/javascript"
+	src="http://status.openstack.org/jquery-visibility.min.js"></script>
+<script type="text/javascript"
+	src="http://status.openstack.org/jquery-graphite.js"></script>
+<script type="text/javascript"
+	src="http://status.openstack.org/common.js"></script>
+<script type="text/javascript"
+	src="status.js"></script>
+
+    <!-- Google Fonts -->
+    <link href='http://fonts.googleapis.com/css?family=PT+Sans&amp;subset=latin' rel='stylesheet' type='text/css'/>
+
+    <!-- Framework CSS -->
+    <link rel="stylesheet" href="http://www.openstack.org/themes/openstack/css/blueprint/screen.css" type="text/css" media="screen, projection"/>
+    <link rel="stylesheet" href="http://www.openstack.org/themes/openstack/css/blueprint/print.css" type="text/css" media="print"/>
+
+    <!-- IE CSS -->
+    <!--[if lt IE 8]><link rel="stylesheet" href="http://www.openstack.org/blueprint/ie.css" type="text/css" media="screen, projection"><![endif]-->
+
+    <!-- OpenStack Specific CSS -->
+
+    <link rel="stylesheet" href="http://www.openstack.org/themes/openstack/css/dropdown.css" type="text/css" media="screen, projection, print"/>
+
+    <!-- Page Specific CSS -->
+    <link rel="stylesheet" href="http://www.openstack.org/themes/openstack/css/home.css" type="text/css" media="screen, projection, print"/>
+
+    <link rel="stylesheet" type="text/css" href="http://www.openstack.org/themes/openstack/css/main.css" />
+
+
 <style type="text/css">
+.container {
+    width: 1024px;
+}
 #pipeline-container {
-    max-width: 950px;
     margin: 0 auto;
+}
+.line {
+    background-image: url('line.png');
+    background-repeat: repeat-y;
+}
+.pipeline {
+    float: left;
+    padding: 4px;
+}
+.pipeline > .header {
+    background: #0000cc;
+    color: white;
+}
+.pipeline > .subhead > .count {
+    float: right;
+    margin-right: 1em;
+    color: #535353;
+    font-size: 11pt;
+}
+.pipeline table {
+    margin: 0 0 2px 0;
+}
+.pipeline table td {
+    margin: 0;
+    padding: 0 0 10px 0;
+}
+td.graph {
+    width: 16px;
+    height: 100%;
+    vertical-align: top;
+}
+.pipeline table td.change-container {
+    padding-left: 4px;
 }
 .change {
     border: 1px solid #95c7db;
-    margin-top: 10px;
     padding: 2px;
 }
 .change > .header {
@@ -24,28 +91,9 @@
 .change > .header > .time {
     float: right;
 }
-.pipeline > .subhead > .count {
-    float: right;
-    margin-right: 1em;
-    color: #535353;
-    font-size: 11pt;
-}
 .job {
     display: block;
-}
-.pipeline {
-    float: left;
-    width: 25em;
-    padding: 4px;
-}
-.pipeline > .header {
-    background: #0000cc;
-    color: white;
-}
-.arrow {
-    text-align: center;
-    font-size: 16pt;
-    line-height: 1.0;
+    line-height: 1.5;
 }
 .result {
     float: right;
@@ -58,6 +106,12 @@
 }
 .result_unstable {
     color: #e39f00;
+}
+#graph-container img {
+    margin-left: 10px;
+}
+#graph-container img:first-of-type {
+    margin-left: 0px;
 }
 a:link {
     color: #204A87;
@@ -143,37 +197,6 @@ progress[aria-valuenow]:before  {
 
 </style>
 
-    <TITLE>Zuul Status</TITLE>
-
-<script type="text/javascript"
-	src="http://status.openstack.org/jquery.min.js"></script>
-<script type="text/javascript"
-	src="http://status.openstack.org/jquery-visibility.min.js"></script>
-<script type="text/javascript"
-	src="http://status.openstack.org/jquery-graphite.js"></script>
-<script type="text/javascript"
-	src="http://status.openstack.org/common.js"></script>
-<script type="text/javascript"
-	src="status.js"></script>
-
-    <!-- Google Fonts -->
-    <link href='http://fonts.googleapis.com/css?family=PT+Sans&amp;subset=latin' rel='stylesheet' type='text/css'/>
-
-    <!-- Framework CSS -->
-    <link rel="stylesheet" href="http://www.openstack.org/themes/openstack/css/blueprint/screen.css" type="text/css" media="screen, projection"/>
-    <link rel="stylesheet" href="http://www.openstack.org/themes/openstack/css/blueprint/print.css" type="text/css" media="print"/>
-
-    <!-- IE CSS -->
-    <!--[if lt IE 8]><link rel="stylesheet" href="http://www.openstack.org/blueprint/ie.css" type="text/css" media="screen, projection"><![endif]-->
-
-    <!-- OpenStack Specific CSS -->
-
-    <link rel="stylesheet" href="http://www.openstack.org/themes/openstack/css/dropdown.css" type="text/css" media="screen, projection, print"/>
-
-    <!-- Page Specific CSS -->
-    <link rel="stylesheet" href="http://www.openstack.org/themes/openstack/css/home.css" type="text/css" media="screen, projection, print"/>
-
-    <link rel="stylesheet" type="text/css" href="http://www.openstack.org/themes/openstack/css/main.css" />
   </HEAD>
 
   <BODY>
@@ -211,8 +234,8 @@ $.fn.graphite.defaults.url = "http://graphite.openstack.org/render/";
 
 $("#graph-container").append($(new Image()).addClass('graph').graphite({
     from: "-24hours",
-    width: 310,
-    height: 170,
+    width: 334,
+    height: 180,
     bgcolor: 'ffffff',
     fgcolor: '000000',
     areaMode: 'stacked',
@@ -227,8 +250,8 @@ $("#graph-container").append($(new Image()).addClass('graph').graphite({
 
 $("#graph-container").append($(new Image()).addClass('graph').graphite({
     from: "-24hours",
-    width: 310,
-    height: 170,
+    width: 334,
+    height: 180,
     bgcolor: 'ffffff',
     fgcolor: '000000',
     target: [
@@ -239,8 +262,8 @@ $("#graph-container").append($(new Image()).addClass('graph').graphite({
 
 $("#graph-container").append($(new Image()).addClass('graph').graphite({
     from: "-24hours",
-    width: 310,
-    height: 170,
+    width: 334,
+    height: 180,
     bgcolor: 'ffffff',
     fgcolor: '000000',
     target: [
