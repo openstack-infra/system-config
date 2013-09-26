@@ -122,12 +122,17 @@ class LogRetriever(threading.Thread):
         gzipped = False
         try:
             logging.debug("Retrieving: " + source_url)
-            r = urllib2.urlopen(source_url)
+            # TODO(clarkb): We really should be using requests instead
+            # of urllib2. urllib2 will automatically perform a POST
+            # instead of a GET if we provide urlencoded data to urlopen
+            # but we need to do a GET. The parameters are currently
+            # hardcoded so this should be ok for now.
+            r = urllib2.urlopen(source_url + "?level=INFO")
             if 'gzip' in r.info().get('Content-Type', ''):
                 gzipped = True
         except urllib2.URLError:
             try:
-                logging.debug("Retrieving: " + source_url + ".gz")
+                logging.debug("Retrieving: " + source_url + ".gz?level=INFO")
                 r = urllib2.urlopen(source_url + ".gz")
                 gzipped = True
             except:
@@ -150,7 +155,7 @@ class LogRetriever(threading.Thread):
                 try:
                     logging.debug(str(i) + " Retrying fetch of: " + source_url)
                     logging.debug("Fetching bytes="  + str(content_len) + '-')
-                    req = urllib2.Request(source_url)
+                    req = urllib2.Request(source_url + "?level=INFO")
                     req.add_header('Range', 'bytes=' + str(content_len) + '-')
                     r = urllib2.urlopen(req)
                     raw_buf += r.read()
