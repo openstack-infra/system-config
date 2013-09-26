@@ -291,6 +291,37 @@ class openstack_project::static (
     require => File['/srv/static/status/zuul'],
   }
 
+  file { '/srv/static/status/zuul/green.png':
+    ensure  => present,
+    source  => 'puppet:///modules/openstack_project/zuul/green.png',
+    require => File['/srv/static/status/zuul'],
+  }
+
+  file { '/srv/static/status/zuul/red.png':
+    ensure  => present,
+    source  => 'puppet:///modules/openstack_project/zuul/red.png',
+    require => File['/srv/static/status/zuul'],
+  }
+
+  file { '/srv/static/status/zuul/line-angle.png':
+    ensure  => present,
+    source  => 'puppet:///modules/openstack_project/zuul/line-angle.png',
+    require => File['/srv/static/status/zuul'],
+  }
+
+  file { '/srv/static/status/zuul/line-t.png':
+    ensure  => present,
+    source  => 'puppet:///modules/openstack_project/zuul/line-t.png',
+    require => File['/srv/static/status/zuul'],
+  }
+
+  file { '/srv/static/status/zuul/line.png':
+    ensure  => present,
+    source  => 'puppet:///modules/openstack_project/zuul/line.png',
+    require => File['/srv/static/status/zuul'],
+  }
+
+
   ###########################################################
   # Status - reviewday
 
