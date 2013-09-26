@@ -65,13 +65,14 @@ class EventProcessor(threading.Thread):
         logging.debug("Jenkins event received: " + json.dumps(event))
         for fileopts in self.files:
             output = {}
-            source_url, out_event = self._parse_event(event, fileopts)
+            source_url, out_event, precedence = self._parse_event(event,
+                                                                  fileopts)
             output['source_url'] = source_url
             output['retry'] = fileopts.get('retry-get', False)
             output['event'] = out_event
             job = gear.Job(b'push-log', json.dumps(output).encode('utf8'))
             try:
-                self.gearman_client.submitJob(job)
+                self.gearman_client.submitJob(job, precedence=precedence)
             except:
                 logging.exception("Exception submitting job to Gearman.")
 
@@ -108,7 +109,10 @@ class EventProcessor(threading.Thread):
         out_event = {}
         out_event["@fields"] = fields
         out_event["@tags"] = [fileopts['name']] + fileopts.get('tags', [])
-        return source_url, out_event
+        precedence = gear.PRECEDENCE_NORMAL
+        if fields['build_status'] == 'FAILURE':
+            precedence = gear.PRECEDENCE_HIGH
+        return source_url, out_event, precedence
 
 
 class Server(object):
