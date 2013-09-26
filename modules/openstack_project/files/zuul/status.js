@@ -75,53 +75,53 @@ function remove(l, idx) {
     }
 }
 
-function create_graph(pipeline) {
+function create_tree(pipeline) {
     var count = 0;
-    var pipeline_max_graph_columns = 1;
+    var pipeline_max_tree_columns = 1;
     $.each(pipeline['change_queues'], function(change_queue_i, change_queue) {
-        var graph = [];
-        var max_graph_columns = 1;
+        var tree = [];
+        var max_tree_columns = 1;
         var changes = [];
-        var last_graph_length = 0;
+        var last_tree_length = 0;
         $.each(change_queue['heads'], function(head_i, head) {
             $.each(head, function(change_i, change) {
                 changes[change['id']] = change;
-                change['_graph_position'] = change_i;
+                change['_tree_position'] = change_i;
             });
         });
         $.each(change_queue['heads'], function(head_i, head) {
             $.each(head, function(change_i, change) {
                 count += 1;
-                var idx = graph.indexOf(change['id']);
+                var idx = tree.indexOf(change['id']);
                 if (idx > -1) {
-                    change['_graph_index'] = idx;
-                    remove(graph, idx);
+                    change['_tree_index'] = idx;
+                    remove(tree, idx);
                 } else {
-                    change['_graph_index'] = 0;
+                    change['_tree_index'] = 0;
                 }
-                change['_graph_branches'] = [];
-                change['_graph'] = [];
+                change['_tree_branches'] = [];
+                change['_tree'] = [];
                 change['items_behind'].sort(function(a, b) {
-                    return changes[b]['_graph_position'] - changes[a]['_graph_position'];
+                    return changes[b]['_tree_position'] - changes[a]['_tree_position'];
                 });
                 $.each(change['items_behind'], function(i, id) {
-                    graph.push(id);
-                    if (last_graph_length>0 && graph.length>last_graph_length)
-                        change['_graph_branches'].push(graph.length-1);
+                    tree.push(id);
+                    if (last_tree_length>0 && tree.length>last_tree_length)
+                        change['_tree_branches'].push(tree.length-1);
                 });
-                if (graph.length > max_graph_columns) {
-                    max_graph_columns = graph.length;
+                if (tree.length > max_tree_columns) {
+                    max_tree_columns = tree.length;
                 }
-                if (graph.length > pipeline_max_graph_columns) {
-                    pipeline_max_graph_columns = graph.length;
+                if (tree.length > pipeline_max_tree_columns) {
+                    pipeline_max_tree_columns = tree.length;
                 }
-                change['_graph'] = graph.slice(0);  // make a copy
-                last_graph_length = graph.length;
+                change['_tree'] = tree.slice(0);  // make a copy
+                last_tree_length = tree.length;
             });
         });
-        change_queue['_graph_columns'] = max_graph_columns;
+        change_queue['_tree_columns'] = max_tree_columns;
     });
-    pipeline['_graph_columns'] = pipeline_max_graph_columns;
+    pipeline['_tree_columns'] = pipeline_max_tree_columns;
     return count;
 }
 
@@ -145,8 +145,8 @@ function get_sparkline_url(pipeline_name) {
 }
 
 function format_pipeline(data) {
-    var count = create_graph(data);
-    var width = (16 * data['_graph_columns']) + 300;
+    var count = create_tree(data);
+    var width = (16 * data['_tree_columns']) + 300;
     var html = '<div class="pipeline" style="width:'+width+'"><h3 class="subhead">'+
         data['name'];
 
@@ -201,13 +201,13 @@ function safe_id(id) {
 function format_change(change, change_queue) {
     var html = '<tr>';
 
-    for (var i=0; i<change_queue['_graph_columns']; i++) {
-        var cls = 'graph';
-        if (i < change['_graph'].length && change['_graph'][i] !== null) {
+    for (var i=0; i<change_queue['_tree_columns']; i++) {
+        var cls = 'tree';
+        if (i < change['_tree'].length && change['_tree'][i] !== null) {
             cls += ' line';
         }
         html += '<td class="'+cls+'">';
-        if (i == change['_graph_index']) {
+        if (i == change['_tree_index']) {
             if (change['failing_reasons'] && change['failing_reasons'].length > 0) {
                 html += '<img src="red.png" title="Failing because '+
                     change['failing_reasons'].join(', ')+'"/>';
@@ -215,8 +215,8 @@ function format_change(change, change_queue) {
                 html += '<img src="green.png" title="Succeeding"/>';
             }
         }
-        if (change['_graph_branches'].indexOf(i) != -1) {
-            if (change['_graph_branches'].indexOf(i) == change['_graph_branches'].length-1)
+        if (change['_tree_branches'].indexOf(i) != -1) {
+            if (change['_tree_branches'].indexOf(i) == change['_tree_branches'].length-1)
                 html += '<img src="line-angle.png"/>';
             else
                 html += '<img src="line-t.png"/>';
