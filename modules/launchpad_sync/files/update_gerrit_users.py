@@ -287,6 +287,12 @@ class Sync(object):
                 'openstack/python-troveclient',
                 'openstack/trove',
                 'openstack/trove-integration',
+                'openstack/savanna',
+                'openstack/savanna-dashboard',
+                'openstack/python-savannaclient',
+                'openstack/savanna-extra',
+                'openstack/savanna-image-elements',
+                'openstack/puppet-savanna'
                 ]
         else:
             projects = subprocess.check_output(['/usr/bin/ssh', '-p', '29418',

@@ -643,13 +643,13 @@ projects:
     check:
       - gate-noop
 
-  - name: stackforge/savanna
+  - name: openstack/savanna
     check:
       - gate-savanna-pep8
       - gate-savanna-python26
       - gate-savanna-python27
 
-  - name: stackforge/python-savannaclient
+  - name: openstack/python-savannaclient
     check:
       - gate-python-savannaclient-pep8
       - gate-python-savannaclient-python26

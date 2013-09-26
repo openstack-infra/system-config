@@ -72,10 +72,11 @@
 
 - project:
     name: savanna
-    github-org: stackforge
+    github-org: openstack
     node: precise
     rtfd-id: 7095
     tarball-site: tarballs.openstack.org
+    doc-publisher-site: docs.openstack.org
 
     jobs:
       - python-jobs
@@ -83,10 +84,11 @@
       - hook-{name}-rtfd
       - pypi-jobs
       - translation-jobs
+      - openstack-publish-jobs
 
 - project:
     name: python-savannaclient
-    github-org: stackforge
+    github-org: openstack
     node: precise
     rtfd-id: 7106
     tarball-site: tarballs.openstack.org
@@ -98,7 +100,7 @@
 
 - project:
     name: savanna-dashboard
-    github-org: stackforge
+    github-org: openstack
     node: precise
     rtfd-id: 7335
     tarball-site: tarballs.openstack.org
