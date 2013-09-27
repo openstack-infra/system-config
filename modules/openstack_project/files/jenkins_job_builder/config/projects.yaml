@@ -199,6 +199,12 @@
       - openstack-publish-jobs
       - python-jobs
       - pypi-jobs
+      - '{pipeline}-pbr-devstack-vm-rawinstall':
+          pipeline: gate
+          node: devstack-precise
+      - '{pipeline}-pbr-devstack-vm-rawinstall':
+          pipeline: check
+          node: 'devstack-precise || devstack-precise-check'
 
 
 - project:
@@ -898,7 +904,25 @@
     jobs:
       - python-jobs
       - openstack-publish-jobs
+      - '{pipeline}-swift-devstack-vm-functional':
+          pipeline: gate
+          node: devstack-precise
+      - '{pipeline}-swift-devstack-vm-functional':
+          pipeline: check
+          node: 'devstack-precise || devstack-precise-check'
 # No one is interested in stable/ branches on swift, so don't run bitrot jobs
+
+
+- project:
+    name: devstack-jobs
+
+    jobs:
+      - devstack-jobs:
+          pipeline: gate
+          node: devstack-precise
+      - devstack-jobs:
+          pipeline: check
+          node: 'devstack-precise || devstack-precise-check'
 
 
 - project:
