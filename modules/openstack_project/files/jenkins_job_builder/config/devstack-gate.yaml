@@ -212,6 +212,33 @@
 
 
 - job:
+    name: gate-tempest-devstack-vm-neutron-pg
+    node: devstack-precise
+
+    wrappers:
+      - timeout:
+          timeout: 60
+          fail: true
+      - timestamps
+
+    builders:
+      - devstack-checkout
+      - shell: |
+          #!/bin/bash -xe
+          export PYTHONUNBUFFERED=true
+          export DEVSTACK_GATE_TEMPEST=1
+          export DEVSTACK_GATE_POSTGRES=1
+          export DEVSTACK_GATE_NEUTRON=1
+          cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
+          ./safe-devstack-vm-gate-wrap.sh
+      - link-logs
+
+    publishers:
+      - devstack-logs
+      - console-log
+
+
+- job:
     name: gate-tempest-devstack-vm-neutron-full
     node: devstack-precise
 

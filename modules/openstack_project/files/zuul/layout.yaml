@@ -116,6 +116,9 @@ jobs:
     branch: ^(?!stable/folsom).*$
   - name: gate-tempest-devstack-vm-neutron
     branch: ^(?!stable/folsom).*$
+  - name: gate-tempest-devstack-vm-neutron-pg
+    branch: ^(?!stable/(folsom|grizzly)).*$
+    voting: false
   - name: gate-tempest-devstack-vm-neutron-full
     branch: ^(?!stable/(folsom|grizzly)).*$
     voting: false
@@ -988,6 +991,7 @@ projects:
       - gate-neutron-python26
       - gate-neutron-python27
       - gate-tempest-devstack-vm-neutron
+      - gate-tempest-devstack-vm-neutron-pg
     gate:
       - gate-neutron-requirements
       - gate-neutron-docs
