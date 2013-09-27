@@ -1,6 +1,6 @@
-- job:
-    name: gate-swift-devstack-vm-functional
-    node: devstack-precise
+- job-template:
+    name: '{pipeline}-swift-devstack-vm-functional'
+    node: '{node}'
 
     wrappers:
       - timeout:

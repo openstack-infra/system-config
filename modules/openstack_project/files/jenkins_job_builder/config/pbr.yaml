@@ -1,6 +1,6 @@
-- job:
-    name: gate-pbr-devstack-vm-rawinstall
-    node: devstack-precise
+- job-template:
+    name: '{pipeline}-pbr-devstack-vm-rawinstall'
+    node: '{node}'
 
     wrappers:
       - timeout:
