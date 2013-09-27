@@ -22,7 +22,7 @@ providers:
     boot-timeout: 120
     max-servers: 10
     images:
-      - name: devstack-precise-dfw
+      - name: devstack-precise-check
         base-image: 'Ubuntu 12.04 LTS (Precise Pangolin)'
         min-ram: 8192
         setup: prepare_node_devstack.sh
@@ -39,7 +39,7 @@ providers:
     boot-timeout: 120
     max-servers: 60
     images:
-      - name: devstack-precise-ord
+      - name: devstack-precise-check
         base-image: 'Ubuntu 12.04 LTS (Precise Pangolin)'
         min-ram: 8192
         setup: prepare_node_devstack.sh
@@ -56,7 +56,7 @@ providers:
     boot-timeout: 120
     max-servers: 6
     images:
-      - name: devstack-precise-iad
+      - name: devstack-precise-check
         base-image: 'Ubuntu 12.04 LTS (Precise Pangolin)'
         min-ram: 8192
         setup: prepare_node_devstack.sh
@@ -130,18 +130,14 @@ targets:
             min-ready: 10
           - name: hpcloud-az3
             min-ready: 10
-      - name: devstack-precise-iad
+      - name: devstack-precise-check
         providers:
           - name: rax-iad
             min-ready: 2
-      - name: devstack-precise-dfw
-        providers:
           - name: rax-dfw
-            min-ready: 2
-      - name: devstack-precise-ord
-        providers:
+            min-ready: 5
           - name: rax-ord
-            min-ready: 2
+            min-ready: 10
   - name: jenkins02
     jenkins:
       url: 'https://jenkins02.openstack.org/'
@@ -157,7 +153,11 @@ targets:
             min-ready: 10
           - name: hpcloud-az3
             min-ready: 10
-      - name: devstack-precise-iad
+      - name: devstack-precise-check
         providers:
           - name: rax-iad
             min-ready: 2
+          - name: rax-dfw
+            min-ready: 5
+          - name: rax-ord
+            min-ready: 10
