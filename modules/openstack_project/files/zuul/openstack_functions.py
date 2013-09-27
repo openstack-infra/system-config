@@ -12,6 +12,7 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 
+
 def set_log_url(item, job, params):
     if hasattr(item.change, 'refspec'):
         path = "%s/%s/%s/%s" % (
@@ -31,3 +32,5 @@ def set_log_url(item, job, params):
 def single_use_node(item, job, params):
     set_log_url(item, job, params)
     params['OFFLINE_NODE_WHEN_COMPLETE'] = '1'
+    if params['ZUUL_PIPELINE'] == 'check':
+        params['NODE_LABEL'] = 'devstack-precise-check'
