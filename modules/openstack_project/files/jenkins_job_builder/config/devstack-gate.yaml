@@ -1,6 +1,6 @@
-- job:
-    name: gate-tempest-devstack-vm-smoke
-    node: devstack-precise
+- job-template:
+    name: '{pipeline}-tempest-devstack-vm-smoke'
+    node: '{node}'
 
     wrappers:
       - timeout:
@@ -23,9 +23,9 @@
       - console-log
 
 
-- job:
-    name: gate-tempest-devstack-vm-full
-    node: devstack-precise
+- job-template:
+    name: '{pipeline}-tempest-devstack-vm-full'
+    node: '{node}'
 
     wrappers:
       - timeout:
@@ -159,9 +159,9 @@
       - console-log
 
 
-- job:
-    name: gate-tempest-devstack-vm-cinder
-    node: devstack-precise
+- job-template:
+    name: '{pipeline}-tempest-devstack-vm-cinder'
+    node: '{node}'
 
     wrappers:
       - timeout:
@@ -185,9 +185,9 @@
       - console-log
 
 
-- job:
-    name: gate-tempest-devstack-vm-neutron
-    node: devstack-precise
+- job-template:
+    name: '{pipeline}-tempest-devstack-vm-neutron'
+    node: '{node}'
 
     wrappers:
       - timeout:
@@ -211,9 +211,9 @@
       - console-log
 
 
-- job:
-    name: gate-tempest-devstack-vm-neutron-pg
-    node: devstack-precise
+- job-template:
+    name: '{pipeline}-tempest-devstack-vm-neutron-pg'
+    node: '{node}'
 
     wrappers:
       - timeout:
@@ -238,9 +238,9 @@
       - console-log
 
 
-- job:
-    name: gate-tempest-devstack-vm-neutron-full
-    node: devstack-precise
+- job-template:
+    name: '{pipeline}-tempest-devstack-vm-neutron-full'
+    node: '{node}'
 
     wrappers:
       - timeout:
@@ -265,9 +265,9 @@
       - console-log
 
 
-- job:
-    name: gate-devstack-vm-cells
-    node: devstack-precise
+- job-template:
+    name: '{pipeline}-devstack-vm-cells'
+    node: '{node}'
 
     wrappers:
       - timeout:
@@ -291,9 +291,9 @@
       - console-log
 
 
-- job:
-    name: gate-tempest-devstack-vm-cells
-    node: devstack-precise
+- job-template:
+    name: '{pipeline}-tempest-devstack-vm-cells'
+    node: '{node}'
 
     wrappers:
       - timeout:
@@ -317,9 +317,9 @@
       - console-log
 
 
-- job:
-    name: gate-tempest-devstack-vm-cells-full
-    node: devstack-precise
+- job-template:
+    name: '{pipeline}-tempest-devstack-vm-cells-full'
+    node: '{node}'
 
     wrappers:
       - timeout:
@@ -343,9 +343,9 @@
       - devstack-logs
       - console-log
 
-- job:
-    name: gate-tempest-devstack-vm-large-ops
-    node: devstack-precise
+- job-template:
+    name: '{pipeline}-tempest-devstack-vm-large-ops'
+    node: '{node}'
 
     wrappers:
       - timeout:
@@ -636,9 +636,9 @@
       - console-log
 
 
-- job:
-    name: gate-tempest-devstack-vm-postgres
-    node: devstack-precise
+- job-template:
+    name: '{pipeline}-tempest-devstack-vm-postgres'
+    node: '{node}'
 
     wrappers:
       - timeout:
@@ -662,9 +662,9 @@
       - console-log
 
 
-- job:
-    name: gate-tempest-devstack-vm-postgres-full
-    node: devstack-precise
+- job-template:
+    name: '{pipeline}-tempest-devstack-vm-postgres-full'
+    node: '{node}'
 
     wrappers:
       - timeout:
@@ -689,9 +689,9 @@
       - console-log
 
 
-- job:
-    name: gate-grenade-devstack-vm
-    node: devstack-precise
+- job-template:
+    name: '{pipeline}-grenade-devstack-vm'
+    node: '{node}'
 
     wrappers:
       - timeout:
@@ -739,3 +739,21 @@
     publishers:
       - devstack-logs
       - console-log
+
+
+- job-group:
+    name: devstack-jobs
+    jobs:
+      - '{pipeline}-tempest-devstack-vm-smoke'
+      - '{pipeline}-tempest-devstack-vm-full'
+      - '{pipeline}-tempest-devstack-vm-cinder'
+      - '{pipeline}-tempest-devstack-vm-neutron'
+      - '{pipeline}-tempest-devstack-vm-neutron-pg'
+      - '{pipeline}-tempest-devstack-vm-neutron-full'
+      - '{pipeline}-devstack-vm-cells'
+      - '{pipeline}-tempest-devstack-vm-cells'
+      - '{pipeline}-tempest-devstack-vm-cells-full'
+      - '{pipeline}-tempest-devstack-vm-large-ops'
+      - '{pipeline}-tempest-devstack-vm-postgres'
+      - '{pipeline}-tempest-devstack-vm-postgres-full'
+      - '{pipeline}-grenade-devstack-vm'

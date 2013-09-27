@@ -1,6 +1,6 @@
-- job:
-    name: gate-pbr-devstack-vm-rawinstall
-    node: devstack-precise
+- job-template:
+    name: '{pipeline}-pbr-devstack-vm-rawinstall'
+    node: '{node}'
 
     wrappers:
       - timeout:
@@ -15,10 +15,10 @@
           export PYTHONUNBUFFERED=true
           export DEVSTACK_GATE_TEMPEST=0
           export DEVSTACK_GATE_EXERCISES=0
-          function gate_hook {
+          function gate_hook {{
               bash $GATE_SCRIPT_DIR/devstack-vm-gate.sh && \
               bash -xe $BASE/new/pbr/tools/integration.sh $PROJECTS $BASE
-          }
+          }}
           export -f gate_hook
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
