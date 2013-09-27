@@ -586,7 +586,6 @@ projects:
       - gate-tempest-devstack-vm-cinder
       - gate-tempest-devstack-vm-postgres-full
       - gate-tempest-devstack-vm-neutron
-      - gate-tempest-devstack-vm-large-ops
       - gate-grenade-devstack-vm
     experimental:
       - gate-grenade-devstack-vm-stable
@@ -633,7 +632,6 @@ projects:
       - gate-tempest-devstack-vm-cinder
       - gate-tempest-devstack-vm-postgres-full
       - gate-tempest-devstack-vm-neutron
-      - gate-tempest-devstack-vm-large-ops
       - gate-grenade-devstack-vm
     experimental:
       - gate-grenade-devstack-vm-stable
@@ -686,7 +684,6 @@ projects:
       - gate-tempest-devstack-vm-cinder
       - gate-tempest-devstack-vm-postgres-full
       - gate-tempest-devstack-vm-neutron
-      - gate-tempest-devstack-vm-large-ops
       - gate-grenade-devstack-vm
     experimental:
       - gate-grenade-devstack-vm-stable
@@ -760,7 +757,6 @@ projects:
       - gate-tempest-devstack-vm-cinder
       - gate-tempest-devstack-vm-postgres-full
       - gate-tempest-devstack-vm-neutron
-      - gate-tempest-devstack-vm-large-ops
       - gate-grenade-devstack-vm
       - gate-swift-devstack-vm-functional
     experimental:
@@ -812,7 +808,6 @@ projects:
       - gate-tempest-devstack-vm-cinder
       - gate-tempest-devstack-vm-postgres-full
       - gate-tempest-devstack-vm-neutron
-      - gate-tempest-devstack-vm-large-ops
       - gate-grenade-devstack-vm
     experimental:
       - gate-grenade-devstack-vm-stable
@@ -879,7 +874,6 @@ projects:
       - gate-oslo.config-python33
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-neutron
-      - gate-tempest-devstack-vm-large-ops
       - gate-grenade-devstack-vm
     post:
       - oslo.config-branch-tarball
@@ -913,7 +907,6 @@ projects:
       - gate-oslo.messaging-python27
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-neutron
-      - gate-tempest-devstack-vm-large-ops
       - gate-grenade-devstack-vm
     post:
       - oslo.messaging-branch-tarball
@@ -1040,7 +1033,6 @@ projects:
       - gate-tempest-devstack-vm-cinder
       - gate-tempest-devstack-vm-neutron
       - gate-tempest-devstack-vm-postgres-full
-      - gate-tempest-devstack-vm-large-ops
       - gate-grenade-devstack-vm
     experimental:
       - gate-grenade-devstack-vm-stable
@@ -1079,7 +1071,6 @@ projects:
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-postgres-full
       - gate-tempest-devstack-vm-neutron
-      - gate-tempest-devstack-vm-large-ops
     post:
       - python-ceilometerclient-branch-tarball
       - python-ceilometerclient-coverage
@@ -1119,7 +1110,6 @@ projects:
       - gate-tempest-devstack-vm-postgres-full
       - gate-tempest-devstack-vm-cinder
       - gate-tempest-devstack-vm-neutron
-      - gate-tempest-devstack-vm-large-ops
       - gate-grenade-devstack-vm
     experimental:
       - gate-grenade-devstack-vm-stable
@@ -1163,7 +1153,6 @@ projects:
       - gate-tempest-devstack-vm-postgres-full
       - gate-tempest-devstack-vm-cinder
       - gate-tempest-devstack-vm-neutron
-      - gate-tempest-devstack-vm-large-ops
       - gate-grenade-devstack-vm
     experimental:
       - gate-grenade-devstack-vm-stable
@@ -1207,7 +1196,6 @@ projects:
       - gate-tempest-devstack-vm-postgres-full
       - gate-tempest-devstack-vm-cinder
       - gate-tempest-devstack-vm-neutron
-      - gate-tempest-devstack-vm-large-ops
       - gate-grenade-devstack-vm
     experimental:
       - gate-grenade-devstack-vm-stable
@@ -1253,7 +1241,6 @@ projects:
       - gate-tempest-devstack-vm-postgres-full
       - gate-tempest-devstack-vm-cinder
       - gate-tempest-devstack-vm-neutron
-      - gate-tempest-devstack-vm-large-ops
       - gate-grenade-devstack-vm
     experimental:
       - gate-grenade-devstack-vm-stable
@@ -1326,7 +1313,6 @@ projects:
       - gate-tempest-devstack-vm-postgres-full
       - gate-tempest-devstack-vm-cinder
       - gate-tempest-devstack-vm-neutron
-      - gate-tempest-devstack-vm-large-ops
       - gate-grenade-devstack-vm
     experimental:
       - gate-grenade-devstack-vm-stable
@@ -1395,7 +1381,6 @@ projects:
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-postgres-full
       - gate-tempest-devstack-vm-neutron
-      - gate-tempest-devstack-vm-large-ops
       - gate-grenade-devstack-vm
       - gate-swift-devstack-vm-functional
     post:
@@ -1485,7 +1470,6 @@ projects:
       - gate-tempest-devstack-vm-cinder
       - gate-tempest-devstack-vm-postgres-full
       - gate-tempest-devstack-vm-neutron
-      - gate-tempest-devstack-vm-large-ops
       - gate-grenade-devstack-vm
       - gate-swift-devstack-vm-functional
     experimental:
@@ -1521,7 +1505,6 @@ projects:
       - gate-tempest-devstack-vm-cinder
       - gate-tempest-devstack-vm-postgres-full
       - gate-tempest-devstack-vm-neutron
-      - gate-tempest-devstack-vm-large-ops
       - gate-grenade-devstack-vm
       - gate-swift-devstack-vm-functional
     experimental:
@@ -1551,7 +1534,6 @@ projects:
       - gate-tempest-devstack-vm-cinder
       - gate-tempest-devstack-vm-postgres-full
       - gate-tempest-devstack-vm-neutron
-      - gate-tempest-devstack-vm-large-ops
       - gate-grenade-devstack-vm
       - gate-swift-devstack-vm-functional
     experimental:
@@ -1598,7 +1580,6 @@ projects:
       - gate-tempest-devstack-vm-postgres-full
       - gate-tempest-devstack-vm-cinder
       - gate-tempest-devstack-vm-neutron
-      - gate-tempest-devstack-vm-large-ops
       - gate-grenade-devstack-vm
     experimental:
       - gate-tempest-devstack-vm-heat-slow
@@ -1639,7 +1620,6 @@ projects:
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-postgres-full
       - gate-tempest-devstack-vm-neutron
-      - gate-tempest-devstack-vm-large-ops
       - gate-swift-devstack-vm-functional
     post:
       - ceilometer-branch-tarball
@@ -1721,7 +1701,6 @@ projects:
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-postgres-full
       - gate-tempest-devstack-vm-neutron
-      - gate-tempest-devstack-vm-large-ops
     experimental:
       - gate-devstack-vm-cells
     post:
@@ -1762,7 +1741,6 @@ projects:
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-postgres-full
       - gate-tempest-devstack-vm-neutron
-      - gate-tempest-devstack-vm-large-ops
     experimental:
       - gate-devstack-vm-cells
     post:
