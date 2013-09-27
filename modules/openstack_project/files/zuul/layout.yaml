@@ -129,7 +129,7 @@ jobs:
     voting: false
   - name: gate-tempest-devstack-vm-large-ops
     branch: ^(?!stable/(folsom|grizzly)).*$
-    voting: false
+    voting: true
   - name: gate-tempest-devstack-vm-cells
     branch: ^(?!stable/folsom).*$
     voting: false
