@@ -6,7 +6,7 @@ pipelines:
     description: Newly uploaded patchsets enter this pipeline to receive an initial +/-1 Verified vote from Jenkins.
     failure-message: Build failed.  For information on how to proceed, see https://wiki.openstack.org/wiki/GerritJenkinsGit#Test_Failures
     manager: IndependentPipelineManager
-    precedence: low
+    precedence: high
     trigger:
       gerrit:
         - event: patchset-created
