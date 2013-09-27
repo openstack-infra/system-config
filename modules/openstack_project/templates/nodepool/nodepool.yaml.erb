@@ -20,7 +20,7 @@ providers:
     project-id: '<%= rackspace_project %>'
     auth-url: 'https://identity.api.rackspacecloud.com/v2.0/'
     boot-timeout: 120
-    max-servers: 60
+    max-servers: 10
     images:
       - name: devstack-precise-dfw
         base-image: 'Ubuntu 12.04 LTS (Precise Pangolin)'
@@ -54,7 +54,7 @@ providers:
     project-id: '<%= rackspace_project %>'
     auth-url: 'https://identity.api.rackspacecloud.com/v2.0/'
     boot-timeout: 120
-    max-servers: 60
+    max-servers: 6
     images:
       - name: devstack-precise-iad
         base-image: 'Ubuntu 12.04 LTS (Precise Pangolin)'
@@ -71,7 +71,7 @@ providers:
     project-id: '<%= hpcloud_project %>'
     auth-url: 'https://region-a.geo-1.identity.hpcloudsvc.com:35357/v2.0'
     boot-timeout: 120
-    max-servers: 83
+    max-servers: 90
     images:
       - name: devstack-precise
         base-image: 'Ubuntu Precise 12.04 LTS Server 64-bit 20121026 (b)'
@@ -88,7 +88,7 @@ providers:
     project-id: '<%= hpcloud_project %>'
     auth-url: 'https://region-a.geo-1.identity.hpcloudsvc.com:35357/v2.0'
     boot-timeout: 120
-    max-servers: 83
+    max-servers: 90
     images:
       - name: devstack-precise
         base-image: 'Ubuntu Precise 12.04 LTS Server 64-bit 20121026 (b)'
@@ -105,7 +105,7 @@ providers:
     project-id: '<%= hpcloud_project %>'
     auth-url: 'https://region-a.geo-1.identity.hpcloudsvc.com:35357/v2.0'
     boot-timeout: 120
-    max-servers: 83
+    max-servers: 90
     images:
       - name: devstack-precise
         base-image: 'Ubuntu Precise 12.04 LTS Server 64-bit 20121026 (b)'
@@ -125,11 +125,11 @@ targets:
       - name: devstack-precise
         providers:
           - name: hpcloud-az1
-            min-ready: 5
+            min-ready: 10
           - name: hpcloud-az2
-            min-ready: 5
+            min-ready: 10
           - name: hpcloud-az3
-            min-ready: 5
+            min-ready: 10
       - name: devstack-precise-iad
         providers:
           - name: rax-iad
@@ -152,11 +152,11 @@ targets:
       - name: devstack-precise
         providers:
           - name: hpcloud-az1
-            min-ready: 5
+            min-ready: 10
           - name: hpcloud-az2
-            min-ready: 5
+            min-ready: 10
           - name: hpcloud-az3
-            min-ready: 5
+            min-ready: 10
       - name: devstack-precise-iad
         providers:
           - name: rax-iad
