@@ -31,3 +31,5 @@ def set_log_url(item, job, params):
 def single_use_node(item, job, params):
     set_log_url(item, job, params)
     params['OFFLINE_NODE_WHEN_COMPLETE'] = '1'
+    if params['ZUUL_PIPELINE'] == 'check':
+        params['NODE_LABEL'] = 'devstack-precise || devstack-precise-rackspace'
