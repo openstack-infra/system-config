@@ -54,7 +54,7 @@ providers:
     project-id: '<%= rackspace_project %>'
     auth-url: 'https://identity.api.rackspacecloud.com/v2.0/'
     boot-timeout: 120
-    max-servers: 6
+    max-servers: 60
     images:
       - name: devstack-precise-check
         base-image: 'Ubuntu 12.04 LTS (Precise Pangolin)'
@@ -133,7 +133,7 @@ targets:
       - name: devstack-precise-check
         providers:
           - name: rax-iad
-            min-ready: 2
+            min-ready: 10
           - name: rax-dfw
             min-ready: 5
           - name: rax-ord
@@ -156,7 +156,7 @@ targets:
       - name: devstack-precise-check
         providers:
           - name: rax-iad
-            min-ready: 2
+            min-ready: 10
           - name: rax-dfw
             min-ready: 5
           - name: rax-ord
