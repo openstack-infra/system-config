@@ -991,12 +991,16 @@ projects:
       - gate-neutron-python27
       - check-tempest-devstack-vm-neutron
       - check-tempest-devstack-vm-neutron-pg
+      - check-tempest-devstack-vm-neutron
+      - check-tempest-devstack-vm-neutron-pg
     gate:
       - gate-neutron-requirements
       - gate-neutron-docs
       - gate-neutron-pep8
       - gate-neutron-python26
       - gate-neutron-python27
+      - gate-tempest-devstack-vm-neutron
+      - gate-tempest-devstack-vm-neutron-pg
       - gate-tempest-devstack-vm-neutron
       - gate-tempest-devstack-vm-neutron-pg
     experimental:
