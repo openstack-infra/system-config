@@ -32,6 +32,7 @@ git clone https://review.openstack.org/p/openstack-dev/grenade
 git clone https://review.openstack.org/p/openstack-dev/pbr
 git clone https://review.openstack.org/p/openstack-infra/devstack-gate
 git clone https://review.openstack.org/p/openstack-infra/jeepyb
+git clone https://review.openstack.org/p/openstack-infra/pypi-mirror
 git clone https://review.openstack.org/p/openstack/ceilometer
 git clone https://review.openstack.org/p/openstack/cinder
 git clone https://review.openstack.org/p/openstack/glance
