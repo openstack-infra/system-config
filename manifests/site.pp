@@ -278,7 +278,7 @@ node 'logstash.openstack.org' {
       'elasticsearch6.openstack.org:9200',
     ],
     # Config for elastic-recheck
-    gerrit_ssh_private_key          => '/etc/elastic-recheck/id_rsa',
+    gerrit_ssh_private_key          => '/home/recheck/.ssh/id_rsa',
     gerrit_ssh_private_key_contents => hiera('elastic-recheck_gerrit_ssh_private_key'),
     recheck_bot_nick                => 'openstackrecheck',
     recheck_bot_passwd              => hiera('elastic-recheck_ircbot_password'),
