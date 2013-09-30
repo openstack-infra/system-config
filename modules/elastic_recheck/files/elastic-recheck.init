@@ -17,9 +17,8 @@
 PATH=/sbin:/usr/sbin:/bin:/usr/bin
 DESC="Elastic Recheck"
 NAME=elastic-recheck
-#TODO: rework the following two lines once we have executable entrypoints
-DAEMON=/usr/bin/python
-DAEMON_ARGS="/opt/$NAME/elastic_recheck/bot.py /etc/$NAME/$NAME.conf"
+DAEMON=/usr/local/bin/$NAME
+DAEMON_ARGS=/etc/$NAME/$NAME.conf
 PIDFILE=/var/run/$NAME/$NAME.pid
 SCRIPTNAME=/etc/init.d/$NAME
 USER=recheck
