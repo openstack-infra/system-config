@@ -116,7 +116,7 @@
 
 # this replaces the old openstack-netconn-api-doc job
 - job:
-    name: network-api-v1.0
+    name: network-api-v1
     project-type: maven
     concurrent: false
     node: precise
@@ -128,21 +128,21 @@
       maven-name: Maven3
       root-module:
         group-id: org.openstack.docs
-        artifact-id: openstack-guide
-      root-pom: doc/pom.xml
+        artifact-id: openstack-network-api-v1
+      root-pom: v1.0/pom.xml
       goals: 'clean generate-sources -B'
 
     publishers:
       - console-log
       - ftp:
           site: docs.openstack.org
-          source: 'doc/target/docbkx/webhelp/api/openstack-network/1.0/**'
+          source: 'v1.0/target/docbkx/webhelp/openstack-network/**'
           target: ''
-          remove-prefix: 'doc/target/docbkx/webhelp'
+          remove-prefix: 'v1.0/target/docbkx/webhelp'
           excludes: '**/*.xml,**/null*'
 
 - job:
-    name: netconn-api-v2.0
+    name: network-api-v2
     project-type: maven
     node: precise
 
@@ -153,17 +153,17 @@
       maven-name: Maven3
       root-module:
         group-id: org.openstack.docs
-        artifact-id: openstack-guide
-      root-pom: doc/pom.xml
+        artifact-id: openstack-network-api-v2
+      root-pom: v2.0/pom.xml
       goals: 'clean generate-sources -B'
 
     publishers:
       - console-log
       - ftp:
           site: docs.openstack.org
-          source: 'doc/target/docbkx/webhelp/api/openstack-network/2.0/**'
+          source: 'v2.0/target/docbkx/webhelp/openstack-network/**'
           target: 'api/openstack-network/2.0/'
-          remove-prefix: 'doc/target/docbkx/webhelp/api/openstack-network/2.0/'
+          remove-prefix: 'v2.0/target/docbkx/webhelp/openstack-network/'
           excludes: '**/*.xml,**/null*'
 
 - job:
