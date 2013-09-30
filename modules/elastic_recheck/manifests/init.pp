@@ -31,7 +31,7 @@ class elastic_recheck (
 
   user { 'recheck':
     ensure  => present,
-    home    => '/var/run/elastic-recheck',
+    home    => '/home/recheck',
     shell   => '/bin/false',
     gid     => 'recheck',
     require => Group['recheck'],
@@ -113,6 +113,22 @@ class elastic_recheck (
       Vcsrepo['/opt/elastic-recheck'],
       File['/etc/elastic-recheck'],
     ],
+  }
+
+  file { '/home/recheck':
+    ensure  => directory,
+    mode    => '0700',
+    owner   => 'recheck',
+    group   => 'recheck',
+    require => User['recheck'],
+  }
+
+  file { '/home/recheck/.ssh':
+    ensure  => directory,
+    mode    => '0700',
+    owner   => 'recheck',
+    group   => 'recheck',
+    require => User['recheck'],
   }
 
   file { $gerrit_ssh_private_key:
