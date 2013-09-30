@@ -87,6 +87,15 @@ class elastic_recheck (
     require => File['/etc/elastic-recheck'],
   }
 
+  file { '/etc/elastic-recheck/logging.config':
+    ensure  => present,
+    mode    => '0640',
+    owner   => 'recheck',
+    group   => 'recheck',
+    source  => 'puppet:///modules/elastic_recheck/logging.config',
+    require => File['/etc/elastic-recheck'],
+  }
+
   file { '/etc/elastic-recheck/recheckwatchbot.yaml':
     ensure  => present,
     mode    => '0640',
