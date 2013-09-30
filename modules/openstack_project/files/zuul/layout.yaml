@@ -3240,3 +3240,14 @@ projects:
     post:
       - python-manilaclient-branch-tarball
       - python-manilaclient-coverage
+
+
+  - name: stackforge/puppet-vswitch
+    check:
+      - gate-puppet-vswitch-puppet-unit-2.7
+      - gate-puppet-vswitch-puppet-unit-3.0
+      - gate-puppet-vswitch-puppet-unit-3.1
+    gate:
+      - gate-puppet-vswitch-puppet-unit-2.7
+      - gate-puppet-vswitch-puppet-unit-3.0
+      - gate-puppet-vswitch-puppet-unit-3.1
