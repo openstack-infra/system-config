@@ -58,24 +58,27 @@ class elastic_recheck (
   }
 
   file { '/var/run/elastic-recheck':
-    ensure => directory,
-    mode   => '0755',
-    owner  => 'recheck',
-    group  => 'recheck',
+    ensure  => directory,
+    mode    => '0755',
+    owner   => 'recheck',
+    group   => 'recheck',
+    require => Group['recheck'],
   }
 
   file { '/var/log/elastic-recheck':
-    ensure => directory,
-    mode   => '0755',
-    owner  => 'recheck',
-    group  => 'recheck',
+    ensure  => directory,
+    mode    => '0755',
+    owner   => 'recheck',
+    group   => 'recheck',
+    require => Group['recheck'],
   }
 
   file { '/etc/elastic-recheck':
-    ensure => directory,
-    mode   => '0755',
-    owner  => 'recheck',
-    group  => 'recheck',
+    ensure  => directory,
+    mode    => '0755',
+    owner   => 'recheck',
+    group   => 'recheck',
+    require => Group['recheck'],
   }
 
   file { '/etc/elastic-recheck/elastic-recheck.conf':
@@ -84,14 +87,16 @@ class elastic_recheck (
     owner   => 'recheck',
     group   => 'recheck',
     content => template('elastic_recheck/elastic-recheck.conf.erb'),
+    require => File['/etc/elastic-recheck'],
   }
 
   file { '/etc/elastic-recheck/recheckwatchbot.yaml':
-    ensure => present,
-    mode   => '0640',
-    owner  => 'recheck',
-    group  => 'recheck',
-    source => 'puppet:///modules/elastic_recheck/recheckwatchbot.yaml',
+    ensure  => present,
+    mode    => '0640',
+    owner   => 'recheck',
+    group   => 'recheck',
+    source  => 'puppet:///modules/elastic_recheck/recheckwatchbot.yaml',
+    require => File['/etc/elastic-recheck'],
   }
 
   # TODO(clarkb) put queries.json somewhere else.
@@ -99,6 +104,7 @@ class elastic_recheck (
     ensure  => link,
     target  => '/opt/elastic-recheck/queries.json',
     require => Vcsrepo['/opt/elastic-recheck'],
+    require => File['/etc/elastic-recheck'],
   }
 
   file { $gerrit_ssh_private_key:
@@ -107,6 +113,7 @@ class elastic_recheck (
     owner   => 'recheck',
     group   => 'recheck',
     content => $gerrit_ssh_private_key_contents,
+    require => Group['recheck'],
   }
 
   file { '/etc/init.d/elastic-recheck':
