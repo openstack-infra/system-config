@@ -57,17 +57,6 @@ openstack-doc:
     branches:
       - master
 
-stackforge-dev:
-    events:
-      - patchset-created
-      - change-merged
-      - x-vrif-minus-2
-    projects:
-      - stackforge/libra
-      - stackforge/python-libraclient
-    branches:
-      - master
-
 openstack-metering:
     events:
       - patchset-created
@@ -336,5 +325,16 @@ openstack-marconi:
     projects:
       - openstack/marconi
       - openstack/python-marconiclient
+    branches:
+      - master
+
+stackforge-libra:
+    events:
+      - patchset-created
+      - change-merged
+      - x-vrif-minus-2
+    projects:
+      - stackforge/libra
+      - stackforge/python-libraclient
     branches:
       - master
