@@ -32,7 +32,7 @@ class elastic_recheck (
   user { 'recheck':
     ensure  => present,
     home    => '/home/recheck',
-    shell   => '/bin/false',
+    shell   => '/bin/bash',
     gid     => 'recheck',
     require => Group['recheck'],
   }
