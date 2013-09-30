@@ -10,6 +10,7 @@ openstack-infra:
       - openstack-infra/askbot-theme
       - openstack-infra/config
       - openstack-infra/devstack-gate
+      - openstack-infra/elastic-recheck
       - openstack-infra/gear
       - openstack-infra/gearman-plugin
       - openstack-infra/gerrit
