@@ -34,10 +34,7 @@ class elastic_recheck (
     home    => '/var/run/elastic-recheck',
     shell   => '/bin/false',
     gid     => 'recheck',
-    require => [
-      Group['recheck'],
-      File['/var/run/elastic-recheck'],
-    ],
+    require => Group['recheck'],
   }
 
   vcsrepo { '/opt/elastic-recheck':
@@ -58,24 +55,27 @@ class elastic_recheck (
   }
 
   file { '/var/run/elastic-recheck':
-    ensure => directory,
-    mode   => '0755',
-    owner  => 'recheck',
-    group  => 'recheck',
+    ensure  => directory,
+    mode    => '0755',
+    owner   => 'recheck',
+    group   => 'recheck',
+    require => User['recheck'],
   }
 
   file { '/var/log/elastic-recheck':
-    ensure => directory,
-    mode   => '0755',
-    owner  => 'recheck',
-    group  => 'recheck',
+    ensure  => directory,
+    mode    => '0755',
+    owner   => 'recheck',
+    group   => 'recheck',
+    require => User['recheck'],
   }
 
   file { '/etc/elastic-recheck':
-    ensure => directory,
-    mode   => '0755',
-    owner  => 'recheck',
-    group  => 'recheck',
+    ensure  => directory,
+    mode    => '0755',
+    owner   => 'recheck',
+    group   => 'recheck',
+    require => User['recheck'],
   }
 
   file { '/etc/elastic-recheck/elastic-recheck.conf':
@@ -84,21 +84,26 @@ class elastic_recheck (
     owner   => 'recheck',
     group   => 'recheck',
     content => template('elastic_recheck/elastic-recheck.conf.erb'),
+    require => File['/etc/elastic-recheck'],
   }
 
   file { '/etc/elastic-recheck/recheckwatchbot.yaml':
-    ensure => present,
-    mode   => '0640',
-    owner  => 'recheck',
-    group  => 'recheck',
-    source => 'puppet:///modules/elastic_recheck/recheckwatchbot.yaml',
+    ensure  => present,
+    mode    => '0640',
+    owner   => 'recheck',
+    group   => 'recheck',
+    source  => 'puppet:///modules/elastic_recheck/recheckwatchbot.yaml',
+    require => File['/etc/elastic-recheck'],
   }
 
   # TODO(clarkb) put queries.json somewhere else.
   file { '/etc/elastic-recheck/queries.json':
     ensure  => link,
     target  => '/opt/elastic-recheck/queries.json',
-    require => Vcsrepo['/opt/elastic-recheck'],
+    require => [
+      Vcsrepo['/opt/elastic-recheck'],
+      File['/etc/elastic-recheck'],
+    ],
   }
 
   file { $gerrit_ssh_private_key:
@@ -107,6 +112,7 @@ class elastic_recheck (
     owner   => 'recheck',
     group   => 'recheck',
     content => $gerrit_ssh_private_key_contents,
+    require => User['recheck'],
   }
 
   file { '/etc/init.d/elastic-recheck':
