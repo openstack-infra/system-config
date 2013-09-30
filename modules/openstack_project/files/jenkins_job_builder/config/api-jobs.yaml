@@ -170,16 +170,16 @@
       root-module:
         group-id: org.openstack.docs
         artifact-id: openstack-guide
-      root-pom: doc/pom.xml
+      root-pom: quantum-api-1.0/pom.xml
       goals: 'clean generate-sources -B'
 
     publishers:
       - console-log
       - ftp:
           site: docs.openstack.org
-          source: 'doc/target/docbkx/webhelp/api/openstack-network/1.0/**'
+          source: 'quantum-api-1.0/target/docbkx/webhelp/openstack-network/**'
           target: ''
-          remove-prefix: 'doc/target/docbkx/webhelp'
+          remove-prefix: 'quantum-api-1.0/target/docbkx/webhelp'
           excludes: '**/*.xml,**/null*'
 
 - job:
@@ -195,16 +195,16 @@
       root-module:
         group-id: org.openstack.docs
         artifact-id: openstack-guide
-      root-pom: doc/pom.xml
+      root-pom: neutron-api-2.0/pom.xml
       goals: 'clean generate-sources -B'
 
     publishers:
       - console-log
       - ftp:
           site: docs.openstack.org
-          source: 'doc/target/docbkx/webhelp/api/openstack-network/2.0/**'
+          source: 'neutron-api-2.0/target/docbkx/webhelp/openstack-network/**'
           target: 'api/openstack-network/2.0/'
-          remove-prefix: 'doc/target/docbkx/webhelp/api/openstack-network/2.0/'
+          remove-prefix: 'neutron-api-2.0/target/docbkx/webhelp/openstack-network/'
           excludes: '**/*.xml,**/null*'
 
 - job:
