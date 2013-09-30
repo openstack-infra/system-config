@@ -22,3 +22,15 @@
 
     publishers:
       - console-log
+
+- job:
+    name: propose-requirements-updates
+    node: proposal
+
+    builders:
+      - gerrit-git-prep
+      - shell: /usr/local/jenkins/slave_scripts/propose_requirements_update.sh
+      - link-logs
+
+    publishers:
+      - console-log
