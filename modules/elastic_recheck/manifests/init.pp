@@ -105,10 +105,10 @@ class elastic_recheck (
     require => File['/etc/elastic-recheck'],
   }
 
-  # TODO(clarkb) put queries.json somewhere else.
-  file { '/etc/elastic-recheck/queries.json':
+  # TODO(clarkb) put queries.yaml somewhere else.
+  file { '/etc/elastic-recheck/queries.yaml':
     ensure  => link,
-    target  => '/opt/elastic-recheck/queries.json',
+    target  => '/opt/elastic-recheck/queries.yaml',
     require => [
       Vcsrepo['/opt/elastic-recheck'],
       File['/etc/elastic-recheck'],
@@ -155,7 +155,7 @@ class elastic_recheck (
     require   => [
       File['/etc/init.d/elastic-recheck'],
       File['/etc/elastic-recheck/elastic-recheck.conf'],
-      File['/etc/elastic-recheck/queries.json'],
+      File['/etc/elastic-recheck/queries.yaml'],
       Exec['install_elastic-recheck'],
     ],
   }
