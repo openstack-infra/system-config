@@ -212,6 +212,7 @@ puppet-openstack:
       - stackforge/puppet-openstack_dev_env
       - stackforge/puppet-swift
       - stackforge/puppet-tempest
+      - stackforge/puppet-vswitch
     branches:
       - master
       - stable/grizzly
