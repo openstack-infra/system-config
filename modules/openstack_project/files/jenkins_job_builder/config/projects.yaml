@@ -1359,7 +1359,7 @@
 
 - project:
     name: python-tuskarclient
-    github-org: stackforge
+    github-org: openstack
     tarball-site: tarballs.openstack.org
     node: precise
 
@@ -1379,7 +1379,7 @@
 
 - project:
     name: tuskar
-    github-org: stackforge
+    github-org: openstack
     tarball-site: tarballs.openstack.org
     node: precise
 
