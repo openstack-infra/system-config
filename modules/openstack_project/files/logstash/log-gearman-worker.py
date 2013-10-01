@@ -147,16 +147,18 @@ class LogRetriever(threading.Thread):
 
         raw_buf = r.read()
         # Hack to read all of Jenkins console logs as they upload
-        # asynchronously. Make one attempt per second for up to 60 seconds to
+        # asynchronously. After each attempt do an exponential backup before
+        # the next request for up to 255 seconds total, if we do not
         # retrieve the entire file. Short circuit when the end of file string
         # for console logs, '\n</pre>\n', is read.
         if (retry and not gzipped and
             raw_buf[-8:].decode('utf-8') != '\n</pre>\n'):
             content_len = len(raw_buf)
-            for i in range(60):
-                # Try for up to 60 seconds to retrieve the complete log file.
+            backoff = 1
+            while backoff < 129:
+                # Try for up to 255 seconds to retrieve the complete log file.
                 try:
-                    logging.debug(str(i) + " Retrying fetch of: " +
+                    logging.debug(str(backoff) + " Retrying fetch of: " +
                                   source_url + "?level=INFO")
                     logging.debug("Fetching bytes="  + str(content_len) + '-')
                     req = urllib2.Request(source_url + "?level=INFO")
@@ -172,7 +174,8 @@ class LogRetriever(threading.Thread):
                 finally:
                     if raw_buf[-8:].decode('utf-8') == '\n</pre>\n':
                         break
-                    semi_busy_wait(1)
+                    semi_busy_wait(backoff)
+                    backoff += backoff
 
         return gzipped, raw_buf
 
