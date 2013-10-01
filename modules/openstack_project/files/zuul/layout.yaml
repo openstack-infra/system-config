@@ -208,19 +208,19 @@ jobs:
   - name: openstack-install-deploy-guide-ubuntu
     branch: ^(?!stable/(folsom|grizzly)).*$
 # Deprecated documentation targets:
-  - name: openstack-admin-manual-block-old
+  - name: openstack-block-storage-admin-old
     branch: stable/(grizzly|folsom)
-  - name: openstack-admin-manual-compute-old
+  - name: openstack-compute-admin-old
     branch: stable/(grizzly|folsom)
-  - name: openstack-admin-manual-netconn-old
+  - name: openstack-network-connectivity-admin-old
     branch: stable/(grizzly|folsom)
   - name: openstack-basic-install-fedora-old
     branch: stable/(grizzly|foslom)
   - name: openstack-basic-install-ubuntu-old
     branch: stable/(grizzly|folsom)
-  - name: openstack-install-deploy-guide-fedora-old
+  - name: openstack-openstack-install-fedora-old
     branch: stable/(grizzly|folsom)
-  - name: openstack-install-deploy-guide-ubuntu-old
+  - name: openstack-openstack-install-ubuntu-old
     branch: stable/(grizzly|folsom)
   - name: ^gate-.*-docs$
     success-pattern: http://docs-draft.openstack.org/{build.parameters[LOG_PATH]}/doc/build/html/
@@ -2023,9 +2023,9 @@ projects:
       - gate-openstack-manuals-validate
     post:
       - openstack-admin-guide-cloud
-      - openstack-admin-manual-compute-old
-      - openstack-admin-manual-netconn-old
-      - openstack-admin-manual-block-old
+      - openstack-block-storage-admin-old
+      - openstack-compute-admin-old
+      - openstack-network-connectivity-admin-old
       - openstack-basic-install-fedora-old
       - openstack-basic-install-ubuntu-old
       - openstack-glossary
@@ -2034,10 +2034,10 @@ projects:
       - openstack-docs-site
       - openstack-ha-guide
       - openstack-install-deploy-guide-fedora
-      - openstack-install-deploy-guide-fedora-old
+      - openstack-openstack-install-fedora-old
       - openstack-install-deploy-guide-opensuse
       - openstack-install-deploy-guide-ubuntu
-      - openstack-install-deploy-guide-ubuntu-old
+      - openstack-openstack-install-ubuntu-old
       - openstack-security-guide
       - openstack-user-guide
       - openstack-user-guide-admin
