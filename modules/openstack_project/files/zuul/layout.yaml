@@ -2429,18 +2429,15 @@ projects:
       - gate-python-savannaclient-requirements
     post:
       - python-savannaclient-branch-tarball
-      - hook-python-savannaclient-rtfd
       - python-savannaclient-coverage
     pre-release:
        - python-savannaclient-tarball
-       - hook-python-savannaclient-rtfd
     release:
        - python-savannaclient-tarball:
          - python-savannaclient-pypi-upload:
            - post-mirror-python26
            - post-mirror-python27
            - post-mirror-python33
-       - hook-python-savannaclient-rtfd
 
   - name: openstack/savanna-dashboard
     check:
@@ -2455,18 +2452,15 @@ projects:
       - gate-savanna-dashboard-requirements
     post:
       - savanna-dashboard-branch-tarball
-      - hook-savanna-dashboard-rtfd
       - savanna-dashboard-coverage
     pre-release:
       - savanna-dashboard-tarball
-      - hook-savanna-dashboard-rtfd
     release:
       - savanna-dashboard-tarball:
         - savanna-dashboard-pypi-upload:
           - post-mirror-python26
           - post-mirror-python27
           - post-mirror-python33
-      - hook-savanna-dashboard-rtfd
 
   - name: openstack/savanna-extra
     check:
