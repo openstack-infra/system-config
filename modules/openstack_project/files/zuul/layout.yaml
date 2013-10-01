@@ -252,14 +252,6 @@ jobs:
     voting: false
   - name: gate-savanna-dashboard-requirements
     voting: false
-  - name: gate-django_openstack_auth-pep8
-    voting: false
-  - name: gate-django_openstack_auth-docs
-    voting: false
-  - name: gate-django_openstack_auth-python26
-    voting: false
-  - name: gate-django_openstack_auth-python27
-    voting: false
   - name: gate-marconi-python33
     voting: false
   - name: gate-python-ceilometerclient-python33
@@ -723,14 +715,12 @@ projects:
       - gate-django_openstack_auth-docs
       - gate-django_openstack_auth-python26
       - gate-django_openstack_auth-python27
-      - gate-django_openstack_auth-noop
     gate:
       - gate-django_openstack_auth-requirements
       - gate-django_openstack_auth-pep8
       - gate-django_openstack_auth-docs
       - gate-django_openstack_auth-python26
       - gate-django_openstack_auth-python27
-      - gate-django_openstack_auth-noop
     post:
       - django_openstack_auth-branch-tarball
       - django_openstack_auth-coverage

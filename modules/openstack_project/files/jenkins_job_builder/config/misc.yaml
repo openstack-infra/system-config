@@ -3,10 +3,6 @@
     node: precise
 
 - job:
-    name: gate-django_openstack_auth-noop
-    node: precise
-
-- job:
     name: gate-grenade-noop
     node: precise
 
