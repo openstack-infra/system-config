@@ -6,7 +6,7 @@ class openstack_project::automatic_upgrades (
 
   if $::osfamily == 'Debian' {
     class { 'unattended_upgrades':
-      origins => [],
+      origins => $origins,
     }
   }
   if $::osfamily == 'RedHat' {
