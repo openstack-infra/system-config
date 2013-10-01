@@ -2470,15 +2470,35 @@ projects:
 
   - name: openstack/savanna-extra
     check:
-      - gate-noop
+      - gate-savanna-extra-pep8
+      - gate-savanna-extra-requirements
     gate:
-      - gate-noop
+      - gate-savanna-extra-pep8
+      - gate-savanna-extra-requirements
+    post:
+      - savanna-extra-branch-tarball
+    pre-release:
+      - savanna-extra-tarball
+    release:
+      - savanna-extra-tarball
 
   - name: openstack/savanna-image-elements
     check:
-      - gate-noop
+      - gate-savanna-image-elements-pep8
+      - gate-savanna-image-elements-requirements
     gate:
-      - gate-noop
+      - gate-savanna-image-elements-pep8
+      - gate-savanna-image-elements-requirements
+    post:
+      - savanna-image-elements-branch-tarball
+    pre-release:
+      - savanna-image-elements-tarball
+    release:
+      - savanna-image-elements-tarball:
+        - savanna-image-elements-pypi-upload:
+          - post-mirror-python26
+          - post-mirror-python27
+          - post-mirror-python33
 
   - name: stackforge/puppet-savanna
     check:
