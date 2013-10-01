@@ -90,24 +90,20 @@
     name: python-savannaclient
     github-org: openstack
     node: precise
-    rtfd-id: 7106
     tarball-site: tarballs.openstack.org
 
     jobs:
       - python-jobs
-      - hook-{name}-rtfd
       - pypi-jobs
 
 - project:
     name: savanna-dashboard
     github-org: openstack
     node: precise
-    rtfd-id: 7335
     tarball-site: tarballs.openstack.org
 
     jobs:
       - python-jobs
-      - hook-{name}-rtfd
       - pypi-jobs
 
 - project:
