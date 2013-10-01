@@ -118,6 +118,10 @@ jobs:
     branch: ^(?!stable/folsom).*$
   - name: ^(gate|check)-tempest-devstack-vm-neutron-pg$
     branch: ^(?!stable/(folsom|grizzly)).*$
+  - name: ^(gate|check)-tempest-devstack-vm-neutron-isolated$
+    branch: ^(?!stable/(folsom|grizzly)).*$
+  - name: ^(gate|check)-tempest-devstack-vm-neutron-pg-isolated$
+    branch: ^(?!stable/(folsom|grizzly)).*$
   - name: ^(gate|check)-tempest-devstack-vm-neutron-full$
     branch: ^(?!stable/(folsom|grizzly)).*$
     voting: false
