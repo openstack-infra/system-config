@@ -118,6 +118,10 @@ jobs:
     branch: ^(?!stable/folsom).*$
   - name: ^(gate|check)-tempest-devstack-vm-neutron-pg$
     branch: ^(?!stable/(folsom|grizzly)).*$
+  - name: ^(gate|check)-tempest-devstack-vm-neutron-isolated$
+    branch: ^(?!stable/(folsom|grizzly)).*$
+  - name: ^(gate|check)-tempest-devstack-vm-neutron-pg-isolated$
+    branch: ^(?!stable/(folsom|grizzly)).*$
   - name: ^(gate|check)-tempest-devstack-vm-neutron-full$
     branch: ^(?!stable/(folsom|grizzly)).*$
     voting: false
@@ -991,6 +995,8 @@ projects:
       - gate-neutron-python27
       - check-tempest-devstack-vm-neutron
       - check-tempest-devstack-vm-neutron-pg
+      - check-tempest-devstack-vm-neutron-isolated
+      - check-tempest-devstack-vm-neutron-pg-isolated
     gate:
       - gate-neutron-requirements
       - gate-neutron-docs
@@ -999,6 +1005,8 @@ projects:
       - gate-neutron-python27
       - gate-tempest-devstack-vm-neutron
       - gate-tempest-devstack-vm-neutron-pg
+      - gate-tempest-devstack-vm-neutron-isolated
+      - gate-tempest-devstack-vm-neutron-pg-isolated
     experimental:
       - gate-tempest-devstack-vm-neutron-full
     post:
