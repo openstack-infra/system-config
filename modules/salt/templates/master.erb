@@ -81,7 +81,8 @@ user: salt
 #job_cache: True
 
 # Cache minion grains and pillar data in the cachedir.
-#minion_data_cache: True
+# Disabled due to a salt mine bug affecting RHEL/CentOS minions
+minion_data_cache: False
 
 # Set the acceptance level for serialization of messages. This should only be
 # set if the master is newer than 0.9.5 and the minion are older. This option
