@@ -30,6 +30,13 @@ rm -f ~/.pydistutils.cfg
 mkdir -p ~/.pip
 rm -f ~/.pip/pip.conf
 
+# Start with a default pip.conf for use with pypi.python.org
+# (which may be overwritten later)
+cat <<EOF > ~/.pip/pip.conf
+[global]
+timeout = 60
+EOF
+
 # Noop, do not setup any mirrors to allow requirements to talk to the
 # outside world.
 if [ "$org" == "openstack" ] && [ "$project" == "requirements" ]
