@@ -512,6 +512,20 @@ projects:
       - gate-python-designateclient-python26
       - gate-python-designateclient-python27
 
+  - name: stackforge/gerrit-client-hooks
+    check:
+      - gate-gerrit-client-hooks-docs
+      - gate-gerrit-client-hooks-pep8
+      - gate-gerrit-client-hooks-python26
+      - gate-gerrit-client-hooks-python27
+    gate:
+      - gate-gerrit-client-hooks-docs
+      - gate-gerrit-client-hooks-pep8
+      - gate-gerrit-client-hooks-python26
+      - gate-gerrit-client-hooks-python27
+    post:
+      - gerrit-client-hooks-coverage
+
   - name: stackforge/bufunfa
     check:
       - gate-bufunfa-pep8
