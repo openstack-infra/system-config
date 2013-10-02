@@ -113,6 +113,23 @@ providers:
         setup: prepare_node_devstack.sh
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
+  - name: tripleo-test-cloud
+    region-name: ''
+    service-type: 'compute'
+    service-name: 'Compute'
+    username: '<%= tripleo_username %>'
+    password: '<%= tripleo_password %>'
+    project-id: '<%= tripleo_project %>'
+    auth-url: 'https://poc.tripleo.org:10000/v2.0'
+    boot-timeout: 120
+    max-servers: 2
+    images:
+      - name: devstack-precise
+        base-image: 'Ubuntu Precise 12.04 LTS Server 64-bit 20121026 (b)'
+        min-ram: 8192
+        setup: prepare_node_tripleo.sh
+        username: jenkins
+        private-key: /home/nodepool/.ssh/id_rsa
 
 targets:
   - name: jenkins01
@@ -153,6 +170,8 @@ targets:
             min-ready: 10
           - name: hpcloud-az3
             min-ready: 10
+          - name: tripleo-test-cloud
+            min-ready: 1
       - name: devstack-precise-check
         providers:
           - name: rax-iad
@@ -161,3 +180,5 @@ targets:
             min-ready: 5
           - name: rax-ord
             min-ready: 10
+          - name: tripleo-test-cloud
+            min-ready: 1
