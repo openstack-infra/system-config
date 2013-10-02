@@ -108,6 +108,7 @@ tripleo:
       - openstack/tripleo-incubator
       - openstack/tripleo-heat-templates
       - openstack-infra/tripleo-ci
+      - stackforge/gerrit-client-hooks
     branches:
       - master
 
