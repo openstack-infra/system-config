@@ -3207,7 +3207,7 @@ projects:
     gate:
       - gate-noop
 
-  - name: stackforge/fuel-ostf-tests
+  - name: stackforge/fuel-ostf
     check:
       - gate-noop
     gate:
