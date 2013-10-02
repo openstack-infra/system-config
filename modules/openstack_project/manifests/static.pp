@@ -271,6 +271,90 @@ class openstack_project::static (
     require => [File['/srv/static/status'],
                 Vcsrepo['/opt/jquery-graphite']],
   }
+  vcsrepo { '/opt/flot':
+    ensure   => latest,
+    provider => git,
+    revision => 'master',
+    source   => 'https://github.com/flot/flot.git',
+  }
+
+  exec { 'install_flot' :
+    command     => 'yui-compressor -o \'.js$:.min.js\' /opt/flot/jquery.flot*.js; mv /opt/flot/jquery.flot*.min.js /srv/static/status',
+    path        => '/bin:/usr/bin',
+    refreshonly => true,
+    subscribe   => Vcsrepo['/opt/flot'],
+    require     => [File['/srv/static/status'],
+                    Vcsrepo['/opt/flot']],
+  }
+
+  ###########################################################
+  # Status - elastic-recheck
+
+  group { 'recheck':
+    ensure => 'present',
+  }
+
+  user { 'recheck':
+    ensure  => present,
+    home    => '/home/recheck',
+    shell   => '/bin/bash',
+    gid     => 'recheck',
+    require => Group['recheck'],
+  }
+
+  file { '/home/recheck':
+    ensure  => directory,
+    mode    => '0700',
+    owner   => 'recheck',
+    group   => 'recheck',
+    require => User['recheck'],
+  }
+
+  vcsrepo { '/opt/elastic-recheck':
+    ensure   => latest,
+    provider => git,
+    revision => 'master',
+    source   => 'https://git.openstack.org/openstack-infra/elastic-recheck',
+  }
+
+  include pip
+  exec { 'install_elastic-recheck' :
+    command     => 'python setup.py install',
+    cwd         => '/opt/elastic-recheck',
+    path        => '/bin:/usr/bin',
+    refreshonly => true,
+    subscribe   => Vcsrepo['/opt/elastic-recheck'],
+    require     => Class['pip'],
+  }
+
+  file { '/srv/static/status/elastic-recheck':
+    ensure  => directory,
+    owner   => 'recheck',
+    group   => 'recheck',
+    require => User['recheck'],
+  }
+
+  file { '/srv/static/status/elastic-recheck/index.html':
+    ensure  => present,
+    source  => 'puppet:///modules/openstack_project/elastic-recheck/elastic-recheck.html',
+    require => File['/srv/static/status/elastic-recheck'],
+  }
+
+  file { '/srv/static/status/elastic-recheck/elastic-recheck.js':
+    ensure  => present,
+    source  => 'puppet:///modules/openstack_project/elastic-recheck/elastic-recheck.js',
+    require => File['/srv/static/status/elastic-recheck'],
+  }
+
+  cron { 'elastic-recheck':
+    user        => 'recheck',
+    minute      => '*/15',
+    hour        => '*',
+    command     => 'elastic-recheck-graph /opt/elastic-recheck/queries.yaml -o /srv/static/status/elastic-recheck/graph-new.json && mv /srv/static/status/elastic-recheck/graph-new.json /srv/static/status/elastic-recheck/graph.json',
+    environment => 'PATH=/usr/bin:/bin:/usr/sbin:/sbin',
+    require     => [Vcsrepo['/opt/elastic-recheck'],
+                    User['recheck']],
+  }
 
   ###########################################################
   # Status - zuul
