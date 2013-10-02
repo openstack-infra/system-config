@@ -184,10 +184,14 @@ jobs:
     branch: ^master$
   - name: openstack-docs-site
     branch: ^master$
+    files:
+      - '^www/.*$'
   - name: openstack-glossary
     branch: ^master$
   - name: openstack-ha-guide
     branch: ^master$
+    files:
+      - '^doc/high-availability-guide/.*$'
   - name: openstack-image-guide
     branch: ^master$
   - name: openstack-user-guide
