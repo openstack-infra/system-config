@@ -15,6 +15,9 @@ class openstack_project::nodepool(
   $hpcloud_username ='',
   $hpcloud_password ='',
   $hpcloud_project ='',
+  $tripleo_username ='',
+  $tripleo_password ='',
+  $tripleo_project ='',
 ) {
   class { 'openstack_project::server':
     sysadmins                 => $sysadmins,
