@@ -155,15 +155,15 @@ It should look something like::
       - gate-project-name-pep8
       - gate-project-name-python26
       - gate-project-name-python27
+      - gate-project-name-python33
     gate:
       - gate-project-name-docs
       - gate-project-name-pep8
       - gate-project-name-python26
       - gate-project-name-python27
+      - gate-project-name-python33
     post:
-      - project-name-branch-tarball
       - project-name-coverage
-      - hook-project-name-rtfd
 
 If you aren't ready to run any gate tests yet and did not configure
 python-jobs in project.yaml, it should look like this instead::
