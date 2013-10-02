@@ -407,16 +407,21 @@
 - project: stackforge/fuel-main
   description: "Fuel is the control plane for installing and managing OpenStack. It is capable of doing bare metal provisioning of physical nodes, installing OpenStack on them, and much more."
   upstream: git://github.com/Mirantis/fuel-main.git
+  acl-config: /home/gerrit2/acls/stackforge/fuel.config
 - project: stackforge/fuel-web
   description: Fuel UI
   upstream: git://github.com/Mirantis/fuelweb.git
+  acl-config: /home/gerrit2/acls/stackforge/fuel.config
 - project: stackforge/fuel-astute
   description: Fuel orchestrator
   upstream: git://github.com/Mirantis/astute.git
-- project: stackforge/fuel-ostf-tests
+  acl-config: /home/gerrit2/acls/stackforge/fuel.config
+- project: stackforge/fuel-ostf
   upstream: git://github.com/Mirantis/fuel-ostf-tests.git
+  acl-config: /home/gerrit2/acls/stackforge/fuel.config
 - project: stackforge/fuel-ostf-plugin
-  upstream: git://github.com/Mirantis/fuel-ostf-plugin.git
+  description: "Obsolete repo, please, take a look at fuel-ostf"
+  acl-config: /home/gerrit2/acls/stackforge/fuel.config
 - project: stackforge/manila
   description: "Shared filesystem management project for OpenStack."
   upstream: git://github.com/bswartz/manila.git
