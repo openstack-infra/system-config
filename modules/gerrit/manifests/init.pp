@@ -67,8 +67,6 @@
 #
 class gerrit(
   $war = '',
-  $mysql_password = '',
-  $mysql_root_password = '',
   $email_private_key = '',
   $vhost_name = $::fqdn,
   $canonicalweburl = "https://${::fqdn}/",
@@ -239,29 +237,6 @@ class gerrit(
     content => template('gerrit/secure.config.erb'),
     replace => true,
     require => File['/home/gerrit2/review_site/etc'],
-  }
-
-  # Set up MySQL.
-
-  class { 'mysql::server':
-    config_hash => {
-      'root_password'  => $mysql_root_password,
-      'default_engine' => 'InnoDB',
-      'bind_address'   => '127.0.0.1',
-    }
-  }
-  include mysql::server::account_security
-
-  mysql::db { 'reviewdb':
-    user     => 'gerrit2',
-    password => $mysql_password,
-    host     => 'localhost',
-    grant    => ['all'],
-    charset  => 'latin1',
-    require  => [
-      Class['mysql::server'],
-      Class['mysql::server::account_security'],
-    ],
   }
 
   # Set up apache.
