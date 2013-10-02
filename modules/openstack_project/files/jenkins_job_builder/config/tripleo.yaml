@@ -1,0 +1,34 @@
+- job:
+    name: 'gate-tripleo-deploy'
+    node: 'tripleo-precise'
+
+    wrappers:
+      - timeout:
+          timeout: 120
+          fail: true
+      - timestamps
+
+    builders:
+      - devstack-checkout
+      - shell: |
+          #!/bin/bash -xe
+          export PYTHONUNBUFFERED=true
+          export DEVSTACK_GATE_TEMPEST=0
+          export DEVSTACK_GATE_EXERCISES=0
+          function gate_hook {{
+              bash -xe $BASE/tripleo-incubator/toci_gate_test.sh
+          }}
+          export -f gate_hook
+          cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
+          ./safe-devstack-vm-gate-wrap.sh
+      - link-logs
+
+    publishers:
+      - scp:
+          site: 'static.openstack.org'
+          files:
+            - target: 'logs/$LOG_PATH'
+              source: '**/pip.log'
+              keep-hierarchy: false
+              copy-after-failure: true
+      - console-log
