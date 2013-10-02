@@ -24,6 +24,15 @@ class openstack_project::review_dev (
   $swift_username = '',
   $swift_password = ''
 ) {
+
+  # Setup MySQL
+  class { 'gerrit::mysql':
+    mysql_root_password  => $mysql_root_password,
+    database_name        => 'reviewdb',
+    database_user        => 'gerrit2',
+    database_password    => $mysql_password,
+  }
+
   class { 'openstack_project::gerrit':
     vhost_name                      => 'review-dev.openstack.org',
     canonicalweburl                 => 'https://review-dev.openstack.org/',
@@ -53,8 +62,6 @@ class openstack_project::review_dev (
     github_oauth_token              => $github_oauth_token,
     github_project_username         => $github_project_username,
     github_project_password         => $github_project_password,
-    mysql_password                  => $mysql_password,
-    mysql_root_password             => $mysql_root_password,
     trivial_rebase_role_id          =>
       'trivial-rebase@review-dev.openstack.org',
     email_private_key               => $email_private_key,
