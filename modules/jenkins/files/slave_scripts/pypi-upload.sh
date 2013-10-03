@@ -33,4 +33,4 @@ curl --fail -o $FILENAME http://$TARBALL_SITE/$PROJECT/$FILENAME
 # Make sure we actually got a gzipped file
 file -b $FILENAME | grep gzip
 
-twine upload $FILENAME
+twine upload -r pypi $FILENAME
