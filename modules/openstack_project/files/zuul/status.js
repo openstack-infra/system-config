@@ -195,6 +195,9 @@ function format_pipeline(data) {
 }
 
 function safe_id(id) {
+    if (id === null) {
+        return "null";
+    }
     return id.replace(',', '_');
 }
 
@@ -225,7 +228,7 @@ function format_change(change, change_queue) {
     }
 
     html += '<td class="change-container">';
-    html += '<div class="change" id="'+safe_id(change['id'])+'"><div class="header">';
+    html += '<div class="change" id="' + safe_id(change['id']) + '"><div class="header">';
 
     html += '<span class="project">' + change['project'] + '</span>';
     var id = change['id'];
