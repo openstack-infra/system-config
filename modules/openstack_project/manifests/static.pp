@@ -351,7 +351,7 @@ class openstack_project::static (
     minute      => '*/15',
     hour        => '*',
     command     => 'elastic-recheck-graph /opt/elastic-recheck/queries.yaml -o /srv/static/status/elastic-recheck/graph-new.json && mv /srv/static/status/elastic-recheck/graph-new.json /srv/static/status/elastic-recheck/graph.json',
-    environment => 'PATH=/usr/bin:/bin:/usr/sbin:/sbin',
+    environment => 'PATH=/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin',
     require     => [Vcsrepo['/opt/elastic-recheck'],
                     User['recheck']],
   }
