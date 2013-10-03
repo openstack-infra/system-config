@@ -28,18 +28,18 @@ class openstack_project::pypi_slave (
 
   include pip
 
-  package { 'pkginfo':
+  package { 'twine':
     ensure   => present,
     provider => 'pip',
     require  => Class['pip'],
   }
 
-  file { '/home/jenkins/.pypicurl':
+  file { '/home/jenkins/.pypirc':
     ensure  => present,
     owner   => 'jenkins',
     group   => 'jenkins',
     mode    => '0600',
-    content => template('openstack_project/pypicurl.erb'),
+    content => template('openstack_project/pypirc.erb'),
     require => File['/home/jenkins'],
   }
 

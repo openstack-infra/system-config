@@ -33,20 +33,4 @@ curl --fail -o $FILENAME http://$TARBALL_SITE/$PROJECT/$FILENAME
 # Make sure we actually got a gzipped file
 file -b $FILENAME | grep gzip
 
-MD5_DIGEST=`md5sum ${FILENAME} | cut -d' ' -f1`
-
-/usr/local/jenkins/slave_scripts/pypi-extract-metadata.py $FILENAME metadata.curl
-
-# Turn off xtrace and mute curl, since under some circumstances API
-# errors may leak authentication credentials
-set +x
-curl --config /home/jenkins/.pypicurl \
-     --config metadata.curl \
-     -F "filetype=sdist" \
-     -F "content=@${FILENAME};filename=${FILENAME}" \
-     -F ":action=file_upload" \
-     -F "protocol_version=1" \
-     -F "name=${DISTNAME}" \
-     -F "version=${TAG}" \
-     -F "md5_digest=${MD5_DIGEST}" \
-     https://pypi.python.org/pypi > /dev/null 2>&1
+twine upload $FILENAME
