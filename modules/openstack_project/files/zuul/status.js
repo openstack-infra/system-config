@@ -82,7 +82,7 @@ function create_tree(pipeline) {
         var tree = [];
         var max_tree_columns = 1;
         var changes = [];
-        var last_tree_length = 1;
+        var last_tree_length = 0;
         $.each(change_queue['heads'], function(head_i, head) {
             $.each(head, function(change_i, change) {
                 changes[change['id']] = change;
@@ -106,7 +106,7 @@ function create_tree(pipeline) {
                 });
                 $.each(change['items_behind'], function(i, id) {
                     tree.push(id);
-                    if (tree.length>last_tree_length)
+                    if (tree.length>last_tree_length && last_tree_length > 0)
                         change['_tree_branches'].push(tree.length-1);
                 });
                 if (tree.length > max_tree_columns) {
