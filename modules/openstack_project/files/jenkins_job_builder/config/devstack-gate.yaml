@@ -210,6 +210,31 @@
       - devstack-logs
       - console-log
 
+- job-template:
+    name: '{pipeline}-tempest-devstack-vm-neutron-stable'
+    node: '{node}'
+
+    wrappers:
+      - timeout:
+          timeout: 60
+          fail: true
+      - timestamps
+
+    builders:
+      - devstack-checkout
+      - shell: |
+          #!/bin/bash -xe
+          export PYTHONUNBUFFERED=true
+          export DEVSTACK_GATE_TEMPEST=1
+          export DEVSTACK_GATE_NEUTRON=1
+          export ZUUL_BRANCH=stable/grizzly
+          cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
+          ./safe-devstack-vm-gate-wrap.sh
+      - link-logs
+
+    publishers:
+      - devstack-logs
+      - console-log
 
 - job-template:
     name: '{pipeline}-tempest-devstack-vm-neutron-pg'
@@ -807,6 +832,7 @@
       - '{pipeline}-tempest-devstack-vm-neutron-isolated'
       - '{pipeline}-tempest-devstack-vm-neutron-pg-isolated'
       - '{pipeline}-tempest-devstack-vm-neutron-full'
+      - '{pipeline}-tempest-devstack-vm-neutron-stable'
       - '{pipeline}-devstack-vm-cells'
       - '{pipeline}-tempest-devstack-vm-cells'
       - '{pipeline}-tempest-devstack-vm-cells-full'
