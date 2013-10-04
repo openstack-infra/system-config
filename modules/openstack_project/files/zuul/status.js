@@ -233,7 +233,7 @@ function format_change(change, change_queue) {
     html += '<span class="project">' + change['project'] + '</span>';
     var id = change['id'];
     var url = change['url'];
-    if (id !== "None" && id !== null) {
+    if (id !== null) {
         if (id.length == 40) {
             id = id.substr(0,7);
         }
