@@ -1549,23 +1549,35 @@ projects:
 
   - name: openstack-infra/devstack-gate
     check:
-      - check-tempest-devstack-vm-smoke
       - check-tempest-devstack-vm-full
-      - check-tempest-devstack-vm-cinder
       - check-tempest-devstack-vm-postgres-full
       - check-tempest-devstack-vm-neutron
       - gate-tempest-devstack-vm-large-ops
       - check-grenade-devstack-vm
       - check-swift-devstack-vm-functional
+      - check-tempest-devstack-vm-cinder-stable-folsom
+      - check-tempest-devstack-vm-smoke-stable-folsom
+      - check-tempest-devstack-vm-full-stable-grizzly
+      - check-tempest-devstack-vm-neutron-stable-grizzly
+      - check-tempest-devstack-vm-postgres-full-stable-grizzly
+      - check-devstack-vm-cells-stable-grizzly
+      - check-tempest-devstack-vm-cells-stable-grizzly
+      - check-tempest-devstack-vm-cells-full-stable-grizzly
     gate:
-      - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
-      - gate-tempest-devstack-vm-cinder
       - gate-tempest-devstack-vm-postgres-full
       - gate-tempest-devstack-vm-neutron
       - gate-tempest-devstack-vm-large-ops
       - gate-grenade-devstack-vm
       - gate-swift-devstack-vm-functional
+      - gate-tempest-devstack-vm-cinder-stable-folsom
+      - gate-tempest-devstack-vm-smoke-stable-folsom
+      - gate-tempest-devstack-vm-full-stable-grizzly
+      - gate-tempest-devstack-vm-neutron-stable-grizzly
+      - gate-tempest-devstack-vm-postgres-full-stable-grizzly
+      - gate-devstack-vm-cells-stable-grizzly
+      - gate-tempest-devstack-vm-cells-stable-grizzly
+      - gate-tempest-devstack-vm-cells-full-stable-grizzly
     experimental:
       - gate-grenade-devstack-vm-stable
       - gate-devstack-vm-cells
@@ -1588,6 +1600,14 @@ projects:
       - gate-tempest-devstack-vm-postgres-full
       - gate-tempest-devstack-vm-neutron-full
       - gate-tempest-devstack-vm-large-ops
+      - gate-tempest-devstack-vm-cinder-stable-folsom
+      - gate-tempest-devstack-vm-smoke-stable-folsom
+      - gate-tempest-devstack-vm-full-stable-grizzly
+      - gate-tempest-devstack-vm-neutron-stable-grizzly
+      - gate-tempest-devstack-vm-postgres-full-stable-grizzly
+      - gate-devstack-vm-cells-stable-grizzly
+      - gate-tempest-devstack-vm-cells-stable-grizzly
+      - gate-tempest-devstack-vm-cells-full-stable-grizzly
 
   - name: openstack/tempest
     check:
