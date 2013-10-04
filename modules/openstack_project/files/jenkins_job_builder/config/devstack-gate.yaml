@@ -23,6 +23,32 @@
       - console-log
 
 
+- job:
+    name: check-tempest-devstack-vm-smoke-stable-folsom
+    node: devstack-precise-check
+
+    wrappers:
+      - timeout:
+          timeout: 120
+          fail: true
+      - timestamps
+
+    builders:
+      - devstack-checkout
+      - shell: |
+          #!/bin/bash -xe
+          export PYTHONUNBUFFERED=true
+          export DEVSTACK_GATE_TEMPEST=1
+          export ZUUL_BRANCH=stable/folsom
+          cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
+          ./safe-devstack-vm-gate-wrap.sh
+      - link-logs
+
+    publishers:
+      - devstack-logs
+      - console-log
+
+
 - job-template:
     name: '{pipeline}-tempest-devstack-vm-full'
     node: '{node}'
@@ -40,6 +66,33 @@
           export PYTHONUNBUFFERED=true
           export DEVSTACK_GATE_TEMPEST=1
           export DEVSTACK_GATE_TEMPEST_FULL=1
+          cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
+          ./safe-devstack-vm-gate-wrap.sh
+      - link-logs
+
+    publishers:
+      - devstack-logs
+      - console-log
+
+
+- job-template:
+    name: 'check-tempest-devstack-vm-full-stable-{release}'
+    node: devstack-precise-check
+
+    wrappers:
+      - timeout:
+          timeout: 60
+          fail: true
+      - timestamps
+
+    builders:
+      - devstack-checkout
+      - shell: |
+          #!/bin/bash -xe
+          export PYTHONUNBUFFERED=true
+          export DEVSTACK_GATE_TEMPEST=1
+          export DEVSTACK_GATE_TEMPEST_FULL=1
+          export ZUUL_BRANCH=stable/{release}
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
       - link-logs
@@ -185,6 +238,33 @@
       - console-log
 
 
+- job:
+    name: check-tempest-devstack-vm-cinder-stable-folsom
+    node: devstack-precise-check
+
+    wrappers:
+      - timeout:
+          timeout: 90
+          fail: true
+      - timestamps
+
+    builders:
+      - devstack-checkout
+      - shell: |
+          #!/bin/bash -xe
+          export PYTHONUNBUFFERED=true
+          export DEVSTACK_GATE_TEMPEST=1
+          export DEVSTACK_GATE_CINDER=1
+          export ZUUL_BRANCH=stable/folsom
+          cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
+          ./safe-devstack-vm-gate-wrap.sh
+      - link-logs
+
+    publishers:
+      - devstack-logs
+      - console-log
+
+
 - job-template:
     name: '{pipeline}-tempest-devstack-vm-neutron'
     node: '{node}'
@@ -202,6 +282,33 @@
           export PYTHONUNBUFFERED=true
           export DEVSTACK_GATE_TEMPEST=1
           export DEVSTACK_GATE_NEUTRON=1
+          cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
+          ./safe-devstack-vm-gate-wrap.sh
+      - link-logs
+
+    publishers:
+      - devstack-logs
+      - console-log
+
+
+- job-template:
+    name: 'check-tempest-devstack-vm-neutron-stable-{release}'
+    node: devstack-precise-check
+
+    wrappers:
+      - timeout:
+          timeout: 60
+          fail: true
+      - timestamps
+
+    builders:
+      - devstack-checkout
+      - shell: |
+          #!/bin/bash -xe
+          export PYTHONUNBUFFERED=true
+          export DEVSTACK_GATE_TEMPEST=1
+          export DEVSTACK_GATE_NEUTRON=1
+          export ZUUL_BRANCH=stable/{release}
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
       - link-logs
@@ -347,6 +454,33 @@
 
 
 - job-template:
+    name: 'check-devstack-vm-cells-stable-{release}'
+    node: devstack-precise-check
+
+    wrappers:
+      - timeout:
+          timeout: 60
+          fail: true
+      - timestamps
+
+    builders:
+      - devstack-checkout
+      - shell: |
+          #!/bin/bash -xe
+          export PYTHONUNBUFFERED=true
+          export DEVSTACK_GATE_CELLS=1
+          export DEVSTACK_GATE_EXERCISES=1
+          export ZUUL_BRANCH=stable/{release}
+          cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
+          ./safe-devstack-vm-gate-wrap.sh
+      - link-logs
+
+    publishers:
+      - devstack-logs
+      - console-log
+
+
+- job-template:
     name: '{pipeline}-tempest-devstack-vm-cells'
     node: '{node}'
 
@@ -363,6 +497,33 @@
           export PYTHONUNBUFFERED=true
           export DEVSTACK_GATE_TEMPEST=1
           export DEVSTACK_GATE_CELLS=1
+          cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
+          ./safe-devstack-vm-gate-wrap.sh
+      - link-logs
+
+    publishers:
+      - devstack-logs
+      - console-log
+
+
+- job-template:
+    name: 'check-tempest-devstack-vm-cells-stable-{release}'
+    node: devstack-precise-check
+
+    wrappers:
+      - timeout:
+          timeout: 60
+          fail: true
+      - timestamps
+
+    builders:
+      - devstack-checkout
+      - shell: |
+          #!/bin/bash -xe
+          export PYTHONUNBUFFERED=true
+          export DEVSTACK_GATE_TEMPEST=1
+          export DEVSTACK_GATE_CELLS=1
+          export ZUUL_BRANCH=stable/{release}
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
       - link-logs
@@ -390,6 +551,33 @@
           export DEVSTACK_GATE_TEMPEST=1
           export DEVSTACK_GATE_TEMPEST_FULL=1
           export DEVSTACK_GATE_CELLS=1
+          cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
+          ./safe-devstack-vm-gate-wrap.sh
+      - link-logs
+
+    publishers:
+      - devstack-logs
+      - console-log
+
+- job-template:
+    name: 'check-tempest-devstack-vm-cells-full-stable-{release}'
+    node: devstack-precise-check
+
+    wrappers:
+      - timeout:
+          timeout: 60
+          fail: true
+      - timestamps
+
+    builders:
+      - devstack-checkout
+      - shell: |
+          #!/bin/bash -xe
+          export PYTHONUNBUFFERED=true
+          export DEVSTACK_GATE_TEMPEST=1
+          export DEVSTACK_GATE_TEMPEST_FULL=1
+          export DEVSTACK_GATE_CELLS=1
+          export ZUUL_BRANCH=stable/{release}
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
       - link-logs
@@ -735,6 +923,34 @@
           export DEVSTACK_GATE_TEMPEST=1
           export DEVSTACK_GATE_TEMPEST_FULL=1
           export DEVSTACK_GATE_POSTGRES=1
+          cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
+          ./safe-devstack-vm-gate-wrap.sh
+      - link-logs
+
+    publishers:
+      - devstack-logs
+      - console-log
+
+
+- job-template:
+    name: 'check-tempest-devstack-vm-postgres-full-stable-{release}'
+    node: devstack-precise-check
+
+    wrappers:
+      - timeout:
+          timeout: 60
+          fail: true
+      - timestamps
+
+    builders:
+      - devstack-checkout
+      - shell: |
+          #!/bin/bash -xe
+          export PYTHONUNBUFFERED=true
+          export DEVSTACK_GATE_TEMPEST=1
+          export DEVSTACK_GATE_TEMPEST_FULL=1
+          export DEVSTACK_GATE_POSTGRES=1
+          export ZUUL_BRANCH=stable/{release}
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
       - link-logs
