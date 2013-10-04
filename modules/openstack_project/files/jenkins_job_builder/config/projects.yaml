@@ -923,6 +923,18 @@
       - devstack-jobs:
           pipeline: check
           node: 'devstack-precise || devstack-precise-check'
+      - 'check-tempest-devstack-vm-full-stable-{release}':
+          release:
+            - grizzly
+            - havana
+      - 'check-tempest-devstack-vm-neutron-stable-{release}':
+          release:
+            - grizzly
+            - havana
+      - 'check-tempest-devstack-vm-postgres-full-stable-{release}':
+          release:
+            - grizzly
+            - havana
 
 
 - project:
