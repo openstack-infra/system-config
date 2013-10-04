@@ -52,8 +52,8 @@ sure you have cloned the openstack-infra/config repository
 First you need to add your StackForge project to the master project
 list. Edit
 ``modules/openstack_project/templates/review.projects.yaml.erb``
-and add a new section for your project at the end of the file. It should
-look something like::
+and add a new section for your project in alphabetical order within the file.
+It should look something like::
 
   - project: stackforge/project-name
     description: Latest and greatest cloud stuff.
@@ -107,7 +107,7 @@ and Zuul for the new StackForge project.
 If you are interested in using the standard python Jenkins jobs (docs,
 pep8, python 2.6 and 2.7 unittests, and coverage), edit
 ``modules/openstack_project/files/jenkins_job_builder/config/projects.yaml``
-and add a new section for your project at the end of the file. It
+and add a new section for your project in alphabetical order in the file. It
 should look something like::
 
   - project:
@@ -146,8 +146,8 @@ jobs yet, you don't need to edit ``projects.yaml``.
 Now that we have Jenkins jobs we need to tell Zuul to run them when
 appropriate. Edit
 ``modules/openstack_project/files/zuul/layout.yaml``
-and add a new section for your project at the end of the file. It
-should look something like::
+and add a new section for your project in alphabetical order within the file.
+It should look something like::
 
   - name: stackforge/project-name
     check:
