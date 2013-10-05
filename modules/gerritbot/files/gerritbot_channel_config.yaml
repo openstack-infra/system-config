@@ -100,14 +100,17 @@ tripleo:
       - change-merged
       - x-vrif-minus-2
     projects:
+      - openstack-infra/tripleo-ci
       - openstack/diskimage-builder
-      - openstack/os-collect-config
       - openstack/os-apply-config
+      - openstack/os-collect-config
       - openstack/os-refresh-config
+      - openstack/python-tuskarclient
+      - openstack/tripleo-heat-templates
       - openstack/tripleo-image-elements
       - openstack/tripleo-incubator
-      - openstack/tripleo-heat-templates
-      - openstack-infra/tripleo-ci
+      - openstack/tuskar
+      - openstack/tuskar-ui
     branches:
       - master
 
@@ -303,18 +306,6 @@ openstack-glance:
     projects:
       - openstack/glance
       - openstack/python-glanceclient
-    branches:
-      - master
-
-tuskar:
-    events:
-      - patchset-created
-      - change-merged
-      - x-vrif-minus-2
-    projects:
-      - stackforge/tuskar
-      - stackforge/tuskar-ui
-      - stackforge/python-tuskarclient
     branches:
       - master
 

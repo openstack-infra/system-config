@@ -3082,7 +3082,7 @@ projects:
           - post-mirror-python27
           - post-mirror-python33
 
-  - name: stackforge/tuskar
+  - name: openstack/tuskar
     check:
       - gate-tuskar-pep8
       - gate-tuskar-python26
@@ -3092,7 +3092,7 @@ projects:
       - gate-tuskar-python26
       - gate-tuskar-python27
 
-  - name: stackforge/python-tuskarclient
+  - name: openstack/python-tuskarclient
     check:
       - gate-python-tuskarclient-pep8
       - gate-python-tuskarclient-pylint
@@ -3106,7 +3106,7 @@ projects:
     post:
       - python-tuskarclient-coverage
 
-  - name: stackforge/tuskar-ui
+  - name: openstack/tuskar-ui
     check:
       - gate-noop
     gate:
