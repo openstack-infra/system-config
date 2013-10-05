@@ -10,6 +10,9 @@ zmq-publishers:
   - tcp://jenkins01.openstack.org:8888
   - tcp://jenkins02.openstack.org:8888
 
+gearman-servers:
+  - host: zuul.openstack.org
+
 providers:
   - name: rax-dfw
     region-name: 'DFW'
@@ -123,21 +126,17 @@ targets:
       credentials-id: '<%= jenkins_credentials_id %>'
     images:
       - name: devstack-precise
+        min-ready: 20
         providers:
           - name: hpcloud-az1
-            min-ready: 10
           - name: hpcloud-az2
-            min-ready: 10
           - name: hpcloud-az3
-            min-ready: 10
       - name: devstack-precise-check
+        min-ready: 10
         providers:
           - name: rax-iad
-            min-ready: 10
           - name: rax-dfw
-            min-ready: 5
           - name: rax-ord
-            min-ready: 10
   - name: jenkins02
     jenkins:
       url: 'https://jenkins02.openstack.org/'
@@ -146,18 +145,14 @@ targets:
       credentials-id: '<%= jenkins_credentials_id %>'
     images:
       - name: devstack-precise
+        min-ready: 20
         providers:
           - name: hpcloud-az1
-            min-ready: 10
           - name: hpcloud-az2
-            min-ready: 10
           - name: hpcloud-az3
-            min-ready: 10
       - name: devstack-precise-check
+        min-ready: 10
         providers:
           - name: rax-iad
-            min-ready: 10
           - name: rax-dfw
-            min-ready: 5
           - name: rax-ord
-            min-ready: 10

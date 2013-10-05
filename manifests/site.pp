@@ -395,6 +395,7 @@ node 'zuul.openstack.org' {
     sysadmins            => hiera('sysadmins'),
     statsd_host          => 'graphite.openstack.org',
     gearman_workers      => [
+      'nodepool.openstack.org',
       'jenkins.openstack.org',
       'jenkins01.openstack.org',
       'jenkins02.openstack.org',
