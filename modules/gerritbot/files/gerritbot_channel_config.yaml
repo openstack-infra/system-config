@@ -145,13 +145,17 @@ savanna:
       - change-merged
       - x-vrif-minus-2
     projects:
-      - stackforge/savanna
-      - stackforge/python-savannaclient
-      - stackforge/savanna-dashboard
-      - stackforge/savanna-extra
+      - openstack/savanna
+      - openstack/python-savannaclient
+      - openstack/savanna-dashboard
+      - openstack/savanna-extra
+      - openstack/savanna-image-elements
+      - stackforge/puppet-savanna
     branches:
       - master
       - stable/0.1
+      - stable/0.2
+      - stable/0.3
 
 openstack-nova:
     events:
