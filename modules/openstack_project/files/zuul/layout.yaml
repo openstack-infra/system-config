@@ -160,6 +160,10 @@ jobs:
     branch: ^(?!stable/(folsom|grizzly)).*$
   - name: ^(gate|check)-swift-devstack-vm-functional$
     branch: ^(?!stable/(folsom|grizzly)).*$
+  - name: ^(gate|check)-gerrit-unittests$
+    branch: ^openstack/.*$
+  - name: gerrit-package
+    branch: ^openstack/.*$
   - name: gate-nova-pylint
     voting: false
   - name: gate-cinder-pylint
