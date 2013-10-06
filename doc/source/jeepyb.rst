@@ -178,12 +178,13 @@ that periodically marks reviews that have seen little activity as
 `Abandoned`.  Their owners may use the Gerrit interface to restore
 them when they are ready for further review.
 
-Fetching Remotes
-----------------
+Manage Projects
+---------------
 
-Some projects may have remotes defined in Jeepyb; the
-``fetch-remotes`` cron job will update these remotes so that their
-commits are available in Gerrit.
+Some projects may have upstreams defined in Jeepyb; the
+``manage-projects`` cron job will update these remotes so that their
+commits are available in Gerrit. It will also ensure that project metadata
+is set up as defined in projects.yaml.
 
 RSS feeds
 ---------
