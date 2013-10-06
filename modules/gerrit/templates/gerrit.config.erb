@@ -12,12 +12,25 @@
 <% if database_poollimit != "" -%>
 	poolLimit = <%= database_poollimit %>
 <% end -%>
-        connectionpool = true
+	connectionpool = true
 [auth]
-	type = OPENID_SSO
-	openIdSsoUrl = <%= openidssourl %>
-	cookieSecure = true
+<% if gerrit_contributor_agreement -%>
 	contributorAgreements = true
+<% end -%>
+	type = <%= gerrit_auth_type %>
+	cookieSecure = true
+<% if gerrit_auth_type == 'OPENID_SSO' -%>
+	openIdSsoUrl = <%= openidssourl %>
+<% end -%>
+<% if gerrit_auth_type == 'LDAP' -%>
+[ldap]
+	server = <%= ldap_server %>
+	accountBase = <%= ldap_account_base %>
+	username = <%= ldap_username %>
+	password = <%= ldap_password %>
+	accountPattern = <%= ldap_account_pattern %>
+	accountEmailAddress = <%= ldap_account_email_address %>
+<% end %>
 [sendemail]
 	smtpServer = localhost
 [container]
