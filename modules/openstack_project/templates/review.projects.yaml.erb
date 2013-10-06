@@ -47,7 +47,10 @@
   description: The jenkins gearman plugin
 - project: openstack-infra/gerrit
   description: Fork of Gerrit used by OpenStack
-  remote: https://gerrit.googlesource.com/gerrit
+  upstream: https://gerrit.googlesource.com/gerrit
+  upstream-prefix: upstream
+  options:
+    - track-upstream
 - project: openstack-infra/gerritbot
 - project: openstack-infra/gerritlib
 - project: openstack-infra/git-review
