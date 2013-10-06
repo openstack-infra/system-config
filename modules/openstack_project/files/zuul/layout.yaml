@@ -152,6 +152,10 @@ jobs:
     voting: false
     # Remove when gate-grenade-devstack-vm-stable is
     # merged into gate-grenade-devstack-vm
+  - name: ^(gate|check)-gerrit-unittests$
+    branch: ^openstack/.*$
+  - name: gerrit-package
+    branch: ^openstack/.*$
   - name: gate-grenade-noop
     branch: ^(stable/(folsom|grizzly)).*$
   - name: gate-tempest-docs
