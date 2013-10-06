@@ -3090,7 +3090,6 @@ projects:
   - name: openstack/python-tuskarclient
     check:
       - gate-python-tuskarclient-pep8
-      - gate-python-tuskarclient-pylint
       - gate-python-tuskarclient-python26
       - gate-python-tuskarclient-python27
       - gate-python-tuskarclient-python33
