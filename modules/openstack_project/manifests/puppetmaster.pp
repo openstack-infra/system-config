@@ -8,6 +8,9 @@ class openstack_project::puppetmaster (
     sysadmins                 => $sysadmins,
   }
 
+  class { 'salt':
+    salt_master => 'ci-puppetmaster.openstack.org',
+  }
   class { 'salt::master': }
 
   cron { 'updatepuppetmaster':
