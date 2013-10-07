@@ -207,6 +207,15 @@ jobs:
     branch: ^(?!stable/(folsom|grizzly)).*$
   - name: openstack-install-deploy-guide-ubuntu
     branch: ^(?!stable/(folsom|grizzly)).*$
+  - name: gate-openstack-manuals-validate-niceness
+    branch: ^(?!stable/(folsom|grizzly)).*$
+    voting: false
+  - name: gate-openstack-manuals-validate-syntax
+    branch: ^(?!stable/(folsom|grizzly)).*$
+  - name: gate-openstack-manuals-validate-deletions
+    branch: ^(?!stable/(folsom|grizzly)).*$
+  - name: gate-openstack-manuals-validate-build
+    branch: ^(?!stable/(folsom|grizzly)).*$
 # Deprecated documentation targets:
   - name: openstack-block-storage-admin-old
     branch: stable/(grizzly|folsom)
@@ -221,6 +230,8 @@ jobs:
   - name: openstack-openstack-install-fedora-old
     branch: stable/(grizzly|folsom)
   - name: openstack-openstack-install-ubuntu-old
+    branch: stable/(grizzly|folsom)
+  - name: gate-openstack-manuals-validate
     branch: stable/(grizzly|folsom)
   - name: ^gate-.*-docs$
     success-pattern: http://docs-draft.openstack.org/{build.parameters[LOG_PATH]}/doc/build/html/
@@ -2016,8 +2027,15 @@ projects:
 
   - name: openstack/openstack-manuals
     check:
+      - gate-openstack-manuals-validate-niceness
+      - gate-openstack-manuals-validate-syntax
+      - gate-openstack-manuals-validate-deletions
+      - gate-openstack-manuals-validate-build
       - gate-openstack-manuals-validate
     gate:
+      - gate-openstack-manuals-validate-syntax
+      - gate-openstack-manuals-validate-deletions
+      - gate-openstack-manuals-validate-build
       - gate-openstack-manuals-validate
     post:
       - openstack-admin-guide-cloud
