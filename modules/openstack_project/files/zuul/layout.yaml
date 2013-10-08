@@ -963,6 +963,7 @@ projects:
       - gate-oslo.version-docs
       - gate-oslo.version-python26
       - gate-oslo.version-python27
+      - gate-oslo.version-pypy
       - gate-oslo.version-python33
       - check-tempest-devstack-vm-full
       - check-tempest-devstack-vm-neutron
@@ -973,6 +974,7 @@ projects:
       - gate-oslo.version-pep8
       - gate-oslo.version-python26
       - gate-oslo.version-python27
+      - gate-oslo.version-pypy
       - gate-oslo.version-python33
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-neutron
