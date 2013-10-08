@@ -1461,7 +1461,7 @@
       - openstack-{install}-{distribution}-old:
           install: openstack-install
           distribution: ubuntu
-          system: yum
+          system: apt
           profileos: "ubuntu"
 
 - project:
