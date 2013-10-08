@@ -2508,8 +2508,8 @@ projects:
       - gate-sqlalchemy-migrate-python26
       - gate-sqlalchemy-migrate-python27
     experimental:
-      - gate-sqlalchemy-migrate-tox-26sa07
-      - gate-sqlalchemy-migrate-tox-27sa07
+      - gate-sqlalchemy-migrate-unittests-26sa07
+      - gate-sqlalchemy-migrate-unittests-27sa07
     post:
       - sqlalchemy-migrate-branch-tarball
       - hook-sqlalchemy-migrate-rtfd

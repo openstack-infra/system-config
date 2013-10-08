@@ -118,7 +118,7 @@
 
     jobs:
       - python-jobs
-      - gate-{name}-tox-{env}
+      - gate-{name}-unittests-{env}
       - hook-{name}-rtfd
       - pypi-jobs
 

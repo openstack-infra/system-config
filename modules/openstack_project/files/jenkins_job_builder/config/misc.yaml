@@ -32,11 +32,11 @@
     node: '{node}'
 
 - job-template:
-    name: 'gate-{name}-tox-{env}'
+    name: 'gate-{name}-unittests-{env}'
 
     builders:
       - gerrit-git-prep
-      - shell: '/usr/local/jenkins/slave_scripts/run-tox.sh {env} {github-org} {name}'
+      - shell: '/usr/local/jenkins/slave_scripts/run-unittests.sh {env} {github-org} {name}'
       - assert-no-extra-files
 
     publishers:
