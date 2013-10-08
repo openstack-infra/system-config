@@ -848,6 +848,12 @@ projects:
       - periodic-nova-python26-stable-grizzly
       - periodic-nova-python27-stable-grizzly
 
+  - name: openstack/openstack
+    check:
+      - gate-noop
+    gate:
+      - gate-noop
+
   - name: openstack/oslo-incubator
     check:
       - gate-oslo-incubator-requirements
