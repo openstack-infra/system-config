@@ -66,6 +66,7 @@ class openstack_project::cacti (
     'elasticsearch5.openstack.org',
     'elasticsearch6.openstack.org',
     'etherpad.openstack.org',
+    'etherpad-dev.openstack.org',
     'git.openstack.org',
     'git01.openstack.org',
     'git02.openstack.org',
