@@ -130,9 +130,14 @@ class openstack_project::gerrit (
         link  => '#q,$1,n,z',
       },
       {
-        name  => 'launchpad',
-        match => '(\\b[Bb]ug\\b|\\b[Ll][Pp]\\b)[ \\t#:]*(\\d+)',
-        link  => 'https://code.launchpad.net/bugs/$2',
+        name  => 'bugheader',
+        match => '^([Cc]loses|[Pp]artial|[Rr]elated)-[Bb]ug:[\\s#]?(\\d+)$',
+        link  => 'https://launchpad.net/bugs/$2',
+      },
+      {
+        name  => 'bug',
+        match => '\\bbug:? #?(\\d+)',
+        link  => 'https://launchpad.net/bugs/$1',
       },
       {
         name  => 'blueprint',
