@@ -2314,6 +2314,8 @@ projects:
       - tripleo-incubator-docs
     release:
       - tripleo-incubator-docs
+    experimental:
+      - gate-tripleo-deploy
 
   - name: stackforge/climate
     check:

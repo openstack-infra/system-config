@@ -383,6 +383,9 @@ node 'nodepool.openstack.org' {
     hpcloud_username         => hiera('nodepool_hpcloud_username'),
     hpcloud_password         => hiera('nodepool_hpcloud_password'),
     hpcloud_project          => hiera('nodepool_hpcloud_project'),
+    tripleo_username         => hiera('nodepool_tripleo_username'),
+    tripleo_password         => hiera('nodepool_tripleo_password'),
+    tripleo_project          => hiera('nodepool_tripleo_project'),
   }
 }
 
