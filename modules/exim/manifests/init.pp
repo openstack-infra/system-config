@@ -3,6 +3,7 @@ class exim(
   $queue_interval = '30m',
   $queue_run_max = '5',
   $queue_smtp_domains = '',
+  $smarthost = false,
   $sysadmin = []
 ) {
 
