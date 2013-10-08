@@ -606,21 +606,12 @@ mailman_router:
 # If the DNS lookup fails, no further routers are tried because of the no_more
 # setting, and consequently the address is unrouteable.
 
-<% if smarthost -%>
-smarthost:
-  driver = manualroute
-  domains = !+local_domains
-  transport = remote_smtp
-  route_list = * <%= smarthost %>
-  no_more
-<% else -%>
 dnslookup:
   driver = dnslookup
   domains = ! +local_domains
   transport = remote_smtp
   ignore_target_hosts = 0.0.0.0 : 127.0.0.0/8
   no_more
-<% end -%>
 
 # The remaining routers handle addresses in the local domain(s), that is those
 # domains that are defined by "domainlist local_domains" above.
