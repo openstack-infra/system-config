@@ -2115,8 +2115,8 @@ projects:
     gate:
       - gate-noop
     post:
-      - network-api-v1.0
-      - netconn-api-v2.0
+      - network-api-v1
+      - network-api-v2
 
   - name: openstack/object-api
     check:
