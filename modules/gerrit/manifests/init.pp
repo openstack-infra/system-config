@@ -18,6 +18,10 @@
 #     The URL to use for OpenID in SSO mode.
 #   email:
 #     The email address Gerrit should use when sending mail.
+#   smtpserver:
+#     The smtp server that Gerrit should send mail through.
+#   sendemail_from:
+#     gerrit.conf value for sendemail.from.
 #   database_poollimit:
 #   container_heaplimit:
 #   core_packedgitopenfiles:
@@ -96,6 +100,8 @@ class gerrit(
   $ldap_account_pattern = '',
   $ldap_account_email_address = '',
   $email = '',
+  $smtpserver = 'localhost',
+  $sendemail_from = 'MIXED',
   $database_poollimit = '',
   $container_heaplimit = '',
   $core_packedgitopenfiles = '',

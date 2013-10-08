@@ -32,7 +32,8 @@
 	accountEmailAddress = <%= ldap_account_email_address %>
 <% end %>
 [sendemail]
-	smtpServer = localhost
+	smtpServer = <%= smtpserver %>
+	from = <%= sendemail_from %>
 [container]
 	user = gerrit2
 	javaHome = <%= java_home %>
