@@ -1,0 +1,29 @@
+# worker MPM
+# StartServers: initial number of server processes to start
+# MinSpareThreads: minimum number of worker threads which are kept spare
+# MaxSpareThreads: maximum number of worker threads which are kept spare
+# ThreadLimit: ThreadsPerChild can be changed to this maximum value during a
+#              graceful restart. ThreadLimit can only be changed by stopping
+#              and starting Apache.
+# ThreadsPerChild: constant number of worker threads in each server process
+# MaxClients: maximum number of simultaneous client connections
+# MaxRequestsPerChild: maximum number of requests a server process serves
+#
+# Etherpad Lite clients create a lot of connections. To be able to support
+# Several hundred concurrent users we need to make sure that we allow a few
+# thousand concurrent connections. This should be ok as typical etherpad use
+# involves a couple writers then a bunch of lurkers. The cost of lurkers
+# is basically the TCP connection as they don't create DB writes and so on.
+# In addition to allowing for connection growth, keep a healthy number of
+# spare threads around to better handle thundering herds of users (eg at the
+# start of summit sessions).
+<IfModule mpm_worker_module>
+    ServerLimit          64
+    StartServers          3
+    MinSpareThreads      96
+    MaxSpareThreads     192
+    ThreadLimit          64
+    ThreadsPerChild      32
+    MaxClients         2048
+    MaxRequestsPerChild   0
+</IfModule>
