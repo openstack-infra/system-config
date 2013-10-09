@@ -14,6 +14,7 @@ class etherpad_lite::apache (
     ensure => present,
   }
 
+  include apache
   apache::vhost { $vhost_name:
     port     => 443,
     docroot  => 'MEANINGLESS ARGUMENT',
@@ -29,6 +30,14 @@ class etherpad_lite::apache (
   }
   a2mod { 'proxy_http':
     ensure => present,
+  }
+  file { '/etc/apache2/conf.d/connection-tuning':
+    ensure  => present,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0644',
+    source  => 'puppet:///modules/etherpad_lite/apache-connection-tuning',
+    notify  => Service['httpd'],
   }
 
   file { '/etc/ssl/certs':
