@@ -223,6 +223,7 @@
 
     jobs:
       - gate-{name}-pep8
+      - gate-{name}-python27
 
 
 - project:
