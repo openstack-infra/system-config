@@ -42,6 +42,7 @@ EOF
         set -e
     fi
 
+    rm -rf $(basename $PROJECT)
     git clone --depth=1 ssh://$USERNAME@review.openstack.org:29418/$PROJECT.git
 
     PROJECT_DIR=$(basename $PROJECT)
