@@ -2420,6 +2420,7 @@ projects:
       - gate-savanna-python27
       - gate-savanna-requirements
     post:
+      - savanna-docs
       - savanna-branch-tarball
       - hook-savanna-rtfd
       - savanna-coverage
