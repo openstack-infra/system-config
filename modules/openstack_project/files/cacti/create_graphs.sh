@@ -12,7 +12,7 @@ php -q add_device.php --description="$HOST_NAME" --ip="$HOST_NAME" \
 
 HOST_ID=`php -q add_graphs.php --list-hosts |grep $HOST_NAME|cut -f 1`
 
-TREE_ID=`php -q add_tree.php --list-trees |grep "Default Tree"|cut -f 1`
+TREE_ID=`php -q add_tree.php --list-trees |grep "All Hosts"|cut -f 1`
 php -q add_tree.php --type=node --node-type=host --tree-id=$TREE_ID \
   --host-id=$HOST_ID
 
