@@ -30,6 +30,13 @@ class etherpad_lite::apache (
   a2mod { 'proxy_http':
     ensure => present,
   }
+  file { '/etc/apache2/conf.d/connection-tuning':
+    ensure => present,
+    owner  => 'root',
+    group  => 'root',
+    mode   => '0644',
+    source => 'puppet:///modules/etherpad_lite/apache-connection-tuning',
+  }
 
   file { '/etc/ssl/certs':
     ensure => directory,
