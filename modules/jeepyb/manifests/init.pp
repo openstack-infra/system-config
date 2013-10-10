@@ -14,24 +14,24 @@ class jeepyb (
   if ! defined(Package['PyGithub']) {
     package { 'PyGithub':
       ensure   => latest,
-      provider => pip,
-      require  => Class['pip'],
+      provider => pip2,
+      require  => Class['pip::python2'],
     }
   }
 
   if ! defined(Package['gerritlib']) {
     package { 'gerritlib':
       ensure   => latest,
-      provider => pip,
-      require  => Class['pip'],
+      provider => pip2,
+      require  => Class['pip::python2'],
     }
   }
 
   if ! defined(Package['pkginfo']) {
     package { 'pkginfo':
       ensure   => latest,
-      provider => pip,
-      require  => Class['pip'],
+      provider => pip2,
+      require  => Class['pip::python2'],
     }
   }
 
@@ -69,9 +69,7 @@ class jeepyb (
   }
 
   exec { 'install_jeepyb' :
-    command     => 'python setup.py install',
-    cwd         => '/opt/jeepyb',
-    path        => '/bin:/usr/bin',
+    command     => 'pip install -U /opt/jeepyb',
     refreshonly => true,
     require     => Class['mysql::python'],
     subscribe   => Vcsrepo['/opt/jeepyb'],
