@@ -934,6 +934,7 @@
       - gate-{name}-pep8
       - gate-{name}-requirements
       - gate-{name}-docs
+      - gate-{name}-python27
       - '{name}-branch-tarball'
       - openstack-publish-jobs
 
