@@ -116,22 +116,6 @@ providers:
         setup: prepare_node_devstack.sh
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
-  - name: tripleo-test-cloud
-    service-type: 'compute'
-    service-name: 'nova'
-    username: '<%= tripleo_username %>'
-    password: '<%= tripleo_password %>'
-    project-id: '<%= tripleo_project %>'
-    auth-url: 'https://poc.tripleo.org:10000/v2.0'
-    boot-timeout: 120
-    max-servers: 2
-    images:
-      - name: tripleo-precise
-        base-image: 'Ubuntu Precise 12.04 LTS Server 64-bit'
-        min-ram: 8192
-        setup: prepare_node_tripleo.sh
-        username: jenkins
-        private-key: /home/nodepool/.ssh/id_rsa
 
 targets:
   - name: jenkins01
@@ -153,10 +137,6 @@ targets:
           - name: rax-iad
           - name: rax-dfw
           - name: rax-ord
-      - name: tripleo-precise
-        min-ready: 1
-        providers:
-          - name: tripleo-test-cloud
   - name: jenkins02
     jenkins:
       url: 'https://jenkins02.openstack.org/'
@@ -176,7 +156,3 @@ targets:
           - name: rax-iad
           - name: rax-dfw
           - name: rax-ord
-      - name: tripleo-precise
-        min-ready: 1
-        providers:
-          - name: tripleo-test-cloud
