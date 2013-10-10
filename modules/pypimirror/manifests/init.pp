@@ -7,7 +7,7 @@ class pypimirror(
 ) {
 
   include apache
-  include pip
+  include pip::python3
   include jeepyb
 
   $log_root = '/var/log/pypimirror/'

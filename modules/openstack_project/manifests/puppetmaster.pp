@@ -56,7 +56,7 @@ class openstack_project::puppetmaster (
 # For launch/launch-node.py.
   package { ['python-cinderclient', 'python-novaclient']:
     ensure   => latest,
-    provider => pip,
+    provider => pip2,
   }
   package { 'python-paramiko':
     ensure => present,

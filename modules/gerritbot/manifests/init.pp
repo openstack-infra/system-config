@@ -7,12 +7,12 @@ class gerritbot(
   $user = '',
   $vhost_name = ''
 ) {
-  include pip
+  include pip::python3
 
   package { 'gerritbot':
     ensure   => present,  # Pip upgrade is not working
-    provider => pip,
-    require  => Class['pip'],
+    provider => pip2,
+    require  => Class['pip::python2'],
   }
 
   file { '/etc/init.d/gerritbot':
