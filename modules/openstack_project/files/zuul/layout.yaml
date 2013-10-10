@@ -282,7 +282,7 @@ jobs:
   - name: gate-python-neutronclient-python33
     voting: false
   - name: gate-python-novaclient-python33
-    voting: false
+    voting: true
   - name: gate-python-openstackclient-python33
     voting: false
   - name: gate-python-swiftclient-python33
