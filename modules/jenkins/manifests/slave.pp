@@ -9,7 +9,6 @@ class jenkins::slave(
   $include_pypy = false
 ) {
 
-  include pip
   include jenkins::params
 
   if ($user == true) {
@@ -153,6 +152,10 @@ class jenkins::slave(
     'tox',
   ]
 
+  # moving this outside of the if because we have other pip2 pcakges below 
+  # that mix with pip3
+  include pip::python2
+
   if $python3 {
     if ($::lsbdistcodename == 'precise') {
       apt::ppa { 'ppa:zulcss/py3k':
@@ -168,21 +171,21 @@ class jenkins::slave(
   } else {
     package { $pip_packages:
       ensure   => latest,  # we want the latest from these
-      provider => pip,
-      require  => Class[pip],
+      provider => pip2,
+      require  => Class[pip::python2],
     }
   }
 
   package { 'python-subunit':
     ensure   => absent,
-    provider => pip,
-    require  => Class[pip],
+    provider => pip2,
+    require  => Class[pip::python2],
   }
 
   package { 'git-review':
     ensure   => '1.17',
-    provider => pip,
-    require  => Class[pip],
+    provider => pip2,
+    require  => Class[pip::python2],
   }
 
   file { '/etc/profile.d/rubygems.sh':
