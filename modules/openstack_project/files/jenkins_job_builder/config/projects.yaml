@@ -912,6 +912,19 @@
 
 
 - project:
+    name: swift-bench
+    github-org: openstack
+    node: precise
+    tarball-site: tarballs.openstack.org
+    doc-publisher-site: docs.openstack.org
+
+    jobs:
+      - python-jobs
+      - openstack-publish-jobs
+      - pypi-jobs
+
+
+- project:
     name: devstack-jobs
 
     jobs:
