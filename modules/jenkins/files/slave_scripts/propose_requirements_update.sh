@@ -12,7 +12,7 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 
-COMMIT_MSG="Updated from global requirements"
+INITIAL_COMMIT_MSG="Updated from global requirements"
 TOPIC="openstack/requirements"
 USERNAME=${USERNAME:-$USER}
 BRANCH=${ZUUL_BRANCH:-master}
@@ -33,13 +33,18 @@ for PROJECT in $(cat projects.txt); do
         # read return a non zero value when it reaches EOF. Because we use a
         # heredoc here it will always reach EOF and return a nonzero value.
         # Disable -e temporarily to get around the read.
+        # The reason we use read is to allow for multiline variable content
+        # and variable interpolation. Simply double quoting a string across
+        # multiple lines removes the newlines.
         set +e
         read -d '' COMMIT_MSG <<EOF
-$COMMIT_MSG
+$INITIAL_COMMIT_MSG
 
 Change-Id: $change_id
 EOF
         set -e
+    else
+        COMMIT_MSG=$INITIAL_COMMIT_MSG
     fi
 
     rm -rf $(basename $PROJECT)
