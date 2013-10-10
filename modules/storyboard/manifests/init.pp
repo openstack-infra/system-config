@@ -33,7 +33,7 @@ class storyboard (
 ) {
   include apache
   include mysql::python
-  include pip
+  include pip::python2
 
   package { 'libapache2-mod-wsgi':
     ensure => present,
@@ -63,13 +63,10 @@ class storyboard (
     source   => $storyboard_git_source_repo,
   }
 
-  exec { 'install-storyboard' :
-    command     => 'pip install /opt/storyboard',
-    path        => '/usr/local/bin:/usr/bin:/bin/',
-    refreshonly => true,
-    subscribe   => Vcsrepo['/opt/storyboard'],
-    notify      => Exec['storyboard-reload'],
-    require     => Class['pip'],
+  package { '/opt/storyboard':
+    ensure   => latest,
+    provider => pip2,
+    require  => [Class['pip::python2'], Vcsrepo['/opt/storyboard']],
   }
 
   file { '/etc/storyboard':
@@ -131,6 +128,7 @@ class storyboard (
     command     => 'touch /usr/local/lib/python2.7/dist-packages/storyboard/api/app.wsgi',
     path        => '/usr/local/bin:/usr/bin:/bin/',
     refreshonly => true,
+    subscribe   => Package['/opt/storyboard'],
   }
 
   # START storyboard-webclient
