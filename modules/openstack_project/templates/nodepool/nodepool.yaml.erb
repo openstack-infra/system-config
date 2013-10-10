@@ -117,9 +117,8 @@ providers:
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
   - name: tripleo-test-cloud
-    region-name: ''
     service-type: 'compute'
-    service-name: 'Compute'
+    service-name: 'nova'
     username: '<%= tripleo_username %>'
     password: '<%= tripleo_password %>'
     project-id: '<%= tripleo_project %>'
