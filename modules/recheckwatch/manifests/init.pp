@@ -27,8 +27,8 @@ class recheckwatch (
   if ! defined(Package['gerritlib']) {
     package { 'gerritlib':
       ensure   => latest,
-      provider => pip,
-      require  => Class['pip'],
+      provider => pip2,
+      require  => Class['pip::python2'],
     }
   }
 
