@@ -20,7 +20,7 @@ import os
 import sys
 import subprocess
 
-DEVSTACK='~/workspace-cache/devstack'
+DEVSTACK=os.path.expanduser('~/workspace-cache/devstack')
 
 def run_local(cmd, status=False, cwd='.', env={}):
     print "Running:", cmd
@@ -116,3 +116,6 @@ def main():
                 continue
             run_local(['wget', '-nv', '-c', url,
                        '-O', '~/cache/files/%s' % fname])
+
+if __name__ == '__main__':
+    main()
