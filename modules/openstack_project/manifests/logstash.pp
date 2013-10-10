@@ -55,11 +55,11 @@ class openstack_project::logstash (
     ensure => present,
   }
 
-  include pip
+  include pip::python3
   package { 'gear':
     ensure   => latest,
     provider => 'pip',
-    require  => Class['pip'],
+    require  => Class['pip::python2'],
   }
 
   file { '/usr/local/bin/log-gearman-client.py':
