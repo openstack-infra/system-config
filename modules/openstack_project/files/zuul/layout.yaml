@@ -1074,6 +1074,12 @@ projects:
       - swift-docs
       - swift-merge-release-tags
 
+  - name: openstack/swift-bench
+    check:
+      - gate-noop
+    gate:
+      - gate-noop
+
   - name: openstack/python-ceilometerclient
     check:
       - gate-python-ceilometerclient-requirements
