@@ -101,4 +101,13 @@ class openstack_project::lists(
     webserver   => $listdomain,
     mailserver  => $listdomain,
   }
+
+  maillist { 'elections-committee':
+    ensure      => present,
+    admin       => 'markmc@redhat.com',
+    password    => $listpassword,
+    description => 'Discussions of the OpenStack Foundation Elections Committee',
+    webserver   => $listdomain,
+    mailserver  => $listdomain,
+  }
 }
