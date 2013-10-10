@@ -51,11 +51,11 @@ class openstack_project::base(
     ensure => present
   }
 
-  include pip
+  include pip::python2
   package { 'virtualenv':
     ensure   => '1.10.1',
-    provider => pip,
-    require  => Class['pip'],
+    provider => pip2,
+    require  => Class['pip::python2'],
   }
 
   if ($install_users) {

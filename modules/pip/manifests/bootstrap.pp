@@ -1,0 +1,34 @@
+# Class: pip::bootstrap
+#
+
+define pip::bootstrap ( $pythonver = $title)
+{
+    include pip::jsongem
+    include pip::params
+    notify{"completed bootstrap for ${pythonver}":
+            require => [
+                    Exec["get_ez_setup for ${pythonver}"],
+                    Exec["get_get_pip for ${pythonver}"],
+                    ],
+    }
+
+    file { '/var/lib/python-install':
+      ensure => directory
+    }
+
+    exec { "get_ez_setup for ${pythonver}":
+      command => 'wget https://bitbucket.org/pypa/setuptools/raw/bootstrap/ez_setup.py -O /var/lib/python-install/ez_setup.py',
+      path    => '/bin:/usr/bin',
+      creates => '/var/lib/ez_setup.py',
+      require => [File['/var/lib/python-install'], Package['wget']],
+    }
+
+    exec { "get_get_pip for ${pythonver}":
+      command => 'wget https://raw.github.com/pypa/pip/master/contrib/get-pip.py -O /var/lib/python-install/get-pip.py',
+      path    => '/bin:/usr/bin',
+      creates => '/var/lib/python-install/get-pip.py',
+      require => Exec["get_ez_setup for ${pythonver}"],
+    }
+
+
+}

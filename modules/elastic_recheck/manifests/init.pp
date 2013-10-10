@@ -36,13 +36,13 @@ class elastic_recheck (
     source   => 'https://git.openstack.org/openstack-infra/elastic-recheck',
   }
 
-  include pip
+  include pip::python2
   exec { 'install_elastic-recheck' :
     command     => 'pip install /opt/elastic-recheck',
     path        => '/usr/local/bin:/usr/bin:/bin/',
     refreshonly => true,
     subscribe   => Vcsrepo['/opt/elastic-recheck'],
-    require     => Class['pip'],
+    require     => Class['pip::python2'],
   }
 
   file { '/var/run/elastic-recheck':

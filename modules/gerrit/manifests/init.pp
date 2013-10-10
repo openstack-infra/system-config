@@ -135,7 +135,7 @@ class gerrit(
 ) {
   include apache
   include jeepyb
-  include pip
+  include pip::python2
 
   $java_home = $::lsbdistcodename ? {
     'precise' => '/usr/lib/jvm/java-7-openjdk-amd64/jre',
