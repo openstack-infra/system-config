@@ -31,7 +31,7 @@ class openstack_project::git_backend (
   }
 
   include jeepyb
-  include pip
+  include pip::python2
 
   class { '::cgit':
     vhost_name              => $vhost_name,
