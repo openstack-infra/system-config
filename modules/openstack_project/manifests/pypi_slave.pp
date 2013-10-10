@@ -26,12 +26,12 @@ class openstack_project::pypi_slave (
     ssh_key => $jenkins_ssh_public_key,
   }
 
-  include pip
+  include pip::python2
 
   package { 'twine':
     ensure   => present,
-    provider => 'pip',
-    require  => Class['pip'],
+    provider => pip2,
+    require  => Class['pip::python2'],
   }
 
   file { '/home/jenkins/.pypirc':
