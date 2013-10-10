@@ -28,9 +28,7 @@ class jenkins::job_builder (
   }
 
   exec { 'install_jenkins_job_builder':
-    command     => 'python setup.py install',
-    cwd         => '/opt/jenkins_job_builder',
-    path        => '/bin:/usr/bin',
+    command     => 'pip install -U /opt/jenkins_job_builder',
     refreshonly => true,
     subscribe   => Vcsrepo['/opt/jenkins_job_builder'],
   }
