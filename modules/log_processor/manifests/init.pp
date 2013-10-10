@@ -33,17 +33,17 @@ class log_processor (
     ensure => present,
   }
 
-  include pip
+  include pip::python2
   package { 'gear':
     ensure   => latest,
-    provider => 'pip',
-    require  => Class['pip'],
+    provider => pip2,
+    require  => Class['pip::python2'],
   }
 
   package { 'statsd':
     ensure   => latest,
-    provider => 'pip',
-    require  => Class['pip'],
+    provider => pip2,
+    require  => Class['pip::python2'],
   }
 
   file { '/var/lib/crm114':

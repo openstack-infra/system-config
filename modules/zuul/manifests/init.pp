@@ -36,7 +36,7 @@ class zuul (
   $git_name = '',
 ) {
   include apache
-  include pip
+  include pip::python2
 
   $packages = [
     'python-webob',
@@ -93,7 +93,7 @@ class zuul (
     path        => '/usr/local/bin:/usr/bin:/bin/',
     refreshonly => true,
     subscribe   => Vcsrepo['/opt/zuul'],
-    require     => Class['pip'],
+    require     => Class['pip::python2'],
   }
 
   file { '/etc/zuul':
