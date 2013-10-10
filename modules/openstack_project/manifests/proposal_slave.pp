@@ -16,8 +16,8 @@ class openstack_project::proposal_slave (
 
   package { ['transifex-client', 'Babel']:
     ensure   => latest,
-    provider => pip,
-    require  => Class['pip'],
+    provider => pip2,
+    require  => Class['pip::python2'],
   }
 
   file { '/home/jenkins/.transifexrc':

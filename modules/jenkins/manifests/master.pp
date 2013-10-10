@@ -13,7 +13,7 @@ class jenkins::master(
   $jenkins_ssh_private_key = '',
   $jenkins_ssh_public_key = '',
 ) {
-  include pip
+  include pip::python3
   include apt
   include apache
 

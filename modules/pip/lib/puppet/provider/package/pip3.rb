@@ -22,117 +22,168 @@
 #
 # Loosely based on the 'pip' package provider in puppet 2.7.
 require 'puppet/provider/package'
-require 'xmlrpc/client'
+require 'json'
+require 'net/https'
+require 'uri'
 
 Puppet::Type.type(:package).provide :pip3,
   :parent => ::Puppet::Provider::Package do
+    desc "Python packages via `python-pip3`."
 
-  desc "Python packages via `python-pip3`."
-
-  has_feature :installable, :uninstallable, :upgradeable, :versionable
-
-  # Parse lines of output from `pip freeze`, which are structured as
-  # _package_==_version_.
-  def self.parse(line)
-    if line.chomp =~ /^([^=]+)==([^=]+)$/
-      {:ensure => $2, :name => $1, :provider => name}
-    else
-      nil
+    has_feature :installable, :uninstallable, :upgradeable, :versionable
+    
+    # get pip proxy option
+    def self.pipproxyarg
+      proxy = getproxy
+      return ((proxy != nil) ? "--proxy #{proxy}" : "")
     end
-  end
-
-  # Return an array of structured information about every installed package
-  # that's managed by `pip` or an empty array if `pip` is not available.
-  def self.instances
-    packages = []
-    execpipe "#{pip3_cmd} freeze" do |process|
-      process.collect do |line|
-        next unless options = parse(line)
-        packages << new(options)
+    
+    # get proxy from environment
+    def self.getproxy
+      proxy = (ENV['HTTP_PROXY'] == nil)? ENV['http_proxy'] : ENV['HTTP_PROXY']
+      return proxy
+    end
+    
+    # get proxy settings from environment variables we expect
+    #
+    def self.getproxyuri
+       proxy = getproxy
+       proxy_uri = (proxy != nil )? URI.parse(proxy) : nil
+       return proxy_uri
+    end
+    
+    # open a url and return the data
+    def self.openurl(url)
+      uri = URI.parse(url)
+      proxy_uri = getproxyuri
+      http = (proxy_uri != nil) ? Net::HTTP.new(uri.host, uri.port, proxy_uri.host, proxy_uri.port) : Net::HTTP.new(uri.host, uri.port)
+      if uri.scheme == "https"
+        http.use_ssl = true
+        http.verify_mode = OpenSSL::SSL::VERIFY_NONE
       end
+      http.start {
+        http.request_get(uri.path) {|res|
+          data = res.body
+        }
+      }
+      return data
     end
-    packages
-  end
-
-  # Return structured information about a particular package or `nil` if
-  # it is not installed or `pip` itself is not available.
-  def query
-    self.class.instances.each do |provider_pip|
-      return provider_pip.properties if @resource[:name] == provider_pip.name
-    end
-    return nil
-  end
-
-  # Ask the PyPI API for the latest version number.  There is no local
-  # cache of PyPI's package list so this operation will always have to
-  # ask the web service.
-  def latest
-    client = XMLRPC::Client.new2("http://pypi.python.org/pypi")
-    client.http_header_extra = {"Content-Type" => "text/xml"}
-    client.timeout = 10
-    result = client.call("package_releases", @resource[:name])
-    result.first
-  rescue Timeout::Error => detail
-    raise Puppet::Error, "Timeout while contacting pypi.python.org: #{detail}";
-  end
-
-  # Install a package.  The ensure parameter may specify installed,
-  # latest, a version number, or, in conjunction with the source
-  # parameter, an SCM revision.  In that case, the source parameter
-  # gives the fully-qualified URL to the repository.
-  def install
-    args = %w{install -q}
-    if @resource[:source]
-      args << "-e"
-      if String === @resource[:ensure]
-        args << "#{@resource[:source]}@#{@resource[:ensure]}#egg=#{
-          @resource[:name]}"
+    
+    # parse json from url data
+    def self.openjsonurl(url)
+      data = openurl(url)
+      if data != '' and data != nil
+        json = JSON.parse(data)
+        if json.has_key? 'error_messages'
+          raise Puppet::Error, 'Error retrieving url data: ' + json['error_messages'].to_s()
+        end
+        return json
       else
-        args << "#{@resource[:source]}#egg=#{@resource[:name]}"
+        return nil
       end
-    else
-      case @resource[:ensure]
-      when String
-        args << "#{@resource[:name]}==#{@resource[:ensure]}"
-      when :latest
-        args << "--upgrade" << @resource[:name]
+    end
+    
+    # Parse lines of output from `pip freeze`, which are structured as
+    # _package_==_version_.
+    def self.parse(line)
+      if line.chomp =~ /^([^=]+)==([^=]+)$/
+        {:ensure => $2, :name => $1, :provider => name}
       else
-        args << @resource[:name]
+        nil
       end
     end
-    lazy_pip *args
-  end
-
-  # Uninstall a package.  Uninstall won't work reliably on Debian/Ubuntu
-  # unless this issue gets fixed.
-  # <http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=562544>
-  def uninstall
-    lazy_pip "uninstall", "-y", "-q", @resource[:name]
-  end
-
-  def update
-    install
-  end
-
-  # Execute a `pip` command.  If Puppet doesn't yet know how to do so,
-  # try to teach it and if even that fails, raise the error.
-  private
-  def lazy_pip(*args)
-    pip3 *args
-  rescue NoMethodError => e
-    self.class.commands :pip => pip3_cmd
-    pip *args
-  end
-
-  def self.pip3_cmd
-    ['/usr/bin/python3-pip', '/usr/bin/pip3', '/usr/bin/pip-3.2', '/usr/bin/pip-3.3'].each do |p|
-      return p if File.exist?(p)
+    
+    # Return an array of structured information about every installed package
+    # that's managed by `pip` or an empty array if `pip` is not available.
+    def self.instances
+      packages = []
+      execpipe "#{pip3_cmd} freeze" do |process|
+        process.collect do |line|
+          next unless options = parse(line)
+          packages << new(options)
+        end
+      end
+      packages
     end
-    raise Puppet::Error, "Unable to find pip3 binary.";
-  end
+  
+    # Return structured information about a particular package or `nil` if
+    # it is not installed or `pip` itself is not available.
+    def query
+      self.class.instances.each do |provider_pip|
+        return provider_pip.properties if @resource[:name] == provider_pip.name
+      end
+      return nil
+    end
+  
+    # Ask the PyPI API for the latest version number.  There is no local
+    # cache of PyPI's package list so this operation will always have to
+    # ask the web service.
+    def latest
+      url = "https://pypi.python.org/pypi/#{URI.encode(@resource[:name])}/json"
+      result = openjsonurl(url)
+      result['info']['version'] if result != nil
+    rescue Timeout::Error => detail
+      raise Puppet::Error, "Error in contacting pypi.python.org: #{detail}"
+    end
+    
+    # Install a package.  The ensure parameter may specify installed,
+    # latest, a version number, or, in conjunction with the source
+    # parameter, an SCM revision.  In that case, the source parameter
+    # gives the fully-qualified URL to the repository.
+    def install
+      args = %w{install -q}
+      if @resource[:source]
+        args << "-e"
+        if String === @resource[:ensure]
+          args << "#{@resource[:source]}@#{@resource[:ensure]}#egg=#{
+            @resource[:name]}"
+        else
+          args << "#{@resource[:source]}#egg=#{@resource[:name]}"
+        end
+      else
+        case @resource[:ensure]
+        when String
+          args << "#{@resource[:name]}==#{@resource[:ensure]}"
+        when :latest
+          args << "--upgrade" << @resource[:name]
+        else
+          args << @resource[:name]
+        end
+      end
+      args << pipproxyarg
+      lazy_pip *args
+    end
+    
+    # Uninstall a package.  Uninstall won't work reliably on Debian/Ubuntu
+    # unless this issue gets fixed.
+    # <http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=562544>
+    def uninstall
+      lazy_pip "uninstall", "-y", "-q", @resource[:name]
+    end
+  
+    def update
+      install
+    end
+  
+    # Execute a `pip` command.  If Puppet doesn't yet know how to do so,
+    # try to teach it and if even that fails, raise the error.
+    private
+    def lazy_pip(*args)
+      pip3 *args
+    rescue NoMethodError => e
+      self.class.commands :pip => pip3_cmd
+      pip *args
+    end
+    
+    def self.pip3_cmd
+      ['/usr/local/bin/pip', '/usr/bin/pip'].each do |p|
+        return p if File.exist?(p)
+      end
+      raise Puppet::Error, "Unable to find pip binary."
+    end
+  
+    def pip3_cmd
+      return self.class.pip3_cmd
+    end
 
-  def pip3_cmd
-    return self.class.pip3_cmd
   end
-
-end
