@@ -13,6 +13,7 @@ Major Systems
    jjb
    logstash
    devstack-gate
+   nodepool
    jeepyb
    irc
    etherpad
