@@ -60,9 +60,8 @@ class graphite(
   }
 
   exec { 'install_whisper' :
-    command     => 'python setup.py install',
-    cwd         => '/opt/whisper',
-    path        => '/bin:/usr/bin',
+    command     => 'pip install /opt/whisper',
+    path        => '/usr/local/bin:/usr/bin:/bin/',
     refreshonly => true,
     subscribe   => Vcsrepo['/opt/whisper'],
   }

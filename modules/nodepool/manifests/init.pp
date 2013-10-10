@@ -78,9 +78,8 @@ class nodepool (
   }
 
   exec { 'install_nodepool' :
-    command     => 'python setup.py install',
-    cwd         => '/opt/nodepool',
-    path        => '/bin:/usr/bin',
+    command     => 'pip install /opt/nodepool',
+    path        => '/usr/local/bin:/usr/bin:/bin/',
     refreshonly => true,
     subscribe   => Vcsrepo['/opt/nodepool'],
     require     => Class['pip'],
