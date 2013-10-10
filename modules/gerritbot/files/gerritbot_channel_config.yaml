@@ -278,6 +278,7 @@ openstack-swift:
       - x-vrif-minus-2
     projects:
       - openstack/swift
+      - openstack/swift-bench
       - openstack/python-swiftclient
     branches:
       - master
