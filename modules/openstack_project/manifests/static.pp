@@ -319,9 +319,7 @@ class openstack_project::static (
 
   include pip
   exec { 'install_elastic-recheck' :
-    command     => 'python setup.py install',
-    cwd         => '/opt/elastic-recheck',
-    path        => '/bin:/usr/bin',
+    command     => 'pip install -U /opt/elastic-recheck',
     refreshonly => true,
     subscribe   => Vcsrepo['/opt/elastic-recheck'],
     require     => Class['pip'],
