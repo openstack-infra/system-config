@@ -46,9 +46,8 @@ class elastic_recheck (
 
   include pip
   exec { 'install_elastic-recheck' :
-    command     => 'python setup.py install',
-    cwd         => '/opt/elastic-recheck',
-    path        => '/bin:/usr/bin',
+    command     => 'pip install -U /opt/elastic-recheck',
+    path        => '/usr/local/bin:/usr/bin:/bin/',
     refreshonly => true,
     subscribe   => Vcsrepo['/opt/elastic-recheck'],
     require     => Class['pip'],
