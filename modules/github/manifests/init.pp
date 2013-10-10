@@ -8,13 +8,13 @@ class github(
   $projects = []
 ) {
   include jeepyb
-  include pip
+  include pip::python3
 
   if ! defined(Package['PyGithub']) {
     package { 'PyGithub':
       ensure   => latest,  # okay to use latest for pip
-      provider => pip,
-      require  => Class['pip'],
+      provider => pip2,
+      require  => Class['pip::python2'],
     }
   }
 
