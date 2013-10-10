@@ -69,9 +69,8 @@ class jeepyb (
   }
 
   exec { 'install_jeepyb' :
-    command     => 'python setup.py install',
-    cwd         => '/opt/jeepyb',
-    path        => '/bin:/usr/bin',
+    command     => 'pip install /opt/jeepyb',
+    path        => '/usr/local/bin:/usr/bin:/bin/',
     refreshonly => true,
     require     => Class['mysql::python'],
     subscribe   => Vcsrepo['/opt/jeepyb'],
