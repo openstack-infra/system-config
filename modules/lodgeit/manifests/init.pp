@@ -11,7 +11,7 @@ class lodgeit {
 
   include apache
 
-  include pip
+  include pip::python3
   a2mod { 'proxy':
     ensure => present,
   }
@@ -31,8 +31,8 @@ class lodgeit {
 
   package { 'SQLAlchemy':
     ensure   => present,
-    provider => pip,
-    require  => Class[pip],
+    provider => pip2,
+    require  => Class[pip::python2],
   }
 
   file { '/srv/lodgeit':

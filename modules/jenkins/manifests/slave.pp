@@ -9,7 +9,6 @@ class jenkins::slave(
   $include_pypy = false
 ) {
 
-  include pip
   include jenkins::params
 
   if ($user == true) {
@@ -149,23 +148,24 @@ class jenkins::slave(
       require  => Class[pip::python3],
     }
   } else {
+    include pip::python3
     package { $pip_packages:
       ensure   => latest,  # we want the latest from these
-      provider => pip,
-      require  => Class[pip],
+      provider => pip2,
+      require  => Class[pip::python2],
     }
   }
 
   package { 'python-subunit':
     ensure   => absent,
-    provider => pip,
-    require  => Class[pip],
+    provider => pip2,
+    require  => Class[pip::python2],
   }
 
   package { 'git-review':
     ensure   => '1.17',
-    provider => pip,
-    require  => Class[pip],
+    provider => pip2,
+    require  => Class[pip::python2],
   }
 
   file { '/etc/profile.d/rubygems.sh':
