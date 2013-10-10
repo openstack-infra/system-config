@@ -1,37 +1,37 @@
-# Class: pip::python3
+# Class: pip::python2
 #
-class pip::python3 {
+class pip::python2 {
   include pip::params
   include pip::bootstrap
 
-  package { $::pip::params::python3_devel_package:
+  package { $::pip::params::python_devel_package:
     ensure => present,
   }
 
-  package { $::pip::params::python3_pip_package:
-    ensure  => absent,
-  }
-
-  package { $::pip::params::python3_setuptools_package:
+  package { $::pip::params::python_setuptools_package:
     ensure => absent,
   }
 
-  exec { 'install_setuptools':
+  package { $::pip::params::python_pip_package:
+    ensure  => absent,
+  }
+
+  exec { 'install_setuptools2':
     command   => 'python /var/lib/ez_setup.py',
     path      => '/bin:/usr/bin',
     subscribe => Exec['get_ez_setup'],
     creates   => $::pip::params::setuptools_pth,
     require   => [
-      Package[$::pip::params::python3_devel_package],
+      Package[$::pip::params::python_devel_package],
       Class['pip::bootstrap'],
     ],
   }
 
-  exec { 'install_pip':
+  exec { 'install_pip2':
     command   => 'python /var/lib/python-install/get-pip.py',
     path      => '/bin:/usr/bin',
     subscribe => Exec['get_get_pip'],
     creates   => $::pip::params::pip_executable,
-    require   => Exec['install_setuptools'],
+    require   => Exec['install_setuptools2'],
   }
 }
