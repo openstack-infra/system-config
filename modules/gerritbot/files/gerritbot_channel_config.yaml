@@ -335,3 +335,13 @@ stackforge-libra:
       - stackforge/python-libraclient
     branches:
       - master
+
+openstack-rally:
+    events:
+      - patchset-created
+      - change-merged
+      - x-vrif-minus-2
+    projects:
+      - stackforge/rally
+    branches:
+      - master
