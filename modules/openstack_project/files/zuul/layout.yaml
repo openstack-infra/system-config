@@ -3268,3 +3268,9 @@ projects:
     post:
       - python-manilaclient-branch-tarball
       - python-manilaclient-coverage
+
+  - name: stackforge/puppet_openstack_builder
+    check:
+      - gate-noop
+    gate:
+     - gate-noop
