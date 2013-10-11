@@ -360,6 +360,14 @@ projects:
           - post-mirror-python27
           - post-mirror-python33
 
+  - name: openstack-infra/os-loganalyze
+    check:
+      - gate-os-loganalyze-pep8
+      - gate-os-loganalyze-python27
+    gate:
+      - gate-os-loganalyze-pep8
+      - gate-os-loganalyze-python27
+
   - name: openstack-infra/gerrit
     check:
       - check-gerrit-unittests

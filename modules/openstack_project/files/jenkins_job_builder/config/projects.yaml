@@ -207,6 +207,16 @@
 
 
 - project:
+    name: os-loganalyze
+    github-org: openstack-infra
+    node: precise
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - python-jobs
+
+
+- project:
     name: gerritbot
     github-org: openstack-infra
     node: precise
