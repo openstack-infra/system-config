@@ -289,8 +289,6 @@ jobs:
     voting: false
   - name: gate-python-troveclient-python33
     voting: false
-  - name: gate-python-tuskarclient-pylint
-    voting: false
   - name: gate-python-tuskarclient-python33
     voting: false
 
@@ -3118,7 +3116,6 @@ projects:
   - name: openstack/python-tuskarclient
     check:
       - gate-python-tuskarclient-pep8
-      - gate-python-tuskarclient-pylint
       - gate-python-tuskarclient-python26
       - gate-python-tuskarclient-python27
       - gate-python-tuskarclient-python33

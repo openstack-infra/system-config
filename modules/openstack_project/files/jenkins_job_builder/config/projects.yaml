@@ -1376,7 +1376,6 @@
 
     jobs:
       - python-jobs
-      - gate-{name}-pylint
 
 - project:
     name: wsme
