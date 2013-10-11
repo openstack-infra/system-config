@@ -18,7 +18,7 @@
 # and push to Gerrit.
 
 PROJECT="openstack-manuals"
-DocFolder="doc/src/docbkx"
+DocFolder="doc"
 
 COMMIT_MSG="Imported Translations from Transifex"
 

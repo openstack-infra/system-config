@@ -16,7 +16,7 @@
 
 # The script is to push the updated PoT to Transifex.
 
-DocFolder="doc/src/docbkx"
+DocFolder="doc"
 
 if [ ! `echo $ZUUL_REFNAME | grep master` ]
 then
