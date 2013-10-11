@@ -16,7 +16,7 @@
 
 # The script is to push the updated PoT to Transifex.
 
-DocFolder="doc/src/docbkx"
+DocFolder="doc"
 
 if [ ! `echo $ZUUL_REFNAME | grep master` ]
 then
@@ -34,8 +34,8 @@ git config user.email "jenkins@openstack.org"
 for FILE in ${DocFolder}/*
 do
     DOCNAME=${FILE#${DocFolder}/}
-    # openstack-ha needs to create new DocBook files
-    if [ "$DOCNAME" == "openstack-ha" ]
+    # high-availability-guide needs to create new DocBook files
+    if [ "$DOCNAME" == "high-availability-guide" ]
     then
         asciidoc -b docbook -d book -o - ${DocFolder}/openstack-ha/ha-guide.txt \
 | xsltproc -o - /usr/share/xml/docbook/stylesheet/docbook5/db4-upgrade.xsl - \
