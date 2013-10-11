@@ -2695,6 +2695,22 @@ projects:
     gate:
       - gate-noop
 
+  - name: stackforge/mistral
+    check:
+      - gate-mistral-pep8
+      - gate-mistral-python26
+      - gate-mistral-python27
+    gate:
+      - gate-mistral-pep8
+      - gate-mistral-python26
+      - gate-mistral-python27
+    post:
+      - mistral-branch-tarball
+    pre-release:
+      - mistral-tarball
+    release:
+      - mistral-tarball
+
   - name: stackforge/murano-api
     check:
       - gate-murano-api-pep8
