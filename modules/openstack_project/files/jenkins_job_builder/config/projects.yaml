@@ -753,9 +753,11 @@
     github-org: stackforge
     tarball-site: tarballs.openstack.org
     node: precise
+    rtfd-id: 7957
 
     jobs:
       - python-jobs
+      - hook-{name}-rtfd
 
 - project:
     name: python-libraclient

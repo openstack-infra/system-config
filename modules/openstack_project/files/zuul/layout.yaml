@@ -1719,10 +1719,13 @@ projects:
       - gate-libra-pep8
       - gate-libra-python27
     post:
+      - hook-libra-rtfd
       - libra-branch-tarball
     pre-release:
+      - hook-libra-rtfd
       - libra-tarball
     release:
+      - hook-libra-rtfd
       - libra-tarball
 
   - name: stackforge/python-libraclient
