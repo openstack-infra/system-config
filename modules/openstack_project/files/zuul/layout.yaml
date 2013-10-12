@@ -281,8 +281,6 @@ jobs:
     voting: false
   - name: gate-python-neutronclient-python33
     voting: false
-  - name: gate-python-novaclient-python33
-    voting: false
   - name: gate-python-openstackclient-python33
     voting: false
   - name: gate-python-swiftclient-python33
@@ -1282,6 +1280,7 @@ projects:
       - gate-python-novaclient-pep8
       - gate-python-novaclient-python26
       - gate-python-novaclient-python27
+      - gate-python-novaclient-python33
       - gate-python-novaclient-pypy
       - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
