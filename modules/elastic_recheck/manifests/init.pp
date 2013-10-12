@@ -50,6 +50,7 @@ class elastic_recheck (
     cwd         => '/opt/elastic-recheck',
     path        => '/bin:/usr/bin',
     refreshonly => true,
+    notify      => Service['elastic-recheck'],
     subscribe   => Vcsrepo['/opt/elastic-recheck'],
     require     => Class['pip'],
   }
