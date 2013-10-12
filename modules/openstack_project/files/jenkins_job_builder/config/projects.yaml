@@ -1419,6 +1419,15 @@
       - python-jobs
 
 - project:
+    name: tuskar-ui
+    github-org: openstack
+    tarball-site: tarballs.openstack.org
+    node: precise
+
+    jobs:
+      - '{name}-branch-tarball'
+
+- project:
     name: rally
     github-org: stackforge
     node: precise

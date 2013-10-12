@@ -3137,6 +3137,8 @@ projects:
       - gate-tuskar-pep8
       - gate-tuskar-python26
       - gate-tuskar-python27
+    post:
+      - tuskar-branch-tarball
 
   - name: openstack/python-tuskarclient
     check:
@@ -3149,6 +3151,7 @@ projects:
       - gate-python-tuskarclient-python26
       - gate-python-tuskarclient-python27
     post:
+      - python-tuskarclient-branch-tarball
       - python-tuskarclient-coverage
 
   - name: openstack/tuskar-ui
@@ -3156,6 +3159,8 @@ projects:
       - gate-noop
     gate:
       - gate-noop
+    post:
+      - tuskar-ui-branch-tarball
 
   - name: stackforge/pecan
     check:
