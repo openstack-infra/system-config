@@ -3156,9 +3156,13 @@ projects:
 
   - name: openstack/tuskar-ui
     check:
-      - gate-noop
+      - gate-tuskar-ui-pep8
+      - gate-tuskar-ui-python26
+      - gate-tuskar-ui-python27
     gate:
-      - gate-noop
+      - gate-tuskar-ui-pep8
+      - gate-tuskar-ui-python26
+      - gate-tuskar-ui-python27
 
   - name: stackforge/pecan
     check:
