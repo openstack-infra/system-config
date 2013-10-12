@@ -291,6 +291,11 @@ jobs:
     voting: false
   - name: gate-python-tuskarclient-python33
     voting: false
+# puppet-openstack targets
+  - name: gate-puppet-vswitch-puppet-lint
+    voting: false
+  - name: gate-puppet-vswitch-puppet-syntax
+    voting: false
 
 projects:
   - name: openstack-infra/zuul
@@ -2688,6 +2693,18 @@ projects:
       - gate-puppet-tempest-puppet-unit-2.7
       - gate-puppet-tempest-puppet-unit-3.0
       - gate-puppet-tempest-puppet-unit-3.1
+
+  - name: stackforge/puppet-vswitch
+    check:
+      - gate-puppet-vswitch-puppet-lint
+      - gate-puppet-vswitch-puppet-syntax
+      - gate-puppet-vswitch-puppet-unit-2.7
+      - gate-puppet-vswitch-puppet-unit-3.0
+      - gate-puppet-vswitch-puppet-unit-3.1
+    gate:
+      - gate-puppet-vswitch-puppet-unit-2.7
+      - gate-puppet-vswitch-puppet-unit-3.0
+      - gate-puppet-vswitch-puppet-unit-3.1
 
   - name: stackforge/puppet-openstack_dev_env
     check:
