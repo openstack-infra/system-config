@@ -409,7 +409,7 @@ To rename a project:
 
 #. Move both the git repository and the mirror on
    review.openstack.org::
-   
+
      sudo mv ~gerrit2/review_site/git/openstack/{OLD,NEW}.git
      sudo mv /var/lib/git/openstack/{OLD,NEW}.git
 
@@ -456,6 +456,29 @@ or manually update their remotes with something like::
 
   git remote set-url origin https://git.openstack.org/$ORG/$PROJECT
 
+
+Third-Party Testing Access
+--------------------------
+
+The command to add an account for an automated system which gets
+-1/+1 code verify voting rights (as outlined in `Third Party
+Testing`_) looks like:
+
+.. code-block:: shell
+
+  ssh -p 29418 review.openstack.org "gerrit create-account \
+      --group 'External Testing Tools' \
+      --full-name 'Some CI Bot' \
+      --email ci-bot@third-party.org \
+      --ssh-key 'ssh-rsa AAAAB3Nz...zaUCse1P ci-bot@third-party.org' \
+      some-ci-bot"
+
+Details on the create-account_ command can be found in the Gerrit
+API documentation.
+
+.. _`External Testing Tools`: http://ci.openstack.org/third_party.html
+
+.. _create-account: https://review.openstack.org/Documentation/cmd-create-account.html
 
 Resetting a Username in Gerrit
 ------------------------------
