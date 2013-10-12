@@ -171,6 +171,12 @@ class gerrit(
     }
   }
 
+  if ! defined(Package['python-launchpadlib']) {
+    package { 'python-launchpadlib':
+      ensure => present,
+    }
+  }
+
   file { '/var/log/gerrit':
     ensure => directory,
     owner  => 'gerrit2',
