@@ -149,14 +149,6 @@ class gerrit(
     require => Package['openjdk-7-jre-headless'],
   }
 
-  if ! defined(Package['gerritlib']) {
-    package { 'gerritlib':
-      ensure   => latest,
-      provider => 'pip',
-      require  => Class[pip],
-    }
-  }
-
   file { '/var/log/gerrit':
     ensure => directory,
     owner  => 'gerrit2',

@@ -11,30 +11,6 @@ class jeepyb (
     }
   }
 
-  if ! defined(Package['PyGithub']) {
-    package { 'PyGithub':
-      ensure   => latest,
-      provider => pip,
-      require  => Class['pip'],
-    }
-  }
-
-  if ! defined(Package['gerritlib']) {
-    package { 'gerritlib':
-      ensure   => latest,
-      provider => pip,
-      require  => Class['pip'],
-    }
-  }
-
-  if ! defined(Package['pkginfo']) {
-    package { 'pkginfo':
-      ensure   => latest,
-      provider => pip,
-      require  => Class['pip'],
-    }
-  }
-
   package { 'gcc':
     ensure => present,
   }
