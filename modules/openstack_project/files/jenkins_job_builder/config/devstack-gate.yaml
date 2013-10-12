@@ -423,6 +423,32 @@
       - devstack-logs
       - console-log
 
+- job-template:
+    name: '{pipeline}-tempest-devstack-vm-neutron-large-ops'
+    node: '{node}'
+
+    wrappers:
+      - timeout:
+          timeout: 60
+          fail: true
+      - timestamps
+
+    builders:
+      - devstack-checkout
+      - shell: |
+          #!/bin/bash -xe
+          export PYTHONUNBUFFERED=true
+          export DEVSTACK_GATE_TEMPEST=1
+          export DEVSTACK_GATE_TEMPEST_LARGE_OPS=1
+          export DEVSTACK_GATE_NEUTRON=1
+          cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
+          ./safe-devstack-vm-gate-wrap.sh
+      - link-logs
+
+    publishers:
+      - devstack-logs
+      - console-log
+
 - job:
     name: periodic-tempest-devstack-vm-stable-folsom
     node: devstack-precise
@@ -811,6 +837,7 @@
       - '{pipeline}-tempest-devstack-vm-cells'
       - '{pipeline}-tempest-devstack-vm-cells-full'
       - '{pipeline}-tempest-devstack-vm-large-ops'
+      - '{pipeline}-tempest-devstack-vm-neutron-large-ops'
       - '{pipeline}-tempest-devstack-vm-postgres'
       - '{pipeline}-tempest-devstack-vm-postgres-full'
       - '{pipeline}-grenade-devstack-vm'
