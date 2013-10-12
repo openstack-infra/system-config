@@ -52,11 +52,6 @@ class openstack_project::base(
   }
 
   include pip
-  package { 'virtualenv':
-    ensure   => latest,
-    provider => pip,
-    require  => Class['pip'],
-  }
 
   if ($install_users) {
     package { $::openstack_project::params::user_packages:
