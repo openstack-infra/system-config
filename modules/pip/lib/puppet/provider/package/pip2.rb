@@ -17,8 +17,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Puppet package provider for Python's `pip3` package management frontend.
-# <http://pip.openplans.org/>
+# Puppet package provider for Python's `pip` package management frontend.
+# <http://pip-installer.org/>
 #
 # Loosely based on the 'pip' package provider in puppet 2.7.
 require 'puppet/provider/package'
@@ -27,10 +27,10 @@ require 'net/https'
 require 'uri'
 
 
-Puppet::Type.type(:package).provide :pip3,
+Puppet::Type.type(:package).provide :pip2,
   :parent => ::Puppet::Provider::Package do
 
-  desc "Python packages via `python-pip3`."
+  desc "Python packages via `pip` from pip-installer.org"
 
   has_feature :installable, :uninstallable, :upgradeable, :versionable
 
@@ -97,7 +97,7 @@ Puppet::Type.type(:package).provide :pip3,
   # that's managed by `pip` or an empty array if `pip` is not available.
   def self.instances
     packages = []
-    execpipe "#{pip3_cmd} freeze" do |process|
+    execpipe "#{pip2_cmd} freeze" do |process|
       process.collect do |line|
         next unless options = parse(line)
         packages << new(options)
@@ -169,21 +169,21 @@ Puppet::Type.type(:package).provide :pip3,
   # try to teach it and if even that fails, raise the error.
   private
   def lazy_pip(*args)
-    pip3 *args
+    pep3 *args
   rescue NoMethodError => e
-    self.class.commands :pip => pip3_cmd
+    self.class.commands :pip => pip2_cmd
     pip *args
   end
 
-  def self.pip3_cmd
-    ['/usr/local/bin/pip3', '/usr/bin/pip3']
+  def self.pip2_cmd
+    ['/usr/local/bin/pip', '/usr/bin/pip'].each do |p|
       return p if File.exist?(p)
     end
-    raise Puppet::Error, "Unable to find pip3 binary.";
+    raise Puppet::Error, "Unable to find pip binary.";
   end
 
-  def pip3_cmd
-    return self.class.pip3_cmd
+  def pip2_cmd
+    return self.class.pip2_cmd
   end
 
 end

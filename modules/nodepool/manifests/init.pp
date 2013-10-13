@@ -77,11 +77,12 @@ class nodepool (
     source   => $git_source_repo,
   }
 
+  include pip::python2
   exec { 'install_nodepool' :
     command     => 'pip install -U /opt/nodepool',
     refreshonly => true,
     subscribe   => Vcsrepo['/opt/nodepool'],
-    require     => Class['pip'],
+    require     => Class['pip::python2'],
   }
 
   file { '/etc/nodepool':

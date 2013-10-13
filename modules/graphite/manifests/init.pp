@@ -12,7 +12,7 @@ class graphite(
                 'nodejs' ]
 
   include apache
-  include pip
+  include pip::python3
 
   package { $packages:
     ensure => present,

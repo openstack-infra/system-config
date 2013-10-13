@@ -34,7 +34,7 @@ class zuul (
   $statsd_host = ''
 ) {
   include apache
-  include pip
+  include pip::python3
 
   $packages = [
     'python-webob',
@@ -90,7 +90,7 @@ class zuul (
     command     => 'pip install -U /opt/zuul',
     refreshonly => true,
     subscribe   => Vcsrepo['/opt/zuul'],
-    require     => Class['pip'],
+    require     => Class['pip::python2'],
   }
 
   file { '/etc/zuul':
