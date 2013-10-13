@@ -15,9 +15,8 @@ class etherpad_lite (
   $ep_user          = 'eplite',
   $base_log_dir     = '/var/log',
   $base_install_dir = '/opt/etherpad-lite',
-  $nodejs_version   = 'v0.6.16',
-  $eplite_version   = '',
-  $ep_headings = false
+  $nodejs_version   = 'v0.10.20',
+  $eplite_version   = 'develop'
 ) {
 
   # where the modules are, needed to easily install modules later
@@ -85,25 +84,16 @@ class etherpad_lite (
     ],
   }
 
-  # Allow existing install to exist without modifying its git repo.
-  # But give the option to specify versions for new installs.
-  if $eplite_version != '' {
-    vcsrepo { "${base_install_dir}/etherpad-lite":
-      ensure   => present,
-      provider => git,
-      source   => 'https://github.com/ether/etherpad-lite.git',
-      owner    => $ep_user,
-      revision => $eplite_version,
-      require  => Package['git'],
-    }
-  } else {
-    vcsrepo { "${base_install_dir}/etherpad-lite":
-      ensure   => present,
-      provider => git,
-      source   => 'https://github.com/Pita/etherpad-lite.git',
-      owner    => $ep_user,
-      require  => Package['git'],
-    }
+  vcsrepo { "${base_install_dir}/etherpad-lite":
+    ensure   => present,
+    provider => git,
+    source   => 'https://github.com/ether/etherpad-lite.git',
+    owner    => $ep_user,
+    revision => $eplite_version,
+    require  => [
+        Package['git'],
+        User[$ep_user],
+    ],
   }
 
   exec { 'install_etherpad_dependencies':
@@ -118,25 +108,6 @@ class etherpad_lite (
     ],
     before      => File["${base_install_dir}/etherpad-lite/settings.json"],
     creates     => "${base_install_dir}/etherpad-lite/node_modules",
-  }
-
-  if $ep_headings == true {
-    # install the test install plugin
-    # This seesm to be needed to get
-    exec {'npm install ep_fintest':
-      cwd     => $modules_dir,
-      path    => $path,
-      creates => "${modules_dir}/ep_fintest",
-      require => Exec['install_etherpad_dependencies']
-    } ->
-
-    # install the headings plugin
-    exec {'npm install ep_headings':
-      cwd     => $modules_dir,
-      path    => $path,
-      creates => "${modules_dir}/ep_headings",
-      require => Exec['install_etherpad_dependencies']
-    }
   }
 
   file { '/etc/init/etherpad-lite.conf':

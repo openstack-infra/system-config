@@ -1,5 +1,8 @@
 class openstack_project::etherpad_dev (
-  $database_password = '',
+  $mysql_password,
+  $mysql_host = 'localhost',
+  $mysql_user = 'eplite',
+  $mysql_db_name = 'etherpad-lite',
   $sysadmins = []
 ) {
   class { 'openstack_project::server':
@@ -7,21 +10,7 @@ class openstack_project::etherpad_dev (
     sysadmins                 => $sysadmins
   }
 
-  class { 'etherpad_lite':
-    # Use the version running on the prod server.
-    eplite_version => '4195e11a41c5992bc555cef71246800bceaf1915',
-    # Use the version running on the prod server.
-    nodejs_version => 'v0.6.16',
-    # Once dev install is working replace the above parameters with
-    # the following to test automated upgrade by puppet.
-    # eplite_version => '1.1.4',
-    # nodejs_version => 'v0.8.14',
-    ep_headings    => true
-  }
-
-  mysql_backup::backup { 'etherpad-lite':
-    require  => Class['etherpad_lite'],
-  }
+  include etherpad_lite
 
   class { 'etherpad_lite::apache':
     ssl_cert_file  => '/etc/ssl/certs/ssl-cert-snakeoil.pem',
@@ -30,11 +19,21 @@ class openstack_project::etherpad_dev (
   }
 
   class { 'etherpad_lite::site':
-    database_password => $database_password,
+    database_host     => $mysql_host,
+    database_user     => $mysql_user,
+    database_name     => $mysql_db_name,
+    database_password => $mysql_password,
   }
 
-  class { 'etherpad_lite::mysql':
-    database_password => $database_password,
+  etherpad_lite::plugin { 'ep_headings':
+    require => Class['etherpad_lite'],
+  }
+
+  mysql_backup::backup_remote { 'etherpad-lite-dev':
+    database_host     => $mysql_host,
+    database_user     => $mysql_user,
+    database_password => $mysql_password,
+    require           => Class['etherpad_lite'],
   }
 }
 
