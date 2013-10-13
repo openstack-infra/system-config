@@ -1,0 +1,9 @@
+Change-Id: Ibc527bbc4355abb94672d79c593f156f80a79f78
+Approved+1: James E. Blair <corvus@inaugust.com>
+Code-Review+2: James E. Blair <corvus@inaugust.com>
+Verified+2: Jenkins
+Submitted-by: Jenkins
+Submitted-at: Sun, 13 Oct 2013 15:44:45 +0000
+Reviewed-on: https://review.openstack.org/51464
+Project: openstack-infra/config
+Branch: refs/heads/master
