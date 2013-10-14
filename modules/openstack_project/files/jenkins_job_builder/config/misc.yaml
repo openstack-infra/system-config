@@ -32,6 +32,20 @@
     node: '{node}'
 
 - job-template:
+    name: 'gate-{name}-bash8'
+
+    builders:
+      - gerrit-git-prep
+      - bash8:
+          github-org: '{github-org}'
+          project: '{name}'
+
+    publishers:
+      - console-log
+
+    node: '{node}'
+
+- job-template:
     name: 'gate-{name}-unittests-{env}'
 
     builders:
