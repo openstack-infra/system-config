@@ -106,6 +106,22 @@ class openstack_project::static (
     require => File['/srv/static/logs'],
   }
 
+  vcsrepo { '/opt/os-loganalyze':
+    ensure   => latest,
+    provider => git,
+    revision => 'master',
+    source   => 'https://git.openstack.org/openstack-infra/os-loganalyze',
+  }
+
+  exec { 'install_os-loganalyze':
+    command     => 'python setup.py install',
+    cwd         => '/opt/os-loganalyze',
+    path        => '/bin:/usr/bin',
+    refreshonly => true,
+    subscribe   => Vcsrepo['/opt/os-loganalyze'],
+  }
+
+  # NOTE(sdague): soon to be deprecated
   file { '/usr/local/bin/htmlify-screen-log.py':
     ensure  => present,
     owner   => 'root',
