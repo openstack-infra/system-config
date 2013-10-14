@@ -26,6 +26,7 @@ openstack-infra:
       - openstack-infra/nodepool
       - openstack-infra/nose-html-output
       - openstack-infra/odsreg
+      - openstack-infra/os-loganalyze
       - openstack-infra/publications
       - openstack-infra/puppet-apparmor
       - openstack-infra/puppet-dashboard
