@@ -58,9 +58,10 @@ NameVirtualHost <%= vhost_name %>:<%= port %>
   </Directory>
 
   RewriteEngine On
-  # rewrite all txt.gz files to map to our internal htmlify wsgi app
+  # rewrite all txt.gz & html.gz files to map to our internal htmlify wsgi app
   RewriteRule ^/(.*\.txt\.gz)$ /htmlify/$1 [QSA,L,PT]
-  WSGIScriptAlias /htmlify /usr/local/bin/htmlify-screen-log.py
+  RewriteRule ^/(.*\.html\.gz)$ /htmlify/$1 [QSA,L,PT]
+  WSGIScriptAlias /htmlify /usr/local/lib/python2.7/dist-packages/os_loganalyze/wsgi.py
 
   ErrorLog /var/log/apache2/<%= name %>_error.log
   LogLevel warn
