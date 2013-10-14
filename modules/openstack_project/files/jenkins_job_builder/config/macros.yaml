@@ -48,6 +48,11 @@
       - shell: "./tools/version.sh --reset"
 
 - builder:
+    name: bash8
+    builders:
+      - shell: "/usr/local/jenkins/slave_scripts/run-bash8.sh {github-org} {project}"
+
+- builder:
     name: pep8
     builders:
       - shell: "/usr/local/jenkins/slave_scripts/run-pep8.sh {github-org} {project}"

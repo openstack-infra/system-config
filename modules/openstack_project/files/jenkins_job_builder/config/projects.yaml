@@ -971,6 +971,15 @@
 
 
 - project:
+    name: devstack
+    github-org: openstack-dev
+    node: precise
+
+    jobs:
+      - gate-{name}-bash8
+
+
+- project:
     name: tempest
     github-org: openstack
     node: precise
