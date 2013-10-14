@@ -2,7 +2,7 @@
 #
 class pip::python3 {
   include pip::params
-  include pip::bootstrap
+  pip::bootstrap::pip_bootstrap{'installing python3 pip':}
 
   package { $::pip::params::python3_devel_package:
     ensure => present,
@@ -16,26 +16,22 @@ class pip::python3 {
     ensure => absent,
   }
 
-  package { $::pip::params::python3_pip_package:
-    ensure  => absent,
-  }
-
   exec { 'install_setuptools':
     command   => 'python /var/lib/ez_setup.py',
     path      => '/bin:/usr/bin',
-    subscribe => File['/var/lib/ez_setup.py'],
+    subscribe => Exec['get_ez_setup'],
     creates   => $::pip::params::setuptools_pth,
     require   => [
       Package[$::pip::params::python3_devel_package],
-      Class[Pip::bootstrap]
+      Pip::Bootstrap::Pip_bootstrap['installing python3 pip'],
     ],
   }
 
   exec { 'install_pip':
     command   => 'python /var/lib/git-pip.py',
     path      => '/bin:/usr/bin',
-    subscribe => File['/var/lib/get-pip.py'],
+    subscribe => Exec['get_get_pip'],
     creates   => $::pip::params::pip_executable,
-    require   => File[$::pip::params::setuptools_pth],
+    require   => Exec['install_setuptools'],
   }
 }

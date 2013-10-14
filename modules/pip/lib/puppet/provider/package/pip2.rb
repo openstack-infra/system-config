@@ -123,7 +123,7 @@ Puppet::Type.type(:package).provide :pip2,
     result = openjsonurl(url)
     result['info']['version'] if result != nil
   rescue Timeout::Error => detail
-    raise Puppet::Error, "Error in contacting pypi.python.org: #{detail}";
+    raise Puppet::Error, "Error in contacting pypi.python.org: #{detail}"
   end
 
   # Install a package.  The ensure parameter may specify installed,
@@ -169,7 +169,7 @@ Puppet::Type.type(:package).provide :pip2,
   # try to teach it and if even that fails, raise the error.
   private
   def lazy_pip(*args)
-    pep3 *args
+    pip2 *args
   rescue NoMethodError => e
     self.class.commands :pip => pip2_cmd
     pip *args
@@ -179,7 +179,7 @@ Puppet::Type.type(:package).provide :pip2,
     ['/usr/local/bin/pip', '/usr/bin/pip'].each do |p|
       return p if File.exist?(p)
     end
-    raise Puppet::Error, "Unable to find pip binary.";
+    raise Puppet::Error, "Unable to find pip binary."
   end
 
   def pip2_cmd
