@@ -41,6 +41,12 @@ class openstack_project::etherpad (
     database_password => $mysql_password,
     require           => Class['etherpad_lite'],
   }
+
+  include bup
+  bup::site { 'rs-ord':
+    backup_user   => 'bup-etherpad',
+    backup_server => 'ci-backup-rs-ord.openstack.org',
+  }
 }
 
 # vim:sw=2:ts=2:expandtab:textwidth=79
