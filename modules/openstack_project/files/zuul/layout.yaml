@@ -1612,8 +1612,10 @@ projects:
   - name: openstack-infra/elastic-recheck
     check:
       - gate-elastic-recheck-pep8
+      - gate-elastic-recheck-python27
     gate:
       - gate-elastic-recheck-pep8
+      - gate-elastic-recheck-python27
 
   - name: openstack-infra/devstack-gate
     check:
