@@ -125,6 +125,9 @@ jobs:
   - name: ^(gate|check)-tempest-devstack-vm-neutron-full$
     branch: ^(?!stable/(folsom|grizzly)).*$
     voting: false
+  - name: ^(gate|check)-tempest-devstack-vm-neutron-parallel$
+    branch: ^(?!stable/(folsom|grizzly)).*$
+    voting: false
   - name: ^(gate|check)-tempest-devstack-vm-postgres-full$
     branch: ^(?!stable/folsom).*$
   - name: gate-tempest-devstack-vm-heat-slow
@@ -1042,6 +1045,7 @@ projects:
       - gate-tempest-devstack-vm-neutron-large-ops
     experimental:
       - gate-tempest-devstack-vm-neutron-full
+      - gate-tempest-devstack-vm-neutron-parallel
     post:
       - neutron-branch-tarball
       - neutron-coverage
@@ -1692,6 +1696,7 @@ projects:
       - gate-grenade-devstack-vm-stable
       - gate-devstack-vm-cells
       - gate-tempest-devstack-vm-neutron-full
+      - gate-tempest-devstack-vm-neutron-parallel
     post:
       - tempest-docs
       - tempest-branch-tarball
