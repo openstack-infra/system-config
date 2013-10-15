@@ -2899,6 +2899,26 @@ projects:
           - post-mirror-python27
           - post-mirror-python33
 
+  - name: stackforge/murano-repository
+    check:
+      - gate-murano-repository-pep8
+      - gate-murano-repository-python26
+      - gate-murano-repository-python27
+    gate:
+      - gate-murano-repository-pep8
+      - gate-murano-repository-python26
+      - gate-murano-repository-python27
+    post:
+      - murano-repository-branch-tarball
+    pre-release:
+      - murano-repository-tarball
+    release:
+      - murano-repository-tarball:
+        - murano-repository-pypi-upload:
+          - post-mirror-python26
+          - post-mirror-python27
+          - post-mirror-python33
+
   - name: stackforge/opencafe
     check:
       - gate-noop
