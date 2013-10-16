@@ -199,6 +199,7 @@ puppet-openstack:
       - x-vrif-minus-2
     projects:
       - stackforge/puppet-ceilometer
+      - stackforge/puppet-ceph
       - stackforge/puppet-cinder
       - stackforge/puppet-glance
       - stackforge/puppet-heat

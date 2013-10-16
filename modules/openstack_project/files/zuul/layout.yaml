@@ -2815,6 +2815,20 @@ projects:
       - gate-puppet-vswitch-puppet-unit-3.0
       - gate-puppet-vswitch-puppet-unit-3.1
 
+  - name: stackforge/puppet-ceph
+    check:
+      - gate-puppet-ceph-puppet-lint
+      - gate-puppet-ceph-puppet-syntax
+      - gate-puppet-ceph-puppet-unit-2.7
+      - gate-puppet-ceph-puppet-unit-3.0
+      - gate-puppet-ceph-puppet-unit-3.1
+    gate:
+      - gate-puppet-ceph-puppet-lint
+      - gate-puppet-ceph-puppet-syntax
+      - gate-puppet-ceph-puppet-unit-2.7
+      - gate-puppet-ceph-puppet-unit-3.0
+      - gate-puppet-ceph-puppet-unit-3.1
+
   - name: stackforge/puppet-openstack_dev_env
     check:
       - gate-noop
