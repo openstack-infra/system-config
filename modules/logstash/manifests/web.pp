@@ -19,7 +19,9 @@ class logstash::web (
   $serveradmin = "webmaster@${::fqdn}",
   $frontend = 'internal',
   $discover_nodes = ['localhost:9200'],
-  $proxy_elasticsearch = false
+  $proxy_elasticsearch = false,
+  $kibana3 = false,
+  $public_es_endpoint = 'http://localhost:9200'
 ) {
   include apache
   a2mod { 'rewrite':
@@ -72,5 +74,49 @@ class logstash::web (
     docroot  => 'MEANINGLESS ARGUMENT',
     priority => '50',
     template => $vhost,
+  }
+
+  if kibana3 == true {
+    file { '/srv/kibana':
+      ensure => directory,
+      owner  => 'nobody',
+      group  => 'nogroup',
+      mode   => '0755',
+    }
+    exec { 'get_kibana3':
+      command  => 'wget https://download.elasticsearch.org/kibana/kibana/kibana-latest.tar.gz -O /srv/kibana/kibana-latest.tar.gz',
+      path     => '/bin:/usr/bin',
+      creates  => '/srv/kibana/kibana-latest.tar.gz',
+      user     => 'nobody',
+      requires => File['srv/kibana'],
+    }
+    exec { 'extract_kibana3':
+      command  => 'tar xzvf /srv/kibana/kibana-latest.tar.gz -C /srv/kibana',
+      path     => '/bin:/usr/bin',
+      creates  => '/srv/kibana/kibana-latest',
+      user     => 'nobody',
+      requires => Exec['get_kibana3'],
+    }
+    file { '/srv/kibana/kibana-latest/config.js':
+      ensure   => present,
+      owner    => 'nobody',
+      group    => 'nogroup',
+      mode     => '0444',
+      content  => template('logstash/kibana3_config.js.erb'),
+      requires => Exec['extract_kibana3'],
+    }
+    file { '/srv/kibana/kibana-latest/app/dashboards/logstash.json':
+      ensure   => present,
+      owner    => 'nobody',
+      group    => 'nogroup',
+      mode     => '0444',
+      source   => 'puppet:///modules/logstash/kibana3_logstash.json',
+      requires => Exec['extract_kibana3'],
+    }
+    file { '/srv/kibana/kibana-latest/app/dashboards/default.json':
+      ensure   => link,
+      target   => '/srv/kibana/kibana-latest/app/dashboards/logstash.json',
+      requires => File['/srv/kibana/kibana-latest/app/dashboards/logstash.json'],
+    }
   }
 }
