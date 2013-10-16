@@ -15,7 +15,13 @@
         RewriteEngine on
         RewriteCond %{REQUEST_METHOD} GET
         RewriteRule ^/elasticsearch/(_aliases|(.*/)?_status|(.*/)?_search|(.*/)?_mapping|_cluster/health|_nodes)$ http://<%= scope.lookupvar("::logstash::web::discover_nodes")[0] %>/$1 [P]
-        ProxySet http://<%= scope.lookupvar("::logstash::web::discover_nodes")[0] %>/ connectiontimeout=15 timeout=120
+        RewriteCond %{REQUEST_METHOD} POST
+        RewriteRule ^/elasticsearch/(_aliases|(.*/)?_search)$ http://<%= scope.lookupvar("::logstash::web::discover_nodes")[0] %>/$1 [P]
+        RewriteCond %{REQUEST_METHOD} OPTIONS
+        RewriteRule ^/elasticsearch/((.*/)?_search)$ http://<%= scope.lookupvar("::logstash::web::discover_nodes")[0] %>/$1 [P]
+        <Proxy http://<%= scope.lookupvar("::logstash::web::discover_nodes")[0] %>/>
+            ProxySet connectiontimeout=15 timeout=120
+        </Proxy>
         ProxyPassReverse /elasticsearch/ http://<%= scope.lookupvar("::logstash::web::discover_nodes")[0] %>/
         <% end %>
 
