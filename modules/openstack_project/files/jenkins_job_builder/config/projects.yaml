@@ -1118,6 +1118,15 @@
       - pypi-jobs
 
 - project:
+    name: tripleo-heat-templates
+    github-org: openstack
+    node: precise
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - python-jobs
+
+- project:
     name: tripleo-image-elements
     github-org: openstack
     node: precise
