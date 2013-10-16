@@ -41,6 +41,7 @@ class openstack_project::logstash (
     frontend            => 'kibana',
     discover_nodes      => $discover_nodes,
     proxy_elasticsearch => true,
+    kibana3             => true,
   }
 
   package { 'python-daemon':

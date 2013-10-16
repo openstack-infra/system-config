@@ -19,7 +19,8 @@ class logstash::web (
   $serveradmin = "webmaster@${::fqdn}",
   $frontend = 'internal',
   $discover_nodes = ['localhost:9200'],
-  $proxy_elasticsearch = false
+  $proxy_elasticsearch = false,
+  $kibana3 = false,
 ) {
   include apache
   a2mod { 'rewrite':
@@ -72,5 +73,47 @@ class logstash::web (
     docroot  => 'MEANINGLESS ARGUMENT',
     priority => '50',
     template => $vhost,
+  }
+
+  if kibana3 == true {
+    file { '/srv/kibana':
+      ensure => directory,
+      owner  => 'root',
+      group  => 'root',
+      mode   => '0775',
+    }
+    exec { 'get_kibana3':
+      command  => 'wget https://download.elasticsearch.org/kibana/kibana/kibana-latest.tar.gz -O /srv/kibana/kibana-latest.tar.gz',
+      path     => '/bin:/usr/bin',
+      creates  => '/srv/kibana/kibana-latest.tar.gz',
+      requires => File['srv/kibana'],
+    }
+    exec { 'extract_kibana3':
+      command  => 'tar xzvf /srv/kibana/kibana-latest.tar.gz -C /srv/kibana',
+      path     => '/bin:/usr/bin',
+      creates  => '/srv/kibana/kibana-latest',
+      requires => Exec['get_kibana3'],
+    }
+    file { '/srv/kibana/kibana-latest/config.js':
+      ensure   => present,
+      owner    => 'root',
+      group    => 'root',
+      mode     => '0444',
+      source   => 'puppet:///modules/logstash/kibana3_config.js',
+      requires => Exec['extract_kibana3'],
+    }
+    file { '/srv/kibana/kibana-latest/app/dashboards/logstash.json':
+      ensure   => present,
+      owner    => 'root',
+      group    => 'root',
+      mode     => '0444',
+      source   => 'puppet:///modules/logstash/kibana3_logstash.json',
+      requires => Exec['extract_kibana3'],
+    }
+    file { '/srv/kibana/kibana-latest/app/dashboards/default.json':
+      ensure => link,
+      target => '/srv/kibana/kibana-latest/app/dashboards/logstash.json',
+      requires => File['/srv/kibana/kibana-latest/app/dashboards/logstash.json'],
+    }
   }
 }
