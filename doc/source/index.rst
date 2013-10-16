@@ -10,7 +10,7 @@ This documentation covers the installation and maintenance of the
 project infrastructure used by OpenStack.  It may be of interest to
 people who may want to help develop this infrastructure or integrate
 their tools into it.  Some instructions may be useful to other
-projects that want to set up similar infrastrucutre systems for their
+projects that want to set up similar infrastructure systems for their
 developers.
 
 OpenStack developers or users do not need to read this documentation.
