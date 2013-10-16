@@ -1,21 +1,25 @@
 <VirtualHost <%= scope.lookupvar("::logstash::web::vhost_name") %>:80>
-             ServerName <%= scope.lookupvar("::logstash::web::vhost_name") %>
-             ServerAdmin <%= scope.lookupvar("::logstash::web::serveradmin") %>
+    ServerName <%= scope.lookupvar("::logstash::web::vhost_name") %>
+    ServerAdmin <%= scope.lookupvar("::logstash::web::serveradmin") %>
 
-             ErrorLog ${APACHE_LOG_DIR}/<%= scope.lookupvar("::logstash::web::vhost_name") %>-error.log
+    ErrorLog ${APACHE_LOG_DIR}/<%= scope.lookupvar("::logstash::web::vhost_name") %>-error.log
 
-             LogLevel warn
+    LogLevel warn
 
-             CustomLog ${APACHE_LOG_DIR}/<%= scope.lookupvar("::logstash::web::vhost_name") %>-access.log combined
+    CustomLog ${APACHE_LOG_DIR}/<%= scope.lookupvar("::logstash::web::vhost_name") %>-access.log combined
 
-             <% if proxy_elasticsearch == true %>
-             # Proxy for elasticsearch _aliases, .*/_status, and .*/_search.
-             <LocationMatch "^/elasticsearch/(_aliases|(.*/)?_status|(.*/)?_search|_cluster/health)$">
-               ProxyPassMatch http://<%= scope.lookupvar("::logstash::web::discover_nodes")[0] %>/$1 connectiontimeout=15 timeout=120
-             </LocationMatch>
-             ProxyPassReverse /elasticsearch/ http://<%= scope.lookupvar("::logstash::web::discover_nodes")[0] %>/
-             <% end %>
+    <IfModule mod_proxy.c>
+        <% if proxy_elasticsearch == true %>
+        # Proxy GETs for elasticsearch _aliases, .*/_status, .*/_search,
+        # .*/_mapping, _cluster/health, and _nodes.
+        RewriteEngine on
+        RewriteCond %{REQUEST_METHOD} GET
+        RewriteRule ^/elasticsearch/(_aliases|(.*/)?_status|(.*/)?_search|(.*/)?_mapping|_cluster/health|_nodes)$ http://<%= scope.lookupvar("::logstash::web::discover_nodes")[0] %>/$1 [P]
+        ProxySet http://<%= scope.lookupvar("::logstash::web::discover_nodes")[0] %>/ connectiontimeout=15 timeout=120
+        ProxyPassReverse /elasticsearch/ http://<%= scope.lookupvar("::logstash::web::discover_nodes")[0] %>/
+        <% end %>
 
-             ProxyPass / http://127.0.0.1:5601/ retry=0
-             ProxyPassReverse / http://127.0.0.1:5601/
+        ProxyPass / http://127.0.0.1:5601/ retry=0
+        ProxyPassReverse / http://127.0.0.1:5601/
+    </IfModule>
 </VirtualHost>
