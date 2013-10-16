@@ -106,8 +106,8 @@ class EventProcessor(threading.Thread):
                 os.path.join(log_dir, fileopts['name'])
         fields["log_url"] = source_url
         out_event = {}
-        out_event["@fields"] = fields
-        out_event["@tags"] = [fileopts['name']] + fileopts.get('tags', [])
+        out_event["fields"] = fields
+        out_event["tags"] = [fileopts['name']] + fileopts.get('tags', [])
         return source_url, out_event
 
 

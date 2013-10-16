@@ -69,19 +69,20 @@ class LogRetriever(threading.Thread):
             retry = arguments['retry']
             event = arguments['event']
             logging.debug("Handling event: " + json.dumps(event))
-            fields = event['@fields']
-            tags = event['@tags']
+            fields = event.get('fields') or event.get('@fields')
+            tags = event.get('tags') or event.get('@tags')
             if fields['build_status'] != 'ABORTED':
                 # Handle events ignoring aborted builds. These builds are
                 # discarded by zuul.
                 log_lines = self._retrieve_log(source_url, retry)
 
                 logging.debug("Pushing " + str(len(log_lines)) + " log lines.")
+                base_event = {}
+                base_event.update(fields)
+                base_event["tags"] = tags
                 for line in log_lines:
-                    out_event = {}
-                    out_event["@fields"] = fields
-                    out_event["@tags"] = tags
-                    out_event["event_message"] = line
+                    out_event = base_event.copy()
+                    out_event["message"] = line
                     self.logq.put(out_event)
             job.sendWorkComplete()
         except Exception as e:
