@@ -11,9 +11,9 @@
 
     builders:
       - update-pypi-mirror
+      - link-logs
 
     publishers:
-      - link-logs
       - console-log-periodic
 
 
@@ -30,9 +30,9 @@
 
     builders:
       - update-pypi-mirror
+      - link-logs
 
     publishers:
-      - link-logs
       - console-log
 
 
@@ -49,9 +49,9 @@
 
     builders:
       - update-pypi-mirror
+      - link-logs
 
     publishers:
-      - link-logs
       - console-log-periodic
 
 
@@ -68,9 +68,9 @@
 
     builders:
       - update-pypi-mirror
+      - link-logs
 
     publishers:
-      - link-logs
       - console-log
 
 
@@ -87,9 +87,9 @@
 
     builders:
       - update-pypi-mirror
+      - link-logs
 
     publishers:
-      - link-logs
       - console-log-periodic
 
 
@@ -106,7 +106,7 @@
 
     builders:
       - update-pypi-mirror
+      - link-logs
 
     publishers:
-      - link-logs
       - console-log
