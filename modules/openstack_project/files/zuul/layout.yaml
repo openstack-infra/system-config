@@ -2919,6 +2919,22 @@ projects:
           - post-mirror-python27
           - post-mirror-python33
 
+  - name: stackforge/murano-metadataclient
+    check:
+      - gate-murano-metadataclient-pep8
+      - gate-murano-metadataclient-python26
+      - gate-murano-metadataclient-python27
+    gate:
+      - gate-murano-metadataclient-pep8
+      - gate-murano-metadataclient-python26
+      - gate-murano-metadataclient-python27
+    post:
+      - murano-metadataclient-branch-tarball
+    pre-release:
+      - murano-metadataclient-tarball
+    release:
+      - murano-metadataclient-tarball
+
   - name: stackforge/opencafe
     check:
       - gate-noop
