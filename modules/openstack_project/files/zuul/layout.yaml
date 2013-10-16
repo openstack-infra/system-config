@@ -1,3 +1,4 @@
+
 includes:
   - python-file: openstack_functions.py
 
@@ -2918,6 +2919,24 @@ projects:
           - post-mirror-python26
           - post-mirror-python27
           - post-mirror-python33
+
+  - name: stackforge/murano-metadataclient
+    check:
+      - gate-murano-metadataclient-pep8
+      - gate-murano-metadataclient-python26
+      - gate-murano-metadataclient-python27
+      - gate-murano-metadataclient-docs
+    gate:
+      - gate-murano-metadataclient-pep8
+      - gate-murano-metadataclient-python26
+      - gate-murano-metadataclient-python27
+      - gate-murano-metadataclient-docs
+    post:
+      - murano-metadataclient-branch-tarball
+    pre-release:
+      - murano-metadataclient-tarball
+    release:
+      - murano-metadataclient-tarball
 
   - name: stackforge/opencafe
     check:
