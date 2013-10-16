@@ -250,6 +250,7 @@ murano:
       - stackforge/python-muranoclient
       - stackforge/murano-common
       - stackforge/murano-repository
+      - stackforge/murano-metadataclient
     branches:
       - master
 
