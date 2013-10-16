@@ -2,132 +2,108 @@ input {
   tcp {
     host => "localhost"
     port => 9999
-    format => "json"
-    message_format => "%{event_message}"
+    codec => line {}
     type => "jenkins"
   }
 }
 
 # You can check grok patterns at http://grokdebug.herokuapp.com/
 filter {
-  grep {
-    # Remove unneeded html tags.
-    type => "jenkins"
-    tags => ["console.html"]
-    # Drop matches.
-    negate => true
-    match => ["@message", "^</?pre>$"]
+  # This is a work around for a bug. We should be able to set the tcp
+  # input codec to json, but that codec doesn't support streaming.
+  # Convert to json here instead.
+  json {
+    source => "message"
   }
-  grep {
-    # Remove screen log headers.
-    type => "jenkins"
-    tags => ["screen"]
-    # Drop matches.
-    negate => true
-    match => ["@message", "^\+ "]
+  if "screen" in [tags] and [message] =~ "^\+ " {
+    drop {}
   }
-  grep {
-    # Remove blank lines.
-    type => "jenkins"
-    tags => ["keystonefmt"]
-    # Drop matches.
-    negate => true
-    match => ["@message", "^$"]
-  }
-  multiline {
-    type => "jenkins"
-    tags => ["console.html"]
-    negate => true
-    pattern => "^%{DATESTAMP} \|"
-    what => "previous"
-    stream_identity => "%{@source_host}.%{filename}"
-  }
-  multiline {
-    type => "jenkins"
-    tags => ["oslofmt"]
-    negate => true
-    pattern => "^%{DATESTAMP} "
-    what => "previous"
-    stream_identity => "%{@source_host}.%{filename}"
-  }
-  multiline {
-    type => "jenkins"
-    tags => ["oslofmt"]
-    negate => false
-    pattern => "^%{DATESTAMP}%{SPACE}%{NUMBER}?%{SPACE}?TRACE"
-    what => "previous"
-    stream_identity => "%{@source_host}.%{filename}"
-  }
-  multiline {
-    type => "jenkins"
-    tags => ["keystonefmt"]
-    negate => true
-    pattern => "^\(\b%{NOTSPACE}\b\):"
-    what => "previous"
-    stream_identity => "%{@source_host}.%{filename}"
-  }
-  grok {
-    type => "jenkins"
-    tags => ["console.html"]
-    # Do multiline matching as the above mutliline filter may add newlines
-    # to the log messages.
-    pattern => [ "(?m)^%{DATESTAMP:logdate} \| %{GREEDYDATA:logmessage}" ]
-    add_field => [ "received_at", "%{@timestamp}" ]
-  }
-  grok {
-    type => "jenkins"
-    tags => ["oslofmt"]
-    # Do multiline matching as the above mutliline filter may add newlines
-    # to the log messages.
-    # TODO move the LOGLEVELs into a proper grok pattern.
-    pattern => [ "(?m)^%{DATESTAMP:logdate}%{SPACE}%{NUMBER:pid}?%{SPACE}?(?<loglevel>AUDIT|CRITICAL|DEBUG|INFO|TRACE|WARNING|ERROR) \[?\b%{NOTSPACE:module}\b\]?%{SPACE}?%{GREEDYDATA:logmessage}?" ]
-    add_field => [ "received_at", "%{@timestamp}" ]
-  }
-  grok {
-    type => "jenkins"
-    tags => ["keystonefmt"]
-    # Do multiline matching as the above mutliline filter may add newlines
-    # to the log messages.
-    # TODO move the LOGLEVELs into a proper grok pattern.
-    pattern => [ "(?m)^\(\b%{NOTSPACE:module}\b\):%{SPACE}%{DATESTAMP:logdate}%{SPACE}(?<loglevel>AUDIT|CRITICAL|DEBUG|INFO|TRACE|WARNING|ERROR)%{SPACE}%{GREEDYDATA:logmessage}" ]
-    add_field => [ "received_at", "%{@timestamp}" ]
-  }
-  grok {
-    type => "jenkins"
-    tags => ["apachecombined"]
-    pattern => [ "%{COMBINEDAPACHELOG}" ]
-    add_field => [ "received_at", "%{@timestamp}", "logdate", "%{timestamp}", "logmessage", "%{verb} %{request} %{response}" ]
-  }
-  grok {
-    type => "jenkins"
-    tags => ["syslog"]
-    # Syslog grok filter adapted from
-    # http://cookbook.logstash.net/recipes/syslog-pri/syslog.conf
-    pattern => [ "%{SYSLOGTIMESTAMP:logdate}%{SPACE}%{SYSLOGHOST:syslog_host}?%{SPACE}%{DATA:syslog_program}(?:\[%{POSINT:syslog_pid}\])?:? %{GREEDYDATA:logmessage}" ]
-    add_field => [ "received_at", "%{@timestamp}" ]
-  }
-  # Remove DEBUG logs to reduce the amount of data that needs to be processed.
-  grep {
-    type => "jenkins"
-    negate => true
-    match => [ "loglevel", "DEBUG" ]
+  if "console.html" in [tags] {
+    if [message] == "<pre>" or [message] == "</pre>" {
+      drop {}
+    }
+    multiline {
+      negate => true
+      pattern => "^%{TIMESTAMP_ISO8601} \|"
+      what => "previous"
+      stream_identity => "%{host}.%{filename}"
+    }
+    grok {
+      # Do multiline matching as the above mutliline filter may add newlines
+      # to the log messages.
+      match => { "message" => "(?m)^%{TIMESTAMP_ISO8601:logdate} \| %{GREEDYDATA:logmessage}" }
+      add_field => { "received_at" => "%{@timestamp}" }
+    }
+  } else if "oslofmt" in [tags] {
+    multiline {
+      negate => true
+      pattern => "^%{TIMESTAMP_ISO8601} "
+      what => "previous"
+      stream_identity => "%{host}.%{filename}"
+    }
+    multiline {
+      negate => false
+      pattern => "^%{TIMESTAMP_ISO8601}%{SPACE}%{NUMBER}?%{SPACE}?TRACE"
+      what => "previous"
+      stream_identity => "%{host}.%{filename}"
+    }
+    grok {
+      # Do multiline matching as the above mutliline filter may add newlines
+      # to the log messages.
+      # TODO move the LOGLEVELs into a proper grok pattern.
+      match => { "message" => "(?m)^%{TIMESTAMP_ISO8601:logdate}%{SPACE}%{NUMBER:pid}?%{SPACE}?(?<loglevel>AUDIT|CRITICAL|DEBUG|INFO|TRACE|WARNING|ERROR) \[?\b%{NOTSPACE:module}\b\]?%{SPACE}?%{GREEDYDATA:logmessage}?" }
+      add_field => { "received_at" => "%{@timestamp}" }
+    }
+  } else if "keystonefmt" in [tags] {
+    if [message] == "" {
+      drop {}
+    }
+    multiline {
+      negate => true
+      pattern => "^\(\b%{NOTSPACE}\b\):"
+      what => "previous"
+      stream_identity => "%{host}.%{filename}"
+    }
+    grok {
+      # Do multiline matching as the above mutliline filter may add newlines
+      # to the log messages.
+      # TODO move the LOGLEVELs into a proper grok pattern.
+      match => { "message" => "(?m)^\(\b%{NOTSPACE:module}\b\):%{SPACE}%{TIMESTAMP_ISO8601:logdate}%{SPACE}(?<loglevel>AUDIT|CRITICAL|DEBUG|INFO|TRACE|WARNING|ERROR)%{SPACE}%{GREEDYDATA:logmessage}" }
+      add_field => { "received_at" => "%{@timestamp}" }
+    }
+  } else if "apachecombined" in [tags] {
+    grok {
+      match => { "message" => "%{COMBINEDAPACHELOG}" }
+      add_field => { "received_at" => "%{@timestamp}" }
+      add_field => { "logdate" => "%{timestamp}" }
+      add_field => { "logmessage" => "%{verb} %{request} %{response}" }
+    }
+  } else if "syslog" in [tags] {
+    grok {
+      # Syslog grok filter adapted from
+      # http://cookbook.logstash.net/recipes/syslog-pri/syslog.conf
+      match => { "message" => "%{SYSLOGTIMESTAMP:logdate}%{SPACE}%{SYSLOGHOST:syslog_host}?%{SPACE}%{DATA:syslog_program}(?:\[%{POSINT:syslog_pid}\])?:? %{GREEDYDATA:logmessage}" }
+      add_field => { "received_at" => "%{@timestamp}" }
+    }
   }
 
   # Filters below here should be consistent for all Jenkins log formats.
-  date {
-    type => "jenkins"
-    exclude_tags => "_grokparsefailure"
-    match => [ "logdate", "yyyy-MM-dd HH:mm:ss.SSS", "yyyy-MM-dd HH:mm:ss,SSS", "yyyy-MM-dd HH:mm:ss", "MMM  d HH:mm:ss", "MMM dd HH:mm:ss", "dd/MMM/yyyy:HH:mm:ss Z" ]
+  # Remove DEBUG logs to reduce the amount of data that needs to be processed.
+  if [loglevel] == "DEBUG" {
+    drop {}
   }
-  mutate {
-    type => "jenkins"
-    exclude_tags => "_grokparsefailure"
-    replace => [ "@message", "%{logmessage}" ]
-  }
-  mutate {
-    type => "jenkins"
-    exclude_tags => "_grokparsefailure"
-    remove => [ "logdate", "logmessage", "event_message" ]
+
+  if ! ("_grokparsefailure" in [tags]) {
+    date {
+      match => [ "logdate", "yyyy-MM-dd HH:mm:ss.SSS", "yyyy-MM-dd HH:mm:ss,SSS", "yyyy-MM-dd HH:mm:ss", "MMM  d HH:mm:ss", "MMM dd HH:mm:ss", "dd/MMM/yyyy:HH:mm:ss Z" ]
+      timezone => "UTC"
+    }
+    mutate {
+      replace => { "message" => "%{logmessage}" }
+    }
+    mutate {
+      remove_field => [ "logdate", "logmessage" ]
+    }
   }
 }
 

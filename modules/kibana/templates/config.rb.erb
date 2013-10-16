@@ -40,7 +40,7 @@ module KibanaConfig
 
   # Change which fields are shown by default. Must be set as an array
   # Default_fields = ['@fields.vhost','@fields.response','@fields.request']
-  Default_fields = ['@message']
+  Default_fields = ['message']
 
   # If set to true, Kibana will use the Highlight feature of Elasticsearch to
   # display highlighted search results
@@ -49,7 +49,7 @@ module KibanaConfig
   # A field needs to be specified for the highlight feature. By default,
   # Elasticsearch doesn't allow highlighting on _all because the field has to
   # be either stored or part of the _source field.
-  Highlighted_field = "@message"
+  Highlighted_field = "message"
 
   # Make URLs clickable in detailed view
   Clickable_URLs = true
@@ -122,10 +122,10 @@ module KibanaConfig
   # field called _all that is searched when no field is specified.
   # Dropping _all can reduce index size significantly. If you do that
   # you'll need to change primary_field to be '@message'
-  Primary_field = '@message'
+  Primary_field = 'message'
 
   # Default Elastic Search index to query
-  Default_index = '@message'
+  Default_index = 'message'
 
   # TODO: This isn't functional yet
   # Prevent wildcard search terms which result in extremely slow queries
