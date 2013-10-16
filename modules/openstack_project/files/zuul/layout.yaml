@@ -2377,6 +2377,13 @@ projects:
       - gate-noop
     gate:
       - gate-noop
+    post:
+      - tripleo-heat-templates-branch-tarball
+    pre-release:
+      - tripleo-heat-templates-tarball
+    release:
+      - tripleo-heat-templates-tarball:
+        - tripleo-heat-templates-pypi-upload
 
   - name: openstack/tripleo-image-elements
     check:
