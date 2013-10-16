@@ -1803,7 +1803,20 @@ projects:
     gate:
       - gate-python-libraclient-pep8
       - gate-python-libraclient-python27
-
+    post:
+      - hook-python-libraclient-rtfd
+      - python-libraclient-coverage
+      - python-libraclient-branch-tarball
+    pre-release:
+      - hook-python-libraclient-rtfd
+      - python-libraclient-tarball
+    release:
+      - hook-python-libraclient-rtfd
+      - python-libraclient-tarball:
+        - python-libraclient-pypi-upload:
+          - post-mirror-python26
+          - post-mirror-python27
+          - post-mirror-python33
 
   - name: stackforge/healthnmon
     check:

@@ -795,10 +795,13 @@
     name: python-libraclient
     github-org: stackforge
     tarball-site: tarballs.openstack.org
+    rtfd-id: 7957
     node: precise
 
     jobs:
       - python-jobs
+      - hook-{name}-rtfd
+      - pypi-jobs
 
 - project:
     name: healthnmon
