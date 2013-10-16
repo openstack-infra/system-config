@@ -34,6 +34,7 @@ class openstack_project::elasticsearch_node (
 
   class { '::elasticsearch':
     discover_nodes => $discover_nodes,
+    version        => '0.90.3',
   }
 
   cron { 'delete_old_es_indices':
