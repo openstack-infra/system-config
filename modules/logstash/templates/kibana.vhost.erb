@@ -8,6 +8,13 @@
 
     CustomLog ${APACHE_LOG_DIR}/<%= scope.lookupvar("::logstash::web::vhost_name") %>-access.log combined
 
+    <% if kibana3 == true %>
+    Alias /kibana3 /srv/kibana/kibana-latest
+    <Directory /srv/kibana/kibana-latest>
+        Allow from all
+        Options -Multiviews
+    </Directory>
+    <% end %>
     <IfModule mod_proxy.c>
         <% if proxy_elasticsearch == true %>
         # Proxy GETs for elasticsearch _aliases, .*/_status, .*/_search,
