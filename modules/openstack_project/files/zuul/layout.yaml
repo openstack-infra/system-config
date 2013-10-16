@@ -163,6 +163,22 @@ jobs:
     branch: ^(?!stable/(folsom|grizzly)).*$
   - name: ^(gate|check)-swift-devstack-vm-functional$
     branch: ^(?!stable/(folsom|grizzly)).*$
+  - name: check-tempest-devstack-vm-cinder-stable-folsom
+    voting: false
+  - name: check-tempest-devstack-vm-smoke-stable-folsom
+    voting: false
+  - name: check-tempest-devstack-vm-full-stable-grizzly
+    voting: false
+  - name: check-tempest-devstack-vm-neutron-stable-grizzly
+    voting: false
+  - name: check-tempest-devstack-vm-postgres-full-stable-grizzly
+    voting: false
+  - name: check-devstack-vm-cells-stable-grizzly
+    voting: false
+  - name: check-tempest-devstack-vm-cells-stable-grizzly
+    voting: false
+  - name: check-tempest-devstack-vm-cells-full-stable-grizzly
+    voting: false
   - name: gate-nova-pylint
     voting: false
   - name: gate-cinder-pylint
@@ -1619,19 +1635,23 @@ projects:
 
   - name: openstack-infra/devstack-gate
     check:
-      - check-tempest-devstack-vm-smoke
       - check-tempest-devstack-vm-full
-      - check-tempest-devstack-vm-cinder
       - check-tempest-devstack-vm-postgres-full
       - check-tempest-devstack-vm-neutron
       - gate-tempest-devstack-vm-large-ops
       - gate-tempest-devstack-vm-neutron-large-ops
       - check-grenade-devstack-vm
       - check-swift-devstack-vm-functional
+      - check-tempest-devstack-vm-cinder-stable-folsom
+      - check-tempest-devstack-vm-smoke-stable-folsom
+      - check-tempest-devstack-vm-full-stable-grizzly
+      - check-tempest-devstack-vm-neutron-stable-grizzly
+      - check-tempest-devstack-vm-postgres-full-stable-grizzly
+      - check-devstack-vm-cells-stable-grizzly
+      - check-tempest-devstack-vm-cells-stable-grizzly
+      - check-tempest-devstack-vm-cells-full-stable-grizzly
     gate:
-      - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
-      - gate-tempest-devstack-vm-cinder
       - gate-tempest-devstack-vm-postgres-full
       - gate-tempest-devstack-vm-neutron
       - gate-tempest-devstack-vm-large-ops
