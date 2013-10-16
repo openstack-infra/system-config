@@ -10,6 +10,7 @@ pipelines:
     trigger:
       gerrit:
         - event: patchset-created
+        - event: change-restored
         - event: comment-added
           comment_filter: (?i)^\s*recheck(( (?:bug|lp)[\s#:]*(\d+))|( no bug))\s*$
     success:
