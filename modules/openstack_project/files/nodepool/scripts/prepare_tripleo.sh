@@ -32,10 +32,14 @@ sudo DEBIAN_FRONTEND=noninteractive apt-get \
 
 rm -rf ~/tripleo
 mkdir -p ~/tripleo
+export TRIPLEO_ROOT=~/tripleo
 
 cd ~/tripleo
 git clone https://review.openstack.org/p/openstack/tripleo-incubator
 bash tripleo-incubator/scripts/pull-tools
+# Instead of running pull-tools, we'll eventually want to get the
+# refresh-env script working:
+# source tripleo-incubator/scripts/refresh-env ~/tripleo
 
 # We'll want something like this for triplo when we do dependencies
 #
