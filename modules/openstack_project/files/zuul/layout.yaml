@@ -847,6 +847,7 @@ projects:
       - gate-tempest-devstack-vm-large-ops
       - gate-tempest-devstack-vm-neutron-large-ops
       - check-grenade-devstack-vm
+      - gate-devstack-vm-cells
       - gate-nova-pylint
     gate:
       - gate-nova-requirements
@@ -864,7 +865,6 @@ projects:
       - gate-grenade-devstack-vm
     experimental:
       - gate-grenade-devstack-vm-stable
-      - gate-devstack-vm-cells
       - gate-tempest-devstack-vm-neutron-full
     post:
       - nova-branch-tarball
