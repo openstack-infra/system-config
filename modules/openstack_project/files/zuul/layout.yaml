@@ -3191,6 +3191,8 @@ projects:
       - gate-taskflow-pep8
       - gate-taskflow-python27
       - gate-taskflow-python26
+    post:
+      - taskflow-coverage
 
   - name: stackforge/novaimagebuilder
     check:
