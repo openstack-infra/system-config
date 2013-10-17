@@ -52,6 +52,15 @@ pipelines:
         - event: ref-updated
           ref: ^(?!(devnull|refs/.*)).*$
 
+  - name: tag
+    description: This pipeline runs jobs in response to any tag event.
+    manager: IndependentPipelineManager
+    precedence: high
+    trigger:
+      gerrit:
+        - event: ref-updated
+          ref: ^refs/tags/.*$
+
   - name: pre-release
     description: This pipeline runs jobs on projects in response to pre-release tags.
     manager: IndependentPipelineManager
@@ -2433,6 +2442,9 @@ projects:
     gate:
       - gate-noop
     post:
+      - infra-publications-publish
+      - infra-publications-publish-index
+    tag:
       - infra-publications-publish
       - infra-publications-publish-index
 
