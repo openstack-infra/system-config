@@ -58,8 +58,8 @@ class openstack_project::wiki (
   }
 
   class { 'elasticsearch':
-    discover_nodes        => ['localhost'],
-    elasticsearch_version => '0.90.5',
+    discover_nodes => ['localhost'],
+    version        => '0.90.5',
   }
 
 }
