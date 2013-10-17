@@ -1399,6 +1399,7 @@
 
     jobs:
       - python-jobs
+      - pypi-jobs
 
 - project:
     name: cl-openstack-client
