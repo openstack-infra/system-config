@@ -57,7 +57,7 @@ class openstack_project::wiki (
     backup_server => 'ci-backup-rs-ord.openstack.org',
   }
 
-  class { 'elasticsearch':
+  class { '::elasticsearch':
     discover_nodes => ['localhost'],
     version        => '0.90.5',
   }
