@@ -1542,12 +1542,12 @@
       - openstack-install-deploy-guide-{distribution}:
           distribution: opensuse
           system: zypper
-          profileos: "opensuse"
+          profileos: "opensuse;sles"
 
       - openstack-install-deploy-guide-{distribution}:
           distribution: ubuntu
           system: apt
-          profileos: "ubuntu"
+          profileos: "ubuntu;debian"
 
       # in zuul/layout.yaml specified to only run against
       # stable/folsom and grizzly branches.
