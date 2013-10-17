@@ -157,6 +157,9 @@ jobs:
     # merged into gate-grenade-devstack-vm
   - name: gate-grenade-noop
     branch: ^(stable/(folsom|grizzly)).*$
+  - name: gate-devstack-bash8
+    branch: ^(stable/(folsom|grizzly)).*$
+    voting: false
   - name: gate-tempest-docs
     branch: ^(?!stable/(folsom|grizzly)).*$
   - name: tempest-docs
@@ -1601,6 +1604,7 @@ projects:
 
   - name: openstack-dev/devstack
     check:
+      - gate-devstack-bash8
       - check-tempest-devstack-vm-smoke
       - check-tempest-devstack-vm-full
       - check-tempest-devstack-vm-cinder
@@ -1611,6 +1615,7 @@ projects:
       - check-grenade-devstack-vm
       - check-swift-devstack-vm-functional
     gate:
+      - gate-devstack-bash8
       - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-cinder
