@@ -232,6 +232,7 @@ openstack-chef:
       - stackforge/cookbook-openstack-object-storage
     branches:
       - master
+      - stable/grizzly
 
 murano:
     events:
