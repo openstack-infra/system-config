@@ -3185,12 +3185,20 @@ projects:
   - name: stackforge/taskflow
     check:
       - gate-taskflow-pep8
-      - gate-taskflow-python27
       - gate-taskflow-python26
+      - gate-taskflow-python27
     gate:
       - gate-taskflow-pep8
-      - gate-taskflow-python27
       - gate-taskflow-python26
+      - gate-taskflow-python27
+    post:
+      - taskflow-coverage
+      - taskflow-branch-tarball
+    pre-release:
+      - taskflow-tarball
+    release:
+      - taskflow-tarball:
+        - taskflow-pypi-upload
 
   - name: stackforge/novaimagebuilder
     check:
