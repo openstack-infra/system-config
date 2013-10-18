@@ -34,6 +34,8 @@ rm -rf ~/tripleo
 mkdir -p ~/tripleo
 export TRIPLEO_ROOT=~/tripleo
 
+git clone https://review.openstack.org/p/openstack-infra/tripleo-ci
+
 cd ~/tripleo
 git clone https://review.openstack.org/p/openstack/tripleo-incubator
 bash tripleo-incubator/scripts/pull-tools
