@@ -1,0 +1,11 @@
+Approved+1: Monty Taylor <mordred@inaugust.com>
+Code-Review+2: Monty Taylor <mordred@inaugust.com>
+Verified+2: Jenkins
+Code-Review+1: Loic Dachary <loic@dachary.org>
+Code-Review+2: Clark Boylan <cboylan@sapwetik.org>
+Code-Review+1: David Moreau Simard <dmsimard@iweb.com>
+Submitted-by: Jenkins
+Submitted-at: Fri, 18 Oct 2013 22:36:33 +0000
+Reviewed-on: https://review.openstack.org/52215
+Project: openstack-infra/config
+Branch: refs/heads/master
