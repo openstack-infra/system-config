@@ -14,7 +14,7 @@
 #
 # Elasticsearch server glue class.
 #
-class openstack_project::elasticsearch (
+class openstack_project::elasticsearch_node (
   $elasticsearch_nodes = [],
   $elasticsearch_clients = [],
   $discover_nodes = ['localhost'],
