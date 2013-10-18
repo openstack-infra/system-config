@@ -16,7 +16,8 @@
 #
 class elasticsearch (
   $discover_nodes = ['localhost'],
-  $version = '0.20.5'
+  $version = '0.20.5',
+  $heap_size = '16g'
 ) {
   # install java runtime
   package { 'java7-runtime-headless':
@@ -96,7 +97,7 @@ class elasticsearch (
 
   file { '/etc/default/elasticsearch':
     ensure  => present,
-    source  => 'puppet:///modules/elasticsearch/elasticsearch.default',
+    content => template('elasticsearch/elasticsearch.default.erb'),
     replace => true,
     owner   => 'root',
     group   => 'root',
