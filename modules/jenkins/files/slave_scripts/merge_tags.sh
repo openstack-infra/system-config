@@ -14,14 +14,17 @@
 
 TAG=$1
 
-git config user.name "OpenStack Jenkins"
-git config user.email "jenkins@openstack.org"
-git config gitreview.username "jenkins"
+if $(git tag --contains origin/milestone-proposed | grep "^$TAG$" >/dev/null)
+then
+    git config user.name "OpenStack Jenkins"
+    git config user.email "jenkins@openstack.org"
+    git config gitreview.username "jenkins"
 
-git review -s
-git checkout master
-git reset --hard origin/master
-git merge -s ours $TAG
-# Get a Change-Id
-GIT_EDITOR=true git commit --amend
-git review -R -t merge/release-tag
+    git review -s
+    git checkout master
+    git reset --hard origin/master
+    git merge -s ours $TAG
+    # Get a Change-Id
+    GIT_EDITOR=true git commit --amend
+    git review -R -t merge/release-tag
+fi

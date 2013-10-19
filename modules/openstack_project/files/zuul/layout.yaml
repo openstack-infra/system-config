@@ -271,8 +271,6 @@ jobs:
     branch: ^(?!stable/(folsom|grizzly)).*$
   - name: manuals-upstream-translation-update
     branch: ^master$
-  - name: ^.*-merge-release-tags$
-    branch: milestone-proposed
   - name: gate-hacking-python33
     voting: false
   - name: gate-hacking-pypy
