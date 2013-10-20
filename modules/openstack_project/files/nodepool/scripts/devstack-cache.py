@@ -21,6 +21,7 @@ import sys
 import subprocess
 
 DEVSTACK=os.path.expanduser('~/workspace-cache/devstack')
+CACHEDIR=os.path.expanduser('~/cache/files')
 
 def run_local(cmd, status=False, cwd='.', env={}):
     print "Running:", cmd
@@ -111,11 +112,11 @@ def main():
                       branch_data['debs'])
 
         for url in branch_data['images']:
-            fname = url.split('/')[-1]
+            fname = url.split(os.path.sep)[-1]
             if fname in image_filenames:
                 continue
             run_local(['wget', '-nv', '-c', url,
-                       '-O', '~/cache/files/%s' % fname])
+                       '-O', os.path.join(CACHEDIR, fname)])
 
 if __name__ == '__main__':
     main()
