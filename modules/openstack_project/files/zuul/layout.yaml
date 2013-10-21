@@ -148,6 +148,8 @@ jobs:
   - name: ^(gate|check)-grenade-devstack-vm$
     branch: ^(?!stable/(folsom|grizzly)).*$
     voting: true
+  - name: gate-tempest-python27
+    branch: ^(?!stable/(folsom|grizzly)).*$
     # only here until stable is votable, then merge
     # back to a single job
   - name: gate-grenade-devstack-vm-stable
@@ -1690,6 +1692,7 @@ projects:
       - gate-tempest-requirements
       - gate-tempest-pep8
       - gate-tempest-docs
+      - gate-tempest-python27
       - check-tempest-devstack-vm-smoke
       - check-tempest-devstack-vm-full
       - check-tempest-devstack-vm-postgres-full
@@ -1702,6 +1705,7 @@ projects:
       - gate-tempest-requirements
       - gate-tempest-pep8
       - gate-tempest-docs
+      - gate-tempest-python27
       - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-postgres-full
