@@ -15,7 +15,7 @@ class etherpad_lite (
   $ep_user          = 'eplite',
   $base_log_dir     = '/var/log',
   $base_install_dir = '/opt/etherpad-lite',
-  $nodejs_version   = 'v0.10.20',
+  $nodejs_version   = 'v0.10.21',
   $eplite_version   = 'develop'
 ) {
 
