@@ -3152,12 +3152,15 @@ projects:
       - ironic-branch-tarball
       - ironic-coverage
       - ironic-docs
+      - ironic-upstream-translation-update
     pre-release:
       - ironic-tarball
     release:
       - ironic-tarball
       - ironic-docs
       - ironic-merge-release-tags
+    periodic:
+      - ironic-propose-translation-update
 
   - name: openstack/python-ironicclient
     check:
