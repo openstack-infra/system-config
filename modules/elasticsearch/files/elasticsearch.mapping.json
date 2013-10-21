@@ -13,7 +13,8 @@
     ],
     "properties" : {
       "@fields": { "type": "object", "dynamic": true, "path": "full" },
-      "@message" : { "type" : "string", "index" : "analyzed" }
+      "@message" : { "type" : "string", "index" : "analyzed" },
+      "message" : { "type" : "string", "index" : "analyzed" }
     }
   }
 }
