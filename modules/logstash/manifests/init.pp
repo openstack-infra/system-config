@@ -38,13 +38,13 @@ class logstash {
   }
 
   exec { 'get_logstash_jar':
-    command => 'wget http://logstash.objects.dreamhost.com/release/logstash-1.1.12-monolithic.jar -O /opt/logstash/logstash-1.1.12-monolithic.jar',
+    command => 'wget https://download.elasticsearch.org/logstash/logstash/logstash-1.2.1-flatjar.jar -O /opt/logstash/logstash-1.2.1-flatjar.jar',
     path    => '/bin:/usr/bin',
-    creates => '/opt/logstash/logstash-1.1.12-monolithic.jar',
+    creates => '/opt/logstash/logstash-1.2.1-flatjar.jar',
     require => File['/opt/logstash'],
   }
 
-  file { '/opt/logstash/logstash-1.1.12-monolithic.jar':
+  file { '/opt/logstash/logstash-1.2.1-flatjar.jar':
     ensure  => present,
     owner   => 'logstash',
     group   => 'logstash',
@@ -57,8 +57,8 @@ class logstash {
 
   file { '/opt/logstash/logstash.jar':
     ensure  => link,
-    target  => '/opt/logstash/logstash-1.1.12-monolithic.jar',
-    require => File['/opt/logstash/logstash-1.1.12-monolithic.jar'],
+    target  => '/opt/logstash/logstash-1.2.1-flatjar.jar',
+    require => File['/opt/logstash/logstash-1.2.1-flatjar.jar'],
   }
 
   file { '/var/log/logstash':
