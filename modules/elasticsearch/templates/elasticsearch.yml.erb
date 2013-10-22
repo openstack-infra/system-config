@@ -135,11 +135,15 @@ node.name: "<%= scope.lookupvar("::hostname") %>"
 # Use the Index Status API (<http://localhost:9200/A/_status>) to inspect
 # the index status.
 
-# Compress stored fields and term vector.
-index.store.compress.stored: true
-index.store.compress.tv: true
-
-indices.memory.index_buffer_size: "33%"
+<% if es_template_config.has_key?('index.store.compress.stored') then -%>
+index.store.compress.stored: <%= es_template_config['index.store.compress.stored'] %>
+<% end -%>
+<% if es_template_config.has_key?('index.store.compress.tv') then -%>
+index.store.compress.tv: <%= es_template_config['index.store.compress.tv'] %>
+<% end -%>
+<% if es_template_config.has_key?('indices.memory.index_buffer_size') then -%>
+indices.memory.index_buffer_size: "<%= es_template_config['indices.memory.index_buffer_size'] %>"
+<% end -%>
 
 #################################### Paths ####################################
 
@@ -184,7 +188,11 @@ indices.memory.index_buffer_size: "33%"
 #
 # Set this property to true to lock the memory:
 #
-bootstrap.mlockall: true
+<% if es_template_config.has_key?('bootstrap.mlockall') then -%>
+bootstrap.mlockall: <%= es_template_config['bootstrap.mlockall'] %>
+<% else -%>
+# bootstrap.mlockall: true
+<% end -%>
 
 # Make sure that the ES_MIN_MEM and ES_MAX_MEM environment variables are set
 # to the same value, and that the machine has enough memory to allocate
@@ -255,18 +263,30 @@ bootstrap.mlockall: true
 
 # Allow recovery process after N nodes in a cluster are up:
 #
-gateway.recover_after_nodes: 5
+<% if es_template_config.has_key?('gateway.recover_after_nodes') then -%>
+gateway.recover_after_nodes: <%= es_template_config['gateway.recover_after_nodes'] %>
+<% else -%>
+# gateway.recover_after_nodes: 1
+<% end -%>
 
 # Set the timeout to initiate the recovery process, once the N nodes
 # from previous setting are up (accepts time value):
 #
-gateway.recover_after_time: 5m
+<% if es_template_config.has_key?('gateway.recover_after_time') then -%>
+gateway.recover_after_time: <%= es_template_config['gateway.recover_after_time'] %>
+<% else -%>
+# gateway.recover_after_time: 5m
+<% end -%>
 
 # Set how many nodes are expected in this cluster. Once these N nodes
 # are up (and recover_after_nodes is met), begin recovery process immediately
 # (without waiting for recover_after_time to expire):
 #
-gateway.expected_nodes: 6
+<% if es_template_config.has_key?('gateway.expected_nodes') then -%>
+gateway.expected_nodes: <%= es_template_config['gateway.expected_nodes'] %>
+<% else -%>
+# gateway.expected_nodes: 2
+<% end -%>
 
 
 ############################# Recovery Throttling #############################
@@ -304,7 +324,11 @@ gateway.expected_nodes: 6
 # operational within the cluster. Set this option to a higher value (2-4)
 # for large clusters (>3 nodes):
 #
-discovery.zen.minimum_master_nodes: 4
+<% if es_template_config.has_key?('discovery.zen.minimum_master_nodes') then -%>
+discovery.zen.minimum_master_nodes: <%= es_template_config['discovery.zen.minimum_master_nodes'] %>
+<% else -%>
+# discovery.zen.minimum_master_nodes: 1
+<% end -%>
 
 # Set the time to wait for ping responses from other nodes when discovering.
 # Set this option to a higher value on a slow or congested network
@@ -321,15 +345,20 @@ discovery.zen.minimum_master_nodes: 4
 #
 # 1. Disable multicast discovery (enabled by default):
 #
-discovery.zen.ping.multicast.enabled: false
+<% if es_template_config.has_key?('discovery.zen.ping.multicast.enabled') then -%>
+discovery.zen.ping.multicast.enabled: <%= es_template_config['discovery.zen.ping.multicast.enabled'] %>
+<% else -%>
+# discovery.zen.ping.multicast.enabled: false
+<% end -%>
 #
 # 2. Configure an initial list of master nodes in the cluster
 #    to perform discovery when new nodes (master or data) are started:
 #
 # discovery.zen.ping.unicast.hosts: ["host1", "host2:port", "host3[portX-portY]"]
 #
-# Make all master eligible nodes discover nodes.
-discovery.zen.ping.unicast.hosts: ["<%= discover_nodes.join("\", \"") %>"]
+<% if es_template_config.has_key?('discovery.zen.ping.unicast.hosts') then -%>
+discovery.zen.ping.unicast.hosts: ["<%= es_template_config['discovery.zen.ping.unicast.hosts'].join("\", \"") %>"]
+<% end -%>
 
 # EC2 discovery allows to use AWS EC2 API in order to perform discovery.
 #

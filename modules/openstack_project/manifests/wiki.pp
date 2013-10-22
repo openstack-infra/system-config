@@ -58,9 +58,12 @@ class openstack_project::wiki (
   }
 
   class { '::elasticsearch':
-    discover_nodes => ['localhost'],
-    version        => '0.90.5',
-    heap_size      => '1g',
+    es_template_config => {
+      'bootstrap.mlockall'               => true,
+      'discovery.zen.ping.unicast.hosts' => ['localhost'],
+    },
+    version            => '0.90.5',
+    heap_size          => '1g',
   }
 
 }
