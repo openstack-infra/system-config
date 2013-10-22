@@ -33,8 +33,19 @@ class openstack_project::elasticsearch_node (
   class { 'logstash::elasticsearch': }
 
   class { '::elasticsearch':
-    discover_nodes => $discover_nodes,
-    version        => '0.90.3',
+    es_template_config => {
+      'index.store.compress.stored'          => true,
+      'index.store.compress.tv'              => true,
+      'indices.memory.index_buffer_size'     => '33%',
+      'bootstrap.mlockall'                   => true,
+      'gateway.recover_after_nodes'          => '5',
+      'gateway.recover_after_time'           => '5m',
+      'gateway.expected_nodes'               => '6',
+      'discovery.zen.minimum_master_nodes'   => '4',
+      'discovery.zen.ping.multicast.enabled' => false,
+      'discovery.zen.ping.unicast.hosts'     => $discover_nodes,
+    },
+    version            => '0.90.3',
   }
 
   cron { 'delete_old_es_indices':
