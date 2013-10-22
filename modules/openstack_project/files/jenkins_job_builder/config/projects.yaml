@@ -1516,6 +1516,7 @@
 
     jobs:
       - python-jobs
+      - pypi-jobs
 
 - project:
     name: wsme
@@ -1535,6 +1536,7 @@
 
     jobs:
       - python-jobs
+      - pypi-jobs
 
 - project:
     name: tuskar-ui
@@ -1544,6 +1546,7 @@
 
     jobs:
       - python-jobs
+      - pypi-jobs
 
 - project:
     name: rally
