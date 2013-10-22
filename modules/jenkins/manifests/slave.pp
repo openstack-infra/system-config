@@ -60,6 +60,7 @@ class jenkins::slave(
     $::jenkins::params::unzip_package,
     $::jenkins::params::xslt_package, # for building openstack docs
     $::jenkins::params::xvfb_package, # for selenium tests
+    $::jenkins::params::graphiz_package, # for doc/manual builds
   ]
 
   if ($bare == false) {

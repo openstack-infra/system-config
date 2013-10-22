@@ -48,6 +48,7 @@ class jenkins::params {
       $unzip_package = 'unzip'
       $xslt_package = 'libxslt'
       $xvfb_package = 'xorg-x11-server-Xvfb'
+      $graphiz_package = 'graphviz'
       $cgroups_package = 'libcgroup'
       if ($::operatingsystem == 'Fedora') {
         $cgroups_tools_package = 'libcgroup-tools'
@@ -110,6 +111,7 @@ class jenkins::params {
       $unzip_package = 'unzip'
       $xslt_package = 'xsltproc'
       $xvfb_package = 'xvfb'
+      $graphiz_package = 'graphviz'
       $cgroups_package = 'cgroup-bin'
       $cgroups_tools_package = ''
       $cgconfig_require = [
