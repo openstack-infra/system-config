@@ -50,6 +50,7 @@ class jenkins::params {
       $unzip_package = 'unzip'
       $xslt_package = 'libxslt'
       $xvfb_package = 'xorg-x11-server-Xvfb'
+      $graphiz_package = 'graphviz'
       # For Tooz unit tests
       # FIXME: No zookeeper packages on RHEL
       #$zookeeper_package = 'zookeeper-server'
@@ -126,6 +127,7 @@ class jenkins::params {
       $unzip_package = 'unzip'
       $xslt_package = 'xsltproc'
       $xvfb_package = 'xvfb'
+      $graphiz_package = 'graphviz'
       # For [tooz, taskflow, nova] using zookeeper in unit tests
       $zookeeper_package = 'zookeeperd'
       $cgroups_package = 'cgroup-bin'
