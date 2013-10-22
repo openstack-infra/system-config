@@ -15,9 +15,9 @@
 # Class to install elasticsearch.
 #
 class elasticsearch (
-  $discover_nodes = ['localhost'],
   $version = '0.20.5',
-  $heap_size = '16g'
+  $heap_size = '16g',
+  $es_template_config = {}
 ) {
   # install java runtime
   package { 'java7-runtime-headless':
