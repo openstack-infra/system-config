@@ -26,6 +26,7 @@ class openstack_project::eavesdrop (
         '#openstack',
         '#openstack-dev',
         '#openstack-infra',
+        '#openstack-ironic',
         '#openstack-marconi',
         '#openstack-meeting',
         '#openstack-meeting-alt',
