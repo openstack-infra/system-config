@@ -3550,3 +3550,23 @@ projects:
     post:
       - python-manilaclient-branch-tarball
       - python-manilaclient-coverage
+
+  - name: stackforge/solum
+    check:
+      - gate-solum-pep8
+      - gate-solum-python26
+      - gate-solum-python27
+      - gate-solum-python33
+      - gate-solum-pypy
+#      docs will be added as soon as we have and docs to build
+#      - gate-solum-docs
+    gate:
+      - gate-solum-pep8
+      - gate-solum-python26
+      - gate-solum-python27
+      - gate-solum-python33
+      - gate-solum-pypy
+#      docs will be added as soon as we have and docs to build
+#      - gate-solum-docs
+    post:
+      - solum-coverage

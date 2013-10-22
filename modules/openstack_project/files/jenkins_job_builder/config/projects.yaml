@@ -1647,3 +1647,12 @@
 
     jobs:
       - python-jobs
+
+- project:
+    name: solum
+    github-org: stackforge
+    node: precise
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - python-jobs
