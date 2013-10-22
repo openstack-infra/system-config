@@ -532,6 +532,13 @@ using, and then null out the others with:
 
   update accounts set preferred_email=NULL, registered_on=registered_on where account_id=OLD;
 
+Then flush Gerrit's caches so any immediate account lookups will hit
+the current DB contents:
+
+.. code-block:: bash
+
+  ssh review.openstack.org -p29418 gerrit flush-caches --all
+
 
 Combining Gerrit Accounts
 -------------------------
