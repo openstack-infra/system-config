@@ -3383,6 +3383,11 @@ projects:
       - gate-tuskar-python27
     post:
       - tuskar-branch-tarball
+    pre-release:
+      - tuskar-tarball
+    release:
+      - tuskar-tarball:
+        - tuskar-pypi-upload
 
   - name: openstack/python-tuskarclient
     check:
@@ -3397,6 +3402,11 @@ projects:
     post:
       - python-tuskarclient-branch-tarball
       - python-tuskarclient-coverage
+    pre-release:
+      - python-tuskarclient-tarball
+    release:
+      - python-tuskarclient-tarball:
+        - python-tuskarclient-pypi-upload
 
   - name: openstack/tuskar-ui
     check:
@@ -3409,6 +3419,11 @@ projects:
       - gate-tuskar-ui-python27
     post:
       - tuskar-ui-branch-tarball
+    pre-release:
+      - tuskar-ui-tarball
+    release:
+      - tuskar-ui-tarball:
+        - tuskar-ui-pypi-upload
 
   - name: stackforge/pecan
     check:
