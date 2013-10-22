@@ -58,6 +58,7 @@ openstack-doc:
       - openstack/api-site
     branches:
       - master
+      - stable/havana
 
 openstack-metering:
     events:
