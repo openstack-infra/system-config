@@ -55,6 +55,9 @@ git clone https://review.openstack.org/p/openstack/python-swiftclient
 git clone https://review.openstack.org/p/openstack/requirements
 git clone https://review.openstack.org/p/openstack/swift
 git clone https://review.openstack.org/p/openstack/tempest
+# and stackforge libraries we might want to test with
+git clone https://review.openstack.org/p/stackforge/pecan
+git clone https://review.openstack.org/p/stackforge/wsme
 
 . /etc/lsb-release
 cd /opt/nodepool-scripts/
