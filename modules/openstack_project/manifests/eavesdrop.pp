@@ -25,15 +25,17 @@ class openstack_project::eavesdrop (
     channels  => [
         '#openstack',
         '#openstack-dev',
+        '#openstack-dns',
         '#openstack-infra',
         '#openstack-marconi',
         '#openstack-meeting',
         '#openstack-meeting-alt',
         '#openstack-metering',
+        '#openstack-neutron',
         '#openstack-qa',
         '#openstack-trove',
         '#savanna',
-        '#openstack-dns',
+        '#tripleo',
     ],
     use_ssl   => 'True'
   }
