@@ -161,7 +161,6 @@ jobs:
     branch: ^(stable/(folsom|grizzly)).*$
   - name: gate-devstack-bash8
     branch: ^(?!stable/(folsom|grizzly)).*$
-    voting: false
   - name: gate-tempest-docs
     branch: ^(?!stable/(folsom|grizzly)).*$
   - name: tempest-docs
