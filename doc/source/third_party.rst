@@ -85,9 +85,26 @@ Feel free to contact the OpenStack Infrastructure Team via
 `bug report <https://bugs.launchpad.net/openstack-ci/>`_
 or in the #openstack-infra IRC channel to arrange setting up a dedicated user
 (so your system can post reviews and vote using a system name rather than your
-user name). You should provide a preferred account name, SSH public key and if
-possible a unique contact email address for that system, though it should not
-be an address used by any existing Gerrit account.
+user name). We'll want a few additional details:
+
+  1. The public SSH key described above (if using OpenSSH, this would be the
+  full contents of the account's ~/.ssh/id_rsa.pub file after running
+  'ssh-keygen'). You can attach it to this bug or reply with a hyperlink to
+  where you've published it so I can retrieve it. This is a non-sensitive piece
+  of data, and it's safe for it to be publicly visible.
+
+  2. A preferred (short, alphanumeric) username you want to use for the new SSH
+  account. This is the username you'll use when connecting to Gerrit via SSH.
+
+  3. (optional) A human-readable display name for your testing system, shown on
+  comments and votes in Gerrit.
+
+  4. (optional) A unique contact E-mail address or alias for this system, which
+  can not be in use as a contact address for any other Gerrit accounts on
+  review.openstack.org (Gerrit doesn't deal well with duplicate E-mail
+  addresses between accounts). This is so that contributors and reviewers can
+  see how to get in touch with people who might be able to fix problems with
+  the system if it starts leaving erroneous votes.
 
 The Jenkins Gerrit Trigger Plugin Way
 -------------------------------------
