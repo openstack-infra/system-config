@@ -2572,6 +2572,9 @@ projects:
            - post-mirror-python26
            - post-mirror-python27
            - post-mirror-python33
+    experimental:
+       - gate-python-savannaclient-python33
+       - gate-python-savannaclient-pypy
 
   - name: openstack/savanna-dashboard
     check:
