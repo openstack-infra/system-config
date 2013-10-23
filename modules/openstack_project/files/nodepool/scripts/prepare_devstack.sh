@@ -18,10 +18,16 @@
 
 mkdir -p ~/cache/files
 mkdir -p ~/cache/pip
-sudo DEBIAN_FRONTEND=noninteractive apt-get \
-  --option "Dpkg::Options::=--force-confold" \
-  --assume-yes install build-essential python-dev \
-  linux-headers-virtual linux-headers-`uname -r`
+
+if which yum &> /dev/null; then
+    sudo yum -y install python-devel make automake gcc gcc-c++ kernel-devel
+else
+    # Default ubuntu
+    sudo DEBIAN_FRONTEND=noninteractive apt-get \
+      --option "Dpkg::Options::=--force-confold" \
+      --assume-yes install build-essential python-dev \
+      linux-headers-virtual linux-headers-`uname -r`
+fi
 
 rm -rf ~/workspace-cache
 mkdir -p ~/workspace-cache
@@ -59,7 +65,8 @@ git clone https://review.openstack.org/p/openstack/tempest
 git clone https://review.openstack.org/p/stackforge/pecan
 git clone https://review.openstack.org/p/stackforge/wsme
 
-. /etc/lsb-release
+DISTRIB_CODENAME=`lsb-release -sc`
+
 cd /opt/nodepool-scripts/
 python ./devstack-cache.py $DISTRIB_CODENAME
 
