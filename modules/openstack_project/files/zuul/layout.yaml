@@ -306,8 +306,6 @@ jobs:
     voting: false
   - name: gate-python-swiftclient-python33
     voting: false
-  - name: gate-python-troveclient-python33
-    voting: false
   - name: gate-python-tuskarclient-python33
     voting: false
 # puppet-openstack targets
@@ -1996,6 +1994,7 @@ projects:
       - gate-python-troveclient-pep8
       - gate-python-troveclient-python26
       - gate-python-troveclient-python27
+      - gate-python-troveclient-python33
       - gate-python-troveclient-pypy
     post:
       - python-troveclient-branch-tarball
