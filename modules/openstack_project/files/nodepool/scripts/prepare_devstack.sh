@@ -18,10 +18,18 @@
 
 mkdir -p ~/cache/files
 mkdir -p ~/cache/pip
-sudo DEBIAN_FRONTEND=noninteractive apt-get \
-  --option "Dpkg::Options::=--force-confold" \
-  --assume-yes install build-essential python-dev \
-  linux-headers-virtual linux-headers-`uname -r`
+
+if cat /etc/*release | grep -e "Fedora" &> /dev/null; then
+
+    sudo yum -y install python-devel make automake gcc gcc-c++ kernel-devel
+
+else
+    # Default ubuntu
+    sudo DEBIAN_FRONTEND=noninteractive apt-get \
+      --option "Dpkg::Options::=--force-confold" \
+      --assume-yes install build-essential python-dev \
+      linux-headers-virtual linux-headers-`uname -r`
+fi
 
 rm -rf ~/workspace-cache
 mkdir -p ~/workspace-cache
