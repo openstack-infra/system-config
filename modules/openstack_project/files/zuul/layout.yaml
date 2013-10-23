@@ -3464,3 +3464,15 @@ projects:
     post:
       - python-manilaclient-branch-tarball
       - python-manilaclient-coverage
+
+  - name: stackforge/python-sphinxcontrib-docbookrestapi
+    check:
+      - gate-sphinxcontrib-docbookrestapi-pep8
+    gate:
+      - gate-sphinxcontrib-docbookrestapi-pep8
+    release:
+      - sphinxcontrib-docbookrestapi-tarball:
+        - sphinxcontrib-docbookrestapi-pypi-upload:
+          - post-mirror-python26
+          - post-mirror-python27
+          - post-mirror-python33
