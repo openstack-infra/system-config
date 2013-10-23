@@ -131,7 +131,7 @@ class openstack_project::gerrit (
       },
       {
         name  => 'bugheader',
-        match => '^([Cc]loses|[Pp]artial|[Rr]elated)-[Bb]ug:[\\s#]?(\\d+)$',
+        match => '([Cc]loses|[Pp]artial|[Rr]elated)-[Bb]ug:\\s*#?(\\d+)',
         link  => 'https://launchpad.net/bugs/$2',
       },
       {
