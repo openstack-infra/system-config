@@ -3674,3 +3674,14 @@ projects:
           - post-mirror-python26
           - post-mirror-python27
           - post-mirror-python33
+
+  - name: stackforge/rubick
+    check:
+      - gate-rubick-pep8
+      - gate-rubick-python27
+      - gate-rubick-python33
+    gate:
+      - gate-rubick-pep8
+      - gate-rubick-python27
+    post:
+      - rubick-coverage
