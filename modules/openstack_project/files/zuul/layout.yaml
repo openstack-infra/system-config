@@ -3474,3 +3474,14 @@ projects:
     post:
       - python-manilaclient-branch-tarball
       - python-manilaclient-coverage
+
+  - name: stackforge/rubick
+    check:
+      - gate-rubick-pep8
+      - gate-rubick-python27
+    gate:
+      - gate-rubick-pep8
+      - gate-rubick-python27
+    post:
+      - rubick-branch-tarball
+      - rubick-coverage
