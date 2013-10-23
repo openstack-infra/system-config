@@ -3661,3 +3661,16 @@ projects:
 #      - gate-solum-docs
     post:
       - solum-coverage
+  - name: stackforge/sphinxcontrib-docbookrestapi
+    check:
+      - gate-sphinxcontrib-docbookrestapi-pep8
+    gate:
+      - gate-sphinxcontrib-docbookrestapi-pep8
+    pre-release:
+      - sphinxcontrib-docbookrestapi-tarball
+    release:
+      - sphinxcontrib-docbookrestapi-tarball:
+        - sphinxcontrib-docbookrestapi-pypi-upload:
+          - post-mirror-python26
+          - post-mirror-python27
+          - post-mirror-python33
