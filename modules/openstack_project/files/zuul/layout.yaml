@@ -3656,6 +3656,17 @@ projects:
       - python-manilaclient-branch-tarball
       - python-manilaclient-coverage
 
+  - name: stackforge/rubick
+    check:
+      - gate-rubick-pep8
+      - gate-rubick-python27
+      - gate-rubick-python33
+    gate:
+      - gate-rubick-pep8
+      - gate-rubick-python27
+    post:
+      - rubick-coverage
+
   - name: stackforge/solum
     check:
       - gate-solum-pep8
