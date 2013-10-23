@@ -1,0 +1,15 @@
+It sends codes from codes.csv to ATCs in atc.csv and outputs a csv file
+with which name corresponds to which code.
+
+You use it like this:
+
+- Copy settings.py.sample to settings.py
+- Update values in settings.py, especially EMAIL_USER, EMAIL_FROM,
+EMAIL_SIGNATURE and EMAIL_PASSWORD
+- Run a test with "python send.py atc_sample.csv codes_sample.csv"
+
+Should work on stock Ubuntu. 
+
+When ready, run the real thing with:
+
+$ python send.py atc.csv codes.csv > sent.csv
