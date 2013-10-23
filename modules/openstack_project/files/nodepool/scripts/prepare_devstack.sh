@@ -18,10 +18,18 @@
 
 mkdir -p ~/cache/files
 mkdir -p ~/cache/pip
-sudo DEBIAN_FRONTEND=noninteractive apt-get \
-  --option "Dpkg::Options::=--force-confold" \
-  --assume-yes install build-essential python-dev \
-  linux-headers-virtual linux-headers-`uname -r`
+
+if cat /etc/*release | grep -e "Fedora\|Red Hat" &> /dev/null; then
+
+    sudo yum -y install python-devel make automake gcc gcc-c++ kernel-devel
+
+else
+    # Default ubuntu
+    sudo DEBIAN_FRONTEND=noninteractive apt-get \
+      --option "Dpkg::Options::=--force-confold" \
+      --assume-yes install build-essential python-dev \
+      linux-headers-virtual linux-headers-`uname -r`
+fi
 
 rm -rf ~/workspace-cache
 mkdir -p ~/workspace-cache
@@ -59,7 +67,13 @@ git clone https://review.openstack.org/p/openstack/tempest
 git clone https://review.openstack.org/p/stackforge/pecan
 git clone https://review.openstack.org/p/stackforge/wsme
 
-. /etc/lsb-release
+# Fedora don't have /etc/lsb-release
+if cat /etc/*release | grep -e "Fedora\|Red Hat" &> /dev/null; then
+    DISTRIB_CODENAME="Fedora"
+else
+    . /etc/lsb-release
+fi
+
 cd /opt/nodepool-scripts/
 python ./devstack-cache.py $DISTRIB_CODENAME
 
