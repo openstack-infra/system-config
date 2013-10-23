@@ -1607,3 +1607,14 @@
 
     jobs:
       - python-jobs
+
+- project:
+    name: sphinxcontrib-docbookrestapi
+    github-org: stackforge
+    node: precise
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - 'gate-{name}-pep8'
+      - '{name}-tarball'
+      - pypi-jobs
