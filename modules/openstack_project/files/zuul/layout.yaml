@@ -431,8 +431,10 @@ projects:
   - name: openstack-infra/jeepyb
     check:
       - gate-jeepyb-pep8
+      - check-requirements-integration
     gate:
       - gate-jeepyb-pep8
+      - gate-requirements-integration
     pre-release:
       - jeepyb-tarball
     release:
@@ -445,8 +447,10 @@ projects:
   - name: openstack-infra/pypi-mirror
     check:
       - gate-pypi-mirror-pep8
+      - check-requirements-integration
     gate:
       - gate-pypi-mirror-pep8
+      - gate-requirements-integration
     pre-release:
       - pypi-mirror-tarball
     release:
@@ -1472,10 +1476,10 @@ projects:
 
   - name: openstack/requirements
     check:
-      - gate-requirements-install
       - gate-requirements-pep8
       - gate-requirements-python27
       - gate-requirements-pypy
+      - check-requirements-integration
       - check-tempest-devstack-vm-full
       - check-tempest-devstack-vm-postgres-full
       - check-tempest-devstack-vm-neutron
@@ -1484,10 +1488,10 @@ projects:
       - check-grenade-devstack-vm
       - check-swift-devstack-vm-functional
     gate:
-      - gate-requirements-install
       - gate-requirements-pep8
       - gate-requirements-python27
       - gate-requirements-pypy
+      - gate-requirements-integration
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-postgres-full
       - gate-tempest-devstack-vm-neutron
@@ -1561,7 +1565,7 @@ projects:
       - gate-pbr-python27
       - gate-pbr-python33
       - gate-pbr-pypy
-      - check-pbr-devstack-vm-rawinstall
+      - check-requirements-integration
       - check-tempest-devstack-vm-smoke
       - check-tempest-devstack-vm-full
       - check-tempest-devstack-vm-cinder
@@ -1578,7 +1582,7 @@ projects:
       - gate-pbr-python27
       - gate-pbr-python33
       - gate-pbr-pypy
-      - gate-pbr-devstack-vm-rawinstall
+      - gate-requirements-integration
       - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-cinder

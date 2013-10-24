@@ -229,12 +229,6 @@
       - openstack-publish-jobs
       - python-jobs
       - pypi-jobs
-      - '{pipeline}-pbr-devstack-vm-rawinstall':
-          pipeline: gate
-          node: devstack-precise
-      - '{pipeline}-pbr-devstack-vm-rawinstall':
-          pipeline: check
-          node: 'devstack-precise || devstack-precise-check'
 
 
 - project:
@@ -1016,6 +1010,16 @@
     jobs:
       - gate-{name}-bash8
 
+- project:
+    name: requirements-jobs
+
+    jobs:
+      - '{pipeline}-requirements-integration':
+          pipeline: gate
+          node: devstack-precise
+      - '{pipeline}-requirements-integration':
+          pipeline: check
+          node: 'devstack-precise || devstack-precise-check'
 
 - project:
     name: tempest
