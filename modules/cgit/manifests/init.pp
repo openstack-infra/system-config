@@ -34,7 +34,6 @@ class cgit(
       'cgit',
       'git-daemon',
       'highlight',
-      'socat',
     ]:
     ensure => present,
   }
@@ -171,6 +170,7 @@ class cgit(
 
   service { 'git-daemon':
     ensure    => running,
+    enable    => true,
     subscribe => File['/etc/init.d/git-daemon'],
   }
 
