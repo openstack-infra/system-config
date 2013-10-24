@@ -1258,6 +1258,17 @@
       - puppet-module-unit
 
 - project:
+    name: puppet-designate
+    github-org: stackforge
+    node: precise
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - gate-{name}-puppet-lint
+      - gate-{name}-puppet-syntax
+      - puppet-module-unit
+
+- project:
     name: openstack-chef-repo
     github-org: stackforge
     node: precise
