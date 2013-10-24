@@ -619,4 +619,16 @@ node /^.*\.jclouds\.openstack\.org$/ {
   }
 }
 
+node 'openstackid-dev.openstack.org' {
+  class { 'openstack_project::openid_dev':
+    sysadmins           => hiera('sysadmins'),
+    mysql_root_password => hiera('openstackid_dev_site_mysql_root_password'),
+    site_admin_password => hiera('openstackid_dev_site_admin_password'),
+    site_mysql_host     => hiera('openstackid_dev_mysql_host'),
+    site_mysql_user     => hiera('openstackid_dev_mysql_user'),
+    site_mysql_password => hiera('openstackid_dev_mysql_password'),
+    db_name             => 'openstackid_openid_dev',
+  }
+}
+
 # vim:sw=2:ts=2:expandtab:textwidth=79
