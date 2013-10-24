@@ -20,8 +20,7 @@ class openstack_project::groups_dev (
   $site_mysql_password = '',
   $sysadmins = [],
 ) {
-
-  realize (
+realize (
     User::Virtual::Localuser['mkiss'],
   )
 
