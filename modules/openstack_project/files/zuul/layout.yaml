@@ -159,7 +159,7 @@ jobs:
     # Remove when gate-grenade-devstack-vm-stable is
     # merged into gate-grenade-devstack-vm
   - name: gate-grenade-noop
-    branch: ^(stable/(folsom|grizzly)).*$
+    branch: ^(stable/(folsom|grizzly|havana)).*$
   - name: gate-devstack-bash8
     branch: ^(?!stable/(folsom|grizzly)).*$
   - name: gate-tempest-docs
