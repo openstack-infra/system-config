@@ -2523,9 +2523,13 @@ projects:
     check:
       - gate-anvil-pep8
       - gate-anvil-pylint
+      - gate-anvil-python26
+      - gate-anvil-python27
     gate:
       - gate-anvil-pep8
       - gate-anvil-pylint
+      - gate-anvil-python26
+      - gate-anvil-python27
 
   - name: openstack/savanna
     check:

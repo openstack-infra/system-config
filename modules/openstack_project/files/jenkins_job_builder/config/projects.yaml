@@ -1452,8 +1452,7 @@
     tarball-site: tarballs.openstack.org
 
     jobs:
-      - gate-{name}-pep8
-      - gate-{name}-pylint
+      - python-jobs
 
 - project:
     name: pycadf
