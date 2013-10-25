@@ -1898,6 +1898,8 @@ projects:
       - gate-tempest-dsvm-savanna-full
       - gate-tempest-dsvm-savanna-postgres-full
       - gate-tempest-dsvm-savanna-neutron
+      - check-tempest-dsvm-ironic
+      - check-tempest-dsvm-ironic-postgres
     post:
       - tempest-docs
       - tempest-branch-tarball
@@ -3607,6 +3609,9 @@ projects:
       - gate-ironic-pep8
       - gate-ironic-python26
       - gate-ironic-python27
+    experimental:
+      - check-tempest-dsvm-ironic
+      - check-tempest-dsvm-ironic-postgres
     post:
       - ironic-branch-tarball
       - ironic-coverage
