@@ -439,6 +439,15 @@ node 'pbx.openstack.org' {
   }
 }
 
+node 'owncloud.openstack.org' {
+  class { 'openstack_project::owncloud':
+    mysql_host          => hiera('owncloud_db_host'),
+    mysql_user          => hiera('owncloud_db_user'),
+    mysql_password      => hiera('owncloud_db_password'),
+    sysadmins           => hiera('sysadmins'),
+  }
+}
+
 # A bare machine, but with a jenkins user
 node /^.*\.template\.openstack\.org$/ {
   include openstack_project::slave_template
