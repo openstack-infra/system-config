@@ -160,5 +160,11 @@ change-merged) to relevant IRC channels.
 Gerritbot's configuration is in
 :file:`modules/gerritbot/files/gerritbot_channel_config.yaml`.
 
-The configuration is organized by channel, with each project that a
-channel is interested in listed under the channel.
+Teams can add their channel and go through the standard code review process to
+get the bot added to their channel. The configuration is organized by channel,
+with each project that a channel is interested in listed under the channel.
+
+Until `bug 1190296 <https://bugs.launchpad.net/openstack-ci/+bug/1190296>`_ is
+addressed, you will also need to add jeblair as a channel founder:
+
+/msg chanserv access #channel add jeblair +AFRfiorstv
