@@ -1,0 +1,7 @@
+# Class owncloud
+#
+class owncloud (
+
+) {
+
+}
