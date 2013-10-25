@@ -154,7 +154,7 @@ jobs:
     # only here until stable is votable, then merge
     # back to a single job
   - name: gate-grenade-devstack-vm-stable
-    branch: ^(stable/grizzly).*$
+    branch: ^(stable/(grizzly|havana)).*$
     voting: false
     # Remove when gate-grenade-devstack-vm-stable is
     # merged into gate-grenade-devstack-vm
