@@ -1774,6 +1774,8 @@ projects:
       - gate-grenade-dsvm-stable
       - gate-devstack-dsvm-cells
       - gate-tempest-dsvm-neutron-full
+      - check-tempest-dsvm-ironic
+      - check-tempest-dsvm-ironic-postgres
     post:
       - tempest-docs
       - tempest-branch-tarball
@@ -3435,12 +3437,16 @@ projects:
       - gate-ironic-pep8
       - gate-ironic-python26
       - gate-ironic-python27
+      - check-tempest-dsvm-ironic
+      - check-tempest-dsvm-ironic-postgres
     gate:
       - gate-ironic-requirements
       - gate-ironic-docs
       - gate-ironic-pep8
       - gate-ironic-python26
       - gate-ironic-python27
+      - gate-tempest-dsvm-ironic
+      - gate-tempest-dsvm-ironic-postgres
     post:
       - ironic-branch-tarball
       - ironic-coverage
