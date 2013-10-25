@@ -1085,6 +1085,10 @@
       - gate-{name}-python27
       - '{name}-branch-tarball'
       - openstack-publish-jobs
+      - '{pipeline}-tempest-devstack-vm-ironic':
+          pipeline: experimental
+      - '{pipeline}-tempest-devstack-vm-ironic-postgres':
+          pipeline: experimental
 
 
 - project:
@@ -1454,9 +1458,14 @@
     node: precise
     tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
+    pipeline:
+      - check
+      - gate
 
     jobs:
       - python-jobs
+      - '{pipeline}-tempest-devstack-vm-ironic'
+      - '{pipeline}-tempest-devstack-vm-ironic-postgres'
       - openstack-publish-jobs
       - translation-jobs
 
