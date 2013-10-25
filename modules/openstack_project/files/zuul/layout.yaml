@@ -3341,11 +3341,21 @@ projects:
       - gate-pecan-python26
       - gate-pecan-python27
       - gate-pecan-python33
+      - check-tempest-devstack-vm-full
+      - check-tempest-devstack-vm-neutron
+      - gate-tempest-devstack-vm-large-ops
+      - gate-tempest-devstack-vm-neutron-large-ops
+      - check-grenade-devstack-vm
     gate:
       - gate-pecan-pep8
       - gate-pecan-python26
       - gate-pecan-python27
       - gate-pecan-python33
+      - gate-tempest-devstack-vm-full
+      - gate-tempest-devstack-vm-neutron
+      - gate-tempest-devstack-vm-large-ops
+      - gate-tempest-devstack-vm-neutron-large-ops
+      - gate-grenade-devstack-vm
     post:
       - pecan-branch-tarball
     pre-release:
@@ -3371,11 +3381,21 @@ projects:
       - gate-wsme-python27
       - gate-wsme-python33
       - gate-wsme-pep8
+      - check-tempest-devstack-vm-full
+      - check-tempest-devstack-vm-neutron
+      - gate-tempest-devstack-vm-large-ops
+      - gate-tempest-devstack-vm-neutron-large-ops
+      - check-grenade-devstack-vm
     gate:
       - gate-wsme-python26
       - gate-wsme-python27
       - gate-wsme-python33
       - gate-wsme-pep8
+      - gate-tempest-devstack-vm-full
+      - gate-tempest-devstack-vm-neutron
+      - gate-tempest-devstack-vm-large-ops
+      - gate-tempest-devstack-vm-neutron-large-ops
+      - gate-grenade-devstack-vm
     post:
       - wsme-branch-tarball
     pre-release:
