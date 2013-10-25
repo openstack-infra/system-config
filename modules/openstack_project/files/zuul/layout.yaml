@@ -3153,6 +3153,10 @@ projects:
       - gate-ironic-pep8
       - gate-ironic-python26
       - gate-ironic-python27
+    experimental:
+      - check-tempest-devstack-vm-full
+      - check-tempest-devstack-vm-postgres-full
+      - gate-tempest-devstack-vm-large-ops
     gate:
       - gate-ironic-requirements
       - gate-ironic-docs
