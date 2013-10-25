@@ -471,6 +471,75 @@
           recipients: openstack-stable-maint@lists.openstack.org
 
 
+- job-template:
+    name: 'periodic-tempest-dsvm-ironic{branch-designator}'
+    node: '{node}'
+
+    wrappers:
+      - timeout:
+          timeout: 125
+          fail: true
+      - timestamps
+
+    builders:
+      - devstack-checkout
+      - shell: |
+          #!/bin/bash -xe
+          export PYTHONUNBUFFERED=true
+          export DEVSTACK_GATE_TIMEOUT=120
+          export DEVSTACK_GATE_TEMPEST=1
+          export DEVSTACK_GATE_IRONIC=1
+          export DEVSTACK_GATE_CONFIGDRIVE=0
+          export DEVSTACK_GATE_NEUTRON=1
+          export ZUUL_BRANCH={branch-override}
+          unset ZUUL_PROJECT
+
+          cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
+          ./safe-devstack-vm-gate-wrap.sh
+      - link-logs
+
+    publishers:
+      - devstack-logs-periodic
+      - console-log-periodic
+      - email:
+          recipients: openstack-stable-maint@lists.openstack.org
+
+
+- job-template:
+    name: 'periodic-tempest-dsvm-ironic-postgres{branch-designator}'
+    node: '{node}'
+
+    wrappers:
+      - timeout:
+          timeout: 125
+          fail: true
+      - timestamps
+
+    builders:
+      - devstack-checkout
+      - shell: |
+          #!/bin/bash -xe
+          export PYTHONUNBUFFERED=true
+          export DEVSTACK_GATE_TIMEOUT=120
+          export DEVSTACK_GATE_TEMPEST=1
+          export DEVSTACK_GATE_POSTGRES=1
+          export DEVSTACK_GATE_IRONIC=1
+          export DEVSTACK_GATE_CONFIGDRIVE=0
+          export DEVSTACK_GATE_NEUTRON=1
+          export ZUUL_BRANCH={branch-override}
+          unset ZUUL_PROJECT
+
+          cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
+          ./safe-devstack-vm-gate-wrap.sh
+      - link-logs
+
+    publishers:
+      - devstack-logs-periodic
+      - console-log-periodic
+      - email:
+          recipients: openstack-stable-maint@lists.openstack.org
+
+
 - job-group:
     name: devstack-periodic-jobs
     jobs:
@@ -490,3 +559,5 @@
       - 'periodic-tempest-dsvm-savanna-postgres-full{branch-designator}'
       - 'periodic-tempest-dsvm-savanna-neutron{branch-designator}'
       - 'periodic-devstack-dsvm-neutron{branch-designator}'
+      - 'periodic-tempest-dsvm-ironic{branch-designator}'
+      - 'periodic-tempest-dsvm-ironic-postgres{branch-designator}'
