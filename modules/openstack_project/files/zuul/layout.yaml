@@ -3260,12 +3260,16 @@ projects:
       - gate-ironic-pep8
       - gate-ironic-python26
       - gate-ironic-python27
+      - check-tempest-devstack-vm-ironic
+      - check-tempest-devstack-vm-ironic-postgres
     gate:
       - gate-ironic-requirements
       - gate-ironic-docs
       - gate-ironic-pep8
       - gate-ironic-python26
       - gate-ironic-python27
+      - gate-tempest-devstack-vm-ironic
+      - gate-tempest-devstack-vm-ironic-postgres
     post:
       - ironic-branch-tarball
       - ironic-coverage
