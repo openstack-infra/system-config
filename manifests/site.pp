@@ -439,6 +439,15 @@ node 'pbx.openstack.org' {
   }
 }
 
+node 'seafile.openstack.org' {
+  class { 'openstack_project::seafile' :
+    mysql_host     => hiera('seafile_db_host'),
+    mysql_user     => hiera('seafile_db_user'),
+    mysql_password => hiera('seafile_db_user'),
+    sysadmins      => hiera('sysadmins'),
+  }
+}
+
 # A bare machine, but with a jenkins user
 node /^.*\.template\.openstack\.org$/ {
   include openstack_project::slave_template
