@@ -25,7 +25,7 @@
 
 - job:
     name: check-tempest-devstack-vm-smoke-stable-folsom
-    node: devstack-precise-check
+    node: devstack-precise || devstack-precise-check
 
     wrappers:
       - timeout:
@@ -77,7 +77,7 @@
 
 - job-template:
     name: 'check-tempest-devstack-vm-full-stable-{release}'
-    node: devstack-precise-check
+    node: devstack-precise || devstack-precise-check
 
     wrappers:
       - timeout:
@@ -240,7 +240,7 @@
 
 - job:
     name: check-tempest-devstack-vm-cinder-stable-folsom
-    node: devstack-precise-check
+    node: devstack-precise || devstack-precise-check
 
     wrappers:
       - timeout:
@@ -293,7 +293,7 @@
 
 - job-template:
     name: 'check-tempest-devstack-vm-neutron-stable-{release}'
-    node: devstack-precise-check
+    node: devstack-precise || devstack-precise-check
 
     wrappers:
       - timeout:
@@ -455,7 +455,7 @@
 
 - job-template:
     name: 'check-devstack-vm-cells-stable-{release}'
-    node: devstack-precise-check
+    node: devstack-precise || devstack-precise-check
 
     wrappers:
       - timeout:
@@ -508,7 +508,7 @@
 
 - job-template:
     name: 'check-tempest-devstack-vm-cells-stable-{release}'
-    node: devstack-precise-check
+    node: devstack-precise || devstack-precise-check
 
     wrappers:
       - timeout:
@@ -561,7 +561,7 @@
 
 - job-template:
     name: 'check-tempest-devstack-vm-cells-full-stable-{release}'
-    node: devstack-precise-check
+    node: devstack-precise || devstack-precise-check
 
     wrappers:
       - timeout:
@@ -960,7 +960,7 @@
 
 - job-template:
     name: 'check-tempest-devstack-vm-postgres-full-stable-{release}'
-    node: devstack-precise-check
+    node: devstack-precise || devstack-precise-check
 
     wrappers:
       - timeout:
