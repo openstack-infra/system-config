@@ -224,6 +224,8 @@ jobs:
 # Documentation targets for master and future stable branches:
   - name: openstack-config-reference
     branch: ^(?!stable/(folsom|grizzly)).*$
+  - name: openstack-install-deploy-guide-debian
+    branch: ^(?!stable/(folsom|grizzly)).*$
   - name: openstack-install-deploy-guide-fedora
     branch: ^(?!stable/(folsom|grizzly)).*$
   - name: openstack-install-deploy-guide-opensuse
@@ -2162,6 +2164,7 @@ projects:
       - openstack-config-reference
       - openstack-docs-site
       - openstack-ha-guide
+      - openstack-install-deploy-guide-debian
       - openstack-install-deploy-guide-fedora
       - openstack-openstack-install-fedora-old
       - openstack-install-deploy-guide-opensuse
