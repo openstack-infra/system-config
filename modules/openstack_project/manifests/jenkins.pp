@@ -10,6 +10,7 @@ class openstack_project::jenkins (
   $ssl_chain_file_contents = '',
   $jenkins_ssh_private_key = '',
   $zmq_event_receivers = [],
+  $zuul_url = 'http://zuul.openstack.org/p',
   $sysadmins = []
 ) {
   include openstack_project
@@ -151,9 +152,17 @@ class openstack_project::jenkins (
       group   => 'root',
       mode    => '0755',
       recurse => true,
-      source  =>
-        'puppet:///modules/openstack_project/jenkins_job_builder/config',
-      notify  => Exec['jenkins_jobs_update'],
+      source  => 'puppet:///modules/openstack_project/jenkins_job_builder/config', 
+    }
+
+    file { '/etc/jenkins_jobs/config/devstack-gate.yaml':
+          ensure  => present,
+          owner   => 'root',
+          group   => 'root',
+          mode    => '0755',
+          content => template('openstack_project/jenkins_job_builder/config/devstack-gate.yaml.erb'),
+          require => File['/etc/jenkins_jobs/config'],
+          notify  => Exec['jenkins_jobs_update'],
     }
 
     file { '/etc/default/jenkins':
