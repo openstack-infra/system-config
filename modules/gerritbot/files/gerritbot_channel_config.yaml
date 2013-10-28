@@ -352,3 +352,13 @@ openstack-rally:
       - stackforge/rally
     branches:
       - master
+
+openstack-climate:
+    events:
+      - patchset-created
+      - change-merged
+      - x-vrif-minus-2
+    projects:
+      - stackforge/climate
+    branches:
+      - master
