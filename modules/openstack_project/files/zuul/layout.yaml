@@ -309,6 +309,14 @@ jobs:
     voting: false
   - name: gate-python-tuskarclient-python33
     voting: false
+  - name: gate-murano-metadataclient-python33
+    voting: false
+  - name: gate-murano-common-python33
+    voting: false
+  - name: gate-python-muranoclient-python33
+    voting: false
+  - name: gate-murano-repository-python33
+    voting: false
 # puppet-openstack targets
   - name: gate-puppet-vswitch-puppet-lint
     voting: false
@@ -2930,6 +2938,7 @@ projects:
       - gate-python-muranoclient-pep8
       - gate-python-muranoclient-python26
       - gate-python-muranoclient-python27
+      - gate-python-muranoclient-python33
     gate:
       - gate-python-muranoclient-pep8
       - gate-python-muranoclient-python26
@@ -2950,6 +2959,7 @@ projects:
       - gate-murano-common-pep8
       - gate-murano-common-python26
       - gate-murano-common-python27
+      - gate-murano-common-python33
     gate:
       - gate-murano-common-pep8
       - gate-murano-common-python26
@@ -2970,6 +2980,7 @@ projects:
       - gate-murano-repository-pep8
       - gate-murano-repository-python26
       - gate-murano-repository-python27
+      - gate-murano-repository-python33
     gate:
       - gate-murano-repository-pep8
       - gate-murano-repository-python26
@@ -2981,6 +2992,29 @@ projects:
     release:
       - murano-repository-tarball:
         - murano-repository-pypi-upload:
+          - post-mirror-python26
+          - post-mirror-python27
+          - post-mirror-python33
+
+  - name: stackforge/murano-metadataclient
+    check:
+      - gate-murano-metadataclient-pep8
+      - gate-murano-metadataclient-python26
+      - gate-murano-metadataclient-python27
+      - gate-murano-metadataclient-python33
+      - gate-murano-metadataclient-docs
+    gate:
+      - gate-murano-metadataclient-pep8
+      - gate-murano-metadataclient-python26
+      - gate-murano-metadataclient-python27
+      - gate-murano-metadataclient-docs
+    post:
+      - murano-metadataclient-branch-tarball
+    pre-release:
+      - murano-metadataclient-tarball
+    release:
+      - murano-metadataclient-tarball:
+        - murano-metadataclient-pypi-upload:
           - post-mirror-python26
           - post-mirror-python27
           - post-mirror-python33
