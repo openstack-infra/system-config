@@ -14,6 +14,7 @@
           #!/bin/bash -xe
           export PYTHONUNBUFFERED=true
           export DEVSTACK_GATE_TEMPEST=1
+          export ZUUL_URL=<%= zuul_url %>
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
       - link-logs
@@ -38,7 +39,8 @@
       - shell: |
           #!/bin/bash -xe
           export PYTHONUNBUFFERED=true
-          export DEVSTACK_GATE_TEMPEST=1
+          export DEVSTACK_GATE_TEMPEST
+          export ZUUL_URL=<%= zuul_url %>
           export ZUUL_BRANCH=stable/folsom
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
@@ -65,6 +67,7 @@
           #!/bin/bash -xe
           export PYTHONUNBUFFERED=true
           export DEVSTACK_GATE_TEMPEST=1
+          export ZUUL_URL=<%= zuul_url %>
           export DEVSTACK_GATE_TEMPEST_FULL=1
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
@@ -91,6 +94,7 @@
           #!/bin/bash -xe
           export PYTHONUNBUFFERED=true
           export DEVSTACK_GATE_TEMPEST=1
+          export ZUUL_URL=<%= zuul_url %>
           export DEVSTACK_GATE_TEMPEST_FULL=1
           export ZUUL_BRANCH=stable/{release}
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
@@ -118,6 +122,7 @@
           #!/bin/bash -xe
           export PYTHONUNBUFFERED=true
           export DEVSTACK_GATE_TEMPEST=1
+          export ZUUL_URL=<%= zuul_url %>
           export DEVSTACK_GATE_TEMPEST_FULL=1
           export ZUUL_BRANCH=master
           unset ZUUL_PROJECT
@@ -146,6 +151,7 @@
           #!/bin/bash -xe
           export PYTHONUNBUFFERED=true
           export DEVSTACK_GATE_TEMPEST=1
+          export ZUUL_URL=<%= zuul_url %>
           export DEVSTACK_GATE_TEMPEST_FULL=1
           export ZUUL_BRANCH=master
           unset ZUUL_PROJECT
@@ -174,6 +180,7 @@
           #!/bin/bash -xe
           export PYTHONUNBUFFERED=true
           export DEVSTACK_GATE_TEMPEST=1
+          export ZUUL_URL=<%= zuul_url %>
           export DEVSTACK_GATE_TEMPEST_FULL=1
           export ZUUL_BRANCH=master
           unset ZUUL_PROJECT
@@ -202,6 +209,7 @@
           #!/bin/bash -xe
           export PYTHONUNBUFFERED=true
           export DEVSTACK_GATE_TEMPEST=1
+          export ZUUL_URL=<%= zuul_url %>
           export DEVSTACK_GATE_TEMPEST_HEAT_SLOW=1
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
@@ -228,6 +236,7 @@
           #!/bin/bash -xe
           export PYTHONUNBUFFERED=true
           export DEVSTACK_GATE_TEMPEST=1
+          export ZUUL_URL=<%= zuul_url %>
           export DEVSTACK_GATE_CINDER=1
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
@@ -254,6 +263,7 @@
           #!/bin/bash -xe
           export PYTHONUNBUFFERED=true
           export DEVSTACK_GATE_TEMPEST=1
+          export ZUUL_URL=<%= zuul_url %>
           export DEVSTACK_GATE_CINDER=1
           export ZUUL_BRANCH=stable/folsom
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
@@ -281,6 +291,7 @@
           #!/bin/bash -xe
           export PYTHONUNBUFFERED=true
           export DEVSTACK_GATE_TEMPEST=1
+          export ZUUL_URL=<%= zuul_url %>
           export DEVSTACK_GATE_NEUTRON=1
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
@@ -307,6 +318,7 @@
           #!/bin/bash -xe
           export PYTHONUNBUFFERED=true
           export DEVSTACK_GATE_TEMPEST=1
+          export ZUUL_URL=<%= zuul_url %>
           export DEVSTACK_GATE_NEUTRON=1
           export ZUUL_BRANCH=stable/{release}
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
@@ -334,6 +346,7 @@
           #!/bin/bash -xe
           export PYTHONUNBUFFERED=true
           export DEVSTACK_GATE_TEMPEST=1
+          export ZUUL_URL=<%= zuul_url %>
           export DEVSTACK_GATE_POSTGRES=1
           export DEVSTACK_GATE_NEUTRON=1
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
@@ -361,6 +374,7 @@
           #!/bin/bash -xe
           export PYTHONUNBUFFERED=true
           export DEVSTACK_GATE_TEMPEST=1
+          export ZUUL_URL=<%= zuul_url %>
           export DEVSTACK_GATE_NEUTRON=1
           export DEVSTACK_GATE_TEMPEST_ALLOW_TENANT_ISOLATION=1
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
@@ -388,6 +402,7 @@
           #!/bin/bash -xe
           export PYTHONUNBUFFERED=true
           export DEVSTACK_GATE_TEMPEST=1
+          export ZUUL_URL=<%= zuul_url %>
           export DEVSTACK_GATE_POSTGRES=1
           export DEVSTACK_GATE_NEUTRON=1
           export DEVSTACK_GATE_TEMPEST_ALLOW_TENANT_ISOLATION=1
@@ -416,6 +431,7 @@
           #!/bin/bash -xe
           export PYTHONUNBUFFERED=true
           export DEVSTACK_GATE_TEMPEST=1
+          export ZUUL_URL=<%= zuul_url %>
           export DEVSTACK_GATE_TEMPEST_FULL=1
           export DEVSTACK_GATE_NEUTRON=1
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
@@ -443,6 +459,7 @@
           #!/bin/bash -xe
           export PYTHONUNBUFFERED=true
           export DEVSTACK_GATE_CELLS=1
+          export ZUUL_URL=<%= zuul_url %>
           export DEVSTACK_GATE_EXERCISES=1
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
@@ -469,6 +486,7 @@
           #!/bin/bash -xe
           export PYTHONUNBUFFERED=true
           export DEVSTACK_GATE_CELLS=1
+          export ZUUL_URL=<%= zuul_url %>
           export DEVSTACK_GATE_EXERCISES=1
           export ZUUL_BRANCH=stable/{release}
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
@@ -496,6 +514,7 @@
           #!/bin/bash -xe
           export PYTHONUNBUFFERED=true
           export DEVSTACK_GATE_TEMPEST=1
+          export ZUUL_URL=<%= zuul_url %>
           export DEVSTACK_GATE_CELLS=1
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
@@ -522,6 +541,7 @@
           #!/bin/bash -xe
           export PYTHONUNBUFFERED=true
           export DEVSTACK_GATE_TEMPEST=1
+          export ZUUL_URL=<%= zuul_url %>
           export DEVSTACK_GATE_CELLS=1
           export ZUUL_BRANCH=stable/{release}
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
@@ -549,6 +569,7 @@
           #!/bin/bash -xe
           export PYTHONUNBUFFERED=true
           export DEVSTACK_GATE_TEMPEST=1
+          export ZUUL_URL=<%= zuul_url %>
           export DEVSTACK_GATE_TEMPEST_FULL=1
           export DEVSTACK_GATE_CELLS=1
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
@@ -575,6 +596,7 @@
           #!/bin/bash -xe
           export PYTHONUNBUFFERED=true
           export DEVSTACK_GATE_TEMPEST=1
+          export ZUUL_URL=<%= zuul_url %>
           export DEVSTACK_GATE_TEMPEST_FULL=1
           export DEVSTACK_GATE_CELLS=1
           export ZUUL_BRANCH=stable/{release}
@@ -602,6 +624,7 @@
           #!/bin/bash -xe
           export PYTHONUNBUFFERED=true
           export DEVSTACK_GATE_TEMPEST=1
+          export ZUUL_URL=<%= zuul_url %>
           export DEVSTACK_GATE_TEMPEST_LARGE_OPS=1
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
@@ -627,6 +650,7 @@
           #!/bin/bash -xe
           export PYTHONUNBUFFERED=true
           export DEVSTACK_GATE_TEMPEST=1
+          export ZUUL_URL=<%= zuul_url %>
           export DEVSTACK_GATE_TEMPEST_LARGE_OPS=1
           export DEVSTACK_GATE_NEUTRON=1
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
@@ -653,6 +677,7 @@
           #!/bin/bash -xe
           export PYTHONUNBUFFERED=true
           export DEVSTACK_GATE_TEMPEST=1
+          export ZUUL_URL=<%= zuul_url %>
           export ZUUL_BRANCH=stable/folsom
           unset ZUUL_PROJECT
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
@@ -682,6 +707,7 @@
           #!/bin/bash -xe
           export PYTHONUNBUFFERED=true
           export DEVSTACK_GATE_TEMPEST=1
+          export ZUUL_URL=<%= zuul_url %>
           export DEVSTACK_GATE_CINDER=1
           export ZUUL_BRANCH=stable/folsom
           unset ZUUL_PROJECT
@@ -712,6 +738,7 @@
           #!/bin/bash -xe
           export PYTHONUNBUFFERED=true
           export DEVSTACK_GATE_TEMPEST=1
+          export ZUUL_URL=<%= zuul_url %>
           export DEVSTACK_GATE_TEMPEST_FULL=1
           export ZUUL_BRANCH=stable/grizzly
           unset ZUUL_PROJECT
@@ -742,6 +769,7 @@
           #!/bin/bash -xe
           export PYTHONUNBUFFERED=true
           export DEVSTACK_GATE_TEMPEST=1
+          export ZUUL_URL=<%= zuul_url %>
           export DEVSTACK_GATE_POSTGRES=1
           export DEVSTACK_GATE_TEMPEST_FULL=1
           export ZUUL_BRANCH=stable/grizzly
@@ -773,6 +801,7 @@
           #!/bin/bash -xe
           export PYTHONUNBUFFERED=true
           export DEVSTACK_GATE_TEMPEST=1
+          export ZUUL_URL=<%= zuul_url %>
           export DEVSTACK_GATE_NEUTRON=1
           export ZUUL_BRANCH=stable/grizzly
           unset ZUUL_PROJECT
@@ -803,6 +832,7 @@
           #!/bin/bash -xe
           export PYTHONUNBUFFERED=true
           export DEVSTACK_GATE_TEMPEST=1
+          export ZUUL_URL=<%= zuul_url %>
           export DEVSTACK_GATE_TEMPEST_ALL=1
           export ZUUL_BRANCH=master
           unset ZUUL_PROJECT
@@ -833,6 +863,7 @@
           #!/bin/bash -xe
           export PYTHONUNBUFFERED=true
           export DEVSTACK_GATE_TEMPEST=1
+          export ZUUL_URL=<%= zuul_url %>
           export DEVSTACK_GATE_TEMPEST_COVERAGE=1
           export ZUUL_BRANCH=master
           unset ZUUL_PROJECT
@@ -863,6 +894,7 @@
           #!/bin/bash -xe
           export PYTHONUNBUFFERED=true
           export DEVSTACK_GATE_TEMPEST=1
+          export ZUUL_URL=<%= zuul_url %>
           export DEVSTACK_GATE_TEMPEST_STRESS=1
           export ZUUL_BRANCH=master
           unset ZUUL_PROJECT
@@ -893,6 +925,7 @@
           #!/bin/bash -xe
           export PYTHONUNBUFFERED=true
           export DEVSTACK_GATE_TEMPEST=1
+          export ZUUL_URL=<%= zuul_url %>
           export DEVSTACK_GATE_TEMPEST_FULL=1
           export DEVSTACK_GATE_POSTGRES=1
           export DEVSTACK_GATE_ZEROMQ=1
@@ -921,6 +954,7 @@
           #!/bin/bash -xe
           export PYTHONUNBUFFERED=true
           export DEVSTACK_GATE_TEMPEST=1
+          export ZUUL_URL=<%= zuul_url %>
           export DEVSTACK_GATE_POSTGRES=1
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
@@ -947,6 +981,7 @@
           #!/bin/bash -xe
           export PYTHONUNBUFFERED=true
           export DEVSTACK_GATE_TEMPEST=1
+          export ZUUL_URL=<%= zuul_url %>
           export DEVSTACK_GATE_TEMPEST_FULL=1
           export DEVSTACK_GATE_POSTGRES=1
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
@@ -974,6 +1009,7 @@
           #!/bin/bash -xe
           export PYTHONUNBUFFERED=true
           export DEVSTACK_GATE_TEMPEST=1
+          export ZUUL_URL=<%= zuul_url %>
           export DEVSTACK_GATE_TEMPEST_FULL=1
           export DEVSTACK_GATE_POSTGRES=1
           export ZUUL_BRANCH=stable/{release}
@@ -1002,6 +1038,7 @@
           #!/bin/bash -xe
           export PYTHONUNBUFFERED=true
           export DEVSTACK_GATE_TEMPEST=0
+          export ZUUL_URL=<%= zuul_url %>
           export DEVSTACK_GATE_GRENADE=1
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
@@ -1028,6 +1065,7 @@
           #!/bin/bash -xe
           export PYTHONUNBUFFERED=true
           export DEVSTACK_GATE_TEMPEST=0
+          export ZUUL_URL=<%= zuul_url %>
           export DEVSTACK_GATE_GRENADE=1
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
