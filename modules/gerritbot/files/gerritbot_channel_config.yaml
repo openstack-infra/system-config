@@ -310,6 +310,19 @@ openstack-cloudkeep:
     branches:
       - master
 
+fuel-dev:
+    events:
+      - patchset-created
+      - change-merged
+      - x-vrif-minus-2
+    projects:
+      - stackforge/fuel-web
+      - stackforge/fuel-astute
+      - stackforge/fuel-ostf
+      - stackforge/fuel-main
+    branches:
+      - master
+
 openstack-glance:
     events:
       - patchset-created
