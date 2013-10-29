@@ -1583,6 +1583,11 @@
       - 'openstack-{manual}'
 
       - openstack-install-deploy-guide-{distribution}:
+          distribution: debian
+          system: apt-debian
+          profileos: "debian"
+
+      - openstack-install-deploy-guide-{distribution}:
           distribution: fedora
           system: yum
           profileos: "centos;fedora;rhel"
@@ -1595,7 +1600,7 @@
       - openstack-install-deploy-guide-{distribution}:
           distribution: ubuntu
           system: apt
-          profileos: "ubuntu;debian"
+          profileos: "ubuntu"
 
       # in zuul/layout.yaml specified to only run against
       # stable/folsom and grizzly branches.
