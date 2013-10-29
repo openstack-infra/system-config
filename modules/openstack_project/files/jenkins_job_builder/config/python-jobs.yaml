@@ -153,6 +153,28 @@
 
     node: '{node}'
 
+- job-template:
+    name: 'gate-{name}-tox-{envlist}'
+
+    wrappers:
+      - timeout:
+          timeout: 40
+          fail: true
+      - timestamps
+
+    builders:
+      - gerrit-git-prep
+      - tox:
+          envlist: '{envlist}'
+          github-org: '{github-org}'
+          project: '{name}'
+      - assert-no-extra-files
+
+    publishers:
+      - test-results
+      - console-log
+
+    node: '{node}'
 
 - job-template:
     name: '{name}-tarball'
@@ -222,3 +244,5 @@
       - '{name}-tarball'
       - '{name}-branch-tarball'
       # pylint isn't standard
+      # gate-{name}-tox-{envlist} also isn't standard, but is reserved for
+      # projects that want to run specific jobs via tox

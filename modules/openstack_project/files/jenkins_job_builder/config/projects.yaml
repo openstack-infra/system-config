@@ -1497,6 +1497,16 @@
       - python-jobs
       - pypi-jobs
       - hook-{name}-rtfd
+      - gate-{name}-tox-{envlist}:
+          envlist: wsme-stable
+      - gate-{name}-tox-{envlist}:
+          envlist: wsme-tip
+      - gate-{name}-tox-{envlist}:
+          envlist: ceilometer-stable
+      - gate-{name}-tox-{envlist}:
+          envlist: ceilometer-tip
+      - gate-{name}-tox-{envlist}:
+          envlist: ironic-tip
 
 - project:
     name: python-tuskarclient
