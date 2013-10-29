@@ -2855,6 +2855,20 @@ projects:
       - gate-puppet-ceph-puppet-unit-3.0
       - gate-puppet-ceph-puppet-unit-3.1
 
+  - name: stackforge/puppet-designate
+    check:
+      - gate-puppet-designate-puppet-lint
+      - gate-puppet-designate-puppet-syntax
+      - gate-puppet-designate-puppet-unit-2.7
+      - gate-puppet-designate-puppet-unit-3.0
+      - gate-puppet-designate-puppet-unit-3.1
+    gate:
+      - gate-puppet-designate-puppet-lint
+      - gate-puppet-designate-puppet-syntax
+      - gate-puppet-designate-puppet-unit-2.7
+      - gate-puppet-designate-puppet-unit-3.0
+      - gate-puppet-designate-puppet-unit-3.1
+
   - name: stackforge/puppet-openstack_dev_env
     check:
       - gate-noop
