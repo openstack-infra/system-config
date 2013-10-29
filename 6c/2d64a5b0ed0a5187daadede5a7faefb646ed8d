@@ -1,0 +1,14 @@
+Approved+1: Monty Taylor <mordred@inaugust.com>
+Code-Review+2: Monty Taylor <mordred@inaugust.com>
+Verified+2: Jenkins
+Code-Review+1: Adrian Otto <adrian.otto@rackspace.com>
+Code-Review+2: Clark Boylan <cboylan@sapwetik.org>
+Code-Review+1: Swapnil Kulkarni <swapnilkulkarni2608@gmail.com>
+Code-Review+1: Krishna Raman <kraman@redhat.com>
+Code-Review+1: Clayton Coleman <ccoleman@redhat.com>
+Code-Review+1: Diane Mueller <dmueller2001@gmail.com>
+Submitted-by: Jenkins
+Submitted-at: Tue, 29 Oct 2013 19:25:20 +0000
+Reviewed-on: https://review.openstack.org/53151
+Project: openstack-infra/config
+Branch: refs/heads/master
