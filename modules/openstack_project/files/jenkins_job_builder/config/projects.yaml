@@ -1497,6 +1497,8 @@
       - python-jobs
       - pypi-jobs
       - hook-{name}-rtfd
+      - gate-{name}-tox-generic:
+          envlist: wsme-stable,wsme-tip,ceilometer-stable,ceilometer-tip,ironic-tip
 
 - project:
     name: python-tuskarclient
