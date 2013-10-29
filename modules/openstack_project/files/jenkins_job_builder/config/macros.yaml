@@ -152,6 +152,11 @@
       - shell: "/usr/local/jenkins/slave_scripts/run-unittests.sh py {github-org} {project}"
 
 - builder:
+    name: tox
+    builders:
+      - shell: "/usr/local/jenkins/slave_scripts/run-tox.sh {envlist} {github-org} {project}"
+
+- builder:
     name: assert-no-extra-files
     builders:
       - shell: |
