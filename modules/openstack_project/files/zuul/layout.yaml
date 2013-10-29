@@ -291,8 +291,6 @@ jobs:
     voting: false
   - name: gate-python-ceilometerclient-python33
     voting: false
-  - name: gate-python-cinderclient-python33
-    voting: false
   - name: gate-python-glanceclient-python33
     voting: false
   - name: gate-python-heatclient-python33
@@ -1206,6 +1204,7 @@ projects:
       - gate-python-cinderclient-pep8
       - gate-python-cinderclient-python26
       - gate-python-cinderclient-python27
+      - gate-python-cinderclient-python33
       - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-postgres-full
