@@ -38,7 +38,7 @@ class openstack_project::users {
 
   @user::virtual::localuser { 'clarkb':
     realname => 'Clark Boylan',
-    sshkeys  => "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDlH6SNieyGDWNl4b9TM+zUgk+XTXRtqxyYxNh1p5e00u/ZrZPVrc7buPhnTHzEde0ABX0vgnZI2rC5Hf9cYY0aRgLHDuikQ4CQHPucslgZ5linjtWx5AuURp+oaJRCj00UZubJsatUx5vz+D4MGRLYmL+MErftYdI4sBbolATfLVwjrmxsd6KF1BZ0+9eEv2Xrk+yXN1A5RGPKBiuE6viDMZxrOuy7IW8+TQZW1LrsbTCAD1b+J5Nx0z/Hn3Rz71zEibdwM9xgu5vROu3p9kdaxu+Ndg/SvCCWlzoLQSeIAmcfGUlWg9IjEc3sQexX9BmUAsKQtu3aZFgq2V7aqtDN boylancl@boylancl1\n",
+    sshkeys  => "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDlH6SNieyGDWNl4b9TM+zUgk+XTXRtqxyYxNh1p5e00u/ZrZPVrc7buPhnTHzEde0ABX0vgnZI2rC5Hf9cYY0aRgLHDuikQ4CQHPucslgZ5linjtWx5AuURp+oaJRCj00UZubJsatUx5vz+D4MGRLYmL+MErftYdI4sBbolATfLVwjrmxsd6KF1BZ0+9eEv2Xrk+yXN1A5RGPKBiuE6viDMZxrOuy7IW8+TQZW1LrsbTCAD1b+J5Nx0z/Hn3Rz71zEibdwM9xgu5vROu3p9kdaxu+Ndg/SvCCWlzoLQSeIAmcfGUlWg9IjEc3sQexX9BmUAsKQtu3aZFgq2V7aqtDN boylancl@boylancl1\nssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCnyRPoWBge/B3Abs0z8RUEkkz05UNpRosSnLePWTvCiC+kZFtDNDtK64wDOWHDTLXFq7G9/ibxQb/lW9eTnBAZEkpLwEm8TfCfavRypbczZSgv36fHrxrsBTM+ewSm2Cp+FCLV7nblabmlZpjXHhZBsmoOeHMC2EER20DZiTOZksDtHnzGDamDtv8lB3XL/vw26hOmA8RrTrhLIFrXgufPw2OObN7GqbpizVVpesVtHGiQcamrCZhZES3vJtQwYh1SwqCmoDo88LfNjtQztHdtkTC5gH09ac4+HdBhSmzUjVSAlKxeZBDJACREM1AJuymfRSQ5GfsdF0WYRA8hkmyL clark@chromebook\n",
   }
 
   @user::virtual::localuser { 'rlane':
