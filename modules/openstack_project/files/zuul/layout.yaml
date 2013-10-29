@@ -309,6 +309,8 @@ jobs:
     voting: false
   - name: gate-python-tuskarclient-python33
     voting: false
+  - name: gate-mistral-python33
+    voting: false
   - name: gate-murano-metadataclient-python33
     voting: false
   - name: gate-murano-common-python33
@@ -2874,6 +2876,29 @@ projects:
       - gate-noop
     gate:
       - gate-noop
+
+  - name: stackforge/mistral
+    check:
+      - gate-mistral-pep8
+      - gate-mistral-python26
+      - gate-mistral-python27
+      - gate-mistral-python33
+      - gate-mistral-docs
+    gate:
+      - gate-mistral-pep8
+      - gate-mistral-python26
+      - gate-mistral-python27
+      - gate-mistral-docs
+    post:
+      - mistral-branch-tarball
+    pre-release:
+      - mistral-tarball
+    release:
+      - mistral-tarball:
+        - mistral-pypi-upload:
+          - post-mirror-python26
+          - post-mirror-python27
+          - post-mirror-python33
 
   - name: stackforge/murano-agent
     check:

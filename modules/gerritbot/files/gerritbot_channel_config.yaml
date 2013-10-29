@@ -237,6 +237,16 @@ openstack-chef:
       - master
       - stable/grizzly
 
+openstack-mistral:
+    events:
+      - patchset-created
+      - change-merged
+      - x-vrif-minus-2
+    projects:
+      - stackforge/mistral
+    branches:
+      - master
+
 murano:
     events:
       - patchset-created

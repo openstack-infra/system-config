@@ -1,4 +1,14 @@
 - project:
+    name: mistral
+    github-org: stackforge
+    node: precise
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - python-jobs
+      - pypi-jobs
+
+- project:
     name: murano-api
     github-org: stackforge
     node: precise
