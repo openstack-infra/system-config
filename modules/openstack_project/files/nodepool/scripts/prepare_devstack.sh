@@ -38,6 +38,7 @@ git clone https://review.openstack.org/p/openstack/cinder
 git clone https://review.openstack.org/p/openstack/glance
 git clone https://review.openstack.org/p/openstack/heat
 git clone https://review.openstack.org/p/openstack/horizon
+git clone https://review.openstack.org/p/openstack/ironic
 git clone https://review.openstack.org/p/openstack/keystone
 git clone https://review.openstack.org/p/openstack/neutron
 git clone https://review.openstack.org/p/openstack/nova
@@ -47,6 +48,7 @@ git clone https://review.openstack.org/p/openstack/python-ceilometerclient
 git clone https://review.openstack.org/p/openstack/python-cinderclient
 git clone https://review.openstack.org/p/openstack/python-glanceclient
 git clone https://review.openstack.org/p/openstack/python-heatclient
+git clone https://review.openstack.org/p/openstack/python-ironicclient
 git clone https://review.openstack.org/p/openstack/python-keystoneclient
 git clone https://review.openstack.org/p/openstack/python-neutronclient
 git clone https://review.openstack.org/p/openstack/python-novaclient
