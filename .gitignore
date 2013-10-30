@@ -10,3 +10,5 @@ manifests/secrets.pp
 openstack_infra_config.egg-info/
 /.project
 /.pydevproject
+tools/invite2summit/settings.py
+tools/invite2summit/done*
