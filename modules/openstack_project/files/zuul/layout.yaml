@@ -3043,12 +3043,10 @@ projects:
       - gate-murano-metadataclient-python26
       - gate-murano-metadataclient-python27
       - gate-murano-metadataclient-python33
-      - gate-murano-metadataclient-docs
     gate:
       - gate-murano-metadataclient-pep8
       - gate-murano-metadataclient-python26
       - gate-murano-metadataclient-python27
-      - gate-murano-metadataclient-docs
     post:
       - murano-metadataclient-branch-tarball
     pre-release:
