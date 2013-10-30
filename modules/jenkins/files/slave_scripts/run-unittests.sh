@@ -14,15 +14,8 @@ version=$1
 org=$2
 project=$3
 
-if [[ -z "$version" || -z "$org" || -z "$project" ]]
-then
-  echo "Usage: $? VERSION ORG PROJECT"
-  echo
-  echo "VERSION: The tox environment python version (eg '27')"
-  echo "ORG: The project organization (eg 'openstack')"
-  echo "PROJECT: The project name (eg 'nova')"
-  exit 1
-fi
+source /usr/local/jenkins/slave_scripts/functions.sh
+check_variable_version_org_project "$version" "$org" "$project" "$0"
 
 venv=py$version
 
