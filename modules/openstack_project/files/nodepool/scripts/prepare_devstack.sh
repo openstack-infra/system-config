@@ -18,10 +18,25 @@
 
 mkdir -p ~/cache/files
 mkdir -p ~/cache/pip
-sudo DEBIAN_FRONTEND=noninteractive apt-get \
-  --option "Dpkg::Options::=--force-confold" \
-  --assume-yes install build-essential python-dev \
-  linux-headers-virtual linux-headers-`uname -r`
+
+if cat /etc/*release | grep -e "Fedora" &> /dev/null; then
+
+  /usr/bin/yum -y groupinstall development-tools
+  /usr/bin/yum install -y redhat-lsb-core python-devel kernel-headers
+
+elif cat /etc/*release | grep -e "Ubuntu" &> /dev/null; then
+
+  sudo DEBIAN_FRONTEND=noninteractive apt-get \
+    --option "Dpkg::Options::=--force-confold" \
+    --assume-yes install build-essential python-dev \
+    linux-headers-virtual linux-headers-`uname -r`
+
+else
+
+  echo "Unsupported distro."
+  exit 1
+
+fi
 
 rm -rf ~/workspace-cache
 mkdir -p ~/workspace-cache
@@ -61,7 +76,12 @@ git clone https://review.openstack.org/p/openstack/tempest
 git clone https://review.openstack.org/p/stackforge/pecan
 git clone https://review.openstack.org/p/stackforge/wsme
 
-. /etc/lsb-release
+if [ -f /etc/lsb-release ]; then
+  . /etc/lsb-release
+else
+  lsb_release
+fi
+
 cd /opt/nodepool-scripts/
 python ./devstack-cache.py $DISTRIB_CODENAME
 
