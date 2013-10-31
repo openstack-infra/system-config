@@ -80,6 +80,13 @@ def local_prep(distribution):
             tokenize(fn, debs, distribution, comment='#')
         branch_data['debs'] = debs
 
+        rpms = []
+        rpmdir = os.path.join(DEVSTACK, 'files', 'rpms')
+        for fn in os.listdir(rpmdir):
+            fn = os.path.join(rpmdir, fn)
+            tokenize(fn, rpms, distribution, comment='#')
+        branch_data['rpms'] = rpms
+
         images = []
         for line in open(os.path.join(DEVSTACK, 'stackrc')):
             line = line.strip()
@@ -110,6 +117,10 @@ def main():
         if branch_data['debs']:
             run_local(['sudo', 'apt-get', '-y', '-d', 'install'] +
                       branch_data['debs'])
+
+        if branch_data['rpms']:
+            run_local(['sudo', 'yum', 'install', '-y'] +
+                      branch_data['rpms'])
 
         for url in branch_data['images']:
             fname = url.split('/')[-1]
