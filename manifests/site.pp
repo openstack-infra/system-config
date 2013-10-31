@@ -192,12 +192,6 @@ node 'eavesdrop.openstack.org' {
   }
 }
 
-node 'pypi.openstack.org' {
-  class { 'openstack_project::pypi':
-    sysadmins => hiera('sysadmins'),
-  }
-}
-
 node 'etherpad.openstack.org' {
   class { 'openstack_project::etherpad':
     ssl_cert_file_contents  => hiera('etherpad_ssl_cert_file_contents'),
