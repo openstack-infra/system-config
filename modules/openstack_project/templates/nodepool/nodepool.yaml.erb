@@ -31,6 +31,12 @@ providers:
         setup: prepare_node_devstack.sh
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
+      - name: devstack-f19-check
+        base-image: 'Fedora 19 (Schrodinger\'s Cat)'
+        min-ram: 8192
+        setup: prepare_node_devstack.sh
+        username: jenkins
+        private-key: /home/nodepool/.ssh/id_rsa
   - name: rax-ord
     region-name: 'ORD'
     service-type: 'compute'
@@ -48,6 +54,12 @@ providers:
         setup: prepare_node_devstack.sh
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
+      - name: devstack-f19-check
+        base-image: 'Fedora 19 (Schrodinger\'s Cat)'
+        min-ram: 8192
+        setup: prepare_node_devstack.sh
+        username: jenkins
+        private-key: /home/nodepool/.ssh/id_rsa
   - name: rax-iad
     region-name: 'IAD'
     service-type: 'compute'
@@ -61,6 +73,12 @@ providers:
     images:
       - name: devstack-precise-check
         base-image: 'Ubuntu 12.04 LTS (Precise Pangolin)'
+        min-ram: 8192
+        setup: prepare_node_devstack.sh
+        username: jenkins
+        private-key: /home/nodepool/.ssh/id_rsa
+      - name: devstack-f19-check
+        base-image: 'Fedora 19 (Schrodinger\'s Cat)'
         min-ram: 8192
         setup: prepare_node_devstack.sh
         username: jenkins
@@ -141,6 +159,12 @@ targets:
       apikey: '<%= jenkins_api_key %>'
       credentials-id: '<%= jenkins_credentials_id %>'
     images:
+      - name: devstack-f19-check
+        min-ready: 2
+        providers:
+          - name: rax-iad
+          - name: rax-dfw
+          - name: rax-ord
       - name: devstack-precise
         min-ready: 20
         providers:
@@ -164,6 +188,12 @@ targets:
       apikey: '<%= jenkins_api_key %>'
       credentials-id: '<%= jenkins_credentials_id %>'
     images:
+      - name: devstack-f19-check
+        min-ready: 2
+        providers:
+          - name: rax-iad
+          - name: rax-dfw
+          - name: rax-ord
       - name: devstack-precise
         min-ready: 20
         providers:
