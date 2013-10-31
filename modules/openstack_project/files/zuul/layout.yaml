@@ -1717,7 +1717,6 @@ projects:
       - check-tempest-devstack-vm-postgres-full
       - check-tempest-devstack-vm-cinder
       - check-tempest-devstack-vm-neutron
-      - check-tempest-devstack-vm-neutron-pg-isolated
       - gate-tempest-devstack-vm-large-ops
       - gate-tempest-devstack-vm-neutron-large-ops
       - check-grenade-devstack-vm
@@ -1731,7 +1730,6 @@ projects:
       - gate-tempest-devstack-vm-postgres-full
       - gate-tempest-devstack-vm-cinder
       - gate-tempest-devstack-vm-neutron
-      - gate-tempest-devstack-vm-neutron-pg-isolated
       - gate-tempest-devstack-vm-large-ops
       - gate-tempest-devstack-vm-neutron-large-ops
       - gate-grenade-devstack-vm
