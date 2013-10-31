@@ -73,12 +73,21 @@ def local_prep(distribution):
         run_local(['git', 'checkout', branch], cwd=DEVSTACK)
         run_local(['git', 'pull', '--ff-only', 'origin'], cwd=DEVSTACK)
 
-        debs = []
-        debdir = os.path.join(DEVSTACK, 'files', 'apts')
-        for fn in os.listdir(debdir):
-            fn = os.path.join(debdir, fn)
-            tokenize(fn, debs, distribution, comment='#')
-        branch_data['debs'] = debs
+        if os.path.exists('/usr/bin/apt-get'):
+            debs = []
+            debdir = os.path.join(DEVSTACK, 'files', 'apts')
+            for fn in os.listdir(debdir):
+                fn = os.path.join(debdir, fn)
+                tokenize(fn, debs, distribution, comment='#')
+            branch_data['debs'] = debs
+
+        if os.path.exists('/usr/bin/rpm'):
+            rpms = []
+            rpmdir = os.path.join(DEVSTACK, 'files', 'rpms')
+            for fn in os.listdir(rpmdir):
+                fn = os.path.join(rpmdir, fn)
+                tokenize(fn, rpms, distribution, comment='#')
+            branch_data['rpms'] = rpms
 
         images = []
         for line in open(os.path.join(DEVSTACK, 'stackrc')):
@@ -110,6 +119,10 @@ def main():
         if branch_data['debs']:
             run_local(['sudo', 'apt-get', '-y', '-d', 'install'] +
                       branch_data['debs'])
+
+        if branch_data['rpms']:
+            run_local(['sudo', 'yum', 'install', '-y', '--downloadonly'] +
+                      branch_data['rpms'])
 
         for url in branch_data['images']:
             fname = url.split('/')[-1]
