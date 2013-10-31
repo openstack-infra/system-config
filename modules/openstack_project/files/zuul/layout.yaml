@@ -759,7 +759,8 @@ projects:
     pre-release:
       - horizon-tarball
     release:
-      - horizon-tarball
+      - horizon-tarball:
+        - horizon-pypi-upload
       - horizon-docs
       - horizon-merge-release-tags
     periodic:
