@@ -324,6 +324,10 @@ jobs:
     voting: false
   - name: gate-puppet-vswitch-puppet-syntax
     voting: false
+  - name: ^gate-puppet-.*-puppet-unit-3.2$
+    voting: false
+  - name: ^gate-puppet-.*-puppet-unit-3.3$
+    voting: false
 
 projects:
   - name: openstack-infra/zuul
@@ -2690,12 +2694,16 @@ projects:
       - gate-puppet-ceilometer-puppet-unit-2.7
       - gate-puppet-ceilometer-puppet-unit-3.0
       - gate-puppet-ceilometer-puppet-unit-3.1
+      - gate-puppet-ceilometer-puppet-unit-3.2
+      - gate-puppet-ceilometer-puppet-unit-3.3
     gate:
       - gate-puppet-ceilometer-puppet-lint
       - gate-puppet-ceilometer-puppet-syntax
       - gate-puppet-ceilometer-puppet-unit-2.7
       - gate-puppet-ceilometer-puppet-unit-3.0
       - gate-puppet-ceilometer-puppet-unit-3.1
+      - gate-puppet-ceilometer-puppet-unit-3.2
+      - gate-puppet-ceilometer-puppet-unit-3.3
 
   - name: stackforge/puppet-cinder
     check:
@@ -2704,12 +2712,34 @@ projects:
       - gate-puppet-cinder-puppet-unit-2.7
       - gate-puppet-cinder-puppet-unit-3.0
       - gate-puppet-cinder-puppet-unit-3.1
+      - gate-puppet-cinder-puppet-unit-3.2
+      - gate-puppet-cinder-puppet-unit-3.3
     gate:
       - gate-puppet-cinder-puppet-lint
       - gate-puppet-cinder-puppet-syntax
       - gate-puppet-cinder-puppet-unit-2.7
       - gate-puppet-cinder-puppet-unit-3.0
       - gate-puppet-cinder-puppet-unit-3.1
+      - gate-puppet-cinder-puppet-unit-3.2
+      - gate-puppet-cinder-puppet-unit-3.3
+
+  - name: stackforge/puppet-designate
+    check:
+      - gate-puppet-designate-puppet-lint
+      - gate-puppet-designate-puppet-syntax
+      - gate-puppet-designate-puppet-unit-2.7
+      - gate-puppet-designate-puppet-unit-3.0
+      - gate-puppet-designate-puppet-unit-3.1
+      - gate-puppet-designate-puppet-unit-3.2
+      - gate-puppet-designate-puppet-unit-3.3
+    gate:
+      - gate-puppet-designate-puppet-lint
+      - gate-puppet-designate-puppet-syntax
+      - gate-puppet-designate-puppet-unit-2.7
+      - gate-puppet-designate-puppet-unit-3.0
+      - gate-puppet-designate-puppet-unit-3.1
+      - gate-puppet-designate-puppet-unit-3.2
+      - gate-puppet-designate-puppet-unit-3.3
 
   - name: stackforge/puppet-glance
     check:
@@ -2718,12 +2748,16 @@ projects:
       - gate-puppet-glance-puppet-unit-2.7
       - gate-puppet-glance-puppet-unit-3.0
       - gate-puppet-glance-puppet-unit-3.1
+      - gate-puppet-glance-puppet-unit-3.2
+      - gate-puppet-glance-puppet-unit-3.3
     gate:
       - gate-puppet-glance-puppet-lint
       - gate-puppet-glance-puppet-syntax
       - gate-puppet-glance-puppet-unit-2.7
       - gate-puppet-glance-puppet-unit-3.0
       - gate-puppet-glance-puppet-unit-3.1
+      - gate-puppet-glance-puppet-unit-3.2
+      - gate-puppet-glance-puppet-unit-3.3
 
   - name: stackforge/puppet-heat
     check:
@@ -2732,12 +2766,16 @@ projects:
       - gate-puppet-heat-puppet-unit-2.7
       - gate-puppet-heat-puppet-unit-3.0
       - gate-puppet-heat-puppet-unit-3.1
+      - gate-puppet-heat-puppet-unit-3.2
+      - gate-puppet-heat-puppet-unit-3.3
     gate:
       - gate-puppet-heat-puppet-lint
       - gate-puppet-heat-puppet-syntax
       - gate-puppet-heat-puppet-unit-2.7
       - gate-puppet-heat-puppet-unit-3.0
       - gate-puppet-heat-puppet-unit-3.1
+      - gate-puppet-heat-puppet-unit-3.2
+      - gate-puppet-heat-puppet-unit-3.3
 
   - name: stackforge/puppet-horizon
     check:
@@ -2746,12 +2784,16 @@ projects:
       - gate-puppet-horizon-puppet-unit-2.7
       - gate-puppet-horizon-puppet-unit-3.0
       - gate-puppet-horizon-puppet-unit-3.1
+      - gate-puppet-horizon-puppet-unit-3.2
+      - gate-puppet-horizon-puppet-unit-3.3
     gate:
       - gate-puppet-horizon-puppet-lint
       - gate-puppet-horizon-puppet-syntax
       - gate-puppet-horizon-puppet-unit-2.7
       - gate-puppet-horizon-puppet-unit-3.0
       - gate-puppet-horizon-puppet-unit-3.1
+      - gate-puppet-horizon-puppet-unit-3.2
+      - gate-puppet-horizon-puppet-unit-3.3
 
   - name: stackforge/puppet-keystone
     check:
@@ -2760,12 +2802,16 @@ projects:
       - gate-puppet-keystone-puppet-unit-2.7
       - gate-puppet-keystone-puppet-unit-3.0
       - gate-puppet-keystone-puppet-unit-3.1
+      - gate-puppet-keystone-puppet-unit-3.2
+      - gate-puppet-keystone-puppet-unit-3.3
     gate:
       - gate-puppet-keystone-puppet-lint
       - gate-puppet-keystone-puppet-syntax
       - gate-puppet-keystone-puppet-unit-2.7
       - gate-puppet-keystone-puppet-unit-3.0
       - gate-puppet-keystone-puppet-unit-3.1
+      - gate-puppet-keystone-puppet-unit-3.2
+      - gate-puppet-keystone-puppet-unit-3.3
 
   - name: stackforge/puppet-nova
     check:
@@ -2774,12 +2820,16 @@ projects:
       - gate-puppet-nova-puppet-unit-2.7
       - gate-puppet-nova-puppet-unit-3.0
       - gate-puppet-nova-puppet-unit-3.1
+      - gate-puppet-nova-puppet-unit-3.2
+      - gate-puppet-nova-puppet-unit-3.3
     gate:
       - gate-puppet-nova-puppet-lint
       - gate-puppet-nova-puppet-syntax
       - gate-puppet-nova-puppet-unit-2.7
       - gate-puppet-nova-puppet-unit-3.0
       - gate-puppet-nova-puppet-unit-3.1
+      - gate-puppet-nova-puppet-unit-3.2
+      - gate-puppet-nova-puppet-unit-3.3
 
   - name: stackforge/puppet-neutron
     check:
@@ -2788,12 +2838,16 @@ projects:
       - gate-puppet-neutron-puppet-unit-2.7
       - gate-puppet-neutron-puppet-unit-3.0
       - gate-puppet-neutron-puppet-unit-3.1
+      - gate-puppet-neutron-puppet-unit-3.2
+      - gate-puppet-neutron-puppet-unit-3.3
     gate:
       - gate-puppet-neutron-puppet-lint
       - gate-puppet-neutron-puppet-syntax
       - gate-puppet-neutron-puppet-unit-2.7
       - gate-puppet-neutron-puppet-unit-3.0
       - gate-puppet-neutron-puppet-unit-3.1
+      - gate-puppet-neutron-puppet-unit-3.2
+      - gate-puppet-neutron-puppet-unit-3.3
 
   - name: stackforge/puppet-openstack
     check:
@@ -2802,12 +2856,16 @@ projects:
       - gate-puppet-openstack-puppet-unit-2.7
       - gate-puppet-openstack-puppet-unit-3.0
       - gate-puppet-openstack-puppet-unit-3.1
+      - gate-puppet-openstack-puppet-unit-3.2
+      - gate-puppet-openstack-puppet-unit-3.3
     gate:
       - gate-puppet-openstack-puppet-lint
       - gate-puppet-openstack-puppet-syntax
       - gate-puppet-openstack-puppet-unit-2.7
       - gate-puppet-openstack-puppet-unit-3.0
       - gate-puppet-openstack-puppet-unit-3.1
+      - gate-puppet-openstack-puppet-unit-3.2
+      - gate-puppet-openstack-puppet-unit-3.3
 
   - name: stackforge/puppet-swift
     check:
@@ -2816,12 +2874,16 @@ projects:
       - gate-puppet-swift-puppet-unit-2.7
       - gate-puppet-swift-puppet-unit-3.0
       - gate-puppet-swift-puppet-unit-3.1
+      - gate-puppet-swift-puppet-unit-3.2
+      - gate-puppet-swift-puppet-unit-3.3
     gate:
       - gate-puppet-swift-puppet-lint
       - gate-puppet-swift-puppet-syntax
       - gate-puppet-swift-puppet-unit-2.7
       - gate-puppet-swift-puppet-unit-3.0
       - gate-puppet-swift-puppet-unit-3.1
+      - gate-puppet-swift-puppet-unit-3.2
+      - gate-puppet-swift-puppet-unit-3.3
 
   - name: stackforge/puppet-tempest
     check:
@@ -2830,12 +2892,16 @@ projects:
       - gate-puppet-tempest-puppet-unit-2.7
       - gate-puppet-tempest-puppet-unit-3.0
       - gate-puppet-tempest-puppet-unit-3.1
+      - gate-puppet-tempest-puppet-unit-3.2
+      - gate-puppet-tempest-puppet-unit-3.3
     gate:
       - gate-puppet-tempest-puppet-lint
       - gate-puppet-tempest-puppet-syntax
       - gate-puppet-tempest-puppet-unit-2.7
       - gate-puppet-tempest-puppet-unit-3.0
       - gate-puppet-tempest-puppet-unit-3.1
+      - gate-puppet-tempest-puppet-unit-3.2
+      - gate-puppet-tempest-puppet-unit-3.3
 
   - name: stackforge/puppet-vswitch
     check:
@@ -2862,20 +2928,6 @@ projects:
       - gate-puppet-ceph-puppet-unit-2.7
       - gate-puppet-ceph-puppet-unit-3.0
       - gate-puppet-ceph-puppet-unit-3.1
-
-  - name: stackforge/puppet-designate
-    check:
-      - gate-puppet-designate-puppet-lint
-      - gate-puppet-designate-puppet-syntax
-      - gate-puppet-designate-puppet-unit-2.7
-      - gate-puppet-designate-puppet-unit-3.0
-      - gate-puppet-designate-puppet-unit-3.1
-    gate:
-      - gate-puppet-designate-puppet-lint
-      - gate-puppet-designate-puppet-syntax
-      - gate-puppet-designate-puppet-unit-2.7
-      - gate-puppet-designate-puppet-unit-3.0
-      - gate-puppet-designate-puppet-unit-3.1
 
   - name: stackforge/puppet-openstack_dev_env
     check:
