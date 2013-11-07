@@ -3586,3 +3586,16 @@ projects:
 #      - gate-solum-docs
     post:
       - solum-coverage
+
+  - name: stackforge/basicdb
+    check:
+      - gate-basicdb-pep8
+      - gate-basicdb-python26
+      - gate-basicdb-python27
+      - gate-basicdb-python33
+      - gate-basicdb-pypy
+    gate:
+      - gate-basicdb-python27
+      - gate-basicdb-pypy
+    post:
+      - basicdb-coverage
