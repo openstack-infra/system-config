@@ -336,6 +336,24 @@ class jenkins::slave(
         require => Apt::Ppa['ppa:pypy/ppa']
       }
     }
+
+    apt::key { 'riak':
+      key        => 'DDF2E833',
+      key_source => 'http://apt.basho.com/gpg/basho.apt.key',
+    }
+
+    apt::source { 'riak':
+      location    => 'http://apt.basho.com',
+      repos       => 'main',
+      key         => 'DDF2E833',
+      include_src => false,
+      require     => Apt::Key['riak']
+    }
+
+    package { 'riak':
+      ensure  => present,
+      require => Apt::Source['riak']
+    }
   }
 
   # Increase syslog message size in order to capture

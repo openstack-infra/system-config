@@ -1733,3 +1733,12 @@
 
     jobs:
       - python-jobs
+
+- project:
+    name: basicdb
+    github-org: stackforge
+    node: precise
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - python-jobs
