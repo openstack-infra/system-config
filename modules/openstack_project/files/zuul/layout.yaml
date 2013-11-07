@@ -302,6 +302,8 @@ jobs:
     voting: false
   - name: gate-rubick-python33
     voting: false
+  - name: ^gate-basicdb-(pep8|python(33|26))$
+    voting: false
 # puppet-openstack targets
   - name: gate-puppet-vswitch-puppet-lint
     voting: false
@@ -3699,3 +3701,16 @@ projects:
       - gate-python-solumclient-docs
     post:
       - python-solumclient-coverage
+
+  - name: stackforge/basicdb
+    check:
+      - gate-basicdb-pep8
+      - gate-basicdb-python26
+      - gate-basicdb-python27
+      - gate-basicdb-python33
+      - gate-basicdb-pypy
+    gate:
+      - gate-basicdb-python27
+      - gate-basicdb-pypy
+    post:
+      - basicdb-coverage
