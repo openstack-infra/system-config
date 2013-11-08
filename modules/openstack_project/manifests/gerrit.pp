@@ -147,6 +147,11 @@ class openstack_project::gerrit (
         match => '<li>([^ ]+) <a href=\"[^\"]+\">([^<]+)</a> : ([^ ]+)([^<]*)</li>',
         html  => '<li><span class=\"comment_test_name\"><a href=\"$2\">$1</a></span> <span class=\"comment_test_result\"><span class=\"result_$3\">$3</span>$4</span></li>',
       },
+      {
+        name  => 'launchpadbug',
+        match => '<a href=\"(https://bugs\\.launchpad\\.net/[a-zA-Z0-9\\-]+/\\+bug/(\\d+))[^\"]+\">[^<]+</a>',
+        html  => '<a href=\"$1\">$1</a>'
+      }
     ],
     war                             => $war,
     contactstore                    => $contactstore,
