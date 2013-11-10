@@ -35,8 +35,9 @@ Contents:
 .. toctree::
    :hidden:
 
-   third_party
+   running-your-own
    stackforge
+   third_party
 
 
 Indices and tables
