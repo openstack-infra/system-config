@@ -881,6 +881,7 @@ projects:
     experimental:
       - gate-grenade-devstack-vm-stable
       - gate-tempest-devstack-vm-neutron-full
+      - periodic-tempest-devstack-vm-coverage
     post:
       - nova-branch-tarball
       - nova-coverage
@@ -1738,6 +1739,7 @@ projects:
       - gate-grenade-devstack-vm-stable
       - gate-devstack-vm-cells
       - gate-tempest-devstack-vm-neutron-full
+      - periodic-tempest-devstack-vm-coverage
     post:
       - tempest-docs
       - tempest-branch-tarball
