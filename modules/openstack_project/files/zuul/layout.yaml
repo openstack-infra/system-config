@@ -3570,6 +3570,12 @@ projects:
     gate:
       - gate-noop
 
+  - name: stackforge/fuel-provision
+    check:
+      - gate-noop
+    gate:
+      - gate-noop
+
   - name: stackforge/fuel-web
     check:
       - gate-noop
