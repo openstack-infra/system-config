@@ -1803,6 +1803,14 @@ projects:
     gate:
       - gate-noop
 
+  - name: stackforge/congress
+    check:
+      - gate-congress-pep8
+      - gate-congress-python27
+    gate:
+      - gate-congress-pep8
+      - gate-congress-python27
+
   - name: stackforge/MRaaS
     check:
       - gate-noop
