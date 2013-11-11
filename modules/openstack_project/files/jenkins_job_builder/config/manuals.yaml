@@ -160,7 +160,7 @@
       goals: '-Drelease.path.name=${DOC_RELEASE_PATH} -Dcomments.enabled=${DOC_COMMENTS_ENABLED} clean generate-sources -B'
 
     publishers:
-      - console-log-post
+      - console-log
       - ftp:
           site: docs.openstack.org
           source: 'generated/ja/openstack-ops/target/docbkx/webhelp/**'
