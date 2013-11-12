@@ -1821,6 +1821,23 @@ projects:
     gate:
       - gate-noop
 
+  - name: stackforge/swiftsync
+    check:
+      - gate-swiftsync-pep8
+      - gate-swiftsync-python27
+    gate:
+      - gate-swiftsync-pep8
+      - gate-swiftsync-python27
+    post:
+      - hook-swiftsync-rtfd
+      - swiftsync-branch-tarball
+    pre-release:
+      - hook-swiftsync-rtfd
+      - swiftsync-tarball
+    release:
+      - hook-swiftsync-rtfd
+      - swiftsync-tarball
+
   - name: stackforge/libra
     check:
       - gate-libra-pep8
