@@ -347,6 +347,12 @@ projects:
     periodic:
       - periodic-test
 
+  - name: openstack-infra/zuul-packaging
+    check:
+      - gate-noop
+    gate:
+      - gate-noop
+
   - name: openstack-infra/askbot-theme
     check:
       - gate-noop
