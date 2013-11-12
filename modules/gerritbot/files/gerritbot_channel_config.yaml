@@ -82,6 +82,7 @@ openstack-dns:
       - stackforge/python-designateclient
     branches:
       - master
+      - stable/havana
 
 openstack-trove:
     events:
