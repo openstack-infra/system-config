@@ -1,0 +1,12 @@
+Verified+2: Jenkins
+Approved+1: Clark Boylan <cboylan@sapwetik.org>
+Code-Review+2: Clark Boylan <cboylan@sapwetik.org>
+Code-Review-1: lifeless <robertc@robertcollins.net>
+Code-Review+2: Jeremy Stanley <fungi@yuggoth.org>
+Code-Review+1: Elizabeth Krumbach Joseph <lyz@princessleia.com>
+Code-Review-1: QianLin <lin.qian@huawei.com>
+Submitted-by: Jenkins
+Submitted-at: Tue, 12 Nov 2013 18:21:21 +0000
+Reviewed-on: https://review.openstack.org/54817
+Project: openstack-infra/config
+Branch: refs/heads/master
