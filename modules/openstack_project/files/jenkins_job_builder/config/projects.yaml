@@ -1697,3 +1697,13 @@
       - 'gate-{name}-pep8'
       - '{name}-tarball'
       - pypi-jobs
+
+- project:
+    name: tomograph
+    github-org: stackforge
+    node: precise
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - python-jobs
+      - pypi-jobs
