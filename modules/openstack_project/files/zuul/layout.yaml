@@ -3688,3 +3688,15 @@ projects:
           - post-mirror-python26
           - post-mirror-python27
           - post-mirror-python33
+
+  - name: stackforge/turbo-hipster
+    check:
+      - gate-turbo-hipster-docs
+      - gate-turbo-hipster-pep8
+      - gate-turbo-hipster-python27
+    gate:
+      - gate-turbo-hipster-docs
+      - gate-turbo-hipster-pep8
+      - gate-turbo-hipster-python27
+    post:
+      - turbo-hipster-coverage
