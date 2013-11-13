@@ -116,6 +116,60 @@ providers:
         setup: prepare_node_devstack.sh
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
+  - name: hpcloud-region-b-az1
+    region-name: 'region-b.geo-1'
+    availability-zone: 'az1'
+    service-type: 'compute'
+    service-name: 'Compute'
+    username: '<%= hpcloud_username %>'
+    password: '<%= hpcloud_password %>'
+    project-id: '<%= hpcloud_project %>'
+    auth-url: 'https://region-b.geo-1.identity.hpcloudsvc.com:35357/v2.0'
+    boot-timeout: 120
+    max-servers: 2
+    images:
+      - name: devstack-precise
+        base-image: 'Ubuntu Precise 12.04 LTS Server 64-bit 20121026 (b)'
+        min-ram: 8192
+        setup: prepare_node_devstack.sh
+        username: jenkins
+        private-key: /home/nodepool/.ssh/id_rsa
+  - name: hpcloud-region-b-az1
+    region-name: 'region-b.geo-1'
+    availability-zone: 'az2'
+    service-type: 'compute'
+    service-name: 'Compute'
+    username: '<%= hpcloud_username %>'
+    password: '<%= hpcloud_password %>'
+    project-id: '<%= hpcloud_project %>'
+    auth-url: 'https://region-b.geo-1.identity.hpcloudsvc.com:35357/v2.0'
+    boot-timeout: 120
+    max-servers: 2
+    images:
+      - name: devstack-precise
+        base-image: 'Ubuntu Precise 12.04 LTS Server 64-bit 20121026 (b)'
+        min-ram: 8192
+        setup: prepare_node_devstack.sh
+        username: jenkins
+        private-key: /home/nodepool/.ssh/id_rsa
+  - name: hpcloud-region-b-az1
+    region-name: 'region-b.geo-1'
+    availability-zone: 'az3'
+    service-type: 'compute'
+    service-name: 'Compute'
+    username: '<%= hpcloud_username %>'
+    password: '<%= hpcloud_password %>'
+    project-id: '<%= hpcloud_project %>'
+    auth-url: 'https://region-b.geo-1.identity.hpcloudsvc.com:35357/v2.0'
+    boot-timeout: 120
+    max-servers: 2
+    images:
+      - name: devstack-precise
+        base-image: 'Ubuntu Precise 12.04 LTS Server 64-bit 20121026 (b)'
+        min-ram: 8192
+        setup: prepare_node_devstack.sh
+        username: jenkins
+        private-key: /home/nodepool/.ssh/id_rsa
   - name: tripleo-test-cloud
     service-type: 'compute'
     service-name: 'nova'
