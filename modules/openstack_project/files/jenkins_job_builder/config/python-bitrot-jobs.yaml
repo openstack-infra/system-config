@@ -97,18 +97,6 @@
 
 
 - job-group:
-    name: python-folsom-bitrot-jobs
-    branch: 'stable/folsom'
-    branch-name: 'stable-folsom'
-    email: openstack-stable-maint@lists.openstack.org
-    node: precise
-    jobs:
-      - 'periodic-{name}-python26-{branch-name}'
-      - 'periodic-{name}-python27-{branch-name}'
-      - 'periodic-{name}-docs-{branch-name}'
-
-
-- job-group:
     name: python-grizzly-bitrot-jobs
     branch: 'stable/grizzly'
     branch-name: 'stable-grizzly'

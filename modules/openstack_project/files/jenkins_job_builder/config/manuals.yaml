@@ -24,8 +24,7 @@
               keep-hierarchy: true
               copy-after-failure: true
 
-# in zuul/layout.yaml specified to only run against stable/folsom and grizzly
-# branches.
+# in zuul/layout.yaml specified to only run against stable/grizzly
 - job:
     name: gate-openstack-manuals-validate
     node: precise
