@@ -754,6 +754,69 @@ projects:
         - django_openstack_auth-pypi-upload
       - django_openstack_auth-docs
 
+  - name: openstack/ironic
+    check:
+      - gate-ironic-requirements
+      - gate-ironic-docs
+      - gate-ironic-pep8
+      - gate-ironic-python26
+      - gate-ironic-python27
+      - check-tempest-devstack-vm-full
+      - check-tempest-devstack-vm-postgres-full
+      - check-tempest-devstack-vm-neutron
+      - gate-tempest-devstack-vm-large-ops
+      - gate-tempest-devstack-vm-neutron-large-ops
+    gate:
+      - gate-ironic-requirements
+      - gate-ironic-docs
+      - gate-ironic-pep8
+      - gate-ironic-python26
+      - gate-ironic-python27
+      - gate-tempest-devstack-vm-full
+      - gate-tempest-devstack-vm-postgres-full
+      - gate-tempest-devstack-vm-neutron
+      - gate-tempest-devstack-vm-large-ops
+      - gate-tempest-devstack-vm-neutron-large-ops
+    post:
+      - ironic-branch-tarball
+      - ironic-coverage
+      - ironic-docs
+      - ironic-upstream-translation-update
+    pre-release:
+      - ironic-tarball
+    release:
+      - ironic-tarball
+      - ironic-docs
+      - ironic-merge-release-tags
+    periodic:
+      - ironic-propose-translation-update
+
+  - name: openstack/python-ironicclient
+    check:
+      - gate-python-ironicclient-pep8
+      - gate-python-ironicclient-python26
+      - gate-python-ironicclient-python27
+      - gate-python-ironicclient-python33
+      - gate-python-ironicclient-pypy
+      - check-tempest-devstack-vm-full
+      - check-tempest-devstack-vm-postgres-full
+      - check-tempest-devstack-vm-neutron
+      - gate-tempest-devstack-vm-large-ops
+      - gate-tempest-devstack-vm-neutron-large-ops
+    gate:
+      - gate-python-ironicclient-pep8
+      - gate-python-ironicclient-python26
+      - gate-python-ironicclient-python27
+      - gate-python-ironicclient-python33
+      - gate-python-ironicclient-pypy
+      - gate-tempest-devstack-vm-full
+      - gate-tempest-devstack-vm-postgres-full
+      - gate-tempest-devstack-vm-neutron
+      - gate-tempest-devstack-vm-large-ops
+      - gate-tempest-devstack-vm-neutron-large-ops
+    post:
+      - python-ironicclient-coverage
+
   - name: openstack/keystone
     check:
       - gate-keystone-requirements
@@ -3202,49 +3265,6 @@ projects:
     gate:
       - gate-cookbook-openstack-ops-messaging-chef-lint
       - gate-cookbook-openstack-ops-messaging-chef-unit
-
-  - name: openstack/ironic
-    check:
-      - gate-ironic-requirements
-      - gate-ironic-docs
-      - gate-ironic-pep8
-      - gate-ironic-python26
-      - gate-ironic-python27
-    gate:
-      - gate-ironic-requirements
-      - gate-ironic-docs
-      - gate-ironic-pep8
-      - gate-ironic-python26
-      - gate-ironic-python27
-    post:
-      - ironic-branch-tarball
-      - ironic-coverage
-      - ironic-docs
-      - ironic-upstream-translation-update
-    pre-release:
-      - ironic-tarball
-    release:
-      - ironic-tarball
-      - ironic-docs
-      - ironic-merge-release-tags
-    periodic:
-      - ironic-propose-translation-update
-
-  - name: openstack/python-ironicclient
-    check:
-      - gate-python-ironicclient-pep8
-      - gate-python-ironicclient-python26
-      - gate-python-ironicclient-python27
-      - gate-python-ironicclient-python33
-      - gate-python-ironicclient-pypy
-    gate:
-      - gate-python-ironicclient-pep8
-      - gate-python-ironicclient-python26
-      - gate-python-ironicclient-python27
-      - gate-python-ironicclient-python33
-      - gate-python-ironicclient-pypy
-    post:
-      - python-ironicclient-coverage
 
   - name: stackforge/inception
     check:
