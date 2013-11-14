@@ -16,27 +16,15 @@ pipelines:
 jobs:
   - name: ^.*$
     parameter-function: set_log_url
-  - name: gate-tempest-devstack-vm-cinder
-    branch: stable/folsom
-  - name: gate-tempest-devstack-vm-smoke
-    branch: stable/folsom
-  - name: gate-tempest-devstack-vm-full
-    branch: ^(?!stable/folsom).*$
-  - name: gate-tempest-devstack-vm-neutron
-    branch: ^(?!stable/folsom).*$
   - name: gate-tempest-devstack-vm-neutron-full
-    branch: ^(?!stable/(folsom|grizzly)).*$
+    branch: ^(?!stable/grizzly).*$
     voting: false
   - name: gate-tempest-devstack-vm-postgres-full
-    branch: ^(?!stable/folsom).*$
     voting: false
   - name: gate-grenade-devstack-vm
-    branch: ^(?!stable/folsom).*$
     voting: false
   - name: gate-nova-pylint
     voting: false
-  - name: gate-nova-python26
-    branch: ^(?!stable/folsom).*$
   - name: dev-zuul-coverage
     voting: false
   - name: dev-heat-coverage
@@ -63,7 +51,7 @@ jobs:
     success-pattern: http://docs-draft.openstack.org/{build.parameters[LOG_PATH]}/doc/build/html/
   - name: ^gate-.*-requirements$
     failure-message: Incompatible requirement found; see https://wiki.openstack.org/wiki/Requirements
-    branch: ^(?!stable/(folsom|grizzly)).*$
+    branch: ^(?!stable/(grizzly|havana)).*$
     files:
       - '^tools/.*-requires$'
       - '^.*requirements.txt$'
@@ -153,9 +141,7 @@ projects:
       - gate-cinder-docs
       - gate-cinder-python26
       - gate-cinder-python27
-      - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
-      - gate-tempest-devstack-vm-cinder
       - gate-tempest-devstack-vm-postgres-full
       - gate-tempest-devstack-vm-neutron
       - gate-grenade-devstack-vm
@@ -167,9 +153,7 @@ projects:
       - gate-glance-docs
       - gate-glance-python26
       - gate-glance-python27
-      - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
-      - gate-tempest-devstack-vm-cinder
       - gate-tempest-devstack-vm-postgres-full
       - gate-tempest-devstack-vm-neutron
       - gate-grenade-devstack-vm
@@ -182,9 +166,7 @@ projects:
       - gate-horizon-python26
       - gate-horizon-python27
       - gate-horizon-selenium
-      - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
-      - gate-tempest-devstack-vm-cinder
       - gate-tempest-devstack-vm-postgres-full
       - gate-tempest-devstack-vm-neutron
       - gate-grenade-devstack-vm
@@ -196,9 +178,7 @@ projects:
       - gate-keystone-docs
       - gate-keystone-python26
       - gate-keystone-python27
-      - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
-      - gate-tempest-devstack-vm-cinder
       - gate-tempest-devstack-vm-postgres-full
       - gate-tempest-devstack-vm-neutron
       - gate-grenade-devstack-vm
@@ -210,9 +190,7 @@ projects:
       - gate-nova-docs
       - gate-nova-python26
       - gate-nova-python27
-      - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
-      - gate-tempest-devstack-vm-cinder
       - gate-tempest-devstack-vm-postgres-full
       - gate-tempest-devstack-vm-neutron
       - gate-grenade-devstack-vm
@@ -268,9 +246,7 @@ projects:
       - gate-swift-docs
       - gate-swift-python26
       - gate-swift-python27
-      - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
-      - gate-tempest-devstack-vm-cinder
       - gate-tempest-devstack-vm-neutron
       - gate-tempest-devstack-vm-postgres-full
       - gate-grenade-devstack-vm
@@ -290,10 +266,8 @@ projects:
       - gate-python-cinderclient-docs
       - gate-python-cinderclient-python26
       - gate-python-cinderclient-python27
-      - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-postgres-full
-      - gate-tempest-devstack-vm-cinder
       - gate-tempest-devstack-vm-neutron
       - gate-grenade-devstack-vm
 
@@ -304,10 +278,8 @@ projects:
       - gate-python-glanceclient-docs
       - gate-python-glanceclient-python26
       - gate-python-glanceclient-python27
-      - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-postgres-full
-      - gate-tempest-devstack-vm-cinder
       - gate-tempest-devstack-vm-neutron
       - gate-grenade-devstack-vm
 
@@ -318,10 +290,8 @@ projects:
       - gate-python-keystoneclient-docs
       - gate-python-keystoneclient-python26
       - gate-python-keystoneclient-python27
-      - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-postgres-full
-      - gate-tempest-devstack-vm-cinder
       - gate-tempest-devstack-vm-neutron
       - gate-grenade-devstack-vm
 
@@ -332,10 +302,8 @@ projects:
       - gate-python-novaclient-docs
       - gate-python-novaclient-python26
       - gate-python-novaclient-python27
-      - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-postgres-full
-      - gate-tempest-devstack-vm-cinder
       - gate-tempest-devstack-vm-neutron
       - gate-grenade-devstack-vm
 
@@ -354,10 +322,8 @@ projects:
       - gate-python-neutronclient-docs
       - gate-python-neutronclient-python26
       - gate-python-neutronclient-python27
-      - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-postgres-full
-      - gate-tempest-devstack-vm-cinder
       - gate-tempest-devstack-vm-neutron
       - gate-grenade-devstack-vm
 
@@ -395,18 +361,14 @@ projects:
 
   - name: openstack-dev/devstack
     check:
-      - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
-      - gate-tempest-devstack-vm-cinder
       - gate-tempest-devstack-vm-postgres-full
       - gate-tempest-devstack-vm-neutron
       - gate-grenade-devstack-vm
 
   - name: openstack-infra/devstack-gate
     check:
-      - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
-      - gate-tempest-devstack-vm-cinder
       - gate-tempest-devstack-vm-postgres-full
       - gate-tempest-devstack-vm-neutron
       - gate-grenade-devstack-vm
@@ -417,10 +379,8 @@ projects:
     check:
       - gate-tempest-requirements
       - gate-tempest-pep8
-      - gate-tempest-devstack-vm-smoke
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-postgres-full
-      - gate-tempest-devstack-vm-cinder
       - gate-tempest-devstack-vm-neutron
       - gate-tempest-devstack-vm-neutron-full
 
