@@ -1,0 +1,9 @@
+Approved+1: Monty Taylor <mordred@inaugust.com>
+Code-Review+2: Monty Taylor <mordred@inaugust.com>
+Verified+2: Jenkins
+Code-Review+1: Joshua Hesketh <joshua.hesketh@rackspace.com>
+Submitted-by: Jenkins
+Submitted-at: Thu, 14 Nov 2013 11:38:56 +0000
+Reviewed-on: https://review.openstack.org/53858
+Project: openstack-infra/config
+Branch: refs/heads/master
