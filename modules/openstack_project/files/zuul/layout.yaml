@@ -3683,6 +3683,27 @@ projects:
           - post-mirror-python27
           - post-mirror-python33
 
+  - name: stackforge/tomograph
+    check:
+      - gate-tomograph-pep8
+      - gate-tomograph-python26
+      - gate-tomograph-python27
+      - gate-tomograph-python33
+      - gate-tomograph-docs
+    gate:
+      - gate-tomograph-pep8
+      - gate-tomograph-python26
+      - gate-tomograph-python27
+    post:
+      - tomograph-branch-tarball
+    pre-release:
+      - tomograph-tarball
+    release:
+      - tomograph-tarball:
+        - tomograph-pypi-upload:
+          - post-mirror-python26
+          - post-mirror-python27
+
   - name: stackforge/turbo-hipster
     check:
       - gate-turbo-hipster-docs
