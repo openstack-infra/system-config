@@ -110,4 +110,13 @@ class openstack_project::lists(
     webserver   => $listdomain,
     mailserver  => $listdomain,
   }
+
+  maillist { 'stackforge-dev':
+    ensure      => present,
+    admin       => 'fungi@yuggoth.org',
+    password    => $listpassword,
+    description => 'StackForge Development Mailing List',
+    webserver   => $listdomain,
+    mailserver  => $listdomain,
+  }
 }
