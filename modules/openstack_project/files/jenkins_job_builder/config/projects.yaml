@@ -1721,3 +1721,12 @@
 
     jobs:
       - python-jobs
+
+- project:
+    name: python-solumclient
+    github-org: stackforge
+    node: precise
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - python-jobs
