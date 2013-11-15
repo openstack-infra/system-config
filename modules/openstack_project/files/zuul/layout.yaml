@@ -127,7 +127,7 @@ jobs:
     branch: ^(?!stable/grizzly).*$
   - name: ^(gate|check)-tempest-devstack-vm-neutron-large-ops$
     branch: ^(?!stable/grizzly).*$
-    voting: false
+    voting: true
   - name: ^(gate|check)-tempest-devstack-vm-cells$
     voting: false
   - name: ^(gate|check)-tempest-devstack-vm-cells-full$
