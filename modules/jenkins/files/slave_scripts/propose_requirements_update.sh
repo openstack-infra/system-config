@@ -15,7 +15,12 @@
 INITIAL_COMMIT_MSG="Updated from global requirements"
 TOPIC="openstack/requirements"
 USERNAME=${USERNAME:-$USER}
-BRANCH=${ZUUL_BRANCH:-master}
+# Find the branch. This require a bit of string processing.
+# 1. remove the first 2 bytes that git provides as a list prefix.
+# 2. remove any refs that refer to other branches like HEAD.
+# 3. get the basename of each name to remove the refs/remotes/* prefixes.
+# 4. take the head of the list as we can currently only deal with one branch.
+BRANCH=$(git branch --no-color --contains $ZUUL_NEWREV | cut -b3- | grep -v -- '->' | xargs -n1 basename | head -1)
 
 git config user.name "OpenStack Jenkins"
 git config user.email "jenkins@openstack.org"
