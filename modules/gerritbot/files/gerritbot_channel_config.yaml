@@ -396,5 +396,6 @@ solum:
       - x-vrif-minus-2
     projects:
       - stackforge/solum
+      - stackforge/python-solumclient
     branches:
       - master

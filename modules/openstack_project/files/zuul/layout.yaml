@@ -3632,3 +3632,21 @@ projects:
       - gate-turbo-hipster-python27
     post:
       - turbo-hipster-coverage
+
+  - name: stackforge/python-solumclient
+    check:
+      - gate-python-solumclient-pep8
+      - gate-python-solumclient-python26
+      - gate-python-solumclient-python27
+      - gate-python-solumclient-python33
+      - gate-python-solumclient-pypy
+      - gate-python-solumclient-docs
+    gate:
+      - gate-python-solumclient-pep8
+      - gate-python-solumclient-python26
+      - gate-python-solumclient-python27
+      - gate-python-solumclient-python33
+      - gate-python-solumclient-pypy
+      - gate-python-solumclient-docs
+    post:
+      - python-solumclient-coverage
