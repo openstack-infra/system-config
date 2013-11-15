@@ -2392,10 +2392,12 @@ projects:
       - gate-climate-pep8
       - gate-climate-python26
       - gate-climate-python27
+      - gate-climate-requirements
     gate:
       - gate-climate-pep8
       - gate-climate-python26
       - gate-climate-python27
+      - gate-climate-requirements
 
   - name: stackforge/kwapi
     check:
@@ -3070,9 +3072,9 @@ projects:
 
   - name: stackforge/python-climateclient
     check:
-      - gate-noop
+      - gate-python-climateclient-requirements
     gate:
-      - gate-noop
+      - gate-python-climateclient-requirements
 
   - name: openstack/python-marconiclient
     check:
