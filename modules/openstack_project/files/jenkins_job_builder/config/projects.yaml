@@ -87,9 +87,15 @@
     node: precise
 
     jobs:
-      - gate-{name}-pep8
-      - gate-{name}-python26
-      - gate-{name}-python27
+      - python-jobs
+
+- project:
+    name: python-climateclient
+    github-org: stackforge
+    node: precise
+
+    jobs:
+      - python-jobs
 
 - project:
     name: config
