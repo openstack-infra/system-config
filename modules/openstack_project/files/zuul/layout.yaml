@@ -294,6 +294,8 @@ jobs:
     voting: false
   - name: ^gate-solum-(python33|pypy)$
     voting: false
+  - name: gate-rubick-python33
+    voting: false
 # puppet-openstack targets
   - name: gate-puppet-vswitch-puppet-lint
     voting: false
