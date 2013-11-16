@@ -429,10 +429,8 @@ projects:
   - name: openstack-infra/jeepyb
     check:
       - gate-jeepyb-pep8
-      - check-requirements-integration
     gate:
       - gate-jeepyb-pep8
-      - gate-requirements-integration
     pre-release:
       - jeepyb-tarball
     release:
