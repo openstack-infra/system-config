@@ -200,6 +200,9 @@
       - tarball:
           project: '{name}'
           site: '{tarball-site}'
+      - wheel:
+          project: '{name}'
+          site: '{tarball-site}'
       - console-log
 
 
