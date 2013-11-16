@@ -226,8 +226,7 @@
     doc-publisher-site: docs.openstack.org
 
     jobs:
-      - api-jobs
-      - openstack-compute-api-doc
+      - compute-api-v2.0
 
 
 - project:
@@ -480,8 +479,7 @@
     doc-publisher-site: docs.openstack.org
 
     jobs:
-      - api-jobs
-      - identity-api-v20
+      - identity-api-v2.0
 
 
 - project:
@@ -492,8 +490,7 @@
     doc-publisher-site: docs.openstack.org
 
     jobs:
-      - api-jobs
-      - image-api-v11
+      - image-api-v1.1
 
 
 - project:
@@ -528,8 +525,7 @@
     doc-publisher-site: docs.openstack.org
 
     jobs:
-      - api-jobs
-      - network-api-v10
+      - network-api-v1
 
 
 - project:
@@ -540,7 +536,7 @@
     doc-publisher-site: docs.openstack.org
 
     jobs:
-      - api-jobs
+      - network-api-v2
 
 
 - project:
@@ -588,8 +584,7 @@
     doc-publisher-site: docs.openstack.org
 
     jobs:
-      - api-jobs
-      - openstack-object-api-doc
+      - object-api-v1.0
 
 
 - project:
