@@ -5,7 +5,8 @@
     builders:
       - gerrit-git-prep
       - shell: |
-          /usr/local/jenkins/slave_scripts/pypi-upload.sh {name} {tarball-site}
+          /usr/local/jenkins/slave_scripts/pypi-tarball-upload.sh {name} {tarball-site}
+          /usr/local/jenkins/slave_scripts/pypi-wheel-upload.sh {name} {tarball-site}
 
     publishers:
       - console-log
@@ -14,4 +15,4 @@
 - job-group:
     name: pypi-jobs
     jobs:
-      - '{name}-pypi-upload'
+      - '{name}-pypi-tarball-upload'
