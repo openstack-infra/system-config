@@ -172,6 +172,57 @@
 
 
 - job-template:
+    name: '{name}-wheel26'
+    node: centos6
+
+    builders:
+      - gerrit-git-prep
+      - wheel:
+          github-org: '{github-org}'
+          project: '{name}'
+
+    publishers:
+      - wheel:
+          project: '{name}'
+          site: '{tarball-site}'
+      - console-log
+
+
+- job-template:
+    name: '{name}-wheel27'
+    node: precise
+
+    builders:
+      - gerrit-git-prep
+      - wheel:
+          github-org: '{github-org}'
+          project: '{name}'
+
+    publishers:
+      - wheel:
+          project: '{name}'
+          site: '{tarball-site}'
+      - console-log
+
+
+- job-template:
+    name: '{name}-wheel33'
+    node: precisepy3k
+
+    builders:
+      - gerrit-git-prep
+      - wheel:
+          github-org: '{github-org}'
+          project: '{name}'
+
+    publishers:
+      - wheel:
+          project: '{name}'
+          site: '{tarball-site}'
+      - console-log
+
+
+- job-template:
     name: '{name}-branch-tarball'
     concurrent: false
     node: precise
@@ -220,5 +271,8 @@
       - 'gate-{name}-docs'
       - 'gate-{name}-requirements'
       - '{name}-tarball'
+      - '{name}-wheel26'
+      - '{name}-wheel27'
+      - '{name}-wheel33'
       - '{name}-branch-tarball'
       # pylint isn't standard
