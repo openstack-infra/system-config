@@ -34,6 +34,7 @@ class openstack_project::eavesdrop (
         '#openstack-metering',
         '#openstack-neutron',
         '#openstack-qa',
+        '#openstack-rally',
         '#openstack-trove',
         '#savanna',
         '#tripleo',
