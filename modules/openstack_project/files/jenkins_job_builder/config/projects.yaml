@@ -205,6 +205,7 @@
     doc-publisher-site: docs.openstack.org
 
     jobs:
+      - pypi-jobs
       - python-jobs
       - python-grizzly-bitrot-jobs
       - python-havana-bitrot-jobs
@@ -219,6 +220,7 @@
     doc-publisher-site: docs.openstack.org
 
     jobs:
+      - pypi-jobs
       - python-jobs
       - python-grizzly-bitrot-jobs
       - python-havana-bitrot-jobs
@@ -397,6 +399,7 @@
     doc-publisher-site: docs.openstack.org
 
     jobs:
+      - pypi-jobs
       - python-jobs
       - python-grizzly-bitrot-jobs
       - python-havana-bitrot-jobs
@@ -463,6 +466,7 @@
     doc-publisher-site: docs.openstack.org
 
     jobs:
+      - pypi-jobs
       - python-jobs
       - python-grizzly-bitrot-jobs
       - python-havana-bitrot-jobs
@@ -522,6 +526,7 @@
     doc-publisher-site: docs.openstack.org
 
     jobs:
+      - pypi-jobs
       - python-jobs
       - python-grizzly-bitrot-jobs
       - python-havana-bitrot-jobs
@@ -581,6 +586,7 @@
     doc-publisher-site: docs.openstack.org
 
     jobs:
+      - pypi-jobs
       - python-jobs
       - python-grizzly-bitrot-jobs
       - python-havana-bitrot-jobs
@@ -785,6 +791,7 @@
     doc-publisher-site: docs.openstack.org
 
     jobs:
+      - pypi-jobs
       - python-jobs
       - python-grizzly-bitrot-jobs
       - python-havana-bitrot-jobs
@@ -991,6 +998,7 @@
     doc-publisher-site: docs.openstack.org
 
     jobs:
+      - pypi-jobs
       - python-jobs
       - openstack-publish-jobs
       - '{pipeline}-swift-dsvm-functional{branch-designator}':
@@ -1479,6 +1487,7 @@
     doc-publisher-site: docs.openstack.org
 
     jobs:
+      - pypi-jobs
       - python-jobs
       - openstack-publish-jobs
       - translation-jobs
@@ -1491,6 +1500,7 @@
     doc-publisher-site: docs.openstack.org
 
     jobs:
+      - pypi-jobs
       - python-jobs
 
 - project:

@@ -350,7 +350,7 @@ projects:
     release:
       - zuul-docs
       - zuul-tarball:
-        - zuul-pypi-upload:
+        - zuul-pypi-tarball-upload:
           - post-mirror-python26
           - post-mirror-python27
           - post-mirror-python33
@@ -380,7 +380,7 @@ projects:
       - nodepool-tarball
     release:
       - nodepool-tarball:
-        - nodepool-pypi-upload:
+        - nodepool-pypi-tarball-upload:
           - post-mirror-python26
           - post-mirror-python27
           - post-mirror-python33
@@ -396,7 +396,7 @@ projects:
       - nose-html-output-tarball
     release:
       - nose-html-output-tarball:
-        - nose-html-output-pypi-upload:
+        - nose-html-output-pypi-tarball-upload:
           - post-mirror-python26
           - post-mirror-python27
           - post-mirror-python33
@@ -428,7 +428,7 @@ projects:
       - gerritbot-tarball
     release:
       - gerritbot-tarball:
-        - gerritbot-pypi-upload:
+        - gerritbot-pypi-tarball-upload:
           - post-mirror-python26
           - post-mirror-python27
           - post-mirror-python33
@@ -442,7 +442,7 @@ projects:
       - gerritlib-tarball
     release:
       - gerritlib-tarball:
-        - gerritlib-pypi-upload:
+        - gerritlib-pypi-tarball-upload:
           - post-mirror-python26
           - post-mirror-python27
           - post-mirror-python33
@@ -456,7 +456,7 @@ projects:
       - jeepyb-tarball
     release:
       - jeepyb-tarball:
-        - jeepyb-pypi-upload:
+        - jeepyb-pypi-tarball-upload:
           - post-mirror-python26
           - post-mirror-python27
           - post-mirror-python33
@@ -476,7 +476,7 @@ projects:
       - pypi-mirror-tarball
     release:
       - pypi-mirror-tarball:
-        - pypi-mirror-pypi-upload:
+        - pypi-mirror-pypi-tarball-upload:
           - post-mirror-python26
           - post-mirror-python27
           - post-mirror-python33
@@ -500,7 +500,7 @@ projects:
       - jenkins-job-builder-tarball
     release:
       - jenkins-job-builder-tarball:
-        - jenkins-job-builder-pypi-upload:
+        - jenkins-job-builder-pypi-tarball-upload:
           - post-mirror-python26
           - post-mirror-python27
           - post-mirror-python33
@@ -572,7 +572,7 @@ projects:
       - reviewday-tarball
     release:
       - reviewday-tarball:
-        - reviewday-pypi-upload:
+        - reviewday-pypi-tarball-upload:
           - post-mirror-python26
           - post-mirror-python27
           - post-mirror-python33
@@ -619,7 +619,7 @@ projects:
       - storyboard-tarball
     release:
       - storyboard-tarball:
-        - storyboard-pypi-upload:
+        - storyboard-pypi-tarball-upload:
           - post-mirror-python26
           - post-mirror-python27
           - post-mirror-python33
@@ -641,7 +641,7 @@ projects:
       - statusbot-tarball
     release:
       - statusbot-tarball:
-        - statusbot-pypi-upload:
+        - statusbot-pypi-tarball-upload:
           - post-mirror-python26
           - post-mirror-python27
           - post-mirror-python33
@@ -682,8 +682,16 @@ projects:
       - cinder-upstream-translation-update
     pre-release:
       - cinder-tarball
+      - cinder-wheel26:
+          - cinder-pypi-wheel-upload-py26
+      - cinder-wheel27:
+          - cinder-pypi-wheel-upload-py27
     release:
       - cinder-tarball
+      - cinder-wheel26:
+          - cinder-pypi-wheel-upload-py26
+      - cinder-wheel27:
+          - cinder-pypi-wheel-upload-py27
       - cinder-docs
       - cinder-merge-release-tags
     periodic:
@@ -729,10 +737,18 @@ projects:
       - glance-docs
     pre-release:
       - glance-tarball
+      - glance-wheel26:
+          - glance-pypi-wheel-upload-py26
+      - glance-wheel27:
+          - glance-pypi-wheel-upload-py27
     release:
       - glance-tarball
       - glance-docs
       - glance-merge-release-tags
+      - glance-wheel26:
+          - glance-pypi-wheel-upload-py26
+      - glance-wheel27:
+          - glance-pypi-wheel-upload-py27
     periodic:
       - glance-propose-translation-update
       - periodic-glance-docs-grizzly
@@ -780,10 +796,18 @@ projects:
       - horizon-docs
     pre-release:
       - horizon-tarball
+      - horizon-wheel26:
+          - horizon-pypi-wheel-upload-py26
+      - horizon-wheel27:
+          - horizon-pypi-wheel-upload-py27
     release:
       - horizon-tarball
       - horizon-docs
       - horizon-merge-release-tags
+      - horizon-wheel26:
+          - horizon-pypi-wheel-upload-py26
+      - horizon-wheel27:
+          - horizon-pypi-wheel-upload-py27
     periodic:
       - periodic-horizon-docs-grizzly
       - periodic-horizon-python26-grizzly
@@ -810,9 +834,17 @@ projects:
       - django_openstack_auth-coverage
     pre-release:
       - django_openstack_auth-tarball
+      - django_openstack_auth-wheel26:
+          - django_openstack_auth-pypi-wheel-upload-py26
+      - django_openstack_auth-wheel27:
+          - django_openstack_auth-pypi-wheel-upload-py27
     release:
       - django_openstack_auth-tarball:
-        - django_openstack_auth-pypi-upload
+        - django_openstack_auth-pypi-tarball-upload
+      - django_openstack_auth-wheel26:
+          - django_openstack_auth-pypi-wheel-upload-py26
+      - django_openstack_auth-wheel27:
+          - django_openstack_auth-pypi-wheel-upload-py27
       - django_openstack_auth-docs
 
   - name: openstack/keystone
@@ -852,10 +884,18 @@ projects:
       - keystone-upstream-translation-update
     pre-release:
       - keystone-tarball
+      - keystone-wheel26:
+          - keystone-pypi-wheel-upload-py26
+      - keystone-wheel27:
+          - keystone-pypi-wheel-upload-py27
     release:
       - keystone-tarball
       - keystone-docs
       - keystone-merge-release-tags
+      - keystone-wheel26:
+          - keystone-pypi-wheel-upload-py26
+      - keystone-wheel27:
+          - keystone-pypi-wheel-upload-py27
     periodic:
       - keystone-propose-translation-update
       - periodic-keystone-docs-grizzly
@@ -904,10 +944,18 @@ projects:
       - nova-upstream-translation-update
     pre-release:
       - nova-tarball
+      - nova-wheel26:
+          - nova-pypi-wheel-upload-py26
+      - nova-wheel27:
+          - nova-pypi-wheel-upload-py27
     release:
       - nova-tarball
       - nova-docs
       - nova-merge-release-tags
+      - nova-wheel26:
+          - nova-pypi-wheel-upload-py26
+      - nova-wheel27:
+          - nova-pypi-wheel-upload-py27
     periodic:
       - nova-propose-translation-update
       - periodic-nova-docs-grizzly
@@ -973,12 +1021,20 @@ projects:
       - oslo.config-docs
     pre-release:
       - oslo.config-tarball
+      - oslo.config-wheel26:
+          - oslo.config-pypi-wheel-upload-py26
+      - oslo.config-wheel27:
+          - oslo.config-pypi-wheel-upload-py27
     release:
       - oslo.config-tarball:
-        - oslo.config-pypi-upload:
+        - oslo.config-pypi-tarball-upload:
           - post-mirror-python26
           - post-mirror-python27
           - post-mirror-python33
+      - oslo.config-wheel26:
+          - oslo.config-pypi-wheel-upload-py26
+      - oslo.config-wheel27:
+          - oslo.config-pypi-wheel-upload-py27
       - oslo.config-docs
 
   - name: openstack/oslo.messaging
@@ -1009,12 +1065,20 @@ projects:
       - oslo.messaging-docs
     pre-release:
       - oslo.messaging-tarball
+      - oslo.messaging-wheel26:
+          - oslo.messaging-pypi-wheel-upload-py26
+      - oslo.messaging-wheel27:
+          - oslo.messaging-pypi-wheel-upload-py27
     release:
       - oslo.messaging-tarball:
-        - oslo.messaging-pypi-upload:
+        - oslo.messaging-pypi-tarball-upload:
           - post-mirror-python26
           - post-mirror-python27
           - post-mirror-python33
+      - oslo.messaging-wheel26:
+          - oslo.messaging-pypi-wheel-upload-py26
+      - oslo.messaging-wheel27:
+          - oslo.messaging-pypi-wheel-upload-py27
       - oslo.messaging-docs
 
   - name: openstack/oslo.rootwrap
@@ -1036,10 +1100,14 @@ projects:
       - oslo.rootwrap-tarball
     release:
       - oslo.rootwrap-tarball:
-        - oslo.rootwrap-pypi-upload:
+        - oslo.rootwrap-pypi-tarball-upload:
           - post-mirror-python26
           - post-mirror-python27
           - post-mirror-python33
+      - oslo.rootwrap-wheel26:
+          - oslo.rootwrap-pypi-wheel-upload-py26
+      - oslo.rootwrap-wheel27:
+          - oslo.rootwrap-pypi-wheel-upload-py27
 
   - name: openstack/oslo.sphinx
     check:
@@ -1052,12 +1120,20 @@ projects:
       - oslo.sphinx-branch-tarball
     pre-release:
       - oslo.sphinx-tarball
+      - oslo.sphinx-wheel26:
+          - oslo.sphinx-pypi-wheel-upload-py26
+      - oslo.sphinx-wheel27:
+          - oslo.sphinx-pypi-wheel-upload-py27
     release:
       - oslo.sphinx-tarball:
-        - oslo.sphinx-pypi-upload:
+        - oslo.sphinx-pypi-tarball-upload:
           - post-mirror-python26
           - post-mirror-python27
           - post-mirror-python33
+      - oslo.sphinx-wheel26:
+          - oslo.sphinx-pypi-wheel-upload-py26
+      - oslo.sphinx-wheel27:
+          - oslo.sphinx-pypi-wheel-upload-py27
 
   - name: openstack/oslo.version
     check:
@@ -1087,11 +1163,19 @@ projects:
       - oslo.version-docs
     pre-release:
       - oslo.version-tarball
+      - oslo.version-wheel26:
+          - oslo.version-pypi-wheel-upload-py26
+      - oslo.version-wheel27:
+          - oslo.version-pypi-wheel-upload-py27
     release:
       - oslo.version-tarball:
-        - oslo.version-pypi-upload:
+        - oslo.version-pypi-tarball-upload:
           - post-mirror-python26
           - post-mirror-python27
+      - oslo.version-wheel26:
+          - oslo.version-pypi-wheel-upload-py26
+      - oslo.version-wheel27:
+          - oslo.version-pypi-wheel-upload-py27
       - oslo.version-docs
 
   - name: openstack/neutron
@@ -1127,10 +1211,18 @@ projects:
       - neutron-upstream-translation-update
     pre-release:
       - neutron-tarball
+      - neutron-wheel26:
+          - neutron-pypi-wheel-upload-py26
+      - neutron-wheel27:
+          - neutron-pypi-wheel-upload-py27
     release:
       - neutron-tarball
       - neutron-docs
       - neutron-merge-release-tags
+      - neutron-wheel26:
+          - neutron-pypi-wheel-upload-py26
+      - neutron-wheel27:
+          - neutron-pypi-wheel-upload-py27
     periodic:
       - neutron-propose-translation-update
       - periodic-neutron-docs-grizzly
@@ -1176,8 +1268,16 @@ projects:
       - swift-docs
     pre-release:
       - swift-tarball
+      - swift-wheel26:
+          - swift-pypi-wheel-upload-py26
+      - swift-wheel27:
+          - swift-pypi-wheel-upload-py27
     release:
       - swift-tarball
+      - swift-wheel26:
+          - swift-pypi-wheel-upload-py26
+      - swift-wheel27:
+          - swift-pypi-wheel-upload-py27
       - swift-docs
       - swift-merge-release-tags
 
@@ -1222,12 +1322,20 @@ projects:
       - python-ceilometerclient-coverage
     pre-release:
       - python-ceilometerclient-tarball
+      - python-ceilometerclient-wheel26:
+          - python-ceilometerclient-pypi-wheel-upload-py26
+      - python-ceilometerclient-wheel27:
+          - python-ceilometerclient-pypi-wheel-upload-py27
     release:
       - python-ceilometerclient-tarball:
-        - python-ceilometerclient-pypi-upload:
+        - python-ceilometerclient-pypi-tarball-upload:
           - post-mirror-python26
           - post-mirror-python27
           - post-mirror-python33
+      - python-ceilometerclient-wheel26:
+          - python-ceilometerclient-pypi-wheel-upload-py26
+      - python-ceilometerclient-wheel27:
+          - python-ceilometerclient-pypi-wheel-upload-py27
       - python-ceilometerclient-docs
 
   - name: openstack/python-cinderclient
@@ -1267,12 +1375,20 @@ projects:
       - python-cinderclient-coverage
     pre-release:
       - python-cinderclient-tarball
+      - python-cinderclient-wheel26:
+          - python-cinderclient-pypi-wheel-upload-py26
+      - python-cinderclient-wheel27:
+          - python-cinderclient-pypi-wheel-upload-py27
     release:
       - python-cinderclient-tarball:
-        - python-cinderclient-pypi-upload:
+        - python-cinderclient-pypi-tarball-upload:
           - post-mirror-python26
           - post-mirror-python27
           - post-mirror-python33
+      - python-cinderclient-wheel26:
+          - python-cinderclient-pypi-wheel-upload-py26
+      - python-cinderclient-wheel27:
+          - python-cinderclient-pypi-wheel-upload-py27
       - python-cinderclient-docs
 
   - name: openstack/python-glanceclient
@@ -1309,12 +1425,20 @@ projects:
       - python-glanceclient-coverage
     pre-release:
       - python-glanceclient-tarball
+      - python-glanceclient-wheel26:
+          - python-glanceclient-pypi-wheel-upload-py26
+      - python-glanceclient-wheel27:
+          - python-glanceclient-pypi-wheel-upload-py27
     release:
       - python-glanceclient-tarball:
-        - python-glanceclient-pypi-upload:
+        - python-glanceclient-pypi-tarball-upload:
           - post-mirror-python26
           - post-mirror-python27
           - post-mirror-python33
+      - python-glanceclient-wheel26:
+          - python-glanceclient-pypi-wheel-upload-py26
+      - python-glanceclient-wheel27:
+          - python-glanceclient-pypi-wheel-upload-py27
       - python-glanceclient-docs
 
   - name: openstack/python-keystoneclient
@@ -1351,12 +1475,20 @@ projects:
       - python-keystoneclient-coverage
     pre-release:
       - python-keystoneclient-tarball
+      - python-keystoneclient-wheel26:
+          - python-keystoneclient-pypi-wheel-upload-py26
+      - python-keystoneclient-wheel27:
+          - python-keystoneclient-pypi-wheel-upload-py27
     release:
       - python-keystoneclient-tarball:
-        - python-keystoneclient-pypi-upload:
+        - python-keystoneclient-pypi-tarball-upload:
           - post-mirror-python26
           - post-mirror-python27
           - post-mirror-python33
+      - python-keystoneclient-wheel26:
+          - python-keystoneclient-pypi-wheel-upload-py26
+      - python-keystoneclient-wheel27:
+          - python-keystoneclient-pypi-wheel-upload-py27
       - python-keystoneclient-docs
 
   - name: openstack/python-novaclient
@@ -1396,12 +1528,20 @@ projects:
       - python-novaclient-coverage
     pre-release:
       - python-novaclient-tarball
+      - python-novaclient-wheel26:
+          - python-novaclient-pypi-wheel-upload-py26
+      - python-novaclient-wheel27:
+          - python-novaclient-pypi-wheel-upload-py27
     release:
       - python-novaclient-tarball:
-        - python-novaclient-pypi-upload:
+        - python-novaclient-pypi-tarball-upload:
           - post-mirror-python26
           - post-mirror-python27
           - post-mirror-python33
+      - python-novaclient-wheel26:
+          - python-novaclient-pypi-wheel-upload-py26
+      - python-novaclient-wheel27:
+          - python-novaclient-pypi-wheel-upload-py27
       - python-novaclient-docs
 
   - name: openstack/python-openstackclient
@@ -1423,12 +1563,20 @@ projects:
       - python-openstackclient-coverage
     pre-release:
       - python-openstackclient-tarball
+      - python-openstackclient-wheel26:
+          - python-openstackclient-pypi-wheel-upload-py26
+      - python-openstackclient-wheel27:
+          - python-openstackclient-pypi-wheel-upload-py27
     release:
       - python-openstackclient-tarball:
-        - python-openstackclient-pypi-upload:
+        - python-openstackclient-pypi-tarball-upload:
           - post-mirror-python26
           - post-mirror-python27
           - post-mirror-python33
+      - python-openstackclient-wheel26:
+          - python-openstackclient-pypi-wheel-upload-py26
+      - python-openstackclient-wheel27:
+          - python-openstackclient-pypi-wheel-upload-py27
       - python-openstackclient-docs
 
   - name: openstack/python-neutronclient
@@ -1473,12 +1621,20 @@ projects:
       - python-neutronclient-coverage
     pre-release:
       - python-neutronclient-tarball
+      - python-neutronclient-wheel26:
+          - python-neutronclient-pypi-wheel-upload-py26
+      - python-neutronclient-wheel27:
+          - python-neutronclient-pypi-wheel-upload-py27
     release:
       - python-neutronclient-tarball:
-        - python-neutronclient-pypi-upload:
+        - python-neutronclient-pypi-tarball-upload:
           - post-mirror-python26
           - post-mirror-python27
           - post-mirror-python33
+      - python-neutronclient-wheel26:
+          - python-neutronclient-pypi-wheel-upload-py26
+      - python-neutronclient-wheel27:
+          - python-neutronclient-pypi-wheel-upload-py27
       - python-neutronclient-docs
 
   - name: openstack/python-swiftclient
@@ -1504,12 +1660,20 @@ projects:
       - python-swiftclient-coverage
     pre-release:
       - python-swiftclient-tarball
+      - python-swiftclient-wheel26:
+          - python-swiftclient-pypi-wheel-upload-py26
+      - python-swiftclient-wheel27:
+          - python-swiftclient-pypi-wheel-upload-py27
     release:
       - python-swiftclient-tarball:
-        - python-swiftclient-pypi-upload:
+        - python-swiftclient-pypi-tarball-upload:
           - post-mirror-python26
           - post-mirror-python27
           - post-mirror-python33
+      - python-swiftclient-wheel26:
+          - python-swiftclient-pypi-wheel-upload-py26
+      - python-swiftclient-wheel27:
+          - python-swiftclient-pypi-wheel-upload-py27
       - python-swiftclient-docs
 
   - name: openstack/requirements
@@ -1586,13 +1750,21 @@ projects:
     pre-release:
       - hacking-docs
       - hacking-tarball
+      - hacking-wheel26:
+          - hacking-pypi-wheel-upload-py26
+      - hacking-wheel27:
+          - hacking-pypi-wheel-upload-py27
     release:
       - hacking-docs
       - hacking-tarball:
-        - hacking-pypi-upload:
+        - hacking-pypi-tarball-upload:
           - post-mirror-python26
           - post-mirror-python27
           - post-mirror-python33
+      - hacking-wheel26:
+          - hacking-pypi-wheel-upload-py26
+      - hacking-wheel27:
+          - hacking-pypi-wheel-upload-py27
 
   - name: openstack-dev/pbr
     check:
@@ -1634,13 +1806,21 @@ projects:
     pre-release:
       - pbr-docs
       - pbr-tarball
+      - pbr-wheel26:
+          - pbr-pypi-wheel-upload-py26
+      - pbr-wheel27:
+          - pbr-pypi-wheel-upload-py27
     release:
       - pbr-docs
       - pbr-tarball:
-        - pbr-pypi-upload:
+        - pbr-pypi-tarball-upload:
           - post-mirror-python26
           - post-mirror-python27
           - post-mirror-python33
+      - pbr-wheel26:
+          - pbr-pypi-wheel-upload-py26
+      - pbr-wheel27:
+          - pbr-pypi-wheel-upload-py27
 
   - name: openstack-dev/devstack
     check:
@@ -1804,9 +1984,17 @@ projects:
       - ceilometer-upstream-translation-update
     pre-release:
       - ceilometer-tarball
+      - ceilometer-wheel26:
+          - ceilometer-pypi-wheel-upload-py26
+      - ceilometer-wheel27:
+          - ceilometer-pypi-wheel-upload-py27
     release:
       - ceilometer-docs
       - ceilometer-tarball
+      - ceilometer-wheel26:
+          - ceilometer-pypi-wheel-upload-py26
+      - ceilometer-wheel27:
+          - ceilometer-pypi-wheel-upload-py27
       - ceilometer-merge-release-tags
     periodic:
       - ceilometer-propose-translation-update
@@ -1891,7 +2079,7 @@ projects:
     release:
       - hook-python-libraclient-rtfd
       - python-libraclient-tarball:
-        - python-libraclient-pypi-upload:
+        - python-libraclient-pypi-tarball-upload:
           - post-mirror-python26
           - post-mirror-python27
           - post-mirror-python33
@@ -1982,7 +2170,7 @@ projects:
       - python-heatclient-tarball
     release:
       - python-heatclient-tarball:
-        - python-heatclient-pypi-upload:
+        - python-heatclient-pypi-tarball-upload:
           - post-mirror-python26
           - post-mirror-python27
           - post-mirror-python33
@@ -2006,7 +2194,7 @@ projects:
       - heat-cfntools-tarball
     release:
       - heat-cfntools-tarball:
-        - heat-cfntools-pypi-upload:
+        - heat-cfntools-pypi-tarball-upload:
           - post-mirror-python26
           - post-mirror-python27
           - post-mirror-python33
@@ -2079,7 +2267,7 @@ projects:
       - python-troveclient-tarball
     release:
       - python-troveclient-tarball:
-        - python-troveclient-pypi-upload:
+        - python-troveclient-pypi-tarball-upload:
           - post-mirror-python26
           - post-mirror-python27
           - post-mirror-python33
@@ -2130,7 +2318,7 @@ projects:
       - designate-tarball
     release:
       - designate-tarball:
-        - designate-pypi-upload:
+        - designate-pypi-tarball-upload:
           - post-mirror-python26
           - post-mirror-python27
           - post-mirror-python33
@@ -2152,7 +2340,7 @@ projects:
       - python-designateclient-tarball
     release:
       - python-designateclient-tarball:
-        - python-designateclient-pypi-upload:
+        - python-designateclient-pypi-tarball-upload:
           - post-mirror-python26
           - post-mirror-python27
           - post-mirror-python33
@@ -2173,7 +2361,7 @@ projects:
       - bindep-tarball
     release:
       - bindep-tarball:
-        - bindep-pypi-upload:
+        - bindep-pypi-tarball-upload:
           - post-mirror-python26
           - post-mirror-python27
           - post-mirror-python33
@@ -2195,7 +2383,7 @@ projects:
       - billingstack-tarball
     release:
       - billingstack-tarball:
-        - billingstack-pypi-upload:
+        - billingstack-pypi-tarball-upload:
           - post-mirror-python26
           - post-mirror-python27
           - post-mirror-python33
@@ -2375,7 +2563,7 @@ projects:
       - git-review-tarball
     release:
       - git-review-tarball:
-        - git-review-pypi-upload:
+        - git-review-pypi-tarball-upload:
           - post-mirror-python26
           - post-mirror-python27
           - post-mirror-python33
@@ -2410,7 +2598,7 @@ projects:
       - diskimage-builder-tarball
     release:
       - diskimage-builder-tarball:
-        - diskimage-builder-pypi-upload:
+        - diskimage-builder-pypi-tarball-upload:
           - post-mirror-python26
           - post-mirror-python27
           - post-mirror-python33
@@ -2433,7 +2621,7 @@ projects:
       - os-apply-config-tarball
     release:
       - os-apply-config-tarball:
-        - os-apply-config-pypi-upload
+        - os-apply-config-pypi-tarball-upload
 
   - name: openstack/os-collect-config
     check:
@@ -2453,7 +2641,7 @@ projects:
       - os-collect-config-tarball
     release:
       - os-collect-config-tarball:
-        - os-collect-config-pypi-upload
+        - os-collect-config-pypi-tarball-upload
 
   - name: openstack/os-refresh-config
     check:
@@ -2473,7 +2661,7 @@ projects:
       - os-refresh-config-tarball
     release:
       - os-refresh-config-tarball:
-        - os-refresh-config-pypi-upload
+        - os-refresh-config-pypi-tarball-upload
 
   - name: openstack/tripleo-heat-templates
     check:
@@ -2498,7 +2686,7 @@ projects:
       - tripleo-image-elements-tarball
     release:
       - tripleo-image-elements-tarball:
-        - tripleo-image-elements-pypi-upload:
+        - tripleo-image-elements-pypi-tarball-upload:
           - post-mirror-python26
           - post-mirror-python27
           - post-mirror-python33
@@ -2568,7 +2756,7 @@ projects:
     release:
       - hook-gear-rtfd
       - gear-tarball:
-        - gear-pypi-upload:
+        - gear-pypi-tarball-upload:
           - post-mirror-python26
           - post-mirror-python27
           - post-mirror-python33
@@ -2652,7 +2840,7 @@ projects:
       - hook-savanna-rtfd
     release:
       - savanna-tarball:
-        - savanna-pypi-upload:
+        - savanna-pypi-tarball-upload:
           - post-mirror-python26
           - post-mirror-python27
           - post-mirror-python33
@@ -2680,7 +2868,7 @@ projects:
        - python-savannaclient-tarball
     release:
        - python-savannaclient-tarball:
-         - python-savannaclient-pypi-upload:
+         - python-savannaclient-pypi-tarball-upload:
            - post-mirror-python26
            - post-mirror-python27
            - post-mirror-python33
@@ -2706,7 +2894,7 @@ projects:
       - savanna-dashboard-tarball
     release:
       - savanna-dashboard-tarball:
-        - savanna-dashboard-pypi-upload:
+        - savanna-dashboard-pypi-tarball-upload:
           - post-mirror-python26
           - post-mirror-python27
           - post-mirror-python33
@@ -2738,7 +2926,7 @@ projects:
       - savanna-image-elements-tarball
     release:
       - savanna-image-elements-tarball:
-        - savanna-image-elements-pypi-upload:
+        - savanna-image-elements-pypi-tarball-upload:
           - post-mirror-python26
           - post-mirror-python27
           - post-mirror-python33
@@ -2762,7 +2950,7 @@ projects:
       - hook-sqlalchemy-migrate-rtfd
     release:
       - sqlalchemy-migrate-tarball:
-        - sqlalchemy-migrate-pypi-upload:
+        - sqlalchemy-migrate-pypi-tarball-upload:
           - post-mirror-python26
           - post-mirror-python27
           - post-mirror-python33
@@ -3058,7 +3246,7 @@ projects:
       - mistral-tarball
     release:
       - mistral-tarball:
-        - mistral-pypi-upload:
+        - mistral-pypi-tarball-upload:
           - post-mirror-python26
           - post-mirror-python27
           - post-mirror-python33
@@ -3151,7 +3339,7 @@ projects:
       - python-muranoclient-tarball
     release:
       - python-muranoclient-tarball:
-        - python-muranoclient-pypi-upload:
+        - python-muranoclient-pypi-tarball-upload:
           - post-mirror-python26
           - post-mirror-python27
           - post-mirror-python33
@@ -3172,7 +3360,7 @@ projects:
       - murano-common-tarball
     release:
       - murano-common-tarball:
-        - murano-common-pypi-upload:
+        - murano-common-pypi-tarball-upload:
           - post-mirror-python26
           - post-mirror-python27
           - post-mirror-python33
@@ -3193,7 +3381,7 @@ projects:
       - murano-repository-tarball
     release:
       - murano-repository-tarball:
-        - murano-repository-pypi-upload:
+        - murano-repository-pypi-tarball-upload:
           - post-mirror-python26
           - post-mirror-python27
           - post-mirror-python33
@@ -3214,7 +3402,7 @@ projects:
       - murano-metadataclient-tarball
     release:
       - murano-metadataclient-tarball:
-        - murano-metadataclient-pypi-upload:
+        - murano-metadataclient-pypi-tarball-upload:
           - post-mirror-python26
           - post-mirror-python27
           - post-mirror-python33
@@ -3270,7 +3458,7 @@ projects:
       - python-marconiclient-tarball
     release:
       - python-marconiclient-tarball:
-        - python-marconiclient-pypi-upload:
+        - python-marconiclient-pypi-tarball-upload:
           - post-mirror-python26
           - post-mirror-python27
           - post-mirror-python33
@@ -3400,8 +3588,16 @@ projects:
       - ironic-upstream-translation-update
     pre-release:
       - ironic-tarball
+      - ironic-wheel26:
+          - ironic-pypi-wheel-upload-py26
+      - ironic-wheel27:
+          - ironic-pypi-wheel-upload-py27
     release:
       - ironic-tarball
+      - ironic-wheel26:
+          - ironic-pypi-wheel-upload-py26
+      - ironic-wheel27:
+          - ironic-pypi-wheel-upload-py27
       - ironic-docs
       - ironic-merge-release-tags
     periodic:
@@ -3422,6 +3618,22 @@ projects:
       - gate-python-ironicclient-pypy
     post:
       - python-ironicclient-coverage
+    pre-release:
+      - python-ironicclient-tarball
+      - python-ironicclient-wheel26:
+          - python-ironicclient-pypi-wheel-upload-py26
+      - python-ironicclient-wheel27:
+          - python-ironicclient-pypi-wheel-upload-py27
+    release:
+      - python-ironicclient-tarball:
+        - python-ironicclient-pypi-tarball-upload:
+          - post-mirror-python26
+          - post-mirror-python27
+          - post-mirror-python33
+      - python-ironicclient-wheel26:
+          - python-ironicclient-pypi-wheel-upload-py26
+      - python-ironicclient-wheel27:
+          - python-ironicclient-pypi-wheel-upload-py27
 
   - name: stackforge/inception
     check:
@@ -3467,9 +3679,17 @@ projects:
       - taskflow-branch-tarball
     pre-release:
       - taskflow-tarball
+      - taskflow-wheel26:
+          - taskflow-pypi-wheel-upload-py26
+      - taskflow-wheel27:
+          - taskflow-pypi-wheel-upload-py27
     release:
       - taskflow-tarball:
-        - taskflow-pypi-upload
+        - taskflow-pypi-tarball-upload
+      - taskflow-wheel26:
+          - taskflow-pypi-wheel-upload-py26
+      - taskflow-wheel27:
+          - taskflow-pypi-wheel-upload-py27
 
   - name: stackforge/novaimagebuilder
     check:
@@ -3529,12 +3749,20 @@ projects:
       - pycadf-branch-tarball
     pre-release:
       - pycadf-tarball
+      - pycadf-wheel26:
+          - pycadf-pypi-wheel-upload-py26
+      - pycadf-wheel27:
+          - pycadf-pypi-wheel-upload-py27
     release:
       - pycadf-tarball:
-        - pycadf-pypi-upload:
+        - pycadf-pypi-tarball-upload:
           - post-mirror-python26
           - post-mirror-python27
           - post-mirror-python33
+      - pycadf-wheel26:
+          - pycadf-pypi-wheel-upload-py26
+      - pycadf-wheel27:
+          - pycadf-pypi-wheel-upload-py27
 
   - name: openstack/tuskar
     check:
@@ -3549,9 +3777,17 @@ projects:
       - tuskar-branch-tarball
     pre-release:
       - tuskar-tarball
+      - tuskar-wheel26:
+          - tuskar-pypi-wheel-upload-py26
+      - tuskar-wheel27:
+          - tuskar-pypi-wheel-upload-py27
     release:
       - tuskar-tarball:
-        - tuskar-pypi-upload
+        - tuskar-pypi-tarball-upload
+      - tuskar-wheel26:
+          - tuskar-pypi-wheel-upload-py26
+      - tuskar-wheel27:
+          - tuskar-pypi-wheel-upload-py27
 
   - name: openstack/python-tuskarclient
     check:
@@ -3568,9 +3804,17 @@ projects:
       - python-tuskarclient-coverage
     pre-release:
       - python-tuskarclient-tarball
+      - python-tuskarclient-wheel26:
+          - python-tuskarclient-pypi-wheel-upload-py26
+      - python-tuskarclient-wheel27:
+          - python-tuskarclient-pypi-wheel-upload-py27
     release:
       - python-tuskarclient-tarball:
-        - python-tuskarclient-pypi-upload
+        - python-tuskarclient-pypi-tarball-upload
+      - python-tuskarclient-wheel26:
+          - python-tuskarclient-pypi-wheel-upload-py26
+      - python-tuskarclient-wheel27:
+          - python-tuskarclient-pypi-wheel-upload-py27
 
   - name: openstack/tuskar-ui
     check:
@@ -3585,9 +3829,17 @@ projects:
       - tuskar-ui-branch-tarball
     pre-release:
       - tuskar-ui-tarball
+      - tuskar-ui-wheel26:
+          - tuskar-ui-pypi-wheel-upload-py26
+      - tuskar-ui-wheel27:
+          - tuskar-ui-pypi-wheel-upload-py27
     release:
       - tuskar-ui-tarball:
-        - tuskar-ui-pypi-upload
+        - tuskar-ui-pypi-tarball-upload
+      - tuskar-ui-wheel26:
+          - tuskar-ui-pypi-wheel-upload-py26
+      - tuskar-ui-wheel27:
+          - tuskar-ui-pypi-wheel-upload-py27
 
   - name: stackforge/pecan
     check:
@@ -3614,13 +3866,21 @@ projects:
       - pecan-branch-tarball
     pre-release:
       - pecan-tarball
+      - pecan-wheel26:
+          - pecan-pypi-wheel-upload-py26
+      - pecan-wheel27:
+          - pecan-pypi-wheel-upload-py27
       - hook-pecan-rtfd
     release:
       - pecan-tarball:
-        - pecan-pypi-upload:
+        - pecan-pypi-tarball-upload:
           - post-mirror-python26
           - post-mirror-python27
           - post-mirror-python33
+      - pecan-wheel26:
+          - pecan-pypi-wheel-upload-py26
+      - pecan-wheel27:
+          - pecan-pypi-wheel-upload-py27
       - hook-pecan-rtfd
 
   - name: stackforge/stevedore
@@ -3668,16 +3928,24 @@ projects:
       - wsme-branch-tarball
     pre-release:
       - wsme-tarball:
-          - wsme-pypi-upload:
+          - wsme-pypi-tarball-upload:
               - post-mirror-python26
               - post-mirror-python27
               - post-mirror-python33
+      - wsme-wheel26:
+          - wsme-pypi-wheel-upload-py26
+      - wsme-wheel27:
+          - wsme-pypi-wheel-upload-py27
     release:
       - wsme-tarball:
-        - wsme-pypi-upload:
+        - wsme-pypi-tarball-upload:
           - post-mirror-python26
           - post-mirror-python27
           - post-mirror-python33
+      - wsme-wheel26:
+          - wsme-pypi-wheel-upload-py26
+      - wsme-wheel27:
+          - wsme-pypi-wheel-upload-py27
 
   - name: openstack/governance
     check:
@@ -3810,7 +4078,7 @@ projects:
       - sphinxcontrib-docbookrestapi-tarball
     release:
       - sphinxcontrib-docbookrestapi-tarball:
-        - sphinxcontrib-docbookrestapi-pypi-upload:
+        - sphinxcontrib-docbookrestapi-pypi-tarball-upload:
           - post-mirror-python26
           - post-mirror-python27
           - post-mirror-python33
@@ -3832,7 +4100,7 @@ projects:
       - tomograph-tarball
     release:
       - tomograph-tarball:
-        - tomograph-pypi-upload:
+        - tomograph-pypi-tarball-upload:
           - post-mirror-python26
           - post-mirror-python27
 
