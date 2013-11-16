@@ -443,6 +443,10 @@ projects:
     gate:
       - gate-pypi-mirror-pep8
       - gate-requirements-integration
+    post:
+      - post-mirror-python26
+      - post-mirror-python27
+      - post-mirror-python33
     pre-release:
       - pypi-mirror-tarball
     release:
