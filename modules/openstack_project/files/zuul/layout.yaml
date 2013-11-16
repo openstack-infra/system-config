@@ -1029,6 +1029,7 @@ projects:
       - gate-tempest-devstack-vm-neutron-large-ops
     experimental:
       - gate-tempest-devstack-vm-neutron-full
+      - check-tempest-devstack-vm-neutron-isolated-parallel 
     post:
       - neutron-branch-tarball
       - neutron-coverage
