@@ -302,6 +302,7 @@
     doc-publisher-site: docs.openstack.org
 
     jobs:
+      - pypi-jobs
       - python-jobs
       - python-havana-bitrot-jobs
       - openstack-publish-jobs
@@ -315,6 +316,7 @@
     doc-publisher-site: docs.openstack.org
 
     jobs:
+      - pypi-jobs
       - python-jobs
       - python-havana-bitrot-jobs
       - openstack-publish-jobs
@@ -523,6 +525,7 @@
     doc-publisher-site: docs.openstack.org
 
     jobs:
+      - pypi-jobs
       - python-jobs
       - python-havana-bitrot-jobs
       - openstack-publish-jobs
@@ -604,6 +607,7 @@
     doc-publisher-site: docs.openstack.org
 
     jobs:
+      - pypi-jobs
       - python-jobs
       - python-havana-bitrot-jobs
       - openstack-publish-jobs
@@ -677,6 +681,7 @@
     doc-publisher-site: docs.openstack.org
 
     jobs:
+      - pypi-jobs
       - python-jobs
       - python-havana-bitrot-jobs
       - openstack-publish-jobs
@@ -736,6 +741,7 @@
     doc-publisher-site: docs.openstack.org
 
     jobs:
+      - pypi-jobs
       - python-jobs
       - python-havana-bitrot-jobs
       - openstack-publish-jobs
@@ -1055,6 +1061,7 @@
     doc-publisher-site: docs.openstack.org
 
     jobs:
+      - pypi-jobs
       - python-jobs
       - python-havana-bitrot-jobs
       - openstack-publish-jobs
@@ -1331,6 +1338,7 @@
     doc-publisher-site: docs.openstack.org
 
     jobs:
+      - pypi-jobs
       - python-jobs
       - openstack-publish-jobs
       - 'gate-{name}-tox-{envlist}':
@@ -1949,6 +1957,7 @@
     doc-publisher-site: docs.openstack.org
 
     jobs:
+      - pypi-jobs
       - python-jobs
       - openstack-publish-jobs
       - translation-jobs
@@ -1976,6 +1985,7 @@
     doc-publisher-site: docs.openstack.org
 
     jobs:
+      - pypi-jobs
       - python-jobs
       - openstack-publish-jobs
       - pypi-jobs
