@@ -3282,10 +3282,12 @@ projects:
       - gate-taskflow-pep8
       - gate-taskflow-python26
       - gate-taskflow-python27
+      - gate-taskflow-python33
     gate:
       - gate-taskflow-pep8
       - gate-taskflow-python26
       - gate-taskflow-python27
+      - gate-taskflow-python33
     post:
       - taskflow-coverage
       - taskflow-branch-tarball
