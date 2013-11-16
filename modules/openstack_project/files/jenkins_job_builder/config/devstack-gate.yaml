@@ -273,6 +273,32 @@
 
 
 - job-template:
+    name: '{pipeline}-tempest-devstack-vm-neutron-isolated-parallel'
+    node: '{node}'
+
+    wrappers:
+      - timeout:
+          timeout: 120
+          fail: true
+      - timestamps
+
+    builders:
+      - devstack-checkout
+      - shell: |
+          #!/bin/bash -xe
+          export PYTHONUNBUFFERED=true
+          export DEVSTACK_GATE_TEMPEST=1
+          export DEVSTACK_GATE_NEUTRON=1
+          export DEVSTACK_GATE_TEMPEST_ALLOW_TENANT_ISOLATION=1
+          cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
+          ./safe-devstack-vm-gate-wrap.sh
+      - link-logs
+
+    publishers:
+      - devstack-logs
+      - console-log
+
+- job-template:
     name: '{pipeline}-tempest-devstack-vm-neutron-pg-isolated'
     node: '{node}'
 
@@ -890,6 +916,7 @@
       - '{pipeline}-tempest-devstack-vm-neutron'
       - '{pipeline}-tempest-devstack-vm-neutron-pg'
       - '{pipeline}-tempest-devstack-vm-neutron-isolated'
+      - '{pipeline}-tempest-devstack-vm-neutron-isolated-parallel'
       - '{pipeline}-tempest-devstack-vm-neutron-pg-isolated'
       - '{pipeline}-tempest-devstack-vm-neutron-full'
       - '{pipeline}-devstack-vm-cells'
