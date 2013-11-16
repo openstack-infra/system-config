@@ -209,7 +209,10 @@
 - builder:
     name: tarball
     builders:
-      - shell: "/usr/local/jenkins/slave_scripts/run-tarball.sh {github-org} {project}"
+      - shell: |
+          #!/bin/bash -xe
+          /usr/local/jenkins/slave_scripts/run-tarball.sh {github-org} {project}
+          /usr/local/jenkins/slave_scripts/run-wheel.sh {github-org} {project}
 
 - builder:
     name: devstack-checkout
@@ -305,6 +308,17 @@
           files:
             - target: 'tarballs/{project}/'
               source: 'dist/*.tar.gz'
+
+- publisher:
+    name: wheel
+    publishers:
+      - archive:
+          artifacts: 'dist/*.whl'
+      - scp:
+          site: '{site}'
+          files:
+            - target: 'tarballs/{project}/'
+              source: 'dist/*.whl'
 
 - publisher:
     name: war
