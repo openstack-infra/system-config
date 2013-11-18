@@ -35,6 +35,7 @@ class jenkins::slave(
     $::jenkins::params::docbook5_xml_package, # for building openstack docs
     $::jenkins::params::docbook5_xsl_package, # for building openstack docs
     $::jenkins::params::gnome_doc_package, # for generating translation files for docs
+    $::jenkins::params::graphviz_package, # for generating graphs in docs
     $::jenkins::params::firefox_package, # for selenium tests
     $::jenkins::params::mod_wsgi_package,
     $::jenkins::params::libcurl_dev_package,
