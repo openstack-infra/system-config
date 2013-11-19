@@ -305,6 +305,8 @@ jobs:
     voting: false
   - name: gate-rubick-python33
     voting: false
+  - name: gate-solum-devstack-dsvm
+    voting: false
 # puppet-openstack targets
   - name: gate-puppet-vswitch-puppet-lint
     voting: false
@@ -3688,6 +3690,7 @@ projects:
       - gate-solum-python33
       - gate-solum-pypy
       - gate-solum-docs
+      - gate-solum-devstack-dsvm
     gate:
       - gate-solum-pep8
       - gate-solum-python26
@@ -3695,6 +3698,7 @@ projects:
       - gate-solum-python33
       - gate-solum-pypy
       - gate-solum-docs
+      - gate-solum-devstack-dsvm
     post:
       - solum-coverage
       - hook-solum-rtfd
