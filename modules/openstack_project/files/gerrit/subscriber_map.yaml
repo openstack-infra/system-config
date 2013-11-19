@@ -1,0 +1,11 @@
+author_map:
+    michael.still@rackspace.com: rcbau
+    mikal@stillhq.com: rcbau
+    joshua.hesketh@rackspace.com: rcbau
+    michael.davies@rackspace.com: rcbau
+    michael@the-davies.net: rcbau
+    lana.brindley@rackspace.com: rcbau
+    openstack@lanabrindley.com: rcbau
+
+subscriber_map:
+    rcbau: ['mikalstill', 'loquacity']

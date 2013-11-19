@@ -261,6 +261,13 @@ class openstack_project::gerrit (
     require => Class['::gerrit'],
   }
 
+  file { '/home/gerrit2/review_site/hooks/subscriber_map.yaml':
+    ensure  => present,
+    source  =>
+      'puppet:///modules/openstack_project/gerrit/subscriber_map.yaml',
+    require => Class['::gerrit'],
+  }
+
   file { '/home/gerrit2/review_site/hooks/patchset-created':
     ensure  => present,
     owner   => 'root',
