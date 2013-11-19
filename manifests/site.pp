@@ -135,8 +135,17 @@ node 'jenkins04.openstack.org' {
 
 node 'jenkins-dev.openstack.org' {
   class { 'openstack_project::jenkins_dev':
-    jenkins_ssh_private_key => hiera('jenkins_dev_ssh_private_key_contents'),
-    sysadmins               => hiera('sysadmins'),
+    jenkins_ssh_private_key  => hiera('jenkins_dev_ssh_private_key_contents'),
+    sysadmins                => hiera('sysadmins'),
+    mysql_password           => hiera('nodepool_dev_mysql_password'),
+    mysql_root_password      => hiera('nodepool_dev_mysql_root_password'),
+    nodepool_ssh_private_key => hiera('jenkins_dev_ssh_private_key_contents'),
+    jenkins_api_user         => hiera('jenkins_dev_api_user'),
+    jenkins_api_key          => hiera('jenkins_dev_api_key'),
+    jenkins_credentials_id   => hiera('jenkins_dev_credentials_id'),
+    hpcloud_username         => hiera('nodepool_hpcloud_username'),
+    hpcloud_password         => hiera('nodepool_hpcloud_password'),
+    hpcloud_project          => hiera('nodepool_hpcloud_project'),
   }
 }
 
