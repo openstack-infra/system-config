@@ -165,6 +165,12 @@ jobs:
     voting: false
   - name: check-tempest-devstack-vm-cells-full-stable-grizzly
     voting: false
+  - name: check-devstack-vm-cells-stable-havana
+    voting: false
+  - name: check-tempest-devstack-vm-cells-stable-havana
+    voting: false
+  - name: check-tempest-devstack-vm-cells-full-stable-havana
+    voting: false
   - name: gate-nova-pylint
     voting: false
   - name: gate-cinder-pylint
@@ -641,6 +647,9 @@ projects:
       - periodic-cinder-docs-stable-grizzly
       - periodic-cinder-python26-stable-grizzly
       - periodic-cinder-python27-stable-grizzly
+      - periodic-cinder-docs-stable-havana
+      - periodic-cinder-python26-stable-havana
+      - periodic-cinder-python27-stable-havana
 
   - name: openstack/glance
     check:
@@ -685,6 +694,9 @@ projects:
       - periodic-glance-docs-stable-grizzly
       - periodic-glance-python26-stable-grizzly
       - periodic-glance-python27-stable-grizzly
+      - periodic-glance-docs-stable-havana
+      - periodic-glance-python26-stable-havana
+      - periodic-glance-python27-stable-havana
 
   - name: openstack/horizon
     check:
@@ -732,6 +744,9 @@ projects:
       - periodic-horizon-docs-stable-grizzly
       - periodic-horizon-python26-stable-grizzly
       - periodic-horizon-python27-stable-grizzly
+      - periodic-horizon-docs-stable-havana
+      - periodic-horizon-python26-stable-havana
+      - periodic-horizon-python27-stable-havana
 
   - name: openstack/django_openstack_auth
     check:
@@ -802,6 +817,10 @@ projects:
       - periodic-keystone-docs-stable-grizzly
       - periodic-keystone-python26-stable-grizzly
       - periodic-keystone-python27-stable-grizzly
+      - periodic-keystone-docs-stable-havana
+      - periodic-keystone-python26-stable-havana
+      - periodic-keystone-python27-stable-havana
+      - periodic-swift-devstack-vm-functional-stable-havana
 
   - name: openstack/nova
     check:
@@ -850,6 +869,9 @@ projects:
       - periodic-nova-docs-stable-grizzly
       - periodic-nova-python26-stable-grizzly
       - periodic-nova-python27-stable-grizzly
+      - periodic-nova-docs-stable-havana
+      - periodic-nova-python26-stable-havana
+      - periodic-nova-python27-stable-havana
 
   - name: openstack/openstack
     check:
@@ -1046,6 +1068,9 @@ projects:
       - periodic-neutron-docs-stable-grizzly
       - periodic-neutron-python26-stable-grizzly
       - periodic-neutron-python27-stable-grizzly
+      - periodic-neutron-docs-stable-havana
+      - periodic-neutron-python26-stable-havana
+      - periodic-neutron-python27-stable-havana
 
   - name: openstack/swift
     check:
@@ -1590,6 +1615,12 @@ projects:
       - check-devstack-vm-cells-stable-grizzly
       - check-tempest-devstack-vm-cells-stable-grizzly
       - check-tempest-devstack-vm-cells-full-stable-grizzly
+      - check-tempest-devstack-vm-full-stable-havana
+      - check-tempest-devstack-vm-neutron-stable-havana
+      - check-tempest-devstack-vm-postgres-full-stable-havana
+      - check-devstack-vm-cells-stable-havana
+      - check-tempest-devstack-vm-cells-stable-havana
+      - check-tempest-devstack-vm-cells-full-stable-havana
     gate:
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-postgres-full
@@ -1654,12 +1685,18 @@ projects:
       - tempest-docs
       - tempest-branch-tarball
     periodic:
-      - periodic-tempest-devstack-vm-stable-grizzly
+      - periodic-tempest-devstack-vm-full-stable-grizzly
       - periodic-tempest-devstack-vm-neutron-stable-grizzly
-      - periodic-tempest-devstack-vm-postgres-stable-grizzly
-      - periodic-tempest-devstack-vm-all
-      - periodic-tempest-devstack-vm-coverage
-      - periodic-tempest-devstack-vm-stress
+      - periodic-tempest-devstack-vm-postgres-full-stable-grizzly
+      - periodic-tempest-devstack-vm-full-stable-havana
+      - periodic-tempest-devstack-vm-neutron-stable-havana
+      - periodic-tempest-devstack-vm-postgres-full-stable-havana
+      - periodic-tempest-devstack-vm-all-stable-havana
+      - periodic-tempest-devstack-vm-coverage-stable-havana
+      - periodic-tempest-devstack-vm-stress-stable-havana
+      - periodic-tempest-devstack-vm-neutron-pg-stable-havana
+      - periodic-tempest-devstack-vm-large-ops-stable-havana
+      - periodic-tempest-devstack-vm-neutron-large-ops-stable-havana
 
   - name: openstack/ceilometer
     check:
@@ -1702,6 +1739,9 @@ projects:
       - periodic-ceilometer-docs-stable-grizzly
       - periodic-ceilometer-python26-stable-grizzly
       - periodic-ceilometer-python27-stable-grizzly
+      - periodic-ceilometer-docs-stable-havana
+      - periodic-ceilometer-python26-stable-havana
+      - periodic-ceilometer-python27-stable-havana
 
   - name: stackforge/clouddocs-maven-plugin
     check:
@@ -1824,6 +1864,9 @@ projects:
       - periodic-heat-docs-stable-grizzly
       - periodic-heat-python26-stable-grizzly
       - periodic-heat-python27-stable-grizzly
+      - periodic-heat-docs-stable-havana
+      - periodic-heat-python26-stable-havana
+      - periodic-heat-python27-stable-havana
       - heat-propose-translation-update
 
   - name: openstack/python-heatclient

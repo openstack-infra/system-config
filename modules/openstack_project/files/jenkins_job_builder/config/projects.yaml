@@ -200,6 +200,7 @@
     jobs:
       - python-jobs
       - python-grizzly-bitrot-jobs
+      - python-havana-bitrot-jobs
       - openstack-publish-jobs
       - translation-jobs
 
@@ -213,6 +214,7 @@
     jobs:
       - python-jobs
       - python-grizzly-bitrot-jobs
+      - python-havana-bitrot-jobs
       - openstack-publish-jobs
       - gate-{name}-pylint
       - translation-jobs
@@ -392,6 +394,7 @@
     jobs:
       - python-jobs
       - python-grizzly-bitrot-jobs
+      - python-havana-bitrot-jobs
       - openstack-publish-jobs
       - translation-jobs
 
@@ -406,6 +409,7 @@
     jobs:
       - python-jobs
       - python-grizzly-bitrot-jobs
+      - python-havana-bitrot-jobs
       - openstack-publish-jobs
       - translation-jobs
 
@@ -456,6 +460,7 @@
     jobs:
       - python-jobs
       - python-grizzly-bitrot-jobs
+      - python-havana-bitrot-jobs
       - openstack-publish-jobs
 
 
@@ -516,6 +521,7 @@
     jobs:
       - python-jobs
       - python-grizzly-bitrot-jobs
+      - python-havana-bitrot-jobs
       - openstack-publish-jobs
       - translation-jobs
 
@@ -575,6 +581,7 @@
     jobs:
       - python-jobs
       - python-grizzly-bitrot-jobs
+      - python-havana-bitrot-jobs
       - openstack-publish-jobs
       - gate-{name}-pylint
       - translation-jobs
@@ -769,6 +776,7 @@
     jobs:
       - python-jobs
       - python-grizzly-bitrot-jobs
+      - python-havana-bitrot-jobs
       - openstack-publish-jobs
       - translation-jobs
 
@@ -974,6 +982,9 @@
       - '{pipeline}-swift-devstack-vm-functional':
           pipeline: check
           node: 'devstack-precise || devstack-precise-check'
+      - 'periodic-swift-devstack-vm-functional-stable-{release}':
+          release: havana
+          node: 'devstack-precise || devstack-precise-check'
 # No one is interested in stable/ branches on swift, so don't run bitrot jobs
 
 
@@ -1000,27 +1011,11 @@
       - devstack-jobs:
           pipeline: check
           node: 'devstack-precise || devstack-precise-check'
-      - 'check-devstack-vm-cells-stable-{release}':
+      - devstack-stable-check-jobs:
           release:
             - grizzly
             - havana
-      - 'check-tempest-devstack-vm-cells-stable-{release}':
-          release:
-            - grizzly
-            - havana
-      - 'check-tempest-devstack-vm-cells-full-stable-{release}':
-          release:
-            - grizzly
-            - havana
-      - 'check-tempest-devstack-vm-full-stable-{release}':
-          release:
-            - grizzly
-            - havana
-      - 'check-tempest-devstack-vm-neutron-stable-{release}':
-          release:
-            - grizzly
-            - havana
-      - 'check-tempest-devstack-vm-postgres-full-stable-{release}':
+      - devstack-stable-periodic-jobs:
           release:
             - grizzly
             - havana
