@@ -268,6 +268,8 @@ jobs:
     voting: false
   - name: gate-savanna-pylint
     voting: false
+  - name: gate-savanna-devstack
+    voting: false
   - name: gate-marconi-python33
     voting: false
   - name: gate-python-ceilometerclient-python33
@@ -2532,12 +2534,14 @@ projects:
       - gate-savanna-python26
       - gate-savanna-python27
       - gate-savanna-requirements
+      - gate-savanna-devstack
     gate:
       - gate-savanna-docs
       - gate-savanna-pep8
       - gate-savanna-python26
       - gate-savanna-python27
       - gate-savanna-requirements
+      - gate-savanna-devstack
     post:
       - savanna-docs
       - savanna-branch-tarball
@@ -2557,6 +2561,9 @@ projects:
       - savanna-docs
     periodic:
       - savanna-propose-translation-update
+    experimental:
+      - gate-savanna-devstack-pg
+      - gate-savanna-devstack-neutron
 
   - name: openstack/python-savannaclient
     check:
