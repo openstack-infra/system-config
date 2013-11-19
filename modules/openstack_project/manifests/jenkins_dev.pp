@@ -2,7 +2,23 @@
 #
 class openstack_project::jenkins_dev (
   $jenkins_ssh_private_key = '',
-  $sysadmins = []
+  $sysadmins = [],
+  $mysql_root_password,
+  $mysql_password,
+  $nodepool_ssh_private_key = '',
+  $statsd_host = '',
+  $jenkins_api_user ='',
+  $jenkins_api_key ='',
+  $jenkins_credentials_id ='',
+  $rackspace_username ='',
+  $rackspace_password ='',
+  $rackspace_project ='',
+  $hpcloud_username ='',
+  $hpcloud_password ='',
+  $hpcloud_project ='',
+  $tripleo_username ='',
+  $tripleo_password ='',
+  $tripleo_project =''
 ) {
   include openstack_project
 
@@ -33,4 +49,19 @@ class openstack_project::jenkins_dev (
     mode   => '0644',
     source => 'puppet:///modules/openstack_project/jenkins/jenkins.default',
   }
+
+  class { '::nodepool':
+    mysql_password           => 'mysql_password',
+    mysql_root_password      => 'mysql_root_password',
+    nodepool_ssh_private_key => 'nodepool_ssh_private_key',
+    nodepool_template        => 'nodepool-dev.yaml.erb',
+    sysadmins                => 'sysadmins',
+    jenkins_api_user         => 'jenkins_api_user',
+    jenkins_api_key          => 'jenkins_api_key',
+    jenkins_credentials_id   => 'jenkins_credentials_id',
+    hpcloud_username         => 'nodepool_hpcloud_username',
+    hpcloud_password         => 'nodepool_hpcloud_password',
+    hpcloud_project          => 'nodepool_hpcloud_project',
+  }
+
 }
