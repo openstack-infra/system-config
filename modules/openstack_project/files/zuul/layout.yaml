@@ -2659,7 +2659,10 @@ projects:
       - hook-sqlalchemy-migrate-rtfd
     release:
       - sqlalchemy-migrate-tarball:
-        - sqlalchemy-migrate-pypi-upload
+        - sqlalchemy-migrate-pypi-upload:
+          - post-mirror-python26
+          - post-mirror-python27
+          - post-mirror-python33
       - hook-sqlalchemy-migrate-rtfd
 
   - name: stackforge/puppet-ceilometer
