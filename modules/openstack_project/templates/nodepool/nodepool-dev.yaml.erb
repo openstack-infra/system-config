@@ -1,0 +1,45 @@
+script-dir: /etc/nodepool/scripts
+dburi: 'mysql://nodepool:<%= mysql_password %>@localhost/nodepool'
+
+cron:
+  cleanup: '*/5 * * * *'
+  check: '*/15 * * * *'
+  update-image: '14 2 * * *'
+
+zmq-publishers:
+  - tcp://jenkins-dev.openstack.org:8888
+
+gearman-servers:
+  - host: zuul.openstack.org
+
+providers:
+  - name: hpcloud-az2
+    region-name: 'az-2.region-a.geo-1'
+    service-type: 'compute'
+    service-name: 'Compute'
+    username: '<%= hpcloud_username %>'
+    password: '<%= hpcloud_password %>'
+    project-id: '<%= hpcloud_project %>'
+    auth-url: 'https://region-a.geo-1.identity.hpcloudsvc.com:35357/v2.0'
+    boot-timeout: 120
+    max-servers: 2
+    images:
+      - name: devstack-precise
+        base-image: 'Ubuntu Precise 12.04 LTS Server 64-bit 20121026 (b)'
+        min-ram: 8192
+        setup: prepare_node_devstack.sh
+        username: jenkins
+        private-key: /home/nodepool/.ssh/id_rsa
+
+targets:
+  - name: jenkins-dev
+    jenkins:
+      url: 'https://jenkins-dev.openstack.org/'
+      user: '<%= jenkins_dev_api_user %>'
+      apikey: '<%= jenkins_dev_api_key %>'
+      credentials-id: '<%= jenkins_dev_credentials_id %>'
+    images:
+      - name: devstack-precise
+        min-ready: 0
+        providers:
+          - name: hpcloud-az2
