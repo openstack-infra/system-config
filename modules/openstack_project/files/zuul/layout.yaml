@@ -680,6 +680,7 @@ projects:
       - gate-cinder-python27
       - gate-cinder-pylint
       - check-tempest-dsvm-full
+      - check-tempest-dsvm-full
       - check-tempest-dsvm-postgres-full
       - check-tempest-dsvm-neutron
       - gate-tempest-dsvm-large-ops
@@ -727,6 +728,7 @@ projects:
       - gate-glance-docs
       - gate-glance-python26
       - gate-glance-python27
+      - check-tempest-dsvm-full
       - check-tempest-dsvm-full
       - check-tempest-dsvm-postgres-full
       - check-tempest-dsvm-neutron
@@ -776,6 +778,7 @@ projects:
       - gate-horizon-python27
       - gate-horizon-python27-django14
       - gate-horizon-selenium
+      - check-tempest-dsvm-full
       - check-tempest-dsvm-full
       - check-tempest-dsvm-postgres-full
       - check-tempest-dsvm-neutron
@@ -848,6 +851,7 @@ projects:
       - gate-keystone-python26
       - gate-keystone-python27
       - check-tempest-dsvm-full
+      - check-tempest-dsvm-full
       - check-tempest-dsvm-postgres-full
       - check-tempest-dsvm-neutron
       - gate-tempest-dsvm-large-ops
@@ -898,6 +902,7 @@ projects:
       - gate-nova-docs
       - gate-nova-python26
       - gate-nova-python27
+      - check-tempest-dsvm-full
       - check-tempest-dsvm-full
       - check-tempest-dsvm-postgres-full
       - check-tempest-dsvm-neutron
@@ -976,6 +981,7 @@ projects:
       - gate-oslo.config-python27
       - gate-oslo.config-python33
       - check-tempest-dsvm-full
+      - check-tempest-dsvm-full
       - check-tempest-dsvm-neutron
       - gate-tempest-dsvm-large-ops
       - gate-tempest-dsvm-neutron-large-ops
@@ -1012,6 +1018,7 @@ projects:
       - gate-oslo.messaging-docs
       - gate-oslo.messaging-python26
       - gate-oslo.messaging-python27
+      - check-tempest-dsvm-full
       - check-tempest-dsvm-full
       - check-tempest-dsvm-neutron
       - gate-tempest-dsvm-large-ops
@@ -1092,6 +1099,7 @@ projects:
       - gate-oslo.version-python27
       - gate-oslo.version-pypy
       - gate-oslo.version-python33
+      - check-tempest-dsvm-full
       - check-tempest-dsvm-full
       - check-tempest-dsvm-neutron
       - check-grenade-dsvm
@@ -1176,6 +1184,7 @@ projects:
       - gate-swift-python27
       - check-swift-dsvm-functional
       - check-tempest-dsvm-full
+      - check-tempest-dsvm-full
       - check-tempest-dsvm-neutron
       - check-tempest-dsvm-postgres-full
       - gate-tempest-dsvm-large-ops
@@ -1238,6 +1247,7 @@ projects:
       - gate-python-ceilometerclient-python33
       - gate-python-ceilometerclient-pypy
       - check-tempest-dsvm-full
+      - check-tempest-dsvm-full
       - check-tempest-dsvm-postgres-full
       - check-tempest-dsvm-neutron
       - gate-tempest-dsvm-large-ops
@@ -1276,6 +1286,7 @@ projects:
       - gate-python-cinderclient-python27
       - gate-python-cinderclient-python33
       - gate-python-cinderclient-pypy
+      - check-tempest-dsvm-full
       - check-tempest-dsvm-full
       - check-tempest-dsvm-postgres-full
       - check-tempest-dsvm-neutron
@@ -1321,6 +1332,7 @@ projects:
       - gate-python-glanceclient-python27
       - gate-python-glanceclient-python33
       - check-tempest-dsvm-full
+      - check-tempest-dsvm-full
       - check-tempest-dsvm-postgres-full
       - check-tempest-dsvm-neutron
       - gate-tempest-dsvm-large-ops
@@ -1362,6 +1374,7 @@ projects:
       - gate-python-keystoneclient-python26
       - gate-python-keystoneclient-python27
       - gate-python-keystoneclient-python33
+      - check-tempest-dsvm-full
       - check-tempest-dsvm-full
       - check-tempest-dsvm-postgres-full
       - check-tempest-dsvm-neutron
@@ -1405,6 +1418,7 @@ projects:
       - gate-python-novaclient-python27
       - gate-python-novaclient-python33
       - gate-python-novaclient-pypy
+      - check-tempest-dsvm-full
       - check-tempest-dsvm-full
       - check-tempest-dsvm-postgres-full
       - check-tempest-dsvm-neutron
@@ -1477,6 +1491,7 @@ projects:
       - gate-python-neutronclient-python27
       - gate-python-neutronclient-python33
       - gate-python-neutronclient-pypy
+      - check-tempest-dsvm-full
       - check-tempest-dsvm-full
       - check-tempest-dsvm-postgres-full
       - check-tempest-dsvm-neutron
@@ -1555,6 +1570,7 @@ projects:
       - gate-requirements-python27
       - gate-requirements-pypy
       - check-requirements-integration-dsvm
+      - check-tempest-dsvm-full
       - check-tempest-dsvm-full
       - check-tempest-dsvm-postgres-full
       - check-tempest-dsvm-neutron
@@ -1646,6 +1662,7 @@ projects:
       - gate-pbr-pypy
       - check-requirements-integration-dsvm
       - check-tempest-dsvm-full
+      - check-tempest-dsvm-full
       - check-tempest-dsvm-postgres-full
       - check-tempest-dsvm-neutron
       - gate-tempest-dsvm-large-ops
@@ -1688,6 +1705,7 @@ projects:
     check:
       - gate-devstack-bash8
       - check-tempest-dsvm-full
+      - check-tempest-dsvm-full
       - check-tempest-dsvm-postgres-full
       - check-tempest-dsvm-neutron
       - gate-tempest-dsvm-large-ops
@@ -1722,6 +1740,7 @@ projects:
     check:
       - check-dg-tempest-dsvm-full
       - check-dg-tempest-dsvm-full-reexec
+      - check-tempest-dsvm-full
       - check-tempest-dsvm-full
       - check-tempest-dsvm-postgres-full
       - check-tempest-dsvm-neutron
@@ -1779,6 +1798,7 @@ projects:
       - gate-tempest-docs
       - gate-tempest-python27
       - check-tempest-dsvm-full
+      - check-tempest-dsvm-full
       - check-tempest-dsvm-postgres-full
       - check-tempest-dsvm-neutron
       - gate-tempest-dsvm-large-ops
@@ -1823,6 +1843,7 @@ projects:
       - gate-ceilometer-docs
       - gate-ceilometer-python26
       - gate-ceilometer-python27
+      - check-tempest-dsvm-full
       - check-tempest-dsvm-full
       - check-tempest-dsvm-postgres-full
       - check-tempest-dsvm-neutron
@@ -1973,6 +1994,7 @@ projects:
       - gate-heat-python26
       - gate-heat-python27
       - check-tempest-dsvm-full
+      - check-tempest-dsvm-full
       - check-tempest-dsvm-postgres-full
       - check-tempest-dsvm-neutron
       - gate-tempest-dsvm-large-ops
@@ -2018,6 +2040,7 @@ projects:
       - gate-python-heatclient-python27
       - gate-python-heatclient-python33
       - gate-python-heatclient-pypy
+      - check-tempest-dsvm-full
       - check-tempest-dsvm-full
       - check-tempest-dsvm-postgres-full
       - check-tempest-dsvm-neutron
