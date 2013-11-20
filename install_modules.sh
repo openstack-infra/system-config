@@ -32,7 +32,6 @@ MODULES["puppetlabs-mysql"]="0.6.1"
 MODULES["puppetlabs-postgresql"]="3.0.0"
 MODULES["puppetlabs-stdlib"]="3.2.0"
 MODULES["saz-memcached"]="2.0.2"
-MODULES["saz-gearman"]="2.0.1"
 MODULES["spiette-selinux"]="0.5.1"
 MODULES["rafaelfc-pear"]="1.0.3"
 
