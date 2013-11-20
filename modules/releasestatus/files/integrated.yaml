@@ -1,16 +1,16 @@
 # Name of the series
-series: havana
+series: icehouse
 
 # Final release date
-releasedate: 2013-10-17
+releasedate: 2014-04-17
 
 # Short milestone codes, with number of weeks leading to them
 # The last one should be the release date
 milestones:
- - [6, h1]
- - [6, h2]
- - [6, h3]
- - [5, Oct 17]
+ - [6, i1]
+ - [6, i2]
+ - [5, i3]
+ - [5, Apr 17]
 
 # Set of projects to consider in the report
 products:
@@ -24,3 +24,4 @@ products:
  - oslo
  - ceilometer
  - heat
+ - trove
