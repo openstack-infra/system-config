@@ -110,4 +110,13 @@ class openstack_project::lists(
     webserver   => $listdomain,
     mailserver  => $listdomain,
   }
+
+  maillist { 'defcore-committee':
+    ensure      => present,
+    admin       => 'josh@openstack.org',
+    password    => $listpassword,
+    description => 'Discussions of the OpenStack Foundation Core Definition Committee',
+    webserver   => $listdomain,
+    mailserver  => $listdomain,
+  }
 }
