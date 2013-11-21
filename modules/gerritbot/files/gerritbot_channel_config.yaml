@@ -312,7 +312,7 @@ openstack-state-management:
     branches:
       - master
 
-openstack-cloudkeep:
+openstack-barbican:
     events:
       - patchset-created
       - change-merged
