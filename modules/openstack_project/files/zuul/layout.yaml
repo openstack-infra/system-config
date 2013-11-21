@@ -3657,7 +3657,6 @@ projects:
       - gate-tomograph-pep8
       - gate-tomograph-python26
       - gate-tomograph-python27
-      - gate-tomograph-python33
       - gate-tomograph-docs
     gate:
       - gate-tomograph-pep8
