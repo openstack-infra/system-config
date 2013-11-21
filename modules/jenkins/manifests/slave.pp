@@ -354,4 +354,24 @@ class jenkins::slave(
     enable    => true,
     subscribe => File['/etc/rsyslog.d/99-maxsize.conf'],
   }
+
+  # IANA assigns ports up to port 49151. Linux defaults to using ports
+  # 32768 to 61000 for its local ephemeral port range. Keystone runs on
+  # ports 35357 and sometimes 35358 which is in the linux ephemeral port
+  # range. Long story short sometimes keystone fails to start on default
+  # linux installs because something is using its port. Fix that.
+  file { '/etc/sysctl.d':
+    ensure => directory,
+    owner  => 'root',
+    group  => 'root',
+    mode   => '0755',
+  }
+  file { '/etc/sysctl.d/60-local-port-shift.conf':
+    ensure  => present,
+    content => 'net.ipv4.ip_local_port_range = 49152	61000',
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0644',
+    require => File['/etc/sysctl.d'],
+  }
 }
