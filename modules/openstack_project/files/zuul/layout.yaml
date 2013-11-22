@@ -305,6 +305,8 @@ jobs:
     voting: false
   - name: gate-rubick-python33
     voting: false
+  - name: gate-manila-devstack
+    voting: false
 # puppet-openstack targets
   - name: gate-puppet-vswitch-puppet-lint
     voting: false
@@ -3640,10 +3642,12 @@ projects:
       - gate-manila-pep8
       - gate-manila-python26
       - gate-manila-python27
+      - gate-manila-devstack
     gate:
       - gate-manila-pep8
       - gate-manila-python26
       - gate-manila-python27
+      - gate-manila-devstack
     post:
       - manila-branch-tarball
       - manila-coverage
