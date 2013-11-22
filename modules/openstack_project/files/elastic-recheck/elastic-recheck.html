@@ -61,6 +61,26 @@
 
   <BODY>
     <script type="text/javascript">header('Rechecks');</script>
+    <div class="container" id="graph-container">
+      <script type="text/javascript">
+$("#graph-container").append($(new Image()).graphite({
+    from: "-36hours",
+    url: "http://graphite.openstack.org/render/",
+    width: 600,
+    height: 400,
+    bgcolor: 'ffffff',
+    fgcolor: '000000',
+    target: [
+    "color(alias(movingAverage(asPercent(stats.zuul.pipeline.gate.job.gate-tempest-devstack-vm-neutron.FAILURE,sum(stats.zuul.pipeline.gate.job.gate-tempest-devstack-vm-neutron.{SUCCESS,FAILURE})),200), 'gate-tempest-devstack-vm-neutron'),'00c868')",
+    "color(alias(movingAverage(asPercent(stats.zuul.pipeline.check.job.check-tempest-devstack-vm-neutron.FAILURE,sum(stats.zuul.pipeline.check.job.check-tempest-devstack-vm-neutron.{SUCCESS,FAILURE})),200), 'check-tempest-devstack-vm-neutron'),'6464ff')",
+    "color(alias(movingAverage(asPercent(stats.zuul.pipeline.gate.job.gate-tempest-devstack-vm-full.FAILURE,sum(stats.zuul.pipeline.gate.job.gate-tempest-devstack-vm-full.{SUCCESS,FAILURE})),200), 'gate-tempest-devstack-vm-full'),'00FF00')",
+    "color(alias(movingAverage(asPercent(stats.zuul.pipeline.check.job.check-tempest-devstack-vm-full.FAILURE,sum(stats.zuul.pipeline.check.job.check-tempest-devstack-vm-full.{SUCCESS,FAILURE})),200), 'check-tempest-devstack-vm-full'),'ffbf52')",
+    "color(alias(movingAverage(asPercent(stats.zuul.pipeline.check.job.check-grenade-devstack-vm.FAILURE,sum(stats.zuul.pipeline.check.job.check-grenade-devstack-vm.{SUCCESS,FAILURE})),200), 'check-grenade-devstack-vm'),'800080')",
+    ],
+    title: "Gate Failure Rates"
+}));
+      </script>
+    </div>
 
     <div id="main-container" class="container">
     </div>
