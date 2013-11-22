@@ -347,11 +347,14 @@ class jenkins::slave(
     owner   => 'root',
     group   => 'root',
     mode    => '0644',
+    notify  => Service['rsyslog'],
   }
 
-  service { 'rsyslog':
-    ensure    => running,
-    enable    => true,
-    subscribe => File['/etc/rsyslog.d/99-maxsize.conf'],
+  if ! defined(Service['rsyslog']) {
+    service { 'rsyslog':
+      ensure     => running,
+      enable     => true,
+      hasrestart => true,
+    }
   }
 }

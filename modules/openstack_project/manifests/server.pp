@@ -30,11 +30,14 @@ class openstack_project::server (
       source  =>
         'puppet:///modules/openstack_project/rsyslog.d_50-default.conf',
       replace => true,
+      notify  => Service['rsyslog'],
     }
-    service { 'rsyslog':
-      ensure      => running,
-      hasrestart  => true,
-      subscribe   => File['/etc/rsyslog.d/50-default.conf'],
+    if ! defined(Service['rsyslog']) {
+      service { 'rsyslog':
+        ensure     => running,
+        enable     => true,
+        hasrestart => true,
+      }
     }
 
     # Ubuntu installs their whoopsie package by default, but it eats through
