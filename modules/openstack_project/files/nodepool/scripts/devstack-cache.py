@@ -20,8 +20,15 @@ import os
 import sys
 import subprocess
 
-DEVSTACK=os.path.expanduser('~/workspace-cache/devstack')
-CACHEDIR=os.path.expanduser('~/cache/files')
+DEVSTACK = os.path.expanduser('~/workspace-cache/devstack')
+CACHEDIR = os.path.expanduser('~/cache/files')
+
+INSTALL_PIP_VERSION = '1.4.1'
+PIP_GET_PIP_URL = 'https://raw.github.com/pypa/pip/master/contrib/get-pip.py'
+PIP_TAR_URL = (
+    'https://pypi.python.org/packages/source/p/pip/pip-%s.tar.gz'
+    % INSTALL_PIP_VERSION)
+
 
 def run_local(cmd, status=False, cwd='.', env={}):
     print "Running:", cmd
@@ -117,6 +124,11 @@ def main():
                 continue
             run_local(['wget', '-nv', '-c', url,
                        '-O', os.path.join(CACHEDIR, fname)])
+
+    run_local(['wget', '-nv', '-c', PIP_GET_PIP_URL,
+               '-O', os.path.join(CACHEDIR, 'get-pip.py')])
+    run_local(['wget', '-nv', '-c', PIP_TAR_URL,
+               '-O', os.path.join(CACHEDIR, os.path.basename(PIP_TAR_URL))])
 
 if __name__ == '__main__':
     main()
