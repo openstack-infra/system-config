@@ -1114,9 +1114,13 @@ projects:
 
   - name: openstack/swift-bench
     check:
-      - gate-noop
+      - gate-swift-bench-pep8
+      - gate-swift-bench-python26
+      - gate-swift-bench-python27
     gate:
-      - gate-noop
+      - gate-swift-bench-pep8
+      - gate-swift-bench-python26
+      - gate-swift-bench-python27
 
   - name: openstack/python-ceilometerclient
     check:
