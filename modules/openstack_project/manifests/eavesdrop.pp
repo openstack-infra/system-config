@@ -36,6 +36,7 @@ class openstack_project::eavesdrop (
         '#openstack-qa',
         '#openstack-trove',
         '#savanna',
+        '#storyboard',
         '#tripleo',
     ],
     use_ssl   => 'True'
