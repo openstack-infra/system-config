@@ -310,6 +310,8 @@ jobs:
     voting: false
   - name: ^gate-puppet-.*-puppet-unit-3.3$
     voting: false
+  - name: gate-tomograph-python33
+    voting: false
 
 projects:
   - name: openstack-infra/zuul
