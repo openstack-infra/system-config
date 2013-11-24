@@ -160,5 +160,10 @@ change-merged) to relevant IRC channels.
 Gerritbot's configuration is in
 :file:`modules/gerritbot/files/gerritbot_channel_config.yaml`.
 
-The configuration is organized by channel, with each project that a
-channel is interested in listed under the channel.
+Teams can add their channel and go through the standard code review process to
+get the bot added to their channel. The configuration is organized by channel,
+with each project that a channel is interested in listed under the channel.
+
+Please also add the openstackinfra account as a channel founder:
+
+/msg chanserv access #channel add openstackinfra +AFRfiorstv
