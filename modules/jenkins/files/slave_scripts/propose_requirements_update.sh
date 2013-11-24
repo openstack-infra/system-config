@@ -23,6 +23,7 @@ git config gitreview.username $USERNAME
 
 for PROJECT in $(cat projects.txt); do
 
+    change_id=""
     # See if there is an open change in the openstack/requirements topic
     # If so, get the change id for the existing change for use in the
     # commit msg.
@@ -47,15 +48,20 @@ EOF
         COMMIT_MSG=$INITIAL_COMMIT_MSG
     fi
 
-    rm -rf $(basename $PROJECT)
-    git clone --depth=1 ssh://$USERNAME@review.openstack.org:29418/$PROJECT.git
-
     PROJECT_DIR=$(basename $PROJECT)
-    python update.py $PROJECT_DIR
+    rm -rf $PROJECT_DIR
+    git clone --depth=1 ssh://$USERNAME@review.openstack.org:29418/$PROJECT.git
 
     pushd $PROJECT_DIR
     git review -s
+    if [ -n "$change_id" ] ; then
+        git review -d $change_id
+    fi
+    popd
 
+    python update.py $PROJECT_DIR
+
+    pushd $PROJECT_DIR
     if ! git diff --quiet ; then
         # Commit and review
         git commit -a -F- <<EOF
