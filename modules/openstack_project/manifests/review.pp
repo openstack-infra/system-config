@@ -120,6 +120,9 @@ class openstack_project::review (
     trivial_rebase_role_id          => 'trivial-rebase@review.openstack.org',
     email_private_key               => $email_private_key,
     sysadmins                       => $sysadmins,
+    gitweb                          => false,
+    cgit                            => true,
+    web_repo_url                    => 'https://git.openstack.org/cgit/',
     swift_username                  => $swift_username,
     swift_password                  => $swift_password,
     replication                     => [
