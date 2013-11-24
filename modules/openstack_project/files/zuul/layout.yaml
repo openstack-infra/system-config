@@ -2921,6 +2921,12 @@ projects:
     gate:
       - gate-noop
 
+  - name: stackforge/puppet_openstack_builder
+    check:
+      - gate-noop
+    gate:
+      - gate-noop
+
   - name: stackforge/mistral
     check:
       - gate-mistral-pep8
