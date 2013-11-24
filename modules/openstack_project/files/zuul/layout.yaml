@@ -3474,11 +3474,21 @@ projects:
       - gate-pecan-python26
       - gate-pecan-python27
       - gate-pecan-python33
+      - gate-pecan-tox-wsme-stable
+      - gate-pecan-tox-wsme-tip
+      - gate-pecan-tox-ceilometer-stable
+      - gate-pecan-tox-ceilometer-tip
+      - gate-pecan-tox-ironic-tip
     gate:
       - gate-pecan-pep8
       - gate-pecan-python26
       - gate-pecan-python27
       - gate-pecan-python33
+      - gate-pecan-tox-wsme-stable
+      - gate-pecan-tox-wsme-tip
+      - gate-pecan-tox-ceilometer-stable
+      - gate-pecan-tox-ceilometer-tip
+      - gate-pecan-tox-ironic-tip
     post:
       - pecan-branch-tarball
     pre-release:
