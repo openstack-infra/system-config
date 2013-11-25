@@ -29,6 +29,7 @@ Contents:
    :maxdepth: 2
 
    project
+   test-infra-requirements
    sysadmin
    systems
 
