@@ -1,5 +1,5 @@
 - job-template:
-    name: '{pipeline}-tempest-devstack-vm-full'
+    name: '{pipeline}-tempest-devstack-vm-full-{branch-designator}'
     node: '{node}'
 
     wrappers:
@@ -15,6 +15,10 @@
           export PYTHONUNBUFFERED=true
           export DEVSTACK_GATE_TEMPEST=1
           export DEVSTACK_GATE_TEMPEST_FULL=1
+          export BRANCH_OVERRIDE={branch-override}
+          if [ "$BRANCH_OVERRIDE" != "default" ] ; then
+              export ZUUL_BRANCH=$BRANCH_OVERRIDE
+          fi
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
       - link-logs
@@ -24,93 +28,9 @@
       - console-log
 
 
-- job:
-    name: gate-tempest-devstack-vm-iad-trial
-    node: devstack-precise-iad
-
-    wrappers:
-      - timeout:
-          timeout: 180
-          fail: true
-      - timestamps
-
-    builders:
-      - devstack-checkout
-      - shell: |
-          #!/bin/bash -xe
-          export PYTHONUNBUFFERED=true
-          export DEVSTACK_GATE_TEMPEST=1
-          export DEVSTACK_GATE_TEMPEST_FULL=1
-          export ZUUL_BRANCH=master
-          unset ZUUL_PROJECT
-          cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
-          ./safe-devstack-vm-gate-wrap.sh
-      - link-logs
-
-    publishers:
-      - devstack-logs-periodic
-      - console-log-periodic
-
-
-- job:
-    name: gate-tempest-devstack-vm-dfw-trial
-    node: devstack-precise-dfw
-
-    wrappers:
-      - timeout:
-          timeout: 180
-          fail: true
-      - timestamps
-
-    builders:
-      - devstack-checkout
-      - shell: |
-          #!/bin/bash -xe
-          export PYTHONUNBUFFERED=true
-          export DEVSTACK_GATE_TEMPEST=1
-          export DEVSTACK_GATE_TEMPEST_FULL=1
-          export ZUUL_BRANCH=master
-          unset ZUUL_PROJECT
-          cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
-          ./safe-devstack-vm-gate-wrap.sh
-      - link-logs
-
-    publishers:
-      - devstack-logs-periodic
-      - console-log-periodic
-
-
-- job:
-    name: gate-tempest-devstack-vm-ord-trial
-    node: devstack-precise-ord
-
-    wrappers:
-      - timeout:
-          timeout: 180
-          fail: true
-      - timestamps
-
-    builders:
-      - devstack-checkout
-      - shell: |
-          #!/bin/bash -xe
-          export PYTHONUNBUFFERED=true
-          export DEVSTACK_GATE_TEMPEST=1
-          export DEVSTACK_GATE_TEMPEST_FULL=1
-          export ZUUL_BRANCH=master
-          unset ZUUL_PROJECT
-          cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
-          ./safe-devstack-vm-gate-wrap.sh
-      - link-logs
-
-    publishers:
-      - devstack-logs-periodic
-      - console-log-periodic
-
-
-- job:
-    name: gate-tempest-devstack-vm-heat-slow
-    node: devstack-precise
+- job-template:
+    name: '{pipeline}-tempest-devstack-vm-heat-slow-{branch-designator}'
+    node: '{node}'
 
     wrappers:
       - timeout:
@@ -125,6 +45,10 @@
           export PYTHONUNBUFFERED=true
           export DEVSTACK_GATE_TEMPEST=1
           export DEVSTACK_GATE_TEMPEST_HEAT_SLOW=1
+          export BRANCH_OVERRIDE={branch-override}
+          if [ "$BRANCH_OVERRIDE" != "default" ] ; then
+              export ZUUL_BRANCH=$BRANCH_OVERRIDE
+          fi
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
       - link-logs
@@ -135,7 +59,7 @@
 
 
 - job-template:
-    name: '{pipeline}-tempest-devstack-vm-neutron'
+    name: '{pipeline}-tempest-devstack-vm-neutron-{branch-designator}'
     node: '{node}'
 
     wrappers:
@@ -152,6 +76,10 @@
           export DEVSTACK_GATE_TEMPEST=1
           export DEVSTACK_GATE_NEUTRON=1
           export DEVSTACK_GATE_SMOKE_SERIAL=1
+          export BRANCH_OVERRIDE={branch-override}
+          if [ "$BRANCH_OVERRIDE" != "default" ] ; then
+              export ZUUL_BRANCH=$BRANCH_OVERRIDE
+          fi
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
       - link-logs
@@ -162,7 +90,7 @@
 
 
 - job-template:
-    name: '{pipeline}-tempest-devstack-vm-neutron-pg'
+    name: '{pipeline}-tempest-devstack-vm-neutron-pg-{branch-designator}'
     node: '{node}'
 
     wrappers:
@@ -180,6 +108,10 @@
           export DEVSTACK_GATE_POSTGRES=1
           export DEVSTACK_GATE_NEUTRON=1
           export DEVSTACK_GATE_SMOKE_SERIAL=1
+          export BRANCH_OVERRIDE={branch-override}
+          if [ "$BRANCH_OVERRIDE" != "default" ] ; then
+              export ZUUL_BRANCH=$BRANCH_OVERRIDE
+          fi
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
       - link-logs
@@ -190,7 +122,7 @@
 
 
 - job-template:
-    name: '{pipeline}-tempest-devstack-vm-neutron-isolated'
+    name: '{pipeline}-tempest-devstack-vm-neutron-isolated-{branch-designator}'
     node: '{node}'
 
     wrappers:
@@ -208,6 +140,10 @@
           export DEVSTACK_GATE_NEUTRON=1
           export DEVSTACK_GATE_TEMPEST_ALLOW_TENANT_ISOLATION=1
           export DEVSTACK_GATE_SMOKE_SERIAL=1
+          export BRANCH_OVERRIDE={branch-override}
+          if [ "$BRANCH_OVERRIDE" != "default" ] ; then
+              export ZUUL_BRANCH=$BRANCH_OVERRIDE
+          fi
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
       - link-logs
@@ -218,7 +154,7 @@
 
 
 - job-template:
-    name: '{pipeline}-tempest-devstack-vm-neutron-isolated-parallel'
+    name: '{pipeline}-tempest-devstack-vm-neutron-isolated-parallel-{branch-designator}'
     node: '{node}'
 
     wrappers:
@@ -235,6 +171,10 @@
           export DEVSTACK_GATE_TEMPEST=1
           export DEVSTACK_GATE_NEUTRON=1
           export DEVSTACK_GATE_TEMPEST_ALLOW_TENANT_ISOLATION=1
+          export BRANCH_OVERRIDE={branch-override}
+          if [ "$BRANCH_OVERRIDE" != "default" ] ; then
+              export ZUUL_BRANCH=$BRANCH_OVERRIDE
+          fi
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
       - link-logs
@@ -244,7 +184,7 @@
       - console-log
 
 - job-template:
-    name: '{pipeline}-tempest-devstack-vm-neutron-pg-isolated'
+    name: '{pipeline}-tempest-devstack-vm-neutron-pg-isolated-{branch-designator}'
     node: '{node}'
 
     wrappers:
@@ -263,6 +203,10 @@
           export DEVSTACK_GATE_NEUTRON=1
           export DEVSTACK_GATE_TEMPEST_ALLOW_TENANT_ISOLATION=1
           export DEVSTACK_GATE_SMOKE_SERIAL=1
+          export BRANCH_OVERRIDE={branch-override}
+          if [ "$BRANCH_OVERRIDE" != "default" ] ; then
+              export ZUUL_BRANCH=$BRANCH_OVERRIDE
+          fi
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
       - link-logs
@@ -273,7 +217,7 @@
 
 
 - job-template:
-    name: '{pipeline}-tempest-devstack-vm-neutron-full'
+    name: '{pipeline}-tempest-devstack-vm-neutron-full-{branch-designator}'
     node: '{node}'
 
     wrappers:
@@ -291,6 +235,10 @@
           export DEVSTACK_GATE_TEMPEST_TESTR_FULL=1
           export DEVSTACK_GATE_NEUTRON=1
           export DEVSTACK_GATE_TEMPEST_ALLOW_TENANT_ISOLATION=1
+          export BRANCH_OVERRIDE={branch-override}
+          if [ "$BRANCH_OVERRIDE" != "default" ] ; then
+              export ZUUL_BRANCH=$BRANCH_OVERRIDE
+          fi
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
       - link-logs
@@ -301,7 +249,7 @@
 
 
 - job-template:
-    name: '{pipeline}-devstack-vm-cells'
+    name: '{pipeline}-devstack-vm-cells-{branch-designator}'
     node: '{node}'
 
     wrappers:
@@ -317,6 +265,10 @@
           export PYTHONUNBUFFERED=true
           export DEVSTACK_GATE_CELLS=1
           export DEVSTACK_GATE_EXERCISES=1
+          export BRANCH_OVERRIDE={branch-override}
+          if [ "$BRANCH_OVERRIDE" != "default" ] ; then
+              export ZUUL_BRANCH=$BRANCH_OVERRIDE
+          fi
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
       - link-logs
@@ -327,7 +279,7 @@
 
 
 - job-template:
-    name: '{pipeline}-tempest-devstack-vm-cells'
+    name: '{pipeline}-tempest-devstack-vm-cells-{branch-designator}'
     node: '{node}'
 
     wrappers:
@@ -343,6 +295,10 @@
           export PYTHONUNBUFFERED=true
           export DEVSTACK_GATE_TEMPEST=1
           export DEVSTACK_GATE_CELLS=1
+          export BRANCH_OVERRIDE={branch-override}
+          if [ "$BRANCH_OVERRIDE" != "default" ] ; then
+              export ZUUL_BRANCH=$BRANCH_OVERRIDE
+          fi
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
       - link-logs
@@ -353,7 +309,7 @@
 
 
 - job-template:
-    name: '{pipeline}-tempest-devstack-vm-cells-full'
+    name: '{pipeline}-tempest-devstack-vm-cells-full-{branch-designator}'
     node: '{node}'
 
     wrappers:
@@ -370,6 +326,10 @@
           export DEVSTACK_GATE_TEMPEST=1
           export DEVSTACK_GATE_TEMPEST_FULL=1
           export DEVSTACK_GATE_CELLS=1
+          export BRANCH_OVERRIDE={branch-override}
+          if [ "$BRANCH_OVERRIDE" != "default" ] ; then
+              export ZUUL_BRANCH=$BRANCH_OVERRIDE
+          fi
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
       - link-logs
@@ -380,7 +340,7 @@
 
 
 - job-template:
-    name: '{pipeline}-tempest-devstack-vm-large-ops'
+    name: '{pipeline}-tempest-devstack-vm-large-ops-{branch-designator}'
     node: '{node}'
 
     wrappers:
@@ -396,6 +356,10 @@
           export PYTHONUNBUFFERED=true
           export DEVSTACK_GATE_TEMPEST=1
           export DEVSTACK_GATE_TEMPEST_LARGE_OPS=1
+          export BRANCH_OVERRIDE={branch-override}
+          if [ "$BRANCH_OVERRIDE" != "default" ] ; then
+              export ZUUL_BRANCH=$BRANCH_OVERRIDE
+          fi
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
       - link-logs
@@ -405,7 +369,7 @@
       - console-log
 
 - job-template:
-    name: '{pipeline}-tempest-devstack-vm-neutron-large-ops'
+    name: '{pipeline}-tempest-devstack-vm-neutron-large-ops-{branch-designator}'
     node: '{node}'
 
     wrappers:
@@ -422,6 +386,10 @@
           export DEVSTACK_GATE_TEMPEST=1
           export DEVSTACK_GATE_TEMPEST_LARGE_OPS=1
           export DEVSTACK_GATE_NEUTRON=1
+          export BRANCH_OVERRIDE={branch-override}
+          if [ "$BRANCH_OVERRIDE" != "default" ] ; then
+              export ZUUL_BRANCH=$BRANCH_OVERRIDE
+          fi
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
       - link-logs
@@ -431,99 +399,9 @@
       - console-log
 
 
-- job:
-    name: periodic-tempest-devstack-vm-all
-    node: devstack-precise
-
-    wrappers:
-      - timeout:
-          timeout: 180
-          fail: true
-      - timestamps
-
-    builders:
-      - devstack-checkout
-      - shell: |
-          #!/bin/bash -xe
-          export PYTHONUNBUFFERED=true
-          export DEVSTACK_GATE_TEMPEST=1
-          export DEVSTACK_GATE_TEMPEST_ALL=1
-          export ZUUL_BRANCH=master
-          unset ZUUL_PROJECT
-          cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
-          ./safe-devstack-vm-gate-wrap.sh
-      - link-logs
-
-    publishers:
-      - devstack-logs-periodic
-      - console-log-periodic
-      - email:
-          recipients: openstack-qa@lists.openstack.org
-
-
-- job:
-    name: periodic-tempest-devstack-vm-coverage
-    node: devstack-precise
-
-    wrappers:
-      - timeout:
-          timeout: 180
-          fail: true
-      - timestamps
-
-    builders:
-      - devstack-checkout
-      - shell: |
-          #!/bin/bash -xe
-          export PYTHONUNBUFFERED=true
-          export DEVSTACK_GATE_TEMPEST=1
-          export DEVSTACK_GATE_TEMPEST_COVERAGE=1
-          export ZUUL_BRANCH=master
-          unset ZUUL_PROJECT
-          cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
-          ./safe-devstack-vm-gate-wrap.sh
-      - link-logs
-
-    publishers:
-      - devstack-logs-periodic
-      - console-log-periodic
-      - email:
-          recipients: openstack-qa@lists.openstack.org
-
-
-- job:
-    name: periodic-tempest-devstack-vm-stress
-    node: devstack-precise
-
-    wrappers:
-      - timeout:
-          timeout: 180
-          fail: true
-      - timestamps
-
-    builders:
-      - devstack-checkout
-      - shell: |
-          #!/bin/bash -xe
-          export PYTHONUNBUFFERED=true
-          export DEVSTACK_GATE_TEMPEST=1
-          export DEVSTACK_GATE_TEMPEST_STRESS=1
-          export ZUUL_BRANCH=master
-          unset ZUUL_PROJECT
-          cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
-          ./safe-devstack-vm-gate-wrap.sh
-      - link-logs
-
-    publishers:
-      - devstack-logs-periodic
-      - console-log-periodic
-      - email:
-          recipients: openstack-qa@lists.openstack.org
-
-
-- job:
-    name: gate-tempest-devstack-vm-postgres-zeromq-full
-    node: devstack-precise
+- job-template:
+    name: '{pipeline}-tempest-devstack-vm-postgres-zeromq-full-{branch-designator}'
+    node: '{node}'
 
     wrappers:
       - timeout:
@@ -540,6 +418,10 @@
           export DEVSTACK_GATE_TEMPEST_FULL=1
           export DEVSTACK_GATE_POSTGRES=1
           export DEVSTACK_GATE_ZEROMQ=1
+          export BRANCH_OVERRIDE={branch-override}
+          if [ "$BRANCH_OVERRIDE" != "default" ] ; then
+              export ZUUL_BRANCH=$BRANCH_OVERRIDE
+          fi
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
       - link-logs
@@ -550,7 +432,7 @@
 
 
 - job-template:
-    name: '{pipeline}-tempest-devstack-vm-postgres'
+    name: '{pipeline}-tempest-devstack-vm-postgres-{branch-designator}'
     node: '{node}'
 
     wrappers:
@@ -566,6 +448,10 @@
           export PYTHONUNBUFFERED=true
           export DEVSTACK_GATE_TEMPEST=1
           export DEVSTACK_GATE_POSTGRES=1
+          export BRANCH_OVERRIDE={branch-override}
+          if [ "$BRANCH_OVERRIDE" != "default" ] ; then
+              export ZUUL_BRANCH=$BRANCH_OVERRIDE
+          fi
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
       - link-logs
@@ -576,7 +462,7 @@
 
 
 - job-template:
-    name: '{pipeline}-tempest-devstack-vm-postgres-full'
+    name: '{pipeline}-tempest-devstack-vm-postgres-full-{branch-designator}'
     node: '{node}'
 
     wrappers:
@@ -593,6 +479,10 @@
           export DEVSTACK_GATE_TEMPEST=1
           export DEVSTACK_GATE_TEMPEST_FULL=1
           export DEVSTACK_GATE_POSTGRES=1
+          export BRANCH_OVERRIDE={branch-override}
+          if [ "$BRANCH_OVERRIDE" != "default" ] ; then
+              export ZUUL_BRANCH=$BRANCH_OVERRIDE
+          fi
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
       - link-logs
@@ -657,18 +547,20 @@
 - job-group:
     name: devstack-jobs
     jobs:
-      - '{pipeline}-tempest-devstack-vm-full'
-      - '{pipeline}-tempest-devstack-vm-neutron'
-      - '{pipeline}-tempest-devstack-vm-neutron-pg'
-      - '{pipeline}-tempest-devstack-vm-neutron-isolated'
-      - '{pipeline}-tempest-devstack-vm-neutron-isolated-parallel'
-      - '{pipeline}-tempest-devstack-vm-neutron-pg-isolated'
-      - '{pipeline}-tempest-devstack-vm-neutron-full'
-      - '{pipeline}-devstack-vm-cells'
-      - '{pipeline}-tempest-devstack-vm-cells'
-      - '{pipeline}-tempest-devstack-vm-cells-full'
-      - '{pipeline}-tempest-devstack-vm-large-ops'
-      - '{pipeline}-tempest-devstack-vm-neutron-large-ops'
-      - '{pipeline}-tempest-devstack-vm-postgres'
-      - '{pipeline}-tempest-devstack-vm-postgres-full'
+      - '{pipeline}-tempest-devstack-vm-full-{branch-designator}'
+      - '{pipeline}-tempest-devstack-vm-neutron-{branch-designator}'
+      - '{pipeline}-tempest-devstack-vm-neutron-pg-{branch-designator}'
+      - '{pipeline}-tempest-devstack-vm-neutron-isolated-{branch-designator}'
+      - '{pipeline}-tempest-devstack-vm-neutron-isolated-parallel-{branch-designator}'
+      - '{pipeline}-tempest-devstack-vm-neutron-pg-isolated-{branch-designator}'
+      - '{pipeline}-tempest-devstack-vm-neutron-full-{branch-designator}'
+      - '{pipeline}-devstack-vm-cells-{branch-designator}'
+      - '{pipeline}-tempest-devstack-vm-cells-{branch-designator}'
+      - '{pipeline}-tempest-devstack-vm-cells-full-{branch-designator}'
+      - '{pipeline}-tempest-devstack-vm-large-ops-{branch-designator}'
+      - '{pipeline}-tempest-devstack-vm-neutron-large-ops-{branch-designator}'
+      - '{pipeline}-tempest-devstack-vm-postgres-{branch-designator}'
+      - '{pipeline}-tempest-devstack-vm-postgres-full-{branch-designator}'
+      - '{pipeline}-tempest-devstack-vm-heat-slow-{branch-designator}'
+      - '{pipeline}-tempest-devstack-vm-postgres-zeromq-full-{branch-designator}'
       - '{pipeline}-grenade-devstack-vm'
