@@ -292,7 +292,7 @@ jobs:
     voting: false
   - name: gate-murano-repository-python33
     voting: false
-  - name: ^gate-solum-(python33|pypy)$
+  - name: gate-solum-pypy
     voting: false
 # puppet-openstack targets
   - name: gate-puppet-vswitch-puppet-lint
