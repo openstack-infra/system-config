@@ -1,0 +1,9 @@
+Approved+1: Monty Taylor <mordred@inaugust.com>
+Code-Review+2: Monty Taylor <mordred@inaugust.com>
+Verified+2: Jenkins
+Code-Review+1: Alex Gaynor <alex.gaynor@gmail.com>
+Submitted-by: Jenkins
+Submitted-at: Mon, 25 Nov 2013 14:16:02 +0000
+Reviewed-on: https://review.openstack.org/58187
+Project: openstack-infra/config
+Branch: refs/heads/master
