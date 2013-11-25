@@ -233,6 +233,8 @@ jobs:
     branch: stable/grizzly
   - name: openstack-network-connectivity-admin-old
     branch: stable/grizzly
+  - name: openstack-object-storage-admin-old
+    branch: stable/grizzly
   - name: openstack-basic-install-fedora-old
     branch: stable/grizzly
   - name: openstack-basic-install-ubuntu-old
@@ -2155,6 +2157,7 @@ projects:
       - openstack-block-storage-admin-old
       - openstack-compute-admin-old
       - openstack-network-connectivity-admin-old
+      - openstack-object-storage-admin-old
       - openstack-basic-install-fedora-old
       - openstack-basic-install-ubuntu-old
       - openstack-glossary
