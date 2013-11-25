@@ -10,14 +10,8 @@
 org=$1
 project=$2
 
-if [[ -z "$org" || -z "$project" ]]
-then
-  echo "Usage: $0 ORG PROJECT"
-  echo
-  echo "ORG: The project organization (eg 'openstack')"
-  echo "PROJECT: The project name (eg 'nova')"
-  exit 1
-fi
+source /usr/local/jenkins/slave_scripts/functions.sh
+check_variable_org_project "$org" "$project" "$0"
 
 source /usr/local/jenkins/slave_scripts/select-mirror.sh $org $project
 
