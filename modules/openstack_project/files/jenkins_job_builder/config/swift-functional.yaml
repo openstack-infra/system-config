@@ -1,5 +1,5 @@
 - job-template:
-    name: '{pipeline}-swift-devstack-vm-functional'
+    name: '{pipeline}-swift-devstack-vm-functional-{branch-designator}'
     node: '{node}'
 
     wrappers:
@@ -15,6 +15,10 @@
           export PYTHONUNBUFFERED=true
           export DEVSTACK_GATE_TEMPEST=0
           export DEVSTACK_GATE_EXERCISES=0
+          if [ "$BRANCH_OVERRIDE" != "default" ] ; then
+              export ZUUL_BRANCH=$BRANCH_OVERRIDE
+          fi
+          cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
 
           function post_test_hook {{
               cd /opt/stack/new/swift
@@ -34,7 +38,7 @@
 
 
 - job-template:
-    name: 'periodic-swift-devstack-vm-functional-stable-{release}'
+    name: 'periodic-swift-devstack-vm-functional-{branch-designator}'
     node: '{node}'
 
     wrappers:
@@ -50,7 +54,7 @@
           export PYTHONUNBUFFERED=true
           export DEVSTACK_GATE_TEMPEST=0
           export DEVSTACK_GATE_EXERCISES=0
-          export ZUUL_BRANCH=stable/{release}
+          export ZUUL_BRANCH={branch-override}
           unset ZUUL_PROJECT
 
           function post_test_hook {{
