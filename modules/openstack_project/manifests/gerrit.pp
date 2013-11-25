@@ -4,6 +4,7 @@
 # up for launchpad single sign on and bug/blueprint links
 
 class openstack_project::gerrit (
+  $mysql_password,
   $vhost_name = $::fqdn,
   $canonicalweburl = "https://${::fqdn}/",
   $serveradmin = 'webmaster@openstack.org',
@@ -161,6 +162,7 @@ class openstack_project::gerrit (
     contactstore_appsec             => $contactstore_appsec,
     contactstore_pubkey             => $contactstore_pubkey,
     contactstore_url                => $contactstore_url,
+    mysql_password                  => $mysql_password,
     email_private_key               => $email_private_key,
     replicate_local                 => $replicate_local,
     replication                     => $replication,

@@ -1,5 +1,7 @@
 # Install and maintain Gerrit Code Review.
 # params:
+#   mysql_password:
+#     The password with which gerrit connects to mysql.
 #   vhost_name:
 #     used in the Apache virtual host, eg., review.example.com
 #   canonicalweburl:
@@ -74,6 +76,7 @@
 # TODO: make more gerrit options configurable here
 #
 class gerrit(
+  $mysql_password,
   $war = '',
   $email_private_key = '',
   $vhost_name = $::fqdn,
@@ -228,6 +231,7 @@ class gerrit(
 
   # Skip replication if we're in test mode
   if ($testmode == false) {
+    # Template uses $replication
     file { '/home/gerrit2/review_site/etc/replication.config':
       ensure  => present,
       owner   => 'root',
@@ -240,6 +244,37 @@ class gerrit(
   }
 
   # Gerrit sets these permissions in 'init'; don't fight them.
+  # Template uses:
+  # - $canonicalweburl
+  # - $database_poollimit
+  # - $gerrit_contributor_agreement
+  # - $gerrit_auth_type
+  # - $openidssourl
+  # - $ldap_server
+  # - $ldap_username
+  # - $ldap_password
+  # - $ldap_account_base
+  # - $ldap_account_pattern
+  # - $ldap_account_email_address
+  # - $smtpserver
+  # - $sendmail_from
+  # - $java_home
+  # - $container_heaplimit
+  # - $core_packedgitopenfiles
+  # - $core_packedgitlimit
+  # - $core_packedgitwindowsize
+  # - $sshd_listen_address
+  # - $sshd_threads
+  # - $httpd_maxwait
+  # - $httpd_acceptorthreads
+  # - $httpd_minthreads
+  # - $httpd_maxthreads
+  # - $commentlinks
+  # - $enable_melody
+  # - $melody_session
+  # - $gitweb
+  # - $contactstore_appsec
+  # - $contactstore_url
   file { '/home/gerrit2/review_site/etc/gerrit.config':
     ensure  => present,
     owner   => 'gerrit2',
@@ -255,6 +290,7 @@ class gerrit(
   # Gerrit sets these permissions in 'init'; don't fight them.  If
   # these permissions aren't set correctly, gerrit init will write a
   # new secure.config file and lose the mysql password.
+  # Template uses $mysql_password, $email_private_key
   file { '/home/gerrit2/review_site/etc/secure.config':
     ensure  => present,
     owner   => 'gerrit2',
@@ -267,6 +303,16 @@ class gerrit(
 
   # Set up apache.
 
+  # Template uses:
+  # - $vhost_name
+  # - $serveradmin
+  # - $ssl_cert_file
+  # - $ssl_key_file
+  # - $ssl_chain_file
+  # - $canonicalweburl
+  # - $replicate_local
+  # - $contactstore
+  # - $robots_txt_source
   apache::vhost { $vhost_name:
     port     => 443,
     docroot  => 'MEANINGLESS ARGUMENT',
@@ -524,6 +570,7 @@ class gerrit(
         File['/home/gerrit2/review_site/lib'],
       ],
     }
+    # Template uses $contactstore_pubkey
     file { '/home/gerrit2/review_site/etc/contact_information.pub':
       ensure  => present,
       owner   => 'root',
