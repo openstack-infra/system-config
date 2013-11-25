@@ -2449,6 +2449,18 @@ projects:
       - gate-climate-python27
       - gate-climate-requirements
 
+  - name: stackforge/climate-nova
+    check:
+      - gate-climate-nova-pep8
+      - gate-climate-nova-python26
+      - gate-climate-nova-python27
+      - gate-climate-nova-requirements
+    gate:
+      - gate-climate-nova-pep8
+      - gate-climate-nova-python26
+      - gate-climate-nova-python27
+      - gate-climate-nova-requirements
+
   - name: stackforge/kwapi
     check:
       - gate-kwapi-pep8

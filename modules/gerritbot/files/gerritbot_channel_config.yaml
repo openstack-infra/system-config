@@ -386,6 +386,7 @@ openstack-climate:
       - x-vrif-minus-2
     projects:
       - stackforge/climate
+      - stackforge/climate-nova
     branches:
       - master
 
