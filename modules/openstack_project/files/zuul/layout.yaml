@@ -297,7 +297,7 @@ jobs:
     voting: false
   - name: gate-murano-repository-python33
     voting: false
-  - name: ^gate-solum-(python33|pypy)$
+  - name: gate-solum-pypy
     voting: false
   - name: gate-rubick-python33
     voting: false
