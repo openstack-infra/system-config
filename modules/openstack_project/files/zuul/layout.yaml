@@ -555,9 +555,28 @@ projects:
 
   - name: openstack-infra/reviewstats
     check:
-      - gate-noop
+      - gate-reviewstats-docs
+      - gate-reviewstats-pep8
+      - gate-reviewstats-python26
+      - gate-reviewstats-python27
+      - gate-reviewstats-python33
     gate:
-      - gate-noop
+      - gate-reviewstats-docs
+      - gate-reviewstats-pep8
+      - gate-reviewstats-python26
+      - gate-reviewstats-python27
+      - gate-reviewstats-python33
+    post:
+      - reviewstats-branch-tarball
+      - reviewstats-coverage
+    pre-release:
+      - reviewstats-tarball
+    release:
+      - reviewstats-tarball:
+        - reviewstats-pypi-upload:
+          - post-mirror-python26
+          - post-mirror-python27
+          - post-mirror-python33
 
   - name: openstack-infra/releasestatus
     check:
