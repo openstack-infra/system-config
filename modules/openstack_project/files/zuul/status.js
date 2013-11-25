@@ -269,7 +269,7 @@ function format_change(change, change_queue) {
         } else if (result == 'UNSTABLE') {
             result_class += " result_unstable";
         }
-        html += '<span class="job">';
+        html += '<span class="jobwrapper"><span class="job">';
         if (job['url'] !== null) {
             html += '<a href="'+job['url']+'">';
         }
@@ -287,7 +287,7 @@ function format_change(change, change_queue) {
         if (job['voting'] == false) {
             html += ' (non-voting)';
         }
-        html += '</span>';
+        html += '</span></span>';
     });
 
     html += '</div></div></td></tr>';
