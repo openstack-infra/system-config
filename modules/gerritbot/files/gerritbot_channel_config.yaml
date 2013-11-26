@@ -234,6 +234,7 @@ openstack-chef:
       - stackforge/cookbook-openstack-metering
       - stackforge/cookbook-openstack-network
       - stackforge/cookbook-openstack-object-storage
+      - stackforge/openstack-chef-repo
     branches:
       - master
       - stable/grizzly
