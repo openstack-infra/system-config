@@ -1,3 +1,12 @@
+# This file is used by the notify_impact jeepyb plugin to add subscribers to
+# automatically created DocImpact bugs. There are two structures here. The
+# author_map maps email addresses of authors to "groups". These groups can be
+# anything you want, although the most likely example is a dev team at a
+# particular company. The second structure is "subscriber_map", which lists
+# the people to subscribe to a bug owned by a particular group.
+#
+# Please keep these structures in alphabetical order.
+
 author_map:
     joshua.hesketh@rackspace.com: rcbau
     lana.brindley@rackspace.com: rcbau
