@@ -976,6 +976,30 @@ projects:
           - post-mirror-python33
       - oslo.messaging-docs
 
+  - name: openstack/oslo.rootwrap
+    check:
+      - gate-oslo.rootwrap-requirements
+      - gate-oslo.rootwrap-pep8
+      - gate-oslo.rootwrap-python26
+      - gate-oslo.rootwrap-python27
+      - gate-oslo.rootwrap-python33
+    gate:
+      - gate-oslo.rootwrap-requirements
+      - gate-oslo.rootwrap-pep8
+      - gate-oslo.rootwrap-python26
+      - gate-oslo.rootwrap-python27
+      - gate-oslo.rootwrap-python33
+    post:
+      - oslo.rootwrap-branch-tarball
+    pre-release:
+      - oslo.rootwrap-tarball
+    release:
+      - oslo.rootwrap-tarball:
+        - oslo.rootwrap-pypi-upload:
+          - post-mirror-python26
+          - post-mirror-python27
+          - post-mirror-python33
+
   - name: openstack/oslo.sphinx
     check:
       - gate-oslo.sphinx-requirements
