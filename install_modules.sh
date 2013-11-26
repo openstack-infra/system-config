@@ -2,13 +2,26 @@
 
 MODULE_PATH=/etc/puppet/modules
 
+function remove_module {
+  local SHORT_MODULE_NAME=$1
+  if [ -n "$SHORT_MODULE_NAME" ]; then
+    rm -Rf "$MODULE_PATH/$SHORT_MODULE_NAME"
+  else
+    echo "ERROR: remove_module requires a SHORT_MODULE_NAME."
+  fi
+}
+
 # Array of modules to be installed key:value is module:version.
 declare -A MODULES
 #NOTE: if we previously installed kickstandproject-ntp we nuke it here
 # since puppetlabs-ntp and kickstandproject-ntp install to the same dir
 if grep kickstandproject-ntp /etc/puppet/modules/ntp/Modulefile &> /dev/null; then
-  rm -Rf "/etc/puppet/modules/ntp"
+  remove_module "ntp"
 fi
+
+remove_module "gearman" #remove old saz-gearman
+remove_module "limits" # remove saz-limits (required by saz-gearman)
+
 MODULES["puppetlabs-ntp"]="0.2.0"
 
 MODULES["openstackci-dashboard"]="0.0.8"
@@ -32,7 +45,6 @@ MODULES["puppetlabs-mysql"]="0.6.1"
 MODULES["puppetlabs-postgresql"]="3.0.0"
 MODULES["puppetlabs-stdlib"]="3.2.0"
 MODULES["saz-memcached"]="2.0.2"
-MODULES["saz-gearman"]="2.0.1"
 MODULES["spiette-selinux"]="0.5.1"
 MODULES["rafaelfc-pear"]="1.0.3"
 
