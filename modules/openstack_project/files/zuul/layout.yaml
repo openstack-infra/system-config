@@ -2164,6 +2164,12 @@ projects:
     post:
       - hook-bufunfa-rtfd
 
+  - name: openstack/doctools
+    check:
+      - gate-doctools-pep8
+    gate:
+      - gate-doctools-pep8
+
   - name: openstack/openstack-manuals
     check:
       - gate-openstack-manuals-validate-niceness

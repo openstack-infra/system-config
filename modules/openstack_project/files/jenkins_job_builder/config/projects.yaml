@@ -1657,6 +1657,14 @@
           profileos: "ubuntu"
 
 - project:
+    name: doctools
+    github-org: openstack
+    node: precise
+
+    jobs:
+      - gate-{name}-pep8
+
+- project:
     name: manila
     github-org: stackforge
     node: precise
