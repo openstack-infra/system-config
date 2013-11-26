@@ -271,6 +271,12 @@ jobs:
     voting: false
   - name: gate-savanna-pylint
     voting: false
+  - name: ^(gate|check)-tempest-dsvm-savanna-full$
+    voting: false
+  - name: ^(gate|check)-tempest-dsvm-savanna-postgres-full$
+    voting: false
+  - name: ^(gate|check)-tempest-dsvm-savanna-neutron$
+    voting: false
   - name: gate-marconi-python33
     voting: false
   - name: gate-python-ceilometerclient-python33
@@ -2571,12 +2577,18 @@ projects:
       - gate-savanna-python26
       - gate-savanna-python27
       - gate-savanna-requirements
+      - check-tempest-dsvm-savanna-full
+      - check-tempest-dsvm-savanna-postgres-full
+      - check-tempest-dsvm-savanna-neutron
     gate:
       - gate-savanna-docs
       - gate-savanna-pep8
       - gate-savanna-python26
       - gate-savanna-python27
       - gate-savanna-requirements
+      - gate-tempest-dsvm-savanna-full
+      - gate-tempest-dsvm-savanna-postgres-full
+      - gate-tempest-dsvm-savanna-neutron
     post:
       - savanna-docs
       - savanna-branch-tarball
