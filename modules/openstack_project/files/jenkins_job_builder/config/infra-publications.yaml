@@ -26,7 +26,10 @@
       - shell: |
           #!/bin/bash -xe
           git reset --hard remotes/origin/master
-          git clean -x -f -d -q
+          if ! git clean -x -f -d -q ; then
+              sleep 1
+              git clean -x -f -d -q
+          fi
           ./make-index
 
     publishers:
