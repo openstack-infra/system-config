@@ -56,6 +56,7 @@ openstack-doc:
       - openstack/openstack-manuals
       - openstack/operations-guide
       - openstack/api-site
+      - stackforge/clouddocs-maven-plugin
     branches:
       - master
       - stable/havana
