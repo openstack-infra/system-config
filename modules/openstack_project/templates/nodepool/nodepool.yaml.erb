@@ -32,7 +32,8 @@ providers:
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
       - name: devstack-f19-check
-        base-image: 'Fedora 19 (Schrodinger\'s Cat)'
+        base-image: |
+          Fedora 19 (Schrodinger's Cat)
         min-ram: 8192
         setup: prepare_node_devstack.sh
         username: jenkins
@@ -55,7 +56,8 @@ providers:
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
       - name: devstack-f19-check
-        base-image: 'Fedora 19 (Schrodinger\'s Cat)'
+        base-image: |
+          Fedora 19 (Schrodinger's Cat)
         min-ram: 8192
         setup: prepare_node_devstack.sh
         username: jenkins
@@ -78,7 +80,8 @@ providers:
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
       - name: devstack-f19-check
-        base-image: 'Fedora 19 (Schrodinger\'s Cat)'
+        base-image: |
+          Fedora 19 (Schrodinger's Cat)
         min-ram: 8192
         setup: prepare_node_devstack.sh
         username: jenkins
