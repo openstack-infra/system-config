@@ -188,10 +188,16 @@
               git remote set-url origin https://review.openstack.org/p/openstack-infra/devstack-gate
               git remote update
               git reset --hard
-              git clean -x -f
+              if ! git clean -x -f ; then
+                  sleep 1
+                  git clean -x -f
+              fi
               git checkout master
               git reset --hard remotes/origin/master
-              git clean -x -f
+              if ! git clean -x -f ; then
+                  sleep 1
+                  git clean -x -f
+              fi
               cd ..
           fi
 

@@ -52,16 +52,25 @@ then
 fi
 
 git reset --hard
-git clean -x -f -d -q
+if ! git clean -x -f -d -q ; then
+    sleep 1
+    git clean -x -f -d -q
+fi
 
 if [ -z "$ZUUL_NEWREV" ]
 then
     git fetch $ZUUL_SITE/p/$ZUUL_PROJECT $ZUUL_REF
     git checkout FETCH_HEAD
     git reset --hard FETCH_HEAD
-    git clean -x -f -d -q
+    if ! git clean -x -f -d -q ; then
+        sleep 1
+        git clean -x -f -d -q
+    fi
 else
     git checkout $ZUUL_NEWREV
     git reset --hard $ZUUL_NEWREV
-    git clean -x -f -d -q
+    if ! git clean -x -f -d -q ; then
+        sleep 1
+        git clean -x -f -d -q
+    fi
 fi
