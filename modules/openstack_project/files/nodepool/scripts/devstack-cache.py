@@ -116,13 +116,14 @@ def main():
     branches = local_prep(distribution)
     image_filenames = {}
     for branch_data in branches:
-        if branch_data['debs']:
+        if branch_data.get('debs'):
             run_local(['sudo', 'apt-get', '-y', '-d', 'install'] +
                       branch_data['debs'])
-
-        if branch_data['rpms']:
+        elif branch_data.get('rpms'):
             run_local(['sudo', 'yum', 'install', '-y', '--downloadonly'] +
                       branch_data['rpms'])
+        else:
+            sys.exit('No supported package data found.')
 
         for url in branch_data['images']:
             fname = url.split('/')[-1]
