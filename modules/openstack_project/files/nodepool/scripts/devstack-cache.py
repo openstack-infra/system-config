@@ -116,11 +116,11 @@ def main():
     branches = local_prep(distribution)
     image_filenames = {}
     for branch_data in branches:
-        if branch_data['debs']:
+        if branch_data.get('debs'):
             run_local(['sudo', 'apt-get', '-y', '-d', 'install'] +
                       branch_data['debs'])
 
-        if branch_data['rpms']:
+        if branch_data.get('rpms'):
             run_local(['sudo', 'yum', 'install', '-y', '--downloadonly'] +
                       branch_data['rpms'])
 
