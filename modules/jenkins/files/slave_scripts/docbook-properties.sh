@@ -10,17 +10,16 @@
 BRANCH=$ZUUL_REFNAME
 
 # The master branch should get published to /trunk
-if [ $BRANCH == "master" ]
-then
+if [[ $BRANCH == "master" ]]; then
     DOC_RELEASE_PATH="trunk"
     DOC_COMMENTS_ENABLED=0
-fi
-
-# The stable/<releasename> branch should get published to /releasename, such as icehouse or havana
-if [[ $BRANCH =~ ^stable/(.*)$ ]]
-then
+elif [[ $BRANCH =~ ^stable/(.*)$ ]]; then
+    # The stable/<releasename> branch should get published to /releasename, such as icehouse or havana
     DOC_RELEASE_PATH=${BASH_REMATCH[1]}
     DOC_COMMENTS_ENABLED=1
+else
+    echo "Error: Branch($BRANCH) is invalid"
+    exit 1
 fi
 
 echo "DOC_RELEASE_PATH=$DOC_RELEASE_PATH" >gerrit-doc.properties
