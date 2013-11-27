@@ -26,9 +26,8 @@ class graphite(
   }
 
   exec { 'install_graphite_web' :
-    command     => 'python setup.py install --install-scripts=/usr/local/bin --install-lib=/usr/local/lib/python2.7/dist-packages --install-data=/var/lib/graphite',
-    cwd         => '/opt/graphite-web',
-    path        => '/bin:/usr/bin',
+    command     => 'pip install --install-option="--install-scripts=/usr/local/bin" --install-option="--install-lib=/usr/local/lib/python2.7/dist-packages" --install-option="--install-data=/var/lib/graphite" /opt/graphite-web',
+    path        => '/usr/local/bin:/usr/bin:/bin',
     refreshonly => true,
     subscribe   => Vcsrepo['/opt/graphite-web'],
     require     => [Exec['install_carbon'],
@@ -43,9 +42,8 @@ class graphite(
   }
 
   exec { 'install_carbon' :
-    command     => 'python setup.py install --install-scripts=/usr/local/bin --install-lib=/usr/local/lib/python2.7/dist-packages --install-data=/var/lib/graphite',
-    cwd         => '/opt/carbon',
-    path        => '/bin:/usr/bin',
+    command     => 'pip install --install-option="--install-scripts=/usr/local/bin" --install-option="--install-lib=/usr/local/lib/python2.7/dist-packages" --install-option="--install-data=/var/lib/graphite" /opt/carbon',
+    path        => '/usr/local/bin:/usr/bin:/bin',
     refreshonly => true,
     subscribe   => Vcsrepo['/opt/carbon'],
     require     => [Exec['install_whisper'],
