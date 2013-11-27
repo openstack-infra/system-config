@@ -33,9 +33,8 @@ class statusbot(
   }
 
   exec { 'install_statusbot' :
-    command     => 'python setup.py install',
-    cwd         => '/opt/statusbot',
-    path        => '/bin:/usr/bin',
+    command     => 'pip install /opt/statusbot',
+    path        => '/usr/local/bin:/usr/bin:/bin/',
     refreshonly => true,
     subscribe   => Vcsrepo['/opt/statusbot'],
   }

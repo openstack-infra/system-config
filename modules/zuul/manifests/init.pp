@@ -87,9 +87,8 @@ class zuul (
   }
 
   exec { 'install_zuul' :
-    command     => 'python setup.py install',
-    cwd         => '/opt/zuul',
-    path        => '/bin:/usr/bin',
+    command     => 'pip install /opt/zuul',
+    path        => '/usr/local/bin:/usr/bin:/bin/',
     refreshonly => true,
     subscribe   => Vcsrepo['/opt/zuul'],
     require     => Class['pip'],
