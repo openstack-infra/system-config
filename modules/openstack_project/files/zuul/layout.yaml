@@ -2584,6 +2584,7 @@ projects:
           - post-mirror-python33
       - hook-savanna-rtfd
       - savanna-docs
+      - savanna-merge-release-tags
     periodic:
       - savanna-propose-translation-update
 
