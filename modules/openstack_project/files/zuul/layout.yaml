@@ -1197,6 +1197,7 @@ projects:
       - gate-python-cinderclient-python26
       - gate-python-cinderclient-python27
       - gate-python-cinderclient-python33
+      - gate-python-cinderclient-pypy
       - check-tempest-devstack-vm-full
       - check-tempest-devstack-vm-postgres-full
       - check-tempest-devstack-vm-neutron
@@ -1210,6 +1211,7 @@ projects:
       - gate-python-cinderclient-python26
       - gate-python-cinderclient-python27
       - gate-python-cinderclient-python33
+      - gate-python-cinderclient-pypy
       - gate-tempest-devstack-vm-full
       - gate-tempest-devstack-vm-postgres-full
       - gate-tempest-devstack-vm-neutron
