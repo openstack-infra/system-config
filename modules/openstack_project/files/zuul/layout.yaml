@@ -325,6 +325,8 @@ jobs:
     voting: false
   - name: gate-manila-devstack-dsvm
     voting: false
+  - name: gate-climate-devstack-dsvm
+    voting: false
 # puppet-openstack targets
   - name: gate-puppet-vswitch-puppet-lint
     voting: false
@@ -2541,11 +2543,13 @@ projects:
       - gate-climate-python26
       - gate-climate-python27
       - gate-climate-requirements
+      - gate-climate-devstack-dsvm
     gate:
       - gate-climate-pep8
       - gate-climate-python26
       - gate-climate-python27
       - gate-climate-requirements
+      - gate-climate-devstack-dsvm
 
   - name: stackforge/climate-nova
     check:
