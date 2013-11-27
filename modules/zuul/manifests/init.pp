@@ -27,6 +27,7 @@ class zuul (
   $zuul_ssh_private_key = '',
   $url_pattern = '',
   $status_url = "https://${::fqdn}/",
+  $zuul_url = '',
   $git_source_repo = 'https://git.openstack.org/openstack-infra/zuul',
   $push_change_refs = false,
   $job_name_in_report = false,

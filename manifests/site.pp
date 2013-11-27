@@ -417,6 +417,7 @@ node 'zuul.openstack.org' {
     gerrit_user          => 'jenkins',
     zuul_ssh_private_key => hiera('jenkins_ssh_private_key_contents'),
     url_pattern          => 'http://logs.openstack.org/{build.parameters[LOG_PATH]}',
+    zuul_url             => 'http://zuul.openstack.org/p',
     sysadmins            => hiera('sysadmins'),
     statsd_host          => 'graphite.openstack.org',
     gearman_workers      => [
@@ -435,6 +436,7 @@ node 'zuul-dev.openstack.org' {
     gerrit_user          => 'zuul-dev',
     zuul_ssh_private_key => hiera('zuul_dev_ssh_private_key_contents'),
     url_pattern          => 'http://logs.openstack.org/{build.parameters[LOG_PATH]}',
+    zuul_url             => 'http://zuul-dev.openstack.org/p',
     sysadmins            => hiera('sysadmins'),
     statsd_host          => 'graphite.openstack.org',
     gearman_workers      => [
