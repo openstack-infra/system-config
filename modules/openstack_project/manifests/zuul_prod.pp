@@ -6,6 +6,7 @@ class openstack_project::zuul_prod(
   $gerrit_user = '',
   $zuul_ssh_private_key = '',
   $url_pattern = '',
+  $zuul_url = '',
   $sysadmins = [],
   $statsd_host = '',
   $gearman_workers = []
@@ -26,6 +27,7 @@ class openstack_project::zuul_prod(
     gerrit_user          => $gerrit_user,
     zuul_ssh_private_key => $zuul_ssh_private_key,
     url_pattern          => $url_pattern,
+    zuul_url             => $zuul_url,
     push_change_refs     => false,
     job_name_in_report   => true,
     status_url           => 'http://status.openstack.org/zuul/',
