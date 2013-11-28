@@ -601,6 +601,61 @@
 
 
 - job-template:
+    name: '{pipeline}-grenade-dsvm-neutron'
+    node: '{node}'
+
+    wrappers:
+      - timeout:
+          timeout: 60
+          fail: true
+      - timestamps
+
+    builders:
+      - devstack-checkout
+      - shell: |
+          #!/bin/bash -xe
+          export PYTHONUNBUFFERED=true
+          export DEVSTACK_GATE_TEMPEST=0
+          export DEVSTACK_GATE_GRENADE=1
+          export DEVSTACK_GATE_NEUTRON=1
+          cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
+          ./safe-devstack-vm-gate-wrap.sh
+      - link-logs
+
+    publishers:
+      - devstack-logs
+      - console-log
+
+
+- job-template:
+    name: '{pipeline}-grenade-dsvm-neutron-forward'
+    node: '{node}'
+
+    wrappers:
+      - timeout:
+          timeout: 60
+          fail: true
+      - timestamps
+
+    builders:
+      - devstack-checkout
+      - shell: |
+          #!/bin/bash -xe
+          export PYTHONUNBUFFERED=true
+          export DEVSTACK_GATE_TEMPEST=0
+          export DEVSTACK_GATE_GRENADE=1
+          export DEVSTACK_GATE_NEUTRON=1
+          export DEVSTACK_GATE_GRENADE_FORWARD=1
+          cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
+          ./safe-devstack-vm-gate-wrap.sh
+      - link-logs
+
+    publishers:
+      - devstack-logs
+      - console-log
+
+
+- job-template:
     name: '{pipeline}-tempest-dsvm-savanna-full{branch-designator}'
     node: '{node}'
 
@@ -723,6 +778,8 @@
       - '{pipeline}-tempest-dsvm-postgres-zeromq-full{branch-designator}'
       - '{pipeline}-grenade-dsvm'
       - '{pipeline}-grenade-dsvm-forward'
+      - '{pipeline}-grenade-dsvm-neutron'
+      - '{pipeline}-grenade-dsvm-neutron-forward'
       - '{pipeline}-tempest-dsvm-savanna-full{branch-designator}'
       - '{pipeline}-tempest-dsvm-savanna-postgres-full{branch-designator}'
       - '{pipeline}-tempest-dsvm-savanna-neutron{branch-designator}'

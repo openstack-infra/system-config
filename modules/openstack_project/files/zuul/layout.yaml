@@ -133,11 +133,17 @@ jobs:
     voting: false
   - name: ^(gate|check)-grenade-dsvm$
     branch: ^(?!stable/grizzly).*$
+  - name: ^(gate|check)-grenade-dsvm-neutron$
+    branch: ^(?!stable/grizzly).*$
+    voting: false
   - name: gate-tempest-python27
     branch: ^(?!stable/grizzly).*$
     # only here until stable is votable, then merge
     # back to a single job
   - name: ^(gate|check)-grenade-dsvm-forward$
+    branch: ^(stable/).*$
+    voting: false
+  - name: ^(gate|check)-grenade-dsvm-neutron-forward
     branch: ^(stable/).*$
     voting: false
   - name: gate-grenade-noop
@@ -1113,6 +1119,7 @@ projects:
       - check-tempest-dsvm-neutron-isolated
       - check-tempest-dsvm-neutron-pg-isolated
       - gate-tempest-dsvm-neutron-large-ops
+      - check-grenade-dsvm-neutron
     gate:
       - gate-neutron-requirements
       - gate-neutron-docs
@@ -1124,9 +1131,11 @@ projects:
       - gate-tempest-dsvm-neutron-isolated
       - gate-tempest-dsvm-neutron-pg-isolated
       - gate-tempest-dsvm-neutron-large-ops
+      - gate-grenade-dsvm-neutron
     experimental:
       - gate-tempest-dsvm-neutron-full
       - check-tempest-dsvm-neutron-isolated-parallel
+      - gate-grenade-dsvm-neutron-forward
     post:
       - neutron-branch-tarball
       - neutron-coverage
@@ -1569,10 +1578,14 @@ projects:
       - gate-grenade-noop
       - check-grenade-dsvm
       - check-grenade-dsvm-forward
+      - check-grenade-dsvm-neutron
     gate:
       - gate-grenade-noop
       - gate-grenade-dsvm
       - gate-grenade-dsvm-forward
+      - gate-grenade-dsvm-neutron
+    experimental:
+      - gate-grenade-dsvm-neutron-forward
 
   - name: openstack-dev/cookiecutter
     check:
