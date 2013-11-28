@@ -1544,11 +1544,14 @@ projects:
     check:
       - gate-grenade-noop
       - check-grenade-dsvm
+      - check-grenade-dsvm-neutron
     gate:
       - gate-grenade-noop
       - gate-grenade-dsvm
+      - gate-grenade-dsvm-neutron
     experimental:
       - gate-grenade-dsvm-stable
+      - gate-grenade-dsvm-neutron-stable
 
   - name: openstack-dev/cookiecutter
     check:
