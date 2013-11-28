@@ -1509,11 +1509,14 @@ projects:
     check:
       - gate-grenade-noop
       - check-grenade-devstack-vm
+      - check-grenade-devstack-vm-neutron
     gate:
       - gate-grenade-noop
       - gate-grenade-devstack-vm
+      - gate-grenade-devstack-vm-neutron
     experimental:
       - gate-grenade-devstack-vm-stable
+      - gate-grenade-devstack-vm-neutron-stable
 
   - name: openstack-dev/cookiecutter
     check:
