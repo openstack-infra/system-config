@@ -1671,6 +1671,7 @@
 
     jobs:
       - python-jobs
+      - hook-{name}-rtfd
 
 - project:
     name: congress
