@@ -40,11 +40,15 @@ function update() {
 	    }
 	    div = div.find(".graph");
 	        
-	    $.plot(div, bug['data'],
-		   {xaxis: {
-		       mode: "time"
-		   }}  
-		  );
+	    if (bug['data'].length > 0) {
+		$.plot(div, bug['data'],
+		       {xaxis: {
+			   mode: "time"
+		       }}
+		      );
+	    } else {
+		div.html("No matches");
+	    }
 
 	});
 	$.each($('.bug-container'), function(i, container) {
