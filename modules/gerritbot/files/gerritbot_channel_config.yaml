@@ -409,3 +409,13 @@ solum:
       - stackforge/python-solumclient
     branches:
       - master
+
+storyboard:
+    events:
+      - patchset-created
+      - change-merged
+      - x-vrif-minus-2
+    projects:
+      - openstack-infra/storyboard
+    branches:
+      - master
