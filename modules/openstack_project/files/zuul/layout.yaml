@@ -131,8 +131,9 @@ jobs:
     voting: false
   - name: ^(gate|check)-tempest-dsvm-cells-full$
     voting: false
-  - name: ^(gate|check)-grenade-dsvm$
+  - name: ^(gate|check)-grenade-dsvm-neutron$
     branch: ^(?!stable/grizzly).*$
+    voting: false
   - name: gate-tempest-python27
     branch: ^(?!stable/grizzly).*$
     # only here until stable is votable, then merge
@@ -1100,6 +1101,7 @@ projects:
       - check-tempest-dsvm-neutron-isolated
       - check-tempest-dsvm-neutron-pg-isolated
       - gate-tempest-dsvm-neutron-large-ops
+      - check-grenade-dsvm-neutron
     gate:
       - gate-neutron-requirements
       - gate-neutron-docs
@@ -1111,9 +1113,11 @@ projects:
       - gate-tempest-dsvm-neutron-isolated
       - gate-tempest-dsvm-neutron-pg-isolated
       - gate-tempest-dsvm-neutron-large-ops
+      - gate-grenade-dsvm-neutron
     experimental:
       - gate-tempest-dsvm-neutron-full
       - check-tempest-dsvm-neutron-isolated-parallel
+      - gate-grenade-dsvm-neutron-stable
     post:
       - neutron-branch-tarball
       - neutron-coverage
@@ -1544,11 +1548,14 @@ projects:
     check:
       - gate-grenade-noop
       - check-grenade-dsvm
+      - check-grenade-dsvm-neutron
     gate:
       - gate-grenade-noop
       - gate-grenade-dsvm
+      - gate-grenade-dsvm-neutron
     experimental:
       - gate-grenade-dsvm-stable
+      - gate-grenade-dsvm-neutron-stable
 
   - name: openstack-dev/cookiecutter
     check:
