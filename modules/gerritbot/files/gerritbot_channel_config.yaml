@@ -65,7 +65,7 @@ openstack-doc:
       - master
       - stable/havana
 
-openstack-metering:
+openstack-ceilometer:
     events:
       - patchset-created
       - change-merged
