@@ -3,4 +3,4 @@
     node: precise
 
     builders:
-      - shell: 'curl -X POST https://readthedocs.org/build/{rtfd-id} >/dev/null'
+      - shell: 'curl -X POST https://readthedocs.org/build/{name} >/dev/null'
