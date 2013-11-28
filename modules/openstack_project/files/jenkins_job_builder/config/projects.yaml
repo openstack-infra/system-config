@@ -1678,10 +1678,12 @@
     name: solum
     github-org: stackforge
     node: precise
+    rtfd-id: solum
     tarball-site: tarballs.openstack.org
 
     jobs:
       - python-jobs
+      - hook-{name}-rtfd
 
 - project:
     name: congress
