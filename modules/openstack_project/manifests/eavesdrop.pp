@@ -24,6 +24,7 @@ class openstack_project::eavesdrop (
     server    => 'chat.freenode.net:7000',
     channels  => [
         '#openstack',
+        '#openstack-ceilometer',
         '#openstack-dev',
         '#openstack-dns',
         '#openstack-infra',
@@ -31,7 +32,6 @@ class openstack_project::eavesdrop (
         '#openstack-marconi',
         '#openstack-meeting',
         '#openstack-meeting-alt',
-        '#openstack-metering',
         '#openstack-neutron',
         '#openstack-qa',
         '#openstack-trove',
