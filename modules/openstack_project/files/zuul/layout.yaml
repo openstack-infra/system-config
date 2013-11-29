@@ -3755,3 +3755,15 @@ projects:
       - gate-python-solumclient-docs
     post:
       - python-solumclient-coverage
+
+  - name: openstack-infra/release-tools
+    check:
+      - gate-release-tools-pep8
+      - gate-release-tools-python26
+      - gate-release-tools-python27
+      - gate-release-tools-pypy
+    gate:
+      - gate-release-tools-pep8
+      - gate-release-tools-python26
+      - gate-release-tools-python27
+      - gate-release-tools-pypy
