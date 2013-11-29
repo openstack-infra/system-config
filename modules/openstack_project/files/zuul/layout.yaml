@@ -3755,3 +3755,33 @@ projects:
       - gate-python-solumclient-docs
     post:
       - python-solumclient-coverage
+
+  - name: openstack-infra/release-tools
+    check:
+      - gate-release-tools-pep8
+      - gate-release-tools-python26
+      - gate-release-tools-python27
+      # launchpadlib doesn't support python33
+      # - gate-release-tools-python33
+      - gate-release-tools-pypy
+      # there are now docs atm
+      # - gate-release-tools-docs
+    gate:
+      - gate-release-tools-pep8
+      - gate-release-tools-python26
+      - gate-release-tools-python27
+      # - gate-release-tools-python33
+      - gate-release-tools-pypy
+      # - gate-release-tools-docs
+    post:
+      # release-tools-docs
+      - release-tools-branch-tarball
+    pre-release:
+      - release-tools-tarball
+    release:
+      - release-tools-tarball:
+        - release-tools-pypi-upload:
+          - post-mirror-python26
+          - post-mirror-python27
+          - post-mirror-python33
+        - release--docs
