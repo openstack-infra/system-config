@@ -137,8 +137,8 @@ jobs:
     branch: ^(?!stable/grizzly).*$
     # only here until stable is votable, then merge
     # back to a single job
-  - name: gate-grenade-devstack-vm-stable
-    branch: ^(stable/grizzly).*$
+  - name: ^(gate|check)-grenade-devstack-vm-stable
+    branch: ^(stable/(grizzly|havana)).*$
     voting: false
     # Remove when gate-grenade-devstack-vm-stable is
     # merged into gate-grenade-devstack-vm
@@ -1078,7 +1078,7 @@ projects:
       - gate-tempest-devstack-vm-neutron-large-ops
     experimental:
       - gate-tempest-devstack-vm-neutron-full
-      - check-tempest-devstack-vm-neutron-isolated-parallel 
+      - check-tempest-devstack-vm-neutron-isolated-parallel
     post:
       - neutron-branch-tarball
       - neutron-coverage
