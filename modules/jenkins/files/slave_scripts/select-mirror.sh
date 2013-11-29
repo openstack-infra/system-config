@@ -37,13 +37,8 @@ cat <<EOF > ~/.pip/pip.conf
 timeout = 60
 EOF
 
-# Noop, do not setup any mirrors to allow requirements to talk to the
-# outside world.
-if [ "$org" == "openstack" ] && [ "$project" == "requirements" ]
-then
-    echo "Not changing mirror"
 # For OpenStack projects, use the pypi.openstack.org mirror exclusively
-elif [ "$org" == "openstack" ]
+if grep "$org/$project" /opt/requirements/projects.txt 2>&1
 then
     # wheel mirrors are below a dir level containing distro and release
     # because the wheel format itself does not distinguish
