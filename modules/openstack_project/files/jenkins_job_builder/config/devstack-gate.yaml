@@ -573,13 +573,13 @@
       - console-log
 
 
-- job:
-    name: gate-grenade-dsvm-stable
-    node: devstack-precise
+- job-template:
+    name: '{pipeline}-grenade-dsvm-forward'
+    node: '{node}'
 
     wrappers:
       - timeout:
-          timeout: 180
+          timeout: 60
           fail: true
       - timestamps
 
@@ -590,6 +590,7 @@
           export PYTHONUNBUFFERED=true
           export DEVSTACK_GATE_TEMPEST=0
           export DEVSTACK_GATE_GRENADE=1
+          export DEVSTACK_GATE_GRENADE_FORWARD=1
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
       - link-logs
@@ -721,6 +722,7 @@
       - '{pipeline}-tempest-dsvm-neutron-heat-slow{branch-designator}'
       - '{pipeline}-tempest-dsvm-postgres-zeromq-full{branch-designator}'
       - '{pipeline}-grenade-dsvm'
+      - '{pipeline}-grenade-dsvm-forward'
       - '{pipeline}-tempest-dsvm-savanna-full{branch-designator}'
       - '{pipeline}-tempest-dsvm-savanna-postgres-full{branch-designator}'
       - '{pipeline}-tempest-dsvm-savanna-neutron{branch-designator}'
