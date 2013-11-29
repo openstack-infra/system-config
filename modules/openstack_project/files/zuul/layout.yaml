@@ -137,8 +137,8 @@ jobs:
     branch: ^(?!stable/grizzly).*$
     # only here until stable is votable, then merge
     # back to a single job
-  - name: gate-grenade-dsvm-stable
-    branch: ^(stable/grizzly).*$
+  - name: ^(gate|check)-grenade-dsvm-forward$
+    branch: ^(stable/).*$
     voting: false
     # Remove when gate-grenade-dsvm-stable is
     # merged into gate-grenade-dsvm
@@ -1118,8 +1118,13 @@ projects:
       - gate-tempest-dsvm-neutron-pg-isolated
       - gate-tempest-dsvm-neutron-large-ops
     experimental:
+<<<<<<< HEAD
       - gate-tempest-dsvm-neutron-full
       - check-tempest-dsvm-neutron-isolated-parallel
+=======
+      - gate-tempest-devstack-vm-neutron-full
+      - check-tempest-devstack-vm-neutron-isolated-parallel
+>>>>>>> Add grenade-vm-stable job template
     post:
       - neutron-branch-tarball
       - neutron-coverage
@@ -1549,12 +1554,21 @@ projects:
   - name: openstack-dev/grenade
     check:
       - gate-grenade-noop
+<<<<<<< HEAD
       - check-grenade-dsvm
     gate:
       - gate-grenade-noop
       - gate-grenade-dsvm
     experimental:
       - gate-grenade-dsvm-stable
+=======
+      - check-grenade-devstack-vm
+      - check-grenade-devstack-vm-stable
+    gate:
+      - gate-grenade-noop
+      - gate-grenade-devstack-vm
+      - gate-grenade-devstack-vm-stable
+>>>>>>> Add grenade-vm-stable job template
 
   - name: openstack-dev/cookiecutter
     check:
