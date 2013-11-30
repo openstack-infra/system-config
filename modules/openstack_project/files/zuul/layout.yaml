@@ -2810,6 +2810,24 @@ projects:
       - gate-puppet-horizon-puppet-unit-3.2
       - gate-puppet-horizon-puppet-unit-3.3
 
+  - name: stackforge/puppet-ironic
+    check:
+      - gate-puppet-ironic-puppet-lint
+      - gate-puppet-ironic-puppet-syntax
+      - gate-puppet-ironic-puppet-unit-2.7
+      - gate-puppet-ironic-puppet-unit-3.0
+      - gate-puppet-ironic-puppet-unit-3.1
+      - gate-puppet-ironic-puppet-unit-3.2
+      - gate-puppet-ironic-puppet-unit-3.3
+    gate:
+      - gate-puppet-ironic-puppet-lint
+      - gate-puppet-ironic-puppet-syntax
+      - gate-puppet-ironic-puppet-unit-2.7
+      - gate-puppet-ironic-puppet-unit-3.0
+      - gate-puppet-ironic-puppet-unit-3.1
+      - gate-puppet-ironic-puppet-unit-3.2
+      - gate-puppet-ironic-puppet-unit-3.3
+
   - name: stackforge/puppet-keystone
     check:
       - gate-puppet-keystone-puppet-lint
