@@ -8,6 +8,7 @@ class openstack_project::static (
   $releasestatus_prvkey_contents = '',
   $releasestatus_pubkey_contents = '',
   $releasestatus_gerrit_ssh_key = '',
+  $er_state_dir = '/srv/static/status/elastic-recheck',
 ) {
 
   class { 'openstack_project::server':
@@ -365,7 +366,7 @@ class openstack_project::static (
     user        => 'recheck',
     minute      => '*/15',
     hour        => '*',
-    command     => 'elastic-recheck-graph /opt/elastic-recheck/queries.yaml -o /srv/static/status/elastic-recheck/graph-new.json && mv /srv/static/status/elastic-recheck/graph-new.json /srv/static/status/elastic-recheck/graph.json',
+    command     => "elastic-recheck-graph /opt/elastic-recheck/queries -o ${er_state_dir}/graph-new.json && mv ${er_state_dir}/graph-new.json ${er_state_dir}/graph.json",
     environment => 'PATH=/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin',
     require     => [Vcsrepo['/opt/elastic-recheck'],
                     User['recheck']],
