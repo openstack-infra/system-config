@@ -342,30 +342,11 @@ class openstack_project::static (
     require     => Class['pip'],
   }
 
-  file { '/srv/static/status/elastic-recheck':
-    ensure  => directory,
-    owner   => 'recheck',
-    group   => 'recheck',
-    require => User['recheck'],
-  }
-
-  file { '/srv/static/status/elastic-recheck/index.html':
-    ensure  => present,
-    source  => 'puppet:///modules/openstack_project/elastic-recheck/elastic-recheck.html',
-    require => File['/srv/static/status/elastic-recheck'],
-  }
-
-  file { '/srv/static/status/elastic-recheck/elastic-recheck.js':
-    ensure  => present,
-    source  => 'puppet:///modules/openstack_project/elastic-recheck/elastic-recheck.js',
-    require => File['/srv/static/status/elastic-recheck'],
-  }
-
   cron { 'elastic-recheck':
     user        => 'recheck',
     minute      => '*/15',
     hour        => '*',
-    command     => 'elastic-recheck-graph /opt/elastic-recheck/queries.yaml -o /srv/static/status/elastic-recheck/graph-new.json && mv /srv/static/status/elastic-recheck/graph-new.json /srv/static/status/elastic-recheck/graph.json',
+    command     => 'elastic-recheck-graph /opt/elastic-recheck/queries -o /var/lib/elastic-recheck/graph-new.json && mv /var/lib/elastic-recheck/graph-new.json /var/lib/elastic-recheck/graph.json',
     environment => 'PATH=/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin',
     require     => [Vcsrepo['/opt/elastic-recheck'],
                     User['recheck']],
