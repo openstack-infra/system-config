@@ -16,12 +16,12 @@ pipelines:
 jobs:
   - name: ^.*$
     parameter-function: set_log_url
-  - name: gate-tempest-devstack-vm-neutron-full
+  - name: gate-tempest-dsvm-neutron-full
     branch: ^(?!stable/grizzly).*$
     voting: false
-  - name: gate-tempest-devstack-vm-postgres-full
+  - name: gate-tempest-dsvm-postgres-full
     voting: false
-  - name: gate-grenade-devstack-vm
+  - name: gate-grenade-dsvm
     voting: false
   - name: gate-nova-pylint
     voting: false
@@ -141,10 +141,10 @@ projects:
       - gate-cinder-docs
       - gate-cinder-python26
       - gate-cinder-python27
-      - gate-tempest-devstack-vm-full
-      - gate-tempest-devstack-vm-postgres-full
-      - gate-tempest-devstack-vm-neutron
-      - gate-grenade-devstack-vm
+      - gate-tempest-dsvm-full
+      - gate-tempest-dsvm-postgres-full
+      - gate-tempest-dsvm-neutron
+      - gate-grenade-dsvm
 
   - name: openstack/glance
     check:
@@ -153,10 +153,10 @@ projects:
       - gate-glance-docs
       - gate-glance-python26
       - gate-glance-python27
-      - gate-tempest-devstack-vm-full
-      - gate-tempest-devstack-vm-postgres-full
-      - gate-tempest-devstack-vm-neutron
-      - gate-grenade-devstack-vm
+      - gate-tempest-dsvm-full
+      - gate-tempest-dsvm-postgres-full
+      - gate-tempest-dsvm-neutron
+      - gate-grenade-dsvm
 
   - name: openstack/horizon
     check:
@@ -166,10 +166,10 @@ projects:
       - gate-horizon-python26
       - gate-horizon-python27
       - gate-horizon-selenium
-      - gate-tempest-devstack-vm-full
-      - gate-tempest-devstack-vm-postgres-full
-      - gate-tempest-devstack-vm-neutron
-      - gate-grenade-devstack-vm
+      - gate-tempest-dsvm-full
+      - gate-tempest-dsvm-postgres-full
+      - gate-tempest-dsvm-neutron
+      - gate-grenade-dsvm
 
   - name: openstack/keystone
     check:
@@ -178,10 +178,10 @@ projects:
       - gate-keystone-docs
       - gate-keystone-python26
       - gate-keystone-python27
-      - gate-tempest-devstack-vm-full
-      - gate-tempest-devstack-vm-postgres-full
-      - gate-tempest-devstack-vm-neutron
-      - gate-grenade-devstack-vm
+      - gate-tempest-dsvm-full
+      - gate-tempest-dsvm-postgres-full
+      - gate-tempest-dsvm-neutron
+      - gate-grenade-dsvm
 
   - name: openstack/nova
     check:
@@ -190,10 +190,10 @@ projects:
       - gate-nova-docs
       - gate-nova-python26
       - gate-nova-python27
-      - gate-tempest-devstack-vm-full
-      - gate-tempest-devstack-vm-postgres-full
-      - gate-tempest-devstack-vm-neutron
-      - gate-grenade-devstack-vm
+      - gate-tempest-dsvm-full
+      - gate-tempest-dsvm-postgres-full
+      - gate-tempest-dsvm-neutron
+      - gate-grenade-dsvm
       - gate-nova-pylint
 
   - name: openstack/oslo-incubator
@@ -237,7 +237,7 @@ projects:
       - gate-neutron-docs
       - gate-neutron-python26
       - gate-neutron-python27
-      - gate-tempest-devstack-vm-neutron
+      - gate-tempest-dsvm-neutron
 
   - name: openstack/swift
     check:
@@ -246,10 +246,10 @@ projects:
       - gate-swift-docs
       - gate-swift-python26
       - gate-swift-python27
-      - gate-tempest-devstack-vm-full
-      - gate-tempest-devstack-vm-neutron
-      - gate-tempest-devstack-vm-postgres-full
-      - gate-grenade-devstack-vm
+      - gate-tempest-dsvm-full
+      - gate-tempest-dsvm-neutron
+      - gate-tempest-dsvm-postgres-full
+      - gate-grenade-dsvm
 
   - name: openstack/python-ceilometerclient
     check:
@@ -266,10 +266,10 @@ projects:
       - gate-python-cinderclient-docs
       - gate-python-cinderclient-python26
       - gate-python-cinderclient-python27
-      - gate-tempest-devstack-vm-full
-      - gate-tempest-devstack-vm-postgres-full
-      - gate-tempest-devstack-vm-neutron
-      - gate-grenade-devstack-vm
+      - gate-tempest-dsvm-full
+      - gate-tempest-dsvm-postgres-full
+      - gate-tempest-dsvm-neutron
+      - gate-grenade-dsvm
 
   - name: openstack/python-glanceclient
     check:
@@ -278,10 +278,10 @@ projects:
       - gate-python-glanceclient-docs
       - gate-python-glanceclient-python26
       - gate-python-glanceclient-python27
-      - gate-tempest-devstack-vm-full
-      - gate-tempest-devstack-vm-postgres-full
-      - gate-tempest-devstack-vm-neutron
-      - gate-grenade-devstack-vm
+      - gate-tempest-dsvm-full
+      - gate-tempest-dsvm-postgres-full
+      - gate-tempest-dsvm-neutron
+      - gate-grenade-dsvm
 
   - name: openstack/python-keystoneclient
     check:
@@ -290,10 +290,10 @@ projects:
       - gate-python-keystoneclient-docs
       - gate-python-keystoneclient-python26
       - gate-python-keystoneclient-python27
-      - gate-tempest-devstack-vm-full
-      - gate-tempest-devstack-vm-postgres-full
-      - gate-tempest-devstack-vm-neutron
-      - gate-grenade-devstack-vm
+      - gate-tempest-dsvm-full
+      - gate-tempest-dsvm-postgres-full
+      - gate-tempest-dsvm-neutron
+      - gate-grenade-dsvm
 
   - name: openstack/python-novaclient
     check:
@@ -302,10 +302,10 @@ projects:
       - gate-python-novaclient-docs
       - gate-python-novaclient-python26
       - gate-python-novaclient-python27
-      - gate-tempest-devstack-vm-full
-      - gate-tempest-devstack-vm-postgres-full
-      - gate-tempest-devstack-vm-neutron
-      - gate-grenade-devstack-vm
+      - gate-tempest-dsvm-full
+      - gate-tempest-dsvm-postgres-full
+      - gate-tempest-dsvm-neutron
+      - gate-grenade-dsvm
 
   - name: openstack/python-openstackclient
     check:
@@ -322,10 +322,10 @@ projects:
       - gate-python-neutronclient-docs
       - gate-python-neutronclient-python26
       - gate-python-neutronclient-python27
-      - gate-tempest-devstack-vm-full
-      - gate-tempest-devstack-vm-postgres-full
-      - gate-tempest-devstack-vm-neutron
-      - gate-grenade-devstack-vm
+      - gate-tempest-dsvm-full
+      - gate-tempest-dsvm-postgres-full
+      - gate-tempest-dsvm-neutron
+      - gate-grenade-dsvm
 
   - name: openstack/python-swiftclient
     check:
@@ -342,7 +342,7 @@ projects:
   - name: openstack-dev/grenade
     check:
       - gate-noop
-      - gate-grenade-devstack-vm
+      - gate-grenade-dsvm
 
   - name: openstack-dev/hacking
     check:
@@ -361,17 +361,17 @@ projects:
 
   - name: openstack-dev/devstack
     check:
-      - gate-tempest-devstack-vm-full
-      - gate-tempest-devstack-vm-postgres-full
-      - gate-tempest-devstack-vm-neutron
-      - gate-grenade-devstack-vm
+      - gate-tempest-dsvm-full
+      - gate-tempest-dsvm-postgres-full
+      - gate-tempest-dsvm-neutron
+      - gate-grenade-dsvm
 
   - name: openstack-infra/devstack-gate
     check:
-      - gate-tempest-devstack-vm-full
-      - gate-tempest-devstack-vm-postgres-full
-      - gate-tempest-devstack-vm-neutron
-      - gate-grenade-devstack-vm
+      - gate-tempest-dsvm-full
+      - gate-tempest-dsvm-postgres-full
+      - gate-tempest-dsvm-neutron
+      - gate-grenade-dsvm
 
   - name: z/tempest
 
@@ -379,10 +379,10 @@ projects:
     check:
       - gate-tempest-requirements
       - gate-tempest-pep8
-      - gate-tempest-devstack-vm-full
-      - gate-tempest-devstack-vm-postgres-full
-      - gate-tempest-devstack-vm-neutron
-      - gate-tempest-devstack-vm-neutron-full
+      - gate-tempest-dsvm-full
+      - gate-tempest-dsvm-postgres-full
+      - gate-tempest-dsvm-neutron
+      - gate-tempest-dsvm-neutron-full
 
   - name: openstack/ceilometer
     check:

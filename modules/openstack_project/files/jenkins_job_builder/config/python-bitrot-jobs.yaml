@@ -1,5 +1,5 @@
 - job-template:
-    name: 'periodic-{name}-python26-{branch-name}'
+    name: 'periodic-{name}-python26{branch-name}'
 
     wrappers:
       - timeout:
@@ -34,7 +34,7 @@
 
 
 - job-template:
-    name: 'periodic-{name}-python27-{branch-name}'
+    name: 'periodic-{name}-python27{branch-name}'
 
     wrappers:
       - timeout:
@@ -69,7 +69,7 @@
 
 
 - job-template:
-    name: 'periodic-{name}-docs-{branch-name}'
+    name: 'periodic-{name}-docs{branch-name}'
 
     wrappers:
       - timeout:
@@ -99,22 +99,22 @@
 - job-group:
     name: python-grizzly-bitrot-jobs
     branch: 'stable/grizzly'
-    branch-name: 'stable-grizzly'
+    branch-name: '-grizzly'
     email: openstack-stable-maint@lists.openstack.org
     node: precise
     jobs:
-      - 'periodic-{name}-python26-{branch-name}'
-      - 'periodic-{name}-python27-{branch-name}'
-      - 'periodic-{name}-docs-{branch-name}'
+      - 'periodic-{name}-python26{branch-name}'
+      - 'periodic-{name}-python27{branch-name}'
+      - 'periodic-{name}-docs{branch-name}'
 
 
 - job-group:
     name: python-havana-bitrot-jobs
     branch: 'stable/havana'
-    branch-name: 'stable-havana'
+    branch-name: '-havana'
     email: openstack-stable-maint@lists.openstack.org
     node: precise
     jobs:
-      - 'periodic-{name}-python26-{branch-name}'
-      - 'periodic-{name}-python27-{branch-name}'
-      - 'periodic-{name}-docs-{branch-name}'
+      - 'periodic-{name}-python26{branch-name}'
+      - 'periodic-{name}-python27{branch-name}'
+      - 'periodic-{name}-docs{branch-name}'

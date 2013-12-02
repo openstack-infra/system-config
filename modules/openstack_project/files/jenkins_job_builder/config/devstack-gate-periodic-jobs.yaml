@@ -1,5 +1,5 @@
 - job-template:
-    name: 'periodic-tempest-devstack-vm-full-{branch-designator}'
+    name: 'periodic-tempest-dsvm-full{branch-designator}'
     node: '{node}'
 
     wrappers:
@@ -29,7 +29,7 @@
 
 
 - job-template:
-    name: 'periodic-tempest-devstack-vm-postgres-full-{branch-designator}'
+    name: 'periodic-tempest-dsvm-postgres-full{branch-designator}'
     node: '{node}'
 
     wrappers:
@@ -60,7 +60,7 @@
 
 
 - job-template:
-    name: 'periodic-tempest-devstack-vm-neutron-{branch-designator}'
+    name: 'periodic-tempest-dsvm-neutron{branch-designator}'
     node: '{node}'
 
     wrappers:
@@ -91,7 +91,7 @@
 
 
 - job-template:
-    name: 'periodic-tempest-devstack-vm-all-{branch-designator}'
+    name: 'periodic-tempest-dsvm-all{branch-designator}'
     node: '{node}'
 
     wrappers:
@@ -121,7 +121,7 @@
 
 
 - job-template:
-    name: 'periodic-tempest-devstack-vm-coverage-{branch-designator}'
+    name: 'periodic-tempest-dsvm-coverage{branch-designator}'
     node: '{node}'
 
     wrappers:
@@ -151,7 +151,7 @@
 
 
 - job-template:
-    name: 'periodic-tempest-devstack-vm-stress-{branch-designator}'
+    name: 'periodic-tempest-dsvm-stress{branch-designator}'
     node: '{node}'
 
     wrappers:
@@ -181,7 +181,7 @@
 
 
 - job-template:
-    name: 'periodic-tempest-devstack-vm-neutron-pg-{branch-designator}'
+    name: 'periodic-tempest-dsvm-neutron-pg{branch-designator}'
     node: '{node}'
 
     wrappers:
@@ -213,7 +213,7 @@
 
 
 - job-template:
-    name: 'periodic-tempest-devstack-vm-large-ops-{branch-designator}'
+    name: 'periodic-tempest-dsvm-large-ops{branch-designator}'
     node: '{node}'
 
     wrappers:
@@ -243,7 +243,7 @@
 
 
 - job-template:
-    name: 'periodic-tempest-devstack-vm-neutron-large-ops-{branch-designator}'
+    name: 'periodic-tempest-dsvm-neutron-large-ops{branch-designator}'
     node: '{node}'
 
     wrappers:
@@ -274,7 +274,7 @@
 
 
 - job-template:
-    name: 'periodic-tempest-devstack-vm-all-{branch-designator}'
+    name: 'periodic-tempest-dsvm-all{branch-designator}'
     node: '{node}'
 
     wrappers:
@@ -304,7 +304,7 @@
 
 
 - job-template:
-    name: 'periodic-tempest-devstack-vm-coverage-{branch-designator}'
+    name: 'periodic-tempest-dsvm-coverage{branch-designator}'
     node: '{node}'
 
     wrappers:
@@ -334,7 +334,7 @@
 
 
 - job-template:
-    name: 'periodic-tempest-devstack-vm-stress-{branch-designator}'
+    name: 'periodic-tempest-dsvm-stress{branch-designator}'
     node: '{node}'
 
     wrappers:
@@ -366,15 +366,15 @@
 - job-group:
     name: devstack-periodic-jobs
     jobs:
-      - 'periodic-tempest-devstack-vm-full-{branch-designator}'
-      - 'periodic-tempest-devstack-vm-postgres-full-{branch-designator}'
-      - 'periodic-tempest-devstack-vm-neutron-{branch-designator}'
-      - 'periodic-tempest-devstack-vm-all-{branch-designator}'
-      - 'periodic-tempest-devstack-vm-coverage-{branch-designator}'
-      - 'periodic-tempest-devstack-vm-stress-{branch-designator}'
-      - 'periodic-tempest-devstack-vm-neutron-pg-{branch-designator}'
-      - 'periodic-tempest-devstack-vm-large-ops-{branch-designator}'
-      - 'periodic-tempest-devstack-vm-neutron-large-ops-{branch-designator}'
-      - 'periodic-tempest-devstack-vm-all-{branch-designator}'
-      - 'periodic-tempest-devstack-vm-coverage-{branch-designator}'
-      - 'periodic-tempest-devstack-vm-stress-{branch-designator}'
+      - 'periodic-tempest-dsvm-full{branch-designator}'
+      - 'periodic-tempest-dsvm-postgres-full{branch-designator}'
+      - 'periodic-tempest-dsvm-neutron{branch-designator}'
+      - 'periodic-tempest-dsvm-all{branch-designator}'
+      - 'periodic-tempest-dsvm-coverage{branch-designator}'
+      - 'periodic-tempest-dsvm-stress{branch-designator}'
+      - 'periodic-tempest-dsvm-neutron-pg{branch-designator}'
+      - 'periodic-tempest-dsvm-large-ops{branch-designator}'
+      - 'periodic-tempest-dsvm-neutron-large-ops{branch-designator}'
+      - 'periodic-tempest-dsvm-all{branch-designator}'
+      - 'periodic-tempest-dsvm-coverage{branch-designator}'
+      - 'periodic-tempest-dsvm-stress{branch-designator}'
