@@ -151,6 +151,7 @@ class openstack_project::jenkins (
       group   => 'root',
       mode    => '0755',
       recurse => true,
+      purge   => true,
       source  =>
         'puppet:///modules/openstack_project/jenkins_job_builder/config',
       notify  => Exec['jenkins_jobs_update'],
