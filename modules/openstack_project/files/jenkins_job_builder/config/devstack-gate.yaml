@@ -1,5 +1,5 @@
 - job-template:
-    name: '{pipeline}-tempest-devstack-vm-full-{branch-designator}'
+    name: '{pipeline}-tempest-dsvm-full{branch-designator}'
     node: '{node}'
 
     wrappers:
@@ -29,7 +29,7 @@
 
 
 - job-template:
-    name: '{pipeline}-tempest-devstack-vm-heat-slow-{branch-designator}'
+    name: '{pipeline}-tempest-dsvm-heat-slow{branch-designator}'
     node: '{node}'
 
     wrappers:
@@ -59,7 +59,7 @@
 
 
 - job-template:
-    name: '{pipeline}-tempest-devstack-vm-neutron-{branch-designator}'
+    name: '{pipeline}-tempest-dsvm-neutron{branch-designator}'
     node: '{node}'
 
     wrappers:
@@ -90,7 +90,7 @@
 
 
 - job-template:
-    name: '{pipeline}-tempest-devstack-vm-neutron-pg-{branch-designator}'
+    name: '{pipeline}-tempest-dsvm-neutron-pg{branch-designator}'
     node: '{node}'
 
     wrappers:
@@ -122,7 +122,7 @@
 
 
 - job-template:
-    name: '{pipeline}-tempest-devstack-vm-neutron-isolated-{branch-designator}'
+    name: '{pipeline}-tempest-dsvm-neutron-isolated{branch-designator}'
     node: '{node}'
 
     wrappers:
@@ -154,7 +154,7 @@
 
 
 - job-template:
-    name: '{pipeline}-tempest-devstack-vm-neutron-isolated-parallel-{branch-designator}'
+    name: '{pipeline}-tempest-dsvm-neutron-isolated-parallel{branch-designator}'
     node: '{node}'
 
     wrappers:
@@ -184,7 +184,7 @@
       - console-log
 
 - job-template:
-    name: '{pipeline}-tempest-devstack-vm-neutron-pg-isolated-{branch-designator}'
+    name: '{pipeline}-tempest-dsvm-neutron-pg-isolated{branch-designator}'
     node: '{node}'
 
     wrappers:
@@ -217,7 +217,7 @@
 
 
 - job-template:
-    name: '{pipeline}-tempest-devstack-vm-neutron-full-{branch-designator}'
+    name: '{pipeline}-tempest-dsvm-neutron-full{branch-designator}'
     node: '{node}'
 
     wrappers:
@@ -249,7 +249,7 @@
 
 
 - job-template:
-    name: '{pipeline}-devstack-vm-cells-{branch-designator}'
+    name: '{pipeline}-devstack-dsvm-cells{branch-designator}'
     node: '{node}'
 
     wrappers:
@@ -279,7 +279,7 @@
 
 
 - job-template:
-    name: '{pipeline}-tempest-devstack-vm-cells-{branch-designator}'
+    name: '{pipeline}-tempest-dsvm-cells{branch-designator}'
     node: '{node}'
 
     wrappers:
@@ -309,7 +309,7 @@
 
 
 - job-template:
-    name: '{pipeline}-tempest-devstack-vm-cells-full-{branch-designator}'
+    name: '{pipeline}-tempest-dsvm-cells-full{branch-designator}'
     node: '{node}'
 
     wrappers:
@@ -340,7 +340,7 @@
 
 
 - job-template:
-    name: '{pipeline}-tempest-devstack-vm-large-ops-{branch-designator}'
+    name: '{pipeline}-tempest-dsvm-large-ops{branch-designator}'
     node: '{node}'
 
     wrappers:
@@ -369,7 +369,7 @@
       - console-log
 
 - job-template:
-    name: '{pipeline}-tempest-devstack-vm-neutron-large-ops-{branch-designator}'
+    name: '{pipeline}-tempest-dsvm-neutron-large-ops{branch-designator}'
     node: '{node}'
 
     wrappers:
@@ -400,7 +400,7 @@
 
 
 - job-template:
-    name: '{pipeline}-tempest-devstack-vm-postgres-zeromq-full-{branch-designator}'
+    name: '{pipeline}-tempest-dsvm-postgres-zeromq-full{branch-designator}'
     node: '{node}'
 
     wrappers:
@@ -432,7 +432,7 @@
 
 
 - job-template:
-    name: '{pipeline}-tempest-devstack-vm-postgres-{branch-designator}'
+    name: '{pipeline}-tempest-dsvm-postgres{branch-designator}'
     node: '{node}'
 
     wrappers:
@@ -462,7 +462,7 @@
 
 
 - job-template:
-    name: '{pipeline}-tempest-devstack-vm-postgres-full-{branch-designator}'
+    name: '{pipeline}-tempest-dsvm-postgres-full{branch-designator}'
     node: '{node}'
 
     wrappers:
@@ -493,7 +493,7 @@
 
 
 - job-template:
-    name: '{pipeline}-grenade-devstack-vm'
+    name: '{pipeline}-grenade-dsvm'
     node: '{node}'
 
     wrappers:
@@ -519,7 +519,7 @@
 
 
 - job:
-    name: gate-grenade-devstack-vm-stable
+    name: gate-grenade-dsvm-stable
     node: devstack-precise
 
     wrappers:
@@ -547,20 +547,20 @@
 - job-group:
     name: devstack-jobs
     jobs:
-      - '{pipeline}-tempest-devstack-vm-full-{branch-designator}'
-      - '{pipeline}-tempest-devstack-vm-neutron-{branch-designator}'
-      - '{pipeline}-tempest-devstack-vm-neutron-pg-{branch-designator}'
-      - '{pipeline}-tempest-devstack-vm-neutron-isolated-{branch-designator}'
-      - '{pipeline}-tempest-devstack-vm-neutron-isolated-parallel-{branch-designator}'
-      - '{pipeline}-tempest-devstack-vm-neutron-pg-isolated-{branch-designator}'
-      - '{pipeline}-tempest-devstack-vm-neutron-full-{branch-designator}'
-      - '{pipeline}-devstack-vm-cells-{branch-designator}'
-      - '{pipeline}-tempest-devstack-vm-cells-{branch-designator}'
-      - '{pipeline}-tempest-devstack-vm-cells-full-{branch-designator}'
-      - '{pipeline}-tempest-devstack-vm-large-ops-{branch-designator}'
-      - '{pipeline}-tempest-devstack-vm-neutron-large-ops-{branch-designator}'
-      - '{pipeline}-tempest-devstack-vm-postgres-{branch-designator}'
-      - '{pipeline}-tempest-devstack-vm-postgres-full-{branch-designator}'
-      - '{pipeline}-tempest-devstack-vm-heat-slow-{branch-designator}'
-      - '{pipeline}-tempest-devstack-vm-postgres-zeromq-full-{branch-designator}'
-      - '{pipeline}-grenade-devstack-vm'
+      - '{pipeline}-tempest-dsvm-full{branch-designator}'
+      - '{pipeline}-tempest-dsvm-neutron{branch-designator}'
+      - '{pipeline}-tempest-dsvm-neutron-pg{branch-designator}'
+      - '{pipeline}-tempest-dsvm-neutron-isolated{branch-designator}'
+      - '{pipeline}-tempest-dsvm-neutron-isolated-parallel{branch-designator}'
+      - '{pipeline}-tempest-dsvm-neutron-pg-isolated{branch-designator}'
+      - '{pipeline}-tempest-dsvm-neutron-full{branch-designator}'
+      - '{pipeline}-devstack-dsvm-cells{branch-designator}'
+      - '{pipeline}-tempest-dsvm-cells{branch-designator}'
+      - '{pipeline}-tempest-dsvm-cells-full{branch-designator}'
+      - '{pipeline}-tempest-dsvm-large-ops{branch-designator}'
+      - '{pipeline}-tempest-dsvm-neutron-large-ops{branch-designator}'
+      - '{pipeline}-tempest-dsvm-postgres{branch-designator}'
+      - '{pipeline}-tempest-dsvm-postgres-full{branch-designator}'
+      - '{pipeline}-tempest-dsvm-heat-slow{branch-designator}'
+      - '{pipeline}-tempest-dsvm-postgres-zeromq-full{branch-designator}'
+      - '{pipeline}-grenade-dsvm'

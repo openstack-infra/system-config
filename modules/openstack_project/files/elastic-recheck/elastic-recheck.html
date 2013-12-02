@@ -71,11 +71,11 @@ $("#graph-container").append($(new Image()).graphite({
     bgcolor: 'ffffff',
     fgcolor: '000000',
     target: [
-    "color(alias(movingAverage(asPercent(stats.zuul.pipeline.gate.job.gate-tempest-devstack-vm-neutron.FAILURE,sum(stats.zuul.pipeline.gate.job.gate-tempest-devstack-vm-neutron.{SUCCESS,FAILURE})),200), 'gate-tempest-devstack-vm-neutron'),'00c868')",
-    "color(alias(movingAverage(asPercent(stats.zuul.pipeline.check.job.check-tempest-devstack-vm-neutron.FAILURE,sum(stats.zuul.pipeline.check.job.check-tempest-devstack-vm-neutron.{SUCCESS,FAILURE})),200), 'check-tempest-devstack-vm-neutron'),'6464ff')",
-    "color(alias(movingAverage(asPercent(stats.zuul.pipeline.gate.job.gate-tempest-devstack-vm-full.FAILURE,sum(stats.zuul.pipeline.gate.job.gate-tempest-devstack-vm-full.{SUCCESS,FAILURE})),200), 'gate-tempest-devstack-vm-full'),'00FF00')",
-    "color(alias(movingAverage(asPercent(stats.zuul.pipeline.check.job.check-tempest-devstack-vm-full.FAILURE,sum(stats.zuul.pipeline.check.job.check-tempest-devstack-vm-full.{SUCCESS,FAILURE})),200), 'check-tempest-devstack-vm-full'),'ffbf52')",
-    "color(alias(movingAverage(asPercent(stats.zuul.pipeline.check.job.check-grenade-devstack-vm.FAILURE,sum(stats.zuul.pipeline.check.job.check-grenade-devstack-vm.{SUCCESS,FAILURE})),200), 'check-grenade-devstack-vm'),'800080')",
+    "color(alias(movingAverage(asPercent(stats.zuul.pipeline.gate.job.gate-tempest-dsvm-neutron.FAILURE,sum(stats.zuul.pipeline.gate.job.gate-tempest-dsvm-neutron.{SUCCESS,FAILURE})),200), 'gate-tempest-dsvm-neutron'),'00c868')",
+    "color(alias(movingAverage(asPercent(stats.zuul.pipeline.check.job.check-tempest-dsvm-neutron.FAILURE,sum(stats.zuul.pipeline.check.job.check-tempest-dsvm-neutron.{SUCCESS,FAILURE})),200), 'check-tempest-dsvm-neutron'),'6464ff')",
+    "color(alias(movingAverage(asPercent(stats.zuul.pipeline.gate.job.gate-tempest-dsvm-full.FAILURE,sum(stats.zuul.pipeline.gate.job.gate-tempest-dsvm-full.{SUCCESS,FAILURE})),200), 'gate-tempest-dsvm-full'),'00FF00')",
+    "color(alias(movingAverage(asPercent(stats.zuul.pipeline.check.job.check-tempest-dsvm-full.FAILURE,sum(stats.zuul.pipeline.check.job.check-tempest-dsvm-full.{SUCCESS,FAILURE})),200), 'check-tempest-dsvm-full'),'ffbf52')",
+    "color(alias(movingAverage(asPercent(stats.zuul.pipeline.check.job.check-grenade-dsvm.FAILURE,sum(stats.zuul.pipeline.check.job.check-grenade-dsvm.{SUCCESS,FAILURE})),200), 'check-grenade-dsvm'),'800080')",
     ],
     title: "Gate Failure Rates"
 }));

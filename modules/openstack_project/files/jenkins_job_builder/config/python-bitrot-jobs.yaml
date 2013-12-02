@@ -99,7 +99,7 @@
 - job-group:
     name: python-grizzly-bitrot-jobs
     branch: 'stable/grizzly'
-    branch-name: 'stable-grizzly'
+    branch-name: '-grizzly'
     email: openstack-stable-maint@lists.openstack.org
     node: precise
     jobs:
@@ -111,7 +111,7 @@
 - job-group:
     name: python-havana-bitrot-jobs
     branch: 'stable/havana'
-    branch-name: 'stable-havana'
+    branch-name: '-havana'
     email: openstack-stable-maint@lists.openstack.org
     node: precise
     jobs:
