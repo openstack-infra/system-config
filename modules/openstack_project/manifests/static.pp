@@ -134,6 +134,7 @@ class openstack_project::static (
   file { '/srv/static/logs/help':
     ensure  => directory,
     recurse => true,
+    purge   => true,
     owner   => 'root',
     group   => 'root',
     mode    => '0755',

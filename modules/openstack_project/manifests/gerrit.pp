@@ -325,6 +325,7 @@ class openstack_project::gerrit (
       mode    => '0444',
       recurse => true,
       replace => true,
+      purge   => true,
       source  => 'puppet:///modules/openstack_project/gerrit/acls',
       require => Class['::gerrit']
     }
