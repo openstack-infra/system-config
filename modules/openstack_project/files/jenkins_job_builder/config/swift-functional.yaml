@@ -1,5 +1,5 @@
 - job-template:
-    name: '{pipeline}-swift-devstack-vm-functional-{branch-designator}'
+    name: '{pipeline}-swift-dsvm-functional{branch-designator}'
     node: '{node}'
 
     wrappers:
@@ -38,7 +38,7 @@
 
 
 - job-template:
-    name: 'periodic-swift-devstack-vm-functional-{branch-designator}'
+    name: 'periodic-swift-dsvm-functional{branch-designator}'
     node: '{node}'
 
     wrappers:
