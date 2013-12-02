@@ -106,6 +106,18 @@
       - shell: |
           COOKBOOK=$(awk '/^name/ {print $NF}' metadata.rb |tr -d \"\')
           ruby1.9.1 /usr/bin/bundle exec tailor
+          ruby1.9.1 /usr/bin/bundle exec rubocop -f s
+
+- builder:
+    name: chef-cookbook-style-rubocop
+    builders:
+      - shell: |
+          if [ -e .rubocop.yml ]; then
+            COOKBOOK=$(awk '/^name/ {print $NF}' metadata.rb |tr -d \"\')
+            ruby1.9.1 /usr/bin/bundle exec rubocop -f s
+          else
+            echo "Rubocop config file missing.. skipping test"
+          fi
 
 - builder:
     name: chef-cookbook-lint
