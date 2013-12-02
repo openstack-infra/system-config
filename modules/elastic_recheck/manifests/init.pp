@@ -115,6 +115,16 @@ class elastic_recheck (
     ],
   }
 
+  # Link in the queries directory for refactoring
+  file { '/etc/elastic-recheck/queries':
+    ensure  => link,
+    target  => '/opt/elastic-recheck/queries',
+    require => [
+      Vcsrepo['/opt/elastic-recheck'],
+      File['/etc/elastic-recheck'],
+    ],
+  }
+
   file { '/home/recheck':
     ensure  => directory,
     mode    => '0700',
