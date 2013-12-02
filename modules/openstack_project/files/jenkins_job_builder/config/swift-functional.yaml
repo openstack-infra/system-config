@@ -15,10 +15,10 @@
           export PYTHONUNBUFFERED=true
           export DEVSTACK_GATE_TEMPEST=0
           export DEVSTACK_GATE_EXERCISES=0
+          export BRANCH_OVERRIDE={branch-override}
           if [ "$BRANCH_OVERRIDE" != "default" ] ; then
               export ZUUL_BRANCH=$BRANCH_OVERRIDE
           fi
-          cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
 
           function post_test_hook {{
               cd /opt/stack/new/swift
