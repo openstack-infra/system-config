@@ -24,7 +24,6 @@
           target: 'api/quick-start/'
           remove-prefix: 'api-quick-start/target/docbkx/webhelp/api-quick-start-onepager/'
           excludes: '**/*.xml,**/null*'
-          remote-directory: 'api/quick-start'
 
 # this replaces the old openstack-api-site job in Jenkins
 - job:
@@ -52,7 +51,6 @@
           target: ''
           remove-prefix: 'api-ref/target/docbkx/html/'
           excludes: '**/*.xml,**/null*'
-          remote-directory: ''
 
 
 # in zuul/layout.yaml specified to only run against master branch.
