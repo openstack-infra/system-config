@@ -170,20 +170,6 @@ class gerrit(
     require => Package['openjdk-7-jre-headless'],
   }
 
-  if ! defined(Package['gerritlib']) {
-    package { 'gerritlib':
-      ensure   => latest,
-      provider => 'pip',
-      require  => Class[pip],
-    }
-  }
-
-  if ! defined(Package['python-launchpadlib']) {
-    package { 'python-launchpadlib':
-      ensure => present,
-    }
-  }
-
   file { '/var/log/gerrit':
     ensure => directory,
     owner  => 'gerrit2',
