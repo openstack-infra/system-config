@@ -20,8 +20,9 @@ import os
 import sys
 import subprocess
 
-DEVSTACK=os.path.expanduser('~/workspace-cache/devstack')
-CACHEDIR=os.path.expanduser('~/cache/files')
+DEVSTACK = os.path.expanduser('~/workspace-cache/devstack')
+CACHEDIR = os.path.expanduser('~/cache/files')
+
 
 def run_local(cmd, status=False, cwd='.', env={}):
     print "Running:", cmd

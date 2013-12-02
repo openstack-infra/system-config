@@ -93,10 +93,10 @@ class TemplateData(object):
     """
 
     STATUS = {
-    0: 'pass',
-    1: 'fail',
-    2: 'error',
-    3: 'skip',
+        0: 'pass',
+        1: 'fail',
+        2: 'error',
+        3: 'skip',
     }
 
     DEFAULT_TITLE = 'Unit Test Report'
@@ -536,9 +536,9 @@ class HtmlOutput(testtools.TestResult):
         a_lines = []
         for name, value in report_attrs:
             line = TemplateData.HEADING_ATTRIBUTE_TMPL % dict(
-                    name=saxutils.escape(name),
-                    value=saxutils.escape(value),
-                )
+                name=saxutils.escape(name),
+                value=saxutils.escape(value),
+            )
             a_lines.append(line)
         heading = TemplateData.HEADING_TMPL % dict(
             title=saxutils.escape(TemplateData.DEFAULT_TITLE),
@@ -590,7 +590,7 @@ class HtmlOutput(testtools.TestResult):
         report = TemplateData.REPORT_TMPL % dict(
             test_list=''.join(rows),
             count=str(self.success_count + self.failure_count +
-                        self.error_count + self.skip_count),
+                      self.error_count + self.skip_count),
             Pass=str(self.success_count),
             fail=str(self.failure_count),
             error=str(self.error_count),

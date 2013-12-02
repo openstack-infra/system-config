@@ -33,8 +33,8 @@ PASS = config.get('admin', 'password')
 management.call_command('syncdb', interactive=False)
 
 try:
-  auth_models.User.objects.get(username=USER)
-  print 'Admin user already exists.'
+    auth_models.User.objects.get(username=USER)
+    print 'Admin user already exists.'
 except auth_models.User.DoesNotExist:
-  print 'Creating admin user'
-  auth_models.User.objects.create_superuser(USER, EMAIL, PASS)
+    print 'Creating admin user'
+    auth_models.User.objects.create_superuser(USER, EMAIL, PASS)

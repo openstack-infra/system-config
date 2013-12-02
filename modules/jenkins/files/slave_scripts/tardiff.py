@@ -25,8 +25,9 @@ class OpenStackTarDiff:
     def check_env(self):
         """ exit if dist/ directory already exists """
         if not self.package and os.path.exists(self.dist_dir):
-            self.error("dist directory '%s' exist. Please remove it before " \
-                  "running this script" % self.dist_dir)
+            self.error(
+                "dist directory '%s' exist. Please remove it before "
+                "running this script" % self.dist_dir)
 
     def validate_args(self):
         try:
@@ -108,8 +109,8 @@ class OpenStackTarDiff:
         """ read file list from git archive """
         git_tar = os.path.join(os.getcwd(), '%s.tar' % self.project_name)
         try:
-            a_cmd = "git archive -o %s HEAD --prefix=%s" % \
-                     (git_tar, self.prefix)
+            a_cmd = ("git archive -o %s HEAD --prefix=%s" %
+                     (git_tar, self.prefix))
             self.debug("executing command '%s'" % a_cmd)
             (status, out) = commands.getstatusoutput(a_cmd)
             if status != 0:
@@ -118,7 +119,7 @@ class OpenStackTarDiff:
                 if os.path.exists(git_tar):
                     os.unlink(git_tar)
                 self.error('git archive failed: %s' % out)
-        except Exception, err:
+        except Exception as err:
             if os.path.exists(git_tar):
                 os.unlink(git_tar)
             self.error('git archive failed: %s' % err)
@@ -132,7 +133,7 @@ class OpenStackTarDiff:
             self.git_files = out.split('\n')
             self.debug("Removing git archive ... %s ..." % git_tar)
             os.remove(git_tar)
-        except Exception, err:
+        except Exception as err:
             self.error('unable to read tar: %s' % err)
 
     def get_sdist_files(self):
@@ -144,7 +145,7 @@ class OpenStackTarDiff:
                 (status, out) = commands.getstatusoutput(sdist_cmd)
                 if status != 0:
                     self.error("command '%s' failed" % sdist_cmd)
-            except Exception, err:
+            except Exception as err:
                 self.error("command '%s' failed" % (sdist_cmd, err))
 
             self.package = os.listdir(self.dist_dir)[0]
@@ -157,7 +158,7 @@ class OpenStackTarDiff:
                 self.error("command '%s' failed" % tar_cmd)
             #self.debug(out)
             self.sdist_files = out.split('\n')
-        except Exception, err:
+        except Exception as err:
             self.error("command '%s' failed: %s" % (tar_cmd, err))
 
     def debug(self, msg):
@@ -175,8 +176,7 @@ class OpenStackTarDiff:
             stream = sys.stdout
         stream.write("usage: %s [--help|h] [-v] "
                      "[-p|--package=sdist_package.tar.gz] "
-                     "-e|--exclude=filename\n" \
-                     % os.path.basename(sys.argv[0]))
+                     "-e|--exclude=filename\n" % os.path.basename(sys.argv[0]))
         if msg:
             stream.write("\nERROR: " + msg + "\n")
             exitCode = 1

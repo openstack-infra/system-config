@@ -35,7 +35,7 @@ SEVS = {
     'TRACE': 4,
     'WARN': 5,
     'ERROR': 6
-    }
+}
 
 
 def _html_close():
@@ -96,13 +96,15 @@ def escape_html(line):
 
 def link_timestamp(line):
     m = re.match(
-        '(<span class=\'(?P<class>[^\']+)\'>)?(?P<date>%s)(?P<rest>.*)' % DATEFMT,
-        line)
+        '(<span class=\'(?P<class>[^\']+)\'>)?(?P<date>%s)(?P<rest>.*)'
+        % DATEFMT, line)
     if m:
         date = "_" + re.sub('[\s\:\.]', '_', m.group('date'))
 
-        return "</span><span class='%s %s'><a name='%s' class='date' href='#%s'>%s</a>%s\n" % (
-            m.group('class'), date, date, date, m.group('date'), m.group('rest'))
+        return ("</span><span class='%s %s'>"
+                "<a name='%s' class='date' href='#%s'>%s</a>%s\n" % (
+                    m.group('class'), date, date, date,
+                    m.group('date'), m.group('rest')))
     else:
         return line
 
