@@ -216,6 +216,7 @@ class jenkins::master(
     group   => 'root',
     mode    => '0755',
     recurse => true,
+    purge   => true,
     require => File['/usr/local/jenkins'],
     source  => 'puppet:///modules/jenkins/slave_scripts',
   }
