@@ -2180,6 +2180,12 @@ projects:
     post:
       - hook-bufunfa-rtfd
 
+  - name: openstack/openstack-doc-tools
+    check:
+      - gate-noop
+    gate:
+      - gate-noop
+
   - name: openstack/openstack-manuals
     check:
       - gate-openstack-manuals-validate-niceness

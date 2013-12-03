@@ -55,6 +55,7 @@ openstack-doc:
       - change-merged
       - x-vrif-minus-2
     projects:
+      - openstack/openstack-doc-tools
       - openstack/openstack-manuals
       - openstack/operations-guide
       - openstack/api-site
