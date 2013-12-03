@@ -3589,6 +3589,30 @@ projects:
           - post-mirror-python33
       - hook-pecan-rtfd
 
+  - name: stackforge/stevedore
+    check:
+      - gate-stevedore-pep8
+      - gate-stevedore-python26
+      - gate-stevedore-python27
+      - gate-stevedore-python33
+    gate:
+      - gate-stevedore-pep8
+      - gate-stevedore-python26
+      - gate-stevedore-python27
+      - gate-stevedore-python33
+    post:
+      - stevedore-branch-tarball
+    pre-release:
+      - stevedore-tarball
+      - hook-stevedore-rtfd
+    release:
+      - stevedore-tarball:
+        - stevedore-pypi-upload:
+          - post-mirror-python26
+          - post-mirror-python27
+          - post-mirror-python33
+      - hook-stevedore-rtfd
+
   - name: openstack-infra/groups
     check:
       - gate-noop
