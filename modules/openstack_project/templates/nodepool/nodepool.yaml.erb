@@ -48,6 +48,12 @@ providers:
         setup: prepare_node_devstack.sh
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
+      - name: bare-precise
+        base-image: 'Ubuntu 12.04 LTS (Precise Pangolin)'
+        min-ram: 8192
+        setup: prepare_node_bare.sh
+        username: jenkins
+        private-key: /home/nodepool/.ssh/id_rsa
   - name: rax-iad
     region-name: 'IAD'
     service-type: 'compute'
@@ -158,6 +164,10 @@ targets:
       apikey: '<%= jenkins_api_key %>'
       credentials-id: '<%= jenkins_credentials_id %>'
     images:
+      - name: bare-precise
+        min-ready: 2
+        providers:
+          - name: rax-ord
       - name: devstack-precise
         min-ready: 20
         providers:
