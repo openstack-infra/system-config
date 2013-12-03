@@ -38,6 +38,7 @@ openstack-infra:
       - openstack-infra/statusbot
       - openstack-infra/storyboard
       - openstack-infra/zuul
+      - openstack-infra/zuul-packaging
       - openstack/requirements
     branches:
       - master
@@ -46,6 +47,7 @@ openstack-infra:
       - template
       - overview
       - logstash
+      - debian/sid
 
 openstack-doc:
     events:
