@@ -3687,18 +3687,18 @@ projects:
       - gate-solum-python27
       - gate-solum-python33
       - gate-solum-pypy
-#      docs will be added as soon as we have and docs to build
-#      - gate-solum-docs
+      - gate-solum-docs
     gate:
       - gate-solum-pep8
       - gate-solum-python26
       - gate-solum-python27
       - gate-solum-python33
       - gate-solum-pypy
-#      docs will be added as soon as we have and docs to build
-#      - gate-solum-docs
+      - gate-solum-docs
     post:
       - solum-coverage
+      - hook-solum-rtfd
+
   - name: stackforge/sphinxcontrib-docbookrestapi
     check:
       - gate-sphinxcontrib-docbookrestapi-pep8
