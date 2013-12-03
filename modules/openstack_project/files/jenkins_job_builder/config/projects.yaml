@@ -1649,6 +1649,7 @@
         - block-storage-admin
         - compute-admin
         - network-connectivity-admin
+        - object-storage-admin
 
     jobs:
       - gate-openstack-manuals-validate-{check}
