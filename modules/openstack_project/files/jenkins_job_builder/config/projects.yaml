@@ -113,7 +113,6 @@
     name: savanna
     github-org: openstack
     node: precise
-    rtfd-id: 7095
     tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
 
@@ -169,7 +168,6 @@
     name: sqlalchemy-migrate
     github-org: stackforge
     node: precise
-    rtfd-id: 1744
     tarball-site: tarballs.openstack.org
 
     jobs:
@@ -343,7 +341,6 @@
     github-org: openstack-infra
     node: precise
     tarball-site: tarballs.openstack.org
-    rtfd-id: 6926
 
     jobs:
       - python-jobs
@@ -816,7 +813,6 @@
     github-org: stackforge
     tarball-site: tarballs.openstack.org
     node: precise
-    rtfd-id: 7957
 
     jobs:
       - python-jobs
@@ -826,7 +822,6 @@
     name: python-libraclient
     github-org: stackforge
     tarball-site: tarballs.openstack.org
-    rtfd-id: 7957
     node: precise
 
     jobs:
@@ -869,7 +864,6 @@
     github-org: stackforge
     node: precise
     tarball-site: tarballs.openstack.org
-    rtfd-id: 7957
 
     jobs:
       - python-jobs
@@ -882,7 +876,6 @@
     github-org: stackforge
     node: precise
     tarball-site: tarballs.openstack.org
-    rtfd-id: 6367
 
     jobs:
       - python-jobs
@@ -916,7 +909,6 @@
     github-org: stackforge
     node: precise
     tarball-site: tarballs.openstack.org
-    rtfd-id: 7963
 
     jobs:
       - python-jobs
@@ -929,7 +921,6 @@
     github-org: stackforge
     node: precise
     tarball-site: tarballs.openstack.org
-    rtfd-id: 5216
 
     jobs:
       - python-jobs
@@ -1509,7 +1500,6 @@
     name: stackalytics
     github-org: stackforge
     node: precise
-    rtfd-id: 8778
     tarball-site: tarballs.openstack.org
 
     jobs:
@@ -1539,7 +1529,6 @@
     name: pecan
     github-org: stackforge
     node: precise
-    rtfd-id: 476
     tarball-site: tarballs.openstack.org
 
     jobs:
