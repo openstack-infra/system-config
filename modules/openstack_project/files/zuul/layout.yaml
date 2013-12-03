@@ -2679,12 +2679,6 @@ projects:
           - post-mirror-python27
           - post-mirror-python33
 
-  - name: stackforge/puppet-savanna
-    check:
-      - gate-noop
-    gate:
-      - gate-noop
-
   - name: stackforge/sqlalchemy-migrate
     check:
       - gate-sqlalchemy-migrate-python26
@@ -2889,6 +2883,24 @@ projects:
       - gate-puppet-openstack-puppet-unit-3.1
       - gate-puppet-openstack-puppet-unit-3.2
       - gate-puppet-openstack-puppet-unit-3.3
+
+  - name: stackforge/puppet-savanna
+    check:
+      - gate-puppet-savanna-puppet-lint
+      - gate-puppet-savanna-puppet-syntax
+      - gate-puppet-savanna-puppet-unit-2.7
+      - gate-puppet-savanna-puppet-unit-3.0
+      - gate-puppet-savanna-puppet-unit-3.1
+      - gate-puppet-savanna-puppet-unit-3.2
+      - gate-puppet-savanna-puppet-unit-3.3
+    gate:
+      - gate-puppet-savanna-puppet-lint
+      - gate-puppet-savanna-puppet-syntax
+      - gate-puppet-savanna-puppet-unit-2.7
+      - gate-puppet-savanna-puppet-unit-3.0
+      - gate-puppet-savanna-puppet-unit-3.1
+      - gate-puppet-savanna-puppet-unit-3.2
+      - gate-puppet-savanna-puppet-unit-3.3
 
   - name: stackforge/puppet-swift
     check:
