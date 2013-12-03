@@ -981,19 +981,19 @@
     jobs:
       - python-jobs
       - openstack-publish-jobs
-      - '{pipeline}-swift-devstack-vm-functional-{branch-designator}':
+      - '{pipeline}-swift-dsvm-functional{branch-designator}':
           pipeline: gate
           node: devstack-precise
-          branch-designator: default
+          branch-designator: ''
           branch-override: default
-      - '{pipeline}-swift-devstack-vm-functional-{branch-designator}':
+      - '{pipeline}-swift-dsvm-functional{branch-designator}':
           pipeline: check
           node: 'devstack-precise || devstack-precise-check'
-          branch-designator: default
+          branch-designator: ''
           branch-override: default
-      - 'periodic-swift-devstack-vm-functional-{branch-designator}':
+      - 'periodic-swift-dsvm-functional{branch-designator}':
           node: 'devstack-precise || devstack-precise-check'
-          branch-designator: stable-havana
+          branch-designator: '-havana'
           branch-override: stable/havana
 # No one is interested in stable/ branches on swift, so don't run bitrot jobs
 
@@ -1019,35 +1019,35 @@
       - devstack-jobs:
           pipeline: gate
           node: devstack-precise
-          branch-designator: default
+          branch-designator: ''
           branch-override: default
       - devstack-jobs:
           pipeline: check
           node: 'devstack-precise || devstack-precise-check'
-          branch-designator: default
+          branch-designator: ''
           branch-override: default
       # Stable check jobs for testing devstack gate
       - devstack-jobs:
           pipeline: check
           node: 'devstack-precise || devstack-precise-check'
-          branch-designator: stable-grizzly
+          branch-designator: '-grizzly'
           branch-override: stable/grizzly
       - devstack-jobs:
           pipeline: check
           node: 'devstack-precise || devstack-precise-check'
-          branch-designator: stable-havana
+          branch-designator: '-havana'
           branch-override: stable/havana
       # Periodic jobs for various branches
       - devstack-periodic-jobs:
-          branch-designator: stable-grizzly
+          branch-designator: '-grizzly'
           branch-override: stable/grizzly
           node: devstack-precise
       - devstack-periodic-jobs:
-          branch-designator: stable-havana
+          branch-designator: '-havana'
           branch-override: stable/havana
           node: devstack-precise
       - devstack-periodic-jobs:
-          branch-designator: master
+          branch-designator: '-master'
           branch-override: master
           node: devstack-precise
 
@@ -1064,10 +1064,10 @@
     name: requirements-jobs
 
     jobs:
-      - '{pipeline}-requirements-integration':
+      - '{pipeline}-requirements-integration-dsvm':
           pipeline: gate
           node: devstack-precise
-      - '{pipeline}-requirements-integration':
+      - '{pipeline}-requirements-integration-dsvm':
           pipeline: check
           node: 'devstack-precise || devstack-precise-check'
 

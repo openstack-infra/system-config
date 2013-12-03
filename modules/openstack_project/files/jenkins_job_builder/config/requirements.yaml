@@ -1,5 +1,5 @@
 - job-template:
-    name: '{pipeline}-requirements-integration'
+    name: '{pipeline}-requirements-integration-dsvm'
     node: '{node}'
 
     wrappers:

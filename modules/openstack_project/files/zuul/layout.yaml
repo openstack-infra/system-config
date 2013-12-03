@@ -107,41 +107,41 @@ pipelines:
 jobs:
   - name: ^.*$
     parameter-function: set_log_url
-  - name: ^.*devstack-vm.*$
+  - name: ^.*(dsvm|devstack-vm).*$
     parameter-function: single_use_node
-  - name: ^(gate|check)-tempest-devstack-vm-neutron-pg-default$
+  - name: ^(gate|check)-tempest-dsvm-neutron-pg$
     branch: ^(?!stable/grizzly).*$
-  - name: ^(gate|check)-tempest-devstack-vm-neutron-isolated-default$
+  - name: ^(gate|check)-tempest-dsvm-neutron-isolated$
     branch: ^(?!stable/grizzly).*$
-  - name: ^(gate|check)-tempest-devstack-vm-neutron-pg-isolated-default$
+  - name: ^(gate|check)-tempest-dsvm-neutron-pg-isolated$
     branch: ^(?!stable/grizzly).*$
-  - name: ^(gate|check)-tempest-devstack-vm-neutron-full-default$
-    branch: ^(?!stable/grizzly).*$
-    voting: false
-  - name: gate-tempest-devstack-vm-heat-slow-default
+  - name: ^(gate|check)-tempest-dsvm-neutron-full$
     branch: ^(?!stable/grizzly).*$
     voting: false
-  - name: ^(gate|check)-devstack-vm-cells-default$
-    voting: false
-  - name: ^(gate|check)-tempest-devstack-vm-large-ops-default$
+  - name: gate-tempest-dsvm-heat-slow
     branch: ^(?!stable/grizzly).*$
-  - name: ^(gate|check)-tempest-devstack-vm-neutron-large-ops-default$
+    voting: false
+  - name: ^(gate|check)-devstack-dsvm-cells$
+    voting: false
+  - name: ^(gate|check)-tempest-dsvm-large-ops$
     branch: ^(?!stable/grizzly).*$
-  - name: ^(gate|check)-tempest-devstack-vm-cells-default$
+  - name: ^(gate|check)-tempest-dsvm-neutron-large-ops$
+    branch: ^(?!stable/grizzly).*$
+  - name: ^(gate|check)-tempest-dsvm-cells$
     voting: false
-  - name: ^(gate|check)-tempest-devstack-vm-cells-full-default$
+  - name: ^(gate|check)-tempest-dsvm-cells-full$
     voting: false
-  - name: ^(gate|check)-grenade-devstack-vm$
+  - name: ^(gate|check)-grenade-dsvm$
     branch: ^(?!stable/grizzly).*$
   - name: gate-tempest-python27
     branch: ^(?!stable/grizzly).*$
     # only here until stable is votable, then merge
     # back to a single job
-  - name: gate-grenade-devstack-vm-stable
+  - name: gate-grenade-dsvm-stable
     branch: ^(stable/grizzly).*$
     voting: false
-    # Remove when gate-grenade-devstack-vm-stable is
-    # merged into gate-grenade-devstack-vm
+    # Remove when gate-grenade-dsvm-stable is
+    # merged into gate-grenade-dsvm
   - name: gate-grenade-noop
     branch: ^(stable/grizzly).*$
   - name: gate-devstack-bash8
@@ -150,25 +150,25 @@ jobs:
     branch: ^(?!stable/grizzly).*$
   - name: tempest-docs
     branch: ^(?!stable/grizzly).*$
-  - name: ^(gate|check)-swift-devstack-vm-functional$
+  - name: ^(gate|check)-swift-dsvm-functional$
     branch: ^(?!stable/grizzly).*$
-  - name: check-tempest-devstack-vm-full-stable-grizzly
+  - name: check-tempest-dsvm-full-grizzly
     voting: false
-  - name: check-tempest-devstack-vm-neutron-stable-grizzly
+  - name: check-tempest-dsvm-neutron-grizzly
     voting: false
-  - name: check-tempest-devstack-vm-postgres-full-stable-grizzly
+  - name: check-tempest-dsvm-postgres-full-grizzly
     voting: false
-  - name: check-devstack-vm-cells-stable-grizzly
+  - name: check-devstack-dsvm-cells-grizzly
     voting: false
-  - name: check-tempest-devstack-vm-cells-stable-grizzly
+  - name: check-tempest-dsvm-cells-grizzly
     voting: false
-  - name: check-tempest-devstack-vm-cells-full-stable-grizzly
+  - name: check-tempest-dsvm-cells-full-grizzly
     voting: false
-  - name: check-devstack-vm-cells-stable-havana
+  - name: check-devstack-dsvm-cells-havana
     voting: false
-  - name: check-tempest-devstack-vm-cells-stable-havana
+  - name: check-tempest-dsvm-cells-havana
     voting: false
-  - name: check-tempest-devstack-vm-cells-full-stable-havana
+  - name: check-tempest-dsvm-cells-full-havana
     voting: false
   - name: ^(gate|check)-gerrit-unittests$
     branch: ^openstack/.*$
@@ -454,10 +454,10 @@ projects:
   - name: openstack-infra/pypi-mirror
     check:
       - gate-pypi-mirror-pep8
-      - check-requirements-integration
+      - check-requirements-integration-dsvm
     gate:
       - gate-pypi-mirror-pep8
-      - gate-requirements-integration
+      - gate-requirements-integration-dsvm
     pre-release:
       - pypi-mirror-tarball
     release:
@@ -621,27 +621,27 @@ projects:
       - gate-cinder-python26
       - gate-cinder-python27
       - gate-cinder-pylint
-      - check-tempest-devstack-vm-full-default
-      - check-tempest-devstack-vm-postgres-full-default
-      - check-tempest-devstack-vm-neutron-default
-      - gate-tempest-devstack-vm-large-ops-default
-      - gate-tempest-devstack-vm-neutron-large-ops-default
-      - check-grenade-devstack-vm
+      - check-tempest-dsvm-full
+      - check-tempest-dsvm-postgres-full
+      - check-tempest-dsvm-neutron
+      - gate-tempest-dsvm-large-ops
+      - gate-tempest-dsvm-neutron-large-ops
+      - check-grenade-dsvm
     gate:
       - gate-cinder-requirements
       - gate-cinder-docs
       - gate-cinder-pep8
       - gate-cinder-python26
       - gate-cinder-python27
-      - gate-tempest-devstack-vm-full-default
-      - gate-tempest-devstack-vm-postgres-full-default
-      - gate-tempest-devstack-vm-neutron-default
-      - gate-tempest-devstack-vm-large-ops-default
-      - gate-tempest-devstack-vm-neutron-large-ops-default
-      - gate-grenade-devstack-vm
+      - gate-tempest-dsvm-full
+      - gate-tempest-dsvm-postgres-full
+      - gate-tempest-dsvm-neutron
+      - gate-tempest-dsvm-large-ops
+      - gate-tempest-dsvm-neutron-large-ops
+      - gate-grenade-dsvm
     experimental:
-      - gate-grenade-devstack-vm-stable
-      - gate-devstack-vm-cells-default
+      - gate-grenade-dsvm-stable
+      - gate-devstack-dsvm-cells
     post:
       - cinder-branch-tarball
       - cinder-coverage
@@ -655,12 +655,12 @@ projects:
       - cinder-merge-release-tags
     periodic:
       - cinder-propose-translation-update
-      - periodic-cinder-docs-stable-grizzly
-      - periodic-cinder-python26-stable-grizzly
-      - periodic-cinder-python27-stable-grizzly
-      - periodic-cinder-docs-stable-havana
-      - periodic-cinder-python26-stable-havana
-      - periodic-cinder-python27-stable-havana
+      - periodic-cinder-docs-grizzly
+      - periodic-cinder-python26-grizzly
+      - periodic-cinder-python27-grizzly
+      - periodic-cinder-docs-havana
+      - periodic-cinder-python26-havana
+      - periodic-cinder-python27-havana
 
   - name: openstack/glance
     check:
@@ -669,27 +669,27 @@ projects:
       - gate-glance-docs
       - gate-glance-python26
       - gate-glance-python27
-      - check-tempest-devstack-vm-full-default
-      - check-tempest-devstack-vm-postgres-full-default
-      - check-tempest-devstack-vm-neutron-default
-      - gate-tempest-devstack-vm-large-ops-default
-      - gate-tempest-devstack-vm-neutron-large-ops-default
-      - check-grenade-devstack-vm
+      - check-tempest-dsvm-full
+      - check-tempest-dsvm-postgres-full
+      - check-tempest-dsvm-neutron
+      - gate-tempest-dsvm-large-ops
+      - gate-tempest-dsvm-neutron-large-ops
+      - check-grenade-dsvm
     gate:
       - gate-glance-requirements
       - gate-glance-docs
       - gate-glance-pep8
       - gate-glance-python26
       - gate-glance-python27
-      - gate-tempest-devstack-vm-full-default
-      - gate-tempest-devstack-vm-postgres-full-default
-      - gate-tempest-devstack-vm-neutron-default
-      - gate-tempest-devstack-vm-large-ops-default
-      - gate-tempest-devstack-vm-neutron-large-ops-default
-      - gate-grenade-devstack-vm
+      - gate-tempest-dsvm-full
+      - gate-tempest-dsvm-postgres-full
+      - gate-tempest-dsvm-neutron
+      - gate-tempest-dsvm-large-ops
+      - gate-tempest-dsvm-neutron-large-ops
+      - gate-grenade-dsvm
     experimental:
-      - gate-grenade-devstack-vm-stable
-      - gate-devstack-vm-cells-default
+      - gate-grenade-dsvm-stable
+      - gate-devstack-dsvm-cells
     post:
       - glance-branch-tarball
       - glance-coverage
@@ -702,12 +702,12 @@ projects:
       - glance-merge-release-tags
     periodic:
       - glance-propose-translation-update
-      - periodic-glance-docs-stable-grizzly
-      - periodic-glance-python26-stable-grizzly
-      - periodic-glance-python27-stable-grizzly
-      - periodic-glance-docs-stable-havana
-      - periodic-glance-python26-stable-havana
-      - periodic-glance-python27-stable-havana
+      - periodic-glance-docs-grizzly
+      - periodic-glance-python26-grizzly
+      - periodic-glance-python27-grizzly
+      - periodic-glance-docs-havana
+      - periodic-glance-python26-havana
+      - periodic-glance-python27-havana
 
   - name: openstack/horizon
     check:
@@ -718,12 +718,12 @@ projects:
       - gate-horizon-python27
       - gate-horizon-python27-django14
       - gate-horizon-selenium
-      - check-tempest-devstack-vm-full-default
-      - check-tempest-devstack-vm-postgres-full-default
-      - check-tempest-devstack-vm-neutron-default
-      - gate-tempest-devstack-vm-large-ops-default
-      - gate-tempest-devstack-vm-neutron-large-ops-default
-      - check-grenade-devstack-vm
+      - check-tempest-dsvm-full
+      - check-tempest-dsvm-postgres-full
+      - check-tempest-dsvm-neutron
+      - gate-tempest-dsvm-large-ops
+      - gate-tempest-dsvm-neutron-large-ops
+      - check-grenade-dsvm
     gate:
       - gate-horizon-requirements
       - gate-horizon-docs
@@ -732,15 +732,15 @@ projects:
       - gate-horizon-python27
       - gate-horizon-python27-django14
       - gate-horizon-selenium
-      - gate-tempest-devstack-vm-full-default
-      - gate-tempest-devstack-vm-postgres-full-default
-      - gate-tempest-devstack-vm-neutron-default
-      - gate-tempest-devstack-vm-large-ops-default
-      - gate-tempest-devstack-vm-neutron-large-ops-default
-      - gate-grenade-devstack-vm
+      - gate-tempest-dsvm-full
+      - gate-tempest-dsvm-postgres-full
+      - gate-tempest-dsvm-neutron
+      - gate-tempest-dsvm-large-ops
+      - gate-tempest-dsvm-neutron-large-ops
+      - gate-grenade-dsvm
     experimental:
-      - gate-grenade-devstack-vm-stable
-      - gate-devstack-vm-cells-default
+      - gate-grenade-dsvm-stable
+      - gate-devstack-dsvm-cells
     post:
       - horizon-branch-tarball
       - horizon-coverage
@@ -752,12 +752,12 @@ projects:
       - horizon-docs
       - horizon-merge-release-tags
     periodic:
-      - periodic-horizon-docs-stable-grizzly
-      - periodic-horizon-python26-stable-grizzly
-      - periodic-horizon-python27-stable-grizzly
-      - periodic-horizon-docs-stable-havana
-      - periodic-horizon-python26-stable-havana
-      - periodic-horizon-python27-stable-havana
+      - periodic-horizon-docs-grizzly
+      - periodic-horizon-python26-grizzly
+      - periodic-horizon-python27-grizzly
+      - periodic-horizon-docs-havana
+      - periodic-horizon-python26-havana
+      - periodic-horizon-python27-havana
 
   - name: openstack/django_openstack_auth
     check:
@@ -789,29 +789,29 @@ projects:
       - gate-keystone-docs
       - gate-keystone-python26
       - gate-keystone-python27
-      - check-tempest-devstack-vm-full-default
-      - check-tempest-devstack-vm-postgres-full-default
-      - check-tempest-devstack-vm-neutron-default
-      - gate-tempest-devstack-vm-large-ops-default
-      - gate-tempest-devstack-vm-neutron-large-ops-default
-      - check-grenade-devstack-vm
-      - check-swift-devstack-vm-functional-default
+      - check-tempest-dsvm-full
+      - check-tempest-dsvm-postgres-full
+      - check-tempest-dsvm-neutron
+      - gate-tempest-dsvm-large-ops
+      - gate-tempest-dsvm-neutron-large-ops
+      - check-grenade-dsvm
+      - check-swift-dsvm-functional
     gate:
       - gate-keystone-requirements
       - gate-keystone-docs
       - gate-keystone-pep8
       - gate-keystone-python26
       - gate-keystone-python27
-      - gate-tempest-devstack-vm-full-default
-      - gate-tempest-devstack-vm-postgres-full-default
-      - gate-tempest-devstack-vm-neutron-default
-      - gate-tempest-devstack-vm-large-ops-default
-      - gate-tempest-devstack-vm-neutron-large-ops-default
-      - gate-grenade-devstack-vm
-      - gate-swift-devstack-vm-functional-default
+      - gate-tempest-dsvm-full
+      - gate-tempest-dsvm-postgres-full
+      - gate-tempest-dsvm-neutron
+      - gate-tempest-dsvm-large-ops
+      - gate-tempest-dsvm-neutron-large-ops
+      - gate-grenade-dsvm
+      - gate-swift-dsvm-functional
     experimental:
-      - gate-grenade-devstack-vm-stable
-      - gate-devstack-vm-cells-default
+      - gate-grenade-dsvm-stable
+      - gate-devstack-dsvm-cells
     post:
       - keystone-branch-tarball
       - keystone-coverage
@@ -825,13 +825,13 @@ projects:
       - keystone-merge-release-tags
     periodic:
       - keystone-propose-translation-update
-      - periodic-keystone-docs-stable-grizzly
-      - periodic-keystone-python26-stable-grizzly
-      - periodic-keystone-python27-stable-grizzly
-      - periodic-keystone-docs-stable-havana
-      - periodic-keystone-python26-stable-havana
-      - periodic-keystone-python27-stable-havana
-      - periodic-swift-devstack-vm-functional-stable-havana
+      - periodic-keystone-docs-grizzly
+      - periodic-keystone-python26-grizzly
+      - periodic-keystone-python27-grizzly
+      - periodic-keystone-docs-havana
+      - periodic-keystone-python26-havana
+      - periodic-keystone-python27-havana
+      - periodic-swift-dsvm-functional-havana
 
   - name: openstack/nova
     check:
@@ -840,13 +840,13 @@ projects:
       - gate-nova-docs
       - gate-nova-python26
       - gate-nova-python27
-      - check-tempest-devstack-vm-full-default
-      - check-tempest-devstack-vm-postgres-full-default
-      - check-tempest-devstack-vm-neutron-default
-      - gate-tempest-devstack-vm-large-ops-default
-      - gate-tempest-devstack-vm-neutron-large-ops-default
-      - check-grenade-devstack-vm
-      - gate-devstack-vm-cells-default
+      - check-tempest-dsvm-full
+      - check-tempest-dsvm-postgres-full
+      - check-tempest-dsvm-neutron
+      - gate-tempest-dsvm-large-ops
+      - gate-tempest-dsvm-neutron-large-ops
+      - check-grenade-dsvm
+      - gate-devstack-dsvm-cells
       - gate-nova-pylint
     gate:
       - gate-nova-requirements
@@ -854,16 +854,16 @@ projects:
       - gate-nova-pep8
       - gate-nova-python26
       - gate-nova-python27
-      - gate-tempest-devstack-vm-full-default
-      - gate-tempest-devstack-vm-postgres-full-default
-      - gate-tempest-devstack-vm-neutron-default
-      - gate-tempest-devstack-vm-large-ops-default
-      - gate-tempest-devstack-vm-neutron-large-ops-default
-      - gate-grenade-devstack-vm
+      - gate-tempest-dsvm-full
+      - gate-tempest-dsvm-postgres-full
+      - gate-tempest-dsvm-neutron
+      - gate-tempest-dsvm-large-ops
+      - gate-tempest-dsvm-neutron-large-ops
+      - gate-grenade-dsvm
     experimental:
-      - gate-grenade-devstack-vm-stable
-      - gate-tempest-devstack-vm-neutron-full-default
-      - periodic-tempest-devstack-vm-coverage-master
+      - gate-grenade-dsvm-stable
+      - gate-tempest-dsvm-neutron-full
+      - periodic-tempest-dsvm-coverage-master
     post:
       - nova-branch-tarball
       - nova-coverage
@@ -877,12 +877,12 @@ projects:
       - nova-merge-release-tags
     periodic:
       - nova-propose-translation-update
-      - periodic-nova-docs-stable-grizzly
-      - periodic-nova-python26-stable-grizzly
-      - periodic-nova-python27-stable-grizzly
-      - periodic-nova-docs-stable-havana
-      - periodic-nova-python26-stable-havana
-      - periodic-nova-python27-stable-havana
+      - periodic-nova-docs-grizzly
+      - periodic-nova-python26-grizzly
+      - periodic-nova-python27-grizzly
+      - periodic-nova-docs-havana
+      - periodic-nova-python26-havana
+      - periodic-nova-python27-havana
 
   - name: openstack/openstack
     check:
@@ -918,11 +918,11 @@ projects:
       - gate-oslo.config-python26
       - gate-oslo.config-python27
       - gate-oslo.config-python33
-      - check-tempest-devstack-vm-full-default
-      - check-tempest-devstack-vm-neutron-default
-      - gate-tempest-devstack-vm-large-ops-default
-      - gate-tempest-devstack-vm-neutron-large-ops-default
-      - check-grenade-devstack-vm
+      - check-tempest-dsvm-full
+      - check-tempest-dsvm-neutron
+      - gate-tempest-dsvm-large-ops
+      - gate-tempest-dsvm-neutron-large-ops
+      - check-grenade-dsvm
     gate:
       - gate-oslo.config-requirements
       - gate-oslo.config-docs
@@ -930,11 +930,11 @@ projects:
       - gate-oslo.config-python26
       - gate-oslo.config-python27
       - gate-oslo.config-python33
-      - gate-tempest-devstack-vm-full-default
-      - gate-tempest-devstack-vm-neutron-default
-      - gate-tempest-devstack-vm-large-ops-default
-      - gate-tempest-devstack-vm-neutron-large-ops-default
-      - gate-grenade-devstack-vm
+      - gate-tempest-dsvm-full
+      - gate-tempest-dsvm-neutron
+      - gate-tempest-dsvm-large-ops
+      - gate-tempest-dsvm-neutron-large-ops
+      - gate-grenade-dsvm
     post:
       - oslo.config-branch-tarball
       - oslo.config-docs
@@ -955,22 +955,22 @@ projects:
       - gate-oslo.messaging-docs
       - gate-oslo.messaging-python26
       - gate-oslo.messaging-python27
-      - check-tempest-devstack-vm-full-default
-      - check-tempest-devstack-vm-neutron-default
-      - gate-tempest-devstack-vm-large-ops-default
-      - gate-tempest-devstack-vm-neutron-large-ops-default
-      - check-grenade-devstack-vm
+      - check-tempest-dsvm-full
+      - check-tempest-dsvm-neutron
+      - gate-tempest-dsvm-large-ops
+      - gate-tempest-dsvm-neutron-large-ops
+      - check-grenade-dsvm
     gate:
       - gate-oslo.messaging-requirements
       - gate-oslo.messaging-docs
       - gate-oslo.messaging-pep8
       - gate-oslo.messaging-python26
       - gate-oslo.messaging-python27
-      - gate-tempest-devstack-vm-full-default
-      - gate-tempest-devstack-vm-neutron-default
-      - gate-tempest-devstack-vm-large-ops-default
-      - gate-tempest-devstack-vm-neutron-large-ops-default
-      - gate-grenade-devstack-vm
+      - gate-tempest-dsvm-full
+      - gate-tempest-dsvm-neutron
+      - gate-tempest-dsvm-large-ops
+      - gate-tempest-dsvm-neutron-large-ops
+      - gate-grenade-dsvm
     post:
       - oslo.messaging-branch-tarball
       - oslo.messaging-docs
@@ -1035,9 +1035,9 @@ projects:
       - gate-oslo.version-python27
       - gate-oslo.version-pypy
       - gate-oslo.version-python33
-      - check-tempest-devstack-vm-full-default
-      - check-tempest-devstack-vm-neutron-default
-      - check-grenade-devstack-vm
+      - check-tempest-dsvm-full
+      - check-tempest-dsvm-neutron
+      - check-grenade-dsvm
     gate:
       - gate-oslo.version-requirements
       - gate-oslo.version-docs
@@ -1046,9 +1046,9 @@ projects:
       - gate-oslo.version-python27
       - gate-oslo.version-pypy
       - gate-oslo.version-python33
-      - gate-tempest-devstack-vm-full-default
-      - gate-tempest-devstack-vm-neutron-default
-      - gate-grenade-devstack-vm
+      - gate-tempest-dsvm-full
+      - gate-tempest-dsvm-neutron
+      - gate-grenade-dsvm
     post:
       - oslo.version-branch-tarball
       - oslo.version-docs
@@ -1068,25 +1068,25 @@ projects:
       - gate-neutron-docs
       - gate-neutron-python26
       - gate-neutron-python27
-      - check-tempest-devstack-vm-neutron-default
-      - check-tempest-devstack-vm-neutron-pg-default
-      - check-tempest-devstack-vm-neutron-isolated-default
-      - check-tempest-devstack-vm-neutron-pg-isolated-default
-      - gate-tempest-devstack-vm-neutron-large-ops-default
+      - check-tempest-dsvm-neutron
+      - check-tempest-dsvm-neutron-pg
+      - check-tempest-dsvm-neutron-isolated
+      - check-tempest-dsvm-neutron-pg-isolated
+      - gate-tempest-dsvm-neutron-large-ops
     gate:
       - gate-neutron-requirements
       - gate-neutron-docs
       - gate-neutron-pep8
       - gate-neutron-python26
       - gate-neutron-python27
-      - gate-tempest-devstack-vm-neutron-default
-      - gate-tempest-devstack-vm-neutron-pg-default
-      - gate-tempest-devstack-vm-neutron-isolated-default
-      - gate-tempest-devstack-vm-neutron-pg-isolated-default
-      - gate-tempest-devstack-vm-neutron-large-ops-default
+      - gate-tempest-dsvm-neutron
+      - gate-tempest-dsvm-neutron-pg
+      - gate-tempest-dsvm-neutron-isolated
+      - gate-tempest-dsvm-neutron-pg-isolated
+      - gate-tempest-dsvm-neutron-large-ops
     experimental:
-      - gate-tempest-devstack-vm-neutron-full-default
-      - check-tempest-devstack-vm-neutron-isolated-parallel-default
+      - gate-tempest-dsvm-neutron-full
+      - check-tempest-dsvm-neutron-isolated-parallel
     post:
       - neutron-branch-tarball
       - neutron-coverage
@@ -1100,12 +1100,12 @@ projects:
       - neutron-merge-release-tags
     periodic:
       - neutron-propose-translation-update
-      - periodic-neutron-docs-stable-grizzly
-      - periodic-neutron-python26-stable-grizzly
-      - periodic-neutron-python27-stable-grizzly
-      - periodic-neutron-docs-stable-havana
-      - periodic-neutron-python26-stable-havana
-      - periodic-neutron-python27-stable-havana
+      - periodic-neutron-docs-grizzly
+      - periodic-neutron-python26-grizzly
+      - periodic-neutron-python27-grizzly
+      - periodic-neutron-docs-havana
+      - periodic-neutron-python26-havana
+      - periodic-neutron-python27-havana
 
   - name: openstack/swift
     check:
@@ -1114,29 +1114,29 @@ projects:
       - gate-swift-docs
       - gate-swift-python26
       - gate-swift-python27
-      - check-swift-devstack-vm-functional-default
-      - check-tempest-devstack-vm-full-default
-      - check-tempest-devstack-vm-neutron-default
-      - check-tempest-devstack-vm-postgres-full-default
-      - gate-tempest-devstack-vm-large-ops-default
-      - gate-tempest-devstack-vm-neutron-large-ops-default
-      - check-grenade-devstack-vm
+      - check-swift-dsvm-functional
+      - check-tempest-dsvm-full
+      - check-tempest-dsvm-neutron
+      - check-tempest-dsvm-postgres-full
+      - gate-tempest-dsvm-large-ops
+      - gate-tempest-dsvm-neutron-large-ops
+      - check-grenade-dsvm
     gate:
       - gate-swift-requirements
       - gate-swift-docs
       - gate-swift-pep8
       - gate-swift-python26
       - gate-swift-python27
-      - gate-swift-devstack-vm-functional-default
-      - gate-tempest-devstack-vm-full-default
-      - gate-tempest-devstack-vm-neutron-default
-      - gate-tempest-devstack-vm-postgres-full-default
-      - gate-tempest-devstack-vm-large-ops-default
-      - gate-tempest-devstack-vm-neutron-large-ops-default
-      - gate-grenade-devstack-vm
+      - gate-swift-dsvm-functional
+      - gate-tempest-dsvm-full
+      - gate-tempest-dsvm-neutron
+      - gate-tempest-dsvm-postgres-full
+      - gate-tempest-dsvm-large-ops
+      - gate-tempest-dsvm-neutron-large-ops
+      - gate-grenade-dsvm
     experimental:
-      - gate-grenade-devstack-vm-stable
-      - gate-devstack-vm-cells-default
+      - gate-grenade-dsvm-stable
+      - gate-devstack-dsvm-cells
     post:
       - swift-branch-tarball
       - swift-coverage
@@ -1167,11 +1167,11 @@ projects:
       - gate-python-ceilometerclient-python27
       - gate-python-ceilometerclient-python33
       - gate-python-ceilometerclient-pypy
-      - check-tempest-devstack-vm-full-default
-      - check-tempest-devstack-vm-postgres-full-default
-      - check-tempest-devstack-vm-neutron-default
-      - gate-tempest-devstack-vm-large-ops-default
-      - gate-tempest-devstack-vm-neutron-large-ops-default
+      - check-tempest-dsvm-full
+      - check-tempest-dsvm-postgres-full
+      - check-tempest-dsvm-neutron
+      - gate-tempest-dsvm-large-ops
+      - gate-tempest-dsvm-neutron-large-ops
     gate:
       - gate-python-ceilometerclient-requirements
       - gate-python-ceilometerclient-docs
@@ -1179,11 +1179,11 @@ projects:
       - gate-python-ceilometerclient-python26
       - gate-python-ceilometerclient-python27
       - gate-python-ceilometerclient-pypy
-      - gate-tempest-devstack-vm-full-default
-      - gate-tempest-devstack-vm-postgres-full-default
-      - gate-tempest-devstack-vm-neutron-default
-      - gate-tempest-devstack-vm-large-ops-default
-      - gate-tempest-devstack-vm-neutron-large-ops-default
+      - gate-tempest-dsvm-full
+      - gate-tempest-dsvm-postgres-full
+      - gate-tempest-dsvm-neutron
+      - gate-tempest-dsvm-large-ops
+      - gate-tempest-dsvm-neutron-large-ops
     post:
       - python-ceilometerclient-branch-tarball
       - python-ceilometerclient-coverage
@@ -1206,12 +1206,12 @@ projects:
       - gate-python-cinderclient-python27
       - gate-python-cinderclient-python33
       - gate-python-cinderclient-pypy
-      - check-tempest-devstack-vm-full-default
-      - check-tempest-devstack-vm-postgres-full-default
-      - check-tempest-devstack-vm-neutron-default
-      - gate-tempest-devstack-vm-large-ops-default
-      - gate-tempest-devstack-vm-neutron-large-ops-default
-      - check-grenade-devstack-vm
+      - check-tempest-dsvm-full
+      - check-tempest-dsvm-postgres-full
+      - check-tempest-dsvm-neutron
+      - gate-tempest-dsvm-large-ops
+      - gate-tempest-dsvm-neutron-large-ops
+      - check-grenade-dsvm
     gate:
       - gate-python-cinderclient-requirements
       - gate-python-cinderclient-docs
@@ -1220,15 +1220,15 @@ projects:
       - gate-python-cinderclient-python27
       - gate-python-cinderclient-python33
       - gate-python-cinderclient-pypy
-      - gate-tempest-devstack-vm-full-default
-      - gate-tempest-devstack-vm-postgres-full-default
-      - gate-tempest-devstack-vm-neutron-default
-      - gate-tempest-devstack-vm-large-ops-default
-      - gate-tempest-devstack-vm-neutron-large-ops-default
-      - gate-grenade-devstack-vm
+      - gate-tempest-dsvm-full
+      - gate-tempest-dsvm-postgres-full
+      - gate-tempest-dsvm-neutron
+      - gate-tempest-dsvm-large-ops
+      - gate-tempest-dsvm-neutron-large-ops
+      - gate-grenade-dsvm
     experimental:
-      - gate-grenade-devstack-vm-stable
-      - gate-devstack-vm-cells-default
+      - gate-grenade-dsvm-stable
+      - gate-devstack-dsvm-cells
     post:
       - python-cinderclient-branch-tarball
       - python-cinderclient-coverage
@@ -1250,27 +1250,27 @@ projects:
       - gate-python-glanceclient-python26
       - gate-python-glanceclient-python27
       - gate-python-glanceclient-python33
-      - check-tempest-devstack-vm-full-default
-      - check-tempest-devstack-vm-postgres-full-default
-      - check-tempest-devstack-vm-neutron-default
-      - gate-tempest-devstack-vm-large-ops-default
-      - gate-tempest-devstack-vm-neutron-large-ops-default
-      - check-grenade-devstack-vm
+      - check-tempest-dsvm-full
+      - check-tempest-dsvm-postgres-full
+      - check-tempest-dsvm-neutron
+      - gate-tempest-dsvm-large-ops
+      - gate-tempest-dsvm-neutron-large-ops
+      - check-grenade-dsvm
     gate:
       - gate-python-glanceclient-requirements
       - gate-python-glanceclient-docs
       - gate-python-glanceclient-pep8
       - gate-python-glanceclient-python26
       - gate-python-glanceclient-python27
-      - gate-tempest-devstack-vm-full-default
-      - gate-tempest-devstack-vm-postgres-full-default
-      - gate-tempest-devstack-vm-neutron-default
-      - gate-tempest-devstack-vm-large-ops-default
-      - gate-tempest-devstack-vm-neutron-large-ops-default
-      - gate-grenade-devstack-vm
+      - gate-tempest-dsvm-full
+      - gate-tempest-dsvm-postgres-full
+      - gate-tempest-dsvm-neutron
+      - gate-tempest-dsvm-large-ops
+      - gate-tempest-dsvm-neutron-large-ops
+      - gate-grenade-dsvm
     experimental:
-      - gate-grenade-devstack-vm-stable
-      - gate-devstack-vm-cells-default
+      - gate-grenade-dsvm-stable
+      - gate-devstack-dsvm-cells
     post:
       - python-glanceclient-branch-tarball
       - python-glanceclient-coverage
@@ -1292,27 +1292,27 @@ projects:
       - gate-python-keystoneclient-python26
       - gate-python-keystoneclient-python27
       - gate-python-keystoneclient-python33
-      - check-tempest-devstack-vm-full-default
-      - check-tempest-devstack-vm-postgres-full-default
-      - check-tempest-devstack-vm-neutron-default
-      - gate-tempest-devstack-vm-large-ops-default
-      - gate-tempest-devstack-vm-neutron-large-ops-default
-      - check-grenade-devstack-vm
+      - check-tempest-dsvm-full
+      - check-tempest-dsvm-postgres-full
+      - check-tempest-dsvm-neutron
+      - gate-tempest-dsvm-large-ops
+      - gate-tempest-dsvm-neutron-large-ops
+      - check-grenade-dsvm
     gate:
       - gate-python-keystoneclient-requirements
       - gate-python-keystoneclient-docs
       - gate-python-keystoneclient-pep8
       - gate-python-keystoneclient-python26
       - gate-python-keystoneclient-python27
-      - gate-tempest-devstack-vm-full-default
-      - gate-tempest-devstack-vm-postgres-full-default
-      - gate-tempest-devstack-vm-neutron-default
-      - gate-tempest-devstack-vm-large-ops-default
-      - gate-tempest-devstack-vm-neutron-large-ops-default
-      - gate-grenade-devstack-vm
+      - gate-tempest-dsvm-full
+      - gate-tempest-dsvm-postgres-full
+      - gate-tempest-dsvm-neutron
+      - gate-tempest-dsvm-large-ops
+      - gate-tempest-dsvm-neutron-large-ops
+      - gate-grenade-dsvm
     experimental:
-      - gate-grenade-devstack-vm-stable
-      - gate-devstack-vm-cells-default
+      - gate-grenade-dsvm-stable
+      - gate-devstack-dsvm-cells
     post:
       - python-keystoneclient-branch-tarball
       - python-keystoneclient-coverage
@@ -1335,12 +1335,12 @@ projects:
       - gate-python-novaclient-python27
       - gate-python-novaclient-python33
       - gate-python-novaclient-pypy
-      - check-tempest-devstack-vm-full-default
-      - check-tempest-devstack-vm-postgres-full-default
-      - check-tempest-devstack-vm-neutron-default
-      - gate-tempest-devstack-vm-large-ops-default
-      - gate-tempest-devstack-vm-neutron-large-ops-default
-      - check-grenade-devstack-vm
+      - check-tempest-dsvm-full
+      - check-tempest-dsvm-postgres-full
+      - check-tempest-dsvm-neutron
+      - gate-tempest-dsvm-large-ops
+      - gate-tempest-dsvm-neutron-large-ops
+      - check-grenade-dsvm
     gate:
       - gate-python-novaclient-requirements
       - gate-python-novaclient-docs
@@ -1349,15 +1349,15 @@ projects:
       - gate-python-novaclient-python27
       - gate-python-novaclient-python33
       - gate-python-novaclient-pypy
-      - gate-tempest-devstack-vm-full-default
-      - gate-tempest-devstack-vm-postgres-full-default
-      - gate-tempest-devstack-vm-neutron-default
-      - gate-tempest-devstack-vm-large-ops-default
-      - gate-tempest-devstack-vm-neutron-large-ops-default
-      - gate-grenade-devstack-vm
+      - gate-tempest-dsvm-full
+      - gate-tempest-dsvm-postgres-full
+      - gate-tempest-dsvm-neutron
+      - gate-tempest-dsvm-large-ops
+      - gate-tempest-dsvm-neutron-large-ops
+      - gate-grenade-dsvm
     experimental:
-      - gate-grenade-devstack-vm-stable
-      - gate-devstack-vm-cells-default
+      - gate-grenade-dsvm-stable
+      - gate-devstack-dsvm-cells
     post:
       - python-novaclient-branch-tarball
       - python-novaclient-coverage
@@ -1407,15 +1407,15 @@ projects:
       - gate-python-neutronclient-python27
       - gate-python-neutronclient-python33
       - gate-python-neutronclient-pypy
-      - check-tempest-devstack-vm-full-default
-      - check-tempest-devstack-vm-postgres-full-default
-      - check-tempest-devstack-vm-neutron-default
-      - check-tempest-devstack-vm-neutron-pg-default
-      - check-tempest-devstack-vm-neutron-isolated-default
-      - check-tempest-devstack-vm-neutron-pg-isolated-default
-      - gate-tempest-devstack-vm-large-ops-default
-      - gate-tempest-devstack-vm-neutron-large-ops-default
-      - check-grenade-devstack-vm
+      - check-tempest-dsvm-full
+      - check-tempest-dsvm-postgres-full
+      - check-tempest-dsvm-neutron
+      - check-tempest-dsvm-neutron-pg
+      - check-tempest-dsvm-neutron-isolated
+      - check-tempest-dsvm-neutron-pg-isolated
+      - gate-tempest-dsvm-large-ops
+      - gate-tempest-dsvm-neutron-large-ops
+      - check-grenade-dsvm
     gate:
       - gate-python-neutronclient-requirements
       - gate-python-neutronclient-docs
@@ -1423,18 +1423,18 @@ projects:
       - gate-python-neutronclient-python26
       - gate-python-neutronclient-python27
       - gate-python-neutronclient-pypy
-      - gate-tempest-devstack-vm-full-default
-      - gate-tempest-devstack-vm-postgres-full-default
-      - gate-tempest-devstack-vm-neutron-default
-      - gate-tempest-devstack-vm-neutron-pg-default
-      - gate-tempest-devstack-vm-neutron-isolated-default
-      - gate-tempest-devstack-vm-neutron-pg-isolated-default
-      - gate-tempest-devstack-vm-large-ops-default
-      - gate-tempest-devstack-vm-neutron-large-ops-default
-      - gate-grenade-devstack-vm
+      - gate-tempest-dsvm-full
+      - gate-tempest-dsvm-postgres-full
+      - gate-tempest-dsvm-neutron
+      - gate-tempest-dsvm-neutron-pg
+      - gate-tempest-dsvm-neutron-isolated
+      - gate-tempest-dsvm-neutron-pg-isolated
+      - gate-tempest-dsvm-large-ops
+      - gate-tempest-dsvm-neutron-large-ops
+      - gate-grenade-dsvm
     experimental:
-      - gate-grenade-devstack-vm-stable
-      - gate-devstack-vm-cells-default
+      - gate-grenade-dsvm-stable
+      - gate-devstack-dsvm-cells
     post:
       - python-neutronclient-branch-tarball
       - python-neutronclient-coverage
@@ -1457,7 +1457,7 @@ projects:
       - gate-python-swiftclient-python27
       - gate-python-swiftclient-python33
       - gate-python-swiftclient-pypy
-      - check-swift-devstack-vm-functional-default
+      - check-swift-dsvm-functional
     gate:
       - gate-python-swiftclient-requirements
       - gate-python-swiftclient-docs
@@ -1465,7 +1465,7 @@ projects:
       - gate-python-swiftclient-python26
       - gate-python-swiftclient-python27
       - gate-python-swiftclient-pypy
-      - gate-swift-devstack-vm-functional-default
+      - gate-swift-dsvm-functional
     post:
       - python-swiftclient-branch-tarball
       - python-swiftclient-coverage
@@ -1484,26 +1484,26 @@ projects:
       - gate-requirements-pep8
       - gate-requirements-python27
       - gate-requirements-pypy
-      - check-requirements-integration
-      - check-tempest-devstack-vm-full-default
-      - check-tempest-devstack-vm-postgres-full-default
-      - check-tempest-devstack-vm-neutron-default
-      - gate-tempest-devstack-vm-large-ops-default
-      - gate-tempest-devstack-vm-neutron-large-ops-default
-      - check-grenade-devstack-vm
-      - check-swift-devstack-vm-functional-default
+      - check-requirements-integration-dsvm
+      - check-tempest-dsvm-full
+      - check-tempest-dsvm-postgres-full
+      - check-tempest-dsvm-neutron
+      - gate-tempest-dsvm-large-ops
+      - gate-tempest-dsvm-neutron-large-ops
+      - check-grenade-dsvm
+      - check-swift-dsvm-functional
     gate:
       - gate-requirements-pep8
       - gate-requirements-python27
       - gate-requirements-pypy
-      - gate-requirements-integration
-      - gate-tempest-devstack-vm-full-default
-      - gate-tempest-devstack-vm-postgres-full-default
-      - gate-tempest-devstack-vm-neutron-default
-      - gate-tempest-devstack-vm-large-ops-default
-      - gate-tempest-devstack-vm-neutron-large-ops-default
-      - gate-grenade-devstack-vm
-      - gate-swift-devstack-vm-functional-default
+      - gate-requirements-integration-dsvm
+      - gate-tempest-dsvm-full
+      - gate-tempest-dsvm-postgres-full
+      - gate-tempest-dsvm-neutron
+      - gate-tempest-dsvm-large-ops
+      - gate-tempest-dsvm-neutron-large-ops
+      - gate-grenade-dsvm
+      - gate-swift-dsvm-functional
     post:
       - post-mirror-python26
       - post-mirror-python27
@@ -1516,12 +1516,12 @@ projects:
   - name: openstack-dev/grenade
     check:
       - gate-grenade-noop
-      - check-grenade-devstack-vm
+      - check-grenade-dsvm
     gate:
       - gate-grenade-noop
-      - gate-grenade-devstack-vm
+      - gate-grenade-dsvm
     experimental:
-      - gate-grenade-devstack-vm-stable
+      - gate-grenade-dsvm-stable
 
   - name: openstack-dev/cookiecutter
     check:
@@ -1569,14 +1569,14 @@ projects:
       - gate-pbr-python27
       - gate-pbr-python33
       - gate-pbr-pypy
-      - check-requirements-integration
-      - check-tempest-devstack-vm-full-default
-      - check-tempest-devstack-vm-postgres-full-default
-      - check-tempest-devstack-vm-neutron-default
-      - gate-tempest-devstack-vm-large-ops-default
-      - gate-tempest-devstack-vm-neutron-large-ops-default
-      - check-grenade-devstack-vm
-      - check-swift-devstack-vm-functional-default
+      - check-requirements-integration-dsvm
+      - check-tempest-dsvm-full
+      - check-tempest-dsvm-postgres-full
+      - check-tempest-dsvm-neutron
+      - gate-tempest-dsvm-large-ops
+      - gate-tempest-dsvm-neutron-large-ops
+      - check-grenade-dsvm
+      - check-swift-dsvm-functional
     gate:
       - gate-pbr-docs
       - gate-pbr-pep8
@@ -1584,16 +1584,16 @@ projects:
       - gate-pbr-python27
       - gate-pbr-python33
       - gate-pbr-pypy
-      - gate-requirements-integration
-      - gate-tempest-devstack-vm-full-default
-      - gate-tempest-devstack-vm-postgres-full-default
-      - gate-tempest-devstack-vm-neutron-default
-      - gate-tempest-devstack-vm-large-ops-default
-      - gate-tempest-devstack-vm-neutron-large-ops-default
-      - gate-grenade-devstack-vm
-      - gate-swift-devstack-vm-functional-default
+      - gate-requirements-integration-dsvm
+      - gate-tempest-dsvm-full
+      - gate-tempest-dsvm-postgres-full
+      - gate-tempest-dsvm-neutron
+      - gate-tempest-dsvm-large-ops
+      - gate-tempest-dsvm-neutron-large-ops
+      - gate-grenade-dsvm
+      - gate-swift-dsvm-functional
     experimental:
-      - gate-devstack-vm-cells-default
+      - gate-devstack-dsvm-cells
     post:
       - pbr-branch-tarball
       - pbr-coverage
@@ -1612,26 +1612,26 @@ projects:
   - name: openstack-dev/devstack
     check:
       - gate-devstack-bash8
-      - check-tempest-devstack-vm-full-default
-      - check-tempest-devstack-vm-postgres-full-default
-      - check-tempest-devstack-vm-neutron-default
-      - gate-tempest-devstack-vm-large-ops-default
-      - gate-tempest-devstack-vm-neutron-large-ops-default
-      - check-grenade-devstack-vm
-      - check-swift-devstack-vm-functional-default
+      - check-tempest-dsvm-full
+      - check-tempest-dsvm-postgres-full
+      - check-tempest-dsvm-neutron
+      - gate-tempest-dsvm-large-ops
+      - gate-tempest-dsvm-neutron-large-ops
+      - check-grenade-dsvm
+      - check-swift-dsvm-functional
     gate:
       - gate-devstack-bash8
-      - gate-tempest-devstack-vm-full-default
-      - gate-tempest-devstack-vm-postgres-full-default
-      - gate-tempest-devstack-vm-neutron-default
-      - gate-tempest-devstack-vm-large-ops-default
-      - gate-tempest-devstack-vm-neutron-large-ops-default
-      - gate-grenade-devstack-vm
-      - gate-swift-devstack-vm-functional-default
+      - gate-tempest-dsvm-full
+      - gate-tempest-dsvm-postgres-full
+      - gate-tempest-dsvm-neutron
+      - gate-tempest-dsvm-large-ops
+      - gate-tempest-dsvm-neutron-large-ops
+      - gate-grenade-dsvm
+      - gate-swift-dsvm-functional
     experimental:
-      - gate-tempest-devstack-vm-heat-slow-default
-      - gate-grenade-devstack-vm-stable
-      - gate-devstack-vm-cells-default
+      - gate-tempest-dsvm-heat-slow
+      - gate-grenade-dsvm-stable
+      - gate-devstack-dsvm-cells
 
   - name: openstack-infra/elastic-recheck
     check:
@@ -1643,55 +1643,55 @@ projects:
 
   - name: openstack-infra/devstack-gate
     check:
-      - check-tempest-devstack-vm-full-default
-      - check-tempest-devstack-vm-postgres-full-default
-      - check-tempest-devstack-vm-neutron-default
-      - gate-tempest-devstack-vm-large-ops-default
-      - gate-tempest-devstack-vm-neutron-large-ops-default
-      - check-grenade-devstack-vm
-      - check-swift-devstack-vm-functional-default
-      - check-tempest-devstack-vm-full-stable-grizzly
-      - check-tempest-devstack-vm-neutron-stable-grizzly
-      - check-tempest-devstack-vm-postgres-full-stable-grizzly
-      - check-devstack-vm-cells-stable-grizzly
-      - check-tempest-devstack-vm-cells-stable-grizzly
-      - check-tempest-devstack-vm-cells-full-stable-grizzly
-      - check-tempest-devstack-vm-full-stable-havana
-      - check-tempest-devstack-vm-neutron-stable-havana
-      - check-tempest-devstack-vm-postgres-full-stable-havana
-      - check-devstack-vm-cells-stable-havana
-      - check-tempest-devstack-vm-cells-stable-havana
-      - check-tempest-devstack-vm-cells-full-stable-havana
+      - check-tempest-dsvm-full
+      - check-tempest-dsvm-postgres-full
+      - check-tempest-dsvm-neutron
+      - gate-tempest-dsvm-large-ops
+      - gate-tempest-dsvm-neutron-large-ops
+      - check-grenade-dsvm
+      - check-swift-dsvm-functional
+      - check-tempest-dsvm-full-grizzly
+      - check-tempest-dsvm-neutron-grizzly
+      - check-tempest-dsvm-postgres-full-grizzly
+      - check-devstack-dsvm-cells-grizzly
+      - check-tempest-dsvm-cells-grizzly
+      - check-tempest-dsvm-cells-full-grizzly
+      - check-tempest-dsvm-full-havana
+      - check-tempest-dsvm-neutron-havana
+      - check-tempest-dsvm-postgres-full-havana
+      - check-devstack-dsvm-cells-havana
+      - check-tempest-dsvm-cells-havana
+      - check-tempest-dsvm-cells-full-havana
     gate:
-      - gate-tempest-devstack-vm-full-default
-      - gate-tempest-devstack-vm-postgres-full-default
-      - gate-tempest-devstack-vm-neutron-default
-      - gate-tempest-devstack-vm-large-ops-default
-      - gate-tempest-devstack-vm-neutron-large-ops-default
-      - gate-grenade-devstack-vm
-      - gate-swift-devstack-vm-functional-default
+      - gate-tempest-dsvm-full
+      - gate-tempest-dsvm-postgres-full
+      - gate-tempest-dsvm-neutron
+      - gate-tempest-dsvm-large-ops
+      - gate-tempest-dsvm-neutron-large-ops
+      - gate-grenade-dsvm
+      - gate-swift-dsvm-functional
     experimental:
-      - gate-grenade-devstack-vm-stable
-      - gate-devstack-vm-cells-default
+      - gate-grenade-dsvm-stable
+      - gate-devstack-dsvm-cells
 
   # This is not strictly necessary; there is currently a transitive
-  # relationship between g-t-devstack-vm,
-  # g-t-devstack-vm-{postgres,cinder,neutron} and g-t-devstack-vm-full
+  # relationship between g-t-dsvm,
+  # g-t-dsvm-{postgres,cinder,neutron} and g-t-dsvm-full
   # that will ensure that these projects end up in the same shared
   # change queue, however, this fake project makes it explicit that
-  # g-t-devstack-vm and g-t-devstack-vm-full must share a change
+  # g-t-dsvm and g-t-dsvm-full must share a change
   # queue, which should protect against accidental queue divorce in
-  # case jobs get moved around.  Since g-t-devstack-vm-full is a
-  # superset of g-t-devstack-vm, the whole set of projects is still
-  # gated on g-t-devstack-vm.
+  # case jobs get moved around.  Since g-t-dsvm-full is a
+  # superset of g-t-dsvm, the whole set of projects is still
+  # gated on g-t-dsvm.
 
   - name: z/tempest
     gate:
-      - gate-tempest-devstack-vm-full-default
-      - gate-tempest-devstack-vm-postgres-full-default
-      - gate-tempest-devstack-vm-neutron-full-default
-      - gate-tempest-devstack-vm-large-ops-default
-      - gate-tempest-devstack-vm-neutron-large-ops-default
+      - gate-tempest-dsvm-full
+      - gate-tempest-dsvm-postgres-full
+      - gate-tempest-dsvm-neutron-full
+      - gate-tempest-dsvm-large-ops
+      - gate-tempest-dsvm-neutron-large-ops
 
   - name: openstack/tempest
     check:
@@ -1699,45 +1699,45 @@ projects:
       - gate-tempest-pep8
       - gate-tempest-docs
       - gate-tempest-python27
-      - check-tempest-devstack-vm-full-default
-      - check-tempest-devstack-vm-postgres-full-default
-      - check-tempest-devstack-vm-neutron-default
-      - gate-tempest-devstack-vm-large-ops-default
-      - gate-tempest-devstack-vm-neutron-large-ops-default
-      - check-grenade-devstack-vm
+      - check-tempest-dsvm-full
+      - check-tempest-dsvm-postgres-full
+      - check-tempest-dsvm-neutron
+      - gate-tempest-dsvm-large-ops
+      - gate-tempest-dsvm-neutron-large-ops
+      - check-grenade-dsvm
     gate:
       - gate-tempest-requirements
       - gate-tempest-pep8
       - gate-tempest-docs
       - gate-tempest-python27
-      - gate-tempest-devstack-vm-full-default
-      - gate-tempest-devstack-vm-postgres-full-default
-      - gate-tempest-devstack-vm-neutron-default
-      - gate-tempest-devstack-vm-large-ops-default
-      - gate-tempest-devstack-vm-neutron-large-ops-default
-      - gate-grenade-devstack-vm
+      - gate-tempest-dsvm-full
+      - gate-tempest-dsvm-postgres-full
+      - gate-tempest-dsvm-neutron
+      - gate-tempest-dsvm-large-ops
+      - gate-tempest-dsvm-neutron-large-ops
+      - gate-grenade-dsvm
     experimental:
-      - gate-tempest-devstack-vm-heat-slow-default
-      - gate-grenade-devstack-vm-stable
-      - gate-devstack-vm-cells-default
-      - gate-tempest-devstack-vm-neutron-full-default
-      - periodic-tempest-devstack-vm-coverage-master
+      - gate-tempest-dsvm-heat-slow
+      - gate-grenade-dsvm-stable
+      - gate-devstack-dsvm-cells
+      - gate-tempest-dsvm-neutron-full
+      - periodic-tempest-dsvm-coverage-master
     post:
       - tempest-docs
       - tempest-branch-tarball
     periodic:
-      - periodic-tempest-devstack-vm-full-stable-grizzly
-      - periodic-tempest-devstack-vm-neutron-stable-grizzly
-      - periodic-tempest-devstack-vm-postgres-full-stable-grizzly
-      - periodic-tempest-devstack-vm-full-stable-havana
-      - periodic-tempest-devstack-vm-neutron-stable-havana
-      - periodic-tempest-devstack-vm-postgres-full-stable-havana
-      - periodic-tempest-devstack-vm-all-stable-havana
-      - periodic-tempest-devstack-vm-coverage-stable-havana
-      - periodic-tempest-devstack-vm-stress-stable-havana
-      - periodic-tempest-devstack-vm-neutron-pg-stable-havana
-      - periodic-tempest-devstack-vm-large-ops-stable-havana
-      - periodic-tempest-devstack-vm-neutron-large-ops-stable-havana
+      - periodic-tempest-dsvm-full-grizzly
+      - periodic-tempest-dsvm-neutron-grizzly
+      - periodic-tempest-dsvm-postgres-full-grizzly
+      - periodic-tempest-dsvm-full-havana
+      - periodic-tempest-dsvm-neutron-havana
+      - periodic-tempest-dsvm-postgres-full-havana
+      - periodic-tempest-dsvm-all-havana
+      - periodic-tempest-dsvm-coverage-havana
+      - periodic-tempest-dsvm-stress-havana
+      - periodic-tempest-dsvm-neutron-pg-havana
+      - periodic-tempest-dsvm-large-ops-havana
+      - periodic-tempest-dsvm-neutron-large-ops-havana
 
   - name: openstack/ceilometer
     check:
@@ -1746,24 +1746,24 @@ projects:
       - gate-ceilometer-docs
       - gate-ceilometer-python26
       - gate-ceilometer-python27
-      - check-tempest-devstack-vm-full-default
-      - check-tempest-devstack-vm-postgres-full-default
-      - check-tempest-devstack-vm-neutron-default
-      - gate-tempest-devstack-vm-large-ops-default
-      - gate-tempest-devstack-vm-neutron-large-ops-default
-      - check-swift-devstack-vm-functional-default
+      - check-tempest-dsvm-full
+      - check-tempest-dsvm-postgres-full
+      - check-tempest-dsvm-neutron
+      - gate-tempest-dsvm-large-ops
+      - gate-tempest-dsvm-neutron-large-ops
+      - check-swift-dsvm-functional
     gate:
       - gate-ceilometer-requirements
       - gate-ceilometer-docs
       - gate-ceilometer-pep8
       - gate-ceilometer-python26
       - gate-ceilometer-python27
-      - gate-tempest-devstack-vm-full-default
-      - gate-tempest-devstack-vm-postgres-full-default
-      - gate-tempest-devstack-vm-neutron-default
-      - gate-tempest-devstack-vm-large-ops-default
-      - gate-tempest-devstack-vm-neutron-large-ops-default
-      - gate-swift-devstack-vm-functional-default
+      - gate-tempest-dsvm-full
+      - gate-tempest-dsvm-postgres-full
+      - gate-tempest-dsvm-neutron
+      - gate-tempest-dsvm-large-ops
+      - gate-tempest-dsvm-neutron-large-ops
+      - gate-swift-dsvm-functional
     post:
       - ceilometer-branch-tarball
       - ceilometer-coverage
@@ -1777,12 +1777,12 @@ projects:
       - ceilometer-merge-release-tags
     periodic:
       - ceilometer-propose-translation-update
-      - periodic-ceilometer-docs-stable-grizzly
-      - periodic-ceilometer-python26-stable-grizzly
-      - periodic-ceilometer-python27-stable-grizzly
-      - periodic-ceilometer-docs-stable-havana
-      - periodic-ceilometer-python26-stable-havana
-      - periodic-ceilometer-python27-stable-havana
+      - periodic-ceilometer-docs-grizzly
+      - periodic-ceilometer-python26-grizzly
+      - periodic-ceilometer-python27-grizzly
+      - periodic-ceilometer-docs-havana
+      - periodic-ceilometer-python26-havana
+      - periodic-ceilometer-python27-havana
 
   - name: stackforge/clouddocs-maven-plugin
     check:
@@ -1872,24 +1872,24 @@ projects:
       - gate-heat-docs
       - gate-heat-python26
       - gate-heat-python27
-      - check-tempest-devstack-vm-full-default
-      - check-tempest-devstack-vm-postgres-full-default
-      - check-tempest-devstack-vm-neutron-default
-      - gate-tempest-devstack-vm-large-ops-default
-      - gate-tempest-devstack-vm-neutron-large-ops-default
+      - check-tempest-dsvm-full
+      - check-tempest-dsvm-postgres-full
+      - check-tempest-dsvm-neutron
+      - gate-tempest-dsvm-large-ops
+      - gate-tempest-dsvm-neutron-large-ops
     gate:
       - gate-heat-requirements
       - gate-heat-pep8
       - gate-heat-docs
       - gate-heat-python26
       - gate-heat-python27
-      - gate-tempest-devstack-vm-full-default
-      - gate-tempest-devstack-vm-postgres-full-default
-      - gate-tempest-devstack-vm-neutron-default
-      - gate-tempest-devstack-vm-large-ops-default
-      - gate-tempest-devstack-vm-neutron-large-ops-default
+      - gate-tempest-dsvm-full
+      - gate-tempest-dsvm-postgres-full
+      - gate-tempest-dsvm-neutron
+      - gate-tempest-dsvm-large-ops
+      - gate-tempest-dsvm-neutron-large-ops
     experimental:
-      - gate-devstack-vm-cells-default
+      - gate-devstack-dsvm-cells
     post:
       - heat-branch-tarball
       - heat-coverage
@@ -1902,12 +1902,12 @@ projects:
       - heat-docs
       - heat-merge-release-tags
     periodic:
-      - periodic-heat-docs-stable-grizzly
-      - periodic-heat-python26-stable-grizzly
-      - periodic-heat-python27-stable-grizzly
-      - periodic-heat-docs-stable-havana
-      - periodic-heat-python26-stable-havana
-      - periodic-heat-python27-stable-havana
+      - periodic-heat-docs-grizzly
+      - periodic-heat-python26-grizzly
+      - periodic-heat-python27-grizzly
+      - periodic-heat-docs-havana
+      - periodic-heat-python26-havana
+      - periodic-heat-python27-havana
       - heat-propose-translation-update
 
   - name: openstack/python-heatclient
@@ -1918,24 +1918,24 @@ projects:
       - gate-python-heatclient-python27
       - gate-python-heatclient-python33
       - gate-python-heatclient-pypy
-      - check-tempest-devstack-vm-full-default
-      - check-tempest-devstack-vm-postgres-full-default
-      - check-tempest-devstack-vm-neutron-default
-      - gate-tempest-devstack-vm-large-ops-default
-      - gate-tempest-devstack-vm-neutron-large-ops-default
+      - check-tempest-dsvm-full
+      - check-tempest-dsvm-postgres-full
+      - check-tempest-dsvm-neutron
+      - gate-tempest-dsvm-large-ops
+      - gate-tempest-dsvm-neutron-large-ops
     gate:
       - gate-python-heatclient-requirements
       - gate-python-heatclient-pep8
       - gate-python-heatclient-python26
       - gate-python-heatclient-python27
       - gate-python-heatclient-pypy
-      - gate-tempest-devstack-vm-full-default
-      - gate-tempest-devstack-vm-postgres-full-default
-      - gate-tempest-devstack-vm-neutron-default
-      - gate-tempest-devstack-vm-large-ops-default
-      - gate-tempest-devstack-vm-neutron-large-ops-default
+      - gate-tempest-dsvm-full
+      - gate-tempest-dsvm-postgres-full
+      - gate-tempest-dsvm-neutron
+      - gate-tempest-dsvm-large-ops
+      - gate-tempest-dsvm-neutron-large-ops
     experimental:
-      - gate-devstack-vm-cells-default
+      - gate-devstack-dsvm-cells
     post:
       - python-heatclient-branch-tarball
       - python-heatclient-coverage
