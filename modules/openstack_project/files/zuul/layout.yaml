@@ -1508,6 +1508,7 @@ projects:
       - post-mirror-python26
       - post-mirror-python27
       - post-mirror-python33
+      - propose-requirements-updates
     periodic:
       - periodic-mirror-python26
       - periodic-mirror-python27
