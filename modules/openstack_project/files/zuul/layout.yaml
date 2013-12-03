@@ -863,7 +863,6 @@ projects:
     experimental:
       - gate-grenade-dsvm-stable
       - gate-tempest-dsvm-neutron-full
-      - periodic-tempest-dsvm-coverage-master
     post:
       - nova-branch-tarball
       - nova-coverage
@@ -1721,7 +1720,6 @@ projects:
       - gate-grenade-dsvm-stable
       - gate-devstack-dsvm-cells
       - gate-tempest-dsvm-neutron-full
-      - periodic-tempest-dsvm-coverage-master
     post:
       - tempest-docs
       - tempest-branch-tarball
