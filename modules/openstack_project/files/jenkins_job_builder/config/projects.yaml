@@ -91,6 +91,15 @@
       - python-jobs
 
 - project:
+    name: climate-nova
+    github-org: stackforge
+    node: precise
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - python-jobs
+
+- project:
     name: python-climateclient
     github-org: stackforge
     node: precise
