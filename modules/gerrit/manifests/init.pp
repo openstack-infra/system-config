@@ -123,8 +123,6 @@ class gerrit(
   $contactstore_appsec = '',
   $contactstore_pubkey = '',
   $contactstore_url = '',
-  $enable_melody = false,
-  $melody_session = false,
   $replicate_local = false,
   $replication = [],
   $replication_targets = [],
@@ -256,8 +254,6 @@ class gerrit(
   # - $httpd_minthreads
   # - $httpd_maxthreads
   # - $commentlinks
-  # - $enable_melody
-  # - $melody_session
   # - $gitweb
   # - $contactstore_appsec
   # - $contactstore_url
