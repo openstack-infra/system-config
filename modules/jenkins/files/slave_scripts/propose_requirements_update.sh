@@ -15,7 +15,7 @@
 INITIAL_COMMIT_MSG="Updated from global requirements"
 TOPIC="openstack/requirements"
 USERNAME=${USERNAME:-$USER}
-BRANCH=${ZUUL_BRANCH:-master}
+BRANCH=${ZUUL_REF:-master}
 
 git config user.name "OpenStack Jenkins"
 git config user.email "jenkins@openstack.org"
