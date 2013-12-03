@@ -38,8 +38,8 @@ to do, this is how you can add a new volume.
 
 Log into ci-puppetmaster.openstack.org, su to root and run::
 
-  . ~/cinder-venv/bin/activate
-  . ~/ci-launch/cinder.sh
+  . ~root/cinder-venv/bin/activate
+  . ~root/ci-launch/cinder.sh
 
   nova list
   cinder list
@@ -47,31 +47,31 @@ Log into ci-puppetmaster.openstack.org, su to root and run::
 * Add a new cinder volume (substitute the next number in series for
   NN)::
 
-    cinder create --display-name "static.openstack.org/mainNN" 512
+    cinder create --display-name "static.openstack.org/mainNN" 1024
     nova volume-attach <server id> <volume id> auto
 
 * On static.openstack.org, create the partition table::
 
     DEVICE=/dev/xvdX
-    parted $DEVICE mklabel msdos mkpart primary 0% 100% set 1 lvm on
-    pvcreate ${DEVICE}1
+    sudo parted $DEVICE mklabel msdos mkpart primary 0% 100% set 1 lvm on
+    sudo pvcreate ${DEVICE}1
 
 * It should show up in pvs::
 
-    root@static:/etc/lvm# pvs
-      PV         VG   Fmt  Attr PSize   PFree
-      /dev/xvdX1      lvm2 a-   512.00g 512.00g
+    $ sudo pvs
+      PV         VG   Fmt  Attr PSize    PFree
+      /dev/xvdX1      lvm2 a-   1024.00g 1024.00g
 
 * Add it to the main volume group::
 
-    vgextend main ${DEVICE}1
+    sudo vgextend main ${DEVICE}1
 
 Creating a New Logical Volume
 =============================
 
 Make sure there is enough space in the volume group::
 
-  root@static:~# vgs
+  $ sudo vgs
     VG   #PV #LV #SN Attr   VSize VFree
     main   4   2   0 wz--n- 2.00t 347.98g
 
@@ -80,10 +80,10 @@ If not, see `Adding a New Device`_.
 Create the new logical volume and initialize the filesystem::
 
   NAME=newvolumename
-  /sbin/lvcreate -L1500GB -n $NAME main
+  sudo lvcreate -L1500GB -n $NAME main
 
-  mkfs.ext4 -m 0 -j -L $NAME /dev/main/$NAME
-  tune2fs -i 0 -c 0 /dev/main/$NAME
+  sudo mkfs.ext4 -m 0 -j -L $NAME /dev/main/$NAME
+  sudo tune2fs -i 0 -c 0 /dev/main/$NAME
 
 Be sure to add it to ``/etc/fstab``.
 
@@ -92,7 +92,7 @@ Expanding an Existing Logical Volume
 
 Make sure there is enough space in the volume group::
 
-  root@static:~# vgs
+  $ sudo vgs
     VG   #PV #LV #SN Attr   VSize VFree
     main   4   2   0 wz--n- 2.00t 347.98g
 
@@ -102,5 +102,5 @@ The following example to increase the size of a volume by 100G is
 untested; please confirm::
 
   NAME=volumename
-  lvextend -L+100G /dev/main/$NAME
-  resize2fs /dev/main/$NAME
+  sudo lvextend -L+100G /dev/main/$NAME
+  sudo resize2fs /dev/main/$NAME
