@@ -3727,6 +3727,12 @@ projects:
     gate:
       - gate-noop
 
+  - name: stackforge/fuel-docs
+    check:
+      - gate-noop
+    gate:
+      - gate-noop
+
   - name: stackforge/rally
     check:
       - gate-rally-pep8
