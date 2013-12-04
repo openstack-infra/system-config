@@ -3243,6 +3243,18 @@ projects:
     gate:
       - gate-noop
 
+  - name: stackforge/python-barbicanclient
+    check:
+      - gate-python-barbicanclient-pep8
+      - gate-python-barbicanclient-python26
+      - gate-python-barbicanclient-python27
+    gate:
+      - gate-python-barbicanclient-pep8
+      - gate-python-barbicanclient-python26
+      - gate-python-barbicanclient-python27
+    post:
+      - python-barbicanclient-branch-tarball
+
   - name: stackforge/python-climateclient
     check:
       - gate-python-climateclient-requirements
