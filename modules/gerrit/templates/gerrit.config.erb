@@ -113,3 +113,7 @@
 	appsec = <%= contactstore_appsec %>
 	url = <%= contactstore_url %>
 <% end -%>
+<% if secondary_index == true -%>
+[index]
+	type = <%= secondary_index_type %>
+<% end -%>
