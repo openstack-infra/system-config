@@ -20,9 +20,9 @@
       - console-log
       - ftp:
           site: docs.openstack.org
-          source: 'api-quick-start/target/docbkx/webhelp/api-quick-start-onepager/**'
+          source: 'api-quick-start/target/docbkx/webhelp/api-quick-start-onepager-external/**'
           target: 'api/quick-start/'
-          remove-prefix: 'api-quick-start/target/docbkx/webhelp/api-quick-start-onepager/'
+          remove-prefix: 'api-quick-start/target/docbkx/webhelp/api-quick-start-onepager-external/'
           excludes: '**/*.xml,**/null*'
 
 # this replaces the old openstack-api-site job in Jenkins
