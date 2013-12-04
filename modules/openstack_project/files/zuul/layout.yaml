@@ -311,6 +311,8 @@ jobs:
     voting: false
   - name: gate-solum-pypy
     voting: false
+  - name: gate-reviewstats-python33
+    voting: false
   - name: gate-rubick-python33
     voting: false
   - name: gate-solum-devstack-dsvm
