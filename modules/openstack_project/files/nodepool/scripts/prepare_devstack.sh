@@ -72,7 +72,7 @@ git clone https://review.openstack.org/p/stackforge/wsme
 DISTRIB_CODENAME=`lsb_release -sc`
 
 cd /opt/nodepool-scripts/
-python ./devstack-cache.py $DISTRIB_CODENAME
+python ./cache_devstack.py $DISTRIB_CODENAME
 
 sync
 sleep 5

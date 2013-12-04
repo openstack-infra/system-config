@@ -1,4 +1,4 @@
-#!/bin/bash -xe
+#!/usr/bin/env python
 
 # Copyright (C) 2011-2013 OpenStack Foundation
 #
@@ -16,7 +16,17 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-HOSTNAME=$1
+import os
+import subprocess
 
-./prepare_node.sh $HOSTNAME
-sudo puppet apply --modulepath=/root/config/modules:/etc/puppet/modules -e "class {'openstack_project::bare_slave': }"
+
+def run_local(cmd, status=False, cwd='.', env={}):
+    print "Running:", cmd
+    newenv = os.environ
+    newenv.update(env)
+    p = subprocess.Popen(cmd, stdout=subprocess.PIPE, cwd=cwd,
+                         stderr=subprocess.STDOUT, env=newenv)
+    (out, nothing) = p.communicate()
+    if status:
+        return (p.returncode, out.strip())
+    return out.strip()
