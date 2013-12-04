@@ -29,7 +29,7 @@
 
 
 - job-template:
-    name: '{pipeline}-tempest-dsvm-heat-slow{branch-designator}'
+    name: '{pipeline}-tempest-dsvm-neutron-heat-slow{branch-designator}'
     node: '{node}'
 
     wrappers:
@@ -44,6 +44,7 @@
           #!/bin/bash -xe
           export PYTHONUNBUFFERED=true
           export DEVSTACK_GATE_TEMPEST=1
+          export DEVSTACK_GATE_NEUTRON=1
           export DEVSTACK_GATE_TEMPEST_HEAT_SLOW=1
           export BRANCH_OVERRIDE={branch-override}
           if [ "$BRANCH_OVERRIDE" != "default" ] ; then
@@ -656,7 +657,7 @@
       - '{pipeline}-tempest-dsvm-neutron-large-ops{branch-designator}'
       - '{pipeline}-tempest-dsvm-postgres{branch-designator}'
       - '{pipeline}-tempest-dsvm-postgres-full{branch-designator}'
-      - '{pipeline}-tempest-dsvm-heat-slow{branch-designator}'
+      - '{pipeline}-tempest-dsvm-neutron-heat-slow{branch-designator}'
       - '{pipeline}-tempest-dsvm-postgres-zeromq-full{branch-designator}'
       - '{pipeline}-grenade-dsvm'
       - '{pipeline}-tempest-dsvm-savanna-full{branch-designator}'
