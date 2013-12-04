@@ -216,7 +216,6 @@ puppet-openstack:
       - stackforge/puppet-neutron
       - stackforge/puppet-nova
       - stackforge/puppet-openstack
-      - stackforge/puppet-openstack_dev_env
       - stackforge/puppet-swift
       - stackforge/puppet-tempest
       - stackforge/puppet-vswitch
