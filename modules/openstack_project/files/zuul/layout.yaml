@@ -1847,6 +1847,12 @@ projects:
     release:
       - swiftsync-tarball
 
+  - name: stackforge/tooz
+    check:
+      - gate-noop
+    gate:
+      - gate-noop
+
   - name: stackforge/libra
     check:
       - gate-libra-pep8
