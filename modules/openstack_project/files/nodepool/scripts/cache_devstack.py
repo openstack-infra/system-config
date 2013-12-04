@@ -18,22 +18,11 @@
 
 import os
 import sys
-import subprocess
+
+from common import run_local
 
 DEVSTACK = os.path.expanduser('~/workspace-cache/devstack')
 CACHEDIR = os.path.expanduser('~/cache/files')
-
-
-def run_local(cmd, status=False, cwd='.', env={}):
-    print "Running:", cmd
-    newenv = os.environ
-    newenv.update(env)
-    p = subprocess.Popen(cmd, stdout=subprocess.PIPE, cwd=cwd,
-                         stderr=subprocess.STDOUT, env=newenv)
-    (out, nothing) = p.communicate()
-    if status:
-        return (p.returncode, out.strip())
-    return out.strip()
 
 
 def git_branches():

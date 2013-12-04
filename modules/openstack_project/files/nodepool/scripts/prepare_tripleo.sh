@@ -46,7 +46,7 @@ bash tripleo-incubator/scripts/pull-tools
 #
 #. /etc/lsb-release
 #cd /opt/nodepool-scripts/
-#python ./devstack-cache.py $DISTRIB_CODENAME
+#python ./cache_devstack.py $DISTRIB_CODENAME
 
 sync
 sleep 5
