@@ -307,6 +307,13 @@ class jenkins::slave(
     mode   => '0440',
   }
 
+  vcsrepo { '/opt/requirements':
+    ensure   => latest,
+    provider => git,
+    revision => 'master',
+    source   => 'https://git.openstack.org/openstack/requirements',
+  }
+
   # Temporary for debugging glance launch problem
   # https://lists.launchpad.net/openstack/msg13381.html
   # NOTE(dprince): ubuntu only as RHEL6 doesn't have sysctl.d yet
