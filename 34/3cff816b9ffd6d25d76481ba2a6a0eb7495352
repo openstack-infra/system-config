@@ -1,0 +1,12 @@
+Change-Id: I343cff816b9ffd6d25d76481ba2a6a0eb7495352
+Code-Review+2: Monty Taylor <mordred@inaugust.com>
+Verified+2: Jenkins
+Approved+1: Clark Boylan <cboylan@sapwetik.org>
+Code-Review+2: Clark Boylan <cboylan@sapwetik.org>
+Approved+1: Jeremy Stanley <fungi@yuggoth.org>
+Code-Review+2: Jeremy Stanley <fungi@yuggoth.org>
+Submitted-by: Jenkins
+Submitted-at: Wed, 04 Dec 2013 18:33:09 +0000
+Reviewed-on: https://review.openstack.org/60042
+Project: openstack-infra/config
+Branch: refs/heads/master
