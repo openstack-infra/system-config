@@ -164,6 +164,12 @@ jobs:
     voting: false
   - name: check-tempest-dsvm-cells-full-grizzly
     voting: false
+  - name: check-tempest-dsvm-full-havana
+    voting: false
+  - name: check-tempest-dsvm-neutron-havana
+    voting: false
+  - name: check-tempest-dsvm-postgres-full-havana
+    voting: false
   - name: check-devstack-dsvm-cells-havana
     voting: false
   - name: check-tempest-dsvm-cells-havana
