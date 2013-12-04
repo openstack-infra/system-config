@@ -339,6 +339,7 @@ fuel-dev:
       - stackforge/fuel-ostf
       - stackforge/fuel-main
       - stackforge/fuel-provision
+      - stackforge/fuel-docs
     branches:
       - master
 
