@@ -1809,3 +1809,12 @@
 
     jobs:
       - python-jobs
+
+- project:
+    name: release-tools
+    github-org: openstack-infra
+    node: precise
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - python-jobs
