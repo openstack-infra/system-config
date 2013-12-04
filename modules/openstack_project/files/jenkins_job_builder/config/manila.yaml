@@ -1,0 +1,33 @@
+- job:
+    name: gate-manila-devstack-dsvm
+    node: devstack-precise
+
+    wrappers:
+      - timeout:
+          timeout: 60
+          fail: true
+      - timestamps
+
+    builders:
+      - devstack-checkout
+      - shell: |
+          #!/bin/bash -xe
+          export PYTHONUNBUFFERED=true
+          export ENABLED_SERVICES=manila,m-api,m-shr,m-sch
+
+          function pre_test_hook {
+              # Install Manila devstack integration
+              MANILA_BASE=/opt/stack/new/manila/contrib/devstack
+              DEVSTACK_BASE=/opt/stack/new/devstack
+              cp ${MANILA_BASE}/lib/* ${DEVSTACK_BASE}/lib
+              cp ${MANILA_BASE}/extras.d/* ${DEVSTACK_BASE}/extras.d
+          }
+          export -f pre_test_hook
+
+          cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
+          ./safe-devstack-vm-gate-wrap.sh
+      - link-logs
+
+    publishers:
+      - devstack-logs
+      - console-log
