@@ -73,6 +73,13 @@
 #   testmode:
 #     Set this to true to disable cron jobs and replication,
 #     which can interfere with testing.
+#   secondary_index:
+#     Set this to true to enable secondary index support
+#   secondary_index_type:
+#     which secondary index to use: SQL (no secondary index),
+#     LUCENE (recommended), SOLR (experimental). Note: as of
+#     Gerrit 2.9 LUCENE is default secondary index and SQL is
+#     removed.
 # TODO: make more gerrit options configurable here
 #
 class gerrit(
@@ -136,7 +143,9 @@ class gerrit(
   $gitweb = true,
   $cgit = false,
   $web_repo_url = '',
-  $testmode = false
+  $testmode = false,
+  $secondary_index = false,
+  $secondary_index_type = 'LUCENE',
 ) {
   include apache
   include jeepyb
@@ -145,6 +154,9 @@ class gerrit(
   $java_home = $::lsbdistcodename ? {
     'precise' => '/usr/lib/jvm/java-7-openjdk-amd64/jre',
   }
+
+  $gerrit_war = '/home/gerrit2/review_site/bin/gerrit.war'
+  $gerrit_site = '/home/gerrit2/review_site'
 
   user { 'gerrit2':
     ensure     => present,
@@ -494,7 +506,7 @@ class gerrit(
   }
 
   # If gerrit.war isn't the same as $basewar, install it.
-  file { '/home/gerrit2/review_site/bin/gerrit.war':
+  file { $gerrit_war:
     ensure  => present,
     source  => "file:///home/gerrit2/gerrit-wars/${basewar}",
     require => Exec["download:${war}"],
@@ -510,7 +522,7 @@ class gerrit(
   # If gerrit.war was just installed, run the Gerrit "init" command.
   exec { 'gerrit-initial-init':
     user      => 'gerrit2',
-    command   => '/usr/bin/java -jar /home/gerrit2/review_site/bin/gerrit.war init -d /home/gerrit2/review_site --batch --no-auto-start',
+    command   => "/usr/bin/java -jar ${gerrit_war} init -d ${gerrit_site} --batch --no-auto-start; /usr/bin/java -jar ${gerrit_war} reindex -d ${gerrit_site}",
     subscribe => File['/home/gerrit2/review_site/bin/gerrit.war'],
     require   => [Package['openjdk-7-jre-headless'],
                   User['gerrit2'],
@@ -527,7 +539,7 @@ class gerrit(
   # Running the init script as the gerrit2 user _does_ work.
   exec { 'gerrit-init':
     user        => 'gerrit2',
-    command     => '/etc/init.d/gerrit stop; /usr/bin/java -jar /home/gerrit2/review_site/bin/gerrit.war init -d /home/gerrit2/review_site --batch --no-auto-start',
+    command     => "/etc/init.d/gerrit stop; /usr/bin/java -jar ${gerrit_war} init -d ${gerrit_site} --batch --no-auto-start; /usr/bin/java -jar ${gerrit_war} reindex -d ${gerrit_site}",
     subscribe   => File['/home/gerrit2/review_site/bin/gerrit.war'],
     refreshonly => true,
     require     => [Package['openjdk-7-jre-headless'],

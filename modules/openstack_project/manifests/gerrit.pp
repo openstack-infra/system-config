@@ -182,6 +182,8 @@ class openstack_project::gerrit (
     cgit                                => $cgit,
     web_repo_url                        => $web_repo_url,
     testmode                            => $testmode,
+    secondary_index                     => $secondary_index,
+    secondary_index_type                => $secondary_index_type,
     require                             => Class[openstack_project::server],
   }
 
