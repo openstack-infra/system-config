@@ -212,6 +212,7 @@ puppet-openstack:
       - stackforge/puppet-glance
       - stackforge/puppet-heat
       - stackforge/puppet-horizon
+      - stackforge/puppet-ironic
       - stackforge/puppet-keystone
       - stackforge/puppet-neutron
       - stackforge/puppet-nova
