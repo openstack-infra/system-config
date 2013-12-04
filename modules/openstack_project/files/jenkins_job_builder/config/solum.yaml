@@ -19,8 +19,8 @@
               # Install solum devstack integration
               SOLUM_BASE=/opt/stack/new/solum/contrib/devstack
               DEVSTACK_BASE=/opt/stack/new/devstack
-              cp ${SOLUM_BASE}/lib/* ${DEVSTACK_BASE}/lib
-              cp ${SOLUM_BASE}/extras.d/* ${DEVSTACK_BASE}/extras.d
+              cp $SOLUM_BASE/lib/* $DEVSTACK_BASE/lib
+              cp $SOLUM_BASE/extras.d/* $DEVSTACK_BASE/extras.d
           }}
           export -f pre_test_hook
 
