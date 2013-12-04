@@ -1573,8 +1573,10 @@
           envlist: wsme-tip
       - gate-{name}-tox-{envlist}:
           envlist: ceilometer-stable
+          node: centos6
       - gate-{name}-tox-{envlist}:
           envlist: ceilometer-tip
+          node: centos6
       - gate-{name}-tox-{envlist}:
           envlist: ironic-tip
 
