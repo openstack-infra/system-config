@@ -73,6 +73,13 @@
 #   testmode:
 #     Set this to true to disable cron jobs and replication,
 #     which can interfere with testing.
+#   secondary_index:
+#     Set this to true to enable secondary index support
+#   secondary_index_type:
+#     which secondary index to use: SQL (no secondary index),
+#     LUCENE (recommended), SOLR (experimental). Note: as of
+#     Gerrit 2.9 LUCENE is default secondary index and SQL is
+#     removed.
 # TODO: make more gerrit options configurable here
 #
 class gerrit(
