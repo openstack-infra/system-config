@@ -64,6 +64,7 @@ class openstack_project::gerrit (
   $web_repo_url = '',
   $secondary_index = true,
   $secondary_index_type = 'LUCENE',
+  $change_screen = 'CHANGE_SCREEN2',
 ) {
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [80, 443, 29418],
@@ -174,6 +175,7 @@ class openstack_project::gerrit (
     testmode                        => $testmode,
     secondary_index                 => $secondary_index,
     secondary_index_type            => $secondary_index_type,
+    change_screen                   => $change_screen,
     require                         => Class[openstack_project::server],
   }
 

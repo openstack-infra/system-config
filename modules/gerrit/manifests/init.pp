@@ -80,6 +80,13 @@
 #     LUCENE (recommended), SOLR (experimental). Note: as of
 #     Gerrit 2.9 LUCENE is default secondary index and SQL is
 #     removed.
+#   changeScreen:
+#     Default change screen UI to direct users to. Valid values
+#     are OLD_UI and CHANGE_SCREEN2. Default is OLD_UI.
+#     Note: user can still choose another change screen then the
+#     system wide on their user preferences. As of Gerrit 2.9
+#     the default change screen is CHANGE_SCREEN2. As of Gerrit
+#     3.0, old change screen is going to be discontinued.
 # TODO: make more gerrit options configurable here
 #
 class gerrit(
