@@ -18,6 +18,13 @@
 
 HOSTNAME=$1
 
-# TODO - bootstrap_xenserver_and_compute_domU.sh $NODEPOOL_SSH_KEY
+# Turn the started Ubuntu VM into a XenServer VM,
+# but with an Ubuntu VM inside the XenServer VM,
+# and redirect the public IP address to the Ubuntu VM.
+# TODO we need to simplify this hack by making this easier in Nova
+./convert_node_to_xenserver.sh
+
+# prepare the ubuntu VM as normal
+# it just happens to be running inside a XenServer VM on a XenServer
 ./prepare_node.sh $HOSTNAME
 sudo -u jenkins -i /opt/nodepool-scripts/prepare_devstack.sh $HOSTNAME
