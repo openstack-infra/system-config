@@ -88,5 +88,93 @@
       - war:
           site: 'tarballs.openstack.org'
           warfile: 'gerrit-war/target/gerrit*.war'
-          target: 'tarballs/ci/'
+          target: 'tarballs/ci/gerrit'
+      - console-log
+
+- job:
+    name: check-gerrit-buck
+    node: precise
+
+    wrappers:
+      - timeout:
+          timeout: 40
+          fail: true
+      - timestamps
+
+    builders:
+      - gerrit-git-prep
+      - shell: |
+          #!/bin/bash -xe
+          /usr/local/jenkins/slave_scripts/maven-properties.sh
+      - inject:
+          properties-file: maven.properties
+      - shell: |
+          #!/bin/bash -xe
+          buck clean
+          buck build release
+          buck test --all
+      - shell: "cp buck-out/gen/release.war buck-out/gen/gerrit-$PROJECT_VER.war"
+
+    publishers:
+      - war:
+          site: 'tarballs.openstack.org'
+          warfile: 'buck-out/gen/gerrit-${{PROJECT_VER}}.war'
+          target: 'tarballs/ci/test'
+      - console-log
+
+- job:
+    name: gate-gerrit-buck
+    node: precise
+
+    wrappers:
+      - timeout:
+          timeout: 40
+          fail: true
+      - timestamps
+
+    builders:
+      - gerrit-git-prep
+      - shell: |
+          #!/bin/bash -xe
+          /usr/local/jenkins/slave_scripts/maven-properties.sh
+      - inject:
+          properties-file: maven.properties
+      - shell: |
+          #!/bin/bash -xe
+          buck clean
+          buck build release
+          buck test --all
+      - shell: "cp buck-out/gen/release.war buck-out/gen/gerrit-$PROJECT_VER.war"
+
+    publishers:
+      - console-log
+
+- job:
+    name: gerrit-package-buck
+    node: precise
+
+    wrappers:
+      - timeout:
+          timeout: 40
+          fail: true
+      - timestamps
+
+    builders:
+      - gerrit-git-prep
+      - shell: |
+          #!/bin/bash -xe
+          /usr/local/jenkins/slave_scripts/maven-properties.sh
+      - inject:
+          properties-file: maven.properties
+      - shell: |
+          #!/bin/bash -xe
+          buck clean
+          buck build release
+      - shell: "cp buck-out/gen/release.war buck-out/gen/gerrit-$PROJECT_VER.war"
+
+    publishers:
+      - war:
+          site: 'tarballs.openstack.org'
+          warfile: 'buck-out/gen/gerrit-${{PROJECT_VER}}.war'
+          target: 'tarballs/ci/gerrit'
       - console-log
