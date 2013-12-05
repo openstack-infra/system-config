@@ -31,3 +31,6 @@ else
     sudo puppet apply --modulepath=/root/config/modules:/etc/puppet/modules \
 	-e "class {'openstack_project::slave_template': install_users => false, ssh_key => '$NODEPOOL_SSH_KEY', }"
 fi
+
+sudo mkdir -p /opt/git
+sudo -i python /opt/nodepool-scripts/cache_git_repos.py
