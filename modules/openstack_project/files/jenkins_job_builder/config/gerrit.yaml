@@ -1,6 +1,5 @@
 - job:
     name: check-gerrit-unittests
-    project-type: maven
     node: precise
 
     wrappers:
@@ -9,18 +8,15 @@
           fail: true
       - timestamps
 
-    prebuilders:
+    builders:
       - gerrit-git-prep
       - gerrit-preclean
-
-    maven:
-      maven-name: Maven3
-      root-module:
-        group-id: com.google.gerrit
-        artifact-id: gerrit-parent
-      goals: 'clean package -Dgerrit.include-documentation=1 -X -B'
-
-    postbuilders:
+      - shell: |
+          #!/bin/bash -xe
+          if [ -f pom.xml ];
+          then
+            mvn clean package -Dgerrit.include-documentation=1 -X -B
+          fi
       - gerrit-postrun
 
     publishers:
@@ -30,10 +26,8 @@
           target: 'tarballs/ci/test/'
       - console-log
 
-
 - job:
     name: gate-gerrit-unittests
-    project-type: maven
     node: precise
 
     wrappers:
@@ -42,18 +36,15 @@
           fail: true
       - timestamps
 
-    prebuilders:
+    builders:
       - gerrit-git-prep
       - gerrit-preclean
-
-    maven:
-      maven-name: Maven3
-      root-module:
-        group-id: com.google.gerrit
-        artifact-id: gerrit-parent
-      goals: 'clean package -Dgerrit.include-documentation=1 -X -B'
-
-    postbuilders:
+      - shell: |
+          #!/bin/bash -xe
+          if [ -f pom.xml ];
+          then
+            mvn clean package -Dgerrit.include-documentation=1 -X -B
+          fi
       - gerrit-postrun
 
     publishers:
@@ -70,23 +61,101 @@
           fail: true
       - timestamps
 
-    prebuilders:
+    builders:
       - gerrit-git-prep
       - gerrit-preclean
-
-    maven:
-      maven-name: Maven3
-      root-module:
-        group-id: com.google.gerrit
-        artifact-id: gerrit-parent
-      goals: 'clean package -Dgerrit.include-documentation=1 -X -B'
-
-    postbuilders:
+      - shell: |
+          #!/bin/bash -xe
+          if [ -f pom.xml ];
+          then
+            mvn clean package -Dgerrit.include-documentation=1 -X -B
+          fi
       - gerrit-postrun
 
     publishers:
       - war:
           site: 'tarballs.openstack.org'
           warfile: 'gerrit-war/target/gerrit*.war'
-          target: 'tarballs/ci/'
+          target: 'tarballs/ci/gerrit'
+      - console-log
+
+- job:
+    name: check-gerrit-buck
+    node: precise
+
+    wrappers:
+      - timeout:
+          timeout: 40
+          fail: true
+      - timestamps
+
+    builders:
+      - gerrit-git-prep
+      - shell: |
+          #!/bin/bash -xe
+          if [ -f BUCK ];
+          then
+            buck clean
+            buck build gerrit
+            buck test --all
+          fi
+
+    publishers:
+      - console-log
+
+- job:
+    name: gate-gerrit-buck
+    node: precise
+
+    wrappers:
+      - timeout:
+          timeout: 40
+          fail: true
+      - timestamps
+
+    builders:
+      - gerrit-git-prep
+      - shell: |
+          #!/bin/bash -xe
+          if [ -f BUCK ];
+          then
+            buck clean
+            buck build gerrit
+            buck test --all
+          fi
+
+    publishers:
+      - console-log
+
+- job:
+    name: gerrit-package-buck
+    node: precise
+
+    wrappers:
+      - timeout:
+          timeout: 40
+          fail: true
+      - timestamps
+
+    builders:
+      - gerrit-git-prep
+      - shell: |
+          #!/bin/bash -xe
+          /usr/local/jenkins/slave_scripts/maven-properties.sh
+      - inject:
+          properties-file: maven.properties
+      - shell: |
+          #!/bin/bash -xe
+          if [ -f BUCK ];
+          then
+            buck clean
+            buck build gerrit
+          fi
+          cp buck-out/gen/gerrit.war buck-out/gen/gerrit-$PROJECT_VER.war
+
+    publishers:
+      - war:
+          site: 'tarballs.openstack.org'
+          warfile: 'buck-out/gen/gerrit-${{PROJECT_VER}}.war'
+          target: 'tarballs/ci/gerrit'
       - console-log
