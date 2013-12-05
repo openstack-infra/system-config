@@ -91,6 +91,7 @@ class asterisk (
     ensure  => present,
     recurse => true,
     purge   => true,
+    force   => true,
     owner   => 'asterisk',
     group   => 'asterisk',
     mode    => '0660',

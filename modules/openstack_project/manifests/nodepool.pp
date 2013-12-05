@@ -49,6 +49,7 @@ class openstack_project::nodepool(
     mode    => '0755',
     recurse => true,
     purge   => true,
+    force   => true,
     require => File['/etc/nodepool'],
     source  => 'puppet:///modules/openstack_project/nodepool/scripts',
   }
