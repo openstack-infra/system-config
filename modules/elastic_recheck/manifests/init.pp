@@ -23,7 +23,7 @@ class elastic_recheck (
   $elasticsearch_url,
   $recheck_bot_passwd,
   $gerrit_user = 'elasticrecheck',
-  $recheck_bot_nick = 'openstackrecheck'
+  $recheck_bot_nick = 'openstackrecheck',
 ) {
   group { 'recheck':
     ensure => 'present',
@@ -55,6 +55,14 @@ class elastic_recheck (
   }
 
   file { '/var/run/elastic-recheck':
+    ensure  => directory,
+    mode    => '0755',
+    owner   => 'recheck',
+    group   => 'recheck',
+    require => User['recheck'],
+  }
+
+  file { '/var/lib/elastic-recheck':
     ensure  => directory,
     mode    => '0755',
     owner   => 'recheck',
@@ -122,51 +130,6 @@ class elastic_recheck (
     require => [
       Vcsrepo['/opt/elastic-recheck'],
       File['/etc/elastic-recheck'],
-    ],
-  }
-
-  file { '/home/recheck':
-    ensure  => directory,
-    mode    => '0700',
-    owner   => 'recheck',
-    group   => 'recheck',
-    require => User['recheck'],
-  }
-
-  file { '/home/recheck/.ssh':
-    ensure  => directory,
-    mode    => '0700',
-    owner   => 'recheck',
-    group   => 'recheck',
-    require => User['recheck'],
-  }
-
-  file { $gerrit_ssh_private_key:
-    ensure  => present,
-    mode    => '0600',
-    owner   => 'recheck',
-    group   => 'recheck',
-    content => $gerrit_ssh_private_key_contents,
-    require => User['recheck'],
-  }
-
-  file { '/etc/init.d/elastic-recheck':
-    ensure => present,
-    mode   => '0755',
-    owner  => 'root',
-    group  => 'root',
-    source => 'puppet:///modules/elastic_recheck/elastic-recheck.init',
-  }
-
-  service { 'elastic-recheck':
-    ensure    => running,
-    enable    => true,
-    subscribe => File['/etc/elastic-recheck/elastic-recheck.conf'],
-    require   => [
-      File['/etc/init.d/elastic-recheck'],
-      File['/etc/elastic-recheck/elastic-recheck.conf'],
-      File['/etc/elastic-recheck/queries.yaml'],
-      Exec['install_elastic-recheck'],
     ],
   }
 }
