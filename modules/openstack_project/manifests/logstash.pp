@@ -125,4 +125,9 @@ class openstack_project::logstash (
     recheck_bot_passwd              => $recheck_bot_passwd,
     recheck_bot_nick                => $recheck_bot_nick,
   }
+
+  class { 'elastic_recheck::bot':
+    gerrit_ssh_private_key          => $gerrit_ssh_private_key,
+    gerrit_ssh_private_key_contents => $gerrit_ssh_private_key_contents
+  }
 }
