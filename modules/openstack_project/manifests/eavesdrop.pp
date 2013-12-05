@@ -23,6 +23,7 @@ class openstack_project::eavesdrop (
     network   => 'FreeNode',
     server    => 'chat.freenode.net:7000',
     channels  => [
+        '#heat',
         '#openstack',
         '#openstack-ceilometer',
         '#openstack-climate',
