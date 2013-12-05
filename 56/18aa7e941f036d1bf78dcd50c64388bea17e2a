@@ -1,0 +1,11 @@
+Verified+2: Jenkins
+Approved+1: Clark Boylan <cboylan@sapwetik.org>
+Code-Review+2: Clark Boylan <cboylan@sapwetik.org>
+Code-Review+1: lifeless <robertc@robertcollins.net>
+Code-Review+1: Ruslan Kamaldinov <rkamaldinov@mirantis.com>
+Code-Review+1: Denis Egorenko <degorenko@mirantis.com>
+Submitted-by: Jenkins
+Submitted-at: Thu, 05 Dec 2013 22:43:21 +0000
+Reviewed-on: https://review.openstack.org/60296
+Project: openstack-infra/config
+Branch: refs/heads/master
