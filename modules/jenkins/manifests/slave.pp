@@ -29,6 +29,7 @@ class jenkins::slave(
 
   # Packages that most jenkins slaves (eg, unit test runners) need
   $standard_packages = [
+    $::jenkins::params::ant_package, # for building buck
     $::jenkins::params::asciidoc_package, # for building gerrit/building openstack docs
     $::jenkins::params::curl_package,
     $::jenkins::params::docbook_xml_package, # for building openstack docs
@@ -319,6 +320,32 @@ class jenkins::slave(
     provider => git,
     revision => 'master',
     source   => 'https://git.openstack.org/openstack/requirements',
+  }
+
+  vcsrepo { '/opt/buck':
+    ensure   => latest,
+    provider => git,
+    revision => 'master',
+    source   => 'https://gerrit.googlesource.com/buck',
+  }
+
+  exec { 'build_buck':
+    command     => 'ant',
+    creates     => '/opt/buck/bin/buck',
+    path        => '/bin:/usr/bin:/usr/local/bin',
+    cwd         => '/opt/buck',
+    require     => [
+      Vcsrepo['/opt/buck'],
+      Package[$::jenkins::params::ant_package],
+    ],
+  }
+
+  file { '/usr/local/bin/buck':
+    ensure      => 'link',
+    target      => '/opt/buck/bin/buck',
+    require     => [
+      Vcsrepo['/opt/buck'],
+    ],
   }
 
   # Temporary for debugging glance launch problem
