@@ -3894,22 +3894,22 @@ projects:
       - gate-release-tools-pypy
     gate:
       - gate-release-tools-pep8
-      - gate-release-tools-python26
+        - gate-release-tools-python26
       - gate-release-tools-python27
       - gate-release-tools-pypy
 
-- name: stackforge/entropy
-  check:
-    - gate-entropy-docs
-    - gate-entropy-pep8
-    - gate-entropy-python26
-    - gate-entropy-python27
-    - gate-entropy-python33
-  gate:
-    - gate-entropy-docs
-    - gate-entropy-pep8
-    - gate-entropy-python26
-    - gate-entropy-python27
-    - gate-entropy-python33
-  post:
-    - entropy-coverage
+  - name: stackforge/entropy
+    check:
+      - gate-entropy-docs
+      - gate-entropy-pep8
+      - gate-entropy-python26
+      - gate-entropy-python27
+      - gate-entropy-python33
+    gate:
+      - gate-entropy-docs
+      - gate-entropy-pep8
+      - gate-entropy-python26
+      - gate-entropy-python27
+      - gate-entropy-python33
+    post:
+      - entropy-coverage
