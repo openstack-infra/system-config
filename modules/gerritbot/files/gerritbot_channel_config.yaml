@@ -224,6 +224,7 @@ puppet-openstack:
     branches:
       - master
       - stable/grizzly
+      - stable/havana
 
 openstack-chef:
     events:
