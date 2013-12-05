@@ -38,22 +38,6 @@ NameVirtualHost <%= vhost_name %>:<%= port %>
     allow from all
   </Directory>
 
-  # Sample elastic-recheck config file, adjust prefixes
-  # per your local configuration
-  Alias /elastic-recheck /usr/local/share/elastic-recheck
-  <Directory /usr/local/share/elastic-recheck>
-      Options FollowSymlinks
-      AllowOverride None
-      Require all granted
-  </Directory>
-
-  Alias /elastic-recheck/data /var/lib/elastic-recheck
-  <Directory /var/lib/elastic-recheck>
-      Options FollowSymlinks
-      AllowOverride None
-      Require all granted
-  </Directory>
-
   ErrorLog /var/log/apache2/<%= name %>_error.log
   LogLevel warn
   CustomLog /var/log/apache2/<%= name %>_access.log combined

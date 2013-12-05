@@ -62,14 +62,6 @@ class elastic_recheck (
     require => User['recheck'],
   }
 
-  file { '/var/lib/elastic-recheck':
-    ensure  => directory,
-    mode    => '0755',
-    owner   => 'recheck',
-    group   => 'recheck',
-    require => User['recheck'],
-  }
-
   file { '/var/log/elastic-recheck':
     ensure  => directory,
     mode    => '0755',
