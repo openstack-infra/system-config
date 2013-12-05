@@ -129,6 +129,8 @@ jobs:
     branch: ^(?!stable/grizzly).*$
   - name: ^(gate|check)-tempest-dsvm-cells$
     voting: false
+  - name: ^(gate|check)-tempest-xenserver-full$
+    voting: false
   - name: ^(gate|check)-tempest-dsvm-cells-full$
     voting: false
   - name: ^(gate|check)-grenade-dsvm$
@@ -908,6 +910,7 @@ projects:
     experimental:
       - gate-grenade-dsvm-stable
       - gate-tempest-dsvm-neutron-full
+      - check-tempest-xenserver-full
     post:
       - nova-branch-tarball
       - nova-coverage
