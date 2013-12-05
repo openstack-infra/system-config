@@ -71,6 +71,13 @@ providers:
         setup: prepare_node_devstack.sh
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
+      - name: devstack-xenserver
+        base-image: 'Ubuntu 12.04 LTS (Precise Pangolin)'
+        min-ram: 8192
+        name-filter: 'performance1'
+        setup: prepare_node_xenserver.sh
+        username: jenkins
+        private-key: /home/nodepool/.ssh/id_rsa
   - name: hpcloud-az1
     region-name: 'az-1.region-a.geo-1'
     service-type: 'compute'
@@ -202,6 +209,10 @@ targets:
         min-ready: 1
         providers:
           - name: tripleo-test-cloud
+      - name: devstack-xenserver
+        min-ready: 1
+        providers:
+          - name: rax-iad
   - name: jenkins02
     jenkins:
       url: 'https://jenkins02.openstack.org/'
@@ -226,3 +237,7 @@ targets:
         min-ready: 1
         providers:
           - name: tripleo-test-cloud
+      - name: devstack-xenserver
+        min-ready: 1
+        providers:
+          - name: rax-iad

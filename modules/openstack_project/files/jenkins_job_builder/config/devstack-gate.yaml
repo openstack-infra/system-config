@@ -343,6 +343,38 @@
 
 
 - job-template:
+    name: '{pipeline}-tempest-dsvm-xenserver{branch-designator}'
+    node: 'devstack-xenserver'
+
+    wrappers:
+      - timeout:
+          timeout: 60
+          fail: true
+      - timestamps
+
+    builders:
+      - devstack-checkout
+      - shell: |
+          #!/bin/bash -xe
+          export PYTHONUNBUFFERED=true
+          export DEVSTACK_GATE_TEMPEST=1
+          export DEVSTACK_GATE_TEMPEST_FULL=0
+          export DEVSTACK_GATE_VIRT_DRIVER=xenapi
+          export DEVSTACK_GATE_XENSERVER=1 #TODO - track this down
+          export BRANCH_OVERRIDE={branch-override}
+          if [ "$BRANCH_OVERRIDE" != "default" ] ; then
+              export ZUUL_BRANCH=$BRANCH_OVERRIDE
+          fi
+          cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
+          ./safe-devstack-vm-gate-wrap.sh
+      - link-logs
+
+    publishers:
+      - devstack-logs
+      - console-log
+
+
+- job-template:
     name: '{pipeline}-tempest-dsvm-large-ops{branch-designator}'
     node: '{node}'
 
