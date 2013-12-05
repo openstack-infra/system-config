@@ -898,7 +898,6 @@ projects:
     experimental:
       - gate-grenade-dsvm-stable
       - gate-tempest-dsvm-neutron-full
-      - periodic-tempest-dsvm-coverage-master
     post:
       - nova-branch-tarball
       - nova-coverage
@@ -1756,7 +1755,6 @@ projects:
       - gate-grenade-dsvm-stable
       - gate-devstack-dsvm-cells
       - gate-tempest-dsvm-neutron-full
-      - periodic-tempest-dsvm-coverage-master
     post:
       - tempest-docs
       - tempest-branch-tarball
@@ -1768,7 +1766,6 @@ projects:
       - periodic-tempest-dsvm-neutron-havana
       - periodic-tempest-dsvm-postgres-full-havana
       - periodic-tempest-dsvm-all-havana
-      - periodic-tempest-dsvm-coverage-havana
       - periodic-tempest-dsvm-stress-havana
       - periodic-tempest-dsvm-neutron-pg-havana
       - periodic-tempest-dsvm-large-ops-havana

@@ -121,36 +121,6 @@
 
 
 - job-template:
-    name: 'periodic-tempest-dsvm-coverage{branch-designator}'
-    node: '{node}'
-
-    wrappers:
-      - timeout:
-          timeout: 180
-          fail: true
-      - timestamps
-
-    builders:
-      - devstack-checkout
-      - shell: |
-          #!/bin/bash -xe
-          export PYTHONUNBUFFERED=true
-          export DEVSTACK_GATE_TEMPEST=1
-          export DEVSTACK_GATE_TEMPEST_COVERAGE=1
-          export ZUUL_BRANCH={branch-override}
-          unset ZUUL_PROJECT
-          cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
-          ./safe-devstack-vm-gate-wrap.sh
-      - link-logs
-
-    publishers:
-      - devstack-logs-periodic
-      - console-log-periodic
-      - email:
-          recipients: openstack-qa@lists.openstack.org
-
-
-- job-template:
     name: 'periodic-tempest-dsvm-stress{branch-designator}'
     node: '{node}'
 
