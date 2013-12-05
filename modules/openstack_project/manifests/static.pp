@@ -8,7 +8,7 @@ class openstack_project::static (
   $releasestatus_prvkey_contents = '',
   $releasestatus_pubkey_contents = '',
   $releasestatus_gerrit_ssh_key = '',
-  $er_state_dir = '/srv/static/status/elastic-recheck',
+  $er_state_dir = '/var/lib/elastic-recheck',
 ) {
 
   class { 'openstack_project::server':
@@ -342,25 +342,6 @@ class openstack_project::static (
     refreshonly => true,
     subscribe   => Vcsrepo['/opt/elastic-recheck'],
     require     => Class['pip'],
-  }
-
-  file { '/srv/static/status/elastic-recheck':
-    ensure  => directory,
-    owner   => 'recheck',
-    group   => 'recheck',
-    require => User['recheck'],
-  }
-
-  file { '/srv/static/status/elastic-recheck/index.html':
-    ensure  => present,
-    source  => 'puppet:///modules/openstack_project/elastic-recheck/elastic-recheck.html',
-    require => File['/srv/static/status/elastic-recheck'],
-  }
-
-  file { '/srv/static/status/elastic-recheck/elastic-recheck.js':
-    ensure  => present,
-    source  => 'puppet:///modules/openstack_project/elastic-recheck/elastic-recheck.js',
-    require => File['/srv/static/status/elastic-recheck'],
   }
 
   cron { 'elastic-recheck':
