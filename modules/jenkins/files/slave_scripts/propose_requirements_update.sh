@@ -15,7 +15,12 @@
 INITIAL_COMMIT_MSG="Updated from global requirements"
 TOPIC="openstack/requirements"
 USERNAME=${USERNAME:-$USER}
-BRANCH=${ZUUL_BRANCH:-master}
+BRANCH=$ZUUL_REF
+
+if [ -z "$BRANCH" ] ; then
+    echo "No branch set, exiting."
+    exit 1
+fi
 
 git config user.name "OpenStack Jenkins"
 git config user.email "jenkins@openstack.org"
