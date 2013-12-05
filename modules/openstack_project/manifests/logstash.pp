@@ -117,7 +117,7 @@ class openstack_project::logstash (
     require => Service['jenkins-log-client'],
   }
 
-  class { 'elastic_recheck':
+  class { 'elastic_recheck::bot':
     gerrit_host                     => $gerrit_host,
     gerrit_ssh_private_key          => $gerrit_ssh_private_key,
     gerrit_ssh_private_key_contents => $gerrit_ssh_private_key_contents,
