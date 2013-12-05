@@ -11,6 +11,7 @@ class jenkins::params {
       $ccache_package = 'ccache'
       $python_netaddr_package = 'python-netaddr'
       # packages needed by slaves
+      $ant_package = 'ant'
       $asciidoc_package = 'asciidoc'
       $curl_package = 'curl'
       $docbook_xml_package = 'docbook-style-xsl'
@@ -72,6 +73,7 @@ class jenkins::params {
       $ccache_package = 'ccache'
       $python_netaddr_package = 'python-netaddr'
       # packages needed by slaves
+      $ant_package = 'ant'
       $asciidoc_package = 'asciidoc'
       $curl_package = 'curl'
       $docbook_xml_package = 'docbook-xml'
