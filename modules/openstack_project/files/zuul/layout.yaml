@@ -118,7 +118,7 @@ jobs:
   - name: ^(gate|check)-tempest-dsvm-neutron-full$
     branch: ^(?!stable/grizzly).*$
     voting: false
-  - name: gate-tempest-dsvm-heat-slow
+  - name: gate-tempest-dsvm-neutron-heat-slow
     branch: ^(?!stable/grizzly).*$
     voting: false
   - name: ^(gate|check)-devstack-dsvm-cells$
@@ -1663,7 +1663,7 @@ projects:
       - gate-grenade-dsvm
       - gate-swift-dsvm-functional
     experimental:
-      - gate-tempest-dsvm-heat-slow
+      - gate-tempest-dsvm-neutron-heat-slow
       - gate-grenade-dsvm-stable
       - gate-devstack-dsvm-cells
 
@@ -1751,7 +1751,7 @@ projects:
       - gate-tempest-dsvm-neutron-large-ops
       - gate-grenade-dsvm
     experimental:
-      - gate-tempest-dsvm-heat-slow
+      - gate-tempest-dsvm-neutron-heat-slow
       - gate-grenade-dsvm-stable
       - gate-devstack-dsvm-cells
       - gate-tempest-dsvm-neutron-full
