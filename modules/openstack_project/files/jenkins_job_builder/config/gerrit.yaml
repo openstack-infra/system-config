@@ -30,7 +30,6 @@
           target: 'tarballs/ci/test/'
       - console-log
 
-
 - job:
     name: gate-gerrit-unittests
     project-type: maven
@@ -89,4 +88,81 @@
           site: 'tarballs.openstack.org'
           warfile: 'gerrit-war/target/gerrit*.war'
           target: 'tarballs/ci/'
+      - console-log
+
+- job:
+    name: check-gerrit-buck
+    node: precise
+
+    wrappers:
+      - timeout:
+          timeout: 40
+          fail: true
+      - timestamps
+
+    prebuilders:
+      - gerrit-git-prep
+
+    builders:
+      - shell: |
+          #!/bin/bash -xe
+          buck clean
+          buck build gerrit
+          buck test --all
+
+    publishers:
+      - console-log
+
+- job:
+    name: gate-gerrit-buck
+    node: precise
+
+    wrappers:
+      - timeout:
+          timeout: 40
+          fail: true
+      - timestamps
+
+    prebuilders:
+      - gerrit-git-prep
+
+    builders:
+      - shell: |
+          #!/bin/bash -xe
+          buck clean
+          buck build gerrit
+
+    publishers:
+      - console-log
+
+- job:
+    name: gerrit-package-buck
+    node: precise
+
+    wrappers:
+      - timeout:
+          timeout: 40
+          fail: true
+      - timestamps
+
+    prebuilders:
+      - gerrit-git-prep
+
+    builders:
+      - shell: |
+          #!/bin/bash -xe
+          /usr/local/jenkins/slave_scripts/maven-properties.sh
+      - inject:
+          properties-file: maven.properties
+      - shell: |
+          #!/bin/bash -xe
+          buck clean
+          buck build gerrit
+          cp buck-out/gen/gerrit.war buck-out/gen/gerrit-$PROJECT_VER.war
+
+    publishers:
+      - war:
+          site: 'tarballs.openstack.org'
+          warfile: 'buck-out/gen/gerrit-${{PROJECT_VER}}.war'
+          target: 'tarballs/ci/gerrit'
       - console-log
