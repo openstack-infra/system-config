@@ -1,4 +1,18 @@
 - project:
+    name: gantt
+    github-org: openstack
+    node: precise
+    tarball-site: tarballs.openstack.org
+    doc-publisher-site: docs.openstack.org
+
+    jobs:
+      - python-jobs
+      - openstack-publish-jobs
+      - gate-{name}-pylint
+      - translation-jobs
+
+
+- project:
     name: mistral
     github-org: stackforge
     node: precise
@@ -37,6 +51,20 @@
     jobs:
       - python-jobs
       - gate-{name}-docs
+
+
+- project:
+    name: python-ganttclient
+    github-org: openstack
+    node: precise
+    tarball-site: tarballs.openstack.org
+    doc-publisher-site: docs.openstack.org
+
+    jobs:
+      - python-jobs
+      - openstack-publish-jobs
+      - pypi-jobs
+
 
 - project:
     name: python-muranoclient

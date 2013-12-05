@@ -720,6 +720,50 @@ projects:
       - periodic-cinder-python26-havana
       - periodic-cinder-python27-havana
 
+  - name: openstack/gantt
+    check:
+      - gate-gantt-requirements
+      - gate-gantt-pep8
+      - gate-gantt-docs
+      - gate-gantt-python26
+      - gate-gantt-python27
+      - check-tempest-dsvm-full
+      - check-tempest-dsvm-postgres-full
+      - check-tempest-dsvm-neutron
+      - gate-tempest-dsvm-large-ops
+      - gate-tempest-dsvm-neutron-large-ops
+      - check-grenade-dsvm
+      - gate-devstack-dsvm-cells
+      - gate-gantt-pylint
+    gate:
+      - gate-gantt-requirements
+      - gate-gantt-docs
+      - gate-gantt-pep8
+      - gate-gantt-python26
+      - gate-gantt-python27
+      - gate-tempest-dsvm-full
+      - gate-tempest-dsvm-postgres-full
+      - gate-tempest-dsvm-neutron
+      - gate-tempest-dsvm-large-ops
+      - gate-tempest-dsvm-neutron-large-ops
+      - gate-grenade-dsvm
+    experimental:
+      - gate-grenade-dsvm-forward
+      - gate-tempest-dsvm-neutron-full
+    post:
+      - gantt-branch-tarball
+      - gantt-coverage
+      - gantt-docs
+      - gantt-upstream-translation-update
+    pre-release:
+      - gantt-tarball
+    release:
+      - gantt-tarball
+      - gantt-docs
+      - gantt-merge-release-tags
+    periodic:
+      - gantt-propose-translation-update
+
   - name: openstack/glance
     check:
       - gate-glance-requirements
@@ -1311,6 +1355,46 @@ projects:
           - post-mirror-python27
           - post-mirror-python33
       - python-cinderclient-docs
+
+  - name: openstack/python-ganttclient
+    check:
+      - gate-python-ganttclient-requirements
+      - gate-python-ganttclient-pep8
+      - gate-python-ganttclient-docs
+      - gate-python-ganttclient-python26
+      - gate-python-ganttclient-python27
+      - check-tempest-dsvm-full
+      - check-tempest-dsvm-postgres-full
+      - check-tempest-dsvm-neutron
+      - gate-tempest-dsvm-large-ops
+      - gate-tempest-dsvm-neutron-large-ops
+      - check-grenade-dsvm
+    gate:
+      - gate-python-ganttclient-requirements
+      - gate-python-ganttclient-docs
+      - gate-python-ganttclient-pep8
+      - gate-python-ganttclient-python26
+      - gate-python-ganttclient-python27
+      - gate-tempest-dsvm-full
+      - gate-tempest-dsvm-postgres-full
+      - gate-tempest-dsvm-neutron
+      - gate-tempest-dsvm-large-ops
+      - gate-tempest-dsvm-neutron-large-ops
+      - gate-grenade-dsvm
+    experimental:
+      - gate-grenade-dsvm-forward
+      - gate-devstack-dsvm-cells
+    post:
+      - python-ganttclient-branch-tarball
+      - python-ganttclient-coverage
+    pre-release:
+      - python-ganttclient-tarball
+    release:
+      - python-ganttclient-tarball:
+        - python-ganttclient-pypi-upload:
+          - post-mirror-python26
+          - post-mirror-python27
+      - python-ganttclient-docs
 
   - name: openstack/python-glanceclient
     check:
