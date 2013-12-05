@@ -50,6 +50,14 @@ root-desc=
 # Include some more info about this site on the index page
 #root-readme=/var/www/html/about.html
 
+# Format markdown and restructuredtext READNE files
+about-filter=/usr/local/bin/about-formatting.sh
+
+readme=:README.md
+readme=:readme.md
+readme=:README.rst
+readme=:readme.rst
+
 # Allow download of tar.gz, tar.bz2 and zip-files
 #snapshots=tar.gz tar.bz2 zip
 

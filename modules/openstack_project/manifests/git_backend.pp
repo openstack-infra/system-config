@@ -134,4 +134,18 @@ class openstack_project::git_backend (
     mode    => '0755',
     source  => 'puppet:///modules/openstack_project/git/commit-filter.sh',
   }
+  file { '/usr/local/bin/about-formatting.sh':
+    ensure  => present,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0755',
+    source  => 'puppet:///modules/openstack_project/git/about-formatting.sh',
+  }
+  file { '/usr/local/bin/rst2html':
+    ensure  => present,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0755',
+    source  => 'puppet:///modules/openstack_project/git/rst2html',
+  }
 }

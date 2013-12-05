@@ -1,0 +1,2 @@
+#!/bin/sh
+rst2html --template="/usr/libexec/cgit/filters/html-converters/resources/rst-template.txt"
