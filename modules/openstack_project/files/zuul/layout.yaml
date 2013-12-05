@@ -323,6 +323,8 @@ jobs:
     voting: false
   - name: gate-solum-devstack-dsvm
     voting: false
+  - name: gate-manila-devstack-dsvm
+    voting: false
 # puppet-openstack targets
   - name: gate-puppet-vswitch-puppet-lint
     voting: false
@@ -3782,10 +3784,12 @@ projects:
       - gate-manila-pep8
       - gate-manila-python26
       - gate-manila-python27
+      - gate-manila-devstack-dsvm
     gate:
       - gate-manila-pep8
       - gate-manila-python26
       - gate-manila-python27
+      - gate-manila-devstack-dsvm
     post:
       - manila-branch-tarball
       - manila-coverage
