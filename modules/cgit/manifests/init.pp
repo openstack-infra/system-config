@@ -34,6 +34,7 @@ class cgit(
       'cgit',
       'git-daemon',
       'highlight',
+      'python-docutils',
     ]:
     ensure => present,
   }
