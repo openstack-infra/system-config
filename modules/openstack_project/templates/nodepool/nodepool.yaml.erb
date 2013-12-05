@@ -75,6 +75,13 @@ providers:
         setup: prepare_node_devstack.sh
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
+      - name: bare-precise
+        base-image: 'Ubuntu 12.04 LTS (Precise Pangolin)'
+        min-ram: 8192
+        name-filter: 'Standard'
+        setup: prepare_node_bare.sh
+        username: jenkins
+        private-key: /home/nodepool/.ssh/id_rsa
   - name: hpcloud-az1
     region-name: 'az-1.region-a.geo-1'
     service-type: 'compute'
@@ -186,7 +193,7 @@ targets:
       credentials-id: '<%= jenkins_credentials_id %>'
     images:
       - name: bare-precise
-        min-ready: 2
+        min-ready: 3
         providers:
           - name: rax-ord
       - name: devstack-precise
@@ -213,6 +220,10 @@ targets:
       apikey: '<%= jenkins_api_key %>'
       credentials-id: '<%= jenkins_credentials_id %>'
     images:
+      - name: bare-precise
+        min-ready: 3
+        providers:
+          - name: rax-ord
       - name: devstack-precise
         min-ready: 20
         providers:
