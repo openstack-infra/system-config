@@ -171,9 +171,13 @@ jobs:
   - name: check-tempest-dsvm-cells-full-havana
     voting: false
   - name: ^(gate|check)-gerrit-unittests$
-    branch: ^openstack/.*$
+    branch: ^openstack/2.4/.*$
   - name: gerrit-package
-    branch: ^openstack/.*$
+    branch: ^openstack/2.4/.*$
+  - name: ^(gate|check)-gerrit-buck$
+    branch: ^openstack/2.8/.*$
+  - name: gerrit-package-buck
+    branch: ^openstack/2.8/.*$
   - name: gate-nova-pylint
     voting: false
   - name: gate-cinder-pylint
@@ -416,6 +420,14 @@ projects:
       - gate-gerrit-unittests
     post:
       - gerrit-package
+
+  - name: openstack-infra/gerrit-2.8
+    check:
+      - check-gerrit-buck
+    gate:
+      - gate-gerrit-buck
+    post:
+      - gerrit-package-buck
 
   - name: openstack-infra/gerritbot
     check:
