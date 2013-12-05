@@ -427,3 +427,14 @@ storyboard:
       - openstack-infra/storyboard
     branches:
       - master
+
+packstack-dev:
+    events:
+      - patchset-created
+      - change-merged
+      - x-vrif-minus-2
+    projects:
+      - stackforge/packstack
+    branches:
+      - master
+      - grizzly
