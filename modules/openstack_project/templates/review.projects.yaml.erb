@@ -154,6 +154,9 @@
   launchpad: django-openstack-auth
   description: A Django authentication backend for use with the OpenStack Keystone Identity backend.
   upstream: git://github.com/gabrielhurley/django_openstack_auth.git
+- project: openstack/gantt
+  description: Common scheduler for OpenStack.
+  upstream: git://github.com/n0ano/gantt.git
 - project: openstack/glance
 - project: openstack/governance
   description: Openstack Technical Committee Decisions
@@ -211,6 +214,10 @@
 - project: openstack/python-ceilometerclient
   upstream: git://github.com/asalkeld/python-ceilometerclient.git
 - project: openstack/python-cinderclient
+- project: openstack/python-ganttclient
+  description: Client code for the common scheduler for OpenStack.
+  acl-config: /home/gerrit2/acls/openstack/gantt.config
+  upstream: git://github.com/n0ano/ganttclient.git
 - project: openstack/python-glanceclient
 - project: openstack/python-heatclient
 - project: openstack/python-ironicclient
