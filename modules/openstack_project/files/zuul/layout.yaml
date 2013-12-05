@@ -1197,6 +1197,16 @@ projects:
       - gate-swift-bench-pep8
       - gate-swift-bench-python26
       - gate-swift-bench-python27
+    post:
+      - swift-bench-branch-tarball
+    pre-release:
+      - swift-bench-tarball
+    release:
+      - swift-bench-tarball:
+        - swift-bench-pypi-upload:
+          - post-mirror-python26
+          - post-mirror-python27
+          - post-mirror-python33
 
   - name: openstack/python-ceilometerclient
     check:
