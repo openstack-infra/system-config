@@ -440,3 +440,13 @@ milk-dev:
       - stackforge/milk
     branches:
       - master
+
+openstack-entropy:
+    events:
+      - patchset-created
+      - change-merged
+      - x-vrif-minus-2
+    projects:
+      - stackforge/entropy
+    branches:
+      - master
