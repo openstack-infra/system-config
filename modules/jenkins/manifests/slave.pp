@@ -29,6 +29,7 @@ class jenkins::slave(
 
   # Packages that most jenkins slaves (eg, unit test runners) need
   $standard_packages = [
+    $::jenkins::params::ant_package, # for building buck
     $::jenkins::params::asciidoc_package, # for building gerrit/building openstack docs
     $::jenkins::params::curl_package,
     $::jenkins::params::docbook_xml_package, # for building openstack docs
@@ -61,6 +62,7 @@ class jenkins::slave(
     $::jenkins::params::sbcl_package, # cl-openstack-client testing
     $::jenkins::params::sqlite_package,
     $::jenkins::params::unzip_package,
+    $::jenkins::params::zip_package,
     $::jenkins::params::xslt_package, # for building openstack docs
     $::jenkins::params::xvfb_package, # for selenium tests
   ]

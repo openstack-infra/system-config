@@ -240,6 +240,18 @@
           find /home/jenkins/pypimirror/mirror/ \( -name index.html -or -name full.html \) -delete
           rsync -a --ignore-existing --itemize-changes /home/jenkins/pypimirror/mirror/ jenkins@static.openstack.org:/srv/static/pypi/
 
+- builder:
+    name: install-buck
+    builders:
+      - shell: |
+           if [[ ! -d "buck"]]
+           then
+             git clone https://gerrit.googlesource.com/buck
+             cd buck
+             git checkout 274acb17e9b6dc9ee60bc1371c47a7f49640c24c
+             ant
+           fi
+
 
 # ======================================================================
 

@@ -11,6 +11,7 @@ class jenkins::params {
       $ccache_package = 'ccache'
       $python_netaddr_package = 'python-netaddr'
       # packages needed by slaves
+      $ant_package = 'ant'
       $asciidoc_package = 'asciidoc'
       $curl_package = 'curl'
       $docbook_xml_package = 'docbook-style-xsl'
@@ -48,6 +49,7 @@ class jenkins::params {
       $sbcl_package = 'sbcl'
       $sqlite_package = 'sqlite'
       $unzip_package = 'unzip'
+      $zip_package = 'zip'
       $xslt_package = 'libxslt'
       $xvfb_package = 'xorg-x11-server-Xvfb'
       # For Tooz unit tests
@@ -84,6 +86,7 @@ class jenkins::params {
       $ccache_package = 'ccache'
       $python_netaddr_package = 'python-netaddr'
       # packages needed by slaves
+      $ant_package = 'ant'
       $asciidoc_package = 'asciidoc'
       $curl_package = 'curl'
       $docbook_xml_package = 'docbook-xml'
@@ -124,6 +127,7 @@ class jenkins::params {
       $sbcl_package = 'sbcl'
       $sqlite_package = 'sqlite3'
       $unzip_package = 'unzip'
+      $zip_package = 'zip'
       $xslt_package = 'xsltproc'
       $xvfb_package = 'xvfb'
       # For [tooz, taskflow, nova] using zookeeper in unit tests
