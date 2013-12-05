@@ -39,7 +39,12 @@ if [[ ! -e .git ]]
 then
     ls -a
     rm -fr .[^.]* *
-    git clone $GIT_ORIGIN/$ZUUL_PROJECT .
+    if [ -d /opt/git/$ZUUL_PROJECT/.git ]
+    then
+        git clone file:///opt/git/$ZUUL_PROJECT .
+    else
+        git clone $GIT_ORIGIN/$ZUUL_PROJECT .
+    fi
 fi
 git remote set-url origin $GIT_ORIGIN/$ZUUL_PROJECT
 
