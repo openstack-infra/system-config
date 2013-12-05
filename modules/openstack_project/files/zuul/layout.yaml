@@ -109,6 +109,12 @@ jobs:
     parameter-function: set_log_url
   - name: ^.*(dsvm|devstack-vm).*$
     parameter-function: single_use_node
+  - name: gate-config-layout
+    parameter-function: single_use_node
+  - name: ci-docs
+    parameter-function: single_use_node
+  - name: gate-ci-docs
+    parameter-function: single_use_node
   - name: ^(gate|check)-tempest-dsvm-neutron-pg$
     branch: ^(?!stable/grizzly).*$
   - name: ^(gate|check)-tempest-dsvm-neutron-isolated$
@@ -197,6 +203,7 @@ jobs:
     voting: false
     failure-message: Jenkins XML output has changed.
     success-message: Jenkins XML output is unchanged.
+    parameter-function: single_use_node
 # Continous publishing from master of the following documentation targets:
   - name: openstack-admin-guide-cloud
     branch: ^master$
