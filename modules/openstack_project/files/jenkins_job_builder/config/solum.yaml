@@ -14,6 +14,7 @@
           #!/bin/bash -xe
           export PYTHONUNBUFFERED=true
           export ENABLED_SERVICES=solum
+          export PROJECTS="stackforge/solum"
 
           function pre_test_hook {
               # Install solum devstack integration
