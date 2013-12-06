@@ -1062,6 +1062,9 @@
           branch-designator: '-master'
           branch-override: master
           node: devstack-precise
+      # Special jobs for devstack-gate
+      - devstack-gate-jobs:
+          node: devstack-precise
 
 
 - project:

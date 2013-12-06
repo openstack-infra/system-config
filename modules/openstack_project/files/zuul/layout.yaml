@@ -1696,6 +1696,8 @@ projects:
 
   - name: openstack-infra/devstack-gate
     check:
+      - check-dg-tempest-dsvm-full
+      - check-dg-tempest-dsvm-full-reexec
       - check-tempest-dsvm-full
       - check-tempest-dsvm-postgres-full
       - check-tempest-dsvm-neutron

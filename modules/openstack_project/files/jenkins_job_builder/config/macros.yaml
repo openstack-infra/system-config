@@ -202,6 +202,18 @@
           fi
 
 - builder:
+    name: experimental-devstack-checkout
+    builders:
+      - shell: |
+          #!/bin/bash -xe
+          if [[ ! -e devstack-gate ]]; then
+              git clone git://git.openstack.org/openstack-infra/devstack-gate
+          fi
+          cd devstack-gate
+          /usr/local/jenkins/slave_scripts/gerrit-git-prep.sh https://review.openstack.org http://zuul.openstack.org git://git.openstack.org
+          cd ..
+
+- builder:
     name: link-logs
     builders:
       - shell: |
