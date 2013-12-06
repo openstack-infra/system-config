@@ -422,6 +422,8 @@
 
     jobs:
       - python-jobs
+      - gate-{name}-tox-{envlist}
+          envlist: contrib
       - python-grizzly-bitrot-jobs
       - python-havana-bitrot-jobs
       - openstack-publish-jobs
