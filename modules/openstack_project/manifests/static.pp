@@ -8,7 +8,7 @@ class openstack_project::static (
   $releasestatus_prvkey_contents = '',
   $releasestatus_pubkey_contents = '',
   $releasestatus_gerrit_ssh_key = '',
-  $er_state_dir = '/srv/static/status/elastic-recheck',
+  $er_state_dir = '/var/lib/elastic-recheck',
 ) {
 
   class { 'openstack_project::server':
@@ -307,61 +307,7 @@ class openstack_project::static (
 
   ###########################################################
   # Status - elastic-recheck
-
-  group { 'recheck':
-    ensure => 'present',
-  }
-
-  user { 'recheck':
-    ensure  => present,
-    home    => '/home/recheck',
-    shell   => '/bin/bash',
-    gid     => 'recheck',
-    require => Group['recheck'],
-  }
-
-  file { '/home/recheck':
-    ensure  => directory,
-    mode    => '0700',
-    owner   => 'recheck',
-    group   => 'recheck',
-    require => User['recheck'],
-  }
-
-  vcsrepo { '/opt/elastic-recheck':
-    ensure   => latest,
-    provider => git,
-    revision => 'master',
-    source   => 'https://git.openstack.org/openstack-infra/elastic-recheck',
-  }
-
-  include pip
-  exec { 'install_elastic-recheck' :
-    command     => 'pip install /opt/elastic-recheck',
-    path        => '/usr/local/bin:/usr/bin:/bin/',
-    refreshonly => true,
-    subscribe   => Vcsrepo['/opt/elastic-recheck'],
-    require     => Class['pip'],
-  }
-
-  file { '/srv/static/status/elastic-recheck':
-    ensure  => directory,
-    owner   => 'recheck',
-    group   => 'recheck',
-    require => User['recheck'],
-  }
-
-  file { '/srv/static/status/elastic-recheck/index.html':
-    ensure  => present,
-    source  => 'puppet:///modules/openstack_project/elastic-recheck/elastic-recheck.html',
-    require => File['/srv/static/status/elastic-recheck'],
-  }
-
-  file { '/srv/static/status/elastic-recheck/elastic-recheck.js':
-    ensure  => present,
-    source  => 'puppet:///modules/openstack_project/elastic-recheck/elastic-recheck.js',
-    require => File['/srv/static/status/elastic-recheck'],
-  }
+  include elastic_recheck
 
   cron { 'elastic-recheck':
     user        => 'recheck',
@@ -369,8 +315,7 @@ class openstack_project::static (
     hour        => '*',
     command     => "elastic-recheck-graph /opt/elastic-recheck/queries -o ${er_state_dir}/graph-new.json && mv ${er_state_dir}/graph-new.json ${er_state_dir}/graph.json",
     environment => 'PATH=/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin',
-    require     => [Vcsrepo['/opt/elastic-recheck'],
-                    User['recheck']],
+    require     => Class['elastic_recheck']
   }
 
   ###########################################################
