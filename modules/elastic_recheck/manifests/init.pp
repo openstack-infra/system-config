@@ -41,7 +41,6 @@ class elastic_recheck (
     command     => 'pip install /opt/elastic-recheck',
     path        => '/usr/local/bin:/usr/bin:/bin/',
     refreshonly => true,
-    notify      => Service['elastic-recheck'],
     subscribe   => Vcsrepo['/opt/elastic-recheck'],
     require     => Class['pip'],
   }
