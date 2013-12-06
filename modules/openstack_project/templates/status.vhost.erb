@@ -39,7 +39,15 @@ NameVirtualHost <%= vhost_name %>:<%= port %>
   </Directory>
 
   # Sample elastic-recheck config file, adjust prefixes
-  # per your local configuration
+  # per your local configuration. Because these are nested
+  # we need the more specific one first.
+  Alias /elastic-recheck/data /var/lib/elastic-recheck
+  <Directory /var/lib/elastic-recheck>
+      AllowOverride None
+      Order allow,deny
+      allow from all
+  </Directory>
+
   Alias /elastic-recheck /usr/local/share/elastic-recheck
   <Directory /usr/local/share/elastic-recheck>
       AllowOverride None
@@ -47,12 +55,6 @@ NameVirtualHost <%= vhost_name %>:<%= port %>
       allow from all
   </Directory>
 
-  Alias /elastic-recheck/data /var/lib/elastic-recheck
-  <Directory /var/lib/elastic-recheck>
-      AllowOverride None
-      Order allow,deny
-      allow from all
-  </Directory>
 
   ErrorLog /var/log/apache2/<%= name %>_error.log
   LogLevel warn
