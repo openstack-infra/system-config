@@ -49,6 +49,8 @@ class jenkins::params {
       $unzip_package = 'unzip'
       $xslt_package = 'libxslt'
       $xvfb_package = 'xorg-x11-server-Xvfb'
+      # For Tooz unit tests
+      $zookeeper_package = 'zookeeper-server'
       $cgroups_package = 'libcgroup'
       if ($::operatingsystem == 'Fedora') {
         $cgroups_tools_package = 'libcgroup-tools'
@@ -112,6 +114,8 @@ class jenkins::params {
       $unzip_package = 'unzip'
       $xslt_package = 'xsltproc'
       $xvfb_package = 'xvfb'
+      # For Tooz unit tests
+      $zookeeper_package = 'zookeeper'
       $cgroups_package = 'cgroup-bin'
       $cgroups_tools_package = ''
       $cgconfig_require = [

@@ -61,6 +61,7 @@ class jenkins::slave(
     $::jenkins::params::unzip_package,
     $::jenkins::params::xslt_package, # for building openstack docs
     $::jenkins::params::xvfb_package, # for selenium tests
+    $::jenkins::params::zookeeper_package, # for tooz unit tests
   ]
 
   if ($bare == false) {
