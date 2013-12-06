@@ -1938,6 +1938,7 @@ projects:
       - gate-heat-docs
       - gate-heat-python26
       - gate-heat-python27
+      - gate-heat-tox-contrib
       - check-tempest-dsvm-full
       - check-tempest-dsvm-postgres-full
       - check-tempest-dsvm-neutron
@@ -1949,6 +1950,7 @@ projects:
       - gate-heat-docs
       - gate-heat-python26
       - gate-heat-python27
+      - gate-heat-tox-contrib
       - gate-tempest-dsvm-full
       - gate-tempest-dsvm-postgres-full
       - gate-tempest-dsvm-neutron
