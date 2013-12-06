@@ -15,14 +15,23 @@ class openstack_project::eavesdrop (
     iptables_public_tcp_ports => [80],
     sysadmins                 => $sysadmins
   }
+  include apache
   include meetbot
 
+  $vhost_extra = '
+  <Location /var/lib/statusbot/www >
+    Header set Access-Control-Allow-Origin "*"
+  </Location>
+  '
+
   meetbot::site { 'openstack':
-    nick      => 'openstack',
-    nickpass  => $nickpass,
-    network   => 'FreeNode',
-    server    => 'chat.freenode.net:7000',
-    channels  => [
+    nick        => 'openstack',
+    nickpass    => $nickpass,
+    network     => 'FreeNode',
+    server      => 'chat.freenode.net:7000',
+    use_ssl     => 'True',
+    vhost_extra => $vhost_extra,
+    channels    => [
         '#openstack',
         '#openstack-ceilometer',
         '#openstack-climate',
@@ -40,7 +49,6 @@ class openstack_project::eavesdrop (
         '#storyboard',
         '#tripleo',
     ],
-    use_ssl   => 'True'
   }
 
   class { 'statusbot':
@@ -54,6 +62,14 @@ class openstack_project::eavesdrop (
     wiki_url      => $statusbot_wiki_url,
     wiki_pageid   => $statusbot_wiki_pageid,
   }
-}
 
-# vim:sw=2:ts=2:expandtab:textwidth=79
+  file { "/srv/meetbot-openstack/alert":
+    ensure  => link,
+    target  => '/var/lib/statusbot/www',
+    require => File['/var/lib/statusbot/www'],
+  }
+
+  a2mod { 'headers':
+    ensure => present,
+  }
+}

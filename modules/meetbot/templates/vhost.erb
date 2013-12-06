@@ -22,6 +22,8 @@ NameVirtualHost <%= vhost_name %>:<%= port %>
     allow from all
   </Directory>
 
+<%= vhost_extra %>
+
   ErrorLog /var/log/apache2/<%= name %>_error.log
   LogLevel warn
   CustomLog /var/log/apache2/<%= name %>_access.log combined
