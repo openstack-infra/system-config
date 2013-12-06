@@ -3927,3 +3927,9 @@ projects:
       - gate-release-tools-python26
       - gate-release-tools-python27
       - gate-release-tools-pypy
+
+  - name: stackforge/milk
+    check:
+      - gate-noop
+    gate:
+      - gate-noop
