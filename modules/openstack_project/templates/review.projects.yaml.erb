@@ -356,24 +356,30 @@
   acl-config: /home/gerrit2/acls/stackforge/chef-cookbooks.config
 - project: stackforge/designate
 - project: stackforge/fuel-astute
+  launchpad: fuel
   description: Fuel orchestrator
   upstream: git://github.com/Mirantis/astute.git
   acl-config: /home/gerrit2/acls/stackforge/fuel.config
 - project: stackforge/fuel-main
+  launchpad: fuel
   description: Fuel is the control plane for installing and managing OpenStack. It is capable of doing bare metal provisioning of physical nodes, installing OpenStack on them, and much more.
   upstream: git://github.com/Mirantis/fuel-main.git
   acl-config: /home/gerrit2/acls/stackforge/fuel.config
 - project: stackforge/fuel-ostf
+  launchpad: fuel
   upstream: git://github.com/Mirantis/fuel-ostf-tests.git
   acl-config: /home/gerrit2/acls/stackforge/fuel.config
 - project: stackforge/fuel-ostf-plugin
+  launchpad: fuel
   description: Obsolete repo, please, take a look at fuel-ostf
   acl-config: /home/gerrit2/acls/stackforge/fuel.config
 - project: stackforge/fuel-provision
+  launchpad: fuel
   description: Fuel provisioning system.
   upstream: git://github.com/Mirantis/fuel-provision.git
   acl-config: /home/gerrit2/acls/stackforge/fuel.config
 - project: stackforge/fuel-web
+  launchpad: fuel
   description: Fuel UI
   upstream: git://github.com/Mirantis/fuelweb.git
   acl-config: /home/gerrit2/acls/stackforge/fuel.config
@@ -437,6 +443,7 @@
   upstream: https://github.com/samu4924/opencafe
   description: Common Automation Framework Engine. Core driver for CloudCAFE
 - project: stackforge/openstack-chef-repo
+  launchpad: openstack-chef
   description: Example Chef Repo that sets up an OpenStack Deployment
   acl-config: /home/gerrit2/acls/stackforge/chef-cookbooks.config
 - project: stackforge/openvz-nova-driver
@@ -496,6 +503,7 @@
   acl-config: /home/gerrit2/acls/stackforge/puppet-modules.config
   upstream: git://github.com/puppetlabs/puppetlabs-openstack.git
 - project: stackforge/puppet-openstack_dev_env
+  launchpad: puppet-openstack
   description: OpenStack Puppet Dev Environment
   acl-config: /home/gerrit2/acls/stackforge/puppet-modules.config
   upstream: git://github.com/puppetlabs/puppetlabs-openstack_dev_env.git
@@ -504,6 +512,7 @@
   description: Data model for deploying multiple openstack reference architectures
   acl-config: /home/gerrit2/acls/stackforge/puppet-modules.config
 - project: stackforge/puppet-savanna
+  launchpad: savanna
   description: Savanna Puppet Module
   acl-config: /home/gerrit2/acls/openstack/savanna.config
 - project: stackforge/puppet-swift
