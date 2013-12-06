@@ -48,6 +48,17 @@ if [ -d ".testrepository" ] ; then
     .tox/$venv/bin/python /usr/local/jenkins/slave_scripts/subunit2html.py ./subunit_log.txt testr_results.html
     gzip -9 ./subunit_log.txt
     gzip -9 ./testr_results.html
+
+    export PYTHON=.tox/$venv/bin/python
+    set -e
+    rancount=$(.tox/$venv/bin/testr last | sed -ne 's/Ran \([0-9]\+\).*tests in.*/\1/p')
+    if [ "$rancount" -eq "0" ] ; then
+        echo
+        echo "Zero tests were run. At least one test should have been run."
+        echo "Failing this test as a result"
+        echo
+        exit 1
+    fi
 fi
 
 sudo /usr/local/jenkins/slave_scripts/jenkins-sudo-grep.sh post
