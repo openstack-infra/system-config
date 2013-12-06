@@ -367,6 +367,15 @@
     jobs:
       - jenkins-plugin-jobs
 
+- project:
+    name: clouddocs-maven-plugin
+    maven-group-id: com.rackspace.cloud.api
+    github-org: stackforge
+    node: precise
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - maven-plugin-jobs
 
 - project:
     name: zmq-event-publisher

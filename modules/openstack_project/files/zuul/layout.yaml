@@ -1837,9 +1837,14 @@ projects:
 
   - name: stackforge/clouddocs-maven-plugin
     check:
-      - gate-noop
+      - gate-clouddocs-maven-plugin-build
     gate:
-      - gate-noop
+      - gate-clouddocs-maven-plugin-build
+    post:
+      - clouddocs-maven-plugin-localrepo-upload
+    release:
+      - clouddocs-maven-plugin-localrepo-upload:
+        - clouddocs-maven-plugin-mavencentral-upload
 
   - name: stackforge/congress
     check:
