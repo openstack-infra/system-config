@@ -330,6 +330,8 @@ jobs:
     voting: false
   - name: gate-puppet-vswitch-puppet-syntax
     voting: false
+  - name: ^gate-puppet-.*-puppet-unit-3.0$
+    voting: false
   - name: ^gate-puppet-.*-puppet-unit-3.2$
     voting: false
   - name: ^gate-puppet-.*-puppet-unit-3.3$
