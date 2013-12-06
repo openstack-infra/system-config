@@ -1,4 +1,55 @@
 - job-template:
+    name: 'check-dg-tempest-dsvm-full'
+    node: '{node}'
+
+    wrappers:
+      - timeout:
+          timeout: 90
+          fail: true
+      - timestamps
+
+    builders:
+      - experimental-devstack-checkout
+      - shell: |
+          #!/bin/bash -xe
+          export PYTHONUNBUFFERED=true
+          export DEVSTACK_GATE_TEMPEST=1
+          export DEVSTACK_GATE_TEMPEST_FULL=1
+          export ZUUL_PROJECT=none
+          cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
+          ./safe-devstack-vm-gate-wrap.sh
+      - link-logs
+
+    publishers:
+      - devstack-logs
+      - console-log
+
+- job-template:
+    name: 'check-dg-tempest-dsvm-full-reexec'
+    node: '{node}'
+
+    wrappers:
+      - timeout:
+          timeout: 90
+          fail: true
+      - timestamps
+
+    builders:
+      - experimental-devstack-checkout
+      - shell: |
+          #!/bin/bash -xe
+          export PYTHONUNBUFFERED=true
+          export DEVSTACK_GATE_TEMPEST=1
+          export DEVSTACK_GATE_TEMPEST_FULL=1
+          cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
+          ./safe-devstack-vm-gate-wrap.sh
+      - link-logs
+
+    publishers:
+      - devstack-logs
+      - console-log
+
+- job-template:
     name: '{pipeline}-tempest-dsvm-full{branch-designator}'
     node: '{node}'
 
@@ -641,6 +692,13 @@
     publishers:
       - devstack-logs
       - console-log
+
+
+- job-group:
+    name: devstack-gate-jobs
+    jobs:
+      - 'check-dg-tempest-dsvm-full'
+      - 'check-dg-tempest-dsvm-full-reexec'
 
 
 - job-group:
