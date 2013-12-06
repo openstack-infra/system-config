@@ -9,6 +9,7 @@
       - timestamps
 
     builders:
+      - gerrit-git-prep
       - devstack-checkout
       - shell: |
           #!/bin/bash -xe
@@ -17,7 +18,7 @@
 
           function pre_test_hook {
               # Install solum devstack integration
-              SOLUM_BASE=/opt/stack/new/solum/contrib/devstack
+              SOLUM_BASE=/home/jenkins/workspace/gate-solum-devstack-dsvm
               DEVSTACK_BASE=/opt/stack/new/devstack
               cp $SOLUM_BASE/lib/* $DEVSTACK_BASE/lib
               cp $SOLUM_BASE/extras.d/* $DEVSTACK_BASE/extras.d
