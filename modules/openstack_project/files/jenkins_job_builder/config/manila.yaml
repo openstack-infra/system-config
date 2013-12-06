@@ -14,6 +14,8 @@
           #!/bin/bash -xe
           export PYTHONUNBUFFERED=true
           export ENABLED_SERVICES=manila,m-api,m-shr,m-sch
+          export PROJECTS="stackforge/manila $PROJECTS"
+          export PROJECTS="stackforge/python-manilaclient $PROJECTS"
 
           function pre_test_hook {
               # Install Manila devstack integration
