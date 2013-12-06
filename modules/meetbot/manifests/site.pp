@@ -6,6 +6,7 @@ define meetbot::site(
   $server,
   $use_ssl,
   $vhost_name = $::fqdn
+  $vhost_extra = '',
 ) {
 
   $varlib = "/var/lib/meetbot/${name}"
