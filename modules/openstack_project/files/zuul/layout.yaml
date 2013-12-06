@@ -3469,7 +3469,16 @@ projects:
       - gate-python-ironicclient-python33
       - gate-python-ironicclient-pypy
     post:
+      - python-ironicclient-branch-tarball
       - python-ironicclient-coverage
+    pre-release:
+      - python-ironicclient-tarball
+    release:
+      - python-ironicclient-tarball:
+        - python-ironicclient-pypi-upload:
+          - post-mirror-python26
+          - post-mirror-python27
+          - post-mirror-python33
 
   - name: stackforge/inception
     check:
