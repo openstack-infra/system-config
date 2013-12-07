@@ -4,6 +4,7 @@ class openstack_project::nodepool(
   $mysql_root_password,
   $mysql_password,
   $nodepool_ssh_private_key = '',
+  $nodepool_template = 'nodepool.yaml.erb',
   $sysadmins = [],
   $statsd_host = '',
   $jenkins_api_user ='',
@@ -35,7 +36,7 @@ class openstack_project::nodepool(
     owner   => 'nodepool',
     group   => 'root',
     mode    => '0400',
-    content => template('openstack_project/nodepool/nodepool.yaml.erb'),
+    content => template("openstack_project/nodepool/${nodepool_template}"),
     require => [
       File['/etc/nodepool'],
       User['nodepool'],
