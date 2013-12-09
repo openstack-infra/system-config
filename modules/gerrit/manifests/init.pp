@@ -475,6 +475,7 @@ class gerrit(
                   File['/home/gerrit2/review_site/etc/secure.config']],
     notify    => Exec['gerrit-start'],
     unless    => '/usr/bin/test -f /etc/init.d/gerrit',
+    logoutput => true,
   }
 
   # If a new gerrit.war was just installed, run the Gerrit "init" command.
@@ -493,6 +494,7 @@ class gerrit(
                     File['/home/gerrit2/review_site/etc/secure.config']],
     notify      => Exec['gerrit-start'],
     onlyif      => '/usr/bin/test -f /etc/init.d/gerrit',
+    logoutput   => true,
   }
 
   # Symlink the init script.
