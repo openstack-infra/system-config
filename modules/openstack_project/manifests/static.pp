@@ -135,6 +135,7 @@ class openstack_project::static (
     ensure  => directory,
     recurse => true,
     purge   => true,
+    force   => true,
     owner   => 'root',
     group   => 'root',
     mode    => '0755',

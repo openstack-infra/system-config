@@ -295,6 +295,7 @@ class jenkins::slave(
     mode    => '0755',
     recurse => true,
     purge   => true,
+    force   => true,
     require => File['/usr/local/jenkins'],
     source  => 'puppet:///modules/jenkins/slave_scripts',
   }

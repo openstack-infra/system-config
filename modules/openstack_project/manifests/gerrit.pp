@@ -326,6 +326,7 @@ class openstack_project::gerrit (
       recurse => true,
       replace => true,
       purge   => true,
+      force   => true,
       source  => 'puppet:///modules/openstack_project/gerrit/acls',
       require => Class['::gerrit']
     }
