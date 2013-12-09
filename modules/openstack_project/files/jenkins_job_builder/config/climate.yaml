@@ -1,0 +1,35 @@
+- job:
+    name: gate-climate-devstack-dsvm
+    node: devstack-precise
+
+    wrappers:
+      - timeout:
+          timeout: 60
+          fail: true
+      - timestamps
+
+    builders:
+      - devstack-checkout
+      - shell: |
+          #!/bin/bash -xe
+          export PYTHONUNBUFFERED=true
+          export ENABLED_SERVICES=climate
+          export PROJECTS="stackforge/climate $PROJECTS"
+          export PROJECTS="stackforge/python-climateclient $PROJECTS"
+
+          function pre_test_hook {
+              # Install climate devstack integration
+              CLIMATE_BASE=/opt/stack/new/climate/contrib/devstack
+              DEVSTACK_BASE=/opt/stack/new/devstack
+              cp $CLIMATE_BASE/lib/* $DEVSTACK_BASE/lib
+              cp $CLIMATE_BASE/extras.d/* $DEVSTACK_BASE/extras.d
+          }
+          export -f pre_test_hook
+
+          cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
+          ./safe-devstack-vm-gate-wrap.sh
+      - link-logs
+
+    publishers:
+      - devstack-logs
+      - console-log
