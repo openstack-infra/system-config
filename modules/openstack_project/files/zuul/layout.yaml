@@ -1878,9 +1878,21 @@ projects:
 
   - name: stackforge/tooz
     check:
-      - gate-noop
+      - gate-tooz-pep8
+      - gate-tooz-python26
+      - gate-tooz-python27
+      - gate-tooz-python33
     gate:
-      - gate-noop
+      - gate-tooz-pep8
+      - gate-tooz-python26
+      - gate-tooz-python27
+      - gate-tooz-python33
+    post:
+      - tooz-branch-tarball
+    pre-release:
+      - tooz-tarball
+    release:
+      - tooz-tarball
 
   - name: stackforge/libra
     check:
