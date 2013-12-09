@@ -15,6 +15,7 @@
 <VirtualHost <%= scope.lookupvar("gerrit::vhost_name") %>:443>
   ServerName <%= scope.lookupvar("gerrit::vhost_name") %>
   ServerAdmin <%= scope.lookupvar("gerrit::serveradmin") %>
+  AllowEncodedSlashes NoDecode
 
   ErrorLog ${APACHE_LOG_DIR}/gerrit-ssl-error.log
 
@@ -57,6 +58,7 @@
 <% end -%>
   RewriteRule ^/(.*)$ http://localhost:8081/$1 [P]
 
+  ProxyPass / http://127.0.0.1:8081/ nocanon
   ProxyPassReverse / http://localhost:8081/
 
 <% if scope.lookupvar("gerrit::robots_txt_source") != "" -%>
