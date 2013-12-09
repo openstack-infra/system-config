@@ -334,10 +334,6 @@ jobs:
     voting: false
   - name: ^gate-puppet-.*-puppet-unit-3.0$
     voting: false
-  - name: ^gate-puppet-.*-puppet-unit-3.2$
-    voting: false
-  - name: ^gate-puppet-.*-puppet-unit-3.3$
-    voting: false
   - name: gate-tomograph-python33
     voting: false
 
