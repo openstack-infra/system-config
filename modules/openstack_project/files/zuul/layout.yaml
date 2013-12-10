@@ -2095,6 +2095,12 @@ projects:
     gate:
       - gate-noop
 
+  - name: openstack/trove-image-elements
+    check:
+      - gate-noop
+    gate:
+      - gate-noop
+
   - name: openstack/python-troveclient
     check:
       - gate-python-troveclient-requirements

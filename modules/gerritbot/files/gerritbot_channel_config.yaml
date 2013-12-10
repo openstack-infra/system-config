@@ -98,6 +98,7 @@ openstack-trove:
       - openstack/trove
       - openstack/trove-integration
       - openstack/python-troveclient
+      - openstack/trove-image-elements
       - openstack/database-api
     branches:
       - master
