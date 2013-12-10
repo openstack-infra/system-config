@@ -388,6 +388,7 @@ openstack-rally:
       - x-vrif-minus-2
     projects:
       - stackforge/rally
+      - stackforge/python-rallyclient
     branches:
       - master
 
