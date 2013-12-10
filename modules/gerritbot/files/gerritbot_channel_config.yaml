@@ -343,6 +343,8 @@ fuel-dev:
       - stackforge/fuel-main
       - stackforge/fuel-provision
       - stackforge/fuel-docs
+      - stackforge/fuel-library
+      - stackforge/fuel-devops
     branches:
       - master
 

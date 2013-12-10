@@ -3811,6 +3811,18 @@ projects:
     gate:
       - gate-noop
 
+  - name: stackforge/fuel-library
+    check:
+      - gate-noop
+    gate:
+      - gate-noop
+
+  - name: stackforge/fuel-devops
+    check:
+      - gate-noop
+    gate:
+      - gate-noop
+
   - name: stackforge/rally
     check:
       - gate-rally-pep8
