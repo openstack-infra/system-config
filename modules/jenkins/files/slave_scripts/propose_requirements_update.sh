@@ -67,7 +67,7 @@ EOF
     python update.py $PROJECT_DIR
 
     pushd $PROJECT_DIR
-    if ! git diff --quiet ; then
+    if ! git diff --exit-code HEAD ; then
         # Commit and review
         git_args="-a -F-"
         if [ -n "$change_id" ] ; then
