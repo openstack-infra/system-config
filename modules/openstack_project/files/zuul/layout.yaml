@@ -137,11 +137,9 @@ jobs:
     branch: ^(?!stable/grizzly).*$
     # only here until stable is votable, then merge
     # back to a single job
-  - name: gate-grenade-dsvm-stable
-    branch: ^(stable/grizzly).*$
+  - name: ^(gate|check)-grenade-dsvm-forward$
+    branch: ^(stable/).*$
     voting: false
-    # Remove when gate-grenade-dsvm-stable is
-    # merged into gate-grenade-dsvm
   - name: gate-grenade-noop
     branch: ^(stable/grizzly).*$
   - name: gate-devstack-bash8
@@ -683,7 +681,7 @@ projects:
       - gate-tempest-dsvm-neutron-large-ops
       - gate-grenade-dsvm
     experimental:
-      - gate-grenade-dsvm-stable
+      - gate-grenade-dsvm-forward
       - gate-devstack-dsvm-cells
     post:
       - cinder-branch-tarball
@@ -731,7 +729,7 @@ projects:
       - gate-tempest-dsvm-neutron-large-ops
       - gate-grenade-dsvm
     experimental:
-      - gate-grenade-dsvm-stable
+      - gate-grenade-dsvm-forward
       - gate-devstack-dsvm-cells
     post:
       - glance-branch-tarball
@@ -782,7 +780,7 @@ projects:
       - gate-tempest-dsvm-neutron-large-ops
       - gate-grenade-dsvm
     experimental:
-      - gate-grenade-dsvm-stable
+      - gate-grenade-dsvm-forward
       - gate-devstack-dsvm-cells
     post:
       - horizon-branch-tarball
@@ -853,7 +851,7 @@ projects:
       - gate-grenade-dsvm
       - gate-swift-dsvm-functional
     experimental:
-      - gate-grenade-dsvm-stable
+      - gate-grenade-dsvm-forward
       - gate-devstack-dsvm-cells
     post:
       - keystone-branch-tarball
@@ -904,7 +902,7 @@ projects:
       - gate-tempest-dsvm-neutron-large-ops
       - gate-grenade-dsvm
     experimental:
-      - gate-grenade-dsvm-stable
+      - gate-grenade-dsvm-forward
       - gate-tempest-dsvm-neutron-full
     post:
       - nova-branch-tarball
@@ -1177,7 +1175,7 @@ projects:
       - gate-tempest-dsvm-neutron-large-ops
       - gate-grenade-dsvm
     experimental:
-      - gate-grenade-dsvm-stable
+      - gate-grenade-dsvm-forward
       - gate-devstack-dsvm-cells
     post:
       - swift-branch-tarball
@@ -1279,7 +1277,7 @@ projects:
       - gate-tempest-dsvm-neutron-large-ops
       - gate-grenade-dsvm
     experimental:
-      - gate-grenade-dsvm-stable
+      - gate-grenade-dsvm-forward
       - gate-devstack-dsvm-cells
     post:
       - python-cinderclient-branch-tarball
@@ -1321,7 +1319,7 @@ projects:
       - gate-tempest-dsvm-neutron-large-ops
       - gate-grenade-dsvm
     experimental:
-      - gate-grenade-dsvm-stable
+      - gate-grenade-dsvm-forward
       - gate-devstack-dsvm-cells
     post:
       - python-glanceclient-branch-tarball
@@ -1363,7 +1361,7 @@ projects:
       - gate-tempest-dsvm-neutron-large-ops
       - gate-grenade-dsvm
     experimental:
-      - gate-grenade-dsvm-stable
+      - gate-grenade-dsvm-forward
       - gate-devstack-dsvm-cells
     post:
       - python-keystoneclient-branch-tarball
@@ -1408,7 +1406,7 @@ projects:
       - gate-tempest-dsvm-neutron-large-ops
       - gate-grenade-dsvm
     experimental:
-      - gate-grenade-dsvm-stable
+      - gate-grenade-dsvm-forward
       - gate-devstack-dsvm-cells
     post:
       - python-novaclient-branch-tarball
@@ -1485,7 +1483,7 @@ projects:
       - gate-tempest-dsvm-neutron-large-ops
       - gate-grenade-dsvm
     experimental:
-      - gate-grenade-dsvm-stable
+      - gate-grenade-dsvm-forward
       - gate-devstack-dsvm-cells
     post:
       - python-neutronclient-branch-tarball
@@ -1570,11 +1568,11 @@ projects:
     check:
       - gate-grenade-noop
       - check-grenade-dsvm
+      - check-grenade-dsvm-forward
     gate:
       - gate-grenade-noop
       - gate-grenade-dsvm
-    experimental:
-      - gate-grenade-dsvm-stable
+      - gate-grenade-dsvm-forward
 
   - name: openstack-dev/cookiecutter
     check:
@@ -1671,6 +1669,7 @@ projects:
       - gate-tempest-dsvm-large-ops
       - gate-tempest-dsvm-neutron-large-ops
       - check-grenade-dsvm
+      - check-grenade-dsvm-forward
       - check-swift-dsvm-functional
     gate:
       - gate-devstack-bash8
@@ -1680,10 +1679,11 @@ projects:
       - gate-tempest-dsvm-large-ops
       - gate-tempest-dsvm-neutron-large-ops
       - gate-grenade-dsvm
+      - gate-grenade-dsvm-forward
       - gate-swift-dsvm-functional
     experimental:
       - gate-tempest-dsvm-neutron-heat-slow
-      - gate-grenade-dsvm-stable
+      - gate-grenade-dsvm-forward
       - gate-devstack-dsvm-cells
 
   - name: openstack-infra/elastic-recheck
@@ -1726,7 +1726,7 @@ projects:
       - gate-grenade-dsvm
       - gate-swift-dsvm-functional
     experimental:
-      - gate-grenade-dsvm-stable
+      - gate-grenade-dsvm-forward
       - gate-devstack-dsvm-cells
 
   # This is not strictly necessary; there is currently a transitive
@@ -1773,7 +1773,7 @@ projects:
       - gate-grenade-dsvm
     experimental:
       - gate-tempest-dsvm-neutron-heat-slow
-      - gate-grenade-dsvm-stable
+      - gate-grenade-dsvm-forward
       - gate-devstack-dsvm-cells
       - gate-tempest-dsvm-neutron-full
     post:
