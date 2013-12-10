@@ -79,3 +79,10 @@ else
         git clean -x -f -d -q
     fi
 fi
+
+if [ -f .gitmodules ]
+then
+    git submodule init
+    git submodule sync
+    git submodule update --init
+fi
