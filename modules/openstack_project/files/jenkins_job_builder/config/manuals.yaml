@@ -3,16 +3,10 @@
     project-type: maven
     node: precise
 
-    prebuilders:
+    builders:
       - gerrit-git-prep
-
-    maven:
-      maven-name: Maven3
-      root-module:
-        group-id: org.openstack.docs
-        artifact-id: openstack-guide
-      root-pom: doc/openstack-ops/pom.xml
-      goals: 'clean generate-sources -B'
+      - openstack-doc-tools-checkout
+      - shell: "openstack-doc-tools-checkout/test.py --check-build"
 
     publishers:
       - console-log

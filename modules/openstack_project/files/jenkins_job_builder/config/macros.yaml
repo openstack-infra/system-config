@@ -225,6 +225,31 @@
           fi
 
 - builder:
+    name: openstack-doc-tools-checkout
+    builders:
+      - shell: |
+          #!/bin/bash -xe
+          if [[ ! -e openstack-doc-tools ]]; then
+              git clone https://review.openstack.org/p/openstack/openstack-doc-tools
+          else
+              cd openstack-doc-tools
+              git remote set-url origin https://review.openstack.org/p/openstack/openstack-doc-tools
+              git remote update
+              git reset --hard
+              if ! git clean -x -f ; then
+                  sleep 1
+                  git clean -x -f
+              fi
+              git checkout master
+              git reset --hard remotes/origin/master
+              if ! git clean -x -f ; then
+                  sleep 1
+                  git clean -x -f
+              fi
+              cd ..
+          fi
+
+- builder:
     name: update-pypi-mirror
     builders:
       - shell: |
