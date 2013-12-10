@@ -69,7 +69,11 @@ EOF
     pushd $PROJECT_DIR
     if ! git diff --quiet ; then
         # Commit and review
-        git commit -a -F- <<EOF
+        git_args="-a -F-"
+        if [ -n "$change_id" ] ; then
+            git_args="--amend $git_args"
+        fi
+        git commit $git_args <<EOF
 $COMMIT_MSG
 EOF
         git review -t $TOPIC $BRANCH
