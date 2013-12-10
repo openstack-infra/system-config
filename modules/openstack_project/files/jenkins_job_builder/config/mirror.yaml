@@ -5,7 +5,7 @@
 
     wrappers:
       - timeout:
-          timeout: 60
+          timeout: 90
           fail: true
       - timestamps
 
@@ -24,7 +24,7 @@
 
     wrappers:
       - timeout:
-          timeout: 60
+          timeout: 90
           fail: true
       - timestamps
 
