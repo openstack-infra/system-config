@@ -399,6 +399,7 @@ openstack-climate:
     projects:
       - stackforge/climate
       - stackforge/climate-nova
+      - stackforge/python-climateclient
     branches:
       - master
 
