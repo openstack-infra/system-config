@@ -55,7 +55,7 @@ EOF
 
     PROJECT_DIR=$(basename $PROJECT)
     rm -rf $PROJECT_DIR
-    git clone --depth=1 ssh://$USERNAME@review.openstack.org:29418/$PROJECT.git
+    git clone ssh://$USERNAME@review.openstack.org:29418/$PROJECT.git
 
     pushd $PROJECT_DIR
     git review -s
