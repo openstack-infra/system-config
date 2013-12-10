@@ -620,9 +620,11 @@ projects:
 
   - name: openstack-infra/storyboard
     check:
-      - gate-storyboard-pep8
+      - check-storyboard-pep8
+      - check-storyboard-python27
     gate:
       - gate-storyboard-pep8
+      - gate-storyboard-python27
     post:
       - storyboard-branch-tarball
     pre-release:
@@ -633,6 +635,8 @@ projects:
           - post-mirror-python26
           - post-mirror-python27
           - post-mirror-python33
+    experimental:
+      - check-storyboard-py26
 
   - name: openstack-infra/odsreg
     check:
