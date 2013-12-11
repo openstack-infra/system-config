@@ -27,6 +27,7 @@ class nodepool (
   $vhost_name = 'nodepool.openstack.org',
   $image_log_document_root = '/var/log/nodepool/image',
   $enable_image_log_via_http = false,
+  $jenkins_ssh_public_key = '',
 ) {
 
   class { 'mysql::server':
@@ -116,6 +117,14 @@ class nodepool (
     require => User['nodepool'],
   }
 
+  file { '/etc/nodepool/scripts':
+    ensure  => directory,
+    mode    => '0755',
+    owner   => 'nodepool',
+    group   => 'nodepool',
+    require => User['nodepool'],
+  }
+
   file { '/home/nodepool/.ssh':
     ensure  => directory,
     mode    => '0500',
@@ -149,6 +158,15 @@ class nodepool (
     group   => 'root',
     content => template('nodepool/nodepool.logging.conf.erb'),
     notify  => Service['nodepool'],
+  }
+
+  file { '/etc/nodepool/scripts/prepare_node_dev_devstack.sh':
+    ensure  => present,
+    mode    => '0755',
+    owner   => 'root',
+    group   => 'root',
+    content => template('nodepool/prepare_node_dev_devstack.sh.erb'),
+    require => File['/etc/nodepool/scripts'],
   }
 
   file { '/etc/init.d/nodepool':
