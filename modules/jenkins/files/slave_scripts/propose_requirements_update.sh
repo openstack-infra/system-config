@@ -58,6 +58,7 @@ EOF
     git clone ssh://$USERNAME@review.openstack.org:29418/$PROJECT.git
 
     pushd $PROJECT_DIR
+    git checkout $BRANCH
     git review -s
     if [ -n "$change_id" ] ; then
         git review -d $change_id
