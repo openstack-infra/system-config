@@ -25,6 +25,9 @@ class nodepool (
   $revision = 'master',
   $statsd_host = ''
 ) {
+  package { 'build-essential':
+    ensure => present,
+  }
 
   class { 'mysql::server':
     config_hash => {
