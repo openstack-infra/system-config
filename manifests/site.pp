@@ -399,7 +399,7 @@ node 'static.openstack.org' {
 }
 
 node 'nodepool.openstack.org' {
-  class { 'openstack_project::nodepool':
+  class { 'openstack_project::nodepool_host':
     mysql_password           => hiera('nodepool_mysql_password'),
     mysql_root_password      => hiera('nodepool_mysql_root_password'),
     nodepool_ssh_private_key => hiera('jenkins_ssh_private_key_contents'),
