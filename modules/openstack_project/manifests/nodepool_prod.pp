@@ -1,10 +1,9 @@
-# == Class: openstack_project::nodepool
+# == Class: openstack_project::nodepool_prod
 #
-class openstack_project::nodepool(
+class openstack_project::nodepool_prod(
   $mysql_root_password,
   $mysql_password,
   $nodepool_ssh_private_key = '',
-  $nodepool_template = 'nodepool.yaml.erb',
   $sysadmins = [],
   $statsd_host = '',
   $jenkins_api_user ='',
@@ -21,6 +20,7 @@ class openstack_project::nodepool(
   $tripleo_project ='',
   $image_log_document_root = '/var/log/nodepool/image',
   $enable_image_log_via_http = true,
+  $nodepool_template = 'nodepool.yaml.erb',
 ) {
   class { 'openstack_project::server':
     sysadmins                 => $sysadmins,
@@ -59,5 +59,4 @@ class openstack_project::nodepool(
     require => File['/etc/nodepool'],
     source  => 'puppet:///modules/openstack_project/nodepool/scripts',
   }
-
 }
