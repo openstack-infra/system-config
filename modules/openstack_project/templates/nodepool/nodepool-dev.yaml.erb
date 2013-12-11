@@ -35,9 +35,9 @@ targets:
   - name: jenkins-dev
     jenkins:
       url: 'https://jenkins-dev.openstack.org/'
-      user: '<%= jenkins_dev_api_user %>'
-      apikey: '<%= jenkins_dev_api_key %>'
-      credentials-id: '<%= jenkins_dev_credentials_id %>'
+      user: '<%= jenkins_api_user %>'
+      apikey: '<%= jenkins_api_key %>'
+      credentials-id: '<%= jenkins_credentials_id %>'
     images:
       - name: devstack-precise
         min-ready: 0

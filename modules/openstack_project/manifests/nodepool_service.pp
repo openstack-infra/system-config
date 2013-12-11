@@ -1,11 +1,10 @@
-# == Class: openstack_project::nodepool
+# == Class: openstack_project::nodepool_service
 #
-class openstack_project::nodepool(
+class openstack_project::nodepool_service(
   $mysql_root_password,
   $mysql_password,
   $nodepool_ssh_private_key = '',
   $nodepool_template = 'nodepool.yaml.erb',
-  $sysadmins = [],
   $statsd_host = '',
   $jenkins_api_user ='',
   $jenkins_api_key ='',
@@ -20,10 +19,6 @@ class openstack_project::nodepool(
   $tripleo_password ='',
   $tripleo_project ='',
 ) {
-  class { 'openstack_project::server':
-    sysadmins                 => $sysadmins,
-  }
-
   class { '::nodepool':
     mysql_root_password      => $mysql_root_password,
     mysql_password           => $mysql_password,
@@ -54,5 +49,4 @@ class openstack_project::nodepool(
     require => File['/etc/nodepool'],
     source  => 'puppet:///modules/openstack_project/nodepool/scripts',
   }
-
 }
