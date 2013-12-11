@@ -31,7 +31,7 @@ pipelines:
           approval:
             - approved: 1
         - event: comment-added
-          comment_filter: (?i)^\s*reverify(( (?:bug|lp)[\s#:]*(\d+))|( no bug))\s*$
+          comment_filter: (?i)^\s*reverify( (?:bug|lp)[\s#:]*(\d+))\s*$
     start:
       gerrit:
         verified: 0
