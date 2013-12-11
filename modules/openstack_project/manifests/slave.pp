@@ -3,7 +3,7 @@
 class openstack_project::slave (
   $bare = false,
   $certname = $::fqdn,
-  $ssh_key = '',
+  $ssh_key = $openstack_project::jenkins_ssh_key,
   $sysadmins = [],
   $python3 = false,
   $include_pypy = false
