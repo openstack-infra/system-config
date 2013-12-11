@@ -3994,3 +3994,19 @@ projects:
       - gate-noop
     gate:
       - gate-noop
+
+  - name: stackforge/entropy
+    check:
+      - gate-entropy-docs
+      - gate-entropy-pep8
+      - gate-entropy-python26
+      - gate-entropy-python27
+      - gate-entropy-python33
+    gate:
+      - gate-entropy-docs
+      - gate-entropy-pep8
+      - gate-entropy-python26
+      - gate-entropy-python27
+      - gate-entropy-python33
+    post:
+      - entropy-coverage
