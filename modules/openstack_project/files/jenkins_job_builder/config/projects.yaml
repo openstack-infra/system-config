@@ -295,6 +295,7 @@
 
     jobs:
       - gate-{name}-pep8
+      - gate-{name}-docs
       - gate-{name}-python27
 
 
