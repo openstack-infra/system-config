@@ -63,17 +63,36 @@ class statusbot(
   }
 
   file { '/var/log/statusbot':
-    ensure => directory,
-    owner  => 'statusbot',
-    group  => 'statusbot',
-    mode   => '0775',
+    ensure  => directory,
+    owner   => 'statusbot',
+    group   => 'statusbot',
+    mode    => '0775',
+    require => User['statusbot'],
   }
 
   file { '/var/run/statusbot':
-    ensure => directory,
-    owner  => 'statusbot',
-    group  => 'statusbot',
-    mode   => '0775',
+    ensure  => directory,
+    owner   => 'statusbot',
+    group   => 'statusbot',
+    mode    => '0775',
+    require => User['statusbot'],
+  }
+
+  file { '/var/lib/statusbot':
+    ensure  => directory,
+    owner   => 'statusbot',
+    group   => 'statusbot',
+    mode    => '0775',
+    require => User['statusbot'],
+  }
+
+  file { '/var/lib/statusbot/www':
+    ensure  => directory,
+    owner   => 'statusbot',
+    group   => 'statusbot',
+    mode    => '0775',
+    require => [File['/var/lib/statusbot'],
+                User['statusbot']]
   }
 
   file { '/etc/statusbot/logging.config':
