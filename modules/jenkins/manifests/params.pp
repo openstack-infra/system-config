@@ -24,6 +24,7 @@ class jenkins::params {
       $librrd_dev_package = 'rrdtool-devel'
       # packages needed by document translation
       $gnome_doc_package = 'gnome-doc-utils'
+      $libtidy_package = 'libtidy-0.99-0'
       # for keystone ldap auth integration
       $libsasl_dev = 'cyrus-sasl-devel'
       $mysql_dev_package = 'mysql-devel'
@@ -87,6 +88,7 @@ class jenkins::params {
       $librrd_dev_package = 'librrd-dev'
       # packages needed by document translation
       $gnome_doc_package = 'gnome-doc-utils'
+      $libtidy_package = 'libtidy'
       # for keystone ldap auth integration
       $libsasl_dev = 'libsasl2-dev'
       $mysql_dev_package = 'libmysqlclient-dev'
