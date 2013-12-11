@@ -313,6 +313,7 @@ openstack-swift:
 
 openstack-state-management:
     events:
+      - patchset-created
       - change-merged
       - x-vrif-minus-2
     projects:
