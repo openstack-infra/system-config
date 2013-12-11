@@ -291,11 +291,14 @@
     name: elastic-recheck
     github-org: openstack-infra
     node: precise
+    doc-publisher-site: docs.openstack.org
     tarball-site: tarballs.openstack.org
 
     jobs:
       - gate-{name}-pep8
+      - gate-{name}-docs
       - gate-{name}-python27
+      - '{name}-docs'
 
 
 - project:
