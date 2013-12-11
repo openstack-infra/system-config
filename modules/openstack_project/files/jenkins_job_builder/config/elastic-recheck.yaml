@@ -1,0 +1,19 @@
+- job:
+    name: elastic-recheck-docs
+    concurrent: false
+    node: precise
+
+    builders:
+      - gerrit-git-prep
+      - docs:
+          github-org: '{github-org}'
+          project: '{name}'
+
+    publishers:
+      - ftp:
+          site: docs.openstack.org
+          source: 'doc/build/html/**'
+          target: 'infra/elastic-recheck/'
+          remove-prefix: 'doc/build/html'
+          excludes: ''
+      - console-log

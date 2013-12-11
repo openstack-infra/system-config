@@ -2225,10 +2225,14 @@ projects:
   - name: openstack-infra/elastic-recheck
     check:
       - gate-elastic-recheck-pep8
+      - gate-elastic-recheck-docs
       - gate-elastic-recheck-python27
     gate:
       - gate-elastic-recheck-pep8
+      - gate-elastic-recheck-docs
       - gate-elastic-recheck-python27
+    post:
+      - elastic-recheck-docs
 
   - name: openstack-infra/gear
     template:
