@@ -56,29 +56,32 @@ EOF
     PROJECT_DIR=$(basename $PROJECT)
     rm -rf $PROJECT_DIR
     git clone ssh://$USERNAME@review.openstack.org:29418/$PROJECT.git
-
     pushd $PROJECT_DIR
-    git checkout $BRANCH
-    git review -s
-    if [ -n "$change_id" ] ; then
-        git review -d $change_id
-    fi
-    popd
 
-    python update.py $PROJECT_DIR
-
-    pushd $PROJECT_DIR
-    if ! git diff --exit-code HEAD ; then
-        # Commit and review
-        git_args="-a -F-"
+    # make sure the project even has this branch
+    if git branch -a | grep -q "^  remotes/origin/$BRANCH$" ; then
+        git checkout $BRANCH
+        git review -s
         if [ -n "$change_id" ] ; then
-            git_args="--amend $git_args"
+            git review -d $change_id
         fi
-        git commit $git_args <<EOF
+        popd
+
+        python update.py $PROJECT_DIR
+
+        pushd $PROJECT_DIR
+        if ! git diff --exit-code HEAD ; then
+            # Commit and review
+            git_args="-a -F-"
+            if [ -n "$change_id" ] ; then
+                git_args="--amend $git_args"
+            fi
+            git commit $git_args <<EOF
 $COMMIT_MSG
 EOF
-        git review -t $TOPIC $BRANCH
+            git review -t $TOPIC $BRANCH
+        fi
     fi
-    popd
 
+    popd
 done
