@@ -21,7 +21,7 @@ class openstack_project::eavesdrop (
   include meetbot
 
   $vhost_extra = '
-  <Location /var/lib/statusbot/www >
+  <Location /alert>
     Header set Access-Control-Allow-Origin "*"
   </Location>
   '
