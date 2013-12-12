@@ -51,6 +51,7 @@ class openstack_project::eavesdrop (
         '#savanna',
         '#storyboard',
         '#tripleo',
+        '#murano',
     ],
   }
 
