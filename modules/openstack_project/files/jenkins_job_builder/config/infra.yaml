@@ -58,3 +58,16 @@
     publishers:
       - console-log
       - upload-sphinx-draft
+
+
+- job:
+    name: check-projects-yaml-alphabetized
+    node: bare-precise
+
+    builders:
+      - gerrit-git-prep
+      - shell: |
+          /usr/local/jenkins/slave_scripts/check_projects_yaml_alphabetized.sh
+
+    publishers:
+      - console-log
