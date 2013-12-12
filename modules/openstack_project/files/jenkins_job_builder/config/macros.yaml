@@ -182,10 +182,10 @@
       - shell: |
           #!/bin/bash -xe
           if [[ ! -e devstack-gate ]]; then
-              git clone https://review.openstack.org/p/openstack-infra/devstack-gate
+              git clone git://git.openstack.org/openstack-infra/devstack-gate
           else
               cd devstack-gate
-              git remote set-url origin https://review.openstack.org/p/openstack-infra/devstack-gate
+              git remote set-url origin git://git.openstack.org/openstack-infra/devstack-gate
               git remote update
               git reset --hard
               if ! git clean -x -f ; then
