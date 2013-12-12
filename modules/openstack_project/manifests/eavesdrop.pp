@@ -35,6 +35,7 @@ class openstack_project::eavesdrop (
     vhost_extra => $vhost_extra,
     channels    => [
         '#heat',
+        '#murano',
         '#openstack',
         '#openstack-ceilometer',
         '#openstack-climate',
