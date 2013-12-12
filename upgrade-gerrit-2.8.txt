@@ -1,0 +1,51 @@
+Some thoughts about new features in new Gerrit version (temporary) put here
+(because i haven't thought about any better place):
+
+* Gerrit 2.8 ships 4 core plugins, that must be installed to be full
+  functional. Particularly replication and download-cmmands plugin are vital.
+  There are number of ways how those plugins can be installed. Unattended mode is
+  supported with --batch and --install-plugin foo option. This option must be
+  provided multiply time to install all core plugins.
+
+* There are also optional plugins that may be considered to be deployed:
+  ** avatar plugin: new change screen and side by side view have integrated
+  avatar images (see upstream gerrit). It only works if one of avatar plugin
+  is installed.
+  ** work-in-progress plugin (gerrit core must be patched, though).
+  ** monitoring plugin: based on javamelody.
+  ** reviewer-by-blame plugin: it scan the diff with git blame command for
+  changed lines in the change and add automagically reviewers who last time
+  touched the changes lines in the change.
+  ** reviewers plugin, where the reviewer can be hard coded into configuration
+  (though i am thinking to add some dynamic configuration options how to add
+  reviewers, i. e. per branch, per project, etc.) and add these reviewers
+  automagically when the change is uploaded.
+
+* Gerrit 2.8 removed deprecated SSH approve command. SSH review command must
+  be used instead. If Zull still uses approve, it must be changed to
+  review. If Jenkins trigger plugin is used, it must be changed there.
+
+* New change screen implements now automatic refresh mode for open changes,
+  that is activated per default and controlled per: `change.updateDelay`
+  config property:
+
+How often in seconds the web interface should poll for updates to the currently open change. The poller relies on the client’s browser cache to use If-Modified-Since and respect 304 Not Modified HTTP responses. This allows for fast polls, often under 8 milliseconds.
+
+With a configured 30 second delay a server with 4900 active users will typically need to dedicate 1 CPU to the update check. 4900 users divided by an average delay of 30 seconds is 163 requests arriving per second. If requests are served at 6 ms response time, 1 CPU is necessary to keep up with the update request traffic. On a smaller user base of 500 active users, the default 30 second delay is only 17 requests per second and requires 10% CPU.
+
+If 0 the update polling is disabled.
+
+Default is 30 seconds.
+
+* Since Gerrit 2.6 label configuration is moved from data base to
+  project.config of All-Projects project.
+
+* One of the very useful features in Gerrit 2.8 is the option to configure a
+  label to be copied forward when a new patch set is uploaded that is a
+  trivial rebase. This option is controlled by two configuration options:
+  https://gerrit-review.googlesource.com/Documentation/config-labels.html#label_copyAllScoresOnTrivialRebase
+  https://gerrit-review.googlesource.com/Documentation/config-labels.html#label_copyAllScoresIfNoCodeChange
+  The latest option is activated when only commit message was changed. To
+  activate them, project.config must be adjusted after the migration to gerrit
+  2.8.
+
