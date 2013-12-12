@@ -1800,6 +1800,9 @@ projects:
       - gate-grenade-dsvm-forward
       - gate-devstack-dsvm-cells
       - gate-tempest-dsvm-neutron-full
+      - gate-tempest-dsvm-savanna-full
+      - gate-tempest-dsvm-savanna-postgres-full
+      - gate-tempest-dsvm-savanna-neutron
     post:
       - tempest-docs
       - tempest-branch-tarball
