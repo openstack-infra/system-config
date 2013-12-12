@@ -75,7 +75,7 @@ class elastic_recheck::bot (
     enable    => true,
     subscribe => [
       File['/etc/elastic-recheck/elastic-recheck.conf'],
-      Exec['::elastic_recheck::install_elastic-recheck'],
+      Exec['install_elastic-recheck'],
     ],
     require   => [
       Class['elastic_recheck'],
