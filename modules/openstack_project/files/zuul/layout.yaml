@@ -3784,6 +3784,13 @@ projects:
           - post-mirror-python27
           - post-mirror-python33
 
+
+  - name: openstack/gce-api
+    check:
+      - gate-noop
+    gate:
+      - gate-noop
+
   - name: openstack/governance
     check:
       - gate-noop
