@@ -180,8 +180,8 @@ Migrate the manifests:
     covers how it gets populated when your infrastructure is working.
 
   * Ditto projects.yaml and projects.ini, which is passed in from your
-    review.pp - something like $PROJECT/templates/review.projects.yaml.erb
-    and $PROJECT/templates/review-dev.projects.yaml.erb
+    review.pp - something like $PROJECT/files/review.projects.yaml and
+    $PROJECT/templates/review-dev.projects.yaml.erb
 
   * set_agreements is a database migration tool for gerrit CLAs; not needed
     unless you have CLAs.

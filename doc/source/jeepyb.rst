@@ -21,7 +21,7 @@ At a Glance
   * :file:`modules/openstack_project/manifests/review_dev.pp`
 :Configuration:
   * :file:`modules/openstack_project/templates/review.projects.ini.erb`
-  * :file:`modules/openstack_project/templates/review.projects.yaml.erb`
+  * :file:`modules/openstack_project/files/review.projects.yaml`
   * :file:`modules/openstack_project/files/pypi-mirror.yaml`
 :Projects:
   * https://git.openstack.org/cgit/openstack-infra/jeepyb
@@ -38,13 +38,17 @@ git replica on the Gerrit host, configure the project Access Controls,
 and create new groups in Gerrit.
 
 OpenStack Gerrit projects are configured in the
-:file:`modules/openstack_project/templates/review.projects.yaml.erb`.
+:file:`modules/openstack_project/files/review.projects.yaml`.
 file.  When this file is updated, ``manage-projects`` is run
 automatically.
 
 The global configuration data needed for ``manage-projects`` to know how to
+<<<<<<< HEAD
 connect to things or how to operate is in
 :file:`modules/openstack_project/templates/review.projects.ini.erb`.
+=======
+connect to things or how to operate is in :file:`modules/openstack_project/templates/review.projects.ini.erb`.
+>>>>>>> 91e6681... Finish the projects.yaml.erb rename
 
 #. Config values::
 
