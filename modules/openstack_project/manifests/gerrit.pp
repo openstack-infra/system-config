@@ -275,10 +275,10 @@ class openstack_project::gerrit (
     require => Class['::gerrit'],
   }
 
-  file { '/home/gerrit2/review_site/hooks/subscriber_map.yaml':
+  file { '/home/gerrit2/review_site/hooks/notify_impact.yaml':
     ensure  => present,
     source  =>
-      'puppet:///modules/openstack_project/gerrit/subscriber_map.yaml',
+      'puppet:///modules/openstack_project/gerrit/notify_impact.yaml',
     require => Class['::gerrit'],
   }
 
