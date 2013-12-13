@@ -22,7 +22,7 @@ import urllib2
 from common import run_local
 
 URL = ('http://git.openstack.org/cgit/openstack-infra/config/plain/'
-       'modules/openstack_project/templates/review.projects.yaml.erb')
+       'modules/openstack_project/files/review.projects.yaml')
 PROJECT_RE = re.compile('^-?\s+project:\s+(.*)$')
 
 
