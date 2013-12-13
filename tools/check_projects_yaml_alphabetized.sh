@@ -7,13 +7,7 @@ export TMPDIR=`/bin/mktemp -d`
 trap "rm -rf $TMPDIR" EXIT
 
 pushd $TMPDIR
-
-if [ -f $OLDPWD/modules/openstack_project/templates/review.projects.yaml.erb ]
-then
-    PROJECTS_LIST=$OLDPWD/modules/openstack_project/templates/review.projects.yaml.erb
-else
-    PROJECTS_LIST=$OLDPWD/modules/openstack_project/files/review.projects.yaml
-fi
+PROJECTS_LIST=$OLDPWD/modules/openstack_project/files/review.projects.yaml
 
 sed -e '/^- project: /!d' -e 's/^- project: //' $PROJECTS_LIST > projects_list
 

@@ -1,16 +1,3 @@
-- homepage: http://openstack.org
-  acl-dir: /home/gerrit2/acls
-  local-git-dir: <%= local_git_dir %>
-  gerrit-host: <%= fqdn %>
-  gerrit-user: openstack-project-creator
-  gerrit-committer: OpenStack Project Creator <openstack-infra@lists.openstack.org>
-  gerrit-key: <%= ssh_project_key %>
-  github-config: /etc/github/github-projects.secure.config
-  has-wiki: False
-  has-issues: False
-  has-pull-requests: False
-  has-downloads: False
----
 - project: openstack-dev/cookiecutter
   description: Cookiecutter Template for new OpenStack projects
   upstream: git://github.com/emonty/cookiecutter-openstack.git

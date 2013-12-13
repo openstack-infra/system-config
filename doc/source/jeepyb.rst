@@ -20,7 +20,8 @@ At a Glance
   * :file:`modules/openstack_project/manifests/review.pp`
   * :file:`modules/openstack_project/manifests/review_dev.pp`
 :Configuration:
-  * :file:`modules/openstack_project/templates/review.projects.yaml.erb`
+  * :file:`modules/openstack_project/templates/review.projects.ini.erb`
+  * :file:`modules/openstack_project/files/review.projects.yaml`
   * :file:`modules/openstack_project/files/pypi-mirror.yaml`
 :Projects:
   * https://git.openstack.org/cgit/openstack-infra/jeepyb
@@ -36,25 +37,28 @@ project in Gerrit, create the new project on Github, create a local
 git replica on the Gerrit host, configure the project Access Controls,
 and create new groups in Gerrit.
 
+The global configuration data needed for ``manage-projects`` to know how to
+connect to things or how to operate is in
+:file:`modules/openstack_project/templates/review.projects.ini.erb`.
+
+#. Config values::
+
+     [projects]
+     homepage=http://example.org
+     local-git-dir=/var/lib/git
+     gerrit-host=review.example.org
+     gerrit-user=example-project-creator
+     gerrit-key=/home/gerrit2/.ssh/example_project_id_rsa
+     github-config=/etc/github/github-projects.secure.config
+     has-wiki=False
+     has-issues=False
+     has-pull-requests=False
+     has-downloads=False
+
 OpenStack Gerrit projects are configured in the
-:file:`modules/openstack_project/templates/review.projects.yaml.erb`.
+:file:`modules/openstack_project/files/review.projects.yaml`.
 file.  When this file is updated, ``manage-projects`` is run
-automatically.  This file contains two sections, the first is a set of
-default config values that each project can override, and the second
-is a list of projects (each may contain their own overrides).
-
-#. Config default values::
-
-     - homepage: http://example.org
-       local-git-dir: /var/lib/git
-       gerrit-host: review.example.org
-       gerrit-user: example-project-creator
-       gerrit-key: /home/gerrit2/.ssh/example_project_id_rsa
-       github-config: /etc/github/github-projects.secure.config
-       has-wiki: False
-       has-issues: False
-       has-pull-requests: False
-       has-downloads: False
+automatically.
 
 #. Project definition::
 
@@ -69,7 +73,7 @@ is a list of projects (each may contain their own overrides).
 The above config gives puppet and its related scripts enough information
 to create new projects, but not enough to add access controls to each
 project. To add access control you need to have have an ``acl-config``
-option for the project in ``review.projects.yaml.erb`` file. That option
+option for the project in ``review.projects.yaml`` file. That option
 should have a value that is a path to the ``project.config`` for that
 project.
 
@@ -99,7 +103,7 @@ a single project you will want to do the following:
              mergeContent = true
 
 #. Add a project entry for the project in
-   ``modules/openstack_project/templates/review.projects.yaml.erb``.::
+   ``modules/openstack_project/files/review.projects.yaml``.::
 
      - project: openstack/project-name
        acl-config: /home/gerrit2/acls/project-name.config
