@@ -49,11 +49,10 @@ with simple changes to the openstack-infra/config repository. To start make
 sure you have cloned the openstack-infra/config repository
 ``git clone https://git.openstack.org/openstack-infra/config``.
 
-First you need to add your StackForge project to the master project
-list. Edit
-``modules/openstack_project/templates/review.projects.yaml.erb``
-and add a new section for your project in alphabetical order within the file.
-It should look something like::
+First you need to add your StackForge project to the master project list.
+Edit ``modules/openstack_project/files.projects.yaml`` and add a new section
+for your project in alphabetical order within the file.  It should look
+something like::
 
   - project: stackforge/project-name
     description: Latest and greatest cloud stuff.
