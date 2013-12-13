@@ -24,6 +24,7 @@ At a Glance
   * :file:`modules/openstack_project/manifests/review.pp`
   * :file:`modules/openstack_project/manifests/review_dev.pp`
 :Configuration:
+  * :file:`modules/openstack_project/templates/review.projects.ini.erb`
   * :file:`modules/openstack_project/templates/review.projects.yaml.erb`
 :Projects:
   * http://code.google.com/p/gerrit/
@@ -136,7 +137,7 @@ account name and add ssh keys - you'll need those.
 Once you've created your groups you should create the
 ``openstack-project-creator`` account by hand (the account name is
 referenced from
-:file:`modules/openstack_project/templates/review.projects.yaml.erb`)
+:file:`modules/openstack_project/templates/review.projects.ini.erb`)
 using::
 
   cat $pubkey | ssh -p 29418 $USER@$HOST gerrit create-account \
