@@ -3546,6 +3546,12 @@ projects:
     gate:
       - gate-noop
 
+  - name: stackforge/php-client
+    check:
+      - gate-noop
+    gate:
+      - gate-noop
+
   - name: stackforge/barbican
     check:
       - gate-barbican-pep8
