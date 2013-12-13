@@ -3284,6 +3284,12 @@ projects:
           - post-mirror-python33
       - hook-pecan-rtfd
 
+  - name: stackforge/php-client
+    check:
+      - gate-noop
+    gate:
+      - gate-noop
+
   - name: stackforge/puppet-ceilometer
     check:
       - gate-puppet-ceilometer-puppet-lint
