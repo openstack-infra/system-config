@@ -43,12 +43,8 @@ file.  When this file is updated, ``manage-projects`` is run
 automatically.
 
 The global configuration data needed for ``manage-projects`` to know how to
-<<<<<<< HEAD
 connect to things or how to operate is in
 :file:`modules/openstack_project/templates/review.projects.ini.erb`.
-=======
-connect to things or how to operate is in :file:`modules/openstack_project/templates/review.projects.ini.erb`.
->>>>>>> 91e6681... Finish the projects.yaml.erb rename
 
 #. Config values::
 
@@ -77,7 +73,7 @@ connect to things or how to operate is in :file:`modules/openstack_project/templ
 The above config gives puppet and its related scripts enough information
 to create new projects, but not enough to add access controls to each
 project. To add access control you need to have have an ``acl-config``
-option for the project in ``review.projects.yaml.erb`` file. That option
+option for the project in ``review.projects.yaml`` file. That option
 should have a value that is a path to the ``project.config`` for that
 project.
 
@@ -107,7 +103,7 @@ a single project you will want to do the following:
              mergeContent = true
 
 #. Add a project entry for the project in
-   ``modules/openstack_project/templates/review.projects.yaml.erb``.::
+   ``modules/openstack_project/files/review.projects.yaml``.::
 
      - project: openstack/project-name
        acl-config: /home/gerrit2/acls/project-name.config

@@ -181,7 +181,7 @@ Migrate the manifests:
 
   * Ditto projects.yaml and projects.ini, which is passed in from your
     review.pp - something like $PROJECT/files/review.projects.yaml and
-    $PROJECT/templates/review-dev.projects.yaml.erb
+    $PROJECT/templates/review.projects.ini.erb
 
   * set_agreements is a database migration tool for gerrit CLAs; not needed
     unless you have CLAs.
