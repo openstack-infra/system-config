@@ -159,6 +159,7 @@
   group: openstack-api-site
 - project: openstack/ceilometer
 - project: openstack/cinder
+  docimpact-group: openstack-manuals
 - project: openstack/compute-api
   group: openstack-api-site
 - project: openstack/database-api
@@ -174,6 +175,7 @@
   description: Common scheduler for OpenStack.
   upstream: git://github.com/n0ano/gantt.git
 - project: openstack/glance
+  docimpact-group: openstack-manuals
 - project: openstack/governance
   description: Openstack Technical Committee Decisions
 - project: openstack/heat
@@ -181,6 +183,7 @@
   upstream: git://github.com/heat-api/heat-cfntools.git
 - project: openstack/heat-templates
 - project: openstack/horizon
+  docimpact-group: openstack-manuals
 - project: openstack/identity-api
   group: openstack-api-site
 - project: openstack/image-api
@@ -189,11 +192,14 @@
   description: A service for managing and provisioning Bare Metal servers.
   upstream: git://github.com/devananda/ironic.git
 - project: openstack/keystone
+  docimpact-group: openstack-manuals
 - project: openstack/marconi
 - project: openstack/netconn-api
   group: openstack-api-site
 - project: openstack/neutron
+  docimpact-group: openstack-manuals
 - project: openstack/nova
+  docimpact-group: openstack-manuals
 - project: openstack/object-api
   group: openstack-api-site
 - project: openstack/openstack
@@ -219,36 +225,47 @@
   description: Restart services and coordinate data migration on Heat config changes.
 - project: openstack/oslo-incubator
   group: oslo
+  docimpact-group: openstack-manuals
   description: Part of OpenStack's Oslo project. New Oslo APIs go through an incubation phase in this repository before being released as part of a proper Python library.
 - project: openstack/oslo.config
+  docimpact-group: openstack-manuals
 - project: openstack/oslo.messaging
+  docimpact-group: openstack-manuals
   upstream: git://github.com/markmc/oslo.messaging.git
 - project: openstack/oslo.rootwrap
+  docimpact-group: openstack-manuals
   upstream: git://github.com/ttx/oslo.rootwrap.git
 - project: openstack/oslo.sphinx
+  docimpact-group: openstack-manuals
   description: Theme and utilities for Sphinx documentation tool
 - project: openstack/oslo.version
+  docimpact-group: openstack-manuals
   upstream: git://github.com/emonty/oslo.version.git
 - project: openstack/python-ceilometerclient
   upstream: git://github.com/asalkeld/python-ceilometerclient.git
 - project: openstack/python-cinderclient
+  docimpact-group: openstack-manuals
 - project: openstack/python-ganttclient
   description: Client code for the common scheduler for OpenStack.
   acl-config: /home/gerrit2/acls/openstack/gantt.config
   upstream: git://github.com/n0ano/ganttclient.git
 - project: openstack/python-glanceclient
+  docimpact-group: openstack-manuals
 - project: openstack/python-heatclient
 - project: openstack/python-ironicclient
   description: A python client implementing the Ironic API.
 - project: openstack/python-keystoneclient
 - project: openstack/python-marconiclient
 - project: openstack/python-neutronclient
+  docimpact-group: openstack-manuals
 - project: openstack/python-novaclient
+  docimpact-group: openstack-manuals
 - project: openstack/python-openstackclient
 - project: openstack/python-savannaclient
   description: Python bindings and CLI to Savanna.
   acl-config: /home/gerrit2/acls/openstack/savanna.config
 - project: openstack/python-swiftclient
+  docimpact-group: openstack-manuals
 - project: openstack/python-troveclient
 - project: openstack/python-tuskarclient
   description: Python bindings and CLI to Tuskar.
@@ -270,6 +287,7 @@
   description: Disk image elements for Savanna
   acl-config: /home/gerrit2/acls/openstack/savanna.config
 - project: openstack/swift
+  docimpact-group: openstack-manuals
 - project: openstack/swift-bench
   description: Benchmarking tool for OpenStack Swift
   upstream: git://github.com/jeblair/swift-bench.git
@@ -358,60 +376,70 @@
   acl-config: /home/gerrit2/acls/stackforge/congress.config
 - project: stackforge/cookbook-openstack-block-storage
   group: openstack-chef
+  docimpact-group: openstack-chef
   description: Chef Cookbook - OpenStack Block Storage
   acl-config: /home/gerrit2/acls/stackforge/chef-cookbooks.config
   options:
     - direct-release
 - project: stackforge/cookbook-openstack-common
   group: openstack-chef
+  docimpact-group: openstack-chef
   description: Chef Cookbook - common OpenStack configuration
   acl-config: /home/gerrit2/acls/stackforge/chef-cookbooks.config
   options:
     - direct-release
 - project: stackforge/cookbook-openstack-compute
   group: openstack-chef
+  docimpact-group: openstack-chef
   description: Chef Cookbook - OpenStack Compute
   acl-config: /home/gerrit2/acls/stackforge/chef-cookbooks.config
   options:
     - direct-release
 - project: stackforge/cookbook-openstack-dashboard
   group: openstack-chef
+  docimpact-group: openstack-chef
   description: Chef Cookbook - OpenStack Dashboard
   acl-config: /home/gerrit2/acls/stackforge/chef-cookbooks.config
   options:
     - direct-release
 - project: stackforge/cookbook-openstack-identity
   group: openstack-chef
+  docimpact-group: openstack-chef
   description: Chef Cookbook - OpenStack Identity
   acl-config: /home/gerrit2/acls/stackforge/chef-cookbooks.config
   options:
     - direct-release
 - project: stackforge/cookbook-openstack-image
   group: openstack-chef
+  docimpact-group: openstack-chef
   description: Chef Cookbook - OpenStack Image
   acl-config: /home/gerrit2/acls/stackforge/chef-cookbooks.config
   options:
     - direct-release
 - project: stackforge/cookbook-openstack-metering
   group: openstack-chef
+  docimpact-group: openstack-chef
   description: Chef Cookbook - OpenStack Metering
   acl-config: /home/gerrit2/acls/stackforge/chef-cookbooks.config
   options:
     - direct-release
 - project: stackforge/cookbook-openstack-network
   group: openstack-chef
+  docimpact-group: openstack-chef
   description: Chef Cookbook - OpenStack Network
   acl-config: /home/gerrit2/acls/stackforge/chef-cookbooks.config
   options:
     - direct-release
 - project: stackforge/cookbook-openstack-object-storage
   group: openstack-chef
+  docimpact-group: openstack-chef
   description: Chef Cookbook - OpenStack Object Storage
   acl-config: /home/gerrit2/acls/stackforge/chef-cookbooks.config
   options:
     - direct-release
 - project: stackforge/cookbook-openstack-ops-database
   group: openstack-chef
+  docimpact-group: openstack-chef
   description: Chef Cookbook - Support Cookbook for Database
   acl-config: /home/gerrit2/acls/stackforge/chef-cookbooks.config
   upstream: git://github.com/mattray/cookbook-openstack-ops-database.git
@@ -419,6 +447,7 @@
     - direct-release
 - project: stackforge/cookbook-openstack-ops-messaging
   group: openstack-chef
+  docimpact-group: openstack-chef
   description: Chef Cookbook - Support Cookbook for Messaging
   acl-config: /home/gerrit2/acls/stackforge/chef-cookbooks.config
   upstream: git://github.com/mattray/cookbook-openstack-ops-messaging.git
@@ -426,6 +455,7 @@
     - direct-release
 - project: stackforge/cookbook-openstack-orchestration
   group: openstack-chef
+  docimpact-group: openstack-chef
   description: Chef Cookbook - OpenStack Orchestration
   acl-config: /home/gerrit2/acls/stackforge/chef-cookbooks.config
   options:
@@ -557,6 +587,7 @@
   description: Common Automation Framework Engine. Core driver for CloudCAFE
 - project: stackforge/openstack-chef-repo
   group: openstack-chef
+  docimpact-group: openstack-chef
   description: Example Chef Repo that sets up an OpenStack Deployment
   acl-config: /home/gerrit2/acls/stackforge/chef-cookbooks.config
   options:
@@ -715,6 +746,8 @@
 - project: stackforge/tooz
   description: Coordinate distributed systems.
 - project: stackforge/turbo-hipster
+  group: turbo-hipster
+  docimpact-group: turbo-hipster
   description: A generic zuul worker using the gearman protocol.
   upstream: git://github.com/rcbau/turbo-hipster.git
 - project: stackforge/wsme
