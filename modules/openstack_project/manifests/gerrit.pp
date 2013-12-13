@@ -314,7 +314,7 @@ class openstack_project::gerrit (
       owner   => 'gerrit2',
       group   => 'gerrit2',
       mode    => '0444',
-      content => template($projects_file),
+      source  => $projects_file,
       replace => true,
       require => Class['::gerrit'],
     }
