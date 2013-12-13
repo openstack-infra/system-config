@@ -60,6 +60,8 @@ class openstack_project::review_dev (
     script_logging_conf             => '/home/gerrit2/.sync_logging.conf',
     projects_file                   =>
       'openstack_project/review-dev.projects.yaml.erb',
+    projects_config                 =>
+      'openstack_project/review-dev.projects.ini.erb',
     github_username                 => 'openstack-gerrit-dev',
     github_oauth_token              => $github_oauth_token,
     github_project_username         => $github_project_username,

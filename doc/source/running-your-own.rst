@@ -179,8 +179,9 @@ Migrate the manifests:
     . file to let git add it).  ``http://ci.openstack.org/stackforge.html``
     covers how it gets populated when your infrastructure is working.
 
-  * Ditto projects.yaml, which is passed in from your review.pp - something like
-    $PROJECT/templates/review.projects.yaml.erb
+  * Ditto projects.yaml and projects.ini, which is passed in from your
+    review.pp - something like $PROJECT/templates/review.projects.yaml.erb
+    and $PROJECT/templates/projects.ini.erb
 
   * set_agreements is a database migration tool for gerrit CLAs; not needed
     unless you have CLAs.

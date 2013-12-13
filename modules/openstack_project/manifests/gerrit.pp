@@ -42,6 +42,7 @@ class openstack_project::gerrit (
   $script_key_file = '/home/gerrit2/.ssh/id_rsa',
   $script_logging_conf = '/home/gerrit2/.sync_logging.conf',
   $projects_file = 'UNDEF',
+  $projects_config = 'UNDEF',
   $github_username = '',
   $github_oauth_token = '',
   $github_project_username = '',
@@ -318,6 +319,16 @@ class openstack_project::gerrit (
       require => Class['::gerrit'],
     }
 
+    file { '/home/gerrit2/projects.ini':
+      ensure  => present,
+      owner   => 'gerrit2',
+      group   => 'gerrit2',
+      mode    => '0444',
+      content => template($projects_config),
+      replace => true,
+      require => Class['::gerrit'],
+    }
+
     file { '/home/gerrit2/acls':
       ensure  => directory,
       owner   => 'gerrit2',
@@ -335,11 +346,13 @@ class openstack_project::gerrit (
       command     => '/usr/local/bin/manage-projects',
       timeout     => 900, # 15 minutes
       subscribe   => [
+          File['/home/gerrit2/projects.ini'],
           File['/home/gerrit2/projects.yaml'],
           File['/home/gerrit2/acls'],
         ],
       refreshonly => true,
       require     => [
+          File['/home/gerrit2/projects.ini'],
           File['/home/gerrit2/projects.yaml'],
           File['/home/gerrit2/acls'],
           Class['jeepyb'],

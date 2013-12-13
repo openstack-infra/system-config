@@ -20,6 +20,7 @@ At a Glance
   * :file:`modules/openstack_project/manifests/review.pp`
   * :file:`modules/openstack_project/manifests/review_dev.pp`
 :Configuration:
+  * :file:`modules/openstack_project/templates/review.projects.ini.erb`
   * :file:`modules/openstack_project/templates/review.projects.yaml.erb`
   * :file:`modules/openstack_project/files/pypi-mirror.yaml`
 :Projects:
@@ -39,22 +40,25 @@ and create new groups in Gerrit.
 OpenStack Gerrit projects are configured in the
 :file:`modules/openstack_project/templates/review.projects.yaml.erb`.
 file.  When this file is updated, ``manage-projects`` is run
-automatically.  This file contains two sections, the first is a set of
-default config values that each project can override, and the second
-is a list of projects (each may contain their own overrides).
+automatically.
 
-#. Config default values::
+The global configuration data needed for ``manage-projects`` to know how to
+connect to things or how to operate is in
+:file:`modules/openstack_project/templates/review.projects.ini.erb`.
 
-     - homepage: http://example.org
-       local-git-dir: /var/lib/git
-       gerrit-host: review.example.org
-       gerrit-user: example-project-creator
-       gerrit-key: /home/gerrit2/.ssh/example_project_id_rsa
-       github-config: /etc/github/github-projects.secure.config
-       has-wiki: False
-       has-issues: False
-       has-pull-requests: False
-       has-downloads: False
+#. Config values::
+
+     [projects]
+     homepage=http://example.org
+     local-git-dir=/var/lib/git
+     gerrit-host=review.example.org
+     gerrit-user=example-project-creator
+     gerrit-key=/home/gerrit2/.ssh/example_project_id_rsa
+     github-config=/etc/github/github-projects.secure.config
+     has-wiki=False
+     has-issues=False
+     has-pull-requests=False
+     has-downloads=False
 
 #. Project definition::
 
