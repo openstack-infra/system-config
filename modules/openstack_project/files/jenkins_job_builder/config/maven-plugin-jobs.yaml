@@ -3,7 +3,7 @@
 
 - job-template:
     name: 'gate-{name}-build'
-    node: precise
+    node: '{node}'
 
     wrappers:
       - timeout:
@@ -30,7 +30,7 @@
 
 - job-template:
     name: '{name}-localrepo-upload'
-    node: precise
+    node: '{node}'
 
     wrappers:
       - timeout:
@@ -54,7 +54,7 @@
 
     publishers:
       - war:
-          site: 'tarballs.openstack.org'
+          site: '{tarball-site}'
           warfile: 'target/{name}-${{PROJECT_VER}}.jar'
           target: 'tarballs/ci/{name}'
       - console-log
