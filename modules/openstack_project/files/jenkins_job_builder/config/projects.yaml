@@ -1626,6 +1626,17 @@
       - hook-{name}-rtfd
 
 - project:
+    name: cliff
+    github-org: stackforge
+    node: precise
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - python-jobs
+      - pypi-jobs
+      - hook-{name}-rtfd
+
+- project:
     name: python-tuskarclient
     github-org: openstack
     tarball-site: tarballs.openstack.org
