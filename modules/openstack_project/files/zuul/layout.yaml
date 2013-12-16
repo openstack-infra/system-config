@@ -4024,3 +4024,9 @@ projects:
       - gate-entropy-python33
     post:
       - entropy-coverage
+
+  - name: stackforge/edeploy
+    check:
+      - gate-noop
+    gate:
+      - gate-noop

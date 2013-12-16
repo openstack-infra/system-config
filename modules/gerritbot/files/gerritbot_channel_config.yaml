@@ -466,3 +466,13 @@ packstack-dev:
     branches:
       - master
       - grizzly
+
+edeploy:
+    events:
+      - patchset-created
+      - change-merged
+      - x-vrif-minus-2
+    projects:
+      - stackforge/edeploy
+    branches:
+      - master
