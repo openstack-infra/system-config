@@ -338,6 +338,8 @@ jobs:
     voting: false
   - name: gate-climate-devstack-dsvm
     voting: false
+  - name: check-projects-yaml-alphabetized
+    voting: false
 # puppet-openstack targets
   - name: gate-puppet-vswitch-puppet-lint
     voting: false
@@ -546,11 +548,13 @@ projects:
       - gate-config-puppet-lint
       - gate-config-puppet-syntax
       - gate-ci-docs
+      - check-projects-yaml-alphabetized
     gate:
       - gate-config-layout
       - gate-config-pep8
       - gate-config-puppet-lint
       - gate-config-puppet-syntax
+      - check-projects-yaml-alphabetized
     post:
       - ci-docs
 
