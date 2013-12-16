@@ -343,6 +343,8 @@ jobs:
     voting: false
   - name: check-projects-yaml-alphabetized
     voting: false
+  - name: gate-storyboard-python26
+    voting: false
 # puppet-openstack targets
   - name: gate-puppet-vswitch-puppet-lint
     voting: false
@@ -639,6 +641,7 @@ projects:
   - name: openstack-infra/storyboard
     check:
       - gate-storyboard-pep8
+      - gate-storyboard-python26
       - gate-storyboard-python27
     gate:
       - gate-storyboard-pep8
@@ -653,8 +656,6 @@ projects:
           - post-mirror-python26
           - post-mirror-python27
           - post-mirror-python33
-    experimental:
-      - gate-storyboard-python26
 
   - name: openstack-infra/odsreg
     check:
