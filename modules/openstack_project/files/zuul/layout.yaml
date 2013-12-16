@@ -1967,6 +1967,22 @@ projects:
       - gate-congress-pep8
       - gate-congress-python27
 
+  - name: stackforge/milk
+    check:
+      - gate-milk-docs
+      - gate-milk-pep8
+      - gate-milk-python26
+      - gate-milk-python27
+      - gate-milk-python33
+    gate:
+      - gate-milk-docs
+      - gate-milk-pep8
+      - gate-milk-python26
+      - gate-milk-python27
+      - gate-milk-python33
+    post:
+      - milk-coverage
+
   - name: stackforge/MRaaS
     check:
       - gate-noop
@@ -4086,12 +4102,6 @@ projects:
       - gate-release-tools-python26
       - gate-release-tools-python27
       - gate-release-tools-pypy
-
-  - name: stackforge/milk
-    check:
-      - gate-noop
-    gate:
-      - gate-noop
 
   - name: stackforge/entropy
     check:
