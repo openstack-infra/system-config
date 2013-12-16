@@ -2917,6 +2917,12 @@ projects:
           - post-mirror-python27
           - post-mirror-python33
 
+  - name: stackforge/edeploy
+    check:
+      - gate-noop
+    gate:
+      - gate-noop
+
   - name: stackforge/entropy
     check:
       - gate-entropy-docs
