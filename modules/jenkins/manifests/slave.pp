@@ -62,7 +62,6 @@ class jenkins::slave(
     $::jenkins::params::unzip_package,
     $::jenkins::params::xslt_package, # for building openstack docs
     $::jenkins::params::xvfb_package, # for selenium tests
-    $::jenkins::params::zookeeper_package, # for tooz unit tests
   ]
 
   if ($bare == false) {
@@ -111,6 +110,11 @@ class jenkins::slave(
       package { 'openjdk-6-jre-headless':
         ensure  => purged,
         require => Package[$::jenkins::params::jdk_package],
+      }
+
+      # For Tooz unit tests
+      package { $::jenkins::params::zookeeper_package:
+        ensure => present,
       }
 
     }
