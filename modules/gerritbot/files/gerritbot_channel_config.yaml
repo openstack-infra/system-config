@@ -170,7 +170,9 @@ openstack-nova:
       - patchset-created
       - x-vrif-minus-2
     projects:
+      - openstack/gantt
       - openstack/nova
+      - openstack/python-ganttclient
       - openstack/python-novaclient
     branches:
       - master
