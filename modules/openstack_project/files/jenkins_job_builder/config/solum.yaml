@@ -25,6 +25,12 @@
           }
           export -f pre_test_hook
 
+          function post_test_hook {
+              cd /opt/stack/new/solum/functionaltests
+              ./run_tests.sh
+          }
+          export -f post_test_hook
+
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
       - link-logs
