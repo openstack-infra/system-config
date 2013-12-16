@@ -48,6 +48,8 @@ openstack-infra:
       - template
       - overview
       - logstash
+      - gearman-plugin
+      - sysadmin-codereview
       - debian/sid
 
 openstack-doc:
