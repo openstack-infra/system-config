@@ -31,102 +31,11 @@ class openstack_project::logstash_worker (
     conf_template => 'openstack_project/logstash/indexer.conf.erb',
   }
 
-  package { 'python-daemon':
-    ensure => present,
+  include log_processor
+  log_processor::worker { 'A':
+    config_file => 'puppet:///modules/openstack_project/logstash/jenkins-log-worker.yaml',
   }
-
-  package { 'python-zmq':
-    ensure => present,
-  }
-
-  package { 'python-yaml':
-    ensure => present,
-  }
-
-  package { 'crm114':
-    ensure => present,
-  }
-
-  include pip
-  package { 'gear':
-    ensure   => latest,
-    provider => 'pip',
-    require  => Class['pip'],
-  }
-
-  file { '/var/lib/crm114':
-    ensure  => directory,
-    owner   => 'logstash',
-    group   => 'logstash',
-    require => User['logstash'],
-  }
-
-  file { '/usr/local/bin/classify-log.crm':
-    ensure  => present,
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0755',
-    source  => 'puppet:///modules/openstack_project/logstash/classify-log.crm',
-    require => [
-      Package['crm114'],
-    ],
-  }
-
-  file { '/usr/local/bin/log-gearman-worker.py':
-    ensure  => present,
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0755',
-    source  => 'puppet:///modules/openstack_project/logstash/log-gearman-worker.py',
-    require => [
-      Package['python-daemon'],
-      Package['python-zmq'],
-      Package['python-yaml'],
-      Package['gear'],
-    ],
-  }
-
-  file { '/etc/logstash/jenkins-log-worker.yaml':
-    ensure  => present,
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0555',
-    source  => 'puppet:///modules/openstack_project/logstash/jenkins-log-worker.yaml',
-  }
-
-  file { '/etc/init.d/jenkins-log-worker':
-    ensure  => present,
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0555',
-    source  => 'puppet:///modules/openstack_project/logstash/jenkins-log-worker.init',
-    require => [
-      File['/usr/local/bin/log-gearman-worker.py'],
-      File['/etc/logstash/jenkins-log-worker.yaml'],
-    ],
-  }
-
-  service { 'jenkins-log-worker':
-    enable     => true,
-    hasrestart => true,
-    subscribe  => File['/etc/logstash/jenkins-log-worker.yaml'],
-    require    => [
-      Class['logstash::indexer'],
-      File['/etc/init.d/jenkins-log-worker'],
-    ],
-  }
-
-  include logrotate
-  logrotate::file { 'log-worker-debug.log':
-    log     => '/var/log/logstash/log-worker-debug.log',
-    options => [
-      'compress',
-      'copytruncate',
-      'missingok',
-      'rotate 7',
-      'daily',
-      'notifempty',
-    ],
-    require => Service['jenkins-log-worker'],
+  log_processor::worker { 'B':
+    config_file => 'puppet:///modules/openstack_project/logstash/jenkins-log-worker.yaml',
   }
 }
