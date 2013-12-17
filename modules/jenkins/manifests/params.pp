@@ -55,6 +55,7 @@ class jenkins::params {
       #$zookeeper_package = 'zookeeper-server'
       $cgroups_package = 'libcgroup'
       if ($::operatingsystem == 'Fedora') {
+        $zookeeper_package = 'zookeeper'
         $cgroups_tools_package = 'libcgroup-tools'
         $cgconfig_require = [
           Package['cgroups'],
