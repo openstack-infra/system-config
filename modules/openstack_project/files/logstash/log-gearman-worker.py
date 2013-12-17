@@ -21,8 +21,12 @@ import gear
 import gzip
 import json
 import logging
+import os
 import Queue
+import re
+import select
 import socket
+import subprocess
 import sys
 import threading
 import time
@@ -48,10 +52,68 @@ def semi_busy_wait(seconds):
             return
 
 
+class CRM114Filter(object):
+    def __init__(self, script, path, build_status):
+        self.p = None
+        self.script = script
+        self.path = path
+        self.build_status = build_status
+        if build_status not in ['SUCCESS', 'FAILURE']:
+            return
+        if not os.path.exists(path):
+            os.makedirs(path)
+        args = [script, path, build_status]
+        self.p = subprocess.Popen(args,
+                                  stdout=subprocess.PIPE,
+                                  stderr=subprocess.PIPE,
+                                  stdin=subprocess.PIPE)
+
+    def process(self, data):
+        if not self.p:
+            return
+        self.p.stdin.write(data['message'].encode('utf-8') + '\n')
+        (r, w, x) = select.select([self.p.stdout], [],
+                                  [self.p.stdin, self.p.stdout], 20)
+        if not r:
+            self.p.kill()
+            raise Exception('Timeout reading from CRM114')
+        r = self.p.stdout.readline()
+        if not r:
+            err = self.p.stderr.read()
+            if err:
+                raise Exception(err)
+            else:
+                raise Exception('Early EOF from CRM114')
+        r = r.strip()
+        data['error_pr'] = float(r)
+
+    def close(self):
+        if not self.p:
+            return
+        self.p.stdin.close()
+        self.p.stdout.read()
+        self.p.stderr.read()
+        self.p.wait()
+
+
+class CRM114FilterFactory(object):
+    name = "CRM114"
+
+    def __init__(self, script, basepath):
+        self.script = script
+        self.basepath = basepath
+
+    def create(self, fields):
+        filename = re.sub('\.', '_', fields['filename'])
+        path = os.path.join(self.basepath, filename)
+        return CRM114Filter(self.script, path, fields['build_status'])
+
+
 class LogRetriever(threading.Thread):
-    def __init__(self, gearman_worker, logq):
+    def __init__(self, gearman_worker, filters, logq):
         threading.Thread.__init__(self)
         self.gearman_worker = gearman_worker
+        self.filters = filters
         self.logq = logq
 
     def run(self):
@@ -76,6 +138,11 @@ class LogRetriever(threading.Thread):
                 # discarded by zuul.
                 log_lines = self._retrieve_log(source_url, retry)
 
+                filters = []
+                for f in self.filters:
+                    logging.debug("Adding filter: %s" % f.name)
+                    filters.append(f.create(fields))
+
                 logging.debug("Pushing " + str(len(log_lines)) + " log lines.")
                 base_event = {}
                 base_event.update(fields)
@@ -83,7 +150,11 @@ class LogRetriever(threading.Thread):
                 for line in log_lines:
                     out_event = base_event.copy()
                     out_event["message"] = line
+                    for f in filters:
+                        f.process(out_event)
                     self.logq.put(out_event)
+                for f in filters:
+                    f.close()
             job.sendWorkComplete()
         except Exception as e:
             logging.exception("Exception handling log event.")
@@ -248,6 +319,12 @@ class Server(object):
         self.retriever = None
         self.logqueue = Queue.Queue(131072)
         self.processor = None
+        self.filter_factories = []
+        crmscript = self.config.get('crm114-script')
+        crmdata = self.config.get('crm114-data')
+        if crmscript and crmdata:
+            self.filter_factories.append(
+                CRM114FilterFactory(crmscript, crmdata))
 
     def setup_logging(self):
         if self.debuglog:
@@ -264,7 +341,8 @@ class Server(object):
         gearman_worker.addServer(self.gearman_host,
                                  self.gearman_port)
         gearman_worker.registerFunction(b'push-log')
-        self.retriever = LogRetriever(gearman_worker, self.logqueue)
+        self.retriever = LogRetriever(gearman_worker, self.filter_factories,
+                                      self.logqueue)
 
     def setup_processor(self):
         if self.output_mode == "tcp":

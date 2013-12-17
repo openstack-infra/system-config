@@ -1,0 +1,90 @@
+#! /usr/bin/crm
+#
+# Copyright 2013 OpenStack Foundation
+#
+# Licensed under the Apache License, Version 2.0 (the "License"); you may
+# not use this file except in compliance with the License. You may obtain
+# a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+# WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+# License for the specific language governing permissions and limitations
+# under the License.
+
+# This script trains an OSB (Orthogonal Sparse Bigram) bayesian filter
+# with log lines from test runs and classifies each line according to
+# the likelyhood it indicates an error.  Very little experimentation
+# has been done to determine the best classifier and training method;
+# further experimentation may be useful.
+
+# The training method is TET -- Train Every Thing.  This is not
+# normally advised as a training method for Bayesian filters.  In
+# experiments, it identified about twice as many lines as being
+# associated with errers as were indicated by a TOE (Train On Error)
+# method.  Some of them were false positives, but many were not, and
+# of those, it had a much higher (pR ~= 37) confidence in them than
+# TOE.  TET seems to give qualitatively better results when filtering
+# for higher pR values.
+
+# Set unbuffered IO
+window
+
+# Base component of path to data files
+isolate (:prefix:) /:*:_arg2:/
+
+# Whether this run is for a SUCCESS or FAILURE result
+isolate (:target:) /:*:_arg3:/
+
+# Train each file on a newline just to make sure it exists
+learn [:_nl:] <osb unique microgroom> (:*:prefix:/SUCCESS.css)
+learn [:_nl:] <osb unique microgroom> (:*:prefix:/FAILURE.css)
+{
+    # Iterate over each line
+    window <bychar> /\n/ /\n/
+    {
+        isolate (:stats:)
+        isolate (:result:)
+        isolate (:prob:)
+        isolate (:pr:)
+        # Save a copy of this line
+        isolate (:line:) /:*:_dw:/
+        {
+            {
+                # Remove things that look like timestamps from the beginning of the line
+                match (:timestamp:) /^[-.0-9 |:]+/
+                alter (:timestamp:) //
+            }
+            # Train on the line
+            learn <osb unique microgroom> (:*:prefix:/:*:target:.css)
+            # Classify the line to see if it looks more like a SUCCESS or FAILURE line
+            classify <osb unique microgroom> (:*:prefix:/SUCCESS.css :*:prefix:/FAILURE.css) (:stats:)
+            {
+                # The stats variable looks like:
+                #   CLASSIFY succeeds; success probability: 1.0000  pR: 304.6527
+                #   Best match to file #0 (/tmp/crm114/console_html/SUCCESS.css) prob: 0.9933  pR: 2.1720
+                #   Total features in input file: 20
+                #   #0 (/tmp/crm114/console_html/SUCCESS.css): features: 3544235, hits: 901854, prob: 9.93e-01, pR:   2.17
+                #   #1 (/tmp/crm114/console_html/FAILURE.css): features: 1, hits: 0, prob: 6.69e-03, pR:  -2.17
+                # Pull out the filename, probability, and pR (a kind of logarithmic probability, see CRM docs)
+                match [:stats:] <nomultiline> /^Best match to .*\/([A-Za-z]+).css\) prob: ([-.0-9]+)  pR: ([-.0-9]+)/ ( :: :result: :prob: :pr: )
+                {
+                    # If this line is classified as FAILURE, negate
+                    # the pR value (which will always be positive).
+                    # Do this by prepending a '-' or the empty string.
+                    {
+                        match [:result:] /FAILURE/
+                        alter (:result:) /-/
+                    } alius {
+                        alter (:result:) //
+                    }
+                }
+                # Output the sign and pR value for this line.
+                output /:*:result::*:pr:\n/
+            }
+        }
+    }
+    liaf
+}

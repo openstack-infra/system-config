@@ -43,11 +43,33 @@ class openstack_project::logstash_worker (
     ensure => present,
   }
 
+  package { 'crm114':
+    ensure => present,
+  }
+
   include pip
   package { 'gear':
     ensure   => latest,
     provider => 'pip',
     require  => Class['pip'],
+  }
+
+  file { '/var/lib/crm114':
+    ensure  => directory,
+    owner   => 'logstash',
+    group   => 'logstash',
+    require => User['logstash'],
+  }
+
+  file { '/usr/local/bin/classify-log.crm':
+    ensure  => present,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0755',
+    source  => 'puppet:///modules/openstack_project/logstash/classify-log.crm',
+    require => [
+      Package['crm114'],
+    ],
   }
 
   file { '/usr/local/bin/log-gearman-worker.py':
