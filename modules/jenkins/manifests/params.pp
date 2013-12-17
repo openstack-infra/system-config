@@ -51,7 +51,8 @@ class jenkins::params {
       $xslt_package = 'libxslt'
       $xvfb_package = 'xorg-x11-server-Xvfb'
       # For Tooz unit tests
-      $zookeeper_package = 'zookeeper-server'
+      # FIXME: No zookeeper packages on RHEL
+      #$zookeeper_package = 'zookeeper-server'
       $cgroups_package = 'libcgroup'
       if ($::operatingsystem == 'Fedora') {
         $cgroups_tools_package = 'libcgroup-tools'
