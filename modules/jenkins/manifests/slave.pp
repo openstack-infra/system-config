@@ -82,6 +82,11 @@ class jenkins::slave(
         command => '/usr/bin/yum -y groupinstall "Development tools"',
       }
 
+      if ($::operatingsystem == 'Fedora') {
+          package { $::jenkins::params::zookeeper_package:
+              ensure => present,
+          }
+      }
     }
     'Debian': {
 
