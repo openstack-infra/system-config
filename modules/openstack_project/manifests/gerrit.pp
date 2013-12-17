@@ -128,8 +128,8 @@ class openstack_project::gerrit (
     commentlinks                    => [
       {
         name  => 'changeid',
-        match => '(I?[0-9a-f]{8,40})',
-        link  => '#q,$1,n,z',
+        match => '(<p>|[\\s.]+)(I?[0-9a-f]{7,40})(</p>|[\\s.]+)',
+        link  => '#q,$2,n,z',
       },
       {
         name  => 'bugheader',
