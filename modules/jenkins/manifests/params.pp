@@ -27,7 +27,6 @@ class jenkins::params {
       $libtidy_package = 'libtidy-0.99-0'
       # for keystone ldap auth integration
       $libsasl_dev = 'cyrus-sasl-devel'
-      $mysql_dev_package = 'mysql-devel'
       $nspr_dev_package = 'nspr-devel'
       $sqlite_dev_package = 'sqlite-devel'
       $libxml2_package = 'libxml2'
@@ -55,6 +54,7 @@ class jenkins::params {
       #$zookeeper_package = 'zookeeper-server'
       $cgroups_package = 'libcgroup'
       if ($::operatingsystem == 'Fedora') {
+        $mysql_dev_package = 'community-mysql-devel'
         $zookeeper_package = 'zookeeper'
         $cgroups_tools_package = 'libcgroup-tools'
         $cgconfig_require = [
@@ -66,6 +66,7 @@ class jenkins::params {
           Package['cgroups-tools'],
         ]
       } else {
+        $mysql_dev_package = 'mysql-devel'
         $cgroups_tools_package = ''
         $cgconfig_require = Package['cgroups']
         $cgred_require = Package['cgroups']
