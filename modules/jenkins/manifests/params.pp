@@ -51,9 +51,9 @@ class jenkins::params {
       $xslt_package = 'libxslt'
       $xvfb_package = 'xorg-x11-server-Xvfb'
       # For Tooz unit tests
-      $zookeeper_package = 'zookeeper-server'
       $cgroups_package = 'libcgroup'
       if ($::operatingsystem == 'Fedora') {
+        $zookeeper_package = 'zookeeper'
         $cgroups_tools_package = 'libcgroup-tools'
         $cgconfig_require = [
           Package['cgroups'],
@@ -64,6 +64,7 @@ class jenkins::params {
           Package['cgroups-tools'],
         ]
       } else {
+        $zookeeper_package = 'zookeeper-server'
         $cgroups_tools_package = ''
         $cgconfig_require = Package['cgroups']
         $cgred_require = Package['cgroups']
