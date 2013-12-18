@@ -23,6 +23,10 @@ class openstack_project::review_dev (
   $swift_password = ''
 ) {
 
+  realize (
+    User::Virtual::Localuser['zaro'],
+  )
+
   # Setup MySQL
   class { 'gerrit::mysql':
     mysql_root_password  => $mysql_root_password,
