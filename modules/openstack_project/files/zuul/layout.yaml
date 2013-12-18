@@ -3862,6 +3862,12 @@ projects:
     gate:
       - gate-noop
 
+  - name: openstack-infra/openstackid
+    check:
+      - gate-noop
+    gate:
+      - gate-noop
+
   - name: stackforge/wsme
     check:
       - gate-wsme-python26
