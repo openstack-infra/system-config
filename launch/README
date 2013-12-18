@@ -16,9 +16,10 @@ to a group.)
 To launch a node in the OpenStack CI account (production servers)::
 
   . ~root/ci-launch/openstackci-rs-nova.sh
+  export FLAVOR="8 GB Performance"
   export FQDN=servername.openstack.org
   sudo puppet cert generate $FQDN
-  ./launch-node.py $FQDN
+  ./launch-node.py $FQDN --flavor "$FLAVOR"
 
 To launch a node in the OpenStack Jenkins account (slave nodes)::
 
@@ -27,9 +28,9 @@ To launch a node in the OpenStack Jenkins account (slave nodes)::
   nova image-list
   export IMAGE='Ubuntu 12.04 LTS (Precise Pangolin)'
   nova flavor-list
-  export RAM=8192
+  export FLAVOR="8 GB Performance"
   sudo puppet cert generate $FQDN
-  ./launch-node.py $FQDN --image "$IMAGE" --ram $RAM --salt
+  ./launch-node.py $FQDN --image "$IMAGE" --flavor "$FLAVOR" --salt
 
 The --salt option tells the script to automatically configure and enroll
 the server as a minion on the salt master.
