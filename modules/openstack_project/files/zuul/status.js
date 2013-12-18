@@ -15,6 +15,7 @@
 window.zuul_enable_status_updates = true;
 window.zuul_filter = [];
 window.zuul_collapsed_changes = [];
+window.zuul_collapse_by_default = true;
 
 function format_time(ms, words) {
     if (ms == null) {
@@ -248,12 +249,18 @@ function format_change(change, change_queue) {
         }
     }
 
-    $index = window.zuul_collapsed_changes.indexOf(safe_id(change['id']));
+    $display = $('#expandAll').is(':checked');
+    if ($display == false) {
+        $index = window.zuul_collapsed_changes.indexOf(safe_id(change['id']));
+        if ($index > -1) {
+            $display = true;
+        }
+    }
 
     html += '</span><span class="time">';
     html += format_time(change['remaining_time'], true);
     html += '</span></div><div class="jobs"';
-    if ($index > -1) {
+    if ($display == false) {
         html += ' style="display: none;"'
     }
     html += '>';
@@ -308,9 +315,9 @@ function toggle_display_jobs(_header) {
         $changeid = header.parent().attr('id');
         $index = window.zuul_collapsed_changes.indexOf($changeid);
         if ($content.is(":visible")) {
-            window.zuul_collapsed_changes.splice($index, 1);
-        } else {
             window.zuul_collapsed_changes.push($changeid);
+        } else {
+            window.zuul_collapsed_changes.splice($index, 1);
         }
     });
 }
