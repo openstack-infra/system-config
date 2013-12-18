@@ -14,6 +14,7 @@
 
 window.zuul_enable_status_updates = true;
 window.zuul_filter = [];
+window.zuul_collapsed_changes = [];
 
 function format_time(ms, words) {
     if (ms == null) {
@@ -228,7 +229,7 @@ function format_change(change, change_queue) {
     }
 
     html += '<td class="change-container">';
-    html += '<div class="change" id="' + safe_id(change['id']) + '"><div class="header">';
+    html += '<div class="change" id="' + safe_id(change['id']) + '"><div class="header" onClick="toggle_display_jobs(this)">';
 
     html += '<span class="project">' + change['project'] + '</span>';
     var id = change['id'];
@@ -247,9 +248,16 @@ function format_change(change, change_queue) {
         }
     }
 
+    collapsed_index = window.zuul_collapsed_changes.indexOf(
+        safe_id(change['id']));
+
     html += '</span><span class="time">';
     html += format_time(change['remaining_time'], true);
-    html += '</span></div><div class="jobs">';
+    html += '</span></div><div class="jobs"';
+    if (collapsed_index > -1) {
+        html += ' style="display: none;"'
+    }
+    html += '>';
 
     $.each(change['jobs'], function(i, job) {
         result = job['result'];
@@ -294,6 +302,20 @@ function format_change(change, change_queue) {
     return html;
 }
 
+function toggle_display_jobs(_header) {
+    var header = $(_header);
+    content = header.next("div");
+    content.slideToggle(100, function () {
+        changeid = header.parent().attr('id');
+        index = window.zuul_collapsed_changes.indexOf(changeid);
+        if (content.is(":visible")) {
+            window.zuul_collapsed_changes.splice(index, 1);
+        } else {
+            window.zuul_collapsed_changes.push(changeid);
+        }
+    });
+}
+
 function update_timeout() {
     if (!window.zuul_enable_status_updates) {
         setTimeout(update_timeout, 5000);
@@ -312,6 +334,19 @@ function update_timeout() {
     setTimeout(update_timeout, 5000);
 }
 
+function clean_collapsed_changes_list(pipelines) {
+    new_list = [];
+
+    $.each($('div.change'), function(i, change) {
+        collapsed_index = window.zuul_collapsed_changes.indexOf(change.id);
+        if (collapsed_index > -1) {
+            new_list.push(change.id);
+        }
+    });
+
+    window.zuul_collapsed_changes = new_list;
+}
+
 function update() {
     var html = '';
 
@@ -326,9 +361,11 @@ function update() {
 
         html += '<br style="clear:both"/>';
 
-        $.each(data['pipelines'], function(i, pipeline) {
+        pipelines = data['pipelines']
+        $.each(pipelines, function(i, pipeline) {
             html = html + format_pipeline(pipeline);
         });
+        clean_collapsed_changes_list(pipelines);
 
         html += '<br style="clear:both"/>';
         $("#pipeline-container").html(html);
