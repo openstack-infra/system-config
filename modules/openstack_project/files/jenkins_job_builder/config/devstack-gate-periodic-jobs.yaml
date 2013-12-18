@@ -427,6 +427,35 @@
       - email:
           recipients: openstack-stable-maint@lists.openstack.org
 
+- job-template:
+    name: 'periodic-devstack-dsvm-neutron{branch-designator}'
+    node: '{node}'
+
+    wrappers:
+      - timeout:
+          timeout: 90
+          fail: true
+      - timestamps
+
+    builders:
+      - devstack-checkout
+      - shell: |
+          #!/bin/bash -xe
+          export PYTHONUNBUFFERED=true
+          export DEVSTACK_GATE_NEUTRON=1
+          export DEVSTACK_GATE_EXERCISES=1
+          export ZUUL_BRANCH={branch-override}
+          unset ZUUL_PROJECT
+          cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
+          ./safe-devstack-vm-gate-wrap.sh
+      - link-logs
+
+    publishers:
+      - devstack-logs-periodic
+      - console-log-periodic
+      - email:
+          recipients: openstack-stable-maint@lists.openstack.org
+
 
 - job-group:
     name: devstack-periodic-jobs
@@ -446,3 +475,4 @@
       - 'periodic-tempest-dsvm-savanna-full{branch-designator}'
       - 'periodic-tempest-dsvm-savanna-postgres-full{branch-designator}'
       - 'periodic-tempest-dsvm-savanna-neutron{branch-designator}'
+      - 'periodic-devstack-dsvm-neutron{branch-designator}'
