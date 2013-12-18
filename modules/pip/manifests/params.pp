@@ -6,13 +6,11 @@ class pip::params {
   case $::osfamily {
     'RedHat': {
       $python_devel_package = 'python-devel'
-      $python_pip_package   = 'python-pip'
       $python3_devel_package = 'python3-devel'
       $python3_pip_package   = 'python3-pip'
     }
     'Debian': {
       $python_devel_package  = 'python-all-dev'
-      $python_pip_package    = 'python-pip'
       $python3_devel_package = 'python3-all-dev'
       $python3_pip_package   = 'python3-pip'
     }

@@ -7,9 +7,4 @@ class pip {
     ensure => present,
   }
 
-  package { $::pip::params::python_pip_package:
-    ensure  => present,
-    require => Package[$::pip::params::python_devel_package]
-  }
-
 }
