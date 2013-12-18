@@ -15,6 +15,7 @@
 window.zuul_enable_status_updates = true;
 window.zuul_filter = [];
 window.zuul_collapsed_changes = [];
+window.zuul_expanded_changes = [];
 
 function format_time(ms, words) {
     if (ms == null) {
@@ -248,13 +249,28 @@ function format_change(change, change_queue) {
         }
     }
 
-    collapsed_index = window.zuul_collapsed_changes.indexOf(
-        safe_id(change['id']));
+    display = $('#expandByDefault').is(':checked');
+    safe_change_id = safe_id(change['id']);
+    expanded_index = window.zuul_expanded_changes.indexOf(safe_change_id);
+    collapsed_index = window.zuul_collapsed_changes.indexOf(safe_change_id);
+    if (display == false) {
+        /* collapsed by default */
+        if (expanded_index > -1) {
+            /* set to be expanded */
+            display = true;
+        }
+    } else {
+        /* expanded by default */
+        if (collapsed_index > -1) {
+            /* set to be collapsed */
+            display = false;
+        }
+    }
 
     html += '</span><span class="time">';
     html += format_time(change['remaining_time'], true);
     html += '</span></div><div class="jobs"';
-    if (collapsed_index > -1) {
+    if (display == false) {
         html += ' style="display: none;"'
     }
     html += '>';
@@ -307,11 +323,36 @@ function toggle_display_jobs(_header) {
     content = header.next("div");
     content.slideToggle(100, function () {
         changeid = header.parent().attr('id');
-        index = window.zuul_collapsed_changes.indexOf(changeid);
+        expanded_index = window.zuul_expanded_changes.indexOf(changeid);
+        collapsed_index = window.zuul_expanded_changes.indexOf(changeid);
         if (content.is(":visible")) {
-            window.zuul_collapsed_changes.splice(index, 1);
+            window.zuul_expanded_changes.push(changeid);
+            if (collapsed_index > -1) {
+                window.zuul_collapsed_changes.splice(index, 1);
+            }
         } else {
             window.zuul_collapsed_changes.push(changeid);
+            if (expanded_index > -1) {
+                window.zuul_expanded_changes.splice(expanded, 1);
+            }
+        }
+    });
+}
+
+function toggle_expand_by_default(_checkbox) {
+    var checkbox = $(_checkbox);
+    $.each($('div.change'), function(i, _change) {
+        change = $(_change);
+        content = change.children('div').next('div');
+        expand_by_default = $('#expandByDefault').is(':checked');
+        expanded_index = window.zuul_expanded_changes.indexOf(change.id);
+        collapsed_index = window.zuul_expanded_changes.indexOf(change.id);
+        if (expanded_index == -1 && collapsed_index == -1) {
+            if (expand_by_default) {
+                content.show(0);
+            } else {
+                content.hide(0);
+            }
         }
     });
 }
@@ -334,17 +375,25 @@ function update_timeout() {
     setTimeout(update_timeout, 5000);
 }
 
-function clean_collapsed_changes_list() {
-    new_list = [];
+function clean_changes_lists() {
+    new_expanded_list = [];
+    new_collapsed_list = [];
 
     $.each($('div.change'), function(i, change) {
+        expanded_index = window.zuul_expanded_changes.indexOf(change.id);
+        if (expanded_index > -1) {
+            new_expanded_list.push(change.id);
+            return;
+        }
         collapsed_index = window.zuul_collapsed_changes.indexOf(change.id);
         if (collapsed_index > -1) {
-            new_list.push(change.id);
+            new_collapsed_list.push(change.id);
+            return;
         }
     });
 
-    window.zuul_collapsed_changes = new_list;
+    window.zuul_expanded_changes = new_expanded_list;
+    window.zuul_collapsed_changes = new_collapsed_list;
 }
 
 function update() {
@@ -375,7 +424,7 @@ function update() {
 
     });
 
-    clean_collapsed_changes_list();
+    clean_changes_lists();
 }
 
 function update_graphs() {
