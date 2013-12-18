@@ -124,6 +124,9 @@ jobs:
   - name: ^(gate|check)-tempest-dsvm-neutron-full$
     branch: ^(?!stable/grizzly).*$
     voting: false
+  - name: ^(gate|check)-tempest-dsvm-neutron-exercises$
+    branch: ^(?!stable/grizzly).*$
+    voting: false
   - name: gate-tempest-dsvm-neutron-heat-slow
     branch: ^(?!stable/grizzly).*$
     voting: false
@@ -1179,6 +1182,7 @@ projects:
       - check-tempest-dsvm-neutron-pg-isolated
       - gate-tempest-dsvm-neutron-large-ops
       - check-grenade-dsvm-neutron
+      - check-tempest-dsvm-neutron-exercises
     gate:
       - gate-neutron-requirements
       - gate-neutron-docs
@@ -1191,6 +1195,7 @@ projects:
       - gate-tempest-dsvm-neutron-pg-isolated
       - gate-tempest-dsvm-neutron-large-ops
       - gate-grenade-dsvm-neutron
+      - gate-tempest-dsvm-neutron-exercises
     experimental:
       - gate-tempest-dsvm-neutron-full
       - check-tempest-dsvm-neutron-isolated-parallel

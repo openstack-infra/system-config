@@ -142,6 +142,37 @@
 
 
 - job-template:
+    name: '{pipeline}-tempest-dsvm-neutron-exercises{branch-designator}'
+    node: '{node}'
+
+    wrappers:
+      - timeout:
+          timeout: 120
+          fail: true
+      - timestamps
+
+    builders:
+      - devstack-checkout
+      - shell: |
+          #!/bin/bash -xe
+          export PYTHONUNBUFFERED=true
+          export DEVSTACK_GATE_TEMPEST=0
+          export DEVSTACK_GATE_NEUTRON=1
+          export DEVSTACK_GATE_EXERCISES=1
+          export BRANCH_OVERRIDE={branch-override}
+          if [ "$BRANCH_OVERRIDE" != "default" ] ; then
+              export ZUUL_BRANCH=$BRANCH_OVERRIDE
+          fi
+          cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
+          ./safe-devstack-vm-gate-wrap.sh
+      - link-logs
+
+    publishers:
+      - devstack-logs
+      - console-log
+
+
+- job-template:
     name: '{pipeline}-tempest-dsvm-neutron-pg{branch-designator}'
     node: '{node}'
 
@@ -767,6 +798,7 @@
       - '{pipeline}-tempest-dsvm-neutron-isolated-parallel{branch-designator}'
       - '{pipeline}-tempest-dsvm-neutron-pg-isolated{branch-designator}'
       - '{pipeline}-tempest-dsvm-neutron-full{branch-designator}'
+      - '{pipeline}-tempest-dsvm-neutron-exercises{branch-designator}'
       - '{pipeline}-devstack-dsvm-cells{branch-designator}'
       - '{pipeline}-tempest-dsvm-cells{branch-designator}'
       - '{pipeline}-tempest-dsvm-cells-full{branch-designator}'
