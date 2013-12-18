@@ -39,6 +39,9 @@
 .container {
     width: 1024px;
 }
+label {
+    font-weight: normal;
+}
 #pipeline-container {
     margin: 0 auto;
 }
@@ -246,7 +249,7 @@ progress[aria-valuenow]:before  {
       Queue lengths: <span id="trigger_event_queue_length"></span> events,
       <span id="result_event_queue_length"></span> results.
       &nbsp;&nbsp;&nbsp;&nbsp;
-      Filter projects:
+      <label for="projects_filter">Filter projects:</label>
       <span class="projects_filter_container">
         <input type="text" id="projects_filter" />
         <!--
@@ -258,6 +261,11 @@ progress[aria-valuenow]:before  {
         <sub>
           <a href="#" class="save-filter hidden">Save Filter</a>
         </sub>
+      </span>
+      &nbsp;&nbsp;&nbsp;&nbsp;
+      <label for="expandByDefault">Expand by default:</label>
+      <span class="expand_by_default_container">
+        <input type="checkbox" id="expandByDefault" onchange="toggle_expand_by_default(this)"/>
       </span>
       </p>
     </div>
