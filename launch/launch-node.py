@@ -176,8 +176,8 @@ def build_server(
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("name", help="server name")
-    parser.add_argument("--ram", dest="ram", default=1024, type=int,
-                        help="minimum amount of ram")
+    parser.add_argument("--flavor", dest="flavor", default='1GB',
+                        help="name (or substring) of flavor")
     parser.add_argument("--image", dest="image",
                         default="Ubuntu 12.04 LTS (Precise Pangolin)",
                         help="image name")
@@ -204,8 +204,7 @@ def main():
                                        cert)):
         raise Exception("Please specify the name of a signed puppet cert.")
 
-    flavors = [f for f in client.flavors.list() if f.ram >= options.ram]
-    flavors.sort(lambda a, b: cmp(a.ram, b.ram))
+    flavors = [f for f in client.flavors.list() if options.flavor in f.name]
     flavor = flavors[0]
     print "Found flavor", flavor
 

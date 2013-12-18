@@ -223,8 +223,8 @@ to use ``: |``::
     contents
     here
 
-Launch a node - be sure to pass --ram 10240 to get a flavor with at least 10G+
-or RAM, as gerrit is configured for 8G of heap.
+Launch a node - be sure to pass --flavor "10G" to get a flavor with at
+least 10G+ of RAM, as gerrit is configured for 8G of heap.
 
 Follow the :file:`doc/source/gerrit.rst` for instructions on getting gerrit
 configured once installed.
@@ -354,10 +354,10 @@ gets their own puppet cert. The openstack/site.pp has a legacy setting for
 
 #. Remove the certname override - upstream are dropping this gradually.
 
-#. Launch a node, passing in --image and --ram to get a node that you
+#. Launch a node, passing in --image and --flavor to get a node that you
    want :). e.g::
 
-     launch-node.py centos6-1.slave.openstack.org --image $IMAGE --ram 1024 \
+     launch-node.py centos6-1.slave.openstack.org --image $IMAGE --flavor "1G" \
        mydns
 
 #. Go into the Jenkins config and press 'test connection' on the gearman config
