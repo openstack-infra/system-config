@@ -14,7 +14,8 @@
 
 window.zuul_enable_status_updates = true;
 window.zuul_filter = [];
-window.zuul_collapsed_changes = [];
+window.zuul_expanded_changes = [];
+window.zuul_collapse_by_default = true;
 
 function format_time(ms, words) {
     if (ms == null) {
@@ -248,13 +249,19 @@ function format_change(change, change_queue) {
         }
     }
 
-    collapsed_index = window.zuul_collapsed_changes.indexOf(
-        safe_id(change['id']));
+    display = $('#expandAll').is(':checked');
+    if (display == false) {
+        collapsed_index = window.zuul_expanded_changes.indexOf(
+            safe_id(change['id']));
+        if (collapsed_index > -1) {
+            display = true;
+        }
+    }
 
     html += '</span><span class="time">';
     html += format_time(change['remaining_time'], true);
     html += '</span></div><div class="jobs"';
-    if (collapsed_index > -1) {
+    if (display == false) {
         html += ' style="display: none;"'
     }
     html += '>';
@@ -307,11 +314,11 @@ function toggle_display_jobs(_header) {
     content = header.next("div");
     content.slideToggle(100, function () {
         changeid = header.parent().attr('id');
-        index = window.zuul_collapsed_changes.indexOf(changeid);
+        index = window.zuul_expanded_changes.indexOf(changeid);
         if (content.is(":visible")) {
-            window.zuul_collapsed_changes.splice(index, 1);
+            window.zuul_expanded_changes.push(changeid);
         } else {
-            window.zuul_collapsed_changes.push(changeid);
+            window.zuul_expanded_changes.splice(index, 1);
         }
     });
 }
@@ -334,7 +341,7 @@ function update_timeout() {
     setTimeout(update_timeout, 5000);
 }
 
-function clean_collapsed_changes_list(pipelines) {
+function clean_expanded_changes_list(pipelines) {
     new_list = [];
 
     $.each(pipelines, function(i, pipeline) {
@@ -342,7 +349,7 @@ function clean_collapsed_changes_list(pipelines) {
             $.each(change_queue['heads'], function(head_i, head) {
                 $.each(head, function(change_i, change) {
                     changeid = safe_id(change['id']);
-                    collapsed_index = window.zuul_collapsed_changes.indexOf(changeid);
+                    collapsed_index = window.zuul_expanded_changes.indexOf(changeid);
                     if (collapsed_index > -1) {
                         new_list.push(changeid);
                     }
@@ -351,7 +358,7 @@ function clean_collapsed_changes_list(pipelines) {
         });
     });
 
-    window.zuul_collapsed_changes = new_list;
+    window.zuul_expanded_changes = new_list;
 }
 
 function update() {
@@ -372,7 +379,7 @@ function update() {
         $.each(pipelines, function(i, pipeline) {
             html = html + format_pipeline(pipeline);
         });
-        clean_collapsed_changes_list(pipelines);
+        clean_expanded_changes_list(pipelines);
 
         html += '<br style="clear:both"/>';
         $("#pipeline-container").html(html);
