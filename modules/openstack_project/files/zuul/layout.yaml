@@ -1432,9 +1432,17 @@ projects:
 
   - name: openstack/openstack-doc-tools
     check:
-      - gate-noop
+      - gate-openstack-doc-tools-pep8
     gate:
-      - gate-noop
+      - gate-openstack-doc-tools-pep8
+    pre-release:
+      - openstack-doc-tools-tarball
+    release:
+      - openstack-doc-tools-tarball:
+        - openstack-doc-tools-pypi-upload:
+          - post-mirror-python26
+          - post-mirror-python27
+          - post-mirror-python33
 
   - name: openstack/openstack-planet
     check:

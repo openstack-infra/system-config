@@ -1943,3 +1943,14 @@
 
     jobs:
       - python-jobs
+
+- project:
+    name: openstack-doc-tools
+    github-org: openstack
+    node: precise
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - gate-{name}-pep8
+      - '{name}-tarball'
+      - pypi-jobs
