@@ -117,6 +117,9 @@ jobs:
     parameter-function: single_use_node
   - name: ^(gate|check)-tempest-dsvm-neutron-pg$
     branch: ^(?!stable/grizzly).*$
+  - name: ^(gate|check)-devstack-dsvm-neutron$
+    branch: ^(?!stable/grizzly).*$
+    voting: false
   - name: ^(gate|check)-tempest-dsvm-neutron-isolated$
     branch: ^(?!stable/grizzly).*$
   - name: ^(gate|check)-tempest-dsvm-neutron-pg-isolated$
@@ -1179,6 +1182,7 @@ projects:
       - check-tempest-dsvm-neutron-pg-isolated
       - gate-tempest-dsvm-neutron-large-ops
       - check-grenade-dsvm-neutron
+      - check-devstack-dsvm-neutron
     gate:
       - gate-neutron-requirements
       - gate-neutron-docs
@@ -1191,6 +1195,7 @@ projects:
       - gate-tempest-dsvm-neutron-pg-isolated
       - gate-tempest-dsvm-neutron-large-ops
       - gate-grenade-dsvm-neutron
+      - gate-devstack-dsmv-neutron
     experimental:
       - gate-tempest-dsvm-neutron-full
       - check-tempest-dsvm-neutron-isolated-parallel
@@ -1783,6 +1788,7 @@ projects:
       - check-grenade-dsvm
       - check-grenade-dsvm-forward
       - check-swift-dsvm-functional
+      - check-devstack-dsvm-neutron
     gate:
       - gate-devstack-bash8
       - gate-tempest-dsvm-full
@@ -1793,6 +1799,7 @@ projects:
       - gate-grenade-dsvm
       - gate-grenade-dsvm-forward
       - gate-swift-dsvm-functional
+      - gate-devstack-dsvm-neutron
     experimental:
       - gate-tempest-dsvm-neutron-heat-slow
       - gate-grenade-dsvm-forward
