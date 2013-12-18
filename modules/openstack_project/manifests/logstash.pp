@@ -43,78 +43,10 @@ class openstack_project::logstash (
     proxy_elasticsearch => true,
   }
 
-  package { 'python-daemon':
-    ensure => present,
-  }
+  class { 'log_processor': }
 
-  package { 'python-zmq':
-    ensure => present,
-  }
-
-  package { 'python-yaml':
-    ensure => present,
-  }
-
-  include pip
-  package { 'gear':
-    ensure   => latest,
-    provider => 'pip',
-    require  => Class['pip'],
-  }
-
-  file { '/usr/local/bin/log-gearman-client.py':
-    ensure  => present,
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0755',
-    source  => 'puppet:///modules/openstack_project/logstash/log-gearman-client.py',
-    require => [
-      Package['python-daemon'],
-      Package['python-zmq'],
-      Package['python-yaml'],
-      Package['gear'],
-    ],
-  }
-
-  file { '/etc/logstash/jenkins-log-client.yaml':
-    ensure  => present,
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0555',
-    source  => 'puppet:///modules/openstack_project/logstash/jenkins-log-client.yaml',
-  }
-
-  file { '/etc/init.d/jenkins-log-client':
-    ensure  => present,
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0555',
-    source  => 'puppet:///modules/openstack_project/logstash/jenkins-log-client.init',
-    require => [
-      File['/usr/local/bin/log-gearman-client.py'],
-      File['/etc/logstash/jenkins-log-client.yaml'],
-    ],
-  }
-
-  service { 'jenkins-log-client':
-    enable     => true,
-    hasrestart => true,
-    subscribe  => File['/etc/logstash/jenkins-log-client.yaml'],
-    require    => File['/etc/init.d/jenkins-log-client'],
-  }
-
-  include logrotate
-  logrotate::file { 'log-client-debug.log':
-    log     => '/var/log/logstash/log-client-debug.log',
-    options => [
-      'compress',
-      'copytruncate',
-      'missingok',
-      'rotate 7',
-      'daily',
-      'notifempty',
-    ],
-    require => Service['jenkins-log-client'],
+  class { 'log_processor::client':
+    config_file => 'puppet:///modules/openstack_project/logstash/jenkins-log-client.yaml',
   }
 
   class { 'elastic_recheck::bot':
