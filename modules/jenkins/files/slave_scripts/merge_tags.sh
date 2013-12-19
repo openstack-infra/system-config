@@ -23,7 +23,7 @@ then
     git review -s
     git checkout master
     git reset --hard origin/master
-    git merge -s ours $TAG
+    git merge --no-edit -s ours $TAG
     # Get a Change-Id
     GIT_EDITOR=true git commit --amend
     git review -R -t merge/release-tag
