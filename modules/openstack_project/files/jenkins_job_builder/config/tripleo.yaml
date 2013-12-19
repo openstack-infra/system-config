@@ -4,7 +4,7 @@
 
     wrappers:
       - timeout:
-          timeout: 120
+          timeout: 125
           fail: true
       - timestamps
 
@@ -13,6 +13,7 @@
       - shell: |
           #!/bin/bash -xe
           export PYTHONUNBUFFERED=true
+          export DEVSTACK_GATE_TIMEOUT=120
           export DEVSTACK_GATE_TEMPEST=0
           export DEVSTACK_GATE_EXERCISES=0
           function gate_hook {
