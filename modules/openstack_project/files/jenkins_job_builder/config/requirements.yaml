@@ -17,7 +17,7 @@
           export DEVSTACK_GATE_EXERCISES=0
           export DEVSTACK_GATE_REQS_INTEGRATION=1
           function gate_hook {{
-              bash $GATE_SCRIPT_DIR/devstack-vm-gate.sh && \
+              bash $BASE/new/devstack-gate/devstack-vm-gate.sh && \
               bash -xe $BASE/new/pbr/tools/integration.sh $PROJECTS
           }}
           export -f gate_hook
