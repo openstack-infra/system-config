@@ -3845,6 +3845,7 @@ projects:
       - gate-stevedore-python33
     post:
       - stevedore-branch-tarball
+      - hook-stevedore-rtfd
     pre-release:
       - stevedore-tarball
       - hook-stevedore-rtfd
