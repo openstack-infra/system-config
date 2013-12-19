@@ -9,7 +9,7 @@ trap "rm -rf $TMPDIR" EXIT
 pushd $TMPDIR
 
 sed -e '/^- project: /!d' -e 's/^- project: //' \
-    modules/openstack_project/templates/review.projects.yaml.erb \
+    $OLDPWD/modules/openstack_project/templates/review.projects.yaml.erb \
     > projects_list
 
 LC_ALL=C sort projects_list -o projects_list.sorted
