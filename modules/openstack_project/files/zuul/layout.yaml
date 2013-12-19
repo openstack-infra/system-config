@@ -115,6 +115,8 @@ jobs:
     parameter-function: single_use_node
   - name: gate-ci-docs
     parameter-function: single_use_node
+  - name: ^(gate|check)-requirements-integration-dsvm$
+    branch: ^(?!stable/grizzly).*$
   - name: ^(gate|check)-tempest-dsvm-neutron-pg$
     branch: ^(?!stable/grizzly).*$
   - name: ^(gate|check)-tempest-dsvm-neutron-isolated$
