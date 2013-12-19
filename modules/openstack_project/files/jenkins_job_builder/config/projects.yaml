@@ -387,7 +387,6 @@
 
 - project:
     name: gearman-plugin
-    maven-group-id: org.jenkins-ci.plugins
     github-org: openstack-infra
     node: precise
     tarball-site: tarballs.openstack.org
@@ -397,7 +396,6 @@
 
 - project:
     name: clouddocs-maven-plugin
-    maven-group-id: com.rackspace.cloud.api
     github-org: stackforge
     node: precise
     tarball-site: tarballs.openstack.org
@@ -407,7 +405,6 @@
 
 - project:
     name: zmq-event-publisher
-    maven-group-id: org.jenkins-ci.plugins
     github-org: openstack-infra
     node: precise
     tarball-site: tarballs.openstack.org

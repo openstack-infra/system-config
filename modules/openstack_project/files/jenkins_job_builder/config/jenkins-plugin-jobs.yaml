@@ -1,9 +1,9 @@
-# usig a freestyle project to work around jenkins bug: 
+# usig a freestyle project to work around jenkins bug:
 # https://issues.jenkins-ci.org/browse/JENKINS-14193
 
 - job-template:
     name: 'gate-{name}-build'
-    node: precise
+    node: '{node}'
 
     wrappers:
       - timeout:
@@ -30,7 +30,7 @@
 
 - job-template:
     name: '{name}-hpi-artifact'
-    node: precise
+    node: '{node}'
 
     wrappers:
       - timeout:
@@ -56,7 +56,7 @@
 
     publishers:
       - war:
-          site: 'tarballs.openstack.org'
+          site: '{tarball-site}'
           warfile: 'target/{name}-${{PROJECT_VER}}.hpi'
           target: 'tarballs/ci/{name}'
       - console-log
