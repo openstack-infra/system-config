@@ -16,6 +16,29 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 
+# If we're running on a cloud server with no swap, fix that:
+if [ `grep SwapTotal /proc/meminfo | awk '{ print $2; }'` -eq 0 ]; then
+    if [ -b /dev/vdb ]; then
+        DEV='/dev/vdb'
+    elif [ -b /dev/xvde ]; then
+        DEV='/dev/xvde'
+    fi
+    if [ -n "$DEV" ]; then
+	MEM = `grep MemTotal /proc/meminfo | awk '{print $2; }'`
+        sudo umount ${DEV}
+        sudo parted ${DEV} --script -- mklabel msdos
+        sudo parted ${DEV} --script -- mkpart primary linux-swap 0 ${MEM}B
+        sudo parted ${DEV} --script -- mkpart primary ext2 ${MEM}B -1
+        sudo mkswap ${DEV}1
+        sudo mkfs.ext4 ${DEV}2
+        sudo swapon ${DEV}1
+        sudo mount ${DEV}2 /mnt
+        sudo rsync -a /opt/ /mnt/
+        sudo umount /mnt
+        sudo mount ${DEV}2 /opt
+    fi
+fi
+
 # Install pip using get-pip
 EZ_SETUP_URL=https://bitbucket.org/pypa/setuptools/raw/bootstrap/ez_setup.py
 PIP_GET_PIP_URL=https://raw.github.com/pypa/pip/master/contrib/get-pip.py
