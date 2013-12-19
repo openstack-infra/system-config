@@ -17,8 +17,7 @@ ssl_client_verify_header = SSL_CLIENT_VERIFY
 manifestdir=/opt/config/$environment/manifests
 modulepath=/opt/config/$environment/modules:/etc/puppet/modules
 manifest=$manifestdir/site.pp
-reports=store, http
-reporturl=http://puppet-dashboard.openstack.org:3000/reports/upload
+reports=store
 
 [agent]
 report=true
