@@ -12,11 +12,9 @@ sed -e '/^- project: /!d' -e 's/^- project: //' \
     $OLDPWD/modules/openstack_project/templates/review.projects.yaml.erb \
     > projects_list
 
-LC_ALL=C sort projects_list -o projects_list.sorted
+LC_ALL=C sort --ignore-case projects_list -o projects_list.sorted
 
-diff projects_list projects_list.sorted > projects_list.diff
-
-if [[ -n `cat projects_list.diff` ]]; then
+if ! diff projects_list projects_list.sorted > projects_list.diff; then
     echo "The following projects should be alphabetized: "
     cat projects_list.diff | grep -e '> '
     exit 1
