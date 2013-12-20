@@ -3863,6 +3863,33 @@ projects:
           - post-mirror-python33
       - hook-stevedore-rtfd
 
+  - name: stackforge/cliff
+    check:
+      - gate-cliff-pep8
+      - gate-cliff-python26
+      - gate-cliff-python27
+      - gate-cliff-python33
+      - gate-cliff-pypy
+    gate:
+      - gate-cliff-pep8
+      - gate-cliff-python26
+      - gate-cliff-python27
+      - gate-cliff-python33
+      - gate-cliff-pypy
+    post:
+      - cliff-branch-tarball
+      - hook-cliff-rtfd
+    pre-release:
+      - cliff-tarball
+      - hook-cliff-rtfd
+    release:
+      - cliff-tarball:
+        - cliff-pypi-upload:
+          - post-mirror-python26
+          - post-mirror-python27
+          - post-mirror-python33
+      - hook-cliff-rtfd
+
   - name: openstack-infra/groups
     check:
       - gate-noop
