@@ -14,6 +14,15 @@ Smokestack reads the Gerrit event stream and runs it's own tests on the commits.
 If one of the tests fails it will publish information and links to the failure
 on the review in Gerrit.
 
+Requirements
+------------
+
+* Support recheck and reverify
+* Publish who the maintainers of the third party testing system are, and make
+  them available for support as needed.
+* Include a link to all test artifacts to make debugging failed tests easier.
+
+
 Reading the Event Stream
 ------------------------
 
