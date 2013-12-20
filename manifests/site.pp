@@ -662,7 +662,7 @@ node /^.*\.jclouds\.openstack\.org$/ {
 }
 
 node 'openstackid-dev.openstack.org' {
-  class { 'openstack_project::openid_dev':
+  class { 'openstack_project::openstackid_dev':
     sysadmins           => hiera('sysadmins'),
     site_admin_password => hiera('openstackid_dev_site_admin_password'),
     site_mysql_host     => hiera('openstackid_dev_mysql_host'),
