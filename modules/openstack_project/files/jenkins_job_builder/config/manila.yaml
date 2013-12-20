@@ -4,7 +4,7 @@
 
     wrappers:
       - timeout:
-          timeout: 60
+          timeout: 65
           fail: true
       - timestamps
 
@@ -13,6 +13,7 @@
       - shell: |
           #!/bin/bash -xe
           export PYTHONUNBUFFERED=true
+          export DEVSTACK_GATE_TIMEOUT=60
           export ENABLED_SERVICES=manila,m-api,m-shr,m-sch
           export PROJECTS="stackforge/manila $PROJECTS"
           export PROJECTS="stackforge/python-manilaclient $PROJECTS"

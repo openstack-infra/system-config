@@ -4,7 +4,7 @@
 
     wrappers:
       - timeout:
-          timeout: 90
+          timeout: 95
           fail: true
       - timestamps
 
@@ -13,6 +13,7 @@
       - shell: |
           #!/bin/bash -xe
           export PYTHONUNBUFFERED=true
+          export DEVSTACK_GATE_TIMEOUT=90
           export DEVSTACK_GATE_TEMPEST=1
           export DEVSTACK_GATE_TEMPEST_FULL=1
           export ZUUL_BRANCH={branch-override}
@@ -34,7 +35,7 @@
 
     wrappers:
       - timeout:
-          timeout: 90
+          timeout: 95
           fail: true
       - timestamps
 
@@ -43,6 +44,7 @@
       - shell: |
           #!/bin/bash -xe
           export PYTHONUNBUFFERED=true
+          export DEVSTACK_GATE_TIMEOUT=90
           export DEVSTACK_GATE_TEMPEST=1
           export DEVSTACK_GATE_POSTGRES=1
           export DEVSTACK_GATE_TEMPEST_FULL=1
@@ -65,7 +67,7 @@
 
     wrappers:
       - timeout:
-          timeout: 90
+          timeout: 95
           fail: true
       - timestamps
 
@@ -74,6 +76,7 @@
       - shell: |
           #!/bin/bash -xe
           export PYTHONUNBUFFERED=true
+          export DEVSTACK_GATE_TIMEOUT=90
           export DEVSTACK_GATE_TEMPEST=1
           export DEVSTACK_GATE_NEUTRON=1
           export DEVSTACK_GATE_SMOKE_SERIAL=1
@@ -96,7 +99,7 @@
 
     wrappers:
       - timeout:
-          timeout: 180
+          timeout: 185
           fail: true
       - timestamps
 
@@ -105,6 +108,7 @@
       - shell: |
           #!/bin/bash -xe
           export PYTHONUNBUFFERED=true
+          export DEVSTACK_GATE_TIMEOUT=180
           export DEVSTACK_GATE_TEMPEST=1
           export DEVSTACK_GATE_TEMPEST_ALL=1
           export ZUUL_BRANCH={branch-override}
@@ -126,7 +130,7 @@
 
     wrappers:
       - timeout:
-          timeout: 180
+          timeout: 185
           fail: true
       - timestamps
 
@@ -135,6 +139,7 @@
       - shell: |
           #!/bin/bash -xe
           export PYTHONUNBUFFERED=true
+          export DEVSTACK_GATE_TIMEOUT=180
           export DEVSTACK_GATE_TEMPEST=1
           export DEVSTACK_GATE_TEMPEST_STRESS=1
           export ZUUL_BRANCH={branch-override}
@@ -156,7 +161,7 @@
 
     wrappers:
       - timeout:
-          timeout: 120
+          timeout: 125
           fail: true
       - timestamps
 
@@ -165,6 +170,7 @@
       - shell: |
           #!/bin/bash -xe
           export PYTHONUNBUFFERED=true
+          export DEVSTACK_GATE_TIMEOUT=120
           export DEVSTACK_GATE_TEMPEST=1
           export DEVSTACK_GATE_POSTGRES=1
           export DEVSTACK_GATE_NEUTRON=1
@@ -188,7 +194,7 @@
 
     wrappers:
       - timeout:
-          timeout: 60
+          timeout: 65
           fail: true
       - timestamps
 
@@ -197,6 +203,7 @@
       - shell: |
           #!/bin/bash -xe
           export PYTHONUNBUFFERED=true
+          export DEVSTACK_GATE_TIMEOUT=60
           export DEVSTACK_GATE_TEMPEST=1
           export DEVSTACK_GATE_TEMPEST_LARGE_OPS=1
           export ZUUL_BRANCH={branch-override}
@@ -218,7 +225,7 @@
 
     wrappers:
       - timeout:
-          timeout: 60
+          timeout: 65
           fail: true
       - timestamps
 
@@ -227,6 +234,7 @@
       - shell: |
           #!/bin/bash -xe
           export PYTHONUNBUFFERED=true
+          export DEVSTACK_GATE_TIMEOUT=60
           export DEVSTACK_GATE_TEMPEST=1
           export DEVSTACK_GATE_TEMPEST_LARGE_OPS=1
           export DEVSTACK_GATE_NEUTRON=1
@@ -249,7 +257,7 @@
 
     wrappers:
       - timeout:
-          timeout: 180
+          timeout: 185
           fail: true
       - timestamps
 
@@ -258,6 +266,7 @@
       - shell: |
           #!/bin/bash -xe
           export PYTHONUNBUFFERED=true
+          export DEVSTACK_GATE_TIMEOUT=180
           export DEVSTACK_GATE_TEMPEST=1
           export DEVSTACK_GATE_TEMPEST_ALL=1
           export ZUUL_BRANCH={branch-override}
@@ -279,7 +288,7 @@
 
     wrappers:
       - timeout:
-          timeout: 180
+          timeout: 185
           fail: true
       - timestamps
 
@@ -288,6 +297,7 @@
       - shell: |
           #!/bin/bash -xe
           export PYTHONUNBUFFERED=true
+          export DEVSTACK_GATE_TIMEOUT=180
           export DEVSTACK_GATE_TEMPEST=1
           export DEVSTACK_GATE_TEMPEST_COVERAGE=1
           export ZUUL_BRANCH={branch-override}
@@ -309,7 +319,7 @@
 
     wrappers:
       - timeout:
-          timeout: 180
+          timeout: 185
           fail: true
       - timestamps
 
@@ -318,6 +328,7 @@
       - shell: |
           #!/bin/bash -xe
           export PYTHONUNBUFFERED=true
+          export DEVSTACK_GATE_TIMEOUT=180
           export DEVSTACK_GATE_TEMPEST=1
           export DEVSTACK_GATE_TEMPEST_STRESS=1
           export ZUUL_BRANCH={branch-override}
@@ -339,7 +350,7 @@
 
     wrappers:
       - timeout:
-          timeout: 90
+          timeout: 95
           fail: true
       - timestamps
 
@@ -348,6 +359,7 @@
       - shell: |
           #!/bin/bash -xe
           export PYTHONUNBUFFERED=true
+          export DEVSTACK_GATE_TIMEOUT=90
           export DEVSTACK_GATE_TEMPEST=1
           export DEVSTACK_GATE_TEMPEST_FULL=1
           export DEVSTACK_GATE_SAVANNA=1
@@ -370,7 +382,7 @@
 
     wrappers:
       - timeout:
-          timeout: 90
+          timeout: 95
           fail: true
       - timestamps
 
@@ -379,6 +391,7 @@
       - shell: |
           #!/bin/bash -xe
           export PYTHONUNBUFFERED=true
+          export DEVSTACK_GATE_TIMEOUT=90
           export DEVSTACK_GATE_TEMPEST=1
           export DEVSTACK_GATE_POSTGRES=1
           export DEVSTACK_GATE_TEMPEST_FULL=1
@@ -402,7 +415,7 @@
 
     wrappers:
       - timeout:
-          timeout: 90
+          timeout: 95
           fail: true
       - timestamps
 
@@ -411,6 +424,7 @@
       - shell: |
           #!/bin/bash -xe
           export PYTHONUNBUFFERED=true
+          export DEVSTACK_GATE_TIMEOUT=90
           export DEVSTACK_GATE_TEMPEST=1
           export DEVSTACK_GATE_NEUTRON=1
           export DEVSTACK_GATE_SMOKE_SERIAL=1
