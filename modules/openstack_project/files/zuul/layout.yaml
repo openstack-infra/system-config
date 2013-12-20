@@ -127,8 +127,6 @@ jobs:
   - name: gate-tempest-dsvm-neutron-heat-slow
     branch: ^(?!stable/grizzly).*$
     voting: false
-  - name: ^(gate|check)-devstack-dsvm-cells$
-    voting: false
   - name: ^(gate|check)-tempest-dsvm-large-ops$
     branch: ^(?!stable/grizzly).*$
   - name: ^(gate|check)-tempest-dsvm-neutron-large-ops$
@@ -751,6 +749,7 @@ projects:
       - gate-tempest-dsvm-large-ops
       - gate-tempest-dsvm-neutron-large-ops
       - gate-grenade-dsvm
+      - gate-devstack-dsvm-cells
     experimental:
       - gate-grenade-dsvm-forward
       - gate-tempest-dsvm-neutron-full
@@ -965,6 +964,7 @@ projects:
       - gate-tempest-dsvm-neutron
       - gate-tempest-dsvm-large-ops
       - gate-tempest-dsvm-neutron-large-ops
+      - gate-devstack-dsvm-cells
       - gate-grenade-dsvm
     experimental:
       - gate-grenade-dsvm-forward
@@ -1384,10 +1384,10 @@ projects:
       - gate-tempest-dsvm-neutron
       - gate-tempest-dsvm-large-ops
       - gate-tempest-dsvm-neutron-large-ops
+      - gate-devstack-dsvm-cells
       - gate-grenade-dsvm
     experimental:
       - gate-grenade-dsvm-forward
-      - gate-devstack-dsvm-cells
     post:
       - python-ganttclient-branch-tarball
       - python-ganttclient-coverage
@@ -1512,10 +1512,10 @@ projects:
       - gate-tempest-dsvm-neutron
       - gate-tempest-dsvm-large-ops
       - gate-tempest-dsvm-neutron-large-ops
+      - gate-devstack-dsvm-cells
       - gate-grenade-dsvm
     experimental:
       - gate-grenade-dsvm-forward
-      - gate-devstack-dsvm-cells
     post:
       - python-novaclient-branch-tarball
       - python-novaclient-coverage
