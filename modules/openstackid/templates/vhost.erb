@@ -1,0 +1,39 @@
+<VirtualHost <%= scope.lookupvar("openstackid::vhost_name") %>:80>
+  ServerAdmin <%= scope.lookupvar("openstackid::serveradmin") %>
+
+  ErrorLog ${APACHE_LOG_DIR}/openstackid-error.log
+  LogLevel warn
+  CustomLog ${APACHE_LOG_DIR}/openstackid-access.log combined
+
+  Redirect / https://<%= scope.lookupvar("openstackid::vhost_name") %>/
+
+</VirtualHost>
+
+<IfModule mod_ssl.c>
+<VirtualHost <%= scope.lookupvar("openstackid::vhost_name") %>:443>
+  ServerName <%= scope.lookupvar("openstackid::vhost_name") %>
+  ServerAdmin <%= scope.lookupvar("openstackid::serveradmin") %>
+
+  ErrorLog ${APACHE_LOG_DIR}/openstackid-ssl-error.log
+  LogLevel warn
+  CustomLog ${APACHE_LOG_DIR}/openstackid-ssl-access.log combined
+
+  SSLEngine on
+  SSLCertificateFile      <%= scope.lookupvar("openstackid::ssl_cert_file") %>
+  SSLCertificateKeyFile   <%= scope.lookupvar("openstackid::ssl_key_file") %>
+<% if scope.lookupvar("openstackid::ssl_chain_file") != "" %>
+  SSLCertificateChainFile <%= scope.lookupvar("openstackid::ssl_chain_file") %>
+<% end %>
+
+  RewriteEngine on
+  RewriteCond %{HTTP_HOST} !<%= scope.lookupvar("openstackid::vhost_name") %>
+  RewriteRule ^.*$ <%= scope.lookupvar("openstackid::canonicalweburl") %>
+
+  DocumentRoot <%= docroot %>
+  <Directory <%= docroot %>/>
+    Order allow,deny
+    Allow from all
+  </Directory>
+
+</VirtualHost>
+</IfModule>
