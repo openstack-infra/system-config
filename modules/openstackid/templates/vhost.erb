@@ -1,0 +1,61 @@
+<VirtualHost <%= scope.lookupvar("openstackid::vhost_name") %>:80>
+  ServerAdmin <%= scope.lookupvar("openstackid::serveradmin") %>
+
+  ErrorLog ${APACHE_LOG_DIR}/openstackid-error.log
+  LogLevel warn
+  CustomLog ${APACHE_LOG_DIR}/openstackid-access.log combined
+
+  Redirect / https://<%= scope.lookupvar("openstackid::vhost_name") %>/
+
+</VirtualHost>
+
+<IfModule mod_ssl.c>
+<VirtualHost <%= scope.lookupvar("openstackid::vhost_name") %>:443>
+  ServerName <%= scope.lookupvar("openstackid::vhost_name") %>
+  ServerAdmin <%= scope.lookupvar("openstackid::serveradmin") %>
+
+  ErrorLog ${APACHE_LOG_DIR}/openstackid-ssl-error.log
+  LogLevel warn
+  CustomLog ${APACHE_LOG_DIR}/openstackid-ssl-access.log combined
+
+  SSLEngine on
+  SSLCertificateFile      <%= scope.lookupvar("openstackid::ssl_cert_file") %>
+  SSLCertificateKeyFile   <%= scope.lookupvar("openstackid::ssl_key_file") %>
+<% if scope.lookupvar("openstackid::ssl_chain_file") != "" %>
+  SSLCertificateChainFile <%= scope.lookupvar("openstackid::ssl_chain_file") %>
+<% end %>
+
+  <FilesMatch "\.(cgi|shtml|phtml|php)$">
+      SSLOptions +StdEnvVars
+  </FilesMatch>
+  <Directory /usr/lib/cgi-bin>
+      SSLOptions +StdEnvVars
+  </Directory>
+
+  BrowserMatch "MSIE [2-6]" \
+      nokeepalive ssl-unclean-shutdown \
+      downgrade-1.0 force-response-1.0
+  # MSIE 7 and newer should be able to use keepalive
+  BrowserMatch "MSIE [17-9]" ssl-unclean-shutdown
+
+  RewriteEngine on
+  RewriteCond %{HTTP_HOST} !<%= scope.lookupvar("openstackid::vhost_name") %>
+  RewriteRule ^.*$ <%= scope.lookupvar("openstackid::canonicalweburl") %>
+<% if scope.lookupvar("openstackid::robots_txt_source") != "" -%>
+  RewriteCond %{REQUEST_URI} !^/robots.txt$
+<% end -%>
+  RewriteRule ^/(.*)$ http://localhost:8081/$1 [P]
+
+  ProxyPassReverse / http://localhost:8081/
+
+<% if scope.lookupvar("openstackid::robots_txt_source") != "" -%>
+  Alias /robots.txt /etc/openstackid/robots.txt
+<% end -%>
+
+  <Directory /srv/openstackid/>
+    Order allow,deny
+    Allow from all
+  </Directory>
+
+</VirtualHost>
+</IfModule>

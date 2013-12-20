@@ -19,12 +19,13 @@ class openstack_project::openid_dev (
   $site_admin_password = '',
   $site_mysql_password = '',
   $site_mysql_user     = 'openstackid',
-  $site_mysql_host     = '127.0.0.1',
+  $site_mysql_host     = '',
   $db_name             = 'openstackid_openid_dev',
   $redis_port          = '6378',
   $redis_max_memory    = '1gb',
   $redis_bind          = '127.0.0.1',
 ) {
+
   realize (
     User::Virtual::Localuser['smarcet'],
   )
@@ -34,25 +35,21 @@ class openstack_project::openid_dev (
     sysadmins                 => $sysadmins,
   }
 
-  # php packages needed for openid server
-
-  include apt
-  apt::ppa { 'ppa:ondrej/php5-oldstable': }
-
-  # we need PHP 5.4 or greather
-  package { ['php5-common','php5-curl','php5-cli','php5-json','php5-mcrypt','php5-mysql']:
-    require  => [ Exec[apt_update], Class['openstack_project::server'] ]
+  class { 'openstackid':
+    site_admin_password => $site_admin_password,
+    site_mysql_password => $site_mysql_password,
+    site_mysql_user     => $site_mysql_user,
+    site_mysql_host     => $site_mysql_host,
+    db_name             => $db_name,
+    redis_port          => $redis_port,
+    redis_host          => $redis_bind,
   }
 
   # redis (custom module written by tipit)
-
   class { 'redis':
     redis_port       => $redis_port,
     redis_max_memory => $redis_max_memory,
     redis_bind       => $redis_bind,
   }
 
-  include apache
-  include apache::ssl
-  include apache::php
 }
