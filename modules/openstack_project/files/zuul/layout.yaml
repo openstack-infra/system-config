@@ -3506,11 +3506,9 @@ projects:
   - name: stackforge/cookbook-openstack-compute
     check:
       - gate-cookbook-openstack-compute-chef-lint
-      - gate-cookbook-openstack-compute-chef-style
       - gate-cookbook-openstack-compute-chef-unit
     gate:
       - gate-cookbook-openstack-compute-chef-lint
-      - gate-cookbook-openstack-compute-chef-style
       - gate-cookbook-openstack-compute-chef-unit
 
   - name: stackforge/cookbook-openstack-dashboard
