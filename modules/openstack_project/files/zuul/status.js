@@ -229,7 +229,10 @@ function format_change(change, change_queue) {
     }
 
     html += '<td class="change-container">';
-    html += '<div class="change" id="' + safe_id(change['id']) + '"><div class="header" onClick="toggle_display_jobs(this)">';
+    html += '<div class="change" id="' + safe_id(change['id']) + '">' +
+            '<div class="header" onClick="toggle_display_jobs(this)" ' +
+            'onmouseover="$(this).addClass(\'hover\')" ' +
+            'onmouseout="$(this).removeClass(\'hover\')">';
 
     html += '<span class="project">' + change['project'] + '</span>';
     var id = change['id'];
