@@ -8,7 +8,7 @@ class openstack_project::users {
 
   @user::virtual::localuser { 'corvus':
     realname => 'James E. Blair',
-    sshkeys  => "ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAvKYcWK1T7e3PKSFiqb03EYktnoxVASpPoq2rJw2JvhsP0JfS+lKrPzpUQv7L4JCuQMsPNtZ8LnwVEft39k58Kh8XMebSfaqPYAZS5zCNvQUQIhP9myOevBZf4CDeG+gmssqRFcWEwIllfDuIzKBQGVbomR+Y5QuW0HczIbkoOYI6iyf2jB6xg+bmzR2HViofNrSa62CYmHS6dO04Z95J27w6jGWpEOTBjEQvnb9sdBc4EzaBVmxCpa2EilB1u0th7/DvuH0yP4T+X8G8UjW1gZCTOVw06fqlBCST4KjdWw1F/AuOCT7048klbf4H+mCTaEcPzzu3Fkv8ckMWtS/Z9Q== jeblair@operational-necessity\nssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDYjpUnQYcxEgWvhuZ7Ta5G6fUU3F4dpQ3VgoimBOPG+IVM4//nZtK76c3qt6Q7zLRcIQVM3LYaPiinGp5UlsA5o9kb5c0zXZWLm8odRN75zvqr2SpHxckowr0/D7WASmbGF5QCnUHV/zoYI6sjTMqw+OcBgOKuIbfNVCTBrQ2wDoOHt2YAtZnMTEOXEJqNxK0MlwgUwOA/yNsAWTfmIORHTjmxcg8L39yfdw9cM3eblD7KnfMeqzntrWKdxuZ/2oM2Y4+mSihEx8it1rVuFh6lTO3tFsdlcfnq7BrGtfiZwtRgrTUnIhzojMafOKunz3Uvu5e0BioSO77IgwbgYs/J chrome\n",
+    sshkeys  => "ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAvKYcWK1T7e3PKSFiqb03EYktnoxVASpPoq2rJw2JvhsP0JfS+lKrPzpUQv7L4JCuQMsPNtZ8LnwVEft39k58Kh8XMebSfaqPYAZS5zCNvQUQIhP9myOevBZf4CDeG+gmssqRFcWEwIllfDuIzKBQGVbomR+Y5QuW0HczIbkoOYI6iyf2jB6xg+bmzR2HViofNrSa62CYmHS6dO04Z95J27w6jGWpEOTBjEQvnb9sdBc4EzaBVmxCpa2EilB1u0th7/DvuH0yP4T+X8G8UjW1gZCTOVw06fqlBCST4KjdWw1F/AuOCT7048klbf4H+mCTaEcPzzu3Fkv8ckMWtS/Z9Q== jeblair@operational-necessity\n",
   }
 
   @user::virtual::localuser { 'soren':
