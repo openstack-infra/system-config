@@ -338,6 +338,10 @@ function update() {
         $("#result_event_queue_length").html(
             data['result_event_queue']['length']);
 
+        if ('last_reconfigured' in data) {
+            var last_reconfigured = new Date(data['last_reconfigured']);
+            $('#last-reconfigured-span').text(last_reconfigured.toString());
+        }
     });
 }
 
