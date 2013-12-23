@@ -971,6 +971,9 @@ projects:
     experimental:
       - gate-grenade-dsvm-forward
       - gate-tempest-dsvm-neutron-full
+      - check-tempest-dsvm-neutron-pg
+      - check-tempest-dsvm-neutron-isolated
+      - check-tempest-dsvm-neutron-pg-isolated
     post:
       - nova-branch-tarball
       - nova-coverage
