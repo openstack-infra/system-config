@@ -128,8 +128,6 @@
 - project: openstack-infra/storyboard
   upstream: git://github.com/ttx/storyboard.git
   description: OpenStack Task Tracking System
-- project: stackforge/tooz
-  description: Coordinate distributed systems.
 - project: openstack-infra/tripleo-ci
   description: CI for the tripleo project
   upstream: https://github.com/toci-dev/toci
@@ -186,11 +184,11 @@
   launchpad: openstack-api-site
 - project: openstack/openstack
   upstream: git://github.com/emonty/openstack
+- project: openstack/openstack-chef
 - project: openstack/openstack-doc-tools
   launchpad: openstack-manuals
   description: Tools used by OpenStack Documentation
   upstream: git://github.com/ajaeger/openstack-doc-tools.git
-- project: openstack/openstack-chef
 - project: openstack/openstack-manuals
 - project: openstack/openstack-planet
 - project: openstack/operations-guide
@@ -296,6 +294,10 @@
 - project: stackforge/cl-openstack-client
   description: Common Lisp OpenStack client libraries
   upstream: git://github.com/jd/cl-openstack-client.git
+- project: stackforge/cliff
+  description: Command Line Interface Formulation Framework
+  upstream: git://github.com/dreamhost/cliff.git
+  launchpad: python-cliff
 - project: stackforge/climate
   description: Reservation Service for OpenStack
   upstream: git://github.com/jd/climate.git
@@ -367,11 +369,18 @@
   description: Chef Cookbook - OpenStack Orchestration
   acl-config: /home/gerrit2/acls/stackforge/chef-cookbooks.config
 - project: stackforge/designate
+- project: stackforge/entropy
+  description: A framework for Audit/Repair scripts for openstack
 - project: stackforge/fuel-astute
   launchpad: fuel
   description: Fuel orchestrator
   upstream: git://github.com/Mirantis/astute.git
   acl-config: /home/gerrit2/acls/stackforge/fuel.config
+- project: stackforge/fuel-devops
+   launchpad: fuel
+   description: Fuel DevOps tools for managing virtual environments
+   upstream: git://github.com/Mirantis/devops.git
+   acl-config: /home/gerrit2/acls/stackforge/fuel.config
 - project: stackforge/fuel-docs
   launchpad: fuel
   description: Fuel Documentation
@@ -381,11 +390,6 @@
   launchpad: fuel
   description: Fuel Library
   upstream: git://github.com/Mirantis/fuel.git
-  acl-config: /home/gerrit2/acls/stackforge/fuel.config
-- project: stackforge/fuel-devops
-  launchpad: fuel
-  description: Fuel DevOps tools for managing virtual environments
-  upstream: git://github.com/Mirantis/devops.git
   acl-config: /home/gerrit2/acls/stackforge/fuel.config
 - project: stackforge/fuel-main
   launchpad: fuel
@@ -428,11 +432,11 @@
 - project: stackforge/milk
   description: ETC cloud API framework project
   upstream: git://github.com/sarob/milk.git
-- project: stackforge/MRaaS
 - project: stackforge/mistral
   description: Task orchestration service for OpenStack cloud.
   upstream: git://github.com/rakhmerov/mistral.git
   acl-config: /home/gerrit2/acls/stackforge/mistral.config
+- project: stackforge/MRaaS
 - project: stackforge/murano-agent
   launchpad: murano
   upstream: git://github.com/Mirantis/murano-agent.git
@@ -547,10 +551,6 @@
   description: OpenStack Puppet Dev Environment
   acl-config: /home/gerrit2/acls/stackforge/puppet-modules.config
   upstream: git://github.com/puppetlabs/puppetlabs-openstack_dev_env.git
-- project: stackforge/puppet_openstack_builder
-  upstream: git://github.com/CiscoSystems/puppet_openstack_builder
-  description: Data model for deploying multiple openstack reference architectures
-  acl-config: /home/gerrit2/acls/stackforge/puppet-modules.config
 - project: stackforge/puppet-savanna
   launchpad: savanna
   description: Savanna Puppet Module
@@ -567,6 +567,10 @@
   description: Puppet provider for virtual switches.
   acl-config: /home/gerrit2/acls/stackforge/puppet-modules.config
   upstream: git://github.com/hogepodge/puppet-vswitch.git
+- project: stackforge/puppet_openstack_builder
+  upstream: git://github.com/CiscoSystems/puppet_openstack_builder
+  description: Data model for deploying multiple openstack reference architectures
+  acl-config: /home/gerrit2/acls/stackforge/puppet-modules.config
 - project: stackforge/pycadf
   description: CADF Python module
 - project: stackforge/pyghmi
@@ -610,6 +614,10 @@
 - project: stackforge/stackalytics
   description: OpenStack analytics dashboard
   upstream: git://github.com/Mirantis/stackalytics.git
+- project: stackforge/stevedore
+  launchpad: python-stevedore
+  description: Manage dynamic plugins for Python applications
+  upstream: git://github.com/dreamhost/stevedore.git
 - project: stackforge/swiftsync
   description: "Swift mass syncronizer"
   upstream: git://github.com/enovance/swiftsync.git
@@ -620,19 +628,11 @@
 - project: stackforge/tomograph
   description: "Library to help distributed applications send trace information to metrics backends like Zipkin and Statsd."
   upstream: https://github.com/timjr/tomograph.git
+- project: stackforge/tooz
+  description: Coordinate distributed systems.
 - project: stackforge/turbo-hipster
   description: A generic zuul worker using the gearman protocol.
   upstream: git://github.com/rcbau/turbo-hipster.git
 - project: stackforge/wsme
   description: Web Service Made Easy (WSME) simplify the writing of REST web services by providing simple yet powerful typing which removes the need to directly manipulate the request and the response objects.
   upstream: git://github.com/ryanpetrello/wsme.git
-- project: stackforge/stevedore
-  launchpad: python-stevedore
-  description: Manage dynamic plugins for Python applications
-  upstream: git://github.com/dreamhost/stevedore.git
-- project: stackforge/entropy
-  description: A framework for Audit/Repair scripts for openstack
-- project: stackforge/cliff
-  description: Command Line Interface Formulation Framework
-  upstream: git://github.com/dreamhost/cliff.git
-  launchpad: python-cliff
