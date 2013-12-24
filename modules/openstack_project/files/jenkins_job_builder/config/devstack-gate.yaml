@@ -71,7 +71,7 @@
           export DEVSTACK_GATE_TEMPEST_FULL=1
           export BRANCH_OVERRIDE={branch-override}
           if [ "$BRANCH_OVERRIDE" != "default" ] ; then
-              export ZUUL_BRANCH=$BRANCH_OVERRIDE
+              export OVERRIDE_ZUUL_BRANCH=$BRANCH_OVERRIDE
           fi
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
@@ -103,7 +103,7 @@
           export DEVSTACK_GATE_TEMPEST_HEAT_SLOW=1
           export BRANCH_OVERRIDE={branch-override}
           if [ "$BRANCH_OVERRIDE" != "default" ] ; then
-              export ZUUL_BRANCH=$BRANCH_OVERRIDE
+              export OVERRIDE_ZUUL_BRANCH=$BRANCH_OVERRIDE
           fi
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
@@ -135,7 +135,7 @@
           export DEVSTACK_GATE_SMOKE_SERIAL=1
           export BRANCH_OVERRIDE={branch-override}
           if [ "$BRANCH_OVERRIDE" != "default" ] ; then
-              export ZUUL_BRANCH=$BRANCH_OVERRIDE
+              export OVERRIDE_ZUUL_BRANCH=$BRANCH_OVERRIDE
           fi
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
@@ -169,7 +169,7 @@
           export DEVSTACK_GATE_SMOKE_SERIAL=1
           export BRANCH_OVERRIDE={branch-override}
           if [ "$BRANCH_OVERRIDE" != "default" ] ; then
-              export ZUUL_BRANCH=$BRANCH_OVERRIDE
+              export OVERRIDE_ZUUL_BRANCH=$BRANCH_OVERRIDE
           fi
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
@@ -203,7 +203,7 @@
           export DEVSTACK_GATE_SMOKE_SERIAL=1
           export BRANCH_OVERRIDE={branch-override}
           if [ "$BRANCH_OVERRIDE" != "default" ] ; then
-              export ZUUL_BRANCH=$BRANCH_OVERRIDE
+              export OVERRIDE_ZUUL_BRANCH=$BRANCH_OVERRIDE
           fi
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
@@ -235,7 +235,7 @@
           export DEVSTACK_GATE_TEMPEST_ALLOW_TENANT_ISOLATION=1
           export BRANCH_OVERRIDE={branch-override}
           if [ "$BRANCH_OVERRIDE" != "default" ] ; then
-              export ZUUL_BRANCH=$BRANCH_OVERRIDE
+              export OVERRIDE_ZUUL_BRANCH=$BRANCH_OVERRIDE
           fi
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
@@ -268,7 +268,7 @@
           export DEVSTACK_GATE_SMOKE_SERIAL=1
           export BRANCH_OVERRIDE={branch-override}
           if [ "$BRANCH_OVERRIDE" != "default" ] ; then
-              export ZUUL_BRANCH=$BRANCH_OVERRIDE
+              export OVERRIDE_ZUUL_BRANCH=$BRANCH_OVERRIDE
           fi
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
@@ -301,7 +301,7 @@
           export DEVSTACK_GATE_TEMPEST_ALLOW_TENANT_ISOLATION=1
           export BRANCH_OVERRIDE={branch-override}
           if [ "$BRANCH_OVERRIDE" != "default" ] ; then
-              export ZUUL_BRANCH=$BRANCH_OVERRIDE
+              export OVERRIDE_ZUUL_BRANCH=$BRANCH_OVERRIDE
           fi
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
@@ -332,7 +332,7 @@
           export DEVSTACK_GATE_EXERCISES=1
           export BRANCH_OVERRIDE={branch-override}
           if [ "$BRANCH_OVERRIDE" != "default" ] ; then
-              export ZUUL_BRANCH=$BRANCH_OVERRIDE
+              export OVERRIDE_ZUUL_BRANCH=$BRANCH_OVERRIDE
           fi
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
@@ -363,7 +363,7 @@
           export DEVSTACK_GATE_CELLS=1
           export BRANCH_OVERRIDE={branch-override}
           if [ "$BRANCH_OVERRIDE" != "default" ] ; then
-              export ZUUL_BRANCH=$BRANCH_OVERRIDE
+              export OVERRIDE_ZUUL_BRANCH=$BRANCH_OVERRIDE
           fi
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
@@ -395,7 +395,7 @@
           export DEVSTACK_GATE_CELLS=1
           export BRANCH_OVERRIDE={branch-override}
           if [ "$BRANCH_OVERRIDE" != "default" ] ; then
-              export ZUUL_BRANCH=$BRANCH_OVERRIDE
+              export OVERRIDE_ZUUL_BRANCH=$BRANCH_OVERRIDE
           fi
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
@@ -426,7 +426,7 @@
           export DEVSTACK_GATE_TEMPEST_LARGE_OPS=1
           export BRANCH_OVERRIDE={branch-override}
           if [ "$BRANCH_OVERRIDE" != "default" ] ; then
-              export ZUUL_BRANCH=$BRANCH_OVERRIDE
+              export OVERRIDE_ZUUL_BRANCH=$BRANCH_OVERRIDE
           fi
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
@@ -457,7 +457,7 @@
           export DEVSTACK_GATE_NEUTRON=1
           export BRANCH_OVERRIDE={branch-override}
           if [ "$BRANCH_OVERRIDE" != "default" ] ; then
-              export ZUUL_BRANCH=$BRANCH_OVERRIDE
+              export OVERRIDE_ZUUL_BRANCH=$BRANCH_OVERRIDE
           fi
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
@@ -490,7 +490,7 @@
           export DEVSTACK_GATE_MQ_DRIVER="zeromq"
           export BRANCH_OVERRIDE={branch-override}
           if [ "$BRANCH_OVERRIDE" != "default" ] ; then
-              export ZUUL_BRANCH=$BRANCH_OVERRIDE
+              export OVERRIDE_ZUUL_BRANCH=$BRANCH_OVERRIDE
           fi
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
@@ -522,7 +522,7 @@
           export DEVSTACK_GATE_CONFIGDRIVE=0
           export BRANCH_OVERRIDE={branch-override}
           if [ "$BRANCH_OVERRIDE" != "default" ] ; then
-              export ZUUL_BRANCH=$BRANCH_OVERRIDE
+              export OVERRIDE_ZUUL_BRANCH=$BRANCH_OVERRIDE
           fi
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
@@ -554,7 +554,7 @@
           export DEVSTACK_GATE_POSTGRES=1
           export BRANCH_OVERRIDE={branch-override}
           if [ "$BRANCH_OVERRIDE" != "default" ] ; then
-              export ZUUL_BRANCH=$BRANCH_OVERRIDE
+              export OVERRIDE_ZUUL_BRANCH=$BRANCH_OVERRIDE
           fi
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
@@ -698,7 +698,7 @@
           export DEVSTACK_GATE_SAVANNA=1
           export BRANCH_OVERRIDE={branch-override}
           if [ "$BRANCH_OVERRIDE" != "default" ] ; then
-              export ZUUL_BRANCH=$BRANCH_OVERRIDE
+              export OVERRIDE_ZUUL_BRANCH=$BRANCH_OVERRIDE
           fi
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
@@ -731,7 +731,7 @@
           export DEVSTACK_GATE_SAVANNA=1
           export BRANCH_OVERRIDE={branch-override}
           if [ "$BRANCH_OVERRIDE" != "default" ] ; then
-              export ZUUL_BRANCH=$BRANCH_OVERRIDE
+              export OVERRIDE_ZUUL_BRANCH=$BRANCH_OVERRIDE
           fi
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
@@ -764,7 +764,7 @@
           export DEVSTACK_GATE_SAVANNA=1
           export BRANCH_OVERRIDE={branch-override}
           if [ "$BRANCH_OVERRIDE" != "default" ] ; then
-              export ZUUL_BRANCH=$BRANCH_OVERRIDE
+              export OVERRIDE_ZUUL_BRANCH=$BRANCH_OVERRIDE
           fi
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
@@ -794,7 +794,7 @@
           export DEVSTACK_GATE_EXERCISES=1
           export BRANCH_OVERRIDE={branch-override}
           if [ "$BRANCH_OVERRIDE" != "default" ] ; then
-              export ZUUL_BRANCH=$BRANCH_OVERRIDE
+              export OVERRIDE_ZUUL_BRANCH=$BRANCH_OVERRIDE
           fi
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh

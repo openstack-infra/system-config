@@ -18,7 +18,7 @@
           export DEVSTACK_GATE_EXERCISES=0
           export BRANCH_OVERRIDE={branch-override}
           if [ "$BRANCH_OVERRIDE" != "default" ] ; then
-              export ZUUL_BRANCH=$BRANCH_OVERRIDE
+              export OVERRIDE_ZUUL_BRANCH=$BRANCH_OVERRIDE
           fi
 
           function post_test_hook {{
