@@ -434,6 +434,7 @@
   upstream: git://github.com/sarob/milk.git
 - project: stackforge/mistral
   description: Task orchestration service for OpenStack cloud.
+  launchpad: mistral
   upstream: git://github.com/rakhmerov/mistral.git
   acl-config: /home/gerrit2/acls/stackforge/mistral.config
 - project: stackforge/MRaaS
@@ -586,6 +587,11 @@
 - project: stackforge/python-libraclient
 - project: stackforge/python-manilaclient
   upstream: git://github.com/bswartz/python-manilaclient.git
+- project: stackforge/python-mistralclient
+  description: Python client for Mistral REST API.
+  launchpad: mistral
+  upstream: git://github.com/rakhmerov/python-mistralclient.git
+  acl-config: /home/gerrit2/acls/stackforge/mistral.config
 - project: stackforge/python-muranoclient
   launchpad: murano
   upstream: git://github.com/Mirantis/python-muranoclient.git
