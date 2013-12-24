@@ -1898,6 +1898,8 @@ projects:
       - gate-tempest-dsvm-savanna-full
       - gate-tempest-dsvm-savanna-postgres-full
       - gate-tempest-dsvm-savanna-neutron
+      - check-tempest-dsvm-neutron-isolated
+      - check-tempest-dsvm-neutron-pg-isolated
     post:
       - tempest-docs
       - tempest-branch-tarball
