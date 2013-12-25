@@ -3482,6 +3482,13 @@ projects:
           - post-mirror-python27
           - post-mirror-python33
 
+  - name: stackforge/python-rallyclient
+    check:
+      - gate-python-rallyclient-requirements
+    gate:
+      - gate-python-rallyclient-requirements
+
+
   - name: stackforge/cookbook-openstack-block-storage
     check:
       - gate-cookbook-openstack-block-storage-chef-lint
