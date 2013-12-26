@@ -156,6 +156,16 @@ project-templates:
       - '{name}-branch-tarball'
       - '{name}-coverage'
 
+  - name: openstack-server-publish-jobs
+    post:
+      - '{name}-docs'
+    release:
+      - '{name}-docs'
+
+  - name: openstack-client-publish-jobs
+    release:
+      - '{name}-docs'
+
   - name: periodic-grizzly
     periodic-grizzly:
       - 'periodic-{name}-docs-grizzly'
@@ -721,6 +731,7 @@ projects:
   - name: openstack/cinder
     template:
       - name: python-jobs
+      - name: openstack-server-publish-jobs
       - name: periodic-grizzly
       - name: periodic-havana
     check:
@@ -744,13 +755,11 @@ projects:
       - gate-grenade-dsvm-forward
       - gate-devstack-dsvm-cells
     post:
-      - cinder-docs
       - cinder-upstream-translation-update
     pre-release:
       - cinder-tarball
     release:
       - cinder-tarball
-      - cinder-docs
       - cinder-merge-release-tags
     periodic:
       - cinder-propose-translation-update
@@ -758,6 +767,7 @@ projects:
   - name: openstack/gantt
     template:
       - name: python-jobs
+      - name: openstack-server-publish-jobs
     check:
       - gate-gantt-requirements
       - check-tempest-dsvm-full
@@ -780,13 +790,11 @@ projects:
       - gate-grenade-dsvm-forward
       - gate-tempest-dsvm-neutron-full
     post:
-      - gantt-docs
       - gantt-upstream-translation-update
     pre-release:
       - gantt-tarball
     release:
       - gantt-tarball
-      - gantt-docs
       - gantt-merge-release-tags
     periodic:
       - gantt-propose-translation-update
@@ -794,6 +802,7 @@ projects:
   - name: openstack/glance
     template:
       - name: python-jobs
+      - name: openstack-server-publish-jobs
       - name: periodic-grizzly
       - name: periodic-havana
     check:
@@ -815,13 +824,10 @@ projects:
     experimental:
       - gate-grenade-dsvm-forward
       - gate-devstack-dsvm-cells
-    post:
-      - glance-docs
     pre-release:
       - glance-tarball
     release:
       - glance-tarball
-      - glance-docs
       - glance-merge-release-tags
     periodic:
       - glance-propose-translation-update
@@ -829,6 +835,7 @@ projects:
   - name: openstack/horizon
     template:
       - name: python-jobs
+      - name: openstack-server-publish-jobs
       - name: periodic-grizzly
       - name: periodic-havana
     check:
@@ -854,18 +861,16 @@ projects:
     experimental:
       - gate-grenade-dsvm-forward
       - gate-devstack-dsvm-cells
-    post:
-      - horizon-docs
     pre-release:
       - horizon-tarball
     release:
       - horizon-tarball
-      - horizon-docs
       - horizon-merge-release-tags
 
   - name: openstack/django_openstack_auth
     template:
       - name: python-jobs
+      - name: openstack-client-publish-jobs
     check:
       - gate-django_openstack_auth-requirements
     gate:
@@ -875,11 +880,11 @@ projects:
     release:
       - django_openstack_auth-tarball:
         - django_openstack_auth-pypi-upload
-      - django_openstack_auth-docs
 
   - name: openstack/keystone
     template:
       - name: python-jobs
+      - name: openstack-server-publish-jobs
       - name: periodic-grizzly
       - name: periodic-havana
     check:
@@ -904,13 +909,11 @@ projects:
       - gate-grenade-dsvm-forward
       - gate-devstack-dsvm-cells
     post:
-      - keystone-docs
       - keystone-upstream-translation-update
     pre-release:
       - keystone-tarball
     release:
       - keystone-tarball
-      - keystone-docs
       - keystone-merge-release-tags
     periodic:
       - keystone-propose-translation-update
@@ -919,6 +922,7 @@ projects:
   - name: openstack/nova
     template:
       - name: python-jobs
+      - name: openstack-server-publish-jobs
       - name: periodic-grizzly
       - name: periodic-havana
     check:
@@ -946,13 +950,11 @@ projects:
       - check-tempest-dsvm-neutron-isolated
       - check-tempest-dsvm-neutron-pg-isolated
     post:
-      - nova-docs
       - nova-upstream-translation-update
     pre-release:
       - nova-tarball
     release:
       - nova-tarball
-      - nova-docs
       - nova-merge-release-tags
     periodic:
       - nova-propose-translation-update
@@ -966,20 +968,18 @@ projects:
   - name: openstack/oslo-incubator
     template:
       - name: python-jobs
+      - name: openstack-server-publish-jobs
     check:
       - gate-oslo-incubator-requirements
     gate:
       - gate-oslo-incubator-requirements
     experimental:
       - gate-oslo-incubator-python33
-    post:
-      - oslo-incubator-docs
-    release:
-      - oslo-incubator-docs
 
   - name: openstack/oslo.config
     template:
       - name: python-jobs
+      - name: openstack-server-publish-jobs
     check:
       - gate-oslo.config-requirements
       - gate-oslo.config-python33
@@ -996,8 +996,6 @@ projects:
       - gate-tempest-dsvm-large-ops
       - gate-tempest-dsvm-neutron-large-ops
       - gate-grenade-dsvm
-    post:
-      - oslo.config-docs
     pre-release:
       - oslo.config-tarball
     release:
@@ -1006,11 +1004,11 @@ projects:
           - post-mirror-python26
           - post-mirror-python27
           - post-mirror-python33
-      - oslo.config-docs
 
   - name: openstack/oslo.messaging
     template:
       - name: python-jobs
+      - name: openstack-server-publish-jobs
     check:
       - gate-oslo.messaging-requirements
       - check-tempest-dsvm-full
@@ -1025,8 +1023,6 @@ projects:
       - gate-tempest-dsvm-large-ops
       - gate-tempest-dsvm-neutron-large-ops
       - gate-grenade-dsvm
-    post:
-      - oslo.messaging-docs
     pre-release:
       - oslo.messaging-tarball
     release:
@@ -1035,8 +1031,8 @@ projects:
           - post-mirror-python26
           - post-mirror-python27
           - post-mirror-python33
-      - oslo.messaging-docs
 
+#TODO: add docs
   - name: openstack/oslo.rootwrap
     check:
       - gate-oslo.rootwrap-requirements
@@ -1061,6 +1057,7 @@ projects:
           - post-mirror-python27
           - post-mirror-python33
 
+#TODO: add docs
   - name: openstack/oslo.sphinx
     check:
       - gate-oslo.sphinx-requirements
@@ -1082,6 +1079,7 @@ projects:
   - name: openstack/oslo.version
     template:
       - name: python-jobs
+      - name: openstack-server-publish-jobs
     check:
       - gate-oslo.version-requirements
       - gate-oslo.version-pypy
@@ -1096,8 +1094,6 @@ projects:
       - gate-tempest-dsvm-full
       - gate-tempest-dsvm-neutron
       - gate-grenade-dsvm
-    post:
-      - oslo.version-docs
     pre-release:
       - oslo.version-tarball
     release:
@@ -1105,11 +1101,11 @@ projects:
         - oslo.version-pypi-upload:
           - post-mirror-python26
           - post-mirror-python27
-      - oslo.version-docs
 
   - name: openstack/neutron
     template:
       - name: python-jobs
+      - name: openstack-server-publish-jobs
       - name: periodic-grizzly
       - name: periodic-havana
     check:
@@ -1133,14 +1129,11 @@ projects:
       - gate-tempest-dsvm-neutron-full
       - check-tempest-dsvm-neutron-isolated-parallel
       - gate-grenade-dsvm-neutron-forward
-    post:
-      - neutron-docs
       - neutron-upstream-translation-update
     pre-release:
       - neutron-tarball
     release:
       - neutron-tarball
-      - neutron-docs
       - neutron-merge-release-tags
     periodic:
       - neutron-propose-translation-update
@@ -1148,6 +1141,7 @@ projects:
   - name: openstack/swift
     template:
       - name: python-jobs
+      - name: openstack-server-publish-jobs
     check:
       - gate-swift-requirements
       - check-swift-dsvm-functional
@@ -1169,15 +1163,13 @@ projects:
     experimental:
       - gate-grenade-dsvm-forward
       - gate-devstack-dsvm-cells
-    post:
-      - swift-docs
     pre-release:
       - swift-tarball
     release:
       - swift-tarball
-      - swift-docs
       - swift-merge-release-tags
 
+#TODO: add docs
   - name: openstack/swift-bench
     check:
       - gate-swift-bench-pep8
@@ -1201,6 +1193,7 @@ projects:
   - name: openstack/python-ceilometerclient
     template:
       - name: python-jobs
+      - name: openstack-client-publish-jobs
     check:
       - gate-python-ceilometerclient-requirements
       - gate-python-ceilometerclient-python33
@@ -1226,11 +1219,11 @@ projects:
           - post-mirror-python26
           - post-mirror-python27
           - post-mirror-python33
-      - python-ceilometerclient-docs
 
   - name: openstack/python-cinderclient
     template:
       - name: python-jobs
+      - name: openstack-client-publish-jobs
     check:
       - gate-python-cinderclient-requirements
       - gate-python-cinderclient-python33
@@ -1262,11 +1255,11 @@ projects:
           - post-mirror-python26
           - post-mirror-python27
           - post-mirror-python33
-      - python-cinderclient-docs
 
   - name: openstack/python-ganttclient
     template:
       - name: python-jobs
+      - name: openstack-client-publish-jobs
     check:
       - gate-python-ganttclient-requirements
       - check-tempest-dsvm-full
@@ -1293,11 +1286,11 @@ projects:
         - python-ganttclient-pypi-upload:
           - post-mirror-python26
           - post-mirror-python27
-      - python-ganttclient-docs
 
   - name: openstack/python-glanceclient
     template:
       - name: python-jobs
+      - name: openstack-client-publish-jobs
     check:
       - gate-python-glanceclient-requirements
       - gate-python-glanceclient-python33
@@ -1326,11 +1319,11 @@ projects:
           - post-mirror-python26
           - post-mirror-python27
           - post-mirror-python33
-      - python-glanceclient-docs
 
   - name: openstack/python-keystoneclient
     template:
       - name: python-jobs
+      - name: openstack-client-publish-jobs
     check:
       - gate-python-keystoneclient-requirements
       - gate-python-keystoneclient-python33
@@ -1359,11 +1352,11 @@ projects:
           - post-mirror-python26
           - post-mirror-python27
           - post-mirror-python33
-      - python-keystoneclient-docs
 
   - name: openstack/python-novaclient
     template:
       - name: python-jobs
+      - name: openstack-client-publish-jobs
     check:
       - gate-python-novaclient-requirements
       - gate-python-novaclient-python33
@@ -1395,11 +1388,11 @@ projects:
           - post-mirror-python26
           - post-mirror-python27
           - post-mirror-python33
-      - python-novaclient-docs
 
   - name: openstack/python-openstackclient
     template:
       - name: python-jobs
+      - name: openstack-client-publish-jobs
     check:
       - gate-python-openstackclient-requirements
       - gate-python-openstackclient-python33
@@ -1413,11 +1406,11 @@ projects:
           - post-mirror-python26
           - post-mirror-python27
           - post-mirror-python33
-      - python-openstackclient-docs
 
   - name: openstack/python-neutronclient
     template:
       - name: python-jobs
+      - name: openstack-client-publish-jobs
     check:
       - gate-python-neutronclient-requirements
       - gate-python-neutronclient-python33
@@ -1454,11 +1447,11 @@ projects:
           - post-mirror-python26
           - post-mirror-python27
           - post-mirror-python33
-      - python-neutronclient-docs
 
   - name: openstack/python-swiftclient
     template:
       - name: python-jobs
+      - name: openstack-client-publish-jobs
     check:
       - gate-python-swiftclient-requirements
       - gate-python-swiftclient-python33
@@ -1476,7 +1469,6 @@ projects:
           - post-mirror-python26
           - post-mirror-python27
           - post-mirror-python33
-      - python-swiftclient-docs
 
   - name: openstack/requirements
     check:
@@ -1740,6 +1732,7 @@ projects:
   - name: openstack/ceilometer
     template:
       - name: python-jobs
+      - name: openstack-server-publish-jobs
       - name: periodic-grizzly
       - name: periodic-havana
     check:
@@ -1759,12 +1752,10 @@ projects:
       - gate-tempest-dsvm-neutron-large-ops
       - gate-swift-dsvm-functional
     post:
-      - ceilometer-docs
       - ceilometer-upstream-translation-update
     pre-release:
       - ceilometer-tarball
     release:
-      - ceilometer-docs
       - ceilometer-tarball
       - ceilometer-merge-release-tags
     periodic:
@@ -1893,6 +1884,7 @@ projects:
   - name: openstack/heat
     template:
       - name: python-jobs
+      - name: openstack-server-publish-jobs
       - name: periodic-grizzly
       - name: periodic-havana
     check:
@@ -1912,13 +1904,11 @@ projects:
     experimental:
       - gate-devstack-dsvm-cells
     post:
-      - heat-docs
       - heat-upstream-translation-update
     pre-release:
       - heat-tarball
     release:
       - heat-tarball
-      - heat-docs
       - heat-merge-release-tags
     periodic:
       - heat-propose-translation-update
@@ -2007,17 +1997,15 @@ projects:
   - name: openstack/trove
     template:
       - name: python-jobs
+      - name: openstack-server-publish-jobs
     check:
       - gate-trove-requirements
     gate:
       - gate-trove-requirements
-    post:
-      - trove-docs
     pre-release:
       - trove-tarball
     release:
       - trove-tarball
-      - trove-docs
       - trove-merge-release-tags
 
   - name: openstack/trove-integration
@@ -2590,6 +2578,7 @@ projects:
   - name: openstack/savanna
     template:
       - name: python-jobs
+      - name: openstack-server-publish-jobs
     check:
       - gate-savanna-pylint
       - gate-savanna-requirements
@@ -2602,7 +2591,6 @@ projects:
       - gate-tempest-dsvm-savanna-postgres-full
       - gate-tempest-dsvm-savanna-neutron
     post:
-      - savanna-docs
       - hook-savanna-rtfd
       - savanna-upstream-translation-update
     pre-release:
@@ -2615,7 +2603,6 @@ projects:
           - post-mirror-python27
           - post-mirror-python33
       - hook-savanna-rtfd
-      - savanna-docs
       - savanna-merge-release-tags
     periodic:
       - savanna-propose-translation-update
@@ -3380,6 +3367,7 @@ projects:
   - name: openstack/ironic
     template:
       - name: python-jobs
+      - name: openstack-server-publish-jobs
     check:
       - gate-ironic-requirements
     gate:
@@ -3388,13 +3376,11 @@ projects:
       - check-tempest-dsvm-ironic
       - check-tempest-dsvm-ironic-postgres
     post:
-      - ironic-docs
       - ironic-upstream-translation-update
     pre-release:
       - ironic-tarball
     release:
       - ironic-tarball
-      - ironic-docs
       - ironic-merge-release-tags
     periodic:
       - ironic-propose-translation-update
