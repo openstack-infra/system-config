@@ -57,7 +57,6 @@
           export DEVSTACK_GATE_TEMPEST=0
           export DEVSTACK_GATE_EXERCISES=0
           export ZUUL_BRANCH={branch-override}
-          unset ZUUL_PROJECT
 
           function post_test_hook {{
               cd /opt/stack/new/swift
