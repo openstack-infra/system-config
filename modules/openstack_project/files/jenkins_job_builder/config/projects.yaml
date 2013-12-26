@@ -1084,21 +1084,21 @@
           branch-designator: '-havana'
           branch-override: stable/havana
       # Periodic jobs for various branches
-      - devstack-periodic-jobs:
+      - devstack-jobs:
           pipeline: periodic
+          node: devstack-precise
           branch-designator: '-grizzly'
           branch-override: stable/grizzly
-          node: devstack-precise
-      - devstack-periodic-jobs:
+      - devstack-jobs:
           pipeline: periodic
+          node: devstack-precise
           branch-designator: '-havana'
           branch-override: stable/havana
-          node: devstack-precise
-      - devstack-periodic-jobs:
+      - devstack-jobs:
           pipeline: periodic
+          node: devstack-precise
           branch-designator: '-master'
           branch-override: master
-          node: devstack-precise
       # Special jobs for devstack-gate
       - devstack-gate-jobs:
           node: devstack-precise
