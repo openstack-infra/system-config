@@ -223,6 +223,9 @@ jobs:
   - name: ^(gate|check)-grenade-dsvm-neutron$
     branch: ^(?!stable/grizzly).*$
     voting: false
+  - name: ^(gate|check)-grenade-dsvm-rolling$
+    branch: ^(?!stable/(grizzly|havana)).*$
+    voting: false
   - name: gate-tempest-python27
     branch: ^(?!stable/grizzly).*$
     # only here until stable is votable, then merge
@@ -771,6 +774,7 @@ projects:
       - gate-tempest-dsvm-large-ops
       - gate-tempest-dsvm-neutron-large-ops
       - check-grenade-dsvm
+      - check-grenade-dsvm-rolling
       - gate-devstack-dsvm-cells
       - gate-nova-pylint
     gate:
@@ -781,6 +785,7 @@ projects:
       - gate-tempest-dsvm-large-ops
       - gate-tempest-dsvm-neutron-large-ops
       - gate-grenade-dsvm
+      - gate-grenade-dsvm-rolling
     experimental:
       - gate-grenade-dsvm-forward
       - gate-tempest-dsvm-neutron-full
