@@ -103,6 +103,42 @@ pipelines:
       timer:
         - time: '0 6 * * *'
 
+  - name: periodic-grizzly
+    description: Periodic checks of the stable/grizzly branches.
+    manager: IndependentPipelineManager
+    precedence: low
+    trigger:
+      timer:
+        - time: '0 6 * * *'
+    failure:
+      smtp:
+        from: jenkins@openstack.org
+        to: openstack-stable-maint@lists.openstack.org
+
+  - name: periodic-havana
+    description: Periodic checks of the stable/havana branches.
+    manager: IndependentPipelineManager
+    precedence: low
+    trigger:
+      timer:
+        - time: '0 6 * * *'
+    failure:
+      smtp:
+        from: jenkins@openstack.org
+        to: openstack-stable-maint@lists.openstack.org
+
+  - name: periodic-qa
+    description: Periodic jobs for the QA team.
+    manager: IndependentPipelineManager
+    precedence: low
+    trigger:
+      timer:
+        - time: '0 6 * * *'
+    failure:
+      smtp:
+        from: jenkins@openstack.org
+        to: openstack-qa@lists.openstack.org
+
 
 project-templates:
   - name: python-jobs
@@ -119,6 +155,18 @@ project-templates:
     post:
       - '{name}-branch-tarball'
       - '{name}-coverage'
+
+  - name: periodic-grizzly
+    periodic-grizzly:
+      - 'periodic-{name}-docs-grizzly'
+      - 'periodic-{name}-python26-grizzly'
+      - 'periodic-{name}-python27-grizzly'
+
+  - name: periodic-havana
+    periodic-havana:
+      - 'periodic-{name}-docs-havana'
+      - 'periodic-{name}-python26-havana'
+      - 'periodic-{name}-python27-havana'
 
 
 jobs:
@@ -673,6 +721,8 @@ projects:
   - name: openstack/cinder
     template:
       - name: python-jobs
+      - name: periodic-grizzly
+      - name: periodic-havana
     check:
       - gate-cinder-requirements
       - gate-cinder-pylint
@@ -704,12 +754,6 @@ projects:
       - cinder-merge-release-tags
     periodic:
       - cinder-propose-translation-update
-      - periodic-cinder-docs-grizzly
-      - periodic-cinder-python26-grizzly
-      - periodic-cinder-python27-grizzly
-      - periodic-cinder-docs-havana
-      - periodic-cinder-python26-havana
-      - periodic-cinder-python27-havana
 
   - name: openstack/gantt
     template:
@@ -750,6 +794,8 @@ projects:
   - name: openstack/glance
     template:
       - name: python-jobs
+      - name: periodic-grizzly
+      - name: periodic-havana
     check:
       - gate-glance-requirements
       - check-tempest-dsvm-full
@@ -779,16 +825,12 @@ projects:
       - glance-merge-release-tags
     periodic:
       - glance-propose-translation-update
-      - periodic-glance-docs-grizzly
-      - periodic-glance-python26-grizzly
-      - periodic-glance-python27-grizzly
-      - periodic-glance-docs-havana
-      - periodic-glance-python26-havana
-      - periodic-glance-python27-havana
 
   - name: openstack/horizon
     template:
       - name: python-jobs
+      - name: periodic-grizzly
+      - name: periodic-havana
     check:
       - gate-horizon-requirements
       - gate-horizon-python27-django14
@@ -820,13 +862,6 @@ projects:
       - horizon-tarball
       - horizon-docs
       - horizon-merge-release-tags
-    periodic:
-      - periodic-horizon-docs-grizzly
-      - periodic-horizon-python26-grizzly
-      - periodic-horizon-python27-grizzly
-      - periodic-horizon-docs-havana
-      - periodic-horizon-python26-havana
-      - periodic-horizon-python27-havana
 
   - name: openstack/django_openstack_auth
     template:
@@ -845,6 +880,8 @@ projects:
   - name: openstack/keystone
     template:
       - name: python-jobs
+      - name: periodic-grizzly
+      - name: periodic-havana
     check:
       - gate-keystone-requirements
       - check-tempest-dsvm-full
@@ -877,17 +914,13 @@ projects:
       - keystone-merge-release-tags
     periodic:
       - keystone-propose-translation-update
-      - periodic-keystone-docs-grizzly
-      - periodic-keystone-python26-grizzly
-      - periodic-keystone-python27-grizzly
-      - periodic-keystone-docs-havana
-      - periodic-keystone-python26-havana
-      - periodic-keystone-python27-havana
       - periodic-swift-dsvm-functional-havana
 
   - name: openstack/nova
     template:
       - name: python-jobs
+      - name: periodic-grizzly
+      - name: periodic-havana
     check:
       - gate-nova-requirements
       - check-tempest-dsvm-full
@@ -923,12 +956,6 @@ projects:
       - nova-merge-release-tags
     periodic:
       - nova-propose-translation-update
-      - periodic-nova-docs-grizzly
-      - periodic-nova-python26-grizzly
-      - periodic-nova-python27-grizzly
-      - periodic-nova-docs-havana
-      - periodic-nova-python26-havana
-      - periodic-nova-python27-havana
 
   - name: openstack/openstack
     check:
@@ -1083,6 +1110,8 @@ projects:
   - name: openstack/neutron
     template:
       - name: python-jobs
+      - name: periodic-grizzly
+      - name: periodic-havana
     check:
       - gate-neutron-requirements
       - check-tempest-dsvm-neutron
@@ -1115,12 +1144,6 @@ projects:
       - neutron-merge-release-tags
     periodic:
       - neutron-propose-translation-update
-      - periodic-neutron-docs-grizzly
-      - periodic-neutron-python26-grizzly
-      - periodic-neutron-python27-grizzly
-      - periodic-neutron-docs-havana
-      - periodic-neutron-python26-havana
-      - periodic-neutron-python27-havana
 
   - name: openstack/swift
     template:
@@ -1699,13 +1722,15 @@ projects:
     post:
       - tempest-docs
       - tempest-branch-tarball
-    periodic:
+    periodic-grizzly:
       - periodic-tempest-dsvm-full-grizzly
       - periodic-tempest-dsvm-neutron-grizzly
       - periodic-tempest-dsvm-postgres-full-grizzly
+    periodic-havana:
       - periodic-tempest-dsvm-full-havana
       - periodic-tempest-dsvm-neutron-havana
       - periodic-tempest-dsvm-postgres-full-havana
+    periodic-qa:
       - periodic-tempest-dsvm-all-havana
       - periodic-tempest-dsvm-stress-havana
       - periodic-tempest-dsvm-neutron-pg-havana
@@ -1715,6 +1740,8 @@ projects:
   - name: openstack/ceilometer
     template:
       - name: python-jobs
+      - name: periodic-grizzly
+      - name: periodic-havana
     check:
       - gate-ceilometer-requirements
       - check-tempest-dsvm-full
@@ -1742,12 +1769,6 @@ projects:
       - ceilometer-merge-release-tags
     periodic:
       - ceilometer-propose-translation-update
-      - periodic-ceilometer-docs-grizzly
-      - periodic-ceilometer-python26-grizzly
-      - periodic-ceilometer-python27-grizzly
-      - periodic-ceilometer-docs-havana
-      - periodic-ceilometer-python26-havana
-      - periodic-ceilometer-python27-havana
 
   - name: stackforge/clouddocs-maven-plugin
     check:
@@ -1872,6 +1893,8 @@ projects:
   - name: openstack/heat
     template:
       - name: python-jobs
+      - name: periodic-grizzly
+      - name: periodic-havana
     check:
       - gate-heat-requirements
       - check-tempest-dsvm-full
@@ -1898,12 +1921,6 @@ projects:
       - heat-docs
       - heat-merge-release-tags
     periodic:
-      - periodic-heat-docs-grizzly
-      - periodic-heat-python26-grizzly
-      - periodic-heat-python27-grizzly
-      - periodic-heat-docs-havana
-      - periodic-heat-python26-havana
-      - periodic-heat-python27-havana
       - heat-propose-translation-update
 
 #TODO: add docs
