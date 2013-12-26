@@ -21,8 +21,6 @@
               keep-hierarchy: false
               copy-after-failure: true
       - console-log-periodic
-      - email:
-          recipients: '{email}'
 
     scm:
       - git:
@@ -56,8 +54,6 @@
               keep-hierarchy: false
               copy-after-failure: true
       - console-log-periodic
-      - email:
-          recipients: '{email}'
 
     scm:
       - git:
@@ -84,8 +80,6 @@
 
     publishers:
       - console-log-periodic
-      - email:
-          recipients: '{email}'
 
     scm:
       - git:
@@ -100,7 +94,6 @@
     name: python-grizzly-bitrot-jobs
     branch: 'stable/grizzly'
     branch-name: '-grizzly'
-    email: openstack-stable-maint@lists.openstack.org
     node: precise
     jobs:
       - 'periodic-{name}-python26{branch-name}'
@@ -112,7 +105,6 @@
     name: python-havana-bitrot-jobs
     branch: 'stable/havana'
     branch-name: '-havana'
-    email: openstack-stable-maint@lists.openstack.org
     node: precise
     jobs:
       - 'periodic-{name}-python26{branch-name}'
