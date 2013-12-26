@@ -1085,14 +1085,17 @@
           branch-override: stable/havana
       # Periodic jobs for various branches
       - devstack-periodic-jobs:
+          pipeline: periodic
           branch-designator: '-grizzly'
           branch-override: stable/grizzly
           node: devstack-precise
       - devstack-periodic-jobs:
+          pipeline: periodic
           branch-designator: '-havana'
           branch-override: stable/havana
           node: devstack-precise
       - devstack-periodic-jobs:
+          pipeline: periodic
           branch-designator: '-master'
           branch-override: master
           node: devstack-precise
