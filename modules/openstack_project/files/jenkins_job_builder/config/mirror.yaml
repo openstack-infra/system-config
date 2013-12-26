@@ -14,7 +14,7 @@
       - link-logs
 
     publishers:
-      - console-log-periodic
+      - console-log
 
 
 - job:
@@ -52,7 +52,7 @@
       - link-logs
 
     publishers:
-      - console-log-periodic
+      - console-log
 
 
 - job:
@@ -90,7 +90,7 @@
       - link-logs
 
     publishers:
-      - console-log-periodic
+      - console-log
 
 
 - job:

@@ -23,7 +23,7 @@
           /usr/local/jenkins/slave_scripts/propose_translation_update.sh {github-org} {name}
 
     publishers:
-      - console-log-periodic
+      - console-log
 
     scm:
       - git:
@@ -58,7 +58,7 @@
           /usr/local/jenkins/slave_scripts/propose_translation_update_manuals.sh
 
     publishers:
-      - console-log-periodic
+      - console-log
 
     scm:
       - git:
