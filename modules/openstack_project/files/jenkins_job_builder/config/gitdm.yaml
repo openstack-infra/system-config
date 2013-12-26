@@ -1,34 +1,17 @@
-- job:
-    name: gate-gitdm
-    node: precise
+- job-template:
+    name: '{pipeline}-gitdm'
+
+    node: '{node}'
 
     builders:
       - gerrit-git-prep
       - shell: |
           #!/bin/bash -xe
-          export TEMPDIR=${TEMPDIR:-$(mktemp -d $(pwd)/dmtmp-XXXXXX)}
-          export GITBASE=${TEMPDIR}/git
+          export TEMPDIR=${{TEMPDIR:-$(mktemp -d $(pwd)/dmtmp-XXXXXX)}}
+          export GITBASE=${{TEMPDIR}}/git
           export LP_STATS=n
           bash ./do-it.sh
       - link-logs
 
     publishers:
       - console-log
-
-
-- job:
-    name: periodic-gitdm
-    node: precise
-
-    builders:
-      - gerrit-git-prep
-      - shell: |
-          #!/bin/bash -xe
-          export TEMPDIR=${TEMPDIR:-$(mktemp -d $(pwd)/dmtmp-XXXXXX)}
-          export GITBASE=${TEMPDIR}/git
-          export LP_STATS=n
-          bash ./do-it.sh
-      - link-logs
-
-    publishers:
-      - console-log-periodic
