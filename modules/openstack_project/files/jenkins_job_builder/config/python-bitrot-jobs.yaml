@@ -11,16 +11,11 @@
       - python26:
           github-org: '{github-org}'
           project: '{name}'
+      - assert-no-extra-files
 
     publishers:
-      - scp:
-          site: 'static.openstack.org'
-          files:
-            - target: 'logs/periodic/$JOB_NAME/$BUILD_NUMBER'
-              source: '**/*nose_results.html'
-              keep-hierarchy: false
-              copy-after-failure: true
-      - console-log-periodic
+      - test-results
+      - console-log
 
     scm:
       - git:
@@ -44,16 +39,11 @@
       - python27:
           github-org: '{github-org}'
           project: '{name}'
+      - assert-no-extra-files
 
     publishers:
-      - scp:
-          site: 'static.openstack.org'
-          files:
-            - target: 'logs/periodic/$JOB_NAME/$BUILD_NUMBER'
-              source: '**/*nose_results.html'
-              keep-hierarchy: false
-              copy-after-failure: true
-      - console-log-periodic
+      - test-results
+      - console-log
 
     scm:
       - git:
@@ -79,7 +69,7 @@
           project: '{name}'
 
     publishers:
-      - console-log-periodic
+      - console-log
 
     scm:
       - git:

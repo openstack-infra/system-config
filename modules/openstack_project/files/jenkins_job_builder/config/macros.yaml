@@ -218,11 +218,8 @@
     builders:
       - shell: |
           #!/bin/sh
-          if test "$LOG_PATH" ; then
-              echo "Detailed logs: http://logs.openstack.org/$LOG_PATH/"
-          else
-              echo "Detailed logs: http://logs.openstack.org/periodic/$JOB_NAME/$NODE_NAME/$BUILD_NUMBER/"
-          fi
+          echo "Detailed logs: http://logs.openstack.org/$LOG_PATH/"
+
 
 - builder:
     name: update-pypi-mirror
@@ -268,15 +265,6 @@
               copy-console: true
               copy-after-failure: true
 
-- publisher:
-    name: console-log-periodic
-    publishers:
-      - scp:
-          site: 'static.openstack.org'
-          files:
-            - target: 'logs/periodic/$JOB_NAME/$NODE_NAME/$BUILD_NUMBER'
-              copy-console: true
-              copy-after-failure: true
 
 - publisher:
     name: devstack-logs
@@ -297,24 +285,6 @@
               keep-hierarchy: false
               copy-after-failure: true
 
-- publisher:
-    name: devstack-logs-periodic
-    publishers:
-      - scp:
-          site: 'static.openstack.org'
-          files:
-            - target: 'logs/periodic/$JOB_NAME/$NODE_NAME/$BUILD_NUMBER'
-              source: 'logs/**'
-              keep-hierarchy: true
-              copy-after-failure: true
-            - target: 'logs/periodic/$JOB_NAME/$NODE_NAME/$BUILD_NUMBER'
-              source: '**/testr_results.html.gz'
-              keep-hierarchy: false
-              copy-after-failure: true
-            - target: 'logs/periodic/$JOB_NAME/$NODE_NAME/$BUILD_NUMBER'
-              source: '**/subunit_log.txt.gz'
-              keep-hierarchy: false
-              copy-after-failure: true
 
 - publisher:
     name: coverage-log
