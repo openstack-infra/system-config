@@ -272,6 +272,9 @@ jobs:
   - name: ^(gate|check)-grenade-dsvm-neutron$
     branch: ^(?!stable/grizzly).*$
     voting: false
+  - name: ^(gate|check)-grenade-dsvm-partial-ncpu$
+    branch: ^(?!stable/(grizzly|havana)).*$
+    voting: false
   - name: gate-tempest-python27
     branch: ^(?!stable/grizzly).*$
     # only here until stable is votable, then merge
@@ -886,6 +889,7 @@ projects:
       - check-tempest-dsvm-cells-full
       - gate-nova-pylint
       - check-tempest-dsvm-neutron-heat-slow
+      - check-grenade-dsvm-partial-ncpu
     gate:
       - gate-nova-requirements
       - gate-devstack-dsvm-cells
