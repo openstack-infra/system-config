@@ -134,6 +134,8 @@ jobs:
     voting: false
   - name: ^(gate|check)-devstack-dsvm-cells$
     voting: false
+  - name: ^(gate|check)-gantt-python2(6|7)$
+    voting: false
   - name: ^(gate|check)-tempest-dsvm-large-ops$
     branch: ^(?!stable/grizzly).*$
   - name: ^(gate|check)-tempest-dsvm-neutron-large-ops$
