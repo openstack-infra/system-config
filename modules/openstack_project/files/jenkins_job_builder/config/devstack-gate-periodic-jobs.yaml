@@ -24,8 +24,6 @@
     publishers:
       - devstack-logs-periodic
       - console-log-periodic
-      - email:
-          recipients: openstack-stable-maint@lists.openstack.org
 
 
 - job-template:
@@ -55,8 +53,6 @@
     publishers:
       - devstack-logs-periodic
       - console-log-periodic
-      - email:
-          recipients: openstack-stable-maint@lists.openstack.org
 
 
 - job-template:
@@ -86,8 +82,6 @@
     publishers:
       - devstack-logs-periodic
       - console-log-periodic
-      - email:
-          recipients: openstack-stable-maint@lists.openstack.org
 
 
 - job-template:
@@ -116,8 +110,6 @@
     publishers:
       - devstack-logs-periodic
       - console-log-periodic
-      - email:
-          recipients: openstack-qa@lists.openstack.org
 
 
 - job-template:
@@ -146,8 +138,6 @@
     publishers:
       - devstack-logs-periodic
       - console-log-periodic
-      - email:
-          recipients: openstack-qa@lists.openstack.org
 
 
 - job-template:
@@ -178,8 +168,6 @@
     publishers:
       - devstack-logs-periodic
       - console-log-periodic
-      - email:
-          recipients: openstack-qa@lists.openstack.org
 
 
 - job-template:
@@ -208,8 +196,6 @@
     publishers:
       - devstack-logs-periodic
       - console-log-periodic
-      - email:
-          recipients: openstack-qa@lists.openstack.org
 
 
 - job-template:
@@ -239,8 +225,6 @@
     publishers:
       - devstack-logs-periodic
       - console-log-periodic
-      - email:
-          recipients: openstack-qa@lists.openstack.org
 
 
 - job-template:
@@ -269,8 +253,6 @@
     publishers:
       - devstack-logs-periodic
       - console-log-periodic
-      - email:
-          recipients: openstack-qa@lists.openstack.org
 
 
 - job-template:
@@ -299,8 +281,6 @@
     publishers:
       - devstack-logs-periodic
       - console-log-periodic
-      - email:
-          recipients: openstack-qa@lists.openstack.org
 
 
 - job-template:
@@ -329,8 +309,6 @@
     publishers:
       - devstack-logs-periodic
       - console-log-periodic
-      - email:
-          recipients: openstack-qa@lists.openstack.org
 
 
 - job-template:
@@ -360,8 +338,6 @@
     publishers:
       - devstack-logs-periodic
       - console-log-periodic
-      - email:
-          recipients: openstack-stable-maint@lists.openstack.org
 
 
 - job-template:
@@ -392,8 +368,6 @@
     publishers:
       - devstack-logs-periodic
       - console-log-periodic
-      - email:
-          recipients: openstack-stable-maint@lists.openstack.org
 
 
 - job-template:
@@ -424,8 +398,6 @@
     publishers:
       - devstack-logs-periodic
       - console-log-periodic
-      - email:
-          recipients: openstack-stable-maint@lists.openstack.org
 
 - job-template:
     name: 'periodic-devstack-dsvm-neutron{branch-designator}'
@@ -452,8 +424,6 @@
     publishers:
       - devstack-logs-periodic
       - console-log-periodic
-      - email:
-          recipients: openstack-stable-maint@lists.openstack.org
 
 
 - job-template:
@@ -485,8 +455,6 @@
     publishers:
       - devstack-logs-periodic
       - console-log-periodic
-      - email:
-          recipients: openstack-stable-maint@lists.openstack.org
 
 
 - job-template:
@@ -519,8 +487,6 @@
     publishers:
       - devstack-logs-periodic
       - console-log-periodic
-      - email:
-          recipients: openstack-stable-maint@lists.openstack.org
 
 
 - job-group:
