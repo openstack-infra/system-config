@@ -147,6 +147,19 @@
       - gate-{name}-pep8
 
 - project:
+    name: gitdm
+    github-org: openstack-infra
+    node: precise
+
+    jobs:
+      - '{pipeline}-gitdm':
+          pipeline: gate
+          node: precise
+      - '{pipeline}-gitdm':
+          pipeline: periodic
+          node: precise
+
+- project:
     name: savanna
     github-org: openstack
     node: precise
