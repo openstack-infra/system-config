@@ -123,6 +123,9 @@ td.tree {
 #graph-container img:first-of-type {
     margin-left: 0px;
 }
+#zuul_info_container {
+    margin-top: 12px;
+}
 a:link {
     color: #204A87;
 }
@@ -334,6 +337,14 @@ $("#graph-container").append($(new Image()).addClass('graph').graphite({
     title: "Gerrit Events (per Hour)"
 }));
       </script>
+    </div>
+
+    <div class="container" id="zuul_info_container">
+        <h2>Zuul info</h2>
+        <p>
+            Zuul version:
+            <span id="zuul-version"></span>
+        </p>
     </div>
 
     <script type="text/javascript">footer();</script>
