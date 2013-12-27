@@ -127,11 +127,6 @@ class openstack_project::gerrit (
     httpd_maxwait                   => $httpd_maxwait,
     commentlinks                    => [
       {
-        name  => 'changeid',
-        match => '(<p>|[\\s]+)(I?[0-9a-f]{7,40})(</p>|[\\s.]+)',
-        html  => '$1<a href=\"#q,$2,n,z\">$2</a>$3',
-      },
-      {
         name  => 'bugheader',
         match => '([Cc]loses|[Pp]artial|[Rr]elated)-[Bb]ug:\\s*#?(\\d+)',
         link  => 'https://launchpad.net/bugs/$2',
@@ -155,7 +150,12 @@ class openstack_project::gerrit (
         name  => 'launchpadbug',
         match => '<a href=\"(https://bugs\\.launchpad\\.net/[a-zA-Z0-9\\-]+/\\+bug/(\\d+))[^\"]+\">[^<]+</a>',
         html  => '<a href=\"$1\">$1</a>'
-      }
+      },
+      {
+        name  => 'changeid',
+        match => '(<p>|[\\s]+)(I?[0-9a-f]{7,40})(</p>|[\\s.]+)',
+        html  => '$1<a href=\"#q,$2,n,z\">$2</a>$3',
+      },
     ],
     war                             => $war,
     contactstore                    => $contactstore,
