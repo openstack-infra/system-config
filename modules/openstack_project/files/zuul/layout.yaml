@@ -908,11 +908,16 @@ projects:
     gate:
       - gate-trove-requirements
       - gate-tempest-dsvm-trove-full
+    post:
+      - trove-upstream-translation-update
     pre-release:
       - trove-tarball
     release:
       - trove-tarball
       - trove-merge-release-tags
+    periodic:
+      - trove-propose-translation-update
+
 
 # TODO: add docs
   - name: openstack/tuskar
