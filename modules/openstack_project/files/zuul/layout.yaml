@@ -112,29 +112,18 @@ pipelines:
       timer:
         - time: '0 6 * * *'
 
-  - name: periodic-grizzly
-    description: Periodic checks of the stable/grizzly branches.
+  - name: periodic-stable
+    description: Periodic checks of the stable branches.
     manager: IndependentPipelineManager
     precedence: low
     trigger:
       timer:
-        - time: '0 6 * * *'
+        - time: '1 6 * * *'
     failure:
       smtp:
         from: jenkins@openstack.org
         to: openstack-stable-maint@lists.openstack.org
-
-  - name: periodic-havana
-    description: Periodic checks of the stable/havana branches.
-    manager: IndependentPipelineManager
-    precedence: low
-    trigger:
-      timer:
-        - time: '0 6 * * *'
-    failure:
-      smtp:
-        from: jenkins@openstack.org
-        to: openstack-stable-maint@lists.openstack.org
+        subject: 'Stable check of {change.project} failed'
 
   - name: periodic-qa
     description: Periodic jobs for the QA team.
@@ -142,11 +131,12 @@ pipelines:
     precedence: low
     trigger:
       timer:
-        - time: '0 6 * * *'
+        - time: '2 6 * * *'
     failure:
       smtp:
         from: jenkins@openstack.org
         to: openstack-qa@lists.openstack.org
+        subject: 'Periodic jobs for {change.project} failed'
 
 
 project-templates:
@@ -176,13 +166,13 @@ project-templates:
       - '{name}-docs'
 
   - name: periodic-grizzly
-    periodic-grizzly:
+    periodic-stable:
       - 'periodic-{name}-docs-grizzly'
       - 'periodic-{name}-python26-grizzly'
       - 'periodic-{name}-python27-grizzly'
 
   - name: periodic-havana
-    periodic-havana:
+    periodic-stable:
       - 'periodic-{name}-docs-havana'
       - 'periodic-{name}-python26-havana'
       - 'periodic-{name}-python27-havana'
@@ -1821,11 +1811,10 @@ projects:
     post:
       - tempest-docs
       - tempest-branch-tarball
-    periodic-grizzly:
+    periodic-stable:
       - periodic-tempest-dsvm-full-grizzly
       - periodic-tempest-dsvm-neutron-grizzly
       - periodic-tempest-dsvm-postgres-full-grizzly
-    periodic-havana:
       - periodic-tempest-dsvm-full-havana
       - periodic-tempest-dsvm-neutron-havana
       - periodic-tempest-dsvm-postgres-full-havana
