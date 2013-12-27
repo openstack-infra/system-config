@@ -18,6 +18,9 @@
           export PROJECTS="stackforge/solum"
 
           function pre_test_hook {
+              # Install packages from test-requirements.txt
+              sudo pip install -r /opt/stack/new/solum/test-requirements.txt
+
               # Install solum devstack integration
               SOLUM_BASE=/opt/stack/new/solum/contrib/devstack
               DEVSTACK_BASE=/opt/stack/new/devstack
