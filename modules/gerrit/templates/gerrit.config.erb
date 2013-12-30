@@ -26,10 +26,13 @@
 [ldap]
 	server = <%= ldap_server %>
 	accountBase = <%= ldap_account_base %>
-	username = <%= ldap_username %>
-	password = <%= ldap_password %>
+	<% if ldap_username -%>username = <%= ldap_username %><%end%>
+	<% if ldap_password -%>password = <%= ldap_password %><%end%>
+	<% if ldap_accountfullname -%>accountFullName = <%= ldap_accountfullname %><%end%>
 	accountPattern = <%= ldap_account_pattern %>
 	accountEmailAddress = <%= ldap_account_email_address %>
+	sslVerify = <%= ldap_sslverify %>
+	<% if @ldap_ssh_account_name -%>accountSshUserName = <%= ldap_ssh_account_name %><%end%>
 <% end %>
 [sendemail]
 	smtpServer = <%= smtpserver %>
