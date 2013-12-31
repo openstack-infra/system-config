@@ -1023,6 +1023,16 @@
 
     publishers:
       - devstack-logs
+
+- job:
+    name: gate-devstack-gate-unittests
+    node: precise
+
+    builders:
+      - gerrit-git-prep
+      - shell: "./test-functions.sh"
+
+    publishers:
       - console-log
 
 

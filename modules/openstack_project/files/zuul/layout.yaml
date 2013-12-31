@@ -2451,6 +2451,7 @@ projects:
 
   - name: openstack-infra/devstack-gate
     check:
+      - gate-devstack-gate-unittests
       - check-devstack-dsvm-cells
       - check-dg-tempest-dsvm-full
       - check-dg-tempest-dsvm-full-reexec
@@ -2476,6 +2477,7 @@ projects:
       - check-tempest-dsvm-savanna-postgres-nv
       - check-tempest-dsvm-savanna-neutron-nv
     gate:
+      - gate-devstack-gate-unittests
       - gate-devstack-dsvm-cells
       - gate-tempest-dsvm-full
       - gate-tempest-dsvm-postgres-full
