@@ -1816,6 +1816,15 @@
           profileos: "ubuntu"
 
 - project:
+    name: operations-guide
+    github-org: openstack
+    node: precise
+
+    jobs:
+      - gate-{name}-tox-{envlist}:
+          envlist: checkniceness
+
+- project:
     name: manila
     github-org: stackforge
     node: precise
