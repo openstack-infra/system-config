@@ -2,13 +2,17 @@
 #
 class openstack_project::status (
   $sysadmins = [],
-  $reviewday_gerrit_ssh_key = '',
-  $reviewday_rsa_pubkey_contents = '',
-  $reviewday_rsa_key_contents = '',
-  $releasestatus_prvkey_contents = '',
-  $releasestatus_pubkey_contents = '',
-  $releasestatus_gerrit_ssh_key = '',
-  $er_state_dir = '/var/lib/elastic-recheck',
+  $gerrit_host,
+  $gerrit_ssh_host_key,
+  $reviewday_ssh_public_key = '',
+  $reviewday_ssh_private_key = '',
+  $releasestatus_ssh_public_key = '',
+  $releasestatus_ssh_private_key = '',
+  $recheck_ssh_public_key,
+  $recheck_ssh_private_key,
+  $recheck_bot_passwd,
+  $recheck_bot_nick,
+  $recheck_state_dir = '/var/lib/elastic-recheck',
 ) {
 
   class { 'openstack_project::server':
@@ -138,9 +142,18 @@ class openstack_project::status (
     user        => 'recheck',
     minute      => '*/15',
     hour        => '*',
-    command     => "elastic-recheck-graph /opt/elastic-recheck/queries -o ${er_state_dir}/graph-new.json && mv ${er_state_dir}/graph-new.json ${er_state_dir}/graph.json",
+    command     => "elastic-recheck-graph /opt/elastic-recheck/queries -o ${recheck_state_dir}/graph-new.json && mv ${recheck_state_dir}/graph-new.json ${recheck_state_dir}/graph.json",
     environment => 'PATH=/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin',
     require     => Class['elastic_recheck']
+  }
+
+  class { 'elastic_recheck::bot':
+    gerrit_host             => $gerrit_host,
+    gerrit_ssh_host_key     => $gerrit_ssh_host_key,
+    recheck_ssh_public_key  => $recheck_ssh_public_key,
+    recheck_ssh_private_key => $recheck_ssh_private_key,
+    recheck_bot_passwd      => $recheck_bot_passwd,
+    recheck_bot_nick        => $recheck_bot_nick,
   }
 
   ###########################################################
@@ -205,18 +218,18 @@ class openstack_project::status (
     gerrit_url                    => 'review.openstack.org',
     gerrit_port                   => '29418',
     gerrit_user                   => 'reviewday',
-    reviewday_gerrit_ssh_key      => $reviewday_gerrit_ssh_key,
-    reviewday_rsa_pubkey_contents => $reviewday_rsa_pubkey_contents,
-    reviewday_rsa_key_contents    => $reviewday_rsa_key_contents,
+    reviewday_gerrit_ssh_key      => $gerrit_ssh_host_key,
+    reviewday_rsa_pubkey_contents => $reviewday_ssh_public_key,
+    reviewday_rsa_key_contents    => $reviewday_ssh_private_key,
   }
 
   ###########################################################
   # Status - releasestatus
 
   class { 'releasestatus':
-    releasestatus_prvkey_contents => $releasestatus_prvkey_contents,
-    releasestatus_pubkey_contents => $releasestatus_pubkey_contents,
-    releasestatus_gerrit_ssh_key  => $releasestatus_gerrit_ssh_key,
+    releasestatus_prvkey_contents => $releasestatus_ssh_private_key,
+    releasestatus_pubkey_contents => $releasestatus_ssh_public_key,
+    releasestatus_gerrit_ssh_key  => $gerrit_ssh_host_key,
   }
 
   releasestatus::site { 'releasestatus':

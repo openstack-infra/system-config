@@ -8,7 +8,7 @@ channel_config=/etc/elastic-recheck/recheckwatchbot.yaml
 log_config=/etc/elastic-recheck/logging.config
 
 [gerrit]
-user=<%= gerrit_user %>
 host=<%= gerrit_host %>
+user=<%= recheck_gerrit_user %>
 query_file=/etc/elastic-recheck/queries
-key=<%= gerrit_ssh_private_key %>
+key=/home/recheck/.ssh/id_rsa

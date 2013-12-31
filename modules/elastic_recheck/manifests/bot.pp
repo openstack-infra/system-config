@@ -18,13 +18,12 @@
 #
 class elastic_recheck::bot (
   $gerrit_host,
-  $gerrit_ssh_private_key,
-  $gerrit_ssh_private_key_contents,
-  #not used today, will be used when elastic-recheck supports it.
-  $elasticsearch_url,
+  $gerrit_ssh_host_key = '',
+  $recheck_gerrit_user = 'elasticrecheck',
+  $recheck_ssh_private_key = '',
+  $recheck_ssh_public_key = '',
   $recheck_bot_passwd,
-  $gerrit_user = 'elasticrecheck',
-  $recheck_bot_nick = 'openstackrecheck',
+  $recheck_bot_nick,
 ) {
   include elastic_recheck
 
@@ -53,13 +52,37 @@ class elastic_recheck::bot (
     require => Class['elastic_recheck'],
   }
 
-  file { $gerrit_ssh_private_key:
-    ensure  => present,
-    mode    => '0600',
-    owner   => 'recheck',
-    group   => 'recheck',
-    content => $gerrit_ssh_private_key_contents,
-    require => Class['elastic_recheck'],
+  if $recheck_ssh_private_key != '' {
+    file { '/home/recheck/.ssh/id_rsa':
+      owner   => 'recheck',
+      group   => 'recheck',
+      mode    => '0600',
+      content => $recheck_ssh_private_key,
+      replace => true,
+      require => File['/home/recheck/.ssh/']
+    }
+  }
+
+  if $recheck_ssh_public_key != '' {
+    file { '/home/recheck/.ssh/id_rsa.pub':
+      owner   => 'recheck',
+      group   => 'recheck',
+      mode    => '0600',
+      content => $recheck_ssh_public_key,
+      replace => true,
+      require => File['/home/recheck/.ssh/']
+    }
+  }
+
+  if $gerrit_ssh_host_key != '' {
+    file { '/home/recheck/.ssh/known_hosts':
+      owner   => 'recheck',
+      group   => 'recheck',
+      mode    => '0600',
+      content => "${gerrit_host} ${gerrit_ssh_host_key}",
+      replace => true,
+      require => File['/home/recheck/.ssh/']
+    }
   }
 
   file { '/etc/init.d/elastic-recheck':
