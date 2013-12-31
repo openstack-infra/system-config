@@ -316,13 +316,6 @@ node 'logstash.openstack.org' {
       'elasticsearch5.openstack.org:9200',
       'elasticsearch6.openstack.org:9200',
     ],
-    # Config for elastic-recheck
-    gerrit_ssh_private_key          => '/home/recheck/.ssh/id_rsa',
-    gerrit_ssh_private_key_contents => hiera('elastic-recheck_gerrit_ssh_private_key'),
-    recheck_bot_nick                => 'openstackrecheck',
-    recheck_bot_passwd              => hiera('elastic-recheck_ircbot_password'),
-    gerrit_host                     => 'review.openstack.org',
-    elasticsearch_url               => 'http://logstash.openstack.org/elasticsearch/',
   }
 }
 
@@ -411,13 +404,17 @@ node 'static.openstack.org' {
 # A machine to serve various project status updates.
 node 'status.openstack.org' {
   class { 'openstack_project::status':
-    sysadmins                       => hiera('sysadmins'),
-    reviewday_rsa_key_contents      => hiera('reviewday_rsa_key_contents'),
-    reviewday_rsa_pubkey_contents   => hiera('reviewday_rsa_pubkey_contents'),
-    reviewday_gerrit_ssh_key        => hiera('gerrit_ssh_rsa_pubkey_contents'),
-    releasestatus_prvkey_contents   => hiera('releasestatus_rsa_key_contents'),
-    releasestatus_pubkey_contents   => hiera('releasestatus_rsa_pubkey_contents'),
-    releasestatus_gerrit_ssh_key    => hiera('gerrit_ssh_rsa_pubkey_contents'),
+    sysadmins                     => hiera('sysadmins'),
+    gerrit_host                   => 'review.openstack.org',
+    gerrit_ssh_host_key           => hiera('gerrit_ssh_rsa_pubkey_contents'),
+    reviewday_ssh_public_key      => hiera('reviewday_rsa_pubkey_contents'),
+    reviewday_ssh_private_key     => hiera('reviewday_rsa_key_contents'),
+    releasestatus_ssh_public_key  => hiera('releasestatus_rsa_pubkey_contents'),
+    releasestatus_ssh_private_key => hiera('releasestatus_rsa_key_contents'),
+    recheck_ssh_public_key        => hiera('elastic-recheck_gerrit_ssh_public_key'),
+    recheck_ssh_private_key       => hiera('elastic-recheck_gerrit_ssh_private_key'),
+    recheck_bot_nick              => 'openstackrecheck',
+    recheck_bot_passwd            => hiera('elastic-recheck_ircbot_password'),
   }
 }
 
