@@ -45,6 +45,7 @@ do_start()
 
         mkdir -p /var/run/$NAME
 	chown $USER /var/run/$NAME
+	ulimit -n 8192
 	start-stop-daemon --start --quiet --pidfile $PIDFILE -c $USER --exec $DAEMON --test > /dev/null \
 		|| return 1
 	start-stop-daemon --start --quiet --pidfile $PIDFILE -c $USER --exec $DAEMON -- \
