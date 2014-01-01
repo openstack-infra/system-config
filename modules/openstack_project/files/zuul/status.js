@@ -14,7 +14,7 @@
 
 window.zuul_enable_status_updates = true;
 window.zuul_filter = [];
-window.zuul_collapsed_changes = [];
+window.zuul_collapsed_exceptions = [];
 
 function format_time(ms, words) {
     if (ms == null) {
@@ -248,13 +248,18 @@ function format_change(change, change_queue) {
         }
     }
 
-    collapsed_index = window.zuul_collapsed_changes.indexOf(
-        safe_id(change['id']));
+    display = $('#expandByDefault').is(':checked');
+    safe_change_id = safe_id(change['id']);
+    collapsed_index = window.zuul_collapsed_exceptions.indexOf(safe_change_id);
+    if (collapsed_index > -1) {
+        /* listed as an exception to the current default */
+        display = !display;
+    }
 
     html += '</span><span class="time">';
     html += format_time(change['remaining_time'], true);
     html += '</span></div><div class="jobs"';
-    if (collapsed_index > -1) {
+    if (display == false) {
         html += ' style="display: none;"'
     }
     html += '>';
@@ -307,11 +312,30 @@ function toggle_display_jobs(_header) {
     content = header.next("div");
     content.slideToggle(100, function () {
         changeid = header.parent().attr('id');
-        index = window.zuul_collapsed_changes.indexOf(changeid);
-        if (content.is(":visible")) {
-            window.zuul_collapsed_changes.splice(index, 1);
+        collapsed_index = window.zuul_collapsed_exceptions.indexOf(changeid);
+        expand_by_default = $('#expandByDefault').is(':checked');
+        visible = content.is(":visible");
+        if (expand_by_default != visible && collapsed_index == -1) {
+            /* now an exception to the default */
+            window.zuul_collapsed_exceptions.push(changeid);
+        } else if (collapsed_index > -1) {
+            window.zuul_collapsed_exceptions.splice(collapsed_index, 1);
+        }
+    });
+}
+
+function toggle_expand_by_default(_checkbox) {
+    var checkbox = $(_checkbox);
+    expand_by_default = checkbox.is(':checked');
+    set_cookie('zuul-expand-by-default', expand_by_default ? 'true' : 'false');
+    window.zuul_collapsed_exceptions = [];
+    $.each($('div.change'), function(i, _change) {
+        change = $(_change);
+        content = change.children('div').next('div');
+        if (expand_by_default) {
+            content.show(0);
         } else {
-            window.zuul_collapsed_changes.push(changeid);
+            content.hide(0);
         }
     });
 }
@@ -334,17 +358,18 @@ function update_timeout() {
     setTimeout(update_timeout, 5000);
 }
 
-function clean_collapsed_changes_list() {
-    new_list = [];
+function clean_changes_lists() {
+    new_collapsed_exceptions = [];
 
     $.each($('div.change'), function(i, change) {
-        collapsed_index = window.zuul_collapsed_changes.indexOf(change.id);
+        collapsed_index = window.zuul_collapsed_exceptions.indexOf(change.id);
         if (collapsed_index > -1) {
-            new_list.push(change.id);
+            new_collapsed_exceptions.push(change.id);
+            return;
         }
     });
 
-    window.zuul_collapsed_changes = new_list;
+    window.zuul_collapsed_exceptions = new_collapsed_exceptions;
 }
 
 function update() {
@@ -375,7 +400,7 @@ function update() {
 
     });
 
-    clean_collapsed_changes_list();
+    clean_changes_lists();
 }
 
 function update_graphs() {
@@ -401,11 +426,15 @@ function update_graphs() {
 function save_filter() {
     var name = 'zuul-project-filter';
     var value = $('#projects_filter').val().trim();
-    document.cookie = name+"="+value+"; path=/";
+    set_cookie(name, value);
     $('img.filter-saved').removeClass('hidden');
     window.setTimeout(function(){
         $('img.filter-saved').addClass('hidden');
     }, 1500);
+}
+
+function set_cookie(name, value) {
+    document.cookie = name + "=" + value + "; path=/";
 }
 
 function read_cookie(name) {
@@ -461,4 +490,7 @@ $(function() {
     var cookie = read_cookie('zuul-project-filter');
     if(cookie)
         $('#projects_filter').val(cookie).change();
+    cookie = read_cookie('zuul-expand-by-default');
+    if(cookie)
+        $('#expandByDefault').prop('checked', cookie == 'true' ? true : false);
 });
