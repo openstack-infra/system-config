@@ -230,7 +230,7 @@ function format_change(change, change_queue) {
 
     html += '<td class="change-container">';
     html += '<div class="change" id="' + safe_id(change['id']) + '">' +
-            '<div class="header" onClick="toggle_display_jobs(this)" ' +
+            '<div class="header" onClick="toggle_display_jobs(event, this)" ' +
             'onmouseover="$(this).addClass(\'hover\')" ' +
             'onmouseout="$(this).removeClass(\'hover\')">';
 
@@ -310,8 +310,15 @@ function format_change(change, change_queue) {
     return html;
 }
 
-function toggle_display_jobs(_header) {
+function toggle_display_jobs(e, _header) {
+    e = e || window.event;  // standards compliant || IE
     var header = $(_header);
+    var target = $(e.target || e.srcElement);
+    var link = header.find("a");
+    if (target.is(link)) {
+        return true;
+    }
+
     content = header.next("div");
     content.slideToggle(100, function () {
         changeid = header.parent().attr('id');
