@@ -1,0 +1,20 @@
+- job:
+    name: gate-storyboard-webclient-unittests
+    node: bare-precise
+
+    builders:
+      - gerrit-git-prep
+      - shell: |
+          ./bin/bootstrap.sh
+          ./bin/build.sh
+
+    publishers:
+      - console-log
+      - coverage-log
+      - scp:
+          site: 'static.openstack.org'
+          files:
+            - target: 'logs/$LOG_PATH'
+              source: './reports/**'
+              keep-hierarchy: true
+              copy-after-failure: true
