@@ -53,7 +53,7 @@ class openstack_project::base(
 
   include pip
   package { 'virtualenv':
-    ensure   => latest,
+    ensure   => '1.10.1',
     provider => pip,
     require  => Class['pip'],
   }
