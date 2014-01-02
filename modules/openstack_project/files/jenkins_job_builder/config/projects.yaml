@@ -1032,6 +1032,18 @@
 
 
 - project:
+    name: storyboard-webclient
+    github-org: openstack-infra
+    node: precise
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - gate-storyboard-webclient-unittests
+      - storyboard-webclient-branch-release
+      - storyboard-webclient-release
+
+
+- project:
     name: swift
     github-org: openstack
     node: precise
