@@ -1,0 +1,12 @@
+- job:
+    name: gate-storyboard-webclient-unittests
+    node: bare-precise
+
+    builders:
+      - gerrit-git-prep
+      - shell: |
+          ./bin/bootstrap.sh
+          ./bin/build.sh
+
+    publishers:
+      - console-log
