@@ -2793,11 +2793,9 @@ projects:
 
   - name: stackforge/congress
     check:
-      - gate-congress-pep8
-      - gate-congress-python27
+      - gate-noop
     gate:
-      - gate-congress-pep8
-      - gate-congress-python27
+      - gate-noop
 
   - name: stackforge/cookbook-openstack-block-storage
     check:
