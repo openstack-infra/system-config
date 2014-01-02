@@ -153,7 +153,12 @@ class openstack_project::gerrit (
       },
       {
         name  => 'changeid',
-        match => '(<p>|[\\s]+)(I?[0-9a-f]{7,40})(</p>|[\\s.]+)',
+        match => 'I[0-9a-f]{8,40}',
+        link  => '#q,$1,n,z',
+      },
+      {
+        name  => 'gitsha',
+        match => '(<p>|[\\s(])([0-9a-f]{40})(</p>|[\\s.,;:)])',
         html  => '$1<a href=\"#q,$2,n,z\">$2</a>$3',
       },
     ],
