@@ -1032,6 +1032,16 @@
 
 
 - project:
+    name: storyboard-webclient
+    github-org: openstack-infra
+    node: precise
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      # None yet, figuring out what needs to go here.
+
+
+- project:
     name: swift
     github-org: openstack
     node: precise

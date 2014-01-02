@@ -2576,6 +2576,12 @@ projects:
           - post-mirror-python27
           - post-mirror-python33
 
+  - name: openstack-infra/storyboard-webclient
+    check:
+      - gate-noop
+    gate:
+      - gate-noop
+
   - name: openstack-infra/tripleo-ci
     check:
       - gate-noop
