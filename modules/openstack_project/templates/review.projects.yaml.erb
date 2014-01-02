@@ -127,7 +127,11 @@
   description: Infrastructure status update IRC bot
 - project: openstack-infra/storyboard
   upstream: git://github.com/ttx/storyboard.git
-  description: OpenStack Task Tracking System
+  description: OpenStack Task Tracking API
+- project: openstack-infra/storyboard-webclient
+  acl-config: /home/gerrit2/acls/openstack-infra/storyboard.config
+  upstream: git://github.com/krotscheck/storyboard-webclient.git
+  description: OpenStack Task Tracking Browser Client
 - project: openstack-infra/tripleo-ci
   description: CI for the tripleo project
   upstream: https://github.com/toci-dev/toci
