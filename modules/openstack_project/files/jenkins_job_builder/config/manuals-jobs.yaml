@@ -156,3 +156,15 @@
           source: 'doc/src/docbkx/{install}/target/docbkx/webhelp/**/atom.xml'
           target: ''
           remove-prefix: 'doc/src/docbkx/{install}/target/docbkx/webhelp/'
+
+- job-group:
+    name: openstack-doc-jobs
+    jobs:
+      - gate-{name}-tox-{envlist}:
+          envlist: checkniceness
+      - gate-{name}-tox-{envlist}:
+          envlist: checksyntax
+      - gate-{name}-tox-{envlist}:
+          envlist: checkdeletions
+      - gate-{name}-tox-{envlist}:
+          envlist: checkbuild
