@@ -3773,8 +3773,14 @@ projects:
   - name: stackforge/sphinxcontrib-docbookrestapi
     check:
       - gate-sphinxcontrib-docbookrestapi-pep8
+      - gate-sphinxcontrib-docbookrestapi-py26
+      - gate-sphinxcontrib-docbookrestapi-py27
+      - gate-sphinxcontrib-docbookrestapi-py33
     gate:
       - gate-sphinxcontrib-docbookrestapi-pep8
+      - gate-sphinxcontrib-docbookrestapi-py26
+      - gate-sphinxcontrib-docbookrestapi-py27
+      - gate-sphinxcontrib-docbookrestapi-py33
     pre-release:
       - sphinxcontrib-docbookrestapi-tarball
     release:
