@@ -75,6 +75,15 @@ class openstack_project::lists(
     mailserver  => $listdomain,
   }
 
+  maillist { 'openstack-personas':
+    ensure      => present,
+    admin       => 'pieter.c.kruithof-jr@hp.com',
+    password    => $listpassword,
+    description => 'A group of designers, researchers, developers, writers and users that are creating a set of personas for OpenStack that are intended to help drive development around the needs of our users.',
+    webserver   => $listdomain,
+    mailserver  => $listdomain,
+  }
+
   maillist { 'openstack-vi':
     ensure      => present,
     admin       => 'hang.tran@dtt.vn',
