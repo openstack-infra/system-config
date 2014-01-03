@@ -718,7 +718,7 @@ projects:
     check:
       - gate-noop
 
-  - name: stackforge/cookbook-openstack-metering
+  - name: stackforge/cookbook-openstack-telemetry
     check:
       - gate-noop
 
