@@ -473,13 +473,6 @@
   acl-config: /home/gerrit2/acls/stackforge/chef-cookbooks.config
   options:
     - direct-release
-- project: stackforge/cookbook-openstack-metering
-  group: openstack-chef
-  docimpact-group: openstack-chef
-  description: Chef Cookbook - OpenStack Metering
-  acl-config: /home/gerrit2/acls/stackforge/chef-cookbooks.config
-  options:
-    - direct-release
 - project: stackforge/cookbook-openstack-network
   group: openstack-chef
   docimpact-group: openstack-chef
@@ -514,6 +507,13 @@
   group: openstack-chef
   docimpact-group: openstack-chef
   description: Chef Cookbook - OpenStack Orchestration
+  acl-config: /home/gerrit2/acls/stackforge/chef-cookbooks.config
+  options:
+    - direct-release
+- project: stackforge/cookbook-openstack-telemetry
+  group: openstack-chef
+  docimpact-group: openstack-chef
+  description: Chef Cookbook - OpenStack Telemetry
   acl-config: /home/gerrit2/acls/stackforge/chef-cookbooks.config
   options:
     - direct-release
