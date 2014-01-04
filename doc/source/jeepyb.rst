@@ -147,18 +147,6 @@ matched, such as:
 * DocImpact
 * SecurityImpact
 
-Trivial Rebase Hook
--------------------
-
-The ``trivial-rebase`` commit hook runs when new patchsets are
-uploaded and detects whether the new patchset is merely a rebase onto
-a new parent, or is a substantial change.  If it is a rebase, it
-restores previous review votes and leaves a comment in Gerrit.  It
-uses Gerrit's own SSH host key as the private key for access in order
-to gain the "superuser" permissions needed to impersonate other users
-in reviews.
-
-
 Periodic Tasks
 ==============
 
