@@ -3881,6 +3881,15 @@ projects:
       - gate-taskflow-python26
       - gate-taskflow-python27
       - gate-taskflow-python33
+      - gate-taskflow-tox-py26-sa7
+      - gate-taskflow-tox-py26-sa8
+      - gate-taskflow-tox-py26-sa9
+      - gate-taskflow-tox-py27-sa7
+      - gate-taskflow-tox-py27-sa8
+      - gate-taskflow-tox-py27-sa9
+      - gate-taskflow-tox-py33-sa7
+      - gate-taskflow-tox-py33-sa8
+      - gate-taskflow-tox-py33-sa9
     gate:
       - gate-taskflow-pep8
       - gate-taskflow-python26
