@@ -405,6 +405,8 @@ jobs:
     voting: false
   - name: ^(gate|check)-tempest-dsvm-savanna-neutron$
     voting: false
+  - name: ^(gate|check)-tempest-dsvm-trove-full$
+    voting: false
   - name: gate-marconi-python33
     voting: false
   - name: gate-python-ceilometerclient-python33
@@ -897,8 +899,10 @@ projects:
       - name: openstack-server-publish-jobs
     check:
       - gate-trove-requirements
+      - check-tempest-dsvm-trove-full
     gate:
       - gate-trove-requirements
+      - gate-tempest-dsvm-trove-full
     pre-release:
       - trove-tarball
     release:
@@ -1855,6 +1859,7 @@ projects:
       - gate-tempest-dsvm-savanna-full
       - gate-tempest-dsvm-savanna-postgres-full
       - gate-tempest-dsvm-savanna-neutron
+      - gate-tempest-dsvm-trove-full
       - check-tempest-dsvm-ironic
       - check-tempest-dsvm-ironic-postgres
       - check-tempest-dsvm-neutron-isolated
