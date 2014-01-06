@@ -1595,6 +1595,20 @@
     jobs:
       - python-jobs
       - pypi-jobs
+      - gate-{name}-tox-{envlist}:
+          envlist: py27-ev
+      - gate-{name}-tox-{envlist}:
+          envlist: py27-sa7
+      - gate-{name}-tox-{envlist}:
+          envlist: py27-sa7-ev
+      - gate-{name}-tox-{envlist}:
+          envlist: py27-sa8
+      - gate-{name}-tox-{envlist}:
+          envlist: py27-sa8-ev
+      - gate-{name}-tox-{envlist}:
+          envlist: py27-sa9
+      - gate-{name}-tox-{envlist}:
+          envlist: py27-sa9-ev
 
 - project:
     name: cl-openstack-client
