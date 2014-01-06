@@ -51,6 +51,7 @@ openstack-infra:
       - gearman-plugin
       - sysadmin-codereview
       - debian/sid
+      - openstack/2.8
 
 openstack-doc:
     events:
