@@ -471,3 +471,15 @@ packstack-dev:
     branches:
       - master
       - grizzly
+
+syscompass:
+    events:
+      - patchset-created
+      - change-merged
+      - x-vrif-minus-2
+    projects:
+      - stackforge/compass
+      - stackforge/compass-web
+      - stackforge/compass-adapters
+    branches:
+      - master

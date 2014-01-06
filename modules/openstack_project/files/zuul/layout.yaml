@@ -2778,6 +2778,24 @@ projects:
     gate:
       - gate-noop
 
+  - name: stackforge/compass
+    check:
+      - gate-noop
+    gate:
+      - gate-noop
+
+  - name: stackforge/compass-web
+    check:
+      - gate-noop
+    gate:
+      - gate-noop
+
+  - name: stackforge/compass-adapters
+    check:
+      - gate-noop
+    gate:
+      - gate-noop
+
   - name: stackforge/congress
     check:
       - gate-congress-pep8
