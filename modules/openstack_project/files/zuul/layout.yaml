@@ -379,6 +379,8 @@ jobs:
     voting: false
   - name: gate-marconi-python33
     voting: false
+  - name: check-tempest-dsvm-marconi
+    voting: false
   - name: gate-python-ceilometerclient-python33
     voting: false
   - name: gate-python-glanceclient-python33
@@ -700,6 +702,7 @@ projects:
 # TODO: add docs
   - name: openstack/marconi
     check:
+      - check-tempest-dsvm-marconi
       - gate-marconi-requirements
       - gate-marconi-pep8
       - gate-marconi-python26
@@ -707,6 +710,7 @@ projects:
       - gate-marconi-python33
       - gate-marconi-pypy
     gate:
+      - check-tempest-dsvm-marconi
       - gate-marconi-requirements
       - gate-marconi-pep8
       - gate-marconi-python26
@@ -1816,6 +1820,7 @@ projects:
       - gate-tempest-dsvm-savanna-neutron
       - check-tempest-dsvm-ironic
       - check-tempest-dsvm-ironic-postgres
+      - check-tempest-dsvm-marconi
       - check-tempest-dsvm-neutron-isolated
       - check-tempest-dsvm-neutron-pg-isolated
     post:
