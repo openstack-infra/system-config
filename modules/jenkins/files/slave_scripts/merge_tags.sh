@@ -14,7 +14,9 @@
 
 TAG=$1
 
-if $(git tag --contains origin/milestone-proposed | grep "^$TAG$" >/dev/null)
+PROPOSED=$(git branch | grep proposed) || exit 0
+
+if $(git tag --contains origin/${PROPOSED:2} | grep "^$TAG$" >/dev/null)
 then
     git config user.name "OpenStack Jenkins"
     git config user.email "jenkins@openstack.org"
