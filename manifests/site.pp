@@ -394,6 +394,15 @@ node 'summit.openstack.org' {
   }
 }
 
+# A machine to run Storyboard
+node 'Storyboard.openstack.org' {
+  class { 'openstack_project::summit':
+    sysadmins           => hiera('sysadmins'),
+    mysql_password      => hiera('storyboard_mysql_password'),
+    mysql_root_password => hiera('storyboard_mysql_root_password'),
+  }
+}
+
 # A machine to serve static content.
 node 'static.openstack.org' {
   class { 'openstack_project::static':
