@@ -2359,6 +2359,12 @@ projects:
           - post-mirror-python27
           - post-mirror-python33
 
+  - name: openstack-infra/javamelody-plugin
+    check:
+      - noop
+    gate:
+      - noop
+
   - name: openstack-infra/jenkins-job-builder
     template:
       - name: python-jobs
