@@ -379,6 +379,8 @@ jobs:
     voting: false
   - name: gate-marconi-python33
     voting: false
+  - name: check-tempest-dsvm-marconi
+    voting: false
   - name: gate-python-ceilometerclient-python33
     voting: false
   - name: gate-python-glanceclient-python33
@@ -706,6 +708,7 @@ projects:
       - gate-marconi-python27
       - gate-marconi-python33
       - gate-marconi-pypy
+      - check-tempest-dsvm-marconi
     gate:
       - gate-marconi-requirements
       - gate-marconi-pep8
@@ -713,6 +716,7 @@ projects:
       - gate-marconi-python27
       - gate-marconi-python33
       - gate-marconi-pypy
+      - check-tempest-dsvm-marconi
     post:
       - marconi-branch-tarball
     pre-release:
@@ -1816,6 +1820,7 @@ projects:
       - gate-tempest-dsvm-savanna-neutron
       - check-tempest-dsvm-ironic
       - check-tempest-dsvm-ironic-postgres
+      - check-tempest-dsvm-marconi
       - check-tempest-dsvm-neutron-isolated
       - check-tempest-dsvm-neutron-pg-isolated
     post:
