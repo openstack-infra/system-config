@@ -1,0 +1,17 @@
+<VirtualHost *:80>
+  DocumentRoot /var/lib/storyboard/www
+  ErrorLog /var/log/apache2/storyboard-error.log
+  CustomLog /var/log/apache2/storyboard-access.log common
+
+  WSGIDaemonProcess storyboard user=storyboard group=storyboard threads=5 python-path=/usr/local/lib/python2.7/dist-packages
+  WSGIScriptAlias /api /usr/local/lib/python2.7/dist-packages/storyboard/api/app.wsgi
+
+  # The app.wsgi file has to be accessible by apache. It won't
+  # be visible to clients because of the DocumentRoot though.
+  <Directory /usr/local/lib/python2.7/dist-packages/storyboard/>
+             WSGIProcessGroup storyboard
+             WSGIApplicationGroup %{GLOBAL}
+             Order deny,allow
+             Allow from all
+  </Directory>
+</VirtualHost>
