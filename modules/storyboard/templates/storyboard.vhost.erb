@@ -1,0 +1,12 @@
+<VirtualHost *:80>
+  DocumentRoot /var/lib/storyboard/www
+
+  ErrorLog ${APACHE_LOG_DIR}/<%= scope.lookupvar("::storyboard::vhost_name") %>-error.log
+
+  LogLevel warn
+
+  CustomLog ${APACHE_LOG_DIR}/<%= scope.lookupvar("::storyboard::vhost_name") %>-access.log combined
+
+  ProxyPass /api http://127.0.0.1:8080/ retry=0
+  ProxyPassReverse /api http://127.0.0.1:8080/
+</VirtualHost>
