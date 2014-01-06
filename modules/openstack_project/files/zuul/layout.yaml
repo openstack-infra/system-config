@@ -2345,6 +2345,12 @@ projects:
     gate:
       - gate-noop
 
+  - name: openstack-infra/javamelody-plugin
+    check:
+      - gate-noop
+    gate:
+      - gate-noop
+
   - name: openstack-infra/jeepyb
     check:
       - gate-jeepyb-pep8
