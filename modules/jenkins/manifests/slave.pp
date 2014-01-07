@@ -47,6 +47,7 @@ class jenkins::slave(
     $::jenkins::params::mysql_dev_package,
     $::jenkins::params::nspr_dev_package, # for spidermonkey, used by ceilometer
     $::jenkins::params::sqlite_dev_package,
+    $::jenkins::params::libvirt_dev_package,
     $::jenkins::params::libxml2_package,
     $::jenkins::params::libxml2_dev_package, # for xmllint, need for wadl
     $::jenkins::params::libxslt_dev_package,
