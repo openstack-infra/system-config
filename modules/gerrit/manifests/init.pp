@@ -161,6 +161,10 @@ class gerrit(
     }
   }
 
+  package { 'unzip':
+    ensure => present,
+  }
+
   package { 'openjdk-7-jre-headless':
     ensure => present,
   }
@@ -473,8 +477,6 @@ class gerrit(
                   Mysql::Db['reviewdb'],
                   File['/home/gerrit2/review_site/etc/gerrit.config'],
                   File['/home/gerrit2/review_site/etc/secure.config']],
-    notify    => Exec['gerrit-start'],
-    unless    => '/usr/bin/test -f /etc/init.d/gerrit',
     logoutput => true,
   }
 
@@ -492,6 +494,19 @@ class gerrit(
                     Mysql::Db['reviewdb'],
                     File['/home/gerrit2/review_site/etc/gerrit.config'],
                     File['/home/gerrit2/review_site/etc/secure.config']],
+    logoutput   => true,
+  }
+
+  # Install Core Plugins
+  exec { 'install-core-plugins':
+    user        => 'gerrit2',
+    command     => "/usr/bin/unzip /home/gerrit2/review_site/bin/gerrit.war -juo /home/gerrit2/review_site/plugins",
+    subscribe   => File['/home/gerrit2/review_site/bin/gerrit.war'],
+    require     => [Package['unzip'],
+                    User['gerrit2'],
+                    Exec['gerrit-initial-init'],
+                    Exec['gerrit-init'],
+                    File['/home/gerrit2/review_site/plugins']],
     notify      => Exec['gerrit-start'],
     onlyif      => '/usr/bin/test -f /etc/init.d/gerrit',
     logoutput   => true,
