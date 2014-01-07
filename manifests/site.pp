@@ -454,6 +454,8 @@ node 'zuul.openstack.org' {
       'jenkins.openstack.org',
       'jenkins01.openstack.org',
       'jenkins02.openstack.org',
+      'jenkins03.openstack.org',
+      'jenkins04.openstack.org',
       'jenkins-dev.openstack.org',
     ],
   }
@@ -472,6 +474,8 @@ node 'zuul-dev.openstack.org' {
       'jenkins.openstack.org',
       'jenkins01.openstack.org',
       'jenkins02.openstack.org',
+      'jenkins03.openstack.org',
+      'jenkins04.openstack.org',
       'jenkins-dev.openstack.org',
     ],
   }
