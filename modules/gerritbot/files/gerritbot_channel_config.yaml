@@ -471,3 +471,14 @@ packstack-dev:
     branches:
       - master
       - grizzly
+
+openstack-anvil:
+    events:
+      - patchset-created
+      - change-merged
+      - x-vrif-minus-2
+    projects:
+      - stackforge/anvil
+    branches:
+      - master
+      - stable/grizzly
