@@ -2703,12 +2703,20 @@ projects:
       - gate-cliff-python27
       - gate-cliff-python33
       - gate-cliff-pypy
+      - gate-cliff-tox-neutronclient-stable
+      - gate-cliff-tox-neutronclient-tip
+      - gate-cliff-tox-openstackclient-stable
+      - gate-cliff-tox-openstackclient-tip
     gate:
       - gate-cliff-pep8
       - gate-cliff-python26
       - gate-cliff-python27
       - gate-cliff-python33
       - gate-cliff-pypy
+      - gate-cliff-tox-neutronclient-stable
+      - gate-cliff-tox-neutronclient-tip
+      - gate-cliff-tox-openstackclient-stable
+      - gate-cliff-tox-openstackclient-tip
     post:
       - cliff-branch-tarball
       - hook-cliff-rtfd
