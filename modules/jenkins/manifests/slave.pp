@@ -47,7 +47,6 @@ class jenkins::slave(
     $::jenkins::params::mysql_dev_package,
     $::jenkins::params::nspr_dev_package, # for spidermonkey, used by ceilometer
     $::jenkins::params::sqlite_dev_package,
-    $::jenkins::params::libvirt_dev_package,
     $::jenkins::params::libxml2_package,
     $::jenkins::params::libxml2_dev_package, # for xmllint, need for wadl
     $::jenkins::params::libxslt_dev_package,
@@ -65,6 +64,12 @@ class jenkins::slave(
     $::jenkins::params::xvfb_package, # for selenium tests
   ]
 
+  # packages that are problematic, so we have to ensure
+  # that they aren't there
+  $verboten_packages = [
+    $::jenkins::params::libvirt_dev_package, # causes grief in nova unit tests
+  ]
+
   if ($bare == false) {
     $packages = [$common_packages, $standard_packages]
   } else {
@@ -73,6 +78,10 @@ class jenkins::slave(
 
   package { $packages:
     ensure => present,
+  }
+
+  package { $verboten_packages:
+    ensure => absent,
   }
 
   case $::osfamily {
