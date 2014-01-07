@@ -1590,12 +1590,22 @@ projects:
       - gate-oslo.rootwrap-python26
       - gate-oslo.rootwrap-python27
       - gate-oslo.rootwrap-python33
+      - check-tempest-dsvm-full
+      - check-tempest-dsvm-neutron
+      - gate-tempest-dsvm-large-ops
+      - gate-tempest-dsvm-neutron-large-ops
+      - check-grenade-dsvm
     gate:
       - gate-oslo.rootwrap-requirements
       - gate-oslo.rootwrap-pep8
       - gate-oslo.rootwrap-python26
       - gate-oslo.rootwrap-python27
       - gate-oslo.rootwrap-python33
+      - gate-tempest-dsvm-full
+      - gate-tempest-dsvm-neutron
+      - gate-tempest-dsvm-large-ops
+      - gate-tempest-dsvm-neutron-large-ops
+      - gate-grenade-dsvm
     post:
       - oslo.rootwrap-branch-tarball
     pre-release:
