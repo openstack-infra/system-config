@@ -3740,10 +3740,12 @@ projects:
       - gate-rally-pep8
       - gate-rally-python26
       - gate-rally-python27
+      - gate-rally-requirements
     gate:
       - gate-rally-pep8
       - gate-rally-python26
       - gate-rally-python27
+      - gate-rally-requirements
     post:
       - rally-branch-tarball
     pre-release:
