@@ -328,6 +328,8 @@ jobs:
     branch: ^(?!stable/grizzly).*$
   - name: gate-openstack-manuals-validate-build
     branch: ^(?!stable/grizzly).*$
+  - name: gate-operations-guide-tox-checkniceness
+    voting: false
 # Deprecated documentation targets:
   - name: openstack-block-storage-admin-old
     branch: stable/grizzly
@@ -2013,6 +2015,7 @@ projects:
 
   - name: openstack/operations-guide
     check:
+      - gate-operations-guide-tox-checkniceness
       - gate-openstack-manuals-operations-guide
     gate:
       - gate-openstack-manuals-operations-guide
