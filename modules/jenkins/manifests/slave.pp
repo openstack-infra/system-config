@@ -71,6 +71,10 @@ class jenkins::slave(
     $packages = $common_packages
   }
 
+  file { '/etc/apt/sources.list.d/cloudarchive.list':
+    ensure => absent,
+  }
+
   package { $packages:
     ensure => present,
   }
