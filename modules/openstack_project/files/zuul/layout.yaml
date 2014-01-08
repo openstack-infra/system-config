@@ -1144,6 +1144,10 @@ projects:
       - python-marconiclient-branch-tarball
     pre-release:
       - python-marconiclient-tarball
+        - python-marconiclient-pypi-upload:
+          - post-mirror-python26
+          - post-mirror-python27
+          - post-mirror-python33
     release:
       - python-marconiclient-tarball:
         - python-marconiclient-pypi-upload:
