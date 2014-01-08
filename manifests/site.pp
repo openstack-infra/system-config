@@ -475,7 +475,8 @@ node 'zuul.openstack.org' {
         name => 'git04',
         url  => 'ssh://zuul@git04.openstack.org:/var/lib/git/zuul',
       },
-  ]
+    ],
+  }
 }
 
 node 'zuul-dev.openstack.org' {
