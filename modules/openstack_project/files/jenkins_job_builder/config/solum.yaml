@@ -36,7 +36,7 @@
 
           function post_test_hook {
               cd /opt/stack/new/solum/functionaltests
-              ./run_tests.sh
+              sudo ./run_tests.sh
           }
           export -f post_test_hook
 
