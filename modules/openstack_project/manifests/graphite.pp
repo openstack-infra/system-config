@@ -14,6 +14,7 @@ class openstack_project::graphite (
 
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [80, 443],
+    iptables_rules6           => $rules,
     iptables_rules4           => $rules,
     sysadmins                 => $sysadmins,
   }
