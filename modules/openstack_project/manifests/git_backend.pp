@@ -19,6 +19,7 @@ class openstack_project::git_backend (
   $vhost_name = $::fqdn,
   $sysadmins = [],
   $git_gerrit_ssh_key = '',
+  $git_zuul_ssh_key = '',
   $ssl_cert_file_contents = '',
   $ssl_key_file_contents = '',
   $ssl_chain_file_contents = '',
@@ -84,8 +85,15 @@ class openstack_project::git_backend (
   exec { 'create_cgitrepos':
     command     => 'create-cgitrepos',
     path        => '/bin:/usr/bin:/usr/local/bin',
-    environment => 'SCRATCH_SUBPATH=zuul',
-    require     => File['/home/cgit/projects.yaml'],
+    environment => [
+      'SCRATCH_SUBPATH=zuul',
+      'SCRATCH_OWNER=zuul',
+      'SCRATCH_GROUP=zuul',
+    ],
+    require     => [
+      File['/home/cgit/projects.yaml'],
+      User['zuul'],
+    ],
     subscribe   => File['/home/cgit/projects.yaml'],
     refreshonly => true,
   }
@@ -99,7 +107,7 @@ class openstack_project::git_backend (
     weekday     => '0',
     hour        => '4',
     minute      => '7',
-    command     => 'find /var/lib/git/ -type d -name "*.git" -print -exec git --git-dir="{}" repack -afd \; -exec git --git-dir="{}" pack-refs --all \;',
+    command     => 'find /var/lib/git/ -not -path /var/lib/git/zuul -type d -name "*.git" -print -exec git --git-dir="{}" repack -afd \; -exec git --git-dir="{}" pack-refs --all \;',
     environment => 'PATH=/usr/bin:/bin:/usr/sbin:/sbin',
     require     => User['cgit'],
   }
@@ -135,4 +143,64 @@ class openstack_project::git_backend (
     mode    => '0755',
     source  => 'puppet:///modules/openstack_project/git/commit-filter.sh',
   }
+
+  user { 'zuul':
+    ensure     => present,
+    home       => '/home/zuul',
+    shell      => '/bin/bash',
+    gid        => 'zuul',
+    managehome => true,
+    require    => Group['zuul'],
+  }
+
+  group { 'zuul':
+    ensure => present,
+  }
+
+  file {'/home/zuul':
+    ensure  => directory,
+    owner   => 'zuul',
+    group   => 'zuul',
+    mode    => '0755',
+    require => User['zuul'],
+  }
+
+  file { '/var/lib/git/zuul':
+    ensure  => directory,
+    owner   => 'zuul',
+    group   => 'zuul',
+    mode    => '0755',
+    require => [
+      User['zuul'],
+      File['/var/lib/git'],
+    ]
+  }
+
+  file { '/home/zuul/.ssh':
+    ensure  => directory,
+    owner   => 'zuul',
+    group   => 'zuul',
+    mode    => '0700',
+    require => User['zuul'],
+  }
+
+  file { '/home/zuul/.ssh/authorized_keys':
+    owner   => 'zuul',
+    group   => 'zuul',
+    mode    => '0600',
+    content => $git_zuul_ssh_key,
+    replace => true,
+    require => File['/home/zuul/.ssh']
+  }
+
+  cron { 'mirror_repack_zuul':
+    user        => 'zuul',
+    weekday     => '0',
+    hour        => '4',
+    minute      => '7',
+    command     => 'find /var/lib/git/zuul -type d -name "*.git" -print -exec git --git-dir="{}" repack -afd \; -exec git --git-dir="{}" pack-refs --all \;',
+    environment => 'PATH=/usr/bin:/bin:/usr/sbin:/sbin',
+    require     => User['zuul'],
+  }
+
 }
