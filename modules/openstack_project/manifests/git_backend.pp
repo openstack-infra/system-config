@@ -84,6 +84,7 @@ class openstack_project::git_backend (
   exec { 'create_cgitrepos':
     command     => 'create-cgitrepos',
     path        => '/bin:/usr/bin:/usr/local/bin',
+    environment => 'SCRATCH_SUBPATH=zuul',
     require     => File['/home/cgit/projects.yaml'],
     subscribe   => File['/home/cgit/projects.yaml'],
     refreshonly => true,
