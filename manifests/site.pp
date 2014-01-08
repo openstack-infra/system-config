@@ -380,6 +380,7 @@ node /^git\d+\.openstack\.org$/ {
     vhost_name              => 'git.openstack.org',
     sysadmins               => hiera('sysadmins'),
     git_gerrit_ssh_key      => hiera('gerrit_replication_ssh_rsa_pubkey_contents'),
+    git_zuul_ssh_key        => hiera('zuul_push_ssh_rsa_pubkey_contents'),
     ssl_cert_file_contents  => hiera('git_ssl_cert_file_contents'),
     ssl_key_file_contents   => hiera('git_ssl_key_file_contents'),
     ssl_chain_file_contents => hiera('git_ssl_chain_file_contents'),
