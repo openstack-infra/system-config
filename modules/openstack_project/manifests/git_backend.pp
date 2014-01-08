@@ -19,6 +19,7 @@ class openstack_project::git_backend (
   $vhost_name = $::fqdn,
   $sysadmins = [],
   $git_gerrit_ssh_key = '',
+  $git_zuul_ssh_key = '',
   $ssl_cert_file_contents = '',
   $ssl_key_file_contents = '',
   $ssl_chain_file_contents = '',
@@ -67,7 +68,7 @@ class openstack_project::git_backend (
     owner   => 'cgit',
     group   => 'cgit',
     mode    => '0600',
-    content => $git_gerrit_ssh_key,
+    content => "${git_gerrit_ssh_key}\n${git_zuul_ssh_key}",
     replace => true,
     require => File['/home/cgit/.ssh/']
   }
