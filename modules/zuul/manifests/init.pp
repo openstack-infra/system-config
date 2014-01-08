@@ -32,7 +32,8 @@ class zuul (
   $push_change_refs = false,
   $job_name_in_report = false,
   $revision = 'master',
-  $statsd_host = ''
+  $statsd_host = '',
+  $replication_targets = []
 ) {
   include apache
   include pip
