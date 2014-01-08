@@ -376,6 +376,7 @@ node 'git.openstack.org' {
 # CentOS machines to run cgit and git daemon. Will be
 # load balanced by git.openstack.org.
 node /^git\d+\.openstack\.org$/ {
+  include openstack_project
   class { 'openstack_project::git_backend':
     vhost_name              => 'git.openstack.org',
     sysadmins               => hiera('sysadmins'),
