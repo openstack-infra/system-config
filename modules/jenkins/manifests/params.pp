@@ -79,6 +79,8 @@ class jenkins::params {
       $python_netaddr_package = 'python-netaddr'
       # packages needed by slaves
       $asciidoc_package = 'asciidoc'
+      # For Ceilometer integration tests
+      $cassandra_package = 'cassandra'
       $curl_package = 'curl'
       $docbook_xml_package = 'docbook-xml'
       $docbook5_xml_package = 'docbook5-xml'

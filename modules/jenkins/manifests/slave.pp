@@ -71,6 +71,14 @@ class jenkins::slave(
     $packages = $common_packages
   }
 
+  apt::source { 'cassandra':
+    location   => 'http://www.apache.org/dist/cassandra/debian',
+    release    => '12x',
+    repos      => ['main'],
+    key        => '2B5C1B00',
+    key_server => 'pgp.mit.edu',
+  }
+
   file { '/etc/apt/sources.list.d/cloudarchive.list':
     ensure => absent,
   }
@@ -124,6 +132,11 @@ class jenkins::slave(
 
       # For Tooz unit tests
       package { $::jenkins::params::zookeeper_package:
+        ensure => present,
+      }
+
+      # For Ceilometer integration tests
+      package { $::jenkins::params::cassandra_package:
         ensure => present,
       }
 
