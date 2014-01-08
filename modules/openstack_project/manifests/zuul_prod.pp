@@ -9,7 +9,8 @@ class openstack_project::zuul_prod(
   $zuul_url = '',
   $sysadmins = [],
   $statsd_host = '',
-  $gearman_workers = []
+  $gearman_workers = [],
+  $replication_targets = []
 ) {
   # Turn a list of hostnames into a list of iptables rules
   $iptables_rules = regsubst ($gearman_workers, '^(.*)$', '-m state --state NEW -m tcp -p tcp --dport 4730 -s \1 -j ACCEPT')
@@ -32,6 +33,7 @@ class openstack_project::zuul_prod(
     job_name_in_report   => true,
     status_url           => 'http://status.openstack.org/zuul/',
     statsd_host          => $statsd_host,
+    replication_targets  => $replication_targets,
   }
 
   file { '/etc/zuul/layout.yaml':
