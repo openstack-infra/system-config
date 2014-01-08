@@ -20,3 +20,9 @@ url_pattern=<%= url_pattern %>
 status_url=<%= status_url %>
 job_name_in_report=<%= job_name_in_report %>
 zuul_url=<%= zuul_url %>
+
+<% if replication_targets != [] -%>
+[replication]
+<% replication_targets.each do |target| -%>
+<%= target['name'] %>=<%= target['url'] %>
+<% end -%>

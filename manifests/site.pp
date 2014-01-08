@@ -459,6 +459,23 @@ node 'zuul.openstack.org' {
       'jenkins04.openstack.org',
       'jenkins-dev.openstack.org',
     ],
+    replication_targets  => [
+      {
+        name => 'git01',
+        url  => 'ssh://cgit@git01.openstack.org:/var/lib/git/zuul',
+      },
+      {
+        name => 'git02',
+        url  => 'ssh://cgit@git02.openstack.org:/var/lib/git/zuul',
+      },
+      {
+        name => 'git03',
+        url  => 'ssh://cgit@git03.openstack.org:/var/lib/git/zuul',
+      },
+      {
+        name => 'git04',
+        url  => 'ssh://cgit@git04.openstack.org:/var/lib/git/zuul',
+      },
   }
 }
 
