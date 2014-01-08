@@ -26,6 +26,10 @@
               # Install packages from test-requirements.txt
               sudo pip install -r $TEMPDIR/test-requirements.txt
 
+              # Allow users to write into solum directory as tempest creates log
+              # file there.
+              sudo chmod -R o+rw /opt/stack/new/solum
+
               # Install solum devstack integration
               SOLUM_BASE=/opt/stack/new/solum/contrib/devstack
               DEVSTACK_BASE=/opt/stack/new/devstack
