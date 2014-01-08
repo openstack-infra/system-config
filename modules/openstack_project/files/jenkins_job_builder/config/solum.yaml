@@ -18,8 +18,13 @@
           export PROJECTS="stackforge/solum"
 
           function pre_test_hook {
+              # Remove oslo.sphinx from test-requirements.txt as it is
+              # causing issues and we don't need it for functional tests.
+              TEMPDIR=`mktemp -d`
+              sed '/oslo.sphinx/d' /opt/stack/new/solum/test-requirements.txt > $TEMPDIR/test-requirements.txt
+
               # Install packages from test-requirements.txt
-              sudo pip install -r /opt/stack/new/solum/test-requirements.txt
+              sudo pip install -r $TEMPDIR/test-requirements.txt
 
               # Install solum devstack integration
               SOLUM_BASE=/opt/stack/new/solum/contrib/devstack
