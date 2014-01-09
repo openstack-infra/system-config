@@ -205,6 +205,25 @@ class openstack_project::status (
     require => File['/srv/static/status/zuul'],
   }
 
+  ###########################################################
+  # Status - Gate Stats
+
+  file { '/srv/static/status/gatestats':
+    ensure => directory,
+  }
+
+  file { '/srv/static/status/gatestats/index.html':
+    ensure  => present,
+    source  => 'puppet:///modules/openstack_project/gatestats/status.html',
+    require => File['/srv/static/status/gatestats'],
+  }
+
+  file { '/srv/static/status/gatestats/status.js':
+    ensure  => present,
+    source  => 'puppet:///modules/openstack_project/gatestats/status.js',
+    require => File['/srv/static/status/gatestats'],
+  }
+
 
   ###########################################################
   # Status - reviewday

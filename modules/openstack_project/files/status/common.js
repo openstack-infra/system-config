@@ -15,12 +15,20 @@
 function header(activeTabName) {
   tabsName = new Array();
   tabsLink = new Array();
-  tabsName[0] = 'Status'; tabsLink[0] = 'http://status.openstack.org/';
-  tabsName[1] = 'Zuul'; tabsLink[1] = 'http://status.openstack.org/zuul/';
-  tabsName[2] = 'Rechecks'; tabsLink[2] = 'http://status.openstack.org/rechecks/';
-  tabsName[3] = 'Release'; tabsLink[3] = 'http://status.openstack.org/release/';
-  tabsName[4] = 'Reviews'; tabsLink[4] = 'http://status.openstack.org/reviews/';
-  tabsName[5] = 'Bugday'; tabsLink[5] = 'http://status.openstack.org/bugday/';
+  tabsName.push('Status');
+  tabsLink.push('http://status.openstack.org/');
+  tabsName.push('Zuul');
+  tabsLink.push('http://status.openstack.org/zuul/');
+  tabsName.push('Gate Stats');
+  tabsLink.push('http://status.openstack.org/gatestats/');
+  tabsName.push('Rechecks');
+  tabsLink.push('http://status.openstack.org/rechecks/');
+  tabsName.push('Release');
+  tabsLink.push('http://status.openstack.org/release/');
+  tabsName.push('Reviews');
+  tabsLink.push('http://status.openstack.org/reviews/');
+  tabsName.push('Bugday');
+  tabsLink.push('http://status.openstack.org/bugday/');
 
   document.write(
    '<div id="header" class="container">'+
@@ -90,4 +98,3 @@ function footer() {
   '</div>'+
   '</div>')
 }
-
