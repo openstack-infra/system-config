@@ -440,7 +440,7 @@
 - project:
     name: glance
     github-org: openstack
-    node: precise
+    node: bare-precise
     tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
 
