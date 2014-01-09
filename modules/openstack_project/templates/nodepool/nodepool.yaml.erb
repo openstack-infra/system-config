@@ -34,6 +34,13 @@ providers:
         setup: prepare_node_devstack.sh
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
+      - name: devstack-precise
+        base-image: 'Ubuntu 12.04 LTS (Precise Pangolin)'
+        min-ram: 8192
+        name-filter: 'Performance'
+        setup: prepare_node_devstack.sh
+        username: jenkins
+        private-key: /home/nodepool/.ssh/id_rsa
   - name: rax-ord
     region-name: 'ORD'
     service-type: 'compute'
@@ -46,6 +53,13 @@ providers:
     max-servers: 60
     images:
       - name: devstack-precise-check
+        base-image: 'Ubuntu 12.04 LTS (Precise Pangolin)'
+        min-ram: 8192
+        name-filter: 'Performance'
+        setup: prepare_node_devstack.sh
+        username: jenkins
+        private-key: /home/nodepool/.ssh/id_rsa
+      - name: devstack-precise
         base-image: 'Ubuntu 12.04 LTS (Precise Pangolin)'
         min-ram: 8192
         name-filter: 'Performance'
@@ -71,6 +85,13 @@ providers:
     max-servers: 60
     images:
       - name: devstack-precise-check
+        base-image: 'Ubuntu 12.04 LTS (Precise Pangolin)'
+        min-ram: 8192
+        name-filter: 'Performance'
+        setup: prepare_node_devstack.sh
+        username: jenkins
+        private-key: /home/nodepool/.ssh/id_rsa
+      - name: devstack-precise
         base-image: 'Ubuntu 12.04 LTS (Precise Pangolin)'
         min-ram: 8192
         name-filter: 'Performance'
@@ -201,15 +222,15 @@ targets:
       - name: devstack-precise
         min-ready: 10
         providers:
+          - name: rax-iad
+          - name: rax-dfw
+          - name: rax-ord
           - name: hpcloud-az1
           - name: hpcloud-az2
           - name: hpcloud-az3
       - name: devstack-precise-check
         min-ready: 5
         providers:
-          - name: rax-iad
-          - name: rax-dfw
-          - name: rax-ord
           - name: hpcloud-region-b
       - name: tripleo-precise
         min-ready: 1
@@ -229,15 +250,15 @@ targets:
       - name: devstack-precise
         min-ready: 10
         providers:
+          - name: rax-iad
+          - name: rax-dfw
+          - name: rax-ord
           - name: hpcloud-az1
           - name: hpcloud-az2
           - name: hpcloud-az3
       - name: devstack-precise-check
         min-ready: 5
         providers:
-          - name: rax-iad
-          - name: rax-dfw
-          - name: rax-ord
           - name: hpcloud-region-b
       - name: tripleo-precise
         min-ready: 1
@@ -257,15 +278,15 @@ targets:
       - name: devstack-precise
         min-ready: 10
         providers:
+          - name: rax-iad
+          - name: rax-dfw
+          - name: rax-ord
           - name: hpcloud-az1
           - name: hpcloud-az2
           - name: hpcloud-az3
       - name: devstack-precise-check
         min-ready: 5
         providers:
-          - name: rax-iad
-          - name: rax-dfw
-          - name: rax-ord
           - name: hpcloud-region-b
   - name: jenkins04
     jenkins:
@@ -281,13 +302,13 @@ targets:
       - name: devstack-precise
         min-ready: 10
         providers:
+          - name: rax-iad
+          - name: rax-dfw
+          - name: rax-ord
           - name: hpcloud-az1
           - name: hpcloud-az2
           - name: hpcloud-az3
       - name: devstack-precise-check
         min-ready: 5
         providers:
-          - name: rax-iad
-          - name: rax-dfw
-          - name: rax-ord
           - name: hpcloud-region-b
