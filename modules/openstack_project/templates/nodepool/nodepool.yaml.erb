@@ -27,13 +27,6 @@ providers:
     boot-timeout: 120
     max-servers: 2
     images:
-      - name: devstack-precise-check
-        base-image: 'Ubuntu 12.04 LTS (Precise Pangolin)'
-        min-ram: 8192
-        name-filter: 'Performance'
-        setup: prepare_node_devstack.sh
-        username: jenkins
-        private-key: /home/nodepool/.ssh/id_rsa
       - name: devstack-precise
         base-image: 'Ubuntu 12.04 LTS (Precise Pangolin)'
         min-ram: 8192
@@ -52,13 +45,6 @@ providers:
     boot-timeout: 120
     max-servers: 60
     images:
-      - name: devstack-precise-check
-        base-image: 'Ubuntu 12.04 LTS (Precise Pangolin)'
-        min-ram: 8192
-        name-filter: 'Performance'
-        setup: prepare_node_devstack.sh
-        username: jenkins
-        private-key: /home/nodepool/.ssh/id_rsa
       - name: devstack-precise
         base-image: 'Ubuntu 12.04 LTS (Precise Pangolin)'
         min-ram: 8192
@@ -84,13 +70,6 @@ providers:
     boot-timeout: 120
     max-servers: 60
     images:
-      - name: devstack-precise-check
-        base-image: 'Ubuntu 12.04 LTS (Precise Pangolin)'
-        min-ram: 8192
-        name-filter: 'Performance'
-        setup: prepare_node_devstack.sh
-        username: jenkins
-        private-key: /home/nodepool/.ssh/id_rsa
       - name: devstack-precise
         base-image: 'Ubuntu 12.04 LTS (Precise Pangolin)'
         min-ram: 8192
