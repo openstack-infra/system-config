@@ -190,15 +190,15 @@ jobs:
     parameter-function: single_use_node
   - name: gate-ci-docs
     parameter-function: single_use_node
-  - name: '^gate-(cinder|glance|heat|horizon|keystone|nova|savanna)-docs$'
+  - name: '^gate-(ceilometer|cinder|glance|heat|horizon|keystone|nova|savanna)-docs$'
     parameter-function: single_use_node
-  - name: '^gate-(cinder|glance|heat|horizon|keystone|nova|savanna)-pep8$'
+  - name: '^gate-(ceilometer|cinder|glance|heat|horizon|keystone|nova|savanna)-pep8$'
     parameter-function: single_use_node
-  - name: '^gate-(cinder|glance|heat|horizon|keystone|nova|savanna)-pylint$'
+  - name: '^gate-(ceilometer|cinder|glance|heat|horizon|keystone|nova|savanna)-pylint$'
     parameter-function: single_use_node
-  - name: '^gate-(cinder|glance|heat|horizon|keystone|nova|savanna)-python27$'
+  - name: '^gate-(ceilometer|cinder|glance|heat|horizon|keystone|nova|savanna)-python27$'
     parameter-function: single_use_node
-  - name: '^(cinder|glance|heat|horizon|keystone|nova|savanna)-coverage$'
+  - name: '^(ceilometer|cinder|glance|heat|horizon|keystone|nova|savanna)-coverage$'
     parameter-function: single_use_node
 # end section to deal with transition to bare-precise
   - name: ^(gate|check)-requirements-integration-dsvm$
