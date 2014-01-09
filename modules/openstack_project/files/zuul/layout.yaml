@@ -183,12 +183,24 @@ jobs:
     parameter-function: set_log_url
   - name: ^.*(dsvm|devstack-vm).*$
     parameter-function: single_use_node
+# begin section to deal with transition to bare-precise
   - name: gate-config-layout
     parameter-function: single_use_node
   - name: ci-docs
     parameter-function: single_use_node
   - name: gate-ci-docs
     parameter-function: single_use_node
+  - name: '^gate-(nova|savanna)-docs$'
+    parameter-function: single_use_node
+  - name: '^gate-(nova|savanna)-pep8$'
+    parameter-function: single_use_node
+  - name: '^gate-(nova|savanna)-pylint$'
+    parameter-function: single_use_node
+  - name: '^gate-(nova|savanna)-python27$'
+    parameter-function: single_use_node
+  - name: '^(nova|savanna)-coverage$'
+    parameter-function: single_use_node
+# end section to deal with transition to bare-precise
   - name: ^(gate|check)-requirements-integration-dsvm$
     branch: ^(?!stable/grizzly).*$
   - name: ^(gate|check)-tempest-dsvm-neutron-pg$
