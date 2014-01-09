@@ -101,6 +101,13 @@ providers:
         setup: prepare_node_devstack.sh
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
+      - name: bare-precise
+        base-image: 'Ubuntu Precise 12.04 LTS Server 64-bit 20121026 (b)'
+        min-ram: 8192
+        name-filter: 'Performance'
+        setup: prepare_node_bare.sh
+        username: jenkins
+        private-key: /home/nodepool/.ssh/id_rsa
   - name: hpcloud-az2
     region-name: 'az-2.region-a.geo-1'
     service-type: 'compute'
@@ -118,6 +125,13 @@ providers:
         setup: prepare_node_devstack.sh
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
+      - name: bare-precise
+        base-image: 'Ubuntu Precise 12.04 LTS Server 64-bit 20121026 (b)'
+        min-ram: 8192
+        name-filter: 'Performance'
+        setup: prepare_node_bare.sh
+        username: jenkins
+        private-key: /home/nodepool/.ssh/id_rsa
   - name: hpcloud-az3
     region-name: 'az-3.region-a.geo-1'
     service-type: 'compute'
@@ -133,6 +147,13 @@ providers:
         base-image: 'Ubuntu Precise 12.04 LTS Server 64-bit 20121026 (b)'
         min-ram: 8192
         setup: prepare_node_devstack.sh
+        username: jenkins
+        private-key: /home/nodepool/.ssh/id_rsa
+      - name: bare-precise
+        base-image: 'Ubuntu Precise 12.04 LTS Server 64-bit 20121026 (b)'
+        min-ram: 8192
+        name-filter: 'Performance'
+        setup: prepare_node_bare.sh
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
   - name: hpcloud-region-a
@@ -195,9 +216,13 @@ targets:
       credentials-id: '<%= jenkins_credentials_id %>'
     images:
       - name: bare-precise
-        min-ready: 2
+        min-ready: 5
         providers:
           - name: rax-iad
+          - name: rax-ord
+          - name: hpcloud-az1
+          - name: hpcloud-az2
+          - name: hpcloud-az3
       - name: devstack-precise
         min-ready: 10
         providers:
@@ -223,9 +248,13 @@ targets:
       credentials-id: '<%= jenkins_credentials_id %>'
     images:
       - name: bare-precise
-        min-ready: 2
+        min-ready: 5
         providers:
           - name: rax-iad
+          - name: rax-ord
+          - name: hpcloud-az1
+          - name: hpcloud-az2
+          - name: hpcloud-az3
       - name: devstack-precise
         min-ready: 10
         providers:
@@ -251,9 +280,13 @@ targets:
       credentials-id: '<%= jenkins_credentials_id %>'
     images:
       - name: bare-precise
-        min-ready: 2
+        min-ready: 5
         providers:
           - name: rax-iad
+          - name: rax-ord
+          - name: hpcloud-az1
+          - name: hpcloud-az2
+          - name: hpcloud-az3
       - name: devstack-precise
         min-ready: 10
         providers:
@@ -275,9 +308,13 @@ targets:
       credentials-id: '<%= jenkins_credentials_id %>'
     images:
       - name: bare-precise
-        min-ready: 2
+        min-ready: 5
         providers:
           - name: rax-iad
+          - name: rax-ord
+          - name: hpcloud-az1
+          - name: hpcloud-az2
+          - name: hpcloud-az3
       - name: devstack-precise
         min-ready: 10
         providers:
