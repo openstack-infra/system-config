@@ -37,10 +37,10 @@ function header(activeTabName) {
    '</div>\n'+
    '<div class="span-19 last blueLine">'+
    '<div id="navigation" class="span-19">'+
-   '<ul id="Menu1">\n')
+   '<ul id="Menu1">\n');
 
   for (var i = 0; i < tabsName.length; i++) {
-      document.write('<li><a id="menu-'+tabsName[i]+'" href="'+tabsLink[i]+'"')
+      document.write('<li><a id="menu-'+tabsName[i]+'" href="'+tabsLink[i]+'"');
       if (tabsName[i] == activeTabName) {
           document.write(' class="current"');
       }
@@ -51,7 +51,7 @@ function header(activeTabName) {
    '</ul>'+
    '</div>'+
    '</div>'+
-   '</div>')
+   '</div>');
 }
 
 function footer() {
@@ -96,5 +96,5 @@ function footer() {
   '</ul>'+
   '</div>'+
   '</div>'+
-  '</div>')
+  '</div>');
 }
