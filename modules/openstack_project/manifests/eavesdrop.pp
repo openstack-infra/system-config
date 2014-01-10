@@ -49,6 +49,7 @@ class openstack_project::eavesdrop (
         '#openstack-neutron',
         '#openstack-qa',
         '#openstack-relmgr-office',
+        '#openstack-swift',
         '#openstack-trove',
         '#savanna',
         '#storyboard',
