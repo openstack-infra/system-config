@@ -1,7 +1,8 @@
 # == Class: openstack_project::puppetmaster
 #
 class openstack_project::puppetmaster (
-  $sysadmins = []
+  $sysadmins = [],
+  $keep_puppetmaster_updated = false,
 ) {
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [4505, 4506, 8140],
@@ -9,11 +10,18 @@ class openstack_project::puppetmaster (
   }
 
   class { 'salt':
-    salt_master => 'ci-puppetmaster.openstack.org',
+    salt_master => $::saltmaster,
   }
   class { 'salt::master': }
 
+  case $keep_puppetmaster_updated {
+    true:    { $updatepuppetcmd = 'present' }
+    false:   { $updatepuppetcmd = 'absent' }
+    default: { fail('invalid value for $keep_puppetmaster_updated'}
+  }
+
   cron { 'updatepuppetmaster':
+    ensure      => $updatepuppetcmd,
     user        => 'root',
     minute      => '*/15',
     command     => 'sleep $((RANDOM\%600)) && cd /opt/config/production && git fetch -q && git reset -q --hard @{u} && ./install_modules.sh && touch manifests/site.pp',
