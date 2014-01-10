@@ -3920,7 +3920,10 @@ projects:
       - taskflow-tarball
     release:
       - taskflow-tarball:
-        - taskflow-pypi-upload
+        - taskflow-pypi-upload:
+          - post-mirror-python26
+          - post-mirror-python27
+          - post-mirror-python33
 
   - name: stackforge/tomograph
     check:
