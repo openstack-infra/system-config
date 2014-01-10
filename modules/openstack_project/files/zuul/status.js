@@ -16,6 +16,20 @@ window.zuul_enable_status_updates = true;
 window.zuul_filter = [];
 window.zuul_collapsed_exceptions = [];
 
+function format_enqueue_time(time) {
+    var hours = 60 * 60 * 1000;
+    var now = Date.now();
+    var delta = now - time;
+    var status = "queue_good";
+    var text = format_time(delta, true);
+    if (delta > (4 * hours)) {
+        status = "queue_bad";
+    } else if (delta > (2 * hours)) {
+        status = "queue_warn";
+    }
+    return '<span class="' + status + '">' + text + '</span>';
+}
+
 function format_time(ms, words) {
     if (ms == null) {
         return "unknown";
@@ -235,6 +249,20 @@ function format_change(change, change_queue) {
             'onmouseout="$(this).removeClass(\'hover\')">';
 
     html += '<span class="project">' + change['project'] + '</span>';
+
+    display = $('#expandByDefault').is(':checked');
+    safe_change_id = safe_id(change['id']);
+    collapsed_index = window.zuul_collapsed_exceptions.indexOf(safe_change_id);
+    if (collapsed_index > -1) {
+        /* listed as an exception to the current default */
+        display = !display;
+    }
+
+    html += '<span class="time">';
+    html += format_time(change['remaining_time'], true);
+    html += '</span><br/>';
+
+    // Row #2 of the header (change id and enqueue time)
     var id = change['id'];
     var url = change['url'];
     if (id !== null) {
@@ -249,19 +277,14 @@ function format_change(change, change_queue) {
         if (url !== null) {
             html += '</a>';
         }
+        html += '</span>';
     }
+    html += '<span class="time">' + format_enqueue_time(change['enqueue_time']) + '</span>';
 
-    display = $('#expandByDefault').is(':checked');
-    safe_change_id = safe_id(change['id']);
-    collapsed_index = window.zuul_collapsed_exceptions.indexOf(safe_change_id);
-    if (collapsed_index > -1) {
-        /* listed as an exception to the current default */
-        display = !display;
-    }
+    html += '</div>';
 
-    html += '</span><span class="time">';
-    html += format_time(change['remaining_time'], true);
-    html += '</span></div><div class="jobs"';
+    // Job listing from here down
+    html += '<div class="jobs"';
     if (display == false) {
         html += ' style="display: none;"'
     }
