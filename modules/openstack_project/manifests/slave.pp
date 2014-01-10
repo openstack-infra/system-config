@@ -25,7 +25,7 @@ class openstack_project::slave (
     include_pypy => $include_pypy,
   }
   class { 'salt':
-    salt_master => 'ci-puppetmaster.openstack.org',
+    salt_master => $::saltmaster,
   }
   include jenkins::cgroups
   include ulimit
