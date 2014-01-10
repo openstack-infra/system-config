@@ -227,8 +227,12 @@ function format_change(change, change_queue) {
         html += '<td class="'+cls+'">';
         if (i == change['_tree_index']) {
             if (change['failing_reasons'] && change['failing_reasons'].length > 0) {
-                html += '<img src="red.png" title="Failing because '+
-                    change['failing_reasons'].join(', ')+'"/>';
+                var reason = change['failing_reasons'].join(', ');
+                var image = 'red.png';
+                if (reason.match(/merge conflict/)) {
+                    image = 'black.png';
+                }
+                html += '<img src="' + image + '" title="Failing because ' + reason +'"/>';
             } else {
                 html += '<img src="green.png" title="Succeeding"/>';
             }
