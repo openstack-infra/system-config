@@ -1,10 +1,26 @@
+# GLOBAL DEFAULTS
+#
+# these variables replace the baked in versions.
+# this allows the entries to be set in hiera or
+# to continue working as previously configured.
+#
+# to use in hiera add the following to your common.yaml
+#
+# puppetmaster: 'your.puppet.host'
+# saltmaster: 'your.salt.host' # (usually the same box)
+# sysadmins: 'single entry or array of email addresses'
+
+$puppetmaster = hiera('puppetmaster','ci-puppetmaster.openstack.org')
+$saltmaster   = hiera('saltmaster','ci-puppetmaster.openstack.org')
+$sysadmins    = hiera('sysadmins','')
+
 #
 # Default: should at least behave like an openstack server
 #
 node default {
   include openstack_project::puppet_cron
   class { 'openstack_project::server':
-    sysadmins => hiera('sysadmins'),
+    sysadmins => $::sysadmins,
   }
 }
 
@@ -194,19 +210,22 @@ node 'jenkins-dev.openstack.org' {
 node 'cacti.openstack.org' {
   include openstack_project::ssl_cert_check
   class { 'openstack_project::cacti':
-    sysadmins => hiera('sysadmins'),
+    sysadmins => $::sysadmins,
   }
 }
 
 node 'community.openstack.org' {
   class { 'openstack_project::community':
-    sysadmins => hiera('sysadmins'),
+    sysadmins => $::sysadmins,
   }
 }
 
+# this puppetmaster has a cron enabled to update/reset the repo to latest
+# this behaviour should be opted in to.
 node 'ci-puppetmaster.openstack.org' {
   class { 'openstack_project::puppetmaster':
-    sysadmins => hiera('sysadmins'),
+    keep_puppetmaster_updated => true,
+    sysadmins                 => $::sysadmins,
   }
 }
 
@@ -223,7 +242,7 @@ node 'graphite.openstack.org' {
 
 node 'groups.openstack.org' {
   class { 'openstack_project::groups':
-    sysadmins => hiera('sysadmins'),
+    sysadmins => $::sysadmins,
   }
 }
 
@@ -245,13 +264,13 @@ node 'lists.openstack.org' {
 
 node 'paste.openstack.org' {
   class { 'openstack_project::paste':
-    sysadmins => hiera('sysadmins'),
+    sysadmins => $::sysadmins,
   }
 }
 
 node 'planet.openstack.org' {
   class { 'openstack_project::planet':
-    sysadmins => hiera('sysadmins'),
+    sysadmins => $::sysadmins,
   }
 }
 
@@ -434,14 +453,14 @@ node /^git\d+\.openstack\.org$/ {
 # A machine to run ODSREG in preparation for summits.
 node 'summit.openstack.org' {
   class { 'openstack_project::summit':
-    sysadmins => hiera('sysadmins'),
+    sysadmins => $::sysadmins,
   }
 }
 
 # A machine to serve static content.
 node 'static.openstack.org' {
   class { 'openstack_project::static':
-    sysadmins => hiera('sysadmins'),
+    sysadmins => $::sysadmins,
   }
 }
 
@@ -625,7 +644,7 @@ node /^precise-?\d+.*\.slave\.openstack\.org$/ {
   class { 'openstack_project::slave':
     certname  => 'precise.slave.openstack.org',
     ssh_key   => $openstack_project::jenkins_ssh_key,
-    sysadmins => hiera('sysadmins'),
+    sysadmins => $::sysadmins,
   }
 }
 
@@ -634,7 +653,7 @@ node /^precise-dev\d+.*\.slave\.openstack\.org$/ {
   include openstack_project::puppet_cron
   class { 'openstack_project::slave':
     ssh_key   => $openstack_project::jenkins_dev_ssh_key,
-    sysadmins => hiera('sysadmins'),
+    sysadmins => $::sysadmins,
   }
 }
 
@@ -666,7 +685,7 @@ node /^centos6-?\d+\.slave\.openstack\.org$/ {
   class { 'openstack_project::slave':
     certname  => 'centos6.slave.openstack.org',
     ssh_key   => $openstack_project::jenkins_ssh_key,
-    sysadmins => hiera('sysadmins'),
+    sysadmins => $::sysadmins,
   }
 }
 
@@ -675,7 +694,7 @@ node /^centos6-dev\d+\.slave\.openstack\.org$/ {
   include openstack_project::puppet_cron
   class { 'openstack_project::slave':
     ssh_key   => $openstack_project::jenkins_dev_ssh_key,
-    sysadmins => hiera('sysadmins'),
+    sysadmins => $::sysadmins,
   }
 }
 
@@ -685,7 +704,7 @@ node /^fedora18-?\d+\.slave\.openstack\.org$/ {
   class { 'openstack_project::slave':
     certname  => 'fedora18.slave.openstack.org',
     ssh_key   => $openstack_project::jenkins_ssh_key,
-    sysadmins => hiera('sysadmins'),
+    sysadmins => $::sysadmins,
     python3   => true,
   }
 }
@@ -695,7 +714,7 @@ node /^fedora18-dev\d+\.slave\.openstack\.org$/ {
   include openstack_project::puppet_cron
   class { 'openstack_project::slave':
     ssh_key   => $openstack_project::jenkins_dev_ssh_key,
-    sysadmins => hiera('sysadmins'),
+    sysadmins => $::sysadmins,
     python3   => true,
   }
 }
