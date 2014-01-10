@@ -658,11 +658,12 @@ projects:
       - name: openstack-server-publish-jobs
     check:
       - gate-ironic-requirements
-    gate:
-      - gate-ironic-requirements
-    experimental:
       - check-tempest-dsvm-ironic
       - check-tempest-dsvm-ironic-postgres
+    gate:
+      - gate-ironic-requirements
+      - gate-tempest-dsvm-ironic
+      - gate-tempest-dsvm-ironic-postgres
     post:
       - ironic-upstream-translation-update
     pre-release:
@@ -1819,6 +1820,8 @@ projects:
       - gate-tempest-dsvm-large-ops
       - gate-tempest-dsvm-neutron-large-ops
       - check-grenade-dsvm
+      - check-tempest-dsvm-ironic
+      - check-tempest-dsvm-ironic-postgres
     gate:
       - gate-tempest-requirements
       - gate-tempest-pep8
@@ -1830,6 +1833,8 @@ projects:
       - gate-tempest-dsvm-large-ops
       - gate-tempest-dsvm-neutron-large-ops
       - gate-grenade-dsvm
+      - gate-tempest-dsvm-ironic
+      - gate-tempest-dsvm-ironic-postgres
     experimental:
       - gate-tempest-dsvm-neutron-heat-slow
       - gate-grenade-dsvm-forward
@@ -1838,8 +1843,6 @@ projects:
       - gate-tempest-dsvm-savanna-full
       - gate-tempest-dsvm-savanna-postgres-full
       - gate-tempest-dsvm-savanna-neutron
-      - check-tempest-dsvm-ironic
-      - check-tempest-dsvm-ironic-postgres
       - check-tempest-dsvm-neutron-isolated
       - check-tempest-dsvm-neutron-pg-isolated
     post:
@@ -2065,6 +2068,8 @@ projects:
       - check-grenade-dsvm-forward
       - check-swift-dsvm-functional
       - check-devstack-dsvm-neutron
+      - check-tempest-dsvm-ironic
+      - check-tempest-dsvm-ironic-postgres
     gate:
       - gate-devstack-bash8
       - gate-tempest-dsvm-full
@@ -2075,6 +2080,8 @@ projects:
       - gate-grenade-dsvm
       - gate-grenade-dsvm-forward
       - gate-swift-dsvm-functional
+      - gate-tempest-dsvm-ironic
+      - gate-tempest-dsvm-ironic-postgres
     experimental:
       - gate-tempest-dsvm-neutron-heat-slow
       - gate-grenade-dsvm-forward
