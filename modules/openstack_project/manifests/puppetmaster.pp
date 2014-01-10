@@ -1,7 +1,8 @@
 # == Class: openstack_project::puppetmaster
 #
 class openstack_project::puppetmaster (
-  $sysadmins = []
+  $sysadmins = [],
+  $keep_puppetmaster_updated = false,
 ) {
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [4505, 4506, 8140],
@@ -9,14 +10,19 @@ class openstack_project::puppetmaster (
   }
 
   class { 'salt':
-    salt_master => 'ci-puppetmaster.openstack.org',
+    salt_master => $::saltmaster,
   }
   class { 'salt::master': }
+
+  $updatepuppetcmd = $keep_puppetmaster_updated ? {
+    true  => 'sleep $((RANDOM\%600)) && cd /opt/config/production && git fetch -q && git reset -q --hard @{u} && ./install_modules.sh && touch manifests/site.pp',
+    false => '# puppetmaster update/reset operation disabled by puppet'
+  }
 
   cron { 'updatepuppetmaster':
     user        => 'root',
     minute      => '*/15',
-    command     => 'sleep $((RANDOM\%600)) && cd /opt/config/production && git fetch -q && git reset -q --hard @{u} && ./install_modules.sh && touch manifests/site.pp',
+    command     => $updatepuppetcmd,
     environment => 'PATH=/var/lib/gems/1.8/bin:/usr/bin:/bin:/usr/sbin:/sbin',
   }
 
