@@ -162,7 +162,7 @@
 - project:
     name: savanna
     github-org: openstack
-    node: 'bare-precise || precise'
+    node: bare-precise
     tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
 
@@ -624,7 +624,7 @@
 - project:
     name: nova
     github-org: openstack
-    node: 'bare-precise || precise'
+    node: bare-precise
     tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
 
