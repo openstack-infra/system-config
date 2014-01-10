@@ -171,6 +171,11 @@ a:link {
     display: none;
 }
 
+.loading_message {
+    text-align: center;
+    font-size: 16pt;
+}
+
 /** Theming for the progress bars to get them consisten across browers:
       referenced from http://www.useragentman.com/blog/2012/01/03/cross-browser-html5-progress-bars-in-depth/
 */
@@ -278,6 +283,7 @@ progress[aria-valuenow]:before  {
     </div>
 
     <div id="pipeline-container">
+        <p class="loading_message">Loading...</p>
     </div>
 
     <div class="container" id="graph-container">
