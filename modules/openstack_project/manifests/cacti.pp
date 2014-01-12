@@ -11,6 +11,10 @@ class openstack_project::cacti (
 
   include apache
 
+  a2mod { 'rewrite':
+    ensure => present,
+  }
+
   package { 'cacti':
     ensure => present,
   }
