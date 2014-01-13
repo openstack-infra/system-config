@@ -1905,6 +1905,9 @@
 
     jobs:
       - 'gate-{name}-pep8'
+      - 'gate-{name}-python26'
+      - 'gate-{name}-python27'
+      - 'gate-{name}-python33'
       - '{name}-tarball'
       - pypi-jobs
 
