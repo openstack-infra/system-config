@@ -16,6 +16,7 @@
           export DEVSTACK_GATE_TIMEOUT=120
           export DEVSTACK_GATE_TEMPEST=0
           export DEVSTACK_GATE_EXERCISES=0
+          export GEARDSERVER=138.35.77.19
           function gate_hook {
               bash -xe /home/jenkins/tripleo/tripleo-ci/toci_gate_test.sh
           }
