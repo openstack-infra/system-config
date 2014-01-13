@@ -3731,6 +3731,7 @@ projects:
 
   - name: stackforge/python-solumclient
     check:
+      - gate-python-solumclient-requirements
       - gate-python-solumclient-pep8
       - gate-python-solumclient-python26
       - gate-python-solumclient-python27
@@ -3738,6 +3739,7 @@ projects:
       - gate-python-solumclient-pypy
       - gate-python-solumclient-docs
     gate:
+      - gate-python-solumclient-requirements
       - gate-python-solumclient-pep8
       - gate-python-solumclient-python26
       - gate-python-solumclient-python27
@@ -3778,6 +3780,7 @@ projects:
 
   - name: stackforge/solum
     check:
+      - gate-solum-requirements
       - gate-solum-pep8
       - gate-solum-python26
       - gate-solum-python27
@@ -3786,6 +3789,7 @@ projects:
       - gate-solum-docs
       - gate-solum-devstack-dsvm
     gate:
+      - gate-solum-requirements
       - gate-solum-pep8
       - gate-solum-python26
       - gate-solum-python27
