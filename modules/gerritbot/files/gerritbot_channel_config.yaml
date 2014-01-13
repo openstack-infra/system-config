@@ -482,3 +482,15 @@ openstack-anvil:
     branches:
       - master
       - stable/grizzly
+
+syscompass:
+    events:
+      - patchset-created
+      - change-merged
+      - x-vrif-minus-2
+    projects:
+      - stackforge/compass-adapters
+      - stackforge/compass-core
+      - stackforge/compass-web
+    branches:
+      - master
