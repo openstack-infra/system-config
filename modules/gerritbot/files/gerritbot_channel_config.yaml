@@ -259,6 +259,7 @@ openstack-mistral:
       - x-vrif-minus-2
     projects:
       - stackforge/mistral
+      - stackforge/mistral-extra
       - stackforge/python-mistralclient
     branches:
       - master

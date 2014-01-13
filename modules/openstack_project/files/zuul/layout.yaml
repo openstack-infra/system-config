@@ -413,6 +413,8 @@ jobs:
     voting: false
   - name: gate-mistral-python33
     voting: false
+  - name: gate-mistral-extra-python33
+    voting: false
   - name: gate-python-mistralclient-python33
     voting: false
   - name: gate-murano-metadataclient-python33
@@ -3121,6 +3123,29 @@ projects:
     release:
       - mistral-tarball:
         - mistral-pypi-upload:
+          - post-mirror-python26
+          - post-mirror-python27
+          - post-mirror-python33
+
+  - name: stackforge/mistral-extra
+    check:
+      - gate-mistral-extra-pep8
+      - gate-mistral-extra-python26
+      - gate-mistral-extra-python27
+      - gate-mistral-extra-python33
+      - gate-mistral-extra-docs
+    gate:
+      - gate-mistral-extra-pep8
+      - gate-mistral-extra-python26
+      - gate-mistral-extra-python27
+      - gate-mistral-extra-docs
+    post:
+      - mistral-extra-branch-tarball
+    pre-release:
+      - mistral-extra-tarball
+    release:
+      - mistral-extra-tarball:
+        - mistral-extra-pypi-upload:
           - post-mirror-python26
           - post-mirror-python27
           - post-mirror-python33

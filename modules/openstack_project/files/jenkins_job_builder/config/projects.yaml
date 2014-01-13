@@ -23,6 +23,16 @@
       - pypi-jobs
 
 - project:
+    name: mistral-extra
+    github-org: stackforge
+    node: precise
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - python-jobs
+      - pypi-jobs
+
+- project:
     name: python-mistralclient
     github-org: stackforge
     node: precise
