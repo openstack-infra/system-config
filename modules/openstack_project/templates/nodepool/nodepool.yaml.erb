@@ -196,9 +196,12 @@ providers:
     username: '<%= tripleo_username %>'
     password: '<%= tripleo_password %>'
     project-id: '<%= tripleo_project %>'
-    auth-url: 'https://poc.tripleo.org:10000/v2.0'
+    auth-url: 'https://ci-overcloud.tripleo.org:13000/v2.0'
     boot-timeout: 120
     max-servers: 2
+    networks:
+      - net-id: '854b0c8c-6665-4f0c-a2f3-bd94c458c98b'
+      - net-id: 'd452f993-2fd0-432d-9d03-6e4b57f6147b'
     images:
       - name: tripleo-precise
         base-image: 'Ubuntu Precise 12.04 LTS Server 64-bit'
