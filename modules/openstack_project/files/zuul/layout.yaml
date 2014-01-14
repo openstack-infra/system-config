@@ -3739,6 +3739,12 @@ projects:
       - gate-puppet-savanna-puppet-unit-3.3
       - gate-puppet-savanna-puppet-unit-3.4
 
+  - name: stackforge/savanna-ci-config
+    check:
+      - gate-savanna-ci-config-pep8
+    gate:
+      - gate-savanna-ci-config-pep8
+
   - name: stackforge/puppet-swift
     check:
       - gate-puppet-swift-puppet-lint
