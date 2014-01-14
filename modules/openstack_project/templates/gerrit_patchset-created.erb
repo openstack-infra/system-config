@@ -10,5 +10,4 @@ timeout -k 2m 10m /usr/local/bin/trivial-rebase \
     --private-key-path=<%= ssh_host_key %> \
     --role-user=<%= trivial_rebase_role_id %> "$@"
 timeout -k 2m 10m /usr/local/bin/welcome-message patchset-created --dryrun \
-    --private-key-path=<%= ssh_host_key %> \
-    --role-user=<%= trivial_rebase_role_id %> "$@"
+    welcome-message@review.openstack.org  <%= welcome-message_gerrit_ssh_private_key %> "$@"
