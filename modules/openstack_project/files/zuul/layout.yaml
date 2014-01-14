@@ -1997,6 +1997,7 @@ projects:
       - openstack-api-quick-start
       - openstack-api-site
       - openstack-api-ref
+      - manuals-upstream-translation-update
 
   - name: openstack/openstack-manuals
     check:
