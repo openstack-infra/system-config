@@ -1042,6 +1042,19 @@
 
 
 - project:
+    name: storyboard-webclient
+    github-org: openstack-infra
+    node: precise
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - 'storyboard-webclient-release-{branch-designator}':
+          branch-designator: 'master'
+      - 'storyboard-webclient-release-{branch-designator}':
+          branch-designator: 'branch'
+
+
+- project:
     name: swift
     github-org: openstack
     node: bare-precise

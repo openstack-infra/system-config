@@ -2602,6 +2602,16 @@ projects:
           - post-mirror-python27
           - post-mirror-python33
 
+  - name: openstack-infra/storyboard-webclient
+    check:
+      - gate-storyboard-webclient-unittests
+    gate:
+      - gate-storyboard-webclient-unittests
+    post:
+      - storyboard-webclient-release-branch
+    release:
+      - storyboard-webclient-release-master
+
   - name: openstack-infra/tripleo-ci
     check:
       - gate-noop

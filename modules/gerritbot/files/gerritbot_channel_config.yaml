@@ -38,6 +38,7 @@ openstack-infra:
       - openstack-infra/reviewstats
       - openstack-infra/statusbot
       - openstack-infra/storyboard
+      - openstack-infra/storyboard-webclient
       - openstack-infra/zuul
       - openstack-infra/zuul-packaging
       - openstack/requirements
@@ -439,6 +440,7 @@ storyboard:
       - x-vrif-minus-2
     projects:
       - openstack-infra/storyboard
+      - openstack-infra/storyboard-webclient
     branches:
       - master
 
