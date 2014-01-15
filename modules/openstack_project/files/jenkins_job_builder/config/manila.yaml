@@ -1,5 +1,5 @@
 - job:
-    name: gate-manila-devstack-dsvm
+    name: gate-manila-tempest-dsvm-neutron
     node: devstack-precise
 
     wrappers:
@@ -17,13 +17,29 @@
           export ENABLED_SERVICES=manila,m-api,m-shr,m-sch
           export PROJECTS="stackforge/manila $PROJECTS"
           export PROJECTS="stackforge/python-manilaclient $PROJECTS"
+          export DEVSTACK_GATE_TEMPEST=1
+          export DEVSTACK_GATE_TEMPEST_FULL=1
+          export DEVSTACK_GATE_TEMPEST_ALLOW_TENANT_ISOLATION=1
+          export DEVSTACK_GATE_NEUTRON=1
+          export TEMPEST_CONCURRENCY=1
+          echo "SHARE_BACKING_FILE_SIZE=24G" >> localrc
 
           function pre_test_hook {
-              # Install Manila devstack integration
-              MANILA_BASE=/opt/stack/new/manila/contrib/devstack
+              MANILA_CONTRIB=/opt/stack/new/manila/contrib
               DEVSTACK_BASE=/opt/stack/new/devstack
-              cp ${MANILA_BASE}/lib/* ${DEVSTACK_BASE}/lib
-              cp ${MANILA_BASE}/extras.d/* ${DEVSTACK_BASE}/extras.d
+              TEMPEST_BASE=/opt/stack/new/tempest
+
+              # Install Manila devstack integration
+              cp -r ${MANILA_CONTRIB}/devstack/* ${DEVSTACK_BASE}
+
+              # Install Manila tempest integration
+              cp -r ${MANILA_CONTRIB}/tempest/tempest/* ${TEMPEST_BASE}/tempest
+              tests_pathes='tempest.cli.*manila*'
+              if [[ ! "$ZUUL_PROJECT" =~ "*python-manilaclient*" ]]; then
+                tests_pathes+=' tempest.api.share*';
+              fi
+              sed -i 's/testenv:full/testenv:full-old/' ${TEMPEST_BASE}/tox.ini
+              echo -e "\n[testenv:full]\ncommands = bash tools/pretty_tox.sh '$tests_pathes'" >> ${TEMPEST_BASE}/tox.ini
           }
           export -f pre_test_hook
 
