@@ -764,6 +764,7 @@ projects:
       - check-tempest-dsvm-neutron-isolated-parallel
       - gate-grenade-dsvm-neutron-forward
       - neutron-upstream-translation-update
+      - check-neutron-dsvm-functional
     pre-release:
       - neutron-tarball
     release:
