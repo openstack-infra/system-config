@@ -71,6 +71,14 @@ class jenkins::slave(
     $packages = $common_packages
   }
 
+  apt::source { 'HDP':
+    location   => 'http://public-repo-1.hortonworks.com/HDP/ubuntu12/2.x',
+    release    => 'HDP',
+    repos      => 'main',
+    key        => '07513CAD',
+    key_server => 'pgp.mit.edu',
+  }
+
   file { '/etc/apt/sources.list.d/cloudarchive.list':
     ensure => absent,
   }
@@ -126,6 +134,12 @@ class jenkins::slave(
       package { $::jenkins::params::zookeeper_package:
         ensure => present,
       }
+
+      # For Ceilometer integration tests
+      package { '$::jenkins::params::hbase_package':
+        ensure => installed,
+        require => Package[$::jenkins::params::jdk_package],
+     }
 
     }
     default: {

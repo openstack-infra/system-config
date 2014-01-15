@@ -85,6 +85,7 @@ class jenkins::params {
       $docbook5_xsl_package = 'docbook-xsl'
       $firefox_package = 'firefox'
       $graphviz_package = 'graphviz'
+      $hbase_package = 'hbase'
       $mod_wsgi_package = 'libapache2-mod-wsgi'
       $libcurl_dev_package = 'libcurl4-gnutls-dev'
       $ldap_dev_package = 'libldap2-dev'
