@@ -761,7 +761,6 @@ projects:
       - gate-tempest-dsvm-neutron-large-ops
       - gate-grenade-dsvm-neutron
     experimental:
-      - gate-tempest-dsvm-neutron-full
       - check-tempest-dsvm-neutron-isolated-parallel
       - gate-grenade-dsvm-neutron-forward
       - neutron-upstream-translation-update
