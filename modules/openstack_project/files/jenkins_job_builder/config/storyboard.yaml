@@ -14,7 +14,7 @@
           site: 'static.openstack.org'
           files:
             - target: 'logs/$LOG_PATH'
-              source: './reports/**'
+              source: 'reports/**'
               keep-hierarchy: true
               copy-after-failure: true
 
@@ -45,7 +45,7 @@
           site: 'static.openstack.org'
           files:
             - target: 'logs/$LOG_PATH'
-              source: './reports/**'
+              source: 'reports/**'
               keep-hierarchy: true
               copy-after-failure: true
       - tarball:
