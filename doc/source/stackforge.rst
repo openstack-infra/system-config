@@ -123,15 +123,12 @@ List of jobs included to the ``python-jobs`` jobs group is located in
 ``modules/openstack_project/files/jenkins_job_builder/config/python-jobs.yaml``.
 For document publication there's also a publisher job template for the
 popular `Read the Docs`_ documentation hosting service, which can be
-used by specifying the ``rtfd-id`` for the project (obtained from your
-readthedocs.org account) and then adding the ``hook-{name}-rtfd``
-template to the jobs list::
+used by adding the ``hook-{name}-rtfd`` template to the jobs list::
 
   - project:
       name: project-name
       github-org: stackforge
       node: precise
-      rtfd-id: 7095
       tarball-site: tarballs.openstack.org
 
       jobs:
