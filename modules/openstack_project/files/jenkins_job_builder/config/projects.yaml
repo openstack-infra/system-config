@@ -2000,3 +2000,11 @@
       - gate-{name}-pep8
       - '{name}-tarball'
       - pypi-jobs
+
+- project:
+    name: api-site
+    github-org: openstack
+    node: precise
+
+    jobs:
+      - openstack-doc-jobs

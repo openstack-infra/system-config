@@ -177,6 +177,18 @@ project-templates:
       - 'periodic-{name}-python26-havana'
       - 'periodic-{name}-python27-havana'
 
+  - name: openstack-doc-gate
+    check:
+      - gate-{name}-tox-checkniceness
+      - gate-{name}-tox-checksyntax
+      - gate-{name}-tox-checkdeletions
+      - gate-{name}-tox-checkbuild
+    gate:
+      - gate-{name}-tox-checkniceness
+      - gate-{name}-tox-checksyntax
+      - gate-{name}-tox-checkdeletions
+      - gate-{name}-tox-checkbuild
+
 
 jobs:
   - name: ^.*$
@@ -341,6 +353,8 @@ jobs:
   - name: gate-openstack-manuals-validate-build
     branch: ^(?!stable/grizzly).*$
   - name: gate-operations-guide-tox-checkniceness
+    voting: false
+  - name: gate-api-site-tox-checkniceness
     voting: false
 # Deprecated documentation targets:
   - name: openstack-block-storage-admin-old
@@ -1990,10 +2004,8 @@ projects:
 # Section: OpenStack documentation projects
 
   - name: openstack/api-site
-    check:
-      - gate-noop
-    gate:
-      - gate-noop
+    template:
+      - name: openstack-doc-gate
     post:
       - openstack-api-quick-start
       - openstack-api-site
