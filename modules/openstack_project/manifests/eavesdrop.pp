@@ -46,6 +46,7 @@ class openstack_project::eavesdrop (
         '#openstack-marconi',
         '#openstack-meeting',
         '#openstack-meeting-alt',
+        '#openstack-meeting-3',
         '#openstack-neutron',
         '#openstack-qa',
         '#openstack-relmgr-office',
