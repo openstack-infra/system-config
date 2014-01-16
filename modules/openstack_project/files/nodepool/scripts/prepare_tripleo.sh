@@ -42,6 +42,16 @@ bash /opt/git/openstack/tripleo-incubator/scripts/pull-tools
 # refresh-env script working:
 # source tripleo-incubator/scripts/refresh-env ~/tripleo
 
+# tripleo-gate runs with two networks - the public access network and eth1
+# pointing at the in-datacentre L2 network where we can talk to the test
+# environments directly. We need to enable DHCP on eth1 though.
+sudo dd of=/etc/network/interfaces oflag=append conv=notrunc << EOF
+auto eth1
+iface eth1 inet dhcp
+EOF
+# Note that we don't bring it up during prepare - it's only needed to run
+# tests.
+
 # We'll want something like this for triplo when we do dependencies
 #
 #. /etc/lsb-release
