@@ -18,7 +18,7 @@
           export DEVSTACK_GATE_EXERCISES=0
           export GEARDSERVER=138.35.77.19
           function gate_hook {
-              bash -xe /home/jenkins/tripleo/tripleo-ci/toci_gate_test.sh
+              bash -xe /opt/git/openstack-infra/tripleo-ci/toci_gate_test.sh
           }
           export -f gate_hook
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh

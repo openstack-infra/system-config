@@ -35,9 +35,9 @@ mkdir -p ~/tripleo
 export TRIPLEO_ROOT=~/tripleo
 
 cd ~/tripleo
-git clone https://review.openstack.org/p/openstack-infra/tripleo-ci
-git clone https://review.openstack.org/p/openstack/tripleo-incubator
-bash tripleo-incubator/scripts/pull-tools
+# XXX: Note that this is redundant with the cached copies in /opt/git.
+# see https://bugs.launchpad.net/openstack-ci/+bug/1269889
+bash /opt/git/openstack/tripleo-incubator/scripts/pull-tools
 # Instead of running pull-tools, we'll eventually want to get the
 # refresh-env script working:
 # source tripleo-incubator/scripts/refresh-env ~/tripleo
