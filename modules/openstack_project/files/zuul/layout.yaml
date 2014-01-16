@@ -2662,10 +2662,12 @@ projects:
       - gate-anvil-pep8
       - gate-anvil-python26
       - gate-anvil-python27
+      - gate-anvil-pylint
     gate:
       - gate-anvil-pep8
       - gate-anvil-python26
       - gate-anvil-python27
+      - gate-anvil-pylint
 
   - name: stackforge/barbican
     check:
