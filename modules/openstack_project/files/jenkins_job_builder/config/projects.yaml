@@ -160,11 +160,13 @@
     name: config
     github-org: openstack-infra
     node: precise
+    ci-doc-target: 'ci'
 
     jobs:
       - gate-{name}-puppet-lint
       - gate-{name}-puppet-syntax
       - gate-{name}-pep8
+      - infra-{name}-docs
 
 - project:
     name: gitdm
@@ -1191,12 +1193,12 @@
     name: zuul
     github-org: openstack-infra
     node: precise
-    tarball-site: tarballs.openstack.org
+    ci-doc-target: 'ci/zuul'
 
     jobs:
       - python-jobs
       - pypi-jobs
-
+      - infra-{name}-docs
 
 - project:
     name: pyghmi

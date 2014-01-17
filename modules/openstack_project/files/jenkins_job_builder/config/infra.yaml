@@ -1,3 +1,24 @@
+# This is a non-standard docs job because it uses SCP instead of FTP
+- job-template:
+    name: 'infra-{name}-docs'
+    node: bare-precise
+
+    builders:
+      - gerrit-git-prep
+      - docs:
+          github-org: openstack-infra
+          project: '{name}'
+
+    publishers:
+      - scp:
+          site: '173.203.107.207'
+          files:
+            - target: '{ci-doc-target}'
+              source: 'doc/build/html/**/*'
+              keep-hierarchy: true
+      - console-log
+
+
 - job:
     name: config-compare-xml
     node: bare-precise
@@ -21,27 +42,6 @@
           ./tools/run-layout.sh openstack-infra config
 
     publishers:
-      - console-log
-
-
-# This is a non-standard docs job because it uses SCP instead of FTP
-- job:
-    name: ci-docs
-    node: bare-precise
-
-    builders:
-      - gerrit-git-prep
-      - docs:
-          github-org: openstack-infra
-          project: config
-
-    publishers:
-      - scp:
-          site: '173.203.107.207'
-          files:
-            - target: 'ci'
-              source: 'doc/build/html/**/*'
-              keep-hierarchy: true
       - console-log
 
 
