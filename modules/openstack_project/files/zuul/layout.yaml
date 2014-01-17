@@ -775,7 +775,6 @@ projects:
       - gate-tempest-dsvm-neutron-isolated
       - gate-tempest-dsvm-neutron-pg-isolated
       - gate-tempest-dsvm-neutron-large-ops
-      - gate-grenade-dsvm-neutron
     experimental:
       - check-tempest-dsvm-neutron-isolated-parallel
       - gate-grenade-dsvm-neutron-forward
