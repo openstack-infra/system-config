@@ -51,3 +51,10 @@
       - tarball:
           project: '{name}'
           site: '{tarball-site}'
+      - scp:
+          site: 'static.openstack.org'
+          files:
+            - target: 'logs/$LOG_PATH'
+              source: 'dist/**'
+              keep-hierarchy: true
+              copy-after-failure: true
