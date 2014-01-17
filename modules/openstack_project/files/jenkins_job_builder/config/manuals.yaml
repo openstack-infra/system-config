@@ -134,8 +134,8 @@
           target: ''
           remove-prefix: 'doc/openstack-ops/target/docbkx/webhelp/'
 
-- job:
-    name: openstack-operations-guide-ja
+- job-template:
+    name: 'openstack-operations-guide-{lang}'
     project-type: maven
     concurrent: false
     node: precise
@@ -148,21 +148,21 @@
     prebuilders:
       - gerrit-git-prep
       - shell: |
-          ./tools/generatedocbook -l ja -b openstack-ops
+          ./tools/generatedocbook -l {lang} -b openstack-ops
 
     maven:
       maven-name: Maven3
       root-module:
         group-id: org.openstack.docs
         artifact-id: openstack-ops-manual
-      root-pom: generated/ja/openstack-ops/pom.xml
-      goals: '-Drelease.path.name=${DOC_RELEASE_PATH} -Dcomments.enabled=${DOC_COMMENTS_ENABLED} clean generate-sources -B'
+      root-pom: generated/{lang}/openstack-ops/pom.xml
+      goals: '-Drelease.path.name=${{DOC_RELEASE_PATH}} -Dcomments.enabled=${{DOC_COMMENTS_ENABLED}} clean generate-sources -B'
 
     publishers:
       - console-log
       - ftp:
           site: docs.openstack.org
-          source: 'generated/ja/openstack-ops/target/docbkx/webhelp/**'
-          target: '/ja/'
-          remove-prefix: 'generated/ja/openstack-ops/target/docbkx/webhelp/'
+          source: 'generated/{lang}/openstack-ops/target/docbkx/webhelp/**'
+          target: '/{lang}/'
+          remove-prefix: 'generated/{lang}/openstack-ops/target/docbkx/webhelp/'
           excludes: '**/*.xml,**/null*'
