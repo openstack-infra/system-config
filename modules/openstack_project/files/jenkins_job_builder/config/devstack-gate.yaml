@@ -642,7 +642,7 @@
 
     wrappers:
       - timeout:
-          timeout: 65
+          timeout: 125
           fail: true
       - timestamps
 
@@ -651,7 +651,7 @@
       - shell: |
           #!/bin/bash -xe
           export PYTHONUNBUFFERED=true
-          export DEVSTACK_GATE_TIMEOUT=60
+          export DEVSTACK_GATE_TIMEOUT=120
           export DEVSTACK_GATE_TEMPEST=0
           export DEVSTACK_GATE_GRENADE=1
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
@@ -669,7 +669,7 @@
 
     wrappers:
       - timeout:
-          timeout: 65
+          timeout: 125
           fail: true
       - timestamps
 
@@ -678,7 +678,7 @@
       - shell: |
           #!/bin/bash -xe
           export PYTHONUNBUFFERED=true
-          export DEVSTACK_GATE_TIMEOUT=60
+          export DEVSTACK_GATE_TIMEOUT=120
           export DEVSTACK_GATE_TEMPEST=0
           export DEVSTACK_GATE_GRENADE=1
           export DEVSTACK_GATE_GRENADE_FORWARD=1
@@ -697,7 +697,7 @@
 
     wrappers:
       - timeout:
-          timeout: 65
+          timeout: 125
           fail: true
       - timestamps
 
@@ -706,7 +706,7 @@
       - shell: |
           #!/bin/bash -xe
           export PYTHONUNBUFFERED=true
-          export DEVSTACK_GATE_TIMEOUT=60
+          export DEVSTACK_GATE_TIMEOUT=120
           export DEVSTACK_GATE_TEMPEST=0
           export DEVSTACK_GATE_GRENADE=1
           export DEVSTACK_GATE_NEUTRON=1
@@ -725,7 +725,7 @@
 
     wrappers:
       - timeout:
-          timeout: 65
+          timeout: 125
           fail: true
       - timestamps
 
@@ -734,7 +734,7 @@
       - shell: |
           #!/bin/bash -xe
           export PYTHONUNBUFFERED=true
-          export DEVSTACK_GATE_TIMEOUT=60
+          export DEVSTACK_GATE_TIMEOUT=120
           export DEVSTACK_GATE_TEMPEST=0
           export DEVSTACK_GATE_GRENADE=1
           export DEVSTACK_GATE_NEUTRON=1
