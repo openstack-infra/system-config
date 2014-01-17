@@ -2235,7 +2235,7 @@ projects:
       - gate-config-puppet-syntax
       - check-projects-yaml-alphabetized
     post:
-      - ci-docs
+      - infra-config-docs
 
   - name: openstack-infra/devstack-gate
     check:
@@ -2649,12 +2649,12 @@ projects:
     check:
       - dev-zuul-coverage
     post:
-      - zuul-docs
+      - infra-zuul-docs
     pre-release:
-      - zuul-docs
+      - infra-zuul-docs
       - zuul-tarball
     release:
-      - zuul-docs
+      - infra-zuul-docs
       - zuul-tarball:
         - zuul-pypi-upload:
           - post-mirror-python26
