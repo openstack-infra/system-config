@@ -89,6 +89,7 @@ class EventProcessor(threading.Thread):
         parameters = event["build"].get("parameters", {})
         fields["project"] = parameters.get("ZUUL_PROJECT", "UNKNOWN")
         fields["build_uuid"] = parameters.get("ZUUL_UUID", "UNKNOWN")
+        fields["short_build_uuid"] = parameters.get("ZUUL_UUID", "UNKNOWN")[:7]
         fields["build_queue"] = parameters.get("ZUUL_PIPELINE", "UNKNOWN")
         fields["build_ref"] = parameters.get("ZUUL_REF", "UNKNOWN")
         if parameters.get("ZUUL_CHANGE"):
