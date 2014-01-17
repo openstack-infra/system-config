@@ -12,7 +12,6 @@ class openstack_project::status (
   $recheck_ssh_private_key,
   $recheck_bot_passwd,
   $recheck_bot_nick,
-  $recheck_state_dir = '/var/lib/elastic-recheck',
 ) {
 
   class { 'openstack_project::server':
@@ -138,11 +137,24 @@ class openstack_project::status (
   # Status - elastic-recheck
   include elastic_recheck
 
+  $er_state_path = $::elastic_recheck::recheck_state_dir
+  $graph_cmd = $::elastic_recheck::graph_cmd
+  $uncat_cmd = $::elastic_recheck::uncat_cmd
+
   cron { 'elastic-recheck':
     user        => 'recheck',
     minute      => '*/15',
     hour        => '*',
-    command     => "elastic-recheck-graph /opt/elastic-recheck/queries -o ${recheck_state_dir}/graph-new.json && mv ${recheck_state_dir}/graph-new.json ${recheck_state_dir}/graph.json",
+    command     => "cd ${er_state_path}; er_safe_run.sh ${graph_cmd}",
+    environment => 'PATH=/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin',
+    require     => Class['elastic_recheck']
+  }
+
+  cron { 'elastic-recheck-uncat':
+    user        => 'recheck',
+    minute      => '*/60',
+    hour        => '*',
+    command     => "cd ${er_state_path}; er_safe_run.sh ${graph_cmd}",
     environment => 'PATH=/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin',
     require     => Class['elastic_recheck']
   }
