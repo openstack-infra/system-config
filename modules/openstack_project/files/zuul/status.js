@@ -152,8 +152,8 @@ function get_sparkline_url(pipeline_name) {
             hideAxes: true,
             hideGrid: true,
             target: [
-                "color(stats.gauges.zuul.pipeline."+pipeline_name+".current_changes, '6b8182')",
-            ],
+                "color(stats.gauges.zuul.pipeline."+pipeline_name+".current_changes, '6b8182')"
+            ]
         });
     }
     return window.zuul_sparkline_urls[pipeline_name];
@@ -197,11 +197,11 @@ function format_pipeline(data) {
                 }
                 html += name + '</a></div>';
             }
-            html += '<table>'
+            html += '<table>';
             $.each(head, function(change_i, change) {
                 html += format_change(change, change_queue);
             });
-            html += '</table></div>'
+            html += '</table></div>';
         });
     });
 
@@ -294,7 +294,7 @@ function format_change(change, change_queue) {
     // Job listing from here down
     html += '<div class="jobs"';
     if (display == false) {
-        html += ' style="display: none;"'
+        html += ' style="display: none;"';
     }
     html += '>';
 
@@ -518,7 +518,7 @@ $(function() {
             } else {
                 val.show(100);
             }
-        })
+        });
     }).live('keyup', function () {
         $('a.save-filter')
             .removeClass('hidden')
