@@ -85,7 +85,7 @@ td.tree {
 .change > .header {
     background: #E2ECEF;
     color: black;
-    margin: -2px -2px 2px -2px;
+    margin: -2px;
     padding: 4px;
 }
 .change > .header > .changeid {
@@ -96,6 +96,9 @@ td.tree {
 }
 .change > .hover {
     background: #F3FDFF;
+}
+.jobs {
+    padding-top: 4px;
 }
 .jobwrapper {
     display: table;
@@ -111,12 +114,19 @@ td.tree {
 .result_success {
     color: #007f00;
 }
+
+.queue_bad,
 .result_failure {
     color: #cf2f19;
 }
+.queue_warn,
 .result_unstable {
     color: #e39f00;
 }
+.queue_good {
+    color: #888888;
+}
+
 #graph-container img {
     margin-left: 10px;
 }
