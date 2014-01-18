@@ -23,8 +23,11 @@ mkdir -p ~/cache/pip
 # build upon as needed
 sudo DEBIAN_FRONTEND=noninteractive apt-get \
   --option "Dpkg::Options::=--force-confold" \
-  --assume-yes install build-essential python-dev \
+  --assume-yes install build-essential python-dev python-pip \
   linux-headers-virtual linux-headers-`uname -r`
+
+# toci scripts use both of these
+sudo pip install gear os-apply-config
 
 # Might use this later for other cache, keeping for consistancy
 # rm -rf ~/workspace-cache
