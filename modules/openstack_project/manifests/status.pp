@@ -187,6 +187,12 @@ class openstack_project::status (
     require => File['/srv/static/status/zuul'],
   }
 
+  file { '/srv/static/status/zuul/black.png':
+    ensure  => present,
+    source  => 'puppet:///modules/openstack_project/zuul/black.png',
+    require => File['/srv/static/status/zuul'],
+  }
+
   file { '/srv/static/status/zuul/line-angle.png':
     ensure  => present,
     source  => 'puppet:///modules/openstack_project/zuul/line-angle.png',
