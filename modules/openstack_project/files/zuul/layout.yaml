@@ -181,8 +181,8 @@ project-templates:
     check:
       - gate-{name}-tox-checkniceness
       - gate-{name}-tox-checksyntax
-      - gate-{name}-tox-checkdeletions
-      - gate-{name}-tox-checkbuild
+        - gate-{name}-tox-checkdeletions
+        - gate-{name}-tox-checkbuild
     gate:
       - gate-{name}-tox-checkniceness
       - gate-{name}-tox-checksyntax
@@ -2015,8 +2015,8 @@ projects:
     check:
       - gate-openstack-manuals-validate-niceness
       - gate-openstack-manuals-validate-syntax
-      - gate-openstack-manuals-validate-deletions
-      - gate-openstack-manuals-validate-build
+        - gate-openstack-manuals-validate-deletions
+        - gate-openstack-manuals-validate-build
       - gate-openstack-manuals-validate
     gate:
       - gate-openstack-manuals-validate-syntax
