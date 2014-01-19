@@ -142,10 +142,10 @@ pipelines:
 project-templates:
   - name: python-jobs
     check:
-      - 'gate-{name}-pep8'
-      - 'gate-{name}-docs'
-      - 'gate-{name}-python26'
-      - 'gate-{name}-python27'
+      - 'gate-{name}-pep8':
+        - 'gate-{name}-docs'
+        - 'gate-{name}-python26'
+        - 'gate-{name}-python27'
     gate:
       - 'gate-{name}-docs'
       - 'gate-{name}-pep8'
