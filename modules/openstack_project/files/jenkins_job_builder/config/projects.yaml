@@ -1063,6 +1063,7 @@
     tarball-site: tarballs.openstack.org
 
     jobs:
+      - gate-{name}-js-unittests
       - 'storyboard-webclient-release-{branch-designator}':
           branch-designator: 'master'
       - 'storyboard-webclient-release-{branch-designator}':

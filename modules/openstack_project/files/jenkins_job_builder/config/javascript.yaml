@@ -1,0 +1,33 @@
+- job-template:
+    name: 'gate-{name}-js-unittests'
+
+    wrappers:
+      - timeout:
+          timeout: 40
+          fail: true
+      - timestamps
+
+    builders:
+      - gerrit-git-prep
+      - js-build:
+          command: 'test'
+          envlist: 'grunt'
+          github-org: '{github-org}'
+          project: '{name}'
+      - assert-no-extra-files
+
+    publishers:
+      - console-log
+      - coverage-log
+      - scp:
+          site: 'static.openstack.org'
+          files:
+            - target: 'logs/$LOG_PATH'
+              source: 'reports/**'
+              keep-hierarchy: true
+              copy-after-failure: true
+            - target: 'docs-draft/$LOG_PATH'
+              source: 'dist/**'
+              keep-hierarchy: true
+              copy-after-failure: true
+    node: '{node}'
