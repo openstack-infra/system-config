@@ -177,6 +177,11 @@
       - shell: "/usr/local/jenkins/slave_scripts/run-tarball.sh {github-org} {project}"
 
 - builder:
+    name: jsdist
+    builders:
+      - shell: "/usr/local/jenkins/slave_scripts/run-jsdist.sh {github-org} {project}"
+
+- builder:
     name: devstack-checkout
     builders:
       - shell: |
