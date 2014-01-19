@@ -9,6 +9,11 @@
 
     builders:
       - gerrit-git-prep
+      - shell: |
+          #!/bin/bash -xe
+          /usr/local/jenkins/slave_scripts/maven-properties.sh
+      - inject:
+          properties-file: maven.properties
       - js-build:
           command: 'test'
           envlist: 'grunt'
@@ -30,4 +35,40 @@
               source: 'dist/**'
               keep-hierarchy: true
               copy-after-failure: true
+    node: '{node}'
+
+- job-template:
+    name: '{name}-js-release-{branch-designator}'
+
+    builders:
+      - gerrit-git-prep
+      - shell: |
+          #!/bin/bash -xe
+          /usr/local/jenkins/slave_scripts/maven-properties.sh
+      - inject:
+          properties-file: maven.properties
+      - js-build:
+          command: 'build'
+          envlist: 'grunt'
+          github-org: '{github-org}'
+          project: '{name}'
+      - shell: |
+          #!/bin/bash -xe
+
+          tar -czf {name}-$PROJECT_VER.tar.gz dist/
+          cp {name}-$PROJECT_VER.tar.gz dist/{name}-latest.tar.gz
+          mv {name}-$PROJECT_VER.tar.gz dist/
+    publishers:
+      - console-log
+      - coverage-log
+      - scp:
+          site: 'static.openstack.org'
+          files:
+            - target: 'logs/$LOG_PATH'
+              source: 'reports/**'
+              keep-hierarchy: true
+              copy-after-failure: true
+      - tarball:
+          project: '{name}'
+          site: '{tarball-site}'
     node: '{node}'
