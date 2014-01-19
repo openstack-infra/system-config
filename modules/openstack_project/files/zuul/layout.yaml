@@ -381,6 +381,8 @@ jobs:
     branch: stable/grizzly
   - name: ^gate-.*-docs$
     success-pattern: http://docs-draft.openstack.org/{build.parameters[LOG_PATH]}/doc/build/html/
+  - name: gate-storyboard-webclient-js-unittests
+    success-pattern: http://docs-draft.openstack.org/{build.parameters[LOG_PATH]}/dist/
   - name: infra-publications-publish
     branch: ^(?!master).*$
   - name: ^gate-.*-requirements$
@@ -2634,9 +2636,9 @@ projects:
 
   - name: openstack-infra/storyboard-webclient
     check:
-      - gate-storyboard-webclient-unittests
+      - gate-storyboard-webclient-js-unittests
     gate:
-      - gate-storyboard-webclient-unittests
+      - gate-storyboard-webclient-js-unittests
     post:
       - storyboard-webclient-release-branch
     release:
