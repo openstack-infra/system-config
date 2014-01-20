@@ -2860,9 +2860,11 @@ projects:
   - name: stackforge/cookbook-openstack-block-storage
     check:
       - gate-cookbook-openstack-block-storage-chef-lint
+      - gate-cookbook-openstack-block-storage-chef-style
       - gate-cookbook-openstack-block-storage-chef-unit
     gate:
       - gate-cookbook-openstack-block-storage-chef-lint
+      - gate-cookbook-openstack-block-storage-chef-style
       - gate-cookbook-openstack-block-storage-chef-unit
 
   - name: stackforge/cookbook-openstack-common
