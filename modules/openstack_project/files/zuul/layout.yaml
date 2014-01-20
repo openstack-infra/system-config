@@ -3847,8 +3847,18 @@ projects:
   - name: stackforge/python-rallyclient
     check:
       - gate-python-rallyclient-requirements
+      - gate-python-rallyclient-pep8
+      - gate-python-rallyclient-python26
+      - gate-python-rallyclient-python27
+      - gate-python-rallyclient-docs
     gate:
       - gate-python-rallyclient-requirements
+      - gate-python-rallyclient-pep8
+      - gate-python-rallyclient-python26
+      - gate-python-rallyclient-python27
+      - gate-python-rallyclient-docs
+    post:
+      - python-rallyclient-coverage
 
   - name: stackforge/python-solumclient
     check:
