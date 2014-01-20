@@ -858,6 +858,11 @@
       - python-havana-bitrot-jobs
       - openstack-publish-jobs
       - translation-jobs
+      - '{pipeline}-neutron-dsvm-functional{branch-designator}':
+          pipeline: check
+          node: 'devstack-precise || devstack-precise-check'
+          branch-designator: ''
+          branch-override: default
 
 
 - project:
