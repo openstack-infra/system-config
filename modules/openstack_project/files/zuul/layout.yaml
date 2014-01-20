@@ -2860,6 +2860,7 @@ projects:
   - name: stackforge/cookbook-openstack-block-storage
     check:
       - gate-cookbook-openstack-block-storage-chef-lint
+      - gate-cookbook-openstack-block-storage-chef-style
       - gate-cookbook-openstack-block-storage-chef-unit
     gate:
       - gate-cookbook-openstack-block-storage-chef-lint
@@ -2868,6 +2869,7 @@ projects:
   - name: stackforge/cookbook-openstack-common
     check:
       - gate-cookbook-openstack-common-chef-lint
+      - gate-cookbook-openstack-common-chef-style
       - gate-cookbook-openstack-common-chef-unit
     gate:
       - gate-cookbook-openstack-common-chef-lint
@@ -2876,6 +2878,7 @@ projects:
   - name: stackforge/cookbook-openstack-compute
     check:
       - gate-cookbook-openstack-compute-chef-lint
+      - gate-cookbook-openstack-compute-chef-style
       - gate-cookbook-openstack-compute-chef-unit
     gate:
       - gate-cookbook-openstack-compute-chef-lint
@@ -2884,6 +2887,7 @@ projects:
   - name: stackforge/cookbook-openstack-dashboard
     check:
       - gate-cookbook-openstack-dashboard-chef-lint
+      - gate-cookbook-openstack-dashboard-chef-style
       - gate-cookbook-openstack-dashboard-chef-unit
     gate:
       - gate-cookbook-openstack-dashboard-chef-lint
@@ -2892,6 +2896,7 @@ projects:
   - name: stackforge/cookbook-openstack-identity
     check:
       - gate-cookbook-openstack-identity-chef-lint
+      - gate-cookbook-openstack-identity-chef-style
       - gate-cookbook-openstack-identity-chef-unit
     gate:
       - gate-cookbook-openstack-identity-chef-lint
@@ -2900,6 +2905,7 @@ projects:
   - name: stackforge/cookbook-openstack-image
     check:
       - gate-cookbook-openstack-image-chef-lint
+      - gate-cookbook-openstack-image-chef-style
       - gate-cookbook-openstack-image-chef-unit
     gate:
       - gate-cookbook-openstack-image-chef-lint
@@ -2908,6 +2914,7 @@ projects:
   - name: stackforge/cookbook-openstack-metering
     check:
       - gate-cookbook-openstack-metering-chef-lint
+      - gate-cookbook-openstack-metering-chef-style
       - gate-cookbook-openstack-metering-chef-unit
     gate:
       - gate-cookbook-openstack-metering-chef-lint
@@ -2916,6 +2923,7 @@ projects:
   - name: stackforge/cookbook-openstack-network
     check:
       - gate-cookbook-openstack-network-chef-lint
+      - gate-cookbook-openstack-network-chef-style
       - gate-cookbook-openstack-network-chef-unit
     gate:
       - gate-cookbook-openstack-network-chef-lint
@@ -2924,6 +2932,7 @@ projects:
   - name: stackforge/cookbook-openstack-object-storage
     check:
       - gate-cookbook-openstack-object-storage-chef-lint
+      - gate-cookbook-openstack-object-storage-chef-style
       - gate-cookbook-openstack-object-storage-chef-unit
     gate:
       - gate-cookbook-openstack-object-storage-chef-lint
@@ -2932,6 +2941,7 @@ projects:
   - name: stackforge/cookbook-openstack-ops-database
     check:
       - gate-cookbook-openstack-ops-database-chef-lint
+      - gate-cookbook-openstack-ops-database-chef-style
       - gate-cookbook-openstack-ops-database-chef-unit
     gate:
       - gate-cookbook-openstack-ops-database-chef-lint
@@ -2940,6 +2950,7 @@ projects:
   - name: stackforge/cookbook-openstack-ops-messaging
     check:
       - gate-cookbook-openstack-ops-messaging-chef-lint
+      - gate-cookbook-openstack-ops-messaging-chef-style
       - gate-cookbook-openstack-ops-messaging-chef-unit
     gate:
       - gate-cookbook-openstack-ops-messaging-chef-lint
@@ -2948,6 +2959,7 @@ projects:
   - name: stackforge/cookbook-openstack-orchestration
     check:
       - gate-cookbook-openstack-orchestration-chef-lint
+      - gate-cookbook-openstack-orchestration-chef-style
       - gate-cookbook-openstack-orchestration-chef-unit
     gate:
       - gate-cookbook-openstack-orchestration-chef-lint
