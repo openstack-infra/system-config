@@ -230,6 +230,8 @@ jobs:
   - name: gate-tempest-dsvm-neutron-heat-slow
     branch: ^(?!stable/grizzly).*$
     voting: false
+  - name: gate-tripleo-deploy
+    voting: false
   - name: ^(gate|check)-devstack-dsvm-cells$
     voting: false
   - name: ^(gate|check)-gantt-python2(6|7)$
