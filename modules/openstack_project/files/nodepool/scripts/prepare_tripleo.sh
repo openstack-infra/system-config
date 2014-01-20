@@ -52,6 +52,11 @@ EOF
 # Note that we don't bring it up during prepare - it's only needed to run
 # tests.
 
+# Workaround bug 1270646 for actual slaves
+sudo dd of=/etc/network/interfaces.d/eth0.cfg oflag=append conv=notrunc << EOF
+    post-up ip link set mtu 1458 dev eth0
+EOF
+
 # We'll want something like this for triplo when we do dependencies
 #
 #. /etc/lsb-release
