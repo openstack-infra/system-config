@@ -57,6 +57,9 @@ sudo dd of=/etc/network/interfaces.d/eth0.cfg oflag=append conv=notrunc << EOF
     post-up ip link set mtu 1458 dev eth0
 EOF
 
+# Install broker / tripleo-gate dependencies
+sudo pip install gear
+
 # We'll want something like this for triplo when we do dependencies
 #
 #. /etc/lsb-release
