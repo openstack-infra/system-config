@@ -844,6 +844,8 @@ projects:
       - gate-grenade-dsvm
     experimental:
       - gate-grenade-dsvm-forward
+    post:
+      - horizon-upstream-translation-update
     pre-release:
       - horizon-tarball
     release:
@@ -1718,6 +1720,8 @@ projects:
       - name: python-jobs
       - name: openstack-client-publish-jobs
       - name: check-requirements
+    post:
+      - django_openstack_auth-upstream-translation-update
     pre-release:
       - django_openstack_auth-tarball
     release:

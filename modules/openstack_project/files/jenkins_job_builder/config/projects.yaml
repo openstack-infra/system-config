@@ -598,6 +598,7 @@
       - python-jobs
       - openstack-publish-jobs
       - pypi-jobs
+      - translation-jobs
 
 
 - project:
