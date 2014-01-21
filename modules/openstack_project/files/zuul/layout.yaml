@@ -666,6 +666,8 @@ projects:
     experimental:
       - gate-grenade-dsvm-forward
       - gate-devstack-dsvm-cells
+    post:
+      - horizon-upstream-translation-update
     pre-release:
       - horizon-tarball
     release:
