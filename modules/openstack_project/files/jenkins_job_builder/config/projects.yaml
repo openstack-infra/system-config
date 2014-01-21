@@ -137,6 +137,8 @@
 
     jobs:
       - python-jobs
+      - 'hook-{name}-rtfd':
+          name: openstack-climate
 
 - project:
     name: climate-nova
