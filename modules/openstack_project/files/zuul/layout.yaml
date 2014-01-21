@@ -2789,6 +2789,8 @@ projects:
       - gate-climate-python27
       - gate-climate-requirements
       - gate-climate-devstack-dsvm
+    post:
+      - hook-openstack-climate-rtfd
 
   - name: stackforge/climate-nova
     check:
