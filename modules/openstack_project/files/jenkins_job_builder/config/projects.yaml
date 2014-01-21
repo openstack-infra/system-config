@@ -193,6 +193,36 @@
       - pypi-jobs
       - translation-jobs
       - openstack-publish-jobs
+      - '{pipeline}-tempest-dsvm-savanna-full{branch-designator}':
+          pipeline: check
+          node: devstack-precise
+          branch-designator: '-nv'
+          branch-override: default
+      - '{pipeline}-tempest-dsvm-savanna-full{branch-designator}':
+          pipeline: gate
+          node: devstack-precise
+          branch-designator: '-nv'
+          branch-override: default
+      - '{pipeline}-tempest-dsvm-savanna-postgres-full{branch-designator}':
+          pipeline: check
+          node: devstack-precise
+          branch-designator: '-nv'
+          branch-override: default
+      - '{pipeline}-tempest-dsvm-savanna-postgres-full{branch-designator}':
+          pipeline: gate
+          node: devstack-precise
+          branch-designator: '-nv'
+          branch-override: default
+      - '{pipeline}-tempest-dsvm-savanna-neutron{branch-designator}':
+          pipeline: check
+          node: devstack-precise
+          branch-designator: '-nv'
+          branch-override: default
+      - '{pipeline}-tempest-dsvm-savanna-neutron{branch-designator}':
+          pipeline: gate
+          node: devstack-precise
+          branch-designator: '-nv'
+          branch-override: default
 
 - project:
     name: python-savannaclient
