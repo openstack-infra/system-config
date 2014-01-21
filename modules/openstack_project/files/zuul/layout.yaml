@@ -415,8 +415,6 @@ jobs:
     voting: false
   - name: gate-python-heatclient-python33
     voting: false
-  - name: gate-python-ironicclient-python33
-    voting: false
   - name: gate-python-keystoneclient-python33
     voting: false
   - name: gate-python-neutronclient-python33
