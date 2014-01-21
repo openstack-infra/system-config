@@ -34,6 +34,21 @@
     node: 'proposal'
 
 - job:
+    name: 'horizon-upstream-translation-update'
+    concurrent: false
+
+    builders:
+      - gerrit-git-prep
+      - shell: |
+          #!/bin/bash -xe
+          /usr/local/jenkins/slave_scripts/upstream_translation_horizon.sh
+
+    publishers:
+      - console-log
+
+    node: 'proposal'
+
+- job:
     name: manuals-upstream-translation-update
     concurrent: false
 

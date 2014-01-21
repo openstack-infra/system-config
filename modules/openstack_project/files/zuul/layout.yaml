@@ -668,6 +668,8 @@ projects:
     experimental:
       - gate-grenade-dsvm-forward
       - gate-devstack-dsvm-cells
+    post:
+      - horizon-upstream-translation-update
     pre-release:
       - horizon-tarball
     release:
@@ -1410,6 +1412,8 @@ projects:
       - gate-django_openstack_auth-requirements
     gate:
       - gate-django_openstack_auth-requirements
+    post:
+      - openstack_auth-upstream-translation-update
     pre-release:
       - django_openstack_auth-tarball
     release:
