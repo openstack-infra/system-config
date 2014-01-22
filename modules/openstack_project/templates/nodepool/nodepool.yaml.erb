@@ -209,6 +209,13 @@ providers:
         setup: prepare_node_tripleo.sh
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
+      - name: tripleo-fedora
+        base-image: 'Fedora 20 64-bit'
+        min-ram: 8192
+        setup: prepare_node_tripleo.sh
+        username: jenkins
+        private-key: /home/nodepool/.ssh/id_rsa
+
 
 targets:
   - name: jenkins01
