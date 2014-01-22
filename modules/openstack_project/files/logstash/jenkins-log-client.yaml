@@ -7,6 +7,9 @@ zmq-publishers:
   - tcp://jenkins02.openstack.org:8888
   - tcp://jenkins03.openstack.org:8888
   - tcp://jenkins04.openstack.org:8888
+  - tcp://jenkins05.openstack.org:8888
+  - tcp://jenkins06.openstack.org:8888
+  - tcp://jenkins07.openstack.org:8888
 
 # List of files to source logs from.
 source-files:
