@@ -133,6 +133,48 @@ node 'jenkins04.openstack.org' {
   }
 }
 
+node 'jenkins05.openstack.org' {
+  class { 'openstack_project::jenkins':
+    jenkins_jobs_password   => hiera('jenkins_jobs_password'),
+    jenkins_ssh_private_key => hiera('jenkins_ssh_private_key_contents'),
+    ssl_cert_file_contents  => hiera('jenkins05_ssl_cert_file_contents'),
+    ssl_key_file_contents   => hiera('jenkins05_ssl_key_file_contents'),
+    ssl_chain_file_contents => hiera('jenkins05_ssl_chain_file_contents'),
+    sysadmins               => hiera('sysadmins'),
+    zmq_event_receivers     => ['logstash.openstack.org',
+                                'nodepool.openstack.org',
+    ],
+  }
+}
+
+node 'jenkins06.openstack.org' {
+  class { 'openstack_project::jenkins':
+    jenkins_jobs_password   => hiera('jenkins_jobs_password'),
+    jenkins_ssh_private_key => hiera('jenkins_ssh_private_key_contents'),
+    ssl_cert_file_contents  => hiera('jenkins06_ssl_cert_file_contents'),
+    ssl_key_file_contents   => hiera('jenkins06_ssl_key_file_contents'),
+    ssl_chain_file_contents => hiera('jenkins06_ssl_chain_file_contents'),
+    sysadmins               => hiera('sysadmins'),
+    zmq_event_receivers     => ['logstash.openstack.org',
+                                'nodepool.openstack.org',
+    ],
+  }
+}
+
+node 'jenkins07.openstack.org' {
+  class { 'openstack_project::jenkins':
+    jenkins_jobs_password   => hiera('jenkins_jobs_password'),
+    jenkins_ssh_private_key => hiera('jenkins_ssh_private_key_contents'),
+    ssl_cert_file_contents  => hiera('jenkins07_ssl_cert_file_contents'),
+    ssl_key_file_contents   => hiera('jenkins07_ssl_key_file_contents'),
+    ssl_chain_file_contents => hiera('jenkins07_ssl_chain_file_contents'),
+    sysadmins               => hiera('sysadmins'),
+    zmq_event_receivers     => ['logstash.openstack.org',
+                                'nodepool.openstack.org',
+    ],
+  }
+}
+
 node 'jenkins-dev.openstack.org' {
   class { 'openstack_project::jenkins_dev':
     jenkins_ssh_private_key  => hiera('jenkins_dev_ssh_private_key_contents'),
@@ -458,6 +500,9 @@ node 'zuul.openstack.org' {
       'jenkins02.openstack.org',
       'jenkins03.openstack.org',
       'jenkins04.openstack.org',
+      'jenkins05.openstack.org',
+      'jenkins06.openstack.org',
+      'jenkins07.openstack.org',
       'jenkins-dev.openstack.org',
     ],
   }
@@ -478,6 +523,9 @@ node 'zuul-dev.openstack.org' {
       'jenkins02.openstack.org',
       'jenkins03.openstack.org',
       'jenkins04.openstack.org',
+      'jenkins05.openstack.org',
+      'jenkins06.openstack.org',
+      'jenkins07.openstack.org',
       'jenkins-dev.openstack.org',
     ],
   }
