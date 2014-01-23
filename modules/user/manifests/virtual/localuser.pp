@@ -1,8 +1,16 @@
+# usage
+#
+# user::virtual::localuser['username']
+
 define user::virtual::localuser(
   $realname,
-  $sshkeys = '',
-  $shell = '/bin/bash'
+  $groups     = [ 'sudo', 'admin', ],
+  $sshkeys    = '',
+  $shell      = '/bin/bash',
+  $home       = "/home/${title}",
+  $managehome = true
 ) {
+
   group { $title:
     ensure => present,
   }
@@ -11,20 +19,17 @@ define user::virtual::localuser(
     ensure     => present,
     comment    => $realname,
     gid        => $title,
-    groups     => [
-      'sudo',
-      'admin',
-    ],
-    home       => "/home/${title}",
-    managehome => true,  # creates home directory, does not manage it
+    groups     => $groups,
+    home       => $home,
+    managehome => $managehome,
     membership => 'minimum',
-    require    => Group[$title],
     shell      => $shell,
+    require    => Group[$title],
   }
 
   file { "${title}_sshdir":
     ensure  => directory,
-    name    => "/home/${title}/.ssh",
+    name    => "${home}/.ssh",
     owner   => $title,
     group   => $title,
     mode    => '0700',
@@ -36,7 +41,7 @@ define user::virtual::localuser(
     content => $sshkeys,
     group   => $title,
     mode    => '0400',
-    name    => "/home/${title}/.ssh/authorized_keys",
+    name    => "${home}/.ssh/authorized_keys",
     owner   => $title,
     require => File["${title}_sshdir"],
   }
