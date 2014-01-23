@@ -42,6 +42,8 @@ pipelines:
     failure:
       gerrit:
         verified: -2
+    window-floor: 6
+    window-increase-factor: 2
 
   - name: post
     description: This pipeline runs jobs that operate after each change is merged.
