@@ -31,7 +31,7 @@ sed "s/\${{project-version}}/${VERSION}/g" <pom.xml >${META_DATA_FILE}
 
 # deploy plugin artifacts from workspace to maven central repository
 MAVEN_REPO="https://oss.sonatype.org/content/groups/public/maven"
-MAVEN_REPO_CREDS="/home/jenkins/.mavencentral-curl"
+MAVEN_REPO_CREDS="~jenkins/.mavencentral-curl"
 
 curl -X PUT \
     --config ${MAVEN_REPO_CREDS} \

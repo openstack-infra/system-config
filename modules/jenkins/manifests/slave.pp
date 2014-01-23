@@ -5,6 +5,7 @@ class jenkins::slave(
   $sudo = false,
   $bare = false,
   $user = true,
+  $jenkinshome = '/home/jenkins',
   $python3 = false,
   $include_pypy = false
 ) {
@@ -17,6 +18,7 @@ class jenkins::slave(
       ensure  => present,
       sudo    => $sudo,
       ssh_key => $ssh_key,
+      home    => $jenkinshome,
     }
   }
 
