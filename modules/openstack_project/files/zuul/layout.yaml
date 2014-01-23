@@ -3762,6 +3762,12 @@ projects:
       - gate-python-barbicanclient-python27
     post:
       - python-barbicanclient-branch-tarball
+    release:
+      - python-barbicanclient-tarball:
+        - python-barbicanclient-pypi-upload:
+          - post-mirror-python26
+          - post-mirror-python27
+          - post-mirror-python33
 
   - name: stackforge/python-climateclient
     check:
