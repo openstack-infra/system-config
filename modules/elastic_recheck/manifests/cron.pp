@@ -26,7 +26,7 @@ class elastic_recheck::cron () {
     user        => 'recheck',
     minute      => '*/15',
     hour        => '*',
-    command     => "cd ${er_state_path}; er_safe_run.sh ${graph_cmd}",
+    command     => "cd ${er_state_path} && er_safe_run.sh ${graph_cmd}",
     environment => 'PATH=/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin',
     require     => Class['elastic_recheck']
   }
@@ -35,7 +35,7 @@ class elastic_recheck::cron () {
     user        => 'recheck',
     minute      => '59',
     hour        => '*',
-    command     => "cd ${er_state_path}; er_safe_run.sh ${graph_cmd}",
+    command     => "cd ${er_state_path} && er_safe_run.sh ${uncat_cmd}",
     environment => 'PATH=/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin',
     require     => Class['elastic_recheck']
   }
