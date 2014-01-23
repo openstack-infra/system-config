@@ -31,7 +31,7 @@ sed "s/\${{project-version}}/${VERSION}/g" <pom.xml >${META_DATA_FILE}
 
 # deploy plugin artifacts from workspace to repo.jenkins-ci.org
 JENKINSCI_REPO="http://repo.jenkins-ci.org/list/releases/org/jenkins-ci/plugins"
-JENKINSCI_REPO_CREDS="/home/jenkins/.jenkinsci-curl"
+JENKINSCI_REPO_CREDS="~jenkins/.jenkinsci-curl"
 
 curl -X PUT \
     --config ${JENKINSCI_REPO_CREDS} \

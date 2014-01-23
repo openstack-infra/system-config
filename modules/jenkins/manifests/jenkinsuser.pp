@@ -4,6 +4,7 @@ class jenkins::jenkinsuser(
   $ssh_key = '',
   $ensure = present,
   $sudo = false,
+  $home = '/home/jenkins',
 ) {
 
   group { 'jenkins':
@@ -19,7 +20,7 @@ class jenkins::jenkinsuser(
   user { 'jenkins':
     ensure     => present,
     comment    => 'Jenkins User',
-    home       => '/home/jenkins',
+    home       => $home,
     gid        => 'jenkins',
     shell      => '/bin/bash',
     membership => 'minimum',
@@ -27,7 +28,7 @@ class jenkins::jenkinsuser(
     require    => Group['jenkins'],
   }
 
-  file { '/home/jenkins':
+  file { $home:
     ensure  => directory,
     owner   => 'jenkins',
     group   => 'jenkins',
@@ -35,122 +36,122 @@ class jenkins::jenkinsuser(
     require => User['jenkins'],
   }
 
-  file { '/home/jenkins/.pip':
+  file { "${home}/.pip":
     ensure  => directory,
     owner   => 'jenkins',
     group   => 'jenkins',
-    require => File['/home/jenkins'],
+    require => File[$home],
   }
 
-  file { '/home/jenkins/.gitconfig':
+  file { "${home}/.gitconfig":
     ensure  => present,
     owner   => 'jenkins',
     group   => 'jenkins',
     mode    => '0640',
     source  => 'puppet:///modules/jenkins/gitconfig',
-    require => File['/home/jenkins'],
+    require => File[$home],
   }
 
-  file { '/home/jenkins/.ssh':
+  file { "${home}/.ssh":
     ensure  => directory,
     owner   => 'jenkins',
     group   => 'jenkins',
     mode    => '0600',
-    require => File['/home/jenkins'],
+    require => File[$home],
   }
 
-  file { '/home/jenkins/.ssh/authorized_keys':
+  file { "${home}/.ssh/authorized_keys":
     ensure  => present,
     owner   => 'jenkins',
     group   => 'jenkins',
     mode    => '0640',
     content => $ssh_key,
-    require => File['/home/jenkins/.ssh'],
+    require => File["${home}/.ssh"],
   }
 
   #NOTE: not all distributions have default bash files in /etc/skel
   if ($::osfamily == 'Debian') {
 
-    file { '/home/jenkins/.bashrc':
+    file { "${home}/.bashrc":
       ensure  => present,
       owner   => 'jenkins',
       group   => 'jenkins',
       mode    => '0640',
       source  => '/etc/skel/.bashrc',
       replace => false,
-      require => File['/home/jenkins'],
+      require => File[$home],
     }
 
-    file { '/home/jenkins/.bash_logout':
+    file { "${home}/.bash_logout":
       ensure  => present,
       source  => '/etc/skel/.bash_logout',
       owner   => 'jenkins',
       group   => 'jenkins',
       mode    => '0640',
       replace => false,
-      require => File['/home/jenkins'],
+      require => File[$home],
     }
 
-    file { '/home/jenkins/.profile':
+    file { "${home}/.profile":
       ensure  => present,
       source  => '/etc/skel/.profile',
       owner   => 'jenkins',
       group   => 'jenkins',
       mode    => '0640',
       replace => false,
-      require => File['/home/jenkins'],
+      require => File[$home],
     }
 
   }
 
-  file { '/home/jenkins/.ssh/config':
+  file { "${home}/.ssh/config":
     ensure  => present,
     owner   => 'jenkins',
     group   => 'jenkins',
     mode    => '0640',
-    require => File['/home/jenkins/.ssh'],
+    require => File["${home}/.ssh"],
     source  => 'puppet:///modules/jenkins/ssh_config',
   }
 
-  file { '/home/jenkins/.gnupg':
+  file { "${home}/.gnupg":
     ensure  => directory,
     owner   => 'jenkins',
     group   => 'jenkins',
     mode    => '0700',
-    require => File['/home/jenkins'],
+    require => File[$home],
   }
 
-  file { '/home/jenkins/.gnupg/pubring.gpg':
+  file { "${home}/.gnupg/pubring.gpg":
     ensure  => present,
     owner   => 'jenkins',
     group   => 'jenkins',
     mode    => '0600',
-    require => File['/home/jenkins/.gnupg'],
+    require => File["${home}/.gnupg"],
     source  => 'puppet:///modules/jenkins/pubring.gpg',
   }
 
-  file { '/home/jenkins/.config':
+  file { "${home}/.config":
     ensure  => directory,
     owner   => 'jenkins',
     group   => 'jenkins',
     mode    => '0755',
-    require => File['/home/jenkins'],
+    require => File[$home],
   }
 
-  file { '/home/jenkins/.m2':
+  file { "${home}/.m2":
     ensure  => directory,
     owner   => 'jenkins',
     group   => 'jenkins',
     mode    => '0755',
-    require => File['/home/jenkins'],
+    require => File[$home],
   }
 
-  file { '/home/jenkins/.m2/settings.xml':
+  file { "${home}/.m2/settings.xml":
     ensure  => present,
     owner   => 'jenkins',
     group   => 'jenkins',
     mode    => '0644',
-    require => File['/home/jenkins/.m2'],
+    require => File["${home}/.m2"],
     source  => 'puppet:///modules/jenkins/settings.xml',
   }
 
