@@ -2276,6 +2276,7 @@ projects:
     experimental:
       - gate-grenade-dsvm-forward
       - gate-devstack-dsvm-cells
+      - publisher-test-dg-dsvm-full
 
   - name: openstack-infra/elastic-recheck
     check:
