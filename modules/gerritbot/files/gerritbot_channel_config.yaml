@@ -249,14 +249,18 @@ openstack-chef:
       - x-vrif-minus-2
     projects:
       - stackforge/cookbook-openstack-block-storage
-      - stackforge/cookbook-openstack-image
+      - stackforge/cookbook-openstack-common
+      - stackforge/cookbook-openstack-compute
       - stackforge/cookbook-openstack-dashboard
       - stackforge/cookbook-openstack-identity
-      - stackforge/cookbook-openstack-compute
-      - stackforge/cookbook-openstack-common
+      - stackforge/cookbook-openstack-image
+      - stackforge/cookbook-openstack-integration-test
       - stackforge/cookbook-openstack-metering
       - stackforge/cookbook-openstack-network
       - stackforge/cookbook-openstack-object-storage
+      - stackforge/cookbook-openstack-ops-database
+      - stackforge/cookbook-openstack-ops-messaging
+      - stackforge/cookbook-openstack-orchestration
       - stackforge/openstack-chef-repo
     branches:
       - master
