@@ -3424,6 +3424,15 @@ projects:
       - gate-cookbook-openstack-orchestration-chef-lint
       - gate-cookbook-openstack-orchestration-chef-unit
 
+  - name: stackforge/cookbook-openstack-integration-test
+    check:
+      - gate-cookbook-openstack-integration-test-chef-lint
+      - gate-cookbook-openstack-integration-test-chef-style
+      - gate-cookbook-openstack-integration-test-chef-unit
+    gate:
+      - gate-cookbook-openstack-integration-test-chef-lint
+      - gate-cookbook-openstack-integration-test-chef-unit
+
   - name: stackforge/designate
     check:
       - gate-designate-pep8
