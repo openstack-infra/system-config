@@ -17,6 +17,15 @@
 #
 class elastic_recheck (
 ) {
+
+  # For all static page generation scripts we want to run them
+  # both on a cron schedule (see elastic_recheck::cron) and on
+  # any commit. So we need to define commands in a way that
+  # we can trigger an exec here, as well as on cron.
+  $recheck_state_dir = '/var/lib/elastic-recheck'
+  $graph_cmd = 'elastic-recheck-graph /opt/elastic-recheck/queries -o graph-new.json && mv graph-new.json graph.json'
+  $uncat_cmd = 'elastic-recheck-uncategorized -d /opt/elastic-recheck/queries -t /usr/local/share/templates -o uncategorized-new.html && mv uncategorized-new.html uncategorized.html'
+
   group { 'recheck':
     ensure => 'present',
   }
@@ -36,6 +45,24 @@ class elastic_recheck (
     source   => 'https://git.openstack.org/openstack-infra/elastic-recheck',
   }
 
+  exec { 'run_er_graph':
+    command     => "cd ${recheck_state_dir} && er_safe_run.sh ${graph_cmd}",
+    path        => '/usr/local/bin:/usr/bin:/bin/',
+    user        => 'recheck',
+    refreshonly => true,
+    require     => File['/usr/local/bin/er_safe_run.sh'],
+    subscribe   => Vcsrepo['/opt/elastic-recheck'],
+  }
+
+  exec { 'run_er_uncat':
+    command     => "cd ${recheck_state_dir} && er_safe_run.sh ${uncat_cmd}",
+    path        => '/usr/local/bin:/usr/bin:/bin/',
+    user        => 'recheck',
+    refreshonly => true,
+    require     => File['/usr/local/bin/er_safe_run.sh'],
+    subscribe   => Vcsrepo['/opt/elastic-recheck'],
+  }
+
   include pip
   exec { 'install_elastic-recheck' :
     command     => 'pip install /opt/elastic-recheck',
@@ -43,6 +70,14 @@ class elastic_recheck (
     refreshonly => true,
     subscribe   => Vcsrepo['/opt/elastic-recheck'],
     require     => Class['pip'],
+  }
+
+  file { '/usr/local/bin/er_safe_run.sh':
+    ensure  => present,
+    source  => 'puppet:///modules/elastic_recheck/er_safe_run.sh',
+    mode    => '0755',
+    owner   => 'root',
+    group   => 'root',
   }
 
   file { '/var/run/elastic-recheck':

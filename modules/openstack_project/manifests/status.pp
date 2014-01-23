@@ -12,7 +12,6 @@ class openstack_project::status (
   $recheck_ssh_private_key,
   $recheck_bot_passwd,
   $recheck_bot_nick,
-  $recheck_state_dir = '/var/lib/elastic-recheck',
 ) {
 
   class { 'openstack_project::server':
@@ -138,15 +137,6 @@ class openstack_project::status (
   # Status - elastic-recheck
   include elastic_recheck
 
-  cron { 'elastic-recheck':
-    user        => 'recheck',
-    minute      => '*/15',
-    hour        => '*',
-    command     => "elastic-recheck-graph /opt/elastic-recheck/queries -o ${recheck_state_dir}/graph-new.json && mv ${recheck_state_dir}/graph-new.json ${recheck_state_dir}/graph.json",
-    environment => 'PATH=/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin',
-    require     => Class['elastic_recheck']
-  }
-
   class { 'elastic_recheck::bot':
     gerrit_host             => $gerrit_host,
     gerrit_ssh_host_key     => $gerrit_ssh_host_key,
@@ -155,6 +145,9 @@ class openstack_project::status (
     recheck_bot_passwd      => $recheck_bot_passwd,
     recheck_bot_nick        => $recheck_bot_nick,
   }
+
+  # sets up the cron update scripts for static pages
+  include elastic_recheck::cron
 
   ###########################################################
   # Status - zuul
