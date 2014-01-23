@@ -46,8 +46,9 @@ class elastic_recheck (
   }
 
   exec { 'run_er_graph':
-    command     => "cd ${recheck_state_dir} && er_safe_run.sh ${graph_cmd}",
+    command     => "er_safe_run.sh ${graph_cmd}",
     path        => '/usr/local/bin:/usr/bin:/bin/',
+    cwd         => $recheck_state_dir,
     user        => 'recheck',
     refreshonly => true,
     require     => File['/usr/local/bin/er_safe_run.sh'],
@@ -55,8 +56,9 @@ class elastic_recheck (
   }
 
   exec { 'run_er_uncat':
-    command     => "cd ${recheck_state_dir} && er_safe_run.sh ${uncat_cmd}",
+    command     => "er_safe_run.sh ${uncat_cmd}",
     path        => '/usr/local/bin:/usr/bin:/bin/',
+    cwd         => $recheck_state_dir,
     user        => 'recheck',
     refreshonly => true,
     require     => File['/usr/local/bin/er_safe_run.sh'],
