@@ -128,4 +128,14 @@ class openstack_project::lists(
     webserver   => $listdomain,
     mailserver  => $listdomain,
   }
+
+
+  maillist { 'ambassadors':
+    ensure      => present,
+    admin       => 'tom@openstack.org',
+    password    => $listpassword,
+    description => 'Private discussions between OpenStack Ambassadors',
+    webserver   => $listdomain,
+    mailserver  => $listdomain,
+  }
 }
