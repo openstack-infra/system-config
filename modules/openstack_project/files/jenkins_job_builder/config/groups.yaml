@@ -1,0 +1,50 @@
+- job:
+    name: gate-groups-unittests
+    node: bare-precise
+
+    builders:
+        - gerrit-git-prep
+        - shell: |
+            ./scripts/bootstrap.sh
+            ./scripts/gate-build.sh
+    publishers:
+        - console-log
+        - coverage-log
+        - scp:
+            site: 'static.openstack.org'
+            files:
+                - target: 'logs/$LOG_PATH'
+                  source: './reports/**'
+                  keep-hierarchy: true
+                  copy-after-failure: true
+
+- job-template:
+    name: 'groups-release-{branch-designator}'
+    node: bare-precise
+
+    builders:
+        - gerrit-git-prep
+        - shell: |
+            #!/bin/bash -xe
+            ./script/bootstrap.sh
+            ARCHIVE_NAME={name}
+            if [ "$BRANCH" != "master" ] ; then
+                BRANCH_PATH=`echo $ZUUL_REFNAME | tr / -`
+                ARCHIVE_NAME={name}-{branch-designator}
+            fi
+            drush make build-groups.make dist
+            tar -czf $ARCHIVE_NAME.tar.gz dist/
+            mv $ARCHIVE_NAME.tar.gz dist/
+    publishers:
+        - console-log
+        - coverage-log
+        - scp:
+            site: 'static.openstack.org'
+            files:
+                - target: 'logs/$LOG_PATH'
+                  source: './reports/**'
+                  keep-hierarchy: true
+                  copy-after-failure: true
+        - tarball:
+            project: '{name}'
+            site: '{tarball-site}'

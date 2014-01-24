@@ -2119,6 +2119,7 @@
     jobs:
       - python-jobs
 
+
 - project:
     name: gce-api
     github-org: stackforge
@@ -2127,3 +2128,15 @@
 
     jobs:
       - python-jobs
+
+- project:
+    name: groups
+    github-org: openstack-infra
+    node: precise
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - 'groups-release-{branch-designator}':
+          branch-designator: 'master'
+      - 'groups-release-{branch-designator}':
+          branch-designator: 'branch'
