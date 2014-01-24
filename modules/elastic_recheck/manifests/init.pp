@@ -24,7 +24,7 @@ class elastic_recheck (
   # we can trigger an exec here, as well as on cron.
   $recheck_state_dir = '/var/lib/elastic-recheck'
   $graph_cmd = 'elastic-recheck-graph /opt/elastic-recheck/queries -o graph-new.json && mv graph-new.json graph.json'
-  $uncat_cmd = 'elastic-recheck-uncategorized -d /opt/elastic-recheck/queries -t /usr/local/share/templates -o uncategorized-new.html && mv uncategorized-new.html uncategorized.html'
+  $uncat_cmd = 'elastic-recheck-uncategorized -d /opt/elastic-recheck/queries -t /usr/local/share/elastic-recheck/templates -o uncategorized-new.html && mv uncategorized-new.html uncategorized.html'
 
   group { 'recheck':
     ensure => 'present',
