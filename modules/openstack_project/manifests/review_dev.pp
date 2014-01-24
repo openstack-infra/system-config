@@ -24,7 +24,7 @@ class openstack_project::review_dev (
 ) {
 
   realize (
-    User::Virtual::Localuser['zaro'],
+    User::Virtual::Localuser['zaro0508'],
   )
 
   # Setup MySQL
