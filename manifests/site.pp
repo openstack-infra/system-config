@@ -648,6 +648,15 @@ node 'pypi.slave.openstack.org' {
   }
 }
 
+node 'npm.openstack.org' {
+  class { 'npm_mirror':
+    host           => '0.0.0.0',
+    port           => '5984',
+    admin_username => hiera('npm_mirror_org_user'),
+    admin_password => hiera('npm_mirror_org_password')
+  }
+}
+
 node 'salt-trigger.slave.openstack.org' {
   include openstack_project
   class { 'openstack_project::salt_trigger_slave':

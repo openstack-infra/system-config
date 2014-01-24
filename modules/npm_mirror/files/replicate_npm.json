@@ -1,0 +1,7 @@
+{
+    "_id": "replicate_npm",
+    "source": "https://fullfatdb.npmjs.com/registry/",
+    "target": "registry",
+    "continuous": true,
+    "create_target": false
+}
