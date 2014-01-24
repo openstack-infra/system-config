@@ -26,18 +26,6 @@ sudo DEBIAN_FRONTEND=noninteractive apt-get \
   --assume-yes install build-essential python-dev \
   linux-headers-virtual linux-headers-`uname -r`
 
-rm -rf ~/tripleo
-mkdir -p ~/tripleo
-export TRIPLEO_ROOT=~/tripleo
-
-cd ~/tripleo
-# XXX: Note that this is redundant with the cached copies in /opt/git.
-# see https://bugs.launchpad.net/openstack-ci/+bug/1269889
-bash /opt/git/openstack/tripleo-incubator/scripts/pull-tools
-# Instead of running pull-tools, we'll eventually want to get the
-# refresh-env script working:
-# source tripleo-incubator/scripts/refresh-env ~/tripleo
-
 # tripleo-gate runs with two networks - the public access network and eth1
 # pointing at the in-datacentre L2 network where we can talk to the test
 # environments directly. We need to enable DHCP on eth1 though.
