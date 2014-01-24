@@ -42,6 +42,15 @@ class jenkins::jenkinsuser(
     require => File['/home/jenkins'],
   }
 
+  file { '/home/jenkins/.npmrc':
+    ensure  => present,
+    owner   => 'jenkins',
+    group   => 'jenkins',
+    mode    => '0640',
+    source  => 'puppet:///modules/jenkins/npmrc',
+    require => File['/home/jenkins'],
+  }
+
   file { '/home/jenkins/.gitconfig':
     ensure  => present,
     owner   => 'jenkins',
