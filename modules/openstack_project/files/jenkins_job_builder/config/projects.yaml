@@ -2014,3 +2014,12 @@
 
     jobs:
       - openstack-doc-jobs
+
+- project:
+    name: python-openstacksdk
+    github-org: stackforge
+    node: precise
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - python-jobs
