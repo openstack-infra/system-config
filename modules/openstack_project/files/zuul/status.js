@@ -226,7 +226,9 @@ function format_change(change, change_queue) {
         }
         html += '<td class="'+cls+'">';
         if (i == change['_tree_index']) {
-            if (change['failing_reasons'] && change['failing_reasons'].length > 0) {
+            if (change['active'] != true) {
+                html += '<img src="grey.png" title="Waiting until closer to head of queue to start jobs"/>';
+            } else if (change['failing_reasons'] && change['failing_reasons'].length > 0) {
                 var reason = change['failing_reasons'].join(', ');
                 var image = 'red.png';
                 if (reason.match(/merge conflict/)) {
