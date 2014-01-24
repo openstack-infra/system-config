@@ -26,10 +26,6 @@ sudo DEBIAN_FRONTEND=noninteractive apt-get \
   --assume-yes install build-essential python-dev \
   linux-headers-virtual linux-headers-`uname -r`
 
-# Might use this later for other cache, keeping for consistancy
-# rm -rf ~/workspace-cache
-# mkdir -p ~/workspace-cache
-
 rm -rf ~/tripleo
 mkdir -p ~/tripleo
 export TRIPLEO_ROOT=~/tripleo
@@ -57,11 +53,53 @@ sudo dd of=/etc/network/interfaces.d/eth0.cfg oflag=append conv=notrunc << EOF
     post-up ip link set mtu 1458 dev eth0
 EOF
 
-# We'll want something like this for triplo when we do dependencies
-#
-#. /etc/lsb-release
-#cd /opt/nodepool-scripts/
-#python ./cache_devstack.py $DISTRIB_CODENAME
+rm -rf ~/workspace-cache
+mkdir -p ~/workspace-cache
+cd ~/workspace-cache
+# XXX (lifeless) While this is redundant with the prepare_devstack
+# one, we need to evolve to using /opt/git separately, so having a
+# separate list makes that easier than refactoring to a single joint
+# list.
+git clone https://review.openstack.org/p/openstack-dev/grenade
+git clone https://review.openstack.org/p/openstack-dev/pbr
+git clone https://review.openstack.org/p/openstack-infra/devstack-gate
+git clone https://review.openstack.org/p/openstack-infra/jeepyb
+git clone https://review.openstack.org/p/openstack-infra/pypi-mirror
+git clone https://review.openstack.org/p/openstack-infra/tripleo-ci
+git clone https://review.openstack.org/p/openstack/ceilometer
+git clone https://review.openstack.org/p/openstack/cinder
+git clone https://review.openstack.org/p/openstack/diskimage-builder
+git clone https://review.openstack.org/p/openstack/glance
+git clone https://review.openstack.org/p/openstack/heat
+git clone https://review.openstack.org/p/openstack/horizon
+git clone https://review.openstack.org/p/openstack/ironic
+git clone https://review.openstack.org/p/openstack/keystone
+git clone https://review.openstack.org/p/openstack/neutron
+git clone https://review.openstack.org/p/openstack/nova
+git clone https://review.openstack.org/p/openstack/os-apply-config
+git clone https://review.openstack.org/p/openstack/os-collect-config
+git clone https://review.openstack.org/p/openstack/os-refresh-config
+git clone https://review.openstack.org/p/openstack/oslo.config
+git clone https://review.openstack.org/p/openstack/oslo.messaging
+git clone https://review.openstack.org/p/openstack/python-ceilometerclient
+git clone https://review.openstack.org/p/openstack/python-cinderclient
+git clone https://review.openstack.org/p/openstack/python-glanceclient
+git clone https://review.openstack.org/p/openstack/python-heatclient
+git clone https://review.openstack.org/p/openstack/python-ironicclient
+git clone https://review.openstack.org/p/openstack/python-keystoneclient
+git clone https://review.openstack.org/p/openstack/python-neutronclient
+git clone https://review.openstack.org/p/openstack/python-novaclient
+git clone https://review.openstack.org/p/openstack/python-openstackclient
+git clone https://review.openstack.org/p/openstack/python-swiftclient
+git clone https://review.openstack.org/p/openstack/requirements
+git clone https://review.openstack.org/p/openstack/swift
+git clone https://review.openstack.org/p/openstack/tempest
+git clone https://review.openstack.org/p/openstack/tripleo-heat-templates
+git clone https://review.openstack.org/p/openstack/tripleo-image-elements
+git clone https://review.openstack.org/p/openstack/tripleo-incubator
+# and stackforge libraries we might want to test with
+git clone https://review.openstack.org/p/stackforge/pecan
+git clone https://review.openstack.org/p/stackforge/wsme
 
 sync
 sleep 5
