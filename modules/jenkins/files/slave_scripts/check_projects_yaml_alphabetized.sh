@@ -5,12 +5,16 @@
 
 export TMPDIR=`/bin/mktemp -d`
 trap "rm -rf $TMPDIR" EXIT
+if [ -f $OLDPWD/modules/openstack_project/templates/review.projects.yaml.erb ]
+then
+    PROJECTS_LIST=$OLDPWD/modules/openstack_project/templates/review.projects.yaml.erb
+else
+    PROJECTS_LIST=$OLDPWD/modules/openstack_project/files/review.projects.yaml
+fi
 
 pushd $TMPDIR
 
-sed -e '/^- project: /!d' -e 's/^- project: //' \
-    $OLDPWD/modules/openstack_project/templates/review.projects.yaml.erb \
-    > projects_list
+sed -e '/^- project: /!d' -e 's/^- project: //' $PROJECTS_LIST > projects_list
 
 LC_ALL=C sort --ignore-case projects_list -o projects_list.sorted
 
