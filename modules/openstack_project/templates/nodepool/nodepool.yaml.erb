@@ -250,6 +250,10 @@ targets:
         min-ready: 1
         providers:
           - name: tripleo-test-cloud
+      - name: tripleo-fedora
+        min-ready: 1
+        providers:
+          - name: tripleo-test-cloud
   - name: jenkins02
     jenkins:
       url: 'https://jenkins02.openstack.org/'
