@@ -1,0 +1,14 @@
+Verified+2: Jenkins
+Code-Review+1: Julie Pichon <jpichon@redhat.com>
+Approved+1: Jeremy Stanley <fungi@yuggoth.org>
+Code-Review+2: Jeremy Stanley <fungi@yuggoth.org>
+Code-Review+1: David Lyle <david.lyle@hp.com>
+Code-Review+1: Elizabeth Krumbach Joseph <lyz@princessleia.com>
+Code-Review+1: Sergey Lukjanov <slukjanov@mirantis.com>
+Code-Review+1: Jarret Raim <jarret.raim@rackspace.com>
+Code-Review+1: sahid <sahid.ferdjaoui@cloudwatt.com>
+Submitted-by: Jenkins
+Submitted-at: Sat, 25 Jan 2014 08:08:30 +0000
+Reviewed-on: https://review.openstack.org/67152
+Project: openstack-infra/config
+Branch: refs/heads/master
