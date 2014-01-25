@@ -13,10 +13,6 @@ pipelines:
         - event: change-restored
         - event: comment-added
           comment_filter: (?i)^\s*recheck(( (?:bug|lp)[\s#:]*(\d+))|( no bug))\s*$
-        - event: comment-added
-          require-approval:
-            - username: jenkins
-              older-than: 48h
     success:
       gerrit:
         verified: 1
