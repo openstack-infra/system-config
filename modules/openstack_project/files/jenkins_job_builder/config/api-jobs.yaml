@@ -353,3 +353,29 @@
           target: ''
           remove-prefix: 'openstack-image-service-api/target/docbkx/webhelp'
           excludes: '**/*.xml,**/null*'
+
+- job:
+    name: database-api
+    project-type: maven
+    concurrent: false
+    node: precise
+
+    prebuilders:
+      - gerrit-git-prep
+
+    maven:
+      maven-name: Maven3
+      root-module:
+        group-id: org.openstack.docs
+        artifact-id: openstack-guide
+      root-pom: api-docs/pom.xml
+      goals: 'clean generate-sources -B'
+
+    publishers:
+      - console-log
+      - ftp:
+          site: docs.openstack.org
+          source: 'api-docs/target/docbkx/webhelp/cdb-devguide-reviewer/**'
+          target: 'api/openstack-database/1.0/'
+          remove-prefix: 'api-docs/target/docbkx/webhelp/cdb-devguide-reviewer/'
+          excludes: '**/*.xml,**/null*'

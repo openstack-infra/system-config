@@ -1974,6 +1974,8 @@ projects:
       - gate-noop
     gate:
       - gate-noop
+    post:
+      - database-api
 
   - name: openstack/identity-api
     check:
