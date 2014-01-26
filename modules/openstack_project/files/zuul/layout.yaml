@@ -2614,18 +2614,16 @@ projects:
           - post-mirror-python33
 
   - name: openstack-infra/storyboard
-    check:
-      - gate-storyboard-pep8
-      - gate-storyboard-python26
-      - gate-storyboard-python27
-    gate:
-      - gate-storyboard-pep8
-      - gate-storyboard-python27
+    template:
+      - name: python-jobs
     post:
       - storyboard-branch-tarball
+      - storyboard-docs
     pre-release:
+      - storyboard-docs
       - storyboard-tarball
     release:
+      - storyboard-docs
       - storyboard-tarball:
         - storyboard-pypi-upload:
           - post-mirror-python26
