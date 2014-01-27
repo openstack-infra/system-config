@@ -11,8 +11,21 @@ class openstack_project::cacti (
 
   include apache
 
+  a2mod { 'rewrite':
+    ensure => present,
+  }
+
   package { 'cacti':
     ensure => present,
+  }
+
+  file { '/etc/apache2/conf-available/cacti.conf':
+    ensure  => present,
+    source  => 'puppet:///modules/openstack_project/cacti/apache.conf',
+    mode    => '0644',
+    owner   => 'root',
+    group   => 'root',
+    require => Package['cacti'],
   }
 
   file { '/usr/local/share/cacti/resource/snmp_queries':
