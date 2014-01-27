@@ -14,6 +14,38 @@ Smokestack reads the Gerrit event stream and runs it's own tests on the commits.
 If one of the tests fails it will publish information and links to the failure
 on the review in Gerrit.
 
+Requirements
+------------
+
+* Until a third party testing system operates in a stable fashion, third
+  party tests can comment on patches but not vote on them.
+
+  * A system can also be set up to only do '+1' reviews and leave all the
+    '-1's to be manually confirmed.
+* The maintainers are responsible for re-triggering tests when their third
+  party testing system breaks.
+* Support recheck to request re-running a test.
+
+  * Support the following syntaxes ``recheck no bug`` and ``recheck bug ###``.
+  * Recheck means recheck everything. A single recheck comment should
+    re-trigger all testing systems.
+* Publish who the maintainers of the third party testing system are, and make
+  them available for support as needed. Maintainers are encouraged to be
+  in IRC regularly to make it faster to contact them.
+
+  * All CI comments must contain a link to a contact page with the details.
+* Include a public link to all test artifacts to make debugging failed tests
+  easier. This should include:
+
+  * Environment details
+  * Test configuration
+
+    * Skipped tests
+    * logs should include a trace of the commands used
+  * OpenStack logs
+  * Tempest logs (including ``testr_results.html.gz``)
+
+
 Reading the Event Stream
 ------------------------
 
