@@ -1735,6 +1735,14 @@
       - python-jobs
       - pypi-jobs
       - hook-{name}-rtfd
+      - gate-{name}-tox-{envlist}:
+          envlist: neutronclient-stable
+      - gate-{name}-tox-{envlist}:
+          envlist: neutronclient-tip
+      - gate-{name}-tox-{envlist}:
+          envlist: openstackclient-stable
+      - gate-{name}-tox-{envlist}:
+          envlist: openstackclient-tip
 
 - project:
     name: python-tuskarclient
