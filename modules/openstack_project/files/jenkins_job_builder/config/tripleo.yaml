@@ -17,6 +17,7 @@
           export DEVSTACK_GATE_TEMPEST=0
           export DEVSTACK_GATE_EXERCISES=0
           export GEARDSERVER=192.168.1.1
+          export DIB_COMMON_ELEMENTS="stackuser pypi-openstack"
           function gate_hook {
               bash -xe /opt/stack/new/tripleo-ci/toci_gate_test.sh
           }
