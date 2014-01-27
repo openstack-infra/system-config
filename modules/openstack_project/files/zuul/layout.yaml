@@ -2288,6 +2288,7 @@ projects:
       - check-tempest-dsvm-cells-full-havana
       - check-tempest-dsvm-ironic-nv
       - check-tempest-dsvm-ironic-postgres-nv
+      - gate-tripleo-deploy
     gate:
       - gate-tempest-dsvm-full
       - gate-tempest-dsvm-postgres-full
