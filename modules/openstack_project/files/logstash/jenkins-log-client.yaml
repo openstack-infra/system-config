@@ -51,6 +51,14 @@ source-files:
     tags:
       - screen
       - oslofmt
+  - name: logs/screen-ir-api.txt
+    tags:
+      - screen
+      - oslofmt
+  - name: logs/screen-ir-cond.txt
+    tags:
+      - screen
+      - oslofmt
   - name: logs/screen-key.txt
     tags:
       - screen
