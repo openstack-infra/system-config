@@ -546,14 +546,22 @@ node 'pbx.openstack.org' {
   }
 }
 
-# A bare machine, but with a jenkins user
+# A bare machine, but with a jenkins user. Identical to
+# single use unittest slaves, but with automatic upgrades.
 node /^.*\.template\.openstack\.org$/ {
-  include openstack_project::slave_template
+  class { 'openstack_project::single_use_slave':
+    automatic_upgrades => true,
+    ssh_key            => $::openstack_project::jenkins_ssh_key,
+  }
 }
 
-# A bare machine, but with a jenkins user
+# A bare machine, but with a jenkins user. Identical to
+# single use unittest slaves, but with automatic upgrades.
 node /^.*dev-.*\.template\.openstack\.org$/ {
-  include openstack_project::dev_slave_template
+  class { 'openstack_project::single_use_slave':
+    automatic_upgrades => true,
+    ssh_key            => $openstack_project::jenkins_dev_ssh_key,
+  }
 }
 
 # A backup machine.  Don't run cron or puppet agent on it.
@@ -697,12 +705,6 @@ node /^fedora18-dev\d+\.slave\.openstack\.org$/ {
     ssh_key   => $openstack_project::jenkins_dev_ssh_key,
     sysadmins => hiera('sysadmins'),
     python3   => true,
-  }
-}
-
-node /^.*\.jclouds\.openstack\.org$/ {
-  class { 'openstack_project::bare_slave':
-    certname => 'jclouds.openstack.org',
   }
 }
 
