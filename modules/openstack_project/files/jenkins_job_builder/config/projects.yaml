@@ -1634,6 +1634,24 @@
     jobs:
       - python-jobs
       - pypi-jobs
+      - gate-{name}-tox-{envlist}:
+          envlist: py26-sa7-ev # For RHEL6.x/CENTOS6.x
+      - gate-{name}-tox-{envlist}:
+          envlist: py27-ev
+      - gate-{name}-tox-{envlist}:
+          envlist: py27-sa7
+      - gate-{name}-tox-{envlist}:
+          envlist: py27-sa7-ev
+      - gate-{name}-tox-{envlist}:
+          envlist: py27-sa8
+      - gate-{name}-tox-{envlist}:
+          envlist: py27-sa8-ev
+      - gate-{name}-tox-{envlist}:
+          envlist: py27-sa9
+      - gate-{name}-tox-{envlist}:
+          envlist: py27-sa9-ev
+      - gate-{name}-tox-{envlist}:
+          envlist: py33-sa9 # For anyone running on newest
 
 - project:
     name: cl-openstack-client
