@@ -1054,6 +1054,16 @@
 
 
 - project:
+    name: bugdaystats
+    github-org: openstack-infra
+    node: precise
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - python-jobs
+      - pypi-jobs
+
+- project:
     name: requirements
     github-org: openstack
     node: precise

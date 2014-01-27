@@ -31,6 +31,12 @@
   upstream: https://bitbucket.org/askbot/openstack-theme
   options:
     - direct-release
+- project: openstack-infra/bugdaystats
+  group: openstack-ci
+  description: Tool to produce static HTML that shows progress during a Bug Day
+  upstream: git://github.com/ttx/bugdaystats.git
+  options:
+    - direct-release
 - project: openstack-infra/config
   group: openstack-ci
   options:
