@@ -225,7 +225,6 @@ class zuul (
 
   cron { 'zuul_repack':
     user        => 'zuul',
-    weekday     => '0',
     hour        => '4',
     minute      => '7',
     command     => 'find /var/lib/zuul/git/ -maxdepth 3 -type d -name ".git" -exec git --git-dir="{}" pack-refs --all \;',
