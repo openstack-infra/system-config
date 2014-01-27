@@ -8,6 +8,7 @@ openstack-infra:
       - openstack-dev/hacking
       - openstack-dev/pbr
       - openstack-infra/askbot-theme
+      - openstack-infra/bugdaystats
       - openstack-infra/config
       - openstack-infra/devstack-gate
       - openstack-infra/elastic-recheck
