@@ -3377,6 +3377,12 @@ projects:
     gate:
       - gate-openstack-chef-repo
 
+  - name: stackforge/openstack-sdk-php
+    check:
+      - gate-noop
+    gate:
+      - gate-noop
+
   - name: stackforge/openvz-nova-driver
     check:
       - gate-noop
