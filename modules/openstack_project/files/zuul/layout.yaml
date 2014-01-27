@@ -2671,6 +2671,23 @@ projects:
     gate:
       - gate-noop
 
+  - name: openstack-infra/bugdaystats
+    check:
+      - gate-bugdaystats-pep8
+    gate:
+      - gate-bugdaystats-pep8
+    post:
+      - bugdaystats-branch-tarball
+      - bugdaystats-coverage
+    pre-release:
+      - bugdaystats-tarball
+    release:
+      - bugdaystats-tarball:
+        - bugdaystats-pypi-upload:
+          - post-mirror-python26
+          - post-mirror-python27
+          - post-mirror-python33
+
   - name: openstack-infra/config
     check:
       - config-compare-xml
