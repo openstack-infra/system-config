@@ -22,6 +22,12 @@ mkdir -p ~/cache/pip
 if [ -f /usr/bin/yum ]; then
     sudo yum -y install python-devel make automake gcc gcc-c++ kernel-devel redhat-lsb-core
 elif [ -f /usr/bin/apt-get ]; then
+    if [ "$(lsb_release -c -s)" = "precise" ]; then
+        sudo DEBIAN_FRONTEND=noninteractive apt-get \
+          --option "Dpkg::Options::=--force-confold" \
+          --assume-yes install linux-generic-lts-saucy
+    fi
+
     sudo DEBIAN_FRONTEND=noninteractive apt-get \
       --option "Dpkg::Options::=--force-confold" \
       --assume-yes install build-essential python-dev \
