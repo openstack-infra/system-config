@@ -1,3 +1,11 @@
+# Global default exec paths
+Exec {
+  path => [
+    "/bin/", "/sbin/" , "/usr/bin/", "/usr/sbin/",
+    "/usr/local/bin/", "/usr/local/sbin/",
+  ]
+}
+
 #
 # Default: should at least behave like an openstack server
 #
