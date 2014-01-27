@@ -1,5 +1,7 @@
-# bare-bones slaves spun up by jclouds. Specifically need to not set ssh
-# login limits, because it screws up jclouds provisioning
+# Super simple slave manifest that installs something very
+# similar to an OpenStack Jenkins slave but does not need to
+# have services managed like firewall, ntp, automatic upgrades,
+# and so on.
 class openstack_project::bare_slave(
   $certname = $::fqdn,
   $install_users = true

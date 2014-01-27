@@ -18,5 +18,4 @@
 
 HOSTNAME=$1
 
-./prepare_node.sh $HOSTNAME
-sudo puppet apply --modulepath=/root/config/modules:/etc/puppet/modules -e "class {'openstack_project::bare_slave': }"
+./prepare_node.sh $HOSTNAME false
