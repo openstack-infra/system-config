@@ -4135,6 +4135,7 @@ projects:
       - gate-turbo-hipster-python27
     post:
       - turbo-hipster-coverage
+      - hook-turbo-hipster-rtfd
 
   - name: stackforge/wsme
     check:

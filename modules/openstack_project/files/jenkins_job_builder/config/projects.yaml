@@ -1994,6 +1994,7 @@
 
     jobs:
       - python-jobs
+      - hook-{name}-rtfd
 
 - project:
     name: python-solumclient
