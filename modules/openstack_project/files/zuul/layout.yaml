@@ -42,7 +42,7 @@ pipelines:
     failure:
       gerrit:
         verified: -2
-    window-floor: 10
+    window-floor: 20
     window-increase-factor: 2
 
   - name: post
