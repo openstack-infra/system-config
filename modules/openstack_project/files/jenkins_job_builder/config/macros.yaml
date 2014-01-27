@@ -276,14 +276,6 @@
               source: 'logs/**'
               keep-hierarchy: true
               copy-after-failure: true
-            - target: 'logs/$LOG_PATH'
-              source: '**/testr_results.html.gz'
-              keep-hierarchy: false
-              copy-after-failure: true
-            - target: 'logs/$LOG_PATH'
-              source: '**/subunit_log.txt.gz'
-              keep-hierarchy: false
-              copy-after-failure: true
 
 
 - publisher:
