@@ -419,6 +419,10 @@ function update_zuul_info(data) {
     if ('zuul_version' in data) {
         $('#zuul-version').text(data['zuul_version']);
     }
+    if ('last_reconfigured' in data) {
+        var last_reconfigured = new Date(data['last_reconfigured']);
+        $('#last-reconfigured-span').text(last_reconfigured.toString());
+    }
 }
 
 function update() {
