@@ -2276,6 +2276,7 @@ projects:
       - check-devstack-dsvm-cells-havana
       - check-tempest-dsvm-cells-havana
       - check-tempest-dsvm-cells-full-havana
+      - gate-tripleo-deploy
     gate:
       - gate-tempest-dsvm-full
       - gate-tempest-dsvm-postgres-full
