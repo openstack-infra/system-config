@@ -4,8 +4,9 @@
 
     builders:
       - gerrit-git-prep
-      - chef-cookbook-prep
-      - chef-cookbook-rspec
+      - chef-bundler-prep
+      - chef-berkshelf-prep
+      - chef-cookbook-chefspec
 
     publishers:
       - console-log
@@ -16,8 +17,8 @@
 
     builders:
       - gerrit-git-prep
-      - chef-cookbook-prep
-      - chef-cookbook-lint
+      - chef-bundler-prep
+      - chef-cookbook-foodcritic
 
     publishers:
       - console-log
@@ -28,8 +29,8 @@
 
     builders:
       - gerrit-git-prep
-      - chef-cookbook-prep
-      - chef-cookbook-style
+      - chef-bundler-prep
+      - chef-cookbook-rubocop
 
     publishers:
       - console-log

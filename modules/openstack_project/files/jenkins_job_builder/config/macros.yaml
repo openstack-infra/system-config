@@ -88,11 +88,17 @@
           done
 
 - builder:
-    name: chef-cookbook-prep
+    name: chef-bundler-prep
     builders:
       - shell: |
-          mkdir -p .cookbooks .bundle
+          mkdir -p .bundle
           ruby1.9.1 /usr/bin/bundle install --path=.bundle
+
+- builder:
+    name: chef-berkshelf-prep
+    builders:
+      - shell: |
+          mkdir -p .cookbooks
           ruby1.9.1 /usr/bin/bundle exec berks install --path=.cookbooks
           COOKBOOK=$(awk '/^name/ {print $NF}' metadata.rb |tr -d \"\')
           if [ -z $COOKBOOK ]; then
@@ -101,21 +107,20 @@
           fi
 
 - builder:
-    name: chef-cookbook-style
+    name: chef-cookbook-rubocop
     builders:
       - shell: |
           COOKBOOK=$(awk '/^name/ {print $NF}' metadata.rb |tr -d \"\')
-          ruby1.9.1 /usr/bin/bundle exec tailor
+          ruby1.9.1 /usr/bin/bundle exec rubocop
 
 - builder:
-    name: chef-cookbook-lint
+    name: chef-cookbook-foodcritic
     builders:
       - shell: |
-          COOKBOOK=$(awk '/^name/ {print $NF}' metadata.rb |tr -d \"\')
-          ruby1.9.1 /usr/bin/bundle exec foodcritic -f any -t ~FC003 -t ~FC023 .cookbooks/$COOKBOOK
+          ruby1.9.1 /usr/bin/bundle exec foodcritic -f any -t ~FC003 -t ~FC023 .
 
 - builder:
-    name: chef-cookbook-rspec
+    name: chef-cookbook-chefspec
     builders:
       - shell: |
           COOKBOOK=$(awk '/^name/ {print $NF}' metadata.rb |tr -d \"\')
