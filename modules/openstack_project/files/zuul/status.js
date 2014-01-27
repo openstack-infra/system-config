@@ -415,10 +415,18 @@ function clean_changes_lists() {
     window.zuul_collapsed_exceptions = new_collapsed_exceptions;
 }
 
+function update_zuul_info(data) {
+    if ('zuul_version' in data) {
+        $('#zuul-version').text(data['zuul_version']);
+    }
+}
+
 function update() {
     var html = '';
 
     $.getJSON('http://zuul.openstack.org/status.json', function(data) {
+        update_zuul_info(data);
+
         if ('message' in data) {
             $("#message").attr('class', 'alertbox');
             $("#message").html(data['message']);
@@ -440,7 +448,6 @@ function update() {
             data['trigger_event_queue']['length']);
         $("#result_event_queue_length").html(
             data['result_event_queue']['length']);
-
     });
 
     clean_changes_lists();
