@@ -1,0 +1,17 @@
+Approved+1: James E. Blair <corvus@inaugust.com>
+Code-Review+2: James E. Blair <corvus@inaugust.com>
+Verified+2: Jenkins
+Code-Review+1: Dan Prince <dprince@redhat.com>
+Code-Review+1: Russell Bryant <rbryant@redhat.com>
+Code-Review+1: Michael Still <mikal@stillhq.com>
+Code-Review+1: Devananda van der Veen <devananda.vdv@gmail.com>
+Code-Review+2: Jeremy Stanley <fungi@yuggoth.org>
+Code-Review+1: Christopher Yeoh <cbkyeoh@gmail.com>
+Code-Review+1: Anita Kuno <anteaya@anteaya.info>
+Code-Review+1: Elizabeth Krumbach Joseph <lyz@princessleia.com>
+Code-Review+1: Sergey Lukjanov <slukjanov@mirantis.com>
+Submitted-by: Jenkins
+Submitted-at: Mon, 27 Jan 2014 19:09:49 +0000
+Reviewed-on: https://review.openstack.org/63478
+Project: openstack-infra/config
+Branch: refs/heads/master
