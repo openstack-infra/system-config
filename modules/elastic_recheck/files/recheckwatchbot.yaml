@@ -1,4 +1,6 @@
 openstack-qa:
+    projects:
+      - all
     events:
       - positive
       - negative
