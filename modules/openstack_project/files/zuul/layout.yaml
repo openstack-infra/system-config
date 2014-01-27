@@ -785,6 +785,10 @@ projects:
       - gate-grenade-dsvm-neutron-forward
       - neutron-upstream-translation-update
       - check-neutron-dsvm-functional
+      - experimental-tempest-dsvm-neutron
+      - experimental-tempest-dsvm-neutron-pg
+      - experimental-tempest-dsvm-neutron-isolated
+      - experimental-tempest-dsvm-neutron-pg-isolated
     pre-release:
       - neutron-tarball
     release:

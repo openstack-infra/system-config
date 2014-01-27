@@ -37,6 +37,13 @@ providers:
         setup: prepare_node_devstack.sh
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
+      - name: devstack-precise-saucy-kernel
+        base-image: 'Ubuntu 12.04 LTS (Precise Pangolin)'
+        min-ram: 8192
+        name-filter: 'Performance'
+        setup: prepare_node_devstack_new_kernel.sh
+        username: jenkins
+        private-key: /home/nodepool/.ssh/id_rsa
   - name: rax-ord
     region-name: 'ORD'
     service-type: 'compute'
