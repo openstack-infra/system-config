@@ -234,6 +234,10 @@ jobs:
     voting: false
   - name: gate-tripleo-deploy
     voting: false
+  - name: check-tempest-dsvm-ironic-nv
+    voting: false
+  - name: check-tempest-dsvm-ironic-postgres-nv
+    voting: false
   - name: ^(gate|check)-devstack-dsvm-cells$
     voting: false
   - name: ^(gate|check)-gantt-python2(6|7)$
@@ -680,11 +684,12 @@ projects:
       - name: openstack-server-publish-jobs
     check:
       - gate-ironic-requirements
-    gate:
-      - gate-ironic-requirements
-    experimental:
       - check-tempest-dsvm-ironic
       - check-tempest-dsvm-ironic-postgres
+    gate:
+      - gate-ironic-requirements
+      - gate-tempest-dsvm-ironic
+      - gate-tempest-dsvm-ironic-postgres
     post:
       - ironic-upstream-translation-update
     pre-release:
@@ -1855,6 +1860,8 @@ projects:
       - gate-tempest-dsvm-large-ops
       - gate-tempest-dsvm-neutron-large-ops
       - check-grenade-dsvm
+      - check-tempest-dsvm-ironic-nv
+      - check-tempest-dsvm-ironic-postgres-nv
     gate:
       - gate-tempest-requirements
       - gate-tempest-pep8
@@ -1875,8 +1882,6 @@ projects:
       - gate-tempest-dsvm-savanna-postgres-full
       - gate-tempest-dsvm-savanna-neutron
       - gate-tempest-dsvm-trove-full
-      - check-tempest-dsvm-ironic
-      - check-tempest-dsvm-ironic-postgres
       - check-tempest-dsvm-neutron-isolated
       - check-tempest-dsvm-neutron-pg-isolated
     post:
@@ -2099,6 +2104,8 @@ projects:
       - check-grenade-dsvm-forward
       - check-swift-dsvm-functional
       - check-devstack-dsvm-neutron
+      - check-tempest-dsvm-ironic-nv
+      - check-tempest-dsvm-ironic-postgres-nv
     gate:
       - gate-devstack-bash8
       - gate-tempest-dsvm-full
@@ -2279,6 +2286,8 @@ projects:
       - check-devstack-dsvm-cells-havana
       - check-tempest-dsvm-cells-havana
       - check-tempest-dsvm-cells-full-havana
+      - check-tempest-dsvm-ironic-nv
+      - check-tempest-dsvm-ironic-postgres-nv
     gate:
       - gate-tempest-dsvm-full
       - gate-tempest-dsvm-postgres-full

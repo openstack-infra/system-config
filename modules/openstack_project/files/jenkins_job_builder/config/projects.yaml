@@ -1586,6 +1586,16 @@
       - python-jobs
       - openstack-publish-jobs
       - translation-jobs
+      - '{pipeline}-tempest-dsvm-ironic{branch-designator}':
+          pipeline: check
+          node: devstack-precise
+          branch-designator: '-nv'
+          branch-override: default
+      - '{pipeline}-tempest-dsvm-ironic-postgres{branch-designator}':
+          pipeline: check
+          node: devstack-precise
+          branch-designator: '-nv'
+          branch-override: default
 
 - project:
     name: python-ironicclient
