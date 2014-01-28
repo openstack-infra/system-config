@@ -19,13 +19,17 @@
 class openstackid (
   $git_source_repo = 'https://git.openstack.org/openstack-infra/openstackid',
   $site_admin_password = '',
-  $mysql_host = '',
-  $mysql_user = '',
-  $mysql_password = '',
+  $id_mysql_host = '',
+  $id_mysql_user = '',
+  $id_mysql_password = '',
   $id_db_name = '',
+  $ss_mysql_host = '',
+  $ss_mysql_user = '',
+  $ss_mysql_password = '',
   $ss_db_name = '',
   $redis_port = '',
   $redis_host = '',
+  $redis_password = '',
   $vhost_name = $::fqdn,
   $robots_txt_source = '',
   $serveradmin = "webmaster@${::fqdn}",
@@ -37,29 +41,26 @@ class openstackid (
   $ssl_key_file_contents = '', # If left empty puppet will not create file.
   $ssl_chain_file_contents = '', # If left empty puppet will not create file.
   $httpd_acceptorthreads = '',
+  $id_log_error_to_email = '',
+  $id_log_error_from_email = '',
+  $id_environment = 'dev',
+  $id_hostname = $::fqdn,
+  $id_recaptcha_public_key = '',
+  $id_recaptcha_private_key = '',
+  $id_recaptcha_template = '',
 ) {
 
-  vcsrepo { '/opt/openstackid':
-    ensure   => latest,
-    provider => git,
-    revision => 'master',
-    source   => $git_source_repo,
-  }
-
-  # we need PHP 5.4 or greather
-  include apt
-  apt::ppa { 'ppa:ondrej/php5-oldstable': }
-
   # php packages needed for openid server
-  package {
-    [
+  $php5_packages = [
       'php5-common',
       'php5-curl',
       'php5-cli',
       'php5-json',
       'php5-mcrypt',
       'php5-mysql',
-    ]:
+    ]
+
+  package { $php5_packages:
     require => Exec[apt_update],
   }
 
@@ -87,60 +88,54 @@ class openstackid (
     ensure  => present,
     content => template('openstackid/database.php.erb'),
     owner   => 'root',
-    group   => 'openstackid',
+    group   => 'www-data',
     mode    => '0640',
     require => [
       File['/etc/openstackid'],
-      Group['openstackid'],
     ]
   }
 
-  file { '/srv/openstackid':
-    ensure => directory,
-    owner  => 'root',
-    group  => 'root',
-    mode   => '0755',
+  file { '/etc/openstackid/log.php':
+      ensure  => present,
+      content => template('openstackid/log.php.erb'),
+      owner   => 'root',
+      group   => 'www-data',
+      mode    => '0640',
+      require => [
+        File['/etc/openstackid'],
+      ]
   }
 
-  file { '/srv/openstackid/app':
+  file { '/etc/openstackid/environment.php':
+      ensure  => present,
+      content => template('openstackid/environment.php.erb'),
+      owner   => 'root',
+      group   => 'www-data',
+      mode    => '0640',
+      require => [
+        File['/etc/openstackid'],
+      ]
+  }
+
+  file { '/etc/openstackid/recaptcha.php':
+        ensure  => present,
+        content => template('openstackid/recaptcha.php.erb'),
+        owner   => 'root',
+        group   => 'www-data',
+        mode    => '0640',
+        require => [
+          File['/etc/openstackid'],
+        ]
+  }
+
+  $docroot_dirs = [ '/srv/openstackid', '/srv/openstackid/w',
+    '/srv/openstackid/w/public']
+
+  file { $docroot_dirs:
     ensure  => directory,
     owner   => 'root',
     group   => 'root',
     mode    => '0755',
-    require => File['/srv/openstackid'],
-  }
-
-  file { '/srv/openstackid/app/config':
-    ensure  => directory,
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0755',
-    require => File['/srv/openstackid/app'],
-  }
-
-  file { '/srv/openstackid/app/config/dev':
-    ensure  => directory,
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0755',
-    require => File['/srv/openstackid/app/config'],
-  }
-
-  file { '/srv/openstackid/app/config/dev/database.php':
-    ensure  => link,
-    target  => '/etc/openstackid/database.php',
-    require => [
-      File['/srv/openstackid/app/config/dev'],
-      File['/etc/openstackid/database.php'],
-    ],
-  }
-
-  file { '/srv/openstackid/public':
-    ensure  => directory,
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0755',
-    require => File['/srv/openstackid'],
   }
 
   include apache
@@ -148,11 +143,11 @@ class openstackid (
   include apache::php
   apache::vhost { $vhost_name:
     port     => 443,
-    docroot  => '/srv/openstackid/public',
+    docroot  => '/srv/openstackid/w/public',
     priority => '50',
     template => 'openstackid/vhost.erb',
     ssl      => true,
-    require  => File['/srv/openstackid/public'],
+    require  => File[$docroot_dirs],
   }
   a2mod { 'rewrite':
     ensure => present,
@@ -194,14 +189,29 @@ class openstackid (
     }
   }
 
-  if $robots_txt_source != '' {
-    file { '/srv/openstackid/public/robots.txt':
-      owner   => 'root',
-      group   => 'root',
-      mode    => '0644',
-      source  => $robots_txt_source,
-      require => File['/srv/openstackid/public'],
-    }
+  deploy { 'deploytool':
+  }
+
+  file { '/opt/deploy/conf.d/openstackid.conf':
+    content => template('openstackid/openstackid.conf.erb'),
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0644',
+    require => Deploy['deploytool'],
+  }
+
+  exec { 'deploy-site':
+    path      => '/usr/bin:/bin:/usr/local/bin',
+    command   => '/opt/deploy/deploy.sh init openstackid',
+    onlyif    => '/opt/deploy/deploy.sh status openstackid | grep N/A',
+    logoutput => on_failure,
+    require   => [
+      File['/opt/deploy/conf.d/openstackid.conf'],
+      Apache::Vhost[$vhost_name],
+      File['/etc/openstackid/recaptcha.php'],
+      File['/etc/openstackid/database.php'],
+      File['/etc/openstackid/log.php'],
+      Package[$php5_packages] ],
   }
 
 }
