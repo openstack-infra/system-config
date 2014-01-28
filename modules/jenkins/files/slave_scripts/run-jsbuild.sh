@@ -20,6 +20,8 @@ project=$3
 source /usr/local/jenkins/slave_scripts/functions.sh
 check_variable_org_project "$org" "$project" "$0"
 
+source /usr/local/jenkins/slave_scripts/select-mirror.sh $org $project
+
 rm -f dist/*.tar.gz
 
 venv=grunt
