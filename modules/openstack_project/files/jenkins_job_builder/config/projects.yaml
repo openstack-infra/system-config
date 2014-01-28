@@ -1069,9 +1069,9 @@
 
     jobs:
       - gate-{name}-js-unittests
-      - 'storyboard-webclient-release-{branch-designator}':
+      - '{name}-js-release-{branch-designator}':
           branch-designator: 'master'
-      - 'storyboard-webclient-release-{branch-designator}':
+      - '{name}-js-release-{branch-designator}':
           branch-designator: 'branch'
 
 

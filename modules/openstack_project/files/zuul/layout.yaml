@@ -2655,9 +2655,9 @@ projects:
     gate:
       - gate-storyboard-webclient-js-unittests
     post:
-      - storyboard-webclient-release-branch
+      - storyboard-webclient-js-release-branch
     release:
-      - storyboard-webclient-release-master
+      - storyboard-webclient-js-release-master
 
   - name: openstack-infra/tripleo-ci
     check:
