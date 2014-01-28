@@ -2656,7 +2656,7 @@ projects:
 
   - name: openstack-infra/tripleo-ci
     check:
-      - gate-noop
+      - gate-tripleo-deploy
     gate:
       - gate-noop
 
