@@ -19,12 +19,18 @@
 
 mkdir -p ~/cache/files
 mkdir -p ~/cache/pip
-# Copied from devstack script, seems reasonable to keep and later
-# build upon as needed
-sudo DEBIAN_FRONTEND=noninteractive apt-get \
-  --option "Dpkg::Options::=--force-confold" \
-  --assume-yes install build-essential python-dev \
-  linux-headers-virtual linux-headers-`uname -r`
+
+if [ -f /usr/bin/yum ]; then
+    sudo yum -y install python-devel make automake gcc gcc-c++ kernel-devel redhat-lsb-core
+elif [ -f /usr/bin/apt-get ]; then
+    sudo DEBIAN_FRONTEND=noninteractive apt-get \
+      --option "Dpkg::Options::=--force-confold" \
+      --assume-yes install build-essential python-dev \
+      linux-headers-virtual linux-headers-`uname -r`
+else
+    echo "Unsupported distro."
+    exit 1
+fi
 
 # tripleo-gate runs with two networks - the public access network and eth1
 # pointing at the in-datacentre L2 network where we can talk to the test

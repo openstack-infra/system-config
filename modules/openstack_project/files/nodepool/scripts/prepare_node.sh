@@ -19,6 +19,10 @@
 HOSTNAME=$1
 
 sudo hostname $1
+# Fedora 20 image doesn't come with wget
+if [ -f /usr/bin/yum ]; then
+    sudo yum -y install wget
+fi
 wget https://git.openstack.org/cgit/openstack-infra/config/plain/install_puppet.sh
 sudo bash -xe install_puppet.sh
 sudo git clone https://review.openstack.org/p/openstack-infra/config.git \
