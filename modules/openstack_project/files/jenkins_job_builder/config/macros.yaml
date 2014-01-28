@@ -137,6 +137,11 @@
       - shell: "/usr/local/jenkins/slave_scripts/run-selenium.sh {github-org} {project}"
 
 - builder:
+    name: js-build
+    builders:
+      - shell: "/usr/local/jenkins/slave_scripts/run-jsbuild.sh {command} {github-org} {project}"
+
+- builder:
     name: python26
     builders:
       - shell: "/usr/local/jenkins/slave_scripts/run-unittests.sh 26 {github-org} {project}"
