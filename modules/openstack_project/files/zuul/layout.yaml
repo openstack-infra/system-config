@@ -186,7 +186,6 @@ project-templates:
       - gate-{name}-tox-checkdeletions
       - gate-{name}-tox-checkbuild
     gate:
-      - gate-{name}-tox-checkniceness
       - gate-{name}-tox-checksyntax
       - gate-{name}-tox-checkdeletions
       - gate-{name}-tox-checkbuild
