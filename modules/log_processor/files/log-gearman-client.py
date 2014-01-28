@@ -86,6 +86,7 @@ class EventProcessor(threading.Thread):
         fields["build_name"] = event.get("name", "UNKNOWN")
         fields["build_status"] = event["build"].get("status", "UNKNOWN")
         fields["build_node"] = event["build"].get("node_name", "UNKNOWN")
+        fields["build_master"] = event["build"].get("host_name", "UNKNOWN")
         parameters = event["build"].get("parameters", {})
         fields["project"] = parameters.get("ZUUL_PROJECT", "UNKNOWN")
         fields["build_uuid"] = parameters.get("ZUUL_UUID", "UNKNOWN")
