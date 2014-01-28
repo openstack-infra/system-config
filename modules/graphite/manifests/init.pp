@@ -53,7 +53,7 @@ class graphite(
   vcsrepo { '/opt/whisper':
     ensure   => latest,
     provider => git,
-    revision => '0.9.x',
+    revision => 'master',
     source   => 'https://github.com/graphite-project/whisper.git',
   }
 
