@@ -19,13 +19,17 @@
 class openstackid (
   $git_source_repo = 'https://git.openstack.org/openstack-infra/openstackid',
   $site_admin_password = '',
-  $mysql_host = '',
-  $mysql_user = '',
-  $mysql_password = '',
+  $id_mysql_host = '',
+  $id_mysql_user = '',
+  $id_mysql_password = '',
   $id_db_name = '',
+  $ss_mysql_host = '',
+  $ss_mysql_user = '',
+  $ss_mysql_password = '',
   $ss_db_name = '',
   $redis_port = '',
   $redis_host = '',
+  $redis_password = '',
   $vhost_name = $::fqdn,
   $robots_txt_source = '',
   $serveradmin = "webmaster@${::fqdn}",
@@ -37,14 +41,14 @@ class openstackid (
   $ssl_key_file_contents = '', # If left empty puppet will not create file.
   $ssl_chain_file_contents = '', # If left empty puppet will not create file.
   $httpd_acceptorthreads = '',
+  $id_log_error_to_email = '',
+  $id_log_error_from_email = '',
+  $id_environment = 'dev',
+  $id_hostname = $::fqdn,
+  $id_recaptcha_public_key = '',
+  $id_recaptcha_private_key = '',
+  $id_recaptcha_template = '',
 ) {
-
-  vcsrepo { '/opt/openstackid':
-    ensure   => latest,
-    provider => git,
-    revision => 'master',
-    source   => $git_source_repo,
-  }
 
   # we need PHP 5.4 or greather
   include apt
@@ -95,6 +99,30 @@ class openstackid (
     ]
   }
 
+  file { '/etc/openstackid/log.php':
+      ensure  => present,
+      content => template('openstackid/log.php.erb'),
+      owner   => 'root',
+      group   => 'openstackid',
+      mode    => '0640',
+      require => [
+        File['/etc/openstackid'],
+        Group['openstackid'],
+      ]
+  }
+
+  file { '/etc/openstackid/recaptcha.php':
+        ensure  => present,
+        content => template('openstackid/recaptcha.php.erb'),
+        owner   => 'root',
+        group   => 'openstackid',
+        mode    => '0640',
+        require => [
+          File['/etc/openstackid'],
+          Group['openstackid'],
+        ]
+  }
+
   file { '/srv/openstackid':
     ensure => directory,
     owner  => 'root',
@@ -102,13 +130,34 @@ class openstackid (
     mode   => '0755',
   }
 
-  file { '/srv/openstackid/app':
+  file { '/srv/openstackid/bootstrap':
     ensure  => directory,
     owner   => 'root',
     group   => 'root',
     mode    => '0755',
     require => File['/srv/openstackid'],
   }
+
+  file { '/srv/openstackid/bootstrap/start.php':
+        ensure  => present,
+        content => template('openstackid/start.php.erb'),
+        owner   => 'root',
+        group   => 'openstackid',
+        mode    => '0640',
+        require => [
+          File['/srv/openstackid/bootstrap'],
+          Group['openstackid'],
+        ]
+  }
+
+  file { '/srv/openstackid/app':
+      ensure  => directory,
+      owner   => 'root',
+      group   => 'root',
+      mode    => '0755',
+      require => File['/srv/openstackid'],
+  }
+
 
   file { '/srv/openstackid/app/config':
     ensure  => directory,
@@ -118,7 +167,48 @@ class openstackid (
     require => File['/srv/openstackid/app'],
   }
 
-  file { '/srv/openstackid/app/config/dev':
+  file { '/srv/openstackid/app/config/packages':
+      ensure  => directory,
+      owner   => 'root',
+      group   => 'root',
+      mode    => '0755',
+      require => File['/srv/openstackid/app/config'],
+  }
+
+  file { '/srv/openstackid/app/config/packages/greggilbert':
+        ensure  => directory,
+        owner   => 'root',
+        group   => 'root',
+        mode    => '0755',
+        require => File['/srv/openstackid/app/config/packages'],
+  }
+
+  file { '/srv/openstackid/app/config/packages/greggilbert/recaptcha':
+        ensure  => directory,
+        owner   => 'root',
+        group   => 'root',
+        mode    => '0755',
+        require => File['/srv/openstackid/app/config/packages/greggilbert'],
+  }
+
+  file { "/srv/openstackid/app/config/packages/greggilbert/recaptcha/${id_environment}":
+          ensure  => directory,
+          owner   => 'root',
+          group   => 'root',
+          mode    => '0755',
+          require => File['/srv/openstackid/app/config/packages/greggilbert/recaptcha'],
+  }
+
+  file { "/srv/openstackid/app/config/packages/greggilbert/recaptcha/${id_environment}/config.php":
+      ensure  => link,
+      target  => '/etc/openstackid/recaptcha.php',
+      require => [
+        File["/srv/openstackid/app/config/packages/greggilbert/recaptcha/${id_environment}"],
+        File['/etc/openstackid/recaptcha.php'],
+      ],
+  }
+
+  file { "/srv/openstackid/app/config/${id_environment}":
     ensure  => directory,
     owner   => 'root',
     group   => 'root',
@@ -126,13 +216,22 @@ class openstackid (
     require => File['/srv/openstackid/app/config'],
   }
 
-  file { '/srv/openstackid/app/config/dev/database.php':
+  file { "/srv/openstackid/app/config/${id_environment}/database.php":
     ensure  => link,
     target  => '/etc/openstackid/database.php',
     require => [
-      File['/srv/openstackid/app/config/dev'],
+      File["/srv/openstackid/app/config/${id_environment}"],
       File['/etc/openstackid/database.php'],
     ],
+  }
+
+  file { "/srv/openstackid/app/config/${id_environment}/log.php":
+      ensure  => link,
+      target  => '/etc/openstackid/log.php',
+      require => [
+        File["/srv/openstackid/app/config/${id_environment}"],
+        File['/etc/openstackid/log.php'],
+      ],
   }
 
   file { '/srv/openstackid/public':
