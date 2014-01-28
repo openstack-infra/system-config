@@ -41,7 +41,6 @@ class openstack_project::eavesdrop (
         '#openstack-climate',
         '#openstack-dev',
         '#openstack-dns',
-        '#openstack-gate',
         '#openstack-infra',
         '#openstack-ironic',
         '#openstack-marconi',
