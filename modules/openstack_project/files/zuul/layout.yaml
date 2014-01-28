@@ -4065,29 +4065,19 @@ projects:
       - gate-taskflow-python26
       - gate-taskflow-python27
       - gate-taskflow-python33
-      - gate-taskflow-tox-py26-sa7-ev
-      - gate-taskflow-tox-py27-ev
-      - gate-taskflow-tox-py27-sa7
-      - gate-taskflow-tox-py27-sa7-ev
-      - gate-taskflow-tox-py27-sa8
-      - gate-taskflow-tox-py27-sa8-ev
-      - gate-taskflow-tox-py27-sa9
-      - gate-taskflow-tox-py27-sa9-ev
-      - gate-taskflow-tox-py33-sa9
+      - gate-taskflow-tox-py26-sa7-mysql
+      - gate-taskflow-tox-py27-sa8-mysql
+      - gate-taskflow-tox-py26-sa9-mysql
+      - gate-taskflow-tox-py27-sa9-mysql
     gate:
       - gate-taskflow-pep8
       - gate-taskflow-python26
       - gate-taskflow-python27
       - gate-taskflow-python33
-      - gate-taskflow-tox-py26-sa7-ev
-      - gate-taskflow-tox-py27-ev
-      - gate-taskflow-tox-py27-sa7
-      - gate-taskflow-tox-py27-sa7-ev
-      - gate-taskflow-tox-py27-sa8
-      - gate-taskflow-tox-py27-sa8-ev
-      - gate-taskflow-tox-py27-sa9
-      - gate-taskflow-tox-py27-sa9-ev
-      - gate-taskflow-tox-py33-sa9
+      - gate-taskflow-tox-py26-sa7-mysql
+      - gate-taskflow-tox-py27-sa8-mysql
+      - gate-taskflow-tox-py26-sa9-mysql
+      - gate-taskflow-tox-py27-sa9-mysql
     post:
       - taskflow-coverage
       - taskflow-branch-tarball

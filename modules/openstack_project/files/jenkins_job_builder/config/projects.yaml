@@ -1660,24 +1660,16 @@
     jobs:
       - python-jobs
       - pypi-jobs
+      # For anyone running without eventlet
       - gate-{name}-tox-{envlist}:
-          envlist: py26-sa7-ev # For RHEL6.x/CENTOS6.x
+          envlist: py26-sa7-mysql
       - gate-{name}-tox-{envlist}:
-          envlist: py27-ev
+          envlist: py27-sa8-mysql
+      # For anyone running the latest without eventlet
       - gate-{name}-tox-{envlist}:
-          envlist: py27-sa7
+          envlist: py26-sa9-mysql
       - gate-{name}-tox-{envlist}:
-          envlist: py27-sa7-ev
-      - gate-{name}-tox-{envlist}:
-          envlist: py27-sa8
-      - gate-{name}-tox-{envlist}:
-          envlist: py27-sa8-ev
-      - gate-{name}-tox-{envlist}:
-          envlist: py27-sa9
-      - gate-{name}-tox-{envlist}:
-          envlist: py27-sa9-ev
-      - gate-{name}-tox-{envlist}:
-          envlist: py33-sa9 # For anyone running on newest
+          envlist: py27-sa9-mysql
 
 - project:
     name: cl-openstack-client
