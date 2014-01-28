@@ -11,6 +11,7 @@ python email-stats.py -p openstack/cinder -o out/cinder.csv
 python email-stats.py -p openstack/ceilometer -o out/ceilometer.csv
 python email-stats.py -p openstack/heat -o out/heat.csv
 python email-stats.py -p openstack/trove -o out/trove.csv
+python email-stats.py -p openstack/tuskar-ui -o out/tuskar-ui.csv
 python email-stats.py -p openstack/ironic -o out/ironic.csv
 python email-stats.py -p openstack/savanna -o out/savanna.csv
 python email-stats.py -p openstack/marconi -o out/marconi.csv
@@ -108,7 +109,6 @@ python email-stats.py -p openstack/tripleo-heat-templates -o out/tripleo-heat-te
 python email-stats.py -p openstack/tripleo-image-elements -o out/tripleo-image-elements.csv
 python email-stats.py -p openstack/tripleo-incubator -o out/tripleo-incubator.csv
 python email-stats.py -p openstack/tuskar -o out/tuskar.csv
-python email-stats.py -p openstack/tuskar-ui -o out/tuskar-ui.csv
 python email-stats.py -p openstack/python-tuskarclient -o out/python-tuskarclient.csv
 
 # Confirmed non-code contributors
