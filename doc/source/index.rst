@@ -24,6 +24,7 @@ Contents:
    * :doc:`third_party`
    * :doc:`stackforge`
    * :doc:`running-your-own`
+   * :doc:`running-your-own`
 
 .. toctree::
    :maxdepth: 2
@@ -32,6 +33,7 @@ Contents:
    test-infra-requirements
    sysadmin
    systems
+   openstackid
 
 .. toctree::
    :hidden:
