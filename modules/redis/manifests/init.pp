@@ -18,8 +18,9 @@
 
 class redis(
   $redis_port = '6379',
-  $redis_max_memory = '1gb',
   $redis_bind = '127.0.0.1',
+  $redis_password = '',
+  $redis_max_memory = '1gb',
   $redis_bin_dir = '/usr/bin',
   $version = '2.2.12',
 ) {
