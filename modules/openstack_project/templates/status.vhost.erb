@@ -29,6 +29,12 @@ NameVirtualHost <%= vhost_name %>:<%= port %>
   </Location>
 
   Alias /reviews /srv/static/reviewday
+  <Directory /srv/static/reviewday>
+      AllowOverride None
+      Order allow,deny
+      allow from all
+  </Directory>
+
   Alias /release /srv/static/release
 
   <Directory <%= docroot %>>
