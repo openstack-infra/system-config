@@ -15,7 +15,6 @@ At a Glance
 
 :Hosts:
   * ci-puppetmaster.openstack.org
-  * http://puppet-dashboard.openstack.org:3000/
 :Puppet:
   * :file:`modules/openstack_project/manifests/puppetmaster.pp`
 :Projects:
