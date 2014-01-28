@@ -412,6 +412,8 @@ jobs:
     voting: false
   - name: ^(gate|check)-tempest-dsvm-trove-full$
     voting: false
+  - name: gate-keystone-python33
+    voting: false
   - name: gate-marconi-python33
     voting: false
   - name: gate-python-ceilometerclient-python33
@@ -705,6 +707,7 @@ projects:
       - name: periodic-havana
     check:
       - gate-keystone-requirements
+      - gate-keystone-python33
       - check-tempest-dsvm-full
       - check-tempest-dsvm-postgres-full
       - check-tempest-dsvm-neutron
