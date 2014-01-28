@@ -2034,6 +2034,9 @@ projects:
       - openstack-api-quick-start
       - openstack-api-site
       - openstack-api-ref
+      - manuals-upstream-translation-update
+    periodic:
+      - manuals-propose-translation-update
 
   - name: openstack/openstack-manuals
     check:
