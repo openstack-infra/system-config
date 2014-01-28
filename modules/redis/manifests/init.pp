@@ -18,14 +18,14 @@
 
 class redis(
   $redis_port = '6379',
-  $redis_max_memory = '1gb',
   $redis_bind = '127.0.0.1',
-  $redis_bin_dir = '/usr/bin',
+  $redis_password = '',
+  $redis_max_memory = '1gb',
   $version = '2.2.12',
 ) {
 
   package {'redis-server':
-    ensure  => installed,
+    ensure  => present,
   }
 
   case $version {
@@ -43,31 +43,20 @@ class redis(
     }
   }
 
-  file { '/etc/init.d/redis-server':
-    ensure  => present,
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0755',
-    require => Package['redis-server'],
-    content => template('redis/init_script.erb'),
-  }
-
   file { '/etc/redis/redis.conf':
-    ensure  => present,
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0644',
-    content => template("redis/${redis_conf_file}"),
-    require => Package['redis-server'],
-    notify  => Service['redis-server'],
-  }
+      ensure  => present,
+      owner   => 'root',
+      group   => 'root',
+      mode    => '0644',
+      replace => true,
+      content => template("redis/${redis_conf_file}"),
+      require => Package['redis-server'],
+    }
 
-  service { 'redis-server':
-    ensure     => running,
-    enable     => true,
-    hasstatus  => true,
-    hasrestart => true,
-    require    => [ File['/etc/redis/redis.conf'],  File['/etc/init.d/redis-server'], Package['redis-server'] ],
-  }
+    service { 'redis-server':
+      ensure     => running,
+      require    => Package['redis-server'],
+      subscribe  => File['/etc/redis/redis.conf'],
+    }
 
 }
