@@ -722,8 +722,11 @@ node 'openstackid-dev.openstack.org' {
   class { 'openstack_project::openstackid_dev':
     sysadmins            => hiera('sysadmins'),
     site_admin_password  => hiera('openstackid_dev_site_admin_password'),
-    mysql_host           => hiera('openstackid_dev_mysql_host'),
-    mysql_password       => hiera('openstackid_dev_mysql_password'),
+    id_mysql_host        => hiera('openstackid_dev_id_mysql_host'),
+    id_mysql_password    => hiera('openstackid_dev_id_mysql_password'),
+    ss_mysql_host        => hiera('openstackid_dev_ss_mysql_host'),
+    ss_mysql_password    => hiera('openstackid_dev_ss_mysql_password'),
+    redis_password       => hiera('openstackid_dev_redis_password'),
   }
 }
 
