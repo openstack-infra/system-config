@@ -60,10 +60,17 @@ openstack-doc:
       - change-merged
       - x-vrif-minus-2
     projects:
+      - openstack/api-site
+      - openstack/compute-api
+      - openstack/database-api
+      - openstack/identity-api
+      - openstack/image-api
+      - openstack/netconn-api
+      - openstack/object-api
       - openstack/openstack-doc-tools
       - openstack/openstack-manuals
       - openstack/operations-guide
-      - openstack/api-site
+      - openstack/volume-api
       - stackforge/clouddocs-maven-plugin
     branches:
       - master
