@@ -91,6 +91,7 @@ class EventProcessor(threading.Thread):
         fields["build_uuid"] = parameters.get("ZUUL_UUID", "UNKNOWN")
         fields["build_queue"] = parameters.get("ZUUL_PIPELINE", "UNKNOWN")
         fields["build_ref"] = parameters.get("ZUUL_REF", "UNKNOWN")
+        fields["build_branch"] = parameters.get("ZUUL_BRANCH", "UNKNOWN")
         if parameters.get("ZUUL_CHANGE"):
             fields["build_change"] = parameters.get("ZUUL_CHANGE", "UNKNOWN")
             fields["build_patchset"] = parameters.get("ZUUL_PATCHSET",
