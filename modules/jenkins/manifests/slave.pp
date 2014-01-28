@@ -258,6 +258,12 @@ class jenkins::slave(
       require    => Database_user['openstack_citest@localhost'],
     }
 
+    database_grant { 'openstack_citest@localhost':
+      privileges => ['CREATE', 'DROP'],
+      provider   => 'mysql',
+      require    => Database_user['openstack_citest@localhost'],
+    }
+
     class { 'postgresql::server':
       postgres_password => 'insecure_slave',
       manage_firewall   => false,
