@@ -5,6 +5,9 @@ class openstack_project::slave_template (
   $ssh_key = $openstack_project::jenkins_ssh_key
 ) inherits openstack_project {
   class { 'openstack_project::template':
+    # Port 8000 from the devstack neutron public net to allow
+    # nova servers to reach heat-api-cfn
+    rules4                    => ['-p tcp --dport 8000 -s 172.24.4.0/24 -j ACCEPT'],
     iptables_public_tcp_ports => [],
     install_users             => $install_users,
   }
