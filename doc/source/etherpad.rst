@@ -60,4 +60,13 @@ Browse to the original pad's URL and you should now see the fresh
 welcome message boilerplate for a new pad. Check the pad's history and
 note that it has no authors and no prior revisions.
 
+Incompatible Behaviour
+----------------------
+
+If an etherpad consumer is browsing to the etherpad using a chrome
+browser with an extension called Accents Plus installed, the etherpad
+will add infinite empty lines to the bottom of the etherpad. We
+recommend disabling this extension while viewing etherpads with chrome.
+  * http://www.chromeextensions.org/other/accents-plus/#.UtghyfiZg5k
+
 .. _HTTP API: https://github.com/ether/etherpad-lite/wiki/HTTP-API
