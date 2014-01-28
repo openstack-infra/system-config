@@ -17,14 +17,24 @@
 class openstack_project::openstackid_dev (
   $sysadmins = [],
   $site_admin_password = '',
-  $mysql_host = '',
-  $mysql_user = 'openstackid',
-  $mysql_password = '',
+  $id_mysql_host = '',
+  $id_mysql_user = 'openstackid',
+  $id_mysql_password = '',
   $id_db_name = 'openstackid_openid_dev',
+  $ss_mysql_host = '',
+  $ss_mysql_user = 'openstackid',
+  $ss_mysql_password = '',
   $ss_db_name = 'openstackid_silverstripe_dev',
   $redis_port = '6378',
   $redis_max_memory = '1gb',
-  $redis_bind = '127.0.0.1'
+  $redis_bind = '127.0.0.1',
+  $redis_password = '',
+  $id_recaptcha_public_key = '',
+  $id_recaptcha_private_key = '',
+  $id_recaptcha_template = '',
+  $id_log_error_to_email = '',
+  $id_log_error_from_email = '',
+  $id_environment = 'dev',
 ) {
 
   realize (
@@ -37,14 +47,24 @@ class openstack_project::openstackid_dev (
   }
 
   class { 'openstackid':
-    site_admin_password => $site_admin_password,
-    mysql_host          => $mysql_host,
-    mysql_user          => $mysql_user,
-    mysql_password      => $mysql_password,
-    id_db_name          => $id_db_name,
-    ss_db_name          => $ss_db_name,
-    redis_port          => $redis_port,
-    redis_host          => $redis_bind,
+    site_admin_password      => $site_admin_password,
+    id_mysql_host            => $id_mysql_host,
+    id_mysql_user            => $id_mysql_user,
+    id_mysql_password        => $id_mysql_password,
+    id_db_name               => $id_db_name,
+    ss_mysql_host            => $ss_mysql_host,
+    ss_mysql_user            => $ss_mysql_user,
+    ss_mysql_password        => $ss_mysql_password,
+    ss_db_name               => $ss_db_name,
+    redis_port               => $redis_port,
+    redis_host               => $redis_bind,
+    redis_password           => $redis_password,
+    id_recaptcha_public_key  => $id_recaptcha_public_key,
+    id_recaptcha_private_key => $id_recaptcha_private_key,
+    id_recaptcha_template    => $id_recaptcha_template,
+    id_log_error_to_email    => $id_log_error_to_email,
+    id_log_error_from_email  => $id_log_error_from_email,
+    id_environment           => $id_environment,
   }
 
   # redis (custom module written by tipit)
@@ -52,6 +72,7 @@ class openstack_project::openstackid_dev (
     redis_port       => $redis_port,
     redis_max_memory => $redis_max_memory,
     redis_bind       => $redis_bind,
+    redis_password   => $redis_password,
   }
 
 }
