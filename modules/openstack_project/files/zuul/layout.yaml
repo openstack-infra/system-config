@@ -2052,6 +2052,10 @@ projects:
       - openstack-install-deploy-guide-opensuse
       - openstack-install-deploy-guide-ubuntu
       - openstack-openstack-install-ubuntu-old
+      - openstack-install-deploy-guide-debian-ja
+      - openstack-install-deploy-guide-fedora-ja
+      - openstack-install-deploy-guide-opensuse-ja
+      - openstack-install-deploy-guide-ubuntu-ja
       - openstack-security-guide
       - openstack-user-guide
       - openstack-user-guide-admin
