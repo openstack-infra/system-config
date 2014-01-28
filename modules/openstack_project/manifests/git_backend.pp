@@ -78,7 +78,7 @@ class openstack_project::git_backend (
     owner   => 'cgit',
     group   => 'cgit',
     mode    => '0444',
-    content => template('openstack_project/review.projects.yaml.erb'),
+    source  => 'puppet:///modules/openstack_project/review.projects.yaml',
     replace => true,
   }
 
