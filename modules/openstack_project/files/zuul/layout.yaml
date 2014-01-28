@@ -2086,6 +2086,9 @@ projects:
     post:
       - openstack-operations-guide
       - openstack-operations-guide-ja
+      - manuals-upstream-translation-update
+    periodic:
+      - manuals-propose-translation-update
 
 # Section: OpenStack development projects
 
