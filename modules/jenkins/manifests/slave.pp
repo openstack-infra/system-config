@@ -270,6 +270,12 @@ class jenkins::slave(
       require    => Database_user['openstack_citest@localhost'],
     }
 
+    database_grant { 'openstack_citest@localhost':
+      privileges => ['CREATE', 'DROP'],
+      provider   => 'mysql',
+      require    => Database_user['openstack_citest@localhost'],
+    }
+
     # The puppetlabs postgres module does not manage the postgres user
     # and group for us. Create them here to ensure concat can create
     # dirs and files owned by this user and group.
