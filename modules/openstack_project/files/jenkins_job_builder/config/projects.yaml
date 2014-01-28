@@ -297,6 +297,7 @@
 
     jobs:
       - compute-api-v2.0
+      - openstack-doc-jobs
 
 
 - project:
@@ -559,6 +560,7 @@
 
     jobs:
       - identity-api-v2.0
+      - openstack-doc-jobs
 
 
 - project:
@@ -569,6 +571,7 @@
     doc-publisher-site: docs.openstack.org
 
     jobs:
+      - openstack-doc-jobs
       - image-api-v1.1
 
 
@@ -606,6 +609,7 @@
 
     jobs:
       - network-api-v1
+      - openstack-doc-jobs
 
 
 - project:
@@ -666,6 +670,7 @@
 
     jobs:
       - object-api-v1.0
+      - openstack-doc-jobs
 
 
 - project:
@@ -1908,8 +1913,7 @@
     node: precise
 
     jobs:
-      - gate-{name}-tox-{envlist}:
-          envlist: checkniceness
+      - openstack-doc-jobs
 
 - project:
     name: manila
@@ -2056,8 +2060,27 @@
       - '{name}-tarball'
       - pypi-jobs
 
+
 - project:
     name: api-site
+    github-org: openstack
+    node: precise
+
+    jobs:
+      - openstack-doc-jobs
+
+
+- project:
+    name: database-api
+    github-org: openstack
+    node: precise
+
+    jobs:
+      - openstack-doc-jobs
+
+
+- project:
+    name: volume-api
     github-org: openstack
     node: precise
 

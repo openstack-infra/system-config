@@ -360,9 +360,7 @@ jobs:
     branch: ^(?!stable/grizzly).*$
   - name: gate-openstack-manuals-validate-build
     branch: ^(?!stable/grizzly).*$
-  - name: gate-operations-guide-tox-checkniceness
-    voting: false
-  - name: gate-api-site-tox-checkniceness
+  - name: ^gate-.*-tox-checkniceness$
     voting: false
 # Deprecated documentation targets:
   - name: openstack-block-storage-admin-old
@@ -1969,59 +1967,45 @@ projects:
 # Section: OpenStack API projects
 
   - name: openstack/compute-api
-    check:
-      - gate-noop
-    gate:
-      - gate-noop
+    template:
+      - name: openstack-doc-gate
     post:
       - compute-api-v2.0
       - compute-api-v2.0-wadl
 
   - name: openstack/database-api
-    check:
-      - gate-noop
-    gate:
-      - gate-noop
+    template:
+      - name: openstack-doc-gate
 
   - name: openstack/identity-api
-    check:
-      - gate-noop
-    gate:
-      - gate-noop
+    template:
+      - name: openstack-doc-gate
     post:
       - identity-api-v2.0
 
   - name: openstack/image-api
-    check:
-      - gate-noop
-    gate:
-      - gate-noop
+    template:
+      - name: openstack-doc-gate
     post:
       - image-api-v1.1
       - image-api-v2.0
 
   - name: openstack/netconn-api
-    check:
-      - gate-noop
-    gate:
-      - gate-noop
+    template:
+      - name: openstack-doc-gate
     post:
       - network-api-v1
       - network-api-v2
 
   - name: openstack/object-api
-    check:
-      - gate-noop
-    gate:
-      - gate-noop
+    template:
+      - name: openstack-doc-gate
     post:
       - object-api-v1.0
 
   - name: openstack/volume-api
-    check:
-      - gate-noop
-    gate:
-      - gate-noop
+    template:
+      - name: openstack-doc-gate
     post:
       - block-api-v2.0
 
@@ -2078,11 +2062,8 @@ projects:
       - manuals-propose-translation-update
 
   - name: openstack/operations-guide
-    check:
-      - gate-operations-guide-tox-checkniceness
-      - gate-openstack-manuals-operations-guide
-    gate:
-      - gate-openstack-manuals-operations-guide
+    template:
+      - name: openstack-doc-gate
     post:
       - openstack-operations-guide
       - openstack-operations-guide-ja

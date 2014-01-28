@@ -1,29 +1,3 @@
-- job:
-    name: gate-openstack-manuals-operations-guide
-    project-type: maven
-    node: precise
-
-    prebuilders:
-      - gerrit-git-prep
-
-    maven:
-      maven-name: Maven3
-      root-module:
-        group-id: org.openstack.docs
-        artifact-id: openstack-guide
-      root-pom: doc/openstack-ops/pom.xml
-      goals: 'clean generate-sources -B'
-
-    publishers:
-      - console-log
-      - scp:
-          site: 'static.openstack.org'
-          files:
-            - target: 'docs-draft/$LOG_PATH/ops/'
-              source: 'doc/openstack-ops/target/docbkx/webhelp/**'
-              keep-hierarchy: true
-              copy-after-failure: true
-
 # in zuul/layout.yaml specified to only run against stable/grizzly
 - job:
     name: gate-openstack-manuals-validate
