@@ -448,6 +448,18 @@ node 'storyboard.openstack.org' {
   }
 }
 
+node 'storyboard-dev.openstack.org' {
+  class { 'openstack_project::storyboard':
+    sysadmins           => hiera('sysadmins'),
+    mysql_host          => hiera('storyboard_dev_db_host'),
+    mysql_user          => hiera('storyboard_dev_db_user'),
+    mysql_password      => hiera('storyboard_dev_db_password'),
+  }
+  realize (
+    User::Virtual::Localuser['krotscheck'],
+  )
+}
+
 # A machine to serve static content.
 node 'static.openstack.org' {
   class { 'openstack_project::static':
