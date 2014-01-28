@@ -1,15 +1,4 @@
 - job-template:
-    name: gate-openstack-manuals-validate-{check}
-    node: precise
-
-    builders:
-      - gerrit-git-prep
-      - shell: "./tools/test.py --check-{check}"
-
-    publishers:
-      - console-log
-
-- job-template:
     name: 'openstack-{manual}'
     project-type: maven
     node: precise
