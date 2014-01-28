@@ -1,0 +1,13 @@
+Code-Review+2: James E. Blair <corvus@inaugust.com>
+Verified+2: Jenkins
+Approved+1: Clark Boylan <cboylan@sapwetik.org>
+Code-Review+2: Clark Boylan <cboylan@sapwetik.org>
+Code-Review+1: Matthias Runge <mrunge@redhat.com>
+Code-Review+1: David Lyle <david.lyle@hp.com>
+Code-Review+1: Sergey Lukjanov <slukjanov@mirantis.com>
+Code-Review+1: Jaromir Coufal <jcoufal@redhat.com>
+Submitted-by: Jenkins
+Submitted-at: Tue, 28 Jan 2014 04:12:34 +0000
+Reviewed-on: https://review.openstack.org/68264
+Project: openstack-infra/config
+Branch: refs/heads/master
