@@ -1131,6 +1131,11 @@
           node: 'devstack-precise || devstack-precise-check'
           branch-designator: ''
           branch-override: default
+      - devstack-jobs:
+          pipeline: experimental
+          node: 'devstack-precise-saucy-kernel'
+          branch-designator: ''
+          branch-override: default
       # Stable check jobs for testing devstack gate
       - devstack-jobs:
           pipeline: check
