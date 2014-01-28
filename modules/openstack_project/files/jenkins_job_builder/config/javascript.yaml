@@ -31,10 +31,13 @@
               source: 'reports/**'
               keep-hierarchy: true
               copy-after-failure: true
+
+              # We're uploading the compiled app as a pre-release sanity check,
+              # much like we do with docs builds.
             - target: 'docs-draft/$LOG_PATH'
               source: 'dist/**'
               keep-hierarchy: true
-              copy-after-failure: true
+              copy-after-failure: false
     node: '{node}'
 
 - job-template:
@@ -55,9 +58,14 @@
       - shell: |
           #!/bin/bash -xe
 
+          # Clean/create a tarball directory
+          rm -rf tarballs
+          mkdir -p tarballs
+
+          # Create an archive tarball.
           tar -czf {name}-$PROJECT_VER.tar.gz dist/
-          cp {name}-$PROJECT_VER.tar.gz dist/{name}-latest.tar.gz
-          mv {name}-$PROJECT_VER.tar.gz dist/
+          cp {name}-$PROJECT_VER.tar.gz tarballs/{name}-latest.tar.gz
+          mv {name}-$PROJECT_VER.tar.gz tarballs/
     publishers:
       - console-log
       - coverage-log
@@ -68,7 +76,8 @@
               source: 'reports/**'
               keep-hierarchy: true
               copy-after-failure: true
-      - tarball:
-          project: '{name}'
-          site: '{tarball-site}'
+            - target: 'tarballs/{name}/'
+              source: 'tarballs/*.tar.gz'
+              keep-hierarchy: false
+              copy-after-failure: false
     node: '{node}'
