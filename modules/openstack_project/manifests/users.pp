@@ -80,4 +80,14 @@ class openstack_project::users {
     realname => 'Khai Do',
     sshkeys  => "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDJqB//ilMx7Y1tKzviAn/6yeXSRAi2VnaGN0/bfaa5Gciz+SWt8vAEAUE99fzuqeJ/ezjkuIXDFm/sjZr93y567a6sDT6CuhVUac1FZIhXRTs0J+pBOiENbwQ7RZxbkyNHQ0ndvtz3kBA1DF5D+MDkluBlIWb085Z31rFJmetsB2Zb8s1FKUjHVk/skyeKSj0qAK5KN3Wme6peWhYjwBiM0gUlxIsEZM6JLYdoPIbD5B8GYAktMN2FvJU9LgKGL93jLZ/vnMtoQIHHAG/85NdPURL1Zbi92Xlxbm4LkbcHnruBdmtPfSgaEupwJ+zFmK264OHD7QFt10ztPMbAFCFn khaido@khaido-HP-EliteBook-Folio-9470m\n",
   }
+
+  @user::virtual::localuser { 'krotscheck':
+    realname => 'Michael Krotscheck',
+    sshkeys  => "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQClPQkxx2Gw2i7yO9NIfFu8OV202GA4EE2x9q46FwOKr8YWSEa/kxXiZEXLM+oe6NZv6UbYW99FXXr083dYjsm2iWwAUR4gj4DL0OtDyNjK1sx0D5x4bJDuw+LzcXN5hbJLPuXBMAMAr3Ik4gVzbnhhebRslVsGueX2K4v0T67oaoRZqj8cV0/IFVhGMlzrvVcnMY5WiR/eoOvuuep0KfVPA0IaHtAD4welqlhlqOmTrt4uQ+bQWth0mg7oEDUxD6mEwr1VcfAuAZ5ClX2P2hhH9VecmG9QvmWYDWeEqfTHcSS3mFY39t2SJ2EHctzJ3LhCQGRQ/rHlHlRVmMcppC/x krotscheck@Superego\n",
+  }
+
+  @user::virtual::localuser { 'ruhe':
+    realname => 'Ruslan Kamaldinov',
+    sshkeys  => "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDKB3vmSPiymW4LV78a23dgLyydKV/iSI2JTGMb8TpTPEydS3cKG8BjDDLe0MaPTa6Kbu0KDZ/v5rC5RqbZdO3cmsWUS7AiaDmbxUlY4SPgYsxaB6DuQvNJWMXf7bQZAqsZCacUofwWophMwQc3VKw0/4zN0rYj88L+npFdb6ZB/uFDfS0Vi1G0VmfDeBnM8EZusMe906GMXvbDjYo+z1k/jIPCZ7IrUe79R/+07ScO0F71/qI27aCQ8flkF4jioay8oox5S5+8VZmOIg8QBw44FbMI01i+pCSS7D9lqg2eIUOYYeiyjZNyay0y7YFzvpcbOCglvL9CX8Ugt6V3FGFH ruhe@intergalactic\n",
+  }
 }
