@@ -14,7 +14,7 @@
 
 # By default Redis does not run as a daemon. Use 'yes' if you need it.
 # Note that Redis will write a pid file in /var/run/redis.pid when daemonized.
-daemonize no
+daemonize yes
 
 # When running daemonized, Redis writes a pid file in /var/run/redis.pid by
 # default. You can specify a custom pid file location here.
@@ -61,7 +61,7 @@ tcp-keepalive 0
 # verbose (many rarely useful info, but not a mess like the debug level)
 # notice (moderately verbose, what you want in production probably)
 # warning (only very important / critical messages are logged)
-loglevel notice
+logfile /var/log/redis/redis-server.log
 
 # Specify the log file name. Also 'stdout' can be used to force
 # Redis to log on the standard output. Note that if you use standard
@@ -255,7 +255,9 @@ slave-priority 100
 # 150k passwords per second against a good box. This means that you should
 # use a very strong password otherwise it will be very easy to break.
 #
-# requirepass foobared
+<% if redis_password != "" %>
+requirepass <%= redis_password %>
+<% end %>
 
 # Command renaming.
 #
