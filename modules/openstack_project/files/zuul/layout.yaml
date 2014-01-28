@@ -430,6 +430,8 @@ jobs:
     voting: false
   - name: gate-python-tuskarclient-python33
     voting: false
+  - name: gate-python-troveclient-pypy
+    voting: false
   - name: gate-mistral-python33
     voting: false
   - name: gate-mistral-extra-python33
