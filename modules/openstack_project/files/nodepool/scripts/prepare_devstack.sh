@@ -16,20 +16,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-mkdir -p ~/cache/files
-mkdir -p ~/cache/pip
-
-if [ -f /usr/bin/yum ]; then
-    sudo yum -y install python-devel make automake gcc gcc-c++ kernel-devel redhat-lsb-core
-elif [ -f /usr/bin/apt-get ]; then
-    sudo DEBIAN_FRONTEND=noninteractive apt-get \
-      --option "Dpkg::Options::=--force-confold" \
-      --assume-yes install build-essential python-dev \
-      linux-headers-virtual linux-headers-`uname -r`
-else
-    echo "Unsupported distro."
-    exit 1
-fi
+./prepare_dependencies.sh
 
 rm -rf ~/workspace-cache
 mkdir -p ~/workspace-cache

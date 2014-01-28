@@ -17,19 +17,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-mkdir -p ~/cache/files
-mkdir -p ~/cache/pip
-
-# Enable precise-backports so we can install jq
-sudo sed -i -e 's/# \(deb .*precise-backports main \)/\1/g' /etc/apt/sources.list
-sudo apt-get update
-
-# Copied from devstack script, seems reasonable to keep and later
-# build upon as needed
-sudo DEBIAN_FRONTEND=noninteractive apt-get \
-  --option "Dpkg::Options::=--force-confold" \
-  --assume-yes install build-essential python-dev python-pip \
-  linux-headers-virtual linux-headers-`uname -r`
+./prepare_dependencies.sh
 
 # toci scripts use both of these
 sudo pip install gear os-apply-config
