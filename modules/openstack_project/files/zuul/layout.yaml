@@ -2351,6 +2351,8 @@ projects:
       - gate-gerrit-unittests
     post:
       - gerrit-package
+    periodic:
+      - periodic-javamelody-gerrit-plugin-build
 
   - name: openstack-infra/gerritbot
     check:
