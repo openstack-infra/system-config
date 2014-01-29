@@ -20,6 +20,7 @@ import gear
 import json
 import logging
 import os
+import re
 import signal
 import threading
 import yaml
@@ -66,6 +67,10 @@ class EventProcessor(threading.Thread):
         for fileopts in self.files:
             output = {}
             source_url, out_event = self._parse_event(event, fileopts)
+            job_filter = fileopts.get('job-filter')
+            if (job_filter and
+                not re.match(job_filter, out_event['fields']['build_name'])):
+                continue
             output['source_url'] = source_url
             output['retry'] = fileopts.get('retry-get', False)
             output['event'] = out_event
