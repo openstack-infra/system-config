@@ -306,6 +306,8 @@ jobs:
 # For Gerrit ver 2.8.x and later (using buck)
   - name: ^.*gerrit.*buck$
     branch: ^openstack/(?!2\.4).*$
+  - name: ^.*gerrit-plugin.*build$
+    branch: ^openstack/(?!2\.4).*$
   - name: gate-nova-pylint
     voting: false
   - name: gate-cinder-pylint
@@ -2400,6 +2402,8 @@ projects:
     post:
       - gerrit-package
       - gerrit-package-buck
+    periodic:
+      - periodic-javamelody-gerrit-plugin-build
 
   - name: openstack-infra/gerritbot
     check:
