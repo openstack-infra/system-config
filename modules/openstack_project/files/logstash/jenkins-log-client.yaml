@@ -127,3 +127,155 @@ source-files:
   - name: logs/syslog.txt
     tags:
       - syslog
+# Grenade new logs below
+  - name: logs/new/screen-c-api.txt
+    tags:
+      - screen
+      - oslofmt
+    job-filter: '.*grenade.*'
+  - name: logs/new/screen-c-sch.txt
+    tags:
+      - screen
+      - oslofmt
+    job-filter: '.*grenade.*'
+  - name: logs/new/screen-c-vol.txt
+    tags:
+      - screen
+      - oslofmt
+    job-filter: '.*grenade.*'
+  - name: logs/new/screen-g-api.txt
+    tags:
+      - screen
+      - oslofmt
+    job-filter: '.*grenade.*'
+  - name: logs/new/screen-g-reg.txt
+    tags:
+      - screen
+      - oslofmt
+    job-filter: '.*grenade.*'
+  - name: logs/new/screen-key.txt
+    tags:
+      - screen
+      - keystonefmt
+    job-filter: '.*grenade.*'
+  - name: logs/new/screen-n-api.txt
+    tags:
+      - screen
+      - oslofmt
+    job-filter: '.*grenade.*'
+  - name: logs/new/screen-n-cond.txt
+    tags:
+      - screen
+      - oslofmt
+    job-filter: '.*grenade.*'
+  - name: logs/new/screen-n-cpu.txt
+    tags:
+      - screen
+      - oslofmt
+    job-filter: '.*grenade.*'
+  - name: logs/new/screen-n-crt.txt
+    tags:
+      - screen
+      - oslofmt
+    job-filter: '.*grenade.*'
+  - name: logs/new/screen-n-net.txt
+    tags:
+      - screen
+      - oslofmt
+    job-filter: '.*grenade.*'
+  - name: logs/new/screen-n-obj.txt
+    tags:
+      - screen
+      - oslofmt
+    job-filter: '.*grenade.*'
+  - name: logs/new/screen-s-account.txt
+    tags:
+      - screen
+      - apachecombined
+    job-filter: '.*grenade.*'
+  - name: logs/new/screen-s-container.txt
+    tags:
+      - screen
+      - apachecombined
+    job-filter: '.*grenade.*'
+  - name: logs/new/screen-s-object.txt
+    tags:
+      - screen
+      - apachecombined
+    job-filter: '.*grenade.*'
+# Grenade old logs below
+  - name: logs/old/screen-c-api.txt
+    tags:
+      - screen
+      - oslofmt
+    job-filter: '.*grenade.*'
+  - name: logs/old/screen-c-sch.txt
+    tags:
+      - screen
+      - oslofmt
+    job-filter: '.*grenade.*'
+  - name: logs/old/screen-c-vol.txt
+    tags:
+      - screen
+      - oslofmt
+    job-filter: '.*grenade.*'
+  - name: logs/old/screen-g-api.txt
+    tags:
+      - screen
+      - oslofmt
+    job-filter: '.*grenade.*'
+  - name: logs/old/screen-g-reg.txt
+    tags:
+      - screen
+      - oslofmt
+    job-filter: '.*grenade.*'
+  - name: logs/old/screen-key.txt
+    tags:
+      - screen
+      - keystonefmt
+    job-filter: '.*grenade.*'
+  - name: logs/old/screen-n-api.txt
+    tags:
+      - screen
+      - oslofmt
+    job-filter: '.*grenade.*'
+  - name: logs/old/screen-n-cond.txt
+    tags:
+      - screen
+      - oslofmt
+    job-filter: '.*grenade.*'
+  - name: logs/old/screen-n-cpu.txt
+    tags:
+      - screen
+      - oslofmt
+    job-filter: '.*grenade.*'
+  - name: logs/old/screen-n-crt.txt
+    tags:
+      - screen
+      - oslofmt
+    job-filter: '.*grenade.*'
+  - name: logs/old/screen-n-net.txt
+    tags:
+      - screen
+      - oslofmt
+    job-filter: '.*grenade.*'
+  - name: logs/old/screen-n-obj.txt
+    tags:
+      - screen
+      - oslofmt
+    job-filter: '.*grenade.*'
+  - name: logs/old/screen-s-account.txt
+    tags:
+      - screen
+      - apachecombined
+    job-filter: '.*grenade.*'
+  - name: logs/old/screen-s-container.txt
+    tags:
+      - screen
+      - apachecombined
+    job-filter: '.*grenade.*'
+  - name: logs/old/screen-s-object.txt
+    tags:
+      - screen
+      - apachecombined
+    job-filter: '.*grenade.*'
