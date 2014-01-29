@@ -474,6 +474,10 @@ jobs:
 # group, projects are sorted (mostly) alphabetically.
 projects:
 
+  - name: javamelody-gerrit-plugin
+    periodic:
+      - periodic-javamelody-gerrit-plugin-build
+
 # Section: OpenStack server projects
 
   - name: openstack/ceilometer
