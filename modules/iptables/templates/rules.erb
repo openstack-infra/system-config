@@ -14,15 +14,15 @@
 -A openstack-INPUT -m udp -p udp --dport 161 -s 50.57.120.246 -j ACCEPT
 -A openstack-INPUT -m udp -p udp --dport 161 -s 198.61.215.188 -j ACCEPT
 # Public TCP ports
-<% public_tcp_ports.each do |port| -%>
+<% @public_tcp_ports.each do |port| -%>
 -A openstack-INPUT -m state --state NEW -m tcp -p tcp --dport <%= port %> -j ACCEPT
 <% end -%>
 # Public UDP ports
-<% public_udp_ports.each do |port| -%>
+<% @public_udp_ports.each do |port| -%>
 -A openstack-INPUT -m udp -p udp --dport <%= port %> -j ACCEPT
 <% end -%>
 # Per-host rules
-<% rules4.each do |rule| -%>
+<% @rules4.each do |rule| -%>
 -A openstack-INPUT <%= rule %>
 <% end -%>
 -A openstack-INPUT -j REJECT --reject-with icmp-host-prohibited
