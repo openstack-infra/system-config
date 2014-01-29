@@ -57,14 +57,12 @@ EOF
     rm -rf $PROJECT_DIR
     git clone ssh://$USERNAME@review.openstack.org:29418/$PROJECT.git
     pushd $PROJECT_DIR
+    git fetch origin
 
     # make sure the project even has this branch
     if git branch -a | grep -q "^  remotes/origin/$BRANCH$" ; then
-        git checkout $BRANCH
+        git checkout origin/${BRANCH}
         git review -s
-        if [ -n "$change_id" ] ; then
-            git review -d $change_id
-        fi
         popd
 
         python update.py $PROJECT_DIR
@@ -73,15 +71,22 @@ EOF
         if ! git diff --exit-code HEAD ; then
             # Commit and review
             git_args="-a -F-"
-            if [ -n "$change_id" ] ; then
-                git_args="--amend $git_args"
-            fi
             git commit $git_args <<EOF
 $COMMIT_MSG
 EOF
-            git review -t $TOPIC $BRANCH
+            # Do error checking manually to ignore one class of failure.
+            set +e
+            OUTPUT=$(git review -t $TOPIC $BRANCH)
+            RET=$?
+            [[ "$RET" -eq "0" || "$OUTPUT" =~ "no new changes" ]]
+            SUCCESS=$?
+            [[ "$SUCCESS" -eq "0" && "$ALL_SUCCESS" -eq "0" ]]
+            ALL_SUCCESS=$?
+            set -e
         fi
     fi
 
     popd
 done
+
+exit $ALL_SUCCESS
