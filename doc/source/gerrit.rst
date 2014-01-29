@@ -343,6 +343,27 @@ Next, edit `project.config` to look like::
       pushMerge = group Continuous Integration Tools
   [access "refs/for/refs/zuul/*"]
       pushMerge = group Continuous Integration Tools
+  [label "Code-Review"]
+      function = MaxWithBlock
+      abbreviation = R
+      copyMinScore = true
+      copyAllScoresOnTrivialRebase = true
+      copyAllScoresIfNoCodeChange = true
+      value = -2 Do not submit
+      value = -1 I would prefer that you didn't submit this
+      value =  0 No score
+      value = +1 Looks good to me, but someone else must approve
+      value = +2 Looks good to me, approved
+  [label "Verified"]
+      function = MaxWithBlock
+      copyAllScoresOnTrivialRebase = true
+      copyAllScoresIfNoCodeChange = true
+      value = -2 Fails
+      value = -1 Doesn't seem to work
+      value =  0 No score
+      value = +1 Works for me
+      value = +2 Verified
+
 
 Now edit the groups file. The format is::
 
