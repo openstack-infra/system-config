@@ -2636,6 +2636,8 @@ projects:
     post:
       - gerrit-package
       - gerrit-package-buck
+    periodic:
+      - periodic-gerrit-plugin-javamelody-gerrit-plugin
 
   - name: openstack-infra/gerrit-powered-agenda
     check:
