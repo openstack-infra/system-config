@@ -2542,6 +2542,8 @@ projects:
     post:
       - gerrit-package
       - gerrit-package-buck
+    periodic:
+      - periodic-javamelody-gerrit-plugin-build
 
   - name: openstack-infra/gerritbot
     check:

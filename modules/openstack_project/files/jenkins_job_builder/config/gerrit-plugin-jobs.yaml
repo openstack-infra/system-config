@@ -1,0 +1,44 @@
+- job-template:
+    name: 'periodic-{name}-build'
+    node: '{node}'
+
+    wrappers:
+      - timeout:
+          timeout: 30
+          fail: true
+      - timestamps
+
+    scm:
+      - git:
+          url: '{gerrit-project}'
+          branches:
+            - '{gerrit-branch}'
+
+    builders:
+      - shell: |
+          #!/bin/bash -xe
+          rm -rf plugins/{plugin-name}
+          git clone -b {plugin-branch} {plugin-project} plugins/{plugin-name}
+      - shell: |
+          #!/bin/bash -xe
+          cd plugins/{plugin-name}
+          /usr/local/jenkins/slave_scripts/maven-properties.sh
+      - inject:
+          properties-file: maven.properties
+      - shell: |
+          #!/bin/bash -xe
+          buck clean
+          buck build plugins/{plugin-name}:{plugin-name}
+      - shell: "cp buck-out/gen/plugins/{plugin-name}/{plugin-name}.jar buck-out/gen/plugins/{plugin-name}/{plugin-name}-$PROJECT_VER.jar"
+
+    publishers:
+      - war:
+          site: '{tarball-site}'
+          warfile: 'buck-out/gen/plugins/{plugin-name}/{plugin-name}-${{PROJECT_VER}}.jar'
+          target: 'tarballs/ci/{name}'
+      - console-log
+
+- job-group:
+    name: gerrit-plugin-jobs
+    jobs:
+      - 'periodic-{name}-build'
