@@ -320,7 +320,11 @@ function format_change(change, change_queue) {
         }
         html += '<span class="jobwrapper"><span class="job">';
         if (job['url'] !== null) {
-            html += '<a href="'+job['url']+'">';
+            var job_url = job['url'];
+            if (job['result'] === null) {
+                job_url += '/console';
+            }
+            html += '<a href="'+job_url+'">';
         }
         html += job['name'];
         if (job['url'] !== null) {
