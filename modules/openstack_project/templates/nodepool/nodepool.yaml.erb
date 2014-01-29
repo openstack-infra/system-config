@@ -37,7 +37,7 @@ providers:
         setup: prepare_node_devstack.sh
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
-      - name: devstack-precise-saucy-kernel
+      - name: dsvm-precise-krnl
         base-image: 'Ubuntu 12.04 LTS (Precise Pangolin)'
         min-ram: 8192
         name-filter: 'Performance'
@@ -433,7 +433,7 @@ targets:
         min-ready: 3
         providers:
           - name: hpcloud-region-b
-      - name: devstack-precise-saucy-kernel
+      - name: dsvm-precise-krnl
         min-ready: 1
         providers:
           - name: rax-dfw

@@ -1133,7 +1133,7 @@
           branch-override: default
       - devstack-jobs:
           pipeline: experimental
-          node: 'devstack-precise-saucy-kernel'
+          node: 'dsvm-precise-krnl'
           branch-designator: ''
           branch-override: default
       # Stable check jobs for testing devstack gate
