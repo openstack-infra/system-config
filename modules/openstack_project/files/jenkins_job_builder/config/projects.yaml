@@ -1855,7 +1855,9 @@
         - object-storage-admin
 
     lang:
+        - de
         - ja
+        - ko_kr
 
     jobs:
       - gate-openstack-manuals-validate-{check}

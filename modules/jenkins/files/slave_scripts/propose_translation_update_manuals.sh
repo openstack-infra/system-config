@@ -66,7 +66,7 @@ do
     # Update the .pot file
     ./tools/generatepot ${DOCNAME}
     if [ -f ${DocFolder}/${DOCNAME}/locale/${DOCNAME}.pot ]
-    then 
+    then
         # Add all changed files to git
         git add ${DocFolder}/${DOCNAME}/locale/*
         # Set auto-local
@@ -77,11 +77,11 @@ do
     fi
 done
 
-if [ ! `git diff --cached --quiet HEAD --` ]
-then
+#if [ ! `git diff --cached --quiet HEAD --` ]
+#then
     # Push .pot changes to transifex
-    tx --debug --traceback push -s
-fi
+    #tx --debug --traceback push -s
+#fi
 
 # Pull all upstream translations
 tx pull -a

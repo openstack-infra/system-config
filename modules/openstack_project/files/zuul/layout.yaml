@@ -2065,11 +2065,19 @@ projects:
       - openstack-openstack-install-fedora-old
       - openstack-install-deploy-guide-opensuse
       - openstack-install-deploy-guide-ubuntu
+      - openstack-install-deploy-guide-debian-de
+      - openstack-install-deploy-guide-fedora-de
+      - openstack-install-deploy-guide-opensuse-de
+      - openstack-install-deploy-guide-ubuntu-de
       - openstack-openstack-install-ubuntu-old
       - openstack-install-deploy-guide-debian-ja
       - openstack-install-deploy-guide-fedora-ja
       - openstack-install-deploy-guide-opensuse-ja
       - openstack-install-deploy-guide-ubuntu-ja
+      - openstack-install-deploy-guide-debian-ko_kr
+      - openstack-install-deploy-guide-fedora-ko_kr
+      - openstack-install-deploy-guide-opensuse-ko_kr
+      - openstack-install-deploy-guide-ubuntu-ko_kr
       - openstack-security-guide
       - openstack-user-guide
       - openstack-user-guide-admin
