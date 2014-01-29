@@ -4,11 +4,13 @@
 timeout -k 2m 10m /usr/local/bin/update-blueprint patchset-created "$@"
 timeout -k 2m 10m /usr/local/bin/update-bug patchset-created "$@"
 timeout -k 2m 10m /usr/local/bin/notify-impact patchset-created "$@" --impact SecurityImpact --dest-address 'openstack-security@lists.openstack.org'
+<% if trivial_rebase_role_id -%>
 timeout -k 2m 10m /usr/local/bin/trivial-rebase \
     patchset-created \
     --whitespace \
     --private-key-path=<%= ssh_host_key %> \
     --role-user=<%= trivial_rebase_role_id %> "$@"
+<% end -%>
 <% if $ssh_welcome_rsa_key_contents != "" -%>
 timeout -k 2m 10m /usr/local/bin/welcome-message patchset-created --dryrun \
     --verbose welcome-message@review.openstack.org \
