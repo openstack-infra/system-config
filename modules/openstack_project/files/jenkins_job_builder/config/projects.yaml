@@ -137,6 +137,7 @@
 
     jobs:
       - python-jobs
+      - pypi-jobs
 
 - project:
     name: climate-nova
@@ -146,6 +147,7 @@
 
     jobs:
       - python-jobs
+      - pypi-jobs
 
 - project:
     name: python-climateclient
@@ -155,6 +157,7 @@
 
     jobs:
       - python-jobs
+      - pypi-jobs
 
 - project:
     name: config

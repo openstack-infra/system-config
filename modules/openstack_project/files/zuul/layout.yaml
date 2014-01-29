@@ -2829,6 +2829,16 @@ projects:
       - gate-climate-python27
       - gate-climate-requirements
       - gate-climate-devstack-dsvm
+    post:
+      - climate-branch-tarball
+    pre-release:
+      - climate-tarball
+    release:
+      - climate-tarball:
+        - climate-pypi-tarball:
+          - post-mirror-python26
+          - post-mirror-python27
+          - post-mirror-python33
 
   - name: stackforge/climate-nova
     check:
@@ -2841,6 +2851,16 @@ projects:
       - gate-climate-nova-python26
       - gate-climate-nova-python27
       - gate-climate-nova-requirements
+    post:
+      - climate-nova-branch-tarball
+    pre-release:
+      - climate-nova-tarball
+    release:
+      - climate-nova-tarball:
+        - climate-nova-pypi-tarball:
+          - post-mirror-python26
+          - post-mirror-python27
+          - post-mirror-python33
 
   - name: stackforge/cl-openstack-client
     check:
@@ -3798,6 +3818,16 @@ projects:
       - gate-python-climateclient-requirements
     gate:
       - gate-python-climateclient-requirements
+    post:
+      - python-climateclient-branch-tarball
+    pre-release:
+      - python-climateclient-tarball
+    release:
+      - python-climateclient-tarball:
+        - python-climateclient-pypi-tarball:
+          - post-mirror-python26
+          - post-mirror-python27
+          - post-mirror-python33
 
   - name: stackforge/python-designateclient
     check:
