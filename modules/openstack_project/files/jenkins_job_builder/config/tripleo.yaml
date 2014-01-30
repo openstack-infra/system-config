@@ -1,5 +1,5 @@
 - job:
-    name: 'gate-tripleo-deploy'
+    name: 'check-tripleo-seed-precise'
     node: 'tripleo-precise'
 
     wrappers:
@@ -18,6 +18,46 @@
           export DEVSTACK_GATE_EXERCISES=0
           export GEARDSERVER=192.168.1.1
           export DIB_COMMON_ELEMENTS="stackuser pypi-openstack"
+          export TRIPLEO_TEST=seed
+          function gate_hook {
+              bash -xe /opt/stack/new/tripleo-ci/toci_gate_test.sh
+          }
+          export -f gate_hook
+          cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
+          ./safe-devstack-vm-gate-wrap.sh
+      - link-logs
+
+    publishers:
+      - scp:
+          site: 'static.openstack.org'
+          files:
+            - target: 'logs/$LOG_PATH'
+              source: 'logs/**'
+              keep-hierarchy: false
+              copy-after-failure: true
+      - console-log
+
+- job:
+    name: 'check-tripleo-undercloud-precise'
+    node: 'tripleo-precise'
+
+    wrappers:
+      - timeout:
+          timeout: 125
+          fail: true
+      - timestamps
+
+    builders:
+      - devstack-checkout
+      - shell: |
+          #!/bin/bash -xe
+          export PYTHONUNBUFFERED=true
+          export DEVSTACK_GATE_TIMEOUT=120
+          export DEVSTACK_GATE_TEMPEST=0
+          export DEVSTACK_GATE_EXERCISES=0
+          export GEARDSERVER=192.168.1.1
+          export DIB_COMMON_ELEMENTS="stackuser pypi-openstack"
+          export TRIPLEO_TEST=undercloud
           function gate_hook {
               bash -xe /opt/stack/new/tripleo-ci/toci_gate_test.sh
           }
