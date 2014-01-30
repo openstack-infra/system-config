@@ -94,6 +94,13 @@ providers:
         setup: prepare_node_bare.sh
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
+      - name: devstack-precise-check
+        base-image: 'Ubuntu 12.04 LTS (Precise Pangolin) (PVHVM)'
+        min-ram: 8192
+        name-filter: 'Performance'
+        setup: prepare_node_devstack.sh
+        username: jenkins
+        private-key: /home/nodepool/.ssh/id_rsa
   - name: hpcloud-az1
     region-name: 'az-1.region-a.geo-1'
     service-type: 'compute'
@@ -250,9 +257,10 @@ targets:
           - name: hpcloud-az2
           - name: hpcloud-az3
       - name: devstack-precise-check
-        min-ready: 3
+        min-ready: 1
         providers:
           - name: hpcloud-region-b
+          - name: rax-iad
       - name: tripleo-precise
         min-ready: 1
         providers:
@@ -286,9 +294,10 @@ targets:
           - name: hpcloud-az2
           - name: hpcloud-az3
       - name: devstack-precise-check
-        min-ready: 3
+        min-ready: 1
         providers:
           - name: hpcloud-region-b
+          - name: rax-iad
       - name: tripleo-precise
         min-ready: 1
         providers:
@@ -318,9 +327,10 @@ targets:
           - name: hpcloud-az2
           - name: hpcloud-az3
       - name: devstack-precise-check
-        min-ready: 3
+        min-ready: 1
         providers:
           - name: hpcloud-region-b
+          - name: rax-iad
   - name: jenkins04
     jenkins:
       url: 'https://jenkins04.openstack.org/'
@@ -346,9 +356,10 @@ targets:
           - name: hpcloud-az2
           - name: hpcloud-az3
       - name: devstack-precise-check
-        min-ready: 3
+        min-ready: 1
         providers:
           - name: hpcloud-region-b
+          - name: rax-iad
   - name: jenkins05
     jenkins:
       url: 'https://jenkins05.openstack.org/'
@@ -374,9 +385,10 @@ targets:
           - name: hpcloud-az2
           - name: hpcloud-az3
       - name: devstack-precise-check
-        min-ready: 3
+        min-ready: 1
         providers:
           - name: hpcloud-region-b
+          - name: rax-iad
   - name: jenkins06
     jenkins:
       url: 'https://jenkins06.openstack.org/'
@@ -402,9 +414,10 @@ targets:
           - name: hpcloud-az2
           - name: hpcloud-az3
       - name: devstack-precise-check
-        min-ready: 3
+        min-ready: 1
         providers:
           - name: hpcloud-region-b
+          - name: rax-iad
   - name: jenkins07
     jenkins:
       url: 'https://jenkins07.openstack.org/'
@@ -430,9 +443,10 @@ targets:
           - name: hpcloud-az2
           - name: hpcloud-az3
       - name: devstack-precise-check
-        min-ready: 3
+        min-ready: 1
         providers:
           - name: hpcloud-region-b
+          - name: rax-iad
       - name: dsvm-precise-krnl
         min-ready: 1
         providers:
