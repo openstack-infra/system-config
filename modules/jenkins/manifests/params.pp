@@ -126,8 +126,8 @@ class jenkins::params {
       $unzip_package = 'unzip'
       $xslt_package = 'xsltproc'
       $xvfb_package = 'xvfb'
-      # For Tooz unit tests
-      $zookeeper_package = 'zookeeper'
+      # For [tooz, taskflow, nova] using zookeeper in unit tests
+      $zookeeper_package = 'zookeeperd'
       $cgroups_package = 'cgroup-bin'
       $cgroups_tools_package = ''
       $cgconfig_require = [
