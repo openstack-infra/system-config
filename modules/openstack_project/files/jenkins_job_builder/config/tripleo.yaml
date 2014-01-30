@@ -31,7 +31,7 @@
           site: 'static.openstack.org'
           files:
             - target: 'logs/$LOG_PATH'
-              source: '**/pip.log'
+              source: 'logs/**'
               keep-hierarchy: false
               copy-after-failure: true
       - console-log
