@@ -122,7 +122,6 @@ class jenkins::slave(
         require => Package[$::jenkins::params::jdk_package],
       }
 
-      # For Tooz unit tests
       package { $::jenkins::params::zookeeper_package:
         ensure => present,
       }
