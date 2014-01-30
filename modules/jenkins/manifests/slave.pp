@@ -230,13 +230,25 @@ class jenkins::slave(
   }
 
   if ($bare == false) {
-    class {'mysql::server':
-      config_hash =>  {
-        'root_password'  => 'insecure_slave',
-        'default_engine' => 'MyISAM',
-        'bind_address'   => '127.0.0.1',
+    if ($::operatingsystem == 'Fedora') and ($::operatingsystemrelease >= 19) {
+      class {'mysql::server':
+        config_hash =>  {
+          'root_password'  => 'insecure_slave',
+          'default_engine' => 'MyISAM',
+          'bind_address'   => '127.0.0.1',
+        },
+        package_name => 'community-mysql-server',
+      }
+    } else {
+      class {'mysql::server':
+        config_hash =>  {
+          'root_password'  => 'insecure_slave',
+          'default_engine' => 'MyISAM',
+          'bind_address'   => '127.0.0.1',
+        }
       }
     }
+
     include mysql::server::account_security
 
     mysql::db { 'openstack_citest':
