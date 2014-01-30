@@ -34,7 +34,7 @@ if cat /etc/*release | grep -e "Fedora" &> /dev/null; then
     yum update -y
 
     # NOTE: we preinstall lsb_release to ensure facter sets lsbdistcodename
-    yum install -y redhat-lsb-core git puppet
+    yum install -y redhat-lsb-core git puppet python-pip
 
     gem install hiera hiera-puppet
 
