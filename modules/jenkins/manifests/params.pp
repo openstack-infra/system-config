@@ -62,7 +62,9 @@ class jenkins::params {
         # mariadb packages.
         $mysql_dev_package = 'community-mysql-devel'
         $zookeeper_package = 'zookeeper'
+        $mysql_package = 'community-mysql'
         $cgroups_tools_package = 'libcgroup-tools'
+        $postgresql_dev_package = 'postgresql-devel'
         $cgconfig_require = [
           Package['cgroups'],
           Package['cgroups-tools'],
