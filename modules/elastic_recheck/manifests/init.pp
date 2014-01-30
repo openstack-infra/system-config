@@ -23,7 +23,8 @@ class elastic_recheck (
   # any commit. So we need to define commands in a way that
   # we can trigger an exec here, as well as on cron.
   $recheck_state_dir = '/var/lib/elastic-recheck'
-  $graph_cmd = 'elastic-recheck-graph /opt/elastic-recheck/queries -o graph-new.json && mv graph-new.json graph.json'
+  $graph_all_cmd = 'elastic-recheck-graph /opt/elastic-recheck/queries -o all-new.json && mv all-new.json all.json'
+  $graph_gate_cmd = 'elastic-recheck-graph /opt/elastic-recheck/queries -o gate-new.json -q gate && mv gate-new.json gate.json'
   $uncat_cmd = 'elastic-recheck-uncategorized -d /opt/elastic-recheck/queries -t /usr/local/share/elastic-recheck/templates -o uncategorized-new.html && mv uncategorized-new.html uncategorized.html'
 
   group { 'recheck':
@@ -45,8 +46,18 @@ class elastic_recheck (
     source   => 'https://git.openstack.org/openstack-infra/elastic-recheck',
   }
 
-  exec { 'run_er_graph':
-    command     => "er_safe_run.sh ${graph_cmd}",
+  exec { 'run_er_graph_all':
+    command     => "er_safe_run.sh ${graph_all_cmd}",
+    path        => '/usr/local/bin:/usr/bin:/bin/',
+    cwd         => $recheck_state_dir,
+    user        => 'recheck',
+    refreshonly => true,
+    require     => File['/usr/local/bin/er_safe_run.sh'],
+    subscribe   => Vcsrepo['/opt/elastic-recheck'],
+  }
+
+  exec { 'run_er_graph_gate_only':
+    command     => "er_safe_run.sh ${graph_gate_cmd}",
     path        => '/usr/local/bin:/usr/bin:/bin/',
     cwd         => $recheck_state_dir,
     user        => 'recheck',
