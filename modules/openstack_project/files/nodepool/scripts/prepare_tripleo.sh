@@ -19,6 +19,11 @@
 
 mkdir -p ~/cache/files
 mkdir -p ~/cache/pip
+
+# Enable precise-backports so we can install jq
+sudo sed -i -e 's/# \(deb .*precise-backports main \)/\1/g' /etc/apt/sources.list
+sudo apt-get update
+
 # Copied from devstack script, seems reasonable to keep and later
 # build upon as needed
 sudo DEBIAN_FRONTEND=noninteractive apt-get \
