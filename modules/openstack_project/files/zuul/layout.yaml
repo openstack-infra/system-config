@@ -235,7 +235,7 @@ jobs:
   - name: ^(gate|check)-tempest-dsvm-neutron-full$
     branch: ^(?!stable/grizzly).*$
     voting: false
-  - name: gate-tempest-dsvm-neutron-heat-slow
+  - name: ^(gate|check)-tempest-dsvm-neutron-heat-slow
     branch: ^(?!stable/grizzly).*$
     voting: false
   - name: check-tripleo-seed-precise
@@ -644,6 +644,7 @@ projects:
       - check-tempest-dsvm-neutron
       - gate-tempest-dsvm-large-ops
       - gate-tempest-dsvm-neutron-large-ops
+      - check-tempest-dsvm-neutron-heat-slow
     gate:
       - gate-heat-requirements
       - gate-devstack-dsvm-cells
@@ -840,6 +841,7 @@ projects:
       - gate-tempest-dsvm-neutron-large-ops
       - check-grenade-dsvm
       - gate-nova-pylint
+      - check-tempest-dsvm-neutron-heat-slow
     gate:
       - gate-nova-requirements
       - gate-devstack-dsvm-cells
@@ -1928,6 +1930,7 @@ projects:
       - check-tempest-dsvm-savanna-nv
       - check-tempest-dsvm-savanna-postgres-nv
       - check-tempest-dsvm-savanna-neutron-nv
+      - check-tempest-dsvm-neutron-heat-slow
     gate:
       - gate-tempest-requirements
       - gate-tempest-pep8
@@ -1940,7 +1943,6 @@ projects:
       - gate-tempest-dsvm-neutron-large-ops
       - gate-grenade-dsvm
     experimental:
-      - gate-tempest-dsvm-neutron-heat-slow
       - gate-grenade-dsvm-forward
       - gate-tempest-dsvm-neutron-full
       - gate-tempest-dsvm-trove-full
@@ -2156,6 +2158,7 @@ projects:
       - check-tempest-dsvm-neutron
       - gate-tempest-dsvm-large-ops
       - gate-tempest-dsvm-neutron-large-ops
+      - check-tempest-dsvm-neutron-heat-slow
       - check-grenade-dsvm
       - check-grenade-dsvm-forward
       - check-swift-dsvm-functional
@@ -2178,7 +2181,6 @@ projects:
       - gate-swift-dsvm-functional
     experimental:
       - check-tempest-dsvm-neutron-isolated
-      - gate-tempest-dsvm-neutron-heat-slow
       - gate-grenade-dsvm-forward
 
   - name: openstack-dev/grenade
