@@ -19,17 +19,28 @@
 
 class elastic_recheck::cron () {
   $er_state_path = $::elastic_recheck::recheck_state_dir
-  $graph_cmd = $::elastic_recheck::graph_cmd
+  $graph_all_cmd = $::elastic_recheck::graph_all_cmd
+  $graph_gate_cmd = $::elastic_recheck::graph_gate_cmd
   $uncat_cmd = $::elastic_recheck::uncat_cmd
 
-  cron { 'elastic-recheck':
+  cron { 'elastic-recheck-all':
     user        => 'recheck',
     minute      => '*/15',
     hour        => '*',
-    command     => "cd ${er_state_path} && er_safe_run.sh ${graph_cmd}",
+    command     => "cd ${er_state_path} && er_safe_run.sh ${graph_all_cmd}",
     environment => 'PATH=/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin',
     require     => Class['elastic_recheck']
   }
+
+  cron { 'elastic-recheck-gate':
+    user        => 'recheck',
+    minute      => '*/15',
+    hour        => '*',
+    command     => "sleep $((RANDOM\%60+90)) && cd ${er_state_path} && er_safe_run.sh ${graph_gate_cmd}",
+    environment => 'PATH=/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin',
+    require     => Class['elastic_recheck']
+  }
+
 
   cron { 'elastic-recheck-uncat':
     user        => 'recheck',
