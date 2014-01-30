@@ -228,7 +228,7 @@ jobs:
   - name: ^(gate|check)-tempest-dsvm-neutron-full$
     branch: ^(?!stable/grizzly).*$
     voting: false
-  - name: gate-tempest-dsvm-neutron-heat-slow
+  - name: ^(gate|check)-tempest-dsvm-neutron-heat-slow
     branch: ^(?!stable/grizzly).*$
     voting: false
   - name: gate-tripleo-deploy
@@ -627,6 +627,7 @@ projects:
       - check-tempest-dsvm-neutron
       - gate-tempest-dsvm-large-ops
       - gate-tempest-dsvm-neutron-large-ops
+      - check-tempest-dsvm-neutron-heat-slow
     gate:
       - gate-heat-requirements
       - gate-tempest-dsvm-full
@@ -634,6 +635,7 @@ projects:
       - gate-tempest-dsvm-neutron
       - gate-tempest-dsvm-large-ops
       - gate-tempest-dsvm-neutron-large-ops
+      - gate-tempest-dsvm-neutron-heat-slow
     experimental:
       - gate-devstack-dsvm-cells
     post:
@@ -822,6 +824,7 @@ projects:
       - check-grenade-dsvm
       - gate-devstack-dsvm-cells
       - gate-nova-pylint
+      - check-tempest-dsvm-neutron-heat-slow
     gate:
       - gate-nova-requirements
       - gate-tempest-dsvm-full
@@ -1875,6 +1878,7 @@ projects:
       - check-grenade-dsvm
       - check-tempest-dsvm-ironic-nv
       - check-tempest-dsvm-ironic-postgres-nv
+      - check-tempest-dsvm-neutron-heat-slow
     gate:
       - gate-tempest-requirements
       - gate-tempest-pep8
@@ -1887,7 +1891,6 @@ projects:
       - gate-tempest-dsvm-neutron-large-ops
       - gate-grenade-dsvm
     experimental:
-      - gate-tempest-dsvm-neutron-heat-slow
       - gate-grenade-dsvm-forward
       - gate-devstack-dsvm-cells
       - gate-tempest-dsvm-neutron-full
@@ -2106,6 +2109,7 @@ projects:
       - check-tempest-dsvm-neutron
       - gate-tempest-dsvm-large-ops
       - gate-tempest-dsvm-neutron-large-ops
+      - check-tempest-dsvm-neutron-heat-slow
       - check-grenade-dsvm
       - check-grenade-dsvm-forward
       - check-swift-dsvm-functional
@@ -2123,7 +2127,6 @@ projects:
       - gate-grenade-dsvm-forward
       - gate-swift-dsvm-functional
     experimental:
-      - gate-tempest-dsvm-neutron-heat-slow
       - gate-grenade-dsvm-forward
       - gate-devstack-dsvm-cells
 
