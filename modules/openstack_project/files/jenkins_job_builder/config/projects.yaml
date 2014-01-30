@@ -1840,6 +1840,7 @@
 
     manual:
       - admin-guide-cloud
+      - cli-reference
       - config-reference
       - glossary
       - image-guide
