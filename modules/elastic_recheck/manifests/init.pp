@@ -23,7 +23,7 @@ class elastic_recheck (
   # any commit. So we need to define commands in a way that
   # we can trigger an exec here, as well as on cron.
   $recheck_state_dir = '/var/lib/elastic-recheck'
-  $graph_cmd = 'elastic-recheck-graph /opt/elastic-recheck/queries -o graph-new.json && mv graph-new.json graph.json'
+  $graph_cmd = 'elastic-recheck-graph /opt/elastic-recheck/queries -o all-new.json && mv all-new.json all.json && elastic-recheck-graph /opt/elastic-recheck/queries -o gate-new.json -q gate && mv gate-new.json gate.json'
   $uncat_cmd = 'elastic-recheck-uncategorized -d /opt/elastic-recheck/queries -t /usr/local/share/elastic-recheck/templates -o uncategorized-new.html && mv uncategorized-new.html uncategorized.html'
 
   group { 'recheck':
