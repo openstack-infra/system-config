@@ -78,6 +78,13 @@ filter {
       add_field => { "logdate" => "%{timestamp}" }
       add_field => { "logmessage" => "%{verb} %{request} %{response}" }
     }
+  } else if "libvirtd" in [tags] {
+    grok {
+      # libvirtd grok filter adapted from
+      # https://github.com/OpenStratus/openstack-logstash/blob/master/agent.conf
+      match => { "message" => "%{TIMESTAMP_ISO8601:logdate}:%{SPACE}%{NUMBER:pid}:%{SPACE}%{LOGLEVEL:loglevel}%{SPACE}:%{SPACE}%{GREEDYDATA:logmessage}" }
+      add_field => { "received_at" => "%{@timestamp}" }
+    }
   } else if "syslog" in [tags] {
     grok {
       # Syslog grok filter adapted from

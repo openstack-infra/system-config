@@ -279,3 +279,6 @@ source-files:
       - screen
       - apachecombined
     job-filter: '.*grenade.*'
+  - name: logs/libvirtd.txt
+    tags:
+      - libvirtd
