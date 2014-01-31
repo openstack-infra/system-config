@@ -333,7 +333,7 @@ openstack-state-management:
       - change-merged
       - x-vrif-minus-2
     projects:
-      - stackforge/taskflow
+      - openstack/taskflow
     branches:
       - master
 
