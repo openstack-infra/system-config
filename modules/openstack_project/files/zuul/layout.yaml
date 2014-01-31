@@ -526,16 +526,12 @@ projects:
       - check-tempest-dsvm-full
       - check-tempest-dsvm-postgres-full
       - check-tempest-dsvm-neutron
-      - gate-tempest-dsvm-large-ops
-      - gate-tempest-dsvm-neutron-large-ops
       - check-grenade-dsvm
     gate:
       - gate-cinder-requirements
       - gate-tempest-dsvm-full
       - gate-tempest-dsvm-postgres-full
       - gate-tempest-dsvm-neutron
-      - gate-tempest-dsvm-large-ops
-      - gate-tempest-dsvm-neutron-large-ops
       - gate-grenade-dsvm
     experimental:
       - gate-grenade-dsvm-forward
@@ -629,15 +625,11 @@ projects:
       - check-tempest-dsvm-full
       - check-tempest-dsvm-postgres-full
       - check-tempest-dsvm-neutron
-      - gate-tempest-dsvm-large-ops
-      - gate-tempest-dsvm-neutron-large-ops
     gate:
       - gate-heat-requirements
       - gate-tempest-dsvm-full
       - gate-tempest-dsvm-postgres-full
       - gate-tempest-dsvm-neutron
-      - gate-tempest-dsvm-large-ops
-      - gate-tempest-dsvm-neutron-large-ops
     experimental:
       - gate-devstack-dsvm-cells
     post:
@@ -663,8 +655,6 @@ projects:
       - check-tempest-dsvm-full
       - check-tempest-dsvm-postgres-full
       - check-tempest-dsvm-neutron
-      - gate-tempest-dsvm-large-ops
-      - gate-tempest-dsvm-neutron-large-ops
       - check-grenade-dsvm
     gate:
       - gate-horizon-requirements
@@ -673,8 +663,6 @@ projects:
       - gate-tempest-dsvm-full
       - gate-tempest-dsvm-postgres-full
       - gate-tempest-dsvm-neutron
-      - gate-tempest-dsvm-large-ops
-      - gate-tempest-dsvm-neutron-large-ops
       - gate-grenade-dsvm
     experimental:
       - gate-grenade-dsvm-forward
@@ -997,8 +985,6 @@ projects:
       - check-tempest-dsvm-full
       - check-tempest-dsvm-postgres-full
       - check-tempest-dsvm-neutron
-      - gate-tempest-dsvm-large-ops
-      - gate-tempest-dsvm-neutron-large-ops
       - check-grenade-dsvm
     gate:
       - gate-python-cinderclient-requirements
@@ -1007,8 +993,6 @@ projects:
       - gate-tempest-dsvm-full
       - gate-tempest-dsvm-postgres-full
       - gate-tempest-dsvm-neutron
-      - gate-tempest-dsvm-large-ops
-      - gate-tempest-dsvm-neutron-large-ops
       - gate-grenade-dsvm
     experimental:
       - gate-grenade-dsvm-forward
@@ -1098,8 +1082,6 @@ projects:
       - check-tempest-dsvm-full
       - check-tempest-dsvm-postgres-full
       - check-tempest-dsvm-neutron
-      - gate-tempest-dsvm-large-ops
-      - gate-tempest-dsvm-neutron-large-ops
     gate:
       - gate-python-heatclient-requirements
       - gate-python-heatclient-pep8
@@ -1109,8 +1091,6 @@ projects:
       - gate-tempest-dsvm-full
       - gate-tempest-dsvm-postgres-full
       - gate-tempest-dsvm-neutron
-      - gate-tempest-dsvm-large-ops
-      - gate-tempest-dsvm-neutron-large-ops
     experimental:
       - gate-devstack-dsvm-cells
     post:
