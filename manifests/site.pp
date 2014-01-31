@@ -522,7 +522,7 @@ node 'zuul.openstack.org' {
 
 node 'zuul-dev.openstack.org' {
   class { 'openstack_project::zuul_dev':
-    gerrit_server        => 'review.openstack.org',
+    gerrit_server        => 'review-dev.openstack.org',
     gerrit_user          => 'zuul-dev',
     zuul_ssh_private_key => hiera('zuul_dev_ssh_private_key_contents'),
     url_pattern          => 'http://logs.openstack.org/{build.parameters[LOG_PATH]}',
