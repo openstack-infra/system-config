@@ -127,3 +127,6 @@ source-files:
   - name: logs/syslog.txt
     tags:
       - syslog
+  - name: logs/libvirtd.txt
+    tags:
+      - libvirtd
