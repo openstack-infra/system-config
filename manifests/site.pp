@@ -29,6 +29,8 @@ node 'review.openstack.org' {
     ssh_rsa_pubkey_contents         => hiera('gerrit_ssh_rsa_pubkey_contents'),
     ssh_project_rsa_key_contents    => hiera('gerrit_project_ssh_rsa_key_contents'),
     ssh_project_rsa_pubkey_contents => hiera('gerrit_project_ssh_rsa_pubkey_contents'),
+    ssh_welcome_rsa_key_contents    => hiera('welcome_message_gerrit_ssh_private_key'),
+    ssh_welcome_rsa_pubkey_contents => hiera('welcome_message_gerrit_ssh_public_key'),
     lp_sync_consumer_key            => hiera('gerrit_lp_consumer_key'),
     lp_sync_token                   => hiera('gerrit_lp_access_token'),
     lp_sync_secret                  => hiera('gerrit_lp_access_secret'),

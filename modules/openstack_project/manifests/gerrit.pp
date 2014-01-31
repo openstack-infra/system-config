@@ -22,6 +22,8 @@ class openstack_project::gerrit (
   $ssh_rsa_pubkey_contents = '', # If left empty puppet will not create file.
   $ssh_project_rsa_key_contents = '', # If left empty will not create file.
   $ssh_project_rsa_pubkey_contents = '', # If left empty will not create file.
+  $ssh_welcome_rsa_key_contents='', # If left empty will not create file.
+  $ssh_welcome_rsa_pubkey_contents='', # If left empty will not create file.
   $email = '',
   $database_poollimit = '',
   $container_heaplimit = '',
@@ -290,6 +292,28 @@ class openstack_project::gerrit (
     content => template('openstack_project/gerrit_patchset-created.erb'),
     replace => true,
     require => Class['::gerrit'],
+  }
+
+  if $ssh_welcome_rsa_key_contents != '' {
+    file { '/home/gerrit2/review_site/etc/ssh_welcome_rsa_key':
+      owner   => 'gerrit2',
+      group   => 'gerrit2',
+      mode    => '0600',
+      content => $ssh_welcome_rsa_key_contents,
+      replace => true,
+      require => File['/home/gerrit2/review_site/etc']
+    }
+  }
+
+  if $ssh_welcome_rsa_pubkey_contents != '' {
+    file { '/home/gerrit2/review_site/etc/ssh_welcome_rsa_key.pub':
+      owner   => 'gerrit2',
+      group   => 'gerrit2',
+      mode    => '0644',
+      content => $ssh_welcome_rsa_pubkey_contents,
+      replace => true,
+      require => File['/home/gerrit2/review_site/etc']
+    }
   }
 
   if ($projects_file != 'UNDEF') {
