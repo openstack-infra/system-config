@@ -1340,10 +1340,22 @@ projects:
       - gate-python-swiftclient-python33
       - gate-python-swiftclient-pypy
       - check-swift-dsvm-functional
+      - check-tempest-dsvm-full
+      - check-tempest-dsvm-postgres-full
+      - check-tempest-dsvm-neutron
+      - gate-tempest-dsvm-large-ops
+      - gate-tempest-dsvm-neutron-large-ops
+      - check-grenade-dsvm
     gate:
       - gate-python-swiftclient-requirements
       - gate-python-swiftclient-pypy
       - gate-swift-dsvm-functional
+      - gate-tempest-dsvm-full
+      - gate-tempest-dsvm-postgres-full
+      - gate-tempest-dsvm-neutron
+      - gate-tempest-dsvm-large-ops
+      - gate-tempest-dsvm-neutron-large-ops
+      - gate-grenade-dsvm
     pre-release:
       - python-swiftclient-tarball
     release:
