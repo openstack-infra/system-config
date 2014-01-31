@@ -550,6 +550,41 @@ projects:
     periodic:
       - cinder-propose-translation-update
 
+  - name: openstack/cliff
+    check:
+      - gate-cliff-pep8
+      - gate-cliff-python26
+      - gate-cliff-python27
+      - gate-cliff-python33
+      - gate-cliff-pypy
+      - gate-cliff-tox-neutronclient-stable
+      - gate-cliff-tox-neutronclient-tip
+      - gate-cliff-tox-openstackclient-stable
+      - gate-cliff-tox-openstackclient-tip
+    gate:
+      - gate-cliff-pep8
+      - gate-cliff-python26
+      - gate-cliff-python27
+      - gate-cliff-python33
+      - gate-cliff-pypy
+      - gate-cliff-tox-neutronclient-stable
+      - gate-cliff-tox-neutronclient-tip
+      - gate-cliff-tox-openstackclient-stable
+      - gate-cliff-tox-openstackclient-tip
+    post:
+      - cliff-branch-tarball
+      - hook-cliff-rtfd
+    pre-release:
+      - cliff-tarball
+      - hook-cliff-rtfd
+    release:
+      - cliff-tarball:
+        - cliff-pypi-upload:
+          - post-mirror-python26
+          - post-mirror-python27
+          - post-mirror-python33
+      - hook-cliff-rtfd
+
   - name: openstack/gantt
     template:
       - name: python-jobs
@@ -850,6 +885,28 @@ projects:
     periodic:
       - nova-propose-translation-update
 
+  - name: openstack/pycadf
+    check:
+      - gate-pycadf-pep8
+      - gate-pycadf-python26
+      - gate-pycadf-python27
+      - gate-pycadf-python33
+    gate:
+      - gate-pycadf-pep8
+      - gate-pycadf-python26
+      - gate-pycadf-python27
+      - gate-pycadf-python33
+    post:
+      - pycadf-branch-tarball
+    pre-release:
+      - pycadf-tarball
+    release:
+      - pycadf-tarball:
+        - pycadf-pypi-upload:
+          - post-mirror-python26
+          - post-mirror-python27
+          - post-mirror-python33
+
   - name: openstack/savanna
     template:
       - name: python-jobs
@@ -882,6 +939,31 @@ projects:
     periodic:
       - savanna-propose-translation-update
 
+  - name: openstack/stevedore
+    check:
+      - gate-stevedore-pep8
+      - gate-stevedore-python26
+      - gate-stevedore-python27
+      - gate-stevedore-python33
+    gate:
+      - gate-stevedore-pep8
+      - gate-stevedore-python26
+      - gate-stevedore-python27
+      - gate-stevedore-python33
+    post:
+      - stevedore-branch-tarball
+      - hook-stevedore-rtfd
+    pre-release:
+      - stevedore-tarball
+      - hook-stevedore-rtfd
+    release:
+      - stevedore-tarball:
+        - stevedore-pypi-upload:
+          - post-mirror-python26
+          - post-mirror-python27
+          - post-mirror-python33
+      - hook-stevedore-rtfd
+
   - name: openstack/swift
     template:
       - name: python-jobs
@@ -912,6 +994,37 @@ projects:
     release:
       - swift-tarball
       - swift-merge-release-tags
+
+  - name: openstack/taskflow
+    check:
+      - gate-taskflow-pep8
+      - gate-taskflow-python26
+      - gate-taskflow-python27
+      - gate-taskflow-python33
+      - gate-taskflow-tox-py26-sa7-mysql
+      - gate-taskflow-tox-py27-sa8-mysql
+      - gate-taskflow-tox-py26-sa9-mysql
+      - gate-taskflow-tox-py27-sa9-mysql
+    gate:
+      - gate-taskflow-pep8
+      - gate-taskflow-python26
+      - gate-taskflow-python27
+      - gate-taskflow-python33
+      - gate-taskflow-tox-py26-sa7-mysql
+      - gate-taskflow-tox-py27-sa8-mysql
+      - gate-taskflow-tox-py26-sa9-mysql
+      - gate-taskflow-tox-py27-sa9-mysql
+    post:
+      - taskflow-coverage
+      - taskflow-branch-tarball
+    pre-release:
+      - taskflow-tarball
+    release:
+      - taskflow-tarball:
+        - taskflow-pypi-upload:
+          - post-mirror-python26
+          - post-mirror-python27
+          - post-mirror-python33
 
   - name: openstack/trove
     template:
@@ -2796,41 +2909,6 @@ projects:
     post:
       - hook-bufunfa-rtfd
 
-  - name: stackforge/cliff
-    check:
-      - gate-cliff-pep8
-      - gate-cliff-python26
-      - gate-cliff-python27
-      - gate-cliff-python33
-      - gate-cliff-pypy
-      - gate-cliff-tox-neutronclient-stable
-      - gate-cliff-tox-neutronclient-tip
-      - gate-cliff-tox-openstackclient-stable
-      - gate-cliff-tox-openstackclient-tip
-    gate:
-      - gate-cliff-pep8
-      - gate-cliff-python26
-      - gate-cliff-python27
-      - gate-cliff-python33
-      - gate-cliff-pypy
-      - gate-cliff-tox-neutronclient-stable
-      - gate-cliff-tox-neutronclient-tip
-      - gate-cliff-tox-openstackclient-stable
-      - gate-cliff-tox-openstackclient-tip
-    post:
-      - cliff-branch-tarball
-      - hook-cliff-rtfd
-    pre-release:
-      - cliff-tarball
-      - hook-cliff-rtfd
-    release:
-      - cliff-tarball:
-        - cliff-pypi-upload:
-          - post-mirror-python26
-          - post-mirror-python27
-          - post-mirror-python33
-      - hook-cliff-rtfd
-
   - name: stackforge/climate
     check:
       - gate-climate-pep8
@@ -3762,28 +3840,6 @@ projects:
       - gate-puppet-vswitch-puppet-unit-2.7
       - gate-puppet-vswitch-puppet-unit-3.1
 
-  - name: stackforge/pycadf
-    check:
-      - gate-pycadf-pep8
-      - gate-pycadf-python26
-      - gate-pycadf-python27
-      - gate-pycadf-python33
-    gate:
-      - gate-pycadf-pep8
-      - gate-pycadf-python26
-      - gate-pycadf-python27
-      - gate-pycadf-python33
-    post:
-      - pycadf-branch-tarball
-    pre-release:
-      - pycadf-tarball
-    release:
-      - pycadf-tarball:
-        - pycadf-pypi-upload:
-          - post-mirror-python26
-          - post-mirror-python27
-          - post-mirror-python33
-
   - name: stackforge/pyghmi
     check:
       - gate-pyghmi-pep8
@@ -4052,31 +4108,6 @@ projects:
       - stackalytics-tarball
       - hook-stackalytics-rtfd
 
-  - name: stackforge/stevedore
-    check:
-      - gate-stevedore-pep8
-      - gate-stevedore-python26
-      - gate-stevedore-python27
-      - gate-stevedore-python33
-    gate:
-      - gate-stevedore-pep8
-      - gate-stevedore-python26
-      - gate-stevedore-python27
-      - gate-stevedore-python33
-    post:
-      - stevedore-branch-tarball
-      - hook-stevedore-rtfd
-    pre-release:
-      - stevedore-tarball
-      - hook-stevedore-rtfd
-    release:
-      - stevedore-tarball:
-        - stevedore-pypi-upload:
-          - post-mirror-python26
-          - post-mirror-python27
-          - post-mirror-python33
-      - hook-stevedore-rtfd
-
   - name: stackforge/swiftsync
     check:
       - gate-swiftsync-pep8
@@ -4090,37 +4121,6 @@ projects:
       - swiftsync-tarball
     release:
       - swiftsync-tarball
-
-  - name: stackforge/taskflow
-    check:
-      - gate-taskflow-pep8
-      - gate-taskflow-python26
-      - gate-taskflow-python27
-      - gate-taskflow-python33
-      - gate-taskflow-tox-py26-sa7-mysql
-      - gate-taskflow-tox-py27-sa8-mysql
-      - gate-taskflow-tox-py26-sa9-mysql
-      - gate-taskflow-tox-py27-sa9-mysql
-    gate:
-      - gate-taskflow-pep8
-      - gate-taskflow-python26
-      - gate-taskflow-python27
-      - gate-taskflow-python33
-      - gate-taskflow-tox-py26-sa7-mysql
-      - gate-taskflow-tox-py27-sa8-mysql
-      - gate-taskflow-tox-py26-sa9-mysql
-      - gate-taskflow-tox-py27-sa9-mysql
-    post:
-      - taskflow-coverage
-      - taskflow-branch-tarball
-    pre-release:
-      - taskflow-tarball
-    release:
-      - taskflow-tarball:
-        - taskflow-pypi-upload:
-          - post-mirror-python26
-          - post-mirror-python27
-          - post-mirror-python33
 
   - name: stackforge/tomograph
     check:
