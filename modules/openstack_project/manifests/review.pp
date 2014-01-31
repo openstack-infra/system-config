@@ -114,7 +114,7 @@ class openstack_project::review (
     projects_file                   =>
       'puppet:///modules/openstack_project/review.projects.yaml',
     projects_config                 =>
-      'openstack_project/review.projects.ini',
+      'openstack_project/review.projects.ini.erb',
     github_username                 => 'openstack-gerrit',
     github_oauth_token              => $github_oauth_token,
     github_project_username         => $github_project_username,
