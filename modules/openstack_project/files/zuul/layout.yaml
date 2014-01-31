@@ -327,6 +327,8 @@ jobs:
     branch: ^master$
   - name: openstack-docs-site
     branch: ^master$
+  - name: openstack-cli-reference
+    branch: ^master$
   - name: openstack-glossary
     branch: ^master$
   - name: openstack-ha-guide
@@ -2070,6 +2072,7 @@ projects:
       - openstack-basic-install-ubuntu-old
       - openstack-glossary
       - openstack-image-guide
+      - openstack-cli-reference
       - openstack-config-reference
       - openstack-docs-site
       - openstack-ha-guide
