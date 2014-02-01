@@ -14,10 +14,16 @@ version=$1
 org=$2
 project=$3
 
+if [ "$4" == "verbose" ]; then
+    verbose=1
+else
+    verbose=0
+fi
+
 source /usr/local/jenkins/slave_scripts/functions.sh
 check_variable_version_org_project "$version" "$org" "$project" "$0"
 
-venv=py$version
+venv=$version
 
 export NOSE_WITH_XUNIT=1
 export NOSE_WITH_HTML_OUTPUT=1
@@ -31,7 +37,13 @@ sudo /usr/local/jenkins/slave_scripts/jenkins-sudo-grep.sh pre
 
 source /usr/local/jenkins/slave_scripts/select-mirror.sh $org $project
 
-tox -e$venv
+if [ $verbose -eq 1 ]
+then
+    tox -v -e$venv
+else
+    tox -e$venv
+fi
+
 result=$?
 
 echo "Begin pip freeze output from test virtualenv:"

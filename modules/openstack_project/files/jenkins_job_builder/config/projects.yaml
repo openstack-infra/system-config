@@ -1729,10 +1729,10 @@
       - python-jobs
       - openstack-publish-jobs
       - pypi-jobs
-      - gate-{name}-tox-{envlist}:
+      - gate-{name}-unittests-{envlist}:
           envlist: py26-sa7-mysql
           node: bare-centos6
-      - gate-{name}-tox-{envlist}:
+      - gate-{name}-unittests-{envlist}:
           envlist: py27-sa8-mysql
 
 - project:

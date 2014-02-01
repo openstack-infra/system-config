@@ -1144,12 +1144,12 @@ projects:
       - name: openstack-server-publish-jobs
     check:
       - gate-taskflow-python33
-      - gate-taskflow-tox-py26-sa7-mysql
-      - gate-taskflow-tox-py27-sa8-mysql
+      - gate-taskflow-unittests-py26-sa7-mysql
+      - gate-taskflow-unittests-py27-sa8-mysql
     gate:
       - gate-taskflow-python33
-      - gate-taskflow-tox-py26-sa7-mysql
-      - gate-taskflow-tox-py27-sa8-mysql
+      - gate-taskflow-unittests-py26-sa7-mysql
+      - gate-taskflow-unittests-py27-sa8-mysql
     pre-release:
       - taskflow-tarball
     release:
