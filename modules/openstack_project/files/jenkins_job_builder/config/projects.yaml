@@ -1667,16 +1667,16 @@
       - python-jobs
       - pypi-jobs
       # For anyone running without eventlet
-      - gate-{name}-tox-{envlist}:
+      - gate-{name}-unittests-{envlist}:
           envlist: py26-sa7-mysql
           node: centos6
-      - gate-{name}-tox-{envlist}:
+      - gate-{name}-unittests-{envlist}:
           envlist: py27-sa8-mysql
       # For anyone running the latest without eventlet
-      - gate-{name}-tox-{envlist}:
+      - gate-{name}-unittests-{envlist}:
           envlist: py26-sa9-mysql
           node: centos6
-      - gate-{name}-tox-{envlist}:
+      - gate-{name}-unittests-{envlist}:
           envlist: py27-sa9-mysql
 
 - project:
