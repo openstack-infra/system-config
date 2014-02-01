@@ -1463,9 +1463,15 @@ projects:
 
   - name: stackforge/gce-api
     check:
-      - gate-noop
+      - gate-gce-api-requirements
+      - gate-gce-api-pep8
+      - gate-gce-api-python26
+      - gate-gce-api-python27
     gate:
-      - gate-noop
+      - gate-gce-api-requirements
+      - gate-gce-api-pep8
+      - gate-gce-api-python26
+      - gate-gce-api-python27
 
   - name: openstack/governance
     check:
