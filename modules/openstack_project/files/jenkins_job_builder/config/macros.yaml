@@ -144,27 +144,27 @@
 - builder:
     name: python26
     builders:
-      - shell: "/usr/local/jenkins/slave_scripts/run-unittests.sh 26 {github-org} {project}"
+      - shell: "/usr/local/jenkins/slave_scripts/run-unittests.sh py26 {github-org} {project}"
 
 - builder:
     name: python27
     builders:
-      - shell: "/usr/local/jenkins/slave_scripts/run-unittests.sh 27 {github-org} {project}"
+      - shell: "/usr/local/jenkins/slave_scripts/run-unittests.sh py27 {github-org} {project}"
 
 - builder:
     name: python33
     builders:
-      - shell: "/usr/local/jenkins/slave_scripts/run-unittests.sh 33 {github-org} {project}"
+      - shell: "/usr/local/jenkins/slave_scripts/run-unittests.sh py33 {github-org} {project}"
 
 - builder:
     name: pypy
     builders:
-      - shell: "/usr/local/jenkins/slave_scripts/run-unittests.sh py {github-org} {project}"
+      - shell: "/usr/local/jenkins/slave_scripts/run-unittests.sh pypy {github-org} {project}"
 
 - builder:
     name: tox
     builders:
-      - shell: "/usr/local/jenkins/slave_scripts/run-tox.sh {envlist} {github-org} {project}"
+      - shell: "/usr/local/jenkins/slave_scripts/run-unittests.sh {envlist} {github-org} {project} verbose"
 
 - builder:
     name: assert-no-extra-files
