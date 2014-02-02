@@ -185,6 +185,29 @@
           target: ''
           remove-prefix: 'doc/src/docbkx/{install}/target/docbkx/webhelp/'
 
+- job-template:
+    name: 'gate-{name}-tox-doc-publish-{envlist}'
+
+    wrappers:
+      - timeout:
+          timeout: 40
+          fail: true
+      - timestamps
+
+    builders:
+      - gerrit-git-prep
+      - tox:
+          envlist: '{envlist}'
+          github-org: '{github-org}'
+          project: '{name}'
+      - assert-no-extra-files
+
+    publishers:
+      - console-log
+      - publish-docs-draft
+
+    node: '{node}'
+
 - job-group:
     name: openstack-doc-jobs
     jobs:
@@ -194,5 +217,5 @@
           envlist: checksyntax
       - gate-{name}-tox-{envlist}:
           envlist: checkdeletions
-      - gate-{name}-tox-{envlist}:
+      - gate-{name}-tox-doc-publish-{envlist}:
           envlist: checkbuild
