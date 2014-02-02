@@ -191,11 +191,11 @@ project-templates:
       - gate-{name}-tox-checkniceness
       - gate-{name}-tox-checksyntax
       - gate-{name}-tox-checkdeletions
-      - gate-{name}-tox-checkbuild
+      - gate-{name}-tox-doc-publish-checkbuild
     gate:
       - gate-{name}-tox-checksyntax
       - gate-{name}-tox-checkdeletions
-      - gate-{name}-tox-checkbuild
+      - gate-{name}-tox-doc-publish-checkbuild
 
 
 jobs:
@@ -368,7 +368,7 @@ jobs:
     branch: ^(?!stable/grizzly).*$
   - name: gate-openstack-manuals-tox-checkdeletions
     branch: ^(?!stable/grizzly).*$
-  - name: gate-openstack-manuals-tox-checkbuild
+  - name: gate-openstack-manuals-tox-doc-publish-checkbuild
     branch: ^(?!stable/grizzly).*$
   - name: ^gate-.*-tox-checkniceness$
     voting: false

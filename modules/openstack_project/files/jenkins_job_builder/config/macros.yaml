@@ -332,3 +332,25 @@
               source: 'doc/build/html/**'
               keep-hierarchy: true
               copy-after-failure: true
+
+- publisher:
+    name: upload-docs-draft
+    publishers:
+      - scp:
+          site: 'static.openstack.org'
+          files:
+            - target: 'docs-draft/$LOG_PATH/'
+              source: 'publish-docs/**'
+              keep-hierarchy: true
+              copy-after-failure: true
+
+- publisher:
+    name: upload-doc-build-results
+    publishers:
+      - scp:
+          site: 'static.openstack.org'
+          files:
+            - target: 'logs/$LOG_PATH'
+              source: 'build-*.log.gz'
+              keep-hierarchy: false
+              copy-after-failure: true
