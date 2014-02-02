@@ -352,14 +352,14 @@ jobs:
     branch: ^(?!stable/grizzly).*$
   - name: openstack-install-deploy-guide-ubuntu
     branch: ^(?!stable/grizzly).*$
-  - name: gate-openstack-manuals-validate-niceness
+  - name: gate-openstack-manuals-tox-checkniceness
     branch: ^(?!stable/grizzly).*$
     voting: false
-  - name: gate-openstack-manuals-validate-syntax
+  - name: gate-openstack-manuals-tox-checksyntax
     branch: ^(?!stable/grizzly).*$
-  - name: gate-openstack-manuals-validate-deletions
+  - name: gate-openstack-manuals-tox-checkdeletions
     branch: ^(?!stable/grizzly).*$
-  - name: gate-openstack-manuals-validate-build
+  - name: gate-openstack-manuals-tox-checkbuild
     branch: ^(?!stable/grizzly).*$
   - name: ^gate-.*-tox-checkniceness$
     voting: false
@@ -2081,16 +2081,11 @@ projects:
       - manuals-propose-translation-update
 
   - name: openstack/openstack-manuals
+    template:
+      - name: openstack-doc-gate
     check:
-      - gate-openstack-manuals-validate-niceness
-      - gate-openstack-manuals-validate-syntax
-      - gate-openstack-manuals-validate-deletions
-      - gate-openstack-manuals-validate-build
       - gate-openstack-manuals-validate
     gate:
-      - gate-openstack-manuals-validate-syntax
-      - gate-openstack-manuals-validate-deletions
-      - gate-openstack-manuals-validate-build
       - gate-openstack-manuals-validate
     post:
       - openstack-admin-guide-cloud

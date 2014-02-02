@@ -1831,12 +1831,9 @@
 
 
 - project:
-    name: manuals
-    check:
-       - niceness
-       - syntax
-       - deletions
-       - build
+    name: openstack-manuals
+    github-org: openstack
+    node: precise
 
     manual:
       - admin-guide-cloud
@@ -1859,7 +1856,7 @@
         - ja
 
     jobs:
-      - gate-openstack-manuals-validate-{check}
+      - openstack-doc-jobs
 
       - 'openstack-{manual}'
 
