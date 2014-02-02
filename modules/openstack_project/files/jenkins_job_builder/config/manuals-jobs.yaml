@@ -97,7 +97,11 @@
     prebuilders:
       - gerrit-git-prep
       - shell: |
+          ./tools/generatedocbook -l {lang} -b common
+          ./tools/generatedocbook -l {lang} -b glossary
+          ./tools/generatedocbook -l {lang} -b user-guide
           ./tools/generatedocbook -l {lang} -b install-guide
+          cp doc/pom.xml generated/{lang}/pom.xml
 
     maven:
       maven-name: Maven3
