@@ -302,9 +302,12 @@ Next, edit `project.config` to look like::
       create = group Project Bootstrappers
       create = group Release Managers
       pushMerge = group Project Bootstrappers
+      pushSignedTag = group Project Bootstrappers
   [access "refs/heads/*"]
       label-Code-Review = -2..+2 group Project Bootstrappers
       label-Code-Review = -1..+1 group Registered Users
+      label-Workflow = -1..+1 group Project Bootstrappers
+      label-Workflow = -1..+0 group Change Owner
       label-Verified = -2..+2 group Continuous Integration Tools
       label-Verified = -2..+2 group Project Bootstrappers
       label-Verified = -1..+1 group Voting Third-Party CI
@@ -340,12 +343,37 @@ Next, edit `project.config` to look like::
       administrateServer = group Administrators
       priority = batch group Non-Interactive Users
       createProject = group Project Bootstrappers
+      streamEvents = group Registered Users
   [access "refs/zuul/*"]
       create = group Continuous Integration Tools
       push = +force group Continuous Integration Tools
       pushMerge = group Continuous Integration Tools
   [access "refs/for/refs/zuul/*"]
       pushMerge = group Continuous Integration Tools
+  [label "Code-Review"]
+      function = MaxWithBlock
+      abbreviation = R
+      copyMinScore = true
+      copyAllScoresOnTrivialRebase = true
+      copyAllScoresIfNoCodeChange = true
+      value = -2 Do not merge
+      value = -1 I would prefer that you didn't merge this
+      value =  0 No score
+      value = +1 Looks good to me, but someone else must approve
+      value = +2 Looks good to me (core reviewer)
+  [label "Verified"]
+      function = MaxWithBlock
+      value = -2 Fails
+      value = -1 Doesn't seem to work
+      value =  0 No score
+      value = +1 Works for me
+      value = +2 Verified
+  [label "Workflow"]
+      function = MaxWithBlock
+      value = -1 Work in progress
+      value =  0 Ready for reviews
+      value = +1 Approved
+
 
 Now edit the groups file. The format is::
 
