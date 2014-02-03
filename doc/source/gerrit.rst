@@ -302,6 +302,7 @@ Next, edit `project.config` to look like::
       create = group Project Bootstrappers
       create = group Release Managers
       pushMerge = group Project Bootstrappers
+      pushSignedTag = group Project Bootstrappers
   [access "refs/heads/*"]
       label-Code-Review = -2..+2 group Project Bootstrappers
       label-Code-Review = -1..+1 group Registered Users
@@ -340,12 +341,34 @@ Next, edit `project.config` to look like::
       administrateServer = group Administrators
       priority = batch group Non-Interactive Users
       createProject = group Project Bootstrappers
+      streamEvents = group Continuous Integration Tools
   [access "refs/zuul/*"]
       create = group Continuous Integration Tools
       push = +force group Continuous Integration Tools
       pushMerge = group Continuous Integration Tools
   [access "refs/for/refs/zuul/*"]
       pushMerge = group Continuous Integration Tools
+  [label "Code-Review"]
+      function = MaxWithBlock
+      abbreviation = R
+      copyMinScore = true
+      copyAllScoresOnTrivialRebase = true
+      copyAllScoresIfNoCodeChange = true
+      value = -2 Do not merge
+      value = -1 I would prefer that you didn't merge this
+      value =  0 No score
+      value = +1 Looks good to me, but someone else must approve
+      value = +2 Looks good to me (core reviewer)
+  [label "Verified"]
+      function = MaxWithBlock
+      copyAllScoresOnTrivialRebase = true
+      copyAllScoresIfNoCodeChange = true
+      value = -2 Fails
+      value = -1 Doesn't seem to work
+      value =  0 No score
+      value = +1 Works for me
+      value = +2 Verified
+
 
 Now edit the groups file. The format is::
 
