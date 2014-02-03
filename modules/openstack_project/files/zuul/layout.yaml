@@ -462,8 +462,6 @@ jobs:
     voting: false
   - name: gate-climate-devstack-dsvm
     voting: false
-  - name: gate-storyboard-python26
-    voting: false
   - name: gate-storyboard-python33
     voting: false
 # puppet-openstack targets
