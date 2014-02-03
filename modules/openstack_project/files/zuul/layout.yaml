@@ -1873,6 +1873,25 @@ projects:
           - post-mirror-python26
           - post-mirror-python27
 
+  - name: openstack/oslo.vmware
+    template:
+      - name: python-jobs
+      - name: openstack-server-publish-jobs
+    check:
+      - gate-oslo.vmware-requirements
+      - gate-oslo.vmware-python33
+    gate:
+      - gate-oslo.vmware-requirements
+      - gate-oslo.vmware-python33
+    pre-release:
+      - oslo.vmware-tarball
+    release:
+      - oslo.vmware-tarball:
+        - oslo.vmware-pypi-upload:
+          - post-mirror-python26
+          - post-mirror-python27
+          - post-mirror-python33
+
   - name: openstack/requirements
     check:
       - gate-requirements-pep8
