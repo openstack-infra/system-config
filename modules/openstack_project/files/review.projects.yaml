@@ -597,6 +597,9 @@
 - project: stackforge/openvz-nova-driver
   description: OpenVz driver for Nova
   upstream: git://github.com/imsplitbit/openvz-nova-driver.git
+- project: stackforge/oslo.vmware
+  description: Oslo VMware library for OpenStack projects
+  upstream: git@github.com:dims/oslo.vmware.git- project: stackforge/wsme
 - project: stackforge/packstack
   description: Install utility to deploy openstack on multiple hosts.
   upstream: git://github.com/fedora-openstack/packstack.git
@@ -750,6 +753,5 @@
   docimpact-group: turbo-hipster
   description: A generic zuul worker using the gearman protocol.
   upstream: git://github.com/rcbau/turbo-hipster.git
-- project: stackforge/wsme
   description: Web Service Made Easy (WSME) simplify the writing of REST web services by providing simple yet powerful typing which removes the need to directly manipulate the request and the response objects.
   upstream: git://github.com/ryanpetrello/wsme.git
