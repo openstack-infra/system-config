@@ -56,47 +56,6 @@ repositories (and in our case, managed by Puppet), but a few items
 must be configured in the database.  The following is a record of
 these changes:
 
-Add "Approved" review type to gerrit:
-
-.. code-block:: mysql
-
-  sudo -u root
-  mysql
-  use reviewdb;
-  insert into approval_categories values ('Approved', 'A', 2, 'MaxNoBlock', 'N', 'APRV');
-  insert into approval_category_values values ('No score', 'APRV', 0);
-  insert into approval_category_values values ('Approved', 'APRV', 1);
-  update approval_category_values set name = "Looks good to me (core reviewer)" where name="Looks good to me, approved";
-
-Expand "Verified" review type to -2/+2:
-
-.. code-block:: mysql
-
-  sudo -u root
-  mysql
-  use reviewdb;
-  update approval_category_values set value=2
-    where value=1 and category_id='VRIF';
-  update approval_category_values set value=-2
-    where value=-1 and category_id='VRIF';
-  insert into approval_category_values values
-    ("Doesn't seem to work","VRIF",-1),
-    ("Works for me","VRIF","1");
-
-Reword the default messages that use the word Submit, as they imply that
-we're not happy with people for submitting the patch in the first place:
-
-.. code-block:: mysql
-
-  sudo -u root
-  mysql
-  use reviewdb;
-  update approval_category_values set name="Do not merge"
-    where category_id='CRVW' and value=-2;
-  update approval_category_values
-    set name="I would prefer that you didn't merge this"
-    where category_id='CRVW' and value=-1;
-
 Add information about the CLA:
 
 .. code-block:: mysql
@@ -297,7 +256,6 @@ Next, edit `project.config` to look like::
 
   [project]
       description = Rights inherited by all other projects
-      state = active
   [access "refs/*"]
       read = group Anonymous Users
       pushTag = group Continuous Integration Tools
@@ -309,36 +267,38 @@ Next, edit `project.config` to look like::
       create = group Project Bootstrappers
       create = group Release Managers
       pushMerge = group Project Bootstrappers
+      pushSignedTag = group Project Bootstrappers
   [access "refs/heads/*"]
       label-Code-Review = -2..+2 group Project Bootstrappers
       label-Code-Review = -1..+1 group Registered Users
       label-Verified = -2..+2 group Continuous Integration Tools
       label-Verified = -2..+2 group Project Bootstrappers
       label-Verified = -1..+1 group Voting Third-Party CI
+      label-Workflow = -1..+1 group Project Bootstrappers
+      label-Workflow = -1..+0 group Change Owner
       submit = group Continuous Integration Tools
       submit = group Project Bootstrappers
-      label-Approved = +0..+1 group Project Bootstrappers
   [access "refs/meta/config"]
       read = group Project Owners
   [access "refs/for/refs/*"]
       push = group Registered Users
   [access "refs/heads/milestone-proposed"]
-      exclusiveGroupPermissions = label-Approved label-Code-Review
+      exclusiveGroupPermissions = label-Workflow label-Code-Review
       label-Code-Review = -2..+2 group Project Bootstrappers
       label-Code-Review = -2..+2 group Release Managers
       label-Code-Review = -1..+1 group Registered Users
       owner = group Release Managers
-      label-Approved = +0..+1 group Project Bootstrappers
-      label-Approved = +0..+1 group Release Managers
+      label-Workflow = +0..+1 group Project Bootstrappers
+      label-Workflow = +0..+1 group Release Managers
   [access "refs/heads/stable/*"]
-      forgeAuthor = group Stable Maintainers
-      forgeCommitter = group Stable Maintainers
-      exclusiveGroupPermissions = label-Approved label-Code-Review
+      forgeAuthor = group openstack-stable-maint
+      forgeCommitter = group openstack-stable-maint
+      exclusiveGroupPermissions = label-Workflow label-Code-Review
       label-Code-Review = -2..+2 group Project Bootstrappers
-      label-Code-Review = -2..+2 group Stable Maintainers
+      label-Code-Review = -2..+2 group openstack-stable-maint
       label-Code-Review = -1..+1 group Registered Users
-      label-Approved = +0..+1 group Project Bootstrappers
-      label-Approved = +0..+1 group Stable Maintainers
+      label-Workflow = +0..+1 group Project Bootstrappers
+      label-Workflow = +0..+1 group openstack-stable-maint
   [access "refs/meta/openstack/*"]
       read = group Continuous Integration Tools
       create = group Continuous Integration Tools
@@ -347,12 +307,52 @@ Next, edit `project.config` to look like::
       administrateServer = group Administrators
       priority = batch group Non-Interactive Users
       createProject = group Project Bootstrappers
+      streamEvents = group Registered Users
   [access "refs/zuul/*"]
       create = group Continuous Integration Tools
       push = +force group Continuous Integration Tools
       pushMerge = group Continuous Integration Tools
   [access "refs/for/refs/zuul/*"]
       pushMerge = group Continuous Integration Tools
+  [accounts]
+      sameGroupVisibility = deny group CLA Accepted - ICLA
+  [contributor-agreement "ICLA"]
+      description = OpenStack Individual Contributor License Agreement
+      requireContactInformation = true
+      agreementUrl = static/cla.html
+      autoVerify = group CLA Accepted - ICLA
+      accepted = group CLA Accepted - ICLA
+  [contributor-agreement "System CLA"]
+      description = DON'T SIGN THIS: System CLA (externally managed)
+      agreementUrl = static/system-cla.html
+      accepted = group System CLA
+  [contributor-agreement "USG CLA"]
+      description = DON'T SIGN THIS: U.S. Government CLA (externally managed)
+      agreementUrl = static/usg-cla.html
+      accepted = group USG CLA
+  [label "Verified"]
+      function = MaxWithBlock
+      value = -2 Fails
+      value = -1 Doesn't seem to work
+      value =  0 No score
+      value = +1 Works for me
+      value = +2 Verified
+  [label "Code-Review"]
+      function = MaxWithBlock
+      abbreviation = R
+      copyMinScore = true
+      copyAllScoresOnTrivialRebase = true
+      copyAllScoresIfNoCodeChange = true
+      value = -2 Do not merge
+      value = -1 I would prefer that you didn't merge this
+      value =  0 No score
+      value = +1 Looks good to me, but someone else must approve
+      value = +2 Looks good to me (core reviewer)
+  [label "Workflow"]
+      function = MaxWithBlock
+      value = -1 Work in progress
+      value =  0 Ready for reviews
+      value = +1 Approved
 
 Now edit the groups file. The format is::
 
@@ -452,7 +452,7 @@ To rename a project:
    the workspaces on persistent Jenkins slaves to mitigate this::
 
      sudo salt '*.slave.openstack.org' cmd.run 'rm -rf ~jenkins/workspace/*PROJECT*'
- 
+
 #. Again, if this is an org move rather than a rename and the GitHub
    project has been created but is empty, trigger replication to
    populate it::
