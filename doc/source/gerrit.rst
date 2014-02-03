@@ -299,6 +299,7 @@ Next, edit `project.config` to look like::
       create = group Project Bootstrappers
       create = group Release Managers
       pushMerge = group Project Bootstrappers
+      pushSignedTag = group Project Bootstrappers
   [access "refs/heads/*"]
       label-Code-Review = -2..+2 group Project Bootstrappers
       label-Code-Review = -1..+1 group Registered Users
@@ -337,6 +338,7 @@ Next, edit `project.config` to look like::
       administrateServer = group Administrators
       priority = batch group Non-Interactive Users
       createProject = group Project Bootstrappers
+      streamEvents = group Continuous Integration Tools
   [access "refs/zuul/*"]
       create = group Continuous Integration Tools
       push = +force group Continuous Integration Tools
