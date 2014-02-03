@@ -2231,6 +2231,12 @@ projects:
     release:
       - openstack-qa-docs
 
+  - name: openstack-dev/oslo-cookiecutter
+    check:
+      - gate-noop
+    gate:
+      - gate-noop
+
   - name: openstack-dev/pbr
     template:
       - name: python-jobs

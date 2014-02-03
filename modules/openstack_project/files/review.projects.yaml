@@ -15,6 +15,9 @@
   upstream: git://github.com/steveb/heat-cfnclient.git
 - project: openstack-dev/openstack-nose
 - project: openstack-dev/openstack-qa
+- project: openstack-dev/oslo-cookiecutter
+  description: Cookiecutter Template for new Oslo libraries
+  upstream: git://github.com/dhellmann/oslo-cookiecutter.git
 - project: openstack-dev/pbr
   upstream: git://github.com/emonty/oslo.packaging
   description: Python Build Reasonableness
