@@ -246,6 +246,10 @@
   description: Theme and utilities for Sphinx documentation tool
 - project: openstack/pycadf
   description: CADF Python module
+- project: openstack/oslo.vmware
+  group: oslo
+  description: Oslo VMware library for OpenStack projects
+  upstream: git://github.com/dims/oslo.vmware.git
 - project: openstack/python-ceilometerclient
   upstream: git://github.com/asalkeld/python-ceilometerclient.git
 - project: openstack/python-cinderclient
