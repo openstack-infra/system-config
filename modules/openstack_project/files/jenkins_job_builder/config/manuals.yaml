@@ -110,33 +110,27 @@
 
 - job-template:
     name: 'openstack-operations-guide-{lang}'
-    project-type: maven
     concurrent: false
     node: precise
+    github-org: openstack
 
     properties:
       - inject:
           script-file: /usr/local/jenkins/slave_scripts/docbook-properties.sh
           properties-file: gerrit-doc.properties
 
-    prebuilders:
+    builders:
       - gerrit-git-prep
       - shell: |
-          ./tools/generatedocbook -l {lang} -b openstack-ops
-
-    maven:
-      maven-name: Maven3
-      root-module:
-        group-id: org.openstack.docs
-        artifact-id: openstack-ops-manual
-      root-pom: generated/{lang}/openstack-ops/pom.xml
-      goals: '-Drelease.path.name=${{DOC_RELEASE_PATH}} -Dcomments.enabled=${{DOC_COMMENTS_ENABLED}} clean generate-sources -B'
+          #!/bin/bash -xe
+          source /usr/local/jenkins/slave_scripts/select-mirror.sh openstack openstack-ops
+          tox -v -e buildlang -- {lang}
 
     publishers:
       - console-log
       - ftp:
           site: docs.openstack.org
-          source: 'generated/{lang}/openstack-ops/target/docbkx/webhelp/**'
+          source: 'published-docs/{lang}/**'
           target: '/{lang}/'
-          remove-prefix: 'generated/{lang}/openstack-ops/target/docbkx/webhelp/'
+          remove-prefix: 'published-docs/{lang}/'
           excludes: '**/*.xml,**/null*'
