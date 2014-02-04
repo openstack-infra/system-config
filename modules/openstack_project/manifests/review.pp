@@ -55,6 +55,9 @@ class openstack_project::review (
   # manage-projects's user ssh key.
   $ssh_project_rsa_key_contents='',
   $ssh_project_rsa_pubkey_contents='',
+  # SSH key for outbound ssh-based replication.
+  $ssh_replication_rsa_key_contents='',
+  $ssh_replication_rsa_pubkey_contents='',
   # welcome-message's user ssh key.
   $ssh_welcome_rsa_key_contents='',
   $ssh_welcome_rsa_pubkey_contents='',
@@ -81,56 +84,58 @@ class openstack_project::review (
   }
 
   class { 'openstack_project::gerrit':
-    ssl_cert_file                   =>
+    ssl_cert_file                       =>
       '/etc/ssl/certs/review.openstack.org.pem',
-    ssl_key_file                    =>
+    ssl_key_file                        =>
       '/etc/ssl/private/review.openstack.org.key',
-    ssl_chain_file                  => '/etc/ssl/certs/intermediate.pem',
-    ssl_cert_file_contents          => $ssl_cert_file_contents,
-    ssl_key_file_contents           => $ssl_key_file_contents,
-    ssl_chain_file_contents         => $ssl_chain_file_contents,
-    ssh_dsa_key_contents            => $ssh_dsa_key_contents,
-    ssh_dsa_pubkey_contents         => $ssh_dsa_pubkey_contents,
-    ssh_rsa_key_contents            => $ssh_rsa_key_contents,
-    ssh_rsa_pubkey_contents         => $ssh_rsa_pubkey_contents,
-    ssh_project_rsa_key_contents    => $ssh_project_rsa_key_contents,
-    ssh_project_rsa_pubkey_contents => $ssh_project_rsa_pubkey_contents,
-    ssh_welcome_rsa_key_contents    => $ssh_welcome_rsa_key_contents,
-    ssh_welcome_rsa_pubkey_contents => $ssh_welcome_rsa_pubkey_contents,
-    email                           => 'review@openstack.org',
-      # 1 + 100 + 9 + 2 + 2 + 25 = 139(rounded up)
-    database_poollimit              => '150',
-    container_heaplimit             => '8g',
-    core_packedgitopenfiles         => '4096',
-    core_packedgitlimit             => '400m',
-    core_packedgitwindowsize        => '16k',
-    sshd_threads                    => '100',
-    httpd_maxwait                   => '5000min',
-    war                             =>
+    ssl_chain_file                      => '/etc/ssl/certs/intermediate.pem',
+    ssl_cert_file_contents              => $ssl_cert_file_contents,
+    ssl_key_file_contents               => $ssl_key_file_contents,
+    ssl_chain_file_contents             => $ssl_chain_file_contents,
+    ssh_dsa_key_contents                => $ssh_dsa_key_contents,
+    ssh_dsa_pubkey_contents             => $ssh_dsa_pubkey_contents,
+    ssh_rsa_key_contents                => $ssh_rsa_key_contents,
+    ssh_rsa_pubkey_contents             => $ssh_rsa_pubkey_contents,
+    ssh_project_rsa_key_contents        => $ssh_project_rsa_key_contents,
+    ssh_project_rsa_pubkey_contents     => $ssh_project_rsa_pubkey_contents,
+    ssh_replication_rsa_key_contents    => $ssh_replication_rsa_key_contents,
+    ssh_replication_rsa_pubkey_contents => $ssh_replication_rsa_pubkey_contents,
+    ssh_welcome_rsa_key_contents        => $ssh_welcome_rsa_key_contents,
+    ssh_welcome_rsa_pubkey_contents     => $ssh_welcome_rsa_pubkey_contents,
+    email                               => 'review@openstack.org',
+      # 1 + 100 + 9 + 2 + 2 + 25 => 139(rounded up)
+    database_poollimit                  => '150',
+    container_heaplimit                 => '8g',
+    core_packedgitopenfiles             => '4096',
+    core_packedgitlimit                 => '400m',
+    core_packedgitwindowsize            => '16k',
+    sshd_threads                        => '100',
+    httpd_maxwait                       => '5000min',
+    war                                 =>
       'http://tarballs.openstack.org/ci/gerrit-2.4.4-14-gab7f4c1.war',
-    contactstore                    => true,
-    contactstore_appsec             => $contactstore_appsec,
-    contactstore_pubkey             => $contactstore_pubkey,
-    contactstore_url                =>
+    contactstore                        => true,
+    contactstore_appsec                 => $contactstore_appsec,
+    contactstore_pubkey                 => $contactstore_pubkey,
+    contactstore_url                    =>
       'http://www.openstack.org/verify/member/',
-    script_user                     => 'launchpadsync',
-    script_key_file                 => '/home/gerrit2/.ssh/launchpadsync_rsa',
-    script_logging_conf             => '/home/gerrit2/.sync_logging.conf',
-    projects_file                   =>
+    script_user                         => 'launchpadsync',
+    script_key_file                     => '/home/gerrit2/.ssh/launchpadsync_rsa',
+    script_logging_conf                 => '/home/gerrit2/.sync_logging.conf',
+    projects_file                       =>
       'puppet:///modules/openstack_project/review.projects.yaml',
-    projects_config                 =>
+    projects_config                     =>
       'openstack_project/review.projects.ini.erb',
-    github_username                 => 'openstack-gerrit',
-    github_oauth_token              => $github_oauth_token,
-    github_project_username         => $github_project_username,
-    github_project_password         => $github_project_password,
-    trivial_rebase_role_id          => 'trivial-rebase@review.openstack.org',
-    mysql_password                  => $mysql_password,
-    email_private_key               => $email_private_key,
-    sysadmins                       => $sysadmins,
-    swift_username                  => $swift_username,
-    swift_password                  => $swift_password,
-    replication                     => [
+    github_username                     => 'openstack-gerrit',
+    github_oauth_token                  => $github_oauth_token,
+    github_project_username             => $github_project_username,
+    github_project_password             => $github_project_password,
+    trivial_rebase_role_id              => 'trivial-rebase@review.openstack.org',
+    mysql_password                      => $mysql_password,
+    email_private_key                   => $email_private_key,
+    sysadmins                           => $sysadmins,
+    swift_username                      => $swift_username,
+    swift_password                      => $swift_password,
+    replication                         => [
       {
         name                 => 'github',
         url                  => 'git@github.com:',
