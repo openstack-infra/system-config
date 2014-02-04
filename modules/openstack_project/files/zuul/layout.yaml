@@ -2333,8 +2333,6 @@ projects:
       - check-devstack-dsvm-cells-havana
       - check-tempest-dsvm-ironic-nv
       - check-tempest-dsvm-ironic-postgres-nv
-      - check-tripleo-seed-precise
-      - check-tripleo-undercloud-precise
     gate:
       - gate-devstack-dsvm-cells
       - gate-tempest-dsvm-full
