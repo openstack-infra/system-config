@@ -1669,12 +1669,12 @@
       - translation-jobs
       - '{pipeline}-tempest-dsvm-ironic{branch-designator}':
           pipeline: check
-          node: devstack-precise
+          node: 'devstack-precise || devstack-precise-check'
           branch-designator: '-nv'
           branch-override: default
       - '{pipeline}-tempest-dsvm-ironic-postgres{branch-designator}':
           pipeline: check
-          node: devstack-precise
+          node: 'devstack-precise || devstack-precise-check'
           branch-designator: '-nv'
           branch-override: default
 
