@@ -2128,6 +2128,7 @@ projects:
       - gate-grenade-dsvm-forward
       - gate-swift-dsvm-functional
     experimental:
+      - check-tempest-dsvm-neutron-isolated
       - gate-tempest-dsvm-neutron-heat-slow
       - gate-grenade-dsvm-forward
       - gate-devstack-dsvm-cells
