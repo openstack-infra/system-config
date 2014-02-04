@@ -1465,12 +1465,10 @@ projects:
     check:
       - gate-gce-api-requirements
       - gate-gce-api-pep8
-      - gate-gce-api-python26
       - gate-gce-api-python27
     gate:
       - gate-gce-api-requirements
       - gate-gce-api-pep8
-      - gate-gce-api-python26
       - gate-gce-api-python27
 
   - name: openstack/governance
