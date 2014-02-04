@@ -95,6 +95,8 @@ class gerrit(
   $ssh_rsa_pubkey_contents = '', # If left empty puppet will not create file.
   $ssh_project_rsa_key_contents = '', # If left empty will not create file.
   $ssh_project_rsa_pubkey_contents = '', # If left empty will not create file.
+  $ssh_replication_key_contents = '', # If left emptry will not create files.
+  $ssh_replication_pubkey_contents = '', # If left emptry will not create files.
   $gerrit_auth_type = 'OPENID_SSO',
   $gerrit_contributor_agreement = true,
   $openidssourl = 'https://login.launchpad.net/+openid',
@@ -186,6 +188,13 @@ class gerrit(
     ensure  => directory,
     owner   => 'gerrit2',
     require => User['gerrit2'],
+  }
+
+  file { '/home/gerrit2/review_site/.ssh':
+    ensure  => directory,
+    owner   => 'gerrit2',
+    mode    => '0700',
+    require => File['/home/gerrit2/review_site'],
   }
 
   file { '/home/gerrit2/review_site/etc':
@@ -422,6 +431,28 @@ class gerrit(
       content => $ssh_project_rsa_pubkey_contents,
       replace => true,
       require => File['/home/gerrit2/review_site/etc']
+    }
+  }
+
+  if $ssh_replication_key_contents != '' {
+    file { '/home/gerrit2/.ssh/id_rsa':
+      owner   => 'gerrit2',
+      group   => 'gerrit2',
+      mode    => '0600',
+      content => $ssh_replication_key_contents,
+      replace => true,
+      require => File['/home/gerrit2/.ssh']
+    }
+  }
+
+  if $ssh_replication_pubkey_contents != '' {
+    file { '/home/gerrit2/id_rsa.pub':
+      owner   => 'gerrit2',
+      group   => 'gerrit2',
+      mode    => '0644',
+      content => $ssh_replication_pubkey_contents,
+      replace => true,
+      require => File['/home/gerrit2/.ssh']
     }
   }
 
