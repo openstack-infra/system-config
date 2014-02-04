@@ -12,7 +12,7 @@ pipelines:
         - event: patchset-created
         - event: change-restored
         - event: comment-added
-          comment_filter: (?i)^\s*recheck(( (?:bug|lp)[\s#:]*(\d+))|( no bug))\s*$
+          comment_filter: (?i)^(Patch Set [0-9]+:\n\n)?\s*recheck(( (?:bug|lp)[\s#:]*(\d+))|( no bug))\s*$
     success:
       gerrit:
         verified: 1
@@ -31,7 +31,7 @@ pipelines:
           approval:
             - approved: 1
         - event: comment-added
-          comment_filter: (?i)^\s*reverify( (?:bug|lp)[\s#:]*(\d+))\s*$
+          comment_filter: (?i)^(Patch Set [0-9]+:\n\n)?\s*reverify( (?:bug|lp)[\s#:]*(\d+))\s*$
     start:
       gerrit:
         verified: 0
@@ -44,6 +44,75 @@ pipelines:
         verified: -2
     window-floor: 20
     window-increase-factor: 2
+
+  - name: post
+    description: This pipeline runs jobs that operate after each change is merged.
+    manager: IndependentPipelineManager
+    precedence: low
+    trigger:
+      gerrit:
+        - event: ref-updated
+          ref: ^(?!(devnull|refs/.*)).*$
+
+  - name: tag
+    description: This pipeline runs jobs in response to any tag event.
+    manager: IndependentPipelineManager
+    precedence: high
+    trigger:
+      gerrit:
+        - event: ref-updated
+          ref: ^refs/tags/.*$
+
+  - name: pre-release
+    description: This pipeline runs jobs on projects in response to pre-release tags.
+    manager: IndependentPipelineManager
+    precedence: high
+    trigger:
+      gerrit:
+        - event: ref-updated
+          ref: ^refs/tags/([0-9]+\.)+[0-9]*(alpha|beta|candidate|rc|a|b|c|r|g)[0-9]*$
+
+  - name: release
+    description: When a commit is tagged as a release, this pipeline runs jobs that publish archives and documentation.
+    manager: IndependentPipelineManager
+    precedence: high
+    trigger:
+      gerrit:
+        - event: ref-updated
+          ref: ^refs/tags/([0-9]+\.)+[0-9]+$
+
+  - name: silent
+    description: This pipeline is used for silently testing new jobs.
+    manager: IndependentPipelineManager
+    precedence: low
+    trigger:
+      gerrit:
+        - event: patchset-created
+        - event: comment-added
+          comment_filter: (?i)^(Patch Set [0-9]+:\n\n)?\s*recheck(( (?:bug|lp)[\s#:]*(\d+))|( no bug))\s*$
+
+  - name: experimental
+    description: On-demand pipeline for requesting a run against a set of jobs that are not yet gating. Leave review comment of "check experimental" to run jobs in this pipeline.
+    manager: IndependentPipelineManager
+    precedence: low
+    trigger:
+      gerrit:
+        - event: comment-added
+          comment_filter: (?i)^(Patch Set [0-9]+:\n\n)?\s*check experimental\s*$
+    success:
+      gerrit:
+        force-message: true
+    failure:
+      gerrit:
+        force-message: true
+
+  - name: periodic
+    description: Jobs in this queue are triggered on a timer.
+    manager: IndependentPipelineManager
+    precedence: low
+    trigger:
+      timer:
+        - time: '0 6 * * *'
 
 jobs:
   - name: ^.*$
@@ -58,4 +127,21 @@ projects:
     check:
       - gate-noop
     gate:
+      - gate-noop
+    post:
+      - gate-noop
+    tag:
+      - gate-noop
+    pre-release:
+      - gate-noop
+    release:
+      - gate-noop
+    silent:
+      - gate-noop
+    experimental:
+      - gate-noop
+
+projects:
+  - name: gtest-org/gtest2
+    periodic:
       - gate-noop
