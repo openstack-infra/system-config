@@ -361,7 +361,6 @@
           export DEVSTACK_GATE_TIMEOUT=120
           export DEVSTACK_GATE_TEMPEST=1
           export DEVSTACK_GATE_IRONIC=1
-          export DEVSTACK_GATE_CONFIGDRIVE=0
           export DEVSTACK_GATE_SMOKE_SERIAL=1
           export BRANCH_OVERRIDE={branch-override}
           if [ "$BRANCH_OVERRIDE" != "default" ] ; then
@@ -396,7 +395,6 @@
           export DEVSTACK_GATE_TEMPEST=1
           export DEVSTACK_GATE_POSTGRES=1
           export DEVSTACK_GATE_IRONIC=1
-          export DEVSTACK_GATE_CONFIGDRIVE=0
           export DEVSTACK_GATE_SMOKE_SERIAL=1
           export BRANCH_OVERRIDE={branch-override}
           if [ "$BRANCH_OVERRIDE" != "default" ] ; then
