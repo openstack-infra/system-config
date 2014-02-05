@@ -298,6 +298,16 @@ murano:
     branches:
       - master
 
+magnetodb:
+    events:
+      - patchset-created
+      - change-merged
+      - x-vrif-minus-2
+    projects:
+      - stackforge/magnetodb
+    branches:
+      - master
+
 billingstack:
     events:
       - patchset-created

@@ -517,6 +517,10 @@ jobs:
     voting: false
   - name: gate-python-troveclient-pypy
     voting: false
+  - name: gate-magnetodb-python26
+    voting: false
+  - name: gate-magnetodb-requirements
+    voting: false
   - name: gate-mistral-python33
     voting: false
   - name: gate-mistral-extra-python33
@@ -3659,6 +3663,27 @@ projects:
           - post-mirror-python26
           - post-mirror-python27
           - post-mirror-python33
+
+  - name: stackforge/magnetodb
+    check:
+      - gate-magnetodb-pep8
+      - gate-magnetodb-python26
+      - gate-magnetodb-python27
+      - gate-magnetodb-docs
+      - gate-magnetodb-requirements
+    gate:
+      - gate-magnetodb-pep8
+      - gate-magnetodb-python27
+      - gate-magnetodb-docs
+    post:
+      - magnetodb-branch-tarball
+    pre-release:
+      - magnetodb-tarball
+    release:
+      - magnetodb-tarball:
+        - magnetodb-pypi-upload:
+          - post-mirror-python26
+          - post-mirror-python27
 
   - name: stackforge/MRaaS
     check:
