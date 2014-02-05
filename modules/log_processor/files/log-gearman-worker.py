@@ -66,7 +66,8 @@ class CRM114Filter(object):
         self.p = subprocess.Popen(args,
                                   stdout=subprocess.PIPE,
                                   stderr=subprocess.PIPE,
-                                  stdin=subprocess.PIPE)
+                                  stdin=subprocess.PIPE,
+                                  close_fds=True)
 
     def process(self, data):
         if not self.p:
