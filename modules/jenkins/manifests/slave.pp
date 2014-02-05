@@ -193,6 +193,8 @@ class jenkins::slave(
   # Temporarily removed tox so we can pin it separately (see below)
   $pip_packages = [
     'setuptools-git',
+    'python-magic',
+    'requests'
   ]
 
   if $python3 {
