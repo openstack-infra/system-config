@@ -171,6 +171,7 @@ savanna:
       - openstack/savanna-image-elements
       - stackforge/puppet-savanna
       - stackforge/savanna-ci-config
+      - stackforge/savanna-guestagent
     branches:
       - master
       - stable/0.1
