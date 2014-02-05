@@ -1,0 +1,18 @@
+# ************************************
+# Puppet Nodepool vhost template
+# Managed by Puppet
+# ************************************
+
+<VirtualHost *:80>
+  ServerName <%= vhost_name %>
+  DocumentRoot "<%= imagelog_root %>"
+  ErrorLog ${APACHE_LOG_DIR}/<%= vhost_name %>-error.log
+  CustomLog ${APACHE_LOG_DIR}/<%= vhost_name %>-access.log common
+
+  <Directory <%= imagelog_root %>>
+    Options FollowSymLinks MultiViews Indexes
+    AllowOverride None
+    Order allow,deny
+    allow from all
+  </Directory>
+</VirtualHost>
