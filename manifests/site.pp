@@ -558,16 +558,6 @@ node 'pbx.openstack.org' {
   }
 }
 
-# A bare machine, but with a jenkins user
-node /^.*\.template\.openstack\.org$/ {
-  include openstack_project::slave_template
-}
-
-# A bare machine, but with a jenkins user
-node /^.*dev-.*\.template\.openstack\.org$/ {
-  include openstack_project::dev_slave_template
-}
-
 # A backup machine.  Don't run cron or puppet agent on it.
 node /^ci-backup-.*\.openstack\.org$/ {
   include openstack_project::backup_server
@@ -709,12 +699,6 @@ node /^fedora18-dev\d+\.slave\.openstack\.org$/ {
     ssh_key   => $openstack_project::jenkins_dev_ssh_key,
     sysadmins => hiera('sysadmins'),
     python3   => true,
-  }
-}
-
-node /^.*\.jclouds\.openstack\.org$/ {
-  class { 'openstack_project::bare_slave':
-    certname => 'jclouds.openstack.org',
   }
 }
 

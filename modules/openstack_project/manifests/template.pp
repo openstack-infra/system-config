@@ -8,11 +8,14 @@ class openstack_project::template (
   $iptables_rules4           = [],
   $iptables_rules6           = [],
   $install_users = true,
+  $automatic_upgrades = true,
   $certname = $::fqdn
 ) {
   include ssh
   include snmpd
-  include openstack_project::automatic_upgrades
+  if $automatic_upgrades == true {
+    include openstack_project::automatic_upgrades
+  }
 
   class { 'iptables':
     public_tcp_ports => $iptables_public_tcp_ports,
