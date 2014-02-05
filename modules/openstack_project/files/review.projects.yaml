@@ -592,6 +592,10 @@
   acl-config: /home/gerrit2/acls/stackforge/chef-cookbooks.config
   options:
     - direct-release
+- project: stackforge/openstack-cli-powershell
+  description: Powershell environment for Openstack
+- project: stackforge/openstack-sdk-dotnet
+  description: OpenStack SDK for .Net
 - project: stackforge/openstack-sdk-php
   description: OpenStack SDK for PHP
 - project: stackforge/openvz-nova-driver

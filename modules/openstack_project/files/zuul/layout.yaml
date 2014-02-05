@@ -3442,6 +3442,18 @@ projects:
     gate:
       - gate-openstack-chef-repo
 
+  - name: stackforge/openstack-cli-powershell
+    check:
+      - gate-noop
+    gate:
+      - gate-noop
+
+  - name: stackforge/openstack-sdk-dotnet
+    check:
+      - gate-noop
+    gate:
+      - gate-noop
+
   - name: stackforge/openstack-sdk-php
     check:
       - gate-noop
