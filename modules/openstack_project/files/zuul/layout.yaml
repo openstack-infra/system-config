@@ -1310,8 +1310,10 @@ projects:
     check:
       - gate-python-openstackclient-requirements
       - gate-python-openstackclient-python33
+      - gate-tempest-dsvm-full
     gate:
       - gate-python-openstackclient-requirements
+      - gate-tempest-dsvm-full
     pre-release:
       - python-openstackclient-tarball
     release:
