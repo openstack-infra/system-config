@@ -411,6 +411,38 @@
 
 
 - job-template:
+    name: '{pipeline}-tempest-dsvm-marconi{branch-designator}'
+    node: '{node}'
+
+    wrappers:
+      - timeout:
+          timeout: 125
+          fail: true
+      - timestamps
+
+    builders:
+      - devstack-checkout
+      - shell: |
+          #!/bin/bash -xe
+          export PYTHONUNBUFFERED=true
+          export DEVSTACK_GATE_TIMEOUT=120
+          export DEVSTACK_GATE_TEMPEST=1
+          export DEVSTACK_GATE_MARCONI=1
+          export BRANCH_OVERRIDE={branch-override}
+          if [ "$BRANCH_OVERRIDE" != "default" ] ; then
+              export OVERRIDE_ZUUL_BRANCH=$BRANCH_OVERRIDE
+          fi
+
+          cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
+          ./safe-devstack-vm-gate-wrap.sh
+      - link-logs
+
+    publishers:
+      - devstack-logs
+      - console-log
+
+
+- job-template:
     name: '{pipeline}-tempest-dsvm-cells{branch-designator}'
     node: '{node}'
 
@@ -1031,6 +1063,7 @@
       - '{pipeline}-devstack-dsvm-neutron{branch-designator}'
       - '{pipeline}-tempest-dsvm-ironic{branch-designator}'
       - '{pipeline}-tempest-dsvm-ironic-postgres{branch-designator}'
+      - '{pipeline}-tempest-dsvm-marconi{branch-designator}'
       - '{pipeline}-tempest-dsvm-all{branch-designator}'
       - '{pipeline}-tempest-dsvm-coverage{branch-designator}'
       - '{pipeline}-tempest-dsvm-stress{branch-designator}'
