@@ -141,7 +141,6 @@ projects:
     experimental:
       - gate-noop
 
-projects:
   - name: gtest-org/gtest2
     periodic:
       - gate-noop
