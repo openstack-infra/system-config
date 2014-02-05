@@ -23,7 +23,9 @@ class nodepool (
   $nodepool_ssh_private_key = '',
   $git_source_repo = 'https://git.openstack.org/openstack-infra/nodepool',
   $revision = 'master',
-  $statsd_host = ''
+  $statsd_host = '',
+  $vhost_name = 'nodepool.openstack.org',
+  $image_log_document_root = '/var/log/nodepool'
 ) {
 
   class { 'mysql::server':
@@ -144,7 +146,7 @@ class nodepool (
     mode    => '0444',
     owner   => 'root',
     group   => 'root',
-    source  => 'puppet:///modules/nodepool/logging.conf',
+    content => template('nodepool/nodepool.logging.conf.erb'),
     notify  => Service['nodepool'],
   }
 
@@ -161,5 +163,25 @@ class nodepool (
     enable     => true,
     hasrestart => true,
     require    => File['/etc/init.d/nodepool'],
+  }
+
+  # Setup apache for image log access
+  include apache
+
+  apache::vhost { $vhost_name:
+    port     => 80,
+    priority => '50',
+    docroot  => $image_log_document_root,
+    template => 'nodepool/nodepool.vhost.erb',
+  }
+
+  if $image_log_document_root != '/var/log/nodepool' {
+    file { $image_log_document_root:
+      ensure   => directory,
+      mode     => '0755',
+      owner    => 'nodepool',
+      group    => 'nodepool',
+      require  => User['nodepool']
+    }
   }
 }
