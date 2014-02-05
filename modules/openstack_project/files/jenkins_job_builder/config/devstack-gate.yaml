@@ -777,12 +777,12 @@
 
 
 - job-template:
-    name: '{pipeline}-tempest-dsvm-savanna-full{branch-designator}'
+    name: '{pipeline}-tempest-dsvm-savanna{branch-designator}'
     node: '{node}'
 
     wrappers:
       - timeout:
-          timeout: 185
+          timeout: 125
           fail: true
       - timestamps
 
@@ -791,9 +791,8 @@
       - shell: |
           #!/bin/bash -xe
           export PYTHONUNBUFFERED=true
-          export DEVSTACK_GATE_TIMEOUT=180
+          export DEVSTACK_GATE_TIMEOUT=120
           export DEVSTACK_GATE_TEMPEST=1
-          export DEVSTACK_GATE_TEMPEST_FULL=1
           export DEVSTACK_GATE_SAVANNA=1
           export BRANCH_OVERRIDE={branch-override}
           if [ "$BRANCH_OVERRIDE" != "default" ] ; then
@@ -809,12 +808,12 @@
 
 
 - job-template:
-    name: '{pipeline}-tempest-dsvm-savanna-postgres-full{branch-designator}'
+    name: '{pipeline}-tempest-dsvm-savanna-postgres{branch-designator}'
     node: '{node}'
 
     wrappers:
       - timeout:
-          timeout: 185
+          timeout: 125
           fail: true
       - timestamps
 
@@ -823,9 +822,8 @@
       - shell: |
           #!/bin/bash -xe
           export PYTHONUNBUFFERED=true
-          export DEVSTACK_GATE_TIMEOUT=180
+          export DEVSTACK_GATE_TIMEOUT=120
           export DEVSTACK_GATE_TEMPEST=1
-          export DEVSTACK_GATE_TEMPEST_FULL=1
           export DEVSTACK_GATE_POSTGRES=1
           export DEVSTACK_GATE_SAVANNA=1
           export BRANCH_OVERRIDE={branch-override}
@@ -1057,8 +1055,8 @@
       - '{pipeline}-grenade-dsvm-forward'
       - '{pipeline}-grenade-dsvm-neutron'
       - '{pipeline}-grenade-dsvm-neutron-forward'
-      - '{pipeline}-tempest-dsvm-savanna-full{branch-designator}'
-      - '{pipeline}-tempest-dsvm-savanna-postgres-full{branch-designator}'
+      - '{pipeline}-tempest-dsvm-savanna{branch-designator}'
+      - '{pipeline}-tempest-dsvm-savanna-postgres{branch-designator}'
       - '{pipeline}-tempest-dsvm-savanna-neutron{branch-designator}'
       - '{pipeline}-devstack-dsvm-neutron{branch-designator}'
       - '{pipeline}-tempest-dsvm-ironic{branch-designator}'

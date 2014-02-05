@@ -193,6 +193,21 @@
       - pypi-jobs
       - translation-jobs
       - openstack-publish-jobs
+      - '{pipeline}-tempest-dsvm-savanna{branch-designator}':
+          pipeline: check
+          node: 'devstack-precise || devstack-precise-check'
+          branch-designator: '-nv'
+          branch-override: default
+      - '{pipeline}-tempest-dsvm-savanna-postgres{branch-designator}':
+          pipeline: check
+          node: 'devstack-precise || devstack-precise-check'
+          branch-designator: '-nv'
+          branch-override: default
+      - '{pipeline}-tempest-dsvm-savanna-neutron{branch-designator}':
+          pipeline: check
+          node: 'devstack-precise || devstack-precise-check'
+          branch-designator: '-nv'
+          branch-override: default
 
 - project:
     name: python-savannaclient

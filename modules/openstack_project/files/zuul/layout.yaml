@@ -415,11 +415,11 @@ jobs:
     voting: false
   - name: gate-savanna-pylint
     voting: false
-  - name: ^(gate|check)-tempest-dsvm-savanna-full$
+  - name: ^(gate|check)-tempest-dsvm-savanna-nv$
     voting: false
-  - name: ^(gate|check)-tempest-dsvm-savanna-postgres-full$
+  - name: ^(gate|check)-tempest-dsvm-savanna-postgres-nv$
     voting: false
-  - name: ^(gate|check)-tempest-dsvm-savanna-neutron$
+  - name: ^(gate|check)-tempest-dsvm-savanna-neutron-nv$
     voting: false
   - name: ^(gate|check)-tempest-dsvm-trove-full$
     voting: false
@@ -873,13 +873,13 @@ projects:
     check:
       - gate-savanna-pylint
       - gate-savanna-requirements
-      - check-tempest-dsvm-savanna-full
-      - check-tempest-dsvm-savanna-postgres-full
+      - check-tempest-dsvm-savanna
+      - check-tempest-dsvm-savanna-postgres
       - check-tempest-dsvm-savanna-neutron
     gate:
       - gate-savanna-requirements
-      - gate-tempest-dsvm-savanna-full
-      - gate-tempest-dsvm-savanna-postgres-full
+      - gate-tempest-dsvm-savanna
+      - gate-tempest-dsvm-savanna-postgres
       - gate-tempest-dsvm-savanna-neutron
     post:
       - hook-savanna-rtfd
@@ -1926,6 +1926,9 @@ projects:
       - check-grenade-dsvm
       - check-tempest-dsvm-ironic-nv
       - check-tempest-dsvm-ironic-postgres-nv
+      - check-tempest-dsvm-savanna-nv
+      - check-tempest-dsvm-savanna-postgres-nv
+      - check-tempest-dsvm-savanna-neutron-nv
     gate:
       - gate-tempest-requirements
       - gate-tempest-pep8
@@ -1941,9 +1944,6 @@ projects:
       - gate-tempest-dsvm-neutron-heat-slow
       - gate-grenade-dsvm-forward
       - gate-tempest-dsvm-neutron-full
-      - gate-tempest-dsvm-savanna-full
-      - gate-tempest-dsvm-savanna-postgres-full
-      - gate-tempest-dsvm-savanna-neutron
       - gate-tempest-dsvm-trove-full
       - check-tempest-dsvm-marconi
       - check-tempest-dsvm-neutron-isolated
@@ -2163,6 +2163,9 @@ projects:
       - check-devstack-dsvm-neutron
       - check-tempest-dsvm-ironic-nv
       - check-tempest-dsvm-ironic-postgres-nv
+      - check-tempest-dsvm-savanna-nv
+      - check-tempest-dsvm-savanna-postgres-nv
+      - check-tempest-dsvm-savanna-neutron-nv
     gate:
       - gate-devstack-bash8
       - gate-devstack-dsvm-cells
@@ -2344,6 +2347,9 @@ projects:
       - check-devstack-dsvm-cells-havana
       - check-tempest-dsvm-ironic-nv
       - check-tempest-dsvm-ironic-postgres-nv
+      - check-tempest-dsvm-savanna-nv
+      - check-tempest-dsvm-savanna-postgres-nv
+      - check-tempest-dsvm-savanna-neutron-nv
     gate:
       - gate-devstack-dsvm-cells
       - gate-tempest-dsvm-full
