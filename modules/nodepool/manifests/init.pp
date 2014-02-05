@@ -23,7 +23,9 @@ class nodepool (
   $nodepool_ssh_private_key = '',
   $git_source_repo = 'https://git.openstack.org/openstack-infra/nodepool',
   $revision = 'master',
-  $statsd_host = ''
+  $statsd_host = '',
+  $vhost_name = 'nodepool.openstack.org',
+  $imagelog_root = '/var/log/nodepool'
 ) {
 
   class { 'mysql::server':
@@ -161,5 +163,15 @@ class nodepool (
     enable     => true,
     hasrestart => true,
     require    => File['/etc/init.d/nodepool'],
+  }
+
+  # Setup apache for image log access
+  include apache
+
+  apache::vhost { $vhost_name:
+    port     => 80,
+    priority => '50',
+    docroot  => $imagelog_root,
+    template => 'nodepool/nodepool.vhost.erb',
   }
 }
