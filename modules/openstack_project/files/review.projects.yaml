@@ -535,6 +535,10 @@
   group: mistral
   upstream: git://github.com/rakhmerov/mistral-extra.git
   acl-config: /home/gerrit2/acls/stackforge/mistral.config
+- project: stackforge/magnetodb
+  description: Key-value database service for OpenStack cloud.
+  upstream: git://github.com:Mirantis/magnetodb.git
+  acl-config: /home/gerrit2/acls/stackforge/magnetodb.config
 - project: stackforge/MRaaS
 - project: stackforge/murano-agent
   group: murano

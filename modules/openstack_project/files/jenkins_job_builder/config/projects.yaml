@@ -1,4 +1,4 @@
-- project:
+	- project:
     name: gantt
     github-org: openstack
     node: precise
@@ -128,6 +128,15 @@
     jobs:
       - python-jobs
       - pypi-jobs
+
+- project:
+    name: magnetodb
+    github-org: stackforge
+    node: precise
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - python-jobs
 
 - project:
     name: climate

@@ -442,6 +442,8 @@ jobs:
     voting: false
   - name: gate-mistral-python33
     voting: false
+  - name: gate-magnetodb-python33
+    voting: false
   - name: gate-mistral-extra-python33
     voting: false
   - name: gate-python-mistralclient-python33
@@ -3281,6 +3283,24 @@ projects:
           - post-mirror-python26
           - post-mirror-python27
           - post-mirror-python33
+
+  - name: stackforge/magnetodb
+    check:
+      - gate-magnetodb-pep8
+      - gate-magnetodb-python27
+      - gate-magnetodb-docs
+    gate:
+      - gate-magnetodb-pep8
+      - gate-magnetodb-python27
+      - gate-magnetodb-docs
+    post:
+      - magnetodb-branch-tarball
+    pre-release:
+      - magnetodb-tarball
+    release:
+      - magnetodb-tarball:
+        - magnetodb-pypi-upload:  
+          - post-mirror-python27
 
   - name: stackforge/MRaaS
     check:
