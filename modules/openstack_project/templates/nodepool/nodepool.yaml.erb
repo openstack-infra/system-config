@@ -204,31 +204,6 @@ providers:
         setup: prepare_node_devstack.sh
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
-  - name: tripleo-test-cloud
-    service-type: 'compute'
-    service-name: 'nova'
-    username: '<%= tripleo_username %>'
-    password: '<%= tripleo_password %>'
-    project-id: '<%= tripleo_project %>'
-    auth-url: 'https://ci-overcloud.tripleo.org:13000/v2.0'
-    boot-timeout: 120
-    max-servers: 5
-    networks:
-      - net-id: b703205c-1340-4258-a654-c14963ccef62
-      - net-id: 874b5d72-39db-4350-809e-cd45f6dd4049
-    images:
-      - name: tripleo-precise
-        base-image: 'Ubuntu Precise 12.04 LTS Server 64-bit'
-        min-ram: 8192
-        setup: prepare_node_tripleo.sh
-        username: jenkins
-        private-key: /home/nodepool/.ssh/id_rsa
-      - name: tripleo-fedora
-        base-image: 'Fedora 20 64-bit'
-        min-ram: 8192
-        setup: prepare_node_tripleo.sh
-        username: jenkins
-        private-key: /home/nodepool/.ssh/id_rsa
 
 
 targets:
@@ -261,14 +236,6 @@ targets:
         providers:
           - name: hpcloud-region-b
           - name: rax-iad
-      - name: tripleo-precise
-        min-ready: 1
-        providers:
-          - name: tripleo-test-cloud
-      - name: tripleo-fedora
-        min-ready: 1
-        providers:
-          - name: tripleo-test-cloud
   - name: jenkins02
     jenkins:
       url: 'https://jenkins02.openstack.org/'
@@ -298,10 +265,6 @@ targets:
         providers:
           - name: hpcloud-region-b
           - name: rax-iad
-      - name: tripleo-precise
-        min-ready: 1
-        providers:
-          - name: tripleo-test-cloud
   - name: jenkins03
     jenkins:
       url: 'https://jenkins03.openstack.org/'
