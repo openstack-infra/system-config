@@ -4225,6 +4225,16 @@ projects:
 
   - name: stackforge/python-openstacksdk
     check:
-      - gate-noop
+      - gate-python-openstacksdk-requirements
+      - gate-python-openstacksdk-pep8
+      - gate-python-openstacksdk-python26
+      - gate-python-openstacksdk-python27
+      - gate-python-openstacksdk-python33
+      - gate-python-openstacksdk-pypy
     gate:
-      - gate-noop
+      - gate-python-openstacksdk-requirements
+      - gate-python-openstacksdk-pep8
+      - gate-python-openstacksdk-python26
+      - gate-python-openstacksdk-python27
+      - gate-python-openstacksdk-python33
+      - gate-python-openstacksdk-pypy
