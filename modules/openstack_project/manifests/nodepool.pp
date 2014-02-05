@@ -22,6 +22,7 @@ class openstack_project::nodepool(
 ) {
   class { 'openstack_project::server':
     sysadmins                 => $sysadmins,
+    iptables_public_tcp_ports => [80],
   }
 
   class { '::nodepool':
