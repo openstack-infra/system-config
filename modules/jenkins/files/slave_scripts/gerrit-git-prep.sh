@@ -1,8 +1,13 @@
 #!/bin/bash -e
 
 GERRIT_SITE=$1
-ZUUL_SITE=$2
-GIT_ORIGIN=$3
+GIT_ORIGIN=$2
+
+# TODO(jeblair): Remove once the arg list is changed in jjb macros
+if [ ! -z $3 ]
+then
+    GIT_ORIGIN=$3
+fi
 
 if [ -z "$GERRIT_SITE" ]
 then
@@ -10,9 +15,9 @@ then
   exit 1
 fi
 
-if [ -z "$ZUUL_SITE" ]
+if [ -z "$ZUUL_URL" ]
 then
-  echo "The zuul site name (eg 'http://zuul.openstack.org') must be the second argument."
+  echo "The ZUUL_URL must be provided."
   exit 1
 fi
 
@@ -64,7 +69,7 @@ fi
 
 if [ -z "$ZUUL_NEWREV" ]
 then
-    git fetch $ZUUL_SITE/p/$ZUUL_PROJECT $ZUUL_REF
+    git fetch $ZUUL_URL/$ZUUL_PROJECT $ZUUL_REF
     git checkout FETCH_HEAD
     git reset --hard FETCH_HEAD
     if ! git clean -x -f -d -q ; then
