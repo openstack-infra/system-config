@@ -18,4 +18,4 @@
 
 HOSTNAME=$1
 
-./prepare_node.sh $HOSTNAME false
+./prepare_node.sh "$HOSTNAME" false
