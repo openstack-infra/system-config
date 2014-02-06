@@ -238,12 +238,12 @@
 - project: openstack/oslo.rootwrap
   docimpact-group: openstack-manuals
   upstream: git://github.com/ttx/oslo.rootwrap.git
-- project: openstack/oslo.sphinx
-  docimpact-group: openstack-manuals
-  description: Theme and utilities for Sphinx documentation tool
 - project: openstack/oslo.version
   docimpact-group: openstack-manuals
   upstream: git://github.com/emonty/oslo.version.git
+- project: openstack/oslosphinx
+  docimpact-group: openstack-manuals
+  description: Theme and utilities for Sphinx documentation tool
 - project: openstack/pycadf
   description: CADF Python module
 - project: openstack/python-ceilometerclient
