@@ -17,6 +17,8 @@
 # limitations under the License.
 
 HOSTNAME=$1
+SUDO='true'
+BARE='true'
 
-./prepare_node.sh "$HOSTNAME" true
+./prepare_node.sh "$HOSTNAME" "$SUDO" "$BARE"
 sudo -u jenkins -i /opt/nodepool-scripts/prepare_devstack_new_kernel.sh $HOSTNAME

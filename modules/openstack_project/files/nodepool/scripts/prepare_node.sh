@@ -18,7 +18,7 @@
 
 HOSTNAME=$1
 SUDO=$2
-
+BARE=$3
 
 sudo hostname $HOSTNAME
 wget https://git.openstack.org/cgit/openstack-infra/config/plain/install_puppet.sh
@@ -28,10 +28,10 @@ sudo git clone https://review.openstack.org/p/openstack-infra/config.git \
 sudo /bin/bash /root/config/install_modules.sh
 if [ -z "$NODEPOOL_SSH_KEY" ] ; then
     sudo puppet apply --modulepath=/root/config/modules:/etc/puppet/modules \
-	-e "class {'openstack_project::single_use_slave': sudo => $SUDO, }"
+	-e "class {'openstack_project::single_use_slave': sudo => $SUDO, bare => $BARE, }"
 else
     sudo puppet apply --modulepath=/root/config/modules:/etc/puppet/modules \
-	-e "class {'openstack_project::single_use_slave': install_users => false, sudo => $SUDO, ssh_key => '$NODEPOOL_SSH_KEY', }"
+	-e "class {'openstack_project::single_use_slave': install_users => false, sudo => $SUDO, bare => $BARE, ssh_key => '$NODEPOOL_SSH_KEY', }"
 fi
 
 sudo mkdir -p /opt/git

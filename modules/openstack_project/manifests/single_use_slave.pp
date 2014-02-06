@@ -10,6 +10,7 @@ class openstack_project::single_use_slave (
   $certname = $::fqdn,
   $install_users = true,
   $sudo = false,
+  $bare = true,
   $automatic_upgrades = false,
   $ssh_key = $openstack_project::jenkins_ssh_key
 ) inherits openstack_project {
@@ -25,6 +26,6 @@ class openstack_project::single_use_slave (
   class { 'jenkins::slave':
     ssh_key => $ssh_key,
     sudo    => $sudo,
-    bare    => true,
+    bare    => $bare,
   }
 }
