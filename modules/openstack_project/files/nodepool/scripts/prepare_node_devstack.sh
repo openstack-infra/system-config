@@ -18,5 +18,5 @@
 
 HOSTNAME=$1
 
-./prepare_node.sh $HOSTNAME true
+./prepare_node.sh "$HOSTNAME" true
 sudo -u jenkins -i /opt/nodepool-scripts/prepare_devstack.sh $HOSTNAME
