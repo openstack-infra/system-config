@@ -270,11 +270,31 @@ class jenkins::slave(
       require    => Database_user['openstack_citest@localhost'],
     }
 
+    # The puppetlabs postgres module does not manage the postgres user
+    # and group for us. Create them here to ensure concat can create
+    # dirs and files owned by this user and group.
+    user { 'postgres':
+      ensure  => present,
+      gid     => 'postgres',
+      system  => true,
+      require => Group['postgres'],
+    }
+
+    group { 'postgres':
+      ensure => present,
+      system => true,
+    }
+
     class { 'postgresql::server':
       postgres_password => 'insecure_slave',
       manage_firewall   => false,
-      listen_addresses  => '127.0.0.1',
-      require           => Class['postgresql::params'],
+      # The puppetlabs postgres module incorrectly quotes ip addresses
+      # in the postgres server config. Use localhost instead.
+      listen_addresses  => ['localhost'],
+      require           => [
+        User['postgres'],
+        Class['postgresql::params'],
+      ],
     }
 
     class { 'postgresql::lib::devel':
