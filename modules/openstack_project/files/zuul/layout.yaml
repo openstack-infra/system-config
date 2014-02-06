@@ -713,33 +713,10 @@ projects:
       - name: python-jobs
       - name: openstack-server-publish-jobs
       - name: check-requirements
-      - name: integrated-gate
     check:
-      - check-devstack-dsvm-cells
-      - check-tempest-dsvm-postgres-full
-      - gate-tempest-dsvm-large-ops
-      - gate-tempest-dsvm-neutron-large-ops
       - gate-gantt-pylint
     gate:
-      - gate-devstack-dsvm-cells
-      - gate-tempest-dsvm-postgres-full
-      - gate-tempest-dsvm-large-ops
-      - gate-tempest-dsvm-neutron-large-ops
-    experimental:
-      - gate-grenade-dsvm-forward
-    experimental-tripleo:
-      - check-tripleo-seed-precise
-      - check-tripleo-undercloud-precise
-      - check-tripleo-overcloud-precise
-    post:
-      - gantt-upstream-translation-update
-    pre-release:
-      - gantt-tarball
-    release:
-      - gantt-tarball
-      - gantt-merge-release-tags
-    periodic:
-      - gantt-propose-translation-update
+      - gate-noop
 
   - name: openstack/glance
     template:
