@@ -566,26 +566,9 @@ projects:
       - name: openstack-server-publish-jobs
     check:
       - gate-gantt-requirements
-      - check-devstack-dsvm-cells
-      - check-tempest-dsvm-full
-      - check-tempest-dsvm-postgres-full
-      - check-tempest-dsvm-neutron
-      - gate-tempest-dsvm-large-ops
-      - gate-tempest-dsvm-neutron-large-ops
-      - check-grenade-dsvm
       - gate-gantt-pylint
     gate:
       - gate-gantt-requirements
-      - gate-devstack-dsvm-cells
-      - gate-tempest-dsvm-full
-      - gate-tempest-dsvm-postgres-full
-      - gate-tempest-dsvm-neutron
-      - gate-tempest-dsvm-large-ops
-      - gate-tempest-dsvm-neutron-large-ops
-      - gate-grenade-dsvm
-    experimental:
-      - gate-grenade-dsvm-forward
-      - gate-tempest-dsvm-neutron-full
     post:
       - gantt-upstream-translation-update
     pre-release:
