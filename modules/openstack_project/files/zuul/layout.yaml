@@ -1906,6 +1906,7 @@ projects:
       - check-tempest-dsvm-neutron
       - gate-tempest-dsvm-large-ops
       - gate-tempest-dsvm-neutron-large-ops
+      - check-tempest-dsvm-neutron-isolated
       - check-grenade-dsvm
       - check-tempest-dsvm-ironic-nv
       - check-tempest-dsvm-ironic-postgres-nv
@@ -1922,6 +1923,7 @@ projects:
       - gate-tempest-dsvm-neutron
       - gate-tempest-dsvm-large-ops
       - gate-tempest-dsvm-neutron-large-ops
+      - gate-tempest-dsvm-neutron-isolated
       - gate-grenade-dsvm
     experimental:
       - gate-tempest-dsvm-neutron-heat-slow
@@ -1929,7 +1931,6 @@ projects:
       - gate-tempest-dsvm-neutron-full
       - gate-tempest-dsvm-trove-full
       - check-tempest-dsvm-marconi
-      - check-tempest-dsvm-neutron-isolated
       - check-tempest-dsvm-neutron-pg-isolated
     post:
       - tempest-docs
