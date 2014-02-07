@@ -2162,12 +2162,9 @@ projects:
       - periodic-tempest-dsvm-neutron-havana
       - periodic-tempest-dsvm-postgres-full-havana
     periodic-qa:
-      - periodic-tempest-dsvm-all-havana
-      - periodic-tempest-dsvm-stress-havana
-      - periodic-tempest-dsvm-neutron-pg-havana
-      - periodic-tempest-dsvm-large-ops-havana
-      - periodic-tempest-dsvm-neutron-large-ops-havana
       - periodic-tempest-dsvm-full-non-isolated-master
+      - periodic-tempest-dsvm-all-master
+      - periodic-tempest-dsvm-stress-master
 
   - name: openstack/tripleo-heat-templates
     check:
