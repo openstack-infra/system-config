@@ -1718,6 +1718,25 @@ projects:
       - os-refresh-config-tarball:
         - os-refresh-config-pypi-upload
 
+#TODO: add docs
+  - name: openstack/oslosphinx
+    check:
+      - gate-oslosphinx-requirements
+      - gate-oslosphinx-pep8
+    gate:
+      - gate-oslosphinx-requirements
+      - gate-oslosphinx-pep8
+    post:
+      - oslosphinx-branch-tarball
+    pre-release:
+      - oslosphinx-tarball
+    release:
+      - oslosphinx-tarball:
+        - oslosphinx-pypi-upload:
+          - post-mirror-python26
+          - post-mirror-python27
+          - post-mirror-python33
+
   - name: openstack/oslo-incubator
     template:
       - name: python-jobs
@@ -1822,25 +1841,6 @@ projects:
     release:
       - oslo.rootwrap-tarball:
         - oslo.rootwrap-pypi-upload:
-          - post-mirror-python26
-          - post-mirror-python27
-          - post-mirror-python33
-
-#TODO: add docs
-  - name: openstack/oslo.sphinx
-    check:
-      - gate-oslo.sphinx-requirements
-      - gate-oslo.sphinx-pep8
-    gate:
-      - gate-oslo.sphinx-requirements
-      - gate-oslo.sphinx-pep8
-    post:
-      - oslo.sphinx-branch-tarball
-    pre-release:
-      - oslo.sphinx-tarball
-    release:
-      - oslo.sphinx-tarball:
-        - oslo.sphinx-pypi-upload:
           - post-mirror-python26
           - post-mirror-python27
           - post-mirror-python33
