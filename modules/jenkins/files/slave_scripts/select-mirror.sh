@@ -35,6 +35,7 @@ EOF
 # use the pypi.openstack.org mirror exclusively
 if grep -x "$org/$project" /opt/requirements/projects.txt 2>&1
 then
+    echo "$org/$project will use the internal openstack pypi mirror"
     export TOX_INDEX_URL='http://pypi.openstack.org/openstack'
     cat <<EOF > ~/.pydistutils.cfg
 [easy_install]
@@ -45,6 +46,7 @@ EOF
 index-url = http://pypi.openstack.org/openstack
 EOF
 else
+    echo "$org/$project will not use the internal openstack pypi mirror"
     cat <<EOF > ~/.pip/pip.conf
 [global]
 timeout = 60
