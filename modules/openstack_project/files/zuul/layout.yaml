@@ -2450,9 +2450,13 @@ projects:
 
   - name: openstack-infra/groups
     check:
-      - gate-noop
+      - gate-groups-unittests
     gate:
-      - gate-noop
+      - gate-groups-unittests
+    post:
+      - groups-release-branch
+    release:
+      - groups-release-master
 
   - name: openstack-infra/jeepyb
     check:
