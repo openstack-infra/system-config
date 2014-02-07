@@ -414,7 +414,7 @@ To rename a project:
      sudo mv ~gerrit2/review_site/git/openstack/{OLD,NEW}.git
      sudo mv /var/lib/git/openstack/{OLD,NEW}.git
 
-#. Move the git repository on git.openstack.org::
+#. Move the git repository on git{01-04}.openstack.org::
 
      sudo mv /var/lib/git/openstack/{OLD,NEW}.git
 
