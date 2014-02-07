@@ -44,4 +44,4 @@ a.gwt-InlineHyperlink {background: none !important}
 .result_LOST {
     color: #e39f00;
 }
-ul {list-style-type: none; }
+li.comment_test {list-style-type: none; }
