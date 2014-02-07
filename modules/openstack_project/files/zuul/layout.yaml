@@ -306,10 +306,6 @@ jobs:
   - name: check-devstack-dsvm-neutron
     branch: ^(?!stable/grizzly).*$
     voting: false
-  - name: ^(gate|check)-tempest-dsvm-neutron-isolated$
-    branch: ^(?!stable/grizzly).*$
-  - name: ^(gate|check)-tempest-dsvm-neutron-pg-isolated$
-    branch: ^(?!stable/grizzly).*$
   - name: ^(gate|check)-tempest-dsvm-neutron-full$
     branch: ^(?!stable/grizzly).*$
     voting: false
@@ -946,26 +942,23 @@ projects:
       - check-tempest-dsvm-neutron
       - check-tempest-dsvm-neutron-full
       - check-tempest-dsvm-neutron-pg
-      - check-tempest-dsvm-neutron-isolated
-      - check-tempest-dsvm-neutron-pg-isolated
+      - check-tempest-dsvm-neutron
+      - check-tempest-dsvm-neutron-pg
       - gate-tempest-dsvm-neutron-large-ops
       - check-grenade-dsvm-neutron
       - check-devstack-dsvm-neutron
     gate:
       - gate-tempest-dsvm-neutron
       - gate-tempest-dsvm-neutron-pg
-      - gate-tempest-dsvm-neutron-isolated
-      - gate-tempest-dsvm-neutron-pg-isolated
+      - gate-tempest-dsvm-neutron
+      - gate-tempest-dsvm-neutron-pg
       - gate-tempest-dsvm-neutron-large-ops
     experimental:
-      - check-tempest-dsvm-neutron-isolated-parallel
       - gate-grenade-dsvm-neutron-forward
       - neutron-upstream-translation-update
       - check-neutron-dsvm-functional
       - experimental-tempest-dsvm-neutron
       - experimental-tempest-dsvm-neutron-pg
-      - experimental-tempest-dsvm-neutron-isolated
-      - experimental-tempest-dsvm-neutron-pg-isolated
     experimental-tripleo:
       - check-tripleo-seed-precise
       - check-tripleo-undercloud-precise
@@ -1009,8 +1002,6 @@ projects:
     experimental:
       - gate-grenade-dsvm-forward
       - check-tempest-dsvm-neutron-pg
-      - check-tempest-dsvm-neutron-isolated
-      - check-tempest-dsvm-neutron-pg-isolated
     experimental-tripleo:
       - check-tripleo-seed-precise
       - check-tripleo-undercloud-precise
@@ -1490,8 +1481,6 @@ projects:
       - check-tempest-dsvm-neutron
       - check-tempest-dsvm-neutron-full
       - check-tempest-dsvm-neutron-pg
-      - check-tempest-dsvm-neutron-isolated
-      - check-tempest-dsvm-neutron-pg-isolated
       - gate-tempest-dsvm-large-ops
       - gate-tempest-dsvm-neutron-large-ops
       - check-grenade-dsvm
@@ -1502,8 +1491,6 @@ projects:
       - gate-tempest-dsvm-postgres-full
       - gate-tempest-dsvm-neutron
       - gate-tempest-dsvm-neutron-pg
-      - gate-tempest-dsvm-neutron-isolated
-      - gate-tempest-dsvm-neutron-pg-isolated
       - gate-tempest-dsvm-large-ops
       - gate-tempest-dsvm-neutron-large-ops
       - gate-grenade-dsvm
@@ -2267,8 +2254,6 @@ projects:
       - gate-grenade-dsvm-forward
       - gate-tempest-dsvm-trove-full
       - check-tempest-dsvm-marconi
-      - check-tempest-dsvm-neutron-isolated
-      - check-tempest-dsvm-neutron-pg-isolated
     experimental-tripleo:
       - check-tripleo-seed-precise
       - check-tripleo-undercloud-precise
@@ -2512,7 +2497,6 @@ projects:
       - gate-grenade-dsvm-forward
       - gate-swift-dsvm-functional
     experimental:
-      - check-tempest-dsvm-neutron-isolated
       - gate-grenade-dsvm-forward
 
   - name: openstack-dev/grenade
