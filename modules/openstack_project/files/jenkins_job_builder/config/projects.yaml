@@ -1674,7 +1674,7 @@
 
 - project:
     name: taskflow
-    github-org: stackforge
+    github-org: openstack
     node: precise
     tarball-site: tarballs.openstack.org
 
@@ -1724,7 +1724,7 @@
 
 - project:
     name: pycadf
-    github-org: stackforge
+    github-org: openstack
     node: precise
     tarball-site: tarballs.openstack.org
 
@@ -1757,7 +1757,7 @@
 
 - project:
     name: stevedore
-    github-org: stackforge
+    github-org: openstack
     node: precise
     rtfd-id: 4157
     tarball-site: tarballs.openstack.org
@@ -1769,7 +1769,7 @@
 
 - project:
     name: cliff
-    github-org: stackforge
+    github-org: openstack
     node: precise
     tarball-site: tarballs.openstack.org
 

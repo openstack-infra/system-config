@@ -160,6 +160,9 @@
 - project: openstack/ceilometer
 - project: openstack/cinder
   docimpact-group: openstack-manuals
+- project: openstack/cliff
+  description: Command Line Interface Formulation Framework
+  group: python-cliff
 - project: openstack/compute-api
   group: openstack-api-site
 - project: openstack/database-api
@@ -241,6 +244,8 @@
 - project: openstack/oslo.version
   docimpact-group: openstack-manuals
   upstream: git://github.com/emonty/oslo.version.git
+- project: openstack/pycadf
+  description: CADF Python module
 - project: openstack/python-ceilometerclient
   upstream: git://github.com/asalkeld/python-ceilometerclient.git
 - project: openstack/python-cinderclient
@@ -286,11 +291,16 @@
   group: savanna
   description: Disk image elements for Savanna
   acl-config: /home/gerrit2/acls/openstack/savanna.config
+- project: openstack/stevedore
+  group: python-stevedore
+  description: Manage dynamic plugins for Python applications
 - project: openstack/swift
   docimpact-group: openstack-manuals
 - project: openstack/swift-bench
   description: Benchmarking tool for OpenStack Swift
   upstream: git://github.com/jeblair/swift-bench.git
+- project: openstack/taskflow
+  description: A library to complete workflows/tasks in HA manner
 - project: openstack/tempest
   options:
     - direct-release
@@ -338,10 +348,6 @@
 - project: stackforge/cl-openstack-client
   description: Common Lisp OpenStack client libraries
   upstream: git://github.com/jd/cl-openstack-client.git
-- project: stackforge/cliff
-  description: Command Line Interface Formulation Framework
-  upstream: git://github.com/dreamhost/cliff.git
-  group: python-cliff
 - project: stackforge/climate
   description: Reservation Service for OpenStack
   upstream: git://github.com/jd/climate.git
@@ -675,8 +681,6 @@
   upstream: git://github.com/CiscoSystems/puppet_openstack_builder
   description: Data model for deploying multiple openstack reference architectures
   acl-config: /home/gerrit2/acls/stackforge/puppet-modules.config
-- project: stackforge/pycadf
-  description: CADF Python module
 - project: stackforge/pyghmi
   description: A Pure python IPMI library
   upstream: git://git.code.sf.net/p/xcat/python-ipmi
@@ -729,17 +733,10 @@
 - project: stackforge/stackalytics
   description: OpenStack analytics dashboard
   upstream: git://github.com/Mirantis/stackalytics.git
-- project: stackforge/stevedore
-  group: python-stevedore
-  description: Manage dynamic plugins for Python applications
-  upstream: git://github.com/dreamhost/stevedore.git
 - project: stackforge/swiftsync
   description: "Swift mass syncronizer"
   upstream: git://github.com/enovance/swiftsync.git
   acl-config: /home/gerrit2/acls/openstack/swiftsync.config
-- project: stackforge/taskflow
-  description: A library to complete workflows/tasks in HA manner
-  upstream: git://github.com/yahoo/TaskFlow
 - project: stackforge/tomograph
   description: "Library to help distributed applications send trace information to metrics backends like Zipkin and Statsd."
   upstream: https://github.com/timjr/tomograph.git
