@@ -116,8 +116,11 @@ is the only member of this group, but members of the `Administrators`
 group may temporarily add themselves in order to correct problems with
 automatic project creation.
 
-The `External Testing Tools` group is used to grant +/-1 Verified
-access to external testing tools.
+The `Third-Party CI` group is used to grant +/-1 Verified
+access to external testing tools on a sandbox project.
+
+The `Voting Third-Party CI` group is used to grant +/-1 Verified
+access to external testing tools for all projects.
 
 The `Continuous Integration Tools` group contains Jenkins and any
 other CI tools that get +2/-2 access on reviews.
@@ -304,7 +307,7 @@ Next, edit `project.config` to look like::
       label-Code-Review = -1..+1 group Registered Users
       label-Verified = -2..+2 group Continuous Integration Tools
       label-Verified = -2..+2 group Project Bootstrappers
-      label-Verified = -1..+1 group External Testing Tools
+      label-Verified = -1..+1 group Voting Third-Party CI
       submit = group Continuous Integration Tools
       submit = group Project Bootstrappers
       label-Approved = +0..+1 group Project Bootstrappers
@@ -468,7 +471,7 @@ Testing`_) looks like:
 .. code-block:: shell
 
   ssh -p 29418 review.openstack.org "gerrit create-account \
-      --group 'External Testing Tools' \
+      --group 'Third-Party CI' \
       --full-name 'Some CI Bot' \
       --email ci-bot@third-party.org \
       --ssh-key 'ssh-rsa AAAAB3Nz...zaUCse1P ci-bot@third-party.org' \
@@ -477,7 +480,7 @@ Testing`_) looks like:
 Details on the create-account_ command can be found in the Gerrit
 API documentation.
 
-.. _`External Testing Tools`: http://ci.openstack.org/third_party.html
+.. _`Third-Party CI`: http://ci.openstack.org/third_party.html
 
 .. _create-account: https://review.openstack.org/Documentation/cmd-create-account.html
 
