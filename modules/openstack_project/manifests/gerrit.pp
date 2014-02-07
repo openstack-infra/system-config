@@ -151,7 +151,7 @@ class openstack_project::gerrit (
       },
       {
         name  => 'launchpadbug',
-        match => '<a href=\"(https://bugs\\.launchpad\\.net/[a-zA-Z0-9\\-]+/\\+bug/(\\d+))[^\"]+\">[^<]+</a>',
+        match => '<a href=\"(https://bugs\\.launchpad\\.net/[a-zA-Z0-9\\-]+/\\+bug/(\\d+))[^\"]*\">[^<]+</a>',
         html  => '<a href=\"$1\">$1</a>'
       },
       {
