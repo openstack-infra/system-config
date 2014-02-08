@@ -223,6 +223,7 @@ providers:
       - name: tripleo-precise
         base-image: 'Ubuntu Precise 12.04 LTS Server 64-bit'
         min-ram: 8192
+        min-ready: 10
         name-filter: h1
         setup: prepare_node_tripleo.sh
         username: jenkins
@@ -230,6 +231,7 @@ providers:
       - name: tripleo-fedora
         base-image: 'Fedora 20 64-bit'
         min-ram: 8192
+        min-ready: 10
         name-filter: h1
         setup: prepare_node_tripleo.sh
         username: jenkins
