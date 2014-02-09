@@ -784,6 +784,7 @@ projects:
       - gate-swift-dsvm-functional
     experimental:
       - gate-grenade-dsvm-forward
+      - keystone-coverage
     post:
       - keystone-upstream-translation-update
     pre-release:
