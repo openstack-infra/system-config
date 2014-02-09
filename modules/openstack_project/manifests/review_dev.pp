@@ -94,13 +94,6 @@ class openstack_project::review_dev (
     ],
   }
 
-  file { '/home/gerrit2/.ssh':
-    ensure  => directory,
-    owner   => 'gerrit2',
-    group   => 'gerrit2',
-    mode    => '0700',
-    require => User['gerrit2'],
-  }
   file { '/home/gerrit2/.launchpadlib':
     ensure  => directory,
     owner   => 'gerrit2',
