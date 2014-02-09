@@ -50,5 +50,6 @@ class jeepyb (
     refreshonly => true,
     require     => Class['mysql::python'],
     subscribe   => Vcsrepo['/opt/jeepyb'],
+    logoutput   => true,
   }
 }

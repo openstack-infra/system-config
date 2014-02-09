@@ -2,11 +2,12 @@
 #
 class gerrit::remotes($ensure=present) {
     cron { 'gerritfetchremotes':
-      ensure  => $ensure,
-      user    => 'gerrit2',
-      minute  => '*/30',
-      command => 'sleep $((RANDOM\%60+90)) && /usr/local/bin/manage-projects',
-      require => [Class['jeepyb'], File['/var/lib/jeepyb']],
+      ensure    => $ensure,
+      user      => 'gerrit2',
+      minute    => '*/30',
+      command   => 'sleep $((RANDOM\%60+90)) && /usr/local/bin/manage-projects',
+      require   => [Class['jeepyb'], File['/var/lib/jeepyb']],
+      logoutput => true,
     }
 
     file { '/var/lib/jeepyb':
