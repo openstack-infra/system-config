@@ -370,6 +370,21 @@ class openstack_project::gerrit (
       source  => 'puppet:///modules/openstack_project/gerrit/acls',
       require => Class['::gerrit']
     }
+
+    exec { 'manage_projects':
+      command     => '/usr/local/bin/manage-projects',
+      timeout     => 900, # 15 minutes
+      subscribe   => [
+          File['/home/gerrit2/projects.yaml'],
+          File['/home/gerrit2/acls'],
+        ],
+      refreshonly => true,
+      require     => [
+          File['/home/gerrit2/projects.yaml'],
+          File['/home/gerrit2/acls'],
+          Class['jeepyb'],
+        ],
+    }
   }
   file { '/home/gerrit2/review_site/bin/set_agreements.sh':
     ensure  => present,
