@@ -379,6 +379,7 @@ class openstack_project::gerrit (
           File['/home/gerrit2/acls'],
         ],
       refreshonly => true,
+      logoutput   => true,
       require     => [
           File['/home/gerrit2/projects.yaml'],
           File['/home/gerrit2/acls'],
