@@ -153,31 +153,31 @@ a:link {
     /* because other wise this floats up off the line */
     margin-top: 0.25em;
 }
-.projects_filter_container {
+.filter_container {
     display: inline-block;
     position: relative;
     top: 1.5em;
     padding-left: .5em;
 }
-.projects_filter_container input#projects_filter {
+.filter_container input#filter {
     display: inline-block;
 }
-.projects_filter_container sub {
+.filter_container sub {
     padding: .5em 0;
     display: block;
 }
-.projects_filter_container sub a.save-filter {
+.filter_container sub a.save-filter {
     text-decoration: underline;
 }
-.projects_filter_container .hidden {
+.filter_container .hidden {
     visibility: hidden;
 }
-.projects_filter_container img.filter-saved {
+.filter_container img.filter-saved {
     display: inline-block;
     position: relative;
     top: 3px;
 }
-.projects_filter_container img.filter-saved.hidden {
+.filter_container img.filter-saved.hidden {
     display: none;
 }
 
@@ -267,9 +267,9 @@ progress[aria-valuenow]:before  {
       Queue lengths: <span id="trigger_event_queue_length"></span> events,
       <span id="result_event_queue_length"></span> results.
       &nbsp;&nbsp;&nbsp;&nbsp;
-      <label for="projects_filter">Filter projects:</label>
-      <span class="projects_filter_container">
-        <input type="text" id="projects_filter" />
+      <label for="filter">Filters:</label>
+      <span class="filter_container">
+        <input title="project(s) or review(s) separated by comma" type="text" id="filter" />
         <!--
         An embedded 'approved' image.
         From the famfamfam "Silk" icon set, Creative Commons Attribution 2.5.
