@@ -125,7 +125,7 @@ class openstack_project::status (
   }
 
   exec { 'install_flot' :
-    command     => 'yui-compressor -o \'.js$:.min.js\' /opt/flot/jquery.flot*.js; mv /opt/flot/jquery.flot*.min.js /srv/static/status',
+    command     => 'yui-compressor -o \'.js\$:.min.js\' /opt/flot/jquery.flot*.js; mv /opt/flot/jquery.flot*.min.js /srv/static/status',
     path        => '/bin:/usr/bin',
     refreshonly => true,
     subscribe   => Vcsrepo['/opt/flot'],
