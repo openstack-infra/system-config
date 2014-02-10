@@ -135,6 +135,11 @@ class jenkins::slave(
         ensure => present,
       }
 
+      # For Japanese document translations
+      package { $::jenkins::params::japanese_fonts_package:
+        ensure => present,
+      }
+
     }
     default: {
       fail("Unsupported osfamily: ${::osfamily} The 'jenkins' module only supports osfamily Debian or RedHat (slaves only).")

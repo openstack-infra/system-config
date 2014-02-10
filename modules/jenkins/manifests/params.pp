@@ -105,6 +105,8 @@ class jenkins::params {
       # packages needed by document translation
       $gnome_doc_package = 'gnome-doc-utils'
       $libtidy_package = 'libtidy-0.99-0'
+      # packages for Japanese translation
+      $japanese_fonts_package = 'fonts-takao'
       # for keystone ldap auth integration
       $libsasl_dev = 'libsasl2-dev'
       $mysql_dev_package = 'libmysqlclient-dev'
