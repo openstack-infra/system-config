@@ -123,6 +123,10 @@ source-files:
     tags:
       - screen
       - apachecombined
+  - name: logs/screen-savanna.txt
+    tags:
+      - screen
+      - oslofmt
 # TODO(clarkb) Add swift proxy logs here.
   - name: logs/syslog.txt
     tags:
