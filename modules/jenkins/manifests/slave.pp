@@ -149,6 +149,11 @@ class jenkins::slave(
         command  => '/usr/sbin/update-java-alternatives --set java-1.7.0-openjdk-amd64',
       }
 
+      # For Japanese document translations
+      package { $::jenkins::params::japanese_fonts_package:
+        ensure => present,
+      }
+
     }
     default: {
       fail("Unsupported osfamily: ${::osfamily} The 'jenkins' module only supports osfamily Debian or RedHat (slaves only).")
