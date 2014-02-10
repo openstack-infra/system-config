@@ -1,0 +1,10 @@
+Change-Id: I15fd9c8e423511fe8c9e4f8c074abe7eb953e7dd
+Code-Review+2: James E. Blair <corvus@inaugust.com>
+Verified+2: Jenkins
+Approved+1: Jeremy Stanley <fungi@yuggoth.org>
+Code-Review+2: Jeremy Stanley <fungi@yuggoth.org>
+Submitted-by: Jenkins
+Submitted-at: Mon, 10 Feb 2014 17:58:22 +0000
+Reviewed-on: https://review.openstack.org/72178
+Project: openstack-infra/config
+Branch: refs/heads/master
