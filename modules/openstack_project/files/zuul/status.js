@@ -70,7 +70,7 @@ function format_progress(elapsed, remaining) {
     return r;
 }
 
-function is_hide_project(project) {
+function is_hidden(project, change_id) {
     var filters = window.zuul_filter;
     if (filters.length == 0) {
         return false;
@@ -78,6 +78,8 @@ function is_hide_project(project) {
     var hide = true;
     $.each(filters, function(filter_i, filter) {
         if(project.indexOf(filter) != -1)
+            hide = false;
+        if(change_id.indexOf(filter) != -1)
             hide = false;
     });
     return hide;
@@ -179,12 +181,14 @@ function format_pipeline(data) {
     $.each(data['change_queues'], function(change_queue_i, change_queue) {
         $.each(change_queue['heads'], function(head_i, head) {
             var projects = "";
+            var change_ids = "";
             var hide_queue = true;
             $.each(head, function(change_i, change) {
                 projects += change['project'] + "|";
-                hide_queue &= is_hide_project(change['project']);
+                change_ids += change['id'];
+                hide_queue &= is_hidden(change['project'], change['id']);
             });
-            html += '<div project="' + projects + '" style="'
+            html += '<div change_id="' + change_ids + '" project="' + projects + '" style="'
                 + (hide_queue ? 'display:none;' : '') + '">';
 
             if (data['change_queues'].length > 1 && head_i == 0) {
@@ -478,8 +482,8 @@ function update_graphs() {
 }
 
 function save_filter() {
-    var name = 'zuul-project-filter';
-    var value = $('#projects_filter').val().trim();
+    var name = 'zuul-filter';
+    var value = $('#filter').val().trim();
     set_cookie(name, value);
     $('img.filter-saved').removeClass('hidden');
     window.setTimeout(function(){
@@ -518,15 +522,16 @@ $(function() {
         }
     });
 
-    $('#projects_filter').live('keyup change', function () {
-        window.zuul_filter = $('#projects_filter').val().trim().split(',');
+    $('#filter').live('keyup change', function () {
+        window.zuul_filter = $('#filter').val().trim().split(/[\s,]+/);
         window.zuul_filter = window.zuul_filter.filter(function(n){
             return n;
         });
         $.each($('div[project]'), function (idx, val) {
             val = $(val);
             var project = val.attr('project');
-            if (is_hide_project(project)) {
+            var change_id = val.attr('change_id');
+            if (is_hidden(project, change_id)) {
                 val.hide(100);
             } else {
                 val.show(100);
@@ -541,9 +546,9 @@ $(function() {
                 save_filter();
             });
     });
-    var cookie = read_cookie('zuul-project-filter');
+    var cookie = read_cookie('zuul-filter');
     if(cookie)
-        $('#projects_filter').val(cookie).change();
+        $('#filter').val(cookie).change();
     cookie = read_cookie('zuul-expand-by-default');
     if(cookie)
         $('#expandByDefault').prop('checked', cookie == 'true' ? true : false);
