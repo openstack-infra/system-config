@@ -188,9 +188,7 @@ class openstack_project::review (
     user       => 'gerritbot',
     vhost_name => $::fqdn,
   }
-  class { 'gerrit::remotes':
-    ensure => absent,
-  }
+  include gerrit::remotes
 
   file { '/home/gerrit2/.launchpadlib':
     ensure  => directory,
