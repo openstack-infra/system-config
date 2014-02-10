@@ -25,6 +25,7 @@ class openstack_project::etherpad (
   }
 
   class { 'etherpad_lite::site':
+    etherpad_title    => 'OpenStack Etherpad',
     database_host     => $mysql_host,
     database_user     => $mysql_user,
     database_name     => $mysql_db_name,

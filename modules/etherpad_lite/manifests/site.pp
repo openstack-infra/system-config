@@ -2,6 +2,7 @@
 #
 class etherpad_lite::site (
   $database_password,
+  $etherpad_title,
   $sessionKey    = '',
   $dbType        = 'mysql',
   $database_user = 'eplite',
