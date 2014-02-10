@@ -2076,6 +2076,7 @@ projects:
       - periodic-tempest-dsvm-neutron-pg-havana
       - periodic-tempest-dsvm-large-ops-havana
       - periodic-tempest-dsvm-neutron-large-ops-havana
+      - periodic-tempest-dsvm-full-non-isolated
 
   - name: openstack/tripleo-heat-templates
     check:
