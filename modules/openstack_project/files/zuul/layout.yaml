@@ -305,6 +305,8 @@ jobs:
     voting: false
   - name: check-tempest-dsvm-cells-full-havana
     voting: false
+  - name: check-tempest-dsvm-cells-full
+    voting: false
   - name: ^(gate|check)-gerrit-unittests$
     branch: ^openstack/.*$
   - name: gerrit-package
@@ -875,6 +877,7 @@ projects:
       - gate-tempest-dsvm-large-ops
       - gate-tempest-dsvm-neutron-large-ops
       - check-grenade-dsvm
+      - check-tempest-dsvm-cells-full
       - gate-nova-pylint
       - check-tempest-dsvm-neutron-heat-slow
     gate:
@@ -2035,6 +2038,7 @@ projects:
       - check-tempest-dsvm-full
       - check-tempest-dsvm-postgres-full
       - check-tempest-dsvm-neutron
+      - check-tempest-dsvm-cells-full
       - gate-tempest-dsvm-large-ops
       - gate-tempest-dsvm-neutron-large-ops
       - check-grenade-dsvm
@@ -2272,6 +2276,7 @@ projects:
       - gate-tempest-dsvm-large-ops
       - gate-tempest-dsvm-neutron-large-ops
       - check-tempest-dsvm-neutron-heat-slow
+      - check-tempest-dsvm-cells-full
       - check-grenade-dsvm
       - check-grenade-dsvm-forward
       - check-swift-dsvm-functional
