@@ -96,6 +96,7 @@ python email-stats.py -p openstack-infra/reviewday -o out/reviewday.csv
 python email-stats.py -p openstack-infra/reviewstats -o out/reviewstats.csv
 python email-stats.py -p openstack-infra/statusbot -o out/statusbot.csv
 python email-stats.py -p openstack-infra/storyboard -o out/storyboard.csv
+python email-stats.py -p openstack-infra/storyboard-webclient -o out/storyboard-webclient.csv
 python email-stats.py -p openstack-infra/tripleo-ci -o out/tripleo-ci.csv
 python email-stats.py -p openstack-infra/zmq-event-publisher -o out/zmq-event-publisher.csv
 python email-stats.py -p openstack-infra/zuul -o out/zuul.csv
