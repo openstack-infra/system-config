@@ -3,6 +3,7 @@
     node: bare-precise
 
     builders:
+      - revoke-sudo
       - gerrit-git-prep
       - shell: "./tools/run-compare-xml.sh openstack-infra config"
 
@@ -15,6 +16,7 @@
     node: bare-precise
 
     builders:
+      - revoke-sudo
       - gerrit-git-prep
       - shell: |
           source /usr/local/jenkins/slave_scripts/select-mirror.sh openstack-infra config
@@ -30,6 +32,7 @@
     node: bare-precise
 
     builders:
+      - revoke-sudo
       - gerrit-git-prep
       - docs:
           github-org: openstack-infra
@@ -50,6 +53,7 @@
     node: bare-precise
 
     builders:
+      - revoke-sudo
       - gerrit-git-prep
       - docs:
           github-org: openstack-infra
@@ -65,6 +69,7 @@
     node: bare-precise
 
     builders:
+      - revoke-sudo
       - gerrit-git-prep
       - shell: "tools/check_projects_yaml_alphabetized.sh"
 
