@@ -5,8 +5,8 @@ ssldir=/var/lib/puppet/ssl
 rundir=/var/run/puppet
 factpath=$vardir/lib/facter
 templatedir=$confdir/templates
-server=ci-puppetmaster.openstack.org
-certname=<%= certname %>
+server=<%= @puppetmaster %>
+certname=<%= @certname %>
 pluginsync=true
 
 [master]
