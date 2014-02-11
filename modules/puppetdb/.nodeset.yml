@@ -1,0 +1,45 @@
+---
+default_set: 'centos-64-x64'
+sets:
+  'centos-59-x64':
+    nodes:
+      "main.foo.vm":
+        prefab: 'centos-59-x64'
+        options:
+          memory: 1024 #mb
+  'centos-64-x64':
+    nodes:
+      "main.foo.vm":
+        prefab: 'centos-64-x64'
+        options:
+          memory: 1024 #mb
+  'fedora-18-x64':
+    nodes:
+      "main.foo.vm":
+        prefab: 'fedora-18-x64'
+        options:
+          memory: 1024 #mb
+  'debian-607-x64':
+    nodes:
+      "main.foo.vm":
+        prefab: 'debian-607-x64'
+        options:
+          memory: 1024 #mb
+  'debian-70rc1-x64':
+    nodes:
+      "main.foo.vm":
+        prefab: 'debian-70rc1-x64'
+        options:
+          memory: 1024 #mb
+  'ubuntu-server-10044-x64':
+    nodes:
+      "main.foo.vm":
+        prefab: 'ubuntu-server-10044-x64'
+        options:
+          memory: 1024 #mb
+  'ubuntu-server-12042-x64':
+    nodes:
+      "main.foo.vm":
+        prefab: 'ubuntu-server-12042-x64'
+        options:
+          memory: 1024 #mb

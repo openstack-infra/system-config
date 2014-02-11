@@ -42,11 +42,13 @@ MODULES["puppetlabs-apache"]="0.0.4"
 MODULES["puppetlabs-apt"]="1.1.0"
 MODULES["puppetlabs-haproxy"]="0.4.1"
 MODULES["puppetlabs-mysql"]="0.6.1"
-MODULES["puppetlabs-postgresql"]="3.0.0"
+MODULES["puppetlabs-postgresql"]="3.1.0"
 MODULES["puppetlabs-stdlib"]="3.2.0"
 MODULES["saz-memcached"]="2.0.2"
 MODULES["spiette-selinux"]="0.5.1"
 MODULES["rafaelfc-pear"]="1.0.3"
+MODULES["puppetlabs-inifile"]="1.0.0"
+MODULES["puppetlabs-firewall"]="0.0.4"
 
 MODULE_LIST=`puppet module list`
 
