@@ -3,6 +3,7 @@
     node: precise
 
     builders:
+      - revoke-sudo
       - gerrit-git-prep
       - docs:
           github-org: '{github-org}'
