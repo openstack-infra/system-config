@@ -21,6 +21,7 @@
     name: 'gate-{name}-run-tests'
 
     builders:
+      - revoke-sudo
       - gerrit-git-prep
       - run-tests:
           github-org: '{github-org}'
@@ -35,6 +36,7 @@
     name: 'gate-{name}-bash8'
 
     builders:
+      - revoke-sudo
       - gerrit-git-prep
       - bash8:
           github-org: '{github-org}'
@@ -49,6 +51,7 @@
     name: 'gate-{name}-unittests-{env}'
 
     builders:
+      - revoke-sudo
       - gerrit-git-prep
       - shell: '/usr/local/jenkins/slave_scripts/run-unittests.sh {env} {github-org} {name}'
       - assert-no-extra-files

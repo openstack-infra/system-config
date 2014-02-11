@@ -8,6 +8,7 @@
       - timestamps
 
     builders:
+      - revoke-sudo
       - gerrit-git-prep
       - shell: |
           #!/bin/bash -xe
@@ -44,6 +45,7 @@
     name: '{name}-js-release-{branch-designator}'
 
     builders:
+      - revoke-sudo
       - gerrit-git-prep
       - shell: |
           #!/bin/bash -xe

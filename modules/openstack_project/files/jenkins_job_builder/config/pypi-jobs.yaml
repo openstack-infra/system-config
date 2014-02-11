@@ -3,6 +3,7 @@
     node: pypi
 
     builders:
+      - revoke-sudo
       - gerrit-git-prep
       - shell: |
           /usr/local/jenkins/slave_scripts/pypi-upload.sh {name} {tarball-site}

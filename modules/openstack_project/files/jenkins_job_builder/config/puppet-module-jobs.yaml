@@ -3,6 +3,7 @@
     node: '{node}'
 
     builders:
+      - revoke-sudo
       - gerrit-git-prep
       - shell: |
           export PUPPET_GEM_VERSION='~> {puppet_version}.0'
@@ -19,6 +20,7 @@
     node: '{node}'
 
     builders:
+      - revoke-sudo
       - gerrit-git-prep
       - puppet-lint
 
@@ -30,6 +32,7 @@
     node: '{node}'
 
     builders:
+      - revoke-sudo
       - gerrit-git-prep
       - puppet-syntax
 
