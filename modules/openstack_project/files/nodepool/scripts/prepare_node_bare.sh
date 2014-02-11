@@ -17,7 +17,7 @@
 # limitations under the License.
 
 HOSTNAME=$1
-SUDO='false'
+SUDO='true'
 BARE='false'
 
 ./prepare_node.sh "$HOSTNAME" "$SUDO" "$BARE"
