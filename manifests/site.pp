@@ -214,6 +214,13 @@ node 'ci-puppetmaster.openstack.org' {
   }
 }
 
+node /puppetdb/ {
+  class { 'openstack_project::puppetdb':
+    sysadmins => hiera('sysadmins'),
+  }
+  class { 'puppetdb': }
+}
+
 node 'graphite.openstack.org' {
   class { 'openstack_project::graphite':
     sysadmins               => hiera('sysadmins'),

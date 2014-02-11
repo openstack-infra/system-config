@@ -1,0 +1,89 @@
+2013-07-16 - Version 1.0.0
+Features:
+- Handle empty values.
+- Handle whitespace in settings names (aka: server role = something)
+- Add mechanism for allowing ini_setting subclasses to override the
+formation of the namevar during .instances, to allow for ini_setting
+derived types that manage flat ini-file-like files and still purge
+them.
+
+2013-05-28 - Chris Price <chris@puppetlabs.com> - 0.10.3
+ * Fix bug in subsetting handling for new settings (cbea5dc)
+
+2013-05-22 - Chris Price <chris@puppetlabs.com> - 0.10.2
+ * Better handling of quotes for subsettings (1aa7e60)
+
+2013-05-21 - Chris Price <chris@puppetlabs.com> - 0.10.1
+ * Change constants to class variables to avoid ruby warnings (6b19864)
+
+2013-04-10 - Erik Dalén <dalen@spotify.com> - 0.10.1
+ * Style fixes (c4af8c3)
+
+2013-04-02 - Dan Bode <dan@puppetlabs.com> - 0.10.1
+ * Add travisfile and Gemfile (c2052b3)
+
+2013-04-02 - Chris Price <chris@puppetlabs.com> - 0.10.1
+ * Update README.markdown (ad38a08)
+
+2013-02-15 - Karel Brezina <karel.brezina@gmail.com> - 0.10.0
+ * Added 'ini_subsetting' custom resource type (4351d8b)
+
+2013-03-11 - Dan Bode <dan@puppetlabs.com> - 0.10.0
+ * guard against nil indentation values (5f71d7f)
+
+2013-01-07 - Dan Bode <dan@puppetlabs.com> - 0.10.0
+ * Add purging support to ini file (2f22483)
+
+2013-02-05 - James Sweeny <james.sweeny@puppetlabs.com> - 0.10.0
+ * Fix test to use correct key_val_parameter (b1aff63)
+
+2012-11-06 - Chris Price <chris@puppetlabs.com> - 0.10.0
+ * Added license file w/Apache 2.0 license (5e1d203)
+
+2012-11-02 - Chris Price <chris@puppetlabs.com> - 0.9.0
+ * Version 0.9.0 released
+
+2012-10-26 - Chris Price <chris@puppetlabs.com> - 0.9.0
+ * Add detection for commented versions of settings (a45ab65)
+
+2012-10-20 - Chris Price <chris@puppetlabs.com> - 0.9.0
+ * Refactor to clarify implementation of `save` (f0d443f)
+
+2012-10-20 - Chris Price <chris@puppetlabs.com> - 0.9.0
+ * Add example for `ensure=absent` (e517148)
+
+2012-10-20 - Chris Price <chris@puppetlabs.com> - 0.9.0
+ * Better handling of whitespace lines at ends of sections (845fa70)
+
+2012-10-20 - Chris Price <chris@puppetlabs.com> - 0.9.0
+ * Respect indentation / spacing for existing sections and settings (c2c26de)
+
+2012-10-17 - Chris Price <chris@puppetlabs.com> - 0.9.0
+ * Minor tweaks to handling of removing settings (cda30a6)
+
+2012-10-10 - Dan Bode <dan@puppetlabs.com> - 0.9.0
+ * Add support for removing lines (1106d70)
+
+2012-10-02 - Dan Bode <dan@puppetlabs.com> - 0.9.0
+ * Make value a property (cbc90d3)
+
+2012-10-02 - Dan Bode <dan@puppetlabs.com> - 0.9.0
+ * Make ruby provider a better parent. (1564c47)
+
+2012-09-29 - Reid Vandewiele <reid@puppetlabs.com> - 0.9.0
+ * Allow values with spaces to be parsed and set (3829e20)
+
+2012-09-24 - Chris Price <chris@pupppetlabs.com> - 0.0.3
+ * Version 0.0.3 released
+
+2012-09-20 - Chris Price <chris@puppetlabs.com> - 0.0.3
+ * Add validation for key_val_separator (e527908)
+
+2012-09-19 - Chris Price <chris@puppetlabs.com> - 0.0.3
+ * Allow overriding separator string between key/val pairs (8d1fdc5)
+
+2012-08-20 - Chris Price <chris@pupppetlabs.com> - 0.0.2
+ * Version 0.0.2 released
+
+2012-08-17 - Chris Price <chris@pupppetlabs.com> - 0.0.2
+ * Add support for "global" section at beginning of file (c57dab4)

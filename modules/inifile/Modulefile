@@ -1,0 +1,8 @@
+name 'puppetlabs-inifile'
+version '1.0.0'
+source 'git://github.com/puppetlabs/puppetlabs-inifile.git'
+author 'Puppetlabs'
+description 'Resource types for managing settings in INI files'
+summary 'Resource types for managing settings in INI files'
+license 'Apache'
+project_page 'https://github.com/puppetlabs/puppetlabs-inifile'
