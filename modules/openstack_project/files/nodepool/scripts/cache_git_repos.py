@@ -34,7 +34,7 @@ def main():
         # YAML module which is not in the stdlib.
         m = PROJECT_RE.match(line)
         if m:
-            project = 'https://git.openstack.org/%s' % m.group(1)
+            project = 'git://git.openstack.org/%s' % m.group(1)
             print run_local(['git', 'clone', project, m.group(1)],
                             cwd='/opt/git')
 
