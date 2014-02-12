@@ -516,4 +516,3 @@ openstack-manila:
       - openstack/python-manilaclient
     branches:
       - master
-        
