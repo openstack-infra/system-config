@@ -506,3 +506,14 @@ syscompass:
       - stackforge/compass-web
     branches:
       - master
+
+openstack-manila:
+    events:
+      - patchset-created
+      - change-merged
+      - x-vrif-minus-2
+    projects:
+      - stackforge/manila
+      - stackforge/python-manilaclient
+    branches:
+      - master
