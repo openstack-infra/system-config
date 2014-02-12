@@ -199,6 +199,9 @@
   upstream: git://github.com/devananda/ironic.git
 - project: openstack/keystone
   docimpact-group: openstack-manuals
+- project openstack/kite
+  description: A service for managing and distributing symmentrical encryption keys under the OpenStack Identity Program.
+  docimpact-group: openstack-manuals
 - project: openstack/marconi
 - project: openstack/netconn-api
   group: openstack-api-site
@@ -263,6 +266,8 @@
 - project: openstack/python-ironicclient
   description: A python client implementing the Ironic API.
 - project: openstack/python-keystoneclient
+- project: openstack/python-kiteclient
+  description: A python client implementing the (kite) Key Distibution API
 - project: openstack/python-marconiclient
 - project: openstack/python-neutronclient
   docimpact-group: openstack-manuals
