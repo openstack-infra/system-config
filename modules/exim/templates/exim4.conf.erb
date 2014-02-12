@@ -457,6 +457,13 @@ acl_check_rcpt:
           control       = submission
           control       = dkim_disable_verify
 
+  # In case people cargo-cult our Zuul configuration, only allow
+  # messages with an envelope sender of jenkins from OpenStack's Zuul.
+
+   deny    senders	= jenkins@openstack.org
+           !hosts       = zuul.openstack.org : 127.0.0.1
+           message      = Sender address not permitted from this host
+
   # Insist that any other recipient address that we accept is either in one of
   # our local domains, or is in a domain for which we explicitly allow
   # relaying. Any other domain is rejected as being unacceptable for relaying.
@@ -528,6 +535,14 @@ acl_check_data:
   #                      X-Spam_score_int: $spam_score_int\n\
   #                      X-Spam_bar: $spam_bar\n\
   #                      X-Spam_report: $spam_report
+
+  # In case people cargo-cult our Zuul configuration, only allow
+  # messages with a From header of jenkins from OpenStack's Zuul.
+
+  deny    condition     = ${if eq{${address:$h_from:}}\
+                                  {jenkins@openstack.org}}
+          !hosts        = zuul.openstack.org : 127.0.0.1
+          message       = From address not permitted from this host
 
   # Accept the message.
 
