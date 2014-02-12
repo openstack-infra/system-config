@@ -437,8 +437,6 @@ jobs:
     voting: false
   - name: gate-python-heatclient-python33
     voting: false
-  - name: gate-python-keystoneclient-python33
-    voting: false
   - name: gate-python-neutronclient-python33
     voting: false
   - name: gate-python-openstackclient-python33
@@ -1307,6 +1305,7 @@ projects:
       - check-grenade-dsvm
     gate:
       - gate-python-keystoneclient-requirements
+      - gate-python-keystoneclient-python33
       - gate-devstack-dsvm-cells
       - gate-tempest-dsvm-full
       - gate-tempest-dsvm-postgres-full
