@@ -32,7 +32,7 @@ For OpenStack we use `a fork
 <https://git.openstack.org/cgit/openstack-infra/lodgeit>`_ of lodgeit which is
 based on one with bugfixes maintained by `dcolish
 <https://bitbucket.org/dcolish/lodgeit-main>`_ but adds back missing
-anti-spam features required by Openstack.
+anti-spam features required by OpenStack.
 
 Puppet configures lodgeit to use drizzle as a database backend, apache
 as a front-end proxy.
