@@ -16,6 +16,7 @@
           export DEVSTACK_GATE_TIMEOUT=60
           export ENABLED_SERVICES=climate
           export PROJECTS="stackforge/climate $PROJECTS"
+          export PROJECTS="stackforge/climate-nova $PROJECTS"
           export PROJECTS="stackforge/python-climateclient $PROJECTS"
 
           function pre_test_hook {
