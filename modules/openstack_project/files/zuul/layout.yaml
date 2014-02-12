@@ -31,7 +31,7 @@ pipelines:
     description: Changes that have been approved by core developers are enqueued in order in this pipeline, and if they pass tests in Jenkins, will be merged.
     failure-message: Build failed.  For information on how to proceed, see https://wiki.openstack.org/wiki/GerritJenkinsGit#Test_Failures
     manager: DependentPipelineManager
-    precedence: low
+    precedence: normal
     trigger:
       gerrit:
         - event: comment-added
