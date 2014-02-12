@@ -71,6 +71,13 @@ providers:
         setup: prepare_node_bare.sh
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
+      - name: bare-centos6
+        base-image: 'CentOS 6.5 (PVHVM)'
+        min-ram: 8192
+        name-filter: 'Performance'
+        setup: prepare_node_bare.sh
+        username: jenkins
+        private-key: /home/nodepool/.ssh/id_rsa
   - name: rax-iad
     region-name: 'IAD'
     service-type: 'compute'
@@ -260,9 +267,10 @@ targets:
           - name: hpcloud-az2
           - name: hpcloud-az3
       - name: bare-centos6
-        min-ready: 1
+        min-ready: 2
         providers:
           - name: rax-iad
+          - name: rax-ord
       - name: devstack-precise
         min-ready: 6
         providers:
@@ -300,6 +308,11 @@ targets:
           - name: hpcloud-az1
           - name: hpcloud-az2
           - name: hpcloud-az3
+      - name: bare-centos6
+        min-ready: 2
+        providers:
+          - name: rax-iad
+          - name: rax-ord
       - name: devstack-precise
         min-ready: 6
         providers:
@@ -333,6 +346,11 @@ targets:
           - name: hpcloud-az1
           - name: hpcloud-az2
           - name: hpcloud-az3
+      - name: bare-centos6
+        min-ready: 2
+        providers:
+          - name: rax-iad
+          - name: rax-ord
       - name: devstack-precise
         min-ready: 6
         providers:
@@ -362,6 +380,11 @@ targets:
           - name: hpcloud-az1
           - name: hpcloud-az2
           - name: hpcloud-az3
+      - name: bare-centos6
+        min-ready: 2
+        providers:
+          - name: rax-iad
+          - name: rax-ord
       - name: devstack-precise
         min-ready: 6
         providers:
@@ -391,6 +414,11 @@ targets:
           - name: hpcloud-az1
           - name: hpcloud-az2
           - name: hpcloud-az3
+      - name: bare-centos6
+        min-ready: 2
+        providers:
+          - name: rax-iad
+          - name: rax-ord
       - name: devstack-precise
         min-ready: 6
         providers:
@@ -420,6 +448,11 @@ targets:
           - name: hpcloud-az1
           - name: hpcloud-az2
           - name: hpcloud-az3
+      - name: bare-centos6
+        min-ready: 2
+        providers:
+          - name: rax-iad
+          - name: rax-ord
       - name: devstack-precise
         min-ready: 6
         providers:
@@ -449,6 +482,11 @@ targets:
           - name: hpcloud-az1
           - name: hpcloud-az2
           - name: hpcloud-az3
+      - name: bare-centos6
+        min-ready: 2
+        providers:
+          - name: rax-iad
+          - name: rax-ord
       - name: devstack-precise
         min-ready: 6
         providers:
