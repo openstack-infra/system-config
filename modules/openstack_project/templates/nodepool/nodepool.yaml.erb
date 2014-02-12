@@ -97,6 +97,13 @@ providers:
         setup: prepare_node_bare.sh
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
+      - name: bare-centos6
+        base-image: 'CentOS 6.5 (PVHVM)'
+        min-ram: 8192
+        name-filter: 'Performance'
+        setup: prepare_node_bare.sh
+        username: jenkins
+        private-key: /home/nodepool/.ssh/id_rsa
       - name: devstack-precise-check
         base-image: 'Ubuntu 12.04 LTS (Precise Pangolin) (PVHVM)'
         min-ram: 8192
@@ -252,6 +259,10 @@ targets:
           - name: hpcloud-az1
           - name: hpcloud-az2
           - name: hpcloud-az3
+      - name: bare-centos6
+        min-ready: 1
+        providers:
+          - name: rax-iad
       - name: devstack-precise
         min-ready: 6
         providers:
