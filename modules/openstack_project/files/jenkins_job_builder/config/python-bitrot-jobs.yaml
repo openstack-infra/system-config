@@ -23,7 +23,7 @@
           branches:
             - 'origin/{branch}'
 
-    node: centos6
+    node: bare-centos6
 
 
 - job-template:

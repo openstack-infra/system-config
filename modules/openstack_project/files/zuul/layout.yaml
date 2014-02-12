@@ -203,6 +203,14 @@ jobs:
     parameter-function: set_log_url
   - name: ^.*(dsvm|devstack-vm).*$
     parameter-function: single_use_node
+  - name: '^(gate|periodic)-.*-python26.*$'
+    parameter-function: single_use_node
+  - name: gate-sqlalchemy-migrate-unittests-26sa07
+    parameter-function: single_use_node
+  - name: '^gate-taskflow-tox-py26-sa(7|9)-mysql$'
+    parameter-function: single_use_node
+  - name: '^gate-pecan-tox-ceilometer-(stable|tip)$'
+    parameter-function: single_use_node
 # begin section to deal with transition to bare-precise
   - name: gate-config-layout
     parameter-function: single_use_node

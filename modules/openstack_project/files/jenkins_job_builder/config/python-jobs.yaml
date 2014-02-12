@@ -70,7 +70,7 @@
       - test-results
       - console-log
 
-    node: centos6
+    node: bare-centos6
 
 - job-template:
     name: 'gate-{name}-python27'
