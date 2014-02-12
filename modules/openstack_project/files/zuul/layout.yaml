@@ -821,6 +821,26 @@ projects:
       - keystone-propose-translation-update
       - periodic-swift-dsvm-functional-havana
 
+  - name: openstack/kite
+    template:
+      - name: python-jobs
+      - name: openstack-server-publish-jobs
+    check:
+      - gate-kite-requirements
+      - gate-kite-python33
+    gate:
+      - gate-kite-requirements
+      - gate-kite-python33
+    post:
+      - kite-upstream-translation-update
+    pre-release:
+      - kite-tarball
+    release:
+      - kite-tarball
+      - kite-merge-release-tags
+    periodic:
+      - kite-propose-translation-update
+
 # TODO: add docs
   - name: openstack/marconi
     check:
@@ -1336,6 +1356,25 @@ projects:
     release:
       - python-keystoneclient-tarball:
         - python-keystoneclient-pypi-upload:
+          - post-mirror-python26
+          - post-mirror-python27
+          - post-mirror-python33
+
+  - name: openstack/python-kiteclient
+    template:
+      - name: python-jobs
+      - name: openstack-client-publish-jobs
+    check:
+      - gate-python-kiteclient-requirements
+      - gate-python-kiteclient-python33
+    gate:
+      - gate-python-kiteclient-requirements
+      - gate-python-kiteclient-python33
+    pre-release:
+      - python-kiteclient-tarball
+    release:
+      - python-keystoneclient-tarball:
+        - python-kiteclient-pypi-upload:
           - post-mirror-python26
           - post-mirror-python27
           - post-mirror-python33
