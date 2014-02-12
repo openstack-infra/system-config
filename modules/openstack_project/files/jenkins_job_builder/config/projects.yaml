@@ -616,6 +616,18 @@
 
 
 - project:
+    name: kite
+    github-org: openstack
+    node: bare-precise
+    tarball-site: tarballs.openstack.org
+    doc-publisher-site: docs.openstack.org
+
+    jobs:
+      - python-jobs
+      - openstack-publish-jobs
+      - translation-jobs
+
+- project:
     name: netconn-api
     github-org: openstack
     node: precise
@@ -803,6 +815,18 @@
 
 - project:
     name: python-keystoneclient
+    github-org: openstack
+    node: precise
+    tarball-site: tarballs.openstack.org
+    doc-publisher-site: docs.openstack.org
+
+    jobs:
+      - python-jobs
+      - openstack-publish-jobs
+      - pypi-jobs
+
+- project:
+    name: python-kiteclient
     github-org: openstack
     node: precise
     tarball-site: tarballs.openstack.org
