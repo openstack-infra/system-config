@@ -242,6 +242,8 @@ jobs:
     voting: false
   - name: check-tripleo-undercloud-precise
     voting: false
+  - name: check-tripleo-overcloud-precise
+    voting: false
   - name: check-tempest-dsvm-ironic-nv
     voting: false
   - name: check-tempest-dsvm-ironic-postgres-nv
@@ -1076,6 +1078,7 @@ projects:
       - gate-tuskar-python27
       - check-tripleo-seed-precise
       - check-tripleo-undercloud-precise
+      - check-tripleo-overcloud-precise
     gate:
       - gate-tuskar-pep8
       - gate-tuskar-python26
@@ -1533,6 +1536,7 @@ projects:
       - gate-python-tuskarclient-python33
       - check-tripleo-seed-precise
       - check-tripleo-undercloud-precise
+      - check-tripleo-overcloud-precise
     gate:
       - gate-python-tuskarclient-pep8
       - gate-python-tuskarclient-python26
@@ -1557,6 +1561,7 @@ projects:
       - gate-diskimage-builder-python27
       - check-tripleo-seed-precise
       - check-tripleo-undercloud-precise
+      - check-tripleo-overcloud-precise
     gate:
       - gate-diskimage-builder-requirements
       - gate-diskimage-builder-pep8
@@ -1679,6 +1684,7 @@ projects:
       - gate-os-apply-config-python27
       - check-tripleo-seed-precise
       - check-tripleo-undercloud-precise
+      - check-tripleo-overcloud-precise
     gate:
       - gate-os-apply-config-requirements
       - gate-os-apply-config-pep8
@@ -1702,6 +1708,7 @@ projects:
       - gate-os-collect-config-python27
       - check-tripleo-seed-precise
       - check-tripleo-undercloud-precise
+      - check-tripleo-overcloud-precise
     gate:
       - gate-os-collect-config-requirements
       - gate-os-collect-config-pep8
@@ -1725,6 +1732,7 @@ projects:
       - gate-os-refresh-config-python27
       - check-tripleo-seed-precise
       - check-tripleo-undercloud-precise
+      - check-tripleo-overcloud-precise
     gate:
       - gate-os-refresh-config-requirements
       - gate-os-refresh-config-pep8
@@ -2087,6 +2095,7 @@ projects:
     check:
       - check-tripleo-seed-precise
       - check-tripleo-undercloud-precise
+      - check-tripleo-overcloud-precise
     gate:
       - gate-noop
     post:
@@ -2100,6 +2109,7 @@ projects:
     check:
       - check-tripleo-seed-precise
       - check-tripleo-undercloud-precise
+      - check-tripleo-overcloud-precise
     gate:
       - gate-noop
     post:
@@ -2117,6 +2127,7 @@ projects:
     check:
       - check-tripleo-seed-precise
       - check-tripleo-undercloud-precise
+      - check-tripleo-overcloud-precise
       - gate-tripleo-incubator-docs
     gate:
       - gate-tripleo-incubator-docs
@@ -2848,6 +2859,7 @@ projects:
     check:
       - check-tripleo-seed-precise
       - check-tripleo-undercloud-precise
+      - check-tripleo-overcloud-precise
     gate:
       - gate-noop
 
