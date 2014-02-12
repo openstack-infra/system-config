@@ -3448,6 +3448,19 @@ projects:
     gate:
       - gate-noop
 
+  - name: stackforge/kite
+    template:
+      - name: python-jobs
+      - name: check-requirements
+    check:
+      - gate-kite-python33
+    gate:
+      - gate-kite-python33
+    pre-release:
+      - kite-tarball
+    release:
+      - kite-tarball
+
   - name: stackforge/libra
     check:
       - gate-libra-pep8
@@ -4194,6 +4207,24 @@ projects:
     release:
       - python-designateclient-tarball:
         - python-designateclient-pypi-upload:
+          - post-mirror-python26
+          - post-mirror-python27
+          - post-mirror-python33
+
+  - name: stackforge/python-kiteclient
+    template:
+      - name: python-jobs
+    check:
+      - gate-python-kiteclient-requirements
+      - gate-python-kiteclient-python33
+    gate:
+      - gate-python-kiteclient-requirements
+      - gate-python-kiteclient-python33
+    pre-release:
+      - python-kiteclient-tarball
+    release:
+      - python-kiteclient-tarball:
+        - python-kiteclient-pypi-upload:
           - post-mirror-python26
           - post-mirror-python27
           - post-mirror-python33

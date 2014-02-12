@@ -660,6 +660,15 @@
 
 
 - project:
+    name: kite
+    github-org: stackforge
+    node: bare-precise
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - python-jobs
+
+- project:
     name: netconn-api
     github-org: openstack
     node: bare-precise
@@ -880,6 +889,16 @@
     jobs:
       - python-jobs
       - openstack-publish-jobs
+      - pypi-jobs
+
+- project:
+    name: python-kiteclient
+    github-org: stackforge
+    node: bare-precise
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - python-jobs
       - pypi-jobs
 
 
