@@ -21,7 +21,7 @@ import sys
 
 from common import run_local
 
-DEVSTACK = os.path.expanduser('~/workspace-cache/devstack')
+DEVSTACK = os.path.expanduser('/opt/git/openstack-dev/devstack')
 CACHEDIR = os.path.expanduser('~/cache/files')
 
 
