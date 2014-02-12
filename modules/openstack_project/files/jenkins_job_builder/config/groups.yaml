@@ -1,12 +1,16 @@
 - job:
     name: gate-groups-unittests
-    node: bare-precise
+    node: '{node}'
 
     builders:
         - gerrit-git-prep
         - shell: |
-            ./scripts/bootstrap.sh
-            ./scripts/gate-build.sh
+            #!/bin/bash -xe
+            # fetch drush
+            mkdir drush
+            curl -L https://github.com/drush-ops/drush/archive/6.0.0.tar.gz | tar -xz -C drush --strip 1
+            # build distribution
+            ./drush/drush make build-groups.make dist
     publishers:
         - console-log
         - coverage-log
@@ -20,21 +24,29 @@
 
 - job-template:
     name: 'groups-release-{branch-designator}'
-    node: bare-precise
+    node: '{node}'
 
     builders:
         - gerrit-git-prep
         - shell: |
             #!/bin/bash -xe
-            ./script/bootstrap.sh
-            ARCHIVE_NAME={name}
-            if [ "$BRANCH" != "master" ] ; then
-                BRANCH_PATH=`echo $ZUUL_REFNAME | tr / -`
-                ARCHIVE_NAME={name}-{branch-designator}
-            fi
-            drush make build-groups.make dist
-            tar -czf $ARCHIVE_NAME.tar.gz dist/
-            mv $ARCHIVE_NAME.tar.gz dist/
+            /usr/local/jenkins/slave_scripts/maven-properties.sh
+        - inject:
+            properties-file: maven.properties
+        - shell: |
+            #!/bin/bash -xe
+            # fetch drush
+            mkdir drush
+            curl -L https://github.com/drush-ops/drush/archive/6.0.0.tar.gz | tar -xz -C drush --strip 1
+            # build distribution
+            ./drush/drush make build-groups.make dist
+            # Clean/create a tarball directory
+            rm -rf tarballs
+            mkdir -p tarballs
+            # Create an archive tarball.
+            tar -czf groups-$PROJECT_VER.tar.gz dist/
+            cp groups-$PROJECT_VER.tar.gz tarballs/groups-latest.tar.gz
+            mv groups-$PROJECT_VER.tar.gz tarballs/
     publishers:
         - console-log
         - coverage-log
@@ -45,6 +57,7 @@
                   source: './reports/**'
                   keep-hierarchy: true
                   copy-after-failure: true
-        - tarball:
-            project: '{name}'
-            site: '{tarball-site}'
+                - target: 'tarballs/groups/'
+                  source: 'tarballs/*.tar.gz'
+                  keep-hierarchy: false
+                  copy-after-failure: false
