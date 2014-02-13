@@ -2152,6 +2152,7 @@
     tarball-site: tarballs.openstack.org
 
     jobs:
+      - gate-groups-unittests
       - 'groups-release-{branch-designator}':
           branch-designator: 'master'
       - 'groups-release-{branch-designator}':
