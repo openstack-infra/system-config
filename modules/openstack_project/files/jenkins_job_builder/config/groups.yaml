@@ -1,6 +1,6 @@
 - job:
     name: gate-groups-unittests
-    node: '{node}'
+    node: 'precise'
 
     builders:
         - gerrit-git-prep
