@@ -271,7 +271,7 @@ class jenkins::slave(
     }
 
     database_grant { 'openstack_citest@localhost':
-      privileges => ['CREATE', 'DROP'],
+      privileges => ['CREATE_PRIV', 'DROP_PRIV'],
       provider   => 'mysql',
       require    => Database_user['openstack_citest@localhost'],
     }
