@@ -1,7 +1,7 @@
 - builder:
     name: gerrit-git-prep
     builders:
-      - shell: "/usr/local/jenkins/slave_scripts/gerrit-git-prep.sh https://review.openstack.org http://zuul.openstack.org git://git.openstack.org"
+      - shell: "/usr/local/jenkins/slave_scripts/gerrit-git-prep.sh https://review.openstack.org git://git.openstack.org"
 
 - builder:
     name: coverage
@@ -220,7 +220,7 @@
               git clone git://git.openstack.org/openstack-infra/devstack-gate
           fi
           cd devstack-gate
-          /usr/local/jenkins/slave_scripts/gerrit-git-prep.sh https://review.openstack.org http://zuul.openstack.org git://git.openstack.org
+          /usr/local/jenkins/slave_scripts/gerrit-git-prep.sh https://review.openstack.org git://git.openstack.org
           cd ..
 
 - builder:
