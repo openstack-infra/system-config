@@ -176,7 +176,7 @@ Jenkins` menu.  This should be given the following options::
   (under Advanced Button):
 
   Stated: (blank)
-  Successful: gerrit approve <CHANGE>,<PATCHSET> --message 'Build Successful <BUILDS_STATS>' --verified <VERIFIED> --code-review <CODE_REVIEW> --submit
+  Successful: gerrit approve <CHANGE>,<PATCHSET> --message 'Build Successful <BUILDS_STATS>' --verified <VERIFIED> --code-review <CODE_REVIEW>
   Failed: gerrit approve <CHANGE>,<PATCHSET> --message 'Build Failed <BUILDS_STATS>' --verified <VERIFIED> --code-review <CODE_REVIEW>
   Unstable: gerrit approve <CHANGE>,<PATCHSET> --message 'Build Unstable <BUILDS_STATS>' --verified <VERIFIED> --code-review <CODE_REVIEW>
 
@@ -198,3 +198,13 @@ should configure as follows::
 This job will now automatically trigger when a new patchset is uploaded and will
 report the results to Gerrit automatically.
 
+Testing your CI setup
+---------------------
+
+You can use ``openstack-dev/sandbox`` project to test your external CI
+infrastructure with OpenStack Gerrit system. By using sandbox project you
+can test your CI system without affecting regular OpenStack reviews.
+
+Once you confirm your CI system works as you expected, change your
+configuration of gerrit trigger plugin or zuul to subscribe gerrit events
+from your target project.
