@@ -259,7 +259,7 @@
       - python-jobs
       - gate-{name}-unittests-{env}:
           env: 26sa07
-          node: centos6
+          node: bare-centos6
       - gate-{name}-unittests-{env}:
           env: 27sa07
       - hook-{name}-rtfd
@@ -1685,13 +1685,13 @@
       # For anyone running without eventlet
       - gate-{name}-tox-{envlist}:
           envlist: py26-sa7-mysql
-          node: centos6
+          node: bare-centos6
       - gate-{name}-tox-{envlist}:
           envlist: py27-sa8-mysql
       # For anyone running the latest without eventlet
       - gate-{name}-tox-{envlist}:
           envlist: py26-sa9-mysql
-          node: centos6
+          node: bare-centos6
       - gate-{name}-tox-{envlist}:
           envlist: py27-sa9-mysql
 
@@ -1749,10 +1749,10 @@
           envlist: wsme-tip
       - gate-{name}-tox-{envlist}:
           envlist: ceilometer-stable
-          node: centos6
+          node: bare-centos6
       - gate-{name}-tox-{envlist}:
           envlist: ceilometer-tip
-          node: centos6
+          node: bare-centos6
       - gate-{name}-tox-{envlist}:
           envlist: ironic-tip
 
