@@ -259,6 +259,9 @@
   description: OpenStack Operations Guide
   options:
     - direct-release
+- project: openstack/openstack-security-notes
+  description: OpenStack Security Notes (OSSN)
+  upstream: https://github.com/nkinder/openstack-security-notes.git
 - project: openstack/os-apply-config
   description: Apply configuration from cloud metadata.
 - project: openstack/os-cloud-config

@@ -2334,6 +2334,12 @@ projects:
       - openstack-operations-guide
       - openstack-operations-guide-ja
 
+  - name: openstack/openstack-security-notes
+    check:
+      - gate-noop
+    gate:
+      - gate-noop
+
 # Section: OpenStack development projects
 
   - name: openstack-dev/cookiecutter
