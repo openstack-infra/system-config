@@ -73,6 +73,45 @@
       - console-log
 
 - job:
+    name: identity-api-v3
+    project-type: maven
+    concurrent: true
+    node: precise
+
+    wrappers:
+      - timeout:
+          timeout: 40
+          fail: true
+      - timestamps
+
+    prebuilders:
+      - gerrit-git-prep
+      - markdown-docbook:
+          filename: "identity-api-v3"
+
+    properties:
+      - inject:
+          script-file: /usr/local/jenkins/slave_scripts/docbook-properties.sh
+          properties-file: gerrit-doc.properties
+
+    maven:
+      maven-name: Maven3
+      root-module:
+        group-id: org.openstack.docs
+        artifact-id: openstack-guide
+      root-pom: openstack-identity-api/v3/pom.xml
+      goals: 'clean generate-sources -B'
+
+    publishers:
+      - console-log
+      - ftp:
+          site: docs.openstack.org
+          source: 'openstack-identity-api/v3/target/docbkx/webhelp/api/openstack-identity-service/3/**'
+          target: '/'
+          remove-prefix: 'openstack-image-service-api/src/markdown/target/docbkx/webhelp/'
+          excludes: '**/*.xml,**/null*'
+
+- job:
     name: image-api-v2.0
     project-type: maven
     concurrent: true
@@ -87,7 +126,7 @@
     prebuilders:
       - gerrit-git-prep
       - markdown-docbook:
-          filename: "image-api-v2.0"
+         filename: "image-api-v2.0"
 
     properties:
       - inject:
@@ -98,17 +137,17 @@
       maven-name: Maven3
       root-module:
         group-id: org.openstack.docs
-        artifact-id: openstack-guide
-      root-pom: openstack-image-service-api/src/markdown/pom.xml
+        artifact-id: openstack-image-api-v2
+      root-pom: doc/image-api-v2/pom.xml
       goals: 'clean generate-sources -B'
 
     publishers:
       - console-log
       - ftp:
           site: docs.openstack.org
-          source: 'openstack-image-service-api/src/markdown/target/docbkx/webhelp/api/openstack-image-service/2.0/**'
+          source: 'doc/image-api-v2/target/docbkx/webhelp/api/openstack-image-service/2.0/**'
           target: '/'
-          remove-prefix: 'openstack-image-service-api/src/markdown/target/docbkx/webhelp/'
+          remove-prefix: 'doc/image-api-v2/target/docbkx/webhelp/'
           excludes: '**/*.xml,**/null*'
 
 
@@ -323,7 +362,7 @@
           site: docs.openstack.org
           source: 'openstack-identity-api/v3/markdown/target/docbkx/webhelp/api/openstack-identity-service/3/**'
           target: ''
-          remove-prefix: 'openstack-identity-api/v3/markdown/target/docbkx/webhelp/'
+          remove-prefix: 'openstack-identity-api/v3/markdown/target/docbkx/webhelp'
           excludes: '**/*.xml,**/null*'
 
 
@@ -341,15 +380,15 @@
       maven-name: Maven3
       root-module:
         group-id: org.openstack.docs
-        artifact-id: openstack-guide
-      root-pom: openstack-image-service-api/pom.xml
+        artifact-id: openstack-image-api-v1
+      root-pom: doc/image-api-v1/pom.xml
       goals: 'clean generate-sources -B'
 
     publishers:
       - console-log
       - ftp:
           site: docs.openstack.org
-          source: 'openstack-image-service-api/target/docbkx/webhelp/api/openstack-image-service/1.1/**'
+          source: 'doc/image-api-v1/target/docbkx/webhelp/api/openstack-image-service/1.1/**'
           target: ''
-          remove-prefix: 'openstack-image-service-api/target/docbkx/webhelp'
+          remove-prefix: 'doc/image-api-v1/target/docbkx/webhelp'
           excludes: '**/*.xml,**/null*'
