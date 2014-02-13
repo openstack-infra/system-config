@@ -737,7 +737,7 @@
   description: OpenStack analytics dashboard
   upstream: git://github.com/Mirantis/stackalytics.git
 - project: stackforge/swiftsync
-  description: "Swift mass syncronizer"
+  description: "Swift massive synchronizer"
   upstream: git://github.com/enovance/swiftsync.git
   acl-config: /home/gerrit2/acls/openstack/swiftsync.config
 - project: stackforge/tomograph
