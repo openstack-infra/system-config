@@ -1457,11 +1457,13 @@ projects:
       - gate-python-savannaclient-pep8
       - gate-python-savannaclient-python26
       - gate-python-savannaclient-python27
+      - gate-python-savannaclient-python33
       - gate-python-savannaclient-requirements
     gate:
       - gate-python-savannaclient-pep8
       - gate-python-savannaclient-python26
       - gate-python-savannaclient-python27
+      - gate-python-savannaclient-python33
       - gate-python-savannaclient-requirements
     post:
       - python-savannaclient-branch-tarball
