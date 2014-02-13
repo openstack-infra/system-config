@@ -603,6 +603,9 @@
     - direct-release
 - project: stackforge/openstack-sdk-php
   description: OpenStack SDK for PHP
+- project: stackforge/openstack-security-notes
+  description: OpenStack Security Notes (OSSN)
+  upstream: https://github.com/nkinder/openstack-security-notes.git
 - project: stackforge/openvz-nova-driver
   description: OpenVz driver for Nova
   upstream: git://github.com/imsplitbit/openvz-nova-driver.git

@@ -3574,6 +3574,12 @@ projects:
     gate:
       - gate-noop
 
+  - name: stackforge/openstack-security-notes
+    check:
+      - gate-noop
+    gate:
+      - gate-noop
+
   - name: stackforge/openvz-nova-driver
     check:
       - gate-noop
