@@ -130,7 +130,7 @@
       - console-log
       - ftp:
           site: docs.openstack.org
-          source: 'published-docs/{lang}/**'
+          source: 'publish-docs/{lang}/**'
           target: '/{lang}/'
-          remove-prefix: 'published-docs/{lang}/'
+          remove-prefix: 'publish-docs/{lang}/'
           excludes: '**/*.xml,**/null*'
