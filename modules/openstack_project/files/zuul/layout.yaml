@@ -1510,13 +1510,10 @@ projects:
       - name: openstack-client-publish-jobs
     check:
       - gate-python-swiftclient-requirements
-      - gate-python-swiftclient-python33
       - gate-python-swiftclient-pypy
-      - check-swift-dsvm-functional
     gate:
       - gate-python-swiftclient-requirements
       - gate-python-swiftclient-pypy
-      - gate-swift-dsvm-functional
     pre-release:
       - python-swiftclient-tarball
     release:
@@ -1524,7 +1521,6 @@ projects:
         - python-swiftclient-pypi-upload:
           - post-mirror-python26
           - post-mirror-python27
-          - post-mirror-python33
 
 #TODO: add docs
   - name: openstack/python-troveclient
