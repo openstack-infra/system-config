@@ -193,7 +193,7 @@
       - pypi-jobs
       - translation-jobs
       - openstack-publish-jobs
-      - '{pipeline}-tempest-dsvm-savanna{branch-designator}':
+      - '{pipeline}-tempest-dsvm-savanna-full{branch-designator}':
           pipeline: check
           node: 'devstack-precise || devstack-precise-check'
           branch-designator: '-nv'

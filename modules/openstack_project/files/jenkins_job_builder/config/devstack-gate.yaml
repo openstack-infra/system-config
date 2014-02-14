@@ -778,7 +778,7 @@
 
 
 - job-template:
-    name: '{pipeline}-tempest-dsvm-savanna{branch-designator}'
+    name: '{pipeline}-tempest-dsvm-savanna-full{branch-designator}'
     node: '{node}'
 
     wrappers:
@@ -794,6 +794,7 @@
           export PYTHONUNBUFFERED=true
           export DEVSTACK_GATE_TIMEOUT=120
           export DEVSTACK_GATE_TEMPEST=1
+          export DEVSTACK_GATE_TEMPEST_FULL=1
           export DEVSTACK_GATE_SAVANNA=1
           export BRANCH_OVERRIDE={branch-override}
           if [ "$BRANCH_OVERRIDE" != "default" ] ; then
@@ -1066,7 +1067,7 @@
       - '{pipeline}-grenade-dsvm-forward'
       - '{pipeline}-grenade-dsvm-neutron'
       - '{pipeline}-grenade-dsvm-neutron-forward'
-      - '{pipeline}-tempest-dsvm-savanna{branch-designator}'
+      - '{pipeline}-tempest-dsvm-savanna-full{branch-designator}'
       - '{pipeline}-tempest-dsvm-savanna-postgres{branch-designator}'
       - '{pipeline}-tempest-dsvm-savanna-neutron{branch-designator}'
       - '{pipeline}-devstack-dsvm-neutron{branch-designator}'
