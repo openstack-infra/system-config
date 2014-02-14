@@ -9,6 +9,13 @@ then
     GIT_ORIGIN=$3
 fi
 
+if [ ! -z $4 ]
+then
+  GIT_DIR=.
+else
+  GIT_DIR=$4
+fi
+
 if [ -z "$GERRIT_SITE" ]
 then
   echo "The gerrit site name (eg 'https://review.openstack.org') must be the first argument."
@@ -40,15 +47,24 @@ then
 fi
 
 set -x
+if [ "$GIT_DIR" != "." ]
+then
+  if [[ ! -d "$GIT_DIR"]
+  then
+    mkdir $GIT_DIR
+  fi
+  cd $GIT_DIR
+fi
+
 if [[ ! -e .git ]]
 then
     ls -a
     rm -fr .[^.]* *
     if [ -d /opt/git/$ZUUL_PROJECT/.git ]
     then
-        git clone file:///opt/git/$ZUUL_PROJECT .
+        git clone file:///opt/git/$ZUUL_PROJECT $GIT_DIR
     else
-        git clone $GIT_ORIGIN/$ZUUL_PROJECT .
+        git clone $GIT_ORIGIN/$ZUUL_PROJECT $GIT_DIR
     fi
 fi
 git remote set-url origin $GIT_ORIGIN/$ZUUL_PROJECT
