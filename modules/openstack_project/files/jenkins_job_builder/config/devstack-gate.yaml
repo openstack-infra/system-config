@@ -1027,7 +1027,7 @@
 
 - job:
     name: gate-devstack-gate-unittests
-    node: precise
+    node: bare-precise
 
     builders:
       - gerrit-git-prep

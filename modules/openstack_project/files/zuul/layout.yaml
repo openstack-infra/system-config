@@ -222,35 +222,20 @@ project-templates:
 
 jobs:
   - name: ^.*$
-    parameter-function: set_log_url
-  - name: ^.*(dsvm|devstack-vm).*$
     parameter-function: single_use_node
-  - name: '^(gate|periodic)-(?!mirror).*-python26.*$'
-    parameter-function: single_use_node
-  - name: gate-sqlalchemy-migrate-unittests-26sa07
-    parameter-function: single_use_node
-  - name: '^gate-taskflow-tox-py26-sa(7|9)-mysql$'
-    parameter-function: single_use_node
-  - name: '^gate-pecan-tox-ceilometer-(stable|tip)$'
-    parameter-function: single_use_node
-# begin section to deal with transition to bare-precise
-  - name: gate-config-layout
-    parameter-function: single_use_node
-  - name: ci-docs
-    parameter-function: single_use_node
-  - name: gate-ci-docs
-    parameter-function: single_use_node
-  - name: '^gate-(ceilometer|cinder|glance|heat|horizon|keystone|nova|savanna|swift)-docs$'
-    parameter-function: single_use_node
-  - name: '^gate-(ceilometer|cinder|glance|heat|horizon|keystone|nova|savanna|swift)-pep8$'
-    parameter-function: single_use_node
-  - name: '^gate-(ceilometer|cinder|glance|heat|horizon|keystone|nova|savanna|swift)-pylint$'
-    parameter-function: single_use_node
-  - name: '^gate-(ceilometer|cinder|glance|heat|horizon|keystone|nova|savanna|swift)-python27$'
-    parameter-function: single_use_node
-  - name: '^(ceilometer|cinder|glance|heat|horizon|keystone|nova|savanna|swift)-coverage$'
-    parameter-function: single_use_node
-# end section to deal with transition to bare-precise
+  # jobs run on the proposal worker
+  - name: ^.*-(merge-release-tags|(propose|upstream)-(requirements|translation)-update)$
+    parameter-function: reusable_node
+  # jobs run on the pypi worker
+  - name: ^.*-(jenkinsci|mavencentral|pypi)-upload$
+    parameter-function: reusable_node
+  # jobs run on the mirror26, mirror27 and mirror33 workers
+  - name: ^(periodic|post)-mirror-python(26|27|33)$
+    parameter-function: reusable_node
+  # the salt-trigger worker has no jobs yet
+  # jobs run on the precisepy3k workers
+  - name: ^gate-.*-(python33|pypy)$
+    parameter-function: reusable_node
   - name: ^(gate|check)-requirements-integration-dsvm$
     branch: ^(?!stable/grizzly).*$
   - name: ^(gate|check)-tempest-dsvm-neutron-pg$
@@ -354,7 +339,6 @@ jobs:
     voting: false
     failure-message: Jenkins XML output has changed.
     success-message: Jenkins XML output is unchanged.
-    parameter-function: single_use_node
 # Continous publishing from master of the following documentation targets:
   - name: openstack-admin-guide-cloud
     branch: ^master$

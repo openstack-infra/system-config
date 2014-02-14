@@ -218,14 +218,14 @@ arguments to and instantiates the job templates as real jobs. For example:
 
    - project:
        name: example1
-       node: precise
+       node: bare-precise
 
        jobs:
          - python-jobs
 
    - project:
        name: example2
-       node: oneiric
+       node: bare-centos6
 
        jobs:
          - {name}-docs

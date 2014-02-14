@@ -1,6 +1,6 @@
 - job:
     name: gate-horizon-selenium
-    node: precise
+    node: bare-precise
 
     builders:
       - gerrit-git-prep
@@ -13,7 +13,7 @@
 
 - job:
     name: gate-horizon-python27-django14
-    node: precise
+    node: bare-precise
 
     wrappers:
       - timeout:

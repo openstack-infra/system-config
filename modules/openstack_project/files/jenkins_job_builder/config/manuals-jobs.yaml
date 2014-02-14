@@ -1,7 +1,7 @@
 - job-template:
     name: 'openstack-{manual}'
     project-type: maven
-    node: precise
+    node: bare-precise
     concurrent: false
 
     prebuilders:
@@ -39,7 +39,7 @@
 
     project-type: maven
     concurrent: false
-    node: precise
+    node: bare-precise
 
     properties:
       - inject:
@@ -75,7 +75,7 @@
     name: 'openstack-install-deploy-guide-{lang}'
 
     concurrent: false
-    node: precise
+    node: bare-precise
 
     properties:
       - inject:
@@ -99,7 +99,7 @@
 - job-template:
     name: openstack-{oldmanual}-old
     project-type: maven
-    node: precise
+    node: bare-precise
     concurrent: false
 
     prebuilders:
@@ -135,7 +135,7 @@
 - job-template:
     name: openstack-{install}-{distribution}-old
     project-type: maven
-    node: precise
+    node: bare-precise
     concurrent: false
 
     prebuilders:

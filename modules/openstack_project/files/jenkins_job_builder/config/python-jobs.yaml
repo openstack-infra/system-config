@@ -178,7 +178,7 @@
 
 - job-template:
     name: '{name}-tarball'
-    node: precise
+    node: bare-precise
 
     builders:
       - gerrit-git-prep
@@ -196,7 +196,7 @@
 - job-template:
     name: '{name}-branch-tarball'
     concurrent: false
-    node: precise
+    node: bare-precise
 
     builders:
       - gerrit-git-prep
@@ -218,7 +218,7 @@
 
 - job-template:
     name: 'gate-{name}-requirements'
-    node: precise
+    node: bare-precise
 
     builders:
       - gerrit-git-prep

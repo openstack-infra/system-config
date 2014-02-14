@@ -1,7 +1,7 @@
 # in zuul/layout.yaml specified to only run against stable/grizzly
 - job:
     name: gate-openstack-manuals-validate
-    node: precise
+    node: bare-precise
 
     builders:
       - gerrit-git-prep
@@ -14,7 +14,7 @@
 - job:
     name: openstack-docs-site
     concurrent: false
-    node: precise
+    node: bare-precise
 
     builders:
       - gerrit-git-prep
@@ -38,7 +38,7 @@
     name: openstack-ha-guide
     project-type: maven
     concurrent: false
-    node: precise
+    node: bare-precise
 
     properties:
       - inject:
@@ -76,7 +76,7 @@
     name: openstack-operations-guide
     project-type: maven
     concurrent: false
-    node: precise
+    node: bare-precise
 
     properties:
       - inject:
@@ -111,7 +111,7 @@
 - job-template:
     name: 'openstack-operations-guide-{lang}'
     concurrent: false
-    node: precise
+    node: bare-precise
     github-org: openstack
 
     properties:

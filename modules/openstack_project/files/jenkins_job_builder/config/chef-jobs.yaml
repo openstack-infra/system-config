@@ -37,7 +37,7 @@
 
 - job:
     name: gate-openstack-chef-repo
-    node: precise
+    node: bare-precise
 
     builders:
       - gerrit-git-prep
