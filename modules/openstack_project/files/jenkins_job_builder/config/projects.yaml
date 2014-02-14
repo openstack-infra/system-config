@@ -222,6 +222,19 @@
       - openstack-publish-jobs
 
 - project:
+    name: satori
+    github-org: stackforge
+    node: bare-precise
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - python-jobs
+      - pypi-jobs
+      - hook-{name}-rtfd
+      - gate-{name}-pylint
+      - gate-{name}-pep8
+
+- project:
     name: savanna-dashboard
     github-org: openstack
     node: bare-precise
