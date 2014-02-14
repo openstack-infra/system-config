@@ -1032,8 +1032,6 @@ projects:
       - gate-taskflow-python33
       - gate-taskflow-tox-py26-sa7-mysql
       - gate-taskflow-tox-py27-sa8-mysql
-      - gate-taskflow-tox-py26-sa9-mysql
-      - gate-taskflow-tox-py27-sa9-mysql
     gate:
       - gate-taskflow-pep8
       - gate-taskflow-python26
@@ -1041,8 +1039,6 @@ projects:
       - gate-taskflow-python33
       - gate-taskflow-tox-py26-sa7-mysql
       - gate-taskflow-tox-py27-sa8-mysql
-      - gate-taskflow-tox-py26-sa9-mysql
-      - gate-taskflow-tox-py27-sa9-mysql
     post:
       - taskflow-coverage
       - taskflow-branch-tarball
