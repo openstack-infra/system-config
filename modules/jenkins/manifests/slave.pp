@@ -64,6 +64,7 @@ class jenkins::slave(
     $::jenkins::params::xslt_package, # for building openstack docs
     $::jenkins::params::xvfb_package, # for selenium tests
     $::jenkins::params::php5_cli_package, # for community portal build
+    $::jenkins::params::php5_mcrypt_package, # for openstackid build
   ]
 
   if ($bare == false) {
