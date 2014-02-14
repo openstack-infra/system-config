@@ -178,8 +178,18 @@ project-templates:
       - 'gate-{name}-python26'
       - 'gate-{name}-python27'
     gate:
-      - 'gate-{name}-docs'
       - 'gate-{name}-pep8'
+      - 'gate-{name}-docs'
+      - 'gate-{name}-python26'
+      - 'gate-{name}-python27'
+    post:
+      - '{name}-branch-tarball'
+      - '{name}-coverage'
+
+  - name: integrated-gate-python-jobs
+    check:
+      - 'gate-{name}-pep8'
+      - 'gate-{name}-docs'
       - 'gate-{name}-python26'
       - 'gate-{name}-python27'
     post:
@@ -521,7 +531,7 @@ projects:
 
   - name: openstack/ceilometer
     template:
-      - name: python-jobs
+      - name: integrated-gate-python-jobs
       - name: openstack-server-publish-jobs
       - name: periodic-grizzly
       - name: periodic-havana
@@ -555,7 +565,7 @@ projects:
 
   - name: openstack/cinder
     template:
-      - name: python-jobs
+      - name: integrated-gate-python-jobs
       - name: openstack-server-publish-jobs
       - name: periodic-grizzly
       - name: periodic-havana
@@ -627,7 +637,7 @@ projects:
 
   - name: openstack/gantt
     template:
-      - name: python-jobs
+      - name: integrated-gate-python-jobs
       - name: openstack-server-publish-jobs
     check:
       - gate-gantt-requirements
@@ -663,7 +673,7 @@ projects:
 
   - name: openstack/glance
     template:
-      - name: python-jobs
+      - name: integrated-gate-python-jobs
       - name: openstack-server-publish-jobs
       - name: periodic-grizzly
       - name: periodic-havana
@@ -697,7 +707,7 @@ projects:
 
   - name: openstack/heat
     template:
-      - name: python-jobs
+      - name: integrated-gate-python-jobs
       - name: openstack-server-publish-jobs
       - name: periodic-grizzly
       - name: periodic-havana
@@ -730,7 +740,7 @@ projects:
 
   - name: openstack/horizon
     template:
-      - name: python-jobs
+      - name: integrated-gate-python-jobs
       - name: openstack-server-publish-jobs
       - name: periodic-grizzly
       - name: periodic-havana
@@ -788,7 +798,7 @@ projects:
 
   - name: openstack/keystone
     template:
-      - name: python-jobs
+      - name: integrated-gate-python-jobs
       - name: openstack-server-publish-jobs
       - name: periodic-grizzly
       - name: periodic-havana
@@ -853,7 +863,7 @@ projects:
 
   - name: openstack/neutron
     template:
-      - name: python-jobs
+      - name: integrated-gate-python-jobs
       - name: openstack-server-publish-jobs
       - name: periodic-grizzly
       - name: periodic-havana
@@ -892,7 +902,7 @@ projects:
 
   - name: openstack/nova
     template:
-      - name: python-jobs
+      - name: integrated-gate-python-jobs
       - name: openstack-server-publish-jobs
       - name: periodic-grizzly
       - name: periodic-havana
@@ -1014,7 +1024,7 @@ projects:
 
   - name: openstack/swift
     template:
-      - name: python-jobs
+      - name: integrated-gate-python-jobs
       - name: openstack-server-publish-jobs
     check:
       - gate-swift-requirements
@@ -1117,7 +1127,7 @@ projects:
 
   - name: openstack/python-ceilometerclient
     template:
-      - name: python-jobs
+      - name: integrated-gate-python-jobs
       - name: openstack-client-publish-jobs
     check:
       - gate-python-ceilometerclient-requirements
@@ -1149,7 +1159,7 @@ projects:
 
   - name: openstack/python-cinderclient
     template:
-      - name: python-jobs
+      - name: integrated-gate-python-jobs
       - name: openstack-client-publish-jobs
     check:
       - gate-python-cinderclient-requirements
@@ -1186,7 +1196,7 @@ projects:
 
   - name: openstack/python-ganttclient
     template:
-      - name: python-jobs
+      - name: integrated-gate-python-jobs
       - name: openstack-client-publish-jobs
     check:
       - gate-python-ganttclient-requirements
@@ -1218,7 +1228,7 @@ projects:
 
   - name: openstack/python-glanceclient
     template:
-      - name: python-jobs
+      - name: integrated-gate-python-jobs
       - name: openstack-client-publish-jobs
     check:
       - gate-python-glanceclient-requirements
@@ -1267,10 +1277,6 @@ projects:
       - gate-tempest-dsvm-neutron-large-ops
     gate:
       - gate-python-heatclient-requirements
-      - gate-python-heatclient-pep8
-      - gate-python-heatclient-python26
-      - gate-python-heatclient-python27
-      - gate-python-heatclient-pypy
       - gate-devstack-dsvm-cells
       - gate-tempest-dsvm-full
       - gate-tempest-dsvm-postgres-full
@@ -1318,7 +1324,7 @@ projects:
 
   - name: openstack/python-keystoneclient
     template:
-      - name: python-jobs
+      - name: integrated-gate-python-jobs
       - name: openstack-client-publish-jobs
     check:
       - gate-python-keystoneclient-requirements
@@ -1379,7 +1385,7 @@ projects:
 
   - name: openstack/python-neutronclient
     template:
-      - name: python-jobs
+      - name: integrated-gate-python-jobs
       - name: openstack-client-publish-jobs
     check:
       - gate-python-neutronclient-requirements
@@ -1421,7 +1427,7 @@ projects:
 
   - name: openstack/python-novaclient
     template:
-      - name: python-jobs
+      - name: integrated-gate-python-jobs
       - name: openstack-client-publish-jobs
     check:
       - gate-python-novaclient-requirements
@@ -1458,7 +1464,7 @@ projects:
 
   - name: openstack/python-openstackclient
     template:
-      - name: python-jobs
+      - name: integrated-gate-python-jobs
       - name: openstack-client-publish-jobs
     check:
       - gate-python-openstackclient-requirements
@@ -1505,7 +1511,7 @@ projects:
 
   - name: openstack/python-swiftclient
     template:
-      - name: python-jobs
+      - name: integrated-gate-python-jobs
       - name: openstack-client-publish-jobs
     check:
       - gate-python-swiftclient-requirements
@@ -1816,7 +1822,7 @@ projects:
 
   - name: openstack/oslo.config
     template:
-      - name: python-jobs
+      - name: integrated-gate-python-jobs
       - name: openstack-server-publish-jobs
     check:
       - gate-oslo.config-requirements
@@ -1847,7 +1853,7 @@ projects:
 
   - name: openstack/oslo.messaging
     template:
-      - name: python-jobs
+      - name: integrated-gate-python-jobs
       - name: openstack-server-publish-jobs
     check:
       - gate-oslo.messaging-requirements
@@ -1890,10 +1896,6 @@ projects:
       - check-grenade-dsvm
     gate:
       - gate-oslo.rootwrap-requirements
-      - gate-oslo.rootwrap-pep8
-      - gate-oslo.rootwrap-python26
-      - gate-oslo.rootwrap-python27
-      - gate-oslo.rootwrap-python33
       - gate-devstack-dsvm-cells
       - gate-tempest-dsvm-full
       - gate-tempest-dsvm-neutron
@@ -1913,7 +1915,7 @@ projects:
 
   - name: openstack/oslo.version
     template:
-      - name: python-jobs
+      - name: integrated-gate-python-jobs
       - name: openstack-server-publish-jobs
     check:
       - gate-oslo.version-requirements
@@ -1954,9 +1956,6 @@ projects:
       - check-grenade-dsvm
       - check-swift-dsvm-functional
     gate:
-      - gate-requirements-pep8
-      - gate-requirements-python27
-      - gate-requirements-pypy
       - gate-requirements-integration-dsvm
       - gate-devstack-dsvm-cells
       - gate-tempest-dsvm-full
@@ -2095,9 +2094,6 @@ projects:
       - check-tempest-dsvm-neutron-heat-slow
     gate:
       - gate-tempest-requirements
-      - gate-tempest-pep8
-      - gate-tempest-docs
-      - gate-tempest-python27
       - gate-tempest-dsvm-full
       - gate-tempest-dsvm-postgres-full
       - gate-tempest-dsvm-neutron
@@ -2332,7 +2328,6 @@ projects:
       - check-tempest-dsvm-savanna-postgres-nv
       - check-tempest-dsvm-savanna-neutron-nv
     gate:
-      - gate-devstack-bash8
       - gate-devstack-dsvm-cells
       - gate-tempest-dsvm-full
       - gate-tempest-dsvm-postgres-full
@@ -2418,7 +2413,7 @@ projects:
 
   - name: openstack-dev/pbr
     template:
-      - name: python-jobs
+      - name: integrated-gate-python-jobs
     check:
       - gate-pbr-python33
       - gate-pbr-pypy
