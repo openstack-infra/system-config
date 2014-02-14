@@ -177,11 +177,6 @@ project-templates:
       - 'gate-{name}-docs'
       - 'gate-{name}-python26'
       - 'gate-{name}-python27'
-    gate:
-      - 'gate-{name}-docs'
-      - 'gate-{name}-pep8'
-      - 'gate-{name}-python26'
-      - 'gate-{name}-python27'
     post:
       - '{name}-branch-tarball'
       - '{name}-coverage'
