@@ -1889,25 +1889,7 @@
           system: apt
           profileos: "ubuntu"
 
-      - openstack-install-deploy-guide-{distribution}-{lang}:
-          distribution: debian
-          system: apt-debian
-          profileos: "debian"
-
-      - openstack-install-deploy-guide-{distribution}-{lang}:
-          distribution: fedora
-          system: yum
-          profileos: "centos;fedora;rhel"
-
-      - openstack-install-deploy-guide-{distribution}-{lang}:
-          distribution: opensuse
-          system: zypper
-          profileos: "opensuse;sles"
-
-      - openstack-install-deploy-guide-{distribution}-{lang}:
-          distribution: ubuntu
-          system: apt
-          profileos: "ubuntu"
+      - openstack-install-deploy-guide-{lang}:
 
       - openstack-operations-guide-{lang}
 

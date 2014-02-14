@@ -72,9 +72,8 @@
           remove-prefix: 'doc/install-guide/target/docbkx/webhelp/'
 
 - job-template:
-    name: 'openstack-install-deploy-guide-{distribution}-{lang}'
+    name: 'openstack-install-deploy-guide-{lang}'
 
-    project-type: maven
     concurrent: false
     node: precise
 
@@ -83,36 +82,19 @@
           script-file: /usr/local/jenkins/slave_scripts/docbook-properties.sh
           properties-file: gerrit-doc.properties
 
-    prebuilders:
+    builders:
       - gerrit-git-prep
       - shell: |
-          ./tools/generatedocbook -l {lang} -b common
-          ./tools/generatedocbook -l {lang} -b glossary
-          ./tools/generatedocbook -l {lang} -b user-guide
-          ./tools/generatedocbook -l {lang} -b install-guide
-          cp doc/pom.xml generated/{lang}/pom.xml
-
-    maven:
-      maven-name: Maven3
-      root-module:
-        group-id: org.openstack.docs
-        artifact-id: openstack-guide
-      root-pom: generated/{lang}/install-guide/pom.xml
-      goals: '-Doperating.system={system} -Dprofile.os={profileos} -Drelease.path.name=${{DOC_RELEASE_PATH}} -Dcomments.enabled=${{DOC_COMMENTS_ENABLED}} clean generate-sources -B'
+          source /usr/local/jenkins/slave_scripts/select-mirror.sh openstack openstack-manuals
+          tox -v -e buildlang-install -- {lang}
 
     publishers:
       - console-log
       - ftp:
           site: docs.openstack.org
-          source: 'generated/{lang}/install-guide/target/docbkx/webhelp/**'
+          source: 'published-docs/{lang}/**'
           target: '/{lang}/'
-          remove-prefix: 'generated/{lang}/install-guide/target/docbkx/webhelp/'
-          excludes: '**/*.xml,**/null*'
-      - ftp:
-          site: docs.openstack.org
-          source: 'generated/{lang}/install-guide/target/docbkx/webhelp/**/atom.xml'
-          target: '/'
-          remove-prefix: 'generated/{lang}/install-guide/target/docbkx/webhelp/'
+          remove-prefix: 'publish-docs/{lang}/'
 
 - job-template:
     name: openstack-{oldmanual}-old
