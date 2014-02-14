@@ -1,10 +1,10 @@
 - job:
     name: gate-noop
-    node: precise
+    node: bare-precise
 
 - job:
     name: gate-grenade-noop
-    node: precise
+    node: bare-precise
 
 - job:
     name: node-test

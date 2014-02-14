@@ -2,7 +2,7 @@
 - job:
     name: infra-publications-publish
     concurrent: false
-    node: precise
+    node: bare-precise
 
     builders:
       - gerrit-git-prep
@@ -29,7 +29,7 @@
 - job:
     name: infra-publications-publish-index
     concurrent: false
-    node: precise
+    node: bare-precise
 
     builders:
       - gerrit-git-prep

@@ -1,7 +1,7 @@
 - project:
     name: gantt
     github-org: openstack
-    node: precise
+    node: bare-precise
     tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
 
@@ -15,7 +15,7 @@
 - project:
     name: mistral
     github-org: stackforge
-    node: precise
+    node: bare-precise
     tarball-site: tarballs.openstack.org
 
     jobs:
@@ -25,7 +25,7 @@
 - project:
     name: mistral-extra
     github-org: stackforge
-    node: precise
+    node: bare-precise
     tarball-site: tarballs.openstack.org
 
     jobs:
@@ -35,7 +35,7 @@
 - project:
     name: python-mistralclient
     github-org: stackforge
-    node: precise
+    node: bare-precise
     tarball-site: tarballs.openstack.org
 
     jobs:
@@ -45,7 +45,7 @@
 - project:
     name: murano-api
     github-org: stackforge
-    node: precise
+    node: bare-precise
     tarball-site: tarballs.openstack.org
 
     jobs:
@@ -55,7 +55,7 @@
 - project:
     name: murano-conductor
     github-org: stackforge
-    node: precise
+    node: bare-precise
     tarball-site: tarballs.openstack.org
 
     jobs:
@@ -65,7 +65,7 @@
 - project:
     name: murano-dashboard
     github-org: stackforge
-    node: precise
+    node: bare-precise
     tarball-site: tarballs.openstack.org
 
     jobs:
@@ -76,7 +76,7 @@
 - project:
     name: python-ganttclient
     github-org: openstack
-    node: precise
+    node: bare-precise
     tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
 
@@ -89,7 +89,7 @@
 - project:
     name: python-muranoclient
     github-org: stackforge
-    node: precise
+    node: bare-precise
     tarball-site: tarballs.openstack.org
 
     jobs:
@@ -100,7 +100,7 @@
 - project:
     name: murano-common
     github-org: stackforge
-    node: precise
+    node: bare-precise
     tarball-site: tarballs.openstack.org
 
     jobs:
@@ -111,7 +111,7 @@
 - project:
     name: murano-repository
     github-org: stackforge
-    node: precise
+    node: bare-precise
     tarball-site: tarballs.openstack.org
 
     jobs:
@@ -122,7 +122,7 @@
 - project:
     name: murano-metadataclient
     github-org: stackforge
-    node: precise
+    node: bare-precise
     tarball-site: tarballs.openstack.org
 
     jobs:
@@ -132,7 +132,7 @@
 - project:
     name: climate
     github-org: stackforge
-    node: precise
+    node: bare-precise
     tarball-site: tarballs.openstack.org
 
     jobs:
@@ -141,7 +141,7 @@
 - project:
     name: climate-nova
     github-org: stackforge
-    node: precise
+    node: bare-precise
     tarball-site: tarballs.openstack.org
 
     jobs:
@@ -150,7 +150,7 @@
 - project:
     name: python-climateclient
     github-org: stackforge
-    node: precise
+    node: bare-precise
     tarball-site: tarballs.openstack.org
 
     jobs:
@@ -159,7 +159,7 @@
 - project:
     name: config
     github-org: openstack-infra
-    node: precise
+    node: bare-precise
 
     jobs:
       - gate-{name}-puppet-lint
@@ -169,15 +169,15 @@
 - project:
     name: gitdm
     github-org: openstack-infra
-    node: precise
+    node: bare-precise
 
     jobs:
       - '{pipeline}-gitdm':
           pipeline: gate
-          node: precise
+          node: bare-precise
       - '{pipeline}-gitdm':
           pipeline: periodic
-          node: precise
+          node: bare-precise
 
 - project:
     name: savanna
@@ -212,7 +212,7 @@
 - project:
     name: python-savannaclient
     github-org: openstack
-    node: precise
+    node: bare-precise
     tarball-site: tarballs.openstack.org
 
     jobs:
@@ -222,7 +222,7 @@
 - project:
     name: savanna-dashboard
     github-org: openstack
-    node: precise
+    node: bare-precise
     tarball-site: tarballs.openstack.org
 
     jobs:
@@ -232,7 +232,7 @@
 - project:
     name: savanna-extra
     github-org: openstack
-    node: precise
+    node: bare-precise
     tarball-site: tarballs.openstack.org
 
     jobs:
@@ -242,7 +242,7 @@
 - project:
     name: savanna-image-elements
     github-org: openstack
-    node: precise
+    node: bare-precise
     tarball-site: tarballs.openstack.org
 
     jobs:
@@ -252,7 +252,7 @@
 - project:
     name: sqlalchemy-migrate
     github-org: stackforge
-    node: precise
+    node: bare-precise
     tarball-site: tarballs.openstack.org
 
     jobs:
@@ -268,7 +268,7 @@
 - project:
     name: kwapi
     github-org: stackforge
-    node: precise
+    node: bare-precise
 
     jobs:
       - gate-{name}-pep8
@@ -306,7 +306,7 @@
 - project:
     name: compute-api
     github-org: openstack
-    node: precise
+    node: bare-precise
     tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
 
@@ -318,7 +318,7 @@
 - project:
     name: hacking
     github-org: openstack-dev
-    node: precise
+    node: bare-precise
     doc-publisher-site: docs.openstack.org
     tarball-site: tarballs.openstack.org
 
@@ -334,7 +334,7 @@
 - project:
     name: pbr
     github-org: openstack-dev
-    node: precise
+    node: bare-precise
     doc-publisher-site: docs.openstack.org
     tarball-site: tarballs.openstack.org
 
@@ -347,7 +347,7 @@
 - project:
     name: os-loganalyze
     github-org: openstack-infra
-    node: precise
+    node: bare-precise
     tarball-site: tarballs.openstack.org
 
     jobs:
@@ -357,7 +357,7 @@
 - project:
     name: gerritbot
     github-org: openstack-infra
-    node: precise
+    node: bare-precise
     tarball-site: tarballs.openstack.org
 
     jobs:
@@ -367,7 +367,7 @@
 - project:
     name: elastic-recheck
     github-org: openstack-infra
-    node: precise
+    node: bare-precise
     tarball-site: tarballs.openstack.org
 
     jobs:
@@ -379,7 +379,7 @@
 - project:
     name: statusbot
     github-org: openstack-infra
-    node: precise
+    node: bare-precise
     tarball-site: tarballs.openstack.org
 
     jobs:
@@ -390,7 +390,7 @@
 - project:
     name: gerritlib
     github-org: openstack-infra
-    node: precise
+    node: bare-precise
     tarball-site: tarballs.openstack.org
 
     jobs:
@@ -402,7 +402,7 @@
 - project:
     name: jeepyb
     github-org: openstack-infra
-    node: precise
+    node: bare-precise
     tarball-site: tarballs.openstack.org
 
     jobs:
@@ -414,7 +414,7 @@
 - project:
     name: pypi-mirror
     github-org: openstack-infra
-    node: precise
+    node: bare-precise
     tarball-site: tarballs.openstack.org
 
     jobs:
@@ -426,7 +426,7 @@
 - project:
     name: gear
     github-org: openstack-infra
-    node: precise
+    node: bare-precise
     tarball-site: tarballs.openstack.org
 
     jobs:
@@ -438,7 +438,7 @@
 - project:
     name: gearman-plugin
     github-org: openstack-infra
-    node: precise
+    node: bare-precise
     tarball-site: tarballs.openstack.org
 
     jobs:
@@ -447,7 +447,7 @@
 - project:
     name: clouddocs-maven-plugin
     github-org: stackforge
-    node: precise
+    node: bare-precise
     tarball-site: tarballs.openstack.org
 
     jobs:
@@ -456,7 +456,7 @@
 - project:
     name: zmq-event-publisher
     github-org: openstack-infra
-    node: precise
+    node: bare-precise
     tarball-site: tarballs.openstack.org
 
     jobs:
@@ -466,7 +466,7 @@
 - project:
     name: git-review
     github-org: openstack-infra
-    node: precise
+    node: bare-precise
     tarball-site: tarballs.openstack.org
     jobs:
       - python-jobs
@@ -506,7 +506,7 @@
 - project:
     name: python-heatclient
     github-org: openstack
-    node: precise
+    node: bare-precise
     tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
 
@@ -519,7 +519,7 @@
 - project:
     name: heat-cfntools
     github-org: openstack
-    node: precise
+    node: bare-precise
     tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
 
@@ -532,7 +532,7 @@
 - project:
     name: heat-cfnclient
     github-org: openstack-dev
-    node: precise
+    node: bare-precise
     tarball-site: tarballs.openstack.org
 
     jobs:
@@ -556,7 +556,7 @@
 - project:
     name: django_openstack_auth
     github-org: openstack
-    node: precise
+    node: bare-precise
     tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
 
@@ -569,7 +569,7 @@
 - project:
     name: identity-api
     github-org: openstack
-    node: precise
+    node: bare-precise
     tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
 
@@ -581,7 +581,7 @@
 - project:
     name: image-api
     github-org: openstack
-    node: precise
+    node: bare-precise
     tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
 
@@ -593,7 +593,7 @@
 - project:
     name: jenkins-job-builder
     github-org: openstack-infra
-    node: precise
+    node: bare-precise
     tarball-site: tarballs.openstack.org
 
     jobs:
@@ -618,7 +618,7 @@
 - project:
     name: netconn-api
     github-org: openstack
-    node: precise
+    node: bare-precise
     tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
 
@@ -630,7 +630,7 @@
 - project:
     name: netconn-api-v20
     github-org: openstack
-    node: precise
+    node: bare-precise
     tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
 
@@ -641,7 +641,7 @@
 - project:
     name: nodepool
     github-org: openstack-infra
-    node: precise
+    node: bare-precise
     tarball-site: tarballs.openstack.org
 
     jobs:
@@ -652,7 +652,7 @@
 - project:
     name: nose-html-output
     github-org: openstack-infra
-    node: precise
+    node: bare-precise
     tarball-site: tarballs.openstack.org
 
     jobs:
@@ -679,7 +679,7 @@
 - project:
     name: object-api
     github-org: openstack
-    node: precise
+    node: bare-precise
     tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
 
@@ -691,7 +691,7 @@
 - project:
     name: oslosphinx
     github-org: openstack
-    node: precise
+    node: bare-precise
     tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
 
@@ -704,7 +704,7 @@
 - project:
     name: oslo.config
     github-org: openstack
-    node: precise
+    node: bare-precise
     tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
 
@@ -717,7 +717,7 @@
 - project:
     name: oslo.messaging
     github-org: openstack
-    node: precise
+    node: bare-precise
     tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
 
@@ -729,7 +729,7 @@
 - project:
     name: oslo.rootwrap
     github-org: openstack
-    node: precise
+    node: bare-precise
     tarball-site: tarballs.openstack.org
 
     jobs:
@@ -739,7 +739,7 @@
 - project:
     name: oslo.test
     github-org: openstack
-    node: precise
+    node: bare-precise
     tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
 
@@ -751,7 +751,7 @@
 - project:
     name: oslo.version
     github-org: openstack
-    node: precise
+    node: bare-precise
     tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
 
@@ -764,7 +764,7 @@
 - project:
     name: oslo.vmware
     github-org: openstack
-    node: precise
+    node: bare-precise
     tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
 
@@ -777,7 +777,7 @@
 - project:
     name: oslo-incubator
     github-org: openstack
-    node: precise
+    node: bare-precise
     tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
 
@@ -789,7 +789,7 @@
 - project:
     name: python-ceilometerclient
     github-org: openstack
-    node: precise
+    node: bare-precise
     tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
 
@@ -802,7 +802,7 @@
 - project:
     name: python-cinderclient
     github-org: openstack
-    node: precise
+    node: bare-precise
     tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
 
@@ -815,7 +815,7 @@
 - project:
     name: python-glanceclient
     github-org: openstack
-    node: precise
+    node: bare-precise
     tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
 
@@ -828,7 +828,7 @@
 - project:
     name: python-keystoneclient
     github-org: openstack
-    node: precise
+    node: bare-precise
     tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
 
@@ -841,7 +841,7 @@
 - project:
     name: python-novaclient
     github-org: openstack
-    node: precise
+    node: bare-precise
     tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
 
@@ -854,7 +854,7 @@
 - project:
     name: python-openstackclient
     github-org: openstack
-    node: precise
+    node: bare-precise
     tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
 
@@ -867,7 +867,7 @@
 - project:
     name: python-neutronclient
     github-org: openstack
-    node: precise
+    node: bare-precise
     tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
 
@@ -880,7 +880,7 @@
 - project:
     name: python-swiftclient
     github-org: openstack
-    node: precise
+    node: bare-precise
     tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
 
@@ -893,7 +893,7 @@
 - project:
     name: neutron
     github-org: openstack
-    node: precise
+    node: bare-precise
     tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
 
@@ -915,7 +915,7 @@
     github-org: openstack
     tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
-    node: precise
+    node: bare-precise
 
     jobs:
       - python-jobs
@@ -927,7 +927,7 @@
     github-org: openstack
     tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
-    node: precise
+    node: bare-precise
 
     jobs:
       - python-jobs
@@ -939,7 +939,7 @@
     name: libra
     github-org: stackforge
     tarball-site: tarballs.openstack.org
-    node: precise
+    node: bare-precise
 
     jobs:
       - python-jobs
@@ -949,7 +949,7 @@
     name: python-libraclient
     github-org: stackforge
     tarball-site: tarballs.openstack.org
-    node: precise
+    node: bare-precise
 
     jobs:
       - python-jobs
@@ -960,7 +960,7 @@
     name: healthnmon
     github-org: stackforge
     tarball-site: tarballs.openstack.org
-    node: precise
+    node: bare-precise
 
     jobs:
       - python-jobs
@@ -970,7 +970,7 @@
     github-org: openstack
     tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
-    node: precise
+    node: bare-precise
 
     jobs:
       - python-jobs
@@ -980,7 +980,7 @@
     name: python-marconiclient
     github-org: openstack
     tarball-site: tarballs.openstack.org
-    node: precise
+    node: bare-precise
 
     jobs:
       - python-jobs
@@ -989,7 +989,7 @@
 - project:
     name: designate
     github-org: stackforge
-    node: precise
+    node: bare-precise
     tarball-site: tarballs.openstack.org
 
     jobs:
@@ -1001,7 +1001,7 @@
 - project:
     name: billingstack
     github-org: stackforge
-    node: precise
+    node: bare-precise
     tarball-site: tarballs.openstack.org
 
     jobs:
@@ -1013,7 +1013,7 @@
 - project:
     name: bindep
     github-org: stackforge
-    node: precise
+    node: bare-precise
     tarball-site: tarballs.openstack.org
 
     jobs:
@@ -1024,7 +1024,7 @@
 - project:
     name: packstack
     github-org: stackforge
-    node: precise
+    node: bare-precise
     tarball-site: tarballs.openstack.org
 
     jobs:
@@ -1034,7 +1034,7 @@
 - project:
     name: python-designateclient
     github-org: stackforge
-    node: precise
+    node: bare-precise
     tarball-site: tarballs.openstack.org
 
     jobs:
@@ -1046,7 +1046,7 @@
 - project:
     name: bufunfa
     github-org: stackforge
-    node: precise
+    node: bare-precise
     tarball-site: tarballs.openstack.org
 
     jobs:
@@ -1057,7 +1057,7 @@
 - project:
     name: reviewday
     github-org: openstack-infra
-    node: precise
+    node: bare-precise
     tarball-site: tarballs.openstack.org
 
     jobs:
@@ -1068,7 +1068,7 @@
 - project:
     name: reviewstats
     github-org: openstack-infra
-    node: precise
+    node: bare-precise
     tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
 
@@ -1080,7 +1080,7 @@
 - project:
     name: requirements
     github-org: openstack
-    node: precise
+    node: bare-precise
     tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
 
@@ -1093,7 +1093,7 @@
 - project:
     name: storyboard
     github-org: openstack-infra
-    node: precise
+    node: bare-precise
     tarball-site: tarballs.openstack.org
 
     jobs:
@@ -1104,7 +1104,7 @@
 - project:
     name: storyboard-webclient
     github-org: openstack-infra
-    node: precise
+    node: bare-precise
     tarball-site: tarballs.openstack.org
 
     jobs:
@@ -1146,7 +1146,7 @@
 - project:
     name: swift-bench
     github-org: openstack
-    node: precise
+    node: bare-precise
     tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
 
@@ -1211,7 +1211,7 @@
 - project:
     name: devstack
     github-org: openstack-dev
-    node: precise
+    node: bare-precise
 
     jobs:
       - gate-{name}-bash8
@@ -1230,7 +1230,7 @@
 - project:
     name: tempest
     github-org: openstack
-    node: precise
+    node: bare-precise
     tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
 
@@ -1246,7 +1246,7 @@
 - project:
     name: zuul
     github-org: openstack-infra
-    node: precise
+    node: bare-precise
     tarball-site: tarballs.openstack.org
 
     jobs:
@@ -1257,7 +1257,7 @@
 - project:
     name: pyghmi
     github-org: stackforge
-    node: precise
+    node: bare-precise
     tarball-site: tarballs.openstack.org
 
     jobs:
@@ -1266,7 +1266,7 @@
 - project:
     name: diskimage-builder
     github-org: openstack
-    node: precise
+    node: bare-precise
     tarball-site: tarballs.openstack.org
 
     jobs:
@@ -1276,7 +1276,7 @@
 - project:
     name: os-apply-config
     github-org: openstack
-    node: precise
+    node: bare-precise
     tarball-site: tarballs.openstack.org
 
     jobs:
@@ -1286,7 +1286,7 @@
 - project:
     name: os-collect-config
     github-org: openstack
-    node: precise
+    node: bare-precise
     tarball-site: tarballs.openstack.org
 
     jobs:
@@ -1296,7 +1296,7 @@
 - project:
     name: os-refresh-config
     github-org: openstack
-    node: precise
+    node: bare-precise
     tarball-site: tarballs.openstack.org
 
     jobs:
@@ -1306,7 +1306,7 @@
 - project:
     name: tripleo-heat-templates
     github-org: openstack
-    node: precise
+    node: bare-precise
     tarball-site: tarballs.openstack.org
 
     jobs:
@@ -1315,7 +1315,7 @@
 - project:
     name: tripleo-image-elements
     github-org: openstack
-    node: precise
+    node: bare-precise
     tarball-site: tarballs.openstack.org
 
     jobs:
@@ -1325,7 +1325,7 @@
 - project:
     name: tripleo-incubator
     github-org: openstack
-    node: precise
+    node: bare-precise
     doc-publisher-site: docs.openstack.org
     tarball-site: tarballs.openstack.org
 
@@ -1336,7 +1336,7 @@
 - project:
     name: puppet-glance
     github-org: stackforge
-    node: precise
+    node: bare-precise
     tarball-site: tarballs.openstack.org
 
     jobs:
@@ -1347,7 +1347,7 @@
 - project:
     name: puppet-keystone
     github-org: stackforge
-    node: precise
+    node: bare-precise
     tarball-site: tarballs.openstack.org
 
     jobs:
@@ -1358,7 +1358,7 @@
 - project:
     name: puppet-ceilometer
     github-org: stackforge
-    node: precise
+    node: bare-precise
     tarball-site: tarballs.openstack.org
 
     jobs:
@@ -1369,7 +1369,7 @@
 - project:
     name: puppet-cinder
     github-org: stackforge
-    node: precise
+    node: bare-precise
     tarball-site: tarballs.openstack.org
 
     jobs:
@@ -1380,7 +1380,7 @@
 - project:
     name: puppet-heat
     github-org: stackforge
-    node: precise
+    node: bare-precise
     tarball-site: tarballs.openstack.org
 
     jobs:
@@ -1391,7 +1391,7 @@
 - project:
     name: puppet-ironic
     github-org: stackforge
-    node: precise
+    node: bare-precise
     tarball-site: tarballs.openstack.org
 
     jobs:
@@ -1402,7 +1402,7 @@
 - project:
     name: puppet-nova
     github-org: stackforge
-    node: precise
+    node: bare-precise
     tarball-site: tarballs.openstack.org
 
     jobs:
@@ -1413,7 +1413,7 @@
 - project:
     name: puppet-horizon
     github-org: stackforge
-    node: precise
+    node: bare-precise
     tarball-site: tarballs.openstack.org
 
     jobs:
@@ -1424,7 +1424,7 @@
 - project:
     name: puppet-openstack
     github-org: stackforge
-    node: precise
+    node: bare-precise
     tarball-site: tarballs.openstack.org
 
     jobs:
@@ -1435,7 +1435,7 @@
 - project:
     name: puppet-savanna
     github-org: stackforge
-    node: precise
+    node: bare-precise
     tarball-site: tarballs.openstack.org
 
     jobs:
@@ -1446,7 +1446,7 @@
 - project:
     name: savanna-ci-config
     github-org: stackforge
-    node: precise
+    node: bare-precise
     tarball-site: tarballs.openstack.org
 
     jobs:
@@ -1455,7 +1455,7 @@
 - project:
     name: savanna-guestagent
     github-org: stackforge
-    node: precise
+    node: bare-precise
     tarball-site: tarballs.openstack.org
 
     jobs:
@@ -1465,7 +1465,7 @@
 - project:
     name: puppet-swift
     github-org: stackforge
-    node: precise
+    node: bare-precise
     tarball-site: tarballs.openstack.org
 
     jobs:
@@ -1476,7 +1476,7 @@
 - project:
     name: puppet-tempest
     github-org: stackforge
-    node: precise
+    node: bare-precise
     tarball-site: tarballs.openstack.org
 
     jobs:
@@ -1487,7 +1487,7 @@
 - project:
     name: puppet-neutron
     github-org: stackforge
-    node: precise
+    node: bare-precise
     tarball-site: tarballs.openstack.org
 
     jobs:
@@ -1498,7 +1498,7 @@
 - project:
     name: puppet-vswitch
     github-org: stackforge
-    node: precise
+    node: bare-precise
     tarball-site: tarballs.openstack.org
 
     jobs:
@@ -1509,7 +1509,7 @@
 - project:
     name: puppet-ceph
     github-org: stackforge
-    node: precise
+    node: bare-precise
     tarball-site: tarballs.openstack.org
 
     jobs:
@@ -1520,7 +1520,7 @@
 - project:
     name: puppet-designate
     github-org: stackforge
-    node: precise
+    node: bare-precise
     tarball-site: tarballs.openstack.org
 
     jobs:
@@ -1531,7 +1531,7 @@
 - project:
     name: openstack-chef-repo
     github-org: stackforge
-    node: precise
+    node: bare-precise
 
     jobs:
       - gate-openstack-chef-repo
@@ -1539,7 +1539,7 @@
 - project:
     name: cookbook-openstack-common
     github-org: stackforge
-    node: precise
+    node: bare-precise
 
     jobs:
       - gate-{name}-chef-lint
@@ -1549,7 +1549,7 @@
 - project:
     name: cookbook-openstack-compute
     github-org: stackforge
-    node: precise
+    node: bare-precise
 
     jobs:
       - gate-{name}-chef-lint
@@ -1559,7 +1559,7 @@
 - project:
     name: cookbook-openstack-block-storage
     github-org: stackforge
-    node: precise
+    node: bare-precise
 
     jobs:
       - gate-{name}-chef-lint
@@ -1569,7 +1569,7 @@
 - project:
     name: cookbook-openstack-metering
     github-org: stackforge
-    node: precise
+    node: bare-precise
 
     jobs:
       - gate-{name}-chef-lint
@@ -1579,7 +1579,7 @@
 - project:
     name: cookbook-openstack-network
     github-org: stackforge
-    node: precise
+    node: bare-precise
 
     jobs:
       - gate-{name}-chef-lint
@@ -1589,7 +1589,7 @@
 - project:
     name: cookbook-openstack-object-storage
     github-org: stackforge
-    node: precise
+    node: bare-precise
 
     jobs:
       - gate-{name}-chef-lint
@@ -1599,7 +1599,7 @@
 - project:
     name: cookbook-openstack-dashboard
     github-org: stackforge
-    node: precise
+    node: bare-precise
 
     jobs:
       - gate-{name}-chef-lint
@@ -1609,7 +1609,7 @@
 - project:
     name: cookbook-openstack-image
     github-org: stackforge
-    node: precise
+    node: bare-precise
 
     jobs:
       - gate-{name}-chef-lint
@@ -1619,7 +1619,7 @@
 - project:
     name: cookbook-openstack-identity
     github-org: stackforge
-    node: precise
+    node: bare-precise
 
     jobs:
       - gate-{name}-chef-lint
@@ -1629,7 +1629,7 @@
 - project:
     name: cookbook-openstack-orchestration
     github-org: stackforge
-    node: precise
+    node: bare-precise
 
     jobs:
       - gate-{name}-chef-lint
@@ -1639,7 +1639,7 @@
 - project:
     name: cookbook-openstack-ops-database
     github-org: stackforge
-    node: precise
+    node: bare-precise
 
     jobs:
       - gate-{name}-chef-lint
@@ -1649,7 +1649,7 @@
 - project:
     name: cookbook-openstack-ops-messaging
     github-org: stackforge
-    node: precise
+    node: bare-precise
 
     jobs:
       - gate-{name}-chef-lint
@@ -1659,7 +1659,7 @@
 - project:
     name: ironic
     github-org: openstack
-    node: precise
+    node: bare-precise
     tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
 
@@ -1681,7 +1681,7 @@
 - project:
     name: python-ironicclient
     github-org: openstack
-    node: precise
+    node: bare-precise
     tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
 
@@ -1692,7 +1692,7 @@
 - project:
     name: inception
     github-org: stackforge
-    node: precise
+    node: bare-precise
 
     jobs:
       - gate-{name}-pep8
@@ -1700,7 +1700,7 @@
 - project:
     name: barbican
     github-org: stackforge
-    node: precise
+    node: bare-precise
     tarball-site: tarballs.openstack.org
 
     jobs:
@@ -1709,7 +1709,7 @@
 - project:
     name: python-barbicanclient
     github-org: stackforge
-    node: precise
+    node: bare-precise
     tarball-site: tarballs.openstack.org
 
     jobs:
@@ -1719,7 +1719,7 @@
 - project:
     name: taskflow
     github-org: openstack
-    node: precise
+    node: bare-precise
     tarball-site: tarballs.openstack.org
 
     jobs:
@@ -1734,7 +1734,7 @@
 - project:
     name: cl-openstack-client
     github-org: stackforge
-    node: precise
+    node: bare-precise
 
     jobs:
       - gate-{name}-run-tests
@@ -1742,7 +1742,7 @@
 - project:
     name: stackalytics
     github-org: stackforge
-    node: precise
+    node: bare-precise
     tarball-site: tarballs.openstack.org
 
     jobs:
@@ -1752,7 +1752,7 @@
 - project:
     name: anvil
     github-org: stackforge
-    node: precise
+    node: bare-precise
     tarball-site: tarballs.openstack.org
 
     jobs:
@@ -1762,7 +1762,7 @@
 - project:
     name: pycadf
     github-org: openstack
-    node: precise
+    node: bare-precise
     tarball-site: tarballs.openstack.org
 
     jobs:
@@ -1772,7 +1772,7 @@
 - project:
     name: pecan
     github-org: stackforge
-    node: precise
+    node: bare-precise
     tarball-site: tarballs.openstack.org
 
     jobs:
@@ -1795,7 +1795,7 @@
 - project:
     name: stevedore
     github-org: openstack
-    node: precise
+    node: bare-precise
     rtfd-id: 4157
     tarball-site: tarballs.openstack.org
 
@@ -1807,7 +1807,7 @@
 - project:
     name: cliff
     github-org: openstack
-    node: precise
+    node: bare-precise
     tarball-site: tarballs.openstack.org
 
     jobs:
@@ -1827,7 +1827,7 @@
     name: python-tuskarclient
     github-org: openstack
     tarball-site: tarballs.openstack.org
-    node: precise
+    node: bare-precise
 
     jobs:
       - python-jobs
@@ -1836,7 +1836,7 @@
 - project:
     name: wsme
     github-org: stackforge
-    node: precise
+    node: bare-precise
     tarball-site: tarballs.openstack.org
 
     jobs:
@@ -1847,7 +1847,7 @@
     name: tuskar
     github-org: openstack
     tarball-site: tarballs.openstack.org
-    node: precise
+    node: bare-precise
 
     jobs:
       - python-jobs
@@ -1857,7 +1857,7 @@
     name: tuskar-ui
     github-org: openstack
     tarball-site: tarballs.openstack.org
-    node: precise
+    node: bare-precise
 
     jobs:
       - python-jobs
@@ -1866,7 +1866,7 @@
 - project:
     name: rally
     github-org: stackforge
-    node: precise
+    node: bare-precise
     tarball-site: tarballs.openstack.org
 
     jobs:
@@ -1875,7 +1875,7 @@
 - project:
     name: python-rallyclient
     github-org: stackforge
-    node: precise
+    node: bare-precise
     tarball-site: tarballs.openstack.org
 
     jobs:
@@ -1885,7 +1885,7 @@
 - project:
     name: openstack-manuals
     github-org: openstack
-    node: precise
+    node: bare-precise
 
     manual:
       - admin-guide-cloud
@@ -1967,7 +1967,7 @@
 - project:
     name: operations-guide
     github-org: openstack
-    node: precise
+    node: bare-precise
 
     jobs:
       - openstack-doc-jobs
@@ -1975,7 +1975,7 @@
 - project:
     name: manila
     github-org: stackforge
-    node: precise
+    node: bare-precise
     tarball-site: tarballs.openstack.org
 
     jobs:
@@ -1984,7 +1984,7 @@
 - project:
     name: python-manilaclient
     github-org: stackforge
-    node: precise
+    node: bare-precise
     tarball-site: tarballs.openstack.org
 
     jobs:
@@ -1993,7 +1993,7 @@
 - project:
     name: milk
     github-org: stackforge
-    node: precise
+    node: bare-precise
     tarball-site: tarballs.openstack.org
 
     jobs:
@@ -2002,7 +2002,7 @@
 - project:
     name: solum
     github-org: stackforge
-    node: precise
+    node: bare-precise
     tarball-site: tarballs.openstack.org
 
     jobs:
@@ -2012,7 +2012,7 @@
 - project:
     name: congress
     github-org: stackforge
-    node: precise
+    node: bare-precise
     tarball-site: tarballs.openstack.org
 
     jobs:
@@ -2021,7 +2021,7 @@
 - project:
     name: rubick
     github-org: stackforge
-    node: precise
+    node: bare-precise
     tarball-site: tarballs.openstack.org
 
     jobs:
@@ -2030,7 +2030,7 @@
 - project:
     name: swiftsync
     github-org: stackforge
-    node: precise
+    node: bare-precise
     tarball-site: tarballs.openstack.org
 
     jobs:
@@ -2039,7 +2039,7 @@
 - project:
     name: tooz
     github-org: stackforge
-    node: precise
+    node: bare-precise
     tarball-site: tarballs.openstack.org
 
     jobs:
@@ -2048,7 +2048,7 @@
 - project:
     name: sphinxcontrib-docbookrestapi
     github-org: stackforge
-    node: precise
+    node: bare-precise
     tarball-site: tarballs.openstack.org
 
     jobs:
@@ -2062,7 +2062,7 @@
 - project:
     name: tomograph
     github-org: stackforge
-    node: precise
+    node: bare-precise
     tarball-site: tarballs.openstack.org
 
     jobs:
@@ -2072,7 +2072,7 @@
 - project:
     name: turbo-hipster
     github-org: stackforge
-    node: precise
+    node: bare-precise
     tarball-site: tarballs.openstack.org
 
     jobs:
@@ -2082,7 +2082,7 @@
 - project:
     name: python-solumclient
     github-org: stackforge
-    node: precise
+    node: bare-precise
     tarball-site: tarballs.openstack.org
 
     jobs:
@@ -2091,7 +2091,7 @@
 - project:
     name: release-tools
     github-org: openstack-infra
-    node: precise
+    node: bare-precise
     tarball-site: tarballs.openstack.org
 
     jobs:
@@ -2100,7 +2100,7 @@
 - project:
     name: entropy
     github-org: stackforge
-    node: precise
+    node: bare-precise
     tarball-site: tarballs.openstack.org
 
     jobs:
@@ -2109,7 +2109,7 @@
 - project:
     name: openstack-doc-tools
     github-org: openstack
-    node: precise
+    node: bare-precise
     tarball-site: tarballs.openstack.org
 
     jobs:
@@ -2121,7 +2121,7 @@
 - project:
     name: api-site
     github-org: openstack
-    node: precise
+    node: bare-precise
 
     jobs:
       - openstack-doc-jobs
@@ -2130,7 +2130,7 @@
 - project:
     name: database-api
     github-org: openstack
-    node: precise
+    node: bare-precise
 
     jobs:
       - openstack-doc-jobs
@@ -2139,7 +2139,7 @@
 - project:
     name: volume-api
     github-org: openstack
-    node: precise
+    node: bare-precise
 
     jobs:
       - openstack-doc-jobs
@@ -2147,7 +2147,7 @@
 - project:
     name: python-openstacksdk
     github-org: stackforge
-    node: precise
+    node: bare-precise
     tarball-site: tarballs.openstack.org
 
     jobs:
@@ -2157,7 +2157,7 @@
 - project:
     name: gce-api
     github-org: stackforge
-    node: precise
+    node: bare-precise
     tarball-site: tarballs.openstack.org
 
     jobs:
@@ -2166,7 +2166,7 @@
 - project:
     name: groups
     github-org: openstack-infra
-    node: precise
+    node: bare-precise
     tarball-site: tarballs.openstack.org
 
     jobs:

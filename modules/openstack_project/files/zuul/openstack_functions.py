@@ -29,6 +29,10 @@ def set_log_url(item, job, params):
                                             params['ZUUL_UUID'][:7])
 
 
-def single_use_node(item, job, params):
+def node_defaults(item, job, params):
     set_log_url(item, job, params)
     params['OFFLINE_NODE_WHEN_COMPLETE'] = '1'
+
+
+def reusable_node(item, job, params):
+    params['OFFLINE_NODE_WHEN_COMPLETE'] = '0'

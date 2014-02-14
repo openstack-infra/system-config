@@ -84,7 +84,7 @@
     name: python-grizzly-bitrot-jobs
     branch: 'stable/grizzly'
     branch-name: '-grizzly'
-    node: precise
+    node: bare-precise
     jobs:
       - 'periodic-{name}-python26{branch-name}'
       - 'periodic-{name}-python27{branch-name}'
@@ -95,7 +95,7 @@
     name: python-havana-bitrot-jobs
     branch: 'stable/havana'
     branch-name: '-havana'
-    node: precise
+    node: bare-precise
     jobs:
       - 'periodic-{name}-python26{branch-name}'
       - 'periodic-{name}-python27{branch-name}'
