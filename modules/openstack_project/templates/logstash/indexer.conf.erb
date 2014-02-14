@@ -2,19 +2,13 @@ input {
   tcp {
     host => "localhost"
     port => 9999
-    codec => line {}
+    codec => json_lines {}
     type => "jenkins"
   }
 }
 
 # You can check grok patterns at http://grokdebug.herokuapp.com/
 filter {
-  # This is a work around for a bug. We should be able to set the tcp
-  # input codec to json, but that codec doesn't support streaming.
-  # Convert to json here instead.
-  json {
-    source => "message"
-  }
   if "screen" in [tags] and [message] =~ "^\+ " {
     drop {}
   }
@@ -118,5 +112,7 @@ output {
   elasticsearch {
     host => "<%= scope.lookupvar("::openstack_project::logstash_worker::discover_node") %>"
     node_name => "<%= scope.lookupvar("::hostname") %>"
+    manage_template => false
+    flush_size => 512
   }
 }

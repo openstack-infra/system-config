@@ -45,7 +45,7 @@ class openstack_project::elasticsearch_node (
       'discovery.zen.ping.multicast.enabled' => false,
       'discovery.zen.ping.unicast.hosts'     => $discover_nodes,
     },
-    version            => '0.90.3',
+    version            => '0.90.9',
   }
 
   cron { 'delete_old_es_indices':
