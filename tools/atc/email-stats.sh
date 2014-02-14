@@ -20,7 +20,7 @@ python email-stats.py -p openstack/marconi -o out/marconi.csv
 python email-stats.py -p openstack/oslo-incubator -o out/olso-incubator.csv
 python email-stats.py -p openstack/oslo.config -o out/olso.config.csv
 python email-stats.py -p openstack/oslo.messaging -o out/olso.messaging.csv
-python email-stats.py -p openstack/oslo.sphinx -o out/olso.sphinx.csv
+python email-stats.py -p openstack/oslosphinx -o out/olsosphinx.csv
 python email-stats.py -p openstack/oslo.version -o out/olso.version.csv
 python email-stats.py -p openstack/python-novaclient -o out/python-novaclient.csv
 python email-stats.py -p openstack/python-swiftclient -o out/python-swiftclient.csv
