@@ -16,12 +16,7 @@ pipelines:
         - event: comment-added
           require-approval:
             - username: jenkins
-              older-than: 72h
-        - event: comment-added
-          require-approval:
-            - approved: 1
-            - username: jenkins
-              older-than: 24h
+              older-than: 48h
     start:
       gerrit:
         verified: 0
@@ -40,22 +35,10 @@ pipelines:
     trigger:
       gerrit:
         - event: comment-added
-          require-approval:
-            - verified: 1
-              username: jenkins
-              newer-than: 24h
           approval:
             - approved: 1
         - event: comment-added
-          approval:
-            - verified: 1
-              username: jenkins
-        - event: comment-added
           comment_filter: (?i)^\s*reverify( (?:bug|lp)[\s#:]*(\d+))\s*$
-          require-approval:
-            - verified: 1
-              username: jenkins
-              newer-than: 24h
     start:
       gerrit:
         verified: 0
