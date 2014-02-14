@@ -348,6 +348,25 @@ class jenkins::slave(
       refreshonly => true,
       subscribe   => Postgresql::Server::Db['openstack_citest'],
     }
+
+    postgresql::server::db { 'openstack_baremetal_citest':
+      user     => 'openstack_citest',
+      password => postgresql_password('openstack_citest', 'openstack_citest'),
+      grant    => 'all',
+      require  => [
+        Class['postgresql::server'],
+        Postgresql::Server::Role['openstack_citest'],
+      ],
+    }
+
+    # Alter the new database giving the test DB user ownership of the DB.
+    # This is necessary to make the nova unittests run properly.
+    postgresql_psql { 'ALTER DATABASE openstack_baremetal_citest OWNER TO
+                       openstack_citest':
+      db          => 'postgres',
+      refreshonly => true,
+      subscribe   => Postgresql::Server::Db['openstack_baremetal_citest'],
+    }
   }
 
   file { '/usr/local/jenkins':
