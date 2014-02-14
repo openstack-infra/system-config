@@ -177,11 +177,6 @@ project-templates:
       - 'gate-{name}-docs'
       - 'gate-{name}-python26'
       - 'gate-{name}-python27'
-    gate:
-      - 'gate-{name}-docs'
-      - 'gate-{name}-pep8'
-      - 'gate-{name}-python26'
-      - 'gate-{name}-python27'
     post:
       - '{name}-branch-tarball'
       - '{name}-coverage'
@@ -1267,10 +1262,6 @@ projects:
       - gate-tempest-dsvm-neutron-large-ops
     gate:
       - gate-python-heatclient-requirements
-      - gate-python-heatclient-pep8
-      - gate-python-heatclient-python26
-      - gate-python-heatclient-python27
-      - gate-python-heatclient-pypy
       - gate-devstack-dsvm-cells
       - gate-tempest-dsvm-full
       - gate-tempest-dsvm-postgres-full
@@ -1890,10 +1881,6 @@ projects:
       - check-grenade-dsvm
     gate:
       - gate-oslo.rootwrap-requirements
-      - gate-oslo.rootwrap-pep8
-      - gate-oslo.rootwrap-python26
-      - gate-oslo.rootwrap-python27
-      - gate-oslo.rootwrap-python33
       - gate-devstack-dsvm-cells
       - gate-tempest-dsvm-full
       - gate-tempest-dsvm-neutron
@@ -1954,9 +1941,6 @@ projects:
       - check-grenade-dsvm
       - check-swift-dsvm-functional
     gate:
-      - gate-requirements-pep8
-      - gate-requirements-python27
-      - gate-requirements-pypy
       - gate-requirements-integration-dsvm
       - gate-devstack-dsvm-cells
       - gate-tempest-dsvm-full
@@ -2095,9 +2079,6 @@ projects:
       - check-tempest-dsvm-neutron-heat-slow
     gate:
       - gate-tempest-requirements
-      - gate-tempest-pep8
-      - gate-tempest-docs
-      - gate-tempest-python27
       - gate-tempest-dsvm-full
       - gate-tempest-dsvm-postgres-full
       - gate-tempest-dsvm-neutron
