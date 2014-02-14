@@ -225,7 +225,7 @@ jobs:
     parameter-function: set_log_url
   - name: ^.*(dsvm|devstack-vm).*$
     parameter-function: single_use_node
-  - name: '^(gate|periodic)-.*-python26.*$'
+  - name: '^(gate|periodic)-(?!mirror).*-python26.*$'
     parameter-function: single_use_node
   - name: gate-sqlalchemy-migrate-unittests-26sa07
     parameter-function: single_use_node
