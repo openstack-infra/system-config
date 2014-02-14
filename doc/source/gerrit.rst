@@ -417,7 +417,7 @@ To rename a project:
      sudo mv ~gerrit2/review_site/git/openstack/{OLD,NEW}.git
      sudo mv /var/lib/git/openstack/{OLD,NEW}.git
 
-#. Move the git repository on git.openstack.org::
+#. Move the git repository on git{01-04}.openstack.org::
 
      sudo mv /var/lib/git/openstack/{OLD,NEW}.git
 
@@ -444,8 +444,8 @@ To rename a project:
    changing, gate jobs may fail due to outdated remote URLs. Clear
    the workspaces on persistent Jenkins slaves to mitigate this::
 
-     ssh -t $h.slave.openstack.org 'sudo rm -rf ~jenkins/workspace/*PROJECT*'
-
+     sudo salt '*.slave.openstack.org' cmd.run 'rm -rf ~jenkins/workspace/*PROJECT*'
+ 
 #. Again, if this is an org move rather than a rename and the GitHub
    project has been created but is empty, trigger replication to
    populate it::
