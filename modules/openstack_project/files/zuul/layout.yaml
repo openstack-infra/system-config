@@ -169,6 +169,14 @@ pipelines:
         to: openstack-stable-maint@lists.openstack.org
         subject: 'Stable check of {change.project} failed'
 
+  - name: periodic-i18n
+    description: Periodic jobs for the i18n team.
+    manager: IndependentPipelineManager
+    precedence: low
+    trigger:
+      timer:
+        - time: '3 */2 * * *'
+
   - name: periodic-qa
     description: Periodic jobs for the QA team.
     manager: IndependentPipelineManager
@@ -432,6 +440,9 @@ jobs:
     branch: ^(?!stable/grizzly).*$
   - name: openstack-install-deploy-guide-ubuntu
     branch: ^(?!stable/grizzly).*$
+  - name: periodic-openstack-install-deploy-guide-(debian|fedora|opensuse|ubuntu)-(.*)
+    branch: ^(?!stable/(grizzly|havana)).*$
+    voting: false
   - name: gate-openstack-manuals-tox-checkniceness
     branch: ^(?!stable/grizzly).*$
     voting: false
@@ -2489,6 +2500,10 @@ projects:
       - openstack-training-guides
     periodic:
       - manuals-propose-translation-update
+    periodic-18n:
+      - periodic-openstack-install-deploy-guide-ja
+      - periodic-openstack-install-deploy-guide-de
+      - periodic-openstack-install-deploy-guide-pt_BR
 
   - name: openstack/operations-guide
     template:
