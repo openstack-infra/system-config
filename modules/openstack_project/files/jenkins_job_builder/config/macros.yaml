@@ -345,6 +345,17 @@
               copy-after-failure: true
 
 - publisher:
+    name: upload-docs-draft-i18n
+    publishers:
+      - scp:
+          site: 'static.openstack.org'
+          files:
+            - target: 'docs-draft/periodic-i18n/{lang}/'
+              source: 'publish-docs/{lang}/**'
+              keep-hierarchy: true
+              copy-after-failure: false
+
+- publisher:
     name: upload-doc-build-results
     publishers:
       - scp:

@@ -97,6 +97,28 @@
           remove-prefix: 'publish-docs/{lang}/'
 
 - job-template:
+    name: 'periodic-openstack-install-deploy-guide-{lang}'
+
+    concurrent: false
+    node: precise
+
+    properties:
+      - inject:
+          script-file: /usr/local/jenkins/slave_scripts/docbook-properties.sh
+          properties-file: gerrit-doc.properties
+
+    builders:
+      - gerrit-git-prep
+      - shell: |
+          source /usr/local/jenkins/slave_scripts/select-mirror.sh openstack openstack-manuals
+          tx pull -l {lang}
+          tox -v -e buildlang-install -- {lang}
+
+    publishers:
+      - console-log
+      - upload-docs-draft-i18n
+
+- job-template:
     name: openstack-{oldmanual}-old
     project-type: maven
     node: precise
