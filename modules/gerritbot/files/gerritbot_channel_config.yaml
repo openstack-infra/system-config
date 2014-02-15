@@ -423,6 +423,16 @@ openstack-climate:
     branches:
       - master
 
+refstack:
+    events:
+      - patchset-created
+      - change-merged
+      - x-vrif-minus-2
+    projects:
+      - stackforge/refstack
+    branches:
+      - master
+
 rubick:
     events:
       - patchset-created

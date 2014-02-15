@@ -2024,6 +2024,15 @@
       - python-jobs
 
 - project:
+    name: refstack
+    github-org: stackforge
+    node: bare-precise
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - python-jobs
+
+- project:
     name: swiftsync
     github-org: stackforge
     node: bare-precise
