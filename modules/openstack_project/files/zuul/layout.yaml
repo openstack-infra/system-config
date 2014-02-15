@@ -492,6 +492,10 @@ jobs:
     voting: false
   - name: gate-reviewstats-python33
     voting: false
+  - name: gate-refstack-python33
+    voting: false
+  - name: gate-refstack-python26
+    voting: false
   - name: gate-rubick-python33
     voting: false
   - name: gate-manila-devstack-dsvm
@@ -4146,6 +4150,18 @@ projects:
       - rally-tarball
     release:
       - rally-tarball
+
+  - name: stackforge/refstack
+    check:
+      - gate-refstack-pep8
+      - gate-refstack-python26
+      - gate-refstack-python27
+      - gate-refstack-python33
+    gate:
+      - gate-refstack-pep8
+      - gate-refstack-python27
+    post:
+      - refstack-coverage
 
   - name: stackforge/rubick
     check:
