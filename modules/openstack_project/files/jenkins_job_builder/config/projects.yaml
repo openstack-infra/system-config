@@ -1902,6 +1902,8 @@
 
     lang:
         - ja
+        - de
+        - pt_BR
 
     jobs:
       - openstack-doc-jobs
@@ -1929,6 +1931,8 @@
           profileos: "ubuntu"
 
       - openstack-install-deploy-guide-{lang}:
+
+      - periodic-openstack-install-deploy-guide-{lang}
 
       - openstack-operations-guide-{lang}
 
