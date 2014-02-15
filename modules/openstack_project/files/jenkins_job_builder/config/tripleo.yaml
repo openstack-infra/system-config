@@ -29,7 +29,7 @@
 
     publishers:
       - scp:
-          site: 'static.openstack.org'
+          site: '*staticserver'
           files:
             - target: 'logs/$LOG_PATH'
               source: 'logs/**'
@@ -68,7 +68,7 @@
 
     publishers:
       - scp:
-          site: 'static.openstack.org'
+          site: '*staticserver'
           files:
             - target: 'logs/$LOG_PATH'
               source: 'logs/**'

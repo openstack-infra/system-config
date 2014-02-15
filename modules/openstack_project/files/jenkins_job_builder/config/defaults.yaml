@@ -27,3 +27,10 @@
       numToKeep: -1
       artifactDaysToKeep: -1
       artifactNumToKeep: -1
+
+    docserver: &docserver
+     - 'docs.openstack.org'
+    tarballserver: &tarballserver
+     - 'tarballs.openstack.org'
+    staticserver: &staticserver
+     - 'static.openstack.org'

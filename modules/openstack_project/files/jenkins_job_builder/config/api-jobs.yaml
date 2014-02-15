@@ -19,7 +19,7 @@
     publishers:
       - console-log
       - ftp:
-          site: docs.openstack.org
+          site: *docserver
           source: 'api-quick-start/target/docbkx/webhelp/api-quick-start-onepager-external/**'
           target: 'api/quick-start/'
           remove-prefix: 'api-quick-start/target/docbkx/webhelp/api-quick-start-onepager-external/'
@@ -105,7 +105,7 @@
     publishers:
       - console-log
       - ftp:
-          site: docs.openstack.org
+          site: *docserver
           source: 'openstack-image-service-api/src/markdown/target/docbkx/webhelp/api/openstack-image-service/2.0/**'
           target: '/'
           remove-prefix: 'openstack-image-service-api/src/markdown/target/docbkx/webhelp/'
@@ -133,7 +133,7 @@
     publishers:
       - console-log
       - ftp:
-          site: docs.openstack.org
+          site: *docserver
           source: 'v1.0/target/docbkx/webhelp/openstack-network/**'
           target: ''
           remove-prefix: 'v1.0/target/docbkx/webhelp'
@@ -158,7 +158,7 @@
     publishers:
       - console-log
       - ftp:
-          site: docs.openstack.org
+          site: *docserver
           source: 'v2.0/target/docbkx/webhelp/openstack-network/**'
           target: 'api/openstack-network/2.0/'
           remove-prefix: 'v2.0/target/docbkx/webhelp/openstack-network/'
@@ -184,7 +184,7 @@
     publishers:
       - console-log
       - ftp:
-          site: docs.openstack.org
+          site: *docserver
           source: 'openstack-object-storage-dev/target/docbkx/webhelp/**'
           target: ''
           remove-prefix: 'openstack-object-storage-dev/target/docbkx/webhelp/'
@@ -210,7 +210,7 @@
     publishers:
       - console-log
       - ftp:
-          site: docs.openstack.org
+          site: *docserver
           source: 'openstack-compute-api-2/target/docbkx/webhelp/api/openstack-compute/2/**'
           target: ''
           remove-prefix: 'openstack-compute-api-2/target/docbkx/webhelp'
@@ -227,7 +227,7 @@
 
     publishers:
       - ftp:
-          site: docs.openstack.org
+          site: *docserver
           source: 'target/**'
           target: 'api/openstack-compute/2/wadl/'
           remove-prefix: 'target/'
@@ -254,7 +254,7 @@
     publishers:
       - console-log
       - ftp:
-          site: docs.openstack.org
+          site: *docserver
           source: 'v2/target/docbkx/webhelp/api/openstack-block-storage/2.0/**'
           target: ''
           remove-prefix: 'v2/target/docbkx/webhelp'
@@ -281,7 +281,7 @@
     publishers:
       - console-log
       - ftp:
-          site: docs.openstack.org
+          site: *docserver
           source: 'openstack-identity-api/v2.0/target/docbkx/webhelp/api/openstack-identity-service/2.0/**'
           target: ''
           remove-prefix: 'openstack-identity-api/v2.0/target/docbkx/webhelp/'
@@ -320,7 +320,7 @@
     publishers:
       - console-log
       - ftp:
-          site: docs.openstack.org
+          site: *docserver
           source: 'openstack-identity-api/v3/markdown/target/docbkx/webhelp/api/openstack-identity-service/3/**'
           target: ''
           remove-prefix: 'openstack-identity-api/v3/markdown/target/docbkx/webhelp/'
@@ -348,7 +348,7 @@
     publishers:
       - console-log
       - ftp:
-          site: docs.openstack.org
+          site: *docserver
           source: 'openstack-image-service-api/target/docbkx/webhelp/api/openstack-image-service/1.1/**'
           target: ''
           remove-prefix: 'openstack-image-service-api/target/docbkx/webhelp'

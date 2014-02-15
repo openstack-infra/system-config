@@ -21,7 +21,7 @@
 
     publishers:
       - ftp:
-          site: docs.openstack.org
+          site: *docserver
           source: 'www/**'
           target: ''
           remove-prefix: 'www/'
@@ -61,13 +61,13 @@
     publishers:
       - console-log
       - ftp:
-          site: docs.openstack.org
+          site: *docserver
           source: 'doc/high-availability-guide/target/docbkx/webhelp/**'
           target: ''
           remove-prefix: 'doc/high-availability-guide/target/docbkx/webhelp/'
           excludes: '**/*.xml,**/null*'
       - ftp:
-          site: docs.openstack.org
+          site: *docserver
           source: 'doc/high-availability-guide/target/docbkx/webhelp/**/atom.xml'
           target: ''
           remove-prefix: 'doc/high-availability-guide/target/docbkx/webhelp/'
@@ -97,13 +97,13 @@
     publishers:
       - console-log
       - ftp:
-          site: docs.openstack.org
+          site: *docserver
           source: 'doc/openstack-ops/target/docbkx/webhelp/**'
           target: '/'
           remove-prefix: 'doc/openstack-ops/target/docbkx/webhelp/'
           excludes: '**/*.xml,**/null*'
       - ftp:
-          site: docs.openstack.org
+          site: *docserver
           source: 'doc/openstack-ops/target/docbkx/webhelp/**/atom.xml'
           target: ''
           remove-prefix: 'doc/openstack-ops/target/docbkx/webhelp/'
@@ -135,7 +135,7 @@
     publishers:
       - console-log
       - ftp:
-          site: docs.openstack.org
+          site: *docserver
           source: 'generated/{lang}/openstack-ops/target/docbkx/webhelp/**'
           target: '/{lang}/'
           remove-prefix: 'generated/{lang}/openstack-ops/target/docbkx/webhelp/'

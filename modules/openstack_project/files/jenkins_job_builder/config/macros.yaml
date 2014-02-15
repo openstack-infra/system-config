@@ -269,7 +269,7 @@
     name: console-log
     publishers:
       - scp:
-          site: 'static.openstack.org'
+          site: '*staticserver'
           files:
             - target: 'logs/$LOG_PATH'
               copy-console: true
@@ -280,7 +280,7 @@
     name: devstack-logs
     publishers:
       - scp:
-          site: 'static.openstack.org'
+          site: '*staticserver'
           files:
             - target: 'logs/$LOG_PATH'
               source: 'logs/**'
@@ -292,7 +292,7 @@
     name: coverage-log
     publishers:
       - scp:
-          site: 'static.openstack.org'
+          site: '*staticserver'
           files:
             - target: 'logs/$LOG_PATH'
               source: 'cover/**'
@@ -303,7 +303,7 @@
     name: test-results
     publishers:
       - scp:
-          site: 'static.openstack.org'
+          site: '*staticserver'
           files:
             - target: 'logs/$LOG_PATH'
               source: '**/*nose_results.html'
@@ -326,7 +326,7 @@
     name: upload-sphinx-draft
     publishers:
       - scp:
-          site: 'static.openstack.org'
+          site: '*staticserver'
           files:
             - target: 'docs-draft/$LOG_PATH'
               source: 'doc/build/html/**'
