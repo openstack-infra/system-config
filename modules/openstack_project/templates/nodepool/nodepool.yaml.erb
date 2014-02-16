@@ -71,6 +71,13 @@ providers:
         setup: prepare_node_bare.sh
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
+      - name: py3k-precise
+        base-image: 'Ubuntu 12.04 LTS (Precise Pangolin)'
+        min-ram: 8192
+        name-filter: 'Performance'
+        setup: prepare_node_py3k.sh
+        username: jenkins
+        private-key: /home/nodepool/.ssh/id_rsa
       - name: bare-centos6
         base-image: 'CentOS 6.5 (PVHVM)'
         min-ram: 8192
@@ -266,6 +273,10 @@ targets:
           - name: hpcloud-az1
           - name: hpcloud-az2
           - name: hpcloud-az3
+      - name: py3k-precise
+        min-ready: 1
+        providers:
+          - name: rax-ord
       - name: bare-centos6
         min-ready: 2
         providers:
