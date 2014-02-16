@@ -125,6 +125,13 @@ providers:
         setup: prepare_node_devstack.sh
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
+      - name: py3k-precise
+        base-image: 'Ubuntu 12.04 LTS (Precise Pangolin)'
+        min-ram: 8192
+        name-filter: 'Performance'
+        setup: prepare_node_py3k.sh
+        username: jenkins
+        private-key: /home/nodepool/.ssh/id_rsa
   - name: hpcloud-az1
     region-name: 'az-1.region-a.geo-1'
     service-type: 'compute'
@@ -268,6 +275,7 @@ targets:
       - name: py3k-precise
         min-ready: 1
         providers:
+          - name: rax-iad
           - name: rax-ord
   - name: jenkins02
     jenkins:
@@ -303,6 +311,11 @@ targets:
         providers:
           - name: hpcloud-region-b
           - name: rax-iad
+      - name: py3k-precise
+        min-ready: 1
+        providers:
+          - name: rax-iad
+          - name: rax-ord
   - name: jenkins03
     jenkins:
       url: 'https://jenkins03.openstack.org/'
@@ -337,6 +350,11 @@ targets:
         providers:
           - name: hpcloud-region-b
           - name: rax-iad
+      - name: py3k-precise
+        min-ready: 1
+        providers:
+          - name: rax-iad
+          - name: rax-ord
   - name: jenkins04
     jenkins:
       url: 'https://jenkins04.openstack.org/'
@@ -371,6 +389,11 @@ targets:
         providers:
           - name: hpcloud-region-b
           - name: rax-iad
+      - name: py3k-precise
+        min-ready: 1
+        providers:
+          - name: rax-iad
+          - name: rax-ord
   - name: jenkins05
     jenkins:
       url: 'https://jenkins05.openstack.org/'
@@ -405,6 +428,11 @@ targets:
         providers:
           - name: hpcloud-region-b
           - name: rax-iad
+      - name: py3k-precise
+        min-ready: 1
+        providers:
+          - name: rax-iad
+          - name: rax-ord
   - name: jenkins06
     jenkins:
       url: 'https://jenkins06.openstack.org/'
@@ -439,6 +467,11 @@ targets:
         providers:
           - name: hpcloud-region-b
           - name: rax-iad
+      - name: py3k-precise
+        min-ready: 1
+        providers:
+          - name: rax-iad
+          - name: rax-ord
   - name: jenkins07
     jenkins:
       url: 'https://jenkins07.openstack.org/'
@@ -473,6 +506,11 @@ targets:
         providers:
           - name: hpcloud-region-b
           - name: rax-iad
+      - name: py3k-precise
+        min-ready: 1
+        providers:
+          - name: rax-iad
+          - name: rax-ord
       - name: dsvm-precise-krnl
         min-ready: 1
         providers:
