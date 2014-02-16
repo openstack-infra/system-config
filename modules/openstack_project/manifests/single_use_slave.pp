@@ -11,6 +11,8 @@ class openstack_project::single_use_slave (
   $install_users = true,
   $sudo = false,
   $bare = true,
+  $python3 = false,
+  $include_pypy = false,
   $automatic_upgrades = false,
   $ssh_key = $openstack_project::jenkins_ssh_key
 ) inherits openstack_project {
@@ -24,8 +26,10 @@ class openstack_project::single_use_slave (
       ['-p tcp --dport 8000 -s 172.24.4.0/24 -j ACCEPT'],
   }
   class { 'jenkins::slave':
-    ssh_key => $ssh_key,
-    sudo    => $sudo,
-    bare    => $bare,
+    ssh_key      => $ssh_key,
+    sudo         => $sudo,
+    bare         => $bare,
+    python3      => $python3,
+    include_pypy => $include_pypy,
   }
 }
