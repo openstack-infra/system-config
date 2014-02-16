@@ -92,6 +92,8 @@ def local_prep(distribution):
                     line = line[len('${IMAGE_URLS:-'):]
                 if line.endswith('}'):
                     line = line[:-1]
+                if not line:
+                    continue
                 if line[0] == line[-1] == '"':
                     line = line[1:-1]
                 images += [x.strip() for x in line.split(',')]
