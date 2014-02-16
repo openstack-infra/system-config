@@ -605,6 +605,8 @@ projects:
       - gate-grenade-dsvm
     experimental:
       - gate-grenade-dsvm-forward
+    experimental-tripleo:
+      - check-tripleo-overcloud-precise
     post:
       - cinder-upstream-translation-update
     pre-release:
@@ -676,6 +678,10 @@ projects:
     experimental:
       - gate-grenade-dsvm-forward
       - gate-tempest-dsvm-neutron-full
+    experimental-tripleo:
+      - check-tripleo-seed-precise
+      - check-tripleo-undercloud-precise
+      - check-tripleo-overcloud-precise
     post:
       - gantt-upstream-translation-update
     pre-release:
@@ -712,6 +718,10 @@ projects:
       - gate-grenade-dsvm
     experimental:
       - gate-grenade-dsvm-forward
+    experimental-tripleo:
+      - check-tripleo-seed-precise
+      - check-tripleo-undercloud-precise
+      - check-tripleo-overcloud-precise
     pre-release:
       - glance-tarball
     release:
@@ -745,6 +755,10 @@ projects:
       - gate-tempest-dsvm-neutron-large-ops
     post:
       - heat-upstream-translation-update
+    experimental-tripleo:
+      - check-tripleo-seed-precise
+      - check-tripleo-undercloud-precise
+      - check-tripleo-overcloud-precise
     pre-release:
       - heat-tarball
     release:
@@ -840,6 +854,10 @@ projects:
       - gate-swift-dsvm-functional
     experimental:
       - gate-grenade-dsvm-forward
+    experimental-tripleo:
+      - check-tripleo-seed-precise
+      - check-tripleo-undercloud-precise
+      - check-tripleo-overcloud-precise
     post:
       - keystone-upstream-translation-update
     pre-release:
@@ -907,6 +925,10 @@ projects:
       - experimental-tempest-dsvm-neutron-pg
       - experimental-tempest-dsvm-neutron-isolated
       - experimental-tempest-dsvm-neutron-pg-isolated
+    experimental-tripleo:
+      - check-tripleo-seed-precise
+      - check-tripleo-undercloud-precise
+      - check-tripleo-overcloud-precise
     pre-release:
       - neutron-tarball
     release:
@@ -948,6 +970,10 @@ projects:
       - check-tempest-dsvm-neutron-pg
       - check-tempest-dsvm-neutron-isolated
       - check-tempest-dsvm-neutron-pg-isolated
+    experimental-tripleo:
+      - check-tripleo-seed-precise
+      - check-tripleo-undercloud-precise
+      - check-tripleo-overcloud-precise
     post:
       - nova-upstream-translation-update
     pre-release:
@@ -1063,6 +1089,10 @@ projects:
       - gate-grenade-dsvm
     experimental:
       - gate-grenade-dsvm-forward
+    experimental-tripleo:
+      - check-tripleo-seed-precise
+      - check-tripleo-undercloud-precise
+      - check-tripleo-overcloud-precise
     pre-release:
       - swift-tarball
     release:
@@ -1197,6 +1227,10 @@ projects:
       - gate-grenade-dsvm
     experimental:
       - gate-grenade-dsvm-forward
+    experimental-tripleo:
+      - check-tripleo-seed-precise
+      - check-tripleo-undercloud-precise
+      - check-tripleo-overcloud-precise
     pre-release:
       - python-cinderclient-tarball
     release:
@@ -1230,6 +1264,10 @@ projects:
       - gate-grenade-dsvm
     experimental:
       - gate-grenade-dsvm-forward
+    experimental-tripleo:
+      - check-tripleo-seed-precise
+      - check-tripleo-undercloud-precise
+      - check-tripleo-overcloud-precise
     pre-release:
       - python-ganttclient-tarball
     release:
@@ -1263,6 +1301,10 @@ projects:
       - gate-grenade-dsvm
     experimental:
       - gate-grenade-dsvm-forward
+    experimental-tripleo:
+      - check-tripleo-seed-precise
+      - check-tripleo-undercloud-precise
+      - check-tripleo-overcloud-precise
     pre-release:
       - python-glanceclient-tarball
     release:
@@ -1302,6 +1344,10 @@ projects:
     post:
       - python-heatclient-branch-tarball
       - python-heatclient-coverage
+    experimental-tripleo:
+      - check-tripleo-seed-precise
+      - check-tripleo-undercloud-precise
+      - check-tripleo-overcloud-precise
     pre-release:
       - python-heatclient-tarball
     release:
@@ -1364,6 +1410,10 @@ projects:
       - gate-grenade-dsvm
     experimental:
       - gate-grenade-dsvm-forward
+    experimental-tripleo:
+      - check-tripleo-seed-precise
+      - check-tripleo-undercloud-precise
+      - check-tripleo-overcloud-precise
     pre-release:
       - python-keystoneclient-tarball
     release:
@@ -1432,6 +1482,10 @@ projects:
       - gate-grenade-dsvm
     experimental:
       - gate-grenade-dsvm-forward
+    experimental-tripleo:
+      - check-tripleo-seed-precise
+      - check-tripleo-undercloud-precise
+      - check-tripleo-overcloud-precise
     pre-release:
       - python-neutronclient-tarball
     release:
@@ -1469,6 +1523,10 @@ projects:
       - gate-grenade-dsvm
     experimental:
       - gate-grenade-dsvm-forward
+    experimental-tripleo:
+      - check-tripleo-seed-precise
+      - check-tripleo-undercloud-precise
+      - check-tripleo-overcloud-precise
     pre-release:
       - python-novaclient-tarball
     release:
@@ -1550,6 +1608,10 @@ projects:
       - gate-tempest-dsvm-large-ops
       - gate-tempest-dsvm-neutron-large-ops
       - gate-grenade-dsvm
+    experimental-tripleo:
+      - check-tripleo-seed-precise
+      - check-tripleo-undercloud-precise
+      - check-tripleo-overcloud-precise
     pre-release:
       - python-swiftclient-tarball
     release:
@@ -1845,6 +1907,10 @@ projects:
       - gate-grenade-dsvm
     pre-release:
       - oslo.config-tarball
+    experimental-tripleo:
+      - check-tripleo-seed-precise
+      - check-tripleo-undercloud-precise
+      - check-tripleo-overcloud-precise
     release:
       - oslo.config-tarball:
         - oslo.config-pypi-upload:
@@ -1872,6 +1938,10 @@ projects:
       - gate-tempest-dsvm-large-ops
       - gate-tempest-dsvm-neutron-large-ops
       - gate-grenade-dsvm
+    experimental-tripleo:
+      - check-tripleo-seed-precise
+      - check-tripleo-undercloud-precise
+      - check-tripleo-overcloud-precise
     pre-release:
       - oslo.messaging-tarball:
         - oslo.messaging-pypi-upload:
@@ -1909,6 +1979,10 @@ projects:
       - gate-grenade-dsvm
     post:
       - oslo.rootwrap-branch-tarball
+    experimental-tripleo:
+      - check-tripleo-seed-precise
+      - check-tripleo-undercloud-precise
+      - check-tripleo-overcloud-precise
     pre-release:
       - oslo.rootwrap-tarball
     release:
@@ -1959,6 +2033,10 @@ projects:
       - gate-tempest-dsvm-full
       - gate-tempest-dsvm-neutron
       - gate-grenade-dsvm
+    experimental-tripleo:
+      - check-tripleo-seed-precise
+      - check-tripleo-undercloud-precise
+      - check-tripleo-overcloud-precise
     pre-release:
       - oslo.version-tarball
     release:
@@ -2018,6 +2096,10 @@ projects:
       - post-mirror-python27
       - post-mirror-python33
       - propose-requirements-updates
+    experimental-tripleo:
+      - check-tripleo-seed-precise
+      - check-tripleo-undercloud-precise
+      - check-tripleo-overcloud-precise
     periodic:
       - periodic-mirror-python26
       - periodic-mirror-python27
@@ -2158,6 +2240,10 @@ projects:
       - check-tempest-dsvm-marconi
       - check-tempest-dsvm-neutron-isolated
       - check-tempest-dsvm-neutron-pg-isolated
+    experimental-tripleo:
+      - check-tripleo-seed-precise
+      - check-tripleo-undercloud-precise
+      - check-tripleo-overcloud-precise
     post:
       - tempest-docs
       - tempest-branch-tarball
@@ -2231,6 +2317,10 @@ projects:
       - gate-tuskar-ui-pep8
       - gate-tuskar-ui-python26
       - gate-tuskar-ui-python27
+    experimental-tripleo:
+      - check-tripleo-seed-precise
+      - check-tripleo-undercloud-precise
+      - check-tripleo-overcloud-precise
     post:
       - tuskar-ui-branch-tarball
     pre-release:
@@ -2483,6 +2573,10 @@ projects:
       - gate-tempest-dsvm-neutron-large-ops
       - gate-grenade-dsvm
       - gate-swift-dsvm-functional
+    experimental-tripleo:
+      - check-tripleo-seed-precise
+      - check-tripleo-undercloud-precise
+      - check-tripleo-overcloud-precise
     post:
       - pbr-docs
     pre-release:
@@ -2573,6 +2667,10 @@ projects:
       - gate-swift-dsvm-functional
     experimental:
       - gate-grenade-dsvm-forward
+    experimental-tripleo:
+      - check-tripleo-seed-precise
+      - check-tripleo-undercloud-precise
+      - check-tripleo-overcloud-precise
 
   - name: openstack-infra/elastic-recheck
     check:
