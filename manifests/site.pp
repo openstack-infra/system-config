@@ -623,33 +623,12 @@ node 'salt-trigger.slave.openstack.org' {
   }
 }
 
-node /^precise-?\d+.*\.slave\.openstack\.org$/ {
-  include openstack_project
-  include openstack_project::puppet_cron
-  class { 'openstack_project::slave':
-    certname  => 'precise.slave.openstack.org',
-    ssh_key   => $openstack_project::jenkins_ssh_key,
-    sysadmins => hiera('sysadmins'),
-  }
-}
-
 node /^precise-dev\d+.*\.slave\.openstack\.org$/ {
   include openstack_project
   include openstack_project::puppet_cron
   class { 'openstack_project::slave':
     ssh_key   => $openstack_project::jenkins_dev_ssh_key,
     sysadmins => hiera('sysadmins'),
-  }
-}
-
-node /^precisepy3k-?\d+.*\.slave\.openstack\.org$/ {
-  include openstack_project
-  include openstack_project::puppet_cron
-  class { 'openstack_project::slave':
-    ssh_key      => $openstack_project::jenkins_ssh_key,
-    sysadmins    => hiera('sysadmins'),
-    python3      => true,
-    include_pypy => true,
   }
 }
 
@@ -664,33 +643,12 @@ node /^precisepy3k-dev\d+.*\.slave\.openstack\.org$/ {
   }
 }
 
-node /^centos6-?\d+\.slave\.openstack\.org$/ {
-  include openstack_project
-  include openstack_project::puppet_cron
-  class { 'openstack_project::slave':
-    certname  => 'centos6.slave.openstack.org',
-    ssh_key   => $openstack_project::jenkins_ssh_key,
-    sysadmins => hiera('sysadmins'),
-  }
-}
-
 node /^centos6-dev\d+\.slave\.openstack\.org$/ {
   include openstack_project
   include openstack_project::puppet_cron
   class { 'openstack_project::slave':
     ssh_key   => $openstack_project::jenkins_dev_ssh_key,
     sysadmins => hiera('sysadmins'),
-  }
-}
-
-node /^fedora18-?\d+\.slave\.openstack\.org$/ {
-  include openstack_project
-  include openstack_project::puppet_cron
-  class { 'openstack_project::slave':
-    certname  => 'fedora18.slave.openstack.org',
-    ssh_key   => $openstack_project::jenkins_ssh_key,
-    sysadmins => hiera('sysadmins'),
-    python3   => true,
   }
 }
 
