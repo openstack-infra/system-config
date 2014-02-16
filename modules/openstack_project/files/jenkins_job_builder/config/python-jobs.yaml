@@ -114,7 +114,7 @@
       - test-results
       - console-log
 
-    node: precisepy3k
+    node: py3k-precise
 
 - job-template:
     name: 'gate-{name}-pypy'
@@ -136,7 +136,7 @@
       - test-results
       - console-log
 
-    node: precisepy3k
+    node: py3k-precise
 
 - job-template:
     name: 'gate-{name}-docs'
