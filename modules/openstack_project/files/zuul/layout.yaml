@@ -135,6 +135,21 @@ pipelines:
       gerrit:
         force-message: true
 
+  - name: experimental-tripleo
+    description: On-demand pipeline for requesting a run against a tripleo experimental jobs - slower and running without redundancy - so not yet gating. Leave review comment of "check tripleo" to run jobs in this pipeline.
+    manager: IndependentPipelineManager
+    precedence: low
+    trigger:
+      gerrit:
+        - event: comment-added
+          comment_filter: (?i)^\s*check tripleo\s*$
+    success:
+      gerrit:
+        force-message: true
+    failure:
+      gerrit:
+        force-message: true
+
   - name: periodic
     description: Jobs in this queue are triggered on a timer.
     manager: IndependentPipelineManager
