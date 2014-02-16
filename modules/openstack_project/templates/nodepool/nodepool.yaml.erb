@@ -28,7 +28,7 @@ providers:
     project-id: '<%= rackspace_project %>'
     auth-url: 'https://identity.api.rackspacecloud.com/v2.0/'
     boot-timeout: 120
-    max-servers: 132
+    max-servers: 188
     rate: 0.001
     images:
       - name: devstack-precise
@@ -36,6 +36,27 @@ providers:
         min-ram: 8192
         name-filter: 'Performance'
         setup: prepare_node_devstack.sh
+        username: jenkins
+        private-key: /home/nodepool/.ssh/id_rsa
+      - name: bare-precise
+        base-image: 'Ubuntu 12.04 LTS (Precise Pangolin)'
+        min-ram: 8192
+        name-filter: 'Performance'
+        setup: prepare_node_bare.sh
+        username: jenkins
+        private-key: /home/nodepool/.ssh/id_rsa
+      - name: bare-centos6
+        base-image: 'CentOS 6.5 (PVHVM)'
+        min-ram: 8192
+        name-filter: 'Performance'
+        setup: prepare_node_bare.sh
+        username: jenkins
+        private-key: /home/nodepool/.ssh/id_rsa
+      - name: py3k-precise
+        base-image: 'Ubuntu 12.04 LTS (Precise Pangolin)'
+        min-ram: 8192
+        name-filter: 'Performance'
+        setup: prepare_node_py3k.sh
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
       - name: dsvm-precise-krnl
@@ -249,6 +270,7 @@ targets:
         min-ready: 6
         providers:
           - name: rax-iad
+          - name: rax-dfw
           - name: rax-ord
           - name: hpcloud-az1
           - name: hpcloud-az2
@@ -257,6 +279,7 @@ targets:
         min-ready: 2
         providers:
           - name: rax-iad
+          - name: rax-dfw
           - name: rax-ord
       - name: devstack-precise
         min-ready: 6
@@ -276,6 +299,7 @@ targets:
         min-ready: 1
         providers:
           - name: rax-iad
+          - name: rax-dfw
           - name: rax-ord
   - name: jenkins02
     jenkins:
@@ -288,6 +312,7 @@ targets:
         min-ready: 6
         providers:
           - name: rax-iad
+          - name: rax-dfw
           - name: rax-ord
           - name: hpcloud-az1
           - name: hpcloud-az2
@@ -296,6 +321,7 @@ targets:
         min-ready: 2
         providers:
           - name: rax-iad
+          - name: rax-dfw
           - name: rax-ord
       - name: devstack-precise
         min-ready: 6
@@ -315,6 +341,7 @@ targets:
         min-ready: 1
         providers:
           - name: rax-iad
+          - name: rax-dfw
           - name: rax-ord
   - name: jenkins03
     jenkins:
@@ -327,6 +354,7 @@ targets:
         min-ready: 6
         providers:
           - name: rax-iad
+          - name: rax-dfw
           - name: rax-ord
           - name: hpcloud-az1
           - name: hpcloud-az2
@@ -335,6 +363,7 @@ targets:
         min-ready: 2
         providers:
           - name: rax-iad
+          - name: rax-dfw
           - name: rax-ord
       - name: devstack-precise
         min-ready: 6
@@ -354,6 +383,7 @@ targets:
         min-ready: 1
         providers:
           - name: rax-iad
+          - name: rax-dfw
           - name: rax-ord
   - name: jenkins04
     jenkins:
@@ -366,6 +396,7 @@ targets:
         min-ready: 6
         providers:
           - name: rax-iad
+          - name: rax-dfw
           - name: rax-ord
           - name: hpcloud-az1
           - name: hpcloud-az2
@@ -374,6 +405,7 @@ targets:
         min-ready: 2
         providers:
           - name: rax-iad
+          - name: rax-dfw
           - name: rax-ord
       - name: devstack-precise
         min-ready: 6
@@ -393,6 +425,7 @@ targets:
         min-ready: 1
         providers:
           - name: rax-iad
+          - name: rax-dfw
           - name: rax-ord
   - name: jenkins05
     jenkins:
@@ -405,6 +438,7 @@ targets:
         min-ready: 6
         providers:
           - name: rax-iad
+          - name: rax-dfw
           - name: rax-ord
           - name: hpcloud-az1
           - name: hpcloud-az2
@@ -413,6 +447,7 @@ targets:
         min-ready: 2
         providers:
           - name: rax-iad
+          - name: rax-dfw
           - name: rax-ord
       - name: devstack-precise
         min-ready: 6
@@ -432,6 +467,7 @@ targets:
         min-ready: 1
         providers:
           - name: rax-iad
+          - name: rax-dfw
           - name: rax-ord
   - name: jenkins06
     jenkins:
@@ -444,6 +480,7 @@ targets:
         min-ready: 6
         providers:
           - name: rax-iad
+          - name: rax-dfw
           - name: rax-ord
           - name: hpcloud-az1
           - name: hpcloud-az2
@@ -452,6 +489,7 @@ targets:
         min-ready: 2
         providers:
           - name: rax-iad
+          - name: rax-dfw
           - name: rax-ord
       - name: devstack-precise
         min-ready: 6
@@ -471,6 +509,7 @@ targets:
         min-ready: 1
         providers:
           - name: rax-iad
+          - name: rax-dfw
           - name: rax-ord
   - name: jenkins07
     jenkins:
@@ -483,6 +522,7 @@ targets:
         min-ready: 6
         providers:
           - name: rax-iad
+          - name: rax-dfw
           - name: rax-ord
           - name: hpcloud-az1
           - name: hpcloud-az2
@@ -491,6 +531,7 @@ targets:
         min-ready: 2
         providers:
           - name: rax-iad
+          - name: rax-dfw
           - name: rax-ord
       - name: devstack-precise
         min-ready: 6
@@ -510,6 +551,7 @@ targets:
         min-ready: 1
         providers:
           - name: rax-iad
+          - name: rax-dfw
           - name: rax-ord
       - name: dsvm-precise-krnl
         min-ready: 1
