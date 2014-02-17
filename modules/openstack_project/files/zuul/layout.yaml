@@ -278,8 +278,6 @@ jobs:
     voting: false
   - name: check-tempest-dsvm-ironic-postgres-nv
     voting: false
-  - name: ^(gate|check)-gantt-python2(6|7)$
-    voting: false
   - name: ^(gate|check)-tempest-dsvm-large-ops$
     branch: ^(?!stable/grizzly).*$
   - name: ^(gate|check)-tempest-dsvm-neutron-large-ops$
