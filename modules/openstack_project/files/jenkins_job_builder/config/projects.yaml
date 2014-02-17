@@ -1453,6 +1453,16 @@
       - gate-{name}-pep8
 
 - project:
+    name: savanna-guestagent
+    github-org: stackforge
+    node: precise
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - python-jobs
+      - pypi-jobs
+
+- project:
     name: puppet-swift
     github-org: stackforge
     node: precise

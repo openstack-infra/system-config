@@ -3944,6 +3944,22 @@ projects:
     gate:
       - gate-savanna-ci-config-pep8
 
+  - name: stackforge/savanna-guestagent
+    template:
+      - name: python-jobs
+    check:
+      - gate-savanna-guestagent-requirements
+    gate:
+      - gate-savanna-guestagent-requirements
+    pre-release:
+      - savanna-guestagent-tarball
+    release:
+      - savanna-guestagent-tarball:
+        - savanna-guestagent-pypi-upload:
+          - post-mirror-python26
+          - post-mirror-python27
+          - post-mirror-python33
+
   - name: stackforge/puppet-swift
     check:
       - gate-puppet-swift-puppet-lint
