@@ -457,6 +457,8 @@ jobs:
     voting: false
   - name: ^(gate|check)-tempest-dsvm-trove-full$
     voting: false
+  - name: check-tempest-dsvm-neutron-isolated-parallel
+    voting: false
   - name: gate-keystone-python33
     voting: false
   - name: gate-marconi-python33
@@ -866,6 +868,7 @@ projects:
       - gate-tempest-dsvm-neutron-large-ops
       - check-grenade-dsvm-neutron
       - check-devstack-dsvm-neutron
+      - check-tempest-dsvm-neutron-isolated-parallel
     gate:
       - gate-neutron-requirements
       - gate-tempest-dsvm-neutron
@@ -873,8 +876,8 @@ projects:
       - gate-tempest-dsvm-neutron-isolated
       - gate-tempest-dsvm-neutron-pg-isolated
       - gate-tempest-dsvm-neutron-large-ops
-    experimental:
       - check-tempest-dsvm-neutron-isolated-parallel
+    experimental:
       - gate-grenade-dsvm-neutron-forward
       - neutron-upstream-translation-update
       - check-neutron-dsvm-functional
@@ -2133,6 +2136,7 @@ projects:
       - check-tempest-dsvm-savanna-postgres-nv
       - check-tempest-dsvm-savanna-neutron-nv
       - check-tempest-dsvm-neutron-heat-slow
+      - check-tempest-dsvm-neutron-isolated-parallel
     gate:
       - gate-tempest-requirements
       - gate-tempest-pep8
@@ -2144,6 +2148,7 @@ projects:
       - gate-tempest-dsvm-large-ops
       - gate-tempest-dsvm-neutron-large-ops
       - gate-grenade-dsvm
+      - check-tempest-dsvm-neutron-isolated-parallel
     experimental:
       - gate-grenade-dsvm-forward
       - gate-tempest-dsvm-neutron-full
