@@ -170,6 +170,7 @@ savanna:
       - openstack/savanna-extra
       - openstack/savanna-image-elements
       - stackforge/puppet-savanna
+      - stackforge/savanna-ci-config
     branches:
       - master
       - stable/0.1

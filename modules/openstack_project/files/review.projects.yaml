@@ -729,6 +729,9 @@
 - project: stackforge/rubick
   description: Rule-based diagnostics of configuration of OpenStack platform
   upstream: git://github.com/MirantisLabs/rubick
+- project: stackforge/savanna-ci-config
+  description: savanna-ci 3rd party testing configs (jjb, zuul, etc.)
+  acl-config: /home/gerrit2/acls/stackforge/savanna-ci-config.config
 - project: stackforge/solum
   description: 'An OpenStack related project designed to make cloud services easier to consume and integrate into your application development process. See: https://wiki.openstack.org/wiki/Solum'
   upstream: git://github.com/rackerlabs/solum
