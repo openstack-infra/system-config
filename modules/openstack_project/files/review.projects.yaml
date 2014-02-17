@@ -248,6 +248,10 @@
 - project: openstack/oslo.version
   docimpact-group: openstack-manuals
   upstream: git://github.com/emonty/oslo.version.git
+- project: openstack/oslo.vmware
+  group: oslo
+  description: Oslo VMware library for OpenStack projects
+  upstream: git://github.com/dims/oslo.vmware.git
 - project: openstack/oslosphinx
   docimpact-group: openstack-manuals
   description: Theme and utilities for Sphinx documentation tool
