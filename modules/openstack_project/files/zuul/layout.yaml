@@ -1911,6 +1911,27 @@ projects:
           - post-mirror-python27
           - post-mirror-python33
 
+  - name: openstack/oslo.test
+    template:
+      - name: python-jobs
+      - name: openstack-server-publish-jobs
+    check:
+      - gate-oslo.test-python33
+      - gate-oslo.test-pypy
+      - gate-oslo.test-requirements
+    gate:
+      - gate-oslo.test-python33
+      - gate-oslo.test-pypy
+      - gate-oslo.test-requirements
+    pre-release:
+      - oslo.test-tarball
+    release:
+      - oslo.test-tarball:
+        - oslo.test-pypi-upload:
+          - post-mirror-python26
+          - post-mirror-python27
+          - post-mirror-python33
+
   - name: openstack/oslo.version
     template:
       - name: python-jobs
