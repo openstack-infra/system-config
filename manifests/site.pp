@@ -518,7 +518,27 @@ node 'zuul.openstack.org' {
       'jenkins06.openstack.org',
       'jenkins07.openstack.org',
       'jenkins-dev.openstack.org',
+      'zm01.openstack.org',
+      'zm02.openstack.org',
     ],
+  }
+}
+
+node 'zm01.openstack.org' {
+  class { 'openstack_project::zuul_merger':
+    gerrit_server        => 'review.openstack.org',
+    gerrit_user          => 'jenkins',
+    zuul_ssh_private_key => hiera('jenkins_ssh_private_key_contents'),
+    sysadmins            => hiera('sysadmins'),
+  }
+}
+
+node 'zm02.openstack.org' {
+  class { 'openstack_project::zuul_merger':
+    gerrit_server        => 'review.openstack.org',
+    gerrit_user          => 'jenkins',
+    zuul_ssh_private_key => hiera('jenkins_ssh_private_key_contents'),
+    sysadmins            => hiera('sysadmins'),
   }
 }
 

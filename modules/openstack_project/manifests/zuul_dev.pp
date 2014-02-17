@@ -28,11 +28,13 @@ class openstack_project::zuul_dev(
     zuul_ssh_private_key => $zuul_ssh_private_key,
     url_pattern          => $url_pattern,
     zuul_url             => $zuul_url,
-    push_change_refs     => false,
     job_name_in_report   => true,
     status_url           => 'http://zuul-dev.openstack.org/',
     statsd_host          => $statsd_host,
   }
+
+  class { '::zuul::server': }
+  class { '::zuul::merger': }
 
   file { '/etc/zuul/layout.yaml':
     ensure => present,
@@ -56,6 +58,11 @@ class openstack_project::zuul_dev(
     ensure => present,
     source => 'puppet:///modules/openstack_project/zuul/gearman-logging.conf',
     notify => Exec['zuul-reload'],
+  }
+
+  file { '/etc/zuul/merger-logging.conf':
+    ensure => present,
+    source => 'puppet:///modules/openstack_project/zuul/merger-logging.conf',
   }
 
   class { '::recheckwatch':

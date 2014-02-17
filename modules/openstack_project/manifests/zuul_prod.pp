@@ -10,7 +10,6 @@ class openstack_project::zuul_prod(
   $sysadmins = [],
   $statsd_host = '',
   $gearman_workers = [],
-  $replication_targets = []
 ) {
   # Turn a list of hostnames into a list of iptables rules
   $iptables_rules = regsubst ($gearman_workers, '^(.*)$', '-m state --state NEW -m tcp -p tcp --dport 4730 -s \1 -j ACCEPT')
@@ -29,12 +28,12 @@ class openstack_project::zuul_prod(
     zuul_ssh_private_key => $zuul_ssh_private_key,
     url_pattern          => $url_pattern,
     zuul_url             => $zuul_url,
-    push_change_refs     => false,
     job_name_in_report   => true,
     status_url           => 'http://status.openstack.org/zuul/',
     statsd_host          => $statsd_host,
-    replication_targets  => $replication_targets,
   }
+
+  class { '::zuul::server': }
 
   file { '/etc/zuul/layout.yaml':
     ensure => present,
@@ -58,6 +57,11 @@ class openstack_project::zuul_prod(
     ensure => present,
     source => 'puppet:///modules/openstack_project/zuul/gearman-logging.conf',
     notify => Exec['zuul-reload'],
+  }
+
+  file { '/etc/zuul/merger-logging.conf':
+    ensure => present,
+    source => 'puppet:///modules/openstack_project/zuul/merger-logging.conf',
   }
 
   class { '::recheckwatch':
