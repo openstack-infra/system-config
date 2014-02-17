@@ -25,6 +25,13 @@ else
     PROJECT_VER="$SCM_TAG.$COMMITS_SINCE_TAG.$SCM_SHA";
 fi
 
-echo "SCM_SHA=$SCM_SHA" >maven.properties
-echo "PROJECT_VER=$PROJECT_VER" >>maven.properties
-echo "COMMITS_SINCE_TAG=$COMMITS_SINCE_TAG" >>maven.properties
+> maven.properties
+if [[ -n "$SCM_SHA" ]]; then
+    echo "SCM_SHA=$SCM_SHA" >>maven.properties
+fi
+if [[ -n "$PROJECT_VER" ]]; then
+    echo "PROJECT_VER=$PROJECT_VER" >>maven.properties
+fi
+if [[ -n "$COMMITS_SINCE_TAG" ]]; then
+    echo "COMMITS_SINCE_TAG=$COMMITS_SINCE_TAG" >>maven.properties
+fi
