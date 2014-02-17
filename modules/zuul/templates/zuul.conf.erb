@@ -15,15 +15,12 @@ layout_config=/etc/zuul/layout.yaml
 log_config=/etc/zuul/logging.conf
 state_dir=/var/lib/zuul
 git_dir=/var/lib/zuul/git
-push_change_refs=<%= push_change_refs %>
 url_pattern=<%= url_pattern %>
 status_url=<%= status_url %>
 job_name_in_report=<%= job_name_in_report %>
 zuul_url=<%= zuul_url %>
 
-<% if replication_targets != [] -%>
-[replication]
-<% replication_targets.each do |target| -%>
-<%= target['name'] %>=<%= target['url'] %>
-<% end -%>
-<% end -%>
+[merger]
+git_dir=/var/lib/zuul/git
+zuul_url=<%= zuul_url %>
+log_config=/etc/zuul/merger-logging.conf

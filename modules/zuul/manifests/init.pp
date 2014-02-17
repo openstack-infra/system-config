@@ -29,11 +29,9 @@ class zuul (
   $status_url = "https://${::fqdn}/",
   $zuul_url = '',
   $git_source_repo = 'https://git.openstack.org/openstack-infra/zuul',
-  $push_change_refs = false,
   $job_name_in_report = false,
   $revision = 'master',
   $statsd_host = '',
-  $replication_targets = []
 ) {
   include apache
   include pip
@@ -132,6 +130,13 @@ class zuul (
     require => User['zuul'],
   }
 
+  file { '/var/run/zuul-merger':
+    ensure  => directory,
+    owner   => 'zuul',
+    group   => 'zuul',
+    require => User['zuul'],
+  }
+
   file { '/var/lib/zuul':
     ensure  => directory,
     owner   => 'zuul',
@@ -210,27 +215,12 @@ class zuul (
     source => 'puppet:///modules/zuul/zuul.init',
   }
 
-  exec { 'zuul-reload':
-    command     => '/etc/init.d/zuul reload',
-    require     => File['/etc/init.d/zuul'],
-    refreshonly => true,
-  }
-
-  service { 'zuul':
-    name       => 'zuul',
-    enable     => true,
-    hasrestart => true,
-    require    => File['/etc/init.d/zuul'],
-  }
-
-  cron { 'zuul_repack':
-    user        => 'zuul',
-    hour        => '4',
-    minute      => '7',
-    command     => 'find /var/lib/zuul/git/ -maxdepth 3 -type d -name ".git" -exec git --git-dir="{}" pack-refs --all \;',
-    environment => 'PATH=/usr/bin:/bin:/usr/sbin:/sbin',
-    require     => [User['zuul'],
-                    File['/var/lib/zuul/git']],
+  file { '/etc/init.d/zuul-merger':
+    ensure => present,
+    owner  => 'root',
+    group  => 'root',
+    mode   => '0555',
+    source => 'puppet:///modules/zuul/zuul-merger.init',
   }
 
   apache::vhost { $vhost_name:
@@ -248,5 +238,4 @@ class zuul (
   a2mod { 'proxy_http':
     ensure => present,
   }
-
 }
