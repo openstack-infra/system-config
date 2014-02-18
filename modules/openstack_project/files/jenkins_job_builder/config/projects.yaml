@@ -1377,6 +1377,7 @@
 
     jobs:
       - python-jobs
+      - pypi-jobs
 
 - project:
     name: diskimage-builder

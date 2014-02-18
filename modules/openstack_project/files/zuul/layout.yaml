@@ -4243,8 +4243,20 @@ projects:
   - name: stackforge/pyghmi
     check:
       - gate-pyghmi-pep8
+      - gate-pyghmi-requirements
     gate:
       - gate-pyghmi-pep8
+      - gate-pyghmi-requirements
+    post:
+      - pyghmi-branch-tarball
+    pre-release:
+      - pyghmi-tarball
+    release:
+      - pyghmi-tarball:
+        - pyghmi-pypi-upload:
+          - post-mirror-python26
+          - post-mirror-python27
+          - post-mirror-python33
 
   - name: stackforge/python-barbicanclient
     check:
