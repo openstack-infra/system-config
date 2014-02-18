@@ -124,7 +124,7 @@
     builders:
       - shell: |
           COOKBOOK=$(awk '/^name/ {print $NF}' metadata.rb |tr -d \"\')
-          ruby1.9.1 /usr/bin/bundle exec rspec .cookbooks/$COOKBOOK
+          ruby1.9.1 /usr/bin/bundle exec rspec .cookbooks/$COOKBOOK/spec
 
 - builder:
     name: run-tests
