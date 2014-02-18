@@ -54,7 +54,7 @@ class openstack_project::zuul_dev(
       owner   => 'zuul',
       group   => 'zuul',
       mode    => '0600',
-      content => "review.openstack.org ${gerrit_ssh_host_key}",
+      content => "review.openstack.org,198.101.231.251,2001:4800:780d:509:3bc3:d7f6:ff04:39f0 ${gerrit_ssh_host_key}",
       replace => true,
       require => File['/home/zuul/.ssh'],
     }
