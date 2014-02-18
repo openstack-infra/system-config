@@ -231,13 +231,19 @@ class zuul (
     priority => '50',
     template => 'zuul/zuul.vhost.erb',
   }
-  a2mod { 'rewrite':
-    ensure => present,
+  if ! defined(A2mod['rewrite']) {
+    a2mod { 'rewrite':
+      ensure => present,
+    }
   }
-  a2mod { 'proxy':
-    ensure => present,
+  if ! defined(A2mod['proxy']) {
+    a2mod { 'proxy':
+      ensure => present,
+    }
   }
-  a2mod { 'proxy_http':
-    ensure => present,
+  if ! defined(A2mod['proxy_http']) {
+    a2mod { 'proxy_http':
+      ensure => present,
+    }
   }
 }
