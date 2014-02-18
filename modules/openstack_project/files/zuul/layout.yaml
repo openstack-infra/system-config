@@ -1474,11 +1474,17 @@ projects:
       - gate-python-savannaclient-python26
       - gate-python-savannaclient-python27
       - gate-python-savannaclient-requirements
+      - check-tempest-dsvm-savanna-full
+      - check-tempest-dsvm-savanna-postgres
+      - check-tempest-dsvm-savanna-neutron
     gate:
       - gate-python-savannaclient-pep8
       - gate-python-savannaclient-python26
       - gate-python-savannaclient-python27
       - gate-python-savannaclient-requirements
+      - gate-tempest-dsvm-savanna-full
+      - gate-tempest-dsvm-savanna-postgres
+      - gate-tempest-dsvm-savanna-neutron
     post:
       - python-savannaclient-branch-tarball
       - python-savannaclient-coverage
