@@ -565,6 +565,8 @@ jobs:
     voting: false
   - name: gate-rubick-python33
     voting: false
+  - name: gate-barbican-devstack-dsvm
+    voting: false
   - name: gate-manila-tempest-dsvm-neutron
     voting: false
   - name: gate-climate-devstack-dsvm
@@ -3138,6 +3140,7 @@ projects:
     check:
       - gate-barbican-pep8
       - gate-barbican-python27
+      - gate-barbican-devstack-dsvm
     gate:
       - gate-barbican-pep8
       - gate-barbican-python27
