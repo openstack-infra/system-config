@@ -3960,8 +3960,20 @@ projects:
   - name: stackforge/pyghmi
     check:
       - gate-pyghmi-pep8
+      - gate-ironic-requirements
+      - check-tempest-dsvm-ironic
     gate:
       - gate-pyghmi-pep8
+      - gate-ironic-requirements
+      - gate-tempest-dsvm-ironic
+    pre-release:
+      - pyghmi-tarball
+    release:
+      - pyghmi-tarball:
+        - pyghmi-pypi-upload:
+          - post-mirror-python26
+          - post-mirror-python27
+          - post-mirror-python33
 
   - name: stackforge/python-barbicanclient
     check:
