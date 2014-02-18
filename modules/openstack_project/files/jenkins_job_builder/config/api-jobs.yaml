@@ -3,7 +3,7 @@
     name: openstack-api-quick-start
     project-type: maven
     concurrent: false
-    node: precise
+    node: bare-precise
 
     prebuilders:
       - gerrit-git-prep
@@ -30,7 +30,7 @@
     name: openstack-api-ref
     project-type: maven
     concurrent: false
-    node: precise
+    node: bare-precise
 
     prebuilders:
       - gerrit-git-prep
@@ -58,7 +58,7 @@
 - job:
     name: openstack-api-site
     concurrent: false
-    node: precise
+    node: bare-precise
 
     builders:
       - gerrit-git-prep
@@ -76,7 +76,7 @@
     name: image-api-v2.0
     project-type: maven
     concurrent: true
-    node: precise
+    node: bare-precise
 
     wrappers:
       - timeout:
@@ -117,7 +117,7 @@
     name: network-api-v1
     project-type: maven
     concurrent: false
-    node: precise
+    node: bare-precise
 
     prebuilders:
       - gerrit-git-prep
@@ -142,7 +142,7 @@
 - job:
     name: network-api-v2
     project-type: maven
-    node: precise
+    node: bare-precise
 
     prebuilders:
       - gerrit-git-prep
@@ -168,7 +168,7 @@
     name: object-api-v1.0
     project-type: maven
     concurrent: false
-    node: precise
+    node: bare-precise
 
     prebuilders:
       - gerrit-git-prep
@@ -194,7 +194,7 @@
     name: compute-api-v2.0
     project-type: maven
     concurrent: false
-    node: precise
+    node: bare-precise
 
     prebuilders:
       - gerrit-git-prep
@@ -219,7 +219,7 @@
 - job:
     name: compute-api-v2.0-wadl
     concurrent: false
-    node: precise
+    node: bare-precise
 
     builders:
       - gerrit-git-prep
@@ -238,7 +238,7 @@
     name: block-api-v2.0
     project-type: maven
     concurrent: false
-    node: precise
+    node: bare-precise
 
     prebuilders:
       - gerrit-git-prep
@@ -265,7 +265,7 @@
     name: identity-api-v2.0
     project-type: maven
     concurrent: false
-    node: precise
+    node: bare-precise
 
     prebuilders:
       - gerrit-git-prep
@@ -291,7 +291,7 @@
     name: identity-api-v3
     project-type: maven
     concurrent: true
-    node: precise
+    node: bare-precise
 
     wrappers:
       - timeout:
@@ -332,7 +332,7 @@
     name: image-api-v1.1
     project-type: maven
     concurrent: false
-    node: precise
+    node: bare-precise
 
     prebuilders:
       - gerrit-git-prep

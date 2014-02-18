@@ -1,7 +1,7 @@
 - job:
     name: elastic-recheck-docs
     concurrent: false
-    node: precise
+    node: bare-precise
 
     builders:
       - gerrit-git-prep

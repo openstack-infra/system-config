@@ -1,6 +1,6 @@
 - job-template:
     name: '{name}-docs'
-    node: precise
+    node: bare-precise
 
     builders:
       - gerrit-git-prep

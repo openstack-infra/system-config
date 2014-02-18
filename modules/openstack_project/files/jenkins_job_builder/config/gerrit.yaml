@@ -1,7 +1,7 @@
 - job:
     name: check-gerrit-unittests
     project-type: maven
-    node: precise
+    node: bare-precise
 
     wrappers:
       - timeout:
@@ -34,7 +34,7 @@
 - job:
     name: gate-gerrit-unittests
     project-type: maven
-    node: precise
+    node: bare-precise
 
     wrappers:
       - timeout:
@@ -62,7 +62,7 @@
 - job:
     name: gerrit-package
     project-type: maven
-    node: precise
+    node: bare-precise
 
     wrappers:
       - timeout:

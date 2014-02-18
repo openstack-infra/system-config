@@ -1,6 +1,6 @@
 - job-template:
     name: gate-hacking-integration-{target-project}
-    node: precise
+    node: bare-precise
 
     builders:
       - gerrit-git-prep
