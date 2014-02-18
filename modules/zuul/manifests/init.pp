@@ -32,6 +32,8 @@ class zuul (
   $job_name_in_report = false,
   $revision = 'master',
   $statsd_host = '',
+  $git_email = '',
+  $git_name = '',
 ) {
   include apache
   include pip

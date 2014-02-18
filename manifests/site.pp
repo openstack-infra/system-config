@@ -502,6 +502,7 @@ node 'zuul.openstack.org' {
   class { 'openstack_project::zuul_prod':
     gerrit_server        => 'review.openstack.org',
     gerrit_user          => 'jenkins',
+    gerrit_ssh_host_key  => hiera('gerrit_ssh_rsa_pubkey_contents'),
     zuul_ssh_private_key => hiera('jenkins_ssh_private_key_contents'),
     url_pattern          => 'http://logs.openstack.org/{build.parameters[LOG_PATH]}',
     zuul_url             => 'http://zuul.openstack.org/p',
@@ -526,8 +527,10 @@ node 'zuul.openstack.org' {
 
 node 'zm01.openstack.org' {
   class { 'openstack_project::zuul_merger':
+    gearman_server       => 'zuul.openstack.org',
     gerrit_server        => 'review.openstack.org',
     gerrit_user          => 'jenkins',
+    gerrit_ssh_host_key  => hiera('gerrit_ssh_rsa_pubkey_contents'),
     zuul_ssh_private_key => hiera('jenkins_ssh_private_key_contents'),
     sysadmins            => hiera('sysadmins'),
   }
@@ -535,8 +538,10 @@ node 'zm01.openstack.org' {
 
 node 'zm02.openstack.org' {
   class { 'openstack_project::zuul_merger':
+    gearman_server       => 'zuul.openstack.org',
     gerrit_server        => 'review.openstack.org',
     gerrit_user          => 'jenkins',
+    gerrit_ssh_host_key  => hiera('gerrit_ssh_rsa_pubkey_contents'),
     zuul_ssh_private_key => hiera('jenkins_ssh_private_key_contents'),
     sysadmins            => hiera('sysadmins'),
   }
