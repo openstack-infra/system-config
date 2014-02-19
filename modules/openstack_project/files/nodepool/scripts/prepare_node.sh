@@ -36,3 +36,6 @@ fi
 
 sudo mkdir -p /opt/git
 sudo -i python /opt/nodepool-scripts/cache_git_repos.py
+
+sync
+sleep 5

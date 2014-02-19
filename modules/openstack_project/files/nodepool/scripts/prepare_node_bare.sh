@@ -21,3 +21,6 @@ SUDO='false'
 BARE='false'
 
 ./prepare_node.sh "$HOSTNAME" "$SUDO" "$BARE"
+
+sync
+sleep 5

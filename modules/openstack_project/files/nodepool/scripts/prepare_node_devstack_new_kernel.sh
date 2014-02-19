@@ -22,3 +22,6 @@ BARE='true'
 
 ./prepare_node.sh "$HOSTNAME" "$SUDO" "$BARE"
 sudo -u jenkins -i /opt/nodepool-scripts/prepare_devstack_new_kernel.sh $HOSTNAME
+
+sync
+sleep 5
