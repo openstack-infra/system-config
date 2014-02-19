@@ -12,6 +12,10 @@ class openstack_project::status (
   $recheck_ssh_private_key,
   $recheck_bot_passwd,
   $recheck_bot_nick,
+  $web_host = 'www.openstack.org',
+  $status_host = 'status.openstack.org',
+  $wiki_host = 'wiki.openstack.org',
+  $docs_host = 'docs.openstack.org',
 ) {
 
   class { 'openstack_project::server':
@@ -43,7 +47,7 @@ class openstack_project::status (
   ###########################################################
   # Status - Index
 
-  apache::vhost { 'status.openstack.org':
+  apache::vhost { $status_host:
     port     => 80,
     priority => '50',
     docroot  => '/srv/static/status',
@@ -64,9 +68,9 @@ class openstack_project::status (
   }
 
   file { '/srv/static/status/index.html':
-    ensure  => present,
-    source  => 'puppet:///modules/openstack_project/status/index.html',
-    require => File['/srv/static/status'],
+    ensure   => present,
+    template => 'puppet:///modules/openstack_project/status/index.html.erb',
+    require  => File['/srv/static/status'],
   }
 
   file { '/srv/static/status/favicon.ico':
@@ -76,9 +80,9 @@ class openstack_project::status (
   }
 
   file { '/srv/static/status/common.js':
-    ensure  => present,
-    source  => 'puppet:///modules/openstack_project/status/common.js',
-    require => File['/srv/static/status'],
+    ensure   => present,
+    template => 'puppet:///modules/openstack_project/status/common.js.erb',
+    require  => File['/srv/static/status'],
   }
 
   file { '/srv/static/status/jquery.min.js':
@@ -157,9 +161,9 @@ class openstack_project::status (
   }
 
   file { '/srv/static/status/zuul/index.html':
-    ensure  => present,
-    source  => 'puppet:///modules/openstack_project/zuul/status.html',
-    require => File['/srv/static/status/zuul'],
+    ensure   => present,
+    template => 'puppet:///modules/openstack_project/zuul/status.html.erb',
+    require  => File['/srv/static/status/zuul'],
   }
 
   file { '/srv/static/status/zuul/status.js':
