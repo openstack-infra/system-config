@@ -3005,18 +3005,17 @@ projects:
       - hook-bufunfa-rtfd
 
   - name: stackforge/climate
+    template:
+      - name: python-jobs
     check:
-      - gate-climate-pep8
-      - gate-climate-python26
-      - gate-climate-python27
       - gate-climate-requirements
       - gate-climate-devstack-dsvm
     gate:
-      - gate-climate-pep8
-      - gate-climate-python26
-      - gate-climate-python27
       - gate-climate-requirements
-      - gate-climate-devstack-dsvm
+    pre-release:
+      - climate-tarball
+    release:
+      - climate-tarball
 
   - name: stackforge/climate-nova
     check:
@@ -3029,6 +3028,12 @@ projects:
       - gate-climate-nova-python26
       - gate-climate-nova-python27
       - gate-climate-nova-requirements
+    post:
+      - climate-nova-branch-tarball
+    pre-release:
+      - climate-nova-tarball
+    release:
+      - climate-nova-tarball
 
   - name: stackforge/cl-openstack-client
     check:
@@ -3983,9 +3988,21 @@ projects:
 
   - name: stackforge/python-climateclient
     check:
+      - gate-python-climateclient-pep8
+      - gate-python-climateclient-python26
+      - gate-python-climateclient-python27
       - gate-python-climateclient-requirements
     gate:
+      - gate-python-climateclient-pep8
+      - gate-python-climateclient-python26
+      - gate-python-climateclient-python27
       - gate-python-climateclient-requirements
+    post:
+      - python-climateclient-branch-tarball
+    pre-release:
+      - python-climateclient-tarball
+    release:
+      - python-climateclient-tarball
 
   - name: stackforge/python-designateclient
     check:
