@@ -25,3 +25,6 @@ if [ -f /usr/bin/apt-get ]; then
 fi
 
 /opt/nodepool-scripts/prepare_devstack.sh "$@"
+
+sync
+sleep 5
