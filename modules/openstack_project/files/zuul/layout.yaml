@@ -1069,17 +1069,17 @@ projects:
     periodic:
       - trove-propose-translation-update
 
-
-# TODO: add docs
   - name: openstack/tuskar
     check:
       - gate-tuskar-pep8
       - gate-tuskar-python26
       - gate-tuskar-python27
+      - gate-tuskar-docs
     gate:
       - gate-tuskar-pep8
       - gate-tuskar-python26
       - gate-tuskar-python27
+      - gate-tuskar-docs
     post:
       - tuskar-branch-tarball
     pre-release:
