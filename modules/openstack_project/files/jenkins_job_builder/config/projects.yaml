@@ -1827,6 +1827,7 @@
     name: python-tuskarclient
     github-org: openstack
     tarball-site: tarballs.openstack.org
+    doc-publisher-site: docs.openstack.org
     node: bare-precise
 
     jobs:

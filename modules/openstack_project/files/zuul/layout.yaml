@@ -1539,17 +1539,18 @@ projects:
           - post-mirror-python27
           - post-mirror-python33
 
-# TODO: add docs
   - name: openstack/python-tuskarclient
     check:
       - gate-python-tuskarclient-pep8
       - gate-python-tuskarclient-python26
       - gate-python-tuskarclient-python27
       - gate-python-tuskarclient-python33
+      - gate-python-tuskarclient-docs
     gate:
       - gate-python-tuskarclient-pep8
       - gate-python-tuskarclient-python26
       - gate-python-tuskarclient-python27
+      - gate-python-tuskarclient-docs
     post:
       - python-tuskarclient-branch-tarball
       - python-tuskarclient-coverage
