@@ -1689,24 +1689,15 @@ projects:
           - post-mirror-python27
           - post-mirror-python33
 
-# TODO: add docs
   - name: openstack/python-tuskarclient
+    template:
+      - name: python-jobs
     check:
-      - gate-python-tuskarclient-pep8
-      - gate-python-tuskarclient-python26
-      - gate-python-tuskarclient-python27
       - gate-python-tuskarclient-python33
     check-tripleo:
       - check-tripleo-seed-precise
       - check-tripleo-undercloud-precise
       - check-tripleo-overcloud-precise
-    gate:
-      - gate-python-tuskarclient-pep8
-      - gate-python-tuskarclient-python26
-      - gate-python-tuskarclient-python27
-    post:
-      - python-tuskarclient-branch-tarball
-      - python-tuskarclient-coverage
     pre-release:
       - python-tuskarclient-tarball
     release:
