@@ -61,4 +61,11 @@ class openstack_project::puppetmaster (
   package { 'python-paramiko':
     ensure => present,
   }
+
+# Enable puppetdb
+
+  class { 'puppetdb::master::config':
+    puppetdb_server => 'puppetdb.openstack.org',
+  }
+
 }
