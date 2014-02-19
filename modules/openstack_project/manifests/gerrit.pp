@@ -160,7 +160,7 @@ class openstack_project::gerrit (
       },
       {
         name  => 'changeid',
-        match => 'I[0-9a-f]{8,40}',
+        match => '(I[0-9a-f]{8,40})',
         link  => '#q,$1,n,z',
       },
       {
