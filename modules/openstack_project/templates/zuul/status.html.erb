@@ -5,13 +5,13 @@
     <TITLE>Zuul Status</TITLE>
 
 <script type="text/javascript"
-	src="http://status.openstack.org/jquery.min.js"></script>
+	src="http://<%= status_host %>/jquery.min.js"></script>
 <script type="text/javascript"
-	src="http://status.openstack.org/jquery-visibility.min.js"></script>
+	src="http://<%= status_host %>/jquery-visibility.min.js"></script>
 <script type="text/javascript"
-	src="http://status.openstack.org/jquery-graphite.js"></script>
+	src="http://<%= status_host %>/jquery-graphite.js"></script>
 <script type="text/javascript"
-	src="http://status.openstack.org/common.js"></script>
+	src="http://<%= status_host %>/common.js"></script>
 <script type="text/javascript"
 	src="status.js"></script>
 
@@ -19,20 +19,20 @@
     <link href='http://fonts.googleapis.com/css?family=PT+Sans&amp;subset=latin' rel='stylesheet' type='text/css'/>
 
     <!-- Framework CSS -->
-    <link rel="stylesheet" href="http://www.openstack.org/themes/openstack/css/blueprint/screen.css" type="text/css" media="screen, projection"/>
-    <link rel="stylesheet" href="http://www.openstack.org/themes/openstack/css/blueprint/print.css" type="text/css" media="print"/>
+    <link rel="stylesheet" href="http://<%= web_host %>/themes/openstack/css/blueprint/screen.css" type="text/css" media="screen, projection"/>
+    <link rel="stylesheet" href="http://<%= web_host %>/themes/openstack/css/blueprint/print.css" type="text/css" media="print"/>
 
     <!-- IE CSS -->
-    <!--[if lt IE 8]><link rel="stylesheet" href="http://www.openstack.org/blueprint/ie.css" type="text/css" media="screen, projection"><![endif]-->
+    <!--[if lt IE 8]><link rel="stylesheet" href="http://<%= web_host %>/blueprint/ie.css" type="text/css" media="screen, projection"><![endif]-->
 
     <!-- OpenStack Specific CSS -->
 
-    <link rel="stylesheet" href="http://www.openstack.org/themes/openstack/css/dropdown.css" type="text/css" media="screen, projection, print"/>
+    <link rel="stylesheet" href="http://<%= web_host %>/themes/openstack/css/dropdown.css" type="text/css" media="screen, projection, print"/>
 
     <!-- Page Specific CSS -->
-    <link rel="stylesheet" href="http://www.openstack.org/themes/openstack/css/home.css" type="text/css" media="screen, projection, print"/>
+    <link rel="stylesheet" href="http://<%= web_host %>/themes/openstack/css/home.css" type="text/css" media="screen, projection, print"/>
 
-    <link rel="stylesheet" type="text/css" href="http://www.openstack.org/themes/openstack/css/main.css" />
+    <link rel="stylesheet" type="text/css" href="http://<%= web_host %>/themes/openstack/css/main.css" />
 
 
 <style type="text/css">
