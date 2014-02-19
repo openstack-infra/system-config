@@ -441,8 +441,6 @@ jobs:
     voting: false
   - name: ^(gate|check)-tempest-dsvm-marconi
     voting: false
-  - name: gate-python-ceilometerclient-python33
-    voting: false
   - name: gate-python-glanceclient-python33
     voting: false
   - name: gate-python-heatclient-python33
