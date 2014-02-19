@@ -78,6 +78,13 @@ providers:
         setup: prepare_node_bare.sh
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
+      - name: py3k-precise
+        base-image: 'Ubuntu 12.04 LTS (Precise Pangolin)'
+        min-ram: 8192
+        name-filter: 'Performance'
+        setup: prepare_node_py3k.sh
+        username: jenkins
+        private-key: /home/nodepool/.ssh/id_rsa
   - name: rax-iad
     region-name: 'IAD'
     service-type: 'compute'
@@ -258,6 +265,10 @@ targets:
         providers:
           - name: hpcloud-region-b
           - name: rax-iad
+      - name: py3k-precise
+        min-ready: 1
+        providers:
+          - name: rax-ord
   - name: jenkins02
     jenkins:
       url: 'https://jenkins02.openstack.org/'
