@@ -1023,23 +1023,17 @@ projects:
       - swift-merge-release-tags
 
   - name: openstack/taskflow
+    template:
+      - name: python-jobs
+      - name: openstack-server-publish-jobs
     check:
-      - gate-taskflow-pep8
-      - gate-taskflow-python26
-      - gate-taskflow-python27
       - gate-taskflow-python33
       - gate-taskflow-tox-py26-sa7-mysql
       - gate-taskflow-tox-py27-sa8-mysql
     gate:
-      - gate-taskflow-pep8
-      - gate-taskflow-python26
-      - gate-taskflow-python27
       - gate-taskflow-python33
       - gate-taskflow-tox-py26-sa7-mysql
       - gate-taskflow-tox-py27-sa8-mysql
-    post:
-      - taskflow-coverage
-      - taskflow-branch-tarball
     pre-release:
       - taskflow-tarball
     release:
