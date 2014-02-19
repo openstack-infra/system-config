@@ -441,8 +441,6 @@ jobs:
     voting: false
   - name: ^(gate|check)-tempest-dsvm-marconi
     voting: false
-  - name: gate-python-ceilometerclient-python33
-    voting: false
   - name: gate-python-glanceclient-python33
     voting: false
   - name: gate-python-heatclient-python33
@@ -1106,6 +1104,7 @@ projects:
       - gate-tempest-dsvm-neutron-large-ops
     gate:
       - gate-python-ceilometerclient-requirements
+      - gate-python-ceilometerclient-python33
       - gate-python-ceilometerclient-pypy
       - gate-devstack-dsvm-cells
       - gate-tempest-dsvm-full
