@@ -46,36 +46,6 @@ class elastic_recheck (
     source   => 'https://git.openstack.org/openstack-infra/elastic-recheck',
   }
 
-  exec { 'run_er_graph_all':
-    command     => "er_safe_run.sh ${graph_all_cmd}",
-    path        => '/usr/local/bin:/usr/bin:/bin/',
-    cwd         => $recheck_state_dir,
-    user        => 'recheck',
-    refreshonly => true,
-    require     => File['/usr/local/bin/er_safe_run.sh'],
-    subscribe   => Vcsrepo['/opt/elastic-recheck'],
-  }
-
-  exec { 'run_er_graph_gate_only':
-    command     => "er_safe_run.sh ${graph_gate_cmd}",
-    path        => '/usr/local/bin:/usr/bin:/bin/',
-    cwd         => $recheck_state_dir,
-    user        => 'recheck',
-    refreshonly => true,
-    require     => File['/usr/local/bin/er_safe_run.sh'],
-    subscribe   => Vcsrepo['/opt/elastic-recheck'],
-  }
-
-  exec { 'run_er_uncat':
-    command     => "er_safe_run.sh ${uncat_cmd}",
-    path        => '/usr/local/bin:/usr/bin:/bin/',
-    cwd         => $recheck_state_dir,
-    user        => 'recheck',
-    refreshonly => true,
-    require     => File['/usr/local/bin/er_safe_run.sh'],
-    subscribe   => Vcsrepo['/opt/elastic-recheck'],
-  }
-
   include pip
   exec { 'install_elastic-recheck' :
     command     => 'pip install /opt/elastic-recheck',
