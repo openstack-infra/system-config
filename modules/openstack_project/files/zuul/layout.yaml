@@ -2737,9 +2737,13 @@ projects:
 
   - name: openstack-infra/openstackid
     check:
-      - gate-noop
+      - gate-openstackid-unittests
     gate:
-      - gate-noop
+      - gate-openstackid-unittests
+    post:
+      - openstackid-release-branch
+    release:
+      - openstackid-release-master
 
   - name: openstack-infra/os-loganalyze
     check:

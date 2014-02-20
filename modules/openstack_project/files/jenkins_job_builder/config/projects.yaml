@@ -2174,3 +2174,16 @@
           branch-designator: 'master'
       - 'groups-release-{branch-designator}':
           branch-designator: 'branch'
+
+- project:
+    name: openstackid
+    github-org: openstack-infra
+    node: bare-precise
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - gate-openstackid-unittests
+      - 'openstackid-release-{branch-designator}':
+          branch-designator: 'master'
+      - 'openstackid-release-{branch-designator}':
+          branch-designator: 'branch'

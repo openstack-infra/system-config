@@ -54,6 +54,8 @@ class jenkins::params {
       $xvfb_package = 'xorg-x11-server-Xvfb'
       # PHP package, used for community portal
       $php5_cli_package = 'php-cli'
+      # FIXME: No php mcrypt package on RHEL, used for openstackid
+      #$php5_mcrypt_package = ''
       # For Tooz unit tests
       # FIXME: No zookeeper packages on RHEL
       #$zookeeper_package = 'zookeeper-server'
@@ -134,6 +136,7 @@ class jenkins::params {
       $xvfb_package = 'xvfb'
       # PHP package, used for community portal
       $php5_cli_package = 'php5-cli'
+      $php5_mcrypt_package = 'php5-mcrypt'
       # For [tooz, taskflow, nova] using zookeeper in unit tests
       $zookeeper_package = 'zookeeperd'
       $cgroups_package = 'cgroup-bin'

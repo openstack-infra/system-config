@@ -130,6 +130,11 @@ class jenkins::slave(
         ensure => present,
       }
 
+      # For openstackid using php5-mcrypt for distro build
+      package { $::jenkins::params::php5_mcrypt_package:
+        ensure => present,
+      }
+
     }
     default: {
       fail("Unsupported osfamily: ${::osfamily} The 'jenkins' module only supports osfamily Debian or RedHat (slaves only).")
