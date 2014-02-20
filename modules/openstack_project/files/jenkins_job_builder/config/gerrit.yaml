@@ -93,7 +93,7 @@
 
 - job:
     name: check-gerrit-buck
-    node: precise
+    node: bare-precise
 
     wrappers:
       - timeout:
@@ -135,7 +135,7 @@
 
 - job:
     name: gate-gerrit-buck
-    node: precise
+    node: bare-precise
 
     wrappers:
       - timeout:
@@ -173,7 +173,7 @@
 
 - job:
     name: gerrit-package-buck
-    node: precise
+    node: bare-precise
 
     wrappers:
       - timeout:
