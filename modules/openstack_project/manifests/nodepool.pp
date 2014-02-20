@@ -19,16 +19,21 @@ class openstack_project::nodepool(
   $tripleo_username ='',
   $tripleo_password ='',
   $tripleo_project ='',
+  $image_log_document_root = '/var/log/nodepool/image',
+  $enable_image_log_via_http = true,
 ) {
   class { 'openstack_project::server':
     sysadmins                 => $sysadmins,
+    iptables_public_tcp_ports => [80],
   }
 
   class { '::nodepool':
-    mysql_root_password      => $mysql_root_password,
-    mysql_password           => $mysql_password,
-    nodepool_ssh_private_key => $nodepool_ssh_private_key,
-    statsd_host              => $statsd_host,
+    mysql_root_password       => $mysql_root_password,
+    mysql_password            => $mysql_password,
+    nodepool_ssh_private_key  => $nodepool_ssh_private_key,
+    statsd_host               => $statsd_host,
+    image_log_document_root   => $image_log_document_root,
+    enable_image_log_via_http => $enable_image_log_via_http,
   }
 
   file { '/etc/nodepool/nodepool.yaml':
