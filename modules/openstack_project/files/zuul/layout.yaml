@@ -3131,9 +3131,13 @@ projects:
 
   - name: stackforge/compass-core
     check:
-      - gate-noop
+      - gate-compass-core-pep8
+      - gate-compass-core-python26
+      - gate-compass-core-python27
     gate:
-      - gate-noop
+      - gate-compass-core-pep8
+      - gate-compass-core-python26
+      - gate-compass-core-python27
 
   - name: stackforge/compass-web
     check:

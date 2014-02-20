@@ -2187,3 +2187,12 @@
           branch-designator: 'master'
       - 'openstackid-release-{branch-designator}':
           branch-designator: 'branch'
+
+- project:
+    name: compass-core
+    github-org: stackforge
+    node: bare-precise
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - python-jobs
