@@ -176,6 +176,50 @@ pipelines:
         to: openstack-qa@lists.openstack.org
         subject: 'Periodic jobs for {change.project} failed'
 
+  - name: check-tripleo
+    description: >
+      Newly uploaded patchsets enter this pipeline to receive an initial +/-1
+      Verified vote from Jenkins. This is used for TripleO patchsets only so
+      that if the TripleO cloud suffers a failure, folk looking can tell that
+      there isn't a system infra problem. only a TripleO specific problem.
+      Once the TripleO test cloud is multi region and has some months of
+      proven stability this will be folded back into the normal check pipeline.
+    failure-message: >
+      Build failed.  For information on how to proceed, see
+      https://wiki.openstack.org/wiki/GerritJenkinsGit#Test_Failures
+    manager: IndependentPipelineManager
+    precedence: low
+    trigger:
+      gerrit:
+        - event: patchset-created
+        - event: change-restored
+        - event: comment-added
+          comment_filter: (?i)^\s*recheck(( (?:bug|lp)[\s#:]*(\d+))|( no bug))\s*$
+    success:
+      gerrit:
+        force-message: true
+    failure:
+      gerrit:
+        force-message: true
+
+  - name: experimental-tripleo
+    description: >
+      On-demand pipeline for requesting a run against a tripleo experimental
+      jobs - slower and running without redundancy - so not yet gating. Leave
+      review comment of "check experimental" to run jobs in this pipeline.
+    manager: IndependentPipelineManager
+    precedence: low
+    trigger:
+      gerrit:
+        - event: comment-added
+          comment_filter: (?i)^\s*check experimental\s*$
+    success:
+      gerrit:
+        force-message: true
+    failure:
+      gerrit:
+        force-message: true
+
 
 project-templates:
   - name: python-jobs
