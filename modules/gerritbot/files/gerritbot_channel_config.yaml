@@ -84,7 +84,7 @@ openstack-ceilometer:
     projects:
       - openstack/ceilometer
       - openstack/python-ceilometerclient
-      - stackforge/pycadf
+      - openstack/pycadf
     branches:
       - master
 
