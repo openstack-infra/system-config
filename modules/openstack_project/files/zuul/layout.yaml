@@ -325,10 +325,14 @@ jobs:
     voting: false
   - name: check-tempest-dsvm-cells-full
     voting: false
+# For Gerrit ver 2.4.x (using maven)
   - name: ^(gate|check)-gerrit-unittests$
-    branch: ^openstack/.*$
+    branch: ^openstack/2\.4.*$
   - name: gerrit-package
-    branch: ^openstack/.*$
+    branch: ^openstack/2\.4.*$
+# For Gerrit ver 2.8.x and later (using buck)
+  - name: ^.*gerrit.*buck$
+    branch: ^openstack/(?!2\.4).*$
   - name: gate-nova-pylint
     voting: false
   - name: gate-cinder-pylint
@@ -2573,10 +2577,13 @@ projects:
   - name: openstack-infra/gerrit
     check:
       - check-gerrit-unittests
+      - check-gerrit-buck
     gate:
       - gate-gerrit-unittests
+      - gate-gerrit-buck
     post:
       - gerrit-package
+      - gerrit-package-buck
 
   - name: openstack-infra/gerritbot
     check:

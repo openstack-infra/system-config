@@ -88,5 +88,127 @@
       - war:
           site: 'tarballs.openstack.org'
           warfile: 'gerrit-war/target/gerrit*.war'
-          target: 'tarballs/ci/'
+          target: 'tarballs/ci/gerrit'
+      - console-log
+
+- job:
+    name: check-gerrit-buck
+    node: precise
+
+    wrappers:
+      - timeout:
+          timeout: 40
+          fail: true
+      - timestamps
+
+    builders:
+      - shell: |
+          #!/bin/bash -xe
+          if [[ ! -d "gerrit"]]
+          then
+            mkdir gerrit
+          fi
+          cd gerrit
+          /usr/local/jenkins/slave_scripts/gerrit-git-prep.sh https://review.openstack.org http://zuul.openstack.org git://git.openstack.org
+      - shell: |
+          #!/bin/bash -xe
+          cd gerrit
+          /usr/local/jenkins/slave_scripts/maven-properties.sh
+      - inject:
+          properties-file: gerrit/maven.properties
+      - install-buck
+      - shell: |
+          #!/bin/bash -xe
+          export PATH=`pwd`/buck/bin:$PATH
+          cd gerrit
+          buck clean
+          buck build release
+          buck test --all
+      - shell: "cp gerrit/buck-out/gen/release.war gerrit/buck-out/gen/gerrit-$PROJECT_VER.war"
+
+    publishers:
+      - war:
+          site: 'tarballs.openstack.org'
+          warfile: 'gerrit/buck-out/gen/gerrit-${{PROJECT_VER}}.war'
+          target: 'tarballs/ci/test'
+      - console-log
+
+- job:
+    name: gate-gerrit-buck
+    node: precise
+
+    wrappers:
+      - timeout:
+          timeout: 40
+          fail: true
+      - timestamps
+
+    builders:
+      - shell: |
+          #!/bin/bash -xe
+          if [[ ! -d "gerrit"]]
+          then
+            mkdir gerrit
+          fi
+          cd gerrit
+          /usr/local/jenkins/slave_scripts/gerrit-git-prep.sh https://review.openstack.org http://zuul.openstack.org git://git.openstack.org
+      - shell: |
+          #!/bin/bash -xe
+          cd gerrit
+          /usr/local/jenkins/slave_scripts/maven-properties.sh
+      - inject:
+          properties-file: gerrit/maven.properties
+      - install-buck
+      - shell: |
+          #!/bin/bash -xe
+          export PATH=`pwd`/buck/bin:$PATH
+          cd gerrit
+          buck clean
+          buck build release
+          buck test --all
+      - shell: "cp gerrit/buck-out/gen/release.war gerrit/buck-out/gen/gerrit-$PROJECT_VER.war"
+
+    publishers:
+      - console-log
+
+- job:
+    name: gerrit-package-buck
+    node: precise
+
+    wrappers:
+      - timeout:
+          timeout: 40
+          fail: true
+      - timestamps
+
+    builders:
+      - shell: |
+          #!/bin/bash -xe
+          if [[ ! -d "gerrit"]]
+          then
+            mkdir gerrit
+          fi
+          cd gerrit
+          /usr/local/jenkins/slave_scripts/gerrit-git-prep.sh https://review.openstack.org http://zuul.openstack.org git://git.openstack.org
+      - shell: |
+          #!/bin/bash -xe
+          cd gerrit
+          /usr/local/jenkins/slave_scripts/maven-properties.sh
+      - inject:
+          properties-file: gerrit/maven.properties
+      - install-buck
+      - shell: |
+          #!/bin/bash -xe
+          export PATH=`pwd`/buck/bin:$PATH
+          cd gerrit
+          buck clean
+          buck build release
+          buck test --all
+      - shell: "cp gerrit/buck-out/gen/release.war gerrit/buck-out/gen/gerrit-$PROJECT_VER.war"
+
+    publishers:
+      - war:
+          site: 'tarballs.openstack.org'
+          warfile: 'gerrit/buck-out/gen/gerrit-${{PROJECT_VER}}.war'
+          target: 'tarballs/ci/gerrit'
       - console-log
