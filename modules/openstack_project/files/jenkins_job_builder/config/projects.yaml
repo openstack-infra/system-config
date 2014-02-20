@@ -313,8 +313,9 @@
     doc-publisher-site: docs.openstack.org
 
     jobs:
-      - compute-api-v2.0
       - openstack-doc-jobs
+      - '{name}-tox-doc-{envlist}':
+          envlist: publishdocs
 
 
 - project:
@@ -576,8 +577,9 @@
     doc-publisher-site: docs.openstack.org
 
     jobs:
-      - identity-api-v2.0
       - openstack-doc-jobs
+      - '{name}-tox-doc-{envlist}':
+          envlist: publishdocs
 
 
 - project:
@@ -589,7 +591,8 @@
 
     jobs:
       - openstack-doc-jobs
-      - image-api-v1.1
+      - '{name}-tox-doc-{envlist}':
+          envlist: publishdocs
 
 
 - project:
@@ -625,19 +628,9 @@
     doc-publisher-site: docs.openstack.org
 
     jobs:
-      - network-api-v1
       - openstack-doc-jobs
-
-
-- project:
-    name: netconn-api-v20
-    github-org: openstack
-    node: bare-precise
-    tarball-site: tarballs.openstack.org
-    doc-publisher-site: docs.openstack.org
-
-    jobs:
-      - network-api-v2
+      - '{name}-tox-doc-{envlist}':
+          envlist: publishdocs
 
 
 - project:
@@ -686,8 +679,9 @@
     doc-publisher-site: docs.openstack.org
 
     jobs:
-      - object-api-v1.0
       - openstack-doc-jobs
+      - '{name}-tox-doc-{envlist}':
+          envlist: publishdocs
 
 
 - project:
@@ -2127,6 +2121,8 @@
 
     jobs:
       - openstack-doc-jobs
+      - '{name}-tox-doc-{envlist}':
+          envlist: publishdocs
 
 
 - project:
@@ -2137,7 +2133,6 @@
     jobs:
       - openstack-doc-jobs
 
-
 - project:
     name: volume-api
     github-org: openstack
@@ -2145,6 +2140,8 @@
 
     jobs:
       - openstack-doc-jobs
+      - '{name}-tox-doc-{envlist}':
+          envlist: publishdocs
 
 - project:
     name: python-openstacksdk

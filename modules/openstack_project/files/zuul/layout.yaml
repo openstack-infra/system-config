@@ -2204,7 +2204,7 @@ projects:
     template:
       - name: openstack-doc-gate
     post:
-      - compute-api-v2.0
+      - compute-api-tox-doc-publishdocs
       - compute-api-v2.0-wadl
 
   - name: openstack/database-api
@@ -2215,33 +2215,31 @@ projects:
     template:
       - name: openstack-doc-gate
     post:
-      - identity-api-v2.0
+      - identity-api-tox-doc-publishdocs
 
   - name: openstack/image-api
     template:
       - name: openstack-doc-gate
     post:
-      - image-api-v1.1
-      - image-api-v2.0
+      - image-api-tox-doc-publishdocs
 
   - name: openstack/netconn-api
     template:
       - name: openstack-doc-gate
     post:
-      - network-api-v1
-      - network-api-v2
+      - netconn-api-tox-doc-publishdocs
 
   - name: openstack/object-api
     template:
       - name: openstack-doc-gate
     post:
-      - object-api-v1.0
+      - object-api-tox-doc-publishdocs
 
   - name: openstack/volume-api
     template:
       - name: openstack-doc-gate
     post:
-      - block-api-v2.0
+      - volume-api-tox-doc-publishdocs
 
 # Section: OpenStack documentation projects
 
@@ -2249,7 +2247,7 @@ projects:
     template:
       - name: openstack-doc-gate
     post:
-      - openstack-api-quick-start
+      - api-site-tox-doc-publishdocs
       - openstack-api-site
       - openstack-api-ref
       - manuals-upstream-translation-update

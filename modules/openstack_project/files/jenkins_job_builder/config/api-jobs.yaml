@@ -1,56 +1,44 @@
-# this replaces the old openstack-api-quick-start job
-- job:
-    name: openstack-api-quick-start
-    project-type: maven
-    concurrent: false
-    node: bare-precise
+- job-template:
+    name: '{name}-tox-doc-{envlist}'
 
-    prebuilders:
+    wrappers:
+      - timeout:
+          timeout: 40
+          fail: true
+      - timestamps
+
+    builders:
       - gerrit-git-prep
-
-    maven:
-      maven-name: Maven3
-      root-module:
-        group-id: org.openstack.docs
-        artifact-id: openstack-guide
-      root-pom: api-quick-start/pom.xml
-      goals: 'clean generate-sources -B'
+      - tox:
+          envlist: '{envlist}'
+          github-org: '{github-org}'
+          project: '{name}'
 
     publishers:
       - console-log
-      - ftp:
-          site: docs.openstack.org
-          source: 'api-quick-start/target/docbkx/webhelp/api-quick-start-onepager-external/**'
-          target: 'api/quick-start/'
-          remove-prefix: 'api-quick-start/target/docbkx/webhelp/api-quick-start-onepager-external/'
-          excludes: '**/*.xml,**/null*'
+      - upload-to-docs-site
+      - upload-doc-build-results
+
+    node: '{node}'
+
 
 # this replaces the old openstack-api-site job in Jenkins
 - job:
     name: openstack-api-ref
-    project-type: maven
     concurrent: false
     node: bare-precise
 
-    prebuilders:
+    builders:
       - gerrit-git-prep
-
-    maven:
-      maven-name: Maven3
-      root-module:
-        group-id: org.openstack.docs
-        artifact-id: openstack-guide
-      root-pom: api-ref/pom.xml
-      goals: 'clean generate-sources -B'
+      - tox:
+          envlist: 'publishdocs-api'
+          github-org: 'openstack'
+          project: 'api-site'
 
     publishers:
       - console-log
-      - ftp:
-          site: api.openstack.org
-          source: 'api-ref/target/docbkx/html/**'
-          target: ''
-          remove-prefix: 'api-ref/target/docbkx/html/'
-          excludes: '**/*.xml,**/null*'
+      - upload-to-api-site
+      - upload-doc-build-results
 
 
 # in zuul/layout.yaml specified to only run against master branch.
@@ -72,149 +60,6 @@
           excludes: ''
       - console-log
 
-- job:
-    name: image-api-v2.0
-    project-type: maven
-    concurrent: true
-    node: bare-precise
-
-    wrappers:
-      - timeout:
-          timeout: 40
-          fail: true
-      - timestamps
-
-    prebuilders:
-      - gerrit-git-prep
-      - markdown-docbook:
-          filename: "image-api-v2.0"
-
-    properties:
-      - inject:
-          script-file: /usr/local/jenkins/slave_scripts/docbook-properties.sh
-          properties-file: gerrit-doc.properties
-
-    maven:
-      maven-name: Maven3
-      root-module:
-        group-id: org.openstack.docs
-        artifact-id: openstack-guide
-      root-pom: openstack-image-service-api/src/markdown/pom.xml
-      goals: 'clean generate-sources -B'
-
-    publishers:
-      - console-log
-      - ftp:
-          site: docs.openstack.org
-          source: 'openstack-image-service-api/src/markdown/target/docbkx/webhelp/api/openstack-image-service/2.0/**'
-          target: '/'
-          remove-prefix: 'openstack-image-service-api/src/markdown/target/docbkx/webhelp/'
-          excludes: '**/*.xml,**/null*'
-
-
-# this replaces the old openstack-netconn-api-doc job
-- job:
-    name: network-api-v1
-    project-type: maven
-    concurrent: false
-    node: bare-precise
-
-    prebuilders:
-      - gerrit-git-prep
-
-    maven:
-      maven-name: Maven3
-      root-module:
-        group-id: org.openstack.docs
-        artifact-id: openstack-network-api-v1
-      root-pom: v1.0/pom.xml
-      goals: 'clean generate-sources -B'
-
-    publishers:
-      - console-log
-      - ftp:
-          site: docs.openstack.org
-          source: 'v1.0/target/docbkx/webhelp/openstack-network/**'
-          target: ''
-          remove-prefix: 'v1.0/target/docbkx/webhelp'
-          excludes: '**/*.xml,**/null*'
-
-- job:
-    name: network-api-v2
-    project-type: maven
-    node: bare-precise
-
-    prebuilders:
-      - gerrit-git-prep
-
-    maven:
-      maven-name: Maven3
-      root-module:
-        group-id: org.openstack.docs
-        artifact-id: openstack-network-api-v2
-      root-pom: v2.0/pom.xml
-      goals: 'clean generate-sources -B'
-
-    publishers:
-      - console-log
-      - ftp:
-          site: docs.openstack.org
-          source: 'v2.0/target/docbkx/webhelp/openstack-network/**'
-          target: 'api/openstack-network/2.0/'
-          remove-prefix: 'v2.0/target/docbkx/webhelp/openstack-network/'
-          excludes: '**/*.xml,**/null*'
-
-- job:
-    name: object-api-v1.0
-    project-type: maven
-    concurrent: false
-    node: bare-precise
-
-    prebuilders:
-      - gerrit-git-prep
-
-    maven:
-      maven-name: Maven3
-      root-module:
-        group-id: org.openstack.docs
-        artifact-id: openstack-object-api-guide
-      root-pom: openstack-object-storage-dev/pom.xml
-      goals: 'clean generate-sources -B'
-
-    publishers:
-      - console-log
-      - ftp:
-          site: docs.openstack.org
-          source: 'openstack-object-storage-dev/target/docbkx/webhelp/**'
-          target: ''
-          remove-prefix: 'openstack-object-storage-dev/target/docbkx/webhelp/'
-          excludes: '**/*.xml,**/null*'
-
-- job:
-    name: compute-api-v2.0
-    project-type: maven
-    concurrent: false
-    node: bare-precise
-
-    prebuilders:
-      - gerrit-git-prep
-
-    maven:
-      maven-name: Maven3
-      root-module:
-        group-id: org.openstack.docs
-        artifact-id: openstack-guide
-      root-pom: openstack-compute-api-2/pom.xml
-      goals: 'clean generate-sources -B'
-
-    publishers:
-      - console-log
-      - ftp:
-          site: docs.openstack.org
-          source: 'openstack-compute-api-2/target/docbkx/webhelp/api/openstack-compute/2/**'
-          target: ''
-          remove-prefix: 'openstack-compute-api-2/target/docbkx/webhelp'
-          excludes: '**/*.xml,**/null*'
 
 - job:
     name: compute-api-v2.0-wadl
@@ -234,122 +79,3 @@
           excludes: '**/*.xml,**/null*'
       - console-log
 
-- job:
-    name: block-api-v2.0
-    project-type: maven
-    concurrent: false
-    node: bare-precise
-
-    prebuilders:
-      - gerrit-git-prep
-
-    maven:
-      maven-name: Maven3
-      root-module:
-        group-id: org.openstack.docs
-        artifact-id: openstack-guide
-      root-pom: v2/pom.xml
-      goals: 'clean generate-sources -B'
-
-    publishers:
-      - console-log
-      - ftp:
-          site: docs.openstack.org
-          source: 'v2/target/docbkx/webhelp/api/openstack-block-storage/2.0/**'
-          target: ''
-          remove-prefix: 'v2/target/docbkx/webhelp'
-          excludes: '**/*.xml,**/null*'
-
-# this replaces the old openstack-identity-api-doc job
-- job:
-    name: identity-api-v2.0
-    project-type: maven
-    concurrent: false
-    node: bare-precise
-
-    prebuilders:
-      - gerrit-git-prep
-
-    maven:
-      maven-name: Maven3
-      root-module:
-        group-id: org.openstack.identity
-        artifact-id: docs
-      root-pom: openstack-identity-api/v2.0/pom.xml
-      goals: 'clean generate-sources -B'
-
-    publishers:
-      - console-log
-      - ftp:
-          site: docs.openstack.org
-          source: 'openstack-identity-api/v2.0/target/docbkx/webhelp/api/openstack-identity-service/2.0/**'
-          target: ''
-          remove-prefix: 'openstack-identity-api/v2.0/target/docbkx/webhelp/'
-          excludes: '**/*.xml,**/null*'
-
-- job:
-    name: identity-api-v3
-    project-type: maven
-    concurrent: true
-    node: bare-precise
-
-    wrappers:
-      - timeout:
-          timeout: 40
-          fail: true
-      - timestamps
-
-    prebuilders:
-      - gerrit-git-prep
-      - markdown-docbook:
-          filename: "identity-api-v3"
-
-    properties:
-      - inject:
-          script-file: /usr/local/jenkins/slave_scripts/docbook-properties.sh
-          properties-file: gerrit-doc.properties
-
-    maven:
-      maven-name: Maven3
-      root-module:
-        group-id: org.openstack.docs
-        artifact-id: openstack-guide
-      root-pom: openstack-identity-api/v3/pom.xml
-      goals: 'clean generate-sources -B'
-
-    publishers:
-      - console-log
-      - ftp:
-          site: docs.openstack.org
-          source: 'openstack-identity-api/v3/markdown/target/docbkx/webhelp/api/openstack-identity-service/3/**'
-          target: ''
-          remove-prefix: 'openstack-identity-api/v3/markdown/target/docbkx/webhelp/'
-          excludes: '**/*.xml,**/null*'
-
-
-# this replaces the old openstack-image-api-doc job
-- job:
-    name: image-api-v1.1
-    project-type: maven
-    concurrent: false
-    node: bare-precise
-
-    prebuilders:
-      - gerrit-git-prep
-
-    maven:
-      maven-name: Maven3
-      root-module:
-        group-id: org.openstack.docs
-        artifact-id: openstack-guide
-      root-pom: openstack-image-service-api/pom.xml
-      goals: 'clean generate-sources -B'
-
-    publishers:
-      - console-log
-      - ftp:
-          site: docs.openstack.org
-          source: 'openstack-image-service-api/target/docbkx/webhelp/api/openstack-image-service/1.1/**'
-          target: ''
-          remove-prefix: 'openstack-image-service-api/target/docbkx/webhelp'
-          excludes: '**/*.xml,**/null*'

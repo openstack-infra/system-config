@@ -344,6 +344,25 @@
               keep-hierarchy: true
               copy-after-failure: true
 
+
+- publisher:
+    name: upload-to-api-site
+    publishers:
+      - ftp:
+          site: api.openstack.org
+          source: 'publish-docs/**'
+          target: '/'
+          remove-prefix: 'publish-docs/'
+
+- publisher:
+    name: upload-to-docs-site
+    publishers:
+      - ftp:
+          site: docs.openstack.org
+          source: 'publish-docs/**'
+          target: '/'
+          remove-prefix: 'publish-docs/'
+
 - publisher:
     name: upload-doc-build-results
     publishers:
