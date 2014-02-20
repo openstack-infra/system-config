@@ -231,7 +231,7 @@ jobs:
   - name: ^.*$
     parameter-function: single_use_node
   # jobs run on the proposal worker
-  - name: ^.*-(merge-release-tags|(propose|upstream)-(requirements|translation)-updates?)$
+  - name: ^.*(merge-release-tags|(propose|upstream)-(requirements|translation)-updates?)$
     parameter-function: reusable_node
   # jobs run on the pypi worker
   - name: ^.*-(jenkinsci|mavencentral|pypi)-upload$
