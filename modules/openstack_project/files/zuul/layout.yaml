@@ -58,6 +58,13 @@ pipelines:
           approval:
             - approved: 1
         - event: comment-added
+          require-approval:
+            - verified: 2
+              username: jenkins
+              newer-than: 24h
+          approval:
+            - approved: 1
+        - event: comment-added
           approval:
             - verified: 1
           username_filter: jenkins
