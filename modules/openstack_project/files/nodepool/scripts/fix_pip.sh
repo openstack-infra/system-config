@@ -1,6 +1,5 @@
 #!/bin/bash -xe
-
-# Copyright (C) 2011-2014 OpenStack Foundation
+# Copyright (C) 2014 Hewlett-Packard Development Company, L.P.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -16,13 +15,20 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-HOSTNAME=$1
-SUDO='false'
-BARE='false'
-PYTHON3='true'
-PYPY='true'
-ALL_MYSQL_PRIVS='true'
+sudo apt-get remove -y python-setuptools python-pip
 
-./prepare_node.sh "$HOSTNAME" "$SUDO" "$BARE" "$PYTHON3" "$PYPY" "$ALL_MYSQL_PRIVS"
-./fix_pip.sh
-./restrict_memory.sh
+# install pip using get-pip
+EZ_SETUP_URL=https://bitbucket.org/pypa/setuptools/raw/bootstrap/ez_setup.py
+PIP_GET_PIP_URL=https://raw.github.com/pypa/pip/master/contrib/get-pip.py
+
+if [ ! -f ez_setup.py ] ; then
+  curl -O $EZ_SETUP_URL || wget $EZ_SETUP_URL
+fi
+sudo python ez_setup.py
+sudo python3 ez_setup.py
+
+if [ ! -f get-pip.py ] ; then
+  curl -O $PIP_GET_PIP_URL || wget $PIP_GET_PIP_URL
+fi
+
+sudo python get-pip.py
