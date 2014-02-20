@@ -1,0 +1,44 @@
+- job:
+    name: gate-murano-devstack-dsvm
+    node: devstack-precise
+
+    wrappers:
+      - timeout:
+          timeout: 65
+          fail: true
+      - timestamps
+
+    builders:
+      - devstack-checkout
+      - shell: |
+          #!/bin/bash -xe
+          export PYTHONUNBUFFERED=true
+          export DEVSTACK_GATE_TIMEOUT=60
+          export ENABLED_SERVICES=murano,murano-api,murano-conductor,murano-repository
+          export PROJECTS="stackforge/murano-api $PROJECTS"
+          export PROJECTS="stackforge/murano-conductor $PROJECTS"
+          export PROJECTS="stackforge/murano-repository $PROJECTS"
+          export PROJECTS="stackforge/murano-common $PROJECTS"
+          export PROJECTS="stackforge/python-muranoclient $PROJECTS"
+          export PROJECTS="stackforge/murano-dashboard $PROJECTS"
+          export PROJECTS="stackforge/murano-metadataclient $PROJECTS"
+
+          function pre_test_hook {
+              cd /opt/stack/new/murano-api/functionaltests
+              ./pre_test_hook.sh
+          }
+          export -f pre_test_hook
+
+          function post_test_hook {
+              cd /opt/stack/new/murano-api/functionaltests
+              ./post_test_hook.sh
+          }
+          export -f post_test_hook
+
+          cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
+          ./safe-devstack-vm-gate-wrap.sh
+      - link-logs
+
+    publishers:
+      - devstack-logs
+      - console-log
