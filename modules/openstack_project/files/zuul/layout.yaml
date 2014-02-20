@@ -478,6 +478,8 @@ jobs:
     voting: false
   - name: gate-murano-repository-python33
     voting: false
+  - name: gate-murano-api-devstack-dsvm
+    voting: false
   - name: gate-oslo.vmware-docs
     voting: false
   - name: gate-oslo.vmware-requirements
@@ -3459,10 +3461,12 @@ projects:
       - gate-murano-api-pep8
       - gate-murano-api-python26
       - gate-murano-api-python27
+      - gate-murano-api-devstack-dsvm
     gate:
       - gate-murano-api-pep8
       - gate-murano-api-python26
       - gate-murano-api-python27
+      - gate-murano-api-devstack-dsvm
     post:
       - murano-api-branch-tarball
     pre-release:
