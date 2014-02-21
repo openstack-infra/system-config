@@ -81,6 +81,35 @@
       - devstack-logs
       - console-log
 
+- job-template:
+    name: '{pipeline}-tempest-dsvm-full-non-isolated{branch-designator}'
+    node: '{node}'
+
+    wrappers:
+      - timeout:
+          timeout: 185
+          fail: true
+      - timestamps
+
+    builders:
+      - devstack-checkout
+      - shell: |
+          #!/bin/bash -xe
+          export PYTHONUNBUFFERED=true
+          export DEVSTACK_GATE_TIMEOUT=180
+          export DEVSTACK_GATE_TEMPEST=1
+          export DEVSTACK_GATE_TEMPEST_DISABLE_TENANT_ISOLATION=1
+          export BRANCH_OVERRIDE={branch-override}
+          if [ "$BRANCH_OVERRIDE" != "default" ] ; then
+              export OVERRIDE_ZUUL_BRANCH=$BRANCH_OVERRIDE
+          fi
+          cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
+          ./safe-devstack-vm-gate-wrap.sh
+      - link-logs
+
+    publishers:
+      - devstack-logs
+      - console-log
 
 - job-template:
     name: '{pipeline}-tempest-dsvm-neutron-heat-slow{branch-designator}'
@@ -1078,3 +1107,4 @@
       - '{pipeline}-tempest-dsvm-coverage{branch-designator}'
       - '{pipeline}-tempest-dsvm-stress{branch-designator}'
       - '{pipeline}-tempest-dsvm-trove-full{branch-designator}'
+      - '{pipeline}-tempest-dsvm-full-non-isolated{branch-designator}'
