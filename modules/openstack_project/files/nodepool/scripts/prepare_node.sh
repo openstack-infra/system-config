@@ -25,7 +25,7 @@ PYPY=${5:-false}
 sudo hostname $HOSTNAME
 wget https://git.openstack.org/cgit/openstack-infra/config/plain/install_puppet.sh
 sudo bash -xe install_puppet.sh
-sudo git clone git://review.openstack.org/p/openstack-infra/config.git \
+sudo git clone --depth=1 git://git.openstack.org/openstack-infra/config.git \
     /root/config
 sudo /bin/bash /root/config/install_modules.sh
 if [ -z "$NODEPOOL_SSH_KEY" ] ; then
