@@ -570,6 +570,7 @@ projects:
       - check-tempest-dsvm-full
       - check-tempest-dsvm-postgres-full
       - check-tempest-dsvm-neutron
+      - check-tempest-dsvm-neutron-full
       - gate-tempest-dsvm-large-ops
       - gate-tempest-dsvm-neutron-large-ops
       - check-swift-dsvm-functional
@@ -605,6 +606,7 @@ projects:
       - check-tempest-dsvm-full
       - check-tempest-dsvm-postgres-full
       - check-tempest-dsvm-neutron
+      - check-tempest-dsvm-neutron-full
       - gate-tempest-dsvm-large-ops
       - gate-tempest-dsvm-neutron-large-ops
       - check-grenade-dsvm
@@ -674,6 +676,7 @@ projects:
       - check-tempest-dsvm-full
       - check-tempest-dsvm-postgres-full
       - check-tempest-dsvm-neutron
+      - check-tempest-dsvm-neutron-full
       - gate-tempest-dsvm-large-ops
       - gate-tempest-dsvm-neutron-large-ops
       - check-grenade-dsvm
@@ -712,6 +715,7 @@ projects:
       - check-tempest-dsvm-full
       - check-tempest-dsvm-postgres-full
       - check-tempest-dsvm-neutron
+      - check-tempest-dsvm-neutron-full
       - gate-tempest-dsvm-large-ops
       - gate-tempest-dsvm-neutron-large-ops
       - check-grenade-dsvm
@@ -746,6 +750,7 @@ projects:
       - check-tempest-dsvm-full
       - check-tempest-dsvm-postgres-full
       - check-tempest-dsvm-neutron
+      - check-tempest-dsvm-neutron-full
       - gate-tempest-dsvm-large-ops
       - gate-tempest-dsvm-neutron-large-ops
       - check-tempest-dsvm-neutron-heat-slow
@@ -781,6 +786,7 @@ projects:
       - check-tempest-dsvm-full
       - check-tempest-dsvm-postgres-full
       - check-tempest-dsvm-neutron
+      - check-tempest-dsvm-neutron-full
       - gate-tempest-dsvm-large-ops
       - gate-tempest-dsvm-neutron-large-ops
       - check-grenade-dsvm
@@ -838,6 +844,7 @@ projects:
       - check-tempest-dsvm-full
       - check-tempest-dsvm-postgres-full
       - check-tempest-dsvm-neutron
+      - check-tempest-dsvm-neutron-full
       - gate-tempest-dsvm-large-ops
       - gate-tempest-dsvm-neutron-large-ops
       - check-grenade-dsvm
@@ -899,6 +906,7 @@ projects:
     check:
       - gate-neutron-requirements
       - check-tempest-dsvm-neutron
+      - check-tempest-dsvm-neutron-full
       - check-tempest-dsvm-neutron-pg
       - check-tempest-dsvm-neutron-isolated
       - check-tempest-dsvm-neutron-pg-isolated
@@ -941,6 +949,7 @@ projects:
       - check-tempest-dsvm-full
       - check-tempest-dsvm-postgres-full
       - check-tempest-dsvm-neutron
+      - check-tempest-dsvm-neutron-full
       - gate-tempest-dsvm-large-ops
       - gate-tempest-dsvm-neutron-large-ops
       - check-grenade-dsvm
@@ -1058,6 +1067,7 @@ projects:
       - check-devstack-dsvm-cells
       - check-tempest-dsvm-full
       - check-tempest-dsvm-neutron
+      - check-tempest-dsvm-neutron-full
       - check-tempest-dsvm-postgres-full
       - gate-tempest-dsvm-large-ops
       - gate-tempest-dsvm-neutron-large-ops
@@ -1160,6 +1170,7 @@ projects:
       - check-tempest-dsvm-full
       - check-tempest-dsvm-postgres-full
       - check-tempest-dsvm-neutron
+      - check-tempest-dsvm-neutron-full
       - gate-tempest-dsvm-large-ops
       - gate-tempest-dsvm-neutron-large-ops
     gate:
@@ -1192,6 +1203,7 @@ projects:
       - check-tempest-dsvm-full
       - check-tempest-dsvm-postgres-full
       - check-tempest-dsvm-neutron
+      - check-tempest-dsvm-neutron-full
       - gate-tempest-dsvm-large-ops
       - gate-tempest-dsvm-neutron-large-ops
       - check-grenade-dsvm
@@ -1227,6 +1239,7 @@ projects:
       - check-tempest-dsvm-full
       - check-tempest-dsvm-postgres-full
       - check-tempest-dsvm-neutron
+      - check-tempest-dsvm-neutron-full
       - gate-tempest-dsvm-large-ops
       - gate-tempest-dsvm-neutron-large-ops
       - check-grenade-dsvm
@@ -1260,6 +1273,7 @@ projects:
       - check-tempest-dsvm-full
       - check-tempest-dsvm-postgres-full
       - check-tempest-dsvm-neutron
+      - check-tempest-dsvm-neutron-full
       - gate-tempest-dsvm-large-ops
       - gate-tempest-dsvm-neutron-large-ops
       - check-grenade-dsvm
@@ -1296,6 +1310,7 @@ projects:
       - check-tempest-dsvm-full
       - check-tempest-dsvm-postgres-full
       - check-tempest-dsvm-neutron
+      - check-tempest-dsvm-neutron-full
       - gate-tempest-dsvm-large-ops
       - gate-tempest-dsvm-neutron-large-ops
     gate:
@@ -1360,6 +1375,7 @@ projects:
       - check-tempest-dsvm-full
       - check-tempest-dsvm-postgres-full
       - check-tempest-dsvm-neutron
+      - check-tempest-dsvm-neutron-full
       - gate-tempest-dsvm-large-ops
       - gate-tempest-dsvm-neutron-large-ops
       - check-grenade-dsvm
@@ -1422,6 +1438,7 @@ projects:
       - check-tempest-dsvm-full
       - check-tempest-dsvm-postgres-full
       - check-tempest-dsvm-neutron
+      - check-tempest-dsvm-neutron-full
       - check-tempest-dsvm-neutron-pg
       - check-tempest-dsvm-neutron-isolated
       - check-tempest-dsvm-neutron-pg-isolated
@@ -1464,6 +1481,7 @@ projects:
       - check-tempest-dsvm-full
       - check-tempest-dsvm-postgres-full
       - check-tempest-dsvm-neutron
+      - check-tempest-dsvm-neutron-full
       - gate-tempest-dsvm-large-ops
       - gate-tempest-dsvm-neutron-large-ops
       - check-grenade-dsvm
@@ -1547,6 +1565,7 @@ projects:
       - check-tempest-dsvm-full
       - check-tempest-dsvm-postgres-full
       - check-tempest-dsvm-neutron
+      - check-tempest-dsvm-neutron-full
       - gate-tempest-dsvm-large-ops
       - gate-tempest-dsvm-neutron-large-ops
       - check-grenade-dsvm
@@ -1841,6 +1860,7 @@ projects:
       - check-devstack-dsvm-cells
       - check-tempest-dsvm-full
       - check-tempest-dsvm-neutron
+      - check-tempest-dsvm-neutron-full
       - gate-tempest-dsvm-large-ops
       - gate-tempest-dsvm-neutron-large-ops
       - check-grenade-dsvm
@@ -1871,6 +1891,7 @@ projects:
       - check-devstack-dsvm-cells
       - check-tempest-dsvm-full
       - check-tempest-dsvm-neutron
+      - check-tempest-dsvm-neutron-full
       - gate-tempest-dsvm-large-ops
       - gate-tempest-dsvm-neutron-large-ops
       - check-grenade-dsvm
@@ -1902,6 +1923,7 @@ projects:
       - check-devstack-dsvm-cells
       - check-tempest-dsvm-full
       - check-tempest-dsvm-neutron
+      - check-tempest-dsvm-neutron-full
       - gate-tempest-dsvm-large-ops
       - gate-tempest-dsvm-neutron-large-ops
       - check-grenade-dsvm
@@ -1960,6 +1982,7 @@ projects:
       - check-devstack-dsvm-cells
       - check-tempest-dsvm-full
       - check-tempest-dsvm-neutron
+      - check-tempest-dsvm-neutron-full
       - check-grenade-dsvm
     gate:
       - gate-oslo.version-requirements
@@ -2003,6 +2026,7 @@ projects:
       - check-tempest-dsvm-full
       - check-tempest-dsvm-postgres-full
       - check-tempest-dsvm-neutron
+      - check-tempest-dsvm-neutron-full
       - gate-tempest-dsvm-large-ops
       - gate-tempest-dsvm-neutron-large-ops
       - check-grenade-dsvm
@@ -2137,6 +2161,7 @@ projects:
       - check-tempest-dsvm-full
       - check-tempest-dsvm-postgres-full
       - check-tempest-dsvm-neutron
+      - check-tempest-dsvm-neutron-full
       - check-tempest-dsvm-cells-full
       - gate-tempest-dsvm-large-ops
       - gate-tempest-dsvm-neutron-large-ops
@@ -2363,6 +2388,7 @@ projects:
       - check-tempest-dsvm-full
       - check-tempest-dsvm-postgres-full
       - check-tempest-dsvm-neutron
+      - check-tempest-dsvm-neutron-full
       - gate-tempest-dsvm-large-ops
       - gate-tempest-dsvm-neutron-large-ops
       - check-tempest-dsvm-neutron-heat-slow
@@ -2472,6 +2498,7 @@ projects:
       - check-tempest-dsvm-full
       - check-tempest-dsvm-postgres-full
       - check-tempest-dsvm-neutron
+      - check-tempest-dsvm-neutron-full
       - gate-tempest-dsvm-large-ops
       - gate-tempest-dsvm-neutron-large-ops
       - check-grenade-dsvm
@@ -2548,6 +2575,7 @@ projects:
       - check-tempest-dsvm-full
       - check-tempest-dsvm-postgres-full
       - check-tempest-dsvm-neutron
+      - check-tempest-dsvm-neutron-full
       - gate-tempest-dsvm-large-ops
       - gate-tempest-dsvm-neutron-large-ops
       - check-grenade-dsvm
