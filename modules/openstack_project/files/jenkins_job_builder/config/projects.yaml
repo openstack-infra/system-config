@@ -1231,11 +1231,7 @@
     doc-publisher-site: docs.openstack.org
 
     jobs:
-      - gate-{name}-pep8
-      - gate-{name}-requirements
-      - gate-{name}-docs
-      - gate-{name}-python27
-      - '{name}-branch-tarball'
+      - python-jobs
       - openstack-publish-jobs
 
 
