@@ -17,11 +17,17 @@ python email-stats.py -p openstack/savanna -o out/savanna.csv
 python email-stats.py -p openstack/marconi -o out/marconi.csv
 
 # Library projects
+python email-stats.py -p openstack/cliff -o out/cliff.csv
 python email-stats.py -p openstack/oslo-incubator -o out/olso-incubator.csv
 python email-stats.py -p openstack/oslo.config -o out/olso.config.csv
 python email-stats.py -p openstack/oslo.messaging -o out/olso.messaging.csv
 python email-stats.py -p openstack/oslo.sphinx -o out/olso.sphinx.csv
+python email-stats.py -p openstack/oslo.test -o out/olso.test.csv
 python email-stats.py -p openstack/oslo.version -o out/olso.version.csv
+python email-stats.py -p openstack/oslo.vmware -o out/olso.vmware.csv
+python email-stats.py -p openstack/pycadf -o out/pycadf.csv
+python email-stats.py -p openstack/stevedore -o out/stevedore.csv
+python email-stats.py -p openstack/taskflow -o out/taskflow.csv
 python email-stats.py -p openstack/python-novaclient -o out/python-novaclient.csv
 python email-stats.py -p openstack/python-swiftclient -o out/python-swiftclient.csv
 python email-stats.py -p openstack/python-glanceclient -o out/python-glanceclient.csv
