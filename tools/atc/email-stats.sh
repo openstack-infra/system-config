@@ -21,7 +21,9 @@ python email-stats.py -p openstack/oslo-incubator -o out/olso-incubator.csv
 python email-stats.py -p openstack/oslo.config -o out/olso.config.csv
 python email-stats.py -p openstack/oslo.messaging -o out/olso.messaging.csv
 python email-stats.py -p openstack/oslo.sphinx -o out/olso.sphinx.csv
+python email-stats.py -p openstack/oslo.test -o out/olso.test.csv
 python email-stats.py -p openstack/oslo.version -o out/olso.version.csv
+python email-stats.py -p openstack/oslo.vmware -o out/olso.vmware.csv
 python email-stats.py -p openstack/python-novaclient -o out/python-novaclient.csv
 python email-stats.py -p openstack/python-swiftclient -o out/python-swiftclient.csv
 python email-stats.py -p openstack/python-glanceclient -o out/python-glanceclient.csv
@@ -43,6 +45,10 @@ python email-stats.py -p openstack/savanna-image-elements -o out/savanna-image-e
 python email-stats.py -p openstack/python-marconiclient -o out/python-marconiclient.csv
 python email-stats.py -p openstack/django_openstack_auth -o out/django_openstack_auth.csv
 python email-stats.py -p openstack-dev/pbr -o out/pbr.csv
+python email-stats.py -p openstack-dev/stevedore -o out/stevedore.csv
+python email-stats.py -p openstack-dev/cliff -o out/cliff.csv
+python email-stats.py -p openstack-dev/taskflow -o out/taskflow.csv
+python email-stats.py -p openstack-dev/pycadf -o out/pycadf.csv
 
 # QA projects
 python email-stats.py -p openstack-dev/devstack -o out/devstack.csv
