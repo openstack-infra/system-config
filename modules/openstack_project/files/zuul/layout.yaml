@@ -1140,6 +1140,10 @@ projects:
       - gate-tuskar-pep8
       - gate-tuskar-python26
       - gate-tuskar-python27
+    check-tripleo:
+      - check-tripleo-seed-precise
+      - check-tripleo-undercloud-precise
+      - check-tripleo-overcloud-precise
     gate:
       - gate-tuskar-pep8
       - gate-tuskar-python26
@@ -1609,6 +1613,10 @@ projects:
       - gate-python-tuskarclient-python26
       - gate-python-tuskarclient-python27
       - gate-python-tuskarclient-python33
+    check-tripleo:
+      - check-tripleo-seed-precise
+      - check-tripleo-undercloud-precise
+      - check-tripleo-overcloud-precise
     gate:
       - gate-python-tuskarclient-pep8
       - gate-python-tuskarclient-python26
@@ -1631,6 +1639,10 @@ projects:
       - gate-diskimage-builder-pep8
       - gate-diskimage-builder-python26
       - gate-diskimage-builder-python27
+    check-tripleo:
+      - check-tripleo-seed-precise
+      - check-tripleo-undercloud-precise
+      - check-tripleo-overcloud-precise
     gate:
       - gate-diskimage-builder-requirements
       - gate-diskimage-builder-pep8
@@ -1751,6 +1763,10 @@ projects:
       - gate-os-apply-config-pep8
       - gate-os-apply-config-python26
       - gate-os-apply-config-python27
+    check-tripleo:
+      - check-tripleo-seed-precise
+      - check-tripleo-undercloud-precise
+      - check-tripleo-overcloud-precise
     gate:
       - gate-os-apply-config-requirements
       - gate-os-apply-config-pep8
@@ -1772,6 +1788,10 @@ projects:
       - gate-os-collect-config-pep8
       - gate-os-collect-config-python26
       - gate-os-collect-config-python27
+    check-tripleo:
+      - check-tripleo-seed-precise
+      - check-tripleo-undercloud-precise
+      - check-tripleo-overcloud-precise
     gate:
       - gate-os-collect-config-requirements
       - gate-os-collect-config-pep8
@@ -1793,6 +1813,10 @@ projects:
       - gate-os-refresh-config-pep8
       - gate-os-refresh-config-python26
       - gate-os-refresh-config-python27
+    check-tripleo:
+      - check-tripleo-seed-precise
+      - check-tripleo-undercloud-precise
+      - check-tripleo-overcloud-precise
     gate:
       - gate-os-refresh-config-requirements
       - gate-os-refresh-config-pep8
@@ -2191,6 +2215,10 @@ projects:
   - name: openstack/tripleo-heat-templates
     check:
       - gate-noop
+    check-tripleo:
+      - check-tripleo-seed-precise
+      - check-tripleo-undercloud-precise
+      - check-tripleo-overcloud-precise
     gate:
       - gate-noop
     post:
@@ -2203,6 +2231,10 @@ projects:
   - name: openstack/tripleo-image-elements
     check:
       - gate-noop
+    check-tripleo:
+      - check-tripleo-seed-precise
+      - check-tripleo-undercloud-precise
+      - check-tripleo-overcloud-precise
     gate:
       - gate-noop
     post:
@@ -2219,6 +2251,10 @@ projects:
   - name: openstack/tripleo-incubator
     check:
       - gate-tripleo-incubator-docs
+    check-tripleo:
+      - check-tripleo-seed-precise
+      - check-tripleo-undercloud-precise
+      - check-tripleo-overcloud-precise
     gate:
       - gate-tripleo-incubator-docs
     post:
@@ -2950,6 +2986,10 @@ projects:
   - name: openstack-infra/tripleo-ci
     check:
       - gate-noop
+    check-tripleo:
+      - check-tripleo-seed-precise
+      - check-tripleo-undercloud-precise
+      - check-tripleo-overcloud-precise
     gate:
       - gate-noop
 
