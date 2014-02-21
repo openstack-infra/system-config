@@ -244,7 +244,7 @@
     name: install-buck
     builders:
       - shell: |
-           if [[ ! -d "buck"]]
+           if [[ ! -d "buck" ]]
            then
              git clone https://gerrit.googlesource.com/buck
              cd buck
