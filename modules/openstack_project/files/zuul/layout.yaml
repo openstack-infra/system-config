@@ -29,6 +29,12 @@ pipelines:
             - username: jenkins
         - event: comment-added
           require-approval:
+            - verified: -1
+              username: jenkins
+          approval:
+            - approved: 1
+        - event: comment-added
+          require-approval:
             - verified: -2
               username: jenkins
           approval:
