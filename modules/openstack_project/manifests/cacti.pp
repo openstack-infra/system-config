@@ -123,6 +123,8 @@ class openstack_project::cacti (
     'review-dev.openstack.org',
     'static.openstack.org',
     'wiki.openstack.org',
+    'zm01.openstack.org',
+    'zm02.openstack.org',
     'zuul.openstack.org',
   ]
 
