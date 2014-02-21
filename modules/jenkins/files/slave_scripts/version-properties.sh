@@ -1,9 +1,7 @@
 #!/bin/bash -ex
 
-# This file is a helper for versioning and deployment of
-# maven projects.  It sets up environment variables to
-# pass to maven build commands so that we can generate
-# versioned builds within the gerrit workflow.
+# This is a script that helps us version build artifacts.  It retrieves
+# git info and generates version strings.
 
 # get version info from scm
 SCM_TAG=`git describe --abbrev=0 --tags` || true
@@ -25,6 +23,6 @@ else
     PROJECT_VER="$SCM_TAG.$COMMITS_SINCE_TAG.$SCM_SHA";
 fi
 
-echo "SCM_SHA=$SCM_SHA" >maven.properties
-echo "PROJECT_VER=$PROJECT_VER" >>maven.properties
-echo "COMMITS_SINCE_TAG=$COMMITS_SINCE_TAG" >>maven.properties
+echo "SCM_SHA=$SCM_SHA" >version.properties
+echo "PROJECT_VER=$PROJECT_VER" >>version.properties
+echo "COMMITS_SINCE_TAG=$COMMITS_SINCE_TAG" >>version.properties

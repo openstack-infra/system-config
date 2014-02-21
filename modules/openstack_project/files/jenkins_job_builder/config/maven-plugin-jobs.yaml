@@ -15,9 +15,9 @@
       - gerrit-git-prep
       - shell: |
           #!/bin/bash -xe
-          /usr/local/jenkins/slave_scripts/maven-properties.sh
+          /usr/local/jenkins/slave_scripts/version-properties.sh
       - inject:
-          properties-file: maven.properties
+          properties-file: version.properties
       - maven-target:
           maven-version: Maven3
           pom: pom.xml
@@ -42,9 +42,9 @@
       - gerrit-git-prep
       - shell: |
           #!/bin/bash -xe
-          /usr/local/jenkins/slave_scripts/maven-properties.sh
+          /usr/local/jenkins/slave_scripts/version-properties.sh
       - inject:
-          properties-file: maven.properties
+          properties-file: version.properties
       - maven-target:
           maven-version: Maven3
           pom: pom.xml
