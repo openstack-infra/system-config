@@ -226,7 +226,8 @@ node 'graphite.openstack.org' {
     graphite_admin_user     => hiera('graphite_admin_user'),
     graphite_admin_email    => hiera('graphite_admin_email'),
     graphite_admin_password => hiera('graphite_admin_password'),
-    statsd_hosts            => ['nodepool.openstack.org',
+    statsd_hosts            => ['logstash.openstack.org',
+                                'nodepool.openstack.org',
                                 'zuul.openstack.org'],
   }
 }

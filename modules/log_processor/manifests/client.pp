@@ -17,6 +17,7 @@
 #
 class log_processor::client (
   $config_file,
+  $statsd_host = '',
 ) {
 
   file { '/etc/logstash/jenkins-log-client.yaml':
@@ -37,7 +38,16 @@ class log_processor::client (
     require => [
       File['/usr/local/bin/log-gearman-client.py'],
       File['/etc/logstash/jenkins-log-client.yaml'],
+      File['/etc/default/jenkins-log-client'],
     ],
+  }
+
+  file { '/etc/default/jenkins-log-client':
+    ensure  => present,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0444',
+    content => template('log_processor/jenkins-log-client.default.erb'),
   }
 
   service { 'jenkins-log-client':
