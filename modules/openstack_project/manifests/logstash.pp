@@ -18,6 +18,7 @@ class openstack_project::logstash (
   $elasticsearch_nodes = [],
   $gearman_workers = [],
   $discover_nodes = ['elasticsearch.openstack.org:9200'],
+  $statsd_host = 'graphite.openstack.org',
   $sysadmins = []
 ) {
   $iptables_es_rule = regsubst ($elasticsearch_nodes, '^(.*)$', '-m state --state NEW -m tcp -p tcp --dport 9200:9400 -s \1 -j ACCEPT')
@@ -40,5 +41,6 @@ class openstack_project::logstash (
 
   class { 'log_processor::client':
     config_file => 'puppet:///modules/openstack_project/logstash/jenkins-log-client.yaml',
+    statsd_host => $statsd_host,
   }
 }
