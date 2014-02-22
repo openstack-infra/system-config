@@ -807,6 +807,34 @@
 
 
 - job-template:
+    name: '{pipeline}-grenade-dsvm-partial-ncpu'
+    node: '{node}'
+
+    wrappers:
+      - timeout:
+          timeout: 125
+          fail: true
+      - timestamps
+
+    builders:
+      - devstack-checkout
+      - shell: |
+          #!/bin/bash -xe
+          export PYTHONUNBUFFERED=true
+          export DEVSTACK_GATE_TIMEOUT=120
+          export DEVSTACK_GATE_TEMPEST=0
+          export DEVSTACK_GATE_GRENADE=1
+          export DEVSTACK_GATE_GRENADE_PARTIAL_NCPU=1
+          cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
+          ./safe-devstack-vm-gate-wrap.sh
+      - link-logs
+
+    publishers:
+      - devstack-logs
+      - console-log
+
+
+- job-template:
     name: '{pipeline}-tempest-dsvm-savanna-full{branch-designator}'
     node: '{node}'
 
@@ -1096,6 +1124,7 @@
       - '{pipeline}-grenade-dsvm-forward'
       - '{pipeline}-grenade-dsvm-neutron'
       - '{pipeline}-grenade-dsvm-neutron-forward'
+      - '{pipeline}-grenade-dsvm-partial-ncpu'
       - '{pipeline}-tempest-dsvm-savanna-full{branch-designator}'
       - '{pipeline}-tempest-dsvm-savanna-postgres{branch-designator}'
       - '{pipeline}-tempest-dsvm-savanna-neutron{branch-designator}'
