@@ -22,7 +22,6 @@
     node: '{node}'
 
 
-# this replaces the old openstack-api-site job in Jenkins
 - job:
     name: openstack-api-ref
     concurrent: false
@@ -37,8 +36,12 @@
 
     publishers:
       - console-log
-      - upload-to-api-site
       - upload-doc-build-results
+      - ftp:
+          site: api.openstack.org
+          source: 'publish-docs/api-ref/**'
+          target: '/'
+          remove-prefix: 'publish-docs/api-ref/'
 
 
 # in zuul/layout.yaml specified to only run against master branch.

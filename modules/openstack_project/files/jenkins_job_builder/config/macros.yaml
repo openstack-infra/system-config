@@ -360,15 +360,6 @@
 
 
 - publisher:
-    name: upload-to-api-site
-    publishers:
-      - ftp:
-          site: api.openstack.org
-          source: 'publish-docs/**'
-          target: '/'
-          remove-prefix: 'publish-docs/'
-
-- publisher:
     name: upload-to-docs-site
     publishers:
       - ftp:
