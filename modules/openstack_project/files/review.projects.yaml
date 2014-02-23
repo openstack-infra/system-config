@@ -433,6 +433,13 @@
   acl-config: /home/gerrit2/acls/stackforge/chef-cookbooks.config
   options:
     - direct-release
+- project: stackforge/cookbook-openstack-integration-test
+  group: openstack-chef
+  docimpact-group: openstack-chef
+  description: Chef Cookbook - OpenStack Integration Testing
+  acl-config: /home/gerrit2/acls/stackforge/chef-cookbooks.config
+  options:
+    - direct-release
 - project: stackforge/cookbook-openstack-metering
   group: openstack-chef
   docimpact-group: openstack-chef

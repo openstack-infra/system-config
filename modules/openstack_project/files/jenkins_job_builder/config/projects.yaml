@@ -1653,6 +1653,16 @@
       - gate-{name}-chef-unit
 
 - project:
+    name: cookbook-openstack-integration-test
+    github-org: stackforge
+    node: bare-precise
+
+    jobs:
+      - gate-{name}-chef-lint
+      - gate-{name}-chef-style
+      - gate-{name}-chef-unit
+
+- project:
     name: ironic
     github-org: openstack
     node: bare-precise
