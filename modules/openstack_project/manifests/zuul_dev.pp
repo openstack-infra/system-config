@@ -13,6 +13,11 @@ class openstack_project::zuul_dev(
   $statsd_host = '',
   $gearman_workers = [],
 ) {
+
+  realize (
+    User::Virtual::Localuser['zaro'],
+  )
+
   # Turn a list of hostnames into a list of iptables rules
   $iptables_rules = regsubst ($gearman_workers, '^(.*)$', '-m state --state NEW -m tcp -p tcp --dport 4730 -s \1 -j ACCEPT')
 
