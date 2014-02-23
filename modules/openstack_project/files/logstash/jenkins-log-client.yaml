@@ -15,6 +15,22 @@ zmq-publishers:
 source-files:
   - name: console.html
     retry-get: True
+  - name: logs/devstack-gate-cleanup-host.txt
+    tags:
+      - console.html
+  - name: logs/devstack-gate-setup-host.txt
+    tags:
+      - console.html
+  - name: logs/devstack-gate-setup-workspace-new.txt
+    tags:
+      - console.html
+  - name: logs/devstack-gate-setup-workspace-old.txt
+    tags:
+      - console.html
+    job-filter: '.*grenade.*'
+  - name: logs/devstacklog.txt
+    tags:
+      - console.html
   - name: logs/screen-c-api.txt
     tags:
       - screen
