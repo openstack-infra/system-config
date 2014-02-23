@@ -80,6 +80,7 @@ class jenkins::slave(
 
   package { $packages:
     ensure => present,
+    before => Exec['update-java-alternatives']
   }
 
   case $::osfamily {
@@ -133,6 +134,11 @@ class jenkins::slave(
       # For openstackid using php5-mcrypt for distro build
       package { $::jenkins::params::php5_mcrypt_package:
         ensure => present,
+      }
+
+      exec { 'update-java-alternatives':
+        unless   => '/bin/ls -l /etc/alternatives/java | /bin/grep java-7-openjdk-amd64',
+        command  => '/usr/sbin/update-java-alternatives --set java-1.7.0-openjdk-amd64',
       }
 
     }
