@@ -194,6 +194,12 @@ class gerrit(
     require => User['gerrit2'],
   }
 
+  file { '/home/gerrit2/review_site/plugins':
+    ensure  => directory,
+    owner   => 'gerrit2',
+    require => [User['gerrit2'], File['/home/gerrit2/review_site']],
+  }
+
   file { '/home/gerrit2/.ssh':
     ensure  => directory,
     owner   => 'gerrit2',
