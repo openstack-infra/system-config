@@ -700,7 +700,7 @@
 
     wrappers:
       - timeout:
-          timeout: 125
+          timeout: 130
           fail: true
       - timestamps
 
@@ -727,7 +727,7 @@
 
     wrappers:
       - timeout:
-          timeout: 125
+          timeout: 130
           fail: true
       - timestamps
 
@@ -755,7 +755,7 @@
 
     wrappers:
       - timeout:
-          timeout: 125
+          timeout: 130
           fail: true
       - timestamps
 
@@ -783,7 +783,7 @@
 
     wrappers:
       - timeout:
-          timeout: 125
+          timeout: 130
           fail: true
       - timestamps
 
@@ -812,7 +812,7 @@
 
     wrappers:
       - timeout:
-          timeout: 125
+          timeout: 130
           fail: true
       - timestamps
 
