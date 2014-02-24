@@ -39,5 +39,9 @@ fi
 sudo mkdir -p /opt/git
 sudo -i python /opt/nodepool-scripts/cache_git_repos.py
 
+# We don't always get ext4 from our clouds, mount ext3 as ext4 on the next
+# boot (eg when this image is used for testing).
+sudo sed -i 's/ext3/ext4/g' /etc/fstab
+
 sync
 sleep 5
