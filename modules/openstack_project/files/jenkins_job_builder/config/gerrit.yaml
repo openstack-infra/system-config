@@ -120,7 +120,6 @@
           cd gerrit
           buck clean
           buck build release
-          buck test --all
       - shell: "cp gerrit/buck-out/gen/release.war gerrit/buck-out/gen/gerrit-$PROJECT_VER.war"
 
     publishers:
@@ -159,7 +158,6 @@
           cd gerrit
           buck clean
           buck build release
-          buck test --all
       - shell: "cp gerrit/buck-out/gen/release.war gerrit/buck-out/gen/gerrit-$PROJECT_VER.war"
 
     publishers:
@@ -194,7 +192,6 @@
           cd gerrit
           buck clean
           buck build release
-          buck test --all
       - shell: "cp gerrit/buck-out/gen/release.war gerrit/buck-out/gen/gerrit-$PROJECT_VER.war"
 
     publishers:
