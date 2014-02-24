@@ -2178,6 +2178,7 @@ projects:
       - check-tempest-dsvm-cells-full
       - gate-tempest-dsvm-large-ops
       - gate-tempest-dsvm-neutron-large-ops
+      - check-grenade-dsvm-partial-ncpu
       - check-tempest-dsvm-ironic-nv
       - check-tempest-dsvm-ironic-postgres-nv
       - check-tempest-dsvm-savanna-full-nv
@@ -2418,6 +2419,7 @@ projects:
       - check-tempest-dsvm-neutron-heat-slow
       - check-tempest-dsvm-cells-full
       - check-grenade-dsvm-forward
+      - check-grenade-dsvm-partial-ncpu
       - check-swift-dsvm-functional
       - check-devstack-dsvm-neutron
       - check-tempest-dsvm-ironic-nv
@@ -2442,6 +2444,7 @@ projects:
       - check-grenade-dsvm
       - check-grenade-dsvm-forward
       - check-grenade-dsvm-neutron
+      - check-grenade-dsvm-partial-ncpu
     gate:
       - gate-grenade-noop
       - gate-grenade-dsvm
