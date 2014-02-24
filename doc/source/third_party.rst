@@ -14,6 +14,11 @@ Smokestack reads the Gerrit event stream and runs it's own tests on the commits.
 If one of the tests fails it will publish information and links to the failure
 on the review in Gerrit.
 
+You can view a list of current 3rd party testing accounts and the relevant
+contact information for each account in the `Gerrit group for 3rd party
+testing <https://review.openstack.org/#/admin/groups/270,members>`_ (you must
+be signed in to Gerrit to view this page).
+
 Requirements
 ------------
 
