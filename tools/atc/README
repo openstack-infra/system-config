@@ -25,8 +25,11 @@ elections and Summit invitations.
   ./email-stats.sh
   DATE=`date --iso`
   mkdir $DATE
-  cat out/*.csv | sort | uniq > $DATE/all.csv
-  mv out/* $DATE/
+  for f in out/*.csv ; do
+      fromdos $f
+      iconv -f ISO-8859-1 -t UTF-8 -o $DATE/`basename $f` $f
+  done
+  cat $DATE/*.csv | sort | uniq > $DATE/all.csv
 
 6) You can use diff.py to get the new ATCs since the previous run:
 
