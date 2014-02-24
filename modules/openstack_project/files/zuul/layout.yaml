@@ -3540,6 +3540,20 @@ projects:
       - gate-healthnmon-pep8
       - gate-healthnmon-python27
 
+  - name: stackforge/heat-translator
+    check:
+      - gate-heat-translator-pep8
+      - gate-heat-translator-python26
+      - gate-heat-translator-python27
+      - gate-heat-translator-python33
+    gate:
+      - gate-heat-translator-pep8
+      - gate-heat-translator-python26
+      - gate-heat-translator-python27
+      - gate-heat-translator-python33
+    post:
+      - heat-translator-coverage
+
   - name: stackforge/inception
     check:
       - gate-inception-pep8
