@@ -73,7 +73,7 @@
   options:
     - direct-release
 - project: openstack-infra/groups
-  description: Openstack Groups community portal
+  description: OpenStack Groups community portal
   upstream: git://github.com/mkissam/groups.git
 - project: openstack-infra/jeepyb
   group: openstack-ci
@@ -183,7 +183,7 @@
 - project: openstack/glance
   docimpact-group: openstack-manuals
 - project: openstack/governance
-  description: Openstack Technical Committee Decisions
+  description: OpenStack Technical Committee Decisions
 - project: openstack/heat
 - project: openstack/heat-cfntools
   upstream: git://github.com/heat-api/heat-cfntools.git
@@ -322,7 +322,7 @@
     - direct-release
 - project: openstack/tripleo-image-elements
   group: tripleo
-  description: Disk image elements for deployment images of Openstack
+  description: Disk image elements for deployment images of OpenStack
   options:
     - direct-release
 - project: openstack/tripleo-incubator
