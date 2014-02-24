@@ -29,7 +29,8 @@ sudo apt-get update
 sudo DEBIAN_FRONTEND=noninteractive apt-get \
   --option "Dpkg::Options::=--force-confold" \
   --assume-yes install build-essential python-dev python-pip \
-  linux-headers-virtual linux-headers-`uname -r`
+  linux-headers-virtual linux-headers-`uname -r` \
+  libffi-dev
 
 # toci scripts use both of these
 sudo pip install gear os-apply-config
