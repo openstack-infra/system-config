@@ -105,7 +105,7 @@ class graphite(
     command => 'python /usr/local/bin/graphite-init-db.py /etc/graphite/admin.ini',
     cwd     => '/usr/local/lib/python2.7/dist-packages/graphite',
     path    => '/bin:/usr/bin',
-    onlyif  => 'test ! -f /var/lib/graphite/graphite.db',
+    onlyif  => 'test ! -f /var/lib/graphite/storage/graphite.db',
     require => [ Exec['install_graphite_web'],
       File['/var/lib/graphite'],
       Package['apache2'],
