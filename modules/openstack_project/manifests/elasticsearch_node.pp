@@ -18,6 +18,7 @@ class openstack_project::elasticsearch_node (
   $elasticsearch_nodes = [],
   $elasticsearch_clients = [],
   $discover_nodes = ['localhost'],
+  $heap_size = '30g',
   $sysadmins = []
 ) {
   $iptables_nodes_rule = regsubst ($elasticsearch_nodes, '^(.*)$', '-m state --state NEW -m tcp -p tcp --dport 9200:9400 -s \1 -j ACCEPT')
@@ -45,6 +46,7 @@ class openstack_project::elasticsearch_node (
       'discovery.zen.ping.multicast.enabled' => false,
       'discovery.zen.ping.unicast.hosts'     => $discover_nodes,
     },
+    heap_size          => $heap_size,
     version            => '0.90.9',
   }
 

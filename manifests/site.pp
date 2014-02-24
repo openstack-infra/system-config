@@ -337,6 +337,12 @@ $elasticsearch_nodes = [
   'elasticsearch4.openstack.org',
   'elasticsearch5.openstack.org',
   'elasticsearch6.openstack.org',
+  'elasticsearch01.openstack.org',
+  'elasticsearch02.openstack.org',
+  'elasticsearch03.openstack.org',
+  'elasticsearch04.openstack.org',
+  'elasticsearch05.openstack.org',
+  'elasticsearch06.openstack.org',
 ]
 
 node 'logstash.openstack.org' {
@@ -368,6 +374,12 @@ node 'logstash.openstack.org' {
       'elasticsearch4.openstack.org:9200',
       'elasticsearch5.openstack.org:9200',
       'elasticsearch6.openstack.org:9200',
+      'elasticsearch01.openstack.org:9200',
+      'elasticsearch02.openstack.org:9200',
+      'elasticsearch03.openstack.org:9200',
+      'elasticsearch04.openstack.org:9200',
+      'elasticsearch05.openstack.org:9200',
+      'elasticsearch06.openstack.org:9200',
     ],
   }
 }
@@ -380,7 +392,35 @@ node /^logstash-worker\d+\.openstack\.org$/ {
   }
 }
 
-node /^elasticsearch\d*\.openstack\.org$/ {
+node /^elasticsearch\d?\.openstack\.org$/ {
+  class { 'openstack_project::elasticsearch_node':
+    sysadmins             => hiera('sysadmins'),
+    elasticsearch_nodes   => $elasticsearch_nodes,
+    elasticsearch_clients => [
+      'logstash.openstack.org',
+      'logstash-worker01.openstack.org',
+      'logstash-worker02.openstack.org',
+      'logstash-worker03.openstack.org',
+      'logstash-worker04.openstack.org',
+      'logstash-worker05.openstack.org',
+      'logstash-worker06.openstack.org',
+      'logstash-worker07.openstack.org',
+      'logstash-worker08.openstack.org',
+      'logstash-worker09.openstack.org',
+      'logstash-worker10.openstack.org',
+      'logstash-worker11.openstack.org',
+      'logstash-worker12.openstack.org',
+      'logstash-worker13.openstack.org',
+      'logstash-worker14.openstack.org',
+      'logstash-worker15.openstack.org',
+      'logstash-worker16.openstack.org',
+    ],
+    discover_nodes        => $elasticsearch_nodes,
+    heap_size             => '16g',
+  }
+}
+
+node /^elasticsearch\d\d\.openstack\.org$/ {
   class { 'openstack_project::elasticsearch_node':
     sysadmins             => hiera('sysadmins'),
     elasticsearch_nodes   => $elasticsearch_nodes,
