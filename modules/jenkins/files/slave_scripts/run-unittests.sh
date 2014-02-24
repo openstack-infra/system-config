@@ -101,7 +101,7 @@ then
     fi
 else
     echo
-    echo "WARNING: Unable to find $NOST_HTML_OUT_FILE to confirm results!"
+    echo "WARNING: Unable to find $NOSE_HTML_OUT_FILE to confirm results!"
     echo
 fi
 
