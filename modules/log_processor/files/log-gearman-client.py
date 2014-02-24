@@ -148,7 +148,13 @@ class Server(object):
             self.processors.append(processor)
 
     def main(self):
-        self.gearserver = gear.Server()
+        statsd_host = os.environ.get('STATSD_HOST')
+        statsd_port = int(os.environ.get('STATSD_PORT', 8125))
+        statsd_prefix = os.environ.get('STATSD_PREFIX', 'logstash.geard')
+        self.gearserver = gear.Server(
+            statsd_host=statsd_host,
+            statsd_port=statsd_port,
+            statsd_prefix=statsd_prefix)
 
         self.setup_processors()
         for processor in self.processors:

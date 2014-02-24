@@ -40,6 +40,12 @@ class log_processor (
     require  => Class['pip'],
   }
 
+  package { 'statsd':
+    ensure   => latest,
+    provider => 'pip',
+    require  => Class['pip'],
+  }
+
   file { '/var/lib/crm114':
     ensure  => directory,
     owner   => 'logstash',
