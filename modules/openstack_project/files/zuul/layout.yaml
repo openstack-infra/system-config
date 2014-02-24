@@ -1936,9 +1936,9 @@ projects:
       - name: openstack-server-publish-jobs
     check:
       - gate-oslo-incubator-requirements
+      - gate-oslo-incubator-python33
     gate:
       - gate-oslo-incubator-requirements
-    experimental:
       - gate-oslo-incubator-python33
 
   - name: openstack/oslo.config
