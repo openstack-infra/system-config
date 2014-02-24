@@ -12,6 +12,7 @@ class jenkins::params {
       $python_netaddr_package = 'python-netaddr'
       # packages needed by slaves
       $ant_package = 'ant'
+      $awk_package = 'gawk'
       $asciidoc_package = 'asciidoc'
       $curl_package = 'curl'
       $docbook_xml_package = 'docbook-style-xsl'
@@ -91,6 +92,7 @@ class jenkins::params {
       $python_netaddr_package = 'python-netaddr'
       # packages needed by slaves
       $ant_package = 'ant'
+      $awk_package = 'gawk'
       $asciidoc_package = 'asciidoc'
       $curl_package = 'curl'
       $docbook_xml_package = 'docbook-xml'
