@@ -2300,6 +2300,7 @@ projects:
       - check-tripleo-overcloud-precise
     post:
       - tempest-docs
+      - tempest-coverage
       - tempest-branch-tarball
     periodic-stable:
       - periodic-tempest-dsvm-full-grizzly
