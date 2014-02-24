@@ -531,6 +531,20 @@ jobs:
     voting: false
   - name: gate-murano-repository-python33
     voting: false
+  - name: gate-murano-api-requirements
+    voting: false
+  - name: gate-murano-repository-requirements
+    voting: false
+  - name: gate-murano-conductor-requirements
+    voting: false
+  - name: gate-murano-common-requirements
+    voting: false
+  - name: gate-python-muranoclient-requirements
+    voting: false
+  - name: gate-murano-metadataclient-requirements
+    voting: false
+  - name: gate-murano-dashboard-requirements
+    voting: false
   - name: gate-oslo.vmware-docs
     voting: false
   - name: gate-oslo.vmware-requirements
@@ -3681,6 +3695,7 @@ projects:
       - gate-murano-api-pep8
       - gate-murano-api-python26
       - gate-murano-api-python27
+      - gate-murano-api-requirements
     gate:
       - gate-murano-api-pep8
       - gate-murano-api-python26
@@ -3698,6 +3713,7 @@ projects:
       - gate-murano-common-python26
       - gate-murano-common-python27
       - gate-murano-common-python33
+      - gate-murano-common-requirements
     gate:
       - gate-murano-common-pep8
       - gate-murano-common-python26
@@ -3718,6 +3734,7 @@ projects:
       - gate-murano-conductor-pep8
       - gate-murano-conductor-python26
       - gate-murano-conductor-python27
+      - gate-murano-conductor-requirements
     gate:
       - gate-murano-conductor-pep8
       - gate-murano-conductor-python26
@@ -3734,6 +3751,7 @@ projects:
       - gate-murano-dashboard-pep8
       - gate-murano-dashboard-python26
       - gate-murano-dashboard-python27
+      - gate-murano-dashboard-requirements
     gate:
       - gate-murano-dashboard-pep8
       - gate-murano-dashboard-python26
@@ -3763,6 +3781,7 @@ projects:
       - gate-murano-metadataclient-python26
       - gate-murano-metadataclient-python27
       - gate-murano-metadataclient-python33
+      - gate-murano-metadataclient-requirements
     gate:
       - gate-murano-metadataclient-pep8
       - gate-murano-metadataclient-python26
@@ -3784,6 +3803,7 @@ projects:
       - gate-murano-repository-python26
       - gate-murano-repository-python27
       - gate-murano-repository-python33
+      - gate-murano-repository-requirements
     gate:
       - gate-murano-repository-pep8
       - gate-murano-repository-python26
@@ -4298,6 +4318,7 @@ projects:
       - gate-python-muranoclient-python26
       - gate-python-muranoclient-python27
       - gate-python-muranoclient-python33
+      - gate-python-muranoclient-requirements
     gate:
       - gate-python-muranoclient-pep8
       - gate-python-muranoclient-python26
