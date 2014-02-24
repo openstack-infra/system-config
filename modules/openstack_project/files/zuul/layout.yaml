@@ -442,6 +442,8 @@ jobs:
     branch: ^(?!stable/grizzly).*$
   - name: gate-openstack-manuals-tox-doc-publish-checkbuild
     branch: ^(?!stable/grizzly).*$
+  - name: ^gate-.*-tox-doc-publish-checkbuild$
+    success-pattern: http://docs-draft.openstack.org/{build.parameters[LOG_PATH]}/publish-docs/
   - name: ^gate-.*-tox-checkniceness$
     voting: false
 # Deprecated documentation targets:
