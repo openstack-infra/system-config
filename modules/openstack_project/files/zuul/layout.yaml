@@ -1182,22 +1182,13 @@ projects:
       - trove-propose-translation-update
 
 
-# TODO: add docs
   - name: openstack/tuskar
-    check:
-      - gate-tuskar-pep8
-      - gate-tuskar-python26
-      - gate-tuskar-python27
+    template:
+      - name: python-jobs
     check-tripleo:
       - check-tripleo-seed-precise
       - check-tripleo-undercloud-precise
       - check-tripleo-overcloud-precise
-    gate:
-      - gate-tuskar-pep8
-      - gate-tuskar-python26
-      - gate-tuskar-python27
-    post:
-      - tuskar-branch-tarball
     pre-release:
       - tuskar-tarball
     release:
