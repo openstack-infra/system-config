@@ -25,12 +25,15 @@ class openstack_project::puppetdb (
   }
 
   class { 'puppetdb::database::postgresql':
-    require         => [User['postgres'], Class['openstack_project::base'],],
+    require         => [User['postgres'],
+      Class['openstack_project::base'],],
   }
 
   class { '::puppetdb::server':
-    database_host   => 'localhost',
-    require         => [ User['postgres'], Class['puppetdb::database::postgresql'],],
+    database_host      => 'localhost',
+    ssl_listen_address => '0.0.0.0', # works for ipv6 too
+    require            => [ User['postgres'],
+      Class['puppetdb::database::postgresql'],],
   }
 
 }
