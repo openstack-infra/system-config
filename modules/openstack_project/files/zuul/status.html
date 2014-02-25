@@ -126,12 +126,9 @@ td.tree {
 .queue_good {
     color: #888888;
 }
-
 #graph-container img {
-    margin-left: 10px;
-}
-#graph-container img:first-of-type {
-    margin-left: 0px;
+    margin-left: 2px;
+    margin-right: 2px;
 }
 #zuul_info_container {
     margin-top: 12px;
@@ -346,6 +343,22 @@ $("#graph-container").append($(new Image()).addClass('graph').graphite({
     ],
     title: "Gerrit Events (per Hour)"
 }));
+
+$("#graph-container").append($(new Image()).addClass('graph').graphite({
+    from: "-24hours",
+    width: 334,
+    height: 180,
+    bgcolor: 'ffffff',
+    fgcolor: '000000',
+    target: [
+        "color(alias(stats.gauges.zuul.geard.queue.running, 'Running'), 'blue')",
+        "color(alias(stats.gauges.zuul.geard.queue.waiting, 'Waiting'), 'red')",
+        "color(alias(stats.gauges.zuul.geard.queue.total, 'Total Jobs'), '888888')",
+        "color(alias(stats.gauges.zuul.geard.workers, 'Workers'), 'green')",
+    ],
+    title: "Zuul Job Queue"
+}));
+
       </script>
     </div>
 
