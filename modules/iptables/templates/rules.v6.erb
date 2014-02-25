@@ -12,15 +12,15 @@
 # SNMP from openstack cacti
 -A openstack-INPUT -m udp -p udp --dport 161 -s 2001:4800:780d:0509:3bc3:d7f6:ff04:49de -j ACCEPT
 # Public TCP ports
-<% public_tcp_ports.each do |port| -%>
+<% @public_tcp_ports.each do |port| -%>
 -A openstack-INPUT -m state --state NEW -m tcp -p tcp --dport <%= port %> -j ACCEPT
 <% end -%>
 # Public UDP ports
-<% public_udp_ports.each do |port| -%>
+<% @public_udp_ports.each do |port| -%>
 -A openstack-INPUT -m udp -p udp --dport <%= port %> -j ACCEPT
 <% end -%>
 # Per-host rules
-<% rules6.each do |rule| -%>
+<% @rules6.each do |rule| -%>
 -A openstack-INPUT <%= rule %>
 <% end -%>
 -A openstack-INPUT -j REJECT --reject-with icmp6-adm-prohibited
