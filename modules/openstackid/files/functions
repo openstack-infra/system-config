@@ -47,10 +47,10 @@ function site_init() {
   chown -R $FILE_OWNER:$FILE_GROUP $target_dir
   umask 0022
   # link configuration files managed by puppet
-  ln -s /etc/openstackid/environment.php $target_dir/bootstrap/environment.php
-  ln -s /etc/openstackid/recaptcha.php $target_dir/app/config/packages/greggilbert/recaptcha/$LARAVEL_ENV/config.php
-  ln -s /etc/openstackid/database.php $target_dir/app/config/$LARAVEL_ENV/database.php
-  ln -s /etc/openstackid/log.php $target_dir/app/config/$LARAVEL_ENV/log.php
+  ln -sf /etc/openstackid/environment.php $target_dir/bootstrap/environment.php
+  ln -sf /etc/openstackid/recaptcha.php $target_dir/app/config/packages/greggilbert/recaptcha/$LARAVEL_ENV/config.php
+  ln -sf /etc/openstackid/database.php $target_dir/app/config/$LARAVEL_ENV/database.php
+  ln -sf /etc/openstackid/log.php $target_dir/app/config/$LARAVEL_ENV/log.php
   # convert app/storage into symlink and set permissions
   mv $target_dir/app/storage $SITE_ROOT/
   chmod 02770 $SITE_ROOT/storage
@@ -134,10 +134,10 @@ function site_update() {
   chown -R $FILE_OWNER:$FILE_GROUP $target_dir
   umask 0022
   # link configuration files managed by puppet
-  ln -s /etc/openstackid/environment.php $target_dir/bootstrap/environment.php
-  ln -s /etc/openstackid/recaptcha.php $target_dir/app/config/packages/greggilbert/recaptcha/$LARAVEL_ENV/config.php
-  ln -s /etc/openstackid/database.php $target_dir/app/config/$LARAVEL_ENV/database.php
-  ln -s /etc/openstackid/log.php $target_dir/app/config/$LARAVEL_ENV/log.php
+  ln -sf /etc/openstackid/environment.php $target_dir/bootstrap/environment.php
+  ln -sf /etc/openstackid/recaptcha.php $target_dir/app/config/packages/greggilbert/recaptcha/$LARAVEL_ENV/config.php
+  ln -sf /etc/openstackid/database.php $target_dir/app/config/$LARAVEL_ENV/database.php
+  ln -sf /etc/openstackid/log.php $target_dir/app/config/$LARAVEL_ENV/log.php
   # link shared app/storage directory
   rm -rf $target_dir/app/storage
   ln -s $SITE_ROOT/storage $target_dir/app
