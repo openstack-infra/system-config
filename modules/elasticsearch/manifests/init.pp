@@ -64,6 +64,9 @@ class elasticsearch (
     require   => [
       Package['java7-runtime-headless'],
       Exec['check_elasticsearch_sha1'],
+      File['/etc/elasticsearch/elasticsearch.yml'],
+      File['/etc/elasticsearch/default-mapping.json'],
+      File['/etc/default/elasticsearch'],
     ]
   }
 
@@ -74,7 +77,6 @@ class elasticsearch (
     owner   => 'root',
     group   => 'root',
     mode    => '0644',
-    require => Package['elasticsearch'],
   }
 
   file { '/etc/elasticsearch/templates':
@@ -82,7 +84,6 @@ class elasticsearch (
     owner   => 'root',
     group   => 'root',
     mode    => '0755',
-    require => Package['elasticsearch'],
   }
 
   file { '/etc/elasticsearch/default-mapping.json':
@@ -92,7 +93,6 @@ class elasticsearch (
     owner   => 'root',
     group   => 'root',
     mode    => '0644',
-    require => Package['elasticsearch'],
   }
 
   file { '/etc/default/elasticsearch':
@@ -102,16 +102,12 @@ class elasticsearch (
     owner   => 'root',
     group   => 'root',
     mode    => '0644',
-    require => Package['elasticsearch'],
   }
 
   service { 'elasticsearch':
     ensure    => running,
     require   => [
       Package['elasticsearch'],
-      File['/etc/elasticsearch/elasticsearch.yml'],
-      File['/etc/elasticsearch/default-mapping.json'],
-      File['/etc/default/elasticsearch'],
     ],
   }
 }
