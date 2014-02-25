@@ -1,0 +1,150 @@
+function print_help() {
+  echo "Usage: `basename $0` command [options]"
+  echo ""
+  echo "Commands:"
+  echo "  status [site]    return status information about site configurations"
+  echo "  init <site>      initialize site structure"
+  echo "  update <site>    update to new version"
+  echo ""
+}
+
+function site_init() {
+  if [ ! $1 ]; then
+    echo "ERROR: site parameter mandatory"
+    exit 1
+  fi
+  CONF_PATH="$CONF_DIR/conf.d/$1.conf"
+  if [ ! -f $CONF_PATH ]; then
+    echo "Site configuration not found: " $1
+    exit 1
+  fi
+  source $CONF_PATH
+  if [ -f "$SITE_ROOT/w/public/index.php" ]; then
+    echo "Cannot override an existing deployment: $SITE_ROOT/w"
+    exit 1
+  fi
+  # cleanup previous broken deployment
+  rm -rf $SITE_ROOT/slot0
+  # create directory structure
+  for dir in slot0 slot1; do
+    mkdir -p $SITE_ROOT/$dir
+    chown $FILE_OWNER:$FILE_GROUP $SITE_ROOT/$dir
+  done
+  target_dir="$SITE_ROOT/slot0"
+  # fetch and extract release tarball
+  umask 0027
+  if [[ $SOURCE_TARBALL == http* ]]; then
+    echo "Download from http!"
+    curl $SOURCE_TARBALL | tar -xzv -C $target_dir --strip-components 1 --no-same-permissions
+  else
+    echo "extract from local file system"
+    if [ ! -f $SOURCE_TARBALL ]; then
+      echo "Source tarball not found: $SOURCE_TARBALL"
+      exit 1
+    fi
+    tar -xzvf $SOURCE_TARBALL -C $target_dir --strip-components 1 --no-same-permissions
+  fi
+  chown -R $FILE_OWNER:$FILE_GROUP $target_dir
+  umask 0022
+  # link configuration files managed by puppet
+  ln -s /etc/openstackid/environment.php $target_dir/bootstrap/environment.php
+  ln -s /etc/openstackid/recaptcha.php $target_dir/app/config/packages/greggilbert/recaptcha/$LARAVEL_ENV/config.php
+  ln -s /etc/openstackid/database.php $target_dir/app/config/$LARAVEL_ENV/database.php
+  ln -s /etc/openstackid/log.php $target_dir/app/config/$LARAVEL_ENV/log.php
+  # convert app/storage into symlink and set permissions
+  mv $target_dir/app/storage $SITE_ROOT/
+  chmod 02770 $SITE_ROOT/storage
+  find $SITE_ROOT/storage/ -type d -exec chmod 0775 {} \;
+  find $SITE_ROOT/storage/ -type f -exec chmod 0664 {} \;
+  rm -rf $target_dir/app/storage
+  ln -s $SITE_ROOT/storage $target_dir/app
+  # populate application database
+  cd $target_dir
+  php artisan migrate --env=$LARAVEL_ENV
+  php artisan db:seed --env=$LARAVEL_ENV
+  # activate site
+  rm -rf $SITE_ROOT/w
+  ln -s $SITE_ROOT/slot0 $SITE_ROOT/w
+}
+
+function site_status() {
+  if [ ! $1 ]; then
+    echo "ERROR: site parameter mandatory"
+    exit 1
+  fi
+  CONF_PATH="$CONF_DIR/conf.d/$1.conf"
+  if [ ! -f $CONF_PATH ]; then
+    echo "Site configuration not found: $1"
+    exit 0
+  fi
+  source $CONF_PATH
+  if [ ! -f "$SITE_ROOT/w/public/index.php" ]; then
+    if [ -d "$SITE_ROOT/slot0" ]; then
+      echo "PENDING"
+    else
+      echo "N/A"
+      exit 1
+    fi
+  else
+    echo "INSTALLED"
+  fi
+}
+
+function site_update() {
+  if [ ! $1 ]; then
+    echo "ERROR: missing site parameter"
+    exit 1
+  fi
+  CONF_PATH="$CONF_DIR/conf.d/$1.conf"
+  if [ ! -f $CONF_PATH ]; then
+    echo "Site configuration not found: $1"
+    exit 0
+  fi
+  source $CONF_PATH
+  SITE_LINK=`readlink -f $SITE_ROOT/w`
+  ACTIVE_SLOT=`basename $SITE_LINK`
+  case $ACTIVE_SLOT in
+    slot0)
+      TARGET_SLOT='slot1'
+      ;;
+    slot1)
+      TARGET_SLOT='slot0'
+      ;;
+    *)
+      echo "Invalid active slot"
+      exit 1
+  esac
+  echo "Target slot: $TARGET_SLOT"
+  target_dir="$SITE_ROOT/$TARGET_SLOT"
+  rm -rf $target_dir
+  mkdir $target_dir
+  # fetch and extract release tarball
+  umask 0027
+  if [[ $SOURCE_TARBALL == http* ]]; then
+    echo "Download from http!"
+    curl $SOURCE_TARBALL | tar -xzv -C $target_dir --strip-components 1 --no-same-permissions
+  else
+    echo "extract from local file system"
+    if [ ! -f $SOURCE_TARBALL ]; then
+      echo "Source tarball not found: $SOURCE_TARBALL"
+      exit 1
+    fi
+    tar -xzvf $SOURCE_TARBALL -C $target_dir --strip-components 1 --no-same-permissions
+  fi
+  chown -R $FILE_OWNER:$FILE_GROUP $target_dir
+  umask 0022
+  # link configuration files managed by puppet
+  ln -s /etc/openstackid/environment.php $target_dir/bootstrap/environment.php
+  ln -s /etc/openstackid/recaptcha.php $target_dir/app/config/packages/greggilbert/recaptcha/$LARAVEL_ENV/config.php
+  ln -s /etc/openstackid/database.php $target_dir/app/config/$LARAVEL_ENV/database.php
+  ln -s /etc/openstackid/log.php $target_dir/app/config/$LARAVEL_ENV/log.php
+  # link shared app/storage directory
+  rm -rf $target_dir/app/storage
+  ln -s $SITE_ROOT/storage $target_dir/app
+  # populate application database
+  cd $target_dir
+  php artisan migrate --env=$LARAVEL_ENV
+  # activate site
+  rm -rf $SITE_ROOT/w
+  ln -s $target_dir $SITE_ROOT/w
+}
