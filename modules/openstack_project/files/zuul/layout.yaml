@@ -551,6 +551,8 @@ jobs:
     voting: false
   - name: gate-murano-dashboard-requirements
     voting: false
+  - name: check-oslo.test-dsvm-oslo.messaging
+    voting: false
   - name: gate-oslo.vmware-docs
     voting: false
   - name: gate-oslo.vmware-requirements
@@ -1958,6 +1960,7 @@ projects:
       - gate-tempest-dsvm-large-ops
       - gate-tempest-dsvm-neutron-large-ops
       - check-grenade-dsvm
+      - check-oslo.test-dsvm-oslo.messaging
     gate:
       - gate-devstack-dsvm-cells
       - gate-tempest-dsvm-full
@@ -2028,6 +2031,7 @@ projects:
     check:
       - gate-oslo.test-python33
       - gate-oslo.test-pypy
+      - check-oslo.test-dsvm-oslo.messaging
     gate:
       - gate-oslo.test-python33
       - gate-oslo.test-pypy
