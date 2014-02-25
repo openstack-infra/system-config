@@ -65,7 +65,8 @@ class openstack_project::puppetmaster (
 # Enable puppetdb
 
   class { 'puppetdb::master::config':
-    puppetdb_server => 'puppetdb.openstack.org',
+    puppetdb_server     => 'puppetdb.openstack.org',
+    puppet_service_name => 'apache2',
   }
 
 }
