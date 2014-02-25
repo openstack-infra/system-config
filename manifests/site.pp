@@ -380,7 +380,7 @@ node /^logstash-worker\d+\.openstack\.org$/ {
   }
 }
 
-node /^elasticsearch\d*\.openstack\.org$/ {
+node /^elasticsearch\d?\.openstack\.org$/ {
   class { 'openstack_project::elasticsearch_node':
     sysadmins             => hiera('sysadmins'),
     elasticsearch_nodes   => $elasticsearch_nodes,
@@ -404,6 +404,14 @@ node /^elasticsearch\d*\.openstack\.org$/ {
       'logstash-worker16.openstack.org',
     ],
     discover_nodes        => $elasticsearch_nodes,
+    heap_size             => '16g',
+  }
+}
+
+node /^elasticsearch\d\d\.openstack\.org$/ {
+  class { 'openstack_project::server':
+    iptables_public_tcp_ports => [22],
+    sysadmins                 => hiera('sysadmins'),
   }
 }
 
