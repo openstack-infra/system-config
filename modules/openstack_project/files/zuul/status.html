@@ -359,6 +359,21 @@ $("#graph-container").append($(new Image()).addClass('graph').graphite({
     title: "Zuul Job Queue"
 }));
 
+$("#graph-container").append($(new Image()).addClass('graph').graphite({
+    from: "-24hours",
+    width: 334,
+    height: 180,
+    bgcolor: 'ffffff',
+    fgcolor: '000000',
+    target: [
+        "color(alias(stats.gauges.logstash.geard.queue.running, 'Running'), 'blue')",
+        "color(alias(stats.gauges.logstash.geard.queue.waiting, 'Waiting'), 'red')",
+        "color(alias(stats.gauges.logstash.geard.queue.total, 'Total Jobs'), '888888')",
+        "color(alias(stats.gauges.logstash.geard.workers, 'Workers'), 'green')",
+    ],
+    title: "Logstash Job Queue"
+}));
+
       </script>
     </div>
 
