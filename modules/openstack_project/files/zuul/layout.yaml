@@ -259,6 +259,16 @@ project-templates:
     post:
       - 'gate-{name}-requirements'
 
+  - name: pypi-release
+    pre-release:
+      - {name}-tarball
+    release:
+      - {name}-tarball:
+        - {name}-pypi-upload:
+          - post-mirror-python26
+          - post-mirror-python27
+          - post-mirror-python33
+
   - name: periodic-grizzly
     periodic-stable:
       - 'periodic-{name}-docs-grizzly'
@@ -657,6 +667,8 @@ projects:
       - cinder-propose-translation-update
 
   - name: openstack/cliff
+    template:
+      - name: pypi-release
     check:
       - gate-cliff-pep8
       - gate-cliff-python26
@@ -681,14 +693,8 @@ projects:
       - cliff-branch-tarball
       - hook-cliff-rtfd
     pre-release:
-      - cliff-tarball
       - hook-cliff-rtfd
     release:
-      - cliff-tarball:
-        - cliff-pypi-upload:
-          - post-mirror-python26
-          - post-mirror-python27
-          - post-mirror-python33
       - hook-cliff-rtfd
 
   - name: openstack/gantt
@@ -1022,6 +1028,8 @@ projects:
       - nova-propose-translation-update
 
   - name: openstack/pycadf
+    template:
+      - name: pypi-release
     check:
       - gate-pycadf-pep8
       - gate-pycadf-python26
@@ -1032,19 +1040,13 @@ projects:
       - gate-pycadf-python27
     post:
       - pycadf-branch-tarball
-    pre-release:
-      - pycadf-tarball
-    release:
-      - pycadf-tarball:
-        - pycadf-pypi-upload:
-          - post-mirror-python26
-          - post-mirror-python27
 
   - name: openstack/savanna
     template:
       - name: python-jobs
       - name: openstack-server-publish-jobs
       - name: check-requirements
+      - name: pypi-release
     check:
       - gate-savanna-pylint
       - check-tempest-dsvm-savanna-full
@@ -1058,20 +1060,16 @@ projects:
       - hook-savanna-rtfd
       - savanna-upstream-translation-update
     pre-release:
-      - savanna-tarball
       - hook-savanna-rtfd
     release:
-      - savanna-tarball:
-        - savanna-pypi-upload:
-          - post-mirror-python26
-          - post-mirror-python27
-          - post-mirror-python33
       - hook-savanna-rtfd
       - savanna-merge-release-tags
     periodic:
       - savanna-propose-translation-update
 
   - name: openstack/stevedore
+    template:
+      - name: pypi-release
     check:
       - gate-stevedore-pep8
       - gate-stevedore-python26
@@ -1086,14 +1084,8 @@ projects:
       - stevedore-branch-tarball
       - hook-stevedore-rtfd
     pre-release:
-      - stevedore-tarball
       - hook-stevedore-rtfd
     release:
-      - stevedore-tarball:
-        - stevedore-pypi-upload:
-          - post-mirror-python26
-          - post-mirror-python27
-          - post-mirror-python33
       - hook-stevedore-rtfd
 
   - name: openstack/swift
@@ -1136,6 +1128,7 @@ projects:
     template:
       - name: python-jobs
       - name: openstack-server-publish-jobs
+      - name: pypi-release
     check:
       - gate-taskflow-python33
       - gate-taskflow-tox-py26-sa7-mysql
@@ -1144,14 +1137,6 @@ projects:
       - gate-taskflow-python33
       - gate-taskflow-tox-py26-sa7-mysql
       - gate-taskflow-tox-py27-sa8-mysql
-    pre-release:
-      - taskflow-tarball
-    release:
-      - taskflow-tarball:
-        - taskflow-pypi-upload:
-          - post-mirror-python26
-          - post-mirror-python27
-          - post-mirror-python33
 
   - name: openstack/trove
     template:
@@ -1193,6 +1178,7 @@ projects:
       - name: python-jobs
       - name: openstack-client-publish-jobs
       - name: check-requirements
+      - name: pypi-release
     check:
       - gate-python-ceilometerclient-python33
       - gate-python-ceilometerclient-pypy
@@ -1212,20 +1198,13 @@ projects:
       - gate-tempest-dsvm-neutron
       - gate-tempest-dsvm-large-ops
       - gate-tempest-dsvm-neutron-large-ops
-    pre-release:
-      - python-ceilometerclient-tarball
-    release:
-      - python-ceilometerclient-tarball:
-        - python-ceilometerclient-pypi-upload:
-          - post-mirror-python26
-          - post-mirror-python27
-          - post-mirror-python33
 
   - name: openstack/python-cinderclient
     template:
       - name: python-jobs
       - name: openstack-client-publish-jobs
       - name: check-requirements
+      - name: pypi-release
     check:
       - gate-python-cinderclient-python33
       - gate-python-cinderclient-pypy
@@ -1253,20 +1232,13 @@ projects:
       - check-tripleo-seed-precise
       - check-tripleo-undercloud-precise
       - check-tripleo-overcloud-precise
-    pre-release:
-      - python-cinderclient-tarball
-    release:
-      - python-cinderclient-tarball:
-        - python-cinderclient-pypi-upload:
-          - post-mirror-python26
-          - post-mirror-python27
-          - post-mirror-python33
 
   - name: openstack/python-ganttclient
     template:
       - name: python-jobs
       - name: openstack-client-publish-jobs
       - name: check-requirements
+      - name: pypi-release
     check:
       - check-devstack-dsvm-cells
       - check-tempest-dsvm-full
@@ -1290,19 +1262,13 @@ projects:
       - check-tripleo-seed-precise
       - check-tripleo-undercloud-precise
       - check-tripleo-overcloud-precise
-    pre-release:
-      - python-ganttclient-tarball
-    release:
-      - python-ganttclient-tarball:
-        - python-ganttclient-pypi-upload:
-          - post-mirror-python26
-          - post-mirror-python27
 
   - name: openstack/python-glanceclient
     template:
       - name: python-jobs
       - name: openstack-client-publish-jobs
       - name: check-requirements
+      - name: pypi-release
     check:
       - gate-python-glanceclient-python33
       - check-devstack-dsvm-cells
@@ -1327,19 +1293,12 @@ projects:
       - check-tripleo-seed-precise
       - check-tripleo-undercloud-precise
       - check-tripleo-overcloud-precise
-    pre-release:
-      - python-glanceclient-tarball
-    release:
-      - python-glanceclient-tarball:
-        - python-glanceclient-pypi-upload:
-          - post-mirror-python26
-          - post-mirror-python27
-          - post-mirror-python33
 
 #TODO: add docs
   - name: openstack/python-heatclient
     template:
       - name: check-requirements
+      - name: pypi-release
     check:
       - gate-python-heatclient-pep8
       - gate-python-heatclient-python26
@@ -1371,18 +1330,13 @@ projects:
       - check-tripleo-seed-precise
       - check-tripleo-undercloud-precise
       - check-tripleo-overcloud-precise
-    pre-release:
-      - python-heatclient-tarball
     release:
-      - python-heatclient-tarball:
-        - python-heatclient-pypi-upload:
-          - post-mirror-python26
-          - post-mirror-python27
-          - post-mirror-python33
       - python-heatclient-docs
 
 # TODO: add docs
   - name: openstack/python-ironicclient
+    template:
+      - name: pypi-release
     check:
       - gate-python-ironicclient-pep8
       - gate-python-ironicclient-python26
@@ -1398,20 +1352,13 @@ projects:
     post:
       - python-ironicclient-branch-tarball
       - python-ironicclient-coverage
-    pre-release:
-      - python-ironicclient-tarball
-    release:
-      - python-ironicclient-tarball:
-        - python-ironicclient-pypi-upload:
-          - post-mirror-python26
-          - post-mirror-python27
-          - post-mirror-python33
 
   - name: openstack/python-keystoneclient
     template:
       - name: python-jobs
       - name: openstack-client-publish-jobs
       - name: check-requirements
+      - name: pypi-release
     check:
       - gate-python-keystoneclient-python33
       - check-devstack-dsvm-cells
@@ -1437,18 +1384,11 @@ projects:
       - check-tripleo-seed-precise
       - check-tripleo-undercloud-precise
       - check-tripleo-overcloud-precise
-    pre-release:
-      - python-keystoneclient-tarball
-    release:
-      - python-keystoneclient-tarball:
-        - python-keystoneclient-pypi-upload:
-          - post-mirror-python26
-          - post-mirror-python27
-          - post-mirror-python33
 
   - name: openstack/python-marconiclient
     template:
       - name: check-requirements
+      - name: pypi-release
     check:
       - gate-python-marconiclient-pep8
       - gate-python-marconiclient-python26
@@ -1463,20 +1403,13 @@ projects:
       - gate-python-marconiclient-pypy
     post:
       - python-marconiclient-branch-tarball
-    pre-release:
-      - python-marconiclient-tarball
-    release:
-      - python-marconiclient-tarball:
-        - python-marconiclient-pypi-upload:
-          - post-mirror-python26
-          - post-mirror-python27
-          - post-mirror-python33
 
   - name: openstack/python-neutronclient
     template:
       - name: python-jobs
       - name: openstack-client-publish-jobs
       - name: check-requirements
+      - name: pypi-release
     check:
       - gate-python-neutronclient-python33
       - gate-python-neutronclient-pypy
@@ -1509,20 +1442,13 @@ projects:
       - check-tripleo-seed-precise
       - check-tripleo-undercloud-precise
       - check-tripleo-overcloud-precise
-    pre-release:
-      - python-neutronclient-tarball
-    release:
-      - python-neutronclient-tarball:
-        - python-neutronclient-pypi-upload:
-          - post-mirror-python26
-          - post-mirror-python27
-          - post-mirror-python33
 
   - name: openstack/python-novaclient
     template:
       - name: python-jobs
       - name: openstack-client-publish-jobs
       - name: check-requirements
+      - name: pypi-release
     check:
       - gate-python-novaclient-python33
       - gate-python-novaclient-pypy
@@ -1550,39 +1476,25 @@ projects:
       - check-tripleo-seed-precise
       - check-tripleo-undercloud-precise
       - check-tripleo-overcloud-precise
-    pre-release:
-      - python-novaclient-tarball
-    release:
-      - python-novaclient-tarball:
-        - python-novaclient-pypi-upload:
-          - post-mirror-python26
-          - post-mirror-python27
-          - post-mirror-python33
 
   - name: openstack/python-openstackclient
     template:
       - name: python-jobs
       - name: openstack-client-publish-jobs
       - name: check-requirements
+      - name: pypi-release
     check:
       - gate-python-openstackclient-python33
       - gate-tempest-dsvm-full
     gate:
       - gate-tempest-dsvm-full
-    pre-release:
-      - python-openstackclient-tarball
-    release:
-      - python-openstackclient-tarball:
-        - python-openstackclient-pypi-upload:
-          - post-mirror-python26
-          - post-mirror-python27
-          - post-mirror-python33
 
   - name: openstack/python-savannaclient
     template:
       - name: python-jobs
       - name: openstack-server-publish-jobs
       - name: check-requirements
+      - name: pypi-release
     check:
       - check-tempest-dsvm-savanna-full
       - check-tempest-dsvm-savanna-postgres
@@ -1591,14 +1503,6 @@ projects:
       - gate-tempest-dsvm-savanna-full
       - gate-tempest-dsvm-savanna-postgres
       - gate-tempest-dsvm-savanna-neutron
-    pre-release:
-       - python-savannaclient-tarball
-    release:
-       - python-savannaclient-tarball:
-         - python-savannaclient-pypi-upload:
-           - post-mirror-python26
-           - post-mirror-python27
-           - post-mirror-python33
     experimental:
        - gate-python-savannaclient-python33
        - gate-python-savannaclient-pypy
@@ -1608,6 +1512,7 @@ projects:
       - name: python-jobs
       - name: openstack-client-publish-jobs
       - name: check-requirements
+      - name: pypi-release
     check:
       - gate-python-swiftclient-python33
       - gate-python-swiftclient-pypy
@@ -1632,19 +1537,12 @@ projects:
       - check-tripleo-seed-precise
       - check-tripleo-undercloud-precise
       - check-tripleo-overcloud-precise
-    pre-release:
-      - python-swiftclient-tarball
-    release:
-      - python-swiftclient-tarball:
-        - python-swiftclient-pypi-upload:
-          - post-mirror-python26
-          - post-mirror-python27
-          - post-mirror-python33
 
 #TODO: add docs
   - name: openstack/python-troveclient
     template:
       - name: check-requirements
+      - name: pypi-release
     check:
       - gate-python-troveclient-pep8
       - gate-python-troveclient-python26
@@ -1659,14 +1557,6 @@ projects:
       - gate-python-troveclient-pypy
     post:
       - python-troveclient-branch-tarball
-    pre-release:
-      - python-troveclient-tarball
-    release:
-      - python-troveclient-tarball:
-        - python-troveclient-pypi-upload:
-          - post-mirror-python26
-          - post-mirror-python27
-          - post-mirror-python33
 
   - name: openstack/python-tuskarclient
     template:
@@ -1689,6 +1579,7 @@ projects:
   - name: openstack/diskimage-builder
     template:
       - name: check-requirements
+      - name: pypi-release
     check:
       - gate-diskimage-builder-pep8
       - gate-diskimage-builder-python26
@@ -1704,14 +1595,6 @@ projects:
     post:
       - diskimage-builder-coverage
       - diskimage-builder-branch-tarball
-    pre-release:
-      - diskimage-builder-tarball
-    release:
-      - diskimage-builder-tarball:
-        - diskimage-builder-pypi-upload:
-          - post-mirror-python26
-          - post-mirror-python27
-          - post-mirror-python33
 
   - name: openstack/django_openstack_auth
     template:
@@ -1746,6 +1629,7 @@ projects:
   - name: openstack/heat-cfntools
     template:
       - name: check-requirements
+      - name: pypi-release
     check:
       - gate-heat-cfntools-pep8
       - gate-heat-cfntools-python26
@@ -1757,14 +1641,7 @@ projects:
     post:
       - heat-cfntools-branch-tarball
       - heat-cfntools-coverage
-    pre-release:
-      - heat-cfntools-tarball
     release:
-      - heat-cfntools-tarball:
-        - heat-cfntools-pypi-upload:
-          - post-mirror-python26
-          - post-mirror-python27
-          - post-mirror-python33
       - heat-cfntools-docs
 
   - name: openstack/heat-templates
@@ -1786,18 +1663,12 @@ projects:
       - gate-noop
 
   - name: openstack/openstack-doc-tools
+    template:
+      - name: pypi-release
     check:
       - gate-openstack-doc-tools-pep8
     gate:
       - gate-openstack-doc-tools-pep8
-    pre-release:
-      - openstack-doc-tools-tarball
-    release:
-      - openstack-doc-tools-tarball:
-        - openstack-doc-tools-pypi-upload:
-          - post-mirror-python26
-          - post-mirror-python27
-          - post-mirror-python33
 
   - name: openstack/openstack-planet
     check:
@@ -1885,20 +1756,13 @@ projects:
   - name: openstack/oslosphinx
     template:
       - name: check-requirements
+      - name: pypi-release
     check:
       - gate-oslosphinx-pep8
     gate:
       - gate-oslosphinx-pep8
     post:
       - oslosphinx-branch-tarball
-    pre-release:
-      - oslosphinx-tarball
-    release:
-      - oslosphinx-tarball:
-        - oslosphinx-pypi-upload:
-          - post-mirror-python26
-          - post-mirror-python27
-          - post-mirror-python33
 
   - name: openstack/oslo-incubator
     template:
@@ -1915,6 +1779,7 @@ projects:
       - name: python-jobs
       - name: openstack-server-publish-jobs
       - name: check-requirements
+      - name: pypi-release
     check:
       - gate-oslo.config-python33
       - check-devstack-dsvm-cells
@@ -1932,18 +1797,10 @@ projects:
       - gate-tempest-dsvm-large-ops
       - gate-tempest-dsvm-neutron-large-ops
       - gate-grenade-dsvm
-    pre-release:
-      - oslo.config-tarball
     experimental-tripleo:
       - check-tripleo-seed-precise
       - check-tripleo-undercloud-precise
       - check-tripleo-overcloud-precise
-    release:
-      - oslo.config-tarball:
-        - oslo.config-pypi-upload:
-          - post-mirror-python26
-          - post-mirror-python27
-          - post-mirror-python33
 
   - name: openstack/oslo.messaging
     template:
@@ -1982,6 +1839,7 @@ projects:
   - name: openstack/oslo.rootwrap
     template:
       - name: check-requirements
+      - name: pypi-release
     check:
       - gate-oslo.rootwrap-pep8
       - gate-oslo.rootwrap-python26
@@ -2011,40 +1869,26 @@ projects:
       - check-tripleo-seed-precise
       - check-tripleo-undercloud-precise
       - check-tripleo-overcloud-precise
-    pre-release:
-      - oslo.rootwrap-tarball
-    release:
-      - oslo.rootwrap-tarball:
-        - oslo.rootwrap-pypi-upload:
-          - post-mirror-python26
-          - post-mirror-python27
-          - post-mirror-python33
 
   - name: openstack/oslo.test
     template:
       - name: python-jobs
       - name: openstack-server-publish-jobs
       - name: check-requirements
+      - name: pypi-release
     check:
       - gate-oslo.test-python33
       - gate-oslo.test-pypy
     gate:
       - gate-oslo.test-python33
       - gate-oslo.test-pypy
-    pre-release:
-      - oslo.test-tarball
-    release:
-      - oslo.test-tarball:
-        - oslo.test-pypi-upload:
-          - post-mirror-python26
-          - post-mirror-python27
-          - post-mirror-python33
 
   - name: openstack/oslo.version
     template:
       - name: python-jobs
       - name: openstack-server-publish-jobs
       - name: check-requirements
+      - name: pypi-release
     check:
       - gate-oslo.version-pypy
       - gate-oslo.version-python33
@@ -2064,29 +1908,15 @@ projects:
       - check-tripleo-seed-precise
       - check-tripleo-undercloud-precise
       - check-tripleo-overcloud-precise
-    pre-release:
-      - oslo.version-tarball
-    release:
-      - oslo.version-tarball:
-        - oslo.version-pypi-upload:
-          - post-mirror-python26
-          - post-mirror-python27
 
   - name: openstack/oslo.vmware
     template:
       - name: python-jobs
       - name: openstack-server-publish-jobs
+      - name: pypi-release
     check:
       - gate-oslo.vmware-requirements
       - gate-oslo.vmware-python33
-    pre-release:
-      - oslo.vmware-tarball
-    release:
-      - oslo.vmware-tarball:
-        - oslo.vmware-pypi-upload:
-          - post-mirror-python26
-          - post-mirror-python27
-          - post-mirror-python33
 
   - name: openstack/requirements
     check:
@@ -2134,6 +1964,7 @@ projects:
   - name: openstack/savanna-dashboard
     template:
       - name: check-requirements
+      - name: pypi-release
     check:
       - gate-savanna-dashboard-pep8
       - gate-savanna-dashboard-python26
@@ -2145,14 +1976,6 @@ projects:
     post:
       - savanna-dashboard-branch-tarball
       - savanna-dashboard-coverage
-    pre-release:
-      - savanna-dashboard-tarball
-    release:
-      - savanna-dashboard-tarball:
-        - savanna-dashboard-pypi-upload:
-          - post-mirror-python26
-          - post-mirror-python27
-          - post-mirror-python33
 
 # TODO: add docs
   - name: openstack/savanna-extra
@@ -2173,23 +1996,18 @@ projects:
   - name: openstack/savanna-image-elements
     template:
       - name: check-requirements
+      - name: pypi-release
     check:
       - gate-savanna-image-elements-pep8
     gate:
       - gate-savanna-image-elements-pep8
     post:
       - savanna-image-elements-branch-tarball
-    pre-release:
-      - savanna-image-elements-tarball
-    release:
-      - savanna-image-elements-tarball:
-        - savanna-image-elements-pypi-upload:
-          - post-mirror-python26
-          - post-mirror-python27
-          - post-mirror-python33
 
 #TODO: add docs
   - name: openstack/swift-bench
+    template:
+      - name: pypi-release
     check:
       - gate-swift-bench-pep8
       - gate-swift-bench-python26
@@ -2200,14 +2018,6 @@ projects:
       - gate-swift-bench-python27
     post:
       - swift-bench-branch-tarball
-    pre-release:
-      - swift-bench-tarball
-    release:
-      - swift-bench-tarball:
-        - swift-bench-pypi-upload:
-          - post-mirror-python26
-          - post-mirror-python27
-          - post-mirror-python33
 
   # This is not strictly necessary; there is currently a transitive
   # relationship between g-t-dsvm,
@@ -2302,6 +2112,8 @@ projects:
       - tripleo-heat-templates-tarball
 
   - name: openstack/tripleo-image-elements
+    template:
+      - name: pypi-release
     check:
       - gate-noop
     check-tripleo:
@@ -2312,14 +2124,6 @@ projects:
       - gate-noop
     post:
       - tripleo-image-elements-branch-tarball
-    pre-release:
-      - tripleo-image-elements-tarball
-    release:
-      - tripleo-image-elements-tarball:
-        - tripleo-image-elements-pypi-upload:
-          - post-mirror-python26
-          - post-mirror-python27
-          - post-mirror-python33
 
   - name: openstack/tripleo-incubator
     check:
@@ -2528,6 +2332,7 @@ projects:
   - name: openstack-dev/hacking
     template:
       - name: python-jobs
+      - name: pypi-release
     check:
       - gate-hacking-python33
       - gate-hacking-pypy
@@ -2540,14 +2345,8 @@ projects:
       - hacking-docs
     pre-release:
       - hacking-docs
-      - hacking-tarball
     release:
       - hacking-docs
-      - hacking-tarball:
-        - hacking-pypi-upload:
-          - post-mirror-python26
-          - post-mirror-python27
-          - post-mirror-python33
 
   - name: openstack-dev/heat-cfnclient
     check:
@@ -2584,6 +2383,7 @@ projects:
   - name: openstack-dev/pbr
     template:
       - name: python-jobs
+      - name: pypi-release
     check:
       - gate-pbr-python33
       - gate-pbr-pypy
@@ -2617,14 +2417,8 @@ projects:
       - pbr-docs
     pre-release:
       - pbr-docs
-      - pbr-tarball
     release:
       - pbr-docs
-      - pbr-tarball:
-        - pbr-pypi-upload:
-          - post-mirror-python26
-          - post-mirror-python27
-          - post-mirror-python33
 
   - name: openstack-dev/sandbox
     check:
@@ -2724,18 +2518,13 @@ projects:
   - name: openstack-infra/gear
     template:
       - name: python-jobs
+      - name: pypi-release
     post:
       - hook-gear-rtfd
     pre-release:
-      - gear-tarball
       - hook-gear-rtfd
     release:
       - hook-gear-rtfd
-      - gear-tarball:
-        - gear-pypi-upload:
-          - post-mirror-python26
-          - post-mirror-python27
-          - post-mirror-python33
 
   - name: openstack-infra/gearman-plugin
     check:
@@ -2760,34 +2549,22 @@ projects:
       - gerrit-package-buck
 
   - name: openstack-infra/gerritbot
+    template:
+      - name: pypi-release
     check:
       - gate-gerritbot-pep8
     gate:
       - gate-gerritbot-pep8
     post:
       - gerritbot-branch-tarball
-    pre-release:
-      - gerritbot-tarball
-    release:
-      - gerritbot-tarball:
-        - gerritbot-pypi-upload:
-          - post-mirror-python26
-          - post-mirror-python27
-          - post-mirror-python33
 
   - name: openstack-infra/gerritlib
+    template:
+      - name: pypi-release
     check:
       - gate-gerritlib-pep8
     gate:
       - gate-gerritlib-pep8
-    pre-release:
-      - gerritlib-tarball
-    release:
-      - gerritlib-tarball:
-        - gerritlib-pypi-upload:
-          - post-mirror-python26
-          - post-mirror-python27
-          - post-mirror-python33
 
   - name: openstack-infra/gitdm
     check:
@@ -2798,6 +2575,8 @@ projects:
       - periodic-gitdm
 
   - name: openstack-infra/git-review
+    template:
+      - name: pypi-release
     check:
       - gate-git-review-pep8
       - gate-git-review-python26
@@ -2810,14 +2589,6 @@ projects:
       - gate-git-review-python33
     post:
       - git-review-branch-tarball
-    pre-release:
-      - git-review-tarball
-    release:
-      - git-review-tarball:
-        - git-review-pypi-upload:
-          - post-mirror-python26
-          - post-mirror-python27
-          - post-mirror-python33
 
   - name: openstack-infra/groups
     check:
@@ -2830,34 +2601,21 @@ projects:
       - groups-release-master
 
   - name: openstack-infra/jeepyb
+    template:
+      - name: pypi-release
     check:
       - gate-jeepyb-pep8
     gate:
       - gate-jeepyb-pep8
-    pre-release:
-      - jeepyb-tarball
-    release:
-      - jeepyb-tarball:
-        - jeepyb-pypi-upload:
-          - post-mirror-python26
-          - post-mirror-python27
-          - post-mirror-python33
 
   - name: openstack-infra/jenkins-job-builder
     template:
       - name: python-jobs
+      - name: pypi-release
     check:
       - jenkins-job-builder-compare-xml
     post:
       - jenkins-job-builder-docs
-    pre-release:
-      - jenkins-job-builder-tarball
-    release:
-      - jenkins-job-builder-tarball:
-        - jenkins-job-builder-pypi-upload:
-          - post-mirror-python26
-          - post-mirror-python27
-          - post-mirror-python33
 
   - name: openstack-infra/lodgeit
     check:
@@ -2872,36 +2630,24 @@ projects:
       - gate-noop
 
   - name: openstack-infra/nodepool
+    template:
+      - name: pypi-release
     check:
       - gate-nodepool-pep8
     gate:
       - gate-nodepool-pep8
     post:
       - nodepool-branch-tarball
-    pre-release:
-      - nodepool-tarball
-    release:
-      - nodepool-tarball:
-        - nodepool-pypi-upload:
-          - post-mirror-python26
-          - post-mirror-python27
-          - post-mirror-python33
 
   - name: openstack-infra/nose-html-output
+    template:
+      - name: pypi-release
     check:
       - gate-noop
     gate:
       - gate-noop
     post:
       - nose-html-output-branch-tarball
-    pre-release:
-      - nose-html-output-tarball
-    release:
-      - nose-html-output-tarball:
-        - nose-html-output-pypi-upload:
-          - post-mirror-python26
-          - post-mirror-python27
-          - post-mirror-python33
 
   - name: openstack-infra/odsreg
     check:
@@ -2958,6 +2704,8 @@ projects:
       - gate-noop
 
   - name: openstack-infra/pypi-mirror
+    template:
+      - name: pypi-release
     check:
       - gate-pypi-mirror-pep8
       - check-requirements-integration-dsvm
@@ -2968,14 +2716,6 @@ projects:
       - post-mirror-python26
       - post-mirror-python27
       - post-mirror-python33
-    pre-release:
-      - pypi-mirror-tarball
-    release:
-      - pypi-mirror-tarball:
-        - pypi-mirror-pypi-upload:
-          - post-mirror-python26
-          - post-mirror-python27
-          - post-mirror-python33
 
   - name: openstack-infra/releasestatus
     check:
@@ -2997,6 +2737,8 @@ projects:
       - gate-release-tools-pypy
 
   - name: openstack-infra/reviewday
+    template:
+      - name: pypi-release
     check:
       - gate-reviewday-pep8
     gate:
@@ -3004,62 +2746,36 @@ projects:
     post:
       - reviewday-branch-tarball
       - reviewday-coverage
-    pre-release:
-      - reviewday-tarball
-    release:
-      - reviewday-tarball:
-        - reviewday-pypi-upload:
-          - post-mirror-python26
-          - post-mirror-python27
-          - post-mirror-python33
 
   - name: openstack-infra/reviewstats
     template:
       - name: python-jobs
+      - name: pypi-release
     check:
       - gate-reviewstats-python33
     gate:
       - gate-reviewstats-python33
-    pre-release:
-      - reviewstats-tarball
-    release:
-      - reviewstats-tarball:
-        - reviewstats-pypi-upload:
-          - post-mirror-python26
-          - post-mirror-python27
-          - post-mirror-python33
 
   - name: openstack-infra/statusbot
+    template:
+      - name: pypi-release
     check:
       - gate-statusbot-pep8
     gate:
       - gate-statusbot-pep8
     post:
       - statusbot-branch-tarball
-    pre-release:
-      - statusbot-tarball
-    release:
-      - statusbot-tarball:
-        - statusbot-pypi-upload:
-          - post-mirror-python26
-          - post-mirror-python27
-          - post-mirror-python33
 
   - name: openstack-infra/storyboard
     template:
       - name: python-jobs
+      - name: pypi-release
     post:
       - storyboard-docs
     pre-release:
       - storyboard-docs
-      - storyboard-tarball
     release:
       - storyboard-docs
-      - storyboard-tarball:
-        - storyboard-pypi-upload:
-          - post-mirror-python26
-          - post-mirror-python27
-          - post-mirror-python33
 
   - name: openstack-infra/storyboard-webclient
     check:
@@ -3095,20 +2811,15 @@ projects:
   - name: openstack-infra/zuul
     template:
       - name: python-jobs
+      - name: pypi-release
     check:
       - dev-zuul-coverage
     post:
       - zuul-docs
     pre-release:
       - zuul-docs
-      - zuul-tarball
     release:
       - zuul-docs
-      - zuul-tarball:
-        - zuul-pypi-upload:
-          - post-mirror-python26
-          - post-mirror-python27
-          - post-mirror-python33
     periodic:
       - periodic-test
 
@@ -3143,6 +2854,8 @@ projects:
       - barbican-branch-tarball
 
   - name: stackforge/billingstack
+    template:
+      - name: pypi-release
     check:
       - gate-billingstack-pep8
       - gate-billingstack-python26
@@ -3155,16 +2868,10 @@ projects:
       - hook-billingstack-rtfd
       - billingstack-coverage
       - billingstack-branch-tarball
-    pre-release:
-      - billingstack-tarball
-    release:
-      - billingstack-tarball:
-        - billingstack-pypi-upload:
-          - post-mirror-python26
-          - post-mirror-python27
-          - post-mirror-python33
 
   - name: stackforge/bindep
+    template:
+      - name: pypi-release
     check:
       - gate-bindep-pep8
       - gate-bindep-python26
@@ -3176,14 +2883,6 @@ projects:
     post:
       - bindep-branch-tarball
       - bindep-coverage
-    pre-release:
-      - bindep-tarball
-    release:
-      - bindep-tarball:
-        - bindep-pypi-upload:
-          - post-mirror-python26
-          - post-mirror-python27
-          - post-mirror-python33
 
   - name: stackforge/bufunfa
     check:
@@ -3399,6 +3098,8 @@ projects:
       - gate-cookbook-openstack-integration-test-chef-unit
 
   - name: stackforge/designate
+    template:
+      - name: pypi-release
     check:
       - gate-designate-pep8
       - gate-designate-python26
@@ -3411,14 +3112,6 @@ projects:
       - hook-designate-rtfd
       - designate-coverage
       - designate-branch-tarball
-    pre-release:
-      - designate-tarball
-    release:
-      - designate-tarball:
-        - designate-pypi-upload:
-          - post-mirror-python26
-          - post-mirror-python27
-          - post-mirror-python33
 
   - name: stackforge/entropy
     check:
@@ -3565,6 +3258,8 @@ projects:
       - milk-coverage
 
   - name: stackforge/mistral
+    template:
+      - name: pypi-release
     check:
       - gate-mistral-pep8
       - gate-mistral-python26
@@ -3578,16 +3273,10 @@ projects:
       - gate-mistral-docs
     post:
       - mistral-branch-tarball
-    pre-release:
-      - mistral-tarball
-    release:
-      - mistral-tarball:
-        - mistral-pypi-upload:
-          - post-mirror-python26
-          - post-mirror-python27
-          - post-mirror-python33
 
   - name: stackforge/mistral-extra
+    template:
+      - name: pypi-release
     check:
       - gate-mistral-extra-pep8
       - gate-mistral-extra-python26
@@ -3601,16 +3290,10 @@ projects:
       - gate-mistral-extra-docs
     post:
       - mistral-extra-branch-tarball
-    pre-release:
-      - mistral-extra-tarball
-    release:
-      - mistral-extra-tarball:
-        - mistral-extra-pypi-upload:
-          - post-mirror-python26
-          - post-mirror-python27
-          - post-mirror-python33
 
   - name: stackforge/python-mistralclient
+    template:
+      - name: pypi-release
     check:
       - gate-python-mistralclient-pep8
       - gate-python-mistralclient-python26
@@ -3624,14 +3307,6 @@ projects:
       - gate-python-mistralclient-docs
     post:
       - python-mistralclient-branch-tarball
-    pre-release:
-      - python-mistralclient-tarball
-    release:
-      - python-mistralclient-tarball:
-        - python-mistralclient-pypi-upload:
-          - post-mirror-python26
-          - post-mirror-python27
-          - post-mirror-python33
 
   - name: stackforge/MRaaS
     check:
@@ -3663,6 +3338,8 @@ projects:
       - murano-api-tarball
 
   - name: stackforge/murano-common
+    template:
+      - name: pypi-release
     check:
       - gate-murano-common-pep8
       - gate-murano-common-python26
@@ -3675,14 +3352,6 @@ projects:
       - gate-murano-common-python27
     post:
       - murano-common-branch-tarball
-    pre-release:
-      - murano-common-tarball
-    release:
-      - murano-common-tarball:
-        - murano-common-pypi-upload:
-          - post-mirror-python26
-          - post-mirror-python27
-          - post-mirror-python33
 
   - name: stackforge/murano-conductor
     check:
@@ -3731,6 +3400,9 @@ projects:
       - gate-noop
 
   - name: stackforge/murano-metadataclient
+    template:
+      - name: pypi-release
+      - name: pypi-release
     check:
       - gate-murano-metadataclient-pep8
       - gate-murano-metadataclient-python26
@@ -3743,14 +3415,6 @@ projects:
       - gate-murano-metadataclient-python27
     post:
       - murano-metadataclient-branch-tarball
-    pre-release:
-      - murano-metadataclient-tarball
-    release:
-      - murano-metadataclient-tarball:
-        - murano-metadataclient-pypi-upload:
-          - post-mirror-python26
-          - post-mirror-python27
-          - post-mirror-python33
 
   - name: stackforge/murano-repository
     check:
@@ -3765,14 +3429,6 @@ projects:
       - gate-murano-repository-python27
     post:
       - murano-repository-branch-tarball
-    pre-release:
-      - murano-repository-tarball
-    release:
-      - murano-repository-tarball:
-        - murano-repository-pypi-upload:
-          - post-mirror-python26
-          - post-mirror-python27
-          - post-mirror-python33
 
   - name: stackforge/murano-tests
     check:
@@ -3827,6 +3483,8 @@ projects:
       - gate-packstack-python27
 
   - name: stackforge/pecan
+    template:
+      - name: pypi-release
     check:
       - gate-pecan-pep8
       - gate-pecan-python26
@@ -3850,14 +3508,8 @@ projects:
     post:
       - pecan-branch-tarball
     pre-release:
-      - pecan-tarball
       - hook-pecan-rtfd
     release:
-      - pecan-tarball:
-        - pecan-pypi-upload:
-          - post-mirror-python26
-          - post-mirror-python27
-          - post-mirror-python33
       - hook-pecan-rtfd
 
   - name: stackforge/puppet-ceilometer
@@ -4110,14 +3762,7 @@ projects:
     template:
       - name: python-jobs
       - name: check-requirements
-    pre-release:
-      - savanna-guestagent-tarball
-    release:
-      - savanna-guestagent-tarball:
-        - savanna-guestagent-pypi-upload:
-          - post-mirror-python26
-          - post-mirror-python27
-          - post-mirror-python33
+      - name: pypi-release
 
   - name: stackforge/puppet-swift
     check:
@@ -4172,6 +3817,8 @@ projects:
       - gate-pyghmi-pep8
 
   - name: stackforge/python-barbicanclient
+    template:
+      - name: pypi-release
     check:
       - gate-python-barbicanclient-pep8
       - gate-python-barbicanclient-python26
@@ -4180,14 +3827,6 @@ projects:
       - gate-python-barbicanclient-pep8
       - gate-python-barbicanclient-python26
       - gate-python-barbicanclient-python27
-    post:
-      - python-barbicanclient-branch-tarball
-    release:
-      - python-barbicanclient-tarball:
-        - python-barbicanclient-pypi-upload:
-          - post-mirror-python26
-          - post-mirror-python27
-          - post-mirror-python33
 
   - name: stackforge/python-climateclient
     template:
@@ -4208,6 +3847,8 @@ projects:
       - python-climateclient-tarball
 
   - name: stackforge/python-designateclient
+    template:
+      - name: pypi-release
     check:
       - gate-python-designateclient-pep8
       - gate-python-designateclient-python26
@@ -4220,16 +3861,10 @@ projects:
       - hook-python-designateclient-rtfd
       - python-designateclient-coverage
       - python-designateclient-branch-tarball
-    pre-release:
-      - python-designateclient-tarball
-    release:
-      - python-designateclient-tarball:
-        - python-designateclient-pypi-upload:
-          - post-mirror-python26
-          - post-mirror-python27
-          - post-mirror-python33
 
   - name: stackforge/python-libraclient
+    template:
+      - name: pypi-release
     check:
       - gate-python-libraclient-pep8
       - gate-python-libraclient-python27
@@ -4242,14 +3877,8 @@ projects:
       - python-libraclient-branch-tarball
     pre-release:
       - hook-python-libraclient-rtfd
-      - python-libraclient-tarball
     release:
       - hook-python-libraclient-rtfd
-      - python-libraclient-tarball:
-        - python-libraclient-pypi-upload:
-          - post-mirror-python26
-          - post-mirror-python27
-          - post-mirror-python33
 
   - name: stackforge/python-manilaclient
     check:
@@ -4267,6 +3896,8 @@ projects:
       - python-manilaclient-coverage
 
   - name: stackforge/python-muranoclient
+    template:
+      - name: pypi-release
     check:
       - gate-python-muranoclient-pep8
       - gate-python-muranoclient-python26
@@ -4279,14 +3910,6 @@ projects:
       - gate-python-muranoclient-python27
     post:
       - python-muranoclient-branch-tarball
-    pre-release:
-      - python-muranoclient-tarball
-    release:
-      - python-muranoclient-tarball:
-        - python-muranoclient-pypi-upload:
-          - post-mirror-python26
-          - post-mirror-python27
-          - post-mirror-python33
 
   - name: stackforge/python-rallyclient
     template:
@@ -4377,6 +4000,8 @@ projects:
       - hook-solum-rtfd
 
   - name: stackforge/sphinxcontrib-docbookrestapi
+    template:
+      - name: pypi-release
     check:
       - gate-sphinxcontrib-docbookrestapi-pep8
       - gate-sphinxcontrib-docbookrestapi-python26
@@ -4387,16 +4012,10 @@ projects:
       - gate-sphinxcontrib-docbookrestapi-python26
       - gate-sphinxcontrib-docbookrestapi-python27
       - gate-sphinxcontrib-docbookrestapi-python33
-    pre-release:
-      - sphinxcontrib-docbookrestapi-tarball
-    release:
-      - sphinxcontrib-docbookrestapi-tarball:
-        - sphinxcontrib-docbookrestapi-pypi-upload:
-          - post-mirror-python26
-          - post-mirror-python27
-          - post-mirror-python33
 
   - name: stackforge/sqlalchemy-migrate
+    template:
+      - name: pypi-release
     check:
       - gate-sqlalchemy-migrate-python26
       - gate-sqlalchemy-migrate-python27
@@ -4411,14 +4030,8 @@ projects:
       - sqlalchemy-migrate-branch-tarball
       - hook-sqlalchemy-migrate-rtfd
     pre-release:
-      - sqlalchemy-migrate-tarball
       - hook-sqlalchemy-migrate-rtfd
     release:
-      - sqlalchemy-migrate-tarball:
-        - sqlalchemy-migrate-pypi-upload:
-          - post-mirror-python26
-          - post-mirror-python27
-          - post-mirror-python33
       - hook-sqlalchemy-migrate-rtfd
 
   - name: stackforge/staccato
@@ -4463,6 +4076,8 @@ projects:
       - swiftsync-tarball
 
   - name: stackforge/tomograph
+    template:
+      - name: pypi-release
     check:
       - gate-tomograph-pep8
       - gate-tomograph-python26
@@ -4475,13 +4090,6 @@ projects:
       - gate-tomograph-python27
     post:
       - tomograph-branch-tarball
-    pre-release:
-      - tomograph-tarball
-    release:
-      - tomograph-tarball:
-        - tomograph-pypi-upload:
-          - post-mirror-python26
-          - post-mirror-python27
 
   - name: stackforge/tooz
     check:
