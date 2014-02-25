@@ -1241,11 +1241,13 @@ projects:
       - name: integrated-gate
     check:
       - gate-python-glanceclient-python33
+      - gate-python-glanceclient-pypy
       - check-devstack-dsvm-cells
       - check-tempest-dsvm-postgres-full
       - gate-tempest-dsvm-large-ops
       - gate-tempest-dsvm-neutron-large-ops
     gate:
+      - gate-python-glanceclient-pypy
       - gate-devstack-dsvm-cells
       - gate-tempest-dsvm-postgres-full
       - gate-tempest-dsvm-large-ops
