@@ -323,9 +323,9 @@ jobs:
   - name: ^(gate|check)-tempest-dsvm-cells-full$
     voting: false
   - name: ^(gate|check)-grenade-dsvm$
-    branch: ^(?!stable/grizzly).*$
+    branch: ^(?!stable/(grizzly|havana)).*$
   - name: ^(gate|check)-grenade-dsvm-neutron$
-    branch: ^(?!stable/grizzly).*$
+    branch: ^(?!stable/(grizzly|havana)).*$
     voting: false
   - name: ^(gate|check)-grenade-dsvm-partial-ncpu$
     branch: ^(?!stable/(grizzly|havana)).*$
@@ -335,13 +335,13 @@ jobs:
     # only here until stable is votable, then merge
     # back to a single job
   - name: ^(gate|check)-grenade-dsvm-forward$
-    branch: ^(stable/).*$
+    branch: ^(stable/(grizzly|havana)).*$
     voting: false
   - name: ^(gate|check)-grenade-dsvm-neutron-forward
-    branch: ^(stable/).*$
+    branch: ^(stable/)(grizzly|havana).*$
     voting: false
   - name: gate-grenade-noop
-    branch: ^(stable/grizzly).*$
+    branch: ^(stable/(grizzly|havana)).*$
   - name: gate-devstack-bash8
     branch: ^(?!stable/grizzly).*$
   - name: gate-tempest-docs
