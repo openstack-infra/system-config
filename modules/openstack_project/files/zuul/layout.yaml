@@ -1319,6 +1319,7 @@ projects:
     check:
       - gate-python-glanceclient-requirements
       - gate-python-glanceclient-python33
+      - gate-python-glanceclient-pypy
       - check-devstack-dsvm-cells
       - check-tempest-dsvm-full
       - check-tempest-dsvm-postgres-full
@@ -1329,6 +1330,7 @@ projects:
       - check-grenade-dsvm
     gate:
       - gate-python-glanceclient-requirements
+      - gate-python-glanceclient-pypy
       - gate-devstack-dsvm-cells
       - gate-tempest-dsvm-full
       - gate-tempest-dsvm-postgres-full
