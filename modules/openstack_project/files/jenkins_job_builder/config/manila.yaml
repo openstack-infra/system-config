@@ -1,5 +1,5 @@
 - job:
-    name: gate-manila-devstack-dsvm
+    name: gate-manila-tempest-dsvm-neutron
     node: devstack-precise
 
     wrappers:
@@ -14,18 +14,38 @@
           #!/bin/bash -xe
           export PYTHONUNBUFFERED=true
           export DEVSTACK_GATE_TIMEOUT=60
-          export ENABLED_SERVICES=manila,m-api,m-shr,m-sch
+          export ENABLED_SERVICES=manila,m-api,m-shr,m-sch,tempest
           export PROJECTS="stackforge/manila $PROJECTS"
           export PROJECTS="stackforge/python-manilaclient $PROJECTS"
+          export DEVSTACK_GATE_TEMPEST_ALLOW_TENANT_ISOLATION=1
+          export DEVSTACK_GATE_NEUTRON=1
+          export TEMPEST_CONCURRENCY=1
+          export KEEP_LOCALRC=1
+          echo "API_RATE_LIMIT=False" >> localrc
+          echo "SHARE_BACKING_FILE_SIZE=12G" >> localrc
+          echo "VOLUME_BACKING_FILE_SIZE=12G" >> localrc
 
           function pre_test_hook {
-              # Install Manila devstack integration
-              MANILA_BASE=/opt/stack/new/manila/contrib/devstack
-              DEVSTACK_BASE=/opt/stack/new/devstack
-              cp ${MANILA_BASE}/lib/* ${DEVSTACK_BASE}/lib
-              cp ${MANILA_BASE}/extras.d/* ${DEVSTACK_BASE}/extras.d
+              # Install manila devstack integration
+              cp -r $BASE/new/manila/contrib/devstack/* $BASE/new/devstack
+              # Install manila tempest integration
+              cp -r $BASE/new/manila/contrib/tempest/tempest/* $BASE/new/tempest/tempest
+              tests_pathes='tempest.cli.*manila*'
+              if [[ ! "$ZUUL_PROJECT" =~ "*python-manilaclient*" ]]; then
+                tests_pathes+=' tempest.api.share*';
+              fi
           }
           export -f pre_test_hook
+
+          function post_test_hook {
+              # let us control if we die or not
+              set +o errexit
+              cd $BASE/new/tempest
+              sudo chown -R tempest:stack $BASE/new/tempest
+              echo "Running tempest manila test suites"
+              sudo -H -u tempest tox -evenv bash tools/pretty_tox.sh \"$tests_pathes\" -- --concurrency=$TEMPEST_CONCURRENCY
+          }
+          export -f post_test_hook
 
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh

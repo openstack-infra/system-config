@@ -557,7 +557,7 @@ jobs:
     voting: false
   - name: gate-rubick-python33
     voting: false
-  - name: gate-manila-devstack-dsvm
+  - name: gate-manila-tempest-dsvm-neutron
     voting: false
   - name: gate-climate-devstack-dsvm
     voting: false
@@ -3565,12 +3565,12 @@ projects:
       - gate-manila-pep8
       - gate-manila-python26
       - gate-manila-python27
-      - gate-manila-devstack-dsvm
+      - gate-manila-tempest-dsvm-neutron
     gate:
       - gate-manila-pep8
       - gate-manila-python26
       - gate-manila-python27
-      - gate-manila-devstack-dsvm
+      - gate-manila-tempest-dsvm-neutron
     post:
       - manila-branch-tarball
       - manila-coverage
@@ -4286,10 +4286,12 @@ projects:
       - gate-python-manilaclient-pep8
       - gate-python-manilaclient-python26
       - gate-python-manilaclient-python27
+      - gate-manila-tempest-dsvm-neutron
     gate:
       - gate-python-manilaclient-pep8
       - gate-python-manilaclient-python26
       - gate-python-manilaclient-python27
+      - gate-manila-tempest-dsvm-neutron
     post:
       - python-manilaclient-branch-tarball
       - python-manilaclient-coverage
