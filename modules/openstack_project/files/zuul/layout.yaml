@@ -1756,6 +1756,13 @@ projects:
       - gate-gce-api-python26
       - gate-gce-api-python27
 
+  - name: stackforge/gerrit-powered-agenda
+    check: 
+      - gate-noop
+    gate:
+      - gate-noop
+    
+
   - name: openstack/governance
     check:
       - gate-noop
