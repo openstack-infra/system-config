@@ -489,6 +489,7 @@ packstack-dev:
     branches:
       - master
       - grizzly
+      - havana
 
 openstack-anvil:
     events:
