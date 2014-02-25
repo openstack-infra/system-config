@@ -253,6 +253,12 @@ project-templates:
     release:
       - '{name}-docs'
 
+  - name: check-requirements
+    check:
+      - 'gate-{name}-requirements'
+    gate:
+      - 'gate-{name}-requirements'
+
   - name: periodic-grizzly
     periodic-stable:
       - 'periodic-{name}-docs-grizzly'
@@ -583,8 +589,8 @@ projects:
       - name: openstack-server-publish-jobs
       - name: periodic-grizzly
       - name: periodic-havana
+      - name: check-requirements
     check:
-      - gate-ceilometer-requirements
       - check-devstack-dsvm-cells
       - check-tempest-dsvm-full
       - check-tempest-dsvm-postgres-full
@@ -594,7 +600,6 @@ projects:
       - gate-tempest-dsvm-neutron-large-ops
       - check-swift-dsvm-functional
     gate:
-      - gate-ceilometer-requirements
       - gate-devstack-dsvm-cells
       - gate-tempest-dsvm-full
       - gate-tempest-dsvm-postgres-full
@@ -618,8 +623,8 @@ projects:
       - name: openstack-server-publish-jobs
       - name: periodic-grizzly
       - name: periodic-havana
+      - name: check-requirements
     check:
-      - gate-cinder-requirements
       - gate-cinder-pylint
       - check-devstack-dsvm-cells
       - check-tempest-dsvm-full
@@ -630,7 +635,6 @@ projects:
       - gate-tempest-dsvm-neutron-large-ops
       - check-grenade-dsvm
     gate:
-      - gate-cinder-requirements
       - gate-devstack-dsvm-cells
       - gate-tempest-dsvm-full
       - gate-tempest-dsvm-postgres-full
@@ -691,8 +695,8 @@ projects:
     template:
       - name: python-jobs
       - name: openstack-server-publish-jobs
+      - name: check-requirements
     check:
-      - gate-gantt-requirements
       - check-devstack-dsvm-cells
       - check-tempest-dsvm-full
       - check-tempest-dsvm-postgres-full
@@ -703,7 +707,6 @@ projects:
       - check-grenade-dsvm
       - gate-gantt-pylint
     gate:
-      - gate-gantt-requirements
       - gate-devstack-dsvm-cells
       - gate-tempest-dsvm-full
       - gate-tempest-dsvm-postgres-full
@@ -733,8 +736,8 @@ projects:
       - name: openstack-server-publish-jobs
       - name: periodic-grizzly
       - name: periodic-havana
+      - name: check-requirements
     check:
-      - gate-glance-requirements
       - check-devstack-dsvm-cells
       - check-tempest-dsvm-full
       - check-tempest-dsvm-postgres-full
@@ -744,7 +747,6 @@ projects:
       - gate-tempest-dsvm-neutron-large-ops
       - check-grenade-dsvm
     gate:
-      - gate-glance-requirements
       - gate-devstack-dsvm-cells
       - gate-tempest-dsvm-full
       - gate-tempest-dsvm-postgres-full
@@ -772,8 +774,8 @@ projects:
       - name: openstack-server-publish-jobs
       - name: periodic-grizzly
       - name: periodic-havana
+      - name: check-requirements
     check:
-      - gate-heat-requirements
       - check-devstack-dsvm-cells
       - check-tempest-dsvm-full
       - check-tempest-dsvm-postgres-full
@@ -783,7 +785,6 @@ projects:
       - gate-tempest-dsvm-neutron-large-ops
       - check-tempest-dsvm-neutron-heat-slow
     gate:
-      - gate-heat-requirements
       - gate-devstack-dsvm-cells
       - gate-tempest-dsvm-full
       - gate-tempest-dsvm-postgres-full
@@ -810,8 +811,8 @@ projects:
       - name: openstack-server-publish-jobs
       - name: periodic-grizzly
       - name: periodic-havana
+      - name: check-requirements
     check:
-      - gate-horizon-requirements
       - gate-horizon-python27-django14
       - gate-horizon-selenium
       - check-devstack-dsvm-cells
@@ -823,7 +824,6 @@ projects:
       - gate-tempest-dsvm-neutron-large-ops
       - check-grenade-dsvm
     gate:
-      - gate-horizon-requirements
       - gate-horizon-python27-django14
       - gate-horizon-selenium
       - check-devstack-dsvm-cells
@@ -845,12 +845,11 @@ projects:
     template:
       - name: python-jobs
       - name: openstack-server-publish-jobs
+      - name: check-requirements
     check:
-      - gate-ironic-requirements
       - check-tempest-dsvm-ironic
       - check-tempest-dsvm-ironic-postgres
     gate:
-      - gate-ironic-requirements
       - gate-tempest-dsvm-ironic
       - gate-tempest-dsvm-ironic-postgres
     post:
@@ -869,8 +868,8 @@ projects:
       - name: openstack-server-publish-jobs
       - name: periodic-grizzly
       - name: periodic-havana
+      - name: check-requirements
     check:
-      - gate-keystone-requirements
       - gate-keystone-python33
       - check-devstack-dsvm-cells
       - check-tempest-dsvm-full
@@ -882,7 +881,6 @@ projects:
       - check-grenade-dsvm
       - check-swift-dsvm-functional
     gate:
-      - gate-keystone-requirements
       - gate-devstack-dsvm-cells
       - gate-tempest-dsvm-full
       - gate-tempest-dsvm-postgres-full
@@ -910,16 +908,16 @@ projects:
 
 # TODO: add docs
   - name: openstack/marconi
+    template:
+      - name: check-requirements
     check:
       - check-tempest-dsvm-marconi
-      - gate-marconi-requirements
       - gate-marconi-pep8
       - gate-marconi-python26
       - gate-marconi-python27
       - gate-marconi-python33
       - gate-marconi-pypy
     gate:
-      - gate-marconi-requirements
       - gate-marconi-pep8
       - gate-marconi-python26
       - gate-marconi-python27
@@ -939,8 +937,8 @@ projects:
       - name: openstack-server-publish-jobs
       - name: periodic-grizzly
       - name: periodic-havana
+      - name: check-requirements
     check:
-      - gate-neutron-requirements
       - check-tempest-dsvm-neutron
       - check-tempest-dsvm-neutron-full
       - check-tempest-dsvm-neutron-pg
@@ -950,7 +948,6 @@ projects:
       - check-grenade-dsvm-neutron
       - check-devstack-dsvm-neutron
     gate:
-      - gate-neutron-requirements
       - gate-tempest-dsvm-neutron
       - gate-tempest-dsvm-neutron-pg
       - gate-tempest-dsvm-neutron-isolated
@@ -983,8 +980,8 @@ projects:
       - name: openstack-server-publish-jobs
       - name: periodic-grizzly
       - name: periodic-havana
+      - name: check-requirements
     check:
-      - gate-nova-requirements
       - check-devstack-dsvm-cells
       - check-tempest-dsvm-full
       - check-tempest-dsvm-postgres-full
@@ -998,7 +995,6 @@ projects:
       - check-tempest-dsvm-neutron-heat-slow
       - check-grenade-dsvm-partial-ncpu
     gate:
-      - gate-nova-requirements
       - gate-devstack-dsvm-cells
       - gate-tempest-dsvm-full
       - gate-tempest-dsvm-postgres-full
@@ -1048,14 +1044,13 @@ projects:
     template:
       - name: python-jobs
       - name: openstack-server-publish-jobs
+      - name: check-requirements
     check:
       - gate-savanna-pylint
-      - gate-savanna-requirements
       - check-tempest-dsvm-savanna-full
       - check-tempest-dsvm-savanna-postgres
       - check-tempest-dsvm-savanna-neutron
     gate:
-      - gate-savanna-requirements
       - gate-tempest-dsvm-savanna-full
       - gate-tempest-dsvm-savanna-postgres
       - gate-tempest-dsvm-savanna-neutron
@@ -1105,8 +1100,8 @@ projects:
     template:
       - name: python-jobs
       - name: openstack-server-publish-jobs
+      - name: check-requirements
     check:
-      - gate-swift-requirements
       - check-swift-dsvm-functional
       - check-devstack-dsvm-cells
       - check-tempest-dsvm-full
@@ -1117,7 +1112,6 @@ projects:
       - gate-tempest-dsvm-neutron-large-ops
       - check-grenade-dsvm
     gate:
-      - gate-swift-requirements
       - gate-swift-dsvm-functional
       - gate-devstack-dsvm-cells
       - gate-tempest-dsvm-full
@@ -1163,11 +1157,10 @@ projects:
     template:
       - name: python-jobs
       - name: openstack-server-publish-jobs
+      - name: check-requirements
     check:
-      - gate-trove-requirements
       - check-tempest-dsvm-trove-full
     gate:
-      - gate-trove-requirements
       - gate-tempest-dsvm-trove-full
     post:
       - trove-upstream-translation-update
@@ -1199,8 +1192,8 @@ projects:
     template:
       - name: python-jobs
       - name: openstack-client-publish-jobs
+      - name: check-requirements
     check:
-      - gate-python-ceilometerclient-requirements
       - gate-python-ceilometerclient-python33
       - gate-python-ceilometerclient-pypy
       - check-devstack-dsvm-cells
@@ -1211,7 +1204,6 @@ projects:
       - gate-tempest-dsvm-large-ops
       - gate-tempest-dsvm-neutron-large-ops
     gate:
-      - gate-python-ceilometerclient-requirements
       - gate-python-ceilometerclient-python33
       - gate-python-ceilometerclient-pypy
       - gate-devstack-dsvm-cells
@@ -1233,8 +1225,8 @@ projects:
     template:
       - name: python-jobs
       - name: openstack-client-publish-jobs
+      - name: check-requirements
     check:
-      - gate-python-cinderclient-requirements
       - gate-python-cinderclient-python33
       - gate-python-cinderclient-pypy
       - check-devstack-dsvm-cells
@@ -1246,7 +1238,6 @@ projects:
       - gate-tempest-dsvm-neutron-large-ops
       - check-grenade-dsvm
     gate:
-      - gate-python-cinderclient-requirements
       - gate-python-cinderclient-python33
       - gate-python-cinderclient-pypy
       - gate-devstack-dsvm-cells
@@ -1275,8 +1266,8 @@ projects:
     template:
       - name: python-jobs
       - name: openstack-client-publish-jobs
+      - name: check-requirements
     check:
-      - gate-python-ganttclient-requirements
       - check-devstack-dsvm-cells
       - check-tempest-dsvm-full
       - check-tempest-dsvm-postgres-full
@@ -1286,7 +1277,6 @@ projects:
       - gate-tempest-dsvm-neutron-large-ops
       - check-grenade-dsvm
     gate:
-      - gate-python-ganttclient-requirements
       - gate-devstack-dsvm-cells
       - gate-tempest-dsvm-full
       - gate-tempest-dsvm-postgres-full
@@ -1312,8 +1302,8 @@ projects:
     template:
       - name: python-jobs
       - name: openstack-client-publish-jobs
+      - name: check-requirements
     check:
-      - gate-python-glanceclient-requirements
       - gate-python-glanceclient-python33
       - check-devstack-dsvm-cells
       - check-tempest-dsvm-full
@@ -1324,7 +1314,6 @@ projects:
       - gate-tempest-dsvm-neutron-large-ops
       - check-grenade-dsvm
     gate:
-      - gate-python-glanceclient-requirements
       - gate-devstack-dsvm-cells
       - gate-tempest-dsvm-full
       - gate-tempest-dsvm-postgres-full
@@ -1349,8 +1338,9 @@ projects:
 
 #TODO: add docs
   - name: openstack/python-heatclient
+    template:
+      - name: check-requirements
     check:
-      - gate-python-heatclient-requirements
       - gate-python-heatclient-pep8
       - gate-python-heatclient-python26
       - gate-python-heatclient-python27
@@ -1364,7 +1354,6 @@ projects:
       - gate-tempest-dsvm-large-ops
       - gate-tempest-dsvm-neutron-large-ops
     gate:
-      - gate-python-heatclient-requirements
       - gate-python-heatclient-pep8
       - gate-python-heatclient-python26
       - gate-python-heatclient-python27
@@ -1422,8 +1411,8 @@ projects:
     template:
       - name: python-jobs
       - name: openstack-client-publish-jobs
+      - name: check-requirements
     check:
-      - gate-python-keystoneclient-requirements
       - gate-python-keystoneclient-python33
       - check-devstack-dsvm-cells
       - check-tempest-dsvm-full
@@ -1434,7 +1423,6 @@ projects:
       - gate-tempest-dsvm-neutron-large-ops
       - check-grenade-dsvm
     gate:
-      - gate-python-keystoneclient-requirements
       - gate-python-keystoneclient-python33
       - gate-devstack-dsvm-cells
       - gate-tempest-dsvm-full
@@ -1459,15 +1447,15 @@ projects:
           - post-mirror-python33
 
   - name: openstack/python-marconiclient
+    template:
+      - name: check-requirements
     check:
-      - gate-python-marconiclient-requirements
       - gate-python-marconiclient-pep8
       - gate-python-marconiclient-python26
       - gate-python-marconiclient-python27
       - gate-python-marconiclient-python33
       - gate-python-marconiclient-pypy
     gate:
-      - gate-python-marconiclient-requirements
       - gate-python-marconiclient-pep8
       - gate-python-marconiclient-python26
       - gate-python-marconiclient-python27
@@ -1488,8 +1476,8 @@ projects:
     template:
       - name: python-jobs
       - name: openstack-client-publish-jobs
+      - name: check-requirements
     check:
-      - gate-python-neutronclient-requirements
       - gate-python-neutronclient-python33
       - gate-python-neutronclient-pypy
       - check-devstack-dsvm-cells
@@ -1504,7 +1492,6 @@ projects:
       - gate-tempest-dsvm-neutron-large-ops
       - check-grenade-dsvm
     gate:
-      - gate-python-neutronclient-requirements
       - gate-python-neutronclient-pypy
       - gate-devstack-dsvm-cells
       - gate-tempest-dsvm-full
@@ -1535,8 +1522,8 @@ projects:
     template:
       - name: python-jobs
       - name: openstack-client-publish-jobs
+      - name: check-requirements
     check:
-      - gate-python-novaclient-requirements
       - gate-python-novaclient-python33
       - gate-python-novaclient-pypy
       - check-devstack-dsvm-cells
@@ -1548,7 +1535,6 @@ projects:
       - gate-tempest-dsvm-neutron-large-ops
       - check-grenade-dsvm
     gate:
-      - gate-python-novaclient-requirements
       - gate-python-novaclient-python33
       - gate-python-novaclient-pypy
       - gate-devstack-dsvm-cells
@@ -1577,12 +1563,11 @@ projects:
     template:
       - name: python-jobs
       - name: openstack-client-publish-jobs
+      - name: check-requirements
     check:
-      - gate-python-openstackclient-requirements
       - gate-python-openstackclient-python33
       - gate-tempest-dsvm-full
     gate:
-      - gate-python-openstackclient-requirements
       - gate-tempest-dsvm-full
     pre-release:
       - python-openstackclient-tarball
@@ -1597,13 +1582,12 @@ projects:
     template:
       - name: python-jobs
       - name: openstack-server-publish-jobs
+      - name: check-requirements
     check:
-      - gate-python-savannaclient-requirements
       - check-tempest-dsvm-savanna-full
       - check-tempest-dsvm-savanna-postgres
       - check-tempest-dsvm-savanna-neutron
     gate:
-      - gate-python-savannaclient-requirements
       - gate-tempest-dsvm-savanna-full
       - gate-tempest-dsvm-savanna-postgres
       - gate-tempest-dsvm-savanna-neutron
@@ -1623,8 +1607,8 @@ projects:
     template:
       - name: python-jobs
       - name: openstack-client-publish-jobs
+      - name: check-requirements
     check:
-      - gate-python-swiftclient-requirements
       - gate-python-swiftclient-python33
       - gate-python-swiftclient-pypy
       - check-swift-dsvm-functional
@@ -1636,7 +1620,6 @@ projects:
       - gate-tempest-dsvm-neutron-large-ops
       - check-grenade-dsvm
     gate:
-      - gate-python-swiftclient-requirements
       - gate-python-swiftclient-pypy
       - gate-swift-dsvm-functional
       - gate-tempest-dsvm-full
@@ -1660,15 +1643,15 @@ projects:
 
 #TODO: add docs
   - name: openstack/python-troveclient
+    template:
+      - name: check-requirements
     check:
-      - gate-python-troveclient-requirements
       - gate-python-troveclient-pep8
       - gate-python-troveclient-python26
       - gate-python-troveclient-python27
       - gate-python-troveclient-python33
       - gate-python-troveclient-pypy
     gate:
-      - gate-python-troveclient-requirements
       - gate-python-troveclient-pep8
       - gate-python-troveclient-python26
       - gate-python-troveclient-python27
@@ -1704,8 +1687,9 @@ projects:
 
 #TODO: add docs
   - name: openstack/diskimage-builder
+    template:
+      - name: check-requirements
     check:
-      - gate-diskimage-builder-requirements
       - gate-diskimage-builder-pep8
       - gate-diskimage-builder-python26
       - gate-diskimage-builder-python27
@@ -1714,7 +1698,6 @@ projects:
       - check-tripleo-undercloud-precise
       - check-tripleo-overcloud-precise
     gate:
-      - gate-diskimage-builder-requirements
       - gate-diskimage-builder-pep8
       - gate-diskimage-builder-python26
       - gate-diskimage-builder-python27
@@ -1734,10 +1717,7 @@ projects:
     template:
       - name: python-jobs
       - name: openstack-client-publish-jobs
-    check:
-      - gate-django_openstack_auth-requirements
-    gate:
-      - gate-django_openstack_auth-requirements
+      - name: check-requirements
     pre-release:
       - django_openstack_auth-tarball
     release:
@@ -1745,13 +1725,13 @@ projects:
         - django_openstack_auth-pypi-upload
 
   - name: stackforge/gce-api
+    template:
+      - name: check-requirements
     check:
-      - gate-gce-api-requirements
       - gate-gce-api-pep8
       - gate-gce-api-python26
       - gate-gce-api-python27
     gate:
-      - gate-gce-api-requirements
       - gate-gce-api-pep8
       - gate-gce-api-python26
       - gate-gce-api-python27
@@ -1764,13 +1744,13 @@ projects:
 
 #TODO: add docs
   - name: openstack/heat-cfntools
+    template:
+      - name: check-requirements
     check:
-      - gate-heat-cfntools-requirements
       - gate-heat-cfntools-pep8
       - gate-heat-cfntools-python26
       - gate-heat-cfntools-python27
     gate:
-      - gate-heat-cfntools-requirements
       - gate-heat-cfntools-pep8
       - gate-heat-cfntools-python26
       - gate-heat-cfntools-python27
@@ -1828,8 +1808,9 @@ projects:
 
 #TODO: add docs
   - name: openstack/os-apply-config
+    template:
+      - name: check-requirements
     check:
-      - gate-os-apply-config-requirements
       - gate-os-apply-config-pep8
       - gate-os-apply-config-python26
       - gate-os-apply-config-python27
@@ -1838,7 +1819,6 @@ projects:
       - check-tripleo-undercloud-precise
       - check-tripleo-overcloud-precise
     gate:
-      - gate-os-apply-config-requirements
       - gate-os-apply-config-pep8
       - gate-os-apply-config-python26
       - gate-os-apply-config-python27
@@ -1853,8 +1833,9 @@ projects:
 
 #TODO: add docs
   - name: openstack/os-collect-config
+    template:
+      - name: check-requirements
     check:
-      - gate-os-collect-config-requirements
       - gate-os-collect-config-pep8
       - gate-os-collect-config-python26
       - gate-os-collect-config-python27
@@ -1863,7 +1844,6 @@ projects:
       - check-tripleo-undercloud-precise
       - check-tripleo-overcloud-precise
     gate:
-      - gate-os-collect-config-requirements
       - gate-os-collect-config-pep8
       - gate-os-collect-config-python26
       - gate-os-collect-config-python27
@@ -1878,8 +1858,9 @@ projects:
 
 #TODO: add docs
   - name: openstack/os-refresh-config
+    template:
+      - name: check-requirements
     check:
-      - gate-os-refresh-config-requirements
       - gate-os-refresh-config-pep8
       - gate-os-refresh-config-python26
       - gate-os-refresh-config-python27
@@ -1888,7 +1869,6 @@ projects:
       - check-tripleo-undercloud-precise
       - check-tripleo-overcloud-precise
     gate:
-      - gate-os-refresh-config-requirements
       - gate-os-refresh-config-pep8
       - gate-os-refresh-config-python26
       - gate-os-refresh-config-python27
@@ -1903,11 +1883,11 @@ projects:
 
 #TODO: add docs
   - name: openstack/oslosphinx
+    template:
+      - name: check-requirements
     check:
-      - gate-oslosphinx-requirements
       - gate-oslosphinx-pep8
     gate:
-      - gate-oslosphinx-requirements
       - gate-oslosphinx-pep8
     post:
       - oslosphinx-branch-tarball
@@ -1924,19 +1904,18 @@ projects:
     template:
       - name: python-jobs
       - name: openstack-server-publish-jobs
+      - name: check-requirements
     check:
-      - gate-oslo-incubator-requirements
       - gate-oslo-incubator-python33
     gate:
-      - gate-oslo-incubator-requirements
       - gate-oslo-incubator-python33
 
   - name: openstack/oslo.config
     template:
       - name: python-jobs
       - name: openstack-server-publish-jobs
+      - name: check-requirements
     check:
-      - gate-oslo.config-requirements
       - gate-oslo.config-python33
       - check-devstack-dsvm-cells
       - check-tempest-dsvm-full
@@ -1946,7 +1925,6 @@ projects:
       - gate-tempest-dsvm-neutron-large-ops
       - check-grenade-dsvm
     gate:
-      - gate-oslo.config-requirements
       - gate-oslo.config-python33
       - gate-devstack-dsvm-cells
       - gate-tempest-dsvm-full
@@ -1971,8 +1949,8 @@ projects:
     template:
       - name: python-jobs
       - name: openstack-server-publish-jobs
+      - name: check-requirements
     check:
-      - gate-oslo.messaging-requirements
       - check-devstack-dsvm-cells
       - check-tempest-dsvm-full
       - check-tempest-dsvm-neutron
@@ -1981,7 +1959,6 @@ projects:
       - gate-tempest-dsvm-neutron-large-ops
       - check-grenade-dsvm
     gate:
-      - gate-oslo.messaging-requirements
       - gate-devstack-dsvm-cells
       - gate-tempest-dsvm-full
       - gate-tempest-dsvm-neutron
@@ -2003,8 +1980,9 @@ projects:
 
 #TODO: add docs
   - name: openstack/oslo.rootwrap
+    template:
+      - name: check-requirements
     check:
-      - gate-oslo.rootwrap-requirements
       - gate-oslo.rootwrap-pep8
       - gate-oslo.rootwrap-python26
       - gate-oslo.rootwrap-python27
@@ -2017,7 +1995,6 @@ projects:
       - gate-tempest-dsvm-neutron-large-ops
       - check-grenade-dsvm
     gate:
-      - gate-oslo.rootwrap-requirements
       - gate-oslo.rootwrap-pep8
       - gate-oslo.rootwrap-python26
       - gate-oslo.rootwrap-python27
@@ -2047,14 +2024,13 @@ projects:
     template:
       - name: python-jobs
       - name: openstack-server-publish-jobs
+      - name: check-requirements
     check:
       - gate-oslo.test-python33
       - gate-oslo.test-pypy
-      - gate-oslo.test-requirements
     gate:
       - gate-oslo.test-python33
       - gate-oslo.test-pypy
-      - gate-oslo.test-requirements
     pre-release:
       - oslo.test-tarball
     release:
@@ -2068,8 +2044,8 @@ projects:
     template:
       - name: python-jobs
       - name: openstack-server-publish-jobs
+      - name: check-requirements
     check:
-      - gate-oslo.version-requirements
       - gate-oslo.version-pypy
       - gate-oslo.version-python33
       - check-devstack-dsvm-cells
@@ -2078,7 +2054,6 @@ projects:
       - check-tempest-dsvm-neutron-full
       - check-grenade-dsvm
     gate:
-      - gate-oslo.version-requirements
       - gate-oslo.version-pypy
       - gate-oslo.version-python33
       - gate-devstack-dsvm-cells
@@ -2157,16 +2132,16 @@ projects:
 
 # TODO: add docs
   - name: openstack/savanna-dashboard
+    template:
+      - name: check-requirements
     check:
       - gate-savanna-dashboard-pep8
       - gate-savanna-dashboard-python26
       - gate-savanna-dashboard-python27
-      - gate-savanna-dashboard-requirements
     gate:
       - gate-savanna-dashboard-pep8
       - gate-savanna-dashboard-python26
       - gate-savanna-dashboard-python27
-      - gate-savanna-dashboard-requirements
     post:
       - savanna-dashboard-branch-tarball
       - savanna-dashboard-coverage
@@ -2181,12 +2156,12 @@ projects:
 
 # TODO: add docs
   - name: openstack/savanna-extra
+    template:
+      - name: check-requirements
     check:
       - gate-savanna-extra-pep8
-      - gate-savanna-extra-requirements
     gate:
       - gate-savanna-extra-pep8
-      - gate-savanna-extra-requirements
     post:
       - savanna-extra-branch-tarball
     pre-release:
@@ -2196,12 +2171,12 @@ projects:
 
 # TODO: add docs
   - name: openstack/savanna-image-elements
+    template:
+      - name: check-requirements
     check:
       - gate-savanna-image-elements-pep8
-      - gate-savanna-image-elements-requirements
     gate:
       - gate-savanna-image-elements-pep8
-      - gate-savanna-image-elements-requirements
     post:
       - savanna-image-elements-branch-tarball
     pre-release:
@@ -2254,8 +2229,9 @@ projects:
       - gate-tempest-dsvm-neutron-large-ops
 
   - name: openstack/tempest
+    template:
+      - name: check-requirements
     check:
-      - gate-tempest-requirements
       - gate-tempest-pep8
       - gate-tempest-docs
       - gate-tempest-python27
@@ -2274,7 +2250,6 @@ projects:
       - check-tempest-dsvm-savanna-neutron-nv
       - check-tempest-dsvm-neutron-heat-slow
     gate:
-      - gate-tempest-requirements
       - gate-tempest-pep8
       - gate-tempest-docs
       - gate-tempest-python27
@@ -3225,27 +3200,25 @@ projects:
   - name: stackforge/climate
     template:
       - name: python-jobs
+      - name: check-requirements
     check:
-      - gate-climate-requirements
       - gate-climate-devstack-dsvm
-    gate:
-      - gate-climate-requirements
     pre-release:
       - climate-tarball
     release:
       - climate-tarball
 
   - name: stackforge/climate-nova
+    template:
+      - name: check-requirements
     check:
       - gate-climate-nova-pep8
       - gate-climate-nova-python26
       - gate-climate-nova-python27
-      - gate-climate-nova-requirements
     gate:
       - gate-climate-nova-pep8
       - gate-climate-nova-python26
       - gate-climate-nova-python27
-      - gate-climate-nova-requirements
     post:
       - climate-nova-branch-tarball
     pre-release:
@@ -4136,10 +4109,7 @@ projects:
   - name: stackforge/savanna-guestagent
     template:
       - name: python-jobs
-    check:
-      - gate-savanna-guestagent-requirements
-    gate:
-      - gate-savanna-guestagent-requirements
+      - name: check-requirements
     pre-release:
       - savanna-guestagent-tarball
     release:
@@ -4220,16 +4190,16 @@ projects:
           - post-mirror-python33
 
   - name: stackforge/python-climateclient
+    template:
+      - name: check-requirements
     check:
       - gate-python-climateclient-pep8
       - gate-python-climateclient-python26
       - gate-python-climateclient-python27
-      - gate-python-climateclient-requirements
     gate:
       - gate-python-climateclient-pep8
       - gate-python-climateclient-python26
       - gate-python-climateclient-python27
-      - gate-python-climateclient-requirements
     post:
       - python-climateclient-branch-tarball
     pre-release:
@@ -4319,14 +4289,14 @@ projects:
           - post-mirror-python33
 
   - name: stackforge/python-rallyclient
+    template:
+      - name: check-requirements
     check:
-      - gate-python-rallyclient-requirements
       - gate-python-rallyclient-pep8
       - gate-python-rallyclient-python26
       - gate-python-rallyclient-python27
       - gate-python-rallyclient-docs
     gate:
-      - gate-python-rallyclient-requirements
       - gate-python-rallyclient-pep8
       - gate-python-rallyclient-python26
       - gate-python-rallyclient-python27
@@ -4335,8 +4305,9 @@ projects:
       - python-rallyclient-coverage
 
   - name: stackforge/python-solumclient
+    template:
+      - name: check-requirements
     check:
-      - gate-python-solumclient-requirements
       - gate-python-solumclient-pep8
       - gate-python-solumclient-python26
       - gate-python-solumclient-python27
@@ -4344,7 +4315,6 @@ projects:
       - gate-python-solumclient-pypy
       - gate-python-solumclient-docs
     gate:
-      - gate-python-solumclient-requirements
       - gate-python-solumclient-pep8
       - gate-python-solumclient-python26
       - gate-python-solumclient-python27
@@ -4355,16 +4325,16 @@ projects:
       - python-solumclient-coverage
 
   - name: stackforge/rally
+    template:
+      - name: check-requirements
     check:
       - gate-rally-pep8
       - gate-rally-python26
       - gate-rally-python27
-      - gate-rally-requirements
     gate:
       - gate-rally-pep8
       - gate-rally-python26
       - gate-rally-python27
-      - gate-rally-requirements
     post:
       - rally-branch-tarball
     pre-release:
@@ -4384,8 +4354,9 @@ projects:
       - rubick-coverage
 
   - name: stackforge/solum
+    template:
+      - name: check-requirements
     check:
-      - gate-solum-requirements
       - gate-solum-pep8
       - gate-solum-python26
       - gate-solum-python27
@@ -4394,7 +4365,6 @@ projects:
       - gate-solum-docs
       - gate-solum-devstack-dsvm
     gate:
-      - gate-solum-requirements
       - gate-solum-pep8
       - gate-solum-python26
       - gate-solum-python27
@@ -4571,15 +4541,15 @@ projects:
           - post-mirror-python33
 
   - name: stackforge/python-openstacksdk
+    template:
+      - name: check-requirements
     check:
-      - gate-python-openstacksdk-requirements
       - gate-python-openstacksdk-pep8
       - gate-python-openstacksdk-python26
       - gate-python-openstacksdk-python27
       - gate-python-openstacksdk-python33
       - gate-python-openstacksdk-pypy
     gate:
-      - gate-python-openstacksdk-requirements
       - gate-python-openstacksdk-pep8
       - gate-python-openstacksdk-python26
       - gate-python-openstacksdk-python27
