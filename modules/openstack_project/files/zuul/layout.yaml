@@ -3552,19 +3552,9 @@ projects:
 
   - name: stackforge/milk
     check:
-      - gate-milk-docs
-      - gate-milk-pep8
-      - gate-milk-python26
-      - gate-milk-python27
-      - gate-milk-python33
+      - gate-noop
     gate:
-      - gate-milk-docs
-      - gate-milk-pep8
-      - gate-milk-python26
-      - gate-milk-python27
-      - gate-milk-python33
-    post:
-      - milk-coverage
+      - gate-noop
 
   - name: stackforge/mistral
     check:
