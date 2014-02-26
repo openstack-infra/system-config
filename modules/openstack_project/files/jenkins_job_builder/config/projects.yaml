@@ -766,6 +766,16 @@
       - python-jobs
       - openstack-publish-jobs
       - pypi-jobs
+      - '{pipeline}-oslo.test-dsvm-{name}{branch-designator}':
+          pipeline: check
+          node: 'devstack-precise || devstack-precise-check'
+          branch-designator: ''
+          branch-override: default
+      - '{pipeline}-oslo.test-dsvm-{name}{branch-designator}':
+          pipeline: gate
+          node: devstack-precise
+          branch-designator: ''
+          branch-override: default
 
 
 - project:
