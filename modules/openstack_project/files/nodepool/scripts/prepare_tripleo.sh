@@ -17,19 +17,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-mkdir -p ~/cache/files
-mkdir -p ~/cache/pip
-
-# Enable precise-backports so we can install jq
-sudo sed -i -e 's/# \(deb .*precise-backports main \)/\1/g' /etc/apt/sources.list
-sudo apt-get update
-
-# Copied from devstack script, seems reasonable to keep and later
-# build upon as needed
-sudo DEBIAN_FRONTEND=noninteractive apt-get \
-  --option "Dpkg::Options::=--force-confold" \
-  --assume-yes install build-essential python-dev python-pip \
-  linux-headers-virtual linux-headers-`uname -r`
+./prepare_dependencies.sh
 
 # toci scripts use both of these
 sudo pip install gear os-apply-config
@@ -37,17 +25,32 @@ sudo pip install gear os-apply-config
 # tripleo-gate runs with two networks - the public access network and eth1
 # pointing at the in-datacentre L2 network where we can talk to the test
 # environments directly. We need to enable DHCP on eth1 though.
-sudo dd of=/etc/network/interfaces oflag=append conv=notrunc << EOF
+#
+# Note that we don't bring it up during prepare - it's only needed to run
+# tests.
+
+if [ -f /usr/bin/yum ]; then
+  sudo dd of=/etc/sysconfig/network-scripts/ifcfg-eth1 << EOF
+DEVICE="eth1"
+BOOTPROTO="dhcp"
+ONBOOT="yes"
+TYPE="Ethernet"
+EOF
+
+elif [ -f /usr/bin/apt-get ]; then
+  sudo dd of=/etc/network/interfaces oflag=append conv=notrunc << EOF
 auto eth1
 iface eth1 inet dhcp
 EOF
-# Note that we don't bring it up during prepare - it's only needed to run
-# tests.
 
 # Workaround bug 1270646 for actual slaves
 sudo dd of=/etc/network/interfaces.d/eth0.cfg oflag=append conv=notrunc << EOF
     post-up ip link set mtu 1458 dev eth0
 EOF
+else
+    echo "Unsupported distro."
+    exit 1
+fi
 
 rm -rf ~/workspace-cache
 mkdir -p ~/workspace-cache
