@@ -650,3 +650,27 @@ openstack-merges:
       - openstack/savanna-dashboard
       - openstack/savanna-extra
       - openstack/savanna-image-elements
+
+openstack-oslo:
+    events:
+      - patchset-created
+      - x-vrif-minus-2
+    projects:
+      - openstack/cliff
+      - openstack/oslo.config
+      - openstack/oslo-incubator
+      - openstack/oslo.messaging
+      - openstack/oslo.rootwrap
+      - openstack/oslosphinx
+      - openstack/oslo.test
+      - openstack/oslo.version
+      - openstack/oslo.vmware
+      - openstack/pycadf
+      - openstack/stevedore
+      - openstack/taskflow
+      - openstack-dev/cookiecutter
+      - openstack-dev/hacking
+      - openstack-dev/oslo-cookiecutter
+      - openstack-dev/pbr
+    branches:
+      - master
