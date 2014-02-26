@@ -178,6 +178,13 @@ class openstack_project::review (
         threads              => '4',
         mirror               => true,
       },
+      {
+        name                 => 'git05',
+        url                  => 'cgit@git05.openstack.org:/var/lib/git/',
+        replicationDelay     => '0',
+        threads              => '4',
+        mirror               => true,
+      },
     ],
   }
 
