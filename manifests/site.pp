@@ -496,6 +496,9 @@ node 'storyboard.openstack.org' {
     mysql_host          => hiera('storyboard_db_host'),
     mysql_user          => hiera('storyboard_db_user'),
     mysql_password      => hiera('storyboard_db_password'),
+#    ssl_cert_file_contents  => hiera('storyboard_ssl_cert_file_contents'),
+#    ssl_key_file_contents   => hiera('storyboard_ssl_key_file_contents'),
+#    ssl_chain_file_contents => hiera('storyboard_ssl_chain_file_contents'),
   }
 }
 
@@ -785,6 +788,9 @@ node 'openstackid-dev.openstack.org' {
     ss_mysql_host        => hiera('openstackid_dev_ss_mysql_host'),
     ss_mysql_password    => hiera('openstackid_dev_ss_mysql_password'),
     redis_password       => hiera('openstackid_dev_redis_password'),
+#    ssl_cert_file_contents  => hiera('openstackid_dev_ssl_cert_file_contents'),
+#    ssl_key_file_contents   => hiera('openstackid_dev_ssl_key_file_contents'),
+#    ssl_chain_file_contents => hiera('openstackid_dev_ssl_chain_file_contents'),
   }
 }
 
