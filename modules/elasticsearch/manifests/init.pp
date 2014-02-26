@@ -70,6 +70,13 @@ class elasticsearch (
     ]
   }
 
+  file { '/etc/elasticsearch':
+    ensure  => directory,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0755',
+  }
+
   file { '/etc/elasticsearch/elasticsearch.yml':
     ensure  => present,
     content => template('elasticsearch/elasticsearch.yml.erb'),
@@ -77,6 +84,7 @@ class elasticsearch (
     owner   => 'root',
     group   => 'root',
     mode    => '0644',
+    require => File['/etc/elasticsearch'],
   }
 
   file { '/etc/elasticsearch/templates':
@@ -84,6 +92,7 @@ class elasticsearch (
     owner   => 'root',
     group   => 'root',
     mode    => '0755',
+    require => File['/etc/elasticsearch'],
   }
 
   file { '/etc/elasticsearch/default-mapping.json':
@@ -93,6 +102,7 @@ class elasticsearch (
     owner   => 'root',
     group   => 'root',
     mode    => '0644',
+    require => File['/etc/elasticsearch'],
   }
 
   file { '/etc/default/elasticsearch':
@@ -106,8 +116,6 @@ class elasticsearch (
 
   service { 'elasticsearch':
     ensure    => running,
-    require   => [
-      Package['elasticsearch'],
-    ],
+    require   => Package['elasticsearch'],
   }
 }
