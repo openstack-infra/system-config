@@ -456,12 +456,14 @@ node 'git.openstack.org' {
       'git02.openstack.org',
       'git03.openstack.org',
       'git04.openstack.org',
+      'git05.openstack.org',
     ],
     balancer_member_ips     => [
       '192.237.218.169',
       '192.237.217.253',
       '192.237.218.239',
       '192.237.218.34',
+      '166.78.46.121',
     ],
   }
 }
