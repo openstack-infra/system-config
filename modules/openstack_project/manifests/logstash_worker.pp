@@ -16,7 +16,7 @@
 #
 class openstack_project::logstash_worker (
   $elasticsearch_nodes = [],
-  $discover_node = 'elasticsearch.openstack.org',
+  $discover_node = 'elasticsearch01.openstack.org',
   $sysadmins = []
 ) {
   $iptables_rule = regsubst ($elasticsearch_nodes, '^(.*)$', '-m state --state NEW -m tcp -p tcp --dport 9200:9400 -s \1 -j ACCEPT')

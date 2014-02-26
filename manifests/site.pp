@@ -331,18 +331,18 @@ node 'puppet-dashboard.openstack.org' {
 }
 
 $elasticsearch_nodes = [
-  'elasticsearch.openstack.org',
-  'elasticsearch2.openstack.org',
-  'elasticsearch3.openstack.org',
-  'elasticsearch4.openstack.org',
-  'elasticsearch5.openstack.org',
-  'elasticsearch6.openstack.org',
   'elasticsearch01.openstack.org',
   'elasticsearch02.openstack.org',
   'elasticsearch03.openstack.org',
   'elasticsearch04.openstack.org',
   'elasticsearch05.openstack.org',
   'elasticsearch06.openstack.org',
+  'elasticsearch.openstack.org',
+  'elasticsearch2.openstack.org',
+  'elasticsearch3.openstack.org',
+  'elasticsearch4.openstack.org',
+  'elasticsearch5.openstack.org',
+  'elasticsearch6.openstack.org',
 ]
 
 node 'logstash.openstack.org' {
@@ -368,18 +368,18 @@ node 'logstash.openstack.org' {
       'logstash-worker16.openstack.org',
     ],
     discover_nodes                  => [
-      'elasticsearch.openstack.org:9200',
-      'elasticsearch2.openstack.org:9200',
-      'elasticsearch3.openstack.org:9200',
-      'elasticsearch4.openstack.org:9200',
-      'elasticsearch5.openstack.org:9200',
-      'elasticsearch6.openstack.org:9200',
       'elasticsearch01.openstack.org:9200',
       'elasticsearch02.openstack.org:9200',
       'elasticsearch03.openstack.org:9200',
       'elasticsearch04.openstack.org:9200',
       'elasticsearch05.openstack.org:9200',
       'elasticsearch06.openstack.org:9200',
+      'elasticsearch.openstack.org:9200',
+      'elasticsearch2.openstack.org:9200',
+      'elasticsearch3.openstack.org:9200',
+      'elasticsearch4.openstack.org:9200',
+      'elasticsearch5.openstack.org:9200',
+      'elasticsearch6.openstack.org:9200',
     ],
   }
 }
@@ -388,7 +388,7 @@ node /^logstash-worker\d+\.openstack\.org$/ {
   class { 'openstack_project::logstash_worker':
     sysadmins           => hiera('sysadmins'),
     elasticsearch_nodes => $elasticsearch_nodes,
-    discover_node       => 'elasticsearch.openstack.org',
+    discover_node       => 'elasticsearch01.openstack.org',
   }
 }
 
