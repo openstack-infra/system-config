@@ -331,18 +331,18 @@ node 'puppet-dashboard.openstack.org' {
 }
 
 $elasticsearch_nodes = [
-  'elasticsearch.openstack.org',
-  'elasticsearch2.openstack.org',
-  'elasticsearch3.openstack.org',
-  'elasticsearch4.openstack.org',
-  'elasticsearch5.openstack.org',
-  'elasticsearch6.openstack.org',
   'elasticsearch01.openstack.org',
   'elasticsearch02.openstack.org',
   'elasticsearch03.openstack.org',
   'elasticsearch04.openstack.org',
   'elasticsearch05.openstack.org',
   'elasticsearch06.openstack.org',
+  'elasticsearch.openstack.org',
+  'elasticsearch2.openstack.org',
+  'elasticsearch3.openstack.org',
+  'elasticsearch4.openstack.org',
+  'elasticsearch5.openstack.org',
+  'elasticsearch6.openstack.org',
 ]
 
 node 'logstash.openstack.org' {
@@ -382,7 +382,7 @@ node /^logstash-worker\d+\.openstack\.org$/ {
   class { 'openstack_project::logstash_worker':
     sysadmins           => hiera('sysadmins'),
     elasticsearch_nodes => $elasticsearch_nodes,
-    discover_node       => 'elasticsearch.openstack.org',
+    discover_node       => 'elasticsearch01.openstack.org',
   }
 }
 

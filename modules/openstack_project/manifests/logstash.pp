@@ -17,7 +17,7 @@
 class openstack_project::logstash (
   $elasticsearch_nodes = [],
   $gearman_workers = [],
-  $discover_nodes = ['elasticsearch.openstack.org:9200'],
+  $discover_nodes = ['elasticsearch01.openstack.org:9200'],
   $statsd_host = 'graphite.openstack.org',
   $sysadmins = []
 ) {
