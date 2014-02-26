@@ -13,7 +13,7 @@ At a Glance
 :Hosts:
   * http://logstash.openstack.org
   * logstash-worker\*.openstack.org
-  * elasticsearch.openstack.org
+  * elasticsearch\*.openstack.org
 :Puppet:
   * :file:`modules/logstash`
   * :file:`modules/openstack_project/manifests/logstash.pp`
