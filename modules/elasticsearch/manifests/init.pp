@@ -113,9 +113,4 @@ class elasticsearch (
     group   => 'root',
     mode    => '0644',
   }
-
-  service { 'elasticsearch':
-    ensure    => running,
-    require   => Package['elasticsearch'],
-  }
 }
