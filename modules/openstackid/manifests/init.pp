@@ -128,8 +128,7 @@ class openstackid (
         ]
   }
 
-  $docroot_dirs = [ '/srv/openstackid', '/srv/openstackid/w',
-    '/srv/openstackid/w/public']
+  $docroot_dirs = [ '/srv/openstackid' ]
 
   file { $docroot_dirs:
     ensure  => directory,
@@ -211,6 +210,7 @@ class openstackid (
       File['/etc/openstackid/recaptcha.php'],
       File['/etc/openstackid/database.php'],
       File['/etc/openstackid/log.php'],
+      File['/etc/openstackid/environment.php'],
       Package[$php5_packages] ],
   }
 
