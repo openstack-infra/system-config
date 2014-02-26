@@ -446,10 +446,12 @@ jobs:
     branch: ^(?!stable/grizzly).*$
   - name: gate-openstack-manuals-tox-checkdeletions
     branch: ^(?!stable/grizzly).*$
-  - name: gate-openstack-manuals-tox-doc-publish-checkbuild
-    branch: ^(?!stable/grizzly).*$
+  # The order of the next two rules is important, the more generic one
+  # needs to be first.
   - name: ^gate-.*-tox-doc-publish-checkbuild$
     success-pattern: http://docs-draft.openstack.org/{build.parameters[LOG_PATH]}/publish-docs/
+  - name: gate-openstack-manuals-tox-doc-publish-checkbuild
+    branch: ^(?!stable/grizzly).*$
   - name: ^gate-.*-tox-checkniceness$
     voting: false
 # Deprecated documentation targets:
