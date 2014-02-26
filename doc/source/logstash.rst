@@ -13,7 +13,7 @@ At a Glance
 :Hosts:
   * http://logstash.openstack.org
   * logstash-worker\*.openstack.org
-  * elasticsearch.openstack.org
+  * elasticsearch\*.openstack.org
 :Puppet:
   * :file:`modules/logstash`
   * :file:`modules/openstack_project/manifests/logstash.pp`
@@ -89,6 +89,7 @@ bottleneck very quickly. This looks something like:
               \      |      /
                \     |     /
                elasticsearch
+                  cluster
                      |
                      |
                   kibana
@@ -170,17 +171,12 @@ ElasticSearch
 
 ElasticSearch is basically a REST API layer for Lucene. It provides
 the storage and search engine for Logstash. It scales horizontally and
-loves it when you give it more memory. Currently we run a single node
-cluster on a large VM to give ElasticSearch both memory and disk space.
-Per index (Logstash creates one index per day) we have one replica (on
-the same node, this does not provide HA, it speeds up searches) and
-five shards (each shard is basically its own index, having multiple
-shards increases indexing throughput).
-
-As this setup grows and handles more logs we may need to add more
-ElasticSearch nodes and run a proper cluster. Haven't reached that point
-yet, but will probably be necessary as disk and memory footprints
-increase.
+loves it when you give it more memory. Currently we run a multi-node
+cluster on large VMs to give ElasticSearch both memory and disk space.
+Per index (Logstash creates one index per day) we have N+1 replica
+redundancy to distribute disk utilization and provide high availability.
+Each replica is broken into multiple shards providing inceased indexing
+and search throughput as each shard is essentially a valid mini index.
 
 Kibana
 ------
