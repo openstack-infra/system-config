@@ -6,7 +6,8 @@ class jenkins::slave(
   $bare = false,
   $user = true,
   $python3 = false,
-  $include_pypy = false
+  $include_pypy = false,
+  $all_mysql_privs = false,
 ) {
 
   include pip
@@ -285,10 +286,12 @@ class jenkins::slave(
       require    => Database_user['openstack_citest@localhost'],
     }
 
-    database_grant { 'openstack_citest@localhost':
-      privileges => ['CREATE_PRIV', 'DROP_PRIV'],
-      provider   => 'mysql',
-      require    => Database_user['openstack_citest@localhost'],
+    if ($all_mysql_privs == true) {
+      database_grant { 'openstack_citest@localhost':
+        privileges => ['all'],
+        provider   => 'mysql',
+        require    => Database_user['openstack_citest@localhost'],
+      }
     }
 
     # The puppetlabs postgres module does not manage the postgres user
