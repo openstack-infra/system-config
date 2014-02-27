@@ -368,12 +368,6 @@ node 'logstash.openstack.org' {
       'logstash-worker16.openstack.org',
     ],
     discover_nodes                  => [
-      'elasticsearch.openstack.org:9200',
-      'elasticsearch2.openstack.org:9200',
-      'elasticsearch3.openstack.org:9200',
-      'elasticsearch4.openstack.org:9200',
-      'elasticsearch5.openstack.org:9200',
-      'elasticsearch6.openstack.org:9200',
       'elasticsearch01.openstack.org:9200',
       'elasticsearch02.openstack.org:9200',
       'elasticsearch03.openstack.org:9200',
