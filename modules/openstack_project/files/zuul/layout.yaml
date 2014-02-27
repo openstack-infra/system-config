@@ -2168,10 +2168,13 @@ projects:
       - gate-savanna-extra-pep8
     post:
       - savanna-extra-branch-tarball
+      - savanna-hadoop-swift-branch
     pre-release:
       - savanna-extra-tarball
+      - savanna-hadoop-swift-branch
     release:
       - savanna-extra-tarball
+      - savanna-hadoop-swift-master
 
 # TODO: add docs
   - name: openstack/savanna-image-elements

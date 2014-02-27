@@ -1,0 +1,31 @@
+- job-template:
+    name: 'savanna-hadoop-swift-{branch-designator}'
+
+    builders:
+      - gerrit-git-prep
+      - shell: |
+          #!/bin/bash -xe
+          cd hadoop-swiftfs
+          /usr/local/jenkins/slave_scripts/maven-properties.sh
+      - inject:
+          properties-file: maven.properties
+      - shell: |
+          #!/bin/bash -xe
+
+          cd hadoop-swiftfs
+          mvn package -B
+          cd ..
+
+          mkdir dist
+          cp hadoop-swiftfs/target/*.jar dist/hadoop-swift-$PROJECT_VER.jar
+          cp dist/hadoop-swift-$PROJECT_VER.jar dist/hadoop-swift-latest.jar
+    publishers:
+      - console-log
+      - scp:
+          site: 'static.openstack.org'
+          files:
+            - target: 'tarballs/savanna-extra/'
+              source: 'dist/*.jar'
+              keep-hierarchy: false
+              copy-after-failure: false
+    node: '{node}'
