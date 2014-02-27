@@ -96,6 +96,12 @@ class jenkins::slave(
           package { $::jenkins::params::zookeeper_package:
               ensure => present,
           }
+          # Fedora needs community-mysql package for mysql_config
+          # command used in some gate-{project}-python27
+          # jobs in Jenkins
+          package { $::jenkins::params::mysql_package:
+              ensure => present,
+          }
       }
     }
     'Debian': {
@@ -245,13 +251,25 @@ class jenkins::slave(
   }
 
   if ($bare == false) {
-    class {'mysql::server':
-      config_hash =>  {
-        'root_password'  => 'insecure_slave',
-        'default_engine' => 'MyISAM',
-        'bind_address'   => '127.0.0.1',
+    if ($::operatingsystem == 'Fedora') and ($::operatingsystemrelease >= 19) {
+      class {'mysql::server':
+        config_hash  =>  {
+          'root_password'  => 'insecure_slave',
+          'default_engine' => 'MyISAM',
+          'bind_address'   => '127.0.0.1',
+        },
+        package_name => 'community-mysql-server',
+      }
+    } else {
+      class {'mysql::server':
+        config_hash =>  {
+          'root_password'  => 'insecure_slave',
+          'default_engine' => 'MyISAM',
+          'bind_address'   => '127.0.0.1',
+        }
       }
     }
+
     include mysql::server::account_security
 
     mysql::db { 'openstack_citest':
