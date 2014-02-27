@@ -19,8 +19,11 @@
 HOSTNAME=$1
 SUDO='false'
 BARE='false'
+PYTHON3='false'
+PYPY='false'
+ALL_MYSQL_PRIVS='true'
 
-./prepare_node.sh "$HOSTNAME" "$SUDO" "$BARE"
+./prepare_node.sh "$HOSTNAME" "$SUDO" "$BARE" "$PYTHON3" "$PYPY" "$ALL_MYSQL_PRIVS"
 
 sync
 sleep 5
