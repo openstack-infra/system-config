@@ -255,6 +255,18 @@ project-templates:
       - 'gate-tempest-dsvm-neutron'
       - 'gate-tempest-dsvm-neutron-heat-slow'
 
+  - name: python3-jobs
+    check:
+      - 'gate-{name}-python33'
+    gate:
+      - 'gate-{name}-python33'
+
+  - name: pypy-jobs
+    check:
+      - 'gate-{name}-pypy'
+    gate:
+      - 'gate-{name}-pypy'
+
   - name: openstack-server-publish-jobs
     post:
       - '{name}-docs'
@@ -299,6 +311,21 @@ project-templates:
       - '{name}-manuals-upstream-translation-update'
     periodic:
       - '{name}-manuals-propose-translation-update'
+
+  - name: tempest-gate
+    check:
+      - check-tempest-dsvm-full
+      - check-tempest-dsvm-postgres-full
+      - check-tempest-dsvm-neutron
+      - check-tempest-dsvm-neutron-full
+      - gate-tempest-dsvm-large-ops
+      - gate-tempest-dsvm-neutron-large-ops
+    gate:
+      - gate-tempest-dsvm-full
+      - gate-tempest-dsvm-postgres-full
+      - gate-tempest-dsvm-neutron
+      - gate-tempest-dsvm-large-ops
+      - gate-tempest-dsvm-neutron-large-ops
 
 jobs:
   - name: ^.*$
@@ -678,28 +705,23 @@ projects:
       - cinder-propose-translation-update
 
   - name: openstack/cliff
+    template:
+      - name: python-jobs
+      - name: python3-jobs
+      - name: pypy-jobs
+      - name: check-requirements
+      - name: tempest-gate
     check:
-      - gate-cliff-pep8
-      - gate-cliff-python26
-      - gate-cliff-python27
-      - gate-cliff-python33
-      - gate-cliff-pypy
       - gate-cliff-tox-neutronclient-stable
       - gate-cliff-tox-neutronclient-tip
       - gate-cliff-tox-openstackclient-stable
       - gate-cliff-tox-openstackclient-tip
     gate:
-      - gate-cliff-pep8
-      - gate-cliff-python26
-      - gate-cliff-python27
-      - gate-cliff-python33
-      - gate-cliff-pypy
       - gate-cliff-tox-neutronclient-stable
       - gate-cliff-tox-neutronclient-tip
       - gate-cliff-tox-openstackclient-stable
       - gate-cliff-tox-openstackclient-tip
     post:
-      - cliff-branch-tarball
       - hook-cliff-rtfd
     pre-release:
       - cliff-tarball
@@ -979,6 +1001,8 @@ projects:
     template:
       - name: python-jobs
       - name: openstack-server-publish-jobs
+      - name: check-requirements
+      - name: tempest-gate
     pre-release:
       - pycadf-tarball
     release:
@@ -1019,18 +1043,13 @@ projects:
       - sahara-propose-translation-update
 
   - name: openstack/stevedore
-    check:
-      - gate-stevedore-pep8
-      - gate-stevedore-python26
-      - gate-stevedore-python27
-      - gate-stevedore-python33
-    gate:
-      - gate-stevedore-pep8
-      - gate-stevedore-python26
-      - gate-stevedore-python27
-      - gate-stevedore-python33
+    template:
+      - name: python-jobs
+      - name: python3-jobs
+      - name: pypy-jobs
+      - name: check-requirements
+      - name: tempest-gate
     post:
-      - stevedore-branch-tarball
       - hook-stevedore-rtfd
     pre-release:
       - stevedore-tarball
@@ -1076,13 +1095,13 @@ projects:
   - name: openstack/taskflow
     template:
       - name: python-jobs
+      - name: python3-jobs
       - name: openstack-server-publish-jobs
+      - name: tempest-gate
     check:
-      - gate-taskflow-python33
       - gate-taskflow-tox-py26-sa7-mysql
       - gate-taskflow-tox-py27-sa8-mysql
     gate:
-      - gate-taskflow-python33
       - gate-taskflow-tox-py26-sa7-mysql
       - gate-taskflow-tox-py27-sa8-mysql
     pre-release:
@@ -1906,16 +1925,10 @@ projects:
   - name: openstack/oslo.test
     template:
       - name: python-jobs
+      - name: python3-jobs
+      - name: pypy-jobs
       - name: openstack-server-publish-jobs
       - name: check-requirements
-    check:
-      - gate-oslo.test-python33
-      - gate-oslo.test-pypy
-      - check-oslo.test-dsvm-oslo.config
-      - check-oslo.test-dsvm-oslo.messaging
-    gate:
-      - gate-oslo.test-python33
-      - gate-oslo.test-pypy
     pre-release:
       - oslo.test-tarball
     release:
@@ -1955,6 +1968,8 @@ projects:
     template:
       - name: python-jobs
       - name: openstack-server-publish-jobs
+      - name: check-requirements
+      - name: tempest-gate
     check:
       - gate-oslo.vmware-requirements
       - gate-oslo.vmware-python33
