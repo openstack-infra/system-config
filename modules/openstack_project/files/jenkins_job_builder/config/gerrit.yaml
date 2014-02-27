@@ -125,7 +125,7 @@
     publishers:
       - war:
           site: 'tarballs.openstack.org'
-          warfile: 'gerrit/buck-out/gen/gerrit-${{PROJECT_VER}}.war'
+          warfile: 'gerrit/buck-out/gen/gerrit-${PROJECT_VER}.war'
           target: 'tarballs/ci/test'
       - console-log
 
@@ -197,6 +197,6 @@
     publishers:
       - war:
           site: 'tarballs.openstack.org'
-          warfile: 'gerrit/buck-out/gen/gerrit-${{PROJECT_VER}}.war'
+          warfile: 'gerrit/buck-out/gen/gerrit-${PROJECT_VER}.war'
           target: 'tarballs/ci/gerrit'
       - console-log
