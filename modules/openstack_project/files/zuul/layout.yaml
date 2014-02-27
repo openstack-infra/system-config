@@ -255,6 +255,18 @@ project-templates:
       - 'gate-tempest-dsvm-neutron'
       - 'gate-tempest-dsvm-neutron-heat-slow'
 
+  - name: python3-jobs
+    check:
+      - 'gate-{name}-python33'
+    gate:
+      - 'gate-{name}-python33'
+
+  - name: pypy-jobs
+    check:
+      - 'gate-{name}-pypy'
+    gate:
+      - 'gate-{name}-pypy'
+
   - name: openstack-server-publish-jobs
     post:
       - '{name}-docs'
@@ -600,28 +612,23 @@ projects:
       - cinder-propose-translation-update
 
   - name: openstack/cliff
+    template:
+      - name: python-jobs
+      - name: python3-jobs
+      - name: pypy-jobs
+      - name: check-requirements
+      - name: integrated-gate
     check:
-      - gate-cliff-pep8
-      - gate-cliff-python26
-      - gate-cliff-python27
-      - gate-cliff-python33
-      - gate-cliff-pypy
       - gate-cliff-tox-neutronclient-stable
       - gate-cliff-tox-neutronclient-tip
       - gate-cliff-tox-openstackclient-stable
       - gate-cliff-tox-openstackclient-tip
     gate:
-      - gate-cliff-pep8
-      - gate-cliff-python26
-      - gate-cliff-python27
-      - gate-cliff-python33
-      - gate-cliff-pypy
       - gate-cliff-tox-neutronclient-stable
       - gate-cliff-tox-neutronclient-tip
       - gate-cliff-tox-openstackclient-stable
       - gate-cliff-tox-openstackclient-tip
     post:
-      - cliff-branch-tarball
       - hook-cliff-rtfd
     pre-release:
       - cliff-tarball
@@ -916,6 +923,8 @@ projects:
     template:
       - name: python-jobs
       - name: openstack-server-publish-jobs
+      - name: check-requirements
+      - name: integrated-gate
     pre-release:
       - pycadf-tarball
     release:
@@ -956,18 +965,13 @@ projects:
       - sahara-propose-translation-update
 
   - name: openstack/stevedore
-    check:
-      - gate-stevedore-pep8
-      - gate-stevedore-python26
-      - gate-stevedore-python27
-      - gate-stevedore-python33
-    gate:
-      - gate-stevedore-pep8
-      - gate-stevedore-python26
-      - gate-stevedore-python27
-      - gate-stevedore-python33
+    template:
+      - name: python-jobs
+      - name: python3-jobs
+      - name: pypy-jobs
+      - name: check-requirements
+      - name: integrated-gate
     post:
-      - stevedore-branch-tarball
       - hook-stevedore-rtfd
     pre-release:
       - stevedore-tarball
@@ -1015,13 +1019,13 @@ projects:
   - name: openstack/taskflow
     template:
       - name: python-jobs
+      - name: python3-jobs
       - name: openstack-server-publish-jobs
+      - name: integrated-gate
     check:
-      - gate-taskflow-python33
       - gate-taskflow-tox-py26-sa7-mysql
       - gate-taskflow-tox-py27-sa8-mysql
     gate:
-      - gate-taskflow-python33
       - gate-taskflow-tox-py26-sa7-mysql
       - gate-taskflow-tox-py27-sa8-mysql
     pre-release:
@@ -1886,18 +1890,10 @@ projects:
   - name: openstack/oslo.test
     template:
       - name: python-jobs
+      - name: python3-jobs
+      - name: pypy-jobs
       - name: openstack-server-publish-jobs
       - name: check-requirements
-    check:
-      - gate-oslo.test-python33
-      - gate-oslo.test-pypy
-      - check-oslo.test-dsvm-oslo.config
-      - check-oslo.test-dsvm-oslo.messaging
-    gate:
-      - gate-oslo.test-python33
-      - gate-oslo.test-pypy
-      - gate-oslo.test-dsvm-oslo.config
-      - gate-oslo.test-dsvm-oslo.messaging
     pre-release:
       - oslo.test-tarball
     release:
@@ -1939,6 +1935,8 @@ projects:
     template:
       - name: python-jobs
       - name: openstack-server-publish-jobs
+      - name: check-requirements
+      - name: integrated-gate
     check:
       - gate-oslo.vmware-requirements
       - gate-oslo.vmware-python33
