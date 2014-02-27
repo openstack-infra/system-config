@@ -30,9 +30,9 @@
         - gerrit-git-prep
         - shell: |
             #!/bin/bash -xe
-            /usr/local/jenkins/slave_scripts/version-properties.sh
+            /usr/local/jenkins/slave_scripts/maven-properties.sh
         - inject:
-            properties-file: version.properties
+            properties-file: maven.properties
         - shell: |
             #!/bin/bash -xe
             # fetch drush

@@ -110,9 +110,9 @@
       - shell: |
           #!/bin/bash -xe
           cd gerrit
-          /usr/local/jenkins/slave_scripts/version-properties.sh
+          /usr/local/jenkins/slave_scripts/maven-properties.sh
       - inject:
-          properties-file: gerrit/version.properties
+          properties-file: gerrit/maven.properties
       - install-buck
       - shell: |
           #!/bin/bash -xe
@@ -148,9 +148,9 @@
       - shell: |
           #!/bin/bash -xe
           cd gerrit
-          /usr/local/jenkins/slave_scripts/version-properties.sh
+          /usr/local/jenkins/slave_scripts/maven-properties.sh
       - inject:
-          properties-file: gerrit/version.properties
+          properties-file: gerrit/maven.properties
       - install-buck
       - shell: |
           #!/bin/bash -xe
@@ -182,9 +182,9 @@
       - shell: |
           #!/bin/bash -xe
           cd gerrit
-          /usr/local/jenkins/slave_scripts/version-properties.sh
+          /usr/local/jenkins/slave_scripts/maven-properties.sh
       - inject:
-          properties-file: gerrit/version.properties
+          properties-file: gerrit/maven.properties
       - install-buck
       - shell: |
           #!/bin/bash -xe
