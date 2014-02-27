@@ -27,6 +27,14 @@ class openstack_project::logstash_worker (
     sysadmins                 => $sysadmins,
   }
 
+  file { '/etc/default/logstash-indexer':
+    ensure => present,
+    owner  => 'root',
+    group  => 'root',
+    mode   => '0644',
+    source => 'puppet:///modules/openstack_project/logstash/logstash-indexer.default',
+  }
+
   class { 'logstash::indexer':
     conf_template => 'openstack_project/logstash/indexer.conf.erb',
   }
