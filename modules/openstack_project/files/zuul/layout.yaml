@@ -571,6 +571,8 @@ jobs:
     voting: false
   - name: gate-storyboard-python33
     voting: false
+  - name: gate-oslo-incubator-python33
+    branch: ^(?!stable/(grizzly|havana)).*$
 # puppet-openstack targets
   - name: gate-puppet-vswitch-puppet-lint
     voting: false
