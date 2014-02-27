@@ -1,0 +1,3 @@
+# Increase the max heap size to twice the default.
+# Default is 25% of memory or 1g whichever is less.
+JAVA_ARGS='-Xmx2g'
