@@ -240,6 +240,10 @@
     jobs:
       - python-jobs
       - pypi-jobs
+      - 'savanna-hadoop-swift-{branch-designator}':
+          branch-designator: 'master'
+      - 'savanna-hadoop-swift-{branch-designator}':
+          branch-designator: 'branch'
 
 - project:
     name: savanna-image-elements
