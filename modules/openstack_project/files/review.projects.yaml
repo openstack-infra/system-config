@@ -550,6 +550,9 @@
   description: Energy Efficiency Monitoring
   upstream: git://github.com/frossigneux/kwapi.git
 - project: stackforge/libra
+- project: stackforge/magnetodb
+  description: Key-value database service for OpenStack cloud.
+  upstream: git://github.com/Mirantis/magnetodb.git
 - project: stackforge/manila
   description: Shared filesystem management project for OpenStack.
   upstream: git://github.com/bswartz/manila.git
