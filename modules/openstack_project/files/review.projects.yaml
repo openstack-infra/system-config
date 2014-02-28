@@ -627,6 +627,9 @@
 - project: stackforge/openvz-nova-driver
   description: OpenVz driver for Nova
   upstream: git://github.com/imsplitbit/openvz-nova-driver.git
+- project: stackforge/ospurge
+  description: Cleanup OpenStack project resources.
+  upstream: https://github.com/cloudwatt/ospurge.git
 - project: stackforge/packstack
   description: Install utility to deploy openstack on multiple hosts.
   upstream: git://github.com/fedora-openstack/packstack.git

@@ -3827,6 +3827,12 @@ projects:
     gate:
       - gate-noop
 
+  - name: stackforge/ospurge
+    check:
+      - gate-noop
+    gate:
+      - gate-noop
+
   - name: stackforge/packstack
     check:
       - gate-packstack-pep8
