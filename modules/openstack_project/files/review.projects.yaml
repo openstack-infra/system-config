@@ -748,6 +748,9 @@
 - project: stackforge/rally
   description: Benchmark System for OpenStack
   upstream: git://github.com/pboris/rally.git
+- project: stackforge/refstack
+  description: Vendor-facing API for registration of interop-compliance
+  upstream: git://github.com/dlenwell/refstack
 - project: stackforge/rubick
   description: Rule-based diagnostics of configuration of OpenStack platform
   upstream: git://github.com/MirantisLabs/rubick
