@@ -789,6 +789,9 @@
   docimpact-group: turbo-hipster
   description: A generic zuul worker using the gearman protocol.
   upstream: git://github.com/rcbau/turbo-hipster.git
+- project: stackforge/warm
+  description: Provides the ability to deploy OpenStack resources from Yaml templates.
+  upstream: git://github.com/sahid/warm.git
 - project: stackforge/wsme
   description: Web Service Made Easy (WSME) simplify the writing of REST web services by providing simple yet powerful typing which removes the need to directly manipulate the request and the response objects.
   upstream: git://github.com/ryanpetrello/wsme.git

@@ -4584,6 +4584,12 @@ projects:
       - turbo-hipster-coverage
       - hook-turbo-hipster-rtfd
 
+  - name: stackforge/warm
+    check:
+      - gate-noop
+    gate:
+      - gate-noop
+
   - name: stackforge/wsme
     check:
       - gate-wsme-python26
