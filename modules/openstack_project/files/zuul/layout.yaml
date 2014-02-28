@@ -4370,6 +4370,19 @@ projects:
     post:
       - rubick-coverage
 
+  - name: stackforge/satori
+    template:
+      - name: python-jobs
+    check:
+      - gate-satori-requirements
+      - gate-satori-python33
+    gate:
+      - gate-satori-requirements
+      - gate-satori-python33
+      - gate-satori-pypy
+    post:
+      - hook-satori-rtfd
+
   - name: stackforge/solum
     template:
       - name: check-requirements

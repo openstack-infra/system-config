@@ -745,6 +745,9 @@
 - project: stackforge/rubick
   description: Rule-based diagnostics of configuration of OpenStack platform
   upstream: git://github.com/MirantisLabs/rubick
+- project: stackforge/satori
+  upstream: git://github.com/rackerlabs/satori
+  description: Configuration Discovery
 - project: stackforge/savanna-ci-config
   description: savanna-ci 3rd party testing configs (jjb, zuul, etc.)
   acl-config: /home/gerrit2/acls/stackforge/savanna-ci-config.config
