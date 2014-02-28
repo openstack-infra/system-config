@@ -231,6 +231,8 @@
   description: OpenStack Operations Guide
 - project: openstack/os-apply-config
   description: Apply configuration from cloud metadata.
+- project: openstack/os-cloud-config
+  description: Configure a cloud
 - project: openstack/os-collect-config
   description: Collect and cache metadata, run hooks on changes.
 - project: openstack/os-refresh-config
