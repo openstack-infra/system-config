@@ -1836,6 +1836,31 @@ projects:
         - os-apply-config-pypi-upload
 
 #TODO: add docs
+  - name: openstack/os-cloud-config
+    template:
+      - name: check-requirements
+    check:
+      - gate-os-cloud-config-pep8
+      - gate-os-cloud-config-python26
+      - gate-os-cloud-config-python27
+    check-tripleo:
+      - check-tripleo-seed-precise
+      - check-tripleo-undercloud-precise
+      - check-tripleo-overcloud-precise
+    gate:
+      - gate-os-cloud-config-pep8
+      - gate-os-cloud-config-python26
+      - gate-os-cloud-config-python27
+    post:
+      - os-cloud-config-coverage
+      - os-cloud-config-branch-tarball
+    pre-release:
+      - os-cloud-config-tarball
+    release:
+      - os-cloud-config-tarball:
+        - os-cloud-config-pypi-upload
+
+#TODO: add docs
   - name: openstack/os-collect-config
     template:
       - name: check-requirements
