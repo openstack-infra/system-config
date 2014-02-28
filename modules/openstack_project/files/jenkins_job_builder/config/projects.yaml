@@ -2126,6 +2126,15 @@
       - python-jobs
 
 - project:
+    name: heat-translator
+    github-org: stackforge
+    node: bare-precise
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - python-jobs
+
+- project:
     name: release-tools
     github-org: openstack-infra
     node: bare-precise

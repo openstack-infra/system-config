@@ -3529,6 +3529,21 @@ projects:
       - gate-healthnmon-pep8
       - gate-healthnmon-python27
 
+  - name: stackforge/heat-translator
+    template:
+      - name: python-jobs
+    check:
+      - gate-heat-translator-python33
+    gate:
+      - gate-heat-translator-python33
+    post:
+      - heat-translator-coverage
+      - heat-translator-branch-tarball
+    pre-release:
+      - heat-translator-tarball
+    release:
+      - heat-translator-tarball
+
   - name: stackforge/inception
     check:
       - gate-inception-pep8
