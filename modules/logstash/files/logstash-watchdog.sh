@@ -18,6 +18,6 @@ echo "$RESULT" >> /var/log/logstash/watchdog.log
 if [ "$CURL_RET" == "0" ] && [ "$RESULT" == "true" ] ;
 then
     echo "restarting" >> /var/log/logstash/watchdog.log
-    stop --quiet logstash-indexer
-    start --quiet logstash-indexer
+    /sbin/stop --quiet logstash-indexer
+    /sbin/start --quiet logstash-indexer
 fi
