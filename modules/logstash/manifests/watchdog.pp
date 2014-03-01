@@ -35,7 +35,7 @@ class logstash::watchdog (
   cron { 'logstash-watchdog':
     minute      => '*/10',
     environment => 'PATH=/bin:/usr/bin:/usr/local/bin',
-    command     => "sleep $((RANDOM\%60)) && /usr/local/bin/logstash-watchdog ${es_api_node}",
+    command     => "sleep $((RANDOM%60)) && /usr/local/bin/logstash-watchdog ${es_api_node}",
     require     => Service['logstash-indexer']
   }
 }
