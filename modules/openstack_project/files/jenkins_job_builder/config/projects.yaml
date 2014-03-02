@@ -2052,17 +2052,6 @@
     github-org: openstack
     node: bare-precise
 
-    manual:
-      - admin-guide-cloud
-      - cli-reference
-      - config-reference
-      - glossary
-      - image-guide
-      - security-guide
-      - training-guides
-      - user-guide
-      - user-guide-admin
-
     oldmanual:
         - block-storage-admin
         - compute-admin
@@ -2076,27 +2065,8 @@
       - openstack-doc-jobs
       - manual-translation-jobs
 
-      - 'openstack-{manual}'
-
-      - openstack-install-deploy-guide-{distribution}:
-          distribution: debian
-          system: apt-debian
-          profileos: "debian"
-
-      - openstack-install-deploy-guide-{distribution}:
-          distribution: fedora
-          system: yum
-          profileos: "centos;fedora;rhel"
-
-      - openstack-install-deploy-guide-{distribution}:
-          distribution: opensuse
-          system: zypper
-          profileos: "opensuse;sles"
-
-      - openstack-install-deploy-guide-{distribution}:
-          distribution: ubuntu
-          system: apt
-          profileos: "ubuntu"
+      - '{name}-tox-doc-{envlist}':
+          envlist: publishdocs
 
       - openstack-install-deploy-guide-{lang}
 
@@ -2112,6 +2082,8 @@
     jobs:
       - openstack-doc-jobs
       - manual-translation-jobs
+      - '{name}-tox-doc-{envlist}':
+          envlist: publishdocs
 
 - project:
     name: manila
