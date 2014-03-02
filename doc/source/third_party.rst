@@ -43,6 +43,7 @@ Requirements
   easier. This should include:
 
   * Environment details
+    * This must include a utc timestamp of the test run
   * Test configuration
 
     * Skipped tests
