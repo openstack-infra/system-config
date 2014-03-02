@@ -1,6 +1,11 @@
 - job-template:
     name: '{name}-tox-doc-{envlist}'
 
+    properties:
+      - inject:
+          script-file: /usr/local/jenkins/slave_scripts/docbook-properties.sh
+          properties-file: gerrit-doc.properties
+
     wrappers:
       - timeout:
           timeout: 40
