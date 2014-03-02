@@ -72,42 +72,6 @@
           target: ''
           remove-prefix: 'doc/high-availability-guide/target/docbkx/webhelp/'
 
-- job:
-    name: openstack-operations-guide
-    project-type: maven
-    concurrent: false
-    node: bare-precise
-
-    properties:
-      - inject:
-          script-file: /usr/local/jenkins/slave_scripts/docbook-properties.sh
-          properties-file: gerrit-doc.properties
-
-    prebuilders:
-      - gerrit-git-prep
-
-    maven:
-      maven-name: Maven3
-      root-module:
-        group-id: org.openstack.docs
-        artifact-id: openstack-guide
-      root-pom: doc/openstack-ops/pom.xml
-      goals: '-Drelease.path.name=${DOC_RELEASE_PATH} -Dcomments.enabled=${DOC_COMMENTS_ENABLED} clean generate-sources -B'
-
-    publishers:
-      - console-log
-      - ftp:
-          site: docs.openstack.org
-          source: 'doc/openstack-ops/target/docbkx/webhelp/**'
-          target: '/'
-          remove-prefix: 'doc/openstack-ops/target/docbkx/webhelp/'
-          excludes: '**/*.xml,**/null*'
-      - ftp:
-          site: docs.openstack.org
-          source: 'doc/openstack-ops/target/docbkx/webhelp/**/atom.xml'
-          target: ''
-          remove-prefix: 'doc/openstack-ops/target/docbkx/webhelp/'
-
 - job-template:
     name: 'openstack-operations-guide-{lang}'
     concurrent: false
@@ -128,9 +92,4 @@
 
     publishers:
       - console-log
-      - ftp:
-          site: docs.openstack.org
-          source: 'publish-docs/{lang}/**'
-          target: '/{lang}/'
-          remove-prefix: 'publish-docs/{lang}/'
-          excludes: '**/*.xml,**/null*'
+      - upload-to-docs-site

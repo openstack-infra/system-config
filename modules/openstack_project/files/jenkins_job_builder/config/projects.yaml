@@ -2018,6 +2018,8 @@
 
     jobs:
       - openstack-doc-jobs
+      - '{name}-tox-doc-{envlist}':
+          envlist: publishdocs
 
 - project:
     name: manila

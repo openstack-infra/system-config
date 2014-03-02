@@ -2498,7 +2498,7 @@ projects:
     template:
       - name: openstack-doc-gate
     post:
-      - openstack-operations-guide
+      - operations-guide-tox-doc-publishdocs
       - openstack-operations-guide-ja
       - manuals-upstream-translation-update
     periodic:
