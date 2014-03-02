@@ -416,40 +416,14 @@ jobs:
     failure-message: Jenkins XML output has changed.
     success-message: Jenkins XML output is unchanged.
 # Continous publishing from master of the following documentation targets:
-  - name: openstack-admin-guide-cloud
-    branch: master
   - name: openstack-docs-site
-    branch: master
-  - name: openstack-cli-reference
-    branch: master
-  - name: openstack-glossary
-    branch: master
-  - name: openstack-ha-guide
-    branch: master
-  - name: openstack-image-guide
-    branch: master
-  - name: openstack-user-guide
-    branch: master
-  - name: openstack-user-guide-admin
-    branch: master
-  - name: openstack-security-guide
-    branch: master
-  - name: openstack-training-guides
     branch: master
   - name: ^.*manuals-propose-translation-update$
     branch: master
   - name: ^.*manuals-upstream-translation-update$
     branch: master
 # Documentation targets for master and future stable branches:
-  - name: openstack-config-reference
-    branch: ^(?!stable/grizzly).*$
-  - name: openstack-install-deploy-guide-debian
-    branch: ^(?!stable/grizzly).*$
-  - name: openstack-install-deploy-guide-fedora
-    branch: ^(?!stable/grizzly).*$
-  - name: openstack-install-deploy-guide-opensuse
-    branch: ^(?!stable/grizzly).*$
-  - name: openstack-install-deploy-guide-ubuntu
+  - name: openstack-manuals-tox-doc-publishdocs
     branch: ^(?!stable/grizzly).*$
   - name: gate-openstack-manuals-tox-checkniceness
     branch: ^(?!stable/grizzly).*$
@@ -2306,37 +2280,23 @@ projects:
     gate:
       - gate-openstack-manuals-validate
     post:
-      - openstack-admin-guide-cloud
       - openstack-block-storage-admin-old
       - openstack-compute-admin-old
       - openstack-network-connectivity-admin-old
       - openstack-object-storage-admin-old
       - openstack-basic-install-fedora-old
       - openstack-basic-install-ubuntu-old
-      - openstack-glossary
-      - openstack-image-guide
-      - openstack-cli-reference
-      - openstack-config-reference
-      - openstack-docs-site
-      - openstack-ha-guide
-      - openstack-install-deploy-guide-debian
-      - openstack-install-deploy-guide-fedora
+      - openstack-manuals-tox-doc-publishdocs
       - openstack-openstack-install-fedora-old
-      - openstack-install-deploy-guide-opensuse
-      - openstack-install-deploy-guide-ubuntu
       - openstack-openstack-install-ubuntu-old
       - openstack-install-deploy-guide-ja
-      - openstack-security-guide
-      - openstack-user-guide
-      - openstack-user-guide-admin
-      - openstack-training-guides
 
   - name: openstack/operations-guide
     template:
       - name: openstack-doc-gate
       - name: openstack-doc-translation
     post:
-      - openstack-operations-guide
+      - operations-guide-tox-doc-publishdocs
       - openstack-operations-guide-ja
 
 # Section: OpenStack development projects
