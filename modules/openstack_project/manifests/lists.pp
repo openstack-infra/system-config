@@ -102,7 +102,16 @@ class openstack_project::lists(
     mailserver  => $listdomain,
   }
 
-  maillist { 'openstack-sos':
+  maillist { 'openstack-track-chairs':
+    ensure      => present,
+    admin       => 'claire@openstack.org',
+    password    => $listpassword,
+    description => 'Coordination of tracks at OpenStack Summits',
+    webserver   => $listdomain,
+    mailserver  => $listdomain,
+  }
+
+ maillist { 'openstack-sos':
     ensure      => present,
     admin       => 'dms@danplanet.com',
     password    => $listpassword,
