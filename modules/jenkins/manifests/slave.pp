@@ -103,6 +103,18 @@ class jenkins::slave(
           package { $::jenkins::params::mysql_package:
               ensure => present,
           }
+          # Not setting on Fedora because java6 packages are not available, so
+          # we'll always be using the java7 ones
+          exec { 'update-java-alternatives':
+            unless   => true,
+            path     => '/usr/local/bin/:/bin/',
+            command  => true,
+          }
+      } else {
+          exec { 'update-java-alternatives':
+            unless   => '/bin/ls -l /etc/alternatives/java | /bin/grep 1.7.0-openjdk',
+            command  => '/usr/sbin/alternatives --set java /usr/lib/jvm/jre-1.7.0-openjdk.x86_64/bin/java && /usr/sbin/alternatives --set javac /usr/lib/jvm/java-1.7.0-openjdk.x86_64/bin/javac',
+          }
       }
     }
     'Debian': {
