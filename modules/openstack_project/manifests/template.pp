@@ -9,7 +9,8 @@ class openstack_project::template (
   $iptables_rules6           = [],
   $install_users = true,
   $automatic_upgrades = true,
-  $certname = $::fqdn
+  $certname = $::fqdn,
+  $puppet_master = 'ci-puppetmaster.openstack.org'
 ) {
   include ssh
   include snmpd
@@ -29,6 +30,7 @@ class openstack_project::template (
   class { 'openstack_project::base':
     install_users => $install_users,
     certname      => $certname,
+    puppet_master => $puppet_master,
   }
 
   package { 'strace':
