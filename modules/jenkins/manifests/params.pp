@@ -7,7 +7,7 @@ class jenkins::params {
     'RedHat': {
       #yum groupinstall "Development Tools"
       # common packages
-      $jdk_package = 'java-1.7.0-openjdk'
+      $jdk_package = 'java-1.7.0-openjdk-devel'
       $ccache_package = 'ccache'
       $python_netaddr_package = 'python-netaddr'
       # packages needed by slaves
