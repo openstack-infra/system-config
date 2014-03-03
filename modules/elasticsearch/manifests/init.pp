@@ -24,6 +24,12 @@ class elasticsearch (
     ensure => present,
   }
 
+  # Curl is handy for talking to the ES API on localhost. Allows for
+  # querying cluster state and deleting indexes and so on.
+  package { 'curl':
+    ensure => present,
+  }
+
   exec { 'get_elasticsearch_deb':
     command => "wget https://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-${version}.deb -O /tmp/elasticsearch-${version}.deb",
     path    => '/bin:/usr/bin',
