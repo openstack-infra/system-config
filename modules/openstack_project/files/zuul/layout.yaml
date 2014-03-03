@@ -296,9 +296,6 @@ jobs:
   - name: ^(periodic|post)-mirror-python(26|27|33)$
     parameter-function: reusable_node
   # the salt-trigger worker has no jobs yet
-  # jobs run on the precisepy3k workers
-  - name: ^gate-.*-pypy$
-    parameter-function: reusable_node
   - name: ^(gate|check)-requirements-integration-dsvm$
     branch: ^(?!stable/grizzly).*$
   - name: ^(gate|check)-tempest-dsvm-neutron-pg$
