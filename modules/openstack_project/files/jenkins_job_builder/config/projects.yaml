@@ -286,6 +286,9 @@
       - gate-{name}-unittests-{env}:
           env: 27sa07
       - hook-{name}-rtfd
+      - '{pipeline}-tempest-dsvm-full{branch-designator}':
+          branch-designator: '-sqla'
+          branch-override: default
       - pypi-jobs
 
 - project:
