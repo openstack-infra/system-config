@@ -285,6 +285,16 @@
           node: bare-centos6
       - gate-{name}-unittests-{env}:
           env: 27sa07
+      - '{pipeline}-sqlalchemy-migrate-devstack-dsvm{branch-designator}':
+          pipeline: check
+          node: 'devstack-precise || devstack-precise-check'
+          branch-designator: ''
+          branch-override: default
+      - '{pipeline}-sqlalchemy-migrate-devstack-dsvm{branch-designator}':
+          pipeline: gate
+          node: 'devstack-precise'
+          branch-designator: ''
+          branch-override: default
       - hook-{name}-rtfd
       - pypi-jobs
 
