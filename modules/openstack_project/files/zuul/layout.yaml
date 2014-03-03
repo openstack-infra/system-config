@@ -575,6 +575,8 @@ jobs:
     voting: false
   - name: gate-barbican-devstack-dsvm
     voting: false
+  - name: ^(gate|check)-sqlalchemy-migrate-devstack-dsvm$
+    voting: false
   - name: gate-manila-tempest-dsvm-neutron
     voting: false
   - name: gate-climate-devstack-dsvm
@@ -4532,6 +4534,7 @@ projects:
       - gate-sqlalchemy-migrate-python27
       - gate-sqlalchemy-migrate-unittests-26sa07
       - gate-sqlalchemy-migrate-unittests-27sa07
+      - check-sqlalchemy-migrate-devstack-dsvm
     gate:
       - gate-sqlalchemy-migrate-python26
       - gate-sqlalchemy-migrate-python27
