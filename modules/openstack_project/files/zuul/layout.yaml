@@ -2728,6 +2728,7 @@ projects:
       - check-devstack-dsvm-cells
       - check-dg-tempest-dsvm-full
       - check-dg-tempest-dsvm-full-reexec
+      - check-dg-hooks-dsvm
       - check-tempest-dsvm-full
       - check-tempest-dsvm-postgres-full
       - check-tempest-dsvm-neutron
