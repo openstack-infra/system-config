@@ -82,7 +82,7 @@ class jenkins::slave(
 
   package { $packages:
     ensure => present,
-    before => Exec['update-java-alternatives']
+    before => Anchor['classname::update-java-alternatives']
   }
 
   case $::osfamily {
@@ -102,6 +102,20 @@ class jenkins::slave(
           # jobs in Jenkins
           package { $::jenkins::params::mysql_package:
               ensure => present,
+          }
+          # Not setting on Fedora because java6 packages are not available, so
+          # we'll always be using the java7 ones
+          exec { 'update-java-alternatives':
+            unless   => 'true',
+            path     => '/usr/local/bin/:/bin/',
+            command  => 'true',
+            require  => Anchor['classname::update-java-alternatives']
+          }
+      } else {
+          exec { 'update-java-alternatives':
+            unless   => '/bin/ls -l /etc/alternatives/java | /bin/grep 1.7.0-openjdk',
+            command  => '/usr/sbin/alternatives --set java /usr/lib/jvm/jre-1.7.0-openjdk.x86_64/bin/java && /usr/sbin/alternatives --set javac /usr/lib/jvm/java-1.7.0-openjdk.x86_64/bin/javac',
+            require  => Anchor['classname::update-java-alternatives']
           }
       }
     }
@@ -147,6 +161,7 @@ class jenkins::slave(
       exec { 'update-java-alternatives':
         unless   => '/bin/ls -l /etc/alternatives/java | /bin/grep java-7-openjdk-amd64',
         command  => '/usr/sbin/update-java-alternatives --set java-1.7.0-openjdk-amd64',
+        require  => Anchor['classname::update-java-alternatives']
       }
 
     }
