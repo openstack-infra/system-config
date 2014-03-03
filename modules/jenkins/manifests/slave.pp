@@ -103,6 +103,15 @@ class jenkins::slave(
           package { $::jenkins::params::mysql_package:
               ensure => present,
           }
+          exec { 'update-java-alternatives':
+            unless   => '/bin/ls -l /etc/alternatives/java | /bin/grep jre-1.7.0-openjdk',
+            command  => '/usr/sbin/alternatives --set java /usr/lib/jvm/java-1.7.0-openjdk-1.7.0.60-2.4.5.1.fc20.x86_64/jre/bin/java && /usr/sbin/alternatives --set javac /usr/lib/jvm/java-1.7.0-openjdk-1.7.0.60-2.4.5.1.fc20.x86_64/bin/javac',
+          }
+      } else {
+          exec { 'update-java-alternatives':
+            unless   => '/bin/ls -l /etc/alternatives/java | /bin/grep jre-1.7.0-openjdk',
+            command  => '/usr/sbin/alternatives --set java /usr/lib/jvm/jre-1.7.0-openjdk.x86_64/bin/java && /usr/sbin/alternatives --set javac /usr/lib/jvm/java-1.7.0-openjdk.x86_64/bin/javac',
+          }
       }
     }
     'Debian': {
