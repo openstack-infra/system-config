@@ -457,6 +457,10 @@ jobs:
     branch: ^(?!stable/grizzly).*$
   - name: ^gate-.*-tox-checkniceness$
     voting: false
+# Sample Config Check - Once sample configs are published via docs / to openstack-manuals
+# and generated at packaging/setup time this check should be removed completely.
+  - name: ^check-.*-config-sample-up-to-date$
+    voting: false
 # Deprecated documentation targets:
   - name: openstack-block-storage-admin-old
     branch: stable/grizzly
@@ -619,6 +623,7 @@ projects:
       - check-tempest-dsvm-neutron-full
       - gate-tempest-dsvm-large-ops
       - gate-tempest-dsvm-neutron-large-ops
+      - check-ceilometer-config-sample-up-to-date
       - check-swift-dsvm-functional
     gate:
       - gate-devstack-dsvm-cells
@@ -789,6 +794,7 @@ projects:
       - gate-tempest-dsvm-large-ops
       - gate-tempest-dsvm-neutron-large-ops
       - check-tempest-dsvm-neutron-heat-slow
+      - check-heat-config-sample-up-to-date
     gate:
       - gate-devstack-dsvm-cells
       - gate-tempest-dsvm-postgres-full
@@ -877,6 +883,7 @@ projects:
       - check-tempest-dsvm-neutron-full
       - gate-tempest-dsvm-large-ops
       - gate-tempest-dsvm-neutron-large-ops
+      - check-keystone-config-sample-up-to-date
       - check-swift-dsvm-functional
     gate:
       - gate-devstack-dsvm-cells
@@ -983,6 +990,7 @@ projects:
       - gate-nova-pylint
       - check-tempest-dsvm-neutron-heat-slow
       - check-grenade-dsvm-partial-ncpu
+      - check-nova-config-sample-up-to-date
     gate:
       - gate-devstack-dsvm-cells
       - gate-tempest-dsvm-postgres-full
