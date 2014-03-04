@@ -1,0 +1,14 @@
+- job-template:
+    name: '{name}-propose-sample-config-update'
+    concurrent: false
+
+    builders:
+      - gerrit-git-prep
+      - shell: |
+          #!/bin/bash -xe
+          /usr/local/jenkins/slave_scripts/propose_sample_config_update.sh {github-org} {name}
+
+    publishers:
+      - console-log
+
+    node: bare-precise
