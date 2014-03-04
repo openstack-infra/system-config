@@ -50,6 +50,7 @@ MODULES["rafaelfc-pear"]="1.0.3"
 MODULES["puppetlabs-inifile"]="1.0.0"
 MODULES["puppetlabs-firewall"]="0.0.4"
 MODULES["puppetlabs-puppetdb"]="3.0.1"
+MODULES["nibalizer-puppetboard"]="2.3.0"
 
 MODULE_LIST=`puppet module list`
 
