@@ -1,0 +1,19 @@
+- job-template:
+    name: 'check-{name}-config-sample-up-to-date'
+    concurrent: false
+
+    builders:
+      - gerrit-git-prep
+      - shell: |
+          #!/bin/bash -xe
+          /usr/local/jenkins/slave_scripts/check-config-sample-up-to-date.sh {github-org} {name}
+
+    publishers:
+      - console-log
+
+    node: 'bare-precise'
+
+- job-group:
+    name: sample-config-jobs
+    jobs:
+      - 'check-{name}-config-sample-up-to-date'
