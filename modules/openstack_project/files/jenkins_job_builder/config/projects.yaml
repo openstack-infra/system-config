@@ -318,6 +318,7 @@
       - python-grizzly-bitrot-jobs
       - python-havana-bitrot-jobs
       - openstack-publish-jobs
+      - sample-config-jobs
       - translation-jobs
 
 - project:
@@ -534,6 +535,7 @@
       - python-grizzly-bitrot-jobs
       - python-havana-bitrot-jobs
       - openstack-publish-jobs
+      - sample-config-jobs
       - translation-jobs
 
 
@@ -649,6 +651,7 @@
       - python-grizzly-bitrot-jobs
       - python-havana-bitrot-jobs
       - openstack-publish-jobs
+      - sample-config-jobs
       - translation-jobs
 
 
@@ -700,6 +703,7 @@
       - python-havana-bitrot-jobs
       - openstack-publish-jobs
       - gate-{name}-pylint
+      - sample-config-jobs
       - translation-jobs
 
 
