@@ -1,0 +1,13 @@
+<VirtualHost *:80>
+    ServerName puppetboard
+
+    WSGIDaemonProcess puppetboard user=puppetboard group=puppetboard threads=5
+    WSGIScriptAlias / /home/puppetboard/puppetboard/wsgi.py
+
+    <Directory /home/puppetboard/puppetboard>
+        WSGIProcessGroup puppetboard
+        WSGIApplicationGroup %{GLOBAL}
+        Order deny,allow
+        Allow from all
+    </Directory>
+</VirtualHost>
