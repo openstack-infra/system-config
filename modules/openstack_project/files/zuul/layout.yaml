@@ -918,6 +918,7 @@ projects:
     periodic:
       - keystone-propose-translation-update
       - periodic-swift-dsvm-functional-havana
+      - keystone-propose-sample-config-update
 
 # TODO: add docs
   - name: openstack/marconi
