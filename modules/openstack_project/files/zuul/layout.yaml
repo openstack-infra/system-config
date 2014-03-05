@@ -2531,6 +2531,7 @@ projects:
       - gate-grenade-dsvm-forward
       - gate-swift-dsvm-functional
     experimental:
+      - check-tempest-dsvm-marconi
       - gate-grenade-dsvm-forward
 
   - name: openstack-dev/grenade
