@@ -535,6 +535,18 @@ syscompass:
     branches:
       - master
 
+openstack-keystone:
+    events:
+      - change-merged
+      - patchset-created
+      - x-vrif-minus-2
+    projects:
+      - openstack/keystone
+      - openstack/identity-api
+      - openstack/python-keystoneclient
+    branches:
+      - master
+
 openstack-merges:
     events:
       - change-merged
