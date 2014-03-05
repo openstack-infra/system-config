@@ -4662,6 +4662,8 @@ projects:
           - post-mirror-python33
 
   - name: stackforge/python-openstacksdk
+    template:
+      - name: check-requirements
     check:
       - gate-python-openstacksdk-pep8
       - gate-python-openstacksdk-python26
