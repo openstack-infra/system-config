@@ -1890,6 +1890,16 @@
       - pypi-jobs
 
 - project:
+    name: warm
+    github-org: stackforge
+    node: bare-precise
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - gate-{name}-pep8
+      - gate-{name}-python27
+
+- project:
     name: wsme
     github-org: stackforge
     node: bare-precise

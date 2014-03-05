@@ -4630,9 +4630,11 @@ projects:
 
   - name: stackforge/warm
     check:
-      - gate-noop
+      - gate-warm-pep8
+      - gate-warm-python27
     gate:
-      - gate-noop
+      - gate-warm-pep8
+      - gate-warm-python27
 
   - name: stackforge/wsme
     check:
