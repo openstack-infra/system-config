@@ -4460,6 +4460,7 @@ projects:
     check:
       - gate-satori-requirements
       - gate-satori-python33
+      - gate-satori-pypy
     gate:
       - gate-satori-requirements
       - gate-satori-python33
