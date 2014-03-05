@@ -11,6 +11,21 @@
 
 
 - job:
+    name: gate-config-irc-access
+    node: bare-precise
+
+    builders:
+      - gerrit-git-prep
+      - tox:
+          envlist: 'irc'
+          github-org: 'openstack-infra'
+          project: 'config'
+
+    publishers:
+      - console-log
+
+
+- job:
     name: gate-config-layout
     node: bare-precise
 
