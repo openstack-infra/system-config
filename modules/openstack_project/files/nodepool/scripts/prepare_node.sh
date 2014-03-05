@@ -44,5 +44,11 @@ sudo -i python /opt/nodepool-scripts/cache_git_repos.py
 # boot (eg when this image is used for testing).
 sudo sed -i 's/ext3/ext4/g' /etc/fstab
 
+# Limit all test slaves to 8GB of memory so that larger flavors with more
+# cpu resources can be used without the risk of becoming dependent on more
+# memory.
+sudo sed -i 's/#\?GRUB_CMDLINE_LINUX=""/GRUB_CMDLINE_LINUX="mem=8G"/g' /etc/default/grub
+sudo update-grub
+
 sync
 sleep 5
