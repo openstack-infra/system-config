@@ -110,6 +110,17 @@ class storyboard (
     ],
   }
 
+  exec { 'load-projects-yaml':
+    command     => 'storyboard-db-manage --config-file /etc/storyboard/storyboard.conf load_projects /etc/storyboard/projects.yaml',
+    path        => '/usr/local/bin:/usr/bin:/bin/',
+    refreshonly => true,
+    subscribe   => File['/etc/storyboard/projects.yaml'],
+    require     => [
+      File['/etc/storyboard/projects.yaml'],
+      Exec['migrate-storyboard-db'],
+    ],
+  }
+
   file { '/var/log/storyboard':
     ensure  => directory,
     owner   => 'storyboard',
