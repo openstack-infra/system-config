@@ -52,6 +52,46 @@
       - console-log
 
 - job-template:
+    name: 'check-dg-hooks-dsvm'
+    node: '{node}'
+
+    wrappers:
+      - timeout:
+          timeout: 60
+          fail: true
+      - timestamps
+
+    builders:
+      - devstack-checkout
+      - shell: |
+          #!/bin/bash -xe
+          export PYTHONUNBUFFERED=true
+
+          # place calls for all hooks in here
+          function pre_test_hook {{
+              echo "I'm totally an awesome pre_test_hook"
+          }}
+          export -f pre_test_hook
+
+          function gate_hook {{
+              echo "I'm totally an awesome gate_hook"
+          }}
+          export -f gate_hook
+
+          function post_test_hook {{
+              echo "I'm totally an awesome post_test_hook"
+          }}
+          export -f post_test_hook
+
+          cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
+          ./safe-devstack-vm-gate-wrap.sh
+      - link-logs
+
+    publishers:
+      - devstack-logs
+      - console-log
+
+- job-template:
     name: '{pipeline}-tempest-dsvm-full{branch-designator}'
     node: '{node}'
 
@@ -1032,6 +1072,7 @@
     jobs:
       - 'check-dg-tempest-dsvm-full'
       - 'check-dg-tempest-dsvm-full-reexec'
+      - 'check-dg-hooks-dsvm'
 
 
 - job-group:
