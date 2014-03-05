@@ -1890,6 +1890,15 @@
       - pypi-jobs
 
 - project:
+    name: warm
+    github-org: stackforge
+    node: bare-precise
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - python-jobs
+
+- project:
     name: wsme
     github-org: stackforge
     node: bare-precise
