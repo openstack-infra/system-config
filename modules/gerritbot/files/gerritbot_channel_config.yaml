@@ -192,6 +192,16 @@ openstack-nova:
     branches:
       - master
 
+openstack-vmware:
+    events:
+      - patchset-created
+      - change-merged
+      - x-vrif-minus-2
+    projects:
+      - openstack/oslo.vmware
+    branches:
+      - master
+
 openstack-cinder:
     events:
       - patchset-created
@@ -578,6 +588,7 @@ openstack-merges:
       - openstack/oslo.rootwrap
       - openstack/oslo.sphinx
       - openstack/oslo.version
+      - openstack/oslo.vmware
       - openstack-dev/cookiecutter
       - openstack-dev/hacking
       - openstack-dev/pbr
