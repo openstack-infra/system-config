@@ -4664,6 +4664,7 @@ projects:
   - name: stackforge/python-openstacksdk
     template:
       - name: check-requirements
+        voting: false
     check:
       - gate-python-openstacksdk-pep8
       - gate-python-openstacksdk-python26
