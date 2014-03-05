@@ -25,5 +25,4 @@ ALL_MYSQL_PRIVS='true'
 
 ./prepare_node.sh "$HOSTNAME" "$SUDO" "$BARE" "$PYTHON3" "$PYPY" "$ALL_MYSQL_PRIVS"
 
-sync
-sleep 5
+./restrict_memory.sh
