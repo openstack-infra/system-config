@@ -44,5 +44,18 @@ sudo -i python /opt/nodepool-scripts/cache_git_repos.py
 # boot (eg when this image is used for testing).
 sudo sed -i 's/ext3/ext4/g' /etc/fstab
 
+# Limit all test slaves to 8GB of memory so that larger flavors with more
+# cpu resources can be used without the risk of becoming dependent on more
+# memory.
+OS_FACT=$(facter operatingsystem)
+if [ "$OS_FACT" == "Ubuntu" ] ; then
+    sudo sed -i -e 's/^GRUB_TIMEOUT=[0-9]\+/GRUB_TIMEOUT=0/' -e 's/#\?GRUB_CMDLINE_LINUX=""/GRUB_CMDLINE_LINUX="mem=8G"/g' /etc/default/grub
+    sudo update-grub
+elif [ "$OS_FACT" == "CentOS" ] ; then
+    sudo sed -i -e 's/^timeout=[0-9]\+/timeout=0/' -e 's/\(^\s\+kernel.*\)/\1 mem=2G/' /boot/grub/grub.conf
+elif [ "$OS_FACT" == "Fedora" ] ; then
+    # TODO
+fi
+
 sync
 sleep 5
