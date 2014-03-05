@@ -57,6 +57,14 @@ case "$1" in
 	    grep -h "$PATTERN" $OLDLOGFILE > /tmp/jenkins-sudo-log/post
 	fi
 	grep -h "$PATTERN" $LOGFILE >> /tmp/jenkins-sudo-log/post
-	diff /tmp/jenkins-sudo-log/pre /tmp/jenkins-sudo-log/post
+	DIFF=`diff /tmp/jenkins-sudo-log/pre /tmp/jenkins-sudo-log/post`
+        rc=$?
+        if [[ $rc -ne 0 ]]; then
+            echo "Un authorized use of sudo detected during test runs."
+            echo "Test will be marked as failed, please fix the tests."
+            echo
+            echo $DIFF
+            exit 1
+        fi
 	;;
 esac
