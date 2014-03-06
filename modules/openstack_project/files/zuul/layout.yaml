@@ -3182,6 +3182,15 @@ projects:
       - gate-cookbook-openstack-block-storage-chef-lint
       - gate-cookbook-openstack-block-storage-chef-unit
 
+  - name: stackforge/cookbook-ceph
+    check:
+      - gate-cookbook-ceph-chef-lint
+      - gate-cookbook-ceph-chef-style
+      - gate-cookbook-ceph-chef-unit
+    gate:
+      - gate-cookbook-ceph-chef-lint
+      - gate-cookbook-ceph-chef-unit
+
   - name: stackforge/cookbook-openstack-common
     check:
       - gate-cookbook-openstack-common-chef-lint
