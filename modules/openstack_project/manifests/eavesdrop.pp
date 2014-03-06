@@ -80,4 +80,11 @@ class openstack_project::eavesdrop (
   a2mod { 'headers':
     ensure => present,
   }
+
+  class { 'accessbot':
+    nick          => $accessbot_nick,
+    password      => $accessbot_password,
+    server        => $statusbot_server,
+    channel_file  => 'puppet:///modules/openstack_project/files/accessbot/channels.yaml',
+  }
 }
