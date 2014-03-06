@@ -248,10 +248,12 @@ project-templates:
       - 'check-grenade-dsvm'
       - 'check-tempest-dsvm-full'
       - 'check-tempest-dsvm-neutron'
+      - 'check-tempest-dsvm-neutron-heat-slow'
     gate:
       - 'gate-grenade-dsvm'
       - 'gate-tempest-dsvm-full'
       - 'gate-tempest-dsvm-neutron'
+      - 'gate-tempest-dsvm-neutron-heat-slow'
 
   - name: openstack-server-publish-jobs
     post:
@@ -317,8 +319,7 @@ jobs:
     branch: ^(?!stable/grizzly).*$
     voting: false
   - name: ^(gate|check)-tempest-dsvm-neutron-heat-slow
-    branch: ^(?!stable/grizzly).*$
-    voting: false
+    branch: ^(?!stable/(grizzly|havana)).*$
   - name: check-tempest-dsvm-ironic-nv
     voting: false
   - name: check-tempest-dsvm-ironic-postgres-nv
@@ -786,7 +787,6 @@ projects:
       - check-tempest-dsvm-neutron-full
       - gate-tempest-dsvm-large-ops
       - gate-tempest-dsvm-neutron-large-ops
-      - check-tempest-dsvm-neutron-heat-slow
     gate:
       - gate-devstack-dsvm-cells
       - gate-tempest-dsvm-postgres-full
@@ -979,7 +979,6 @@ projects:
       - gate-tempest-dsvm-neutron-large-ops
       - check-tempest-dsvm-cells-full
       - gate-nova-pylint
-      - check-tempest-dsvm-neutron-heat-slow
       - check-grenade-dsvm-partial-ncpu
     gate:
       - gate-devstack-dsvm-cells
@@ -2181,7 +2180,6 @@ projects:
       - check-tempest-dsvm-savanna-full-nv
       - check-tempest-dsvm-savanna-postgres-nv
       - check-tempest-dsvm-savanna-neutron-nv
-      - check-tempest-dsvm-neutron-heat-slow
     gate:
       - gate-tempest-pep8
       - gate-tempest-docs
@@ -2413,7 +2411,6 @@ projects:
       - check-tempest-dsvm-neutron-full
       - gate-tempest-dsvm-large-ops
       - gate-tempest-dsvm-neutron-large-ops
-      - check-tempest-dsvm-neutron-heat-slow
       - check-tempest-dsvm-cells-full
       - check-grenade-dsvm-forward
       - check-swift-dsvm-functional
