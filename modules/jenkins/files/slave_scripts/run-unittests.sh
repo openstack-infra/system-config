@@ -50,7 +50,6 @@ if [ -d ".testrepository" ] ; then
     gzip -9 ./testr_results.html
 
     export PYTHON=.tox/$venv/bin/python
-    set -e
     rancount=$(.tox/$venv/bin/testr last | sed -ne 's/Ran \([0-9]\+\).*tests in.*/\1/p')
     if [ "$rancount" -eq "0" ] ; then
         echo
