@@ -5,6 +5,7 @@
 
   WSGIDaemonProcess storyboard user=storyboard group=storyboard threads=5 python-path=/usr/local/lib/python2.7/dist-packages
   WSGIScriptAlias /api /usr/local/lib/python2.7/dist-packages/storyboard/api/app.wsgi
+  WSGIPassAuthorization On
 
   # The app.wsgi file has to be accessible by apache. It won't
   # be visible to clients because of the DocumentRoot though.
