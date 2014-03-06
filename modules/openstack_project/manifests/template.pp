@@ -31,6 +31,10 @@ class openstack_project::template (
     certname      => $certname,
   }
 
+  package { 'lvm2':
+    ensure => present,
+  }
+
   package { 'strace':
     ensure => present,
   }
