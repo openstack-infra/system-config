@@ -20,10 +20,16 @@ class storyboard (
   $mysql_password,
   $mysql_user,
   $projects_file,
+  $ssl_cert_file,
+  $ssl_key_file,
+  $ssl_chain_file,
   $storyboard_git_source_repo = 'https://git.openstack.org/openstack-infra/storyboard/',
   $storyboard_revision = 'master',
-  $storyboard_webclient_url = 'http://tarballs.openstack.org/storyboard-webclient/storyboard-webclient-latest.tar.gz'
-
+  $storyboard_webclient_url = 'http://tarballs.openstack.org/storyboard-webclient/storyboard-webclient-latest.tar.gz',
+  $serveradmin = "webmaster@${::fqdn}",
+  $ssl_cert_file_contents = '',
+  $ssl_key_file_contents = '',
+  $ssl_chain_file_contents = ''
 ) {
   include apache
   include mysql::python
@@ -162,6 +168,7 @@ class storyboard (
     priority => '50',
     template => 'storyboard/storyboard.vhost.erb',
     require  => Package['libapache2-mod-wsgi'],
+    ssl      => true,
   }
 
   a2mod { 'proxy':
@@ -177,4 +184,33 @@ class storyboard (
     require => Package['libapache2-mod-wsgi'],
   }
 
+  if $ssl_cert_file_contents != '' {
+    file { $ssl_cert_file:
+      owner   => 'root',
+      group   => 'root',
+      mode    => '0640',
+      content => $ssl_cert_file_contents,
+      before  => Apache::Vhost[$vhost_name],
+    }
+  }
+
+  if $ssl_key_file_contents != '' {
+    file { $ssl_key_file:
+      owner   => 'root',
+      group   => 'ssl-cert',
+      mode    => '0640',
+      content => $ssl_key_file_contents,
+      before  => Apache::Vhost[$vhost_name],
+    }
+  }
+
+  if $ssl_chain_file_contents != '' {
+    file { $ssl_chain_file:
+      owner   => 'root',
+      group   => 'root',
+      mode    => '0640',
+      content => $ssl_chain_file_contents,
+      before  => Apache::Vhost[$vhost_name],
+    }
+  }
 }
