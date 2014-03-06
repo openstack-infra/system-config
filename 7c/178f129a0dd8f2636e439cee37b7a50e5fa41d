@@ -1,0 +1,14 @@
+Verified+2: Jenkins
+Approved+1: Clark Boylan <cboylan@sapwetik.org>
+Code-Review+2: Clark Boylan <cboylan@sapwetik.org>
+Code-Review+2: Sergey Lukjanov <slukjanov@mirantis.com>
+Code-Review+1: Khai Do <zaro0508@gmail.com>
+Code-Review+1: Joshua Hesketh <joshua.hesketh@rackspace.com>
+Code-Review+1: Yassine Lamgarchal <yassine.lamgarchal@enovance.com>
+Code-Review+1: Cyril Roelandt <cyril.roelandt@enovance.com>
+Code-Review+1: Victor Stinner <victor.stinner@enovance.com>
+Submitted-by: Jenkins
+Submitted-at: Thu, 06 Mar 2014 23:15:50 +0000
+Reviewed-on: https://review.openstack.org/77209
+Project: openstack-infra/config
+Branch: refs/heads/master
