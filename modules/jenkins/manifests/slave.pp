@@ -48,6 +48,7 @@ class jenkins::slave(
     $::jenkins::params::librrd_dev_package, # for python-rrdtool, used by kwapi
     $::jenkins::params::libtidy_package, # for python-tidy, used by sphinxcontrib-docbookrestapi
     $::jenkins::params::libsasl_dev, # for keystone ldap auth integration
+    $::jenkins::params::memcached_package, # for tooz unit tests
     $::jenkins::params::mongodb_package, # for ceilometer unit tests
     $::jenkins::params::mysql_dev_package,
     $::jenkins::params::nspr_dev_package, # for spidermonkey, used by ceilometer

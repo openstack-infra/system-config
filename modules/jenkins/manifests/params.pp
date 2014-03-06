@@ -38,6 +38,8 @@ class jenkins::params {
       $libffi_dev_package = 'libffi-devel'
       # FIXME: No Maven packages on RHEL
       #$maven_package = 'maven'
+      # For tooz unit tests
+      $memcached_package = 'memcached'
       # For Ceilometer unit tests
       $mongodb_package = 'mongodb-server'
       $pandoc_package = 'pandoc'
@@ -119,6 +121,8 @@ class jenkins::params {
       $libxslt_dev_package = 'libxslt1-dev'
       $libffi_dev_package = 'libffi-dev'
       $maven_package = 'maven2'
+      # For tooz unit tests
+      $memcached_package = 'memcached'
       # For Ceilometer unit tests
       $mongodb_package = 'mongodb'
       $pandoc_package = 'pandoc'
