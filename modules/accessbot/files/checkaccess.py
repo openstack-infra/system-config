@@ -108,7 +108,7 @@ class CheckAccess(irc.client.SimpleIRCClient):
 def main():
     parser = argparse.ArgumentParser(description='IRC channel access check')
     parser.add_argument('-l', dest='config',
-                        default='/etc/irc/channels.yaml',
+                        default='/etc/accessbot/channels.yaml',
                         help='path to the config file')
     parser.add_argument('-s', dest='server',
                         default='chat.freenode.net',

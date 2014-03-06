@@ -17,20 +17,21 @@
 access:
   masters: +AFRfiorstv
   operators: +Aiortv
+  autoops: +O
   topics: +t
 
 # Define access that should apply to all channels:
 global:
   masters:
     - openstackinfra
-  operators:
     - jeblair
+  operators:
     - mtaylor
     - clarkb
     - fungi
     - SergeyLukjanov
     - ttx
-    - reed
+    - maffulli
   topics:
     - openstackstatus
 
@@ -38,8 +39,8 @@ global:
 channels:
   - name: openstack-infra
   - name: openstack-meeting
-    topics:
+    autoops:
       - open_stack
   - name: openstack-nova
     operators:
-      - russellb
+      - drumkilla
