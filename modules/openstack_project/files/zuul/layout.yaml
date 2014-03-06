@@ -550,6 +550,8 @@ jobs:
     voting: false
   - name: gate-murano-dashboard-requirements
     voting: false
+  - name: gate-murano-devstack-dsvm
+    voting: false
   - name: gate-oslo.vmware-docs
     voting: false
   - name: gate-oslo.vmware-requirements
@@ -3726,6 +3728,7 @@ projects:
       - gate-murano-api-python26
       - gate-murano-api-python27
       - gate-murano-api-requirements
+      - gate-murano-devstack-dsvm
     gate:
       - gate-murano-api-pep8
       - gate-murano-api-python26
@@ -3744,6 +3747,7 @@ projects:
       - gate-murano-common-python27
       - gate-murano-common-python33
       - gate-murano-common-requirements
+      - gate-murano-devstack-dsvm
     gate:
       - gate-murano-common-pep8
       - gate-murano-common-python26
@@ -3765,6 +3769,7 @@ projects:
       - gate-murano-conductor-python26
       - gate-murano-conductor-python27
       - gate-murano-conductor-requirements
+      - gate-murano-devstack-dsvm
     gate:
       - gate-murano-conductor-pep8
       - gate-murano-conductor-python26
@@ -3782,6 +3787,7 @@ projects:
       - gate-murano-dashboard-python26
       - gate-murano-dashboard-python27
       - gate-murano-dashboard-requirements
+      - gate-murano-devstack-dsvm
     gate:
       - gate-murano-dashboard-pep8
       - gate-murano-dashboard-python26
@@ -3812,6 +3818,7 @@ projects:
       - gate-murano-metadataclient-python27
       - gate-murano-metadataclient-python33
       - gate-murano-metadataclient-requirements
+      - gate-murano-devstack-dsvm
     gate:
       - gate-murano-metadataclient-pep8
       - gate-murano-metadataclient-python26
@@ -3834,6 +3841,7 @@ projects:
       - gate-murano-repository-python27
       - gate-murano-repository-python33
       - gate-murano-repository-requirements
+      - gate-murano-devstack-dsvm
     gate:
       - gate-murano-repository-pep8
       - gate-murano-repository-python26
@@ -4366,6 +4374,7 @@ projects:
       - gate-python-muranoclient-python27
       - gate-python-muranoclient-python33
       - gate-python-muranoclient-requirements
+      - gate-murano-devstack-dsvm
     gate:
       - gate-python-muranoclient-pep8
       - gate-python-muranoclient-python26
