@@ -279,6 +279,8 @@ node 'eavesdrop.openstack.org' {
     statusbot_wiki_password => hiera('statusbot_wiki_password'),
     statusbot_wiki_url      => 'https://wiki.openstack.org/w/api.php',
     statusbot_wiki_pageid   => '1781',
+    accessbot_nick          => hiera('accessbot_nick'),
+    accessbot_password      => hiera('accessbot_nick_password'),
   }
 }
 
