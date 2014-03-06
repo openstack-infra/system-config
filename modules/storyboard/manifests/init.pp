@@ -22,8 +22,14 @@ class storyboard (
   $projects_file,
   $storyboard_git_source_repo = 'https://git.openstack.org/openstack-infra/storyboard/',
   $storyboard_revision = 'master',
-  $storyboard_webclient_url = 'http://tarballs.openstack.org/storyboard-webclient/storyboard-webclient-latest.tar.gz'
-
+  $storyboard_webclient_url = 'http://tarballs.openstack.org/storyboard-webclient/storyboard-webclient-latest.tar.gz',
+  $serveradmin = "webmaster@${::fqdn}",
+  $ssl_cert_file = '/etc/ssl/certs/ssl-cert-snakeoil.pem',
+  $ssl_key_file = '/etc/ssl/private/ssl-cert-snakeoil.key',
+  $ssl_chain_file = '',
+  $ssl_cert_file_contents = '',
+  $ssl_key_file_contents = '',
+  $ssl_chain_file_contents = ''
 ) {
   include apache
   include mysql::python
@@ -177,4 +183,33 @@ class storyboard (
     require => Package['libapache2-mod-wsgi'],
   }
 
+  if $ssl_cert_file_contents != '' {
+    file { $ssl_cert_file:
+      owner   => 'root',
+      group   => 'root',
+      mode    => '0640',
+      content => $ssl_cert_file_contents,
+      before  => Apache::Vhost[$vhost_name],
+    }
+  }
+
+  if $ssl_key_file_contents != '' {
+    file { $ssl_key_file:
+      owner   => 'root',
+      group   => 'ssl-cert',
+      mode    => '0640',
+      content => $ssl_key_file_contents,
+      before  => Apache::Vhost[$vhost_name],
+    }
+  }
+
+  if $ssl_chain_file_contents != '' {
+    file { $ssl_chain_file:
+      owner   => 'root',
+      group   => 'root',
+      mode    => '0640',
+      content => $ssl_chain_file_contents,
+      before  => Apache::Vhost[$vhost_name],
+    }
+  }
 }
