@@ -22,6 +22,9 @@
           export TEMPEST_CONCURRENCY=1
           export KEEP_LOCALRC=1
           export MANILA_TESTS='tempest.cli.*manila*'
+          if [[ ! "$ZUUL_PROJECT" =~ python-manilaclient ]]; then
+              MANILA_TESTS+=' tempest.api.share*';
+          fi
           echo "API_RATE_LIMIT=False" >> localrc
           echo "SHARE_BACKING_FILE_SIZE=12G" >> localrc
           echo "VOLUME_BACKING_FILE_SIZE=12G" >> localrc
@@ -31,9 +34,6 @@
               cp -r $BASE/new/manila/contrib/devstack/* $BASE/new/devstack
               # Install manila tempest integration
               cp -r $BASE/new/manila/contrib/tempest/tempest/* $BASE/new/tempest/tempest
-              if [[ ! "$ZUUL_PROJECT" =~ "*python-manilaclient*" ]]; then
-                MANILA_TESTS+=' tempest.api.share*';
-              fi
           }
           export -f pre_test_hook
 
