@@ -413,7 +413,7 @@ jobs:
   - name: gate-config-irc-access
     voting: false
     files:
-      - 'modules/openstack_project/files/irc/channels.yaml'
+      - 'modules/openstack_project/files/accessbot/channels.yaml'
 # Continous publishing from master of the following documentation targets:
   - name: openstack-admin-guide-cloud
     branch: ^master$
