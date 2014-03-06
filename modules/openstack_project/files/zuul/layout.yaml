@@ -618,16 +618,12 @@ projects:
       - check-tempest-dsvm-postgres-full
       - check-tempest-dsvm-neutron
       - check-tempest-dsvm-neutron-full
-      - gate-tempest-dsvm-large-ops
-      - gate-tempest-dsvm-neutron-large-ops
       - check-swift-dsvm-functional
     gate:
       - gate-devstack-dsvm-cells
       - gate-tempest-dsvm-full
       - gate-tempest-dsvm-postgres-full
       - gate-tempest-dsvm-neutron
-      - gate-tempest-dsvm-large-ops
-      - gate-tempest-dsvm-neutron-large-ops
       - gate-swift-dsvm-functional
     post:
       - ceilometer-upstream-translation-update
@@ -652,13 +648,9 @@ projects:
       - check-devstack-dsvm-cells
       - check-tempest-dsvm-postgres-full
       - check-tempest-dsvm-neutron-full
-      - gate-tempest-dsvm-large-ops
-      - gate-tempest-dsvm-neutron-large-ops
     gate:
       - gate-devstack-dsvm-cells
       - gate-tempest-dsvm-postgres-full
-      - gate-tempest-dsvm-large-ops
-      - gate-tempest-dsvm-neutron-large-ops
     experimental:
       - gate-grenade-dsvm-forward
     experimental-tripleo:
@@ -787,13 +779,9 @@ projects:
       - check-devstack-dsvm-cells
       - check-tempest-dsvm-postgres-full
       - check-tempest-dsvm-neutron-full
-      - gate-tempest-dsvm-large-ops
-      - gate-tempest-dsvm-neutron-large-ops
     gate:
       - gate-devstack-dsvm-cells
       - gate-tempest-dsvm-postgres-full
-      - gate-tempest-dsvm-large-ops
-      - gate-tempest-dsvm-neutron-large-ops
     post:
       - heat-upstream-translation-update
     experimental-tripleo:
@@ -822,15 +810,11 @@ projects:
       - check-devstack-dsvm-cells
       - check-tempest-dsvm-postgres-full
       - check-tempest-dsvm-neutron-full
-      - gate-tempest-dsvm-large-ops
-      - gate-tempest-dsvm-neutron-large-ops
     gate:
       - gate-horizon-python27-django14
       - gate-horizon-selenium
       - check-devstack-dsvm-cells
       - gate-tempest-dsvm-postgres-full
-      - gate-tempest-dsvm-large-ops
-      - gate-tempest-dsvm-neutron-large-ops
     experimental:
       - gate-grenade-dsvm-forward
     post:
@@ -1178,15 +1162,11 @@ projects:
       - check-devstack-dsvm-cells
       - check-tempest-dsvm-postgres-full
       - check-tempest-dsvm-neutron-full
-      - gate-tempest-dsvm-large-ops
-      - gate-tempest-dsvm-neutron-large-ops
     gate:
       - gate-python-ceilometerclient-python33
       - gate-python-ceilometerclient-pypy
       - gate-devstack-dsvm-cells
       - gate-tempest-dsvm-postgres-full
-      - gate-tempest-dsvm-large-ops
-      - gate-tempest-dsvm-neutron-large-ops
     pre-release:
       - python-ceilometerclient-tarball
     release:
@@ -1208,15 +1188,11 @@ projects:
       - check-devstack-dsvm-cells
       - check-tempest-dsvm-postgres-full
       - check-tempest-dsvm-neutron-full
-      - gate-tempest-dsvm-large-ops
-      - gate-tempest-dsvm-neutron-large-ops
     gate:
       - gate-python-cinderclient-python33
       - gate-python-cinderclient-pypy
       - gate-devstack-dsvm-cells
       - gate-tempest-dsvm-postgres-full
-      - gate-tempest-dsvm-large-ops
-      - gate-tempest-dsvm-neutron-large-ops
     experimental:
       - gate-grenade-dsvm-forward
     experimental-tripleo:
@@ -1310,8 +1286,6 @@ projects:
       - check-devstack-dsvm-cells
       - check-tempest-dsvm-postgres-full
       - check-tempest-dsvm-neutron-full
-      - gate-tempest-dsvm-large-ops
-      - gate-tempest-dsvm-neutron-large-ops
     gate:
       - gate-python-heatclient-pep8
       - gate-python-heatclient-python26
@@ -1319,8 +1293,6 @@ projects:
       - gate-python-heatclient-pypy
       - gate-devstack-dsvm-cells
       - gate-tempest-dsvm-postgres-full
-      - gate-tempest-dsvm-large-ops
-      - gate-tempest-dsvm-neutron-large-ops
     post:
       - python-heatclient-branch-tarball
       - python-heatclient-coverage
@@ -1437,14 +1409,12 @@ projects:
       - check-tempest-dsvm-postgres-full
       - check-tempest-dsvm-neutron-full
       - check-tempest-dsvm-neutron-pg
-      - gate-tempest-dsvm-large-ops
       - gate-tempest-dsvm-neutron-large-ops
     gate:
       - gate-python-neutronclient-pypy
       - gate-devstack-dsvm-cells
       - gate-tempest-dsvm-postgres-full
       - gate-tempest-dsvm-neutron-pg
-      - gate-tempest-dsvm-large-ops
       - gate-tempest-dsvm-neutron-large-ops
     experimental:
       - gate-grenade-dsvm-forward
@@ -1879,13 +1849,9 @@ projects:
       - gate-oslo.config-python33
       - check-devstack-dsvm-cells
       - check-tempest-dsvm-neutron-full
-      - gate-tempest-dsvm-large-ops
-      - gate-tempest-dsvm-neutron-large-ops
     gate:
       - gate-oslo.config-python33
       - gate-devstack-dsvm-cells
-      - gate-tempest-dsvm-large-ops
-      - gate-tempest-dsvm-neutron-large-ops
     pre-release:
       - oslo.config-tarball
     experimental-tripleo:
