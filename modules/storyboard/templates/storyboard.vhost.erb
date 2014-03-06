@@ -1,7 +1,21 @@
-<VirtualHost *:80>
+<VirtualHost <%= scope.lookupvar("storyboard::vhost_name") %>:80>
+  ServerAdmin <%= scope.lookupvar("storyboard::serveradmin") %>
+
+  ErrorLog ${APACHE_LOG_DIR}/storyboard-error.log
+
+  LogLevel warn
+
+  CustomLog ${APACHE_LOG_DIR}/storyboard-access.log combined
+
+  Redirect / https://<%= scope.lookupvar("storyboard::vhost_name") %>/
+
+</VirtualHost>
+
+<IfModule mod_ssl.c>
+<VirtualHost *:443>
   DocumentRoot /var/lib/storyboard/www
-  ErrorLog /var/log/apache2/storyboard-error.log
-  CustomLog /var/log/apache2/storyboard-access.log common
+  ErrorLog ${APACHE_LOG_DIR}/storyboard-ssl-error.log
+  CustomLog ${APACHE_LOG_DIR}/storyboard-ssl-access.log common
 
   WSGIDaemonProcess storyboard user=storyboard group=storyboard threads=5 python-path=/usr/local/lib/python2.7/dist-packages
   WSGIScriptAlias /api /usr/local/lib/python2.7/dist-packages/storyboard/api/app.wsgi
@@ -15,4 +29,19 @@
              Order deny,allow
              Allow from all
   </Directory>
+
+  SSLEngine on
+
+  SSLCertificateFile      <%= scope.lookupvar("storyboard::ssl_cert_file") %>
+  SSLCertificateKeyFile   <%= scope.lookupvar("storyboard::ssl_key_file") %>
+<% if scope.lookupvar("storyboard::ssl_chain_file") != "" %>
+  SSLCertificateChainFile <%= scope.lookupvar("storyboard::ssl_chain_file") %>
+<% end %>
+
+  BrowserMatch "MSIE [2-6]" \
+      nokeepalive ssl-unclean-shutdown \
+      downgrade-1.0 force-response-1.0
+  # MSIE 7 and newer should be able to use keepalive
+  BrowserMatch "MSIE [17-9]" ssl-unclean-shutdown
 </VirtualHost>
+</IfModule>
