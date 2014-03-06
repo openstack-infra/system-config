@@ -1,0 +1,117 @@
+# Copyright 2014 OpenStack Foundation
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# In general, to add a new channel for an official OpenStack project
+# to this file, just add the name to the list in "channels" without
+# anything else.  Stackforge projects can optionally set "mask" to
+# "full_mask" to keep full permissions.
+
+# Global definitions
+# First set up the access levels (map names in this file to chanserv flags):
+access:
+  masters: +AFRfiorstv
+  topics: +t
+  meetbots: +O
+  operators: +Afortv
+  channel_op_mask: +AVOfortv
+  full_mask: +AFORVfiorstv
+
+# Define access that should apply to all channels.  The label 'mask'
+# is special: anyone with perms on a channel that isn't otherwise
+# listed for the channel or in the global list will have their access
+# limited to the mask but otherwise left alone.
+global:
+  masters:
+    - openstackinfra
+  operators:
+    - SergeyLukjanov
+    - clarkb
+    - fungi
+    - jeblair
+    - lifeless
+    - maffulli
+    - mtaylor
+    - ttx
+  topics:
+    - openstackstatus
+  mask:
+    channel_op_mask
+
+# Individual channel configuration:
+channels:
+  - name: edeploy
+    mask: full_mask
+  - name: fuel-dev
+    mask: full_mask
+  - name: heat
+  - name: magnetodb
+    mask: full_mask
+  - name: murano
+    mask: full_mask
+  - name: openstack
+  - name: openstack-101
+  - name: openstack-anvil
+  - name: openstack-bacon
+  - name: openstack-barbican
+  - name: openstack-board
+  - name: openstack-ceilometer
+  - name: openstack-chef
+  - name: openstack-cinder
+  - name: openstack-climate
+  - name: openstack-cloudkeep
+  - name: openstack-community
+  - name: openstack-dev
+  - name: openstack-dns
+  - name: openstack-doc
+  - name: openstack-entropy
+  - name: openstack-foundation
+  - name: openstack-gantt
+  - name: openstack-gate
+  - name: openstack-hyper-v
+  - name: openstack-infra
+  - name: openstack-ironic
+  - name: openstack-keystone
+  - name: openstack-manila
+  - name: openstack-marconi
+  - name: openstack-meeting
+    meetbots:
+      - open_stack
+  - name: openstack-meeting-3
+    meetbots:
+      - open_stack
+  - name: openstack-meeting-alt
+    meetbots:
+      - open_stack
+  - name: openstack-meniscus
+  - name: openstack-merges
+  - name: openstack-metering
+  - name: openstack-neutron
+  - name: openstack-nova
+  - name: openstack-opw
+  - name: openstack-oslo
+  - name: openstack-packaging
+  - name: openstack-qa
+  - name: openstack-raksha
+  - name: openstack-relmgr-office
+  - name: openstack-sdks
+  - name: openstack-state-management
+  - name: openstack-swift
+  - name: openstack-translation
+  - name: openstack-trove
+  - name: packstack-dev
+  - name: refstack
+  - name: storyboard
+  - name: syscompass
+    mask: full_mask
+  - name: tripleo
