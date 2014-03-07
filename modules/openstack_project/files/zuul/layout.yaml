@@ -1830,6 +1830,20 @@ projects:
           - post-mirror-python27
           - post-mirror-python33
 
+  - name: openstack/oslo.db
+    template:
+      - name: python-jobs
+      - name: openstack-server-publish-jobs
+      - name: check-requirements
+    pre-release:
+      - oslo.db-tarball
+    release:
+      - oslo.db-tarball:
+        - oslo.db-pypi-upload:
+          - post-mirror-python26
+          - post-mirror-python27
+
+
   - name: openstack/oslo.messaging
     template:
       - name: python-jobs
