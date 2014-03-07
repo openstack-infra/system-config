@@ -310,9 +310,10 @@
 - project: openstack/python-novaclient
   docimpact-group: openstack-manuals
 - project: openstack/python-openstackclient
-- project: openstack/python-savannaclient
-  description: Python bindings and CLI to Savanna.
-  acl-config: /home/gerrit2/acls/openstack/savanna.config
+- project: openstack/python-saharaclient
+  group: python-savannaclient
+  description: Python bindings and CLI for Sahara.
+  acl-config: /home/gerrit2/acls/openstack/sahara.config
 - project: openstack/python-swiftclient
   docimpact-group: openstack-manuals
 - project: openstack/python-troveclient
@@ -320,21 +321,22 @@
   description: Python bindings and CLI to Tuskar.
   upstream: git://github.com/tuskar/python-tuskarclient.git
 - project: openstack/requirements
-- project: openstack/savanna
-  description: Savanna aims to provide users with simple means to provision a Hadoop cluster by specifying several parameters like Hadoop version, cluster topology, nodes hardware details and a few more.
-  acl-config: /home/gerrit2/acls/openstack/savanna.config
-- project: openstack/savanna-dashboard
+- project: openstack/sahara
   group: savanna
-  description: Savanna Horizon plugin.
-  acl-config: /home/gerrit2/acls/openstack/savanna.config
-- project: openstack/savanna-extra
+  description: Sahara aims to provide users with simple means to provision a Hadoop cluster by specifying several parameters like Hadoop version, cluster topology, nodes hardware details and a few more.
+  acl-config: /home/gerrit2/acls/openstack/sahara.config
+- project: openstack/sahara-dashboard
   group: savanna
-  description: Repo for Savanna-related utils.
-  acl-config: /home/gerrit2/acls/openstack/savanna.config
-- project: openstack/savanna-image-elements
+  description: Sahara Horizon plugin.
+  acl-config: /home/gerrit2/acls/openstack/sahara.config
+- project: openstack/sahara-extra
   group: savanna
-  description: Disk image elements for Savanna
-  acl-config: /home/gerrit2/acls/openstack/savanna.config
+  description: Repo for sahara-related utils.
+  acl-config: /home/gerrit2/acls/openstack/sahara.config
+- project: openstack/sahara-image-elements
+  group: savanna
+  description: Disk image elements for Sahara
+  acl-config: /home/gerrit2/acls/openstack/sahara.config
 - project: openstack/stevedore
   group: python-stevedore
   description: Manage dynamic plugins for Python applications
@@ -730,10 +732,10 @@
   description: OpenStack Puppet Dev Environment
   acl-config: /home/gerrit2/acls/stackforge/puppet-modules.config
   upstream: git://github.com/puppetlabs/puppetlabs-openstack_dev_env.git
-- project: stackforge/puppet-savanna
+- project: stackforge/puppet-sahara
   group: savanna
-  description: Savanna Puppet Module
-  acl-config: /home/gerrit2/acls/openstack/savanna.config
+  description: Sahara Puppet Module
+  acl-config: /home/gerrit2/acls/openstack/sahara.config
 - project: stackforge/puppet-swift
   description: OpenStack Swift Puppet Module
   acl-config: /home/gerrit2/acls/stackforge/puppet-modules.config
@@ -790,15 +792,15 @@
 - project: stackforge/rubick
   description: Rule-based diagnostics of configuration of OpenStack platform
   upstream: git://github.com/MirantisLabs/rubick
+- project: stackforge/sahara-ci-config
+  description: Sahara-ci 3rd party testing configs (jjb, zuul, etc.)
+  acl-config: /home/gerrit2/acls/stackforge/sahara-ci-config.config
+- project: stackforge/sahara-guestagent
+  description: Guest agent for Sahara project
+  acl-config: /home/gerrit2/acls/stackforge/sahara-guestagent.config
 - project: stackforge/satori
   upstream: git://github.com/rackerlabs/satori
   description: Configuration Discovery
-- project: stackforge/savanna-ci-config
-  description: savanna-ci 3rd party testing configs (jjb, zuul, etc.)
-  acl-config: /home/gerrit2/acls/stackforge/savanna-ci-config.config
-- project: stackforge/savanna-guestagent
-  description: Guest agent for Savanna project
-  acl-config: /home/gerrit2/acls/stackforge/savanna-guestagent.config
 - project: stackforge/solum
   description: 'An OpenStack related project designed to make cloud services easier to consume and integrate into your application development process. See: https://wiki.openstack.org/wiki/Solum'
   upstream: git://github.com/rackerlabs/solum

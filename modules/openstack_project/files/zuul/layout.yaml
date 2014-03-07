@@ -501,13 +501,13 @@ jobs:
     voting: false
   - name: gate-hacking-integration-nova
     voting: false
-  - name: gate-savanna-pylint
+  - name: gate-sahara-pylint
     voting: false
-  - name: ^(gate|check)-tempest-dsvm-savanna-full-nv$
+  - name: ^(gate|check)-tempest-dsvm-sahara-full-nv$
     voting: false
-  - name: ^(gate|check)-tempest-dsvm-savanna-postgres-nv$
+  - name: ^(gate|check)-tempest-dsvm-sahara-postgres-nv$
     voting: false
-  - name: ^(gate|check)-tempest-dsvm-savanna-neutron-nv$
+  - name: ^(gate|check)-tempest-dsvm-sahara-neutron-nv$
     voting: false
   - name: ^(gate|check)-tempest-dsvm-trove-full$
     voting: false
@@ -1023,36 +1023,36 @@ projects:
           - post-mirror-python26
           - post-mirror-python27
 
-  - name: openstack/savanna
+  - name: openstack/sahara
     template:
       - name: python-jobs
       - name: openstack-server-publish-jobs
       - name: check-requirements
     check:
-      - gate-savanna-pylint
-      - check-tempest-dsvm-savanna-full
-      - check-tempest-dsvm-savanna-postgres
-      - check-tempest-dsvm-savanna-neutron
+      - gate-sahara-pylint
+      - check-tempest-dsvm-sahara-full
+      - check-tempest-dsvm-sahara-postgres
+      - check-tempest-dsvm-sahara-neutron
     gate:
-      - gate-tempest-dsvm-savanna-full
-      - gate-tempest-dsvm-savanna-postgres
-      - gate-tempest-dsvm-savanna-neutron
+      - gate-tempest-dsvm-sahara-full
+      - gate-tempest-dsvm-sahara-postgres
+      - gate-tempest-dsvm-sahara-neutron
     post:
-      - hook-savanna-rtfd
-      - savanna-upstream-translation-update
+      - hook-sahara-rtfd
+      - sahara-upstream-translation-update
     pre-release:
-      - savanna-tarball
-      - hook-savanna-rtfd
+      - sahara-tarball
+      - hook-sahara-rtfd
     release:
-      - savanna-tarball:
-        - savanna-pypi-upload:
+      - sahara-tarball:
+        - sahara-pypi-upload:
           - post-mirror-python26
           - post-mirror-python27
           - post-mirror-python33
-      - hook-savanna-rtfd
-      - savanna-merge-release-tags
+      - hook-sahara-rtfd
+      - sahara-merge-release-tags
     periodic:
-      - savanna-propose-translation-update
+      - sahara-propose-translation-update
 
   - name: openstack/stevedore
     check:
@@ -1515,30 +1515,30 @@ projects:
           - post-mirror-python27
           - post-mirror-python33
 
-  - name: openstack/python-savannaclient
+  - name: openstack/python-saharaclient
     template:
       - name: python-jobs
       - name: openstack-server-publish-jobs
       - name: check-requirements
     check:
-      - check-tempest-dsvm-savanna-full
-      - check-tempest-dsvm-savanna-postgres
-      - check-tempest-dsvm-savanna-neutron
+      - check-tempest-dsvm-sahara-full
+      - check-tempest-dsvm-sahara-postgres
+      - check-tempest-dsvm-sahara-neutron
     gate:
-      - gate-tempest-dsvm-savanna-full
-      - gate-tempest-dsvm-savanna-postgres
-      - gate-tempest-dsvm-savanna-neutron
+      - gate-tempest-dsvm-sahara-full
+      - gate-tempest-dsvm-sahara-postgres
+      - gate-tempest-dsvm-sahara-neutron
     pre-release:
-       - python-savannaclient-tarball
+       - python-saharaclient-tarball
     release:
-       - python-savannaclient-tarball:
-         - python-savannaclient-pypi-upload:
+       - python-saharaclient-tarball:
+         - python-saharaclient-pypi-upload:
            - post-mirror-python26
            - post-mirror-python27
            - post-mirror-python33
     experimental:
-       - gate-python-savannaclient-python33
-       - gate-python-savannaclient-pypy
+       - gate-python-saharaclient-python33
+       - gate-python-saharaclient-pypy
 
   - name: openstack/python-swiftclient
     template:
@@ -2067,59 +2067,59 @@ projects:
       - periodic-mirror-python33
 
 # TODO: add docs
-  - name: openstack/savanna-dashboard
+  - name: openstack/sahara-dashboard
     template:
       - name: check-requirements
     check:
-      - gate-savanna-dashboard-pep8
-      - gate-savanna-dashboard-python26
-      - gate-savanna-dashboard-python27
+      - gate-sahara-dashboard-pep8
+      - gate-sahara-dashboard-python26
+      - gate-sahara-dashboard-python27
     gate:
-      - gate-savanna-dashboard-pep8
-      - gate-savanna-dashboard-python26
-      - gate-savanna-dashboard-python27
+      - gate-sahara-dashboard-pep8
+      - gate-sahara-dashboard-python26
+      - gate-sahara-dashboard-python27
     post:
-      - savanna-dashboard-branch-tarball
-      - savanna-dashboard-coverage
+      - sahara-dashboard-branch-tarball
+      - sahara-dashboard-coverage
     pre-release:
-      - savanna-dashboard-tarball
+      - sahara-dashboard-tarball
     release:
-      - savanna-dashboard-tarball:
-        - savanna-dashboard-pypi-upload:
+      - sahara-dashboard-tarball:
+        - sahara-dashboard-pypi-upload:
           - post-mirror-python26
           - post-mirror-python27
           - post-mirror-python33
 
 # TODO: add docs
-  - name: openstack/savanna-extra
+  - name: openstack/sahara-extra
     template:
       - name: check-requirements
     check:
-      - gate-savanna-extra-pep8
+      - gate-sahara-extra-pep8
     gate:
-      - gate-savanna-extra-pep8
+      - gate-sahara-extra-pep8
     post:
-      - savanna-extra-branch-tarball
+      - sahara-extra-branch-tarball
     pre-release:
-      - savanna-extra-tarball
+      - sahara-extra-tarball
     release:
-      - savanna-extra-tarball
+      - sahara-extra-tarball
 
 # TODO: add docs
-  - name: openstack/savanna-image-elements
+  - name: openstack/sahara-image-elements
     template:
       - name: check-requirements
     check:
-      - gate-savanna-image-elements-pep8
+      - gate-sahara-image-elements-pep8
     gate:
-      - gate-savanna-image-elements-pep8
+      - gate-sahara-image-elements-pep8
     post:
-      - savanna-image-elements-branch-tarball
+      - sahara-image-elements-branch-tarball
     pre-release:
-      - savanna-image-elements-tarball
+      - sahara-image-elements-tarball
     release:
-      - savanna-image-elements-tarball:
-        - savanna-image-elements-pypi-upload:
+      - sahara-image-elements-tarball:
+        - sahara-image-elements-pypi-upload:
           - post-mirror-python26
           - post-mirror-python27
           - post-mirror-python33
@@ -2180,9 +2180,9 @@ projects:
       - check-grenade-dsvm-partial-ncpu
       - check-tempest-dsvm-ironic-nv
       - check-tempest-dsvm-ironic-postgres-nv
-      - check-tempest-dsvm-savanna-full-nv
-      - check-tempest-dsvm-savanna-postgres-nv
-      - check-tempest-dsvm-savanna-neutron-nv
+      - check-tempest-dsvm-sahara-full-nv
+      - check-tempest-dsvm-sahara-postgres-nv
+      - check-tempest-dsvm-sahara-neutron-nv
     gate:
       - gate-tempest-pep8
       - gate-tempest-docs
@@ -2421,9 +2421,9 @@ projects:
       - check-devstack-dsvm-neutron
       - check-tempest-dsvm-ironic-nv
       - check-tempest-dsvm-ironic-postgres-nv
-      - check-tempest-dsvm-savanna-full-nv
-      - check-tempest-dsvm-savanna-postgres-nv
-      - check-tempest-dsvm-savanna-neutron-nv
+      - check-tempest-dsvm-sahara-full-nv
+      - check-tempest-dsvm-sahara-postgres-nv
+      - check-tempest-dsvm-sahara-neutron-nv
     gate:
       - gate-devstack-bash8
       - gate-devstack-dsvm-cells
@@ -2626,9 +2626,9 @@ projects:
       - check-devstack-dsvm-cells-havana
       - check-tempest-dsvm-ironic-nv
       - check-tempest-dsvm-ironic-postgres-nv
-      - check-tempest-dsvm-savanna-full-nv
-      - check-tempest-dsvm-savanna-postgres-nv
-      - check-tempest-dsvm-savanna-neutron-nv
+      - check-tempest-dsvm-sahara-full-nv
+      - check-tempest-dsvm-sahara-postgres-nv
+      - check-tempest-dsvm-sahara-neutron-nv
     gate:
       - gate-devstack-gate-unittests
       - gate-devstack-dsvm-cells
@@ -4083,39 +4083,39 @@ projects:
     gate:
       - gate-noop
 
-  - name: stackforge/puppet-savanna
+  - name: stackforge/puppet-sahara
     check:
-      - gate-puppet-savanna-puppet-lint
-      - gate-puppet-savanna-puppet-syntax
-      - gate-puppet-savanna-puppet-unit-2.7
-      - gate-puppet-savanna-puppet-unit-3.1
-      - gate-puppet-savanna-puppet-unit-3.2
-      - gate-puppet-savanna-puppet-unit-3.3
-      - gate-puppet-savanna-puppet-unit-3.4
+      - gate-puppet-sahara-puppet-lint
+      - gate-puppet-sahara-puppet-syntax
+      - gate-puppet-sahara-puppet-unit-2.7
+      - gate-puppet-sahara-puppet-unit-3.1
+      - gate-puppet-sahara-puppet-unit-3.2
+      - gate-puppet-sahara-puppet-unit-3.3
+      - gate-puppet-sahara-puppet-unit-3.4
     gate:
-      - gate-puppet-savanna-puppet-lint
-      - gate-puppet-savanna-puppet-syntax
-      - gate-puppet-savanna-puppet-unit-2.7
-      - gate-puppet-savanna-puppet-unit-3.1
-      - gate-puppet-savanna-puppet-unit-3.2
-      - gate-puppet-savanna-puppet-unit-3.3
-      - gate-puppet-savanna-puppet-unit-3.4
+      - gate-puppet-sahara-puppet-lint
+      - gate-puppet-sahara-puppet-syntax
+      - gate-puppet-sahara-puppet-unit-2.7
+      - gate-puppet-sahara-puppet-unit-3.1
+      - gate-puppet-sahara-puppet-unit-3.2
+      - gate-puppet-sahara-puppet-unit-3.3
+      - gate-puppet-sahara-puppet-unit-3.4
 
-  - name: stackforge/savanna-ci-config
+  - name: stackforge/sahara-ci-config
     check:
-      - gate-savanna-ci-config-pep8
+      - gate-sahara-ci-config-pep8
     gate:
-      - gate-savanna-ci-config-pep8
+      - gate-sahara-ci-config-pep8
 
-  - name: stackforge/savanna-guestagent
+  - name: stackforge/sahara-guestagent
     template:
       - name: python-jobs
       - name: check-requirements
     pre-release:
-      - savanna-guestagent-tarball
+      - sahara-guestagent-tarball
     release:
-      - savanna-guestagent-tarball:
-        - savanna-guestagent-pypi-upload:
+      - sahara-guestagent-tarball:
+        - sahara-guestagent-pypi-upload:
           - post-mirror-python26
           - post-mirror-python27
           - post-mirror-python33
