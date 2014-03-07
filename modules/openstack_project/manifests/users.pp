@@ -85,4 +85,9 @@ class openstack_project::users {
     realname => 'Michael Krotscheck',
     sshkeys  => "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQClPQkxx2Gw2i7yO9NIfFu8OV202GA4EE2x9q46FwOKr8YWSEa/kxXiZEXLM+oe6NZv6UbYW99FXXr083dYjsm2iWwAUR4gj4DL0OtDyNjK1sx0D5x4bJDuw+LzcXN5hbJLPuXBMAMAr3Ik4gVzbnhhebRslVsGueX2K4v0T67oaoRZqj8cV0/IFVhGMlzrvVcnMY5WiR/eoOvuuep0KfVPA0IaHtAD4welqlhlqOmTrt4uQ+bQWth0mg7oEDUxD6mEwr1VcfAuAZ5ClX2P2hhH9VecmG9QvmWYDWeEqfTHcSS3mFY39t2SJ2EHctzJ3LhCQGRQ/rHlHlRVmMcppC/x krotscheck@Superego\n",
   }
+ 
+  @user::virual::localuser { 'nkonovalov':
+    realname => 'Nikita Konovalov',
+    sshkeys  => "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCtHQQbcdikSK9+NU4XGlyS8s2GFDb3wt8H/dI3Ax2iZuQqVlgrnzewReU39QqXXNlxWDANoP+nljojMwDsJwGDti+yargsw2z8smfc4sNdY/YsPTz92bCflckpwlKKda8qxrzAK2hlfUPlG0ekz5E3DRZkTh5dxfjkaRJjRteO2ixBmXCTlT6GzK64g4khf8leBoR9EzxTN6dOtxgogOzR9O0sFk6w7H843Ui9T8GrlHwgnAyekkuFpAUVACVEdbaxLbIBDgnYyiSuoHcBOM0ZU54QjOCZEmelSG/QF0qI44/VDKGaokCUMgxDRdedz534500HXo4uIy12y+oBztV5 nkonovalov@mirantis.com\n",
+  }
 }

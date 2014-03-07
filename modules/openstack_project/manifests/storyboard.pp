@@ -8,7 +8,8 @@ class openstack_project::storyboard(
 ) {
 
   realize (
-    User::Virtual::Localuser['krotscheck']
+    User::Virtual::Localuser['krotscheck'],
+    User::Virtual::Localuser['nkonovalov']
   )
 
   class { 'openstack_project::server':
