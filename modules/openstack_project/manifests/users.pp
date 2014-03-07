@@ -80,4 +80,9 @@ class openstack_project::users {
     realname => 'Khai Do',
     sshkeys  => "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDJqB//ilMx7Y1tKzviAn/6yeXSRAi2VnaGN0/bfaa5Gciz+SWt8vAEAUE99fzuqeJ/ezjkuIXDFm/sjZr93y567a6sDT6CuhVUac1FZIhXRTs0J+pBOiENbwQ7RZxbkyNHQ0ndvtz3kBA1DF5D+MDkluBlIWb085Z31rFJmetsB2Zb8s1FKUjHVk/skyeKSj0qAK5KN3Wme6peWhYjwBiM0gUlxIsEZM6JLYdoPIbD5B8GYAktMN2FvJU9LgKGL93jLZ/vnMtoQIHHAG/85NdPURL1Zbi92Xlxbm4LkbcHnruBdmtPfSgaEupwJ+zFmK264OHD7QFt10ztPMbAFCFn khaido@khaido-HP-EliteBook-Folio-9470m\n",
   }
+
+  @user::virual::localuser { 'nkonovalov':
+    realname => 'Nikita Konovalov',
+    sshkeys  => "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCtHQQbcdikSK9+NU4XGlyS8s2GFDb3wt8H/dI3Ax2iZuQqVlgrnzewReU39QqXXNlxWDANoP+nljojMwDsJwGDti+yargsw2z8smfc4sNdY/YsPTz92bCflckpwlKKda8qxrzAK2hlfUPlG0ekz5E3DRZkTh5dxfjkaRJjRteO2ixBmXCTlT6GzK64g4khf8leBoR9EzxTN6dOtxgogOzR9O0sFk6w7H843Ui9T8GrlHwgnAyekkuFpAUVACVEdbaxLbIBDgnYyiSuoHcBOM0ZU54QjOCZEmelSG/QF0qI44/VDKGaokCUMgxDRdedz534500HXo4uIy12y+oBztV5 nkonovalov@mirantis.com\n"
+  }
 }

@@ -6,6 +6,11 @@ class openstack_project::storyboard(
   $mysql_user = '',
   $sysadmins = [],
 ) {
+
+  realize (
+    User::Virtual::Localuser['nkonovalov']
+  )
+
   class { 'openstack_project::server':
     sysadmins                 => $sysadmins,
     iptables_public_tcp_ports => [80],
