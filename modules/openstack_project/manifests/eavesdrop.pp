@@ -52,6 +52,7 @@ class openstack_project::eavesdrop (
         '#openstack-oslo',
         '#openstack-qa',
         '#openstack-relmgr-office',
+        '#openstack-sahara',
         '#openstack-sdks',
         '#openstack-swift',
         '#openstack-trove',
