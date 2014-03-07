@@ -190,7 +190,7 @@
           node: bare-precise
 
 - project:
-    name: savanna
+    name: sahara
     github-org: openstack
     node: bare-precise
     tarball-site: tarballs.openstack.org
@@ -203,24 +203,24 @@
       - pypi-jobs
       - translation-jobs
       - openstack-publish-jobs
-      - '{pipeline}-tempest-dsvm-savanna-full{branch-designator}':
+      - '{pipeline}-tempest-dsvm-sahara-full{branch-designator}':
           pipeline: check
           node: 'devstack-precise || devstack-precise-check'
           branch-designator: '-nv'
           branch-override: default
-      - '{pipeline}-tempest-dsvm-savanna-postgres{branch-designator}':
+      - '{pipeline}-tempest-dsvm-sahara-postgres{branch-designator}':
           pipeline: check
           node: 'devstack-precise || devstack-precise-check'
           branch-designator: '-nv'
           branch-override: default
-      - '{pipeline}-tempest-dsvm-savanna-neutron{branch-designator}':
+      - '{pipeline}-tempest-dsvm-sahara-neutron{branch-designator}':
           pipeline: check
           node: 'devstack-precise || devstack-precise-check'
           branch-designator: '-nv'
           branch-override: default
 
 - project:
-    name: python-savannaclient
+    name: python-saharaclient
     github-org: openstack
     node: bare-precise
     tarball-site: tarballs.openstack.org
@@ -243,7 +243,7 @@
       - hook-{name}-rtfd
 
 - project:
-    name: savanna-dashboard
+    name: sahara-dashboard
     github-org: openstack
     node: bare-precise
     tarball-site: tarballs.openstack.org
@@ -253,7 +253,7 @@
       - pypi-jobs
 
 - project:
-    name: savanna-extra
+    name: sahara-extra
     github-org: openstack
     node: bare-precise
     tarball-site: tarballs.openstack.org
@@ -263,7 +263,7 @@
       - pypi-jobs
 
 - project:
-    name: savanna-image-elements
+    name: sahara-image-elements
     github-org: openstack
     node: bare-precise
     tarball-site: tarballs.openstack.org
@@ -1477,7 +1477,7 @@
       - puppet-module-unit
 
 - project:
-    name: puppet-savanna
+    name: puppet-sahara
     github-org: stackforge
     node: bare-precise
     tarball-site: tarballs.openstack.org
@@ -1488,7 +1488,7 @@
       - puppet-module-unit
 
 - project:
-    name: savanna-ci-config
+    name: sahara-ci-config
     github-org: stackforge
     node: bare-precise
     tarball-site: tarballs.openstack.org
@@ -1497,7 +1497,7 @@
       - gate-{name}-pep8
 
 - project:
-    name: savanna-guestagent
+    name: sahara-guestagent
     github-org: stackforge
     node: bare-precise
     tarball-site: tarballs.openstack.org
