@@ -1846,6 +1846,37 @@ projects:
           - post-mirror-python27
           - post-mirror-python33
 
+  - name: openstack/oslo.db
+    template:
+      - name: python-jobs
+      - name: openstack-server-publish-jobs
+      - name: check-requirements
+      - name: integrated-gate
+    check:
+      - check-devstack-dsvm-cells
+      - gate-tempest-dsvm-large-ops
+      - check-tempest-dsvm-postgres-full
+      - gate-tempest-dsvm-neutron-large-ops
+    gate:
+      - gate-devstack-dsvm-cells
+      - gate-tempest-dsvm-large-ops
+      - check-tempest-dsvm-postgres-full
+      - gate-tempest-dsvm-neutron-large-ops
+    experimental-tripleo:
+      - check-tripleo-seed-precise
+      - check-tripleo-ironic-seed-precise
+      - check-tripleo-undercloud-precise
+      - check-tripleo-ironic-undercloud-precise
+      - check-tripleo-overcloud-precise
+    pre-release:
+      - oslo.db-tarball
+    release:
+      - oslo.db-tarball:
+        - oslo.db-pypi-upload:
+          - post-mirror-python26
+          - post-mirror-python27
+
+
   - name: openstack/oslo.messaging
     template:
       - name: python-jobs

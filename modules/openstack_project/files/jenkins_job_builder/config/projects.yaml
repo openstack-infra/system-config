@@ -744,6 +744,19 @@
       - oslotest-cross-test
 
 - project:
+    name: oslo.db
+    github-org: openstack
+    node: bare-precise
+    tarball-site: tarballs.openstack.org
+    doc-publisher-site: docs.openstack.org
+
+    jobs:
+      - python-jobs
+      - openstack-publish-jobs
+      - pypi-jobs
+
+
+- project:
     name: oslo.messaging
     github-org: openstack
     node: bare-precise
