@@ -542,6 +542,8 @@
   description: Google Compute Engine API support for OpenStack
 - project: stackforge/golang-client
   description: OpenStack API client for golang
+- project: stackforge/graffiti
+  description: Cloud Capability Service
 - project: stackforge/healthnmon
   description: Healthnmon aims to deliver 'Cloud Resource Monitor', an extensible service to OpenStack Cloud Operating system by providing monitoring service for Cloud Resources and Infrastructure with a pluggable framework for 'Inventory Management', 'Alerts and notifications' and 'Utilization Data.
   upstream: git://github.com/healthnmon/healthnmon.git
