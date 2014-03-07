@@ -4580,3 +4580,19 @@ projects:
       - gate-python-openstacksdk-python27
       - gate-python-openstacksdk-python33
       - gate-python-openstacksdk-pypy
+
+  - name: stackforge/graffiti
+    check:
+      - gate-graffiti-docs
+      - gate-graffiti-pep8
+      - gate-graffiti-python26
+      - gate-graffiti-python27
+      - gate-graffiti-python33
+    gate:
+      - gate-graffiti-docs
+      - gate-graffiti-pep8
+      - gate-graffiti-python26
+      - gate-graffiti-python27
+      - gate-graffiti-python33
+    post:
+      - graffiti-coverage
