@@ -67,8 +67,8 @@ class openstack_project::gerrit (
   $gitweb = true,
   $cgit = false,
   $web_repo_url = '',
-  $secondary_index = false,
-  $secondary_index_type = 'SQL',
+  $secondary_index = true,
+  $secondary_index_type = 'LUCENE',
 ) {
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [80, 443, 29418],
