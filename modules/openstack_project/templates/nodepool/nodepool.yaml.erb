@@ -176,6 +176,18 @@ providers:
         setup: prepare_node_bare.sh
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
+      - name: bare-centos6
+        base-image: 'CentOS 6.3 Server 64-bit 20130116 (b)'
+        min-ram: 8192
+        setup: prepare_node_bare.sh
+        username: jenkins
+        private-key: /home/nodepool/.ssh/id_rsa
+      - name: py3k-precise
+        base-image: 'Ubuntu Precise 12.04 LTS Server 64-bit 20121026 (b)'
+        min-ram: 8192
+        setup: prepare_node_py3k.sh
+        username: jenkins
+        private-key: /home/nodepool/.ssh/id_rsa
   - name: hpcloud-az2
     region-name: 'az-2.region-a.geo-1'
     service-type: 'compute'
@@ -199,6 +211,18 @@ providers:
         setup: prepare_node_bare.sh
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
+      - name: bare-centos6
+        base-image: 'CentOS 6.3 Server 64-bit 20130116 (b)'
+        min-ram: 8192
+        setup: prepare_node_bare.sh
+        username: jenkins
+        private-key: /home/nodepool/.ssh/id_rsa
+      - name: py3k-precise
+        base-image: 'Ubuntu Precise 12.04 LTS Server 64-bit 20121026 (b)'
+        min-ram: 8192
+        setup: prepare_node_py3k.sh
+        username: jenkins
+        private-key: /home/nodepool/.ssh/id_rsa
   - name: hpcloud-az3
     region-name: 'az-3.region-a.geo-1'
     service-type: 'compute'
@@ -220,6 +244,18 @@ providers:
         base-image: 'Ubuntu Precise 12.04 LTS Server 64-bit 20121026 (b)'
         min-ram: 8192
         setup: prepare_node_bare.sh
+        username: jenkins
+        private-key: /home/nodepool/.ssh/id_rsa
+      - name: bare-centos6
+        base-image: 'CentOS 6.3 Server 64-bit 20130116 (b)'
+        min-ram: 8192
+        setup: prepare_node_bare.sh
+        username: jenkins
+        private-key: /home/nodepool/.ssh/id_rsa
+      - name: py3k-precise
+        base-image: 'Ubuntu Precise 12.04 LTS Server 64-bit 20121026 (b)'
+        min-ram: 8192
+        setup: prepare_node_py3k.sh
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
   - name: hpcloud-region-a
@@ -302,6 +338,9 @@ targets:
           - name: rax-iad
           - name: rax-dfw
           - name: rax-ord
+          - name: hpcloud-az1
+          - name: hpcloud-az2
+          - name: hpcloud-az3
       - name: devstack-precise
         min-ready: 6
         providers:
@@ -322,6 +361,9 @@ targets:
           - name: rax-iad
           - name: rax-dfw
           - name: rax-ord
+          - name: hpcloud-az1
+          - name: hpcloud-az2
+          - name: hpcloud-az3
       - name: tripleo-precise
         min-ready: 5
         providers:
@@ -348,6 +390,9 @@ targets:
           - name: rax-iad
           - name: rax-dfw
           - name: rax-ord
+          - name: hpcloud-az1
+          - name: hpcloud-az2
+          - name: hpcloud-az3
       - name: devstack-precise
         min-ready: 6
         providers:
@@ -368,6 +413,9 @@ targets:
           - name: rax-iad
           - name: rax-dfw
           - name: rax-ord
+          - name: hpcloud-az1
+          - name: hpcloud-az2
+          - name: hpcloud-az3
       - name: tripleo-precise
         min-ready: 5
         providers:
@@ -394,6 +442,9 @@ targets:
           - name: rax-iad
           - name: rax-dfw
           - name: rax-ord
+          - name: hpcloud-az1
+          - name: hpcloud-az2
+          - name: hpcloud-az3
       - name: devstack-precise
         min-ready: 6
         providers:
@@ -414,6 +465,9 @@ targets:
           - name: rax-iad
           - name: rax-dfw
           - name: rax-ord
+          - name: hpcloud-az1
+          - name: hpcloud-az2
+          - name: hpcloud-az3
       - name: tripleo-precise
         min-ready: 5
         providers:
@@ -440,6 +494,9 @@ targets:
           - name: rax-iad
           - name: rax-dfw
           - name: rax-ord
+          - name: hpcloud-az1
+          - name: hpcloud-az2
+          - name: hpcloud-az3
       - name: devstack-precise
         min-ready: 6
         providers:
@@ -460,6 +517,9 @@ targets:
           - name: rax-iad
           - name: rax-dfw
           - name: rax-ord
+          - name: hpcloud-az1
+          - name: hpcloud-az2
+          - name: hpcloud-az3
       - name: tripleo-precise
         min-ready: 5
         providers:
@@ -486,6 +546,9 @@ targets:
           - name: rax-iad
           - name: rax-dfw
           - name: rax-ord
+          - name: hpcloud-az1
+          - name: hpcloud-az2
+          - name: hpcloud-az3
       - name: devstack-precise
         min-ready: 6
         providers:
@@ -506,6 +569,9 @@ targets:
           - name: rax-iad
           - name: rax-dfw
           - name: rax-ord
+          - name: hpcloud-az1
+          - name: hpcloud-az2
+          - name: hpcloud-az3
       - name: tripleo-precise
         min-ready: 5
         providers:
@@ -532,6 +598,9 @@ targets:
           - name: rax-iad
           - name: rax-dfw
           - name: rax-ord
+          - name: hpcloud-az1
+          - name: hpcloud-az2
+          - name: hpcloud-az3
       - name: devstack-precise
         min-ready: 6
         providers:
@@ -552,6 +621,9 @@ targets:
           - name: rax-iad
           - name: rax-dfw
           - name: rax-ord
+          - name: hpcloud-az1
+          - name: hpcloud-az2
+          - name: hpcloud-az3
       - name: tripleo-precise
         min-ready: 5
         providers:
@@ -578,6 +650,9 @@ targets:
           - name: rax-iad
           - name: rax-dfw
           - name: rax-ord
+          - name: hpcloud-az1
+          - name: hpcloud-az2
+          - name: hpcloud-az3
       - name: devstack-precise
         min-ready: 6
         providers:
@@ -598,6 +673,9 @@ targets:
           - name: rax-iad
           - name: rax-dfw
           - name: rax-ord
+          - name: hpcloud-az1
+          - name: hpcloud-az2
+          - name: hpcloud-az3
       - name: dsvm-precise-krnl
         min-ready: 1
         providers:
