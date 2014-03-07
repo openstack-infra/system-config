@@ -211,6 +211,7 @@
 - project: openstack/keystone
   docimpact-group: openstack-manuals
 - project: openstack/marconi
+- project: openstack/melange
 - project: openstack/netconn-api
   group: openstack-api-site
 - project: openstack/neutron
@@ -285,6 +286,7 @@
   description: A python client implementing the Ironic API.
 - project: openstack/python-keystoneclient
 - project: openstack/python-marconiclient
+- project: openstack/python-melangeclient
 - project: openstack/python-neutronclient
   docimpact-group: openstack-manuals
 - project: openstack/python-novaclient
