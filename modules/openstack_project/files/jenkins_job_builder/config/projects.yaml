@@ -11,6 +11,14 @@
       - gate-{name}-pylint
       - translation-jobs
 
+- project:
+    name: graffiti
+    github-org: stackforge
+    node: bare-precise
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - python-jobs
 
 - project:
     name: mistral
