@@ -2696,6 +2696,12 @@ projects:
       - gerrit-package
       - gerrit-package-buck
 
+  - name: openstack-infra/gerrit-powered-agenda
+    check:
+      - gate-noop
+    gate:
+      - gate-noop
+
   - name: openstack-infra/gerritbot
     check:
       - gate-gerritbot-pep8

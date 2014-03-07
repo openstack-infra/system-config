@@ -62,6 +62,11 @@
   options:
     - track-upstream
     - direct-release
+- project: openstack-infra/gerrit-powered-agenda
+  description:  Replace meetings wiki with YAML files that use Gerrit and Jenkins to create iCal files
+  upstream: https://github.com/NDSU-OpenStack-Capstone/ndsuopenstack.git
+  options:
+    - direct-release
 - project: openstack-infra/gerritbot
   group: openstack-ci
   options:
