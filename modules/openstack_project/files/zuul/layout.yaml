@@ -20,12 +20,14 @@ pipelines:
         - event: comment-added
           require-approval:
             - approved: 1
+            - workflow: 1
             - username: jenkins
               older-than: 24h
         - event: comment-added
           comment_filter: (?i)^\s*reverify( (?:bug|lp)[\s#:]*(\d+))\s*$
           require-approval:
             - approved: 1
+            - workflow: 1
             - username: jenkins
         - event: comment-added
           require-approval:
@@ -33,12 +35,14 @@ pipelines:
               username: jenkins
           approval:
             - approved: 1
+            - workflow: 1
         - event: comment-added
           require-approval:
             - verified: -2
               username: jenkins
           approval:
             - approved: 1
+            - workflow: 1
     start:
       gerrit:
         verified: 0
@@ -63,6 +67,7 @@ pipelines:
               newer-than: 24h
           approval:
             - approved: 1
+            - workflow: 1
         - event: comment-added
           require-approval:
             - verified: 2
@@ -70,6 +75,7 @@ pipelines:
               newer-than: 24h
           approval:
             - approved: 1
+            - workflow: 1
         - event: comment-added
           approval:
             - verified: 1
