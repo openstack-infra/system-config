@@ -1,0 +1,14 @@
+Verified+2: Jenkins
+Approved+1: Clark Boylan <cboylan@sapwetik.org>
+Code-Review+2: Clark Boylan <cboylan@sapwetik.org>
+Code-Review+1: Elizabeth Krumbach Joseph <lyz@princessleia.com>
+Code-Review+2: Sergey Lukjanov <slukjanov@mirantis.com>
+Code-Review+1: Khai Do <zaro0508@gmail.com>
+Code-Review+1: Joshua Hesketh <joshua.hesketh@rackspace.com>
+Code-Review+1: Terry Howe <thowe@hp.com>
+Code-Review+1: Jesse Noller <jesse.noller@rackspace.com>
+Submitted-by: Jenkins
+Submitted-at: Sat, 08 Mar 2014 01:03:26 +0000
+Reviewed-on: https://review.openstack.org/76594
+Project: openstack-infra/config
+Branch: refs/heads/master
