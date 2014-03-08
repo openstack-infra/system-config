@@ -1,0 +1,5 @@
+export GERRIT_SITE=<%= scope.lookupvar("infra_vars::gerrit_site") %>
+export GIT_PROTOCOL=<%= scope.lookupvar("infra_vars::git_protocol") %>
+export GIT_SITE=<%= scope.lookupvar("infra_vars::git_site") %>
+export GIT_ORIGIN=<%= scope.lookupvar("infra_vars::git_protocol") %><%= scope.lookupvar("infra_vars::git_site") %>
+export PYPI_MIRROR=<%= scope.lookupvar("infra_vars::pypi_mirror") %>

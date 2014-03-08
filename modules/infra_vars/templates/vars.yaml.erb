@@ -1,0 +1,5 @@
+gerrit_site: <%= scope.lookupvar("infra_vars::gerrit_site") %>
+git_protocol: <%= scope.lookupvar("infra_vars::git_protocol") %>
+git_site: <%= scope.lookupvar("infra_vars::git_site") %>
+git_origin: <%= scope.lookupvar("infra_vars::git_protocol") %><%= scope.lookupvar("infra_vars::git_site") %>
+pypi_mirror: <%= scope.lookupvar("infra_vars::pypi_mirror") %>
