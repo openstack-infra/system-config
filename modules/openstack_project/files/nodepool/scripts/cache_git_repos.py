@@ -19,17 +19,17 @@
 import os.path
 import re
 import shutil
+import sys
 import urllib2
 
 from common import run_local
 
-URL = ('https://git.openstack.org/cgit/openstack-infra/config/plain/'
-       'modules/openstack_project/files/review.projects.yaml')
+GIT_ORIGIN_RE = re.compile('^-?\s+git_origin:\s+(.*)$')
 PROJECT_RE = re.compile('^-?\s+project:\s+(.*)$')
 
 
-def clone_repo(project):
-    remote = 'git://git.openstack.org/%s.git' % project
+def clone_repo(git_url, project):
+    remote = '%s/%s.git' % (git_url, project)
 
     # Clear out any existing target directory first, in case of a retry.
     try:
@@ -59,14 +59,24 @@ def clone_repo(project):
 
 
 def main():
+    URL=sys.argv[1]
+
+    # We're regex-parsing YAML so that we don't have to depend on the
+    # YAML module which is not in the stdlib.
+    git_origin = None
+    config_data = open('/etc/infra/vars.yaml', 'r').read()
+    for line in config_data.split():
+        m = GIT_ORIGIN_RE.match(line)
+        if m:
+            git_origin = m.group(1)
+            break
+
     # TODO(jeblair): use gerrit rest api when available
     data = urllib2.urlopen(URL).read()
     for line in data.split('\n'):
-        # We're regex-parsing YAML so that we don't have to depend on the
-        # YAML module which is not in the stdlib.
         m = PROJECT_RE.match(line)
         if m:
-            (status, out) = clone_repo(m.group(1))
+            (status, out) = clone_repo(git_origin, m.group(1))
             print out
             if status != 0:
                 print 'Retrying to clone %s' % m.group(1)

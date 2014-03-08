@@ -17,6 +17,7 @@
 org=$1
 project=$2
 
+source /etc/infra/vars.sh
 source /usr/local/jenkins/slave_scripts/functions.sh
 check_variable_org_project "$org" "$project" "$0"
 
@@ -35,22 +36,22 @@ EOF
 # use the pypi.openstack.org mirror exclusively
 if grep -x "$org/$project" /opt/requirements/projects.txt 2>&1
 then
-    export TOX_INDEX_URL='http://pypi.openstack.org/openstack'
+    export TOX_INDEX_URL=$PYPI_MIRROR
     echo "Switching on internal pypi mirror $TOX_INDEX_URL for $org/$project"
     cat <<EOF > ~/.pydistutils.cfg
 [easy_install]
-index_url = http://pypi.openstack.org/openstack
+index_url = $PYPI_MIRROR
 EOF
     cat <<EOF > ~/.pip/pip.conf
 [global]
-index-url = http://pypi.openstack.org/openstack
+index-url = $PYPI_MIRROR
 EOF
 else
     echo "$org/$project will not use the internal openstack pypi mirror"
     cat <<EOF > ~/.pip/pip.conf
 [global]
 timeout = 60
-index-url = http://pypi.openstack.org/openstack
+index-url = $PYPI_MIRROR
 extra-index-url = http://pypi.python.org/simple
 EOF
 fi

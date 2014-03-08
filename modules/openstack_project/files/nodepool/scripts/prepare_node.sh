@@ -23,10 +23,14 @@ PYTHON3=${4:-false}
 PYPY=${5:-false}
 ALL_MYSQL_PRIVS=${6:-false}
 
+CGIT_SITE=https://git.openstack.org/cgit
+GIT_ORIGIN=git://git.openstack.org
+PROJECTS_YAML_URL=$CGIT_SITE/openstack-infra/config/plain/modules/openstack_project/files/review.projects.yaml
+
 sudo hostname $HOSTNAME
-wget https://git.openstack.org/cgit/openstack-infra/config/plain/install_puppet.sh
+wget $CGIT_SITE/openstack-infra/config/plain/install_puppet.sh
 sudo bash -xe install_puppet.sh
-sudo git clone --depth=1 git://git.openstack.org/openstack-infra/config.git \
+sudo git clone --depth=1 $GIT_ORIGIN/openstack-infra/config.git \
     /root/config
 sudo /bin/bash /root/config/install_modules.sh
 if [ -z "$NODEPOOL_SSH_KEY" ] ; then
@@ -38,7 +42,7 @@ else
 fi
 
 sudo mkdir -p /opt/git
-sudo -i python /opt/nodepool-scripts/cache_git_repos.py
+sudo -i python /opt/nodepool-scripts/cache_git_repos.py $PROJECTS_YAML_URL
 
 # We don't always get ext4 from our clouds, mount ext3 as ext4 on the next
 # boot (eg when this image is used for testing).

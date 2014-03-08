@@ -1,7 +1,11 @@
 #!/bin/bash -e
 
-GERRIT_SITE=$1
-GIT_ORIGIN=$2
+if [ -f /etc/infra/vars.sh ]; then
+    source /etc/infra/vars.sh
+fi
+
+GERRIT_SITE=${GERRIT_SITE:-$1}
+GIT_ORIGIN=${GIT_ORIGIN:-$2}
 
 # TODO(jeblair): Remove once the arg list is changed in jjb macros
 if [ ! -z $3 ]
