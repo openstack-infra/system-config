@@ -14,7 +14,7 @@
           #!/bin/bash -xe
           export PYTHONUNBUFFERED=true
           export DEVSTACK_GATE_TIMEOUT=60
-          export ENABLED_SERVICES=murano,murano-api,murano-conductor,murano-repository
+          export ENABLED_SERVICES=murano,murano-api,murano-conductor,murano-repository,tempest
           export PROJECTS="stackforge/murano-api $PROJECTS"
           export PROJECTS="stackforge/murano-conductor $PROJECTS"
           export PROJECTS="stackforge/murano-repository $PROJECTS"
