@@ -1,3 +1,24 @@
+openstack-nova:
+    projects:
+      - nova
+      - python-novaclient
+    events:
+      - positive
+
+openstack-cinder:
+    projects:
+      - cinder
+      - python-cinderclient
+    events:
+      - positive
+
+openstack-neutron:
+    projects:
+      - neutron
+      - python-neutronclient
+    events:
+      - positive
+
 openstack-qa:
     projects:
       - all
