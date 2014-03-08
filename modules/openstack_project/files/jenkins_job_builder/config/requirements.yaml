@@ -20,7 +20,7 @@
           export PIP_PROCESS_DEPENDENCY_LINKS=1
           function gate_hook {{
               bash $BASE/new/devstack-gate/devstack-vm-gate.sh && \
-              bash -xe $BASE/new/pbr/tools/integration.sh $PROJECTS
+              bash -xe $BASE/new/pbr/tools/integration.sh $(cat $BASE/new/requirements/projects.txt)
           }}
           export -f gate_hook
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
