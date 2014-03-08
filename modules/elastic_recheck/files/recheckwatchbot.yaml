@@ -1,3 +1,82 @@
+openstack-infra:
+    projects:
+      - hacking
+      - pbr
+      - openstack-ci
+      - elastic-recheck
+      - nodepool
+      - os-loganalyze
+      - pypi-mirror
+      - zuul
+    events:
+      - positive
+
+openstack-ceilometer:
+    projects:
+      - ceilometer
+      - python-ceilometerclient
+      - pycadf
+    events:
+      - positive
+
+openstack-trove:
+    projects:
+      - trove
+      - python-troveclient
+    events:
+      - positive
+
+openstack-nova:
+    projects:
+      - gantt
+      - nova
+      - python-ganttclient
+      - python-novaclient
+    events:
+      - positive
+
+openstack-cinder:
+    projects:
+      - cinder
+      - python-cinderclient
+    events:
+      - positive
+
+openstack-ironic:
+    projects:
+      - ironic
+      - python-ironicclient
+    events:
+      - positive
+
+openstack-swift:
+    projects:
+      - swift
+      - python-swiftclient
+    events:
+      - positive
+
+openstack-glance:
+    projects:
+      - glance
+      - python-glanceclient
+    events:
+      - positive
+
+openstack-keystone:
+    projects:
+      - keystone
+      - python-keystoneclient
+    events:
+      - positive
+
+openstack-oslo:
+    projects:
+      - pbr
+      - oslo
+    events:
+      - positive
+
 openstack-qa:
     projects:
       - all
