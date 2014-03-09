@@ -171,6 +171,8 @@
   description: Zuul packaging
 - project: openstack/api-site
   group: openstack-api-site
+  options:
+    - direct-release
 - project: openstack/ceilometer
 - project: openstack/cinder
   docimpact-group: openstack-manuals
@@ -179,9 +181,13 @@
   group: python-cliff
 - project: openstack/compute-api
   group: openstack-api-site
+  options:
+    - direct-release
 - project: openstack/database-api
   group: openstack-api-site
   description: Doc repo for trove project
+  options:
+    - direct-release
 - project: openstack/diskimage-builder
   description: Image building tools for OpenStack
 - project: openstack/django_openstack_auth
@@ -203,8 +209,12 @@
   docimpact-group: openstack-manuals
 - project: openstack/identity-api
   group: openstack-api-site
+  options:
+    - direct-release
 - project: openstack/image-api
   group: openstack-api-site
+  options:
+    - direct-release
 - project: openstack/ironic
   description: A service for managing and provisioning Bare Metal servers.
   upstream: git://github.com/devananda/ironic.git
@@ -214,12 +224,16 @@
 - project: openstack/melange
 - project: openstack/netconn-api
   group: openstack-api-site
+  options:
+    - direct-release
 - project: openstack/neutron
   docimpact-group: openstack-manuals
 - project: openstack/nova
   docimpact-group: openstack-manuals
 - project: openstack/object-api
   group: openstack-api-site
+  options:
+    - direct-release
 - project: openstack/openstack
   upstream: git://github.com/emonty/openstack
 - project: openstack/openstack-chef
@@ -230,11 +244,15 @@
   options:
     - direct-release
 - project: openstack/openstack-manuals
+  options:
+    - direct-release
 - project: openstack/openstack-planet
 - project: openstack/operations-guide
   group: openstack-manuals
   upstream: git://github.com/jeblair/openstack-ops
   description: OpenStack Operations Guide
+  options:
+    - direct-release
 - project: openstack/os-apply-config
   description: Apply configuration from cloud metadata.
 - project: openstack/os-cloud-config
