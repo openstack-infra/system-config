@@ -12,7 +12,7 @@ filter {
   if "screen" in [tags] and [message] =~ "^\+ " {
     drop {}
   }
-  if "console.html" in [tags] {
+  if "console" in [tags] or "console.html" in [tags] {
     if [message] == "<pre>" or [message] == "</pre>" {
       drop {}
     }
