@@ -226,6 +226,23 @@ pipelines:
       gerrit:
         force-message: true
 
+  - name: experimental-keystonev3
+    description: >
+      On-demand pipeline for requesting a run against a devstack configured
+      to use keystone v3 only.
+    manager: IndependentPipelineManager
+    precedence: low
+    trigger:
+      gerrit:
+        - event: comment-added
+          comment_filter: (?i)^\s*check experimental\s*$
+    success:
+      gerrit:
+        force-message: true
+    failure:
+      gerrit:
+        force-message: true
+
 
 project-templates:
   - name: python-jobs
@@ -2200,6 +2217,9 @@ projects:
       - check-tripleo-seed-precise
       - check-tripleo-undercloud-precise
       - check-tripleo-overcloud-precise
+    experimental-keystonev3:
+      - check-tempest-dsvm-keystonev3-full
+      - check-tempest-dsvm-neutron-keystonev3-full
     post:
       - tempest-docs
       - tempest-coverage
