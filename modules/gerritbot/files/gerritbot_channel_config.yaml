@@ -187,6 +187,7 @@ openstack-nova:
     projects:
       - openstack/gantt
       - openstack/nova
+        openstack/nova-specs
       - openstack/python-ganttclient
       - openstack/python-novaclient
     branches:
