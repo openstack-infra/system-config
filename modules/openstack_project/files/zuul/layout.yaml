@@ -916,7 +916,6 @@ projects:
       - gate-marconi-pep8
       - gate-marconi-python26
       - gate-marconi-python27
-      - gate-marconi-python33
       - gate-marconi-pypy
     post:
       - marconi-branch-tarball
