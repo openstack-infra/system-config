@@ -2141,6 +2141,8 @@ projects:
       - gate-tempest-dsvm-trove-full
       - check-tempest-dsvm-marconi
       - check-tempest-dsvm-virtual-ironic-nv
+      - check-tempest-dsvm-keystonev3-full
+      - check-tempest-dsvm-neutron-keystonev3-full
     experimental-tripleo:
       - check-tripleo-seed-precise
       - check-tripleo-ironic-seed-precise
