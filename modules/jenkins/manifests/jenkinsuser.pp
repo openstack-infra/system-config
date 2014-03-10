@@ -3,17 +3,10 @@
 class jenkins::jenkinsuser(
   $ssh_key = '',
   $ensure = present,
-  $sudo = false,
 ) {
 
   group { 'jenkins':
     ensure => present,
-  }
-
-  if ($sudo == true) {
-    $groups = ['sudo', 'admin']
-  } else {
-    $groups = []
   }
 
   user { 'jenkins':
@@ -23,7 +16,7 @@ class jenkins::jenkinsuser(
     gid        => 'jenkins',
     shell      => '/bin/bash',
     membership => 'minimum',
-    groups     => $groups,
+    groups     => [],
     require    => Group['jenkins'],
   }
 

@@ -16,7 +16,6 @@ class jenkins::slave(
   if ($user == true) {
     class { 'jenkins::jenkinsuser':
       ensure  => present,
-      sudo    => $sudo,
       ssh_key => $ssh_key,
     }
   }
@@ -398,6 +397,16 @@ class jenkins::slave(
     force   => true,
     require => File['/usr/local/jenkins'],
     source  => 'puppet:///modules/jenkins/slave_scripts',
+  }
+
+  if ($sudo == true) {
+    file { '/etc/sudoers.d/jenkins-sudo':
+      ensure => present,
+      source => 'puppet:///modules/jenkins/jenkins-sudo.sudo',
+      owner  => 'root',
+      group  => 'root',
+      mode   => '0440',
+    }
   }
 
   file { '/etc/sudoers.d/jenkins-sudo-grep':
