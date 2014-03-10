@@ -104,6 +104,7 @@ channels:
   - name: openstack-qa
   - name: openstack-raksha
   - name: openstack-relmgr-office
+  - name: openstack-sahara
   - name: openstack-sdks
   - name: openstack-state-management
   - name: openstack-swift
