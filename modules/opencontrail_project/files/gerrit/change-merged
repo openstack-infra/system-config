@@ -1,0 +1,5 @@
+#!/bin/sh
+
+# Use timeout to kill any process running longer than 10 minutes.
+timeout -k 2m 10m /usr/local/bin/update-bug change-merged "$@"
+timeout -k 2m 10m /usr/local/bin/notify-impact change-merged "$@" --impact DocImpact --dest-address 'openstack-docs@lists.openstack.org' --config /home/gerrit2/review_site/hooks/notify_impact.yaml

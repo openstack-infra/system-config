@@ -1,0 +1,84 @@
+#
+# See cgitrc(5) or /usr/share/doc/cgit-*/cgitrc.5.html for details
+#
+
+# Enable caching of up to 1000 output entries
+cache-size=1000
+
+# Cache repository pages without a fixed SHA for one minute.
+cache-dynamic-ttl=1
+
+# Cache repo summary page for one minute.
+cache-repo-ttl=1
+
+# Cache cgit front page for one minute.
+cache-root-ttl=1
+
+# Specify some default clone prefixes
+clone-prefix=git://git.openstack.org https://git.openstack.org
+
+# Specify a command which will be invoked to format commit messages
+commit-filter=/usr/local/bin/commit-filter.sh
+
+# Specify the css url
+css=/static/openstack.css
+
+# Hide owner for each repository on the index page
+enable-index-owner=0
+
+# Show extra links for each repository on the index page
+enable-index-links=1
+
+# Add a cgit favicon
+favicon=/static/favicon.ico
+
+# Use a custom logo
+logo=/static/openstack.png
+
+# Enable statistics per week, month and quarter
+max-stats=quarter
+
+# Set the title and heading of the repository index page
+root-title=OpenStack git repository browser
+
+# Make side-by-side diffs the default
+side-by-side-diffs=1
+
+# Set a subheading for the repository index page
+root-desc=
+
+# Include some more info about this site on the index page
+#root-readme=/var/www/html/about.html
+
+# Allow download of tar.gz, tar.bz2 and zip-files
+#snapshots=tar.gz tar.bz2 zip
+
+##
+## List of common mimetypes
+##
+
+mimetype.gif=image/gif
+mimetype.html=text/html
+mimetype.jpg=image/jpeg
+mimetype.jpeg=image/jpeg
+mimetype.pdf=application/pdf
+mimetype.png=image/png
+mimetype.svg=image/svg+xml
+
+# Enable syntax highlighting (requires the highlight package)
+source-filter=/usr/libexec/cgit/filters/syntax-highlighting.sh
+
+# Increase the number of entries to list per page on the repository
+# index page (default 50)
+max-repo-count=250
+
+##
+## List of repositories.
+## PS: Any repositories listed when section is unset will not be
+##     displayed under a section heading
+## PPS: This list could be kept in a different file (e.g. '/etc/cgitrepos')
+##      and included like this:
+##        include=/etc/cgitrepos
+##
+
+include=/etc/cgitrepos

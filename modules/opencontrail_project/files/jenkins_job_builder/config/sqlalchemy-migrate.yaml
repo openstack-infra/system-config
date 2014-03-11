@@ -1,0 +1,37 @@
+- job-template:
+    name: '{pipeline}-sqlalchemy-migrate-devstack-dsvm{branch-designator}'
+    node: '{node}'
+
+    wrappers:
+      - timeout:
+          timeout: 185
+          fail: true
+      - timestamps
+
+    builders:
+      - devstack-checkout
+      - shell: |
+          #!/bin/bash -xe
+          export PYTHONUNBUFFERED=true
+          export DEVSTACK_GATE_TIMEOUT=180
+          export PROJECTS="stackforge/sqlalchemy-migrate $PROJECTS"
+          export DEVSTACK_GATE_TEMPEST=1
+          export DEVSTACK_GATE_TEMPEST_FULL=1
+          export BRANCH_OVERRIDE={branch-override}
+          if [ "$BRANCH_OVERRIDE" != "default" ] ; then
+              export OVERRIDE_ZUUL_BRANCH=$BRANCH_OVERRIDE
+          fi
+
+          function pre_test_hook {{
+              cd /opt/stack/new/sqlalchemy-migrate
+              sudo pip install .
+          }}
+          export -f pre_test_hook
+
+          cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
+          ./safe-devstack-vm-gate-wrap.sh
+      - link-logs
+
+    publishers:
+      - devstack-logs
+      - console-log

@@ -1,0 +1,48 @@
+#!/bin/sh
+
+# The point of this script is to update the list of contributor license
+# agreements Gerrit knows about. More specifically, in its current form,
+# it's being used by Puppet to perform database-specific parts of a
+# migration for OpenStack's development and production Gerrit servers
+# from Echosign to a Gerrit-managed CLA. As such, a lot of this code can
+# be ripped out once that migration is complete (though it doesn't
+# necessarily need to be, and can be left in place more or less
+# indefinitely without impact).
+
+# This function takes a contributor agreement ID and returns 0 if Y
+# (active), 1 if N (inactive) or anything else (including if the CLA
+# does not exist). It would be nice to implement this by short name
+# instead, but Gerrit does not create the id column with auto_increment
+# so we have to know what ID integers we want when creating anyway.
+is_active () {
+    ACTIVE=$(
+        mysql --defaults-file=/etc/mysql/debian.cnf --batch \
+            --skip-column-names --execute '
+                SELECT active FROM contributor_agreements WHERE id='$1';
+            ' reviewdb
+    )
+    if test "$ACTIVE" = "Y" ; then
+        return 0
+    else
+        return 1
+    fi
+}
+
+# The old Echosign CLA needs to be invalidated, so if it's active then
+# update it to an inactive state.
+is_active 1 \
+&& mysql --defaults-file=/etc/mysql/debian.cnf --execute '
+        UPDATE contributor_agreements SET active="N" WHERE id=1;
+    ' reviewdb
+
+# The new Gerrit-managed CLA should be created if it does not yet exist.
+# It's added as ID 2 to accomodate the existence of the old Echosign CLA
+# occupying ID 1.
+is_active 2 \
+|| mysql --defaults-file=/etc/mysql/debian.cnf --execute '
+        INSERT INTO contributor_agreements VALUES (
+            "Y", "Y", "Y", "<%= cla_name %>",
+            "<%= cla_description %>",
+            "<%= cla_file %>", <%= cla_id %>
+        );
+    ' reviewdb

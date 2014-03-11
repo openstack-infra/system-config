@@ -1,0 +1,3 @@
+- project: stackforge/contrail-controller
+  description: Contrail Controller
+  upstream: git://github.com/rombie/contrail-controller.git

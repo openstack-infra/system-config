@@ -1,0 +1,56 @@
+<h1>Guide to Tempest Results Runs</h1>
+<p>
+  You are looking at the full test results of a devstack setup and
+  tempest run for the OpenStack gate, as well as all the logs of all the
+  relevant services that were running during that tempest test run. From
+  them you should have enough information to debug.
+</p>
+<h2>How To Debug - Quickstart</h2>
+<p>
+  <ol>
+    <li>scroll to the end of console.html
+    <li>work your way backwards until the first failing test
+    <li>copy the timestamp of that failing test
+    <li>go into logs directory and look at that time stamp in related
+    service logs for traces, failures, or other oddities
+  </ol>
+</p>
+<h2>File Overview</h2>
+<h3>console.html</h3>
+This file contains the stdout/stderr console of the devstack-gate
+job. The basic flow of the file goes as follows:
+<ul>
+  <li>Boot guest from base Linux image
+  <li>Use devstack to install all required packages (debs and pips)
+  <li>Use devstack to setup all the services from upstream master except
+    for the particular project being tested, which is pulled from
+    gerrit.
+  <li>Run devstack exercises (very basic sanity checking)
+  <li>Run tempest tests
+</ul>
+<p>
+  All the devstack setup is done under bash tracing, so
+  is <b>extremely</b> verbose. This is to ensure enough data is captured
+  so that you can debug failures in the gate with the information provided.
+</p>
+<p>
+  The tempest tests are the last 1% of the console.html. When looking
+  at failures it is typical best to start at the end of the file and
+  work backwards.
+</p>
+<h3>logs</h3>
+<p>
+  The <a href="logs">logs</a> directory contains all the screen logs
+  from all the services during the devstack-gate run.
+</p>
+<h2>About this Help</h2>
+<p>
+  This help file is part of the
+  <a href="https://git.openstack.org/cgit/openstack-infra/config">
+      openstack-infra/config</a>
+  project, and can be found at
+  <a href="https://git.openstack.org/cgit/openstack-infra/config/tree/modules/openstack_project/files/logs/help/tempest_overview.html">
+      modules/openstack_project/files/logs/help/tempest_overview.html
+  </a>.
+  The file can be updated via the standard OpenStack Gerrit Review process.
+</p>

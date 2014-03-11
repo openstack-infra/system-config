@@ -1,0 +1,15 @@
+# This file is managed by puppet.
+# https://git.openstack.org/cgit/openstack-infra/config
+
+cache-root: /var/cache/pypimirror
+
+mirrors:
+  - name: openstack
+    projects:
+      - git://git.openstack.org/openstack/requirements
+    output: /var/lib/pypimirror/openstack
+
+  - name: openstack-infra
+    projects:
+      - git://git.openstack.org/openstack-infra/config
+    output: /var/lib/pypimirror/openstack-infra

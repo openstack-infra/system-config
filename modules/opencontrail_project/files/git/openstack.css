@@ -1,0 +1,82 @@
+@import url('/cgit-data/cgit.css');
+
+body {
+  background: url("/static/openstack-page-bkg.jpg") no-repeat scroll 0 0 white !important;
+}
+
+div#cgit {
+  background: transparent;
+}
+
+div#cgit table#header td.main {
+  font-size: 200%;
+  letter-spacing: -1px;
+  color: #CF2F19;
+}
+
+div#cgit table.list {
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+div#cgit table.list th {
+  border: 1px solid #ffffff;
+  padding: 2px 6px 1px;
+  background-color: #eef3f5;
+  font-style: italic;
+  white-space: nowrap;
+  font-weight: normal;
+}
+
+div#cgit table.list th a {
+  color: #264d69;
+}
+
+div#cgit table.list td.reposection {
+  color: #264d69;
+}
+
+div#cgit table.list tr:nth-child(odd) {
+  background: white;
+}
+
+div#cgit table.list tr:nth-child(even) {
+  background: #f5f5ff;
+}
+
+div#cgit table.list td {
+  padding-left: 5px;
+  padding-right: 5px;
+  border-right: 1px solid #eef3f5;
+  border-bottom: 1px solid #eef3f5;
+}
+
+div#cgit table.list td a {
+  color: #264d69;
+}
+
+div#cgit table.list td a:hover {
+  color: black;
+}
+
+div#cgit table.list tr.nohover {
+  background: #eef3f5;
+}
+
+div#cgit table.list tr.nohover:hover {
+  background: #eef3f5;
+}
+
+/* Syntax highlighting */
+div#cgit table.blob .num  { color:#2928ff; }
+div#cgit table.blob .esc  { color:#ff00ff; }
+div#cgit table.blob .str  { color:#ff0000; }
+div#cgit table.blob .dstr { color:#818100; }
+div#cgit table.blob .slc  { color:#838183; font-style:italic; }
+div#cgit table.blob .com  { color:#838183; font-style:italic; }
+div#cgit table.blob .dir  { color:#008200; }
+div#cgit table.blob .sym  { color:#000000; }
+div#cgit table.blob .kwa  { color:#000000; font-weight:bold; }
+div#cgit table.blob .kwb  { color:#830000; }
+div#cgit table.blob .kwc  { color:#000000; font-weight:bold; }
+div#cgit table.blob .kwd  { color:#010181; }

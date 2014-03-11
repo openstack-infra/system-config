@@ -1,0 +1,90 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:py="http://genshi.edgewall.org/"
+      lang="en">
+  <HEAD>
+    <TITLE>Elastic Recheck</TITLE>
+
+<script type="text/javascript"
+	src="http://status.openstack.org/jquery.min.js"></script>
+<script type="text/javascript"
+	src="http://status.openstack.org/jquery-visibility.min.js"></script>
+<script type="text/javascript"
+	src="http://status.openstack.org/jquery-graphite.js"></script>
+<script type="text/javascript"
+	src="http://status.openstack.org/common.js"></script>
+<script type="text/javascript"
+	src="http://status.openstack.org/jquery.flot.min.js"></script>
+<script type="text/javascript"
+	src="http://status.openstack.org/jquery.flot.time.min.js"></script>
+<script type="text/javascript"
+	src="elastic-recheck.js"></script>
+
+    <!-- Google Fonts -->
+    <link href='http://fonts.googleapis.com/css?family=PT+Sans&amp;subset=latin' rel='stylesheet' type='text/css'/>
+
+    <!-- Framework CSS -->
+    <link rel="stylesheet" href="http://www.openstack.org/themes/openstack/css/blueprint/screen.css" type="text/css" media="screen, projection"/>
+    <link rel="stylesheet" href="http://www.openstack.org/themes/openstack/css/blueprint/print.css" type="text/css" media="print"/>
+
+    <!-- IE CSS -->
+    <!--[if lt IE 8]><link rel="stylesheet" href="http://www.openstack.org/blueprint/ie.css" type="text/css" media="screen, projection"><![endif]-->
+
+    <!-- OpenStack Specific CSS -->
+
+    <link rel="stylesheet" href="http://www.openstack.org/themes/openstack/css/dropdown.css" type="text/css" media="screen, projection, print"/>
+
+    <!-- Page Specific CSS -->
+    <link rel="stylesheet" href="http://www.openstack.org/themes/openstack/css/home.css" type="text/css" media="screen, projection, print"/>
+
+    <link rel="stylesheet" type="text/css" href="http://www.openstack.org/themes/openstack/css/main.css" />
+
+
+<style type="text/css">
+.graph {
+    width: 600px;
+    height: 200px;
+    margin-bottom: 6px;
+}
+.extlink {
+    margin-left: 2em;
+    margin-right: 2em;
+}
+.bug-container {
+    margin-bottom: 2em;
+}
+</style>
+
+<script type="text/javascript">
+</script>
+
+  </HEAD>
+
+  <BODY>
+    <script type="text/javascript">header('Rechecks');</script>
+    <div class="container" id="graph-container">
+      <script type="text/javascript">
+$("#graph-container").append($(new Image()).graphite({
+    from: "-36hours",
+    url: "http://graphite.openstack.org/render/",
+    width: 600,
+    height: 400,
+    bgcolor: 'ffffff',
+    fgcolor: '000000',
+    target: [
+    "color(alias(movingAverage(asPercent(stats.zuul.pipeline.gate.job.gate-tempest-dsvm-neutron.FAILURE,sum(stats.zuul.pipeline.gate.job.gate-tempest-dsvm-neutron.{SUCCESS,FAILURE})),200), 'gate-tempest-dsvm-neutron'),'00c868')",
+    "color(alias(movingAverage(asPercent(stats.zuul.pipeline.check.job.check-tempest-dsvm-neutron.FAILURE,sum(stats.zuul.pipeline.check.job.check-tempest-dsvm-neutron.{SUCCESS,FAILURE})),200), 'check-tempest-dsvm-neutron'),'6464ff')",
+    "color(alias(movingAverage(asPercent(stats.zuul.pipeline.gate.job.gate-tempest-dsvm-full.FAILURE,sum(stats.zuul.pipeline.gate.job.gate-tempest-dsvm-full.{SUCCESS,FAILURE})),200), 'gate-tempest-dsvm-full'),'00FF00')",
+    "color(alias(movingAverage(asPercent(stats.zuul.pipeline.check.job.check-tempest-dsvm-full.FAILURE,sum(stats.zuul.pipeline.check.job.check-tempest-dsvm-full.{SUCCESS,FAILURE})),200), 'check-tempest-dsvm-full'),'ffbf52')",
+    "color(alias(movingAverage(asPercent(stats.zuul.pipeline.check.job.check-grenade-dsvm.FAILURE,sum(stats.zuul.pipeline.check.job.check-grenade-dsvm.{SUCCESS,FAILURE})),200), 'check-grenade-dsvm'),'800080')",
+    ],
+    title: "Gate Failure Rates"
+}));
+      </script>
+    </div>
+
+    <div id="main-container" class="container">
+    </div>
+
+    <script type="text/javascript">footer();</script>
+  </BODY>
+</html>

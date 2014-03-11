@@ -1,0 +1,55 @@
+<h1>Guide to Devstack Gate Logs</h1>
+<p>
+  Above is a collection of log files from
+  the <a href="../console.html">current tempest run</a>. Within them
+  should be everything you need to get to the bottom of a test
+  failure. The screen-* logs will be your most valuable tools in this
+  process. Use the timestamp of a the failed test in
+  the <a href="../console.html">current tempest run</a>.
+</p>
+<h2>Nova Compute Fails</h2>
+<p>
+  If there is a compute test failure, especially a server not getting
+  created correctly, or being in an unexpected state, the following is
+  typically the most fruitful order to look at things:
+<ul>
+  <li><a href="screen-n-api.txt.gz">screen-n-api.txt.gz</a> - the nova
+    api log, which will show top level failures. Make sure the request
+    that was being sent in actually suceeded.
+  <li><a href="screen-n-cpu.txt.gz">screen-n-cpu.txt.gz</a> - the nova
+    compute log. If a libvirt or qemu issue happened during guest
+    creation it will be here.
+  <li><a href="screen-n-sch.txt.gz">screen-n-sch.txt.gz</a> - the nova
+    scheduler. Some times there are races in allocating resources, and
+    the scheduler will throw a WARNING if it couldn't allocate the
+    requested resources.
+  <li>all other nova logs
+</ul>
+<h2>Cinder Volume Fails</h2>
+<p>
+  If there is a volume failure in the test, the following is typically
+  the most fruitful order to look at things:
+  <ul>
+    <li><a href="screen-c-api.txt.gz">screen-c-api.txt.gz</a> - the
+      cinder api log, which will show top level failures. Make sure
+      the request that was being sent in actually suceeded.
+    <li><a href="screen-c-vol.txt.gz">screen-c-vol.txt.gz</a> - the
+      cinder agent log. If there was a local allocation error it will be
+      here.
+    <li><a href="screen-c-sch.txt.gz">screen-c-sch.txt.gz</a> - the
+      cinder scheduler. Some times there are races in allocating
+      resources, and the scheduler will throw a WARNING if it couldn't
+      allocate the requested resources.
+  </ul>
+</p>
+<h2>About this Help</h2>
+<p>
+  This help file is part of the
+  <a href="https://git.openstack.org/cgit/openstack-infra/config">
+      openstack-infra/config</a>
+  project, and can be found at
+  <a href="https://git.openstack.org/cgit/openstack-infra/config/tree/modules/openstack_project/files/logs/help/tempest_logs.html">
+      modules/openstack_project/files/logs/help/tempest_logs.html
+  </a>.
+  The file can be updated via the standard OpenStack Gerrit Review process.
+</p>

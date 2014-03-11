@@ -1,0 +1,39 @@
+- job:
+    name: gate-barbican-devstack-dsvm
+    node: devstack-precise
+
+    wrappers:
+      - timeout:
+          timeout: 65
+          fail: true
+      - timestamps
+
+    builders:
+      - devstack-checkout
+      - shell: |
+          #!/bin/bash -xe
+          export PYTHONUNBUFFERED=true
+          export DEVSTACK_GATE_TIMEOUT=60
+          export ENABLED_SERVICES=barbican,tempest,keystone
+          export PROJECTS="stackforge/barbican $PROJECTS"
+          export PROJECTS="stackforge/python-barbicanclient $PROJECTS"
+
+          function pre_test_hook {
+              cd /opt/stack/new/barbican/functionaltests
+              ./pre_test_hook.sh
+          }
+          export -f pre_test_hook
+
+          function post_test_hook {
+              cd /opt/stack/new/barbican/functionaltests
+              ./post_test_hook.sh
+          }
+          export -f post_test_hook
+
+          cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
+          ./safe-devstack-vm-gate-wrap.sh
+      - link-logs
+
+    publishers:
+      - devstack-logs
+      - console-log

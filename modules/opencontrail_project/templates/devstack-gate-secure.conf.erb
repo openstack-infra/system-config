@@ -1,0 +1,7 @@
+[jenkins]
+server=https://<%= jenkins_server %>
+user=<%= jenkins_api_user %>
+apikey=<%= jenkins_api_key %>
+<% if jenkins_credentials_id != "" -%>
+credentials_id=<%= jenkins_credentials_id %>
+<% end -%>

@@ -1,0 +1,32 @@
+; sip.conf customizations for pbx.openstack.org
+
+[general](+)
+udpbindaddr=::
+tcpenable=yes
+tcpbindaddr=::
+context=public
+allowguest=yes
+disallow=all
+allow=g722
+allow=ulaw
+allow=alaw
+allow=gsm
+nat=force_rport,comedia
+<% sip_providers.each do |provider| -%>
+register => <%= provider['username'] %>:<%= provider['password'] %>@<%= provider['hostname'] %>:5060
+<% end -%>
+
+
+<% sip_providers.each do |provider| -%>
+<% if provider['outgoing'] == true -%>
+[<%= provider['username'] %>]
+context=public
+host=<%= provider['hostname'] %>
+secret=<%= provider['password'] %>
+type=peer
+defaultuser=<%= provider['username'] %>
+fromuser=<%= provider['username'] %>
+trustrpid=yes
+sendrpid=yes
+<% end -%>
+<% end -%>
