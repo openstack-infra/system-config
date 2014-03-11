@@ -4,6 +4,7 @@
     node: '{node}'
 
     builders:
+      - link-logs
       - gerrit-git-prep
       - shell: |
           #!/bin/bash -xe
@@ -11,7 +12,6 @@
           export GITBASE=${{TEMPDIR}}/git
           export LP_STATS=n
           bash ./do-it.sh
-      - link-logs
 
     publishers:
       - console-log

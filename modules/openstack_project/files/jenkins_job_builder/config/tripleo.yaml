@@ -9,6 +9,7 @@
       - timestamps
 
     builders:
+      - link-logs
       - devstack-checkout
       - shell: |
           #!/bin/bash -xe
@@ -25,7 +26,6 @@
           export -f gate_hook
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
-      - link-logs
 
     publishers:
       - scp:
@@ -48,6 +48,7 @@
       - timestamps
 
     builders:
+      - link-logs
       - devstack-checkout
       - shell: |
           #!/bin/bash -xe
@@ -64,7 +65,6 @@
           export -f gate_hook
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
-      - link-logs
 
     publishers:
       - scp:
@@ -87,6 +87,7 @@
       - timestamps
 
     builders:
+      - link-logs
       - devstack-checkout
       - shell: |
           #!/bin/bash -xe
@@ -103,7 +104,6 @@
           export -f gate_hook
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
-      - link-logs
 
     publishers:
       - scp:

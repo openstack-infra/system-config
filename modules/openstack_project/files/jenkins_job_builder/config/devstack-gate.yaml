@@ -9,6 +9,7 @@
       - timestamps
 
     builders:
+      - link-logs
       - experimental-devstack-checkout
       - shell: |
           #!/bin/bash -xe
@@ -19,7 +20,6 @@
           export RE_EXEC=true
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
-      - link-logs
 
     publishers:
       - devstack-logs
@@ -36,6 +36,7 @@
       - timestamps
 
     builders:
+      - link-logs
       - experimental-devstack-checkout
       - shell: |
           #!/bin/bash -xe
@@ -45,7 +46,6 @@
           export DEVSTACK_GATE_TEMPEST_FULL=1
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
-      - link-logs
 
     publishers:
       - devstack-logs
@@ -62,6 +62,7 @@
       - timestamps
 
     builders:
+      - link-logs
       - devstack-checkout
       - shell: |
           #!/bin/bash -xe
@@ -85,7 +86,6 @@
 
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
-      - link-logs
 
     publishers:
       - devstack-logs
@@ -102,6 +102,7 @@
       - timestamps
 
     builders:
+      - link-logs
       - devstack-checkout
       - shell: |
           #!/bin/bash -xe
@@ -115,7 +116,6 @@
           fi
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
-      - link-logs
 
     publishers:
       - devstack-logs
@@ -132,6 +132,7 @@
       - timestamps
 
     builders:
+      - link-logs
       - devstack-checkout
       - shell: |
           #!/bin/bash -xe
@@ -145,7 +146,6 @@
           fi
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
-      - link-logs
 
     publishers:
       - devstack-logs
@@ -162,6 +162,7 @@
       - timestamps
 
     builders:
+      - link-logs
       - devstack-checkout
       - shell: |
           #!/bin/bash -xe
@@ -176,7 +177,6 @@
           fi
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
-      - link-logs
 
     publishers:
       - devstack-logs
@@ -194,6 +194,7 @@
       - timestamps
 
     builders:
+      - link-logs
       - devstack-checkout
       - shell: |
           #!/bin/bash -xe
@@ -208,7 +209,6 @@
           fi
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
-      - link-logs
 
     publishers:
       - devstack-logs
@@ -226,6 +226,7 @@
       - timestamps
 
     builders:
+      - link-logs
       - devstack-checkout
       - shell: |
           #!/bin/bash -xe
@@ -242,7 +243,6 @@
           fi
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
-      - link-logs
 
     publishers:
       - devstack-logs
@@ -260,6 +260,7 @@
       - timestamps
 
     builders:
+      - link-logs
       - devstack-checkout
       - shell: |
           #!/bin/bash -xe
@@ -274,7 +275,6 @@
           fi
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
-      - link-logs
 
     publishers:
       - devstack-logs
@@ -292,6 +292,7 @@
       - timestamps
 
     builders:
+      - link-logs
       - devstack-checkout
       - shell: |
           #!/bin/bash -xe
@@ -307,7 +308,6 @@
           fi
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
-      - link-logs
 
     publishers:
       - devstack-logs
@@ -325,6 +325,7 @@
       - timestamps
 
     builders:
+      - link-logs
       - devstack-checkout
       - shell: |
           #!/bin/bash -xe
@@ -338,7 +339,6 @@
           fi
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
-      - link-logs
 
     publishers:
       - devstack-logs
@@ -356,6 +356,7 @@
       - timestamps
 
     builders:
+      - link-logs
       - devstack-checkout
       - shell: |
           #!/bin/bash -xe
@@ -371,7 +372,6 @@
 
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
-      - link-logs
 
     publishers:
       - devstack-logs
@@ -389,6 +389,7 @@
       - timestamps
 
     builders:
+      - link-logs
       - devstack-checkout
       - shell: |
           #!/bin/bash -xe
@@ -405,7 +406,6 @@
 
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
-      - link-logs
 
     publishers:
       - devstack-logs
@@ -423,6 +423,7 @@
       - timestamps
 
     builders:
+      - link-logs
       - devstack-checkout
       - shell: |
           #!/bin/bash -xe
@@ -437,7 +438,6 @@
 
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
-      - link-logs
 
     publishers:
       - devstack-logs
@@ -455,6 +455,7 @@
       - timestamps
 
     builders:
+      - link-logs
       - devstack-checkout
       - shell: |
           #!/bin/bash -xe
@@ -468,7 +469,6 @@
           fi
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
-      - link-logs
 
     publishers:
       - devstack-logs
@@ -486,6 +486,7 @@
       - timestamps
 
     builders:
+      - link-logs
       - devstack-checkout
       - shell: |
           #!/bin/bash -xe
@@ -500,7 +501,6 @@
           fi
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
-      - link-logs
 
     publishers:
       - devstack-logs
@@ -518,6 +518,7 @@
       - timestamps
 
     builders:
+      - link-logs
       - devstack-checkout
       - shell: |
           #!/bin/bash -xe
@@ -531,7 +532,6 @@
           fi
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
-      - link-logs
 
     publishers:
       - devstack-logs
@@ -548,6 +548,7 @@
       - timestamps
 
     builders:
+      - link-logs
       - devstack-checkout
       - shell: |
           #!/bin/bash -xe
@@ -562,7 +563,6 @@
           fi
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
-      - link-logs
 
     publishers:
       - devstack-logs
@@ -580,6 +580,7 @@
       - timestamps
 
     builders:
+      - link-logs
       - devstack-checkout
       - shell: |
           #!/bin/bash -xe
@@ -595,7 +596,6 @@
           fi
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
-      - link-logs
 
     publishers:
       - devstack-logs
@@ -613,6 +613,7 @@
       - timestamps
 
     builders:
+      - link-logs
       - devstack-checkout
       - shell: |
           #!/bin/bash -xe
@@ -627,7 +628,6 @@
           fi
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
-      - link-logs
 
     publishers:
       - devstack-logs
@@ -645,6 +645,7 @@
       - timestamps
 
     builders:
+      - link-logs
       - devstack-checkout
       - shell: |
           #!/bin/bash -xe
@@ -660,7 +661,6 @@
           fi
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
-      - link-logs
 
     publishers:
       - devstack-logs
@@ -678,6 +678,7 @@
       - timestamps
 
     builders:
+      - link-logs
       - devstack-checkout
       - shell: |
           #!/bin/bash -xe
@@ -687,7 +688,6 @@
           export DEVSTACK_GATE_GRENADE=1
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
-      - link-logs
 
     publishers:
       - devstack-logs
@@ -705,6 +705,7 @@
       - timestamps
 
     builders:
+      - link-logs
       - devstack-checkout
       - shell: |
           #!/bin/bash -xe
@@ -715,7 +716,6 @@
           export DEVSTACK_GATE_GRENADE_FORWARD=1
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
-      - link-logs
 
     publishers:
       - devstack-logs
@@ -733,6 +733,7 @@
       - timestamps
 
     builders:
+      - link-logs
       - devstack-checkout
       - shell: |
           #!/bin/bash -xe
@@ -743,7 +744,6 @@
           export DEVSTACK_GATE_NEUTRON=1
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
-      - link-logs
 
     publishers:
       - devstack-logs
@@ -761,6 +761,7 @@
       - timestamps
 
     builders:
+      - link-logs
       - devstack-checkout
       - shell: |
           #!/bin/bash -xe
@@ -772,7 +773,6 @@
           export DEVSTACK_GATE_GRENADE_FORWARD=1
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
-      - link-logs
 
     publishers:
       - devstack-logs
@@ -790,6 +790,7 @@
       - timestamps
 
     builders:
+      - link-logs
       - devstack-checkout
       - shell: |
           #!/bin/bash -xe
@@ -800,7 +801,6 @@
           export DEVSTACK_GATE_GRENADE_PARTIAL_NCPU=1
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
-      - link-logs
 
     publishers:
       - devstack-logs
@@ -818,6 +818,7 @@
       - timestamps
 
     builders:
+      - link-logs
       - devstack-checkout
       - shell: |
           #!/bin/bash -xe
@@ -832,7 +833,6 @@
           fi
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
-      - link-logs
 
     publishers:
       - devstack-logs
@@ -850,6 +850,7 @@
       - timestamps
 
     builders:
+      - link-logs
       - devstack-checkout
       - shell: |
           #!/bin/bash -xe
@@ -864,7 +865,6 @@
           fi
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
-      - link-logs
 
     publishers:
       - devstack-logs
@@ -882,6 +882,7 @@
       - timestamps
 
     builders:
+      - link-logs
       - devstack-checkout
       - shell: |
           #!/bin/bash -xe
@@ -897,7 +898,6 @@
           fi
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
-      - link-logs
 
     publishers:
       - devstack-logs
@@ -915,6 +915,7 @@
       - timestamps
 
     builders:
+      - link-logs
       - devstack-checkout
       - shell: |
           #!/bin/bash -xe
@@ -927,7 +928,6 @@
           fi
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
-      - link-logs
 
     publishers:
       - devstack-logs
@@ -945,6 +945,7 @@
       - timestamps
 
     builders:
+      - link-logs
       - devstack-checkout
       - shell: |
           #!/bin/bash -xe
@@ -957,7 +958,6 @@
           fi
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
-      - link-logs
 
     publishers:
       - devstack-logs
@@ -975,6 +975,7 @@
       - timestamps
 
     builders:
+      - link-logs
       - devstack-checkout
       - shell: |
           #!/bin/bash -xe
@@ -987,7 +988,6 @@
           fi
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
-      - link-logs
 
     publishers:
       - devstack-logs
@@ -1005,6 +1005,7 @@
       - timestamps
 
     builders:
+      - link-logs
       - devstack-checkout
       - shell: |
           #!/bin/bash -xe
@@ -1019,7 +1020,6 @@
           fi
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
-      - link-logs
 
     publishers:
       - devstack-logs
