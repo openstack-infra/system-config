@@ -12,12 +12,12 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 #
-# openstackid idp(sso-openid)
+# opencontrailid idp(sso-openid)
 #
-# == Class: openstackid
+# == Class: opencontrailid
 #
-class openstackid (
-  $git_source_repo = 'https://git.openstack.org/openstack-infra/openstackid',
+class opencontrailid (
+  $git_source_repo = 'https://git.opencontrail.org/opencontrail-infra/opencontrailid',
   $site_admin_password = '',
   $id_mysql_host = '',
   $id_mysql_user = '',
@@ -64,71 +64,71 @@ class openstackid (
     require => Exec[apt_update],
   }
 
-  group { 'openstackid':
+  group { 'opencontrailid':
     ensure => present,
   }
 
-  user { 'openstackid':
+  user { 'opencontrailid':
     ensure     => present,
     managehome => true,
     comment    => 'OpenStackID User',
     shell      => '/bin/bash',
-    gid        => 'openstackid',
-    require    => Group['openstackid'],
+    gid        => 'opencontrailid',
+    require    => Group['opencontrailid'],
   }
 
-  file { '/etc/openstackid':
+  file { '/etc/opencontrailid':
     ensure => directory,
     owner  => 'root',
     group  => 'root',
     mode   => '0755',
   }
 
-  file { '/etc/openstackid/database.php':
+  file { '/etc/opencontrailid/database.php':
     ensure  => present,
-    content => template('openstackid/database.php.erb'),
+    content => template('opencontrailid/database.php.erb'),
     owner   => 'root',
     group   => 'www-data',
     mode    => '0640',
     require => [
-      File['/etc/openstackid'],
+      File['/etc/opencontrailid'],
     ]
   }
 
-  file { '/etc/openstackid/log.php':
+  file { '/etc/opencontrailid/log.php':
       ensure  => present,
-      content => template('openstackid/log.php.erb'),
+      content => template('opencontrailid/log.php.erb'),
       owner   => 'root',
       group   => 'www-data',
       mode    => '0640',
       require => [
-        File['/etc/openstackid'],
+        File['/etc/opencontrailid'],
       ]
   }
 
-  file { '/etc/openstackid/environment.php':
+  file { '/etc/opencontrailid/environment.php':
       ensure  => present,
-      content => template('openstackid/environment.php.erb'),
+      content => template('opencontrailid/environment.php.erb'),
       owner   => 'root',
       group   => 'www-data',
       mode    => '0640',
       require => [
-        File['/etc/openstackid'],
+        File['/etc/opencontrailid'],
       ]
   }
 
-  file { '/etc/openstackid/recaptcha.php':
+  file { '/etc/opencontrailid/recaptcha.php':
         ensure  => present,
-        content => template('openstackid/recaptcha.php.erb'),
+        content => template('opencontrailid/recaptcha.php.erb'),
         owner   => 'root',
         group   => 'www-data',
         mode    => '0640',
         require => [
-          File['/etc/openstackid'],
+          File['/etc/opencontrailid'],
         ]
   }
 
-  $docroot_dirs = [ '/srv/openstackid' ]
+  $docroot_dirs = [ '/srv/opencontrailid' ]
 
   file { $docroot_dirs:
     ensure  => directory,
@@ -142,9 +142,9 @@ class openstackid (
   include apache::php
   apache::vhost { $vhost_name:
     port     => 443,
-    docroot  => '/srv/openstackid/w/public',
+    docroot  => '/srv/opencontrailid/w/public',
     priority => '50',
-    template => 'openstackid/vhost.erb',
+    template => 'opencontrailid/vhost.erb',
     ssl      => true,
     require  => File[$docroot_dirs],
   }
@@ -191,8 +191,8 @@ class openstackid (
   deploy { 'deploytool':
   }
 
-  file { '/opt/deploy/conf.d/openstackid.conf':
-    content => template('openstackid/openstackid.conf.erb'),
+  file { '/opt/deploy/conf.d/opencontrailid.conf':
+    content => template('opencontrailid/opencontrailid.conf.erb'),
     owner   => 'root',
     group   => 'root',
     mode    => '0644',
@@ -201,16 +201,16 @@ class openstackid (
 
   exec { 'deploy-site':
     path      => '/usr/bin:/bin:/usr/local/bin',
-    command   => '/opt/deploy/deploy.sh init openstackid',
-    onlyif    => '/opt/deploy/deploy.sh status openstackid | grep N/A',
+    command   => '/opt/deploy/deploy.sh init opencontrailid',
+    onlyif    => '/opt/deploy/deploy.sh status opencontrailid | grep N/A',
     logoutput => on_failure,
     require   => [
-      File['/opt/deploy/conf.d/openstackid.conf'],
+      File['/opt/deploy/conf.d/opencontrailid.conf'],
       Apache::Vhost[$vhost_name],
-      File['/etc/openstackid/recaptcha.php'],
-      File['/etc/openstackid/database.php'],
-      File['/etc/openstackid/log.php'],
-      File['/etc/openstackid/environment.php'],
+      File['/etc/opencontrailid/recaptcha.php'],
+      File['/etc/opencontrailid/database.php'],
+      File['/etc/opencontrailid/log.php'],
+      File['/etc/opencontrailid/environment.php'],
       Package[$php5_packages] ],
   }
 

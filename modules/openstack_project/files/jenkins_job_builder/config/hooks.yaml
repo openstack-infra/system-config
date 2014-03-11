@@ -1,6 +1,0 @@
-- job-template:
-    name: 'hook-{name}-rtfd'
-    node: bare-precise
-
-    builders:
-      - shell: 'curl -X POST https://readthedocs.org/build/{name} >/dev/null'

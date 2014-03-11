@@ -1,7 +1,7 @@
 #!/bin/bash -ex
 
 # Documentation is published to a URL depending on the branch of the
-# openstack-manuals project.  This script determines what that location
+# opencontrail-manuals project.  This script determines what that location
 # should be, and writes a properties file.  This is used by Jenkins when
 # invoking certain docs jobs and made available to maven.
 

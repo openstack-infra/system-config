@@ -1,4 +1,4 @@
-openstack-qa:
+opencontrail-qa:
     projects:
       - all
     events:

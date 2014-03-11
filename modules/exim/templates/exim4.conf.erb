@@ -460,8 +460,8 @@ acl_check_rcpt:
   # In case people cargo-cult our Zuul configuration, only allow
   # messages with an envelope sender of jenkins from OpenStack's Zuul.
 
-   deny    senders	= jenkins@openstack.org
-           !hosts       = zuul.openstack.org : 127.0.0.1
+   deny    senders	= jenkins@opencontrail.org
+           !hosts       = zuul.opencontrail.org : 127.0.0.1
            message      = Sender address not permitted from this host
 
   # Insist that any other recipient address that we accept is either in one of
@@ -540,8 +540,8 @@ acl_check_data:
   # messages with a From header of jenkins from OpenStack's Zuul.
 
   deny    condition     = ${if eq{${address:$h_from:}}\
-                                  {jenkins@openstack.org}}
-          !hosts        = zuul.openstack.org : 127.0.0.1
+                                  {jenkins@opencontrail.org}}
+          !hosts        = zuul.opencontrail.org : 127.0.0.1
           message       = From address not permitted from this host
 
   # Accept the message.

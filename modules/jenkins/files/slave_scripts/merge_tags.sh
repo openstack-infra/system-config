@@ -17,7 +17,7 @@ TAG=$1
 if $(git tag --contains origin/milestone-proposed | grep "^$TAG$" >/dev/null)
 then
     git config user.name "OpenStack Jenkins"
-    git config user.email "jenkins@openstack.org"
+    git config user.email "jenkins@opencontrail.org"
     git config gitreview.username "jenkins"
 
     git review -s

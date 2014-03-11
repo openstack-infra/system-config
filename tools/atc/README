@@ -4,7 +4,7 @@ elections and Summit invitations.
 0) Write a patch to email-stats.py so steps 1-2 are not necessary.
 1) Edit email-stats.py to set your gerrit username.
 2) Edit email-stats.py to set the start_date and end_date.
-3) Run the following queries on review.openstack.org:
+3) Run the following queries on review.opencontrail.org:
 
   SELECT * FROM accounts
   INTO OUTFILE '/tmp/accounts.csv'

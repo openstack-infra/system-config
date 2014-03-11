@@ -1,6 +1,6 @@
 # Settings for the passcode-sending application
 #
-# Copyright 2013 Thierry Carrez <thierry@openstack.org>
+# Copyright 2013 Thierry Carrez <thierry@opencontrail.org>
 # All Rights Reserved.
 #
 #    Licensed under the Apache License, Version 2.0 (the "License"); you may
@@ -41,11 +41,11 @@ Regards,
 $signature
 """
 
-EMAIL_FROM = "thierry@openstack.org"
+EMAIL_FROM = "thierry@opencontrail.org"
 EMAIL_SIGNATURE = "Thierry Carrez\nOpenStack Foundation"
 EMAIL_HOST = "secure.emailsrvr.com"
 EMAIL_PORT = 465
-EMAIL_USER = "thierry.carrez@openstack.org"
+EMAIL_USER = "thierry.carrez@opencontrail.org"
 EMAIL_PASSWORD = "MYPASSWORDHERE"
 EMAIL_USE_SSL = True
 EMAIL_USE_TLS = False

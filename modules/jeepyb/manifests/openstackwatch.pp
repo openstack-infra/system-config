@@ -1,6 +1,6 @@
-# == Class: jeepyb::openstackwatch
+# == Class: jeepyb::opencontrailwatch
 
-class jeepyb::openstackwatch(
+class jeepyb::opencontrailwatch(
   $swift_username = '',
   $swift_password = '',
   $swift_auth_url = '',
@@ -15,41 +15,41 @@ class jeepyb::openstackwatch(
 ) {
   include jeepyb
 
-  group { 'openstackwatch':
+  group { 'opencontrailwatch':
     ensure => present,
   }
 
-  user { 'openstackwatch':
+  user { 'opencontrailwatch':
     ensure     => present,
     managehome => true,
     comment    => 'OpenStackWatch User',
     shell      => '/bin/bash',
-    gid        => 'openstackwatch',
-    require    => Group['openstackwatch'],
+    gid        => 'opencontrailwatch',
+    require    => Group['opencontrailwatch'],
   }
 
   if $swift_password != '' {
-    cron { 'openstackwatch':
+    cron { 'opencontrailwatch':
       ensure  => present,
-      command => '/usr/local/bin/openstackwatch /home/openstackwatch/openstackwatch.ini',
+      command => '/usr/local/bin/opencontrailwatch /home/opencontrailwatch/opencontrailwatch.ini',
       minute  => $minute,
       hour    => $hour,
-      user    => 'openstackwatch',
+      user    => 'opencontrailwatch',
       require => [
-        File['/home/openstackwatch/openstackwatch.ini'],
-        User['openstackwatch'],
+        File['/home/opencontrailwatch/opencontrailwatch.ini'],
+        User['opencontrailwatch'],
         Class['jeepyb'],
       ],
     }
   }
 
-  file { '/home/openstackwatch/openstackwatch.ini':
+  file { '/home/opencontrailwatch/opencontrailwatch.ini':
     ensure  => present,
-    content => template('jeepyb/openstackwatch.ini.erb'),
+    content => template('jeepyb/opencontrailwatch.ini.erb'),
     owner   => 'root',
-    group   => 'openstackwatch',
+    group   => 'opencontrailwatch',
     mode    => '0640',
-    require => User['openstackwatch'],
+    require => User['opencontrailwatch'],
   }
 
   if ! defined(Package['python-pyrss2gen']) {

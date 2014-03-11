@@ -12,17 +12,17 @@ At a Glance
 ===========
 
 :Hosts:
-  * nodepool.openstack.org
+  * nodepool.opencontrail.org
 :Puppet:
   * :file:`modules/nodepool/`
-  * :file:`modules/openstack_project/manifests/single_use_slave.pp`
+  * :file:`modules/opencontrail_project/manifests/single_use_slave.pp`
 :Configuration:
-  * :file:`modules/openstack_project/templates/nodepool/nodepool.yaml.erb`
-  * :file:`modules/openstack_project/files/nodepool/scripts/`
+  * :file:`modules/opencontrail_project/templates/nodepool/nodepool.yaml.erb`
+  * :file:`modules/opencontrail_project/files/nodepool/scripts/`
 :Projects:
-  * https://git.openstack.org/openstack-infra/nodepool
+  * https://git.opencontrail.org/opencontrail-infra/nodepool
 :Bugs:
-  * http://bugs.launchpad.net/openstack-ci
+  * http://bugs.launchpad.net/opencontrail-ci
 
 Overview
 ========

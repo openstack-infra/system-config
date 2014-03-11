@@ -12,22 +12,22 @@ At a Glance
 ===========
 
 :Hosts:
-  * http://status.openstack.org/zuul
-  * http://zuul.openstack.org
-  * http://zuul-dev.openstack.org
+  * http://status.opencontrail.org/zuul
+  * http://zuul.opencontrail.org
+  * http://zuul-dev.opencontrail.org
 :Puppet:
   * :file:`modules/zuul`
-  * :file:`modules/openstack_project/manifests/zuul_prod.pp`
-  * :file:`modules/openstack_project/manifests/zuul_dev.pp`
+  * :file:`modules/opencontrail_project/manifests/zuul_prod.pp`
+  * :file:`modules/opencontrail_project/manifests/zuul_dev.pp`
 :Configuration:
-  * :file:`modules/openstack_project/files/zuul/layout.yaml`
+  * :file:`modules/opencontrail_project/files/zuul/layout.yaml`
 :Projects:
   * http://launchpad.net/zuul
-  * https://git.openstack.org/cgit/openstack-infra/zuul
+  * https://git.opencontrail.org/cgit/opencontrail-infra/zuul
 :Bugs:
   * http://bugs.launchpad.net/zuul
 :Resources:
-  * `Zuul Reference Manual <http://ci.openstack.org/zuul>`_
+  * `Zuul Reference Manual <http://ci.opencontrail.org/zuul>`_
 
 Overview
 ========
@@ -76,10 +76,10 @@ many changes may be tested in parallel while continuing to assure that
 each commit is correctly tested.
 
 Zuul's current status may be viewed at
-`<http://status.openstack.org/zuul/>`_.
+`<http://status.opencontrail.org/zuul/>`_.
 
 Zuul's configuration is stored in
-:file:`modules/openstack_project/files/zuul/layout.yaml`.  Anyone may
+:file:`modules/opencontrail_project/files/zuul/layout.yaml`.  Anyone may
 propose a change to the configuration by editing that file and
 submitting the change to Gerrit for review.
 
@@ -98,4 +98,4 @@ zuul talks through git and ssh so you will need to manually check ssh
 host keys as the zuul user. e.g.::
 
   sudo su - zuul
-  ssh -p 29418 review.openstack.org
+  ssh -p 29418 review.opencontrail.org

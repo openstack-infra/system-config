@@ -25,7 +25,7 @@ function check_variable_org_project()
     then
         echo "Usage: $filename ORG PROJECT"
         echo
-        echo "ORG: The project organization (eg 'openstack')"
+        echo "ORG: The project organization (eg 'opencontrail')"
         echo "PROJECT: The project name (eg 'nova')"
         exit 1
     fi
@@ -42,7 +42,7 @@ function check_variable_version_org_project()
         echo "Usage: $filename VERSION ORG PROJECT"
         echo
         echo "VERSION: The tox environment python version (eg '27')"
-        echo "ORG: The project organization (eg 'openstack')"
+        echo "ORG: The project organization (eg 'opencontrail')"
         echo "PROJECT: The project name (eg 'nova')"
         exit 1
     fi

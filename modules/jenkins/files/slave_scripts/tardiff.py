@@ -15,7 +15,7 @@ import commands
 
 
 class OpenStackTarDiff:
-    """ main class to verify tar generated in each openstack projects """
+    """ main class to verify tar generated in each opencontrail projects """
 
     def __init__(self):
         self.init_vars()

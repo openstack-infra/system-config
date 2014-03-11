@@ -16,7 +16,7 @@
 #
 # deployment tool for laravel framework/php site management
 #
-define openstackid::deploy (
+define opencontrailid::deploy (
 ) {
   $deploy_dirs = [ '/opt/deploy', '/opt/deploy/conf.d' ]
 
@@ -28,7 +28,7 @@ define openstackid::deploy (
   }
 
   file { '/opt/deploy/deploy.sh':
-    source  => 'puppet:///modules/openstackid/deploy.sh',
+    source  => 'puppet:///modules/opencontrailid/deploy.sh',
     owner   => 'root',
     group   => 'root',
     mode    => '0755',
@@ -36,7 +36,7 @@ define openstackid::deploy (
   }
 
   file { '/opt/deploy/functions':
-    source  => 'puppet:///modules/openstackid/functions',
+    source  => 'puppet:///modules/opencontrailid/functions',
     owner   => 'root',
     group   => 'root',
     mode    => '0644',
@@ -44,7 +44,7 @@ define openstackid::deploy (
   }
 
   file { '/opt/deploy/deployrc':
-    source  => 'puppet:///modules/openstackid/deployrc',
+    source  => 'puppet:///modules/opencontrailid/deployrc',
     owner   => 'root',
     group   => 'root',
     mode    => '0644',

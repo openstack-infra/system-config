@@ -23,7 +23,7 @@ if [[ -z "$org" || -z "$project" ]]
 then
   echo "Usage: $0 ORG PROJECT"
   echo
-  echo "ORG: The project organization (eg 'openstack')"
+  echo "ORG: The project organization (eg 'opencontrail')"
   echo "PROJECT: The project name (eg 'nova')"
   #TODO: make fatal in subsequent change: exit 1
 else
@@ -33,7 +33,7 @@ fi
 rm -fr .test
 mkdir .test
 cd .test
-git clone https://review.openstack.org/p/openstack-infra/jenkins-job-builder --depth 1
+git clone https://review.opencontrail.org/p/opencontrail-infra/jenkins-job-builder --depth 1
 cd jenkins-job-builder
 # These are $WORKSPACE/.test/jenkins-job-builder/.test/...
 mkdir -p .test/old/config
@@ -46,11 +46,11 @@ GITHEAD=`git rev-parse HEAD`
 
 # First generate output from HEAD~1
 git checkout HEAD~1
-cp modules/openstack_project/files/jenkins_job_builder/config/* .test/jenkins-job-builder/.test/old/config
+cp modules/opencontrail_project/files/jenkins_job_builder/config/* .test/jenkins-job-builder/.test/old/config
 
 # Then use that as a reference to compare against HEAD
 git checkout $GITHEAD
-cp modules/openstack_project/files/jenkins_job_builder/config/* .test/jenkins-job-builder/.test/new/config
+cp modules/opencontrail_project/files/jenkins_job_builder/config/* .test/jenkins-job-builder/.test/new/config
 
 cd .test/jenkins-job-builder
 

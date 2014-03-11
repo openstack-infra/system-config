@@ -13,17 +13,17 @@ At a Glance
 ===========
 
 :Hosts:
-  * http://jenkins.openstack.org/
-  * http://devstack-launch.slave.openstack.org/
+  * http://jenkins.opencontrail.org/
+  * http://devstack-launch.slave.opencontrail.org/
 :Puppet:
-  * :file:`modules/openstack_project/manifests/template.pp`
-  * :file:`modules/openstack_project/manifests/devstack_launch_slave.pp`
+  * :file:`modules/opencontrail_project/manifests/template.pp`
+  * :file:`modules/opencontrail_project/manifests/devstack_launch_slave.pp`
 :Projects:
-  * https://git.openstack.org/openstack-infra/devstack-gate
+  * https://git.opencontrail.org/opencontrail-infra/devstack-gate
 :Bugs:
-  * http://bugs.launchpad.net/openstack-ci
+  * http://bugs.launchpad.net/opencontrail-ci
 :Resources:
-  * `Devstack-gate README <https://git.openstack.org/cgit/openstack-infra/devstack-gate/tree/README.rst>`_
+  * `Devstack-gate README <https://git.opencontrail.org/cgit/opencontrail-infra/devstack-gate/tree/README.rst>`_
 
 Overview
 ========
@@ -78,7 +78,7 @@ devstack, and then runs the devstack-vm-update-image.py script. It
 boots a new VM from the provider's base image, installs some basic
 packages (build-essential, python-dev, etc) including java so that the
 machine can run the Jenkins slave agent, runs puppet to set up the
-basic system configuration for Jenkins slaves in the openstack-infra
+basic system configuration for Jenkins slaves in the opencontrail-infra
 project, and then caches all of the debian and pip packages and test
 images specified in the devstack repository, and clones the OpenStack
 project repositories. It then takes a snapshot image of that machine

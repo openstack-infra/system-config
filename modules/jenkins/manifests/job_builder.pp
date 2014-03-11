@@ -24,7 +24,7 @@ class jenkins::job_builder (
     ensure   => latest,
     provider => git,
     revision => 'master',
-    source   => 'https://git.openstack.org/openstack-infra/jenkins-job-builder',
+    source   => 'https://git.opencontrail.org/opencontrail-infra/jenkins-job-builder',
   }
 
   exec { 'install_jenkins_job_builder':

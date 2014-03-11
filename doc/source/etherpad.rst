@@ -6,7 +6,7 @@ Etherpad
 ########
 
 Etherpad (previously known as "etherpad-lite") is installed on
-etherpad.openstack.org to facilitate real-time collaboration on
+etherpad.opencontrail.org to facilitate real-time collaboration on
 documents.  It is used extensively during OpenStack Developer
 Summits.
 
@@ -14,16 +14,16 @@ At a Glance
 ===========
 
 :Hosts:
-  * http://etherpad.openstack.org
+  * http://etherpad.opencontrail.org
 :Puppet:
   * :file:`modules/etherpad_lite`
-  * :file:`modules/openstack_project/manifests/etherpad.pp`
-  * :file:`modules/openstack_project/manifests/etherpad_dev.pp`
+  * :file:`modules/opencontrail_project/manifests/etherpad.pp`
+  * :file:`modules/opencontrail_project/manifests/etherpad_dev.pp`
 :Projects:
   * http://etherpad.org/
   * https://github.com/ether/etherpad-lite
 :Bugs:
-  * http://bugs.launchpad.net/openstack-ci
+  * http://bugs.launchpad.net/opencontrail-ci
   * https://github.com/ether/etherpad-lite/issues
 
 Overview

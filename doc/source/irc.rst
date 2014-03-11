@@ -12,25 +12,25 @@ At a Glance
 ===========
 
 :Hosts:
-  * http://eavesdrop.openstack.org/
-  * http://review.openstack.org/
-  * https://wiki.openstack.org/wiki/Infrastructure_Status
+  * http://eavesdrop.opencontrail.org/
+  * http://review.opencontrail.org/
+  * https://wiki.opencontrail.org/wiki/Infrastructure_Status
 :Puppet:
   * :file:`modules/meetbot`
   * :file:`modules/statusbot`
   * :file:`modules/gerritbot`
-  * :file:`modules/openstack_project/manifests/eavesdrop.pp`
-  * :file:`modules/openstack_project/manifests/review.pp`
+  * :file:`modules/opencontrail_project/manifests/eavesdrop.pp`
+  * :file:`modules/opencontrail_project/manifests/review.pp`
 :Configuration:
   * :file:`modules/gerritbot/files/gerritbot_channel_config.yaml`
 :Projects:
   * http://wiki.debian.org/MeetBot
   * http://sourceforge.net/projects/supybot/
-  * https://git.openstack.org/cgit/openstack-infra/meetbot
-  * https://git.openstack.org/cgit/openstack-infra/gerritbot
-  * https://git.openstack.org/cgit/openstack-infra/statusbot
+  * https://git.opencontrail.org/cgit/opencontrail-infra/meetbot
+  * https://git.opencontrail.org/cgit/opencontrail-infra/gerritbot
+  * https://git.opencontrail.org/cgit/opencontrail-infra/statusbot
 :Bugs:
-  * http://bugs.launchpad.net/openstack-ci
+  * http://bugs.launchpad.net/opencontrail-ci
 
 Meetbot
 =======
@@ -63,7 +63,7 @@ Meetbot
 -------
 
 The OpenStack Infrastructure Meetbot fork can be found at
-https://git.openstack.org/cgit/openstack-infra/meetbot. Manual installation of the Meetbot
+https://git.opencontrail.org/cgit/opencontrail-infra/meetbot. Manual installation of the Meetbot
 plugin is straightforward and documented in that repository's README.
 OpenStack Infrastructure installs and configures Meetbot through Puppet.
 
@@ -125,10 +125,10 @@ Statusbot
 Statusbot is used to distribute urgent information from the
 Infrastructure team to OpenStack channels.  It updates the
 `Infrastructure Status wiki page
-<https://wiki.openstack.org/wiki/Infrastructure_Status>`_.  It
+<https://wiki.opencontrail.org/wiki/Infrastructure_Status>`_.  It
 supports the following public message commands when issued by
 authenticated and whitelisted users from the channels the bot is
-listening to, including #openstack-infra:
+listening to, including #opencontrail-infra:
 
 #status log MESSAGE
   Log a message to the wiki page.
@@ -140,7 +140,7 @@ listening to, including #openstack-infra:
 #status alert MESSAGE
   Broadcast a message to all OpenStack channels and change their
   topics, log to the wiki page, and set an alert box on the wiki
-  page (eventually include this alert box on status.openstack.org
+  page (eventually include this alert box on status.opencontrail.org
   pages).
 
 #status ok [MESSAGE]
@@ -164,6 +164,6 @@ Teams can add their channel and go through the standard code review process to
 get the bot added to their channel. The configuration is organized by channel,
 with each project that a channel is interested in listed under the channel.
 
-Please also add the openstackinfra account as a channel founder:
+Please also add the opencontrailinfra account as a channel founder:
 
-/msg chanserv access #channel add openstackinfra +AFRfiorstv
+/msg chanserv access #channel add opencontrailinfra +AFRfiorstv

@@ -5,23 +5,23 @@
 Git
 ########
 
-The web frontend cgit is running on git.openstack.org.
+The web frontend cgit is running on git.opencontrail.org.
 
 At a Glance
 ===========
 
 :Hosts:
-  * https://git.openstack.org
-  * git*.openstack.org
+  * https://git.opencontrail.org
+  * git*.opencontrail.org
 :Puppet:
   * :file:`modules/cgit`
-  * :file:`modules/openstack_project/manifests/git.pp`
+  * :file:`modules/opencontrail_project/manifests/git.pp`
 :Configuration:
-  * :file:`modules/openstack_project/files/git/cgitrc`
+  * :file:`modules/opencontrail_project/files/git/cgitrc`
 :Projects:
   * http://git.zx2c4.com/cgit/
 :Bugs:
-  * http://bugs.launchpad.net/openstack-ci
+  * http://bugs.launchpad.net/opencontrail-ci
   * http://lists.zx2c4.com/mailman/listinfo/cgit
 
 Overview

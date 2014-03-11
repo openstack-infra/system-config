@@ -1,6 +1,6 @@
 # Summit passcode-sending application
 #
-# Copyright 2013 Thierry Carrez <thierry@openstack.org>
+# Copyright 2013 Thierry Carrez <thierry@opencontrail.org>
 # All Rights Reserved.
 #
 #    Licensed under the Apache License, Version 2.0 (the "License"); you may

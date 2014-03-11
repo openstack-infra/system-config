@@ -14,7 +14,7 @@ projects that want to set up similar infrastructure systems for their
 developers.
 
 OpenStack developers or users do not need to read this documentation.
-Instead, see http://wiki.openstack.org/ to learn how contribute to or
+Instead, see http://wiki.opencontrail.org/ to learn how contribute to or
 use OpenStack.
 
 Contents:

@@ -29,7 +29,7 @@ Experimental
 
 Experimental jobs have low reliability requirements: they are run by hand on
 developer request, typically as part of bringing up a new job definition.
-Failures in experimental jobs are not the responsibility of openstack-infra,
+Failures in experimental jobs are not the responsibility of opencontrail-infra,
 though they will offer best-effort assistance to developers.
 
 Silent

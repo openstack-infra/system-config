@@ -69,18 +69,18 @@ def print_dns(client, name):
             "    --ttl 3600" % (
                 server.name, ip4, href))
         print
-        print ". ~root/ci-launch/openstack-rs-nova.sh"
+        print ". ~root/ci-launch/opencontrail-rs-nova.sh"
         print
         print (
             "rackdns record-create --name %s \\\n"
             "    --type AAAA --data %s \\\n"
-            "    --ttl 3600 openstack.org" % (
+            "    --ttl 3600 opencontrail.org" % (
                 server.name, ip6))
         print
         print (
             "rackdns record-create --name %s \\\n"
             "    --type A --data %s \\\n"
-            "    --ttl 3600 openstack.org" % (
+            "    --ttl 3600 opencontrail.org" % (
                 server.name, ip4))
 
 

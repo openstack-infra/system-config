@@ -1,4 +1,4 @@
 [gerrit]
-host=review.openstack.org
+host=review.opencontrail.org
 port=29418
-project=openstack-infra/config.git
+project=opencontrail-infra/config.git

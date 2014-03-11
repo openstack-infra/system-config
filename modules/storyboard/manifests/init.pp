@@ -20,9 +20,9 @@ class storyboard (
   $mysql_password,
   $mysql_user,
   $projects_file,
-  $storyboard_git_source_repo = 'https://git.openstack.org/openstack-infra/storyboard/',
+  $storyboard_git_source_repo = 'https://git.opencontrail.org/opencontrail-infra/storyboard/',
   $storyboard_revision = 'master',
-  $storyboard_webclient_url = 'http://tarballs.openstack.org/storyboard-webclient/storyboard-webclient-latest.tar.gz'
+  $storyboard_webclient_url = 'http://tarballs.opencontrail.org/storyboard-webclient/storyboard-webclient-latest.tar.gz'
 
 ) {
   include apache
