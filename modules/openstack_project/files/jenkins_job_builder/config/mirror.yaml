@@ -9,8 +9,8 @@
       - timestamps
 
     builders:
-      - update-pypi-mirror
       - link-logs
+      - update-pypi-mirror
 
     publishers:
       - console-log
@@ -27,8 +27,8 @@
       - timestamps
 
     builders:
-      - update-pypi-mirror
       - link-logs
+      - update-pypi-mirror
 
     publishers:
       - console-log
@@ -45,8 +45,8 @@
       - timestamps
 
     builders:
-      - update-pypi-mirror
       - link-logs
+      - update-pypi-mirror
 
     publishers:
       - console-log
@@ -63,8 +63,8 @@
       - timestamps
 
     builders:
-      - update-pypi-mirror
       - link-logs
+      - update-pypi-mirror
 
     publishers:
       - console-log
@@ -81,8 +81,8 @@
       - timestamps
 
     builders:
-      - update-pypi-mirror
       - link-logs
+      - update-pypi-mirror
 
     publishers:
       - console-log
@@ -99,8 +99,8 @@
       - timestamps
 
     builders:
-      - update-pypi-mirror
       - link-logs
+      - update-pypi-mirror
 
     publishers:
       - console-log

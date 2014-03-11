@@ -9,6 +9,7 @@
       - timestamps
 
     builders:
+      - link-logs
       - devstack-checkout
       - shell: |
           #!/bin/bash -xe
@@ -37,7 +38,6 @@
 
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
-      - link-logs
 
     publishers:
       - devstack-logs

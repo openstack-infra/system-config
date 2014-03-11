@@ -9,6 +9,7 @@
       - timestamps
 
     builders:
+      - link-logs
       - devstack-checkout
       - shell: |
           #!/bin/bash -xe
@@ -25,7 +26,6 @@
           export -f gate_hook
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
-      - link-logs
 
     publishers:
       - devstack-logs
@@ -36,9 +36,9 @@
     node: proposal
 
     builders:
+      - link-logs
       - gerrit-git-prep
       - shell: /usr/local/jenkins/slave_scripts/propose_requirements_update.sh
-      - link-logs
 
     publishers:
       - console-log
