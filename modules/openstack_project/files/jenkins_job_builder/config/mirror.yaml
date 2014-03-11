@@ -1,7 +1,6 @@
 - job:
     name: 'periodic-mirror-python26'
     node: mirror26
-    concurrent: false
 
     wrappers:
       - timeout:
@@ -20,7 +19,6 @@
 - job:
     name: 'post-mirror-python26'
     node: mirror26
-    concurrent: false
 
     wrappers:
       - timeout:
@@ -39,7 +37,6 @@
 - job:
     name: 'periodic-mirror-python27'
     node: mirror27
-    concurrent: false
 
     wrappers:
       - timeout:
@@ -58,7 +55,6 @@
 - job:
     name: 'post-mirror-python27'
     node: mirror27
-    concurrent: false
 
     wrappers:
       - timeout:
@@ -77,7 +73,6 @@
 - job:
     name: 'periodic-mirror-python33'
     node: mirror33
-    concurrent: false
 
     wrappers:
       - timeout:
@@ -96,7 +91,6 @@
 - job:
     name: 'post-mirror-python33'
     node: mirror33
-    concurrent: false
 
     wrappers:
       - timeout:

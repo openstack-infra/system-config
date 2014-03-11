@@ -20,7 +20,6 @@
 
 - job-template:
     name: '{name}-merge-release-tags'
-    concurrent: false
 
     builders:
       - gerrit-git-prep

@@ -1,7 +1,6 @@
 # simply copy the contents of the repository to the server, no building needed
 - job:
     name: infra-publications-publish
-    concurrent: false
     node: bare-precise
 
     builders:
@@ -28,7 +27,6 @@
 
 - job:
     name: infra-publications-publish-index
-    concurrent: false
     node: bare-precise
 
     builders:

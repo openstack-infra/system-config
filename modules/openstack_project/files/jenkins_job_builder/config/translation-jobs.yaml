@@ -1,6 +1,5 @@
 - job-template:
     name: '{name}-upstream-translation-update'
-    concurrent: false
 
     builders:
       - gerrit-git-prep
@@ -15,7 +14,6 @@
 
 - job-template:
     name: '{name}-propose-translation-update'
-    concurrent: false
 
     builders:
       - shell: |
@@ -35,7 +33,6 @@
 
 - job:
     name: 'horizon-upstream-translation-update'
-    concurrent: false
 
     builders:
       - gerrit-git-prep
@@ -50,7 +47,6 @@
 
 - job:
     name: manuals-upstream-translation-update
-    concurrent: false
 
     builders:
       - gerrit-git-prep
@@ -65,7 +61,6 @@
 
 - job:
     name: manuals-propose-translation-update
-    concurrent: false
 
     builders:
       - shell: |

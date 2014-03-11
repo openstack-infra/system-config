@@ -2,7 +2,6 @@
     name: 'openstack-{manual}'
     project-type: maven
     node: bare-precise
-    concurrent: false
 
     prebuilders:
       - gerrit-git-prep
@@ -38,7 +37,6 @@
     name: 'openstack-install-deploy-guide-{distribution}'
 
     project-type: maven
-    concurrent: false
     node: bare-precise
 
     properties:
@@ -74,7 +72,6 @@
 - job-template:
     name: 'openstack-install-deploy-guide-{lang}'
 
-    concurrent: false
     node: bare-precise
 
     properties:
@@ -100,7 +97,6 @@
     name: openstack-{oldmanual}-old
     project-type: maven
     node: bare-precise
-    concurrent: false
 
     prebuilders:
       - gerrit-git-prep
@@ -136,7 +132,6 @@
     name: openstack-{install}-{distribution}-old
     project-type: maven
     node: bare-precise
-    concurrent: false
 
     prebuilders:
       - gerrit-git-prep

@@ -13,7 +13,6 @@
 # in zuul/layout.yaml specified to only run against master branch.
 - job:
     name: openstack-docs-site
-    concurrent: false
     node: bare-precise
 
     builders:
@@ -37,7 +36,6 @@
 - job:
     name: openstack-ha-guide
     project-type: maven
-    concurrent: false
     node: bare-precise
 
     properties:
@@ -75,7 +73,6 @@
 - job:
     name: openstack-operations-guide
     project-type: maven
-    concurrent: false
     node: bare-precise
 
     properties:
@@ -110,7 +107,6 @@
 
 - job-template:
     name: 'openstack-operations-guide-{lang}'
-    concurrent: false
     node: bare-precise
     github-org: openstack
 

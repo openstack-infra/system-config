@@ -34,7 +34,6 @@
 - job:
     name: propose-requirements-updates
     node: proposal
-    concurrent: false
 
     builders:
       - gerrit-git-prep
