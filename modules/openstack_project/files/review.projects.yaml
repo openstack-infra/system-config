@@ -311,7 +311,7 @@
   docimpact-group: openstack-manuals
 - project: openstack/python-openstackclient
 - project: openstack/python-saharaclient
-  group: python-savannaclient
+  group: python-saharaclient
   description: Python bindings and CLI for Sahara.
   acl-config: /home/gerrit2/acls/openstack/sahara.config
 - project: openstack/python-swiftclient
@@ -322,19 +322,19 @@
   upstream: git://github.com/tuskar/python-tuskarclient.git
 - project: openstack/requirements
 - project: openstack/sahara
-  group: savanna
+  group: sahara
   description: Sahara aims to provide users with simple means to provision a Hadoop cluster by specifying several parameters like Hadoop version, cluster topology, nodes hardware details and a few more.
   acl-config: /home/gerrit2/acls/openstack/sahara.config
 - project: openstack/sahara-dashboard
-  group: savanna
+  group: sahara
   description: Sahara Horizon plugin.
   acl-config: /home/gerrit2/acls/openstack/sahara.config
 - project: openstack/sahara-extra
-  group: savanna
+  group: sahara
   description: Repo for sahara-related utils.
   acl-config: /home/gerrit2/acls/openstack/sahara.config
 - project: openstack/sahara-image-elements
-  group: savanna
+  group: sahara
   description: Disk image elements for Sahara
   acl-config: /home/gerrit2/acls/openstack/sahara.config
 - project: openstack/stevedore
@@ -733,7 +733,7 @@
   acl-config: /home/gerrit2/acls/stackforge/puppet-modules.config
   upstream: git://github.com/puppetlabs/puppetlabs-openstack_dev_env.git
 - project: stackforge/puppet-sahara
-  group: savanna
+  group: sahara
   description: Sahara Puppet Module
   acl-config: /home/gerrit2/acls/openstack/sahara.config
 - project: stackforge/puppet-swift
