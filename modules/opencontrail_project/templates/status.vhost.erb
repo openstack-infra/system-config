@@ -15,14 +15,14 @@ NameVirtualHost <%= vhost_name %>:<%= port %>
   RewriteEngine on
 
   RewriteRule ^/rechecks$ /rechecks/ [R]
-  RewriteRule ^/rechecks/$ http://zuul.openstack.org/rechecks.html [P]
+  RewriteRule ^/rechecks/$ http://zuul.opencontrail.org/rechecks.html [P]
   <Location /rechecks/>
     Order allow,deny
     Allow from all
   </Location>
 
   RewriteRule ^/bugday$ /bugday/ [R]
-  RewriteRule ^/bugday/(.*)$ http://old-wiki.openstack.org/bugday/$1 [P]
+  RewriteRule ^/bugday/(.*)$ http://old-wiki.opencontrail.org/bugday/$1 [P]
   <Location /bugday/>
     Order allow,deny
     Allow from all
