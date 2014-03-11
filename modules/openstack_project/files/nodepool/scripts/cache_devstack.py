@@ -97,6 +97,9 @@ def local_prep(distribution):
                 if line[0] == line[-1] == '"':
                     line = line[1:-1]
                 images += [x.strip() for x in line.split(',')]
+                # Skip downloading giant vmware images
+                if line.endswith('vmdk'):
+                    continue
         branch_data['images'] = images
         branches.append(branch_data)
     return branches
