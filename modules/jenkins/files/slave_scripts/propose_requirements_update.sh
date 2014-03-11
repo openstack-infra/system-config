@@ -23,7 +23,7 @@ if [ -z "$BRANCH" ] ; then
     exit 1
 fi
 
-git config user.name "OpenStack Jenkins"
+git config user.name "OpenContrail Jenkins"
 git config user.email "jenkins@opencontrail.org"
 git config gitreview.username $USERNAME
 

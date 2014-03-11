@@ -22,7 +22,7 @@ class jeepyb::opencontrailwatch(
   user { 'opencontrailwatch':
     ensure     => present,
     managehome => true,
-    comment    => 'OpenStackWatch User',
+    comment    => 'OpenContrailWatch User',
     shell      => '/bin/bash',
     gid        => 'opencontrailwatch',
     require    => Group['opencontrailwatch'],

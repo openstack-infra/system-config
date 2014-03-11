@@ -33,7 +33,7 @@ easier, Jenkins Job Builder was designed to take YAML based
 configurations and convert those into jobs that are injected into
 Jenkins.
 
-The documentation below describes how the OpenStack Infrastructure
+The documentation below describes how the OpenContrail Infrastructure
 team uses the Jenkins Job Builder in our environment.
 
 Configuring Projects

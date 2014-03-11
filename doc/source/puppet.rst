@@ -41,7 +41,7 @@ client. After that installing the puppetmaster and hiera (used to maintain
 secrets on the puppet master).
 
 Please note: Fedora F19 and Ubuntu Raring and above cannot successfully run an
-OpenStack-CI puppetmaster due to new Ruby and older Puppet not being
+OpenContrail-CI puppetmaster due to new Ruby and older Puppet not being
 compatible, so be sure to use an older release - e.g. Ubuntu Precise.
 
 .. code-block:: bash
@@ -63,7 +63,7 @@ finish configuration:
 
 Note: Hiera uses a systemwide configuration file in ``/etc/puppet/hiera.yaml``
 and this setup supports multiple configurations. The two sets of environments
-that OpenStack Infrastructure uses are ``production`` and ``development``.
+that OpenContrail Infrastructure uses are ``production`` and ``development``.
 ``production`` is the default is and the environment used when nothing else is
 specified. Then the configuration needs to be placed into common.yaml in
 ``/etc/puppet/hieradata/production`` and ``/etc/puppet/hieradata/development``.

@@ -6,7 +6,7 @@ System Administration
 #####################
 
 Our infrastructure is code and contributions to it are handled just
-like the rest of OpenStack.  This means that anyone can contribute to
+like the rest of OpenContrail.  This means that anyone can contribute to
 the installation and long-running maintenance of systems without shell
 access, and anyone who is interested can provide feedback and
 collaborate on code reviews.
@@ -32,21 +32,21 @@ configuration higher in the stack.
 
 The `modules/` directory holds puppet modules that abstractly describe
 the configuration of a service.  Ideally, these should have no
-OpenStack-specific information in them, and eventually they should all
+OpenContrail-specific information in them, and eventually they should all
 become modules that are directly consumed from PuppetForge, only
 existing in the config repo during an initial incubation period.  This
-is not yet the case, so you may find OpenStack-specific configuration
+is not yet the case, so you may find OpenContrail-specific configuration
 in these modules, though we are working to reduce it.
 
 The `modules/opencontrail_project/manifests/` directory holds
-configuration for each of the servers that the OpenStack project runs.
-Think of these manifests as describing how OpenStack runs a particular
+configuration for each of the servers that the OpenContrail project runs.
+Think of these manifests as describing how OpenContrail runs a particular
 service.  However, no site-specific configuration such as hostnames or
 credentials should be included in these files.  This is what lets you
-easily test an OpenStack project manifest on your own server.
+easily test an OpenContrail project manifest on your own server.
 
 Finally, the `manifests/site.pp` file contains the information that is
-specific to the actual servers that OpenStack runs.  These should be
+specific to the actual servers that OpenContrail runs.  These should be
 very simple node definitions that largely exist simply to provide
 private date from hiera to the more robust manifests in the
 `opencontrail_project` modules.
@@ -91,7 +91,7 @@ repository::
   puppet apply -l /tmp/manifest.log --modulepath=modules:/etc/puppet/modules manifests/local.pp
 
 That should turn the system you are logged into into an etherpad
-server with the same configuration as that used by the OpenStack
+server with the same configuration as that used by the OpenContrail
 project.  You can edit the contents of the config repo and iterate as
 needed.  When you're ready to propose the change for review, you can
 propose the change with git-review.  See the `Gerrit Workflow wiki
@@ -128,7 +128,7 @@ To create a new server, do the following:
 SSH Access
 ==========
 
-For any of the systems managed by the OpenStack Infrastructure team, the
+For any of the systems managed by the OpenContrail Infrastructure team, the
 following practices must be observed for SSH access:
 
  * SSH access is only permitted with SSH public/private key
@@ -153,8 +153,8 @@ following practices must be observed for SSH access:
    is received should be used, and the SSH keys should be added with
    the confirmation constraint ('ssh-add -c').
  * The number of SSH keys that are configured to permit access to
-   OpenStack machines should be kept to a minimum.
- * OpenStack Infrastructure machines must use puppet to centrally manage and
+   OpenContrail machines should be kept to a minimum.
+ * OpenContrail Infrastructure machines must use puppet to centrally manage and
    configure user accounts, and the SSH authorized_keys files from the
    opencontrail-infra/config repository.
  * SSH keys should be periodically rotated (at least once per year).
@@ -168,20 +168,20 @@ GitHub Access
 
 To ensure that code review and testing are not bypassed in the public
 Git repositories, only Gerrit will be permitted to commit code to
-OpenStack repositories.  Because GitHub always allows project
+OpenContrail repositories.  Because GitHub always allows project
 administrators to commit code, accounts that have access to manage the
 GitHub projects necessarily will have commit access to the
 repositories.  Therefore, to avoid inadvertent commits to the public
 repositories, unique administrative-only accounts must be used to
-manage the OpenStack GitHub organization and projects.  These accounts
+manage the OpenContrail GitHub organization and projects.  These accounts
 will not be used to check out or commit code for any project.
 
 Root only information
 #####################
 
 Some information is only relevant if you have root access to the system - e.g.
-you are an OpenStack CI root operator, or you are running a clone of the
-OpenStack CI infrastructure for another project.
+you are an OpenContrail CI root operator, or you are running a clone of the
+OpenContrail CI infrastructure for another project.
 
 Backups
 =======

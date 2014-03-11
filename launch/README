@@ -13,7 +13,7 @@ and salt groups for access to their respective keys::
 (Remember to log out and back into your shell if you add yourself
 to a group.)
 
-To launch a node in the OpenStack CI account (production servers)::
+To launch a node in the OpenContrail CI account (production servers)::
 
   . ~root/ci-launch/opencontrailci-rs-nova.sh
   export FLAVOR="8 GB Performance"
@@ -21,7 +21,7 @@ To launch a node in the OpenStack CI account (production servers)::
   sudo puppet cert generate $FQDN
   ./launch-node.py $FQDN --flavor "$FLAVOR"
 
-To launch a node in the OpenStack Jenkins account (slave nodes)::
+To launch a node in the OpenContrail Jenkins account (slave nodes)::
 
   . ~root/ci-launch/opencontrailjenkins-rs-nova.sh
   export FQDN=slavename.slave.opencontrail.org
@@ -49,7 +49,7 @@ automatically). Note that this example assumes you've already
 exported a relevant FQDN and sourced the appropriate API credentials
 above.
 
-When running outside the official OpenStack CI infrastructure, you
+When running outside the official OpenContrail CI infrastructure, you
 will want to pass --server ci-puppetmaster.example.com otherwise the
 new node wil try to register with ci-puppetmaster.opencontrail.org - and
 fail hilariously.

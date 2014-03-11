@@ -32,7 +32,7 @@ At a Glance
 Overview
 ========
 
-The OpenStack project uses a number of pipelines in Zuul:
+The OpenContrail project uses a number of pipelines in Zuul:
 
 **check**
   Newly uploaded patchsets enter this pipeline to receive an initial
@@ -90,7 +90,7 @@ Sysadmin
 ========
 
 Zuul and gear are lightweight - it should be possible to run both on a
-1G instance for small deployments. OpenStack's deployment requires at
+1G instance for small deployments. OpenContrail's deployment requires at
 least a 2G instance at the time of writing.
 
 Zuul is stateless, so the server does not need backing up. However

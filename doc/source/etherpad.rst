@@ -7,7 +7,7 @@ Etherpad
 
 Etherpad (previously known as "etherpad-lite") is installed on
 etherpad.opencontrail.org to facilitate real-time collaboration on
-documents.  It is used extensively during OpenStack Developer
+documents.  It is used extensively during OpenContrail Developer
 Summits.
 
 At a Glance

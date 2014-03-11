@@ -5,8 +5,8 @@
 Nodepool
 ########
 
-Nodepool is a service used by the OpenStack CI team to deploy and manage a pool
-of devstack images on a cloud server for use in OpenStack project testing.
+Nodepool is a service used by the OpenContrail CI team to deploy and manage a pool
+of devstack images on a cloud server for use in OpenContrail project testing.
 
 At a Glance
 ===========

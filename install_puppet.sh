@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Copyright 2013 OpenStack Foundation.
+# Copyright 2013 OpenContrail Foundation.
 # Copyright 2013 Hewlett-Packard Development Company, L.P.
 # Copyright 2013 Red Hat, Inc.
 #

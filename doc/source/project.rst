@@ -5,10 +5,10 @@
 Infrastructure Project
 ######################
 
-The infrastructure for the OpenStack project itself is run with the
-same processes, tools and philosophy as any other OpenStack project.
+The infrastructure for the OpenContrail project itself is run with the
+same processes, tools and philosophy as any other OpenContrail project.
 The infrastructure team is an open meritocracy that welcomes new
-members.  You can read about the OpenStack way on the wiki:
+members.  You can read about the OpenContrail way on the wiki:
 
 * https://wiki.opencontrail.org/wiki/How_To_Contribute
 * https://wiki.opencontrail.org/wiki/Open
@@ -19,7 +19,7 @@ Scope
 =====
 
 The project infrastructure encompasses all of the systems that are
-used in the day to day operation of the OpenStack project as a whole.
+used in the day to day operation of the OpenContrail project as a whole.
 This includes development, testing, and collaboration tools.  All of
 the software that we run is open source, and its configuration is
 public.  The project still uses a number of systems that do not yet
@@ -54,7 +54,7 @@ triage bugs.
 To read about how our systems are managed and how to view or edit
 those configurations, see :ref:`sysadmin`.
 
-We also have a a collection of `OpenStack Project Infrastructure Publications
+We also have a a collection of `OpenContrail Project Infrastructure Publications
 <http://docs.opencontrail.org/infra/publications/>`_ where we host slides for
 presentations team members have given about the infrastructure.
 
@@ -80,7 +80,7 @@ Core Members
 
 Root Members
   While core membership is directly analogous to the same system in
-  other OpenStack projects, because the infrastructure team operates
+  other OpenContrail projects, because the infrastructure team operates
   production servers, there is another sub-group of the infrastructure
   team that has root access to all servers.  Root membership is
   handled in the same way as core membership.  Root members must also

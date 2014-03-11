@@ -1,5 +1,5 @@
 # Copyright 2012-2013 Hewlett-Packard Development Company, L.P.
-# Copyright 2014 OpenStack Foundation
+# Copyright 2014 OpenContrail Foundation
 #
 # Licensed under the Apache License, Version 2.0 (the "License"); you may
 # not use this file except in compliance with the License. You may obtain

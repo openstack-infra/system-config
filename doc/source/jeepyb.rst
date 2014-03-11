@@ -55,7 +55,7 @@ connect to things or how to operate is in
      has-pull-requests=False
      has-downloads=False
 
-OpenStack Gerrit projects are configured in the
+OpenContrail Gerrit projects are configured in the
 :file:`modules/opencontrail_project/files/review.projects.yaml`.
 file.  When this file is updated, ``manage-projects`` is run
 automatically.

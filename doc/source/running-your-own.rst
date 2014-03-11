@@ -5,20 +5,20 @@
 Running your own CI infrastructure
 ##################################
 
-The OpenStack CI infrastructure is designed to be shared amongst other projects
+The OpenContrail CI infrastructure is designed to be shared amongst other projects
 wanting a scalable cloud based CI system. We're delighted when someone wants to
 reuse what we're building.
 
 To avoid having lots of meta references in the rest of the system
 documentation, we document most things targeted specifically for use in the
-OpenStack CI system itself. This chapter acts as a patch to the rest of our
-documentation explaining how to reuse the OpenStack CI infrastructure for
+OpenContrail CI system itself. This chapter acts as a patch to the rest of our
+documentation explaining how to reuse the OpenContrail CI infrastructure for
 another project.
 
 Requirements
 ============
 
-* You need a cloud of some sort, all our tooling is built for OpenStack clouds :).
+* You need a cloud of some sort, all our tooling is built for OpenContrail clouds :).
 
 * A service account for your CI systems within that cloud/clouds.
 
@@ -40,7 +40,7 @@ Initial setup
 1. Manually boot a machine with ~2G of ram to be the puppetmaster.
 
 1. Follow http://ci.opencontrail.org/puppet.html#id2 but use your repository
-   rather than the OpenStack CI repository.
+   rather than the OpenContrail CI repository.
 
 Changes required
 ================
@@ -163,11 +163,11 @@ Migrate the manifests:
   * opencontrailwatch creates an rss feed of the unified changes from many
     projects - it is entirely optional.
 
-  * The cla files should be skipped or forked; they are specific to OpenStack.
+  * The cla files should be skipped or forked; they are specific to OpenContrail.
 
-  * The title and page-bkg are OpenStack specific and should be replaced.
+  * The title and page-bkg are OpenContrail specific and should be replaced.
 
-  * The GerritSite.css is OpenStack specific - it references the
+  * The GerritSite.css is OpenContrail specific - it references the
     opencontrail-page-bkg image.
 
   * The gerritsyncusers cron reference can be dropped.
@@ -236,7 +236,7 @@ this point. (Zuul and Jenkins jobs obviously won't work yet).
 Stage 4 - Zuul
 ~~~~~~~~~~~~~~
 
-Zuul is the scheduler in the OpenStack CI system queuing and dispatching work
+Zuul is the scheduler in the OpenContrail CI system queuing and dispatching work
 across multiple CI engines (via gearman). With a working code review system we
 can now set up a scheduler.  Once setup, new patches uploaded
 to gerrit should be picked up and have a zuul verification fail (with 'LOST'
@@ -300,11 +300,11 @@ which get the most load (as they run jobs from anyone).
    modules/opencontrail_project/files/jenkins_job_builder/config for your project.
    This is documented in :ref:`stackforge`. You should copy hooks.yaml and
    defaults.yaml across as-is, and if you want the stock set of python jobs
-   that OpenStack uses, the python-jobs.yaml and pypi-jobs.yaml files too.
+   that OpenContrail uses, the python-jobs.yaml and pypi-jobs.yaml files too.
    Macros.yaml will need to be copied and customised.  See the
    jenkins-job-builder docs for information on customisation - failing to
    customise isn't harmful, but you may find your jobs try to post errors to
-   the OpenStack logging site :).  Finally setup the list of projects to build
+   the OpenContrail logging site :).  Finally setup the list of projects to build
    in projects.yaml.  The ``config`` job  with the puppet-lint/syntax and
    pyflakes job can be particularly useful for ensuring you can push updates
    with confidence (which needs puppet-modules-jobs.yaml).
@@ -337,7 +337,7 @@ executor register itself for that queue, and it's being ignored.
 Stage 6 - Static slaves
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-The OpenStack CI infrastructure has two sets of Jenkins slaves : dynamically
+The OpenContrail CI infrastructure has two sets of Jenkins slaves : dynamically
 managed via nodepool and statically managed by hand. A by-hand slave is easier
 to bring up initially, so that's our next step.
 

@@ -22,7 +22,7 @@ DocFolder="doc"
 
 COMMIT_MSG="Imported Translations from Transifex"
 
-git config user.name "OpenStack Jenkins"
+git config user.name "OpenContrail Jenkins"
 git config user.email "jenkins@opencontrail.org"
 git config gitreview.username "jenkins"
 

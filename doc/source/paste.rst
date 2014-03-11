@@ -7,7 +7,7 @@ Paste
 
 Paste servers are an easy way to share long-form content such as
 configuration files or log data with others over short-form
-communication protocols such as IRC.  OpenStack runs the "lodgeit"
+communication protocols such as IRC.  OpenContrail runs the "lodgeit"
 paste software.
 
 At a Glance
@@ -28,11 +28,11 @@ At a Glance
 Overview
 ========
 
-For OpenStack we use `a fork
+For OpenContrail we use `a fork
 <https://git.opencontrail.org/cgit/opencontrail-infra/lodgeit>`_ of lodgeit which is
 based on one with bugfixes maintained by `dcolish
 <https://bitbucket.org/dcolish/lodgeit-main>`_ but adds back missing
-anti-spam features required by OpenStack.
+anti-spam features required by OpenContrail.
 
 Puppet configures lodgeit to use drizzle as a database backend, apache
 as a front-end proxy.

@@ -23,7 +23,7 @@ then
     exit 0
 fi
 
-git config user.name "OpenStack Jenkins"
+git config user.name "OpenContrail Jenkins"
 git config user.email "jenkins@opencontrail.org"
 
 # no need to initialize transifex client,

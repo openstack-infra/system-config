@@ -5,7 +5,7 @@ Overview
 --------
 
 Gerrit has an event stream which can be subscribed to, using this it is possible
-to test commits against testing systems beyond those supplied by OpenStack's
+to test commits against testing systems beyond those supplied by OpenContrail's
 Jenkins setup.  It is also possible for these systems to feed information back
 into Gerrit and they can also leave non-gating votes on Gerrit review requests.
 
@@ -47,7 +47,7 @@ Requirements
 
     * Skipped tests
     * logs should include a trace of the commands used
-  * OpenStack logs
+  * OpenContrail logs
   * Tempest logs (including ``testr_results.html.gz``)
 
 
@@ -91,7 +91,7 @@ Posting Result To Gerrit
 ------------------------
 
 External testing systems can give non-gating votes to Gerrit by means of a -1/+1
-verify vote.  OpenStack Jenkins has extra permissions to give a +2/-2 verify
+verify vote.  OpenContrail Jenkins has extra permissions to give a +2/-2 verify
 vote which is gating.  Comments should also be provided to explain what kind of
 test failed..  We do also ask that the comments contain public links to the
 failure so that the developer can see what caused the failure.
@@ -109,7 +109,7 @@ Further documentation on the `review` command in Gerrit can be found in the `Ger
 
 We do suggest cautious testing of these systems and have a development Gerrit
 setup to test on if required.  In SmokeStack's case all failures are manually
-reviewed before getting pushed to OpenStack, whilst this may no scale it is
+reviewed before getting pushed to OpenContrail, whilst this may no scale it is
 advisable during initial testing of the setup.
 
 .. _request-account-label:
@@ -117,7 +117,7 @@ advisable during initial testing of the setup.
 Requesting a Service Account
 ----------------------------
 
-Feel free to contact the OpenStack Infrastructure Team via
+Feel free to contact the OpenContrail Infrastructure Team via
 `email <mailto:opencontrail-infra@lists.opencontrail.org>`_,
 `bug report <https://bugs.launchpad.net/opencontrail-ci/>`_
 or in the #opencontrail-infra IRC channel to arrange setting up a dedicated user
@@ -207,8 +207,8 @@ Testing your CI setup
 ---------------------
 
 You can use ``opencontrail-dev/sandbox`` project to test your external CI
-infrastructure with OpenStack Gerrit system. By using sandbox project you
-can test your CI system without affecting regular OpenStack reviews.
+infrastructure with OpenContrail Gerrit system. By using sandbox project you
+can test your CI system without affecting regular OpenContrail reviews.
 
 Once you confirm your CI system works as you expected, change your
 configuration of gerrit trigger plugin or zuul to subscribe gerrit events

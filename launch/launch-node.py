@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 
-# Launch a new OpenStack project infrastructure node.
+# Launch a new OpenContrail project infrastructure node.
 
-# Copyright (C) 2011-2012 OpenStack LLC.
+# Copyright (C) 2011-2012 OpenContrail LLC.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.

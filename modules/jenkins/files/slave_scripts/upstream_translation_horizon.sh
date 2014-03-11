@@ -23,7 +23,7 @@ then
     exit 0
 fi
 
-git config user.name "OpenStack Jenkins"
+git config user.name "OpenContrail Jenkins"
 git config user.email "jenkins@opencontrail.org"
 
 # initialize transifex client
@@ -36,7 +36,7 @@ tx set --auto-local -r ${PROJECT}.${PROJECT}-js-translations \
 tx set --auto-local -r ${PROJECT}.${PROJECT}-translations \
 "${PROJECT}/locale/<lang>/LC_MESSAGES/django.po" --source-lang en \
 --source-file ${PROJECT}/locale/en/LC_MESSAGES/django.po -t PO --execute
-# OpenStack Dashboard Translations
+# OpenContrail Dashboard Translations
 tx set --auto-local -r ${PROJECT}.opencontrail-dashboard-translations \
 "opencontrail_dashboard/locale/<lang>/LC_MESSAGES/django.po" --source-lang en \
 --source-file opencontrail_dashboard/locale/en/LC_MESSAGES/django.po -t PO --execute

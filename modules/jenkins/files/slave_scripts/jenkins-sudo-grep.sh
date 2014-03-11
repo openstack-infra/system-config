@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Copyright 2012 Hewlett-Packard Development Company, L.P.
-# Copyright 2013 OpenStack Foundation
+# Copyright 2013 OpenContrail Foundation
 #
 # Licensed under the Apache License, Version 2.0 (the "License"); you may
 # not use this file except in compliance with the License. You may obtain

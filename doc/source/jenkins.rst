@@ -46,7 +46,7 @@ that defines a new job or alters an existing job by editing the
 appropriate YAML files.  See :ref:`jjb` for more information.
 
 Because of the large number of builds that Jenkins executes, the
-OpenStack project favors the following approach in configuring Jenkins
+OpenContrail project favors the following approach in configuring Jenkins
 jobs:
 
   * Minimal use of plugins: the more post-processing work that Jenkins
@@ -80,7 +80,7 @@ privileges to take effect.
 Devstack Gate
 =============
 
-OpenStack integration testing is performed by the devstack gate test
+OpenContrail integration testing is performed by the devstack gate test
 framework. This framework runs the devstack exercises and Tempest
 smoketests against a devstack install on single use cloud servers. The
 devstack gate source can be found on `git.opencontrail.org

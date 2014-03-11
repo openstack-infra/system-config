@@ -6,7 +6,7 @@ Mailing Lists
 #############
 
 `Mailman <http://www.gnu.org/software/mailman/>`_ is installed on
-lists.opencontrail.org to run OpenStack related mailing lists, as well as
+lists.opencontrail.org to run OpenContrail related mailing lists, as well as
 host list archives.
 
 At a Glance
@@ -38,7 +38,7 @@ example:
     ensure      => present,
     admin       => 'admin@example.com',
     password    => $listpassword,
-    description => 'Discussion of OpenStack Foo',
+    description => 'Discussion of OpenContrail Foo',
     webserver   => $listdomain,
     mailserver  => $listdomain,
   }

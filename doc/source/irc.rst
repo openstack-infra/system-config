@@ -6,7 +6,7 @@ IRC Services
 ############
 
 The infrastructure team runs a number of IRC bots that are active on
-OpenStack related channels.
+OpenContrail related channels.
 
 At a Glance
 ===========
@@ -35,7 +35,7 @@ At a Glance
 Meetbot
 =======
 
-The OpenStack Infrastructure team run a slightly modified
+The OpenContrail Infrastructure team run a slightly modified
 `Meetbot <http://wiki.debian.org/MeetBot>`_ to log IRC channel activity and
 meeting minutes. Meetbot is a plugin for
 `Supybot <http://sourceforge.net/projects/supybot/>`_ which adds meeting
@@ -52,7 +52,7 @@ get you going, but there are other goodies in ``doc/``.
 
 Once you have Supybot installed you will need to configure a bot. The
 ``supybot-wizard`` command can get you started with a basic config, or you can
-have the OpenStack meetbot puppet module do the heavy lifting.
+have the OpenContrail meetbot puppet module do the heavy lifting.
 
 One important config setting is ``supybot.reply.whenAddressedBy.chars``, which
 sets the prefix character for this bot. This should be set to something other
@@ -62,15 +62,15 @@ if you don't want a prefix character).
 Meetbot
 -------
 
-The OpenStack Infrastructure Meetbot fork can be found at
+The OpenContrail Infrastructure Meetbot fork can be found at
 https://git.opencontrail.org/cgit/opencontrail-infra/meetbot. Manual installation of the Meetbot
 plugin is straightforward and documented in that repository's README.
-OpenStack Infrastructure installs and configures Meetbot through Puppet.
+OpenContrail Infrastructure installs and configures Meetbot through Puppet.
 
 Voting
 ^^^^^^
 
-The OpenStack Infrastructure Meetbot fork adds simple voting features. After
+The OpenContrail Infrastructure Meetbot fork adds simple voting features. After
 a meeting has been started a meeting chair can begin a voting block with the
 ``#startvote`` command. The command takes two arguments, a question posed to
 voters (ending with a ``?``), and the valid voting options. If the second
@@ -123,7 +123,7 @@ Statusbot
 =========
 
 Statusbot is used to distribute urgent information from the
-Infrastructure team to OpenStack channels.  It updates the
+Infrastructure team to OpenContrail channels.  It updates the
 `Infrastructure Status wiki page
 <https://wiki.opencontrail.org/wiki/Infrastructure_Status>`_.  It
 supports the following public message commands when issued by
@@ -134,11 +134,11 @@ listening to, including #opencontrail-infra:
   Log a message to the wiki page.
 
 #status notice MESSAGE
-  Broadcast a message to all OpenStack channels, and log to the wiki
+  Broadcast a message to all OpenContrail channels, and log to the wiki
   page.
 
 #status alert MESSAGE
-  Broadcast a message to all OpenStack channels and change their
+  Broadcast a message to all OpenContrail channels and change their
   topics, log to the wiki page, and set an alert box on the wiki
   page (eventually include this alert box on status.opencontrail.org
   pages).

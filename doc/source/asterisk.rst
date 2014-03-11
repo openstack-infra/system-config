@@ -28,4 +28,4 @@ Overview
 ========
 
 This is a CentOS 6 system that runs Asterisk, a telephony server.  It is used
-as a conferencing server for the OpenStack project.
+as a conferencing server for the OpenContrail project.

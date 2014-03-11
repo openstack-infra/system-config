@@ -5,13 +5,13 @@
 Gerrit
 ######
 
-Gerrit is the code review system used by the OpenStack project.  For a
-full description of how the system fits into the OpenStack workflow,
+Gerrit is the code review system used by the OpenContrail project.  For a
+full description of how the system fits into the OpenContrail workflow,
 see `the GerritJenkinsGit wiki article
 <https://wiki.opencontrail.org/wiki/GerritJenkinsGit>`_.
 
 This section describes how Gerrit is configured for use in the
-OpenStack project and the tools used to manage that configuration.
+OpenContrail project and the tools used to manage that configuration.
 
 At a Glance
 ===========
@@ -39,7 +39,7 @@ Installation
 
 Gerrit is installed and configured by Puppet, including specifying the
 exact Java WAR file that is used.  See :ref:`sysadmin` for how Puppet
-is used to manage OpenStack infrastructure systems.
+is used to manage OpenContrail infrastructure systems.
 
 Gerrit Configuration
 --------------------
@@ -99,7 +99,7 @@ Add information about the CLA:
   use reviewdb;
   insert into contributor_agreements values (
   'Y', 'Y', 'Y', 'ICLA',
-  'OpenStack Individual Contributor License Agreement',
+  'OpenContrail Individual Contributor License Agreement',
   'static/cla.html', 2);
 
 Groups
@@ -111,7 +111,7 @@ hand (and capture their UUID - you will need them to setup the ACLs
 later).
 
 The `Project Bootstrappers` group grants all the permissions needed to
-set up a new project.  Normally the OpenStack Project Creater account
+set up a new project.  Normally the OpenContrail Project Creater account
 is the only member of this group, but members of the `Administrators`
 group may temporarily add themselves in order to correct problems with
 automatic project creation.
@@ -228,7 +228,7 @@ High level goals:
    on any project.
 #. Jenkins can perform verification (blocking or approving: +/-1).
 #. All registered users can create changes.
-#. The OpenStack Release Manager and Jenkins can tag releases (push
+#. The OpenContrail Release Manager and Jenkins can tag releases (push
    annotated tags).
 #. Members of $PROJECT-core group can perform full code review
    (blocking or approving: +/- 2), and submit changes to be merged.
@@ -239,7 +239,7 @@ High level goals:
 #. Full code review (+/- 2) of API projects (documentation of the API,
    not implementation of the API) should be available to the -core
    group of the corresponding implementation project as well as to the
-   OpenStack Documentation Coordinators.
+   OpenContrail Documentation Coordinators.
 #. Full code review of stable branches should be available to the
    -core group of the project as well as the Stable Maintainers
    group.
@@ -520,7 +520,7 @@ addresses, which also renders the accounts unselectable in some
 parts of the WebUI (notably when trying to add reviewers to a change
 or members in a group). Gerrit does not provide a supported
 mechanism for `Combining Gerrit Accounts`_, and doing so manually is
-both time-consuming and error prone. As a result, the OpenStack
+both time-consuming and error prone. As a result, the OpenContrail
 infrastructure team does not combine duplicate accounts for users
 but can clean up these E-mail address issues upon request. To find
 the offending duplicates:
@@ -549,7 +549,7 @@ Combining Gerrit Accounts
 
 While not supported by Gerrit, a fairly thorough account merge is
 documented here (mostly as a demonstration of its unfortunate
-complexity). Please note that the OpenStack infrastructure team does
+complexity). Please note that the OpenContrail infrastructure team does
 not combine duplicate accounts for users upon request, but this
 would be the process to follow if it becomes necessary under some
 extraordinary circumstance.

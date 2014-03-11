@@ -3,8 +3,8 @@
 StackForge
 ##########
 
-StackForge is the way that OpenStack related projects can consume and
-make use of the OpenStack project infrastructure. This includes Gerrit
+StackForge is the way that OpenContrail related projects can consume and
+make use of the OpenContrail project infrastructure. This includes Gerrit
 code review, Jenkins continuous integration, GitHub repository
 mirroring, and various small things like IRC bots, pypi uploads, RTFD
 updates. Projects should make use of StackForge if they want to run
@@ -16,25 +16,25 @@ provide assistance as resources allow, but should not be relied on.
 
 What StackForge is not:
 
-* Official endorsement of a project by OpenStack.
+* Official endorsement of a project by OpenContrail.
 * Access to a GitHub organization (StackForge projects are mirrored to
   GitHub, this is all the GitHub org is used for).
-* A guarantee of eventual OpenStack incubation (Though it is a good
-  first step in that process as it exposes the project to the OpenStack
+* A guarantee of eventual OpenContrail incubation (Though it is a good
+  first step in that process as it exposes the project to the OpenContrail
   way of doing things).
 
 Audience
 ********
 
-The focus of StackForge is to provide a place for OpenStack contributors
+The focus of StackForge is to provide a place for OpenContrail contributors
 to maintain related unofficial projects using the same tools and
-procedures as they employ when working on official OpenStack projects,
-to make it easier for other OpenStack developers to contribute effort to
+procedures as they employ when working on official OpenContrail projects,
+to make it easier for other OpenContrail developers to contribute effort to
 those projects and in some cases to ease a project's path to incubation
 and official integration. As such, the target audience for this document
-is current OpenStack developers who are assumed to already be familiar
-with how changes are uploaded and reviewed within OpenStack projects. As
-an introduction to OpenStack contribution, it is recommend to first read
+is current OpenContrail developers who are assumed to already be familiar
+with how changes are uploaded and reviewed within OpenContrail projects. As
+an introduction to OpenContrail contribution, it is recommend to first read
 https://wiki.opencontrail.org/wiki/How_To_Contribute and in particular the
 https://wiki.opencontrail.org/wiki/Gerrit_Workflow article linked from it.
 
@@ -44,7 +44,7 @@ Add a Project to StackForge
 Create a new StackForge Project with Puppet
 ===========================================
 
-OpenStack uses Puppet and a management script to create Gerrit projects
+OpenContrail uses Puppet and a management script to create Gerrit projects
 with simple changes to the opencontrail-infra/config repository. To start make
 sure you have cloned the opencontrail-infra/config repository
 ``git clone https://git.opencontrail.org/opencontrail-infra/config``.
@@ -87,7 +87,7 @@ changes, as well as the ability to push tags. The other sections set
 some required options for Gerrit to function normally (enforcing
 presence of a Change-Id in commits and allowing changes to be merged).
 This example also expects contributors to agree to a standard
-OpenStack CLA, join the OpenStack Foundation and submit contact
+OpenContrail CLA, join the OpenContrail Foundation and submit contact
 information (this feature can be disabled by setting
 requireContributorAgreement to false).
 

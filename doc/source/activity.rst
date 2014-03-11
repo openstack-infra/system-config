@@ -3,7 +3,7 @@
 Activity Board
 ##############
 
-A temporary server hosting the OpenStack Dash and Insights services for
+A temporary server hosting the OpenContrail Dash and Insights services for
 various projects metrics.
 
 
@@ -27,4 +27,4 @@ Overview
 
 At the moment only the staging server activity-dev is managed via
 puppet. It runs Apache. Eventually we'll have activity.opencontrail.org run
-fully on the official OpenStack Infrastructure.
+fully on the official OpenContrail Infrastructure.

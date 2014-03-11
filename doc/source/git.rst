@@ -27,7 +27,7 @@ At a Glance
 Overview
 ========
 
-The OpenStack git repositories are hosted on a pool of CentOS servers with the
+The OpenContrail git repositories are hosted on a pool of CentOS servers with the
 EPEL repository that includes the cgit package. They are served up via https
 using cgit and via git:// by git-daemon behind HAProxy which handles load
 balancing across the nodes.

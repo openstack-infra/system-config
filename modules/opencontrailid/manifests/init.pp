@@ -1,4 +1,4 @@
-# Copyright 2013  OpenStack Foundation
+# Copyright 2013  OpenContrail Foundation
 #
 # Licensed under the Apache License, Version 2.0 (the "License"); you may
 # not use this file except in compliance with the License. You may obtain
@@ -71,7 +71,7 @@ class opencontrailid (
   user { 'opencontrailid':
     ensure     => present,
     managehome => true,
-    comment    => 'OpenStackID User',
+    comment    => 'OpenContrailID User',
     shell      => '/bin/bash',
     gid        => 'opencontrailid',
     require    => Group['opencontrailid'],
