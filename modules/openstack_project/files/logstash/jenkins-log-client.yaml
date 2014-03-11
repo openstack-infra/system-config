@@ -139,10 +139,6 @@ source-files:
     tags:
       - screen
       - apachecombined
-  - name: logs/screen-savanna.txt
-    tags:
-      - screen
-      - oslofmt
   - name: logs/screen-sahara.txt
     tags:
       - screen
