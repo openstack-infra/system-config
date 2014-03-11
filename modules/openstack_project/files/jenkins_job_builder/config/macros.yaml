@@ -4,6 +4,15 @@
       - shell: "/usr/local/jenkins/slave_scripts/gerrit-git-prep.sh https://review.openstack.org git://git.openstack.org"
 
 - builder:
+    name: revoke-sudo
+    builders:
+      - shell: |
+          #!/bin/bash
+          if [ -f /etc/sudoers.d/jenkins-sudo ] ; then
+              sudo rm /etc/sudoers.d/jenkins-sudo
+          fi
+
+- builder:
     name: coverage
     builders:
       - shell: "/usr/local/jenkins/slave_scripts/run-cover.sh {github-org} {project}"
