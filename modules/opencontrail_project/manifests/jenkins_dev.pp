@@ -1,6 +1,6 @@
-# == Class: openstack_project::jenkins_dev
+# == Class: opencontrail_project::jenkins_dev
 #
-class openstack_project::jenkins_dev (
+class opencontrail_project::jenkins_dev (
   $jenkins_ssh_private_key = '',
   $sysadmins = [],
   $mysql_root_password,
@@ -13,26 +13,26 @@ class openstack_project::jenkins_dev (
   $hpcloud_password ='',
   $hpcloud_project ='',
 ) {
-  include openstack_project
+  include opencontrail_project
 
-  class { 'openstack_project::server':
+  class { 'opencontrail_project::server':
     iptables_public_tcp_ports => [80, 443],
     sysadmins                 => $sysadmins,
   }
   include bup
   bup::site { 'rs-ord':
     backup_user   => 'bup-jenkins-dev',
-    backup_server => 'ci-backup-rs-ord.openstack.org',
+    backup_server => 'ci-backup-rs-ord.opencontrail.org',
   }
   class { '::jenkins::master':
-    vhost_name              => 'jenkins-dev.openstack.org',
-    serveradmin             => 'webmaster@openstack.org',
-    logo                    => 'openstack.png',
+    vhost_name              => 'jenkins-dev.opencontrail.org',
+    serveradmin             => 'webmaster@opencontrail.org',
+    logo                    => 'opencontrail.png',
     ssl_cert_file           => '/etc/ssl/certs/ssl-cert-snakeoil.pem',
     ssl_key_file            => '/etc/ssl/private/ssl-cert-snakeoil.key',
     ssl_chain_file          => '',
     jenkins_ssh_private_key => $jenkins_ssh_private_key,
-    jenkins_ssh_public_key  => $openstack_project::jenkins_dev_ssh_key,
+    jenkins_ssh_public_key  => $opencontrail_project::jenkins_dev_ssh_key,
   }
 
   file { '/etc/default/jenkins':
@@ -40,7 +40,7 @@ class openstack_project::jenkins_dev (
     owner  => 'root',
     group  => 'root',
     mode   => '0644',
-    source => 'puppet:///modules/openstack_project/jenkins/jenkins.default',
+    source => 'puppet:///modules/opencontrail_project/jenkins/jenkins.default',
   }
 
   class { '::nodepool':

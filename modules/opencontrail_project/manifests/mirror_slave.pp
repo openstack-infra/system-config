@@ -14,13 +14,13 @@
 #
 # Install a python mirror building slave.
 
-class openstack_project::mirror_slave (
+class opencontrail_project::mirror_slave (
   $jenkins_ssh_public_key,
   $jenkins_ssh_private_key,
   $python3=false,
 ) {
 
-  class { 'openstack_project::slave':
+  class { 'opencontrail_project::slave':
     ssh_key => $jenkins_ssh_public_key,
     python3 => $python3,
   }
@@ -67,7 +67,7 @@ class openstack_project::mirror_slave (
 
   file { '/home/jenkins/pypimirror/etc/pypi-mirror.yaml':
     ensure  => present,
-    source  => 'puppet:///modules/openstack_project/jenkins-pypi-mirror.yaml',
+    source  => 'puppet:///modules/opencontrail_project/jenkins-pypi-mirror.yaml',
     require => File['/home/jenkins/pypimirror/etc'],
   }
 
@@ -79,7 +79,7 @@ class openstack_project::mirror_slave (
     ensure   => latest,
     provider => git,
     revision => 'master',
-    source   => 'https://git.openstack.org/openstack-infra/pypi-mirror',
+    source   => 'https://git.opencontrail.org/opencontrail-infra/pypi-mirror',
   }
 
   exec { 'install_pypi_mirror' :

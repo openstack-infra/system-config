@@ -1,17 +1,17 @@
-# == Class: openstack_project::static
+# == Class: opencontrail_project::static
 #
-class openstack_project::static (
+class opencontrail_project::static (
   $sysadmins = [],
 ) {
 
-  class { 'openstack_project::server':
+  class { 'opencontrail_project::server':
     iptables_public_tcp_ports => [22, 80, 443],
     sysadmins                 => $sysadmins,
   }
 
-  include openstack_project
+  include opencontrail_project
   class { 'jenkins::jenkinsuser':
-    ssh_key => $openstack_project::jenkins_ssh_key,
+    ssh_key => $opencontrail_project::jenkins_ssh_key,
   }
 
   include apache
@@ -34,7 +34,7 @@ class openstack_project::static (
   ###########################################################
   # Tarballs
 
-  apache::vhost { 'tarballs.openstack.org':
+  apache::vhost { 'tarballs.opencontrail.org':
     port     => 80,
     priority => '50',
     docroot  => '/srv/static/tarballs',
@@ -51,7 +51,7 @@ class openstack_project::static (
   ###########################################################
   # CI
 
-  apache::vhost { 'ci.openstack.org':
+  apache::vhost { 'ci.opencontrail.org':
     port     => 80,
     priority => '50',
     docroot  => '/srv/static/ci',
@@ -68,20 +68,20 @@ class openstack_project::static (
   ###########################################################
   # Logs
 
-  apache::vhost { 'logs.openstack.org':
+  apache::vhost { 'logs.opencontrail.org':
     port     => 80,
     priority => '50',
     docroot  => '/srv/static/logs',
     require  => File['/srv/static/logs'],
-    template => 'openstack_project/logs.vhost.erb',
+    template => 'opencontrail_project/logs.vhost.erb',
   }
 
-  apache::vhost { 'logs-dev.openstack.org':
+  apache::vhost { 'logs-dev.opencontrail.org':
     port     => 80,
     priority => '51',
     docroot  => '/srv/static/logs',
     require  => File['/srv/static/logs'],
-    template => 'openstack_project/logs-dev.vhost.erb',
+    template => 'opencontrail_project/logs-dev.vhost.erb',
   }
 
   file { '/srv/static/logs':
@@ -96,7 +96,7 @@ class openstack_project::static (
     owner   => 'root',
     group   => 'root',
     mode    => '0444',
-    source  => 'puppet:///modules/openstack_project/disallow_robots.txt',
+    source  => 'puppet:///modules/opencontrail_project/disallow_robots.txt',
     require => File['/srv/static/logs'],
   }
 
@@ -104,7 +104,7 @@ class openstack_project::static (
     ensure   => latest,
     provider => git,
     revision => 'master',
-    source   => 'https://git.openstack.org/openstack-infra/os-loganalyze',
+    source   => 'https://git.opencontrail.org/opencontrail-infra/os-loganalyze',
   }
 
   exec { 'install_os-loganalyze':
@@ -123,7 +123,7 @@ class openstack_project::static (
     owner   => 'root',
     group   => 'root',
     mode    => '0755',
-    source  => 'puppet:///modules/openstack_project/logs/help',
+    source  => 'puppet:///modules/opencontrail_project/logs/help',
     require => File['/srv/static/logs'],
   }
 
@@ -132,7 +132,7 @@ class openstack_project::static (
     owner  => 'root',
     group  => 'root',
     mode   => '0744',
-    source => 'puppet:///modules/openstack_project/log_archive_maintenance.sh',
+    source => 'puppet:///modules/opencontrail_project/log_archive_maintenance.sh',
   }
 
   cron { 'gziprmlogs':
@@ -148,7 +148,7 @@ class openstack_project::static (
   ###########################################################
   # Docs-draft
 
-  apache::vhost { 'docs-draft.openstack.org':
+  apache::vhost { 'docs-draft.opencontrail.org':
     port     => 80,
     priority => '50',
     docroot  => '/srv/static/docs-draft',
@@ -167,14 +167,14 @@ class openstack_project::static (
     owner   => 'root',
     group   => 'root',
     mode    => '0444',
-    source  => 'puppet:///modules/openstack_project/disallow_robots.txt',
+    source  => 'puppet:///modules/opencontrail_project/disallow_robots.txt',
     require => File['/srv/static/docs-draft'],
   }
 
   ###########################################################
   # Pypi Mirror
 
-  apache::vhost { 'pypi.openstack.org':
+  apache::vhost { 'pypi.opencontrail.org':
     port     => 80,
     priority => '50',
     docroot  => '/srv/static/pypi',
@@ -193,7 +193,7 @@ class openstack_project::static (
     owner   => 'root',
     group   => 'root',
     mode    => '0444',
-    source  => 'puppet:///modules/openstack_project/disallow_robots.txt',
+    source  => 'puppet:///modules/opencontrail_project/disallow_robots.txt',
     require => File['/srv/static/pypi'],
   }
 }

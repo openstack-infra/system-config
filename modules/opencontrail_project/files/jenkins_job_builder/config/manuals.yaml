@@ -1,6 +1,6 @@
 # in zuul/layout.yaml specified to only run against stable/grizzly
 - job:
-    name: gate-openstack-manuals-validate
+    name: gate-opencontrail-manuals-validate
     node: bare-precise
 
     builders:
@@ -12,7 +12,7 @@
 
 # in zuul/layout.yaml specified to only run against master branch.
 - job:
-    name: openstack-docs-site
+    name: opencontrail-docs-site
     concurrent: false
     node: bare-precise
 
@@ -21,7 +21,7 @@
 
     publishers:
       - ftp:
-          site: docs.openstack.org
+          site: docs.opencontrail.org
           source: 'www/**'
           target: ''
           remove-prefix: 'www/'
@@ -35,7 +35,7 @@
 #
 # We can use the git and snapshot dependency triggers if that is preferable.
 - job:
-    name: openstack-ha-guide
+    name: opencontrail-ha-guide
     project-type: maven
     concurrent: false
     node: bare-precise
@@ -48,32 +48,32 @@
     prebuilders:
       - gerrit-git-prep
       - shell: |
-          asciidoc -b docbook -d book -o - doc/high-availability-guide/ha-guide.txt |  xsltproc -o - /usr/share/xml/docbook/stylesheet/docbook5/db4-upgrade.xsl - | xmllint  --format - | sed -e 's,<book,<book xml:id="bk-ha-guide",' | sed -e 's,<info,<?rax pdf.url="../openstack-ha-guide-trunk.pdf"?><info,' > doc/high-availability-guide/bk-ha-guide.xml
+          asciidoc -b docbook -d book -o - doc/high-availability-guide/ha-guide.txt |  xsltproc -o - /usr/share/xml/docbook/stylesheet/docbook5/db4-upgrade.xsl - | xmllint  --format - | sed -e 's,<book,<book xml:id="bk-ha-guide",' | sed -e 's,<info,<?rax pdf.url="../opencontrail-ha-guide-trunk.pdf"?><info,' > doc/high-availability-guide/bk-ha-guide.xml
 
     maven:
       maven-name: Maven3
       root-module:
-        group-id: org.openstack.docs
-        artifact-id: openstack-guide
+        group-id: org.opencontrail.docs
+        artifact-id: opencontrail-guide
       root-pom: doc/high-availability-guide/pom.xml
       goals: 'clean generate-sources -B'
 
     publishers:
       - console-log
       - ftp:
-          site: docs.openstack.org
+          site: docs.opencontrail.org
           source: 'doc/high-availability-guide/target/docbkx/webhelp/**'
           target: ''
           remove-prefix: 'doc/high-availability-guide/target/docbkx/webhelp/'
           excludes: '**/*.xml,**/null*'
       - ftp:
-          site: docs.openstack.org
+          site: docs.opencontrail.org
           source: 'doc/high-availability-guide/target/docbkx/webhelp/**/atom.xml'
           target: ''
           remove-prefix: 'doc/high-availability-guide/target/docbkx/webhelp/'
 
 - job:
-    name: openstack-operations-guide
+    name: opencontrail-operations-guide
     project-type: maven
     concurrent: false
     node: bare-precise
@@ -89,30 +89,30 @@
     maven:
       maven-name: Maven3
       root-module:
-        group-id: org.openstack.docs
-        artifact-id: openstack-guide
-      root-pom: doc/openstack-ops/pom.xml
+        group-id: org.opencontrail.docs
+        artifact-id: opencontrail-guide
+      root-pom: doc/opencontrail-ops/pom.xml
       goals: '-Drelease.path.name=${DOC_RELEASE_PATH} -Dcomments.enabled=${DOC_COMMENTS_ENABLED} clean generate-sources -B'
 
     publishers:
       - console-log
       - ftp:
-          site: docs.openstack.org
-          source: 'doc/openstack-ops/target/docbkx/webhelp/**'
+          site: docs.opencontrail.org
+          source: 'doc/opencontrail-ops/target/docbkx/webhelp/**'
           target: '/'
-          remove-prefix: 'doc/openstack-ops/target/docbkx/webhelp/'
+          remove-prefix: 'doc/opencontrail-ops/target/docbkx/webhelp/'
           excludes: '**/*.xml,**/null*'
       - ftp:
-          site: docs.openstack.org
-          source: 'doc/openstack-ops/target/docbkx/webhelp/**/atom.xml'
+          site: docs.opencontrail.org
+          source: 'doc/opencontrail-ops/target/docbkx/webhelp/**/atom.xml'
           target: ''
-          remove-prefix: 'doc/openstack-ops/target/docbkx/webhelp/'
+          remove-prefix: 'doc/opencontrail-ops/target/docbkx/webhelp/'
 
 - job-template:
-    name: 'openstack-operations-guide-{lang}'
+    name: 'opencontrail-operations-guide-{lang}'
     concurrent: false
     node: bare-precise
-    github-org: openstack
+    github-org: opencontrail
 
     properties:
       - inject:
@@ -123,13 +123,13 @@
       - gerrit-git-prep
       - shell: |
           #!/bin/bash -xe
-          source /usr/local/jenkins/slave_scripts/select-mirror.sh openstack openstack-ops
+          source /usr/local/jenkins/slave_scripts/select-mirror.sh opencontrail opencontrail-ops
           tox -v -e buildlang -- {lang}
 
     publishers:
       - console-log
       - ftp:
-          site: docs.openstack.org
+          site: docs.opencontrail.org
           source: 'publish-docs/{lang}/**'
           target: '/{lang}/'
           remove-prefix: 'publish-docs/{lang}/'

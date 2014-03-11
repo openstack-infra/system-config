@@ -13,7 +13,7 @@
 // under the License.
 
 function update() {
-    $.getJSON('http://status.openstack.org/elastic-recheck/graph.json', function(data) {
+    $.getJSON('http://status.opencontrail.org/elastic-recheck/graph.json', function(data) {
 	var seen = [];
 	$.each(data, function(i, bug) {
 	    var id = 'bug-'+bug['number'];
@@ -26,7 +26,7 @@ function update() {
 		$('<h2/>', {text: 'Bug ' + bug['number']}).appendTo(div);
 		$('<div/>', {'class': 'graph'}).appendTo(div);
 		$('<a/>', {
-		    href: 'http://logstash.openstack.org/#'+bug['logstash_query'],
+		    href: 'http://logstash.opencontrail.org/#'+bug['logstash_query'],
 		    text: 'Logstash'
 		}).appendTo($('<span/>', {
 		    'class': 'extlink'

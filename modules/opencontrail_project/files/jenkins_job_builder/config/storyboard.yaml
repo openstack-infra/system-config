@@ -6,7 +6,7 @@
     builders:
       - gerrit-git-prep
       - docs:
-          github-org: openstack-infra
+          github-org: opencontrail-infra
           project: storyboard
 
     publishers:

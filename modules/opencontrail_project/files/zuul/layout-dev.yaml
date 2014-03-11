@@ -1,11 +1,11 @@
 includes:
-  - python-file: openstack_functions.py
+  - python-file: opencontrail_functions.py
 
 pipelines:
   - name: check
     description: Newly uploaded patchsets enter this pipeline to receive an initial +/-1 Verified vote from Jenkins.
     manager: IndependentPipelineManager
-    failure-message: Build failed.  For information on how to proceed, see https://wiki.openstack.org/wiki/GerritJenkinsGit#Test_Failures
+    failure-message: Build failed.  For information on how to proceed, see https://wiki.opencontrail.org/wiki/GerritJenkinsGit#Test_Failures
     precedence: low
     trigger:
       gerrit:
@@ -22,7 +22,7 @@ pipelines:
 
   - name: gate
     description: Changes that have been approved by core developers are enqueued in order in this pipeline, and if they pass tests in Jenkins, will be merged.
-    failure-message: Build failed.  For information on how to proceed, see https://wiki.openstack.org/wiki/GerritJenkinsGit#Test_Failures
+    failure-message: Build failed.  For information on how to proceed, see https://wiki.opencontrail.org/wiki/GerritJenkinsGit#Test_Failures
     manager: DependentPipelineManager
     precedence: low
     trigger:

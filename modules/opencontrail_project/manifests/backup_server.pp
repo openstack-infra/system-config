@@ -1,7 +1,7 @@
-# == Class: openstack_project::backup_server
+# == Class: opencontrail_project::backup_server
 #
-class openstack_project::backup_server {
-  class { 'openstack_project::template':
+class opencontrail_project::backup_server {
+  class { 'opencontrail_project::template':
     iptables_public_tcp_ports => [],
   }
 }

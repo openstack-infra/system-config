@@ -15,17 +15,17 @@
 function header(activeTabName) {
   tabsName = new Array();
   tabsLink = new Array();
-  tabsName[0] = 'Status'; tabsLink[0] = 'http://status.openstack.org/';
-  tabsName[1] = 'Zuul'; tabsLink[1] = 'http://status.openstack.org/zuul/';
-  tabsName[2] = 'Rechecks'; tabsLink[2] = 'http://status.openstack.org/rechecks/';
-  tabsName[3] = 'Release'; tabsLink[3] = 'http://status.openstack.org/release/';
-  tabsName[4] = 'Reviews'; tabsLink[4] = 'http://status.openstack.org/reviews/';
-  tabsName[5] = 'Bugday'; tabsLink[5] = 'http://status.openstack.org/bugday/';
+  tabsName[0] = 'Status'; tabsLink[0] = 'http://status.opencontrail.org/';
+  tabsName[1] = 'Zuul'; tabsLink[1] = 'http://status.opencontrail.org/zuul/';
+  tabsName[2] = 'Rechecks'; tabsLink[2] = 'http://status.opencontrail.org/rechecks/';
+  tabsName[3] = 'Release'; tabsLink[3] = 'http://status.opencontrail.org/release/';
+  tabsName[4] = 'Reviews'; tabsLink[4] = 'http://status.opencontrail.org/reviews/';
+  tabsName[5] = 'Bugday'; tabsLink[5] = 'http://status.opencontrail.org/bugday/';
 
   document.write(
    '<div id="header" class="container">'+
    '<div class="span-5">'+
-   ' <h1 id="logo"><a href="http://status.openstack.org/">Open Stack</a></h1>'+
+   ' <h1 id="logo"><a href="http://status.opencontrail.org/">Open Stack</a></h1>'+
    '</div>\n'+
    '<div class="span-19 last blueLine">'+
    '<div id="navigation" class="span-19">'+
@@ -54,37 +54,37 @@ function footer() {
   '<div class="span-4">'+
   '<h3>OpenStack</h3>'+
   '<ul>'+
-  ' <li><a href="http://www.openstack.org/projects/">Projects</a></li>'+
-  ' <li><a href="http://www.openstack.org/openstack-security/">OpenStack Security</a></li>'+
-  ' <li><a href="http://www.openstack.org/projects/openstack-faq/">Common Questions</a></li>'+
-  ' <li><a href="http://www.openstack.org/blog/">Blog</a></li>'+
+  ' <li><a href="http://www.opencontrail.org/projects/">Projects</a></li>'+
+  ' <li><a href="http://www.opencontrail.org/opencontrail-security/">OpenStack Security</a></li>'+
+  ' <li><a href="http://www.opencontrail.org/projects/opencontrail-faq/">Common Questions</a></li>'+
+  ' <li><a href="http://www.opencontrail.org/blog/">Blog</a></li>'+
   '</ul>'+
   '</div>\n'+
   '<div class="span-4">'+
   '<h3>Community</h3>'+
   '<ul>'+
-  ' <li><a href="http://www.openstack.org/community/">User Groups</a></li>'+
-  ' <li><a href="http://www.openstack.org/events/">Events</a></li>'+
-  ' <li><a href="http://www.openstack.org/jobs/">Jobs</a></li>'+
-  ' <li><a href="http://www.openstack.org/companies/">Companies</a></li>'+
-  ' <li><a href="http://wiki.openstack.org/HowToContribute">Contribute</a></li>'+
+  ' <li><a href="http://www.opencontrail.org/community/">User Groups</a></li>'+
+  ' <li><a href="http://www.opencontrail.org/events/">Events</a></li>'+
+  ' <li><a href="http://www.opencontrail.org/jobs/">Jobs</a></li>'+
+  ' <li><a href="http://www.opencontrail.org/companies/">Companies</a></li>'+
+  ' <li><a href="http://wiki.opencontrail.org/HowToContribute">Contribute</a></li>'+
   '</ul>'+
   '</div>\n'+
   '<div class="span-4">'+
   '<h3>Documentation</h3>'+
   '<ul>'+
-  ' <li><a href="http://docs.openstack.org/">OpenStack Manuals</a></li>'+
-  ' <li><a href="http://docs.openstack.org/diablo/openstack-compute/starter/content/">Getting Started</a></li>'+
-  ' <li><a href="http://wiki.openstack.org/">Wiki</a></li>'+
+  ' <li><a href="http://docs.opencontrail.org/">OpenStack Manuals</a></li>'+
+  ' <li><a href="http://docs.opencontrail.org/diablo/opencontrail-compute/starter/content/">Getting Started</a></li>'+
+  ' <li><a href="http://wiki.opencontrail.org/">Wiki</a></li>'+
   '</ul>'+
   '</div>\n'+
   '<div class="span-4 last">'+
   '<h3>Branding &amp; Legal</h3>'+
   '<ul>'+
-  ' <li><a href="http://www.openstack.org/brand/">Logos &amp; Guidelines</a></li>'+
-  ' <li><a href="http://www.openstack.org/brand/openstack-trademark-policy/">Trademark Policy</a></li>'+
-  ' <li><a href="http://www.openstack.org/privacy/">Privacy Policy</a></li>'+
-  ' <li><a href="http://wiki.openstack.org/CLA">OpenStack CLA</a></li>'+
+  ' <li><a href="http://www.opencontrail.org/brand/">Logos &amp; Guidelines</a></li>'+
+  ' <li><a href="http://www.opencontrail.org/brand/opencontrail-trademark-policy/">Trademark Policy</a></li>'+
+  ' <li><a href="http://www.opencontrail.org/privacy/">Privacy Policy</a></li>'+
+  ' <li><a href="http://wiki.opencontrail.org/CLA">OpenStack CLA</a></li>'+
   '</ul>'+
   '</div>'+
   '</div>'+

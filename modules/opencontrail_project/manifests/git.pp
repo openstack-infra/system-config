@@ -14,13 +14,13 @@
 #
 # Class to configure haproxy to serve git on a CentOS node.
 #
-# == Class: openstack_project::git
-class openstack_project::git (
+# == Class: opencontrail_project::git
+class opencontrail_project::git (
   $sysadmins = [],
   $balancer_member_names = [],
   $balancer_member_ips = []
 ) {
-  class { 'openstack_project::server':
+  class { 'opencontrail_project::server':
     iptables_public_tcp_ports => [80, 443, 9418],
     sysadmins                 => $sysadmins,
   }
@@ -110,7 +110,7 @@ class openstack_project::git (
     owner  => 'root',
     group  => 'root',
     mode   => '0644',
-    source => 'puppet:///modules/openstack_project/git/rsyslog.haproxy.conf',
+    source => 'puppet:///modules/opencontrail_project/git/rsyslog.haproxy.conf',
     notify => Service['rsyslog'],
   }
 }

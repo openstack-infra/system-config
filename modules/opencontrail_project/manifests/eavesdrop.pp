@@ -1,6 +1,6 @@
 # Eavesdrop server
 
-class openstack_project::eavesdrop (
+class opencontrail_project::eavesdrop (
   $nickpass = '',
   $sysadmins = [],
   $statusbot_nick = '',
@@ -13,7 +13,7 @@ class openstack_project::eavesdrop (
   $statusbot_wiki_url = '',
   $statusbot_wiki_pageid = '',
 ) {
-  class { 'openstack_project::server':
+  class { 'opencontrail_project::server':
     iptables_public_tcp_ports => [80],
     sysadmins                 => $sysadmins
   }
@@ -26,8 +26,8 @@ class openstack_project::eavesdrop (
   </Location>
   '
 
-  meetbot::site { 'openstack':
-    nick        => 'openstack',
+  meetbot::site { 'opencontrail':
+    nick        => 'opencontrail',
     nickpass    => $nickpass,
     network     => 'FreeNode',
     server      => 'chat.freenode.net:7000',
@@ -36,23 +36,23 @@ class openstack_project::eavesdrop (
     channels    => [
         '#heat',
         '#murano',
-        '#openstack',
-        '#openstack-ceilometer',
-        '#openstack-climate',
-        '#openstack-dev',
-        '#openstack-dns',
-        '#openstack-infra',
-        '#openstack-ironic',
-        '#openstack-keystone',
-        '#openstack-marconi',
-        '#openstack-meeting',
-        '#openstack-meeting-alt',
-        '#openstack-meeting-3',
-        '#openstack-neutron',
-        '#openstack-qa',
-        '#openstack-relmgr-office',
-        '#openstack-swift',
-        '#openstack-trove',
+        '#opencontrail',
+        '#opencontrail-ceilometer',
+        '#opencontrail-climate',
+        '#opencontrail-dev',
+        '#opencontrail-dns',
+        '#opencontrail-infra',
+        '#opencontrail-ironic',
+        '#opencontrail-keystone',
+        '#opencontrail-marconi',
+        '#opencontrail-meeting',
+        '#opencontrail-meeting-alt',
+        '#opencontrail-meeting-3',
+        '#opencontrail-neutron',
+        '#opencontrail-qa',
+        '#opencontrail-relmgr-office',
+        '#opencontrail-swift',
+        '#opencontrail-trove',
         '#savanna',
         '#storyboard',
         '#tripleo',
@@ -71,7 +71,7 @@ class openstack_project::eavesdrop (
     wiki_pageid   => $statusbot_wiki_pageid,
   }
 
-  file { '/srv/meetbot-openstack/alert':
+  file { '/srv/meetbot-opencontrail/alert':
     ensure  => link,
     target  => '/var/lib/statusbot/www',
     require => Class['statusbot'],

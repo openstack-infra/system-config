@@ -1,5 +1,5 @@
 # Class to configure ssl-cert-check on a node.
-class openstack_project::ssl_cert_check {
+class opencontrail_project::ssl_cert_check {
   class { '::ssl_cert_check':
     domainlist_file => '/var/lib/certcheck/ssldomains',
     email           => 'root',
@@ -11,6 +11,6 @@ class openstack_project::ssl_cert_check {
       owner   => 'certcheck',
       group   => 'certcheck',
       mode    => '0444',
-      source  => 'puppet:///modules/openstack_project/ssl_cert_check/ssldomains'
+      source  => 'puppet:///modules/opencontrail_project/ssl_cert_check/ssldomains'
   }
 }

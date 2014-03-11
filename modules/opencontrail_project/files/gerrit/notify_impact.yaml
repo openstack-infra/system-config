@@ -18,7 +18,7 @@ author_map:
     michael.still@rackspace.com: rcbau
     michael@the-davies.net: rcbau
     mikal@stillhq.com: rcbau
-    openstack@lanabrindley.com: rcbau
+    opencontrail@lanabrindley.com: rcbau
 
 subscriber_map:
     rcbau: ['loquacity', 'mikalstill']

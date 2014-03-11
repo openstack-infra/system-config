@@ -1,7 +1,7 @@
 # This is a non-standard docs job because it uses SCP instead of FTP.
 # It also uses a non standard build script.
 - job:
-    name: openstack-qa-docs
+    name: opencontrail-qa-docs
     node: bare-precise
 
     builders:

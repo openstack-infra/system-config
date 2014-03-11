@@ -1,7 +1,7 @@
 @import url('/cgit-data/cgit.css');
 
 body {
-  background: url("/static/openstack-page-bkg.jpg") no-repeat scroll 0 0 white !important;
+  background: url("/static/opencontrail-page-bkg.jpg") no-repeat scroll 0 0 white !important;
 }
 
 div#cgit {

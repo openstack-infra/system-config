@@ -7,10 +7,10 @@ cron:
   update-image: '14 2 * * *'
 
 zmq-publishers:
-  - tcp://jenkins-dev.openstack.org:8888
+  - tcp://jenkins-dev.opencontrail.org:8888
 
 gearman-servers:
-  - host: zuul.openstack.org
+  - host: zuul.opencontrail.org
 
 providers:
   - name: hpcloud-az2
@@ -34,7 +34,7 @@ providers:
 targets:
   - name: jenkins-dev
     jenkins:
-      url: 'https://jenkins-dev.openstack.org/'
+      url: 'https://jenkins-dev.opencontrail.org/'
       user: '<%= jenkins_dev_api_user %>'
       apikey: '<%= jenkins_dev_api_key %>'
       credentials-id: '<%= jenkins_dev_credentials_id %>'

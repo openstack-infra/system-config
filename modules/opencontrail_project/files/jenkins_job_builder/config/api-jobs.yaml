@@ -23,7 +23,7 @@
 
 
 - job:
-    name: openstack-api-ref
+    name: opencontrail-api-ref
     concurrent: false
     node: bare-precise
 
@@ -31,14 +31,14 @@
       - gerrit-git-prep
       - tox:
           envlist: 'publishdocs-api'
-          github-org: 'openstack'
+          github-org: 'opencontrail'
           project: 'api-site'
 
     publishers:
       - console-log
       - upload-doc-build-results
       - ftp:
-          site: api.openstack.org
+          site: api.opencontrail.org
           source: 'publish-docs/api-ref/**'
           target: '/'
           remove-prefix: 'publish-docs/api-ref/'
@@ -47,7 +47,7 @@
 # in zuul/layout.yaml specified to only run against master branch.
 # this copies static files from www
 - job:
-    name: openstack-api-site
+    name: opencontrail-api-site
     concurrent: false
     node: bare-precise
 
@@ -56,7 +56,7 @@
 
     publishers:
       - ftp:
-          site: api.openstack.org
+          site: api.opencontrail.org
           source: 'www/**'
           target: ''
           remove-prefix: 'www/'
@@ -71,13 +71,13 @@
 
     builders:
       - gerrit-git-prep
-      - shell: /usr/local/jenkins/slave_scripts/run-xmllint.sh openstack-compute-api-2/src/os-compute-2.wadl
+      - shell: /usr/local/jenkins/slave_scripts/run-xmllint.sh opencontrail-compute-api-2/src/os-compute-2.wadl
 
     publishers:
       - ftp:
-          site: docs.openstack.org
+          site: docs.opencontrail.org
           source: 'target/**'
-          target: 'api/openstack-compute/2/wadl/'
+          target: 'api/opencontrail-compute/2/wadl/'
           remove-prefix: 'target/'
           excludes: '**/*.xml,**/null*'
       - console-log

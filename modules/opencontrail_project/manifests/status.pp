@@ -1,6 +1,6 @@
-# == Class: openstack_project::status
+# == Class: opencontrail_project::status
 #
-class openstack_project::status (
+class opencontrail_project::status (
   $sysadmins = [],
   $gerrit_host,
   $gerrit_ssh_host_key,
@@ -14,14 +14,14 @@ class openstack_project::status (
   $recheck_bot_nick,
 ) {
 
-  class { 'openstack_project::server':
+  class { 'opencontrail_project::server':
     iptables_public_tcp_ports => [22, 80, 443],
     sysadmins                 => $sysadmins,
   }
 
-  include openstack_project
+  include opencontrail_project
   class { 'jenkins::jenkinsuser':
-    ssh_key => $openstack_project::jenkins_ssh_key,
+    ssh_key => $opencontrail_project::jenkins_ssh_key,
   }
 
   include apache
@@ -43,11 +43,11 @@ class openstack_project::status (
   ###########################################################
   # Status - Index
 
-  apache::vhost { 'status.openstack.org':
+  apache::vhost { 'status.opencontrail.org':
     port     => 80,
     priority => '50',
     docroot  => '/srv/static/status',
-    template => 'openstack_project/status.vhost.erb',
+    template => 'opencontrail_project/status.vhost.erb',
     require  => File['/srv/static/status'],
   }
 
@@ -65,19 +65,19 @@ class openstack_project::status (
 
   file { '/srv/static/status/index.html':
     ensure  => present,
-    source  => 'puppet:///modules/openstack_project/status/index.html',
+    source  => 'puppet:///modules/opencontrail_project/status/index.html',
     require => File['/srv/static/status'],
   }
 
   file { '/srv/static/status/favicon.ico':
     ensure  => present,
-    source  => 'puppet:///modules/openstack_project/status/favicon.ico',
+    source  => 'puppet:///modules/opencontrail_project/status/favicon.ico',
     require => File['/srv/static/status'],
   }
 
   file { '/srv/static/status/common.js':
     ensure  => present,
-    source  => 'puppet:///modules/openstack_project/status/common.js',
+    source  => 'puppet:///modules/opencontrail_project/status/common.js',
     require => File['/srv/static/status'],
   }
 
@@ -158,55 +158,55 @@ class openstack_project::status (
 
   file { '/srv/static/status/zuul/index.html':
     ensure  => present,
-    source  => 'puppet:///modules/openstack_project/zuul/status.html',
+    source  => 'puppet:///modules/opencontrail_project/zuul/status.html',
     require => File['/srv/static/status/zuul'],
   }
 
   file { '/srv/static/status/zuul/status.js':
     ensure  => present,
-    source  => 'puppet:///modules/openstack_project/zuul/status.js',
+    source  => 'puppet:///modules/opencontrail_project/zuul/status.js',
     require => File['/srv/static/status/zuul'],
   }
 
   file { '/srv/static/status/zuul/green.png':
     ensure  => present,
-    source  => 'puppet:///modules/openstack_project/zuul/green.png',
+    source  => 'puppet:///modules/opencontrail_project/zuul/green.png',
     require => File['/srv/static/status/zuul'],
   }
 
   file { '/srv/static/status/zuul/red.png':
     ensure  => present,
-    source  => 'puppet:///modules/openstack_project/zuul/red.png',
+    source  => 'puppet:///modules/opencontrail_project/zuul/red.png',
     require => File['/srv/static/status/zuul'],
   }
 
   file { '/srv/static/status/zuul/black.png':
     ensure  => present,
-    source  => 'puppet:///modules/openstack_project/zuul/black.png',
+    source  => 'puppet:///modules/opencontrail_project/zuul/black.png',
     require => File['/srv/static/status/zuul'],
   }
 
   file { '/srv/static/status/zuul/grey.png':
     ensure  => present,
-    source  => 'puppet:///modules/openstack_project/zuul/grey.png',
+    source  => 'puppet:///modules/opencontrail_project/zuul/grey.png',
     require => File['/srv/static/status/zuul'],
   }
 
   file { '/srv/static/status/zuul/line-angle.png':
     ensure  => present,
-    source  => 'puppet:///modules/openstack_project/zuul/line-angle.png',
+    source  => 'puppet:///modules/opencontrail_project/zuul/line-angle.png',
     require => File['/srv/static/status/zuul'],
   }
 
   file { '/srv/static/status/zuul/line-t.png':
     ensure  => present,
-    source  => 'puppet:///modules/openstack_project/zuul/line-t.png',
+    source  => 'puppet:///modules/opencontrail_project/zuul/line-t.png',
     require => File['/srv/static/status/zuul'],
   }
 
   file { '/srv/static/status/zuul/line.png':
     ensure  => present,
-    source  => 'puppet:///modules/openstack_project/zuul/line.png',
+    source  => 'puppet:///modules/opencontrail_project/zuul/line.png',
     require => File['/srv/static/status/zuul'],
   }
 
@@ -217,10 +217,10 @@ class openstack_project::status (
   include reviewday
 
   reviewday::site { 'reviewday':
-    git_url                       => 'git://git.openstack.org/openstack-infra/reviewday',
-    serveradmin                   => 'webmaster@openstack.org',
+    git_url                       => 'git://git.opencontrail.org/opencontrail-infra/reviewday',
+    serveradmin                   => 'webmaster@opencontrail.org',
     httproot                      => '/srv/static/reviewday',
-    gerrit_url                    => 'review.openstack.org',
+    gerrit_url                    => 'review.opencontrail.org',
     gerrit_port                   => '29418',
     gerrit_user                   => 'reviewday',
     reviewday_gerrit_ssh_key      => $gerrit_ssh_host_key,

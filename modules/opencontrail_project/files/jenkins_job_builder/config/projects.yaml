@@ -1,13 +1,13 @@
 - project:
     name: gantt
-    github-org: openstack
+    github-org: opencontrail
     node: bare-precise
-    tarball-site: tarballs.openstack.org
-    doc-publisher-site: docs.openstack.org
+    tarball-site: tarballs.opencontrail.org
+    doc-publisher-site: docs.opencontrail.org
 
     jobs:
       - python-jobs
-      - openstack-publish-jobs
+      - opencontrail-publish-jobs
       - gate-{name}-pylint
       - translation-jobs
 
@@ -16,7 +16,7 @@
     name: mistral
     github-org: stackforge
     node: bare-precise
-    tarball-site: tarballs.openstack.org
+    tarball-site: tarballs.opencontrail.org
 
     jobs:
       - python-jobs
@@ -26,7 +26,7 @@
     name: mistral-extra
     github-org: stackforge
     node: bare-precise
-    tarball-site: tarballs.openstack.org
+    tarball-site: tarballs.opencontrail.org
 
     jobs:
       - python-jobs
@@ -36,7 +36,7 @@
     name: python-mistralclient
     github-org: stackforge
     node: bare-precise
-    tarball-site: tarballs.openstack.org
+    tarball-site: tarballs.opencontrail.org
 
     jobs:
       - python-jobs
@@ -46,7 +46,7 @@
     name: murano-api
     github-org: stackforge
     node: bare-precise
-    tarball-site: tarballs.openstack.org
+    tarball-site: tarballs.opencontrail.org
 
     jobs:
       - python-jobs
@@ -56,7 +56,7 @@
     name: murano-conductor
     github-org: stackforge
     node: bare-precise
-    tarball-site: tarballs.openstack.org
+    tarball-site: tarballs.opencontrail.org
 
     jobs:
       - python-jobs
@@ -66,7 +66,7 @@
     name: murano-dashboard
     github-org: stackforge
     node: bare-precise
-    tarball-site: tarballs.openstack.org
+    tarball-site: tarballs.opencontrail.org
 
     jobs:
       - python-jobs
@@ -75,14 +75,14 @@
 
 - project:
     name: python-ganttclient
-    github-org: openstack
+    github-org: opencontrail
     node: bare-precise
-    tarball-site: tarballs.openstack.org
-    doc-publisher-site: docs.openstack.org
+    tarball-site: tarballs.opencontrail.org
+    doc-publisher-site: docs.opencontrail.org
 
     jobs:
       - python-jobs
-      - openstack-publish-jobs
+      - opencontrail-publish-jobs
       - pypi-jobs
 
 
@@ -90,7 +90,7 @@
     name: python-muranoclient
     github-org: stackforge
     node: bare-precise
-    tarball-site: tarballs.openstack.org
+    tarball-site: tarballs.opencontrail.org
 
     jobs:
       - python-jobs
@@ -101,7 +101,7 @@
     name: murano-common
     github-org: stackforge
     node: bare-precise
-    tarball-site: tarballs.openstack.org
+    tarball-site: tarballs.opencontrail.org
 
     jobs:
       - python-jobs
@@ -112,7 +112,7 @@
     name: murano-repository
     github-org: stackforge
     node: bare-precise
-    tarball-site: tarballs.openstack.org
+    tarball-site: tarballs.opencontrail.org
 
     jobs:
       - python-jobs
@@ -123,7 +123,7 @@
     name: murano-metadataclient
     github-org: stackforge
     node: bare-precise
-    tarball-site: tarballs.openstack.org
+    tarball-site: tarballs.opencontrail.org
 
     jobs:
       - python-jobs
@@ -133,7 +133,7 @@
     name: magnetodb
     github-org: stackforge
     node: bare-precise
-    tarball-site: tarballs.openstack.org
+    tarball-site: tarballs.opencontrail.org
 
     jobs:
       - python-jobs
@@ -143,7 +143,7 @@
     name: climate
     github-org: stackforge
     node: bare-precise
-    tarball-site: tarballs.openstack.org
+    tarball-site: tarballs.opencontrail.org
 
     jobs:
       - python-jobs
@@ -152,7 +152,7 @@
     name: climate-nova
     github-org: stackforge
     node: bare-precise
-    tarball-site: tarballs.openstack.org
+    tarball-site: tarballs.opencontrail.org
 
     jobs:
       - python-jobs
@@ -161,14 +161,14 @@
     name: python-climateclient
     github-org: stackforge
     node: bare-precise
-    tarball-site: tarballs.openstack.org
+    tarball-site: tarballs.opencontrail.org
 
     jobs:
       - python-jobs
 
 - project:
     name: config
-    github-org: openstack-infra
+    github-org: opencontrail-infra
     node: bare-precise
 
     jobs:
@@ -178,7 +178,7 @@
 
 - project:
     name: gitdm
-    github-org: openstack-infra
+    github-org: opencontrail-infra
     node: bare-precise
 
     jobs:
@@ -191,10 +191,10 @@
 
 - project:
     name: savanna
-    github-org: openstack
+    github-org: opencontrail
     node: bare-precise
-    tarball-site: tarballs.openstack.org
-    doc-publisher-site: docs.openstack.org
+    tarball-site: tarballs.opencontrail.org
+    doc-publisher-site: docs.opencontrail.org
 
     jobs:
       - python-jobs
@@ -202,7 +202,7 @@
       - hook-{name}-rtfd
       - pypi-jobs
       - translation-jobs
-      - openstack-publish-jobs
+      - opencontrail-publish-jobs
       - '{pipeline}-tempest-dsvm-savanna-full{branch-designator}':
           pipeline: check
           node: 'devstack-precise || devstack-precise-check'
@@ -221,21 +221,21 @@
 
 - project:
     name: python-savannaclient
-    github-org: openstack
+    github-org: opencontrail
     node: bare-precise
-    tarball-site: tarballs.openstack.org
-    doc-publisher-site: docs.openstack.org
+    tarball-site: tarballs.opencontrail.org
+    doc-publisher-site: docs.opencontrail.org
 
     jobs:
       - python-jobs
       - pypi-jobs
-      - openstack-publish-jobs
+      - opencontrail-publish-jobs
 
 - project:
     name: satori
     github-org: stackforge
     node: bare-precise
-    tarball-site: tarballs.openstack.org
+    tarball-site: tarballs.opencontrail.org
 
     jobs:
       - python-jobs
@@ -244,9 +244,9 @@
 
 - project:
     name: savanna-dashboard
-    github-org: openstack
+    github-org: opencontrail
     node: bare-precise
-    tarball-site: tarballs.openstack.org
+    tarball-site: tarballs.opencontrail.org
 
     jobs:
       - python-jobs
@@ -254,9 +254,9 @@
 
 - project:
     name: savanna-extra
-    github-org: openstack
+    github-org: opencontrail
     node: bare-precise
-    tarball-site: tarballs.openstack.org
+    tarball-site: tarballs.opencontrail.org
 
     jobs:
       - python-jobs
@@ -264,9 +264,9 @@
 
 - project:
     name: savanna-image-elements
-    github-org: openstack
+    github-org: opencontrail
     node: bare-precise
-    tarball-site: tarballs.openstack.org
+    tarball-site: tarballs.opencontrail.org
 
     jobs:
       - python-jobs
@@ -276,7 +276,7 @@
     name: sqlalchemy-migrate
     github-org: stackforge
     node: bare-precise
-    tarball-site: tarballs.openstack.org
+    tarball-site: tarballs.opencontrail.org
 
     jobs:
       - python-jobs
@@ -308,81 +308,81 @@
 
 - project:
     name: ceilometer
-    github-org: openstack
+    github-org: opencontrail
     node: bare-precise
-    tarball-site: tarballs.openstack.org
-    doc-publisher-site: docs.openstack.org
+    tarball-site: tarballs.opencontrail.org
+    doc-publisher-site: docs.opencontrail.org
 
     jobs:
       - python-jobs
       - python-grizzly-bitrot-jobs
       - python-havana-bitrot-jobs
-      - openstack-publish-jobs
+      - opencontrail-publish-jobs
       - translation-jobs
 
 - project:
     name: cinder
-    github-org: openstack
+    github-org: opencontrail
     node: bare-precise
-    tarball-site: tarballs.openstack.org
-    doc-publisher-site: docs.openstack.org
+    tarball-site: tarballs.opencontrail.org
+    doc-publisher-site: docs.opencontrail.org
 
     jobs:
       - python-jobs
       - python-grizzly-bitrot-jobs
       - python-havana-bitrot-jobs
-      - openstack-publish-jobs
+      - opencontrail-publish-jobs
       - gate-{name}-pylint
       - translation-jobs
 
 
 - project:
     name: compute-api
-    github-org: openstack
+    github-org: opencontrail
     node: bare-precise
-    tarball-site: tarballs.openstack.org
-    doc-publisher-site: docs.openstack.org
+    tarball-site: tarballs.opencontrail.org
+    doc-publisher-site: docs.opencontrail.org
 
     jobs:
-      - openstack-doc-jobs
+      - opencontrail-doc-jobs
       - '{name}-tox-doc-{envlist}':
           envlist: publishdocs
 
 
 - project:
     name: hacking
-    github-org: openstack-dev
+    github-org: opencontrail-dev
     node: bare-precise
-    doc-publisher-site: docs.openstack.org
-    tarball-site: tarballs.openstack.org
+    doc-publisher-site: docs.opencontrail.org
+    tarball-site: tarballs.opencontrail.org
 
     jobs:
-      - openstack-publish-jobs
+      - opencontrail-publish-jobs
       - python-jobs
       - pypi-jobs
       - gate-hacking-integration-{target-project}:
-          target-org: openstack
+          target-org: opencontrail
           target-project: nova
 
 
 - project:
     name: pbr
-    github-org: openstack-dev
+    github-org: opencontrail-dev
     node: bare-precise
-    doc-publisher-site: docs.openstack.org
-    tarball-site: tarballs.openstack.org
+    doc-publisher-site: docs.opencontrail.org
+    tarball-site: tarballs.opencontrail.org
 
     jobs:
-      - openstack-publish-jobs
+      - opencontrail-publish-jobs
       - python-jobs
       - pypi-jobs
 
 
 - project:
     name: os-loganalyze
-    github-org: openstack-infra
+    github-org: opencontrail-infra
     node: bare-precise
-    tarball-site: tarballs.openstack.org
+    tarball-site: tarballs.opencontrail.org
 
     jobs:
       - python-jobs
@@ -390,9 +390,9 @@
 
 - project:
     name: gerritbot
-    github-org: openstack-infra
+    github-org: opencontrail-infra
     node: bare-precise
-    tarball-site: tarballs.openstack.org
+    tarball-site: tarballs.opencontrail.org
 
     jobs:
       - python-jobs
@@ -400,9 +400,9 @@
 
 - project:
     name: elastic-recheck
-    github-org: openstack-infra
+    github-org: opencontrail-infra
     node: bare-precise
-    tarball-site: tarballs.openstack.org
+    tarball-site: tarballs.opencontrail.org
 
     jobs:
       - gate-{name}-pep8
@@ -412,9 +412,9 @@
 
 - project:
     name: statusbot
-    github-org: openstack-infra
+    github-org: opencontrail-infra
     node: bare-precise
-    tarball-site: tarballs.openstack.org
+    tarball-site: tarballs.opencontrail.org
 
     jobs:
       - python-jobs
@@ -423,9 +423,9 @@
 
 - project:
     name: gerritlib
-    github-org: openstack-infra
+    github-org: opencontrail-infra
     node: bare-precise
-    tarball-site: tarballs.openstack.org
+    tarball-site: tarballs.opencontrail.org
 
     jobs:
       - gate-{name}-pep8
@@ -435,9 +435,9 @@
 
 - project:
     name: jeepyb
-    github-org: openstack-infra
+    github-org: opencontrail-infra
     node: bare-precise
-    tarball-site: tarballs.openstack.org
+    tarball-site: tarballs.opencontrail.org
 
     jobs:
       - gate-{name}-pep8
@@ -447,9 +447,9 @@
 
 - project:
     name: pypi-mirror
-    github-org: openstack-infra
+    github-org: opencontrail-infra
     node: bare-precise
-    tarball-site: tarballs.openstack.org
+    tarball-site: tarballs.opencontrail.org
 
     jobs:
       - gate-{name}-pep8
@@ -459,9 +459,9 @@
 
 - project:
     name: gear
-    github-org: openstack-infra
+    github-org: opencontrail-infra
     node: bare-precise
-    tarball-site: tarballs.openstack.org
+    tarball-site: tarballs.opencontrail.org
 
     jobs:
       - python-jobs
@@ -471,9 +471,9 @@
 
 - project:
     name: gearman-plugin
-    github-org: openstack-infra
+    github-org: opencontrail-infra
     node: bare-precise
-    tarball-site: tarballs.openstack.org
+    tarball-site: tarballs.opencontrail.org
 
     jobs:
       - jenkins-plugin-jobs
@@ -482,16 +482,16 @@
     name: clouddocs-maven-plugin
     github-org: stackforge
     node: bare-precise
-    tarball-site: tarballs.openstack.org
+    tarball-site: tarballs.opencontrail.org
 
     jobs:
       - maven-plugin-jobs
 
 - project:
     name: zmq-event-publisher
-    github-org: openstack-infra
+    github-org: opencontrail-infra
     node: bare-precise
-    tarball-site: tarballs.openstack.org
+    tarball-site: tarballs.opencontrail.org
 
     jobs:
       - jenkins-plugin-jobs
@@ -499,9 +499,9 @@
 
 - project:
     name: git-review
-    github-org: openstack-infra
+    github-org: opencontrail-infra
     node: bare-precise
-    tarball-site: tarballs.openstack.org
+    tarball-site: tarballs.opencontrail.org
     jobs:
       - python-jobs
       - pypi-jobs
@@ -509,65 +509,65 @@
 
 - project:
     name: glance
-    github-org: openstack
+    github-org: opencontrail
     node: bare-precise
-    tarball-site: tarballs.openstack.org
-    doc-publisher-site: docs.openstack.org
+    tarball-site: tarballs.opencontrail.org
+    doc-publisher-site: docs.opencontrail.org
 
     jobs:
       - python-jobs
       - python-grizzly-bitrot-jobs
       - python-havana-bitrot-jobs
-      - openstack-publish-jobs
+      - opencontrail-publish-jobs
       - translation-jobs
 
 
 - project:
     name: heat
-    github-org: openstack
+    github-org: opencontrail
     node: bare-precise
-    tarball-site: tarballs.openstack.org
-    doc-publisher-site: docs.openstack.org
+    tarball-site: tarballs.opencontrail.org
+    doc-publisher-site: docs.opencontrail.org
 
     jobs:
       - python-jobs
       - python-grizzly-bitrot-jobs
       - python-havana-bitrot-jobs
-      - openstack-publish-jobs
+      - opencontrail-publish-jobs
       - translation-jobs
 
 
 - project:
     name: python-heatclient
-    github-org: openstack
+    github-org: opencontrail
     node: bare-precise
-    tarball-site: tarballs.openstack.org
-    doc-publisher-site: docs.openstack.org
+    tarball-site: tarballs.opencontrail.org
+    doc-publisher-site: docs.opencontrail.org
 
     jobs:
       - python-jobs
-      - openstack-publish-jobs
+      - opencontrail-publish-jobs
       - pypi-jobs
 
 
 - project:
     name: heat-cfntools
-    github-org: openstack
+    github-org: opencontrail
     node: bare-precise
-    tarball-site: tarballs.openstack.org
-    doc-publisher-site: docs.openstack.org
+    tarball-site: tarballs.opencontrail.org
+    doc-publisher-site: docs.opencontrail.org
 
     jobs:
       - python-jobs
-      - openstack-publish-jobs
+      - opencontrail-publish-jobs
       - pypi-jobs
 
 
 - project:
     name: heat-cfnclient
-    github-org: openstack-dev
+    github-org: opencontrail-dev
     node: bare-precise
-    tarball-site: tarballs.openstack.org
+    tarball-site: tarballs.opencontrail.org
 
     jobs:
       - python-jobs
@@ -575,63 +575,63 @@
 
 - project:
     name: horizon
-    github-org: openstack
+    github-org: opencontrail
     node: bare-precise
-    tarball-site: tarballs.openstack.org
-    doc-publisher-site: docs.openstack.org
+    tarball-site: tarballs.opencontrail.org
+    doc-publisher-site: docs.opencontrail.org
 
     jobs:
       - python-jobs
       - python-grizzly-bitrot-jobs
       - python-havana-bitrot-jobs
-      - openstack-publish-jobs
+      - opencontrail-publish-jobs
 
 
 - project:
-    name: django_openstack_auth
-    github-org: openstack
+    name: django_opencontrail_auth
+    github-org: opencontrail
     node: bare-precise
-    tarball-site: tarballs.openstack.org
-    doc-publisher-site: docs.openstack.org
+    tarball-site: tarballs.opencontrail.org
+    doc-publisher-site: docs.opencontrail.org
 
     jobs:
       - python-jobs
-      - openstack-publish-jobs
+      - opencontrail-publish-jobs
       - pypi-jobs
       - translation-jobs
 
 
 - project:
     name: identity-api
-    github-org: openstack
+    github-org: opencontrail
     node: bare-precise
-    tarball-site: tarballs.openstack.org
-    doc-publisher-site: docs.openstack.org
+    tarball-site: tarballs.opencontrail.org
+    doc-publisher-site: docs.opencontrail.org
 
     jobs:
-      - openstack-doc-jobs
+      - opencontrail-doc-jobs
       - '{name}-tox-doc-{envlist}':
           envlist: publishdocs
 
 
 - project:
     name: image-api
-    github-org: openstack
+    github-org: opencontrail
     node: bare-precise
-    tarball-site: tarballs.openstack.org
-    doc-publisher-site: docs.openstack.org
+    tarball-site: tarballs.opencontrail.org
+    doc-publisher-site: docs.opencontrail.org
 
     jobs:
-      - openstack-doc-jobs
+      - opencontrail-doc-jobs
       - '{name}-tox-doc-{envlist}':
           envlist: publishdocs
 
 
 - project:
     name: jenkins-job-builder
-    github-org: openstack-infra
+    github-org: opencontrail-infra
     node: bare-precise
-    tarball-site: tarballs.openstack.org
+    tarball-site: tarballs.opencontrail.org
 
     jobs:
       - python-jobs
@@ -639,37 +639,37 @@
 
 - project:
     name: keystone
-    github-org: openstack
+    github-org: opencontrail
     node: bare-precise
-    tarball-site: tarballs.openstack.org
-    doc-publisher-site: docs.openstack.org
+    tarball-site: tarballs.opencontrail.org
+    doc-publisher-site: docs.opencontrail.org
 
     jobs:
       - python-jobs
       - python-grizzly-bitrot-jobs
       - python-havana-bitrot-jobs
-      - openstack-publish-jobs
+      - opencontrail-publish-jobs
       - translation-jobs
 
 
 - project:
     name: netconn-api
-    github-org: openstack
+    github-org: opencontrail
     node: bare-precise
-    tarball-site: tarballs.openstack.org
-    doc-publisher-site: docs.openstack.org
+    tarball-site: tarballs.opencontrail.org
+    doc-publisher-site: docs.opencontrail.org
 
     jobs:
-      - openstack-doc-jobs
+      - opencontrail-doc-jobs
       - '{name}-tox-doc-{envlist}':
           envlist: publishdocs
 
 
 - project:
     name: nodepool
-    github-org: openstack-infra
+    github-org: opencontrail-infra
     node: bare-precise
-    tarball-site: tarballs.openstack.org
+    tarball-site: tarballs.opencontrail.org
 
     jobs:
       - python-jobs
@@ -678,9 +678,9 @@
 
 - project:
     name: nose-html-output
-    github-org: openstack-infra
+    github-org: opencontrail-infra
     node: bare-precise
-    tarball-site: tarballs.openstack.org
+    tarball-site: tarballs.opencontrail.org
 
     jobs:
       - python-jobs
@@ -689,76 +689,76 @@
 
 - project:
     name: nova
-    github-org: openstack
+    github-org: opencontrail
     node: bare-precise
-    tarball-site: tarballs.openstack.org
-    doc-publisher-site: docs.openstack.org
+    tarball-site: tarballs.opencontrail.org
+    doc-publisher-site: docs.opencontrail.org
 
     jobs:
       - python-jobs
       - python-grizzly-bitrot-jobs
       - python-havana-bitrot-jobs
-      - openstack-publish-jobs
+      - opencontrail-publish-jobs
       - gate-{name}-pylint
       - translation-jobs
 
 
 - project:
     name: object-api
-    github-org: openstack
+    github-org: opencontrail
     node: bare-precise
-    tarball-site: tarballs.openstack.org
-    doc-publisher-site: docs.openstack.org
+    tarball-site: tarballs.opencontrail.org
+    doc-publisher-site: docs.opencontrail.org
 
     jobs:
-      - openstack-doc-jobs
+      - opencontrail-doc-jobs
       - '{name}-tox-doc-{envlist}':
           envlist: publishdocs
 
 
 - project:
     name: oslosphinx
-    github-org: openstack
+    github-org: opencontrail
     node: bare-precise
-    tarball-site: tarballs.openstack.org
-    doc-publisher-site: docs.openstack.org
+    tarball-site: tarballs.opencontrail.org
+    doc-publisher-site: docs.opencontrail.org
 
     jobs:
       - python-jobs
-      - openstack-publish-jobs
+      - opencontrail-publish-jobs
       - pypi-jobs
 
 
 - project:
     name: oslo.config
-    github-org: openstack
+    github-org: opencontrail
     node: bare-precise
-    tarball-site: tarballs.openstack.org
-    doc-publisher-site: docs.openstack.org
+    tarball-site: tarballs.opencontrail.org
+    doc-publisher-site: docs.opencontrail.org
 
     jobs:
       - python-jobs
-      - openstack-publish-jobs
+      - opencontrail-publish-jobs
       - pypi-jobs
 
 
 - project:
     name: oslo.messaging
-    github-org: openstack
+    github-org: opencontrail
     node: bare-precise
-    tarball-site: tarballs.openstack.org
-    doc-publisher-site: docs.openstack.org
+    tarball-site: tarballs.opencontrail.org
+    doc-publisher-site: docs.opencontrail.org
 
     jobs:
       - python-jobs
-      - openstack-publish-jobs
+      - opencontrail-publish-jobs
       - pypi-jobs
 
 - project:
     name: oslo.rootwrap
-    github-org: openstack
+    github-org: opencontrail
     node: bare-precise
-    tarball-site: tarballs.openstack.org
+    tarball-site: tarballs.opencontrail.org
 
     jobs:
       - python-jobs
@@ -766,170 +766,170 @@
 
 - project:
     name: oslo.test
-    github-org: openstack
+    github-org: opencontrail
     node: bare-precise
-    tarball-site: tarballs.openstack.org
-    doc-publisher-site: docs.openstack.org
+    tarball-site: tarballs.opencontrail.org
+    doc-publisher-site: docs.opencontrail.org
 
     jobs:
       - python-jobs
-      - openstack-publish-jobs
+      - opencontrail-publish-jobs
       - pypi-jobs
 
 - project:
     name: oslo.version
-    github-org: openstack
+    github-org: opencontrail
     node: bare-precise
-    tarball-site: tarballs.openstack.org
-    doc-publisher-site: docs.openstack.org
+    tarball-site: tarballs.opencontrail.org
+    doc-publisher-site: docs.opencontrail.org
 
     jobs:
       - python-jobs
-      - openstack-publish-jobs
+      - opencontrail-publish-jobs
       - pypi-jobs
 
 
 - project:
     name: oslo.vmware
-    github-org: openstack
+    github-org: opencontrail
     node: bare-precise
-    tarball-site: tarballs.openstack.org
-    doc-publisher-site: docs.openstack.org
+    tarball-site: tarballs.opencontrail.org
+    doc-publisher-site: docs.opencontrail.org
 
     jobs:
       - python-jobs
-      - openstack-publish-jobs
+      - opencontrail-publish-jobs
       - pypi-jobs
 
 
 - project:
     name: oslo-incubator
-    github-org: openstack
+    github-org: opencontrail
     node: bare-precise
-    tarball-site: tarballs.openstack.org
-    doc-publisher-site: docs.openstack.org
+    tarball-site: tarballs.opencontrail.org
+    doc-publisher-site: docs.opencontrail.org
 
     jobs:
       - python-jobs
-      - openstack-publish-jobs
+      - opencontrail-publish-jobs
 
 
 - project:
     name: python-ceilometerclient
-    github-org: openstack
+    github-org: opencontrail
     node: bare-precise
-    tarball-site: tarballs.openstack.org
-    doc-publisher-site: docs.openstack.org
+    tarball-site: tarballs.opencontrail.org
+    doc-publisher-site: docs.opencontrail.org
 
     jobs:
       - python-jobs
-      - openstack-publish-jobs
+      - opencontrail-publish-jobs
       - pypi-jobs
 
 
 - project:
     name: python-cinderclient
-    github-org: openstack
+    github-org: opencontrail
     node: bare-precise
-    tarball-site: tarballs.openstack.org
-    doc-publisher-site: docs.openstack.org
+    tarball-site: tarballs.opencontrail.org
+    doc-publisher-site: docs.opencontrail.org
 
     jobs:
       - python-jobs
-      - openstack-publish-jobs
+      - opencontrail-publish-jobs
       - pypi-jobs
 
 
 - project:
     name: python-glanceclient
-    github-org: openstack
+    github-org: opencontrail
     node: bare-precise
-    tarball-site: tarballs.openstack.org
-    doc-publisher-site: docs.openstack.org
+    tarball-site: tarballs.opencontrail.org
+    doc-publisher-site: docs.opencontrail.org
 
     jobs:
       - python-jobs
-      - openstack-publish-jobs
+      - opencontrail-publish-jobs
       - pypi-jobs
 
 
 - project:
     name: python-keystoneclient
-    github-org: openstack
+    github-org: opencontrail
     node: bare-precise
-    tarball-site: tarballs.openstack.org
-    doc-publisher-site: docs.openstack.org
+    tarball-site: tarballs.opencontrail.org
+    doc-publisher-site: docs.opencontrail.org
 
     jobs:
       - python-jobs
-      - openstack-publish-jobs
+      - opencontrail-publish-jobs
       - pypi-jobs
 
 
 - project:
     name: python-novaclient
-    github-org: openstack
+    github-org: opencontrail
     node: bare-precise
-    tarball-site: tarballs.openstack.org
-    doc-publisher-site: docs.openstack.org
+    tarball-site: tarballs.opencontrail.org
+    doc-publisher-site: docs.opencontrail.org
 
     jobs:
       - python-jobs
-      - openstack-publish-jobs
+      - opencontrail-publish-jobs
       - pypi-jobs
 
 
 - project:
-    name: python-openstackclient
-    github-org: openstack
+    name: python-opencontrailclient
+    github-org: opencontrail
     node: bare-precise
-    tarball-site: tarballs.openstack.org
-    doc-publisher-site: docs.openstack.org
+    tarball-site: tarballs.opencontrail.org
+    doc-publisher-site: docs.opencontrail.org
 
     jobs:
       - python-jobs
-      - openstack-publish-jobs
+      - opencontrail-publish-jobs
       - pypi-jobs
 
 
 - project:
     name: python-neutronclient
-    github-org: openstack
+    github-org: opencontrail
     node: bare-precise
-    tarball-site: tarballs.openstack.org
-    doc-publisher-site: docs.openstack.org
+    tarball-site: tarballs.opencontrail.org
+    doc-publisher-site: docs.opencontrail.org
 
     jobs:
       - python-jobs
-      - openstack-publish-jobs
+      - opencontrail-publish-jobs
       - pypi-jobs
 
 
 - project:
     name: python-swiftclient
-    github-org: openstack
+    github-org: opencontrail
     node: bare-precise
-    tarball-site: tarballs.openstack.org
-    doc-publisher-site: docs.openstack.org
+    tarball-site: tarballs.opencontrail.org
+    doc-publisher-site: docs.opencontrail.org
 
     jobs:
       - python-jobs
-      - openstack-publish-jobs
+      - opencontrail-publish-jobs
       - pypi-jobs
 
 
 - project:
     name: neutron
-    github-org: openstack
+    github-org: opencontrail
     node: bare-precise
-    tarball-site: tarballs.openstack.org
-    doc-publisher-site: docs.openstack.org
+    tarball-site: tarballs.opencontrail.org
+    doc-publisher-site: docs.opencontrail.org
 
     jobs:
       - python-jobs
       - python-grizzly-bitrot-jobs
       - python-havana-bitrot-jobs
-      - openstack-publish-jobs
+      - opencontrail-publish-jobs
       - translation-jobs
       - '{pipeline}-neutron-dsvm-functional{branch-designator}':
           pipeline: check
@@ -940,33 +940,33 @@
 
 - project:
     name: trove
-    github-org: openstack
-    tarball-site: tarballs.openstack.org
-    doc-publisher-site: docs.openstack.org
+    github-org: opencontrail
+    tarball-site: tarballs.opencontrail.org
+    doc-publisher-site: docs.opencontrail.org
     node: bare-precise
 
     jobs:
       - python-jobs
-      - openstack-publish-jobs
+      - opencontrail-publish-jobs
       - translation-jobs
 
 - project:
     name: python-troveclient
-    github-org: openstack
-    tarball-site: tarballs.openstack.org
-    doc-publisher-site: docs.openstack.org
+    github-org: opencontrail
+    tarball-site: tarballs.opencontrail.org
+    doc-publisher-site: docs.opencontrail.org
     node: bare-precise
 
     jobs:
       - python-jobs
-      - openstack-publish-jobs
+      - opencontrail-publish-jobs
       - pypi-jobs
 
 
 - project:
     name: libra
     github-org: stackforge
-    tarball-site: tarballs.openstack.org
+    tarball-site: tarballs.opencontrail.org
     node: bare-precise
 
     jobs:
@@ -976,7 +976,7 @@
 - project:
     name: python-libraclient
     github-org: stackforge
-    tarball-site: tarballs.openstack.org
+    tarball-site: tarballs.opencontrail.org
     node: bare-precise
 
     jobs:
@@ -987,7 +987,7 @@
 - project:
     name: healthnmon
     github-org: stackforge
-    tarball-site: tarballs.openstack.org
+    tarball-site: tarballs.opencontrail.org
     node: bare-precise
 
     jobs:
@@ -995,19 +995,19 @@
 
 - project:
     name: marconi
-    github-org: openstack
-    tarball-site: tarballs.openstack.org
-    doc-publisher-site: docs.openstack.org
+    github-org: opencontrail
+    tarball-site: tarballs.opencontrail.org
+    doc-publisher-site: docs.opencontrail.org
     node: bare-precise
 
     jobs:
       - python-jobs
-      - openstack-publish-jobs
+      - opencontrail-publish-jobs
 
 - project:
     name: python-marconiclient
-    github-org: openstack
-    tarball-site: tarballs.openstack.org
+    github-org: opencontrail
+    tarball-site: tarballs.opencontrail.org
     node: bare-precise
 
     jobs:
@@ -1018,7 +1018,7 @@
     name: designate
     github-org: stackforge
     node: bare-precise
-    tarball-site: tarballs.openstack.org
+    tarball-site: tarballs.opencontrail.org
 
     jobs:
       - python-jobs
@@ -1030,7 +1030,7 @@
     name: billingstack
     github-org: stackforge
     node: bare-precise
-    tarball-site: tarballs.openstack.org
+    tarball-site: tarballs.opencontrail.org
 
     jobs:
       - python-jobs
@@ -1042,7 +1042,7 @@
     name: bindep
     github-org: stackforge
     node: bare-precise
-    tarball-site: tarballs.openstack.org
+    tarball-site: tarballs.opencontrail.org
 
     jobs:
       - python-jobs
@@ -1053,7 +1053,7 @@
     name: packstack
     github-org: stackforge
     node: bare-precise
-    tarball-site: tarballs.openstack.org
+    tarball-site: tarballs.opencontrail.org
 
     jobs:
       - python-jobs
@@ -1063,7 +1063,7 @@
     name: python-designateclient
     github-org: stackforge
     node: bare-precise
-    tarball-site: tarballs.openstack.org
+    tarball-site: tarballs.opencontrail.org
 
     jobs:
       - python-jobs
@@ -1075,7 +1075,7 @@
     name: bufunfa
     github-org: stackforge
     node: bare-precise
-    tarball-site: tarballs.openstack.org
+    tarball-site: tarballs.opencontrail.org
 
     jobs:
       - python-jobs
@@ -1084,9 +1084,9 @@
 
 - project:
     name: reviewday
-    github-org: openstack-infra
+    github-org: opencontrail-infra
     node: bare-precise
-    tarball-site: tarballs.openstack.org
+    tarball-site: tarballs.opencontrail.org
 
     jobs:
       - python-jobs
@@ -1095,10 +1095,10 @@
 
 - project:
     name: reviewstats
-    github-org: openstack-infra
+    github-org: opencontrail-infra
     node: bare-precise
-    tarball-site: tarballs.openstack.org
-    doc-publisher-site: docs.openstack.org
+    tarball-site: tarballs.opencontrail.org
+    doc-publisher-site: docs.opencontrail.org
 
     jobs:
       - python-jobs
@@ -1107,9 +1107,9 @@
 
 - project:
     name: bugdaystats
-    github-org: openstack-infra
+    github-org: opencontrail-infra
     node: bare-precise
-    tarball-site: tarballs.openstack.org
+    tarball-site: tarballs.opencontrail.org
 
     jobs:
       - python-jobs
@@ -1117,10 +1117,10 @@
 
 - project:
     name: requirements
-    github-org: openstack
+    github-org: opencontrail
     node: bare-precise
-    tarball-site: tarballs.openstack.org
-    doc-publisher-site: docs.openstack.org
+    tarball-site: tarballs.opencontrail.org
+    doc-publisher-site: docs.opencontrail.org
 
     jobs:
       - gate-{name}-pep8
@@ -1130,9 +1130,9 @@
 
 - project:
     name: storyboard
-    github-org: openstack-infra
+    github-org: opencontrail-infra
     node: bare-precise
-    tarball-site: tarballs.openstack.org
+    tarball-site: tarballs.opencontrail.org
 
     jobs:
       - python-jobs
@@ -1141,9 +1141,9 @@
 
 - project:
     name: storyboard-webclient
-    github-org: openstack-infra
+    github-org: opencontrail-infra
     node: bare-precise
-    tarball-site: tarballs.openstack.org
+    tarball-site: tarballs.opencontrail.org
 
     jobs:
       - gate-{name}-js-unittests
@@ -1155,14 +1155,14 @@
 
 - project:
     name: swift
-    github-org: openstack
+    github-org: opencontrail
     node: bare-precise
-    tarball-site: tarballs.openstack.org
-    doc-publisher-site: docs.openstack.org
+    tarball-site: tarballs.opencontrail.org
+    doc-publisher-site: docs.opencontrail.org
 
     jobs:
       - python-jobs
-      - openstack-publish-jobs
+      - opencontrail-publish-jobs
       - '{pipeline}-swift-dsvm-functional{branch-designator}':
           pipeline: gate
           node: devstack-precise
@@ -1183,14 +1183,14 @@
 
 - project:
     name: swift-bench
-    github-org: openstack
+    github-org: opencontrail
     node: bare-precise
-    tarball-site: tarballs.openstack.org
-    doc-publisher-site: docs.openstack.org
+    tarball-site: tarballs.opencontrail.org
+    doc-publisher-site: docs.opencontrail.org
 
     jobs:
       - python-jobs
-      - openstack-publish-jobs
+      - opencontrail-publish-jobs
       - pypi-jobs
 
 
@@ -1248,7 +1248,7 @@
 
 - project:
     name: devstack
-    github-org: openstack-dev
+    github-org: opencontrail-dev
     node: bare-precise
 
     jobs:
@@ -1267,21 +1267,21 @@
 
 - project:
     name: tempest
-    github-org: openstack
+    github-org: opencontrail
     node: bare-precise
-    tarball-site: tarballs.openstack.org
-    doc-publisher-site: docs.openstack.org
+    tarball-site: tarballs.opencontrail.org
+    doc-publisher-site: docs.opencontrail.org
 
     jobs:
       - python-jobs
-      - openstack-publish-jobs
+      - opencontrail-publish-jobs
 
 
 - project:
     name: zuul
-    github-org: openstack-infra
+    github-org: opencontrail-infra
     node: bare-precise
-    tarball-site: tarballs.openstack.org
+    tarball-site: tarballs.opencontrail.org
 
     jobs:
       - python-jobs
@@ -1292,16 +1292,16 @@
     name: pyghmi
     github-org: stackforge
     node: bare-precise
-    tarball-site: tarballs.openstack.org
+    tarball-site: tarballs.opencontrail.org
 
     jobs:
       - python-jobs
 
 - project:
     name: diskimage-builder
-    github-org: openstack
+    github-org: opencontrail
     node: bare-precise
-    tarball-site: tarballs.openstack.org
+    tarball-site: tarballs.opencontrail.org
 
     jobs:
       - python-jobs
@@ -1309,9 +1309,9 @@
 
 - project:
     name: os-apply-config
-    github-org: openstack
+    github-org: opencontrail
     node: bare-precise
-    tarball-site: tarballs.openstack.org
+    tarball-site: tarballs.opencontrail.org
 
     jobs:
       - python-jobs
@@ -1319,9 +1319,9 @@
 
 - project:
     name: os-cloud-config
-    github-org: openstack
+    github-org: opencontrail
     node: bare-precise
-    tarball-site: tarballs.openstack.org
+    tarball-site: tarballs.opencontrail.org
 
     jobs:
       - python-jobs
@@ -1329,9 +1329,9 @@
 
 - project:
     name: os-collect-config
-    github-org: openstack
+    github-org: opencontrail
     node: bare-precise
-    tarball-site: tarballs.openstack.org
+    tarball-site: tarballs.opencontrail.org
 
     jobs:
       - python-jobs
@@ -1339,9 +1339,9 @@
 
 - project:
     name: os-refresh-config
-    github-org: openstack
+    github-org: opencontrail
     node: bare-precise
-    tarball-site: tarballs.openstack.org
+    tarball-site: tarballs.opencontrail.org
 
     jobs:
       - python-jobs
@@ -1349,18 +1349,18 @@
 
 - project:
     name: tripleo-heat-templates
-    github-org: openstack
+    github-org: opencontrail
     node: bare-precise
-    tarball-site: tarballs.openstack.org
+    tarball-site: tarballs.opencontrail.org
 
     jobs:
       - python-jobs
 
 - project:
     name: tripleo-image-elements
-    github-org: openstack
+    github-org: opencontrail
     node: bare-precise
-    tarball-site: tarballs.openstack.org
+    tarball-site: tarballs.opencontrail.org
 
     jobs:
       - python-jobs
@@ -1368,20 +1368,20 @@
 
 - project:
     name: tripleo-incubator
-    github-org: openstack
+    github-org: opencontrail
     node: bare-precise
-    doc-publisher-site: docs.openstack.org
-    tarball-site: tarballs.openstack.org
+    doc-publisher-site: docs.opencontrail.org
+    tarball-site: tarballs.opencontrail.org
 
     jobs:
       - gate-{name}-docs
-      - openstack-publish-jobs
+      - opencontrail-publish-jobs
 
 - project:
     name: puppet-glance
     github-org: stackforge
     node: bare-precise
-    tarball-site: tarballs.openstack.org
+    tarball-site: tarballs.opencontrail.org
 
     jobs:
       - gate-{name}-puppet-lint
@@ -1392,7 +1392,7 @@
     name: puppet-keystone
     github-org: stackforge
     node: bare-precise
-    tarball-site: tarballs.openstack.org
+    tarball-site: tarballs.opencontrail.org
 
     jobs:
       - gate-{name}-puppet-lint
@@ -1403,7 +1403,7 @@
     name: puppet-ceilometer
     github-org: stackforge
     node: bare-precise
-    tarball-site: tarballs.openstack.org
+    tarball-site: tarballs.opencontrail.org
 
     jobs:
       - gate-{name}-puppet-lint
@@ -1414,7 +1414,7 @@
     name: puppet-cinder
     github-org: stackforge
     node: bare-precise
-    tarball-site: tarballs.openstack.org
+    tarball-site: tarballs.opencontrail.org
 
     jobs:
       - gate-{name}-puppet-lint
@@ -1425,7 +1425,7 @@
     name: puppet-heat
     github-org: stackforge
     node: bare-precise
-    tarball-site: tarballs.openstack.org
+    tarball-site: tarballs.opencontrail.org
 
     jobs:
       - gate-{name}-puppet-lint
@@ -1436,7 +1436,7 @@
     name: puppet-ironic
     github-org: stackforge
     node: bare-precise
-    tarball-site: tarballs.openstack.org
+    tarball-site: tarballs.opencontrail.org
 
     jobs:
       - gate-{name}-puppet-lint
@@ -1447,7 +1447,7 @@
     name: puppet-nova
     github-org: stackforge
     node: bare-precise
-    tarball-site: tarballs.openstack.org
+    tarball-site: tarballs.opencontrail.org
 
     jobs:
       - gate-{name}-puppet-lint
@@ -1458,7 +1458,7 @@
     name: puppet-horizon
     github-org: stackforge
     node: bare-precise
-    tarball-site: tarballs.openstack.org
+    tarball-site: tarballs.opencontrail.org
 
     jobs:
       - gate-{name}-puppet-lint
@@ -1466,10 +1466,10 @@
       - puppet-module-unit
 
 - project:
-    name: puppet-openstack
+    name: puppet-opencontrail
     github-org: stackforge
     node: bare-precise
-    tarball-site: tarballs.openstack.org
+    tarball-site: tarballs.opencontrail.org
 
     jobs:
       - gate-{name}-puppet-lint
@@ -1480,7 +1480,7 @@
     name: puppet-savanna
     github-org: stackforge
     node: bare-precise
-    tarball-site: tarballs.openstack.org
+    tarball-site: tarballs.opencontrail.org
 
     jobs:
       - gate-{name}-puppet-lint
@@ -1491,7 +1491,7 @@
     name: savanna-ci-config
     github-org: stackforge
     node: bare-precise
-    tarball-site: tarballs.openstack.org
+    tarball-site: tarballs.opencontrail.org
 
     jobs:
       - gate-{name}-pep8
@@ -1500,7 +1500,7 @@
     name: savanna-guestagent
     github-org: stackforge
     node: bare-precise
-    tarball-site: tarballs.openstack.org
+    tarball-site: tarballs.opencontrail.org
 
     jobs:
       - python-jobs
@@ -1510,7 +1510,7 @@
     name: puppet-swift
     github-org: stackforge
     node: bare-precise
-    tarball-site: tarballs.openstack.org
+    tarball-site: tarballs.opencontrail.org
 
     jobs:
       - gate-{name}-puppet-lint
@@ -1521,7 +1521,7 @@
     name: puppet-tempest
     github-org: stackforge
     node: bare-precise
-    tarball-site: tarballs.openstack.org
+    tarball-site: tarballs.opencontrail.org
 
     jobs:
       - gate-{name}-puppet-lint
@@ -1532,7 +1532,7 @@
     name: puppet-neutron
     github-org: stackforge
     node: bare-precise
-    tarball-site: tarballs.openstack.org
+    tarball-site: tarballs.opencontrail.org
 
     jobs:
       - gate-{name}-puppet-lint
@@ -1543,7 +1543,7 @@
     name: puppet-vswitch
     github-org: stackforge
     node: bare-precise
-    tarball-site: tarballs.openstack.org
+    tarball-site: tarballs.opencontrail.org
 
     jobs:
       - gate-{name}-puppet-lint
@@ -1554,7 +1554,7 @@
     name: puppet-ceph
     github-org: stackforge
     node: bare-precise
-    tarball-site: tarballs.openstack.org
+    tarball-site: tarballs.opencontrail.org
 
     jobs:
       - gate-{name}-puppet-lint
@@ -1565,7 +1565,7 @@
     name: puppet-designate
     github-org: stackforge
     node: bare-precise
-    tarball-site: tarballs.openstack.org
+    tarball-site: tarballs.opencontrail.org
 
     jobs:
       - gate-{name}-puppet-lint
@@ -1573,25 +1573,15 @@
       - puppet-module-unit
 
 - project:
-    name: openstack-chef-repo
+    name: opencontrail-chef-repo
     github-org: stackforge
     node: bare-precise
 
     jobs:
-      - gate-openstack-chef-repo
+      - gate-opencontrail-chef-repo
 
 - project:
-    name: cookbook-openstack-common
-    github-org: stackforge
-    node: bare-precise
-
-    jobs:
-      - gate-{name}-chef-lint
-      - gate-{name}-chef-style
-      - gate-{name}-chef-unit
-
-- project:
-    name: cookbook-openstack-compute
+    name: cookbook-opencontrail-common
     github-org: stackforge
     node: bare-precise
 
@@ -1601,7 +1591,7 @@
       - gate-{name}-chef-unit
 
 - project:
-    name: cookbook-openstack-block-storage
+    name: cookbook-opencontrail-compute
     github-org: stackforge
     node: bare-precise
 
@@ -1611,7 +1601,7 @@
       - gate-{name}-chef-unit
 
 - project:
-    name: cookbook-openstack-metering
+    name: cookbook-opencontrail-block-storage
     github-org: stackforge
     node: bare-precise
 
@@ -1621,7 +1611,7 @@
       - gate-{name}-chef-unit
 
 - project:
-    name: cookbook-openstack-network
+    name: cookbook-opencontrail-metering
     github-org: stackforge
     node: bare-precise
 
@@ -1631,7 +1621,7 @@
       - gate-{name}-chef-unit
 
 - project:
-    name: cookbook-openstack-object-storage
+    name: cookbook-opencontrail-network
     github-org: stackforge
     node: bare-precise
 
@@ -1641,7 +1631,7 @@
       - gate-{name}-chef-unit
 
 - project:
-    name: cookbook-openstack-dashboard
+    name: cookbook-opencontrail-object-storage
     github-org: stackforge
     node: bare-precise
 
@@ -1651,7 +1641,7 @@
       - gate-{name}-chef-unit
 
 - project:
-    name: cookbook-openstack-image
+    name: cookbook-opencontrail-dashboard
     github-org: stackforge
     node: bare-precise
 
@@ -1661,7 +1651,7 @@
       - gate-{name}-chef-unit
 
 - project:
-    name: cookbook-openstack-identity
+    name: cookbook-opencontrail-image
     github-org: stackforge
     node: bare-precise
 
@@ -1671,7 +1661,7 @@
       - gate-{name}-chef-unit
 
 - project:
-    name: cookbook-openstack-orchestration
+    name: cookbook-opencontrail-identity
     github-org: stackforge
     node: bare-precise
 
@@ -1681,7 +1671,7 @@
       - gate-{name}-chef-unit
 
 - project:
-    name: cookbook-openstack-ops-database
+    name: cookbook-opencontrail-orchestration
     github-org: stackforge
     node: bare-precise
 
@@ -1691,7 +1681,7 @@
       - gate-{name}-chef-unit
 
 - project:
-    name: cookbook-openstack-ops-messaging
+    name: cookbook-opencontrail-ops-database
     github-org: stackforge
     node: bare-precise
 
@@ -1701,7 +1691,17 @@
       - gate-{name}-chef-unit
 
 - project:
-    name: cookbook-openstack-integration-test
+    name: cookbook-opencontrail-ops-messaging
+    github-org: stackforge
+    node: bare-precise
+
+    jobs:
+      - gate-{name}-chef-lint
+      - gate-{name}-chef-style
+      - gate-{name}-chef-unit
+
+- project:
+    name: cookbook-opencontrail-integration-test
     github-org: stackforge
     node: bare-precise
 
@@ -1712,14 +1712,14 @@
 
 - project:
     name: ironic
-    github-org: openstack
+    github-org: opencontrail
     node: bare-precise
-    tarball-site: tarballs.openstack.org
-    doc-publisher-site: docs.openstack.org
+    tarball-site: tarballs.opencontrail.org
+    doc-publisher-site: docs.opencontrail.org
 
     jobs:
       - python-jobs
-      - openstack-publish-jobs
+      - opencontrail-publish-jobs
       - translation-jobs
       - '{pipeline}-tempest-dsvm-ironic{branch-designator}':
           pipeline: check
@@ -1734,10 +1734,10 @@
 
 - project:
     name: python-ironicclient
-    github-org: openstack
+    github-org: opencontrail
     node: bare-precise
-    tarball-site: tarballs.openstack.org
-    doc-publisher-site: docs.openstack.org
+    tarball-site: tarballs.opencontrail.org
+    doc-publisher-site: docs.opencontrail.org
 
     jobs:
       - python-jobs
@@ -1755,7 +1755,7 @@
     name: barbican
     github-org: stackforge
     node: bare-precise
-    tarball-site: tarballs.openstack.org
+    tarball-site: tarballs.opencontrail.org
 
     jobs:
       - python-jobs
@@ -1764,7 +1764,7 @@
     name: python-barbicanclient
     github-org: stackforge
     node: bare-precise
-    tarball-site: tarballs.openstack.org
+    tarball-site: tarballs.opencontrail.org
 
     jobs:
       - python-jobs
@@ -1772,14 +1772,14 @@
 
 - project:
     name: taskflow
-    github-org: openstack
+    github-org: opencontrail
     node: bare-precise
-    tarball-site: tarballs.openstack.org
-    doc-publisher-site: docs.openstack.org
+    tarball-site: tarballs.opencontrail.org
+    doc-publisher-site: docs.opencontrail.org
 
     jobs:
       - python-jobs
-      - openstack-publish-jobs
+      - opencontrail-publish-jobs
       - pypi-jobs
       - gate-{name}-tox-{envlist}:
           envlist: py26-sa7-mysql
@@ -1788,7 +1788,7 @@
           envlist: py27-sa8-mysql
 
 - project:
-    name: cl-openstack-client
+    name: cl-opencontrail-client
     github-org: stackforge
     node: bare-precise
 
@@ -1799,7 +1799,7 @@
     name: stackalytics
     github-org: stackforge
     node: bare-precise
-    tarball-site: tarballs.openstack.org
+    tarball-site: tarballs.opencontrail.org
 
     jobs:
       - python-jobs
@@ -1809,7 +1809,7 @@
     name: anvil
     github-org: stackforge
     node: bare-precise
-    tarball-site: tarballs.openstack.org
+    tarball-site: tarballs.opencontrail.org
 
     jobs:
       - python-jobs
@@ -1817,9 +1817,9 @@
 
 - project:
     name: pycadf
-    github-org: openstack
+    github-org: opencontrail
     node: bare-precise
-    tarball-site: tarballs.openstack.org
+    tarball-site: tarballs.opencontrail.org
 
     jobs:
       - python-jobs
@@ -1829,7 +1829,7 @@
     name: pecan
     github-org: stackforge
     node: bare-precise
-    tarball-site: tarballs.openstack.org
+    tarball-site: tarballs.opencontrail.org
 
     jobs:
       - python-jobs
@@ -1850,10 +1850,10 @@
 
 - project:
     name: stevedore
-    github-org: openstack
+    github-org: opencontrail
     node: bare-precise
     rtfd-id: 4157
-    tarball-site: tarballs.openstack.org
+    tarball-site: tarballs.opencontrail.org
 
     jobs:
       - python-jobs
@@ -1862,9 +1862,9 @@
 
 - project:
     name: cliff
-    github-org: openstack
+    github-org: opencontrail
     node: bare-precise
-    tarball-site: tarballs.openstack.org
+    tarball-site: tarballs.opencontrail.org
 
     jobs:
       - python-jobs
@@ -1875,15 +1875,15 @@
       - gate-{name}-tox-{envlist}:
           envlist: neutronclient-tip
       - gate-{name}-tox-{envlist}:
-          envlist: openstackclient-stable
+          envlist: opencontrailclient-stable
       - gate-{name}-tox-{envlist}:
-          envlist: openstackclient-tip
+          envlist: opencontrailclient-tip
 
 - project:
     name: python-tuskarclient
-    github-org: openstack
-    tarball-site: tarballs.openstack.org
-    doc-publisher-site: docs.openstack.org
+    github-org: opencontrail
+    tarball-site: tarballs.opencontrail.org
+    doc-publisher-site: docs.opencontrail.org
     node: bare-precise
 
     jobs:
@@ -1894,7 +1894,7 @@
     name: wsme
     github-org: stackforge
     node: bare-precise
-    tarball-site: tarballs.openstack.org
+    tarball-site: tarballs.opencontrail.org
 
     jobs:
       - python-jobs
@@ -1902,9 +1902,9 @@
 
 - project:
     name: tuskar
-    github-org: openstack
-    tarball-site: tarballs.openstack.org
-    doc-publisher-site: docs.openstack.org
+    github-org: opencontrail
+    tarball-site: tarballs.opencontrail.org
+    doc-publisher-site: docs.opencontrail.org
     node: bare-precise
 
     jobs:
@@ -1913,8 +1913,8 @@
 
 - project:
     name: tuskar-ui
-    github-org: openstack
-    tarball-site: tarballs.openstack.org
+    github-org: opencontrail
+    tarball-site: tarballs.opencontrail.org
     node: bare-precise
 
     jobs:
@@ -1925,7 +1925,7 @@
     name: rally
     github-org: stackforge
     node: bare-precise
-    tarball-site: tarballs.openstack.org
+    tarball-site: tarballs.opencontrail.org
 
     jobs:
       - python-jobs
@@ -1934,15 +1934,15 @@
     name: python-rallyclient
     github-org: stackforge
     node: bare-precise
-    tarball-site: tarballs.openstack.org
+    tarball-site: tarballs.opencontrail.org
 
     jobs:
       - python-jobs
 
 
 - project:
-    name: openstack-manuals
-    github-org: openstack
+    name: opencontrail-manuals
+    github-org: opencontrail
     node: bare-precise
 
     manual:
@@ -1966,75 +1966,75 @@
         - ja
 
     jobs:
-      - openstack-doc-jobs
+      - opencontrail-doc-jobs
 
-      - 'openstack-{manual}'
+      - 'opencontrail-{manual}'
 
-      - openstack-install-deploy-guide-{distribution}:
+      - opencontrail-install-deploy-guide-{distribution}:
           distribution: debian
           system: apt-debian
           profileos: "debian"
 
-      - openstack-install-deploy-guide-{distribution}:
+      - opencontrail-install-deploy-guide-{distribution}:
           distribution: fedora
           system: yum
           profileos: "centos;fedora;rhel"
 
-      - openstack-install-deploy-guide-{distribution}:
+      - opencontrail-install-deploy-guide-{distribution}:
           distribution: opensuse
           system: zypper
           profileos: "opensuse;sles"
 
-      - openstack-install-deploy-guide-{distribution}:
+      - opencontrail-install-deploy-guide-{distribution}:
           distribution: ubuntu
           system: apt
           profileos: "ubuntu"
 
-      - openstack-install-deploy-guide-{lang}:
+      - opencontrail-install-deploy-guide-{lang}:
 
-      - openstack-operations-guide-{lang}
+      - opencontrail-operations-guide-{lang}
 
       # in zuul/layout.yaml specified to only run against
       # stable/grizzly
-      - 'openstack-{oldmanual}-old'
+      - 'opencontrail-{oldmanual}-old'
 
-      - openstack-{install}-{distribution}-old:
+      - opencontrail-{install}-{distribution}-old:
           install: basic-install
           distribution: fedora
           system: yum
           profileos: "centos;fedora;rhel"
 
-      - openstack-{install}-{distribution}-old:
+      - opencontrail-{install}-{distribution}-old:
           install: basic-install
           distribution: ubuntu
           system: apt
           profileos: "ubuntu;debian"
 
-      - openstack-{install}-{distribution}-old:
-          install: openstack-install
+      - opencontrail-{install}-{distribution}-old:
+          install: opencontrail-install
           distribution: fedora
           system: yum
           profileos: "centos;fedora;rhel"
 
-      - openstack-{install}-{distribution}-old:
-          install: openstack-install
+      - opencontrail-{install}-{distribution}-old:
+          install: opencontrail-install
           distribution: ubuntu
           system: apt
           profileos: "ubuntu"
 
 - project:
     name: operations-guide
-    github-org: openstack
+    github-org: opencontrail
     node: bare-precise
 
     jobs:
-      - openstack-doc-jobs
+      - opencontrail-doc-jobs
 
 - project:
     name: manila
     github-org: stackforge
     node: bare-precise
-    tarball-site: tarballs.openstack.org
+    tarball-site: tarballs.opencontrail.org
 
     jobs:
       - python-jobs
@@ -2043,7 +2043,7 @@
     name: python-manilaclient
     github-org: stackforge
     node: bare-precise
-    tarball-site: tarballs.openstack.org
+    tarball-site: tarballs.opencontrail.org
 
     jobs:
       - python-jobs
@@ -2052,7 +2052,7 @@
     name: milk
     github-org: stackforge
     node: bare-precise
-    tarball-site: tarballs.openstack.org
+    tarball-site: tarballs.opencontrail.org
 
     jobs:
       - python-jobs
@@ -2061,7 +2061,7 @@
     name: solum
     github-org: stackforge
     node: bare-precise
-    tarball-site: tarballs.openstack.org
+    tarball-site: tarballs.opencontrail.org
 
     jobs:
       - python-jobs
@@ -2071,7 +2071,7 @@
     name: congress
     github-org: stackforge
     node: bare-precise
-    tarball-site: tarballs.openstack.org
+    tarball-site: tarballs.opencontrail.org
 
     jobs:
       - python-jobs
@@ -2080,7 +2080,7 @@
     name: rubick
     github-org: stackforge
     node: bare-precise
-    tarball-site: tarballs.openstack.org
+    tarball-site: tarballs.opencontrail.org
 
     jobs:
       - python-jobs
@@ -2089,7 +2089,7 @@
     name: refstack
     github-org: stackforge
     node: bare-precise
-    tarball-site: tarballs.openstack.org
+    tarball-site: tarballs.opencontrail.org
 
     jobs:
       - python-jobs
@@ -2098,7 +2098,7 @@
     name: swiftsync
     github-org: stackforge
     node: bare-precise
-    tarball-site: tarballs.openstack.org
+    tarball-site: tarballs.opencontrail.org
 
     jobs:
       - python-jobs
@@ -2107,7 +2107,7 @@
     name: tooz
     github-org: stackforge
     node: bare-precise
-    tarball-site: tarballs.openstack.org
+    tarball-site: tarballs.opencontrail.org
 
     jobs:
       - python-jobs
@@ -2116,7 +2116,7 @@
     name: sphinxcontrib-docbookrestapi
     github-org: stackforge
     node: bare-precise
-    tarball-site: tarballs.openstack.org
+    tarball-site: tarballs.opencontrail.org
 
     jobs:
       - 'gate-{name}-pep8'
@@ -2130,7 +2130,7 @@
     name: tomograph
     github-org: stackforge
     node: bare-precise
-    tarball-site: tarballs.openstack.org
+    tarball-site: tarballs.opencontrail.org
 
     jobs:
       - python-jobs
@@ -2140,7 +2140,7 @@
     name: turbo-hipster
     github-org: stackforge
     node: bare-precise
-    tarball-site: tarballs.openstack.org
+    tarball-site: tarballs.opencontrail.org
 
     jobs:
       - python-jobs
@@ -2150,7 +2150,7 @@
     name: python-solumclient
     github-org: stackforge
     node: bare-precise
-    tarball-site: tarballs.openstack.org
+    tarball-site: tarballs.opencontrail.org
 
     jobs:
       - python-jobs
@@ -2159,16 +2159,16 @@
     name: heat-translator
     github-org: stackforge
     node: bare-precise
-    tarball-site: tarballs.openstack.org
+    tarball-site: tarballs.opencontrail.org
 
     jobs:
       - python-jobs
 
 - project:
     name: release-tools
-    github-org: openstack-infra
+    github-org: opencontrail-infra
     node: bare-precise
-    tarball-site: tarballs.openstack.org
+    tarball-site: tarballs.opencontrail.org
 
     jobs:
       - python-jobs
@@ -2177,16 +2177,16 @@
     name: entropy
     github-org: stackforge
     node: bare-precise
-    tarball-site: tarballs.openstack.org
+    tarball-site: tarballs.opencontrail.org
 
     jobs:
       - python-jobs
 
 - project:
-    name: openstack-doc-tools
-    github-org: openstack
+    name: opencontrail-doc-tools
+    github-org: opencontrail
     node: bare-precise
-    tarball-site: tarballs.openstack.org
+    tarball-site: tarballs.opencontrail.org
 
     jobs:
       - gate-{name}-pep8
@@ -2196,38 +2196,38 @@
 
 - project:
     name: api-site
-    github-org: openstack
+    github-org: opencontrail
     node: bare-precise
 
     jobs:
-      - openstack-doc-jobs
+      - opencontrail-doc-jobs
       - '{name}-tox-doc-{envlist}':
           envlist: publishdocs
 
 
 - project:
     name: database-api
-    github-org: openstack
+    github-org: opencontrail
     node: bare-precise
 
     jobs:
-      - openstack-doc-jobs
+      - opencontrail-doc-jobs
 
 - project:
     name: volume-api
-    github-org: openstack
+    github-org: opencontrail
     node: bare-precise
 
     jobs:
-      - openstack-doc-jobs
+      - opencontrail-doc-jobs
       - '{name}-tox-doc-{envlist}':
           envlist: publishdocs
 
 - project:
-    name: python-openstacksdk
+    name: python-opencontrailsdk
     github-org: stackforge
     node: bare-precise
-    tarball-site: tarballs.openstack.org
+    tarball-site: tarballs.opencontrail.org
 
     jobs:
       - python-jobs
@@ -2237,16 +2237,16 @@
     name: gce-api
     github-org: stackforge
     node: bare-precise
-    tarball-site: tarballs.openstack.org
+    tarball-site: tarballs.opencontrail.org
 
     jobs:
       - python-jobs
 
 - project:
     name: groups
-    github-org: openstack-infra
+    github-org: opencontrail-infra
     node: bare-precise
-    tarball-site: tarballs.openstack.org
+    tarball-site: tarballs.opencontrail.org
 
     jobs:
       - gate-groups-unittests
@@ -2256,23 +2256,23 @@
           branch-designator: 'branch'
 
 - project:
-    name: openstackid
-    github-org: openstack-infra
+    name: opencontrailid
+    github-org: opencontrail-infra
     node: bare-precise
-    tarball-site: tarballs.openstack.org
+    tarball-site: tarballs.opencontrail.org
 
     jobs:
-      - gate-openstackid-unittests
-      - 'openstackid-release-{branch-designator}':
+      - gate-opencontrailid-unittests
+      - 'opencontrailid-release-{branch-designator}':
           branch-designator: 'master'
-      - 'openstackid-release-{branch-designator}':
+      - 'opencontrailid-release-{branch-designator}':
           branch-designator: 'branch'
 
 - project:
     name: compass-core
     github-org: stackforge
     node: bare-precise
-    tarball-site: tarballs.openstack.org
+    tarball-site: tarballs.opencontrail.org
 
     jobs:
       - python-jobs
@@ -2281,7 +2281,7 @@
     name: contrail-controller
     github-org: stackforge
     node: bare-precise
-    tarball-site: tarballs.openstack.org
+    tarball-site: tarballs.opencontrail.org
 
     jobs:
       - python-jobs

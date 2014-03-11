@@ -5,26 +5,26 @@
     <TITLE></TITLE>
 
     <script type="text/javascript"
-        src="http://status.openstack.org/common.js"></script>
+        src="http://status.opencontrail.org/common.js"></script>
 
     <!-- Google Fonts -->
     <link href='http://fonts.googleapis.com/css?family=PT+Sans&amp;subset=latin' rel='stylesheet' type='text/css'/>
 
     <!-- Framework CSS -->
-    <link rel="stylesheet" href="http://openstack.org/themes/openstack/css/blueprint/screen.css" type="text/css" media="screen, projection"/>
-    <link rel="stylesheet" href="http://openstack.org/themes/openstack/css/blueprint/print.css" type="text/css" media="print"/>
+    <link rel="stylesheet" href="http://opencontrail.org/themes/opencontrail/css/blueprint/screen.css" type="text/css" media="screen, projection"/>
+    <link rel="stylesheet" href="http://opencontrail.org/themes/opencontrail/css/blueprint/print.css" type="text/css" media="print"/>
 
     <!-- IE CSS -->
-    <!--[if lt IE 8]><link rel="stylesheet" href="http://openstack.org/blueprint/ie.css" type="text/css" media="screen, projection"><![endif]-->
+    <!--[if lt IE 8]><link rel="stylesheet" href="http://opencontrail.org/blueprint/ie.css" type="text/css" media="screen, projection"><![endif]-->
 
     <!-- OpenStack Specific CSS -->
 
-    <link rel="stylesheet" href="http://openstack.org/themes/openstack/css/dropdown.css" type="text/css" media="screen, projection, print"/>
+    <link rel="stylesheet" href="http://opencontrail.org/themes/opencontrail/css/dropdown.css" type="text/css" media="screen, projection, print"/>
 
     <!-- Page Specific CSS -->
-    <link rel="stylesheet" href="http://openstack.org/themes/openstack/css/home.css" type="text/css" media="screen, projection, print"/>
+    <link rel="stylesheet" href="http://opencontrail.org/themes/opencontrail/css/home.css" type="text/css" media="screen, projection, print"/>
 
-    <link rel="stylesheet" type="text/css" href="http://openstack.org/themes/openstack/css/main.css" />
+    <link rel="stylesheet" type="text/css" href="http://opencontrail.org/themes/opencontrail/css/main.css" />
     <style type="text/css">
       h3.subhead {
           border: none;
@@ -52,7 +52,7 @@
       Affecting projects: ${', '.join(bug.projects)}<br/>
       Affecting changes:
       <span py:for="i, change in enumerate(bug.changes)">
-        <a href="https://review.openstack.org/${change}"
+        <a href="https://review.opencontrail.org/${change}"
            >${change}</a><span py:if="i+1 != len(bug.changes)" py:replace="','"/>
       </span>
     </div>

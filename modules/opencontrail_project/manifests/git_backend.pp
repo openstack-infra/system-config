@@ -14,8 +14,8 @@
 #
 # Class to configure cgit on a CentOS node.
 #
-# == Class: openstack_project::git_backend
-class openstack_project::git_backend (
+# == Class: opencontrail_project::git_backend
+class opencontrail_project::git_backend (
   $vhost_name = $::fqdn,
   $sysadmins = [],
   $git_gerrit_ssh_key = '',
@@ -25,7 +25,7 @@ class openstack_project::git_backend (
   $ssl_chain_file_contents = '',
   $behind_proxy = false
 ) {
-  class { 'openstack_project::server':
+  class { 'opencontrail_project::server':
     iptables_public_tcp_ports => [4443, 8080, 29418],
     sysadmins                 => $sysadmins,
   }
@@ -35,8 +35,8 @@ class openstack_project::git_backend (
 
   class { '::cgit':
     vhost_name              => $vhost_name,
-    ssl_cert_file           => '/etc/pki/tls/certs/git.openstack.org.pem',
-    ssl_key_file            => '/etc/pki/tls/private/git.openstack.org.key',
+    ssl_cert_file           => '/etc/pki/tls/certs/git.opencontrail.org.pem',
+    ssl_key_file            => '/etc/pki/tls/private/git.opencontrail.org.key',
     ssl_chain_file          => '/etc/pki/tls/certs/intermediate.pem',
     ssl_cert_file_contents  => $ssl_cert_file_contents,
     ssl_key_file_contents   => $ssl_key_file_contents,
@@ -53,7 +53,7 @@ class openstack_project::git_backend (
     owner   => 'root',
     group   => 'root',
     mode    => '0644',
-    source  => 'puppet:///modules/openstack_project/git/cgitrc'
+    source  => 'puppet:///modules/opencontrail_project/git/cgitrc'
   }
 
   file { '/home/cgit/.ssh/':
@@ -78,7 +78,7 @@ class openstack_project::git_backend (
     owner   => 'cgit',
     group   => 'cgit',
     mode    => '0444',
-    source  => 'puppet:///modules/openstack_project/review.projects.yaml',
+    source  => 'puppet:///modules/opencontrail_project/review.projects.yaml',
     replace => true,
   }
 
@@ -112,27 +112,27 @@ class openstack_project::git_backend (
     require     => User['cgit'],
   }
 
-  file { '/var/www/cgit/static/openstack.png':
+  file { '/var/www/cgit/static/opencontrail.png':
     ensure  => present,
-    source  => 'puppet:///modules/openstack_project/openstack.png',
+    source  => 'puppet:///modules/opencontrail_project/opencontrail.png',
     require => File['/var/www/cgit/static'],
   }
 
   file { '/var/www/cgit/static/favicon.ico':
     ensure  => present,
-    source  => 'puppet:///modules/openstack_project/status/favicon.ico',
+    source  => 'puppet:///modules/opencontrail_project/status/favicon.ico',
     require => File['/var/www/cgit/static'],
   }
 
-  file { '/var/www/cgit/static/openstack-page-bkg.jpg':
+  file { '/var/www/cgit/static/opencontrail-page-bkg.jpg':
     ensure  => present,
-    source  => 'puppet:///modules/openstack_project/openstack-page-bkg.jpg',
+    source  => 'puppet:///modules/opencontrail_project/opencontrail-page-bkg.jpg',
     require => File['/var/www/cgit/static'],
   }
 
-  file { '/var/www/cgit/static/openstack.css':
+  file { '/var/www/cgit/static/opencontrail.css':
     ensure  => present,
-    source  => 'puppet:///modules/openstack_project/git/openstack.css',
+    source  => 'puppet:///modules/opencontrail_project/git/opencontrail.css',
     require => File['/var/www/cgit/static'],
   }
 
@@ -141,7 +141,7 @@ class openstack_project::git_backend (
     owner   => 'root',
     group   => 'root',
     mode    => '0755',
-    source  => 'puppet:///modules/openstack_project/git/commit-filter.sh',
+    source  => 'puppet:///modules/opencontrail_project/git/commit-filter.sh',
   }
 
   user { 'zuul':

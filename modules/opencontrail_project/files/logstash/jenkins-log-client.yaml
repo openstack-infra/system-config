@@ -1,15 +1,15 @@
-source-url: http://logs.openstack.org
+source-url: http://logs.opencontrail.org
 
 # List of zmq event inputs.
 zmq-publishers:
-  - tcp://jenkins.openstack.org:8888
-  - tcp://jenkins01.openstack.org:8888
-  - tcp://jenkins02.openstack.org:8888
-  - tcp://jenkins03.openstack.org:8888
-  - tcp://jenkins04.openstack.org:8888
-  - tcp://jenkins05.openstack.org:8888
-  - tcp://jenkins06.openstack.org:8888
-  - tcp://jenkins07.openstack.org:8888
+  - tcp://jenkins.opencontrail.org:8888
+  - tcp://jenkins01.opencontrail.org:8888
+  - tcp://jenkins02.opencontrail.org:8888
+  - tcp://jenkins03.opencontrail.org:8888
+  - tcp://jenkins04.opencontrail.org:8888
+  - tcp://jenkins05.opencontrail.org:8888
+  - tcp://jenkins06.opencontrail.org:8888
+  - tcp://jenkins07.opencontrail.org:8888
 
 # List of files to source logs from.
 source-files:

@@ -57,46 +57,46 @@ cd ~/workspace-cache
 # one, we need to evolve to using /opt/git separately, so having a
 # separate list makes that easier than refactoring to a single joint
 # list.
-git clone https://review.openstack.org/p/openstack-dev/grenade
-git clone https://review.openstack.org/p/openstack-dev/pbr
-git clone https://review.openstack.org/p/openstack-infra/devstack-gate
-git clone https://review.openstack.org/p/openstack-infra/jeepyb
-git clone https://review.openstack.org/p/openstack-infra/pypi-mirror
-git clone https://review.openstack.org/p/openstack-infra/tripleo-ci
-git clone https://review.openstack.org/p/openstack/ceilometer
-git clone https://review.openstack.org/p/openstack/cinder
-git clone https://review.openstack.org/p/openstack/diskimage-builder
-git clone https://review.openstack.org/p/openstack/glance
-git clone https://review.openstack.org/p/openstack/heat
-git clone https://review.openstack.org/p/openstack/horizon
-git clone https://review.openstack.org/p/openstack/ironic
-git clone https://review.openstack.org/p/openstack/keystone
-git clone https://review.openstack.org/p/openstack/neutron
-git clone https://review.openstack.org/p/openstack/nova
-git clone https://review.openstack.org/p/openstack/os-apply-config
-git clone https://review.openstack.org/p/openstack/os-collect-config
-git clone https://review.openstack.org/p/openstack/os-refresh-config
-git clone https://review.openstack.org/p/openstack/oslo.config
-git clone https://review.openstack.org/p/openstack/oslo.messaging
-git clone https://review.openstack.org/p/openstack/python-ceilometerclient
-git clone https://review.openstack.org/p/openstack/python-cinderclient
-git clone https://review.openstack.org/p/openstack/python-glanceclient
-git clone https://review.openstack.org/p/openstack/python-heatclient
-git clone https://review.openstack.org/p/openstack/python-ironicclient
-git clone https://review.openstack.org/p/openstack/python-keystoneclient
-git clone https://review.openstack.org/p/openstack/python-neutronclient
-git clone https://review.openstack.org/p/openstack/python-novaclient
-git clone https://review.openstack.org/p/openstack/python-openstackclient
-git clone https://review.openstack.org/p/openstack/python-swiftclient
-git clone https://review.openstack.org/p/openstack/requirements
-git clone https://review.openstack.org/p/openstack/swift
-git clone https://review.openstack.org/p/openstack/tempest
-git clone https://review.openstack.org/p/openstack/tripleo-heat-templates
-git clone https://review.openstack.org/p/openstack/tripleo-image-elements
-git clone https://review.openstack.org/p/openstack/tripleo-incubator
+git clone https://review.opencontrail.org/p/opencontrail-dev/grenade
+git clone https://review.opencontrail.org/p/opencontrail-dev/pbr
+git clone https://review.opencontrail.org/p/opencontrail-infra/devstack-gate
+git clone https://review.opencontrail.org/p/opencontrail-infra/jeepyb
+git clone https://review.opencontrail.org/p/opencontrail-infra/pypi-mirror
+git clone https://review.opencontrail.org/p/opencontrail-infra/tripleo-ci
+git clone https://review.opencontrail.org/p/opencontrail/ceilometer
+git clone https://review.opencontrail.org/p/opencontrail/cinder
+git clone https://review.opencontrail.org/p/opencontrail/diskimage-builder
+git clone https://review.opencontrail.org/p/opencontrail/glance
+git clone https://review.opencontrail.org/p/opencontrail/heat
+git clone https://review.opencontrail.org/p/opencontrail/horizon
+git clone https://review.opencontrail.org/p/opencontrail/ironic
+git clone https://review.opencontrail.org/p/opencontrail/keystone
+git clone https://review.opencontrail.org/p/opencontrail/neutron
+git clone https://review.opencontrail.org/p/opencontrail/nova
+git clone https://review.opencontrail.org/p/opencontrail/os-apply-config
+git clone https://review.opencontrail.org/p/opencontrail/os-collect-config
+git clone https://review.opencontrail.org/p/opencontrail/os-refresh-config
+git clone https://review.opencontrail.org/p/opencontrail/oslo.config
+git clone https://review.opencontrail.org/p/opencontrail/oslo.messaging
+git clone https://review.opencontrail.org/p/opencontrail/python-ceilometerclient
+git clone https://review.opencontrail.org/p/opencontrail/python-cinderclient
+git clone https://review.opencontrail.org/p/opencontrail/python-glanceclient
+git clone https://review.opencontrail.org/p/opencontrail/python-heatclient
+git clone https://review.opencontrail.org/p/opencontrail/python-ironicclient
+git clone https://review.opencontrail.org/p/opencontrail/python-keystoneclient
+git clone https://review.opencontrail.org/p/opencontrail/python-neutronclient
+git clone https://review.opencontrail.org/p/opencontrail/python-novaclient
+git clone https://review.opencontrail.org/p/opencontrail/python-opencontrailclient
+git clone https://review.opencontrail.org/p/opencontrail/python-swiftclient
+git clone https://review.opencontrail.org/p/opencontrail/requirements
+git clone https://review.opencontrail.org/p/opencontrail/swift
+git clone https://review.opencontrail.org/p/opencontrail/tempest
+git clone https://review.opencontrail.org/p/opencontrail/tripleo-heat-templates
+git clone https://review.opencontrail.org/p/opencontrail/tripleo-image-elements
+git clone https://review.opencontrail.org/p/opencontrail/tripleo-incubator
 # and stackforge libraries we might want to test with
-git clone https://review.openstack.org/p/stackforge/pecan
-git clone https://review.openstack.org/p/stackforge/wsme
+git clone https://review.opencontrail.org/p/stackforge/pecan
+git clone https://review.opencontrail.org/p/stackforge/wsme
 
 sync
 sleep 5

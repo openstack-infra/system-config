@@ -14,12 +14,12 @@
 #
 # Install a python27 mirror building slave.
 
-class openstack_project::mirror27_slave (
+class opencontrail_project::mirror27_slave (
   $jenkins_ssh_public_key,
   $jenkins_ssh_private_key,
 ) {
 
-  class { 'openstack_project::mirror_slave':
+  class { 'opencontrail_project::mirror_slave':
     jenkins_ssh_public_key  => $jenkins_ssh_public_key,
     jenkins_ssh_private_key => $jenkins_ssh_private_key,
   }

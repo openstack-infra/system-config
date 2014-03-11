@@ -1,6 +1,6 @@
-# == Class: openstack_project::zuul_dev
+# == Class: opencontrail_project::zuul_dev
 #
-class openstack_project::zuul_dev(
+class opencontrail_project::zuul_dev(
   $vhost_name = $::fqdn,
   $gearman_server = '127.0.0.1',
   $gerrit_server = '',
@@ -21,7 +21,7 @@ class openstack_project::zuul_dev(
   # Turn a list of hostnames into a list of iptables rules
   $iptables_rules = regsubst ($gearman_workers, '^(.*)$', '-m state --state NEW -m tcp -p tcp --dport 4730 -s \1 -j ACCEPT')
 
-  class { 'openstack_project::server':
+  class { 'opencontrail_project::server':
     iptables_public_tcp_ports => [80],
     iptables_rules6           => $iptables_rules,
     iptables_rules4           => $iptables_rules,
@@ -37,9 +37,9 @@ class openstack_project::zuul_dev(
     url_pattern          => $url_pattern,
     zuul_url             => $zuul_url,
     job_name_in_report   => true,
-    status_url           => 'http://zuul-dev.openstack.org/',
+    status_url           => 'http://zuul-dev.opencontrail.org/',
     statsd_host          => $statsd_host,
-    git_email            => 'jenkins@openstack.org',
+    git_email            => 'jenkins@opencontrail.org',
     git_name             => 'OpenStack Jenkins',
   }
 
@@ -59,7 +59,7 @@ class openstack_project::zuul_dev(
       owner   => 'zuul',
       group   => 'zuul',
       mode    => '0600',
-      content => "review.openstack.org,198.101.231.251,2001:4800:780d:509:3bc3:d7f6:ff04:39f0 ${gerrit_ssh_host_key}",
+      content => "review.opencontrail.org,198.101.231.251,2001:4800:780d:509:3bc3:d7f6:ff04:39f0 ${gerrit_ssh_host_key}",
       replace => true,
       require => File['/home/zuul/.ssh'],
     }
@@ -67,31 +67,31 @@ class openstack_project::zuul_dev(
 
   file { '/etc/zuul/layout.yaml':
     ensure => present,
-    source => 'puppet:///modules/openstack_project/zuul/layout-dev.yaml',
+    source => 'puppet:///modules/opencontrail_project/zuul/layout-dev.yaml',
     notify => Exec['zuul-reload'],
   }
 
-  file { '/etc/zuul/openstack_functions.py':
+  file { '/etc/zuul/opencontrail_functions.py':
     ensure => present,
-    source => 'puppet:///modules/openstack_project/zuul/openstack_functions.py',
+    source => 'puppet:///modules/opencontrail_project/zuul/opencontrail_functions.py',
     notify => Exec['zuul-reload'],
   }
 
   file { '/etc/zuul/logging.conf':
     ensure => present,
-    source => 'puppet:///modules/openstack_project/zuul/logging.conf',
+    source => 'puppet:///modules/opencontrail_project/zuul/logging.conf',
     notify => Exec['zuul-reload'],
   }
 
   file { '/etc/zuul/gearman-logging.conf':
     ensure => present,
-    source => 'puppet:///modules/openstack_project/zuul/gearman-logging.conf',
+    source => 'puppet:///modules/opencontrail_project/zuul/gearman-logging.conf',
     notify => Exec['zuul-reload'],
   }
 
   file { '/etc/zuul/merger-logging.conf':
     ensure => present,
-    source => 'puppet:///modules/openstack_project/zuul/merger-logging.conf',
+    source => 'puppet:///modules/opencontrail_project/zuul/merger-logging.conf',
   }
 
   class { '::recheckwatch':
@@ -102,7 +102,7 @@ class openstack_project::zuul_dev(
 
   file { '/var/lib/recheckwatch/scoreboard.html':
     ensure  => present,
-    source  => 'puppet:///modules/openstack_project/zuul/scoreboard.html',
+    source  => 'puppet:///modules/opencontrail_project/zuul/scoreboard.html',
     require => File['/var/lib/recheckwatch'],
   }
 }

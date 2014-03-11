@@ -11,7 +11,7 @@
 
     publishers:
       - ftp:
-          site: docs.openstack.org
+          site: docs.opencontrail.org
           source: 'doc/build/html/**'
           target: 'infra/elastic-recheck/'
           remove-prefix: 'doc/build/html'

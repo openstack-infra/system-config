@@ -1,13 +1,13 @@
-# == Class: openstack_project::gerrit
+# == Class: opencontrail_project::gerrit
 #
 # A wrapper class around the main gerrit class that sets gerrit
 # up for launchpad single sign on and bug/blueprint links
 
-class openstack_project::gerrit (
+class opencontrail_project::gerrit (
   $mysql_password,
   $vhost_name = $::fqdn,
   $canonicalweburl = "https://${::fqdn}/",
-  $serveradmin = 'webmaster@openstack.org',
+  $serveradmin = 'webmaster@opencontrail.org',
   $ssh_host_key = '/home/gerrit2/review_site/etc/ssh_host_rsa_key',
   $ssh_project_key = '/home/gerrit2/review_site/etc/ssh_project_rsa_key',
   $ssl_cert_file = '',
@@ -68,30 +68,30 @@ class openstack_project::gerrit (
   $cgit = false,
   $web_repo_url = '',
 ) {
-  class { 'openstack_project::server':
+  class { 'opencontrail_project::server':
     iptables_public_tcp_ports => [80, 443, 29418],
     sysadmins                 => $sysadmins,
   }
 
-  class { 'jeepyb::openstackwatch':
+  class { 'jeepyb::opencontrailwatch':
     projects       => [
-      'openstack/ceilometer',
-      'openstack/cinder',
-      'openstack/glance',
-      'openstack/heat',
-      'openstack/horizon',
-      'openstack/infra',
-      'openstack/keystone',
-      'openstack/nova',
-      'openstack/oslo',
-      'openstack/neutron',
-      'openstack/swift',
-      'openstack/tempest',
-      'openstack-dev/devstack',
+      'opencontrail/ceilometer',
+      'opencontrail/cinder',
+      'opencontrail/glance',
+      'opencontrail/heat',
+      'opencontrail/horizon',
+      'opencontrail/infra',
+      'opencontrail/keystone',
+      'opencontrail/nova',
+      'opencontrail/oslo',
+      'opencontrail/neutron',
+      'opencontrail/swift',
+      'opencontrail/tempest',
+      'opencontrail-dev/devstack',
     ],
     container      => 'rss',
-    feed           => 'openstackwatch.xml',
-    json_url       => 'https://review.openstack.org/query?q=status:open',
+    feed           => 'opencontrailwatch.xml',
+    json_url       => 'https://review.opencontrail.org/query?q=status:open',
     swift_username => $swift_username,
     swift_password => $swift_password,
     swift_auth_url => 'https://auth.api.rackspacecloud.com/v1.0',
@@ -104,7 +104,7 @@ class openstack_project::gerrit (
     # opinions
     enable_melody                       => true,
     melody_session                      => true,
-    robots_txt_source                   => 'puppet:///modules/openstack_project/gerrit/robots.txt',
+    robots_txt_source                   => 'puppet:///modules/opencontrail_project/gerrit/robots.txt',
     # passthrough
     ssl_cert_file                       => $ssl_cert_file,
     ssl_key_file                        => $ssl_key_file,
@@ -146,7 +146,7 @@ class openstack_project::gerrit (
       {
         name  => 'blueprint',
         match => '(\\b[Bb]lue[Pp]rint\\b|\\b[Bb][Pp]\\b)[ \\t#:]*([A-Za-z0-9\\-]+)',
-        link  => 'https://blueprints.launchpad.net/openstack/?searchtext=$2',
+        link  => 'https://blueprints.launchpad.net/opencontrail/?searchtext=$2',
       },
       {
         name  => 'testresult',
@@ -182,7 +182,7 @@ class openstack_project::gerrit (
     cgit                                => $cgit,
     web_repo_url                        => $web_repo_url,
     testmode                            => $testmode,
-    require                             => Class[openstack_project::server],
+    require                             => Class[opencontrail_project::server],
   }
 
   mysql_backup::backup { 'gerrit':
@@ -208,7 +208,7 @@ class openstack_project::gerrit (
     owner   => 'root',
     group   => 'root',
     mode    => '0444',
-    source  => 'puppet:///modules/openstack_project/gerrit/echosign-cla.html',
+    source  => 'puppet:///modules/opencontrail_project/gerrit/echosign-cla.html',
     replace => true,
     require => Class['::gerrit'],
   }
@@ -218,7 +218,7 @@ class openstack_project::gerrit (
     owner   => 'root',
     group   => 'root',
     mode    => '0444',
-    source  => 'puppet:///modules/openstack_project/gerrit/cla.html',
+    source  => 'puppet:///modules/opencontrail_project/gerrit/cla.html',
     replace => true,
     require => Class['::gerrit'],
   }
@@ -228,7 +228,7 @@ class openstack_project::gerrit (
     owner   => 'root',
     group   => 'root',
     mode    => '0444',
-    source  => 'puppet:///modules/openstack_project/gerrit/usg-cla.html',
+    source  => 'puppet:///modules/opencontrail_project/gerrit/usg-cla.html',
     replace => true,
     require => Class['::gerrit'],
   }
@@ -238,33 +238,33 @@ class openstack_project::gerrit (
     owner   => 'root',
     group   => 'root',
     mode    => '0444',
-    source  => 'puppet:///modules/openstack_project/gerrit/system-cla.html',
+    source  => 'puppet:///modules/opencontrail_project/gerrit/system-cla.html',
     replace => true,
     require => Class['::gerrit'],
   }
 
   file { '/home/gerrit2/review_site/static/title.png':
     ensure  => present,
-    source  => 'puppet:///modules/openstack_project/openstack.png',
+    source  => 'puppet:///modules/opencontrail_project/opencontrail.png',
     require => Class['::gerrit'],
   }
 
-  file { '/home/gerrit2/review_site/static/openstack-page-bkg.jpg':
+  file { '/home/gerrit2/review_site/static/opencontrail-page-bkg.jpg':
     ensure  => present,
-    source  => 'puppet:///modules/openstack_project/openstack-page-bkg.jpg',
+    source  => 'puppet:///modules/opencontrail_project/opencontrail-page-bkg.jpg',
     require => Class['::gerrit'],
   }
 
   file { '/home/gerrit2/review_site/etc/GerritSite.css':
     ensure  => present,
-    source  => 'puppet:///modules/openstack_project/gerrit/GerritSite.css',
+    source  => 'puppet:///modules/opencontrail_project/gerrit/GerritSite.css',
     require => Class['::gerrit'],
   }
 
   file { '/home/gerrit2/review_site/etc/GerritSiteHeader.html':
     ensure  => present,
     source  =>
-      'puppet:///modules/openstack_project/gerrit/GerritSiteHeader.html',
+      'puppet:///modules/opencontrail_project/gerrit/GerritSiteHeader.html',
     require => Class['::gerrit'],
   }
 
@@ -281,7 +281,7 @@ class openstack_project::gerrit (
     owner   => 'root',
     group   => 'root',
     mode    => '0555',
-    source  => 'puppet:///modules/openstack_project/gerrit/change-merged',
+    source  => 'puppet:///modules/opencontrail_project/gerrit/change-merged',
     replace => true,
     require => Class['::gerrit'],
   }
@@ -289,7 +289,7 @@ class openstack_project::gerrit (
   file { '/home/gerrit2/review_site/hooks/notify_impact.yaml':
     ensure  => present,
     source  =>
-      'puppet:///modules/openstack_project/gerrit/notify_impact.yaml',
+      'puppet:///modules/opencontrail_project/gerrit/notify_impact.yaml',
     require => Class['::gerrit'],
   }
 
@@ -298,7 +298,7 @@ class openstack_project::gerrit (
     owner   => 'root',
     group   => 'root',
     mode    => '0555',
-    content => template('openstack_project/gerrit_patchset-created.erb'),
+    content => template('opencontrail_project/gerrit_patchset-created.erb'),
     replace => true,
     require => Class['::gerrit'],
   }
@@ -371,7 +371,7 @@ class openstack_project::gerrit (
       replace => true,
       purge   => true,
       force   => true,
-      source  => 'puppet:///modules/openstack_project/gerrit/acls',
+      source  => 'puppet:///modules/opencontrail_project/gerrit/acls',
       require => Class['::gerrit']
     }
 
@@ -396,7 +396,7 @@ class openstack_project::gerrit (
     owner   => 'root',
     group   => 'root',
     mode    => '0755',
-    content => template('openstack_project/gerrit_set_agreements.sh.erb'),
+    content => template('opencontrail_project/gerrit_set_agreements.sh.erb'),
     replace => true,
     require => Class['::gerrit']
   }

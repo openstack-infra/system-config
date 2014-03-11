@@ -25,7 +25,7 @@
 
     publishers:
       - war:
-          site: 'tarballs.openstack.org'
+          site: 'tarballs.opencontrail.org'
           warfile: 'gerrit-war/target/gerrit*.war'
           target: 'tarballs/ci/test/'
       - console-log
@@ -86,7 +86,7 @@
 
     publishers:
       - war:
-          site: 'tarballs.openstack.org'
+          site: 'tarballs.opencontrail.org'
           warfile: 'gerrit-war/target/gerrit*.war'
           target: 'tarballs/ci/gerrit'
       - console-log
@@ -106,7 +106,7 @@
           #!/bin/bash -xe
           mkdir -p gerrit
           cd gerrit
-          /usr/local/jenkins/slave_scripts/gerrit-git-prep.sh https://review.openstack.org http://zuul.openstack.org git://git.openstack.org
+          /usr/local/jenkins/slave_scripts/gerrit-git-prep.sh https://review.opencontrail.org http://zuul.opencontrail.org git://git.opencontrail.org
       - shell: |
           #!/bin/bash -xe
           cd gerrit
@@ -124,7 +124,7 @@
 
     publishers:
       - war:
-          site: 'tarballs.openstack.org'
+          site: 'tarballs.opencontrail.org'
           warfile: 'gerrit/buck-out/gen/gerrit-${PROJECT_VER}.war'
           target: 'tarballs/ci/test'
       - console-log
@@ -144,7 +144,7 @@
           #!/bin/bash -xe
           mkdir -p gerrit
           cd gerrit
-          /usr/local/jenkins/slave_scripts/gerrit-git-prep.sh https://review.openstack.org http://zuul.openstack.org git://git.openstack.org
+          /usr/local/jenkins/slave_scripts/gerrit-git-prep.sh https://review.opencontrail.org http://zuul.opencontrail.org git://git.opencontrail.org
       - shell: |
           #!/bin/bash -xe
           cd gerrit
@@ -178,7 +178,7 @@
           #!/bin/bash -xe
           mkdir -p gerrit
           cd gerrit
-          /usr/local/jenkins/slave_scripts/gerrit-git-prep.sh https://review.openstack.org http://zuul.openstack.org git://git.openstack.org
+          /usr/local/jenkins/slave_scripts/gerrit-git-prep.sh https://review.opencontrail.org http://zuul.opencontrail.org git://git.opencontrail.org
       - shell: |
           #!/bin/bash -xe
           cd gerrit
@@ -196,7 +196,7 @@
 
     publishers:
       - war:
-          site: 'tarballs.openstack.org'
+          site: 'tarballs.opencontrail.org'
           warfile: 'gerrit/buck-out/gen/gerrit-${PROJECT_VER}.war'
           target: 'tarballs/ci/gerrit'
       - console-log

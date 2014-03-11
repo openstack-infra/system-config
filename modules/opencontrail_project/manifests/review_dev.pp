@@ -1,6 +1,6 @@
-# == Class: openstack_project::review_dev
+# == Class: opencontrail_project::review_dev
 #
-class openstack_project::review_dev (
+class opencontrail_project::review_dev (
   $github_oauth_token = '',
   $github_project_username = '',
   $github_project_password = '',
@@ -35,9 +35,9 @@ class openstack_project::review_dev (
     database_password    => $mysql_password,
   }
 
-  class { 'openstack_project::gerrit':
-    vhost_name                      => 'review-dev.openstack.org',
-    canonicalweburl                 => 'https://review-dev.openstack.org/',
+  class { 'opencontrail_project::gerrit':
+    vhost_name                      => 'review-dev.opencontrail.org',
+    canonicalweburl                 => 'https://review-dev.opencontrail.org/',
     ssl_cert_file                   => '/etc/ssl/certs/ssl-cert-snakeoil.pem',
     ssl_key_file                    => '/etc/ssl/private/ssl-cert-snakeoil.key',
     ssl_chain_file                  => '',
@@ -47,22 +47,22 @@ class openstack_project::review_dev (
     ssh_rsa_pubkey_contents         => $ssh_rsa_pubkey_contents,
     ssh_project_rsa_key_contents    => $ssh_project_rsa_key_contents,
     ssh_project_rsa_pubkey_contents => $ssh_project_rsa_pubkey_contents,
-    email                           => 'review-dev@openstack.org',
+    email                           => 'review-dev@opencontrail.org',
     war                             =>
-      'http://tarballs.openstack.org/ci/gerrit-2.4.4-14-gab7f4c1.war',
+      'http://tarballs.opencontrail.org/ci/gerrit-2.4.4-14-gab7f4c1.war',
     contactstore                    => true,
     contactstore_appsec             => $contactstore_appsec,
     contactstore_pubkey             => $contactstore_pubkey,
     contactstore_url                =>
-      'https://review-dev.openstack.org/fakestore',
+      'https://review-dev.opencontrail.org/fakestore',
     script_user                     => 'launchpadsync',
     script_key_file                 => '/home/gerrit2/.ssh/launchpadsync_rsa',
     script_logging_conf             => '/home/gerrit2/.sync_logging.conf',
     projects_file                   =>
-      'puppet:///modules/openstack_project/review-dev.projects.yaml',
+      'puppet:///modules/opencontrail_project/review-dev.projects.yaml',
     projects_config                 =>
-      'openstack_project/review-dev.projects.ini.erb',
-    github_username                 => 'openstack-gerrit-dev',
+      'opencontrail_project/review-dev.projects.ini.erb',
+    github_username                 => 'opencontrail-gerrit-dev',
     github_oauth_token              => $github_oauth_token,
     github_project_username         => $github_project_username,
     github_project_password         => $github_project_password,
@@ -71,7 +71,7 @@ class openstack_project::review_dev (
     sysadmins                       => $sysadmins,
     gitweb                          => false,
     cgit                            => true,
-    web_repo_url                    => 'https://git.openstack.org/cgit/',
+    web_repo_url                    => 'https://git.opencontrail.org/cgit/',
     swift_username                  => $swift_username,
     swift_password                  => $swift_password,
     replication                     => [
@@ -104,7 +104,7 @@ class openstack_project::review_dev (
     owner   => 'gerrit2',
     group   => 'gerrit2',
     mode    => '0600',
-    content => template('openstack_project/gerrit_lp_creds.erb'),
+    content => template('opencontrail_project/gerrit_lp_creds.erb'),
     replace => true,
     require => User['gerrit2'],
   }
@@ -112,6 +112,6 @@ class openstack_project::review_dev (
   include bup
   bup::site { 'rs-ord':
     backup_user   => 'bup-review-dev',
-    backup_server => 'ci-backup-rs-ord.openstack.org',
+    backup_server => 'ci-backup-rs-ord.opencontrail.org',
   }
 }

@@ -75,7 +75,7 @@ filter {
   } else if "libvirtd" in [tags] {
     grok {
       # libvirtd grok filter adapted from
-      # https://github.com/OpenStratus/openstack-logstash/blob/master/agent.conf
+      # https://github.com/OpenStratus/opencontrail-logstash/blob/master/agent.conf
       match => { "message" => "%{TIMESTAMP_ISO8601:logdate}:%{SPACE}%{NUMBER:pid}:%{SPACE}%{LOGLEVEL:loglevel}%{SPACE}:%{SPACE}%{GREEDYDATA:logmessage}" }
       add_field => { "received_at" => "%{@timestamp}" }
     }
@@ -110,7 +110,7 @@ filter {
 
 output {
   elasticsearch {
-    host => "<%= scope.lookupvar("::openstack_project::logstash_worker::discover_node") %>"
+    host => "<%= scope.lookupvar("::opencontrail_project::logstash_worker::discover_node") %>"
     node_name => "<%= scope.lookupvar("::hostname") %>"
     manage_template => false
     flush_size => 512

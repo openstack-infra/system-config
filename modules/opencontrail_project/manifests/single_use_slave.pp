@@ -1,4 +1,4 @@
-# == Class: openstack_project::single_use_slave
+# == Class: opencontrail_project::single_use_slave
 #
 # This class configures single use Jenkins slaves with a few
 # toggleable options. Most importantly sudo rights for the Jenkins
@@ -6,7 +6,7 @@
 # are off by default as the assumption is the backing image for
 # this single use slaves will be refreshed with new packages
 # periodically.
-class openstack_project::single_use_slave (
+class opencontrail_project::single_use_slave (
   $certname = $::fqdn,
   $install_users = true,
   $sudo = false,
@@ -15,9 +15,9 @@ class openstack_project::single_use_slave (
   $include_pypy = false,
   $automatic_upgrades = false,
   $all_mysql_privs = false,
-  $ssh_key = $openstack_project::jenkins_ssh_key
-) inherits openstack_project {
-  class { 'openstack_project::template':
+  $ssh_key = $opencontrail_project::jenkins_ssh_key
+) inherits opencontrail_project {
+  class { 'opencontrail_project::template':
     certname           => $certname,
     automatic_upgrades => $automatic_upgrades,
     install_users      => $install_users,

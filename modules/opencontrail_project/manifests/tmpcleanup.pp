@@ -1,6 +1,6 @@
-# == Class: openstack_project::tmpcleanup
+# == Class: opencontrail_project::tmpcleanup
 #
-class openstack_project::tmpcleanup (
+class opencontrail_project::tmpcleanup (
 ) {
 
   if $::osfamily == 'Debian' {

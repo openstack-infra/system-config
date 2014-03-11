@@ -14,13 +14,13 @@
 #
 # Logstash indexer worker glue class.
 #
-class openstack_project::logstash_worker (
+class opencontrail_project::logstash_worker (
   $elasticsearch_nodes = [],
-  $discover_node = 'elasticsearch01.openstack.org',
+  $discover_node = 'elasticsearch01.opencontrail.org',
   $sysadmins = []
 ) {
   $iptables_rule = regsubst ($elasticsearch_nodes, '^(.*)$', '-m state --state NEW -m tcp -p tcp --dport 9200:9400 -s \1 -j ACCEPT')
-  class { 'openstack_project::server':
+  class { 'opencontrail_project::server':
     iptables_public_tcp_ports => [22],
     iptables_rules6           => $iptables_rule,
     iptables_rules4           => $iptables_rule,
@@ -32,11 +32,11 @@ class openstack_project::logstash_worker (
     owner  => 'root',
     group  => 'root',
     mode   => '0644',
-    source => 'puppet:///modules/openstack_project/logstash/logstash-indexer.default',
+    source => 'puppet:///modules/opencontrail_project/logstash/logstash-indexer.default',
   }
 
   class { 'logstash::indexer':
-    conf_template => 'openstack_project/logstash/indexer.conf.erb',
+    conf_template => 'opencontrail_project/logstash/indexer.conf.erb',
   }
 
   class { 'logstash::watchdog':
@@ -45,15 +45,15 @@ class openstack_project::logstash_worker (
 
   include log_processor
   log_processor::worker { 'A':
-    config_file => 'puppet:///modules/openstack_project/logstash/jenkins-log-worker.yaml',
+    config_file => 'puppet:///modules/opencontrail_project/logstash/jenkins-log-worker.yaml',
   }
   log_processor::worker { 'B':
-    config_file => 'puppet:///modules/openstack_project/logstash/jenkins-log-worker.yaml',
+    config_file => 'puppet:///modules/opencontrail_project/logstash/jenkins-log-worker.yaml',
   }
   log_processor::worker { 'C':
-    config_file => 'puppet:///modules/openstack_project/logstash/jenkins-log-worker.yaml',
+    config_file => 'puppet:///modules/opencontrail_project/logstash/jenkins-log-worker.yaml',
   }
   log_processor::worker { 'D':
-    config_file => 'puppet:///modules/openstack_project/logstash/jenkins-log-worker.yaml',
+    config_file => 'puppet:///modules/opencontrail_project/logstash/jenkins-log-worker.yaml',
   }
 }

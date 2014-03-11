@@ -15,14 +15,14 @@
 # Class to install dependencies for uploading python packages to pypi and
 # maven repositories
 #
-class openstack_project::pypi_slave (
+class opencontrail_project::pypi_slave (
   $pypi_password,
   $jenkins_ssh_public_key,
-  $pypi_username = 'openstackci',
+  $pypi_username = 'opencontrailci',
   $jenkinsci_username,
   $jenkinsci_password
 ) {
-  class { 'openstack_project::slave':
+  class { 'opencontrail_project::slave':
     ssh_key => $jenkins_ssh_public_key,
   }
 
@@ -39,7 +39,7 @@ class openstack_project::pypi_slave (
     owner   => 'jenkins',
     group   => 'jenkins',
     mode    => '0600',
-    content => template('openstack_project/pypirc.erb'),
+    content => template('opencontrail_project/pypirc.erb'),
     require => File['/home/jenkins'],
   }
 
@@ -48,7 +48,7 @@ class openstack_project::pypi_slave (
     owner   => 'jenkins',
     group   => 'jenkins',
     mode    => '0600',
-    content => template('openstack_project/jenkinsci-curl.erb'),
+    content => template('opencontrail_project/jenkinsci-curl.erb'),
     require => File['/home/jenkins'],
   }
 
@@ -57,7 +57,7 @@ class openstack_project::pypi_slave (
     owner   => 'jenkins',
     group   => 'jenkins',
     mode    => '0600',
-    content => template('openstack_project/mavencentral-curl.erb'),
+    content => template('opencontrail_project/mavencentral-curl.erb'),
     require => File['/home/jenkins'],
   }
 

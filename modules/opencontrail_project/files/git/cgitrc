@@ -15,13 +15,13 @@ cache-repo-ttl=1
 cache-root-ttl=1
 
 # Specify some default clone prefixes
-clone-prefix=git://git.openstack.org https://git.openstack.org
+clone-prefix=git://git.opencontrail.org https://git.opencontrail.org
 
 # Specify a command which will be invoked to format commit messages
 commit-filter=/usr/local/bin/commit-filter.sh
 
 # Specify the css url
-css=/static/openstack.css
+css=/static/opencontrail.css
 
 # Hide owner for each repository on the index page
 enable-index-owner=0
@@ -33,7 +33,7 @@ enable-index-links=1
 favicon=/static/favicon.ico
 
 # Use a custom logo
-logo=/static/openstack.png
+logo=/static/opencontrail.png
 
 # Enable statistics per week, month and quarter
 max-stats=quarter

@@ -12,19 +12,19 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 #
-# openstackid idp(sso-openid) dev server
+# opencontrailid idp(sso-openid) dev server
 #
-class openstack_project::openstackid_dev (
+class opencontrail_project::opencontrailid_dev (
   $sysadmins = [],
   $site_admin_password = '',
   $id_mysql_host = '',
-  $id_mysql_user = 'openstackid',
+  $id_mysql_user = 'opencontrailid',
   $id_mysql_password = '',
-  $id_db_name = 'openstackid_openid_dev',
+  $id_db_name = 'opencontrailid_openid_dev',
   $ss_mysql_host = '',
-  $ss_mysql_user = 'openstackid',
+  $ss_mysql_user = 'opencontrailid',
   $ss_mysql_password = '',
-  $ss_db_name = 'openstackid_silverstripe_dev',
+  $ss_db_name = 'opencontrailid_silverstripe_dev',
   $redis_port = '6378',
   $redis_max_memory = '1gb',
   $redis_bind = '127.0.0.1',
@@ -44,12 +44,12 @@ class openstack_project::openstackid_dev (
     User::Virtual::Localuser['smarcet'],
   )
 
-  class { 'openstack_project::server':
+  class { 'opencontrail_project::server':
     iptables_public_tcp_ports => [80, 443],
     sysadmins                 => $sysadmins,
   }
 
-  class { 'openstackid':
+  class { 'opencontrailid':
     site_admin_password      => $site_admin_password,
     id_mysql_host            => $id_mysql_host,
     id_mysql_user            => $id_mysql_user,

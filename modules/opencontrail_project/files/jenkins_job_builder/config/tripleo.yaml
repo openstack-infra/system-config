@@ -17,7 +17,7 @@
           export DEVSTACK_GATE_TEMPEST=0
           export DEVSTACK_GATE_EXERCISES=0
           export GEARDSERVER=192.168.1.48
-          export DIB_COMMON_ELEMENTS="stackuser pypi-openstack"
+          export DIB_COMMON_ELEMENTS="stackuser pypi-opencontrail"
           export TRIPLEO_TEST=seed
           function gate_hook {
               bash -xe /opt/stack/new/tripleo-ci/toci_gate_test.sh
@@ -29,7 +29,7 @@
 
     publishers:
       - scp:
-          site: 'static.openstack.org'
+          site: 'static.opencontrail.org'
           files:
             - target: 'logs/$LOG_PATH'
               source: 'logs/**'
@@ -56,7 +56,7 @@
           export DEVSTACK_GATE_TEMPEST=0
           export DEVSTACK_GATE_EXERCISES=0
           export GEARDSERVER=192.168.1.48
-          export DIB_COMMON_ELEMENTS="stackuser pypi-openstack"
+          export DIB_COMMON_ELEMENTS="stackuser pypi-opencontrail"
           export TRIPLEO_TEST=undercloud
           function gate_hook {
               bash -xe /opt/stack/new/tripleo-ci/toci_gate_test.sh
@@ -68,7 +68,7 @@
 
     publishers:
       - scp:
-          site: 'static.openstack.org'
+          site: 'static.opencontrail.org'
           files:
             - target: 'logs/$LOG_PATH'
               source: 'logs/**'
@@ -95,7 +95,7 @@
           export DEVSTACK_GATE_TEMPEST=0
           export DEVSTACK_GATE_EXERCISES=0
           export GEARDSERVER=192.168.1.48
-          export DIB_COMMON_ELEMENTS="stackuser pypi-openstack"
+          export DIB_COMMON_ELEMENTS="stackuser pypi-opencontrail"
           export TRIPLEO_TEST=overcloud
           function gate_hook {
               bash -xe /opt/stack/new/tripleo-ci/toci_gate_test.sh
@@ -107,7 +107,7 @@
 
     publishers:
       - scp:
-          site: 'static.openstack.org'
+          site: 'static.opencontrail.org'
           files:
             - target: 'logs/$LOG_PATH'
               source: 'logs/**'

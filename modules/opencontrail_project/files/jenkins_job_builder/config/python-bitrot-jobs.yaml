@@ -19,7 +19,7 @@
 
     scm:
       - git:
-          url: 'git://git.openstack.org/{github-org}/{name}'
+          url: 'git://git.opencontrail.org/{github-org}/{name}'
           branches:
             - 'origin/{branch}'
 
@@ -47,7 +47,7 @@
 
     scm:
       - git:
-          url: 'git://git.openstack.org/{github-org}/{name}'
+          url: 'git://git.opencontrail.org/{github-org}/{name}'
           branches:
             - 'origin/{branch}'
 
@@ -73,7 +73,7 @@
 
     scm:
       - git:
-          url: 'git://git.openstack.org/{github-org}/{name}'
+          url: 'git://git.opencontrail.org/{github-org}/{name}'
           branches:
             - 'origin/{branch}'
 

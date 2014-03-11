@@ -1,6 +1,6 @@
-# Not using the template because openstack-planet does not use tox.
+# Not using the template because opencontrail-planet does not use tox.
 - job:
-    name: 'gate-openstack-planet-unittest'
+    name: 'gate-opencontrail-planet-unittest'
     node: bare-precise
 
     builders:

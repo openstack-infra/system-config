@@ -1,7 +1,7 @@
 - builder:
     name: gerrit-git-prep
     builders:
-      - shell: "/usr/local/jenkins/slave_scripts/gerrit-git-prep.sh https://review.openstack.org git://git.openstack.org"
+      - shell: "/usr/local/jenkins/slave_scripts/gerrit-git-prep.sh https://review.opencontrail.org git://git.opencontrail.org"
 
 - builder:
     name: coverage
@@ -192,10 +192,10 @@
       - shell: |
           #!/bin/bash -xe
           if [[ ! -e devstack-gate ]]; then
-              git clone git://git.openstack.org/openstack-infra/devstack-gate
+              git clone git://git.opencontrail.org/opencontrail-infra/devstack-gate
           else
               cd devstack-gate
-              git remote set-url origin git://git.openstack.org/openstack-infra/devstack-gate
+              git remote set-url origin git://git.opencontrail.org/opencontrail-infra/devstack-gate
               git remote update
               git reset --hard
               if ! git clean -x -f ; then
@@ -217,10 +217,10 @@
       - shell: |
           #!/bin/bash -xe
           if [[ ! -e devstack-gate ]]; then
-              git clone git://git.openstack.org/openstack-infra/devstack-gate
+              git clone git://git.opencontrail.org/opencontrail-infra/devstack-gate
           fi
           cd devstack-gate
-          /usr/local/jenkins/slave_scripts/gerrit-git-prep.sh https://review.openstack.org git://git.openstack.org
+          /usr/local/jenkins/slave_scripts/gerrit-git-prep.sh https://review.opencontrail.org git://git.opencontrail.org
           cd ..
 
 - builder:
@@ -228,7 +228,7 @@
     builders:
       - shell: |
           #!/bin/sh
-          echo "Detailed logs: http://logs.openstack.org/$LOG_PATH/"
+          echo "Detailed logs: http://logs.opencontrail.org/$LOG_PATH/"
 
 
 - builder:
@@ -238,7 +238,7 @@
           #!/bin/bash -xe
           /usr/local/bin/run-mirror -c /home/jenkins/pypimirror/etc/pypi-mirror.yaml
           find /home/jenkins/pypimirror/mirror/ \( -name index.html -or -name full.html \) -delete
-          rsync -a --ignore-existing --itemize-changes /home/jenkins/pypimirror/mirror/ jenkins@static.openstack.org:/srv/static/pypi/
+          rsync -a --ignore-existing --itemize-changes /home/jenkins/pypimirror/mirror/ jenkins@static.opencontrail.org:/srv/static/pypi/
 
 - builder:
     name: install-buck
@@ -282,7 +282,7 @@
     name: console-log
     publishers:
       - scp:
-          site: 'static.openstack.org'
+          site: 'static.opencontrail.org'
           files:
             - target: 'logs/$LOG_PATH'
               copy-console: true
@@ -293,7 +293,7 @@
     name: devstack-logs
     publishers:
       - scp:
-          site: 'static.openstack.org'
+          site: 'static.opencontrail.org'
           files:
             - target: 'logs/$LOG_PATH'
               source: 'logs/**'
@@ -305,7 +305,7 @@
     name: coverage-log
     publishers:
       - scp:
-          site: 'static.openstack.org'
+          site: 'static.opencontrail.org'
           files:
             - target: 'logs/$LOG_PATH'
               source: 'cover/**'
@@ -316,7 +316,7 @@
     name: test-results
     publishers:
       - scp:
-          site: 'static.openstack.org'
+          site: 'static.opencontrail.org'
           files:
             - target: 'logs/$LOG_PATH'
               source: '**/*nose_results.html'
@@ -339,7 +339,7 @@
     name: upload-sphinx-draft
     publishers:
       - scp:
-          site: 'static.openstack.org'
+          site: 'static.opencontrail.org'
           files:
             - target: 'docs-draft/$LOG_PATH'
               source: 'doc/build/html/**'
@@ -350,7 +350,7 @@
     name: upload-docs-draft
     publishers:
       - scp:
-          site: 'static.openstack.org'
+          site: 'static.opencontrail.org'
           files:
             - target: 'docs-draft/$LOG_PATH/'
               source: 'publish-docs/**'
@@ -362,7 +362,7 @@
     name: upload-to-docs-site
     publishers:
       - ftp:
-          site: docs.openstack.org
+          site: docs.opencontrail.org
           source: 'publish-docs/**'
           target: '/'
           remove-prefix: 'publish-docs/'
@@ -371,7 +371,7 @@
     name: upload-doc-build-results
     publishers:
       - scp:
-          site: 'static.openstack.org'
+          site: 'static.opencontrail.org'
           files:
             - target: 'logs/$LOG_PATH'
               source: 'build-*.log.gz'

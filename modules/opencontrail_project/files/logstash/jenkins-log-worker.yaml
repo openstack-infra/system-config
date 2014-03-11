@@ -1,4 +1,4 @@
-gearman-host: logstash.openstack.org
+gearman-host: logstash.opencontrail.org
 gearman-port: 4730
 output-host: localhost
 output-port: 9999

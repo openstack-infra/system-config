@@ -1,17 +1,17 @@
-# == Class: openstack_project::lists
+# == Class: opencontrail_project::lists
 #
-class openstack_project::lists(
+class opencontrail_project::lists(
   $listadmins,
   $listpassword = ''
 ) {
-  # Using openstack_project::template instead of openstack_project::server
+  # Using opencontrail_project::template instead of opencontrail_project::server
   # because the exim config on this machine is almost certainly
   # going to be more complicated than normal.
-  class { 'openstack_project::template':
+  class { 'opencontrail_project::template':
     iptables_public_tcp_ports => [25, 80, 465],
   }
 
-  $listdomain = 'lists.openstack.org'
+  $listdomain = 'lists.opencontrail.org'
 
   class { 'exim':
     sysadmin        => $listadmins,
@@ -30,7 +30,7 @@ class openstack_project::lists(
     User::Virtual::Localuser['smaffulli'],
   )
 
-  maillist { 'openstack-es':
+  maillist { 'opencontrail-es':
     ensure      => present,
     admin       => 'flavio@redhat.com',
     password    => $listpassword,
@@ -39,7 +39,7 @@ class openstack_project::lists(
     mailserver  => $listdomain,
   }
 
-  maillist { 'openstack-fr':
+  maillist { 'opencontrail-fr':
     ensure      => present,
     admin       => 'erwan.gallen@cloudwatt.com',
     password    => $listpassword,
@@ -48,7 +48,7 @@ class openstack_project::lists(
     mailserver  => $listdomain,
   }
 
-  maillist { 'openstack-i18n':
+  maillist { 'opencontrail-i18n':
     ensure      => present,
     admin       => 'guoyingc@cn.ibm.com',
     password    => $listpassword,
@@ -57,25 +57,25 @@ class openstack_project::lists(
     mailserver  => $listdomain,
   }
 
-  maillist { 'openstack-it':
+  maillist { 'opencontrail-it':
     ensure      => present,
-    admin       => 'stefano@openstack.org',
+    admin       => 'stefano@opencontrail.org',
     password    => $listpassword,
     description => 'Discussioni su OpenStack in italiano',
     webserver   => $listdomain,
     mailserver  => $listdomain,
   }
 
-  maillist { 'openstack-travel-committee':
+  maillist { 'opencontrail-travel-committee':
     ensure      => present,
-    admin       => 'communitymngr@openstack.org',
+    admin       => 'communitymngr@opencontrail.org',
     password    => $listpassword,
     description => 'Private discussions for the OpenStack Travel Program Committee for Hong Kong Summit 2013.',
     webserver   => $listdomain,
     mailserver  => $listdomain,
   }
 
-  maillist { 'openstack-personas':
+  maillist { 'opencontrail-personas':
     ensure      => present,
     admin       => 'pieter.c.kruithof-jr@hp.com',
     password    => $listpassword,
@@ -84,7 +84,7 @@ class openstack_project::lists(
     mailserver  => $listdomain,
   }
 
-  maillist { 'openstack-vi':
+  maillist { 'opencontrail-vi':
     ensure      => present,
     admin       => 'hang.tran@dtt.vn',
     password    => $listpassword,
@@ -95,23 +95,23 @@ class openstack_project::lists(
 
   maillist { 'nov-2013-track-chairs':
     ensure      => present,
-    admin       => 'claire@openstack.org',
+    admin       => 'claire@opencontrail.org',
     password    => $listpassword,
     description => 'Coordination of tracks at OpenStack Summit April 2013',
     webserver   => $listdomain,
     mailserver  => $listdomain,
   }
 
-  maillist { 'openstack-track-chairs':
+  maillist { 'opencontrail-track-chairs':
     ensure      => present,
-    admin       => 'claire@openstack.org',
+    admin       => 'claire@opencontrail.org',
     password    => $listpassword,
     description => 'Coordination of tracks at OpenStack Summits',
     webserver   => $listdomain,
     mailserver  => $listdomain,
   }
 
-  maillist { 'openstack-sos':
+  maillist { 'opencontrail-sos':
     ensure      => present,
     admin       => 'dms@danplanet.com',
     password    => $listpassword,
@@ -131,7 +131,7 @@ class openstack_project::lists(
 
   maillist { 'defcore-committee':
     ensure      => present,
-    admin       => 'josh@openstack.org',
+    admin       => 'josh@opencontrail.org',
     password    => $listpassword,
     description => 'Discussions of the OpenStack Foundation Core Definition Committee',
     webserver   => $listdomain,
@@ -141,7 +141,7 @@ class openstack_project::lists(
 
   maillist { 'ambassadors':
     ensure      => present,
-    admin       => 'tom@openstack.org',
+    admin       => 'tom@opencontrail.org',
     password    => $listpassword,
     description => 'Private discussions between OpenStack Ambassadors',
     webserver   => $listdomain,

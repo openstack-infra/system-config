@@ -1,6 +1,6 @@
-# == Class: openstack_project::wiki
+# == Class: opencontrail_project::wiki
 #
-class openstack_project::wiki (
+class opencontrail_project::wiki (
   $mysql_root_password = '',
   $sysadmins = [],
   $ssl_cert_file_contents = '',
@@ -11,7 +11,7 @@ class openstack_project::wiki (
   include openssl
   include subversion
 
-  class { 'openstack_project::server':
+  class { 'opencontrail_project::server':
     iptables_public_tcp_ports => [80, 443],
     sysadmins                 => $sysadmins,
   }
@@ -54,7 +54,7 @@ class openstack_project::wiki (
   include bup
   bup::site { 'rs-ord':
     backup_user   => 'bup-wiki',
-    backup_server => 'ci-backup-rs-ord.openstack.org',
+    backup_server => 'ci-backup-rs-ord.opencontrail.org',
   }
 
   class { '::elasticsearch':

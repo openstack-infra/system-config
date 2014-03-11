@@ -1,16 +1,16 @@
 # Slave used for automatically proposing changes to Gerrit,
 # Transifex and other tools.
 #
-# == Class: openstack_project::translation_slave
+# == Class: opencontrail_project::translation_slave
 #
-class openstack_project::proposal_slave (
+class opencontrail_project::proposal_slave (
   $jenkins_ssh_public_key,
   $jenkins_ssh_private_key,
   $transifex_password = '',
-  $transifex_username = 'openstackci',
+  $transifex_username = 'opencontrailci',
 ) {
 
-  class { 'openstack_project::slave':
+  class { 'opencontrail_project::slave':
     ssh_key => $jenkins_ssh_public_key,
   }
 
@@ -25,7 +25,7 @@ class openstack_project::proposal_slave (
     owner   => 'jenkins',
     group   => 'jenkins',
     mode    => '0600',
-    content => template('openstack_project/transifexrc.erb'),
+    content => template('opencontrail_project/transifexrc.erb'),
     require => User['jenkins'],
   }
 

@@ -70,7 +70,7 @@ class opencontrail_project::review (
   $contactstore_appsec='',
   $contactstore_pubkey='',
   $sysadmins = [],
-  # For openstackwatch.
+  # For opencontrailwatch.
   $swift_username = '',
   $swift_password = ''
 ) {
@@ -162,7 +162,7 @@ class opencontrail_project::review (
   }
 
   class { 'gerritbot':
-    nick       => 'openstackgerrit',
+    nick       => 'opencontrailgerrit',
     password   => $gerritbot_password,
     server     => 'irc.freenode.net',
     user       => 'gerritbot',

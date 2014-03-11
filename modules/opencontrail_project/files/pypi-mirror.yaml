@@ -1,15 +1,15 @@
 # This file is managed by puppet.
-# https://git.openstack.org/cgit/openstack-infra/config
+# https://git.opencontrail.org/cgit/opencontrail-infra/config
 
 cache-root: /var/cache/pypimirror
 
 mirrors:
-  - name: openstack
+  - name: opencontrail
     projects:
-      - git://git.openstack.org/openstack/requirements
-    output: /var/lib/pypimirror/openstack
+      - git://git.opencontrail.org/opencontrail/requirements
+    output: /var/lib/pypimirror/opencontrail
 
-  - name: openstack-infra
+  - name: opencontrail-infra
     projects:
-      - git://git.openstack.org/openstack-infra/config
-    output: /var/lib/pypimirror/openstack-infra
+      - git://git.opencontrail.org/opencontrail-infra/config
+    output: /var/lib/pypimirror/opencontrail-infra

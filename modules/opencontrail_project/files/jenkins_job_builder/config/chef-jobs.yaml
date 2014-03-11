@@ -36,7 +36,7 @@
       - console-log
 
 - job:
-    name: gate-openstack-chef-repo
+    name: gate-opencontrail-chef-repo
     node: bare-precise
 
     builders:

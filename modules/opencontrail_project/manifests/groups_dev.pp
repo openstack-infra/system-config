@@ -14,7 +14,7 @@
 #
 # User group management dev server
 #
-class openstack_project::groups_dev (
+class opencontrail_project::groups_dev (
   $site_admin_password = '',
   $site_mysql_host     = '',
   $site_mysql_password = '',
@@ -27,14 +27,14 @@ class openstack_project::groups_dev (
 
 #  include drupal
 
-  class { 'openstack_project::server':
+  class { 'opencontrail_project::server':
     iptables_public_tcp_ports => [22, 80, 443],
     sysadmins                 => $sysadmins,
   }
 
   class { 'drupal':
-    site_name            => 'groups-dev.openstack.org',
-    site_docroot         => '/srv/vhosts/groups-dev.openstack.org',
+    site_name            => 'groups-dev.opencontrail.org',
+    site_docroot         => '/srv/vhosts/groups-dev.opencontrail.org',
     site_mysql_host      => $site_mysql_host,
     site_mysql_user      => 'groups',
     site_mysql_password  => $site_mysql_password,
@@ -44,10 +44,10 @@ class openstack_project::groups_dev (
     site_admin_password  => $site_admin_password,
     site_build_reponame  => 'groups-master',
     site_makefile        => 'build-groups.make',
-    site_repo_url        => 'https://git.openstack.org/openstack-infra/groups',
+    site_repo_url        => 'https://git.opencontrail.org/opencontrail-infra/groups',
     site_profile         => 'groups',
-    site_base_url        => 'http://groups-dev.openstack.org',
-    require              => Class['openstack_project::server'],
+    site_base_url        => 'http://groups-dev.opencontrail.org',
+    require              => Class['opencontrail_project::server'],
   }
 
 }

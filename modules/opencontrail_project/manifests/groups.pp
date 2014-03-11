@@ -1,8 +1,8 @@
 # User group management server
-class openstack_project::groups (
+class opencontrail_project::groups (
   $sysadmins = []
 ) {
-  class { 'openstack_project::server':
+  class { 'opencontrail_project::server':
     iptables_public_tcp_ports => [80, 443],
     sysadmins                 => $sysadmins,
   }

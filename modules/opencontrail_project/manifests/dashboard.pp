@@ -1,10 +1,10 @@
-class openstack_project::dashboard(
+class opencontrail_project::dashboard(
     $password = '',
     $mysql_password = '',
     $sysadmins = []
 ) {
 
-  class { 'openstack_project::server':
+  class { 'opencontrail_project::server':
     iptables_public_tcp_ports => [80, 443, 3000],
     sysadmins                 => $sysadmins
   }
@@ -25,7 +25,7 @@ class openstack_project::dashboard(
   file { '/etc/mysql/conf.d/mysqld_innodb_fpt.cnf':
     ensure  => present,
     source  =>
-      'puppet:///modules/openstack_project/dashboard/mysqld_innodb_fpt.cnf',
+      'puppet:///modules/opencontrail_project/dashboard/mysqld_innodb_fpt.cnf',
     require => Class['mysql::server'],
   }
 }

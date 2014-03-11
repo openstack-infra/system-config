@@ -19,7 +19,7 @@
 
     publishers:
       - ftp:
-          site: docs.openstack.org
+          site: docs.opencontrail.org
           source: '_out/**'
           target: 'infra/publications/'
           remove-prefix: '_out/'
@@ -44,7 +44,7 @@
 
     publishers:
       - ftp:
-          site: docs.openstack.org
+          site: docs.opencontrail.org
           source: 'output/**'
           target: 'infra/publications/'
           remove-prefix: 'output/'

@@ -2,11 +2,11 @@
 # similar to an OpenStack Jenkins slave but does not need to
 # have services managed like firewall, ntp, automatic upgrades,
 # and so on.
-class openstack_project::bare_slave(
+class opencontrail_project::bare_slave(
   $certname = $::fqdn,
   $install_users = true
 ) {
-  class { 'openstack_project::base':
+  class { 'opencontrail_project::base':
     certname      => $certname,
     install_users => $install_users,
   }

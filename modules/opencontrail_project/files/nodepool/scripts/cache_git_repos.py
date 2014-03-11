@@ -23,13 +23,13 @@ import urllib2
 
 from common import run_local
 
-URL = ('https://git.openstack.org/cgit/openstack-infra/config/plain/'
-       'modules/openstack_project/files/review.projects.yaml')
+URL = ('https://git.opencontrail.org/cgit/opencontrail-infra/config/plain/'
+       'modules/opencontrail_project/files/review.projects.yaml')
 PROJECT_RE = re.compile('^-?\s+project:\s+(.*)$')
 
 
 def clone_repo(project):
-    remote = 'git://git.openstack.org/%s.git' % project
+    remote = 'git://git.opencontrail.org/%s.git' % project
 
     # Clear out any existing target directory first, in case of a retry.
     try:

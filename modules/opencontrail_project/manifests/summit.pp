@@ -1,7 +1,7 @@
-class openstack_project::summit (
+class opencontrail_project::summit (
   $sysadmins = []
 ) {
-  class { 'openstack_project::server':
+  class { 'opencontrail_project::server':
     iptables_public_tcp_ports => [22, 80],
     sysadmins                 => $sysadmins
   }

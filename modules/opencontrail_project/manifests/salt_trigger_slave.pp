@@ -1,12 +1,12 @@
 # Slave used for automatically triggering commands on the salt master.
 #
-# == Class: openstack_project::salt_trigger_slave
+# == Class: opencontrail_project::salt_trigger_slave
 #
-class openstack_project::salt_trigger_slave (
+class opencontrail_project::salt_trigger_slave (
   $jenkins_ssh_public_key = ''
 ) {
 
-  class { 'openstack_project::slave':
+  class { 'opencontrail_project::slave':
     ssh_key => $jenkins_ssh_public_key,
   }
 
@@ -15,7 +15,7 @@ class openstack_project::salt_trigger_slave (
     owner   => 'root',
     group   => 'root',
     mode    => '0440',
-    source  => 'puppet:///modules/openstack_project/salt-trigger.sudoers',
+    source  => 'puppet:///modules/opencontrail_project/salt-trigger.sudoers',
     replace => true,
   }
 

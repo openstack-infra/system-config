@@ -1,5 +1,5 @@
 - job:
-    name: gate-openstackid-unittests
+    name: gate-opencontrailid-unittests
     node: 'bare-precise'
 
     builders:
@@ -11,7 +11,7 @@
         - console-log
         - coverage-log
         - scp:
-            site: 'static.openstack.org'
+            site: 'static.opencontrail.org'
             files:
                 - target: 'logs/$LOG_PATH'
                   source: './reports/**'
@@ -19,7 +19,7 @@
                   copy-after-failure: true
 
 - job-template:
-    name: 'openstackid-release-{branch-designator}'
+    name: 'opencontrailid-release-{branch-designator}'
     node: '{node}'
 
     builders:
@@ -40,20 +40,20 @@
             rm -rf tarballs
             mkdir -p tarballs
             # Create an archive tarball.
-            tar -czf openstackid-$PROJECT_VER.tar.gz dist/
-            cp openstackid-$PROJECT_VER.tar.gz tarballs/openstackid-latest.tar.gz
-            mv openstackid-$PROJECT_VER.tar.gz tarballs/
+            tar -czf opencontrailid-$PROJECT_VER.tar.gz dist/
+            cp opencontrailid-$PROJECT_VER.tar.gz tarballs/opencontrailid-latest.tar.gz
+            mv opencontrailid-$PROJECT_VER.tar.gz tarballs/
     publishers:
         - console-log
         - coverage-log
         - scp:
-            site: 'static.openstack.org'
+            site: 'static.opencontrail.org'
             files:
                 - target: 'logs/$LOG_PATH'
                   source: './reports/**'
                   keep-hierarchy: true
                   copy-after-failure: true
-                - target: 'tarballs/openstackid/'
+                - target: 'tarballs/opencontrailid/'
                   source: 'tarballs/*.tar.gz'
                   keep-hierarchy: false
                   copy-after-failure: false

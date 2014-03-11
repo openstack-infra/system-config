@@ -7,16 +7,16 @@ cron:
   update-image: '14 2 * * *'
 
 zmq-publishers:
-  - tcp://jenkins01.openstack.org:8888
-  - tcp://jenkins02.openstack.org:8888
-  - tcp://jenkins03.openstack.org:8888
-  - tcp://jenkins04.openstack.org:8888
-  - tcp://jenkins05.openstack.org:8888
-  - tcp://jenkins06.openstack.org:8888
-  - tcp://jenkins07.openstack.org:8888
+  - tcp://jenkins01.opencontrail.org:8888
+  - tcp://jenkins02.opencontrail.org:8888
+  - tcp://jenkins03.opencontrail.org:8888
+  - tcp://jenkins04.opencontrail.org:8888
+  - tcp://jenkins05.opencontrail.org:8888
+  - tcp://jenkins06.opencontrail.org:8888
+  - tcp://jenkins07.opencontrail.org:8888
 
 gearman-servers:
-  - host: zuul.openstack.org
+  - host: zuul.opencontrail.org
 
 providers:
   - name: rax-dfw
@@ -282,7 +282,7 @@ providers:
 targets:
   - name: jenkins01
     jenkins:
-      url: 'https://jenkins01.openstack.org/'
+      url: 'https://jenkins01.opencontrail.org/'
       user: '<%= jenkins_api_user %>'
       apikey: '<%= jenkins_api_key %>'
       credentials-id: '<%= jenkins_credentials_id %>'
@@ -328,7 +328,7 @@ targets:
           - name: tripleo-test-cloud
   - name: jenkins02
     jenkins:
-      url: 'https://jenkins02.openstack.org/'
+      url: 'https://jenkins02.opencontrail.org/'
       user: '<%= jenkins_api_user %>'
       apikey: '<%= jenkins_api_key %>'
       credentials-id: '<%= jenkins_credentials_id %>'
@@ -374,7 +374,7 @@ targets:
           - name: tripleo-test-cloud
   - name: jenkins03
     jenkins:
-      url: 'https://jenkins03.openstack.org/'
+      url: 'https://jenkins03.opencontrail.org/'
       user: '<%= jenkins_api_user %>'
       apikey: '<%= jenkins_api_key %>'
       credentials-id: '<%= jenkins_credentials_id %>'
@@ -420,7 +420,7 @@ targets:
           - name: tripleo-test-cloud
   - name: jenkins04
     jenkins:
-      url: 'https://jenkins04.openstack.org/'
+      url: 'https://jenkins04.opencontrail.org/'
       user: '<%= jenkins_api_user %>'
       apikey: '<%= jenkins_api_key %>'
       credentials-id: '<%= jenkins_credentials_id %>'
@@ -466,7 +466,7 @@ targets:
           - name: tripleo-test-cloud
   - name: jenkins05
     jenkins:
-      url: 'https://jenkins05.openstack.org/'
+      url: 'https://jenkins05.opencontrail.org/'
       user: '<%= jenkins_api_user %>'
       apikey: '<%= jenkins_api_key %>'
       credentials-id: '<%= jenkins_credentials_id %>'
@@ -512,7 +512,7 @@ targets:
           - name: tripleo-test-cloud
   - name: jenkins06
     jenkins:
-      url: 'https://jenkins06.openstack.org/'
+      url: 'https://jenkins06.opencontrail.org/'
       user: '<%= jenkins_api_user %>'
       apikey: '<%= jenkins_api_key %>'
       credentials-id: '<%= jenkins_credentials_id %>'
@@ -558,7 +558,7 @@ targets:
           - name: tripleo-test-cloud
   - name: jenkins07
     jenkins:
-      url: 'https://jenkins07.openstack.org/'
+      url: 'https://jenkins07.opencontrail.org/'
       user: '<%= jenkins_api_user %>'
       apikey: '<%= jenkins_api_key %>'
       credentials-id: '<%= jenkins_credentials_id %>'

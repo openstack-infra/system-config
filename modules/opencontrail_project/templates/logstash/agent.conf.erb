@@ -1,6 +1,6 @@
 input {
   pipe {
-    command => "python3 /usr/local/bin/log-pusher.py -r -z tcp://jenkins.openstack.org:8888 -l http://logs.openstack.org -f console.html"
+    command => "python3 /usr/local/bin/log-pusher.py -r -z tcp://jenkins.opencontrail.org:8888 -l http://logs.opencontrail.org -f console.html"
     format => "json"
     message_format => "%{event_message}"
     tags => ["jenkins", "console"]
@@ -44,4 +44,4 @@ filter {
   }
 }
 
-<%= scope.function_template(['openstack_project/logstash/redis-output.conf.erb']) %>
+<%= scope.function_template(['opencontrail_project/logstash/redis-output.conf.erb']) %>

@@ -1,7 +1,7 @@
-class openstack_project::community (
+class opencontrail_project::community (
   $sysadmins = []
 ) {
-  class { 'openstack_project::server':
+  class { 'opencontrail_project::server':
     iptables_public_tcp_ports => [80, 443, 8099, 8080],
     sysadmins                 => $sysadmins
   }

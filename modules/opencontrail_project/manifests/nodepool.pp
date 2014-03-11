@@ -1,6 +1,6 @@
-# == Class: openstack_project::nodepool
+# == Class: opencontrail_project::nodepool
 #
-class openstack_project::nodepool(
+class opencontrail_project::nodepool(
   $mysql_root_password,
   $mysql_password,
   $nodepool_ssh_private_key = '',
@@ -22,7 +22,7 @@ class openstack_project::nodepool(
   $image_log_document_root = '/var/log/nodepool/image',
   $enable_image_log_via_http = true,
 ) {
-  class { 'openstack_project::server':
+  class { 'opencontrail_project::server':
     sysadmins                 => $sysadmins,
     iptables_public_tcp_ports => [80],
   }
@@ -41,7 +41,7 @@ class openstack_project::nodepool(
     owner   => 'nodepool',
     group   => 'root',
     mode    => '0400',
-    content => template("openstack_project/nodepool/${nodepool_template}"),
+    content => template("opencontrail_project/nodepool/${nodepool_template}"),
     require => [
       File['/etc/nodepool'],
       User['nodepool'],
@@ -57,7 +57,7 @@ class openstack_project::nodepool(
     purge   => true,
     force   => true,
     require => File['/etc/nodepool'],
-    source  => 'puppet:///modules/openstack_project/nodepool/scripts',
+    source  => 'puppet:///modules/opencontrail_project/nodepool/scripts',
   }
 
 }

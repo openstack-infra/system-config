@@ -1,6 +1,6 @@
-# == Class: openstack_project::slave
+# == Class: opencontrail_project::slave
 #
-class openstack_project::slave (
+class opencontrail_project::slave (
   $bare = false,
   $certname = $::fqdn,
   $ssh_key = '',
@@ -8,12 +8,12 @@ class openstack_project::slave (
   $python3 = false,
   $include_pypy = false
 ) {
-  include openstack_project
-  include openstack_project::tmpcleanup
-  class { 'openstack_project::automatic_upgrades':
+  include opencontrail_project
+  include opencontrail_project::tmpcleanup
+  class { 'opencontrail_project::automatic_upgrades':
     origins => ['LP-PPA-saltstack-salt precise'],
   }
-  class { 'openstack_project::server':
+  class { 'opencontrail_project::server':
     iptables_public_tcp_ports => [],
     certname                  => $certname,
     sysadmins                 => $sysadmins,
@@ -25,7 +25,7 @@ class openstack_project::slave (
     include_pypy => $include_pypy,
   }
   class { 'salt':
-    salt_master => 'ci-puppetmaster.openstack.org',
+    salt_master => 'ci-puppetmaster.opencontrail.org',
   }
   include jenkins::cgroups
   include ulimit

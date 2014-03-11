@@ -25,7 +25,7 @@
 #   - First parameter is the password for the XenServer
 #   - Second parameter is a URL to an xva appliance to be installed. For
 #     building such an appliance, see:
-#        https://github.com/citrix-openstack/openstack-xenapi-testing-xva
+#        https://github.com/citrix-opencontrail/opencontrail-xenapi-testing-xva
 #   - Third parameter should be the name-label for the appliance.
 # 4.) Poll the public IP through ssh, and Wait until the file
 #     "$FILE_TO_TOUCH_ON_COMPLETION" exists

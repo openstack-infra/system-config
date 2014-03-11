@@ -14,12 +14,12 @@
 #
 # Class to configure asterisk on a CentOS node.
 #
-# == Class: openstack_project::pbx
-class openstack_project::pbx (
+# == Class: opencontrail_project::pbx
+class opencontrail_project::pbx (
   $sysadmins = [],
   $sip_providers = [],
 ) {
-  class { 'openstack_project::server':
+  class { 'opencontrail_project::server':
     sysadmins                 => $sysadmins,
     # SIP signaling is either TCP or UDP port 5060.
     # RTP media (audio/video) uses a range of UDP ports.
@@ -39,8 +39,8 @@ class openstack_project::pbx (
   )
 
   class { 'asterisk':
-    asterisk_conf_source  => 'puppet:///modules/openstack_project/pbx/asterisk/asterisk.conf',
-    modules_conf_source   => 'puppet:///modules/openstack_project/pbx/asterisk/modules.conf',
+    asterisk_conf_source  => 'puppet:///modules/opencontrail_project/pbx/asterisk/asterisk.conf',
+    modules_conf_source   => 'puppet:///modules/opencontrail_project/pbx/asterisk/modules.conf',
   }
 
   file {'/etc/asterisk/sip.conf.d/sip.conf':
@@ -48,7 +48,7 @@ class openstack_project::pbx (
     owner   => 'asterisk',
     group   => 'asterisk',
     mode    => '0660',
-    content => template('openstack_project/pbx/asterisk/sip.conf.erb'),
+    content => template('opencontrail_project/pbx/asterisk/sip.conf.erb'),
     require => File['/etc/asterisk/'],
   }
 
@@ -57,7 +57,7 @@ class openstack_project::pbx (
     owner   => 'asterisk',
     group   => 'asterisk',
     mode    => '0660',
-    source  => 'puppet:///modules/openstack_project/pbx/asterisk/extensions.conf',
+    source  => 'puppet:///modules/opencontrail_project/pbx/asterisk/extensions.conf',
     require => File['/etc/asterisk/'],
   }
 
@@ -66,7 +66,7 @@ class openstack_project::pbx (
     owner   => 'asterisk',
     group   => 'asterisk',
     mode    => '0660',
-    source  => 'puppet:///modules/openstack_project/pbx/asterisk/cdr.conf',
+    source  => 'puppet:///modules/opencontrail_project/pbx/asterisk/cdr.conf',
     require => File['/etc/asterisk/'],
   }
 
@@ -75,7 +75,7 @@ class openstack_project::pbx (
     owner   => 'asterisk',
     group   => 'asterisk',
     mode    => '0660',
-    source  => 'puppet:///modules/openstack_project/pbx/asterisk/cdr_custom.conf',
+    source  => 'puppet:///modules/opencontrail_project/pbx/asterisk/cdr_custom.conf',
     require => File['/etc/asterisk/'],
   }
 }

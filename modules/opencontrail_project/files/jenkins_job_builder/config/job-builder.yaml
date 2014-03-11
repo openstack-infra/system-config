@@ -6,7 +6,7 @@
     builders:
       - gerrit-git-prep
       - docs:
-          github-org: openstack-infra
+          github-org: opencontrail-infra
           project: jenkins-job-builder
 
     publishers:
@@ -25,7 +25,7 @@
     builders:
       - gerrit-git-prep
       - shell: |
-          source /usr/local/jenkins/slave_scripts/select-mirror.sh openstack-infra jenkins-job-builder
+          source /usr/local/jenkins/slave_scripts/select-mirror.sh opencontrail-infra jenkins-job-builder
           ./tools/run-compare-xml.sh
 
     publishers:

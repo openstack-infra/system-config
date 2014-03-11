@@ -5,7 +5,7 @@
     builders:
       - gerrit-git-prep
       - selenium:
-          github-org: openstack
+          github-org: opencontrail
           project: horizon
 
     publishers:
@@ -23,7 +23,7 @@
 
     builders:
       - gerrit-git-prep
-      - shell: '/usr/local/jenkins/slave_scripts/run-unittests.sh 27dj14 openstack horizon'
+      - shell: '/usr/local/jenkins/slave_scripts/run-unittests.sh 27dj14 opencontrail horizon'
       - assert-no-extra-files
 
     publishers:

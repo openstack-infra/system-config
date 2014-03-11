@@ -1,11 +1,11 @@
-class openstack_project::etherpad_dev (
+class opencontrail_project::etherpad_dev (
   $mysql_password,
   $mysql_host = 'localhost',
   $mysql_user = 'eplite',
   $mysql_db_name = 'etherpad-lite',
   $sysadmins = []
 ) {
-  class { 'openstack_project::server':
+  class { 'opencontrail_project::server':
     iptables_public_tcp_ports => [22, 80, 443],
     sysadmins                 => $sysadmins
   }
