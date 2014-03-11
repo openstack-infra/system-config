@@ -160,26 +160,6 @@ openstack-neutron:
     branches:
       - master
 
-savanna:
-    events:
-      - patchset-created
-      - change-merged
-      - x-vrif-minus-2
-    projects:
-      - openstack/sahara
-      - openstack/python-saharaclient
-      - openstack/sahara-dashboard
-      - openstack/sahara-extra
-      - openstack/sahara-image-elements
-      - stackforge/puppet-sahara
-      - stackforge/sahara-ci-config
-      - stackforge/sahara-guestagent
-    branches:
-      - master
-      - stable/0.1
-      - stable/0.2
-      - stable/0.3
-
 openstack-sahara:
     events:
       - patchset-created
