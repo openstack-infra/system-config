@@ -1,6 +1,6 @@
-# == Class: openstack_project::puppetdb
+# == Class: opencontrail_project::puppetdb
 #
-class openstack_project::puppetdb (
+class opencontrail_project::puppetdb (
   $sysadmins = [],
 ) {
 
@@ -19,14 +19,14 @@ class openstack_project::puppetdb (
     system => true,
   }
 
-  class { 'openstack_project::server':
+  class { 'opencontrail_project::server':
     iptables_public_tcp_ports => [8081],
     sysadmins                 => $sysadmins,
   }
 
   class { 'puppetdb::database::postgresql':
     require         => [User['postgres'],
-      Class['openstack_project::base'],],
+      Class['opencontrail_project::base'],],
   }
 
   class { '::puppetdb::server':
