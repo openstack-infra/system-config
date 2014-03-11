@@ -24,7 +24,6 @@
 
 - job:
     name: openstack-api-ref
-    concurrent: false
     node: bare-precise
 
     builders:
@@ -48,7 +47,6 @@
 # this copies static files from www
 - job:
     name: openstack-api-site
-    concurrent: false
     node: bare-precise
 
     builders:
@@ -66,7 +64,6 @@
 
 - job:
     name: compute-api-v2.0-wadl
-    concurrent: false
     node: bare-precise
 
     builders:

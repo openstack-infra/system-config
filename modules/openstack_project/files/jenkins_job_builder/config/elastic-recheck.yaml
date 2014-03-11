@@ -1,6 +1,5 @@
 - job:
     name: elastic-recheck-docs
-    concurrent: false
     node: bare-precise
 
     builders:

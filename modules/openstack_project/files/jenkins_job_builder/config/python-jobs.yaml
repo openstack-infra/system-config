@@ -195,7 +195,6 @@
 
 - job-template:
     name: '{name}-branch-tarball'
-    concurrent: false
     node: bare-precise
 
     builders:
