@@ -88,7 +88,8 @@ class openstack_project::review (
       '/etc/ssl/certs/review.openstack.org.pem',
     ssl_key_file                        =>
       '/etc/ssl/private/review.openstack.org.key',
-    ssl_chain_file                      => '/etc/ssl/certs/intermediate.pem',
+#   ssl_chain_file                      => '/etc/ssl/certs/intermediate.pem',
+    ssl_chain_file                      => '',
     ssl_cert_file_contents              => $ssl_cert_file_contents,
     ssl_key_file_contents               => $ssl_key_file_contents,
     ssl_chain_file_contents             => $ssl_chain_file_contents,
