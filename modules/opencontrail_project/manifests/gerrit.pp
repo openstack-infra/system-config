@@ -56,7 +56,7 @@ class opencontrail_project::gerrit (
   $replicate_local = true,
   $replication = [],
   $local_git_dir = '/var/lib/git',
-  $cla_description = 'OpenStack Individual Contributor License Agreement',
+  $cla_description = 'OpenContrail Individual Contributor License Agreement',
   $cla_file = 'static/cla.html',
   $cla_id = '2',
   $cla_name = 'ICLA',

@@ -19,7 +19,7 @@ class opencontrail_project::etherpad_dev (
   }
 
   class { 'etherpad_lite::site':
-    etherpad_title    => 'OpenStack Dev Etherpad',
+    etherpad_title    => 'OpenContrail Dev Etherpad',
     database_host     => $mysql_host,
     database_user     => $mysql_user,
     database_name     => $mysql_db_name,

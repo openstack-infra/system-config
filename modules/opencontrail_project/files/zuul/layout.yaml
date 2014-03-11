@@ -592,7 +592,7 @@ jobs:
 # group, projects are sorted (mostly) alphabetically.
 projects:
 
-# Section: OpenStack server projects
+# Section: OpenContrail server projects
 
   - name: opencontrail/ceilometer
     template:
@@ -1194,7 +1194,7 @@ projects:
       - tuskar-tarball:
         - tuskar-pypi-upload
 
-# Section: OpenStack client projects
+# Section: OpenContrail client projects
 
   - name: opencontrail/python-ceilometerclient
     template:
@@ -1687,7 +1687,7 @@ projects:
       - python-tuskarclient-tarball:
         - python-tuskarclient-pypi-upload
 
-# Section: Other OpenStack projects
+# Section: Other OpenContrail projects
 
 #TODO: add docs
   - name: opencontrail/diskimage-builder
@@ -2394,7 +2394,7 @@ projects:
       - tuskar-ui-tarball:
         - tuskar-ui-pypi-upload
 
-# Section: OpenStack API projects
+# Section: OpenContrail API projects
 
   - name: opencontrail/compute-api
     template:
@@ -2437,7 +2437,7 @@ projects:
     post:
       - volume-api-tox-doc-publishdocs
 
-# Section: OpenStack documentation projects
+# Section: OpenContrail documentation projects
 
   - name: opencontrail/api-site
     template:
@@ -2496,7 +2496,7 @@ projects:
     periodic:
       - manuals-propose-translation-update
 
-# Section: OpenStack development projects
+# Section: OpenContrail development projects
 
   - name: opencontrail-dev/cookiecutter
     check:
@@ -2660,7 +2660,7 @@ projects:
     gate:
       - gate-noop
 
-# Section: OpenStack infrastructure projects
+# Section: OpenContrail infrastructure projects
 
   - name: opencontrail-infra/activity-board
     check:

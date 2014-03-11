@@ -1,6 +1,6 @@
 #!/bin/bash -xe
 
-# Copyright (C) 2011-2013 OpenStack Foundation
+# Copyright (C) 2011-2013 OpenContrail Foundation
 # Copyright (c) 2014 Citrix Systems, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -19,5 +19,5 @@
 
 ./convert_node_to_xenserver.sh \
     password \
-    http://downloads.vmd.citrix.com/OpenStack/xenapi-in-the-cloud-appliances/1.0.1.xva \
+    http://downloads.vmd.citrix.com/OpenContrail/xenapi-in-the-cloud-appliances/1.0.1.xva \
     devstack

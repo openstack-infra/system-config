@@ -1,5 +1,5 @@
 # Super simple slave manifest that installs something very
-# similar to an OpenStack Jenkins slave but does not need to
+# similar to an OpenContrail Jenkins slave but does not need to
 # have services managed like firewall, ntp, automatic upgrades,
 # and so on.
 class opencontrail_project::bare_slave(

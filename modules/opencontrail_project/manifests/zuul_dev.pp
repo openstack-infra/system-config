@@ -40,7 +40,7 @@ class opencontrail_project::zuul_dev(
     status_url           => 'http://zuul-dev.opencontrail.org/',
     statsd_host          => $statsd_host,
     git_email            => 'jenkins@opencontrail.org',
-    git_name             => 'OpenStack Jenkins',
+    git_name             => 'OpenContrail Jenkins',
   }
 
   class { '::zuul::server': }

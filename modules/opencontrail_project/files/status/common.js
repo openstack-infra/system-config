@@ -1,4 +1,4 @@
-// Copyright 2013 OpenStack Foundation
+// Copyright 2013 OpenContrail Foundation
 // //
 // // Licensed under the Apache License, Version 2.0 (the "License"); you may
 // // not use this file except in compliance with the License. You may obtain
@@ -52,10 +52,10 @@ function footer() {
   '<hr>'+
   '<div id="footer">'+
   '<div class="span-4">'+
-  '<h3>OpenStack</h3>'+
+  '<h3>OpenContrail</h3>'+
   '<ul>'+
   ' <li><a href="http://www.opencontrail.org/projects/">Projects</a></li>'+
-  ' <li><a href="http://www.opencontrail.org/opencontrail-security/">OpenStack Security</a></li>'+
+  ' <li><a href="http://www.opencontrail.org/opencontrail-security/">OpenContrail Security</a></li>'+
   ' <li><a href="http://www.opencontrail.org/projects/opencontrail-faq/">Common Questions</a></li>'+
   ' <li><a href="http://www.opencontrail.org/blog/">Blog</a></li>'+
   '</ul>'+
@@ -73,7 +73,7 @@ function footer() {
   '<div class="span-4">'+
   '<h3>Documentation</h3>'+
   '<ul>'+
-  ' <li><a href="http://docs.opencontrail.org/">OpenStack Manuals</a></li>'+
+  ' <li><a href="http://docs.opencontrail.org/">OpenContrail Manuals</a></li>'+
   ' <li><a href="http://docs.opencontrail.org/diablo/opencontrail-compute/starter/content/">Getting Started</a></li>'+
   ' <li><a href="http://wiki.opencontrail.org/">Wiki</a></li>'+
   '</ul>'+
@@ -84,7 +84,7 @@ function footer() {
   ' <li><a href="http://www.opencontrail.org/brand/">Logos &amp; Guidelines</a></li>'+
   ' <li><a href="http://www.opencontrail.org/brand/opencontrail-trademark-policy/">Trademark Policy</a></li>'+
   ' <li><a href="http://www.opencontrail.org/privacy/">Privacy Policy</a></li>'+
-  ' <li><a href="http://wiki.opencontrail.org/CLA">OpenStack CLA</a></li>'+
+  ' <li><a href="http://wiki.opencontrail.org/CLA">OpenContrail CLA</a></li>'+
   '</ul>'+
   '</div>'+
   '</div>'+

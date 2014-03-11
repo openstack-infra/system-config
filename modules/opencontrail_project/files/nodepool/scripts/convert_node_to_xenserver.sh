@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Copyright (C) 2011-2014 OpenStack Foundation
+# Copyright (C) 2011-2014 OpenContrail Foundation
 # Copyright (c) 2014 Citrix Systems, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
