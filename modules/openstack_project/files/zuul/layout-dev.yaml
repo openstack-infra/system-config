@@ -144,3 +144,9 @@ projects:
   - name: gtest-org/gtest2
     periodic:
       - gate-noop
+
+  - name: stackforge/contrail-controller
+    check:
+      - gate-noop
+    gate:
+      - gate-noop

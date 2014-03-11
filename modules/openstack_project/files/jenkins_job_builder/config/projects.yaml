@@ -2276,3 +2276,12 @@
 
     jobs:
       - python-jobs
+
+- project:
+    name: contrail-controller
+    github-org: stackforge
+    node: bare-precise
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - python-jobs
