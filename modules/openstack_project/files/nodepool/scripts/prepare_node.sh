@@ -24,6 +24,10 @@ PYPY=${5:-false}
 ALL_MYSQL_PRIVS=${6:-false}
 
 sudo hostname $HOSTNAME
+# Fedora image doesn't come with wget
+if [ -f /usr/bin/yum ]; then
+    sudo yum -y install wget
+fi
 wget https://git.openstack.org/cgit/openstack-infra/config/plain/install_puppet.sh
 sudo bash -xe install_puppet.sh
 sudo git clone --depth=1 git://git.openstack.org/openstack-infra/config.git \
