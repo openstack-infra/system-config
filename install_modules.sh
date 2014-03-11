@@ -24,7 +24,7 @@ remove_module "limits" # remove saz-limits (required by saz-gearman)
 
 MODULES["puppetlabs-ntp"]="0.2.0"
 
-MODULES["openstackci-dashboard"]="0.0.8"
+MODULES["opencontrailci-dashboard"]="0.0.8"
 
 # freenode #puppet 2012-09-25:
 # 18:25 < jeblair> i would like to use some code that someone wrote,
@@ -36,7 +36,7 @@ MODULES["openstackci-dashboard"]="0.0.8"
 # 18:30 < jamesturnbull> jeblair: since we - being PL - are the author
 # - our intent was not to limit it's use and it should be Apache
 # licensed
-MODULES["openstackci-vcsrepo"]="0.0.8"
+MODULES["opencontrailci-vcsrepo"]="0.0.8"
 
 MODULES["puppetlabs-apache"]="0.0.4"
 MODULES["puppetlabs-apt"]="1.1.0"
