@@ -21,8 +21,8 @@ esac
 HUDSON=http://localhost:8080/
 # We keep packaging for opencontrail trunk in lp:~o-u-p/$project/ubuntu
 # For a release (diablo, essex), it's in lp:~o-u-p/$project/$release
-OPENSTACK_RELEASE=${OPENSTACK_RELEASE:-ubuntu}
-BZR_BRANCH=${BZR_BRANCH:-lp:~opencontrail-ubuntu-packagers/$PROJECT/${OPENSTACK_RELEASE}}
+OPENCONTRAIL_RELEASE=${OPENCONTRAIL_RELEASE:-ubuntu}
+BZR_BRANCH=${BZR_BRANCH:-lp:~opencontrail-ubuntu-packagers/$PROJECT/${OPENCONTRAIL_RELEASE}}
 PPAS=${PPAS:-ppa:$PROJECT-core/trunk}
 PACKAGING_REVNO=${PACKAGING_REVNO:--1}
 series=${series:-lucid}
