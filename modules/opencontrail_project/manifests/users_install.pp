@@ -1,6 +1,6 @@
-# Class: openstack_project::users_install
+# Class: opencontrail_project::users_install
 #
-# This class handles adding and removing openstack admin users
+# This class handles adding and removing opencontrail admin users
 # from the servers.
 #
 # Parameters:
@@ -8,23 +8,23 @@
 #   admins.  Defaults to 'false', can be set in hiera.
 #
 # Requires:
-#   openstack_project::users - must contain the users designated.
+#   opencontrail_project::users - must contain the users designated.
 #
 # Sample Usage:
-#   include openstack_project::users_install
-#   class { 'openstack_project::users_install':
+#   include opencontrail_project::users_install
+#   class { 'opencontrail_project::users_install':
 #     install_users => true,
 #   }
 
-class openstack_project::users_install (
+class opencontrail_project::users_install (
   $install_users = false,
 ) {
 
-  include openstack_project::users
+  include opencontrail_project::users
 
   ## TODO: this should be it's own manifest.
   if ( $install_users == true ) {
-    package { $::openstack_project::params::user_packages:
+    package { $::opencontrail_project::params::user_packages:
       ensure => present
     }
     realize (
