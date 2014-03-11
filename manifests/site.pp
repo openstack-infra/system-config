@@ -1,5 +1,5 @@
 #
-# Default: should at least behave like an openstack server
+# Default: should at least behave like an opencontrail server
 #
 node default {
   include opencontrail_project::puppet_cron

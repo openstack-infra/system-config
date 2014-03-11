@@ -1,8 +1,8 @@
-# == Class: openstack_project::template
+# == Class: opencontrail_project::template
 #
 # A template host with no running services
 #
-class openstack_project::template (
+class opencontrail_project::template (
   $iptables_public_tcp_ports = [],
   $iptables_public_udp_ports = [],
   $iptables_rules4           = [],
@@ -14,7 +14,7 @@ class openstack_project::template (
   include ssh
   include snmpd
   if $automatic_upgrades == true {
-    include openstack_project::automatic_upgrades
+    include opencontrail_project::automatic_upgrades
   }
 
   class { 'iptables':
@@ -26,7 +26,7 @@ class openstack_project::template (
 
   class { 'ntp': }
 
-  class { 'openstack_project::base':
+  class { 'opencontrail_project::base':
     install_users => $install_users,
     certname      => $certname,
   }
@@ -51,7 +51,7 @@ class openstack_project::template (
       group   => 'root',
       mode    => '0644',
       source  =>
-        'puppet:///modules/openstack_project/rsyslog.d_50-default.conf',
+        'puppet:///modules/opencontrail_project/rsyslog.d_50-default.conf',
       replace => true,
       notify  => Service['rsyslog'],
     }

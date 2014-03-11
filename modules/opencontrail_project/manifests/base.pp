@@ -1,14 +1,14 @@
-# == Class: openstack_project::base
+# == Class: opencontrail_project::base
 #
-class openstack_project::base(
+class opencontrail_project::base(
   $certname = $::fqdn,
   $install_users = true
 ) {
   if ($::osfamily == 'Debian') {
     include apt
   }
-  include openstack_project::params
-  include openstack_project::users
+  include opencontrail_project::params
+  include opencontrail_project::users
   include sudoers
 
   file { '/etc/profile.d/Z98-byobu.sh':
@@ -47,7 +47,7 @@ class openstack_project::base(
 
   }
 
-  package { $::openstack_project::params::packages:
+  package { $::opencontrail_project::params::packages:
     ensure => present
   }
 
@@ -59,15 +59,12 @@ class openstack_project::base(
   }
 
   if ($install_users) {
-    package { $::openstack_project::params::user_packages:
+    package { $::opencontrail_project::params::user_packages:
       ensure => present
     }
 
     realize (
-      User::Virtual::Localuser['mordred'],
-      User::Virtual::Localuser['corvus'],
-      User::Virtual::Localuser['clarkb'],
-      User::Virtual::Localuser['fungi'],
+      User::Virtual::Localuser['ubuntu'],
     )
   }
 
@@ -85,7 +82,7 @@ class openstack_project::base(
       owner   => 'root',
       group   => 'root',
       mode    => '0444',
-      source  => 'puppet:///modules/openstack_project/00-puppet.pref',
+      source  => 'puppet:///modules/opencontrail_project/00-puppet.pref',
       replace => true,
     }
 
@@ -96,7 +93,7 @@ class openstack_project::base(
     owner   => 'root',
     group   => 'root',
     mode    => '0444',
-    content => template('openstack_project/puppet.conf.erb'),
+    content => template('opencontrail_project/puppet.conf.erb'),
     replace => true,
   }
 

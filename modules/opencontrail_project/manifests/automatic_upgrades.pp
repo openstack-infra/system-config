@@ -1,6 +1,6 @@
-# == Class: openstack_project::automatic_upgrades
+# == Class: opencontrail_project::automatic_upgrades
 #
-class openstack_project::automatic_upgrades (
+class opencontrail_project::automatic_upgrades (
   $origins = []
 ) {
 

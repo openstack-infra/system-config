@@ -1,6 +1,6 @@
-# == Class: openstack_project::puppet_cron
+# == Class: opencontrail_project::puppet_cron
 #
-class openstack_project::puppet_cron($ensure = present)
+class opencontrail_project::puppet_cron($ensure = present)
 {
   include logrotate
 
@@ -11,7 +11,7 @@ class openstack_project::puppet_cron($ensure = present)
     ensure      => $ensure,
     user        => 'root',
     minute      => '*/15',
-    command     => "${::openstack_project::params::update_pkg_list_cmd}sleep $((RANDOM\%600)) && puppet agent --test >>/var/log/manifest.log",
+    command     => "${::opencontrail_project::params::update_pkg_list_cmd}sleep $((RANDOM\%600)) && puppet agent --test >>/var/log/manifest.log",
     environment => 'PATH=/var/lib/gems/1.8/bin:/usr/bin:/bin:/usr/sbin:/sbin',
   }
   logrotate::file { 'updatepuppet':

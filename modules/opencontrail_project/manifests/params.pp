@@ -1,8 +1,8 @@
-# Class: openstack_project::params
+# Class: opencontrail_project::params
 #
 # This class holds parameters that need to be
 # accessed by other classes.
-class openstack_project::params {
+class opencontrail_project::params {
   case $::osfamily {
     'RedHat': {
       $packages = ['puppet', 'wget']
@@ -15,7 +15,7 @@ class openstack_project::params {
       $update_pkg_list_cmd = 'apt-get update >/dev/null 2>&1;'
     }
     default: {
-      fail("Unsupported osfamily: ${::osfamily} The 'openstack_project' module only supports osfamily Debian or RedHat (slaves only).")
+      fail("Unsupported osfamily: ${::osfamily} The 'opencontrail_project' module only supports osfamily Debian or RedHat (slaves only).")
     }
   }
 }
