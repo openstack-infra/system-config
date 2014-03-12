@@ -109,6 +109,39 @@ class openstack_project::review_dev (
     require => User['gerrit2'],
   }
 
+  # Include this here until we are ready to go live
+  file { '/home/gerrit2/review_site/etc/GerritSiteFooter.html':
+    ensure  => present,
+    source  =>
+      'puppet:///modules/openstack_project/gerrit/GerritSiteFooter.html',
+    require => Class['::gerrit'],
+  }
+
+  file { '/home/gerrit2/review_site/static/green.png':
+    ensure  => present,
+    source  => 'puppet:///modules/openstack_project/zuul/green.png',
+    require => Class['::gerrit'],
+  }
+
+  file { '/home/gerrit2/review_site/static/red.png':
+    ensure  => present,
+    source  => 'puppet:///modules/openstack_project/zuul/red.png',
+    require => Class['::gerrit'],
+  }
+
+  file { '/home/gerrit2/review_site/static/black.png':
+    ensure  => present,
+    source  => 'puppet:///modules/openstack_project/zuul/black.png',
+    require => Class['::gerrit'],
+  }
+
+  file { '/home/gerrit2/review_site/static/grey.png':
+    ensure  => present,
+    source  => 'puppet:///modules/openstack_project/zuul/grey.png',
+    require => Class['::gerrit'],
+  }
+
+
   include bup
   bup::site { 'rs-ord':
     backup_user   => 'bup-review-dev',

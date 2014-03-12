@@ -45,3 +45,121 @@ a.gwt-InlineHyperlink {background: none !important}
     color: #e39f00;
 }
 li.comment_test {list-style-type: none; }
+
+
+/* For use in the zuul overlay */
+
+.line {
+    background-image: url('line.png');
+    background-repeat: repeat-y;
+}
+.change {
+    border: 1px solid #95c7db;
+    padding: 2px;
+    width: 316px;
+}
+.change > .header {
+    background: #E2ECEF;
+    color: black;
+    margin: -2px;
+    padding: 4px;
+}
+.change > .header > .changeid {
+    margin: 1em;
+}
+.change > .header > .time {
+    float: right;
+}
+.change > .hover {
+    background: #F3FDFF;
+}
+.jobs {
+    padding-top: 4px;
+}
+.jobwrapper {
+    display: table;
+    width: 100%;
+}
+.job {
+    display: block;
+    line-height: 1.5;
+}
+.result {
+    float: right;
+}
+.result_success {
+    color: #007f00;
+}
+
+.result_failure {
+    color: #cf2f19;
+}
+.result_unstable {
+    color: #e39f00;
+}
+.change_progress {
+    width: 5em;
+    float: right;
+    /* because other wise this floats up off the line */
+    margin-top: 0.25em;
+}
+/** Theming for the progress bars to get them consisten across browers:
+      referenced from http://www.useragentman.com/blog/2012/01/03/cross-browser-html5-progress-bars-in-depth/
+*/
+
+progress,          /* All HTML5 progress enabled browsers */
+progress[role]     /* polyfill */
+{
+      /* Turns off styling - not usually needed, but good to know. */
+      appearance: none;
+      -moz-appearance: none;
+      -webkit-appearance: none;
+
+      /* gets rid of default border in Firefox and Opera. */
+      border: none;
+
+      /* Needs to be in here for Safari polyfill so background images work as expected. */
+      background-size: auto;
+}
+
+/* Polyfill */
+progress[role]:after {
+      background-image: none; /* removes default background from polyfill */
+}
+
+/* Ensure fallback text doesn't appear in polyfill */
+progress[role] strong {
+      display: none;
+}
+
+/** Background color */
+progress,                          /* Firefox  */
+progress[role][aria-valuenow] {    /* Polyfill */
+   background: #e6e6e6 !important; /* !important is needed by the polyfill */
+}
+
+/* Chrome */
+progress::-webkit-progress-bar {
+    background: #e6e6e6;
+}
+
+/** Foreground color */
+/* IE10 */
+progress {
+    color: #6b81a2;
+}
+
+/* Firefox */
+progress::-moz-progress-bar {
+    background: #6b81a2;
+}
+
+/* Chrome */
+progress::-webkit-progress-value {
+    background: #6b81a2;
+}
+
+/* Polyfill */
+progress[aria-valuenow]:before  {
+    background: #6b81a2;
+}
