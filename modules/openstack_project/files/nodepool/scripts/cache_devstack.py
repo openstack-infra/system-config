@@ -106,7 +106,7 @@ def main():
     distribution = sys.argv[1]
 
     branches = local_prep(distribution)
-    image_filenames = {}
+    image_filenames = []
     for branch_data in branches:
         if branch_data.get('debs'):
             run_local(['sudo', 'apt-get', '-y', '-d', 'install'] +
@@ -121,6 +121,7 @@ def main():
             fname = url.split('/')[-1]
             if fname in image_filenames:
                 continue
+            image_filenames.append(fname)
             run_local(['wget', '-nv', '-c', url,
                        '-O', os.path.join(CACHEDIR, fname)])
 
