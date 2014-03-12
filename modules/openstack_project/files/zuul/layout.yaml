@@ -3832,6 +3832,7 @@ projects:
       - gate-pecan-python26
       - gate-pecan-python27
       - gate-pecan-python33
+      - gate-pecan-pypy
       - gate-pecan-tox-wsme-stable
       - gate-pecan-tox-wsme-tip
       - gate-pecan-tox-ceilometer-stable
@@ -3842,6 +3843,7 @@ projects:
       - gate-pecan-python26
       - gate-pecan-python27
       - gate-pecan-python33
+      - gate-pecan-pypy
       - gate-pecan-tox-wsme-stable
       - gate-pecan-tox-wsme-tip
       - gate-pecan-tox-ceilometer-stable
