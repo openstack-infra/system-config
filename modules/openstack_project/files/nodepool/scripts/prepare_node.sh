@@ -23,20 +23,54 @@ PYTHON3=${4:-false}
 PYPY=${5:-false}
 ALL_MYSQL_PRIVS=${6:-false}
 
+# Save the nameservers configured by our provider.
+echo 'forward-zone:' > /tmp/forwarding.conf
+echo '  name: "."' >> /tmp/forwarding.conf
+# HPCloud nameservers (which have 10. addresses) strip RRSIG records.
+# Until this is resolved, use google instead.
+if grep "^nameserver \(10\|206\)\." /etc/resolv.conf; then
+    echo "  forward-addr: 8.8.8.8">> /tmp/forwarding.conf
+else
+    grep "^nameserver" /etc/resolv.conf|sed 's/nameserver \(.*\)/  forward-addr: \1/' >> /tmp/forwarding.conf
+fi
+
 sudo hostname $HOSTNAME
 wget https://git.openstack.org/cgit/openstack-infra/config/plain/install_puppet.sh
 sudo bash -xe install_puppet.sh
-sudo git clone --depth=1 git://git.openstack.org/openstack-infra/config.git \
+# TESTING:
+sudo git clone git://git.openstack.org/openstack-infra/config.git \
     /root/config
+# TESTING:
+sudo bash -c "(cd /root/config && git fetch https://review.openstack.org/openstack-infra/config refs/changes/92/80092/10 && git checkout FETCH_HEAD)"
 sudo /bin/bash /root/config/install_modules.sh
 if [ -z "$NODEPOOL_SSH_KEY" ] ; then
     sudo puppet apply --modulepath=/root/config/modules:/etc/puppet/modules \
 	-e "class {'openstack_project::single_use_slave': sudo => $SUDO, bare => $BARE, python3 => $PYTHON3, include_pypy => $PYPY, all_mysql_privs => $ALL_MYSQL_PRIVS, }"
 else
+    # TESTING:
     sudo puppet apply --modulepath=/root/config/modules:/etc/puppet/modules \
-	-e "class {'openstack_project::single_use_slave': install_users => false, sudo => $SUDO, bare => $BARE, python3 => $PYTHON3, include_pypy => $PYPY, all_mysql_privs => $ALL_MYSQL_PRIVS, ssh_key => '$NODEPOOL_SSH_KEY', }"
+	-e "class {'openstack_project::single_use_slave': sudo => $SUDO, bare => $BARE, python3 => $PYTHON3, include_pypy => $PYPY, all_mysql_privs => $ALL_MYSQL_PRIVS, ssh_key => '$NODEPOOL_SSH_KEY', }"
 fi
 
+# The puppet modules should install unbound.  Take the nameservers
+# that we ended up with at boot and configure unbound to forward to
+# them.
+sudo mv /tmp/forwarding.conf /etc/unbound/
+sudo chown root:root /etc/unbound/forwarding.conf
+sudo chmod a+r /etc/unbound/forwarding.conf
+if [ -x /sbin/restorecon ] ; then
+    sudo chcon system_u:object_r:named_conf_t:s0 /etc/unbound/forwarding.conf
+fi
+
+echo "include: /etc/unbound/forwarding.conf" >> /etc/unbound/unbound.conf
+
+# TESTING:
+ls -laZ /etc/unbound/
+sudo /etc/init.d/unbound restart
+
+dig git.openstack.org
+
+# Cache all currently known gerrit repos
 sudo mkdir -p /opt/git
 sudo -i python /opt/nodepool-scripts/cache_git_repos.py
 
