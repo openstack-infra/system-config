@@ -143,6 +143,10 @@ source-files:
     tags:
       - screen
       - oslofmt
+  - name: logs/screen-sahara.txt
+    tags:
+      - screen
+      - oslofmt
 # TODO(clarkb) Add swift proxy logs here.
   - name: logs/syslog.txt
     tags:

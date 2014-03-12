@@ -166,14 +166,34 @@ savanna:
       - change-merged
       - x-vrif-minus-2
     projects:
-      - openstack/savanna
-      - openstack/python-savannaclient
-      - openstack/savanna-dashboard
-      - openstack/savanna-extra
-      - openstack/savanna-image-elements
-      - stackforge/puppet-savanna
-      - stackforge/savanna-ci-config
-      - stackforge/savanna-guestagent
+      - openstack/sahara
+      - openstack/python-saharaclient
+      - openstack/sahara-dashboard
+      - openstack/sahara-extra
+      - openstack/sahara-image-elements
+      - stackforge/puppet-sahara
+      - stackforge/sahara-ci-config
+      - stackforge/sahara-guestagent
+    branches:
+      - master
+      - stable/0.1
+      - stable/0.2
+      - stable/0.3
+
+openstack-sahara:
+    events:
+      - patchset-created
+      - change-merged
+      - x-vrif-minus-2
+    projects:
+      - openstack/sahara
+      - openstack/python-saharaclient
+      - openstack/sahara-dashboard
+      - openstack/sahara-extra
+      - openstack/sahara-image-elements
+      - stackforge/puppet-sahara
+      - stackforge/sahara-ci-config
+      - stackforge/sahara-guestagent
     branches:
       - master
       - stable/0.1
@@ -658,11 +678,11 @@ openstack-merges:
       - openstack-infra/release-tools
       - openstack/marconi
       - openstack/python-marconiclient
-      - openstack/savanna
-      - openstack/python-savannaclient
-      - openstack/savanna-dashboard
-      - openstack/savanna-extra
-      - openstack/savanna-image-elements
+      - openstack/sahara
+      - openstack/python-saharaclient
+      - openstack/sahara-dashboard
+      - openstack/sahara-extra
+      - openstack/sahara-image-elements
 
 openstack-oslo:
     events:

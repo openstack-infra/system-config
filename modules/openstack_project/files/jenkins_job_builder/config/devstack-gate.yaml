@@ -808,7 +808,7 @@
 
 
 - job-template:
-    name: '{pipeline}-tempest-dsvm-savanna-full{branch-designator}'
+    name: '{pipeline}-tempest-dsvm-sahara-full{branch-designator}'
     node: '{node}'
 
     wrappers:
@@ -825,7 +825,7 @@
           export DEVSTACK_GATE_TIMEOUT=180
           export DEVSTACK_GATE_TEMPEST=1
           export DEVSTACK_GATE_TEMPEST_FULL=1
-          export DEVSTACK_GATE_SAVANNA=1
+          export DEVSTACK_GATE_SAHARA=1
           export BRANCH_OVERRIDE={branch-override}
           if [ "$BRANCH_OVERRIDE" != "default" ] ; then
               export OVERRIDE_ZUUL_BRANCH=$BRANCH_OVERRIDE
@@ -840,7 +840,7 @@
 
 
 - job-template:
-    name: '{pipeline}-tempest-dsvm-savanna-postgres{branch-designator}'
+    name: '{pipeline}-tempest-dsvm-sahara-postgres{branch-designator}'
     node: '{node}'
 
     wrappers:
@@ -857,7 +857,7 @@
           export DEVSTACK_GATE_TIMEOUT=120
           export DEVSTACK_GATE_TEMPEST=1
           export DEVSTACK_GATE_POSTGRES=1
-          export DEVSTACK_GATE_SAVANNA=1
+          export DEVSTACK_GATE_SAHARA=1
           export BRANCH_OVERRIDE={branch-override}
           if [ "$BRANCH_OVERRIDE" != "default" ] ; then
               export OVERRIDE_ZUUL_BRANCH=$BRANCH_OVERRIDE
@@ -872,7 +872,7 @@
 
 
 - job-template:
-    name: '{pipeline}-tempest-dsvm-savanna-neutron{branch-designator}'
+    name: '{pipeline}-tempest-dsvm-sahara-neutron{branch-designator}'
     node: '{node}'
 
     wrappers:
@@ -890,7 +890,7 @@
           export DEVSTACK_GATE_TEMPEST=1
           export DEVSTACK_GATE_NEUTRON=1
           export DEVSTACK_GATE_SMOKE_SERIAL=1
-          export DEVSTACK_GATE_SAVANNA=1
+          export DEVSTACK_GATE_SAHARA=1
           export BRANCH_OVERRIDE={branch-override}
           if [ "$BRANCH_OVERRIDE" != "default" ] ; then
               export OVERRIDE_ZUUL_BRANCH=$BRANCH_OVERRIDE
@@ -1099,9 +1099,9 @@
       - '{pipeline}-grenade-dsvm-neutron'
       - '{pipeline}-grenade-dsvm-neutron-forward'
       - '{pipeline}-grenade-dsvm-partial-ncpu'
-      - '{pipeline}-tempest-dsvm-savanna-full{branch-designator}'
-      - '{pipeline}-tempest-dsvm-savanna-postgres{branch-designator}'
-      - '{pipeline}-tempest-dsvm-savanna-neutron{branch-designator}'
+      - '{pipeline}-tempest-dsvm-sahara-full{branch-designator}'
+      - '{pipeline}-tempest-dsvm-sahara-postgres{branch-designator}'
+      - '{pipeline}-tempest-dsvm-sahara-neutron{branch-designator}'
       - '{pipeline}-devstack-dsvm-neutron{branch-designator}'
       - '{pipeline}-tempest-dsvm-ironic{branch-designator}'
       - '{pipeline}-tempest-dsvm-ironic-postgres{branch-designator}'
