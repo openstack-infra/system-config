@@ -64,6 +64,7 @@ EOF
 else
     #defaults to Ubuntu
     # NB: keep in sync with opencontrail_project/files/00-puppet.pref
+    mkdir -p /etc/apt/preferencestacks.d/
     cat > /etc/apt/preferencestacks.d/00-puppet.pref <<EOF
 Package: puppet puppet-common puppetmaster puppetmaster-common puppetmaster-passenger
 Pin: version 2.7*
