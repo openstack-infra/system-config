@@ -114,7 +114,7 @@ class opencontrail_project::review (
     httpd_maxwait                       => '5000min',
     war                                 =>
       'http://tarballs.opencontrail.org/ci/gerrit-2.4.4-14-gab7f4c1.war',
-    contactstore                        => true,
+    contactstore                        => false,
     contactstore_appsec                 => $contactstore_appsec,
     contactstore_pubkey                 => $contactstore_pubkey,
     contactstore_url                    =>
