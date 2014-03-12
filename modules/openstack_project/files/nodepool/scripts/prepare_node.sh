@@ -23,6 +23,11 @@ PYTHON3=${4:-false}
 PYPY=${5:-false}
 ALL_MYSQL_PRIVS=${6:-false}
 
+# Save the nameservers configured by our provider.
+echo 'forward-zone:' > /tmp/forwarding.conf
+echo '  name: "."' >> /tmp/forwarding.conf
+grep "^nameserver" /etc/resolv.conf|sed 's/nameserver \(.*\)/  forward-addr: \1/' >> /tmp/forwarding.conf
+
 sudo hostname $HOSTNAME
 wget https://git.openstack.org/cgit/openstack-infra/config/plain/install_puppet.sh
 sudo bash -xe install_puppet.sh
@@ -37,6 +42,15 @@ else
 	-e "class {'openstack_project::single_use_slave': install_users => false, sudo => $SUDO, bare => $BARE, python3 => $PYTHON3, include_pypy => $PYPY, all_mysql_privs => $ALL_MYSQL_PRIVS, ssh_key => '$NODEPOOL_SSH_KEY', }"
 fi
 
+# The puppet modules should install unbound and make sure it is
+# configured to include config files from /etc/unbound/conf.d/.  Take
+# the nameservers that we ended up with at boot and configure unbound
+# to forward to them.
+sudo mv /tmp/forwarding.conf /etc/unbound/conf.d/
+sudo chown root:root /etc/unbound/conf.d/forwarding.conf
+sudo /etc/init.d/unbound restart
+
+# Cache all currently known gerrit repos
 sudo mkdir -p /opt/git
 sudo -i python /opt/nodepool-scripts/cache_git_repos.py
 
