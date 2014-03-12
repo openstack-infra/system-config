@@ -113,7 +113,8 @@ class opencontrail_project::review (
     sshd_threads                        => '100',
     httpd_maxwait                       => '5000min',
     war                                 =>
-      'http://tarballs.openstack.org/ci/gerrit-2.4.4-14-gab7f4c1.war',
+      '/home/gerrit2/gerrit-2.4.4-14-gab7f4c1.war',
+#     'http://tarballs.opencontrail.org/ci/gerrit-2.4.4-14-gab7f4c1.war',
     contactstore                        => false,
     contactstore_appsec                 => $contactstore_appsec,
     contactstore_pubkey                 => $contactstore_pubkey,
