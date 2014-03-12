@@ -19,15 +19,15 @@
           export PROJECTS="stackforge/python-manilaclient $PROJECTS"
           export DEVSTACK_GATE_TEMPEST_ALLOW_TENANT_ISOLATION=1
           export DEVSTACK_GATE_NEUTRON=1
-          export TEMPEST_CONCURRENCY=1
+          export TEMPEST_CONCURRENCY=2
           export KEEP_LOCALRC=1
           export MANILA_TESTS='tempest.cli.*manila*'
           if [[ ! "$ZUUL_PROJECT" =~ python-manilaclient ]]; then
               MANILA_TESTS+=' tempest.api.share*';
           fi
           echo "API_RATE_LIMIT=False" >> localrc
-          echo "SHARE_BACKING_FILE_SIZE=12G" >> localrc
-          echo "VOLUME_BACKING_FILE_SIZE=12G" >> localrc
+          echo "SHARE_BACKING_FILE_SIZE=30G" >> localrc
+          echo "VOLUME_BACKING_FILE_SIZE=30G" >> localrc
 
           function pre_test_hook {
               # Install manila devstack integration
@@ -43,7 +43,7 @@
               cd $BASE/new/tempest
               sudo chown -R tempest:stack $BASE/new/tempest
               echo "Running tempest manila test suites"
-              sudo -H -u tempest tox -evenv bash tools/pretty_tox.sh \"$MANILA_TESTS\" -- --concurrency=$TEMPEST_CONCURRENCY
+              sudo -H -u tempest tox -evenv bash tools/pretty_tox.sh \"$MANILA_TESTS -- --concurrency=$TEMPEST_CONCURRENCY\"
           }
           export -f post_test_hook
 
