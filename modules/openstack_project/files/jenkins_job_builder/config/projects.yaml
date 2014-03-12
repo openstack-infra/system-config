@@ -1619,7 +1619,7 @@
       - gate-{name}-chef-unit
 
 - project:
-    name: cookbook-openstack-metering
+    name: cookbook-openstack-telemetry
     github-org: stackforge
     node: bare-precise
 

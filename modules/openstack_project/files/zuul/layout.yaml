@@ -3279,15 +3279,6 @@ projects:
       - gate-cookbook-openstack-image-chef-lint
       - gate-cookbook-openstack-image-chef-unit
 
-  - name: stackforge/cookbook-openstack-metering
-    check:
-      - gate-cookbook-openstack-metering-chef-lint
-      - gate-cookbook-openstack-metering-chef-style
-      - gate-cookbook-openstack-metering-chef-unit
-    gate:
-      - gate-cookbook-openstack-metering-chef-lint
-      - gate-cookbook-openstack-metering-chef-unit
-
   - name: stackforge/cookbook-openstack-network
     check:
       - gate-cookbook-openstack-network-chef-lint
@@ -3341,6 +3332,15 @@ projects:
     gate:
       - gate-cookbook-openstack-integration-test-chef-lint
       - gate-cookbook-openstack-integration-test-chef-unit
+
+  - name: stackforge/cookbook-openstack-telemetry
+    check:
+      - gate-cookbook-openstack-telemetry-chef-lint
+      - gate-cookbook-openstack-telemetry-chef-style
+      - gate-cookbook-openstack-telemetry-chef-unit
+    gate:
+      - gate-cookbook-openstack-telemetry-chef-lint
+      - gate-cookbook-openstack-telemetry-chef-unit
 
   - name: stackforge/designate
     check:
