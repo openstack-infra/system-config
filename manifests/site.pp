@@ -55,7 +55,6 @@ node 'jenkins.opencontrail.org' {
     zmq_event_receivers     => [ ],
 #   zmq_event_receivers     => ['logstash.opencontrail.org',
 #                               'nodepool.opencontrail.org',
-    ],
   }
 }
 
@@ -70,7 +69,6 @@ node 'jenkins01.opencontrail.org' {
     zmq_event_receivers     => [ ],
 #   zmq_event_receivers     => ['logstash.opencontrail.org',
 #                               'nodepool.opencontrail.org',
-    ],
   }
 }
 
