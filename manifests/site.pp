@@ -101,7 +101,7 @@ node 'zuul.opencontrail.org' {
     url_pattern          => 'http://logs.opencontrail.org/{build.parameters[LOG_PATH]}',
     zuul_url             => 'http://zuul.opencontrail.org/p',
     sysadmins            => hiera('sysadmins'),
-    statsd_host          => 'graphite.opencontrail.org',
+#   statsd_host          => 'graphite.opencontrail.org',
     gearman_workers      => [
 #     'nodepool.opencontrail.org',
       'jenkins.opencontrail.org',

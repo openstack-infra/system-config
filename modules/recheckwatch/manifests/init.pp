@@ -67,6 +67,13 @@ class recheckwatch (
     require => User['recheckwatch'],
   }
 
+  file { '/var/www/':
+    ensure  => directory,
+    owner   => 'recheckwatch',
+    mode    => '0755',
+    require => User['recheckwatch'],
+  }
+
   file { '/var/www/recheckwatch':
     ensure  => directory,
     owner   => 'recheckwatch',
