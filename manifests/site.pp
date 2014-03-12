@@ -52,8 +52,9 @@ node 'jenkins.opencontrail.org' {
     ssl_key_file_contents   => hiera('jenkins_ssl_key_file_contents'),
     ssl_chain_file_contents => hiera('jenkins_ssl_chain_file_contents'),
     sysadmins               => hiera('sysadmins'),
-    zmq_event_receivers     => ['logstash.opencontrail.org',
-                                'nodepool.opencontrail.org',
+    zmq_event_receivers     => [ ],
+#   zmq_event_receivers     => ['logstash.opencontrail.org',
+#                               'nodepool.opencontrail.org',
     ],
   }
 }
@@ -66,8 +67,9 @@ node 'jenkins01.opencontrail.org' {
     ssl_key_file_contents   => hiera('jenkins01_ssl_key_file_contents'),
     ssl_chain_file_contents => hiera('jenkins01_ssl_chain_file_contents'),
     sysadmins               => hiera('sysadmins'),
-    zmq_event_receivers     => ['logstash.opencontrail.org',
-                                'nodepool.opencontrail.org',
+    zmq_event_receivers     => [ ],
+#   zmq_event_receivers     => ['logstash.opencontrail.org',
+#                               'nodepool.opencontrail.org',
     ],
   }
 }
@@ -106,7 +108,7 @@ node 'zuul.opencontrail.org' {
 #     'nodepool.opencontrail.org',
       'jenkins.opencontrail.org',
       'jenkins01.opencontrail.org',
-      'zm01.opencontrail.org',
+#     'zm01.opencontrail.org',
     ],
   }
 }
