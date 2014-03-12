@@ -711,6 +711,16 @@
 
 
 - project:
+    name: nova-docker
+    github-org: stackforge
+    node: bare-precise
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - python-jobs
+
+
+- project:
     name: object-api
     github-org: openstack
     node: bare-precise
