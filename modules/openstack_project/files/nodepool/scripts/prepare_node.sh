@@ -44,5 +44,12 @@ sudo -i python /opt/nodepool-scripts/cache_git_repos.py
 # boot (eg when this image is used for testing).
 sudo sed -i 's/ext3/ext4/g' /etc/fstab
 
+# Remove additional sources used to isntall puppet or special version of pypi.
+# We do this because leaving these sources in place causes every test that
+# does an apt-get update to hit those servers which may not have the uptime
+# of our local mirrors.
+sudo rm -f /etc/apt/sources.list.d/*
+sudo apt-get update
+
 sync
 sleep 5
