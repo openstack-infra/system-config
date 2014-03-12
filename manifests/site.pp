@@ -103,7 +103,7 @@ node 'zuul.opencontrail.org' {
     sysadmins            => hiera('sysadmins'),
     statsd_host          => 'graphite.opencontrail.org',
     gearman_workers      => [
-      'nodepool.opencontrail.org',
+#     'nodepool.opencontrail.org',
       'jenkins.opencontrail.org',
       'jenkins01.opencontrail.org',
       'zm01.opencontrail.org',
@@ -119,6 +119,28 @@ node 'zm01.opencontrail.org' {
     gerrit_ssh_host_key  => hiera('gerrit_ssh_rsa_pubkey_contents'),
     zuul_ssh_private_key => hiera('jenkins_ssh_private_key_contents'),
     sysadmins            => hiera('sysadmins'),
+  }
+}
+
+node 'nodepool.opencontrail.org' {
+  class { 'opencontrail_project::nodepool':
+    mysql_password           => hiera('nodepool_mysql_password'),
+    mysql_root_password      => hiera('nodepool_mysql_root_password'),
+    nodepool_ssh_private_key => hiera('jenkins_ssh_private_key_contents'),
+    sysadmins                => hiera('sysadmins'),
+    statsd_host              => 'graphite.opencontrail.org',
+    jenkins_api_user         => hiera('jenkins_api_user'),
+    jenkins_api_key          => hiera('jenkins_api_key'),
+    jenkins_credentials_id   => hiera('jenkins_credentials_id'),
+    rackspace_username       => hiera('nodepool_rackspace_username'),
+    rackspace_password       => hiera('nodepool_rackspace_password'),
+    rackspace_project        => hiera('nodepool_rackspace_project'),
+    hpcloud_username         => hiera('nodepool_hpcloud_username'),
+    hpcloud_password         => hiera('nodepool_hpcloud_password'),
+    hpcloud_project          => hiera('nodepool_hpcloud_project'),
+    tripleo_username         => hiera('nodepool_tripleo_username'),
+    tripleo_password         => hiera('nodepool_tripleo_password'),
+    tripleo_project          => hiera('nodepool_tripleo_project'),
   }
 }
 
