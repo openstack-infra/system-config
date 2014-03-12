@@ -43,6 +43,8 @@ class openstack_project::template (
     ensure => present,
   }
 
+  class { 'unbound': }
+
   if $::osfamily == 'Debian' {
     # Custom rsyslog config to disable /dev/xconsole noise on Debuntu servers
     file { '/etc/rsyslog.d/50-default.conf':
