@@ -20,7 +20,6 @@ class opencontrail_project::puppetdb (
   }
 
   class { 'opencontrail_project::server':
-    ssl_listen_address => '0.0.0.0', # works for ipv6 too
     iptables_public_tcp_ports => [8081],
     sysadmins                 => $sysadmins,
   }
