@@ -1003,6 +1003,15 @@ projects:
     periodic:
       - nova-propose-translation-update
 
+  - name: stackforge/nova-docker
+    template:
+      - name: python-jobs
+      - name: check-requirements
+    check:
+      - gate-noop
+    gate:
+      - gate-noop
+
   - name: openstack/pycadf
     check:
       - gate-pycadf-pep8
