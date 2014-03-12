@@ -52,7 +52,7 @@
 
     scm:
       - git:
-          url: 'git://git.opencontrail.org/opencontrail-infra/zuul'
+          url: 'git://git.openstack.org/openstack-infra/zuul'
           branches:
             - 'origin/master'
 
