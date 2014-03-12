@@ -50,7 +50,7 @@ class RequirementsList(object):
                 line = line[:line.find('#')]
             line = line.strip()
             if (not line or
-                line.startswith('http://tarballs.opencontrail.org/') or
+                line.startswith('http://tarballs.openstack.org/') or
                 line.startswith('-e') or
                 line.startswith('-f')):
                 continue

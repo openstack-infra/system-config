@@ -34,7 +34,7 @@ class opencontrail_project::static (
   ###########################################################
   # Tarballs
 
-  apache::vhost { 'tarballs.opencontrail.org':
+  apache::vhost { 'tarballs.openstack.org':
     port     => 80,
     priority => '50',
     docroot  => '/srv/static/tarballs',

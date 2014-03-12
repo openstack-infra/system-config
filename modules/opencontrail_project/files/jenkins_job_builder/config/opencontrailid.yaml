@@ -41,7 +41,7 @@
             mkdir -p tarballs
             # Create an archive tarball.
             tar -czf opencontrailid-$PROJECT_VER.tar.gz dist/
-            cp opencontrailid-$PROJECT_VER.tar.gz tarballs/opencontrailid-latest.tar.gz
+            cp opencontrailid-$PROJECT_VER.tar.gz tarballs.openstackid-latest.tar.gz
             mv opencontrailid-$PROJECT_VER.tar.gz tarballs/
     publishers:
         - console-log
@@ -53,7 +53,7 @@
                   source: './reports/**'
                   keep-hierarchy: true
                   copy-after-failure: true
-                - target: 'tarballs/opencontrailid/'
+                - target: 'tarballs.openstackid/'
                   source: 'tarballs/*.tar.gz'
                   keep-hierarchy: false
                   copy-after-failure: false
