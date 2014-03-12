@@ -74,8 +74,7 @@ class opencontrail_project::base(
       location   => 'http://apt.puppetlabs.com',
       repos      => 'main',
       key        => '4BD6EC30',
-      key_server => '',
-#     key_server => 'pgp.mit.edu',
+      key_server => 'pgp.mit.edu',
     }
 
     file { '/etc/apt/preferences.d/00-puppet.pref':
