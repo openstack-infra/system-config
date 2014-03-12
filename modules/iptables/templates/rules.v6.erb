@@ -19,9 +19,11 @@
 <% @public_udp_ports.each do |port| -%>
 -A opencontrail-INPUT -m udp -p udp --dport <%= port %> -j ACCEPT
 <% end -%>
+
+# Skip ipv6 for rnow
 # Per-host rules
-<% @rules6.each do |rule| -%>
--A opencontrail-INPUT <%= rule %>
-<% end -%>
+# <% @rules6.each do |rule| -%>
+# -A opencontrail-INPUT <%= rule %>
+# <% end -%>
 -A opencontrail-INPUT -j REJECT --reject-with icmp6-adm-prohibited
 COMMIT
