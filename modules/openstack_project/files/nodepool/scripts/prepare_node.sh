@@ -44,5 +44,21 @@ sudo -i python /opt/nodepool-scripts/cache_git_repos.py
 # boot (eg when this image is used for testing).
 sudo sed -i 's/ext3/ext4/g' /etc/fstab
 
+# Remove additional sources used to install puppet or special version of pypi.
+# We do this because leaving these sources in place causes every test that
+# does an apt-get update to hit those servers which may not have the uptime
+# of our local mirrors.
+OS_FAMILY=$(facter osfamily)
+if [ "$OS_FAMILY" == "Debian" ] ; then
+    sudo rm -f /etc/apt/sources.list.d/*
+    sudo apt-get update
+elif [ "$OS_FAMILY" == "RedHat" ] ; then
+    # Can't delete * in yum.repos.d since all of the repos are listed there.
+    # Be specific instead.
+    if [ -f /etc/yum.repos.d/puppetlabs.repo ] ; then
+        sudo rm -f /etc/yum.repos.d/puppetlabs.repo
+    fi
+fi
+
 sync
 sleep 5
