@@ -20,6 +20,7 @@ import gear
 import json
 import logging
 import os
+import os.path
 import re
 import signal
 import threading
@@ -94,7 +95,9 @@ class EventProcessor(threading.Thread):
         fields["build_master"] = event["build"].get("host_name", "UNKNOWN")
         parameters = event["build"].get("parameters", {})
         fields["project"] = parameters.get("ZUUL_PROJECT", "UNKNOWN")
+        # TODO(clarkb) can we do better without duplicated data here?
         fields["build_uuid"] = parameters.get("ZUUL_UUID", "UNKNOWN")
+        fields["build_short_uuid"] = fields["build_uuid"][:7]
         fields["build_queue"] = parameters.get("ZUUL_PIPELINE", "UNKNOWN")
         fields["build_ref"] = parameters.get("ZUUL_REF", "UNKNOWN")
         fields["build_branch"] = parameters.get("ZUUL_BRANCH", "UNKNOWN")
@@ -115,7 +118,8 @@ class EventProcessor(threading.Thread):
         fields["log_url"] = source_url
         out_event = {}
         out_event["fields"] = fields
-        out_event["tags"] = [fileopts['name']] + fileopts.get('tags', [])
+        out_event["tags"] = [os.path.basename(fileopts['name'])] + \
+            fileopts.get('tags', [])
         return source_url, out_event
 
 
