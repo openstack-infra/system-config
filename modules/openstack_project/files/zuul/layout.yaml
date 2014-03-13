@@ -312,9 +312,6 @@ jobs:
     branch: ^(?!stable/grizzly).*$
   - name: ^(gate|check)-tempest-dsvm-neutron-pg$
     branch: ^(?!stable/grizzly).*$
-  - name: check-devstack-dsvm-neutron
-    branch: ^(?!stable/grizzly).*$
-    voting: false
   - name: ^(gate|check)-tempest-dsvm-neutron-full$
     branch: ^(?!stable/grizzly).*$
     voting: false
@@ -924,7 +921,6 @@ projects:
       - check-tempest-dsvm-neutron-pg
       - gate-tempest-dsvm-neutron-large-ops
       - check-grenade-dsvm-neutron
-      - check-devstack-dsvm-neutron
     gate:
       - gate-tempest-dsvm-neutron
       - gate-tempest-dsvm-neutron-pg
@@ -2383,7 +2379,6 @@ projects:
       - check-grenade-dsvm-forward
       - check-grenade-dsvm-partial-ncpu
       - check-swift-dsvm-functional
-      - check-devstack-dsvm-neutron
       - check-tempest-dsvm-ironic-nv
       - check-tempest-dsvm-ironic-postgres-nv
       - check-tempest-dsvm-sahara-full-nv
