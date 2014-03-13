@@ -223,6 +223,14 @@ function safe_id(id) {
 function format_change(change, change_queue) {
     var html = '<tr>';
 
+    safe_change_id = safe_id(change['id']);
+    display = $('#expandByDefault').is(':checked');
+    collapsed_index = window.zuul_collapsed_exceptions.indexOf(safe_change_id);
+    if (collapsed_index > -1) {
+        /* listed as an exception to the current default */
+        display = !display;
+    }
+
     for (var i=0; i<change_queue['_tree_columns']; i++) {
         var cls = 'tree';
         if (i < change['_tree'].length && change['_tree'][i] !== null) {
@@ -253,22 +261,14 @@ function format_change(change, change_queue) {
     }
 
     html += '<td class="change-container">';
-    html += '<div class="change" id="' + safe_id(change['id']) + '">' +
+    html += '<div class="change" id="' + safe_change_id + '">' +
             '<div class="header" onClick="toggle_display_jobs(event, this)" ' +
             'onmouseover="$(this).addClass(\'hover\')" ' +
             'onmouseout="$(this).removeClass(\'hover\')">';
 
+    // Row #1 of the header (project and remaining time)
     html += '<span class="project">' + change['project'] + '</span>';
-
-    display = $('#expandByDefault').is(':checked');
-    safe_change_id = safe_id(change['id']);
-    collapsed_index = window.zuul_collapsed_exceptions.indexOf(safe_change_id);
-    if (collapsed_index > -1) {
-        /* listed as an exception to the current default */
-        display = !display;
-    }
-
-    html += '<span class="time">';
+    html += '<span class="time" title="Remaining Time">';
     html += format_time(change['remaining_time'], true);
     html += '</span><br/>';
 
@@ -293,7 +293,8 @@ function format_change(change, change_queue) {
         html += '&nbsp;';
     }
     html += '</span>';
-    html += '<span class="time">' + format_enqueue_time(change['enqueue_time']) + '</span>';
+    html += '<span class="time" title="Queued Time">';
+    html += format_enqueue_time(change['enqueue_time']) + '</span>';
 
     html += '</div>';
 
