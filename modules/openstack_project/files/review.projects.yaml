@@ -320,6 +320,7 @@
 - project: openstack/python-tuskarclient
   description: Python bindings and CLI to Tuskar.
   upstream: git://github.com/tuskar/python-tuskarclient.git
+- project: openstack/qa-specs
 - project: openstack/requirements
 - project: openstack/sahara
   group: sahara
