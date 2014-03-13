@@ -147,4 +147,14 @@ class openstack_project::lists(
     webserver   => $listdomain,
     mailserver  => $listdomain,
   }
+
+  maillist { 'openstack-content':
+    ensure      => present,
+    admin       => 'margie@openstack.org',
+    password    => $listpassword,
+    description => 'Discussions of the OpenStack Content team',
+    webserver   => $listdomain,
+    mailserver  => $listdomain,
+  }
+
 }
