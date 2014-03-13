@@ -18,11 +18,10 @@
 # Limit all test slaves to 8GB of memory so that larger flavors with more
 # cpu resources can be used without the risk of becoming dependent on more
 # memory.
-OS_FACT=$(facter operatingsystem)
-if [ "$OS_FACT" == "Ubuntu" ] ; then
+if [ -f /etc/default/grub ] ; then
     sudo sed -i -e 's/^GRUB_TIMEOUT=[0-9]\+/GRUB_TIMEOUT=0/' -e 's/#\?GRUB_CMDLINE_LINUX=""/GRUB_CMDLINE_LINUX="mem=8G"/g' /etc/default/grub
     sudo update-grub
-elif [ "$OS_FACT" == "CentOS" ] || [ "$OS_FACT" == "Fedora" ] ; then
+elif [ -f /boot/grub/grub.conf ] ; then
     sudo sed -i -e 's/^timeout=[0-9]\+/timeout=0/' -e 's/\(^\s\+kernel.*\)/\1 mem=8G/' /boot/grub/grub.conf
 fi
 
