@@ -3,6 +3,9 @@
 class jenkins::jenkinsuser(
   $ssh_key = '',
   $ensure = present,
+  $gitfullname = 'OpenStack Jenkins',
+  $gitemail = 'jenkins@openstack.org',
+  $gerrituser = 'jenkins',
 ) {
 
   group { 'jenkins':
@@ -40,7 +43,7 @@ class jenkins::jenkinsuser(
     owner   => 'jenkins',
     group   => 'jenkins',
     mode    => '0640',
-    source  => 'puppet:///modules/jenkins/gitconfig',
+    content => template('jenkins/gitconfig.erb'),
     require => File['/home/jenkins'],
   }
 
