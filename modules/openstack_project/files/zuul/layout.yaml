@@ -429,6 +429,8 @@ jobs:
     branch: ^master$
   - name: openstack-training-guides
     branch: ^master$
+  - name: ^.*manuals-propose-translation-update$
+    branch: ^master$
 # Documentation targets for master and future stable branches:
   - name: openstack-config-reference
     branch: ^(?!stable/grizzly).*$
@@ -2286,7 +2288,7 @@ projects:
       - openstack-api-ref
       - manuals-upstream-translation-update
     periodic:
-      - manuals-propose-translation-update
+      - operations-guide-manuals-propose-translation-update
 
   - name: openstack/openstack-manuals
     template:
@@ -2322,7 +2324,7 @@ projects:
       - manuals-upstream-translation-update
       - openstack-training-guides
     periodic:
-      - manuals-propose-translation-update
+      - operations-guide-manuals-propose-translation-update
 
   - name: openstack/operations-guide
     template:
@@ -2332,7 +2334,7 @@ projects:
       - openstack-operations-guide-ja
       - manuals-upstream-translation-update
     periodic:
-      - manuals-propose-translation-update
+      - operations-guide-manuals-propose-translation-update
 
 # Section: OpenStack development projects
 

@@ -2006,6 +2006,8 @@
           system: apt
           profileos: "ubuntu"
 
+      - '{name}-manuals-propose-translation-update'
+
       - openstack-install-deploy-guide-{lang}:
 
       - openstack-operations-guide-{lang}
@@ -2045,6 +2047,7 @@
 
     jobs:
       - openstack-doc-jobs
+      - '{name}-manuals-propose-translation-update'
 
 - project:
     name: manila
@@ -2219,7 +2222,7 @@
       - openstack-doc-jobs
       - '{name}-tox-doc-{envlist}':
           envlist: publishdocs
-
+      - '{name}-manuals-propose-translation-update'
 
 - project:
     name: database-api
