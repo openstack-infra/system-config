@@ -585,8 +585,6 @@ jobs:
     voting: false
   - name: gate-rubick-python33
     voting: false
-  - name: gate-barbican-devstack-dsvm
-    voting: false
   - name: ^(gate|check)-sqlalchemy-migrate-devstack-dsvm$
     voting: false
   - name: gate-manila-tempest-dsvm-neutron
@@ -3041,6 +3039,7 @@ projects:
       - gate-barbican-pep8
       - gate-barbican-python27
       - gate-barbican-python26
+      - gate-barbican-devstack-dsvm
     post:
       - barbican-branch-tarball
 
