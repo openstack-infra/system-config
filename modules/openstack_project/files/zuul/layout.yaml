@@ -294,6 +294,11 @@ project-templates:
       - gate-{name}-tox-checkdeletions
       - gate-{name}-tox-doc-publish-checkbuild
 
+  - name: openstack-doc-translation-gate
+    post:
+      - '{name}-manuals-upstream-translation-update'
+    periodic:
+      - '{name}-manuals-propose-translation-update'
 
 jobs:
   - name: ^.*$
@@ -428,6 +433,10 @@ jobs:
   - name: openstack-security-guide
     branch: ^master$
   - name: openstack-training-guides
+    branch: ^master$
+  - name: ^.*manuals-propose-translation-update$
+    branch: ^master$
+  - name: ^.*manuals-upstream-translation-update$
     branch: ^master$
 # Documentation targets for master and future stable branches:
   - name: openstack-config-reference
@@ -2280,17 +2289,16 @@ projects:
   - name: openstack/api-site
     template:
       - name: openstack-doc-gate
+      - name: openstack-doc-translation-gate
     post:
       - api-site-tox-doc-publishdocs
       - openstack-api-site
       - openstack-api-ref
-      - manuals-upstream-translation-update
-    periodic:
-      - manuals-propose-translation-update
 
   - name: openstack/openstack-manuals
     template:
       - name: openstack-doc-gate
+      - name: openstack-doc-translation-gate
     check:
       - gate-openstack-manuals-validate
     gate:
@@ -2319,20 +2327,18 @@ projects:
       - openstack-security-guide
       - openstack-user-guide
       - openstack-user-guide-admin
-      - manuals-upstream-translation-update
       - openstack-training-guides
-    periodic:
-      - manuals-propose-translation-update
 
   - name: openstack/operations-guide
     template:
       - name: openstack-doc-gate
+      - name: openstack-doc-translation-gate
     post:
       - openstack-operations-guide
       - openstack-operations-guide-ja
       - manuals-upstream-translation-update
     periodic:
-      - manuals-propose-translation-update
+      - operations-guide-manuals-propose-translation-update
 
 # Section: OpenStack development projects
 
