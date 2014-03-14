@@ -3019,10 +3019,12 @@ projects:
     check:
       - gate-barbican-pep8
       - gate-barbican-python27
+      - gate-barbican-python26
       - gate-barbican-devstack-dsvm
     gate:
       - gate-barbican-pep8
       - gate-barbican-python27
+      - gate-barbican-python26
     post:
       - barbican-branch-tarball
 
