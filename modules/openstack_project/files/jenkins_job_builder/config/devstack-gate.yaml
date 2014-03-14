@@ -431,26 +431,29 @@
           export DEVSTACK_GATE_TIMEOUT=120
           export DEVSTACK_GATE_TEMPEST=1
           export DEVSTACK_GATE_IRONIC=1
+          export DEVSTACK_GATE_VIRT_DRIVER=ironic
           export DEVSTACK_GATE_SMOKE_SERIAL=1
           export BRANCH_OVERRIDE={branch-override}
           if [ "$BRANCH_OVERRIDE" != "default" ] ; then
               export OVERRIDE_ZUUL_BRANCH=$BRANCH_OVERRIDE
           fi
 
-          export BM_BUILD_DEPLOY_RAMDISK=True
-          export BM_DEPLOY_FLAVOR="-a amd64 ubuntu deploy-ironic"
-          export IRONIC_VM_COUNT=1
-          export IRONIC_VM_SPECS_RAM=512
-          export IRONIC_VM_SPECS_DISK=10
-          export IRONIC_BAREMETAL_BASIC_OPS=True
-          export VIRT_DRIVER=ironic
+          # pull in ovs support from ubuntu cloud-archive.
+          sudo add-apt-repository cloud-archive:havana
+          sudo apt-get update
 
+          # work around bug in libvirt-bin on rax nodes, pending fixes to bug:
+          # https://bugs.launchpad.net/ubuntu/+source/libvirt/+bug/1248025
+          sudo service nova-agent stop || echo ''
+          sudo service xe-linux-distribution stop || echo ''
+          if [ -e /proc/xen ] ; then 
+              sudo umount /proc/xen
+          fi
+
+          # prevent sshd from jumping to the ovs bridge on Precise instances.
           IP=$(ip addr show eth0 | grep 'inet ' | sed 's/inet \([0-9\.]*\)\/.*/\1/' | tr -d ' ')
           sudo sed -i "s/#ListenAddress 0.0.0.0/ListenAddress $IP/" /etc/ssh/sshd_config
           sudo service ssh restart
-
-          sudo add-apt-repository cloud-archive:havana
-          sudo apt-get update
 
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
