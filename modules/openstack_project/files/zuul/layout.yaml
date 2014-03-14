@@ -985,6 +985,12 @@ projects:
     periodic:
       - nova-propose-translation-update
 
+  - name: openstack/nova-specs
+    check:
+      - gate-noop
+    gate:
+      - gate-noop
+
   - name: openstack/pycadf
     check:
       - gate-pycadf-pep8
