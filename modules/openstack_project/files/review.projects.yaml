@@ -648,6 +648,9 @@
   group: murano
   upstream: git://github.com/Mirantis/murano-tests.git
   acl-config: /home/gerrit2/acls/stackforge/murano.config
+- project: stackforge/nova-docker
+  description: Docker driver for OpenStack Nova
+  upstream: git://github.com/russellb/nova-docker.git
 - project: stackforge/novaimagebuilder
   description: Image building tool for OpenStack.
   upstream: git://github.com/redhat-openstack/image-building-poc.git

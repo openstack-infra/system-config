@@ -597,6 +597,10 @@ jobs:
     voting: false
   - name: gate-oslo-incubator-python33
     branch: ^(?!stable/(grizzly|havana)).*$
+  - name: gate-nova-docker-python26
+    voting: false
+  - name: gate-nova-docker-python27
+    voting: false
 # puppet-openstack targets
   - name: gate-puppet-vswitch-puppet-lint
     voting: false
@@ -990,6 +994,11 @@ projects:
       - gate-noop
     gate:
       - gate-noop
+
+  - name: stackforge/nova-docker
+    template:
+      - name: python-jobs
+      - name: check-requirements
 
   - name: openstack/pycadf
     check:
