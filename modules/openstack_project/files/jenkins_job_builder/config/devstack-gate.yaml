@@ -413,6 +413,54 @@
 
 
 - job-template:
+    name: '{pipeline}-tempest-dsvm-virtual-ironic{branch-designator}'
+    node: '{node}'
+
+    wrappers:
+      - timeout:
+          timeout: 125
+          fail: true
+      - timestamps
+
+    builders:
+      - link-logs
+      - devstack-checkout
+      - shell: |
+          #!/bin/bash -xe
+          export PYTHONUNBUFFERED=true
+          export DEVSTACK_GATE_TIMEOUT=120
+          export DEVSTACK_GATE_TEMPEST=1
+          export DEVSTACK_GATE_IRONIC=1
+          export DEVSTACK_GATE_SMOKE_SERIAL=1
+          export BRANCH_OVERRIDE={branch-override}
+          if [ "$BRANCH_OVERRIDE" != "default" ] ; then
+              export OVERRIDE_ZUUL_BRANCH=$BRANCH_OVERRIDE
+          fi
+
+          export BM_BUILD_DEPLOY_RAMDISK=True
+          export BM_DEPLOY_FLAVOR="-a amd64 ubuntu deploy-ironic"
+          export IRONIC_VM_COUNT=1
+          export IRONIC_VM_SPECS_RAM=512
+          export IRONIC_VM_SPECS_DISK=10
+          export IRONIC_BAREMETAL_BASIC_OPS=True
+          export VIRT_DRIVER=ironic
+
+          IP=$(ip addr show eth0 | grep 'inet ' | sed 's/inet \([0-9\.]*\)\/.*/\1/' | tr -d ' ')
+          sudo sed -i "s/#ListenAddress 0.0.0.0/ListenAddress $IP/" /etc/ssh/sshd_config
+          sudo service ssh restart
+
+          sudo add-apt-repository cloud-archive:havana
+          sudo apt-get update
+
+          cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
+          ./safe-devstack-vm-gate-wrap.sh
+
+    publishers:
+      - devstack-logs
+      - console-log
+
+
+- job-template:
     name: '{pipeline}-tempest-dsvm-marconi{branch-designator}'
     node: '{node}'
 
@@ -1073,6 +1121,7 @@
       - '{pipeline}-tempest-dsvm-sahara-neutron{branch-designator}'
       - '{pipeline}-tempest-dsvm-ironic{branch-designator}'
       - '{pipeline}-tempest-dsvm-ironic-postgres{branch-designator}'
+      - '{pipeline}-tempest-dsvm-virtual-ironic{branch-designator}'
       - '{pipeline}-tempest-dsvm-marconi{branch-designator}'
       - '{pipeline}-tempest-dsvm-all{branch-designator}'
       - '{pipeline}-tempest-dsvm-coverage{branch-designator}'
