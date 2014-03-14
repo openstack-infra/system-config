@@ -269,6 +269,14 @@ project-templates:
     gate:
       - 'gate-{name}-pypy'
 
+  - name: stable-compat-jobs
+    # trunk clients and libs are used in stable jobs, so run stable jobs
+    # on those repos
+    # TODO(jogo): run this on libraries
+    check:
+      - 'check-tempest-dsvm-full-havana'
+      - 'check-tempest-dsvm-neutron-havana'
+
   - name: openstack-server-publish-jobs
     post:
       - '{name}-docs'
@@ -1089,6 +1097,7 @@ projects:
       - name: openstack-client-publish-jobs
       - name: check-requirements
       - name: integrated-gate
+      - name: stable-compat-jobs
     check:
       - gate-python-ceilometerclient-python33
       - gate-python-ceilometerclient-pypy
@@ -1114,6 +1123,7 @@ projects:
       - name: openstack-client-publish-jobs
       - name: check-requirements
       - name: integrated-gate
+      - name: stable-compat-jobs
     check:
       - gate-python-cinderclient-python33
       - gate-python-cinderclient-pypy
@@ -1179,6 +1189,7 @@ projects:
       - name: openstack-client-publish-jobs
       - name: check-requirements
       - name: integrated-gate
+      - name: stable-compat-jobs
     check:
       - gate-python-glanceclient-python33
       - gate-python-glanceclient-pypy
@@ -1214,6 +1225,7 @@ projects:
     template:
       - name: check-requirements
       - name: integrated-gate
+      - name: stable-compat-jobs
     check:
       - gate-python-heatclient-pep8
       - gate-python-heatclient-python26
@@ -1284,6 +1296,7 @@ projects:
       - name: openstack-client-publish-jobs
       - name: check-requirements
       - name: integrated-gate
+      - name: stable-compat-jobs
     check:
       - gate-python-keystoneclient-python33
       - check-devstack-dsvm-cells
@@ -1345,6 +1358,7 @@ projects:
       - name: openstack-client-publish-jobs
       - name: check-requirements
       - name: integrated-gate
+      - name: stable-compat-jobs
     check:
       - gate-python-neutronclient-python33
       - gate-python-neutronclient-pypy
@@ -1382,6 +1396,7 @@ projects:
       - name: openstack-client-publish-jobs
       - name: check-requirements
       - name: integrated-gate
+      - name: stable-compat-jobs
     check:
       - gate-python-novaclient-python33
       - gate-python-novaclient-pypy
@@ -1419,6 +1434,7 @@ projects:
       - name: openstack-client-publish-jobs
       - name: check-requirements
       - name: integrated-gate
+      - name: stable-compat-jobs
     check:
       - gate-python-openstackclient-python33
     pre-release:
@@ -1461,6 +1477,7 @@ projects:
       - name: openstack-client-publish-jobs
       - name: check-requirements
       - name: integrated-gate
+      - name: stable-compat-jobs
     check:
       - gate-python-swiftclient-python33
       - gate-python-swiftclient-pypy
@@ -1494,6 +1511,7 @@ projects:
     template:
       - name: check-requirements
       - name: integrated-gate
+      - name: stable-compat-jobs
     check:
       - gate-python-troveclient-pep8
       - gate-python-troveclient-python26
