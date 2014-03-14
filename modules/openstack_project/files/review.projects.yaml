@@ -585,7 +585,7 @@
 - project: stackforge/kickstack
   description: Rapid OpenStack deployment with puppet-dashboard, The Foreman, or any other Puppet ENC
   upstream: git://github.com/hastexo/kickstack
-- project stackforge/kite
+- project: stackforge/kite
   description: A service for managing and distributing message encryption keys.
 - project: stackforge/kwapi
   description: Energy Efficiency Monitoring
