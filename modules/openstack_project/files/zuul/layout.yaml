@@ -294,6 +294,11 @@ project-templates:
       - gate-{name}-tox-checkdeletions
       - gate-{name}-tox-doc-publish-checkbuild
 
+  - name: openstack-doc-translation
+    post:
+      - '{name}-manuals-upstream-translation-update'
+    periodic:
+      - '{name}-manuals-propose-translation-update'
 
 jobs:
   - name: ^.*$
@@ -412,25 +417,29 @@ jobs:
     success-message: Jenkins XML output is unchanged.
 # Continous publishing from master of the following documentation targets:
   - name: openstack-admin-guide-cloud
-    branch: ^master$
+    branch: master
   - name: openstack-docs-site
-    branch: ^master$
+    branch: master
   - name: openstack-cli-reference
-    branch: ^master$
+    branch: master
   - name: openstack-glossary
-    branch: ^master$
+    branch: master
   - name: openstack-ha-guide
-    branch: ^master$
+    branch: master
   - name: openstack-image-guide
-    branch: ^master$
+    branch: master
   - name: openstack-user-guide
-    branch: ^master$
+    branch: master
   - name: openstack-user-guide-admin
-    branch: ^master$
+    branch: master
   - name: openstack-security-guide
-    branch: ^master$
+    branch: master
   - name: openstack-training-guides
-    branch: ^master$
+    branch: master
+  - name: ^.*manuals-propose-translation-update$
+    branch: master
+  - name: ^.*manuals-upstream-translation-update$
+    branch: master
 # Documentation targets for master and future stable branches:
   - name: openstack-config-reference
     branch: ^(?!stable/grizzly).*$
@@ -492,8 +501,6 @@ jobs:
     branch: ^(?!stable/grizzly).*$
   - name: ^gate-requirements-(python27|pypy)$
     branch: ^(?!stable/grizzly).*$
-  - name: manuals-upstream-translation-update
-    branch: ^master$
   - name: gate-hacking-python33
     voting: false
   - name: gate-hacking-pypy
@@ -2284,17 +2291,16 @@ projects:
   - name: openstack/api-site
     template:
       - name: openstack-doc-gate
+      - name: openstack-doc-translation
     post:
       - api-site-tox-doc-publishdocs
       - openstack-api-site
       - openstack-api-ref
-      - manuals-upstream-translation-update
-    periodic:
-      - manuals-propose-translation-update
 
   - name: openstack/openstack-manuals
     template:
       - name: openstack-doc-gate
+      - name: openstack-doc-translation
     check:
       - gate-openstack-manuals-validate
     gate:
@@ -2323,20 +2329,15 @@ projects:
       - openstack-security-guide
       - openstack-user-guide
       - openstack-user-guide-admin
-      - manuals-upstream-translation-update
       - openstack-training-guides
-    periodic:
-      - manuals-propose-translation-update
 
   - name: openstack/operations-guide
     template:
       - name: openstack-doc-gate
+      - name: openstack-doc-translation
     post:
       - openstack-operations-guide
       - openstack-operations-guide-ja
-      - manuals-upstream-translation-update
-    periodic:
-      - manuals-propose-translation-update
 
 # Section: OpenStack development projects
 
