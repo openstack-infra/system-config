@@ -1983,6 +1983,7 @@
 
     jobs:
       - openstack-doc-jobs
+      - manual-translation-jobs
 
       - 'openstack-{manual}'
 
@@ -2045,6 +2046,7 @@
 
     jobs:
       - openstack-doc-jobs
+      - manual-translation-jobs
 
 - project:
     name: manila
@@ -2217,9 +2219,9 @@
 
     jobs:
       - openstack-doc-jobs
+      - manual-translation-jobs
       - '{name}-tox-doc-{envlist}':
           envlist: publishdocs
-
 
 - project:
     name: database-api

@@ -16,7 +16,12 @@
 
 # The script is to push the updated PoT to Transifex.
 
+PROJECT=$1
+
 DocFolder="doc"
+if [ $PROJECT = "api-site" ] ; then
+    DocFolder="./"
+fi
 
 if [ ! `echo $ZUUL_REFNAME | grep master` ]
 then
@@ -62,6 +67,3 @@ then
     # Push .pot changes to transifex
     tx --debug --traceback push -s
 fi
-
-
-
