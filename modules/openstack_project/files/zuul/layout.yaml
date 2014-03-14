@@ -324,6 +324,8 @@ jobs:
     voting: false
   - name: check-tempest-dsvm-ironic-postgres-nv
     voting: false
+  - name: ^check-tempest-dsvm-virtual-ironic.*$
+    voting: false
   - name: ^(gate|check)-tempest-dsvm-large-ops$
     branch: ^(?!stable/grizzly).*$
   - name: ^(gate|check)-tempest-dsvm-neutron-large-ops$
@@ -849,6 +851,7 @@ projects:
     check:
       - check-tempest-dsvm-ironic
       - check-tempest-dsvm-ironic-postgres
+      - check-tempest-dsvm-virtual-ironic
     gate:
       - gate-tempest-dsvm-ironic
       - gate-tempest-dsvm-ironic-postgres
@@ -2193,6 +2196,7 @@ projects:
       - gate-grenade-dsvm-forward
       - gate-tempest-dsvm-trove-full
       - check-tempest-dsvm-marconi
+      - check-tempest-dsvm-virtual-ironic-nv
     experimental-tripleo:
       - check-tripleo-seed-precise
       - check-tripleo-undercloud-precise
@@ -2433,6 +2437,7 @@ projects:
       - gate-swift-dsvm-functional
     experimental:
       - gate-grenade-dsvm-forward
+      - check-tempest-dsvm-virtual-ironic-nv
 
   - name: openstack-dev/grenade
     check:
@@ -2637,6 +2642,7 @@ projects:
       - gate-swift-dsvm-functional
     experimental:
       - gate-grenade-dsvm-forward
+      - check-tempest-dsvm-virtual-ironic-nv
     experimental-tripleo:
       - check-tripleo-seed-precise
       - check-tripleo-undercloud-precise
