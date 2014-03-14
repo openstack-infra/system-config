@@ -229,6 +229,7 @@ openstack-qa:
       - change-merged
       - x-vrif-minus-2
     projects:
+      - openstack/qa-specs
       - openstack/tempest
       - openstack-dev/devstack
       - openstack-dev/grenade
