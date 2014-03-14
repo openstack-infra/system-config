@@ -154,6 +154,9 @@ source-files:
     tags:
       - screen
       - oslofmt
+  - name: logs/horizon_error.txt
+    tags:
+      - apacheerror
 # TODO(clarkb) Add swift proxy logs here.
   - name: logs/syslog.txt
     tags:
