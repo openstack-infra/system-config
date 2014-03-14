@@ -2160,6 +2160,7 @@ projects:
       - periodic-tempest-dsvm-postgres-full-havana
     periodic-qa:
       - periodic-tempest-dsvm-full-non-isolated-master
+      - periodic-tempest-dsvm-neutron-full-non-isolated-master
       - periodic-tempest-dsvm-all-master
       - periodic-tempest-dsvm-stress-master
 
