@@ -227,7 +227,11 @@ end of this file that looks like::
         - master
 
 And thats it. At this point you will want to submit these edits as a
-change to review.openstack.org.
+change to review.openstack.org. When you do so, please use the
+``new-project`` topic.  You can do that using the ``-t`` option to
+``git review``.
+
+  $ git review -t new-project
 
 Add .gitreview file to project
 ==============================
