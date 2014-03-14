@@ -573,7 +573,37 @@
           export PYTHONUNBUFFERED=true
           export DEVSTACK_GATE_TIMEOUT=60
           export DEVSTACK_GATE_TEMPEST=1
-          export DEVSTACK_GATE_TEMPEST_LARGE_OPS=1
+          export DEVSTACK_GATE_TEMPEST_LARGE_OPS=50
+          export BRANCH_OVERRIDE={branch-override}
+          if [ "$BRANCH_OVERRIDE" != "default" ] ; then
+              export OVERRIDE_ZUUL_BRANCH=$BRANCH_OVERRIDE
+          fi
+          cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
+          ./safe-devstack-vm-gate-wrap.sh
+
+    publishers:
+      - devstack-logs
+      - console-log
+
+- job-template:
+    name: '{pipeline}-tempest-dsvm-large-ops-testing{branch-designator}'
+    node: '{node}'
+
+    wrappers:
+      - timeout:
+          timeout: 65
+          fail: true
+      - timestamps
+
+    builders:
+      - link-logs
+      - devstack-checkout
+      - shell: |
+          #!/bin/bash -xe
+          export PYTHONUNBUFFERED=true
+          export DEVSTACK_GATE_TIMEOUT=60
+          export DEVSTACK_GATE_TEMPEST=1
+          export DEVSTACK_GATE_TEMPEST_LARGE_OPS=175
           export BRANCH_OVERRIDE={branch-override}
           if [ "$BRANCH_OVERRIDE" != "default" ] ; then
               export OVERRIDE_ZUUL_BRANCH=$BRANCH_OVERRIDE
@@ -603,7 +633,7 @@
           export PYTHONUNBUFFERED=true
           export DEVSTACK_GATE_TIMEOUT=60
           export DEVSTACK_GATE_TEMPEST=1
-          export DEVSTACK_GATE_TEMPEST_LARGE_OPS=1
+          export DEVSTACK_GATE_TEMPEST_LARGE_OPS=50
           export DEVSTACK_GATE_NEUTRON=1
           export BRANCH_OVERRIDE={branch-override}
           if [ "$BRANCH_OVERRIDE" != "default" ] ; then
@@ -1109,6 +1139,7 @@
       - '{pipeline}-tempest-dsvm-cells{branch-designator}'
       - '{pipeline}-tempest-dsvm-cells-full{branch-designator}'
       - '{pipeline}-tempest-dsvm-large-ops{branch-designator}'
+      - '{pipeline}-tempest-dsvm-large-ops-testing{branch-designator}'
       - '{pipeline}-tempest-dsvm-neutron-large-ops{branch-designator}'
       - '{pipeline}-tempest-dsvm-postgres{branch-designator}'
       - '{pipeline}-tempest-dsvm-postgres-full{branch-designator}'
