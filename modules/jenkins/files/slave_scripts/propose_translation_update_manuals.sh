@@ -46,11 +46,10 @@ EOF
     set -e
 fi
 
-# no need to initialize transifex client
-# because there is an existing .tx folder in openstack-manuals
-# tx init --host=https://www.transifex.com
+# Initialize transifex client
+tx init --host=https://www.transifex.com
 
-# generate pot one by one
+# Generate pot one by one
 for FILE in ${DocFolder}/*
 do
     DOCNAME=${FILE#${DocFolder}/}
