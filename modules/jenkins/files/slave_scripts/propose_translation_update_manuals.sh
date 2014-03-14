@@ -17,8 +17,12 @@
 # The script is to pull the translations from Transifex,
 # and push to Gerrit.
 
-PROJECT="openstack-manuals"
+PROJECT=$1
+
 DocFolder="doc"
+if [ $PROJECT = "api-site" ] ; then
+    DocFolder="./"
+fi
 
 COMMIT_MSG="Imported Translations from Transifex"
 

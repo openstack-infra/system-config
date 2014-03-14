@@ -45,36 +45,30 @@
 
     node: 'proposal'
 
-- job:
-    name: manuals-upstream-translation-update
+- job-template:
+    name: '{name}-manuals-upstream-translation-update'
 
     builders:
       - gerrit-git-prep
       - shell: |
           #!/bin/bash -xe
-          /usr/local/jenkins/slave_scripts/upstream_translation_update_manuals.sh
+          /usr/local/jenkins/slave_scripts/upstream_translation_update_manuals.sh {name}
 
     publishers:
       - console-log
 
     node: 'proposal'
 
-- job:
-    name: manuals-propose-translation-update
+- job-template:
+    name: '{name}-manuals-propose-translation-update'
 
     builders:
       - shell: |
           #!/bin/bash -xe
-          /usr/local/jenkins/slave_scripts/propose_translation_update_manuals.sh
+          /usr/local/jenkins/slave_scripts/propose_translation_update_manuals.sh {name}
 
     publishers:
       - console-log
-
-    scm:
-      - git:
-          url: 'git://git.openstack.org/openstack/openstack-manuals'
-          branches:
-            - 'origin/master'
 
     node: 'proposal'
 
@@ -84,3 +78,8 @@
       - '{name}-upstream-translation-update'
       - '{name}-propose-translation-update'
 
+- job-group:
+    name: manual-translation-jobs
+    jobs:
+      - '{name}-manuals-upstream-translation-update'
+      - '{name}-manuals-propose-translation-update'
