@@ -4,6 +4,9 @@ class jenkins::slave(
   $ssh_key = '',
   $user = true,
   $python3 = false,
+  $gitfullname = 'OpenStack Jenkins',
+  $gitemail = 'jenkins@openstack.org',
+  $gerrituser = 'jenkins',
 ) {
 
   include pip
@@ -11,8 +14,11 @@ class jenkins::slave(
 
   if ($user == true) {
     class { 'jenkins::jenkinsuser':
-      ensure  => present,
-      ssh_key => $ssh_key,
+      ensure      => present,
+      ssh_key     => $ssh_key,
+      gitfullname => $gitfullname,
+      gitemail    => $gitemail,
+      gerrituser  => $gerrituser,
     }
   }
 
