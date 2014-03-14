@@ -1001,16 +1001,9 @@ projects:
       - name: check-requirements
 
   - name: openstack/pycadf
-    check:
-      - gate-pycadf-pep8
-      - gate-pycadf-python26
-      - gate-pycadf-python27
-    gate:
-      - gate-pycadf-pep8
-      - gate-pycadf-python26
-      - gate-pycadf-python27
-    post:
-      - pycadf-branch-tarball
+    template:
+      - name: python-jobs
+      - name: openstack-server-publish-jobs
     pre-release:
       - pycadf-tarball
     release:

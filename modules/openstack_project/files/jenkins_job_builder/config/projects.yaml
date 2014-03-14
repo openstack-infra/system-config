@@ -1861,9 +1861,11 @@
     github-org: openstack
     node: bare-precise
     tarball-site: tarballs.openstack.org
+    doc-publisher-site: docs.openstack.org
 
     jobs:
       - python-jobs
+      - openstack-publish-jobs
       - pypi-jobs
 
 - project:
