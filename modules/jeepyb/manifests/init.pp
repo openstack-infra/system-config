@@ -1,6 +1,7 @@
 # == Class: jeepyb
 #
 class jeepyb (
+  $jeepy_version = latest,
   $git_source_repo = 'https://git.openstack.org/openstack-infra/jeepyb',
 ) {
   include mysql::python
@@ -38,7 +39,7 @@ class jeepyb (
   }
 
   vcsrepo { '/opt/jeepyb':
-    ensure   => latest,
+    ensure   => $jeepy_version,
     provider => git,
     revision => 'master',
     source   => $git_source_repo,
