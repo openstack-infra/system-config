@@ -300,7 +300,7 @@ providers:
     project-id: '<%= tripleo_project %>'
     auth-url: 'https://ci-overcloud.tripleo.org:13000/v2.0'
     boot-timeout: 120
-    max-servers: 190
+    max-servers: 50
     rate: 0.001
     networks:
       - net-id: f69ac547-db64-4e69-ae70-e5233634aff0
@@ -308,7 +308,7 @@ providers:
     images:
       - name: tripleo-precise
         base-image: 'Ubuntu Precise 12.04 LTS Server 64-bit'
-        min-ram: 8192
+        min-ram: 16384
         name-filter: h1
         setup: prepare_node_tripleo.sh
         username: jenkins
