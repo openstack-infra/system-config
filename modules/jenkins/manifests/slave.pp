@@ -27,6 +27,7 @@ class jenkins::slave(
     $::jenkins::params::jdk_package, # jdk for building java jobs
     $::jenkins::params::ccache_package,
     $::jenkins::params::python_netaddr_package, # Needed for devstack address_in_net()
+    $::jenkins::params::haveged_package, # entropy is useful to have
   ]
 
   # Packages that most jenkins slaves (eg, unit test runners) need

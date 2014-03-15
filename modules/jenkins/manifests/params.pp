@@ -10,6 +10,7 @@ class jenkins::params {
       $jdk_package = 'java-1.7.0-openjdk-devel'
       $ccache_package = 'ccache'
       $python_netaddr_package = 'python-netaddr'
+      $haveged_package = 'haveged'
       # packages needed by slaves
       $ant_package = 'ant'
       $awk_package = 'gawk'
@@ -94,6 +95,7 @@ class jenkins::params {
       $jdk_package = 'openjdk-7-jdk'
       $ccache_package = 'ccache'
       $python_netaddr_package = 'python-netaddr'
+      $haveged_package = 'haveged'
       # packages needed by slaves
       $ant_package = 'ant'
       $awk_package = 'gawk'
