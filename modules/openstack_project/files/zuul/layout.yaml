@@ -515,8 +515,6 @@ jobs:
     voting: false
   - name: ^(gate|check)-tempest-dsvm-sahara-neutron-nv$
     voting: false
-  - name: ^(gate|check)-tempest-dsvm-trove-full$
-    voting: false
   - name: gate-keystone-python33
     voting: false
   - name: gate-marconi-python33
@@ -2140,6 +2138,7 @@ projects:
       - gate-tempest-dsvm-large-ops
       - gate-tempest-dsvm-neutron-large-ops
       - check-grenade-dsvm-partial-ncpu
+      - check-tempest-dsvm-trove-full
       - check-tempest-dsvm-ironic-nv
       - check-tempest-dsvm-ironic-postgres-nv
       - check-tempest-dsvm-sahara-full-nv
@@ -2152,9 +2151,9 @@ projects:
       - gate-tempest-dsvm-postgres-full
       - gate-tempest-dsvm-large-ops
       - gate-tempest-dsvm-neutron-large-ops
+      - gate-tempest-dsvm-trove-full
     experimental:
       - gate-grenade-dsvm-forward
-      - gate-tempest-dsvm-trove-full
       - check-tempest-dsvm-marconi
       - check-tempest-dsvm-virtual-ironic-nv
     experimental-tripleo:
@@ -2371,6 +2370,7 @@ projects:
       - check-tempest-dsvm-neutron-full
       - gate-tempest-dsvm-large-ops
       - gate-tempest-dsvm-neutron-large-ops
+      - check-tempest-dsvm-trove-full
       - check-tempest-dsvm-cells-full
       - check-grenade-dsvm-forward
       - check-grenade-dsvm-partial-ncpu
@@ -2386,6 +2386,7 @@ projects:
       - gate-tempest-dsvm-postgres-full
       - gate-tempest-dsvm-large-ops
       - gate-tempest-dsvm-neutron-large-ops
+      - gate-tempest-dsvm-trove-full
       - gate-grenade-dsvm-forward
       - gate-swift-dsvm-functional
     experimental:
