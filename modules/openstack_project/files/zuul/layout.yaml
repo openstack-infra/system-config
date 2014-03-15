@@ -4317,6 +4317,15 @@ projects:
       - gate-python-solumclient-docs
     post:
       - python-solumclient-coverage
+      - python-solumclient-branch-tarball
+    pre-release:
+      - python-solumclient-tarball
+    release:
+      - python-solumclient-tarball:
+        - python-solumclient-pypi-upload:
+          - post-mirror-python26
+          - post-mirror-python27
+          - post-mirror-python33
 
   - name: stackforge/rally
     template:
@@ -4393,6 +4402,10 @@ projects:
     post:
       - solum-coverage
       - hook-solum-rtfd
+    pre-release:
+      - solum-tarball
+    release:
+      - solum-tarball
 
   - name: stackforge/sphinxcontrib-docbookrestapi
     check:
