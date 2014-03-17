@@ -4,7 +4,7 @@ dburi: 'mysql://nodepool:<%= mysql_password %>@localhost/nodepool'
 cron:
   cleanup: '*/1 * * * *'
   check: '*/15 * * * *'
-  update-image: '14 2 * * *'
+  update-image: '14 14 * * *'
 
 zmq-publishers:
   - tcp://jenkins01.openstack.org:8888
