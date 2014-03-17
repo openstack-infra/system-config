@@ -866,21 +866,15 @@ projects:
       - keystone-propose-translation-update
       - periodic-swift-dsvm-functional-havana
 
-# TODO: add docs
   - name: openstack/marconi
     template:
+      - name: python-jobs
       - name: check-requirements
     check:
       - check-tempest-dsvm-marconi
-      - gate-marconi-pep8
-      - gate-marconi-python26
-      - gate-marconi-python27
       - gate-marconi-python33
       - gate-marconi-pypy
     gate:
-      - gate-marconi-pep8
-      - gate-marconi-python26
-      - gate-marconi-python27
       - gate-marconi-pypy
     post:
       - marconi-branch-tarball
