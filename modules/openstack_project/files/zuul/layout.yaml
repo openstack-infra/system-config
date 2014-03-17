@@ -1106,10 +1106,12 @@ projects:
       - gate-taskflow-python33
       - gate-taskflow-tox-py26-sa7-mysql
       - gate-taskflow-tox-py27-sa8-mysql
+      - gate-taskflow-pypy
     gate:
       - gate-taskflow-python33
       - gate-taskflow-tox-py26-sa7-mysql
       - gate-taskflow-tox-py27-sa8-mysql
+      - gate-taskflow-pypy
     pre-release:
       - taskflow-tarball
     release:
