@@ -100,6 +100,9 @@ class openstack_project::base(
     replace => true,
   }
 
+  service { 'puppet':
+    ensure => stopped,
+  }
 }
 
 # vim:sw=2:ts=2:expandtab:textwidth=79
