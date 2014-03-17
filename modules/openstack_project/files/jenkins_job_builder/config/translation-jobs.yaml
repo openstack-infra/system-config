@@ -63,6 +63,7 @@
     name: '{name}-manuals-propose-translation-update'
 
     builders:
+      - gerrit-git-prep
       - shell: |
           #!/bin/bash -xe
           /usr/local/jenkins/slave_scripts/propose_translation_update_manuals.sh {name}
