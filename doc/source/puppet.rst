@@ -82,13 +82,6 @@ On the new server connecting (for example, review.openstack.org) to the puppet m
 
   sudo apt-get install puppet
 
-Then edit the ``/etc/default/puppet`` file to change the start variable:
-
-.. code-block:: ini
-
-  # Start puppet on boot?
-  START=yes
-
 The node then needs to be configured to set a fixed hostname and the hostname
 of the puppet master with the following additions to ``/etc/puppet/puppet.conf``:
 
@@ -121,15 +114,45 @@ If you see the new node there you can sign its cert on the puppet master with:
 
   sudo puppet cert sign review.openstack.org
 
-Finally on the puppet agent you need to start the agent daemon:
+Once the cert is signed, the puppet running orchestration will pick up
+the node and run puppet on it as needed.
+
+Running Puppet on Nodes
+-----------------------
+
+In OpenStack's Infrastructure, puppet runs are triggered from a cronjob
+running on the puppetmaster which in turn runs a single run of puppet on
+each host we know about. We do not use the daemon mode of puppet agent
+because it experiences random hangs, and also does not allow us to control
+sequencing in any meaningful way.
+
+The entry point for this process is ``/opt/config/production/run_all.sh``
+
+There are a set of nodes, which are configured in puppet as "override" nodes,
+which are run in sequence before the rest of the nodes are run in parellel.
+At the moment, this allows creation of git repos on the git slaves before
+creation of the master repos on the gerrit server.
+
+Disabling Puppet on Nodes
+-------------------------
+
+In the case of needing to disable the running of puppet on a node, it's a
+simple matter of disabling the agent:
 
 .. code-block:: bash
 
-   sudo service puppet start
+  sudo puppet agent --disable
 
-Now that it is signed the puppet agent will execute any instructions for its
-node on the next run (default is every 30 minutes).  You can trigger this
-earlier by restarting the puppet service on the agent node.
+This will prevent any subsequent runs of the agent, including ones triggered
+globally by the run_all script. If, as an admin, you need to run puppet on
+a node where it has been disabled, you need to specify an alternate disable
+lock file which will allow your local run of puppet without allowing the
+globally orchestrated runs to occur:
+
+.. code-block:: bash
+
+  sudo puppet agent --test --puppetdlockfile=/tmp/alt-lock-file
+
 
 Important Notes
 ---------------
