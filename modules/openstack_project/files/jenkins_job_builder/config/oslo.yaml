@@ -1,0 +1,45 @@
+- job-template:
+    name: '{pipeline}-oslo.test-dsvm-{name}{branch-designator}'
+    node: '{node}'
+
+    wrappers:
+      - timeout:
+          timeout: 95
+          fail: true
+      - timestamps
+
+    builders:
+      - devstack-checkout
+      - shell: |
+          #!/bin/bash -xe
+          export PYTHONUNBUFFERED=true
+          export DEVSTACK_GATE_TIMEOUT=95
+          export PROJECTS="openstack/oslo.test $PROJECTS"
+          export BRANCH_OVERRIDE={branch-override}
+          if [ "$BRANCH_OVERRIDE" != "default" ] ; then
+              export OVERRIDE_ZUUL_BRANCH=$BRANCH_OVERRIDE
+          fi
+
+          function gate_hook {{
+              cd /opt/stack/new/oslo.test
+              remaining_time
+              timeout -s 9 ${{REMAINING_TIME}}m ./tools/run_cross_tests.sh /opt/stack/new/{name} py27
+          }}
+          export -f gate_hook
+
+          function post_test_hook {{
+              cd /opt/stack/new/{name}
+              mv nose_results.html $WORKSPACE/logs
+              mv testr_results.html.gz $WORKSPACE/logs
+              mv .testrepository/tmp* $WORKSPACE/logs
+              mv subunit_log.txt.gz $WORKSPACE/logs
+          }}
+          export -f post_test_hook
+
+          cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
+          ./safe-devstack-vm-gate-wrap.sh
+      - link-logs
+
+    publishers:
+      - devstack-logs
+      - console-log
