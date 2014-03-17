@@ -1,0 +1,51 @@
+#!/bin/bash
+
+# Copyright 2014 Hewlett-Packard Development Company, L.P.
+#
+# Licensed under the Apache License, Version 2.0 (the "License"); you may
+# not use this file except in compliance with the License. You may obtain
+# a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+# WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+# License for the specific language governing permissions and limitations
+# under the License.
+
+# This function will properly fail if puppet is disabled on the target host
+function run_ssh {
+ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no root@$1 <%= scope.lookupvar('openstack_project::params::allowed_ssh_command') %>
+    ret=$?
+    # Did we timeout
+    if [ $ret eq 124 ]; the
+        echo "TODO: Timeout instead of other failure. Report this differently."
+    fi
+    return $ret
+}
+
+FULL_LIST=$(puppet cert list -a  | grep '^\+' | awk '{print $2}' | sed 's/"//g')
+OVERRIDE_LIST="
+<% @override_list.each do |host| -%>
+<%= host %>
+<% end -%>
+"
+FILTERED_LIST=""
+for host in $FULL_LIST; do
+    if ! echo $OVERRIDE_LIST | grep $host >/dev/null 2>&1 ; then
+        FILTERED_LIST="$FILTERED_LIST $host"
+    fi
+done
+
+cd /opt/config/production
+
+# Run things that need to be ordered
+for host in $OVERRIDE_LIST; do
+    if ! run_ssh $host ; then
+        break
+    fi
+done
+
+# Now, run everyone else
+echo $FILTERED_LIST | xargs -P 10 -n 1 run_ssh
