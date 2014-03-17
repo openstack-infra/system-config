@@ -104,7 +104,6 @@ class openstack_project::git_backend (
 
   cron { 'mirror_repack':
     user        => 'cgit',
-    weekday     => '0',
     hour        => '4',
     minute      => '7',
     command     => 'find /var/lib/git/ -not -path /var/lib/git/zuul -type d -name "*.git" -print -exec git --git-dir="{}" repack -afd \; -exec git --git-dir="{}" pack-refs --all \;',
