@@ -100,6 +100,15 @@ class openstack_project::base(
       replace => true,
     }
 
+    file { '/etc/default/puppet':
+      ensure  => present,
+      owner   => 'root',
+      group   => 'root',
+      mode    => '0444',
+      source  => 'puppet:///modules/openstack_project/puppet.default',
+      replace => true,
+    }
+
   }
 
   file { '/etc/puppet/puppet.conf':
@@ -111,6 +120,9 @@ class openstack_project::base(
     replace => true,
   }
 
+  service { 'puppet':
+    ensure => stopped,
+  }
 }
 
 # vim:sw=2:ts=2:expandtab:textwidth=79
