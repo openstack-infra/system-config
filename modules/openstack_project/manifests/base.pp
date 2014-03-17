@@ -100,6 +100,22 @@ class openstack_project::base(
     replace => true,
   }
 
+  file { '/etc/puppet/auth.conf':
+    ensure  => present,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0444',
+    content => template('openstack_project/auth.conf.erb'),
+    replace => true,
+  }
+
+  service { 'puppet':
+    ensure    => running,
+    subscribe => [
+      File['/etc/puppet/auth.conf'],
+      File['/etc/puppet/puppet.conf'],
+    ],
+  }
 }
 
 # vim:sw=2:ts=2:expandtab:textwidth=79

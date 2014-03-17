@@ -17,10 +17,11 @@ class openstack_project::template (
     include openstack_project::automatic_upgrades
   }
 
+  $puppet_agent_rule = ['-m state --state NEW -m tcp -p tcp --dport 8139 -s ci-puppetmaster.openstack.org -j ACCEPT']
   class { 'iptables':
     public_tcp_ports => $iptables_public_tcp_ports,
     public_udp_ports => $iptables_public_udp_ports,
-    rules4           => $iptables_rules4,
+    rules4           => $iptables_rules4 + $puppet_agent_rule,
     rules6           => $iptables_rules6,
   }
 
