@@ -1,6 +1,8 @@
 # == Class: openstack_project::puppetmaster
 #
 class openstack_project::puppetmaster (
+  $root_rsa_key,
+  $override_list = [],
   $sysadmins = []
 ) {
   class { 'openstack_project::server':
@@ -44,6 +46,25 @@ class openstack_project::puppetmaster (
     group  => 'puppet',
     mode   => '0750',
     }
+
+  file { '/usr/local/bin/run_remote_puppet':
+    ensure  => present,
+    mode    => '0700',
+    content => template('openstack_project/run_remote_puppet.sh.erb'),
+  }
+
+  if ! defined(File['/root/.ssh']) {
+    file { '/root/.ssh':
+      ensure => directory,
+      mode   => '0700',
+    }
+  }
+
+  file { '/root/.ssh/id_rsa':
+    ensure  => present,
+    mode    => '0400',
+    content => $root_rsa_key,
+  }
 
 # Cloud credentials are stored in this directory for launch-node.py.
   file { '/root/ci-launch':
