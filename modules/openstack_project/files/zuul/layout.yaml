@@ -4274,23 +4274,22 @@ projects:
 
   - name: stackforge/python-solumclient
     template:
+      - name: python-jobs
       - name: check-requirements
     check:
-      - gate-python-solumclient-pep8
-      - gate-python-solumclient-python26
-      - gate-python-solumclient-python27
       - gate-python-solumclient-python33
       - gate-python-solumclient-pypy
-      - gate-python-solumclient-docs
     gate:
-      - gate-python-solumclient-pep8
-      - gate-python-solumclient-python26
-      - gate-python-solumclient-python27
       - gate-python-solumclient-python33
       - gate-python-solumclient-pypy
-      - gate-python-solumclient-docs
-    post:
-      - python-solumclient-coverage
+    pre-release:
+      - python-solumclient-tarball
+    release:
+      - python-solumclient-tarball:
+        - python-solumclient-pypi-upload:
+          - post-mirror-python26
+          - post-mirror-python27
+          - post-mirror-python33
 
   - name: stackforge/rally
     template:
@@ -4347,26 +4346,22 @@ projects:
 
   - name: stackforge/solum
     template:
+      - name: python-jobs
       - name: check-requirements
     check:
-      - gate-solum-pep8
-      - gate-solum-python26
-      - gate-solum-python27
       - gate-solum-python33
       - gate-solum-pypy
-      - gate-solum-docs
       - gate-solum-devstack-dsvm
     gate:
-      - gate-solum-pep8
-      - gate-solum-python26
-      - gate-solum-python27
       - gate-solum-python33
       - gate-solum-pypy
-      - gate-solum-docs
       - gate-solum-devstack-dsvm
     post:
-      - solum-coverage
       - hook-solum-rtfd
+    pre-release:
+      - solum-tarball
+    release:
+      - solum-tarball
 
   - name: stackforge/sphinxcontrib-docbookrestapi
     check:
