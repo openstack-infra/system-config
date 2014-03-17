@@ -231,6 +231,7 @@
 - project: openstack/nova
   docimpact-group: openstack-manuals
 - project: openstack/nova-specs
+  group: nova
 - project: openstack/object-api
   group: openstack-api-site
   options:
