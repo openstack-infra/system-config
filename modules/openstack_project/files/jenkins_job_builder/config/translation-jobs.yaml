@@ -70,6 +70,12 @@
     publishers:
       - console-log
 
+    scm:
+      - git:
+          url: 'git://git.openstack.org/{github-org}/{name}'
+          branches:
+            - 'origin/master'
+
     node: 'proposal'
 
 - job-group:

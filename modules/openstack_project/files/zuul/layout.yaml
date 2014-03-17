@@ -436,8 +436,6 @@ jobs:
     branch: master
   - name: openstack-training-guides
     branch: master
-  - name: ^.*manuals-propose-translation-update$
-    branch: master
   - name: ^.*manuals-upstream-translation-update$
     branch: master
 # Documentation targets for master and future stable branches:
