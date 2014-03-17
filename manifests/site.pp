@@ -126,7 +126,16 @@ node 'community.openstack.org' {
 
 node 'ci-puppetmaster.openstack.org' {
   class { 'openstack_project::puppetmaster':
-    sysadmins => hiera('sysadmins'),
+    root_rsa_key    => hiera('puppetmaster_root_rsa_key'),
+    override_list   => [
+      'git01.openstack.org',
+      'git02.openstack.org',
+      'git03.openstack.org',
+      'git04.openstack.org',
+      'git05.openstack.org',
+      'review.openstack.org',
+    ],
+    sysadmins       => hiera('sysadmins'),
   }
 }
 
