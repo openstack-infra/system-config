@@ -98,11 +98,15 @@
     - direct-release
 - project: openstack-infra/meetbot
   group: openstack-ci
+  options:
+    - direct-release
 - project: openstack-infra/nodepool
   group: openstack-ci
   description: Manage a pool of nodes for a distributed test infrastructure
 - project: openstack-infra/nose-html-output
   group: openstack-ci
+  options:
+    - direct-release
 - project: openstack-infra/odsreg
   upstream: git://github.com/ttx/odsreg.git
   description: OpenStack Design Summit session management system
