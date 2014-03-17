@@ -454,13 +454,13 @@ node 'summit.openstack.org' {
 # A machine to run Storyboard
 node 'storyboard.openstack.org' {
   class { 'openstack_project::storyboard':
-    sysadmins           => hiera('sysadmins'),
-    mysql_host          => hiera('storyboard_db_host'),
-    mysql_user          => hiera('storyboard_db_user'),
-    mysql_password      => hiera('storyboard_db_password'),
-#    ssl_cert_file_contents  => hiera('storyboard_ssl_cert_file_contents'),
-#    ssl_key_file_contents   => hiera('storyboard_ssl_key_file_contents'),
-#    ssl_chain_file_contents => hiera('storyboard_ssl_chain_file_contents'),
+    sysadmins               => hiera('sysadmins'),
+    mysql_host              => hiera('storyboard_db_host'),
+    mysql_user              => hiera('storyboard_db_user'),
+    mysql_password          => hiera('storyboard_db_password'),
+    ssl_cert_file_contents  => hiera('storyboard_ssl_cert_file_contents'),
+    ssl_key_file_contents   => hiera('storyboard_ssl_key_file_contents'),
+    ssl_chain_file_contents => hiera('storyboard_ssl_chain_file_contents'),
   }
 }
 
