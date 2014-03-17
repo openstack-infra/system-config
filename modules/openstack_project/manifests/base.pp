@@ -63,6 +63,24 @@ class openstack_project::base(
     )
   }
 
+  if ! defined(File['/root/.ssh']) {
+    file { '/root/.ssh':
+      ensure => directory,
+      mode   => '0700',
+    }
+  }
+
+  ssh_authorized_key { '/root/.ssh/authorized_keys':
+    ensure  => present,
+    user    => 'root',
+    type    => 'ssh-rsa',
+    content => 'AAAAB3NzaC1yc2EAAAADAQABAAABAQDSLlN41ftgxkNeUi/kATYPwMPjJdMaSbgokSb9PSkRPZE7GeNai60BCfhu+ky8h5eMe70Bpwb7mQ7GAtHGXPNU1SRBPhMuVN9EYrQbt5KSiwuiTXtQHsWyYrSKtB+XGbl2PhpMQ/TPVtFoL5usxu/MYaakVkCEbt5IbPYNg88/NKPixicJuhi0qsd+l1X1zoc1+Fn87PlwMoIgfLIktwaL8hw9mzqr+pPcDIjCFQQWnjqJVEObOcMstBT20XwKj/ymiH+6p123nnlIHilACJzXhmIZIZO+EGkNF7KyXpcBSfv9efPI+VCE2TOv/scJFdEHtDFkl2kdUBYPC0wQ92rp',
+    options => [
+      'command=puppet agent --test',
+      'from=ci-puppetmaster.openstack.org',
+    ],
+  }
+
   # Use upstream puppet and pin to version 2.7.*
   if ($::osfamily == 'Debian') {
     apt::source { 'puppetlabs':
@@ -81,6 +99,15 @@ class openstack_project::base(
       replace => true,
     }
 
+    file { '/etc/default/puppet':
+      ensure => present,
+      owner  => 'root',
+      group  => 'root',
+      mode   => '0444',
+      source  => 'puppet:///modules/openstack_project/puppet.default',
+      replace => true,
+    }
+
   }
 
   file { '/etc/puppet/puppet.conf':
@@ -92,6 +119,9 @@ class openstack_project::base(
     replace => true,
   }
 
+  service { 'puppet':
+    ensure => stopped,
+  }
 }
 
 # vim:sw=2:ts=2:expandtab:textwidth=79
