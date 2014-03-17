@@ -323,6 +323,7 @@
   description: Python bindings and CLI to Tuskar.
   upstream: git://github.com/tuskar/python-tuskarclient.git
 - project: openstack/qa-specs
+  group: tempest
 - project: openstack/requirements
 - project: openstack/sahara
   group: sahara
