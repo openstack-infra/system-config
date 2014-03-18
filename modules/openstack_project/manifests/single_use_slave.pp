@@ -21,10 +21,14 @@ class openstack_project::single_use_slave (
     certname           => $certname,
     automatic_upgrades => $automatic_upgrades,
     install_users      => $install_users,
-    # Port 8000 from the devstack neutron public net to allow
-    # nova servers to reach heat-api-cfn
+    # Ports 8000, 8003, 8004 from the devstack neutron public net to allow
+    # nova servers to reach heat-api-cfn, heat-api-cloudwatch, heat-api
     iptables_rules4    =>
-      ['-p tcp --dport 8000 -s 172.24.4.0/24 -j ACCEPT'],
+      [
+        '-p tcp --dport 8000 -s 172.24.4.0/24 -j ACCEPT',
+        '-p tcp --dport 8003 -s 172.24.4.0/24 -j ACCEPT',
+        '-p tcp --dport 8004 -s 172.24.4.0/24 -j ACCEPT',
+      ],
   }
   class { 'jenkins::slave':
     ssh_key         => $ssh_key,
