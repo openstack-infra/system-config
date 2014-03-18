@@ -445,6 +445,7 @@
           # work around bug in libvirt-bin on rax nodes, pending fixes to bug:
           # https://bugs.launchpad.net/ubuntu/+source/libvirt/+bug/1248025
           sudo service nova-agent stop || echo ''
+          sudo pkill -9 nova-agent || echo ''
           sudo service xe-linux-distribution stop || echo ''
           if [ -e /proc/xen ] ; then 
               sudo umount /proc/xen
