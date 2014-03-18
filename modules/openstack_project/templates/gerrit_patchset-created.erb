@@ -13,6 +13,6 @@ timeout -k 2m 10m /usr/local/bin/trivial-rebase \
 <% end -%>
 <% if $ssh_welcome_rsa_key_contents != "" -%>
 timeout -k 2m 10m /usr/local/bin/welcome-message patchset-created \
-    --verbose welcome-message@review.openstack.org \
-    /home/gerrit2/review_site/etc/ssh_welcome_rsa_key "$@"
+    --verbose --ssh-user=welcome-message \
+    --ssh-key=/home/gerrit2/review_site/etc/ssh_welcome_rsa_key "$@"
 <% end -%>
