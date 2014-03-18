@@ -343,7 +343,6 @@ jobs:
     voting: false
   - name: ^(gate|check)-grenade-dsvm-partial-ncpu$
     branch: ^(?!stable/(grizzly|havana)).*$
-    voting: false
   - name: gate-tempest-python27
     branch: ^(?!stable/grizzly).*$
     # only here until stable is votable, then merge
@@ -951,6 +950,7 @@ projects:
       - gate-tempest-dsvm-postgres-full
       - gate-tempest-dsvm-large-ops
       - gate-tempest-dsvm-neutron-large-ops
+      - gate-grenade-dsvm-partial-ncpu
     experimental:
       - gate-grenade-dsvm-forward
       - check-tempest-dsvm-neutron-pg
@@ -2137,6 +2137,7 @@ projects:
       - gate-tempest-dsvm-postgres-full
       - gate-tempest-dsvm-large-ops
       - gate-tempest-dsvm-neutron-large-ops
+      - gate-grenade-dsvm-partial-ncpu
     experimental:
       - gate-grenade-dsvm-forward
       - gate-tempest-dsvm-trove-full
@@ -2372,6 +2373,7 @@ projects:
       - gate-tempest-dsvm-large-ops
       - gate-tempest-dsvm-neutron-large-ops
       - gate-grenade-dsvm-forward
+      - gate-grenade-dsvm-partial-ncpu
       - gate-swift-dsvm-functional
     experimental:
       - check-tempest-dsvm-marconi
@@ -2390,6 +2392,7 @@ projects:
       - gate-grenade-dsvm
       - gate-grenade-dsvm-forward
       - gate-grenade-dsvm-neutron
+      - gate-grenade-dsvm-partial-ncpu
     experimental:
       - gate-grenade-dsvm-neutron-forward
 
