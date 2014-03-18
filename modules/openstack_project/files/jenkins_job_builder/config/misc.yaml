@@ -46,6 +46,20 @@
     node: '{node}'
 
 - job-template:
+    name: 'gate-{name}-rstcheck'
+
+    builders:
+      - gerrit-git-prep
+      - rstcheck:
+          github-org: '{github-org}'
+          project: '{name}'
+
+    publishers:
+        - console-log
+
+    node: '{node}'
+
+- job-template:
     name: 'gate-{name}-unittests-{env}'
 
     builders:

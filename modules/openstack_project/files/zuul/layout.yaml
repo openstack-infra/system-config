@@ -2107,9 +2107,9 @@ projects:
 
   - name: openstack/qa-specs
     check:
-      - gate-noop
+      - gate-qa-specs-rstcheck
     gate:
-      - gate-noop
+      - gate-qa-specs-rstcheck
 
   - name: openstack/tempest
     template:

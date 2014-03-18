@@ -1334,6 +1334,15 @@
 
 
 - project:
+    name: qa-specs
+    github-org: openstack
+    node: bare-precise
+
+    jobs:
+      - gate-{name}-rstcheck
+
+
+- project:
     name: zuul
     github-org: openstack-infra
     node: bare-precise
