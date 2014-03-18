@@ -24,8 +24,16 @@ fi
 
 if [ -z "$ZUUL_REF" ]
 then
-    echo "This job may only be triggered by Zuul."
-    exit 1
+    if [ -n "$BRANCH" ]
+    then
+        echo "No ZUUL_REF so using requested branch $BRANCH from origin."
+        ZUUL_REF=$BRANCH
+        # use the origin since zuul mergers have outdated branches
+        ZUUL_URL=$GIT_ORIGIN
+    else
+        echo "Provide either ZUUL_REF or BRANCH in the calling enviromnent."
+        exit 1
+    fi
 fi
 
 if [ ! -z "$ZUUL_CHANGE" ]
