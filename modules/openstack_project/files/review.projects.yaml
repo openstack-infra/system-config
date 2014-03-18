@@ -317,7 +317,6 @@
   docimpact-group: openstack-manuals
 - project: openstack/python-openstackclient
 - project: openstack/python-saharaclient
-  group: python-saharaclient
   description: Python bindings and CLI for Sahara.
   acl-config: /home/gerrit2/acls/openstack/sahara.config
 - project: openstack/python-swiftclient
@@ -330,7 +329,6 @@
   group: tempest
 - project: openstack/requirements
 - project: openstack/sahara
-  group: sahara
   description: Sahara aims to provide users with simple means to provision a Hadoop cluster by specifying several parameters like Hadoop version, cluster topology, nodes hardware details and a few more.
   acl-config: /home/gerrit2/acls/openstack/sahara.config
 - project: openstack/sahara-dashboard
