@@ -579,6 +579,8 @@ jobs:
     voting: false
   - name: gate-solum-requirements
     voting: false
+  - name: gate-solum-python33
+    voting: false
   - name: gate-reviewstats-python33
     voting: false
   - name: gate-refstack-python33
