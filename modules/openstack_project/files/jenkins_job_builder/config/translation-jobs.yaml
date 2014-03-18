@@ -16,18 +16,14 @@
     name: '{name}-propose-translation-update'
 
     builders:
+      - branch-git-prep:
+          branch: master
       - shell: |
           #!/bin/bash -xe
           /usr/local/jenkins/slave_scripts/propose_translation_update.sh {github-org} {name}
 
     publishers:
       - console-log
-
-    scm:
-      - git:
-          url: 'git://git.openstack.org/{github-org}/{name}'
-          branches:
-            - 'origin/master'
 
     node: 'proposal'
 
@@ -63,18 +59,14 @@
     name: '{name}-manuals-propose-translation-update'
 
     builders:
+      - branch-git-prep:
+          branch: master
       - shell: |
           #!/bin/bash -xe
           /usr/local/jenkins/slave_scripts/propose_translation_update_manuals.sh {name}
 
     publishers:
       - console-log
-
-    scm:
-      - git:
-          url: 'git://git.openstack.org/{github-org}/{name}'
-          branches:
-            - 'origin/master'
 
     node: 'proposal'
 
