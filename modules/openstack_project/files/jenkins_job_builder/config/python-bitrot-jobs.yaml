@@ -8,6 +8,8 @@
       - timestamps
 
     builders:
+      - branch-git-prep:
+          branch: '{branch}'
       - python26:
           github-org: '{github-org}'
           project: '{name}'
@@ -16,12 +18,6 @@
     publishers:
       - test-results
       - console-log
-
-    scm:
-      - git:
-          url: 'git://git.openstack.org/{github-org}/{name}'
-          branches:
-            - 'origin/{branch}'
 
     node: bare-centos6
 
@@ -36,6 +32,8 @@
       - timestamps
 
     builders:
+      - branch-git-prep:
+          branch: '{branch}'
       - python27:
           github-org: '{github-org}'
           project: '{name}'
@@ -44,12 +42,6 @@
     publishers:
       - test-results
       - console-log
-
-    scm:
-      - git:
-          url: 'git://git.openstack.org/{github-org}/{name}'
-          branches:
-            - 'origin/{branch}'
 
     node: '{node}'
 
@@ -64,18 +56,14 @@
       - timestamps
 
     builders:
+      - branch-git-prep:
+          branch: '{branch}'
       - docs:
           github-org: '{github-org}'
           project: '{name}'
 
     publishers:
       - console-log
-
-    scm:
-      - git:
-          url: 'git://git.openstack.org/{github-org}/{name}'
-          branches:
-            - 'origin/{branch}'
 
     node: '{node}'
 
