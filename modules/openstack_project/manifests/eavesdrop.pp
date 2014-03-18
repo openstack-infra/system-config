@@ -36,6 +36,7 @@ class openstack_project::eavesdrop (
     channels    => [
         '#heat',
         '#murano',
+        '#magnetodb',
         '#openstack',
         '#openstack-ceilometer',
         '#openstack-climate',
