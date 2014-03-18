@@ -106,7 +106,7 @@
           #!/bin/bash -xe
           mkdir -p gerrit
           cd gerrit
-          /usr/local/jenkins/slave_scripts/gerrit-git-prep.sh https://review.openstack.org http://zuul.openstack.org git://git.openstack.org
+          /usr/local/jenkins/slave_scripts/gerrit-git-prep.sh https://review.openstack.org git://git.openstack.org
       - shell: |
           #!/bin/bash -xe
           cd gerrit
@@ -145,7 +145,7 @@
           #!/bin/bash -xe
           mkdir -p gerrit
           cd gerrit
-          /usr/local/jenkins/slave_scripts/gerrit-git-prep.sh https://review.openstack.org http://zuul.openstack.org git://git.openstack.org
+          /usr/local/jenkins/slave_scripts/gerrit-git-prep.sh https://review.openstack.org git://git.openstack.org
       - shell: |
           #!/bin/bash -xe
           cd gerrit
@@ -180,7 +180,7 @@
           #!/bin/bash -xe
           mkdir -p gerrit
           cd gerrit
-          /usr/local/jenkins/slave_scripts/gerrit-git-prep.sh https://review.openstack.org http://zuul.openstack.org git://git.openstack.org
+          /usr/local/jenkins/slave_scripts/gerrit-git-prep.sh https://review.openstack.org git://git.openstack.org
       - shell: |
           #!/bin/bash -xe
           cd gerrit
