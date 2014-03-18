@@ -72,6 +72,11 @@ filter {
       add_field => { "logdate" => "%{timestamp}" }
       add_field => { "logmessage" => "%{verb} %{request} %{response}" }
     }
+  } else if "apacheerror" in [tags] {
+    grok {
+      match => { "message" => "\[(?<logdate>%{DAY} %{MONTH} %{MONTHDAY} %{TIME} %{YEAR}%{SPACE}%{TZ}?)\]%{SPACE}\[%{LOGLEVEL:loglevel}\]%{SPACE}%{GREEDYDATA:logmessage}" }
+      add_field => { "received_at" => "%{@timestamp}" }
+    }
   } else if "libvirtd" in [tags] {
     grok {
       # libvirtd grok filter adapted from
@@ -96,7 +101,17 @@ filter {
 
   if ! ("_grokparsefailure" in [tags]) {
     date {
-      match => [ "logdate", "yyyy-MM-dd HH:mm:ss.SSS", "yyyy-MM-dd HH:mm:ss,SSS", "yyyy-MM-dd HH:mm:ss", "MMM  d HH:mm:ss", "MMM dd HH:mm:ss", "dd/MMM/yyyy:HH:mm:ss Z", "yyyy-MM-dd HH:mm:ss.SSSZ" ]
+      match => [ "logdate",
+                 "yyyy-MM-dd HH:mm:ss.SSS",
+                 "yyyy-MM-dd HH:mm:ss,SSS",
+                 "yyyy-MM-dd HH:mm:ss",
+                 "MMM  d HH:mm:ss",
+                 "MMM dd HH:mm:ss",
+                 "dd/MMM/yyyy:HH:mm:ss Z",
+                 "yyyy-MM-dd HH:mm:ss.SSSZ",
+                 "E MMM dd HH:mm:ss yyyy Z",
+                 "E MMM dd HH:mm:ss yyyy"
+               ]
       timezone => "UTC"
     }
     mutate {
