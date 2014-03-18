@@ -415,6 +415,10 @@ jobs:
     voting: false
     failure-message: Jenkins XML output has changed.
     success-message: Jenkins XML output is unchanged.
+  - name: gate-config-irc-access
+    voting: false
+    files:
+      - 'modules/openstack_project/files/irc/channels.yaml'
 # Continous publishing from master of the following documentation targets:
   - name: openstack-admin-guide-cloud
     branch: master
@@ -2528,6 +2532,7 @@ projects:
       - gate-config-pep8
       - gate-config-puppet-lint
       - gate-config-puppet-syntax
+      - gate-config-irc-access
       - gate-ci-docs
       - check-projects-yaml-alphabetized
     gate:
@@ -2535,6 +2540,7 @@ projects:
       - gate-config-pep8
       - gate-config-puppet-lint
       - gate-config-puppet-syntax
+      - gate-config-irc-access
       - check-projects-yaml-alphabetized
     post:
       - ci-docs
