@@ -487,6 +487,11 @@
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
 
+          function post_test_hook {{
+              gzip -9 -c /var/log/marconi/queues.log > $WORKSPACE/logs/queues.log.txt.gz
+          }}
+          export -f post_test_hook
+
     publishers:
       - devstack-logs
       - console-log
