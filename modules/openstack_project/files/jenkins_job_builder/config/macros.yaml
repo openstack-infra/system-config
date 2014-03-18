@@ -262,6 +262,10 @@
             ant
           fi
 
+- builder:
+    name: rstcheck
+    builders:
+      - shell: "/usr/local/jenkins/slave_scripts/run-bash8.sh {github-org} {project}"
 
 # ======================================================================
 
