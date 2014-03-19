@@ -25,6 +25,10 @@ export NOSE_HTML_OUT_FILE='nose_results.html'
 export TMPDIR=`/bin/mktemp -d`
 trap "rm -rf $TMPDIR" EXIT
 
+# Change default PIP socket timeout to avoid intermittent errors
+# fetching the pip index, Bug 1272417
+export PIP_DEFAULT_TIMEOUT=30
+
 /usr/local/jenkins/slave_scripts/jenkins-oom-grep.sh pre
 
 sudo /usr/local/jenkins/slave_scripts/jenkins-sudo-grep.sh pre
