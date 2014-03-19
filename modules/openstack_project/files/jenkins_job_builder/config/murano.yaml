@@ -10,6 +10,7 @@
 
     builders:
       - link-logs
+      - net-info
       - devstack-checkout
       - shell: |
           #!/bin/bash -xe

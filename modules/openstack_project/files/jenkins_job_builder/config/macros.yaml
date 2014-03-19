@@ -241,6 +241,20 @@
 
 
 - builder:
+    name: net-info
+    builders:
+      - shell: |
+          #!/bin/sh
+          echo "Network interface addresses..."
+          ip address show
+          echo "Network routing tables..."
+          ip route show
+          ip -6 route show
+          echo "Network neighbors..."
+          ip neighbor show
+
+
+- builder:
     name: update-pypi-mirror
     builders:
       - shell: |

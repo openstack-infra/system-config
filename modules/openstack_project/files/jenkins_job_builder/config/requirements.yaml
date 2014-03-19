@@ -10,6 +10,7 @@
 
     builders:
       - link-logs
+      - net-info
       - devstack-checkout
       - shell: |
           #!/bin/bash -xe
@@ -37,6 +38,7 @@
 
     builders:
       - link-logs
+      - net-info
       - gerrit-git-prep
       - shell: /usr/local/jenkins/slave_scripts/propose_requirements_update.sh
 
