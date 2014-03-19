@@ -3,12 +3,6 @@
 GERRIT_SITE=$1
 GIT_ORIGIN=$2
 
-# TODO(jeblair): Remove once the arg list is changed in jjb macros
-if [ ! -z $3 ]
-then
-    GIT_ORIGIN=$3
-fi
-
 if [ -z "$GERRIT_SITE" ]
 then
   echo "The gerrit site name (eg 'https://review.openstack.org') must be the first argument."
