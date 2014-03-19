@@ -4,7 +4,7 @@
 
     wrappers:
       - timeout:
-          timeout: 185
+          timeout: 125
           fail: true
       - timestamps
 
@@ -14,7 +14,7 @@
       - shell: |
           #!/bin/bash -xe
           export PYTHONUNBUFFERED=true
-          export DEVSTACK_GATE_TIMEOUT=180
+          export DEVSTACK_GATE_TIMEOUT=120
           export DEVSTACK_GATE_TEMPEST=1
           export DEVSTACK_GATE_TEMPEST_FULL=1
           export RE_EXEC=true
@@ -31,7 +31,7 @@
 
     wrappers:
       - timeout:
-          timeout: 185
+          timeout: 125
           fail: true
       - timestamps
 
@@ -41,7 +41,7 @@
       - shell: |
           #!/bin/bash -xe
           export PYTHONUNBUFFERED=true
-          export DEVSTACK_GATE_TIMEOUT=180
+          export DEVSTACK_GATE_TIMEOUT=120
           export DEVSTACK_GATE_TEMPEST=1
           export DEVSTACK_GATE_TEMPEST_FULL=1
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
@@ -97,7 +97,7 @@
 
     wrappers:
       - timeout:
-          timeout: 185
+          timeout: 125
           fail: true
       - timestamps
 
@@ -107,7 +107,7 @@
       - shell: |
           #!/bin/bash -xe
           export PYTHONUNBUFFERED=true
-          export DEVSTACK_GATE_TIMEOUT=180
+          export DEVSTACK_GATE_TIMEOUT=120
           export DEVSTACK_GATE_TEMPEST=1
           export DEVSTACK_GATE_TEMPEST_FULL=1
           export BRANCH_OVERRIDE={branch-override}
@@ -127,7 +127,7 @@
 
     wrappers:
       - timeout:
-          timeout: 185
+          timeout: 125
           fail: true
       - timestamps
 
@@ -137,7 +137,7 @@
       - shell: |
           #!/bin/bash -xe
           export PYTHONUNBUFFERED=true
-          export DEVSTACK_GATE_TIMEOUT=180
+          export DEVSTACK_GATE_TIMEOUT=120
           export DEVSTACK_GATE_TEMPEST=1
           export DEVSTACK_GATE_TEMPEST_DISABLE_TENANT_ISOLATION=1
           export BRANCH_OVERRIDE={branch-override}
@@ -447,7 +447,7 @@
           sudo service nova-agent stop || echo ''
           sudo pkill -9 nova-agent || echo ''
           sudo service xe-linux-distribution stop || echo ''
-          if [ -e /proc/xen ] ; then 
+          if [ -e /proc/xen ] ; then
               sudo umount /proc/xen
           fi
 
@@ -533,7 +533,7 @@
 
     wrappers:
       - timeout:
-          timeout: 185
+          timeout: 125
           fail: true
       - timestamps
 
@@ -543,7 +543,7 @@
       - shell: |
           #!/bin/bash -xe
           export PYTHONUNBUFFERED=true
-          export DEVSTACK_GATE_TIMEOUT=180
+          export DEVSTACK_GATE_TIMEOUT=120
           export DEVSTACK_GATE_TEMPEST=1
           export DEVSTACK_GATE_TEMPEST_FULL=1
           export DEVSTACK_GATE_CELLS=1
@@ -627,7 +627,7 @@
 
     wrappers:
       - timeout:
-          timeout: 185
+          timeout: 125
           fail: true
       - timestamps
 
@@ -637,7 +637,7 @@
       - shell: |
           #!/bin/bash -xe
           export PYTHONUNBUFFERED=true
-          export DEVSTACK_GATE_TIMEOUT=180
+          export DEVSTACK_GATE_TIMEOUT=120
           export DEVSTACK_GATE_TEMPEST=1
           export DEVSTACK_GATE_TEMPEST_FULL=1
           export DEVSTACK_GATE_POSTGRES=1
@@ -660,7 +660,7 @@
 
     wrappers:
       - timeout:
-          timeout: 185
+          timeout: 125
           fail: true
       - timestamps
 
@@ -670,7 +670,7 @@
       - shell: |
           #!/bin/bash -xe
           export PYTHONUNBUFFERED=true
-          export DEVSTACK_GATE_TIMEOUT=180
+          export DEVSTACK_GATE_TIMEOUT=120
           export DEVSTACK_GATE_TEMPEST=1
           export DEVSTACK_GATE_POSTGRES=1
           export DEVSTACK_GATE_CONFIGDRIVE=0
@@ -692,7 +692,7 @@
 
     wrappers:
       - timeout:
-          timeout: 185
+          timeout: 125
           fail: true
       - timestamps
 
@@ -702,7 +702,7 @@
       - shell: |
           #!/bin/bash -xe
           export PYTHONUNBUFFERED=true
-          export DEVSTACK_GATE_TIMEOUT=180
+          export DEVSTACK_GATE_TIMEOUT=120
           export DEVSTACK_GATE_TEMPEST=1
           export DEVSTACK_GATE_TEMPEST_FULL=1
           export DEVSTACK_GATE_POSTGRES=1
@@ -865,7 +865,7 @@
 
     wrappers:
       - timeout:
-          timeout: 185
+          timeout: 125
           fail: true
       - timestamps
 
@@ -875,7 +875,7 @@
       - shell: |
           #!/bin/bash -xe
           export PYTHONUNBUFFERED=true
-          export DEVSTACK_GATE_TIMEOUT=180
+          export DEVSTACK_GATE_TIMEOUT=120
           export DEVSTACK_GATE_TEMPEST=1
           export DEVSTACK_GATE_TEMPEST_FULL=1
           export DEVSTACK_GATE_SAHARA=1
@@ -962,7 +962,7 @@
 
     wrappers:
       - timeout:
-          timeout: 185
+          timeout: 125
           fail: true
       - timestamps
 
@@ -972,7 +972,7 @@
       - shell: |
           #!/bin/bash -xe
           export PYTHONUNBUFFERED=true
-          export DEVSTACK_GATE_TIMEOUT=180
+          export DEVSTACK_GATE_TIMEOUT=120
           export DEVSTACK_GATE_TEMPEST=1
           export DEVSTACK_GATE_TEMPEST_ALL=1
           export BRANCH_OVERRIDE={branch-override}
@@ -993,7 +993,7 @@
 
     wrappers:
       - timeout:
-          timeout: 185
+          timeout: 125
           fail: true
       - timestamps
 
@@ -1003,7 +1003,7 @@
       - shell: |
           #!/bin/bash -xe
           export PYTHONUNBUFFERED=true
-          export DEVSTACK_GATE_TIMEOUT=180
+          export DEVSTACK_GATE_TIMEOUT=120
           export DEVSTACK_GATE_TEMPEST=1
           export DEVSTACK_GATE_TEMPEST_COVERAGE=1
           export BRANCH_OVERRIDE={branch-override}
@@ -1024,7 +1024,7 @@
 
     wrappers:
       - timeout:
-          timeout: 185
+          timeout: 125
           fail: true
       - timestamps
 
@@ -1034,7 +1034,7 @@
       - shell: |
           #!/bin/bash -xe
           export PYTHONUNBUFFERED=true
-          export DEVSTACK_GATE_TIMEOUT=180
+          export DEVSTACK_GATE_TIMEOUT=120
           export DEVSTACK_GATE_TEMPEST=1
           export DEVSTACK_GATE_TEMPEST_STRESS=1
           export BRANCH_OVERRIDE={branch-override}
