@@ -5,6 +5,7 @@
 
     builders:
       - link-logs
+      - net-info
       - gerrit-git-prep
       - shell: |
           #!/bin/bash -xe

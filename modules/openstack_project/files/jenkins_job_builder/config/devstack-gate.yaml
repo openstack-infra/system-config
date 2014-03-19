@@ -10,6 +10,7 @@
 
     builders:
       - link-logs
+      - net-info
       - experimental-devstack-checkout
       - shell: |
           #!/bin/bash -xe
@@ -37,6 +38,7 @@
 
     builders:
       - link-logs
+      - net-info
       - experimental-devstack-checkout
       - shell: |
           #!/bin/bash -xe
@@ -63,6 +65,7 @@
 
     builders:
       - link-logs
+      - net-info
       - devstack-checkout
       - shell: |
           #!/bin/bash -xe
@@ -103,6 +106,7 @@
 
     builders:
       - link-logs
+      - net-info
       - devstack-checkout
       - shell: |
           #!/bin/bash -xe
@@ -133,6 +137,7 @@
 
     builders:
       - link-logs
+      - net-info
       - devstack-checkout
       - shell: |
           #!/bin/bash -xe
@@ -163,6 +168,7 @@
 
     builders:
       - link-logs
+      - net-info
       - devstack-checkout
       - shell: |
           #!/bin/bash -xe
@@ -195,6 +201,7 @@
 
     builders:
       - link-logs
+      - net-info
       - devstack-checkout
       - shell: |
           #!/bin/bash -xe
@@ -227,6 +234,7 @@
 
     builders:
       - link-logs
+      - net-info
       - devstack-checkout
       - shell: |
           #!/bin/bash -xe
@@ -261,6 +269,7 @@
 
     builders:
       - link-logs
+      - net-info
       - devstack-checkout
       - shell: |
           #!/bin/bash -xe
@@ -293,6 +302,7 @@
 
     builders:
       - link-logs
+      - net-info
       - devstack-checkout
       - shell: |
           #!/bin/bash -xe
@@ -326,6 +336,7 @@
 
     builders:
       - link-logs
+      - net-info
       - devstack-checkout
       - shell: |
           #!/bin/bash -xe
@@ -357,6 +368,7 @@
 
     builders:
       - link-logs
+      - net-info
       - devstack-checkout
       - shell: |
           #!/bin/bash -xe
@@ -390,6 +402,7 @@
 
     builders:
       - link-logs
+      - net-info
       - devstack-checkout
       - shell: |
           #!/bin/bash -xe
@@ -424,6 +437,7 @@
 
     builders:
       - link-logs
+      - net-info
       - devstack-checkout
       - shell: |
           #!/bin/bash -xe
@@ -476,6 +490,7 @@
 
     builders:
       - link-logs
+      - net-info
       - devstack-checkout
       - shell: |
           #!/bin/bash -xe
@@ -508,6 +523,7 @@
 
     builders:
       - link-logs
+      - net-info
       - devstack-checkout
       - shell: |
           #!/bin/bash -xe
@@ -539,6 +555,7 @@
 
     builders:
       - link-logs
+      - net-info
       - devstack-checkout
       - shell: |
           #!/bin/bash -xe
@@ -571,6 +588,7 @@
 
     builders:
       - link-logs
+      - net-info
       - devstack-checkout
       - shell: |
           #!/bin/bash -xe
@@ -601,6 +619,7 @@
 
     builders:
       - link-logs
+      - net-info
       - devstack-checkout
       - shell: |
           #!/bin/bash -xe
@@ -633,6 +652,7 @@
 
     builders:
       - link-logs
+      - net-info
       - devstack-checkout
       - shell: |
           #!/bin/bash -xe
@@ -666,6 +686,7 @@
 
     builders:
       - link-logs
+      - net-info
       - devstack-checkout
       - shell: |
           #!/bin/bash -xe
@@ -698,6 +719,7 @@
 
     builders:
       - link-logs
+      - net-info
       - devstack-checkout
       - shell: |
           #!/bin/bash -xe
@@ -731,6 +753,7 @@
 
     builders:
       - link-logs
+      - net-info
       - devstack-checkout
       - shell: |
           #!/bin/bash -xe
@@ -758,6 +781,7 @@
 
     builders:
       - link-logs
+      - net-info
       - devstack-checkout
       - shell: |
           #!/bin/bash -xe
@@ -786,6 +810,7 @@
 
     builders:
       - link-logs
+      - net-info
       - devstack-checkout
       - shell: |
           #!/bin/bash -xe
@@ -814,6 +839,7 @@
 
     builders:
       - link-logs
+      - net-info
       - devstack-checkout
       - shell: |
           #!/bin/bash -xe
@@ -843,6 +869,7 @@
 
     builders:
       - link-logs
+      - net-info
       - devstack-checkout
       - shell: |
           #!/bin/bash -xe
@@ -871,6 +898,7 @@
 
     builders:
       - link-logs
+      - net-info
       - devstack-checkout
       - shell: |
           #!/bin/bash -xe
@@ -903,6 +931,7 @@
 
     builders:
       - link-logs
+      - net-info
       - devstack-checkout
       - shell: |
           #!/bin/bash -xe
@@ -935,6 +964,7 @@
 
     builders:
       - link-logs
+      - net-info
       - devstack-checkout
       - shell: |
           #!/bin/bash -xe
@@ -968,6 +998,7 @@
 
     builders:
       - link-logs
+      - net-info
       - devstack-checkout
       - shell: |
           #!/bin/bash -xe
@@ -999,6 +1030,7 @@
 
     builders:
       - link-logs
+      - net-info
       - devstack-checkout
       - shell: |
           #!/bin/bash -xe
@@ -1030,6 +1062,7 @@
 
     builders:
       - link-logs
+      - net-info
       - devstack-checkout
       - shell: |
           #!/bin/bash -xe
@@ -1061,6 +1094,7 @@
 
     builders:
       - link-logs
+      - net-info
       - devstack-checkout
       - shell: |
           #!/bin/bash -xe
