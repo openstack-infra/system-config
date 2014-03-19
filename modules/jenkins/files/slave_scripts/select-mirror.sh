@@ -44,6 +44,7 @@ EOF
     cat <<EOF > ~/.pip/pip.conf
 [global]
 index-url = http://pypi.openstack.org/openstack
+timeout = 60
 EOF
 else
     echo "$org/$project will not use the internal openstack pypi mirror"
