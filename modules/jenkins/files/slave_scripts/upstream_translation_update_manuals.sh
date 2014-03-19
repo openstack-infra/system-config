@@ -31,8 +31,10 @@ fi
 git config user.name "OpenStack Jenkins"
 git config user.email "jenkins@openstack.org"
 
-# Initialize transifex client
-tx init --host=https://www.transifex.com
+# Initialize the transifex client, if there's no .tx directory
+if [ ! -d .tx ] ; then
+    tx init --host=https://www.transifex.com
+fi
 
 # Generate pot one by one
 for FILE in ${DocFolder}/*
