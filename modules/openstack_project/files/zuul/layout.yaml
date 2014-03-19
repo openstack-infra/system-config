@@ -749,7 +749,9 @@ projects:
       - gate-grenade-dsvm-forward
     experimental-tripleo:
       - check-tripleo-seed-precise
+      - check-tripleo-ironic-seed-precise
       - check-tripleo-undercloud-precise
+      - check-tripleo-ironic-undercloud-precise
       - check-tripleo-overcloud-precise
     pre-release:
       - glance-tarball
@@ -777,7 +779,9 @@ projects:
       - heat-upstream-translation-update
     experimental-tripleo:
       - check-tripleo-seed-precise
+      - check-tripleo-ironic-seed-precise
       - check-tripleo-undercloud-precise
+      - check-tripleo-ironic-undercloud-precise
       - check-tripleo-overcloud-precise
     pre-release:
       - heat-tarball
@@ -862,7 +866,9 @@ projects:
       - gate-grenade-dsvm-forward
     experimental-tripleo:
       - check-tripleo-seed-precise
+      - check-tripleo-ironic-seed-precise
       - check-tripleo-undercloud-precise
+      - check-tripleo-ironic-undercloud-precise
       - check-tripleo-overcloud-precise
     post:
       - keystone-upstream-translation-update
@@ -921,7 +927,9 @@ projects:
       - experimental-tempest-dsvm-neutron-pg
     experimental-tripleo:
       - check-tripleo-seed-precise
+      - check-tripleo-ironic-seed-precise
       - check-tripleo-undercloud-precise
+      - check-tripleo-ironic-undercloud-precise
       - check-tripleo-overcloud-precise
     pre-release:
       - neutron-tarball
@@ -958,7 +966,9 @@ projects:
       - check-tempest-dsvm-neutron-pg
     experimental-tripleo:
       - check-tripleo-seed-precise
+      - check-tripleo-ironic-seed-precise
       - check-tripleo-undercloud-precise
+      - check-tripleo-ironic-undercloud-precise
       - check-tripleo-overcloud-precise
     post:
       - nova-upstream-translation-update
@@ -1071,7 +1081,9 @@ projects:
       - gate-grenade-dsvm-forward
     experimental-tripleo:
       - check-tripleo-seed-precise
+      - check-tripleo-ironic-seed-precise
       - check-tripleo-undercloud-precise
+      - check-tripleo-ironic-undercloud-precise
       - check-tripleo-overcloud-precise
     pre-release:
       - swift-tarball
@@ -1126,7 +1138,9 @@ projects:
       - name: python-jobs
     check-tripleo:
       - check-tripleo-seed-precise
+      - check-tripleo-ironic-seed-precise
       - check-tripleo-undercloud-precise
+      - check-tripleo-ironic-undercloud-precise
       - check-tripleo-overcloud-precise
     pre-release:
       - tuskar-tarball
@@ -1181,7 +1195,9 @@ projects:
       - gate-grenade-dsvm-forward
     experimental-tripleo:
       - check-tripleo-seed-precise
+      - check-tripleo-ironic-seed-precise
       - check-tripleo-undercloud-precise
+      - check-tripleo-ironic-undercloud-precise
       - check-tripleo-overcloud-precise
     pre-release:
       - python-cinderclient-tarball
@@ -1212,7 +1228,9 @@ projects:
       - gate-grenade-dsvm-forward
     experimental-tripleo:
       - check-tripleo-seed-precise
+      - check-tripleo-ironic-seed-precise
       - check-tripleo-undercloud-precise
+      - check-tripleo-ironic-undercloud-precise
       - check-tripleo-overcloud-precise
     pre-release:
       - python-ganttclient-tarball
@@ -1245,7 +1263,9 @@ projects:
       - gate-grenade-dsvm-forward
     experimental-tripleo:
       - check-tripleo-seed-precise
+      - check-tripleo-ironic-seed-precise
       - check-tripleo-undercloud-precise
+      - check-tripleo-ironic-undercloud-precise
       - check-tripleo-overcloud-precise
     pre-release:
       - python-glanceclient-tarball
@@ -1281,7 +1301,9 @@ projects:
       - python-heatclient-coverage
     experimental-tripleo:
       - check-tripleo-seed-precise
+      - check-tripleo-ironic-seed-precise
       - check-tripleo-undercloud-precise
+      - check-tripleo-ironic-undercloud-precise
       - check-tripleo-overcloud-precise
     pre-release:
       - python-heatclient-tarball
@@ -1341,7 +1363,9 @@ projects:
       - gate-grenade-dsvm-forward
     experimental-tripleo:
       - check-tripleo-seed-precise
+      - check-tripleo-ironic-seed-precise
       - check-tripleo-undercloud-precise
+      - check-tripleo-ironic-undercloud-precise
       - check-tripleo-overcloud-precise
     pre-release:
       - python-keystoneclient-tarball
@@ -1402,7 +1426,9 @@ projects:
       - gate-grenade-dsvm-forward
     experimental-tripleo:
       - check-tripleo-seed-precise
+      - check-tripleo-ironic-seed-precise
       - check-tripleo-undercloud-precise
+      - check-tripleo-ironic-undercloud-precise
       - check-tripleo-overcloud-precise
     pre-release:
       - python-neutronclient-tarball
@@ -1437,7 +1463,9 @@ projects:
       - gate-grenade-dsvm-forward
     experimental-tripleo:
       - check-tripleo-seed-precise
+      - check-tripleo-ironic-seed-precise
       - check-tripleo-undercloud-precise
+      - check-tripleo-ironic-undercloud-precise
       - check-tripleo-overcloud-precise
     pre-release:
       - python-novaclient-tarball
@@ -1511,7 +1539,9 @@ projects:
       - gate-tempest-dsvm-neutron-large-ops
     experimental-tripleo:
       - check-tripleo-seed-precise
+      - check-tripleo-ironic-seed-precise
       - check-tripleo-undercloud-precise
+      - check-tripleo-ironic-undercloud-precise
       - check-tripleo-overcloud-precise
     pre-release:
       - python-swiftclient-tarball
@@ -1557,7 +1587,9 @@ projects:
       - gate-python-tuskarclient-python33
     check-tripleo:
       - check-tripleo-seed-precise
+      - check-tripleo-ironic-seed-precise
       - check-tripleo-undercloud-precise
+      - check-tripleo-ironic-undercloud-precise
       - check-tripleo-overcloud-precise
     pre-release:
       - python-tuskarclient-tarball
@@ -1577,7 +1609,9 @@ projects:
       - gate-diskimage-builder-python27
     check-tripleo:
       - check-tripleo-seed-precise
+      - check-tripleo-ironic-seed-precise
       - check-tripleo-undercloud-precise
+      - check-tripleo-ironic-undercloud-precise
       - check-tripleo-overcloud-precise
     gate:
       - gate-diskimage-builder-pep8
@@ -1700,7 +1734,9 @@ projects:
       - gate-os-apply-config-python27
     check-tripleo:
       - check-tripleo-seed-precise
+      - check-tripleo-ironic-seed-precise
       - check-tripleo-undercloud-precise
+      - check-tripleo-ironic-undercloud-precise
       - check-tripleo-overcloud-precise
     gate:
       - gate-os-apply-config-pep8
@@ -1725,7 +1761,9 @@ projects:
       - gate-os-cloud-config-python27
     check-tripleo:
       - check-tripleo-seed-precise
+      - check-tripleo-ironic-seed-precise
       - check-tripleo-undercloud-precise
+      - check-tripleo-ironic-undercloud-precise
       - check-tripleo-overcloud-precise
     gate:
       - gate-os-cloud-config-pep8
@@ -1750,7 +1788,9 @@ projects:
       - gate-os-collect-config-python27
     check-tripleo:
       - check-tripleo-seed-precise
+      - check-tripleo-ironic-seed-precise
       - check-tripleo-undercloud-precise
+      - check-tripleo-ironic-undercloud-precise
       - check-tripleo-overcloud-precise
     gate:
       - gate-os-collect-config-pep8
@@ -1775,7 +1815,9 @@ projects:
       - gate-os-refresh-config-python27
     check-tripleo:
       - check-tripleo-seed-precise
+      - check-tripleo-ironic-seed-precise
       - check-tripleo-undercloud-precise
+      - check-tripleo-ironic-undercloud-precise
       - check-tripleo-overcloud-precise
     gate:
       - gate-os-refresh-config-pep8
@@ -1836,7 +1878,9 @@ projects:
       - oslo.config-tarball
     experimental-tripleo:
       - check-tripleo-seed-precise
+      - check-tripleo-ironic-seed-precise
       - check-tripleo-undercloud-precise
+      - check-tripleo-ironic-undercloud-precise
       - check-tripleo-overcloud-precise
     release:
       - oslo.config-tarball:
@@ -1862,7 +1906,9 @@ projects:
       - gate-tempest-dsvm-neutron-large-ops
     experimental-tripleo:
       - check-tripleo-seed-precise
+      - check-tripleo-ironic-seed-precise
       - check-tripleo-undercloud-precise
+      - check-tripleo-ironic-undercloud-precise
       - check-tripleo-overcloud-precise
     pre-release:
       - oslo.messaging-tarball:
@@ -1898,7 +1944,9 @@ projects:
       - oslo.rootwrap-branch-tarball
     experimental-tripleo:
       - check-tripleo-seed-precise
+      - check-tripleo-ironic-seed-precise
       - check-tripleo-undercloud-precise
+      - check-tripleo-ironic-undercloud-precise
       - check-tripleo-overcloud-precise
     pre-release:
       - oslo.rootwrap-tarball
@@ -1947,7 +1995,9 @@ projects:
       - gate-devstack-dsvm-cells
     experimental-tripleo:
       - check-tripleo-seed-precise
+      - check-tripleo-ironic-seed-precise
       - check-tripleo-undercloud-precise
+      - check-tripleo-ironic-undercloud-precise
       - check-tripleo-overcloud-precise
     pre-release:
       - oslo.version-tarball
@@ -2003,7 +2053,9 @@ projects:
       - propose-requirements-updates
     experimental-tripleo:
       - check-tripleo-seed-precise
+      - check-tripleo-ironic-seed-precise
       - check-tripleo-undercloud-precise
+      - check-tripleo-ironic-undercloud-precise
       - check-tripleo-overcloud-precise
     periodic:
       - periodic-mirror-python26
@@ -2147,7 +2199,9 @@ projects:
       - check-tempest-dsvm-virtual-ironic-nv
     experimental-tripleo:
       - check-tripleo-seed-precise
+      - check-tripleo-ironic-seed-precise
       - check-tripleo-undercloud-precise
+      - check-tripleo-ironic-undercloud-precise
       - check-tripleo-overcloud-precise
     post:
       - tempest-docs
@@ -2170,7 +2224,9 @@ projects:
       - gate-noop
     check-tripleo:
       - check-tripleo-seed-precise
+      - check-tripleo-ironic-seed-precise
       - check-tripleo-undercloud-precise
+      - check-tripleo-ironic-undercloud-precise
       - check-tripleo-overcloud-precise
     gate:
       - gate-noop
@@ -2186,7 +2242,9 @@ projects:
       - gate-noop
     check-tripleo:
       - check-tripleo-seed-precise
+      - check-tripleo-ironic-seed-precise
       - check-tripleo-undercloud-precise
+      - check-tripleo-ironic-undercloud-precise
       - check-tripleo-overcloud-precise
     gate:
       - gate-noop
@@ -2206,7 +2264,9 @@ projects:
       - gate-tripleo-incubator-docs
     check-tripleo:
       - check-tripleo-seed-precise
+      - check-tripleo-ironic-seed-precise
       - check-tripleo-undercloud-precise
+      - check-tripleo-ironic-undercloud-precise
       - check-tripleo-overcloud-precise
     gate:
       - gate-tripleo-incubator-docs
@@ -2235,7 +2295,9 @@ projects:
       - gate-tuskar-ui-python27
     experimental-tripleo:
       - check-tripleo-seed-precise
+      - check-tripleo-ironic-seed-precise
       - check-tripleo-undercloud-precise
+      - check-tripleo-ironic-undercloud-precise
       - check-tripleo-overcloud-precise
     post:
       - tuskar-ui-branch-tarball
@@ -2478,7 +2540,9 @@ projects:
       - gate-swift-dsvm-functional
     experimental-tripleo:
       - check-tripleo-seed-precise
+      - check-tripleo-ironic-seed-precise
       - check-tripleo-undercloud-precise
+      - check-tripleo-ironic-undercloud-precise
       - check-tripleo-overcloud-precise
     post:
       - pbr-docs
@@ -2589,7 +2653,9 @@ projects:
       - check-tempest-dsvm-virtual-ironic-nv
     experimental-tripleo:
       - check-tripleo-seed-precise
+      - check-tripleo-ironic-seed-precise
       - check-tripleo-undercloud-precise
+      - check-tripleo-ironic-undercloud-precise
       - check-tripleo-overcloud-precise
 
   - name: openstack-infra/elastic-recheck
@@ -2965,7 +3031,9 @@ projects:
       - gate-noop
     check-tripleo:
       - check-tripleo-seed-precise
+      - check-tripleo-ironic-seed-precise
       - check-tripleo-undercloud-precise
+      - check-tripleo-ironic-undercloud-precise
       - check-tripleo-overcloud-precise
     gate:
       - gate-noop
