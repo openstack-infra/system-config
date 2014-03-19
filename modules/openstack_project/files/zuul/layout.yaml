@@ -343,6 +343,8 @@ jobs:
     voting: false
   - name: ^(gate|check)-grenade-dsvm-partial-ncpu$
     branch: ^(?!stable/(grizzly|havana)).*$
+  - name: ^gate-.*-pypy$
+    voting: false
   - name: gate-tempest-python27
     branch: ^(?!stable/grizzly).*$
     # only here until stable is votable, then merge
