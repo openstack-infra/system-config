@@ -608,6 +608,8 @@ jobs:
     voting: false
   - name: gate-nova-docker-python27
     voting: false
+  - name: check-neutron-dsvm-functional
+    voting: false
 # puppet-openstack targets
   - name: gate-puppet-vswitch-puppet-lint
     voting: false
@@ -900,6 +902,7 @@ projects:
       - name: check-requirements
       - name: integrated-gate
     check:
+      - check-neutron-dsvm-functional
       - check-tempest-dsvm-neutron-full
       - check-tempest-dsvm-neutron
       - check-tempest-dsvm-neutron-pg
@@ -914,7 +917,6 @@ projects:
     experimental:
       - gate-grenade-dsvm-neutron-forward
       - neutron-upstream-translation-update
-      - check-neutron-dsvm-functional
       - experimental-tempest-dsvm-neutron
       - experimental-tempest-dsvm-neutron-pg
     experimental-tripleo:
