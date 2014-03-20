@@ -17,9 +17,9 @@ fi
 
 if [ -z "$GIT_ORIGIN" ] || [ -n "$ZUUL_NEWREV" ]
 then
-    GIT_ORIGIN="$GERRIT_SITE/p"
+    GIT_ORIGIN="$GERRIT_SITE"
     # git://git.openstack.org/
-    # https://review.openstack.org/p
+    # https://review.openstack.org/
 fi
 
 if [ -z "$ZUUL_REF" ]
