@@ -313,6 +313,14 @@ providers:
         setup: prepare_node_tripleo.sh
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
+    images:
+      - name: tripleo-f20
+        base-image: 'Fedora 20 64-bit'
+        min-ram: 16384
+        name-filter: h1
+        setup: prepare_node_tripleo.sh
+        username: jenkins
+        private-key: /home/nodepool/.ssh/id_rsa
 
 
 targets:
@@ -365,6 +373,10 @@ targets:
         min-ready: 5
         providers:
           - name: tripleo-test-cloud
+      - name: tripleo-f20
+        min-ready: 1
+        providers:
+          - name: tripleo-test-cloud
   - name: jenkins02
     jenkins:
       url: 'https://jenkins02.openstack.org/'
@@ -412,6 +424,10 @@ targets:
           - name: hpcloud-az3
       - name: tripleo-precise
         min-ready: 5
+        providers:
+          - name: tripleo-test-cloud
+      - name: tripleo-f20
+        min-ready: 1
         providers:
           - name: tripleo-test-cloud
   - name: jenkins03
@@ -463,6 +479,10 @@ targets:
         min-ready: 5
         providers:
           - name: tripleo-test-cloud
+      - name: tripleo-f20
+        min-ready: 1
+        providers:
+          - name: tripleo-test-cloud
   - name: jenkins04
     jenkins:
       url: 'https://jenkins04.openstack.org/'
@@ -510,6 +530,10 @@ targets:
           - name: hpcloud-az3
       - name: tripleo-precise
         min-ready: 5
+        providers:
+          - name: tripleo-test-cloud
+      - name: tripleo-f20
+        min-ready: 1
         providers:
           - name: tripleo-test-cloud
   - name: jenkins05
@@ -561,6 +585,10 @@ targets:
         min-ready: 5
         providers:
           - name: tripleo-test-cloud
+      - name: tripleo-f20
+        min-ready: 1
+        providers:
+          - name: tripleo-test-cloud
   - name: jenkins06
     jenkins:
       url: 'https://jenkins06.openstack.org/'
@@ -608,6 +636,10 @@ targets:
           - name: hpcloud-az3
       - name: tripleo-precise
         min-ready: 5
+        providers:
+          - name: tripleo-test-cloud
+      - name: tripleo-f20
+        min-ready: 1
         providers:
           - name: tripleo-test-cloud
   - name: jenkins07
@@ -661,5 +693,9 @@ targets:
           - name: rax-dfw
       - name: tripleo-precise
         min-ready: 5
+        providers:
+          - name: tripleo-test-cloud
+      - name: tripleo-f20
+        min-ready: 1
         providers:
           - name: tripleo-test-cloud
