@@ -41,6 +41,9 @@ if cat /etc/*release | grep -e "Fedora" &> /dev/null; then
     mkdir -p /etc/puppet/modules/
     ln -s /usr/local/share/gems/gems/hiera-puppet-* /etc/puppet/modules/
 
+    # Puppet is expecting the command to be pip-python on Fedora
+    ln -s /usr/bin/pip /usr/bin/pip-python
+
 elif cat /etc/*release | grep -e "CentOS" -e "Red Hat" &> /dev/null; then
     rpm -qi epel-release &> /dev/null || rpm -Uvh http://download.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm
     rpm -ivh http://yum.puppetlabs.com/el/6/products/x86_64/puppetlabs-release-6-6.noarch.rpm
