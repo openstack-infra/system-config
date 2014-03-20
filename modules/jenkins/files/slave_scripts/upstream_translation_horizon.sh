@@ -45,7 +45,7 @@ tx set --auto-local -r ${PROJECT}.openstack-dashboard-translations \
 
 # Invoke run_tests.sh to update the po files
 # Or else, "../manage.py makemessages" can be used.
-./run_tests.sh --makemessages
+./run_tests.sh --makemessages -V
 
 # Add all changed files to git
 git add ${PROJECT}/locale/en/LC_MESSAGES/*
