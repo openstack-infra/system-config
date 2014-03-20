@@ -39,6 +39,47 @@
       - console-log
 
 - job:
+    name: 'check-tripleo-ironic-seed-precise'
+    node: 'tripleo-precise'
+
+    wrappers:
+      - timeout:
+          timeout: 125
+          fail: true
+      - timestamps
+
+    builders:
+      - link-logs
+      - net-info
+      - devstack-checkout
+      - shell: |
+          #!/bin/bash -xe
+          export PYTHONUNBUFFERED=true
+          export DEVSTACK_GATE_TIMEOUT=120
+          export DEVSTACK_GATE_TEMPEST=0
+          export DEVSTACK_GATE_EXERCISES=0
+          export GEARDSERVER=192.168.1.48
+          export DIB_COMMON_ELEMENTS="stackuser pypi-openstack"
+          export TRIPLEO_TEST=seed
+          export USE_IRONIC=1
+          function gate_hook {
+              bash -xe /opt/stack/new/tripleo-ci/toci_gate_test.sh
+          }
+          export -f gate_hook
+          cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
+          ./safe-devstack-vm-gate-wrap.sh
+
+    publishers:
+      - scp:
+          site: 'static.openstack.org'
+          files:
+            - target: 'logs/$LOG_PATH'
+              source: 'logs/**'
+              keep-hierarchy: false
+              copy-after-failure: true
+      - console-log
+
+- job:
     name: 'check-tripleo-undercloud-precise'
     node: 'tripleo-precise'
 
@@ -61,6 +102,47 @@
           export GEARDSERVER=192.168.1.48
           export DIB_COMMON_ELEMENTS="stackuser pypi-openstack"
           export TRIPLEO_TEST=undercloud
+          function gate_hook {
+              bash -xe /opt/stack/new/tripleo-ci/toci_gate_test.sh
+          }
+          export -f gate_hook
+          cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
+          ./safe-devstack-vm-gate-wrap.sh
+
+    publishers:
+      - scp:
+          site: 'static.openstack.org'
+          files:
+            - target: 'logs/$LOG_PATH'
+              source: 'logs/**'
+              keep-hierarchy: false
+              copy-after-failure: true
+      - console-log
+
+- job:
+    name: 'check-tripleo-ironic-undercloud-precise'
+    node: 'tripleo-precise'
+
+    wrappers:
+      - timeout:
+          timeout: 125
+          fail: true
+      - timestamps
+
+    builders:
+      - link-logs
+      - net-info
+      - devstack-checkout
+      - shell: |
+          #!/bin/bash -xe
+          export PYTHONUNBUFFERED=true
+          export DEVSTACK_GATE_TIMEOUT=120
+          export DEVSTACK_GATE_TEMPEST=0
+          export DEVSTACK_GATE_EXERCISES=0
+          export GEARDSERVER=192.168.1.48
+          export DIB_COMMON_ELEMENTS="stackuser pypi-openstack"
+          export TRIPLEO_TEST=undercloud
+          export USE_IRONIC=1
           function gate_hook {
               bash -xe /opt/stack/new/tripleo-ci/toci_gate_test.sh
           }
