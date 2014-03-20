@@ -18,8 +18,11 @@
 # limitations under the License.
 
 # Enable precise-backports so we can install jq
-sudo sed -i -e 's/# \(deb .*precise-backports main \)/\1/g' /etc/apt/sources.list
-sudo apt-get update
+if [ -f /usr/bin/apt-get ]; then
+    sudo sed -i -e 's/# \(deb .*precise-backports main \)/\1/g' \
+      /etc/apt/sources.list
+    sudo apt-get update
+fi
 
 ./install_devstack_dependencies.sh
 
