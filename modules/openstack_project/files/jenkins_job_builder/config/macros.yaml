@@ -245,6 +245,7 @@
     builders:
       - shell: |
           #!/bin/sh
+          export PATH=$PATH:/sbin
           echo "Network interface addresses..."
           ip address show
           echo "Network routing tables..."
