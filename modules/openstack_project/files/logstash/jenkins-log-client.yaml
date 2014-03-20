@@ -126,11 +126,23 @@ source-files:
     tags:
       - screen
       - oslofmt
+  - name: logs/screen-q-lbaas.txt
+    tags:
+      - screen
+      - oslofmt
   - name: logs/screen-q-meta.txt
     tags:
       - screen
       - oslofmt
+  - name: logs/screen-q-metering.txt
+    tags:
+      - screen
+      - oslofmt
   - name: logs/screen-q-svc.txt
+    tags:
+      - screen
+      - oslofmt
+  - name: logs/screen-q-vpn.txt
     tags:
       - screen
       - oslofmt
