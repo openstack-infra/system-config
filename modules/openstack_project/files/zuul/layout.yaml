@@ -1537,6 +1537,7 @@ projects:
       - check-tripleo-undercloud-precise
       - check-tripleo-ironic-undercloud-precise
       - check-tripleo-overcloud-precise
+      - check-tripleo-overcloud-f20
     gate:
       - gate-diskimage-builder-pep8
       - gate-diskimage-builder-python26
@@ -1662,6 +1663,7 @@ projects:
       - check-tripleo-undercloud-precise
       - check-tripleo-ironic-undercloud-precise
       - check-tripleo-overcloud-precise
+      - check-tripleo-overcloud-f20
     gate:
       - gate-os-apply-config-pep8
       - gate-os-apply-config-python26
@@ -1689,6 +1691,7 @@ projects:
       - check-tripleo-undercloud-precise
       - check-tripleo-ironic-undercloud-precise
       - check-tripleo-overcloud-precise
+      - check-tripleo-overcloud-f20
     gate:
       - gate-os-cloud-config-pep8
       - gate-os-cloud-config-python26
@@ -1716,6 +1719,7 @@ projects:
       - check-tripleo-undercloud-precise
       - check-tripleo-ironic-undercloud-precise
       - check-tripleo-overcloud-precise
+      - check-tripleo-overcloud-f20
     gate:
       - gate-os-collect-config-pep8
       - gate-os-collect-config-python26
@@ -1743,6 +1747,7 @@ projects:
       - check-tripleo-undercloud-precise
       - check-tripleo-ironic-undercloud-precise
       - check-tripleo-overcloud-precise
+      - check-tripleo-overcloud-f20
     gate:
       - gate-os-refresh-config-pep8
       - gate-os-refresh-config-python26
@@ -2167,6 +2172,7 @@ projects:
       - check-tripleo-undercloud-precise
       - check-tripleo-ironic-undercloud-precise
       - check-tripleo-overcloud-precise
+      - check-tripleo-overcloud-f20
     gate:
       - noop
     post:
@@ -2185,6 +2191,7 @@ projects:
       - check-tripleo-undercloud-precise
       - check-tripleo-ironic-undercloud-precise
       - check-tripleo-overcloud-precise
+      - check-tripleo-overcloud-f20
     gate:
       - noop
     post:
@@ -2207,6 +2214,7 @@ projects:
       - check-tripleo-undercloud-precise
       - check-tripleo-ironic-undercloud-precise
       - check-tripleo-overcloud-precise
+      - check-tripleo-overcloud-f20
     gate:
       - gate-tripleo-incubator-docs
     post:
@@ -2963,6 +2971,7 @@ projects:
       - check-tripleo-undercloud-precise
       - check-tripleo-ironic-undercloud-precise
       - check-tripleo-overcloud-precise
+      - check-tripleo-overcloud-f20
     gate:
       - noop
 
