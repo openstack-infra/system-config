@@ -463,7 +463,16 @@
           sudo pkill -9 nova-agent || echo ''
           sudo service xe-linux-distribution stop || echo ''
           if [ -e /proc/xen ] ; then
-              sudo umount /proc/xen
+              if ! sudo umount /proc/xen ; then
+                  # find out what is holding /proc/xen
+                  sudo lsof  | grep "/proc/xen"
+                  pids=$(sudo lsof  | grep "/proc/xen" | awk '{{ print $2 }}')
+                  for pid in $pids ; do
+                      ps $pid
+                      sudo kill -9 $pid
+                  done
+                  sudo umount /proc/xen
+              fi
           fi
 
           # prevent sshd from jumping to the ovs bridge on Precise instances.
