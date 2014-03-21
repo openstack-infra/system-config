@@ -241,4 +241,15 @@ class openstack_project::status (
     configfile => 'integrated.yaml',
     httproot   => '/srv/static/release',
   }
+  ###########################################################
+  # Status - reviewday
+
+  include reviewday
+
+  reviewday::site { 'reviewday':
+    git_url     => 'git://git.openstack.org/openstack-infra/bugdaystats',
+    serveradmin => 'webmaster@openstack.org',
+    httproot    => '/srv/static/bugdaystats',
+    configfile  => 'config.js',
+  }
 }
