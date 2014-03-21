@@ -46,6 +46,11 @@ class openstack_project::template (
   class { 'unbound': }
 
   if $::osfamily == 'Debian' {
+    # Make sure dig is installed
+    package { 'dnsutils':
+      ensure => present,
+    }
+
     # Custom rsyslog config to disable /dev/xconsole noise on Debuntu servers
     file { '/etc/rsyslog.d/50-default.conf':
       ensure  => present,
@@ -81,5 +86,12 @@ class openstack_project::template (
     ensure     => running,
     enable     => true,
     hasrestart => true,
+  }
+
+  if ($::osfamily == 'RedHat') {
+    # Make sure dig is installed
+    package { 'bind-utils':
+      ensure => present,
+    }
   }
 }
