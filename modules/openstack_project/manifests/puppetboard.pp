@@ -38,7 +38,7 @@ class openstack_project::puppetboard(
     port     => 80,
     docroot  => 'MEANINGLESS ARGUMENT',
     priority => '50',
-    template => 'openstack_projects/puppetboard/puppetboard.vhost.erb',
+    template => 'openstack_project/puppetboard/puppetboard.vhost.erb',
   }
 
 }
