@@ -23,6 +23,17 @@ PYTHON3=${4:-false}
 PYPY=${5:-false}
 ALL_MYSQL_PRIVS=${6:-false}
 
+# Save the nameservers configured by our provider.
+echo 'forward-zone:' > /tmp/forwarding.conf
+echo '  name: "."' >> /tmp/forwarding.conf
+# HPCloud nameservers (which have 10. addresses) strip RRSIG records.
+# Until this is resolved, use google instead.
+if grep "^nameserver \(10\|206\)\." /etc/resolv.conf; then
+    echo "  forward-addr: 8.8.8.8">> /tmp/forwarding.conf
+else
+    grep "^nameserver" /etc/resolv.conf|sed 's/nameserver \(.*\)/  forward-addr: \1/' >> /tmp/forwarding.conf
+fi
+
 sudo hostname $HOSTNAME
 # Fedora image doesn't come with wget
 if [ -f /usr/bin/yum ]; then
@@ -41,6 +52,25 @@ else
 	-e "class {'openstack_project::single_use_slave': install_users => false, sudo => $SUDO, bare => $BARE, python3 => $PYTHON3, include_pypy => $PYPY, all_mysql_privs => $ALL_MYSQL_PRIVS, ssh_key => '$NODEPOOL_SSH_KEY', }"
 fi
 
+# The puppet modules should install unbound.  Take the nameservers
+# that we ended up with at boot and configure unbound to forward to
+# them.
+sudo mv /tmp/forwarding.conf /etc/unbound/
+sudo chown root:root /etc/unbound/forwarding.conf
+sudo chmod a+r /etc/unbound/forwarding.conf
+# HPCloud has selinux enabled by default, Rackspace apparently not.
+# Regardless, apply the correct context.
+if [ -x /sbin/restorecon ] ; then
+    sudo chcon system_u:object_r:named_conf_t:s0 /etc/unbound/forwarding.conf
+fi
+
+sudo bash -c "echo 'include: /etc/unbound/forwarding.conf' >> /etc/unbound/unbound.conf"
+sudo /etc/init.d/unbound restart
+
+# Make sure DNS works.
+dig git.openstack.org
+
+# Cache all currently known gerrit repos.
 sudo mkdir -p /opt/git
 sudo -i python /opt/nodepool-scripts/cache_git_repos.py
 
