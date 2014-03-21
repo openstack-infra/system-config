@@ -15,7 +15,12 @@
 # Class to install kibana frontend to logstash.
 #
 class kibana (
-  $discover_nodes = ['localhost:9200']
+  $discover_nodes     = ['localhost:9200'],
+  $elasticsearch_url  = 'localhost:9200',
+  $version            = '2',
+  $port               = '80',
+  $vhost_name         = $::fqdn,
+  $serveradmin        = "webmaster@${::fqdn}",
 ) {
 
   group { 'kibana':
@@ -41,53 +46,21 @@ class kibana (
     require  => User['kibana'],
   }
 
-  vcsrepo { '/opt/kibana/kibana':
-    ensure   => latest,
-    provider => git,
-    source   => 'https://github.com/rashidkpc/Kibana.git',
-    revision => 'v0.2.0',
-    require  => File['/opt/kibana'],
-  }
+  case $version {
+    '2': {
+      class { 'kibana::two':
+        discover_nodes => $discover_nodes,
+        port           => $port,
+        vhost_name     => $vhost_name,
+      }
+    }
 
-  package { 'bundler':
-    ensure   => latest,
-    provider => 'gem',
+    '3': {
+      class { 'kibana::three':
+        elasticsearch_url => $elasticsearch_url,
+        port              => $port,
+        vhost_name        => $vhost_name,
+      }
+    }
   }
-
-  exec { 'install_kibana':
-    command     => 'bundle install',
-    path        => ['/usr/bin', '/usr/local/bin'],
-    cwd         => '/opt/kibana/kibana',
-    logoutput   => true,
-    refreshonly => true,
-    subscribe   => Vcsrepo['/opt/kibana/kibana'],
-    require     => [
-      User['kibana'],
-      Package['bundler'],
-    ],
-  }
-
-  file { '/opt/kibana/kibana/KibanaConfig.rb':
-    ensure  => present,
-    content => template('kibana/config.rb.erb'),
-    replace => true,
-    owner   => 'kibana',
-    group   => 'kibana',
-    require => Vcsrepo['/opt/kibana/kibana'],
-  }
-
-  file { '/etc/init/kibana.conf':
-    ensure => present,
-    source => 'puppet:///modules/kibana/kibana.init',
-  }
-
-  service { 'kibana':
-    ensure  => running,
-    require => [
-      File['/etc/init/kibana.conf'],
-      File['/opt/kibana/kibana/KibanaConfig.rb'],
-      Exec['install_kibana'],
-    ],
-  }
-
 }

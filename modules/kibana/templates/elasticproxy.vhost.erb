@@ -1,12 +1,17 @@
-<VirtualHost <%= scope.lookupvar("::logstash::web::vhost_name") %>:80>
-    ServerName <%= scope.lookupvar("::logstash::web::vhost_name") %>
-    ServerAdmin <%= scope.lookupvar("::logstash::web::serveradmin") %>
+<VirtualHost <%= scope.lookupvar("::kibana::three::vhost_name") %>:<%= scope.lookupvar("::kibana::three::es_port") %>>
+    ServerName <%= scope.lookupvar("::kibana::three::vhost_name") %>
+    ServerAdmin <%= scope.lookupvar("::kibana::serveradmin") %>
 
-    ErrorLog ${APACHE_LOG_DIR}/<%= scope.lookupvar("::logstash::web::vhost_name") %>-error.log
+    ErrorLog ${APACHE_LOG_DIR}/<%= scope.lookupvar("::kibana::three::vhost_name") %>-elastic-error.log
 
     LogLevel warn
 
-    CustomLog ${APACHE_LOG_DIR}/<%= scope.lookupvar("::logstash::web::vhost_name") %>-access.log combined
+    CustomLog ${APACHE_LOG_DIR}/<%= scope.lookupvar("::kibana::three::vhost_name") %>-elastic-access.log combined
+
+    DocumentRoot /opt/kibana/three/src
+    <Directory /opt/kibana/three/src>
+        Options -Multiviews
+    </Directory>
 
     <IfModule mod_proxy.c>
         <% if proxy_elasticsearch == true %>
@@ -19,13 +24,10 @@
         RewriteRule ^/elasticsearch/(_aliases|(.*/)?_search)$ http://<%= scope.lookupvar("::logstash::web::discover_nodes")[0] %>/$1 [P]
         RewriteCond %{REQUEST_METHOD} OPTIONS
         RewriteRule ^/elasticsearch/((.*/)?_search)$ http://<%= scope.lookupvar("::logstash::web::discover_nodes")[0] %>/$1 [P]
-        <Proxy http://<%= scope.lookupvar("::logstash::web::discover_nodes")[0] %>/>
+        <Proxy http://<%= scope.lookupvar("::kibana::three::elasticsearch_url") %>/>
             ProxySet connectiontimeout=15 timeout=120
         </Proxy>
-        ProxyPassReverse /elasticsearch/ http://<%= scope.lookupvar("::logstash::web::discover_nodes")[0] %>/
+        ProxyPassReverse /elasticsearch/ http://<%= scope.lookupvar("::kibana::three::elasticsearch_url") %>/
         <% end %>
-
-        ProxyPass / http://127.0.0.1:5601/ retry=0
-        ProxyPassReverse / http://127.0.0.1:5601/
     </IfModule>
 </VirtualHost>
