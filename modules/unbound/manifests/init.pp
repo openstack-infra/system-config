@@ -39,6 +39,12 @@ class unbound (
       ensure  => present,
       require => File['/etc/default/unbound'],
     }
+
+    # Make sure resolvconf is enabled (which is the default).
+    exec {'enable-resolvconf':
+      command => '/sbin/resolvconf --enable-updates',
+      creates => '/var/run/resolvconf/enable-updates',
+    }
   }
 
   # Ubuntu uses resolvconf which will update resolv.conf to point to
