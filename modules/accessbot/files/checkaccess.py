@@ -20,8 +20,11 @@ import irc.client
 import logging
 import random
 import string
+import ssl
 import sys
+import time
 import yaml
+
 
 logging.basicConfig(level=logging.INFO)
 
@@ -82,6 +85,7 @@ class CheckAccess(irc.client.SimpleIRCClient):
             self.current_list = []
             self.connection.privmsg('chanserv', 'access list %s' %
                                     self.current_channel)
+            time.sleep(1)
             return
         if msg.startswith('End of'):
             found = False
@@ -108,13 +112,13 @@ class CheckAccess(irc.client.SimpleIRCClient):
 def main():
     parser = argparse.ArgumentParser(description='IRC channel access check')
     parser.add_argument('-l', dest='config',
-                        default='/etc/irc/channels.yaml',
+                        default='/etc/accessbot/channels.yaml',
                         help='path to the config file')
     parser.add_argument('-s', dest='server',
                         default='chat.freenode.net',
                         help='IRC server')
     parser.add_argument('-p', dest='port',
-                        default=6667,
+                        default=6697,
                         help='IRC port')
     parser.add_argument('nick',
                         help='the nick for which access should be validated')
@@ -137,7 +141,13 @@ def main():
     a = CheckAccess(channels, args.nick, flags)
     mynick = ''.join(random.choice(string.ascii_uppercase)
                      for x in range(16))
-    a.connect(args.server, int(args.port), mynick)
+    port = int(args.port)
+    if port == 6697:
+        factory = irc.connection.Factory(wrapper=ssl.wrap_socket)
+        a.connect(args.server, int(args.port), mynick,
+                  connect_factory=factory)
+    else:
+        a.connect(args.server, int(args.port), mynick)
     a.start()
 
 if __name__ == "__main__":
