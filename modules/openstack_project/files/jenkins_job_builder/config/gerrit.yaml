@@ -10,6 +10,7 @@
       - timestamps
 
     prebuilders:
+      - revoke-sudo
       - gerrit-git-prep
       - gerrit-preclean
 
@@ -43,6 +44,7 @@
       - timestamps
 
     prebuilders:
+      - revoke-sudo
       - gerrit-git-prep
       - gerrit-preclean
 
@@ -71,6 +73,7 @@
       - timestamps
 
     prebuilders:
+      - revoke-sudo
       - gerrit-git-prep
       - gerrit-preclean
 
@@ -102,6 +105,7 @@
       - timestamps
 
     builders:
+      - revoke-sudo
       - shell: |
           #!/bin/bash -xe
           mkdir -p gerrit
@@ -141,6 +145,7 @@
       - timestamps
 
     builders:
+      - revoke-sudo
       - shell: |
           #!/bin/bash -xe
           mkdir -p gerrit
@@ -176,6 +181,7 @@
       - timestamps
 
     builders:
+      - revoke-sudo
       - shell: |
           #!/bin/bash -xe
           mkdir -p gerrit

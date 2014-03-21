@@ -4,6 +4,7 @@
     node: bare-precise
 
     builders:
+      - revoke-sudo
       - gerrit-git-prep
       - docs:
           github-org: openstack-infra
@@ -23,6 +24,7 @@
     node: bare-precise
 
     builders:
+      - revoke-sudo
       - gerrit-git-prep
       - shell: |
           source /usr/local/jenkins/slave_scripts/select-mirror.sh openstack-infra jenkins-job-builder

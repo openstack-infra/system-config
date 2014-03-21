@@ -4,6 +4,7 @@
     node: bare-precise
 
     builders:
+      - revoke-sudo
       - gerrit-git-prep
       - docs:
           github-org: openstack-infra
@@ -23,6 +24,7 @@
     node: bare-precise
 
     builders:
+      - revoke-sudo
       - gerrit-git-prep
       - coverage:
           github-org: openstack-infra
@@ -42,6 +44,7 @@
       - timestamps
 
     builders:
+      - revoke-sudo
       - python27:
           github-org: 'openstack-infra'
           project: 'zuul'
