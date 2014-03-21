@@ -12,9 +12,9 @@
       - gerrit-git-prep
       - shell: |
           #!/bin/bash -xe
-          /usr/local/jenkins/slave_scripts/maven-properties.sh
+          /usr/local/jenkins/slave_scripts/version-properties.sh
       - inject:
-          properties-file: maven.properties
+          properties-file: version.properties
       - js-build:
           command: 'test'
           envlist: 'grunt'
@@ -49,9 +49,9 @@
       - gerrit-git-prep
       - shell: |
           #!/bin/bash -xe
-          /usr/local/jenkins/slave_scripts/maven-properties.sh
+          /usr/local/jenkins/slave_scripts/version-properties.sh
       - inject:
-          properties-file: maven.properties
+          properties-file: version.properties
       - js-build:
           command: 'build'
           envlist: 'grunt'
