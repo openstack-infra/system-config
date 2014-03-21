@@ -765,6 +765,8 @@ projects:
     release:
       - horizon-tarball
       - horizon-merge-release-tags
+    periodic:
+      - horizon-propose-translation-update
 
   - name: openstack/ironic
     template:
