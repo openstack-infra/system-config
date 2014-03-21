@@ -14,6 +14,21 @@
 
 PROJECT=$1
 
+# The setup for django_openstack_auth is different. The locale files
+# are under openstack_auth and the transifex resource is part of
+# horizon with a non-standard name. Therefore we have to special case
+# it.
+RESOURCE=${PROJECT}-translations
+PROJECT_DIR=${PROJECT}
+PO_FILE=${PROJECT}
+
+if [ $PROJECT = "django_openstack_auth" ] ; then
+    PROJECT=horizon
+    PROJECT_DIR=openstack_auth
+    RESOURCE=djangopo
+    PO_FILE=django
+fi
+
 if [ ! `echo $ZUUL_REFNAME | grep master` ]
 then
     exit 0
@@ -26,18 +41,18 @@ git config user.email "jenkins@openstack.org"
 if [ ! -d .tx ] ; then
     tx init --host=https://www.transifex.com
 fi
-tx set --auto-local -r ${PROJECT}.${PROJECT}-translations "${PROJECT}/locale/<lang>/LC_MESSAGES/${PROJECT}.po" --source-lang en --source-file ${PROJECT}/locale/${PROJECT}.pot -t PO --execute
+tx set --auto-local -r ${PROJECT}.${RESOURCE} "${PROJECT_DIR}/locale/<lang>/LC_MESSAGES/${PO_FILE}.po" --source-lang en --source-file ${PROJECT_DIR}/locale/${PROJECT_DIR}.pot -t PO --execute
 
 # Update the .pot file
 python setup.py extract_messages
-PO_FILES=`find ${PROJECT}/locale -name '*.po'`
+PO_FILES=`find ${PROJECT_DIR}/locale -name '*.po'`
 if [ -n "$PO_FILES" ]
 then
     # Use updated .pot file to update translations
     python setup.py update_catalog --no-fuzzy-matching --ignore-obsolete=true
 fi
 # Add all changed files to git
-git add $PROJECT/locale/*
+git add $PROJECT_DIR/locale/*
 
 if [ ! `git diff-index --quiet HEAD --` ]
 then
