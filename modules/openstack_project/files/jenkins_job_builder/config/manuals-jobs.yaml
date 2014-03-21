@@ -4,6 +4,7 @@
     node: bare-precise
 
     prebuilders:
+      - revoke-sudo
       - gerrit-git-prep
 
     properties:
@@ -45,6 +46,7 @@
           properties-file: gerrit-doc.properties
 
     prebuilders:
+      - revoke-sudo
       - gerrit-git-prep
 
     maven:
@@ -80,6 +82,7 @@
           properties-file: gerrit-doc.properties
 
     builders:
+      - revoke-sudo
       - gerrit-git-prep
       - shell: |
           source /usr/local/jenkins/slave_scripts/select-mirror.sh openstack openstack-manuals
@@ -99,6 +102,7 @@
     node: bare-precise
 
     prebuilders:
+      - revoke-sudo
       - gerrit-git-prep
 
     properties:
@@ -134,6 +138,7 @@
     node: bare-precise
 
     prebuilders:
+      - revoke-sudo
       - gerrit-git-prep
 
     properties:

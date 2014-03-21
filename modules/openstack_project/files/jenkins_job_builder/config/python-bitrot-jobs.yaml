@@ -8,6 +8,7 @@
       - timestamps
 
     builders:
+      - revoke-sudo
       - python26:
           github-org: '{github-org}'
           project: '{name}'
@@ -36,6 +37,7 @@
       - timestamps
 
     builders:
+      - revoke-sudo
       - python27:
           github-org: '{github-org}'
           project: '{name}'
@@ -64,6 +66,7 @@
       - timestamps
 
     builders:
+      - revoke-sudo
       - docs:
           github-org: '{github-org}'
           project: '{name}'

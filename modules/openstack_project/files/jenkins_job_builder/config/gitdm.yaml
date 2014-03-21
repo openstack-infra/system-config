@@ -6,6 +6,7 @@
     builders:
       - link-logs
       - net-info
+      - revoke-sudo
       - gerrit-git-prep
       - shell: |
           #!/bin/bash -xe

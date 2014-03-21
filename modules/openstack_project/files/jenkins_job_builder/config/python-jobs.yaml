@@ -8,6 +8,7 @@
       - timestamps
 
     builders:
+      - revoke-sudo
       - gerrit-git-prep
       - coverage:
           github-org: '{github-org}'
@@ -24,6 +25,7 @@
     name: 'gate-{name}-pep8'
 
     builders:
+      - revoke-sudo
       - gerrit-git-prep
       - pep8:
           github-org: '{github-org}'
@@ -39,6 +41,7 @@
     name: 'gate-{name}-pylint'
 
     builders:
+      - revoke-sudo
       - gerrit-git-prep
       - pylint:
           github-org: '{github-org}'
@@ -60,6 +63,7 @@
       - timestamps
 
     builders:
+      - revoke-sudo
       - gerrit-git-prep
       - python26:
           github-org: '{github-org}'
@@ -82,6 +86,7 @@
       - timestamps
 
     builders:
+      - revoke-sudo
       - gerrit-git-prep
       - python27:
           github-org: '{github-org}'
@@ -104,6 +109,7 @@
       - timestamps
 
     builders:
+      - revoke-sudo
       - gerrit-git-prep
       - python33:
           github-org: '{github-org}'
@@ -126,6 +132,7 @@
       - timestamps
 
     builders:
+      - revoke-sudo
       - gerrit-git-prep
       - pypy:
           github-org: '{github-org}'
@@ -142,6 +149,7 @@
     name: 'gate-{name}-docs'
 
     builders:
+      - revoke-sudo
       - gerrit-git-prep
       - docs:
           github-org: '{github-org}'
@@ -163,6 +171,7 @@
       - timestamps
 
     builders:
+      - revoke-sudo
       - gerrit-git-prep
       - tox:
           envlist: '{envlist}'
@@ -181,6 +190,7 @@
     node: bare-precise
 
     builders:
+      - revoke-sudo
       - gerrit-git-prep
       - tarball:
           github-org: '{github-org}'
@@ -198,6 +208,7 @@
     node: bare-precise
 
     builders:
+      - revoke-sudo
       - gerrit-git-prep
       - tarball:
           github-org: '{github-org}'
@@ -220,6 +231,7 @@
     node: bare-precise
 
     builders:
+      - revoke-sudo
       - gerrit-git-prep
       - shell: |
           #!/bin/bash -xe

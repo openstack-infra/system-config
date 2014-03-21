@@ -3,6 +3,7 @@
     node: '{node}'
 
     builders:
+      - revoke-sudo
       - gerrit-git-prep
       - chef-bundler-prep
       - chef-berkshelf-prep
@@ -16,6 +17,7 @@
     node: '{node}'
 
     builders:
+      - revoke-sudo
       - gerrit-git-prep
       - chef-bundler-prep
       - chef-cookbook-foodcritic
@@ -28,6 +30,7 @@
     node: '{node}'
 
     builders:
+      - revoke-sudo
       - gerrit-git-prep
       - chef-bundler-prep
       - chef-cookbook-rubocop
@@ -40,6 +43,7 @@
     node: bare-precise
 
     builders:
+      - revoke-sudo
       - gerrit-git-prep
       - shell: |
           #!/bin/bash -xe
