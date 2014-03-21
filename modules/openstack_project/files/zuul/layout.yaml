@@ -4530,6 +4530,12 @@ projects:
       - stackalytics-tarball
       - hook-stackalytics-rtfd
 
+  - name: stackforge/project-name
+    check:
+      - gate-noop
+    gate:
+      - gate-noop
+
   - name: stackforge/swiftsync
     check:
       - gate-swiftsync-pep8
