@@ -252,6 +252,7 @@ openstack-chef:
       - change-merged
       - x-vrif-minus-2
     projects:
+      - stackforge/cookbook-ceph
       - stackforge/cookbook-openstack-block-storage
       - stackforge/cookbook-openstack-common
       - stackforge/cookbook-openstack-compute

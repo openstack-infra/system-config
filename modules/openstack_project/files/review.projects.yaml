@@ -435,6 +435,14 @@
   description: Congress
   upstream: git://github.com/pballand/congress.git
   acl-config: /home/gerrit2/acls/stackforge/congress.config
+- project: stackforge/cookbook-ceph
+  group: openstack-chef
+  docimpact-group: openstack-chef
+  description: Chef Cookbook - Ceph
+  upstream: git://github.com/ceph/ceph-cookbooks.git
+  acl-config: /home/gerrit2/acls/stackforge/chef-cookbooks.config
+  options:
+    - direct-release
 - project: stackforge/cookbook-openstack-block-storage
   group: openstack-chef
   docimpact-group: openstack-chef
