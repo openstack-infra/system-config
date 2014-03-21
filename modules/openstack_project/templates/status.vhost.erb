@@ -21,12 +21,12 @@ NameVirtualHost <%= vhost_name %>:<%= port %>
     Allow from all
   </Location>
 
-  RewriteRule ^/bugday$ /bugday/ [R]
-  RewriteRule ^/bugday/(.*)$ http://old-wiki.openstack.org/bugday/$1 [P]
-  <Location /bugday/>
-    Order allow,deny
-    Allow from all
-  </Location>
+  Alias /bugday /srv/static/bugdaystats
+  <Directory /srv/static/bugdaystats>
+      AllowOverride None
+      Order allow,deny
+      allow from all
+  </Directory>
 
   Alias /reviews /srv/static/reviewday
   <Directory /srv/static/reviewday>

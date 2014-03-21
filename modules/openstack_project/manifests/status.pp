@@ -241,4 +241,15 @@ class openstack_project::status (
     configfile => 'integrated.yaml',
     httproot   => '/srv/static/release',
   }
+  ###########################################################
+  # Status - bugdaystats
+
+  include bugdaystats
+
+  bugdaystats::site { 'bugdaystats':
+    git_url     => 'git://git.openstack.org/openstack-infra/bugdaystats',
+    serveradmin => 'webmaster@openstack.org',
+    httproot    => '/srv/static/bugdaystats',
+    configfile  => '/var/lib/bugdaystats/config.js',
+  }
 }
