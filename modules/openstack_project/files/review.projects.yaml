@@ -828,6 +828,9 @@
 - project: stackforge/stackalytics
   description: OpenStack analytics dashboard
   upstream: git://github.com/Mirantis/stackalytics.git
+- project: stackforge/swift3
+  description: Swift3 Middleware for OpenStack Swift, allowing access to OpenStack swift via the Amazon S3 API.
+  upstream: git://github.com/fujita/swift3.git
 - project: stackforge/swiftsync
   description: "Swift mass syncronizer"
   upstream: git://github.com/enovance/swiftsync.git
