@@ -679,6 +679,9 @@
   description: OpenStack SDK for .Net
 - project: stackforge/openstack-sdk-php
   description: OpenStack SDK for PHP
+- project: stackforge/openstackdroid
+  description: Openstackdroid is an Android application to access Openstack clouds
+  upstream: https://github.com/rcarrillocruz/openstackdroid.git
 - project: stackforge/openvz-nova-driver
   description: OpenVz driver for Nova
   upstream: git://github.com/imsplitbit/openvz-nova-driver.git

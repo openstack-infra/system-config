@@ -3846,6 +3846,12 @@ projects:
     gate:
       - gate-noop
 
+  - name: stackforge/openstackdroid
+    check:
+      - gate-noop
+    gate:
+      - gate-noop
+
   - name: stackforge/openvz-nova-driver
     check:
       - gate-noop
