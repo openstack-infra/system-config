@@ -1,0 +1,16 @@
+<VirtualHost <%= scope.lookupvar("::kibana::three::vhost_name") %>:<%= scope.lookupvar("::kibana::three::port") %>>
+    ServerName <%= scope.lookupvar("::kibana::three::vhost_name") %>
+    ServerAdmin <%= scope.lookupvar("::kibana::serveradmin") %>
+
+    ErrorLog ${APACHE_LOG_DIR}/<%= scope.lookupvar("::kibana::three::vhost_name") %>-error.log
+
+    LogLevel warn
+
+    CustomLog ${APACHE_LOG_DIR}/<%= scope.lookupvar("::kibana::three::vhost_name") %>-access.log combined
+
+    DocumentRoot /opt/kibana/three/src
+    <Directory /opt/kibana/three/src>
+        Options -Multiviews
+    </Directory>
+
+</VirtualHost>

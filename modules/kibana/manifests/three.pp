@@ -14,32 +14,34 @@
 #
 # Class to install kibana frontend to logstash.
 #
-class kibana (
-  $discover_nodes     = ['localhost:9200'],
-  $elasticsearch_url  = 'localhost:9200',
-  $version            = '2',
+class kibana::three (
   $port               = '80',
+  $es_port            = '9200',
   $vhost_name         = $::fqdn,
+  $elasticsearch_url  = 'localhost:9200',
   $serveradmin        = "webmaster@${::fqdn}",
 ) {
 
-  case $version {
-    '2': {
-      class { 'kibana::two':
-        discover_nodes => $discover_nodes,
-        port           => $port,
-        vhost_name     => $vhost_name,
-      }
-    }
+  include kibana::common
 
-    '3': {
-      class { 'kibana::three':
-        elasticsearch_url => $elasticsearch_url,
-        port              => $port,
-        vhost_name        => $vhost_name,
-      }
-    }
-
-    default: { fail("Bad kibana version: ${version}") }
+  vcsrepo { '/opt/kibana/three':
+    ensure   => latest,
+    provider => git,
+    source   => 'https://github.com/elasticsearch/kibana.git',
+    revision => 'v3.0.0milestone5',
+    require  => File['/opt/kibana'],
   }
+
+  apache::vhost { $vhost_name:
+    port     => $port,
+    priority => '50',
+    template => 'kibana/three.vhost.erb'
+  }
+
+  apache::vhost { $vhost_name:
+    port     => $es_port,
+    priority => '50',
+    template => 'kibana/elasticproxy.vhost.erb'
+  }
+
 }

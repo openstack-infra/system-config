@@ -1,0 +1,31 @@
+<VirtualHost <%= scope.lookupvar("::kibana::three::vhost_name") %>:<%= scope.lookupvar("::kibana::three::es_port") %>>
+    ServerName <%= scope.lookupvar("::kibana::three::vhost_name") %>
+    ServerAdmin <%= scope.lookupvar("::kibana::serveradmin") %>
+
+    ErrorLog ${APACHE_LOG_DIR}/<%= scope.lookupvar("::kibana::three::vhost_name") %>-elastic-error.log
+
+    LogLevel warn
+
+    CustomLog ${APACHE_LOG_DIR}/<%= scope.lookupvar("::kibana::three::vhost_name") %>-elastic-access.log combined
+
+    DocumentRoot /opt/kibana/three/src
+    <Directory /opt/kibana/three/src>
+        Options -Multiviews
+    </Directory>
+
+    <IfModule mod_proxy.c>
+        # Proxy GETs for elasticsearch _aliases, .*/_status, .*/_search,
+        # .*/_mapping, _cluster/health, _nodes, and kibana-int/.*
+        RewriteEngine on
+        RewriteCond %{REQUEST_METHOD} GET
+        RewriteRule ^/(_aliases|(.*/)?_status|(.*/)?_search|(.*/)?_mapping|_cluster/health|_nodes|kibana-int/(dashboard|temp)(/.*)?)$ http://<%= scope.lookupvar("::kibana::three::elasticsearch_url") %>/$1 [P]
+        RewriteCond %{REQUEST_METHOD} POST
+        RewriteRule ^/(_aliases|(.*/)?_search|kibana-int/(dashboard|temp)(/.*)?)$ http://<%= scope.lookupvar("::kibana::three::elasticsearch_url") %>/$1 [P]
+        RewriteCond %{REQUEST_METHOD} OPTIONS
+        RewriteRule ^/((.*/)?_search)$ http://<%= scope.lookupvar("::kibana::three::elasticsearch_url") %>/$1 [P]
+        <Proxy http://<%= scope.lookupvar("::kibana::three::elasticsearch_url") %>/>
+            ProxySet connectiontimeout=15 timeout=120
+        </Proxy>
+        ProxyPassReverse / http://<%= scope.lookupvar("::kibana::three::elasticsearch_url") %>/
+    </IfModule>
+</VirtualHost>

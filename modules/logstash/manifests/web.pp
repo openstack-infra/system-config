@@ -52,25 +52,30 @@ class logstash::web (
         ],
       }
 
-      $vhost = 'logstash/logstash.vhost.erb'
+      apache::vhost { $vhost_name:
+        port     => 80,
+        priority => '50',
+        template => 'logstash/logstash.vhost.erb',
+      }
     }
 
     'kibana': {
-      class { 'kibana':
+      class { 'kibana::two':
         discover_nodes => $discover_nodes,
+        port           => 80,
+        vhost_name     => $vhost_name,
+        serveradmin    => $serveradmin,
       }
-      $vhost = 'logstash/kibana.vhost.erb'
+      class { 'kibana::three':
+        elasticsearch_url => $discover_nodes[0],
+        port              => 8080,
+        vhost_name        => $vhost_name,
+        serveradmin       => $serveradmin,
+      }
     }
 
     default: {
       fail("Unknown frontend to logstash: ${frontend}.")
     }
-  }
-
-  apache::vhost { $vhost_name:
-    port     => 80,
-    docroot  => 'MEANINGLESS ARGUMENT',
-    priority => '50',
-    template => $vhost,
   }
 }
