@@ -1805,6 +1805,16 @@
       - pypi-jobs
 
 - project:
+    name: ironic-python-agent
+    github-org: openstack
+    node: bare-precise
+    tarball-site: tarballs.openstack.org
+    doc-publisher-site: docs.openstack.org
+
+    jobs:
+      - python-jobs
+
+- project:
     name: inception
     github-org: stackforge
     node: bare-precise

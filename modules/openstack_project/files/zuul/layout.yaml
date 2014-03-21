@@ -2149,6 +2149,19 @@ projects:
           - post-mirror-python27
           - post-mirror-python33
 
+#TODO: add docs
+  - name: openstack/ironic-python-agent
+    check:
+      - gate-ironic-python-agent-pep8
+      - gate-ironic-python-agent-python26
+      - gate-ironic-python-agent-python27
+      - gate-ironic-python-agent-python33
+    gate:
+      - gate-ironic-python-agent-pep8
+      - gate-ironic-python-agent-python26
+      - gate-ironic-python-agent-python27
+      - gate-ironic-python-agent-python33
+
   # This is not strictly necessary; there is currently a transitive
   # relationship between g-t-dsvm,
   # g-t-dsvm-{postgres,cinder,neutron} and g-t-dsvm-full
