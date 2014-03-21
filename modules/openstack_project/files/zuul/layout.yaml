@@ -727,7 +727,7 @@ projects:
     check:
       - gate-gantt-pylint
     gate:
-      - gate-noop
+      - noop
 
   - name: openstack/glance
     template:
@@ -987,9 +987,9 @@ projects:
 
   - name: openstack/nova-specs
     check:
-      - gate-noop
+      - noop
     gate:
-      - gate-noop
+      - noop
 
   - name: stackforge/nova-docker
     template:
@@ -1664,9 +1664,9 @@ projects:
 
   - name: openstack/governance
     check:
-      - gate-noop
+      - noop
     gate:
-      - gate-noop
+      - noop
 
 #TODO: add docs
   - name: openstack/heat-cfntools
@@ -1695,21 +1695,21 @@ projects:
 
   - name: openstack/heat-templates
     check:
-      - gate-noop
+      - noop
     gate:
-      - gate-noop
+      - noop
 
   - name: openstack/openstack
     check:
-      - gate-noop
+      - noop
     gate:
-      - gate-noop
+      - noop
 
   - name: openstack/openstack-chef
     check:
-      - gate-noop
+      - noop
     gate:
-      - gate-noop
+      - noop
 
   - name: openstack/openstack-doc-tools
     check:
@@ -2182,9 +2182,9 @@ projects:
 
   - name: openstack/qa-specs
     check:
-      - gate-noop
+      - noop
     gate:
-      - gate-noop
+      - noop
 
   - name: openstack/tempest
     template:
@@ -2242,7 +2242,7 @@ projects:
 
   - name: openstack/tripleo-heat-templates
     check:
-      - gate-noop
+      - noop
     check-tripleo:
       - check-tripleo-seed-precise
       - check-tripleo-ironic-seed-precise
@@ -2250,7 +2250,7 @@ projects:
       - check-tripleo-ironic-undercloud-precise
       - check-tripleo-overcloud-precise
     gate:
-      - gate-noop
+      - noop
     post:
       - tripleo-heat-templates-branch-tarball
     pre-release:
@@ -2260,7 +2260,7 @@ projects:
 
   - name: openstack/tripleo-image-elements
     check:
-      - gate-noop
+      - noop
     check-tripleo:
       - check-tripleo-seed-precise
       - check-tripleo-ironic-seed-precise
@@ -2268,7 +2268,7 @@ projects:
       - check-tripleo-ironic-undercloud-precise
       - check-tripleo-overcloud-precise
     gate:
-      - gate-noop
+      - noop
     post:
       - tripleo-image-elements-branch-tarball
     pre-release:
@@ -2300,9 +2300,9 @@ projects:
 
   - name: openstack/trove-integration
     check:
-      - gate-noop
+      - noop
     gate:
-      - gate-noop
+      - noop
 
 # TODO: add docs
   - name: openstack/tuskar-ui
@@ -2428,9 +2428,9 @@ projects:
 
   - name: openstack-dev/cookiecutter
     check:
-      - gate-noop
+      - noop
     gate:
-      - gate-noop
+      - noop
 
   - name: openstack-dev/devstack
     template:
@@ -2517,15 +2517,15 @@ projects:
 
   - name: openstack-dev/openstack-nose
     check:
-      - gate-noop
+      - noop
     gate:
-      - gate-noop
+      - noop
 
   - name: openstack-dev/openstack-qa
     check:
-      - gate-noop
+      - noop
     gate:
-      - gate-noop
+      - noop
     post:
       - openstack-qa-docs
     release:
@@ -2533,9 +2533,9 @@ projects:
 
   - name: openstack-dev/oslo-cookiecutter
     check:
-      - gate-noop
+      - noop
     gate:
-      - gate-noop
+      - noop
 
   - name: openstack-dev/pbr
     template:
@@ -2580,23 +2580,23 @@ projects:
 
   - name: openstack-dev/sandbox
     check:
-      - gate-noop
+      - noop
     gate:
-      - gate-noop
+      - noop
 
 # Section: OpenStack infrastructure projects
 
   - name: openstack-infra/activity-board
     check:
-      - gate-noop
+      - noop
     gate:
-      - gate-noop
+      - noop
 
   - name: openstack-infra/askbot-theme
     check:
-      - gate-noop
+      - noop
     gate:
-      - gate-noop
+      - noop
 
   - name: openstack-infra/bugdaystats
     check:
@@ -2731,9 +2731,9 @@ projects:
 
   - name: openstack-infra/gerrit-powered-agenda
     check:
-      - gate-noop
+      - noop
     gate:
-      - gate-noop
+      - noop
 
   - name: openstack-infra/gerritbot
     check:
@@ -2837,15 +2837,15 @@ projects:
 
   - name: openstack-infra/lodgeit
     check:
-      - gate-noop
+      - noop
     gate:
-      - gate-noop
+      - noop
 
   - name: openstack-infra/meetbot
     check:
-      - gate-noop
+      - noop
     gate:
-      - gate-noop
+      - noop
 
   - name: openstack-infra/nodepool
     check:
@@ -2865,9 +2865,9 @@ projects:
 
   - name: openstack-infra/nose-html-output
     check:
-      - gate-noop
+      - noop
     gate:
-      - gate-noop
+      - noop
     post:
       - nose-html-output-branch-tarball
     pre-release:
@@ -2881,9 +2881,9 @@ projects:
 
   - name: openstack-infra/odsreg
     check:
-      - gate-noop
+      - noop
     gate:
-      - gate-noop
+      - noop
 
   - name: openstack-infra/openstackid
     check:
@@ -2905,9 +2905,9 @@ projects:
 
   - name: openstack-infra/publications
     check:
-      - gate-noop
+      - noop
     gate:
-      - gate-noop
+      - noop
     post:
       - infra-publications-publish
       - infra-publications-publish-index
@@ -2917,21 +2917,21 @@ projects:
 
   - name: openstack-infra/puppet-apparmor
     check:
-      - gate-noop
+      - noop
     gate:
-      - gate-noop
+      - noop
 
   - name: openstack-infra/puppet-dashboard
     check:
-      - gate-noop
+      - noop
     gate:
-      - gate-noop
+      - noop
 
   - name: openstack-infra/puppet-vcsrepo
     check:
-      - gate-noop
+      - noop
     gate:
-      - gate-noop
+      - noop
 
   - name: openstack-infra/pypi-mirror
     check:
@@ -2955,9 +2955,9 @@ projects:
 
   - name: openstack-infra/releasestatus
     check:
-      - gate-noop
+      - noop
     gate:
-      - gate-noop
+      - noop
 
 # TODO: add docs
   - name: openstack-infra/release-tools
@@ -3049,7 +3049,7 @@ projects:
 
   - name: openstack-infra/tripleo-ci
     check:
-      - gate-noop
+      - noop
     check-tripleo:
       - check-tripleo-seed-precise
       - check-tripleo-ironic-seed-precise
@@ -3057,7 +3057,7 @@ projects:
       - check-tripleo-ironic-undercloud-precise
       - check-tripleo-overcloud-precise
     gate:
-      - gate-noop
+      - noop
 
   - name: openstack-infra/zmq-event-publisher
     check:
@@ -3092,9 +3092,9 @@ projects:
 
   - name: openstack-infra/zuul-packaging
     check:
-      - gate-noop
+      - noop
     gate:
-      - gate-noop
+      - noop
 
 # Section: Stackforge projects
 
@@ -3216,9 +3216,9 @@ projects:
 
   - name: stackforge/cloudcafe
     check:
-      - gate-noop
+      - noop
     gate:
-      - gate-noop
+      - noop
 
   - name: stackforge/clouddocs-maven-plugin
     check:
@@ -3233,15 +3233,15 @@ projects:
 
   - name: stackforge/cloudroast
     check:
-      - gate-noop
+      - noop
     gate:
-      - gate-noop
+      - noop
 
   - name: stackforge/compass-adapters
     check:
-      - gate-noop
+      - noop
     gate:
-      - gate-noop
+      - noop
 
   - name: stackforge/compass-core
     check:
@@ -3255,9 +3255,9 @@ projects:
 
   - name: stackforge/compass-web
     check:
-      - gate-noop
+      - noop
     gate:
-      - gate-noop
+      - noop
 
   - name: stackforge/congress
     check:
@@ -3433,63 +3433,63 @@ projects:
 
   - name: stackforge/fuel-astute
     check:
-      - gate-noop
+      - noop
     gate:
-      - gate-noop
+      - noop
 
   - name: stackforge/fuel-devops
     check:
-      - gate-noop
+      - noop
     gate:
-      - gate-noop
+      - noop
 
   - name: stackforge/fuel-docs
     check:
-      - gate-noop
+      - noop
     gate:
-      - gate-noop
+      - noop
 
   - name: stackforge/fuel-library
     check:
-      - gate-noop
+      - noop
     gate:
-      - gate-noop
+      - noop
 
   - name: stackforge/fuel-main
     check:
-      - gate-noop
+      - noop
     gate:
-      - gate-noop
+      - noop
 
   - name: stackforge/fuel-ostf
     check:
-      - gate-noop
+      - noop
     gate:
-      - gate-noop
+      - noop
 
   - name: stackforge/fuel-ostf-plugin
     check:
-      - gate-noop
+      - noop
     gate:
-      - gate-noop
+      - noop
 
   - name: stackforge/fuel-provision
     check:
-      - gate-noop
+      - noop
     gate:
-      - gate-noop
+      - noop
 
   - name: stackforge/fuel-web
     check:
-      - gate-noop
+      - noop
     gate:
-      - gate-noop
+      - noop
 
   - name: stackforge/golang-client
     check:
-      - gate-noop
+      - noop
     gate:
-      - gate-noop
+      - noop
 
   - name: stackforge/healthnmon
     check:
@@ -3528,9 +3528,9 @@ projects:
 
   - name: stackforge/kickstack
     check:
-      - gate-noop
+      - noop
     gate:
-      - gate-noop
+      - noop
 
   - name: stackforge/kite
     template:
@@ -3579,9 +3579,9 @@ projects:
 
   - name: stackforge/milk
     check:
-      - gate-noop
+      - noop
     gate:
-      - gate-noop
+      - noop
 
   - name: stackforge/mistral
     check:
@@ -3675,15 +3675,15 @@ projects:
 
   - name: stackforge/MRaaS
     check:
-      - gate-noop
+      - noop
     gate:
-      - gate-noop
+      - noop
 
   - name: stackforge/murano-agent
     check:
-      - gate-noop
+      - noop
     gate:
-      - gate-noop
+      - noop
 
   - name: stackforge/murano-api
     check:
@@ -3764,15 +3764,15 @@ projects:
 
   - name: stackforge/murano-deployment
     check:
-      - gate-noop
+      - noop
     gate:
-      - gate-noop
+      - noop
 
   - name: stackforge/murano-docs
     check:
-      - gate-noop
+      - noop
     gate:
-      - gate-noop
+      - noop
 
   - name: stackforge/murano-metadataclient
     check:
@@ -3822,27 +3822,27 @@ projects:
 
   - name: stackforge/murano-tests
     check:
-      - gate-noop
+      - noop
     gate:
-      - gate-noop
+      - noop
 
   - name: stackforge/novaimagebuilder
     check:
-      - gate-noop
+      - noop
     gate:
-      - gate-noop
+      - noop
 
   - name: stackforge/occi-os
     check:
-      - gate-noop
+      - noop
     gate:
-      - gate-noop
+      - noop
 
   - name: stackforge/opencafe
     check:
-      - gate-noop
+      - noop
     gate:
-      - gate-noop
+      - noop
 
   - name: stackforge/openstack-chef-repo
     check:
@@ -3852,39 +3852,39 @@ projects:
 
   - name: stackforge/openstack-cli-powershell
     check:
-      - gate-noop
+      - noop
     gate:
-      - gate-noop
+      - noop
 
   - name: stackforge/openstack-sdk-dotnet
     check:
-      - gate-noop
+      - noop
     gate:
-      - gate-noop
+      - noop
 
   - name: stackforge/openstack-sdk-php
     check:
-      - gate-noop
+      - noop
     gate:
-      - gate-noop
+      - noop
 
   - name: stackforge/openstackdroid
     check:
-      - gate-noop
+      - noop
     gate:
-      - gate-noop
+      - noop
 
   - name: stackforge/openvz-nova-driver
     check:
-      - gate-noop
+      - noop
     gate:
-      - gate-noop
+      - noop
 
   - name: stackforge/ospurge
     check:
-      - gate-noop
+      - noop
     gate:
-      - gate-noop
+      - noop
 
   - name: stackforge/packstack
     check:
@@ -4144,15 +4144,15 @@ projects:
 
   - name: stackforge/puppet_openstack_builder
     check:
-      - gate-noop
+      - noop
     gate:
-      - gate-noop
+      - noop
 
   - name: stackforge/puppet-openstack_dev_env
     check:
-      - gate-noop
+      - noop
     gate:
-      - gate-noop
+      - noop
 
   - name: stackforge/puppet-sahara
     check:
@@ -4533,9 +4533,9 @@ projects:
 
   - name: stackforge/staccato
     check:
-      - gate-noop
+      - noop
     gate:
-      - gate-noop
+      - noop
 
   - name: stackforge/stackalytics
     check:
@@ -4560,9 +4560,9 @@ projects:
 
   - name: stackforge/swift3
     check:
-      - gate-noop
+      - noop
     gate:
-      - gate-noop
+      - noop
 
   - name: stackforge/swiftsync
     check:

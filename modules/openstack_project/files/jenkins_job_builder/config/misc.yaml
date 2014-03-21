@@ -1,8 +1,4 @@
 - job:
-    name: gate-noop
-    node: bare-precise
-
-- job:
     name: gate-grenade-noop
     node: bare-precise
 
