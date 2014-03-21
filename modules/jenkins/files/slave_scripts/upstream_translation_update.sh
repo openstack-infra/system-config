@@ -13,6 +13,14 @@
 # under the License.
 
 PROJECT=$1
+RESOURCE=${PROJECT}-translations
+PROJECT_DIR=${PROJECT}
+
+if [ $PROJECT = "django_openstack_auth" ] ; then
+    PROJECT=horizon
+    PROJECT_DIR=openstack_auth
+    RESOURCE=djangopo
+fi
 
 if [ ! `echo $ZUUL_REFNAME | grep master` ]
 then
@@ -26,7 +34,7 @@ git config user.email "jenkins@openstack.org"
 if [ ! -d .tx ] ; then
     tx init --host=https://www.transifex.com
 fi
-tx set --auto-local -r ${PROJECT}.${PROJECT}-translations "${PROJECT}/locale/<lang>/LC_MESSAGES/${PROJECT}.po" --source-lang en --source-file ${PROJECT}/locale/${PROJECT}.pot -t PO --execute
+tx set --auto-local -r ${PROJECT}.${RESOURCE} "${PROJECT_DIR}/locale/<lang>/LC_MESSAGES/${PROJECT}.po" --source-lang en --source-file ${PROJECT_DIR}/locale/${PROJECT_DIR}.pot -t PO --execute
 
 # Update the .pot file
 python setup.py extract_messages
