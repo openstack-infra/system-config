@@ -16,11 +16,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-./install_devstack_dependencies.sh
-
-DISTRIB_CODENAME=`lsb_release -sc`
-
 cd /opt/nodepool-scripts/
+./install_devstack_dependencies.sh
+DISTRIB_CODENAME=`lsb_release -sc`
 python ./cache_devstack.py $DISTRIB_CODENAME
 
 sync
