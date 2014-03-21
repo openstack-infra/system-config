@@ -40,10 +40,13 @@ class unbound (
       require => File['/etc/default/unbound'],
     }
 
-    # Make sure resolvconf is enabled (which is the default).
-    exec {'enable-resolvconf':
-      command => '/sbin/resolvconf --enable-updates',
-      creates => '/var/run/resolvconf/enable-updates',
+    # Rackspace uses static config files
+    file { '/etc/resolv.conf':
+      content => "nameserver 127.0.0.1\n",
+      owner   => 'root',
+      group   => 'root',
+      mode    => '0444',
+      require => Service['unbound'],
     }
   }
 
