@@ -93,7 +93,7 @@ for MOD in ${!NONDEP_MODULES[*]} ; do
     then
       # This will get run in cron, so silence non-error output
       puppet module install $MOD --ignore-dependencies --version \
-      ${NONDEP_MODULES[$MOD]} >/dev/null
+      ${NONDEP_MODULES[$MOD]} >/dev/null 2>&1
     fi
   fi
 done
