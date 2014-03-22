@@ -5,7 +5,7 @@ class openstack_project::puppetboard(
   $user    = $::puppetboard::params::user,
   $group   = $::puppetboard::params::group,
   $port    = '80',
-) {
+) inherits ::puppetboard::params {
 
   include apache
 
@@ -36,7 +36,7 @@ class openstack_project::puppetboard(
   #
   apache::vhost { $::fqdn:
     port     => 80,
-    docroot  => 'MEANINGLESS ARGUMENT',
+    docroot  => $docroot,
     priority => '50',
     template => 'openstack_project/puppetboard/puppetboard.vhost.erb',
   }
