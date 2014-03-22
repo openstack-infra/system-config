@@ -5,7 +5,7 @@ class openstack_project::puppetboard(
   $user    = $::puppetboard::params::user,
   $group   = $::puppetboard::params::group,
   $port    = '80',
-) {
+) inherits ::pupppetboard::params {
 
   include apache
 
