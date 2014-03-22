@@ -24,6 +24,7 @@ if [ -f /usr/bin/apt-get ]; then
     sudo apt-get update
 fi
 
+cd /opt/nodepool-scripts/
 ./install_devstack_dependencies.sh
 
 # toci scripts use both of these
