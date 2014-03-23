@@ -1,13 +1,13 @@
-# Site deployment config file: <%= site_name %>
+# Site deployment config file: <%= @site_name %>
 #
 
-site_tarball=<%= site_staging_root %>/<%= site_staging_tarball %>
-db_url=mysql://<%= site_mysql_user %>:<%= site_mysql_password %>@<%= site_mysql_host %>/<%= site_mysql_database %>
-site_admin_password=<%= site_admin_password %>
-site_name=<%= site_name %>
-profile_name=<%= site_profile %>
-dest_dir=<%= site_docroot %>
-flag_file=<%= site_deploy_flagfile %>
+site_tarball=<%= @site_staging_root %>/<%= @site_staging_tarball %>
+db_url=mysql://<%= @site_mysql_user %>:<%= @site_mysql_password %>@<%= @site_mysql_host %>/<%= @site_mysql_database %>
+site_admin_password=<%= @site_admin_password %>
+site_name=<%= @site_name %>
+profile_name=<%= @site_profile %>
+dest_dir=<%= @site_docroot %>
+flag_file=<%= @site_deploy_flagfile %>
 is_clean=true
-base_url=<%= site_base_url %>
-file_owner=<%= site_file_owner %>
+base_url=<%= @site_base_url %>
+file_owner=<%= @site_file_owner %>
