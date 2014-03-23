@@ -17,7 +17,9 @@ ssl_client_verify_header = SSL_CLIENT_VERIFY
 manifestdir=/opt/config/$environment/manifests
 modulepath=/opt/config/$environment/modules:/etc/puppet/modules
 manifest=$manifestdir/site.pp
-reports=store
+reports=store,puppetdb
+storeconfigs = true
+storeconfigs_backend = puppetdb
 
 [agent]
 report=true
