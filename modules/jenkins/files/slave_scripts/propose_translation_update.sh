@@ -40,9 +40,15 @@ EOF
     set -e
 fi
 
+# Track in HAS_CONFIG whether we run "tx init" since calling it will
+# add the file .tx/config - and "tx set" might update it. If "tx set"
+# updates .tx/config, we need to commit the file if it existed before.
+HAS_CONFIG=1
+
 # Initialize the transifex client, if there's no .tx directory
 if [ ! -d .tx ] ; then
     tx init --host=https://www.transifex.com
+    HAS_CONFIG=0
 fi
 tx set --auto-local -r ${PROJECT}.${PROJECT}-translations "${PROJECT}/locale/<lang>/LC_MESSAGES/${PROJECT}.po" --source-lang en --source-file ${PROJECT}/locale/${PROJECT}.pot -t PO --execute
 
@@ -70,6 +76,11 @@ do
       git checkout -- $f
   fi
 done
+
+if [ $HAS_CONFIG -eq 1 ]
+then
+    git add .tx/config
+fi
 
 # Don't send a review if nothing has changed.
 if [ `git diff --cached |wc -l` -gt 0 ]
