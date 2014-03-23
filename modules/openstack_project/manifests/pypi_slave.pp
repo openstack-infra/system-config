@@ -20,7 +20,9 @@ class openstack_project::pypi_slave (
   $jenkins_ssh_public_key,
   $pypi_username = 'openstackci',
   $jenkinsci_username,
-  $jenkinsci_password
+  $jenkinsci_password,
+  $mavencentral_username,
+  $mavencentral_password
 ) {
   class { 'openstack_project::slave':
     ssh_key => $jenkins_ssh_public_key,
