@@ -90,6 +90,6 @@ class openstack_project::eavesdrop (
     nick          => $accessbot_nick,
     password      => $accessbot_password,
     server        => $statusbot_server,
-    channel_file  => 'puppet:///modules/openstack_project/files/accessbot/channels.yaml',
+    channel_file  => 'puppet:///modules/openstack_project/accessbot/channels.yaml',
   }
 }

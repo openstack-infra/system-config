@@ -64,7 +64,7 @@ class accessbot(
 
   file { '/usr/local/bin/accessbot':
     ensure  => present,
-    source  => 'puppet:///modules/accessbot/files/accessbot.py',
+    source  => 'puppet:///modules/accessbot/accessbot.py',
     group   => 'accessbot',
     mode    => '0440',
     owner   => 'root',
