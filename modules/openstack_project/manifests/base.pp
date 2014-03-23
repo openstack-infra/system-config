@@ -49,9 +49,16 @@ class openstack_project::base(
 
   openstack_project::base_install_package{$::openstack_project::params::packages:}
 
-  include pip::python2
+  include pip
+  $desired_virtualenv = '1.10.1'
+
+  if (( versioncmp($::virtualenv_version, $desired_virtualenv) < 0 )) {
+    $virtualenv_ensure = $desired_virtualenv
+  } else {
+    $virtualenv_ensure = present
+  }
   package { 'virtualenv':
-    ensure   => '1.10.1',
+    ensure   => $virtualenv_ensure,
     provider => pip2,
     require  => Class['pip::python2'],
   }
