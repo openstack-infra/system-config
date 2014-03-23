@@ -19,16 +19,8 @@ class openstack_project::base(
     ensure => purged,
   }
 
-  if ($::lsbdistcodename == 'oneiric') {
-    apt::ppa { 'ppa:git-core/ppa': }
-    package { 'git':
-      ensure  => latest,
-      require => Apt::Ppa['ppa:git-core/ppa'],
-    }
-  } else {
-    package { 'git':
-      ensure => present,
-    }
+  package { 'git':
+    ensure => present,
   }
 
   if ($::operatingsystem == 'Fedora') {
