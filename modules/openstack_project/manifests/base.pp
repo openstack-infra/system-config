@@ -16,7 +16,7 @@ class openstack_project::base(
   }
 
   package { 'popularity-contest':
-    ensure => purged,
+    ensure => absent,
   }
 
   if ($::lsbdistcodename == 'oneiric') {
