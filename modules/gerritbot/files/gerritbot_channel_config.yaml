@@ -366,7 +366,9 @@ openstack-barbican:
       - x-vrif-minus-2
     projects:
       - stackforge/barbican
+      - stackforge/kite
       - stackforge/python-barbicanclient
+      - stackforge/python-kiteclient
     branches:
       - master
 
