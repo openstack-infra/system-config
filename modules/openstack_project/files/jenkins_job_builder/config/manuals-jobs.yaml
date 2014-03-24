@@ -181,6 +181,7 @@
       - timestamps
 
     builders:
+      - revoke-sudo
       - gerrit-git-prep
       - tox:
           envlist: '{envlist}'

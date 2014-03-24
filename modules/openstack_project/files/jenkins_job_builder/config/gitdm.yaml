@@ -4,9 +4,9 @@
     node: '{node}'
 
     builders:
+      - revoke-sudo
       - link-logs
       - net-info
-      - revoke-sudo
       - gerrit-git-prep
       - shell: |
           #!/bin/bash -xe

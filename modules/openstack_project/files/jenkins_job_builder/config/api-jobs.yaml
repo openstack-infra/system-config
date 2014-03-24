@@ -8,6 +8,7 @@
       - timestamps
 
     builders:
+      - revoke-sudo
       - gerrit-git-prep
       - tox:
           envlist: '{envlist}'
@@ -27,6 +28,7 @@
     node: bare-precise
 
     builders:
+      - revoke-sudo
       - gerrit-git-prep
       - tox:
           envlist: 'publishdocs-api'
@@ -50,6 +52,7 @@
     node: bare-precise
 
     builders:
+      - revoke-sudo
       - gerrit-git-prep
 
     publishers:
@@ -67,6 +70,7 @@
     node: bare-precise
 
     builders:
+      - revoke-sudo
       - gerrit-git-prep
       - shell: /usr/local/jenkins/slave_scripts/run-xmllint.sh openstack-compute-api-2/src/os-compute-2.wadl
 

@@ -2,6 +2,7 @@
     name: '{name}-upstream-translation-update'
 
     builders:
+      - revoke-sudo
       - gerrit-git-prep
       - shell: |
           #!/bin/bash -xe
@@ -16,6 +17,7 @@
     name: '{name}-propose-translation-update'
 
     builders:
+      - revoke-sudo
       - shell: |
           #!/bin/bash -xe
           /usr/local/jenkins/slave_scripts/propose_translation_update.sh {github-org} {name}
@@ -35,6 +37,7 @@
     name: 'horizon-upstream-translation-update'
 
     builders:
+      - revoke-sudo
       - gerrit-git-prep
       - shell: |
           #!/bin/bash -xe
@@ -49,6 +52,7 @@
     name: '{name}-manuals-upstream-translation-update'
 
     builders:
+      - revoke-sudo
       - gerrit-git-prep
       - shell: |
           #!/bin/bash -xe
@@ -63,6 +67,7 @@
     name: '{name}-manuals-propose-translation-update'
 
     builders:
+      - revoke-sudo
       - shell: |
           #!/bin/bash -xe
           /usr/local/jenkins/slave_scripts/propose_translation_update_manuals.sh {name}

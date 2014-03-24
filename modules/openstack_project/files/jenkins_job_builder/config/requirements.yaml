@@ -37,6 +37,7 @@
     node: proposal
 
     builders:
+      - revoke-sudo
       - link-logs
       - net-info
       - gerrit-git-prep

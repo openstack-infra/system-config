@@ -4,6 +4,7 @@
     node: bare-precise
 
     builders:
+      - revoke-sudo
       - gerrit-git-prep
       - docs:
           github-org: openstack-infra

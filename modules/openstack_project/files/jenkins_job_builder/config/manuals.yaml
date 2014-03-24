@@ -4,6 +4,7 @@
     node: bare-precise
 
     builders:
+      - revoke-sudo
       - gerrit-git-prep
       - shell: "./tools/validate.py"
 
@@ -16,6 +17,7 @@
     node: bare-precise
 
     builders:
+      - revoke-sudo
       - gerrit-git-prep
 
     publishers:
@@ -44,6 +46,7 @@
           properties-file: gerrit-doc.properties
 
     prebuilders:
+      - revoke-sudo
       - gerrit-git-prep
       - shell: |
           asciidoc -b docbook -d book -o - doc/high-availability-guide/ha-guide.txt |  xsltproc -o - /usr/share/xml/docbook/stylesheet/docbook5/db4-upgrade.xsl - | xmllint  --format - | sed -e 's,<book,<book xml:id="bk-ha-guide",' | sed -e 's,<info,<?rax pdf.url="../openstack-ha-guide-trunk.pdf"?><info,' > doc/high-availability-guide/bk-ha-guide.xml
@@ -81,6 +84,7 @@
           properties-file: gerrit-doc.properties
 
     prebuilders:
+      - revoke-sudo
       - gerrit-git-prep
 
     maven:
@@ -116,6 +120,7 @@
           properties-file: gerrit-doc.properties
 
     builders:
+      - revoke-sudo
       - gerrit-git-prep
       - shell: |
           #!/bin/bash -xe
