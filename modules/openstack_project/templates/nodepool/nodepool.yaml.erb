@@ -344,6 +344,34 @@ providers:
         setup: prepare_node_tripleo.sh
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
+  - name: tripleo-test-cloud-rh1
+    service-type: 'compute'
+    service-name: 'nova'
+    username: '<%= tripleo_username %>'
+    password: '<%= tripleo_password %>'
+    project-id: '<%= tripleo_project %>'
+    auth-url: 'https://ci-overcloud.rh1.tripleo.org:13000/v2.0'
+    boot-timeout: 120
+    max-servers: 20
+    rate: 0.001
+    networks:
+      - net-id: 505a106c-7d65-44a7-b3e7-99bb49d2ebab
+      - net-id: deedbc59-a076-4d9c-94a8-21fc5a7b8e0b
+    images:
+      - name: tripleo-precise
+        base-image: 'Ubuntu Precise 12.04 LTS Server 64-bit'
+        min-ram: 16384
+        name-filter: h1
+        setup: prepare_node_tripleo.sh
+        username: jenkins
+        private-key: /home/nodepool/.ssh/id_rsa
+      - name: tripleo-f20
+        base-image: 'Fedora 20 64-bit'
+        min-ram: 16384
+        name-filter: h1
+        setup: prepare_node_tripleo.sh
+        username: jenkins
+        private-key: /home/nodepool/.ssh/id_rsa
 
 
 targets:
@@ -399,10 +427,12 @@ targets:
         min-ready: 5
         providers:
           - name: tripleo-test-cloud
+          - name: tripleo-test-cloud-rh1
       - name: tripleo-f20
         min-ready: 1
         providers:
           - name: tripleo-test-cloud
+          - name: tripleo-test-cloud-rh1
   - name: jenkins02
     jenkins:
       url: 'https://jenkins02.openstack.org/'
@@ -455,10 +485,12 @@ targets:
         min-ready: 5
         providers:
           - name: tripleo-test-cloud
+          - name: tripleo-test-cloud-rh1
       - name: tripleo-f20
         min-ready: 1
         providers:
           - name: tripleo-test-cloud
+          - name: tripleo-test-cloud-rh1
   - name: jenkins03
     jenkins:
       url: 'https://jenkins03.openstack.org/'
@@ -511,10 +543,12 @@ targets:
         min-ready: 5
         providers:
           - name: tripleo-test-cloud
+          - name: tripleo-test-cloud-rh1
       - name: tripleo-f20
         min-ready: 1
         providers:
           - name: tripleo-test-cloud
+          - name: tripleo-test-cloud-rh1
   - name: jenkins04
     jenkins:
       url: 'https://jenkins04.openstack.org/'
@@ -567,10 +601,12 @@ targets:
         min-ready: 5
         providers:
           - name: tripleo-test-cloud
+          - name: tripleo-test-cloud-rh1
       - name: tripleo-f20
         min-ready: 1
         providers:
           - name: tripleo-test-cloud
+          - name: tripleo-test-cloud-rh1
   - name: jenkins05
     jenkins:
       url: 'https://jenkins05.openstack.org/'
@@ -623,10 +659,12 @@ targets:
         min-ready: 5
         providers:
           - name: tripleo-test-cloud
+          - name: tripleo-test-cloud-rh1
       - name: tripleo-f20
         min-ready: 1
         providers:
           - name: tripleo-test-cloud
+          - name: tripleo-test-cloud-rh1
   - name: jenkins06
     jenkins:
       url: 'https://jenkins06.openstack.org/'
@@ -679,10 +717,12 @@ targets:
         min-ready: 5
         providers:
           - name: tripleo-test-cloud
+          - name: tripleo-test-cloud-rh1
       - name: tripleo-f20
         min-ready: 1
         providers:
           - name: tripleo-test-cloud
+          - name: tripleo-test-cloud-rh1
   - name: jenkins07
     jenkins:
       url: 'https://jenkins07.openstack.org/'
@@ -739,7 +779,9 @@ targets:
         min-ready: 5
         providers:
           - name: tripleo-test-cloud
+          - name: tripleo-test-cloud-rh1
       - name: tripleo-f20
         min-ready: 1
         providers:
           - name: tripleo-test-cloud
+          - name: tripleo-test-cloud-rh1
