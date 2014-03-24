@@ -572,10 +572,6 @@ jobs:
     voting: false
   - name: gate-murano-devstack-dsvm
     voting: false
-  - name: check-oslo.test-dsvm-oslo.config
-    voting: false
-  - name: check-oslo.test-dsvm-oslo.messaging
-    voting: false
   - name: gate-oslo.vmware-docs
     voting: false
   - name: gate-oslo.vmware-requirements
