@@ -55,6 +55,11 @@ then
     git remote update
 fi
 
+if echo "$ZUUL_REF" | grep -q ^refs/tags/
+then
+    git fetch --tags $ZUUL_URL/$ZUUL_PROJECT $ZUUL_REF
+fi
+
 git reset --hard
 if ! git clean -x -f -d -q ; then
     sleep 1
