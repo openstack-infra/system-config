@@ -61,22 +61,24 @@ if ! git clean -x -f -d -q ; then
     git clean -x -f -d -q
 fi
 
-if [ -z "$ZUUL_NEWREV" ]
+if echo "$ZUUL_REF" | grep -q ^refs/tags/
+then
+    git fetch --tags $ZUUL_URL/$ZUUL_PROJECT $ZUUL_REF
+    git checkout $ZUUL_REF
+    git reset --hard $ZUUL_REF
+elif [ -z "$ZUUL_NEWREV" ]
 then
     git fetch $ZUUL_URL/$ZUUL_PROJECT $ZUUL_REF
     git checkout FETCH_HEAD
     git reset --hard FETCH_HEAD
-    if ! git clean -x -f -d -q ; then
-        sleep 1
-        git clean -x -f -d -q
-    fi
 else
     git checkout $ZUUL_NEWREV
     git reset --hard $ZUUL_NEWREV
-    if ! git clean -x -f -d -q ; then
-        sleep 1
-        git clean -x -f -d -q
-    fi
+fi
+
+if ! git clean -x -f -d -q ; then
+    sleep 1
+    git clean -x -f -d -q
 fi
 
 if [ -f .gitmodules ]
