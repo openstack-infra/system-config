@@ -235,6 +235,8 @@
     - direct-release
 - project: openstack/neutron
   docimpact-group: openstack-manuals
+- project: openstack/neutron-specs
+  group: neutron
 - project: openstack/nova
   docimpact-group: openstack-manuals
 - project: openstack/nova-specs
