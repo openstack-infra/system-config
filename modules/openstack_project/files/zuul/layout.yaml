@@ -2850,14 +2850,8 @@ projects:
       - noop
 
   - name: openstack-infra/nodepool
-    check:
-      - gate-nodepool-pep8
-    gate:
-      - gate-nodepool-pep8
-    post:
-      - nodepool-branch-tarball
-    pre-release:
-      - nodepool-tarball
+    template:
+      - name: python-jobs
     release:
       - nodepool-tarball:
         - nodepool-pypi-upload:
