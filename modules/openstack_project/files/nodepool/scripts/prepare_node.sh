@@ -65,7 +65,14 @@ if [ -x /sbin/restorecon ] ; then
 fi
 
 sudo bash -c "echo 'include: /etc/unbound/forwarding.conf' >> /etc/unbound/unbound.conf"
-sudo /etc/init.d/unbound restart
+if [ -e /etc/init.d/unbound ] ; then
+    sudo /etc/init.d/unbound restart
+elif [ -e /usr/lib/systemd/system/unbound.service ] ; then
+    sudo systemctl restart unbound
+else
+    echo "Can't discover a method to restart \"unbound\""
+    exit 1
+fi
 
 # Make sure DNS works.
 dig git.openstack.org
