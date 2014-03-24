@@ -57,6 +57,39 @@ learn [:_nl:] <osb unique microgroom> (:*:prefix:/FAILURE.css)
                 match (:timestamp:) /^[-.0-9 |:]+/
                 alter (:timestamp:) //
             }
+            {
+                # Don't treat UUIDs as uniquely special.
+                match (:uuidtoken:) /[[:xdigit:]]{8}-[[:xdigit:]]{4}-[[:xdigit:]]{4}-[[:xdigit:]]{4}-[[:xdigit:]]{12}/
+                alter (:uuidtoken:) /UUIDTOKEN/
+                {
+                    match (:uuidtoken:) <fromnext> /[[:xdigit:]]{8}-[[:xdigit:]]{4}-[[:xdigit:]]{4}-[[:xdigit:]]{4}-[[:xdigit:]]{12}/
+                    alter (:uuidtoken:) /UUIDTOKEN/
+                    # Loop to replace all TOKENS in line
+                    liaf
+                }
+            }
+            {
+                # Don't treat IDs as uniquely special.
+                match (:idtoken:) /[[:xdigit:]]{32,40}/
+                alter (:idtoken:) /IDTOKEN/
+                {
+                    match (:idtoken:) <fromnext> /[[:xdigit:]]{32,40}/
+                    alter (:idtoken:) /IDTOKEN/
+                    # Loop to replace all TOKENS in line
+                    liaf
+                }
+            }
+            {
+                # Don't treat IDs as uniquely special.
+                match (:numtoken:) /-[[:digit:]]{7,}/
+                alter (:numtoken:) /-NUMTOKEN/
+                {
+                    match (:numtoken:) <fromnext> /-[[:digit:]]{7,}/
+                    alter (:numtoken:) /-NUMTOKEN/
+                    # Loop to replace all TOKENS in line
+                    liaf
+                }
+            }
             # Train on the line
             learn <osb unique microgroom> (:*:prefix:/:*:target:.css)
             # Classify the line to see if it looks more like a SUCCESS or FAILURE line
