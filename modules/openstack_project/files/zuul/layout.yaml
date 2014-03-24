@@ -619,6 +619,8 @@ jobs:
     voting: false
   - name: gate-tomograph-python33
     voting: false
+  - name: ^check-rally-install-.*$
+    voting: false
 
 # The project list is grouped by type of project, and within each
 # group, projects are sorted (mostly) alphabetically.
@@ -4423,6 +4425,8 @@ projects:
       - gate-rally-pep8
       - gate-rally-python26
       - gate-rally-python27
+      - check-rally-install-bare-centos6
+      - check-rally-install-bare-precise
     gate:
       - gate-rally-pep8
       - gate-rally-python26
