@@ -48,6 +48,14 @@ class unbound (
       mode    => '0444',
       require => Service['unbound'],
     }
+
+    # Tripleo uses dhcp
+    file { '/etc/dhcp/dhclient.conf':
+      source  => 'puppet:///modules/unbound/dhclient.conf.debian',
+      owner   => 'root',
+      group   => 'root',
+      mode    => '0444',
+    }
   }
 
   # Ubuntu uses resolvconf which will update resolv.conf to point to
