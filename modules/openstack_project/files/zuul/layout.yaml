@@ -2445,6 +2445,7 @@ projects:
       - check-tempest-dsvm-cells-full
       - check-grenade-dsvm-forward
       - check-grenade-dsvm-partial-ncpu
+      - check-neutron-dsvm-functional
       - check-swift-dsvm-functional
       - check-tempest-dsvm-ironic-nv
       - check-tempest-dsvm-ironic-postgres-nv
