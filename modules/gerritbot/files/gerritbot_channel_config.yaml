@@ -156,6 +156,7 @@ openstack-neutron:
       - x-vrif-minus-2
     projects:
       - openstack/neutron
+      - openstack/neutron-specs
       - openstack/python-neutronclient
     branches:
       - master
