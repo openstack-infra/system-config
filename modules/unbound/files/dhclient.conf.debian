@@ -1,0 +1,9 @@
+option rfc3442-classless-static-routes code 121 = array of unsigned integer 8;
+send host-name "<hostname>";
+request subnet-mask, broadcast-address, time-offset, routers,
+	domain-name, domain-name-servers, domain-search, host-name,
+	netbios-name-servers, netbios-scope, interface-mtu,
+	rfc3442-classless-static-routes, ntp-servers,
+	dhcp6.domain-search, dhcp6.fqdn,
+	dhcp6.name-servers, dhcp6.sntp-servers;
+supersede domain-name-servers 127.0.0.1;
