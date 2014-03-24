@@ -65,7 +65,7 @@ if [ -x /sbin/restorecon ] ; then
 fi
 
 sudo bash -c "echo 'include: /etc/unbound/forwarding.conf' >> /etc/unbound/unbound.conf"
-sudo /etc/init.d/unbound restart
+sudo /etc/init.d/unbound restart || sudo systemctl restart unbound
 
 # Make sure DNS works.
 dig git.openstack.org
