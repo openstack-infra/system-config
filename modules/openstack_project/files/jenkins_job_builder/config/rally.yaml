@@ -1,0 +1,11 @@
+- job-template:
+    name: 'check-rally-install-{node}'
+    node: '{node}'
+
+    builders:
+        - gerrit-git-prep
+        - link-logs
+        - shell: "tests_ci/test_install.sh"
+
+    publishers:
+        - console-log
