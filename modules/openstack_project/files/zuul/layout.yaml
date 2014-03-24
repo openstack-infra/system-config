@@ -572,10 +572,6 @@ jobs:
     voting: false
   - name: gate-murano-devstack-dsvm
     voting: false
-  - name: check-oslo.test-dsvm-oslo.config
-    voting: false
-  - name: check-oslo.test-dsvm-oslo.messaging
-    voting: false
   - name: gate-oslo.vmware-docs
     voting: false
   - name: gate-oslo.vmware-requirements
@@ -1882,6 +1878,7 @@ projects:
     gate:
       - gate-oslo.config-python33
       - gate-devstack-dsvm-cells
+      - gate-oslo.test-dsvm-oslo.config
     pre-release:
       - oslo.config-tarball
     experimental-tripleo:
@@ -1912,6 +1909,7 @@ projects:
       - gate-devstack-dsvm-cells
       - gate-tempest-dsvm-large-ops
       - gate-tempest-dsvm-neutron-large-ops
+      - gate-oslo.test-dsvm-oslo.messaging
     experimental-tripleo:
       - check-tripleo-seed-precise
       - check-tripleo-ironic-seed-precise
@@ -1978,6 +1976,8 @@ projects:
     gate:
       - gate-oslo.test-python33
       - gate-oslo.test-pypy
+      - gate-oslo.test-dsvm-oslo.config
+      - gate-oslo.test-dsvm-oslo.messaging
     pre-release:
       - oslo.test-tarball
     release:
