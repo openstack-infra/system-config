@@ -58,7 +58,6 @@ class openstack_project::eavesdrop (
         '#openstack-sdks',
         '#openstack-swift',
         '#openstack-trove',
-        '#savanna',
         '#storyboard',
         '#tripleo',
     ],
