@@ -20,6 +20,8 @@ class openstack_project::storyboard(
     mysql_user              => $mysql_user,
     projects_file           =>
       'puppet:///modules/openstack_project/review.projects.yaml',
+    superusers_file         =>
+      'puppet:///modules/openstack_project/storyboard/superusers.yaml',
     ssl_cert_file           =>
       '/etc/ssl/certs/storyboard.openstack.org.pem',
     ssl_key_file            =>

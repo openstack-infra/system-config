@@ -20,6 +20,7 @@ class storyboard (
   $mysql_password,
   $mysql_user,
   $projects_file,
+  $superusers_file,
   $ssl_cert_file,
   $ssl_key_file,
   $ssl_chain_file,
@@ -100,6 +101,18 @@ class storyboard (
     ],
   }
 
+  file { '/etc/storyboard/superusers.yaml':
+    ensure  => present,
+    owner   => 'storyboard',
+    mode    => '0400',
+    source  => $superusers_file,
+    replace => true,
+    require => [
+      File['/etc/storyboard'],
+      User['storyboard'],
+    ],
+  }
+
   exec { 'migrate-storyboard-db':
     command     => 'storyboard-db-manage --config-file /etc/storyboard/storyboard.conf upgrade head',
     path        => '/usr/local/bin:/usr/bin:/bin/',
@@ -117,6 +130,17 @@ class storyboard (
     subscribe   => File['/etc/storyboard/projects.yaml'],
     require     => [
       File['/etc/storyboard/projects.yaml'],
+      Exec['migrate-storyboard-db'],
+    ],
+  }
+
+  exec { 'load-superusers-yaml':
+    command     => 'storyboard-db-manage --config-file /etc/storyboard/storyboard.conf load_superusers /etc/storyboard/superusers.yaml',
+    path        => '/usr/local/bin:/usr/bin:/bin/',
+    refreshonly => true,
+    subscribe   => File['/etc/storyboard/superusers.yaml'],
+    require     => [
+      File['/etc/storyboard/superusers.yaml'],
       Exec['migrate-storyboard-db'],
     ],
   }
