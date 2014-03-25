@@ -167,6 +167,15 @@ class jenkins::slave(
   }
 
   if ($bare == false) {
+    # pin to a release of rake which works with ruby 1.8.x
+    # before PSH tries to pull in a newer one which isn't
+    package { 'rake':
+      ensure   => '10.1.1',
+      provider => gem,
+      before   => Package['puppetlabs_spec_helper'],
+      require  => Package['rubygems'],
+    }
+
     $gem_packages = [
       'bundler',
       'puppet-lint',
