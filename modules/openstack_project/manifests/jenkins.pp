@@ -84,10 +84,9 @@ class openstack_project::jenkins (
   jenkins::plugin { 'postbuild-task':
     version => '1.8',
   }
-#  TODO(clarkb): release
-#  jenkins::plugin { 'zmq-event-publisher':
-#    version => '1.0',
-#  }
+  jenkins::plugin { 'zmq-event-publisher':
+    version => '0.0.3',
+  }
   jenkins::plugin { 'jclouds-jenkins':
     version => '2.3.1',
   }
