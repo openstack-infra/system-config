@@ -22,7 +22,11 @@
     builders:
       - revoke-sudo
       - gerrit-git-prep
-      - puppet-lint
+      - shell: |
+          mkdir .bundled_gems
+          export GEM_HOME=`pwd`/.bundled_gems
+          bundle install
+          bundle exec rake lint SPEC_OPTS='--format documentation'
 
     publishers:
       - console-log
