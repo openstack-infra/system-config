@@ -310,10 +310,10 @@ $("#graph-container").append($(new Image()).addClass('graph').graphite({
     fgcolor: '000000',
     areaMode: 'stacked',
     target: [
-        "color(alias(sumSeries(stats.gauges.nodepool.target.*.*.*.building), 'Building'), 'ffbf52')",
-        "color(alias(sumSeries(stats.gauges.nodepool.target.*.*.*.ready), 'Available'), '00c868')",
-        "color(alias(sumSeries(stats.gauges.nodepool.target.*.*.*.used), 'In Use'), '6464ff')",
-        "color(alias(sumSeries(stats.gauges.nodepool.target.*.*.*.delete), 'Deleting'), 'c864ff')",
+        "color(alias(sumSeries(stats.gauges.nodepool.target.building), 'Building'), 'ffbf52')",
+        "color(alias(sumSeries(stats.gauges.nodepool.target.ready), 'Available'), '00c868')",
+        "color(alias(sumSeries(stats.gauges.nodepool.target.used), 'In Use'), '6464ff')",
+        "color(alias(sumSeries(stats.gauges.nodepool.target.delete), 'Deleting'), 'c864ff')",
     ],
     title: "Test Nodes"
 }));
