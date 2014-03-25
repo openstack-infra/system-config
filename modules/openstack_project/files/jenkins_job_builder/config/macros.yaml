@@ -85,7 +85,14 @@
               cd "$MODULE"
             fi
           fi
-          rake lint 2>&1
+          if [ -f Gemfile ]; then
+            mkdir .bundled_gems
+            export GEM_HOME=`pwd`/.bundled_gems
+            bundle install
+            bundle exec rake lint 2>&1
+          else
+            rake lint 2>&1
+          fi
 
 - builder:
     name: puppet-syntax
