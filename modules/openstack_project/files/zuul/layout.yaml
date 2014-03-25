@@ -2733,9 +2733,9 @@ projects:
 
   - name: openstack-infra/gerrit-powered-agenda
     check:
-      - noop
+      - gate-gerrit-powered-agenda-pep8
     gate:
-      - noop
+      - gate-gerrit-powered-agenda-pep8
 
   - name: openstack-infra/gerritbot
     check:
