@@ -394,6 +394,14 @@
     jobs:
       - python-jobs
 
+- project:
+    name: gerrit-powered-agenda
+    github-org: openstack-infra
+    node: bare-precise
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - python-jobs
 
 - project:
     name: gerritbot
