@@ -167,3 +167,12 @@ index 4d301c9..0364a0d 100644
 EOF
 echo $diff | patch -p1
 
+function delete_project {
+    rm -rf  ~gerrit2/review_site/git/stackforge/contrail-controller.git  /var/lib/jeepyb/stackforge/contrail-controller
+
+    # Run this as gerrit2
+    manage-projects -d
+    service gerrit restart
+    manage-projects -d
+}
+
