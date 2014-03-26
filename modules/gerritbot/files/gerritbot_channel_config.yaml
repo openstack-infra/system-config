@@ -7,6 +7,7 @@ openstack-infra:
       - openstack-dev/cookiecutter
       - openstack-dev/hacking
       - openstack-dev/pbr
+      - openstack-dev/specs-cookiecutter
       - openstack-infra/askbot-theme
       - openstack-infra/bugdaystats
       - openstack-infra/config
@@ -613,6 +614,7 @@ openstack-merges:
       - openstack-dev/hacking
       - openstack-dev/pbr
       - openstack-dev/openstack-nose
+      - openstack-dev/specs-cookiecutter
       - openstack-infra/activity-board
       - openstack-infra/askbot-theme
       - openstack-infra/config
