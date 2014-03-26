@@ -842,15 +842,15 @@ projects:
     check:
       - check-neutron-dsvm-functional
       - check-tempest-dsvm-neutron-full
-      - check-tempest-dsvm-neutron
+      - check-tempest-dsvm-neutron-2
       - check-tempest-dsvm-neutron-pg
-      - check-tempest-dsvm-neutron-pg
+      - check-tempest-dsvm-neutron-pg-2
       - gate-tempest-dsvm-neutron-large-ops
       - check-grenade-dsvm-neutron
     gate:
-      - gate-tempest-dsvm-neutron
+      - gate-tempest-dsvm-neutron-2
       - gate-tempest-dsvm-neutron-pg
-      - gate-tempest-dsvm-neutron-pg
+      - gate-tempest-dsvm-neutron-pg-2
       - gate-tempest-dsvm-neutron-large-ops
     experimental:
       - check-neutron-dsvm-api

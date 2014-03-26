@@ -1207,10 +1207,10 @@
     jobs:
       - '{pipeline}-tempest-dsvm-full{branch-designator}'
       - '{pipeline}-tempest-dsvm-neutron{branch-designator}'
+      - '{pipeline}-tempest-dsvm-neutron-2{branch-designator}'
       - '{pipeline}-tempest-dsvm-neutron-pg{branch-designator}'
-      - '{pipeline}-tempest-dsvm-neutron-isolated{branch-designator}'
+      - '{pipeline}-tempest-dsvm-neutron-pg-2{branch-designator}'
       - '{pipeline}-tempest-dsvm-neutron-isolated-parallel{branch-designator}'
-      - '{pipeline}-tempest-dsvm-neutron-pg-isolated{branch-designator}'
       - '{pipeline}-tempest-dsvm-neutron-full{branch-designator}'
       - '{pipeline}-devstack-dsvm-cells{branch-designator}'
       - '{pipeline}-tempest-dsvm-cells{branch-designator}'
