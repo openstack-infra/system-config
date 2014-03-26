@@ -144,20 +144,20 @@ class opencontrail_project::review (
         replicatePermissions => false,
         mirror               => true,
       },
-      {
-        name                 => 'local',
-        url                  => 'file:///var/lib/git/',
-        replicationDelay     => '0',
-        threads              => '4',
-        mirror               => true,
-      },
-      {
-        name                 => 'git01',
-        url                  => 'cgit@git01.opencontrail.org:/var/lib/git/',
-        replicationDelay     => '0',
-        threads              => '4',
-        mirror               => true,
-      },
+#     {
+#       name                 => 'local',
+#       url                  => 'file:///var/lib/git/',
+#       replicationDelay     => '0',
+#       threads              => '4',
+#       mirror               => true,
+#     },
+#     {
+#       name                 => 'git01',
+#       url                  => 'cgit@git01.opencontrail.org:/var/lib/git/',
+#       replicationDelay     => '0',
+#       threads              => '4',
+#       mirror               => true,
+#     },
     ],
   }
 
