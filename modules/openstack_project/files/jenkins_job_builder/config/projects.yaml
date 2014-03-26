@@ -2210,6 +2210,15 @@
       - python-jobs
 
 - project:
+    name: swift3
+    github-org: stackforge
+    node: bare-precise
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - python-jobs
+
+- project:
     name: swiftsync
     github-org: stackforge
     node: bare-precise
