@@ -612,6 +612,8 @@ jobs:
     voting: false
   - name: check-neutron-dsvm-functional
     voting: false
+  - name: check-neutron-dsvm-api
+    voting: false
 # puppet-openstack targets
   - name: gate-puppet-vswitch-puppet-lint
     voting: false
@@ -928,6 +930,7 @@ projects:
       - gate-tempest-dsvm-neutron-pg
       - gate-tempest-dsvm-neutron-large-ops
     experimental:
+      - check-neutron-dsvm-api
       - gate-grenade-dsvm-neutron-forward
       - neutron-upstream-translation-update
       - experimental-tempest-dsvm-neutron

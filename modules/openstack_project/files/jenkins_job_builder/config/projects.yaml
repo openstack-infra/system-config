@@ -1013,6 +1013,11 @@
           node: 'devstack-precise || devstack-precise-check'
           branch-designator: ''
           branch-override: default
+      - '{pipeline}-neutron-dsvm-api{branch-designator}':
+          pipeline: check
+          node: 'devstack-precise || devstack-precise-check'
+          branch-designator: ''
+          branch-override: default
 
 
 - project:
