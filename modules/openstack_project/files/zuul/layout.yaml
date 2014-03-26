@@ -4562,9 +4562,17 @@ projects:
 
   - name: stackforge/swift3
     check:
-      - noop
+      - gate-swift3-docs
+      - gate-swift3-pep8
+      - gate-swift3-python26
+      - gate-swift3-python27
     gate:
-      - noop
+      - gate-swift3-docs
+      - gate-swift3-pep8
+      - gate-swift3-python26
+      - gate-swift3-python27
+    post:
+      - swift3-coverage
 
   - name: stackforge/swiftsync
     check:
