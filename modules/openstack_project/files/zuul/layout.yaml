@@ -4561,6 +4561,8 @@ projects:
       - hook-stackalytics-rtfd
 
   - name: stackforge/swift3
+    template:
+      - name: python-jobs
     check:
       - noop
     gate:
