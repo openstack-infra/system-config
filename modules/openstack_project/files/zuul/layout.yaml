@@ -317,6 +317,8 @@ jobs:
     branch: ^(?!stable/grizzly).*$
   - name: ^(gate|check)-tempest-dsvm-neutron-pg$
     branch: ^(?!stable/grizzly).*$
+  - name: ^(gate|check)-tempest-dsvm-neutron-pg-2$
+    branch: ^(?!stable/grizzly).*$
   - name: ^(gate|check)-tempest-dsvm-neutron-full$
     branch: ^(?!stable/grizzly).*$
     voting: false
@@ -918,14 +920,16 @@ projects:
       - check-neutron-dsvm-functional
       - check-tempest-dsvm-neutron-full
       - check-tempest-dsvm-neutron
+      - check-tempest-dsvm-neutron-2
       - check-tempest-dsvm-neutron-pg
-      - check-tempest-dsvm-neutron-pg
+      - check-tempest-dsvm-neutron-pg-2
       - gate-tempest-dsvm-neutron-large-ops
       - check-grenade-dsvm-neutron
     gate:
       - gate-tempest-dsvm-neutron
+      - gate-tempest-dsvm-neutron-2
       - gate-tempest-dsvm-neutron-pg
-      - gate-tempest-dsvm-neutron-pg
+      - gate-tempest-dsvm-neutron-pg-2
       - gate-tempest-dsvm-neutron-large-ops
     experimental:
       - gate-grenade-dsvm-neutron-forward
