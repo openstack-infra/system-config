@@ -9,7 +9,9 @@ function set_date {
 }
 
 function puppet_install {
-  apt-get -y install git python-pip
+  apt-get -y install git python-pip ruby
+
+  # Upgrade pip to be 1.4+
   pip install -U pip
 
   # Setup time
@@ -19,17 +21,17 @@ function puppet_install {
   puppet agent --test
 }
 
-function reset_project() {
+function reset_project {
   PROJECT=$1
   rm -rf ~gerrit2/review_site/git/stackforge/$PROJECT.git /var/lib/jeepyb/stackforge/$PROJECT
   service gerrit restart
   manage-projects -dv
 }
 
-function ls_projects() {
-    ssh -qp 29418 review.opencontrail.org gerrit ls-projects
+function ls_projects {
+  ssh -qp 29418 review.opencontrail.org gerrit ls-projects
 }
 
-function ls_groups() {
-    ssh -qp 29418 review.opencontrail.org gerrit ls-groups
+function ls_groups {
+  ssh -qp 29418 review.opencontrail.org gerrit ls-groups
 }

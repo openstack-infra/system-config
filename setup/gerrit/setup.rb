@@ -5,8 +5,11 @@
 # Setup opencontrail-admin user by logging onto web interface
 # Setup user as opencontrail-admin
 # https://review.opencontrail.org/#/admin/projects/All-Projects,access
-# add 'PUSH' to Administrators
-# save settings
+# add 'PUSH' to Administrators and save settings
+
+# Run this as 
+#   sudo su -
+#   setup.rb
 
 ADMIN_EMAIL="anantha@juniper.net"
 ADMIN_NAME="Ananth Suryanarayana"
