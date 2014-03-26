@@ -59,7 +59,6 @@ class asterisk (
     'asterisk-sounds-core-en-g722',
     'asterisk-sounds-core-en-ulaw',
     'asterisk-sounds-core-en-gsm',
-    'asterisk-sounds-extra-en-g722',
     'asterisk-sounds-extra-en-ulaw',
     'asterisk-sounds-extra-en-gsm',
     'asterisk-sounds-moh-opsound-wav',
