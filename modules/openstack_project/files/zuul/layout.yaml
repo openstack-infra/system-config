@@ -271,12 +271,6 @@ project-templates:
     gate:
       - 'gate-{name}-requirements'
 
-  - name: periodic-grizzly
-    periodic-stable:
-      - 'periodic-{name}-docs-grizzly'
-      - 'periodic-{name}-python26-grizzly'
-      - 'periodic-{name}-python27-grizzly'
-
   - name: periodic-havana
     periodic-stable:
       - 'periodic-{name}-docs-havana'
@@ -337,9 +331,9 @@ jobs:
   - name: ^(gate|check)-tempest-dsvm-cells-full$
     voting: false
   - name: ^(gate|check)-grenade-dsvm$
-    branch: ^(?!stable/grizzly).*$
+    branch: ^(?!stable/(grizzly|havana)).*$
   - name: ^(gate|check)-grenade-dsvm-neutron$
-    branch: ^(?!stable/grizzly).*$
+    branch: ^(?!stable/(grizzly|havana)).*$
     voting: false
   - name: ^(gate|check)-grenade-dsvm-partial-ncpu$
     branch: ^(?!stable/(grizzly|havana)).*$
@@ -634,7 +628,6 @@ projects:
     template:
       - name: python-jobs
       - name: openstack-server-publish-jobs
-      - name: periodic-grizzly
       - name: periodic-havana
       - name: check-requirements
     check:
@@ -663,7 +656,6 @@ projects:
     template:
       - name: python-jobs
       - name: openstack-server-publish-jobs
-      - name: periodic-grizzly
       - name: periodic-havana
       - name: check-requirements
       - name: integrated-gate
@@ -737,7 +729,6 @@ projects:
     template:
       - name: python-jobs
       - name: openstack-server-publish-jobs
-      - name: periodic-grizzly
       - name: periodic-havana
       - name: check-requirements
       - name: integrated-gate
@@ -771,7 +762,6 @@ projects:
     template:
       - name: python-jobs
       - name: openstack-server-publish-jobs
-      - name: periodic-grizzly
       - name: periodic-havana
       - name: check-requirements
       - name: integrated-gate
@@ -801,7 +791,6 @@ projects:
     template:
       - name: python-jobs
       - name: openstack-server-publish-jobs
-      - name: periodic-grizzly
       - name: periodic-havana
       - name: check-requirements
       - name: integrated-gate
@@ -854,7 +843,6 @@ projects:
     template:
       - name: python-jobs
       - name: openstack-server-publish-jobs
-      - name: periodic-grizzly
       - name: periodic-havana
       - name: check-requirements
       - name: integrated-gate
@@ -912,7 +900,6 @@ projects:
     template:
       - name: python-jobs
       - name: openstack-server-publish-jobs
-      - name: periodic-grizzly
       - name: periodic-havana
       - name: check-requirements
       - name: integrated-gate
@@ -953,7 +940,6 @@ projects:
     template:
       - name: python-jobs
       - name: openstack-server-publish-jobs
-      - name: periodic-grizzly
       - name: periodic-havana
       - name: check-requirements
       - name: integrated-gate
@@ -2234,9 +2220,6 @@ projects:
       - tempest-coverage
       - tempest-branch-tarball
     periodic-stable:
-      - periodic-tempest-dsvm-full-grizzly
-      - periodic-tempest-dsvm-neutron-grizzly
-      - periodic-tempest-dsvm-postgres-full-grizzly
       - periodic-tempest-dsvm-full-havana
       - periodic-tempest-dsvm-neutron-havana
       - periodic-tempest-dsvm-postgres-full-havana
@@ -2653,11 +2636,6 @@ projects:
       - gate-tempest-dsvm-large-ops
       - gate-tempest-dsvm-neutron-large-ops
       - check-swift-dsvm-functional
-      - check-tempest-dsvm-full-grizzly
-      - check-tempest-dsvm-neutron-grizzly
-      - check-tempest-dsvm-postgres-full-grizzly
-      - check-tempest-dsvm-cells-grizzly
-      - check-tempest-dsvm-cells-full-grizzly
       - check-tempest-dsvm-full-havana
       - check-tempest-dsvm-neutron-havana
       - check-tempest-dsvm-postgres-full-havana
