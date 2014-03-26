@@ -322,7 +322,6 @@
 
     jobs:
       - python-jobs
-      - python-grizzly-bitrot-jobs
       - python-havana-bitrot-jobs
       - openstack-publish-jobs
       - translation-jobs
@@ -336,7 +335,6 @@
 
     jobs:
       - python-jobs
-      - python-grizzly-bitrot-jobs
       - python-havana-bitrot-jobs
       - openstack-publish-jobs
       - gate-{name}-pylint
@@ -544,7 +542,6 @@
 
     jobs:
       - python-jobs
-      - python-grizzly-bitrot-jobs
       - python-havana-bitrot-jobs
       - openstack-publish-jobs
       - translation-jobs
@@ -559,7 +556,6 @@
 
     jobs:
       - python-jobs
-      - python-grizzly-bitrot-jobs
       - python-havana-bitrot-jobs
       - openstack-publish-jobs
       - translation-jobs
@@ -610,7 +606,6 @@
 
     jobs:
       - python-jobs
-      - python-grizzly-bitrot-jobs
       - python-havana-bitrot-jobs
       - openstack-publish-jobs
 
@@ -674,7 +669,6 @@
 
     jobs:
       - python-jobs
-      - python-grizzly-bitrot-jobs
       - python-havana-bitrot-jobs
       - openstack-publish-jobs
       - translation-jobs
@@ -733,7 +727,6 @@
 
     jobs:
       - python-jobs
-      - python-grizzly-bitrot-jobs
       - python-havana-bitrot-jobs
       - openstack-publish-jobs
       - gate-{name}-pylint
@@ -1004,7 +997,6 @@
 
     jobs:
       - python-jobs
-      - python-grizzly-bitrot-jobs
       - python-havana-bitrot-jobs
       - openstack-publish-jobs
       - translation-jobs
@@ -1295,19 +1287,9 @@
       - devstack-jobs:
           pipeline: check
           node: 'devstack-precise || devstack-precise-check'
-          branch-designator: '-grizzly'
-          branch-override: stable/grizzly
-      - devstack-jobs:
-          pipeline: check
-          node: 'devstack-precise || devstack-precise-check'
           branch-designator: '-havana'
           branch-override: stable/havana
       # Periodic jobs for various branches
-      - devstack-jobs:
-          pipeline: periodic
-          node: devstack-precise
-          branch-designator: '-grizzly'
-          branch-override: stable/grizzly
       - devstack-jobs:
           pipeline: periodic
           node: devstack-precise
@@ -2111,34 +2093,6 @@
       - openstack-install-deploy-guide-{lang}:
 
       - openstack-operations-guide-{lang}
-
-      # in zuul/layout.yaml specified to only run against
-      # stable/grizzly
-      - 'openstack-{oldmanual}-old'
-
-      - openstack-{install}-{distribution}-old:
-          install: basic-install
-          distribution: fedora
-          system: yum
-          profileos: "centos;fedora;rhel"
-
-      - openstack-{install}-{distribution}-old:
-          install: basic-install
-          distribution: ubuntu
-          system: apt
-          profileos: "ubuntu;debian"
-
-      - openstack-{install}-{distribution}-old:
-          install: openstack-install
-          distribution: fedora
-          system: yum
-          profileos: "centos;fedora;rhel"
-
-      - openstack-{install}-{distribution}-old:
-          install: openstack-install
-          distribution: ubuntu
-          system: apt
-          profileos: "ubuntu"
 
 - project:
     name: operations-guide

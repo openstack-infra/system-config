@@ -1,8 +1,4 @@
 - job:
-    name: gate-grenade-noop
-    node: bare-precise
-
-- job:
     name: node-test
 
     parameters:
