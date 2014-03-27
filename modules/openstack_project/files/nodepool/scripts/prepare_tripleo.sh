@@ -42,6 +42,7 @@ DEVICE="eth1"
 BOOTPROTO="dhcp"
 ONBOOT="yes"
 TYPE="Ethernet"
+PEERDNS="no"
 EOF
 
 elif [ -f /etc/network/interfaces ]; then
