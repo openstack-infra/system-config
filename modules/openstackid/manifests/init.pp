@@ -61,7 +61,7 @@ class openstackid (
     ]
 
   package { $php5_packages:
-    require => Exec[apt_update],
+    ensure => present,
   }
 
   group { 'openstackid':
@@ -171,7 +171,7 @@ class openstackid (
   if $ssl_key_file_contents != '' {
     file { $ssl_key_file:
       owner   => 'root',
-      group   => 'ssl-cert',
+      group   => 'root',
       mode    => '0640',
       content => $ssl_key_file_contents,
       before  => Apache::Vhost[$vhost_name],
