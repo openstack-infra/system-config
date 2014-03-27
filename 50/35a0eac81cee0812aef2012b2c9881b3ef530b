@@ -1,0 +1,11 @@
+Verified+2: Jenkins
+Approved+1: Clark Boylan <cboylan@sapwetik.org>
+Code-Review+2: Clark Boylan <cboylan@sapwetik.org>
+Code-Review+2: Jeremy Stanley <fungi@yuggoth.org>
+Code-Review+1: Jim Rollenhagen <jim@jimrollenhagen.com>
+Code-Review+1: Josh Gachnang <josh@pcsforeducation.com>
+Submitted-by: Jenkins
+Submitted-at: Thu, 27 Mar 2014 00:32:52 +0000
+Reviewed-on: https://review.openstack.org/83255
+Project: openstack-infra/config
+Branch: refs/heads/master
