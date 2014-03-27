@@ -739,6 +739,14 @@
       - gate-{name}-pylint
       - translation-jobs
 
+- project:
+    name: nova-specs
+    github-org: openstack
+    node: bare-precise
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - gate-{name}-docs
 
 - project:
     name: nova-docker
