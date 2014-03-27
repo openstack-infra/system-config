@@ -36,7 +36,7 @@
               sudo -H -u tempest tox -e api --notest
               sudo -H -u tempest .tox/api/bin/pip install -e $BASE/new/tempest
               echo "Running neutron api test suite"
-              sudo -H -u tempest tempest tox -e api
+              sudo -H -u tempest tox -e api
           }}
           export -f post_test_hook
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
