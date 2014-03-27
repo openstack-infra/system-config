@@ -18,6 +18,69 @@ zmq-publishers:
 gearman-servers:
   - host: zuul.openstack.org
 
+labels:
+  - name: devstack-precise
+    image: devstack-precise
+    min-ready: 42
+    providers:
+      - name: rax-dfw
+      - name: rax-ord
+      - name: rax-iad
+      - name: hpcloud-az1
+      - name: hpcloud-az2
+      - name: hpcloud-az3
+      - name: hpcloud-region-b
+  - name: devstack-precise-check
+    image: devstack-precise-check
+    min-ready: 7
+    providers:
+      - name: rax-iad
+  - name: bare-precise
+    image: bare-precise
+    min-ready: 42
+    providers:
+      - name: rax-dfw
+      - name: rax-ord
+      - name: rax-iad
+      - name: hpcloud-az1
+      - name: hpcloud-az2
+      - name: hpcloud-az3
+      - name: hpcloud-region-b
+  - name: bare-centos6
+    image: bare-centos6
+    min-ready: 14
+    providers:
+      - name: rax-dfw
+      - name: rax-ord
+      - name: rax-iad
+      - name: hpcloud-az1
+      - name: hpcloud-az2
+      - name: hpcloud-az3
+      - name: hpcloud-region-b
+  - name: py3k-precise
+    image: py3k-precise
+    min-ready: 7
+    providers:
+      - name: hpcloud-az1
+      - name: hpcloud-az2
+      - name: hpcloud-az3
+      - name: hpcloud-region-b
+  - name: dsvm-precise-krnl
+    image: dsvm-precise-krnl
+    min-ready: 1
+    providers:
+      - name: rax-dfw
+  - name: tripleo-precise
+    image: tripleo-precise
+    min-ready: 35
+    providers:
+      - name: tripleo-test-cloud
+  - name: tripleo-f20
+    image: tripleo-f20
+    min-ready: 1
+    providers:
+      - name: tripleo-test-cloud
+
 providers:
   - name: rax-dfw
     region-name: 'DFW'
@@ -345,7 +408,6 @@ providers:
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
 
-
 targets:
   - name: jenkins01
     jenkins:
@@ -353,393 +415,39 @@ targets:
       user: '<%= jenkins_api_user %>'
       apikey: '<%= jenkins_api_key %>'
       credentials-id: '<%= jenkins_credentials_id %>'
-    images:
-      - name: bare-precise
-        min-ready: 6
-        providers:
-          - name: rax-iad
-          - name: rax-dfw
-          - name: rax-ord
-          - name: hpcloud-az1
-          - name: hpcloud-az2
-          - name: hpcloud-az3
-          - name: hpcloud-region-b
-      - name: bare-centos6
-        min-ready: 2
-        providers:
-          - name: rax-iad
-          - name: rax-dfw
-          - name: rax-ord
-          - name: hpcloud-az1
-          - name: hpcloud-az2
-          - name: hpcloud-az3
-          - name: hpcloud-region-b
-      - name: devstack-precise
-        min-ready: 6
-        providers:
-          - name: rax-iad
-          - name: rax-dfw
-          - name: rax-ord
-          - name: hpcloud-az1
-          - name: hpcloud-az2
-          - name: hpcloud-az3
-          - name: hpcloud-region-b
-      - name: devstack-precise-check
-        min-ready: 1
-        providers:
-          - name: rax-iad
-      - name: py3k-precise
-        min-ready: 1
-        providers:
-          - name: hpcloud-az1
-          - name: hpcloud-az2
-          - name: hpcloud-az3
-          - name: hpcloud-region-b
-      - name: tripleo-precise
-        min-ready: 5
-        providers:
-          - name: tripleo-test-cloud
-      - name: tripleo-f20
-        min-ready: 1
-        providers:
-          - name: tripleo-test-cloud
   - name: jenkins02
     jenkins:
       url: 'https://jenkins02.openstack.org/'
       user: '<%= jenkins_api_user %>'
       apikey: '<%= jenkins_api_key %>'
       credentials-id: '<%= jenkins_credentials_id %>'
-    images:
-      - name: bare-precise
-        min-ready: 6
-        providers:
-          - name: rax-iad
-          - name: rax-dfw
-          - name: rax-ord
-          - name: hpcloud-az1
-          - name: hpcloud-az2
-          - name: hpcloud-az3
-          - name: hpcloud-region-b
-      - name: bare-centos6
-        min-ready: 2
-        providers:
-          - name: rax-iad
-          - name: rax-dfw
-          - name: rax-ord
-          - name: hpcloud-az1
-          - name: hpcloud-az2
-          - name: hpcloud-az3
-          - name: hpcloud-region-b
-      - name: devstack-precise
-        min-ready: 6
-        providers:
-          - name: rax-iad
-          - name: rax-dfw
-          - name: rax-ord
-          - name: hpcloud-az1
-          - name: hpcloud-az2
-          - name: hpcloud-az3
-          - name: hpcloud-region-b
-      - name: devstack-precise-check
-        min-ready: 1
-        providers:
-          - name: rax-iad
-      - name: py3k-precise
-        min-ready: 1
-        providers:
-          - name: hpcloud-az1
-          - name: hpcloud-az2
-          - name: hpcloud-az3
-          - name: hpcloud-region-b
-      - name: tripleo-precise
-        min-ready: 5
-        providers:
-          - name: tripleo-test-cloud
-      - name: tripleo-f20
-        min-ready: 1
-        providers:
-          - name: tripleo-test-cloud
   - name: jenkins03
     jenkins:
       url: 'https://jenkins03.openstack.org/'
       user: '<%= jenkins_api_user %>'
       apikey: '<%= jenkins_api_key %>'
       credentials-id: '<%= jenkins_credentials_id %>'
-    images:
-      - name: bare-precise
-        min-ready: 6
-        providers:
-          - name: rax-iad
-          - name: rax-dfw
-          - name: rax-ord
-          - name: hpcloud-az1
-          - name: hpcloud-az2
-          - name: hpcloud-az3
-          - name: hpcloud-region-b
-      - name: bare-centos6
-        min-ready: 2
-        providers:
-          - name: rax-iad
-          - name: rax-dfw
-          - name: rax-ord
-          - name: hpcloud-az1
-          - name: hpcloud-az2
-          - name: hpcloud-az3
-          - name: hpcloud-region-b
-      - name: devstack-precise
-        min-ready: 6
-        providers:
-          - name: rax-iad
-          - name: rax-dfw
-          - name: rax-ord
-          - name: hpcloud-az1
-          - name: hpcloud-az2
-          - name: hpcloud-az3
-          - name: hpcloud-region-b
-      - name: devstack-precise-check
-        min-ready: 1
-        providers:
-          - name: rax-iad
-      - name: py3k-precise
-        min-ready: 1
-        providers:
-          - name: hpcloud-az1
-          - name: hpcloud-az2
-          - name: hpcloud-az3
-          - name: hpcloud-region-b
-      - name: tripleo-precise
-        min-ready: 5
-        providers:
-          - name: tripleo-test-cloud
-      - name: tripleo-f20
-        min-ready: 1
-        providers:
-          - name: tripleo-test-cloud
   - name: jenkins04
     jenkins:
       url: 'https://jenkins04.openstack.org/'
       user: '<%= jenkins_api_user %>'
       apikey: '<%= jenkins_api_key %>'
       credentials-id: '<%= jenkins_credentials_id %>'
-    images:
-      - name: bare-precise
-        min-ready: 6
-        providers:
-          - name: rax-iad
-          - name: rax-dfw
-          - name: rax-ord
-          - name: hpcloud-az1
-          - name: hpcloud-az2
-          - name: hpcloud-az3
-          - name: hpcloud-region-b
-      - name: bare-centos6
-        min-ready: 2
-        providers:
-          - name: rax-iad
-          - name: rax-dfw
-          - name: rax-ord
-          - name: hpcloud-az1
-          - name: hpcloud-az2
-          - name: hpcloud-az3
-          - name: hpcloud-region-b
-      - name: devstack-precise
-        min-ready: 6
-        providers:
-          - name: rax-iad
-          - name: rax-dfw
-          - name: rax-ord
-          - name: hpcloud-az1
-          - name: hpcloud-az2
-          - name: hpcloud-az3
-          - name: hpcloud-region-b
-      - name: devstack-precise-check
-        min-ready: 1
-        providers:
-          - name: rax-iad
-      - name: py3k-precise
-        min-ready: 1
-        providers:
-          - name: hpcloud-az1
-          - name: hpcloud-az2
-          - name: hpcloud-az3
-          - name: hpcloud-region-b
-      - name: tripleo-precise
-        min-ready: 5
-        providers:
-          - name: tripleo-test-cloud
-      - name: tripleo-f20
-        min-ready: 1
-        providers:
-          - name: tripleo-test-cloud
   - name: jenkins05
     jenkins:
       url: 'https://jenkins05.openstack.org/'
       user: '<%= jenkins_api_user %>'
       apikey: '<%= jenkins_api_key %>'
       credentials-id: '<%= jenkins_credentials_id %>'
-    images:
-      - name: bare-precise
-        min-ready: 6
-        providers:
-          - name: rax-iad
-          - name: rax-dfw
-          - name: rax-ord
-          - name: hpcloud-az1
-          - name: hpcloud-az2
-          - name: hpcloud-az3
-          - name: hpcloud-region-b
-      - name: bare-centos6
-        min-ready: 2
-        providers:
-          - name: rax-iad
-          - name: rax-dfw
-          - name: rax-ord
-          - name: hpcloud-az1
-          - name: hpcloud-az2
-          - name: hpcloud-az3
-          - name: hpcloud-region-b
-      - name: devstack-precise
-        min-ready: 6
-        providers:
-          - name: rax-iad
-          - name: rax-dfw
-          - name: rax-ord
-          - name: hpcloud-az1
-          - name: hpcloud-az2
-          - name: hpcloud-az3
-          - name: hpcloud-region-b
-      - name: devstack-precise-check
-        min-ready: 1
-        providers:
-          - name: rax-iad
-      - name: py3k-precise
-        min-ready: 1
-        providers:
-          - name: hpcloud-az1
-          - name: hpcloud-az2
-          - name: hpcloud-az3
-          - name: hpcloud-region-b
-      - name: tripleo-precise
-        min-ready: 5
-        providers:
-          - name: tripleo-test-cloud
-      - name: tripleo-f20
-        min-ready: 1
-        providers:
-          - name: tripleo-test-cloud
   - name: jenkins06
     jenkins:
       url: 'https://jenkins06.openstack.org/'
       user: '<%= jenkins_api_user %>'
       apikey: '<%= jenkins_api_key %>'
       credentials-id: '<%= jenkins_credentials_id %>'
-    images:
-      - name: bare-precise
-        min-ready: 6
-        providers:
-          - name: rax-iad
-          - name: rax-dfw
-          - name: rax-ord
-          - name: hpcloud-az1
-          - name: hpcloud-az2
-          - name: hpcloud-az3
-          - name: hpcloud-region-b
-      - name: bare-centos6
-        min-ready: 2
-        providers:
-          - name: rax-iad
-          - name: rax-dfw
-          - name: rax-ord
-          - name: hpcloud-az1
-          - name: hpcloud-az2
-          - name: hpcloud-az3
-          - name: hpcloud-region-b
-      - name: devstack-precise
-        min-ready: 6
-        providers:
-          - name: rax-iad
-          - name: rax-dfw
-          - name: rax-ord
-          - name: hpcloud-az1
-          - name: hpcloud-az2
-          - name: hpcloud-az3
-          - name: hpcloud-region-b
-      - name: devstack-precise-check
-        min-ready: 1
-        providers:
-          - name: rax-iad
-      - name: py3k-precise
-        min-ready: 1
-        providers:
-          - name: hpcloud-az1
-          - name: hpcloud-az2
-          - name: hpcloud-az3
-          - name: hpcloud-region-b
-      - name: tripleo-precise
-        min-ready: 5
-        providers:
-          - name: tripleo-test-cloud
-      - name: tripleo-f20
-        min-ready: 1
-        providers:
-          - name: tripleo-test-cloud
   - name: jenkins07
     jenkins:
       url: 'https://jenkins07.openstack.org/'
       user: '<%= jenkins_api_user %>'
       apikey: '<%= jenkins_api_key %>'
       credentials-id: '<%= jenkins_credentials_id %>'
-    images:
-      - name: bare-precise
-        min-ready: 6
-        providers:
-          - name: rax-iad
-          - name: rax-dfw
-          - name: rax-ord
-          - name: hpcloud-az1
-          - name: hpcloud-az2
-          - name: hpcloud-az3
-          - name: hpcloud-region-b
-      - name: bare-centos6
-        min-ready: 2
-        providers:
-          - name: rax-iad
-          - name: rax-dfw
-          - name: rax-ord
-          - name: hpcloud-az1
-          - name: hpcloud-az2
-          - name: hpcloud-az3
-          - name: hpcloud-region-b
-      - name: devstack-precise
-        min-ready: 6
-        providers:
-          - name: rax-iad
-          - name: rax-dfw
-          - name: rax-ord
-          - name: hpcloud-az1
-          - name: hpcloud-az2
-          - name: hpcloud-az3
-          - name: hpcloud-region-b
-      - name: devstack-precise-check
-        min-ready: 1
-        providers:
-          - name: rax-iad
-      - name: py3k-precise
-        min-ready: 1
-        providers:
-          - name: hpcloud-az1
-          - name: hpcloud-az2
-          - name: hpcloud-az3
-          - name: hpcloud-region-b
-      - name: dsvm-precise-krnl
-        min-ready: 1
-        providers:
-          - name: rax-dfw
-      - name: tripleo-precise
-        min-ready: 5
-        providers:
-          - name: tripleo-test-cloud
-      - name: tripleo-f20
-        min-ready: 1
-        providers:
-          - name: tripleo-test-cloud
