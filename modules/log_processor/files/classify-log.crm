@@ -38,6 +38,19 @@ isolate (:prefix:) /:*:_arg2:/
 # Whether this run is for a SUCCESS or FAILURE result
 isolate (:target:) /:*:_arg3:/
 
+# Regex for uuid token replacement
+isolate (:uuid-regex:) /[[:xdigit:]]{8}-[[:xdigit:]]{4}-[[:xdigit:]]{4}-[[:xdigit:]]{4}-[[:xdigit:]]{12}/
+# Token value for uuids
+isolate (:uuid-token:) /UUIDTOKEN/
+# Regex for id token replacement
+isolate (:id-regex:) /[[:xdigit:]]{32,40}/
+# Token value for ids
+isolate (:id-token:) /IDTOKEN/
+# Regex for num token replacement
+isolate (:num-regex:) /-[[:digit:]]{7,}/
+# Token value for num tokens
+isolate (:num-token:) /-NUMTOKEN/
+
 # Train each file on a newline just to make sure it exists
 learn [:_nl:] <osb unique microgroom> (:*:prefix:/SUCCESS.css)
 learn [:_nl:] <osb unique microgroom> (:*:prefix:/FAILURE.css)
@@ -57,39 +70,10 @@ learn [:_nl:] <osb unique microgroom> (:*:prefix:/FAILURE.css)
                 match (:timestamp:) /^[-.0-9 |:]+/
                 alter (:timestamp:) //
             }
-            {
-                # Don't treat UUIDs as uniquely special.
-                match (:uuidtoken:) /[[:xdigit:]]{8}-[[:xdigit:]]{4}-[[:xdigit:]]{4}-[[:xdigit:]]{4}-[[:xdigit:]]{12}/
-                alter (:uuidtoken:) /UUIDTOKEN/
-                {
-                    match (:uuidtoken:) <fromnext> /[[:xdigit:]]{8}-[[:xdigit:]]{4}-[[:xdigit:]]{4}-[[:xdigit:]]{4}-[[:xdigit:]]{12}/
-                    alter (:uuidtoken:) /UUIDTOKEN/
-                    # Loop to replace all TOKENS in line
-                    liaf
-                }
-            }
-            {
-                # Don't treat IDs as uniquely special.
-                match (:idtoken:) /[[:xdigit:]]{32,40}/
-                alter (:idtoken:) /IDTOKEN/
-                {
-                    match (:idtoken:) <fromnext> /[[:xdigit:]]{32,40}/
-                    alter (:idtoken:) /IDTOKEN/
-                    # Loop to replace all TOKENS in line
-                    liaf
-                }
-            }
-            {
-                # Don't treat IDs as uniquely special.
-                match (:numtoken:) /-[[:digit:]]{7,}/
-                alter (:numtoken:) /-NUMTOKEN/
-                {
-                    match (:numtoken:) <fromnext> /-[[:digit:]]{7,}/
-                    alter (:numtoken:) /-NUMTOKEN/
-                    # Loop to replace all TOKENS in line
-                    liaf
-                }
-            }
+            call /:replace_occurences:/ [:*:uuid-regex: :*:uuid-token:]
+            call /:replace_occurences:/ [:*:id-regex: :*:id-token:]
+            call /:replace_occurences:/ [:*:num-regex: :*:num-token:]
+
             # Train on the line
             learn <osb unique microgroom> (:*:prefix:/:*:target:.css)
             # Classify the line to see if it looks more like a SUCCESS or FAILURE line
@@ -121,3 +105,20 @@ learn [:_nl:] <osb unique microgroom> (:*:prefix:/FAILURE.css)
     }
     liaf
 }
+
+exit
+
+:replace_occurences: (:routine_args:)
+match [:routine_args:] (:: :regex: :token:) /([[:graph:]]+) ([[:graph:]]+)/
+{
+    # Don't treat UUIDs as uniquely special.
+    match (:uuidtoken:) /:*:regex:/
+    alter (:uuidtoken:) /:*:token:/
+    {
+        match (:uuidtoken:) <fromnext> /:*:regex:/
+        alter (:uuidtoken:) /:*:token:/
+        # Loop to replace all TOKENS in line
+        liaf
+    }
+}
+return
