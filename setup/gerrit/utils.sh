@@ -9,7 +9,12 @@ function set_date {
 }
 
 function puppet_install {
-  apt-get -y install git python-pip ruby
+  apt-get -y install git python-pip ruby puppet
+  sed -e s%START=no%START=yes% /etc/default/puppet > /tmp/puppet
+  cp /tmp/puppet /etc/default/puppet
+
+  sed -e 's%\[main\]%\[main\]\nserver=ci-puppetmaster.opencontrail.org\ncertname=review.opencontrail.org\npluginsync=true%' /etc/puppet/puppet.conf > /tmp/puppet.conf
+  cp /tmp/puppet.conf /etc/puppet/puppet.conf
 
   # Upgrade pip to be 1.4+
   pip install -U pip
