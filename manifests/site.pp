@@ -758,4 +758,19 @@ node 'openstackid-dev.openstack.org' {
   }
 }
 
+node 'openstackid.openstack.org' {
+  class { 'openstack_project::openstackid':
+    sysadmins               => hiera('sysadmins'),
+    site_admin_password     => hiera('openstackid_site_admin_password'),
+    id_mysql_host           => hiera('openstackid_id_mysql_host'),
+    id_mysql_password       => hiera('openstackid_id_mysql_password'),
+    ss_mysql_host           => hiera('openstackid_ss_mysql_host'),
+    ss_mysql_password       => hiera('openstackid_ss_mysql_password'),
+    redis_password          => hiera('openstackid_redis_password'),
+    ssl_cert_file_contents  => hiera('openstackid_ssl_cert_file_contents'),
+    ssl_key_file_contents   => hiera('openstackid_ssl_key_file_contents'),
+    ssl_chain_file_contents => hiera('openstackid_ssl_chain_file_contents'),
+  }
+}
+
 # vim:sw=2:ts=2:expandtab:textwidth=79
