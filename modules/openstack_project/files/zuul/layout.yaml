@@ -4547,10 +4547,8 @@ projects:
       - hook-stackalytics-rtfd
 
   - name: stackforge/swift3
-    check:
-      - noop
-    gate:
-      - noop
+    template:
+      - name: python-jobs
 
   - name: stackforge/swiftsync
     check:
