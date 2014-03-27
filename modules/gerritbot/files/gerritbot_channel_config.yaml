@@ -497,6 +497,16 @@ milk-dev:
     branches:
       - master
 
+pecanpy:
+    events:
+      - patchset-created
+      - change-merged
+      - x-vrif-minus-2
+    projects:
+      - stackforge/pecan
+    branches:
+      - master
+
 openstack-entropy:
     events:
       - patchset-created
