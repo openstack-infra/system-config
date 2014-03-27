@@ -395,6 +395,8 @@ jobs:
     branch: ^openstack/(?!2\.4).*$
   - name: gate-nova-pylint
     voting: false
+  - name: gate-nova-specs-docs
+    voting: false
   - name: gate-cinder-pylint
     branch: ^(?!stable/grizzly).*$
     voting: false
@@ -980,9 +982,9 @@ projects:
 
   - name: openstack/nova-specs
     check:
-      - noop
+      - gate-nova-specs-docs
     gate:
-      - noop
+      - gate-nova-specs-docs
 
   - name: stackforge/nova-docker
     template:
