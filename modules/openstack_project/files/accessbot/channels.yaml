@@ -116,3 +116,4 @@ channels:
   - name: syscompass
     mask: full_mask
   - name: tripleo
+  - name: pecanpy
