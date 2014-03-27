@@ -18,6 +18,7 @@
           export DEVSTACK_GATE_TIMEOUT=60
           export ENABLED_SERVICES=murano,murano-api,murano-engine,tempest
           export PROJECTS="stackforge/murano-api $PROJECTS"
+          export PROJECTS="stackforge/murano-dashboard $PROJECTS"
           export PROJECTS="stackforge/python-muranoclient $PROJECTS"
 
           function pre_test_hook {
