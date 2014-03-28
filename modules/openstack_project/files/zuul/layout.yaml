@@ -2254,6 +2254,9 @@ projects:
   - name: openstack/tripleo-image-elements
     check:
       - check-oslo.test-dsvm-tripleo-image-elements
+      - check-tripleo-image-elements-pep8
+      - check-tripleo-image-elements-python26
+      - check-tripleo-image-elements-pytnon27
     check-tripleo:
       - check-tripleo-seed-precise
       - check-tripleo-ironic-seed-precise
@@ -2261,7 +2264,9 @@ projects:
       - check-tripleo-ironic-undercloud-precise
       - check-tripleo-overcloud-precise
     gate:
-      - noop
+      - gate-tripleo-image-elements-pep8
+      - gate-tripleo-image-elements-python26
+      - gate-tripleo-image-elements-pytnon27
     post:
       - tripleo-image-elements-branch-tarball
     pre-release:
