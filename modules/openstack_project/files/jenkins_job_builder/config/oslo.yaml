@@ -1,5 +1,5 @@
 - job-template:
-    name: '{pipeline}-oslo.test-dsvm-{name}{branch-designator}'
+    name: '{pipeline}-{injectedlib}-dsvm-{name}{branch-designator}'
     node: '{node}'
 
     wrappers:
@@ -16,14 +16,14 @@
           #!/bin/bash -xe
           export PYTHONUNBUFFERED=true
           export DEVSTACK_GATE_TIMEOUT=95
-          export PROJECTS="openstack/oslo.test $PROJECTS"
+          export PROJECTS="{injectedrepo} $PROJECTS"
           export BRANCH_OVERRIDE={branch-override}
           if [ "$BRANCH_OVERRIDE" != "default" ] ; then
               export OVERRIDE_ZUUL_BRANCH=$BRANCH_OVERRIDE
           fi
 
           function gate_hook {{
-              cd /opt/stack/new/oslo.test
+              cd /opt/stack/new/$(basename {injectedrepo})
               remaining_time
               timeout -s 9 ${{REMAINING_TIME}}m ./tools/run_cross_tests.sh /opt/stack/new/{name} py27
           }}
@@ -44,3 +44,22 @@
     publishers:
       - devstack-logs
       - console-log
+
+
+- job-group:
+    name: oslotest-cross-test
+
+    injectedlib: oslotest
+    injectedrepo: openstack/oslo.test
+
+    jobs:
+      - '{pipeline}-{injectedlib}-dsvm-{name}{branch-designator}':
+          pipeline: check
+          node: 'devstack-precise || devstack-precise-check'
+          branch-designator: ''
+          branch-override: default
+      - '{pipeline}-{injectedlib}-dsvm-{name}{branch-designator}':
+          pipeline: gate
+          node: devstack-precise
+          branch-designator: ''
+          branch-override: default
