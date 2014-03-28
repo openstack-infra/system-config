@@ -4407,8 +4407,7 @@ projects:
       - gate-rally-pep8
       - gate-rally-python26
       - gate-rally-python27
-      - check-rally-install-bare-centos6
-      - check-rally-install-bare-precise
+      - check-rally-install-devstack-precise
     gate:
       - gate-rally-pep8
       - gate-rally-python26

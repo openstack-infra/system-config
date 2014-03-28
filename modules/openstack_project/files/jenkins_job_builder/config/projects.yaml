@@ -2056,9 +2056,7 @@
     jobs:
       - python-jobs
       - check-rally-install-{node}:
-          node: bare-precise
-      - check-rally-install-{node}:
-          node: bare-centos6
+          node: devstack-precise
 
 - project:
     name: python-rallyclient
