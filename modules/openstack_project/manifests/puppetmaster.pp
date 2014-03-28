@@ -1,11 +1,20 @@
 # == Class: openstack_project::puppetmaster
 #
 class openstack_project::puppetmaster (
-  $sysadmins = []
+  $sysadmins = [],
+  $version   = '2',
 ) {
+
+  if $version == '3' {
+    $pin_puppet = false
+  } else {
+    $pin_puppet = true
+  }
+
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [4505, 4506, 8140],
     sysadmins                 => $sysadmins,
+    pin_puppet                => $pin_puppet,
   }
 
   class { 'salt':
