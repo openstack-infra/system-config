@@ -568,9 +568,9 @@ jobs:
     voting: false
   - name: gate-murano-devstack-dsvm
     voting: false
-  - name: check-oslo.test-dsvm-oslo.config
+  - name: check-oslotest-dsvm-oslo.config
     voting: false
-  - name: check-oslo.test-dsvm-oslo.messaging
+  - name: check-oslotest-dsvm-oslo.messaging
     voting: false
   - name: gate-oslo.vmware-docs
     voting: false
@@ -1871,7 +1871,7 @@ projects:
     check:
       - gate-oslo.config-python33
       - check-devstack-dsvm-cells
-      - check-oslo.test-dsvm-oslo.config
+      - check-oslotest-dsvm-oslo.config
     gate:
       - gate-oslo.config-python33
       - gate-devstack-dsvm-cells
@@ -1900,7 +1900,7 @@ projects:
       - check-devstack-dsvm-cells
       - gate-tempest-dsvm-large-ops
       - gate-tempest-dsvm-neutron-large-ops
-      - check-oslo.test-dsvm-oslo.messaging
+      - check-oslotest-dsvm-oslo.messaging
     gate:
       - gate-devstack-dsvm-cells
       - gate-tempest-dsvm-large-ops
@@ -1966,8 +1966,8 @@ projects:
     check:
       - gate-oslo.test-python33
       - gate-oslo.test-pypy
-      - check-oslo.test-dsvm-oslo.config
-      - check-oslo.test-dsvm-oslo.messaging
+      - check-oslotest-dsvm-oslo.config
+      - check-oslotest-dsvm-oslo.messaging
     gate:
       - gate-oslo.test-python33
       - gate-oslo.test-pypy
