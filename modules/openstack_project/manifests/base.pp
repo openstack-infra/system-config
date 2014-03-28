@@ -1,8 +1,9 @@
 # == Class: openstack_project::base
 #
 class openstack_project::base(
-  $certname = $::fqdn,
-  $install_users = true
+  $certname      = $::fqdn,
+  $install_users = true,
+  $pin_puppet    = true,
 ) {
   if ($::osfamily == 'Debian') {
     include apt
@@ -63,7 +64,7 @@ class openstack_project::base(
     )
   }
 
-  # Use upstream puppet and pin to version 2.7.*
+  # Use upstream puppet and pin to version 2.7.*, conditionally
   if ($::osfamily == 'Debian') {
     apt::source { 'puppetlabs':
       location   => 'http://apt.puppetlabs.com',
@@ -71,16 +72,17 @@ class openstack_project::base(
       key        => '4BD6EC30',
       key_server => 'pgp.mit.edu',
     }
+    if $pin_puppet { 
 
-    file { '/etc/apt/preferences.d/00-puppet.pref':
-      ensure  => present,
-      owner   => 'root',
-      group   => 'root',
-      mode    => '0444',
-      source  => 'puppet:///modules/openstack_project/00-puppet.pref',
-      replace => true,
+      file { '/etc/apt/preferences.d/00-puppet.pref':
+        ensure  => present,
+        owner   => 'root',
+        group   => 'root',
+        mode    => '0444',
+        source  => 'puppet:///modules/openstack_project/00-puppet.pref',
+        replace => true,
+      }
     }
-
   }
 
   file { '/etc/puppet/puppet.conf':
