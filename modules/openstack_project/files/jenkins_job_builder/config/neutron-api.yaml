@@ -34,7 +34,7 @@
               # best to include tempest as an explicit test dependency
               # of neutron.
               sudo -H -u tempest tox -e api --notest
-              sudo -H -u tempest .tox/api/bin/pip install -e $BASE/new/tempest
+              sudo -H -u tempest .tox/api/bin/pip install $BASE/new/tempest
               echo "Running neutron api test suite"
               sudo -H -u tempest tox -e api
           }}
