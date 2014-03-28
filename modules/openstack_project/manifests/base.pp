@@ -1,8 +1,10 @@
 # == Class: openstack_project::base
 #
 class openstack_project::base(
-  $certname = $::fqdn,
-  $install_users = true
+  $certname      = $::fqdn,
+  $install_users = true,
+  $pin_puppet    = '2.7',
+  $pin_facter    = '1',
 ) {
   if ($::osfamily == 'Debian') {
     include apt
@@ -103,23 +105,12 @@ class openstack_project::base(
       key_server => 'pgp.mit.edu',
     }
 
-    case $::lsbdistcodename {
-      'trusty': {
-        file { '/etc/apt/preferences.d/00-puppet.pref':
-          ensure => absent,
-        }
-      }
-
-      default: {
-        file { '/etc/apt/preferences.d/00-puppet.pref':
-          ensure  => present,
-          owner   => 'root',
-          group   => 'root',
-          mode    => '0444',
-          source  => 'puppet:///modules/openstack_project/00-puppet.pref',
-          replace => true,
-        }
-      }
+    file { '/etc/apt/preferences.d/00-puppet.pref':
+      ensure  => present,
+      owner   => 'root',
+      group   => 'root',
+      mode    => '0444',
+      content => template('openstack_project/00-puppet.pref.erb'),
     }
 
     file { '/etc/default/puppet':
