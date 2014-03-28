@@ -3,7 +3,8 @@
 class openstack_project::puppetmaster (
   $root_rsa_key,
   $override_list = [],
-  $sysadmins = []
+  $sysadmins = [],
+  $version   = '2.7',
 ) {
   include logrotate
   include openstack_project::params
@@ -11,6 +12,7 @@ class openstack_project::puppetmaster (
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [4505, 4506, 8140],
     sysadmins                 => $sysadmins,
+    pin_puppet                => $version,
   }
 
   class { 'salt':
