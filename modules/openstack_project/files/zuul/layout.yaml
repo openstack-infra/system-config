@@ -550,6 +550,8 @@ jobs:
     voting: false
   - name: gate-rally-python33
     voting: false
+  - name: gate-heat-templates
+    voting: false
 
 # The project list is grouped by type of project, and within each
 # group, projects are sorted (mostly) alphabetically.
@@ -1617,7 +1619,7 @@ projects:
 
   - name: openstack/heat-templates
     check:
-      - noop
+      - gate-heat-templates
     gate:
       - noop
 
