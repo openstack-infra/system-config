@@ -4676,3 +4676,11 @@ projects:
       - gate-graffiti-python33
     post:
       - graffiti-coverage
+
+  - name: stackforge/stacktach
+    check:
+      - gate-stacktach-pep8
+      - gate-stacktach-python27
+    gate:
+      - gate-stacktach-pep8
+      - gate-stacktach-python27

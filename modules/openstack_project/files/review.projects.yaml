@@ -842,6 +842,9 @@
 - project: stackforge/stackalytics
   description: OpenStack analytics dashboard
   upstream: git://github.com/Mirantis/stackalytics.git
+- project: stackforge/stacktach
+  description: Event-based Debugging, Monitoring and Billing solution for OpenStack.
+  upstream: https://github.com/rackerlabs/stacktach.git
 - project: stackforge/swift3
   description: Swift3 Middleware for OpenStack Swift, allowing access to OpenStack swift via the Amazon S3 API.
   upstream: git://github.com/fujita/swift3.git
