@@ -980,9 +980,9 @@ projects:
 
   - name: openstack/nova-specs
     check:
-      - noop
+      - gate-nova-specs-docs
     gate:
-      - noop
+      - gate-nova-specs-docs
 
   - name: stackforge/nova-docker
     template:
