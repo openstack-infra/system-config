@@ -610,6 +610,8 @@ jobs:
     voting: false
   - name: check-neutron-dsvm-api
     voting: false
+  - name: gate-pecan-pypy
+    voting: true
 # puppet-openstack targets
   - name: gate-puppet-vswitch-puppet-lint
     voting: false
