@@ -2198,6 +2198,8 @@ projects:
       - tripleo-heat-templates-tarball
 
   - name: openstack/tripleo-image-elements
+    template:
+      - name: python-jobs
     check:
       - check-oslotest-dsvm-tripleo-image-elements
     check-tripleo:
