@@ -1808,11 +1808,11 @@ projects:
     check:
       - gate-oslo.config-python33
       - check-devstack-dsvm-cells
-      - check-oslo.test-dsvm-oslo.config
+      - check-oslotest-dsvm-oslo.config
     gate:
       - gate-oslo.config-python33
       - gate-devstack-dsvm-cells
-      - gate-oslo.test-dsvm-oslo.config
+      - gate-oslotest-dsvm-oslo.config
     pre-release:
       - oslo.config-tarball
     experimental-tripleo:
@@ -1838,12 +1838,12 @@ projects:
       - check-devstack-dsvm-cells
       - gate-tempest-dsvm-large-ops
       - gate-tempest-dsvm-neutron-large-ops
-      - check-oslo.test-dsvm-oslo.messaging
+      - check-oslotest-dsvm-oslo.messaging
     gate:
       - gate-devstack-dsvm-cells
       - gate-tempest-dsvm-large-ops
       - gate-tempest-dsvm-neutron-large-ops
-      - gate-oslo.test-dsvm-oslo.messaging
+      - gate-oslotest-dsvm-oslo.messaging
     experimental-tripleo:
       - check-tripleo-seed-precise
       - check-tripleo-ironic-seed-precise
@@ -1904,6 +1904,12 @@ projects:
       - name: pypy-jobs
       - name: openstack-server-publish-jobs
       - name: check-requirements
+    check:
+      - check-oslotest-dsvm-oslo.config
+      - check-oslotest-dsvm-oslo.messaging
+    gate:
+      - gate-oslotest-dsvm-oslo.config
+      - gate-oslotest-dsvm-oslo.messaging
     pre-release:
       - oslo.test-tarball
     release:
