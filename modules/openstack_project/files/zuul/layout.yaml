@@ -938,6 +938,12 @@ projects:
     periodic:
       - neutron-propose-translation-update
 
+  - name: openstack/neutron-specs
+    check:
+      - noop
+    gate:
+      - noop
+
   - name: openstack/nova
     template:
       - name: python-jobs
