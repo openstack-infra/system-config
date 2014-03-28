@@ -1,8 +1,10 @@
 # == Class: openstack_project::base
 #
 class openstack_project::base(
-  $certname = $::fqdn,
-  $install_users = true
+  $certname      = $::fqdn,
+  $install_users = true,
+  $pin_puppet    = '2.7',
+  $pin_facter    = '1',
 ) {
   if ($::osfamily == 'Debian') {
     include apt
