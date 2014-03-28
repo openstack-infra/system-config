@@ -258,6 +258,9 @@
   options:
     - direct-release
 - project: openstack/openstack-planet
+- project: openstack/openstack-security-notes
+  description: OpenStack Security Notes (OSSN)
+  upstream: https://github.com/nkinder/openstack-security-notes.git
 - project: openstack/operations-guide
   group: openstack-manuals
   upstream: git://github.com/jeblair/openstack-ops
