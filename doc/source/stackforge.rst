@@ -64,6 +64,10 @@ repository which can be used to preseed Gerrit with an initial commit
 history. Both of these are optional. Note that the current tools
 assume that the upstream repo will have a master branch.
 
+Note: Ensure the source repo has been evaluated and only required branches
+remain when it seeds the stackforge repo. Cleaning up a repo of unnecessary
+branches after the merge requires an openstack-infra core member to do so.
+
 The next step is to add a Gerrit ACL config file. Edit
 ``modules/openstack_project/files/gerrit/acls/stackforge/project-name.config``
 and make it look like::
