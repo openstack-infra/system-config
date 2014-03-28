@@ -37,6 +37,7 @@ class openstack_project::eavesdrop (
     vhost_extra => $vhost_extra,
     channels    => [
         '#heat',
+        '#magnetodb',
         '#murano',
         '#openstack',
         '#openstack-ceilometer',
