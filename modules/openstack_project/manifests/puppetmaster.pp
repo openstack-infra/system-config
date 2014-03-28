@@ -3,7 +3,10 @@
 class openstack_project::puppetmaster (
   $root_rsa_key,
   $override_list = [],
-  $sysadmins = []
+  $salt = true,
+  $update_slave = true,
+  $sysadmins = [],
+  $version   = '2.7.',
 ) {
   include logrotate
   include openstack_project::params
@@ -11,31 +14,40 @@ class openstack_project::puppetmaster (
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [4505, 4506, 8140],
     sysadmins                 => $sysadmins,
+    pin_puppet                => $version,
   }
 
-  class { 'salt':
-    salt_master => 'ci-puppetmaster.openstack.org',
+  if ($salt) {
+    class { 'salt':
+      salt_master => 'ci-puppetmaster.openstack.org',
+    }
+    class { 'salt::master': }
   }
-  class { 'salt::master': }
+
+  if ($update_slave) {
+    $cron_command = 'bash /opt/config/production/run_all.sh'
+    logrotate::file { 'updatepuppetmaster':
+      ensure  => present,
+      log     => '/var/log/puppet_run_all.log',
+      options => ['compress',
+        'copytruncate',
+        'delaycompress',
+        'missingok',
+        'rotate 7',
+        'daily',
+        'notifempty',
+      ],
+      require => Cron['updatepuppetmaster'],
+    }
+  } else {
+    $cron_command = 'sleep $((RANDOM\%600)) && cd /opt/config/production && git fetch -q && git reset -q --hard @{u} && ./install_modules.sh && touch manifests/site.pp'
+  }
 
   cron { 'updatepuppetmaster':
     user        => 'root',
     minute      => '*/15',
-    command     => 'bash /opt/config/production/run_all.sh',
+    command     => $cron_command,
     environment => 'PATH=/var/lib/gems/1.8/bin:/usr/bin:/bin:/usr/sbin:/sbin',
-  }
-  logrotate::file { 'updatepuppetmaster':
-    ensure  => present,
-    log     => '/var/log/puppet_run_all.log',
-    options => ['compress',
-      'copytruncate',
-      'delaycompress',
-      'missingok',
-      'rotate 7',
-      'daily',
-      'notifempty',
-    ],
-    require => Cron['updatepuppetmaster'],
   }
 
   cron { 'deleteoldreports':

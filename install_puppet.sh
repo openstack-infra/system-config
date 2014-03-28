@@ -20,7 +20,19 @@
 # Distro identification functions
 #  note, can't rely on lsb_release for these as we're bare-bones and
 #  it may not be installed yet)
+
 #
+# Test condition to install puppet 3
+if [ "$1" = '--three' ]; then
+    THREE=yes
+    echo "Running in 3 mode"
+fi
+
+#
+# Distro identification functions
+#  note, can't rely on lsb_release for these as we're bare-bones and
+#  it may not be installed yet)
+
 
 function is_fedora {
     [ -f /usr/bin/yum ] && cat /etc/*release | grep -q -e "Fedora"
@@ -48,10 +60,12 @@ function setup_puppet_fedora {
     # lsbdistcodename
     yum install -y redhat-lsb-core git puppet
 
-    gem install hiera hiera-puppet
 
     mkdir -p /etc/puppet/modules/
-    ln -s /usr/local/share/gems/gems/hiera-puppet-* /etc/puppet/modules/
+    if [ "$THREE" != 'yes' ]; then
+        gem install hiera hiera-puppet
+        ln -s /usr/local/share/gems/gems/hiera-puppet-* /etc/puppet/modules/
+    fi
 
     # Puppet expects for an expects the command to be pip-python on
     # Fedora, as per the packaged command name.  However, we're
@@ -85,8 +99,11 @@ baseurl=http://yum.puppetlabs.com/el/6/products/$basearch
 gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-puppetlabs
 enabled=1
 gpgcheck=1
-exclude=puppet-2.8* puppet-2.9* puppet-3* facter-2*
 EOF
+
+    if [ "$THREE" != 'yes' ]; then
+        echo "exclude=puppet-2.8* puppet-2.9* puppet-3*" >> /etc/yum.repos.d/puppetlabs.repo
+    fi
 
     yum update -y
 }
@@ -94,20 +111,31 @@ EOF
 function setup_puppet_ubuntu {
     lsbdistcodename=`lsb_release -c -s`
     if [ $lsbdistcodename != 'trusty' ] ; then
-        # NB: keep in sync with openstack_project/files/00-puppet.pref
-        cat > /etc/apt/preferences.d/00-puppet.pref <<EOF
-Package: puppet puppet-common puppetmaster puppetmaster-common puppetmaster-passenger
-Pin: version 2.7*
-Pin-Priority: 501
-
-Package: facter
-Pin: version 1.*
-Pin-Priority: 501
-EOF
         rubypkg=rubygems
     else
         rubypkg=ruby
+        THREE=yes
     fi
+
+    # NB: keep in sync with openstack_project/files/00-puppet.pref
+    if [ "$THREE" == 'yes' ]; then
+        PUPPET_VERSION=3.4.*
+        FACTER_VERSION=2.*
+    else
+        PUPPET_VERSION=2.7*
+        FACTER_VERSION=1.*
+    fi
+
+    cat > /etc/apt/preferences.d/00-puppet.pref <<EOF
+Package: puppet puppet-common puppetmaster puppetmaster-common puppetmaster-passenger
+Pin: version $PUPPET_VERSION
+Pin-Priority: 501
+
+Package: facter
+Pin: version $FACTER_VERSION
+Pin-Priority: 501
+EOF
+
     puppet_deb=puppetlabs-release-${lsbdistcodename}.deb
     wget http://apt.puppetlabs.com/$puppet_deb -O $puppet_deb
     dpkg -i $puppet_deb

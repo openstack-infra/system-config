@@ -7,6 +7,7 @@ class openstack_project::template (
   $iptables_public_udp_ports = [],
   $iptables_rules4           = [],
   $iptables_rules6           = [],
+  $pin_puppet                = '2.7.',
   $install_users = true,
   $install_resolv_conf = true,
   $automatic_upgrades = true,
@@ -30,6 +31,7 @@ class openstack_project::template (
   class { 'openstack_project::base':
     install_users => $install_users,
     certname      => $certname,
+    pin_puppet    => $pin_puppet,
   }
 
   package { 'lvm2':
