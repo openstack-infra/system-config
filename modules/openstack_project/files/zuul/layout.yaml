@@ -2407,6 +2407,7 @@ projects:
       - openstack-install-deploy-guide-ubuntu
       - openstack-openstack-install-ubuntu-old
       - openstack-install-deploy-guide-ja
+      - openstack-misc-guides-ja
       - openstack-security-guide
       - openstack-user-guide
       - openstack-user-guide-admin
