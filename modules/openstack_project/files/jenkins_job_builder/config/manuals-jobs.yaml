@@ -97,6 +97,31 @@
           remove-prefix: 'publish-docs/{lang}/'
 
 - job-template:
+    name: 'openstack-misc-guides-{lang}'
+
+    node: bare-precise
+
+    properties:
+      - inject:
+          script-file: /usr/local/jenkins/slave_scripts/docbook-properties.sh
+          properties-file: gerrit-doc.properties
+
+    builders:
+      - revoke-sudo
+      - gerrit-git-prep
+      - shell: |
+          source /usr/local/jenkins/slave_scripts/select-mirror.sh openstack openstack-manuals
+          tox -v -e buildlang-misc -- {lang}
+
+    publishers:
+      - console-log
+      - ftp:
+          site: docs.openstack.org
+          source: 'publish-docs/{lang}/**'
+          target: '/{lang}/'
+          remove-prefix: 'publish-docs/{lang}/'
+
+- job-template:
     name: 'gate-{name}-tox-doc-publish-{envlist}'
 
     wrappers:
