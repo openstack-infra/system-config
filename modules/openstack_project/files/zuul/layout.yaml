@@ -307,40 +307,29 @@ jobs:
   - name: ^(periodic|post)-mirror-python(26|27|33)$
     parameter-function: reusable_node
   # the salt-trigger worker has no jobs yet
-  - name: ^(gate|check)-requirements-integration-dsvm$
-    branch: ^(?!stable/grizzly).*$
-  - name: ^(gate|check)-tempest-dsvm-neutron-pg$
-    branch: ^(?!stable/grizzly).*$
   - name: ^(gate|check)-tempest-dsvm-neutron-full$
-    branch: ^(?!stable/grizzly).*$
     voting: false
   - name: ^(gate|check)-tempest-dsvm-neutron-heat-slow
-    branch: ^(?!stable/(grizzly|havana)).*$
+    branch: ^(?!stable/havana).*$
   - name: check-tempest-dsvm-ironic-nv
     voting: false
   - name: check-tempest-dsvm-ironic-postgres-nv
     voting: false
   - name: ^check-tempest-dsvm-virtual-ironic.*$
     voting: false
-  - name: ^(gate|check)-tempest-dsvm-large-ops$
-    branch: ^(?!stable/grizzly).*$
-  - name: ^(gate|check)-tempest-dsvm-neutron-large-ops$
-    branch: ^(?!stable/grizzly).*$
   - name: ^(gate|check)-tempest-dsvm-cells$
     voting: false
   - name: ^(gate|check)-tempest-dsvm-cells-full$
     voting: false
   - name: ^(gate|check)-grenade-dsvm$
-    branch: ^(?!stable/(grizzly|havana)).*$
+    branch: ^(?!stable/havana).*$
   - name: ^(gate|check)-grenade-dsvm-neutron$
-    branch: ^(?!stable/(grizzly|havana)).*$
+    branch: ^(?!stable/havana).*$
     voting: false
   - name: ^(gate|check)-grenade-dsvm-partial-ncpu$
-    branch: ^(?!stable/(grizzly|havana)).*$
+    branch: ^(?!stable/havana).*$
   - name: ^gate-.*-pypy$
     voting: false
-  - name: gate-tempest-python27
-    branch: ^(?!stable/grizzly).*$
     # only here until stable is votable, then merge
     # back to a single job
   - name: ^(gate|check)-grenade-dsvm-forward$
@@ -348,28 +337,6 @@ jobs:
     voting: false
   - name: ^(gate|check)-grenade-dsvm-neutron-forward
     branch: ^(stable/).*$
-    voting: false
-  - name: gate-grenade-noop
-    branch: ^(stable/grizzly).*$
-  - name: gate-devstack-bash8
-    branch: ^(?!stable/grizzly).*$
-  - name: gate-tempest-docs
-    branch: ^(?!stable/grizzly).*$
-  - name: tempest-docs
-    branch: ^(?!stable/grizzly).*$
-  - name: ^(gate|check)-swift-dsvm-functional$
-    branch: ^(?!stable/grizzly).*$
-  - name: check-tempest-dsvm-full-grizzly
-    voting: false
-  - name: check-tempest-dsvm-neutron-grizzly
-    voting: false
-  - name: check-tempest-dsvm-postgres-full-grizzly
-    voting: false
-  - name: check-devstack-dsvm-cells-grizzly
-    voting: false
-  - name: check-tempest-dsvm-cells-grizzly
-    voting: false
-  - name: check-tempest-dsvm-cells-full-grizzly
     voting: false
   - name: check-tempest-dsvm-full-havana
     voting: false
@@ -396,10 +363,7 @@ jobs:
   - name: gate-nova-pylint
     voting: false
   - name: gate-cinder-pylint
-    branch: ^(?!stable/grizzly).*$
     voting: false
-  - name: gate-horizon-python27-django14
-    branch: ^(?!stable/grizzly).*$
   - name: dev-zuul-coverage
     voting: false
   - name: jenkins-job-builder-compare-xml
@@ -437,51 +401,12 @@ jobs:
     branch: master
   - name: ^.*manuals-upstream-translation-update$
     branch: master
-# Documentation targets for master and future stable branches:
-  - name: openstack-config-reference
-    branch: ^(?!stable/grizzly).*$
-  - name: openstack-install-deploy-guide-debian
-    branch: ^(?!stable/grizzly).*$
-  - name: openstack-install-deploy-guide-fedora
-    branch: ^(?!stable/grizzly).*$
-  - name: openstack-install-deploy-guide-opensuse
-    branch: ^(?!stable/grizzly).*$
-  - name: openstack-install-deploy-guide-ubuntu
-    branch: ^(?!stable/grizzly).*$
   - name: gate-openstack-manuals-tox-checkniceness
-    branch: ^(?!stable/grizzly).*$
     voting: false
-  - name: gate-openstack-manuals-tox-checksyntax
-    branch: ^(?!stable/grizzly).*$
-  - name: gate-openstack-manuals-tox-checkdeletions
-    branch: ^(?!stable/grizzly).*$
-  # The order of the next two rules is important, the more generic one
-  # needs to be first.
   - name: ^gate-.*-tox-doc-publish-checkbuild$
     success-pattern: http://docs-draft.openstack.org/{build.parameters[LOG_PATH]}/publish-docs/
-  - name: gate-openstack-manuals-tox-doc-publish-checkbuild
-    branch: ^(?!stable/grizzly).*$
   - name: ^gate-.*-tox-checkniceness$
     voting: false
-# Deprecated documentation targets:
-  - name: openstack-block-storage-admin-old
-    branch: stable/grizzly
-  - name: openstack-compute-admin-old
-    branch: stable/grizzly
-  - name: openstack-network-connectivity-admin-old
-    branch: stable/grizzly
-  - name: openstack-object-storage-admin-old
-    branch: stable/grizzly
-  - name: openstack-basic-install-fedora-old
-    branch: stable/grizzly
-  - name: openstack-basic-install-ubuntu-old
-    branch: stable/grizzly
-  - name: openstack-openstack-install-fedora-old
-    branch: stable/grizzly
-  - name: openstack-openstack-install-ubuntu-old
-    branch: stable/grizzly
-  - name: gate-openstack-manuals-validate
-    branch: stable/grizzly
   - name: ^gate-.*-docs$
     success-pattern: http://docs-draft.openstack.org/{build.parameters[LOG_PATH]}/doc/build/html/
   - name: gate-storyboard-webclient-js-unittests
@@ -490,14 +415,10 @@ jobs:
     branch: ^(?!master).*$
   - name: ^gate-.*-requirements$
     failure-message: Incompatible requirement found; see https://wiki.openstack.org/wiki/Requirements
-    branch: ^(?!stable/(grizzly|havana)).*$
+    branch: ^(?!stable/havana).*$
     files:
       - '^tools/.*-requires$'
       - '^.*requirements.txt$'
-  - name: ^gate-requirements-pep8$
-    branch: ^(?!stable/grizzly).*$
-  - name: ^gate-requirements-(python27|pypy)$
-    branch: ^(?!stable/grizzly).*$
   - name: gate-hacking-python33
     voting: false
   - name: gate-hacking-pypy
@@ -601,7 +522,7 @@ jobs:
   - name: gate-storyboard-python33
     voting: false
   - name: gate-oslo-incubator-python33
-    branch: ^(?!stable/(grizzly|havana)).*$
+    branch: ^(?!stable/havana).*$
   - name: gate-nova-docker-python26
     voting: false
   - name: gate-nova-docker-python27
@@ -2383,18 +2304,8 @@ projects:
     template:
       - name: openstack-doc-gate
       - name: openstack-doc-translation
-    check:
-      - gate-openstack-manuals-validate
-    gate:
-      - gate-openstack-manuals-validate
     post:
       - openstack-admin-guide-cloud
-      - openstack-block-storage-admin-old
-      - openstack-compute-admin-old
-      - openstack-network-connectivity-admin-old
-      - openstack-object-storage-admin-old
-      - openstack-basic-install-fedora-old
-      - openstack-basic-install-ubuntu-old
       - openstack-glossary
       - openstack-image-guide
       - openstack-cli-reference
@@ -2403,10 +2314,8 @@ projects:
       - openstack-ha-guide
       - openstack-install-deploy-guide-debian
       - openstack-install-deploy-guide-fedora
-      - openstack-openstack-install-fedora-old
       - openstack-install-deploy-guide-opensuse
       - openstack-install-deploy-guide-ubuntu
-      - openstack-openstack-install-ubuntu-old
       - openstack-install-deploy-guide-ja
       - openstack-security-guide
       - openstack-user-guide
@@ -2470,13 +2379,11 @@ projects:
 
   - name: openstack-dev/grenade
     check:
-      - gate-grenade-noop
       - check-grenade-dsvm
       - check-grenade-dsvm-forward
       - check-grenade-dsvm-neutron
       - check-grenade-dsvm-partial-ncpu
     gate:
-      - gate-grenade-noop
       - gate-grenade-dsvm
       - gate-grenade-dsvm-forward
       - gate-grenade-dsvm-neutron

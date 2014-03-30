@@ -1,16 +1,3 @@
-# in zuul/layout.yaml specified to only run against stable/grizzly
-- job:
-    name: gate-openstack-manuals-validate
-    node: bare-precise
-
-    builders:
-      - revoke-sudo
-      - gerrit-git-prep
-      - shell: "./tools/validate.py"
-
-    publishers:
-      - console-log
-
 # in zuul/layout.yaml specified to only run against master branch.
 - job:
     name: openstack-docs-site

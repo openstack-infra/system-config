@@ -84,17 +84,6 @@
 
 
 - job-group:
-    name: python-grizzly-bitrot-jobs
-    branch: 'stable/grizzly'
-    branch-name: '-grizzly'
-    node: bare-precise
-    jobs:
-      - 'periodic-{name}-python26{branch-name}'
-      - 'periodic-{name}-python27{branch-name}'
-      - 'periodic-{name}-docs{branch-name}'
-
-
-- job-group:
     name: python-havana-bitrot-jobs
     branch: 'stable/havana'
     branch-name: '-havana'
