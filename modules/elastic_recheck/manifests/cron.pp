@@ -25,7 +25,7 @@ class elastic_recheck::cron () {
 
   cron { 'elastic-recheck-all':
     user        => 'recheck',
-    minute      => '0',
+    minute      => '0,30',
     hour        => '*',
     command     => "cd ${er_state_path} && er_safe_run.sh ${graph_all_cmd}",
     environment => 'PATH=/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin',
@@ -34,7 +34,7 @@ class elastic_recheck::cron () {
 
   cron { 'elastic-recheck-gate':
     user        => 'recheck',
-    minute      => '20',
+    minute      => '10,40',
     hour        => '*',
     command     => "cd ${er_state_path} && er_safe_run.sh ${graph_gate_cmd}",
     environment => 'PATH=/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin',
@@ -44,7 +44,7 @@ class elastic_recheck::cron () {
 
   cron { 'elastic-recheck-uncat':
     user        => 'recheck',
-    minute      => '40',
+    minute      => '20,50',
     hour        => '*',
     command     => "cd ${er_state_path} && er_safe_run.sh ${uncat_cmd}",
     environment => 'PATH=/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin',
