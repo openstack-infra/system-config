@@ -1843,13 +1843,13 @@ projects:
       - check-tripleo-ironic-undercloud-precise
       - check-tripleo-overcloud-precise
     pre-release:
+      - oslo.messaging-tarball
+    release:
       - oslo.messaging-tarball:
         - oslo.messaging-pypi-upload:
           - post-mirror-python26
           - post-mirror-python27
           - post-mirror-python33
-    release:
-      - oslo.messaging-tarball
 
 #TODO: add docs
   - name: openstack/oslo.rootwrap
