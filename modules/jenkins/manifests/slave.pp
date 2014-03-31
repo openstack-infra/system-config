@@ -44,6 +44,7 @@ class jenkins::slave(
     $::jenkins::params::graphviz_package, # for generating graphs in docs
     $::jenkins::params::firefox_package, # for selenium tests
     $::jenkins::params::mod_wsgi_package,
+    $::jenkins::params::language_fonts_packages,
     $::jenkins::params::libcurl_dev_package,
     $::jenkins::params::ldap_dev_package,
     $::jenkins::params::librrd_dev_package, # for python-rrdtool, used by kwapi
