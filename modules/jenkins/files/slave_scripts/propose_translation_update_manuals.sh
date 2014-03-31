@@ -82,14 +82,8 @@ do
     fi
 done
 
-if [ ! `git diff --cached --quiet HEAD --` ]
-then
-    # Push .pot changes to transifex
-    tx --debug --traceback push -s
-fi
-
 # Pull all upstream translations
-tx pull -a
+tx pull -a -f
 
 for FILE in ${DocFolder}/*
 do
