@@ -63,7 +63,7 @@ EOF
     # yum-config-manager --enable rhel-6-server-optional-rpms
 
     # NOTE: we preinstall lsb_release to ensure facter sets lsbdistcodename
-    yum install -y redhat-lsb-core git puppet heira hiera-puppet
+    yum install -y redhat-lsb-core git puppet
 else
     #defaults to Ubuntu
     # NB: keep in sync with openstack_project/files/00-puppet.pref
@@ -83,5 +83,5 @@ EOF
     DEBIAN_FRONTEND=noninteractive apt-get --option 'Dpkg::Options::=--force-confold' \
         --assume-yes dist-upgrade
     DEBIAN_FRONTEND=noninteractive apt-get --option 'Dpkg::Options::=--force-confold' \
-        --assume-yes install -y --force-yes puppet git rubygems hiera hiera-puppet
+        --assume-yes install -y --force-yes puppet git rubygems
 fi

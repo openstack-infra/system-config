@@ -88,7 +88,7 @@ repository::
 
   ./install_puppet.sh
   ./install_modules.sh
-  puppet apply -l /tmp/manifest.log --confdir=`pwd` --modulepath=modules:/etc/puppet/modules manifests/local.pp
+  puppet apply -l /tmp/manifest.log --modulepath=modules:/etc/puppet/modules manifests/local.pp
 
 That should turn the system you are logged into into an etherpad
 server with the same configuration as that used by the OpenStack

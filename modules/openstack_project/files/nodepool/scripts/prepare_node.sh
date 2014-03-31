@@ -45,10 +45,10 @@ sudo git clone --depth=1 git://git.openstack.org/openstack-infra/config.git \
     /root/config
 sudo /bin/bash /root/config/install_modules.sh
 if [ -z "$NODEPOOL_SSH_KEY" ] ; then
-    sudo puppet apply --confdir=/root/config --modulepath=/root/config/modules:/etc/puppet/modules \
+    sudo puppet apply --modulepath=/root/config/modules:/etc/puppet/modules \
 	-e "class {'openstack_project::single_use_slave': sudo => $SUDO, bare => $BARE, python3 => $PYTHON3, include_pypy => $PYPY, all_mysql_privs => $ALL_MYSQL_PRIVS, }"
 else
-    sudo puppet apply --confdir=/root/config --modulepath=/root/config/modules:/etc/puppet/modules \
+    sudo puppet apply --modulepath=/root/config/modules:/etc/puppet/modules \
 	-e "class {'openstack_project::single_use_slave': install_users => false, sudo => $SUDO, bare => $BARE, python3 => $PYTHON3, include_pypy => $PYPY, all_mysql_privs => $ALL_MYSQL_PRIVS, ssh_key => '$NODEPOOL_SSH_KEY', }"
 fi
 
