@@ -10,6 +10,7 @@
       - timestamps
 
     builders:
+      - revoke-sudo
       - shell: |
           #!/bin/bash -xe
           rm -rf gerrit
