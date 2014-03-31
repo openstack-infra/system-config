@@ -894,6 +894,7 @@ projects:
     experimental:
       - gate-grenade-dsvm-forward
       - check-tempest-dsvm-neutron-pg
+      - gate-tempest-dsvm-large-ops-testing
     experimental-tripleo:
       - check-tripleo-seed-precise
       - check-tripleo-ironic-seed-precise
