@@ -912,8 +912,10 @@ projects:
 
   - name: openstack/nova-specs
     check:
+      - gate-nova-specs-python27
       - gate-nova-specs-docs
     gate:
+      - gate-nova-specs-python27
       - gate-nova-specs-docs
 
   - name: stackforge/nova-docker
