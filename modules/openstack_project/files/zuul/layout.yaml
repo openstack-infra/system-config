@@ -1899,6 +1899,12 @@ projects:
       - name: pypy-jobs
       - name: openstack-server-publish-jobs
       - name: check-requirements
+    check:
+      - check-oslo.test-dsvm-oslo.config
+      - check-oslo.test-dsvm-oslo.messaging
+    gate:
+      - gate-oslo.test-dsvm-oslo.config
+      - gate-oslo.test-dsvm-oslo.messaging
     pre-release:
       - oslo.test-tarball
     release:
