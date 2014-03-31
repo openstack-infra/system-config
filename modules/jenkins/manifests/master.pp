@@ -4,9 +4,6 @@ class jenkins::master(
   $logo = '',
   $vhost_name = $::fqdn,
   $serveradmin = "webmaster@${::fqdn}",
-  $gearman_server = '127.0.0.1',
-  $gearman_enable = true,
-  $gearman_port = '4730',
   $ssl_cert_file = '',
   $ssl_key_file = '',
   $ssl_chain_file = '',
@@ -163,17 +160,6 @@ class jenkins::master(
     group   => 'nogroup',
     mode    => '0750',
     require => File['/var/lib/jenkins'],
-  }
-
-  file {'/var/lib/jenkins/hudson.plugins.gearman.GearmanPluginConfig.xml':
-    ensure  => present,
-    content => template('jenkins/gearman-plugin.xml.erb'),
-    owner   => 'jenkins',
-    group   => 'adm',
-    require => [
-      Class['zuul'],
-      File['/var/lib/jenkins'],
-    ],
   }
 
   file { '/var/lib/jenkins/plugins/simple-theme-plugin':
