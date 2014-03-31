@@ -1,8 +1,21 @@
 ---
 :hierarchy:
-  - %{operatingsystem}
-  - common
+  - etc/puppet/hieradata/%{environment}/fqdn/%{::fqdn}
+  - etc/puppet/hieradata/%{environment}/%{::osfamily}/%{::lsbdistcodename}
+  - etc/puppet/hieradata/%{environment}/%{::osfamily}/common
+  - etc/puppet/hieradata/%{environment}/%{operatingsystem}
+  - etc/puppet/hieradata/%{environment}/common
+  - %{::settings::confdir}/data/fqdn/%{::fqdn}
+  - %{::settings::confdir}/data/%{::osfamily}/%{::lsbdistcodename}
+  - %{::settings::confdir}/data/%{::osfamily}/common
+  - %{::settings::confdir}/data/%{operatingsystem}
+  - %{::settings::confdir}/data/common
+  - opt/config/%{environment}/data/fqdn/%{::fqdn}
+  - opt/config/%{environment}/data/%{::osfamily}/%{::lsbdistcodename}
+  - opt/config/%{environment}/data/%{::osfamily}/common
+  - opt/config/%{environment}/data/%{operatingsystem}
+  - opt/config/%{environment}/data/common
 :backends:
   - yaml
 :yaml:
-  :datadir: '/etc/puppet/hieradata/%{environment}'
+  :datadir: '/'
