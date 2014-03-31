@@ -78,7 +78,6 @@ node 'jenkins.openstack.org' {
     zmq_event_receivers     => ['logstash.openstack.org',
                                 'nodepool.openstack.org',
     ],
-    gearman_server          => 'zuul.openstack.org',
   }
 }
 
@@ -93,7 +92,6 @@ node 'jenkins01.openstack.org' {
     zmq_event_receivers     => ['logstash.openstack.org',
                                 'nodepool.openstack.org',
     ],
-    gearman_server          => 'zuul.openstack.org',
   }
 }
 
@@ -108,7 +106,6 @@ node 'jenkins02.openstack.org' {
     zmq_event_receivers     => ['logstash.openstack.org',
                                 'nodepool.openstack.org',
     ],
-    gearman_server          => 'zuul.openstack.org',
   }
 }
 
@@ -123,7 +120,6 @@ node 'jenkins03.openstack.org' {
     zmq_event_receivers     => ['logstash.openstack.org',
                                 'nodepool.openstack.org',
     ],
-    gearman_server          => 'zuul.openstack.org',
   }
 }
 
@@ -138,7 +134,6 @@ node 'jenkins04.openstack.org' {
     zmq_event_receivers     => ['logstash.openstack.org',
                                 'nodepool.openstack.org',
     ],
-    gearman_server          => 'zuul.openstack.org',
   }
 }
 
@@ -153,7 +148,6 @@ node 'jenkins05.openstack.org' {
     zmq_event_receivers     => ['logstash.openstack.org',
                                 'nodepool.openstack.org',
     ],
-    gearman_server          => 'zuul.openstack.org',
   }
 }
 
@@ -168,7 +162,6 @@ node 'jenkins06.openstack.org' {
     zmq_event_receivers     => ['logstash.openstack.org',
                                 'nodepool.openstack.org',
     ],
-    gearman_server          => 'zuul.openstack.org',
   }
 }
 
@@ -183,7 +176,6 @@ node 'jenkins07.openstack.org' {
     zmq_event_receivers     => ['logstash.openstack.org',
                                 'nodepool.openstack.org',
     ],
-    gearman_server          => 'zuul.openstack.org',
   }
 }
 
@@ -200,7 +192,6 @@ node 'jenkins-dev.openstack.org' {
     hpcloud_username         => hiera('nodepool_hpcloud_username'),
     hpcloud_password         => hiera('nodepool_hpcloud_password'),
     hpcloud_project          => hiera('nodepool_hpcloud_project'),
-    gearman_server           => 'zuul-dev.openstack.org',
   }
 }
 

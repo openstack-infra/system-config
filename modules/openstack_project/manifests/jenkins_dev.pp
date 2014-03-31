@@ -12,7 +12,6 @@ class openstack_project::jenkins_dev (
   $hpcloud_username ='',
   $hpcloud_password ='',
   $hpcloud_project ='',
-  $gearman_server = '127.0.0.1',
 ) {
   include openstack_project
 
@@ -34,7 +33,6 @@ class openstack_project::jenkins_dev (
     ssl_chain_file          => '',
     jenkins_ssh_private_key => $jenkins_ssh_private_key,
     jenkins_ssh_public_key  => $openstack_project::jenkins_dev_ssh_key,
-    gearman_server          => $gearman_server,
   }
 
   file { '/etc/default/jenkins':
