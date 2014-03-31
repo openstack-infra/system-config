@@ -9,7 +9,9 @@ o Run puppet_install functin of utils.sh
   puppet_install
 
 
-Copy your id_rsa and id_rsa.pub to /root/.ssh/.
+Copy your id_rsa and id_rsa.pub to /root/.ssh/. and ~gerrits/.ssh/.
+su - gerrit2
+ssh github.com (Should report authentication successful)
 
 Setup opencontrail-admin user by logging onto web interface
 Setup username as opencontrail-admin
