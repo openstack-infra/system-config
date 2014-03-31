@@ -95,7 +95,7 @@ node 'puppet-dashboard.opencontrail.org' {
 node 'zuul.opencontrail.org' {
   class { 'opencontrail_project::zuul_prod':
     gerrit_server        => 'review.opencontrail.org',
-    gerrit_user          => 'jenkins',
+    gerrit_user          => 'zuul',
     gerrit_ssh_host_key  => hiera('gerrit_ssh_rsa_pubkey_contents'),
     zuul_ssh_private_key => hiera('zuul_ssh_private_key_contents'),
     url_pattern          => 'http://logs.opencontrail.org/{build.parameters[LOG_PATH]}',
@@ -104,8 +104,8 @@ node 'zuul.opencontrail.org' {
 #   statsd_host          => 'graphite.opencontrail.org',
     gearman_workers      => [
 #     'nodepool.opencontrail.org',
-      'jenkins.opencontrail.org',
-      'jenkins01.opencontrail.org',
+#     'jenkins.opencontrail.org',
+#     'jenkins01.opencontrail.org',
 #     'zm01.opencontrail.org',
     ],
   }
