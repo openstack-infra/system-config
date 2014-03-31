@@ -9,7 +9,7 @@ function set_date {
 }
 
 function puppet_install {
-  apt-get -y install git python-pip ruby puppet
+  apt-get -y install git python-pip ruby puppet git-review
   sed -e s%START=no%START=yes% /etc/default/puppet > /tmp/puppet
   cp /tmp/puppet /etc/default/puppet
 

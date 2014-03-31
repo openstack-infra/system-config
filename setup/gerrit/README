@@ -8,7 +8,6 @@ o Run puppet_install functin of utils.sh
   source utils.sh
   puppet_install
 
-
 Copy your id_rsa and id_rsa.pub to /root/.ssh/. and ~gerrits/.ssh/.
 su - gerrit2
 ssh github.com (Should report authentication successful)
@@ -26,4 +25,12 @@ add 'PUSH' to Administrators and save settings
 # Run setup.rb as
   sudo su -
   setup.rb
+
+# Test and verify
+Checkout contrail-controller project
+git clone git@github.com:rombie/contrail-controller
+git checkout -b test
+Make a sample change and git commit
+git review
+Use opencontrail-admin as the user name
 
