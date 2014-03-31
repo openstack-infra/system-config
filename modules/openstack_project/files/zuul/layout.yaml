@@ -1016,6 +1016,7 @@ projects:
     template:
       - name: python-jobs
       - name: openstack-server-publish-jobs
+      - name: integrated-gate
     check:
       - gate-taskflow-python33
       - gate-taskflow-tox-py26-sa7-mysql
