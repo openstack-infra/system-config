@@ -199,7 +199,5 @@ File.open("/tmp/cmd", "w") { |fp| fp.puts cmd }
 # Finally run the commands and update gerrit meta config.
 `cat /tmp/cmd | sh`
 
-def zuul_setup
-  `cat #{HOME}/.ssh/id_rsa.pub | ssh #{SSH_OPTIONS} create-account --group "'Continuous Integration Tools'" --full-name "'Zuul'" --email zuul@lists.opencontrail.org --ssh-key - zuul`
-end
+`cat #{HOME}/.ssh/id_rsa.pub | ssh #{SSH_OPTIONS} create-account --group "'Continuous Integration Tools'" --full-name "'Zuul'" --email zuul@lists.opencontrail.org --ssh-key - zuul`
 
