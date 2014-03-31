@@ -18,7 +18,7 @@
           export DEVSTACK_GATE_TIMEOUT=120
           export DEVSTACK_GATE_TEMPEST=0
           export DEVSTACK_GATE_EXERCISES=0
-          export GEARDSERVER=192.168.1.48
+          export GEARDSERVER=192.168.1.1
           export DIB_COMMON_ELEMENTS="stackuser pypi-openstack"
           export TRIPLEO_TEST=seed
           function gate_hook {
@@ -58,7 +58,7 @@
           export DEVSTACK_GATE_TIMEOUT=120
           export DEVSTACK_GATE_TEMPEST=0
           export DEVSTACK_GATE_EXERCISES=0
-          export GEARDSERVER=192.168.1.48
+          export GEARDSERVER=192.168.1.1
           export DIB_COMMON_ELEMENTS="stackuser pypi-openstack"
           export TRIPLEO_TEST=seed
           export USE_IRONIC=1
@@ -99,7 +99,7 @@
           export DEVSTACK_GATE_TIMEOUT=120
           export DEVSTACK_GATE_TEMPEST=0
           export DEVSTACK_GATE_EXERCISES=0
-          export GEARDSERVER=192.168.1.48
+          export GEARDSERVER=192.168.1.1
           export DIB_COMMON_ELEMENTS="stackuser pypi-openstack"
           export TRIPLEO_TEST=undercloud
           function gate_hook {
@@ -139,7 +139,7 @@
           export DEVSTACK_GATE_TIMEOUT=120
           export DEVSTACK_GATE_TEMPEST=0
           export DEVSTACK_GATE_EXERCISES=0
-          export GEARDSERVER=192.168.1.48
+          export GEARDSERVER=192.168.1.1
           export DIB_COMMON_ELEMENTS="stackuser pypi-openstack"
           export TRIPLEO_TEST=undercloud
           export USE_IRONIC=1
@@ -180,7 +180,7 @@
           export DEVSTACK_GATE_TIMEOUT=140
           export DEVSTACK_GATE_TEMPEST=0
           export DEVSTACK_GATE_EXERCISES=0
-          export GEARDSERVER=192.168.1.48
+          export GEARDSERVER=192.168.1.1
           export DIB_COMMON_ELEMENTS="stackuser pypi-openstack"
           export TRIPLEO_TEST=overcloud
           function gate_hook {
