@@ -1,5 +1,10 @@
 ---
 :hierarchy:
+  - %{environment}/fqdn/%{::fqdn}
+  - %{environment}/%{::osfamily}/%{::lsbdistcodename}
+  - %{environment}/%{::osfamily}/common
+  - %{environment}/%{operatingsystem}
+  - %{environment}/common
   - fqdn/%{::fqdn}
   - %{::osfamily}/%{::lsbdistcodename}
   - %{::osfamily}/common
