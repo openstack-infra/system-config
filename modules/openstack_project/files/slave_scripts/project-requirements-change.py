@@ -33,6 +33,54 @@ def run_command(cmd):
     return out.strip()
 
 
+def increase_version(version_string):
+    """
+    Returns simple increased version string
+    """
+    items = version_string.split('.')
+    for i in range(len(items) - 1, 0, -1):
+        current_item = items[i]
+        if current_item.isdigit():
+            current_item = int(current_item) + 1
+            items[i] = str(current_item)
+            break
+    final = '.'.join(items)
+    return final
+
+
+def decrease_version(version_string):
+    """
+    Returns simple decreased version string
+    """
+    items = version_string.split('.')
+    for i in range(len(items) - 1, 0, -1):
+        current_item = items[i]
+        if current_item.isdigit():
+            current_item = int(current_item) - 1
+            if current_item >= 0:
+                items[i] = str(current_item)
+                break
+            else:
+                # continue to parent
+                items[i] = '9'
+
+    final = '.'.join(items)
+    return final
+
+
+def get_version_required(req):
+    """
+    Returns required version string depending on reqs
+    """
+    operator = req[0]
+    version = req[1]
+    if operator == '>':
+        version = increase_version(version)
+    elif operator == '<':
+        version = decrease_version(version)
+    return version
+
+
 class RequirementsList(object):
     def __init__(self, name):
         self.name = name
@@ -130,8 +178,20 @@ def main():
     failed = False
     for req in head_reqs.reqs.values():
         name = req.project_name.lower()
-        if name in branch_reqs.reqs and req == branch_reqs.reqs[name]:
-            continue
+        if name in branch_reqs.reqs:
+            if req == branch_reqs.reqs[name]:
+                continue
+            else:
+                # check if overlaps
+                for spec in req.specs:
+                    version = get_version_required(spec)
+                    branch_req = branch_reqs.reqs[name]
+                    if not branch_req.__contains__(version):
+                        failed = True
+                        print("Requirement %s does not overlap with branch " %
+                              str(req))
+                        continue
+
         if name not in os_reqs.reqs:
             print("Requirement %s not in openstack/requirements" % str(req))
             failed = True
