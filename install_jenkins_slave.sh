@@ -24,7 +24,7 @@ if cat /etc/*release | grep -e "CentOS" -e "Red Hat" &> /dev/null; then
 	# yum-config-manager --enable rhel-6-server-optional-rpms
 
         # NOTE: we preinstall lsb_release to ensure facter sets lsbdistcodename
-	yum install -y redhat-lsb-core git puppet heira heira-puppet
+	yum install -y redhat-lsb-core git puppet
 
 else #defaults to Ubuntu
 
@@ -41,11 +41,11 @@ else #defaults to Ubuntu
 
 	apt-get update
 	apt-get dist-upgrade
-	apt-get install -y puppet git rubygems heira heira-puppet
+	apt-get install -y puppet git rubygems
 
 fi
 
 git clone https://git.openstack.org/openstack-infra/config
 bash config/install_modules.sh
 
-puppet apply --confdir=$(pwd) --modulepath=$(pwd)/config/modules:/etc/puppet/modules -e 'node default {class { "openstack_project::bare_slave": install_users => false }}'
+puppet apply --modulepath=`pwd`/config/modules:/etc/puppet/modules -e 'node default {class { "openstack_project::bare_slave": install_users => false }}'
