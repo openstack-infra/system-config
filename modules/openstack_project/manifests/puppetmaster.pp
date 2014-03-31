@@ -52,6 +52,12 @@ class openstack_project::puppetmaster (
     environment => 'PATH=/var/lib/gems/1.8/bin:/usr/bin:/bin:/usr/sbin:/sbin',
   }
 
+  file { '/etc/hiera.yaml':
+    ensure  => link,
+    target  => '/etc/puppet/hiera.yaml',
+    require => File['/etc/puppet/hiera.yaml'],
+  }
+
   file { '/etc/puppet/hiera.yaml':
     ensure  => present,
     owner   => 'root',
