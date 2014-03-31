@@ -8,6 +8,4 @@
 :backends:
   - yaml
 :yaml:
-  :datadir: '/etc/puppet/hieradata/%{environment}'
-  :datadir: '%{confdir}/data'
-  :datadir: '/opt/config/%{environment}/data'
+  :datadir: '%{::settings::confdir}/hieradata/%{environment}'
