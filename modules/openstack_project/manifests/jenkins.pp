@@ -10,7 +10,8 @@ class openstack_project::jenkins (
   $ssl_chain_file_contents = '',
   $jenkins_ssh_private_key = '',
   $zmq_event_receivers = [],
-  $sysadmins = []
+  $sysadmins = [],
+  $gearman_server = '127.0.0.1',
 ) {
   include openstack_project
 
@@ -40,6 +41,7 @@ class openstack_project::jenkins (
     ssl_chain_file_contents => $ssl_chain_file_contents,
     jenkins_ssh_private_key => $jenkins_ssh_private_key,
     jenkins_ssh_public_key  => $openstack_project::jenkins_ssh_key,
+    gearman_server          => $gearman_server,
   }
 
   jenkins::plugin { 'ansicolor':
@@ -61,7 +63,7 @@ class openstack_project::jenkins (
     version => '1.70',
   }
   jenkins::plugin { 'gearman-plugin':
-    version => '0.0.3',
+    version => '0.0.6',
   }
   jenkins::plugin { 'git':
     version => '1.1.23',
