@@ -30,6 +30,7 @@ function reset_project {
   PROJECT=$1
   rm -rf ~gerrit2/review_site/git/stackforge/$PROJECT.git /var/lib/jeepyb/stackforge/$PROJECT
   service gerrit restart
+  ssh -qp 29418 review.opencontrail.org gerrit flush-caches
   manage-projects -dv
 }
 
