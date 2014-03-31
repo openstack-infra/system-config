@@ -225,6 +225,7 @@
 - project: openstack/ironic-python-agent
   description: A python agent for provisioning and deprovisioning Bare Metal servers.
   upstream: git://github.com/rackerlabs/teeth-agent.git
+  group: ironic
 - project: openstack/keystone
   docimpact-group: openstack-manuals
 - project: openstack/marconi
