@@ -13,5 +13,5 @@ sed -i -e 's/hiera..sysadmins../["admin"]/' applytest/puppetapplytest*
 sed -i -e 's/hiera..listadmins../["admin"]/' applytest/puppetapplytest*
 sed -i -e 's/hiera.*/PASSWORD,/' applytest/puppetapplytest*
 for f in `find applytest -name 'puppetapplytest*' -print` ; do
-    puppet apply --confdir=$(pwd) --modulepath=./modules:/etc/puppet/modules -v --noop --debug $f >/dev/null
+    puppet apply --modulepath=./modules:/etc/puppet/modules -v --noop --debug $f >/dev/null
 done
