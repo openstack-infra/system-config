@@ -1,1 +1,16 @@
-modules/openstack_project/files/puppetmaster/hiera.yaml
+---
+:hierarchy:
+  - %{environment}/fqdn/%{::fqdn}
+  - %{environment}/%{::osfamily}/%{::lsbdistcodename}
+  - %{environment}/%{::osfamily}/common
+  - %{environment}/%{operatingsystem}
+  - %{environment}/common
+  - fqdn/%{::fqdn}
+  - %{::osfamily}/%{::lsbdistcodename}
+  - %{::osfamily}/common
+  - %{operatingsystem}
+  - common
+:backends:
+  - yaml
+:yaml:
+  :datadir: '%{::settings::confdir}/hieradata/%{environment}'
