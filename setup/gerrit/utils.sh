@@ -41,3 +41,11 @@ function ls_projects {
 function ls_groups {
   ssh -qp 29418 review.opencontrail.org gerrit ls-groups
 }
+
+function create_zuul_user {
+  cat $HOME/.ssh/id_rsa.pub | ssh -qp 29418 review.opencontrail.org gerrit create-account --group "'Continuous Integration Tools'" --full-name "'Zuul'" --email zuul@lists.opencontrail.org --ssh-key - zuul
+}
+
+function gerrit_cmd {
+  ssh -qp 29418 review.opencontrail.org gerrit $*
+}
