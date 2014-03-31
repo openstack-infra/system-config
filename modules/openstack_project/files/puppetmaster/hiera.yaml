@@ -1,8 +1,10 @@
 ---
 :hierarchy:
-  - %{operatingsystem}
-  - common
+  - hieradata/%{environment}/common.yaml
+  - %{environment}/data/%{osfamily}/common.yaml
+  - %{environment}/data/%{operatingsystem}/common.yaml
+  - %{environment}/data/common.yaml
 :backends:
   - yaml
 :yaml:
-  :datadir: '/etc/puppet/hieradata/%{environment}'
+  :datadir: '/etc/puppet'
