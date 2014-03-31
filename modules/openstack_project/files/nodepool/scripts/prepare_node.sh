@@ -24,15 +24,11 @@ PYPY=${5:-false}
 ALL_MYSQL_PRIVS=${6:-false}
 
 # Save the nameservers configured by our provider.
-echo 'forward-zone:' > /tmp/forwarding.conf
-echo '  name: "."' >> /tmp/forwarding.conf
-# HPCloud nameservers (which have 10. addresses) strip RRSIG records.
-# Until this is resolved, use google instead.
-if grep "^nameserver \(10\|206\)\." /etc/resolv.conf; then
-    echo "  forward-addr: 8.8.8.8">> /tmp/forwarding.conf
-else
-    grep "^nameserver" /etc/resolv.conf|sed 's/nameserver \(.*\)/  forward-addr: \1/' >> /tmp/forwarding.conf
-fi
+cat >/tmp/forwarding.conf <<EOF
+forward-zone:
+  name: "."
+  forward-addr: 8.8.8.8
+EOF
 
 sudo hostname $HOSTNAME
 # Fedora image doesn't come with wget
