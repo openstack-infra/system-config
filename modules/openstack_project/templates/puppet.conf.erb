@@ -14,8 +14,8 @@ pluginsync=true
 # and can safely be removed if webrick is used.
 ssl_client_header = SSL_CLIENT_S_DN
 ssl_client_verify_header = SSL_CLIENT_VERIFY
-manifestdir=/opt/config/$environment/manifests
-modulepath=/opt/config/$environment/modules:/etc/puppet/modules
+manifestdir=/etc/puppet/$environment/manifests
+modulepath=/etc/puppet/modules:/etc/puppet/$environment/modules:/etc/puppet/modules
 manifest=$manifestdir/site.pp
 reports=store,puppetdb
 <% if @ca_server -%>
