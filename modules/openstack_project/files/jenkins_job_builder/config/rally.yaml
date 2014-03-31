@@ -3,9 +3,10 @@
     node: '{node}'
 
     builders:
-        - gerrit-git-prep
-        - link-logs
-        - shell: "tests_ci/test_install.sh"
+      - revoke-sudo
+      - link-logs
+      - gerrit-git-prep
+      - shell: "tests_ci/test_install.sh"
 
     publishers:
-        - console-log
+      - console-log
