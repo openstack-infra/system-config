@@ -105,7 +105,7 @@ node 'zuul.opencontrail.org' {
     gearman_workers      => [
 #     'nodepool.opencontrail.org',
       'jenkins.opencontrail.org',
-#     'jenkins01.opencontrail.org',
+      'jenkins01.opencontrail.org',
 #     'zm01.opencontrail.org',
     ],
   }
@@ -115,7 +115,7 @@ node 'zm01.opencontrail.org' {
   class { 'opencontrail_project::zuul_merger':
     gearman_server       => 'zuul.opencontrail.org',
     gerrit_server        => 'review.opencontrail.org',
-    gerrit_user          => 'jenkins',
+    gerrit_user          => 'zuul',
     gerrit_ssh_host_key  => hiera('gerrit_ssh_rsa_pubkey_contents'),
     zuul_ssh_private_key => hiera('jenkins_ssh_private_key_contents'),
     sysadmins            => hiera('sysadmins'),
