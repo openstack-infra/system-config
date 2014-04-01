@@ -200,4 +200,5 @@ File.open("/tmp/cmd", "w") { |fp| fp.puts cmd }
 `cat /tmp/cmd | sh`
 
 `cat #{HOME}/.ssh/id_rsa.pub | ssh #{SSH_OPTIONS} create-account --group "'Continuous Integration Tools'" --full-name "'Zuul'" --email zuul@lists.opencontrail.org --ssh-key - zuul`
+`cat #{HOME}/.ssh/id_rsa.pub | ssh #{SSH_OPTIONS} create-account --group "'Continuous Integration Tools'" --full-name "'Jenkins'" --email jenkins@lists.opencontrail.org --ssh-key - jenkins`
 
