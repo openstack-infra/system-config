@@ -919,11 +919,6 @@ projects:
       - gate-nova-specs-python27
       - gate-nova-specs-docs
 
-  - name: stackforge/nova-docker
-    template:
-      - name: python-jobs
-      - name: check-requirements
-
   - name: openstack/pycadf
     template:
       - name: python-jobs
