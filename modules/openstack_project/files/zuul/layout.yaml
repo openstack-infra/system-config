@@ -445,6 +445,8 @@ jobs:
     voting: false
   - name: ^(gate|check)-tempest-dsvm-sahara-neutron-nv$
     voting: false
+  - name: gate-kite-python33
+    voting: false
   - name: gate-keystone-python33
     voting: false
   - name: gate-marconi-python33
@@ -3459,8 +3461,6 @@ projects:
       - name: python-jobs
       - name: check-requirements
     check:
-      - gate-kite-python33
-    gate:
       - gate-kite-python33
     pre-release:
       - kite-tarball
