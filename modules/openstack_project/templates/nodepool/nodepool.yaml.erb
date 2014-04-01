@@ -72,7 +72,7 @@ labels:
       - name: rax-dfw
   - name: tripleo-precise
     image: tripleo-precise
-    min-ready: 35
+    min-ready: 10
     providers:
       - name: tripleo-test-cloud
   - name: tripleo-f20
@@ -387,11 +387,11 @@ providers:
     project-id: '<%= tripleo_project %>'
     auth-url: 'https://ci-overcloud.tripleo.org:13000/v2.0'
     boot-timeout: 120
-    max-servers: 35
+    max-servers: 55
     rate: 0.001
     networks:
-      - net-id: f69ac547-db64-4e69-ae70-e5233634aff0
-      - net-id: b54c5011-519a-4364-8256-a9214eec2387
+      - net-id: a395fac5-adec-4ab9-a605-963558349cfd
+      - net-id: 063ec9df-2fec-4723-8d4b-92c60193bd08
     images:
       - name: tripleo-precise
         base-image: 'Ubuntu Precise 12.04 LTS Server 64-bit'
