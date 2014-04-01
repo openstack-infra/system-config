@@ -445,8 +445,6 @@ jobs:
     voting: false
   - name: ^(gate|check)-tempest-dsvm-sahara-neutron-nv$
     voting: false
-  - name: ^(gate|check)-tempest-dsvm-trove-full$
-    voting: false
   - name: gate-keystone-python33
     voting: false
   - name: gate-marconi-python33
@@ -1048,10 +1046,6 @@ projects:
       - name: openstack-server-publish-jobs
       - name: check-requirements
       - name: integrated-gate
-    check:
-      - check-tempest-dsvm-trove-full
-    gate:
-      - gate-tempest-dsvm-trove-full
     post:
       - trove-upstream-translation-update
     pre-release:
@@ -2138,7 +2132,6 @@ projects:
       - gate-grenade-dsvm-partial-ncpu
     experimental:
       - gate-grenade-dsvm-forward
-      - gate-tempest-dsvm-trove-full
       - check-tempest-dsvm-marconi
       - check-tempest-dsvm-virtual-ironic-nv
     experimental-tripleo:
