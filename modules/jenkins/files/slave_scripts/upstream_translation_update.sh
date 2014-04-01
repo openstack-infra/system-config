@@ -29,7 +29,9 @@ fi
 tx set --auto-local -r ${PROJECT}.${PROJECT}-translations "${PROJECT}/locale/<lang>/LC_MESSAGES/${PROJECT}.po" --source-lang en --source-file ${PROJECT}/locale/${PROJECT}.pot -t PO --execute
 
 # Pull all upstream translations
-tx pull -a
+# --force is necessary to avoid timestamp issues
+# https://bugs.launchpad.net/keystone/+bug/1299349
+tx pull --force -a
 # Update the .pot file
 python setup.py extract_messages
 PO_FILES=`find ${PROJECT}/locale -name '*.po'`

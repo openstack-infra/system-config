@@ -89,7 +89,9 @@ then
 fi
 
 # Pull all upstream translations
-tx pull -a
+# --force is necessary to avoid timestamp issues
+# https://bugs.launchpad.net/keystone/+bug/1299349
+tx pull --force -a
 
 for FILE in ${DocFolder}/*
 do
