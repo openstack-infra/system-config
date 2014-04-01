@@ -6,4 +6,4 @@
     doc-publisher-site: docs.opencontrail.org
 
     jobs:
-      - python-jobs
+      - contrail-jobs

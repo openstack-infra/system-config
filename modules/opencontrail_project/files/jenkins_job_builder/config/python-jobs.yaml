@@ -229,6 +229,19 @@
     publishers:
       - console-log
 
+- job-template:
+    name: 'gate-{name}-build'
+    node: master
+
+    builders:
+      - gerrit-git-prep
+      - shell: |
+          #!/bin/bash -xe
+          # cd to the right directory
+          scons .
+
+    publishers:
+      - console-log
 
 - job-group:
     name: python-jobs
@@ -246,3 +259,8 @@
       # pylint isn't standard
       # gate-{name}-tox-{envlist} also isn't standard, but is reserved for
       # projects that want to run specific jobs via tox
+
+- job-group:
+    name: contrail-jobs
+    jobs:
+      - 'gate-{name}-build'

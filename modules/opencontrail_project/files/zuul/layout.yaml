@@ -271,16 +271,8 @@ projects:
 
   - name: stackforge/contrail-controller
     check:
-      - gate-contrail-controller-docs
-      - gate-contrail-controller-pep8
-      - gate-contrail-controller-python26
-      - gate-contrail-controller-python27
-      - gate-contrail-controller-python33
+      - gate-contrail-jobs
     gate:
-      - gate-contrail-controller-docs
-      - gate-contrail-controller-pep8
-      - gate-contrail-controller-python26
-      - gate-contrail-controller-python27
-      - gate-contrail-controller-python33
+      - gate-contrail-jobs
     post:
-      - contrail-controller-coverage
+      - gate-contrail-jobs
