@@ -1,18 +1,9 @@
 - project:
-    name: neutron
-    github-org: opencontrail
+    name: contrail-controller
+    github-org: stackforge
     node: master
     tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.opencontrail.org
 
     jobs:
       - python-jobs
-      - python-grizzly-bitrot-jobs
-      - python-havana-bitrot-jobs
-      - opencontrail-publish-jobs
-      - translation-jobs
-      - '{pipeline}-neutron-dsvm-functional{branch-designator}':
-          pipeline: check
-          node: 'devstack-precise || devstack-precise-check'
-          branch-designator: ''
-          branch-override: default
