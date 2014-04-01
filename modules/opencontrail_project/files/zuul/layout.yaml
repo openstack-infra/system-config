@@ -270,3 +270,17 @@ projects:
 # Section: OpenContrail server projects
 
   - name: stackforge/contrail-controller
+    check:
+      - gate-contrail-controller-docs
+      - gate-contrail-controller-pep8
+      - gate-contrail-controller-python26
+      - gate-contrail-controller-python27
+      - gate-contrail-controller-python33
+    gate:
+      - gate-contrail-controller-docs
+      - gate-contrail-controller-pep8
+      - gate-contrail-controller-python26
+      - gate-contrail-controller-python27
+      - gate-contrail-controller-python33
+    post:
+      - contrail-controller-coverage
