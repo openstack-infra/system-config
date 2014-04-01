@@ -2280,7 +2280,7 @@
 - project:
     name: contrail-controller
     github-org: stackforge
-    node: bare-precise
+    node: master
     tarball-site: tarballs.openstack.org
 
     jobs:
