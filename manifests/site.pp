@@ -104,7 +104,7 @@ node 'zuul.opencontrail.org' {
 #   statsd_host          => 'graphite.opencontrail.org',
     gearman_workers      => [
 #     'nodepool.opencontrail.org',
-#     'jenkins.opencontrail.org',
+      'jenkins.opencontrail.org',
 #     'jenkins01.opencontrail.org',
 #     'zm01.opencontrail.org',
     ],
