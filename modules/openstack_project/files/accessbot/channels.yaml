@@ -116,3 +116,5 @@ channels:
   - name: syscompass
     mask: full_mask
   - name: tripleo
+  - name: openstack-satori
+    mask: full_mask
