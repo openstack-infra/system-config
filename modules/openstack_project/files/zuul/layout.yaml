@@ -3444,8 +3444,6 @@ projects:
       - name: check-requirements
     check:
       - gate-kite-python33
-    gate:
-      - gate-kite-python33
     pre-release:
       - kite-tarball
     release:
