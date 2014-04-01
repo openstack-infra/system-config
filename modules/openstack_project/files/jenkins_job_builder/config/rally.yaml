@@ -3,7 +3,6 @@
     node: '{node}'
 
     builders:
-      - revoke-sudo
       - link-logs
       - gerrit-git-prep
       - shell: "tests_ci/test_install.sh"
