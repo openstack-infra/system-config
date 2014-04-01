@@ -269,3 +269,4 @@ projects:
 
 # Section: OpenContrail server projects
 
+  - name: stackforge/contrail-controller
