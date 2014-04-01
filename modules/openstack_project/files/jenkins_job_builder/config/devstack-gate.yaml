@@ -473,6 +473,7 @@
       - shell: |
           #!/bin/bash -xe
           export PYTHONUNBUFFERED=true
+          export DEVSTACK_GATE_TEMPEST_DISABLE_TENANT_ISOLATION=1
           export DEVSTACK_GATE_TIMEOUT=120
           export DEVSTACK_GATE_TEMPEST=1
           export DEVSTACK_GATE_IRONIC=1
@@ -484,18 +485,24 @@
               export OVERRIDE_ZUUL_BRANCH=$BRANCH_OVERRIDE
           fi
 
-          # pull in ovs support from ubuntu cloud-archive.
-          sudo add-apt-repository cloud-archive:havana
-          sudo apt-get update
+          # Construct a regex to use when limiting scope of tempest
+          # to avoid features unsupported by Ironic.
+          # skip all compute API tests that touch secgroups, volumes, servers and
+          # snapshots
+          r="^(?!.*(?:(compute\.|compute\.v3\.)(security_groups\.test_security_groups|images\.test_images_oneserver|servers\.*))"
+          r="$r|^(?:tempest\.api\.database\.*)"
+          # skip volumes attach tests
+          r="$r|(?:tempest\.api\.volume\.test_volumes_actions.*)"
+          # skip all scenario tests until a baremetal scenario test exists
+          r="$r|(?:tempest\.scenario\.*)"
+          # skip boto tests which expect to spawn an instance
+          r="$r|(?:tempest\.thirdparty\.boto\.test_ec2_instance_run.*))"
+          r="$r.*(?=.*smoke.*).*$"
+          export DEVSTACK_GATE_TEMPEST_REGEX="$r"
 
-          # work around bug in libvirt-bin on rax nodes, pending fixes to bug:
-          # https://bugs.launchpad.net/ubuntu/+source/libvirt/+bug/1248025
-          sudo service nova-agent stop || echo ''
-          sudo pkill -9 nova-agent || echo ''
-          sudo service xe-linux-distribution stop || echo ''
-          if [ -e /proc/xen ] ; then
-              sudo umount /proc/xen
-          fi
+          # pull in libvirt /w ovs support from ubuntu cloud-archive.
+          sudo add-apt-repository cloud-archive:icehouse
+          sudo apt-get update
 
           # prevent sshd from jumping to the ovs bridge on Precise instances.
           IP=$(ip addr show eth0 | grep 'inet ' | sed 's/inet \([0-9\.]*\)\/.*/\1/' | tr -d ' ')
