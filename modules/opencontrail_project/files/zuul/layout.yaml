@@ -271,8 +271,8 @@ projects:
 
   - name: stackforge/contrail-controller
     check:
-      - gate-contrail-jobs
+      - gate-contrail-controller-build
     gate:
-      - gate-contrail-jobs
+      - gate-contrail-controller-build
     post:
-      - gate-contrail-jobs
+      - gate-contrail-controller-build
