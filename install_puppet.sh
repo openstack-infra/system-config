@@ -71,6 +71,10 @@ else
 Package: puppet puppet-common puppetmaster puppetmaster-common puppetmaster-passenger
 Pin: version 2.7*
 Pin-Priority: 501
+
+Package: facter
+Pin: version 1.*
+Pin-Priority: 501
 EOF
 
     lsbdistcodename=`lsb_release -c -s`
