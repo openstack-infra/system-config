@@ -39,11 +39,11 @@ class RequirementsList(object):
         self.reqs = {}
         self.failed = False
 
-    def read_requirements(self, fn, ignore_dups=False):
+    def read_requirements(self, fn, ignore_dups=False, strict=False):
         if not os.path.exists(fn):
             return
         for line in open(fn):
-            if '\n' not in line:
+            if strict and '\n' not in line:
                 raise Exception("Requirements file %s does not "
                                 "end with a newline." % fn)
             if '#' in line:
@@ -55,13 +55,15 @@ class RequirementsList(object):
                 line.startswith('-f')):
                 continue
             req = pkg_resources.Requirement.parse(line)
-            if not ignore_dups and req.project_name.lower() in self.reqs:
+            if (not ignore_dups and strict and req.project_name.lower()
+                in self.reqs):
                 print("Duplicate requirement in %s: %s" %
                       (self.name, str(req)))
                 self.failed = True
             self.reqs[req.project_name.lower()] = req
 
-    def read_all_requirements(self, global_req=False, include_dev=False):
+    def read_all_requirements(self, global_req=False, include_dev=False,
+                              strict=False):
         """ Read all the requirements into a list.
 
         Build ourselves a consolidated list of requirements. If global_req is
@@ -71,26 +73,29 @@ class RequirementsList(object):
         If include_dev is true allow for development requirements, which
         may be prereleased versions of libraries that would otherwise be
         listed. This is most often used for olso prereleases.
+
+        If strict is True then style checks should be performed while reading
+        the file.
         """
         if global_req:
-            self.read_requirements('global-requirements.txt')
+            self.read_requirements('global-requirements.txt', strict=strict)
         else:
             for fn in ['tools/pip-requires',
                        'tools/test-requires',
                        'requirements.txt',
                        'test-requirements.txt'
                        ]:
-                self.read_requirements(fn)
+                self.read_requirements(fn, strict=strict)
         if include_dev:
             self.read_requirements('dev-requirements.txt',
-                                   ignore_dups=True)
+                                   ignore_dups=True, strict=strict)
 
 
 def main():
     branch = sys.argv[1]
     head = run_command("git rev-parse HEAD").strip()
     head_reqs = RequirementsList('HEAD')
-    head_reqs.read_all_requirements()
+    head_reqs.read_all_requirements(strict=True)
 
     run_command("git remote update")
     run_command("git checkout remotes/origin/%s" % branch)
