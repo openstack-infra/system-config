@@ -2042,6 +2042,9 @@
           node: bare-precise
       - check-rally-install-{node}:
           node: bare-centos6
+      - {pipeline}-rally-scenarios-{node}:
+          node: devstack-precise
+          pipeline: check
 
 - project:
     name: python-rallyclient
