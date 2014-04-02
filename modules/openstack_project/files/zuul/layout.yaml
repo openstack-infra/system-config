@@ -536,8 +536,10 @@ jobs:
   - name: gate-nova-docker-python27
     voting: false
   - name: check-neutron-dsvm-functional
+    branch: ^(?!stable/havana).*$
     voting: false
   - name: check-neutron-dsvm-api
+    branch: ^(?!stable/(havana|icehouse)).*$
     voting: false
 # puppet-openstack targets
   - name: gate-puppet-vswitch-puppet-lint
