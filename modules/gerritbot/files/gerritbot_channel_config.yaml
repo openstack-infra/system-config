@@ -705,3 +705,13 @@ openstack-oslo:
       - openstack-dev/pbr
     branches:
       - master
+
+openstack-satori:
+    events:
+      - patchset-created
+      - change-merged
+      - x-vrif-minus-2
+    projects:
+      - stackforge/satori
+    branches:
+      - master
