@@ -214,4 +214,19 @@ class openstackid (
       Package[$php5_packages] ],
   }
 
+  exec { 'update-site':
+    path      => '/usr/bin:/bin:/usr/local/bin',
+    command   => '/opt/deploy/deploy.sh update openstackid',
+    onlyif    => '/opt/deploy/deploy.sh status openstackid | grep UPDATE',
+    logoutput => on_failure,
+    require   => [
+      File['/opt/deploy/conf.d/openstackid.conf'],
+      Apache::Vhost[$vhost_name],
+      File['/etc/openstackid/recaptcha.php'],
+      File['/etc/openstackid/database.php'],
+      File['/etc/openstackid/log.php'],
+      File['/etc/openstackid/environment.php'],
+      Package[$php5_packages] ],
+  }
+
 }

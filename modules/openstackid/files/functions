@@ -140,6 +140,10 @@ function site_update() {
   target_dir="$SITE_ROOT/$TARGET_SLOT"
   rm -rf $target_dir
   mkdir $target_dir
+  # fetch catalog and write actual version
+  fetch_catalog
+  RELEASE_VERSION=`catalog_get_version`
+  echo $RELEASE_VERSION > $target_dir/release
   # fetch and extract release tarball
   umask 0027
   if [[ $SOURCE_TARBALL == http* ]]; then
