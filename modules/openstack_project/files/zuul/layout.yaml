@@ -447,6 +447,8 @@ jobs:
     voting: false
   - name: ^(gate|check)-tempest-dsvm-trove-full$
     voting: false
+  - name: ^(gate|check)-tempest-master
+    voting: false
   - name: gate-keystone-python33
     voting: false
   - name: gate-marconi-python33
@@ -2133,8 +2135,8 @@ projects:
       - check-tempest-dsvm-sahara-full-nv
       - check-tempest-dsvm-sahara-postgres-nv
       - check-tempest-dsvm-sahara-neutron-nv
-      - check-tempest-dsvm-full-havana
-      - check-tempest-dsvm-neutron-havana
+      - check-tempest-master-dsvm-full-havana
+      - check-tempest-master-dsvm-neutron-havana
     gate:
       - gate-tempest-pep8
       - gate-tempest-docs
@@ -2377,6 +2379,8 @@ projects:
       - check-tempest-dsvm-sahara-full-nv
       - check-tempest-dsvm-sahara-postgres-nv
       - check-tempest-dsvm-sahara-neutron-nv
+      - check-tempest-master-dsvm-full-havana
+      - check-tempest-master-dsvm-neutron-havana
     gate:
       - gate-devstack-bash8
       - gate-devstack-dsvm-cells
@@ -2581,6 +2585,8 @@ projects:
       - check-tempest-dsvm-sahara-full-nv
       - check-tempest-dsvm-sahara-postgres-nv
       - check-tempest-dsvm-sahara-neutron-nv
+      - check-tempest-master-dsvm-full-havana
+      - check-tempest-master-dsvm-neutron-havana
     gate:
       - gate-devstack-gate-unittests
       - gate-devstack-dsvm-cells
