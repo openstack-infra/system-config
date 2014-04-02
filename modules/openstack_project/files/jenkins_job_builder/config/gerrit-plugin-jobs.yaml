@@ -17,9 +17,9 @@
           git clone -b {gerrit-branch} {gerrit-project}
           git clone -b {plugin-branch} {plugin-project} gerrit/plugins/{plugin-name}
           cd gerrit/plugins/{plugin-name}
-          /usr/local/jenkins/slave_scripts/maven-properties.sh
+          /usr/local/jenkins/slave_scripts/version-properties.sh
       - inject:
-          properties-file: gerrit/plugins/{plugin-name}/maven.properties
+          properties-file: gerrit/plugins/{plugin-name}/version.properties
       - install-buck
       - shell: |
           #!/bin/bash -xe
