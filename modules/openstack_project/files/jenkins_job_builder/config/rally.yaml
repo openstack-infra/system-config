@@ -9,3 +9,26 @@
 
     publishers:
       - console-log
+
+- job-template:
+    name: '{pipeline}-rally-scenarios'
+    node: '{node}'
+
+    builders:
+      - link-logs
+      - devstack-checkout
+      - shell: |
+          #!/bin/bash -xe
+          export PROJECTS="stackforge/rally $PROJECTS"
+
+          function pre_test_hook {{
+              /opt/stack/new/rally/tests_ci/pre_test_hook.sh
+          }}
+          export -f pre_test_hook
+
+          cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
+          ./safe-devstack-vm-gate-wrap.sh
+
+    publishers:
+      - devstack-logs
+      - console-log
