@@ -2777,14 +2777,18 @@ projects:
   - name: openstack-infra/nodepool
     template:
       - name: python-jobs
+    post:
+      - nodepool-docs
     pre-release:
       - nodepool-tarball
+      - nodepool-docs
     release:
       - nodepool-tarball:
         - nodepool-pypi-upload:
           - post-mirror-python26
           - post-mirror-python27
           - post-mirror-python33
+      - nodepool-docs
 
   - name: openstack-infra/nose-html-output
     check:
