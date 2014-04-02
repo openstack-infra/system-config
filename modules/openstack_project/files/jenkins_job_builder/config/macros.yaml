@@ -277,6 +277,15 @@
             ant
           fi
 
+# ======================================================================
+
+- wrapper:
+    name: build-timeout
+    wrappers:
+      - timeout:
+          timeout: '{timeout}'
+          timeout-var: 'BUILD_TIMEOUT'
+          fail: true
 
 # ======================================================================
 
