@@ -111,6 +111,7 @@ channels:
   - name: openstack-translation
   - name: openstack-trove
   - name: packstack-dev
+  - name: pecanpy
   - name: refstack
   - name: storyboard
   - name: syscompass
