@@ -255,6 +255,14 @@ project-templates:
       - 'gate-tempest-dsvm-neutron'
       - 'gate-tempest-dsvm-neutron-heat-slow'
 
+  - name: integrated-gate-neutron
+    check:
+      - 'check-tempest-dsvm-neutron'
+      - 'check-tempest-dsvm-neutron-heat-slow'
+    gate:
+      - 'gate-tempest-dsvm-neutron'
+      - 'gate-tempest-dsvm-neutron-heat-slow'
+
   - name: python3-jobs
     check:
       - 'gate-{name}-python33'
@@ -830,7 +838,7 @@ projects:
       - name: openstack-server-publish-jobs
       - name: periodic-havana
       - name: check-requirements
-      - name: integrated-gate
+      - name: integrated-gate-neutron
     check:
       - check-neutron-dsvm-functional
       - check-tempest-dsvm-neutron-full
