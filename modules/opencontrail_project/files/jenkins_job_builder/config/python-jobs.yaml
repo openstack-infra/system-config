@@ -238,7 +238,7 @@
       - shell: |
           #!/bin/bash -xe
           # cd to the right directory
-          scons src/discovery
+          scons controller/src/discovery
 
     publishers:
       - console-log
