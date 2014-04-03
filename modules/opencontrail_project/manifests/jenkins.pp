@@ -16,7 +16,7 @@ class opencontrail_project::jenkins (
 
   $iptables_rule = regsubst ($zmq_event_receivers, '^(.*)$', '-m state --state NEW -m tcp -p tcp --dport 8888 -s \1 -j ACCEPT')
   class { 'opencontrail_project::server':
-    iptables_public_tcp_ports => [80, 443],
+    iptables_public_tcp_ports => [80, 443, 8080],
     iptables_rules6           => $iptables_rule,
     iptables_rules4           => $iptables_rule,
     sysadmins                 => $sysadmins,
