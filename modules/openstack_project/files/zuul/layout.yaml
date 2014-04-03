@@ -550,6 +550,8 @@ jobs:
     voting: false
   - name: gate-rally-python33
     voting: false
+  - name: gate-stevedore-docs
+    voting: false
 
 # The project list is grouped by type of project, and within each
 # group, projects are sorted (mostly) alphabetically.
