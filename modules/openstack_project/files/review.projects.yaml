@@ -543,6 +543,9 @@
   options:
     - direct-release
 - project: stackforge/designate
+- project: stackforge/driverlog
+  description: Vendor drivers for OpenStack
+  upstream: git://github.com/Mirantis/oscp.git
 - project: stackforge/entropy
   description: A framework for Audit/Repair scripts for openstack
 - project: stackforge/fuel-astute
