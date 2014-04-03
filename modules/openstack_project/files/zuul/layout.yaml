@@ -453,8 +453,6 @@ jobs:
     voting: false
   - name: gate-python-glanceclient-python33
     voting: false
-  - name: gate-python-heatclient-python33
-    voting: false
   - name: gate-python-neutronclient-python33
     voting: false
   - name: gate-python-openstackclient-python33
@@ -1223,6 +1221,7 @@ projects:
       - gate-python-heatclient-pep8
       - gate-python-heatclient-python26
       - gate-python-heatclient-python27
+      - gate-python-heatclient-python33
       - gate-python-heatclient-pypy
       - gate-devstack-dsvm-cells
       - gate-tempest-dsvm-postgres-full
