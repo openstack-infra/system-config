@@ -2292,6 +2292,14 @@
       - openstack-doc-jobs
 
 - project:
+    name: driverlog
+    github-org: stackforge
+    node: bare-precise
+
+    jobs:
+      - python-jobs
+
+- project:
     name: volume-api
     github-org: openstack
     node: bare-precise
