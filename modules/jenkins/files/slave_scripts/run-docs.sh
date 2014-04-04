@@ -15,11 +15,16 @@ check_variable_org_project "$org" "$project" "$0"
 
 source /usr/local/jenkins/slave_scripts/select-mirror.sh $org $project
 
+PROJECTS_WITH_DOCS_ENV=",horizon,django_openstack_auth,"
 venv=venv
 
 mkdir -p doc/build
 export HUDSON_PUBLISH_DOCS=1
-tox -e$venv -- python setup.py build_sphinx
+if [[ $PROJECTS_WITH_DOCS_ENV =~ ,$project, ]]; then
+    tox -edocs
+else
+    tox -e$venv -- python setup.py build_sphinx
+fi
 result=$?
 
 if [ -z "$ZUUL_REFNAME" ] || [ "$ZUUL_REFNAME" == "master" ] ; then
