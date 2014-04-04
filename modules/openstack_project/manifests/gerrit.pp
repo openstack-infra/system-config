@@ -69,6 +69,7 @@ class openstack_project::gerrit (
   $gitweb = true,
   $cgit = false,
   $web_repo_url = '',
+  $secondary_index = true,
 ) {
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [80, 443, 29418],
@@ -185,6 +186,7 @@ class openstack_project::gerrit (
     cgit                                => $cgit,
     web_repo_url                        => $web_repo_url,
     testmode                            => $testmode,
+    secondary_index                     => $secondary_index,
     require                             => Class[openstack_project::server],
   }
 
