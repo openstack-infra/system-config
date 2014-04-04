@@ -61,7 +61,7 @@ EOF
 
     # make sure the project even has this branch
     if git branch -a | grep -q "^  remotes/origin/$BRANCH$" ; then
-        git checkout origin/${BRANCH}
+        git checkout -B ${BRANCH} -t origin/${BRANCH}
         git review -s
         popd
 
