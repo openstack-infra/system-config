@@ -2117,9 +2117,9 @@ projects:
 
   - name: openstack/qa-specs
     check:
-      - noop
+      - gate-qa-specs-docs
     gate:
-      - noop
+      - gate-qa-specs-docs
 
   - name: openstack/tempest
     template:
