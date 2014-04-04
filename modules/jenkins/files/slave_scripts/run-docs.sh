@@ -19,7 +19,15 @@ venv=venv
 
 mkdir -p doc/build
 export HUDSON_PUBLISH_DOCS=1
-tox -e$venv -- python setup.py build_sphinx
+
+# Currently not all projects has 'docs' env in tox.ini.
+# If 'docs' env exists use it. Otherwise run build_sphinx.
+# Once all projects have 'docs' env in tox, we can remove if-else.
+if grep -q '[testenv:docs]' tox.ini; then
+    tox -edocs
+else
+    tox -e$venv -- python setup.py build_sphinx
+fi
 result=$?
 
 if [ -z "$ZUUL_REFNAME" ] || [ "$ZUUL_REFNAME" == "master" ] ; then
