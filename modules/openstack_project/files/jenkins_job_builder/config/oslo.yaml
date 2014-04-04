@@ -63,3 +63,136 @@
           node: devstack-precise
           branch-designator: ''
           branch-override: default
+
+
+- job-group:
+    name: cliff-cross-test
+
+    injectedlib: cliff
+    injectedrepo: openstack/cliff
+
+    jobs:
+      - '{pipeline}-{injectedlib}-dsvm-{name}{branch-designator}':
+          pipeline: check
+          node: 'devstack-precise || devstack-precise-check'
+          branch-designator: ''
+          branch-override: default
+      - '{pipeline}-{injectedlib}-dsvm-{name}{branch-designator}':
+          pipeline: gate
+          node: devstack-precise
+          branch-designator: ''
+          branch-override: default
+
+
+- job-group:
+    name: oslo.config-cross-test
+
+    injectedlib: oslo.config
+    injectedrepo: openstack/oslo.config
+
+    jobs:
+      - '{pipeline}-{injectedlib}-dsvm-{name}{branch-designator}':
+          pipeline: check
+          node: 'devstack-precise || devstack-precise-check'
+          branch-designator: ''
+          branch-override: default
+      - '{pipeline}-{injectedlib}-dsvm-{name}{branch-designator}':
+          pipeline: gate
+          node: devstack-precise
+          branch-designator: ''
+          branch-override: default
+
+
+- job-group:
+    name: oslo.messaging-cross-test
+
+    injectedlib: oslo.messaging
+    injectedrepo: openstack/oslo.messaging
+
+    jobs:
+      - '{pipeline}-{injectedlib}-dsvm-{name}{branch-designator}':
+          pipeline: check
+          node: 'devstack-precise || devstack-precise-check'
+          branch-designator: ''
+          branch-override: default
+      - '{pipeline}-{injectedlib}-dsvm-{name}{branch-designator}':
+          pipeline: gate
+          node: devstack-precise
+          branch-designator: ''
+          branch-override: default
+
+
+- job-group:
+    name: oslo.vmware-cross-test
+
+    injectedlib: oslo.vmware
+    injectedrepo: openstack/oslo.vmware
+
+    jobs:
+      - '{pipeline}-{injectedlib}-dsvm-{name}{branch-designator}':
+          pipeline: check
+          node: 'devstack-precise || devstack-precise-check'
+          branch-designator: ''
+          branch-override: default
+      - '{pipeline}-{injectedlib}-dsvm-{name}{branch-designator}':
+          pipeline: gate
+          node: devstack-precise
+          branch-designator: ''
+          branch-override: default
+
+
+- job-group:
+    name: pycadf-cross-test
+
+    injectedlib: pycadf
+    injectedrepo: openstack/pycadf
+
+    jobs:
+      - '{pipeline}-{injectedlib}-dsvm-{name}{branch-designator}':
+          pipeline: check
+          node: 'devstack-precise || devstack-precise-check'
+          branch-designator: ''
+          branch-override: default
+      - '{pipeline}-{injectedlib}-dsvm-{name}{branch-designator}':
+          pipeline: gate
+          node: devstack-precise
+          branch-designator: ''
+          branch-override: default
+
+
+- job-group:
+    name: stevedore-cross-test
+
+    injectedlib: stevedore
+    injectedrepo: openstack/stevedore
+
+    jobs:
+      - '{pipeline}-{injectedlib}-dsvm-{name}{branch-designator}':
+          pipeline: check
+          node: 'devstack-precise || devstack-precise-check'
+          branch-designator: ''
+          branch-override: default
+      - '{pipeline}-{injectedlib}-dsvm-{name}{branch-designator}':
+          pipeline: gate
+          node: devstack-precise
+          branch-designator: ''
+          branch-override: default
+
+
+- job-group:
+    name: taskflow-cross-test
+
+    injectedlib: taskflow
+    injectedrepo: openstack/taskflow
+
+    jobs:
+      - '{pipeline}-{injectedlib}-dsvm-{name}{branch-designator}':
+          pipeline: check
+          node: 'devstack-precise || devstack-precise-check'
+          branch-designator: ''
+          branch-override: default
+      - '{pipeline}-{injectedlib}-dsvm-{name}{branch-designator}':
+          pipeline: gate
+          node: devstack-precise
+          branch-designator: ''
+          branch-override: default
