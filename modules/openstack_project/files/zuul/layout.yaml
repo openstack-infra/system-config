@@ -541,6 +541,10 @@ jobs:
   - name: check-neutron-dsvm-api
     branch: ^(?!stable/(havana|icehouse)).*$
     voting: false
+  - name: check-tripleo-ironic-undercloud-precise
+    voting: false
+  - name: check-tripleo-overcloud-f20
+    voting: false
 # puppet-openstack targets
   - name: gate-puppet-vswitch-puppet-lint
     voting: false
