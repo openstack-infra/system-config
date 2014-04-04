@@ -554,6 +554,8 @@ jobs:
     voting: false
   - name: gate-cliff-requirements
     voting: false
+  - name: check-tripleo-ironic-undercloud-precise
+    voting: false
   - name: check-tripleo-overcloud-f20
     voting: false
 
