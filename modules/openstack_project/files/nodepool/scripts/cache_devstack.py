@@ -17,6 +17,7 @@
 # limitations under the License.
 
 import os
+import subprocess
 import sys
 
 from common import run_local
@@ -46,6 +47,46 @@ def tokenize(fn, tokens, distribution, comment=None):
         line = line.strip()
         if line and line not in tokens:
             tokens.append(line)
+
+
+def _legacy_find_images(basedir):
+    """Divine what images we should use based on parsing stackrc."""
+    images = []
+    for line in open(os.path.join(DEVSTACK, 'stackrc')):
+        line = line.strip()
+        if line.startswith('IMAGE_URLS'):
+            if '#' in line:
+                line = line[:line.rfind('#')]
+            if line.endswith(';;'):
+                line = line[:-2]
+            line = line.split('=', 1)[1].strip()
+            if line.startswith('${IMAGE_URLS:-'):
+                line = line[len('${IMAGE_URLS:-'):]
+            if line.endswith('}'):
+                line = line[:-1]
+            if not line:
+                continue
+            if line[0] == line[-1] == '"':
+                line = line[1:-1]
+            # Add image to the list to be downloaded, but
+            # skip downloading giant vmware images
+            images += [x.strip() for x in line.split(',')
+                       if not x.strip().endswith('vmdk')]
+    return images
+
+
+def _find_images(basedir):
+    images = []
+    try:
+        image_tool = os.path.join(DEVSTACK, 'tools', 'image_list.sh')
+        if os.path.exist(image_tool):
+            images = subprocess.check_output(image_tool).split('\n')
+    except subprocess.CalledProcessError as ce:
+        print "image_list.sh failed"
+        print "Exit: %s, Output: %s" % (ce.returncode, ce.output)
+        # reset images so we'll fall back
+        images = []
+    return images
 
 
 def local_prep(distribution):
@@ -79,27 +120,10 @@ def local_prep(distribution):
                 tokenize(fn, rpms, distribution, comment='#')
             branch_data['rpms'] = rpms
 
-        images = []
-        for line in open(os.path.join(DEVSTACK, 'stackrc')):
-            line = line.strip()
-            if line.startswith('IMAGE_URLS'):
-                if '#' in line:
-                    line = line[:line.rfind('#')]
-                if line.endswith(';;'):
-                    line = line[:-2]
-                line = line.split('=', 1)[1].strip()
-                if line.startswith('${IMAGE_URLS:-'):
-                    line = line[len('${IMAGE_URLS:-'):]
-                if line.endswith('}'):
-                    line = line[:-1]
-                if not line:
-                    continue
-                if line[0] == line[-1] == '"':
-                    line = line[1:-1]
-                # Add image to the list to be downloaded, but
-                # skip downloading giant vmware images
-                images += [x.strip() for x in line.split(',')
-                           if not x.strip().endswith('vmdk')]
+        images = _find_images(DEVSTACK)
+        if not images:
+            images = _legacy_find_images(DEVSTACK)
+
         branch_data['images'] = images
         branches.append(branch_data)
     return branches
