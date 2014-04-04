@@ -493,11 +493,13 @@
           r="$r|^(?:tempest\.api\.database\.*)"
           # skip volumes attach tests
           r="$r|(?:tempest\.api\.volume\.test_volumes_actions.*)"
-          # skip all scenario tests until a baremetal scenario test exists
+          # skip all scenario tests
           r="$r|(?:tempest\.scenario\.*)"
           # skip boto tests which expect to spawn an instance
           r="$r|(?:tempest\.thirdparty\.boto\.test_ec2_instance_run.*))"
           r="$r.*(?=.*smoke.*).*$"
+          # enable the single baremetal scenario test
+          r="$r tempest.scenario.test_baremetal_basic_ops"
           export DEVSTACK_GATE_TEMPEST_REGEX="$r"
 
           # pull in libvirt /w ovs support from ubuntu cloud-archive.
