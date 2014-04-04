@@ -27,7 +27,7 @@
           cd gerrit
           buck clean
           buck build plugins/{plugin-name}:{plugin-name}
-          cp gerrit/buck-out/gen/plugins/{plugin-name}/{plugin-name}.jar gerrit/buck-out/gen/plugins/{plugin-name}/{plugin-name}-$PROJECT_VER.jar
+          cp ./buck-out/gen/plugins/{plugin-name}/{plugin-name}.jar ./buck-out/gen/plugins/{plugin-name}/{plugin-name}-$PROJECT_VER.jar
 
     publishers:
       - war:
