@@ -647,6 +647,20 @@ projects:
           - post-mirror-python33
       - hook-cliff-rtfd
 
+  - name: stackforge/driverlog
+    check:
+      - gate-driverlog-pep8
+      - gate-driverlog-python27
+    gate:
+      - gate-driverlog-pep8
+      - gate-driverlog-python27
+    post:
+      - driverlog-branch-tarball
+    pre-release:
+      - driverlog-tarball
+    release:
+      - driverlog-tarball
+
   - name: openstack/gantt
     template:
       - name: python-jobs
