@@ -22,6 +22,9 @@
   upstream: git://github.com/emonty/oslo.packaging
   description: Python Build Reasonableness
 - project: openstack-dev/sandbox
+- project: openstack-dev/specs-cookiecutter
+  upstream: git://github.com/mtreinish/specs-cookiecutter
+  description: Cookiecutter templates for new specs repos
 - project: openstack-infra/activity-board
   description: Tech community metrics dash of the OpenStack community based on the Metrics Grimoire toolset
   upstream: git://github.com/Bitergia/openstack-dashboard.git

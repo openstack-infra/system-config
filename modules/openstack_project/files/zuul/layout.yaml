@@ -2514,6 +2514,12 @@ projects:
     gate:
       - noop
 
+  - name: openstack-dev/specs-cookiecutter
+    check:
+      - noop
+    gate:
+      - noop
+
 # Section: OpenStack infrastructure projects
 
   - name: openstack-infra/activity-board
