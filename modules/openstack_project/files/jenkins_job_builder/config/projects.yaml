@@ -226,6 +226,8 @@
           node: 'devstack-precise || devstack-precise-check'
           branch-designator: '-nv'
           branch-override: default
+      - oslo.config-cross-test
+      - stevedore-cross-test
 
 - project:
     name: python-saharaclient
@@ -325,6 +327,9 @@
       - python-havana-bitrot-jobs
       - openstack-publish-jobs
       - translation-jobs
+      - oslo.config-cross-test
+      - oslo.vmware-cross-test
+      - stevedore-cross-test
 
 - project:
     name: cinder
@@ -339,6 +344,10 @@
       - openstack-publish-jobs
       - gate-{name}-pylint
       - translation-jobs
+      - oslo.config-cross-test
+      - oslo.messaging-cross-test
+      - stevedore-cross-test
+      - taskflow-cross-test
 
 
 - project:
@@ -545,6 +554,10 @@
       - python-havana-bitrot-jobs
       - openstack-publish-jobs
       - translation-jobs
+      - oslo.config-cross-test
+      - oslo.messaging-cross-test
+      - oslo.vmware-cross-test
+      - stevedore-cross-test
 
 
 - project:
@@ -559,6 +572,7 @@
       - python-havana-bitrot-jobs
       - openstack-publish-jobs
       - translation-jobs
+      - oslo.config-cross-test
 
 
 - project:
@@ -672,6 +686,11 @@
       - python-havana-bitrot-jobs
       - openstack-publish-jobs
       - translation-jobs
+      - oslotest-cross-test
+      - oslo.config-cross-test
+      - oslo.messaging-cross-test
+      - pycadf-cross-test
+      - stevedore-cross-test
 
 
 - project:
@@ -731,6 +750,10 @@
       - openstack-publish-jobs
       - gate-{name}-pylint
       - translation-jobs
+      - oslo.config-cross-test
+      - oslo.messaging-cross-test
+      - pycadf-cross-test
+      - stevedore-cross-test
 
 - project:
     name: nova-specs
@@ -803,6 +826,8 @@
       - openstack-publish-jobs
       - pypi-jobs
       - oslotest-cross-test
+      - oslo.config-cross-test
+      - stevedore-cross-test
 
 - project:
     name: oslo.rootwrap
@@ -850,6 +875,7 @@
       - python-jobs
       - openstack-publish-jobs
       - pypi-jobs
+      - stevedore-cross-test
 
 
 - project:
@@ -914,6 +940,8 @@
       - python-jobs
       - openstack-publish-jobs
       - pypi-jobs
+      - oslo.config-cross-test
+      - stevedore-cross-test
 
 - project:
     name: python-kiteclient
@@ -950,6 +978,7 @@
       - python-jobs
       - openstack-publish-jobs
       - pypi-jobs
+      - cliff-cross-test
 
 
 - project:
@@ -963,6 +992,7 @@
       - python-jobs
       - openstack-publish-jobs
       - pypi-jobs
+      - cliff-cross-test
 
 
 - project:
@@ -990,6 +1020,7 @@
       - python-havana-bitrot-jobs
       - openstack-publish-jobs
       - translation-jobs
+      - cliff-cross-test
       - '{pipeline}-neutron-dsvm-functional{branch-designator}':
           pipeline: check
           node: 'devstack-precise || devstack-precise-check'
@@ -1000,6 +1031,8 @@
           node: 'devstack-precise || devstack-precise-check'
           branch-designator: ''
           branch-override: default
+      - oslo.config-cross-test
+      - stevedore-cross-test
 
 
 - project:
@@ -1013,6 +1046,7 @@
       - python-jobs
       - openstack-publish-jobs
       - translation-jobs
+      - oslo.config-cross-test
 
 - project:
     name: python-troveclient
@@ -1329,6 +1363,7 @@
     jobs:
       - python-jobs
       - openstack-publish-jobs
+      - oslo.config-cross-test
 
 
 - project:
@@ -1419,6 +1454,7 @@
     jobs:
       - python-jobs
       - pypi-jobs
+      - oslotest-cross-test
 
 - project:
     name: tripleo-incubator
@@ -1800,6 +1836,8 @@
           node: 'devstack-precise || devstack-precise-check'
           branch-designator: '-nv'
           branch-override: default
+      - oslo.config-cross-test
+      - stevedore-cross-test
 
 - project:
     name: python-ironicclient
@@ -1821,6 +1859,9 @@
 
     jobs:
       - python-jobs
+      - oslotest-cross-test
+      - oslo.config-cross-test
+      - stevedore-cross-test
 
 - project:
     name: inception
@@ -1865,6 +1906,7 @@
           node: bare-centos6
       - gate-{name}-tox-{envlist}:
           envlist: py27-sa8-mysql
+      - stevedore-cross-test
 
 - project:
     name: cl-openstack-client
@@ -1905,6 +1947,8 @@
       - python-jobs
       - openstack-publish-jobs
       - pypi-jobs
+      - oslo.config-cross-test
+      - oslo.messaging-cross-test
 
 - project:
     name: pecan
@@ -1951,14 +1995,7 @@
       - python-jobs
       - pypi-jobs
       - hook-{name}-rtfd
-      - gate-{name}-tox-{envlist}:
-          envlist: neutronclient-stable
-      - gate-{name}-tox-{envlist}:
-          envlist: neutronclient-tip
-      - gate-{name}-tox-{envlist}:
-          envlist: openstackclient-stable
-      - gate-{name}-tox-{envlist}:
-          envlist: openstackclient-tip
+      - stevedore-cross-test
 
 - project:
     name: python-tuskarclient
