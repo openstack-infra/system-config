@@ -30,3 +30,14 @@ git_user_email=<%= git_email %>
 <% if git_name != "" -%>
 git_user_name=<%= git_name %>
 <% end -%>
+
+<% if swift_authurl != "" -%>
+[swift]
+authurl=<%= swift_authurl %>
+user=<%= swift_user %>
+key=<%= swift_key %>
+tenant_name=<%= swift_tenant_name %>
+region_name=<%= swift_region_name %>
+default_container=<%= swift_default_container %>
+default_logserver_prefix=<%= swift_default_logserver_prefix %>
+<% end -%>

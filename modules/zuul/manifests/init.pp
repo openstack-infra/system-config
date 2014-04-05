@@ -34,6 +34,13 @@ class zuul (
   $statsd_host = '',
   $git_email = '',
   $git_name = '',
+  $swift_authurl = '',
+  $swift_user = '',
+  $swift_key = '',
+  $swift_tenant_name = '',
+  $swift_region_name = '',
+  $swift_default_container = '',
+  $swift_default_logserver_prefix = '',
 ) {
   include apache
   include pip
