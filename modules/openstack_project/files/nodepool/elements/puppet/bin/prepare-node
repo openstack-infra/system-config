@@ -1,0 +1,24 @@
+# Copyright (C) 2011-2013 OpenStack Foundation
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#    http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
+# implied.
+#
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+SUDO=$1
+BARE=$2
+PYTHON3=${3:-false}
+PYPY=${4:-false}
+ALL_MYSQL_PRIVS=${5:-false}
+
+puppet apply --modulepath=/opt/git/openstack-infra/config/modules:/etc/puppet/modules \
+    -e "class {'openstack_project::single_use_slave': sudo => $SUDO, bare => $BARE, python3 => $PYTHON3, include_pypy => $PYPY, all_mysql_privs => $ALL_MYSQL_PRIVS, install_resolv_conf => false }"
