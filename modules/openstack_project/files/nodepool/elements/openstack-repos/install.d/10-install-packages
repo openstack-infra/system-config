@@ -1,0 +1,5 @@
+#!/bin/bash
+set -e
+
+install-packages -d `cat /home/jenkins/packages-to-install | sort -u`
+rm /home/jenkins/packages-to-install

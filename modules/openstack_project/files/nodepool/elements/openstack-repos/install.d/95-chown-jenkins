@@ -1,0 +1,4 @@
+#!/bin/bash
+set -e
+
+chown -R jenkins:jenkins /home/jenkins

@@ -1,0 +1,54 @@
+#!/bin/bash
+set -eu
+
+sudo mkdir -p $TMP_MOUNT_PATH/home/jenkins/cache/files
+sudo mkdir -p $TMP_MOUNT_PATH/home/jenkins/cache/pip
+
+cd $TMP_MOUNT_PATH/opt/git/openstack-dev/devstack
+
+mkdir -p ~/.cache/image-create/image-files
+
+PACKAGES_FILE=$TMP_MOUNT_PATH/home/jenkins/packages-to-install
+sudo touch $PACKAGES_FILE
+sudo chmod 666 $PACKAGES_FILE
+
+DISTRO=Ubuntu # `lsb_release -si`
+for branch in `git branch -r --list 'origin/*' | grep -v '\->'` ; do
+    sudo git checkout $branch
+    for image in `grep IMAGE_URLS stackrc | grep -v openvz | grep -v vmdk | grep = | cut -f2 -d\" | cut -f1`
+    do
+        set +e
+        $TMP_HOOKS_PATH/bin/cache-url $image ~/.cache/image-create/image-files/`basename $image`
+        sudo cp  ~/.cache/image-create/image-files/`basename $image` $TMP_MOUNT_PATH/home/jenkins/cache/files
+        set -e
+    done
+    for fname in files/apts/*; do
+
+        OIFS=$IFS
+        IFS=$'\n'
+        for line in $(<${fname}); do
+            if [[ $line =~ "NOPRIME" ]]; then
+                continue
+            fi
+
+            if [[ $line =~ (.*)#.*dist:([^ ]*) ]]; then
+                # We are using BASH regexp matching feature.
+                package=${BASH_REMATCH[1]}
+                distros=${BASH_REMATCH[2]}
+                # In bash ${VAR,,} will lowercase VAR
+                [[ ${distros,,} =~ ${DISTRO,,} ]] && echo $package
+                continue
+            fi
+
+            echo ${line%#*} >> $PACKAGES_FILE
+        done
+        IFS=$OIFS
+    done
+done
+
+sudo git checkout master
+sudo git reset --hard origin/master
+
+sudo cp -a /var/cache/apt/archives/*deb $TMP_MOUNT_PATH/var/cache/apt/archives
+sudo mkdir -p $TMP_MOUNT_PATH/home/jenkins/.cache
+sudo cp -a ~/.cache/image-create $TMP_MOUNT_PATH/home/jenkins/.cache
