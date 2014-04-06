@@ -60,4 +60,16 @@ class openstack_project::nodepool(
     source  => 'puppet:///modules/openstack_project/nodepool/scripts',
   }
 
+  file { '/etc/nodepool/elements':
+    ensure  => directory,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0755',
+    recurse => true,
+    purge   => true,
+    force   => true,
+    require => File['/etc/nodepool'],
+    source  => 'puppet:///modules/openstack_project/nodepool/elements',
+  }
+
 }
