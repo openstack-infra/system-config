@@ -1,0 +1,12 @@
+#!/bin/bash
+set -e
+
+install-packages git puppet rubygems
+
+/bin/bash /tmp/config/install_modules.sh
+
+# Unset the download cache for this invocation to prevent bleed from build
+# host. Also, the next command creates the jenkins user, so making the
+# download cache be the normal location would be weird.
+unset PIP_DOWNLOAD_CACHE
+puppet apply --modulepath=/tmp/config/modules:/etc/puppet/modules -e "class {'openstack_project::slave_template': }"

@@ -1,0 +1,17 @@
+#!/bin/bash
+set -e
+
+# If lsb_release is missing, just do nothing.
+DISTRO=`lsb_release -si` || true
+
+case $DISTRO in
+    'Ubuntu'|'Debian')
+    dpkg -i /root/puppet-repo.deb
+
+    cat > /etc/apt/preferences.d/00-puppet.pref <<EOF
+Package: puppet puppet-common puppetmaster puppetmaster-common
+Pin: version 2.7*
+Pin-Priority: 501
+EOF
+    ;;
+esac

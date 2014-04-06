@@ -1,0 +1,14 @@
+#!/bin/bash
+set -e
+
+# If lsb_release is missing, just do nothing.
+DISTRO=Ubuntu # `lsb_release -si` || true
+
+case $DISTRO in
+    'Ubuntu'|'Debian')
+    PUPPET_REPO_DEB=~/.cache/image-create/puppet-repo-$DIB_RELEASE.deb
+
+    $TMP_HOOKS_PATH/bin/cache-url http://apt.puppetlabs.com/puppetlabs-release-$DIB_RELEASE.deb $PUPPET_REPO_DEB
+    sudo cp $PUPPET_REPO_DEB $TMP_MOUNT_PATH/root/puppet-repo.deb
+    ;;
+esac

@@ -1,0 +1,4 @@
+#!/bin/bash
+set -e
+
+install-packages build-essential python-dev linux-headers-virtual linux-headers-generic

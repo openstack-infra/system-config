@@ -52,6 +52,15 @@ class nodepool (
     ],
   }
 
+  $packages = [
+    'kpartx',
+    'qemu-utils',
+  }
+
+  package { $packages:
+    ensure => present,
+  }
+
   file { '/etc/mysql/conf.d/max_connections.cnf':
     ensure  => present,
     content => "[server]\nmax_connections = 8192\n",
@@ -98,6 +107,10 @@ class nodepool (
     mode    => '0444',
     owner   => 'root',
     group   => 'root',
+  }
+
+  file { '/var/lib/nodepool':
+    ensure => directory,
   }
 
   file { '/var/log/nodepool':
