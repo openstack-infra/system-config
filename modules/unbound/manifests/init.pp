@@ -18,6 +18,7 @@
 # recursive resolver.
 
 class unbound (
+  $install_resolve_conf = true
 ) {
 
   if ($::osfamily == 'Debian') {
@@ -40,13 +41,15 @@ class unbound (
       require => File['/etc/default/unbound'],
     }
 
-    # Rackspace uses static config files
-    file { '/etc/resolv.conf':
-      content => "nameserver 127.0.0.1\n",
-      owner   => 'root',
-      group   => 'root',
-      mode    => '0444',
-      require => Service['unbound'],
+    if ( $install_resolv_conf ) {
+      # Rackspace uses static config files
+      file { '/etc/resolv.conf':
+        content => "nameserver 127.0.0.1\n",
+        owner   => 'root',
+        group   => 'root',
+        mode    => '0444',
+        require => Service['unbound'],
+      }
     }
 
     # Tripleo uses dhcp
@@ -65,14 +68,16 @@ class unbound (
       ensure  => present,
     }
 
-    # Rackspace uses static config files
-    file { '/etc/resolv.conf':
-      content => "nameserver 127.0.0.1\n",
-      owner   => 'root',
-      group   => 'root',
-      mode    => '0444',
-      require => Service['unbound'],
-      notify  => Exec['make-resolv-conf-immutable'],
+    if ( $install_resolv_conf ) {
+      # Rackspace uses static config files
+      file { '/etc/resolv.conf':
+        content => "nameserver 127.0.0.1\n",
+        owner   => 'root',
+        group   => 'root',
+        mode    => '0444',
+        require => Service['unbound'],
+        notify  => Exec['make-resolv-conf-immutable'],
+      }
     }
 
     # Rackspace uses file injection to configure networking which
