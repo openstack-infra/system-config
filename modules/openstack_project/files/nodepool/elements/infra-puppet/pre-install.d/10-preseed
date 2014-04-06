@@ -1,0 +1,23 @@
+#!/bin/bash
+set -e
+
+# workaround a broken maintainer script in iptables-persistent that
+# assumes it can execute things during postinst. Since we're installing
+# in a chroot, we're actually not running the right kernel for its assumptions
+# to work.
+
+# If lsb_release is missing, just do nothing.
+DISTRO=`lsb_release -si` || true
+
+case $DISTRO in
+    'Ubuntu'|'Debian')
+    PRESEED=`mktemp`
+    cat > $PRESEED <<EOF
+d-i iptables-persistent/autosave_done boolean true
+d-i iptables-persistent/autosave_v4 boolean false
+d-i iptables-persistent/autosave_v6 boolean false
+EOF
+    debconf-set-selections $PRESEED
+    rm $PRESEED
+    ;;
+esac

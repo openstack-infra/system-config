@@ -1,0 +1,1 @@
+install-puppet file /tmp/install_puppet.sh https://git.openstack.org/cgit/openstack-infra/config/plain/install_puppet.sh

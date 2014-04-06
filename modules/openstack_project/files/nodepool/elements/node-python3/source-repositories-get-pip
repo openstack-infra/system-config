@@ -1,0 +1,1 @@
+get-pip file /root/get-pip.py https://raw.github.com/pypa/pip/master/contrib/get-pip.py
