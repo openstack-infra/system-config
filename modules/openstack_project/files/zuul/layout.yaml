@@ -337,7 +337,6 @@ jobs:
     branch: ^(?!stable/havana).*$
   - name: ^(gate|check)-grenade-dsvm-neutron$
     branch: ^(?!stable/havana).*$
-    voting: false
   - name: ^(gate|check)-grenade-dsvm-partial-ncpu$
     branch: ^(?!stable/havana).*$
   - name: ^gate-.*-pypy$
