@@ -709,6 +709,8 @@ node 'openstackid-dev.openstack.org' {
     id_mysql_password       => hiera('openstackid_dev_id_mysql_password'),
     ss_mysql_host           => hiera('openstackid_dev_ss_mysql_host'),
     ss_mysql_password       => hiera('openstackid_dev_ss_mysql_password'),
+    ss_mysql_user           => hiera('openstackid_dev_ss_mysql_user'),
+    ss_db_name              => hiera('openstackid_dev_ss_db_name'),
     redis_password          => hiera('openstackid_dev_redis_password'),
     ssl_cert_file_contents  => hiera('openstackid_dev_ssl_cert_file_contents'),
     ssl_key_file_contents   => hiera('openstackid_dev_ssl_key_file_contents'),
