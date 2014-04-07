@@ -92,4 +92,10 @@ class openstack_project::eavesdrop (
     server        => $statusbot_server,
     channel_file  => 'puppet:///modules/openstack_project/accessbot/channels.yaml',
   }
+
+  include bup
+  bup::site { 'rs-ord':
+    backup_user   => 'bup-eavesdrop',
+    backup_server => 'ci-backup-rs-ord.openstack.org',
+  }
 }
