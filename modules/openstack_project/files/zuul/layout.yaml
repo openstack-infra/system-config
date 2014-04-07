@@ -2106,12 +2106,15 @@ projects:
       - gate-ironic-python-agent-pep8
       - gate-ironic-python-agent-python26
       - gate-ironic-python-agent-python27
-      - gate-ironic-python-agent-pypy
+      # TODO(JayF): pypy tests are currently timing out after 40m due to
+      # https://github.com/eventlet/eventlet/pull/84. Re-enable pypy check
+      # and gate once this is fixed and released.
+      #- gate-ironic-python-agent-pypy
     gate:
       - gate-ironic-python-agent-pep8
       - gate-ironic-python-agent-python26
       - gate-ironic-python-agent-python27
-      - gate-ironic-python-agent-pypy
+      #- gate-ironic-python-agent-pypy
 
   # This is not strictly necessary; there is currently a transitive
   # relationship between g-t-dsvm,
