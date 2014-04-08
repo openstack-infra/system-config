@@ -4,6 +4,11 @@
       - shell: "/usr/local/jenkins/slave_scripts/gerrit-git-prep.sh https://review.opencontrail.org git://git.opencontrail.org"
 
 - builder:
+    name: build
+    builders:
+      - shell: "scons controller/src/discovery"
+
+- builder:
     name: coverage
     builders:
       - shell: "/usr/local/jenkins/slave_scripts/run-cover.sh {github-org} {project}"
