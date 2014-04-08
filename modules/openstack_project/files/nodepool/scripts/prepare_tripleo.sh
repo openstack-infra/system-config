@@ -85,6 +85,7 @@ git clone https://review.openstack.org/p/openstack/keystone
 git clone https://review.openstack.org/p/openstack/neutron
 git clone https://review.openstack.org/p/openstack/nova
 git clone https://review.openstack.org/p/openstack/os-apply-config
+git clone https://review.openstack.org/p/openstack/os-cloud-config
 git clone https://review.openstack.org/p/openstack/os-collect-config
 git clone https://review.openstack.org/p/openstack/os-refresh-config
 git clone https://review.openstack.org/p/openstack/oslo.config
