@@ -15,10 +15,7 @@ class ssh {
       owner   => 'root',
       group   => 'root',
       mode    => '0444',
-      source  => [
-        "puppet:///modules/ssh/sshd_config.${::osfamily}",
-        'puppet:///modules/ssh/sshd_config',
-      ],
+      content => template('ssh/sshd_config.erb'),
       replace => true,
     }
 }
