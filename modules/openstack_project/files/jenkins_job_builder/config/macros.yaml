@@ -4,6 +4,14 @@
       - shell: "/usr/local/jenkins/slave_scripts/gerrit-git-prep.sh https://review.openstack.org git://git.openstack.org"
 
 - builder:
+    name: branch-git-prep
+    builders:
+      - shell: |
+          #!/bin/bash
+          export BRANCH={branch}
+          /usr/local/jenkins/slave_scripts/gerrit-git-prep.sh https://review.openstack.org git://git.openstack.org
+
+- builder:
     name: revoke-sudo
     builders:
       - shell: |

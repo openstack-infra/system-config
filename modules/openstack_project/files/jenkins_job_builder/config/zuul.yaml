@@ -45,6 +45,8 @@
 
     builders:
       - revoke-sudo
+      - branch-git-prep:
+          branch: master
       - python27:
           github-org: 'openstack-infra'
           project: 'zuul'
@@ -52,11 +54,5 @@
     publishers:
       - test-results
       - console-log
-
-    scm:
-      - git:
-          url: 'git://git.openstack.org/openstack-infra/zuul'
-          branches:
-            - 'origin/master'
 
     node: bare-precise
