@@ -2107,12 +2107,10 @@ projects:
       - gate-ironic-python-agent-pep8
       - gate-ironic-python-agent-python26
       - gate-ironic-python-agent-python27
-      - gate-ironic-python-agent-pypy
     gate:
       - gate-ironic-python-agent-pep8
       - gate-ironic-python-agent-python26
       - gate-ironic-python-agent-python27
-      - gate-ironic-python-agent-pypy
 
   # This is not strictly necessary; there is currently a transitive
   # relationship between g-t-dsvm,
