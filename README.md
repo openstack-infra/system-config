@@ -10,3 +10,11 @@ These puppet modules require puppet 2.7 or greater. Additionally, the
 site.pp manifest assumes the existence of hiera.
 
 See http://ci.openstack.org for more information.
+
+ci.openstack.org
+================
+
+The documentation presented at http://ci.openstack.org comes from
+docs/source.  To build the documentation try
+
+ $ tox -evenv python setup.py build_sphinx
