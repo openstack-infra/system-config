@@ -1,0 +1,9 @@
+- project:
+    name: contrail-controller
+    github-org: stackforge
+    node: master
+    tarball-site: tarballs.openstack.org
+    doc-publisher-site: docs.opencontrail.org
+
+    jobs:
+      - contrail-jobs

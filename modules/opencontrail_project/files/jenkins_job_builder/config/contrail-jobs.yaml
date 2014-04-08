@@ -1,0 +1,26 @@
+- job-template:
+    name: 'gate-{name}-build'
+    node: master
+
+    builders:
+      - gerrit-git-prep
+      - build:
+          github-org: '{github-org}'
+          project: '{name}'
+      - shell: |
+          #!/bin/bash -xe
+          # cd to the right directory
+          scons controller/src/discovery
+
+    publishers:
+      - console-log
+
+- job-group:
+    name: contrail-jobs
+    jobs:
+      - 'gate-{name}-build'
+
+- project:
+    name: stackforge/contrail-controller
+    jobs:
+      - contrail-jobs

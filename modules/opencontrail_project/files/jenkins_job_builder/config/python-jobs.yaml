@@ -235,6 +235,10 @@
 
     builders:
       - gerrit-git-prep
+      - build:
+          github-org: '{github-org}'
+          project: '{name}'
+
       - shell: |
           #!/bin/bash -xe
           # cd to the right directory
