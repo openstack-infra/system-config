@@ -112,6 +112,14 @@ setup to test on if required.  In SmokeStack's case all failures are manually
 reviewed before getting pushed to OpenStack, whilst this may no scale it is
 advisable during initial testing of the setup.
 
+There are several triggers that gerrit will match to alter the
+formatting of comments.  The raw regular expressions can be seen in
+`gerrit.pp <https://git.openstack.org/cgit/openstack-infra/config/tree/modules/openstack_project/manifests/gerrit.pp>`_.
+For example, to have your test results formatted in the same manner as
+the upstream Jenkins results, use a template for each result matching::
+
+  * test-name-no-spaces http://link.to/result : [SUCCESS|FAILURE] some comment about the test
+
 .. _request-account-label:
 
 Requesting a Service Account
