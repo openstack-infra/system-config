@@ -1,0 +1,20 @@
+# This is a non-standard docs job because it uses SCP instead of FTP
+- job:
+    name: nodepool-docs
+    node: bare-precise
+
+    builders:
+      - revoke-sudo
+      - gerrit-git-prep
+      - docs:
+          github-org: openstack-infra
+          project: nodepool
+
+    publishers:
+      - scp:
+          site: '173.203.107.207'
+          files:
+            - target: 'ci/nodepool'
+              source: 'doc/build/html/**/*'
+              keep-hierarchy: true
+      - console-log

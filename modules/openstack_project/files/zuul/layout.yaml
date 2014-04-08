@@ -2806,6 +2806,8 @@ projects:
   - name: openstack-infra/nodepool
     template:
       - name: python-jobs
+    post:
+      - nodepool-docs
     pre-release:
       - nodepool-tarball
     release:
