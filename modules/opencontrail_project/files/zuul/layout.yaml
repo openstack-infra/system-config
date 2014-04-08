@@ -259,6 +259,12 @@ project-templates:
     gate:
       - 'gate-{name}-requirements'
 
+  - name: contrail-jobs
+    check:
+      - 'gate-{name}-build'
+    gate:
+      - 'gate-{name}-build'
+
 jobs:
   - name: ^.*$
     parameter-function: single_use_node
