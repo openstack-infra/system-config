@@ -71,6 +71,26 @@
       - rally-plot
 
 
+- job-template:
+    name: 'check-rally-cli'
+    node: '{node}'
+
+    builders:
+      - link-logs
+      - devstack-checkout
+      - shell: |
+          #/bin/bash -xe
+          function post_test_hook {{
+              /usr/local/jenkins/slave_scripts/run-tox.sh cli stackforge rally
+          }}
+          cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
+          ./safe-devstack-vm-gate-wrap.sh
+
+    publishers:
+      - devstack-logs
+      - console-log
+
+
 - job-group:
     name: rally-jobs
     jobs:
