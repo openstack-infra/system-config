@@ -22,7 +22,7 @@
           export PROJECTS="stackforge/rally $PROJECTS"
 
           function pre_test_hook {{
-              /opt/stack/new/rally/tests_ci/pre_test_hook.sh
+              . /opt/stack/new/rally/tests_ci/pre_test_hook.sh
           }}
           export -f pre_test_hook
 
