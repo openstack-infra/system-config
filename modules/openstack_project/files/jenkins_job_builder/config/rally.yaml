@@ -51,7 +51,28 @@
       - console-log
 
 
+- job-template:
+    name: '{pipeline}-rally-cli'
+    node: '{node}'
+
+    builders:
+      - link-logs
+      - devstack-checkout
+      - shell: "devstack-gate/devstack-vm-gate-wrap.sh"
+      - tox:
+          envlist: 'cli'
+          github-org: 'stackforge'
+          project: 'rally'
+
+    publishers:
+      - devstack-logs
+      - console-log
+
+
 - job-group:
     name: rally-jobs
     jobs:
       - 'check-rally-dsvm-{name}'
+
+
+
