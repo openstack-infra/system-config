@@ -81,97 +81,13 @@ node 'jenkins.openstack.org' {
   }
 }
 
-node 'jenkins01.openstack.org' {
+node /^jenkins\d+\.openstack\.org$/ {
   class { 'openstack_project::jenkins':
     jenkins_jobs_password   => hiera('jenkins_jobs_password'),
     jenkins_ssh_private_key => hiera('jenkins_ssh_private_key_contents'),
-    ssl_cert_file_contents  => hiera('jenkins01_ssl_cert_file_contents'),
-    ssl_key_file_contents   => hiera('jenkins01_ssl_key_file_contents'),
-    ssl_chain_file_contents => hiera('jenkins01_ssl_chain_file_contents'),
-    sysadmins               => hiera('sysadmins'),
-    zmq_event_receivers     => ['logstash.openstack.org',
-                                'nodepool.openstack.org',
-    ],
-  }
-}
-
-node 'jenkins02.openstack.org' {
-  class { 'openstack_project::jenkins':
-    jenkins_jobs_password   => hiera('jenkins_jobs_password'),
-    jenkins_ssh_private_key => hiera('jenkins_ssh_private_key_contents'),
-    ssl_cert_file_contents  => hiera('jenkins02_ssl_cert_file_contents'),
-    ssl_key_file_contents   => hiera('jenkins02_ssl_key_file_contents'),
-    ssl_chain_file_contents => hiera('jenkins02_ssl_chain_file_contents'),
-    sysadmins               => hiera('sysadmins'),
-    zmq_event_receivers     => ['logstash.openstack.org',
-                                'nodepool.openstack.org',
-    ],
-  }
-}
-
-node 'jenkins03.openstack.org' {
-  class { 'openstack_project::jenkins':
-    jenkins_jobs_password   => hiera('jenkins_jobs_password'),
-    jenkins_ssh_private_key => hiera('jenkins_ssh_private_key_contents'),
-    ssl_cert_file_contents  => hiera('jenkins03_ssl_cert_file_contents'),
-    ssl_key_file_contents   => hiera('jenkins03_ssl_key_file_contents'),
-    ssl_chain_file_contents => hiera('jenkins03_ssl_chain_file_contents'),
-    sysadmins               => hiera('sysadmins'),
-    zmq_event_receivers     => ['logstash.openstack.org',
-                                'nodepool.openstack.org',
-    ],
-  }
-}
-
-node 'jenkins04.openstack.org' {
-  class { 'openstack_project::jenkins':
-    jenkins_jobs_password   => hiera('jenkins_jobs_password'),
-    jenkins_ssh_private_key => hiera('jenkins_ssh_private_key_contents'),
-    ssl_cert_file_contents  => hiera('jenkins04_ssl_cert_file_contents'),
-    ssl_key_file_contents   => hiera('jenkins04_ssl_key_file_contents'),
-    ssl_chain_file_contents => hiera('jenkins04_ssl_chain_file_contents'),
-    sysadmins               => hiera('sysadmins'),
-    zmq_event_receivers     => ['logstash.openstack.org',
-                                'nodepool.openstack.org',
-    ],
-  }
-}
-
-node 'jenkins05.openstack.org' {
-  class { 'openstack_project::jenkins':
-    jenkins_jobs_password   => hiera('jenkins_jobs_password'),
-    jenkins_ssh_private_key => hiera('jenkins_ssh_private_key_contents'),
-    ssl_cert_file_contents  => hiera('jenkins05_ssl_cert_file_contents'),
-    ssl_key_file_contents   => hiera('jenkins05_ssl_key_file_contents'),
-    ssl_chain_file_contents => hiera('jenkins05_ssl_chain_file_contents'),
-    sysadmins               => hiera('sysadmins'),
-    zmq_event_receivers     => ['logstash.openstack.org',
-                                'nodepool.openstack.org',
-    ],
-  }
-}
-
-node 'jenkins06.openstack.org' {
-  class { 'openstack_project::jenkins':
-    jenkins_jobs_password   => hiera('jenkins_jobs_password'),
-    jenkins_ssh_private_key => hiera('jenkins_ssh_private_key_contents'),
-    ssl_cert_file_contents  => hiera('jenkins06_ssl_cert_file_contents'),
-    ssl_key_file_contents   => hiera('jenkins06_ssl_key_file_contents'),
-    ssl_chain_file_contents => hiera('jenkins06_ssl_chain_file_contents'),
-    sysadmins               => hiera('sysadmins'),
-    zmq_event_receivers     => ['logstash.openstack.org',
-                                'nodepool.openstack.org',
-    ],
-  }
-}
-
-node 'jenkins07.openstack.org' {
-  class { 'openstack_project::jenkins':
-    jenkins_jobs_password   => hiera('jenkins_jobs_password'),
-    jenkins_ssh_private_key => hiera('jenkins_ssh_private_key_contents'),
-    ssl_cert_file_contents  => hiera('jenkins07_ssl_cert_file_contents'),
-    ssl_key_file_contents   => hiera('jenkins07_ssl_key_file_contents'),
-    ssl_chain_file_contents => hiera('jenkins07_ssl_chain_file_contents'),
+    ssl_cert_file           => '/etc/ssl/certs/ssl-cert-snakeoil.pem',
+    ssl_key_file            => '/etc/ssl/private/ssl-cert-snakeoil.key',
+    ssl_chain_file          => '',
     sysadmins               => hiera('sysadmins'),
     zmq_event_receivers     => ['logstash.openstack.org',
                                 'nodepool.openstack.org',
