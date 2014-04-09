@@ -5,6 +5,9 @@ class openstack_project::jenkins (
   $jenkins_jobs_password = '',
   $jenkins_jobs_username = 'gerrig', # This is not a typo, well it isn't anymore.
   $manage_jenkins_jobs = true,
+  $ssl_cert_file = '',
+  $ssl_key_file = '',
+  $ssl_chain_file = '/etc/ssl/certs/intermediate.pem',
   $ssl_cert_file_contents = '',
   $ssl_key_file_contents = '',
   $ssl_chain_file_contents = '',
@@ -22,18 +25,21 @@ class openstack_project::jenkins (
     sysadmins                 => $sysadmins,
   }
 
-  if $ssl_chain_file_contents != '' {
-    $ssl_chain_file = '/etc/ssl/certs/intermediate.pem'
-  } else {
-    $ssl_chain_file = ''
+  # Set defaults here because they evaluate variables which you cannot
+  # do in the class parameter list.
+  if $ssl_cert_file == '' {
+    $ssl_cert_file = "/etc/ssl/certs/${vhost_name}.pem"
+  }
+  if $ssl_key_file == '' {
+    $ssl_key_file = "/etc/ssl/private/${vhost_name}.key"
   }
 
   class { '::jenkins::master':
     vhost_name              => $vhost_name,
     serveradmin             => 'webmaster@openstack.org',
     logo                    => 'openstack.png',
-    ssl_cert_file           => "/etc/ssl/certs/${vhost_name}.pem",
-    ssl_key_file            => "/etc/ssl/private/${vhost_name}.key",
+    ssl_cert_file           => $ssl_cert_file,
+    ssl_key_file            => $ssl_key_file,
     ssl_chain_file          => $ssl_chain_file,
     ssl_cert_file_contents  => $ssl_cert_file_contents,
     ssl_key_file_contents   => $ssl_key_file_contents,
