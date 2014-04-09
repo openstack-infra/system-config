@@ -2026,6 +2026,9 @@
       - '{pipeline}-rally-scenarios':
           pipeline: check
           node: 'devstack-precise || devstack-precise-check'
+      - '{pipeline}-rally-cli':
+          pipeline: check
+          node: 'devstack-precise || devstack-precise-check'
 
 - project:
     name: python-rallyclient

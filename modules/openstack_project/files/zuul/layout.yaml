@@ -551,6 +551,8 @@ jobs:
     voting: false
   - name: ^check-rally-scenarios-.*$
     voting: false
+  - name: check-rally-cli
+    voting: false
   - name: gate-rally-python33
     voting: false
   - name: gate-stevedore-docs
@@ -4377,6 +4379,7 @@ projects:
       - check-rally-install-bare-centos6
       - check-rally-install-bare-precise
       - check-rally-scenarios
+      - check-rally-cli
     gate:
       - gate-rally-pep8
       - gate-rally-python26
