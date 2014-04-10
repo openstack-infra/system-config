@@ -12,15 +12,7 @@
           # cd to the right directory
           scons controller/src/discovery
 
-    publishers:
-      - console-log
-
 - job-group:
     name: contrail-jobs
     jobs:
       - 'gate-{name}-build'
-
-- project:
-    name: stackforge/contrail-controller
-    jobs:
-      - contrail-jobs
