@@ -1332,6 +1332,16 @@
 
 
 - project:
+    name: qa-specs
+    github-org: openstack
+    node: bare-precise
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - gate-{name}-docs
+
+
+- project:
     name: zuul
     github-org: openstack-infra
     node: bare-precise
