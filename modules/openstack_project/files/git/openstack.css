@@ -67,6 +67,23 @@ div#cgit table.list tr.nohover:hover {
   background: #eef3f5;
 }
 
+div#cgit table.blob td.lines {
+    margin: 0; padding: 0 0 0 0.5em;
+    vertical-align: top;
+    color: black;
+    font-family: monospace;
+    font-size: 14px;
+}
+
+div#cgit table.blob td.linenumbers {
+    margin: 0; padding: 0 0.5em 0 0.5em;
+    vertical-align: top;
+    text-align: right;
+    border-right: 1px solid gray;
+    font-family: monospace;
+    font-size: 14px;
+}
+
 /* Syntax highlighting */
 div#cgit table.blob .num  { color:#2928ff; }
 div#cgit table.blob .esc  { color:#ff00ff; }
