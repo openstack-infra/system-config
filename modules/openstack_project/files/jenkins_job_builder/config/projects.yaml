@@ -915,6 +915,19 @@
       - openstack-publish-jobs
       - pypi-jobs
 
+
+- project:
+    name: python-jenkins
+    github-org: stackforge
+    node: bare-precise
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - python-jobs
+      - pypi-jobs
+      - hook-{name}-rtfd
+
+
 - project:
     name: python-kiteclient
     github-org: stackforge

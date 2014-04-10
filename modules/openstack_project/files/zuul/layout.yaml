@@ -2907,6 +2907,12 @@ projects:
           - post-mirror-python27
           - post-mirror-python33
 
+  - name: stackforge/python-jenkins
+    check:
+      - noop
+    gate:
+      - noop
+
   - name: openstack-infra/releasestatus
     check:
       - noop
