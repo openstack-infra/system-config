@@ -245,15 +245,17 @@ project-templates:
 
   - name: integrated-gate
     check:
-      - 'check-grenade-dsvm'
       - 'check-tempest-dsvm-full'
       - 'check-tempest-dsvm-neutron'
       - 'check-tempest-dsvm-neutron-heat-slow'
+      - 'check-grenade-dsvm'
+      - 'check-grenade-dsvm-neutron'
     gate:
-      - 'gate-grenade-dsvm'
       - 'gate-tempest-dsvm-full'
       - 'gate-tempest-dsvm-neutron'
       - 'gate-tempest-dsvm-neutron-heat-slow'
+      - 'gate-grenade-dsvm'
+      - 'gate-grenade-dsvm-neutron'
 
   - name: python3-jobs
     check:
@@ -859,7 +861,6 @@ projects:
       - check-tempest-dsvm-neutron-pg
       - check-tempest-dsvm-neutron-pg
       - gate-tempest-dsvm-neutron-large-ops
-      - check-grenade-dsvm-neutron
     gate:
       - gate-tempest-dsvm-neutron
       - gate-tempest-dsvm-neutron-pg
