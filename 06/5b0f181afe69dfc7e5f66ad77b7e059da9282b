@@ -1,0 +1,10 @@
+Approved+1: James E. Blair <corvus@inaugust.com>
+Code-Review+2: James E. Blair <corvus@inaugust.com>
+Approved+1: Clark Boylan <cboylan@sapwetik.org>
+Code-Review+2: Clark Boylan <cboylan@sapwetik.org>
+Verified+2: Clark Boylan <cboylan@sapwetik.org>
+Submitted-by: Clark Boylan <cboylan@sapwetik.org>
+Submitted-at: Fri, 11 Apr 2014 17:42:58 +0000
+Reviewed-on: https://review.openstack.org/86969
+Project: openstack-infra/config
+Branch: refs/heads/master
