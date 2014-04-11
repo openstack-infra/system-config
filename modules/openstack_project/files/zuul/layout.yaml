@@ -537,6 +537,8 @@ jobs:
     voting: false
   - name: gate-nova-docker-python27
     voting: false
+  - name: check-novadocker-dsvm-f20
+    voting: false
   - name: check-neutron-dsvm-functional
     branch: ^(?!stable/havana).*$
     voting: false
@@ -946,6 +948,8 @@ projects:
     template:
       - name: python-jobs
       - name: check-requirements
+    check:
+      - name: check-novadocker-dsvm-f20
 
   - name: openstack/pycadf
     template:
