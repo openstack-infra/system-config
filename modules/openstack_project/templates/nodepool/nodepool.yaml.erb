@@ -26,11 +26,6 @@ labels:
       - name: rax-dfw
       - name: rax-ord
       - name: rax-iad
-  - name: devstack-precise-check
-    image: devstack-precise-check
-    min-ready: 7
-    providers:
-      - name: rax-iad
   - name: bare-precise
     image: bare-precise
     min-ready: 42
@@ -40,14 +35,14 @@ labels:
       - name: rax-iad
   - name: bare-centos6
     image: bare-centos6
-    min-ready: 14
+    min-ready: 21
     providers:
       - name: rax-dfw
       - name: rax-ord
       - name: rax-iad
   - name: py3k-precise
     image: py3k-precise
-    min-ready: 7
+    min-ready: 21
     providers:
       - name: rax-dfw
       - name: rax-ord
