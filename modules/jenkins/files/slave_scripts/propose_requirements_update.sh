@@ -25,7 +25,7 @@ fi
 
 git config user.name "OpenStack Jenkins"
 git config user.email "jenkins@openstack.org"
-git config gitreview.username $USERNAME
+git config gitreview.username "jenkins-proposal"
 
 for PROJECT in $(cat projects.txt); do
 
