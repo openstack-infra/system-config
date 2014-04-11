@@ -67,6 +67,7 @@ class openstack_project::review (
   $lp_sync_secret='',
   # For gerrit's contactstore feature
   # https://review.openstack.org/Documentation/config-contact.html
+  $contactstore = true,
   $contactstore_appsec='',
   $contactstore_pubkey='',
   $sysadmins = [],
@@ -113,7 +114,7 @@ class openstack_project::review (
     httpd_maxwait                       => '5000min',
     war                                 =>
       'http://tarballs.openstack.org/ci/gerrit-2.4.4-14-gab7f4c1.war',
-    contactstore                        => true,
+    contactstore                        => $contactstore,
     contactstore_appsec                 => $contactstore_appsec,
     contactstore_pubkey                 => $contactstore_pubkey,
     contactstore_url                    =>
