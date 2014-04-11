@@ -23,6 +23,10 @@ labels:
     image: devstack-precise
     min-ready: 42
     providers:
+      - name: hpcloud-az1
+      - name: hpcloud-az2
+      - name: hpcloud-az3
+      - name: hpcloud-region-b
       - name: rax-dfw
       - name: rax-ord
       - name: rax-iad
@@ -30,6 +34,10 @@ labels:
     image: bare-precise
     min-ready: 42
     providers:
+      - name: hpcloud-az1
+      - name: hpcloud-az2
+      - name: hpcloud-az3
+      - name: hpcloud-region-b
       - name: rax-dfw
       - name: rax-ord
       - name: rax-iad
@@ -37,6 +45,10 @@ labels:
     image: bare-centos6
     min-ready: 21
     providers:
+      - name: hpcloud-az1
+      - name: hpcloud-az2
+      - name: hpcloud-az3
+      - name: hpcloud-region-b
       - name: rax-dfw
       - name: rax-ord
       - name: rax-iad
@@ -44,6 +56,10 @@ labels:
     image: py3k-precise
     min-ready: 21
     providers:
+      - name: hpcloud-az1
+      - name: hpcloud-az2
+      - name: hpcloud-az3
+      - name: hpcloud-region-b
       - name: rax-dfw
       - name: rax-ord
       - name: rax-iad
@@ -207,7 +223,7 @@ providers:
     project-id: '<%= hpcloud_project %>'
     auth-url: 'https://region-a.geo-1.identity.hpcloudsvc.com:35357/v2.0'
     boot-timeout: 180
-    max-servers: 0
+    max-servers: 48
     images:
       - name: devstack-precise
         base-image: 'Ubuntu Precise 12.04 LTS Server 64-bit 20121026 (b)'
@@ -242,7 +258,7 @@ providers:
     project-id: '<%= hpcloud_project %>'
     auth-url: 'https://region-a.geo-1.identity.hpcloudsvc.com:35357/v2.0'
     boot-timeout: 180
-    max-servers: 0
+    max-servers: 192
     images:
       - name: devstack-precise
         base-image: 'Ubuntu Precise 12.04 LTS Server 64-bit 20121026 (b)'
@@ -277,7 +293,7 @@ providers:
     project-id: '<%= hpcloud_project %>'
     auth-url: 'https://region-a.geo-1.identity.hpcloudsvc.com:35357/v2.0'
     boot-timeout: 180
-    max-servers: 0
+    max-servers: 48
     images:
       - name: devstack-precise
         base-image: 'Ubuntu Precise 12.04 LTS Server 64-bit 20121026 (b)'
@@ -329,7 +345,7 @@ providers:
     project-id: '<%= hpcloud_project %>'
     auth-url: 'https://region-b.geo-1.identity.hpcloudsvc.com:35357/v2.0'
     boot-timeout: 120
-    max-servers: 0
+    max-servers: 200
     images:
       - name: devstack-precise-check
         base-image: 'Ubuntu Precise 12.04 LTS Server 64-bit 20121026 (b)'
