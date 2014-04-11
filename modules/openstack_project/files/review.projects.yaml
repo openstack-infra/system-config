@@ -106,6 +106,7 @@
 - project: openstack-infra/nodepool
   group: openstack-ci
   description: Manage a pool of nodes for a distributed test infrastructure
+  use-storyboard: true
 - project: openstack-infra/nose-html-output
   group: openstack-ci
   options:
@@ -158,11 +159,13 @@
     - direct-release
 - project: openstack-infra/storyboard
   upstream: git://github.com/ttx/storyboard.git
+  use-storyboard: true
   description: OpenStack Task Tracking API
 - project: openstack-infra/storyboard-webclient
   acl-config: /home/gerrit2/acls/openstack-infra/storyboard.config
   upstream: git://github.com/krotscheck/storyboard-webclient.git
   description: OpenStack Task Tracking Browser Client
+  use-storyboard: true
 - project: openstack-infra/tripleo-ci
   description: CI for the tripleo project
   upstream: https://github.com/toci-dev/toci
@@ -172,6 +175,7 @@
   upstream: git://github.com/cboylan/zmq-event-publisher.git
 - project: openstack-infra/zuul
   group: openstack-ci
+  use-storyboard: true
 - project: openstack-infra/zuul-packaging
   group: openstack-ci
   upstream: git://github.com/pabelanger/zuul-packaging.git
