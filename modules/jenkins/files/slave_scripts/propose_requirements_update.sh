@@ -23,9 +23,9 @@ if [ -z "$BRANCH" ] ; then
     exit 1
 fi
 
-git config user.name "OpenStack Jenkins"
-git config user.email "jenkins@openstack.org"
-git config gitreview.username $USERNAME
+git config user.name "OpenStack Proposal Bot"
+git config user.email "openstack-infra@lists.openstack.org"
+git config gitreview.username "proposal-bot"
 
 for PROJECT in $(cat projects.txt); do
 
