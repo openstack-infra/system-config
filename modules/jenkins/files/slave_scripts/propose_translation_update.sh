@@ -59,9 +59,19 @@ fi
 # Add all changed files to git
 git add $PROJECT/locale/*
 
-# Don't send a review if the only things which have changed are the creation
-# date or comments.
-if [ `git diff --cached | egrep -v "(POT-Creation-Date|^[\+\-]#|^\+{3}|^\-{3})" | egrep -c "^[\-\+]"` -gt 0 ]
+# Don't send files where the only things that have changed are the
+# creation date, the version number or comment lines.
+for f in `git diff --cached --name-only`
+do
+  if [ `git diff --cached $f |egrep -v "(POT-Creation-Date|Project-Id-Version|^\+{3}|^\-{3}|^[-+]#)" | egrep -c "^[\-\+]"` -eq 0 ]
+  then
+      git reset -q $f
+      git checkout -- $f
+  fi
+done
+
+# Don't send a review if nothing has changed.
+if [ `git diff --cached |wc -l` -gt 0 ]
 then
     # Commit and review
     git commit -F- <<EOF
