@@ -37,6 +37,21 @@ if [ -f /usr/bin/yum ]; then
 fi
 wget https://git.openstack.org/cgit/openstack-infra/config/plain/install_puppet.sh
 sudo bash -xe install_puppet.sh
+
+# Facter's ec2 metadata facts don't always fail gracefully
+# but we don't use them. Simplest fix is to just remove those
+# facts completely.
+# Precise
+if [ -f /usr/lib/ruby/vendor_ruby/facter/ec2.rb ] ; then
+    sudo rm /usr/lib/ruby/vendor_ruby/facter/ec2.rb
+# CentOS6
+elif [ -f /usr/lib/ruby/site_ruby/1.8/facter/ec2.rb ] ; then
+    sudo rm /usr/lib/ruby/site_ruby/1.8/facter/ec2.rb
+# Fedora20
+elif [ -f /usr/share/ruby/vendor_ruby/facter/ec2.rb ] ; then
+    sudo rm /usr/share/ruby/vendor_ruby/facter/ec2.rb
+fi
+
 sudo git clone --depth=1 git://git.openstack.org/openstack-infra/config.git \
     /root/config
 sudo /bin/bash /root/config/install_modules.sh
