@@ -36,13 +36,11 @@ define user::virtual::localuser(
     require => User[$title],
   }
 
-  file { "${title}_keys":
+  ssh_authorized_key { "${title}_keys":
     ensure  => present,
-    content => $sshkeys,
-    group   => $title,
-    mode    => '0400',
-    name    => "${home}/.ssh/authorized_keys",
-    owner   => $title,
+    key     => $sshkeys,
+    user    => $title,
+    type    => 'ssh-rsa',
     require => File["${title}_sshdir"],
   }
 }
