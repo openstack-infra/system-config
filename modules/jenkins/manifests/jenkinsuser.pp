@@ -52,11 +52,10 @@ class jenkins::jenkinsuser(
     require => File['/home/jenkins'],
   }
 
-  file { '/home/jenkins/.ssh/authorized_keys':
+  ssh_authorized_key { '/home/jenkins/.ssh/authorized_keys':
     ensure  => present,
-    owner   => 'jenkins',
-    group   => 'jenkins',
-    mode    => '0640',
+    user    => 'jenkins',
+    type    => 'ssh-rsa',
     content => $ssh_key,
     require => File['/home/jenkins/.ssh'],
   }
