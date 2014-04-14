@@ -15,12 +15,14 @@ class openstack_project::single_use_slave (
   $include_pypy = false,
   $automatic_upgrades = false,
   $all_mysql_privs = false,
+  $enable_unbound = true,
   $ssh_key = $openstack_project::jenkins_ssh_key
 ) inherits openstack_project {
   class { 'openstack_project::template':
     certname           => $certname,
     automatic_upgrades => $automatic_upgrades,
     install_users      => $install_users,
+    enable_unbound     => $enable_unbound,
     # Ports 8000, 8003, 8004 from the devstack neutron public net to allow
     # nova servers to reach heat-api-cfn, heat-api-cloudwatch, heat-api
     iptables_rules4    =>
