@@ -79,6 +79,7 @@ class openstack_project::base(
       'command=puppet agent --test',
       'from=ci-puppetmaster.openstack.org',
     ],
+    require => File['/root/.ssh'],
   }
 
   # Use upstream puppet and pin to version 2.7.*
