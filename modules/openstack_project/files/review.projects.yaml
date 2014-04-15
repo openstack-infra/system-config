@@ -433,14 +433,17 @@
   upstream: https://github.com/samu4924/cloudroast
   description: Automated Test Case Repository for OpenStack. Based on CloudCAFE.
 - project: stackforge/compass-adapters
+  group: compass
   description: Compass adapter related code and data (chef, cobbler, etc)
   upstream: git://github.com/huawei-cloud/compass-adapters.git
   acl-config: /home/gerrit2/acls/stackforge/compass.config
 - project: stackforge/compass-core
+  group: compass
   description: Automating Distributed System Deployment to Baremetal Resources
   upstream: git://github.com/huawei-cloud/compass-core.git
   acl-config: /home/gerrit2/acls/stackforge/compass.config
 - project: stackforge/compass-web
+  group: compass
   description: A web-based UI consuming the Restful API service provided by Compass
   upstream: git://github.com/huawei-cloud/compass-web.git
   acl-config: /home/gerrit2/acls/stackforge/compass.config
