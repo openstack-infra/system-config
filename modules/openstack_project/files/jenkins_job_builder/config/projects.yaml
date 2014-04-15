@@ -2098,7 +2098,9 @@
           system: apt
           profileos: "ubuntu"
 
-      - openstack-install-deploy-guide-{lang}:
+      - openstack-install-deploy-guide-{lang}
+
+      - openstack-misc-guides-{lang}
 
       - openstack-operations-guide-{lang}
 

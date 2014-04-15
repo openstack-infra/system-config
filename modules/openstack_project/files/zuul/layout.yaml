@@ -2355,6 +2355,7 @@ projects:
       - openstack-install-deploy-guide-opensuse
       - openstack-install-deploy-guide-ubuntu
       - openstack-install-deploy-guide-ja
+      - openstack-misc-guides-ja
       - openstack-security-guide
       - openstack-user-guide
       - openstack-user-guide-admin
