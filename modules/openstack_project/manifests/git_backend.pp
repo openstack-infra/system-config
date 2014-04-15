@@ -19,7 +19,6 @@ class openstack_project::git_backend (
   $vhost_name = $::fqdn,
   $sysadmins = [],
   $git_gerrit_ssh_key = '',
-  $git_zuul_ssh_key = '',
   $ssl_cert_file_contents = '',
   $ssl_key_file_contents = '',
   $ssl_chain_file_contents = '',
@@ -184,12 +183,7 @@ class openstack_project::git_backend (
   }
 
   file { '/home/zuul/.ssh/authorized_keys':
-    owner   => 'zuul',
-    group   => 'zuul',
-    mode    => '0600',
-    content => $git_zuul_ssh_key,
-    replace => true,
-    require => File['/home/zuul/.ssh']
+    ensure => absent,
   }
 
   cron { 'mirror_repack_zuul':

@@ -354,7 +354,6 @@ node /^git\d+\.openstack\.org$/ {
     vhost_name              => 'git.openstack.org',
     sysadmins               => hiera('sysadmins'),
     git_gerrit_ssh_key      => hiera('gerrit_replication_ssh_rsa_pubkey_contents'),
-    git_zuul_ssh_key        => $openstack_project::jenkins_ssh_key,
     ssl_cert_file_contents  => hiera('git_ssl_cert_file_contents'),
     ssl_key_file_contents   => hiera('git_ssl_key_file_contents'),
     ssl_chain_file_contents => hiera('git_ssl_chain_file_contents'),
@@ -433,7 +432,7 @@ node 'zuul.openstack.org' {
     gerrit_server        => 'review.openstack.org',
     gerrit_user          => 'jenkins',
     gerrit_ssh_host_key  => hiera('gerrit_ssh_rsa_pubkey_contents'),
-    zuul_ssh_private_key => hiera('jenkins_ssh_private_key_contents'),
+    zuul_ssh_private_key => hiera('zuul_ssh_private_key_contents'),
     url_pattern          => 'http://logs.openstack.org/{build.parameters[LOG_PATH]}',
     zuul_url             => 'http://zuul.openstack.org/p',
     sysadmins            => hiera('sysadmins'),
@@ -461,7 +460,7 @@ node 'zm01.openstack.org' {
     gerrit_server        => 'review.openstack.org',
     gerrit_user          => 'jenkins',
     gerrit_ssh_host_key  => hiera('gerrit_ssh_rsa_pubkey_contents'),
-    zuul_ssh_private_key => hiera('jenkins_ssh_private_key_contents'),
+    zuul_ssh_private_key => hiera('zuul_ssh_private_key_contents'),
     sysadmins            => hiera('sysadmins'),
   }
 }
@@ -472,7 +471,7 @@ node 'zm02.openstack.org' {
     gerrit_server        => 'review.openstack.org',
     gerrit_user          => 'jenkins',
     gerrit_ssh_host_key  => hiera('gerrit_ssh_rsa_pubkey_contents'),
-    zuul_ssh_private_key => hiera('jenkins_ssh_private_key_contents'),
+    zuul_ssh_private_key => hiera('zuul_ssh_private_key_contents'),
     sysadmins            => hiera('sysadmins'),
   }
 }
