@@ -322,6 +322,7 @@
 
     jobs:
       - python-jobs
+      - ceilometer-backends-jobs
       - python-havana-bitrot-jobs
       - openstack-publish-jobs
       - translation-jobs

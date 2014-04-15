@@ -594,6 +594,9 @@ projects:
       - ceilometer-merge-release-tags
     periodic:
       - ceilometer-propose-translation-update
+    experimental:
+      - ceilometer-python26-mongodb
+      - ceilometer-python27-mongodb
 
   - name: openstack/cinder
     template:
