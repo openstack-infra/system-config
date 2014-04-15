@@ -826,6 +826,9 @@
 - project: stackforge/python-solumclient
   description: 'Client library to Solum API. See: https://wiki.openstack.org/wiki/Solum'
   upstream: https://github.com/noorul/python-solumclient.git
+- project: stackforge/solum-ui
+  description: 'Horizon plugin for Solum. See: https://wiki.openstack.org/wiki/Solum'
+  upstream: https://github.com/asalkeld/solum-horizon.git
 - project: stackforge/rally
   description: Benchmark System for OpenStack
   upstream: git://github.com/pboris/rally.git
