@@ -99,6 +99,7 @@ openstack-dns:
       - x-vrif-minus-2
     projects:
       - stackforge/designate
+      - stackforge/designate-specs
       - stackforge/python-designateclient
     branches:
       - master
