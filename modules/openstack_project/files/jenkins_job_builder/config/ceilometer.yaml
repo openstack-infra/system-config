@@ -1,0 +1,40 @@
+
+- builder:
+    name: mongodb
+    builders:
+      - shell: "export CEILOMETER_TESTS_CONNECTION_URL='mongodb://localhost/ceilometer_test'"
+
+- job-template:
+    name: 'ceilometer-{python}-{backend}'
+
+    wrappers:
+      - timeout:
+          timeout: 50
+          fail: true
+      - timestamps
+
+    builders:
+      - revoke-sudo
+      - gerrit-git-prep
+      - '{backend}'
+      - '{python}':
+          github-org: '{github-org}'
+          project: '{name}'
+      - assert-no-extra-files
+
+    publishers:
+      - test-results
+      - console-log
+
+    node: '{node}'
+
+
+- job-group:
+    name: ceilometer-backends-jobs
+    jobs:
+      - 'ceilometer-{python}-{backend}':
+          python: python26
+          backend: mongodb
+      - 'ceilometer-{python}-{backend}':
+          python: python27
+          backend: mongodb
