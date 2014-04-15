@@ -573,6 +573,9 @@ projects:
       - name: openstack-server-publish-jobs
       - name: periodic-havana
       - name: check-requirements
+    experimental:
+      - ceilometer-python26-mongodb
+      - ceilometer-python27-mongodb
     check:
       - check-devstack-dsvm-cells
       - check-tempest-dsvm-full
