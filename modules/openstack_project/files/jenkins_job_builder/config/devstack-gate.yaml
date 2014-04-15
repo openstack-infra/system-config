@@ -546,8 +546,7 @@
           export DEVSTACK_GATE_IRONIC=1
           export DEVSTACK_GATE_NEUTRON=1
           export DEVSTACK_GATE_VIRT_DRIVER=ironic
-          export DEVSTACK_GATE_SMOKE_SERIAL=1
-          export OS_TEST_TIMEOUT=1800
+          export TEMPEST_CONCURRENCY=1
           export BRANCH_OVERRIDE={branch-override}
           if [ "$BRANCH_OVERRIDE" != "default" ] ; then
               export OVERRIDE_ZUUL_BRANCH=$BRANCH_OVERRIDE
