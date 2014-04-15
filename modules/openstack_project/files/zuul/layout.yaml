@@ -4368,6 +4368,28 @@ projects:
           - post-mirror-python27
           - post-mirror-python33
 
+  - name: stackforge/solum-ui
+    template:
+      - name: python-jobs
+      - name: check-requirements
+    check:
+      - gate-solum-ui-pypy
+      - gate-solum-ui-pep8
+      - gate-solum-ui-python26
+      - gate-solum-ui-python27
+    gate:
+      - gate-solum-ui-pypy
+      - gate-solum-ui-pep8
+      - gate-solum-ui-python26
+      - gate-solum-ui-python27
+    pre-release:
+      - solum-ui-tarball
+    release:
+      - solum-ui-tarball:
+        - solum-ui-pypi-upload:
+          - post-mirror-python26
+          - post-mirror-python27
+
   - name: stackforge/rally
     template:
       - name: check-requirements
