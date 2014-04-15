@@ -24,7 +24,7 @@ git review -s
 
 # See if there is an open change in the transifex/translations topic
 # If so, get the change id for the existing change for use in the commit msg.
-change_info=`ssh -p 29418 review.openstack.org gerrit query --current-patch-set status:open project:$ORG/$PROJECT topic:transifex/translations owner:jenkins`
+change_info=`ssh -p 29418 proposal-bot@review.openstack.org gerrit query --current-patch-set status:open project:$ORG/$PROJECT topic:transifex/translations owner:proposal-bot`
 previous=`echo "$change_info" | grep "^  number:" | awk '{print $2}'`
 if [ "x${previous}" != "x" ] ; then
     change_id=`echo "$change_info" | grep "^change" | awk '{print $2}'`
