@@ -50,3 +50,28 @@ function create_ci_users {
 function gerrit_cmd {
   ssh -qp 29418 review.opencontrail.org gerrit $*
 }
+
+function abandon_all_reviews {
+  ssh -p 29418 opencontrail-admin@review.opencontrail.org gerrit query --patch-sets status:open |\grep revision | awk '{print $2}' | xargs ssh -p 29418 opencontrail-admin@review.opencontrail.org gerrit review --abandon
+}
+
+function add_review {
+  echo 1 >> README.md && git commit -m "sample commit" . && git review -y
+}
+
+function list_reviews {
+    ssh -p 29418 opencontrail-admin@review.opencontrail.org gerrit query --patch-sets status:open
+}
+
+# Pass revision id
+function delete_review {
+    ssh -p 29418 opencontrail-admin@review.opencontrail.org gerrit query --patch-sets status:abandoned |\grep revision | awk '{print $2}' | xargs ssh -p 29418 opencontrail-admin@review.opencontrail.org gerrit review --delete $1
+}
+
+# deleted abandoned
+
+# ssh -p 29418 opencontrail-admin@review.opencontrail.org gerrit gsql
+#     update changes set status='d';
+#     update patch_sets set draft='Y';
+# ssh -p 29418 opencontrail-admin@review.opencontrail.org gerrit flush-caches --all
+

@@ -239,6 +239,10 @@ projects:
       - name: contrail-jobs
     check:
       - gate-contrail-controller-build
+    silent:
+      - gate-contrail-controller-build
+    check-tripleo:
+      - gate-contrail-controller-build
     gate:
       - gate-contrail-controller-build
     post:
