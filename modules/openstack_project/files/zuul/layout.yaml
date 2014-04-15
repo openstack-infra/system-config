@@ -873,9 +873,11 @@ projects:
 
   - name: openstack/neutron-specs
     check:
-      - noop
+      - gate-neutron-specs-python27
+      - gate-neutron-specs-docs
     gate:
-      - noop
+      - gate-neutron-specs-python27
+      - gate-neutron-specs-docs
 
   - name: openstack/nova
     template:
