@@ -9,7 +9,34 @@ pipelines:
     precedence: low
     trigger:
       gerrit:
+        - event: patchset-created
+        - event: change-restored
         - event: comment-added
+          comment_filter: (?i)^(Patch Set [0-9]+:\n\n)?\s*recheck(( (?:bug|lp)[\s#:]*(\d+))|( no bug))\s*$
+        - event: comment-added
+          require-approval:
+            - username: jenkins
+              older-than: 72h
+        - event: comment-added
+          require-approval:
+            - approved: 1
+            - username: jenkins
+              older-than: 24h
+        - event: comment-added
+          comment_filter: (?i)^(Patch Set [0-9]+:\n\n)?\s*reverify( (?:bug|lp)[\s#:]*(\d+))\s*$
+          require-approval:
+            - approved: 1
+            - username: jenkins
+        - event: comment-added
+          require-approval:
+            - verified: -1
+              username: jenkins
+          approval:
+            - approved: 1
+        - event: comment-added
+          require-approval:
+            - verified: -2
+              username: jenkins
           approval:
             - approved: 1
     start:
@@ -24,14 +51,29 @@ pipelines:
 
   - name: gate
     description: Changes that have been approved by core developers are enqueued in order in this pipeline, and if they pass tests in Jenkins, will be merged.
-    failure-message: Build failed.  For information on how to proceed, see https://wiki.opencontrail.org/wiki/GerritJenkinsGit#Test_Failures
+    failure-message: Build failed.  For information on how to proceed, see https://wiki.openstack.org/wiki/GerritJenkinsGit#Test_Failures
     manager: DependentPipelineManager
     precedence: normal
     trigger:
       gerrit:
         - event: comment-added
+          require-approval:
+            - verified: 1
+              username: jenkins
+              newer-than: 24h
           approval:
             - approved: 1
+        - event: comment-added
+          require-approval:
+            - verified: 2
+              username: jenkins
+              newer-than: 24h
+          approval:
+            - approved: 1
+        - event: comment-added
+          approval:
+            - verified: 1
+          username_filter: jenkins
     start:
       gerrit:
         verified: 0
@@ -42,6 +84,8 @@ pipelines:
     failure:
       gerrit:
         verified: -2
+    window-floor: 20
+    window-increase-factor: 2
 
   - name: post
     description: This pipeline runs jobs that operate after each change is merged.

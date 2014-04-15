@@ -1,12 +1,7 @@
 - builder:
     name: gerrit-git-prep
     builders:
-      - shell: "cd ~/; git clone git@github.com:rombie/contrail-controller"
-
-- builder:
-    name: build
-    builders:
-      - shell: "cd ~/contrail-controller ; scons controller/src/discovery"
+      - shell: "/usr/local/jenkins/slave_scripts/gerrit-git-prep.sh https://review.opencontrail.org git://git.opencontrail.org"
 
 - builder:
     name: coverage
