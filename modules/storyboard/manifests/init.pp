@@ -142,11 +142,12 @@ class storyboard (
     group   => 'storyboard',
   }
 
-  # Using -z here to only download when the tarball has changed.
+  # Checking last modified time versus mtime on the file
   exec { 'get-webclient':
     command => "curl ${storyboard_webclient_url} -z ./${tarball} -o ${tarball}",
     path    => '/bin:/usr/bin',
     cwd     => '/var/lib/storyboard',
+    onlyif  => "curl -I ${storyboard_webclient_url} -z ./${tarball} | grep '200 OK'",
     require => [
       File['/var/lib/storyboard'],
       Package['curl'],
@@ -154,10 +155,11 @@ class storyboard (
   }
 
   exec { 'unpack-webclient':
-    command => "tar -xzf ${tarball}",
-    path    => '/bin:/usr/bin',
-    cwd     => '/var/lib/storyboard',
-    require => Exec['get-webclient'],
+    command     => "tar -xzf ${tarball}",
+    path        => '/bin:/usr/bin',
+    cwd         => '/var/lib/storyboard',
+    refreshonly => true,
+    subscribe   => Exec['get-webclient'],
   }
 
   file { '/var/lib/storyboard/www':
