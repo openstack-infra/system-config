@@ -26,9 +26,9 @@ fi
 
 COMMIT_MSG="Imported Translations from Transifex"
 
-git config user.name "OpenStack Jenkins"
-git config user.email "jenkins@openstack.org"
-git config gitreview.username "jenkins"
+git config user.name "OpenStack Proposal Bot"
+git config user.email "openstack-infra@lists.openstack.org"
+git config gitreview.username "proposal-bot"
 
 git review -s
 
