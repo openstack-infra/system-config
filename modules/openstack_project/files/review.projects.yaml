@@ -582,6 +582,7 @@
   options:
     - direct-release
 - project: stackforge/designate
+- project: stackforge/designate-specs
 - project: stackforge/driverlog
   description: Vendor drivers for OpenStack
   upstream: git://github.com/Mirantis/oscp.git
