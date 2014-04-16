@@ -536,7 +536,7 @@ jobs:
     voting: false
   - name: ^check-rally-install-.*$
     voting: false
-  - name: ^check-rally-scenarios-.*$
+  - name: check-rally-scenarios
     voting: false
   - name: gate-rally-python33
     voting: false
