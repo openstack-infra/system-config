@@ -27,6 +27,7 @@ class nodepool (
   $vhost_name = 'nodepool.openstack.org',
   $image_log_document_root = '/var/log/nodepool/image',
   $enable_image_log_via_http = false,
+  $environment = {},
 ) {
 
   class { 'mysql::server':
