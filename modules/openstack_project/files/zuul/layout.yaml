@@ -393,26 +393,6 @@ jobs:
     files:
       - 'modules/openstack_project/files/accessbot/channels.yaml'
 # Continous publishing from master of the following documentation targets:
-  - name: openstack-admin-guide-cloud
-    branch: master
-  - name: openstack-docs-site
-    branch: master
-  - name: openstack-cli-reference
-    branch: master
-  - name: openstack-glossary
-    branch: master
-  - name: openstack-ha-guide
-    branch: master
-  - name: openstack-image-guide
-    branch: master
-  - name: openstack-user-guide
-    branch: master
-  - name: openstack-user-guide-admin
-    branch: master
-  - name: openstack-security-guide
-    branch: master
-  - name: openstack-training-guides
-    branch: master
   - name: ^.*manuals-upstream-translation-update$
     branch: master
   - name: gate-openstack-manuals-tox-checkniceness
@@ -2347,30 +2327,16 @@ projects:
       - name: openstack-doc-gate
       - name: openstack-doc-translation
     post:
-      - openstack-admin-guide-cloud
-      - openstack-glossary
-      - openstack-image-guide
-      - openstack-cli-reference
-      - openstack-config-reference
-      - openstack-docs-site
-      - openstack-ha-guide
-      - openstack-install-deploy-guide-debian
-      - openstack-install-deploy-guide-fedora
-      - openstack-install-deploy-guide-opensuse
-      - openstack-install-deploy-guide-ubuntu
+      - openstack-manuals-tox-doc-publishdocs
       - openstack-install-deploy-guide-ja
       - openstack-misc-guides-ja
-      - openstack-security-guide
-      - openstack-user-guide
-      - openstack-user-guide-admin
-      - openstack-training-guides
 
   - name: openstack/operations-guide
     template:
       - name: openstack-doc-gate
       - name: openstack-doc-translation
     post:
-      - openstack-operations-guide
+      - operations-guide-tox-doc-publishdocs
       - openstack-operations-guide-ja
 
   - name: openstack/openstack-security-notes
