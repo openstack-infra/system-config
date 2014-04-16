@@ -1,0 +1,6 @@
+- remote_command: '<%= scope.lookupvar('openstack_project::params::allowed_ssh_command') %>'
+  targets:
+<% @puppet_run_list.each do |target| -%>
+  - <%= target %>
+<% end -%>
+
