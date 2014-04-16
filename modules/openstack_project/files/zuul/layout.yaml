@@ -2733,6 +2733,12 @@ projects:
     release:
       - groups-release-master
 
+  - name: openstack-infra/infra-manual
+    check:
+      - noop
+    gate:
+      - noop
+
   - name: openstack-infra/jeepyb
     check:
       - gate-jeepyb-pep8

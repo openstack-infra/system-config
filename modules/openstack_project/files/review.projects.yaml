@@ -89,6 +89,10 @@
 - project: openstack-infra/groups
   description: OpenStack Groups community portal
   upstream: git://github.com/mkissam/groups.git
+- project: openstack-infra/infra-manual
+  group: openstack-ci
+  options:
+    - direct-release
 - project: openstack-infra/jeepyb
   group: openstack-ci
   upstream: git://github.com/emonty/gerritx.git
