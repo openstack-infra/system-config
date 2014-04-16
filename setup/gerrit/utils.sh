@@ -56,6 +56,8 @@ function abandon_all_reviews {
 }
 
 function add_review {
+  export FILE=1 && echo hello > $FILE && git add $FILE && git commit -m "sample commit" $FILE && git review -y
+
   echo 1 >> README.md && git commit -m "sample commit" . && git review -y
 }
 

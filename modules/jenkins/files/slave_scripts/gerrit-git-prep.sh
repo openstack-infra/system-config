@@ -1,7 +1,7 @@
 #!/bin/bash -e
 
 GERRIT_SITE=$1
-GIT_ORIGIN=$2
+GIT_ORIGIN=ssh://zuul@review.opencontrail.org:29418 #$2
 
 # TODO(jeblair): Remove once the arg list is changed in jjb macros
 if [ ! -z $3 ]
