@@ -1112,8 +1112,10 @@ projects:
       - name: openstack-server-publish-jobs
       - name: check-requirements
       - name: integrated-gate
+      - name: openstack-doc-gate
     post:
       - trove-upstream-translation-update
+      - trove-tox-doc-publishdocs
     pre-release:
       - trove-tarball
     release:
