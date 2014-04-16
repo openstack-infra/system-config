@@ -12,6 +12,7 @@ class openstack_project::jenkins_dev (
   $hpcloud_username ='',
   $hpcloud_password ='',
   $hpcloud_project ='',
+  $nodepool_template ='nodepool-dev.yaml.erb',
 ) {
   include openstack_project
 
@@ -44,17 +45,36 @@ class openstack_project::jenkins_dev (
   }
 
   class { '::nodepool':
-    mysql_password           => 'mysql_password',
-    mysql_root_password      => 'mysql_root_password',
-    nodepool_ssh_private_key => 'nodepool_ssh_private_key',
-    nodepool_template        => 'nodepool-dev.yaml.erb',
-    sysadmins                => 'sysadmins',
-    jenkins_api_user         => 'jenkins_api_user',
-    jenkins_api_key          => 'jenkins_api_key',
-    jenkins_credentials_id   => 'jenkins_credentials_id',
-    hpcloud_username         => 'hpcloud_username',
-    hpcloud_password         => 'hpcloud_password',
-    hpcloud_project          => 'hpcloud_project',
+    mysql_root_password      => $mysql_root_password,
+    mysql_password           => $mysql_password,
+    nodepool_ssh_private_key => $nodepool_ssh_private_key,
+    environment              => {
+      'NODEPOOL_SSH_KEY'     => $openstack_project::jenkins_dev_ssh_key,
+    }
+  }
+
+  file { '/etc/nodepool/nodepool.yaml':
+    ensure  => present,
+    owner   => 'nodepool',
+    group   => 'root',
+    mode    => '0400',
+    content => template("openstack_project/nodepool/${nodepool_template}"),
+    require => [
+      File['/etc/nodepool'],
+      User['nodepool'],
+    ],
+  }
+
+  file { '/etc/nodepool/scripts':
+    ensure  => directory,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0755',
+    recurse => true,
+    purge   => true,
+    force   => true,
+    require => File['/etc/nodepool'],
+    source  => 'puppet:///modules/openstack_project/nodepool/scripts',
   }
 
 }
