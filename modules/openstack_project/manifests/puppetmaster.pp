@@ -2,7 +2,7 @@
 #
 class openstack_project::puppetmaster (
   $root_rsa_key,
-  $override_list = [],
+  $puppet_run_list = [],
   $sysadmins = []
 ) {
   include openstack_project::params
@@ -10,6 +10,11 @@ class openstack_project::puppetmaster (
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [4505, 4506, 8140],
     sysadmins                 => $sysadmins,
+  }
+
+  package { 'ansible':
+    ensure   => latest,
+    provider => pip,
   }
 
   class { 'salt':
@@ -49,10 +54,16 @@ class openstack_project::puppetmaster (
     mode   => '0750',
     }
 
+  file { '/etc/puppet/remote_puppet.yaml':
+    ensure  => present,
+    mode    => '0700',
+    content => template('openstack_project/remote_puppet.yaml.erb'),
+  }
+
   file { '/usr/local/bin/run_remote_puppet':
     ensure  => present,
     mode    => '0700',
-    content => template('openstack_project/run_remote_puppet.sh.erb'),
+    source  => 'puppet:///modules/openstack_project/run_remote_puppet.py',
   }
 
   if ! defined(File['/root/.ssh']) {
