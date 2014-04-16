@@ -3649,18 +3649,23 @@ projects:
       - gate-murano-api-pep8
       - gate-murano-api-python26
       - gate-murano-api-python27
+      - gate-murano-api-docs
       - gate-murano-api-requirements
       - gate-murano-devstack-dsvm
     gate:
       - gate-murano-api-pep8
       - gate-murano-api-python26
       - gate-murano-api-python27
+      - gate-murano-api-docs
     post:
       - murano-api-branch-tarball
+      - hook-murano-api-rtfd
     pre-release:
       - murano-api-tarball
+      - hook-murano-api-rtfd
     release:
       - murano-api-tarball
+      - hook-murano-api-rtfd
 
   - name: stackforge/murano-common
     check:
