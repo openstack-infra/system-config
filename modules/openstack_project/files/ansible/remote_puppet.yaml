@@ -1,0 +1,14 @@
+---
+- hosts: git0*
+  gather_facts: false
+  max_fail_percentage: 1
+  roles:
+    - puppet
+- hosts: review.openstack.org
+  gather_facts: false
+  roles:
+    - puppet
+- hosts: "!review.openstack.org:!git0*"
+  gather_facts: false
+  roles:
+    - puppet
