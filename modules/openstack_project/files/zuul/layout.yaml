@@ -257,6 +257,21 @@ project-templates:
       - 'gate-grenade-dsvm'
       - 'gate-grenade-dsvm-neutron'
 
+  - name: integrated-gate-neutron
+    check:
+      - 'check-tempest-dsvm-neutron'
+      - 'check-tempest-dsvm-neutron-pg'
+      - 'check-tempest-dsvm-neutron-heat-slow'
+      - 'check-tempest-dsvm-neutron-full'
+      - 'gate-tempest-dsvm-neutron-large-ops'
+      - 'check-grenade-dsvm-neutron'
+    gate:
+      - 'gate-tempest-dsvm-neutron'
+      - 'gate-tempest-dsvm-neutron-pg'
+      - 'gate-tempest-dsvm-neutron-heat-slow'
+      - 'gate-tempest-dsvm-neutron-large-ops'
+      - 'gate-grenade-dsvm-neutron'
+
   - name: python3-jobs
     check:
       - 'gate-{name}-python33'
@@ -838,19 +853,14 @@ projects:
       - name: openstack-server-publish-jobs
       - name: periodic-havana
       - name: check-requirements
-      - name: integrated-gate
+      - name: integrated-gate-neutron
     check:
       - check-neutron-dsvm-functional
-      - check-tempest-dsvm-neutron-full
       - check-tempest-dsvm-neutron
       - check-tempest-dsvm-neutron-pg
-      - check-tempest-dsvm-neutron-pg
-      - gate-tempest-dsvm-neutron-large-ops
     gate:
       - gate-tempest-dsvm-neutron
       - gate-tempest-dsvm-neutron-pg
-      - gate-tempest-dsvm-neutron-pg
-      - gate-tempest-dsvm-neutron-large-ops
     experimental:
       - check-neutron-dsvm-api
       - gate-grenade-dsvm-neutron-forward
@@ -1344,21 +1354,12 @@ projects:
       - name: python-jobs
       - name: openstack-client-publish-jobs
       - name: check-requirements
-      - name: integrated-gate
+      - name: integrated-gate-neutron
     check:
       - gate-python-neutronclient-python33
       - gate-python-neutronclient-pypy
-      - check-devstack-dsvm-cells
-      - check-tempest-dsvm-postgres-full
-      - check-tempest-dsvm-neutron-full
-      - check-tempest-dsvm-neutron-pg
-      - gate-tempest-dsvm-neutron-large-ops
     gate:
       - gate-python-neutronclient-pypy
-      - gate-devstack-dsvm-cells
-      - gate-tempest-dsvm-postgres-full
-      - gate-tempest-dsvm-neutron-pg
-      - gate-tempest-dsvm-neutron-large-ops
     experimental:
       - gate-grenade-dsvm-forward
     experimental-tripleo:
