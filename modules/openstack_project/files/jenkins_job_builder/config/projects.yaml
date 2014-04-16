@@ -505,7 +505,7 @@
     node: bare-precise
     tarball-site: tarballs.openstack.org
     gerrit-project: https://git.openstack.org/openstack-infra/gerrit
-    gerrit-branch: openstack/2.8.3
+    gerrit-branch: openstack/2.8.4
     plugin-project: https://gerrit.googlesource.com/plugins/javamelody
     plugin-name: javamelody
     plugin-branch: stable-2.8
