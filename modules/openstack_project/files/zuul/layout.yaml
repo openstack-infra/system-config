@@ -254,7 +254,6 @@ project-templates:
       - 'gate-tempest-dsvm-full'
       - 'gate-tempest-dsvm-neutron'
       - 'gate-grenade-dsvm'
-      - 'gate-grenade-dsvm-neutron'
 
   - name: integrated-gate-neutron
     check:
@@ -268,7 +267,6 @@ project-templates:
       - 'gate-tempest-dsvm-neutron'
       - 'gate-tempest-dsvm-neutron-pg'
       - 'gate-tempest-dsvm-neutron-large-ops'
-      - 'gate-grenade-dsvm-neutron'
 
   - name: python3-jobs
     check:
