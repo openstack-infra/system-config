@@ -2,13 +2,13 @@
 #
 class openstack_project::puppetmaster (
   $root_rsa_key,
-  $override_list = [],
   $salt = true,
   $update_slave = true,
   $sysadmins = [],
   $version   = '2.7.',
   $ca_server = undef,
 ) {
+  include ansible
   include logrotate
   include openstack_project::params
 
@@ -77,12 +77,6 @@ class openstack_project::puppetmaster (
     mode   => '0750',
     }
 
-  file { '/usr/local/bin/run_remote_puppet':
-    ensure  => present,
-    mode    => '0700',
-    content => template('openstack_project/run_remote_puppet.sh.erb'),
-  }
-
   if ! defined(File['/root/.ssh']) {
     file { '/root/.ssh':
       ensure => directory,
@@ -119,6 +113,14 @@ class openstack_project::puppetmaster (
     puppetdb_server              => 'puppetdb.openstack.org',
     puppet_service_name          => 'apache2',
     puppetdb_soft_write_failure  => true,
+  }
+
+# Playbooks
+#
+  file { '/etc/ansible/remote_puppet.yaml':
+    ensure  => present,
+    source  => 'puppet:///modules/openstack_project/ansible/remote_puppet.yaml',
+    require => Class[ansible],
   }
 
 }

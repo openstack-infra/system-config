@@ -82,12 +82,15 @@ class openstack_project::base(
   }
 
   ssh_authorized_key { 'puppet-remote-2014-04-17':
+    ensure  => absent,
+  }
+
+  ssh_authorized_key { 'puppet-remote-2014-05-24':
     ensure  => present,
     user    => 'root',
     type    => 'ssh-rsa',
     key     => 'AAAAB3NzaC1yc2EAAAADAQABAAABAQDSLlN41ftgxkNeUi/kATYPwMPjJdMaSbgokSb9PSkRPZE7GeNai60BCfhu+ky8h5eMe70Bpwb7mQ7GAtHGXPNU1SRBPhMuVN9EYrQbt5KSiwuiTXtQHsWyYrSKtB+XGbl2PhpMQ/TPVtFoL5usxu/MYaakVkCEbt5IbPYNg88/NKPixicJuhi0qsd+l1X1zoc1+Fn87PlwMoIgfLIktwaL8hw9mzqr+pPcDIjCFQQWnjqJVEObOcMstBT20XwKj/ymiH+6p123nnlIHilACJzXhmIZIZO+EGkNF7KyXpcBSfv9efPI+VCE2TOv/scJFdEHtDFkl2kdUBYPC0wQ92rp',
     options => [
-      "command=\"${::openstack_project::params::allowed_ssh_command}\"",
       'from="ci-puppetmaster.openstack.org"',
     ],
     require => File['/root/.ssh'],
