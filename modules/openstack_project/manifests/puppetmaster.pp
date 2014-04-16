@@ -2,7 +2,6 @@
 #
 class openstack_project::puppetmaster (
   $root_rsa_key,
-  $override_list = [],
   $sysadmins = []
 ) {
   include logrotate
@@ -11,6 +10,11 @@ class openstack_project::puppetmaster (
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [4505, 4506, 8140],
     sysadmins                 => $sysadmins,
+  }
+
+  package { 'ansible':
+    ensure   => latest,
+    provider => pip,
   }
 
   class { 'salt':
@@ -63,10 +67,23 @@ class openstack_project::puppetmaster (
     mode   => '0750',
     }
 
-  file { '/usr/local/bin/run_remote_puppet':
-    ensure  => present,
-    mode    => '0700',
-    content => template('openstack_project/run_remote_puppet.sh.erb'),
+  file { '/etc/ansible':
+    ensure  => directory,
+    source  => 'puppet:///modules/openstack_project/ansible',
+    recurse => true,
+  }
+
+  include logrotate
+  logrotate::file { 'ansible':
+    log     => '/var/log/ansible.log',
+    options => [
+      'compress',
+      'copytruncate',
+      'missingok',
+      'rotate 7',
+      'daily',
+      'notifempty',
+    ],
   }
 
   if ! defined(File['/root/.ssh']) {
