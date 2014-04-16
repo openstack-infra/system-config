@@ -1,0 +1,13 @@
+---
+- hosts: git0*
+  tasks:
+    - name: run puppet
+      shell: timeout -s 9 30m puppet agent --onetime --ignorecache --no-daemonize --no-usecacheonfailure --no-splay
+- hosts: review.openstack.org
+  tasks:
+    - name: run puppet
+      shell: timeout -s 9 30m puppet agent --onetime --ignorecache --no-daemonize --no-usecacheonfailure --no-splay
+- hosts: "!review.openstack.org:!git0*"
+  tasks:
+    - name: run puppet
+      shell: timeout -s 9 30m puppet agent --onetime --ignorecache --no-daemonize --no-usecacheonfailure --no-splay
