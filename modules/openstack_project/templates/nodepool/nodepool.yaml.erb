@@ -71,6 +71,19 @@ labels:
     min-ready: 1
     providers:
       - name: rax-dfw
+  - name: devstack-precise-2-node
+    image: devstack-precise
+    ready-script: multinode_setup.sh
+    subnodes: 1
+    min-ready: 1
+    providers:
+      - name: rax-dfw
+      - name: rax-ord
+      - name: rax-iad
+      - name: hpcloud-az1
+      - name: hpcloud-az2
+      - name: hpcloud-az3
+      - name: hpcloud-region-b
   - name: tripleo-precise
     image: tripleo-precise
     min-ready: 10
