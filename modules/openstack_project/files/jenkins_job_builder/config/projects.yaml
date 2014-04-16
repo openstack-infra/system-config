@@ -198,6 +198,14 @@
           node: bare-precise
 
 - project:
+    name: infra-manual
+    github-org: openstack-infra
+    node: bare-precise
+
+    jobs:
+      - gate-{name}-docs
+
+- project:
     name: sahara
     github-org: openstack
     node: bare-precise
