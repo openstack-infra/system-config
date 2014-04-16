@@ -44,17 +44,12 @@ class openstack_project::jenkins_dev (
   }
 
   class { '::nodepool':
-    mysql_password           => 'mysql_password',
-    mysql_root_password      => 'mysql_root_password',
-    nodepool_ssh_private_key => 'nodepool_ssh_private_key',
-    nodepool_template        => 'nodepool-dev.yaml.erb',
-    sysadmins                => 'sysadmins',
-    jenkins_api_user         => 'jenkins_api_user',
-    jenkins_api_key          => 'jenkins_api_key',
-    jenkins_credentials_id   => 'jenkins_credentials_id',
-    hpcloud_username         => 'hpcloud_username',
-    hpcloud_password         => 'hpcloud_password',
-    hpcloud_project          => 'hpcloud_project',
+    mysql_root_password      => $mysql_root_password,
+    mysql_password           => $mysql_password,
+    nodepool_ssh_private_key => $nodepool_ssh_private_key,
+    environment              => {
+      'NODEPOOL_SSH_KEY' => $openstack_project::jenkins_dev_ssh_key,
+    }
   }
 
 }
