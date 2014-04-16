@@ -8,13 +8,13 @@ find -O3 /srv/static/logs/ -depth \
           -not -name \*\[.-\]gz -not -name \*\[._-\]\[zZ\] \
           \( -name \*.txt -or -name \*.html -or -name tmp\* \) \
           -exec gzip \{\} \; \) \
-      -o \( -type f -mtime +183 -name \*.gz -execdir rm \{\} \; \) \
+      -o \( -type f -mtime +120 -name \*.gz -execdir rm \{\} \; \) \
       -o \( -type d -not -name lost+found -empty -mtime +1 \
           -execdir rmdir {} \; \) \
     \)
 find -O3 /srv/static/docs-draft/ -depth \
     \( \
-      \( -type f -mtime +30 -name \*.gz -execdir rm \{\} \; \) \
+      \( -type f -mtime +21 -name \*.gz -execdir rm \{\} \; \) \
       -o \( -type d -not -name lost+found -empty -mtime +1 \
           -execdir rmdir {} \; \) \
     \)
