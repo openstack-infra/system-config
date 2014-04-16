@@ -253,7 +253,6 @@ project-templates:
     gate:
       - 'gate-tempest-dsvm-full'
       - 'gate-tempest-dsvm-neutron'
-      - 'gate-tempest-dsvm-neutron-heat-slow'
       - 'gate-grenade-dsvm'
       - 'gate-grenade-dsvm-neutron'
 
@@ -268,7 +267,6 @@ project-templates:
     gate:
       - 'gate-tempest-dsvm-neutron'
       - 'gate-tempest-dsvm-neutron-pg'
-      - 'gate-tempest-dsvm-neutron-heat-slow'
       - 'gate-tempest-dsvm-neutron-large-ops'
       - 'gate-grenade-dsvm-neutron'
 
@@ -340,6 +338,7 @@ jobs:
     voting: false
   - name: ^(gate|check)-tempest-dsvm-neutron-heat-slow
     branch: ^(?!stable/havana).*$
+    voting: false
   - name: check-tempest-dsvm-ironic-nv
     voting: false
   - name: check-tempest-dsvm-ironic-postgres-nv
