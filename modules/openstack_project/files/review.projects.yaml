@@ -95,6 +95,10 @@
   description: Gerrit Project Builder Tools
 - project: openstack-infra/jenkins-job-builder
   group: openstack-ci
+- project: openstack-infra/infra-manual
+  group: openstack-ci
+  options:
+    - direct-release
 - project: openstack-infra/lodgeit
   group: openstack-ci
   options:
