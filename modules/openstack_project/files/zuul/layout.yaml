@@ -2882,6 +2882,12 @@ projects:
     gate:
       - noop
 
+  - name: openstack-infra/puppet-storyboard
+    check:
+      - noop
+    gate:
+      - noop
+
   - name: openstack-infra/puppet-vcsrepo
     check:
       - noop

@@ -32,6 +32,7 @@ openstack-infra:
       - openstack-infra/publications
       - openstack-infra/puppet-apparmor
       - openstack-infra/puppet-dashboard
+      - openstack-infra/puppet-storyboard
       - openstack-infra/puppet-vcsrepo
       - openstack-infra/pypi-mirror
       - openstack-infra/release-tools
@@ -650,6 +651,7 @@ openstack-merges:
       - openstack-infra/publications
       - openstack-infra/puppet-apparmor
       - openstack-infra/puppet-dashboard
+      - openstack-infra/puppet-storyboard
       - openstack-infra/puppet-vcsrepo
       - openstack-infra/pypi-mirror
       - openstack-infra/releasestatus
