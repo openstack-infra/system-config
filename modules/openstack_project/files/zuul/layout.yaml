@@ -856,11 +856,11 @@ projects:
       - name: integrated-gate-neutron
     check:
       - check-neutron-dsvm-functional
-      - check-tempest-dsvm-neutron
-      - check-tempest-dsvm-neutron-pg
+      - check-tempest-dsvm-neutron-2
+      - check-tempest-dsvm-neutron-pg-2
     gate:
-      - gate-tempest-dsvm-neutron
-      - gate-tempest-dsvm-neutron-pg
+      - gate-tempest-dsvm-neutron-2
+      - gate-tempest-dsvm-neutron-pg-2
     experimental:
       - check-neutron-dsvm-api
       - gate-grenade-dsvm-neutron-forward
