@@ -61,16 +61,6 @@
       - gate-{name}-docs
 
 - project:
-    name: murano-conductor
-    github-org: stackforge
-    node: bare-precise
-    tarball-site: tarballs.openstack.org
-
-    jobs:
-      - python-jobs
-      - gate-{name}-docs
-
-- project:
     name: murano-dashboard
     github-org: stackforge
     node: bare-precise
@@ -104,38 +94,6 @@
       - python-jobs
       - pypi-jobs
       - gate-{name}-docs
-
-- project:
-    name: murano-common
-    github-org: stackforge
-    node: bare-precise
-    tarball-site: tarballs.openstack.org
-
-    jobs:
-      - python-jobs
-      - pypi-jobs
-      - gate-{name}-docs
-
-- project:
-    name: murano-repository
-    github-org: stackforge
-    node: bare-precise
-    tarball-site: tarballs.openstack.org
-
-    jobs:
-      - python-jobs
-      - pypi-jobs
-      - gate-{name}-docs
-
-- project:
-    name: murano-metadataclient
-    github-org: stackforge
-    node: bare-precise
-    tarball-site: tarballs.openstack.org
-
-    jobs:
-      - python-jobs
-      - pypi-jobs
 
 - project:
     name: magnetodb
