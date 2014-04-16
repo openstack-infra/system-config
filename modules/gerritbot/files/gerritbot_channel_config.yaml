@@ -475,6 +475,7 @@ solum:
     projects:
       - stackforge/solum
       - stackforge/python-solumclient
+      - stackforge/solum-dashboard
     branches:
       - master
 
