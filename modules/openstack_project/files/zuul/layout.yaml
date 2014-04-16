@@ -3636,22 +3636,20 @@ projects:
       - noop
 
   - name: stackforge/murano-api
+    template:
+      - name: python-jobs
     check:
-      - gate-murano-api-pep8
-      - gate-murano-api-python26
-      - gate-murano-api-python27
       - gate-murano-api-requirements
       - gate-murano-devstack-dsvm
-    gate:
-      - gate-murano-api-pep8
-      - gate-murano-api-python26
-      - gate-murano-api-python27
     post:
       - murano-api-branch-tarball
+      - hook-murano-api-rtfd
     pre-release:
       - murano-api-tarball
+      - hook-murano-api-rtfd
     release:
       - murano-api-tarball
+      - hook-murano-api-rtfd
 
   - name: stackforge/murano-common
     check:
