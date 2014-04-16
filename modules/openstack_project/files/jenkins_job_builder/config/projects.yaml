@@ -657,6 +657,7 @@
     tarball-site: tarballs.openstack.org
 
     jobs:
+      - 'gate-{name}-python33'
       - python-jobs
       - pypi-jobs
 
