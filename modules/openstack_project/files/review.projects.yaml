@@ -131,6 +131,9 @@
   group: openstack-ci
 - project: openstack-infra/puppet-dashboard
   group: openstack-ci
+- project: openstack-infra/puppet-storyboard
+  description: Puppet module to deploy storyboard
+  group: openstack-ci
 - project: openstack-infra/puppet-vcsrepo
   group: openstack-ci
 - project: openstack-infra/pypi-mirror
