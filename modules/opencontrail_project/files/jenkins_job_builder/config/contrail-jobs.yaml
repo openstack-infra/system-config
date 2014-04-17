@@ -9,7 +9,7 @@
           project: '{name}'
       - shell: |
           #!/bin/bash -xe
-          cd /var/lib/jenkins/jobs/gate-contrail-controller-build/workspace/repo/controller
+          cd /var/lib/jenkins/jobs/gate-contrail-controller-build/workspace/repo
           scons -U controller/src/discovery
 
 - job-group:
