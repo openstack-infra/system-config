@@ -1,7 +1,7 @@
 - builder:
     name: gerrit-git-prep
     builders:
-      - shell: "/usr/local/jenkins/slave_scripts/gerrit-git-prep.sh https://review.opencontrail.org git://git.opencontrail.org"
+      - shell: "/usr/local/jenkins/slave_scripts/contrail-git-prep.sh https://review.opencontrail.org ssh://zuul@review.opencontrail.org:29418"
 
 - builder:
     name: coverage

@@ -9,8 +9,8 @@
           project: '{name}'
       - shell: |
           #!/bin/bash -xe
-          # cd to the right directory
-          scons controller/src/discovery
+          cd /var/lib/jenkins/jobs/gate-contrail-controller-build/workspace/repo/
+          scons -U controller/src/discovery
 
 - job-group:
     name: contrail-jobs
