@@ -1,0 +1,11 @@
+Approved+1: James E. Blair <corvus@inaugust.com>
+Code-Review+2: James E. Blair <corvus@inaugust.com>
+Verified+2: Jenkins
+Code-Review+1: Doug Hellmann <doug.hellmann@dreamhost.com>
+Code-Review+2: Jeremy Stanley <fungi@yuggoth.org>
+Code-Review+1: Joshua Hesketh <joshua.hesketh@rackspace.com>
+Submitted-by: Jenkins
+Submitted-at: Thu, 17 Apr 2014 21:02:15 +0000
+Reviewed-on: https://review.openstack.org/83885
+Project: openstack-infra/config
+Branch: refs/heads/master
