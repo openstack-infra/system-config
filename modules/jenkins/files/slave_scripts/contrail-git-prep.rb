@@ -52,7 +52,7 @@ def setup_contrail_repo
     sh "cd #{TOP}/repo"
 
     # Initialize a repo - Need to retrieve
-    sh "/usr/local/jenkins/slave_scripts/repo init "
+    sh "/usr/local/jenkins/slave_scripts/repo init " +
        "-u git@github.com:Juniper/contrail-vnc-private " +
        "-m mainline/ubuntu-12-04/manifest-havana.xml"
 

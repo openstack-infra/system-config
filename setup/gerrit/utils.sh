@@ -83,5 +83,5 @@ function flip_jenkins_job {
 }
 
 function create_sample_review() {
-    export FILE=$1 && git checkout origin/master && git checkout test$FILE && echo hello > $FILE && git add $FILE && git commit -m "sample commit" $FILE && git review
+    export FILE=$1 && git checkout origin/master && git checkout test$FILE && echo $FILE > $FILE && git add $FILE && git commit -m "sample commit $FILE" $FILE && git review
 }

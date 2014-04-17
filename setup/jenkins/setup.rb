@@ -1,8 +1,17 @@
 #!/usr/bin/env ruby
 
-`apt-get -y install scons`
+`apt-get -y install scons python-lxml unzip make`
 
 # Setup ssh keys id_rsa and id_rsa.pub in ~jenkins/.ssh/., ~root/.ssh/.
+# Setup ~jenkins/.ssh/config
+SSH_CONFIG =<<EOF
+UserKnownHostsFile=/dev/null
+StrictHostKeyChecking=no
+
+Host *.*
+  UserKnownHostsFile=/dev/null
+  StrictHostKeyChecking=no
+EOF
 
 def flip_jenkins_job(job = "gate-contrail-controller-build")
     # Download jenkins-cli.jar
