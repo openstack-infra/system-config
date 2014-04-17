@@ -407,6 +407,10 @@ jobs:
 # Continous publishing from master of the following documentation targets:
   - name: ^.*manuals-upstream-translation-update$
     branch: master
+  - name: openstack-install-deploy-guide-ja
+    branch: master
+  - name: openstack-misc-guides-ja
+    branch: master
   - name: gate-openstack-manuals-tox-checkniceness
     voting: false
   - name: ^gate-.*-tox-doc-publish-checkbuild$
