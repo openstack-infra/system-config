@@ -129,6 +129,10 @@ def local_prep(distribution):
     return branches
 
 
+def download(url, fname):
+    run_local(['wget', '-nv', '-c', url, '-O', os.path.join(CACHEDIR, fname)])
+
+
 def main():
     distribution = sys.argv[1]
 
@@ -149,8 +153,14 @@ def main():
             if fname in image_filenames:
                 continue
             image_filenames.append(fname)
-            run_local(['wget', '-nv', '-c', url,
-                       '-O', os.path.join(CACHEDIR, fname)])
+            download(url, fname)
+
+    # cache get-pip, because upstream network connection fails more
+    # often than you might imagine.
+    download(
+        'https://raw.github.com/pypa/pip/master/contrib/get-pip.py',
+        'get-pip.py')
+
 
 if __name__ == '__main__':
     main()
