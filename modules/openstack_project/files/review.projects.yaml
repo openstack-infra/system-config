@@ -22,6 +22,7 @@
   upstream: git://github.com/emonty/oslo.packaging
   description: Python Build Reasonableness
 - project: openstack-dev/sandbox
+  use-storyboard: true
 - project: openstack-dev/specs-cookiecutter
   upstream: git://github.com/mtreinish/specs-cookiecutter
   description: Cookiecutter templates for new specs repos
