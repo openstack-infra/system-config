@@ -10,25 +10,44 @@
     publishers:
       - console-log
 
-- job-template:
-    name: '{pipeline}-rally-scenarios'
-    node: '{node}'
 
+- builder:
+    name: devstack-rally-gate
     builders:
       - link-logs
       - devstack-checkout
       - shell: |
           #!/bin/bash -xe
           export PROJECTS="stackforge/rally $PROJECTS"
+          export ENABLED_SERVICES=rally
+          export DEVSTACK_GATE_EXERCISES=1
+          export RUN_EXERCISES=rally
+          export RALLY_SCENARIO={scenario}
 
           function pre_test_hook {{
-              . /opt/stack/new/rally/tests_ci/pre_test_hook.sh
+              # Install rally-devstack integration
+              cp -r $BASE/new/rally/contrib/devstack/* $BASE/new/devstack
           }}
           export -f pre_test_hook
 
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
 
+
+- job-template:
+    name: 'check-rally-dsvm-{name}'
+    node: 'devstack-precise || devstack-precise-check'
+
+    builders:
+      - devstack-rally-gate:
+          scenario: '{name}'
+
     publishers:
       - devstack-logs
       - console-log
+
+
+- job-group:
+    name: rally-jobs
+    jobs:
+      - 'check-rally-dsvm-{name}'

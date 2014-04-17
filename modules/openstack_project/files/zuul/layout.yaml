@@ -557,7 +557,7 @@ jobs:
     voting: false
   - name: ^check-rally-install-.*$
     voting: false
-  - name: check-rally-scenarios
+  - name: check-rally-dsvm-rally
     voting: false
   - name: gate-rally-python33
     voting: false
@@ -4358,7 +4358,7 @@ projects:
       - gate-rally-python33
       - check-rally-install-bare-centos6
       - check-rally-install-bare-precise
-      - check-rally-scenarios
+      - check-rally-dsvm-rally
     gate:
       - gate-rally-pep8
       - gate-rally-python26
