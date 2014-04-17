@@ -42,6 +42,7 @@ class openstack_project::openstackid_dev (
 
   realize (
     User::Virtual::Localuser['smarcet'],
+    User::Virtual::Localuser['mkiss'],
   )
 
   class { 'openstack_project::server':
