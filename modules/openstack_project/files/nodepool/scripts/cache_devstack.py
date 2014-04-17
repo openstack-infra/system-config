@@ -79,7 +79,7 @@ def _find_images(basedir):
     images = []
     try:
         image_tool = os.path.join(DEVSTACK, 'tools', 'image_list.sh')
-        if os.path.exist(image_tool):
+        if os.path.exists(image_tool):
             images = subprocess.check_output(image_tool).split('\n')
     except subprocess.CalledProcessError as ce:
         print "image_list.sh failed"
