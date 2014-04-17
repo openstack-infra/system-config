@@ -257,15 +257,14 @@ project-templates:
 
   - name: integrated-gate-neutron
     check:
-      - 'check-tempest-dsvm-neutron'
-      - 'check-tempest-dsvm-neutron-pg'
       - 'check-tempest-dsvm-neutron-heat-slow'
       - 'check-tempest-dsvm-neutron-full'
+      - 'check-tempest-dsvm-neutron-pg-full'
       - 'gate-tempest-dsvm-neutron-large-ops'
       - 'check-grenade-dsvm-neutron'
     gate:
-      - 'gate-tempest-dsvm-neutron'
-      - 'gate-tempest-dsvm-neutron-pg'
+      - 'gate-tempest-dsvm-neutron-full'
+      - 'gate-tempest-dsvm-neutron-pg-full'
       - 'gate-tempest-dsvm-neutron-large-ops'
 
   - name: integrated-gate-sahara
@@ -344,6 +343,7 @@ jobs:
     parameter-function: reusable_node
   # the salt-trigger worker has no jobs yet
   - name: ^(gate|check)-tempest-dsvm-neutron-full$
+    branch: ^(?!stable/).*$
     voting: false
   - name: ^(gate|check)-tempest-dsvm-neutron-full-icehouse$
     voting: false
@@ -863,11 +863,11 @@ projects:
       - name: integrated-gate-neutron
     check:
       - check-neutron-dsvm-functional
-      - check-tempest-dsvm-neutron-2
-      - check-tempest-dsvm-neutron-pg-2
+      - check-tempest-dsvm-neutron-full-2
+      - check-tempest-dsvm-neutron-pg-full-2
     gate:
-      - gate-tempest-dsvm-neutron-2
-      - gate-tempest-dsvm-neutron-pg-2
+      - gate-tempest-dsvm-neutron-full-2
+      - gate-tempest-dsvm-neutron-pg-full-2
     experimental:
       - check-neutron-dsvm-api
       - gate-grenade-dsvm-neutron-forward
@@ -2134,7 +2134,7 @@ projects:
       - gate-tempest-docs
       - gate-tempest-python27
       - check-tempest-dsvm-postgres-full
-      - check-tempest-dsvm-neutron-full
+      - check-tempest-dsvm-neutron
       - check-tempest-dsvm-cells-full
       - gate-tempest-dsvm-large-ops
       - gate-tempest-dsvm-neutron-large-ops
@@ -2372,7 +2372,7 @@ projects:
       - gate-devstack-bash8
       - check-devstack-dsvm-cells
       - check-tempest-dsvm-postgres-full
-      - check-tempest-dsvm-neutron-full
+      - check-tempest-dsvm-neutron
       - gate-tempest-dsvm-large-ops
       - gate-tempest-dsvm-neutron-large-ops
       - check-tempest-dsvm-cells-full
