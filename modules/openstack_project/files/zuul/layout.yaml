@@ -1544,6 +1544,7 @@ projects:
       - gate-diskimage-builder-pep8
       - gate-diskimage-builder-python26
       - gate-diskimage-builder-python27
+      - check-oslotest-dsvm-diskimage-builder
     check-tripleo:
       - check-tripleo-seed-precise
       - check-tripleo-ironic-seed-precise
@@ -1555,6 +1556,7 @@ projects:
       - gate-diskimage-builder-pep8
       - gate-diskimage-builder-python26
       - gate-diskimage-builder-python27
+      - gate-oslotest-dsvm-diskimage-builder
     post:
       - diskimage-builder-coverage
       - diskimage-builder-branch-tarball
@@ -1909,11 +1911,15 @@ projects:
       - name: openstack-server-publish-jobs
       - name: check-requirements
     check:
+      - check-oslotest-dsvm-diskimage-builder
       - check-oslotest-dsvm-oslo.config
       - check-oslotest-dsvm-oslo.messaging
+      - check-oslotest-dsvm-tripleo-image-elements
     gate:
+      - gate-oslotest-dsvm-diskimage-builder
       - gate-oslotest-dsvm-oslo.config
       - gate-oslotest-dsvm-oslo.messaging
+      - gate-oslotest-dsvm-tripleo-image-elements
     pre-release:
       - oslo.test-tarball
     release:
@@ -2198,7 +2204,7 @@ projects:
 
   - name: openstack/tripleo-image-elements
     check:
-      - noop
+      - check-oslotest-dsvm-tripleo-image-elements
     check-tripleo:
       - check-tripleo-seed-precise
       - check-tripleo-ironic-seed-precise
@@ -2207,7 +2213,7 @@ projects:
       - check-tripleo-overcloud-precise
       - check-tripleo-overcloud-f20
     gate:
-      - noop
+      - gate-oslotest-dsvm-tripleo-image-elements
     post:
       - tripleo-image-elements-branch-tarball
     pre-release:
