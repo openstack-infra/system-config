@@ -267,15 +267,18 @@ project-templates:
 
   - name: integrated-gate-neutron
     check:
+      - 'check-tempest-dsvm-neutron-heat-slow'
       - 'check-tempest-dsvm-neutron'
       - 'check-tempest-dsvm-neutron-pg'
-      - 'check-tempest-dsvm-neutron-heat-slow'
       - 'check-tempest-dsvm-neutron-full'
+      - 'check-tempest-dsvm-neutron-pg-full'
       - 'gate-tempest-dsvm-neutron-large-ops'
       - 'check-grenade-dsvm-neutron'
     gate:
       - 'gate-tempest-dsvm-neutron'
       - 'gate-tempest-dsvm-neutron-pg'
+      - 'gate-tempest-dsvm-neutron-full'
+      - 'gate-tempest-dsvm-neutron-pg-full'
       - 'gate-tempest-dsvm-neutron-large-ops'
 
   - name: integrated-gate-sahara
@@ -416,8 +419,10 @@ jobs:
   # the salt-trigger worker has no jobs yet
   - name: gate-tempest-dsvm-full
     queue-name: integrated
-  - name: ^(gate|check)-tempest-dsvm-neutron-full$
-    voting: false
+  - name: ^(gate|check)-tempest-dsvm-neutron(-pg)?-full$
+    branch: ^(?!stable/).*$
+  - name: ^(gate|check)-tempest-dsvm-neutron(-pg)?(-2)?$
+    branch: ^(stable/).*$
   - name: ^(gate|check)-tempest-dsvm-neutron-full-icehouse$
     voting: false
   - name: ^(gate|check)-tempest-dsvm-neutron-heat-slow
@@ -999,10 +1004,14 @@ projects:
       - check-neutron-dsvm-functional
       - check-tempest-dsvm-neutron-2
       - check-tempest-dsvm-neutron-pg-2
+      - check-tempest-dsvm-neutron-full-2
+      - check-tempest-dsvm-neutron-pg-full-2
     gate:
       - gate-neutron-dsvm-functional
       - gate-tempest-dsvm-neutron-2
       - gate-tempest-dsvm-neutron-pg-2
+      - gate-tempest-dsvm-neutron-full-2
+      - gate-tempest-dsvm-neutron-pg-full-2
     experimental:
       - check-neutron-dsvm-api
       - gate-grenade-dsvm-neutron-forward
