@@ -605,13 +605,13 @@ class gerrit(
     ensure  => link,
     target  => '/usr/share/java/mysql-connector-java.jar',
     require => [
-      package['libmysql-java'],
-      file['/home/gerrit2/review_site/lib'],
+      Package['libmysql-java'],
+      File['/home/gerrit2/review_site/lib'],
     ],
   }
   file { '/home/gerrit2/review_site/lib/mysql-connector-java-5.1.10.jar':
     ensure  => absent,
-    require => file['/home/gerrit2/review_site/lib/mysql-connector-java.jar'],
+    require => File['/home/gerrit2/review_site/lib/mysql-connector-java.jar'],
   }
 
   package { 'libbcprov-java':
@@ -621,13 +621,13 @@ class gerrit(
     ensure  => link,
     target  => '/usr/share/java/bcprov.jar',
     require => [
-      package['libbcprov-java'],
-      file['/home/gerrit2/review_site/lib'],
+      Package['libbcprov-java'],
+      File['/home/gerrit2/review_site/lib'],
     ],
   }
   file { '/home/gerrit2/review_site/lib/bcprov-jdk16-144.jar':
     ensure  => absent,
-    require => file['/home/gerrit2/review_site/lib/bcprov.jar'],
+    require => File['/home/gerrit2/review_site/lib/bcprov.jar'],
   }
 
   # Install Bouncy Castle's OpenPGP plugin and populate the contact store
