@@ -2203,6 +2203,8 @@ projects:
       - tripleo-heat-templates-tarball
 
   - name: openstack/tripleo-image-elements
+    template:
+      - name: python-jobs
     check:
       - check-oslotest-dsvm-tripleo-image-elements
     check-tripleo:
@@ -2214,8 +2216,6 @@ projects:
       - check-tripleo-overcloud-f20
     gate:
       - gate-oslotest-dsvm-tripleo-image-elements
-    post:
-      - tripleo-image-elements-branch-tarball
     pre-release:
       - tripleo-image-elements-tarball
     release:
