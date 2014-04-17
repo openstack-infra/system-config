@@ -29,6 +29,7 @@ class jenkins::params {
       $gnome_doc_package = 'gnome-doc-utils'
       $libtidy_package = 'libtidy'
       $gettext_package = 'gettext'
+      $language_fonts_packages = []
       # for keystone ldap auth integration
       $libsasl_dev = 'cyrus-sasl-devel'
       $nspr_dev_package = 'nspr-devel'
@@ -114,6 +115,7 @@ class jenkins::params {
       $gnome_doc_package = 'gnome-doc-utils'
       $libtidy_package = 'libtidy-0.99-0'
       $gettext_package = 'gettext'
+      $language_fonts_packages = ['fonts-takao', 'fonts-nanum']
       # for keystone ldap auth integration
       $libsasl_dev = 'libsasl2-dev'
       $mysql_dev_package = 'libmysqlclient-dev'
