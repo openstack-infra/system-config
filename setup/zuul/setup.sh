@@ -2,6 +2,6 @@
 
 # Set date and time correctly (ntp preferred)
 
-service zuul-merge restart
+service zuul-merger restart
 service zuul restart
 
