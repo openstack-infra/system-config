@@ -21,10 +21,14 @@ class openstack_project::single_use_slave (
     certname           => $certname,
     automatic_upgrades => $automatic_upgrades,
     install_users      => $install_users,
-    # Ports 8000, 8003, 8004 from the devstack neutron public net to allow
-    # nova servers to reach heat-api-cfn, heat-api-cloudwatch, heat-api
     iptables_rules4    =>
       [
+        # Ports 69 and 6385 allow to allow ironic VM nodes to reach tftp and
+        # the ironic API from the neutron public net
+        '-p udp --dport 69 -s 172.24.4.0/24 -j ACCEPT',
+        '-p tcp --dport 6385 -s 172.24.4.0/24 -j ACCEPT',
+        # Ports 8000, 8003, 8004 from the devstack neutron public net to allow
+        # nova servers to reach heat-api-cfn, heat-api-cloudwatch, heat-api
         '-p tcp --dport 8000 -s 172.24.4.0/24 -j ACCEPT',
         '-p tcp --dport 8003 -s 172.24.4.0/24 -j ACCEPT',
         '-p tcp --dport 8004 -s 172.24.4.0/24 -j ACCEPT',
