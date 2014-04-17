@@ -70,7 +70,7 @@ class openstack_project::base(
     }
   }
 
-  ssh_authorized_key { '/root/.ssh/authorized_keys':
+  ssh_authorized_key { 'puppet-remote-2014-04-17':
     ensure  => present,
     user    => 'root',
     type    => 'ssh-rsa',
@@ -80,6 +80,10 @@ class openstack_project::base(
       'from="ci-puppetmaster.openstack.org"',
     ],
     require => File['/root/.ssh'],
+  }
+  ssh_authorized_key { '/root/.ssh/authorized_keys':
+    ensure  => absent,
+    user    => 'root',
   }
 
   # Use upstream puppet and pin to version 2.7.*
