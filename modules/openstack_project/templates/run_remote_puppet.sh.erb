@@ -16,14 +16,16 @@
 
 # This function will properly fail if puppet is disabled on the target host
 function run_ssh {
-ssh -o StrictHostKeyChecking=no root@$1 <%= scope.lookupvar('openstack_project::params::allowed_ssh_command') %>
-    ret=$?
-    # Did we timeout
-    if [ $ret = 124 ]; then
-        echo "TODO: Timeout instead of other failure. Report this differently."
-    fi
-    return $ret
+    echo ssh -o StrictHostKeyChecking=no root@$1 <%= scope.lookupvar('openstack_project::params::allowed_ssh_command') %>
+    ssh -o StrictHostKeyChecking=no root@$1 <%= scope.lookupvar('openstack_project::params::allowed_ssh_command') %>
 }
+export -f run_ssh
+
+function brazenly_run_ssh {
+    run_ssh $1
+    return 0
+}
+export -f brazenly_run_ssh
 
 FULL_LIST=$(puppet cert list -a  | grep '^\+' | awk '{print $2}' | sed 's/"//g')
 OVERRIDE_LIST="
@@ -42,11 +44,10 @@ cd /opt/config/production
 
 # Run things that need to be ordered
 for host in $OVERRIDE_LIST; do
-    if ! run_ssh $host ; then
+    if run_ssh $host ; then
         break
     fi
 done
 
 # Now, run everyone else
-export -f run_ssh
-echo $FILTERED_LIST | xargs -P 10 -n 1 bash -c run_ssh
+echo $FILTERED_LIST | xargs -d' ' -P 10 -n 1 -I{} bash -c "brazenly_run_ssh {}"
