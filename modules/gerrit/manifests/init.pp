@@ -132,7 +132,6 @@ class gerrit(
   $melody_session = false,
   $replicate_local = false,
   $replication = [],
-  $replication_targets = [],
   $gitweb = true,
   $cgit = false,
   $web_repo_url = '',
