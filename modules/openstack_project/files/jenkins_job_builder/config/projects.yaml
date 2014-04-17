@@ -211,21 +211,6 @@
       - pypi-jobs
       - translation-jobs
       - openstack-publish-jobs
-      - '{pipeline}-tempest-dsvm-sahara-full{branch-designator}':
-          pipeline: check
-          node: 'devstack-precise || devstack-precise-check'
-          branch-designator: '-nv'
-          branch-override: default
-      - '{pipeline}-tempest-dsvm-sahara-postgres{branch-designator}':
-          pipeline: check
-          node: 'devstack-precise || devstack-precise-check'
-          branch-designator: '-nv'
-          branch-override: default
-      - '{pipeline}-tempest-dsvm-sahara-neutron{branch-designator}':
-          pipeline: check
-          node: 'devstack-precise || devstack-precise-check'
-          branch-designator: '-nv'
-          branch-override: default
 
 - project:
     name: python-saharaclient

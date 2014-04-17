@@ -448,12 +448,6 @@ jobs:
     voting: false
   - name: gate-sahara-pylint
     voting: false
-  - name: ^(gate|check)-tempest-dsvm-sahara-full-nv$
-    voting: false
-  - name: ^(gate|check)-tempest-dsvm-sahara-postgres-nv$
-    voting: false
-  - name: ^(gate|check)-tempest-dsvm-sahara-neutron-nv$
-    voting: false
   - name: gate-kite-python33
     voting: false
   - name: ^(gate|check)-tempest-master
@@ -977,13 +971,6 @@ projects:
       - name: integrated-gate-sahara
     check:
       - gate-sahara-pylint
-      - check-tempest-dsvm-sahara-full
-      - check-tempest-dsvm-sahara-postgres
-      - check-tempest-dsvm-sahara-neutron
-    gate:
-      - gate-tempest-dsvm-sahara-full
-      - gate-tempest-dsvm-sahara-postgres
-      - gate-tempest-dsvm-sahara-neutron
     post:
       - hook-sahara-rtfd
       - sahara-upstream-translation-update
@@ -1452,14 +1439,6 @@ projects:
       - name: openstack-server-publish-jobs
       - name: check-requirements
       - name: integrated-gate-sahara
-    check:
-      - check-tempest-dsvm-sahara-full
-      - check-tempest-dsvm-sahara-postgres
-      - check-tempest-dsvm-sahara-neutron
-    gate:
-      - gate-tempest-dsvm-sahara-full
-      - gate-tempest-dsvm-sahara-postgres
-      - gate-tempest-dsvm-sahara-neutron
     pre-release:
        - python-saharaclient-tarball
     release:
@@ -2161,9 +2140,6 @@ projects:
       - check-grenade-dsvm-partial-ncpu
       - check-tempest-dsvm-ironic-nv
       - check-tempest-dsvm-ironic-postgres-nv
-      - check-tempest-dsvm-sahara-full-nv
-      - check-tempest-dsvm-sahara-postgres-nv
-      - check-tempest-dsvm-sahara-neutron-nv
       # icehouse compat jobs for tempest master
       - check-tempest-dsvm-full-icehouse
       - check-tempest-dsvm-neutron-icehouse
@@ -2405,9 +2381,6 @@ projects:
       - check-swift-dsvm-functional
       - check-tempest-dsvm-ironic-nv
       - check-tempest-dsvm-ironic-postgres-nv
-      - check-tempest-dsvm-sahara-full-nv
-      - check-tempest-dsvm-sahara-postgres-nv
-      - check-tempest-dsvm-sahara-neutron-nv
       - check-tempest-master-dsvm-full-havana
       - check-tempest-master-dsvm-neutron-havana
     gate:
@@ -2621,9 +2594,6 @@ projects:
       - check-devstack-dsvm-cells-havana
       - check-tempest-dsvm-ironic-nv
       - check-tempest-dsvm-ironic-postgres-nv
-      - check-tempest-dsvm-sahara-full-nv
-      - check-tempest-dsvm-sahara-postgres-nv
-      - check-tempest-dsvm-sahara-neutron-nv
       - check-tempest-master-dsvm-full-havana
       - check-tempest-master-dsvm-neutron-havana
     gate:
