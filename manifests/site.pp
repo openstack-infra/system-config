@@ -240,14 +240,6 @@ node 'wiki.openstack.org' {
   }
 }
 
-node 'puppet-dashboard.openstack.org' {
-  class { 'openstack_project::dashboard':
-    password        => hiera('dashboard_password'),
-    mysql_password  => hiera('dashboard_mysql_password'),
-    sysadmins       => hiera('sysadmins'),
-  }
-}
-
 $elasticsearch_nodes = [
   'elasticsearch01.openstack.org',
   'elasticsearch02.openstack.org',

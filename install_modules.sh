@@ -28,8 +28,6 @@ remove_module "limits" # remove saz-limits (required by saz-gearman)
 
 MODULES["puppetlabs-ntp"]="0.2.0"
 
-MODULES["openstackci-dashboard"]="0.0.8"
-
 # freenode #puppet 2012-09-25:
 # 18:25 < jeblair> i would like to use some code that someone wrote,
 # but it's important that i understand how the author wants me to use
