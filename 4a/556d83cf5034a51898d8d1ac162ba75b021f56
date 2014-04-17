@@ -1,0 +1,11 @@
+Verified+2: Jenkins
+Code-Review+1: Akihiro Motoki <motoki@da.jp.nec.com>
+Approved+1: Clark Boylan <cboylan@sapwetik.org>
+Code-Review+2: Clark Boylan <cboylan@sapwetik.org>
+Code-Review+1: Aaron Rosen <aaronorosen@gmail.com>
+Code-Review+1: Andreas Jaeger <jaegerandi@gmail.com>
+Submitted-by: Jenkins
+Submitted-at: Thu, 17 Apr 2014 18:37:05 +0000
+Reviewed-on: https://review.openstack.org/88069
+Project: openstack-infra/config
+Branch: refs/heads/master
