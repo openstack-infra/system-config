@@ -16,8 +16,15 @@
 
 # This function will properly fail if puppet is disabled on the target host
 function run_ssh {
-    echo ssh -o StrictHostKeyChecking=no root@$1 <%= scope.lookupvar('openstack_project::params::allowed_ssh_command') %>
-    ssh -o StrictHostKeyChecking=no root@$1 <%= scope.lookupvar('openstack_project::params::allowed_ssh_command') %>
+    echo ssh root@$1 <%= scope.lookupvar('openstack_project::params::allowed_ssh_command') %>
+    ssh -o StrictHostKeyChecking=no root@$1 <%= scope.lookupvar('openstack_project::params::allowed_ssh_command') %> >/dev/null
+    ret=$?
+    if [ $ret == 124 ] ; then
+        echo "puppet on $1 timed out"
+    elif [ $ret != 0 ] ; then
+        echo "puppet on $1 failed with return code: $ret"
+    fi
+    return $ret
 }
 export -f run_ssh
 
