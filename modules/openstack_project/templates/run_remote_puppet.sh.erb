@@ -16,10 +16,10 @@
 
 # This function will properly fail if puppet is disabled on the target host
 function run_ssh {
-ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no root@$1 <%= scope.lookupvar('openstack_project::params::allowed_ssh_command') %>
+ssh -o StrictHostKeyChecking=no root@$1 <%= scope.lookupvar('openstack_project::params::allowed_ssh_command') %>
     ret=$?
     # Did we timeout
-    if [ $ret eq 124 ]; the
+    if [ $ret = 124 ]; then
         echo "TODO: Timeout instead of other failure. Report this differently."
     fi
     return $ret
@@ -48,4 +48,5 @@ for host in $OVERRIDE_LIST; do
 done
 
 # Now, run everyone else
-echo $FILTERED_LIST | xargs -P 10 -n 1 run_ssh
+export -f run_ssh
+echo $FILTERED_LIST | xargs -P 10 -n 1 bash -c run_ssh
