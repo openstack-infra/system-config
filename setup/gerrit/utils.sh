@@ -77,3 +77,11 @@ function delete_review {
 #     update patch_sets set draft='Y';
 # ssh -p 29418 opencontrail-admin@review.opencontrail.org gerrit flush-caches --all
 
+function flip_jenkins_job {
+    java -jar jenkins-cli.jar -s http://jenkins.opencontrail.org:8080 disable-job gate-contrail-controller-build
+    java -jar jenkins-cli.jar -s http://jenkins.opencontrail.org:8080 enable-job gate-contrail-controller-build
+}
+
+function create_sample_review() {
+    export FILE=$1 && git checkout origin/master && git checkout test$FILE && echo hello > $FILE && git add $FILE && git commit -m "sample commit" $FILE && git review
+}
