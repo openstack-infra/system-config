@@ -18,5 +18,5 @@ class openstack_project::params {
       fail("Unsupported osfamily: ${::osfamily} The 'openstack_project' module only supports osfamily Debian or RedHat (slaves only).")
     }
   }
-  $allowed_ssh_command = 'timeout -s 9 30m puppet agent --test'
+  $allowed_ssh_command = 'timeout -s 9 30m puppet agent --onetime --ignorecache --no-daemonize --no-usecacheonfailure --no-splay'
 }
