@@ -67,7 +67,7 @@ def switch_gerrit_repo
     sh "mv #{TOP}/#{@project} #{TOP}/repo/#{@project}"
 end
 
-def make_ready_for_build
+def pre_build_setup
     sh "python #{TOP}/repo/third_party/fetch_packages.py"
     sh "python #{TOP}/repo/distro/third_party/fetch_packages.py"
 end
@@ -76,7 +76,7 @@ def main
     setup_gerrit_repo
     setup_contrail_repo
     switch_gerrit_repo
-    make_ready_for_build
+    pre_build_setup
 end
 
 main
