@@ -1,9 +1,12 @@
 #!/usr/bin/env bash
 
-# Setup ssh keys id_rsa and id_rsa.pub in ~jenkins/.ssh/.
+set -ex
 
-# Setup ~jenkins/.ssh/config
-SSH_CONFIG =<<EOF
+JENKINS=jenkins
+
+# setup ~jenkins/.ssh
+function ssh_setup() {
+    SSH_CONFIG =<<EOF
 UserKnownHostsFile=/dev/null
 StrictHostKeyChecking=no
 
@@ -11,18 +14,24 @@ Host *.*
   UserKnownHostsFile=/dev/null
   StrictHostKeyChecking=no
 EOF
+    echo $SSH_CONFIG > ~$JENKINS/.ssh/config
 
-echo $SSH_CONFIG > ~jenkins/.ssh/config
+    # Setup ssh keys id_rsa and id_rsa.pub in ~$JENKINS/.ssh/.
+    chmod 600 ~$JENKINS/.ssh/id_rsa*
+}
 
-function flip_jenkins_job() {
+function flip_jenkins_job {
     # Download jenkins-cli.jar
-    wget "https://jenkins.opencontrail.org/jnlpJars/jenkins-cli.jar" --no-check-certificate
-    java -jar jenkins-cli.jar -s http://jenkins.opencontrail.org:8080 disable-job $1
-    java -jar jenkins-cli.jar -s http://jenkins.opencontrail.org:8080 enable-job $1
+    if [ ! -f /usr/local/bin/jenkins-cli.jar ]; then
+        wget -O $HOME/jenkins-cli.jar https://jenkins.opencontrail.org/jnlpJars/jenkins-cli.jar --no-check-certificate
+    fi
+    java -jar $HOME/jenkins-cli.jar -s http://jenkins.opencontrail.org:8080 disable-job $1
+    java -jar $HOME/jenkins-cli.jar -s http://jenkins.opencontrail.org:8080 enable-job $1
 }
 
 # setup ~jenkins/.gitconfig
-GIT_CONFIG=<<EOF
+function git_setup() {
+    GIT_CONFIG=<<EOF
 [user]
         name = Ananth Suryanarayana
         email = anantha@juniper.net
@@ -35,15 +44,15 @@ GIT_CONFIG=<<EOF
         autosetuprebase = always
 EOF
 
-echo $GIT_CONFIG > ~jenkins/.gitconfig
+    echo $GIT_CONFIG > ~$JENKINS/.gitconfig
+}
 
+# Setup a node as a build system where contrail software can be built.
 function build_setup {
-    apt-get -y install python-software-properties
+    apt-get -y install python-software-properties git python-lxml unzip patch scons flex bison make vim ant libexpat-dev libgettextpo0 libcurl4-openssl-dev python-dev autoconf automake build-essential libtool libevent-dev libxml2-dev libxslt-dev python-setuptools build-essential devscripts debhelper
 
-    apt-get -y install git python-lxml unzip patch scons flex bison make vim ant libexpat-dev libgettextpo0 libcurl4-openssl-dev python-dev autoconf automake build-essential libtool libevent-dev libxml2-dev libxslt-dev python-setuptools build-essential devscripts debhelper
-
-    wget -O /usr/local/bin/repo http://commondatastorage.googleapis.com/git-repo-downloads/repo
-    chmd 755 /usr/local/bin/repo
+    # Get repo tool from googleapis.com
+    wget -O /usr/local/bin/repo http://commondatastorage.googleapis.com/git-repo-downloads/repo && chmd 755 /usr/local/bin/repo
 
     add-apt-repository -y ppa:webupd8team/java
     apt-get update
@@ -51,4 +60,8 @@ function build_setup {
     echo debconf shared/accepted-oracle-license-v1-1 seen true | debconf-set-selections
     apt-get -y install oracle-java7-installer
 }
+
+sudo build_setup
+git_setup
+ssh_setup
 
