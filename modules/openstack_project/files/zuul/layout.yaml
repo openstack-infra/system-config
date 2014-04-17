@@ -268,6 +268,16 @@ project-templates:
       - 'gate-tempest-dsvm-neutron-pg'
       - 'gate-tempest-dsvm-neutron-large-ops'
 
+  - name: integrated-gate-sahara
+    check:
+      - 'check-tempest-dsvm-full'
+      - 'check-tempest-dsvm-neutron'
+      - 'check-tempest-dsvm-postgres-full'
+    gate:
+      - 'gate-tempest-dsvm-full'
+      - 'gate-tempest-dsvm-neutron'
+      - 'gate-tempest-dsvm-postgres-full'
+
   - name: python3-jobs
     check:
       - 'gate-{name}-python33'
@@ -959,6 +969,7 @@ projects:
       - name: python-jobs
       - name: openstack-server-publish-jobs
       - name: check-requirements
+      - name: integrated-gate-sahara
     check:
       - gate-sahara-pylint
       - check-tempest-dsvm-sahara-full
@@ -1435,6 +1446,7 @@ projects:
       - name: python-jobs
       - name: openstack-server-publish-jobs
       - name: check-requirements
+      - name: integrated-gate-sahara
     check:
       - check-tempest-dsvm-sahara-full
       - check-tempest-dsvm-sahara-postgres
