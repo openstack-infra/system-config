@@ -26,5 +26,5 @@ then
     git merge --no-edit -s ours $TAG
     # Get a Change-Id
     GIT_EDITOR=true git commit --amend
-    git review -R -t merge/release-tag
+    git review -R -y -t merge/release-tag
 fi
