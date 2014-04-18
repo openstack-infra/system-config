@@ -134,7 +134,11 @@ class jenkins::params {
       $python_libvirt_package = 'python-libvirt'
       $python_lxml_package = 'python-lxml'
       $python_zmq_package = 'python-zmq'
-      $rubygems_package = 'rubygems'
+      if ($::lsbdistcodename) == 'trusty' {
+        $rubygems_package = 'ruby'
+      } else {
+        $rubygems_package = 'rubygems'
+      }
       $ruby1_9_1_package = 'ruby1.9.1'
       $ruby1_9_1_dev_package = 'ruby1.9.1-dev'
       $ruby_bundler_package = 'ruby-bundler'

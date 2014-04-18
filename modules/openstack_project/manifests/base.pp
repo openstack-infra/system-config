@@ -95,13 +95,23 @@ class openstack_project::base(
       key_server => 'pgp.mit.edu',
     }
 
-    file { '/etc/apt/preferences.d/00-puppet.pref':
-      ensure  => present,
-      owner   => 'root',
-      group   => 'root',
-      mode    => '0444',
-      source  => 'puppet:///modules/openstack_project/00-puppet.pref',
-      replace => true,
+    case $::lsbdistcodename {
+      'trusty': {
+        file { '/etc/apt/preferences.d/00-puppet.pref':
+          ensure => absent,
+        }
+      }
+
+      default: {
+        file { '/etc/apt/preferences.d/00-puppet.pref':
+          ensure  => present,
+          owner   => 'root',
+          group   => 'root',
+          mode    => '0444',
+          source  => 'puppet:///modules/openstack_project/00-puppet.pref',
+          replace => true,
+        }
+      }
     }
 
   }
