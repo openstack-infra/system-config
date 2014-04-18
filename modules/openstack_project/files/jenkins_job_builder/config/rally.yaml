@@ -20,8 +20,7 @@
           #!/bin/bash -xe
           export PROJECTS="stackforge/rally $PROJECTS"
           export ENABLED_SERVICES=rally
-          export DEVSTACK_GATE_EXERCISES=1
-          export RUN_EXERCISES=rally
+          export DEVSTACK_GATE_EXERCISES=0
           export RALLY_SCENARIO={scenario}
 
           function pre_test_hook {{
@@ -29,6 +28,11 @@
               cp -r $BASE/new/rally/contrib/devstack/* $BASE/new/devstack
           }}
           export -f pre_test_hook
+
+          function post_test_hook {{
+              $BASE/new/rally/tests_ci/rally-gate.sh
+          }}
+          export -f post_test_hook
 
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
