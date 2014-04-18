@@ -509,16 +509,18 @@ class gerrit(
 
   # If gerrit.war was just installed, run the Gerrit "init" command.
   exec { 'gerrit-initial-init':
-    user      => 'gerrit2',
-    command   => '/usr/bin/java -jar /home/gerrit2/review_site/bin/gerrit.war init -d /home/gerrit2/review_site --batch --no-auto-start',
-    subscribe => File['/home/gerrit2/review_site/bin/gerrit.war'],
-    require   => [Package['openjdk-7-jre-headless'],
-                  User['gerrit2'],
-                  Mysql::Db['reviewdb'],
-                  File['/home/gerrit2/review_site/etc/gerrit.config'],
-                  File['/home/gerrit2/review_site/etc/secure.config']],
-    notify    => Exec['install-core-plugins'],
-    logoutput => true,
+    user        => 'gerrit2',
+    command     => '/usr/bin/java -jar /home/gerrit2/review_site/bin/gerrit.war init -d /home/gerrit2/review_site --batch --no-auto-start',
+    subscribe   => File['/home/gerrit2/review_site/bin/gerrit.war'],
+    refreshonly => true,
+    require     => [Package['openjdk-7-jre-headless'],
+                    User['gerrit2'],
+                    Mysql::Db['reviewdb'],
+                    File['/home/gerrit2/review_site/etc/gerrit.config'],
+                    File['/home/gerrit2/review_site/etc/secure.config']],
+    notify      => Exec['install-core-plugins'],
+    unless      => '/usr/bin/test -f /etc/init.d/gerrit',
+    logoutput   => true,
   }
 
   # If a new gerrit.war was just installed, run the Gerrit "init" command.
@@ -536,6 +538,7 @@ class gerrit(
                     File['/home/gerrit2/review_site/etc/gerrit.config'],
                     File['/home/gerrit2/review_site/etc/secure.config']],
     notify      => Exec['install-core-plugins'],
+    onlyif      => '/usr/bin/test -f /etc/init.d/gerrit',
     logoutput   => true,
   }
 
@@ -547,7 +550,7 @@ class gerrit(
     require     => [Package['unzip'],
                     File['/home/gerrit2/review_site/plugins']],
     notify      => Exec['gerrit-start'],
-    unless      => '/usr/bin/test -f /etc/init.d/gerrit',
+    refreshonly => true,
     logoutput   => true,
   }
 
