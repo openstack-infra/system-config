@@ -1298,18 +1298,34 @@
           node: 'dsvm-precise-krnl'
           branch-designator: ''
           branch-override: default
+      # Stable gate jobs for branchless tempest
+      - devstack-jobs:
+          pipeline: gate
+          node: devstack-precise
+          branch-designator: '-icehouse'
+          branch-override: stable/icehouse
       # Stable check jobs for testing devstack gate
       - devstack-jobs:
           pipeline: check
           node: 'devstack-precise || devstack-precise-check'
           branch-designator: '-havana'
           branch-override: stable/havana
+      - devstack-jobs:
+          pipeline: check
+          node: 'devstack-precise || devstack-precise-check'
+          branch-designator: '-icehouse'
+          branch-override: stable/icehouse
       # Periodic jobs for various branches
       - devstack-jobs:
           pipeline: periodic
           node: devstack-precise
           branch-designator: '-havana'
           branch-override: stable/havana
+      - devstack-jobs:
+          pipeline: periodic
+          node: devstack-precise
+          branch-designator: '-icehouse'
+          branch-override: stable/icehouse
       - devstack-jobs:
           pipeline: periodic
           node: devstack-precise

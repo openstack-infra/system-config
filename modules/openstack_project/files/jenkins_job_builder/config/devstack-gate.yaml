@@ -921,7 +921,7 @@
 
 
 - job-template:
-    name: '{pipeline}-grenade-dsvm'
+    name: '{pipeline}-grenade-dsvm{branch-designator}'
     node: '{node}'
 
     wrappers:
@@ -940,6 +940,10 @@
           export DEVSTACK_GATE_TIMEOUT=120
           export DEVSTACK_GATE_TEMPEST=0
           export DEVSTACK_GATE_GRENADE=1
+          export BRANCH_OVERRIDE={branch-override}
+          if [ "$BRANCH_OVERRIDE" != "default" ] ; then
+              export OVERRIDE_ZUUL_BRANCH=$BRANCH_OVERRIDE
+          fi
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
 
@@ -949,7 +953,7 @@
 
 
 - job-template:
-    name: '{pipeline}-grenade-dsvm-forward'
+    name: '{pipeline}-grenade-dsvm-forward{branch-designator}'
     node: '{node}'
 
     wrappers:
@@ -969,6 +973,10 @@
           export DEVSTACK_GATE_TEMPEST=0
           export DEVSTACK_GATE_GRENADE=1
           export DEVSTACK_GATE_GRENADE_FORWARD=1
+          export BRANCH_OVERRIDE={branch-override}
+          if [ "$BRANCH_OVERRIDE" != "default" ] ; then
+              export OVERRIDE_ZUUL_BRANCH=$BRANCH_OVERRIDE
+          fi
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
 
@@ -978,7 +986,7 @@
 
 
 - job-template:
-    name: '{pipeline}-grenade-dsvm-neutron'
+    name: '{pipeline}-grenade-dsvm-neutron{branch-designator}'
     node: '{node}'
 
     wrappers:
@@ -998,6 +1006,10 @@
           export DEVSTACK_GATE_TEMPEST=0
           export DEVSTACK_GATE_GRENADE=1
           export DEVSTACK_GATE_NEUTRON=1
+          export BRANCH_OVERRIDE={branch-override}
+          if [ "$BRANCH_OVERRIDE" != "default" ] ; then
+              export OVERRIDE_ZUUL_BRANCH=$BRANCH_OVERRIDE
+          fi
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
 
@@ -1007,7 +1019,7 @@
 
 
 - job-template:
-    name: '{pipeline}-grenade-dsvm-neutron-forward'
+    name: '{pipeline}-grenade-dsvm-neutron-forward{branch-designator}'
     node: '{node}'
 
     wrappers:
@@ -1028,6 +1040,10 @@
           export DEVSTACK_GATE_GRENADE=1
           export DEVSTACK_GATE_NEUTRON=1
           export DEVSTACK_GATE_GRENADE_FORWARD=1
+          export BRANCH_OVERRIDE={branch-override}
+          if [ "$BRANCH_OVERRIDE" != "default" ] ; then
+              export OVERRIDE_ZUUL_BRANCH=$BRANCH_OVERRIDE
+          fi
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
 
@@ -1037,7 +1053,7 @@
 
 
 - job-template:
-    name: '{pipeline}-grenade-dsvm-partial-ncpu'
+    name: '{pipeline}-grenade-dsvm-partial-ncpu{branch-designator}'
     node: '{node}'
 
     wrappers:
@@ -1057,6 +1073,10 @@
           export DEVSTACK_GATE_TEMPEST=0
           export DEVSTACK_GATE_GRENADE=1
           export DEVSTACK_GATE_GRENADE_PARTIAL_NCPU=1
+          export BRANCH_OVERRIDE={branch-override}
+          if [ "$BRANCH_OVERRIDE" != "default" ] ; then
+              export OVERRIDE_ZUUL_BRANCH=$BRANCH_OVERRIDE
+          fi
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
 
@@ -1302,11 +1322,11 @@
       - '{pipeline}-tempest-dsvm-postgres-full{branch-designator}'
       - '{pipeline}-tempest-dsvm-neutron-heat-slow{branch-designator}'
       - '{pipeline}-tempest-dsvm-postgres-zeromq-full{branch-designator}'
-      - '{pipeline}-grenade-dsvm'
-      - '{pipeline}-grenade-dsvm-forward'
-      - '{pipeline}-grenade-dsvm-neutron'
-      - '{pipeline}-grenade-dsvm-neutron-forward'
-      - '{pipeline}-grenade-dsvm-partial-ncpu'
+      - '{pipeline}-grenade-dsvm{branch-designator}'
+      - '{pipeline}-grenade-dsvm-forward{branch-designator}'
+      - '{pipeline}-grenade-dsvm-neutron{branch-designator}'
+      - '{pipeline}-grenade-dsvm-neutron-forward{branch-designator}'
+      - '{pipeline}-grenade-dsvm-partial-ncpu{branch-designator}'
       - '{pipeline}-tempest-dsvm-sahara-full{branch-designator}'
       - '{pipeline}-tempest-dsvm-sahara-postgres{branch-designator}'
       - '{pipeline}-tempest-dsvm-sahara-neutron{branch-designator}'

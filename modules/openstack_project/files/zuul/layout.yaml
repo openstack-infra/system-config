@@ -2147,6 +2147,18 @@ projects:
       - check-tempest-dsvm-sahara-full-nv
       - check-tempest-dsvm-sahara-postgres-nv
       - check-tempest-dsvm-sahara-neutron-nv
+      # icehouse compat jobs for tempest master
+      - check-tempest-dsvm-full-icehouse
+      - check-tempest-dsvm-neutron-icehouse
+      - check-tempest-dsvm-neutron-heat-slow-icehouse
+      - check-grenade-dsvm-icehouse
+      - check-grenade-dsvm-neutron-icehouse
+      - check-tempest-dsvm-postgres-full-icehouse
+      - check-tempest-dsvm-neutron-full-icehouse
+      - gate-tempest-dsvm-large-ops-icehouse
+      - gate-tempest-dsvm-neutron-large-ops-icehouse
+      - check-grenade-dsvm-partial-ncpu-icehouse
+      # havana compat jobs for tempest master (non voting)
       - check-tempest-master-dsvm-full-havana
       - check-tempest-master-dsvm-neutron-havana
     gate:
@@ -2582,6 +2594,10 @@ projects:
       - gate-tempest-dsvm-large-ops
       - gate-tempest-dsvm-neutron-large-ops
       - check-swift-dsvm-functional
+      - check-tempest-dsvm-full-icehouse
+      - check-tempest-dsvm-neutron-icehouse
+      - check-tempest-dsvm-postgres-full-icehouse
+      - check-devstack-dsvm-cells-icehouse
       - check-tempest-dsvm-full-havana
       - check-tempest-dsvm-neutron-havana
       - check-tempest-dsvm-postgres-full-havana
