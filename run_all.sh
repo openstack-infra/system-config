@@ -23,5 +23,7 @@ git fetch -a && git reset -q --hard @{u}
 # some times
 touch manifests/site.pp
 
+# Put in a logging header
+echo "****\n\n$(date)\n\n****" >> /var/log/puppet_run_all.log 2>&1
 # Run this as an external script so that the above pull will get new changes
-/usr/local/bin/run_remote_puppet
+/usr/local/bin/run_remote_puppet >> /var/log/puppet_run_all.log 2>&1

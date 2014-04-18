@@ -5,6 +5,7 @@ class openstack_project::puppetmaster (
   $override_list = [],
   $sysadmins = []
 ) {
+  include logrotate
   include openstack_project::params
 
   class { 'openstack_project::server':
@@ -22,6 +23,19 @@ class openstack_project::puppetmaster (
     minute      => '*/15',
     command     => 'bash /opt/config/production/run_all.sh',
     environment => 'PATH=/var/lib/gems/1.8/bin:/usr/bin:/bin:/usr/sbin:/sbin',
+  }
+  logrotate::file { 'updatepuppetmaster':
+    ensure  => present,
+    log     => '/var/log/puppet_run_all.log',
+    options => ['compress',
+      'copytruncate',
+      'delaycompress',
+      'missingok',
+      'rotate 7',
+      'daily',
+      'notifempty',
+    ],
+    require => Cron['updatepuppetmaster'],
   }
 
   cron { 'deleteoldreports':
