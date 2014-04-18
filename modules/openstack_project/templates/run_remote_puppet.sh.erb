@@ -51,7 +51,9 @@ cd /opt/config/production
 
 # Run things that need to be ordered
 for host in $OVERRIDE_LIST; do
-    if run_ssh $host ; then
+    run_ssh $host
+    ret=$?
+    if [ $ret != 0 ] ; then
         break
     fi
 done
