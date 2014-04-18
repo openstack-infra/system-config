@@ -347,17 +347,38 @@ class jenkins::slave(
       system => true,
     }
 
-    class { 'postgresql::server':
-      postgres_password => 'insecure_slave',
-      manage_firewall   => false,
-      # The puppetlabs postgres module incorrectly quotes ip addresses
-      # in the postgres server config. Use localhost instead.
-      listen_addresses  => ['localhost'],
-      require           => [
-        User['postgres'],
-        Class['postgresql::params'],
-      ],
+    case $::lsbdistcodename {
+      'trusty': {
+        class { 'postgresql::globals':
+            version => '9.3',
+        } ->
+        class { 'postgresql::server':
+          postgres_password => 'insecure_slave',
+          manage_firewall   => false,
+          # The puppetlabs postgres module incorrectly quotes ip addresses
+          # in the postgres server config. Use localhost instead.
+          listen_addresses  => ['localhost'],
+          require           => [
+            User['postgres'],
+            Class['postgresql::params'],
+          ],
+        }
+      }
+      default: {
+        class { 'postgresql::server':
+          postgres_password => 'insecure_slave',
+          manage_firewall   => false,
+          # The puppetlabs postgres module incorrectly quotes ip addresses
+          # in the postgres server config. Use localhost instead.
+          listen_addresses  => ['localhost'],
+          require           => [
+            User['postgres'],
+            Class['postgresql::params'],
+          ],
+        }
+      }
     }
+ 
 
     class { 'postgresql::lib::devel':
       require => Class['postgresql::params'],
