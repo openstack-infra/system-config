@@ -273,6 +273,7 @@ project-templates:
       - 'check-tempest-dsvm-full'
       - 'check-tempest-dsvm-neutron'
       - 'check-tempest-dsvm-postgres-full'
+      - 'check-tempest-dsvm-neutron-heat-slow'
     gate:
       - 'gate-tempest-dsvm-full'
       - 'gate-tempest-dsvm-neutron'
