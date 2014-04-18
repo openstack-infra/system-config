@@ -63,8 +63,11 @@ EOF
     yum install -y redhat-lsb-core git puppet
 else
     #defaults to Ubuntu
-    # NB: keep in sync with openstack_project/files/00-puppet.pref
-    cat > /etc/apt/preferences.d/00-puppet.pref <<EOF
+
+    lsbdistcodename=`lsb_release -c -s`
+    if [ $lsbdircodename != 'trusty' ] ; then
+        # NB: keep in sync with openstack_project/files/00-puppet.pref
+        cat > /etc/apt/preferences.d/00-puppet.pref <<EOF
 Package: puppet puppet-common puppetmaster puppetmaster-common puppetmaster-passenger
 Pin: version 2.7*
 Pin-Priority: 501
@@ -73,16 +76,19 @@ Package: facter
 Pin: version 1.*
 Pin-Priority: 501
 EOF
+        puppet_deb=puppetlabs-release-${lsbdistcodename}.deb
+        wget http://apt.puppetlabs.com/$puppet_deb -O $puppet_deb
+        dpkg -i $puppet_deb
+        rm $puppet_deb
+        rubypkg=rubygems
+    else
+        rubypkg=ruby
+    fi
 
-    lsbdistcodename=`lsb_release -c -s`
-    puppet_deb=puppetlabs-release-${lsbdistcodename}.deb
-    wget http://apt.puppetlabs.com/$puppet_deb -O $puppet_deb
-    dpkg -i $puppet_deb
-    rm $puppet_deb
 
     apt-get update
     DEBIAN_FRONTEND=noninteractive apt-get --option 'Dpkg::Options::=--force-confold' \
         --assume-yes dist-upgrade
     DEBIAN_FRONTEND=noninteractive apt-get --option 'Dpkg::Options::=--force-confold' \
-        --assume-yes install -y --force-yes puppet git rubygems
+        --assume-yes install -y --force-yes puppet git $rubypkg
 fi
