@@ -127,9 +127,6 @@ for full details)::
 
 * Run the DNS update commands [nb: install your DNS API by hand at the moment]
 
-* ssh into the new node and update its ``/etc/default/puppet`` to autostart
-  per the launch README.
-
 Stage 3 - gerrit
 ~~~~~~~~~~~~~~~~
 
