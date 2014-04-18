@@ -2586,6 +2586,7 @@ projects:
       - check-tempest-dsvm-postgres-full
       - gate-tempest-dsvm-large-ops
       - gate-tempest-dsvm-neutron-large-ops
+      - check-grenade-dsvm-partial-ncpu
       - check-swift-dsvm-functional
       - check-tempest-dsvm-full-icehouse
       - check-tempest-dsvm-neutron-icehouse
@@ -2605,6 +2606,7 @@ projects:
       - gate-tempest-dsvm-postgres-full
       - gate-tempest-dsvm-large-ops
       - gate-tempest-dsvm-neutron-large-ops
+      - gate-grenade-dsvm-partial-ncpu
       - gate-swift-dsvm-functional
     experimental:
       - gate-grenade-dsvm-forward
