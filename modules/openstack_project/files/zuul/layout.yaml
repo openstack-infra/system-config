@@ -334,6 +334,8 @@ jobs:
   # the salt-trigger worker has no jobs yet
   - name: ^(gate|check)-tempest-dsvm-neutron-full$
     voting: false
+  - name: ^(gate|check)-tempest-dsvm-neutron-full-icehouse$
+    voting: false
   - name: ^(gate|check)-tempest-dsvm-neutron-heat-slow
     branch: ^(?!stable/havana).*$
     voting: false
@@ -350,6 +352,9 @@ jobs:
   - name: ^(gate|check)-grenade-dsvm$
     branch: ^(?!stable/havana).*$
   - name: ^(gate|check)-grenade-dsvm-neutron$
+    branch: ^(?!stable/havana).*$
+    voting: false
+  - name: ^(gate|check)-grenade-dsvm-neutron-icehouse$
     branch: ^(?!stable/havana).*$
     voting: false
   - name: ^(gate|check)-grenade-dsvm-partial-ncpu$
