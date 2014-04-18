@@ -68,9 +68,9 @@ class elasticsearch (
     ensure    => latest,
     source    => "/tmp/elasticsearch-${version}.deb",
     provider  => 'dpkg',
-    subscribe => Exec['get_elasticsearch_sha1'],
+    subscribe => Exec['get_elasticsearch_deb_sha1'],
     require   => [
-      Package['java7-runtime-headless'],
+      Package['openjdk-7-jre-headless'],
       File['/etc/elasticsearch/elasticsearch.yml'],
       File['/etc/elasticsearch/default-mapping.json'],
       File['/etc/default/elasticsearch'],
