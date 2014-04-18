@@ -176,7 +176,7 @@ class jenkins::slave(
       ensure   => '10.1.1',
       provider => gem,
       before   => Package['puppetlabs_spec_helper'],
-      require  => Package['rubygems'],
+      require  => Package[$::jenkins::params::rubygems_package],
     }
 
     $gem_packages = [
@@ -188,7 +188,7 @@ class jenkins::slave(
     package { $gem_packages:
       ensure   => latest,
       provider => gem,
-      require  => Package['rubygems'],
+      require  => Package[$::jenkins::params::rubygems_package],
     }
   }
 
@@ -220,12 +220,18 @@ class jenkins::slave(
     require  => Class[pip],
   }
 
-  file { '/etc/profile.d/rubygems.sh':
-    ensure => present,
-    owner  => 'root',
-    group  => 'root',
-    mode   => '0644',
-    source => 'puppet:///modules/jenkins/rubygems.sh',
+  if ($::lsbdistcodename == 'trusty') {
+    file { '/etc/profile.d/rubygems.sh':
+      ensure => absent,
+    }
+  } else {
+    file { '/etc/profile.d/rubygems.sh':
+      ensure => present,
+      owner  => 'root',
+      group  => 'root',
+      mode   => '0644',
+      source => 'puppet:///modules/jenkins/rubygems.sh',
+    }
   }
 
   file { '/usr/local/bin/gcc':
@@ -338,6 +344,13 @@ class jenkins::slave(
         User['postgres'],
         Class['postgresql::params'],
       ],
+    }
+
+    if ($::lsbdistcodename == 'trusty') {
+      class { 'postgresql::globals':
+        version => '9.3',
+        before  => Class['postgresql::server'],
+      }
     }
 
     class { 'postgresql::lib::devel':
