@@ -47,7 +47,11 @@ class openstack_project::jenkins_params {
       $python_magic_package = 'python-magic'
       $python_requests_package = 'python-requests'
       $python_zmq_package = 'python-zmq'
-      $rubygems_package = 'rubygems'
+      if ($::lsbdistcodename) == 'trusty' {
+        $rubygems_package = 'ruby'
+      } else {
+        $rubygems_package = 'rubygems'
+      }
       # Common Lisp interpreter, used for cl-openstack-client
       $sbcl_package = 'sbcl'
       $sqlite_package = 'sqlite'

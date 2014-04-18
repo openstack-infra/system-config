@@ -57,11 +57,25 @@ class openstack_project::thick_slave(
     ensure => present,
   }
 
+  if ($::lsbdistcodename == 'trusty') {
+    file { '/etc/profile.d/rubygems.sh':
+      ensure => absent,
+    }
+  } else {
+    file { '/etc/profile.d/rubygems.sh':
+      ensure => present,
+      owner  => 'root',
+      group  => 'root',
+      mode   => '0644',
+      source => 'puppet:///modules/openstack_project/rubygems.sh',
+    }
+  }
+
   package { 'rake':
     ensure   => '10.1.1',
     provider => gem,
     before   => Package['puppetlabs_spec_helper'],
-    require  => Package['rubygems'],
+    require  => Package[$::openstack_project::jenkins_params::rubygems_package],
   }
 
   $gem_packages = [
@@ -73,7 +87,7 @@ class openstack_project::thick_slave(
   package { $gem_packages:
     ensure   => latest,
     provider => gem,
-    require  => Package['rubygems'],
+    require  => Package[$::openstack_project::jenkins_params::rubygems_package],
   }
 
   if ($::operatingsystem == 'Fedora') and ($::operatingsystemrelease >= 19) {
@@ -149,6 +163,13 @@ class openstack_project::thick_slave(
   group { 'postgres':
     ensure => present,
     system => true,
+  }
+
+  if ($::lsbdistcodename == 'trusty') {
+    class { 'postgresql::globals':
+      version => '9.3',
+      before  => Class['postgresql::server'],
+    }
   }
 
   class { 'postgresql::server':
