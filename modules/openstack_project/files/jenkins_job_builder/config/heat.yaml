@@ -1,0 +1,32 @@
+- job:
+    name: gate-heat-templates-dsvm
+    node: devstack-precise
+
+    wrappers:
+      - timeout:
+          timeout: 120
+          fail: true
+      - timestamps
+
+    builders:
+      - link-logs
+      - net-info
+      - devstack-checkout
+      - shell: |
+          #!/bin/bash -xe
+          export PYTHONUNBUFFERED=true
+          export DEVSTACK_GATE_TIMEOUT=120
+          export DEVSTACK_GATE_TEMPEST=0
+          export DEVSTACK_GATE_EXERCISES=0
+          export PROJECTS="openstack/heat-templates $PROJECTS"
+          function post_test_hook {{
+              source $BASE/new/devstack/openrc && \
+              python $BASE/new/heat-templates/tools/validate-templates $BASE/new/heat-templates
+          }}
+          export -f post_test_hook
+          cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
+          ./safe-devstack-vm-gate-wrap.sh
+
+    publishers:
+      - devstack-logs
+      - console-log

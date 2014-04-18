@@ -566,6 +566,8 @@ jobs:
     voting: false
   - name: gate-cliff-requirements
     voting: false
+  - name: gate-heat-templates-dsvm
+    voting: false
 
 # The project list is grouped by type of project, and within each
 # group, projects are sorted (mostly) alphabetically.
@@ -1624,7 +1626,7 @@ projects:
 
   - name: openstack/heat-templates
     check:
-      - noop
+      - gate-heat-templates-dsvm
     gate:
       - noop
 
