@@ -173,7 +173,7 @@ class jenkins::slave(
       ensure   => '10.1.1',
       provider => gem,
       before   => Package['puppetlabs_spec_helper'],
-      require  => Package['rubygems'],
+      require  => Package[$::jenkins::params::rubygems_package],
     }
 
     $gem_packages = [
@@ -185,7 +185,7 @@ class jenkins::slave(
     package { $gem_packages:
       ensure   => latest,
       provider => gem,
-      require  => Package['rubygems'],
+      require  => Package[$::jenkins::params::rubygems_package],
     }
   }
 
@@ -239,12 +239,18 @@ class jenkins::slave(
     require  => Class[pip],
   }
 
-  file { '/etc/profile.d/rubygems.sh':
-    ensure => present,
-    owner  => 'root',
-    group  => 'root',
-    mode   => '0644',
-    source => 'puppet:///modules/jenkins/rubygems.sh',
+  if ($::lsbdistcodename == 'trusty') {
+    file { '/etc/profile.d/rubygems.sh':
+      ensure => absent,
+    }
+  } else {
+    file { '/etc/profile.d/rubygems.sh':
+      ensure => present,
+      owner  => 'root',
+      group  => 'root',
+      mode   => '0644',
+      source => 'puppet:///modules/jenkins/rubygems.sh',
+    }
   }
 
   file { '/usr/local/bin/gcc':
@@ -347,17 +353,38 @@ class jenkins::slave(
       system => true,
     }
 
-    class { 'postgresql::server':
-      postgres_password => 'insecure_slave',
-      manage_firewall   => false,
-      # The puppetlabs postgres module incorrectly quotes ip addresses
-      # in the postgres server config. Use localhost instead.
-      listen_addresses  => ['localhost'],
-      require           => [
-        User['postgres'],
-        Class['postgresql::params'],
-      ],
+    case $::lsbdistcodename {
+      'trusty': {
+        class { 'postgresql::globals':
+            version => '9.3',
+        } ->
+        class { 'postgresql::server':
+          postgres_password => 'insecure_slave',
+          manage_firewall   => false,
+          # The puppetlabs postgres module incorrectly quotes ip addresses
+          # in the postgres server config. Use localhost instead.
+          listen_addresses  => ['localhost'],
+          require           => [
+            User['postgres'],
+            Class['postgresql::params'],
+          ],
+        }
+      }
+      default: {
+        class { 'postgresql::server':
+          postgres_password => 'insecure_slave',
+          manage_firewall   => false,
+          # The puppetlabs postgres module incorrectly quotes ip addresses
+          # in the postgres server config. Use localhost instead.
+          listen_addresses  => ['localhost'],
+          require           => [
+            User['postgres'],
+            Class['postgresql::params'],
+          ],
+        }
+      }
     }
+ 
 
     class { 'postgresql::lib::devel':
       require => Class['postgresql::params'],
