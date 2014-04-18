@@ -55,7 +55,6 @@ class openstackid (
       'php5-common',
       'php5-curl',
       'php5-cli',
-      'php5-json',
       'php5-mcrypt',
       'php5-mysql',
     ]
