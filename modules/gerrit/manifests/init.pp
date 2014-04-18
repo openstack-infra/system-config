@@ -546,7 +546,6 @@ class gerrit(
     subscribe   => File['/home/gerrit2/review_site/bin/gerrit.war'],
     require     => [Package['unzip'],
                     File['/home/gerrit2/review_site/plugins']],
-    notify      => Exec['gerrit-start'],
     unless      => '/usr/bin/test -f /etc/init.d/gerrit',
     logoutput   => true,
   }
@@ -579,12 +578,6 @@ class gerrit(
     ensure  => link,
     target  => '/etc/init.d/gerrit',
     require => File['/etc/init.d/gerrit'],
-  }
-
-  exec { 'gerrit-start':
-    command     => '/etc/init.d/gerrit start',
-    require     => File['/etc/init.d/gerrit'],
-    refreshonly => true,
   }
 
   file { '/usr/local/gerrit':
