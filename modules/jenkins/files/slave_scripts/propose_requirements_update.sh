@@ -62,6 +62,11 @@ EOF
     # make sure the project even has this branch
     if git branch -a | grep -q "^  remotes/origin/$BRANCH$" ; then
         git checkout -B ${BRANCH} -t origin/${BRANCH}
+        # Need to set the git config in each repo as we shouldn't
+        # set it globally for the Jenkins user on the slaves.
+        git config user.name "OpenStack Proposal Bot"
+        git config user.email "openstack-infra@lists.openstack.org"
+        git config gitreview.username "proposal-bot"
         git review -s
         popd
 
