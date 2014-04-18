@@ -1,0 +1,9 @@
+Code-Review+2: Monty Taylor <mordred@inaugust.com>
+Verified+2: Jenkins
+Approved+1: Clark Boylan <cboylan@sapwetik.org>
+Code-Review+2: Clark Boylan <cboylan@sapwetik.org>
+Submitted-by: Jenkins
+Submitted-at: Fri, 18 Apr 2014 18:03:10 +0000
+Reviewed-on: https://review.openstack.org/88637
+Project: openstack-infra/config
+Branch: refs/heads/master
