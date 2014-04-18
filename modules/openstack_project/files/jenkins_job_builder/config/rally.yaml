@@ -21,12 +21,12 @@
           export PROJECTS="stackforge/rally $PROJECTS"
           export ENABLED_SERVICES=rally
           export DEVSTACK_GATE_EXERCISES=1
-          export RUN_EXERCISES=rally
-          export RALLY_SCENARIO={scenario}
 
           function pre_test_hook {{
               # Install rally-devstack integration
               cp -r $BASE/new/rally/contrib/devstack/* $BASE/new/devstack
+              export RUN_EXERCISES=rally
+              export RALLY_SCENARIO={scenario}
           }}
           export -f pre_test_hook
 
