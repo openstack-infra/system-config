@@ -392,17 +392,6 @@ class openstack_project::gerrit (
     }
   }
   file { '/home/gerrit2/review_site/bin/set_agreements.sh':
-    ensure  => present,
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0755',
-    content => template('openstack_project/gerrit_set_agreements.sh.erb'),
-    replace => true,
-    require => Class['::gerrit']
-  }
-  exec { 'set_contributor_agreements':
-    path    => ['/bin', '/usr/bin'],
-    command => '/home/gerrit2/review_site/bin/set_agreements.sh',
-    require => File['/home/gerrit2/review_site/bin/set_agreements.sh']
+    ensure  => absent,
   }
 }
