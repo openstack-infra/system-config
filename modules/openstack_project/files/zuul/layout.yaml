@@ -2363,6 +2363,19 @@ projects:
 
 # Section: OpenStack development projects
 
+  - name: openstack-dev/bash8
+    check:
+      - gate-bash8-pep8
+      - gate-bash8-python26
+      - gate-bash8-python27
+    gate:
+      - gate-bash8-pep8
+      - gate-bash8-python26
+      - gate-bash8-python27
+    post:
+      - bash8-branch-tarball
+      - bash8-coverage
+
   - name: openstack-dev/cookiecutter
     check:
       - noop
