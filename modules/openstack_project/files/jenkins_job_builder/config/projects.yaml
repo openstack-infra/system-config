@@ -2362,3 +2362,12 @@
 
     jobs:
       - python-jobs
+
+- project:
+    name: bash8
+    github-org: openstack-dev
+    node: bare-precise
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - python-jobs
