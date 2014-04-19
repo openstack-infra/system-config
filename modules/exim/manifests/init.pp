@@ -59,13 +59,15 @@ class exim(
     require => Package[$::exim::params::package],
   }
 
-  file { '/etc/aliases':
-    ensure  => present,
-    content => template("${module_name}/aliases.erb"),
-    group   => 'root',
-    mode    => '0444',
-    owner   => 'root',
-    replace => true,
+  if empty($mailman_domains) {
+    file { '/etc/aliases':
+      ensure  => present,
+      content => template("${module_name}/aliases.erb"),
+      group   => 'root',
+      mode    => '0444',
+      owner   => 'root',
+      replace => true,
+    }
   }
 }
 
