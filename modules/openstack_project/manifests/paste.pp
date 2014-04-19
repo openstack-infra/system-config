@@ -1,6 +1,10 @@
 # == Class: openstack_project::paste
 #
 class openstack_project::paste (
+  $mysql_password,
+  $mysql_host = 'localhost',
+  $mysql_user = 'openstack',
+  $mysql_db_name = 'openstack',
   $sysadmins = []
 ) {
   class { 'openstack_project::server':
@@ -9,11 +13,11 @@ class openstack_project::paste (
   }
   include lodgeit
   lodgeit::site { 'openstack':
-    port  => '5000',
-    image => 'header-bg2.png',
-  }
-
-  lodgeit::site { 'drizzle':
-    port => '5001',
+    mysql_host     => $mysql_host,
+    mysql_user     => $mysql_user,
+    mysql_password => $mysql_password,
+    mysql_db_name  => $mysql_db_name,
+    port           => '5000',
+    image          => 'header-bg2.png',
   }
 }

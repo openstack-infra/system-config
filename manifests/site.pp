@@ -181,7 +181,9 @@ node 'lists.openstack.org' {
 
 node 'paste.openstack.org' {
   class { 'openstack_project::paste':
-    sysadmins => hiera('sysadmins'),
+    mysql_host        => hiera('paste_db_host'),
+    mysql_db_password => hiera('paste_db_password'),
+    sysadmins         => hiera('sysadmins'),
   }
 }
 

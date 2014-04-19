@@ -7,7 +7,7 @@ from lodgeit import local
 from lodgeit.application import make_app
 from lodgeit.database import session
 
-dburi = 'drizzle://127.0.0.1:4427/<%= @name %>'
+dburi = 'mysql://<%= @mysql_user %>:<%= @mysql_password %>@<%= @mysql_host %>:3306/<%= @mysql_db_name %>'
 
 SECRET_KEY = 'no secret key'
 

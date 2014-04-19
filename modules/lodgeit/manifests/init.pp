@@ -10,8 +10,9 @@ class lodgeit {
                 'drizzle']
 
   include apache
-
+  include mysql::python
   include pip
+
   a2mod { 'proxy':
     ensure => present,
   }
@@ -21,12 +22,6 @@ class lodgeit {
 
   package { $packages:
     ensure => present,
-  }
-
-  if ! defined(Package['python-mysqldb']) {
-    package { 'python-mysqldb':
-      ensure   => present,
-    }
   }
 
   package { 'SQLAlchemy':
@@ -49,14 +44,6 @@ class lodgeit {
     ensure   => latest,
     provider => git,
     source   => 'https://git.openstack.org/openstack-infra/lodgeit',
-  }
-
-# create initial git DB backup location
-
-  exec { 'create_db_backup':
-    command => 'git init /var/backups/lodgeit_db',
-    path    => '/bin:/usr/bin',
-    onlyif  => 'test ! -d /var/backups/lodgeit_db',
   }
 
 }
