@@ -405,6 +405,9 @@
 - project: stackforge/barbican
   description: Barbican is a ReST API designed for the secure storage, provisioning and management of secrets, including in OpenStack environments.
   upstream: git://github.com/cloudkeep/barbican.git
+- project: stackforge/bash8
+  description: A pep8 equivalent for bash scripts
+  upstream: git://github.com/locke105/bash8.git
 - project: stackforge/billingstack
   upstream: git://github.com/billingstack/billingstack
   description: Billing software
