@@ -441,6 +441,10 @@ jobs:
     files:
       - '^tools/.*-requires$'
       - '^.*requirements.txt$'
+  - name: gate-bash8-python26
+    voting: false
+  - name: gate-bash8-python27
+    voting: false
   - name: gate-hacking-python33
     voting: false
   - name: gate-hacking-pypy
@@ -3063,6 +3067,10 @@ projects:
       - gate-barbican-devstack-dsvm
     post:
       - barbican-branch-tarball
+
+  - name: stackforge/bash8
+    template:
+      - name: python-jobs
 
   - name: stackforge/billingstack
     check:
