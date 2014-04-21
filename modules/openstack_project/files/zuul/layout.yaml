@@ -913,7 +913,6 @@ projects:
       - check-tempest-dsvm-postgres-full
       - gate-tempest-dsvm-large-ops
       - gate-tempest-dsvm-neutron-large-ops
-      - check-tempest-dsvm-cells-full
       - gate-nova-pylint
       - check-grenade-dsvm-partial-ncpu
     gate:
@@ -924,6 +923,7 @@ projects:
       - gate-grenade-dsvm-partial-ncpu
     experimental:
       - gate-grenade-dsvm-forward
+      - check-tempest-dsvm-cells-full
       - check-tempest-dsvm-neutron-pg
       - gate-tempest-dsvm-large-ops-testing
     experimental-tripleo:
@@ -2140,7 +2140,6 @@ projects:
       - gate-tempest-python27
       - check-tempest-dsvm-postgres-full
       - check-tempest-dsvm-neutron-full
-      - check-tempest-dsvm-cells-full
       - gate-tempest-dsvm-large-ops
       - gate-tempest-dsvm-neutron-large-ops
       - check-grenade-dsvm-partial-ncpu
@@ -2170,6 +2169,7 @@ projects:
       - gate-grenade-dsvm-partial-ncpu
     experimental:
       - gate-grenade-dsvm-forward
+      - check-tempest-dsvm-cells-full
       - check-tempest-dsvm-marconi
       - check-tempest-dsvm-virtual-ironic-nv
       - check-tempest-dsvm-keystonev3-full
@@ -2380,7 +2380,6 @@ projects:
       - check-tempest-dsvm-neutron-full
       - gate-tempest-dsvm-large-ops
       - gate-tempest-dsvm-neutron-large-ops
-      - check-tempest-dsvm-cells-full
       - check-grenade-dsvm-forward
       - check-grenade-dsvm-partial-ncpu
       - check-neutron-dsvm-functional
@@ -2399,6 +2398,7 @@ projects:
       - gate-grenade-dsvm-partial-ncpu
       - gate-swift-dsvm-functional
     experimental:
+      - check-tempest-dsvm-cells-full
       - check-tempest-dsvm-marconi
       - gate-grenade-dsvm-forward
       - check-tempest-dsvm-virtual-ironic-nv
