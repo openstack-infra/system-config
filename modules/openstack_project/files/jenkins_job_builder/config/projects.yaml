@@ -185,6 +185,14 @@
       - gate-{name}-pep8
 
 - project:
+    name: infra-manual
+    github-org: openstack-infra
+    node: bare-precise
+
+    jobs:
+      - infra-publish-jobs
+
+- project:
     name: gitdm
     github-org: openstack-infra
     node: bare-precise
