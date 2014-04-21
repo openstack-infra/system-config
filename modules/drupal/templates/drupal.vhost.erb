@@ -3,16 +3,16 @@
 # Managed by Puppet
 # ************************************
 
-NameVirtualHost <%= vhost_name %>:<%= port %>
-<VirtualHost <%= vhost_name %>:<%= port %>>
-  ServerName <%= srvname %>
-<% if serveraliases.is_a? Array -%>
-<% serveraliases.each do |name| -%><%= " ServerAlias #{name}\n" %><% end -%>
-<% elsif serveraliases != '' -%>
-<%= " ServerAlias #{serveraliases}" %>
+NameVirtualHost <%= @vhost_name %>:<%= @port %>
+<VirtualHost <%= @vhost_name %>:<%= @port %>>
+  ServerName <%= @srvname %>
+<% if @serveraliases.is_a? Array -%>
+<% @serveraliases.each do |name| -%><%= " ServerAlias #{name}\n" %><% end -%>
+<% elsif @serveraliases != '' -%>
+<%= " ServerAlias #{@serveraliases}" %>
 <% end -%>
-  DocumentRoot <%= docroot %>
-  <Directory <%= site_docroot %>>
+  DocumentRoot <%= @docroot %>
+  <Directory <%= @site_docroot %>>
     Options FollowSymLinks MultiViews
     AllowOverride None
     Order allow,deny
@@ -132,8 +132,8 @@ NameVirtualHost <%= vhost_name %>:<%= port %>
       </IfModule>
     </IfModule>
   </Directory>
-  ErrorLog /var/log/apache2/<%= name %>_error.log
+  ErrorLog /var/log/apache2/<%= @name %>_error.log
   LogLevel warn
-  CustomLog /var/log/apache2/<%= name %>_access.log combined
+  CustomLog /var/log/apache2/<%= @name %>_access.log combined
   ServerSignature Off
 </VirtualHost>
