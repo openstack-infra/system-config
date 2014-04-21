@@ -1189,7 +1189,7 @@
     builders:
       - revoke-sudo
       - gerrit-git-prep
-      - shell: "./test-*.sh"
+      - shell: "./run-tests.sh"
 
     publishers:
       - console-log
