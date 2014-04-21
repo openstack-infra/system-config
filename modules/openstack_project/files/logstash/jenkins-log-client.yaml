@@ -90,6 +90,10 @@ source-files:
     tags:
       - screen
       - oslofmt
+  - name: logs/screen-n-api-meta.txt
+    tags:
+      - screen
+      - oslofmt
   - name: logs/screen-n-cond.txt
     tags:
       - screen
