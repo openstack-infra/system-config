@@ -55,7 +55,7 @@ baseurl=http://yum.puppetlabs.com/el/6/products/$basearch
 gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-puppetlabs
 enabled=1
 gpgcheck=1
-exclude=puppet-2.8* puppet-2.9* puppet-3*
+exclude=puppet-2.8* puppet-2.9* puppet-3* facter-2*
 EOF
 
     yum update -y

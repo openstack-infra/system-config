@@ -122,6 +122,17 @@ class openstack_project::base(
 
   }
 
+  if ($::operatingsystem == 'CentOS') {
+    file { '/etc/yum.repos.d/puppetlabs.repo':
+      ensure  => present,
+      owner   => 'root',
+      group   => 'root',
+      mode    => '0444',
+      source  => 'puppet:///modules/openstack_project/centos-puppetlabs.repo',
+      replace => true,
+    }
+  }
+
   file { '/etc/puppet/puppet.conf':
     ensure  => present,
     owner   => 'root',
