@@ -2242,6 +2242,16 @@
       - pypi-jobs
 
 - project:
+    name: solum-dashboard
+    github-org: stackforge
+    node: bare-precise
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - python-jobs
+      - pypi-jobs
+
+- project:
     name: heat-translator
     github-org: stackforge
     node: bare-precise
