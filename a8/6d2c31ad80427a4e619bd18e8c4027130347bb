@@ -1,0 +1,9 @@
+Code-Review+2: James E. Blair <corvus@inaugust.com>
+Verified+2: Jenkins
+Approved+1: Sergey Lukjanov <slukjanov@mirantis.com>
+Code-Review+2: Sergey Lukjanov <slukjanov@mirantis.com>
+Submitted-by: Jenkins
+Submitted-at: Mon, 21 Apr 2014 15:00:56 +0000
+Reviewed-on: https://review.openstack.org/89361
+Project: openstack-infra/config
+Branch: refs/heads/master
