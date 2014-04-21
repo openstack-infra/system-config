@@ -721,6 +721,7 @@
 - project: stackforge/pecan
   description: A WSGI object-dispatching web framework, designed to be lean and fast with few dependencies.
   upstream: git://github.com/dreamhost/pecan.git
+  homepage: http://pecanpy.org
 - project: stackforge/puppet-ceilometer
   description: OpenStack Ceilometer Puppet Module
   acl-config: /home/gerrit2/acls/stackforge/puppet-modules.config
