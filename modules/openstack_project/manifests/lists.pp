@@ -30,6 +30,10 @@ class openstack_project::lists(
     User::Virtual::Localuser['smaffulli'],
   )
 
+  Maillist {
+    provider    => 'noaliasmailman',
+  }
+
   maillist { 'openstack-es':
     ensure      => present,
     admin       => 'flavio@redhat.com',
