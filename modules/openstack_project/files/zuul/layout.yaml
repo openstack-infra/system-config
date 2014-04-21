@@ -365,6 +365,10 @@ jobs:
   - name: ^(gate|check)-grenade-dsvm-neutron$
     branch: ^(?!stable/havana).*$
     voting: false
+  - name: ^(gate|check)-tempest-dsvm-full-icehouse
+    branch: ^(?!stable/havana).*$
+  - name: ^(gate|check)-tempest-dsvm-postgres-full-icehouse
+    branch: ^(?!stable/havana).*$
   - name: ^(gate|check)-grenade-dsvm-neutron-icehouse$
     branch: ^(?!stable/havana).*$
     voting: false
