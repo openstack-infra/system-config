@@ -2738,6 +2738,8 @@ projects:
       - noop
     gate:
       - noop
+    post:
+      - infra-manual
 
   - name: openstack-infra/jeepyb
     check:
