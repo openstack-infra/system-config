@@ -159,9 +159,11 @@
     name: infra-manual
     github-org: openstack-infra
     node: bare-precise
+    doc-publisher-site: docs.openstack.org
+    doc-publisher-folder: manual
 
     jobs:
-      - gate-{name}-docs
+      - infra-publish-jobs
 
 - project:
     name: sahara
