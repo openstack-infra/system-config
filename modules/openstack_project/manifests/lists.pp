@@ -32,6 +32,7 @@ class openstack_project::lists(
 
   maillist { 'openstack-es':
     ensure      => present,
+    provider    => 'openstack',
     admin       => 'flavio@redhat.com',
     password    => $listpassword,
     description => 'Lista de correo acerca de OpenStack en español',
@@ -41,6 +42,7 @@ class openstack_project::lists(
 
   maillist { 'openstack-fr':
     ensure      => present,
+    provider    => 'openstack',
     admin       => 'erwan.gallen@cloudwatt.com',
     password    => $listpassword,
     description => 'List of the OpenStack french user group',
@@ -50,6 +52,7 @@ class openstack_project::lists(
 
   maillist { 'openstack-i18n':
     ensure      => present,
+    provider    => 'openstack',
     admin       => 'guoyingc@cn.ibm.com',
     password    => $listpassword,
     description => 'List of the OpenStack Internationalization team.',
@@ -59,6 +62,7 @@ class openstack_project::lists(
 
   maillist { 'openstack-it':
     ensure      => present,
+    provider    => 'openstack',
     admin       => 'stefano@openstack.org',
     password    => $listpassword,
     description => 'Discussioni su OpenStack in italiano',
@@ -68,6 +72,7 @@ class openstack_project::lists(
 
   maillist { 'openstack-travel-committee':
     ensure      => present,
+    provider    => 'openstack',
     admin       => 'communitymngr@openstack.org',
     password    => $listpassword,
     description => 'Private discussions for the OpenStack Travel Program Committee for Hong Kong Summit 2013.',
@@ -77,6 +82,7 @@ class openstack_project::lists(
 
   maillist { 'openstack-personas':
     ensure      => present,
+    provider    => 'openstack',
     admin       => 'pieter.c.kruithof-jr@hp.com',
     password    => $listpassword,
     description => 'A group of designers, researchers, developers, writers and users that are creating a set of personas for OpenStack that are intended to help drive development around the needs of our users.',
@@ -86,6 +92,7 @@ class openstack_project::lists(
 
   maillist { 'openstack-vi':
     ensure      => present,
+    provider    => 'openstack',
     admin       => 'hang.tran@dtt.vn',
     password    => $listpassword,
     description => 'Discussions in Vietnamese - please add Vietnamese translation here',
@@ -95,6 +102,7 @@ class openstack_project::lists(
 
   maillist { 'nov-2013-track-chairs':
     ensure      => present,
+    provider    => 'openstack',
     admin       => 'claire@openstack.org',
     password    => $listpassword,
     description => 'Coordination of tracks at OpenStack Summit April 2013',
@@ -104,6 +112,7 @@ class openstack_project::lists(
 
   maillist { 'openstack-track-chairs':
     ensure      => present,
+    provider    => 'openstack',
     admin       => 'claire@openstack.org',
     password    => $listpassword,
     description => 'Coordination of tracks at OpenStack Summits',
@@ -113,6 +122,7 @@ class openstack_project::lists(
 
   maillist { 'openstack-sos':
     ensure      => present,
+    provider    => 'openstack',
     admin       => 'dms@danplanet.com',
     password    => $listpassword,
     description => 'Coordination of activities for Significant Others at Summits',
@@ -122,6 +132,7 @@ class openstack_project::lists(
 
   maillist { 'elections-committee':
     ensure      => present,
+    provider    => 'openstack',
     admin       => 'markmc@redhat.com',
     password    => $listpassword,
     description => 'Discussions of the OpenStack Foundation Elections Committee',
@@ -131,6 +142,7 @@ class openstack_project::lists(
 
   maillist { 'defcore-committee':
     ensure      => present,
+    provider    => 'openstack',
     admin       => 'josh@openstack.org',
     password    => $listpassword,
     description => 'Discussions of the OpenStack Foundation Core Definition Committee',
@@ -141,6 +153,7 @@ class openstack_project::lists(
 
   maillist { 'ambassadors':
     ensure      => present,
+    provider    => 'openstack',
     admin       => 'tom@openstack.org',
     password    => $listpassword,
     description => 'Private discussions between OpenStack Ambassadors',
@@ -150,6 +163,7 @@ class openstack_project::lists(
 
   maillist { 'openstack-content':
     ensure      => present,
+    provider    => 'openstack',
     admin       => 'margie@openstack.org',
     password    => $listpassword,
     description => 'Discussions of the OpenStack Content team',
