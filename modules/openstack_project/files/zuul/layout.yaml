@@ -494,25 +494,11 @@ jobs:
     voting: false
   - name: gate-python-mistralclient-python33
     voting: false
-  - name: gate-murano-metadataclient-python33
-    voting: false
-  - name: gate-murano-common-python33
-    voting: false
   - name: gate-python-muranoclient-python33
-    voting: false
-  - name: gate-murano-repository-python33
     voting: false
   - name: gate-murano-api-requirements
     voting: false
-  - name: gate-murano-repository-requirements
-    voting: false
-  - name: gate-murano-conductor-requirements
-    voting: false
-  - name: gate-murano-common-requirements
-    voting: false
   - name: gate-python-muranoclient-requirements
-    voting: false
-  - name: gate-murano-metadataclient-requirements
     voting: false
   - name: gate-murano-dashboard-requirements
     voting: false
@@ -3661,44 +3647,15 @@ projects:
 
   - name: stackforge/murano-common
     check:
-      - gate-murano-common-pep8
-      - gate-murano-common-python26
-      - gate-murano-common-python27
-      - gate-murano-common-python33
-      - gate-murano-common-requirements
-      - gate-murano-devstack-dsvm
+      - noop
     gate:
-      - gate-murano-common-pep8
-      - gate-murano-common-python26
-      - gate-murano-common-python27
-    post:
-      - murano-common-branch-tarball
-    pre-release:
-      - murano-common-tarball
-    release:
-      - murano-common-tarball:
-        - murano-common-pypi-upload:
-          - post-mirror-python26
-          - post-mirror-python27
-          - post-mirror-python33
+      - noop
 
   - name: stackforge/murano-conductor
     check:
-      - gate-murano-conductor-pep8
-      - gate-murano-conductor-python26
-      - gate-murano-conductor-python27
-      - gate-murano-conductor-requirements
-      - gate-murano-devstack-dsvm
+      - noop
     gate:
-      - gate-murano-conductor-pep8
-      - gate-murano-conductor-python26
-      - gate-murano-conductor-python27
-    post:
-      - murano-conductor-branch-tarball
-    pre-release:
-      - murano-conductor-tarball
-    release:
-      - murano-conductor-tarball
+      - noop
 
   - name: stackforge/murano-dashboard
     check:
@@ -3732,49 +3689,15 @@ projects:
 
   - name: stackforge/murano-metadataclient
     check:
-      - gate-murano-metadataclient-pep8
-      - gate-murano-metadataclient-python26
-      - gate-murano-metadataclient-python27
-      - gate-murano-metadataclient-python33
-      - gate-murano-metadataclient-requirements
-      - gate-murano-devstack-dsvm
+      - noop
     gate:
-      - gate-murano-metadataclient-pep8
-      - gate-murano-metadataclient-python26
-      - gate-murano-metadataclient-python27
-    post:
-      - murano-metadataclient-branch-tarball
-    pre-release:
-      - murano-metadataclient-tarball
-    release:
-      - murano-metadataclient-tarball:
-        - murano-metadataclient-pypi-upload:
-          - post-mirror-python26
-          - post-mirror-python27
-          - post-mirror-python33
+      - noop
 
   - name: stackforge/murano-repository
     check:
-      - gate-murano-repository-pep8
-      - gate-murano-repository-python26
-      - gate-murano-repository-python27
-      - gate-murano-repository-python33
-      - gate-murano-repository-requirements
-      - gate-murano-devstack-dsvm
+      - noop
     gate:
-      - gate-murano-repository-pep8
-      - gate-murano-repository-python26
-      - gate-murano-repository-python27
-    post:
-      - murano-repository-branch-tarball
-    pre-release:
-      - murano-repository-tarball
-    release:
-      - murano-repository-tarball:
-        - murano-repository-pypi-upload:
-          - post-mirror-python26
-          - post-mirror-python27
-          - post-mirror-python33
+      - noop
 
   - name: stackforge/murano-tests
     check:
