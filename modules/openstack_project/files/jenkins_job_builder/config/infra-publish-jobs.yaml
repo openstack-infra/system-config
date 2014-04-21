@@ -1,0 +1,40 @@
+- job-template:
+    name: 'gate-{name}-docs'
+    node: '{node}'
+
+    builders:
+        - revoke-sudo
+        - gerrit-git-prep
+        - docs:
+            github-org: '{github-org}'
+            project: '{name}'
+
+    publishers:
+        - upload-sphinx-draft
+        - console-log
+
+- job-template:
+    name: '{name}-infra-docs'
+    node: '{node}'
+
+    builders:
+        - revoke-sudo
+        - gerrit-git-prep
+        - docs:
+            github-org: '{github-org}'
+            project: '{name}'
+
+    publishers:
+        - console-log
+        - ftp:
+            site: '{doc-publisher-site}'
+            source: 'doc/build/html/**'
+            target: 'infra/{doc-publisher-folder}'
+            remove-prefix: 'doc/build/html'
+            excludes: ''
+
+- job-group:
+    name: infra-publish-jobs
+    jobs:
+        - 'gate-{name}'
+        - '{name}'
