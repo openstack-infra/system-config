@@ -1281,26 +1281,20 @@ projects:
           - post-mirror-python33
       - python-heatclient-docs
 
-# TODO: add docs
   - name: openstack/python-ironicclient
+    template:
+      - name: python-jobs
+      - name: openstack-client-publish-jobs
+      - name: check-requirements
     check:
-      - gate-python-ironicclient-pep8
-      - gate-python-ironicclient-python26
-      - gate-python-ironicclient-python27
       - gate-python-ironicclient-python33
       - gate-python-ironicclient-pypy
     check-tripleo:
       - check-tripleo-ironic-seed-precise
       - check-tripleo-ironic-undercloud-precise
     gate:
-      - gate-python-ironicclient-pep8
-      - gate-python-ironicclient-python26
-      - gate-python-ironicclient-python27
       - gate-python-ironicclient-python33
       - gate-python-ironicclient-pypy
-    post:
-      - python-ironicclient-branch-tarball
-      - python-ironicclient-coverage
     pre-release:
       - python-ironicclient-tarball
     release:
