@@ -28,7 +28,7 @@ add 'PUSH' to Administrators and save settings
 
 # Test and verify
 Checkout contrail-controller project
-git clone git@github.com:rombie/contrail-controller
+git clone git@github.com:Juniper/contrail-controller
 git checkout -b test
 Make a sample change and git commit
 git review

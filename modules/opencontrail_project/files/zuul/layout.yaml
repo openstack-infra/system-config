@@ -12,7 +12,7 @@ pipelines:
         - event: patchset-created
         - event: change-restored
         - event: comment-added
-          comment_filter: (?i)^(Patch Set [0-9]+:\n\n)?\s*recheck(( (?:bug|lp)[\s#:]*(\d+))|( no bug))\s*$
+          comment_filter: (?i)^\s*recheck(( (?:bug|lp)[\s#:]*(\d+))|( no bug))\s*$
         - event: comment-added
           require-approval:
             - username: jenkins
@@ -23,7 +23,7 @@ pipelines:
             - username: jenkins
               older-than: 24h
         - event: comment-added
-          comment_filter: (?i)^(Patch Set [0-9]+:\n\n)?\s*reverify( (?:bug|lp)[\s#:]*(\d+))\s*$
+          comment_filter: (?i)^\s*reverify( (?:bug|lp)[\s#:]*(\d+))\s*$
           require-approval:
             - approved: 1
             - username: jenkins
@@ -59,21 +59,21 @@ pipelines:
         - event: comment-added
           require-approval:
             - verified: 1
-              username: jenkins
+              username: zuul
               newer-than: 24h
           approval:
             - approved: 1
         - event: comment-added
           require-approval:
             - verified: 2
-              username: jenkins
+              username: zuul
               newer-than: 24h
           approval:
             - approved: 1
         - event: comment-added
           approval:
             - verified: 1
-          username_filter: jenkins
+          username_filter: zuul
     start:
       gerrit:
         verified: 0
@@ -265,8 +265,7 @@ project-templates:
     gate:
       - 'gate-{name}-build'
     post:
-      - '{name}-branch-tarball'
-      - '{name}-coverage'
+      - 'gate-{name}-build'
 
 jobs:
   - name: ^.*$
@@ -275,19 +274,26 @@ jobs:
 # The project list is grouped by type of project, and within each
 # group, projects are sorted (mostly) alphabetically.
 projects:
-
-# Section: OpenContrail server projects
-
   - name: stackforge/contrail-controller
-    template:
-      - name: contrail-jobs
     check:
       - gate-contrail-controller-build
     silent:
-      - gate-contrail-controller-build
+      - noop
     check-tripleo:
-      - gate-contrail-controller-build
+      - noop
     gate:
-      - gate-contrail-controller-build
+      - noop
     post:
+      - noop
+
+  - name: Juniper/contrail-controller
+    check:
       - gate-contrail-controller-build
+    silent:
+      - noop
+    check-tripleo:
+      - noop
+    gate:
+      - noop
+    post:
+      - noop

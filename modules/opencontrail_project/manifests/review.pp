@@ -137,13 +137,13 @@ class opencontrail_project::review (
     swift_username                      => $swift_username,
     swift_password                      => $swift_password,
     replication                         => [
-#     {
-#       name                 => 'github',
-#       url                  => 'git@github.com:',
-#       authGroup            => 'Anonymous Users',
-#       replicatePermissions => false,
-#       mirror               => true,
-#     },
+      {
+        name                 => 'github',
+        url                  => 'git@github.com:',
+        authGroup            => 'Anonymous Users',
+        replicatePermissions => false,
+        mirror               => false, # Turn this to true when ready.
+      },
 #     {
 #       namee                => 'local',
 #       url                  => 'file:///var/lib/git/',
