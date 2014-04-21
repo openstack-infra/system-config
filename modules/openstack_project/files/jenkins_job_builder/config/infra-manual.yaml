@@ -1,0 +1,20 @@
+- job:
+    name: infra-manual
+    node: bare-precise
+
+    wrappers:
+        - timeout:
+            timeout: 40
+            fail: true
+        - timestamps
+
+    builders:
+        - revoke-sudo
+        - gerrit-git-prep
+        - docs:
+            github.org: openstack
+            project: infra
+
+    publishers:
+        - console-log
+        - upload-sphinx-draft
