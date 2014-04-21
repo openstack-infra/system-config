@@ -1,0 +1,13 @@
+Code-Review+2: James E. Blair <corvus@inaugust.com>
+Verified+2: Jenkins
+Approved+1: Clark Boylan <cboylan@sapwetik.org>
+Code-Review+2: Clark Boylan <cboylan@sapwetik.org>
+Code-Review+1: Elizabeth Krumbach Joseph <lyz@princessleia.com>
+Code-Review+1: Sergey Lukjanov <slukjanov@mirantis.com>
+Code-Review+1: Joshua Hesketh <joshua.hesketh@rackspace.com>
+Code-Review+1: Aaron Greengrass <aaron@greenbtn.com>
+Submitted-by: Jenkins
+Submitted-at: Mon, 21 Apr 2014 21:15:16 +0000
+Reviewed-on: https://review.openstack.org/82373
+Project: openstack-infra/config
+Branch: refs/heads/master
