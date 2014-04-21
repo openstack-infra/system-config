@@ -804,6 +804,9 @@
   description: Client for OpenStack Climate
   acl-config: /home/gerrit2/acls/stackforge/climate.config
 - project: stackforge/python-designateclient
+- project: stackforge/python-jenkins
+  upstream: git://github.com/jeblair/python-jenkins.git
+  description: Python API for managing jobs and nodes in a Jenkins CI instance
 - project: stackforge/python-kiteclient
   description: Python bindings to Kite.
 - project: stackforge/python-libraclient
