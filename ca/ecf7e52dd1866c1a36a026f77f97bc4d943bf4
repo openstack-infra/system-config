@@ -1,0 +1,16 @@
+Approved+1: James E. Blair <corvus@inaugust.com>
+Code-Review+2: James E. Blair <corvus@inaugust.com>
+Verified+2: Jenkins
+Code-Review+1: Jonathan LaCour <jonathan@cleverdevil.org>
+Code-Review+1: Doug Hellmann <doug.hellmann@dreamhost.com>
+Approved+1: Clark Boylan <cboylan@sapwetik.org>
+Code-Review+2: Clark Boylan <cboylan@sapwetik.org>
+Code-Review+2: Sergey Lukjanov <slukjanov@mirantis.com>
+Code-Review+1: Joshua Hesketh <joshua.hesketh@rackspace.com>
+Code-Review+1: Sergey Skripnick <sskripnick@mirantis.com>
+Code-Review+1: Alfredo Deza <launchpad@deza.pe>
+Submitted-by: Jenkins
+Submitted-at: Mon, 21 Apr 2014 22:35:31 +0000
+Reviewed-on: https://review.openstack.org/84302
+Project: openstack-infra/config
+Branch: refs/heads/master
