@@ -338,6 +338,12 @@ project-templates:
     periodic:
       - '{name}-manuals-propose-translation-update'
 
+  - name: infra-publish-jobs
+    check:
+      - 'gate-{name}'
+    post:
+      - '{name}'
+
 jobs:
   - name: ^.*$
     parameter-function: single_use_node
@@ -2820,8 +2826,8 @@ projects:
       - groups-release-master
 
   - name: openstack-infra/infra-manual
-    check:
-      - noop
+    template:
+      - name: infra-publish-jobs
     gate:
       - noop
 
