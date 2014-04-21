@@ -2735,9 +2735,11 @@ projects:
 
   - name: openstack-infra/infra-manual
     check:
-      - noop
+      - gate-infra-manual
     gate:
       - noop
+    post:
+      - infra-manual
 
   - name: openstack-infra/jeepyb
     check:

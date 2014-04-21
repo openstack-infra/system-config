@@ -1,0 +1,34 @@
+- job:
+    name: gate-infra-manual
+    node: bare-precise
+
+    builders:
+        - revoke-sudo
+        - gerrit-git-prep
+        - docs:
+            github-org: openstack-infra
+            project: infra-manual
+
+    publishers:
+        - upload-sphinx-draft
+        - console-log
+
+- job:
+    name: infra-manual
+    node: bare-precise
+
+    builders:
+        - revoke-sudo
+        - gerrit-git-prep
+        - docs:
+            github-org: openstack-infra
+            project: infra-manual
+
+    publishers:
+        - console-log
+        - ftp:
+            site: docs.openstack.org
+            source: 'doc/build/html/**'
+            target: 'infra/manual/'
+            remove-prefix: 'doc/build/html'
+            excludes: ''
