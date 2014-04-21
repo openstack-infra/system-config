@@ -378,6 +378,9 @@ jobs:
     voting: false
   - name: check-tempest-dsvm-cells-full
     voting: false
+  # tempest and d-g branchless tests need to only run on master
+  - name: ^.*(-icehouse|-havana)$
+    branch: ^master.*$
 # For Gerrit ver 2.4.x (using maven)
   - name: ^(gate|check)-gerrit-unittests$
     branch: ^openstack/2\.4.*$
