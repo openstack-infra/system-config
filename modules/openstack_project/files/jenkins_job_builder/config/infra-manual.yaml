@@ -1,0 +1,33 @@
+- job:
+    name: check-infra-manual
+    node: bare-precise
+
+    builders:
+        - revoke-sudo
+        - gerrit-git-prep
+        - docs:
+            github-org: openstack
+            project: infra
+
+    publishers:
+        - upload-sphinx-draft
+
+- job:
+    name: infra-manual
+    node: bare-precise
+
+    builders:
+        - revoke-sudo
+        - gerrit-git-prep
+        - docs:
+            github-org: openstack
+            project: infra
+
+    publishers:
+        - console-log
+        - ftp:
+            site: docs.openstack.org
+            source: 'doc/build/html/**'
+            target: 'infra/manual/'
+            remove-prefix: 'doc/build/html'
+            excludes: ''
