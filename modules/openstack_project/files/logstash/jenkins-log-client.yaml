@@ -90,6 +90,10 @@ source-files:
     tags:
       - screen
       - oslofmt
+  - name: logs/screen-n-api-meta.txt
+    tags:
+      - screen
+      - oslofmt
   - name: logs/screen-n-cond.txt
     tags:
       - screen
@@ -204,6 +208,10 @@ source-files:
     tags:
       - screen
       - oslofmt
+  - name: logs/new/screen-n-api-meta.txt
+    tags:
+      - screen
+      - oslofmt
     job-filter: '.*grenade.*'
   - name: logs/new/screen-n-cond.txt
     tags:
@@ -277,6 +285,10 @@ source-files:
       - keystonefmt
     job-filter: '.*grenade.*'
   - name: logs/old/screen-n-api.txt
+    tags:
+      - screen
+      - oslofmt
+  - name: logs/old/screen-n-api-meta.txt
     tags:
       - screen
       - oslofmt
