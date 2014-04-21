@@ -61,7 +61,7 @@ class openstack_project::jenkins (
     version => '1.20',
   }
   jenkins::plugin { 'build-timeout':
-    version => '1.10',
+    version => '1.13',
   }
   jenkins::plugin { 'copyartifact':
     version => '1.22',
