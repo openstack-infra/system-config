@@ -333,6 +333,10 @@ project-templates:
 jobs:
   - name: ^.*$
     parameter-function: single_use_node
+  # tempest and d-g branchless tests need to only run on master
+  # (needs to be early to not impact non-voting stanzas later)
+  - name: ^.*(-icehouse|-havana)$
+    branch: ^master.*$
   # jobs run on the proposal worker
   - name: ^.*(merge-release-tags|(propose|upstream)-(requirements|translation)-updates?)$
     parameter-function: reusable_node
@@ -394,9 +398,6 @@ jobs:
     voting: false
   - name: check-tempest-dsvm-cells-full
     voting: false
-  # tempest and d-g branchless tests need to only run on master
-  - name: ^.*(-icehouse|-havana)$
-    branch: ^master.*$
 # For Gerrit ver 2.4.x (using maven)
   - name: ^(gate|check)-gerrit-unittests$
     branch: ^openstack/2\.4.*$
