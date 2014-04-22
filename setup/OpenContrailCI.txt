@@ -1,9 +1,3 @@
-Hi,
-
-A baseline for next OpenContrail CI discussion..
-
-...
-
 A sample setup of puppetmaster, gerrit, zuul and jenkins servers is
 complete in a local lab machine. In this setup, I can submit a patch and get
 it verified via jenkins job. Later I see that the changes get merged too
@@ -108,6 +102,3 @@ o OpenContrail CI Maintenance
 
   If and how do we merge changes (bug fixes, etc.) from upstream OpenStack CI.
   Most of the stuff has been renamed to OpenContrail. So auto-merge won't work.
-
-Thanks,
-Ananth
