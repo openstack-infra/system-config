@@ -429,6 +429,8 @@ jobs:
     voting: false
     failure-message: Jenkins XML output has changed.
     success-message: Jenkins XML output is unchanged.
+  - name: gate-jenkins-job-builder-python33
+    voting: false
   - name: gate-config-irc-access
     voting: false
     files:
@@ -2762,6 +2764,7 @@ projects:
   - name: openstack-infra/jenkins-job-builder
     template:
       - name: python-jobs
+      - name: python3-jobs
     check:
       - jenkins-job-builder-compare-xml
     post:
