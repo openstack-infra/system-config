@@ -43,7 +43,8 @@ class openstack_project::git_backend (
     behind_proxy            => $behind_proxy,
   }
 
-  # We don't actually use these, but jeepyb requires them.
+  # We don't actually use these variables in this manifest, but jeepyb
+  # requires them to exist.
   $local_git_dir = '/var/lib/git'
   $ssh_project_key = ''
 
