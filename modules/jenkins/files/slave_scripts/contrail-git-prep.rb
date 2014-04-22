@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
-# Find the project e.g. ZUUL_PROJECT : stackforge/contrail-controller
+# Find the project e.g. ZUUL_PROJECT=Juniper/contrail-controller
 if ENV['ZUUL_PROJECT'] !~ /Juniper\/(.*)/ then
     puts "Error: Cannot find project information off ZUUL_PROJECT : " +
          "#{ENV['ZUUL_PROJECT']}"
