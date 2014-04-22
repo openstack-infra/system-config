@@ -18,11 +18,11 @@
 
 HOSTNAME=$1
 SUDO='false'
-BARE='false'
+THIN='false'
 PYTHON3='true'
 PYPY='true'
 ALL_MYSQL_PRIVS='true'
 
-./prepare_node.sh "$HOSTNAME" "$SUDO" "$BARE" "$PYTHON3" "$PYPY" "$ALL_MYSQL_PRIVS"
+./prepare_node.sh "$HOSTNAME" "$SUDO" "$THIN" "$PYTHON3" "$PYPY" "$ALL_MYSQL_PRIVS"
 ./fix_pip.sh
 ./restrict_memory.sh
