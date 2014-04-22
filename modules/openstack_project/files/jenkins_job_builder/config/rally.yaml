@@ -11,6 +11,18 @@
       - console-log
 
 
+- publisher:
+    name: rally-plot
+    publishers:
+      - scp:
+          site: 'static.openstack.org'
+          files:
+            - target: 'logs/$LOG_PATH'
+              source: 'rally-plot/**'
+              keep-hierarchy: true
+              copy-after-failure: true
+
+
 - builder:
     name: devstack-rally-gate
     builders:
@@ -49,6 +61,7 @@
     publishers:
       - devstack-logs
       - console-log
+      - rally-plot
 
 
 - job-group:
