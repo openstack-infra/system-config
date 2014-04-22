@@ -18,9 +18,9 @@
 
 HOSTNAME=$1
 SUDO='true'
-BARE='true'
+THIN='true'
 
-./prepare_node.sh "$HOSTNAME" "$SUDO" "$BARE"
+./prepare_node.sh "$HOSTNAME" "$SUDO" "$THIN"
 sudo -u jenkins -i /opt/nodepool-scripts/prepare_devstack.sh $HOSTNAME
 
 ./restrict_memory.sh
