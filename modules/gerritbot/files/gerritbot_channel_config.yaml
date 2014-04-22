@@ -375,7 +375,7 @@ openstack-barbican:
     branches:
       - master
 
-fuel-dev:
+fuel-tracker:
     events:
       - patchset-created
       - change-merged

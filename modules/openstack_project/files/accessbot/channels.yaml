@@ -52,7 +52,7 @@ global:
 channels:
   - name: edeploy
     mask: full_mask
-  - name: fuel-dev
+  - name: fuel-tracker
     mask: full_mask
   - name: heat
   - name: magnetodb
