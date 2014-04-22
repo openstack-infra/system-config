@@ -1,14 +1,14 @@
 #!/usr/bin/env ruby
 
 # Find the project e.g. ZUUL_PROJECT : stackforge/contrail-controller
-if ENV['ZUUL_PROJECT'] !~ /stackforge\/(.*)/ then
+if ENV['ZUUL_PROJECT'] !~ /Juniper\/(.*)/ then
     puts "Error: Cannot find project information off ZUUL_PROJECT : " +
          "#{ENV['ZUUL_PROJECT']}"
     exit -1
 end
 
 @project = $1
-@project = "controller" if @project == "contrail-controller" # Temporary hack
+# @project = "controller" if @project == "contrail-controller" # Temporary hack
 puts "Working with project #{@project}"
 
 GERRIT_SITE="https://review.opencontrail.org" # ARGV[0]
@@ -21,17 +21,20 @@ end
 
 def sh (cmd, ignore = false)
     puts "#{cmd}"
+    exit_code = 0
     if not dry_run? then
         if cmd =~ /^cd\s+(.*)/ then
             Dir.chdir($1)
         else
             output = `#{cmd}`
+            exit_code = $? unless ignore
         end
     end
     puts output if !output.nil? and !output.empty?
 
-    if !dry_run? and !ignore and $? != 0 then
+    if exit_code != 0 then
         puts "Comamnd #{cmd} failed with exit code #{$?}"
+        exit exit_code
     end
     return output
 end
@@ -51,7 +54,7 @@ def setup_contrail_repo
     sh "mkdir #{TOP}/repo"
     sh "cd #{TOP}/repo"
 
-    # Initialize a repo - Need to retrieve
+    # Initialize a repo. TODO Do not hard code manifest.xml file path
     sh "/usr/local/jenkins/slave_scripts/repo init " +
        "-u git@github.com:Juniper/contrail-vnc-private " +
        "-m mainline/ubuntu-12-04/manifest-havana.xml"
@@ -60,11 +63,22 @@ def setup_contrail_repo
     sh "/usr/local/jenkins/slave_scripts/repo sync"
 end
 
+# TODO Ideally, we should tweak .repo/manifest.xml to directly fetch project
+# off gerrit.
 def switch_gerrit_repo
 
-    # Now, switch to project's git repo.
-    sh "mv #{TOP}/repo/#{@project} #{TOP}/repo/.#{@project}.orig"
-    sh "mv #{TOP}/#{@project} #{TOP}/repo/#{@project}"
+    # Find the project git repo based on .repo/manifest.xml file
+    out = sh "\grep name=\\\"#{@project} .repo/manifest.xml"
+    if out !~ /path=\"(.*?)\"/ then
+        puts "Error! Cannot find project #{@project} path in .repo/manifest.xml"
+        exit -1
+    end
+
+    old_project = $1
+
+    # Now, switch old_project to project's git repo fetched from gerrit.
+    sh "mv #{TOP}/repo/#{old_project} #{TOP}/repo/#{old_project}.orig"
+    sh "mv #{TOP}/#{@project} #{TOP}/repo/#{old_project}"
 end
 
 def pre_build_setup
