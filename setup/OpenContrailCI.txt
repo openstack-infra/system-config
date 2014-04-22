@@ -1,0 +1,113 @@
+Hi,
+
+A baseline for next OpenContrail CI discussion..
+
+...
+
+A sample setup of puppetmaster, gerrit, zuul and jenkins servers is
+complete in a local lab machine. In this setup, I can submit a patch and get
+it verified via jenkins job. Later I see that the changes get merged too
+in the git repo hosted by gerrit. There is replication configuration
+which enables to replicate the merged commits to any upstream, such as
+github.com/Juniper/...
+
+This whole process is automated only partially. Now, we need to redo this
+in the target systems.
+
+Vinay, can you please add items that I might have missed here.
+
+o OpenStack CI suggests to use a cluster manager. I believe, they use RackSpace.
+  What should we use ? At the moment, I am launching each node manually using
+  VirtualBox. We could use our 1.05..
+
+o Fork (CI infra) OpenStack/config into Juniper/config and apply changes from
+  my private repo
+
+o User management
+  For each of the Juniper project that needs to be part of the CI, we need
+  to 
+    o create a project in zuul and gerrit
+    o Create project specific group such as contrail-controller-core
+    o Add necessary users (launch pad ids) to these groups
+
+o Key management
+   All the key components of the CI interact using ssh/https. We need to
+   generate, maintain and periodically update these ssh keys http certificates
+   via puppet
+
+o Projects management
+   o Need to address how certain commits can go directly to github bypassing
+     gerrit (CI). At the moment, we get into rebase issues if commits are made
+     to github bypassing the CI system. This is especially needed in the
+     initial states, when CI system itself is new and unstable
+
+   o Merge conflicts
+
+   o Mutually incompatible changes
+     Today, CI mechanism works on individual git repo basis. i.e, if a change
+     is submitted to contrail-controller project, then we checkout the repo
+     using repo command in the usual way, then replace controller with 
+     contrail-controller off gerrit (which contains the review patch)
+     and then do necessary builds, tests, etc.
+
+     We need to see if and how to solve mutually dependent changes such as
+     changes to both tools/sandesh and controller which need each other for
+     proper build. In gerrit, this would be two separate review entries
+     handled independently
+
+  o Branch management
+     It is not clear yet to me, how we do branch management. At the moment,
+     repo checkout command we run is hard-coded to use mainline havana.
+
+  o Jenkins master and slaves
+     Need to make the while process elastic. OpenStack CI has nodepool
+     concept. We need to incorporate them
+
+o CI infra issues
+   So far, we have seen following issues intermittently.
+
+   o gerrit stops responding after a day (Vinay, you have a timeout fix
+     for this ? If so, can u please commit)
+
+   o Jenkins stops downloading jobs to zuul-gearman
+       Workaround is to disable and enable jenkins job using jenkins CLI
+       Restart zuul and jenkins service
+
+o OpenContrail CI infrastructure testing
+   As we scale this project, we will hit bugs, request for new features, etc.
+   Need to see how we can have a quick parallel test setup which can be used
+   to test CI infra changes, before they are checked in and propagated to
+   production CI.
+
+o Complete automation of CI infra setup
+  Today, CI infra does use puppet and hence is already automated. But
+  But this is not complete. There are some additional steps that we
+  constantly need to do, when ever a node needs to be setup afresh. I
+  have automated most of the gerrit's setup. We need a similar setup
+  script for Jenkins as well which does so using Jenkins CLI.
+
+o Jenkins jobs from external network to internal network
+   We need ability to launch tests in internal (jenkins) nodes. One simple way
+   would be to construct ssh tunnels using remote port forwarding, and then
+   make new servers directly available as jenkins slaves to zuul
+
+o Change logs, images. etc.
+   Many images and links point to OpenStack. They should point to OpenContrail
+
+o Some of the nodes that have nee setup yet (We may not need them as well)
+   status.opencontrail.org
+   logs.opencontrail.org
+   git.opencontrail.org
+   nodepool
+   etc.
+
+o OpenContrail CI Maintenance
+  IMO, we need 2 engineers full time to maintain and support this. As we move
+  all the commits to go through CI, this team would become very important to
+  make sure that the normal development process is not affected.
+
+  If and how do we merge changes (bug fixes, etc.) from upstream OpenStack CI.
+  Most of the stuff has been renamed to OpenContrail. So auto-merge won't work.
+
+Thanks,
+Ananth
