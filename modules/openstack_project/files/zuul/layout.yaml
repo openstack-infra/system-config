@@ -534,10 +534,6 @@ jobs:
     voting: false
   - name: gate-oslo-incubator-python33
     branch: ^(?!stable/havana).*$
-  - name: gate-nova-docker-python26
-    voting: false
-  - name: gate-nova-docker-python27
-    voting: false
   - name: check-neutron-dsvm-functional
     branch: ^(?!stable/havana).*$
     voting: false
