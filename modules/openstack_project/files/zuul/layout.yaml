@@ -2674,8 +2674,10 @@ projects:
   - name: openstack-infra/gerrit-powered-agenda
     check:
       - gate-gerrit-powered-agenda-pep8
+      - gate-gerrit-powered-agenda-python33
     gate:
       - gate-gerrit-powered-agenda-pep8
+      - gate-gerrit-powered-agenda-python33
 
   - name: openstack-infra/gerritbot
     check:
