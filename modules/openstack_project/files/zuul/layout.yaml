@@ -494,6 +494,10 @@ jobs:
     voting: false
   - name: gate-mistral-extra-python33
     voting: false
+  - name: python-jenkins-coverage
+    voting: false
+  - name: gate-python-jenkins-python33
+    voting: false
   - name: gate-python-mistralclient-python33
     voting: false
   - name: gate-python-muranoclient-python33
@@ -2897,10 +2901,29 @@ projects:
           - post-mirror-python33
 
   - name: stackforge/python-jenkins
+    # docs is missing a build_sphinx entry point in setup.py
     check:
-      - noop
+      #- gate-python-jenkins-docs
+      - gate-python-jenkins-pep8
+      - gate-python-jenkins-python26
+      - gate-python-jenkins-python27
+      - gate-python-jenkins-python33
+      - python-jenkins-coverage
     gate:
-      - noop
+      #- gate-python-jenkins-docs
+      - gate-python-jenkins-pep8
+      - gate-python-jenkins-python26
+      - gate-python-jenkins-python27
+      #- gate-python-jenkins-python33
+    post:
+      - python-jenkins-branch-tarball
+      - python-jenkins-coverage
+    release:
+      - python-jenkins-tarball:
+        - python-jenkins-pypi-upload:
+          - post-mirror-python26
+          - post-mirror-python27
+          - post-mirror-python33
 
   - name: openstack-infra/releasestatus
     check:
