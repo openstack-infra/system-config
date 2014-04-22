@@ -399,6 +399,8 @@
   description: The TripleO incubator where unformed things are experimented with.
   options:
     - direct-release
+- project: openstack/tripleo-specs
+  group: tripleo
 - project: openstack/trove
 - project: openstack/trove-integration
 - project: openstack/tuskar
