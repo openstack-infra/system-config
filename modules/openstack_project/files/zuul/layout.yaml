@@ -2306,6 +2306,14 @@ projects:
     release:
       - tripleo-incubator-docs
 
+  - name: openstack/tripleo-specs
+    check:
+      - gate-tripleo-specs-python27
+      - gate-tripleo-specs-docs
+    gate:
+      - gate-tripleo-specs-python27
+      - gate-tripleo-specs-docs
+
   - name: openstack/trove-integration
     check:
       - noop

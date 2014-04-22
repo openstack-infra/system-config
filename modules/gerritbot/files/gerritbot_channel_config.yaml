@@ -134,6 +134,7 @@ tripleo:
       - openstack/tripleo-heat-templates
       - openstack/tripleo-image-elements
       - openstack/tripleo-incubator
+      - openstack/tripleo-specs
       - openstack/tuskar
       - openstack/tuskar-ui
     branches:
