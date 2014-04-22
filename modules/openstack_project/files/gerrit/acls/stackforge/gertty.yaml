@@ -1,0 +1,13 @@
+[access "refs/heads/*"]
+        label-Code-Review = -2..+2 group gertty-core
+        label-Approved = +0..+1 group gertty-core
+        workInProgress = group gertty-core
+[access "refs/tags/*"]
+        create = group gertty-core
+        pushTag = group gertty-core
+[project]
+        state = active
+[receive]
+        requireChangeId = true
+[submit]
+        mergeContent = true
