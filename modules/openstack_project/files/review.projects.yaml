@@ -598,6 +598,8 @@
   description: Fuel UI
   upstream: git://github.com/Mirantis/fuelweb.git
   acl-config: /home/gerrit2/acls/stackforge/fuel.config
+- project: stackforge/gertty
+  description: Console interface to Gerrit Code Review
 - project: stackforge/gce-api
   description: Google Compute Engine API support for OpenStack
 - project: stackforge/golang-client
