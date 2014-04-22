@@ -2897,10 +2897,8 @@ projects:
           - post-mirror-python33
 
   - name: stackforge/python-jenkins
-    check:
-      - noop
-    gate:
-      - noop
+    template:
+      - name: python-jobs
 
   - name: openstack-infra/releasestatus
     check:
