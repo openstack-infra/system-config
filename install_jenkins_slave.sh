@@ -48,4 +48,4 @@ fi
 git clone https://git.openstack.org/openstack-infra/config
 bash config/install_modules.sh
 
-puppet apply --modulepath=`pwd`/config/modules:/etc/puppet/modules -e 'node default {class { "openstack_project::bare_slave": install_users => false }}'
+puppet apply --modulepath=`pwd`/config/modules:/etc/puppet/modules -e 'node default {class { "openstack_project::simple_slave": install_users => false }}'
