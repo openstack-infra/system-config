@@ -37,9 +37,17 @@ class openstack_project::single_use_slave (
   class { 'jenkins::slave':
     ssh_key         => $ssh_key,
     sudo            => $sudo,
-    bare            => $bare,
     python3         => $python3,
-    include_pypy    => $include_pypy,
-    all_mysql_privs => $all_mysql_privs,
   }
+
+  class { 'openstack_project::slave_common':
+    include_pypy    => $include_pypy,
+  }
+
+  if (! $bare) {
+    class { 'openstack_project::thick_slave':
+      all_mysql_privs => $all_mysql_privs,
+    }
+  }
+
 }
