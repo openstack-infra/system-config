@@ -16,7 +16,7 @@ GIT_ORIGIN="ssh://zuul@review.opencontrail.org:29418" # ARGV[1]
 TOP=ENV['PWD']
 
 def dry_run?
-    return !ENV['DRY_RUN'].nil? && ENV['DRY_RUN'].casecmp("true")
+    return !ENV['DRY_RUN'].nil? && ENV['DRY_RUN'].casecmp("true") == 0
 end
 
 def sh (cmd, ignore = false)
