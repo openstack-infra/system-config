@@ -2254,6 +2254,12 @@ projects:
     release:
       - tripleo-incubator-docs
 
+  - name: openstack/tripleo-specs
+    check:
+      - noop
+    gate:
+      - noop
+
   - name: openstack/trove-integration
     check:
       - noop
