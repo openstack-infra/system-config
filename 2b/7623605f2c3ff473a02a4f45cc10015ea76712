@@ -1,0 +1,12 @@
+Verified+2: Jenkins
+Code-Review+1: Mike Scherbakov <mscherbakov@mirantis.com>
+Code-Review+2: Clark Boylan <cboylan@sapwetik.org>
+Code-Review+1: Elizabeth Krumbach Joseph <lyz@princessleia.com>
+Approved+1: Sergey Lukjanov <slukjanov@mirantis.com>
+Code-Review+2: Sergey Lukjanov <slukjanov@mirantis.com>
+Code-Review+1: Joshua Hesketh <joshua.hesketh@rackspace.com>
+Submitted-by: Jenkins
+Submitted-at: Tue, 22 Apr 2014 18:31:03 +0000
+Reviewed-on: https://review.openstack.org/89402
+Project: openstack-infra/config
+Branch: refs/heads/master
