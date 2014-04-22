@@ -102,3 +102,13 @@ o OpenContrail CI Maintenance
 
   If and how do we merge changes (bug fixes, etc.) from upstream OpenStack CI.
   Most of the stuff has been renamed to OpenContrail. So auto-merge won't work.
+
+References
+==========
+OpenStack Building your own CI http://ci.openstack.org/running-your-own.html
+OpenStack StackForge Documentation http://ci.openstack.org/stackforge.html
+Zuul - A Project Gating System http://ci.openstack.org/zuul/
+
+review.openstack.org
+zuul.openstack.org
+jenkins.openstack.org
