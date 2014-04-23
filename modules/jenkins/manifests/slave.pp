@@ -64,6 +64,8 @@ class jenkins::slave(
     $::jenkins::params::pkgconfig_package, # for spidermonkey, used by ceilometer
     $::jenkins::params::python_libvirt_package,
     $::jenkins::params::python_lxml_package, # for validating openstack manuals
+    $::jenkins::params::python_magic_package, # for pushing files to swift
+    $::jenkins::params::python_requests_package, # for pushing files to swift
     $::jenkins::params::python_zmq_package, # zeromq unittests (not pip installable)
     $::jenkins::params::rubygems_package,
     $::jenkins::params::sbcl_package, # cl-openstack-client testing

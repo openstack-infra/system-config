@@ -49,6 +49,8 @@ class jenkins::params {
       $pkgconfig_package = 'pkgconfig'
       $python_libvirt_package = 'libvirt-python'
       $python_lxml_package = 'python-lxml'
+      $python_magic_package = 'python-magic'
+      $python_requests_package = 'python-requests'
       $python_zmq_package = 'python-zmq'
       $rubygems_package = 'rubygems'
       # Common Lisp interpreter, used for cl-openstack-client
@@ -135,6 +137,8 @@ class jenkins::params {
       $pkgconfig_package = 'pkg-config'
       $python_libvirt_package = 'python-libvirt'
       $python_lxml_package = 'python-lxml'
+      $python_magic_package = 'python-magic'
+      $python_requests_package = 'python-requests'
       $python_zmq_package = 'python-zmq'
       $rubygems_package = 'rubygems'
       $ruby1_9_1_package = 'ruby1.9.1'
