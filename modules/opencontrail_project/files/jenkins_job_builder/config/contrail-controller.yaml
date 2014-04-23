@@ -1,6 +1,6 @@
 - project:
     name: contrail-controller
-    github-org: stackforge
+    github-org: Juniper
     node: master
     tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.opencontrail.org

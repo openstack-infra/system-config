@@ -28,7 +28,7 @@ function puppet_install {
 
 function reset_project {
   PROJECT=$1
-  rm -rf ~gerrit2/review_site/git/stackforge/$PROJECT.git /var/lib/jeepyb/stackforge/$PROJECT
+  rm -rf ~gerrit2/review_site/git/Juniper/$PROJECT.git /var/lib/jeepyb/Juniper/$PROJECT
   service gerrit restart
   ssh -qp 29418 review.opencontrail.org gerrit flush-caches
   manage-projects -dv

@@ -145,7 +145,7 @@ projects:
     periodic:
       - gate-noop
 
-  - name: stackforge/contrail-controller
+  - name: Juniper/contrail-controller
     check:
       - gate-noop
     gate:

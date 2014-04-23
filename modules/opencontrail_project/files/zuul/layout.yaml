@@ -274,18 +274,6 @@ jobs:
 # The project list is grouped by type of project, and within each
 # group, projects are sorted (mostly) alphabetically.
 projects:
-  - name: stackforge/contrail-controller
-    check:
-      - gate-contrail-controller-build
-    silent:
-      - noop
-    check-tripleo:
-      - noop
-    gate:
-      - noop
-    post:
-      - noop
-
   - name: Juniper/contrail-controller
     check:
       - gate-contrail-controller-build
