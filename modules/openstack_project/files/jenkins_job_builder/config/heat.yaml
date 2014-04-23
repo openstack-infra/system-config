@@ -19,10 +19,10 @@
           export DEVSTACK_GATE_TEMPEST=0
           export DEVSTACK_GATE_EXERCISES=0
           export PROJECTS="openstack/heat-templates $PROJECTS"
-          function post_test_hook {{
+          function post_test_hook {
               source $BASE/new/devstack/openrc && \
               python $BASE/new/heat-templates/tools/validate-templates $BASE/new/heat-templates
-          }}
+          }
           export -f post_test_hook
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
