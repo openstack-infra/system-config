@@ -83,7 +83,7 @@ EOF
             set +e
             OUTPUT=$(git review -t $TOPIC $BRANCH)
             RET=$?
-            [[ "$RET" -eq "0" || "$OUTPUT" =~ "no new changes" ]]
+            [[ "$RET" -eq "0" || "$OUTPUT" =~ "no new changes" || "$OUTPUT" =~ "no changes made" ]]
             SUCCESS=$?
             [[ "$SUCCESS" -eq "0" && "$ALL_SUCCESS" -eq "0" ]]
             ALL_SUCCESS=$?
