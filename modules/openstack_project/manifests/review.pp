@@ -38,8 +38,8 @@ class openstack_project::review (
   $github_project_password = '',
   # Create arbitrary values and put here, puppet will use during
   # provisioning.
+  $mysql_host = '',
   $mysql_password = '',
-  $mysql_root_password = '',
   $email_private_key = '',
   # Register an IRC bot and supply it's password here.
   $gerritbot_password = '',
@@ -124,6 +124,7 @@ class openstack_project::review (
     github_project_username             => $github_project_username,
     github_project_password             => $github_project_password,
     trivial_rebase_role_id              => 'trivial-rebase@review.openstack.org',
+    mysql_host                          => $mysql_host,
     mysql_password                      => $mysql_password,
     email_private_key                   => $email_private_key,
     sysadmins                           => $sysadmins,

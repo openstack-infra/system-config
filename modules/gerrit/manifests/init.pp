@@ -1,5 +1,7 @@
 # Install and maintain Gerrit Code Review.
 # params:
+#   mysql_host:
+#     The mysql host to which gerrit should connect.
 #   mysql_password:
 #     The password with which gerrit connects to mysql.
 #   vhost_name:
@@ -76,6 +78,7 @@
 # TODO: make more gerrit options configurable here
 #
 class gerrit(
+  $mysql_host = 'localhost',
   $mysql_password,
   $war = '',
   $email_private_key = '',
@@ -252,6 +255,7 @@ class gerrit(
 
   # Gerrit sets these permissions in 'init'; don't fight them.
   # Template uses:
+  # - $mysql_host
   # - $canonicalweburl
   # - $database_poollimit
   # - $gerrit_contributor_agreement
