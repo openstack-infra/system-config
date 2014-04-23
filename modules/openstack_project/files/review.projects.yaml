@@ -89,6 +89,9 @@
 - project: openstack-infra/groups
   description: OpenStack Groups community portal
   upstream: git://github.com/mkissam/groups.git
+- project: openstack-infra/groups-static-pages
+  description: Community portal static pages
+  upstream: git://github.com/mkissam/groups-static-pages
 - project: openstack-infra/jeepyb
   group: openstack-ci
   upstream: git://github.com/emonty/gerritx.git
