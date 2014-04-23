@@ -475,6 +475,8 @@ jobs:
     voting: false
   - name: ^(gate|check)-tempest-dsvm-marconi
     voting: false
+  - name: check-rally-dsvm-glance
+    voting: false
   - name: gate-python-glanceclient-python33
     voting: false
   - name: gate-python-neutronclient-python33
@@ -695,6 +697,7 @@ projects:
       - check-tempest-dsvm-postgres-full
       - gate-tempest-dsvm-large-ops
       - gate-tempest-dsvm-neutron-large-ops
+      - check-rally-dsvm-glance
     gate:
       - gate-devstack-dsvm-cells
       - gate-tempest-dsvm-postgres-full
