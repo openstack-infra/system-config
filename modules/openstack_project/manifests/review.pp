@@ -76,15 +76,8 @@ class openstack_project::review (
   $swift_password = ''
 ) {
 
-  # Setup MySQL
-  class { 'gerrit::mysql':
-    mysql_root_password  => $mysql_root_password,
-    database_name        => 'reviewdb',
-    database_user        => 'gerrit2',
-    database_password    => $mysql_password,
-  }
-
   class { 'openstack_project::gerrit':
+    testmode                            => true,
     ssl_cert_file                       =>
       '/etc/ssl/certs/review.openstack.org.pem',
     ssl_key_file                        =>

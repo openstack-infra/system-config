@@ -375,20 +375,22 @@ class openstack_project::gerrit (
       require => Class['::gerrit']
     }
 
-    exec { 'manage_projects':
-      command     => '/usr/local/bin/manage-projects',
-      timeout     => 900, # 15 minutes
-      subscribe   => [
-          File['/home/gerrit2/projects.yaml'],
-          File['/home/gerrit2/acls'],
-        ],
-      refreshonly => true,
-      logoutput   => true,
-      require     => [
-          File['/home/gerrit2/projects.yaml'],
-          File['/home/gerrit2/acls'],
-          Class['jeepyb'],
-        ],
+    if ($testmode == false) {
+      exec { 'manage_projects':
+        command     => '/usr/local/bin/manage-projects',
+        timeout     => 900, # 15 minutes
+        subscribe   => [
+            File['/home/gerrit2/projects.yaml'],
+            File['/home/gerrit2/acls'],
+          ],
+        refreshonly => true,
+        logoutput   => true,
+        require     => [
+            File['/home/gerrit2/projects.yaml'],
+            File['/home/gerrit2/acls'],
+            Class['jeepyb'],
+          ],
+      }
     }
   }
   file { '/home/gerrit2/review_site/bin/set_agreements.sh':
