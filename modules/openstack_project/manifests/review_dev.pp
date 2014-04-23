@@ -4,8 +4,8 @@ class openstack_project::review_dev (
   $github_oauth_token = '',
   $github_project_username = '',
   $github_project_password = '',
+  $mysql_host = '',
   $mysql_password = '',
-  $mysql_root_password = '',
   $email_private_key = '',
   $contactstore = true,
   $contactstore_appsec = '',
@@ -27,14 +27,6 @@ class openstack_project::review_dev (
   realize (
     User::Virtual::Localuser['zaro'],
   )
-
-  # Setup MySQL
-  class { 'gerrit::mysql':
-    mysql_root_password  => $mysql_root_password,
-    database_name        => 'reviewdb',
-    database_user        => 'gerrit2',
-    database_password    => $mysql_password,
-  }
 
   class { 'openstack_project::gerrit':
     vhost_name                      => 'review-dev.openstack.org',
@@ -67,6 +59,7 @@ class openstack_project::review_dev (
     github_oauth_token              => $github_oauth_token,
     github_project_username         => $github_project_username,
     github_project_password         => $github_project_password,
+    mysql_host                      => $mysql_host,
     mysql_password                  => $mysql_password,
     email_private_key               => $email_private_key,
     sysadmins                       => $sysadmins,

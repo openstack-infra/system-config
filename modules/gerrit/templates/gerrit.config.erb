@@ -6,7 +6,7 @@
 	canonicalWebUrl = <%= canonicalweburl %>
 [database]
 	type = MYSQL
-	hostname = localhost
+	hostname = <%= mysql_host %>
 	database = reviewdb
 	username = gerrit2
 <% if database_poollimit != "" -%>
