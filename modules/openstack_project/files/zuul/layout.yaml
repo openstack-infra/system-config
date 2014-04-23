@@ -4301,6 +4301,22 @@ projects:
           - post-mirror-python27
           - post-mirror-python33
 
+  - name: stackforge/solum-dashboard
+    template:
+      - name: python-jobs
+      - name: check-requirements
+    check:
+      - gate-solum-dashboard-pypy
+    gate:
+      - gate-solum-dashboard-pypy
+    pre-release:
+      - solum-dashboard-tarball
+    release:
+      - solum-dashboard-tarball:
+        - solum-dashboard-pypi-upload:
+          - post-mirror-python26
+          - post-mirror-python27
+
   - name: stackforge/rally
     template:
       - name: check-requirements
