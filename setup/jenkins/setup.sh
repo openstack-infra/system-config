@@ -2,6 +2,8 @@
 
 set -ex
 
+apt-get update
+
 JENKINS=jenkins
 
 # setup ~jenkins/.ssh
