@@ -8,6 +8,7 @@ class openstack_project::template (
   $iptables_rules4           = [],
   $iptables_rules6           = [],
   $install_users = true,
+  $install_resolv_conf = true,
   $automatic_upgrades = true,
   $certname = $::fqdn
 ) {
@@ -43,7 +44,9 @@ class openstack_project::template (
     ensure => present,
   }
 
-  class { 'unbound': }
+  class { 'unbound':
+    install_resolv_conf => $install_resolv_conf
+  }
 
   if $::osfamily == 'Debian' {
     # Make sure dig is installed
