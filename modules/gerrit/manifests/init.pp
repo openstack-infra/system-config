@@ -189,6 +189,14 @@ class gerrit(
     owner  => 'gerrit2',
   }
 
+  if ((!defined(File['/opt/lib']))
+      and ($replicate_path =~ /^\/opt\/lib\/.*$/)) {
+    file { '/opt/lib':
+      ensure => directory,
+      owner  => root,
+    }
+  }
+
   # Prepare gerrit directories.  Even though some of these would be created
   # by the init command, we can go ahead and create them now and populate them.
   # That way the config files are already in place before init runs.
