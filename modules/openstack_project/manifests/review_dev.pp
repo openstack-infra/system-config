@@ -68,6 +68,7 @@ class openstack_project::review_dev (
     web_repo_url                    => 'https://git.openstack.org/cgit/',
     swift_username                  => $swift_username,
     swift_password                  => $swift_password,
+    local_git_dir                   => '/opt/lib/git',
     replication                     => [
       {
         name                 => 'github',
@@ -78,7 +79,7 @@ class openstack_project::review_dev (
       },
       {
         name                 => 'local',
-        url                  => 'file:///var/lib/git/',
+        url                  => 'file:///opt/lib/git/',
         replicationDelay     => '0',
         threads              => '4',
         mirror               => true,

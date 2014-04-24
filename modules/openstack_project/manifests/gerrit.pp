@@ -57,6 +57,7 @@ class openstack_project::gerrit (
   $replicate_local = true,
   $replication = [],
   $local_git_dir = '/var/lib/git',
+  $jeepyb_cache_dir = '/opt/lib/jeepyb',
   $cla_description = 'OpenStack Individual Contributor License Agreement',
   $cla_file = 'static/cla.html',
   $cla_id = '2',
@@ -178,6 +179,7 @@ class openstack_project::gerrit (
     mysql_password                      => $mysql_password,
     email_private_key                   => $email_private_key,
     replicate_local                     => $replicate_local,
+    replicate_path                      => $local_git_dir,
     replication                         => $replication,
     gitweb                              => $gitweb,
     cgit                                => $cgit,
@@ -338,7 +340,7 @@ class openstack_project::gerrit (
         weekday     => '0',
         hour        => '4',
         minute      => '7',
-        command     => 'find /var/lib/git/ -type d -name "*.git" -print -exec git --git-dir="{}" repack -afd \;',
+        command     => "find ${::local_git_dir} -type d -name \"*.git\" -print -exec git --git-dir=\"{}\" repack -afd \;",
         environment => 'PATH=/usr/bin:/bin:/usr/sbin:/sbin',
       }
     }
