@@ -51,7 +51,7 @@ EOF
 
 # Setup a node as a build system where contrail software can be built.
 function build_setup {
-    apt-get -y install python-software-properties git python-lxml unzip patch scons flex bison make vim ant libexpat-dev libgettextpo0 libcurl4-openssl-dev python-dev autoconf automake build-essential libtool libevent-dev libxml2-dev libxslt-dev python-setuptools build-essential devscripts debhelper ruby
+    apt-get -y install python-software-properties git python-lxml unzip patch scons flex bison make vim ant libexpat-dev libgettextpo0 libcurl4-openssl-dev python-dev autoconf automake build-essential libtool libevent-dev libxml2-dev libxslt-dev python-setuptools build-essential devscripts debhelper ruby maven
 
     # Get repo tool from googleapis.com
     wget -O /usr/bin/repo http://commondatastorage.googleapis.com/git-repo-downloads/repo && chmd 755 /usr/bin/repo

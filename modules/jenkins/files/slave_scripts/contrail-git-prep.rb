@@ -40,7 +40,8 @@ def sh (cmd, ignore = false)
 end
 
 def setup_gerrit_repo
-    sh "mkdir #{TOP}/#{@project}"
+    sh "rm -rf #{TOP}/#{@project}"
+    sh "mkdir -p #{TOP}/#{@project}"
     sh "cd #{TOP}/#{@project}"
 
     # This clones a git repo with appropriate review patch
@@ -51,7 +52,8 @@ end
 def setup_contrail_repo
 
     # Restore to parent directory
-    sh "mkdir #{TOP}/repo"
+    sh "rm -rf #{TOP}/repo"
+    sh "mkdir -p #{TOP}/repo"
     sh "cd #{TOP}/repo"
 
     # Initialize a repo. TODO Do not hard code manifest.xml file path
