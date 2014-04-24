@@ -340,7 +340,7 @@ class openstack_project::gerrit (
         weekday     => '0',
         hour        => '4',
         minute      => '7',
-        command     => "find ${::local_git_dir} -type d -name \"*.git\" -print -exec git --git-dir=\"{}\" repack -afd \;",
+        command     => "find ${local_git_dir} -type d -name \"*.git\" -print -exec git --git-dir=\"{}\" repack -afd \\;",
         environment => 'PATH=/usr/bin:/bin:/usr/sbin:/sbin',
       }
     }
