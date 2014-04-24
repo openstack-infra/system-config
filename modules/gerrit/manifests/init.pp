@@ -66,6 +66,8 @@
 #     A URL for the remote contact store application
 #   replicate_local:
 #     A boolean enabling local replication for apache acceleration
+#   replicate_path:
+#     The path to the local git replica if replicate_local is enabled
 #   gitweb:
 #     A boolean enabling gitweb
 #   cgit:
@@ -134,6 +136,7 @@ class gerrit(
   $enable_melody = false,
   $melody_session = false,
   $replicate_local = false,
+  $replicate_path = '/var/lib/git',
   $replication = [],
   $gitweb = true,
   $cgit = false,
@@ -322,6 +325,7 @@ class gerrit(
   # - $ssl_chain_file
   # - $canonicalweburl
   # - $replicate_local
+  # - $replicate_path
   # - $contactstore
   # - $robots_txt_source
   apache::vhost { $vhost_name:

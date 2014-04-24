@@ -65,11 +65,11 @@
 <% end -%>
 
 <% if scope.lookupvar("gerrit::replicate_local") -%>
-  SetEnv GIT_PROJECT_ROOT /var/lib/git/
+  SetEnv GIT_PROJECT_ROOT <%= scope.lookupvar("gerrit::replicate_path") %>
   SetEnv GIT_HTTP_EXPORT_ALL
 
-  AliasMatch ^/p/(.*/objects/[0-9a-f]{2}/[0-9a-f]{38})$ /var/lib/git/$1
-  AliasMatch ^/p/(.*/objects/pack/pack-[0-9a-f]{40}.(pack|idx))$ /var/lib/git/$1
+  AliasMatch ^/p/(.*/objects/[0-9a-f]{2}/[0-9a-f]{38})$ <%= scope.lookupvar("gerrit::replicate_path") %>/$1
+  AliasMatch ^/p/(.*/objects/pack/pack-[0-9a-f]{40}.(pack|idx))$ <%= scope.lookupvar("gerrit::replicate_path") %>/$1
   ScriptAlias /p/ /usr/lib/git-core/git-http-backend/
 <% end -%>
 
