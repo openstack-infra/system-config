@@ -123,7 +123,6 @@
           export PATH=`pwd`/buck/bin:$PATH
           cd gerrit
           buck clean
-          buck test --all --exclude slow
           buck build release
       - shell: "cp gerrit/buck-out/gen/release.war gerrit/buck-out/gen/gerrit-$PROJECT_VER.war"
 
@@ -163,7 +162,6 @@
           export PATH=`pwd`/buck/bin:$PATH
           cd gerrit
           buck clean
-          buck test --all --exclude slow
           buck build release
       - shell: "cp gerrit/buck-out/gen/release.war gerrit/buck-out/gen/gerrit-$PROJECT_VER.war"
 
@@ -199,7 +197,6 @@
           export PATH=`pwd`/buck/bin:$PATH
           cd gerrit
           buck clean
-          buck test --all --exclude slow
           buck build release
       - shell: "cp gerrit/buck-out/gen/release.war gerrit/buck-out/gen/gerrit-$PROJECT_VER.war"
 
