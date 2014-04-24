@@ -288,7 +288,6 @@
           then
             git clone https://gerrit.googlesource.com/buck
             cd buck
-            git checkout 274acb17e9b6dc9ee60bc1371c47a7f49640c24c
             ant
           fi
 
