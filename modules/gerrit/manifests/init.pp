@@ -582,7 +582,7 @@ class gerrit(
   }
 
   exec { 'gerrit-start':
-    command     => '/etc/init.d/gerrit start',
+    command     => '/etc/init.d/gerrit restart',
     require     => File['/etc/init.d/gerrit'],
     refreshonly => true,
   }

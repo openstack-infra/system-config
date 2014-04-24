@@ -55,8 +55,7 @@ def setup_contrail_repo
     sh "cd #{TOP}/repo"
 
     # Initialize a repo. TODO Do not hard code manifest.xml file path
-    sh "/usr/local/jenkins/slave_scripts/repo init " +
-       "-u git@github.com:Juniper/contrail-vnc-private " +
+    sh "repo init -u git@github.com:Juniper/contrail-vnc-private " +
        "-m mainline/ubuntu-12-04/manifest-havana.xml"
 
     # Sync the repo

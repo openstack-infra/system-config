@@ -54,7 +54,7 @@ function build_setup {
     apt-get -y install python-software-properties git python-lxml unzip patch scons flex bison make vim ant libexpat-dev libgettextpo0 libcurl4-openssl-dev python-dev autoconf automake build-essential libtool libevent-dev libxml2-dev libxslt-dev python-setuptools build-essential devscripts debhelper ruby
 
     # Get repo tool from googleapis.com
-    wget -O /usr/local/bin/repo http://commondatastorage.googleapis.com/git-repo-downloads/repo && chmd 755 /usr/local/bin/repo
+    wget -O /usr/bin/repo http://commondatastorage.googleapis.com/git-repo-downloads/repo && chmd 755 /usr/bin/repo
 
     add-apt-repository -y ppa:webupd8team/java
     apt-get update
