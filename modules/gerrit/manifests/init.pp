@@ -136,7 +136,7 @@ class gerrit(
   $enable_melody = false,
   $melody_session = false,
   $replicate_local = false,
-  $replicate_path = '/var/lib/git',
+  $replicate_path = '/opt/lib/git',
   $replication = [],
   $gitweb = true,
   $cgit = false,

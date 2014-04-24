@@ -56,7 +56,7 @@ class openstack_project::gerrit (
   $email_private_key = '',
   $replicate_local = true,
   $replication = [],
-  $local_git_dir = '/var/lib/git',
+  $local_git_dir = '/opt/lib/git',
   $jeepyb_cache_dir = '/opt/lib/jeepyb',
   $cla_description = 'OpenStack Individual Contributor License Agreement',
   $cla_file = 'static/cla.html',
