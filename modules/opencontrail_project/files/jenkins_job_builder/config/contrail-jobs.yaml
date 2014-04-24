@@ -6,10 +6,15 @@
       - gerrit-git-prep
       - shell: |
           #!/bin/bash -xe
-          cd /var/lib/jenkins/jobs/gate-contrail-controller-build/workspace/repo
+          cd /var/lib/jenkins/jobs/gate-{name}-build/workspace/repo
           scons -U controller/src/discovery
 
 - job-group:
     name: contrail-jobs
+    jobs:
+      - 'gate-{name}-build'
+
+- job-group:
+    name: contrail-ci-test-jobs
     jobs:
       - 'gate-{name}-build'

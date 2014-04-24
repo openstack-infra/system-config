@@ -285,3 +285,15 @@ projects:
       - noop
     post:
       - noop
+
+  - name: Juniper/contrail-ci-test
+    check:
+      - gate-contrail-ci-test-build
+    silent:
+      - noop
+    check-tripleo:
+      - noop
+    gate:
+      - noop
+    post:
+      - noop

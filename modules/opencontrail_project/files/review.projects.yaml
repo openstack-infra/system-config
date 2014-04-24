@@ -2,3 +2,8 @@
   description: Contrail Controller
   upstream: git@github.com:Juniper/contrail-controller
   acl-config: /home/gerrit2/acls/Juniper/contrail-controller.config
+
+- project: Juniper/contrailci-testcontroller
+  description: Contrail CI Test
+  upstream: git@github.com:Juniper/contrail-ci-test
+  acl-config: /home/gerrit2/acls/Juniper/contrail-ci-test.config
