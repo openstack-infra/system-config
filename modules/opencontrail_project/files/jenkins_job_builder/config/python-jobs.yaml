@@ -229,24 +229,6 @@
     publishers:
       - console-log
 
-- job-template:
-    name: 'gate-{name}-build'
-    node: master
-
-    builders:
-      - gerrit-git-prep
-      - build:
-          github-org: '{github-org}'
-          project: '{name}'
-
-      - shell: |
-          #!/bin/bash -xe
-          # cd to the right directory
-          scons controller/src/discovery
-
-    publishers:
-      - console-log
-
 - job-group:
     name: python-jobs
     jobs:
