@@ -2,136 +2,136 @@
 # https://git.openstack.org/cgit/openstack-infra/system-config
 
 [gerrit]
-	basePath = git
-	canonicalWebUrl = <%= @canonicalweburl %>
+  basePath = git
+  canonicalWebUrl = <%= @canonicalweburl %>
 [database]
-	type = MYSQL
-	hostname = <%= @mysql_host %>
-	database = reviewdb
-	username = gerrit2
+  type = MYSQL
+  hostname = <%= @mysql_host %>
+  database = reviewdb
+  username = gerrit2
 <% if @database_poollimit != "" -%>
-	poolLimit = <%= @database_poollimit %>
+  poolLimit = <%= @database_poollimit %>
 <% end -%>
-	connectionpool = true
+  connectionpool = true
 [auth]
 <% if @gerrit_contributor_agreement -%>
-	contributorAgreements = true
+  contributorAgreements = true
 <% end -%>
-	type = <%= @gerrit_auth_type %>
-	cookieSecure = true
-	enableRunAs = true
+  type = <%= @gerrit_auth_type %>
+  cookieSecure = true
+  enableRunAs = true
 <% if @gerrit_auth_type == 'OPENID_SSO' -%>
-	openIdSsoUrl = <%= @openidssourl %>
+  openIdSsoUrl = <%= @openidssourl %>
 <% end -%>
 <% if @gerrit_auth_type == 'LDAP' -%>
 [ldap]
-	server = <%= @ldap_server %>
-	accountBase = <%= @ldap_account_base %>
-	<% if @ldap_username -%>username = <%= @ldap_username %><%end%>
-	<% if @ldap_password -%>password = <%= @ldap_password %><%end%>
-	<% if @ldap_accountfullname -%>accountFullName = <%= @ldap_accountfullname %><%end%>
-	accountPattern = <%= @ldap_account_pattern %>
-	accountEmailAddress = <%= @ldap_account_email_address %>
-	sslVerify = <%= @ldap_sslverify %>
-	<% if @ldap_ssh_account_name -%>accountSshUserName = <%= @ldap_ssh_account_name %><%end%>
+  server = <%= @ldap_server %>
+  accountBase = <%= @ldap_account_base %>
+  <% if @ldap_username -%>username = <%= @ldap_username %><%end%>
+  <% if @ldap_password -%>password = <%= @ldap_password %><%end%>
+  <% if @ldap_accountfullname -%>accountFullName = <%= @ldap_accountfullname %><%end%>
+  accountPattern = <%= @ldap_account_pattern %>
+  accountEmailAddress = <%= @ldap_account_email_address %>
+  sslVerify = <%= @ldap_sslverify %>
+  <% if @ldap_ssh_account_name -%>accountSshUserName = <%= @ldap_ssh_account_name %><%end%>
 <% end %>
 [sendemail]
-	smtpServer = <%= @smtpserver %>
-	from = <%= @sendemail_from %>
+  smtpServer = <%= @smtpserver %>
+  from = <%= @sendemail_from %>
 [container]
-	user = gerrit2
-	javaHome = <%= @java_home %>
+  user = gerrit2
+  javaHome = <%= @java_home %>
 <% if @container_heaplimit != "" -%>
-	heapLimit = <%= @container_heaplimit %>
+  heapLimit = <%= @container_heaplimit %>
 <% end -%>
 [core]
 <% if @core_packedgitopenfiles != "" -%>
-	packedGitOpenFiles = <%= @core_packedgitopenfiles %>
+  packedGitOpenFiles = <%= @core_packedgitopenfiles %>
 <% end -%>
 <% if @core_packedgitlimit != "" -%>
-	packedGitLimit = <%= @core_packedgitlimit %>
+  packedGitLimit = <%= @core_packedgitlimit %>
 <% end -%>
 <% if @core_packedgitwindowsize != "" -%>
-	packedGitWindowSize = <%= @core_packedgitwindowsize %>
+  packedGitWindowSize = <%= @core_packedgitwindowsize %>
 <% end -%>
 [sshd]
-	listenAddress = <%= @sshd_listen_address %>
+  listenAddress = <%= @sshd_listen_address %>
 <% if @sshd_threads != "" -%>
-	threads = <%= @sshd_threads %>
+  threads = <%= @sshd_threads %>
 <% end -%>
 [httpd]
-	listenUrl = proxy-https://*:8081/
+  listenUrl = proxy-https://*:8081/
 <% if @httpd_maxwait != "" -%>
-	maxWait = <%= @httpd_maxwait %>
+  maxWait = <%= @httpd_maxwait %>
 <% end -%>
 <% if @httpd_acceptorthreads != "" -%>
-	acceptorThreads = <%= @httpd_acceptorthreads %>
+  acceptorThreads = <%= @httpd_acceptorthreads %>
 <% end -%>
 <% if @httpd_minthreads != "" -%>
-	minThreads = <%= @httpd_minthreads %>
+  minThreads = <%= @httpd_minthreads %>
 <% end -%>
 <% if @httpd_maxthreads != "" -%>
-	maxThreads = <%= @httpd_maxthreads %>
+  maxThreads = <%= @httpd_maxthreads %>
 <% end -%>
 [cache]
-	directory = cache
+  directory = cache
 [cache "web_sessions"]
-	maxAge = 1d
+  maxAge = 1d
 [user]
-	email = <%= @email %>
+  email = <%= @email %>
 <% @commentlinks.each do |commentlink| -%>
 [commentlink "<%= commentlink['name'] %>"]
-	match = "<%= commentlink['match'] %>"
+  match = "<%= commentlink['match'] %>"
 <% if commentlink['link'] != "" -%>
-	link = "<%= commentlink['link'] %>"
+  link = "<%= commentlink['link'] %>"
 <% end -%>
 <% if commentlink['html'] != "" -%>
-	html = "<%= commentlink['html'] %>"
+  html = "<%= commentlink['html'] %>"
 <% end -%>
 <% end -%>
 [theme]
-	backgroundColor = ffffff
-	topMenuColor = ffffff
-	textColor = 264d69
-	trimColor = eef3f5
-	selectionColor = d1e6ea
-	changeTableOutdatedColor = f5cccc
-	tableOddRowColor = ffffff
-	tableEvenRowColor = f5f5ff
+  backgroundColor = ffffff
+  topMenuColor = ffffff
+  textColor = 264d69
+  trimColor = eef3f5
+  selectionColor = d1e6ea
+  changeTableOutdatedColor = f5cccc
+  tableOddRowColor = ffffff
+  tableEvenRowColor = f5f5ff
 [melody]
-	monitoring = <%= @enable_melody %>
-	session = <%= @melody_session %>
+  monitoring = <%= @enable_melody %>
+  session = <%= @melody_session %>
 [plugin "javamelody"]
-        allowTopMenu = <%= @enable_javamelody_top_menu %>
+  allowTopMenu = <%= @enable_javamelody_top_menu %>
 <% if gitweb or cgit -%>
 [gitweb]
 <% if gitweb -%>
-	revision = "?p=${project}.git;a=commitdiff;h=${commit}"
+  revision = "?p=${project}.git;a=commitdiff;h=${commit}"
 <% else -%>
-	type = cgit
+  type = cgit
 <% end -%>
 <% if  scope.lookupvar("gerrit::web_repo_url") -%>
-	url = "<%= scope.lookupvar('gerrit::web_repo_url') %>"
+  url = "<%= scope.lookupvar('gerrit::web_repo_url') %>"
 <% end -%>
 <% end -%>
 <% if contactstore == true -%>
 [contactstore]
-	appsec = <%= @contactstore_appsec %>
-	url = <%= @contactstore_url %>
+  appsec = <%= @contactstore_appsec %>
+  url = <%= @contactstore_url %>
 <% end -%>
 <% if @secondary_index == true -%>
 [index]
-	type = <%= @secondary_index_type %>
+  type = <%= @secondary_index_type %>
 <% end -%>
 [mimetype "image/*"]
-	safe = true
+  safe = true
 [mimetype "application/yaml"]
-	safe = true
+  safe = true
 [mimetype "application/xml"]
-	safe = true
+  safe = true
 [mimetype "application/rst"]
-	safe = true
+  safe = true
 [mimetype "application/txt"]
-	safe = true
+  safe = true
 [mimetype "application/html"]
-	safe = true
+  safe = true
