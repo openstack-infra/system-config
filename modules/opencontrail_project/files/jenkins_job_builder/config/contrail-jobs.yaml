@@ -4,9 +4,6 @@
 
     builders:
       - gerrit-git-prep
-      - build:
-          github-org: '{github-org}'
-          project: '{name}'
       - shell: |
           #!/bin/bash -xe
           cd /var/lib/jenkins/jobs/gate-contrail-controller-build/workspace/repo
