@@ -2155,9 +2155,6 @@ projects:
       - gate-tempest-dsvm-large-ops-icehouse
       - gate-tempest-dsvm-neutron-large-ops-icehouse
       - check-grenade-dsvm-partial-ncpu-icehouse
-      # havana compat jobs for tempest master (non voting)
-      - check-tempest-master-dsvm-full-havana
-      - check-tempest-master-dsvm-neutron-havana
     gate:
       - gate-tempest-pep8
       - gate-tempest-docs
@@ -2173,6 +2170,9 @@ projects:
       - check-tempest-dsvm-virtual-ironic-nv
       - check-tempest-dsvm-keystonev3-full
       - check-tempest-dsvm-neutron-keystonev3-full
+      # havana compat jobs for tempest master (non voting)
+      - check-tempest-master-dsvm-full-havana
+      - check-tempest-master-dsvm-neutron-havana
     experimental-tripleo:
       - check-tripleo-seed-precise
       - check-tripleo-ironic-seed-precise
@@ -2385,8 +2385,6 @@ projects:
       - check-swift-dsvm-functional
       - check-tempest-dsvm-ironic-nv
       - check-tempest-dsvm-ironic-postgres-nv
-      - check-tempest-master-dsvm-full-havana
-      - check-tempest-master-dsvm-neutron-havana
     gate:
       - gate-devstack-bash8
       - gate-devstack-dsvm-cells
@@ -2401,6 +2399,8 @@ projects:
       - check-tempest-dsvm-marconi
       - gate-grenade-dsvm-forward
       - check-tempest-dsvm-virtual-ironic-nv
+      - check-tempest-master-dsvm-full-havana
+      - check-tempest-master-dsvm-neutron-havana
 
   - name: openstack-dev/grenade
     check:
@@ -2600,8 +2600,6 @@ projects:
       - check-devstack-dsvm-cells-havana
       - check-tempest-dsvm-ironic-nv
       - check-tempest-dsvm-ironic-postgres-nv
-      - check-tempest-master-dsvm-full-havana
-      - check-tempest-master-dsvm-neutron-havana
     gate:
       - gate-devstack-gate-unittests
       - gate-devstack-dsvm-cells
@@ -2613,6 +2611,8 @@ projects:
     experimental:
       - gate-grenade-dsvm-forward
       - check-tempest-dsvm-virtual-ironic-nv
+      - check-tempest-master-dsvm-full-havana
+      - check-tempest-master-dsvm-neutron-havana
     experimental-tripleo:
       - check-tripleo-seed-precise
       - check-tripleo-ironic-seed-precise
