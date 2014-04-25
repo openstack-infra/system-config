@@ -212,6 +212,9 @@
   description: Doc repo for trove project
   options:
     - direct-release
+- project: openstack/dib-utils
+  description: Pieces of diskimage-builder that are useful without the full project
+  upstream: git://github.com/cybertron/dib-utils.git
 - project: openstack/diskimage-builder
   description: Image building tools for OpenStack
 - project: openstack/django_openstack_auth

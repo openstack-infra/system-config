@@ -1615,6 +1615,29 @@ projects:
           - post-mirror-python27
           - post-mirror-python33
 
+  - name: openstack/dib-utils
+    template:
+      - name: check-requirements
+    check:
+      - noop
+    check-tripleo:
+      - check-tripleo-ironic-seed-precise
+      - check-tripleo-undercloud-precise
+      - check-tripleo-overcloud-precise
+      - check-tripleo-overcloud-f20
+    gate:
+      - noop
+    post:
+      - diskimage-builder-branch-tarball
+    pre-release:
+      - diskimage-builder-tarball
+    release:
+      - diskimage-builder-tarball:
+        - diskimage-builder-pypi-upload:
+          - post-mirror-python26
+          - post-mirror-python27
+          - post-mirror-python33
+
   - name: openstack/django_openstack_auth
     template:
       - name: python-jobs
