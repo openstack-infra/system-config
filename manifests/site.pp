@@ -149,7 +149,7 @@ node 'nodepool.opencontrail.org' {
 #
 # Static Jenkins slaves:
 #
-node 'jnpr-slave-1.opencontrail.org' {
+node 'slave1.opencontrail.org' {
   include opencontrail_project
   include opencontrail_project::puppet_cron
   class { 'opencontrail_project::slave':
