@@ -3,7 +3,7 @@
 class opencontrail_project::jenkins (
   $vhost_name = $::fqdn,
   $jenkins_jobs_password = '',
-  $jenkins_jobs_username = 'gerrig', # This is not a typo, well it isn't anymore.
+  $jenkins_jobs_username = 'ci-admin',
   $manage_jenkins_jobs = true,
   $ssl_cert_file_contents = '',
   $ssl_key_file_contents = '',

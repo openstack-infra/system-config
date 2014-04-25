@@ -1,6 +1,5 @@
 - job-template:
     name: 'gate-{name}-build'
-    node: master
 
     builders:
       - gerrit-git-prep

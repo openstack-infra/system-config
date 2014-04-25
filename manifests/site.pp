@@ -145,3 +145,17 @@ node 'nodepool.opencontrail.org' {
 }
 
 # vim:sw=2:ts=2:expandtab:textwidth=79
+
+#
+# Static Jenkins slaves:
+#
+
+node /^juniper-precise-?\d+.*\.slave\.opencontrail\.org$/ {
+  include opencontrail_project
+  include opencontrail_project::puppet_cron
+  class { 'opencontrail_project::slave':
+#   certname  => 'precise.slave.opencontrail.org',
+    ssh_key   => $opencontrail_project::jenkins_ssh_key,
+    sysadmins => hiera('sysadmins'),
+  }
+}
