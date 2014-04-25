@@ -104,6 +104,7 @@ class openstack_project::puppetmaster (
   class { 'puppetdb::master::config':
     puppetdb_server     => 'puppetdb.openstack.org',
     puppet_service_name => 'apache2',
+    soft_write_failure  => true,
   }
 
 }
