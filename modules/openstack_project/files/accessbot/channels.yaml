@@ -21,7 +21,7 @@
 # First set up the access levels (map names in this file to chanserv flags):
 access:
   masters: +AFRfiorstv
-  topics: +t
+  status: +Vt
   meetbots: +O
   operators: +Afortv
   channel_op_mask: +AVOfortv
@@ -43,7 +43,7 @@ global:
     - maffulli
     - mtaylor
     - ttx
-  topics:
+  status:
     - openstackstatus
   mask:
     channel_op_mask
