@@ -144,15 +144,3 @@ projects:
   - name: gtest-org/gtest2
     periodic:
       - gate-noop
-
-  - name: Juniper/contrail-controller
-    check:
-      - gate-noop
-    gate:
-      - gate-noop
-
-  - name: Juniper/contrail-ci-test
-    check:
-      - gate-noop
-    gate:
-      - gate-noop
