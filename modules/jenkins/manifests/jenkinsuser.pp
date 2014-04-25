@@ -52,12 +52,16 @@ class jenkins::jenkinsuser(
     require => File['/home/jenkins'],
   }
 
-  ssh_authorized_key { '/home/jenkins/.ssh/authorized_keys':
+  ssh_authorized_key { 'jenkins-master-2014-04-24':
     ensure  => present,
     user    => 'jenkins',
     type    => 'ssh-rsa',
     key     => $ssh_key,
     require => File['/home/jenkins/.ssh'],
+  }
+  ssh_authorized_key { '/home/jenkins/.ssh/authorized_keys':
+    ensure  => absent,
+    user    => 'jenkins',
   }
 
   #NOTE: not all distributions have default bash files in /etc/skel
