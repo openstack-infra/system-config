@@ -914,6 +914,7 @@ projects:
       - gate-tempest-dsvm-neutron-large-ops
       - gate-nova-pylint
       - check-grenade-dsvm-partial-ncpu
+      - check-tempest-dsvm-virtual-ironic-nv
     gate:
       - gate-devstack-dsvm-cells
       - gate-tempest-dsvm-postgres-full
@@ -1550,6 +1551,7 @@ projects:
       - gate-diskimage-builder-python26
       - gate-diskimage-builder-python27
       - check-oslotest-dsvm-diskimage-builder
+      - check-tempest-dsvm-virtual-ironic-nv
     check-tripleo:
       - check-tripleo-seed-precise
       - check-tripleo-ironic-seed-precise
@@ -2156,6 +2158,7 @@ projects:
       - check-grenade-dsvm-neutron-icehouse
       - check-tempest-dsvm-postgres-full-icehouse
       - check-tempest-dsvm-neutron-full-icehouse
+      - check-tempest-dsvm-virtual-ironic-nv
       - gate-tempest-dsvm-large-ops-icehouse
       - gate-tempest-dsvm-neutron-large-ops-icehouse
       - check-grenade-dsvm-partial-ncpu-icehouse
@@ -2171,7 +2174,6 @@ projects:
       - gate-grenade-dsvm-forward
       - check-tempest-dsvm-cells-full
       - check-tempest-dsvm-marconi
-      - check-tempest-dsvm-virtual-ironic-nv
       - check-tempest-dsvm-keystonev3-full
       - check-tempest-dsvm-neutron-keystonev3-full
       # havana compat jobs for tempest master (non voting)
@@ -2389,6 +2391,7 @@ projects:
       - check-swift-dsvm-functional
       - check-tempest-dsvm-ironic-nv
       - check-tempest-dsvm-ironic-postgres-nv
+      - check-tempest-dsvm-virtual-ironic-nv
     gate:
       - gate-devstack-bash8
       - gate-devstack-dsvm-cells
@@ -2402,7 +2405,6 @@ projects:
       - check-tempest-dsvm-cells-full
       - check-tempest-dsvm-marconi
       - gate-grenade-dsvm-forward
-      - check-tempest-dsvm-virtual-ironic-nv
       - check-tempest-master-dsvm-full-havana
       - check-tempest-master-dsvm-neutron-havana
 
@@ -2604,6 +2606,7 @@ projects:
       - check-devstack-dsvm-cells-havana
       - check-tempest-dsvm-ironic-nv
       - check-tempest-dsvm-ironic-postgres-nv
+      - check-tempest-dsvm-virtual-ironic-nv
     gate:
       - gate-devstack-gate-unittests
       - gate-devstack-dsvm-cells
@@ -2614,7 +2617,6 @@ projects:
       - gate-swift-dsvm-functional
     experimental:
       - gate-grenade-dsvm-forward
-      - check-tempest-dsvm-virtual-ironic-nv
       - check-tempest-master-dsvm-full-havana
       - check-tempest-master-dsvm-neutron-havana
     experimental-tripleo:
