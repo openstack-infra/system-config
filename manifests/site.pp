@@ -153,7 +153,7 @@ node 'slave1.opencontrail.org' {
   include opencontrail_project
   include opencontrail_project::puppet_cron
   class { 'opencontrail_project::slave':
-    ssh_key   => $opencontrail_project::jenkins_ssh_key,
+#   ssh_key   => $opencontrail_project::jenkins_ssh_key,
     sysadmins => hiera('sysadmins'),
   }
 }
