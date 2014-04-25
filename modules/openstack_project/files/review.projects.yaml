@@ -211,6 +211,7 @@
   upstream: git://github.com/n0ano/gantt.git
 - project: openstack/glance
   docimpact-group: openstack-manuals
+- project: openstack/glance-specs
 - project: openstack/governance
   description: OpenStack Technical Committee Decisions
 - project: openstack/heat
