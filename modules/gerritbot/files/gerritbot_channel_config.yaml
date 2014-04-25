@@ -729,3 +729,13 @@ openstack-satori:
       - stackforge/satori
     branches:
       - master
+
+openstack-sdks:
+    events:
+      - patchset-created
+      - change-merged
+    projects:
+      - stackforge/openstack-sdk-php
+      - stackforge/golang-client
+    branches:
+      - master
