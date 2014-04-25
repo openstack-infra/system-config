@@ -722,9 +722,11 @@ projects:
 
   - name: openstack/glance-specs
     check:
-      - gate-noop
+      - gate-glance-specs-python27 
+      - gate-glance-specs-docs
     gate:
-      - gate-noop
+      - gate-glance-specs-python27
+      - gate-glance-specs-docs
 
   - name: openstack/heat
     template:
