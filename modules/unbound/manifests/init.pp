@@ -40,15 +40,6 @@ class unbound (
       require => File['/etc/default/unbound'],
     }
 
-    # Rackspace uses static config files
-    file { '/etc/resolv.conf':
-      content => "nameserver 127.0.0.1\n",
-      owner   => 'root',
-      group   => 'root',
-      mode    => '0444',
-      require => Service['unbound'],
-    }
-
     # Tripleo uses dhcp
     file { '/etc/dhcp/dhclient.conf':
       source  => 'puppet:///modules/unbound/dhclient.conf.debian',
@@ -65,31 +56,31 @@ class unbound (
       ensure  => present,
     }
 
-    # Rackspace uses static config files
-    file { '/etc/resolv.conf':
-      content => "nameserver 127.0.0.1\n",
-      owner   => 'root',
-      group   => 'root',
-      mode    => '0444',
-      require => Service['unbound'],
-      notify  => Exec['make-resolv-conf-immutable'],
-    }
-
-    # Rackspace uses file injection to configure networking which
-    # overwrites all of the files on disk where we could set the env
-    # variable to disable the resolv.conf update on network-up.
-    # Instead, make that file immutable so that the update will fail
-    # (harmlessly).  Of course this means Puppet won't be able to
-    # update it either after this, but we don't plan on changing it.
-    exec { 'make-resolv-conf-immutable':
-      command     => '/usr/bin/chattr +i /etc/resolv.conf',
-      refreshonly => true,
-    }
-
     # HPCloud uses dhclient; tell dhclient to use our nameserver instead.
     exec { '/usr/bin/printf "\nsupersede domain-name-servers 127.0.0.1;\n" >> /etc/dhcp/dhclient-eth0.conf':
         unless => '/bin/grep -q "supersede domain-name-servers" /etc/dhcp/dhclient-eth0.conf'
     }
+  }
+
+  # Rackspace uses static config files
+  file { '/etc/resolv.conf':
+    content => "nameserver 127.0.0.1\n",
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0444',
+    require => Service['unbound'],
+    notify  => Exec['make-resolv-conf-immutable'],
+  }
+
+  # Rackspace uses file injection to configure networking which
+  # overwrites all of the files on disk where we could set the env
+  # variable to disable the resolv.conf update on network-up.
+  # Instead, make that file immutable so that the update will fail
+  # (harmlessly).  Of course this means Puppet won't be able to
+  # update it either after this, but we don't plan on changing it.
+  exec { 'make-resolv-conf-immutable':
+    command     => '/usr/bin/chattr +i /etc/resolv.conf',
+    refreshonly => true,
   }
 
   service { 'unbound':
