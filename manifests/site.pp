@@ -166,4 +166,4 @@ node 'jnpr-slave-1.opencontrail.org' {
 #     ssh_key   => $opencontrail_project::jenkins_ssh_key,
 #     sysadmins => hiera('sysadmins'),
 #   }
-}
+# }
