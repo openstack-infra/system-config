@@ -283,9 +283,9 @@ class jenkins::slave(
 
     include mysql::server::account_security
 
-    mysql::db { 'opencontrail_citest':
-      user     => 'opencontrail_citest',
-      password => 'opencontrail_citest',
+    mysql::db { 'openctrl_citest':
+      user     => 'openctrl_citest',
+      password => 'openctrl_citest',
       host     => 'localhost',
       grant    => ['all'],
       require  => [
@@ -308,17 +308,17 @@ class jenkins::slave(
       ],
     }
 
-    database_grant { 'opencontrail_citest@localhost/opencontrail_baremetal_citest':
+    database_grant { 'openctrl_citest@localhost/opencontrail_baremetal_citest':
       privileges => ['all'],
       provider   => 'mysql',
-      require    => Database_user['opencontrail_citest@localhost'],
+      require    => Database_user['openctrl_citest@localhost'],
     }
 
     if ($all_mysql_privs == true) {
-      database_grant { 'opencontrail_citest@localhost':
+      database_grant { 'openctrl_citest@localhost':
         privileges => ['all'],
         provider   => 'mysql',
-        require    => Database_user['opencontrail_citest@localhost'],
+        require    => Database_user['openctrl_citest@localhost'],
       }
     }
 
@@ -355,29 +355,29 @@ class jenkins::slave(
 
     # Create DB user and explicitly make it non superuser
     # that can create databases.
-    postgresql::server::role { 'opencontrail_citest':
-      password_hash => postgresql_password('opencontrail_citest', 'opencontrail_citest'),
+    postgresql::server::role { 'openctrl_citest':
+      password_hash => postgresql_password('openctrl_citest', 'openctrl_citest'),
       createdb      => true,
       superuser     => false,
       require       => Class['postgresql::server'],
     }
 
-    postgresql::server::db { 'opencontrail_citest':
-      user     => 'opencontrail_citest',
-      password => postgresql_password('opencontrail_citest', 'opencontrail_citest'),
+    postgresql::server::db { 'openctrl_citest':
+      user     => 'openctrl_citest',
+      password => postgresql_password('openctrl_citest', 'openctrl_citest'),
       grant    => 'all',
       require  => [
         Class['postgresql::server'],
-        Postgresql::Server::Role['opencontrail_citest'],
+        Postgresql::Server::Role['openctrl_citest'],
       ],
     }
 
     # Alter the new database giving the test DB user ownership of the DB.
     # This is necessary to make the nova unittests run properly.
-    postgresql_psql { 'ALTER DATABASE opencontrail_citest OWNER TO opencontrail_citest':
+    postgresql_psql { 'ALTER DATABASE openctrl_citest OWNER TO openctrl_citest':
       db          => 'postgres',
       refreshonly => true,
-      subscribe   => Postgresql::Server::Db['opencontrail_citest'],
+      subscribe   => Postgresql::Server::Db['openctrl_citest'],
     }
   }
 
