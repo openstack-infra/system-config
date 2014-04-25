@@ -720,6 +720,12 @@ projects:
     periodic:
       - glance-propose-translation-update
 
+  - name: openstack/glance-specs
+    check:
+      - gate-noop
+    gate:
+      - gate-noop
+
   - name: openstack/heat
     template:
       - name: python-jobs
