@@ -420,6 +420,8 @@ jobs:
     voting: false
   - name: gate-cinder-pylint
     voting: false
+  - name: check-rally-dsvm-cinder
+    voting: false
   - name: dev-zuul-coverage
     voting: false
   - name: jenkins-job-builder-compare-xml
@@ -616,6 +618,7 @@ projects:
       - gate-cinder-pylint
       - check-devstack-dsvm-cells
       - check-tempest-dsvm-postgres-full
+      - check-rally-dsvm-cinder
     gate:
       - gate-devstack-dsvm-cells
       - gate-tempest-dsvm-postgres-full
