@@ -149,13 +149,21 @@ node 'nodepool.opencontrail.org' {
 #
 # Static Jenkins slaves:
 #
-
-node /^jnpr-slave-?\d+.*\.opencontrail\.org$/ {
+node 'jnpr-slave-1.opencontrail.org' {
   include opencontrail_project
   include opencontrail_project::puppet_cron
   class { 'opencontrail_project::slave':
-#   certname  => 'precise.slave.opencontrail.org',
     ssh_key   => $opencontrail_project::jenkins_ssh_key,
     sysadmins => hiera('sysadmins'),
   }
+}
+
+# node /^jnpr-slave-?\d+.*\.opencontrail\.org$/ {
+#   include opencontrail_project
+#   include opencontrail_project::puppet_cron
+#   class { 'opencontrail_project::slave':
+# #   certname  => 'precise.slave.opencontrail.org',
+#     ssh_key   => $opencontrail_project::jenkins_ssh_key,
+#     sysadmins => hiera('sysadmins'),
+#   }
 }
