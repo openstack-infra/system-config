@@ -1567,6 +1567,24 @@ projects:
       - diskimage-builder-coverage
       - diskimage-builder-branch-tarball
 
+  - name: openstack/dib-utils
+    template:
+      - name: check-requirements
+      - name: publish-to-pypi
+    check:
+      - noop
+    check-tripleo:
+      - check-tripleo-ironic-seed-precise
+      - check-tripleo-undercloud-precise
+      - check-tripleo-overcloud-f20
+    gate:
+      - noop
+    experimental-tripleo:
+      - check-tripleo-ironic-undercloud-precise
+      - check-tripleo-overcloud-precise
+    post:
+      - dib-utils-branch-tarball
+
   - name: openstack/django_openstack_auth
     template:
       - name: python-jobs
