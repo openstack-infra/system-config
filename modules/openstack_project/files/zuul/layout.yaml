@@ -475,6 +475,8 @@ jobs:
     voting: false
   - name: gate-keystone-python33
     voting: false
+  - name: check-rally-dsvm-keystone
+    voting: false
   - name: gate-marconi-python33
     voting: false
   - name: ^(gate|check)-tempest-dsvm-marconi
@@ -815,6 +817,7 @@ projects:
       - gate-tempest-dsvm-large-ops
       - gate-tempest-dsvm-neutron-large-ops
       - check-swift-dsvm-functional
+      - check-rally-dsvm-keystone
     gate:
       - gate-devstack-dsvm-cells
       - gate-tempest-dsvm-postgres-full
