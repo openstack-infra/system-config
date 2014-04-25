@@ -66,7 +66,7 @@ class accessbot(
     ensure  => present,
     source  => 'puppet:///modules/accessbot/accessbot.py',
     group   => 'accessbot',
-    mode    => '0440',
+    mode    => '0555',
     owner   => 'root',
     replace => true,
     require => User['accessbot'],
