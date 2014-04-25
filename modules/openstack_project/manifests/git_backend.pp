@@ -64,12 +64,11 @@ class openstack_project::git_backend (
     require => User['cgit'],
   }
 
-  file { '/home/cgit/.ssh/authorized_keys':
-    owner   => 'cgit',
-    group   => 'cgit',
-    mode    => '0600',
-    content => $git_gerrit_ssh_key,
-    replace => true,
+  ssh_authorized_key { '/home/cgit/.ssh/authorized_keys':
+    ensure  => present,
+    user    => 'cgit',
+    type    => 'ssh-rsa',
+    key     => $git_gerrit_ssh_key,
     require => File['/home/cgit/.ssh/']
   }
 
