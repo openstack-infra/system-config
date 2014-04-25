@@ -1,19 +1,19 @@
 - job-template:
-    name: 'gate-{name}-build'
+    name: 'ci-{name}-build'
 
     builders:
       - gerrit-git-prep
       - shell: |
           #!/bin/bash -xe
-          cd /var/lib/jenkins/jobs/gate-{name}-build/workspace/repo
+          cd /var/lib/jenkins/jobs/ci-{name}-build/workspace/repo
           scons -U controller/src/discovery
 
 - job-group:
     name: contrail-jobs
     jobs:
-      - 'gate-{name}-build'
+      - 'ci-{name}-build'
 
 - job-group:
     name: contrail-ci-test-jobs
     jobs:
-      - 'gate-{name}-build'
+      - 'ci-{name}-build'
