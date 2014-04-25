@@ -266,10 +266,94 @@ Note if you created your working directory in a path that is not
 excluded by bup you will want to remove that directory when your work is
 done. /root/backup-restore-* is excluded so the path above is safe.
 
-Launching new servers
+Launching New Servers
 =====================
 
 New servers are launched using the ``launch/launch-node.py`` tool from the git
 repository ``https://git.openstack.org/openstack-infra/config``. This tool is
 run from a checkout on the puppetmaster - please see :file:`launch/README` for
 detailed instructions.
+
+.. _cinder:
+
+Cinder Volume Management
+========================
+
+Adding a New Device
+-------------------
+
+If the main volume group doesn't have enough space for what you want
+to do, this is how you can add a new volume.
+
+Log into ci-puppetmaster.openstack.org and run::
+
+  . ~root/cinder-venv/bin/activate
+  . ~root/ci-launch/cinder.sh
+
+  nova list
+  cinder list
+
+* Add a new 1024G cinder volume (substitute the hostname and the next number
+  in series for NN)::
+
+    cinder create --display-name "HOSTNAME.openstack.org/mainNN" 1024
+    nova volume-attach <server id> <volume id> auto
+
+* or to add a 100G SSD volume::
+
+    cinder create --volume-type SSD --display-name "HOSTNAME.openstack.org/mainNN" 100
+    nova volume-attach <server id> <volume id> auto
+
+* Then, on the host, create the partition table::
+
+    DEVICE=/dev/xvdX
+    sudo parted $DEVICE mklabel msdos mkpart primary 0% 100% set 1 lvm on
+    sudo pvcreate ${DEVICE}1
+
+* It should show up in pvs::
+
+    $ sudo pvs
+      PV         VG   Fmt  Attr PSize    PFree
+      /dev/xvdX1      lvm2 a-   1024.00g 1024.00g
+
+* Add it to the main volume group::
+
+    sudo vgextend main ${DEVICE}1
+
+Creating a New Logical Volume
+-----------------------------
+
+Make sure there is enough space in the volume group::
+
+  $ sudo vgs
+    VG   #PV #LV #SN Attr   VSize VFree
+    main   4   2   0 wz--n- 2.00t 347.98g
+
+If not, see `Adding a New Device`_.
+
+Create the new logical volume and initialize the filesystem::
+
+  NAME=newvolumename
+  sudo lvcreate -L1500GB -n $NAME main
+
+  sudo mkfs.ext4 -m 0 -j -L $NAME /dev/main/$NAME
+  sudo tune2fs -i 0 -c 0 /dev/main/$NAME
+
+Be sure to add it to ``/etc/fstab``.
+
+Expanding an Existing Logical Volume
+------------------------------------
+
+Make sure there is enough space in the volume group::
+
+  $ sudo vgs
+    VG   #PV #LV #SN Attr   VSize VFree
+    main   4   2   0 wz--n- 2.00t 347.98g
+
+If not, see `Adding a New Device`_.
+
+The following example increases the size of a volume by 100G::
+
+  NAME=volumename
+  sudo lvextend -L+100G /dev/main/$NAME
+  sudo resize2fs /dev/main/$NAME

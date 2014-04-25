@@ -41,6 +41,13 @@ Gerrit is installed and configured by Puppet, including specifying the
 exact Java WAR file that is used.  See :ref:`sysadmin` for how Puppet
 is used to manage OpenStack infrastructure systems.
 
+Cinder Volumes
+--------------
+
+The Gerrit installation at /home/gerrit2 is located on a Cinder
+volume.  See :ref:`cinder` for details on volume management.  Note
+that SSD volumes are used (and they have a mininum size of 100G).
+
 Gerrit Configuration
 --------------------
 
