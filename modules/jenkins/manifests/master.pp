@@ -149,7 +149,7 @@ class jenkins::master(
     owner   => 'jenkins',
     group   => 'nogroup',
     mode    => '0644',
-    content => $jenkins_ssh_public_key,
+    content => template('jenkins/master.pub.key.erb'),
     replace => true,
     require => File['/var/lib/jenkins/.ssh/'],
   }
