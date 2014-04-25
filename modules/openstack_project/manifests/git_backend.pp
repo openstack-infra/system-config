@@ -64,12 +64,16 @@ class openstack_project::git_backend (
     require => User['cgit'],
   }
 
-  ssh_authorized_key { '/home/cgit/.ssh/authorized_keys':
+  ssh_authorized_key { 'gerrit-replication-2014-04-25':
     ensure  => present,
     user    => 'cgit',
     type    => 'ssh-rsa',
     key     => $git_gerrit_ssh_key,
     require => File['/home/cgit/.ssh/']
+  }
+  ssh_authorized_key { '/home/cgit/.ssh/authorized_keys':
+    ensure  => absent,
+    user    => 'cgit',
   }
 
   file { '/home/cgit/projects.yaml':
