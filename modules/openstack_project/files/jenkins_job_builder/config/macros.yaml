@@ -116,6 +116,7 @@
     builders:
       - shell: |
           mkdir -p .bundle
+          ruby1.9.1 /usr/bin/bundle config --global jobs $(nproc)
           ruby1.9.1 /usr/bin/bundle install --path=.bundle
 
 - builder:
