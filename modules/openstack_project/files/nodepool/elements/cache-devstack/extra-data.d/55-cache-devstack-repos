@@ -21,9 +21,13 @@ import subprocess
 import sys
 
 
-DEVSTACK = os.path.expanduser('/opt/git/openstack-dev/devstack')
-CACHEDIR = os.path.expanduser('~jenkins/cache/files')
 RELEASE = os.environ['DIB_RELEASE']
+TMP_MOUNT_PATH = os.environ['TMP_MOUNT_PATH']
+TMP_HOOKS_PATH = os.environ['TMP_HOOKS_PATH']
+
+DEVSTACK = os.path.join(TMP_MOUNT_PATH, 'opt/git/openstack-dev/devstack')
+CACHEDIR = os.path.join(TMP_MOUNT_PATH, 'tmp')
+IMAGES=os.path.join(TMP_HOOKS_PATH, 'source-repository-images')
 
 
 def run_local(cmd, status=False, cwd='.', env={}):
@@ -76,7 +80,7 @@ def local_prep(distribution):
         run_local(['git', 'checkout', branch], cwd=DEVSTACK)
         run_local(['git', 'pull', '--ff-only', 'origin'], cwd=DEVSTACK)
 
-        if os.path.exists('/usr/bin/apt-get'):
+        if os.path.exists(os.path.join(TMP_MOUNT_PATH, 'usr/bin/apt-get')):
             debs = []
             debdir = os.path.join(DEVSTACK, 'files', 'apts')
             for fn in os.listdir(debdir):
@@ -84,7 +88,7 @@ def local_prep(distribution):
                 tokenize(fn, debs, distribution, comment='#')
             branch_data['debs'] = debs
 
-        if os.path.exists('/usr/bin/rpm'):
+        if os.path.exists(os.path.join(TMP_MOUNT_PATH, 'usr/bin/rpm')):
             rpms = []
             rpmdir = os.path.join(DEVSTACK, 'files', 'rpms')
             for fn in os.listdir(rpmdir):
@@ -121,24 +125,38 @@ def local_prep(distribution):
 def main():
 
     branches = local_prep(RELEASE)
-    image_filenames = []
-    for branch_data in branches:
-        if branch_data.get('debs'):
-            run_local(['sudo', 'apt-get', '-y', '-d', 'install'] +
-                      branch_data['debs'])
-        elif branch_data.get('rpms'):
-            run_local(['sudo', 'yum', 'install', '-y', '--downloadonly'] +
-                      branch_data['rpms'])
-        else:
-            sys.exit('No supported package data found.')
 
-        for url in branch_data['images']:
-            fname = url.split('/')[-1]
-            if fname in image_filenames:
-                continue
-            image_filenames.append(fname)
-            run_local(['wget', '-nv', '-c', url,
-                       '-O', os.path.join(CACHEDIR, fname)])
+    with open(os.path.join(CACHEDIR, 'pkgs-to-install'), 'w') as pkgs:
+        for branch_data in branches:
+            if branch_data.get('debs'):
+                pkgs.write(" ".join(branch_data['debs']) + "\n")
+            elif branch_data.get('rpms'):
+                pkgs.write(" ".join(branch_data['rpms']) + "\n")
+            else:
+                sys.exit('No supported package data found.')
+
+    image_filenames = []
+    line_template = "%(name)s file %(location)s %(url)s\n"
+    with open(IMAGES, 'w') as images_list:
+        for branch_data in branches:
+            for url in branch_data['images']:
+                fname = url.split('/')[-1].strip()
+                if fname == '':
+                    continue
+                # TODO: There is an image in devstack that starts with
+                #       $HEAT_FETCHED_TEST_IMAGE
+                if fname.startswith('$'):
+                    continue
+                if fname in image_filenames:
+                    continue
+                image_filenames.append(fname)
+                args = dict(
+                    name=fname,
+                    location=os.path.join('/home/jenkins/cache/files', fname),
+                    url=url)
+
+                images_list.write(line_template % args)
+
 
 if __name__ == '__main__':
     main()

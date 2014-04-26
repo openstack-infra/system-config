@@ -15,4 +15,16 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-chattr +i /etc/resolv.conf
+set -e
+
+while read line ; do
+
+    if [ -f /usr/bin/apt-get ] ; then
+        apt-get -y -d install $line
+    else
+        yum install -y --downloadonly $line
+    fi
+
+done < ~/tmp/pkgs-to-install
+
+rm /tmp/pkgs-to-install
