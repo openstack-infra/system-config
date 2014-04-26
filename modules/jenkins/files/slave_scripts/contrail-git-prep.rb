@@ -57,11 +57,12 @@ def setup_contrail_repo
     sh "cd #{TOP}/repo"
 
     # Initialize a repo. TODO Do not hard code manifest.xml file path
-    sh "repo init -u git@github.com:Juniper/contrail-vnc-private " +
-       "-m mainline/ubuntu-12-04/manifest-havana.xml"
+    sh "repo init -u git@github.com:Juniper/contrail-vnc " +
+       "-m default.xml"
+#      "-m mainline/ubuntu-12-04/manifest-havana.xml"
 
     # Sync the repo
-    sh "/usr/local/jenkins/slave_scripts/repo sync"
+    sh "repo sync"
 end
 
 # TODO Ideally, we should tweak .repo/manifest.xml to directly fetch project
