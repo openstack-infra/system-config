@@ -17,3 +17,8 @@
     name: contrail-ci-test-jobs
     jobs:
       - 'ci-{name}-build'
+
+- job-group:
+    name: contrail-controller-test-jobs
+    jobs:
+      - 'ci-{name}-build'
