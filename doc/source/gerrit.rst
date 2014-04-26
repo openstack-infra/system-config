@@ -46,7 +46,7 @@ Cinder Volumes
 
 The Gerrit installation at /home/gerrit2 is located on a Cinder
 volume.  See :ref:`cinder` for details on volume management.  Note
-that SSD volumes are used (and they have a mininum size of 100G).
+that SSD volumes are used (and they have a minimum size of 100G).
 
 Gerrit Configuration
 --------------------
@@ -374,7 +374,7 @@ Manual Administrative Tasks
 ===========================
 
 The following sections describe tasks that individuals with root
-access may need to perform on rare occations.
+access may need to perform on rare occasions.
 
 
 Renaming a Project

@@ -30,7 +30,7 @@ Overview
 Once per day, for every image type (and provider) configured by nodepool, a new
 image with cached data for use by devstack.  Nodepool spins up new instances
 and tears down old as tests are queued up and completed, always maintaining a
-consistant number of available instances for tests up to the set limits of the
+consistent number of available instances for tests up to the set limits of the
 CI infrastructure.
 
 Bad Images

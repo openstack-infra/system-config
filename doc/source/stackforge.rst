@@ -232,9 +232,9 @@ end of this file that looks like::
         - master
 
 For more information about channel requirements and IRC services provided by
-the infrasructure team, visit :ref:`irc`
+the infrastructure team, visit :ref:`irc`
 
-And thats it. At this point you will want to submit these edits as a
+And that's it. At this point you will want to submit these edits as a
 change to review.openstack.org. When you do so, please use the
 ``new-project`` topic.  You can do that using the ``-t`` option to
 ``git review``.

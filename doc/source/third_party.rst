@@ -10,7 +10,7 @@ Jenkins setup.  It is also possible for these systems to feed information back
 into Gerrit and they can also leave non-gating votes on Gerrit review requests.
 
 An example of one such system is `Smokestack <https://smokestack.openstack.org/>`_.
-Smokestack reads the Gerrit event stream and runs it's own tests on the commits.
+Smokestack reads the Gerrit event stream and runs its own tests on the commits.
 If one of the tests fails it will publish information and links to the failure
 on the review in Gerrit.
 

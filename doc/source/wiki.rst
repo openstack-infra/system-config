@@ -58,7 +58,7 @@ active Mediawiki install slot. To perform a Mediawiki upgrade:
      skin and openid. Any untracked extensions that we are not using
      should be removed.
   #. Update the untracked extensions that we are using
-     ``cd $EXTENSION_DIR && git pull origin master``. Note their may be
+     ``cd $EXTENSION_DIR && git pull origin master``. Note there may be
      conflicts doing this if security patches or bug fixes have been
      applied by hand. Refer to /srv/mediawiki/NOTES for info.
   #. Run the backup script ``/srv/mediawiki/backup.sh``. This will backup

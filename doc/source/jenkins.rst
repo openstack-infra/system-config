@@ -137,14 +137,14 @@ hand:
 
 #. You will configure global scp and ftp credentials for static and
    docs sites respectively later, but as we haven't setup those sites
-   yet, thats not possible :).
+   yet, that's not possible :).
 
 Puppet takes care of the rest.
 
 Quirks
 ------
 
-Note that jenkins talks to it's slaves via ssh, the
+Note that jenkins talks to its slaves via ssh, the
 modules/openstack_project/manifests/init.pp file contains the ssh
 public key that puppet installs on the slaves.
 
