@@ -8,7 +8,7 @@ if ENV['ZUUL_PROJECT'] !~ /Juniper\/(.*)/ then
 end
 
 @project = $1
-# @project = "controller" if @project == "contrail-controller" # Temporary hack
+@project = "contrail-controller" if @project == "contrail-controller-test" # For testing
 puts "Working with project #{@project}"
 
 GERRIT_SITE="https://review.opencontrail.org" # ARGV[0]
