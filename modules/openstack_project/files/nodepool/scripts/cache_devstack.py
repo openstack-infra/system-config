@@ -158,7 +158,7 @@ def main():
     # cache get-pip, because upstream network connection fails more
     # often than you might imagine.
     download(
-        'https://raw.github.com/pypa/pip/master/contrib/get-pip.py',
+        'https://raw.githubusercontent.com/pypa/pip/master/contrib/get-pip.py',
         'get-pip.py')
 
 
