@@ -88,6 +88,14 @@ EOF
     yum install -y redhat-lsb-core git puppet
 else
     #defaults to Ubuntu
+    lsbdistcodename=$(lsb_release -c -s)
+    if [ $lsbdistcodename == 'trusty' ] ; then
+        gempkg=ruby
+        THREE=yes
+    else
+        gempkg=rubygems
+    fi
+
     # NB: keep in sync with openstack_project/files/00-puppet.pref
     if [ "$THREE" != 'yes' ]; then
     cat > /etc/apt/preferences.d/00-puppet.pref <<EOF
@@ -108,8 +116,10 @@ EOF
     rm $puppet_deb
 
     apt-get update
-    DEBIAN_FRONTEND=noninteractive apt-get --option 'Dpkg::Options::=--force-confold' \
+    DEBIAN_FRONTEND=noninteractive apt-get \
+        --option 'Dpkg::Options::=--force-confold' \
         --assume-yes dist-upgrade
-    DEBIAN_FRONTEND=noninteractive apt-get --option 'Dpkg::Options::=--force-confold' \
-        --assume-yes install -y --force-yes puppet git rubygems
+    DEBIAN_FRONTEND=noninteractive apt-get \
+        --option 'Dpkg::Options::=--force-confold' \
+        --assume-yes install -y --force-yes puppet git $gempkg
 fi
