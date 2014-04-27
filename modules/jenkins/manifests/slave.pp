@@ -192,12 +192,6 @@ class jenkins::slave(
     }
   }
 
-  # Packages that need to be installed from pip
-  # Temporarily removed tox so we can pin it separately (see below)
-  $pip_packages = [
-    'setuptools-git',
-  ]
-
   if $python3 {
     if ($::lsbdistcodename == 'precise') {
       apt::ppa { 'ppa:zulcss/py3k':
@@ -205,11 +199,6 @@ class jenkins::slave(
       }
     }
     include pip::python3
-    package { $pip_packages:
-      ensure   => latest,  # we want the latest from these
-      provider => pip3,
-      require  => Class[pip::python3],
-    }
     # Temporarily handle tox separately so we can pin it
     package { 'tox':
       ensure   => '1.6.1',
@@ -217,23 +206,12 @@ class jenkins::slave(
       require  => Class['pip::python3'],
     }
   } else {
-    package { $pip_packages:
-      ensure   => latest,  # we want the latest from these
-      provider => pip,
-      require  => Class[pip],
-    }
     # Temporarily handle tox separately so we can pin it
     package { 'tox':
       ensure   => '1.6.1',
       provider => pip,
       require  => Class['pip'],
     }
-  }
-
-  package { 'python-subunit':
-    ensure   => absent,
-    provider => pip,
-    require  => Class[pip],
   }
 
   package { 'git-review':
