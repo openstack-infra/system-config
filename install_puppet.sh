@@ -18,7 +18,7 @@
 
 # Install pip using get-pip
 EZ_SETUP_URL=https://bitbucket.org/pypa/setuptools/raw/bootstrap/ez_setup.py
-PIP_GET_PIP_URL=https://raw.github.com/pypa/pip/master/contrib/get-pip.py
+PIP_GET_PIP_URL=https://raw.githubusercontent.com/pypa/pip/master/contrib/get-pip.py
 
 curl -O $EZ_SETUP_URL || wget $EZ_SETUP_URL
 python ez_setup.py
