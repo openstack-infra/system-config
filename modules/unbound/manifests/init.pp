@@ -69,7 +69,6 @@ class unbound (
     group   => 'root',
     mode    => '0444',
     require => Service['unbound'],
-    notify  => Exec['make-resolv-conf-immutable'],
   }
 
   service { 'unbound':
