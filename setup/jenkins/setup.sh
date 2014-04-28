@@ -6,6 +6,8 @@ apt-get update
 
 JENKINS=jenkins
 
+# Setup jenkins ssh server port to 6000 and jnlp slave port to 6001
+
 # setup ~jenkins/.ssh
 function ssh_setup() {
     SSH_CONFIG =<<EOF

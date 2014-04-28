@@ -83,5 +83,5 @@ function flip_jenkins_job {
 }
 
 function create_sample_review() {
-    export FILE=$1 && git checkout origin/master && git checkout test$FILE && echo $FILE > $FILE && git add $FILE && git commit -m "sample commit $FILE" $FILE && git review
+    export FILE=$1  && git checkout origin/master && ( git branch -D test$FILE || true ) && git checkout -b ci-test$FILE && mkdir -p ci-test && echo $FILE > ci-test/$FILE && git add ci-test/$FILE && git commit -m "sample commit ci-test/$FILE" ci-test/$FILE && git review -y
 }
