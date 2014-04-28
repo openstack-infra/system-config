@@ -52,7 +52,7 @@ def tokenize(fn, tokens, distribution, comment=None):
 def _legacy_find_images(basedir):
     """Divine what images we should use based on parsing stackrc."""
     images = []
-    for line in open(os.path.join(DEVSTACK, 'stackrc')):
+    for line in open(os.path.join(basedir, 'stackrc')):
         line = line.strip()
         if line.startswith('IMAGE_URLS'):
             if '#' in line:
@@ -78,7 +78,7 @@ def _legacy_find_images(basedir):
 def _find_images(basedir):
     images = []
     try:
-        image_tool = os.path.join(DEVSTACK, 'tools', 'image_list.sh')
+        image_tool = os.path.join(basedir, 'tools', 'image_list.sh')
         if os.path.exists(image_tool):
             images = subprocess.check_output(image_tool).split('\n')
     except subprocess.CalledProcessError as ce:
