@@ -26,3 +26,4 @@ scp /etc/hosts ci-puppetmaster:/etc/
 scp /etc/hosts puppetdb:/etc/
 scp /etc/hosts ubuntu-base-os:/etc/
 
+apt-get -y install traceroute wireshark

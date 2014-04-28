@@ -6,7 +6,7 @@
       - shell: |
           #!/bin/bash -xe
           cd ~jenkins/workspace/ci-{name}-build/repo
-          scons -U controller/src/discovery
+          scons -U controller/src/base
 
 - job-group:
     name: contrail-jobs
