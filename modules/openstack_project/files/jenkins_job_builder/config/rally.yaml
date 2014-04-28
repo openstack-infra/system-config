@@ -54,6 +54,12 @@
     name: 'check-rally-dsvm-{name}'
     node: 'devstack-precise || devstack-precise-check'
 
+    wrappers:
+      - timeout:
+          timeout: 120
+          fail: true
+      - timestamps
+
     builders:
       - devstack-rally-gate:
           scenario: '{name}'
