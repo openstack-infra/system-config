@@ -5,7 +5,9 @@ class gerritbot(
   $password = '',
   $server = '',
   $user = '',
-  $vhost_name = ''
+  $vhost_name = '',
+  $ssh_rsa_key_contents = '',
+  $ssh_rsa_pubkey_contents = '',
 ) {
   include pip
 
@@ -75,6 +77,28 @@ class gerritbot(
     owner   => 'root',
     replace => true,
     require => User['gerrit2'],
+  }
+
+  if $ssh_rsa_key_contents != '' {
+    file { '/home/gerrit2/.ssh/gerritbot_rsa':
+      owner   => 'gerrit2',
+      group   => 'gerrit2',
+      mode    => '0600',
+      content => $ssh_rsa_key_contents,
+      replace => true,
+      require => File['/home/gerrit2/.ssh']
+    }
+  }
+
+  if $ssh_rsa_pubkey_contents != '' {
+    file { '/home/gerrit2/.ssh/gerritbot_rsa.pub':
+      owner   => 'gerrit2',
+      group   => 'gerrit2',
+      mode    => '0644',
+      content => $ssh_rsa_pubkey_contents,
+      replace => true,
+      require => File['/home/gerrit2/.ssh']
+    }
   }
 }
 

@@ -20,6 +20,8 @@ node 'review.openstack.org' {
     mysql_password                      => hiera('gerrit_mysql_password'),
     email_private_key                   => hiera('gerrit_email_private_key'),
     gerritbot_password                  => hiera('gerrit_gerritbot_password'),
+    gerritbot_ssh_rsa_key_contents      => hiera('gerritbot_ssh_rsa_key_contents'),
+    gerritbot_ssh_rsa_pubkey_contents   => hiera('gerritbot_ssh_rsa_pubkey_contents'),
     ssl_cert_file_contents              => hiera('gerrit_ssl_cert_file_contents'),
     ssl_key_file_contents               => hiera('gerrit_ssl_key_file_contents'),
     ssl_chain_file_contents             => hiera('gerrit_ssl_chain_file_contents'),
