@@ -5,7 +5,7 @@
       - gerrit-git-prep
       - shell: |
           #!/bin/bash -xe
-          cd /var/lib/jenkins/jobs/ci-{name}-build/workspace/repo
+          cd ~jenkins/workspace/ci-{name}-build/repo
           scons -U controller/src/discovery
 
 - job-group:

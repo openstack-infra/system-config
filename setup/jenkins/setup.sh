@@ -8,9 +8,20 @@ JENKINS=jenkins
 
 # Setup jenkins ssh server port to 6000 and jnlp slave port to 6001
 
+function iptables_restart {
+/etc/init.d/iptables-persistent restart
+}
+
+function setup_nat_entries {
+iptables -t nat -I PREROUTING -p tcp -d 148.251.46.180 --dport 8080 -j DNAT --to-destination 192.168.1.13:8080
+iptables -t nat -I PREROUTING -p tcp -d 148.251.46.180 --dport 6000 -j DNAT --to-destination 192.168.1.13:6000
+iptables -t nat -I PREROUTING -p tcp -d 148.251.46.180 --dport 6001 -j DNAT --to-destination 192.168.1.13:6001
+iptables -I FORWARD -m state -d 192.168.1.0/24 --state NEW,RELATED,ESTABLISHED -j ACCEPT        
+}
+
 # setup ~jenkins/.ssh
 function ssh_setup() {
-    SSH_CONFIG =<<EOF
+SSH_CONFIG =<<EOF
 UserKnownHostsFile=/dev/null
 StrictHostKeyChecking=no
 
@@ -25,17 +36,17 @@ EOF
 }
 
 function flip_jenkins_job {
-    # Download jenkins-cli.jar
-    if [ ! -f /usr/local/bin/jenkins-cli.jar ]; then
-        wget -O $HOME/jenkins-cli.jar https://jenkins.opencontrail.org/jnlpJars/jenkins-cli.jar --no-check-certificate
-    fi
-    java -jar $HOME/jenkins-cli.jar -s http://jenkins.opencontrail.org:8080 disable-job $1
-    java -jar $HOME/jenkins-cli.jar -s http://jenkins.opencontrail.org:8080 enable-job $1
+# Download jenkins-cli.jar
+if [ ! -f /usr/local/bin/jenkins-cli.jar ]; then
+    wget -O $HOME/jenkins-cli.jar https://jenkins.opencontrail.org/jnlpJars/jenkins-cli.jar --no-check-certificate
+fi
+java -jar $HOME/jenkins-cli.jar -s http://jenkins.opencontrail.org:8080 disable-job $1
+java -jar $HOME/jenkins-cli.jar -s http://jenkins.opencontrail.org:8080 enable-job $1
 }
 
 # setup ~jenkins/.gitconfig
 function git_setup() {
-    GIT_CONFIG=<<EOF
+GIT_CONFIG=<<EOF
 [user]
         name = OpenContrail CI
         email = ci-admin@opencontrail.org
@@ -47,20 +58,20 @@ function git_setup() {
         autosetuprebase = always
 EOF
 
-    echo $GIT_CONFIG > ~$JENKINS/.gitconfig
+echo $GIT_CONFIG > ~$JENKINS/.gitconfig
 }
 
 # Setup a node as a build system where contrail software can be built.
 function build_setup {
-    apt-get -y install python-software-properties git python-lxml unzip patch scons flex bison make vim ant libexpat-dev libgettextpo0 libcurl4-openssl-dev python-dev autoconf automake build-essential libtool libevent-dev libxml2-dev libxslt-dev python-setuptools build-essential devscripts debhelper ruby maven
+apt-get -y install python-software-properties git python-lxml unzip patch scons flex bison make vim ant libexpat-dev libgettextpo0 libcurl4-openssl-dev python-dev autoconf automake build-essential libtool libevent-dev libxml2-dev libxslt-dev python-setuptools build-essential devscripts debhelper ruby maven
 
-    wget -O /usr/bin/repo http://commondatastorage.googleapis.com/git-repo-downloads/repo && chmod 755 /usr/bin/repo
+wget -O /usr/bin/repo http://commondatastorage.googleapis.com/git-repo-downloads/repo && chmod 755 /usr/bin/repo
 
-    add-apt-repository -y ppa:webupd8team/java
-    apt-get update
-    echo debconf shared/accepted-oracle-license-v1-1 select true | debconf-set-selections
-    echo debconf shared/accepted-oracle-license-v1-1 seen true | debconf-set-selections
-    apt-get -y install oracle-java7-installer
+add-apt-repository -y ppa:webupd8team/java
+apt-get update
+echo debconf shared/accepted-oracle-license-v1-1 select true | debconf-set-selections
+echo debconf shared/accepted-oracle-license-v1-1 seen true | debconf-set-selections
+apt-get -y install oracle-java7-installer
 }
 
 functions setup_certificates {
@@ -81,12 +92,12 @@ dpkg-reconfigure ca-certificates
 }
 
 functions start_slave {
-    # Install certificates
-    setup_certificates
+# Install certificates
+setup_certificates
 
-    # Download slave.jar
-    wget -O $HOME/slave.jar https://jenkins.opencontrail.org/jnlpJars/slave.jar
-    java -jar slave.jar -jnlpUrl https://jenkins.opencontrail.org/computer/jnpr-slave-1/slave-agent.jnlp -jnlpCredentials ci-admin:b8057c342d448
+# Download slave.jar
+wget -O $HOME/slave.jar https://jenkins.opencontrail.org/jnlpJars/slave.jar
+java -jar slave.jar -jnlpUrl https://jenkins.opencontrail.org/computer/jnpr-slave-1/slave-agent.jnlp -jnlpCredentials ci-admin:b8057c342d448
 }
 
 sudo build_setup
