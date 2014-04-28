@@ -300,9 +300,9 @@ Next, edit `project.config` to look like::
       state = active
   [access "refs/*"]
       read = group Anonymous Users
-      pushTag = group Continuous Integration Tools
-      pushTag = group Project Bootstrappers
-      pushTag = group Release Managers
+      pushSignedTag = group Continuous Integration Tools
+      pushSignedTag = group Project Bootstrappers
+      pushSignedTag = group Release Managers
       forgeAuthor = group Registered Users
       forgeCommitter = group Project Bootstrappers
       push = +force group Project Bootstrappers

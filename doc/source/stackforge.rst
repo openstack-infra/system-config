@@ -78,8 +78,7 @@ and make it look like::
           label-Approved = +0..+1 group project-name-core
           workInProgress = group project-name-core
   [access "refs/tags/*"]
-          create = group project-name-core
-          pushTag = group project-name-core
+          pushSignedTag = group project-name-core
   [receive]
           requireChangeId = true
           requireContributorAgreement = true
