@@ -122,7 +122,6 @@ class openstack_project::review (
     github_oauth_token                  => $github_oauth_token,
     github_project_username             => $github_project_username,
     github_project_password             => $github_project_password,
-    trivial_rebase_role_id              => 'trivial-rebase@review.openstack.org',
     mysql_host                          => $mysql_host,
     mysql_password                      => $mysql_password,
     email_private_key                   => $email_private_key,
