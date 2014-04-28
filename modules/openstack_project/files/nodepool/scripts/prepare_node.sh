@@ -60,6 +60,18 @@ if [ -x /sbin/restorecon ] ; then
     sudo chcon system_u:object_r:named_conf_t:s0 /etc/unbound/forwarding.conf
 fi
 
+# Overwrite /etc/resolv.conf at boot
+sudo dd of=/etc/rc.local <<EOF
+#!/bin/bash
+set -e
+set -o xtrace
+
+echo 'nameserver 127.0.0.1' > /etc/resolv.conf
+chattr +i /etc/resolv.conf
+
+exit 0
+EOF
+
 sudo bash -c "echo 'include: /etc/unbound/forwarding.conf' >> /etc/unbound/unbound.conf"
 if [ -e /etc/init.d/unbound ] ; then
     sudo /etc/init.d/unbound restart
