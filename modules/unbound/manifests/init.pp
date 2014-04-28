@@ -72,17 +72,6 @@ class unbound (
     notify  => Exec['make-resolv-conf-immutable'],
   }
 
-  # Rackspace uses file injection to configure networking which
-  # overwrites all of the files on disk where we could set the env
-  # variable to disable the resolv.conf update on network-up.
-  # Instead, make that file immutable so that the update will fail
-  # (harmlessly).  Of course this means Puppet won't be able to
-  # update it either after this, but we don't plan on changing it.
-  exec { 'make-resolv-conf-immutable':
-    command     => '/usr/bin/chattr +i /etc/resolv.conf',
-    refreshonly => true,
-  }
-
   service { 'unbound':
     ensure     => running,
     name       => 'unbound',
