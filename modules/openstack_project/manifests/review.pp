@@ -77,7 +77,6 @@ class openstack_project::review (
 ) {
 
   class { 'openstack_project::gerrit':
-    testmode                            => true,
     ssl_cert_file                       =>
       '/etc/ssl/certs/review.openstack.org.pem',
     ssl_key_file                        =>
