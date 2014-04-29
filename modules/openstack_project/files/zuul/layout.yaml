@@ -2526,6 +2526,8 @@ projects:
       - noop
     gate:
       - noop
+    release:
+      - sandbox-tag
 
   - name: openstack-dev/specs-cookiecutter
     check:

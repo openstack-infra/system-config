@@ -53,3 +53,15 @@
       - console-log
 
     node: '{node}'
+
+- job:
+    name: 'sandbox-tag'
+
+    builders:
+      - revoke-sudo
+      - gerrit-git-prep
+
+    publishers:
+      - console-log
+
+    node: 'bare-precise'
