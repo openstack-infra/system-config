@@ -151,6 +151,7 @@ class gerrit(
   $testmode = false,
   $secondary_index = false,
   $secondary_index_type = 'LUCENE',
+  $enable_javamelody_top_menu = false,
 ) {
   include apache
   include jeepyb
