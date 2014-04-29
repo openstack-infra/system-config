@@ -126,6 +126,12 @@ node 'community.openstack.org' {
   }
 }
 
+node 'yum.openstack.org' {
+  class { 'openstack_project::yum_mirror':
+    sysadmins => hiera('sysadmins', ['admin']),
+  }
+}
+
 node 'ci-puppetmaster.openstack.org' {
   class { 'openstack_project::puppetmaster':
     root_rsa_key    => hiera('puppetmaster_root_rsa_key', 'XXX'),
