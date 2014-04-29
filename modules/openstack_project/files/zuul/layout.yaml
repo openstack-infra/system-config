@@ -199,6 +199,10 @@ pipelines:
         - event: change-restored
         - event: comment-added
           comment_filter: (?i)^(Patch Set [0-9]+:\n\n)?\s*recheck(( (?:bug|lp)[\s#:]*(\d+))|( no bug))\s*$
+        - event: comment-added
+          require-approval:
+            - username: jenkins
+              older-than: 120h
     success:
       gerrit: {}
     failure:
