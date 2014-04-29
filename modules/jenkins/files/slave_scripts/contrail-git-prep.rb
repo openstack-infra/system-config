@@ -61,8 +61,6 @@ def setup_gerrit_repo
 end
 
 def setup_contrail_repo
-    return unless @gerrit_setup
-
     # Restore to parent directory
     sh "rm -rf #{TOP}/repo"
     sh "mkdir -p #{TOP}/repo"
