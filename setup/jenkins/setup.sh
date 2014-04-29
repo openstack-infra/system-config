@@ -94,11 +94,12 @@ dpkg-reconfigure ca-certificates
 
 functions start_slave {
 # Install certificates
-setup_certificates
+# setup_certificates
 
 # Download slave.jar
-wget -O $HOME/slave.jar https://jenkins.opencontrail.org/jnlpJars/slave.jar
-java -jar slave.jar -jnlpUrl https://jenkins.opencontrail.org/computer/jnpr-slave-1/slave-agent.jnlp -jnlpCredentials ci-admin:b8057c342d448
+# wget -O $HOME/slave.jar https://jenkins.opencontrail.org/jnlpJars/slave.jar
+# java -jar slave.jar -jnlpUrl https://jenkins.opencontrail.org/computer/jnpr-slave-1/slave-agent.jnlp -jnlpCredentials ci-admin:b8057c342d448
+java -jar swarm-client-1.15-jar-with-dependencies.jar -labels juniper-tests -mode normal -master http://jenkins.opencontrail.org:8080/ -fsroot ~jenkins -username ci-admin -password b8057c342d44883f750d93f1cc2d092f
 }
 
 sudo build_setup
