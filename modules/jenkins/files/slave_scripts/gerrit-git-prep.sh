@@ -71,7 +71,7 @@ fi
 
 if echo "$ZUUL_REF" | grep -q ^refs/tags/
 then
-    git fetch --tags $ZUUL_URL/$ZUUL_PROJECT $ZUUL_REF
+    git fetch --tags $ZUUL_URL/$ZUUL_PROJECT
     git checkout $ZUUL_REF
     git reset --hard $ZUUL_REF
 elif [ -z "$ZUUL_NEWREV" ]
