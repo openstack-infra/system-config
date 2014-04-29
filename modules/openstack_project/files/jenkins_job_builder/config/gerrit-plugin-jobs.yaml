@@ -33,7 +33,7 @@
       - war:
           site: '{tarball-site}'
           warfile: 'gerrit/buck-out/gen/plugins/{plugin-name}/{plugin-name}-${{PROJECT_VER}}.jar'
-          target: 'tarballs/ci/{name}'
+          target: 'tarballs/ci/gerrit/plugins/{plugin-name}'
       - console-log
 
 - job-group:
