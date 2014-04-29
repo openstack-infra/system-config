@@ -6,6 +6,8 @@ define user::virtual::localuser(
   $realname,
   $groups     = [ 'sudo', 'admin', ],
   $sshkeys    = '',
+  $key_id     = '',
+  $old_keys   = [],
   $shell      = '/bin/bash',
   $home       = "/home/${title}",
   $managehome = true
@@ -36,12 +38,28 @@ define user::virtual::localuser(
     require => User[$title],
   }
 
-  ssh_authorized_key { "${title}_keys":
+  file { "${title}_keyfile":
+    ensure => present,
+    mode   => '0600',
+    require => File["${title}_sshdir"],
+  }
+
+  ssh_authorized_key { "${title}_${key_id}":
     ensure  => present,
     key     => $sshkeys,
     user    => $title,
     type    => 'ssh-rsa',
-    require => File["${title}_sshdir"],
+    require => File["${title}_keyfile"],
+  }
+
+  ssh_authorized_key { "${title}_keys}":
+    ensure => absent,
+  }
+
+  if ( $old_keys != [] ) {
+    ssh_authorized_key { $old_keys:
+      ensure  => absent,
+    }
   }
 }
 
