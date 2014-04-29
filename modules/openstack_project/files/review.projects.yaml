@@ -301,6 +301,11 @@
   description: OpenStack Common DB Code
   group: oslo
   upstream: git://github.com/malor/oslo.db.git
+- project: openstack/oslo.i18n
+  description: Internationalization and translation library.
+  group: oslo
+  docimpact-group: openstack-manuals
+  upstream: git@github.com:dhellmann/oslo.i18n.git
 - project: openstack/oslo.messaging
   docimpact-group: openstack-manuals
   upstream: git://github.com/markmc/oslo.messaging.git
