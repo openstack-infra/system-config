@@ -20,7 +20,10 @@
 # memory.
 if [ -f /etc/default/grub ] ; then
     sudo sed -i -e 's/^GRUB_TIMEOUT=[0-9]\+/GRUB_TIMEOUT=0/' -e 's/#\?GRUB_CMDLINE_LINUX=""/GRUB_CMDLINE_LINUX="mem=8G"/g' /etc/default/grub
-    sudo update-grub
+    # update-grub doesn't exist on fedora
+    if which update-grub &> /dev/null ; then
+        sudo update-grub
+    fi
 elif [ -f /boot/grub/grub.conf ] ; then
     sudo sed -i -e 's/^timeout=[0-9]\+/timeout=0/' -e 's/\(^\s\+kernel.*\)/\1 mem=8G/' /boot/grub/grub.conf
 fi
