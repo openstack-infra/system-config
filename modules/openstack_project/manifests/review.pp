@@ -184,6 +184,10 @@ class openstack_project::review (
     ],
   }
 
+  gerrit::plugin { 'javamelody':
+    version => '4744bfb',
+  }
+
   class { 'gerritbot':
     nick                    => 'openstackgerrit',
     password                => $gerritbot_password,
