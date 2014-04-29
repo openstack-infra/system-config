@@ -51,3 +51,13 @@ li.comment_test {list-style-type: none; }
     max-width: 100px;
     overflow-x: hidden;
 }
+/* fixes to make this like old gerrit */
+.changeTable td.dataCell {
+    height: 1em;
+}
+
+/* don't make the non voting stand out more than the voting */
+table.infoTable td.notVotable,
+.changeTable td.dataCell.labelNotApplicable {
+    background: inherit;
+}
