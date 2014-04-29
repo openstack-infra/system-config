@@ -1,10 +1,15 @@
 #!/usr/bin/env ruby
 
-# Find the project e.g. ZUUL_PROJECT=Juniper/contrail-controller
-if ENV['ZUUL_PROJECT'] !~ /Juniper\/(.*)/ then
+ENV['USER'] = "jenkins" if ENV['USER'].nil? or ENV['USER'].empty?
+@zuul_project = ENV['ZUUL_PROJECT'] || "Juniper/contrail-controller-test"
+
+@gerrit_setup = !ENV['ZUUL_PROJECT'].nil?
+
+# Find the project
+if @zuul_project !~ /Juniper\/(.*)/ then
     puts "Error: Cannot find project information off ZUUL_PROJECT : " +
-         "#{ENV['ZUUL_PROJECT']}"
-    exit -1
+         "#{@zuul_project}"
+#   exit -1
 end
 
 @project = $1
@@ -40,6 +45,8 @@ def sh (cmd, ignore = false)
 end
 
 def setup_gerrit_repo
+    return unless @gerrit_setup
+
     sh "rm -rf #{TOP}/#{@project}"
     sh "mkdir -p #{TOP}/#{@project}"
     sh "cd #{TOP}/#{@project}"
@@ -50,6 +57,7 @@ def setup_gerrit_repo
 end
 
 def setup_contrail_repo
+    return unless @gerrit_setup
 
     # Restore to parent directory
     sh "rm -rf #{TOP}/repo"
@@ -84,8 +92,8 @@ def switch_gerrit_repo
 end
 
 def pre_build_setup
-    sh "python #{TOP}/repo/third_party/fetch_packages.py"
-    sh "python #{TOP}/repo/distro/third_party/fetch_packages.py"
+    sh "python #{TOP}/repo/third_party/fetch_packages.py 2>&1"
+    sh "python #{TOP}/repo/distro/third_party/fetch_packages.py 2>&1"
 end
 
 def main
