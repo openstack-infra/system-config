@@ -196,6 +196,9 @@ class openstack_project::review (
     ensure => absent,
   }
 
+  package { 'python-launchpadlib':
+    ensure => present,
+  }
   file { '/home/gerrit2/.launchpadlib':
     ensure  => directory,
     owner   => 'gerrit2',
