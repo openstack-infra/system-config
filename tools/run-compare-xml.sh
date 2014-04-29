@@ -57,26 +57,12 @@ cd .test/jenkins-job-builder
 tox -e compare-xml-old
 tox -e compare-xml-new
 
-CHANGED=0
-for x in `(cd .test/old/out && find -type f)`
-do
-    if ! diff -u .test/old/out/$x .test/new/out/$x >/dev/null 2>&1
-    then
-	CHANGED=1
-	echo "============================================================"
-	echo $x
-	echo "------------------------------------------------------------"
-    fi
-    diff -u .test/old/out/$x .test/new/out/$x || /bin/true
-done
-cd ../..
+diff -r -N -u .test/old/out .test/new/out
+CHANGED=$?  # 0 == same ; 1 == different ; 2 == error
 
 echo
 echo "You are in detached HEAD mode. If you are a developer"
 echo "and not very familiar with git, you might want to do"
 echo "'git checkout branch-name' to go back to your branch."
 
-if [ "$CHANGED" -eq "1" ]; then
-    exit 1
-fi
-exit 0
+exit $CHANGED
