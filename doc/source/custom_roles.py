@@ -1,4 +1,4 @@
-# Copyright 2013 OpenStack Foundation
+# Copyright 2013 OpenContrail Foundation
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -39,7 +39,7 @@ def file_role(name, rawtext, text, lineno, inliner,
     :param content: The directive content for customization.
     """
 
-    ref = ('https://git.openstack.org/cgit/openstack-infra/config/tree/%s'
+    ref = ('https://git.opencontrail.org/cgit/opencontrail-infra/config/tree/%s'
            % text)
     node = nodes.reference(rawtext, text, refuri=ref, **options)
     return [node], []

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Copyright 2013 OpenStack Foundation.
+# Copyright 2013 OpenContrail Foundation.
 # Copyright 2013 Hewlett-Packard Development Company, L.P.
 # Copyright 2013 Red Hat, Inc.
 #
@@ -63,7 +63,7 @@ EOF
     yum install -y redhat-lsb-core git puppet
 else
     #defaults to Ubuntu
-    # NB: keep in sync with openstack_project/files/00-puppet.pref
+    # NB: keep in sync with opencontrail_project/files/00-puppet.pref
     cat > /etc/apt/preferences.d/00-puppet.pref <<EOF
 Package: puppet puppet-common puppetmaster puppetmaster-common puppetmaster-passenger
 Pin: version 2.7*

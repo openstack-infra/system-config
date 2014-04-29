@@ -169,27 +169,27 @@ class jenkins::master(
     require => File['/var/lib/jenkins/plugins'],
   }
 
-  file { '/var/lib/jenkins/plugins/simple-theme-plugin/openstack.css':
+  file { '/var/lib/jenkins/plugins/simple-theme-plugin/opencontrail.css':
     ensure  => present,
     owner   => 'jenkins',
     group   => 'nogroup',
-    source  => 'puppet:///modules/jenkins/openstack.css',
+    source  => 'puppet:///modules/jenkins/opencontrail.css',
     require => File['/var/lib/jenkins/plugins/simple-theme-plugin'],
   }
 
-  file { '/var/lib/jenkins/plugins/simple-theme-plugin/openstack.js':
+  file { '/var/lib/jenkins/plugins/simple-theme-plugin/opencontrail.js':
     ensure  => present,
     owner   => 'jenkins',
     group   => 'nogroup',
-    content => template('jenkins/openstack.js.erb'),
+    content => template('jenkins/opencontrail.js.erb'),
     require => File['/var/lib/jenkins/plugins/simple-theme-plugin'],
   }
 
-  file { '/var/lib/jenkins/plugins/simple-theme-plugin/openstack-page-bkg.jpg':
+  file { '/var/lib/jenkins/plugins/simple-theme-plugin/opencontrail-page-bkg.jpg':
     ensure  => present,
     owner   => 'jenkins',
     group   => 'nogroup',
-    source  => 'puppet:///modules/jenkins/openstack-page-bkg.jpg',
+    source  => 'puppet:///modules/jenkins/opencontrail-page-bkg.jpg',
     require => File['/var/lib/jenkins/plugins/simple-theme-plugin'],
   }
 

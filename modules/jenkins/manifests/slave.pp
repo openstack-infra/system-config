@@ -34,11 +34,11 @@ class jenkins::slave(
   $standard_packages = [
     $::jenkins::params::ant_package, # for building buck
     $::jenkins::params::awk_package, # for building extract_docs.awk to work correctly
-    $::jenkins::params::asciidoc_package, # for building gerrit/building openstack docs
+    $::jenkins::params::asciidoc_package, # for building gerrit/building opencontrail docs
     $::jenkins::params::curl_package,
-    $::jenkins::params::docbook_xml_package, # for building openstack docs
-    $::jenkins::params::docbook5_xml_package, # for building openstack docs
-    $::jenkins::params::docbook5_xsl_package, # for building openstack docs
+    $::jenkins::params::docbook_xml_package, # for building opencontrail docs
+    $::jenkins::params::docbook5_xml_package, # for building opencontrail docs
+    $::jenkins::params::docbook5_xsl_package, # for building opencontrail docs
     $::jenkins::params::gnome_doc_package, # for generating translation files for docs
     $::jenkins::params::graphviz_package, # for generating graphs in docs
     $::jenkins::params::firefox_package, # for selenium tests
@@ -61,14 +61,14 @@ class jenkins::slave(
     $::jenkins::params::pandoc_package, #for docs, markdown->docbook, bug 924507
     $::jenkins::params::pkgconfig_package, # for spidermonkey, used by ceilometer
     $::jenkins::params::python_libvirt_package,
-    $::jenkins::params::python_lxml_package, # for validating openstack manuals
+    $::jenkins::params::python_lxml_package, # for validating opencontrail manuals
     $::jenkins::params::python_zmq_package, # zeromq unittests (not pip installable)
     $::jenkins::params::rubygems_package,
-    $::jenkins::params::sbcl_package, # cl-openstack-client testing
+    $::jenkins::params::sbcl_package, # cl-opencontrail-client testing
     $::jenkins::params::sqlite_package,
     $::jenkins::params::unzip_package,
     $::jenkins::params::zip_package,
-    $::jenkins::params::xslt_package, # for building openstack docs
+    $::jenkins::params::xslt_package, # for building opencontrail docs
     $::jenkins::params::xvfb_package, # for selenium tests
     $::jenkins::params::php5_cli_package, # for community portal build
   ]
@@ -148,7 +148,7 @@ class jenkins::slave(
         ensure => present,
       }
 
-      # For openstackid using php5-mcrypt for distro build
+      # For opencontrailid using php5-mcrypt for distro build
       package { $::jenkins::params::php5_mcrypt_package:
         ensure => present,
       }
@@ -283,9 +283,9 @@ class jenkins::slave(
 
     include mysql::server::account_security
 
-    mysql::db { 'openstack_citest':
-      user     => 'openstack_citest',
-      password => 'openstack_citest',
+    mysql::db { 'openctrl_citest':
+      user     => 'openctrl_citest',
+      password => 'openctrl_citest',
       host     => 'localhost',
       grant    => ['all'],
       require  => [
@@ -298,7 +298,7 @@ class jenkins::slave(
     # access to multiple databases and will fail if you try creating
     # a second DB with the same user. Create the DB directly as mysql::db
     # above is creating the user for us.
-    database { 'openstack_baremetal_citest':
+    database { 'opencontrail_baremetal_citest':
       ensure   => present,
       charset  => 'utf8',
       provider => 'mysql',
@@ -308,17 +308,17 @@ class jenkins::slave(
       ],
     }
 
-    database_grant { 'openstack_citest@localhost/openstack_baremetal_citest':
+    database_grant { 'openctrl_citest@localhost/opencontrail_baremetal_citest':
       privileges => ['all'],
       provider   => 'mysql',
-      require    => Database_user['openstack_citest@localhost'],
+      require    => Database_user['openctrl_citest@localhost'],
     }
 
     if ($all_mysql_privs == true) {
-      database_grant { 'openstack_citest@localhost':
+      database_grant { 'openctrl_citest@localhost':
         privileges => ['all'],
         provider   => 'mysql',
-        require    => Database_user['openstack_citest@localhost'],
+        require    => Database_user['openctrl_citest@localhost'],
       }
     }
 
@@ -355,29 +355,29 @@ class jenkins::slave(
 
     # Create DB user and explicitly make it non superuser
     # that can create databases.
-    postgresql::server::role { 'openstack_citest':
-      password_hash => postgresql_password('openstack_citest', 'openstack_citest'),
+    postgresql::server::role { 'openctrl_citest':
+      password_hash => postgresql_password('openctrl_citest', 'openctrl_citest'),
       createdb      => true,
       superuser     => false,
       require       => Class['postgresql::server'],
     }
 
-    postgresql::server::db { 'openstack_citest':
-      user     => 'openstack_citest',
-      password => postgresql_password('openstack_citest', 'openstack_citest'),
+    postgresql::server::db { 'openctrl_citest':
+      user     => 'openctrl_citest',
+      password => postgresql_password('openctrl_citest', 'openctrl_citest'),
       grant    => 'all',
       require  => [
         Class['postgresql::server'],
-        Postgresql::Server::Role['openstack_citest'],
+        Postgresql::Server::Role['openctrl_citest'],
       ],
     }
 
     # Alter the new database giving the test DB user ownership of the DB.
     # This is necessary to make the nova unittests run properly.
-    postgresql_psql { 'ALTER DATABASE openstack_citest OWNER TO openstack_citest':
+    postgresql_psql { 'ALTER DATABASE openctrl_citest OWNER TO openctrl_citest':
       db          => 'postgres',
       refreshonly => true,
-      subscribe   => Postgresql::Server::Db['openstack_citest'],
+      subscribe   => Postgresql::Server::Db['openctrl_citest'],
     }
   }
 
@@ -412,11 +412,11 @@ class jenkins::slave(
     ensure   => latest,
     provider => git,
     revision => 'master',
-    source   => 'https://git.openstack.org/openstack/requirements',
+    source   => 'https://git.opencontrail.org/opencontrail/requirements',
   }
 
   # Temporary for debugging glance launch problem
-  # https://lists.launchpad.net/openstack/msg13381.html
+  # https://lists.launchpad.net/opencontrail/msg13381.html
   # NOTE(dprince): ubuntu only as RHEL6 doesn't have sysctl.d yet
   if ($::osfamily == 'Debian') {
 

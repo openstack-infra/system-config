@@ -8,10 +8,10 @@ fi
 
 case "$ZUUL_REFNAME" in
     master)
-        export PPAS="ppa:openstack-ppa/bleeding-edge"
+        export PPAS="ppa:opencontrail-ppa/bleeding-edge"
         ;;
     milestone-proposed)
-        export PPAS="ppa:openstack-ppa/milestone-proposed"
+        export PPAS="ppa:opencontrail-ppa/milestone-proposed"
         ;;
     *)
         echo "No PPA defined for branch $ZUUL_REFNAME"
@@ -19,10 +19,10 @@ case "$ZUUL_REFNAME" in
 esac
 
 HUDSON=http://localhost:8080/
-# We keep packaging for openstack trunk in lp:~o-u-p/$project/ubuntu
+# We keep packaging for opencontrail trunk in lp:~o-u-p/$project/ubuntu
 # For a release (diablo, essex), it's in lp:~o-u-p/$project/$release
-OPENSTACK_RELEASE=${OPENSTACK_RELEASE:-ubuntu}
-BZR_BRANCH=${BZR_BRANCH:-lp:~openstack-ubuntu-packagers/$PROJECT/${OPENSTACK_RELEASE}}
+OPENCONTRAIL_RELEASE=${OPENCONTRAIL_RELEASE:-ubuntu}
+BZR_BRANCH=${BZR_BRANCH:-lp:~opencontrail-ubuntu-packagers/$PROJECT/${OPENCONTRAIL_RELEASE}}
 PPAS=${PPAS:-ppa:$PROJECT-core/trunk}
 PACKAGING_REVNO=${PACKAGING_REVNO:--1}
 series=${series:-lucid}
@@ -62,7 +62,7 @@ fi
 # Please don't change this. It's the only way I'll get notified
 # if an upload fails.
 export DEBFULLNAME="Soren Hansen"
-export DEBEMAIL="soren@openstack.org"
+export DEBEMAIL="soren@opencontrail.org"
 
 buildno=$BUILD_NUMBER
 pkgversion="${version}-0ubuntu0~${series}${buildno}"

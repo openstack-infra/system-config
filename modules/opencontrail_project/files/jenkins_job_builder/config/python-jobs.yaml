@@ -1,0 +1,252 @@
+- job-template:
+    name: '{name}-coverage'
+
+    wrappers:
+      - timeout:
+          timeout: 40
+          fail: true
+      - timestamps
+
+    builders:
+      - gerrit-git-prep
+      - coverage:
+          github-org: '{github-org}'
+          project: '{name}'
+
+    publishers:
+      - coverage-log
+      - console-log
+
+    node: '{node}'
+
+
+- job-template:
+    name: 'gate-{name}-pep8'
+
+    builders:
+      - gerrit-git-prep
+      - pep8:
+          github-org: '{github-org}'
+          project: '{name}'
+
+    publishers:
+      - console-log
+
+    node: '{node}'
+
+
+- job-template:
+    name: 'gate-{name}-pylint'
+
+    builders:
+      - gerrit-git-prep
+      - pylint:
+          github-org: '{github-org}'
+          project: '{name}'
+
+    publishers:
+      - console-log
+
+    node: '{node}'
+
+
+- job-template:
+    name: 'gate-{name}-python26'
+
+    wrappers:
+      - timeout:
+          timeout: 60
+          fail: true
+      - timestamps
+
+    builders:
+      - gerrit-git-prep
+      - python26:
+          github-org: '{github-org}'
+          project: '{name}'
+      - assert-no-extra-files
+
+    publishers:
+      - test-results
+      - console-log
+
+    node: bare-centos6
+
+- job-template:
+    name: 'gate-{name}-python27'
+
+    wrappers:
+      - timeout:
+          timeout: 40
+          fail: true
+      - timestamps
+
+    builders:
+      - gerrit-git-prep
+      - python27:
+          github-org: '{github-org}'
+          project: '{name}'
+      - assert-no-extra-files
+
+    publishers:
+      - test-results
+      - console-log
+
+    node: '{node}'
+
+- job-template:
+    name: 'gate-{name}-python33'
+
+    wrappers:
+      - timeout:
+          timeout: 40
+          fail: true
+      - timestamps
+
+    builders:
+      - gerrit-git-prep
+      - python33:
+          github-org: '{github-org}'
+          project: '{name}'
+      - assert-no-extra-files
+
+    publishers:
+      - test-results
+      - console-log
+
+    node: py3k-precise
+
+- job-template:
+    name: 'gate-{name}-pypy'
+
+    wrappers:
+      - timeout:
+          timeout: 40
+          fail: true
+      - timestamps
+
+    builders:
+      - gerrit-git-prep
+      - pypy:
+          github-org: '{github-org}'
+          project: '{name}'
+      - assert-no-extra-files
+
+    publishers:
+      - test-results
+      - console-log
+
+    node: py3k-precise
+
+- job-template:
+    name: 'gate-{name}-docs'
+
+    builders:
+      - gerrit-git-prep
+      - docs:
+          github-org: '{github-org}'
+          project: '{name}'
+
+    publishers:
+      - console-log
+      - upload-sphinx-draft
+
+    node: '{node}'
+
+- job-template:
+    name: 'gate-{name}-tox-{envlist}'
+
+    wrappers:
+      - timeout:
+          timeout: 40
+          fail: true
+      - timestamps
+
+    builders:
+      - gerrit-git-prep
+      - tox:
+          envlist: '{envlist}'
+          github-org: '{github-org}'
+          project: '{name}'
+      - assert-no-extra-files
+
+    publishers:
+      - test-results
+      - console-log
+
+    node: '{node}'
+
+- job-template:
+    name: '{name}-tarball'
+    node: bare-precise
+
+    builders:
+      - gerrit-git-prep
+      - tarball:
+          github-org: '{github-org}'
+          project: '{name}'
+
+    publishers:
+      - tarball:
+          project: '{name}'
+          site: '{tarball-site}'
+      - console-log
+
+
+- job-template:
+    name: '{name}-branch-tarball'
+    concurrent: false
+    node: bare-precise
+
+    builders:
+      - gerrit-git-prep
+      - tarball:
+          github-org: '{github-org}'
+          project: '{name}'
+      - shell: |
+          #!/bin/bash -xe
+          BRANCH=$ZUUL_REFNAME
+          BRANCH_PATH=`echo $BRANCH | tr / -`
+          mv dist/* dist/{name}-$BRANCH_PATH.tar.gz
+
+    publishers:
+      - tarball:
+          project: '{name}'
+          site: '{tarball-site}'
+      - console-log
+
+
+- job-template:
+    name: 'gate-{name}-requirements'
+    node: bare-precise
+
+    builders:
+      - gerrit-git-prep
+      - shell: |
+          #!/bin/bash -xe
+          /usr/local/jenkins/slave_scripts/project-requirements-change.py $ZUUL_BRANCH
+
+    publishers:
+      - console-log
+
+- job-group:
+    name: python-jobs
+    jobs:
+      - '{name}-coverage'
+      - 'gate-{name}-pep8'
+      - 'gate-{name}-python26'
+      - 'gate-{name}-python27'
+      - 'gate-{name}-python33'
+      - 'gate-{name}-pypy'
+      - 'gate-{name}-docs'
+      - 'gate-{name}-requirements'
+      - '{name}-tarball'
+      - '{name}-branch-tarball'
+      # pylint isn't standard
+      # gate-{name}-tox-{envlist} also isn't standard, but is reserved for
+      # projects that want to run specific jobs via tox
+
+- job-group:
+    name: contrail-jobs
+    jobs:
+      - 'gate-{name}-build'

@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-# Copyright (C) 2013 OpenStack Foundation
+# Copyright (C) 2013 OpenContrail Foundation
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -89,7 +89,7 @@ client = paramiko.SSHClient()
 client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
 client.load_system_host_keys()
 client.connect(
-    'review.openstack.org', port=29418,
+    'review.opencontrail.org', port=29418,
     key_filename='/home/corvus/.ssh/id_rsa', username='CHANGME')
 stdin, stdout, stderr = client.exec_command(
     'gerrit query %s --all-approvals --format JSON' % QUERY)

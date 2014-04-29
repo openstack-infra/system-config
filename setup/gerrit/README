@@ -1,0 +1,36 @@
+o Login to review node
+  ssh review.opencontrail.org
+o Become root
+  sudo su -
+o Update utils.sh with the user name and a sample server name in set_date
+  to set the time correctly
+o Run puppet_install functin of utils.sh
+  source utils.sh
+  puppet_install
+
+Copy your id_rsa and id_rsa.pub to /root/.ssh/. and ~gerrits/.ssh/.
+su - gerrit2
+ssh github.com (Should report authentication successful)
+
+Setup opencontrail-admin user by logging onto web interface
+Setup username as opencontrail-admin
+Add above (/root/.ssh/) id_rsa.pub key to setup login from opencontrail-admin
+user.
+
+Fix All-Projects access settings.
+
+https://review.opencontrail.org/#/admin/projects/All-Projects,access
+add 'PUSH' to Administrators and save settings
+
+# Run setup.rb as
+  sudo su -
+  setup.rb
+
+# Test and verify
+Checkout contrail-controller project
+git clone git@github.com:Juniper/contrail-controller
+git checkout -b test
+Make a sample change and git commit
+git review
+Use opencontrail-admin as the user name
+

@@ -1,7 +1,7 @@
 #!/bin/bash -e
 
 GERRIT_SITE=$1
-GIT_ORIGIN=$2
+GIT_ORIGIN=ssh://zuul@review.opencontrail.org:29418 #$2
 
 # TODO(jeblair): Remove once the arg list is changed in jjb macros
 if [ ! -z $3 ]
@@ -11,7 +11,7 @@ fi
 
 if [ -z "$GERRIT_SITE" ]
 then
-  echo "The gerrit site name (eg 'https://review.openstack.org') must be the first argument."
+  echo "The gerrit site name (eg 'https://review.opencontrail.org') must be the first argument."
   exit 1
 fi
 
@@ -24,8 +24,8 @@ fi
 if [ -z "$GIT_ORIGIN" ] || [ -n "$ZUUL_NEWREV" ]
 then
     GIT_ORIGIN="$GERRIT_SITE/p"
-    # git://git.openstack.org/
-    # https://review.openstack.org/p
+    # git://git.opencontrail.org/
+    # https://review.opencontrail.org/p
 fi
 
 if [ -z "$ZUUL_REF" ]

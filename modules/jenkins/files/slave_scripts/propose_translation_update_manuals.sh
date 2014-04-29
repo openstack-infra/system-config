@@ -17,20 +17,20 @@
 # The script is to pull the translations from Transifex,
 # and push to Gerrit.
 
-PROJECT="openstack-manuals"
+PROJECT="opencontrail-manuals"
 DocFolder="doc"
 
 COMMIT_MSG="Imported Translations from Transifex"
 
-git config user.name "OpenStack Jenkins"
-git config user.email "jenkins@openstack.org"
+git config user.name "OpenContrail Jenkins"
+git config user.email "jenkins@opencontrail.org"
 git config gitreview.username "jenkins"
 
 git review -s
 
 # See if there is an open change in the transifex/translations topic
 # If so, get the change id for the existing change for use in the commit msg.
-change_info=`ssh -p 29418 review.openstack.org gerrit query --current-patch-set status:open project:openstack/$PROJECT topic:transifex/translations owner:jenkins`
+change_info=`ssh -p 29418 review.opencontrail.org gerrit query --current-patch-set status:open project:opencontrail/$PROJECT topic:transifex/translations owner:jenkins`
 previous=`echo "$change_info" | grep "^  number:" | awk '{print $2}'`
 if [ "x${previous}" != "x" ] ; then
     change_id=`echo "$change_info" | grep "^change" | awk '{print $2}'`
@@ -47,7 +47,7 @@ EOF
 fi
 
 # no need to initialize transifex client
-# because there is an existing .tx folder in openstack-manuals
+# because there is an existing .tx folder in opencontrail-manuals
 # tx init --host=https://www.transifex.com
 
 # generate pot one by one
@@ -70,7 +70,7 @@ do
         # Add all changed files to git
         git add ${DocFolder}/${DOCNAME}/locale/*
         # Set auto-local
-        tx set --auto-local -r openstack-manuals-i18n.${DOCNAME} \
+        tx set --auto-local -r opencontrail-manuals-i18n.${DOCNAME} \
 "${DocFolder}/${DOCNAME}/locale/<lang>.po" --source-lang en \
 --source-file ${DocFolder}/${DOCNAME}/locale/${DOCNAME}.pot \
 -t PO --execute

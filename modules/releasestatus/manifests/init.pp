@@ -93,7 +93,7 @@ class releasestatus (
       owner   => 'releasestatus',
       group   => 'releasestatus',
       mode    => '0600',
-      content => "review.openstack.org ${releasestatus_gerrit_ssh_key}",
+      content => "review.opencontrail.org ${releasestatus_gerrit_ssh_key}",
       replace => true,
       require => File['/var/lib/releasestatus/.ssh/']
     }
@@ -111,7 +111,7 @@ class releasestatus (
   vcsrepo { '/var/lib/releasestatus/releasestatus':
     ensure   => latest,
     provider => git,
-    source   => 'https://git.openstack.org/openstack-infra/releasestatus',
+    source   => 'https://git.opencontrail.org/opencontrail-infra/releasestatus',
     revision => 'master',
     require  => File['/var/lib/releasestatus'],
   }

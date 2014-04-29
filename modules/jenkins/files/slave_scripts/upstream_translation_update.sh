@@ -19,8 +19,8 @@ then
     exit 0
 fi
 
-git config user.name "OpenStack Jenkins"
-git config user.email "jenkins@openstack.org"
+git config user.name "OpenContrail Jenkins"
+git config user.email "jenkins@opencontrail.org"
 
 # initialize transifex client
 tx init --host=https://www.transifex.com

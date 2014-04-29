@@ -1,0 +1,25 @@
+- job-template:
+    name: 'ci-{name}-build'
+
+    builders:
+      - gerrit-git-prep
+      - shell: |
+          #!/bin/bash -xe
+          export USER=jenkins
+          cd ~jenkins/workspace/ci-{name}-build/repo
+          scons -U controller/src/base
+
+- job-group:
+    name: contrail-jobs
+    jobs:
+      - 'ci-{name}-build'
+
+- job-group:
+    name: contrail-ci-test-jobs
+    jobs:
+      - 'ci-{name}-build'
+
+- job-group:
+    name: contrail-controller-test-jobs
+    jobs:
+      - 'ci-{name}-build'

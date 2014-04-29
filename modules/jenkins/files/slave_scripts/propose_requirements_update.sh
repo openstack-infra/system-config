@@ -13,7 +13,7 @@
 # under the License.
 
 INITIAL_COMMIT_MSG="Updated from global requirements"
-TOPIC="openstack/requirements"
+TOPIC="opencontrail/requirements"
 USERNAME=${USERNAME:-$USER}
 BRANCH=$ZUUL_REF
 ALL_SUCCESS=0
@@ -23,17 +23,17 @@ if [ -z "$BRANCH" ] ; then
     exit 1
 fi
 
-git config user.name "OpenStack Jenkins"
-git config user.email "jenkins@openstack.org"
+git config user.name "OpenContrail Jenkins"
+git config user.email "jenkins@opencontrail.org"
 git config gitreview.username $USERNAME
 
 for PROJECT in $(cat projects.txt); do
 
     change_id=""
-    # See if there is an open change in the openstack/requirements topic
+    # See if there is an open change in the opencontrail/requirements topic
     # If so, get the change id for the existing change for use in the
     # commit msg.
-    change_info=$(ssh -p 29418 review.openstack.org gerrit query --current-patch-set status:open project:$PROJECT topic:$TOPIC owner:$USERNAME branch:$BRANCH)
+    change_info=$(ssh -p 29418 review.opencontrail.org gerrit query --current-patch-set status:open project:$PROJECT topic:$TOPIC owner:$USERNAME branch:$BRANCH)
     previous=$(echo "$change_info" | grep "^  number:" | awk '{print $2}')
     if [ "x${previous}" != "x" ] ; then
         change_id=$(echo "$change_info" | grep "^change" | awk '{print $2}')
@@ -56,7 +56,7 @@ EOF
 
     PROJECT_DIR=$(basename $PROJECT)
     rm -rf $PROJECT_DIR
-    git clone ssh://$USERNAME@review.openstack.org:29418/$PROJECT.git
+    git clone ssh://$USERNAME@review.opencontrail.org:29418/$PROJECT.git
     pushd $PROJECT_DIR
 
     # make sure the project even has this branch

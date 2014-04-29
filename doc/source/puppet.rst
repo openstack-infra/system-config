@@ -14,13 +14,13 @@ At a Glance
 ===========
 
 :Hosts:
-  * ci-puppetmaster.openstack.org
+  * ci-puppetmaster.opencontrail.org
 :Puppet:
-  * :file:`modules/openstack_project/manifests/puppetmaster.pp`
+  * :file:`modules/opencontrail_project/manifests/puppetmaster.pp`
 :Projects:
   * https://puppetlabs.com/
 :Bugs:
-  * http://bugs.launchpad.net/openstack-ci
+  * http://bugs.launchpad.net/opencontrail-ci
   * http://projects.puppetlabs.com/
 :Resources:
   * `Puppet Language Reference <http://docs.puppetlabs.com/references/2.7.latest/type.html>`_
@@ -41,13 +41,13 @@ client. After that installing the puppetmaster and hiera (used to maintain
 secrets on the puppet master).
 
 Please note: Fedora F19 and Ubuntu Raring and above cannot successfully run an
-OpenStack-CI puppetmaster due to new Ruby and older Puppet not being
+OpenContrail-CI puppetmaster due to new Ruby and older Puppet not being
 compatible, so be sure to use an older release - e.g. Ubuntu Precise.
 
 .. code-block:: bash
 
    sudo su -
-   git clone https://git.openstack.org/openstack-infra/config /opt/config/production
+   git clone https://git.opencontrail.org/opencontrail-infra/config /opt/config/production
    /opt/config/production/install_puppet.sh
    apt-get install puppetmaster-passenger hiera hiera-puppet
 
@@ -59,11 +59,11 @@ finish configuration:
    bash /opt/config/production/install_modules.sh
    echo $REAL_HOSTNAME > /etc/hostname
    service hostname restart
-   puppet apply --modulepath='/opt/config/production/modules:/etc/puppet/modules' -e 'include openstack_project::puppetmaster'
+   puppet apply --modulepath='/opt/config/production/modules:/etc/puppet/modules' -e 'include opencontrail_project::puppetmaster'
 
 Note: Hiera uses a systemwide configuration file in ``/etc/puppet/hiera.yaml``
 and this setup supports multiple configurations. The two sets of environments
-that OpenStack Infrastructure uses are ``production`` and ``development``.
+that OpenContrail Infrastructure uses are ``production`` and ``development``.
 ``production`` is the default is and the environment used when nothing else is
 specified. Then the configuration needs to be placed into common.yaml in
 ``/etc/puppet/hieradata/production`` and ``/etc/puppet/hieradata/development``.
@@ -76,7 +76,7 @@ file should have mode 0600.
 Adding a node
 -------------
 
-On the new server connecting (for example, review.openstack.org) to the puppet master:
+On the new server connecting (for example, review.opencontrail.org) to the puppet master:
 
 .. code-block:: bash
 
@@ -95,8 +95,8 @@ of the puppet master with the following additions to ``/etc/puppet/puppet.conf``
 .. code-block:: ini
 
    [main]
-   server=ci-puppetmaster.openstack.org
-   certname=review.openstack.org
+   server=ci-puppetmaster.opencontrail.org
+   certname=review.opencontrail.org
 
 The cert signing process needs to be started with:
 
@@ -113,13 +113,13 @@ On the puppet master:
 
 You should get a list of entries similar to the one below::
 
-  review.openstack.org  (44:18:BB:DF:08:50:62:70:17:07:82:1F:D5:70:0E:BF)
+  review.opencontrail.org  (44:18:BB:DF:08:50:62:70:17:07:82:1F:D5:70:0E:BF)
 
 If you see the new node there you can sign its cert on the puppet master with:
 
 .. code-block:: bash
 
-  sudo puppet cert sign review.openstack.org
+  sudo puppet cert sign review.opencontrail.org
 
 Finally on the puppet agent you need to start the agent daemon:
 

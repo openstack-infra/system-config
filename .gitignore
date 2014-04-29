@@ -7,7 +7,7 @@ doc/build/
 manifests/secrets.pp
 .tox/
 .test/
-openstack_infra_config.egg-info/
+opencontrail_infra_config.egg-info/
 /.project
 /.pydevproject
 tools/invite2summit/settings.py

@@ -6,28 +6,28 @@ Wiki
 ####
 
 `Mediawiki <http://www.mediawiki.org/wiki/MediaWiki>`_ is installed on
-wiki.openstack.org.
+wiki.opencontrail.org.
 
 At a Glance
 ===========
 
 :Hosts:
-  * https://wiki.openstack.org
+  * https://wiki.opencontrail.org
 :Puppet:
   * :file:`modules/mediawiki`
-  * :file:`modules/openstack_project/manifests/wiki.pp`
+  * :file:`modules/opencontrail_project/manifests/wiki.pp`
 :Projects:
   * http://www.mediawiki.org/wiki/MediaWiki
 :Bugs:
-  * http://bugs.launchpad.net/openstack-ci
+  * http://bugs.launchpad.net/opencontrail-ci
 
 Overview
 ========
-wiki.openstack.org runs off of Wikmedia Foundation deployment branches.
+wiki.opencontrail.org runs off of Wikmedia Foundation deployment branches.
 This was done to ease the pain of managing Mediawiki extensions. The
 foundation branches come with git submodules that refer to known good
 versions of extensions. Much (but not all) of the configuration is in
-puppet in the ``openstack-infra/config`` repository.  Mediawiki upgrades
+puppet in the ``opencontrail-infra/config`` repository.  Mediawiki upgrades
 are currently performed manually.
 
 Mediawiki Upgrades
@@ -71,5 +71,5 @@ active Mediawiki install slot. To perform a Mediawiki upgrade:
   #. At this point we are ready to change the ``/srv/mediawiki/w``
      symlink to point to the slot we just upgraded
      ``rm -f /srv/mediawiki/w && ln -s /srv/mediawiki/$PREVIOUSLY_INACTIVE_SLOT /srv/mediawiki/w``.
-     https://wiki.openstack.org/wiki/Special:Version should report the
+     https://wiki.opencontrail.org/wiki/Special:Version should report the
      new version now.

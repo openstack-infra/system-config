@@ -6,4 +6,4 @@ stop on runlevel [!2345]
 
 env PYTHONPATH=/var/lib/meetbot/<%= name %>
 
-exec start-stop-daemon --start --chdir /var/lib/meetbot/openstack --chuid meetbot --name meetbot --startas  /usr/bin/python /usr/bin/supybot /var/lib/meetbot/<%= name %>.conf
+exec start-stop-daemon --start --chdir /var/lib/meetbot/opencontrail --chuid meetbot --name meetbot --startas  /usr/bin/python /usr/bin/supybot /var/lib/meetbot/<%= name %>.conf

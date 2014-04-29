@@ -9,7 +9,7 @@
 # Description:       Update status page from IRC
 ### END INIT INFO
 
-# Author: James E. Blair <jeblair@openstack.org>
+# Author: James E. Blair <jeblair@opencontrail.org>
 
 # Do NOT "set -e"
 

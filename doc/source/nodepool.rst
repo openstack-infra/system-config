@@ -5,24 +5,24 @@
 Nodepool
 ########
 
-Nodepool is a service used by the OpenStack CI team to deploy and manage a pool
-of devstack images on a cloud server for use in OpenStack project testing.
+Nodepool is a service used by the OpenContrail CI team to deploy and manage a pool
+of devstack images on a cloud server for use in OpenContrail project testing.
 
 At a Glance
 ===========
 
 :Hosts:
-  * nodepool.openstack.org
+  * nodepool.opencontrail.org
 :Puppet:
   * :file:`modules/nodepool/`
-  * :file:`modules/openstack_project/manifests/single_use_slave.pp`
+  * :file:`modules/opencontrail_project/manifests/single_use_slave.pp`
 :Configuration:
-  * :file:`modules/openstack_project/templates/nodepool/nodepool.yaml.erb`
-  * :file:`modules/openstack_project/files/nodepool/scripts/`
+  * :file:`modules/opencontrail_project/templates/nodepool/nodepool.yaml.erb`
+  * :file:`modules/opencontrail_project/files/nodepool/scripts/`
 :Projects:
-  * https://git.openstack.org/openstack-infra/nodepool
+  * https://git.opencontrail.org/opencontrail-infra/nodepool
 :Bugs:
-  * http://bugs.launchpad.net/openstack-ci
+  * http://bugs.launchpad.net/opencontrail-ci
 
 Overview
 ========

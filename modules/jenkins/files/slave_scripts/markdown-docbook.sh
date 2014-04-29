@@ -10,8 +10,8 @@ BRANCH=$ZUUL_REFNAME
 shopt -s extglob
 
 # Need to get the file name to insert here so it can be reused for multiple projects
-# Filenames for the known repos that could do this are openstackapi-programming.mdown
-# and images-api-v2.0.md and openstackapi-programming and images-api-v2.0 are the names
+# Filenames for the known repos that could do this are opencontrailapi-programming.mdown
+# and images-api-v2.0.md and opencontrailapi-programming and images-api-v2.0 are the names
 # for the ID and xml filename.
 FILENAME=$1
 FILEPATH=`find ./ -regextype posix-extended -regex ".*${FILENAME}\.(md|markdown|mdown)"`

@@ -1,7 +1,7 @@
 #! /usr/bin/env python
-# Copyright (C) 2011 OpenStack, LLC.
+# Copyright (C) 2011 OpenContrail, LLC.
 # Copyright (c) 2013 Hewlett-Packard Development Company, L.P.
-# Copyright (c) 2013 OpenStack Foundation
+# Copyright (c) 2013 OpenContrail Foundation
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -101,13 +101,13 @@ def main():
 
     reqroot = tempfile.mkdtemp()
     reqdir = os.path.join(reqroot, "requirements")
-    run_command("git clone https://review.openstack.org/p/openstack/"
+    run_command("git clone https://review.opencontrail.org/p/opencontrail/"
                 "requirements --depth 1 %s" % reqdir)
     os.chdir(reqdir)
     run_command("git checkout remotes/origin/%s" % branch)
     print "requirements git sha: %s" % run_command(
         "git rev-parse HEAD").strip()
-    os_reqs = RequirementsList('openstack/requirements')
+    os_reqs = RequirementsList('opencontrail/requirements')
     os_reqs.read_all_requirements(include_dev=(branch == 'master'),
                                   global_req=True)
 
@@ -117,21 +117,21 @@ def main():
         if name in branch_reqs.reqs and req == branch_reqs.reqs[name]:
             continue
         if name not in os_reqs.reqs:
-            print("Requirement %s not in openstack/requirements" % str(req))
+            print("Requirement %s not in opencontrail/requirements" % str(req))
             failed = True
             continue
         # pkg_resources.Requirement implements __eq__() but not __ne__().
         # There is no implied relationship between __eq__() and __ne__()
         # so we must negate the result of == here instead of using !=.
         if not (req == os_reqs.reqs[name]):
-            print("Requirement %s does not match openstack/requirements "
+            print("Requirement %s does not match opencontrail/requirements "
                   "value %s" % (str(req), str(os_reqs.reqs[name])))
             failed = True
 
     shutil.rmtree(reqroot)
     if failed or os_reqs.failed or head_reqs.failed or branch_reqs.failed:
         sys.exit(1)
-    print("Updated requirements match openstack/requirements.")
+    print("Updated requirements match opencontrail/requirements.")
 
 
 if __name__ == '__main__':

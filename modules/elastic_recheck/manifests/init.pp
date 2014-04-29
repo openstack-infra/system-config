@@ -43,7 +43,7 @@ class elastic_recheck (
     ensure   => latest,
     provider => git,
     revision => 'master',
-    source   => 'https://git.openstack.org/openstack-infra/elastic-recheck',
+    source   => 'https://git.opencontrail.org/opencontrail-infra/elastic-recheck',
   }
 
   include pip

@@ -52,7 +52,7 @@ define lodgeit::site(
   exec { "create_database_${name}":
     command => "drizzle --user=root -e \"create database if not exists ${name};\"",
     path    => '/bin:/usr/bin',
-    unless  => 'drizzle --disable-column-names -r --batch -e "show databases like \'openstack\'" | grep -q openstack',
+    unless  => 'drizzle --disable-column-names -r --batch -e "show databases like \'opencontrail\'" | grep -q opencontrail',
     require => Service['drizzle'],
   }
 

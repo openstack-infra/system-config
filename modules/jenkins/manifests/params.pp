@@ -48,7 +48,7 @@ class jenkins::params {
       $python_lxml_package = 'python-lxml'
       $python_zmq_package = 'python-zmq'
       $rubygems_package = 'rubygems'
-      # Common Lisp interpreter, used for cl-openstack-client
+      # Common Lisp interpreter, used for cl-opencontrail-client
       $sbcl_package = 'sbcl'
       $sqlite_package = 'sqlite'
       $unzip_package = 'unzip'
@@ -57,7 +57,7 @@ class jenkins::params {
       $xvfb_package = 'xorg-x11-server-Xvfb'
       # PHP package, used for community portal
       $php5_cli_package = 'php-cli'
-      # FIXME: No php mcrypt package on RHEL, used for openstackid
+      # FIXME: No php mcrypt package on RHEL, used for opencontrailid
       #$php5_mcrypt_package = ''
       # For Tooz unit tests
       # FIXME: No zookeeper packages on RHEL
@@ -134,7 +134,7 @@ class jenkins::params {
       $ruby1_9_1_package = 'ruby1.9.1'
       $ruby1_9_1_dev_package = 'ruby1.9.1-dev'
       $ruby_bundler_package = 'ruby-bundler'
-      # Common Lisp interpreter, used for cl-openstack-client
+      # Common Lisp interpreter, used for cl-opencontrail-client
       $sbcl_package = 'sbcl'
       $sqlite_package = 'sqlite3'
       $unzip_package = 'unzip'

@@ -11,23 +11,23 @@ At a Glance
 ===========
 
 :Hosts:
-  * http://logstash.openstack.org
-  * logstash-worker\*.openstack.org
-  * elasticsearch\*.openstack.org
+  * http://logstash.opencontrail.org
+  * logstash-worker\*.opencontrail.org
+  * elasticsearch\*.opencontrail.org
 :Puppet:
   * :file:`modules/logstash`
-  * :file:`modules/openstack_project/manifests/logstash.pp`
-  * :file:`modules/openstack_project/manifests/logstash_worker.pp`
-  * :file:`modules/openstack_project/manifests/elasticsearch.pp`
+  * :file:`modules/opencontrail_project/manifests/logstash.pp`
+  * :file:`modules/opencontrail_project/manifests/logstash_worker.pp`
+  * :file:`modules/opencontrail_project/manifests/elasticsearch.pp`
 :Configuration:
-  * :file:`modules/openstack_project/files/logstash`
-  * :file:`modules/openstack_project/templates/logstash`
+  * :file:`modules/opencontrail_project/files/logstash`
+  * :file:`modules/opencontrail_project/templates/logstash`
 :Projects:
   * http://logstash.net/
   * http://kibana.org/
   * http://www.elasticsearch.org/
 :Bugs:
-  * http://bugs.launchpad.net/openstack-ci
+  * http://bugs.launchpad.net/opencontrail-ci
   * https://logstash.jira.com/secure/Dashboard.jspa
   * https://github.com/rashidkpc/Kibana/issues
   * https://github.com/elasticsearch/elasticsearch/issues
@@ -115,8 +115,8 @@ the Gearman server.
 If you are interested in technical details the source of these scripts
 can be found at
 
-* :file:`modules/openstack_project/files/logstash/log-gearman-client.py`
-* :file:`modules/openstack_project/files/logstash/log-gearman-worker.py`
+* :file:`modules/opencontrail_project/files/logstash/log-gearman-client.py`
+* :file:`modules/opencontrail_project/files/logstash/log-gearman-worker.py`
 
 Logstash
 --------
@@ -163,7 +163,7 @@ schema.
 
 The config file that tells Logstash how to do this flattening can be
 found at
-:file:`modules/openstack_project/templates/logstash/indexer.conf.erb`
+:file:`modules/opencontrail_project/templates/logstash/indexer.conf.erb`
 
 
 ElasticSearch
@@ -183,7 +183,7 @@ Kibana
 
 Kibana is a ruby app sitting behind Apache that provides a nice web UI
 for querying Logstash events stored in ElasticSearch. Our install can
-be reached at http://logstash.openstack.org. See
+be reached at http://logstash.opencontrail.org. See
 :ref:`query-logstash` for more info on using Kibana to perform
 queries.
 
@@ -192,7 +192,7 @@ queries.
 Querying Logstash
 =================
 
-Hop on over to http://logstash.openstack.org and by default you get the
+Hop on over to http://logstash.opencontrail.org and by default you get the
 last 15 minutes of everything Logstash knows about in chunks of 100.
 We run a lot of tests but it is possible no logs have come in over the
 last 15 minutes, change the dropdown in the top left from ``Last 15m``

@@ -13,20 +13,20 @@ At a Glance
 ===========
 
 :Hosts:
-  * http://jenkins.openstack.org
-  * http://jenkins-dev.openstack.org
+  * http://jenkins.opencontrail.org
+  * http://jenkins-dev.opencontrail.org
 :Puppet:
   * :file:`modules/jenkins`
-  * :file:`modules/openstack_project/manifests/jenkins.pp`
-  * :file:`modules/openstack_project/manifests/jenkins_dev.pp`
+  * :file:`modules/opencontrail_project/manifests/jenkins.pp`
+  * :file:`modules/opencontrail_project/manifests/jenkins_dev.pp`
 :Configuration:
-  * :file:`modules/openstack_project/files/jenkins_job_builder/config/`
+  * :file:`modules/opencontrail_project/files/jenkins_job_builder/config/`
 :Projects:
   * http://jenkins-ci.org/
   * :ref:`zuul`
   * :ref:`jjb`
 :Bugs:
-  * http://bugs.launchpad.net/openstack-ci
+  * http://bugs.launchpad.net/opencontrail-ci
   * https://wiki.jenkins-ci.org/display/JENKINS/Issue+Tracking
 :Resources:
   * :ref:`zuul`
@@ -37,16 +37,16 @@ Overview
 
 A large number and variety of jobs are defined in Jenkins.  The
 configuration of all of those jobs is stored in git in the
-openstack-infra/config repository.  They are defined in YAML files
+opencontrail-infra/config repository.  They are defined in YAML files
 that are read by :ref:`jjb` which configures the actual jobs in
 Jenkins.
 
-Anyone may submit a change to the openstack-infra/config repository
+Anyone may submit a change to the opencontrail-infra/config repository
 that defines a new job or alters an existing job by editing the
 appropriate YAML files.  See :ref:`jjb` for more information.
 
 Because of the large number of builds that Jenkins executes, the
-OpenStack project favors the following approach in configuring Jenkins
+OpenContrail project favors the following approach in configuring Jenkins
 jobs:
 
   * Minimal use of plugins: the more post-processing work that Jenkins
@@ -80,12 +80,12 @@ privileges to take effect.
 Devstack Gate
 =============
 
-OpenStack integration testing is performed by the devstack gate test
+OpenContrail integration testing is performed by the devstack gate test
 framework. This framework runs the devstack exercises and Tempest
 smoketests against a devstack install on single use cloud servers. The
-devstack gate source can be found on `git.openstack.org
-<https://git.openstack.org/cgit/openstack-infra/devstack-gate>`_ and the `Readme
-<https://git.openstack.org/cgit/openstack-infra/devstack-gate/tree/README.rst>`_
+devstack gate source can be found on `git.opencontrail.org
+<https://git.opencontrail.org/cgit/opencontrail-infra/devstack-gate>`_ and the `Readme
+<https://git.opencontrail.org/cgit/opencontrail-infra/devstack-gate/tree/README.rst>`_
 describes the process of using devstack gate to run your own devstack
 based tests.
 
@@ -116,7 +116,7 @@ hand:
 #. Setup matrix security: add the 'authenticated' pseudo user and 
    grant Admin access to your own user. 
 
-#. Setup one account per `http://ci.openstack.org/jenkins-job-builder/installation.html#configuration-file`
+#. Setup one account per `http://ci.opencontrail.org/jenkins-job-builder/installation.html#configuration-file`
    and grab the API token for it.
 
 #. Configure the number of executors you want on the Jenkins Master
@@ -145,7 +145,7 @@ Quirks
 ------
 
 Note that jenkins talks to it's slaves via ssh, the
-modules/openstack_project/manifests/init.pp file contains the ssh
+modules/opencontrail_project/manifests/init.pp file contains the ssh
 public key that puppet installs on the slaves.
 
 Slaves

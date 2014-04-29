@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# OpenStack Project Infrastructure documentation build configuration file,
+# OpenContrail Project Infrastructure documentation build configuration file,
 # created by sphinx-quickstart on Mon Jul 18 13:42:23 2011.
 #
 # This file is execfile()d with the current directory set to its containing
@@ -46,8 +46,8 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'OpenStack Project Infrastructure'
-copyright = (u'2012-2013, OpenStack Infastructure Team'
+project = u'OpenContrail Project Infrastructure'
+copyright = (u'2012-2013, OpenContrail Infastructure Team'
              ' - see git repo for details')
 
 # The version info for the project you're documenting, acts as replacement for
@@ -102,7 +102,7 @@ pygments_style = 'sphinx'
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
-#html_theme = 'openstack'
+#html_theme = 'opencontrail'
 
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
@@ -178,7 +178,7 @@ html_last_updated_fmt = os.popen(git_cmd).read()
 #html_file_suffix = None
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'OpenStackInfradoc'
+htmlhelp_basename = 'OpenContrailInfradoc'
 
 
 # -- Options for LaTeX output -------------------------------------------------
@@ -193,8 +193,8 @@ htmlhelp_basename = 'OpenStackInfradoc'
 # (source start file, target name, title, author, documentclass
 # [howto/manual]).
 latex_documents = [
-    ('index', 'OpenStackInfra.tex', u'OpenStack Infrastructure Documentation',
-     u'OpenStack Infrastructure Team', 'manual'),
+    ('index', 'OpenContrailInfra.tex', u'OpenContrail Infrastructure Documentation',
+     u'OpenContrail Infrastructure Team', 'manual'),
 ]
 
 # The name of an image file (relative to this directory) to place at the top of
@@ -226,6 +226,6 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    ('index', 'openstackinfra', u'OpenStack Infrastructure Documentation',
-     [u'OpenStack Infrastructure Team'], 1)
+    ('index', 'opencontrailinfra', u'OpenContrail Infrastructure Documentation',
+     [u'OpenContrail Infrastructure Team'], 1)
 ]

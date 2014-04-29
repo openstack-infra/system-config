@@ -23,8 +23,8 @@ then
     exit 0
 fi
 
-git config user.name "OpenStack Jenkins"
-git config user.email "jenkins@openstack.org"
+git config user.name "OpenContrail Jenkins"
+git config user.email "jenkins@opencontrail.org"
 
 # initialize transifex client
 tx init --host=https://www.transifex.com
@@ -36,10 +36,10 @@ tx set --auto-local -r ${PROJECT}.${PROJECT}-js-translations \
 tx set --auto-local -r ${PROJECT}.${PROJECT}-translations \
 "${PROJECT}/locale/<lang>/LC_MESSAGES/django.po" --source-lang en \
 --source-file ${PROJECT}/locale/en/LC_MESSAGES/django.po -t PO --execute
-# OpenStack Dashboard Translations
-tx set --auto-local -r ${PROJECT}.openstack-dashboard-translations \
-"openstack_dashboard/locale/<lang>/LC_MESSAGES/django.po" --source-lang en \
---source-file openstack_dashboard/locale/en/LC_MESSAGES/django.po -t PO --execute
+# OpenContrail Dashboard Translations
+tx set --auto-local -r ${PROJECT}.opencontrail-dashboard-translations \
+"opencontrail_dashboard/locale/<lang>/LC_MESSAGES/django.po" --source-lang en \
+--source-file opencontrail_dashboard/locale/en/LC_MESSAGES/django.po -t PO --execute
 
 # Invoke run_tests.sh to update the po files
 # Or else, "../manage.py makemessages" can be used.
@@ -47,7 +47,7 @@ tx set --auto-local -r ${PROJECT}.openstack-dashboard-translations \
 
 # Add all changed files to git
 git add ${PROJECT}/locale/en/LC_MESSAGES/*
-git add openstack_dashboard/locale/en/LC_MESSAGES/*
+git add opencontrail_dashboard/locale/en/LC_MESSAGES/*
 
 if [ `git diff --cached | egrep -v "(POT-Creation-Date|^[\+\-]#|^\+{3}|^\-{3})" | egrep -c "^[\-\+]"` -gt 0 ] ]
 then

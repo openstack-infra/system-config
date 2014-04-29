@@ -1,6 +1,6 @@
 #!/bin/bash -e
 
-# Copyright 2013 OpenStack Foundation
+# Copyright 2013 OpenContrail Foundation
 #
 # Licensed under the Apache License, Version 2.0 (the "License"); you may
 # not use this file except in compliance with the License. You may obtain
@@ -21,7 +21,7 @@ if [[ -z "$org" || -z "$project" ]]
 then
   echo "Usage: $0 ORG PROJECT"
   echo
-  echo "ORG: The project organization (eg 'openstack')"
+  echo "ORG: The project organization (eg 'opencontrail')"
   echo "PROJECT: The project name (eg 'nova')"
   exit 1
 else
@@ -30,15 +30,15 @@ fi
 
 mkdir -p .test
 cd .test
-[ -d zuul ] || git clone https://review.openstack.org/p/openstack-infra/zuul --depth 1
-[ -d jenkins-job-builder ] || git clone https://review.openstack.org/p/openstack-infra/jenkins-job-builder --depth 1
+[ -d zuul ] || git clone https://review.opencontrail.org/p/opencontrail-infra/zuul --depth 1
+[ -d jenkins-job-builder ] || git clone https://review.opencontrail.org/p/opencontrail-infra/jenkins-job-builder --depth 1
 cd jenkins-job-builder
 # These are $WORKSPACE/.test/jenkins-job-builder/.test/...
 mkdir -p .test/new/config
 mkdir -p .test/new/out
 cd ../..
 
-cp modules/openstack_project/files/jenkins_job_builder/config/* .test/jenkins-job-builder/.test/new/config
+cp modules/opencontrail_project/files/jenkins_job_builder/config/* .test/jenkins-job-builder/.test/new/config
 cd .test/jenkins-job-builder
 tox -e compare-xml-new
 
@@ -46,4 +46,4 @@ cd ..
 find jenkins-job-builder/.test/new/out/ -printf "%f\n" > job-list.txt
 
 cd zuul
-tox -e venv -- zuul-server -c etc/zuul.conf-sample -l ../../modules/openstack_project/files/zuul/layout.yaml -t ../job-list.txt
+tox -e venv -- zuul-server -c etc/zuul.conf-sample -l ../../modules/opencontrail_project/files/zuul/layout.yaml -t ../job-list.txt
