@@ -142,11 +142,9 @@ pipelines:
         - event: comment-added
           comment_filter: (?i)^(Patch Set [0-9]+:\n\n)?\s*check experimental\s*$
     success:
-      gerrit:
-        force-message: true
+      gerrit: {}
     failure:
-      gerrit:
-        force-message: true
+      gerrit: {}
 
   - name: periodic
     description: Jobs in this queue are triggered on a timer.
@@ -202,11 +200,9 @@ pipelines:
         - event: comment-added
           comment_filter: (?i)^(Patch Set [0-9]+:\n\n)?\s*recheck(( (?:bug|lp)[\s#:]*(\d+))|( no bug))\s*$
     success:
-      gerrit:
-        force-message: true
+      gerrit: {}
     failure:
-      gerrit:
-        force-message: true
+      gerrit: {}
 
   - name: experimental-tripleo
     description: >
@@ -220,11 +216,9 @@ pipelines:
         - event: comment-added
           comment_filter: (?i)^(Patch Set [0-9]+:\n\n)?\s*check experimental\s*$
     success:
-      gerrit:
-        force-message: true
+      gerrit: {}
     failure:
-      gerrit:
-        force-message: true
+      gerrit: {}
 
 
 project-templates:
