@@ -1,0 +1,12 @@
+[access "refs/heads/*"]
+        label-Code-Review = -2..+2 group gertty-core
+        label-Workflow = -1..+1 group gertty-core
+[access "refs/tags/*"]
+        create = group gertty-ptl
+        pushSignedTag = group gertty-ptl
+[project]
+        state = active
+[receive]
+        requireChangeId = true
+[submit]
+        mergeContent = true

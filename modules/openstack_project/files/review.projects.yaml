@@ -601,6 +601,8 @@
   acl-config: /home/gerrit2/acls/stackforge/fuel.config
 - project: stackforge/gce-api
   description: Google Compute Engine API support for OpenStack
+- project: stackforge/gertty
+  description: Console interface to Gerrit Code Review
 - project: stackforge/golang-client
   description: OpenStack API client for golang
 - project: stackforge/graffiti

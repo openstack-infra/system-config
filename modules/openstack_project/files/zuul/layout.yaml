@@ -1585,6 +1585,12 @@ projects:
       - django_openstack_auth-tarball:
         - django_openstack_auth-pypi-upload
 
+  - name: stackforge/gertty
+    check:
+      - noop
+    gate:
+      - noop
+
   - name: stackforge/gce-api
     template:
       - name: check-requirements
