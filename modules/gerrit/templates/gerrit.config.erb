@@ -19,6 +19,7 @@
 <% end -%>
 	type = <%= gerrit_auth_type %>
 	cookieSecure = true
+	enableRunAs = true
 <% if gerrit_auth_type == 'OPENID_SSO' -%>
 	openIdSsoUrl = <%= openidssourl %>
 <% end -%>
