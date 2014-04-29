@@ -2,7 +2,7 @@
 
 # Update the base image that is used for devstack VMs.
 
-# Copyright (C) 2011-2012 OpenStack LLC.
+# Copyright (C) 2011-2012 OpenContrail LLC.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -95,9 +95,9 @@ def get_public_ip(server, version=4):
             if addr.instance_id == server.id:
                 return addr.ip
     for addr in server.addresses.get('public', []):
-        if type(addr) == type(u''):  # Rackspace/openstack 1.0
+        if type(addr) == type(u''):  # Rackspace/opencontrail 1.0
             return addr
-        if addr['version'] == version:  # Rackspace/openstack 1.1
+        if addr['version'] == version:  # Rackspace/opencontrail 1.1
             return addr['addr']
     for addr in server.addresses.get('private', []):
         # HP Cloud

@@ -20,7 +20,7 @@ class elasticsearch (
   $es_template_config = {}
 ) {
   # install java runtime
-  package { 'openjdk-7-jre-headless':
+  package { 'java7-runtime-headless':
     ensure => present,
   }
 
@@ -53,11 +53,9 @@ class elasticsearch (
   }
 
   exec { 'check_elasticsearch_sha1':
-    command     => "diff /tmp/elasticsearch-${version}.deb.sha1.txt /tmp/elasticsearch-${version}.deb.sha1.gen",
-    path        => '/bin:/usr/bin',
-    subscribe   => Exec['get_elasticsearch_deb'],
-    refreshonly => true,
-    require     => [
+    command => "diff /tmp/elasticsearch-${version}.deb.sha1.txt /tmp/elasticsearch-${version}.deb.sha1.gen",
+    path    => '/bin:/usr/bin',
+    require => [
       Exec['gen_elasticsearch_deb_sha1'],
       Exec['get_elasticsearch_deb_sha1'],
     ]
@@ -68,9 +66,10 @@ class elasticsearch (
     ensure    => latest,
     source    => "/tmp/elasticsearch-${version}.deb",
     provider  => 'dpkg',
-    subscribe => Exec['get_elasticsearch_deb_sha1'],
+    subscribe => Exec['get_elasticsearch_deb'],
     require   => [
-      Package['openjdk-7-jre-headless'],
+      Package['java7-runtime-headless'],
+      Exec['check_elasticsearch_sha1'],
       File['/etc/elasticsearch/elasticsearch.yml'],
       File['/etc/elasticsearch/default-mapping.json'],
       File['/etc/default/elasticsearch'],

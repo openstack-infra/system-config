@@ -19,11 +19,9 @@ class graphite(
   }
 
   vcsrepo { '/opt/graphite-web':
-    ensure   => present,
+    ensure   => latest,
     provider => git,
-    # revision => '0.9.x',
-    # pin version because of https://github.com/graphite-project/graphite-web/issues/650
-    revision => '7f8c33da809e2938df55c1ff57ab5329d8d7b878',
+    revision => '0.9.x',
     source   => 'https://github.com/graphite-project/graphite-web.git',
   }
 

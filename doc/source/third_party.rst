@@ -5,18 +5,18 @@ Overview
 --------
 
 Gerrit has an event stream which can be subscribed to, using this it is possible
-to test commits against testing systems beyond those supplied by OpenStack's
+to test commits against testing systems beyond those supplied by OpenContrail's
 Jenkins setup.  It is also possible for these systems to feed information back
 into Gerrit and they can also leave non-gating votes on Gerrit review requests.
 
-An example of one such system is `Smokestack <https://smokestack.openstack.org/>`_.
+An example of one such system is `Smokestack <https://smokestack.opencontrail.org/>`_.
 Smokestack reads the Gerrit event stream and runs it's own tests on the commits.
 If one of the tests fails it will publish information and links to the failure
 on the review in Gerrit.
 
 You can view a list of current 3rd party testing accounts and the relevant
 contact information for each account in the `Gerrit group for 3rd party
-testing <https://review.openstack.org/#/admin/groups/270,members>`_ (you must
+testing <https://review.opencontrail.org/#/admin/groups/270,members>`_ (you must
 be signed in to Gerrit to view this page).
 
 Requirements
@@ -47,14 +47,14 @@ Requirements
 
     * Skipped tests
     * logs should include a trace of the commands used
-  * OpenStack logs
+  * OpenContrail logs
   * Tempest logs (including ``testr_results.html.gz``)
 
 
 Reading the Event Stream
 ------------------------
 
-It is possible to use ssh to connect to ``review.openstack.org`` on port 29418
+It is possible to use ssh to connect to ``review.opencontrail.org`` on port 29418
 with your ssh key if you have a normal reviewer account in Gerrit.
 
 This will give you a real-time JSON stream of events happening inside Gerrit.
@@ -70,8 +70,8 @@ in this document for readability, the read JSON will be all one line per event):
 .. code-block:: javascript
 
    {"type":"comment-added","change":
-     {"project":"openstack/keystone","branch":"stable/essex","topic":"bug/969088","id":"I18ae38af62b4c2b2423e20e436611fc30f844ae1","number":"7385","subject":"Make import_nova_auth only create roles which don\u0027t already exist","owner":
-       {"name":"Chuck Short","email":"chuck.short@canonical.com","username":"zulcss"},"url":"https://review.openstack.org/7385"},
+     {"project":"opencontrail/keystone","branch":"stable/essex","topic":"bug/969088","id":"I18ae38af62b4c2b2423e20e436611fc30f844ae1","number":"7385","subject":"Make import_nova_auth only create roles which don\u0027t already exist","owner":
+       {"name":"Chuck Short","email":"chuck.short@canonical.com","username":"zulcss"},"url":"https://review.opencontrail.org/7385"},
      "patchSet":
        {"number":"1","revision":"aff45d69a73033241531f5e3542a8d1782ddd859","ref":"refs/changes/85/7385/1","uploader":
          {"name":"Chuck Short","email":"chuck.short@canonical.com","username":"zulcss"},
@@ -91,7 +91,7 @@ Posting Result To Gerrit
 ------------------------
 
 External testing systems can give non-gating votes to Gerrit by means of a -1/+1
-verify vote.  OpenStack Jenkins has extra permissions to give a +2/-2 verify
+verify vote.  OpenContrail Jenkins has extra permissions to give a +2/-2 verify
 vote which is gating.  Comments should also be provided to explain what kind of
 test failed..  We do also ask that the comments contain public links to the
 failure so that the developer can see what caused the failure.
@@ -109,7 +109,7 @@ Further documentation on the `review` command in Gerrit can be found in the `Ger
 
 We do suggest cautious testing of these systems and have a development Gerrit
 setup to test on if required.  In SmokeStack's case all failures are manually
-reviewed before getting pushed to OpenStack, whilst this may no scale it is
+reviewed before getting pushed to OpenContrail, whilst this may no scale it is
 advisable during initial testing of the setup.
 
 .. _request-account-label:
@@ -117,10 +117,10 @@ advisable during initial testing of the setup.
 Requesting a Service Account
 ----------------------------
 
-Feel free to contact the OpenStack Infrastructure Team via
-`email <mailto:openstack-infra@lists.openstack.org>`_,
-`bug report <https://bugs.launchpad.net/openstack-ci/>`_
-or in the #openstack-infra IRC channel to arrange setting up a dedicated user
+Feel free to contact the OpenContrail Infrastructure Team via
+`email <mailto:opencontrail-infra@lists.opencontrail.org>`_,
+`bug report <https://bugs.launchpad.net/opencontrail-ci/>`_
+or in the #opencontrail-infra IRC channel to arrange setting up a dedicated user
 (so your system can post reviews and vote using a system name rather than your
 user name). We'll want a few additional details:
 
@@ -138,7 +138,7 @@ user name). We'll want a few additional details:
 
   4. (optional) A unique contact E-mail address or alias for this system, which
   can not be in use as a contact address for any other Gerrit accounts on
-  review.openstack.org (Gerrit doesn't deal well with duplicate E-mail
+  review.opencontrail.org (Gerrit doesn't deal well with duplicate E-mail
   addresses between accounts). This is so that contributors and reviewers can
   see how to get in touch with people who might be able to fix problems with
   the system if it starts leaving erroneous votes.
@@ -158,8 +158,8 @@ You can install it using the Advanced tab in the Jenkins Plugin Manager.
 Once installed Jenkins will have a new `Gerrit Trigger` option in the `Manage
 Jenkins` menu.  This should be given the following options::
 
-  Hostname: review.openstack.org
-  Frontend URL: https://review.openstack.org/
+  Hostname: review.opencontrail.org
+  Frontend URL: https://review.opencontrail.org/
   SSH Port: 29418
   Username: (the Gerrit user)
   SSH Key File: (path to the user SSH key)
@@ -195,7 +195,7 @@ should configure as follows::
   (the rest unticked)
 
   Type: Plain
-  Pattern: openstack/project-name (where project-name is the name of the project)
+  Pattern: opencontrail/project-name (where project-name is the name of the project)
   Branches:
     Type: Path
     Pattern: **
@@ -206,9 +206,9 @@ report the results to Gerrit automatically.
 Testing your CI setup
 ---------------------
 
-You can use ``openstack-dev/sandbox`` project to test your external CI
-infrastructure with OpenStack Gerrit system. By using sandbox project you
-can test your CI system without affecting regular OpenStack reviews.
+You can use ``opencontrail-dev/sandbox`` project to test your external CI
+infrastructure with OpenContrail Gerrit system. By using sandbox project you
+can test your CI system without affecting regular OpenContrail reviews.
 
 Once you confirm your CI system works as you expected, change your
 configuration of gerrit trigger plugin or zuul to subscribe gerrit events

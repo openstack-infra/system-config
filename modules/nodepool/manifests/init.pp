@@ -1,7 +1,7 @@
 # Copyright 2012-2013 Hewlett-Packard Development Company, L.P.
 # Copyright 2012 Antoine "hashar" Musso
 # Copyright 2012 Wikimedia Foundation Inc.
-# Copyright 2013 OpenStack Foundation
+# Copyright 2013 OpenContrail Foundation
 #
 # Licensed under the Apache License, Version 2.0 (the "License"); you may
 # not use this file except in compliance with the License. You may obtain
@@ -21,10 +21,10 @@ class nodepool (
   $mysql_root_password,
   $mysql_password,
   $nodepool_ssh_private_key = '',
-  $git_source_repo = 'https://git.openstack.org/openstack-infra/nodepool',
+  $git_source_repo = 'https://git.opencontrail.org/opencontrail-infra/nodepool',
   $revision = 'master',
   $statsd_host = '',
-  $vhost_name = 'nodepool.openstack.org',
+  $vhost_name = 'nodepool.opencontrail.org',
   $image_log_document_root = '/var/log/nodepool/image',
   $enable_image_log_via_http = false,
 ) {

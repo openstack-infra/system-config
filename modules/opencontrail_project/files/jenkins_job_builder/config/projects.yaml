@@ -1,0 +1,29 @@
+- project:
+    name: contrail-controller
+    github-org: Juniper
+    node: master
+    tarball-site: tarballs.openstack.org
+    doc-publisher-site: docs.opencontrail.org
+
+    jobs:
+      - contrail-jobs
+
+- project:
+    name: contrail-ci-test
+    github-org: Juniper
+    node: master
+    tarball-site: tarballs.openstack.org
+    doc-publisher-site: docs.opencontrail.org
+
+    jobs:
+      - contrail-ci-test-jobs
+
+- project:
+    name: contrail-controller-test
+    github-org: Juniper
+    node: master
+    tarball-site: tarballs.openstack.org
+    doc-publisher-site: docs.opencontrail.org
+
+    jobs:
+      - contrail-controller-test-jobs

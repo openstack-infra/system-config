@@ -6,56 +6,36 @@ IRC Services
 ############
 
 The infrastructure team runs a number of IRC bots that are active on
-OpenStack related channels.
+OpenContrail related channels.
 
 At a Glance
 ===========
 
 :Hosts:
-  * http://eavesdrop.openstack.org/
-  * http://review.openstack.org/
-  * https://wiki.openstack.org/wiki/Infrastructure_Status
+  * http://eavesdrop.opencontrail.org/
+  * http://review.opencontrail.org/
+  * https://wiki.opencontrail.org/wiki/Infrastructure_Status
 :Puppet:
   * :file:`modules/meetbot`
   * :file:`modules/statusbot`
   * :file:`modules/gerritbot`
-  * :file:`modules/openstack_project/manifests/eavesdrop.pp`
-  * :file:`modules/openstack_project/manifests/review.pp`
+  * :file:`modules/opencontrail_project/manifests/eavesdrop.pp`
+  * :file:`modules/opencontrail_project/manifests/review.pp`
 :Configuration:
   * :file:`modules/gerritbot/files/gerritbot_channel_config.yaml`
 :Projects:
   * http://wiki.debian.org/MeetBot
   * http://sourceforge.net/projects/supybot/
-  * https://git.openstack.org/cgit/openstack-infra/meetbot
-  * https://git.openstack.org/cgit/openstack-infra/gerritbot
-  * https://git.openstack.org/cgit/openstack-infra/statusbot
+  * https://git.opencontrail.org/cgit/opencontrail-infra/meetbot
+  * https://git.opencontrail.org/cgit/opencontrail-infra/gerritbot
+  * https://git.opencontrail.org/cgit/opencontrail-infra/statusbot
 :Bugs:
-  * http://bugs.launchpad.net/openstack-ci
-
-Channel Requirements
-====================
-
-In general, discussion for OpenStack projects is preferred in #openstack-dev,
-but there are many reasons why a team would like to have their own channel.
-
-Access
-------
-
-Register the channel with ChanServ and give the infrastructure team account
-founder access to the channel with::
-
-  /msg chanserv access #channel add openstackinfra +AFRfiorstv
-
-This is good practice project-wide to make sure we keep channels under
-control and is a requirement if you want any of the project bots in
-your channel.
-
-Join #openstack-infra if you have any trouble with any of these commands.
+  * http://bugs.launchpad.net/opencontrail-ci
 
 Meetbot
 =======
 
-The OpenStack Infrastructure team run a slightly modified
+The OpenContrail Infrastructure team run a slightly modified
 `Meetbot <http://wiki.debian.org/MeetBot>`_ to log IRC channel activity and
 meeting minutes. Meetbot is a plugin for
 `Supybot <http://sourceforge.net/projects/supybot/>`_ which adds meeting
@@ -72,7 +52,7 @@ get you going, but there are other goodies in ``doc/``.
 
 Once you have Supybot installed you will need to configure a bot. The
 ``supybot-wizard`` command can get you started with a basic config, or you can
-have the OpenStack meetbot puppet module do the heavy lifting.
+have the OpenContrail meetbot puppet module do the heavy lifting.
 
 One important config setting is ``supybot.reply.whenAddressedBy.chars``, which
 sets the prefix character for this bot. This should be set to something other
@@ -82,15 +62,15 @@ if you don't want a prefix character).
 Meetbot
 -------
 
-The OpenStack Infrastructure Meetbot fork can be found at
-https://git.openstack.org/cgit/openstack-infra/meetbot. Manual installation of the Meetbot
+The OpenContrail Infrastructure Meetbot fork can be found at
+https://git.opencontrail.org/cgit/opencontrail-infra/meetbot. Manual installation of the Meetbot
 plugin is straightforward and documented in that repository's README.
-OpenStack Infrastructure installs and configures Meetbot through Puppet.
+OpenContrail Infrastructure installs and configures Meetbot through Puppet.
 
 Voting
 ^^^^^^
 
-The OpenStack Infrastructure Meetbot fork adds simple voting features. After
+The OpenContrail Infrastructure Meetbot fork adds simple voting features. After
 a meeting has been started a meeting chair can begin a voting block with the
 ``#startvote`` command. The command takes two arguments, a question posed to
 voters (ending with a ``?``), and the valid voting options. If the second
@@ -143,24 +123,24 @@ Statusbot
 =========
 
 Statusbot is used to distribute urgent information from the
-Infrastructure team to OpenStack channels.  It updates the
+Infrastructure team to OpenContrail channels.  It updates the
 `Infrastructure Status wiki page
-<https://wiki.openstack.org/wiki/Infrastructure_Status>`_.  It
+<https://wiki.opencontrail.org/wiki/Infrastructure_Status>`_.  It
 supports the following public message commands when issued by
 authenticated and whitelisted users from the channels the bot is
-listening to, including #openstack-infra:
+listening to, including #opencontrail-infra:
 
 #status log MESSAGE
   Log a message to the wiki page.
 
 #status notice MESSAGE
-  Broadcast a message to all OpenStack channels, and log to the wiki
+  Broadcast a message to all OpenContrail channels, and log to the wiki
   page.
 
 #status alert MESSAGE
-  Broadcast a message to all OpenStack channels and change their
+  Broadcast a message to all OpenContrail channels and change their
   topics, log to the wiki page, and set an alert box on the wiki
-  page (eventually include this alert box on status.openstack.org
+  page (eventually include this alert box on status.opencontrail.org
   pages).
 
 #status ok [MESSAGE]
@@ -183,3 +163,7 @@ Gerritbot's configuration is in
 Teams can add their channel and go through the standard code review process to
 get the bot added to their channel. The configuration is organized by channel,
 with each project that a channel is interested in listed under the channel.
+
+Please also add the opencontrailinfra account as a channel founder:
+
+/msg chanserv access #channel add opencontrailinfra +AFRfiorstv

@@ -1,0 +1,48 @@
+- job-template:
+    name: 'gate-{name}-puppet-unit-{puppet_version}'
+    node: '{node}'
+
+    builders:
+      - gerrit-git-prep
+      - shell: |
+          export PUPPET_GEM_VERSION='~> {puppet_version}.0'
+          mkdir .bundled_gems
+          export GEM_HOME=`pwd`/.bundled_gems
+          bundle install
+          bundle exec rake spec SPEC_OPTS='--format documentation'
+
+    publishers:
+      - console-log
+
+- job-template:
+    name: 'gate-{name}-puppet-lint'
+    node: '{node}'
+
+    builders:
+      - gerrit-git-prep
+      - puppet-lint
+
+    publishers:
+      - console-log
+
+- job-template:
+    name: 'gate-{name}-puppet-syntax'
+    node: '{node}'
+
+    builders:
+      - gerrit-git-prep
+      - puppet-syntax
+
+    publishers:
+      - console-log
+
+- job-group:
+    name: 'puppet-module-unit'
+    puppet_version:
+      - 2.7
+      - 3.1
+      - 3.2
+      - 3.3
+      - 3.4
+    jobs:
+      - 'gate-{name}-puppet-unit-{puppet_version}'

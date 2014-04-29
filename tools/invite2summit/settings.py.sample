@@ -1,6 +1,6 @@
 # Settings for the passcode-sending application
 #
-# Copyright 2013 Thierry Carrez <thierry@openstack.org>
+# Copyright 2013 Thierry Carrez <thierry@opencontrail.org>
 # All Rights Reserved.
 #
 #    Licensed under the Apache License, Version 2.0 (the "License"); you may
@@ -15,14 +15,14 @@
 #    License for the specific language governing permissions and limitations
 #    under the License.
 
-EMAIL_SUBJECT = "Your registration code for OpenStack Summit in Portland"
+EMAIL_SUBJECT = "Your registration code for OpenContrail Summit in Portland"
 
 EMAIL_TEMPLATE = """
 Hello $name,
 
-As you may already know, we'll be having our next OpenStack Summit
+As you may already know, we'll be having our next OpenContrail Summit
 in Portland from April 15 to April 18, 2013. We issue free passes to
-recent contributors to encourage them to join the OpenStack Summit
+recent contributors to encourage them to join the OpenContrail Summit
 and participate to shaping the next release at the Design Summit.
 
 You've been identified as a contributor in the Havana and/or Icehouse
@@ -41,11 +41,11 @@ Regards,
 $signature
 """
 
-EMAIL_FROM = "thierry@openstack.org"
-EMAIL_SIGNATURE = "Thierry Carrez\nOpenStack Foundation"
+EMAIL_FROM = "thierry@opencontrail.org"
+EMAIL_SIGNATURE = "Thierry Carrez\nOpenContrail Foundation"
 EMAIL_HOST = "secure.emailsrvr.com"
 EMAIL_PORT = 465
-EMAIL_USER = "thierry.carrez@openstack.org"
+EMAIL_USER = "thierry.carrez@opencontrail.org"
 EMAIL_PASSWORD = "MYPASSWORDHERE"
 EMAIL_USE_SSL = True
 EMAIL_USE_TLS = False

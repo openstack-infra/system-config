@@ -7,8 +7,8 @@ Overview
 There are multiple different ways that tests can be run. Each has different
 trade-offs between cost, reliability and test coverage.
 
-The primary goal for OpenStack test infrastructure is to deliver highly
-reliable testing: with 500 patches successfully getting through the OpenStack
+The primary goal for OpenContrail test infrastructure is to deliver highly
+reliable testing: with 500 patches successfully getting through the OpenContrail
 gate on a peak day, even short service interruptions have a significant impact
 on project velocity.
 
@@ -29,7 +29,7 @@ Experimental
 
 Experimental jobs have low reliability requirements: they are run by hand on
 developer request, typically as part of bringing up a new job definition.
-Failures in experimental jobs are not the responsibility of openstack-infra,
+Failures in experimental jobs are not the responsibility of opencontrail-infra,
 though they will offer best-effort assistance to developers.
 
 Silent
@@ -64,9 +64,9 @@ Gate
 ----
 
 Gate jobs are used to detect failures in patches after they are approved. They
-run against the state the OpenStack projects will have if the code is merged
+run against the state the OpenContrail projects will have if the code is merged
 (rather than the state of the pushed code). This allows detection of semantic
-conflicts cross-patch (and the usual state for OpenStack is that multiple
+conflicts cross-patch (and the usual state for OpenContrail is that multiple
 patches are going through the gate at once, so this is crucial). Failures in
 the gate both prevent the patch landing and cause all the pending patches after
 it to be retested. Gate jobs, like check jobs, have to run in a highly

@@ -14,13 +14,13 @@ At a Glance
 ===========
 
 :Hosts:
-  * ci-puppetmaster.openstack.org
+  * ci-puppetmaster.opencontrail.org
 :Puppet:
-  * :file:`modules/openstack_project/manifests/puppetmaster.pp`
+  * :file:`modules/opencontrail_project/manifests/puppetmaster.pp`
 :Projects:
   * https://puppetlabs.com/
 :Bugs:
-  * http://bugs.launchpad.net/openstack-ci
+  * http://bugs.launchpad.net/opencontrail-ci
   * http://projects.puppetlabs.com/
 :Resources:
   * `Puppet Language Reference <http://docs.puppetlabs.com/references/2.7.latest/type.html>`_
@@ -41,13 +41,13 @@ client. After that installing the puppetmaster and hiera (used to maintain
 secrets on the puppet master).
 
 Please note: Fedora F19 and Ubuntu Raring and above cannot successfully run an
-OpenStack-CI puppetmaster due to new Ruby and older Puppet not being
+OpenContrail-CI puppetmaster due to new Ruby and older Puppet not being
 compatible, so be sure to use an older release - e.g. Ubuntu Precise.
 
 .. code-block:: bash
 
    sudo su -
-   git clone https://git.openstack.org/openstack-infra/config /opt/config/production
+   git clone https://git.opencontrail.org/opencontrail-infra/config /opt/config/production
    /opt/config/production/install_puppet.sh
    apt-get install puppetmaster-passenger hiera hiera-puppet
 
@@ -59,11 +59,11 @@ finish configuration:
    bash /opt/config/production/install_modules.sh
    echo $REAL_HOSTNAME > /etc/hostname
    service hostname restart
-   puppet apply --modulepath='/opt/config/production/modules:/etc/puppet/modules' -e 'include openstack_project::puppetmaster'
+   puppet apply --modulepath='/opt/config/production/modules:/etc/puppet/modules' -e 'include opencontrail_project::puppetmaster'
 
 Note: Hiera uses a systemwide configuration file in ``/etc/puppet/hiera.yaml``
 and this setup supports multiple configurations. The two sets of environments
-that OpenStack Infrastructure uses are ``production`` and ``development``.
+that OpenContrail Infrastructure uses are ``production`` and ``development``.
 ``production`` is the default is and the environment used when nothing else is
 specified. Then the configuration needs to be placed into common.yaml in
 ``/etc/puppet/hieradata/production`` and ``/etc/puppet/hieradata/development``.
@@ -76,11 +76,18 @@ file should have mode 0600.
 Adding a node
 -------------
 
-On the new server connecting (for example, review.openstack.org) to the puppet master:
+On the new server connecting (for example, review.opencontrail.org) to the puppet master:
 
 .. code-block:: bash
 
   sudo apt-get install puppet
+
+Then edit the ``/etc/default/puppet`` file to change the start variable:
+
+.. code-block:: ini
+
+  # Start puppet on boot?
+  START=yes
 
 The node then needs to be configured to set a fixed hostname and the hostname
 of the puppet master with the following additions to ``/etc/puppet/puppet.conf``:
@@ -88,8 +95,8 @@ of the puppet master with the following additions to ``/etc/puppet/puppet.conf``
 .. code-block:: ini
 
    [main]
-   server=ci-puppetmaster.openstack.org
-   certname=review.openstack.org
+   server=ci-puppetmaster.opencontrail.org
+   certname=review.opencontrail.org
 
 The cert signing process needs to be started with:
 
@@ -106,53 +113,23 @@ On the puppet master:
 
 You should get a list of entries similar to the one below::
 
-  review.openstack.org  (44:18:BB:DF:08:50:62:70:17:07:82:1F:D5:70:0E:BF)
+  review.opencontrail.org  (44:18:BB:DF:08:50:62:70:17:07:82:1F:D5:70:0E:BF)
 
 If you see the new node there you can sign its cert on the puppet master with:
 
 .. code-block:: bash
 
-  sudo puppet cert sign review.openstack.org
+  sudo puppet cert sign review.opencontrail.org
 
-Once the cert is signed, the puppet running orchestration will pick up
-the node and run puppet on it as needed.
-
-Running Puppet on Nodes
------------------------
-
-In OpenStack's Infrastructure, puppet runs are triggered from a cronjob
-running on the puppetmaster which in turn runs a single run of puppet on
-each host we know about. We do not use the daemon mode of puppet agent
-because it experiences random hangs, and also does not allow us to control
-sequencing in any meaningful way.
-
-The entry point for this process is ``/opt/config/production/run_all.sh``
-
-There are a set of nodes, which are configured in puppet as "override" nodes,
-which are run in sequence before the rest of the nodes are run in parellel.
-At the moment, this allows creation of git repos on the git slaves before
-creation of the master repos on the gerrit server.
-
-Disabling Puppet on Nodes
--------------------------
-
-In the case of needing to disable the running of puppet on a node, it's a
-simple matter of disabling the agent:
+Finally on the puppet agent you need to start the agent daemon:
 
 .. code-block:: bash
 
-  sudo puppet agent --disable
+   sudo service puppet start
 
-This will prevent any subsequent runs of the agent, including ones triggered
-globally by the run_all script. If, as an admin, you need to run puppet on
-a node where it has been disabled, you need to specify an alternate disable
-lock file which will allow your local run of puppet without allowing the
-globally orchestrated runs to occur:
-
-.. code-block:: bash
-
-  sudo puppet agent --test --puppetdlockfile=/tmp/alt-lock-file
-
+Now that it is signed the puppet agent will execute any instructions for its
+node on the next run (default is every 30 minutes).  You can trigger this
+earlier by restarting the puppet service on the agent node.
 
 Important Notes
 ---------------

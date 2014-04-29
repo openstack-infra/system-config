@@ -1,50 +1,48 @@
-openstack-infra:
+opencontrail-infra:
     events:
       - patchset-created
       - change-merged
       - x-vrif-minus-2
     projects:
-      - openstack-dev/cookiecutter
-      - openstack-dev/hacking
-      - openstack-dev/pbr
-      - openstack-dev/specs-cookiecutter
-      - openstack-infra/askbot-theme
-      - openstack-infra/bugdaystats
-      - openstack-infra/config
-      - openstack-infra/devstack-gate
-      - openstack-infra/elastic-recheck
-      - openstack-infra/gear
-      - openstack-infra/gearman-plugin
-      - openstack-infra/gerrit
-      - openstack-infra/gerrit-trigger-plugin
-      - openstack-infra/gerritbot
-      - openstack-infra/gerritlib
-      - openstack-infra/gitdm
-      - openstack-infra/git-review
-      - openstack-infra/jeepyb
-      - openstack-infra/jenkins-job-builder
-      - openstack-infra/lodgeit
-      - openstack-infra/meetbot
-      - openstack-infra/nodepool
-      - openstack-infra/nose-html-output
-      - openstack-infra/odsreg
-      - openstack-infra/os-loganalyze
-      - openstack-infra/publications
-      - openstack-infra/puppet-apparmor
-      - openstack-infra/puppet-dashboard
-      - openstack-infra/puppet-vcsrepo
-      - openstack-infra/pypi-mirror
-      - openstack-infra/release-tools
-      - openstack-infra/releasestatus
-      - openstack-infra/reviewday
-      - openstack-infra/reviewstats
-      - openstack-infra/statusbot
-      - openstack-infra/storyboard
-      - openstack-infra/storyboard-webclient
-      - openstack-infra/zuul
-      - openstack-infra/zuul-packaging
-      - openstack/requirements
-      - stackforge/python-jenkins
+      - opencontrail-dev/cookiecutter
+      - opencontrail-dev/hacking
+      - opencontrail-dev/pbr
+      - opencontrail-infra/askbot-theme
+      - opencontrail-infra/bugdaystats
+      - opencontrail-infra/config
+      - opencontrail-infra/devstack-gate
+      - opencontrail-infra/elastic-recheck
+      - opencontrail-infra/gear
+      - opencontrail-infra/gearman-plugin
+      - opencontrail-infra/gerrit
+      - opencontrail-infra/gerrit-trigger-plugin
+      - opencontrail-infra/gerritbot
+      - opencontrail-infra/gerritlib
+      - opencontrail-infra/gitdm
+      - opencontrail-infra/git-review
+      - opencontrail-infra/jeepyb
+      - opencontrail-infra/jenkins-job-builder
+      - opencontrail-infra/lodgeit
+      - opencontrail-infra/meetbot
+      - opencontrail-infra/nodepool
+      - opencontrail-infra/nose-html-output
+      - opencontrail-infra/odsreg
+      - opencontrail-infra/os-loganalyze
+      - opencontrail-infra/publications
+      - opencontrail-infra/puppet-apparmor
+      - opencontrail-infra/puppet-dashboard
+      - opencontrail-infra/puppet-vcsrepo
+      - opencontrail-infra/pypi-mirror
+      - opencontrail-infra/release-tools
+      - opencontrail-infra/releasestatus
+      - opencontrail-infra/reviewday
+      - opencontrail-infra/reviewstats
+      - opencontrail-infra/statusbot
+      - opencontrail-infra/storyboard
+      - opencontrail-infra/storyboard-webclient
+      - opencontrail-infra/zuul
+      - opencontrail-infra/zuul-packaging
+      - opencontrail/requirements
     branches:
       - master
       - feature/gearman
@@ -55,43 +53,43 @@ openstack-infra:
       - gearman-plugin
       - sysadmin-codereview
       - debian/sid
-      - openstack/2.8
+      - opencontrail/2.8
 
-openstack-doc:
+opencontrail-doc:
     events:
       - patchset-created
       - change-merged
       - x-vrif-minus-2
     projects:
-      - openstack/api-site
-      - openstack/compute-api
-      - openstack/database-api
-      - openstack/identity-api
-      - openstack/image-api
-      - openstack/netconn-api
-      - openstack/object-api
-      - openstack/openstack-doc-tools
-      - openstack/openstack-manuals
-      - openstack/operations-guide
-      - openstack/volume-api
+      - opencontrail/api-site
+      - opencontrail/compute-api
+      - opencontrail/database-api
+      - opencontrail/identity-api
+      - opencontrail/image-api
+      - opencontrail/netconn-api
+      - opencontrail/object-api
+      - opencontrail/opencontrail-doc-tools
+      - opencontrail/opencontrail-manuals
+      - opencontrail/operations-guide
+      - opencontrail/volume-api
       - stackforge/clouddocs-maven-plugin
     branches:
       - master
       - stable/havana
 
-openstack-ceilometer:
+opencontrail-ceilometer:
     events:
       - patchset-created
       - change-merged
       - x-vrif-minus-2
     projects:
-      - openstack/ceilometer
-      - openstack/python-ceilometerclient
-      - openstack/pycadf
+      - opencontrail/ceilometer
+      - opencontrail/python-ceilometerclient
+      - opencontrail/pycadf
     branches:
       - master
 
-openstack-dns:
+opencontrail-dns:
     events:
       - patchset-created
       - change-merged
@@ -103,16 +101,16 @@ openstack-dns:
       - master
       - stable/havana
 
-openstack-trove:
+opencontrail-trove:
     events:
       - patchset-created
       - change-merged
       - x-vrif-minus-2
     projects:
-      - openstack/trove
-      - openstack/trove-integration
-      - openstack/python-troveclient
-      - openstack/database-api
+      - opencontrail/trove
+      - opencontrail/trove-integration
+      - opencontrail/python-troveclient
+      - opencontrail/database-api
     branches:
       - master
 
@@ -122,18 +120,18 @@ tripleo:
       - change-merged
       - x-vrif-minus-2
     projects:
-      - openstack-infra/tripleo-ci
-      - openstack/diskimage-builder
-      - openstack/os-apply-config
-      - openstack/os-cloud-config
-      - openstack/os-collect-config
-      - openstack/os-refresh-config
-      - openstack/python-tuskarclient
-      - openstack/tripleo-heat-templates
-      - openstack/tripleo-image-elements
-      - openstack/tripleo-incubator
-      - openstack/tuskar
-      - openstack/tuskar-ui
+      - opencontrail-infra/tripleo-ci
+      - opencontrail/diskimage-builder
+      - opencontrail/os-apply-config
+      - opencontrail/os-cloud-config
+      - opencontrail/os-collect-config
+      - opencontrail/os-refresh-config
+      - opencontrail/python-tuskarclient
+      - opencontrail/tripleo-heat-templates
+      - opencontrail/tripleo-image-elements
+      - opencontrail/tripleo-incubator
+      - opencontrail/tuskar
+      - opencontrail/tuskar-ui
     branches:
       - master
 
@@ -143,85 +141,82 @@ heat:
       - change-merged
       - x-vrif-minus-2
     projects:
-      - openstack/heat
-      - openstack/python-heatclient
-      - openstack/heat-cfntools
-      - openstack/heat-templates
-      - openstack-dev/heat-cfnclient
+      - opencontrail/heat
+      - opencontrail/python-heatclient
+      - opencontrail/heat-cfntools
+      - opencontrail/heat-templates
+      - opencontrail-dev/heat-cfnclient
     branches:
       - master
 
-openstack-neutron:
+opencontrail-neutron:
     events:
       - patchset-created
       - change-merged
       - x-vrif-minus-2
     projects:
-      - openstack/neutron
-      - openstack/neutron-specs
-      - openstack/python-neutronclient
+      - opencontrail/neutron
+      - opencontrail/python-neutronclient
     branches:
       - master
 
-openstack-sahara:
+savanna:
     events:
       - patchset-created
       - change-merged
       - x-vrif-minus-2
     projects:
-      - openstack/sahara
-      - openstack/python-saharaclient
-      - openstack/sahara-dashboard
-      - openstack/sahara-extra
-      - openstack/sahara-image-elements
-      - stackforge/puppet-sahara
-      - stackforge/sahara-ci-config
-      - stackforge/sahara-guestagent
+      - opencontrail/savanna
+      - opencontrail/python-savannaclient
+      - opencontrail/savanna-dashboard
+      - opencontrail/savanna-extra
+      - opencontrail/savanna-image-elements
+      - stackforge/puppet-savanna
+      - stackforge/savanna-ci-config
+      - stackforge/savanna-guestagent
     branches:
       - master
       - stable/0.1
       - stable/0.2
       - stable/0.3
 
-openstack-nova:
+opencontrail-nova:
     events:
       - patchset-created
       - x-vrif-minus-2
     projects:
-      - openstack/gantt
-      - openstack/nova
-      - openstack/nova-specs
-      - openstack/python-ganttclient
-      - openstack/python-novaclient
+      - opencontrail/gantt
+      - opencontrail/nova
+      - opencontrail/python-ganttclient
+      - opencontrail/python-novaclient
     branches:
       - master
 
-openstack-cinder:
+opencontrail-cinder:
     events:
       - patchset-created
       - x-vrif-minus-2
     projects:
-      - openstack/cinder
-      - openstack/python-cinderclient
+      - opencontrail/cinder
+      - opencontrail/python-cinderclient
     branches:
       - master
 
-openstack-qa:
+opencontrail-qa:
     events:
       - patchset-created
       - change-merged
       - x-vrif-minus-2
     projects:
-      - openstack/qa-specs
-      - openstack/tempest
-      - openstack-dev/devstack
-      - openstack-dev/grenade
-      - openstack-infra/elastic-recheck
-      - openstack-infra/devstack-gate
+      - opencontrail/tempest
+      - opencontrail-dev/devstack
+      - opencontrail-dev/grenade
+      - opencontrail-infra/elastic-recheck
+      - opencontrail-infra/devstack-gate
     branches:
       - master
 
-puppet-openstack:
+puppet-opencontrail:
     events:
       - patchset-created
       - change-merged
@@ -238,9 +233,9 @@ puppet-openstack:
       - stackforge/puppet-keystone
       - stackforge/puppet-neutron
       - stackforge/puppet-nova
-      - stackforge/puppet-openstack
-      - stackforge/puppet_openstack_builder
-      - stackforge/puppet-openstack_dev_env
+      - stackforge/puppet-opencontrail
+      - stackforge/puppet_opencontrail_builder
+      - stackforge/puppet-opencontrail_dev_env
       - stackforge/puppet-swift
       - stackforge/puppet-tempest
       - stackforge/puppet-vswitch
@@ -249,32 +244,31 @@ puppet-openstack:
       - stable/grizzly
       - stable/havana
 
-openstack-chef:
+opencontrail-chef:
     events:
       - patchset-created
       - change-merged
       - x-vrif-minus-2
     projects:
-      - stackforge/cookbook-ceph
-      - stackforge/cookbook-openstack-block-storage
-      - stackforge/cookbook-openstack-common
-      - stackforge/cookbook-openstack-compute
-      - stackforge/cookbook-openstack-dashboard
-      - stackforge/cookbook-openstack-identity
-      - stackforge/cookbook-openstack-image
-      - stackforge/cookbook-openstack-integration-test
-      - stackforge/cookbook-openstack-network
-      - stackforge/cookbook-openstack-object-storage
-      - stackforge/cookbook-openstack-ops-database
-      - stackforge/cookbook-openstack-ops-messaging
-      - stackforge/cookbook-openstack-orchestration
-      - stackforge/cookbook-openstack-telemetry
-      - stackforge/openstack-chef-repo
+      - stackforge/cookbook-opencontrail-block-storage
+      - stackforge/cookbook-opencontrail-common
+      - stackforge/cookbook-opencontrail-compute
+      - stackforge/cookbook-opencontrail-dashboard
+      - stackforge/cookbook-opencontrail-identity
+      - stackforge/cookbook-opencontrail-image
+      - stackforge/cookbook-opencontrail-integration-test
+      - stackforge/cookbook-opencontrail-metering
+      - stackforge/cookbook-opencontrail-network
+      - stackforge/cookbook-opencontrail-object-storage
+      - stackforge/cookbook-opencontrail-ops-database
+      - stackforge/cookbook-opencontrail-ops-messaging
+      - stackforge/cookbook-opencontrail-orchestration
+      - stackforge/opencontrail-chef-repo
     branches:
       - master
       - stable/grizzly
 
-openstack-mistral:
+opencontrail-mistral:
     events:
       - patchset-created
       - change-merged
@@ -326,56 +320,53 @@ billingstack:
     branches:
       - master
 
-openstack-ironic:
+opencontrail-ironic:
     events:
       - patchset-created
       - change-merged
       - x-vrif-minus-2
     projects:
-      - openstack/ironic
-      - openstack/ironic-python-agent
-      - openstack/python-ironicclient
+      - opencontrail/ironic
+      - opencontrail/python-ironicclient
       - stackforge/pyghmi
     branches:
       - master
 
-openstack-swift:
+opencontrail-swift:
     events:
       - patchset-created
       - change-merged
       - x-vrif-minus-2
     projects:
-      - openstack/swift
-      - openstack/swift-bench
-      - openstack/python-swiftclient
+      - opencontrail/swift
+      - opencontrail/swift-bench
+      - opencontrail/python-swiftclient
     branches:
       - master
       - feature/ec
 
-openstack-state-management:
+opencontrail-state-management:
     events:
       - patchset-created
       - change-merged
       - x-vrif-minus-2
     projects:
-      - openstack/taskflow
+      - opencontrail/taskflow
     branches:
       - master
 
-openstack-barbican:
+opencontrail-barbican:
     events:
       - patchset-created
       - change-merged
       - x-vrif-minus-2
     projects:
       - stackforge/barbican
-      - stackforge/kite
       - stackforge/python-barbicanclient
-      - stackforge/python-kiteclient
     branches:
       - master
 
-fuel-tracker:
+fuel-dev:
     events:
       - patchset-created
       - change-merged
@@ -392,25 +383,25 @@ fuel-tracker:
     branches:
       - master
 
-openstack-glance:
+opencontrail-glance:
     events:
       - patchset-created
       - change-merged
       - x-vrif-minus-2
     projects:
-      - openstack/glance
-      - openstack/python-glanceclient
+      - opencontrail/glance
+      - opencontrail/python-glanceclient
     branches:
       - master
 
-openstack-marconi:
+opencontrail-marconi:
     events:
       - patchset-created
       - change-merged
       - x-vrif-minus-2
     projects:
-      - openstack/marconi
-      - openstack/python-marconiclient
+      - opencontrail/marconi
+      - opencontrail/python-marconiclient
     branches:
       - master
 
@@ -425,7 +416,7 @@ stackforge-libra:
     branches:
       - master
 
-openstack-rally:
+opencontrail-rally:
     events:
       - patchset-created
       - change-merged
@@ -436,7 +427,7 @@ openstack-rally:
     branches:
       - master
 
-openstack-climate:
+opencontrail-climate:
     events:
       - patchset-created
       - change-merged
@@ -485,8 +476,8 @@ storyboard:
       - change-merged
       - x-vrif-minus-2
     projects:
-      - openstack-infra/storyboard
-      - openstack-infra/storyboard-webclient
+      - opencontrail-infra/storyboard
+      - opencontrail-infra/storyboard-webclient
     branches:
       - master
 
@@ -500,17 +491,7 @@ milk-dev:
     branches:
       - master
 
-pecanpy:
-    events:
-      - patchset-created
-      - change-merged
-      - x-vrif-minus-2
-    projects:
-      - stackforge/pecan
-    branches:
-      - master
-
-openstack-entropy:
+opencontrail-entropy:
     events:
       - patchset-created
       - change-merged
@@ -532,7 +513,7 @@ packstack-dev:
       - grizzly
       - havana
 
-openstack-anvil:
+opencontrail-anvil:
     events:
       - patchset-created
       - change-merged
@@ -555,176 +536,142 @@ syscompass:
     branches:
       - master
 
-openstack-keystone:
-    events:
-      - change-merged
-      - patchset-created
-      - x-vrif-minus-2
-    projects:
-      - openstack/keystone
-      - openstack/identity-api
-      - openstack/python-keystoneclient
-    branches:
-      - master
-
-openstack-manila:
-    events:
-      - patchset-created
-      - change-merged
-      - x-vrif-minus-2
-    projects:
-      - stackforge/manila
-      - stackforge/python-manilaclient
-    branches:
-      - master
-
-openstack-merges:
+opencontrail-merges:
     events:
       - change-merged
     branches:
       - master
     projects:
-      # grep openstack governance/reference/programs.yaml | grep -v url
-      - openstack/nova
-      - openstack/python-novaclient
-      - openstack/gantt
-      - openstack/python-ganttclient
-      - openstack/swift
-      - openstack/python-swiftclient
-      - openstack/swift-bench
-      - openstack/glance
-      - openstack/python-glanceclient
-      - openstack/keystone
-      - openstack/python-keystoneclient
-      - openstack/horizon
-      - openstack/django_openstack_auth
-      - openstack/tuskar-ui
-      - openstack/neutron
-      - openstack/python-neutronclient
-      - openstack/cinder
-      - openstack/python-cinderclient
-      - openstack/ceilometer
-      - openstack/python-ceilometerclient
-      - openstack/heat
-      - openstack/python-heatclient
-      - openstack/heat-cfntools
-      - openstack/heat-templates
-      - openstack-dev/heat-cfnclient
-      - openstack/trove
-      - openstack/python-troveclient
-      - openstack/trove-integration
-      - openstack/ironic
-      - openstack/python-ironicclient
-      - openstack/oslo-incubator
-      - openstack/oslo.config
-      - openstack/oslo.messaging
-      - openstack/oslo.rootwrap
-      - openstack/oslo.sphinx
-      - openstack/oslo.version
-      - openstack-dev/cookiecutter
-      - openstack-dev/hacking
-      - openstack-dev/pbr
-      - openstack-dev/openstack-nose
-      - openstack-dev/specs-cookiecutter
-      - openstack-infra/activity-board
-      - openstack-infra/askbot-theme
-      - openstack-infra/config
-      - openstack-infra/devstack-gate
-      - openstack-infra/elastic-recheck
-      - openstack-infra/gear
-      - openstack-infra/gearman-plugin
-      - openstack-infra/gerrit
-      - openstack-infra/gerritbot
-      - openstack-infra/gerritlib
-      - openstack-infra/git-review
-      - openstack-infra/gitdm
-      - openstack-infra/groups
-      - openstack-infra/jeepyb
-      - openstack-infra/jenkins-job-builder
-      - openstack-infra/lodgeit
-      - openstack-infra/meetbot
-      - openstack-infra/nodepool
-      - openstack-infra/nose-html-output
-      - openstack-infra/odsreg
-      - openstack-infra/openstackid
-      - openstack-infra/os-loganalyze
-      - openstack-infra/publications
-      - openstack-infra/puppet-apparmor
-      - openstack-infra/puppet-dashboard
-      - openstack-infra/puppet-vcsrepo
-      - openstack-infra/pypi-mirror
-      - openstack-infra/releasestatus
-      - openstack-infra/reviewday
-      - openstack-infra/reviewstats
-      - openstack-infra/statusbot
-      - openstack-infra/storyboard
-      - openstack-infra/tripleo-ci
-      - openstack-infra/zmq-event-publisher
-      - openstack-infra/zuul
-      - openstack-infra/zuul-packaging
-      - openstack/openstack-planet
-      - openstack/api-site
-      - openstack/compute-api
-      - openstack/database-api
-      - openstack/identity-api
-      - openstack/image-api
-      - openstack/netconn-api
-      - openstack/object-api
-      - openstack/openstack-doc-tools
-      - openstack/openstack-manuals
-      - openstack/operations-guide
-      - openstack/volume-api
-      - openstack/tempest
-      - openstack-dev/grenade
-      - openstack/diskimage-builder
-      - openstack/os-apply-config
-      - openstack/os-collect-config
-      - openstack/os-refresh-config
-      - openstack/tripleo-heat-templates
-      - openstack/tripleo-image-elements
-      - openstack/tripleo-incubator
-      - openstack/tuskar
-      - openstack/python-tuskarclient
-      - openstack-dev/devstack
-      - openstack-infra/release-tools
-      - openstack/marconi
-      - openstack/python-marconiclient
-      - openstack/sahara
-      - openstack/python-saharaclient
-      - openstack/sahara-dashboard
-      - openstack/sahara-extra
-      - openstack/sahara-image-elements
+      # grep opencontrail governance/reference/programs.yaml | grep -v url
+      - opencontrail/nova
+      - opencontrail/python-novaclient
+      - opencontrail/gantt
+      - opencontrail/python-ganttclient
+      - opencontrail/swift
+      - opencontrail/python-swiftclient
+      - opencontrail/swift-bench
+      - opencontrail/glance
+      - opencontrail/python-glanceclient
+      - opencontrail/keystone
+      - opencontrail/python-keystoneclient
+      - opencontrail/horizon
+      - opencontrail/django_opencontrail_auth
+      - opencontrail/tuskar-ui
+      - opencontrail/neutron
+      - opencontrail/python-neutronclient
+      - opencontrail/cinder
+      - opencontrail/python-cinderclient
+      - opencontrail/ceilometer
+      - opencontrail/python-ceilometerclient
+      - opencontrail/heat
+      - opencontrail/python-heatclient
+      - opencontrail/heat-cfntools
+      - opencontrail/heat-templates
+      - opencontrail-dev/heat-cfnclient
+      - opencontrail/trove
+      - opencontrail/python-troveclient
+      - opencontrail/trove-integration
+      - opencontrail/ironic
+      - opencontrail/python-ironicclient
+      - opencontrail/oslo-incubator
+      - opencontrail/oslo.config
+      - opencontrail/oslo.messaging
+      - opencontrail/oslo.rootwrap
+      - opencontrail/oslo.sphinx
+      - opencontrail/oslo.version
+      - opencontrail-dev/cookiecutter
+      - opencontrail-dev/hacking
+      - opencontrail-dev/pbr
+      - opencontrail-dev/opencontrail-nose
+      - opencontrail-infra/activity-board
+      - opencontrail-infra/askbot-theme
+      - opencontrail-infra/config
+      - opencontrail-infra/devstack-gate
+      - opencontrail-infra/elastic-recheck
+      - opencontrail-infra/gear
+      - opencontrail-infra/gearman-plugin
+      - opencontrail-infra/gerrit
+      - opencontrail-infra/gerritbot
+      - opencontrail-infra/gerritlib
+      - opencontrail-infra/git-review
+      - opencontrail-infra/gitdm
+      - opencontrail-infra/groups
+      - opencontrail-infra/jeepyb
+      - opencontrail-infra/jenkins-job-builder
+      - opencontrail-infra/lodgeit
+      - opencontrail-infra/meetbot
+      - opencontrail-infra/nodepool
+      - opencontrail-infra/nose-html-output
+      - opencontrail-infra/odsreg
+      - opencontrail-infra/opencontrailid
+      - opencontrail-infra/os-loganalyze
+      - opencontrail-infra/publications
+      - opencontrail-infra/puppet-apparmor
+      - opencontrail-infra/puppet-dashboard
+      - opencontrail-infra/puppet-vcsrepo
+      - opencontrail-infra/pypi-mirror
+      - opencontrail-infra/releasestatus
+      - opencontrail-infra/reviewday
+      - opencontrail-infra/reviewstats
+      - opencontrail-infra/statusbot
+      - opencontrail-infra/storyboard
+      - opencontrail-infra/tripleo-ci
+      - opencontrail-infra/zmq-event-publisher
+      - opencontrail-infra/zuul
+      - opencontrail-infra/zuul-packaging
+      - opencontrail/opencontrail-planet
+      - opencontrail/api-site
+      - opencontrail/compute-api
+      - opencontrail/database-api
+      - opencontrail/identity-api
+      - opencontrail/image-api
+      - opencontrail/netconn-api
+      - opencontrail/object-api
+      - opencontrail/opencontrail-doc-tools
+      - opencontrail/opencontrail-manuals
+      - opencontrail/operations-guide
+      - opencontrail/volume-api
+      - opencontrail/tempest
+      - opencontrail-dev/grenade
+      - opencontrail/diskimage-builder
+      - opencontrail/os-apply-config
+      - opencontrail/os-collect-config
+      - opencontrail/os-refresh-config
+      - opencontrail/tripleo-heat-templates
+      - opencontrail/tripleo-image-elements
+      - opencontrail/tripleo-incubator
+      - opencontrail/tuskar
+      - opencontrail/python-tuskarclient
+      - opencontrail-dev/devstack
+      - opencontrail-infra/release-tools
+      - opencontrail/marconi
+      - opencontrail/python-marconiclient
+      - opencontrail/savanna
+      - opencontrail/python-savannaclient
+      - opencontrail/savanna-dashboard
+      - opencontrail/savanna-extra
+      - opencontrail/savanna-image-elements
 
-openstack-oslo:
+opencontrail-oslo:
     events:
       - patchset-created
       - x-vrif-minus-2
     projects:
-      - openstack/cliff
-      - openstack/oslo.config
-      - openstack/oslo-incubator
-      - openstack/oslo.messaging
-      - openstack/oslo.rootwrap
-      - openstack/oslosphinx
-      - openstack/oslo.test
-      - openstack/oslo.version
-      - openstack/oslo.vmware
-      - openstack/pycadf
-      - openstack/stevedore
-      - openstack/taskflow
-      - openstack-dev/cookiecutter
-      - openstack-dev/hacking
-      - openstack-dev/oslo-cookiecutter
-      - openstack-dev/pbr
-    branches:
-      - master
-
-openstack-satori:
-    events:
-      - patchset-created
-      - change-merged
-      - x-vrif-minus-2
-    projects:
-      - stackforge/satori
+      - opencontrail/cliff
+      - opencontrail/oslo.config
+      - opencontrail/oslo-incubator
+      - opencontrail/oslo.messaging
+      - opencontrail/oslo.rootwrap
+      - opencontrail/oslosphinx
+      - opencontrail/oslo.test
+      - opencontrail/oslo.version
+      - opencontrail/oslo.vmware
+      - opencontrail/pycadf
+      - opencontrail/stevedore
+      - opencontrail/taskflow
+      - opencontrail-dev/cookiecutter
+      - opencontrail-dev/hacking
+      - opencontrail-dev/oslo-cookiecutter
+      - opencontrail-dev/pbr
     branches:
       - master

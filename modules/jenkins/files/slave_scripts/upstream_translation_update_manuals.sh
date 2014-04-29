@@ -16,27 +16,21 @@
 
 # The script is to push the updated PoT to Transifex.
 
-PROJECT=$1
-
 DocFolder="doc"
-if [ $PROJECT = "api-site" ] ; then
-    DocFolder="./"
-fi
 
 if [ ! `echo $ZUUL_REFNAME | grep master` ]
 then
     exit 0
 fi
 
-git config user.name "OpenStack Jenkins"
-git config user.email "jenkins@openstack.org"
+git config user.name "OpenContrail Jenkins"
+git config user.email "jenkins@opencontrail.org"
 
-# Initialize the transifex client, if there's no .tx directory
-if [ ! -d .tx ] ; then
-    tx init --host=https://www.transifex.com
-fi
+# no need to initialize transifex client,
+# because there is an existing .tx folder in opencontrail-manuals
+# tx init --host=https://www.transifex.com
 
-# Generate pot one by one
+# generate pot one by one
 for FILE in ${DocFolder}/*
 do
     DOCNAME=${FILE#${DocFolder}/}
@@ -56,7 +50,7 @@ do
         # Add all changed files to git
         git add ${DocFolder}/${DOCNAME}/locale/*
         # Set auto-local
-        tx set --auto-local -r openstack-manuals-i18n.${DOCNAME} \
+        tx set --auto-local -r opencontrail-manuals-i18n.${DOCNAME} \
 "${DocFolder}/${DOCNAME}/locale/<lang>.po" --source-lang en \
 --source-file ${DocFolder}/${DOCNAME}/locale/${DOCNAME}.pot \
 -t PO --execute
@@ -68,3 +62,6 @@ then
     # Push .pot changes to transifex
     tx --debug --traceback push -s
 fi
+
+
+

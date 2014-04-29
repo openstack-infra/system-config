@@ -1,0 +1,39 @@
+<VirtualHost <%= scope.lookupvar("opencontrailid::vhost_name") %>:80>
+  ServerAdmin <%= scope.lookupvar("opencontrailid::serveradmin") %>
+
+  ErrorLog ${APACHE_LOG_DIR}/opencontrailid-error.log
+  LogLevel warn
+  CustomLog ${APACHE_LOG_DIR}/opencontrailid-access.log combined
+
+  Redirect / https://<%= scope.lookupvar("opencontrailid::vhost_name") %>/
+
+</VirtualHost>
+
+<IfModule mod_ssl.c>
+<VirtualHost <%= scope.lookupvar("opencontrailid::vhost_name") %>:443>
+  ServerName <%= scope.lookupvar("opencontrailid::vhost_name") %>
+  ServerAdmin <%= scope.lookupvar("opencontrailid::serveradmin") %>
+
+  ErrorLog ${APACHE_LOG_DIR}/opencontrailid-ssl-error.log
+  LogLevel warn
+  CustomLog ${APACHE_LOG_DIR}/opencontrailid-ssl-access.log combined
+
+  SSLEngine on
+  SSLCertificateFile      <%= scope.lookupvar("opencontrailid::ssl_cert_file") %>
+  SSLCertificateKeyFile   <%= scope.lookupvar("opencontrailid::ssl_key_file") %>
+<% if scope.lookupvar("opencontrailid::ssl_chain_file") != "" %>
+  SSLCertificateChainFile <%= scope.lookupvar("opencontrailid::ssl_chain_file") %>
+<% end %>
+
+  RewriteEngine on
+  RewriteCond %{HTTP_HOST} !<%= scope.lookupvar("opencontrailid::vhost_name") %>
+  RewriteRule ^.*$ <%= scope.lookupvar("opencontrailid::canonicalweburl") %>
+
+  DocumentRoot <%= docroot %>
+  <Directory <%= docroot %>/>
+    Order allow,deny
+    Allow from all
+  </Directory>
+
+</VirtualHost>
+</IfModule>

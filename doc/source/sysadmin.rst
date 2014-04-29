@@ -6,7 +6,7 @@ System Administration
 #####################
 
 Our infrastructure is code and contributions to it are handled just
-like the rest of OpenStack.  This means that anyone can contribute to
+like the rest of OpenContrail.  This means that anyone can contribute to
 the installation and long-running maintenance of systems without shell
 access, and anyone who is interested can provide feedback and
 collaborate on code reviews.
@@ -14,7 +14,7 @@ collaborate on code reviews.
 The configuration of every system operated by the infrastructure team
 is managed by Puppet in a single Git repository:
 
-  https://git.openstack.org/cgit/openstack-infra/config
+  https://git.opencontrail.org/cgit/opencontrail-infra/config
 
 All system configuration should be encoded in that repository so that
 anyone may propose a change in the running configuration to Gerrit.
@@ -32,24 +32,24 @@ configuration higher in the stack.
 
 The `modules/` directory holds puppet modules that abstractly describe
 the configuration of a service.  Ideally, these should have no
-OpenStack-specific information in them, and eventually they should all
+OpenContrail-specific information in them, and eventually they should all
 become modules that are directly consumed from PuppetForge, only
 existing in the config repo during an initial incubation period.  This
-is not yet the case, so you may find OpenStack-specific configuration
+is not yet the case, so you may find OpenContrail-specific configuration
 in these modules, though we are working to reduce it.
 
-The `modules/openstack_project/manifests/` directory holds
-configuration for each of the servers that the OpenStack project runs.
-Think of these manifests as describing how OpenStack runs a particular
+The `modules/opencontrail_project/manifests/` directory holds
+configuration for each of the servers that the OpenContrail project runs.
+Think of these manifests as describing how OpenContrail runs a particular
 service.  However, no site-specific configuration such as hostnames or
 credentials should be included in these files.  This is what lets you
-easily test an OpenStack project manifest on your own server.
+easily test an OpenContrail project manifest on your own server.
 
 Finally, the `manifests/site.pp` file contains the information that is
-specific to the actual servers that OpenStack runs.  These should be
+specific to the actual servers that OpenContrail runs.  These should be
 very simple node definitions that largely exist simply to provide
 private date from hiera to the more robust manifests in the
-`openstack_project` modules.
+`opencontrail_project` modules.
 
 This means that you can run the same configuration on your own server
 simply by providing a different manifest file instead of site.pp.
@@ -65,7 +65,7 @@ repo::
 
   sudo su -
   apt-get install git
-  git clone https://git.openstack.org/openstack-infra/config
+  git clone https://git.opencontrail.org/opencontrail-infra/config
   cd config
 
 Then copy the etherpad node definition from manifests/site.pp to a new
@@ -73,7 +73,7 @@ file (be sure to specify the FQDN of the host you are working with in
 the node specifier).  It might look something like this::
 
   # local.pp
-  class { 'openstack_project::etherpad':
+  class { 'opencontrail_project::etherpad':
     database_password       => 'badpassword',
     sysadmins               => ['user@example.org'],
   }
@@ -91,11 +91,11 @@ repository::
   puppet apply -l /tmp/manifest.log --modulepath=modules:/etc/puppet/modules manifests/local.pp
 
 That should turn the system you are logged into into an etherpad
-server with the same configuration as that used by the OpenStack
+server with the same configuration as that used by the OpenContrail
 project.  You can edit the contents of the config repo and iterate as
 needed.  When you're ready to propose the change for review, you can
 propose the change with git-review.  See the `Gerrit Workflow wiki
-article <https://wiki.openstack.org/wiki/GerritWorkflow>`_ for more
+article <https://wiki.opencontrail.org/wiki/GerritWorkflow>`_ for more
 information.
 
 Adding a New Server
@@ -103,7 +103,7 @@ Adding a New Server
 
 To create a new server, do the following:
 
- * Add a file in :file:`modules/openstack_project/manifests/` that defines a
+ * Add a file in :file:`modules/opencontrail_project/manifests/` that defines a
    class which specifies the configuration of the server.
 
  * Add a node entry in :file:`manifests/site.pp` for the server that uses that
@@ -115,7 +115,7 @@ To create a new server, do the following:
 
  * You should be able to install and configure most software only with
    puppet.  Nonetheless, if you need SSH access to the host, add your
-   public key to :file:`modules/openstack_project/manifests/users.pp` and
+   public key to :file:`modules/opencontrail_project/manifests/users.pp` and
    include a stanza like this in your server class::
 
      realize (
@@ -128,7 +128,7 @@ To create a new server, do the following:
 SSH Access
 ==========
 
-For any of the systems managed by the OpenStack Infrastructure team, the
+For any of the systems managed by the OpenContrail Infrastructure team, the
 following practices must be observed for SSH access:
 
  * SSH access is only permitted with SSH public/private key
@@ -153,10 +153,10 @@ following practices must be observed for SSH access:
    is received should be used, and the SSH keys should be added with
    the confirmation constraint ('ssh-add -c').
  * The number of SSH keys that are configured to permit access to
-   OpenStack machines should be kept to a minimum.
- * OpenStack Infrastructure machines must use puppet to centrally manage and
+   OpenContrail machines should be kept to a minimum.
+ * OpenContrail Infrastructure machines must use puppet to centrally manage and
    configure user accounts, and the SSH authorized_keys files from the
-   openstack-infra/config repository.
+   opencontrail-infra/config repository.
  * SSH keys should be periodically rotated (at least once per year).
    During rotation, a new key can be added to puppet for a time, and
    then the old one removed.  Be sure to run puppet on the backup
@@ -168,28 +168,28 @@ GitHub Access
 
 To ensure that code review and testing are not bypassed in the public
 Git repositories, only Gerrit will be permitted to commit code to
-OpenStack repositories.  Because GitHub always allows project
+OpenContrail repositories.  Because GitHub always allows project
 administrators to commit code, accounts that have access to manage the
 GitHub projects necessarily will have commit access to the
 repositories.  Therefore, to avoid inadvertent commits to the public
 repositories, unique administrative-only accounts must be used to
-manage the OpenStack GitHub organization and projects.  These accounts
+manage the OpenContrail GitHub organization and projects.  These accounts
 will not be used to check out or commit code for any project.
 
 Root only information
 #####################
 
 Some information is only relevant if you have root access to the system - e.g.
-you are an OpenStack CI root operator, or you are running a clone of the
-OpenStack CI infrastructure for another project.
+you are an OpenContrail CI root operator, or you are running a clone of the
+OpenContrail CI infrastructure for another project.
 
 Backups
 =======
 
 Off-site backups are made to two servers:
 
- * ci-backup-rs-ord.openstack.org
- * ci-backup-hp-az1.openstack.org
+ * ci-backup-rs-ord.opencontrail.org
+ * ci-backup-hp-az1.opencontrail.org
 
 Puppet is used to perform the initial configuration of those machines,
 but to protect them from unauthorized access in case access to the
@@ -220,8 +220,8 @@ and add this to the authorized_keys file::
 
 Switching back to the server to be backed up, run::
 
-  ssh $BUPUSER@ci-backup-rs-ord.openstack.org
-  ssh $BUPUSER@ci-backup-hp-az1.openstack.org
+  ssh $BUPUSER@ci-backup-rs-ord.opencontrail.org
+  ssh $BUPUSER@ci-backup-hp-az1.opencontrail.org
 
 And verify the host key.  Note this will start the bup server on the
 remote end, you will not be given a pty. Use ^D to close the connection
@@ -243,7 +243,7 @@ how we restore content from backups::
 
 At this point we can join the tar that was split by the backup cron::
 
-  bup join -r bup-<short-servername>@ci-backup-rs-ord.openstack.org: root > backup.tar
+  bup join -r bup-<short-servername>@ci-backup-rs-ord.opencontrail.org: root > backup.tar
 
 At this point you may need to wait a while. These backups are stored on
 servers geographically distant from our normal servers resulting in less
@@ -270,6 +270,6 @@ Launching new servers
 =====================
 
 New servers are launched using the ``launch/launch-node.py`` tool from the git
-repository ``https://git.openstack.org/openstack-infra/config``. This tool is
+repository ``https://git.opencontrail.org/opencontrail-infra/config``. This tool is
 run from a checkout on the puppetmaster - please see :file:`launch/README` for
 detailed instructions.

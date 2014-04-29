@@ -1,6 +1,6 @@
 #!/bin/bash -x
 
-# Copyright 2013 OpenStack Foundation
+# Copyright 2013 OpenContrail Foundation
 #
 # Licensed under the Apache License, Version 2.0 (the "License"); you may
 # not use this file except in compliance with the License. You may obtain
@@ -31,27 +31,26 @@ cat <<EOF > ~/.pip/pip.conf
 timeout = 60
 EOF
 
-# For project listed in openstack/requirements,
-# use the pypi.openstack.org mirror exclusively
+# For project listed in opencontrail/requirements,
+# use the pypi.opencontrail.org mirror exclusively
 if grep -x "$org/$project" /opt/requirements/projects.txt 2>&1
 then
-    export TOX_INDEX_URL='http://pypi.openstack.org/openstack'
+    export TOX_INDEX_URL='http://pypi.opencontrail.org/opencontrail'
     echo "Switching on internal pypi mirror $TOX_INDEX_URL for $org/$project"
     cat <<EOF > ~/.pydistutils.cfg
 [easy_install]
-index_url = http://pypi.openstack.org/openstack
+index_url = http://pypi.opencontrail.org/opencontrail
 EOF
     cat <<EOF > ~/.pip/pip.conf
 [global]
-index-url = http://pypi.openstack.org/openstack
-timeout = 60
+index-url = http://pypi.opencontrail.org/opencontrail
 EOF
 else
-    echo "$org/$project will not use the internal openstack pypi mirror"
+    echo "$org/$project will not use the internal opencontrail pypi mirror"
     cat <<EOF > ~/.pip/pip.conf
 [global]
 timeout = 60
-index-url = http://pypi.openstack.org/openstack
+index-url = http://pypi.opencontrail.org/opencontrail
 extra-index-url = http://pypi.python.org/simple
 EOF
 fi

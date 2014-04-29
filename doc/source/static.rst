@@ -6,22 +6,22 @@ Static Web Hosting
 ##################
 
 Several virtual hosts serve static data from an Apache server on
-static.openstack.org.
+static.opencontrail.org.
 
 At a Glance
 ===========
 
 :Hosts:
-  * http://logs.openstack.org
-  * http://docs-draft.openstack.org
-  * http://status.openstack.org
-  * http://pypi.openstack.org
+  * http://logs.opencontrail.org
+  * http://docs-draft.opencontrail.org
+  * http://status.opencontrail.org
+  * http://pypi.opencontrail.org
 :Puppet:
-  * :file:`modules/openstack_project/manifests/static.pp`
+  * :file:`modules/opencontrail_project/manifests/static.pp`
 :Projects:
   * http://apache.org/
 :Bugs:
-  * http://bugs.launchpad.net/openstack-ci
+  * http://bugs.launchpad.net/opencontrail-ci
 
 Overview
 ========
@@ -36,7 +36,7 @@ Adding a New Device
 If the main volume group doesn't have enough space for what you want
 to do, this is how you can add a new volume.
 
-Log into ci-puppetmaster.openstack.org and run::
+Log into ci-puppetmaster.opencontrail.org and run::
 
   . ~root/cinder-venv/bin/activate
   . ~root/ci-launch/cinder.sh
@@ -47,10 +47,10 @@ Log into ci-puppetmaster.openstack.org and run::
 * Add a new cinder volume (substitute the next number in series for
   NN)::
 
-    cinder create --display-name "static.openstack.org/mainNN" 1024
+    cinder create --display-name "static.opencontrail.org/mainNN" 1024
     nova volume-attach <server id> <volume id> auto
 
-* On static.openstack.org, create the partition table::
+* On static.opencontrail.org, create the partition table::
 
     DEVICE=/dev/xvdX
     sudo parted $DEVICE mklabel msdos mkpart primary 0% 100% set 1 lvm on

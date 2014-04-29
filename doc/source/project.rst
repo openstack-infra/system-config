@@ -5,21 +5,21 @@
 Infrastructure Project
 ######################
 
-The infrastructure for the OpenStack project itself is run with the
-same processes, tools and philosophy as any other OpenStack project.
+The infrastructure for the OpenContrail project itself is run with the
+same processes, tools and philosophy as any other OpenContrail project.
 The infrastructure team is an open meritocracy that welcomes new
-members.  You can read about the OpenStack way on the wiki:
+members.  You can read about the OpenContrail way on the wiki:
 
-* https://wiki.openstack.org/wiki/How_To_Contribute
-* https://wiki.openstack.org/wiki/Open
-* https://wiki.openstack.org/wiki/Governance
-* https://wiki.openstack.org/wiki/Teams
+* https://wiki.opencontrail.org/wiki/How_To_Contribute
+* https://wiki.opencontrail.org/wiki/Open
+* https://wiki.opencontrail.org/wiki/Governance
+* https://wiki.opencontrail.org/wiki/Teams
 
 Scope
 =====
 
 The project infrastructure encompasses all of the systems that are
-used in the day to day operation of the OpenStack project as a whole.
+used in the day to day operation of the OpenContrail project as a whole.
 This includes development, testing, and collaboration tools.  All of
 the software that we run is open source, and its configuration is
 public.  The project still uses a number of systems that do not yet
@@ -33,29 +33,29 @@ Contributing
 ============
 
 We welcome contributions from new contributors.  Reading this
-documentation is the first step.  You should also join our `mailing list <http://lists.openstack.org/cgi-bin/mailman/listinfo/openstack-infra>`_.
+documentation is the first step.  You should also join our `mailing list <http://lists.opencontrail.org/cgi-bin/mailman/listinfo/opencontrail-infra>`_.
 
-We are most active on IRC, so please join the **#openstack-infra**
+We are most active on IRC, so please join the **#opencontrail-infra**
 channel on Freenode.
 
 Feel free to attend our `weekly IRC meeting
-<https://wiki.openstack.org/wiki/Meetings/InfraTeamMeeting>`_.
-on Tuesdays at 19:00 UTC in #openstack-meeting.
+<https://wiki.opencontrail.org/wiki/Meetings/InfraTeamMeeting>`_.
+on Tuesdays at 19:00 UTC in #opencontrail-meeting.
 
 Check out our open bugs, particularly the `low-hanging-fruit
-<https://bugs.launchpad.net/openstack-ci/+bugs?field.tag=low-hanging-fruit>`_,
+<https://bugs.launchpad.net/opencontrail-ci/+bugs?field.tag=low-hanging-fruit>`_,
 which are smaller (but still important!) tasks that may not require a
 great deal of in-depth knowledge.
 
 We hold regular `bug days
-<https://wiki.openstack.org/wiki/InfraTeam#Bugs>`_ where we review and
+<https://wiki.opencontrail.org/wiki/InfraTeam#Bugs>`_ where we review and
 triage bugs.
 
 To read about how our systems are managed and how to view or edit
 those configurations, see :ref:`sysadmin`.
 
-We also have a a collection of `OpenStack Project Infrastructure Publications
-<http://docs.openstack.org/infra/publications/>`_ where we host slides for
+We also have a a collection of `OpenContrail Project Infrastructure Publications
+<http://docs.opencontrail.org/infra/publications/>`_ where we host slides for
 presentations team members have given about the infrastructure.
 
 And if you have any questions, please ask.
@@ -80,7 +80,7 @@ Core Members
 
 Root Members
   While core membership is directly analogous to the same system in
-  other OpenStack projects, because the infrastructure team operates
+  other OpenContrail projects, because the infrastructure team operates
   production servers, there is another sub-group of the infrastructure
   team that has root access to all servers.  Root membership is
   handled in the same way as core membership.  Root members must also
@@ -103,7 +103,7 @@ Bugs
 
 The infrastructure project maintains a bug list at:
 
-  https://bugs.launchpad.net/openstack-ci
+  https://bugs.launchpad.net/opencontrail-ci
 
 Both defects and new features are tracked in the bug system.  A number
 of tags are used to indicate relevance to a particular subsystem.

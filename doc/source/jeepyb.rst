@@ -13,20 +13,20 @@ At a Glance
 ===========
 
 :Hosts:
-  * http://review.openstack.org
-  * http://review-dev.openstack.org
+  * http://review.opencontrail.org
+  * http://review-dev.opencontrail.org
 :Puppet:
   * :file:`modules/jeepyb`
-  * :file:`modules/openstack_project/manifests/review.pp`
-  * :file:`modules/openstack_project/manifests/review_dev.pp`
+  * :file:`modules/opencontrail_project/manifests/review.pp`
+  * :file:`modules/opencontrail_project/manifests/review_dev.pp`
 :Configuration:
-  * :file:`modules/openstack_project/templates/review.projects.ini.erb`
-  * :file:`modules/openstack_project/files/review.projects.yaml`
-  * :file:`modules/openstack_project/files/pypi-mirror.yaml`
+  * :file:`modules/opencontrail_project/templates/review.projects.ini.erb`
+  * :file:`modules/opencontrail_project/files/review.projects.yaml`
+  * :file:`modules/opencontrail_project/files/pypi-mirror.yaml`
 :Projects:
-  * https://git.openstack.org/cgit/openstack-infra/jeepyb
+  * https://git.opencontrail.org/cgit/opencontrail-infra/jeepyb
 :Bugs:
-  * http://bugs.launchpad.net/openstack-ci
+  * http://bugs.launchpad.net/opencontrail-ci
 
 
 Gerrit Project Configuration
@@ -39,7 +39,7 @@ and create new groups in Gerrit.
 
 The global configuration data needed for ``manage-projects`` to know how to
 connect to things or how to operate is in
-:file:`modules/openstack_project/templates/review.projects.ini.erb`.
+:file:`modules/opencontrail_project/templates/review.projects.ini.erb`.
 
 #. Config values::
 
@@ -55,8 +55,8 @@ connect to things or how to operate is in
      has-pull-requests=False
      has-downloads=False
 
-OpenStack Gerrit projects are configured in the
-:file:`modules/openstack_project/files/review.projects.yaml`.
+OpenContrail Gerrit projects are configured in the
+:file:`modules/opencontrail_project/files/review.projects.yaml`.
 file.  When this file is updated, ``manage-projects`` is run
 automatically.
 
@@ -82,7 +82,7 @@ pupppet repository. To create an actual change that does all of this for
 a single project you will want to do the following:
 
 #. Add a
-   ``modules/openstack_project/files/gerrit/acls/project-name.config``
+   ``modules/opencontrail_project/files/gerrit/acls/project-name.config``
    file to the repo. The contents will probably end up looking like
    the block below (note that the sections are in alphabetical order
    and each indentation is 8 spaces)::
@@ -103,9 +103,9 @@ a single project you will want to do the following:
              mergeContent = true
 
 #. Add a project entry for the project in
-   ``modules/openstack_project/files/review.projects.yaml``.::
+   ``modules/opencontrail_project/files/review.projects.yaml``.::
 
-     - project: openstack/project-name
+     - project: opencontrail/project-name
        acl-config: /home/gerrit2/acls/project-name.config
 
 #. If there is an existing repo that is being replaced by this new
@@ -113,7 +113,7 @@ a single project you will want to do the following:
    upstream is set, that upstream will be cloned and pushed into Gerrit
    instead of an empty repository. eg::
 
-     - project: openstack/project-name
+     - project: opencontrail/project-name
        acl-config: /home/gerrit2/acls/project-name.config
        upstream: git://github.com/awesumsauce/project-name.git
 
@@ -193,7 +193,7 @@ is set up as defined in projects.yaml.
 RSS feeds
 ---------
 
-Jeepyb's ``openstackwatch`` command publishes RSS feeds of Gerrit
+Jeepyb's ``opencontrailwatch`` command publishes RSS feeds of Gerrit
 projects.
 
 Pypi Mirror

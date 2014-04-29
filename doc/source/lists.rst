@@ -6,21 +6,21 @@ Mailing Lists
 #############
 
 `Mailman <http://www.gnu.org/software/mailman/>`_ is installed on
-lists.openstack.org to run OpenStack related mailing lists, as well as
+lists.opencontrail.org to run OpenContrail related mailing lists, as well as
 host list archives.
 
 At a Glance
 ===========
 
 :Hosts:
-  * http://lists.openstack.org
+  * http://lists.opencontrail.org
 :Puppet:
   * :file:`modules/mailman`
-  * :file:`modules/openstack_project/manifests/lists.pp`
+  * :file:`modules/opencontrail_project/manifests/lists.pp`
 :Projects:
   * http://www.gnu.org/software/mailman/
 :Bugs:
-  * http://bugs.launchpad.net/openstack-ci
+  * http://bugs.launchpad.net/opencontrail-ci
   * https://bugs.launchpad.net/mailman
 :Resources:
   * `Mailman Documentation <http://www.gnu.org/software/mailman/docs.html>`_
@@ -28,17 +28,17 @@ At a Glance
 Adding a List
 =============
 
-A list may be added by adding it to the ``openstack-infra/config``
-repository in ``modules/openstack_project/manifests/lists.pp``.  For
+A list may be added by adding it to the ``opencontrail-infra/config``
+repository in ``modules/opencontrail_project/manifests/lists.pp``.  For
 example:
 
 .. code-block:: ruby
 
-  maillist { 'openstack-foo':
+  maillist { 'opencontrail-foo':
     ensure      => present,
     admin       => 'admin@example.com',
     password    => $listpassword,
-    description => 'Discussion of OpenStack Foo',
+    description => 'Discussion of OpenContrail Foo',
     webserver   => $listdomain,
     mailserver  => $listdomain,
   }

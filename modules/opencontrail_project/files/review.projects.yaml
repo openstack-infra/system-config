@@ -1,0 +1,14 @@
+- project: Juniper/contrail-controller
+  description: Contrail Controller
+  upstream: git@github.com:Juniper/contrail-controller
+  acl-config: /home/gerrit2/acls/Juniper/contrail-controller.config
+
+- project: Juniper/contrail-ci-test
+  description: Contrail CI Test
+  upstream: git@github.com:Juniper/contrail-ci-test
+  acl-config: /home/gerrit2/acls/Juniper/contrail-ci-test.config
+
+- project: Juniper/contrail-controller-test
+  description: Contrail CI Test
+  upstream: git@github.com:Juniper/contrail-controller-test
+  acl-config: /home/gerrit2/acls/Juniper/contrail-controller-test.config

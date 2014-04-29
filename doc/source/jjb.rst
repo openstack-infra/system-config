@@ -12,18 +12,18 @@ At a Glance
 ===========
 
 :Hosts:
-  * http://jenkins.openstack.org
-  * http://jenkins-dev.openstack.org
+  * http://jenkins.opencontrail.org
+  * http://jenkins-dev.opencontrail.org
 :Puppet:
   * :file:`modules/jenkins/manifests/job_builder.pp`
 :Configuration:
-  * :file:`modules/openstack_project/files/jenkins_job_builder/config/`
+  * :file:`modules/opencontrail_project/files/jenkins_job_builder/config/`
 :Projects:
-  * https://git.openstack.org/cgit/openstack-infra/jenkins-job-builder
+  * https://git.opencontrail.org/cgit/opencontrail-infra/jenkins-job-builder
 :Bugs:
-  * http://bugs.launchpad.net/openstack-ci
+  * http://bugs.launchpad.net/opencontrail-ci
 :Resources:
-  * `Reference Manual <http://ci.openstack.org/jenkins-job-builder>`_
+  * `Reference Manual <http://ci.opencontrail.org/jenkins-job-builder>`_
 
 Overview
 ========
@@ -33,14 +33,14 @@ easier, Jenkins Job Builder was designed to take YAML based
 configurations and convert those into jobs that are injected into
 Jenkins.
 
-The documentation below describes how the OpenStack Infrastructure
+The documentation below describes how the OpenContrail Infrastructure
 team uses the Jenkins Job Builder in our environment.
 
 Configuring Projects
 ====================
 
 The YAML scripts to make this work are stored in the
-:file:`modules/openstack_project/files/jenkins_job_builder/config/`
+:file:`modules/opencontrail_project/files/jenkins_job_builder/config/`
 directory.  In this directory you can have four different types of
 yaml config files:
 
@@ -70,11 +70,11 @@ Example defaults config:
 
          <p>If you would like to make changes to this job, please see:
 
-           <a href="https://git.openstack.org/cgit/openstack-infra/config">
-             https://git.openstack.org/cgit/openstack-infra/config
+           <a href="https://git.opencontrail.org/cgit/opencontrail-infra/config">
+             https://git.opencontrail.org/cgit/opencontrail-infra/config
            </a>
 
-         In modules/openstack_project/files/jenkins_jobs
+         In modules/opencontrail_project/files/jenkins_jobs
          </p>
        project-type: freestyle
        concurrent: true
@@ -249,7 +249,7 @@ it finds the XML is different then it will proceed to send this
 to Jenkins, otherwise it is skipped.  If a job is accidentally deleted then this
 file should be modified or removed.
 
-.. _cache: http://ci.openstack.org/jenkins-job-builder/installation.html#running
+.. _cache: http://ci.opencontrail.org/jenkins-job-builder/installation.html#running
 
 Sending a Job to Jenkins
 ------------------------
@@ -273,7 +273,7 @@ of this template are:
    url=<%= url %>
 
 The values for user and url are hardcoded in the Puppet repo in
-:file:`modules/openstack_project/manifests/jenkins.pp`, but the
+:file:`modules/opencontrail_project/manifests/jenkins.pp`, but the
 password is stored in hiera. Make sure you have it defined as
 ``jenkins_jobs_password`` in the hiera DB.
 

@@ -5,30 +5,30 @@
 Devstack Gate
 #############
 
-Devstack-gate is a collection of scripts used by the OpenStack CI team
-to test every change to core OpenStack projects by deploying OpenStack
+Devstack-gate is a collection of scripts used by the OpenContrail CI team
+to test every change to core OpenContrail projects by deploying OpenContrail
 via devstack on a cloud server.
 
 At a Glance
 ===========
 
 :Hosts:
-  * http://jenkins.openstack.org/
-  * http://devstack-launch.slave.openstack.org/
+  * http://jenkins.opencontrail.org/
+  * http://devstack-launch.slave.opencontrail.org/
 :Puppet:
-  * :file:`modules/openstack_project/manifests/template.pp`
-  * :file:`modules/openstack_project/manifests/devstack_launch_slave.pp`
+  * :file:`modules/opencontrail_project/manifests/template.pp`
+  * :file:`modules/opencontrail_project/manifests/devstack_launch_slave.pp`
 :Projects:
-  * https://git.openstack.org/openstack-infra/devstack-gate
+  * https://git.opencontrail.org/opencontrail-infra/devstack-gate
 :Bugs:
-  * http://bugs.launchpad.net/openstack-ci
+  * http://bugs.launchpad.net/opencontrail-ci
 :Resources:
-  * `Devstack-gate README <https://git.openstack.org/cgit/openstack-infra/devstack-gate/tree/README.rst>`_
+  * `Devstack-gate README <https://git.opencontrail.org/cgit/opencontrail-infra/devstack-gate/tree/README.rst>`_
 
 Overview
 ========
 
-All changes to core OpenStack projects are "gated" on a set of tests
+All changes to core OpenContrail projects are "gated" on a set of tests
 so that it will not be merged into the main repository unless it
 passes all of the configured tests. Most projects require unit tests
 in python2.6 and python2.7, and pep8. Those tests are all run only on
@@ -38,7 +38,7 @@ several of the projects to work together. Any proposed change to the
 configured set of projects must pass the devstack gate test:
 
 Obviously we test nova, glance, keystone, horizon, neutron and their
-clients because they all work closely together to form an OpenStack
+clients because they all work closely together to form an OpenContrail
 system. Changes to devstack itself are also required to pass this test
 so that we can be assured that devstack is always able to produce a
 system capable of testing the next change to nova. The devstack gate
@@ -49,7 +49,7 @@ How It Works
 
 The devstack test starts with an essentially bare virtual machine,
 installs devstack on it, and runs some simple tests of the resulting
-OpenStack installation. In order to ensure that each test run is
+OpenContrail installation. In order to ensure that each test run is
 independent, the virtual machine is discarded at the end of the run,
 and a new machine is used for the next run. In order to keep the
 actual test run as short and reliable as possible, the virtual
@@ -78,9 +78,9 @@ devstack, and then runs the devstack-vm-update-image.py script. It
 boots a new VM from the provider's base image, installs some basic
 packages (build-essential, python-dev, etc) including java so that the
 machine can run the Jenkins slave agent, runs puppet to set up the
-basic system configuration for Jenkins slaves in the openstack-infra
+basic system configuration for Jenkins slaves in the opencontrail-infra
 project, and then caches all of the debian and pip packages and test
-images specified in the devstack repository, and clones the OpenStack
+images specified in the devstack repository, and clones the OpenContrail
 project repositories. It then takes a snapshot image of that machine
 to use when booting the actual test machines. When they boot, they
 will already be configured and have all, or nearly all, of the network
@@ -180,9 +180,9 @@ created, the updated dependency will be downloaded from the Internet,
 which could cause a false negative if that fails.
 
 Assuming that there are no visible failures in the console log, you
-may need to examine the log output from the OpenStack services. Back
+may need to examine the log output from the OpenContrail services. Back
 on the Jenkins page for the build, you should see a list of "Build
-Artifacts" in the center of the screen. All of the OpenStack services
+Artifacts" in the center of the screen. All of the OpenContrail services
 are configured to syslog, so you may find helpful log messages by
 clicking on "syslog.txt". Some error messages are so basic they don't
 make it to syslog, such as if a service fails to start. Devstack
@@ -193,11 +193,11 @@ traceback there that isn't in syslog.
 After examining the output from the test, if you believe the result
 was a false negative, you can retrigger the test by re-approving the
 change in Gerrit. If a test failure is a result of a race condition in
-the OpenStack code, please take the opportunity to try to identify it,
+the OpenContrail code, please take the opportunity to try to identify it,
 and file a bug report or fix the problem. If it seems to be related to
 a specific devstack gate node provider, we'd love it if you could help
 identify what the variable might be (whether in the devstack-gate
-scripts, devstack itself, OpenStack, or even the provider's service).
+scripts, devstack itself, OpenContrail, or even the provider's service).
 
 Developer Setup
 ===============

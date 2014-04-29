@@ -13,18 +13,18 @@ and salt groups for access to their respective keys::
 (Remember to log out and back into your shell if you add yourself
 to a group.)
 
-To launch a node in the OpenStack CI account (production servers)::
+To launch a node in the OpenContrail CI account (production servers)::
 
-  . ~root/ci-launch/openstackci-rs-nova.sh
+  . ~root/ci-launch/opencontrailci-rs-nova.sh
   export FLAVOR="8 GB Performance"
-  export FQDN=servername.openstack.org
+  export FQDN=servername.opencontrail.org
   sudo puppet cert generate $FQDN
   ./launch-node.py $FQDN --flavor "$FLAVOR"
 
-To launch a node in the OpenStack Jenkins account (slave nodes)::
+To launch a node in the OpenContrail Jenkins account (slave nodes)::
 
-  . ~root/ci-launch/openstackjenkins-rs-nova.sh
-  export FQDN=slavename.slave.openstack.org
+  . ~root/ci-launch/opencontrailjenkins-rs-nova.sh
+  export FQDN=slavename.slave.opencontrail.org
   nova image-list
   export IMAGE='Ubuntu 12.04 LTS (Precise Pangolin)'
   nova flavor-list
@@ -49,9 +49,9 @@ automatically). Note that this example assumes you've already
 exported a relevant FQDN and sourced the appropriate API credentials
 above.
 
-When running outside the official OpenStack CI infrastructure, you
+When running outside the official OpenContrail CI infrastructure, you
 will want to pass --server ci-puppetmaster.example.com otherwise the
-new node wil try to register with ci-puppetmaster.openstack.org - and
+new node wil try to register with ci-puppetmaster.opencontrail.org - and
 fail hilariously.
 
 Add DNS Records
@@ -64,3 +64,23 @@ run to configure DNS for a newly launched server.  To see the commands
 for an existing server, run:
 
   ./dns.py $FQDN
+
+Activate Puppet Agent
+=====================
+
+If this is a Jenkins slave, Puppet configuration is applied through
+an already installed cron job, so you can ignore this section. If
+this is ''not'' a Jenkins slave, you'll want to log into it via SSH
+and turn on the Puppet agent so it will start checking into the
+master on its own. on Debian/Ubuntu::
+
+  sudo sed -i 's/^START=.*/START=yes/' /etc/default/puppet
+  sudo su -c 'invoke-rc.d puppet start'
+
+...or on CentOS/Fedora/RHEL::
+
+  sudo chkconfig puppet on
+  sudo su -c 'service puppet start'
+
+You should be able to tell from the Puppet Dashboard when it begins
+to check in, which normally happens at 10-minute intervals.

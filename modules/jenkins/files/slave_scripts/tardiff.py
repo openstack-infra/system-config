@@ -14,8 +14,8 @@ import os
 import commands
 
 
-class OpenStackTarDiff:
-    """ main class to verify tar generated in each openstack projects """
+class OpenContrailTarDiff:
+    """ main class to verify tar generated in each opencontrail projects """
 
     def __init__(self):
         self.init_vars()
@@ -185,5 +185,5 @@ class OpenStackTarDiff:
         sys.exit(exitCode)
 
 if __name__ == '__main__':
-    tardiff = OpenStackTarDiff()
+    tardiff = OpenContrailTarDiff()
     tardiff.verify()

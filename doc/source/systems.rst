@@ -24,6 +24,3 @@ Major Systems
    lists
    wiki
    git
-   openstackid
-
-

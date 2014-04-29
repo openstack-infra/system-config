@@ -1,6 +1,6 @@
 #!/bin/bash -xe
 
-# Copyright 2013 OpenStack Foundation
+# Copyright 2013 OpenContrail Foundation
 #
 # Licensed under the Apache License, Version 2.0 (the "License"); you may
 # not use this file except in compliance with the License. You may obtain
@@ -25,14 +25,7 @@ source /usr/local/jenkins/slave_scripts/select-mirror.sh $org $project
 rm -f dist/*.tar.gz
 tox -evenv python setup.py sdist
 
-FILES=dist/*.tar.gz
-for f in $FILES
-do
-  echo "SHA1sum for $f:"
-  sha1sum $f | awk '{print $1}' > $f.sha1
-  cat $f.sha1
-
-  echo "MD5sum for $f:"
-  md5sum $f  | awk '{print $1}' > $f.md5
-  cat $f.md5
-done
+echo "SHA1sum: "
+sha1sum dist/*
+echo "MD5sum: "
+md5sum dist/*

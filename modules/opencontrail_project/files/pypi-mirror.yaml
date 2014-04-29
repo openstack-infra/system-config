@@ -1,0 +1,15 @@
+# This file is managed by puppet.
+# https://git.opencontrail.org/cgit/opencontrail-infra/config
+
+cache-root: /var/cache/pypimirror
+
+mirrors:
+  - name: opencontrail
+    projects:
+      - git://git.opencontrail.org/opencontrail/requirements
+    output: /var/lib/pypimirror/opencontrail
+
+  - name: opencontrail-infra
+    projects:
+      - git://git.opencontrail.org/opencontrail-infra/config
+    output: /var/lib/pypimirror/opencontrail-infra

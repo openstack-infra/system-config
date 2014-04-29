@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 
-# Launch a new OpenStack project infrastructure node.
+# Launch a new OpenContrail project infrastructure node.
 
-# Copyright (C) 2011-2012 OpenStack LLC.
+# Copyright (C) 2011-2012 OpenContrail LLC.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -80,8 +80,8 @@ def bootstrap_server(server, admin_pass, key, cert, environment, name,
     ssh_client = utils.ssh_connect(ip, 'root', ssh_kwargs, timeout=600)
 
     if IPV6:
-        ssh_client.ssh('ping6 -c5 -Q 0x10 review.openstack.org '
-                       '|| ping6 -c5 -Q 0x10 wiki.openstack.org')
+        ssh_client.ssh('ping6 -c5 -Q 0x10 review.opencontrail.org '
+                       '|| ping6 -c5 -Q 0x10 wiki.opencontrail.org')
 
     ssh_client.scp(os.path.join(SCRIPT_DIR, '..', 'install_puppet.sh'),
                    'install_puppet.sh')
@@ -190,7 +190,7 @@ def main():
     parser.add_argument("--salt", dest="salt", action="store_true",
                         help="Manage salt keys for this host.")
     parser.add_argument("--server", dest="server", help="Puppetmaster to use.",
-                        default="ci-puppetmaster.openstack.org")
+                        default="ci-puppetmaster.opencontrail.org")
     options = parser.parse_args()
 
     client = get_client()

@@ -2,7 +2,7 @@
 
 # Update the base image that is used for devstack VMs.
 
-# Copyright (C) 2011-2012 OpenStack LLC.
+# Copyright (C) 2011-2012 OpenContrail LLC.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.

@@ -1,0 +1,311 @@
+includes:
+  - python-file: opencontrail_functions.py
+
+pipelines:
+  - name: check
+    description: Newly uploaded patchsets enter this pipeline to receive an initial +/-1 Verified vote from Jenkins.
+    failure-message: Build failed.  For information on how to proceed, see https://wiki.opencontrail.org/wiki/GerritJenkinsGit#Test_Failures
+    manager: IndependentPipelineManager
+    precedence: low
+    trigger:
+      gerrit:
+        - event: patchset-created
+        - event: change-restored
+        - event: comment-added
+          comment_filter: (?i)^\s*recheck(( (?:bug|lp)[\s#:]*(\d+))|( no bug))\s*$
+        - event: comment-added
+          require-approval:
+            - username: jenkins
+              older-than: 72h
+        - event: comment-added
+          require-approval:
+            - approved: 1
+            - username: jenkins
+              older-than: 24h
+        - event: comment-added
+          comment_filter: (?i)^\s*reverify( (?:bug|lp)[\s#:]*(\d+))\s*$
+          require-approval:
+            - approved: 1
+            - username: jenkins
+        - event: comment-added
+          require-approval:
+            - verified: -1
+              username: jenkins
+          approval:
+            - approved: 1
+        - event: comment-added
+          require-approval:
+            - verified: -2
+              username: jenkins
+          approval:
+            - approved: 1
+    start:
+      gerrit:
+        verified: 0
+    success:
+      gerrit:
+        verified: 1
+    failure:
+      gerrit:
+        verified: -1
+
+  - name: gate
+    description: Changes that have been approved by core developers are enqueued in order in this pipeline, and if they pass tests in Jenkins, will be merged.
+    failure-message: Build failed.  For information on how to proceed, see https://wiki.openstack.org/wiki/GerritJenkinsGit#Test_Failures
+    manager: DependentPipelineManager
+    precedence: normal
+    trigger:
+      gerrit:
+        - event: comment-added
+          require-approval:
+            - verified: 1
+              username: zuul
+              newer-than: 24h
+          approval:
+            - approved: 1
+        - event: comment-added
+          require-approval:
+            - verified: 2
+              username: zuul
+              newer-than: 24h
+          approval:
+            - approved: 1
+        - event: comment-added
+          approval:
+            - verified: 1
+          username_filter: zuul
+    start:
+      gerrit:
+        verified: 0
+    success:
+      gerrit:
+        verified: 2
+        submit: true
+    failure:
+      gerrit:
+        verified: -2
+    window-floor: 20
+    window-increase-factor: 2
+
+  - name: post
+    description: This pipeline runs jobs that operate after each change is merged.
+    manager: IndependentPipelineManager
+    precedence: low
+    trigger:
+      gerrit:
+        - event: ref-updated
+          ref: ^(?!(devnull|refs/.*)).*$
+
+  - name: tag
+    description: This pipeline runs jobs in response to any tag event.
+    manager: IndependentPipelineManager
+    precedence: high
+    trigger:
+      gerrit:
+        - event: ref-updated
+          ref: ^refs/tags/.*$
+
+  - name: pre-release
+    description: This pipeline runs jobs on projects in response to pre-release tags.
+    manager: IndependentPipelineManager
+    precedence: high
+    trigger:
+      gerrit:
+        - event: ref-updated
+          ref: ^refs/tags/([0-9]+\.)+[0-9]*(alpha|beta|candidate|rc|a|b|c|r|g)[0-9]*$
+
+  - name: release
+    description: When a commit is tagged as a release, this pipeline runs jobs that publish archives and documentation.
+    manager: IndependentPipelineManager
+    precedence: high
+    trigger:
+      gerrit:
+        - event: ref-updated
+          ref: ^refs/tags/([0-9]+\.)+[0-9]+$
+
+  - name: silent
+    description: This pipeline is used for silently testing new jobs.
+    manager: IndependentPipelineManager
+    precedence: low
+    trigger:
+      gerrit:
+        - event: patchset-created
+        - event: comment-added
+          comment_filter: (?i)^\s*recheck(( (?:bug|lp)[\s#:]*(\d+))|( no bug))\s*$
+
+  - name: experimental
+    description: On-demand pipeline for requesting a run against a set of jobs that are not yet gating. Leave review comment of "check experimental" to run jobs in this pipeline.
+    manager: IndependentPipelineManager
+    precedence: low
+    trigger:
+      gerrit:
+        - event: comment-added
+          comment_filter: (?i)^\s*check experimental\s*$
+    success:
+      gerrit:
+        force-message: true
+    failure:
+      gerrit:
+        force-message: true
+
+  - name: periodic
+    description: Jobs in this queue are triggered on a timer.
+    manager: IndependentPipelineManager
+    precedence: low
+    trigger:
+      timer:
+        - time: '0 6 * * *'
+
+  - name: periodic-stable
+    description: Periodic checks of the stable branches.
+    manager: IndependentPipelineManager
+    precedence: low
+    trigger:
+      timer:
+        - time: '1 6 * * *'
+    failure:
+      smtp:
+        from: jenkins@opencontrail.org
+        to: opencontrail-stable-maint@lists.opencontrail.org
+        subject: 'Stable check of {change.project} failed'
+
+  - name: periodic-qa
+    description: Periodic jobs for the QA team.
+    manager: IndependentPipelineManager
+    precedence: low
+    trigger:
+      timer:
+        - time: '2 6 * * *'
+    failure:
+      smtp:
+        from: jenkins@opencontrail.org
+        to: opencontrail-qa@lists.opencontrail.org
+        subject: 'Periodic jobs for {change.project} failed'
+
+  - name: check-tripleo
+    description: >
+      Newly uploaded patchsets enter this pipeline to receive an initial +/-1
+      Verified vote from Jenkins. This is used for TripleO patchsets only so
+      that if the TripleO cloud suffers a failure, folk looking can tell that
+      there isn't a system infra problem. only a TripleO specific problem.
+      Once the TripleO test cloud is multi region and has some months of
+      proven stability this will be folded back into the normal check pipeline.
+    failure-message: >
+      Build failed.  For information on how to proceed, see
+      https://wiki.opencontrail.org/wiki/GerritJenkinsGit#Test_Failures
+    manager: IndependentPipelineManager
+    precedence: low
+    trigger:
+      gerrit:
+        - event: patchset-created
+        - event: change-restored
+        - event: comment-added
+          comment_filter: (?i)^\s*recheck(( (?:bug|lp)[\s#:]*(\d+))|( no bug))\s*$
+    success:
+      gerrit:
+        force-message: true
+    failure:
+      gerrit:
+        force-message: true
+
+  - name: experimental-tripleo
+    description: >
+      On-demand pipeline for requesting a run against a tripleo experimental
+      jobs - slower and running without redundancy - so not yet gating. Leave
+      review comment of "check experimental" to run jobs in this pipeline.
+    manager: IndependentPipelineManager
+    precedence: low
+    trigger:
+      gerrit:
+        - event: comment-added
+          comment_filter: (?i)^\s*check experimental\s*$
+    success:
+      gerrit:
+        force-message: true
+    failure:
+      gerrit:
+        force-message: true
+
+
+project-templates:
+  - name: python-jobs
+    check:
+      - 'gate-{name}-pep8'
+      - 'gate-{name}-docs'
+      - 'gate-{name}-python26'
+      - 'gate-{name}-python27'
+    gate:
+      - 'gate-{name}-docs'
+      - 'gate-{name}-pep8'
+      - 'gate-{name}-python26'
+      - 'gate-{name}-python27'
+    post:
+      - '{name}-branch-tarball'
+      - '{name}-coverage'
+
+  - name: opencontrail-server-publish-jobs
+    post:
+      - '{name}-docs'
+    release:
+      - '{name}-docs'
+
+  - name: opencontrail-client-publish-jobs
+    release:
+      - '{name}-docs'
+
+  - name: check-requirements
+    check:
+      - 'gate-{name}-requirements'
+    gate:
+      - 'gate-{name}-requirements'
+
+  - name: contrail-jobs
+    check:
+      - 'gate-{name}-build'
+    gate:
+      - 'gate-{name}-build'
+    post:
+      - 'gate-{name}-build'
+
+jobs:
+  - name: ^.*$
+    parameter-function: single_use_node
+
+# The project list is grouped by type of project, and within each
+# group, projects are sorted (mostly) alphabetically.
+projects:
+  - name: Juniper/contrail-controller
+    check:
+      - ci-contrail-controller-build
+    silent:
+      - noop
+    check-tripleo:
+      - noop
+    gate:
+      - noop
+    post:
+      - noop
+
+  - name: Juniper/contrail-ci-test
+    check:
+      - ci-contrail-ci-test-build
+    silent:
+      - noop
+    check-tripleo:
+      - noop
+    gate:
+      - noop
+    post:
+      - noop
+
+  - name: Juniper/contrail-controller-test
+    check:
+      - ci-contrail-controller-test-build
+    silent:
+      - noop
+    check-tripleo:
+      - noop
+    gate:
+      - noop
+    post:
+      - noop

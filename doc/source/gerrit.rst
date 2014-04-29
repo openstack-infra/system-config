@@ -5,41 +5,41 @@
 Gerrit
 ######
 
-Gerrit is the code review system used by the OpenStack project.  For a
-full description of how the system fits into the OpenStack workflow,
+Gerrit is the code review system used by the OpenContrail project.  For a
+full description of how the system fits into the OpenContrail workflow,
 see `the GerritJenkinsGit wiki article
-<https://wiki.openstack.org/wiki/GerritJenkinsGit>`_.
+<https://wiki.opencontrail.org/wiki/GerritJenkinsGit>`_.
 
 This section describes how Gerrit is configured for use in the
-OpenStack project and the tools used to manage that configuration.
+OpenContrail project and the tools used to manage that configuration.
 
 At a Glance
 ===========
 
 :Hosts:
-  * http://review.openstack.org
-  * http://review-dev.openstack.org
+  * http://review.opencontrail.org
+  * http://review-dev.opencontrail.org
 :Puppet:
   * :file:`modules/gerrit`
-  * :file:`modules/openstack_project/manifests/review.pp`
-  * :file:`modules/openstack_project/manifests/review_dev.pp`
+  * :file:`modules/opencontrail_project/manifests/review.pp`
+  * :file:`modules/opencontrail_project/manifests/review_dev.pp`
 :Configuration:
-  * :file:`modules/openstack_project/templates/review.projects.ini.erb`
-  * :file:`modules/openstack_project/files/review.projects.yaml`
+  * :file:`modules/opencontrail_project/templates/review.projects.ini.erb`
+  * :file:`modules/opencontrail_project/files/review.projects.yaml`
 :Projects:
   * http://code.google.com/p/gerrit/
 :Bugs:
-  * http://bugs.launchpad.net/openstack-ci
+  * http://bugs.launchpad.net/opencontrail-ci
   * http://code.google.com/p/gerrit/issues/list
 :Resources:
-  * `Gerrit Documentation <https://review.openstack.org/Documentation/index.html>`_
+  * `Gerrit Documentation <https://review.opencontrail.org/Documentation/index.html>`_
 
 Installation
 ============
 
 Gerrit is installed and configured by Puppet, including specifying the
 exact Java WAR file that is used.  See :ref:`sysadmin` for how Puppet
-is used to manage OpenStack infrastructure systems.
+is used to manage OpenContrail infrastructure systems.
 
 Gerrit Configuration
 --------------------
@@ -99,7 +99,7 @@ Add information about the CLA:
   use reviewdb;
   insert into contributor_agreements values (
   'Y', 'Y', 'Y', 'ICLA',
-  'OpenStack Individual Contributor License Agreement',
+  'OpenContrail Individual Contributor License Agreement',
   'static/cla.html', 2);
 
 Groups
@@ -111,7 +111,7 @@ hand (and capture their UUID - you will need them to setup the ACLs
 later).
 
 The `Project Bootstrappers` group grants all the permissions needed to
-set up a new project.  Normally the OpenStack Project Creater account
+set up a new project.  Normally the OpenContrail Project Creater account
 is the only member of this group, but members of the `Administrators`
 group may temporarily add themselves in order to correct problems with
 automatic project creation.
@@ -138,17 +138,17 @@ The first user to log in becomes an administrator. Be sure to set an
 account name and add ssh keys - you'll need those.
 
 Once you've created your groups you should create the
-``openstack-project-creator`` account by hand (the account name is
+``opencontrail-project-creator`` account by hand (the account name is
 referenced from
-:file:`modules/openstack_project/templates/review.projects.ini.erb`)
+:file:`modules/opencontrail_project/templates/review.projects.ini.erb`)
 using::
 
   cat $pubkey | ssh -p 29418 $USER@$HOST gerrit create-account \
     --group "'Project Bootstrappers'" \
     --group Administrators \
     --full-name "'Project Creator'" \
-    --email openstack-infra@lists.openstack.org \
-    --ssh-key - openstack-project-creator
+    --email opencontrail-infra@lists.opencontrail.org \
+    --ssh-key - opencontrail-project-creator
 
 GitHub Integration
 ==================
@@ -182,13 +182,13 @@ onto the gerrit servers.  This script follows two rules:
 If your review gets touched by either of these rules it is possible to
 unabandon a review on the gerrit web interface.
 
-This process is managed by the :ref:`jeepyb` openstack-infra project.
+This process is managed by the :ref:`jeepyb` opencontrail-infra project.
 
 Gerrit IRC Bot
 ==============
 
 Gerritbot consumes the Gerrit event stream and announces relevant
-events on IRC.  :ref:`gerritbot` is an openstack-infra project and is
+events on IRC.  :ref:`gerritbot` is an opencontrail-infra project and is
 also available on Pypi.
 
 
@@ -198,14 +198,14 @@ Launchpad Bug Integration
 In addition to the hyperlinks provided by the regex in gerrit.config,
 we use a Gerrit hook to update Launchpad bugs when changes referencing
 them are applied.  This is managed by the :ref:`jeepyb`
-openstack-infra project.
+opencontrail-infra project.
 
 
 New Project Creation
 ====================
 
 Gerrit project creation is now managed through changes to the
-openstack-infra/config repository.  :ref:`jeepyb` handles
+opencontrail-infra/config repository.  :ref:`jeepyb` handles
 automatically creating any new projects defined in the configuration
 files.
 
@@ -228,7 +228,7 @@ High level goals:
    on any project.
 #. Jenkins can perform verification (blocking or approving: +/-1).
 #. All registered users can create changes.
-#. The OpenStack Release Manager and Jenkins can tag releases (push
+#. The OpenContrail Release Manager and Jenkins can tag releases (push
    annotated tags).
 #. Members of $PROJECT-core group can perform full code review
    (blocking or approving: +/- 2), and submit changes to be merged.
@@ -239,7 +239,7 @@ High level goals:
 #. Full code review (+/- 2) of API projects (documentation of the API,
    not implementation of the API) should be available to the -core
    group of the corresponding implementation project as well as to the
-   OpenStack Documentation Coordinators.
+   OpenContrail Documentation Coordinators.
 #. Full code review of stable branches should be available to the
    -core group of the project as well as the Stable Maintainers
    group.
@@ -332,7 +332,7 @@ Next, edit `project.config` to look like::
       label-Code-Review = -1..+1 group Registered Users
       label-Approved = +0..+1 group Project Bootstrappers
       label-Approved = +0..+1 group Stable Maintainers
-  [access "refs/meta/openstack/*"]
+  [access "refs/meta/opencontrail/*"]
       read = group Continuous Integration Tools
       create = group Continuous Integration Tools
       push = group Continuous Integration Tools
@@ -384,55 +384,55 @@ To rename a project:
 #. Prepare a change to the Puppet configuration which updates
    projects.yaml/ACLs and jenkins-job-builder for the new name.
 
-#. Stop puppet on review.openstack.org to prevent your interim
+#. Stop puppet on review.opencontrail.org to prevent your interim
    configuration changes from being reset by the project management
    routines::
 
      sudo puppetd --disable
 
-#. Gracefully stop Zuul on zuul.openstack.org::
+#. Gracefully stop Zuul on zuul.opencontrail.org::
 
      sudo kill -USR1 $(cat /var/run/zuul/zuul.pid)
      rm -f /var/run/zuul/zuul.pid /var/run/zuul/zuul.lock
 
-#. Stop Gerrit on review.openstack.org::
+#. Stop Gerrit on review.opencontrail.org::
 
      sudo invoke-rc.d gerrit stop
 
-#. Update the database on review.openstack.org::
+#. Update the database on review.opencontrail.org::
 
      sudo mysql --defaults-file=/etc/mysql/debian.cnf reviewdb
 
      update account_project_watches
-     set project_name = "openstack/NEW"
-     where project_name = "openstack/OLD";
+     set project_name = "opencontrail/NEW"
+     where project_name = "opencontrail/OLD";
 
      update changes
-     set dest_project_name = "openstack/NEW", created_on = created_on
-     where dest_project_name = "openstack/OLD";
+     set dest_project_name = "opencontrail/NEW", created_on = created_on
+     where dest_project_name = "opencontrail/OLD";
 
 #. Move both the git repository and the mirror on
-   review.openstack.org::
+   review.opencontrail.org::
 
-     sudo mv ~gerrit2/review_site/git/openstack/{OLD,NEW}.git
-     sudo mv /var/lib/git/openstack/{OLD,NEW}.git
+     sudo mv ~gerrit2/review_site/git/opencontrail/{OLD,NEW}.git
+     sudo mv /var/lib/git/opencontrail/{OLD,NEW}.git
 
-#. Move the git repository on git{01-04}.openstack.org::
+#. Move the git repository on git{01-04}.opencontrail.org::
 
-     sudo mv /var/lib/git/openstack/{OLD,NEW}.git
+     sudo mv /var/lib/git/opencontrail/{OLD,NEW}.git
 
-#. Start Gerrit on review.openstack.org::
+#. Start Gerrit on review.opencontrail.org::
 
      sudo invoke-rc.d gerrit start
 
-#. Start Zuul on zuul.openstack.org::
+#. Start Zuul on zuul.opencontrail.org::
 
      sudo invoke-rc.d zuul start
 
 #. Merge the prepared Puppet configuration change, removing the
    original Jenkins jobs via the Jenkins WebUI later if needed.
 
-#. Start puppet again on review.openstack.org::
+#. Start puppet again on review.opencontrail.org::
 
      sudo puppetd --enable
 
@@ -444,13 +444,13 @@ To rename a project:
    changing, gate jobs may fail due to outdated remote URLs. Clear
    the workspaces on persistent Jenkins slaves to mitigate this::
 
-     sudo salt '*.slave.openstack.org' cmd.run 'rm -rf ~jenkins/workspace/*PROJECT*'
+     sudo salt '*.slave.opencontrail.org' cmd.run 'rm -rf ~jenkins/workspace/*PROJECT*'
  
 #. Again, if this is an org move rather than a rename and the GitHub
    project has been created but is empty, trigger replication to
    populate it::
 
-     ssh -p 29418 review.openstack.org gerrit replicate --all
+     ssh -p 29418 review.opencontrail.org gerrit replicate --all
 
 #. Submit a change that updates .gitreview with the new location of the
    project.
@@ -458,7 +458,7 @@ To rename a project:
 Developers will either need to re-clone a new copy of the repository,
 or manually update their remotes with something like::
 
-  git remote set-url origin https://git.openstack.org/$ORG/$PROJECT
+  git remote set-url origin https://git.opencontrail.org/$ORG/$PROJECT
 
 
 Third-Party Testing Access
@@ -470,7 +470,7 @@ Testing`_) looks like:
 
 .. code-block:: shell
 
-  ssh -p 29418 review.openstack.org "gerrit create-account \
+  ssh -p 29418 review.opencontrail.org "gerrit create-account \
       --group 'Third-Party CI' \
       --full-name 'Some CI Bot' \
       --email ci-bot@third-party.org \
@@ -480,9 +480,9 @@ Testing`_) looks like:
 Details on the create-account_ command can be found in the Gerrit
 API documentation.
 
-.. _`Third-Party CI`: http://ci.openstack.org/third_party.html
+.. _`Third-Party CI`: http://ci.opencontrail.org/third_party.html
 
-.. _create-account: https://review.openstack.org/Documentation/cmd-create-account.html
+.. _create-account: https://review.opencontrail.org/Documentation/cmd-create-account.html
 
 Resetting a Username in Gerrit
 ------------------------------
@@ -520,7 +520,7 @@ addresses, which also renders the accounts unselectable in some
 parts of the WebUI (notably when trying to add reviewers to a change
 or members in a group). Gerrit does not provide a supported
 mechanism for `Combining Gerrit Accounts`_, and doing so manually is
-both time-consuming and error prone. As a result, the OpenStack
+both time-consuming and error prone. As a result, the OpenContrail
 infrastructure team does not combine duplicate accounts for users
 but can clean up these E-mail address issues upon request. To find
 the offending duplicates:
@@ -541,7 +541,7 @@ the current DB contents:
 
 .. code-block:: bash
 
-  ssh review.openstack.org -p29418 gerrit flush-caches --all
+  ssh review.opencontrail.org -p29418 gerrit flush-caches --all
 
 
 Combining Gerrit Accounts
@@ -549,7 +549,7 @@ Combining Gerrit Accounts
 
 While not supported by Gerrit, a fairly thorough account merge is
 documented here (mostly as a demonstration of its unfortunate
-complexity). Please note that the OpenStack infrastructure team does
+complexity). Please note that the OpenContrail infrastructure team does
 not combine duplicate accounts for users upon request, but this
 would be the process to follow if it becomes necessary under some
 extraordinary circumstance.
@@ -597,7 +597,7 @@ against the current DB contents:
 
 .. code-block:: bash
 
-  ssh review.openstack.org -p29418 gerrit flush-caches --all
+  ssh review.opencontrail.org -p29418 gerrit flush-caches --all
 
 Make the user aware that these steps have also removed any group
 memberships, preferences, SSH keys, contact information, CLA

@@ -1,7 +1,7 @@
 #! /usr/bin/env python
-# Copyright (C) 2011 OpenStack, LLC.
+# Copyright (C) 2011 OpenContrail, LLC.
 # Copyright (c) 2013 Hewlett-Packard Development Company, L.P.
-# Copyright (c) 2013 OpenStack Foundation
+# Copyright (c) 2013 OpenContrail Foundation
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -39,12 +39,11 @@ class RequirementsList(object):
         self.reqs = {}
         self.failed = False
 
-    def read_requirements(self, fn, ignore_dups=False, strict=False):
-        """ Read a requirements file and optionally enforce style."""
+    def read_requirements(self, fn, ignore_dups=False):
         if not os.path.exists(fn):
             return
         for line in open(fn):
-            if strict and '\n' not in line:
+            if '\n' not in line:
                 raise Exception("Requirements file %s does not "
                                 "end with a newline." % fn)
             if '#' in line:
@@ -56,15 +55,13 @@ class RequirementsList(object):
                 line.startswith('-f')):
                 continue
             req = pkg_resources.Requirement.parse(line)
-            if (not ignore_dups and strict and req.project_name.lower()
-                in self.reqs):
+            if not ignore_dups and req.project_name.lower() in self.reqs:
                 print("Duplicate requirement in %s: %s" %
                       (self.name, str(req)))
                 self.failed = True
             self.reqs[req.project_name.lower()] = req
 
-    def read_all_requirements(self, global_req=False, include_dev=False,
-                              strict=False):
+    def read_all_requirements(self, global_req=False, include_dev=False):
         """ Read all the requirements into a list.
 
         Build ourselves a consolidated list of requirements. If global_req is
@@ -74,81 +71,67 @@ class RequirementsList(object):
         If include_dev is true allow for development requirements, which
         may be prereleased versions of libraries that would otherwise be
         listed. This is most often used for olso prereleases.
-
-        If strict is True then style checks should be performed while reading
-        the file.
         """
         if global_req:
-            self.read_requirements('global-requirements.txt', strict=strict)
+            self.read_requirements('global-requirements.txt')
         else:
             for fn in ['tools/pip-requires',
                        'tools/test-requires',
                        'requirements.txt',
                        'test-requirements.txt'
                        ]:
-                self.read_requirements(fn, strict=strict)
+                self.read_requirements(fn)
         if include_dev:
             self.read_requirements('dev-requirements.txt',
-                                   ignore_dups=True, strict=strict)
+                                   ignore_dups=True)
 
 
 def main():
     branch = sys.argv[1]
-
-    # build a list of requirements in the proposed change,
-    # and check them for style violations while doing so
     head = run_command("git rev-parse HEAD").strip()
     head_reqs = RequirementsList('HEAD')
-    head_reqs.read_all_requirements(strict=True)
+    head_reqs.read_all_requirements()
 
-    # build a list of requirements already in the target branch,
-    # so that we can create a diff and identify what's being changed
     run_command("git remote update")
     run_command("git checkout remotes/origin/%s" % branch)
     branch_reqs = RequirementsList(branch)
     branch_reqs.read_all_requirements()
 
-    # switch back to the proposed change now
     run_command("git checkout %s" % head)
 
-    # build a list of requirements from the global list in the
-    # openstack/requirements project so we can match them to the changes
     reqroot = tempfile.mkdtemp()
     reqdir = os.path.join(reqroot, "requirements")
-    run_command("git clone https://review.openstack.org/p/openstack/"
+    run_command("git clone https://review.opencontrail.org/p/opencontrail/"
                 "requirements --depth 1 %s" % reqdir)
     os.chdir(reqdir)
     run_command("git checkout remotes/origin/%s" % branch)
     print "requirements git sha: %s" % run_command(
         "git rev-parse HEAD").strip()
-    os_reqs = RequirementsList('openstack/requirements')
+    os_reqs = RequirementsList('opencontrail/requirements')
     os_reqs.read_all_requirements(include_dev=(branch == 'master'),
                                   global_req=True)
 
-    # iterate through the changing entries and see if they match the global
-    # equivalents we want enforced
     failed = False
     for req in head_reqs.reqs.values():
         name = req.project_name.lower()
         if name in branch_reqs.reqs and req == branch_reqs.reqs[name]:
             continue
         if name not in os_reqs.reqs:
-            print("Requirement %s not in openstack/requirements" % str(req))
+            print("Requirement %s not in opencontrail/requirements" % str(req))
             failed = True
             continue
         # pkg_resources.Requirement implements __eq__() but not __ne__().
         # There is no implied relationship between __eq__() and __ne__()
         # so we must negate the result of == here instead of using !=.
         if not (req == os_reqs.reqs[name]):
-            print("Requirement %s does not match openstack/requirements "
+            print("Requirement %s does not match opencontrail/requirements "
                   "value %s" % (str(req), str(os_reqs.reqs[name])))
             failed = True
 
-    # clean up and report the results
     shutil.rmtree(reqroot)
     if failed or os_reqs.failed or head_reqs.failed or branch_reqs.failed:
         sys.exit(1)
-    print("Updated requirements match openstack/requirements.")
+    print("Updated requirements match opencontrail/requirements.")
 
 
 if __name__ == '__main__':
