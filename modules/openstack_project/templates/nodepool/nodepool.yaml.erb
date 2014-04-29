@@ -84,6 +84,13 @@ labels:
       - name: hpcloud-az2
       - name: hpcloud-az3
       - name: hpcloud-region-b
+  - name: devstack-f20
+    image: devstack-f20
+    min-ready: 5
+    providers:
+      - name: rax-dfw
+      - name: rax-ord
+      - name: rax-iad
   - name: tripleo-precise
     image: tripleo-precise
     min-ready: 10
@@ -145,6 +152,13 @@ providers:
         setup: prepare_node_devstack_new_kernel.sh
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
+      - name: devstack-f20
+        base-image: 'Fedora 20 (Heisenbug) (PVHVM)'
+        min-ram: 8192
+        name-filter: 'Performance'
+        setup: prepare_node_devstack.sh
+        username: jenkins
+        private-key: /home/nodepool/.ssh/id_rsa
   - name: rax-ord
     region-name: 'ORD'
     service-type: 'compute'
@@ -183,6 +197,13 @@ providers:
         min-ram: 8192
         name-filter: 'Performance'
         setup: prepare_node_py3k.sh
+        username: jenkins
+        private-key: /home/nodepool/.ssh/id_rsa
+      - name: devstack-f20
+        base-image: 'Fedora 20 (Heisenbug) (PVHVM)'
+        min-ram: 8192
+        name-filter: 'Performance'
+        setup: prepare_node_devstack.sh
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
   - name: rax-iad
@@ -230,6 +251,13 @@ providers:
         min-ram: 8192
         name-filter: 'Performance'
         setup: prepare_node_py3k.sh
+        username: jenkins
+        private-key: /home/nodepool/.ssh/id_rsa
+      - name: devstack-f20
+        base-image: 'Fedora 20 (Heisenbug) (PVHVM)'
+        min-ram: 8192
+        name-filter: 'Performance'
+        setup: prepare_node_devstack.sh
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
   - name: hpcloud-az1
