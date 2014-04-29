@@ -607,6 +607,7 @@
   description: Google Compute Engine API support for OpenStack
 - project: stackforge/gertty
   description: Console interface to Gerrit Code Review
+  use-storyboard: true
 - project: stackforge/golang-client
   description: OpenStack API client for golang
 - project: stackforge/graffiti
