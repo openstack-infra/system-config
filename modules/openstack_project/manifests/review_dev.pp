@@ -86,6 +86,10 @@ class openstack_project::review_dev (
     ],
   }
 
+  gerrit::plugin { 'javamelody':
+    version => '4744bfb',
+  }
+
   file { '/home/gerrit2/.launchpadlib':
     ensure  => directory,
     owner   => 'gerrit2',
