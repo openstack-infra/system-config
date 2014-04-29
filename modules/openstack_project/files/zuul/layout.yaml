@@ -491,8 +491,6 @@ jobs:
     voting: false
   - name: gate-magnetodb-requirements
     voting: false
-  - name: gate-magnetodb-devstack-dsvm
-    voting: false
   - name: gate-mistral-python33
     voting: false
   - name: gate-mistral-extra-python33
@@ -3615,6 +3613,7 @@ projects:
       - gate-magnetodb-pep8
       - gate-magnetodb-python27
       - gate-magnetodb-docs
+      - gate-magnetodb-devstack-dsvm
     post:
       - magnetodb-branch-tarball
     pre-release:
