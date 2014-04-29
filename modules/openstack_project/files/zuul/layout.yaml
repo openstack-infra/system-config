@@ -3615,6 +3615,7 @@ projects:
       - gate-magnetodb-pep8
       - gate-magnetodb-python27
       - gate-magnetodb-docs
+      - gate-magnetodb-devstack-dsvm
     post:
       - magnetodb-branch-tarball
     pre-release:
