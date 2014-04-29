@@ -2631,3 +2631,13 @@
 
     jobs:
       - python-jobs
+
+- project:
+    name: python-magnetodbclient
+    github-org: stackforge
+    node: bare-precise
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - python-jobs
+      - pypi-jobs

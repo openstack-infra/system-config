@@ -4157,6 +4157,26 @@ projects:
       - python-libraclient-coverage
       - python-libraclient-branch-tarball
 
+  - name: stackforge/python-magnetodbclient
+    template:
+      - name: check-requirements
+    check:
+      - gate-python-magnetodbclient-pep8
+      - gate-python-magnetodbclient-python26
+      - gate-python-magnetodbclient-python27
+      - gate-magnetodbclient-requirements
+    gate:
+      - gate-python-magnetodbclient-pep8
+      - gate-python-magnetodbclient-python26
+      - gate-python-magnetodbclient-python27
+      - gate-magnetodbclient-requirements
+    post:
+      - python-magnetodbclient-branch-tarball
+    pre-release:
+      - python-magnetodbclient-tarball
+    release:
+      - python-magnetodbclient-tarball
+
   - name: stackforge/python-manilaclient
     check:
       - gate-python-manilaclient-pep8

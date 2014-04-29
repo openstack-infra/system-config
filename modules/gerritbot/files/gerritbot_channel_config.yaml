@@ -323,6 +323,7 @@ magnetodb:
       - change-merged
       - x-vrif-minus-2
     projects:
+      - stackforge/python-magnetodbclient
       - stackforge/magnetodb
     branches:
       - master

@@ -903,6 +903,9 @@
 - project: stackforge/python-kiteclient
   description: Python bindings to Kite.
 - project: stackforge/python-libraclient
+- project: stackforge/python-magnetodbclient
+  description: Python client for MagnetoDB, the key-value database service for OpenStack cloud.
+  upstream: git://github.com/aostapenko/python-magnetodbclient
 - project: stackforge/python-manilaclient
   upstream: git://github.com/bswartz/python-manilaclient.git
 - project: stackforge/python-mistralclient
