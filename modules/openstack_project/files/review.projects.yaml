@@ -297,10 +297,18 @@
   description: Part of OpenStack's Oslo project. New Oslo APIs go through an incubation phase in this repository before being released as part of a proper Python library.
 - project: openstack/oslo.config
   docimpact-group: openstack-manuals
+<<<<<<< HEAD
 - project: openstack/oslo.db
   description: OpenStack Common DB Code
   group: oslo
   upstream: git://github.com/malor/oslo.db.git
+=======
+- project: openstack/oslo.i18n
+  description: Internationalization and translation library.
+  group: oslo
+  docimpact-group: openstack-manuals
+  upstream: git@github.com:dhellmann/oslo.i18n.git
+>>>>>>> Import oslo.i18n
 - project: openstack/oslo.messaging
   docimpact-group: openstack-manuals
   upstream: git://github.com/markmc/oslo.messaging.git
