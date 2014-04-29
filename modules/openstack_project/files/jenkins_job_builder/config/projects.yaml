@@ -2826,3 +2826,14 @@
 
     jobs:
       - python-jobs
+
+- project:
+    name: python-magnetodbclient
+    github-org: stackforge
+    node: bare-precise
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - hook-{name}-rtfd
+      - python-jobs
+      - pypi-jobs

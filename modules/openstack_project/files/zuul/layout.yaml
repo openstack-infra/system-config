@@ -4345,6 +4345,16 @@ projects:
       - python-libraclient-coverage
       - python-libraclient-branch-tarball
 
+  - name: stackforge/python-magnetodbclient
+    template:
+      - name: check-requirements
+      - name: docs-on-rtfd
+      - name: python-jobs
+    pre-release:
+      - python-magnetodbclient-tarball
+    release:
+      - python-magnetodbclient-tarball
+
   - name: stackforge/python-manilaclient
     check:
       - gate-python-manilaclient-docs
