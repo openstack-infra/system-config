@@ -1,0 +1,18 @@
+Verified+2: Jenkins
+Code-Review+1: Mark Washenberger <mark.washenberger@markwash.net>
+Code-Review+1: garyk <gkotton@vmware.com>
+Code-Review+2: Jeremy Stanley <fungi@yuggoth.org>
+Workflow+1: Jeremy Stanley <fungi@yuggoth.org>
+Code-Review+1: Boris Pavlovic <boris@pavlovic.me>
+Code-Review+1: Spencer Krum <krum.spencer@gmail.com>
+Code-Review+2: Sergey Lukjanov <slukjanov@mirantis.com>
+Code-Review+1: Kun Huang <gareth@openstacker.org>
+Code-Review+1: Arnaud Legendre <arnaudleg@gmail.com>
+Code-Review+1: Andrey Kurilin <akurilin@mirantis.com>
+Code-Review+1: Sergey Nikitin <snikitin@mirantis.com>
+Verified-1: XenServer CI <openstack@citrix.com>
+Submitted-by: Jenkins
+Submitted-at: Tue, 29 Apr 2014 21:36:01 +0000
+Reviewed-on: https://review.openstack.org/89801
+Project: openstack-infra/config
+Branch: refs/heads/master
