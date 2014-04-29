@@ -4,10 +4,10 @@ a:hover {color: #000 !important; text-decoration: underline}
 
 a.gwt-InlineHyperlink {background: none !important}
 
-#gerrit_header {display: block !important; position: relative; top: -60px; margin-bottom: -60px; width: 400px; padding-left: 17px}
+#gerrit_header {display: block !important; position: relative; top: -60px; margin-bottom: -60px; width: 200px; padding-left: 17px}
 #gerrit_header h1 {font-family: 'PT Sans', sans-serif; font-weight: normal; letter-spacing: -1px}
 
-#gerrit_topmenu {background: none; position:relative; top: 0px; left: 400px; margin-right: 400px}
+#gerrit_topmenu {background: none; position:relative; top: 0px; left: 200px; margin-right: 200px}
 
 #gerrit_topmenu tbody tr td table {border: 0}
 
