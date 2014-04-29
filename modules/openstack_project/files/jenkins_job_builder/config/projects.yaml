@@ -2275,11 +2275,16 @@
     github-org: openstack
     node: bare-precise
 
+    lang:
+        - es
+        - fr
+
     jobs:
       - openstack-doc-jobs
       - manual-translation-jobs
       - '{name}-tox-doc-{envlist}':
           envlist: publishdocs
+      - 'api-site-tox-build-{lang}':
 
 - project:
     name: database-api
