@@ -164,19 +164,7 @@ class gerrit(
   $gerrit_war = '/home/gerrit2/review_site/bin/gerrit.war'
   $gerrit_site = '/home/gerrit2/review_site'
 
-  user { 'gerrit2':
-    ensure     => present,
-    comment    => 'Gerrit',
-    home       => '/home/gerrit2',
-    shell      => '/bin/bash',
-    gid        => 'gerrit2',
-    managehome => true,
-    require    => Group['gerrit2'],
-  }
-
-  group { 'gerrit2':
-    ensure => present,
-  }
+  include gerrit::user
 
   if ($gitweb) {
     package { 'gitweb':
