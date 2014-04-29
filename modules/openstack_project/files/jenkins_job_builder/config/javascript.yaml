@@ -8,13 +8,12 @@
       - timestamps
 
     builders:
-      - revoke-sudo
       - gerrit-git-prep
       - shell: |
           #!/bin/bash -xe
-          /usr/local/jenkins/slave_scripts/version-properties.sh
+          /usr/local/jenkins/slave_scripts/maven-properties.sh
       - inject:
-          properties-file: version.properties
+          properties-file: maven.properties
       - js-build:
           command: 'test'
           envlist: 'grunt'
@@ -45,13 +44,12 @@
     name: '{name}-js-release-{branch-designator}'
 
     builders:
-      - revoke-sudo
       - gerrit-git-prep
       - shell: |
           #!/bin/bash -xe
-          /usr/local/jenkins/slave_scripts/version-properties.sh
+          /usr/local/jenkins/slave_scripts/maven-properties.sh
       - inject:
-          properties-file: version.properties
+          properties-file: maven.properties
       - js-build:
           command: 'build'
           envlist: 'grunt'

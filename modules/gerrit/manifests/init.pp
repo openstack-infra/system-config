@@ -132,6 +132,7 @@ class gerrit(
   $melody_session = false,
   $replicate_local = false,
   $replication = [],
+  $replication_targets = [],
   $gitweb = true,
   $cgit = false,
   $web_repo_url = '',
@@ -508,18 +509,16 @@ class gerrit(
 
   # If gerrit.war was just installed, run the Gerrit "init" command.
   exec { 'gerrit-initial-init':
-    user        => 'gerrit2',
-    command     => '/usr/bin/java -jar /home/gerrit2/review_site/bin/gerrit.war init -d /home/gerrit2/review_site --batch --no-auto-start',
-    subscribe   => File['/home/gerrit2/review_site/bin/gerrit.war'],
-    refreshonly => true,
-    require     => [Package['openjdk-7-jre-headless'],
-                    User['gerrit2'],
-                    Mysql::Db['reviewdb'],
-                    File['/home/gerrit2/review_site/etc/gerrit.config'],
-                    File['/home/gerrit2/review_site/etc/secure.config']],
-    notify      => Exec['install-core-plugins'],
-    unless      => '/usr/bin/test -f /etc/init.d/gerrit',
-    logoutput   => true,
+    user      => 'gerrit2',
+    command   => '/usr/bin/java -jar /home/gerrit2/review_site/bin/gerrit.war init -d /home/gerrit2/review_site --batch --no-auto-start',
+    subscribe => File['/home/gerrit2/review_site/bin/gerrit.war'],
+    require   => [Package['openjdk-7-jre-headless'],
+                  User['gerrit2'],
+                  Mysql::Db['reviewdb'],
+                  File['/home/gerrit2/review_site/etc/gerrit.config'],
+                  File['/home/gerrit2/review_site/etc/secure.config']],
+    notify    => Exec['install-core-plugins'],
+    logoutput => true,
   }
 
   # If a new gerrit.war was just installed, run the Gerrit "init" command.
@@ -537,7 +536,6 @@ class gerrit(
                     File['/home/gerrit2/review_site/etc/gerrit.config'],
                     File['/home/gerrit2/review_site/etc/secure.config']],
     notify      => Exec['install-core-plugins'],
-    onlyif      => '/usr/bin/test -f /etc/init.d/gerrit',
     logoutput   => true,
   }
 
@@ -549,7 +547,7 @@ class gerrit(
     require     => [Package['unzip'],
                     File['/home/gerrit2/review_site/plugins']],
     notify      => Exec['gerrit-start'],
-    refreshonly => true,
+    unless      => '/usr/bin/test -f /etc/init.d/gerrit',
     logoutput   => true,
   }
 
@@ -607,13 +605,13 @@ class gerrit(
     ensure  => link,
     target  => '/usr/share/java/mysql-connector-java.jar',
     require => [
-      Package['libmysql-java'],
-      File['/home/gerrit2/review_site/lib'],
+      package['libmysql-java'],
+      file['/home/gerrit2/review_site/lib'],
     ],
   }
   file { '/home/gerrit2/review_site/lib/mysql-connector-java-5.1.10.jar':
     ensure  => absent,
-    require => File['/home/gerrit2/review_site/lib/mysql-connector-java.jar'],
+    require => file['/home/gerrit2/review_site/lib/mysql-connector-java.jar'],
   }
 
   package { 'libbcprov-java':
@@ -623,13 +621,13 @@ class gerrit(
     ensure  => link,
     target  => '/usr/share/java/bcprov.jar',
     require => [
-      Package['libbcprov-java'],
-      File['/home/gerrit2/review_site/lib'],
+      package['libbcprov-java'],
+      file['/home/gerrit2/review_site/lib'],
     ],
   }
   file { '/home/gerrit2/review_site/lib/bcprov-jdk16-144.jar':
     ensure  => absent,
-    require => File['/home/gerrit2/review_site/lib/bcprov.jar'],
+    require => file['/home/gerrit2/review_site/lib/bcprov.jar'],
   }
 
   # Install Bouncy Castle's OpenPGP plugin and populate the contact store

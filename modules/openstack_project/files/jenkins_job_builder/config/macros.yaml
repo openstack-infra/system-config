@@ -4,23 +4,6 @@
       - shell: "/usr/local/jenkins/slave_scripts/gerrit-git-prep.sh https://review.openstack.org git://git.openstack.org"
 
 - builder:
-    name: branch-git-prep
-    builders:
-      - shell: |
-          #!/bin/bash
-          export BRANCH={branch}
-          /usr/local/jenkins/slave_scripts/gerrit-git-prep.sh https://review.openstack.org git://git.openstack.org
-
-- builder:
-    name: revoke-sudo
-    builders:
-      - shell: |
-          #!/bin/bash
-          if [ -f /etc/sudoers.d/jenkins-sudo ] ; then
-              sudo rm /etc/sudoers.d/jenkins-sudo
-          fi
-
-- builder:
     name: coverage
     builders:
       - shell: "/usr/local/jenkins/slave_scripts/run-cover.sh {github-org} {project}"
@@ -93,14 +76,7 @@
               cd "$MODULE"
             fi
           fi
-          if [ -f Gemfile ]; then
-            mkdir .bundled_gems
-            export GEM_HOME=`pwd`/.bundled_gems
-            bundle install
-            bundle exec rake lint 2>&1
-          else
-            rake lint 2>&1
-          fi
+          rake lint 2>&1
 
 - builder:
     name: puppet-syntax
@@ -253,21 +229,6 @@
       - shell: |
           #!/bin/sh
           echo "Detailed logs: http://logs.openstack.org/$LOG_PATH/"
-
-
-- builder:
-    name: net-info
-    builders:
-      - shell: |
-          #!/bin/sh
-          export PATH=$PATH:/sbin
-          echo "Network interface addresses..."
-          ip address show
-          echo "Network routing tables..."
-          ip route show
-          ip -6 route show
-          echo "Network neighbors..."
-          ip neighbor show
 
 
 - builder:

@@ -5,8 +5,7 @@
 #
 class openstack_project::proposal_slave (
   $jenkins_ssh_public_key,
-  $proposal_ssh_public_key,
-  $proposal_ssh_private_key,
+  $jenkins_ssh_private_key,
   $transifex_password = '',
   $transifex_username = 'openstackci',
 ) {
@@ -35,14 +34,6 @@ class openstack_project::proposal_slave (
     group   => 'jenkins',
     mode    => '0400',
     require => File['/home/jenkins/.ssh'],
-    content => $proposal_ssh_private_key,
-  }
-
-  file { '/home/jenkins/.ssh/id_rsa.pub':
-    owner   => 'jenkins',
-    group   => 'jenkins',
-    mode    => '0400',
-    require => File['/home/jenkins/.ssh'],
-    content => $proposal_ssh_public_key,
+    content => $jenkins_ssh_private_key,
   }
 }

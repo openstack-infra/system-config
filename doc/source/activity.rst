@@ -12,6 +12,7 @@ At a glance:
 
 :Hosts:
   * http://activity.openstack.org
+  * http://activity-dev.openstack.org
 
 :Bugs:
   * https://bugs.launchpad.net/openstack-community
@@ -24,5 +25,6 @@ At a glance:
 Overview
 ========
 
-Eventually we'll have activity.openstack.org run fully on the official
-OpenStack Infrastructure.
+At the moment only the staging server activity-dev is managed via
+puppet. It runs Apache. Eventually we'll have activity.openstack.org run
+fully on the official OpenStack Infrastructure.

@@ -3,7 +3,6 @@
     node: bare-precise
 
     builders:
-      - revoke-sudo
       - gerrit-git-prep
       - selenium:
           github-org: openstack
@@ -23,7 +22,6 @@
       - timestamps
 
     builders:
-      - revoke-sudo
       - gerrit-git-prep
       - shell: '/usr/local/jenkins/slave_scripts/run-unittests.sh 27dj14 openstack horizon'
       - assert-no-extra-files

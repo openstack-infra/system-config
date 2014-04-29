@@ -4,23 +4,22 @@
 
     wrappers:
       - timeout:
-          timeout: 125
+          timeout: 185
           fail: true
       - timestamps
 
     builders:
-      - link-logs
-      - net-info
       - experimental-devstack-checkout
       - shell: |
           #!/bin/bash -xe
           export PYTHONUNBUFFERED=true
-          export DEVSTACK_GATE_TIMEOUT=120
+          export DEVSTACK_GATE_TIMEOUT=180
           export DEVSTACK_GATE_TEMPEST=1
           export DEVSTACK_GATE_TEMPEST_FULL=1
           export RE_EXEC=true
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
+      - link-logs
 
     publishers:
       - devstack-logs
@@ -32,22 +31,21 @@
 
     wrappers:
       - timeout:
-          timeout: 125
+          timeout: 185
           fail: true
       - timestamps
 
     builders:
-      - link-logs
-      - net-info
       - experimental-devstack-checkout
       - shell: |
           #!/bin/bash -xe
           export PYTHONUNBUFFERED=true
-          export DEVSTACK_GATE_TIMEOUT=120
+          export DEVSTACK_GATE_TIMEOUT=180
           export DEVSTACK_GATE_TEMPEST=1
           export DEVSTACK_GATE_TEMPEST_FULL=1
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
+      - link-logs
 
     publishers:
       - devstack-logs
@@ -64,8 +62,6 @@
       - timestamps
 
     builders:
-      - link-logs
-      - net-info
       - devstack-checkout
       - shell: |
           #!/bin/bash -xe
@@ -89,6 +85,7 @@
 
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
+      - link-logs
 
     publishers:
       - devstack-logs
@@ -100,18 +97,16 @@
 
     wrappers:
       - timeout:
-          timeout: 125
+          timeout: 185
           fail: true
       - timestamps
 
     builders:
-      - link-logs
-      - net-info
       - devstack-checkout
       - shell: |
           #!/bin/bash -xe
           export PYTHONUNBUFFERED=true
-          export DEVSTACK_GATE_TIMEOUT=120
+          export DEVSTACK_GATE_TIMEOUT=180
           export DEVSTACK_GATE_TEMPEST=1
           export DEVSTACK_GATE_TEMPEST_FULL=1
           export BRANCH_OVERRIDE={branch-override}
@@ -120,38 +115,7 @@
           fi
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
-
-    publishers:
-      - devstack-logs
-      - console-log
-
-- job-template:
-    name: '{pipeline}-tempest-master-dsvm-full{branch-designator}'
-    node: '{node}'
-
-    wrappers:
-      - timeout:
-          timeout: 125
-          fail: true
-      - timestamps
-
-    builders:
       - link-logs
-      - net-info
-      - devstack-checkout
-      - shell: |
-          #!/bin/bash -xe
-          export PYTHONUNBUFFERED=true
-          export DEVSTACK_GATE_TIMEOUT=120
-          export DEVSTACK_GATE_TEMPEST=1
-          export DEVSTACK_GATE_TEMPEST_FULL=1
-          export BRANCH_OVERRIDE={branch-override}
-          if [ "$BRANCH_OVERRIDE" != "default" ] ; then
-              export OVERRIDE_ZUUL_BRANCH=$BRANCH_OVERRIDE
-          fi
-          export OVERRIDE_TEMPEST_PROJECT_BRANCH=master
-          cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
-          ./safe-devstack-vm-gate-wrap.sh
 
     publishers:
       - devstack-logs
@@ -163,50 +127,17 @@
 
     wrappers:
       - timeout:
-          timeout: 125
-          fail: true
-      - timestamps
-
-    builders:
-      - link-logs
-      - net-info
-      - devstack-checkout
-      - shell: |
-          #!/bin/bash -xe
-          export PYTHONUNBUFFERED=true
-          export DEVSTACK_GATE_TIMEOUT=120
-          export DEVSTACK_GATE_TEMPEST=1
-          export DEVSTACK_GATE_TEMPEST_DISABLE_TENANT_ISOLATION=1
-          export BRANCH_OVERRIDE={branch-override}
-          if [ "$BRANCH_OVERRIDE" != "default" ] ; then
-              export OVERRIDE_ZUUL_BRANCH=$BRANCH_OVERRIDE
-          fi
-          cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
-          ./safe-devstack-vm-gate-wrap.sh
-
-    publishers:
-      - devstack-logs
-      - console-log
-
-- job-template:
-    name: '{pipeline}-tempest-dsvm-neutron-full-non-isolated{branch-designator}'
-    node: '{node}'
-
-    wrappers:
-      - timeout:
           timeout: 185
           fail: true
       - timestamps
 
     builders:
-      - link-logs
       - devstack-checkout
       - shell: |
           #!/bin/bash -xe
           export PYTHONUNBUFFERED=true
           export DEVSTACK_GATE_TIMEOUT=180
           export DEVSTACK_GATE_TEMPEST=1
-          export DEVSTACK_GATE_NEUTRON=1
           export DEVSTACK_GATE_TEMPEST_DISABLE_TENANT_ISOLATION=1
           export BRANCH_OVERRIDE={branch-override}
           if [ "$BRANCH_OVERRIDE" != "default" ] ; then
@@ -214,11 +145,11 @@
           fi
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
+      - link-logs
 
     publishers:
       - devstack-logs
       - console-log
-
 
 - job-template:
     name: '{pipeline}-tempest-dsvm-neutron-heat-slow{branch-designator}'
@@ -231,8 +162,6 @@
       - timestamps
 
     builders:
-      - link-logs
-      - net-info
       - devstack-checkout
       - shell: |
           #!/bin/bash -xe
@@ -247,6 +176,7 @@
           fi
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
+      - link-logs
 
     publishers:
       - devstack-logs
@@ -264,8 +194,6 @@
       - timestamps
 
     builders:
-      - link-logs
-      - net-info
       - devstack-checkout
       - shell: |
           #!/bin/bash -xe
@@ -280,40 +208,7 @@
           fi
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
-
-    publishers:
-      - devstack-logs
-      - console-log
-
-
-- job-template:
-    name: '{pipeline}-tempest-master-dsvm-neutron{branch-designator}'
-    node: '{node}'
-
-    wrappers:
-      - timeout:
-          timeout: 125
-          fail: true
-      - timestamps
-
-    builders:
       - link-logs
-      - net-info
-      - devstack-checkout
-      - shell: |
-          #!/bin/bash -xe
-          export PYTHONUNBUFFERED=true
-          export DEVSTACK_GATE_TIMEOUT=120
-          export DEVSTACK_GATE_TEMPEST=1
-          export DEVSTACK_GATE_NEUTRON=1
-          export DEVSTACK_GATE_SMOKE_SERIAL=1
-          export BRANCH_OVERRIDE={branch-override}
-          if [ "$BRANCH_OVERRIDE" != "default" ] ; then
-              export OVERRIDE_ZUUL_BRANCH=$BRANCH_OVERRIDE
-          fi
-          export OVERRIDE_TEMPEST_PROJECT_BRANCH=master
-          cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
-          ./safe-devstack-vm-gate-wrap.sh
 
     publishers:
       - devstack-logs
@@ -331,8 +226,6 @@
       - timestamps
 
     builders:
-      - link-logs
-      - net-info
       - devstack-checkout
       - shell: |
           #!/bin/bash -xe
@@ -349,6 +242,7 @@
           fi
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
+      - link-logs
 
     publishers:
       - devstack-logs
@@ -366,8 +260,6 @@
       - timestamps
 
     builders:
-      - link-logs
-      - net-info
       - devstack-checkout
       - shell: |
           #!/bin/bash -xe
@@ -382,6 +274,7 @@
           fi
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
+      - link-logs
 
     publishers:
       - devstack-logs
@@ -399,8 +292,6 @@
       - timestamps
 
     builders:
-      - link-logs
-      - net-info
       - devstack-checkout
       - shell: |
           #!/bin/bash -xe
@@ -416,6 +307,7 @@
           fi
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
+      - link-logs
 
     publishers:
       - devstack-logs
@@ -433,8 +325,6 @@
       - timestamps
 
     builders:
-      - link-logs
-      - net-info
       - devstack-checkout
       - shell: |
           #!/bin/bash -xe
@@ -448,6 +338,7 @@
           fi
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
+      - link-logs
 
     publishers:
       - devstack-logs
@@ -465,8 +356,6 @@
       - timestamps
 
     builders:
-      - link-logs
-      - net-info
       - devstack-checkout
       - shell: |
           #!/bin/bash -xe
@@ -482,6 +371,7 @@
 
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
+      - link-logs
 
     publishers:
       - devstack-logs
@@ -499,8 +389,6 @@
       - timestamps
 
     builders:
-      - link-logs
-      - net-info
       - devstack-checkout
       - shell: |
           #!/bin/bash -xe
@@ -517,69 +405,7 @@
 
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
-
-    publishers:
-      - devstack-logs
-      - console-log
-
-
-- job-template:
-    name: '{pipeline}-tempest-dsvm-virtual-ironic{branch-designator}'
-    node: '{node}'
-
-    wrappers:
-      - timeout:
-          timeout: 125
-          fail: true
-      - timestamps
-
-    builders:
       - link-logs
-      - net-info
-      - devstack-checkout
-      - shell: |
-          #!/bin/bash -xe
-          export PYTHONUNBUFFERED=true
-          export DEVSTACK_GATE_TEMPEST_DISABLE_TENANT_ISOLATION=1
-          export DEVSTACK_GATE_TIMEOUT=120
-          export DEVSTACK_GATE_TEMPEST=1
-          export DEVSTACK_GATE_IRONIC=1
-          export DEVSTACK_GATE_NEUTRON=1
-          export DEVSTACK_GATE_VIRT_DRIVER=ironic
-          export TEMPEST_CONCURRENCY=1
-          export BRANCH_OVERRIDE={branch-override}
-          if [ "$BRANCH_OVERRIDE" != "default" ] ; then
-              export OVERRIDE_ZUUL_BRANCH=$BRANCH_OVERRIDE
-          fi
-
-          # Construct a regex to use when limiting scope of tempest
-          # to avoid features unsupported by Ironic.
-          # skip all compute API tests that touch secgroups, volumes, servers and
-          # snapshots
-          r="^(?!.*(?:(compute\.|compute\.v3\.)(security_groups\.test_security_groups|images\.test_images_oneserver|servers\.*))"
-          r="$r|^(?:tempest\.api\.database\.*)"
-          # skip volumes attach tests
-          r="$r|(?:tempest\.api\.volume\.test_volumes_actions.*)"
-          # skip all scenario tests
-          r="$r|(?:tempest\.scenario\.*)"
-          # skip boto tests which expect to spawn an instance
-          r="$r|(?:tempest\.thirdparty\.boto\.test_ec2_instance_run.*))"
-          r="$r.*(?=.*smoke.*).*$"
-          # enable the single baremetal scenario test
-          r="$r tempest.scenario.test_baremetal_basic_ops"
-          export DEVSTACK_GATE_TEMPEST_REGEX="$r"
-
-          # pull in libvirt /w ovs support from ubuntu cloud-archive.
-          sudo add-apt-repository cloud-archive:icehouse
-          sudo apt-get update
-
-          # prevent sshd from jumping to the ovs bridge on Precise instances.
-          IP=$(ip addr show eth0 | grep 'inet ' | sed 's/inet \([0-9\.]*\)\/.*/\1/' | tr -d ' ')
-          sudo sed -i "s/#ListenAddress 0.0.0.0/ListenAddress $IP/" /etc/ssh/sshd_config
-          sudo service ssh restart
-
-          cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
-          ./safe-devstack-vm-gate-wrap.sh
 
     publishers:
       - devstack-logs
@@ -597,8 +423,6 @@
       - timestamps
 
     builders:
-      - link-logs
-      - net-info
       - devstack-checkout
       - shell: |
           #!/bin/bash -xe
@@ -613,11 +437,7 @@
 
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
-
-          function post_test_hook {{
-              gzip -9 -c /var/log/marconi/queues.log > $WORKSPACE/logs/queues.log.txt.gz
-          }}
-          export -f post_test_hook
+      - link-logs
 
     publishers:
       - devstack-logs
@@ -635,8 +455,6 @@
       - timestamps
 
     builders:
-      - link-logs
-      - net-info
       - devstack-checkout
       - shell: |
           #!/bin/bash -xe
@@ -650,6 +468,7 @@
           fi
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
+      - link-logs
 
     publishers:
       - devstack-logs
@@ -662,18 +481,16 @@
 
     wrappers:
       - timeout:
-          timeout: 125
+          timeout: 185
           fail: true
       - timestamps
 
     builders:
-      - link-logs
-      - net-info
       - devstack-checkout
       - shell: |
           #!/bin/bash -xe
           export PYTHONUNBUFFERED=true
-          export DEVSTACK_GATE_TIMEOUT=120
+          export DEVSTACK_GATE_TIMEOUT=180
           export DEVSTACK_GATE_TEMPEST=1
           export DEVSTACK_GATE_TEMPEST_FULL=1
           export DEVSTACK_GATE_CELLS=1
@@ -683,6 +500,7 @@
           fi
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
+      - link-logs
 
     publishers:
       - devstack-logs
@@ -700,51 +518,20 @@
       - timestamps
 
     builders:
-      - link-logs
-      - net-info
       - devstack-checkout
       - shell: |
           #!/bin/bash -xe
           export PYTHONUNBUFFERED=true
           export DEVSTACK_GATE_TIMEOUT=60
           export DEVSTACK_GATE_TEMPEST=1
-          export DEVSTACK_GATE_TEMPEST_LARGE_OPS=50
+          export DEVSTACK_GATE_TEMPEST_LARGE_OPS=1
           export BRANCH_OVERRIDE={branch-override}
           if [ "$BRANCH_OVERRIDE" != "default" ] ; then
               export OVERRIDE_ZUUL_BRANCH=$BRANCH_OVERRIDE
           fi
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
-
-    publishers:
-      - devstack-logs
-      - console-log
-
-- job-template:
-    name: '{pipeline}-tempest-dsvm-large-ops-testing{branch-designator}'
-    node: '{node}'
-
-    wrappers:
-      - timeout:
-          timeout: 65
-          fail: true
-      - timestamps
-
-    builders:
       - link-logs
-      - devstack-checkout
-      - shell: |
-          #!/bin/bash -xe
-          export PYTHONUNBUFFERED=true
-          export DEVSTACK_GATE_TIMEOUT=60
-          export DEVSTACK_GATE_TEMPEST=1
-          export DEVSTACK_GATE_TEMPEST_LARGE_OPS=175
-          export BRANCH_OVERRIDE={branch-override}
-          if [ "$BRANCH_OVERRIDE" != "default" ] ; then
-              export OVERRIDE_ZUUL_BRANCH=$BRANCH_OVERRIDE
-          fi
-          cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
-          ./safe-devstack-vm-gate-wrap.sh
 
     publishers:
       - devstack-logs
@@ -761,15 +548,13 @@
       - timestamps
 
     builders:
-      - link-logs
-      - net-info
       - devstack-checkout
       - shell: |
           #!/bin/bash -xe
           export PYTHONUNBUFFERED=true
           export DEVSTACK_GATE_TIMEOUT=60
           export DEVSTACK_GATE_TEMPEST=1
-          export DEVSTACK_GATE_TEMPEST_LARGE_OPS=50
+          export DEVSTACK_GATE_TEMPEST_LARGE_OPS=1
           export DEVSTACK_GATE_NEUTRON=1
           export BRANCH_OVERRIDE={branch-override}
           if [ "$BRANCH_OVERRIDE" != "default" ] ; then
@@ -777,6 +562,7 @@
           fi
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
+      - link-logs
 
     publishers:
       - devstack-logs
@@ -789,18 +575,16 @@
 
     wrappers:
       - timeout:
-          timeout: 125
+          timeout: 185
           fail: true
       - timestamps
 
     builders:
-      - link-logs
-      - net-info
       - devstack-checkout
       - shell: |
           #!/bin/bash -xe
           export PYTHONUNBUFFERED=true
-          export DEVSTACK_GATE_TIMEOUT=120
+          export DEVSTACK_GATE_TIMEOUT=180
           export DEVSTACK_GATE_TEMPEST=1
           export DEVSTACK_GATE_TEMPEST_FULL=1
           export DEVSTACK_GATE_POSTGRES=1
@@ -811,6 +595,39 @@
           fi
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
+      - link-logs
+
+    publishers:
+      - devstack-logs
+      - console-log
+
+
+- job-template:
+    name: '{pipeline}-tempest-dsvm-postgres{branch-designator}'
+    node: '{node}'
+
+    wrappers:
+      - timeout:
+          timeout: 185
+          fail: true
+      - timestamps
+
+    builders:
+      - devstack-checkout
+      - shell: |
+          #!/bin/bash -xe
+          export PYTHONUNBUFFERED=true
+          export DEVSTACK_GATE_TIMEOUT=180
+          export DEVSTACK_GATE_TEMPEST=1
+          export DEVSTACK_GATE_POSTGRES=1
+          export DEVSTACK_GATE_CONFIGDRIVE=0
+          export BRANCH_OVERRIDE={branch-override}
+          if [ "$BRANCH_OVERRIDE" != "default" ] ; then
+              export OVERRIDE_ZUUL_BRANCH=$BRANCH_OVERRIDE
+          fi
+          cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
+          ./safe-devstack-vm-gate-wrap.sh
+      - link-logs
 
     publishers:
       - devstack-logs
@@ -823,22 +640,19 @@
 
     wrappers:
       - timeout:
-          timeout: 125
+          timeout: 185
           fail: true
       - timestamps
 
     builders:
-      - link-logs
-      - net-info
       - devstack-checkout
       - shell: |
           #!/bin/bash -xe
           export PYTHONUNBUFFERED=true
-          export DEVSTACK_GATE_TIMEOUT=120
+          export DEVSTACK_GATE_TIMEOUT=180
           export DEVSTACK_GATE_TEMPEST=1
           export DEVSTACK_GATE_TEMPEST_FULL=1
           export DEVSTACK_GATE_POSTGRES=1
-          export DEVSTACK_GATE_CONFIGDRIVE=0
           export DEVSTACK_GATE_NOVA_API_METADATA_SPLIT=1
           export BRANCH_OVERRIDE={branch-override}
           if [ "$BRANCH_OVERRIDE" != "default" ] ; then
@@ -846,6 +660,7 @@
           fi
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
+      - link-logs
 
     publishers:
       - devstack-logs
@@ -853,7 +668,147 @@
 
 
 - job-template:
-    name: '{pipeline}-tempest-dsvm-keystonev3-full{branch-designator}'
+    name: '{pipeline}-grenade-dsvm'
+    node: '{node}'
+
+    wrappers:
+      - timeout:
+          timeout: 130
+          fail: true
+      - timestamps
+
+    builders:
+      - devstack-checkout
+      - shell: |
+          #!/bin/bash -xe
+          export PYTHONUNBUFFERED=true
+          export DEVSTACK_GATE_TIMEOUT=120
+          export DEVSTACK_GATE_TEMPEST=0
+          export DEVSTACK_GATE_GRENADE=1
+          cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
+          ./safe-devstack-vm-gate-wrap.sh
+      - link-logs
+
+    publishers:
+      - devstack-logs
+      - console-log
+
+
+- job-template:
+    name: '{pipeline}-grenade-dsvm-forward'
+    node: '{node}'
+
+    wrappers:
+      - timeout:
+          timeout: 130
+          fail: true
+      - timestamps
+
+    builders:
+      - devstack-checkout
+      - shell: |
+          #!/bin/bash -xe
+          export PYTHONUNBUFFERED=true
+          export DEVSTACK_GATE_TIMEOUT=120
+          export DEVSTACK_GATE_TEMPEST=0
+          export DEVSTACK_GATE_GRENADE=1
+          export DEVSTACK_GATE_GRENADE_FORWARD=1
+          cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
+          ./safe-devstack-vm-gate-wrap.sh
+      - link-logs
+
+    publishers:
+      - devstack-logs
+      - console-log
+
+
+- job-template:
+    name: '{pipeline}-grenade-dsvm-neutron'
+    node: '{node}'
+
+    wrappers:
+      - timeout:
+          timeout: 130
+          fail: true
+      - timestamps
+
+    builders:
+      - devstack-checkout
+      - shell: |
+          #!/bin/bash -xe
+          export PYTHONUNBUFFERED=true
+          export DEVSTACK_GATE_TIMEOUT=120
+          export DEVSTACK_GATE_TEMPEST=0
+          export DEVSTACK_GATE_GRENADE=1
+          export DEVSTACK_GATE_NEUTRON=1
+          cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
+          ./safe-devstack-vm-gate-wrap.sh
+      - link-logs
+
+    publishers:
+      - devstack-logs
+      - console-log
+
+
+- job-template:
+    name: '{pipeline}-grenade-dsvm-neutron-forward'
+    node: '{node}'
+
+    wrappers:
+      - timeout:
+          timeout: 130
+          fail: true
+      - timestamps
+
+    builders:
+      - devstack-checkout
+      - shell: |
+          #!/bin/bash -xe
+          export PYTHONUNBUFFERED=true
+          export DEVSTACK_GATE_TIMEOUT=120
+          export DEVSTACK_GATE_TEMPEST=0
+          export DEVSTACK_GATE_GRENADE=1
+          export DEVSTACK_GATE_NEUTRON=1
+          export DEVSTACK_GATE_GRENADE_FORWARD=1
+          cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
+          ./safe-devstack-vm-gate-wrap.sh
+      - link-logs
+
+    publishers:
+      - devstack-logs
+      - console-log
+
+
+- job-template:
+    name: '{pipeline}-grenade-dsvm-partial-ncpu'
+    node: '{node}'
+
+    wrappers:
+      - timeout:
+          timeout: 130
+          fail: true
+      - timestamps
+
+    builders:
+      - devstack-checkout
+      - shell: |
+          #!/bin/bash -xe
+          export PYTHONUNBUFFERED=true
+          export DEVSTACK_GATE_TIMEOUT=120
+          export DEVSTACK_GATE_TEMPEST=0
+          export DEVSTACK_GATE_GRENADE=1
+          export DEVSTACK_GATE_GRENADE_PARTIAL_NCPU=1
+          cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
+          ./safe-devstack-vm-gate-wrap.sh
+      - link-logs
+
+    publishers:
+      - devstack-logs
+      - console-log
+
+
+- job-template:
+    name: '{pipeline}-tempest-dsvm-savanna-full{branch-designator}'
     node: '{node}'
 
     wrappers:
@@ -863,8 +818,6 @@
       - timestamps
 
     builders:
-      - link-logs
-      - net-info
       - devstack-checkout
       - shell: |
           #!/bin/bash -xe
@@ -872,13 +825,14 @@
           export DEVSTACK_GATE_TIMEOUT=180
           export DEVSTACK_GATE_TEMPEST=1
           export DEVSTACK_GATE_TEMPEST_FULL=1
-          export DEVSTACK_GATE_KEYSTONE_V3=1
+          export DEVSTACK_GATE_SAVANNA=1
           export BRANCH_OVERRIDE={branch-override}
           if [ "$BRANCH_OVERRIDE" != "default" ] ; then
               export OVERRIDE_ZUUL_BRANCH=$BRANCH_OVERRIDE
           fi
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
+      - link-logs
 
     publishers:
       - devstack-logs
@@ -886,7 +840,7 @@
 
 
 - job-template:
-    name: '{pipeline}-tempest-dsvm-neutron-keystonev3-full{branch-designator}'
+    name: '{pipeline}-tempest-dsvm-savanna-postgres{branch-designator}'
     node: '{node}'
 
     wrappers:
@@ -896,24 +850,54 @@
       - timestamps
 
     builders:
-      - link-logs
-      - net-info
       - devstack-checkout
       - shell: |
           #!/bin/bash -xe
           export PYTHONUNBUFFERED=true
           export DEVSTACK_GATE_TIMEOUT=120
           export DEVSTACK_GATE_TEMPEST=1
-          export DEVSTACK_GATE_TEMPEST_TESTR_FULL=1
+          export DEVSTACK_GATE_POSTGRES=1
+          export DEVSTACK_GATE_SAVANNA=1
+          export BRANCH_OVERRIDE={branch-override}
+          if [ "$BRANCH_OVERRIDE" != "default" ] ; then
+              export OVERRIDE_ZUUL_BRANCH=$BRANCH_OVERRIDE
+          fi
+          cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
+          ./safe-devstack-vm-gate-wrap.sh
+      - link-logs
+
+    publishers:
+      - devstack-logs
+      - console-log
+
+
+- job-template:
+    name: '{pipeline}-tempest-dsvm-savanna-neutron{branch-designator}'
+    node: '{node}'
+
+    wrappers:
+      - timeout:
+          timeout: 125
+          fail: true
+      - timestamps
+
+    builders:
+      - devstack-checkout
+      - shell: |
+          #!/bin/bash -xe
+          export PYTHONUNBUFFERED=true
+          export DEVSTACK_GATE_TIMEOUT=120
+          export DEVSTACK_GATE_TEMPEST=1
           export DEVSTACK_GATE_NEUTRON=1
-          export DEVSTACK_GATE_TEMPEST_ALLOW_TENANT_ISOLATION=1
-          export DEVSTACK_GATE_KEYSTONE_V3=1
+          export DEVSTACK_GATE_SMOKE_SERIAL=1
+          export DEVSTACK_GATE_SAVANNA=1
           export BRANCH_OVERRIDE={branch-override}
           if [ "$BRANCH_OVERRIDE" != "default" ] ; then
               export OVERRIDE_ZUUL_BRANCH=$BRANCH_OVERRIDE
           fi
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
+      - link-logs
 
     publishers:
       - devstack-logs
@@ -921,164 +905,30 @@
 
 
 - job-template:
-    name: '{pipeline}-grenade-dsvm{branch-designator}'
+    name: '{pipeline}-devstack-dsvm-neutron{branch-designator}'
     node: '{node}'
 
     wrappers:
       - timeout:
-          timeout: 130
+          timeout: 125
           fail: true
       - timestamps
 
     builders:
-      - link-logs
-      - net-info
       - devstack-checkout
       - shell: |
           #!/bin/bash -xe
           export PYTHONUNBUFFERED=true
           export DEVSTACK_GATE_TIMEOUT=120
-          export DEVSTACK_GATE_TEMPEST=0
-          export DEVSTACK_GATE_GRENADE=1
-          export BRANCH_OVERRIDE={branch-override}
-          if [ "$BRANCH_OVERRIDE" != "default" ] ; then
-              export OVERRIDE_ZUUL_BRANCH=$BRANCH_OVERRIDE
-          fi
-          cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
-          ./safe-devstack-vm-gate-wrap.sh
-
-    publishers:
-      - devstack-logs
-      - console-log
-
-
-- job-template:
-    name: '{pipeline}-grenade-dsvm-forward{branch-designator}'
-    node: '{node}'
-
-    wrappers:
-      - timeout:
-          timeout: 130
-          fail: true
-      - timestamps
-
-    builders:
-      - link-logs
-      - net-info
-      - devstack-checkout
-      - shell: |
-          #!/bin/bash -xe
-          export PYTHONUNBUFFERED=true
-          export DEVSTACK_GATE_TIMEOUT=120
-          export DEVSTACK_GATE_TEMPEST=0
-          export DEVSTACK_GATE_GRENADE=1
-          export DEVSTACK_GATE_GRENADE_FORWARD=1
-          export BRANCH_OVERRIDE={branch-override}
-          if [ "$BRANCH_OVERRIDE" != "default" ] ; then
-              export OVERRIDE_ZUUL_BRANCH=$BRANCH_OVERRIDE
-          fi
-          cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
-          ./safe-devstack-vm-gate-wrap.sh
-
-    publishers:
-      - devstack-logs
-      - console-log
-
-
-- job-template:
-    name: '{pipeline}-grenade-dsvm-neutron{branch-designator}'
-    node: '{node}'
-
-    wrappers:
-      - timeout:
-          timeout: 130
-          fail: true
-      - timestamps
-
-    builders:
-      - link-logs
-      - net-info
-      - devstack-checkout
-      - shell: |
-          #!/bin/bash -xe
-          export PYTHONUNBUFFERED=true
-          export DEVSTACK_GATE_TIMEOUT=120
-          export DEVSTACK_GATE_TEMPEST=0
-          export DEVSTACK_GATE_GRENADE=1
           export DEVSTACK_GATE_NEUTRON=1
+          export DEVSTACK_GATE_EXERCISES=1
           export BRANCH_OVERRIDE={branch-override}
           if [ "$BRANCH_OVERRIDE" != "default" ] ; then
               export OVERRIDE_ZUUL_BRANCH=$BRANCH_OVERRIDE
           fi
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
-
-    publishers:
-      - devstack-logs
-      - console-log
-
-
-- job-template:
-    name: '{pipeline}-grenade-dsvm-neutron-forward{branch-designator}'
-    node: '{node}'
-
-    wrappers:
-      - timeout:
-          timeout: 130
-          fail: true
-      - timestamps
-
-    builders:
       - link-logs
-      - net-info
-      - devstack-checkout
-      - shell: |
-          #!/bin/bash -xe
-          export PYTHONUNBUFFERED=true
-          export DEVSTACK_GATE_TIMEOUT=120
-          export DEVSTACK_GATE_TEMPEST=0
-          export DEVSTACK_GATE_GRENADE=1
-          export DEVSTACK_GATE_NEUTRON=1
-          export DEVSTACK_GATE_GRENADE_FORWARD=1
-          export BRANCH_OVERRIDE={branch-override}
-          if [ "$BRANCH_OVERRIDE" != "default" ] ; then
-              export OVERRIDE_ZUUL_BRANCH=$BRANCH_OVERRIDE
-          fi
-          cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
-          ./safe-devstack-vm-gate-wrap.sh
-
-    publishers:
-      - devstack-logs
-      - console-log
-
-
-- job-template:
-    name: '{pipeline}-grenade-dsvm-partial-ncpu{branch-designator}'
-    node: '{node}'
-
-    wrappers:
-      - timeout:
-          timeout: 130
-          fail: true
-      - timestamps
-
-    builders:
-      - link-logs
-      - net-info
-      - devstack-checkout
-      - shell: |
-          #!/bin/bash -xe
-          export PYTHONUNBUFFERED=true
-          export DEVSTACK_GATE_TIMEOUT=120
-          export DEVSTACK_GATE_TEMPEST=0
-          export DEVSTACK_GATE_GRENADE=1
-          export DEVSTACK_GATE_GRENADE_PARTIAL_NCPU=1
-          export BRANCH_OVERRIDE={branch-override}
-          if [ "$BRANCH_OVERRIDE" != "default" ] ; then
-              export OVERRIDE_ZUUL_BRANCH=$BRANCH_OVERRIDE
-          fi
-          cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
-          ./safe-devstack-vm-gate-wrap.sh
 
     publishers:
       - devstack-logs
@@ -1091,26 +941,24 @@
 
     wrappers:
       - timeout:
-          timeout: 125
+          timeout: 185
           fail: true
       - timestamps
 
     builders:
-      - link-logs
-      - net-info
       - devstack-checkout
       - shell: |
           #!/bin/bash -xe
           export PYTHONUNBUFFERED=true
-          export DEVSTACK_GATE_TIMEOUT=120
+          export DEVSTACK_GATE_TIMEOUT=180
           export DEVSTACK_GATE_TEMPEST=1
           export DEVSTACK_GATE_TEMPEST_ALL=1
-          export BRANCH_OVERRIDE={branch-override}
           if [ "$BRANCH_OVERRIDE" != "default" ] ; then
               export OVERRIDE_ZUUL_BRANCH=$BRANCH_OVERRIDE
           fi
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
+      - link-logs
 
     publishers:
       - devstack-logs
@@ -1123,26 +971,24 @@
 
     wrappers:
       - timeout:
-          timeout: 125
+          timeout: 185
           fail: true
       - timestamps
 
     builders:
-      - link-logs
-      - net-info
       - devstack-checkout
       - shell: |
           #!/bin/bash -xe
           export PYTHONUNBUFFERED=true
-          export DEVSTACK_GATE_TIMEOUT=120
+          export DEVSTACK_GATE_TIMEOUT=180
           export DEVSTACK_GATE_TEMPEST=1
           export DEVSTACK_GATE_TEMPEST_COVERAGE=1
-          export BRANCH_OVERRIDE={branch-override}
           if [ "$BRANCH_OVERRIDE" != "default" ] ; then
               export OVERRIDE_ZUUL_BRANCH=$BRANCH_OVERRIDE
           fi
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
+      - link-logs
 
     publishers:
       - devstack-logs
@@ -1155,41 +1001,67 @@
 
     wrappers:
       - timeout:
-          timeout: 125
+          timeout: 185
           fail: true
       - timestamps
 
     builders:
-      - link-logs
-      - net-info
       - devstack-checkout
       - shell: |
           #!/bin/bash -xe
           export PYTHONUNBUFFERED=true
-          export DEVSTACK_GATE_TIMEOUT=120
+          export DEVSTACK_GATE_TIMEOUT=180
           export DEVSTACK_GATE_TEMPEST=1
           export DEVSTACK_GATE_TEMPEST_STRESS=1
-          export DEVSTACK_GATE_CLEAN_LOGS=0
-          export BRANCH_OVERRIDE={branch-override}
           if [ "$BRANCH_OVERRIDE" != "default" ] ; then
               export OVERRIDE_ZUUL_BRANCH=$BRANCH_OVERRIDE
           fi
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
+      - link-logs
 
     publishers:
       - devstack-logs
       - console-log
 
 
+- job-template:
+    name: '{pipeline}-tempest-dsvm-trove-full{branch-designator}'
+    node: '{node}'
+
+    wrappers:
+      - timeout:
+          timeout: 95
+          fail: true
+      - timestamps
+
+    builders:
+      - devstack-checkout
+      - shell: |
+          #!/bin/bash -xe
+          export PYTHONUNBUFFERED=true
+          export DEVSTACK_GATE_TIMEOUT=90
+          export DEVSTACK_GATE_TEMPEST=1
+          export DEVSTACK_GATE_TEMPEST_FULL=1
+          export DEVSTACK_GATE_TROVE=1
+          export BRANCH_OVERRIDE={branch-override}
+          if [ "$BRANCH_OVERRIDE" != "default" ] ; then
+              export OVERRIDE_ZUUL_BRANCH=$BRANCH_OVERRIDE
+          fi
+          cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
+          ./safe-devstack-vm-gate-wrap.sh
+      - link-logs
+
+    publishers:
+      - devstack-logs
+
 - job:
     name: gate-devstack-gate-unittests
     node: bare-precise
 
     builders:
-      - revoke-sudo
       - gerrit-git-prep
-      - shell: "./run-tests.sh"
+      - shell: "./test-functions.sh"
 
     publishers:
       - console-log
@@ -1207,34 +1079,35 @@
     name: devstack-jobs
     jobs:
       - '{pipeline}-tempest-dsvm-full{branch-designator}'
-      - '{pipeline}-tempest-master-dsvm-full{branch-designator}'
       - '{pipeline}-tempest-dsvm-neutron{branch-designator}'
-      - '{pipeline}-tempest-master-dsvm-neutron{branch-designator}'
       - '{pipeline}-tempest-dsvm-neutron-pg{branch-designator}'
+      - '{pipeline}-tempest-dsvm-neutron-isolated{branch-designator}'
       - '{pipeline}-tempest-dsvm-neutron-isolated-parallel{branch-designator}'
+      - '{pipeline}-tempest-dsvm-neutron-pg-isolated{branch-designator}'
       - '{pipeline}-tempest-dsvm-neutron-full{branch-designator}'
       - '{pipeline}-devstack-dsvm-cells{branch-designator}'
       - '{pipeline}-tempest-dsvm-cells{branch-designator}'
       - '{pipeline}-tempest-dsvm-cells-full{branch-designator}'
       - '{pipeline}-tempest-dsvm-large-ops{branch-designator}'
-      - '{pipeline}-tempest-dsvm-large-ops-testing{branch-designator}'
       - '{pipeline}-tempest-dsvm-neutron-large-ops{branch-designator}'
+      - '{pipeline}-tempest-dsvm-postgres{branch-designator}'
       - '{pipeline}-tempest-dsvm-postgres-full{branch-designator}'
       - '{pipeline}-tempest-dsvm-neutron-heat-slow{branch-designator}'
       - '{pipeline}-tempest-dsvm-postgres-zeromq-full{branch-designator}'
-      - '{pipeline}-grenade-dsvm{branch-designator}'
-      - '{pipeline}-grenade-dsvm-forward{branch-designator}'
-      - '{pipeline}-grenade-dsvm-neutron{branch-designator}'
-      - '{pipeline}-grenade-dsvm-neutron-forward{branch-designator}'
-      - '{pipeline}-grenade-dsvm-partial-ncpu{branch-designator}'
+      - '{pipeline}-grenade-dsvm'
+      - '{pipeline}-grenade-dsvm-forward'
+      - '{pipeline}-grenade-dsvm-neutron'
+      - '{pipeline}-grenade-dsvm-neutron-forward'
+      - '{pipeline}-grenade-dsvm-partial-ncpu'
+      - '{pipeline}-tempest-dsvm-savanna-full{branch-designator}'
+      - '{pipeline}-tempest-dsvm-savanna-postgres{branch-designator}'
+      - '{pipeline}-tempest-dsvm-savanna-neutron{branch-designator}'
+      - '{pipeline}-devstack-dsvm-neutron{branch-designator}'
       - '{pipeline}-tempest-dsvm-ironic{branch-designator}'
       - '{pipeline}-tempest-dsvm-ironic-postgres{branch-designator}'
-      - '{pipeline}-tempest-dsvm-virtual-ironic{branch-designator}'
       - '{pipeline}-tempest-dsvm-marconi{branch-designator}'
       - '{pipeline}-tempest-dsvm-all{branch-designator}'
       - '{pipeline}-tempest-dsvm-coverage{branch-designator}'
       - '{pipeline}-tempest-dsvm-stress{branch-designator}'
+      - '{pipeline}-tempest-dsvm-trove-full{branch-designator}'
       - '{pipeline}-tempest-dsvm-full-non-isolated{branch-designator}'
-      - '{pipeline}-tempest-dsvm-neutron-full-non-isolated{branch-designator}'
-      - '{pipeline}-tempest-dsvm-keystonev3-full{branch-designator}'
-      - '{pipeline}-tempest-dsvm-neutron-keystonev3-full{branch-designator}'

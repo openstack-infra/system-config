@@ -3,6 +3,12 @@
 GERRIT_SITE=$1
 GIT_ORIGIN=$2
 
+# TODO(jeblair): Remove once the arg list is changed in jjb macros
+if [ ! -z $3 ]
+then
+    GIT_ORIGIN=$3
+fi
+
 if [ -z "$GERRIT_SITE" ]
 then
   echo "The gerrit site name (eg 'https://review.openstack.org') must be the first argument."
@@ -24,16 +30,8 @@ fi
 
 if [ -z "$ZUUL_REF" ]
 then
-    if [ -n "$BRANCH" ]
-    then
-        echo "No ZUUL_REF so using requested branch $BRANCH from origin."
-        ZUUL_REF=$BRANCH
-        # use the origin since zuul mergers have outdated branches
-        ZUUL_URL=$GIT_ORIGIN
-    else
-        echo "Provide either ZUUL_REF or BRANCH in the calling enviromnent."
-        exit 1
-    fi
+    echo "This job may only be triggered by Zuul."
+    exit 1
 fi
 
 if [ ! -z "$ZUUL_CHANGE" ]
@@ -69,24 +67,22 @@ if ! git clean -x -f -d -q ; then
     git clean -x -f -d -q
 fi
 
-if echo "$ZUUL_REF" | grep -q ^refs/tags/
-then
-    git fetch --tags $ZUUL_URL/$ZUUL_PROJECT $ZUUL_REF
-    git checkout $ZUUL_REF
-    git reset --hard $ZUUL_REF
-elif [ -z "$ZUUL_NEWREV" ]
+if [ -z "$ZUUL_NEWREV" ]
 then
     git fetch $ZUUL_URL/$ZUUL_PROJECT $ZUUL_REF
     git checkout FETCH_HEAD
     git reset --hard FETCH_HEAD
+    if ! git clean -x -f -d -q ; then
+        sleep 1
+        git clean -x -f -d -q
+    fi
 else
     git checkout $ZUUL_NEWREV
     git reset --hard $ZUUL_NEWREV
-fi
-
-if ! git clean -x -f -d -q ; then
-    sleep 1
-    git clean -x -f -d -q
+    if ! git clean -x -f -d -q ; then
+        sleep 1
+        git clean -x -f -d -q
+    fi
 fi
 
 if [ -f .gitmodules ]

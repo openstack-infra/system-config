@@ -16,6 +16,7 @@ class jenkins::slave(
   if ($user == true) {
     class { 'jenkins::jenkinsuser':
       ensure  => present,
+      sudo    => $sudo,
       ssh_key => $ssh_key,
     }
   }
@@ -27,7 +28,6 @@ class jenkins::slave(
     $::jenkins::params::jdk_package, # jdk for building java jobs
     $::jenkins::params::ccache_package,
     $::jenkins::params::python_netaddr_package, # Needed for devstack address_in_net()
-    $::jenkins::params::haveged_package, # entropy is useful to have
   ]
 
   # Packages that most jenkins slaves (eg, unit test runners) need
@@ -39,12 +39,10 @@ class jenkins::slave(
     $::jenkins::params::docbook_xml_package, # for building openstack docs
     $::jenkins::params::docbook5_xml_package, # for building openstack docs
     $::jenkins::params::docbook5_xsl_package, # for building openstack docs
-    $::jenkins::params::gettext_package, # for msgfmt, used in translating manuals
     $::jenkins::params::gnome_doc_package, # for generating translation files for docs
     $::jenkins::params::graphviz_package, # for generating graphs in docs
     $::jenkins::params::firefox_package, # for selenium tests
     $::jenkins::params::mod_wsgi_package,
-    $::jenkins::params::language_fonts_packages,
     $::jenkins::params::libcurl_dev_package,
     $::jenkins::params::ldap_dev_package,
     $::jenkins::params::librrd_dev_package, # for python-rrdtool, used by kwapi
@@ -168,15 +166,6 @@ class jenkins::slave(
   }
 
   if ($bare == false) {
-    # pin to a release of rake which works with ruby 1.8.x
-    # before PSH tries to pull in a newer one which isn't
-    package { 'rake':
-      ensure   => '10.1.1',
-      provider => gem,
-      before   => Package['puppetlabs_spec_helper'],
-      require  => Package['rubygems'],
-    }
-
     $gem_packages = [
       'bundler',
       'puppet-lint',
@@ -390,25 +379,6 @@ class jenkins::slave(
       refreshonly => true,
       subscribe   => Postgresql::Server::Db['openstack_citest'],
     }
-
-    postgresql::server::db { 'openstack_baremetal_citest':
-      user     => 'openstack_citest',
-      password => postgresql_password('openstack_citest', 'openstack_citest'),
-      grant    => 'all',
-      require  => [
-        Class['postgresql::server'],
-        Postgresql::Server::Role['openstack_citest'],
-      ],
-    }
-
-    # Alter the new database giving the test DB user ownership of the DB.
-    # This is necessary to make the nova unittests run properly.
-    postgresql_psql { 'ALTER DATABASE openstack_baremetal_citest OWNER TO
-                       openstack_citest':
-      db          => 'postgres',
-      refreshonly => true,
-      subscribe   => Postgresql::Server::Db['openstack_baremetal_citest'],
-    }
   }
 
   file { '/usr/local/jenkins':
@@ -428,16 +398,6 @@ class jenkins::slave(
     force   => true,
     require => File['/usr/local/jenkins'],
     source  => 'puppet:///modules/jenkins/slave_scripts',
-  }
-
-  if ($sudo == true) {
-    file { '/etc/sudoers.d/jenkins-sudo':
-      ensure => present,
-      source => 'puppet:///modules/jenkins/jenkins-sudo.sudo',
-      owner  => 'root',
-      group  => 'root',
-      mode   => '0440',
-    }
   }
 
   file { '/etc/sudoers.d/jenkins-sudo-grep':

@@ -57,15 +57,6 @@ class openstack_project::lists(
     mailserver  => $listdomain,
   }
 
-  maillist { 'openstack-ir':
-    ensure      => present,
-    admin       => 'Roozbeh.Shafiee@Gmail.Com',
-    password    => $listpassword,
-    description => 'OpenStack IRAN Community Discussions in Persian/Farsi',
-    webserver   => $listdomain,
-    mailserver  => $listdomain,
-  }
-
   maillist { 'openstack-it':
     ensure      => present,
     admin       => 'stefano@openstack.org',
@@ -156,14 +147,4 @@ class openstack_project::lists(
     webserver   => $listdomain,
     mailserver  => $listdomain,
   }
-
-  maillist { 'openstack-content':
-    ensure      => present,
-    admin       => 'margie@openstack.org',
-    password    => $listpassword,
-    description => 'Discussions of the OpenStack Content team',
-    webserver   => $listdomain,
-    mailserver  => $listdomain,
-  }
-
 }

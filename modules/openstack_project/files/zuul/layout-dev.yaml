@@ -125,22 +125,22 @@ jobs:
 projects:
   - name: gtest-org/gtest
     check:
-      - noop
+      - gate-noop
     gate:
-      - noop
+      - gate-noop
     post:
-      - noop
+      - gate-noop
     tag:
-      - noop
+      - gate-noop
     pre-release:
-      - noop
+      - gate-noop
     release:
-      - noop
+      - gate-noop
     silent:
-      - noop
+      - gate-noop
     experimental:
-      - noop
+      - gate-noop
 
   - name: gtest-org/gtest2
     periodic:
-      - noop
+      - gate-noop

@@ -10,7 +10,6 @@ class jenkins::params {
       $jdk_package = 'java-1.7.0-openjdk-devel'
       $ccache_package = 'ccache'
       $python_netaddr_package = 'python-netaddr'
-      $haveged_package = 'haveged'
       # packages needed by slaves
       $ant_package = 'ant'
       $awk_package = 'gawk'
@@ -28,8 +27,6 @@ class jenkins::params {
       # packages needed by document translation
       $gnome_doc_package = 'gnome-doc-utils'
       $libtidy_package = 'libtidy'
-      $gettext_package = 'gettext'
-      $language_fonts_packages = []
       # for keystone ldap auth integration
       $libsasl_dev = 'cyrus-sasl-devel'
       $nspr_dev_package = 'nspr-devel'
@@ -96,7 +93,6 @@ class jenkins::params {
       $jdk_package = 'openjdk-7-jdk'
       $ccache_package = 'ccache'
       $python_netaddr_package = 'python-netaddr'
-      $haveged_package = 'haveged'
       # packages needed by slaves
       $ant_package = 'ant'
       $awk_package = 'gawk'
@@ -114,8 +110,6 @@ class jenkins::params {
       # packages needed by document translation
       $gnome_doc_package = 'gnome-doc-utils'
       $libtidy_package = 'libtidy-0.99-0'
-      $gettext_package = 'gettext'
-      $language_fonts_packages = ['fonts-takao', 'fonts-nanum']
       # for keystone ldap auth integration
       $libsasl_dev = 'libsasl2-dev'
       $mysql_dev_package = 'libmysqlclient-dev'

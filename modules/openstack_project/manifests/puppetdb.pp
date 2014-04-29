@@ -2,7 +2,6 @@
 #
 class openstack_project::puppetdb (
   $sysadmins = [],
-  $puppetboard = true,
 ) {
 
   # The puppetlabs postgres module does not manage the postgres user
@@ -20,14 +19,8 @@ class openstack_project::puppetdb (
     system => true,
   }
 
-  if $puppetboard {
-    $open_ports = [8081, 80]
-  } else {
-    $open_ports = [8081]
-  }
-
   class { 'openstack_project::server':
-    iptables_public_tcp_ports => $open_ports,
+    iptables_public_tcp_ports => [8081],
     sysadmins                 => $sysadmins,
   }
 
@@ -41,10 +34,6 @@ class openstack_project::puppetdb (
     ssl_listen_address => '0.0.0.0', # works for ipv6 too
     require            => [ User['postgres'],
       Class['puppetdb::database::postgresql'],],
-  }
-
-  if $puppetboard {
-    class { 'openstack_project::puppetboard': }
   }
 
 }

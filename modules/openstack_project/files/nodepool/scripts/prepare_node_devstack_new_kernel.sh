@@ -23,4 +23,5 @@ BARE='true'
 ./prepare_node.sh "$HOSTNAME" "$SUDO" "$BARE"
 sudo -u jenkins -i /opt/nodepool-scripts/prepare_devstack_new_kernel.sh $HOSTNAME
 
-./restrict_memory.sh
+sync
+sleep 5

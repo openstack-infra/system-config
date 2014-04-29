@@ -3,7 +3,6 @@
     node: bare-precise
 
     builders:
-      - revoke-sudo
       - gerrit-git-prep
       - docs:
           github-org: '{github-org}'
@@ -21,9 +20,9 @@
 
 - job-template:
     name: '{name}-merge-release-tags'
+    concurrent: false
 
     builders:
-      - revoke-sudo
       - gerrit-git-prep
       - shell: |
           #!/bin/bash -xe

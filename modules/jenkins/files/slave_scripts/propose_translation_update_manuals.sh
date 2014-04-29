@@ -17,24 +17,20 @@
 # The script is to pull the translations from Transifex,
 # and push to Gerrit.
 
-PROJECT=$1
-
+PROJECT="openstack-manuals"
 DocFolder="doc"
-if [ $PROJECT = "api-site" ] ; then
-    DocFolder="./"
-fi
 
 COMMIT_MSG="Imported Translations from Transifex"
 
-git config user.name "OpenStack Proposal Bot"
-git config user.email "openstack-infra@lists.openstack.org"
-git config gitreview.username "proposal-bot"
+git config user.name "OpenStack Jenkins"
+git config user.email "jenkins@openstack.org"
+git config gitreview.username "jenkins"
 
 git review -s
 
 # See if there is an open change in the transifex/translations topic
 # If so, get the change id for the existing change for use in the commit msg.
-change_info=`ssh -p 29418 proposal-bot@review.openstack.org gerrit query --current-patch-set status:open project:openstack/$PROJECT topic:transifex/translations owner:proposal-bot`
+change_info=`ssh -p 29418 review.openstack.org gerrit query --current-patch-set status:open project:openstack/$PROJECT topic:transifex/translations owner:jenkins`
 previous=`echo "$change_info" | grep "^  number:" | awk '{print $2}'`
 if [ "x${previous}" != "x" ] ; then
     change_id=`echo "$change_info" | grep "^change" | awk '{print $2}'`
@@ -50,12 +46,11 @@ EOF
     set -e
 fi
 
-# Initialize the transifex client, if there's no .tx directory
-if [ ! -d .tx ] ; then
-    tx init --host=https://www.transifex.com
-fi
+# no need to initialize transifex client
+# because there is an existing .tx folder in openstack-manuals
+# tx init --host=https://www.transifex.com
 
-# Generate pot one by one
+# generate pot one by one
 for FILE in ${DocFolder}/*
 do
     DOCNAME=${FILE#${DocFolder}/}
@@ -82,8 +77,14 @@ do
     fi
 done
 
+if [ ! `git diff --cached --quiet HEAD --` ]
+then
+    # Push .pot changes to transifex
+    tx --debug --traceback push -s
+fi
+
 # Pull all upstream translations
-tx pull -a -f
+tx pull -a
 
 for FILE in ${DocFolder}/*
 do
@@ -94,20 +95,9 @@ do
     fi
 done
 
-# Don't send files where the only things which have changed are the
-# creation date, the version number, the revision date, or comment
-# lines.
-for f in `git diff --cached --name-only`
-do
-  if [ `git diff --cached $f |egrep -v "(POT-Creation-Date|Project-Id-Version|PO-Revision-Date|^\+{3}|^\-{3}|^[-+]#)" | egrep -c "^[\-\+]"` -eq 0 ]
-  then
-      git reset -q $f
-      git checkout -- $f
-  fi
-done
-
-# Don't send a review if nothing has changed.
-if [ `git diff --cached |wc -l` -gt 0 ]
+# Don't send a review if the only things which have changed are the creation
+# date or comments.
+if [ `git diff --cached | egrep -v "(POT-Creation-Date|^[\+\-]#|^\+{3}|^\-{3})" | egrep -c "^[\-\+]"` -gt 0 ]
 then
     # Commit and review
     git commit -F- <<EOF

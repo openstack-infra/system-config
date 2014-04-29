@@ -41,9 +41,6 @@ if cat /etc/*release | grep -e "Fedora" &> /dev/null; then
     mkdir -p /etc/puppet/modules/
     ln -s /usr/local/share/gems/gems/hiera-puppet-* /etc/puppet/modules/
 
-    # Puppet is expecting the command to be pip-python on Fedora
-    ln -s /usr/bin/pip /usr/bin/pip-python
-
 elif cat /etc/*release | grep -e "CentOS" -e "Red Hat" &> /dev/null; then
     rpm -qi epel-release &> /dev/null || rpm -Uvh http://download.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm
     rpm -ivh http://yum.puppetlabs.com/el/6/products/x86_64/puppetlabs-release-6-6.noarch.rpm
@@ -55,7 +52,7 @@ baseurl=http://yum.puppetlabs.com/el/6/products/$basearch
 gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-puppetlabs
 enabled=1
 gpgcheck=1
-exclude=puppet-2.8* puppet-2.9* puppet-3* facter-2*
+exclude=puppet-2.8* puppet-2.9* puppet-3*
 EOF
 
     yum update -y
@@ -70,10 +67,6 @@ else
     cat > /etc/apt/preferences.d/00-puppet.pref <<EOF
 Package: puppet puppet-common puppetmaster puppetmaster-common puppetmaster-passenger
 Pin: version 2.7*
-Pin-Priority: 501
-
-Package: facter
-Pin: version 1.*
 Pin-Priority: 501
 EOF
 

@@ -10,7 +10,6 @@
       - timestamps
 
     prebuilders:
-      - revoke-sudo
       - gerrit-git-prep
       - gerrit-preclean
 
@@ -44,7 +43,6 @@
       - timestamps
 
     prebuilders:
-      - revoke-sudo
       - gerrit-git-prep
       - gerrit-preclean
 
@@ -73,7 +71,6 @@
       - timestamps
 
     prebuilders:
-      - revoke-sudo
       - gerrit-git-prep
       - gerrit-preclean
 
@@ -105,25 +102,23 @@
       - timestamps
 
     builders:
-      - revoke-sudo
       - shell: |
           #!/bin/bash -xe
           mkdir -p gerrit
           cd gerrit
-          /usr/local/jenkins/slave_scripts/gerrit-git-prep.sh https://review.openstack.org git://git.openstack.org
+          /usr/local/jenkins/slave_scripts/gerrit-git-prep.sh https://review.openstack.org http://zuul.openstack.org git://git.openstack.org
       - shell: |
           #!/bin/bash -xe
           cd gerrit
-          /usr/local/jenkins/slave_scripts/version-properties.sh
+          /usr/local/jenkins/slave_scripts/maven-properties.sh
       - inject:
-          properties-file: gerrit/version.properties
+          properties-file: gerrit/maven.properties
       - install-buck
       - shell: |
           #!/bin/bash -xe
           export PATH=`pwd`/buck/bin:$PATH
           cd gerrit
           buck clean
-          buck test --all --exclude slow
           buck build release
       - shell: "cp gerrit/buck-out/gen/release.war gerrit/buck-out/gen/gerrit-$PROJECT_VER.war"
 
@@ -145,25 +140,23 @@
       - timestamps
 
     builders:
-      - revoke-sudo
       - shell: |
           #!/bin/bash -xe
           mkdir -p gerrit
           cd gerrit
-          /usr/local/jenkins/slave_scripts/gerrit-git-prep.sh https://review.openstack.org git://git.openstack.org
+          /usr/local/jenkins/slave_scripts/gerrit-git-prep.sh https://review.openstack.org http://zuul.openstack.org git://git.openstack.org
       - shell: |
           #!/bin/bash -xe
           cd gerrit
-          /usr/local/jenkins/slave_scripts/version-properties.sh
+          /usr/local/jenkins/slave_scripts/maven-properties.sh
       - inject:
-          properties-file: gerrit/version.properties
+          properties-file: gerrit/maven.properties
       - install-buck
       - shell: |
           #!/bin/bash -xe
           export PATH=`pwd`/buck/bin:$PATH
           cd gerrit
           buck clean
-          buck test --all --exclude slow
           buck build release
       - shell: "cp gerrit/buck-out/gen/release.war gerrit/buck-out/gen/gerrit-$PROJECT_VER.war"
 
@@ -181,25 +174,23 @@
       - timestamps
 
     builders:
-      - revoke-sudo
       - shell: |
           #!/bin/bash -xe
           mkdir -p gerrit
           cd gerrit
-          /usr/local/jenkins/slave_scripts/gerrit-git-prep.sh https://review.openstack.org git://git.openstack.org
+          /usr/local/jenkins/slave_scripts/gerrit-git-prep.sh https://review.openstack.org http://zuul.openstack.org git://git.openstack.org
       - shell: |
           #!/bin/bash -xe
           cd gerrit
-          /usr/local/jenkins/slave_scripts/version-properties.sh
+          /usr/local/jenkins/slave_scripts/maven-properties.sh
       - inject:
-          properties-file: gerrit/version.properties
+          properties-file: gerrit/maven.properties
       - install-buck
       - shell: |
           #!/bin/bash -xe
           export PATH=`pwd`/buck/bin:$PATH
           cd gerrit
           buck clean
-          buck test --all --exclude slow
           buck build release
       - shell: "cp gerrit/buck-out/gen/release.war gerrit/buck-out/gen/gerrit-$PROJECT_VER.war"
 

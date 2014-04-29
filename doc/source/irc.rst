@@ -32,26 +32,6 @@ At a Glance
 :Bugs:
   * http://bugs.launchpad.net/openstack-ci
 
-Channel Requirements
-====================
-
-In general, discussion for OpenStack projects is preferred in #openstack-dev,
-but there are many reasons why a team would like to have their own channel.
-
-Access
-------
-
-Register the channel with ChanServ and give the infrastructure team account
-founder access to the channel with::
-
-  /msg chanserv access #channel add openstackinfra +AFRfiorstv
-
-This is good practice project-wide to make sure we keep channels under
-control and is a requirement if you want any of the project bots in
-your channel.
-
-Join #openstack-infra if you have any trouble with any of these commands.
-
 Meetbot
 =======
 
@@ -183,3 +163,7 @@ Gerritbot's configuration is in
 Teams can add their channel and go through the standard code review process to
 get the bot added to their channel. The configuration is organized by channel,
 with each project that a channel is interested in listed under the channel.
+
+Please also add the openstackinfra account as a channel founder:
+
+/msg chanserv access #channel add openstackinfra +AFRfiorstv

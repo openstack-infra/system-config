@@ -12,8 +12,6 @@ class openstack_project::eavesdrop (
   $statusbot_wiki_password = '',
   $statusbot_wiki_url = '',
   $statusbot_wiki_pageid = '',
-  $accessbot_nick = '',
-  $accessbot_password = '',
 ) {
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [80],
@@ -37,7 +35,6 @@ class openstack_project::eavesdrop (
     vhost_extra => $vhost_extra,
     channels    => [
         '#heat',
-        '#magnetodb',
         '#murano',
         '#openstack',
         '#openstack-ceilometer',
@@ -52,13 +49,11 @@ class openstack_project::eavesdrop (
         '#openstack-meeting-alt',
         '#openstack-meeting-3',
         '#openstack-neutron',
-        '#openstack-oslo',
         '#openstack-qa',
         '#openstack-relmgr-office',
-        '#openstack-sahara',
-        '#openstack-sdks',
         '#openstack-swift',
         '#openstack-trove',
+        '#savanna',
         '#storyboard',
         '#tripleo',
     ],
@@ -84,12 +79,5 @@ class openstack_project::eavesdrop (
 
   a2mod { 'headers':
     ensure => present,
-  }
-
-  class { 'accessbot':
-    nick          => $accessbot_nick,
-    password      => $accessbot_password,
-    server        => $statusbot_server,
-    channel_file  => 'puppet:///modules/openstack_project/accessbot/channels.yaml',
   }
 }

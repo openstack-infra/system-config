@@ -64,3 +64,23 @@ run to configure DNS for a newly launched server.  To see the commands
 for an existing server, run:
 
   ./dns.py $FQDN
+
+Activate Puppet Agent
+=====================
+
+If this is a Jenkins slave, Puppet configuration is applied through
+an already installed cron job, so you can ignore this section. If
+this is ''not'' a Jenkins slave, you'll want to log into it via SSH
+and turn on the Puppet agent so it will start checking into the
+master on its own. on Debian/Ubuntu::
+
+  sudo sed -i 's/^START=.*/START=yes/' /etc/default/puppet
+  sudo su -c 'invoke-rc.d puppet start'
+
+...or on CentOS/Fedora/RHEL::
+
+  sudo chkconfig puppet on
+  sudo su -c 'service puppet start'
+
+You should be able to tell from the Puppet Dashboard when it begins
+to check in, which normally happens at 10-minute intervals.

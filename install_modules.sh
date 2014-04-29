@@ -13,10 +13,6 @@ function remove_module {
 
 # Array of modules to be installed key:value is module:version.
 declare -A MODULES
-
-# These modules will be installed without dependency resolution
-declare -A  NONDEP_MODULES
-
 #NOTE: if we previously installed kickstandproject-ntp we nuke it here
 # since puppetlabs-ntp and kickstandproject-ntp install to the same dir
 if grep kickstandproject-ntp /etc/puppet/modules/ntp/Modulefile &> /dev/null; then
@@ -27,6 +23,8 @@ remove_module "gearman" #remove old saz-gearman
 remove_module "limits" # remove saz-limits (required by saz-gearman)
 
 MODULES["puppetlabs-ntp"]="0.2.0"
+
+MODULES["openstackci-dashboard"]="0.0.8"
 
 # freenode #puppet 2012-09-25:
 # 18:25 < jeblair> i would like to use some code that someone wrote,
@@ -52,9 +50,6 @@ MODULES["rafaelfc-pear"]="1.0.3"
 MODULES["puppetlabs-inifile"]="1.0.0"
 MODULES["puppetlabs-firewall"]="0.0.4"
 MODULES["puppetlabs-puppetdb"]="3.0.1"
-MODULES["stankevich-python"]="1.6.6"
-
-NONDEP_MODULES["nibalizer-puppetboard"]="2.3.0"
 
 MODULE_LIST=`puppet module list`
 
@@ -64,7 +59,6 @@ then
     rm -rf /etc/puppet/modules/vcsrepo
 fi
 
-# Install all the modules
 for MOD in ${!MODULES[*]} ; do
   # If the module at the current version does not exist upgrade or install it.
   if ! echo $MODULE_LIST | grep "$MOD ([^v]*v${MODULES[$MOD]}" >/dev/null 2>&1
@@ -74,24 +68,6 @@ for MOD in ${!MODULES[*]} ; do
     then
       # This will get run in cron, so silence non-error output
       puppet module install $MOD --version ${MODULES[$MOD]} >/dev/null
-    fi
-  fi
-done
-
-MODULE_LIST=`puppet module list`
-
-# Make a second pass, installing all modules without their dependencies
-for MOD in ${!NONDEP_MODULES[*]} ; do
-  # If the module at the current version does not exist upgrade or install it.
-  if ! echo $MODULE_LIST | grep "$MOD ([^v]*v${NONDEP_MODULES[$MOD]}" >/dev/null 2>&1
-  then
-    # Attempt module upgrade. If that fails try installing the module.
-    if ! puppet module upgrade $MOD --ignore-dependencies --version \
-         ${NONDEP_MODULES[$MOD]} >/dev/null 2>&1
-    then
-      # This will get run in cron, so silence non-error output
-      puppet module install $MOD --ignore-dependencies --version \
-      ${NONDEP_MODULES[$MOD]} >/dev/null 2>&1
     fi
   fi
 done

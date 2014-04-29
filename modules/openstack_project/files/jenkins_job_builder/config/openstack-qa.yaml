@@ -5,7 +5,6 @@
     node: bare-precise
 
     builders:
-      - revoke-sudo
       - gerrit-git-prep
       - shell: |
           export HUDSON_PUBLISH_DOCS=1

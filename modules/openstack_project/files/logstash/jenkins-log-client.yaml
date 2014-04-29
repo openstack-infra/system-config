@@ -15,28 +15,21 @@ zmq-publishers:
 source-files:
   - name: console.html
     retry-get: True
-    tags:
-      - console
   - name: logs/devstack-gate-cleanup-host.txt
     tags:
-      - console
       - console.html
   - name: logs/devstack-gate-setup-host.txt
     tags:
-      - console
       - console.html
   - name: logs/devstack-gate-setup-workspace-new.txt
     tags:
-      - console
       - console.html
   - name: logs/devstack-gate-setup-workspace-old.txt
     tags:
-      - console
       - console.html
     job-filter: '.*grenade.*'
   - name: logs/devstacklog.txt
     tags:
-      - console
       - console.html
   - name: logs/screen-c-api.txt
     tags:
@@ -90,10 +83,6 @@ source-files:
     tags:
       - screen
       - oslofmt
-  - name: logs/screen-n-api-meta.txt
-    tags:
-      - screen
-      - oslofmt
   - name: logs/screen-n-cond.txt
     tags:
       - screen
@@ -130,23 +119,11 @@ source-files:
     tags:
       - screen
       - oslofmt
-  - name: logs/screen-q-lbaas.txt
-    tags:
-      - screen
-      - oslofmt
   - name: logs/screen-q-meta.txt
     tags:
       - screen
       - oslofmt
-  - name: logs/screen-q-metering.txt
-    tags:
-      - screen
-      - oslofmt
   - name: logs/screen-q-svc.txt
-    tags:
-      - screen
-      - oslofmt
-  - name: logs/screen-q-vpn.txt
     tags:
       - screen
       - oslofmt
@@ -162,13 +139,10 @@ source-files:
     tags:
       - screen
       - apachecombined
-  - name: logs/screen-sahara.txt
+  - name: logs/screen-savanna.txt
     tags:
       - screen
       - oslofmt
-  - name: logs/horizon_error.txt
-    tags:
-      - apacheerror
 # TODO(clarkb) Add swift proxy logs here.
   - name: logs/syslog.txt
     tags:
@@ -205,10 +179,6 @@ source-files:
       - keystonefmt
     job-filter: '.*grenade.*'
   - name: logs/new/screen-n-api.txt
-    tags:
-      - screen
-      - oslofmt
-  - name: logs/new/screen-n-api-meta.txt
     tags:
       - screen
       - oslofmt
@@ -288,10 +258,6 @@ source-files:
     tags:
       - screen
       - oslofmt
-  - name: logs/old/screen-n-api-meta.txt
-    tags:
-      - screen
-      - oslofmt
     job-filter: '.*grenade.*'
   - name: logs/old/screen-n-cond.txt
     tags:
@@ -333,3 +299,6 @@ source-files:
       - screen
       - apachecombined
     job-filter: '.*grenade.*'
+  - name: logs/libvirtd.txt
+    tags:
+      - libvirtd

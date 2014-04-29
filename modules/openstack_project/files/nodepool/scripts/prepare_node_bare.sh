@@ -17,7 +17,7 @@
 # limitations under the License.
 
 HOSTNAME=$1
-SUDO='true'
+SUDO='false'
 BARE='false'
 PYTHON3='false'
 PYPY='false'
@@ -25,4 +25,5 @@ ALL_MYSQL_PRIVS='true'
 
 ./prepare_node.sh "$HOSTNAME" "$SUDO" "$BARE" "$PYTHON3" "$PYPY" "$ALL_MYSQL_PRIVS"
 
-./restrict_memory.sh
+sync
+sleep 5

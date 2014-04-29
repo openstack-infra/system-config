@@ -26,10 +26,8 @@ fi
 git config user.name "OpenStack Jenkins"
 git config user.email "jenkins@openstack.org"
 
-# Initialize the transifex client, if there's no .tx directory
-if [ ! -d .tx ] ; then
-    tx init --host=https://www.transifex.com
-fi
+# initialize transifex client
+tx init --host=https://www.transifex.com
 # Horizon JavaScript Translations
 tx set --auto-local -r ${PROJECT}.${PROJECT}-js-translations \
 "${PROJECT}/locale/<lang>/LC_MESSAGES/djangojs.po" --source-lang en \
@@ -45,13 +43,13 @@ tx set --auto-local -r ${PROJECT}.openstack-dashboard-translations \
 
 # Invoke run_tests.sh to update the po files
 # Or else, "../manage.py makemessages" can be used.
-./run_tests.sh --makemessages -V
+./run_tests.sh --makemessages
 
 # Add all changed files to git
 git add ${PROJECT}/locale/en/LC_MESSAGES/*
 git add openstack_dashboard/locale/en/LC_MESSAGES/*
 
-if [ `git diff --cached | egrep -v "(POT-Creation-Date|^[\+\-]#|^\+{3}|^\-{3})" | egrep -c "^[\-\+]"` -gt 0 ]
+if [ `git diff --cached | egrep -v "(POT-Creation-Date|^[\+\-]#|^\+{3}|^\-{3})" | egrep -c "^[\-\+]"` -gt 0 ] ]
 then
     # Push source file changes to transifex
     tx --debug --traceback push -s

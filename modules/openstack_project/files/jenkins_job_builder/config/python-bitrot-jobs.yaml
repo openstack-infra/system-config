@@ -8,9 +8,6 @@
       - timestamps
 
     builders:
-      - revoke-sudo
-      - branch-git-prep:
-          branch: '{branch}'
       - python26:
           github-org: '{github-org}'
           project: '{name}'
@@ -19,6 +16,12 @@
     publishers:
       - test-results
       - console-log
+
+    scm:
+      - git:
+          url: 'git://git.openstack.org/{github-org}/{name}'
+          branches:
+            - 'origin/{branch}'
 
     node: bare-centos6
 
@@ -33,9 +36,6 @@
       - timestamps
 
     builders:
-      - revoke-sudo
-      - branch-git-prep:
-          branch: '{branch}'
       - python27:
           github-org: '{github-org}'
           project: '{name}'
@@ -44,6 +44,12 @@
     publishers:
       - test-results
       - console-log
+
+    scm:
+      - git:
+          url: 'git://git.openstack.org/{github-org}/{name}'
+          branches:
+            - 'origin/{branch}'
 
     node: '{node}'
 
@@ -58,9 +64,6 @@
       - timestamps
 
     builders:
-      - revoke-sudo
-      - branch-git-prep:
-          branch: '{branch}'
       - docs:
           github-org: '{github-org}'
           project: '{name}'
@@ -68,7 +71,24 @@
     publishers:
       - console-log
 
+    scm:
+      - git:
+          url: 'git://git.openstack.org/{github-org}/{name}'
+          branches:
+            - 'origin/{branch}'
+
     node: '{node}'
+
+
+- job-group:
+    name: python-grizzly-bitrot-jobs
+    branch: 'stable/grizzly'
+    branch-name: '-grizzly'
+    node: bare-precise
+    jobs:
+      - 'periodic-{name}-python26{branch-name}'
+      - 'periodic-{name}-python27{branch-name}'
+      - 'periodic-{name}-docs{branch-name}'
 
 
 - job-group:

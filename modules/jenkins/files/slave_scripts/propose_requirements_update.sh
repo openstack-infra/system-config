@@ -14,7 +14,7 @@
 
 INITIAL_COMMIT_MSG="Updated from global requirements"
 TOPIC="openstack/requirements"
-USERNAME="proposal-bot"
+USERNAME=${USERNAME:-$USER}
 BRANCH=$ZUUL_REF
 ALL_SUCCESS=0
 
@@ -23,9 +23,9 @@ if [ -z "$BRANCH" ] ; then
     exit 1
 fi
 
-git config user.name "OpenStack Proposal Bot"
-git config user.email "openstack-infra@lists.openstack.org"
-git config gitreview.username "proposal-bot"
+git config user.name "OpenStack Jenkins"
+git config user.email "jenkins@openstack.org"
+git config gitreview.username $USERNAME
 
 for PROJECT in $(cat projects.txt); do
 
@@ -33,7 +33,7 @@ for PROJECT in $(cat projects.txt); do
     # See if there is an open change in the openstack/requirements topic
     # If so, get the change id for the existing change for use in the
     # commit msg.
-    change_info=$(ssh -p 29418 $USERNAME@review.openstack.org gerrit query --current-patch-set status:open project:$PROJECT topic:$TOPIC owner:$USERNAME branch:$BRANCH)
+    change_info=$(ssh -p 29418 review.openstack.org gerrit query --current-patch-set status:open project:$PROJECT topic:$TOPIC owner:$USERNAME branch:$BRANCH)
     previous=$(echo "$change_info" | grep "^  number:" | awk '{print $2}')
     if [ "x${previous}" != "x" ] ; then
         change_id=$(echo "$change_info" | grep "^change" | awk '{print $2}')
@@ -61,12 +61,7 @@ EOF
 
     # make sure the project even has this branch
     if git branch -a | grep -q "^  remotes/origin/$BRANCH$" ; then
-        git checkout -B ${BRANCH} -t origin/${BRANCH}
-        # Need to set the git config in each repo as we shouldn't
-        # set it globally for the Jenkins user on the slaves.
-        git config user.name "OpenStack Proposal Bot"
-        git config user.email "openstack-infra@lists.openstack.org"
-        git config gitreview.username "proposal-bot"
+        git checkout origin/${BRANCH}
         git review -s
         popd
 

@@ -16,9 +16,9 @@ TAG=$1
 
 if $(git tag --contains origin/milestone-proposed | grep "^$TAG$" >/dev/null)
 then
-    git config user.name "OpenStack Proposal Bot"
-    git config user.email "openstack-infra@lists.openstack.org"
-    git config gitreview.username "proposal-bot"
+    git config user.name "OpenStack Jenkins"
+    git config user.email "jenkins@openstack.org"
+    git config gitreview.username "jenkins"
 
     git review -s
     git checkout master
@@ -26,5 +26,5 @@ then
     git merge --no-edit -s ours $TAG
     # Get a Change-Id
     GIT_EDITOR=true git commit --amend
-    git review -R -y -t merge/release-tag
+    git review -R -t merge/release-tag
 fi

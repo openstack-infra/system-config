@@ -19,6 +19,7 @@ class openstack_project::git_backend (
   $vhost_name = $::fqdn,
   $sysadmins = [],
   $git_gerrit_ssh_key = '',
+  $git_zuul_ssh_key = '',
   $ssl_cert_file_contents = '',
   $ssl_key_file_contents = '',
   $ssl_chain_file_contents = '',
@@ -43,8 +44,7 @@ class openstack_project::git_backend (
     behind_proxy            => $behind_proxy,
   }
 
-  # We don't actually use these variables in this manifest, but jeepyb
-  # requires them to exist.
+  # We don't actually use these, but jeepyb requires them.
   $local_git_dir = '/var/lib/git'
   $ssh_project_key = ''
 
@@ -104,6 +104,7 @@ class openstack_project::git_backend (
 
   cron { 'mirror_repack':
     user        => 'cgit',
+    weekday     => '0',
     hour        => '4',
     minute      => '7',
     command     => 'find /var/lib/git/ -not -path /var/lib/git/zuul -type d -name "*.git" -print -exec git --git-dir="{}" repack -afd \; -exec git --git-dir="{}" pack-refs --all \;',
@@ -184,7 +185,12 @@ class openstack_project::git_backend (
   }
 
   file { '/home/zuul/.ssh/authorized_keys':
-    ensure => absent,
+    owner   => 'zuul',
+    group   => 'zuul',
+    mode    => '0600',
+    content => $git_zuul_ssh_key,
+    replace => true,
+    require => File['/home/zuul/.ssh']
   }
 
   cron { 'mirror_repack_zuul':

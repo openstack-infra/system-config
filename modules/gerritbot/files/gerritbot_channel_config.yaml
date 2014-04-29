@@ -7,7 +7,6 @@ openstack-infra:
       - openstack-dev/cookiecutter
       - openstack-dev/hacking
       - openstack-dev/pbr
-      - openstack-dev/specs-cookiecutter
       - openstack-infra/askbot-theme
       - openstack-infra/bugdaystats
       - openstack-infra/config
@@ -44,7 +43,6 @@ openstack-infra:
       - openstack-infra/zuul
       - openstack-infra/zuul-packaging
       - openstack/requirements
-      - stackforge/python-jenkins
     branches:
       - master
       - feature/gearman
@@ -158,25 +156,24 @@ openstack-neutron:
       - x-vrif-minus-2
     projects:
       - openstack/neutron
-      - openstack/neutron-specs
       - openstack/python-neutronclient
     branches:
       - master
 
-openstack-sahara:
+savanna:
     events:
       - patchset-created
       - change-merged
       - x-vrif-minus-2
     projects:
-      - openstack/sahara
-      - openstack/python-saharaclient
-      - openstack/sahara-dashboard
-      - openstack/sahara-extra
-      - openstack/sahara-image-elements
-      - stackforge/puppet-sahara
-      - stackforge/sahara-ci-config
-      - stackforge/sahara-guestagent
+      - openstack/savanna
+      - openstack/python-savannaclient
+      - openstack/savanna-dashboard
+      - openstack/savanna-extra
+      - openstack/savanna-image-elements
+      - stackforge/puppet-savanna
+      - stackforge/savanna-ci-config
+      - stackforge/savanna-guestagent
     branches:
       - master
       - stable/0.1
@@ -190,7 +187,6 @@ openstack-nova:
     projects:
       - openstack/gantt
       - openstack/nova
-      - openstack/nova-specs
       - openstack/python-ganttclient
       - openstack/python-novaclient
     branches:
@@ -212,7 +208,6 @@ openstack-qa:
       - change-merged
       - x-vrif-minus-2
     projects:
-      - openstack/qa-specs
       - openstack/tempest
       - openstack-dev/devstack
       - openstack-dev/grenade
@@ -255,7 +250,6 @@ openstack-chef:
       - change-merged
       - x-vrif-minus-2
     projects:
-      - stackforge/cookbook-ceph
       - stackforge/cookbook-openstack-block-storage
       - stackforge/cookbook-openstack-common
       - stackforge/cookbook-openstack-compute
@@ -263,12 +257,12 @@ openstack-chef:
       - stackforge/cookbook-openstack-identity
       - stackforge/cookbook-openstack-image
       - stackforge/cookbook-openstack-integration-test
+      - stackforge/cookbook-openstack-metering
       - stackforge/cookbook-openstack-network
       - stackforge/cookbook-openstack-object-storage
       - stackforge/cookbook-openstack-ops-database
       - stackforge/cookbook-openstack-ops-messaging
       - stackforge/cookbook-openstack-orchestration
-      - stackforge/cookbook-openstack-telemetry
       - stackforge/openstack-chef-repo
     branches:
       - master
@@ -333,7 +327,6 @@ openstack-ironic:
       - x-vrif-minus-2
     projects:
       - openstack/ironic
-      - openstack/ironic-python-agent
       - openstack/python-ironicclient
       - stackforge/pyghmi
     branches:
@@ -369,13 +362,11 @@ openstack-barbican:
       - x-vrif-minus-2
     projects:
       - stackforge/barbican
-      - stackforge/kite
       - stackforge/python-barbicanclient
-      - stackforge/python-kiteclient
     branches:
       - master
 
-fuel-tracker:
+fuel-dev:
     events:
       - patchset-created
       - change-merged
@@ -500,16 +491,6 @@ milk-dev:
     branches:
       - master
 
-pecanpy:
-    events:
-      - patchset-created
-      - change-merged
-      - x-vrif-minus-2
-    projects:
-      - stackforge/pecan
-    branches:
-      - master
-
 openstack-entropy:
     events:
       - patchset-created
@@ -552,29 +533,6 @@ syscompass:
       - stackforge/compass-adapters
       - stackforge/compass-core
       - stackforge/compass-web
-    branches:
-      - master
-
-openstack-keystone:
-    events:
-      - change-merged
-      - patchset-created
-      - x-vrif-minus-2
-    projects:
-      - openstack/keystone
-      - openstack/identity-api
-      - openstack/python-keystoneclient
-    branches:
-      - master
-
-openstack-manila:
-    events:
-      - patchset-created
-      - change-merged
-      - x-vrif-minus-2
-    projects:
-      - stackforge/manila
-      - stackforge/python-manilaclient
     branches:
       - master
 
@@ -625,7 +583,6 @@ openstack-merges:
       - openstack-dev/hacking
       - openstack-dev/pbr
       - openstack-dev/openstack-nose
-      - openstack-dev/specs-cookiecutter
       - openstack-infra/activity-board
       - openstack-infra/askbot-theme
       - openstack-infra/config
@@ -689,11 +646,11 @@ openstack-merges:
       - openstack-infra/release-tools
       - openstack/marconi
       - openstack/python-marconiclient
-      - openstack/sahara
-      - openstack/python-saharaclient
-      - openstack/sahara-dashboard
-      - openstack/sahara-extra
-      - openstack/sahara-image-elements
+      - openstack/savanna
+      - openstack/python-savannaclient
+      - openstack/savanna-dashboard
+      - openstack/savanna-extra
+      - openstack/savanna-image-elements
 
 openstack-oslo:
     events:
@@ -716,15 +673,5 @@ openstack-oslo:
       - openstack-dev/hacking
       - openstack-dev/oslo-cookiecutter
       - openstack-dev/pbr
-    branches:
-      - master
-
-openstack-satori:
-    events:
-      - patchset-created
-      - change-merged
-      - x-vrif-minus-2
-    projects:
-      - stackforge/satori
     branches:
       - master

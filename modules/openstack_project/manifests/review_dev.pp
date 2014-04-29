@@ -7,7 +7,6 @@ class openstack_project::review_dev (
   $mysql_password = '',
   $mysql_root_password = '',
   $email_private_key = '',
-  $contactstore = true,
   $contactstore_appsec = '',
   $contactstore_pubkey = '',
   $ssh_dsa_key_contents = '',
@@ -50,8 +49,8 @@ class openstack_project::review_dev (
     ssh_project_rsa_pubkey_contents => $ssh_project_rsa_pubkey_contents,
     email                           => 'review-dev@openstack.org',
     war                             =>
-      'http://tarballs.openstack.org/ci/gerrit/gerrit-v2.8.3.5.ce9b043.war',
-    contactstore                    => $contactstore,
+      'http://tarballs.openstack.org/ci/gerrit-2.4.4-14-gab7f4c1.war',
+    contactstore                    => true,
     contactstore_appsec             => $contactstore_appsec,
     contactstore_pubkey             => $contactstore_pubkey,
     contactstore_url                =>

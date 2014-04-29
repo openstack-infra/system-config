@@ -20,17 +20,10 @@ class storyboard (
   $mysql_password,
   $mysql_user,
   $projects_file,
-  $superusers_file,
-  $ssl_cert_file,
-  $ssl_key_file,
-  $ssl_chain_file,
   $storyboard_git_source_repo = 'https://git.openstack.org/openstack-infra/storyboard/',
   $storyboard_revision = 'master',
-  $storyboard_webclient_url = 'http://tarballs.openstack.org/storyboard-webclient/storyboard-webclient-latest.tar.gz',
-  $serveradmin = "webmaster@${::fqdn}",
-  $ssl_cert_file_contents = '',
-  $ssl_key_file_contents = '',
-  $ssl_chain_file_contents = ''
+  $storyboard_webclient_url = 'http://tarballs.openstack.org/storyboard-webclient/storyboard-webclient-latest.tar.gz'
+
 ) {
   include apache
   include mysql::python
@@ -101,18 +94,6 @@ class storyboard (
     ],
   }
 
-  file { '/etc/storyboard/superusers.yaml':
-    ensure  => present,
-    owner   => 'storyboard',
-    mode    => '0400',
-    source  => $superusers_file,
-    replace => true,
-    require => [
-      File['/etc/storyboard'],
-      User['storyboard'],
-    ],
-  }
-
   exec { 'migrate-storyboard-db':
     command     => 'storyboard-db-manage --config-file /etc/storyboard/storyboard.conf upgrade head',
     path        => '/usr/local/bin:/usr/bin:/bin/',
@@ -120,28 +101,6 @@ class storyboard (
     subscribe   => Exec['install-storyboard'],
     require     => [
       File['/etc/storyboard/storyboard.conf'],
-    ],
-  }
-
-  exec { 'load-projects-yaml':
-    command     => 'storyboard-db-manage --config-file /etc/storyboard/storyboard.conf load_projects /etc/storyboard/projects.yaml',
-    path        => '/usr/local/bin:/usr/bin:/bin/',
-    refreshonly => true,
-    subscribe   => File['/etc/storyboard/projects.yaml'],
-    require     => [
-      File['/etc/storyboard/projects.yaml'],
-      Exec['migrate-storyboard-db'],
-    ],
-  }
-
-  exec { 'load-superusers-yaml':
-    command     => 'storyboard-db-manage --config-file /etc/storyboard/storyboard.conf load_superusers /etc/storyboard/superusers.yaml',
-    path        => '/usr/local/bin:/usr/bin:/bin/',
-    refreshonly => true,
-    subscribe   => File['/etc/storyboard/superusers.yaml'],
-    require     => [
-      File['/etc/storyboard/superusers.yaml'],
-      Exec['migrate-storyboard-db'],
     ],
   }
 
@@ -166,12 +125,11 @@ class storyboard (
     group   => 'storyboard',
   }
 
-  # Checking last modified time versus mtime on the file
+  # Using -z here to only download when the tarball has changed.
   exec { 'get-webclient':
     command => "curl ${storyboard_webclient_url} -z ./${tarball} -o ${tarball}",
     path    => '/bin:/usr/bin',
     cwd     => '/var/lib/storyboard',
-    onlyif  => "curl -I ${storyboard_webclient_url} -z ./${tarball} | grep '200 OK'",
     require => [
       File['/var/lib/storyboard'],
       Package['curl'],
@@ -179,11 +137,10 @@ class storyboard (
   }
 
   exec { 'unpack-webclient':
-    command     => "tar -xzf ${tarball}",
-    path        => '/bin:/usr/bin',
-    cwd         => '/var/lib/storyboard',
-    refreshonly => true,
-    subscribe   => Exec['get-webclient'],
+    command => "tar -xzf ${tarball}",
+    path    => '/bin:/usr/bin',
+    cwd     => '/var/lib/storyboard',
+    require => Exec['get-webclient'],
   }
 
   file { '/var/lib/storyboard/www':
@@ -205,7 +162,6 @@ class storyboard (
     priority => '50',
     template => 'storyboard/storyboard.vhost.erb',
     require  => Package['libapache2-mod-wsgi'],
-    ssl      => true,
   }
 
   a2mod { 'proxy':
@@ -221,33 +177,4 @@ class storyboard (
     require => Package['libapache2-mod-wsgi'],
   }
 
-  if $ssl_cert_file_contents != '' {
-    file { $ssl_cert_file:
-      owner   => 'root',
-      group   => 'root',
-      mode    => '0640',
-      content => $ssl_cert_file_contents,
-      before  => Apache::Vhost[$vhost_name],
-    }
-  }
-
-  if $ssl_key_file_contents != '' {
-    file { $ssl_key_file:
-      owner   => 'root',
-      group   => 'ssl-cert',
-      mode    => '0640',
-      content => $ssl_key_file_contents,
-      before  => Apache::Vhost[$vhost_name],
-    }
-  }
-
-  if $ssl_chain_file_contents != '' {
-    file { $ssl_chain_file:
-      owner   => 'root',
-      group   => 'root',
-      mode    => '0640',
-      content => $ssl_chain_file_contents,
-      before  => Apache::Vhost[$vhost_name],
-    }
-  }
 }

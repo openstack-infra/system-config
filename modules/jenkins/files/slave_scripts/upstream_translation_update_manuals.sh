@@ -16,12 +16,7 @@
 
 # The script is to push the updated PoT to Transifex.
 
-PROJECT=$1
-
 DocFolder="doc"
-if [ $PROJECT = "api-site" ] ; then
-    DocFolder="./"
-fi
 
 if [ ! `echo $ZUUL_REFNAME | grep master` ]
 then
@@ -31,12 +26,11 @@ fi
 git config user.name "OpenStack Jenkins"
 git config user.email "jenkins@openstack.org"
 
-# Initialize the transifex client, if there's no .tx directory
-if [ ! -d .tx ] ; then
-    tx init --host=https://www.transifex.com
-fi
+# no need to initialize transifex client,
+# because there is an existing .tx folder in openstack-manuals
+# tx init --host=https://www.transifex.com
 
-# Generate pot one by one
+# generate pot one by one
 for FILE in ${DocFolder}/*
 do
     DOCNAME=${FILE#${DocFolder}/}
@@ -68,3 +62,6 @@ then
     # Push .pot changes to transifex
     tx --debug --traceback push -s
 fi
+
+
+

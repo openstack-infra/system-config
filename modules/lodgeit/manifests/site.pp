@@ -31,7 +31,7 @@ define lodgeit::site(
   if $image != '' {
     file { "/srv/lodgeit/${name}/lodgeit/static/${image}":
       ensure => present,
-      source => "puppet:///modules/lodgeit/${image}",
+      source => "puppet:///lodgeit/${image}",
     }
   }
 

@@ -50,7 +50,7 @@ site.pp
 
 This file lists the specific servers you are running. Minimally you need a
 ci-puppetmaster, gerrit (review), jenkins (secure jobs such as making
-releases), jenkins01 (untrusted jobs from any code author), puppetboard,
+releases), jenkins01 (untrusted jobs from any code author), puppet-dashboard,
 nodepool, zuul, and then one or more slaves with appropriate distro choices.
 
 A minimal site.pp can be useful to start with to get up and running. E.g.
@@ -95,13 +95,15 @@ The minimum set of things to port across is:
 
 * The ci-puppetmaster definition in site.pp
 
-* The puppetdb definition in site.pp
+* The puppet-dashboard definition in site.pp
 
 Then follow the puppet.rsh instructions for bringing up a puppetmaster,
 replacing openstack_project with your project name. You'll need to populate
 hiera at the end with the minimum set of keys:
 
 * sysadmins
+
+* dashboard_password and dashboard_mysql_password
 
 Copy in your cloud credentials to /root/ci-launch - e.g. to
 ``$projectname-rs.sh`` for a rackspace cloud.
@@ -111,10 +113,10 @@ Stage 2
 
 Migrate:
 
-* modules/openstack_project/manifests/puppetdb.pp
+* modules/openstack_project/manifests/dashboard.pp
 
-Then start up your puppet db with puppet board (see :file:`launch/README`
-for full details)::
+Then start up your puppet dashboard (see :file:`launch/README` for full
+details)::
 
     sudo su -
     cd /opt/config/production/launch
@@ -126,6 +128,9 @@ for full details)::
 * This will chug for a while.
 
 * Run the DNS update commands [nb: install your DNS API by hand at the moment]
+
+* ssh into the new node and update its ``/etc/default/puppet`` to autostart
+  per the launch README.
 
 Stage 3 - gerrit
 ~~~~~~~~~~~~~~~~

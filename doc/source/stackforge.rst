@@ -64,11 +64,6 @@ repository which can be used to preseed Gerrit with an initial commit
 history. Both of these are optional. Note that the current tools
 assume that the upstream repo will have a master branch.
 
-Note: Ensure the source repo has been evaluated and only required branches
-and tags remain when it seeds the stackforge repo. Cleaning up a repo of
-unnecessary branches and tags after the merge requires an openstack-infra
-core member to do so.
-
 The next step is to add a Gerrit ACL config file. Edit
 ``modules/openstack_project/files/gerrit/acls/stackforge/project-name.config``
 and make it look like::
@@ -171,9 +166,9 @@ python-jobs in project.yaml, it should look like this instead::
 
   - name: stackforge/project-name
     check:
-      - noop
+      - gate-noop
     gate:
-      - noop
+      - gate-noop
 
 That concludes the bare minimum openstack-infra/config changes necessary to
 add a project to StackForge. You can commit these changes and submit
@@ -231,15 +226,8 @@ end of this file that looks like::
       branches:
         - master
 
-For more information about channel requirements and IRC services provided by
-the infrasructure team, visit :ref:`irc`
-
 And thats it. At this point you will want to submit these edits as a
-change to review.openstack.org. When you do so, please use the
-``new-project`` topic.  You can do that using the ``-t`` option to
-``git review``.
-
-  $ git review -t new-project
+change to review.openstack.org.
 
 Add .gitreview file to project
 ==============================

@@ -11,14 +11,6 @@
       - gate-{name}-pylint
       - translation-jobs
 
-- project:
-    name: graffiti
-    github-org: stackforge
-    node: bare-precise
-    tarball-site: tarballs.openstack.org
-
-    jobs:
-      - python-jobs
 
 - project:
     name: mistral
@@ -61,6 +53,16 @@
       - gate-{name}-docs
 
 - project:
+    name: murano-conductor
+    github-org: stackforge
+    node: bare-precise
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - python-jobs
+      - gate-{name}-docs
+
+- project:
     name: murano-dashboard
     github-org: stackforge
     node: bare-precise
@@ -94,6 +96,38 @@
       - python-jobs
       - pypi-jobs
       - gate-{name}-docs
+
+- project:
+    name: murano-common
+    github-org: stackforge
+    node: bare-precise
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - python-jobs
+      - pypi-jobs
+      - gate-{name}-docs
+
+- project:
+    name: murano-repository
+    github-org: stackforge
+    node: bare-precise
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - python-jobs
+      - pypi-jobs
+      - gate-{name}-docs
+
+- project:
+    name: murano-metadataclient
+    github-org: stackforge
+    node: bare-precise
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - python-jobs
+      - pypi-jobs
 
 - project:
     name: magnetodb
@@ -156,7 +190,7 @@
           node: bare-precise
 
 - project:
-    name: sahara
+    name: savanna
     github-org: openstack
     node: bare-precise
     tarball-site: tarballs.openstack.org
@@ -169,9 +203,24 @@
       - pypi-jobs
       - translation-jobs
       - openstack-publish-jobs
+      - '{pipeline}-tempest-dsvm-savanna-full{branch-designator}':
+          pipeline: check
+          node: 'devstack-precise || devstack-precise-check'
+          branch-designator: '-nv'
+          branch-override: default
+      - '{pipeline}-tempest-dsvm-savanna-postgres{branch-designator}':
+          pipeline: check
+          node: 'devstack-precise || devstack-precise-check'
+          branch-designator: '-nv'
+          branch-override: default
+      - '{pipeline}-tempest-dsvm-savanna-neutron{branch-designator}':
+          pipeline: check
+          node: 'devstack-precise || devstack-precise-check'
+          branch-designator: '-nv'
+          branch-override: default
 
 - project:
-    name: python-saharaclient
+    name: python-savannaclient
     github-org: openstack
     node: bare-precise
     tarball-site: tarballs.openstack.org
@@ -190,10 +239,11 @@
 
     jobs:
       - python-jobs
+      - pypi-jobs
       - hook-{name}-rtfd
 
 - project:
-    name: sahara-dashboard
+    name: savanna-dashboard
     github-org: openstack
     node: bare-precise
     tarball-site: tarballs.openstack.org
@@ -203,7 +253,7 @@
       - pypi-jobs
 
 - project:
-    name: sahara-extra
+    name: savanna-extra
     github-org: openstack
     node: bare-precise
     tarball-site: tarballs.openstack.org
@@ -213,7 +263,7 @@
       - pypi-jobs
 
 - project:
-    name: sahara-image-elements
+    name: savanna-image-elements
     github-org: openstack
     node: bare-precise
     tarball-site: tarballs.openstack.org
@@ -265,6 +315,7 @@
 
     jobs:
       - python-jobs
+      - python-grizzly-bitrot-jobs
       - python-havana-bitrot-jobs
       - openstack-publish-jobs
       - translation-jobs
@@ -278,6 +329,7 @@
 
     jobs:
       - python-jobs
+      - python-grizzly-bitrot-jobs
       - python-havana-bitrot-jobs
       - openstack-publish-jobs
       - gate-{name}-pylint
@@ -335,14 +387,6 @@
     jobs:
       - python-jobs
 
-- project:
-    name: gerrit-powered-agenda
-    github-org: openstack-infra
-    node: bare-precise
-    tarball-site: tarballs.openstack.org
-
-    jobs:
-      - python-jobs
 
 - project:
     name: gerritbot
@@ -444,19 +488,6 @@
       - maven-plugin-jobs
 
 - project:
-    name: javamelody-gerrit-plugin
-    node: bare-precise
-    tarball-site: tarballs.openstack.org
-    gerrit-project: https://git.openstack.org/openstack-infra/gerrit
-    gerrit-branch: openstack/2.8.3
-    plugin-project: https://gerrit.googlesource.com/plugins/javamelody
-    plugin-name: javamelody
-    plugin-branch: stable-2.8
-
-    jobs:
-      - gerrit-plugin-jobs
-
-- project:
     name: zmq-event-publisher
     github-org: openstack-infra
     node: bare-precise
@@ -485,6 +516,7 @@
 
     jobs:
       - python-jobs
+      - python-grizzly-bitrot-jobs
       - python-havana-bitrot-jobs
       - openstack-publish-jobs
       - translation-jobs
@@ -499,6 +531,7 @@
 
     jobs:
       - python-jobs
+      - python-grizzly-bitrot-jobs
       - python-havana-bitrot-jobs
       - openstack-publish-jobs
       - translation-jobs
@@ -549,6 +582,7 @@
 
     jobs:
       - python-jobs
+      - python-grizzly-bitrot-jobs
       - python-havana-bitrot-jobs
       - openstack-publish-jobs
 
@@ -612,19 +646,11 @@
 
     jobs:
       - python-jobs
+      - python-grizzly-bitrot-jobs
       - python-havana-bitrot-jobs
       - openstack-publish-jobs
       - translation-jobs
 
-
-- project:
-    name: kite
-    github-org: stackforge
-    node: bare-precise
-    tarball-site: tarballs.openstack.org
-
-    jobs:
-      - python-jobs
 
 - project:
     name: netconn-api
@@ -670,29 +696,11 @@
 
     jobs:
       - python-jobs
+      - python-grizzly-bitrot-jobs
       - python-havana-bitrot-jobs
       - openstack-publish-jobs
       - gate-{name}-pylint
       - translation-jobs
-
-- project:
-    name: nova-specs
-    github-org: openstack
-    node: bare-precise
-    tarball-site: tarballs.openstack.org
-
-    jobs:
-      - gate-{name}-python27
-      - gate-{name}-docs
-
-- project:
-    name: nova-docker
-    github-org: stackforge
-    node: bare-precise
-    tarball-site: tarballs.openstack.org
-
-    jobs:
-      - python-jobs
 
 
 - project:
@@ -732,7 +740,7 @@
       - python-jobs
       - openstack-publish-jobs
       - pypi-jobs
-      - oslotest-cross-test
+
 
 - project:
     name: oslo.messaging
@@ -745,7 +753,6 @@
       - python-jobs
       - openstack-publish-jobs
       - pypi-jobs
-      - oslotest-cross-test
 
 - project:
     name: oslo.rootwrap
@@ -860,29 +867,6 @@
 
 
 - project:
-    name: python-jenkins
-    github-org: stackforge
-    node: bare-precise
-    tarball-site: tarballs.openstack.org
-
-    jobs:
-      - python-jobs
-      - pypi-jobs
-      - hook-{name}-rtfd
-
-
-- project:
-    name: python-kiteclient
-    github-org: stackforge
-    node: bare-precise
-    tarball-site: tarballs.openstack.org
-
-    jobs:
-      - python-jobs
-      - pypi-jobs
-
-
-- project:
     name: python-novaclient
     github-org: openstack
     node: bare-precise
@@ -943,6 +927,7 @@
 
     jobs:
       - python-jobs
+      - python-grizzly-bitrot-jobs
       - python-havana-bitrot-jobs
       - openstack-publish-jobs
       - translation-jobs
@@ -951,31 +936,6 @@
           node: 'devstack-precise || devstack-precise-check'
           branch-designator: ''
           branch-override: default
-      - '{pipeline}-neutron-dsvm-api{branch-designator}':
-          pipeline: check
-          node: 'devstack-precise || devstack-precise-check'
-          branch-designator: ''
-          branch-override: default
-      - devstack-jobs:
-          pipeline: gate
-          node: devstack-precise
-          branch-designator: '-2'
-          branch-override: default
-      - devstack-jobs:
-          pipeline: check
-          node: 'devstack-precise || devstack-precise-check'
-          branch-designator: '-2'
-          branch-override: default
-
-- project:
-    name: neutron-specs
-    github-org: openstack
-    node: bare-precise
-    tarball-site: tarballs.openstack.org
-
-    jobs:
-      - gate-{name}-python27
-      - gate-{name}-docs
 
 
 - project:
@@ -1254,34 +1214,28 @@
           node: 'dsvm-precise-krnl'
           branch-designator: ''
           branch-override: default
-      # Stable gate jobs for branchless tempest
-      - devstack-jobs:
-          pipeline: gate
-          node: devstack-precise
-          branch-designator: '-icehouse'
-          branch-override: stable/icehouse
       # Stable check jobs for testing devstack gate
       - devstack-jobs:
           pipeline: check
           node: 'devstack-precise || devstack-precise-check'
-          branch-designator: '-havana'
-          branch-override: stable/havana
+          branch-designator: '-grizzly'
+          branch-override: stable/grizzly
       - devstack-jobs:
           pipeline: check
           node: 'devstack-precise || devstack-precise-check'
-          branch-designator: '-icehouse'
-          branch-override: stable/icehouse
+          branch-designator: '-havana'
+          branch-override: stable/havana
       # Periodic jobs for various branches
       - devstack-jobs:
           pipeline: periodic
           node: devstack-precise
-          branch-designator: '-havana'
-          branch-override: stable/havana
+          branch-designator: '-grizzly'
+          branch-override: stable/grizzly
       - devstack-jobs:
           pipeline: periodic
           node: devstack-precise
-          branch-designator: '-icehouse'
-          branch-override: stable/icehouse
+          branch-designator: '-havana'
+          branch-override: stable/havana
       - devstack-jobs:
           pipeline: periodic
           node: devstack-precise
@@ -1324,16 +1278,6 @@
 
 
 - project:
-    name: qa-specs
-    github-org: openstack
-    node: bare-precise
-    tarball-site: tarballs.openstack.org
-
-    jobs:
-      - gate-{name}-docs
-
-
-- project:
     name: zuul
     github-org: openstack-infra
     node: bare-precise
@@ -1362,7 +1306,6 @@
     jobs:
       - python-jobs
       - pypi-jobs
-      - oslotest-cross-test
 
 - project:
     name: os-apply-config
@@ -1422,7 +1365,6 @@
     jobs:
       - python-jobs
       - pypi-jobs
-      - oslotest-cross-test
 
 - project:
     name: tripleo-incubator
@@ -1535,7 +1477,7 @@
       - puppet-module-unit
 
 - project:
-    name: puppet-sahara
+    name: puppet-savanna
     github-org: stackforge
     node: bare-precise
     tarball-site: tarballs.openstack.org
@@ -1546,7 +1488,7 @@
       - puppet-module-unit
 
 - project:
-    name: sahara-ci-config
+    name: savanna-ci-config
     github-org: stackforge
     node: bare-precise
     tarball-site: tarballs.openstack.org
@@ -1555,7 +1497,7 @@
       - gate-{name}-pep8
 
 - project:
-    name: sahara-guestagent
+    name: savanna-guestagent
     github-org: stackforge
     node: bare-precise
     tarball-site: tarballs.openstack.org
@@ -1639,16 +1581,6 @@
       - gate-openstack-chef-repo
 
 - project:
-    name: cookbook-ceph
-    github-org: stackforge
-    node: bare-precise
-
-    jobs:
-      - gate-{name}-chef-lint
-      - gate-{name}-chef-style
-      - gate-{name}-chef-unit
-
-- project:
     name: cookbook-openstack-common
     github-org: stackforge
     node: bare-precise
@@ -1679,7 +1611,7 @@
       - gate-{name}-chef-unit
 
 - project:
-    name: cookbook-openstack-telemetry
+    name: cookbook-openstack-metering
     github-org: stackforge
     node: bare-precise
 
@@ -1799,11 +1731,6 @@
           node: 'devstack-precise || devstack-precise-check'
           branch-designator: '-nv'
           branch-override: default
-      - '{pipeline}-tempest-dsvm-virtual-ironic{branch-designator}':
-          pipeline: check
-          node: 'devstack-precise || devstack-precise-check'
-          branch-designator: '-nv'
-          branch-override: default
 
 - project:
     name: python-ironicclient
@@ -1814,18 +1741,7 @@
 
     jobs:
       - python-jobs
-      - openstack-publish-jobs
       - pypi-jobs
-
-- project:
-    name: ironic-python-agent
-    github-org: openstack
-    node: bare-precise
-    tarball-site: tarballs.openstack.org
-    doc-publisher-site: docs.openstack.org
-
-    jobs:
-      - python-jobs
 
 - project:
     name: inception
@@ -1904,11 +1820,9 @@
     github-org: openstack
     node: bare-precise
     tarball-site: tarballs.openstack.org
-    doc-publisher-site: docs.openstack.org
 
     jobs:
       - python-jobs
-      - openstack-publish-jobs
       - pypi-jobs
 
 - project:
@@ -1977,15 +1891,6 @@
       - pypi-jobs
 
 - project:
-    name: warm
-    github-org: stackforge
-    node: bare-precise
-    tarball-site: tarballs.openstack.org
-
-    jobs:
-      - python-jobs
-
-- project:
     name: wsme
     github-org: stackforge
     node: bare-precise
@@ -2024,11 +1929,6 @@
 
     jobs:
       - python-jobs
-      - rally-jobs
-      - check-rally-install-{node}:
-          node: bare-precise
-      - check-rally-install-{node}:
-          node: bare-centos6
 
 - project:
     name: python-rallyclient
@@ -2045,6 +1945,17 @@
     github-org: openstack
     node: bare-precise
 
+    manual:
+      - admin-guide-cloud
+      - cli-reference
+      - config-reference
+      - glossary
+      - image-guide
+      - security-guide
+      - training-guides
+      - user-guide
+      - user-guide-admin
+
     oldmanual:
         - block-storage-admin
         - compute-admin
@@ -2056,16 +1967,60 @@
 
     jobs:
       - openstack-doc-jobs
-      - manual-translation-jobs
 
-      - '{name}-tox-doc-{envlist}':
-          envlist: publishdocs
+      - 'openstack-{manual}'
 
-      - openstack-install-deploy-guide-{lang}
+      - openstack-install-deploy-guide-{distribution}:
+          distribution: debian
+          system: apt-debian
+          profileos: "debian"
 
-      - openstack-misc-guides-{lang}
+      - openstack-install-deploy-guide-{distribution}:
+          distribution: fedora
+          system: yum
+          profileos: "centos;fedora;rhel"
+
+      - openstack-install-deploy-guide-{distribution}:
+          distribution: opensuse
+          system: zypper
+          profileos: "opensuse;sles"
+
+      - openstack-install-deploy-guide-{distribution}:
+          distribution: ubuntu
+          system: apt
+          profileos: "ubuntu"
+
+      - openstack-install-deploy-guide-{lang}:
 
       - openstack-operations-guide-{lang}
+
+      # in zuul/layout.yaml specified to only run against
+      # stable/grizzly
+      - 'openstack-{oldmanual}-old'
+
+      - openstack-{install}-{distribution}-old:
+          install: basic-install
+          distribution: fedora
+          system: yum
+          profileos: "centos;fedora;rhel"
+
+      - openstack-{install}-{distribution}-old:
+          install: basic-install
+          distribution: ubuntu
+          system: apt
+          profileos: "ubuntu;debian"
+
+      - openstack-{install}-{distribution}-old:
+          install: openstack-install
+          distribution: fedora
+          system: yum
+          profileos: "centos;fedora;rhel"
+
+      - openstack-{install}-{distribution}-old:
+          install: openstack-install
+          distribution: ubuntu
+          system: apt
+          profileos: "ubuntu"
 
 - project:
     name: operations-guide
@@ -2074,9 +2029,6 @@
 
     jobs:
       - openstack-doc-jobs
-      - manual-translation-jobs
-      - '{name}-tox-doc-{envlist}':
-          envlist: publishdocs
 
 - project:
     name: manila
@@ -2135,15 +2087,6 @@
 
 - project:
     name: refstack
-    github-org: stackforge
-    node: bare-precise
-    tarball-site: tarballs.openstack.org
-
-    jobs:
-      - python-jobs
-
-- project:
-    name: swift3
     github-org: stackforge
     node: bare-precise
     tarball-site: tarballs.openstack.org
@@ -2211,7 +2154,6 @@
 
     jobs:
       - python-jobs
-      - pypi-jobs
 
 - project:
     name: heat-translator
@@ -2259,9 +2201,9 @@
 
     jobs:
       - openstack-doc-jobs
-      - manual-translation-jobs
       - '{name}-tox-doc-{envlist}':
           envlist: publishdocs
+
 
 - project:
     name: database-api
@@ -2270,15 +2212,6 @@
 
     jobs:
       - openstack-doc-jobs
-
-- project:
-    name: driverlog
-    github-org: stackforge
-    node: bare-precise
-    tarball-site: tarballs.openstack.org
-
-    jobs:
-      - python-jobs
 
 - project:
     name: volume-api
@@ -2337,15 +2270,6 @@
 
 - project:
     name: compass-core
-    github-org: stackforge
-    node: bare-precise
-    tarball-site: tarballs.openstack.org
-
-    jobs:
-      - python-jobs
-
-- project:
-    name: stacktach
     github-org: stackforge
     node: bare-precise
     tarball-site: tarballs.openstack.org

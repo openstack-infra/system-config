@@ -9,17 +9,19 @@
       - timestamps
 
     builders:
-      - link-logs
-      - net-info
       - devstack-checkout
       - shell: |
           #!/bin/bash -xe
           export PYTHONUNBUFFERED=true
           export DEVSTACK_GATE_TIMEOUT=60
-          export ENABLED_SERVICES=murano,murano-api,murano-engine,tempest
+          export ENABLED_SERVICES=murano,murano-api,murano-conductor,murano-repository
           export PROJECTS="stackforge/murano-api $PROJECTS"
-          export PROJECTS="stackforge/murano-dashboard $PROJECTS"
+          export PROJECTS="stackforge/murano-conductor $PROJECTS"
+          export PROJECTS="stackforge/murano-repository $PROJECTS"
+          export PROJECTS="stackforge/murano-common $PROJECTS"
           export PROJECTS="stackforge/python-muranoclient $PROJECTS"
+          export PROJECTS="stackforge/murano-dashboard $PROJECTS"
+          export PROJECTS="stackforge/murano-metadataclient $PROJECTS"
 
           function pre_test_hook {
               cd /opt/stack/new/murano-api/functionaltests
@@ -35,6 +37,7 @@
 
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
+      - link-logs
 
     publishers:
       - devstack-logs

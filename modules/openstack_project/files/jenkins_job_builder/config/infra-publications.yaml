@@ -1,10 +1,10 @@
 # simply copy the contents of the repository to the server, no building needed
 - job:
     name: infra-publications-publish
+    concurrent: false
     node: bare-precise
 
     builders:
-      - revoke-sudo
       - gerrit-git-prep
       - shell: |
           #!/bin/bash -x
@@ -28,10 +28,10 @@
 
 - job:
     name: infra-publications-publish-index
+    concurrent: false
     node: bare-precise
 
     builders:
-      - revoke-sudo
       - gerrit-git-prep
       - shell: |
           #!/bin/bash -xe

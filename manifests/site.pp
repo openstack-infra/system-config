@@ -81,13 +81,97 @@ node 'jenkins.openstack.org' {
   }
 }
 
-node /^jenkins\d+\.openstack\.org$/ {
+node 'jenkins01.openstack.org' {
   class { 'openstack_project::jenkins':
     jenkins_jobs_password   => hiera('jenkins_jobs_password'),
     jenkins_ssh_private_key => hiera('jenkins_ssh_private_key_contents'),
-    ssl_cert_file           => '/etc/ssl/certs/ssl-cert-snakeoil.pem',
-    ssl_key_file            => '/etc/ssl/private/ssl-cert-snakeoil.key',
-    ssl_chain_file          => '',
+    ssl_cert_file_contents  => hiera('jenkins01_ssl_cert_file_contents'),
+    ssl_key_file_contents   => hiera('jenkins01_ssl_key_file_contents'),
+    ssl_chain_file_contents => hiera('jenkins01_ssl_chain_file_contents'),
+    sysadmins               => hiera('sysadmins'),
+    zmq_event_receivers     => ['logstash.openstack.org',
+                                'nodepool.openstack.org',
+    ],
+  }
+}
+
+node 'jenkins02.openstack.org' {
+  class { 'openstack_project::jenkins':
+    jenkins_jobs_password   => hiera('jenkins_jobs_password'),
+    jenkins_ssh_private_key => hiera('jenkins_ssh_private_key_contents'),
+    ssl_cert_file_contents  => hiera('jenkins02_ssl_cert_file_contents'),
+    ssl_key_file_contents   => hiera('jenkins02_ssl_key_file_contents'),
+    ssl_chain_file_contents => hiera('jenkins02_ssl_chain_file_contents'),
+    sysadmins               => hiera('sysadmins'),
+    zmq_event_receivers     => ['logstash.openstack.org',
+                                'nodepool.openstack.org',
+    ],
+  }
+}
+
+node 'jenkins03.openstack.org' {
+  class { 'openstack_project::jenkins':
+    jenkins_jobs_password   => hiera('jenkins_jobs_password'),
+    jenkins_ssh_private_key => hiera('jenkins_ssh_private_key_contents'),
+    ssl_cert_file_contents  => hiera('jenkins03_ssl_cert_file_contents'),
+    ssl_key_file_contents   => hiera('jenkins03_ssl_key_file_contents'),
+    ssl_chain_file_contents => hiera('jenkins03_ssl_chain_file_contents'),
+    sysadmins               => hiera('sysadmins'),
+    zmq_event_receivers     => ['logstash.openstack.org',
+                                'nodepool.openstack.org',
+    ],
+  }
+}
+
+node 'jenkins04.openstack.org' {
+  class { 'openstack_project::jenkins':
+    jenkins_jobs_password   => hiera('jenkins_jobs_password'),
+    jenkins_ssh_private_key => hiera('jenkins_ssh_private_key_contents'),
+    ssl_cert_file_contents  => hiera('jenkins04_ssl_cert_file_contents'),
+    ssl_key_file_contents   => hiera('jenkins04_ssl_key_file_contents'),
+    ssl_chain_file_contents => hiera('jenkins04_ssl_chain_file_contents'),
+    sysadmins               => hiera('sysadmins'),
+    zmq_event_receivers     => ['logstash.openstack.org',
+                                'nodepool.openstack.org',
+    ],
+  }
+}
+
+node 'jenkins05.openstack.org' {
+  class { 'openstack_project::jenkins':
+    jenkins_jobs_password   => hiera('jenkins_jobs_password'),
+    jenkins_ssh_private_key => hiera('jenkins_ssh_private_key_contents'),
+    ssl_cert_file_contents  => hiera('jenkins05_ssl_cert_file_contents'),
+    ssl_key_file_contents   => hiera('jenkins05_ssl_key_file_contents'),
+    ssl_chain_file_contents => hiera('jenkins05_ssl_chain_file_contents'),
+    sysadmins               => hiera('sysadmins'),
+    zmq_event_receivers     => ['logstash.openstack.org',
+                                'nodepool.openstack.org',
+    ],
+  }
+}
+
+node 'jenkins06.openstack.org' {
+  class { 'openstack_project::jenkins':
+    jenkins_jobs_password   => hiera('jenkins_jobs_password'),
+    jenkins_ssh_private_key => hiera('jenkins_ssh_private_key_contents'),
+    ssl_cert_file_contents  => hiera('jenkins06_ssl_cert_file_contents'),
+    ssl_key_file_contents   => hiera('jenkins06_ssl_key_file_contents'),
+    ssl_chain_file_contents => hiera('jenkins06_ssl_chain_file_contents'),
+    sysadmins               => hiera('sysadmins'),
+    zmq_event_receivers     => ['logstash.openstack.org',
+                                'nodepool.openstack.org',
+    ],
+  }
+}
+
+node 'jenkins07.openstack.org' {
+  class { 'openstack_project::jenkins':
+    jenkins_jobs_password   => hiera('jenkins_jobs_password'),
+    jenkins_ssh_private_key => hiera('jenkins_ssh_private_key_contents'),
+    ssl_cert_file_contents  => hiera('jenkins07_ssl_cert_file_contents'),
+    ssl_key_file_contents   => hiera('jenkins07_ssl_key_file_contents'),
+    ssl_chain_file_contents => hiera('jenkins07_ssl_chain_file_contents'),
     sysadmins               => hiera('sysadmins'),
     zmq_event_receivers     => ['logstash.openstack.org',
                                 'nodepool.openstack.org',
@@ -126,16 +210,7 @@ node 'community.openstack.org' {
 
 node 'ci-puppetmaster.openstack.org' {
   class { 'openstack_project::puppetmaster':
-    root_rsa_key    => hiera('puppetmaster_root_rsa_key'),
-    override_list   => [
-      'git01.openstack.org',
-      'git02.openstack.org',
-      'git03.openstack.org',
-      'git04.openstack.org',
-      'git05.openstack.org',
-      'review.openstack.org',
-    ],
-    sysadmins       => hiera('sysadmins'),
+    sysadmins => hiera('sysadmins'),
   }
 }
 
@@ -198,14 +273,12 @@ node 'eavesdrop.openstack.org' {
     statusbot_nick          => hiera('statusbot_nick'),
     statusbot_password      => hiera('statusbot_nick_password'),
     statusbot_server        => 'chat.freenode.net',
-    statusbot_channels      => 'edeploy, fuel-dev, heat, magnetodb, murano, openstack, openstack-101, openstack-anvil, openstack-bacon, openstack-barbican, openstack-board, openstack-ceilometer, openstack-chef, openstack-cinder, openstack-climate, openstack-cloudkeep, openstack-community, openstack-dev, openstack-dns, openstack-doc, openstack-entropy, openstack-foundation, openstack-gantt, openstack-gate, openstack-hyper-v, openstack-infra, openstack-ironic, openstack-keystone, openstack-manila, openstack-marconi, openstack-meeting, openstack-meeting-3, openstack-meeting-alt, openstack-meniscus, openstack-merges, openstack-metering, openstack-neutron, openstack-nova, openstack-opw, openstack-oslo, openstack-packaging, openstack-qa, openstack-raksha, openstack-relmgr-office, openstack-sdks, openstack-state-management, openstack-swift, openstack-translation, openstack-trove, packstack-dev, refstack, storyboard, syscompass, tripleo',
-    statusbot_auth_nicks    => 'jeblair, ttx, fungi, mordred, clarkb, sdague, SergeyLukjanov',
+    statusbot_channels      => 'openstack-infra, openstack-dev, openstack',
+    statusbot_auth_nicks    => 'jeblair, ttx, fungi, mordred, clarkb, sdague',
     statusbot_wiki_user     => hiera('statusbot_wiki_username'),
     statusbot_wiki_password => hiera('statusbot_wiki_password'),
     statusbot_wiki_url      => 'https://wiki.openstack.org/w/api.php',
     statusbot_wiki_pageid   => '1781',
-    accessbot_nick          => hiera('accessbot_nick'),
-    accessbot_password      => hiera('accessbot_nick_password'),
   }
 }
 
@@ -230,6 +303,15 @@ node 'etherpad-dev.openstack.org' {
   }
 }
 
+node 'activity-dev.openstack.org' {
+  class { 'openstack_project::activity_dev':
+    sysadmins               => hiera('sysadmins'),
+    site_admin_password     => hiera('activity_dev_site_admin_password'),
+    site_mysql_host         => hiera('activity_dev_site_mysql_host'),
+    site_mysql_password     => hiera('activity_dev_site_mysql_password'),
+  }
+}
+
 node 'wiki.openstack.org' {
   class { 'openstack_project::wiki':
     mysql_root_password     => hiera('wiki_db_password'),
@@ -237,6 +319,14 @@ node 'wiki.openstack.org' {
     ssl_cert_file_contents  => hiera('wiki_ssl_cert_file_contents'),
     ssl_key_file_contents   => hiera('wiki_ssl_key_file_contents'),
     ssl_chain_file_contents => hiera('wiki_ssl_chain_file_contents'),
+  }
+}
+
+node 'puppet-dashboard.openstack.org' {
+  class { 'openstack_project::dashboard':
+    password        => hiera('dashboard_password'),
+    mysql_password  => hiera('dashboard_mysql_password'),
+    sysadmins       => hiera('sysadmins'),
   }
 }
 
@@ -346,6 +436,7 @@ node /^git\d+\.openstack\.org$/ {
     vhost_name              => 'git.openstack.org',
     sysadmins               => hiera('sysadmins'),
     git_gerrit_ssh_key      => hiera('gerrit_replication_ssh_rsa_pubkey_contents'),
+    git_zuul_ssh_key        => $openstack_project::jenkins_ssh_key,
     ssl_cert_file_contents  => hiera('git_ssl_cert_file_contents'),
     ssl_key_file_contents   => hiera('git_ssl_key_file_contents'),
     ssl_chain_file_contents => hiera('git_ssl_chain_file_contents'),
@@ -363,13 +454,13 @@ node 'summit.openstack.org' {
 # A machine to run Storyboard
 node 'storyboard.openstack.org' {
   class { 'openstack_project::storyboard':
-    sysadmins               => hiera('sysadmins'),
-    mysql_host              => hiera('storyboard_db_host'),
-    mysql_user              => hiera('storyboard_db_user'),
-    mysql_password          => hiera('storyboard_db_password'),
-    ssl_cert_file_contents  => hiera('storyboard_ssl_cert_file_contents'),
-    ssl_key_file_contents   => hiera('storyboard_ssl_key_file_contents'),
-    ssl_chain_file_contents => hiera('storyboard_ssl_chain_file_contents'),
+    sysadmins           => hiera('sysadmins'),
+    mysql_host          => hiera('storyboard_db_host'),
+    mysql_user          => hiera('storyboard_db_user'),
+    mysql_password      => hiera('storyboard_db_password'),
+#    ssl_cert_file_contents  => hiera('storyboard_ssl_cert_file_contents'),
+#    ssl_key_file_contents   => hiera('storyboard_ssl_key_file_contents'),
+#    ssl_chain_file_contents => hiera('storyboard_ssl_chain_file_contents'),
   }
 }
 
@@ -424,7 +515,7 @@ node 'zuul.openstack.org' {
     gerrit_server        => 'review.openstack.org',
     gerrit_user          => 'jenkins',
     gerrit_ssh_host_key  => hiera('gerrit_ssh_rsa_pubkey_contents'),
-    zuul_ssh_private_key => hiera('zuul_ssh_private_key_contents'),
+    zuul_ssh_private_key => hiera('jenkins_ssh_private_key_contents'),
     url_pattern          => 'http://logs.openstack.org/{build.parameters[LOG_PATH]}',
     zuul_url             => 'http://zuul.openstack.org/p',
     sysadmins            => hiera('sysadmins'),
@@ -452,7 +543,7 @@ node 'zm01.openstack.org' {
     gerrit_server        => 'review.openstack.org',
     gerrit_user          => 'jenkins',
     gerrit_ssh_host_key  => hiera('gerrit_ssh_rsa_pubkey_contents'),
-    zuul_ssh_private_key => hiera('zuul_ssh_private_key_contents'),
+    zuul_ssh_private_key => hiera('jenkins_ssh_private_key_contents'),
     sysadmins            => hiera('sysadmins'),
   }
 }
@@ -463,7 +554,7 @@ node 'zm02.openstack.org' {
     gerrit_server        => 'review.openstack.org',
     gerrit_user          => 'jenkins',
     gerrit_ssh_host_key  => hiera('gerrit_ssh_rsa_pubkey_contents'),
-    zuul_ssh_private_key => hiera('zuul_ssh_private_key_contents'),
+    zuul_ssh_private_key => hiera('jenkins_ssh_private_key_contents'),
     sysadmins            => hiera('sysadmins'),
   }
 }
@@ -542,11 +633,10 @@ node 'mirror33.slave.openstack.org' {
 node 'proposal.slave.openstack.org' {
   include openstack_project
   class { 'openstack_project::proposal_slave':
-    transifex_username       => 'openstackjenkins',
-    transifex_password       => hiera('transifex_password'),
-    jenkins_ssh_public_key   => $openstack_project::jenkins_ssh_key,
-    proposal_ssh_public_key  => hiera('proposal_ssh_public_key_contents'),
-    proposal_ssh_private_key => hiera('proposal_ssh_private_key_contents'),
+    transifex_username      => 'openstackjenkins',
+    transifex_password      => hiera('transifex_password'),
+    jenkins_ssh_public_key  => $openstack_project::jenkins_ssh_key,
+    jenkins_ssh_private_key => hiera('jenkins_ssh_private_key_contents'),
   }
 }
 
@@ -570,12 +660,33 @@ node 'salt-trigger.slave.openstack.org' {
   }
 }
 
+node /^precise-?\d+.*\.slave\.openstack\.org$/ {
+  include openstack_project
+  include openstack_project::puppet_cron
+  class { 'openstack_project::slave':
+    certname  => 'precise.slave.openstack.org',
+    ssh_key   => $openstack_project::jenkins_ssh_key,
+    sysadmins => hiera('sysadmins'),
+  }
+}
+
 node /^precise-dev\d+.*\.slave\.openstack\.org$/ {
   include openstack_project
   include openstack_project::puppet_cron
   class { 'openstack_project::slave':
     ssh_key   => $openstack_project::jenkins_dev_ssh_key,
     sysadmins => hiera('sysadmins'),
+  }
+}
+
+node /^precisepy3k-?\d+.*\.slave\.openstack\.org$/ {
+  include openstack_project
+  include openstack_project::puppet_cron
+  class { 'openstack_project::slave':
+    ssh_key      => $openstack_project::jenkins_ssh_key,
+    sysadmins    => hiera('sysadmins'),
+    python3      => true,
+    include_pypy => true,
   }
 }
 
@@ -590,12 +701,33 @@ node /^precisepy3k-dev\d+.*\.slave\.openstack\.org$/ {
   }
 }
 
+node /^centos6-?\d+\.slave\.openstack\.org$/ {
+  include openstack_project
+  include openstack_project::puppet_cron
+  class { 'openstack_project::slave':
+    certname  => 'centos6.slave.openstack.org',
+    ssh_key   => $openstack_project::jenkins_ssh_key,
+    sysadmins => hiera('sysadmins'),
+  }
+}
+
 node /^centos6-dev\d+\.slave\.openstack\.org$/ {
   include openstack_project
   include openstack_project::puppet_cron
   class { 'openstack_project::slave':
     ssh_key   => $openstack_project::jenkins_dev_ssh_key,
     sysadmins => hiera('sysadmins'),
+  }
+}
+
+node /^fedora18-?\d+\.slave\.openstack\.org$/ {
+  include openstack_project
+  include openstack_project::puppet_cron
+  class { 'openstack_project::slave':
+    certname  => 'fedora18.slave.openstack.org',
+    ssh_key   => $openstack_project::jenkins_ssh_key,
+    sysadmins => hiera('sysadmins'),
+    python3   => true,
   }
 }
 
@@ -617,8 +749,6 @@ node 'openstackid-dev.openstack.org' {
     id_mysql_password       => hiera('openstackid_dev_id_mysql_password'),
     ss_mysql_host           => hiera('openstackid_dev_ss_mysql_host'),
     ss_mysql_password       => hiera('openstackid_dev_ss_mysql_password'),
-    ss_mysql_user           => hiera('openstackid_dev_ss_mysql_user'),
-    ss_db_name              => hiera('openstackid_dev_ss_db_name'),
     redis_password          => hiera('openstackid_dev_redis_password'),
     ssl_cert_file_contents  => hiera('openstackid_dev_ssl_cert_file_contents'),
     ssl_key_file_contents   => hiera('openstackid_dev_ssl_key_file_contents'),

@@ -22,9 +22,6 @@
   upstream: git://github.com/emonty/oslo.packaging
   description: Python Build Reasonableness
 - project: openstack-dev/sandbox
-- project: openstack-dev/specs-cookiecutter
-  upstream: git://github.com/mtreinish/specs-cookiecutter
-  description: Cookiecutter templates for new specs repos
 - project: openstack-infra/activity-board
   description: Tech community metrics dash of the OpenStack community based on the Metrics Grimoire toolset
   upstream: git://github.com/Bitergia/openstack-dashboard.git
@@ -65,11 +62,6 @@
   options:
     - track-upstream
     - direct-release
-- project: openstack-infra/gerrit-powered-agenda
-  description:  Replace meetings wiki with YAML files that use Gerrit and Jenkins to create iCal files
-  upstream: https://github.com/NDSU-OpenStack-Capstone/ndsuopenstack.git
-  options:
-    - direct-release
 - project: openstack-infra/gerritbot
   group: openstack-ci
   options:
@@ -101,16 +93,11 @@
     - direct-release
 - project: openstack-infra/meetbot
   group: openstack-ci
-  options:
-    - direct-release
 - project: openstack-infra/nodepool
   group: openstack-ci
   description: Manage a pool of nodes for a distributed test infrastructure
-  use-storyboard: true
 - project: openstack-infra/nose-html-output
   group: openstack-ci
-  options:
-    - direct-release
 - project: openstack-infra/odsreg
   upstream: git://github.com/ttx/odsreg.git
   description: OpenStack Design Summit session management system
@@ -159,13 +146,11 @@
     - direct-release
 - project: openstack-infra/storyboard
   upstream: git://github.com/ttx/storyboard.git
-  use-storyboard: true
   description: OpenStack Task Tracking API
 - project: openstack-infra/storyboard-webclient
   acl-config: /home/gerrit2/acls/openstack-infra/storyboard.config
   upstream: git://github.com/krotscheck/storyboard-webclient.git
   description: OpenStack Task Tracking Browser Client
-  use-storyboard: true
 - project: openstack-infra/tripleo-ci
   description: CI for the tripleo project
   upstream: https://github.com/toci-dev/toci
@@ -175,15 +160,12 @@
   upstream: git://github.com/cboylan/zmq-event-publisher.git
 - project: openstack-infra/zuul
   group: openstack-ci
-  use-storyboard: true
 - project: openstack-infra/zuul-packaging
   group: openstack-ci
   upstream: git://github.com/pabelanger/zuul-packaging.git
   description: Zuul packaging
 - project: openstack/api-site
   group: openstack-api-site
-  options:
-    - direct-release
 - project: openstack/ceilometer
 - project: openstack/cinder
   docimpact-group: openstack-manuals
@@ -192,13 +174,9 @@
   group: python-cliff
 - project: openstack/compute-api
   group: openstack-api-site
-  options:
-    - direct-release
 - project: openstack/database-api
   group: openstack-api-site
   description: Doc repo for trove project
-  options:
-    - direct-release
 - project: openstack/diskimage-builder
   description: Image building tools for OpenStack
 - project: openstack/django_openstack_auth
@@ -220,39 +198,22 @@
   docimpact-group: openstack-manuals
 - project: openstack/identity-api
   group: openstack-api-site
-  options:
-    - direct-release
 - project: openstack/image-api
   group: openstack-api-site
-  options:
-    - direct-release
 - project: openstack/ironic
   description: A service for managing and provisioning Bare Metal servers.
   upstream: git://github.com/devananda/ironic.git
-- project: openstack/ironic-python-agent
-  description: A python agent for provisioning and deprovisioning Bare Metal servers.
-  upstream: git://github.com/rackerlabs/teeth-agent.git
-  group: ironic
 - project: openstack/keystone
   docimpact-group: openstack-manuals
 - project: openstack/marconi
-- project: openstack/melange
 - project: openstack/netconn-api
   group: openstack-api-site
-  options:
-    - direct-release
 - project: openstack/neutron
   docimpact-group: openstack-manuals
-- project: openstack/neutron-specs
-  group: neutron
 - project: openstack/nova
   docimpact-group: openstack-manuals
-- project: openstack/nova-specs
-  group: nova
 - project: openstack/object-api
   group: openstack-api-site
-  options:
-    - direct-release
 - project: openstack/openstack
   upstream: git://github.com/emonty/openstack
 - project: openstack/openstack-chef
@@ -263,18 +224,11 @@
   options:
     - direct-release
 - project: openstack/openstack-manuals
-  options:
-    - direct-release
 - project: openstack/openstack-planet
-- project: openstack/openstack-security-notes
-  description: OpenStack Security Notes (OSSN)
-  upstream: https://github.com/nkinder/openstack-security-notes.git
 - project: openstack/operations-guide
   group: openstack-manuals
   upstream: git://github.com/jeblair/openstack-ops
   description: OpenStack Operations Guide
-  options:
-    - direct-release
 - project: openstack/os-apply-config
   description: Apply configuration from cloud metadata.
 - project: openstack/os-cloud-config
@@ -326,39 +280,36 @@
   description: A python client implementing the Ironic API.
 - project: openstack/python-keystoneclient
 - project: openstack/python-marconiclient
-- project: openstack/python-melangeclient
 - project: openstack/python-neutronclient
   docimpact-group: openstack-manuals
 - project: openstack/python-novaclient
   docimpact-group: openstack-manuals
 - project: openstack/python-openstackclient
-- project: openstack/python-saharaclient
-  description: Python bindings and CLI for Sahara.
-  acl-config: /home/gerrit2/acls/openstack/sahara.config
+- project: openstack/python-savannaclient
+  description: Python bindings and CLI to Savanna.
+  acl-config: /home/gerrit2/acls/openstack/savanna.config
 - project: openstack/python-swiftclient
   docimpact-group: openstack-manuals
 - project: openstack/python-troveclient
 - project: openstack/python-tuskarclient
   description: Python bindings and CLI to Tuskar.
   upstream: git://github.com/tuskar/python-tuskarclient.git
-- project: openstack/qa-specs
-  group: tempest
 - project: openstack/requirements
-- project: openstack/sahara
-  description: Sahara aims to provide users with simple means to provision a Hadoop cluster by specifying several parameters like Hadoop version, cluster topology, nodes hardware details and a few more.
-  acl-config: /home/gerrit2/acls/openstack/sahara.config
-- project: openstack/sahara-dashboard
-  group: sahara
-  description: Sahara Horizon plugin.
-  acl-config: /home/gerrit2/acls/openstack/sahara.config
-- project: openstack/sahara-extra
-  group: sahara
-  description: Repo for sahara-related utils.
-  acl-config: /home/gerrit2/acls/openstack/sahara.config
-- project: openstack/sahara-image-elements
-  group: sahara
-  description: Disk image elements for Sahara
-  acl-config: /home/gerrit2/acls/openstack/sahara.config
+- project: openstack/savanna
+  description: Savanna aims to provide users with simple means to provision a Hadoop cluster by specifying several parameters like Hadoop version, cluster topology, nodes hardware details and a few more.
+  acl-config: /home/gerrit2/acls/openstack/savanna.config
+- project: openstack/savanna-dashboard
+  group: savanna
+  description: Savanna Horizon plugin.
+  acl-config: /home/gerrit2/acls/openstack/savanna.config
+- project: openstack/savanna-extra
+  group: savanna
+  description: Repo for Savanna-related utils.
+  acl-config: /home/gerrit2/acls/openstack/savanna.config
+- project: openstack/savanna-image-elements
+  group: savanna
+  description: Disk image elements for Savanna
+  acl-config: /home/gerrit2/acls/openstack/savanna.config
 - project: openstack/stevedore
   group: python-stevedore
   description: Manage dynamic plugins for Python applications
@@ -448,14 +399,6 @@
   description: Congress
   upstream: git://github.com/pballand/congress.git
   acl-config: /home/gerrit2/acls/stackforge/congress.config
-- project: stackforge/cookbook-ceph
-  group: openstack-chef
-  docimpact-group: openstack-chef
-  description: Chef Cookbook - Ceph
-  upstream: git://github.com/ceph/ceph-cookbooks.git
-  acl-config: /home/gerrit2/acls/stackforge/chef-cookbooks.config
-  options:
-    - direct-release
 - project: stackforge/cookbook-openstack-block-storage
   group: openstack-chef
   docimpact-group: openstack-chef
@@ -505,6 +448,13 @@
   acl-config: /home/gerrit2/acls/stackforge/chef-cookbooks.config
   options:
     - direct-release
+- project: stackforge/cookbook-openstack-metering
+  group: openstack-chef
+  docimpact-group: openstack-chef
+  description: Chef Cookbook - OpenStack Metering
+  acl-config: /home/gerrit2/acls/stackforge/chef-cookbooks.config
+  options:
+    - direct-release
 - project: stackforge/cookbook-openstack-network
   group: openstack-chef
   docimpact-group: openstack-chef
@@ -542,17 +492,7 @@
   acl-config: /home/gerrit2/acls/stackforge/chef-cookbooks.config
   options:
     - direct-release
-- project: stackforge/cookbook-openstack-telemetry
-  group: openstack-chef
-  docimpact-group: openstack-chef
-  description: Chef Cookbook - OpenStack Telemetry
-  acl-config: /home/gerrit2/acls/stackforge/chef-cookbooks.config
-  options:
-    - direct-release
 - project: stackforge/designate
-- project: stackforge/driverlog
-  description: Vendor drivers for OpenStack
-  upstream: git://github.com/Mirantis/oscp.git
 - project: stackforge/entropy
   description: A framework for Audit/Repair scripts for openstack
 - project: stackforge/fuel-astute
@@ -602,8 +542,6 @@
   description: Google Compute Engine API support for OpenStack
 - project: stackforge/golang-client
   description: OpenStack API client for golang
-- project: stackforge/graffiti
-  description: Cloud Capability Service
 - project: stackforge/healthnmon
   description: Healthnmon aims to deliver 'Cloud Resource Monitor', an extensible service to OpenStack Cloud Operating system by providing monitoring service for Cloud Resources and Infrastructure with a pluggable framework for 'Inventory Management', 'Alerts and notifications' and 'Utilization Data.
   upstream: git://github.com/healthnmon/healthnmon.git
@@ -613,11 +551,6 @@
 - project: stackforge/inception
   description: Inception Cloud Project
   upstream: git://github.com/maoy/inception.git
-- project: stackforge/kickstack
-  description: Rapid OpenStack deployment with puppet-dashboard, The Foreman, or any other Puppet ENC
-  upstream: git://github.com/hastexo/kickstack
-- project: stackforge/kite
-  description: A service for managing and distributing message encryption keys.
 - project: stackforge/kwapi
   description: Energy Efficiency Monitoring
   upstream: git://github.com/frossigneux/kwapi.git
@@ -681,9 +614,6 @@
   group: murano
   upstream: git://github.com/Mirantis/murano-tests.git
   acl-config: /home/gerrit2/acls/stackforge/murano.config
-- project: stackforge/nova-docker
-  description: Docker driver for OpenStack Nova
-  upstream: git://github.com/russellb/nova-docker.git
 - project: stackforge/novaimagebuilder
   description: Image building tool for OpenStack.
   upstream: git://github.com/redhat-openstack/image-building-poc.git
@@ -706,9 +636,6 @@
   description: OpenStack SDK for .Net
 - project: stackforge/openstack-sdk-php
   description: OpenStack SDK for PHP
-- project: stackforge/openstackdroid
-  description: Openstackdroid is an Android application to access Openstack clouds
-  upstream: https://github.com/rcarrillocruz/openstackdroid.git
 - project: stackforge/openvz-nova-driver
   description: OpenVz driver for Nova
   upstream: git://github.com/imsplitbit/openvz-nova-driver.git
@@ -721,7 +648,6 @@
 - project: stackforge/pecan
   description: A WSGI object-dispatching web framework, designed to be lean and fast with few dependencies.
   upstream: git://github.com/dreamhost/pecan.git
-  homepage: http://pecanpy.org
 - project: stackforge/puppet-ceilometer
   description: OpenStack Ceilometer Puppet Module
   acl-config: /home/gerrit2/acls/stackforge/puppet-modules.config
@@ -774,10 +700,10 @@
   description: OpenStack Puppet Dev Environment
   acl-config: /home/gerrit2/acls/stackforge/puppet-modules.config
   upstream: git://github.com/puppetlabs/puppetlabs-openstack_dev_env.git
-- project: stackforge/puppet-sahara
-  group: sahara
-  description: Sahara Puppet Module
-  acl-config: /home/gerrit2/acls/openstack/sahara.config
+- project: stackforge/puppet-savanna
+  group: savanna
+  description: Savanna Puppet Module
+  acl-config: /home/gerrit2/acls/openstack/savanna.config
 - project: stackforge/puppet-swift
   description: OpenStack Swift Puppet Module
   acl-config: /home/gerrit2/acls/stackforge/puppet-modules.config
@@ -804,11 +730,6 @@
   description: Client for OpenStack Climate
   acl-config: /home/gerrit2/acls/stackforge/climate.config
 - project: stackforge/python-designateclient
-- project: stackforge/python-jenkins
-  upstream: git://github.com/jeblair/python-jenkins.git
-  description: Python API for managing jobs and nodes in a Jenkins CI instance
-- project: stackforge/python-kiteclient
-  description: Python bindings to Kite.
 - project: stackforge/python-libraclient
 - project: stackforge/python-manilaclient
   upstream: git://github.com/bswartz/python-manilaclient.git
@@ -839,14 +760,15 @@
 - project: stackforge/rubick
   description: Rule-based diagnostics of configuration of OpenStack platform
   upstream: git://github.com/MirantisLabs/rubick
-- project: stackforge/sahara-ci-config
-  description: Sahara-ci 3rd party testing configs (jjb, zuul, etc.)
-  acl-config: /home/gerrit2/acls/stackforge/sahara-ci-config.config
-- project: stackforge/sahara-guestagent
-  description: Guest agent for Sahara project
-  acl-config: /home/gerrit2/acls/stackforge/sahara-guestagent.config
 - project: stackforge/satori
+  upstream: git://github.com/rackerlabs/satori
   description: Configuration Discovery
+- project: stackforge/savanna-ci-config
+  description: savanna-ci 3rd party testing configs (jjb, zuul, etc.)
+  acl-config: /home/gerrit2/acls/stackforge/savanna-ci-config.config
+- project: stackforge/savanna-guestagent
+  description: Guest agent for Savanna project
+  acl-config: /home/gerrit2/acls/stackforge/savanna-guestagent.config
 - project: stackforge/solum
   description: 'An OpenStack related project designed to make cloud services easier to consume and integrate into your application development process. See: https://wiki.openstack.org/wiki/Solum'
   upstream: git://github.com/rackerlabs/solum
@@ -862,12 +784,6 @@
 - project: stackforge/stackalytics
   description: OpenStack analytics dashboard
   upstream: git://github.com/Mirantis/stackalytics.git
-- project: stackforge/stacktach
-  description: Event-based Debugging, Monitoring and Billing solution for OpenStack.
-  upstream: https://github.com/rackerlabs/stacktach.git
-- project: stackforge/swift3
-  description: Swift3 Middleware for OpenStack Swift, allowing access to OpenStack swift via the Amazon S3 API.
-  upstream: git://github.com/fujita/swift3.git
 - project: stackforge/swiftsync
   description: "Swift mass syncronizer"
   upstream: git://github.com/enovance/swiftsync.git

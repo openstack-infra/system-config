@@ -17,7 +17,6 @@
 # limitations under the License.
 
 import os
-import subprocess
 import sys
 
 from common import run_local
@@ -47,46 +46,6 @@ def tokenize(fn, tokens, distribution, comment=None):
         line = line.strip()
         if line and line not in tokens:
             tokens.append(line)
-
-
-def _legacy_find_images(basedir):
-    """Divine what images we should use based on parsing stackrc."""
-    images = []
-    for line in open(os.path.join(DEVSTACK, 'stackrc')):
-        line = line.strip()
-        if line.startswith('IMAGE_URLS'):
-            if '#' in line:
-                line = line[:line.rfind('#')]
-            if line.endswith(';;'):
-                line = line[:-2]
-            line = line.split('=', 1)[1].strip()
-            if line.startswith('${IMAGE_URLS:-'):
-                line = line[len('${IMAGE_URLS:-'):]
-            if line.endswith('}'):
-                line = line[:-1]
-            if not line:
-                continue
-            if line[0] == line[-1] == '"':
-                line = line[1:-1]
-            # Add image to the list to be downloaded, but
-            # skip downloading giant vmware images
-            images += [x.strip() for x in line.split(',')
-                       if not x.strip().endswith('vmdk')]
-    return images
-
-
-def _find_images(basedir):
-    images = []
-    try:
-        image_tool = os.path.join(DEVSTACK, 'tools', 'image_list.sh')
-        if os.path.exists(image_tool):
-            images = subprocess.check_output(image_tool).split('\n')
-    except subprocess.CalledProcessError as ce:
-        print "image_list.sh failed"
-        print "Exit: %s, Output: %s" % (ce.returncode, ce.output)
-        # reset images so we'll fall back
-        images = []
-    return images
 
 
 def local_prep(distribution):
@@ -120,24 +79,34 @@ def local_prep(distribution):
                 tokenize(fn, rpms, distribution, comment='#')
             branch_data['rpms'] = rpms
 
-        images = _find_images(DEVSTACK)
-        if not images:
-            images = _legacy_find_images(DEVSTACK)
-
+        images = []
+        for line in open(os.path.join(DEVSTACK, 'stackrc')):
+            line = line.strip()
+            if line.startswith('IMAGE_URLS'):
+                if '#' in line:
+                    line = line[:line.rfind('#')]
+                if line.endswith(';;'):
+                    line = line[:-2]
+                line = line.split('=', 1)[1].strip()
+                if line.startswith('${IMAGE_URLS:-'):
+                    line = line[len('${IMAGE_URLS:-'):]
+                if line.endswith('}'):
+                    line = line[:-1]
+                if not line:
+                    continue
+                if line[0] == line[-1] == '"':
+                    line = line[1:-1]
+                images += [x.strip() for x in line.split(',')]
         branch_data['images'] = images
         branches.append(branch_data)
     return branches
-
-
-def download(url, fname):
-    run_local(['wget', '-nv', '-c', url, '-O', os.path.join(CACHEDIR, fname)])
 
 
 def main():
     distribution = sys.argv[1]
 
     branches = local_prep(distribution)
-    image_filenames = []
+    image_filenames = {}
     for branch_data in branches:
         if branch_data.get('debs'):
             run_local(['sudo', 'apt-get', '-y', '-d', 'install'] +
@@ -152,15 +121,8 @@ def main():
             fname = url.split('/')[-1]
             if fname in image_filenames:
                 continue
-            image_filenames.append(fname)
-            download(url, fname)
-
-    # cache get-pip, because upstream network connection fails more
-    # often than you might imagine.
-    download(
-        'https://raw.github.com/pypa/pip/master/contrib/get-pip.py',
-        'get-pip.py')
-
+            run_local(['wget', '-nv', '-c', url,
+                       '-O', os.path.join(CACHEDIR, fname)])
 
 if __name__ == '__main__':
     main()

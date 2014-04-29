@@ -31,10 +31,6 @@ function site_init() {
     chown $FILE_OWNER:$FILE_GROUP $SITE_ROOT/$dir
   done
   target_dir="$SITE_ROOT/slot0"
-  # fetch catalog and write actual version
-  fetch_catalog
-  RELEASE_VERSION=`catalog_get_version`
-  echo $RELEASE_VERSION > $SITE_ROOT/slot0/release
   # fetch and extract release tarball
   umask 0027
   if [[ $SOURCE_TARBALL == http* ]]; then
@@ -90,26 +86,8 @@ function site_status() {
       exit 1
     fi
   else
-    fetch_catalog
-    REMOTE_VERSION=`catalog_get_version`
-    RELEASE_VERSION=$(head -n 1 $SITE_ROOT/w/release)
-    if [ "$REMOTE_VERSION" == "$RELEASE_VERSION" ]; then
-      echo "INSTALLED [$RELEASE_VERSION]"
-    else
-      echo "UPDATE AVAILABLE [$RELEASE_VERSION-$REMOTE_VERSION]"
-    fi
+    echo "INSTALLED"
   fi
-}
-
-function fetch_catalog() {
-  curl --silent $SOURCE_ROOT > $SITE_ROOT/releases.lst
-  grep -q "^<!DOCTYPE HTML PUBLIC" $SITE_ROOT/releases.lst
-}
-
-function catalog_get_version() {
-  RAW_LINE=`cat $SITE_ROOT/releases.lst | grep "$RELEASE_NAME" | sed "s/<[^>]\+>//g" | sed -r "s/^$RELEASE_NAME//"`
-  RELEASE_DATE=`echo $RAW_LINE | awk '{ print $1 " " $2}'`
-  echo $RELEASE_DATE
 }
 
 function site_update() {
@@ -140,10 +118,6 @@ function site_update() {
   target_dir="$SITE_ROOT/$TARGET_SLOT"
   rm -rf $target_dir
   mkdir $target_dir
-  # fetch catalog and write actual version
-  fetch_catalog
-  RELEASE_VERSION=`catalog_get_version`
-  echo $RELEASE_VERSION > $target_dir/release
   # fetch and extract release tarball
   umask 0027
   if [[ $SOURCE_TARBALL == http* ]]; then

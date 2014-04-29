@@ -5,9 +5,6 @@ class openstack_project::jenkins (
   $jenkins_jobs_password = '',
   $jenkins_jobs_username = 'gerrig', # This is not a typo, well it isn't anymore.
   $manage_jenkins_jobs = true,
-  $ssl_cert_file = '',
-  $ssl_key_file = '',
-  $ssl_chain_file = '/etc/ssl/certs/intermediate.pem',
   $ssl_cert_file_contents = '',
   $ssl_key_file_contents = '',
   $ssl_chain_file_contents = '',
@@ -25,27 +22,18 @@ class openstack_project::jenkins (
     sysadmins                 => $sysadmins,
   }
 
-  # Set defaults here because they evaluate variables which you cannot
-  # do in the class parameter list.
-  if $ssl_cert_file == '' {
-    $prv_ssl_cert_file = "/etc/ssl/certs/${vhost_name}.pem"
-  }
-  else {
-    $prv_ssl_cert_file = $ssl_cert_file
-  }
-  if $ssl_key_file == '' {
-    $prv_ssl_key_file = "/etc/ssl/private/${vhost_name}.key"
-  }
-  else {
-    $prv_ssl_key_file = $ssl_key_file
+  if $ssl_chain_file_contents != '' {
+    $ssl_chain_file = '/etc/ssl/certs/intermediate.pem'
+  } else {
+    $ssl_chain_file = ''
   }
 
   class { '::jenkins::master':
     vhost_name              => $vhost_name,
     serveradmin             => 'webmaster@openstack.org',
     logo                    => 'openstack.png',
-    ssl_cert_file           => $prv_ssl_cert_file,
-    ssl_key_file            => $prv_ssl_key_file,
+    ssl_cert_file           => "/etc/ssl/certs/${vhost_name}.pem",
+    ssl_key_file            => "/etc/ssl/private/${vhost_name}.key",
     ssl_chain_file          => $ssl_chain_file,
     ssl_cert_file_contents  => $ssl_cert_file_contents,
     ssl_key_file_contents   => $ssl_key_file_contents,
@@ -61,7 +49,7 @@ class openstack_project::jenkins (
     version => '1.20',
   }
   jenkins::plugin { 'build-timeout':
-    version => '1.13',
+    version => '1.10',
   }
   jenkins::plugin { 'copyartifact':
     version => '1.22',
@@ -96,9 +84,10 @@ class openstack_project::jenkins (
   jenkins::plugin { 'postbuild-task':
     version => '1.8',
   }
-  jenkins::plugin { 'zmq-event-publisher':
-    version => '0.0.3',
-  }
+#  TODO(clarkb): release
+#  jenkins::plugin { 'zmq-event-publisher':
+#    version => '1.0',
+#  }
   jenkins::plugin { 'jclouds-jenkins':
     version => '2.3.1',
   }

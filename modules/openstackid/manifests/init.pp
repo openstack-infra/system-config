@@ -55,12 +55,13 @@ class openstackid (
       'php5-common',
       'php5-curl',
       'php5-cli',
+      'php5-json',
       'php5-mcrypt',
       'php5-mysql',
     ]
 
   package { $php5_packages:
-    ensure => present,
+    require => Exec[apt_update],
   }
 
   group { 'openstackid':
@@ -170,7 +171,7 @@ class openstackid (
   if $ssl_key_file_contents != '' {
     file { $ssl_key_file:
       owner   => 'root',
-      group   => 'root',
+      group   => 'ssl-cert',
       mode    => '0640',
       content => $ssl_key_file_contents,
       before  => Apache::Vhost[$vhost_name],
@@ -202,21 +203,6 @@ class openstackid (
     path      => '/usr/bin:/bin:/usr/local/bin',
     command   => '/opt/deploy/deploy.sh init openstackid',
     onlyif    => '/opt/deploy/deploy.sh status openstackid | grep N/A',
-    logoutput => on_failure,
-    require   => [
-      File['/opt/deploy/conf.d/openstackid.conf'],
-      Apache::Vhost[$vhost_name],
-      File['/etc/openstackid/recaptcha.php'],
-      File['/etc/openstackid/database.php'],
-      File['/etc/openstackid/log.php'],
-      File['/etc/openstackid/environment.php'],
-      Package[$php5_packages] ],
-  }
-
-  exec { 'update-site':
-    path      => '/usr/bin:/bin:/usr/local/bin',
-    command   => '/opt/deploy/deploy.sh update openstackid',
-    onlyif    => '/opt/deploy/deploy.sh status openstackid | grep UPDATE',
     logoutput => on_failure,
     require   => [
       File['/opt/deploy/conf.d/openstackid.conf'],
