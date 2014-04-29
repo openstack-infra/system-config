@@ -98,7 +98,7 @@ node 'zuul.opencontrail.org' {
     gerrit_user          => 'zuul',
     gerrit_ssh_host_key  => hiera('gerrit_ssh_rsa_pubkey_contents'),
     zuul_ssh_private_key => hiera('zuul_ssh_private_key_contents'),
-    url_pattern          => 'http://logs.opencontrail.org/{build.parameters[LOG_PATH]}',
+#   url_pattern          => 'http://logs.opencontrail.org/{build.parameters[LOG_PATH]}',
     zuul_url             => 'http://zuul.opencontrail.org/p',
     sysadmins            => hiera('sysadmins'),
 #   statsd_host          => 'graphite.opencontrail.org',
