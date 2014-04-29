@@ -23,7 +23,7 @@ for p in python-pip python3-pip ; do
 done
 
 # install pip using get-pip
-PIP_GET_PIP_URL=https://raw.github.com/pypa/pip/master/contrib/get-pip.py
+PIP_GET_PIP_URL=https://raw.githubusercontent.com/pypa/pip/master/contrib/get-pip.py
 if [ ! -f get-pip.py ] ; then
   curl -O $PIP_GET_PIP_URL || wget $PIP_GET_PIP_URL
 fi
