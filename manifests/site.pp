@@ -171,6 +171,13 @@ node 'community.openstack.org' {
   }
 }
 
+# Node-OS: centos6
+node 'yum.openstack.org' {
+  class { 'openstack_project::yum_mirror':
+    sysadmins => hiera('sysadmins', []),
+  }
+}
+
 # Node-OS: precise
 node 'ci-puppetmaster.openstack.org' {
   class { 'openstack_project::puppetmaster':
