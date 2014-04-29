@@ -21,6 +21,7 @@ openstack-infra:
       - openstack-infra/gerritlib
       - openstack-infra/gitdm
       - openstack-infra/git-review
+      - openstack-infra/infra-manual
       - openstack-infra/jeepyb
       - openstack-infra/jenkins-job-builder
       - openstack-infra/lodgeit
