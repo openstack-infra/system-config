@@ -4,6 +4,10 @@ ENV['USER'] = "jenkins" if ENV['USER'].nil? or ENV['USER'].empty?
 @zuul_project = ENV['ZUUL_PROJECT'] || "Juniper/contrail-controller-test"
 
 @gerrit_setup = !ENV['ZUUL_PROJECT'].nil?
+`ping -c 1 -q zuul.opencontrail.org 2>&1 > /dev/null`
+@gerrit_setup &&= $?.to_i == 0
+`ping -c 1 -q review.opencontrail.org 2>&1 > /dev/null`
+@gerrit_setup &&= $?.to_i == 0
 
 # Find the project
 if @zuul_project !~ /Juniper\/(.*)/ then
@@ -32,7 +36,7 @@ def sh (cmd, ignore = false)
             Dir.chdir($1)
         else
             output = `#{cmd}`
-            exit_code = $? unless ignore
+            exit_code = $?.to_i unless ignore
         end
     end
     puts output if !output.nil? and !output.empty?
@@ -76,6 +80,7 @@ end
 # TODO Ideally, we should tweak .repo/manifest.xml to directly fetch project
 # off gerrit.
 def switch_gerrit_repo
+    return unless @gerrit_setup
 
     # Find the project git repo based on .repo/manifest.xml file
     out = sh "\grep name=\\\"#{@project} .repo/manifest.xml"
