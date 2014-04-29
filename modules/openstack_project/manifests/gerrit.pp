@@ -177,6 +177,7 @@ class openstack_project::gerrit (
     contactstore_appsec                 => $contactstore_appsec,
     contactstore_pubkey                 => $contactstore_pubkey,
     contactstore_url                    => $contactstore_url,
+    mysql_host                          => $mysql_host,
     mysql_password                      => $mysql_password,
     email_private_key                   => $email_private_key,
     replicate_local                     => $replicate_local,

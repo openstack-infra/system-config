@@ -16,7 +16,7 @@ node 'review.openstack.org' {
     github_oauth_token                  => hiera('gerrit_github_token'),
     github_project_username             => hiera('github_project_username'),
     github_project_password             => hiera('github_project_password'),
-    mysql_host                          => 'localhost',
+    mysql_host                          => hiera('gerrit_mysql_host'),
     mysql_password                      => hiera('gerrit_mysql_password'),
     email_private_key                   => hiera('gerrit_email_private_key'),
     gerritbot_password                  => hiera('gerrit_gerritbot_password'),
