@@ -45,3 +45,9 @@ a.gwt-InlineHyperlink {background: none !important}
     color: #e39f00;
 }
 li.comment_test {list-style-type: none; }
+
+/* this is for support of 'Display Person Name In Review Category' */
+.cAPPROVAL {
+    max-width: 100px;
+    overflow-x: hidden;
+}
