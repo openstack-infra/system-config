@@ -44,6 +44,22 @@
 
     node: 'proposal'
 
+- job:
+    name: 'horizon-propose-translation-update'
+
+    builders:
+      - revoke-sudo
+      - branch-git-prep:
+          branch: master
+      - shell: |
+          #!/bin/bash -xe
+          /usr/local/jenkins/slave_scripts/propose_translation_update_horizon.sh
+
+    publishers:
+      - console-log
+
+    node: 'proposal'
+
 - job-template:
     name: '{name}-manuals-upstream-translation-update'
 
