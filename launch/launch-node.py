@@ -83,6 +83,10 @@ def bootstrap_server(server, admin_pass, key, cert, environment, name,
         ssh_client.ssh('ping6 -c5 -Q 0x10 review.openstack.org '
                        '|| ping6 -c5 -Q 0x10 wiki.openstack.org')
 
+    ssh_client.scp(os.path.join(SCRIPT_DIR, '..', 'make_swap.sh'),
+                   'make_swap.sh')
+    ssh_client.ssh('bash -x make_swap.sh')
+
     ssh_client.scp(os.path.join(SCRIPT_DIR, '..', 'install_puppet.sh'),
                    'install_puppet.sh')
     ssh_client.ssh('bash -x install_puppet.sh')
