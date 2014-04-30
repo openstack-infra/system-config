@@ -1,4 +1,6 @@
-#!/bin/bash -e
+#!/bin/bash
+
+set -ex
 
 GERRIT_SITE=$1
 GIT_ORIGIN=ssh://zuul@review.opencontrail.org:29418 #$2

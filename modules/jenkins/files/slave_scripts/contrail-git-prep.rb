@@ -3,11 +3,15 @@
 ENV['USER'] = "jenkins" if ENV['USER'].nil? or ENV['USER'].empty?
 @zuul_project = ENV['ZUUL_PROJECT'] || "Juniper/contrail-controller-test"
 
-@gerrit_setup = !ENV['ZUUL_PROJECT'].nil?
-`ping -c 1 -q zuul.opencontrail.org 2>&1 > /dev/null`
-@gerrit_setup &&= $?.to_i == 0
-`ping -c 1 -q review.opencontrail.org 2>&1 > /dev/null`
-@gerrit_setup &&= $?.to_i == 0
+@gerrit_setup = true
+
+def init_gerrit_setup
+    @gerrit_setup = !ENV['ZUUL_PROJECT'].nil?
+    `ping -c 1 -q zuul.opencontrail.org 2>&1 > /dev/null`
+    @gerrit_setup &&= $?.to_i == 0
+    `ping -c 1 -q review.opencontrail.org 2>&1 > /dev/null`
+    @gerrit_setup &&= $?.to_i == 0
+end
 
 # Find the project
 if @zuul_project !~ /Juniper\/(.*)/ then
@@ -35,6 +39,7 @@ def sh (cmd, ignore = false)
         if cmd =~ /^cd\s+(.*)/ then
             Dir.chdir($1)
         else
+            puts cmd
             output = `#{cmd}`
             exit_code = $?.to_i unless ignore
         end
@@ -96,7 +101,7 @@ end
 
 def pre_build_setup
     sh "python #{TOP}/repo/third_party/fetch_packages.py 2>&1"
-    sh "python #{TOP}/repo/distro/third_party/fetch_packages.py 2>&1"
+#   sh "python #{TOP}/repo/distro/third_party/fetch_packages.py 2>&1"
 end
 
 def main
