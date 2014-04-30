@@ -40,6 +40,7 @@ class jenkins::job_builder (
 
   exec { 'jenkins_jobs_update':
     command     => 'jenkins-jobs update --delete-old /etc/jenkins_jobs/config',
+    timeout     => '600',
     path        => '/bin:/usr/bin:/usr/local/bin',
     refreshonly => true,
     require     => [
