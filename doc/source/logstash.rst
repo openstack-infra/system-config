@@ -115,8 +115,8 @@ the Gearman server.
 If you are interested in technical details the source of these scripts
 can be found at
 
-* :file:`modules/openstack_project/files/logstash/log-gearman-client.py`
-* :file:`modules/openstack_project/files/logstash/log-gearman-worker.py`
+* :file:`modules/log_processor/files/log-gearman-client.py`
+* :file:`modules/log_processor/files/log-gearman-worker.py`
 
 Logstash
 --------
