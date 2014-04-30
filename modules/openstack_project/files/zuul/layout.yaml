@@ -497,6 +497,8 @@ jobs:
     voting: false
   - name: gate-mistral-python33
     voting: false
+  - name: gate-mistral-dashboard-python33
+    voting: false
   - name: gate-mistral-extra-python33
     voting: false
   - name: gate-python-mistralclient-python33
@@ -3572,6 +3574,29 @@ projects:
     release:
       - mistral-tarball:
         - mistral-pypi-upload:
+          - post-mirror-python26
+          - post-mirror-python27
+          - post-mirror-python33
+
+  - name: stackforge/mistral-dashboard
+    check:
+      - gate-mistral-dashboard-pep8
+      - gate-mistral-dasboard-python26
+      - gate-mistral-dasboard-python27
+      - gate-mistral-dasboard-python33
+      - gate-mistral-dasboard-docs
+    gate:
+      - gate-mistral-dasboard-pep8
+      - gate-mistral-dasboard-python26
+      - gate-mistral-dasboard-python27
+      - gate-mistral-dasboard-docs
+    post:
+      - mistral-dasboard-branch-tarball
+    pre-release:
+      - mistral-dasboard-tarball
+    release:
+      - mistral-dasboard-tarball:
+        - mistral-dasboard-pypi-upload:
           - post-mirror-python26
           - post-mirror-python27
           - post-mirror-python33
