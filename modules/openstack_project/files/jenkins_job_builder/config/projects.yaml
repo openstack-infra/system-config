@@ -243,6 +243,8 @@
           node: bare-centos6
       - gate-{name}-unittests-{env}:
           env: 27sa07
+      - gate-{name}-unittests-{env}:
+          env: func
       - '{pipeline}-sqlalchemy-migrate-devstack-dsvm{branch-designator}':
           pipeline: check
           node: 'devstack-precise || devstack-precise-check'
