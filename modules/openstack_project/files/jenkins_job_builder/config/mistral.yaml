@@ -1,0 +1,42 @@
+- job:
+    name: gate-mistral-devstack-dsvm
+    node: devstack-precise
+
+    wrappers:
+      - timeout:
+          timeout: 65
+          fail: true
+      - timestamps
+
+    builders:
+      - link-logs
+      - net-info
+      - devstack-checkout
+      - shell: |
+          #!/bin/bash -xe
+          export PYTHONUNBUFFERED=true
+          export DEVSTACK_GATE_TIMEOUT=60
+          export ENABLED_SERVICES=mistral
+          export PROJECTS="stackforge/mistral $PROJECTS"
+
+          function pre_test_hook {
+              # Install mistral devstack integration
+              MISTRAL_BASE=/opt/stack/new/mistral/contrib/devstack
+              DEVSTACK_BASE=/opt/stack/new/devstack
+              cp $MISTRAL_BASE/lib/* $DEVSTACK_BASE/lib
+              cp $MISTRAL_BASE/extras.d/* $DEVSTACK_BASE/extras.d
+          }
+          export -f pre_test_hook
+
+          function post_test_hook {
+              cd /opt/stack/new/mistral/tools
+              bash check_api.sh
+          }
+          export -f post_test_hook
+
+          cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
+          ./safe-devstack-vm-gate-wrap.sh
+
+    publishers:
+      - devstack-logs
+      - console-log
