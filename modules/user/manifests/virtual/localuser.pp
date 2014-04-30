@@ -29,33 +29,11 @@ define user::virtual::localuser(
     require    => Group[$title],
   }
 
-  file { "${title}_sshdir":
-    ensure  => directory,
-    name    => "${home}/.ssh",
-    owner   => $title,
-    group   => $title,
-    mode    => '0700',
-    require => User[$title],
-  }
-
-  file { "${title}_keyfile":
-    ensure  => present,
-    mode    => '0600',
-    name    => "${home}/.ssh/authorized_keys",
-    require => File["${title}_sshdir"],
-  }
-
   ssh_authorized_key { $key_id:
     ensure  => present,
     key     => $sshkeys,
     user    => $title,
     type    => 'ssh-rsa',
-    require => File["${title}_keyfile"],
-  }
-
-  ssh_authorized_key { "${title}_keys":
-    ensure => absent,
-    user   => $title,
   }
 
   if ( $old_keys != [] ) {
