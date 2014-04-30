@@ -103,10 +103,14 @@ functions start_slave {
 # Install certificates
 # setup_certificates
 
-# Download slave.jar
-# wget -O $HOME/slave.jar https://jenkins.opencontrail.org/jnlpJars/slave.jar
-# java -jar slave.jar -jnlpUrl https://jenkins.opencontrail.org/computer/jnpr-slave-1/slave-agent.jnlp -jnlpCredentials ci-admin:b8057c342d448
-java -jar swarm-client-1.15-jar-with-dependencies.jar -labels juniper-tests -mode normal -master http://jenkins.opencontrail.org:8080/ -fsroot ~jenkins -username ci-admin -password b8057c342d44883f750d93f1cc2d092f
+# Port forwarding until lab firewall filtering is fixed
+ssh -i ~/work/new_config/contrail-infra-config/setup/ssh/id_rsa -R18324:localhost:18324 -R8080:jenkins.opencontrail.org:8080 -R6001:jenkins.opencontrail.org:6001 -R29418:review.opencontrail.org:29418 ubuntu@10.84.35.201
+
+export http_proxy=http://localhost:18324
+wget "http://maven.jenkins-ci.org/content/repositories/releases/org/jenkins-ci/plugins/swarm-client/1.15/swarm-client-1.15-jar-with-dependencies.jar"
+
+java -jar swarm-client-1.15-jar-with-dependencies.jar -labels juniper-tests -mode normal -master http://jenkins.opencontrail.org:8080/ -fsroot ~jenkins -username ci-admin -password b8057c342d44883f750d93f1cc2d092f -name ci-jenkins-slave-10.84.35.201
+
 }
 
 sudo build_setup
