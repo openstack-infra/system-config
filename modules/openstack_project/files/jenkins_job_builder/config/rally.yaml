@@ -33,6 +33,7 @@
           export PROJECTS="stackforge/rally $PROJECTS"
           export ENABLED_SERVICES=rally
           export DEVSTACK_GATE_EXERCISES=0
+          export DEVSTACK_GATE_TIMEOUT=120
           export RALLY_SCENARIO={scenario}
 
           function pre_test_hook {{
@@ -53,6 +54,12 @@
 - job-template:
     name: 'check-rally-dsvm-{name}'
     node: 'devstack-precise || devstack-precise-check'
+
+    wrappers:
+      - timeout:
+          timeout: 125
+          fail: true
+      - timestamps
 
     builders:
       - devstack-rally-gate:
