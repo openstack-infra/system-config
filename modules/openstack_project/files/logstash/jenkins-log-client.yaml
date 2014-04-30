@@ -243,6 +243,47 @@ source-files:
       - screen
       - oslofmt
     job-filter: '.*grenade.*'
+  - name: logs/new/screen-q-agt.txt
+    tags:
+      - screen
+      - oslofmt
+    job-filter: '.*grenade.*'
+  - name: logs/new/screen-q-dhcp.txt
+    tags:
+      - screen
+      - oslofmt
+    job-filter: '.*grenade.*'
+  - name: logs/new/screen-q-l3.txt
+    tags:
+      - screen
+      - oslofmt
+    job-filter: '.*grenade.*'
+  - name: logs/new/screen-q-lbaas.txt
+    tags:
+      - screen
+      - oslofmt
+    job-filter: '.*grenade.*'
+  - name: logs/new/screen-q-meta.txt
+    tags:
+      - screen
+      - oslofmt
+    job-filter: '.*grenade.*'
+  - name: logs/new/screen-q-metering.txt
+    job-filter: '.*grenade.*'
+    tags:
+      - screen
+      - oslofmt
+    job-filter: '.*grenade.*'
+  - name: logs/new/screen-q-svc.txt
+    tags:
+      - screen
+      - oslofmt
+    job-filter: '.*grenade.*'
+  - name: logs/new/screen-q-vpn.txt
+    tags:
+      - screen
+      - oslofmt
+    job-filter: '.*grenade.*'
   - name: logs/new/screen-s-account.txt
     tags:
       - screen
@@ -324,6 +365,47 @@ source-files:
       - oslofmt
     job-filter: '.*grenade.*'
   - name: logs/old/screen-n-sched.txt
+    tags:
+      - screen
+      - oslofmt
+    job-filter: '.*grenade.*'
+  - name: logs/old/screen-q-agt.txt
+    tags:
+      - screen
+      - oslofmt
+    job-filter: '.*grenade.*'
+  - name: logs/old/screen-q-dhcp.txt
+    tags:
+      - screen
+      - oslofmt
+    job-filter: '.*grenade.*'
+  - name: logs/old/screen-q-l3.txt
+    tags:
+      - screen
+      - oslofmt
+    job-filter: '.*grenade.*'
+  - name: logs/old/screen-q-lbaas.txt
+    tags:
+      - screen
+      - oslofmt
+    job-filter: '.*grenade.*'
+  - name: logs/old/screen-q-meta.txt
+    tags:
+      - screen
+      - oslofmt
+    job-filter: '.*grenade.*'
+  - name: logs/old/screen-q-metering.txt
+    job-filter: '.*grenade.*'
+    tags:
+      - screen
+      - oslofmt
+    job-filter: '.*grenade.*'
+  - name: logs/old/screen-q-svc.txt
+    tags:
+      - screen
+      - oslofmt
+    job-filter: '.*grenade.*'
+  - name: logs/old/screen-q-vpn.txt
     tags:
       - screen
       - oslofmt
