@@ -497,6 +497,8 @@ jobs:
     voting: false
   - name: gate-mistral-python33
     voting: false
+  - name: gate-mistral-devstack-dsvm
+    voting: false
   - name: gate-mistral-extra-python33
     voting: false
   - name: gate-python-mistralclient-python33
@@ -3560,6 +3562,7 @@ projects:
       - gate-mistral-python27
       - gate-mistral-python33
       - gate-mistral-docs
+      - gate-mistral-devstack-dsvm
     gate:
       - gate-mistral-pep8
       - gate-mistral-python26
