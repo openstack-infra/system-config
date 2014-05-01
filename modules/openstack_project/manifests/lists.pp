@@ -166,4 +166,13 @@ class openstack_project::lists(
     mailserver  => $listdomain,
   }
 
+  maillist { 'openstack-superuser':
+    ensure      => present,
+    admin       => 'lauren@openstack.org',
+    password    => $listpassword,
+    description => 'Discussions for Superuser editorial advisors to collaborate, and for readers to be able to contact the editorial team to make suggestions, provide feedback',
+    webserver   => $listdomain,
+    mailserver  => $listdomain,
+  }
+
 }
