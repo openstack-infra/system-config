@@ -58,7 +58,7 @@
 
     jobs:
       - python-jobs
-      - gate-{name}-docs
+      - hook-{name}-rtfd
 
 - project:
     name: murano-dashboard
