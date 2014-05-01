@@ -9,6 +9,7 @@ class openstack_project::template (
   $iptables_rules6           = [],
   $install_users = true,
   $automatic_upgrades = true,
+  $enable_unbound = true,
   $certname = $::fqdn
 ) {
   include ssh
@@ -43,7 +44,9 @@ class openstack_project::template (
     ensure => present,
   }
 
-  class { 'unbound': }
+  if ($enable_unbound) {
+      class { 'unbound': }
+  }
 
   if $::osfamily == 'Debian' {
     # Make sure dig is installed
