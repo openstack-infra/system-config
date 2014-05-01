@@ -51,9 +51,7 @@ class RequirementsList(object):
                 line = line[:line.find('#')]
             line = line.strip()
             if (not line or
-                line.startswith('http://tarballs.openstack.org/') or
-                line.startswith('-e') or
-                line.startswith('-f')):
+                    line.startswith('http://tarballs.openstack.org/')):
                 continue
             req = pkg_resources.Requirement.parse(line)
             if (not ignore_dups and strict and req.project_name.lower()
