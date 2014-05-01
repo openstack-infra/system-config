@@ -472,8 +472,10 @@ jobs:
   - name: ^(gate|check)-tempest-master
     voting: false
   - name: gate-keystone-python33
+    branch: ^(?!stable/(havana|icehouse)).*$
     voting: false
   - name: check-rally-dsvm-keystone
+    branch: ^(?!stable/(havana|icehouse)).*$
     voting: false
   - name: gate-marconi-python33
     voting: false
