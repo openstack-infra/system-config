@@ -129,7 +129,7 @@ sequencing in any meaningful way.
 The entry point for this process is ``/opt/config/production/run_all.sh``
 
 There are a set of nodes, which are configured in puppet as "override" nodes,
-which are run in sequence before the rest of the nodes are run in parellel.
+which are run in sequence before the rest of the nodes are run in parallel.
 At the moment, this allows creation of git repos on the git slaves before
 creation of the master repos on the gerrit server.
 

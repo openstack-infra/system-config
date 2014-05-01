@@ -67,7 +67,7 @@ like app/config/dev/database.php
 Error Log Configuration
 _______________________
 
-Error log configuration is on file *app/config/log.php*  but could be overriden per environment
+Error log configuration is on file *app/config/log.php*  but could be overridden per environment
 such as *app/config/dev/log.php* , here you set two variables:
 
 * to_email : The receiver of the error log email.

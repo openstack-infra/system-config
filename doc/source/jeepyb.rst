@@ -72,7 +72,7 @@ automatically.
 
 The above config gives puppet and its related scripts enough information
 to create new projects, but not enough to add access controls to each
-project. To add access control you need to have have an ``acl-config``
+project. To add access control you need to have an ``acl-config``
 option for the project in ``review.projects.yaml`` file. That option
 should have a value that is a path to the ``project.config`` for that
 project.
