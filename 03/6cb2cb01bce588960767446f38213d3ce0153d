@@ -1,0 +1,12 @@
+Code-Review+2: James E. Blair <corvus@inaugust.com>
+Verified+2: Jenkins
+Code-Review+1: Sean Dague <sean@dague.net>
+Code-Review+1: Devananda van der Veen <devananda.vdv@gmail.com>
+Code-Review+1: Clint 'SpamapS' Byrum <clint@ubuntu.com>
+Code-Review+2: Sergey Lukjanov <slukjanov@mirantis.com>
+Workflow+1: Sergey Lukjanov <slukjanov@mirantis.com>
+Submitted-by: Jenkins
+Submitted-at: Thu, 01 May 2014 21:41:46 +0000
+Reviewed-on: https://review.openstack.org/90452
+Project: openstack-infra/config
+Branch: refs/heads/master
