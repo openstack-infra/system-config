@@ -46,10 +46,21 @@ if [ -d ".testrepository" ] ; then
         .tox/$venv/bin/subunit-1to2 < .testrepository/0 > ./subunit_log.txt
     fi
     .tox/$venv/bin/python /usr/local/jenkins/slave_scripts/subunit2html.py ./subunit_log.txt testr_results.html
+    SUBUNIT_SIZE=$(du -k ./subunit_log.txt | awk '{print $1}')
     gzip -9 ./subunit_log.txt
     gzip -9 ./testr_results.html
 
     export PYTHON=.tox/$venv/bin/python
+    if [[ "$SUBUNIT_SIZE" -gt 50000 ]]; then
+        echo
+        echo "sub_unit.log was > 50 MB of uncompressed data!!!"
+        echo "Something is causing tests for this project to log significant amounts"
+        echo "of data. This may be writers to python logging, stdout, or stderr."
+        echo "Failing this test as a result"
+        echo
+        exit 1
+    fi
+
     rancount=$(.tox/$venv/bin/testr last | sed -ne 's/Ran \([0-9]\+\).*tests in.*/\1/p')
     if [ "$rancount" -eq "0" ] ; then
         echo
