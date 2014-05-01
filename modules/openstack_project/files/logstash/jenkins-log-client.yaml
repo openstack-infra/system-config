@@ -238,6 +238,11 @@ source-files:
       - screen
       - oslofmt
     job-filter: '.*grenade.*'
+  - name: logs/new/screen-n-sched.txt
+    tags:
+      - screen
+      - oslofmt
+    job-filter: '.*grenade.*'
   - name: logs/new/screen-s-account.txt
     tags:
       - screen
@@ -314,6 +319,11 @@ source-files:
       - oslofmt
     job-filter: '.*grenade.*'
   - name: logs/old/screen-n-obj.txt
+    tags:
+      - screen
+      - oslofmt
+    job-filter: '.*grenade.*'
+  - name: logs/old/screen-n-sched.txt
     tags:
       - screen
       - oslofmt
