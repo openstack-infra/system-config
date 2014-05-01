@@ -34,6 +34,7 @@ def setup_image
 end
 
 def create_instance
+    puts "Creating instance.."
     floating_ip = sh %{neutron floatingip-list | \grep -v " 192\." | \grep -m 1 "10\."  | awk '{print $5}'}
     net_id = sh "nova net-list |\grep -w internet | awk '{print $2}'"
     image_id = sh "glance image-list |\grep ci-jenkins-slave-base | awk '{print $2}'"
@@ -45,7 +46,7 @@ def create_instance
             private_ip = $1
             break
         end
-        sleep 1
+        sleep 5
     end
     port_id = sh "neutron port-list | \grep #{private_ip} | awk '{print $2}'"
     floating_ip_id = sh "neutron floatingip-list |\grep #{floating_ip} | awk '{print $2}'"
@@ -54,5 +55,9 @@ def create_instance
     puts "Created instance ci=#{floating_ip} with floating ip #{floating_ip}"
 end
 
-create_instance
-
+count = 1
+count = ARGV[0].to_i unless ARGV[0].nil?
+1.upto(count) {
+    create_instance
+    sleep 1
+}
