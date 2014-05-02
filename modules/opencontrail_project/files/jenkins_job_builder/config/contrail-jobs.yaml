@@ -1,5 +1,6 @@
 - job-template:
     name: 'ci-{name}-build'
+    node: juniper-tests
 
     builders:
       - gerrit-git-prep
