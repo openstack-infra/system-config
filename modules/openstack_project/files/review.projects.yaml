@@ -194,6 +194,8 @@
     - direct-release
 - project: openstack/ceilometer
 - project: openstack/cinder
+- project: openstack/cinder-specs
+- group: cinder
   docimpact-group: openstack-manuals
 - project: openstack/cliff
   description: Command Line Interface Formulation Framework
