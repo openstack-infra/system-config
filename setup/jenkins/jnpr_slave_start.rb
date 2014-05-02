@@ -27,9 +27,10 @@ def sh (cmd, ignore = false)
     return output.chomp
 end
 
+@base_image = "ci-jenkins-slave-base"
 def setup_image
-    sh "nova image-create jnpr-slave-base ci-jenkins-slave-base"
-    sh "glance image-download --file ci-jenkins-slave-base.qcow2 --progress ci-jenkins-slave-base"
+    sh "nova image-create #{@base_image} ci-jenkins-slave-base"
+    sh "glance image-download --file #{@base_image}.qcow2 --progress #{@base_image}"
 #   sh "glance image-create --disk-format qcow2 --container-format bare --name ci-jenkins-slave-base2 --file ci-jenkins-slave-base.qcow2 --is-public True"
 end
 
@@ -37,7 +38,7 @@ def create_instance
     puts "Creating instance.."
     floating_ip = sh %{neutron floatingip-list | \grep -v " 192\." | \grep -m 1 "10\."  | awk '{print $5}'}
     net_id = sh "nova net-list |\grep -w internet | awk '{print $2}'"
-    image_id = sh "glance image-list |\grep ci-jenkins-slave-base | awk '{print $2}'"
+    image_id = sh %{glance image-list |\grep " #{@base_image} " | awk '{print $2}'}
     sh "nova boot --flavor 4 --nic net-id=#{net_id} --image #{image_id} ci-#{floating_ip}"
 
     private_ip = nil
@@ -46,7 +47,7 @@ def create_instance
             private_ip = $1
             break
         end
-        sleep 5
+        sleep 1
     end
     port_id = sh "neutron port-list | \grep #{private_ip} | awk '{print $2}'"
     floating_ip_id = sh "neutron floatingip-list |\grep #{floating_ip} | awk '{print $2}'"
