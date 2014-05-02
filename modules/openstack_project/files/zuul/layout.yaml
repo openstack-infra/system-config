@@ -576,6 +576,9 @@ jobs:
     voting: false
   - name: gate-swift-unittests-func
     voting: false
+  - name: ^(gate|check)-tempest-dsvm-full-apache-services
+    voting: false
+    branch: ^(!?stable/(havana|icehouse)).*$
 
 # The project list is grouped by type of project, and within each
 # group, projects are sorted (mostly) alphabetically.
@@ -825,6 +828,7 @@ projects:
       - gate-tempest-dsvm-neutron-large-ops
       - check-swift-dsvm-functional
       - check-rally-dsvm-keystone
+      - check-tempest-dsvm-full-apache-services
     gate:
       - gate-devstack-dsvm-cells
       - gate-tempest-dsvm-postgres-full
@@ -1321,6 +1325,7 @@ projects:
       - check-tempest-dsvm-postgres-full
       - gate-tempest-dsvm-large-ops
       - gate-tempest-dsvm-neutron-large-ops
+      - check-tempest-dsvm-full-apache-services
     gate:
       - gate-python-keystoneclient-python33
       - gate-devstack-dsvm-cells
