@@ -2203,6 +2203,7 @@
 
     jobs:
       - python-jobs
+      - pypi-jobs
 
 - project:
     name: sphinxcontrib-docbookrestapi
