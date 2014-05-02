@@ -6,8 +6,9 @@
       - shell: |
           #!/bin/bash -xe
           export USER=jenkins
-          cd ~jenkins/workspace/ci-{name}-build/repo
-          scons -U controller/src/base && echo Success
+          export JOB_NAME={name}
+          export WORKSPACE=~jenkins/workspace/ci-{name}-build
+          /usr/local/jenkins/slave_scripts/contrail-build-job.sh
 
 - job-group:
     name: contrail-jobs
