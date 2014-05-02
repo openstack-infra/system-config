@@ -382,8 +382,6 @@ jobs:
     voting: false
   - name: ^(gate|check)-grenade-dsvm-partial-ncpu$
     branch: ^(?!stable/havana).*$
-  - name: ^gate-.*-pypy$
-    voting: false
     # only here until stable is votable, then merge
     # back to a single job
   - name: ^(gate|check)-grenade-dsvm-forward$
@@ -1124,12 +1122,10 @@ projects:
       - name: stable-compat-jobs
     check:
       - gate-python-ceilometerclient-python33
-      - gate-python-ceilometerclient-pypy
       - check-devstack-dsvm-cells
       - check-tempest-dsvm-postgres-full
     gate:
       - gate-python-ceilometerclient-python33
-      - gate-python-ceilometerclient-pypy
       - gate-devstack-dsvm-cells
       - gate-tempest-dsvm-postgres-full
     pre-release:
@@ -1150,12 +1146,10 @@ projects:
       - name: stable-compat-jobs
     check:
       - gate-python-cinderclient-python33
-      - gate-python-cinderclient-pypy
       - check-devstack-dsvm-cells
       - check-tempest-dsvm-postgres-full
     gate:
       - gate-python-cinderclient-python33
-      - gate-python-cinderclient-pypy
       - gate-devstack-dsvm-cells
       - gate-tempest-dsvm-postgres-full
     experimental:
@@ -1216,13 +1210,11 @@ projects:
       - name: stable-compat-jobs
     check:
       - gate-python-glanceclient-python33
-      - gate-python-glanceclient-pypy
       - check-devstack-dsvm-cells
       - check-tempest-dsvm-postgres-full
       - gate-tempest-dsvm-large-ops
       - gate-tempest-dsvm-neutron-large-ops
     gate:
-      - gate-python-glanceclient-pypy
       - gate-devstack-dsvm-cells
       - gate-tempest-dsvm-postgres-full
       - gate-tempest-dsvm-large-ops
@@ -1255,7 +1247,6 @@ projects:
       - gate-python-heatclient-python26
       - gate-python-heatclient-python27
       - gate-python-heatclient-python33
-      - gate-python-heatclient-pypy
       - check-devstack-dsvm-cells
       - check-tempest-dsvm-postgres-full
     gate:
@@ -1263,7 +1254,6 @@ projects:
       - gate-python-heatclient-python26
       - gate-python-heatclient-python27
       - gate-python-heatclient-python33
-      - gate-python-heatclient-pypy
       - gate-devstack-dsvm-cells
       - gate-tempest-dsvm-postgres-full
     post:
@@ -1292,13 +1282,11 @@ projects:
       - name: check-requirements
     check:
       - gate-python-ironicclient-python33
-      - gate-python-ironicclient-pypy
     check-tripleo:
       - check-tripleo-ironic-seed-precise
       - check-tripleo-ironic-undercloud-precise
     gate:
       - gate-python-ironicclient-python33
-      - gate-python-ironicclient-pypy
     pre-release:
       - python-ironicclient-tarball
     release:
@@ -1379,9 +1367,6 @@ projects:
       - name: stable-compat-jobs
     check:
       - gate-python-neutronclient-python33
-      - gate-python-neutronclient-pypy
-    gate:
-      - gate-python-neutronclient-pypy
     experimental:
       - gate-grenade-dsvm-forward
     experimental-tripleo:
@@ -1408,14 +1393,12 @@ projects:
       - name: stable-compat-jobs
     check:
       - gate-python-novaclient-python33
-      - gate-python-novaclient-pypy
       - check-devstack-dsvm-cells
       - check-tempest-dsvm-postgres-full
       - gate-tempest-dsvm-large-ops
       - gate-tempest-dsvm-neutron-large-ops
     gate:
       - gate-python-novaclient-python33
-      - gate-python-novaclient-pypy
       - gate-devstack-dsvm-cells
       - gate-tempest-dsvm-postgres-full
       - gate-tempest-dsvm-large-ops
@@ -1519,13 +1502,11 @@ projects:
       - gate-python-troveclient-python26
       - gate-python-troveclient-python27
       - gate-python-troveclient-python33
-      - gate-python-troveclient-pypy
     gate:
       - gate-python-troveclient-pep8
       - gate-python-troveclient-python26
       - gate-python-troveclient-python27
       - gate-python-troveclient-python33
-      - gate-python-troveclient-pypy
     post:
       - python-troveclient-branch-tarball
     pre-release:
@@ -2040,7 +2021,6 @@ projects:
     check:
       - gate-requirements-pep8
       - gate-requirements-python27
-      - gate-requirements-pypy
       - check-requirements-integration-dsvm
       - check-devstack-dsvm-cells
       - check-tempest-dsvm-postgres-full
@@ -2050,7 +2030,6 @@ projects:
     gate:
       - gate-requirements-pep8
       - gate-requirements-python27
-      - gate-requirements-pypy
       - gate-requirements-integration-dsvm
       - gate-devstack-dsvm-cells
       - gate-tempest-dsvm-postgres-full
