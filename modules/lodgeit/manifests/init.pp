@@ -6,8 +6,7 @@ class lodgeit {
                 'python-pybabel',
                 'python-werkzeug',
                 'python-simplejson',
-                'python-pygments',
-                'drizzle']
+                'python-pygments']
 
   include apache
 
@@ -39,24 +38,10 @@ class lodgeit {
     ensure => directory,
   }
 
-  service { 'drizzle':
-    ensure     => running,
-    hasrestart => true,
-    require    => Package['drizzle'],
-  }
-
   vcsrepo { '/tmp/lodgeit-main':
     ensure   => latest,
     provider => git,
     source   => 'https://git.openstack.org/openstack-infra/lodgeit',
-  }
-
-# create initial git DB backup location
-
-  exec { 'create_db_backup':
-    command => 'git init /var/backups/lodgeit_db',
-    path    => '/bin:/usr/bin',
-    onlyif  => 'test ! -d /var/backups/lodgeit_db',
   }
 
 }

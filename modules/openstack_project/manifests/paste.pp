@@ -1,6 +1,8 @@
 # == Class: openstack_project::paste
 #
 class openstack_project::paste (
+  $db_host,
+  $db_password,
   $sysadmins = []
 ) {
   class { 'openstack_project::server':
@@ -9,11 +11,9 @@ class openstack_project::paste (
   }
   include lodgeit
   lodgeit::site { 'openstack':
-    port  => '5000',
-    image => 'header-bg2.png',
-  }
-
-  lodgeit::site { 'drizzle':
-    port => '5001',
+    db_host     => $db_host,
+    db_password => $db_password,
+    port        => '5000',
+    image       => 'header-bg2.png',
   }
 }
