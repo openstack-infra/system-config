@@ -412,6 +412,8 @@ jobs:
     voting: false
   - name: check-tempest-dsvm-cells-full
     voting: false
+  - name: experimental-devstack-tempest-dsvm-f20
+    voting: false
 # For Gerrit ver 2.4.x (using maven)
   - name: ^(gate|check)-gerrit-unittests$
     branch: ^openstack/2\.4.*$
@@ -2519,6 +2521,7 @@ projects:
       - gate-grenade-dsvm-forward
       - check-tempest-master-dsvm-full-havana
       - check-tempest-master-dsvm-neutron-havana
+      - experimental-devstack-tempest-dsvm-f20
 
   - name: openstack-dev/grenade
     check:
