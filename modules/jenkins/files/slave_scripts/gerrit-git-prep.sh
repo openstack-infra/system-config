@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 set -ex
 
@@ -50,9 +50,19 @@ then
     then
         git clone file:///opt/git/$ZUUL_PROJECT .
     else
-        git clone $GIT_ORIGIN/$ZUUL_PROJECT .
+        # This some times fails. Retry a few times
+        COUNTER=0
+        while [  $COUNTER -lt 10 ]; do
+            git clone $GIT_ORIGIN/$ZUUL_PROJECT . || true
+            if [ -d .git ]; then
+                break
+            fi
+            let COUNTER=COUNTER+1
+            echo Try again $COUNTER of 10
+        done
     fi
 fi
+
 git remote set-url origin $GIT_ORIGIN/$ZUUL_PROJECT
 
 # attempt to work around bugs 925790 and 1229352

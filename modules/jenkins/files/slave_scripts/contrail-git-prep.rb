@@ -1,5 +1,9 @@
 #!/usr/bin/env ruby
 
+require 'pp'
+
+pp ENV
+
 ENV['USER'] = "jenkins" if ENV['USER'].nil? or ENV['USER'].empty?
 @zuul_project = ENV['ZUUL_PROJECT'] || "Juniper/contrail-controller-test"
 
@@ -100,6 +104,9 @@ def switch_gerrit_repo
 end
 
 def pre_build_setup
+    sh "rm -rf /tmp/cache"
+    sh "mkdir -p ~jenkins/tmp/cache"
+    sh "ln -sf ~jenkins/tmp/cache /tmp/cache"
     sh "python #{TOP}/repo/third_party/fetch_packages.py 2>&1"
 #   sh "python #{TOP}/repo/distro/third_party/fetch_packages.py 2>&1"
 end
