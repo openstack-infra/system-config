@@ -16,7 +16,8 @@
           #!/bin/bash -xe
           export PYTHONUNBUFFERED=true
           export DEVSTACK_GATE_TIMEOUT=60
-          export ENABLED_SERVICES=solum,solum-api,solum-build-api,tempest
+          export DEVSTACK_GATE_NEUTRON=1
+          export ENABLED_SERVICES=solum,solum-api,solum-build-api,solum-conductor,solum-deployer,solum-worker,tempest
           export PROJECTS="stackforge/solum"
 
           function pre_test_hook {
