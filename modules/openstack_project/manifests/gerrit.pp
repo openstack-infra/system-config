@@ -191,7 +191,10 @@ class openstack_project::gerrit (
     require                             => Class[openstack_project::server],
   }
 
-  mysql_backup::backup { 'gerrit':
+  mysql_backup::backup_remote { 'gerrit':
+    database_host     => $mysql_host,
+    database_user     => 'gerrit2',
+    database_password => $mysql_password,
     require => Class['::gerrit'],
   }
 
