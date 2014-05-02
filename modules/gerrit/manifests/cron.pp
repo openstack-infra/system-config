@@ -23,10 +23,7 @@ class gerrit::cron(
   }
 
   cron { 'removedbdumps':
+    ensure      => 'absent',
     user        => 'gerrit2',
-    hour        => '5',
-    minute      => '1',
-    command     => 'find /home/gerrit2/dbupdates/ -name "*.sql.gz" -mtime +30 -exec rm -f {} \;',
-    environment => 'PATH=/usr/bin:/bin:/usr/sbin:/sbin',
   }
 }
