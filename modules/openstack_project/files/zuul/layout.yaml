@@ -4630,7 +4630,8 @@ projects:
     pre-release:
       - tooz-tarball
     release:
-      - tooz-tarball
+      - tooz-tarball:
+        - tooz-pypi-upload
 
   - name: stackforge/turbo-hipster
     check:
