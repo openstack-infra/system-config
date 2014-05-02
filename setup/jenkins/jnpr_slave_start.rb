@@ -27,7 +27,7 @@ def sh (cmd, ignore = false)
     return output.chomp
 end
 
-@base_image = "ci-jenkins-slave-base"
+@base_image = "ci-jenkins-slave"
 def setup_image
     sh "nova image-create #{@base_image} ci-jenkins-slave-base"
     sh "glance image-download --file #{@base_image}.qcow2 --progress #{@base_image}"
@@ -47,7 +47,7 @@ def create_instance
             private_ip = $1
             break
         end
-        sleep 1
+        sleep 3
     end
     port_id = sh "neutron port-list | \grep #{private_ip} | awk '{print $2}'"
     floating_ip_id = sh "neutron floatingip-list |\grep #{floating_ip} | awk '{print $2}'"
