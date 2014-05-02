@@ -639,6 +639,14 @@ projects:
     periodic:
       - cinder-propose-translation-update
 
+  - name: openstack/cinder-specs
+    check:
+      - gate-cinder-specs-python27
+      - gate-cinder-specs-docs
+    gate:
+      - gate-cinder-specs-python27
+      - gate-cinder-specs-docs
+
   - name: openstack/cliff
     template:
       - name: python-jobs
