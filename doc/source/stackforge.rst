@@ -76,6 +76,7 @@ and make it look like::
   [access "refs/heads/*"]
           label-Code-Review = -2..+2 group project-name-core
           label-Workflow = -1..+1 group project-name-core
+          abandon = group project-name-core
   [access "refs/tags/*"]
           pushSignedTag = group project-name-core
   [receive]
