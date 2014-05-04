@@ -351,6 +351,12 @@
 
     jobs:
       - python-jobs
+      - gate-{name}-tox-{envlist}:
+          envlist: meetings-check
+      - gate-{name}-tox-{envlist}:
+          envlist: meetings-gate
+      - gate-{name}-tox-{envlist}:
+          envlist: meetings-post
 
 - project:
     name: gerritbot
