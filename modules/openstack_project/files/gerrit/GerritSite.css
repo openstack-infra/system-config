@@ -61,3 +61,7 @@ table.infoTable td.notVotable,
 .changeTable td.dataCell.labelNotApplicable {
     background: inherit;
 }
+
+span.GKSE20JDC1 {
+    white-space: pre-wrap;
+}
