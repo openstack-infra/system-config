@@ -1,0 +1,65 @@
+- job:
+    name: check-gerrit-powered-agenda-tests
+    node: bare-precise
+
+    wrappers:
+      - timeout:
+          timeout: 65
+          fail: true
+      - timestamps
+
+    builders:
+    - shining-panda:
+        build-environment: python
+        python-version: System-CPython-3.3
+        nature: python
+        command: python gerrit-powered-agenda/jobs.py -t check
+        clear: true
+        ignore-exit-code: false
+
+    publishers:
+      - console-log
+
+- job:
+    name: gate-gerrit-powered-agenda-tests
+    node: bare-precise
+
+    wrappers:
+      - timeout:
+          timeout: 65
+          fail: true
+      - timestamps
+
+    builders:
+    - shining-panda:
+        build-environment: python
+        python-version: System-CPython-3.3
+        nature: python
+        command: python gerrit-powered-agenda/jobs.py -t gate
+        clear: true
+        ignore-exit-code: false
+
+    publishers:
+      - console-log
+
+- job:
+    name: post-gerrit-powered-agenda-tests
+    node: bare-precise
+
+    wrappers:
+      - timeout:
+          timeout: 65
+          fail: true
+      - timestamps
+
+    builders:
+    - shining-panda:
+        build-environment: python
+        python-version: System-CPython-3.3
+        nature: python
+        command: python gerrit-powered-agenda/jobs.py -t post
+        clear: true
+        ignore-exit-code: false
+
+    publishers:
+      - console-log

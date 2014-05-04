@@ -351,6 +351,9 @@
 
     jobs:
       - python-jobs
+      - check-gerrit-powered-agenda-tests
+      - gate-gerrit-powered-agenda-tests
+      - post-gerrit-powered-agenda-tests
 
 - project:
     name: gerritbot
