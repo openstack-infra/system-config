@@ -351,6 +351,9 @@
 
     jobs:
       - python-jobs
+      - check-{name}-tests
+      - gate-{name}-tests
+      - post-{name}-tests
 
 - project:
     name: gerritbot
