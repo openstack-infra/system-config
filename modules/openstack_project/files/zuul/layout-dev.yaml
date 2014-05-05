@@ -10,6 +10,7 @@ pipelines:
     trigger:
       gerrit:
         - event: patchset-created
+        - event: draft-published
         - event: change-restored
         - event: comment-added
           comment_filter: (?i)^(Patch Set [0-9]+:\n\n)?\s*recheck(( (?:bug|lp)[\s#:]*(\d+))|( no bug))\s*$
@@ -88,6 +89,7 @@ pipelines:
     trigger:
       gerrit:
         - event: patchset-created
+        - event: draft-published
         - event: comment-added
           comment_filter: (?i)^(Patch Set [0-9]+:\n\n)?\s*recheck(( (?:bug|lp)[\s#:]*(\d+))|( no bug))\s*$
 
