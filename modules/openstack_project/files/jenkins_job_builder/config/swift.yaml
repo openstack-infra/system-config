@@ -38,3 +38,27 @@
     publishers:
       - devstack-logs
       - console-log
+
+- job:
+    name: 'gate-swift-functional-in-process'
+    node: bare-precise
+
+    wrappers:
+      - timeout:
+          timeout: 90
+          fail: true
+      - timestamps
+
+    builders:
+      - link-logs
+      - net-info
+      - gerrit-git-prep
+      - revoke-sudo
+      - tox:
+          envlist: func
+          github-org: 'openstack'
+          project: 'swift'
+
+    publishers:
+      - test-results
+      - console-log
