@@ -1,0 +1,22 @@
+- job-template:
+    name: '{pipeline}-swift-dsvm-functional-in-process{branch-designator}'
+    node: '{node}'
+
+    wrappers:
+      - timeout:
+          timeout: 95
+          fail: true
+      - timestamps
+
+    builders:
+      - link-logs
+      - net-info
+      - devstack-checkout
+      - tox:
+          envlist: func
+          github-org: 'openstack'
+          project: 'swift'
+
+    publishers:
+      - devstack-logs
+      - console-log

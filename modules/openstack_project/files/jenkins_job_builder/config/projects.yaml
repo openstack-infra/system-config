@@ -1226,8 +1226,6 @@
     jobs:
       - python-jobs
       - openstack-publish-jobs
-      - gate-{name}-unittests-{env}:
-          env: func
       - '{pipeline}-swift-dsvm-functional{branch-designator}':
           pipeline: gate
           node: devstack-precise
@@ -1243,6 +1241,16 @@
           node: 'devstack-precise || devstack-precise-check'
           branch-designator: '-havana'
           branch-override: stable/havana
+      - '{pipeline}-swift-dsvm-functional-in-process{branch-designator}':
+          pipeline: gate
+          node: devstack-precise
+          branch-designator: ''
+          branch-override: default
+      - '{pipeline}-swift-dsvm-functional-in-process{branch-designator}':
+          pipeline: check
+          node: 'devstack-precise || devstack-precise-check'
+          branch-designator: ''
+          branch-override: default
 # No one is interested in stable/ branches on swift, so don't run bitrot jobs
 
 
