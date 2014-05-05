@@ -578,7 +578,7 @@ jobs:
     voting: false
   - name: gate-heat-templates-dsvm
     voting: false
-  - name: gate-swift-unittests-func
+  - name: gate-swift-tox-func
     voting: false
 
 # The project list is grouped by type of project, and within each
@@ -1037,14 +1037,14 @@ projects:
       - name: check-requirements
       - name: integrated-gate
     check:
-      - gate-swift-unittests-func
+      - gate-swift-tox-func
       - check-swift-dsvm-functional
       - check-devstack-dsvm-cells
       - check-tempest-dsvm-postgres-full
       - gate-tempest-dsvm-large-ops
       - gate-tempest-dsvm-neutron-large-ops
     gate:
-      - gate-swift-unittests-func
+      - gate-swift-tox-func
       - gate-swift-dsvm-functional
       - gate-devstack-dsvm-cells
       - gate-tempest-dsvm-postgres-full
