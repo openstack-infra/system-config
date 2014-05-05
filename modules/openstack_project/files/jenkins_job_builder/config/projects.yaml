@@ -1226,8 +1226,7 @@
     jobs:
       - python-jobs
       - openstack-publish-jobs
-      - gate-{name}-unittests-{env}:
-          env: func
+      - gate-swift-functional-in-process
       - '{pipeline}-swift-dsvm-functional{branch-designator}':
           pipeline: gate
           node: devstack-precise

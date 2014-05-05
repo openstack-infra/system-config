@@ -578,7 +578,7 @@ jobs:
     voting: false
   - name: gate-heat-templates-dsvm
     voting: false
-  - name: gate-swift-unittests-func
+  - name: gate-swift-functional-in-process
     voting: false
 
 # The project list is grouped by type of project, and within each
