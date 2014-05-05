@@ -49,7 +49,7 @@ li.comment_test {list-style-type: none; }
 /* this is for support of 'Display Person Name In Review Category' */
 .cAPPROVAL {
     max-width: 100px;
-    overflow-x: hidden;
+    overflow: hidden;
 }
 /* fixes to make this like old gerrit */
 .changeTable td.dataCell {
