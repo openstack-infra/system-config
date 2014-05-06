@@ -91,3 +91,16 @@
 
     publishers:
       - console-log
+
+
+- job:
+    name: check-projects-yaml-upstream
+    node: bare-precise
+
+    builders:
+      - revoke-sudo
+      - gerrit-git-prep
+      - shell: "tox -e upstream"
+
+    publishers:
+      - console-log
