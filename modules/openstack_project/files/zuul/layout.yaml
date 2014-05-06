@@ -3963,6 +3963,12 @@ projects:
           - post-mirror-python33
       - hook-pecan-rtfd
 
+  - name: stackforge/powervc-driver
+    check:
+      - noop
+    gate:
+      - noop
+
   - name: stackforge/puppet-ceilometer
     check:
       - gate-puppet-ceilometer-puppet-lint
