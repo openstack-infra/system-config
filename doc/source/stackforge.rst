@@ -77,7 +77,7 @@ and make it look like::
           label-Code-Review = -2..+2 group project-name-core
           label-Workflow = -1..+1 group project-name-core
   [access "refs/tags/*"]
-          pushSignedTag = group project-name-core
+          pushSignedTag = group project-name-ptl
   [receive]
           requireChangeId = true
           requireContributorAgreement = true
@@ -85,7 +85,7 @@ and make it look like::
           mergeContent = true
 
 The access sections in the example ACL grant the project's core group
-approval privileges and the ability so set/un-set WIP status on
+approval privileges and the ability so set/un-set Workflow status on
 changes, as well as the ability to push tags. The other sections set
 some required options for Gerrit to function normally (enforcing
 presence of a Change-Id in commits and allowing changes to be merged).
