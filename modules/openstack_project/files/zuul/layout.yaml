@@ -1903,6 +1903,34 @@ projects:
           - post-mirror-python26
           - post-mirror-python27
 
+  - name: openstack/oslo.i18n
+    template:
+      - name: python-jobs
+      - name: openstack-server-publish-jobs
+      - name: check-requirements
+      - name: integrated-gate
+    check:
+      - gate-oslo.i18n-python33
+      - check-devstack-dsvm-cells
+      - check-oslotest-dsvm-oslo.i18n
+    gate:
+      - gate-oslo.i18n-python33
+      - gate-devstack-dsvm-cells
+      - gate-oslotest-dsvm-oslo.i18n
+    pre-release:
+      - oslo.i18n-tarball
+    experimental-tripleo:
+      - check-tripleo-seed-precise
+      - check-tripleo-ironic-seed-precise
+      - check-tripleo-undercloud-precise
+      - check-tripleo-ironic-undercloud-precise
+      - check-tripleo-overcloud-precise
+    release:
+      - oslo.i18n-tarball:
+        - oslo.i18n-pypi-upload:
+          - post-mirror-python26
+          - post-mirror-python27
+          - post-mirror-python33
 
   - name: openstack/oslo.messaging
     template:
