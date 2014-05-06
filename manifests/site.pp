@@ -425,22 +425,15 @@ node 'nodepool.openstack.org' {
 
 node 'zuul.openstack.org' {
   class { 'openstack_project::zuul_prod':
-    gerrit_server                  => 'review.openstack.org',
-    gerrit_user                    => 'jenkins',
-    gerrit_ssh_host_key            => hiera('gerrit_ssh_rsa_pubkey_contents'),
-    zuul_ssh_private_key           => hiera('zuul_ssh_private_key_contents'),
-    url_pattern                    => 'http://logs.openstack.org/{build.parameters[LOG_PATH]}',
-    swift_authurl                  => 'https://identity.api.rackspacecloud.com/v2.0/',
-    swift_user                     => 'infra-files-rw',
-    swift_key                      => hiera('infra_files_rw_password'),
-    swift_tenant_name              => 'openstackjenkins',
-    swift_region_name              => 'DFW',
-    swift_default_container        => 'infra-files',
-    swift_default_logserver_prefix => 'http://logs.openstack.org/',
-    zuul_url                       => 'http://zuul.openstack.org/p',
-    sysadmins                      => hiera('sysadmins'),
-    statsd_host                    => 'graphite.openstack.org',
-    gearman_workers                => [
+    gerrit_server        => 'review.openstack.org',
+    gerrit_user          => 'jenkins',
+    gerrit_ssh_host_key  => hiera('gerrit_ssh_rsa_pubkey_contents'),
+    zuul_ssh_private_key => hiera('zuul_ssh_private_key_contents'),
+    url_pattern          => 'http://logs.openstack.org/{build.parameters[LOG_PATH]}',
+    zuul_url             => 'http://zuul.openstack.org/p',
+    sysadmins            => hiera('sysadmins'),
+    statsd_host          => 'graphite.openstack.org',
+    gearman_workers      => [
       'nodepool.openstack.org',
       'jenkins.openstack.org',
       'jenkins01.openstack.org',
