@@ -6,7 +6,7 @@
     doc-publisher-site: docs.opencontrail.org
 
     jobs:
-      - contrail-jobs
+      - contrail-controller-jobs
 
 - project:
     name: contrail-ci-test

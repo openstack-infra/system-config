@@ -1,9 +1,4 @@
 #!/usr/bin/env bash
 
 set -ex
-
-env
-cd $WORKSPACE/repo
-scons -U controller/src/base
-echo Success
-
+exec ruby /usr/local/jenkins/slave_scripts/contrail-build-job.rb

@@ -12,7 +12,7 @@
           /usr/local/jenkins/slave_scripts/contrail-build-job.sh
 
 - job-group:
-    name: contrail-jobs
+    name: contrail-controller-jobs
     jobs:
       - 'ci-{name}-build'
 
