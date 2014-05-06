@@ -7,6 +7,8 @@ pipelines:
     failure-message: Build failed.  For information on how to proceed, see https://wiki.openstack.org/wiki/GerritJenkinsGit#Test_Failures
     manager: IndependentPipelineManager
     precedence: low
+    require:
+      open: True
     trigger:
       gerrit:
         - event: patchset-created
@@ -54,6 +56,8 @@ pipelines:
     failure-message: Build failed.  For information on how to proceed, see https://wiki.openstack.org/wiki/GerritJenkinsGit#Test_Failures
     manager: DependentPipelineManager
     precedence: normal
+    require:
+      open: True
     trigger:
       gerrit:
         - event: comment-added
@@ -193,6 +197,8 @@ pipelines:
       https://wiki.openstack.org/wiki/GerritJenkinsGit#Test_Failures
     manager: IndependentPipelineManager
     precedence: low
+    require:
+      open: True
     trigger:
       gerrit:
         - event: patchset-created
