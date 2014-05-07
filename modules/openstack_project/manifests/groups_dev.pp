@@ -32,6 +32,13 @@ class openstack_project::groups_dev (
     sysadmins                 => $sysadmins,
   }
 
+  vcsrepo { '/srv/groups-static-pages':
+    ensure   => latest,
+    provider => git,
+    revision => 'master',
+    source   => 'https://git.openstack.org/openstack-infra/groups-static-pages',
+  }
+
   class { 'drupal':
     site_name            => 'groups-dev.openstack.org',
     site_docroot         => '/srv/vhosts/groups-dev.openstack.org',
@@ -47,7 +54,8 @@ class openstack_project::groups_dev (
     site_repo_url        => 'https://git.openstack.org/openstack-infra/groups',
     site_profile         => 'groups',
     site_base_url        => 'http://groups-dev.openstack.org',
-    require              => Class['openstack_project::server'],
+    require              => [ Class['openstack_project::server'],
+      Vcsrepo['/srv/groups-static-pages'] ]
   }
 
 }
