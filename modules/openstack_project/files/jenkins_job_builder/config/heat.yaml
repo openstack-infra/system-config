@@ -18,6 +18,7 @@
           export DEVSTACK_GATE_TIMEOUT=120
           export DEVSTACK_GATE_TEMPEST=0
           export DEVSTACK_GATE_EXERCISES=0
+          export DEVSTACK_GATE_HEAT_TEMPLATES=1
           export PROJECTS="openstack/heat-templates $PROJECTS"
           function post_test_hook {
               source $BASE/new/devstack/openrc && \
