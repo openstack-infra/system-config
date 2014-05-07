@@ -407,6 +407,15 @@
           remove-prefix: 'publish-docs/'
 
 - publisher:
+    name: upload-to-developer-site
+    publishers:
+      - scp:
+          site: developer.openstack.org
+          source: '{prefix}**'
+          target: '/'
+          remove-prefix: '{prefix}'
+
+- publisher:
     name: upload-doc-build-results
     publishers:
       - scp:
