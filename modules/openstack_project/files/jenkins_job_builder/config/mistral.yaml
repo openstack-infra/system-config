@@ -16,11 +16,10 @@
           #!/bin/bash -xe
           export PYTHONUNBUFFERED=true
           export DEVSTACK_GATE_TIMEOUT=60
-          export ENABLED_SERVICES=mistral
+          export ENABLED_SERVICES=mistral,tempest
           export PROJECTS="stackforge/mistral $PROJECTS"
 
           function pre_test_hook {
-              # Install mistral devstack integration
               cd /opt/stack/new/mistral/functionaltests
               ./pre_test_hook.sh
           }
