@@ -2,6 +2,12 @@
     name: 'ci-{name}-build'
     node: juniper-tests
 
+    wrappers:
+      - timeout:
+          timeout: 120
+          fail: true
+      - timestamps
+
     builders:
       - gerrit-git-prep
       - shell: |
