@@ -18,7 +18,7 @@
           export DEVSTACK_GATE_TIMEOUT=60
           export DEVSTACK_GATE_NEUTRON=1
           export ENABLED_SERVICES=solum,solum-api,solum-build-api,solum-conductor,solum-deployer,solum-worker,tempest
-          export PROJECTS="stackforge/solum"
+          export PROJECTS="stackforge/solum $PROJECTS"
 
           function pre_test_hook {
               cd /opt/stack/new/solum/functionaltests
