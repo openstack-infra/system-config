@@ -43,11 +43,8 @@
     publishers:
       - console-log
       - upload-doc-build-results
-      - ftp:
-          site: api.openstack.org
-          source: 'publish-docs/api-ref/**'
-          target: '/'
-          remove-prefix: 'publish-docs/api-ref/'
+      - upload-to-developer-site:
+          prefix: 'publish-docs/api-ref/'
 
 
 # in zuul/layout.yaml specified to only run against master branch.
@@ -61,13 +58,9 @@
       - gerrit-git-prep
 
     publishers:
-      - ftp:
-          site: api.openstack.org
-          source: 'www/**'
-          target: ''
-          remove-prefix: 'www/'
-          excludes: ''
       - console-log
+      - upload-to-developer-site:
+          prefix: 'www/'
 
 
 - job:
