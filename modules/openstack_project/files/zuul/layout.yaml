@@ -1519,10 +1519,10 @@ projects:
           - post-mirror-python27
           - post-mirror-python33
 
-#TODO: add docs
   - name: openstack/python-troveclient
     template:
       - name: check-requirements
+      - name: openstack-client-publish-jobs
       - name: integrated-gate
       - name: stable-compat-jobs
     check:
