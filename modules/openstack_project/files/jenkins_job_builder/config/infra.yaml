@@ -87,7 +87,26 @@
     builders:
       - revoke-sudo
       - gerrit-git-prep
-      - shell: "tools/check_projects_yaml_alphabetized.sh"
+      - tox:
+          envlist: projects_alphabetized
+          github-org: openstack-infra
+          project: config
+
+    publishers:
+      - console-log
+
+
+- job:
+    name: check-projects-yaml-upstream
+    node: bare-precise
+
+    builders:
+      - revoke-sudo
+      - gerrit-git-prep
+      - tox:
+          envlist: upstream
+          github-org: openstack-infra
+          project: config
 
     publishers:
       - console-log
