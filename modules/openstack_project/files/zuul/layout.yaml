@@ -600,6 +600,8 @@ jobs:
   - name: ^(gate|check)-tempest-dsvm-full-apache-services
     voting: false
     branch: ^(?!stable/(havana|icehouse)).*$
+  - name: gate-tuskar-ui-selenium
+    voting: false
 
 # The project list is grouped by type of project, and within each
 # group, projects are sorted (mostly) alphabetically.
@@ -2396,10 +2398,12 @@ projects:
       - gate-tuskar-ui-pep8
       - gate-tuskar-ui-python26
       - gate-tuskar-ui-python27
+      - gate-tuskar-ui-selenium
     gate:
       - gate-tuskar-ui-pep8
       - gate-tuskar-ui-python26
       - gate-tuskar-ui-python27
+      - gate-tuskar-ui-selenium
     experimental-tripleo:
       - check-tripleo-ironic-seed-precise
       - check-tripleo-undercloud-precise
