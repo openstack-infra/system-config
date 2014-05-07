@@ -2382,6 +2382,15 @@
           branch-designator: 'branch'
 
 - project:
+    name: groups-static-pages
+    github-org: openstack-infra
+    node: bare-precise
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - python-jobs
+
+- project:
     name: openstackid
     github-org: openstack-infra
     node: bare-precise
