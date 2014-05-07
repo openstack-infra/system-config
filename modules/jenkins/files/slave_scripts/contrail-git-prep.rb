@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
-require 'contrail-utils'
+require 'pp'
 
 pp ENV
 
@@ -31,6 +31,31 @@ puts "Working with project #{@project}"
 GERRIT_SITE="https://review.opencontrail.org" # ARGV[0]
 GIT_ORIGIN="ssh://zuul@review.opencontrail.org:29418" # ARGV[1]
 TOP=ENV['PWD']
+
+def dry_run?
+    return !ENV['DRY_RUN'].nil? && ENV['DRY_RUN'].casecmp("true") == 0
+end
+
+def sh (cmd, ignore = false)
+    puts "#{cmd}"
+    exit_code = 0
+    if not dry_run? then
+        if cmd =~ /^cd\s+(.*)/ then
+            Dir.chdir($1)
+        else
+            puts cmd
+            output = `#{cmd}`
+            exit_code = $?.to_i unless ignore
+        end
+    end
+    puts output if !output.nil? and !output.empty?
+
+    if exit_code != 0 then
+        puts "Comamnd #{cmd} failed with exit code #{$?}"
+        exit exit_code
+    end
+    return output
+end
 
 def setup_gerrit_repo
     return unless @gerrit_setup
@@ -71,12 +96,11 @@ def switch_gerrit_repo
         exit -1
     end
 
-    orig_project = $1
+    old_project = $1
 
-    # Now, switch orig_project to project's git repo fetched from gerrit.
-    sh "mv #{TOP}/repo/#{orig_project} #{TOP}/repo/#{orig_project}.orig"
-    ENV['GERRIT_CONTRAIL_PROJECT_PATH'] = "#{TOP}/repo/#{orig_project}"
-    sh "mv #{TOP}/#{@project} #{ENV['GERRIT_CONTRAIL_PROJECT_PATH']}"
+    # Now, switch old_project to project's git repo fetched from gerrit.
+    sh "mv #{TOP}/repo/#{old_project} #{TOP}/repo/#{old_project}.orig"
+    sh "mv #{TOP}/#{@project} #{TOP}/repo/#{old_project}"
 end
 
 def pre_build_setup
