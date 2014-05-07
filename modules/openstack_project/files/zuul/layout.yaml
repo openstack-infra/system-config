@@ -1519,26 +1519,19 @@ projects:
           - post-mirror-python27
           - post-mirror-python33
 
-#TODO: add docs
   - name: openstack/python-troveclient
     template:
       - name: check-requirements
+      - name: openstack-client-publish-jobs
+      - name: python-jobs
       - name: integrated-gate
       - name: stable-compat-jobs
     check:
-      - gate-python-troveclient-pep8
-      - gate-python-troveclient-python26
-      - gate-python-troveclient-python27
       - gate-python-troveclient-python33
       - gate-python-troveclient-pypy
     gate:
-      - gate-python-troveclient-pep8
-      - gate-python-troveclient-python26
-      - gate-python-troveclient-python27
       - gate-python-troveclient-python33
       - gate-python-troveclient-pypy
-    post:
-      - python-troveclient-branch-tarball
     pre-release:
       - python-troveclient-tarball
     release:
