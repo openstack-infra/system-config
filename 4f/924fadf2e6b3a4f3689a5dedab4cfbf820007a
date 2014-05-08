@@ -1,0 +1,13 @@
+Code-Review+2: Monty Taylor <mordred@inaugust.com>
+Workflow+1: Monty Taylor <mordred@inaugust.com>
+Verified+2: Jenkins
+Code-Review+1: Derek Higgins <derekh@redhat.com>
+Code-Review+1: Clint 'SpamapS' Byrum <clint@ubuntu.com>
+Code-Review+1: Michael Kerrin <michael.kerrin@hp.com>
+Code-Review+1: Joshua Hesketh <joshua.hesketh@rackspace.com>
+Code-Review+1: Jiri Stransky <jistr@redhat.com>
+Submitted-by: Jenkins
+Submitted-at: Thu, 08 May 2014 00:50:39 +0000
+Reviewed-on: https://review.openstack.org/91870
+Project: openstack-infra/config
+Branch: refs/heads/master
