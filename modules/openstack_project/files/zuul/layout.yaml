@@ -599,7 +599,7 @@ jobs:
     voting: false
   - name: ^(gate|check)-tempest-dsvm-full-apache-services
     voting: false
-    branch: ^(!?stable/(havana|icehouse)).*$
+    branch: ^(?!stable/(havana|icehouse)).*$
 
 # The project list is grouped by type of project, and within each
 # group, projects are sorted (mostly) alphabetically.
