@@ -1,1 +1,2 @@
 jenkins ALL=(ALL) NOPASSWD:ALL
+Defaults:jenkins secure_path=/sbin:/usr/sbin:/usr/bin:/bin:/usr/local/sbin:/usr/local/bin
