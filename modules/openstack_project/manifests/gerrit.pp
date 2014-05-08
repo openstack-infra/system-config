@@ -45,6 +45,7 @@ class openstack_project::gerrit (
   $contactstore_url = '',
   $script_user = 'update',
   $script_key_file = '/home/gerrit2/.ssh/id_rsa',
+  $script_key_content = '',
   $script_logging_conf = '/home/gerrit2/.sync_logging.conf',
   $projects_file = 'UNDEF',
   $projects_config = 'UNDEF',
@@ -200,8 +201,9 @@ class openstack_project::gerrit (
 
   if ($testmode == false) {
     class { 'gerrit::cron':
-      script_user     => $script_user,
-      script_key_file => $script_key_file,
+      script_user        => $script_user,
+      script_key_file    => $script_key_file,
+      script_key_content => $script_key_content,
     }
     class { 'github':
       username         => $github_username,
