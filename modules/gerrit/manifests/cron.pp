@@ -2,15 +2,28 @@
 #
 class gerrit::cron(
   $script_user = 'update',
-  $script_key_file = '/home/gerrit2/.ssh/id_rsa'
+  $script_key_file = '/home/gerrit2/.ssh/id_rsa',
+  $script_key_content = ''
 ) {
 
-  cron { 'expireoldreviews':
-    user    => 'gerrit2',
-    hour    => '6',
-    minute  => '3',
-    command => "python /usr/local/bin/expire-old-reviews ${script_user} ${script_key_file}",
-    require => Class['jeepyb'],
+  if $script_key_content != '' {
+    file { $script_key_file:
+      owner   => 'gerrit2',
+      group   => 'gerrit2',
+      mode    => '0600',
+      content => $script_key_content,
+      replace => true,
+    }
+    cron { 'expireoldreviews':
+      user    => 'gerrit2',
+      hour    => '6',
+      minute  => '3',
+      command => "python /usr/local/bin/expire-old-reviews ${script_user} ${script_key_file}",
+      require => [
+        Class['jeepyb'],
+        File[$script_key_file],
+      ]
+    }
   }
 
   cron { 'gerrit_repack':
