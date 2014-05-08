@@ -8,10 +8,10 @@ timeout -k 2m 10m /usr/local/bin/notify-impact patchset-created "$@" --impact Se
 timeout -k 2m 10m /usr/local/bin/trivial-rebase \
     patchset-created \
     --whitespace \
-    --private-key-path=<%= ssh_host_key %> \
-    --role-user=<%= trivial_rebase_role_id %> "$@"
+    --private-key-path=<%= @ssh_host_key %> \
+    --role-user=<%= @trivial_rebase_role_id %> "$@"
 <% end -%>
-<% if $ssh_welcome_rsa_key_contents != "" -%>
+<% if @ssh_welcome_rsa_key_contents != "" -%>
 timeout -k 2m 10m /usr/local/bin/welcome-message patchset-created \
     --verbose --ssh-user=welcome-message \
     --ssh-key=/home/gerrit2/review_site/etc/ssh_welcome_rsa_key "$@"
