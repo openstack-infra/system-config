@@ -1572,7 +1572,6 @@ projects:
       - gate-diskimage-builder-pep8
       - gate-diskimage-builder-python26
       - gate-diskimage-builder-python27
-      - check-oslotest-dsvm-diskimage-builder
       - check-tempest-dsvm-virtual-ironic
     check-tripleo:
       - check-tripleo-ironic-seed-precise
@@ -1582,7 +1581,6 @@ projects:
       - gate-diskimage-builder-pep8
       - gate-diskimage-builder-python26
       - gate-diskimage-builder-python27
-      - gate-oslotest-dsvm-diskimage-builder
       - gate-tempest-dsvm-virtual-ironic
     experimental-tripleo:
       - check-tripleo-ironic-undercloud-precise
@@ -1793,15 +1791,11 @@ projects:
       - name: check-requirements
       - name: publish-to-pypi
     check:
-      - check-oslotest-dsvm-diskimage-builder
       - check-oslotest-dsvm-oslo.config
       - check-oslotest-dsvm-oslo.messaging
-      - check-oslotest-dsvm-tripleo-image-elements
     gate:
-      - gate-oslotest-dsvm-diskimage-builder
       - gate-oslotest-dsvm-oslo.config
       - gate-oslotest-dsvm-oslo.messaging
-      - gate-oslotest-dsvm-tripleo-image-elements
 
   - name: openstack/oslo-incubator
     template:
@@ -2193,13 +2187,13 @@ projects:
     template:
       - name: publish-to-pypi
     check:
-      - check-oslotest-dsvm-tripleo-image-elements
+      - noop
     check-tripleo:
       - check-tripleo-ironic-seed-precise
       - check-tripleo-undercloud-precise
       - check-tripleo-overcloud-f20
     gate:
-      - gate-oslotest-dsvm-tripleo-image-elements
+      - noop
     experimental-tripleo:
       - check-tripleo-ironic-undercloud-precise
       - check-tripleo-overcloud-precise

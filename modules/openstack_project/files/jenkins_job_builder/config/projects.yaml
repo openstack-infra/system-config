@@ -1515,7 +1515,6 @@
     jobs:
       - python-jobs
       - pypi-jobs
-      - oslotest-cross-test
 
 - project:
     name: os-apply-config
@@ -1585,7 +1584,6 @@
     jobs:
       - python-jobs
       - pypi-jobs
-      - oslotest-cross-test
 
 - project:
     name: tripleo-incubator
