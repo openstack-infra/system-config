@@ -963,6 +963,7 @@ projects:
       - check-tempest-dsvm-cells-full
       - check-tempest-dsvm-neutron-pg
       - gate-tempest-dsvm-large-ops-testing
+      - gate-tempest-dsvm-neutron-large-ops-testing
     experimental-tripleo:
       - check-tripleo-ironic-seed-precise
       - check-tripleo-undercloud-precise
