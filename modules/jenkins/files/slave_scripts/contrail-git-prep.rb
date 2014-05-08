@@ -7,7 +7,7 @@ pp ENV
 ENV['USER'] = "jenkins" if ENV['USER'].nil? or ENV['USER'].empty?
 @zuul_project = ENV['ZUUL_PROJECT'] || "Juniper/contrail-controller-test"
 
-@gerrit_setup = true
+@gerrit_setup = !ENV['ZUUL_PROJECT'].nil?
 
 def init_gerrit_setup
     @gerrit_setup = !ENV['ZUUL_PROJECT'].nil?
@@ -107,8 +107,8 @@ def pre_build_setup
     sh "rm -rf /tmp/cache"
     sh "mkdir -p ~jenkins/tmp/cache"
     sh "ln -sf ~jenkins/tmp/cache /tmp/cache"
-    sh "python #{TOP}/repo/third_party/fetch_packages.py 2>&1"
-#   sh "python #{TOP}/repo/distro/third_party/fetch_packages.py 2>&1"
+    sh "python #{TOP}/repo/third_party/fetch_packages.py 2>&1 | tee #{TOP}/third_party_fetch_packages.log"
+#   sh "python #{TOP}/repo/distro/third_party/fetch_packages.py 2>&1 | tee #{TOP}/distro_fetch_packages.log"
 end
 
 def main
