@@ -62,7 +62,7 @@ if [ -d ".testrepository" ] ; then
     fi
 
     rancount=$(.tox/$venv/bin/testr last | sed -ne 's/Ran \([0-9]\+\).*tests in.*/\1/p')
-    if [ "$rancount" -eq "0" ] ; then
+    if [ -z "$rancount" ] || [ "$rancount" -eq "0" ] ; then
         echo
         echo "Zero tests were run. At least one test should have been run."
         echo "Failing this test as a result"
