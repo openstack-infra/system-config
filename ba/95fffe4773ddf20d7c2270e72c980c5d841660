@@ -1,0 +1,11 @@
+Verified+2: Jenkins
+Code-Review+1: Mark Washenberger <mark.washenberger@markwash.net>
+Code-Review+2: Clark Boylan <cboylan@sapwetik.org>
+Code-Review+2: Jeremy Stanley <fungi@yuggoth.org>
+Workflow+1: Jeremy Stanley <fungi@yuggoth.org>
+Code-Review+1: Anita Kuno <anteaya@anteaya.info>
+Submitted-by: Jenkins
+Submitted-at: Thu, 08 May 2014 18:59:50 +0000
+Reviewed-on: https://review.openstack.org/90461
+Project: openstack-infra/config
+Branch: refs/heads/master
