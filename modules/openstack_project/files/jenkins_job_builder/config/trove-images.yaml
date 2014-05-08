@@ -1,0 +1,23 @@
+- job:
+    name: 'gate-trove-buildimage-mysql'
+    node: 'bare-precise'
+
+    builders:
+      - link-logs
+      - net-info
+      - gerrit-git-prep
+      - shell: |
+          #!/bin/bash -xe
+          export DEST=/opt/stack
+          export USERHOME=$WORKSPACE
+          cd scripts
+          ./redstack build-image mysql
+
+    publishers:
+      - scp:
+          site: 'tarballs.openstack.org'
+          files:
+            - source: 'images/ubuntu_mysql/ubuntu_mysql.qcow2'
+              target: 'trove/images/ubuntu_mysql.qcow2'
+              keep-hierarchy: false
+              copy-after-failure: false
