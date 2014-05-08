@@ -44,7 +44,7 @@
       - console-log
       - upload-doc-build-results
       - ftp:
-          site: api.openstack.org
+          site: developer.openstack.org
           source: 'publish-docs/api-ref/**'
           target: '/'
           remove-prefix: 'publish-docs/api-ref/'
@@ -62,7 +62,7 @@
 
     publishers:
       - ftp:
-          site: api.openstack.org
+          site: developer.openstack.org
           source: 'www/**'
           target: ''
           remove-prefix: 'www/'
