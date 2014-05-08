@@ -16,6 +16,7 @@ class openstack_project::review_dev (
   $ssh_rsa_pubkey_contents = '',
   $ssh_project_rsa_key_contents = '',
   $ssh_project_rsa_pubkey_contents = '',
+  $script_key_content = '',
   $lp_sync_consumer_key = '',
   $lp_sync_token = '',
   $lp_sync_secret = '',
@@ -50,6 +51,7 @@ class openstack_project::review_dev (
       'https://review-dev.openstack.org/fakestore',
     script_user                     => 'launchpadsync',
     script_key_file                 => '/home/gerrit2/.ssh/launchpadsync_rsa',
+    script_key_content              => $script_key_content,
     script_logging_conf             => '/home/gerrit2/.sync_logging.conf',
     projects_file                   =>
       'puppet:///modules/openstack_project/review-dev.projects.yaml',

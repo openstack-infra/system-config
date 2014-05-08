@@ -63,6 +63,7 @@ class openstack_project::review (
   # welcome-message's user ssh key.
   $ssh_welcome_rsa_key_contents='',
   $ssh_welcome_rsa_pubkey_contents='',
+  $script_key_content='',
   # To be renamed - they're now just launchpad creds, not lp_sync
   $lp_sync_consumer_key='',
   $lp_sync_token='',
@@ -115,6 +116,7 @@ class openstack_project::review (
       'http://www.openstack.org/verify/member/',
     script_user                         => 'launchpadsync',
     script_key_file                     => '/home/gerrit2/.ssh/launchpadsync_rsa',
+    script_key_content                  => $script_key_content,
     script_logging_conf                 => '/home/gerrit2/.sync_logging.conf',
     projects_file                       =>
       'puppet:///modules/openstack_project/review.projects.yaml',
