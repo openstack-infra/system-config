@@ -4632,6 +4632,12 @@ projects:
       - stackalytics-tarball
       - hook-stackalytics-rtfd
 
+  - name: stackforge/swift-ceph-backend
+    check:
+      - noop
+    gate:
+      - noop
+
   - name: stackforge/swift3
     template:
       - name: python-jobs
