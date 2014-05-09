@@ -503,8 +503,6 @@ jobs:
     voting: false
   - name: gate-python-openstackclient-python33
     voting: false
-  - name: gate-python-swiftclient-python33
-    voting: false
   - name: gate-python-troveclient-pypy
     voting: false
   - name: gate-magnetodb-python26
@@ -1507,6 +1505,7 @@ projects:
       - gate-tempest-dsvm-large-ops
       - gate-tempest-dsvm-neutron-large-ops
     gate:
+      - gate-python-swiftclient-python33
       - gate-python-swiftclient-pypy
       - gate-swift-dsvm-functional
       - gate-tempest-dsvm-postgres-full
