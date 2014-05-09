@@ -64,7 +64,7 @@ echo $GIT_CONFIG > ~$JENKINS/.gitconfig
 
 # Setup a node as a build system where contrail software can be built.
 function build_setup {
-apt-get -y install python-software-properties git python-lxml unzip patch scons flex bison make vim ant libexpat-dev libgettextpo0 libcurl4-openssl-dev python-dev autoconf automake build-essential libtool libevent-dev libxml2-dev libxslt-dev python-setuptools build-essential devscripts debhelper ruby maven traceroute wireshark autossh firefox xterm
+apt-get -y install python-software-properties git python-lxml unzip patch scons flex bison make vim ant libexpat-dev libgettextpo0 libcurl4-openssl-dev python-dev autoconf automake build-essential libtool libevent-dev libxml2-dev libxslt-dev python-setuptools build-essential devscripts debhelper ruby maven traceroute wireshark autossh firefox xterm libbz2-dev bzip2-devel apt-file python-sphinx
 
 wget -O /usr/bin/repo http://commondatastorage.googleapis.com/git-repo-downloads/repo && chmod 755 /usr/bin/repo
 
@@ -73,6 +73,9 @@ apt-get update
 echo debconf shared/accepted-oracle-license-v1-1 select true | debconf-set-selections
 echo debconf shared/accepted-oracle-license-v1-1 seen true | debconf-set-selections
 apt-get -y install oracle-java7-installer
+
+mkdir -p /usr/local/java/jre1.6.0_43/bin
+ln -s `which java` /usr/local/java/jre1.6.0_43/bin/java
 
 useradd -m jenkins
 # setup ~jenkins/.ssh

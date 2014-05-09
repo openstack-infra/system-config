@@ -76,9 +76,11 @@ def setup_contrail_repo
     sh "cd #{TOP}/repo"
 
     # Initialize a repo. TODO Do not hard code manifest.xml file path
-    sh "repo init -u git@github.com:Juniper/contrail-vnc " +
-       "-m default.xml"
-#      "-m mainline/ubuntu-12-04/manifest-havana.xml"
+    branch = ENV['ZUUL_BRANCH'] || "master"
+
+    # Fix hardcoded ubuntu to the flavor from jenkins slave label
+    # e.g. ENV['NODE_LABELS' = "ci-10.84.35.174 juniper-tests swarm"
+    sh "repo init -u git@github.com:Juniper/contrail-vnc -b #{branch}"
 
     # Sync the repo
     sh "repo sync"
