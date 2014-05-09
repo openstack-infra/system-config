@@ -1293,7 +1293,10 @@
           branch-override: default
       - devstack-jobs:
           pipeline: check
-          node: 'devstack-precise || devstack-precise-check'
+          # There is a need for shorter node names in order to debug volume attachments because the node number is at
+          # end of the name and without that you won't be able to map volume attachments to test nodes. As a work-
+          # around, use d-p-c abbreviation.
+          node: 'devstack-precise || devstack-precise-check || d-p-c'
           branch-designator: ''
           branch-override: default
       - devstack-jobs:

@@ -158,6 +158,119 @@
       - console-log
 
 - job-template:
+    name: '{pipeline}-tempest-dsvm-cinder-cert-hp-3par-iscsi'
+    node: '{node}'
+
+    wrappers:
+      - timeout:
+          timeout: 125
+          fail: true
+      - timestamps
+
+    builders:
+      - link-logs
+      - shell: |
+          #!/bin/bash -xe
+
+          #TODO(Ramy) Explore a simpler way to get these scripts into the node.
+          # Since sudo is needed, this script writes a script that writes a script that enables ethX
+
+          cat >setup_ethx.sh <<EOF1
+          #!/bin/bash -xe
+          ETHX=\$1
+          IFC="/etc/network/interfaces.d/\$ETHX.cfg"
+          echo "Setting up auto dhcp on interface '\$IFC'"
+          cat >\$IFC <<EOF2
+          auto \$ETHX
+          iface \$ETHX inet dhcp
+          EOF2
+          EOF1
+          chmod +x setup_ethx.sh
+
+          cat >setup_ethx_route.sh <<EOF1
+          #!/bin/bash -xe
+          ETHX=\$1
+          CIDR=\$2
+          ROUTE="up route add -net \$CIDR dev \$ETHX"
+          IFC="/etc/network/interfaces.d/\$ETHX.cfg"
+          echo "Adding '\$ROUTE' to \$IFC"
+          cat >>\$IFC <<EOF2
+          \$ROUTE
+          EOF2
+          EOF1
+          chmod +x setup_ethx_route.sh
+
+          # Now, using sudo, run those scripts to configure and start eth1
+          ETHX=eth1
+          CIDR=10.10.120.0/23
+          sudo ./setup_ethx.sh $ETHX
+          sudo ./setup_ethx_route.sh $ETHX $CIDR
+          sudo ifup $ETHX
+          # Note the "net-info' script below will confirm the results of these scripts
+
+      - net-info
+      # Use http to checkout instead of git.
+      - devstack-checkout-http
+      #TODO(Ramy) How to selectively checkout from the local repo v.s official
+      #- devstack-checkout-hp-csim
+      #TODO(Ramy) Replace this macro with DEVSTACK_GATE_SELECT_MIRROR?
+      - openstack-pypi-setup
+      - shell: |
+          #!/bin/bash -xe
+          # Setup the
+          function pre_test_hook {{
+              echo "Install thirdparty client libraries" 
+              sudo pip install hp3parclient
+              echo "Configure the local.conf file to properly setup hp 3par iscsi driver in cinder.conf"
+              cat <<EOF >$BASE/new/devstack/local.conf
+          #Don't use groups for certification tests because the tests will fail
+          #under that configuration. Instead use the "DEFAULT" group.
+          [[post-config|\$CINDER_CONF]]
+          [DEFAULT]
+          hp3par_api_url=https://10.10.20.244:8080/api/v1
+          hp3par_username=username
+          hp3par_password=password
+          hp3par_debug=False
+          san_ip=10.10.20.244
+          san_login=username
+          san_password=password
+          hp3par_cpg=JENKINS-CPG
+          volume_driver=cinder.volume.drivers.san.hp.hp_3par_iscsi.HP3PARISCSIDriver
+          iscsi_ip_address=10.10.120.244
+
+          # Use post-extra because the tempest configuration file is
+          # overwritten with the .sample after post-config.
+          [[post-extra|\$TEMPEST_CONFIG]]
+          [volume]
+          storage_protocol=iSCSI
+          vendor_name=Hewlett-Packard
+          EOF
+          }}
+
+          export -f pre_test_hook
+
+          export PYTHONUNBUFFERED=true
+          export DEVSTACK_GATE_TIMEOUT=120
+          export DEVSTACK_GATE_TEMPEST=1
+          # These are the failing test cases when access to the 3par iscsi network eth1 is not setup correctly,
+          # mostly because iSCSI volume attaches (obviously) won't work without it.
+          #export DEVSTACK_GATE_TEMPEST_REGEX="tempest.api.volume.admin.test_volumes_backup.VolumesBackupsTest.test_volume_backup_create_get_detailed_list_restore_delete|tempest.api.volume.test_snapshot_metadata.SnapshotMetadataTestXML.test_create_get_delete_snapshot_metadata|tempest.api.volume.test_volumes_actions.VolumesActionsTest.test_volume_upload|tempest.api.volume.test_volumes_actions.VolumesActionsTestXML.test_volume_upload|tempest.api.volume.test_volumes_get.VolumesGetTest.test_volume_create_get_update_delete_from_image|tempest.api.volume.test_volumes_get.VolumesGetTestXML.test_volume_create_get_update_delete_from_image|tempest.api.volume.test_volumes_snapshots_negative.VolumesSnapshotNegativeTestXML.test_create_snapshot_without_passing_volume_id"
+
+          export DEVSTACK_GATE_TEMPEST_REGEX="tempest.api.volume."
+          #export BRANCH_OVERRIDE={branch-override}
+          #TODO(Ramy) For dev purposes hardcode to master since we're not connected to zuul, etc.
+          export BRANCH_OVERRIDE=master
+          export ZUUL_BRANCH=master
+          if [ "$BRANCH_OVERRIDE" != "default" ] ; then
+              export OVERRIDE_ZUUL_BRANCH=$BRANCH_OVERRIDE
+          fi
+          cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
+          ./safe-devstack-vm-gate-wrap.sh
+
+    publishers:
+      - devstack-logs-local
+
+- job-template:
     name: '{pipeline}-tempest-master-dsvm-full{branch-designator}'
     node: '{node}'
 
@@ -1268,6 +1381,7 @@
     name: devstack-jobs
     jobs:
       - '{pipeline}-tempest-dsvm-full{branch-designator}'
+      - '{pipeline}-tempest-dsvm-cinder-cert-hp-3par-iscsi'
       - '{pipeline}-tempest-master-dsvm-full{branch-designator}'
       - '{pipeline}-tempest-dsvm-neutron{branch-designator}'
       - '{pipeline}-tempest-master-dsvm-neutron{branch-designator}'

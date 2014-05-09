@@ -237,6 +237,80 @@
           fi
 
 - builder:
+    name: devstack-checkout-http
+    builders:
+      - shell: |
+          #!/bin/bash -xe
+          if [[ ! -e devstack-gate ]]; then
+              git clone http://git.openstack.org/openstack-infra/devstack-gate
+          else
+              cd devstack-gate
+              git remote set-url origin http://git.openstack.org/openstack-infra/devstack-gate
+              git remote update
+              git reset --hard
+              if ! git clean -x -f ; then
+                  sleep 1
+                  git clean -x -f
+              fi
+              git checkout master
+              git reset --hard remotes/origin/master
+              if ! git clean -x -f ; then
+                  sleep 1
+                  git clean -x -f
+              fi
+              cd ..
+          fi
+
+- builder:
+    name: devstack-checkout-hp-csim
+    builders:
+      - shell: |
+          #!/bin/bash -xe
+          if [[ ! -e devstack-gate ]]; then
+              git clone git://csim-cloud.rose.hp.com/openstack/devstack-gate.git
+              cd devstack-gate
+              git checkout hp
+              cd ..
+          else
+              cd devstack-gate
+              git remote set-url origin git://csim-cloud.rose.hp.com/openstack/devstack-gate.git
+              git remote update
+              git reset --hard
+              if ! git clean -x -f ; then
+                  sleep 1
+                  git clean -x -f
+              fi
+              git checkout hp
+              git reset --hard remotes/origin/hp
+              if ! git clean -x -f ; then
+                  sleep 1
+                  git clean -x -f
+              fi
+              cd ..
+          fi
+
+- builder:
+    name: openstack-pypi-setup
+    builders:
+      - shell: |
+          #!/bin/bash -xe
+          echo "Using pypi mirror http://pypi.openstack.org/openstack"
+          cat <<EOF > ~/.pydistutils.cfg
+          [easy_install]
+          index_url = http://pypi.openstack.org/openstack
+          find_links = /var/cache/pip
+          EOF
+
+          cat <<EOF > ~/.pip/pip.conf
+          [global]
+          index-url = http://pypi.openstack.org/openstack
+          extra-index-url = http://pypi.python.org/simple
+          #index-url = http://pypi.openstack.org/openstack
+          find-links = /var/cache/pip
+          timeout = 60
+          EOF
+
+- builder:
     name: experimental-devstack-checkout
     builders:
       - shell: |
@@ -316,6 +390,14 @@
           files:
             - target: '{target}'
               source: '{warfile}'
+
+- publisher: 
+    name: devstack-logs-local
+    publishers:
+      - copy-to-master:
+            includes:
+              - 'logs/**'
+            destination: '/tmp/$BUILD_TAG'
 
 - publisher:
     name: console-log
