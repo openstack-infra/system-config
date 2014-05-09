@@ -1851,6 +1851,14 @@ projects:
     gate:
       - gate-oslo-incubator-python33
 
+  - name: openstack/oslo-specs
+    check:
+      - gate-oslo-specs-python27
+      - gate-oslo-specs-docs
+    gate:
+      - gate-oslo-specs-python27
+      - gate-oslo-specs-docs
+
   - name: openstack/oslo.config
     template:
       - name: python-jobs

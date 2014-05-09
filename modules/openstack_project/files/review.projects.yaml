@@ -299,6 +299,9 @@
   group: oslo
   docimpact-group: openstack-manuals
   description: Part of OpenStack's Oslo project. New Oslo APIs go through an incubation phase in this repository before being released as part of a proper Python library.
+- project: openstack/oslo-specs
+  group: oslo
+  upstream: git://github.com/dhellmann/oslo-specs.git
 - project: openstack/oslo.config
   docimpact-group: openstack-manuals
 - project: openstack/oslo.db
