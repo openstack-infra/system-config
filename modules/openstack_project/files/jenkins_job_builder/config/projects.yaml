@@ -2449,3 +2449,4 @@
 
     jobs:
       - python-jobs
+      - pypi-jobs

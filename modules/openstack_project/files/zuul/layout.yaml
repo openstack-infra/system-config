@@ -2486,6 +2486,14 @@ projects:
     post:
       - bash8-branch-tarball
       - bash8-coverage
+    pre-release:
+      - bash8-tarball
+    release:
+      - bash8-tarball:
+        - bash8-pypi-upload:
+          - post-mirror-python26
+          - post-mirror-python27
+          - post-mirror-python33
 
   - name: openstack-dev/cookiecutter
     check:
