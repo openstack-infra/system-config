@@ -1,0 +1,11 @@
+Verified+2: Jenkins
+Code-Review+1: Anne Gentle <anne@openstack.org>
+Code-Review+1: Everett Toews <everett.toews@rackspace.com>
+Code-Review+2: Jeremy Stanley <fungi@yuggoth.org>
+Workflow+1: Jeremy Stanley <fungi@yuggoth.org>
+Code-Review+1: Andreas Jaeger <jaegerandi@gmail.com>
+Submitted-by: Jenkins
+Submitted-at: Fri, 09 May 2014 14:35:51 +0000
+Reviewed-on: https://review.openstack.org/92493
+Project: openstack-infra/config
+Branch: refs/heads/master
