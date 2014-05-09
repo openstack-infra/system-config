@@ -183,6 +183,21 @@ class zuul (
                 Package['libjs-jquery']],
   }
 
+  vcsrepo { '/opt/twitter-bootstrap':
+    ensure   => latest,
+    provider => git,
+    revision => 'v3.1.1',
+    source   => 'https://github.com/twbs/bootstrap.git',
+  }
+
+  file { '/var/lib/zuul/www/bootstrap':
+    ensure  => link,
+    target  => '/opt/twitter-bootstrap/dist',
+    require => [File['/var/lib/zuul/www'],
+                Package['libjs-jquery'],
+                Vcsrepo['/opt/twitter-bootstrap']],
+  }
+
   vcsrepo { '/opt/jquery-visibility':
     ensure   => latest,
     provider => git,
