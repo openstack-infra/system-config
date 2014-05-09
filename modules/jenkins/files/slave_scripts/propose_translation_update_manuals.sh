@@ -82,8 +82,10 @@ do
     fi
 done
 
-# Pull all upstream translations
-tx pull -a -f
+# Pull upstream translations of files that are at least 75 %
+# translated
+tx pull -a -f --minimum-perc=75
+
 
 for FILE in ${DocFolder}/*
 do
