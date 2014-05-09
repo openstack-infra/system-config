@@ -88,18 +88,21 @@ a single project you will want to do the following:
    and each indentation is 8 spaces)::
 
      [access "refs/heads/*"]
-             label-Code-Review = -2..+2 group project-name-core
-             label-Workflow = -1..+1 group project-name-core
+     abandon = group project-name-core
+     label-Code-Review = -2..+2 group project-name-core
+     label-Workflow = -1..+1 group project-name-core
+
      [access "refs/heads/milestone-proposed"]
-             label-Code-Review = -2..+2 group project-name-milestone
-             label-Workflow = -1..+1 group project-name-milestone
-     [project]
-             state = active
+     abandon = group project-name-milestone
+     label-Code-Review = -2..+2 group project-name-milestone
+     label-Workflow = -1..+1 group project-name-milestone
+
      [receive]
-             requireChangeId = true
-             requireContributorAgreement = true
+     requireChangeId = true
+     requireContributorAgreement = true
+
      [submit]
-             mergeContent = true
+     mergeContent = true
 
 #. Add a project entry for the project in
    ``modules/openstack_project/files/review.projects.yaml``.::

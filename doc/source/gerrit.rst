@@ -254,106 +254,123 @@ There will be two interesting files, `groups` and `project.config`.
 in `project.config`. UUIDs can be found on the group page in gerrit.
 Next, edit `project.config` to look like::
 
-  [project]
-      description = Rights inherited by all other projects
   [access "refs/*"]
-      read = group Anonymous Users
-      pushTag = group Continuous Integration Tools
-      pushTag = group Project Bootstrappers
-      pushTag = group Release Managers
-      forgeAuthor = group Registered Users
-      forgeCommitter = group Project Bootstrappers
-      push = +force group Project Bootstrappers
-      create = group Project Bootstrappers
-      create = group Release Managers
-      pushMerge = group Project Bootstrappers
-      pushSignedTag = group Project Bootstrappers
-  [access "refs/heads/*"]
-      label-Code-Review = -2..+2 group Project Bootstrappers
-      label-Code-Review = -1..+1 group Registered Users
-      label-Verified = -2..+2 group Continuous Integration Tools
-      label-Verified = -2..+2 group Project Bootstrappers
-      label-Verified = -1..+1 group Voting Third-Party CI
-      label-Workflow = -1..+1 group Project Bootstrappers
-      label-Workflow = -1..+0 group Change Owner
-      submit = group Continuous Integration Tools
-      submit = group Project Bootstrappers
-  [access "refs/meta/config"]
-      read = group Project Owners
+  create = group Project Bootstrappers
+  create = group Release Managers
+  forgeAuthor = group Registered Users
+  forgeCommitter = group Project Bootstrappers
+  push = +force group Project Bootstrappers
+  pushMerge = group Project Bootstrappers
+  pushSignedTag = group Project Bootstrappers
+  pushTag = group Continuous Integration Tools
+  pushTag = group Project Bootstrappers
+  pushTag = group Release Managers
+  read = group Anonymous Users
+
   [access "refs/for/refs/*"]
-      push = group Registered Users
-  [access "refs/heads/milestone-proposed"]
-      exclusiveGroupPermissions = label-Code-Review label-Workflow
-      label-Code-Review = -2..+2 group Project Bootstrappers
-      label-Code-Review = -2..+2 group Release Managers
-      label-Code-Review = -1..+1 group Registered Users
-      owner = group Release Managers
-      label-Workflow = +0..+1 group Project Bootstrappers
-      label-Workflow = +0..+1 group Release Managers
-  [access "refs/heads/stable/*"]
-      forgeAuthor = group openstack-stable-maint
-      forgeCommitter = group openstack-stable-maint
-      exclusiveGroupPermissions = label-Code-Review label-Workflow
-      label-Code-Review = -2..+2 group Project Bootstrappers
-      label-Code-Review = -2..+2 group openstack-stable-maint
-      label-Code-Review = -1..+1 group Registered Users
-      label-Workflow = +0..+1 group Project Bootstrappers
-      label-Workflow = +0..+1 group openstack-stable-maint
-  [access "refs/meta/openstack/*"]
-      read = group Continuous Integration Tools
-      create = group Continuous Integration Tools
-      push = group Continuous Integration Tools
-  [capability]
-      administrateServer = group Administrators
-      priority = batch group Non-Interactive Users
-      createProject = group Project Bootstrappers
-      streamEvents = group Registered Users
-      runAs = group Project Bootstrappers
-  [access "refs/zuul/*"]
-      create = group Continuous Integration Tools
-      push = +force group Continuous Integration Tools
-      pushMerge = group Continuous Integration Tools
+  push = group Registered Users
+
   [access "refs/for/refs/zuul/*"]
-      pushMerge = group Continuous Integration Tools
+  pushMerge = group Continuous Integration Tools
+
+  [access "refs/heads/*"]
+  label-Code-Review = -1..+1 group Registered Users
+  label-Code-Review = -2..+2 group Project Bootstrappers
+  label-Verified = -1..+1 group Voting Third-Party CI
+  label-Verified = -2..+2 group Continuous Integration Tools
+  label-Verified = -2..+2 group Project Bootstrappers
+  label-Workflow = -1..+0 group Change Owner
+  label-Workflow = -1..+1 group Project Bootstrappers
+  submit = group Continuous Integration Tools
+  submit = group Project Bootstrappers
+
+  [access "refs/heads/milestone-proposed"]
+  exclusiveGroupPermissions = label-Code-Review label-Workflow
+  label-Code-Review = -1..+1 group Registered Users
+  label-Code-Review = -2..+2 group Project Bootstrappers
+  label-Code-Review = -2..+2 group Release Managers
+  label-Workflow = +0..+1 group Project Bootstrappers
+  label-Workflow = +0..+1 group Release Managers
+  owner = group Release Managers
+
+  [access "refs/heads/stable/*"]
+  exclusiveGroupPermissions = label-Code-Review label-Workflow
+  forgeAuthor = group openstack-stable-maint
+  forgeCommitter = group openstack-stable-maint
+  label-Code-Review = -1..+1 group Registered Users
+  label-Code-Review = -2..+2 group Project Bootstrappers
+  label-Code-Review = -2..+2 group openstack-stable-maint
+  label-Workflow = +0..+1 group Project Bootstrappers
+  label-Workflow = +0..+1 group openstack-stable-maint
+
+  [access "refs/meta/config"]
+  read = group Project Owners
+
+  [access "refs/meta/openstack/*"]
+  create = group Continuous Integration Tools
+  push = group Continuous Integration Tools
+  read = group Continuous Integration Tools
+
+  [access "refs/zuul/*"]
+  create = group Continuous Integration Tools
+  push = +force group Continuous Integration Tools
+  pushMerge = group Continuous Integration Tools
+
   [accounts]
-      sameGroupVisibility = deny group CLA Accepted - ICLA
+  sameGroupVisibility = deny group CLA Accepted - ICLA
+
+  [capability]
+  administrateServer = group Administrators
+  createProject = group Project Bootstrappers
+  priority = batch group Non-Interactive Users
+  runAs = group Project Bootstrappers
+  streamEvents = group Registered Users
+
   [contributor-agreement "ICLA"]
-      description = OpenStack Individual Contributor License Agreement
-      requireContactInformation = true
-      agreementUrl = static/cla.html
-      autoVerify = group CLA Accepted - ICLA
-      accepted = group CLA Accepted - ICLA
+  accepted = group CLA Accepted - ICLA
+  agreementUrl = static/cla.html
+  autoVerify = group CLA Accepted - ICLA
+  description = OpenStack Individual Contributor License Agreement
+  requireContactInformation = true
+
   [contributor-agreement "System CLA"]
-      description = DON'T SIGN THIS: System CLA (externally managed)
-      agreementUrl = static/system-cla.html
-      accepted = group System CLA
+  accepted = group System CLA
+  agreementUrl = static/system-cla.html
+  description = DON'T SIGN THIS: System CLA (externally managed)
+
   [contributor-agreement "USG CLA"]
-      description = DON'T SIGN THIS: U.S. Government CLA (externally managed)
-      agreementUrl = static/usg-cla.html
-      accepted = group USG CLA
-  [label "Verified"]
-      function = MaxWithBlock
-      value = -2 Fails
-      value = -1 Doesn't seem to work
-      value =  0 No score
-      value = +1 Works for me
-      value = +2 Verified
+  accepted = group USG CLA
+  agreementUrl = static/usg-cla.html
+  description = DON'T SIGN THIS: U.S. Government CLA (externally managed)
+
   [label "Code-Review"]
-      function = MaxWithBlock
-      abbreviation = R
-      copyMinScore = true
-      copyAllScoresOnTrivialRebase = true
-      copyAllScoresIfNoCodeChange = true
-      value = -2 Do not merge
-      value = -1 I would prefer that you didn't merge this
-      value =  0 No score
-      value = +1 Looks good to me, but someone else must approve
-      value = +2 Looks good to me (core reviewer)
+  abbreviation = R
+  copyAllScoresIfNoCodeChange = true
+  copyAllScoresOnTrivialRebase = true
+  copyMinScore = true
+  function = MaxWithBlock
+  value =  0 No score
+  value = +1 Looks good to me, but someone else must approve
+  value = +2 Looks good to me (core reviewer)
+  value = -1 I would prefer that you didn't merge this
+  value = -2 Do not merge
+
+  [label "Verified"]
+  function = MaxWithBlock
+  value =  0 No score
+  value = +1 Works for me
+  value = +2 Verified
+  value = -1 Doesn't seem to work
+  value = -2 Fails
+
   [label "Workflow"]
-      function = MaxWithBlock
-      value = -1 Work in progress
-      value =  0 Ready for reviews
-      value = +1 Approved
+  function = MaxWithBlock
+  value =  0 Ready for reviews
+  value = +1 Approved
+  value = -1 Work in progress
+
+  [project]
+  description = Rights inherited by all other projects
 
 Now edit the groups file. The format is::
 
