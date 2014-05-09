@@ -907,6 +907,8 @@
   description: "Swift mass syncronizer"
   upstream: git://github.com/enovance/swiftsync.git
   acl-config: /home/gerrit2/acls/openstack/swiftsync.config
+- project: stackforge/swift-ceph-backend
+  description: Ceph backend for Swift
 - project: stackforge/tomograph
   description: "Library to help distributed applications send trace information to metrics backends like Zipkin and Statsd."
   upstream: https://github.com/timjr/tomograph.git

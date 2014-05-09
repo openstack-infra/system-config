@@ -4650,6 +4650,12 @@ projects:
     release:
       - swiftsync-tarball
 
+  - name: stackforge/swift-ceph-backend
+    check:
+      - noop
+    gate:
+      - noop
+
   - name: stackforge/tomograph
     check:
       - gate-tomograph-pep8
