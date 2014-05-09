@@ -46,8 +46,10 @@ if [ ! -d .tx ] ; then
 fi
 tx set --auto-local -r ${PROJECT}.${PROJECT}-translations "${PROJECT}/locale/<lang>/LC_MESSAGES/${PROJECT}.po" --source-lang en --source-file ${PROJECT}/locale/${PROJECT}.pot -t PO --execute
 
-# Pull all upstream translations
-tx pull -a -f
+# Pull upstream translations of files that are at least 75 %
+# translated
+tx pull -a -f --minimum-perc=75
+
 # Update the .pot file
 python setup.py extract_messages
 PO_FILES=`find ${PROJECT}/locale -name '*.po'`
