@@ -2735,6 +2735,7 @@ projects:
       - gate-grenade-dsvm-forward
       - check-tempest-master-dsvm-full-havana
       - check-tempest-master-dsvm-neutron-havana
+      - gate-tempest-dsvm-large-ops-testing
     experimental-tripleo:
       - check-tripleo-ironic-seed-precise
       - check-tripleo-undercloud-precise
