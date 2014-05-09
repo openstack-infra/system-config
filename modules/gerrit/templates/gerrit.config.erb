@@ -81,20 +81,20 @@
 	email = <%= email %>
 <% commentlinks.each do |commentlink| -%>
 [commentlink "<%= commentlink['name'] %>"]
-        match = "<%= commentlink['match'] %>"
+	match = "<%= commentlink['match'] %>"
 <% if commentlink['link'] != "" -%>
-        link = "<%= commentlink['link'] %>"
+	link = "<%= commentlink['link'] %>"
 <% end -%>
 <% if commentlink['html'] != "" -%>
-        html = "<%= commentlink['html'] %>"
+	html = "<%= commentlink['html'] %>"
 <% end -%>
 <% end -%>
 [theme]
-        backgroundColor = ffffff
-        topMenuColor = ffffff
-        textColor = 264d69
-        trimColor = eef3f5
-        selectionColor = d1e6ea
+	backgroundColor = ffffff
+	topMenuColor = ffffff
+	textColor = 264d69
+	trimColor = eef3f5
+	selectionColor = d1e6ea
 	changeTableOutdatedColor = f5cccc
 	tableOddRowColor = ffffff
 	tableEvenRowColor = f5f5ff
@@ -122,4 +122,14 @@
 	type = <%= secondary_index_type %>
 <% end -%>
 [mimetype "image/*"]
-safe = true
+	safe = true
+[mimetype "application/yaml"]
+	safe = true
+[mimetype "application/xml"]
+	safe = true
+[mimetype "application/rst"]
+	safe = true
+[mimetype "application/txt"]
+	safe = true
+[mimetype "application/html"]
+	safe = true
