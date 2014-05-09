@@ -80,6 +80,7 @@ openstack-doc:
     branches:
       - master
       - stable/havana
+      - stable/icehouse
 
 openstack-ceilometer:
     events:
