@@ -4770,3 +4770,9 @@ projects:
     gate:
       - gate-stacktach-pep8
       - gate-stacktach-python27
+
+  - name: stackforge/xenapi-os-testing
+    check:
+      - noop
+    gate:
+      - noop

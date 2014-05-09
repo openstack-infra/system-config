@@ -923,3 +923,6 @@
 - project: stackforge/wsme
   description: Web Service Made Easy (WSME) simplify the writing of REST web services by providing simple yet powerful typing which removes the need to directly manipulate the request and the response objects.
   upstream: git://github.com/ryanpetrello/wsme.git
+- project: stackforge/xenapi-os-testing
+  description: Scripts to enable running of tempest tests in a nested Xen instance
+  upstream: git://github.com/citrix-openstack/xenapi-os-testing.git
