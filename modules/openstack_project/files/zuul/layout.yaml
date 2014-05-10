@@ -567,7 +567,8 @@ jobs:
     voting: false
   - name: check-neutron-dsvm-functional
     branch: ^(?!stable/havana).*$
-    voting: false
+  - name: gate-neutron-dsvm-functional
+    branch: ^(?!stable/havana).*$
   - name: check-neutron-dsvm-api
     branch: ^(?!stable/(havana|icehouse)).*$
     voting: false
@@ -914,6 +915,7 @@ projects:
       - check-tempest-dsvm-neutron-2
       - check-tempest-dsvm-neutron-pg-2
     gate:
+      - gate-neutron-dsvm-functional
       - gate-tempest-dsvm-neutron-2
       - gate-tempest-dsvm-neutron-pg-2
     experimental:
@@ -2532,6 +2534,7 @@ projects:
       - gate-tempest-dsvm-neutron-large-ops
       - gate-grenade-dsvm-forward
       - gate-grenade-dsvm-partial-ncpu
+      - gate-neutron-dsvm-functional
       - gate-swift-dsvm-functional
     experimental:
       - check-tempest-dsvm-cells-full
