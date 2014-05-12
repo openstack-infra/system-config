@@ -23,6 +23,8 @@ At a Glance
   * https://git.openstack.org/openstack-infra/nodepool
 :Bugs:
   * http://bugs.launchpad.net/openstack-ci
+:Resources:
+  * `Nodepool Reference Manual <http://ci.openstack.org/nodepool>`_
 
 Overview
 ========
