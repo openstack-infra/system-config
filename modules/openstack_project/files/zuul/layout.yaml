@@ -1742,7 +1742,10 @@ projects:
       - os-apply-config-tarball
     release:
       - os-apply-config-tarball:
-        - os-apply-config-pypi-upload
+        - os-apply-config-pypi-upload:
+          - post-mirror-python26
+          - post-mirror-python27
+          - post-mirror-python33
 
 #TODO: add docs
   - name: openstack/os-cloud-config
@@ -1770,7 +1773,10 @@ projects:
       - os-cloud-config-tarball
     release:
       - os-cloud-config-tarball:
-        - os-cloud-config-pypi-upload
+        - os-cloud-config-pypi-upload:
+          - post-mirror-python26
+          - post-mirror-python27
+          - post-mirror-python33
 
 #TODO: add docs
   - name: openstack/os-collect-config
@@ -1798,7 +1804,10 @@ projects:
       - os-collect-config-tarball
     release:
       - os-collect-config-tarball:
-        - os-collect-config-pypi-upload
+        - os-collect-config-pypi-upload:
+          - post-mirror-python26
+          - post-mirror-python27
+          - post-mirror-python33
 
 #TODO: add docs
   - name: openstack/os-refresh-config
@@ -1826,7 +1835,10 @@ projects:
       - os-refresh-config-tarball
     release:
       - os-refresh-config-tarball:
-        - os-refresh-config-pypi-upload
+        - os-refresh-config-pypi-upload:
+          - post-mirror-python26
+          - post-mirror-python27
+          - post-mirror-python33
 
 #TODO: add docs
   - name: openstack/oslosphinx
