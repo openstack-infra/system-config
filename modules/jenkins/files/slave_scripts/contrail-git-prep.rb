@@ -30,7 +30,8 @@ puts "Working with project #{@project}"
 
 GERRIT_SITE="https://review.opencontrail.org" # ARGV[0]
 GIT_ORIGIN="ssh://zuul@review.opencontrail.org:29418" # ARGV[1]
-TOP=ENV['PWD']
+ENV['WORKSPACE']=ENV['PWD']
+WORKSPACE=ENV['WORKSPACE']
 
 def dry_run?
     return !ENV['DRY_RUN'].nil? && ENV['DRY_RUN'].casecmp("true") == 0
@@ -60,9 +61,9 @@ end
 def setup_gerrit_repo
     return unless @gerrit_setup
 
-    sh "rm -rf #{TOP}/#{@project}"
-    sh "mkdir -p #{TOP}/#{@project}"
-    sh "cd #{TOP}/#{@project}"
+    sh "rm -rf #{WORKSPACE}/#{@project}"
+    sh "mkdir -p #{WORKSPACE}/#{@project}"
+    sh "cd #{WORKSPACE}/#{@project}"
 
     # This clones a git repo with appropriate review patch
     sh "/usr/local/jenkins/slave_scripts/gerrit-git-prep.sh " +
@@ -71,9 +72,9 @@ end
 
 def setup_contrail_repo
     # Restore to parent directory
-    sh "rm -rf #{TOP}/repo"
-    sh "mkdir -p #{TOP}/repo"
-    sh "cd #{TOP}/repo"
+    sh "rm -rf #{WORKSPACE}/repo"
+    sh "mkdir -p #{WORKSPACE}/repo"
+    sh "cd #{WORKSPACE}/repo"
 
     # Initialize a repo. TODO Do not hard code manifest.xml file path
     branch = ENV['ZUUL_BRANCH'] || "master"
@@ -101,16 +102,16 @@ def switch_gerrit_repo
     old_project = $1
 
     # Now, switch old_project to project's git repo fetched from gerrit.
-    sh "mv #{TOP}/repo/#{old_project} #{TOP}/repo/#{old_project}.orig"
-    sh "mv #{TOP}/#{@project} #{TOP}/repo/#{old_project}"
+    sh "mv #{WORKSPACE}/repo/#{old_project} #{WORKSPACE}/repo/#{old_project}.orig"
+    sh "mv #{WORKSPACE}/#{@project} #{WORKSPACE}/repo/#{old_project}"
 end
 
 def pre_build_setup
     sh "rm -rf /tmp/cache"
-    sh "mkdir -p ~jenkins/tmp/cache"
-    sh "ln -sf ~jenkins/tmp/cache /tmp/cache"
-    sh "python #{TOP}/repo/third_party/fetch_packages.py 2>&1 | tee #{TOP}/third_party_fetch_packages.log"
-#   sh "python #{TOP}/repo/distro/third_party/fetch_packages.py 2>&1 | tee #{TOP}/distro_fetch_packages.log"
+    sh "mkdir -p ~#{ENV['USER']}/tmp/cache"
+    sh "ln -sf /home/#{ENV['USER']}/tmp/cache /tmp/cache"
+    sh "python #{WORKSPACE}/repo/third_party/fetch_packages.py 2>&1 | tee #{WORKSPACE}/third_party_fetch_packages.log"
+#   sh "python #{WORKSPACE}/repo/distro/third_party/fetch_packages.py 2>&1 | tee #{WORKSPACE}/distro_fetch_packages.log"
 end
 
 def main

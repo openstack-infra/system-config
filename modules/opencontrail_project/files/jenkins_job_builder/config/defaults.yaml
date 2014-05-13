@@ -7,8 +7,8 @@
 
       <p>If you would like to make changes to this job, please see:
 
-        <a href="https://git.opencontrail.org/cgit/opencontrail-infra/config">
-          https://git.opencontrail.org/cgit/opencontrail-infra/config
+        <a href="https://github.com/Juniper/contrail-infra-config">
+          https://github.com/Juniper/contrail-infra-config
         </a>
 
       In modules/opencontrail_project/files/jenkins_job_builder/config
@@ -18,7 +18,7 @@
 
     wrappers:
       - timeout:
-          timeout: 30
+          timeout: 600
           fail: true
       - timestamps
 

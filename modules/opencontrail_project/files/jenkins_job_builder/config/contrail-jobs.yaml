@@ -15,7 +15,7 @@
           export USER=jenkins
           export JOB_NAME={name}
           export WORKSPACE=~jenkins/workspace/ci-{name}-build
-          /usr/local/jenkins/slave_scripts/contrail-build-job.sh
+          /usr/local/jenkins/slave_scripts/contrail-unittests-job.sh
 
 - job-group:
     name: contrail-controller-jobs

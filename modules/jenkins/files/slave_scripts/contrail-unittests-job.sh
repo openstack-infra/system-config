@@ -2,10 +2,19 @@
 
 set -ex
 
-SCONS_JOBS=1
+if [ -z $USER ]; then
+    USER=jenkins
+fi
 
-# Build software
-function scons_build() {
+export WORKSPACE=$PWD
+if [ -z $SCONS_JOBS ]; then
+    export SCONS_JOBS=1
+fi
+
+# Build unittests
+function build_unittest() {
+    # Goto the repo top directory.
+    cd $WORKSPACE/repo
 
     # Build every thing.
     export BUILD_ONLY=TRUE
@@ -15,14 +24,16 @@ function scons_build() {
     unset BUILD_ONLY
 }
 
-# Run tests
-function scons_test() {
+# Run unittests
+function run_unittest() {
+    # Goto the repo top directory.
+    cd $WORKSPACE/repo
 
     ### Ignore test failures until tests stability is achieved ###
     scons -i -j $SCONS_JOBS -U test 2>&1 | tee $WORKSPACE/scons_test.log
 
     # Turn off error check and echo for the rest of the script.
-    set +xe
+    set +ex
 
     FAIL_COUNT=`grep -cw FAIL $WORKSPACE/scons_test.log`
     grep -w PASS $WORKSPACE/scons_test.log
@@ -40,16 +51,14 @@ function scons_test() {
     fi
 
     # Turn on error check and echo
-    set -xe
+    set -ex
 }
 
 function main() {
-    env
-    # Goto the repo top directory.
-    cd $WORKSPACE/repo
-    scons_build
-    scons_test
+    build_unittest
+    run_unittest
 }
 
+env
 main
 echo Success

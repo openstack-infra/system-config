@@ -1,0 +1,21 @@
+- job-template:
+    name: 'ci-{name}-unittest'
+    node: {node}
+
+    builders:
+      - gerrit-git-prep
+      - shell: |
+          #!/bin/bash -xe
+          export USER=jenkins
+          /usr/local/jenkins/slave_scripts/contrail-unittests-job.sh
+
+- job-template:
+    name: 'ci-{name}-devstack'
+    node: {node}
+
+    builders:
+      - gerrit-git-prep
+      - shell: |
+          #!/bin/bash -xe
+          export USER=jenkins
+          /usr/local/jenkins/slave_scripts/contrail-devstack-job.sh

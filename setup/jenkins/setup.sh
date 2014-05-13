@@ -62,9 +62,33 @@ EOF
 echo $GIT_CONFIG > ~$JENKINS/.gitconfig
 }
 
+function run_stack() {
+    cd $DEVSTACK_WORKSPACE
+    git clone git@github.com:dsetia/devstack.git .
+    PHYSICAL_INTERFACE=eth0
+    sed -e s%PHYSICAL_INTERFACE=eth1%PHYSICAL_INTERFACE=${PHYSICAL_INTERFACE}% contrail/localrc-single > localrc
+    $WORKSPACE/stack.sh
+}
+
+function devstack_setup() {
+    export DEVSTACK_WORKSPACE=$USER/workspace/devstack
+    export CONTRAIL_SRC=$USER/workspace/contrail-controller-build
+    export CONTRAIL_REPO_SETUP_SKIP=TRUE
+    mkdir -p ~/tmp/cache
+    rm -rf /tmp/cache
+    ln -sf ~/tmp/cache /tmp/cache
+#   /home/jenkins/workspace/devstack/tools/create-stack-user.sh
+
+    mkdir -p $DEVSTACK_WORKSPACE
+    chown stack.stack $DEVSTACK_WORKSPACE
+    su -c run_stack stack
+}
+
 # Setup a node as a build system where contrail software can be built.
 function build_setup {
-apt-get -y install python-software-properties git python-lxml unzip patch scons flex bison make vim ant libexpat-dev libgettextpo0 libcurl4-openssl-dev python-dev autoconf automake build-essential libtool libevent-dev libxml2-dev libxslt-dev python-setuptools build-essential devscripts debhelper ruby maven traceroute wireshark autossh firefox xterm libbz2-dev bzip2-devel apt-file python-sphinx
+apt-get -y install python-software-properties git python-lxml unzip patch scons flex bison make vim ant libexpat-dev libgettextpo0 libcurl4-openssl-dev python-dev autoconf automake libtool libevent-dev libxml2-dev libxslt-dev python-setuptools build-essential devscripts debhelper ruby maven traceroute wireshark autossh firefox xterm libbz2-dev bzip2-devel apt-file python-sphinx git-core pkg-config linux-headers-virtual
+
+export PATH=$PATH:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games
 
 wget -O /usr/bin/repo http://commondatastorage.googleapis.com/git-repo-downloads/repo && chmod 755 /usr/bin/repo
 
