@@ -23,7 +23,7 @@ function setup_devstack() {
 
     rm -rf $DEVSTACK_WORKSPACE
     mkdir -p $DEVSTACK_WORKSPACE
-    chown $USER.$USER $DEVSTACK_WORKSPACE
+    chown -R $USER.$USER $WORKSPACE
     chown -R $USER.$USER $CONTRAIL_SRC
 
     # rm -rf /opt/stack
