@@ -300,7 +300,8 @@ projects:
 
   - name: Juniper/contrail-controller-test
     check:
-      - ci-contrail-controller-test-build
+      - ci-contrail-controller-test-unittest
+      - ci-contrail-controller-test-devstack
     silent:
       - noop
     check-tripleo:
