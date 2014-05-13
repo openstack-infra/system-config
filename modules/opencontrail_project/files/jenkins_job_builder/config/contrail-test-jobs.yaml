@@ -1,6 +1,6 @@
 - job-template:
     name: 'ci-{name}-unittest'
-    node: {node}
+    node: '{node}'
 
     builders:
       - gerrit-git-prep
@@ -11,7 +11,7 @@
 
 - job-template:
     name: 'ci-{name}-devstack'
-    node: {node}
+    node: '{node}'
 
     builders:
       - gerrit-git-prep
