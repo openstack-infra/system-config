@@ -19,3 +19,13 @@
           #!/bin/bash -xe
           export USER=jenkins
           /usr/local/jenkins/slave_scripts/contrail-devstack-job.sh
+
+- job-group:
+    name: contrail-controller-test-unitest
+    jobs:
+      - 'ci-{name}-unittest'
+
+- job-group:
+    name: contrail-controller-test-devstack
+    jobs:
+      - 'ci-{name}-devstack'

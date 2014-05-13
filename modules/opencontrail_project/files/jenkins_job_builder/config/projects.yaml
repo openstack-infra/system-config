@@ -16,5 +16,5 @@
     doc-publisher-site: docs.opencontrail.org
 
     jobs:
-      - ci-contrail-controller-test-unitest
-      - ci-contrail-controller-test-devstack
+      - contrail-controller-test-unitest
+      - contrail-controller-test-devstack
