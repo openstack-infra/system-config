@@ -8,6 +8,11 @@ JENKINS=jenkins
 
 # Setup jenkins ssh server port to 6000 and jnlp slave port to 6001
 
+function install_crontab_hack() {
+# Run this once every 10 minues
+# */30 * * * * /path/to/command java -jar /root/jenkins-cli.jar -s http://jenkins.opencontrail.org:8080 disable-job ci-contrail-controller-build && java -jar /root/jenkins-cli.jar -s http://jenkins.opencontrail.org:8080 enable-job ci-contrail-controller-build
+}
+
 function iptables_restart {
 /etc/init.d/iptables-persistent restart
 }
