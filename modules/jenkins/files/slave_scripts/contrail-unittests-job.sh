@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+set -o pipefail
 set -ex
 
 if [ -z $USER ]; then

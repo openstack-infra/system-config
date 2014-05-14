@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+set -o pipefail
 set -ex
 
 # Copy slave scripts from the jenkins.opencontrail.org master

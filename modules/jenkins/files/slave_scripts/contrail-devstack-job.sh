@@ -1,13 +1,11 @@
 #!/usr/bin/env bash
 
 # TODO Ignore failures temporarily
+set -o pipefail
 set +e
 set -x
 
-if [ -z $USER ]; then
-    USER=jenkins
-fi
-
+export USER=jenkins
 export WORKSPACE=$PWD
 export CONTRAIL_REPO_SYNC_SKIP=TRUE
 export PHYSICAL_INTERFACE=eth0
@@ -16,10 +14,6 @@ export CONTRAIL_SRC=$WORKSPACE/repo
 # Build devstack
 function setup_devstack() {
     export DEVSTACK_WORKSPACE=$WORKSPACE/devstack
-
-    # Setup cache
-    rm -rf /tmp/cache
-    ln -sf /home/$USER/tmp/cache /tmp/cache
 
     rm -rf $DEVSTACK_WORKSPACE
     mkdir -p $DEVSTACK_WORKSPACE
@@ -48,19 +42,19 @@ function run_devstack() {
     echo CONTRAIL_REPO_SYNC_SKIP=TRUE >> $DEVSTACK_WORKSPACE/localrc
     echo CONTRAIL_SRC=$WORKSPACE/repo >> $DEVSTACK_WORKSPACE/localrc
 
-    $DEVSTACK_WORKSPACE/stack.sh
+    su -c $DEVSTACK_WORKSPACE/stack.sh $USER
 }
 
 function main() {
     setup_devstack
 
     # Run devstack as $USER (not root)
-    export -f run_devstack
-    export HOME=/home/$USER
+    # export -f run_devstack
 
     # TODO Ignore failures for now.
-    su -mc run_devstack $USER
-    su -mc $DEVSTACK_WORKSPACE/unstack.sh $USER
+    run_devstack
+
+    su -c $DEVSTACK_WORKSPACE/unstack.sh $USER
 }
 
 # env
