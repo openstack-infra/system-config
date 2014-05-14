@@ -3,7 +3,7 @@
 class opencontrail_project::jenkins (
   $vhost_name = $::fqdn,
   $jenkins_jobs_password = '',
-  $jenkins_jobs_username = 'ci-admin',
+  $jenkins_jobs_username = 'ci-admin-f',
   $manage_jenkins_jobs = true,
   $ssl_cert_file_contents = '',
   $ssl_key_file_contents = '',
