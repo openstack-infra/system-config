@@ -221,3 +221,39 @@ can test your CI system without affecting regular OpenStack reviews.
 Once you confirm your CI system works as you expected, change your
 configuration of gerrit trigger plugin or zuul to subscribe gerrit events
 from your target project.
+
+Permissions on your Third Party System
+--------------------------------------
+
+When your CI account is created it will be in the `Third-Party CI Gerrit
+group <https://review.openstack.org/#/admin/groups/270,members>`_.
+The permissions on this group allow for commenting and voting on the
+`openstack-dev/sandbox <https://git.openstack.org/cgit/openstack-dev/sandbox/>`_
+repo as well as commenting without voting on other repos in gerrit.
+
+In order to get your Third Pary CI account to have voting permissions on
+repos in gerrit in addition to ``openstack-dev/sandbox`` you have a greater
+chance of success if you follow these steps:
+
+* Set up your system and test it according to "Testing your CI setup" outlined
+  above (this will create a history of activity associated with your account
+  which will be evaluated when you apply for voting permissions).
+
+* Post comments, that adhere to the "Requirements" listed above, that demonstrate
+  the format for your system communication to the repos you want your system to test.
+
+* Once your Third Party Account has a history on gerrit so that others can evaluate
+  your format for comments, and the stability of your voting pattern (in the sandbox repo):
+
+  * send an email to the openstack-dev mailing list nominating your system for voting
+    permissions
+      * openstack-dev@lists.openstack.org
+      * use tags [Infra][Nova] for the Nova program, please replace [Nova] with [Program],
+        where [Program] is the name of the program your CI account will test
+  * present your account history
+  * address any questions and concerns with your system
+
+* If the members of the program you want voting permissions from agree your system should be
+  able to vote, the ptl or a core-reviewer from the program communicates this decision to the
+  OpenStack Infrastructure team who will move your Third Party CI System to the `Voting
+  Third-Party CI Gerrit group <https://review.openstack.org/#/admin/groups/91,members>`_.
