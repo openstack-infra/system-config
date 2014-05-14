@@ -10,19 +10,10 @@ export WORKSPACE=$PWD
 export CONTRAIL_REPO_SYNC_SKIP=TRUE
 export PHYSICAL_INTERFACE=eth0
 export CONTRAIL_SRC=$WORKSPACE/repo
+export DEVSTACK_WORKSPACE=$WORKSPACE/devstack
 
 # Build devstack
 function setup_devstack() {
-    export DEVSTACK_WORKSPACE=$WORKSPACE/devstack
-
-    rm -rf $DEVSTACK_WORKSPACE
-    mkdir -p $DEVSTACK_WORKSPACE
-    chown -R $USER.$USER $WORKSPACE
-    chown -R $USER.$USER $CONTRAIL_SRC
-
-    # rm -rf /opt/stack
-    # mkdir -p /opt/stack
-    # chown $USER.$USER /opt/stack
 }
 
 # Run devstack
@@ -30,6 +21,9 @@ function setup_devstack() {
 function run_devstack() {
     set +e
     set -x
+
+    rm -rf $DEVSTACK_WORKSPACE
+    mkdir -p $DEVSTACK_WORKSPACE
     cd $DEVSTACK_WORKSPACE
 
     git clone git@github.com:rombie/devstack.git .
@@ -41,6 +35,8 @@ function run_devstack() {
     perl -ni -e 's/.*GIT_BASE=.*/GIT_BASE=https:\/\/git.openstack.org/g; print $_;' $DEVSTACK_WORKSPACE/localrc
     echo CONTRAIL_REPO_SYNC_SKIP=TRUE >> $DEVSTACK_WORKSPACE/localrc
     echo CONTRAIL_SRC=$WORKSPACE/repo >> $DEVSTACK_WORKSPACE/localrc
+
+    chown -R $USER.$USER $WORKSPACE
 
     su -c $DEVSTACK_WORKSPACE/stack.sh $USER
 }
