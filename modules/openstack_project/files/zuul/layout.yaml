@@ -3614,6 +3614,12 @@ projects:
     gate:
       - noop
 
+  - name: stackforge/fuel-specs
+    check:
+      - noop
+    gate:
+      - noop
+
   - name: stackforge/fuel-web
     check:
       - noop
