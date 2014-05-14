@@ -21,6 +21,16 @@
       - python-jobs
 
 - project:
+    name: fuel-specs
+    github-org: stackforge
+    node: bare-precise
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - gate-{name}-python27
+      - gate-{name}-docs
+
+- project:
     name: mistral
     github-org: stackforge
     node: bare-precise

@@ -625,6 +625,9 @@
   description: Fuel provisioning system.
   upstream: git://github.com/Mirantis/fuel-provision.git
   acl-config: /home/gerrit2/acls/stackforge/fuel.config
+- project: stackforge/fuel-specs
+  group: fuel
+  description: Fuel designs and specs
 - project: stackforge/fuel-web
   group: fuel
   description: Fuel UI
