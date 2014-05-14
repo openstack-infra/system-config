@@ -12,10 +12,6 @@ export PHYSICAL_INTERFACE=eth0
 export CONTRAIL_SRC=$WORKSPACE/repo
 export DEVSTACK_WORKSPACE=$WORKSPACE/devstack
 
-# Build devstack
-function setup_devstack() {
-}
-
 # Run devstack
 # TODO Ignore failures temporarily
 function run_devstack() {
@@ -38,12 +34,17 @@ function run_devstack() {
 
     chown -R $USER.$USER $WORKSPACE
 
+    rm -rf /etc/contrail
+    mkdir -p /etc/contrail
+    chown $USER /etc/contrail
+
+    mkdir -p /opt/stack/neutron
+    cp /home/jenkins/tmp/cache/jenkins/third_party/node-v0.8.15.tar.gz /opt/stack/neutron/.
+    chown -R $USER /opt/stack/
     su -c $DEVSTACK_WORKSPACE/stack.sh $USER
 }
 
 function main() {
-    setup_devstack
-
     # Run devstack as $USER (not root)
     # export -f run_devstack
 
