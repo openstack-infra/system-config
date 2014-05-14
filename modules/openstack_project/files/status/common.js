@@ -18,9 +18,10 @@ function header(activeTabName) {
   tabsName[0] = 'Status'; tabsLink[0] = 'http://status.openstack.org/';
   tabsName[1] = 'Zuul'; tabsLink[1] = 'http://status.openstack.org/zuul/';
   tabsName[2] = 'Rechecks'; tabsLink[2] = 'http://status.openstack.org/rechecks/';
-  tabsName[3] = 'Release'; tabsLink[3] = 'http://status.openstack.org/release/';
-  tabsName[4] = 'Reviews'; tabsLink[4] = 'http://status.openstack.org/reviews/';
-  tabsName[5] = 'Bugday'; tabsLink[5] = 'http://status.openstack.org/bugday/';
+  tabsName[3] = 'Elastic Rechecks'; tabsLink[3] = 'http://status.openstack.org/elastic-recheck/';
+  tabsName[4] = 'Release'; tabsLink[4] = 'http://status.openstack.org/release/';
+  tabsName[5] = 'Reviews'; tabsLink[5] = 'http://status.openstack.org/reviews/';
+  tabsName[6] = 'Bugday'; tabsLink[6] = 'http://status.openstack.org/bugday/';
 
   document.write(
    '<div id="header" class="container">'+
