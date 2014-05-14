@@ -393,6 +393,7 @@ fuel-tracker:
       - stackforge/fuel-docs
       - stackforge/fuel-library
       - stackforge/fuel-devops
+      - stackforge/fuel-specs
     branches:
       - master
 
