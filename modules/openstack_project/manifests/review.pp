@@ -46,8 +46,11 @@ class openstack_project::review (
   $gerritbot_ssh_rsa_key_contents = '',
   $gerritbot_ssh_rsa_pubkey_contents = '',
   # Register SSL keys and pass their contents in.
+  $ssl_cert_file = '',
   $ssl_cert_file_contents = '',
+  $ssl_key_file = '',
   $ssl_key_file_contents = '',
+  $ssl_chain_file = '',
   $ssl_chain_file_contents = '',
   # Create SSH server key by hand and supply here.
   $ssh_dsa_key_contents = '',
@@ -79,11 +82,9 @@ class openstack_project::review (
 ) {
 
   class { 'openstack_project::gerrit':
-    ssl_cert_file                       =>
-      '/etc/ssl/certs/review.openstack.org.pem',
-    ssl_key_file                        =>
-      '/etc/ssl/private/review.openstack.org.key',
-    ssl_chain_file                      => '/etc/ssl/certs/intermediate.pem',
+    ssl_cert_file                       => $ssl_cert_file,
+    ssl_key_file                        => $ssl_key_file,
+    ssl_chain_file                      => $ssl_chain_file,
     ssl_cert_file_contents              => $ssl_cert_file_contents,
     ssl_key_file_contents               => $ssl_key_file_contents,
     ssl_chain_file_contents             => $ssl_chain_file_contents,
