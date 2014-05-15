@@ -25,6 +25,48 @@ function build_unittest() {
     unset BUILD_ONLY
 }
 
+function print_test_results() {
+
+    # Turn off error check and echo for the rest of the script.
+    set +ex
+
+    grep -w FAIL $WORKSPACE/scons_test.log > $WORKSPACE/scons_failed_unittests.log
+    FAIL_COUNT=`cat $WORKSPACE/scons_failed_unittests.log | wc -l`
+    grep -w PASS $WORKSPACE/scons_test.log
+    echo
+    echo "Number of PASS tests: "`grep -cw PASS $WORKSPACE/scons_test.log`
+    echo "Number of FAIL tests: $FAIL_COUNT"
+
+    if [ "$FAIL_COUNT" != "0" ]; then
+        echo
+        cat $WORKSPACE/scons_failed_unittests.log
+        echo
+        echo "*****************************************************************"
+        echo $FAIL_COUNT tests failure ignored -- This will change shortly...
+        echo "*****************************************************************"
+    fi
+
+    # Maintain a consolidated list of failed tests in jenkins master.
+    cp $WORKSPACE/scons_failed_unittests.log $WORKSPACE/scons_all_failed_unittests.log
+    ssh 148.251.110.18 cat /root/ci-test/scons_all_failed_unittests.log  >> $WORKSPACE/scons_all_failed_unittests.log
+    perl -ni -e 's/.*\/repo\/build\///g; print $_;' $WORKSPACE/scons_all_failed_unittests.log
+    sort -u $WORKSPACE/scons_all_failed_unittests.log > $WORKSPACE/scons_all_failed_unittests2.log
+    mv $WORKSPACE/scons_all_failed_unittests2.log scons_all_failed_unittests.log
+    scp -q $WORKSPACE/scons_all_failed_unittests.log 148.251.110.18:/root/ci-test/scons_all_failed_unittests.log
+
+    TOTAL_FAIL_COUNT=`cat $WORKSPACE/scons_all_failed_unittests.log | wc -l`
+    echo
+    echo
+    echo "*******************************************************************"
+    echo Aggregate stats from other runs for failed tests: $TOTAL_FAIL_COUNT
+    echo "*******************************************************************"
+    ssh 148.251.110.18 cat /root/ci-test/scons_all_failed_unittests.log
+    echo "*******************************************************************"
+
+    # Turn on error check and echo
+    set -ex
+}
+
 # Run unittests
 function run_unittest() {
     # Goto the repo top directory.
@@ -33,31 +75,13 @@ function run_unittest() {
     ### Ignore test failures until tests stability is achieved ###
     scons -i -j $SCONS_JOBS -U test 2>&1 | tee $WORKSPACE/scons_test.log
 
-    # Turn off error check and echo for the rest of the script.
-    set +ex
-
-    FAIL_COUNT=`grep -cw FAIL $WORKSPACE/scons_test.log`
-    grep -w PASS $WORKSPACE/scons_test.log
-    echo
-    echo "Number of PASS tests: "`grep -cw PASS $WORKSPACE/scons_test.log`
-    echo "Number of FAIL tests: $FAIL_COUNT"
-
-    if [ "$FAIL_COUNT" != "0" ]; then
-        echo
-        grep -w FAIL $WORKSPACE/scons_test.log
-        echo
-        echo "*****************************************************************"
-        echo $FAIL_COUNT tests failure ignored -- This will change shortly...
-        echo "*****************************************************************"
-    fi
-
-    # Turn on error check and echo
-    set -ex
+    print_test_results
 }
 
 function main() {
     build_unittest
     run_unittest
+    print_test_results
 }
 
 env
