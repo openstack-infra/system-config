@@ -295,6 +295,16 @@ class openstack_project::gerrit (
     require => Class['::gerrit'],
   }
 
+  file { '/home/gerrit2/review_site/hooks/change-abandoned':
+    ensure  => present,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0555',
+    source  => 'puppet:///modules/openstack_project/gerrit/change-abandoned',
+    replace => true,
+    require => Class['::gerrit'],
+  }
+
   file { '/home/gerrit2/review_site/hooks/notify_impact.yaml':
     ensure  => present,
     source  =>
