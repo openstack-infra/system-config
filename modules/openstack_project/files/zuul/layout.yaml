@@ -2490,6 +2490,12 @@ projects:
     gate:
       - noop
 
+  - name: openstack/security-doc
+    check:
+      - noop
+    gate:
+      - noop
+
 # Section: OpenStack development projects
 
   - name: openstack-dev/bash8

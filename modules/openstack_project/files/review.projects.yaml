@@ -283,6 +283,8 @@
 - project: openstack/openstack-security-notes
   description: OpenStack Security Notes (OSSN)
   upstream: https://github.com/nkinder/openstack-security-notes.git
+- project: openstack/security-doc
+  description: Documentation work from the OpenStack Security Group (OSSG)
 - project: openstack/operations-guide
   group: openstack-manuals
   upstream: git://github.com/jeblair/openstack-ops
