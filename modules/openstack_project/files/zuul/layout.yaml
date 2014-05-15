@@ -339,6 +339,8 @@ project-templates:
       - gate-{name}-tox-doc-publish-checkbuild
 
   - name: openstack-doc-translation
+    check:
+      - 'gate-{name}-tox-checklang'
     post:
       - '{name}-manuals-upstream-translation-update'
     periodic:
@@ -459,6 +461,8 @@ jobs:
     voting: false
   - name: ^gate-.*-tox-doc-publish-checkbuild$
     success-pattern: http://docs-draft.openstack.org/{build.parameters[LOG_PATH]}/publish-docs/
+  - name: ^gate-.*-tox-checklang$
+    voting: false
   - name: ^gate-.*-tox-checkniceness$
     voting: false
   - name: ^gate-.*-docs$
