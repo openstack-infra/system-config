@@ -4664,7 +4664,10 @@ projects:
       - stackalytics-tarball
       - hook-stackalytics-rtfd
     release:
-      - stackalytics-tarball
+      - stackalytics-tarball:
+        - stackalytics-pypi-upload:
+          - post-mirror-python26
+          - post-mirror-python27
       - hook-stackalytics-rtfd
 
   - name: stackforge/swift3
