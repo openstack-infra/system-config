@@ -3245,6 +3245,12 @@ projects:
       - gate-anvil-python27
       - gate-anvil-pylint
 
+  - name: stackforge/aviator
+    check:
+      - noop
+    gate:
+      - noop
+
   - name: stackforge/barbican
     check:
       - gate-barbican-pep8

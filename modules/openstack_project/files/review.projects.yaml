@@ -431,6 +431,9 @@
 - project: stackforge/anvil
   description: A set of python scripts and utilities to forge raw openstack into a productive tool!
   upstream: git://github.com/yahoo/Openstack-Anvil.git
+- project: stackforge/aviator
+  description: An OpenStack client library for Ruby
+  upstream: git://github.com/aviator/aviator
 - project: stackforge/barbican
   description: Barbican is a ReST API designed for the secure storage, provisioning and management of secrets, including in OpenStack environments.
   upstream: git://github.com/cloudkeep/barbican.git
