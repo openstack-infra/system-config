@@ -2450,3 +2450,12 @@
     jobs:
       - python-jobs
       - pypi-jobs
+
+- project:
+    name: cloudkitty
+    github-org: stackforge
+    node: bare-precise
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - python-jobs
