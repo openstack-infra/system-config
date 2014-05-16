@@ -168,7 +168,7 @@ class Vm
         check_keepalive(hostname) if mode == CI_SUB_SLAVE
 
         # CI-Slaves register to jenkins.opencontrail.org
-        exec %{java -jar /root/swarm-client-1.15-jar-with-dependencies.jar -labels juniper-tests -mode normal -master http://jenkins.opencontrail.org:8080/ -fsroot /home/jenkins -username ci-admin-f -password bf33d8e024f41dc3aa4cab6d90cefa64 -name #{get_hostname} 2>&1 | tee /root/jenkins-slave.log} if mode == CI_SLAVE
+        exec %{java -jar /root/swarm-client-1.15-jar-with-dependencies.jar -labels juniper-tests -mode normal -master http://jenkins.opencontrail.org:8080/ -fsroot /home/jenkins -username ci-admin-f -password bf33d8e02sdfdskjfdsj4f41dc3aa4cab6d90cefa64 -name #{get_hostname} 2>&1 | tee /root/jenkins-slave.log} if mode == CI_SLAVE
     end
 end
 
