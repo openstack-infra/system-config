@@ -580,6 +580,8 @@ jobs:
     voting: false
   - name: gate-puppet-vswitch-puppet-syntax
     voting: false
+  - name: gate-config-puppet-apply
+    voting: false
   - name: gate-tomograph-python33
     voting: false
   - name: ^check-rally-install-.*$
@@ -2717,6 +2719,7 @@ projects:
       - gate-config-pep8
       - gate-config-puppet-lint
       - gate-config-puppet-syntax
+      - gate-config-puppet-apply
       - gate-config-irc-access
       - gate-ci-docs
       - check-projects-yaml-alphabetized
@@ -2726,6 +2729,7 @@ projects:
       - gate-config-pep8
       - gate-config-puppet-lint
       - gate-config-puppet-syntax
+      - gate-config-puppet-apply
       - gate-config-irc-access
       - check-projects-yaml-alphabetized
       - check-projects-yaml-upstream
