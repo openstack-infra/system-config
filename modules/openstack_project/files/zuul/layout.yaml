@@ -517,6 +517,8 @@ jobs:
     success-pattern: http://docs-draft.openstack.org/{build.parameters[LOG_PATH]}/doc/build/html/
   - name: gate-storyboard-webclient-js-unittests
     success-pattern: http://docs-draft.openstack.org/{build.parameters[LOG_PATH]}/dist/
+  - name: gate-vinz-webclient-js-unittests
+    success-pattern: http://docs-draft.openstack.org/{build.parameters[LOG_PATH]}/dist/
   - name: infra-publications-publish
     branch: ^(?!master).*$
   - name: ^gate-.*-requirements$
@@ -651,7 +653,8 @@ jobs:
     voting: false
   - name: gate-pecan-tox-barbican-tip
     voting: false
-
+  - name: gate-pecan-tox-vinz-tip
+    voting: false
 # The project list is grouped by type of project, and within each
 # group, projects are sorted (mostly) alphabetically.
 projects:
@@ -2832,6 +2835,14 @@ projects:
       - gate-config-puppet-lint
       - gate-config-puppet-syntax
 
+  - name: openstack-infra/puppet-vinz
+    check:
+      - gate-config-puppet-lint
+      - gate-config-puppet-syntax
+    gate:
+      - gate-config-puppet-lint
+      - gate-config-puppet-syntax
+
   - name: openstack-infra/puppet-zuul
     check:
       - gate-config-puppet-lint
@@ -2961,6 +2972,28 @@ projects:
       - storyboard-webclient-js-release-branch
     release:
       - storyboard-webclient-js-release-master
+
+  - name: openstack-infra/vinz
+    template:
+      - name: publish-to-pypi
+    template:
+      - name: python-jobs
+    post:
+      - vinz-docs
+    pre-release:
+      - vinz-docs
+    release:
+      - vinz-docs
+
+  - name: openstack-infra/vinz-webclient
+    check:
+      - gate-vinz-webclient-js-unittests
+    gate:
+      - gate-vinz-webclient-js-unittests
+    post:
+      - vinz-webclient-js-release-branch
+    release:
+      - vinz-webclient-js-release-master
 
   - name: openstack-infra/tripleo-ci
     check:
@@ -3773,6 +3806,7 @@ projects:
       - gate-pecan-tox-ironic-tip
       - gate-pecan-tox-barbican-tip
       - gate-pecan-tox-storyboard-tip
+      - gate-pecan-tox-vinz-tip
     gate:
       - gate-pecan-pep8
       - gate-pecan-python26
@@ -3786,6 +3820,7 @@ projects:
       - gate-pecan-tox-ironic-stable
       - gate-pecan-tox-ironic-tip
       - gate-pecan-tox-storyboard-tip
+      - gate-pecan-tox-vinz-tip
     post:
       - pecan-branch-tarball
 
