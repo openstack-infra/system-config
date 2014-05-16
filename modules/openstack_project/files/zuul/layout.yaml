@@ -580,6 +580,8 @@ jobs:
     voting: false
   - name: gate-puppet-vswitch-puppet-syntax
     voting: false
+  - name: gate-config-puppet-apply-test
+    voting: false
   - name: gate-tomograph-python33
     voting: false
   - name: ^check-rally-install-.*$
