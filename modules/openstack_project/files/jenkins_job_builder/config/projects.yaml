@@ -166,6 +166,14 @@
       - infra-publish-jobs
 
 - project:
+    name: infra-specs
+    github-org: openstack-infra
+    node: bare-precise
+
+    jobs:
+      - gate-{name}-docs
+
+- project:
     name: sahara
     github-org: openstack
     node: bare-precise

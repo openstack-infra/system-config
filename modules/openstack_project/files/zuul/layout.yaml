@@ -2912,6 +2912,12 @@ projects:
     gate:
       - noop
 
+  - name: openstack-infra/infra-specs
+    check:
+      - gate-infra-specs-docs
+    gate:
+      - gate-infra-specs-docs
+
   - name: openstack-infra/groups-static-pages
     check:
       - noop
