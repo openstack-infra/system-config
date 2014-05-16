@@ -465,6 +465,8 @@ jobs:
     success-pattern: http://docs-draft.openstack.org/{build.parameters[LOG_PATH]}/doc/build/html/
   - name: gate-storyboard-webclient-js-unittests
     success-pattern: http://docs-draft.openstack.org/{build.parameters[LOG_PATH]}/dist/
+  - name: gate-vinz-webclient-js-unittests
+    success-pattern: http://docs-draft.openstack.org/{build.parameters[LOG_PATH]}/dist/ 
   - name: infra-publications-publish
     branch: ^(?!master).*$
   - name: ^gate-.*-requirements$
@@ -3180,6 +3182,16 @@ projects:
       - storyboard-webclient-js-release-branch
     release:
       - storyboard-webclient-js-release-master
+
+  - name: openstack-infra/vinz-webclient
+    check:
+      - gate-vinz-webclient-js-unittests
+    gate:
+      - gate-vinz-webclient-js-unittests
+    post:
+      - vinz-webclient-js-release-branch
+    release:
+      - vinz-webclient-js-release-master
 
   - name: openstack-infra/tripleo-ci
     check:
