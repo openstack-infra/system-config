@@ -42,6 +42,7 @@ openstack-infra:
       - openstack-infra/statusbot
       - openstack-infra/storyboard
       - openstack-infra/storyboard-webclient
+      - openstack-infra/vinz-webclient
       - openstack-infra/zuul
       - openstack-infra/zuul-packaging
       - openstack/requirements
@@ -493,6 +494,16 @@ storyboard:
     projects:
       - openstack-infra/storyboard
       - openstack-infra/storyboard-webclient
+    branches:
+      - master
+
+vinz:
+    events:
+      - patchset-created
+      - change-merged
+      - x-vrif-minus-2
+    projects:
+      - openstack-infra/vinz-webclient
     branches:
       - master
 
