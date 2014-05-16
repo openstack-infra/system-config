@@ -14,7 +14,7 @@ pipelines:
         - event: patchset-created
         - event: change-restored
         - event: comment-added
-          comment_filter: (?i)^(Patch Set [0-9]+:\n\n)?\s*recheck(( (?:bug|lp)[\s#:]*(\d+))|( no bug))\s*$
+          comment_filter: (?i)^(Patch Set [0-9]+:)?( [\w\\-]*)?(\n\n)?\s*recheck(( (?:bug|lp)[\s#:]*(\d+))|( no bug))\s*$
         - event: comment-added
           require-approval:
             - username: jenkins
@@ -25,7 +25,7 @@ pipelines:
             - username: jenkins
               older-than: 24h
         - event: comment-added
-          comment_filter: (?i)^(Patch Set [0-9]+:\n\n)?\s*reverify( (?:bug|lp)[\s#:]*(\d+))\s*$
+          comment_filter: (?i)^(Patch Set [0-9]+:)?( [\w\\-]*)?(\n\n)?\s*reverify( (?:bug|lp)[\s#:]*(\d+))\s*$
           require-approval:
             - workflow: 1
             - username: jenkins
@@ -135,7 +135,7 @@ pipelines:
       gerrit:
         - event: patchset-created
         - event: comment-added
-          comment_filter: (?i)^(Patch Set [0-9]+:\n\n)?\s*recheck(( (?:bug|lp)[\s#:]*(\d+))|( no bug))\s*$
+          comment_filter: (?i)^(Patch Set [0-9]+:)?( [\w\\-]*)?(\n\n)?\s*recheck(( (?:bug|lp)[\s#:]*(\d+))|( no bug))\s*$
 
   - name: experimental
     description: On-demand pipeline for requesting a run against a set of jobs that are not yet gating. Leave review comment of "check experimental" to run jobs in this pipeline.
@@ -144,7 +144,7 @@ pipelines:
     trigger:
       gerrit:
         - event: comment-added
-          comment_filter: (?i)^(Patch Set [0-9]+:\n\n)?\s*check experimental\s*$
+          comment_filter: (?i)^(Patch Set [0-9]+:)?( [\w\\-]*)?(\n\n)?\s*check experimental\s*$
     success:
       gerrit: {}
     failure:
@@ -204,7 +204,7 @@ pipelines:
         - event: patchset-created
         - event: change-restored
         - event: comment-added
-          comment_filter: (?i)^(Patch Set [0-9]+:\n\n)?\s*recheck(( (?:bug|lp)[\s#:]*(\d+))|( no bug))\s*$
+          comment_filter: (?i)^(Patch Set [0-9]+:)?( [\w\\-]*)?(\n\n)?\s*recheck(( (?:bug|lp)[\s#:]*(\d+))|( no bug))\s*$
         - event: comment-added
           require-approval:
             - username: jenkins
@@ -224,7 +224,7 @@ pipelines:
     trigger:
       gerrit:
         - event: comment-added
-          comment_filter: (?i)^(Patch Set [0-9]+:\n\n)?\s*check experimental\s*$
+          comment_filter: (?i)^(Patch Set [0-9]+:)?( [\w\\-]*)?(\n\n)?\s*check experimental\s*$
     success:
       gerrit: {}
     failure:
