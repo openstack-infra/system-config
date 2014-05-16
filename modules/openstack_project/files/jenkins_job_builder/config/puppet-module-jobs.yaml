@@ -39,6 +39,17 @@
     publishers:
       - console-log
 
+- job-template:
+    name: 'gate-{name}-puppet-apply'
+    node: '{node}'
+
+    builders:
+      - gerrit-git-prep
+      - puppet-apply
+
+    publishers:
+      - console-log
+
 - job-group:
     name: 'puppet-module-unit'
     puppet_version:

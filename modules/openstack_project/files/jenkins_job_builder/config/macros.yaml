@@ -112,6 +112,11 @@
           done
 
 - builder:
+    name: puppet-apply
+    builders:
+      - shell: "./test.sh"
+
+- builder:
     name: chef-bundler-prep
     builders:
       - shell: |
