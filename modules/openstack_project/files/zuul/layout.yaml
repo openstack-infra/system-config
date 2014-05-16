@@ -517,6 +517,8 @@ jobs:
     success-pattern: http://docs-draft.openstack.org/{build.parameters[LOG_PATH]}/doc/build/html/
   - name: gate-storyboard-webclient-js-unittests
     success-pattern: http://docs-draft.openstack.org/{build.parameters[LOG_PATH]}/dist/
+  - name: gate-vinz-webclient-js-unittests
+    success-pattern: http://docs-draft.openstack.org/{build.parameters[LOG_PATH]}/dist/
   - name: infra-publications-publish
     branch: ^(?!master).*$
   - name: ^gate-.*-requirements$
@@ -606,6 +608,8 @@ jobs:
   - name: gate-blazar-devstack-dsvm
     voting: false
   - name: gate-storyboard-python33
+    voting: false
+  - name: gate-vinz-python33
     voting: false
   - name: gate-oslo-incubator-python33
     branch: ^(?!stable/havana).*$
@@ -2961,6 +2965,32 @@ projects:
       - storyboard-webclient-js-release-branch
     release:
       - storyboard-webclient-js-release-master
+
+  - name: openstack-infra/vinz
+    template:
+      - name: python-jobs
+    post:
+      - vinz-docs
+    pre-release:
+      - vinz-docs
+      - vinz-tarball
+    release:
+      - vinz-docs
+      - vinz-tarball:
+        - vinz-pypi-upload:
+          - post-mirror-python26
+          - post-mirror-python27
+          - post-mirror-python33
+
+  - name: openstack-infra/vinz-webclient
+    check:
+      - gate-vinz-webclient-js-unittests
+    gate:
+      - gate-vinz-webclient-js-unittests
+    post:
+      - vinz-webclient-js-release-branch
+    release:
+      - vinz-webclient-js-release-master
 
   - name: openstack-infra/tripleo-ci
     check:
