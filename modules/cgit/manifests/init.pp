@@ -17,6 +17,7 @@
 class cgit(
   $vhost_name = $::fqdn,
   $serveradmin = "webmaster@${::fqdn}",
+  $serveraliases = '',
   $cgitdir = '/var/www/cgit',
   $staticfiles = '/var/www/cgit/static',
   $ssl_cert_file = '',
@@ -116,12 +117,13 @@ class cgit(
   }
 
   apache::vhost { $vhost_name:
-    port     => $https_port,
-    docroot  => 'MEANINGLESS ARGUMENT',
-    priority => '50',
-    template => 'cgit/git.vhost.erb',
-    ssl      => true,
-    require  => [
+    port          => $https_port,
+    serveraliases => $serveraliases,
+    docroot       => 'MEANINGLESS ARGUMENT',
+    priority      => '50',
+    template      => 'cgit/git.vhost.erb',
+    ssl           => true,
+    require       => [
       File[$staticfiles],
       Package['cgit'],
     ],
