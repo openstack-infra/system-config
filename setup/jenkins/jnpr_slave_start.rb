@@ -1,31 +1,13 @@
 #!/usr/bin/env ruby
 
+require 'contrail-util'
+
 # source ~/anantha/openstackrc
-# Picks one available from `neutron floatingip-list`
-
-def dry_run?
-    return !ENV['DRY_RUN'].nil? && ENV['DRY_RUN'].casecmp("true") == 0
-end
-
-def sh (cmd, ignore = false)
-    puts "#{cmd}"
-    exit_code = 0
-    if not dry_run? then
-        if cmd =~ /^cd\s+(.*)/ then
-            Dir.chdir($1)
-        else
-            output = `#{cmd}`
-            exit_code = $?.to_i unless ignore
-        end
-    end
-    puts output if !output.nil? and !output.empty?
-
-    if exit_code != 0 then
-        puts "Comamnd #{cmd} failed with exit code #{$?}"
-        exit exit_code
-    end
-    return output.chomp
-end
+ENV['OS_AUTH_URL']="http://192.168.69.1:5000/v2.0"
+ENV['OS_TENANT_ID']="bc4ef31e0f1c4412bddc0b7ac606d5f2"
+ENV['OS_TENANT_NAME']="opencontrail-ci"
+ENV['OS_USERNAME']="anantha"
+ENV['OS_PASSWORD']="anantha123" # $OS_PASSWORD_INPUT
 
 @base_image = "ci-jenkins-slave"
 def setup_image
@@ -53,7 +35,7 @@ def create_instance
     floating_ip_id = sh "neutron floatingip-list |\grep #{floating_ip} | awk '{print $2}'"
     sh "neutron floatingip-associate #{floating_ip_id} #{port_id}"
 
-    puts "Created instance ci=#{floating_ip} with floating ip #{floating_ip}"
+    puts "Created instance ci-#{floating_ip} with floating ip #{floating_ip}"
 end
 
 count = 1

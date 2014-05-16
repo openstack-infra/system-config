@@ -1,6 +1,6 @@
+#!/usr/bin/env bash
+
 set -ex
-
-
 set -o pipefail
 
 function build_vm() {
@@ -22,7 +22,7 @@ if ! grep -q Contrail-Ansible ~/.ssh/authorized_keys; then
     python $ANSIBLE -i $HOSTIP -r contrail-ec-build03.juniper.net key
 fi
 
-python $ANSIBLE -n $HOSNAME -i $HOSTIP -r contrail-ec-build03.juniper.net -d ubuntu-12-04 config
+python $ANSIBLE -n $HOSTNAME -i $HOSTIP -r contrail-ec-build03.juniper.net -d ubuntu-12-04 config
 }
 
 # wget https://bitbucket.org/pypa/setuptools/raw/0.7.4/ez_setup.py -O - | python

@@ -6,6 +6,15 @@ apt-get update
 
 JENKINS=jenkins
 
+function setup_ntp {
+    apt-get -y install ntp
+    echo ntpdate ntp.ubuntu.com > /etc/cron.daily/ntpdate
+    chmod +x /etc/cron.daily/ntpdate
+
+    echo America/Los_Angeles > /etc/timezone
+    dpkg-reconfigure --frontend noninteractive tzdata
+}
+
 # Setup jenkins ssh server port to 6000 and jnlp slave port to 6001
 
 function install_crontab_hack() {
