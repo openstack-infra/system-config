@@ -36,6 +36,7 @@ openstack-infra:
       - openstack-infra/puppet-dashboard
       - openstack-infra/puppet-storyboard
       - openstack-infra/puppet-vcsrepo
+      - openstack-infra/puppet-vinz
       - openstack-infra/puppet-yum
       - openstack-infra/puppet-zuul
       - openstack-infra/pypi-mirror
@@ -46,6 +47,8 @@ openstack-infra:
       - openstack-infra/statusbot
       - openstack-infra/storyboard
       - openstack-infra/storyboard-webclient
+      - openstack-infra/vinz
+      - openstack-infra/vinz-webclient
       - openstack-infra/zuul
       - openstack-infra/zuul-packaging
       - openstack/requirements
