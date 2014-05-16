@@ -1356,6 +1356,28 @@
       - '{name}-js-release-{branch-designator}':
           branch-designator: 'branch'
 
+- project:
+    name: vinz
+    github-org: openstack-infra
+    node: bare-precise
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - python-jobs
+      - pypi-jobs
+
+- project:
+    name: vinz-webclient
+    github-org: openstack-infra
+    node: bare-precise
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - gate-{name}-js-unittests
+      - '{name}-js-release-{branch-designator}':
+          branch-designator: 'master'
+      - '{name}-js-release-{branch-designator}':
+          branch-designator: 'branch'
 
 - project:
     name: swift
