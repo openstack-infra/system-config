@@ -100,6 +100,9 @@
   group: openstack-ci
   options:
     - direct-release
+- project: openstack-infra/infra-specs
+  group: openstack-ci
+  description: OpenStack Infrastructure Blueprint Repository
 - project: openstack-infra/jeepyb
   group: openstack-ci
   upstream: git://github.com/emonty/gerritx.git
