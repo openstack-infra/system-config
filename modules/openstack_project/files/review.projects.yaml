@@ -180,6 +180,13 @@
 - project: openstack-infra/tripleo-ci
   description: CI for the tripleo project
   upstream: https://github.com/toci-dev/toci
+- project: openstack-infra/vinz
+  use-storyboard: true
+  description: Standalong UI replacement for Gerrit API
+- project: openstack-infra/vinz-webclient
+  acl-config: /home/gerrit2/acls/openstack-infra/vinz.config
+  description: Standalone UI replacment for Gerrit
+  use-storyboard: true
 - project: openstack-infra/zmq-event-publisher
   group: openstack-ci
   description: Jenkins plugin to publish build events via ZMQ PUB SUB.
