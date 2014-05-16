@@ -42,6 +42,7 @@ openstack-infra:
       - openstack-infra/statusbot
       - openstack-infra/storyboard
       - openstack-infra/storyboard-webclient
+      - openstack-infra/vinz-webclient
       - openstack-infra/zuul
       - openstack-infra/zuul-packaging
       - openstack/requirements
