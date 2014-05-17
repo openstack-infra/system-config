@@ -200,6 +200,9 @@
   options:
     - direct-release
 - project: openstack/ceilometer
+- project: openstack/telemetry-specs
+  group: ceilometer
+  upstream: git://github.com/eglynn/telemetry-specs.git
 - project: openstack/cinder
   docimpact-group: openstack-manuals
 - project: openstack/cinder-specs
