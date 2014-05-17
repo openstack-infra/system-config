@@ -399,6 +399,9 @@
   upstream: git://github.com/jeblair/swift-bench.git
 - project: openstack/taskflow
   description: A library to complete workflows/tasks in HA manner
+- project: openstack/telemetry-specs
+  group: ceilometer
+  upstream: git://github.com/eglynn/telemetry-specs.git
 - project: openstack/tempest
   options:
     - direct-release
