@@ -635,6 +635,14 @@ projects:
     periodic:
       - ceilometer-propose-translation-update
 
+  - name: openstack/ceilometer-specs
+    check:
+      - gate-ceilometer-specs-python27
+      - gate-ceilometer-specs-docs
+    gate:
+      - gate-ceilometer-specs-python27
+      - gate-ceilometer-specs-docs
+
   - name: openstack/cinder
     template:
       - name: python-jobs

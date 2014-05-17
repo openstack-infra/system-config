@@ -196,6 +196,9 @@
   options:
     - direct-release
 - project: openstack/ceilometer
+- project: openstack/ceilometer-specs
+  group: ceilometer
+  upstream: git://github.com/eglynn/ceilometer-specs.git
 - project: openstack/cinder
   docimpact-group: openstack-manuals
 - project: openstack/cinder-specs
