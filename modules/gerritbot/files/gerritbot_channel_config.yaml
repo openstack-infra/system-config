@@ -89,6 +89,7 @@ openstack-ceilometer:
       - x-vrif-minus-2
     projects:
       - openstack/ceilometer
+      - openstack/telemetry-specs
       - openstack/python-ceilometerclient
       - openstack/pycadf
     branches:
