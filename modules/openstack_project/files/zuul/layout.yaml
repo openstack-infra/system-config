@@ -2432,6 +2432,14 @@ projects:
     post:
       - identity-api-tox-doc-publishdocs
 
+  - name: openstack/identity-specs
+    check:
+      - gate-identity-specs-python27
+      - gate-identity-specs-docs
+    gate:
+      - gate-identity-specs-python27
+      - gate-identity-specs-docs
+
   - name: openstack/image-api
     template:
       - name: openstack-doc-gate
