@@ -249,6 +249,8 @@
   group: ironic
 - project: openstack/keystone
   docimpact-group: openstack-manuals
+- project: openstack/keystone-specs
+  group: keystone
 - project: openstack/marconi
 - project: openstack/melange
 - project: openstack/netconn-api
