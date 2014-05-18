@@ -600,6 +600,16 @@
 
 
 - project:
+    name: keystone-specs
+    github-org: openstack
+    node: bare-precise
+    tarball-site: tarballs.openstack.org
+
+    - jobs:
+      - gate-{name}-python27
+      - gate-{name}-docs
+
+- project:
     name: image-api
     github-org: openstack
     node: bare-precise

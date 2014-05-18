@@ -884,6 +884,14 @@ projects:
       - keystone-propose-translation-update
       - periodic-swift-dsvm-functional-havana
 
+  - name: openstack/keystone-specs
+    check:
+      - gate-keystone-specs-python27
+      - gate-keystone-specs-docs
+    gate:
+      - gate-keystone-specs-python27
+      - gate-keystone-specs-docs
+
   - name: openstack/marconi
     template:
       - name: python-jobs
