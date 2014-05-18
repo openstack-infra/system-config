@@ -195,6 +195,8 @@
   group: openstack-api-site
   options:
     - direct-release
+- project: openstack/baremetal-specs
+  group: ironic
 - project: openstack/ceilometer
 - project: openstack/cinder
   docimpact-group: openstack-manuals
