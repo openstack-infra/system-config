@@ -68,23 +68,3 @@
           remove-prefix: 'www/'
           excludes: ''
       - console-log
-
-
-- job:
-    name: compute-api-v2.0-wadl
-    node: bare-precise
-
-    builders:
-      - revoke-sudo
-      - gerrit-git-prep
-      - shell: /usr/local/jenkins/slave_scripts/run-xmllint.sh openstack-compute-api-2/src/os-compute-2.wadl
-
-    publishers:
-      - ftp:
-          site: docs.openstack.org
-          source: 'target/**'
-          target: 'api/openstack-compute/2/wadl/'
-          remove-prefix: 'target/'
-          excludes: '**/*.xml,**/null*'
-      - console-log
-
