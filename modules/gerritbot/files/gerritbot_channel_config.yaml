@@ -337,6 +337,7 @@ openstack-ironic:
       - x-vrif-minus-2
     projects:
       - openstack/ironic
+      - openstack/ironic-specs
       - openstack/ironic-python-agent
       - openstack/python-ironicclient
       - stackforge/pyghmi

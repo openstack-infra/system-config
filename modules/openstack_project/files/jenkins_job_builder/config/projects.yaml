@@ -1874,6 +1874,16 @@
           branch-override: default
 
 - project:
+    name: ironic-specs
+    github-org: openstack
+    node: bare-precise
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - gate-{name}-python27
+      - gate-{name}-docs
+
+- project:
     name: python-ironicclient
     github-org: openstack
     node: bare-precise
