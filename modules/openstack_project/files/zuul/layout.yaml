@@ -844,6 +844,14 @@ projects:
     periodic:
       - ironic-propose-translation-update
 
+  - name: openstack/ironic-specs
+    check:
+      - gate-ironic-specs-python27
+      - gate-ironic-specs-docs
+    gate:
+      - gate-ironic-specs-python27
+      - gate-ironic-specs-docs
+
   - name: openstack/keystone
     template:
       - name: python-jobs
