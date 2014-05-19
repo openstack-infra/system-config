@@ -352,6 +352,7 @@ openstack-swift:
       - openstack/swift
       - openstack/swift-bench
       - openstack/python-swiftclient
+      - openstack/swift-specs
     branches:
       - master
       - feature/ec

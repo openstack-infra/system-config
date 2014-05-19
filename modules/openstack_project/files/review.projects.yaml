@@ -393,6 +393,8 @@
 - project: openstack/swift-bench
   description: Benchmarking tool for OpenStack Swift
   upstream: git://github.com/jeblair/swift-bench.git
+- project: openstack/swift-specs
+  group: swift
 - project: openstack/taskflow
   description: A library to complete workflows/tasks in HA manner
 - project: openstack/tempest
