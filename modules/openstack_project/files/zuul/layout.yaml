@@ -1090,7 +1090,11 @@ projects:
     release:
       - swift-tarball
       - swift-merge-release-tags
-
+  - name: openstack/swift-specs
+    check:
+      - gate-swift-specs-docs
+    gate:
+      - gate-swift-specs-docs
   - name: openstack/taskflow
     template:
       - name: python-jobs
