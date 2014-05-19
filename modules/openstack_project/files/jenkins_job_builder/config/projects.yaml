@@ -729,6 +729,16 @@
 
 
 - project:
+    name: object-specs
+    github-org: openstack
+    node: bare-precise
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - gate-{name}-docs
+
+
+- project:
     name: oslosphinx
     github-org: openstack
     node: bare-precise
