@@ -363,6 +363,8 @@
   acl-config: /home/gerrit2/acls/openstack/sahara.config
 - project: openstack/python-swiftclient
   docimpact-group: openstack-manuals
+- project: openstack/swift-specs
+  group: swift
 - project: openstack/python-troveclient
 - project: openstack/python-tuskarclient
   description: Python bindings and CLI to Tuskar.
