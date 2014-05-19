@@ -1090,8 +1090,7 @@ projects:
     release:
       - swift-tarball
       - swift-merge-release-tags
-
-  - name: openstack/taskflow
+- name: openstack/taskflow
     template:
       - name: python-jobs
       - name: python3-jobs
@@ -2449,6 +2448,12 @@ projects:
       - name: openstack-doc-gate
     post:
       - object-api-tox-doc-publishdocs
+
+  - name: openstack/object-specs
+    check:
+      - noop
+    gate:
+      - noop
 
   - name: openstack/volume-api
     template:
