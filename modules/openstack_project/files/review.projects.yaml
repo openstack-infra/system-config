@@ -931,3 +931,6 @@
 - project: stackforge/xenapi-os-testing
   description: Scripts to enable running of tempest tests in a nested Xen instance
   upstream: git://github.com/citrix-openstack/xenapi-os-testing.git
+- project: stackforge/doc8
+  description: Style checker for sphinx (or other) rst documentation.
+  upstream: git://github.com/harlowja/doc8.git
