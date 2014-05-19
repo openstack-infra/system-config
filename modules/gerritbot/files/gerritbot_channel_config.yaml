@@ -349,9 +349,10 @@ openstack-swift:
       - change-merged
       - x-vrif-minus-2
     projects:
+      - openstack/object-specs
+      - openstack/python-swiftclient
       - openstack/swift
       - openstack/swift-bench
-      - openstack/python-swiftclient
     branches:
       - master
       - feature/ec
