@@ -9,6 +9,7 @@ pipelines:
     precedence: low
     require:
       open: True
+      current-patchset: True
     trigger:
       gerrit:
         - event: patchset-created
@@ -58,6 +59,7 @@ pipelines:
     precedence: normal
     require:
       open: True
+      current-patchset: True
     trigger:
       gerrit:
         - event: comment-added
@@ -199,6 +201,7 @@ pipelines:
     precedence: low
     require:
       open: True
+      current-patchset: True
     trigger:
       gerrit:
         - event: patchset-created
