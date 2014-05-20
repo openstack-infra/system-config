@@ -29,9 +29,16 @@ if [ "$SLAVE_MASTER" != "localhost" ]; then
     echo export ftp_proxy=http://$SLAVE_MASTER:3128 >> /root/.proxyrc
 fi
 
+# Check if this run needs to be skipped.
+ssh -p $PORT root@$SLAVE_MASTER ls /root/ci-test/skip_jobs
+if [ "$?" == "0" ]; then
+    echo Jobs skipped due to jenkins.opencontrail.org:/root/ci-test/skip_jobs
+    exit 0
+fi
+
 BRANCH=master
 ssh -p $PORT root@$SLAVE_MASTER ls /root/ci-test/\*$HOSTNAME\*-test
-if [ "$?" -eq 0 ]; then
+if [ "$?" == "0" ]; then
     BRANCH=test
 fi
 
