@@ -41,6 +41,16 @@
       - pypi-jobs
 
 - project:
+    name: mistral-dashboard
+    github-org: stackforge
+    node: bare-precise
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - python-jobs
+      - pypi-jobs
+
+- project:
     name: python-mistralclient
     github-org: stackforge
     node: bare-precise

@@ -514,6 +514,8 @@ jobs:
     voting: false
   - name: gate-mistral-devstack-dsvm
     voting: false
+  - name: gate-mistral-dashboard-python33
+    voting: false
   - name: gate-mistral-extra-python33
     voting: false
   - name: python-jenkins-coverage
@@ -3744,6 +3746,19 @@ projects:
     release:
       - mistral-tarball:
         - mistral-pypi-upload:
+          - post-mirror-python26
+          - post-mirror-python27
+          - post-mirror-python33
+
+  - name: stackforge/mistral-dashboard
+    template:
+      - name: python-jobs
+      - name: python3-jobs
+    pre-release:
+      - mistral-dashboard-tarball
+    release:
+      - mistral-dashboard-tarball:
+        - mistral-dashboard-pypi-upload:
           - post-mirror-python26
           - post-mirror-python27
           - post-mirror-python33
