@@ -42,7 +42,7 @@ class Vm
                 break if line =~ /# launch_vms.rb autogeneration start/
                 next unless start
 
-                vms.push(new Vm(line.split[0], line.split[1]))
+                vms.push(Vm.new(line.split[0], line.split[1]))
             }
         }
         return vms
