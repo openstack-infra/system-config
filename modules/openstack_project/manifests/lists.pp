@@ -75,6 +75,15 @@ class openstack_project::lists(
     mailserver  => $listdomain,
   }
 
+  maillist { 'openstack-el':
+    ensure      => present,
+    admin       => 'aparathyras@stackmasters.eu',
+    password    => $listpassword,
+    description => 'List of the OpenStack Greek User Group',
+    webserver   => $listdomain,
+    mailserver  => $listdomain,
+  }
+
   maillist { 'openstack-travel-committee':
     ensure      => present,
     admin       => 'communitymngr@openstack.org',
