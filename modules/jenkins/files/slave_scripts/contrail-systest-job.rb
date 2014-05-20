@@ -14,7 +14,7 @@ end
 def setup
     image = "/root/contrail-install-packages_1.06-12~havana_all.deb"
 
-    vms = Vm.vms
+    vms = Vm.all_vms
     vms = Vm.init_all if vms.empty?
 
     vms.each { |vm|

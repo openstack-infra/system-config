@@ -16,11 +16,13 @@ class Vm
 
     @@base_image = "ci-jenkins-slave"
     @@vms = [ ]
+    def all_vms; @@vms end
 
     def initialize(vmname, hostip)
         @vmname = vmname
         @hostip = hostip
     end
+
 
     def delete
         @thread.kill unless @thread.nil?
