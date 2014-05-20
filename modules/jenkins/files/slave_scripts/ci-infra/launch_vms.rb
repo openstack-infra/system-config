@@ -16,7 +16,7 @@ class Vm
 
     @@base_image = "ci-jenkins-slave"
     @@vms = [ ]
-    def all_vms; @@vms end
+    def Vm.all_vms; @@vms end
 
     def initialize(vmname, hostip)
         @vmname = vmname
