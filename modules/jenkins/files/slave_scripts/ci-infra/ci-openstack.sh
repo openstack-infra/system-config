@@ -9,4 +9,3 @@ export OS_PASSWORD=anantha123 # $OS_PASSWORD_INPUT
 CMD=$1
 shift
 $CMD $*
-

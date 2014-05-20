@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+set -e
+
+MASTER=jenkins.opencontrail.org
+ssh root@$MASTER ls skip_copy_jenkins_slave_scripts
+if [ "$?" -ne 0 ]; then
+    # Copy slave scripts from the jenkins.opencontrail.org central master location.
+    rm -rf /usr/local/jenkins/slave_scripts
+    ssh root@$MASTER tar zcf - /usr/local/jenkins/slave_scripts | tar -zx -C /
+fi
+
+set -o pipefail
+set -x
+
+# Run the real script
+cmd=$1
+shift
+exec $cmd $*
