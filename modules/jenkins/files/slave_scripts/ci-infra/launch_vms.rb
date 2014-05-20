@@ -20,12 +20,30 @@ class Vm
     def initialize(vmname, hostip)
         @vmname = vmname
         @hostip = hostip
-        send_keepalive
     end
 
     def delete
         @thread.kill unless @thread.nil?
         Sh.crun "nova delete #{@vmname}"
+    end
+
+    # Initialize VMs list from /etc/hosts
+    def Vm.init_all
+        vms = [ ]
+        File.open("/etc/hosts", "r") { |fp|
+            start = false
+            fp.readlines.each { |line|
+                if line =~ /# launch_vms.rb autogeneration start/ then
+                    start = true
+                    next
+                end
+                break if line =~ /# launch_vms.rb autogeneration start/
+                next unless start
+
+                vms.push(new Vm(line.split[0], line.split[1]))
+            }
+        }
+        return vms
     end
 
     def Vm.clean_all
@@ -93,7 +111,9 @@ class Vm
         1.upto(count) { |i|
             vmname = "ci-subslave-#{floatingip}-#{i}"
             hostip = Vm.create_internal(vmname, nil, slave_master)
-            @@vms.push Vm.new(vmname, hostip)
+            vm = Vm.new(vmname, hostip)
+            vm.send_keepalive
+            @@vms.push vm
         }
 
         pp @@vms
