@@ -15,6 +15,13 @@ fi
 
 echo HOSTNAME $HOSTNAME, SLAVE_MASTER $SLAVE_MASTER
 
+# Check if this run needs to be skipped.
+ssh -p $PORT root@$SLAVE_MASTER ls /root/ci-test/skip_jobs
+if [ "$?" == "0" ]; then
+    echo Jobs skipped due to jenkins.opencontrail.org:/root/ci-test/skip_jobs
+    exit 0
+fi
+
 echo $HOSTNAME > /etc/hostname
 service hostname restart
 
@@ -27,13 +34,6 @@ if [ "$SLAVE_MASTER" != "localhost" ]; then
     echo export http_proxy=http://$SLAVE_MASTER:3128 > /root/.proxyrc
     echo export https_proxy=http://$SLAVE_MASTER:3128 >> /root/.proxyrc
     echo export ftp_proxy=http://$SLAVE_MASTER:3128 >> /root/.proxyrc
-fi
-
-# Check if this run needs to be skipped.
-ssh -p $PORT root@$SLAVE_MASTER ls /root/ci-test/skip_jobs
-if [ "$?" == "0" ]; then
-    echo Jobs skipped due to jenkins.opencontrail.org:/root/ci-test/skip_jobs
-    exit 0
 fi
 
 BRANCH=master
