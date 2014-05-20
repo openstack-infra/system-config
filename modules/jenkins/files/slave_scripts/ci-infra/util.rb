@@ -53,7 +53,15 @@ end
 
 class Vm
     def Vm.get_hostname(type="name")
-        return Sh.run %{curl -s http://169.254.169.254/openstack/2012-08-10/meta_data.json | python -m json.tool | \grep \\"#{type}\\": | awk -F '\"' '{print $4}'}
+
+        # Disable proxy..
+        http_proxy=ENV['http_proxy']
+        ENV['http_proxy'] = nil
+        name = Sh.run %{curl -s http://169.254.169.254/openstack/2012-08-10/meta_data.json | python -m json.tool | \grep \\"#{type}\\": | awk -F '\"' '{print $4}'}
+
+        # Re-enable proxy ..
+        ENV['http_proxy'] = http_proxy
+        return name
     end
 
     def Vm.get_hostip (hostname = get_hostname)

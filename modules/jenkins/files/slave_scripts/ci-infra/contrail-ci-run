@@ -2,6 +2,9 @@
 
 set -x
 
+# Disable http proxy to access openstack metadata
+unset http_proxy
+
 HOSTNAME=`curl -s http://169.254.169.254/openstack/2012-08-10/meta_data.json | python -m json.tool | \grep \"name\": | awk -F '\"' '{print $4}'`
 SLAVE_MASTER=`curl -s http://169.254.169.254/openstack/2012-08-10/meta_data.json | python -m json.tool | \grep \"slave-master\": | awk -F '\"' '{print $4}'`
 PORT=6002 # 22
@@ -10,13 +13,20 @@ if [ -z $SLAVE_MASTER ]; then
     SLAVE_MASTER=localhost
 fi
 
+echo HOSTNAME $HOSTNAME, SLAVE_MASTER $SLAVE_MASTER
+
 echo $HOSTNAME > /etc/hostname
 service hostname restart
 
-if [ $SLAVE_MASTER -ne "localhost" ]; then
+if [ "$SLAVE_MASTER" != "localhost" ]; then
     # Set http proxy in sub-slaves
     export http_proxy=http://$SLAVE_MASTER:3128 # squid
+    export https_proxy=http://$SLAVE_MASTER:3128 # squid
+    export ftp_proxy=http://$SLAVE_MASTER:3128 # squid
+
     echo export http_proxy=http://$SLAVE_MASTER:3128 > /root/.proxyrc
+    echo export https_proxy=http://$SLAVE_MASTER:3128 >> /root/.proxyrc
+    echo export ftp_proxy=http://$SLAVE_MASTER:3128 >> /root/.proxyrc
 fi
 
 BRANCH=master
