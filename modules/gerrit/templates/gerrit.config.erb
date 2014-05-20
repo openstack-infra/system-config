@@ -101,6 +101,8 @@
 [melody]
 	monitoring = <%= enable_melody %>
 	session = <%= melody_session %>
+[plugin "javamelody"]
+        allowTopMenu = <%= enable_javamelody_top_menu %>
 <% if gitweb or cgit -%>
 [gitweb]
 <% if gitweb -%>

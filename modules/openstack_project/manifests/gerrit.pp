@@ -108,6 +108,7 @@ class openstack_project::gerrit (
     enable_melody                       => true,
     melody_session                      => true,
     robots_txt_source                   => 'puppet:///modules/openstack_project/gerrit/robots.txt',
+    enable_javamelody_top_menu          => false,
     # passthrough
     ssl_cert_file                       => $ssl_cert_file,
     ssl_key_file                        => $ssl_key_file,
