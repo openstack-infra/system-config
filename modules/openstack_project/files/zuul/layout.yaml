@@ -1621,6 +1621,10 @@ projects:
       - name: openstack-client-publish-jobs
       - name: check-requirements
       - name: integrated-gate
+    check:
+      - gate-django_openstack_auth-python33
+    gate:
+      - gate-django_openstack_auth-python33
     post:
       - django_openstack_auth-upstream-translation-update
     pre-release:
