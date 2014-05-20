@@ -1119,6 +1119,10 @@ projects:
       - name: openstack-server-publish-jobs
       - name: check-requirements
       - name: integrated-gate
+    check:
+      - check-tempest-dsvm-postgres-full
+    gate:
+      - gate-tempest-dsvm-postgres-full
     post:
       - trove-upstream-translation-update
     pre-release:
