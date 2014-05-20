@@ -162,7 +162,7 @@ providers:
     project-id: '<%= hpcloud_project %>'
     auth-url: 'https://region-a.geo-1.identity.hpcloudsvc.com:35357/v2.0'
     boot-timeout: 180
-    max-servers: 48
+    max-servers: 0
     images:
       - name: devstack-precise
         base-image: 'Ubuntu Precise 12.04 LTS Server 64-bit 20121026 (b)'
@@ -197,7 +197,7 @@ providers:
     project-id: '<%= hpcloud_project %>'
     auth-url: 'https://region-a.geo-1.identity.hpcloudsvc.com:35357/v2.0'
     boot-timeout: 180
-    max-servers: 192
+    max-servers: 0
     images:
       - name: devstack-precise
         base-image: 'Ubuntu Precise 12.04 LTS Server 64-bit 20121026 (b)'
@@ -232,7 +232,7 @@ providers:
     project-id: '<%= hpcloud_project %>'
     auth-url: 'https://region-a.geo-1.identity.hpcloudsvc.com:35357/v2.0'
     boot-timeout: 180
-    max-servers: 48
+    max-servers: 0
     images:
       - name: devstack-precise
         base-image: 'Ubuntu Precise 12.04 LTS Server 64-bit 20121026 (b)'
@@ -284,7 +284,7 @@ providers:
     project-id: '<%= hpcloud_project %>'
     auth-url: 'https://region-b.geo-1.identity.hpcloudsvc.com:35357/v2.0'
     boot-timeout: 120
-    max-servers: 28
+    max-servers: 590
     images:
       - name: devstack-precise-check
         base-image: 'Ubuntu Precise 12.04 LTS Server 64-bit 20121026 (b)'
@@ -353,9 +353,6 @@ targets:
           - name: rax-iad
           - name: rax-dfw
           - name: rax-ord
-          - name: hpcloud-az1
-          - name: hpcloud-az2
-          - name: hpcloud-az3
           - name: hpcloud-region-b
       - name: bare-centos6
         min-ready: 2
@@ -363,9 +360,6 @@ targets:
           - name: rax-iad
           - name: rax-dfw
           - name: rax-ord
-          - name: hpcloud-az1
-          - name: hpcloud-az2
-          - name: hpcloud-az3
           - name: hpcloud-region-b
       - name: devstack-precise
         min-ready: 6
@@ -373,9 +367,6 @@ targets:
           - name: rax-iad
           - name: rax-dfw
           - name: rax-ord
-          - name: hpcloud-az1
-          - name: hpcloud-az2
-          - name: hpcloud-az3
           - name: hpcloud-region-b
       - name: devstack-precise-check
         min-ready: 1
@@ -384,9 +375,6 @@ targets:
       - name: py3k-precise
         min-ready: 1
         providers:
-          - name: hpcloud-az1
-          - name: hpcloud-az2
-          - name: hpcloud-az3
           - name: hpcloud-region-b
       - name: tripleo-precise
         min-ready: 5
@@ -405,9 +393,6 @@ targets:
           - name: rax-iad
           - name: rax-dfw
           - name: rax-ord
-          - name: hpcloud-az1
-          - name: hpcloud-az2
-          - name: hpcloud-az3
           - name: hpcloud-region-b
       - name: bare-centos6
         min-ready: 2
@@ -415,9 +400,6 @@ targets:
           - name: rax-iad
           - name: rax-dfw
           - name: rax-ord
-          - name: hpcloud-az1
-          - name: hpcloud-az2
-          - name: hpcloud-az3
           - name: hpcloud-region-b
       - name: devstack-precise
         min-ready: 6
@@ -425,9 +407,6 @@ targets:
           - name: rax-iad
           - name: rax-dfw
           - name: rax-ord
-          - name: hpcloud-az1
-          - name: hpcloud-az2
-          - name: hpcloud-az3
           - name: hpcloud-region-b
       - name: devstack-precise-check
         min-ready: 1
@@ -436,9 +415,6 @@ targets:
       - name: py3k-precise
         min-ready: 1
         providers:
-          - name: hpcloud-az1
-          - name: hpcloud-az2
-          - name: hpcloud-az3
           - name: hpcloud-region-b
       - name: tripleo-precise
         min-ready: 5
@@ -457,9 +433,6 @@ targets:
           - name: rax-iad
           - name: rax-dfw
           - name: rax-ord
-          - name: hpcloud-az1
-          - name: hpcloud-az2
-          - name: hpcloud-az3
           - name: hpcloud-region-b
       - name: bare-centos6
         min-ready: 2
@@ -467,9 +440,6 @@ targets:
           - name: rax-iad
           - name: rax-dfw
           - name: rax-ord
-          - name: hpcloud-az1
-          - name: hpcloud-az2
-          - name: hpcloud-az3
           - name: hpcloud-region-b
       - name: devstack-precise
         min-ready: 6
@@ -477,9 +447,6 @@ targets:
           - name: rax-iad
           - name: rax-dfw
           - name: rax-ord
-          - name: hpcloud-az1
-          - name: hpcloud-az2
-          - name: hpcloud-az3
           - name: hpcloud-region-b
       - name: devstack-precise-check
         min-ready: 1
@@ -488,9 +455,6 @@ targets:
       - name: py3k-precise
         min-ready: 1
         providers:
-          - name: hpcloud-az1
-          - name: hpcloud-az2
-          - name: hpcloud-az3
           - name: hpcloud-region-b
       - name: tripleo-precise
         min-ready: 5
@@ -509,9 +473,6 @@ targets:
           - name: rax-iad
           - name: rax-dfw
           - name: rax-ord
-          - name: hpcloud-az1
-          - name: hpcloud-az2
-          - name: hpcloud-az3
           - name: hpcloud-region-b
       - name: bare-centos6
         min-ready: 2
@@ -519,9 +480,6 @@ targets:
           - name: rax-iad
           - name: rax-dfw
           - name: rax-ord
-          - name: hpcloud-az1
-          - name: hpcloud-az2
-          - name: hpcloud-az3
           - name: hpcloud-region-b
       - name: devstack-precise
         min-ready: 6
@@ -529,9 +487,6 @@ targets:
           - name: rax-iad
           - name: rax-dfw
           - name: rax-ord
-          - name: hpcloud-az1
-          - name: hpcloud-az2
-          - name: hpcloud-az3
           - name: hpcloud-region-b
       - name: devstack-precise-check
         min-ready: 1
@@ -540,9 +495,6 @@ targets:
       - name: py3k-precise
         min-ready: 1
         providers:
-          - name: hpcloud-az1
-          - name: hpcloud-az2
-          - name: hpcloud-az3
           - name: hpcloud-region-b
       - name: tripleo-precise
         min-ready: 5
@@ -561,9 +513,6 @@ targets:
           - name: rax-iad
           - name: rax-dfw
           - name: rax-ord
-          - name: hpcloud-az1
-          - name: hpcloud-az2
-          - name: hpcloud-az3
           - name: hpcloud-region-b
       - name: bare-centos6
         min-ready: 2
@@ -571,9 +520,6 @@ targets:
           - name: rax-iad
           - name: rax-dfw
           - name: rax-ord
-          - name: hpcloud-az1
-          - name: hpcloud-az2
-          - name: hpcloud-az3
           - name: hpcloud-region-b
       - name: devstack-precise
         min-ready: 6
@@ -581,9 +527,6 @@ targets:
           - name: rax-iad
           - name: rax-dfw
           - name: rax-ord
-          - name: hpcloud-az1
-          - name: hpcloud-az2
-          - name: hpcloud-az3
           - name: hpcloud-region-b
       - name: devstack-precise-check
         min-ready: 1
@@ -592,9 +535,6 @@ targets:
       - name: py3k-precise
         min-ready: 1
         providers:
-          - name: hpcloud-az1
-          - name: hpcloud-az2
-          - name: hpcloud-az3
           - name: hpcloud-region-b
       - name: tripleo-precise
         min-ready: 5
@@ -613,9 +553,6 @@ targets:
           - name: rax-iad
           - name: rax-dfw
           - name: rax-ord
-          - name: hpcloud-az1
-          - name: hpcloud-az2
-          - name: hpcloud-az3
           - name: hpcloud-region-b
       - name: bare-centos6
         min-ready: 2
@@ -623,9 +560,6 @@ targets:
           - name: rax-iad
           - name: rax-dfw
           - name: rax-ord
-          - name: hpcloud-az1
-          - name: hpcloud-az2
-          - name: hpcloud-az3
           - name: hpcloud-region-b
       - name: devstack-precise
         min-ready: 6
@@ -633,9 +567,6 @@ targets:
           - name: rax-iad
           - name: rax-dfw
           - name: rax-ord
-          - name: hpcloud-az1
-          - name: hpcloud-az2
-          - name: hpcloud-az3
           - name: hpcloud-region-b
       - name: devstack-precise-check
         min-ready: 1
@@ -644,9 +575,6 @@ targets:
       - name: py3k-precise
         min-ready: 1
         providers:
-          - name: hpcloud-az1
-          - name: hpcloud-az2
-          - name: hpcloud-az3
           - name: hpcloud-region-b
       - name: tripleo-precise
         min-ready: 5
@@ -665,9 +593,6 @@ targets:
           - name: rax-iad
           - name: rax-dfw
           - name: rax-ord
-          - name: hpcloud-az1
-          - name: hpcloud-az2
-          - name: hpcloud-az3
           - name: hpcloud-region-b
       - name: bare-centos6
         min-ready: 2
@@ -675,9 +600,6 @@ targets:
           - name: rax-iad
           - name: rax-dfw
           - name: rax-ord
-          - name: hpcloud-az1
-          - name: hpcloud-az2
-          - name: hpcloud-az3
           - name: hpcloud-region-b
       - name: devstack-precise
         min-ready: 6
@@ -685,9 +607,6 @@ targets:
           - name: rax-iad
           - name: rax-dfw
           - name: rax-ord
-          - name: hpcloud-az1
-          - name: hpcloud-az2
-          - name: hpcloud-az3
           - name: hpcloud-region-b
       - name: devstack-precise-check
         min-ready: 1
@@ -696,9 +615,6 @@ targets:
       - name: py3k-precise
         min-ready: 1
         providers:
-          - name: hpcloud-az1
-          - name: hpcloud-az2
-          - name: hpcloud-az3
           - name: hpcloud-region-b
       - name: dsvm-precise-krnl
         min-ready: 1
