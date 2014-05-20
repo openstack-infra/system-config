@@ -42,7 +42,8 @@ class Vm
                 break if line =~ /# launch_vms.rb autogeneration start/
                 next unless start
 
-                vms.push(Vm.new(line.split[0], line.split[1]))
+                vms.push(Vm.new(line.split[0], line.split[1])) \
+                    if line =~ /\d+\.\d+\d+\.\d+/
             }
         }
         return vms

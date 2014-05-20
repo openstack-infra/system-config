@@ -7,7 +7,7 @@ pp ENV
 
 class Sh
     @ignore_failed_exit_code = false
-    def Sh.exit; Kernel.exit end
+    def Sh.exit(code = 0); Kernel.exit(code) end
     def Sh.dry_run?
         return !ENV['DRY_RUN'].nil? && ENV['DRY_RUN'].casecmp("true") == 0
     end
