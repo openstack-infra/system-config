@@ -1,0 +1,12 @@
+Verified+2: Jenkins
+Code-Review+1: Philip Marc Schwartz <philip.schwartz@rackspace.com>
+Code-Review+2: Clark Boylan <cboylan@sapwetik.org>
+Workflow+1: Clark Boylan <cboylan@sapwetik.org>
+Code-Review+2: Jeremy Stanley <fungi@yuggoth.org>
+Workflow+1: Jeremy Stanley <fungi@yuggoth.org>
+Code-Review+1: Michael Krotscheck <krotscheck@gmail.com>
+Submitted-by: Jenkins
+Submitted-at: Tue, 20 May 2014 17:53:24 +0000
+Reviewed-on: https://review.openstack.org/94431
+Project: openstack-infra/config
+Branch: refs/heads/master
