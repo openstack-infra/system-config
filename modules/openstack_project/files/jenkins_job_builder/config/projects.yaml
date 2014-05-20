@@ -1062,6 +1062,9 @@
       - python-jobs
       - openstack-publish-jobs
       - translation-jobs
+      - openstack-doc-jobs
+      - '{name}-tox-doc-{envlist}':
+          envlist: publishdocs
 
 - project:
     name: python-troveclient
