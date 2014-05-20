@@ -18,19 +18,19 @@ def setup
     vms = Vm.init_all if vms.empty?
 
     vms.each { |vm|
-        Sh.run "scp #{image} root@#{vm.vm_name}:."
-        Sh.run "ssh #{vm.vm_name} dpkg -i #{image}"
+        Sh.run "scp #{image} root@#{vm.vmname}:."
+        Sh.run "ssh #{vm.vmname} dpkg -i #{image}"
     }
 
     vm = vms.first
-    puts "ssh #{vm.vm_name} /opt/contrail/util/setup.sh"
-    puts "ssh #{vm.vm_name} fab install_images"
-    puts "ssh #{vm.vm_name} fab setup_all"
-    puts "ssh #{vm.vm_name} fab add_images"
+    puts "ssh #{vm.vmname} /opt/contrail/util/setup.sh"
+    puts "ssh #{vm.vmname} fab install_images"
+    puts "ssh #{vm.vmname} fab setup_all"
+    puts "ssh #{vm.vmname} fab add_images"
 end
 
 def run
-    # Sh.run "ssh #{vm.vm_name} fab quick_sanity"
+    # Sh.run "ssh #{vm.vmname} fab quick_sanity"
     sleep 100000
 end
 
