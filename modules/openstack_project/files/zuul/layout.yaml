@@ -1618,6 +1618,7 @@ projects:
   - name: openstack/django_openstack_auth
     template:
       - name: python-jobs
+      - name: python3-jobs
       - name: openstack-client-publish-jobs
       - name: check-requirements
       - name: integrated-gate
