@@ -58,8 +58,9 @@ tx set --auto-local -r ${PROJECT}.openstack-dashboard-translations \
 "openstack_dashboard/locale/<lang>/LC_MESSAGES/django.po" --source-lang en \
 --source-file openstack_dashboard/locale/en/LC_MESSAGES/django.po -t PO --execute
 
-# Pull all upstream translations
-tx pull -a -f
+# Pull upstream translations of files that are at least 75 %
+# translated
+tx pull -a -f --minimum-perc=75
 
 # Invoke run_tests.sh to update the po files
 # Or else, "../manage.py makemessages" can be used.
