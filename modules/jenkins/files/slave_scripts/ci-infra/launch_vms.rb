@@ -38,12 +38,12 @@ class Vm
             kfile = "/root/#{@vmname}-jenkins-keepalive.log"
             loop do begin
                 t = Time.now
-                puts "Updating time #{t} to #{@vmname}"
+                # puts "Updating time #{t} to #{@vmname}"
                 File.open(kfile, "w") {|fp| t.to_a.each {|i| fp.puts i}}
-                Sh.run "scp #{kfile} root@#{@hostip}:#{kfile}", true
-            #rescue StandardError, Interrupt, SystemExit
+                Sh.run "scp #{kfile} root@#{@hostip}:#{kfile}", true, 1, 1, false
+                #rescue StandardError, Interrupt, SystemExit
                 rescue Exception => e
-                    puts "ERROR: scp #{kfile} root@#{@hostip}:#{kfile} #{e}"
+                    # puts "ERROR: scp #{kfile} root@#{@hostip}:#{kfile} #{e}"
                 end
                 sleep 2
             end

@@ -12,15 +12,15 @@ class Sh
         return !ENV['DRY_RUN'].nil? && ENV['DRY_RUN'].casecmp("true") == 0
     end
 
-    def Sh.run (cmd, ignore = @ignore_failed_exit_code, repeat = 1, wait = 1)
-        pp cmd
+    def Sh.run (cmd, ignore = @ignore_failed_exit_code, repeat = 1, wait = 1,
+                debug = true)
         output = ""
         exit_code = 0
         1.upto(repeat) { |i|
             if i == 1 then
-                puts "#{cmd}"
+                puts "#{cmd}" if debug
             else
-                puts "Retry #{i}/#{repeat}: #{cmd}"
+                puts "Retry #{i}/#{repeat}: #{cmd}" if debug
                 sleep(wait)
             end
             exit_code = 0
@@ -37,9 +37,9 @@ class Sh
 
         if exit_code != 0 then
             if ignore then
-                puts "IGNORED: Comamnd #{cmd} failed with exit code #{$?}"
+                puts "IGNORED: Comamnd #{cmd} failed with exit code #{$?}" if debug
             else
-                puts "ERROR EXIT: Comamnd #{cmd} failed with exit code #{$?}"
+                puts "ERROR EXIT: Comamnd #{cmd} failed with exit code #{$?}" if debug
                 exit exit_code
             end
         end
