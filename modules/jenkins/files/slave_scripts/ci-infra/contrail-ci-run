@@ -1,17 +1,26 @@
 #!/usr/bin/env bash
 
-set -e
+set -x
 
 MASTER=jenkins.opencontrail.org
-ssh root@$MASTER ls skip_copy_jenkins_slave_scripts
-if [ "$?" -ne 0 ]; then
-    # Copy slave scripts from the jenkins.opencontrail.org central master location.
-    rm -rf /usr/local/jenkins/slave_scripts
-    ssh root@$MASTER tar zcf - /usr/local/jenkins/slave_scripts | tar -zx -C /
+HOSTNAME=`curl -s http://169.254.169.254/openstack/2012-08-10/meta_data.json | python -m json.tool | \grep \"name\": | awk -F '\"' '{print $4}'`
+echo $HOSTNAME > /etc/hostname
+service hostname restart
+
+BRANCH=master
+ssh root@$MASTER ls /root/$HOSTNAME-test
+if [ "$?" -eq 0 ]; then
+    BRANCH=test
 fi
 
+# Copy slave scripts from the jenkins.opencontrail.org central master location.
+rm -rf /usr/local/jenkins/slave_scripts /root/contrail-infra-config
+git clone -b $BRANCH https://github.com/Juniper/contrail-infra-config.git /root/contrail-infra-config
+ln -sf /root/contrail-infra-config/modules/jenkins/files/slave_scripts /usr/local/jenkins/slave_scripts
+# ssh root@$MASTER tar zcf - /usr/local/jenkins/slave_scripts | tar -zx -C /
+
 set -o pipefail
-set -x
+set -e
 
 # Run the real script
 cmd=$1
