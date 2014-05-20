@@ -6,8 +6,7 @@ require 'util'
 
 def setup_hostname
     @hostname = Vm.get_hostname()
-    @hostip = "127.0.0.1"    
-    @hostip = $1 if Sh.run(%{ifconfig eth0 |\grep "inet addr"}) =~ /inet addr:(\d+\.\d+\.\d+\.\d+)/
+    @hostip = Vm.get_interface_ip
 
     Sh.run "\grep #{@hostname} /etc/hosts || echo #{@hostip} #{@hostname} >> /etc/hosts"
     Sh.run "echo #{@hostname} > /etc/hostname"

@@ -60,4 +60,10 @@ class Vm
         return $1 if hostname =~ /ci-.*?(\d+\.\d+\.\d+\.\d+)/
         return "127.0.0.1"
     end
+
+    def Vm.get_interface_ip (interface = "eth0")
+        ip = "127.0.0.1"
+        ip = $1 if Sh.run(%{ifconfig #{interface} |\grep "inet addr"}) =~ /inet addr:(\d+\.\d+\.\d+\.\d+)/
+        return ip
+    end
 end

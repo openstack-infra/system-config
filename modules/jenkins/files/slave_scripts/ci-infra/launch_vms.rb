@@ -50,11 +50,12 @@ class Vm
         }
     end
 
-    def Vm.create_internal(vmname, floatingip = nil)
+    def Vm.create_internal(vmname, floatingip,
+                           slave_master = "--meta slave-master=localhost")
         puts "Creating VM #{vmname}"
         net_id = Sh.crun "nova net-list |\grep -w internet | awk '{print $2}'"
         image_id = Sh.crun %{glance image-list |\grep " #{@@base_image} " | awk '{print $2}'}
-        Sh.crun "nova boot --flavor 4 --nic net-id=#{net_id} --image #{image_id} #{vmname}"
+        Sh.crun "nova boot --flavor 4 #{slave_master} --nic net-id=#{net_id} --image #{image_id} #{vmname}"
 
         private_ip = nil
         while true do
@@ -88,9 +89,10 @@ class Vm
     def Vm.create_subslaves(count = 1)
         # Find my floatingip
         floatingip = get_hostip()
+        slave_master = "--meta slave-master=#{Vm.get_interface_ip}"
         1.upto(count) { |i|
             vmname = "ci-subslave-#{floatingip}-#{i}"
-            hostip = Vm.create_internal(vmname)
+            hostip = Vm.create_internal(vmname, nil, slave_master)
             @@vms.push Vm.new(vmname, hostip)
         }
 
