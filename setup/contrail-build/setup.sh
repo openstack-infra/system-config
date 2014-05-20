@@ -39,3 +39,5 @@ cd $REPO/tools/packaging/build/
 ./packager.py 
 # build/debian/contrail-analytics-venv/opt/contrail/analytics-venv/bin/pip install --upgrade setuptools
 }
+
+build_vm
