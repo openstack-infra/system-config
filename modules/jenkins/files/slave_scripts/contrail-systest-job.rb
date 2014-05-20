@@ -12,16 +12,21 @@ def create
 end
 
 def setup
-    image = "/root/all_install.deb"
-    Vm.vms.each { |vm|
-        Sh.run "scp #{image} root@#{vm.vm_name}:#{image}"
+    image = "/root/contrail-install-packages_1.06-12~havana_all.deb"
+
+    vms = Vm.vms
+    vms = Vm.init_all if vms.empty?
+
+    vms.each { |vm|
+        Sh.run "scp #{image} root@#{vm.vm_name}:."
         Sh.run "ssh #{vm.vm_name} dpkg -i #{image}"
     }
 
-    Sh.run "ssh #{vm.vm_name} /opt/contrail/util/setup.sh"
-    Sh.run "ssh #{vm.vm_name} fab install_images"
-    Sh.run "ssh #{vm.vm_name} fab setup_all"
-    Sh.run "ssh #{vm.vm_name} fab add_images"
+    vm = vms.first
+    puts "ssh #{vm.vm_name} /opt/contrail/util/setup.sh"
+    puts "ssh #{vm.vm_name} fab install_images"
+    puts "ssh #{vm.vm_name} fab setup_all"
+    puts "ssh #{vm.vm_name} fab add_images"
 end
 
 def run
@@ -30,8 +35,8 @@ def run
 end
 
 def main
-    create
-    # setup
+    # create
+    setup
     run
 end
 
