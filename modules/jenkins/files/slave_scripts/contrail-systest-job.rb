@@ -111,7 +111,6 @@ def setup
 end
 
 def run
-    # Sh.run "ssh #{vm.vmname} fab quick_sanity"
     sleep 100000
 end
 
