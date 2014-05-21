@@ -65,6 +65,7 @@ def setup
     vms = Vm.init_all if vms.empty?
 
     vms.each { |vm|
+        # Sh.run "ssh root@#{vm.vmname} apt-get update"
         # Sh.run "scp #{image} root@#{vm.vmname}:."
         # Sh.run "ssh #{vm.vmname} dpkg -i #{image}"
     }
