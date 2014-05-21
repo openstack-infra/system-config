@@ -53,7 +53,7 @@ env.ostypes = {
 env.test_repo_dir='#{ENV['HOME']}/test'
 env.mail_from='ci-admin@opencontrail.org'
 env.mail_to='ci-admin@opencontrail.org'
-env.interface_rename = False
+env.interface_rename=False
 EOF
     return topo
 end
