@@ -49,7 +49,7 @@ if [ "$SLAVE_MASTER" != "localhost" ]; then
 
     # Set proxy for apt as well, if it is not already set.
     apt_proxy="Acquire::http::Proxy http://$SLAVE_MASTER:3128;"
-    grep --quiet "$apt_auth" /etc/apt/apt.conf
+    grep --quiet "$apt_proxy" /etc/apt/apt.conf
     if [ "$?" != "0" ]; then
         echo "$apt_proxy" >> /etc/apt/apt.conf
     fi
