@@ -30,7 +30,7 @@ class Sh
         exit_code = PTY.check(pid).exitstatus
         end
 
-        return (output, exit_code)
+        return [output, exit_code]
     end
 
     def Sh.run (cmd, ignore = @ignore_failed_exit_code, repeat = 1, wait = 1,
@@ -50,7 +50,7 @@ class Sh
                     Dir.chdir($1)
                 else
 #                   output = `#{cmd}`
-                    (output, exit_code) = spaen(cmd)
+                    [output, exit_code] = spaen(cmd)
                 end
                 return output.chomp if exit_code == 0
             end
