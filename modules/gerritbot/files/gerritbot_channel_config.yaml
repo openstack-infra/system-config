@@ -744,5 +744,7 @@ openstack-sdks:
     projects:
       - stackforge/openstack-sdk-php
       - stackforge/golang-client
+      - stackforge/openstack-sdk-dotnet
+      - stackforge/openstack-cli-powershell
     branches:
       - master
