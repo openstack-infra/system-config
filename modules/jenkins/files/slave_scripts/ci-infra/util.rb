@@ -21,7 +21,10 @@ class Sh
         PTY.spawn( cmd ) do |stdin, stdout, pid|
             begin
             # Do stuff with the output here. Just printing to show it works
-            stdin.each { |line| output += line; print line if debug }
+            stdin.each { |line|
+                output += line
+                print "#{cmd}: #{line}" if debug
+            }
             rescue Errno::EIO
             end
         end
