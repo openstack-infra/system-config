@@ -73,7 +73,7 @@ def setup
     # Sh.run "ssh #{vm.vmname} /opt/contrail/contrail_packages/setup.sh"
 
     topo_file = "/root/testbed_dual.py"
-    File.open(topo_file, "w") { |fp| fp.write get_dual_topo }
+    File.open(topo_file, "w") { |fp| fp.write get_dual_topo(vms[0], vms[1]) }
     Sh.run "scp #{topo_file} #{vm.vmname}:/opt/contrail/utils/fabfile/testbeds/testbed.py"
     puts "ssh #{vm.vmname} fab install_images"
     puts "ssh #{vm.vmname} fab setup_all"
