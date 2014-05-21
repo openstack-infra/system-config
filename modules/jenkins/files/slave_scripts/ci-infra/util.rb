@@ -13,7 +13,7 @@ class Sh
         return !ENV['DRY_RUN'].nil? && ENV['DRY_RUN'].casecmp("true") == 0
     end
 
-    def Sh.spawn(cmd)
+    def Sh.spawn(cmd, debug = true)
         output = ""
         exit_code = 0
 
@@ -21,7 +21,7 @@ class Sh
         PTY.spawn( cmd ) do |stdin, stdout, pid|
             begin
             # Do stuff with the output here. Just printing to show it works
-            stdin.each { |line| output += line; print line }
+            stdin.each { |line| output += line; print line if debug }
             rescue Errno::EIO
             end
         end
@@ -50,7 +50,7 @@ class Sh
                     Dir.chdir($1)
                 else
 #                   output = `#{cmd}`
-                    output, exit_code = spawn(cmd)
+                    output, exit_code = spawn(cmd, debug)
                 end
                 return output.chomp if exit_code == 0
             end
