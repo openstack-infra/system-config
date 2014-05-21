@@ -93,6 +93,7 @@ def setup
         Sh.run "ssh root@#{vm.vmname} apt-get update"
         Sh.run "scp #{image} root@#{vm.vmname}:."
         Sh.run "ssh #{vm.vmname} dpkg -i #{image}"
+        Sh.run "ssh #{vm.vmname} /opt/contrail/contrail_packages/setup.sh"
 
         # Apply patch to setup.sh to retain apt.conf proxy settings.
         Sh.run "scp #{patch_file} #{vm.vmname}:#{patch_file}"
@@ -108,7 +109,7 @@ def setup
     Sh.run "ssh #{vm.vmname} contrail-fab install_contrail"
     Sh.run "ssh #{vm.vmname} perl -ni -e 's/JVM_OPTS \-Xss\d+/JVM_OPTS -Xss256/g; print $_;' /etc/cassandra/cassandra-env.sh"
     Sh.run "ssh #{vm.vmname} contrail-fab setup_all"
-    Sh.run "ssh #{vm.vmname} contrail-fab run_sanity"
+    Sh.run "ssh #{vm.vmname} contrail-fab run_sanity:quick_sanity"
 end
 
 def run
