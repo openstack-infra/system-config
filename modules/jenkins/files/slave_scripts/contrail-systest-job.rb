@@ -66,7 +66,7 @@ end
  fi
  
 -#Allow unauthenticated pacakges to get installed
--echo "APT::Get::AllowUnauthenticated \"true\";" > apt.conf
+-echo "APT::Get::AllowUnauthenticated \\"true\\";" > apt.conf
 +# Allow unauthenticated pacakges to get installed.
 +# Do not over-write apt.conf. Instead just append what is necessary
 +# retaining other useful configurations such as http::proxy info.
