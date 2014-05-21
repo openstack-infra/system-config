@@ -114,8 +114,8 @@ def run
 end
 
 def main
-    create
-    # setup
+    # create
+    setup
     run
 end
 
