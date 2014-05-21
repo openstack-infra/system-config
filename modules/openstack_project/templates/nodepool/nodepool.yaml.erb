@@ -439,14 +439,14 @@ providers:
     images:
       - name: tripleo-precise
         base-image: 'Ubuntu Precise 12.04 LTS Server 64-bit'
-        min-ram: 16384
+        min-ram: 8192
         name-filter: h1
         setup: prepare_node_tripleo.sh
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
       - name: tripleo-f20
         base-image: 'Fedora 20 64-bit'
-        min-ram: 16384
+        min-ram: 8192
         name-filter: h1
         setup: prepare_node_tripleo.sh
         username: jenkins
@@ -459,7 +459,7 @@ providers:
     project-id: '<%= tripleo_project %>'
     auth-url: 'https://ci-overcloud.rh1.tripleo.org:13000/v2.0'
     boot-timeout: 120
-    max-servers: 10
+    max-servers: 18
     rate: 0.001
     networks:
       - net-id: 505a106c-7d65-44a7-b3e7-99bb49d2ebab
@@ -467,14 +467,14 @@ providers:
     images:
       - name: tripleo-precise
         base-image: 'Ubuntu Precise 12.04 LTS Server 64-bit'
-        min-ram: 16384
+        min-ram: 8192
         name-filter: h1
         setup: prepare_node_tripleo.sh
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
       - name: tripleo-f20
         base-image: 'Fedora 20 64-bit'
-        min-ram: 16384
+        min-ram: 8192
         name-filter: h1
         setup: prepare_node_tripleo.sh
         username: jenkins
