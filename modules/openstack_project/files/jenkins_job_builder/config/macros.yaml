@@ -293,6 +293,29 @@
           fi
 
 
+- builder:
+    name: zuul_swift_upload
+    builders:
+      - shell: "/usr/local/jenkins/slave_scripts/zuul_swift_upload.py --name {zuul_log_instruction_set} {upload_source}"
+
+
+- builder:
+    name: zuul_swift_upload_logs
+    builders:
+      - zuul_swift_upload:
+         zuul_log_instruction_set: logs
+         upload_source: "{upload_source}"
+
+
+- builder:
+    name: zuul_swift_upload_console_log
+    builders:
+      - shell: "/usr/local/jenkins/slave_scripts/grab_console_log.sh"
+      - zuul_swift_upload_logs:
+         upload_source: "/tmp/consoleText"
+
+
+
 # ======================================================================
 
 - publisher:
