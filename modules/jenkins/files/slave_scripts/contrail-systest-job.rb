@@ -102,8 +102,6 @@ def setup
     }
 
     vm = vms.first
-    Sh.run "ssh #{vm.vmname} /opt/contrail/contrail_packages/setup.sh"
-
     File.open(topo_file, "w") { |fp| fp.write get_dual_topo(vms[0], vms[1]) }
     Sh.run "scp #{topo_file} #{vm.vmname}:/opt/contrail/utils/fabfile/testbeds/testbed.py"
     Sh.run "ssh #{vm.vmname} contrail-fab install_contrail"
