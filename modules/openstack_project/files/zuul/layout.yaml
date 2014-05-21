@@ -437,6 +437,8 @@ jobs:
     voting: false
   - name: dev-zuul-coverage
     voting: false
+  - name: jenkins-job-builder-coverage
+    voting: false
   - name: jenkins-job-builder-compare-xml
     voting: false
     failure-message: XML output has changed.
@@ -2950,8 +2952,10 @@ projects:
       - name: python3-jobs
     check:
       - jenkins-job-builder-compare-xml
+      - jenkins-job-builder-coverage
     post:
       - jenkins-job-builder-docs
+      - jenkins-job-builder-coverage
     pre-release:
       - jenkins-job-builder-tarball
     release:
