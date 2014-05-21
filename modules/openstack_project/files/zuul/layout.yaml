@@ -793,6 +793,12 @@ projects:
     periodic:
       - heat-propose-translation-update
 
+  - name: openstack/orchestration-specs
+    check:
+      - gate-orchestration-specs-docs
+    gate:
+      - gate-orchestration-specs-docs
+
   - name: openstack/horizon
     template:
       - name: python-jobs

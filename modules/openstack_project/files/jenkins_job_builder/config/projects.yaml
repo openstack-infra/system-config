@@ -540,6 +540,14 @@
       - openstack-publish-jobs
       - translation-jobs
 
+- project:
+    name: orchestration-specs
+    github-org: openstack
+    node: bare-precise
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - gate-{name}-docs
 
 - project:
     name: python-heatclient
