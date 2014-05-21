@@ -27,3 +27,5 @@
       numToKeep: -1
       artifactDaysToKeep: -1
       artifactNumToKeep: -1
+
+    zuul_log_instruction_set: logs
