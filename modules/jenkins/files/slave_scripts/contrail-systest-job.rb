@@ -105,7 +105,7 @@ def setup
     File.open(topo_file, "w") { |fp| fp.write get_dual_topo(vms[0], vms[1]) }
     Sh.run "scp #{topo_file} #{vm.vmname}:/opt/contrail/utils/fabfile/testbeds/testbed.py"
     Sh.run "ssh #{vm.vmname} contrail-fab install_contrail"
-    Sh.run "ssh #{vm.vmname} perl -ni -e 's/JVM_OPTS \-Xss\d+/JVM_OPTS -Xss256/g; print $_;' /etc/cassandra/cassandra-env.sh"
+    Sh.run "echo \"perl -ni -e 's/JVM_OPTS -Xss\\d+/JVM_OPTS -Xss512/g; print \\$_;' /etc/cassandra/cassandra-env.sh\" | ssh -t #{vm.vmname} \$(< /dev/fd/0)"
     Sh.run "ssh #{vm.vmname} contrail-fab setup_all"
     Sh.run "ssh #{vm.vmname} contrail-fab run_sanity:quick_sanity"
 end
