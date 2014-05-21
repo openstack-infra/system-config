@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
 
 require 'pp'
+require 'pty'
 
 ENV['USER'] = "jenkins" if ENV['USER'].nil? or ENV['USER'].empty?
 pp ENV
@@ -10,6 +11,26 @@ class Sh
     def Sh.exit(code = 0); Kernel.exit(code) end
     def Sh.dry_run?
         return !ENV['DRY_RUN'].nil? && ENV['DRY_RUN'].casecmp("true") == 0
+    end
+
+    private_class_method :spawn
+    def Sh.spawn(cmd)
+        output = ""
+        exit_code = 0
+
+        begin
+        PTY.spawn( cmd ) do |stdin, stdout, pid|
+            begin
+            # Do stuff with the output here. Just printing to show it works
+            stdin.each { |line| output += line; print line }
+            rescue Errno::EIO
+            end
+        end
+        rescue PTY::ChildExited
+        exit_code = PTY.check(pid).exitstatus
+        end
+
+        return (output, exit_code)
     end
 
     def Sh.run (cmd, ignore = @ignore_failed_exit_code, repeat = 1, wait = 1,
@@ -28,9 +49,9 @@ class Sh
                 if cmd =~ /^cd\s+(.*)/ then
                     Dir.chdir($1)
                 else
-                    output = `#{cmd}`
+#                   output = `#{cmd}`
+                    (output, exit_code) = spaen(cmd)
                 end
-                exit_code = $?.to_i
                 return output.chomp if exit_code == 0
             end
         }

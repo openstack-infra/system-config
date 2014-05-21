@@ -58,27 +58,62 @@ EOF
     return topo
 end
 
+@setup_sh_patch=<<EOF
+commit bc7a599ff679c5503bc0c5dff9f2235be85459d8
+Author: Ananth Suryanarayana <anantha@juniper.net>
+Date:   Tue May 20 18:57:50 2014 -0700
+
+    Do not overwrite apt.conf. Instead just add what is necessary retaining existing con
+
+diff --git a/setup.sh b/setup.sh
+index 238525a..2d3686c 100644
+--- a/setup.sh
++++ b/setup.sh
+@@ -24,8 +24,14 @@ if [ $? != 0 ]; then
+      mv new_sources.list sources.list
+ fi
+ 
+-#Allow unauthenticated pacakges to get installed
+-echo "APT::Get::AllowUnauthenticated \"true\";" > apt.conf
++# Allow unauthenticated pacakges to get installed.
++# Do not over-write apt.conf. Instead just append what is necessary
++# retaining other useful configurations such as http::proxy info.
++apt_auth="APT::Get::AllowUnauthenticated \"true\";"
++grep --quiet "$apt_auth" apt.conf
++if [ "$?" != "0" ]; then
++    echo "$apt_auth" >> apt.conf
++fi
+ 
+ #install local repo preferences from /opt/contrail/ to /etc/apt/
+ cp /opt/contrail/contrail_packages/preferences /etc/apt/preferences 
+EOF
+
 def setup
     image = "/root/contrail-install-packages_1.06-12~havana_all.deb"
+    topo_file = "/root/testbed_dual.py"
+    patch_file = "/tmp/setup_sh_patch.diff"
 
     vms = Vm.all_vms
     vms = Vm.init_all if vms.empty?
+    File.open(patch_file, "w") { |fp| fp.write @setup_sh_patch }
 
     vms.each { |vm|
-        # Sh.run "ssh root@#{vm.vmname} apt-get update"
-        # Sh.run "scp #{image} root@#{vm.vmname}:."
-        # Sh.run "ssh #{vm.vmname} dpkg -i #{image}"
+        Sh.run "ssh root@#{vm.vmname} apt-get update"
+        Sh.run "scp #{image} root@#{vm.vmname}:."
+        Sh.run "ssh #{vm.vmname} dpkg -i #{image}"
+
+        # Apply patch to setup.sh to retain apt.conf proxy settings.
+        Sh.run "cat #{patch_file} | ssh #{vm.vmname} patch -p1 -d /opt/contrail/contrail_packages/"
     }
 
     vm = vms.first
-    # Sh.run "ssh #{vm.vmname} /opt/contrail/contrail_packages/setup.sh"
+    Sh.run "ssh #{vm.vmname} /opt/contrail/contrail_packages/setup.sh"
 
-    topo_file = "/root/testbed_dual.py"
     File.open(topo_file, "w") { |fp| fp.write get_dual_topo(vms[0], vms[1]) }
     Sh.run "scp #{topo_file} #{vm.vmname}:/opt/contrail/utils/fabfile/testbeds/testbed.py"
     Sh.run "ssh #{vm.vmname} contrail-fab install_contrail"
-    puts "ssh #{vm.vmname} contrail-fab setup_all"
-    puts "ssh #{vm.vmname} contrail-fab quick_sanity"
+    Sh.run "ssh #{vm.vmname} contrail-fab setup_all"
+    Sh.run "ssh #{vm.vmname} contrail-fab quick_sanity"
 end
 
 def run
@@ -87,8 +122,8 @@ def run
 end
 
 def main
-    # create
-    setup
+    create
+    # setup
     run
 end
 
