@@ -13,7 +13,6 @@ class Sh
         return !ENV['DRY_RUN'].nil? && ENV['DRY_RUN'].casecmp("true") == 0
     end
 
-    private_class_method :spawn
     def Sh.spawn(cmd)
         output = ""
         exit_code = 0
@@ -32,6 +31,7 @@ class Sh
 
         return output, exit_code
     end
+    private_class_method :spawn
 
     def Sh.run (cmd, ignore = @ignore_failed_exit_code, repeat = 1, wait = 1,
                 debug = true)
