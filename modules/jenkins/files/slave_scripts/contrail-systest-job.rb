@@ -59,8 +59,8 @@ EOF
 end
 
 @setup_sh_patch=<<EOF
---- /root/setup.sh      2014-05-21 20:20:08.656881000 +0000
-+++ /opt/contrail/contrail_packages/setup.sh    2014-05-21 20:20:37.944881000 +0000
+--- a/setup.sh
++++ b/setup.sh
 @@ -24,8 +24,14 @@ if [ $? != 0 ]; then
       mv new_sources.list sources.list
  fi
@@ -83,7 +83,7 @@ EOF
 def setup
     image = "/root/contrail-install-packages_1.06-12~havana_all.deb"
     topo_file = "/root/testbed_dual.py"
-    patch_file = "/tmp/setup_sh_patch.diff"
+    patch_file = "/root/setup_sh_patch.diff"
 
     vms = Vm.all_vms
     vms = Vm.init_all if vms.empty?
@@ -95,7 +95,9 @@ def setup
         Sh.run "ssh #{vm.vmname} dpkg -i #{image}"
 
         # Apply patch to setup.sh to retain apt.conf proxy settings.
-        Sh.run "cat #{patch_file} | ssh #{vm.vmname} patch -p1 -d /opt/contrail/contrail_packages/"
+        Sh.run "scp #{patch_file} #{vm.vmname}:#{patch_file}"
+        Sh.run "ssh #{vm.vmname} patch -p1 -d /opt/contrail/contrail_packages/"+
+               " -i #{patch_file}"
     }
 
     vm = vms.first
