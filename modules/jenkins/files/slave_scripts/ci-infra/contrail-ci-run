@@ -34,6 +34,13 @@ if [ "$SLAVE_MASTER" != "localhost" ]; then
     echo export http_proxy=http://$SLAVE_MASTER:3128 > /root/.proxyrc
     echo export https_proxy=http://$SLAVE_MASTER:3128 >> /root/.proxyrc
     echo export ftp_proxy=http://$SLAVE_MASTER:3128 >> /root/.proxyrc
+
+    # Set proxy for apt as well, if it is not already set.
+    apt_proxy="Acquire::http::Proxy http://$SLAVE_MASTER:3128;"
+    grep --quiet "$apt_auth" /etc/apt/apt.conf
+    if [ "$?" != "0" ]; then
+        echo "$apt_proxy" >> /etc/apt/apt.conf
+    fi
 fi
 
 BRANCH=master
