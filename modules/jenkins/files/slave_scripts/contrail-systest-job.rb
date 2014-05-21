@@ -16,7 +16,7 @@ def get_dual_topo (vm1, vm2)
 from fabric.api import env
 
 host1 = 'root@#{vm1.hostip}'
-host2 = 'root@#{vm2.hostip}
+host2 = 'root@#{vm2.hostip}'
 host_build = 'root@#{vm1.hostip}'
 ext_routers = []
 router_asn = 64512

@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+set -ex
+
+cd /opt/contrail/utils
+exec fab $*
