@@ -59,16 +59,8 @@ EOF
 end
 
 @setup_sh_patch=<<EOF
-commit bc7a599ff679c5503bc0c5dff9f2235be85459d8
-Author: Ananth Suryanarayana <anantha@juniper.net>
-Date:   Tue May 20 18:57:50 2014 -0700
-
-    Do not overwrite apt.conf. Instead just add what is necessary retaining existing con
-
-diff --git a/setup.sh b/setup.sh
-index 238525a..2d3686c 100644
---- a/setup.sh
-+++ b/setup.sh
+--- /root/setup.sh      2014-05-21 20:20:08.656881000 +0000
++++ /opt/contrail/contrail_packages/setup.sh    2014-05-21 20:20:37.944881000 +0000
 @@ -24,8 +24,14 @@ if [ $? != 0 ]; then
       mv new_sources.list sources.list
  fi
