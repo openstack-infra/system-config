@@ -93,12 +93,12 @@ def setup
         Sh.run "ssh root@#{vm.vmname} apt-get update"
         Sh.run "scp #{image} root@#{vm.vmname}:."
         Sh.run "ssh #{vm.vmname} dpkg -i #{image}"
-        Sh.run "ssh #{vm.vmname} /opt/contrail/contrail_packages/setup.sh"
 
         # Apply patch to setup.sh to retain apt.conf proxy settings.
         Sh.run "scp #{patch_file} #{vm.vmname}:#{patch_file}"
         Sh.run "ssh #{vm.vmname} patch -p1 -d /opt/contrail/contrail_packages/"+
                " -i #{patch_file}"
+        Sh.run "ssh #{vm.vmname} /opt/contrail/contrail_packages/setup.sh"
     }
 
     vm = vms.first
