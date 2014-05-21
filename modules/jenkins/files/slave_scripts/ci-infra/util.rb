@@ -50,7 +50,7 @@ class Sh
                     Dir.chdir($1)
                 else
 #                   output = `#{cmd}`
-                    [output, exit_code] = spaen(cmd)
+                    [output, exit_code] = spawn(cmd)
                 end
                 return output.chomp if exit_code == 0
             end
