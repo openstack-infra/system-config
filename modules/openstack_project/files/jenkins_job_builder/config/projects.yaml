@@ -2114,12 +2114,11 @@
     jobs:
       - python-jobs
       - rally-jobs
+      - check-rally-cli
       - check-rally-install-{node}:
           node: bare-precise
       - check-rally-install-{node}:
           node: bare-centos6
-      - 'check-rally-cli':
-          node: 'devstack-precise || devstack-precise-check'
 
 - project:
     name: python-rallyclient
@@ -2129,7 +2128,6 @@
 
     jobs:
       - python-jobs
-
 
 - project:
     name: openstack-manuals
