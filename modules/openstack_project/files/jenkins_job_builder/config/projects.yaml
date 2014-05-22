@@ -1059,6 +1059,11 @@
       - openstack-publish-jobs
       - translation-jobs
       - '{pipeline}-neutron-dsvm-functional{branch-designator}':
+          pipeline: gate
+          node: devstack-precise
+          branch-designator: ''
+          branch-override: default
+      - '{pipeline}-neutron-dsvm-functional{branch-designator}':
           pipeline: check
           node: 'devstack-precise || devstack-precise-check'
           branch-designator: ''
