@@ -1,6 +1,6 @@
 - job:
-    name: gate-solum-devstack-dsvm
-    node: 'devstack-precise || devstack-trusty'
+    name: 'gate-solum-devstack-dsvm'
+    node: 'devstack-f20'
 
     wrappers:
       - timeout:
