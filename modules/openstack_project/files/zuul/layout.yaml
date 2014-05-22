@@ -3742,6 +3742,16 @@ projects:
     gate:
       - noop
 
+  - name: stackforge/gnocchi
+    check:
+      - gate-gnocchi-pep8
+      - gate-gnocchi-python26
+      - gate-gnocchi-python27
+    gate:
+      - gate-gnocchi-pep8
+      - gate-gnocchi-python26
+      - gate-gnocchi-python27
+
   - name: stackforge/healthnmon
     check:
       - gate-healthnmon-pep8
