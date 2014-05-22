@@ -1,3 +1,4 @@
+- project: openstack-attic/database-api
 - project: openstack-attic/melange
 - project: openstack-attic/openstack-chef
 - project: openstack-attic/openstack-qa
@@ -217,11 +218,6 @@
   group: python-cliff
 - project: openstack/compute-api
   group: openstack-api-site
-  options:
-    - direct-release
-- project: openstack/database-api
-  group: openstack-api-site
-  description: Doc repo for trove project
   options:
     - direct-release
 - project: openstack/diskimage-builder

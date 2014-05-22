@@ -69,7 +69,6 @@ openstack-doc:
     projects:
       - openstack/api-site
       - openstack/compute-api
-      - openstack/database-api
       - openstack/identity-api
       - openstack/image-api
       - openstack/netconn-api
@@ -119,7 +118,6 @@ openstack-trove:
       - openstack/trove
       - openstack/trove-integration
       - openstack/python-troveclient
-      - openstack/database-api
     branches:
       - master
 
@@ -684,7 +682,6 @@ openstack-merges:
       - openstack/openstack-planet
       - openstack/api-site
       - openstack/compute-api
-      - openstack/database-api
       - openstack/identity-api
       - openstack/image-api
       - openstack/netconn-api
