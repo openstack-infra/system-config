@@ -234,7 +234,6 @@
   upstream: git://github.com/n0ano/gantt.git
 - project: openstack/glance
   docimpact-group: openstack-manuals
-- project: openstack/glance-specs
 - project: openstack/governance
   description: OpenStack Technical Committee Decisions
 - project: openstack/heat
@@ -253,6 +252,7 @@
   group: openstack-api-site
   options:
     - direct-release
+- project: openstack/image-specs
 - project: openstack/ironic
   description: A service for managing and provisioning Bare Metal servers.
   upstream: git://github.com/devananda/ironic.git

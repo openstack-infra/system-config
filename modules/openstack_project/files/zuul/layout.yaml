@@ -787,11 +787,11 @@ projects:
     periodic:
       - glance-propose-translation-update
 
-  - name: openstack/glance-specs
+  - name: openstack/image-specs
     check:
-      - gate-glance-specs-docs
+      - gate-image-specs-docs
     gate:
-      - gate-glance-specs-docs
+      - gate-image-specs-docs
 
   - name: openstack/heat
     template:

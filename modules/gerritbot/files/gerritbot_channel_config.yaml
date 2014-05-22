@@ -411,7 +411,7 @@ openstack-glance:
       - x-vrif-minus-2
     projects:
       - openstack/glance
-      - openstack/glance-specs
+      - openstack/image-specs
       - openstack/python-glanceclient
     branches:
       - master

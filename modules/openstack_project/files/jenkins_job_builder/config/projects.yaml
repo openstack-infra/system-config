@@ -530,7 +530,7 @@
       - rally-jobs
 
 - project:
-    name: glance-specs
+    name: image-specs
     github-org: openstack
     node: bare-precise
     tarball-site: tarballs.openstack.org
