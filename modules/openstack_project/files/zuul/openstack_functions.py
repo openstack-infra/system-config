@@ -88,6 +88,7 @@ def set_node_options(item, job, params, default):
     mirror_re = r'^(periodic|post)-mirror-python(26|27|33)$'
     python26_re = r'^.*-py(thon)?26.*$'
     centos6_re = r'^.*-centos6.*$'
+    f20_re = r'^.*-f20.*$'
     python33_re = r'^.*-py(py|(thon)?33).*$'
     tripleo_re = r'^.*-tripleo.*$'
     devstack_re = r'^.*-dsvm.*$'
@@ -103,6 +104,10 @@ def set_node_options(item, job, params, default):
         pass
     # Jobs needing centos6
     elif re.match(centos6_re, job.name):
+        # Pass because job specified label is always correct.
+        pass
+    # Jobs needing fedora 20
+    elif re.match(f20_re, job.name):
         # Pass because job specified label is always correct.
         pass
     # Jobs needing py33/pypy slaves
