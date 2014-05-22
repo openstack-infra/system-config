@@ -241,6 +241,7 @@ project-templates:
       - 'gate-{name}-docs'
       - 'gate-{name}-python26'
       - 'gate-{name}-python27'
+      - '{name}-coverage'
     gate:
       - 'gate-{name}-docs'
       - 'gate-{name}-pep8'
@@ -248,7 +249,6 @@ project-templates:
       - 'gate-{name}-python27'
     post:
       - '{name}-branch-tarball'
-      - '{name}-coverage'
 
   - name: integrated-gate
     check:
