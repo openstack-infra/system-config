@@ -2440,14 +2440,6 @@
       - 'api-site-tox-buildlang-{lang}'
 
 - project:
-    name: database-api
-    github-org: openstack
-    node: bare-precise
-
-    jobs:
-      - openstack-doc-jobs
-
-- project:
     name: driverlog
     github-org: stackforge
     node: bare-precise
