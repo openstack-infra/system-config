@@ -864,6 +864,14 @@ projects:
     periodic:
       - ironic-propose-translation-update
 
+  - name: openstack/baremetal-specs
+    check:
+      - gate-baremetal-specs-python27
+      - gate-baremetal-specs-docs
+    gate:
+      - gate-baremetal-specs-python27
+      - gate-baremetal-specs-docs
+
   - name: openstack/keystone
     template:
       - name: python-jobs
