@@ -459,18 +459,6 @@ openstack-rally:
     branches:
       - master
 
-openstack-climate:
-    events:
-      - patchset-created
-      - change-merged
-      - x-vrif-minus-2
-    projects:
-      - stackforge/blazar
-      - stackforge/blazar-nova
-      - stackforge/python-blazarclient
-    branches:
-      - master
-
 openstack-blazar:
     events:
       - patchset-created
