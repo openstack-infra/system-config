@@ -462,19 +462,19 @@
 - project: stackforge/bindep
   description: Binary dependency automation
   upstream: git://github.com/rbtcollins/bindep.git
+- project: stackforge/blazar
+  description: Reservation Service for OpenStack
+  upstream: git://github.com/jd/climate.git
+  acl-config: /home/gerrit2/acls/stackforge/blazar.config
+- project: stackforge/blazar-nova
+  description: Specific Nova part of the Blazar Reservation Service for OpenStack
+  upstream: git://github.com/scroiset/climate-nova.git
+  acl-config: /home/gerrit2/acls/stackforge/blazar.config
 - project: stackforge/bufunfa
   upstream: git://github.com/ekarlso/bufunfa.git
 - project: stackforge/cl-openstack-client
   description: Common Lisp OpenStack client libraries
   upstream: git://github.com/jd/cl-openstack-client.git
-- project: stackforge/climate
-  description: Reservation Service for OpenStack
-  upstream: git://github.com/jd/climate.git
-  acl-config: /home/gerrit2/acls/stackforge/climate.config
-- project: stackforge/climate-nova
-  description: Specific Nova part of the Climate Reservation Service for OpenStack
-  upstream: git://github.com/scroiset/climate-nova.git
-  acl-config: /home/gerrit2/acls/stackforge/climate.config
 - project: stackforge/cloudcafe
   upstream: https://github.com/samu4924/cloudcafe
   description: OpenStack based test automation framework. Based on OpenCAFE engine
@@ -875,9 +875,9 @@
 - project: stackforge/pyghmi
   description: A Pure python IPMI library
   upstream: git://git.code.sf.net/p/xcat/python-ipmi
-- project: stackforge/python-climateclient
-  description: Client for OpenStack Climate
-  acl-config: /home/gerrit2/acls/stackforge/climate.config
+- project: stackforge/python-blazarclient
+  description: Client for OpenStack Blazar
+  acl-config: /home/gerrit2/acls/stackforge/blazar.config
 - project: stackforge/python-designateclient
 - project: stackforge/python-jenkins
   upstream: git://github.com/jeblair/python-jenkins.git
