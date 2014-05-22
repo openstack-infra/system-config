@@ -982,13 +982,13 @@ projects:
     periodic:
       - neutron-propose-translation-update
 
-  - name: openstack/neutron-specs
+  - name: openstack/networking-specs
     check:
-      - gate-neutron-specs-python27
-      - gate-neutron-specs-docs
+      - gate-networking-specs-python27
+      - gate-networking-specs-docs
     gate:
-      - gate-neutron-specs-python27
-      - gate-neutron-specs-docs
+      - gate-networking-specs-python27
+      - gate-networking-specs-docs
 
   - name: openstack/nova
     template:
