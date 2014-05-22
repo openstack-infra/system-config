@@ -476,6 +476,8 @@
   description: OpenStack based test automation framework. Based on OpenCAFE engine
 - project: stackforge/clouddocs-maven-plugin
   upstream: git://github.com/rackerlabs/clouddocs-maven-plugin.git
+- project: stackforge/cloudkitty
+  description: OpenStack Billing and Usage Reporter
 - project: stackforge/cloudroast
   upstream: https://github.com/samu4924/cloudroast
   description: Automated Test Case Repository for OpenStack. Based on CloudCAFE.

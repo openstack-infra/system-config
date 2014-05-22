@@ -3429,6 +3429,20 @@ projects:
       - clouddocs-maven-plugin-localrepo-upload:
         - clouddocs-maven-plugin-mavencentral-upload
 
+  - name: stackforge/cloudkitty
+    check:
+      - gate-cloudkitty-docs
+      - gate-cloudkitty-pep8
+      - gate-cloudkitty-python26
+      - gate-cloudkitty-python27
+      - gate-cloudkitty-python33
+    gate:
+      - gate-cloudkitty-docs
+      - gate-cloudkitty-pep8
+      - gate-cloudkitty-python26
+      - gate-cloudkitty-python27
+      - gate-cloudkitty-python33
+
   - name: stackforge/cloudroast
     check:
       - noop
