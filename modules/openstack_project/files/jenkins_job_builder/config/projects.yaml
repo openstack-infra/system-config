@@ -799,6 +799,19 @@
 
 
 - project:
+    name: oslotest
+    github-org: openstack
+    node: bare-precise
+    tarball-site: tarballs.openstack.org
+    doc-publisher-site: docs.openstack.org
+
+    jobs:
+      - python-jobs
+      - openstack-publish-jobs
+      - pypi-jobs
+
+
+- project:
     name: oslo.config
     github-org: openstack
     node: bare-precise
@@ -857,18 +870,6 @@
 
     jobs:
       - python-jobs
-      - pypi-jobs
-
-- project:
-    name: oslo.test
-    github-org: openstack
-    node: bare-precise
-    tarball-site: tarballs.openstack.org
-    doc-publisher-site: docs.openstack.org
-
-    jobs:
-      - python-jobs
-      - openstack-publish-jobs
       - pypi-jobs
 
 - project:
