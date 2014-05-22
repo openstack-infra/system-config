@@ -2000,7 +2000,7 @@
 
 - project:
     name: barbican
-    github-org: stackforge
+    github-org: openstack
     node: bare-precise
     tarball-site: tarballs.openstack.org
 
@@ -2009,7 +2009,7 @@
 
 - project:
     name: python-barbicanclient
-    github-org: stackforge
+    github-org: openstack
     node: bare-precise
     tarball-site: tarballs.openstack.org
 
