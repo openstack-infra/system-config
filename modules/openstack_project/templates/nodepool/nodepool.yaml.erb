@@ -26,7 +26,11 @@ labels:
       - name: hpcloud-az1
       - name: hpcloud-az2
       - name: hpcloud-az3
-      - name: hpcloud-region-b
+      - name: hpcloud-region-b-net1
+      - name: hpcloud-region-b-net2
+      - name: hpcloud-region-b-net3
+      - name: hpcloud-region-b-net4
+      - name: hpcloud-region-b-net5
       - name: rax-dfw
       - name: rax-ord
       - name: rax-iad
@@ -42,7 +46,11 @@ labels:
       - name: hpcloud-az1
       - name: hpcloud-az2
       - name: hpcloud-az3
-      - name: hpcloud-region-b
+      - name: hpcloud-region-b-net1
+      - name: hpcloud-region-b-net2
+      - name: hpcloud-region-b-net3
+      - name: hpcloud-region-b-net4
+      - name: hpcloud-region-b-net5
       - name: rax-dfw
       - name: rax-ord
       - name: rax-iad
@@ -51,7 +59,11 @@ labels:
     min-ready: 21
     providers:
       - name: hpcloud-az3
-      - name: hpcloud-region-b
+      - name: hpcloud-region-b-net1
+      - name: hpcloud-region-b-net2
+      - name: hpcloud-region-b-net3
+      - name: hpcloud-region-b-net4
+      - name: hpcloud-region-b-net5
       - name: rax-dfw
       - name: rax-ord
       - name: rax-iad
@@ -62,7 +74,11 @@ labels:
       - name: hpcloud-az1
       - name: hpcloud-az2
       - name: hpcloud-az3
-      - name: hpcloud-region-b
+      - name: hpcloud-region-b-net1
+      - name: hpcloud-region-b-net2
+      - name: hpcloud-region-b-net3
+      - name: hpcloud-region-b-net4
+      - name: hpcloud-region-b-net5
       - name: rax-dfw
       - name: rax-ord
       - name: rax-iad
@@ -83,7 +99,11 @@ labels:
       - name: hpcloud-az1
       - name: hpcloud-az2
       - name: hpcloud-az3
-      - name: hpcloud-region-b
+      - name: hpcloud-region-b-net1
+      - name: hpcloud-region-b-net2
+      - name: hpcloud-region-b-net3
+      - name: hpcloud-region-b-net4
+      - name: hpcloud-region-b-net5
   - name: devstack-f20
     image: devstack-f20
     min-ready: 5
@@ -392,6 +412,221 @@ providers:
     auth-url: 'https://region-b.geo-1.identity.hpcloudsvc.com:35357/v2.0'
     boot-timeout: 120
     max-servers: 200
+    images:
+      - name: devstack-precise-check
+        base-image: 'Ubuntu Server 12.04.4 LTS (amd64 20140408) - Partner Image'
+        min-ram: 30720
+        setup: prepare_node_devstack.sh
+        username: jenkins
+        private-key: /home/nodepool/.ssh/id_rsa
+      - name: devstack-precise
+        base-image: 'Ubuntu Server 12.04.4 LTS (amd64 20140408) - Partner Image'
+        min-ram: 30720
+        setup: prepare_node_devstack.sh
+        username: jenkins
+        private-key: /home/nodepool/.ssh/id_rsa
+      - name: bare-precise
+        base-image: 'Ubuntu Server 12.04.4 LTS (amd64 20140408) - Partner Image'
+        min-ram: 30720
+        setup: prepare_node_bare.sh
+        username: jenkins
+        private-key: /home/nodepool/.ssh/id_rsa
+      - name: bare-centos6
+        base-image: 'CentOS 6.3 Server 64-bit 20130116'
+        min-ram: 30720
+        setup: prepare_node_bare.sh
+        username: jenkins
+        private-key: /home/nodepool/.ssh/id_rsa
+      - name: py3k-precise
+        base-image: 'Ubuntu Server 12.04.4 LTS (amd64 20140408) - Partner Image'
+        min-ram: 30720
+        setup: prepare_node_py3k.sh
+        username: jenkins
+        private-key: /home/nodepool/.ssh/id_rsa
+  - name: hpcloud-region-b-net1
+    region-name: 'region-b.geo-1'
+    service-type: 'compute'
+    service-name: 'Compute'
+    username: '<%= hpcloud_username %>'
+    password: '<%= hpcloud_password %>'
+    project-id: '<%= hpcloud_project %>'
+    auth-url: 'https://region-b.geo-1.identity.hpcloudsvc.com:35357/v2.0'
+    boot-timeout: 120
+    max-servers: 118
+    networks:
+      - net-id: b6596f90-914a-41e9-b01a-223d90b86e8d
+    images:
+      - name: devstack-precise-check
+        base-image: 'Ubuntu Server 12.04.4 LTS (amd64 20140408) - Partner Image'
+        min-ram: 30720
+        setup: prepare_node_devstack.sh
+        username: jenkins
+        private-key: /home/nodepool/.ssh/id_rsa
+      - name: devstack-precise
+        base-image: 'Ubuntu Server 12.04.4 LTS (amd64 20140408) - Partner Image'
+        min-ram: 30720
+        setup: prepare_node_devstack.sh
+        username: jenkins
+        private-key: /home/nodepool/.ssh/id_rsa
+      - name: bare-precise
+        base-image: 'Ubuntu Server 12.04.4 LTS (amd64 20140408) - Partner Image'
+        min-ram: 30720
+        setup: prepare_node_bare.sh
+        username: jenkins
+        private-key: /home/nodepool/.ssh/id_rsa
+      - name: bare-centos6
+        base-image: 'CentOS 6.3 Server 64-bit 20130116'
+        min-ram: 30720
+        setup: prepare_node_bare.sh
+        username: jenkins
+        private-key: /home/nodepool/.ssh/id_rsa
+      - name: py3k-precise
+        base-image: 'Ubuntu Server 12.04.4 LTS (amd64 20140408) - Partner Image'
+        min-ram: 30720
+        setup: prepare_node_py3k.sh
+        username: jenkins
+        private-key: /home/nodepool/.ssh/id_rsa
+  - name: hpcloud-region-b-net2
+    region-name: 'region-b.geo-1'
+    service-type: 'compute'
+    service-name: 'Compute'
+    username: '<%= hpcloud_username %>'
+    password: '<%= hpcloud_password %>'
+    project-id: '<%= hpcloud_project %>'
+    auth-url: 'https://region-b.geo-1.identity.hpcloudsvc.com:35357/v2.0'
+    boot-timeout: 120
+    max-servers: 118
+    networks:
+      - net-id: 90169672-ad5a-4fd5-a1b6-af121203f95c
+    images:
+      - name: devstack-precise-check
+        base-image: 'Ubuntu Server 12.04.4 LTS (amd64 20140408) - Partner Image'
+        min-ram: 30720
+        setup: prepare_node_devstack.sh
+        username: jenkins
+        private-key: /home/nodepool/.ssh/id_rsa
+      - name: devstack-precise
+        base-image: 'Ubuntu Server 12.04.4 LTS (amd64 20140408) - Partner Image'
+        min-ram: 30720
+        setup: prepare_node_devstack.sh
+        username: jenkins
+        private-key: /home/nodepool/.ssh/id_rsa
+      - name: bare-precise
+        base-image: 'Ubuntu Server 12.04.4 LTS (amd64 20140408) - Partner Image'
+        min-ram: 30720
+        setup: prepare_node_bare.sh
+        username: jenkins
+        private-key: /home/nodepool/.ssh/id_rsa
+      - name: bare-centos6
+        base-image: 'CentOS 6.3 Server 64-bit 20130116'
+        min-ram: 30720
+        setup: prepare_node_bare.sh
+        username: jenkins
+        private-key: /home/nodepool/.ssh/id_rsa
+      - name: py3k-precise
+        base-image: 'Ubuntu Server 12.04.4 LTS (amd64 20140408) - Partner Image'
+        min-ram: 30720
+        setup: prepare_node_py3k.sh
+        username: jenkins
+        private-key: /home/nodepool/.ssh/id_rsa
+  - name: hpcloud-region-b-net3
+    region-name: 'region-b.geo-1'
+    service-type: 'compute'
+    service-name: 'Compute'
+    username: '<%= hpcloud_username %>'
+    password: '<%= hpcloud_password %>'
+    project-id: '<%= hpcloud_project %>'
+    auth-url: 'https://region-b.geo-1.identity.hpcloudsvc.com:35357/v2.0'
+    boot-timeout: 120
+    max-servers: 118
+    networks:
+      - net-id: 63657422-b84f-4d2d-b7d2-765ac560546b
+    images:
+      - name: devstack-precise-check
+        base-image: 'Ubuntu Server 12.04.4 LTS (amd64 20140408) - Partner Image'
+        min-ram: 30720
+        setup: prepare_node_devstack.sh
+        username: jenkins
+        private-key: /home/nodepool/.ssh/id_rsa
+      - name: devstack-precise
+        base-image: 'Ubuntu Server 12.04.4 LTS (amd64 20140408) - Partner Image'
+        min-ram: 30720
+        setup: prepare_node_devstack.sh
+        username: jenkins
+        private-key: /home/nodepool/.ssh/id_rsa
+      - name: bare-precise
+        base-image: 'Ubuntu Server 12.04.4 LTS (amd64 20140408) - Partner Image'
+        min-ram: 30720
+        setup: prepare_node_bare.sh
+        username: jenkins
+        private-key: /home/nodepool/.ssh/id_rsa
+      - name: bare-centos6
+        base-image: 'CentOS 6.3 Server 64-bit 20130116'
+        min-ram: 30720
+        setup: prepare_node_bare.sh
+        username: jenkins
+        private-key: /home/nodepool/.ssh/id_rsa
+      - name: py3k-precise
+        base-image: 'Ubuntu Server 12.04.4 LTS (amd64 20140408) - Partner Image'
+        min-ram: 30720
+        setup: prepare_node_py3k.sh
+        username: jenkins
+        private-key: /home/nodepool/.ssh/id_rsa
+  - name: hpcloud-region-b-net4
+    region-name: 'region-b.geo-1'
+    service-type: 'compute'
+    service-name: 'Compute'
+    username: '<%= hpcloud_username %>'
+    password: '<%= hpcloud_password %>'
+    project-id: '<%= hpcloud_project %>'
+    auth-url: 'https://region-b.geo-1.identity.hpcloudsvc.com:35357/v2.0'
+    boot-timeout: 120
+    max-servers: 118
+    networks:
+      - net-id: f6d0d957-f31d-4e3b-9c07-3d2a4feebc03
+    images:
+      - name: devstack-precise-check
+        base-image: 'Ubuntu Server 12.04.4 LTS (amd64 20140408) - Partner Image'
+        min-ram: 30720
+        setup: prepare_node_devstack.sh
+        username: jenkins
+        private-key: /home/nodepool/.ssh/id_rsa
+      - name: devstack-precise
+        base-image: 'Ubuntu Server 12.04.4 LTS (amd64 20140408) - Partner Image'
+        min-ram: 30720
+        setup: prepare_node_devstack.sh
+        username: jenkins
+        private-key: /home/nodepool/.ssh/id_rsa
+      - name: bare-precise
+        base-image: 'Ubuntu Server 12.04.4 LTS (amd64 20140408) - Partner Image'
+        min-ram: 30720
+        setup: prepare_node_bare.sh
+        username: jenkins
+        private-key: /home/nodepool/.ssh/id_rsa
+      - name: bare-centos6
+        base-image: 'CentOS 6.3 Server 64-bit 20130116'
+        min-ram: 30720
+        setup: prepare_node_bare.sh
+        username: jenkins
+        private-key: /home/nodepool/.ssh/id_rsa
+      - name: py3k-precise
+        base-image: 'Ubuntu Server 12.04.4 LTS (amd64 20140408) - Partner Image'
+        min-ram: 30720
+        setup: prepare_node_py3k.sh
+        username: jenkins
+        private-key: /home/nodepool/.ssh/id_rsa
+  - name: hpcloud-region-b-net5
+    region-name: 'region-b.geo-1'
+    service-type: 'compute'
+    service-name: 'Compute'
+    username: '<%= hpcloud_username %>'
+    password: '<%= hpcloud_password %>'
+    project-id: '<%= hpcloud_project %>'
+    auth-url: 'https://region-b.geo-1.identity.hpcloudsvc.com:35357/v2.0'
+    boot-timeout: 120
+    max-servers: 118
+    networks:
+      - net-id: b96c212f-16e1-4b9c-a3d2-09b3871220c2
     images:
       - name: devstack-precise-check
         base-image: 'Ubuntu Server 12.04.4 LTS (amd64 20140408) - Partner Image'
