@@ -64,6 +64,7 @@ channels:
   - name: openstack-anvil
   - name: openstack-bacon
   - name: openstack-barbican
+  - name: openstack-blazar
   - name: openstack-board
   - name: openstack-ceilometer
   - name: openstack-chef
