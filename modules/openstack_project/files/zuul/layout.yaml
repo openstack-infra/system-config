@@ -4747,7 +4747,8 @@ projects:
       - stackalytics-tarball
       - hook-stackalytics-rtfd
     release:
-      - stackalytics-tarball
+      - stackalytics-tarball:
+        - stackalytics-pypi-upload
       - hook-stackalytics-rtfd
 
   - name: stackforge/swift3
