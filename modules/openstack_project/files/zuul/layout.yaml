@@ -3583,6 +3583,14 @@ projects:
           - post-mirror-python27
           - post-mirror-python33
 
+  - name: stackforge/designate-specs
+    check:
+      - gate-designate-specs-python27
+      - gate-designate-specs-docs
+    gate:
+      - gate-designate-specs-python27
+      - gate-designate-specs-docs
+
   - name: stackforge/entropy
     check:
       - gate-entropy-docs
