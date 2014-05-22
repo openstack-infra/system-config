@@ -2655,8 +2655,20 @@ projects:
       - name: publish-to-pypi
     check:
       - gate-gerritlib-pep8
+      - gate-gerritlib-docs
     gate:
       - gate-gerritlib-pep8
+      - gate-gerritlib-docs
+    post:
+      - gerritlib-docs
+    pre-release:
+      - gerritlib-tarball
+    release:
+      - gerritlib-tarball:
+        - gerritlib-pypi-upload:
+          - post-mirror-python26
+          - post-mirror-python27
+          - post-mirror-python33
 
   - name: openstack-infra/gitdm
     check:
