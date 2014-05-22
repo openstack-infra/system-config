@@ -1,3 +1,4 @@
+- project: openstack-attic/melange
 - project: openstack-attic/openstack-qa
 - project: openstack-dev/bash8
   description: A pep8 equivalent for bash scripts
@@ -261,7 +262,6 @@
 - project: openstack/keystone
   docimpact-group: openstack-manuals
 - project: openstack/marconi
-- project: openstack/melange
 - project: openstack/netconn-api
   group: openstack-api-site
   options:
