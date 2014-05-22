@@ -286,6 +286,12 @@ project-templates:
       - 'gate-tempest-dsvm-neutron'
       - 'gate-tempest-dsvm-postgres-full'
 
+  - name: integrated-gate-dib-tools
+    check:
+      - 'check-tempest-dsvm-full'
+      - 'check-tempest-dsvm-neutron-heat-slow'
+      - 'check-tempest-dsvm-virtual-ironic'
+
   - name: python3-jobs
     check:
       - 'gate-{name}-python33'
@@ -1618,12 +1624,12 @@ projects:
   - name: openstack/diskimage-builder
     template:
       - name: check-requirements
+      - name: integrated-gate-dib-tools
     check:
       - gate-diskimage-builder-pep8
       - gate-diskimage-builder-python26
       - gate-diskimage-builder-python27
       - check-oslotest-dsvm-diskimage-builder
-      - check-tempest-dsvm-virtual-ironic-nv
     check-tripleo:
       - check-tripleo-ironic-seed-precise
       - check-tripleo-undercloud-precise
@@ -1754,6 +1760,7 @@ projects:
   - name: openstack/os-apply-config
     template:
       - name: check-requirements
+      - name: integrated-gate-dib-tools
     check:
       - gate-os-apply-config-pep8
       - gate-os-apply-config-python26
@@ -1785,6 +1792,7 @@ projects:
   - name: openstack/os-cloud-config
     template:
       - name: check-requirements
+      - name: integrated-gate-dib-tools
     check:
       - gate-os-cloud-config-pep8
       - gate-os-cloud-config-python26
@@ -1816,6 +1824,7 @@ projects:
   - name: openstack/os-collect-config
     template:
       - name: check-requirements
+      - name: integrated-gate-dib-tools
     check:
       - gate-os-collect-config-pep8
       - gate-os-collect-config-python26
@@ -1847,6 +1856,7 @@ projects:
   - name: openstack/os-refresh-config
     template:
       - name: check-requirements
+      - name: integrated-gate-dib-tools
     check:
       - gate-os-refresh-config-pep8
       - gate-os-refresh-config-python26
