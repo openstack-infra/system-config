@@ -120,8 +120,8 @@ def cleanup
 end
 
 def main
-    # create
-    setup
+    create
+    # setup
     run
     cleanup
 end

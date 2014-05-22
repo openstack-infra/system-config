@@ -17,8 +17,7 @@ class Sh
         output = ""
         exit_code = 0
 
-        begin
-        PTY.spawn( cmd ) do |stdin, stdout, pid|
+        PTY.spawn(cmd) { |stdin, stdout, pid|
             begin
             # Do stuff with the output here. Just printing to show it works
             stdin.each { |line|
@@ -26,11 +25,11 @@ class Sh
                 print "#{cmd}: #{line}" if debug
             }
             rescue Errno::EIO
+                exit_code = 0
+            rescue PTY::ChildExited
+                exit_code = PTY.check(pid).exitstatus
             end
-        end
-        rescue PTY::ChildExited
-        exit_code = PTY.check(pid).exitstatus
-        end
+        }
 
         return output, exit_code
     end
