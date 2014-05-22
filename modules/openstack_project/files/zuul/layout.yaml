@@ -4279,6 +4279,12 @@ projects:
       - gate-puppet-openstack-puppet-unit-3.3
       - gate-puppet-openstack-puppet-unit-3.4
 
+  - name: stackforge/puppet-openstack-specs
+    check:
+      - noop
+    gate:
+      - noop
+
   - name: stackforge/puppet_openstack_builder
     check:
       - noop
