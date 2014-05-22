@@ -1957,13 +1957,13 @@ projects:
     gate:
       - gate-oslo-incubator-python33
 
-  - name: openstack/oslo-specs
+  - name: openstack/common-libraries-specs
     check:
-      - gate-oslo-specs-python27
-      - gate-oslo-specs-docs
+      - gate-common-libraries-specs-python27
+      - gate-common-libraries-specs-docs
     gate:
-      - gate-oslo-specs-python27
-      - gate-oslo-specs-docs
+      - gate-common-libraries-specs-python27
+      - gate-common-libraries-specs-docs
 
   - name: openstack/oslo.config
     template:
