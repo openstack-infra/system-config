@@ -2655,8 +2655,12 @@ projects:
       - name: publish-to-pypi
     check:
       - gate-gerritlib-pep8
+      - gate-gerritlib-docs
     gate:
       - gate-gerritlib-pep8
+      - gate-gerritlib-docs
+    post:
+      - gerritlib-docs
 
   - name: openstack-infra/gitdm
     check:
