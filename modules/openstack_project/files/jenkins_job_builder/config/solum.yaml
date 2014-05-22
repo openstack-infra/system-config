@@ -1,6 +1,48 @@
 - job:
-    name: gate-solum-devstack-dsvm
+    name: 'gate-solum-devstack-dsvm'
     node: 'devstack-precise || devstack-trusty'
+
+    wrappers:
+      - timeout:
+          timeout: 65
+          fail: true
+      - timestamps
+
+    builders:
+      - link-logs
+      - net-info
+      - devstack-checkout
+      - shell: |
+          #!/bin/bash -xe
+          export PYTHONUNBUFFERED=true
+          export DEVSTACK_GATE_TIMEOUT=60
+          export DEVSTACK_GATE_NEUTRON=1
+          export KEEP_LOCALRC=1
+          export ENABLED_SERVICES=solum,solum-api,solum-build-api,solum-conductor,solum-deployer,solum-worker,tempest
+          export PROJECTS="stackforge/solum $PROJECTS"
+
+          function pre_test_hook {
+              cd /opt/stack/new/solum/functionaltests
+              ./pre_test_hook.sh
+          }
+          export -f pre_test_hook
+
+          function post_test_hook {
+              cd /opt/stack/new/solum/functionaltests
+              ./post_test_hook.sh
+          }
+          export -f post_test_hook
+
+          cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
+          ./safe-devstack-vm-gate-wrap.sh
+
+    publishers:
+      - devstack-logs
+      - console-log
+
+- job:
+    name: 'gate-solum-devstack-dsvm-f20'
+    node: 'devstack-f20'
 
     wrappers:
       - timeout:
