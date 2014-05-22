@@ -578,6 +578,7 @@ openstack-keystone:
     projects:
       - openstack/keystone
       - openstack/identity-api
+      - openstack/identity-specs
       - openstack/python-keystoneclient
     branches:
       - master
