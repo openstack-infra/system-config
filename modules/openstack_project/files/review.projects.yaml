@@ -1,3 +1,4 @@
+- project: openstack-attic/openstack-qa
 - project: openstack-dev/bash8
   description: A pep8 equivalent for bash scripts
   upstream: git://github.com/locke105/bash8.git
@@ -17,7 +18,6 @@
   description: CloudFormation compatibile Heat client
   upstream: git://github.com/steveb/heat-cfnclient.git
 - project: openstack-dev/openstack-nose
-- project: openstack-dev/openstack-qa
 - project: openstack-dev/oslo-cookiecutter
   description: Cookiecutter Template for new Oslo libraries
   upstream: git://github.com/dhellmann/oslo-cookiecutter.git

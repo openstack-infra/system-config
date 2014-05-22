@@ -2668,16 +2668,6 @@ projects:
     gate:
       - noop
 
-  - name: openstack-dev/openstack-qa
-    check:
-      - noop
-    gate:
-      - noop
-    post:
-      - openstack-qa-docs
-    release:
-      - openstack-qa-docs
-
   - name: openstack-dev/oslo-cookiecutter
     check:
       - noop
