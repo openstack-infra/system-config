@@ -30,7 +30,7 @@ def slave
     end
 
     # CI-Slaves register to jenkins.opencontrail.org
-    exec %{java -jar #{jar_file} -labels juniper-tests -mode normal -master http://jenkins.opencontrail.org:8080/ -fsroot /home/jenkins -username #{jenkins_user} -password #{jenkins_password} -name #{@hostname} 2>&1 | tee /root/jenkins-slave.log}
+    exec %{java -jar #{jar_file} -labels juniper-tests -mode normal -master http://jenkins.opencontrail.org:8080/ -executors 1 -fsroot /home/jenkins -username #{jenkins_user} -password #{jenkins_password} -name #{@hostname} 2>&1 | tee /root/jenkins-slave.log}
 end
 
 def subslave
