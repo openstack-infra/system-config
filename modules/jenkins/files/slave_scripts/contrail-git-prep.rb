@@ -28,8 +28,8 @@ end
 @project = "contrail-controller" if @project == "contrail-controller-test" # For testing
 puts "Working with project #{@project}"
 
-GERRIT_SITE="https://review.opencontrail.org"
-GIT_ORIGIN="ssh://zuul@review.opencontrail.org:29418"
+GERRIT_SITE="https://review.opencontrail.org" # ARGV[0]
+GIT_ORIGIN="ssh://zuul@review.opencontrail.org:29418" # ARGV[1]
 ENV['WORKSPACE']=ENV['PWD']
 WORKSPACE=ENV['WORKSPACE']
 

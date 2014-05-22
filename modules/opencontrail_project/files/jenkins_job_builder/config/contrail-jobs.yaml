@@ -9,11 +9,12 @@
       - timestamps
 
     builders:
-      - contrail-ci-prep
+      - gerrit-git-prep
       - shell: |
           #!/bin/bash -xe
-          source ci-setup.env
-          contrail-unittests-job.sh
+          export USER=jenkins
+          export JOB_NAME={name}
+          contrail-ci-run /usr/local/jenkins/slave_scripts/contrail-unittests-job.sh
 
 - job-group:
     name: contrail-controller-jobs

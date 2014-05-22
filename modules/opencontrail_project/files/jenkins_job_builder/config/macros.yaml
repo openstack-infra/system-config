@@ -1,27 +1,8 @@
 - builder:
     name: gerrit-git-prep
     builders:
-      - shell: |
-          #!/bin/bash -xe
-          export JOB_NAME={name}
-          export USER=jenkins
-          export WORKSPACE=$PWD
-          export PATH=$PATH:$WORKSPACE/contrail-infra-config/slave_scripts:$WORKSPACE/contrail-infra-config/slave_scripts:ci-infra
-          /usr/bin/contrail-ci-setup
-          source ci-setup.env
-          contrail-git-prep.rb
+      - shell: "/usr/bin/contrail-ci-run ruby /usr/local/jenkins/slave_scripts/contrail-git-prep.rb https://review.opencontrail.org ssh://zuul@review.opencontrail.org:29418"
 
-- builder:
-    name: contrail-ci-prep
-    builders:
-      - shell: |
-          #!/bin/bash -xe
-          export JOB_NAME={name}
-          export USER=jenkins
-          export WORKSPACE=$PWD
-          export PATH=$PATH:$WORKSPACE/contrail-infra-config/slave_scripts:$WORKSPACE/contrail-infra-config/slave_scripts:ci-infra
-          /usr/bin/contrail-ci-setup {name}
-          contrail-git-prep.rb
 - builder:
     name: coverage
     builders:
