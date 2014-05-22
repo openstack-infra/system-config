@@ -206,6 +206,9 @@
   group: openstack-api-site
   options:
     - direct-release
+- project: openstack/barbican
+  description: Barbican is a ReST API designed for the secure storage, provisioning and management of secrets, including in OpenStack environments.
+  upstream: git://github.com/cloudkeep/barbican.git
 - project: openstack/baremetal-specs
   group: ironic
 - project: openstack/ceilometer
@@ -349,6 +352,9 @@
   upstream: git://github.com/dhellmann/oslo.test.git
 - project: openstack/pycadf
   description: CADF Python module
+- project: openstack/python-barbicanclient
+  description: Client library for Barbican API.
+  upstream: git://github.com/cloudkeep/python-barbicanclient
 - project: openstack/python-ceilometerclient
   upstream: git://github.com/asalkeld/python-ceilometerclient.git
 - project: openstack/python-cinderclient
@@ -450,9 +456,6 @@
 - project: stackforge/aviator
   description: An OpenStack client library for Ruby
   upstream: git://github.com/aviator/aviator
-- project: stackforge/barbican
-  description: Barbican is a ReST API designed for the secure storage, provisioning and management of secrets, including in OpenStack environments.
-  upstream: git://github.com/cloudkeep/barbican.git
 - project: stackforge/billingstack
   upstream: git://github.com/billingstack/billingstack
   description: Billing software
@@ -869,9 +872,6 @@
 - project: stackforge/pyghmi
   description: A Pure python IPMI library
   upstream: git://git.code.sf.net/p/xcat/python-ipmi
-- project: stackforge/python-barbicanclient
-  description: Client library for Barbican API.
-  upstream: git://github.com/cloudkeep/python-barbicanclient
 - project: stackforge/python-climateclient
   description: Client for OpenStack Climate
   acl-config: /home/gerrit2/acls/stackforge/climate.config
