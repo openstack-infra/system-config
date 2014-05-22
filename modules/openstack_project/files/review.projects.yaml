@@ -267,10 +267,10 @@
   group: openstack-api-site
   options:
     - direct-release
+- project: openstack/networking-specs
+  group: neutron
 - project: openstack/neutron
   docimpact-group: openstack-manuals
-- project: openstack/neutron-specs
-  group: neutron
 - project: openstack/nova
   docimpact-group: openstack-manuals
 - project: openstack/nova-specs
