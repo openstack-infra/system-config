@@ -3091,7 +3091,7 @@ projects:
       - gate-python-jenkins-pep8
       - gate-python-jenkins-python26
       - gate-python-jenkins-python27
-      #- gate-python-jenkins-python33
+      - gate-python-jenkins-python33
     post:
       - python-jenkins-branch-tarball
       - python-jenkins-coverage
