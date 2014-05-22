@@ -615,6 +615,20 @@ projects:
 
 # Section: OpenStack server projects
 
+  - name: openstack/barbican
+    check:
+      - gate-barbican-pep8
+      - gate-barbican-python27
+      - gate-barbican-python26
+      - gate-barbican-devstack-dsvm
+    gate:
+      - gate-barbican-pep8
+      - gate-barbican-python27
+      - gate-barbican-python26
+      - gate-barbican-devstack-dsvm
+    post:
+      - barbican-branch-tarball
+
   - name: openstack/ceilometer
     template:
       - name: python-jobs
@@ -1184,6 +1198,24 @@ projects:
         - tuskar-pypi-upload
 
 # Section: OpenStack client projects
+
+  - name: openstack/python-barbicanclient
+    check:
+      - gate-python-barbicanclient-pep8
+      - gate-python-barbicanclient-python26
+      - gate-python-barbicanclient-python27
+    gate:
+      - gate-python-barbicanclient-pep8
+      - gate-python-barbicanclient-python26
+      - gate-python-barbicanclient-python27
+    post:
+      - python-barbicanclient-branch-tarball
+    release:
+      - python-barbicanclient-tarball:
+        - python-barbicanclient-pypi-upload:
+          - post-mirror-python26
+          - post-mirror-python27
+          - post-mirror-python33
 
   - name: openstack/python-ceilometerclient
     template:
@@ -3314,20 +3346,6 @@ projects:
     gate:
       - noop
 
-  - name: stackforge/barbican
-    check:
-      - gate-barbican-pep8
-      - gate-barbican-python27
-      - gate-barbican-python26
-      - gate-barbican-devstack-dsvm
-    gate:
-      - gate-barbican-pep8
-      - gate-barbican-python27
-      - gate-barbican-python26
-      - gate-barbican-devstack-dsvm
-    post:
-      - barbican-branch-tarball
-
   - name: stackforge/billingstack
     check:
       - gate-billingstack-pep8
@@ -4456,24 +4474,6 @@ projects:
     release:
       - pyghmi-tarball:
         - pyghmi-pypi-upload:
-          - post-mirror-python26
-          - post-mirror-python27
-          - post-mirror-python33
-
-  - name: stackforge/python-barbicanclient
-    check:
-      - gate-python-barbicanclient-pep8
-      - gate-python-barbicanclient-python26
-      - gate-python-barbicanclient-python27
-    gate:
-      - gate-python-barbicanclient-pep8
-      - gate-python-barbicanclient-python26
-      - gate-python-barbicanclient-python27
-    post:
-      - python-barbicanclient-branch-tarball
-    release:
-      - python-barbicanclient-tarball:
-        - python-barbicanclient-pypi-upload:
           - post-mirror-python26
           - post-mirror-python27
           - post-mirror-python33
