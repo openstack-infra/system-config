@@ -1,0 +1,13 @@
+- job:
+    name: gate-tuskar-ui-selenium
+    node: bare-precise
+
+    builders:
+      - revoke-sudo
+      - gerrit-git-prep
+      - selenium:
+          github-org: openstack
+          project: tuskar-ui
+
+    publishers:
+      - console-log
