@@ -1137,7 +1137,6 @@ projects:
     periodic:
       - trove-propose-translation-update
 
-
   - name: openstack/tuskar
     template:
       - name: python-jobs
@@ -2461,6 +2460,12 @@ projects:
       - name: openstack-doc-gate
     post:
       - object-api-tox-doc-publishdocs
+
+  - name: openstack/object-specs
+    check:
+      - gate-object-specs-docs
+    gate:
+      - gate-object-specs-docs
 
   - name: openstack/volume-api
     template:

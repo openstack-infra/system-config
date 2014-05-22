@@ -274,6 +274,8 @@
   group: openstack-api-site
   options:
     - direct-release
+- project: openstack/object-specs
+  group: swift
 - project: openstack/openstack
   upstream: git://github.com/emonty/openstack
 - project: openstack/openstack-chef
