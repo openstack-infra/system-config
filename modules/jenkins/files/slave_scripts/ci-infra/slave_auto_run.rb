@@ -44,8 +44,11 @@ def subslave
         elapsed = (Time.now - last_updated)/60
         puts "#{@hostname}: #{elapsed} minutes elapsed since last update"
 
-        # If it is not updated within 5 minutes, commit suicide!
-        Sh.crun "nova delete #{@hostname}" if elapsed > 5
+        # If it is not updated within 5 minutes, commit suicide! unless
+        # we want to skip it.
+        if !File.file? "/root/skip_subslave_keepalive" then
+            Sh.crun "nova delete #{@hostname}" if elapsed > 5
+        end
         sleep 10
     end
 end
