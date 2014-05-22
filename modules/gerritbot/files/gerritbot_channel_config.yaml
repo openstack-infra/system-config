@@ -154,6 +154,7 @@ heat:
       - openstack/python-heatclient
       - openstack/heat-cfntools
       - openstack/heat-templates
+      - openstack/orchestration-specs
       - openstack-dev/heat-cfnclient
     branches:
       - master

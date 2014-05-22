@@ -298,6 +298,8 @@
   description: OpenStack Operations Guide
   options:
     - direct-release
+- project: openstack/orchestration-specs
+  group: heat
 - project: openstack/os-apply-config
   description: Apply configuration from cloud metadata.
 - project: openstack/os-cloud-config
