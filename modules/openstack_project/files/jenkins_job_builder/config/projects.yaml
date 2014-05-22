@@ -126,7 +126,7 @@
       - pypi-jobs
 
 - project:
-    name: climate
+    name: blazar
     github-org: stackforge
     node: bare-precise
     tarball-site: tarballs.openstack.org
@@ -135,7 +135,7 @@
       - python-jobs
 
 - project:
-    name: climate-nova
+    name: blazar-nova
     github-org: stackforge
     node: bare-precise
     tarball-site: tarballs.openstack.org
@@ -144,7 +144,7 @@
       - python-jobs
 
 - project:
-    name: python-climateclient
+    name: python-blazarclient
     github-org: stackforge
     node: bare-precise
     tarball-site: tarballs.openstack.org

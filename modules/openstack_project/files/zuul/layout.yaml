@@ -562,7 +562,7 @@ jobs:
     voting: false
   - name: gate-manila-tempest-dsvm-neutron
     voting: false
-  - name: gate-climate-devstack-dsvm
+  - name: gate-blazar-devstack-dsvm
     voting: false
   - name: gate-storyboard-python33
     voting: false
@@ -3401,34 +3401,34 @@ projects:
     post:
       - hook-bufunfa-rtfd
 
-  - name: stackforge/climate
+  - name: stackforge/blazar
     template:
       - name: python-jobs
       - name: check-requirements
     check:
-      - gate-climate-devstack-dsvm
+      - gate-blazar-devstack-dsvm
     pre-release:
-      - climate-tarball
+      - blazar-tarball
     release:
-      - climate-tarball
+      - blazar-tarball
 
-  - name: stackforge/climate-nova
+  - name: stackforge/blazar-nova
     template:
       - name: check-requirements
     check:
-      - gate-climate-nova-pep8
-      - gate-climate-nova-python26
-      - gate-climate-nova-python27
+      - gate-blazar-nova-pep8
+      - gate-blazar-nova-python26
+      - gate-blazar-nova-python27
     gate:
-      - gate-climate-nova-pep8
-      - gate-climate-nova-python26
-      - gate-climate-nova-python27
+      - gate-blazar-nova-pep8
+      - gate-blazar-nova-python26
+      - gate-blazar-nova-python27
     post:
-      - climate-nova-branch-tarball
+      - blazar-nova-branch-tarball
     pre-release:
-      - climate-nova-tarball
+      - blazar-nova-tarball
     release:
-      - climate-nova-tarball
+      - blazar-nova-tarball
 
   - name: stackforge/cl-openstack-client
     check:
@@ -4478,23 +4478,23 @@ projects:
           - post-mirror-python27
           - post-mirror-python33
 
-  - name: stackforge/python-climateclient
+  - name: stackforge/python-blazarclient
     template:
       - name: check-requirements
     check:
-      - gate-python-climateclient-pep8
-      - gate-python-climateclient-python26
-      - gate-python-climateclient-python27
+      - gate-python-blazarclient-pep8
+      - gate-python-blazarclient-python26
+      - gate-python-blazarclient-python27
     gate:
-      - gate-python-climateclient-pep8
-      - gate-python-climateclient-python26
-      - gate-python-climateclient-python27
+      - gate-python-blazarclient-pep8
+      - gate-python-blazarclient-python26
+      - gate-python-blazarclient-python27
     post:
-      - python-climateclient-branch-tarball
+      - python-blazarclient-branch-tarball
     pre-release:
-      - python-climateclient-tarball
+      - python-blazarclient-tarball
     release:
-      - python-climateclient-tarball
+      - python-blazarclient-tarball
 
   - name: stackforge/python-designateclient
     check:
