@@ -1,0 +1,11 @@
+Code-Review+2: James E. Blair <corvus@inaugust.com>
+Verified+2: Jenkins
+Code-Review+1: Mehdi Abaakouk <mehdi.abaakouk@enovance.com>
+Code-Review+2: Clark Boylan <cboylan@sapwetik.org>
+Workflow+1: Clark Boylan <cboylan@sapwetik.org>
+Code-Review+1: Ildiko Vancsa <ildiko.vancsa@ericsson.com>
+Submitted-by: Jenkins
+Submitted-at: Thu, 22 May 2014 00:40:01 +0000
+Reviewed-on: https://review.openstack.org/94044
+Project: openstack-infra/config
+Branch: refs/heads/master
