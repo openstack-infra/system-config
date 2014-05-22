@@ -188,9 +188,7 @@ openstack-sahara:
       - stackforge/sahara-guestagent
     branches:
       - master
-      - stable/0.1
-      - stable/0.2
-      - stable/0.3
+      - stable/icehouse
 
 openstack-nova:
     events:
