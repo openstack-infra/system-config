@@ -3685,6 +3685,14 @@ projects:
     gate:
       - noop
 
+  - name: stackforge/fuel-specs
+    check:
+      - gate-fuel-specs-python27
+      - gate-fuel-specs-docs
+    gate:
+      - gate-fuel-specs-python27
+      - gate-fuel-specs-docs
+
   - name: stackforge/fuel-web
     check:
       - noop
