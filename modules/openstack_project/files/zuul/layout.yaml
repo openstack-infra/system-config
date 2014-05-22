@@ -1725,12 +1725,6 @@ projects:
     gate:
       - noop
 
-  - name: openstack/openstack-chef
-    check:
-      - noop
-    gate:
-      - noop
-
   - name: openstack/openstack-doc-tools
     check:
       - gate-openstack-doc-tools-pep8
