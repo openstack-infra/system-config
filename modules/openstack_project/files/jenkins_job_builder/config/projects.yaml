@@ -1086,7 +1086,7 @@
           branch-override: default
 
 - project:
-    name: neutron-specs
+    name: networking-specs
     github-org: openstack
     node: bare-precise
     tarball-site: tarballs.openstack.org
