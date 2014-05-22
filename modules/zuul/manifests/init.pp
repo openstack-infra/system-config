@@ -231,6 +231,12 @@ class zuul (
     require => File['/var/lib/zuul/www'],
   }
 
+  file { '/var/lib/zuul/www/images':
+    ensure  => link,
+    target  => '/opt/zuul/etc/status/public_html/images',
+    require => File['/var/lib/zuul/www'],
+  }
+
   file { '/etc/init.d/zuul':
     ensure => present,
     owner  => 'root',
