@@ -69,7 +69,6 @@ channels:
   - name: openstack-ceilometer
   - name: openstack-chef
   - name: openstack-cinder
-  - name: openstack-climate
   - name: openstack-cloudkeep
   - name: openstack-community
   - name: openstack-dev
