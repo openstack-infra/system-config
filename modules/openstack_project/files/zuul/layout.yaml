@@ -2454,10 +2454,6 @@ projects:
       - compute-api-tox-doc-publishdocs
       - compute-api-v2.0-wadl
 
-  - name: openstack/database-api
-    template:
-      - name: openstack-doc-gate
-
   - name: openstack/identity-api
     template:
       - name: openstack-doc-gate
