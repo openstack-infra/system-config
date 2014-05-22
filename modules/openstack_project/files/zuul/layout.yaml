@@ -1894,6 +1894,32 @@ projects:
           - post-mirror-python27
           - post-mirror-python33
 
+  - name: openstack/oslotest
+    template:
+      - name: python-jobs
+      - name: python3-jobs
+      - name: pypy-jobs
+      - name: openstack-server-publish-jobs
+      - name: check-requirements
+    check:
+      - check-oslotest-dsvm-diskimage-builder
+      - check-oslotest-dsvm-oslo.config
+      - check-oslotest-dsvm-oslo.messaging
+      - check-oslotest-dsvm-tripleo-image-elements
+    gate:
+      - gate-oslotest-dsvm-diskimage-builder
+      - gate-oslotest-dsvm-oslo.config
+      - gate-oslotest-dsvm-oslo.messaging
+      - gate-oslotest-dsvm-tripleo-image-elements
+    pre-release:
+      - oslotest-tarball
+    release:
+      - oslotest-tarball:
+        - oslotest-pypi-upload:
+          - post-mirror-python26
+          - post-mirror-python27
+          - post-mirror-python33
+
   - name: openstack/oslo-incubator
     template:
       - name: python-jobs
@@ -2060,32 +2086,6 @@ projects:
     release:
       - oslo.rootwrap-tarball:
         - oslo.rootwrap-pypi-upload:
-          - post-mirror-python26
-          - post-mirror-python27
-          - post-mirror-python33
-
-  - name: openstack/oslo.test
-    template:
-      - name: python-jobs
-      - name: python3-jobs
-      - name: pypy-jobs
-      - name: openstack-server-publish-jobs
-      - name: check-requirements
-    check:
-      - check-oslotest-dsvm-diskimage-builder
-      - check-oslotest-dsvm-oslo.config
-      - check-oslotest-dsvm-oslo.messaging
-      - check-oslotest-dsvm-tripleo-image-elements
-    gate:
-      - gate-oslotest-dsvm-diskimage-builder
-      - gate-oslotest-dsvm-oslo.config
-      - gate-oslotest-dsvm-oslo.messaging
-      - gate-oslotest-dsvm-tripleo-image-elements
-    pre-release:
-      - oslo.test-tarball
-    release:
-      - oslo.test-tarball:
-        - oslo.test-pypi-upload:
           - post-mirror-python26
           - post-mirror-python27
           - post-mirror-python33

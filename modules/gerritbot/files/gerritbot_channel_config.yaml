@@ -725,7 +725,7 @@ openstack-oslo:
       - openstack/oslo.rootwrap
       - openstack/oslosphinx
       - openstack/oslo-specs
-      - openstack/oslo.test
+      - openstack/oslotest
       - openstack/oslo.version
       - openstack/oslo.vmware
       - openstack/pycadf

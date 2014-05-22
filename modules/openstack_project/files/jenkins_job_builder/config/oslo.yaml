@@ -50,7 +50,7 @@
     name: oslotest-cross-test
 
     injectedlib: oslotest
-    injectedrepo: openstack/oslo.test
+    injectedrepo: openstack/oslotest
 
     jobs:
       - '{pipeline}-{injectedlib}-dsvm-{name}{branch-designator}':
