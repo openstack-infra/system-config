@@ -756,7 +756,11 @@ openstack-sdks:
       - patchset-created
       - change-merged
     projects:
+      - openstack/python-openstackclient
       - stackforge/openstack-sdk-php
       - stackforge/golang-client
+      - stackforge/openstack-sdk-dotnet
+      - stackforge/openstack-cli-powershell
+      - stackforge/python-openstacksdk
     branches:
       - master
