@@ -496,8 +496,6 @@ jobs:
     voting: false
   - name: gate-marconi-python33
     voting: false
-  - name: ^(gate|check)-tempest-dsvm-marconi
-    voting: false
   - name: check-rally-dsvm-glance
     voting: false
   - name: gate-python-glanceclient-python33
@@ -921,6 +919,7 @@ projects:
       - gate-marconi-python33
       - gate-marconi-pypy
     gate:
+      - gate-tempest-dsvm-marconi
       - gate-marconi-pypy
     post:
       - marconi-branch-tarball
