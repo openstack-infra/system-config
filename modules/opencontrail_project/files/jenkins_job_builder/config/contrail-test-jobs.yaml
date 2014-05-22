@@ -3,24 +3,22 @@
     node: '{node}'
 
     builders:
-      - gerrit-git-prep
+      - contrail-ci-prep
       - shell: |
           #!/bin/bash -xe
-          export USER=jenkins
-          export JOB_NAME={name}
-          contrail-ci-run /usr/local/jenkins/slave_scripts/contrail-unittests-job.sh
+          source ci-setup.env
+          contrail-unittests-job.sh
 
 - job-template:
     name: 'ci-{name}-devstack'
     node: '{node}'
 
     builders:
-      - gerrit-git-prep
+      - contrail-ci-prep
       - shell: |
           #!/bin/bash -xe
-          export USER=jenkins
-          export JOB_NAME={name}
-          contrail-ci-run /usr/local/jenkins/slave_scripts/contrail-devstack-job.sh
+          source ci-setup.env
+          contrail-devstack-job.sh
 
 - job-group:
     name: contrail-controller-test-unitest
