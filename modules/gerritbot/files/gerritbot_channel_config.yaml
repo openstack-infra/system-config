@@ -259,6 +259,7 @@ puppet-openstack:
       - master
       - stable/grizzly
       - stable/havana
+      - stable/icehouse
 
 openstack-chef:
     events:
