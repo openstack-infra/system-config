@@ -2668,16 +2668,6 @@ projects:
     gate:
       - noop
 
-  - name: openstack-dev/openstack-qa
-    check:
-      - noop
-    gate:
-      - noop
-    post:
-      - openstack-qa-docs
-    release:
-      - openstack-qa-docs
-
   - name: openstack-dev/oslo-cookiecutter
     check:
       - noop
@@ -3301,6 +3291,14 @@ projects:
       - periodic-test
 
   - name: openstack-infra/zuul-packaging
+    check:
+      - noop
+    gate:
+      - noop
+
+# Section: Attic projects
+
+  - name: openstack-attic/openstack-qa
     check:
       - noop
     gate:
