@@ -17,8 +17,8 @@
           export PYTHONUNBUFFERED=true
           export DEVSTACK_GATE_TIMEOUT=60
           export ENABLED_SERVICES=barbican,tempest,keystone
-          export PROJECTS="stackforge/barbican $PROJECTS"
-          export PROJECTS="stackforge/python-barbicanclient $PROJECTS"
+          export PROJECTS="openstack/barbican $PROJECTS"
+          export PROJECTS="openstack/python-barbicanclient $PROJECTS"
 
           function pre_test_hook {
               cd /opt/stack/new/barbican/functionaltests
