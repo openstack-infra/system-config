@@ -1,4 +1,5 @@
 - project: openstack-attic/melange
+- project: openstack-attic/openstack-chef
 - project: openstack-attic/openstack-qa
 - project: openstack-attic/python-melangeclient
 - project: openstack-dev/bash8
@@ -283,7 +284,6 @@
   group: swift
 - project: openstack/openstack
   upstream: git://github.com/emonty/openstack
-- project: openstack/openstack-chef
 - project: openstack/openstack-doc-tools
   group: openstack-manuals
   description: Tools used by OpenStack Documentation
