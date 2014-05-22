@@ -640,6 +640,14 @@ projects:
     periodic:
       - ceilometer-propose-translation-update
 
+  - name: openstack/telemetry-specs
+    check:
+      - gate-telemetry-specs-python27
+      - gate-telemetry-specs-docs
+    gate:
+      - gate-telemetry-specs-python27
+      - gate-telemetry-specs-docs
+
   - name: openstack/cinder
     template:
       - name: python-jobs
