@@ -102,3 +102,5 @@
     jobs:
       - '{name}-manuals-upstream-translation-update'
       - '{name}-manuals-propose-translation-update'
+      - 'gate-{name}-tox-{envlist}':
+          envlist: checklang
