@@ -423,6 +423,7 @@
     tarball-site: tarballs.openstack.org
 
     jobs:
+      - python-jobs
       - gate-{name}-pep8
       - '{name}-tarball'
       - pypi-jobs

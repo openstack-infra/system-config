@@ -2916,8 +2916,12 @@ projects:
   - name: openstack-infra/gerritlib
     check:
       - gate-gerritlib-pep8
+      - gate-gerritlib-docs
     gate:
       - gate-gerritlib-pep8
+      - gate-gerritlib-docs
+    post:
+      - gerritlib-docs
     pre-release:
       - gerritlib-tarball
     release:
