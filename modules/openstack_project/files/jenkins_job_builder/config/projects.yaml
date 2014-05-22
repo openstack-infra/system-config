@@ -910,7 +910,7 @@
       - openstack-publish-jobs
 
 - project:
-    name: oslo-specs
+    name: common-libraries-specs
     github-org: openstack
     node: bare-precise
     tarball-site: tarballs.openstack.org

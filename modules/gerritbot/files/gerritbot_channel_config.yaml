@@ -723,7 +723,7 @@ openstack-oslo:
       - openstack/oslo.messaging
       - openstack/oslo.rootwrap
       - openstack/oslosphinx
-      - openstack/oslo-specs
+      - openstack/common-libraries-specs
       - openstack/oslotest
       - openstack/oslo.version
       - openstack/oslo.vmware
