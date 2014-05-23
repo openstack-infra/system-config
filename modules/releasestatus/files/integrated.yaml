@@ -26,3 +26,4 @@ products:
  - ceilometer
  - heat
  - trove
+ - sahara
