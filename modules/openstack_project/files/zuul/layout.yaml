@@ -881,13 +881,13 @@ projects:
     periodic:
       - ironic-propose-translation-update
 
-  - name: openstack/baremetal-specs
+  - name: openstack/ironic-specs
     check:
-      - gate-baremetal-specs-python27
-      - gate-baremetal-specs-docs
+      - gate-ironic-specs-python27
+      - gate-ironic-specs-docs
     gate:
-      - gate-baremetal-specs-python27
-      - gate-baremetal-specs-docs
+      - gate-ironic-specs-python27
+      - gate-ironic-specs-docs
 
   - name: openstack/keystone
     template:
