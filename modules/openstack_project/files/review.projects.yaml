@@ -238,6 +238,8 @@
 - project: openstack/heat
 - project: openstack/heat-cfntools
   upstream: git://github.com/heat-api/heat-cfntools.git
+- project: openstack/heat-specs
+  group: heat
 - project: openstack/heat-templates
 - project: openstack/horizon
   docimpact-group: openstack-manuals
@@ -300,8 +302,6 @@
   description: OpenStack Operations Guide
   options:
     - direct-release
-- project: openstack/orchestration-specs
-  group: heat
 - project: openstack/os-apply-config
   description: Apply configuration from cloud metadata.
 - project: openstack/os-cloud-config
