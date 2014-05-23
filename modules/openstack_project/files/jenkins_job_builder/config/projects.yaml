@@ -637,7 +637,7 @@
 
 
 - project:
-    name: identity-specs
+    name: keystone-specs
     github-org: openstack
     node: bare-precise
     tarball-site: tarballs.openstack.org

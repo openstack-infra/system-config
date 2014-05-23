@@ -247,8 +247,6 @@
   group: openstack-api-site
   options:
     - direct-release
-- project: openstack/identity-specs
-  group: keystone
 - project: openstack/image-api
   group: openstack-api-site
   options:
@@ -264,6 +262,8 @@
   group: ironic
 - project: openstack/keystone
   docimpact-group: openstack-manuals
+- project: openstack/keystone-specs
+  group: keystone
 - project: openstack/marconi
 - project: openstack/netconn-api
   group: openstack-api-site
