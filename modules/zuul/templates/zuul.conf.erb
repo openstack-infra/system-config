@@ -48,3 +48,11 @@ region_name=<%= swift_region_name %>
 default_container=<%= swift_default_container %>
 default_logserver_prefix=<%= swift_default_logserver_prefix %>
 <% end -%>
+
+<% if smtp_host != "" -%>
+[smtp]
+server=<%= smtp_host %>
+port=<%= smtp_port %>
+default_from=<%= smtp_default_from %>
+default_to=<%= smtp_default_to %>
+<% end -%>
