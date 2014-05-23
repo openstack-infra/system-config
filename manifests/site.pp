@@ -430,7 +430,7 @@ node 'zuul.openstack.org' {
     gerrit_ssh_host_key            => hiera('gerrit_ssh_rsa_pubkey_contents'),
     zuul_ssh_private_key           => hiera('zuul_ssh_private_key_contents'),
     url_pattern                    => 'http://logs.openstack.org/{build.parameters[LOG_PATH]}',
-    swift_authurl                  => 'https://identity.api.rackspacecloud.com/v2.0/',
+    swift_authurl                  => '',
     swift_user                     => 'infra-files-rw',
     swift_key                      => hiera('infra_files_rw_password'),
     # Yes, really unset the tenant name. Rax identity can't construct a
