@@ -776,7 +776,7 @@
 
 
 - project:
-    name: object-specs
+    name: swift-specs
     github-org: openstack
     node: bare-precise
     tarball-site: tarballs.openstack.org
