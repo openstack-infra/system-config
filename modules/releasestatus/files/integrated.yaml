@@ -2,15 +2,15 @@
 series: icehouse
 
 # Final release date
-releasedate: 2014-04-17
+releasedate: 2014-10-16
 
 # Short milestone codes, with number of weeks leading to them
 # The last one should be the release date
 milestones:
- - [6, i1]
- - [6, i2]
- - [5, i3]
- - [5, Apr 17]
+ - [4, j1]
+ - [6, j2]
+ - [6, j3]
+ - [6, Oct 17]
 
 # Set of projects to consider in the report
 products:
