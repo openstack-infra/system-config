@@ -1662,7 +1662,7 @@ projects:
       - gate-diskimage-builder-python26
       - gate-diskimage-builder-python27
       - check-oslotest-dsvm-diskimage-builder
-      - check-tempest-dsvm-virtual-ironic-nv
+      - check-tempest-dsvm-virtual-ironic
     check-tripleo:
       - check-tripleo-ironic-seed-precise
       - check-tripleo-undercloud-precise
@@ -1673,6 +1673,7 @@ projects:
       - gate-diskimage-builder-python26
       - gate-diskimage-builder-python27
       - gate-oslotest-dsvm-diskimage-builder
+      - gate-tempest-dsvm-virtual-ironic
     experimental-tripleo:
       - check-tripleo-ironic-undercloud-precise
     post:
