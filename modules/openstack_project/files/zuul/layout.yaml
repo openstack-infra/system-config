@@ -562,6 +562,8 @@ jobs:
     voting: false
   - name: gate-manila-tempest-dsvm-neutron
     voting: false
+  - name: gate-manila-tempest-dsvm-neutron-multibackend
+    voting: false
   - name: gate-climate-devstack-dsvm
     voting: false
   - name: gate-storyboard-python33
@@ -3826,11 +3828,13 @@ projects:
       - gate-manila-python26
       - gate-manila-python27
       - gate-manila-tempest-dsvm-neutron
+      - gate-manila-tempest-dsvm-neutron-multibackend
     gate:
       - gate-manila-pep8
       - gate-manila-python26
       - gate-manila-python27
       - gate-manila-tempest-dsvm-neutron
+      - gate-manila-tempest-dsvm-neutron-multibackend
     post:
       - manila-branch-tarball
       - manila-coverage
