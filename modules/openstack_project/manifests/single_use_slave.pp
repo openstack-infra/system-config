@@ -36,12 +36,12 @@ class openstack_project::single_use_slave (
   }
   class { 'jenkins::slave':
     ssh_key         => $ssh_key,
-    sudo            => $sudo,
     python3         => $python3,
   }
 
   class { 'openstack_project::slave_common':
     include_pypy    => $include_pypy,
+    sudo            => $sudo,
   }
 
   if (! $thin) {

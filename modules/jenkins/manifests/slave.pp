@@ -2,7 +2,6 @@
 #
 class jenkins::slave(
   $ssh_key = '',
-  $sudo = false,
   $user = true,
   $python3 = false,
 ) {
@@ -178,23 +177,5 @@ class jenkins::slave(
     owner  => 'root',
     group  => 'root',
     mode   => '0755',
-  }
-
-  if ($sudo == true) {
-    file { '/etc/sudoers.d/jenkins-sudo':
-      ensure => present,
-      source => 'puppet:///modules/jenkins/jenkins-sudo.sudo',
-      owner  => 'root',
-      group  => 'root',
-      mode   => '0440',
-    }
-  }
-
-  file { '/etc/sudoers.d/jenkins-sudo-grep':
-    ensure => present,
-    source => 'puppet:///modules/jenkins/jenkins-sudo-grep.sudo',
-    owner  => 'root',
-    group  => 'root',
-    mode   => '0440',
   }
 }
