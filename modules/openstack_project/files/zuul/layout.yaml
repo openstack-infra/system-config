@@ -2346,6 +2346,10 @@ projects:
       - tempest-docs
       - tempest-coverage
       - tempest-branch-tarball
+    pre-release:
+      - tempest-tarball
+    release:
+      - tempest-tarball
     periodic-stable:
       - periodic-tempest-dsvm-full-havana
       - periodic-tempest-dsvm-neutron-havana
