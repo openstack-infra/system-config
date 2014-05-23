@@ -2500,13 +2500,13 @@ projects:
     post:
       - identity-api-tox-doc-publishdocs
 
-  - name: openstack/identity-specs
+  - name: openstack/keystone-specs
     check:
-      - gate-identity-specs-python27
-      - gate-identity-specs-docs
+      - gate-keystone-specs-python27
+      - gate-keystone-specs-docs
     gate:
-      - gate-identity-specs-python27
-      - gate-identity-specs-docs
+      - gate-keystone-specs-python27
+      - gate-keystone-specs-docs
 
   - name: openstack/image-api
     template:
