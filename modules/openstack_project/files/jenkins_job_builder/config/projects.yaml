@@ -1538,7 +1538,7 @@
       - pypi-jobs
 
 - project:
-    name: telemetry-specs
+    name: ceilometer-specs
     github-org: openstack
     node: bare-precise
     tarball-site: tarballs.openstack.org
