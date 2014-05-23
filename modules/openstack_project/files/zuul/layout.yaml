@@ -2526,11 +2526,11 @@ projects:
     post:
       - object-api-tox-doc-publishdocs
 
-  - name: openstack/object-specs
+  - name: openstack/swift-specs
     check:
-      - gate-object-specs-docs
+      - gate-swift-specs-docs
     gate:
-      - gate-object-specs-docs
+      - gate-swift-specs-docs
 
   - name: openstack/volume-api
     template:
