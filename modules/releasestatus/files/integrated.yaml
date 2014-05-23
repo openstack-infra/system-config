@@ -4,8 +4,15 @@ series: icehouse
 # Final release date
 releasedate: 2014-10-16
 
-# Short milestone codes, with number of weeks leading to them
-# The last one should be the release date
+# Short milestone codes, with number of weeks leading to them, not including
+# the milestone week. The last one should be the release date.
+#
+# For example, Juno cycle schedule:
+# https://wiki.openstack.org/wiki/Juno_Release_Schedule
+# [6, j1] - taking in account pre-summit weeks (not including j1 week)
+# [5, j2] - 5 full weeks between j1 and j2 (not including j1 or j2 weeks)
+# [5, j3] - 5 full weeks between j2 and j3 (not including j2 or j3 weeks)
+# [5, Oct 16] - 5 weeks for rc and release, not including release week
 milestones:
  - [6, j1]
  - [5, j2]
