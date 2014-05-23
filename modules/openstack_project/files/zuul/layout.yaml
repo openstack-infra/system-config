@@ -530,7 +530,7 @@ jobs:
     voting: false
   - name: gate-python-muranoclient-python33
     voting: false
-  - name: gate-murano-api-requirements
+  - name: gate-murano-requirements
     voting: false
   - name: gate-python-muranoclient-requirements
     voting: false
@@ -3943,21 +3943,21 @@ projects:
     gate:
       - noop
 
-  - name: stackforge/murano-api
+  - name: stackforge/murano
     template:
       - name: python-jobs
     check:
-      - gate-murano-api-requirements
+      - gate-murano-requirements
       - gate-murano-devstack-dsvm
     post:
-      - murano-api-branch-tarball
-      - hook-murano-api-rtfd
+      - murano-branch-tarball
+      - hook-murano-rtfd
     pre-release:
-      - murano-api-tarball
-      - hook-murano-api-rtfd
+      - murano-tarball
+      - hook-murano-rtfd
     release:
-      - murano-api-tarball
-      - hook-murano-api-rtfd
+      - murano-tarball
+      - hook-murano-rtfd
 
   - name: stackforge/murano-common
     check:

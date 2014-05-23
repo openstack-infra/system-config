@@ -71,7 +71,7 @@
       - pypi-jobs
 
 - project:
-    name: murano-api
+    name: murano
     github-org: stackforge
     node: bare-precise
     tarball-site: tarballs.openstack.org

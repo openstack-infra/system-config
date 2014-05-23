@@ -710,13 +710,11 @@
   upstream: git://github.com/rakhmerov/mistral-extra.git
   acl-config: /home/gerrit2/acls/stackforge/mistral.config
 - project: stackforge/MRaaS
+- project: stackforge/murano
+  upstream: git://github.com/Mirantis/murano-api.git
 - project: stackforge/murano-agent
   group: murano
   upstream: git://github.com/Mirantis/murano-agent.git
-  acl-config: /home/gerrit2/acls/stackforge/murano.config
-- project: stackforge/murano-api
-  group: murano
-  upstream: git://github.com/Mirantis/murano-api.git
   acl-config: /home/gerrit2/acls/stackforge/murano.config
 - project: stackforge/murano-common
   group: murano

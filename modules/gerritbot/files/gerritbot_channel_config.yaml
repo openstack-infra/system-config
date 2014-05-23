@@ -301,8 +301,8 @@ murano:
       - change-merged
       - x-vrif-minus-2
     projects:
+      - stackforge/murano
       - stackforge/murano-agent
-      - stackforge/murano-api
       - stackforge/murano-conductor
       - stackforge/murano-dashboard
       - stackforge/murano-deployment
