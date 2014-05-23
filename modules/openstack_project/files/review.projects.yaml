@@ -210,6 +210,8 @@
   description: Barbican is a ReST API designed for the secure storage, provisioning and management of secrets, including in OpenStack environments.
   upstream: git://github.com/cloudkeep/barbican.git
 - project: openstack/ceilometer
+- project: openstack/ceilometer-specs
+  group: ceilometer
 - project: openstack/cinder
   docimpact-group: openstack-manuals
 - project: openstack/cinder-specs
@@ -414,8 +416,6 @@
   group: swift
 - project: openstack/taskflow
   description: A library to complete workflows/tasks in HA manner
-- project: openstack/telemetry-specs
-  group: ceilometer
   upstream: git://github.com/eglynn/telemetry-specs.git
 - project: openstack/tempest
   options:
