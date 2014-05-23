@@ -209,8 +209,6 @@
 - project: openstack/barbican
   description: Barbican is a ReST API designed for the secure storage, provisioning and management of secrets, including in OpenStack environments.
   upstream: git://github.com/cloudkeep/barbican.git
-- project: openstack/baremetal-specs
-  group: ironic
 - project: openstack/ceilometer
 - project: openstack/cinder
   docimpact-group: openstack-manuals
@@ -259,6 +257,8 @@
 - project: openstack/ironic-python-agent
   description: A python agent for provisioning and deprovisioning Bare Metal servers.
   upstream: git://github.com/rackerlabs/teeth-agent.git
+  group: ironic
+- project: openstack/ironic-specs
   group: ironic
 - project: openstack/keystone
   docimpact-group: openstack-manuals
