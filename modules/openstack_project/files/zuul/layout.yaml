@@ -383,7 +383,7 @@ jobs:
     voting: false
   - name: check-tempest-dsvm-ironic-postgres-nv
     voting: false
-  - name: ^check-tempest-dsvm-virtual-ironic.*$
+  - name: check-tempest-dsvm-virtual-ironic-nv
     voting: false
   - name: ^(gate|check)-tempest-dsvm-cells$
     voting: false
@@ -871,6 +871,7 @@ projects:
     gate:
       - gate-tempest-dsvm-ironic
       - gate-tempest-dsvm-ironic-postgres
+      - gate-tempest-dsvm-virtual-ironic
     post:
       - ironic-upstream-translation-update
     pre-release:
