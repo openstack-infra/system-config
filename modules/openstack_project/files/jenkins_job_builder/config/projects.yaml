@@ -552,7 +552,7 @@
       - translation-jobs
 
 - project:
-    name: orchestration-specs
+    name: heat-specs
     github-org: openstack
     node: bare-precise
     tarball-site: tarballs.openstack.org

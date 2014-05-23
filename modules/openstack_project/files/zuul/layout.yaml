@@ -821,11 +821,11 @@ projects:
     periodic:
       - heat-propose-translation-update
 
-  - name: openstack/orchestration-specs
+  - name: openstack/heat-specs
     check:
-      - gate-orchestration-specs-docs
+      - gate-heat-specs-docs
     gate:
-      - gate-orchestration-specs-docs
+      - gate-heat-specs-docs
 
   - name: openstack/horizon
     template:
