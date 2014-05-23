@@ -342,8 +342,8 @@ openstack-ironic:
       - change-merged
       - x-vrif-minus-2
     projects:
-      - openstack/baremetal-specs
       - openstack/ironic
+      - openstack/ironic-specs
       - openstack/ironic-python-agent
       - openstack/python-ironicclient
       - stackforge/pyghmi

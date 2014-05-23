@@ -1932,7 +1932,7 @@
       - gate-{name}-chef-unit
 
 - project:
-    name: baremetal-specs
+    name: ironic-specs
     github-org: openstack
     node: bare-precise
     tarball-site: tarballs.openstack.org
