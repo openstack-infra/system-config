@@ -71,6 +71,7 @@ channels:
   - name: openstack-climate
   - name: openstack-cloudkeep
   - name: openstack-community
+  - name: openstack-containers
   - name: openstack-dev
   - name: openstack-dns
   - name: openstack-doc
