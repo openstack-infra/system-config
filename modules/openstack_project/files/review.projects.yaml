@@ -915,6 +915,7 @@
 - project: stackforge/refstack
   description: Vendor-facing API for registration of interop-compliance
   upstream: git://github.com/dlenwell/refstack
+  use-storyboard: true
 - project: stackforge/rubick
   description: Rule-based diagnostics of configuration of OpenStack platform
   upstream: git://github.com/MirantisLabs/rubick
