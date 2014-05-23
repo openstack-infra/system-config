@@ -1,0 +1,10 @@
+Verified+2: Jenkins
+Code-Review+1: Adam Gandelman <adamg@ubuntu.com>
+Code-Review+2: Clark Boylan <cboylan@sapwetik.org>
+Code-Review+2: Sergey Lukjanov <slukjanov@mirantis.com>
+Workflow+1: Sergey Lukjanov <slukjanov@mirantis.com>
+Submitted-by: Jenkins
+Submitted-at: Fri, 23 May 2014 23:19:09 +0000
+Reviewed-on: https://review.openstack.org/95220
+Project: openstack-infra/config
+Branch: refs/heads/master
