@@ -118,7 +118,7 @@ pipelines:
     trigger:
       gerrit:
         - event: ref-updated
-          ref: ^refs/tags/([0-9]+\.)+[0-9]*(alpha|beta|candidate|rc|a|b|c|r|g)[0-9]*$
+          ref: ^refs/tags/([0-9]+\.?)+[0-9]*(alpha|beta|candidate|rc|a|b|c|r|g)[0-9]*$
 
   - name: release
     description: When a commit is tagged as a release, this pipeline runs jobs that publish archives and documentation.
@@ -127,7 +127,7 @@ pipelines:
     trigger:
       gerrit:
         - event: ref-updated
-          ref: ^refs/tags/([0-9]+\.)+[0-9]+$
+          ref: ^refs/tags/([0-9]+\.)*[0-9]+$
 
   - name: silent
     description: This pipeline is used for silently testing new jobs.
