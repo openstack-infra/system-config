@@ -116,3 +116,52 @@ EOF
 
     fi
 }
+
+# Setup global variables LEVELS and LKEYWORDS
+function setup_loglevel_vars ()
+{
+    # Strings for various log levels
+    LEVELS="info warning error critical"
+    # Keywords for each log level:
+    declare -g -A LKEYWORD
+    LKEYWORD['info']='_LI'
+    LKEYWORD['warning']='_LW'
+    LKEYWORD['error']='_LE'
+    LKEYWORD['critical']='_LC'
+}
+
+# Setup transifex configuration for log level message translation.
+# Needs variables setup via setup_loglevel_vars.
+function setup_loglevel_project ()
+{
+    project=$1
+
+    for level in $LEVELS ; do
+        # Bootstrapping: Create file if it does not exist yet,
+        # otherwise "tx set" will fail.
+        if [ ! -e  ${project}/locale/${project}-log-${level}.pot ]
+        then
+            touch ${project}/locale/${project}-log-${level}.pot
+        fi
+        tx set --auto-local -r ${project}.${project}-log-${level}-translations \
+            "${project}/locale/<lang>/LC_MESSAGES/${project}-log-${level}.po" \
+            --source-lang en \
+            --source-file ${project}/locale/${project}-log-${level}.pot -t PO \
+            --execute
+    done
+}
+
+# Run extract_messages for user visible messages and log messages.
+# Needs variables setup via setup_loglevel_vars.
+function extract_messages_log ()
+{
+    project=$1
+
+    # Update the .pot files
+    python setup.py extract_messages
+    for level in $LEVELS ; do
+        python setup.py extract_messages --no-default-keywords \
+            --keyword ${LKEYWORD[$level]} \
+            --output-file ${project}/locale/${project}-log-${level}.pot
+    done
+}
