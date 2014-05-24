@@ -17,6 +17,7 @@
 # The script is to pull the translations from Transifex,
 # and push to Gerrit.
 
+ORG="openstack"
 PROJECT=$1
 
 DocFolder="doc"
@@ -26,34 +27,11 @@ fi
 
 COMMIT_MSG="Imported Translations from Transifex"
 
-git config user.name "OpenStack Proposal Bot"
-git config user.email "openstack-infra@lists.openstack.org"
-git config gitreview.username "proposal-bot"
+source /usr/local/jenkins/slave_scripts/common_translation_update.sh
 
-git review -s
-
-# See if there is an open change in the transifex/translations topic
-# If so, get the change id for the existing change for use in the commit msg.
-change_info=`ssh -p 29418 proposal-bot@review.openstack.org gerrit query --current-patch-set status:open project:openstack/$PROJECT topic:transifex/translations owner:proposal-bot`
-previous=`echo "$change_info" | grep "^  number:" | awk '{print $2}'`
-if [ "x${previous}" != "x" ] ; then
-    change_id=`echo "$change_info" | grep "^change" | awk '{print $2}'`
-    # read return a non zero value when it reaches EOF. Because we use a
-    # heredoc here it will always reach EOF and return a nonzero value.
-    # Disable -e temporarily to get around the read.
-    set +e
-    read -d '' COMMIT_MSG <<EOF
-Imported Translations from Transifex
-
-Change-Id: $change_id
-EOF
-    set -e
-fi
-
-# Initialize the transifex client, if there's no .tx directory
-if [ ! -d .tx ] ; then
-    tx init --host=https://www.transifex.com
-fi
+setup_git
+setup_review "$ORG" "$PROJECT"
+setup_translation
 
 # Generate pot one by one
 for FILE in ${DocFolder}/*
@@ -116,13 +94,4 @@ do
   fi
 done
 
-# Don't send a review if nothing has changed.
-if [ `git diff --cached |wc -l` -gt 0 ]
-then
-    # Commit and review
-    git commit -F- <<EOF
-$COMMIT_MSG
-EOF
-    git review -t transifex/translations
-
-fi
+send_patch

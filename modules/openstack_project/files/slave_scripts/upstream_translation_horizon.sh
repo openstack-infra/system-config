@@ -23,13 +23,11 @@ then
     exit 0
 fi
 
-git config user.name "OpenStack Jenkins"
-git config user.email "jenkins@openstack.org"
+source /usr/local/jenkins/slave_scripts/common_translation_update.sh
 
-# Initialize the transifex client, if there's no .tx directory
-if [ ! -d .tx ] ; then
-    tx init --host=https://www.transifex.com
-fi
+setup_git
+setup_translation
+
 # Horizon JavaScript Translations
 tx set --auto-local -r ${PROJECT}.${PROJECT}-js-translations \
 "${PROJECT}/locale/<lang>/LC_MESSAGES/djangojs.po" --source-lang en \
