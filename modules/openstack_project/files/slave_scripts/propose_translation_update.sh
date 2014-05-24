@@ -44,20 +44,60 @@ fi
 if [ ! -d .tx ] ; then
     tx init --host=https://www.transifex.com
 fi
+
+# User visible strings
 tx set --auto-local -r ${PROJECT}.${PROJECT}-translations "${PROJECT}/locale/<lang>/LC_MESSAGES/${PROJECT}.po" --source-lang en --source-file ${PROJECT}/locale/${PROJECT}.pot -t PO --execute
+
+# Strings for various log levels
+LEVELS="info warning error critical"
+# Keywords for each log level:
+declare -A LKEYWORD
+LKEYWORD['info']='_LI'
+LKEYWORD['warning']='_LW'
+LKEYWORD['error']='_LE'
+LKEYWORD['critical']='_LC'
+
+for level in $LEVELS ; do
+  # Bootstrapping: Create file if it does not exist yet, otherwise "tx
+  # set" will fail
+  if [ ! -e  ${PROJECT}/locale/${PROJECT}-log-${level}.pot ]
+  then
+    touch ${PROJECT}/locale/${PROJECT}-log-${level}.pot
+  fi
+  tx set --auto-local -r ${PROJECT}.${PROJECT}-log-${level}-translations \
+    "${PROJECT}/locale/<lang>/LC_MESSAGES/${PROJECT}.po-log-${level}" \
+    --source-lang en \
+    --source-file ${PROJECT}/locale/${PROJECT}-log-${level}.pot -t PO \
+    --execute
+done
 
 # Pull upstream translations of files that are at least 75 %
 # translated
 tx pull -a -f --minimum-perc=75
 
-# Update the .pot file
+# Update the .pot files
 python setup.py extract_messages
-PO_FILES=`find ${PROJECT}/locale -name '*.po'`
+for level in $LEVELS ; do
+  python setup.py extract_messages --no-default-keywords \
+    --keyword ${LKEYWORD[$level]} \
+    --output-file ${PROJECT}/locale/${PROJECT}-log-${level}.pot
+done
+
+PO_FILES=`find ${PROJECT}/locale -name "${PROJECT}.po"`
 if [ -n "$PO_FILES" ]
 then
     # Use updated .pot file to update translations
     python setup.py update_catalog --no-fuzzy-matching  --ignore-obsolete=true
 fi
+for level in $LEVELS ; do
+  PO_FILES=`find ${PROJECT}/locale -name "${PROJECT}-log-${level}.po"`
+  if [ -n "$PO_FILES" ]
+  then
+    python setup.py update_catalog --no-fuzzy-matching \
+        --ignore-obsolete=true --domain=${PROJECT}-log-${level}
+  fi
+done
+
 # Add all changed files to git
 git add $PROJECT/locale/*
 
