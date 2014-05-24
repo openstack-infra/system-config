@@ -16,9 +16,9 @@ ORG=$1
 PROJECT=$2
 COMMIT_MSG="Imported Translations from Transifex"
 
-git config user.name "OpenStack Proposal Bot"
-git config user.email "openstack-infra@lists.openstack.org"
-git config gitreview.username "proposal-bot"
+source /usr/local/jenkins/slave_scripts/common_translation_update.sh
+
+setup_git 
 
 git review -s
 
@@ -40,11 +40,8 @@ EOF
     set -e
 fi
 
-# Initialize the transifex client, if there's no .tx directory
-if [ ! -d .tx ] ; then
-    tx init --host=https://www.transifex.com
-fi
-tx set --auto-local -r ${PROJECT}.${PROJECT}-translations "${PROJECT}/locale/<lang>/LC_MESSAGES/${PROJECT}.po" --source-lang en --source-file ${PROJECT}/locale/${PROJECT}.pot -t PO --execute
+setup_translation
+setup_project "$PROJECT"
 
 # Pull upstream translations of files that are at least 75 %
 # translated

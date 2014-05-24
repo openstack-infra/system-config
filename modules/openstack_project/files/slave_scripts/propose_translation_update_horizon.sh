@@ -16,9 +16,9 @@ ORG=openstack
 PROJECT=horizon
 COMMIT_MSG="Imported Translations from Transifex"
 
-git config user.name "OpenStack Proposal Bot"
-git config user.email "openstack-infra@lists.openstack.org"
-git config gitreview.username "proposal-bot"
+source /usr/local/jenkins/slave_scripts/common_translation_update.sh
+
+setup_git
 
 git review -s
 
@@ -40,10 +40,7 @@ EOF
     set -e
 fi
 
-# Initialize the transifex client, if there's no .tx directory
-if [ ! -d .tx ] ; then
-    tx init --host=https://www.transifex.com
-fi
+setup_translation
 
 # Horizon JavaScript Translations
 tx set --auto-local -r ${PROJECT}.${PROJECT}-js-translations \
