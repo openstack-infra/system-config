@@ -25,8 +25,10 @@ setup_git
 setup_translation
 setup_project "$PROJECT"
 
-# Update the .pot file
-python setup.py extract_messages
+setup_loglevel_vars
+setup_loglevel_project "$PROJECT"
+
+extract_messages_log "$PROJECT"
 
 # Add all changed files to git
 git add $PROJECT/locale/*
@@ -34,5 +36,14 @@ git add $PROJECT/locale/*
 if [ ! `git diff-index --quiet HEAD --` ]
 then
     # Push .pot changes to transifex
-    tx --debug --traceback push -s
+    tx --debug --traceback push -s -r ${PROJECT}.${PROJECT}-translations
+    for level in $LEVELS ; do
+        # Only push if there is actual content in the file. We check
+        # that the file contains at least one non-empty msgid string.
+        if grep -q 'msgid "[^"]' ${PROJECT}/locale/${PROJECT}-log-${level}.pot
+        then
+            tx --debug --traceback push -s \
+                -r ${PROJECT}.${PROJECT}-log-${level}-translations
+        fi
+    done
 fi
