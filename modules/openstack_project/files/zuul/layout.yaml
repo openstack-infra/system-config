@@ -577,6 +577,8 @@ jobs:
     voting: false
   - name: check-tripleo-ironic-undercloud-precise
     voting: false
+  - name: gate-trove-buildimage-mysql
+    voting: false
 # puppet-openstack targets
   - name: gate-puppet-vswitch-puppet-lint
     voting: false
@@ -2460,6 +2462,8 @@ projects:
       - noop
     gate:
       - noop
+    experimental:
+      - gate-trove-buildimage-mysql
 
 # TODO: add docs
   - name: openstack/tuskar-ui
