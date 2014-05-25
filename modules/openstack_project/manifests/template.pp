@@ -48,6 +48,21 @@ class openstack_project::template (
     install_resolv_conf => $install_resolv_conf
   }
 
+  if ($::in_chroot) {
+    notify { 'rsyslog in chroot':
+      message => 'rsyslog not refreshed, running in chroot',
+    }
+  } else {
+    File['/etc/rsyslog.d/50-default.conf'] ~> Service['rsyslog']
+    File['/etc/rsyslog.d/99-maxsize.conf'] ~> Service['rsyslog']
+  }
+
+  service { 'rsyslog':
+    ensure     => running,
+    enable     => true,
+    hasrestart => true,
+  }
+
   if $::osfamily == 'Debian' {
     # Make sure dig is installed
     package { 'dnsutils':
@@ -63,7 +78,6 @@ class openstack_project::template (
       source  =>
         'puppet:///modules/openstack_project/rsyslog.d_50-default.conf',
       replace => true,
-      notify  => Service['rsyslog'],
     }
 
     # Ubuntu installs their whoopsie package by default, but it eats through
@@ -82,13 +96,6 @@ class openstack_project::template (
     owner   => 'root',
     group   => 'root',
     mode    => '0644',
-    notify  => Service['rsyslog'],
-  }
-
-  service { 'rsyslog':
-    ensure     => running,
-    enable     => true,
-    hasrestart => true,
   }
 
   if ($::osfamily == 'RedHat') {

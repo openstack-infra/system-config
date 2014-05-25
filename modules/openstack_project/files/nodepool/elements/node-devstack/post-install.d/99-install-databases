@@ -1,0 +1,30 @@
+#!/bin/bash
+
+set -eu
+set -o pipefail
+
+# TODO - need to handle redhat :(
+
+cp /sbin/start-stop-daemon.REAL /sbin/start-stop-daemon
+
+if [ -f /sbin/initctl.REAL ]
+then
+    cp /sbin/initctl.REAL /sbin/initctl
+fi
+
+mv /usr/sbin/policy-rc.d /usr/sbin/disable-policy-rc.d
+
+
+# Puppet doesn't return nonzero if some things fail by default.
+# Use detailed exit codes to get that info and determine whether
+# the return code indicates failure.
+set +e
+puppet apply --detailed-exitcodes --modulepath=/opt/build_git/openstack-infra/config/modules:/etc/puppet/modules \
+    -e "class {'openstack_project::slave_db': all_mysql_privs => true}"
+PUPPET_RETURN=$?
+if [ "$PUPPET_RETURN" -eq 4 ] || [ "$PUPPET_RETURN" -eq 6 ] ; then
+    mv /usr/sbin/disable-policy-rc.d /usr/sbin/policy-rc.d
+    exit $PUPPET_RETURN
+fi
+set -e
+mv /usr/sbin/disable-policy-rc.d /usr/sbin/policy-rc.d
