@@ -17,8 +17,7 @@
 # This installs unbound in its default configuration as a caching
 # recursive resolver.
 
-class unbound (
-) {
+class unbound {
 
   if ($::osfamily == 'Debian') {
     # This file differs from that in the package only by setting
