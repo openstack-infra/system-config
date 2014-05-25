@@ -6,6 +6,7 @@
         { "project": "neutron" },
         { "project": "cinder" },
         { "project": "horizon" },
+        { "project": "sahara" },
         { "project": "swift" },
         { "project": "openstack-manuals", "title": "Manuals" },
         { "project": "openstack-api-site", "title": "API Site" },
