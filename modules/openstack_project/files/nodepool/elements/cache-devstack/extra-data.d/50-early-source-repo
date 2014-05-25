@@ -1,0 +1,209 @@
+#!/bin/bash
+
+# Copyright (c) 2012-2014 Hewlett-Packard Development Company, L.P.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#    http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
+# implied.
+#
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# We need a copy of the devstack repo so that we can read it so that
+# we can generate the list of repos that we need to get. We'd like to
+# use the normal repo fetching and caching routines for that, so use
+# a modified version.
+
+# The bulk of this code is copied from
+# elements/source-repositories/extra-data.d/98-source-repositories
+# Most of it should be removed when we can source and call the
+# functions directly
+
+set -eu
+
+# If the old cache exists, move it to the new name
+function make_new_cache(){
+    local OLD_CACHE_BASE=$1
+    local CACHE_BASE=$2
+
+    # If the old cache name exists, move it to the new cache name
+    if [ -e "$OLD_CACHE_BASE" ] ; then
+        if [ ! -e "$CACHE_BASE" ] ; then
+            mv -n $OLD_CACHE_BASE $CACHE_BASE
+        else
+            echo "Not replacing new cache location with old cache"
+        fi
+    fi
+}
+
+# Gets repositories or individual files listed in the a repository file
+# and places them in the specified destination path.
+# The format of the repository file is one or more lines matching
+# <name> <type> <destination> <location> [<ref>]
+function get_repos_for_element(){
+    local REPO_SOURCES=$1
+    local CACHE_URL=$TMP_HOOKS_PATH/bin/cache-url
+
+    local REGEX="^([^ ]+) (git|tar|file|package) ?(/[^ ]+)? ?([^ ]+)? ?([^ ]*)$"
+
+    while read line; do
+        # expand variables
+        line=$(eval echo $line)
+
+        # ignore blank lines and lines beginning in '#'
+        [[ "$line" == \#* ]] || [[ -z "$line" ]] && continue
+
+        if [[ "$line" =~ $REGEX ]]  ; then
+            local REPONAME=${BASH_REMATCH[1]}
+            local REPOTYPE=${BASH_REMATCH[2]}
+            local REPOPATH=${BASH_REMATCH[3]}
+            local REPOLOCATION=${BASH_REMATCH[4]}
+            local REPO_ORIG_LOCATION=$REPOLOCATION
+            local REPOREF=${BASH_REMATCH[5]:-master}
+
+            local REPO_DEST=$TMP_MOUNT_PATH$REPOPATH
+            local REPO_SUB_DIRECTORY=$(dirname $REPO_DEST)
+
+            # REPOTYPE can be overridden with DIB_REPOTYPE_{name}
+            local REPOTYPE_OVERRIDE=DIB_REPOTYPE_${REPONAME//[^A-Za-z0-9]/_}
+            REPOTYPE=${!REPOTYPE_OVERRIDE:-$REPOTYPE}
+
+            # REPOLOCATION can be overridden with DIB_REPOLOCATION_{name}
+            local REPOLOCATION_OVERRIDE=DIB_REPOLOCATION_${REPONAME//[^A-Za-z0-9]/_}
+            REPOLOCATION=${!REPOLOCATION_OVERRIDE:-$REPOLOCATION}
+
+            # REPOREF can be overridden with DIB_REPOREF_{name}
+            local REPOREF_OVERRIDE=DIB_REPOREF_${REPONAME//[^A-Za-z0-9]/_}
+            REPOREF=${!REPOREF_OVERRIDE:-$REPOREF}
+
+            # Determine a unique cache path for this repo
+            CACHE_NAME=$(echo "${REPOTYPE}_${REPOLOCATION}" | sha1sum | awk '{ print $1 }' )
+            OLD_CACHE_PATH=${CACHE_BASE}/${CACHE_NAME}
+            # Add the repo name to the sha1sum for readability
+            CACHE_NAME=${REPONAME//[^A-Za-z0-9]/_}_${CACHE_NAME}
+            CACHE_PATH=${CACHE_BASE}/$CACHE_NAME
+            make_new_cache $OLD_CACHE_PATH $CACHE_PATH
+
+            # Return if install type is not source
+            local INSTALL_TYPE_VAR=DIB_INSTALLTYPE_${REPONAME//[^A-Za-z0-9]/_}
+            local INSTALL_TYPE=${!INSTALL_TYPE_VAR:-source}
+            if [ ! $INSTALL_TYPE = "source" ]; then
+                echo "$REPONAME install type not set to source"
+                continue
+            fi
+
+            case $REPOTYPE in
+            git)
+                if [ -z "${!REPOLOCATION_OVERRIDE:-""}" -a -n "${DIB_GITREPOBASE:-""}" ] ; then
+                    # Transform the current repo base to the new one
+                    local NEW_REPOLOCATION=$(echo $REPOLOCATION |\
+                        sed "s,^[^:]\+://[^/]\+/\(~[^/]\+\)\?\(.*\)$,${DIB_GITREPOBASE}\2,g")
+                    echo "Transformed ${REPOLOCATION} to ${NEW_REPOLOCATION}"
+                    REPOLOCATION=$NEW_REPOLOCATION
+                    # Also update the cache location
+                    CACHE_NAME=$(echo "${REPOTYPE}_${REPOLOCATION}" | sha1sum | awk '{ print $1 }' )
+                    CACHE_PATH=~/.cache/image-create/repository-sources/$CACHE_NAME
+                fi
+                sudo mkdir -p $REPO_SUB_DIRECTORY
+
+                if [ ! -e "$CACHE_PATH" ] ; then
+                    echo "Caching $REPONAME from $REPOLOCATION in $CACHE_PATH"
+                    git clone $REPOLOCATION $CACHE_PATH.tmp
+                    mv ${CACHE_PATH}{.tmp,}
+                fi
+
+                HAS_REF=$(git --git-dir=$CACHE_PATH/.git name-rev $REPOREF 2>/dev/null || true)
+                if [ -z "$DIB_OFFLINE" -o -z "$HAS_REF" ] ; then
+                    echo "Updating cache of $REPOLOCATION in $CACHE_PATH with ref $REPOREF"
+                    git --git-dir=$CACHE_PATH/.git fetch --update-head-ok $REPOLOCATION +refs/heads/*:refs/heads/*
+                fi
+
+                echo "Cloning from $REPONAME cache and applying ref $REPOREF"
+                sudo git clone $CACHE_PATH $REPO_DEST
+                pushd $REPO_DEST
+                sudo git fetch $CACHE_PATH $REPOREF
+                sudo git reset --hard FETCH_HEAD
+                # Get the reference in use
+                git_ref=$(git rev-parse FETCH_HEAD)
+                popd
+
+                # Write the reference being used into the source-repositories manifest
+                echo "$REPONAME git $REPOPATH $REPOLOCATION $git_ref" >> $GIT_MANIFEST
+                ;;
+            tar)
+                # The top level directory of the tarball mightn't have a fixed name i.e.
+                # it could contain version numbers etc... so we write it to a tmpdir
+                # the then move the contents into the directory we want it in, this does
+                # assume the tarball only contains a single top level directory
+                local tmpdir=$(mktemp --tmpdir=$TMP_MOUNT_PATH/tmp -d)
+                if [ -n "$CACHE_PATH" ] ; then
+                    echo "Caching $REPONAME tarball from $REPOLOCATION in $CACHE_PATH"
+                    if [ ! -f "$CACHE_PATH" -o -z "$DIB_OFFLINE" ] ; then
+                        $CACHE_URL $REPOLOCATION $CACHE_PATH
+                    fi
+                    tar -C $tmpdir -xzf $CACHE_PATH
+                else
+                    echo "Fetching $REPONAME tarball from $REPOLOCATION"
+                    curl $REPOLOCATION | tar -C $tmpdir -xzf -
+                fi
+                sudo mkdir -p $REPO_DEST
+                sudo mv $tmpdir/*/* $REPO_DEST
+                rm -rf $tmpdir
+                ;;
+            file)
+                sudo mkdir -p $REPO_SUB_DIRECTORY
+                if [ -n "$CACHE_PATH" ] ; then
+                    echo "Caching $REPONAME file from $REPOLOCATION in $CACHE_PATH"
+                    if [ ! -f "$CACHE_PATH" -o -z "$DIB_OFFLINE" ] ; then
+                        $CACHE_URL $REPOLOCATION $CACHE_PATH
+                    fi
+                    sudo cp $CACHE_PATH $REPO_DEST
+                else
+                    echo "Fetching $REPONAME file from $REPOLOCATION"
+                    sudo curl $REPOLOCATION -o $REPO_DEST
+                fi
+                ;;
+            *)
+                echo "Unsupported repository type: $REPOTYPE"
+                return 1
+                ;;
+            esac
+
+            # Capture the in-instance repository path for later review / other
+            # elements (like a pypi dependency cache).
+            echo "$REPOPATH" | sudo dd of=$TMP_MOUNT_PATH/etc/dib-source-repositories oflag=append conv=notrunc
+
+        else
+            echo "Couldn't parse '$line' as a source repository"
+            return 1
+        fi
+    done < $REPO_SOURCES
+}
+
+CACHE_BASE=~/.cache/image-create/source-repositories
+OLD_CACHE_BASE=~/.cache/image-create/repository-sources
+make_new_cache $OLD_CACHE_BASE $CACHE_BASE
+mkdir -p $CACHE_BASE
+# Use the IMAGE_NAME from the calling script, and make it unique with the temporary path
+GIT_MANIFEST_NAME=dib-manifest-git-$(basename ${IMAGE_NAME})
+GIT_MANIFEST_CACHE_NAME=${GIT_MANIFEST_NAME}_$(dirname ${TMP_MOUNT_PATH##*.})
+GIT_MANIFEST=$CACHE_BASE/${GIT_MANIFEST_CACHE_NAME}
+rm -f $GIT_MANIFEST
+
+# Get source repositories for the target
+echo "devstack git /opt/git/openstack-dev/devstack git://git.openstack.org/openstack-dev/devstack.git" > $TMP_HOOKS_PATH/early-source-repository-config
+for _SOURCEREPO in $(find $TMP_HOOKS_PATH -maxdepth 1 -name "early-source-repository-*" -not -name '*~'); do
+    get_repos_for_element $_SOURCEREPO
+done
+
+# Copy the manifest into the image if it exists (there may be no git repositories used)
+if [ -e "$GIT_MANIFEST" ] ; then
+    sudo cp $GIT_MANIFEST $TMP_MOUNT_PATH/${DIB_MANIFEST_IMAGE_DIR}/$GIT_MANIFEST_NAME
+fi
