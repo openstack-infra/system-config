@@ -92,4 +92,27 @@ class openstack_project::slave_common(
       }
     }
   }
+
+  # install linux-headers depending on OS version
+  case $::osfamily {
+    'RedHat': {
+      $header_packages = ['kernel-devel', 'kernel-headers']
+    }
+    'Debian': {
+      if ($::operatingsystem == 'Debian') {
+          # install depending on kernel release
+          $header_packages = [ "linux-headers-${::kernelrelease}", ]
+      }
+      else {
+        $header_packages = ['linux-headers-virtual', 'linux-headers-generic']
+      }
+    }
+    default: {
+      fail("Unsupported osfamily: ${::osfamily}.")
+    }
+  }
+
+  package { $header_packages:
+    ensure => present
+  }
 }
