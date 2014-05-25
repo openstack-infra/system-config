@@ -1,3 +1,4 @@
+
 #
 # Default: should at least behave like an openstack server
 #
