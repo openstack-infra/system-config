@@ -1,0 +1,1 @@
+get-pip file /root/get-pip.py https://bootstrap.pypa.io/get-pip.py
