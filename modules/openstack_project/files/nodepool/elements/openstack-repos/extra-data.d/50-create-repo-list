@@ -1,0 +1,54 @@
+#!/usr/bin/env python
+
+# Copyright (C) 2011-2013 OpenStack Foundation
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#    http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
+# implied.
+#
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import os
+import urllib2
+import yaml
+
+URL = ('https://git.openstack.org/cgit/openstack-infra/config/plain/'
+       'modules/openstack_project/files/review.projects.yaml')
+
+TMP_HOOKS_PATH=os.environ['TMP_HOOKS_PATH']
+PROJECTS_REPOS=os.path.join(TMP_HOOKS_PATH, 'source-repository-projects-yaml')
+
+
+def main():
+    projects = [f['project'] for f in yaml.load(urllib2.urlopen(URL))]
+    with open(PROJECTS_REPOS, 'w') as projects_list:
+        for project in projects:
+            args = dict(
+                name=os.path.basename(project),
+                location=os.path.join('/opt/git', project),
+                url='git://git.openstack.org/%s.git' % project)
+
+            projects_list.write("%(name)s git %(location)s %(url)s\n" % args)
+        # Clone openstack-infra/config again so that we can use it to build
+        # the image without interferring with the slave repo cache.
+        project = 'openstack-infra/config'
+        args = dict(
+            name=os.path.basename(project),
+            location=os.path.join('/opt/build_git', project),
+            url=os.environ.get('CONFIG_SOURCE',
+                               'git://git.openstack.org/%s.git' % project),
+            ref=os.environ.get('CONFIG_REF', 'master'))
+        projects_list.write(
+                "%(name)s git %(location)s %(url)s %(ref)s\n" % args)
+
+
+if __name__ == '__main__':
+    main()
