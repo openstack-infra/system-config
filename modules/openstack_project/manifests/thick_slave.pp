@@ -101,7 +101,7 @@ class openstack_project::thick_slave(
     require  => Package[$::openstack_project::jenkins_params::rubygems_package],
   }
 
-  if ($::in_chroot == 'true') {
+  if ($::in_chroot == true) {
     notify { 'databases in chroot':
       message => 'databases and grants not created, running in chroot',
     }
