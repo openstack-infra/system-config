@@ -1,0 +1,37 @@
+#!/bin/bash
+# Copyright (C) 2011-2013 OpenStack Foundation
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#    http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
+# implied.
+#
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# Remove additional sources used to install puppet or special version of pypi.
+# We do this because leaving these sources in place causes every test that
+# does an apt-get update to hit those servers which may not have the uptime
+# of our local mirrors.
+
+set -e
+
+OS_FAMILY=$(facter osfamily)
+if [ "$OS_FAMILY" == "Debian" ] ; then
+    rm -f /etc/apt/sources.list.d/*
+    apt-get update
+elif [ "$OS_FAMILY" == "RedHat" ] ; then
+    # Can't delete * in yum.repos.d since all of the repos are listed there.
+    # Be specific instead.
+    if [ -f /etc/yum.repos.d/puppetlabs.repo ] ; then
+        sudo rm -f /etc/yum.repos.d/puppetlabs.repo
+    fi
+fi
+
+rm /usr/local/bin/prepare-node
