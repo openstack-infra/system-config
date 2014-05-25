@@ -3,6 +3,62 @@ class openstack_project::slave_db(
   $all_mysql_privs = false,
 ){
 
+  $root_db_password = 'insecure_slave'
+
+  if ($::operatingsystem == 'Fedora') and ($::operatingsystemrelease >= 19) {
+    $package_name = 'community-mysql-server'
+  } else {
+    $package_name = $mysql::params::server_package_name
+  }
+
+  class {'mysql::server':
+    config_hash    =>  {
+      'root_password'  => $root_db_password,
+      'default_engine' => 'MyISAM',
+      'bind_address'   => '127.0.0.1',
+    },
+    package_name   => $package_name,
+  }
+
+  # The puppetlabs postgres module does not manage the postgres user
+  # and group for us. Create them here to ensure concat can create
+  # dirs and files owned by this user and group.
+  user { 'postgres':
+    ensure  => present,
+    gid     => 'postgres',
+    system  => true,
+    require => Group['postgres'],
+  }
+
+  group { 'postgres':
+    ensure => present,
+    system => true,
+  }
+
+  if ($::lsbdistcodename == 'trusty') {
+    class { 'postgresql::globals':
+      version => '9.3',
+      before  => Class['postgresql::server'],
+    }
+  }
+
+  class { 'postgresql::server':
+    postgres_password => $root_db_password,
+    manage_firewall   => false,
+    # The puppetlabs postgres module incorrectly quotes ip addresses
+    # in the postgres server config. Use localhost instead.
+    listen_addresses  => ['localhost'],
+    require           => [
+      User['postgres'],
+      Class['postgresql::params'],
+    ],
+  }
+
+  class { 'postgresql::lib::devel':
+    require => Class['postgresql::params'],
+  }
+
+
   include mysql::server::account_security
 
   mysql::db { 'openstack_citest':
@@ -91,4 +147,3 @@ class openstack_project::slave_db(
   }
 
 }
-# vim:sw=2:ts=2:expandtab:textwidth=79
