@@ -31,6 +31,16 @@ class iptables(
     hasrestart => $::iptables::params::service_has_restart,
   }
 
+  if ($::in_chroot == 'true') {
+    notify { 'iptables in chroot':
+      message => 'Iptables not refreshed, running in chroot',
+    }
+    $notify_iptables = undef
+  }
+  else {
+    $notify_iptables = Service['iptables']
+  }
+
   file { $::iptables::params::rules_dir:
     ensure     => directory,
     require    => Package['iptables'],
@@ -49,7 +59,7 @@ class iptables(
       File[$::iptables::params::rules_dir],
     ],
     # When this file is updated, make sure the rules get reloaded.
-    notify  => Service['iptables'],
+    notify  => $notify_iptables,
   }
 
   file { $::iptables::params::ipv4_rules:
@@ -59,7 +69,7 @@ class iptables(
     mode    => '0640',
     target  => "${::iptables::params::rules_dir}/rules",
     require => File["${::iptables::params::rules_dir}/rules"],
-    notify  => Service['iptables'],
+    notify  => $notify_iptables,
   }
 
   file { $::iptables::params::ipv6_rules:
@@ -73,7 +83,7 @@ class iptables(
       File[$::iptables::params::rules_dir],
     ],
     # When this file is updated, make sure the rules get reloaded.
-    notify  => Service['iptables'],
+    notify  => $notify_iptables,
     replace => true,
   }
 }
