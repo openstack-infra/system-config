@@ -101,82 +101,17 @@ class openstack_project::thick_slave(
     require  => Package[$::openstack_project::jenkins_params::rubygems_package],
   }
 
-  if ($::in_chroot == 'true') {
+  if ($::in_chroot) {
     notify { 'databases in chroot':
       message => 'databases and grants not created, running in chroot',
     }
-    $manage_mysql_service = false
-    $root_db_password = undef
   } else {
-    $manage_mysql_service = true
-    $root_db_password = 'insecure_slave'
     class { 'openstack_project::slave_db':
-      all_mysql_privs => $all_mysql_privs,
-      require         => [
+      all_mysql_privs  => $all_mysql_privs,
+      require          => [
         Class['postgresql::server'],
         Class['mysql::server'],
       ]
     }
   }
-
-  if ($::operatingsystem == 'Fedora') and ($::operatingsystemrelease >= 19) {
-    class {'mysql::server':
-      config_hash    =>  {
-        'root_password'  => $root_db_password,
-        'default_engine' => 'MyISAM',
-        'bind_address'   => '127.0.0.1',
-      },
-      package_name   => 'community-mysql-server',
-      manage_service => $manage_mysql_service,
-    }
-  } else {
-    class {'mysql::server':
-      config_hash    =>  {
-        'root_password'  => $root_db_password,
-        'default_engine' => 'MyISAM',
-        'bind_address'   => '127.0.0.1',
-      },
-      manage_service => $manage_mysql_service,
-    }
-  }
-
-  # The puppetlabs postgres module does not manage the postgres user
-  # and group for us. Create them here to ensure concat can create
-  # dirs and files owned by this user and group.
-  user { 'postgres':
-    ensure  => present,
-    gid     => 'postgres',
-    system  => true,
-    require => Group['postgres'],
-  }
-
-  group { 'postgres':
-    ensure => present,
-    system => true,
-  }
-
-  if ($::lsbdistcodename == 'trusty') {
-    class { 'postgresql::globals':
-      version => '9.3',
-      before  => Class['postgresql::server'],
-    }
-  }
-
-  class { 'postgresql::server':
-    postgres_password => $root_db_password,
-    manage_firewall   => false,
-    # The puppetlabs postgres module incorrectly quotes ip addresses
-    # in the postgres server config. Use localhost instead.
-    listen_addresses  => ['localhost'],
-    require           => [
-      User['postgres'],
-      Class['postgresql::params'],
-    ],
-  }
-
-  class { 'postgresql::lib::devel':
-    require => Class['postgresql::params'],
-  }
-
 }
-# vim:sw=2:ts=2:expandtab:textwidth=79
