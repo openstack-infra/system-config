@@ -4654,6 +4654,7 @@ projects:
   - name: stackforge/rally
     template:
       - name: check-requirements
+      - name: docs-on-rtfd
     check:
       - gate-rally-pep8
       - gate-rally-python26
