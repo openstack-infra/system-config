@@ -2230,6 +2230,7 @@
     jobs:
       - python-jobs
       - rally-jobs
+      - hook-{name}-rtfd
       - gate-rally-install-{node}:
           node: bare-precise
       - gate-rally-install-{node}:
