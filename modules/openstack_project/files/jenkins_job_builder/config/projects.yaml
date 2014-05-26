@@ -2189,6 +2189,7 @@
     jobs:
       - python-jobs
       - rally-jobs
+      - hook-{name}-rtfd
       - check-rally-install-{node}:
           node: bare-precise
       - check-rally-install-{node}:
