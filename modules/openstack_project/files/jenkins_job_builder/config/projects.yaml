@@ -2435,8 +2435,10 @@
     node: bare-precise
 
     lang:
+        - de
         - es
         - fr
+        - ja
 
     jobs:
       - openstack-doc-jobs
