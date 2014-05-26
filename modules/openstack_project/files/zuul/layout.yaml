@@ -15,7 +15,7 @@ pipelines:
         - event: patchset-created
         - event: change-restored
         - event: comment-added
-          comment_filter: (?i)^(Patch Set [0-9]+:)?( [\w\\-]*)?(\n\n)?\s*recheck(( (?:bug|lp)[\s#:]*(\d+))|( no bug))\s*$
+          comment_filter: (?i)^(Patch Set [0-9]+:)?( [\w\\+-]*)*(\n\n)?\s*recheck(( (?:bug|lp)[\s#:]*(\d+))|( no bug))\s*$
         - event: comment-added
           require-approval:
             - username: jenkins
@@ -26,7 +26,7 @@ pipelines:
             - username: jenkins
               older-than: 24h
         - event: comment-added
-          comment_filter: (?i)^(Patch Set [0-9]+:)?( [\w\\-]*)?(\n\n)?\s*reverify( (?:bug|lp)[\s#:]*(\d+))\s*$
+          comment_filter: (?i)^(Patch Set [0-9]+:)?( [\w\\+-]*)*(\n\n)?\s*reverify( (?:bug|lp)[\s#:]*(\d+))\s*$
           require-approval:
             - workflow: 1
             - username: jenkins
