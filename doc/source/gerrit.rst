@@ -425,6 +425,12 @@ To rename a project:
      sudo mv ~gerrit2/review_site/git/openstack/{OLD,NEW}.git
      sudo mv /var/lib/git/openstack/{OLD,NEW}.git
 
+#. Reindex the lucene search index on review.openstack.org::
+
+     sudo su - gerrit2
+     cp -ax review_site/index index.backup.`date +%s`
+     java -jar review_site/bin/gerrit.war reindex -d /home/gerrit2/review_site
+
 #. Move the git repository on git{01-04}.openstack.org::
 
      sudo mv /var/lib/git/openstack/{OLD,NEW}.git
