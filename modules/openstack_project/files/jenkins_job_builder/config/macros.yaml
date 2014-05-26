@@ -136,20 +136,29 @@
     builders:
       - shell: |
           COOKBOOK=$(awk '/^name/ {print $NF}' metadata.rb |tr -d \"\')
-          ruby1.9.1 /usr/bin/bundle exec rubocop
+          if grep rubocop: Strainerfile
+            then ruby1.9.1 /usr/bin/bundle exec strainer test -o rubocop
+            else ruby1.9.1 /usr/bin/bundle exec ruby1.9.1 /usr/bin/bundle exec rubocop
+          fi
 
 - builder:
     name: chef-cookbook-foodcritic
     builders:
       - shell: |
-          ruby1.9.1 /usr/bin/bundle exec foodcritic -f any -t ~FC003 -t ~FC023 .
+          if grep foodcritic: Strainerfile
+            then ruby1.9.1 /usr/bin/bundle exec strainer test -o foodcritic
+            else ruby1.9.1 /usr/bin/bundle exec foodcritic -f any -t ~FC003 -t ~FC023 .
+          fi
 
 - builder:
     name: chef-cookbook-chefspec
     builders:
       - shell: |
           COOKBOOK=$(awk '/^name/ {print $NF}' metadata.rb |tr -d \"\')
-          ruby1.9.1 /usr/bin/bundle exec rspec .cookbooks/$COOKBOOK/spec
+          if grep chefspec: Strainerfile
+            then ruby1.9.1 /usr/bin/bundle exec strainer test -o chefspec
+            else ruby1.9.1 /usr/bin/bundle exec rspec .cookbooks/$COOKBOOK/spec
+          fi
 
 - builder:
     name: run-tests
