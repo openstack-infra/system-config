@@ -3163,6 +3163,14 @@ projects:
     gate:
       - noop
 
+  - name: openstack-infra/puppet-yum
+    check:
+      - gate-config-puppet-lint
+      - gate-config-puppet-syntax
+    gate:
+      - gate-config-puppet-lint
+      - gate-config-puppet-syntax
+
   - name: openstack-infra/pypi-mirror
     check:
       - gate-pypi-mirror-pep8
