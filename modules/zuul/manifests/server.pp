@@ -35,7 +35,6 @@ class zuul::server (
     log     => '/var/log/zuul/zuul.log',
     options => [
       'compress',
-      'copytruncate',
       'missingok',
       'rotate 30',
       'daily',
@@ -47,7 +46,6 @@ class zuul::server (
     log     => '/var/log/zuul/debug.log',
     options => [
       'compress',
-      'copytruncate',
       'missingok',
       'rotate 30',
       'daily',
@@ -59,7 +57,6 @@ class zuul::server (
     log     => '/var/log/zuul/gearman-server.log',
     options => [
       'compress',
-      'copytruncate',
       'missingok',
       'rotate 7',
       'daily',

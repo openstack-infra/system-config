@@ -39,7 +39,6 @@ class zuul::merger (
     log     => '/var/log/zuul/merger.log',
     options => [
       'compress',
-      'copytruncate',
       'missingok',
       'rotate 30',
       'daily',
@@ -51,7 +50,6 @@ class zuul::merger (
     log     => '/var/log/zuul/merger-debug.log',
     options => [
       'compress',
-      'copytruncate',
       'missingok',
       'rotate 30',
       'daily',
