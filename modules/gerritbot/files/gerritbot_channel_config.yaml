@@ -181,6 +181,7 @@ openstack-sahara:
       - openstack/sahara-dashboard
       - openstack/sahara-extra
       - openstack/sahara-image-elements
+      - openstack/sahara-specs
       - stackforge/puppet-sahara
       - stackforge/sahara-ci-config
       - stackforge/sahara-guestagent
