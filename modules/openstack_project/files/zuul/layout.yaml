@@ -372,6 +372,8 @@ jobs:
   - name: ^(periodic|post)-mirror-python(26|27|33)$
     parameter-function: reusable_node
   # the salt-trigger worker has no jobs yet
+  - name: gate-tempest-dsvm-full
+    queue-name: integrated
   - name: ^(gate|check)-tempest-dsvm-neutron-full$
     voting: false
   - name: ^(gate|check)-tempest-dsvm-neutron-full-icehouse$
