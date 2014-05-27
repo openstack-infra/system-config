@@ -259,6 +259,23 @@ class openstack_project::gerrit (
     require => Class['::gerrit'],
   }
 
+  package { 'libjs-jquery':
+    ensure => present,
+  }
+
+  file { '/home/gerrit2/review_site/static/jquery.min.js':
+    ensure  => link,
+    target  => '/usr/share/javascript/jquery/jquery.min.js',
+    require => [Class['::gerrit'],
+                Package['libjs-jquery']],
+  }
+
+  file { '/home/gerrit2/review_site/static/hideci.js':
+    ensure  => present,
+    source  => 'puppet:///modules/openstack_project/gerrit/hideci.js',
+    require => Class['::gerrit'],
+  }
+
   file { '/home/gerrit2/review_site/etc/GerritSite.css':
     ensure  => present,
     source  => 'puppet:///modules/openstack_project/gerrit/GerritSite.css',
