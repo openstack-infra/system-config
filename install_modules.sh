@@ -59,10 +59,12 @@ MODULES["puppetlabs-rabbitmq"]="4.0.0"
 # Source modules should use tags, explicit refs or remote branches because
 # we do not update local branches in this script.
 SOURCE_MODULES["https://github.com/puppet-community/puppet-module-puppetboard"]="2.4.0"
+SOURCE_MODULES["https://git.openstack.org/openstack-infra/puppet-yum"]="0.1.0"
 
 # Add modules that should be part of the openstack-infra integration test here
 if [[ "$PUPPET_INTEGRATION_TEST" -ne "1" ]]; then
   SOURCE_MODULES["https://git.openstack.org/openstack-infra/puppet-storyboard"]="origin/master"
+  SOURCE_MODULES["https://git.openstack.org/openstack-infra/puppet-yum"]="origin/master"
 fi
 
 MODULE_LIST=`puppet module list`
