@@ -1,3 +1,40 @@
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"/>
+<script type="text/javascript" src="/static/ci-names.js"/>
+<script type="text/javascript">
+// this regex matches only review pages
+var regex = /^https:\/\/review\.openstack\.org\/\#\/c\/\d+/
+
+window.onload = function() {
+    var input = document.createElement("input");
+    input.id = "toggleci";
+    input.type = "button";
+    input.className = "gwt-Button";
+    input.value = "Toggle CI";
+    input.onclick = function() {
+        // CI comments in New Screen
+        $("div").filter(function() {
+            return $.inArray(this.innerHTML, ciNames) >= 0;
+        }).parent().parent().parent().toggle();
+
+        // CI comments in Old Screen
+        $("div").filter(function() {
+            return $.inArray(this.getAttribute('name'), ciNames) >= 0;
+        }).toggle();
+    }
+    document.body.appendChild(input);
+    if (!regex.test(window.location.href)) {
+        $("#toggleci").hide();
+    }
+};
+
+window.onhashchange = function() {
+    if (regex.test(window.location.href)) {
+        $("#toggleci").show();
+    } else {
+        $("#toggleci").hide();
+    }
+};
+</script>
 <div>
   <a href="/"><h1 style="color: #CF2F19"><img src="static/title.png" style="vertical-align:middle;" /></h1></a>
 </div>
