@@ -33,4 +33,30 @@ class zuul::merger (
     require     => [User['zuul'],
                     File['/var/lib/zuul/git']],
   }
+
+  include logrotate
+  logrotate::file { 'merger.log':
+    log     => '/var/log/zuul/merger.log',
+    options => [
+      'compress',
+      'copytruncate',
+      'missingok',
+      'rotate 30',
+      'daily',
+      'notifempty',
+    ],
+    require => Service['zuul-merger'],
+  }
+  logrotate::file { 'merger-debug.log':
+    log     => '/var/log/zuul/merger-debug.log',
+    options => [
+      'compress',
+      'copytruncate',
+      'missingok',
+      'rotate 30',
+      'daily',
+      'notifempty',
+    ],
+    require => Service['zuul-merger'],
+  }
 }
