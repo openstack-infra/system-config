@@ -30,12 +30,7 @@ tx set --auto-local -r ${PROJECT}.${PROJECT}-translations "${PROJECT}/locale/<la
 
 # Update the .pot file
 python setup.py extract_messages
-PO_FILES=`find ${PROJECT}/locale -name '*.po'`
-if [ -n "$PO_FILES" ]
-then
-    # Use updated .pot file to update translations
-    python setup.py update_catalog --no-fuzzy-matching --ignore-obsolete=true
-fi
+
 # Add all changed files to git
 git add $PROJECT/locale/*
 
