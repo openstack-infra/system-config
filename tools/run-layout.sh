@@ -25,7 +25,13 @@ then
   echo "PROJECT: The project name (eg 'nova')"
   exit 1
 else
-  /usr/local/jenkins/slave_scripts/select-mirror.sh $org $project
+  if [ -f /usr/local/jenkins/slave_scripts/select-mirror.sh ]
+  then
+      /usr/local/jenkins/slave_scripts/select-mirror.sh $org $project
+  else
+      echo "No mirror script /usr/local/jenkins/slave_scripts/select-mirror.sh,"
+      echo "assuming local environment is configured properly."
+  fi
 fi
 
 mkdir -p .test
