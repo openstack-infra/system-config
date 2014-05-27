@@ -467,6 +467,7 @@ jobs:
   - name: ^gate-.*-tox-doc-publish-checkbuild$
     success-pattern: http://docs-draft.openstack.org/{build.parameters[LOG_PATH]}/publish-docs/
   - name: ^gate-.*-tox-checklang$
+    branch: master
     voting: false
   - name: ^gate-.*-tox-checkniceness$
     voting: false
