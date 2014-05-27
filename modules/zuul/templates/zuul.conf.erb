@@ -36,14 +36,7 @@ git_user_name=<%= git_name %>
 authurl=<%= swift_authurl %>
 user=<%= swift_user %>
 key=<%= swift_key %>
-<% if swift_tenant_name != "" -%>
 tenant_name=<%= swift_tenant_name %>
-<% else -%>
-# tenant_name is not provided here as some swift providers
-# do not have identity servers that work when tenant_name
-# is provided. You may set the tenant_name if necessary
-# but otherwise it is unset to accomodate these providers.
-<% end -%>
 region_name=<%= swift_region_name %>
 default_container=<%= swift_default_container %>
 default_logserver_prefix=<%= swift_default_logserver_prefix %>

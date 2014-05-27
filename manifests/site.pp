@@ -433,9 +433,7 @@ node 'zuul.openstack.org' {
     swift_authurl                  => 'https://identity.api.rackspacecloud.com/v2.0/',
     swift_user                     => 'infra-files-rw',
     swift_key                      => hiera('infra_files_rw_password'),
-    # Yes, really unset the tenant name. Rax identity can't construct a
-    # proper catalog when we provide the tenant here.
-    swift_tenant_name              => '',
+    swift_tenant_name              => hiera('infra_files_tenant_name'),
     swift_region_name              => 'DFW',
     swift_default_container        => 'infra-files',
     swift_default_logserver_prefix => 'http://logs.openstack.org/',
