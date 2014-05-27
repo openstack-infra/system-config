@@ -2,9 +2,8 @@
     name: '{name}-coverage'
 
     wrappers:
-      - timeout:
+      - build-timeout:
           timeout: 40
-          fail: true
       - timestamps
 
     builders:
@@ -57,9 +56,8 @@
     name: 'gate-{name}-python26'
 
     wrappers:
-      - timeout:
+      - build-timeout:
           timeout: 70
-          fail: true
       - timestamps
 
     builders:
@@ -80,9 +78,8 @@
     name: 'gate-{name}-python27'
 
     wrappers:
-      - timeout:
+      - build-timeout:
           timeout: 50
-          fail: true
       - timestamps
 
     builders:
@@ -103,9 +100,8 @@
     name: 'gate-{name}-python33'
 
     wrappers:
-      - timeout:
+      - build-timeout:
           timeout: 40
-          fail: true
       - timestamps
 
     builders:
@@ -126,9 +122,8 @@
     name: 'gate-{name}-pypy'
 
     wrappers:
-      - timeout:
+      - build-timeout:
           timeout: 40
-          fail: true
       - timestamps
 
     builders:
@@ -165,9 +160,8 @@
     name: 'gate-{name}-tox-{envlist}'
 
     wrappers:
-      - timeout:
+      - build-timeout:
           timeout: 40
-          fail: true
       - timestamps
 
     builders:

@@ -38,9 +38,8 @@
     name: 'periodic-test'
 
     wrappers:
-      - timeout:
+      - build-timeout:
           timeout: 40
-          fail: true
       - timestamps
 
     builders:

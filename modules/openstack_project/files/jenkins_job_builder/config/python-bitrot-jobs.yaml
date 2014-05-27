@@ -2,9 +2,8 @@
     name: 'periodic-{name}-python26{branch-name}'
 
     wrappers:
-      - timeout:
+      - build-timeout:
           timeout: 40
-          fail: true
       - timestamps
 
     builders:
@@ -27,9 +26,8 @@
     name: 'periodic-{name}-python27{branch-name}'
 
     wrappers:
-      - timeout:
+      - build-timeout:
           timeout: 40
-          fail: true
       - timestamps
 
     builders:
@@ -52,9 +50,8 @@
     name: 'periodic-{name}-docs{branch-name}'
 
     wrappers:
-      - timeout:
+      - build-timeout:
           timeout: 40
-          fail: true
       - timestamps
 
     builders:

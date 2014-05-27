@@ -7,9 +7,8 @@
           properties-file: gerrit-doc.properties
 
     wrappers:
-      - timeout:
+      - build-timeout:
           timeout: 40
-          fail: true
       - timestamps
 
     builders:
