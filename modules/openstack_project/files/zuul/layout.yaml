@@ -1087,6 +1087,14 @@ projects:
     periodic:
       - sahara-propose-translation-update
 
+  - name: openstack/sahara-specs
+    check:
+      - gate-sahara-specs-docs
+      - gate-sahara-specs-python27
+    gate:
+      - gate-sahara-specs-docs
+      - gate-sahara-specs-python27
+
   - name: openstack/stevedore
     template:
       - name: python-jobs
