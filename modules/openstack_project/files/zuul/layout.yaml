@@ -2557,8 +2557,10 @@ projects:
       - api-site-tox-doc-publishdocs
       - openstack-api-site
       - openstack-api-ref
+      - api-site-tox-buildlang-de
       - api-site-tox-buildlang-es
       - api-site-tox-buildlang-fr
+      - api-site-tox-buildlang-ja
 
   - name: openstack/openstack-manuals
     template:
