@@ -113,9 +113,6 @@ class openstack_project::review (
     contactstore_pubkey                 => $contactstore_pubkey,
     contactstore_url                    =>
       'http://www.openstack.org/verify/member/',
-    script_user                         => 'launchpadsync',
-    script_key_file                     => '/home/gerrit2/.ssh/launchpadsync_rsa',
-    script_logging_conf                 => '/home/gerrit2/.sync_logging.conf',
     projects_file                       =>
       'puppet:///modules/openstack_project/review.projects.yaml',
     projects_config                     =>
