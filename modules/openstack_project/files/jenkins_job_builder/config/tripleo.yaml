@@ -3,9 +3,8 @@
     node: 'tripleo-precise'
 
     wrappers:
-      - timeout:
+      - build-timeout:
           timeout: 125
-          fail: true
       - timestamps
 
     builders:
@@ -44,9 +43,8 @@
     node: 'tripleo-precise'
 
     wrappers:
-      - timeout:
+      - build-timeout:
           timeout: 125
-          fail: true
       - timestamps
 
     builders:
@@ -84,9 +82,8 @@
     node: 'tripleo-precise'
 
     wrappers:
-      - timeout:
+      - build-timeout:
           timeout: 125
-          fail: true
       - timestamps
 
     builders:
@@ -125,9 +122,8 @@
     node: 'tripleo-precise'
 
     wrappers:
-      - timeout:
+      - build-timeout:
           timeout: 145
-          fail: true
       - timestamps
 
     builders:
@@ -165,9 +161,8 @@
     node: 'tripleo-f20'
 
     wrappers:
-      - timeout:
+      - build-timeout:
           timeout: 145
-          fail: true
       - timestamps
 
     builders:
@@ -205,9 +200,8 @@
     node: 'tripleo-precise'
 
     wrappers:
-      - timeout:
+      - build-timeout:
           timeout: 145
-          fail: true
       - timestamps
 
     builders:

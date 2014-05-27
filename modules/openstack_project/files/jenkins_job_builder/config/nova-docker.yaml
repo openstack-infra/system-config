@@ -3,9 +3,8 @@
     node: 'devstack-f20'
 
     wrappers:
-      - timeout:
+      - build-timeout:
           timeout: 65
-          fail: true
       - timestamps
 
     builders:
