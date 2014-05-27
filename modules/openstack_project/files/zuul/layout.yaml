@@ -385,6 +385,15 @@ project-templates:
             - post-mirror-python26
             - post-mirror-python27
 
+  - name: docs-on-rtfd
+    post:
+      - 'hook-{name}-rtfd'
+    pre-release:
+      - 'hook-{name}-rtfd'
+    release:
+      - 'hook-{name}-rtfd'
+
+
 jobs:
   - name: ^.*$
     parameter-function: single_use_node
@@ -743,6 +752,7 @@ projects:
       - name: check-requirements
       - name: integrated-gate
       - name: publish-to-pypi
+      - name: docs-on-rtfd
     check:
       - gate-cliff-tox-neutronclient-stable
       - gate-cliff-tox-neutronclient-tip
@@ -753,12 +763,6 @@ projects:
       - gate-cliff-tox-neutronclient-tip
       - gate-cliff-tox-openstackclient-stable
       - gate-cliff-tox-openstackclient-tip
-    post:
-      - hook-cliff-rtfd
-    pre-release:
-      - hook-cliff-rtfd
-    release:
-      - hook-cliff-rtfd
 
   - name: stackforge/driverlog
     check:
@@ -1093,15 +1097,12 @@ projects:
       - name: check-requirements
       - name: integrated-gate-sahara
       - name: publish-to-pypi
+      - name: docs-on-rtfd
     check:
       - gate-sahara-pylint
     post:
-      - hook-sahara-rtfd
       - sahara-upstream-translation-update
-    pre-release:
-      - hook-sahara-rtfd
     release:
-      - hook-sahara-rtfd
       - sahara-merge-release-tags
     periodic:
       - sahara-propose-translation-update
@@ -1114,12 +1115,7 @@ projects:
       - name: check-requirements
       - name: integrated-gate
       - name: publish-to-pypi
-    post:
-      - hook-stevedore-rtfd
-    pre-release:
-      - hook-stevedore-rtfd
-    release:
-      - hook-stevedore-rtfd
+      - name: docs-on-rtfd
 
   - name: openstack/swift
     template:
@@ -2627,12 +2623,7 @@ projects:
     template:
       - name: python-jobs
       - name: publish-to-pypi
-    post:
-      - hook-gear-rtfd
-    pre-release:
-      - hook-gear-rtfd
-    release:
-      - hook-gear-rtfd
+      - name: docs-on-rtfd
 
   - name: openstack-infra/gearman-plugin
     check:
@@ -3023,6 +3014,7 @@ projects:
   - name: stackforge/billingstack
     template:
       - name: publish-to-pypi
+      - name: docs-on-rtfd
     check:
       - gate-billingstack-pep8
       - gate-billingstack-python26
@@ -3032,7 +3024,6 @@ projects:
       - gate-billingstack-python26
       - gate-billingstack-python27
     post:
-      - hook-billingstack-rtfd
       - billingstack-coverage
       - billingstack-branch-tarball
 
@@ -3052,6 +3043,8 @@ projects:
       - bindep-coverage
 
   - name: stackforge/bufunfa
+    template:
+      - name: docs-on-rtfd
     check:
       - gate-bufunfa-pep8
       - gate-bufunfa-python26
@@ -3060,8 +3053,6 @@ projects:
       - gate-bufunfa-pep8
       - gate-bufunfa-python26
       - gate-bufunfa-python27
-    post:
-      - hook-bufunfa-rtfd
 
   - name: stackforge/blazar
     template:
@@ -3294,6 +3285,7 @@ projects:
   - name: stackforge/designate
     template:
       - name: publish-to-pypi
+      - name: docs-on-rtfd
     check:
       - gate-designate-pep8
       - gate-designate-python26
@@ -3303,7 +3295,6 @@ projects:
       - gate-designate-python26
       - gate-designate-python27
     post:
-      - hook-designate-rtfd
       - designate-coverage
       - designate-branch-tarball
 
@@ -3466,6 +3457,8 @@ projects:
       - kite-tarball
 
   - name: stackforge/libra
+    template:
+      - name: docs-on-rtfd
     check:
       - gate-libra-pep8
       - gate-libra-python27
@@ -3473,13 +3466,10 @@ projects:
       - gate-libra-pep8
       - gate-libra-python27
     post:
-      - hook-libra-rtfd
       - libra-branch-tarball
     pre-release:
-      - hook-libra-rtfd
       - libra-tarball
     release:
-      - hook-libra-rtfd
       - libra-tarball
 
   - name: stackforge/manila
@@ -3595,16 +3585,12 @@ projects:
   - name: stackforge/murano
     template:
       - name: python-jobs
+      - name: docs-on-rtfd
     check:
       - gate-murano-requirements
       - gate-murano-devstack-dsvm
     post:
       - murano-branch-tarball
-      - hook-murano-rtfd
-    pre-release:
-      - hook-murano-rtfd
-    release:
-      - hook-murano-rtfd
 
   - name: stackforge/murano-common
     check:
@@ -3739,6 +3725,7 @@ projects:
   - name: stackforge/pecan
     template:
       - name: publish-to-pypi
+      - name: docs-on-rtfd
     check:
       - gate-pecan-pep8
       - gate-pecan-python26
@@ -3763,10 +3750,6 @@ projects:
       - gate-pecan-tox-ironic-tip
     post:
       - pecan-branch-tarball
-    pre-release:
-      - hook-pecan-rtfd
-    release:
-      - hook-pecan-rtfd
 
   - name: stackforge/powervc-driver
     check:
@@ -4111,6 +4094,7 @@ projects:
   - name: stackforge/python-designateclient
     template:
       - name: publish-to-pypi
+      - name: docs-on-rtfd
     check:
       - gate-python-designateclient-pep8
       - gate-python-designateclient-python26
@@ -4120,7 +4104,6 @@ projects:
       - gate-python-designateclient-python26
       - gate-python-designateclient-python27
     post:
-      - hook-python-designateclient-rtfd
       - python-designateclient-coverage
       - python-designateclient-branch-tarball
 
@@ -4138,6 +4121,7 @@ projects:
   - name: stackforge/python-libraclient
     template:
       - name: publish-to-pypi
+      - name: docs-on-rtfd
     check:
       - gate-python-libraclient-pep8
       - gate-python-libraclient-python27
@@ -4145,13 +4129,8 @@ projects:
       - gate-python-libraclient-pep8
       - gate-python-libraclient-python27
     post:
-      - hook-python-libraclient-rtfd
       - python-libraclient-coverage
       - python-libraclient-branch-tarball
-    pre-release:
-      - hook-python-libraclient-rtfd
-    release:
-      - hook-python-libraclient-rtfd
 
   - name: stackforge/python-manilaclient
     check:
@@ -4272,19 +4251,19 @@ projects:
   - name: stackforge/satori
     template:
       - name: python-jobs
+      - name: docs-on-rtfd
     check:
       - gate-satori-python33
       - gate-satori-pypy
     gate:
       - gate-satori-python33
       - gate-satori-pypy
-    post:
-      - hook-satori-rtfd
 
   - name: stackforge/solum
     template:
       - name: python-jobs
       - name: check-requirements
+      - name: docs-on-rtfd
     check:
       - gate-solum-python33
       - gate-solum-pypy
@@ -4292,8 +4271,6 @@ projects:
     gate:
       - gate-solum-pypy
       - gate-solum-devstack-dsvm
-    post:
-      - hook-solum-rtfd
     pre-release:
       - solum-tarball
     release:
@@ -4316,6 +4293,7 @@ projects:
   - name: stackforge/sqlalchemy-migrate
     template:
       - name: publish-to-pypi
+      - name: docs-on-rtfd
     check:
       - gate-sqlalchemy-migrate-python26
       - gate-sqlalchemy-migrate-python27
@@ -4329,11 +4307,6 @@ projects:
       - gate-sqlalchemy-migrate-unittests-27sa07
     post:
       - sqlalchemy-migrate-branch-tarball
-      - hook-sqlalchemy-migrate-rtfd
-    pre-release:
-      - hook-sqlalchemy-migrate-rtfd
-    release:
-      - hook-sqlalchemy-migrate-rtfd
 
   - name: stackforge/staccato
     check:
@@ -4342,6 +4315,8 @@ projects:
       - noop
 
   - name: stackforge/stackalytics
+    template:
+      - name: docs-on-rtfd
     check:
       - gate-stackalytics-docs
       - gate-stackalytics-pep8
@@ -4354,14 +4329,11 @@ projects:
       - gate-stackalytics-python27
     post:
       - stackalytics-branch-tarball
-      - hook-stackalytics-rtfd
     pre-release:
       - stackalytics-tarball
-      - hook-stackalytics-rtfd
     release:
       - stackalytics-tarball:
         - stackalytics-pypi-both-upload
-      - hook-stackalytics-rtfd
 
   - name: stackforge/swift3
     template:
@@ -4414,6 +4386,8 @@ projects:
       - tooz-branch-tarball
 
   - name: stackforge/turbo-hipster
+    template:
+      - name: docs-on-rtfd
     check:
       - gate-turbo-hipster-docs
       - gate-turbo-hipster-pep8
@@ -4424,7 +4398,6 @@ projects:
       - gate-turbo-hipster-python27
     post:
       - turbo-hipster-coverage
-      - hook-turbo-hipster-rtfd
 
   - name: stackforge/warm
     check:
