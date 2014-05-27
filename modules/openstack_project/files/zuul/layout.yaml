@@ -3838,6 +3838,7 @@ projects:
   - name: stackforge/manila
     check:
       - gate-manila-pep8
+      - gate-manila-pylint
       - gate-manila-python26
       - gate-manila-python27
       - gate-manila-tempest-dsvm-neutron
