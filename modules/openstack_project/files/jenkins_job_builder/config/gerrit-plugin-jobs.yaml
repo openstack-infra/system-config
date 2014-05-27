@@ -4,9 +4,8 @@
     node: '{node}'
 
     wrappers:
-      - timeout:
+      - build-timeout:
           timeout: 30
-          fail: true
       - timestamps
 
     builders:

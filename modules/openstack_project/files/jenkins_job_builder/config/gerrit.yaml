@@ -4,9 +4,8 @@
     node: 'bare-precise || bare-trusty'
 
     wrappers:
-      - timeout:
+      - build-timeout:
           timeout: 40
-          fail: true
       - timestamps
 
     prebuilders:
@@ -38,9 +37,8 @@
     node: 'bare-precise || bare-trusty'
 
     wrappers:
-      - timeout:
+      - build-timeout:
           timeout: 40
-          fail: true
       - timestamps
 
     prebuilders:
@@ -67,9 +65,8 @@
     node: 'bare-precise || bare-trusty'
 
     wrappers:
-      - timeout:
+      - build-timeout:
           timeout: 40
-          fail: true
       - timestamps
 
     prebuilders:
@@ -99,9 +96,8 @@
     node: 'bare-precise || bare-trusty'
 
     wrappers:
-      - timeout:
+      - build-timeout:
           timeout: 40
-          fail: true
       - timestamps
 
     builders:
@@ -138,9 +134,8 @@
     node: 'bare-precise || bare-trusty'
 
     wrappers:
-      - timeout:
+      - build-timeout:
           timeout: 40
-          fail: true
       - timestamps
 
     builders:
@@ -173,9 +168,8 @@
     node: 'bare-precise || bare-trusty'
 
     wrappers:
-      - timeout:
+      - build-timeout:
           timeout: 40
-          fail: true
       - timestamps
 
     builders:

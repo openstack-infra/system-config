@@ -2,9 +2,8 @@
     name: '{name}-tox-doc-{envlist}'
 
     wrappers:
-      - timeout:
+      - build-timeout:
           timeout: 40
-          fail: true
       - timestamps
 
     builders:
