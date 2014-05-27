@@ -37,15 +37,6 @@ setup_translation
 for FILE in ${DocFolder}/*
 do
     DOCNAME=${FILE#${DocFolder}/}
-    # high-availability-guide needs to create new DocBook files
-    if [ "$DOCNAME" == "high-availability-guide" ]
-    then
-        asciidoc -b docbook -d book -o - ${DocFolder}/high-availability-guide/ha-guide.txt \
-| xsltproc -o - /usr/share/xml/docbook/stylesheet/docbook5/db4-upgrade.xsl - \
-| xmllint  --format - | sed -e 's,<book,<book xml:id="bk-ha-guide",' \
-| sed -e 's,<info,<?rax pdf.url="../high-availability-guide.pdf"?><info,' \
-> ${DocFolder}/high-availability-guide/bk-ha-guide.xml
-    fi
     # Update the .pot file
     ./tools/generatepot ${DOCNAME}
     if [ -f ${DocFolder}/${DOCNAME}/locale/${DOCNAME}.pot ]
