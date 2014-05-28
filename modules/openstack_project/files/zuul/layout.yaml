@@ -589,8 +589,6 @@ jobs:
     voting: false
   - name: gate-tomograph-python33
     voting: false
-  - name: ^check-rally-install-.*$
-    voting: false
   - name: check-rally-dsvm-rally
     voting: false
   - name: check-rally-cli
@@ -4680,6 +4678,8 @@ projects:
       - gate-rally-pep8
       - gate-rally-python26
       - gate-rally-python27
+      - check-rally-install-bare-centos6
+      - check-rally-install-bare-precise
     post:
       - rally-branch-tarball
     pre-release:
