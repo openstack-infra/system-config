@@ -1021,6 +1021,7 @@ projects:
       - gate-grenade-dsvm-forward
       - check-tempest-dsvm-cells-full
       - check-tempest-dsvm-neutron-pg
+    silent:
       - gate-tempest-dsvm-large-ops-testing
       - gate-tempest-dsvm-neutron-large-ops-testing
     experimental-tripleo:
