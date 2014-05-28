@@ -555,8 +555,6 @@ jobs:
     voting: false
   - name: gate-refstack-python33
     voting: false
-  - name: gate-refstack-python26
-    voting: false
   - name: gate-rubick-python33
     voting: false
   - name: ^(gate|check)-sqlalchemy-migrate-devstack-dsvm$
@@ -4694,7 +4692,6 @@ projects:
   - name: stackforge/refstack
     check:
       - gate-refstack-pep8
-      - gate-refstack-python26
       - gate-refstack-python27
       - gate-refstack-python33
     gate:
