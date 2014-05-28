@@ -1,5 +1,5 @@
 - job-template:
-    name: 'check-rally-install-{node}'
+    name: 'gate-rally-install-{node}'
     node: '{node}'
 
     builders:
