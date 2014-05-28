@@ -4139,7 +4139,10 @@ projects:
       - gate-pecan-tox-wsme-tip
       - gate-pecan-tox-ceilometer-stable
       - gate-pecan-tox-ceilometer-tip
+      - gate-pecan-tox-ironic-stable
       - gate-pecan-tox-ironic-tip
+      - gate-pecan-tox-barbican-tip
+      - gate-pecan-tox-storyboard-tip
     gate:
       - gate-pecan-pep8
       - gate-pecan-python26
@@ -4150,7 +4153,10 @@ projects:
       - gate-pecan-tox-wsme-tip
       - gate-pecan-tox-ceilometer-stable
       - gate-pecan-tox-ceilometer-tip
+      - gate-pecan-tox-ironic-stable
       - gate-pecan-tox-ironic-tip
+      - gate-pecan-tox-barbican-tip
+      - gate-pecan-tox-storyboard-tip
     post:
       - pecan-branch-tarball
     pre-release:
