@@ -140,14 +140,6 @@ class jenkins::slave(
     require  => Class[pip],
   }
 
-  file { '/etc/profile.d/rubygems.sh':
-    ensure => present,
-    owner  => 'root',
-    group  => 'root',
-    mode   => '0644',
-    source => 'puppet:///modules/jenkins/rubygems.sh',
-  }
-
   file { '/usr/local/bin/gcc':
     ensure  => link,
     target  => '/usr/bin/ccache',
