@@ -57,7 +57,6 @@ puppetdb.openstack.org
 pypi.slave.openstack.org
 review-dev.openstack.org
 review.openstack.org
-salt-trigger.slave.openstack.org
 static.openstack.org
 status.openstack.org
 storyboard.openstack.org
