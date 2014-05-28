@@ -53,6 +53,7 @@ MODULES["puppetlabs-inifile"]="1.0.0"
 MODULES["puppetlabs-firewall"]="0.0.4"
 MODULES["puppetlabs-puppetdb"]="3.0.1"
 MODULES["stankevich-python"]="1.6.6"
+MODULES["openstack-pip"]="0.0.1"
 
 NONDEP_MODULES["nibalizer-puppetboard"]="2.3.0"
 
