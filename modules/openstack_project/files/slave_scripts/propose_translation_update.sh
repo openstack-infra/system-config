@@ -14,7 +14,6 @@
 
 ORG=$1
 PROJECT=$2
-COMMIT_MSG="Imported Translations from Transifex"
 
 source /usr/local/jenkins/slave_scripts/common_translation_update.sh
 

@@ -25,8 +25,6 @@ if [ $PROJECT = "api-site" ] ; then
     DocFolder="./"
 fi
 
-COMMIT_MSG="Imported Translations from Transifex"
-
 source /usr/local/jenkins/slave_scripts/common_translation_update.sh
 
 setup_git
