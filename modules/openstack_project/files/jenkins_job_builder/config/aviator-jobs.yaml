@@ -1,0 +1,16 @@
+- job-template:
+    name: 'gate-aviator-tests'
+
+    builders:
+        - revoke-sudo
+        - gerrit-git-prep
+        - shell: |
+            cp test/environment.yml.travis-ci test/environment.yml
+            mkdir .bundled_gems
+            export GEM_HOME=`pwd`/.bundled_gems
+            ruby1.9.1 /usr/bin/bundle --without development
+            ruby1.9.1 /usr/bin/bundle exec rake
+
+    publishers:
+      - console-log
+      - coverage-log-ruby
