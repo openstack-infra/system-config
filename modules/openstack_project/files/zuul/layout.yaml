@@ -3038,6 +3038,7 @@ projects:
       - name: python3-jobs
     check:
       - jenkins-job-builder-compare-xml
+      - jenkins-job-builder-coverage
     post:
       - jenkins-job-builder-docs
     pre-release:
