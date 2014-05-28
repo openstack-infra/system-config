@@ -13,13 +13,6 @@ class openstack_project::puppetmaster (
     sysadmins                 => $sysadmins,
   }
 
-  class { 'salt':
-    ensure => absent,
-  }
-  class { 'salt::master':
-    ensure => absent,
-  }
-
   cron { 'updatepuppetmaster':
     user        => 'root',
     minute      => '*/15',
