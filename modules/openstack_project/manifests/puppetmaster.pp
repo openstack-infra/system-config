@@ -17,13 +17,6 @@ class openstack_project::puppetmaster (
     provider => pip,
   }
 
-  class { 'salt':
-    ensure => absent,
-  }
-  class { 'salt::master':
-    ensure => absent,
-  }
-
   cron { 'updatepuppetmaster':
     user        => 'root',
     minute      => '*/15',
