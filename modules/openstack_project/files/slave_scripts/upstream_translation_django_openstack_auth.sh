@@ -1,5 +1,7 @@
 #!/bin/bash -xe
 
+# Copyright 2014 IBM Corp.
+#
 # Licensed under the Apache License, Version 2.0 (the "License"); you may
 # not use this file except in compliance with the License. You may obtain
 # a copy of the License at
@@ -12,28 +14,28 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 
-ORG=openstack
-PROJECT=horizon
+# The script is to push the updated English po to Transifex.
+
+if [ ! `echo $ZUUL_REFNAME | grep master` ]
+then
+    exit 0
+fi
 
 source /usr/local/jenkins/slave_scripts/common_translation_update.sh
 
 setup_git
-
-setup_review "$ORG" "$PROJECT"
 setup_translation
-setup_horizon
 
-# Pull upstream translations of files that are at least 75 %
-# translated
-tx pull -a -f --minimum-perc=75
+setup_django_openstack_auth
 
-# Invoke run_tests.sh to update the po files
-# Or else, "../manage.py makemessages" can be used.
-./run_tests.sh --makemessages -V
+# Update the .pot file
+python setup.py extract_messages
 
 # Add all changed files to git
-git add horizon/locale/* openstack_dashboard/locale/*
+git add openstack_auth/locale/*
 
-filter_commits
-
-send_patch
+if [ ! `git diff-index --quiet HEAD --` ]
+then
+    # Push .pot changes to transifex
+    tx --debug --traceback push -s
+fi
