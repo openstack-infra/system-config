@@ -3,11 +3,6 @@
     node: bare-precise
     github-org: openstack
 
-    properties:
-      - inject:
-          script-file: /usr/local/jenkins/slave_scripts/docbook-properties.sh
-          properties-file: gerrit-doc.properties
-
     builders:
       - revoke-sudo
       - gerrit-git-prep
