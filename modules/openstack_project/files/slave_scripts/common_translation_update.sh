@@ -89,3 +89,13 @@ EOF
 
     fi
 }
+
+# Setup project django_openstack_auth for transifex
+function setup_django_openstack_auth ()
+{
+    tx set --auto-local -r horizon.djangopo \
+        "openstack_auth/locale/<lang>/LC_MESSAGES/django.po" \
+        --source-lang en \
+        --source-file openstack_auth/locale/openstack_auth.pot -t PO \
+        --execute
+}
