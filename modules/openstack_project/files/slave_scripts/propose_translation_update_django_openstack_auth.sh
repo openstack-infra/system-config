@@ -12,52 +12,33 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 
-ORG=$1
-PROJECT=$2
+ORG=openstack
+PROJECT=django_openstack_auth
+COMMIT_MSG="Imported Translations from Transifex"
 
 source /usr/local/jenkins/slave_scripts/common_translation_update.sh
 
 setup_git
 
 setup_review "$ORG" "$PROJECT"
-setup_translation
-setup_project "$PROJECT"
 
-setup_loglevel_vars
-setup_loglevel_project "$PROJECT"
+setup_django_openstack_auth
 
 # Pull upstream translations of files that are at least 75 %
 # translated
 tx pull -a -f --minimum-perc=75
 
-extract_messages_log "$PROJECT"
-
-PO_FILES=`find ${PROJECT}/locale -name "${PROJECT}.po"`
+# Update the .pot file
+python setup.py extract_messages
+PO_FILES=`find openstack_auth/locale -name '*.po'`
 if [ -n "$PO_FILES" ]
 then
     # Use updated .pot file to update translations
     python setup.py update_catalog --no-fuzzy-matching  --ignore-obsolete=true
 fi
-# We cannot run update_catlog for the log files, since there is no
-# option to specify the keyword and thus an update_catalog run would
-# add the messages with the default keywords. Therefore use msgmerge
-# directly.
-for level in $LEVELS ; do
-  PO_FILES=`find ${PROJECT}/locale -name "${PROJECT}-log-${level}.po"`
-  if [ -n "$PO_FILES" ]
-  then
-    for f in $PO_FILES ; do
-        echo "Updating $f"
-        msgmerge --update --no-fuzzy-matching $f \
-            --backup=none \
-            ${PROJECT}/locale/${PROJECT}-log-${level}.pot
-    done
-  fi
-done
 
-#
 # Add all changed files to git
-git add $PROJECT/locale/*
+git add openstack_auth/locale/*
 
 filter_commits
 

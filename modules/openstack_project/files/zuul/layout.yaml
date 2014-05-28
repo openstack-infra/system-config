@@ -1574,6 +1574,8 @@ projects:
     release:
       - django_openstack_auth-tarball:
         - django_openstack_auth-pypi-both-upload
+    periodic:
+      - django_openstack_auth-propose-translation-update
 
   - name: stackforge/gertty
     check:
