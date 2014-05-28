@@ -28,18 +28,7 @@ source /usr/local/jenkins/slave_scripts/common_translation_update.sh
 setup_git
 setup_translation
 
-# Horizon JavaScript Translations
-tx set --auto-local -r ${PROJECT}.${PROJECT}-js-translations \
-"${PROJECT}/locale/<lang>/LC_MESSAGES/djangojs.po" --source-lang en \
---source-file ${PROJECT}/locale/en/LC_MESSAGES/djangojs.po -t PO --execute
-# Horizon Translations
-tx set --auto-local -r ${PROJECT}.${PROJECT}-translations \
-"${PROJECT}/locale/<lang>/LC_MESSAGES/django.po" --source-lang en \
---source-file ${PROJECT}/locale/en/LC_MESSAGES/django.po -t PO --execute
-# OpenStack Dashboard Translations
-tx set --auto-local -r ${PROJECT}.openstack-dashboard-translations \
-"openstack_dashboard/locale/<lang>/LC_MESSAGES/django.po" --source-lang en \
---source-file openstack_dashboard/locale/en/LC_MESSAGES/django.po -t PO --execute
+setup_horizon
 
 # Invoke run_tests.sh to update the po files
 # Or else, "../manage.py makemessages" can be used.
@@ -54,4 +43,3 @@ then
     # Push source file changes to transifex
     tx --debug --traceback push -s
 fi
-

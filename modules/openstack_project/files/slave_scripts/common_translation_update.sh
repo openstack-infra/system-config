@@ -27,13 +27,40 @@ function setup_translation ()
 # Setup a project for transifex
 function setup_project ()
 {
-    project=$1
+    local project=$1
 
     tx set --auto-local -r ${project}.${project}-translations \
         "${project}/locale/<lang>/LC_MESSAGES/${project}.po" \
         --source-lang en \
         --source-file ${project}/locale/${project}.pot -t PO \
         --execute
+}
+
+# Setup project horizon for transifex
+function setup_horizon ()
+{
+    local project=horizon
+
+    # Horizon JavaScript Translations
+    tx set --auto-local -r ${project}.${project}-js-translations \
+	"${project}/locale/<lang>/LC_MESSAGES/djangojs.po" \
+	--source-lang en \
+	--source-file ${project}/locale/en/LC_MESSAGES/djangojs.po \
+	-t PO --execute
+
+    # Horizon Translations
+    tx set --auto-local -r ${project}.${project}-translations \
+	"${project}/locale/<lang>/LC_MESSAGES/django.po" \
+	--source-lang en \
+	--source-file ${project}/locale/en/LC_MESSAGES/django.po \
+	-t PO --execute
+
+    # OpenStack Dashboard Translations
+    tx set --auto-local -r ${project}.openstack-dashboard-translations \
+	"openstack_dashboard/locale/<lang>/LC_MESSAGES/django.po" \
+	--source-lang en \
+	--source-file openstack_dashboard/locale/en/LC_MESSAGES/django.po \
+	-t PO --execute
 }
 
 # Setup git so that git review works
@@ -48,8 +75,8 @@ function setup_git ()
 # COMMIT_MSG.
 function setup_review ()
 {
-    ORG="$1"
-    PROJECT="$2"
+    local ORG="$1"
+    local PROJECT="$2"
 
     COMMIT_MSG="Imported Translations from Transifex"
 
