@@ -10,11 +10,8 @@ class openstack_project::slave (
 ) {
 
   include openstack_project
+  include openstack_project::automatic_upgrades
   include openstack_project::tmpcleanup
-
-  class { 'openstack_project::automatic_upgrades':
-    origins => ['LP-PPA-saltstack-salt precise'],
-  }
 
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [],
@@ -28,7 +25,7 @@ class openstack_project::slave (
   }
 
   class { 'salt':
-    salt_master => 'ci-puppetmaster.openstack.org',
+    ensure => absent,
   }
 
   include jenkins::cgroups
