@@ -4957,3 +4957,9 @@ projects:
       - noop
     gate:
       - noop
+
+  - name: stackforge/doc8
+    check:
+      - noop
+    gate:
+      - noop
