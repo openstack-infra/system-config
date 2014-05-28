@@ -642,14 +642,6 @@ node 'pypi.slave.openstack.org' {
 }
 
 # Node-OS: precise
-node 'salt-trigger.slave.openstack.org' {
-  include openstack_project
-  class { 'openstack_project::salt_trigger_slave':
-    jenkins_ssh_public_key => $openstack_project::jenkins_ssh_key,
-  }
-}
-
-# Node-OS: precise
 node /^precise-dev\d+.*\.slave\.openstack\.org$/ {
   include openstack_project
   include openstack_project::puppet_cron

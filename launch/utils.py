@@ -30,7 +30,6 @@ try:
 except:
     pass
 import paramiko
-import salt.crypt
 
 from sshclient import SSHClient
 
@@ -134,26 +133,6 @@ def add_keypair(client, name):
     public_key = key.get_name() + ' ' + key.get_base64()
     kp = client.keypairs.create(name, public_key)
     return key, kp
-
-
-def add_salt_keypair(keydir, keyname, keysize=2048):
-    '''
-    Generate a key pair for use with Salt
-    '''
-    salt_priv = '{0}.pem'.format(keyname)
-    salt_pub = '{0}.pub'.format(keyname)
-    priv_key = os.path.join(keydir, salt_priv)
-    pub_key = os.path.join(keydir, salt_pub)
-    if not os.path.exists(priv_key) or \
-       not os.path.exists(pub_key):
-        try:
-            os.makedirs(keydir)
-        except OSError:
-            pass
-        priv_key = salt.crypt.gen_keys(keydir, keyname, keysize)
-        path, ext = os.path.splitext(priv_key)
-        pub_key = '{0}.pub'.format(path)
-    return priv_key, pub_key
 
 
 def wait_for_resource(wait_resource):

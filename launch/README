@@ -3,12 +3,11 @@ Create Server
 
 Note that these instructions assume you're working from this
 directory on an updated local clone of the repository on the
-puppetmaster, and that your account is a member of the admin, puppet
-and salt groups for access to their respective keys::
+puppetmaster, and that your account is a member of the admin
+and puppet groups for access to their respective keys::
 
   sudo adduser $(whoami) admin
   sudo adduser $(whoami) puppet
-  sudo adduser $(whoami) salt
 
 (Remember to log out and back into your shell if you add yourself
 to a group.)
@@ -31,10 +30,6 @@ To launch a node in the OpenStack Jenkins account (slave nodes)::
   export FLAVOR="8 GB Performance"
   sudo puppet cert generate $FQDN
   ./launch-node.py $FQDN --image "$IMAGE" --flavor "$FLAVOR"
-
-There is also a --salt option which can be used to tell the script to
-automatically configure and enroll the server as a minion on the salt
-master.
 
 If you are launching a replacement server, you may skip the generate
 step and specify the name of an existing puppet cert (as long as the
