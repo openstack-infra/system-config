@@ -23,7 +23,6 @@ import os
 import time
 import traceback
 import argparse
-import shutil
 
 import dns
 import utils
@@ -37,9 +36,6 @@ NOVACLIENT_INSECURE = os.getenv('NOVACLIENT_INSECURE', None)
 IPV6 = os.environ.get('IPV6', '0') is 1
 
 SCRIPT_DIR = os.path.dirname(sys.argv[0])
-
-SALT_MASTER_PKI = os.environ.get('SALT_MASTER_PKI', '/etc/salt/pki/master')
-SALT_MINION_PKI = os.environ.get('SALT_MINION_PKI', '/etc/salt/pki/minion')
 
 
 def get_client():
@@ -56,8 +52,8 @@ def get_client():
     return client
 
 
-def bootstrap_server(server, admin_pass, key, cert, environment, name,
-                     salt_priv, salt_pub, puppetmaster):
+def bootstrap_server(
+        server, admin_pass, key, cert, environment, name, puppetmaster):
     ip = utils.get_public_ip(server)
     if not ip:
         raise Exception("Unable to find public ip of server")
@@ -107,16 +103,6 @@ def bootstrap_server(server, admin_pass, key, cert, environment, name,
     ssh_client.ssh("chmod 0750 /var/lib/puppet/ssl/private_keys")
     ssh_client.ssh("chmod 0755 /var/lib/puppet/ssl/public_keys")
 
-    if salt_pub and salt_priv:
-        # Assuming salt-master is running on the puppetmaster
-        shutil.copyfile(salt_pub,
-                        os.path.join(SALT_MASTER_PKI, 'minions', name))
-        ssh_client.ssh('mkdir -p {0}'.format(SALT_MINION_PKI))
-        ssh_client.scp(salt_pub,
-                       os.path.join(SALT_MINION_PKI, 'minion.pub'))
-        ssh_client.scp(salt_priv,
-                       os.path.join(SALT_MINION_PKI, 'minion.pem'))
-
     for ssldir in ['/var/lib/puppet/ssl/certs/',
                    '/var/lib/puppet/ssl/private_keys/',
                    '/var/lib/puppet/ssl/public_keys/']:
@@ -138,7 +124,7 @@ def bootstrap_server(server, admin_pass, key, cert, environment, name,
 
 
 def build_server(
-        client, name, image, flavor, cert, environment, salt, puppetmaster):
+        client, name, image, flavor, cert, environment, puppetmaster):
     key = None
     server = None
 
@@ -159,15 +145,11 @@ def build_server(
             traceback.print_exc()
         raise
 
-    salt_priv, salt_pub = (None, None)
-    if salt:
-        salt_priv, salt_pub = utils.add_salt_keypair(
-            SALT_MASTER_PKI, name, 2048)
     try:
         admin_pass = server.adminPass
         server = utils.wait_for_resource(server)
         bootstrap_server(server, admin_pass, key, cert, environment, name,
-                         salt_priv, salt_pub, puppetmaster)
+                         puppetmaster)
         print('UUID=%s\nIPV4=%s\nIPV6=%s\n' % (server.id,
                                                server.accessIPv4,
                                                server.accessIPv6))
@@ -197,8 +179,6 @@ def main():
     parser.add_argument("--cert", dest="cert",
                         help="name of signed puppet certificate file (e.g., "
                         "hostname.example.com.pem)")
-    parser.add_argument("--salt", dest="salt", action="store_true",
-                        help="Manage salt keys for this host.")
     parser.add_argument("--server", dest="server", help="Puppetmaster to use.",
                         default="ci-puppetmaster.openstack.org")
     options = parser.parse_args()
@@ -239,7 +219,7 @@ def main():
     print "Found image", image
 
     build_server(client, options.name, image, flavor, cert,
-                 options.environment, options.salt, options.server)
+                 options.environment, options.server)
     dns.print_dns(client, options.name)
 
 if __name__ == '__main__':
