@@ -143,6 +143,18 @@ tripleo:
     branches:
       - master
 
+tuskar:
+    events:
+      - patchset-created
+      - change-merged
+      - x-vrif-minus-2
+    projects:
+      - openstack/python-tuskarclient
+      - openstack/tuskar
+      - openstack/tuskar-ui
+    branches:
+      - master
+
 heat:
     events:
       - patchset-created
