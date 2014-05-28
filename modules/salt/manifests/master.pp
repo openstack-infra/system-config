@@ -1,6 +1,16 @@
 # Class salt::master
 #
-class salt::master {
+class salt::master (
+  $ensure = present,
+) {
+
+  if ($ensure == present) {
+    $directory_ensure = directory
+    $running_ensure = running
+  } else {
+    $directory_ensure = absent
+    $running_ensure = stopped
+  }
 
   if ($::osfamily == 'Debian') {
     include apt
@@ -8,12 +18,14 @@ class salt::master {
     # Wrap in ! defined checks to allow minion and master installs on the
     # same host.
     if ! defined(Apt::Ppa['ppa:saltstack/salt']) {
-      apt::ppa { 'ppa:saltstack/salt': }
+      apt::ppa { 'ppa:saltstack/salt':
+        ensure => $ensure
+      }
     }
 
     if ! defined(Package['python-software-properties']) {
       package { 'python-software-properties':
-        ensure => present,
+        ensure => $ensure,
       }
     }
 
@@ -22,16 +34,16 @@ class salt::master {
   }
 
   package { 'salt-master':
-    ensure  => present
+    ensure  => $ensure
   }
 
   group { 'salt':
-    ensure => present,
+    ensure => $ensure,
     system => true,
   }
 
   user { 'salt':
-    ensure  => present,
+    ensure  => $ensure,
     gid     => 'salt',
     home    => '/home/salt',
     shell   => '/bin/bash',
@@ -40,7 +52,7 @@ class salt::master {
   }
 
   file { '/home/salt':
-    ensure  => directory,
+    ensure  => $directory_ensure,
     owner   => 'salt',
     group   => 'salt',
     mode    => '0755',
@@ -48,7 +60,7 @@ class salt::master {
   }
 
   file { '/etc/salt/master':
-    ensure  => present,
+    ensure  => $ensure,
     owner   => 'salt',
     group   => 'salt',
     mode    => '0644',
@@ -58,7 +70,7 @@ class salt::master {
   }
 
   file { '/srv/reactor':
-    ensure  => directory,
+    ensure  => $directory_ensure,
     owner   => 'salt',
     group   => 'salt',
     mode    => '0755',
@@ -69,7 +81,7 @@ class salt::master {
   }
 
   file { '/srv/reactor/tests.sls':
-    ensure  => present,
+    ensure  => $ensure,
     owner   => 'salt',
     group   => 'salt',
     mode    => '0644',
@@ -82,7 +94,7 @@ class salt::master {
   }
 
   file { '/etc/salt/pki':
-    ensure  => directory,
+    ensure  => $directory_ensure,
     owner   => 'salt',
     group   => 'salt',
     mode    => '0710',
@@ -93,7 +105,7 @@ class salt::master {
   }
 
   file { '/etc/salt/pki/master':
-    ensure  => directory,
+    ensure  => $directory_ensure,
     owner   => 'salt',
     group   => 'salt',
     mode    => '0770',
@@ -101,7 +113,7 @@ class salt::master {
   }
 
   file { '/etc/salt/pki/master/minions':
-    ensure  => directory,
+    ensure  => $directory_ensure,
     owner   => 'salt',
     group   => 'salt',
     mode    => '0775',
@@ -109,7 +121,7 @@ class salt::master {
   }
 
   service { 'salt-master':
-    ensure    => running,
+    ensure    => $running_ensure,
     enable    => true,
     require   => [
       User['salt'],
