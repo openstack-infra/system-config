@@ -413,7 +413,6 @@ jobs:
   # jobs run on the mirror26, mirror27 and mirror33 workers
   - name: ^(periodic|post)-mirror-python(26|27|33)$
     parameter-function: reusable_node
-  # the salt-trigger worker has no jobs yet
   - name: gate-tempest-dsvm-full
     queue-name: integrated
   - name: ^(gate|check)-tempest-dsvm-neutron-full$

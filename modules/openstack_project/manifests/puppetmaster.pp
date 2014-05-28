@@ -14,9 +14,11 @@ class openstack_project::puppetmaster (
   }
 
   class { 'salt':
-    salt_master => 'ci-puppetmaster.openstack.org',
+    ensure => absent,
   }
-  class { 'salt::master': }
+  class { 'salt::master':
+    ensure => absent,
+  }
 
   cron { 'updatepuppetmaster':
     user        => 'root',
