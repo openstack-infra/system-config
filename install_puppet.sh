@@ -17,7 +17,7 @@
 # under the License.
 
 # Install pip using get-pip
-PIP_GET_PIP_URL=https://raw.githubusercontent.com/pypa/pip/master/contrib/get-pip.py
+PIP_GET_PIP_URL=https://bootstrap.pypa.io/get-pip.py
 
 curl -O $PIP_GET_PIP_URL || wget $PIP_GET_PIP_URL
 python get-pip.py
