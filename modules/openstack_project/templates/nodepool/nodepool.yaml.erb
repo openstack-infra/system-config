@@ -115,14 +115,14 @@ labels:
     image: tripleo-precise
     min-ready: 10
     providers:
-      - name: tripleo-test-cloud
-      - name: tripleo-test-cloud-rh1
+      - name: tripleo-test-cloud-r1
+      - name: tripleo-test-cloud-r2
   - name: tripleo-f20
     image: tripleo-f20
     min-ready: 5
     providers:
-      - name: tripleo-test-cloud
-      - name: tripleo-test-cloud-rh1
+      - name: tripleo-test-cloud-r1
+      - name: tripleo-test-cloud-r2
 
 providers:
   - name: rax-dfw
@@ -658,7 +658,7 @@ providers:
         setup: prepare_node_py3k.sh
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
-  - name: tripleo-test-cloud
+  - name: tripleo-test-cloud-r1
     service-type: 'compute'
     service-name: 'nova'
     username: '<%= tripleo_username %>'
@@ -686,7 +686,7 @@ providers:
         setup: prepare_node_tripleo.sh
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
-  - name: tripleo-test-cloud-rh1
+  - name: tripleo-test-cloud-r2
     service-type: 'compute'
     service-name: 'nova'
     username: '<%= tripleo_username %>'
