@@ -1,0 +1,12 @@
+Code-Review+2: James E. Blair <corvus@inaugust.com>
+Verified+2: James E. Blair <corvus@inaugust.com>
+Workflow+1: James E. Blair <corvus@inaugust.com>
+Code-Review+2: Monty Taylor <mordred@inaugust.com>
+Workflow+1: Monty Taylor <mordred@inaugust.com>
+Code-Review+1: Anita Kuno <anteaya@anteaya.info>
+Code-Review+2: Joshua Hesketh <joshua.hesketh@rackspace.com>
+Submitted-by: James E. Blair <corvus@inaugust.com>
+Submitted-at: Wed, 28 May 2014 00:02:48 +0000
+Reviewed-on: https://review.openstack.org/95972
+Project: openstack-infra/config
+Branch: refs/heads/master
