@@ -37,13 +37,6 @@ class openstack_project::puppetmaster (
     $cron_command = 'sleep $((RANDOM\%600)) && cd /opt/config/production && git fetch -q && git reset -q --hard @{u} && ./install_modules.sh && touch manifests/site.pp'
   }
 
-  class { 'salt':
-    ensure => absent,
-  }
-  class { 'salt::master':
-    ensure => absent,
-  }
-
   cron { 'updatepuppetmaster':
     user        => 'root',
     minute      => '*/15',
