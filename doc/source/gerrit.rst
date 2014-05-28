@@ -458,7 +458,7 @@ To rename a project:
    changing, gate jobs may fail due to outdated remote URLs. Clear
    the workspaces on persistent Jenkins slaves to mitigate this::
 
-     sudo salt '*.slave.openstack.org' cmd.run 'rm -rf ~jenkins/workspace/*PROJECT*'
+     sudo ansible '*.slave.openstack.org' -f 10 -a 'rm -rf ~jenkins/workspace/*PROJECT*'
 
 #. Again, if this is an org move rather than a rename and the GitHub
    project has been created but is empty, trigger replication to
