@@ -58,7 +58,6 @@
 
     jobs:
       - python-jobs
-      - pypi-jobs
 
 - project:
     name: python-mistralclient
@@ -248,7 +247,6 @@
 
     jobs:
       - python-jobs
-      - pypi-jobs
 
 - project:
     name: sahara-image-elements
@@ -725,7 +723,6 @@
 
     jobs:
       - python-jobs
-      - pypi-jobs
 
 
 - project:
@@ -1205,7 +1202,6 @@
     jobs:
       - python-jobs
       - hook-{name}-rtfd
-      - pypi-jobs
 
 
 - project:
@@ -1216,7 +1212,6 @@
 
     jobs:
       - python-jobs
-      - pypi-jobs
 
 
 - project:
@@ -1283,7 +1278,6 @@
 
     jobs:
       - python-jobs
-      - pypi-jobs
 
 - project:
     name: requirements
@@ -2359,7 +2353,6 @@
 
     jobs:
       - python-jobs
-      - pypi-jobs
 
 - project:
     name: turbo-hipster
@@ -2389,7 +2382,6 @@
 
     jobs:
       - python-jobs
-      - pypi-jobs
 
 - project:
     name: heat-translator
