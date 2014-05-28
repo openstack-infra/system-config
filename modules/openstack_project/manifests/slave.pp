@@ -24,10 +24,6 @@ class openstack_project::slave (
     python3      => $python3,
   }
 
-  class { 'salt':
-    ensure => absent,
-  }
-
   include jenkins::cgroups
   include ulimit
   ulimit::conf { 'limit_jenkins_procs':
