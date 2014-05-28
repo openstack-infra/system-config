@@ -121,3 +121,5 @@ channels:
   - name: tripleo
   - name: openstack-satori
     mask: full_mask
+  - name: nova-docker
+    mask: full_mask

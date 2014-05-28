@@ -771,3 +771,13 @@ openstack-sdks:
       - stackforge/python-openstacksdk
     branches:
       - master
+
+nova-docker:
+    events:
+      - patchset-created
+      - change-merged
+      - x-vrif-minus-2
+    projects:
+      - stackforge/nova-docker
+    branches:
+      - master
