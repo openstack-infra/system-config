@@ -1,4 +1,13 @@
 - project:
+    name: aviator
+    github-org: stackforge
+    node: bare-precise
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - 'gate-aviator-tests'
+
+- project:
     name: gantt
     github-org: openstack
     node: bare-precise
