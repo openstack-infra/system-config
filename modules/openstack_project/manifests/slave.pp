@@ -27,10 +27,6 @@ class openstack_project::slave (
     python3      => $python3,
   }
 
-  class { 'salt':
-    salt_master => 'ci-puppetmaster.openstack.org',
-  }
-
   include jenkins::cgroups
   include ulimit
   ulimit::conf { 'limit_jenkins_procs':
