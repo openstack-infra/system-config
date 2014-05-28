@@ -162,7 +162,6 @@ node 'ci-puppetmaster.openstack.org' {
 node 'puppetmaster.openstack.org' {
   class { 'openstack_project::puppetmaster':
     root_rsa_key => hiera('puppetmaster_root_rsa_key', 'XXX'),
-    salt         => false,
     update_slave => false,
     sysadmins    => hiera('sysadmins', ['admin']),
     version      => '3.4.',
@@ -638,14 +637,6 @@ node 'pypi.slave.openstack.org' {
     jenkinsci_password     => hiera('jenkins_ci_org_password', 'XXX'),
     mavencentral_username  => hiera('mavencentral_org_user', 'username'),
     mavencentral_password  => hiera('mavencentral_org_password', 'XXX'),
-  }
-}
-
-# Node-OS: precise
-node 'salt-trigger.slave.openstack.org' {
-  include openstack_project
-  class { 'openstack_project::salt_trigger_slave':
-    jenkins_ssh_public_key => $openstack_project::jenkins_ssh_key,
   }
 }
 
