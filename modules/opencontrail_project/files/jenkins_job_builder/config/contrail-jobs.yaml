@@ -33,8 +33,7 @@
           #!/bin/bash -xe
           export USER=jenkins
           export JOB_NAME={name}
-          export CONTRAIL_VNC_PRIVATE=1
-          /usr/bin/contrail-ci-run ruby /usr/local/jenkins/slave_scripts/contrail-git-prep.rb
+          /usr/bin/contrail-ci-run ruby /usr/local/jenkins/slave_scripts/contrail-git-prep.rb use_private
           /usr/local/jenkins/slave_scripts/contrail-systest-job.rb
 
 - job-group:
