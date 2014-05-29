@@ -276,7 +276,7 @@ jobs:
 projects:
   - name: Juniper/contrail-controller
     check:
-      - ci-contrail-controller-build
+      - ci-contrail-controller-unittest
     silent:
       - noop
     check-tripleo:
