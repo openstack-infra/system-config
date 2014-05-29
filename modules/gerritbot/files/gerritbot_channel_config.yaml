@@ -265,9 +265,12 @@ openstack-chef:
     projects:
       - stackforge/cookbook-ceph
       - stackforge/cookbook-openstack-block-storage
+      - stackforge/cookbook-openstack-client
       - stackforge/cookbook-openstack-common
       - stackforge/cookbook-openstack-compute
       - stackforge/cookbook-openstack-dashboard
+      - stackforge/cookbook-openstack-data
+      - stackforge/cookbook-openstack-database
       - stackforge/cookbook-openstack-identity
       - stackforge/cookbook-openstack-image
       - stackforge/cookbook-openstack-integration-test
@@ -281,6 +284,7 @@ openstack-chef:
     branches:
       - master
       - stable/grizzly
+      - stable/havana
 
 openstack-mistral:
     events:
