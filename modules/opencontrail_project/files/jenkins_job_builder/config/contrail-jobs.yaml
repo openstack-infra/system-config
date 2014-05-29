@@ -9,7 +9,6 @@
       - timestamps
 
     builders:
-      - gerrit-git-prep
       - shell: |
           #!/bin/bash -xe
           export USER=jenkins
@@ -28,7 +27,6 @@
       - timestamps
 
     builders:
-      - gerrit-git-prep
       - shell: |
           #!/bin/bash -xe
           export USER=jenkins
