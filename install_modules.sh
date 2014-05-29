@@ -14,8 +14,9 @@ function remove_module {
 # Array of modules to be installed key:value is module:version.
 declare -A MODULES
 
-# These modules will be installed without dependency resolution
-declare -A  NONDEP_MODULES
+# Array of modues to be installed from source and without dependency resolution.
+# key:value is source location, revision to checkout
+declare -A SOURCE_MODULES
 
 #NOTE: if we previously installed kickstandproject-ntp we nuke it here
 # since puppetlabs-ntp and kickstandproject-ntp install to the same dir
@@ -54,14 +55,14 @@ MODULES["puppetlabs-firewall"]="0.0.4"
 MODULES["puppetlabs-puppetdb"]="3.0.1"
 MODULES["stankevich-python"]="1.6.6"
 
-NONDEP_MODULES["nibalizer-puppetboard"]="2.3.0"
+SOURCE_MODULES["https://github.com/nibalizer/puppet-module-puppetboard"]="2.4.0"
 
 MODULE_LIST=`puppet module list`
 
 # Transition away from old things
 if [ -d /etc/puppet/modules/vcsrepo/.git ]
 then
-    rm -rf /etc/puppet/modules/vcsrepo
+  rm -rf /etc/puppet/modules/vcsrepo
 fi
 
 # Install all the modules
@@ -80,18 +81,32 @@ done
 
 MODULE_LIST=`puppet module list`
 
-# Make a second pass, installing all modules without their dependencies
-for MOD in ${!NONDEP_MODULES[*]} ; do
-  # If the module at the current version does not exist upgrade or install it.
-  if ! echo $MODULE_LIST | grep "$MOD ([^v]*v${NONDEP_MODULES[$MOD]}" >/dev/null 2>&1
-  then
-    # Attempt module upgrade. If that fails try installing the module.
-    if ! puppet module upgrade $MOD --ignore-dependencies --version \
-         ${NONDEP_MODULES[$MOD]} >/dev/null 2>&1
-    then
-      # This will get run in cron, so silence non-error output
-      puppet module install $MOD --ignore-dependencies --version \
-      ${NONDEP_MODULES[$MOD]} >/dev/null 2>&1
+# Make a second pass, just installing modules from source
+for MOD in ${!SOURCE_MODULES[*]} ; do
+  # get the name of the module directory
+  module_name=`echo $MOD | awk -F- '{print $NF}'`
+  # set up git base command to use the correct path
+  git_cmd_base="git --git-dir=${MODULE_PATH}/${module_name}/.git --work-tree ${MODULE_PATH}/${module_name}"
+  # treat any occurrence of the module as a match
+  if ! echo $MODULE_LIST | grep "${module_name}" >/dev/null 2>&1; then
+    # clone modules that are not installed
+    git clone $MOD "${MODULE_PATH}/${module_name}"
+  else
+    if [ ! -d ${MODULE_PATH}/${module_name}/.git ]; then
+      # delete and re-clone if the directory is not a git repo
+      rm -Rvf "${MODULE_PATH}/${module_name}"
+      git clone $MOD "${MODULE_PATH}/${module_name}"
+    elif [ `${git_cmd_base} remote show origin | grep 'Fetch URL' | awk -F'URL: ' '{print $2}'` != $MOD ]; then
+      # delete and re-clone if the repo does not match our specified remote
+      rm -Rvf "${MODULE_PATH}/${module_name}"
+      git clone $MOD "${MODULE_PATH}/${module_name}"
     fi
+  fi
+  # make sure the correct revision is installed, I have to use rev-list b/c rev-parse does not work with tags
+  if [ `${git_cmd_base} rev-list HEAD | head -1` != `${git_cmd_base} rev-list ${SOURCE_MODULES[$MOD]} | head -1` ]; then
+    # fetch the latest refs from the repo
+    $git_cmd_base fetch
+    # checkout correct revision
+    $git_cmd_base checkout ${SOURCE_MODULES[$MOD]}
   fi
 done
