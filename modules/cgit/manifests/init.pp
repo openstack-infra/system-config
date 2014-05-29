@@ -31,6 +31,10 @@ class cgit(
 
   include apache
 
+  if ($::osfamily == 'RedHat') {
+    include cgit::selinux
+  }
+
   package { [
       'cgit',
       'git-daemon',
@@ -68,22 +72,6 @@ class cgit(
     require => User['cgit'],
   }
 
-  exec { 'restorecon -R -v /var/lib/git':
-    path        => '/sbin',
-    require     => File['/var/lib/git'],
-    subscribe   => File['/var/lib/git'],
-    refreshonly => true,
-  }
-
-  selboolean { 'httpd_enable_cgi':
-    persistent => true,
-    value      => on
-  }
-
-  package { 'policycoreutils-python':
-    ensure => present,
-  }
-
   if $behind_proxy == true {
     $http_port = 8080
     $https_port = 4443
@@ -93,27 +81,6 @@ class cgit(
     $http_port = 80
     $https_port = 443
     $daemon_port = 9418
-  }
-
-  exec { 'cgit_allow_http_port':
-    # If we cannot add the rule modify the existing rule.
-    onlyif      => "bash -c \'! semanage port -a -t http_port_t -p tcp ${http_port}\'",
-    command     => "semanage port -m -t http_port_t -p tcp ${http_port}",
-    path        => '/bin:/usr/sbin',
-    before      => Service['httpd'],
-    require     => Package['policycoreutils-python'],
-    subscribe   => File['/etc/httpd/conf/httpd.conf'],
-    refreshonly => true,
-  }
-
-  exec { 'cgit_allow_https_port':
-    # If we cannot add the rule modify the existing rule.
-    onlyif      => "bash -c \'! semanage port -a -t http_port_t -p tcp ${https_port}\'",
-    command     => "semanage port -m -t http_port_t -p tcp ${https_port}",
-    path        => '/bin:/usr/sbin',
-    require     => Package['policycoreutils-python'],
-    subscribe   => File['/etc/httpd/conf.d/ssl.conf'],
-    refreshonly => true,
   }
 
   apache::vhost { $vhost_name:
