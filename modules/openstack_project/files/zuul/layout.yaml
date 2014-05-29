@@ -3448,6 +3448,20 @@ projects:
     release:
       - blazar-nova-tarball
 
+  - name: stackforge/cachemonkey
+    check:
+      - gate-cachemonkey-pep8
+      - gate-cachemonkey-python26
+      - gate-cachemonkey-python27
+      - gate-cachemonkey-python33
+    gate:
+      - gate-cachemonkey-pep8
+      - gate-cachemonkey-python26
+      - gate-cachemonkey-python27
+      - gate-cachemonkey-python33
+    post:
+      - cachemonkey-coverage
+
   - name: stackforge/cl-openstack-client
     check:
       - gate-cl-openstack-client-run-tests
