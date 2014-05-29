@@ -1,4 +1,13 @@
 - project:
+    name: aviator
+    github-org: stackforge
+    node: bare-precise
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - 'gate-aviator-tests'
+
+- project:
     name: gantt
     github-org: openstack
     node: bare-precise
@@ -162,6 +171,7 @@
       - gate-{name}-puppet-syntax
       - gate-{name}-puppet-apply
       - gate-{name}-pep8
+      - experimental-swift-logs-{name}-pep8
 
 - project:
     name: gitdm
@@ -208,6 +218,16 @@
       - pypi-jobs
       - translation-jobs
       - openstack-publish-jobs
+
+- project:
+    name: sahara-specs
+    github-org: openstack
+    node: bare-precise
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - gate-{name}-docs
+      - gate-{name}-python27
 
 - project:
     name: python-saharaclient
@@ -482,6 +502,19 @@
 
     jobs:
       - maven-plugin-jobs
+
+- project:
+    name: delete-project-gerrit-plugin
+    node: bare-precise
+    tarball-site: tarballs.openstack.org
+    gerrit-project: https://git.openstack.org/openstack-infra/gerrit
+    gerrit-branch: openstack/2.8.4
+    plugin-project: https://gerrit.googlesource.com/plugins/delete-project
+    plugin-name: delete-project
+    plugin-branch: master
+
+    jobs:
+      - gerrit-plugin-jobs
 
 - project:
     name: javamelody-gerrit-plugin
@@ -1499,6 +1532,16 @@
       - oslotest-cross-test
 
 - project:
+    name: dib-utils
+    github-org: openstack
+    node: bare-precise
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - python-jobs
+      - pypi-jobs
+
+- project:
     name: os-apply-config
     github-org: openstack
     node: bare-precise
@@ -1513,10 +1556,12 @@
     github-org: openstack
     node: bare-precise
     tarball-site: tarballs.openstack.org
+    doc-publisher-site: docs.openstack.org
 
     jobs:
       - python-jobs
       - pypi-jobs
+      - openstack-publish-jobs
 
 - project:
     name: os-collect-config
@@ -1556,6 +1601,7 @@
 
     jobs:
       - python-jobs
+      - pypi-jobs
 
 - project:
     name: tripleo-image-elements
@@ -2009,6 +2055,15 @@
       - python-jobs
 
 - project:
+    name: barbican-specs
+    github-org: openstack
+    node: bare-precise
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - gate-{name}-docs
+
+- project:
     name: python-barbicanclient
     github-org: openstack
     node: bare-precise
@@ -2097,7 +2152,13 @@
           envlist: ceilometer-tip
           node: bare-centos6
       - gate-{name}-tox-{envlist}:
+          envlist: ironic-stable
+      - gate-{name}-tox-{envlist}:
           envlist: ironic-tip
+      - gate-{name}-tox-{envlist}:
+          envlist: barbican-tip
+      - gate-{name}-tox-{envlist}:
+          envlist: storyboard-tip
 
 - project:
     name: stevedore
@@ -2190,9 +2251,10 @@
     jobs:
       - python-jobs
       - rally-jobs
-      - check-rally-install-{node}:
+      - hook-{name}-rtfd
+      - gate-rally-install-{node}:
           node: bare-precise
-      - check-rally-install-{node}:
+      - gate-rally-install-{node}:
           node: bare-centos6
       - 'check-rally-cli':
           node: 'devstack-precise || devstack-precise-check'
@@ -2206,6 +2268,14 @@
     jobs:
       - python-jobs
 
+- project:
+    name: osprofiler
+    github-org: stackforge
+    node: bare-precise
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - python-jobs
 
 - project:
     name: openstack-manuals
@@ -2232,8 +2302,6 @@
 
       - openstack-misc-guides-{lang}
 
-      - openstack-operations-guide-{lang}
-
 - project:
     name: operations-guide
     github-org: openstack
@@ -2244,6 +2312,8 @@
       - manual-translation-jobs
       - '{name}-tox-doc-{envlist}':
           envlist: publishdocs
+      - openstack-operations-guide-{lang}:
+          lang: ja
 
 - project:
     name: manila
@@ -2361,6 +2431,16 @@
     jobs:
       - python-jobs
       - pypi-jobs
+
+- project:
+    name: training-guides
+    github-org: openstack
+    node: bare-precise
+    
+    jobs:
+      - openstack-doc-jobs
+      - '{name}-tox-doc-{envlist}':
+         envlist: publishdocs
 
 - project:
     name: turbo-hipster
@@ -2569,3 +2649,4 @@
 
     jobs:
       - python-jobs
+
