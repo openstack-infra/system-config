@@ -70,7 +70,7 @@ def setup_gerrit_repo
        "#{GERRIT_SITE} #{GIT_ORIGIN}", false
 end
 
-def setup_contrail_repo(use_public=ENV['CONTRAIL_VNC_PRIVATE'].nil?)
+def setup_contrail_repo(use_public)
     # Restore to parent directory
     sh "rm -rf #{WORKSPACE}/repo"
     sh "mkdir -p #{WORKSPACE}/repo"
@@ -126,7 +126,7 @@ end
 
 def main
     setup_gerrit_repo
-    setup_contrail_repo
+    setup_contrail_repo(ARGV[0].nil? or ARGV[0] != "use_private")
     switch_gerrit_repo
     pre_build_setup
 end
