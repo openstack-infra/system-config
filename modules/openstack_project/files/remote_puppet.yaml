@@ -3,10 +3,16 @@
   tasks:
     - name: run puppet
       shell: timeout -s 9 30m puppet agent --onetime --ignorecache --no-daemonize --no-usecacheonfailure --no-splay
+    - irc: server=irc.freenode.net channel="#openstack-infra" nick=InfraAnsible
+           msg="Puppet failed on git mirrors"
+      when: result|failed
 - hosts: review.openstack.org
   tasks:
     - name: run puppet
       shell: timeout -s 9 30m puppet agent --onetime --ignorecache --no-daemonize --no-usecacheonfailure --no-splay
+    - irc: server=irc.freenode.net channel="#openstack-infra" nick=InfraAnsible
+           msg="Puppet failed on gerrit"
+      when: result|failed
 - hosts: "!review.openstack.org:!git0*"
   tasks:
     - name: run puppet
