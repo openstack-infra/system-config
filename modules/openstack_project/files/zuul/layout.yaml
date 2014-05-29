@@ -427,6 +427,8 @@ jobs:
     voting: false
   - name: experimental-devstack-tempest-dsvm-f20
     voting: false
+  - name: experimental-ceilometer-devstack-tempest-dsvm-f20
+    voting: false
 # For Gerrit ver 2.4.x (using maven)
   - name: ^(gate|check)-gerrit-unittests$
     branch: ^openstack/2\.4.*$
@@ -661,6 +663,8 @@ projects:
       - ceilometer-merge-release-tags
     periodic:
       - ceilometer-propose-translation-update
+    experimental:
+      - experimental-ceilometer-devstack-tempest-dsvm-f20
 
   - name: openstack/ceilometer-specs
     check:
