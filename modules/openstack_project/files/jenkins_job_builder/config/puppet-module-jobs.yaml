@@ -40,8 +40,8 @@
       - console-log
 
 - job-template:
-    name: 'gate-{name}-puppet-apply'
-    node: '{node}'
+    name: 'gate-{name}-puppet-apply-precise'
+    node: bare-precise
 
     builders:
       - gerrit-git-prep
@@ -49,6 +49,23 @@
 
     publishers:
       - console-log
+
+- job-template:
+    name: 'gate-{name}-puppet-apply-centos6'
+    node: bare-centos6
+
+    builders:
+      - gerrit-git-prep
+      - puppet-apply
+
+    publishers:
+      - console-log
+
+- job-group:
+    name: 'gate-{name}-puppet-apply'
+    jobs:
+      - 'gate-{name}-puppet-apply-centos6'
+      - 'gate-{name}-puppet-apply-precise'
 
 - job-group:
     name: 'puppet-module-unit'
