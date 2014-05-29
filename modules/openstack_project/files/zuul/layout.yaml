@@ -1825,7 +1825,6 @@ projects:
           - post-mirror-python27
           - post-mirror-python33
 
-#TODO: add docs
   - name: openstack/os-cloud-config
     template:
       - name: check-requirements
@@ -1845,6 +1844,7 @@ projects:
     experimental-tripleo:
       - check-tripleo-ironic-undercloud-precise
     post:
+      - os-cloud-config-docs
       - os-cloud-config-coverage
       - os-cloud-config-branch-tarball
     pre-release:
