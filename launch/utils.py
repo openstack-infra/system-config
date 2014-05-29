@@ -188,7 +188,7 @@ def ssh_connect(ip, username, connect_kwargs={}, timeout=60):
         try:
             client = SSHClient(ip, username, **connect_kwargs)
             break
-        except socket.error, e:
+        except socket.error as e:
             print "While testing ssh access:", e
             time.sleep(5)
 
