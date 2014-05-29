@@ -2855,6 +2855,14 @@ projects:
       - gate-config-puppet-lint
       - gate-config-puppet-syntax
 
+  - name: openstack-infra/puppet-zuul
+    check:
+      - gate-config-puppet-lint
+      - gate-config-puppet-syntax
+    gate:
+      - gate-config-puppet-lint
+      - gate-config-puppet-syntax
+
   - name: openstack-infra/puppet-vcsrepo
     check:
       - noop

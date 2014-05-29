@@ -155,6 +155,9 @@
   group: openstack-ci
 - project: openstack-infra/puppet-vcsrepo
   group: openstack-ci
+- project: openstack-infra/puppet-zuul
+  description: Puppet module to install and configure zuul
+  group: openstack-ci
 - project: openstack-infra/pypi-mirror
   group: openstack-ci
   upstream: git://github.com/openstack-infra/jeepyb.git
