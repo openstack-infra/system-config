@@ -23,13 +23,16 @@ PYTHON3=${4:-false}
 PYPY=${5:-false}
 ALL_MYSQL_PRIVS=${6:-false}
 GIT_BASE=${7:-git://git.openstack.org}
+ENABLE_UNBOUND=${8:-true}
 
-# Save the nameservers configured by our provider.
-cat >/tmp/forwarding.conf <<EOF
+if [ $ENABLE_UNBOUND == true ]; then
+    # Save the nameservers configured by our provider.
+    cat >/tmp/forwarding.conf <<EOF
 forward-zone:
   name: "."
   forward-addr: 8.8.8.8
 EOF
+fi
 
 sudo hostname $HOSTNAME
 # Fedora image doesn't come with wget
@@ -44,26 +47,42 @@ sudo git clone --depth=1 $GIT_BASE/openstack-infra/config.git \
 sudo /bin/bash /root/config/install_modules.sh
 if [ -z "$NODEPOOL_SSH_KEY" ] ; then
     sudo puppet apply --modulepath=/root/config/modules:/etc/puppet/modules \
-	-e "class {'openstack_project::single_use_slave': sudo => $SUDO, thin => $THIN, python3 => $PYTHON3, include_pypy => $PYPY, all_mysql_privs => $ALL_MYSQL_PRIVS, }"
+        -e "class {'openstack_project::single_use_slave':
+                sudo => $SUDO,
+                thin => $THIN,
+                python3 => $PYTHON3,
+                include_pypy => $PYPY,
+                all_mysql_privs => $ALL_MYSQL_PRIVS,
+                enable_unbound => $ENABLE_UNBOUND,
+            }"
 else
     sudo puppet apply --modulepath=/root/config/modules:/etc/puppet/modules \
-	-e "class {'openstack_project::single_use_slave': install_users => false, sudo => $SUDO, thin => $THIN, python3 => $PYTHON3, include_pypy => $PYPY, all_mysql_privs => $ALL_MYSQL_PRIVS, ssh_key => '$NODEPOOL_SSH_KEY', }"
+        -e "class {'openstack_project::single_use_slave':
+                install_users => false,
+                sudo => $SUDO,
+                thin => $THIN,
+                python3 => $PYTHON3,
+                include_pypy => $PYPY,
+                all_mysql_privs => $ALL_MYSQL_PRIVS,
+                ssh_key => '$NODEPOOL_SSH_KEY',
+                enable_unbound => $ENABLE_UNBOUND,
+            }"
 fi
 
-# The puppet modules should install unbound.  Take the nameservers
-# that we ended up with at boot and configure unbound to forward to
-# them.
-sudo mv /tmp/forwarding.conf /etc/unbound/
-sudo chown root:root /etc/unbound/forwarding.conf
-sudo chmod a+r /etc/unbound/forwarding.conf
-# HPCloud has selinux enabled by default, Rackspace apparently not.
-# Regardless, apply the correct context.
-if [ -x /sbin/restorecon ] ; then
-    sudo chcon system_u:object_r:named_conf_t:s0 /etc/unbound/forwarding.conf
-fi
-
-# Overwrite /etc/resolv.conf at boot
-sudo dd of=/etc/rc.local <<EOF
+if [ $ENABLE_UNBOUND == true ]; then
+    # The puppet modules should install unbound.  Take the nameservers
+    # that we ended up with at boot and configure unbound to forward to
+    # them.
+    sudo mv /tmp/forwarding.conf /etc/unbound/
+    sudo chown root:root /etc/unbound/forwarding.conf
+    sudo chmod a+r /etc/unbound/forwarding.conf
+    # HPCloud has selinux enabled by default, Rackspace apparently not.
+    # Regardless, apply the correct context.
+    if [ -x /sbin/restorecon ] ; then
+        sudo chcon system_u:object_r:named_conf_t:s0 /etc/unbound/forwarding.conf
+    fi
+    # Overwrite /etc/resolv.conf at boot
+    sudo dd of=/etc/rc.local <<EOF
 #!/bin/bash
 set -e
 set -o xtrace
@@ -73,14 +92,15 @@ echo 'nameserver 127.0.0.1' > /etc/resolv.conf
 exit 0
 EOF
 
-sudo bash -c "echo 'include: /etc/unbound/forwarding.conf' >> /etc/unbound/unbound.conf"
-if [ -e /etc/init.d/unbound ] ; then
-    sudo /etc/init.d/unbound restart
-elif [ -e /usr/lib/systemd/system/unbound.service ] ; then
-    sudo systemctl restart unbound
-else
-    echo "Can't discover a method to restart \"unbound\""
-    exit 1
+    sudo bash -c "echo 'include: /etc/unbound/forwarding.conf' >> /etc/unbound/unbound.conf"
+    if [ -e /etc/init.d/unbound ] ; then
+        sudo /etc/init.d/unbound restart
+    elif [ -e /usr/lib/systemd/system/unbound.service ] ; then
+        sudo systemctl restart unbound
+    else
+        echo "Can't discover a method to restart \"unbound\""
+        exit 1
+    fi
 fi
 
 # Make sure DNS works.
