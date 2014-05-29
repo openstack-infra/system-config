@@ -70,7 +70,7 @@ def setup_gerrit_repo
        "#{GERRIT_SITE} #{GIT_ORIGIN}", false
 end
 
-def setup_contrail_repo
+def setup_contrail_repo(use_public=ENV['CONTRAIL_VNC_PRIVATE'].nil?)
     # Restore to parent directory
     sh "rm -rf #{WORKSPACE}/repo"
     sh "mkdir -p #{WORKSPACE}/repo"
@@ -81,10 +81,20 @@ def setup_contrail_repo
 
     # Fix hardcoded ubuntu to the flavor from jenkins slave label
     # e.g. ENV['NODE_LABELS' = "ci-10.84.35.174 juniper-tests swarm"
-    sh "repo init -u git@github.com:Juniper/contrail-vnc -b #{branch}"
+
+    if use_public then
+        sh "repo init -u git@github.com:Juniper/contrail-vnc -b #{branch}"
+    else
+        branch = "mainline" if branch == "master"
+        sh "repo init -u git@github.com:Juniper/contrail-vnc-private " +
+           "-m #{branch}/ubuntu-12-04/manifest-havana.xml"
+    end
 
     # Sync the repo
     sh "repo sync"
+
+    # Remove annoying non-exsting shallow file symlink
+    sh "rm -rf third_party/euca2ools/.git/shallow"
 end
 
 # TODO Ideally, we should tweak .repo/manifest.xml to directly fetch project

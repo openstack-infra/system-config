@@ -3,8 +3,11 @@
 $LOAD_PATH.unshift "/usr/local/jenkins/slave_scripts/",
                    "/usr/local/jenkins/slave_scripts/ci-infra"
 
+ENV['WORKSPACE']=ENV['PWD']
+
 require 'util'
 require 'launch_vms'
+
 
 def create
     # Launch 2 ci-subslave VMs
@@ -22,7 +25,7 @@ ext_routers = []
 router_asn = 64512
 
 env.roledefs = {
-    'all': [host1],
+    'all': [host1, host2],
     'cfgm': [host1],
     'openstack': [host1],
     'control': [host1],
@@ -47,10 +50,10 @@ env.passwords = {
 
 env.ostypes = {
     host1:'ubuntu',
-    host1:'ubuntu',
+    host2:'ubuntu',
 }
 
-env.test_repo_dir='#{ENV['HOME']}/test'
+env.test_repo_dir='#{ENV['HOME']}/contrail-test'
 env.mail_from='ci-admin@opencontrail.org'
 env.mail_to='ci-admin@opencontrail.org'
 # env.interface_rename=False
@@ -80,16 +83,16 @@ end
  cp /opt/contrail/contrail_packages/preferences /etc/apt/preferences 
 EOF
 
-def setup
-    image = "/root/contrail-install-packages_1.06-12~havana_all.deb"
+def setup(image = nil)
+    image ||= "/root/contrail-install-packages_1.06-12~havana_all.deb")
     topo_file = "/root/testbed_dual.py"
     patch_file = "/root/setup_sh_patch.diff"
 
-    vms = Vm.all_vms
-    vms = Vm.init_all if vms.empty?
+    @vms = Vm.all_vms
+    @vms = Vm.init_all if @vms.empty?
     File.open(patch_file, "w") { |fp| fp.write @setup_sh_patch }
 
-    vms.each { |vm|
+    @vms.each { |vm|
         Sh.run "ssh root@#{vm.vmname} apt-get update"
         Sh.run "scp #{image} root@#{vm.vmname}:."
         Sh.run "ssh #{vm.vmname} dpkg -i #{image}"
@@ -101,16 +104,33 @@ def setup
         Sh.run "ssh #{vm.vmname} /opt/contrail/contrail_packages/setup.sh"
     }
 
-    vm = vms.first
-    File.open(topo_file, "w") { |fp| fp.write get_dual_topo(vms[0], vms[1]) }
+    vm = @vms.first
+    File.open(topo_file, "w") { |fp| fp.write get_dual_topo(@vms[0], @vms[1]) }
     Sh.run "scp #{topo_file} #{vm.vmname}:/opt/contrail/utils/fabfile/testbeds/testbed.py"
     Sh.run "ssh #{vm.vmname} contrail-fab install_contrail"
     Sh.run "echo \"perl -ni -e 's/JVM_OPTS -Xss\\d+/JVM_OPTS -Xss512/g; print \\$_;' /etc/cassandra/cassandra-env.sh\" | ssh -t #{vm.vmname} \$(< /dev/fd/0)"
     Sh.run "ssh #{vm.vmname} contrail-fab setup_all"
-    Sh.run "ssh #{vm.vmname} contrail-fab run_sanity:quick_sanity"
 end
 
-def run
+def build_contrail_packages(repo = "#{ENV['WORKSPACE']}/repo")
+    ENV['BUILD_ONLY'] = "1"
+    Sh.run "cd #{repo}"
+    Sh.run "scons #{repo}/build/third_party/log4cplus"
+    Sh.run "rm -rf #{repo}/third_party/euca2ools/.git/shallow"
+    Sh.run "cd #{repo}/tools/packaging/build/"
+    Sh.run "./packager.py"
+
+    # Return the all-in-one debian package file path.
+    return nil
+end
+
+def run_sanity
+    vm = @vms.first
+    Sh.run "ssh #{vm.vmname} source /opt/contrail/api-venv/bin/activate && pip install fixtures testtools testresources selenium pyvirtualdisplay"
+    Sh.run "rm -rf #{ENV['HOME']}/contrail-test"
+    Sh.run "git clone git@github.com:Juniper/contrail-test.git #{ENV['HOME']}/contrail-test"
+    Sh.run "ssh #{vm.vmname} contrail-fab add_images"
+    Sh.run "ssh #{vm.vmname} contrail-fab run_sanity:quick_sanity"
     sleep 100000
 end
 
@@ -120,10 +140,11 @@ def cleanup
 end
 
 def main
-    create
-    # setup
-    run
-    cleanup
+    image = build_contrail_packages
+    # create
+    # setup(image)
+    # run_sanity
+    # cleanup
 end
 
 main
