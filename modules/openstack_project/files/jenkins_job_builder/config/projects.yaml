@@ -2569,3 +2569,13 @@
 
     jobs:
       - python-jobs
+
+- project:
+    name: training-guides
+    github-org: openstack
+    node: bare-precise
+
+    jobs:
+      - openstack-doc-jobs
+      - '{name}-tox-doc-{envlist}':
+         envlist: publishdocs

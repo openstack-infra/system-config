@@ -4968,3 +4968,9 @@ projects:
       - noop
     gate:
       - noop
+
+  - name: openstack/training-guides
+    template:
+      - name: openstack-doc-gate
+    post:
+      - openstack-training-guides-tox-doc-publishdocs
