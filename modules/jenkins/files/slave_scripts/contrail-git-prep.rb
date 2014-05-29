@@ -126,7 +126,7 @@ end
 
 def main
     setup_gerrit_repo
-    setup_contrail_repo(ARGV[0].nil? or ARGV[0] != "use_private")
+    setup_contrail_repo(ARGV[0].nil? || ARGV[0] != "use_private")
     switch_gerrit_repo
     pre_build_setup
 end
