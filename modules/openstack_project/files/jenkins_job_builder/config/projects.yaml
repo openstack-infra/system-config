@@ -21,6 +21,16 @@
       - python-jobs
 
 - project:
+    name: training-guides
+    github-org: openstack
+    node: bare-precise
+
+    jobs:
+      - openstack-doc-jobs
+      - '{name}-tox-doc-{envlist}':
+         envlist: publishdocs
+
+- project:
     name: fuel-specs
     github-org: stackforge
     node: bare-precise
