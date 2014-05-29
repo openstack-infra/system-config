@@ -4971,3 +4971,11 @@ projects:
       - noop
     gate:
       - noop
+    pre-release:
+      - doc8-tarball
+    release:
+      - doc8-tarball:
+        - doc8-pypi-upload:
+          - post-mirror-python26
+          - post-mirror-python27
+          - post-mirror-python33
