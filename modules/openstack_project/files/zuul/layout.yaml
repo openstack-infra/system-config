@@ -613,6 +613,8 @@ jobs:
     branch: ^(?!stable/(havana|icehouse)).*$
   - name: gate-tuskar-ui-selenium
     voting: false
+  - name: gate-tuskar-ui-jshint
+    voting: false
 
 # The project list is grouped by type of project, and within each
 # group, projects are sorted (mostly) alphabetically.
@@ -2481,11 +2483,13 @@ projects:
       - gate-tuskar-ui-python26
       - gate-tuskar-ui-python27
       - gate-tuskar-ui-selenium
+      - gate-tuskar-ui-jshint
     gate:
       - gate-tuskar-ui-pep8
       - gate-tuskar-ui-python26
       - gate-tuskar-ui-python27
       - gate-tuskar-ui-selenium
+      - gate-tuskar-ui-jshint
     experimental-tripleo:
       - check-tripleo-ironic-seed-precise
       - check-tripleo-undercloud-precise
