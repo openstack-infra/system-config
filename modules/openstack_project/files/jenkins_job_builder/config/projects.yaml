@@ -1517,6 +1517,7 @@
     jobs:
       - python-jobs
       - pypi-jobs
+      - openstack-publish-jobs
 
 - project:
     name: os-collect-config
