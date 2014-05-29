@@ -79,7 +79,7 @@ function is_hidden(project, change_id) {
     $.each(filters, function(filter_i, filter) {
         if(project.indexOf(filter) != -1)
             hide = false;
-        if(change_id.indexOf(filter) != -1)
+        if(change_id !== null && change_id.indexOf(filter) != -1)
             hide = false;
     });
     return hide;
