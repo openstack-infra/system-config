@@ -34,6 +34,7 @@ openstack-infra:
       - openstack-infra/publications
       - openstack-infra/puppet-apparmor
       - openstack-infra/puppet-dashboard
+      - openstack-infra/puppet-jenkins
       - openstack-infra/puppet-pip
       - openstack-infra/puppet-storyboard
       - openstack-infra/puppet-vcsrepo
@@ -679,6 +680,7 @@ openstack-merges:
       - openstack-infra/publications
       - openstack-infra/puppet-apparmor
       - openstack-infra/puppet-dashboard
+      - openstack-infra/puppet-jenkins
       - openstack-infra/puppet-pip
       - openstack-infra/puppet-storyboard
       - openstack-infra/puppet-vcsrepo
