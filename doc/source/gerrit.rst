@@ -464,7 +464,7 @@ To rename a project:
    project has been created but is empty, trigger replication to
    populate it::
 
-     ssh -p 29418 review.openstack.org gerrit replicate --all
+     ssh -p 29418 review.openstack.org replication start --all
 
 #. Submit a change that updates .gitreview with the new location of the
    project.
