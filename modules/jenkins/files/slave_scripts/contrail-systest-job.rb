@@ -83,7 +83,7 @@ end
  cp /opt/contrail/contrail_packages/preferences /etc/apt/preferences 
 EOF
 
-def setup(image = nil)
+def setup(image = @image)
     image ||= "/root/contrail-install-packages_1.06-12~havana_all.deb")
     topo_file = "/root/testbed_dual.py"
     patch_file = "/root/setup_sh_patch.diff"
@@ -119,9 +119,11 @@ def build_contrail_packages(repo = "#{ENV['WORKSPACE']}/repo")
     Sh.run "rm -rf #{repo}/third_party/euca2ools/.git/shallow"
     Sh.run "cd #{repo}/tools/packaging/build/"
     Sh.run "./packager.py"
+    Sh.run "ls -al #{repo}/build/artifacts/contrail-install-packages_*_all.deb"
 
     # Return the all-in-one debian package file path.
-    return nil
+    @image = Sh.run "ls -1 #{repo}/build/artifacts/contrail-install-packages_*_all.deb"
+    puts "Successfully built package #{image}"
 end
 
 def run_sanity
@@ -140,9 +142,9 @@ def cleanup
 end
 
 def main
-    image = build_contrail_packages
+    build_contrail_packages
     # create
-    # setup(image)
+    # setup
     # run_sanity
     # cleanup
 end
