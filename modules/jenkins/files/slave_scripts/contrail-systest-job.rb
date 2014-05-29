@@ -130,8 +130,10 @@ end
 def setup_sanity
     vm = @vms.first
     Sh.run "ssh #{vm.vmname} source /opt/contrail/api-venv/bin/activate && pip install fixtures testtools testresources selenium pyvirtualdisplay"
+
+    branch = ENV['ZUUL_BRANCH'] || "master"
     Sh.run "rm -rf #{ENV['HOME']}/contrail-test"
-    Sh.run "git clone git@github.com:Juniper/contrail-test.git #{ENV['HOME']}/contrail-test"
+    Sh.run "git clone --branch #{branch} git@github.com:Juniper/contrail-test.git #{ENV['HOME']}/contrail-test"
 end
 
 def verify_contrail
@@ -146,7 +148,6 @@ def run_sanity
     # Set http-proxy
     Sh.run "ssh #{vm.vmname} contrail-fab add_images"
     Sh.run "ssh #{vm.vmname} contrail-fab run_sanity:quick_sanity"
-    sleep 100000
 end
 
 def cleanup
