@@ -29,8 +29,10 @@ class openstack_project::pbx (
     iptables_rules6           => ['-m udp -p udp --dport 10000:20000 -j ACCEPT'],
   }
 
-  class { 'selinux':
-    mode => 'enforcing',
+  if ($::osfamily == 'RedHat') {
+    class { 'selinux':
+      mode => 'enforcing'
+    }
   }
 
   realize (
