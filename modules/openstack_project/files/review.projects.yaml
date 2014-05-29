@@ -472,6 +472,9 @@
   acl-config: /home/gerrit2/acls/stackforge/blazar.config
 - project: stackforge/bufunfa
   upstream: git://github.com/ekarlso/bufunfa.git
+- project: stackforge/cachemonkey
+  description: Image pre-caching controller service
+  upstream: git://github.com/bdelliott/cachemonkey.git
 - project: stackforge/cl-openstack-client
   description: Common Lisp OpenStack client libraries
   upstream: git://github.com/jd/cl-openstack-client.git
