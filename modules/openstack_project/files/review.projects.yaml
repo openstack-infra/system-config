@@ -150,6 +150,9 @@
   group: openstack-ci
 - project: openstack-infra/puppet-dashboard
   group: openstack-ci
+- project: openstack-infra/puppet-pip
+  description: Puppet module to deploy pip and manage packages with pip
+  group: openstack-ci
 - project: openstack-infra/puppet-storyboard
   description: Puppet module to deploy storyboard
   group: openstack-ci
