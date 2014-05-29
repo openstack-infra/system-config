@@ -4968,3 +4968,10 @@ projects:
       - noop
     gate:
       - noop
+
+  - name: stackforge/openstack-training-guides
+    template:
+      - name: openstack-doc-gate
+      - name: openstack-doc-translation
+    post:
+      - openstack-manuals-tox-doc-publishdocs
