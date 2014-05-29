@@ -121,6 +121,9 @@ class Vm
 
         pp @@vms
         setup_etc_hosts
+
+        puts "All ci-sublaves up!"
+        pp @@vms
         return @@vms
     end
 

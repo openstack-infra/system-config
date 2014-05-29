@@ -100,7 +100,8 @@ function devstack_setup() {
 
 # Setup a node as a build system where contrail software can be built.
 function build_setup {
-apt-get -y install python-software-properties git python-lxml unzip patch scons flex bison make vim ant libexpat-dev libgettextpo0 libcurl4-openssl-dev python-dev autoconf automake libtool libevent-dev libxml2-dev libxslt-dev python-setuptools build-essential devscripts debhelper ruby maven traceroute wireshark autossh firefox xterm libbz2-dev bzip2-devel apt-file python-sphinx git-core pkg-config linux-headers-virtual
+apt-get -y install python-software-properties git python-lxml unzip patch scons flex bison make vim ant libexpat-dev libgettextpo0 libcurl4-openssl-dev python-dev autoconf automake libtool libevent-dev libxml2-dev libxslt-dev python-setuptools build-essential devscripts debhelper ruby maven traceroute wireshark autossh firefox xterm libbz2-dev bzip2-devel apt-file python-sphinx git-core pkg-config linux-headers-virtual python-pip
+pip install fixtures testtools testresources selenium pyvirtualdisplay
 
 export PATH=$PATH:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games
 

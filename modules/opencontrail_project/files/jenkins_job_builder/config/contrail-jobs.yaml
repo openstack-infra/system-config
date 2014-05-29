@@ -1,5 +1,5 @@
 - job-template:
-    name: 'ci-{name}-build'
+    name: 'ci-{name}-unittest'
     node: juniper-tests
 
     wrappers:
@@ -14,19 +14,36 @@
           #!/bin/bash -xe
           export USER=jenkins
           export JOB_NAME={name}
-          contrail-ci-run /usr/local/jenkins/slave_scripts/contrail-unittests-job.sh
+          /usr/bin/contrail-ci-run ruby /usr/local/jenkins/slave_scripts/contrail-git-prep.rb
+          /usr/local/jenkins/slave_scripts/contrail-unittests-job.sh
+
+- job-template:
+    name: 'ci-{name}-systest'
+    node: juniper-tests
+
+    wrappers:
+      - timeout:
+          timeout: 600
+          fail: true
+      - timestamps
+
+    builders:
+      - gerrit-git-prep
+      - shell: |
+          #!/bin/bash -xe
+          export USER=jenkins
+          export JOB_NAME={name}
+          export CONTRAIL_VNC_PRIVATE=1
+          /usr/bin/contrail-ci-run ruby /usr/local/jenkins/slave_scripts/contrail-git-prep.rb
+          /usr/local/jenkins/slave_scripts/contrail-systest-job.rb
 
 - job-group:
-    name: contrail-controller-jobs
+    name: contrail-unittest-jobs
     jobs:
-      - 'ci-{name}-build'
+      - 'ci-{name}-unittest'
 
 - job-group:
-    name: contrail-ci-test-jobs
+    name: contrail-systest-jobs
     jobs:
-      - 'ci-{name}-build'
+      - 'ci-{name}-systest'
 
-- job-group:
-    name: contrail-controller-test-jobs
-    jobs:
-      - 'ci-{name}-build'
