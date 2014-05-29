@@ -3421,6 +3421,10 @@ projects:
       - gate-designate-specs-python27
       - gate-designate-specs-docs
 
+  - name: stackforge/doc8
+    template:
+      - name: python-jobs
+
   - name: stackforge/entropy
     check:
       - gate-entropy-docs
@@ -4640,12 +4644,6 @@ projects:
       - gate-stacktach-python27
 
   - name: stackforge/xenapi-os-testing
-    check:
-      - noop
-    gate:
-      - noop
-
-  - name: stackforge/doc8
     check:
       - noop
     gate:
