@@ -16,6 +16,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import argparse
 import os.path
 import re
 import shutil
@@ -28,8 +29,17 @@ URL = ('https://git.openstack.org/cgit/openstack-infra/config/plain/'
 PROJECT_RE = re.compile('^-?\s+project:\s+(.*)$')
 
 
+parser = argparse.ArgumentParser()
+parser.add_argument('-p', '--git-protocol',
+                    help='GIT protocol to use. Default is "git".',
+                    default='git',
+                    choices=['git', 'http'],
+                    )
+args = parser.parse_args()
+
+
 def clone_repo(project):
-    remote = 'git://git.openstack.org/%s.git' % project
+    remote = '%s://git.openstack.org/%s.git' % (args.git_protocol, project)
 
     # Clear out any existing target directory first, in case of a retry.
     try:
