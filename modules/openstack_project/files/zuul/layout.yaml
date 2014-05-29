@@ -505,8 +505,6 @@ jobs:
     voting: false
   - name: check-rally-dsvm-glance
     voting: false
-  - name: gate-python-glanceclient-python33
-    voting: false
   - name: gate-python-neutronclient-python33
     voting: false
   - name: gate-python-openstackclient-python33
@@ -1316,6 +1314,7 @@ projects:
   - name: openstack/python-glanceclient
     template:
       - name: python-jobs
+      - name: python3-jobs
       - name: openstack-client-publish-jobs
       - name: check-requirements
       - name: integrated-gate
