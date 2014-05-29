@@ -3144,6 +3144,14 @@ projects:
     gate:
       - noop
 
+  - name: openstack-infra/puppet-jenkins
+    check:
+      - gate-config-puppet-lint
+      - gate-config-puppet-syntax
+    gate:
+      - gate-config-puppet-lint
+      - gate-config-puppet-syntax
+
   - name: openstack-infra/puppet-pip
     check:
       - gate-config-puppet-lint
