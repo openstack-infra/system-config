@@ -9,7 +9,7 @@ require 'util'
 require 'launch_vms'
 
 
-def create
+def create_vms
     # Launch 2 ci-subslave VMs
     Vm.create_subslaves(2)
 end
@@ -83,8 +83,9 @@ end
  cp /opt/contrail/contrail_packages/preferences /etc/apt/preferences 
 EOF
 
-def setup(image = @image)
+def setup_contrail(image = @image)
     image ||= "/root/contrail-install-packages_1.06-12~havana_all.deb"
+    puts "setup_contrail: #{image}"
     topo_file = "/root/testbed_dual.py"
     patch_file = "/root/setup_sh_patch.diff"
 
@@ -126,11 +127,23 @@ def build_contrail_packages(repo = "#{ENV['WORKSPACE']}/repo")
     puts "Successfully built package #{image}"
 end
 
-def run_sanity
+def setup_sanity
     vm = @vms.first
     Sh.run "ssh #{vm.vmname} source /opt/contrail/api-venv/bin/activate && pip install fixtures testtools testresources selenium pyvirtualdisplay"
     Sh.run "rm -rf #{ENV['HOME']}/contrail-test"
     Sh.run "git clone git@github.com:Juniper/contrail-test.git #{ENV['HOME']}/contrail-test"
+end
+
+def verify_contrail
+
+    # Verify that contrail-status shows 'up' for all necessary components.
+    Sh.run "ssh #{@vms[0].vm_name} openstack-status"
+    Sh.run "ssh #{@vms[0].vm_name} contrail-status"
+    Sh.run "ssh #{@vms[1].vm_name} contrail-status"
+end
+
+def run_sanity
+    # Set http-proxy
     Sh.run "ssh #{vm.vmname} contrail-fab add_images"
     Sh.run "ssh #{vm.vmname} contrail-fab run_sanity:quick_sanity"
     sleep 100000
@@ -148,11 +161,13 @@ end
 
 def main
     build_contrail_packages
-    # create
-    # setup
+    create_vms
+    setup_contrail
+    setup_sanity
+    verify_contrail
     # run_sanity
     # wait
-    # cleanup
+    cleanup
 end
 
 main
