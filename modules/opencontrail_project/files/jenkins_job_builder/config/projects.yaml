@@ -7,7 +7,7 @@
 
     jobs:
       - contrail-unittest-jobs
-      - contrail-systest-jobs
+#     - contrail-systest-jobs
 
 - project:
     name: contrail-controller-test
@@ -17,5 +17,6 @@
     doc-publisher-site: docs.opencontrail.org
 
     jobs:
-      - contrail-controller-test-unitest
+      - contrail-unittest-jobs
+      - contrail-systest-jobs
       - contrail-controller-test-devstack
