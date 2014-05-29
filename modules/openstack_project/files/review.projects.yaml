@@ -202,6 +202,9 @@
   group: openstack-ci
   upstream: git://github.com/pabelanger/zuul-packaging.git
   description: Zuul packaging
+- project: openstack-ux/ux
+  description: The OpenStack User Experience Project.
+  use-storyboard: true
 - project: openstack/api-site
   group: openstack-api-site
   options:
