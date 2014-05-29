@@ -779,6 +779,9 @@
   description: OpenStack SDK for .Net
 - project: stackforge/openstack-sdk-php
   description: OpenStack SDK for PHP
+- project: stackforge/openstack-training-guides
+  description: Community created, open source training guides for OpenStack.
+  upstream: git://github.com/fifieldt/openstack-training-guides.git
 - project: stackforge/openstackdroid
   description: Openstackdroid is an Android application to access Openstack clouds
   upstream: https://github.com/rcarrillocruz/openstackdroid.git
@@ -971,3 +974,6 @@
 - project: stackforge/xenapi-os-testing
   description: Scripts to enable running of tempest tests in a nested Xen instance
   upstream: git://github.com/citrix-openstack/xenapi-os-testing.git
+- project: stackforge/openstack-training-guides
+  description: Community created, open source training guides for OpenStack.
+  upstream: git://github.com/fifieldt/openstack-training-guides.git
