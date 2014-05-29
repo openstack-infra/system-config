@@ -84,7 +84,7 @@ end
 EOF
 
 def setup(image = @image)
-    image ||= "/root/contrail-install-packages_1.06-12~havana_all.deb")
+    image ||= "/root/contrail-install-packages_1.06-12~havana_all.deb"
     topo_file = "/root/testbed_dual.py"
     patch_file = "/root/setup_sh_patch.diff"
 
@@ -141,11 +141,17 @@ def cleanup
     Sh.exit
 end
 
+def wait
+    puts "Waiting for ever!"
+    loop do sleep 1 end
+end
+
 def main
     build_contrail_packages
     # create
     # setup
     # run_sanity
+    # wait
     # cleanup
 end
 
