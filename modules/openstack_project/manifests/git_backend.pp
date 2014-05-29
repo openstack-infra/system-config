@@ -101,8 +101,10 @@ class openstack_project::git_backend (
     refreshonly => true,
   }
 
-  class { 'selinux':
-    mode => 'enforcing'
+  if ($::osfamily == 'RedHat') {
+    class { 'selinux':
+      mode => 'enforcing'
+    }
   }
 
   cron { 'mirror_repack':
