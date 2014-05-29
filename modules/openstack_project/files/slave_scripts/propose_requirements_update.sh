@@ -67,8 +67,18 @@ EOF
         git config user.name "OpenStack Proposal Bot"
         git config user.email "openstack-infra@lists.openstack.org"
         git config gitreview.username "proposal-bot"
+        # Do error checking manually to continue with the next project
+        # in case of failures like a broken .gitreview file.
+        set +e
         git review -s
+        RET=$?
+        set -e
         popd
+        if [ "$RET" -ne "0" ] ; then
+            ALL_SUCCESS=1
+            echo "Error in git review -s: Ignoring $PROJECT"
+            continue
+        fi
 
         python update.py $PROJECT_DIR
 
