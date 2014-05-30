@@ -101,6 +101,17 @@ class openstack_project::puppetmaster (
     puppetdb_soft_write_failure  => true,
   }
 
+  file { '/etc/ansible/roles/puppet/defaults':
+    ensure  => directory,
+    require => Class[ansible],
+  }
+
+  file { '/etc/ansible/roles/puppet/defaults/main.yml':
+    ensure  => present,
+    source  => 'puppet:///modules/openstack_project/ansible/puppet.main.yml',
+    require => File['/etc/ansible/roles/puppet/defaults'],
+  }
+
 # Playbooks
 #
   file { '/etc/ansible/remote_puppet.yaml':
