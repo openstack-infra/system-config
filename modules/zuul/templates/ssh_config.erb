@@ -1,0 +1,10 @@
+UserKnownHostsFile=/dev/null
+StrictHostKeyChecking=no
+LogLevel=ERROR
+
+<% if (gerrit_server != "") and (gerrit_user != "") -%>
+Host <%= gerrit_server %>
+   Hostname <%= gerrit_server %>
+   User <%= gerrit_user %>
+   IdentityFile /var/lib/zuul/ssh/id_rsa
+<% end -%>
