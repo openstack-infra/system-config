@@ -1,10 +1,10 @@
 ---
 - hosts: git0*
-  tasks:
-    - include: run_puppet.yaml
+  roles:
+    - puppet
 - hosts: review.openstack.org
-  tasks:
-    - include: run_puppet.yaml
+  roles:
+    - puppet
 - hosts: "!review.openstack.org:!git0*"
-  tasks:
-    - include: run_puppet.yaml
+  roles:
+    - puppet
