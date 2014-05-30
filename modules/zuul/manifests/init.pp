@@ -79,6 +79,12 @@ class zuul (
     }
   }
 
+  if ! defined(Package['yui-compressor']) {
+    package { 'yui-compressor':
+      ensure => present,
+    }
+  }
+
   user { 'zuul':
     ensure     => present,
     home       => '/home/zuul',
@@ -216,11 +222,14 @@ class zuul (
     source   => 'https://github.com/mathiasbynens/jquery-visibility.git',
   }
 
-  file { '/var/lib/zuul/www/jquery-visibility.min.js':
-    ensure  => link,
-    target  => '/opt/jquery-visibility/jquery-visibility.min.js',
-    require => [File['/var/lib/zuul/www'],
-                Vcsrepo['/opt/jquery-visibility']],
+  exec { 'install-jquery-visibility':
+    command     => 'yui-compressor -o /var/lib/zuul/www/jquery-visibility.js /opt/jquery-visibility/jquery-visibility.js',
+    path        => 'bin:/usr/bin',
+    refreshonly => true,
+    subscribe   => Vcsrepo['/opt/jquery-visibility'],
+    require     => [File['/var/lib/zuul/www'],
+                    Package['yui-compressor'],
+                    Vcsrepo['/opt/jquery-visibility']],
   }
 
   file { '/var/lib/zuul/www/index.html':
