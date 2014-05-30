@@ -31,6 +31,8 @@ forward-zone:
 EOF
 
 sudo hostname $HOSTNAME
+echo "127.0.1.1 $HOSTNAME" | sudo tee -a /etc/hosts
+
 # Fedora image doesn't come with wget
 if [ -f /usr/bin/yum ]; then
     sudo yum -y install wget
