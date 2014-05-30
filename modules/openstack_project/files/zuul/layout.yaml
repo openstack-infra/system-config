@@ -371,20 +371,6 @@ project-templates:
             - post-mirror-python27
             - post-mirror-python33
 
-  # Publish pre-releases as wheels and official releases as sdist and
-  # wheels, then sync to the python 2 mirrors only.
-  - name: publish-to-pypi-2only
-    pre-release:
-      - '{name}-tarball':
-          - '{name}-pypi-wheel-upload':
-              - post-mirror-python26
-              - post-mirror-python27
-    release:
-      - '{name}-tarball':
-        - '{name}-pypi-both-upload':
-            - post-mirror-python26
-            - post-mirror-python27
-
   - name: docs-on-rtfd
     post:
       - 'hook-{name}-rtfd'
@@ -1088,7 +1074,7 @@ projects:
       - name: openstack-server-publish-jobs
       - name: check-requirements
       - name: integrated-gate
-      - name: publish-to-pypi-2only
+      - name: publish-to-pypi
 
   - name: openstack/sahara
     template:
@@ -1268,7 +1254,7 @@ projects:
       - name: openstack-client-publish-jobs
       - name: check-requirements
       - name: integrated-gate
-      - name: publish-to-pypi-2only
+      - name: publish-to-pypi
     check:
       - check-devstack-dsvm-cells
       - check-tempest-dsvm-postgres-full
@@ -1841,7 +1827,7 @@ projects:
       - name: openstack-server-publish-jobs
       - name: check-requirements
       - name: integrated-gate
-      - name: publish-to-pypi-2only
+      - name: publish-to-pypi
     check:
       - check-devstack-dsvm-cells
       - gate-tempest-dsvm-large-ops
@@ -1938,7 +1924,7 @@ projects:
       - name: openstack-server-publish-jobs
       - name: check-requirements
       - name: integrated-gate
-      - name: publish-to-pypi-2only
+      - name: publish-to-pypi
     check:
       - gate-oslo.version-pypy
       - gate-oslo.version-python33
