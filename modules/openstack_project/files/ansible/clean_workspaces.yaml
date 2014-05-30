@@ -1,0 +1,4 @@
+---
+- hosts: *.slave.openstack.org
+  tasks:
+    - command: 'rm -rf ~jenkins/workspace/*{{ project }}*'
