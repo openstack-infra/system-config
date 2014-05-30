@@ -1,0 +1,37 @@
+#! /bin/sh
+
+NAME=livegrep
+DAEMON=/opt/livegrep/codesearch
+DAEMON_ARGS="-listen tcp://localhost:9999 /etc/livegrep/codesearch.json"
+PIDFILE=/var/run/$NAME/$NAME.pid
+USER=livegrep
+
+do_start()
+{
+  mkdir -p /var/run/$NAME
+  chown $USER /var/run/$NAME
+  start-stop-daemon --start --quiet --pidfile $PIDFILE -c $USER --exec $DAEMON --test > /dev/null || return 1
+  start-stop-daemon --start --quiet --pidfile $PIDFILE -c $USER --exec $DAEMON -- $DAEMON_ARGS || return 2
+}
+
+do_stop()
+{
+  start-stop-daemon --stop --signal 9 --pidfile $PIDFILE
+  RETVAL="$?"
+  [ "$RETVAL" = 2 ] && return 2
+  rm -f /var/run/$NAME/*
+  return "$RETVAL"
+}
+
+case "$1" in
+  start)
+    do_start
+    ;;
+  stop)
+    do_stop
+    ;;
+  restart)
+    do_stop
+    do_start
+    ;;
+esac
