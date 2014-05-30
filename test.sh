@@ -11,6 +11,9 @@ csplit -sf applytest/puppetapplytest manifests/site.pp '/^$/' {*}
 sed -i -e 's/^[^[:space:]]/#&/g' applytest/puppetapplytest*
 sed -i -e 's@hiera(.\([^.]*\).,\([^)]*\))@\2@' applytest/puppetapplytest*
 
+set +e
+RETURN=0
 for f in `find applytest -name 'puppetapplytest*' -print` ; do
-    sudo puppet apply --modulepath=${MODULE_PATH} --noop --verbose --debug $f >/dev/null
+    sudo puppet apply --modulepath=${MODULE_PATH} --noop --verbose --debug $f >/dev/null || RETURN=1
 done
+exit $RETURN
