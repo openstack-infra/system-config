@@ -371,6 +371,17 @@
               copy-after-failure: true
 
 - publisher:
+    name: coverage-log-ruby
+    publishers:
+      - scp:
+          site: 'static.openstack.org'
+          files:
+            - target: 'logs/$LOG_PATH'
+              source: 'coverage/**'
+              keep-hierarchy: true
+              copy-after-failure: true
+
+- publisher:
     name: test-results
     publishers:
       - scp:

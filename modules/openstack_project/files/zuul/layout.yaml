@@ -3031,9 +3031,9 @@ projects:
 
   - name: stackforge/aviator
     check:
-      - noop
+      - gate-aviator-tests
     gate:
-      - noop
+      - gate-aviator-tests
 
   - name: stackforge/billingstack
     template:
