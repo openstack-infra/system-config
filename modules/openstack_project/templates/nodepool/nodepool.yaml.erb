@@ -23,9 +23,6 @@ labels:
     image: devstack-precise
     min-ready: 42
     providers:
-      - name: hpcloud-az1
-      - name: hpcloud-az2
-      - name: hpcloud-az3
       - name: hpcloud-b1
       - name: hpcloud-b2
       - name: hpcloud-b3
@@ -43,9 +40,6 @@ labels:
     image: bare-precise
     min-ready: 42
     providers:
-      - name: hpcloud-az1
-      - name: hpcloud-az2
-      - name: hpcloud-az3
       - name: hpcloud-b1
       - name: hpcloud-b2
       - name: hpcloud-b3
@@ -58,7 +52,6 @@ labels:
     image: bare-centos6
     min-ready: 21
     providers:
-      - name: hpcloud-az3
       - name: hpcloud-b1
       - name: hpcloud-b2
       - name: hpcloud-b3
@@ -71,9 +64,6 @@ labels:
     image: py3k-precise
     min-ready: 21
     providers:
-      - name: hpcloud-az1
-      - name: hpcloud-az2
-      - name: hpcloud-az3
       - name: hpcloud-b1
       - name: hpcloud-b2
       - name: hpcloud-b3
@@ -96,9 +86,6 @@ labels:
       - name: rax-dfw
       - name: rax-ord
       - name: rax-iad
-      - name: hpcloud-az1
-      - name: hpcloud-az2
-      - name: hpcloud-az3
       - name: hpcloud-b1
       - name: hpcloud-b2
       - name: hpcloud-b3
@@ -287,7 +274,7 @@ providers:
     project-id: '<%= hpcloud_project %>'
     auth-url: 'https://region-a.geo-1.identity.hpcloudsvc.com:35357/v2.0'
     boot-timeout: 180
-    max-servers: 48
+    max-servers: 0
     images:
       - name: devstack-precise
         base-image: 'Ubuntu Server 12.04.4 LTS (amd64 20140408) - Partner Image'
@@ -322,7 +309,7 @@ providers:
     project-id: '<%= hpcloud_project %>'
     auth-url: 'https://region-a.geo-1.identity.hpcloudsvc.com:35357/v2.0'
     boot-timeout: 180
-    max-servers: 192
+    max-servers: 0
     images:
       - name: devstack-precise
         base-image: 'Ubuntu Server 12.04.4 LTS (amd64 20140408) - Partner Image'
@@ -357,7 +344,7 @@ providers:
     project-id: '<%= hpcloud_project %>'
     auth-url: 'https://region-a.geo-1.identity.hpcloudsvc.com:35357/v2.0'
     boot-timeout: 180
-    max-servers: 48
+    max-servers: 0
     images:
       - name: devstack-precise
         base-image: 'Ubuntu Server 12.04.4 LTS (amd64 20140408) - Partner Image'
