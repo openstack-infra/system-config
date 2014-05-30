@@ -81,6 +81,7 @@ class nodepool (
     source   => $git_source_repo,
   }
 
+  include pip
   exec { 'install_nodepool' :
     command     => 'pip install /opt/nodepool',
     path        => '/usr/local/bin:/usr/bin:/bin/',
