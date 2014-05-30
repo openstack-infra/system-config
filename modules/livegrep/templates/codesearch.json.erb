@@ -1,0 +1,13 @@
+<%=
+{
+    "name" => "livegrep",
+    "repositories" => @repos.map { |name, info| {
+        "name" => name,
+        "path" => "/home/livegrep/repos/#{name}",
+        "revisions" => ["HEAD"],
+        "metadata" => {
+            "github" => info["github"]
+        }
+    }}
+}.to_json
+%>
