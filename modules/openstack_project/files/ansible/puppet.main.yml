@@ -1,0 +1,5 @@
+---
+puppet_base_url: http://puppetboard.openstack.org
+puppet_irc_server: irc.freenode.net
+puppet_irc_channel: "#openstack-infra"
+puppet_irc_nick: InfraAnsible
