@@ -8,6 +8,8 @@
       - gerrit-git-prep
       - shell: |
           #!/bin/bash -xe
+          sudo mkdir -p /opt/stack
+          sudo chown $(whoami) /opt/stack
           export DEST=/opt/stack
           cd scripts
           ./redstack build-image mysql
@@ -21,3 +23,4 @@
               target: 'trove/images/ubuntu_mysql.qcow2'
               keep-hierarchy: false
               copy-after-failure: false
+      - console-log
