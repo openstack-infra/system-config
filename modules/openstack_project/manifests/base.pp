@@ -2,7 +2,10 @@
 #
 class openstack_project::base(
   $certname = $::fqdn,
-  $install_users = true
+  $install_users = true,
+  $irc_server = 'irc.freenode.net',
+  $irc_channel = '#openstack-infra',
+  $irc_nick = 'InfraAnsible',
 ) {
   if ($::osfamily == 'Debian') {
     include apt
@@ -158,6 +161,21 @@ class openstack_project::base(
 
   service { 'puppet':
     ensure => stopped,
+  }
+
+  if ! defined(File['/etc/ansible']) {
+    file { '/etc/ansible':
+      ensure  => directory,
+    }
+  }
+
+  file { '/etc/ansible/facts.d':
+    ensure  => directory,
+  }
+
+  file { '/etc/ansible/facts.d/irc.fact':
+    ensure  => present,
+    content => template('openstack_project/facts/irc.erb'),
   }
 }
 

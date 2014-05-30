@@ -4,17 +4,13 @@ class openstack_project::puppetmaster (
   $root_rsa_key,
   $sysadmins = []
 ) {
+  include ansible
   include logrotate
   include openstack_project::params
 
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [4505, 4506, 8140],
     sysadmins                 => $sysadmins,
-  }
-
-  package { 'ansible':
-    ensure   => latest,
-    provider => pip,
   }
 
   class { 'salt':
@@ -67,33 +63,6 @@ class openstack_project::puppetmaster (
     mode   => '0750',
     }
 
-  file { '/etc/ansible':
-    ensure  => directory,
-    source  => 'puppet:///modules/openstack_project/ansible',
-    recurse => true,
-  }
-
-  file { '/usr/local/bin/puppet-inventory':
-    ensure => present,
-    mode   => '0755',
-    owner  => 'root',
-    group  => 'root',
-    source => 'puppet:///modules/openstack_project/puppet-inventory',
-  }
-
-  include logrotate
-  logrotate::file { 'ansible':
-    log     => '/var/log/ansible.log',
-    options => [
-      'compress',
-      'copytruncate',
-      'missingok',
-      'rotate 7',
-      'daily',
-      'notifempty',
-    ],
-  }
-
   if ! defined(File['/root/.ssh']) {
     file { '/root/.ssh':
       ensure => directory,
@@ -130,6 +99,20 @@ class openstack_project::puppetmaster (
     puppetdb_server              => 'puppetdb.openstack.org',
     puppet_service_name          => 'apache2',
     puppetdb_soft_write_failure  => true,
+  }
+
+# Playbooks
+#
+  file { '/etc/ansible/clean_workspaces.yaml':
+    ensure  => present,
+    source  => 'puppet:///modules/openstack_project/ansible/clean_workspaces.yaml',
+    require => Class[ansible],
+  }
+
+  file { '/etc/ansible/remote_puppet.yaml':
+    ensure  => present,
+    source  => 'puppet:///modules/openstack_project/ansible/remote_puppet.yaml',
+    require => Class[ansible],
   }
 
 }
