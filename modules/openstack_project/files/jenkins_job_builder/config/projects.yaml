@@ -210,6 +210,16 @@
       - openstack-publish-jobs
 
 - project:
+    name: sahara-specs
+    github-org: openstack
+    node: bare-precise
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - gate-{name}-docs
+      - gate-{name}-python27
+
+- project:
     name: python-saharaclient
     github-org: openstack
     node: bare-precise

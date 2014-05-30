@@ -402,6 +402,8 @@
   group: sahara
   description: Disk image elements for Sahara
   acl-config: /home/gerrit2/acls/openstack/sahara.config
+- project: openstack/sahara-specs
+  group: sahara
 - project: openstack/security-doc
   description: Documentation work from the OpenStack Security Group (OSSG)
 - project: openstack/stevedore
