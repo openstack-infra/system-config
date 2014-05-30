@@ -142,9 +142,9 @@ end
 def verify_contrail
 
     # Verify that contrail-status shows 'up' for all necessary components.
-    Sh.run "ssh #{@vms[0].vm_name} openstack-status"
-    Sh.run "ssh #{@vms[0].vm_name} contrail-status"
-    Sh.run "ssh #{@vms[1].vm_name} contrail-status"
+    Sh.run "ssh #{@vms[0].vmname} openstack-status"
+    Sh.run "ssh #{@vms[0].vmname} contrail-status"
+    Sh.run "ssh #{@vms[1].vmname} contrail-status"
 end
 
 def run_sanity
