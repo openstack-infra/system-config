@@ -12,6 +12,9 @@
 - project: openstack-dev/devstack
   options:
     - direct-release
+- project: openstack-dev/devstack-vagrant
+  description: Vagrant scripts to build local devstack environments
+  upstream: git://github.com/sdague/devstack-vagrant.git
 - project: openstack-dev/grenade
   upstream: git://github.com/nebula/grenade
   description: OpenStack upgrade testing tool

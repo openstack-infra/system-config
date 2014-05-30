@@ -2637,6 +2637,12 @@ projects:
     gate:
       - noop
 
+  - name: openstack-dev/devstack-vagrant
+    check:
+      - noop
+    gate:
+      - noop
+
   - name: openstack-dev/devstack
     template:
       - name: integrated-gate
