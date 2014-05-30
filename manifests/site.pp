@@ -654,4 +654,10 @@ node 'openstackid-dev.openstack.org' {
   }
 }
 
+node 'livegrep.openstack.org' {
+  class { 'openstack_project::livegrep':
+    sysadmins => hiera('sysadmins', ['admin']),
+  }
+}
+
 # vim:sw=2:ts=2:expandtab:textwidth=79
