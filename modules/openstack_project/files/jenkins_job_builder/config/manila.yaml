@@ -16,12 +16,13 @@
           #!/bin/bash -xe
           export PYTHONUNBUFFERED=true
           export DEVSTACK_GATE_TIMEOUT=60
-          export BASE="/opt/stack"
-
-          # Run setup script with exports of env vars
-          $BASE/new/manila/contrib/ci/setup.sh
+          export ENABLED_SERVICES=manila,m-api,m-shr,m-sch,tempest
+          export PROJECTS="stackforge/manila $PROJECTS"
+          export PROJECTS="stackforge/python-manilaclient $PROJECTS"
 
           function pre_test_hook {
+              # Run setup script with exports of env vars
+              $BASE/new/manila/contrib/ci/setup.sh
               $BASE/new/manila/contrib/ci/pre_test_hook.sh
           }
           export -f pre_test_hook
@@ -58,11 +59,12 @@
           export PYTHONUNBUFFERED=true
           export DEVSTACK_GATE_TIMEOUT=60
           export BASE="/opt/stack"
-
-          # Run setup script with exports of env vars
-          $BASE/new/manila/contrib/ci/multi_backend/setup.sh
+          export PROJECTS="stackforge/manila $PROJECTS"
+          export PROJECTS="stackforge/python-manilaclient $PROJECTS"
 
           function pre_test_hook {
+              # Run setup script with exports of env vars
+              $BASE/new/manila/contrib/ci/multi_backend/setup.sh
               $BASE/new/manila/contrib/ci/multi_backend/pre_test_hook.sh
           }
           export -f pre_test_hook
