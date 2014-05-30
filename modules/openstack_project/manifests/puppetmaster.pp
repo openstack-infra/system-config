@@ -115,4 +115,14 @@ class openstack_project::puppetmaster (
     require => Class[ansible],
   }
 
+  file { '/etc/ansible/roles/puppet/defaults':
+    ensure  => directory,
+    require => Class[ansible],
+  }
+
+  file { '/etc/ansible/roles/puppet/defaults/main.yml':
+    ensure  => present,
+    source  => 'puppet:///modules/openstack_project/ansible/puppet.main.yml',
+    require => File['/etc/ansible/roles/puppet/defaults'],
+  }
 }
