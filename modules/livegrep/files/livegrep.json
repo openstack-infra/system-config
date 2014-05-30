@@ -1,0 +1,10 @@
+{
+    "backends": [
+        {
+            "id": "livegrep",
+            "addr": "localhost:9999"
+        }
+    ],
+    "docroot": "/opt/livegrep/web/",
+    "listen": "0.0.0.0:8080"
+}
