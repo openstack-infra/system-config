@@ -1,0 +1,15 @@
+{
+    "name": "livegrep",
+    "repositories": [
+        <% @openstack_repos.each do |repo| %>
+            {
+                "name": <%= repo %>,
+                "path": "/home/livegrep/repos/<%= repo %>",
+                "revisions": "HEAD",
+                "metadata": {
+                    "github": "openstack/<%= repo %>"
+                }
+            }<% if repo != @openstack_repos.last %>,<% end %>
+        <% end %>
+    ],
+}
