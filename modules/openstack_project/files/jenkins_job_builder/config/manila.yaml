@@ -16,6 +16,7 @@
           #!/bin/bash -xe
           export PYTHONUNBUFFERED=true
           export DEVSTACK_GATE_TIMEOUT=60
+          export BASE="/opt/stack"
 
           # Run setup script with exports of env vars
           $BASE/new/manila/contrib/ci/setup.sh
@@ -56,6 +57,7 @@
           #!/bin/bash -xe
           export PYTHONUNBUFFERED=true
           export DEVSTACK_GATE_TIMEOUT=60
+          export BASE="/opt/stack"
 
           # Run setup script with exports of env vars
           $BASE/new/manila/contrib/ci/multi_backend/setup.sh
