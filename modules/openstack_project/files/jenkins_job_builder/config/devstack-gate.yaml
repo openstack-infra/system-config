@@ -277,6 +277,9 @@
           if [ "$BRANCH_OVERRIDE" != "default" ] ; then
               export OVERRIDE_ZUUL_BRANCH=$BRANCH_OVERRIDE
           fi
+          if [ "$BRANCH_OVERRIDE" == "stable/icehouse" ] ; then
+              export DEVSTACK_GATE_IPV6_SUBNET_ATTRIBUTES_ENABLED=false
+          fi
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
 
@@ -309,6 +312,9 @@
           export BRANCH_OVERRIDE={branch-override}
           if [ "$BRANCH_OVERRIDE" != "default" ] ; then
               export OVERRIDE_ZUUL_BRANCH=$BRANCH_OVERRIDE
+          fi
+          if [ "$BRANCH_OVERRIDE" == "stable/icehouse" ] ; then
+              export DEVSTACK_GATE_IPV6_SUBNET_ATTRIBUTES_ENABLED=false
           fi
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
@@ -445,6 +451,9 @@
           export BRANCH_OVERRIDE={branch-override}
           if [ "$BRANCH_OVERRIDE" != "default" ] ; then
               export OVERRIDE_ZUUL_BRANCH=$BRANCH_OVERRIDE
+          fi
+          if [ "$BRANCH_OVERRIDE" == "stable/icehouse" ] ; then
+              export DEVSTACK_GATE_IPV6_SUBNET_ATTRIBUTES_ENABLED=false
           fi
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
@@ -1072,6 +1081,9 @@
           export BRANCH_OVERRIDE={branch-override}
           if [ "$BRANCH_OVERRIDE" != "default" ] ; then
               export OVERRIDE_ZUUL_BRANCH=$BRANCH_OVERRIDE
+          fi
+          if [ "$BRANCH_OVERRIDE" == "stable/icehouse" ] ; then
+              export DEVSTACK_GATE_IPV6_SUBNET_ATTRIBUTES_ENABLED=false
           fi
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
