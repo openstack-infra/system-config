@@ -28,11 +28,23 @@
 
     publishers:
       - console-log
-      - ftp:
-          site: docs.openstack.org
-          source: 'publish-docs/{lang}/**'
-          target: '/{lang}/'
-          remove-prefix: 'publish-docs/{lang}/'
+      - upload-to-docs-site
+
+- job-template:
+    name: 'openstack-operations-guide-{lang}'
+    node: '{node}'
+
+    builders:
+      - revoke-sudo
+      - gerrit-git-prep
+      - shell: |
+          #!/bin/bash -xe
+          source /usr/local/jenkins/slave_scripts/select-mirror.sh openstack operations-guide
+          tox -v -e buildlang -- {lang}
+
+    publishers:
+      - console-log
+      - upload-to-docs-site
 
 - job-template:
     name: 'gate-{name}-tox-doc-publish-{envlist}'

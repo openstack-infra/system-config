@@ -2251,8 +2251,6 @@
 
       - openstack-misc-guides-{lang}
 
-      - openstack-operations-guide-{lang}
-
 - project:
     name: operations-guide
     github-org: openstack
@@ -2263,6 +2261,8 @@
       - manual-translation-jobs
       - '{name}-tox-doc-{envlist}':
           envlist: publishdocs
+      - openstack-operations-guide-{lang}:
+          lang: ja
 
 - project:
     name: manila
