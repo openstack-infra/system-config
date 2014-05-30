@@ -180,7 +180,7 @@ class LogRetriever(threading.Thread):
         raw_buf = b''
         try:
             gzipped, raw_buf = self._get_log_data(source_url, retry)
-        except urllib2.HTTPError, e:
+        except urllib2.HTTPError as e:
             if e.code == 404:
                 logging.info("Unable to retrieve %s: HTTP error 404" %
                              source_url)
