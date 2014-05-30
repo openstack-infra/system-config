@@ -4,3 +4,12 @@
   register: result
   failed_when: "result.rc != 0 and result.rc != 2"
   changed_when: "result.rc == 4 or result.rc == 6"
+- irc: server={{ puppet_irc_server }} channel={{ puppet_irc_channel }} nick={{ puppet_irc_nick }}
+       msg="puppet failed to run on {{ ansible_fqdn }}."
+  when: "result.rc == 1"
+- irc: server={{ puppet_irc_server }} channel={{ puppet_irc_channel }} nick={{ puppet_irc_nick }}
+       msg="puppet error on {{ ansible_fqdn }}: {{puppet_base_url}}/report/latest/{{ ansible_fqdn }}"
+  when: "result.rc == 4 or result.rc == 6"
+- irc: server={{ puppet_irc_server }} channel={{ puppet_irc_channel }} nick={{ puppet_irc_nick }}
+       msg="puppet timed out on {{ ansible_fqdn }}."
+  when: "result.rc == 124"
