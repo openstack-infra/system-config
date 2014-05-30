@@ -173,6 +173,10 @@ source-files:
   - name: logs/syslog.txt
     tags:
       - syslog
+  - name: logs/tempest.txt
+    tags:
+      - screen
+      - oslofmt
 # Grenade new logs below
   - name: logs/new/screen-c-api.txt
     tags:
