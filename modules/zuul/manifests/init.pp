@@ -174,6 +174,23 @@ class zuul (
     content => $zuul_ssh_private_key,
   }
 
+  file { '/home/zuul/.ssh':
+    ensure  => directory,
+    owner   => 'zuul',
+    group   => 'zuul',
+    require => User['zuul'],
+  }
+
+  file { '/home/zuul/.ssh/config':
+    ensure  => present,
+    owner   => 'zuul',
+    group   => 'zuul',
+    mode    => '0640',
+    require => [File['/home/zuul/.ssh'],
+                File['/var/lib/zuul/ssh/id_rsa']],
+    content => template('zuul/ssh_config.erb'),
+  }
+
   file { '/var/lib/zuul/www':
     ensure  => directory,
     require => File['/var/lib/zuul'],
