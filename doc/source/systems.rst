@@ -26,5 +26,6 @@ Major Systems
    wiki
    git
    openstackid
+   livegrep
 
 
