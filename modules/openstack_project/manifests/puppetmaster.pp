@@ -109,4 +109,9 @@ class openstack_project::puppetmaster (
     require => Class[ansible],
   }
 
+  file { '/etc/ansible/clean_workspaces.yaml':
+    ensure  => present,
+    source  => 'puppet:///modules/openstack_project/ansible/clean_workspaces.yaml',
+    require => Class[ansible],
+  }
 }
