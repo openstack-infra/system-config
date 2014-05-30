@@ -54,12 +54,6 @@ class openstack_project::jenkins (
     jenkins_ssh_public_key  => $openstack_project::jenkins_ssh_key,
   }
 
-  jenkins::plugin { 'ansicolor':
-    version => '0.3.1',
-  }
-  jenkins::plugin { 'bazaar':
-    version => '1.20',
-  }
   jenkins::plugin { 'build-timeout':
     version => '1.13',
   }
@@ -78,40 +72,19 @@ class openstack_project::jenkins (
   jenkins::plugin { 'git':
     version => '1.1.23',
   }
-  jenkins::plugin { 'github-api':
-    version => '1.33',
-  }
-  jenkins::plugin { 'github':
-    version => '1.4',
-  }
   jenkins::plugin { 'greenballs':
     version => '1.12',
-  }
-  jenkins::plugin { 'htmlpublisher':
-    version => '1.0',
   }
   jenkins::plugin { 'extended-read-permission':
     version => '1.0',
   }
-  jenkins::plugin { 'postbuild-task':
-    version => '1.8',
-  }
   jenkins::plugin { 'zmq-event-publisher':
     version => '0.0.3',
-  }
-  jenkins::plugin { 'jclouds-jenkins':
-    version => '2.3.1',
   }
 #  TODO(jeblair): release
 #  jenkins::plugin { 'scp':
 #    version => '1.9',
 #  }
-  jenkins::plugin { 'violations':
-    version => '0.7.11',
-  }
-  jenkins::plugin { 'jobConfigHistory':
-    version => '1.13',
-  }
   jenkins::plugin { 'monitoring':
     version => '1.40.0',
   }
@@ -124,14 +97,8 @@ class openstack_project::jenkins (
   jenkins::plugin { 'openid':
     version => '1.5',
   }
-  jenkins::plugin { 'parameterized-trigger':
-    version => '2.15',
-  }
   jenkins::plugin { 'publish-over-ftp':
     version => '1.7',
-  }
-  jenkins::plugin { 'rebuild':
-    version => '1.14',
   }
   jenkins::plugin { 'simple-theme-plugin':
     version => '0.2',
@@ -141,12 +108,6 @@ class openstack_project::jenkins (
   }
   jenkins::plugin { 'token-macro':
     version => '1.5.1',
-  }
-  jenkins::plugin { 'url-change-trigger':
-    version => '1.2',
-  }
-  jenkins::plugin { 'urltrigger':
-    version => '0.24',
   }
 
   if $manage_jenkins_jobs == true {
