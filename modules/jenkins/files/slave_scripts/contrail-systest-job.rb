@@ -124,7 +124,7 @@ def build_contrail_packages(repo = "#{ENV['WORKSPACE']}/repo")
 
     # Return the all-in-one debian package file path.
     @image = Sh.run "ls -1 #{repo}/build/artifacts/contrail-install-packages_*_all.deb"
-    puts "Successfully built package #{image}"
+    puts "Successfully built package #{@image}"
 end
 
 def setup_sanity
