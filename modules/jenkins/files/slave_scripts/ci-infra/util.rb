@@ -26,8 +26,8 @@ class Sh
             }
             rescue Errno::EIO
                 exit_code = 0
-            rescue PTY::ChildExited
-                exit_code = PTY.check(pid).exitstatus
+            rescue PTY::ChildExited => e
+                exit_code = e.status.exitstatus
             end
         }
 
