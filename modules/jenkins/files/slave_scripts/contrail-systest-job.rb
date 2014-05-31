@@ -3,11 +3,10 @@
 $LOAD_PATH.unshift "/usr/local/jenkins/slave_scripts/",
                    "/usr/local/jenkins/slave_scripts/ci-infra"
 
-ENV['WORKSPACE']=ENV['PWD']
-
 require 'util'
 require 'launch_vms'
 
+Util.ci_setup
 
 def create_vms
     # Launch 2 ci-subslave VMs

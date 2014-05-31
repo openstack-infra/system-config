@@ -1,12 +1,14 @@
 #!/usr/bin/env ruby
 
-require 'pp'
+$LOAD_PATH.unshift "/usr/local/jenkins/slave_scripts/",
+                   "/usr/local/jenkins/slave_scripts/ci-infra"
 
-pp ENV
+require 'util'
 
-ENV['USER'] = "jenkins" if ENV['USER'].nil? or ENV['USER'].empty?
+Util.ci_setup
+WORKSPACE=ENV['WORKSPACE']
+
 @zuul_project = ENV['ZUUL_PROJECT'] || "Juniper/contrail-controller-test"
-
 @gerrit_setup = !ENV['ZUUL_PROJECT'].nil?
 
 def init_gerrit_setup
@@ -30,8 +32,6 @@ puts "Working with project #{@project}"
 
 GERRIT_SITE="https://review.opencontrail.org" # ARGV[0]
 GIT_ORIGIN="ssh://zuul@review.opencontrail.org:29418" # ARGV[1]
-ENV['WORKSPACE']=ENV['PWD']
-WORKSPACE=ENV['WORKSPACE']
 
 def dry_run?
     return !ENV['DRY_RUN'].nil? && ENV['DRY_RUN'].casecmp("true") == 0

@@ -70,32 +70,5 @@ fi
 rm -rf /tmp/cache
 ln -sf /home/jenkins/tmp/cache /tmp/cache
 
-# Check if this run needs to be skipped.
-ssh root@jenkins.opencontrail.org ls /root/ci-test/skip_jobs
-if [ "$?" == "0" ]; then
-    echo Jobs skipped due to jenkins.opencontrail.org:/root/ci-test/skip_jobs
-    exit 0
-fi
-
 echo $HOSTNAME > /etc/hostname
 service hostname restart
-
-BRANCH=master
-ssh root@jenkins.opencontrail.org ls /root/ci-test/\*$HOSTNAME\*-test
-if [ "$?" == "0" ]; then
-    BRANCH=test
-fi
-
-# Copy slave scripts from the jenkins.opencontrail.org central master location.
-rm -rf /usr/local/jenkins/slave_scripts /root/contrail-infra-config
-git clone -b $BRANCH git@github.com:juniper/contrail-infra-config.git /root/contrail-infra-config
-ln -sf /root/contrail-infra-config/modules/jenkins/files/slave_scripts /usr/local/jenkins/slave_scripts
-# ssh root@$SLAVE_MASTER -p $PORT tar zcf - /usr/local/jenkins/slave_scripts | tar -zx -C /
-
-set -o pipefail
-set -e
-
-# Run the real script
-cmd=$1
-shift
-exec $cmd $*

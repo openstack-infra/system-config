@@ -3,13 +3,19 @@
 set -o pipefail
 set -ex
 
-if [ -z $USER ]; then
-    USER=jenkins
+export WORKSPACE=$PWD
+SKIP_JOBS=$WORKSPACE/skip_jobs
+if [ -f $SKIP_JOBS ]; then
+    echo Jobs skipped due to jenkins.opencontrail.org:/root/ci-test/skip_jobs
+    exit
 fi
 
-export WORKSPACE=$PWD
 if [ -z $SCONS_JOBS ]; then
     export SCONS_JOBS=1
+fi
+
+if [ -z $USER ]; then
+    USER=jenkins
 fi
 
 # Build unittests

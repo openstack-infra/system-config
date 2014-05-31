@@ -98,3 +98,15 @@ class Vm
         return ip
     end
 end
+
+class Util
+    def self.ci_setup
+        ENV['WORKSPACE']=ENV['PWD']
+        ENV['USER'] = "jenkins" if ENV['USER'].nil? or ENV['USER'].empty?
+        pp ENV
+        if File.file? "#{ENV['WORKSPACE']}/skip_jobs" then
+            puts "Jobs skipped due to jenkins.opencontrail.org:/root/ci-test/skip_jobs"
+            exit
+        end
+    end
+end
