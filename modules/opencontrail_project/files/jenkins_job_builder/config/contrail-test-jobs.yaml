@@ -8,7 +8,8 @@
           #!/bin/bash -xe
           export USER=jenkins
           export JOB_NAME={name}
-          contrail-ci-run /usr/local/jenkins/slave_scripts/contrail-unittests-job.sh
+          /usr/bin/ci_setup.sh
+          /usr/local/jenkins/slave_scripts/contrail-unittests-job.sh
 
 - job-template:
     name: 'ci-{name}-devstack'
@@ -20,7 +21,8 @@
           #!/bin/bash -xe
           export USER=jenkins
           export JOB_NAME={name}
-          contrail-ci-run /usr/local/jenkins/slave_scripts/contrail-devstack-job.sh
+          /usr/bin/ci_setup.sh
+          /usr/local/jenkins/slave_scripts/contrail-devstack-job.sh
 
 - job-group:
     name: contrail-controller-test-unitest

@@ -1,7 +1,10 @@
 - builder:
     name: gerrit-git-prep
     builders:
-      - shell: "/usr/bin/contrail-ci-run ruby /usr/local/jenkins/slave_scripts/contrail-git-prep.rb"
+      - shell: |
+          #!/bin/bash -xe
+          /usr/bin/ci_setup.sh
+          ruby /usr/local/jenkins/slave_scripts/contrail-git-prep.rb
 
 - builder:
     name: coverage
