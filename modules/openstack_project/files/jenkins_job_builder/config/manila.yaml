@@ -22,13 +22,13 @@
 
           function pre_test_hook {
               # Run setup script with exports of env vars
-              $BASE/new/manila/contrib/ci/setup.sh
-              $BASE/new/manila/contrib/ci/pre_test_hook.sh
+              source $BASE/new/manila/contrib/ci/setup.sh
+              source $BASE/new/manila/contrib/ci/pre_test_hook.sh
           }
           export -f pre_test_hook
 
           function post_test_hook {
-              $BASE/new/manila/contrib/ci/post_test_hook.sh
+              source $BASE/new/manila/contrib/ci/post_test_hook.sh
           }
           export -f post_test_hook
 
@@ -64,13 +64,13 @@
 
           function pre_test_hook {
               # Run setup script with exports of env vars
-              $BASE/new/manila/contrib/ci/multi_backend/setup.sh
-              $BASE/new/manila/contrib/ci/multi_backend/pre_test_hook.sh
+              source $BASE/new/manila/contrib/ci/multi_backend/setup.sh
+              source $BASE/new/manila/contrib/ci/multi_backend/pre_test_hook.sh
           }
           export -f pre_test_hook
 
           function post_test_hook {
-              $BASE/new/manila/contrib/ci/multi_backend/post_test_hook.sh
+              source $BASE/new/manila/contrib/ci/multi_backend/post_test_hook.sh
           }
           export -f post_test_hook
 
