@@ -108,9 +108,9 @@ def setup_contrail(image = @image)
     vm = @vms.first
     File.open(topo_file, "w") { |fp| fp.write get_dual_topo(@vms[0], @vms[1]) }
     Sh.run "scp #{topo_file} #{vm.vmname}:/opt/contrail/utils/fabfile/testbeds/testbed.py"
-    Sh.run "ssh #{vm.vmname} contrail_fab install_contrail"
+    Sh.run "ssh #{vm.vmname} /usr/local/jenkins/slave_scripts/ci-infra/contrail_fab install_contrail"
     Sh.run "echo \"perl -ni -e 's/JVM_OPTS -Xss\\d+/JVM_OPTS -Xss512/g; print \\$_;' /etc/cassandra/cassandra-env.sh\" | ssh -t #{vm.vmname} \$(< /dev/fd/0)"
-    Sh.run "ssh #{vm.vmname} contrail_fab setup_all"
+    Sh.run "ssh #{vm.vmname} /usr/local/jenkins/slave_scripts/ci-infra/contrail_fab setup_all"
 end
 
 def build_contrail_packages(repo = "#{ENV['WORKSPACE']}/repo")
@@ -147,8 +147,8 @@ end
 
 def run_sanity
     # Set http-proxy
-    Sh.run "ssh #{vm.vmname} contrail_fab add_images"
-    Sh.run "ssh #{@vms.first.vmname} contrail_fab run_sanity:quick_sanity"
+    Sh.run "ssh #{vm.vmname} /usr/local/jenkins/slave_scripts/ci-infra/contrail_fab add_images"
+    Sh.run "ssh #{@vms.first.vmname} /usr/local/jenkins/slave_scripts/ci-infra/contrail_fab run_sanity:quick_sanity"
 end
 
 def cleanup
