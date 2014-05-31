@@ -117,16 +117,16 @@ def switch_gerrit_repo
 end
 
 def pre_build_setup
-    sh "rm -rf /tmp/cache"
-    sh "mkdir -p ~#{ENV['USER']}/tmp/cache"
-    sh "ln -sf /home/#{ENV['USER']}/tmp/cache /tmp/cache"
     sh "python #{WORKSPACE}/repo/third_party/fetch_packages.py 2>&1 | tee #{WORKSPACE}/third_party_fetch_packages.log"
-#   sh "python #{WORKSPACE}/repo/distro/third_party/fetch_packages.py 2>&1 | tee #{WORKSPACE}/distro_fetch_packages.log"
+    if ! @use_public then
+        sh "python #{WORKSPACE}/repo/distro/third_party/fetch_packages.py 2>&1 | tee #{WORKSPACE}/distro_fetch_packages.log"
+    end
 end
 
 def main
     setup_gerrit_repo
-    setup_contrail_repo(ARGV[0].nil? || ARGV[0] != "use_private")
+    @use_public = (ARGV[0].nil? || ARGV[0] != "use_private")
+    setup_contrail_repo(@use_public)
     switch_gerrit_repo
     pre_build_setup
 end
