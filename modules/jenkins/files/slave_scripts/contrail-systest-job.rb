@@ -83,8 +83,9 @@ end
 EOF
 
 def setup_contrail(image = @image)
-    image ||= "/root/contrail-install-packages_1.06-12~havana_all.deb"
-    puts "setup_contrail: #{image}"
+    @image ||= "/root/contrail-install-packages_1.06-12~havana_all.deb"
+    dest_image = Sh.run "basename #{@image}"
+    puts "setup_contrail: #{@image}"
     topo_file = "/root/testbed_dual.py"
     patch_file = "/root/setup_sh_patch.diff"
 
@@ -94,8 +95,8 @@ def setup_contrail(image = @image)
 
     @vms.each { |vm|
         Sh.run "ssh root@#{vm.vmname} apt-get update"
-        Sh.run "scp #{image} root@#{vm.vmname}:."
-        Sh.run "ssh #{vm.vmname} dpkg -i #{image}"
+        Sh.run "scp #{@image} root@#{vm.vmname}:#{dest_image}"
+        Sh.run "ssh #{vm.vmname} dpkg -i #{dest_image}"
 
         # Apply patch to setup.sh to retain apt.conf proxy settings.
         Sh.run "scp #{patch_file} #{vm.vmname}:#{patch_file}"
