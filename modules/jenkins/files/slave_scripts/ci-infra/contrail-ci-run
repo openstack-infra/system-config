@@ -67,6 +67,9 @@ if [ "$?" != "0" ]; then
     /sbin/ethtool --offload eth0 gso off
 fi
 
+rm -rf /tmp/cache
+ln -sf /home/jenkins/tmp/cache /tmp/cache
+
 # Check if this run needs to be skipped.
 ssh root@jenkins.opencontrail.org ls /root/ci-test/skip_jobs
 if [ "$?" == "0" ]; then
