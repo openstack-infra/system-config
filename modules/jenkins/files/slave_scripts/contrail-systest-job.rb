@@ -107,20 +107,20 @@ def setup_contrail(image = @image)
     vm = @vms.first
     File.open(topo_file, "w") { |fp| fp.write get_dual_topo(@vms[0], @vms[1]) }
     Sh.run "scp #{topo_file} #{vm.vmname}:/opt/contrail/utils/fabfile/testbeds/testbed.py"
-    Sh.run "ssh #{vm.vmname} contrail-fab install_contrail"
+    Sh.run "ssh #{vm.vmname} contrail_fab install_contrail"
     Sh.run "echo \"perl -ni -e 's/JVM_OPTS -Xss\\d+/JVM_OPTS -Xss512/g; print \\$_;' /etc/cassandra/cassandra-env.sh\" | ssh -t #{vm.vmname} \$(< /dev/fd/0)"
-    Sh.run "ssh #{vm.vmname} contrail-fab setup_all"
+    Sh.run "ssh #{vm.vmname} contrail_fab setup_all"
 end
 
 def build_contrail_packages(repo = "#{ENV['WORKSPACE']}/repo")
     ENV['BUILD_ONLY'] = "1"
     Sh.run "cd #{repo}"
-    Sh.run "scons"
+#   Sh.run "scons"
 #   Sh.run "scons #{repo}/build/third_party/log4cplus"
     Sh.run "rm -rf #{repo}/third_party/euca2ools/.git/shallow"
     Sh.run "cd #{repo}/tools/packaging/build/"
-    Sh.run "./packager.py"
-    Sh.run "ls -al #{repo}/build/artifacts/contrail-install-packages_*_all.deb"
+#   Sh.run "./packager.py"
+    Sh.run "ls -alh #{repo}/build/artifacts/contrail-install-packages_*_all.deb"
 
     # Return the all-in-one debian package file path.
     @image = Sh.run "ls -1 #{repo}/build/artifacts/contrail-install-packages_*_all.deb"
@@ -131,7 +131,7 @@ def setup_sanity
     vm = @vms.first
     Sh.run "ssh #{vm.vmname} source /opt/contrail/api-venv/bin/activate && pip install fixtures testtools testresources selenium pyvirtualdisplay"
 
-    branch = ENV['ZUUL_BRANCH'] || "R1.06" # TODO "master"
+    branch = ENV['ZUUL_BRANCH'] || "master"
     Sh.run "ssh #{vm.vmname} rm -rf /root/contrail-test"
     Sh.run "ssh #{vm.vmname} git clone --branch #{branch} git@github.com:juniper/contrail-test.git /root/contrail-test"
 end
@@ -146,8 +146,8 @@ end
 
 def run_sanity
     # Set http-proxy
-    Sh.run "ssh #{vm.vmname} contrail-fab add_images"
-    Sh.run "ssh #{@vms.first.vmname} contrail-fab run_sanity:quick_sanity"
+    Sh.run "ssh #{vm.vmname} contrail_fab add_images"
+    Sh.run "ssh #{@vms.first.vmname} contrail_fab run_sanity:quick_sanity"
 end
 
 def cleanup
@@ -167,7 +167,7 @@ def main
     setup_sanity
     verify_contrail
     # run_sanity
-    # wait
+    wait
     cleanup
 end
 
