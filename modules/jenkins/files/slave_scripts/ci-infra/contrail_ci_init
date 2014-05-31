@@ -72,3 +72,12 @@ ln -sf /home/jenkins/tmp/cache /tmp/cache
 
 echo $HOSTNAME > /etc/hostname
 service hostname restart
+
+# Setup VM emulation if vmx support is not available
+grep -q vmx /proc/cpuinfo
+if [ "$?" != "0" ]; then
+    if [ -f /etc/nova/nova-compute.conf ]; then
+        perl -ni -e 's/libvirt_type=kvm/libvirt_type=qemu/g; print $_' /etc/nova/nova-compute.conf
+        service nova-compute restart
+    fi
+fi
