@@ -15,16 +15,6 @@ fi
 
 echo HOSTNAME $HOSTNAME, SLAVE_MASTER $SLAVE_MASTER
 
-# Check if this run needs to be skipped.
-ssh -p $PORT root@$SLAVE_MASTER ls /root/ci-test/skip_jobs
-if [ "$?" == "0" ]; then
-    echo Jobs skipped due to jenkins.opencontrail.org:/root/ci-test/skip_jobs
-    exit 0
-fi
-
-echo $HOSTNAME > /etc/hostname
-service hostname restart
-
 if [ "$SLAVE_MASTER" != "localhost" ]; then
     # Set http proxy in sub-slaves
     export http_proxy=http://$SLAVE_MASTER:3128 # squid
@@ -53,17 +43,49 @@ if [ "$SLAVE_MASTER" != "localhost" ]; then
     if [ "$?" != "0" ]; then
         echo "$apt_proxy" >> /etc/apt/apt.conf
     fi
+
+    # Set ssh-proxy for root and jenkins users.
+    grep --quiet "ProxyCommand" /root/.ssh/config
+    if [ "$?" != "0" ]; then
+        echo ProxyCommand /usr/bin/corkscrew $SLAVE_MASTER 3128 %h %p >> /root/.ssh/config
+    fi
+
+    grep --quiet "ProxyCommand" /home/jenkins/.ssh/config
+    if [ "$?" != "0" ]; then
+        echo ProxyCommand /usr/bin/corkscrew $SLAVE_MASTER 3128 %h %p >> /home/jenkins/.ssh/config
+        chown jenkins.jenkins /home/jenkins/.ssh/config
+    fi
 fi
 
+# Work around for kernel tun/tap driver bug
+# https://bugzilla.kernel.org/show_bug.cgi?id=60620
+ssh root@jenkins.opencontrail.org ls /root/ci-test/skip_gso_disable
+if [ "$?" != "0" ]; then
+    /sbin/ethtool --offload eth0 tx off
+    /sbin/ethtool --offload eth0 tso off
+    /sbin/ethtool --offload eth0 ufo off
+    /sbin/ethtool --offload eth0 gso off
+fi
+
+# Check if this run needs to be skipped.
+ssh root@jenkins.opencontrail.org ls /root/ci-test/skip_jobs
+if [ "$?" == "0" ]; then
+    echo Jobs skipped due to jenkins.opencontrail.org:/root/ci-test/skip_jobs
+    exit 0
+fi
+
+echo $HOSTNAME > /etc/hostname
+service hostname restart
+
 BRANCH=master
-ssh -p $PORT root@$SLAVE_MASTER ls /root/ci-test/\*$HOSTNAME\*-test
+ssh root@jenkins.opencontrail.org ls /root/ci-test/\*$HOSTNAME\*-test
 if [ "$?" == "0" ]; then
     BRANCH=test
 fi
 
 # Copy slave scripts from the jenkins.opencontrail.org central master location.
 rm -rf /usr/local/jenkins/slave_scripts /root/contrail-infra-config
-git clone -b $BRANCH https://github.com/Juniper/contrail-infra-config.git /root/contrail-infra-config
+git clone -b $BRANCH git@github.com:juniper/contrail-infra-config.git /root/contrail-infra-config
 ln -sf /root/contrail-infra-config/modules/jenkins/files/slave_scripts /usr/local/jenkins/slave_scripts
 # ssh root@$SLAVE_MASTER -p $PORT tar zcf - /usr/local/jenkins/slave_scripts | tar -zx -C /
 
