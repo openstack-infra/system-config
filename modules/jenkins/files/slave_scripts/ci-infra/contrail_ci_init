@@ -2,6 +2,11 @@
 
 set -x
 
+# We care only when eth0 comes up.
+if [ "$IFACE" != "eth0" ]; then
+    exit 0
+fi
+
 # Disable http proxy to access openstack metadata
 unset http_proxy
 
