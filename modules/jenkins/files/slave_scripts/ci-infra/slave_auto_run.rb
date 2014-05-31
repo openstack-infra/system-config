@@ -38,17 +38,20 @@ def subslave
     last_updated = Time.now
 
     kfile = "/root/#{@hostname}-jenkins-keepalive.log"
+    dfile = "/root/#{@hostname}-jenkins-keepalive.debug"
     loop do
         last_updated = File.open(kfile, "r") { |fp| Time.mktime *fp.readlines }\
             if File.file? kfile
         elapsed = (Time.now - last_updated)/60
-        puts "#{@hostname}: #{elapsed} minutes elapsed since last update"
+        File.open(dfile, "w") { |fp|
+            fp.puts "#{@hostname}: #{elapsed} minutes elapsed since last update"
 
-        # If it is not updated within 5 minutes, commit suicide! unless
-        # we want to skip it.
-        if !File.file? "/root/skip_subslave_keepalive" then
-            Sh.crun "nova delete #{@hostname}" if elapsed > 5
-        end
+            # If it is not updated within 5 minutes, commit suicide! unless
+            # we want to skip it.
+            if !File.file? "/root/skip_subslave_keepalive" then
+                fp.puts(Sh.crun "nova delete #{@hostname}") if elapsed > 5
+            end
+        }
         sleep 10
     end
 end
