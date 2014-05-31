@@ -117,10 +117,10 @@ def build_contrail_packages(repo = "#{ENV['WORKSPACE']}/repo")
     ENV['BUILD_ONLY'] = "1"
     Sh.run "cd #{repo}"
 #   Sh.run "scons"
-#   Sh.run "scons #{repo}/build/third_party/log4cplus"
+    Sh.run "scons #{repo}/build/third_party/log4cplus"
     Sh.run "rm -rf #{repo}/third_party/euca2ools/.git/shallow"
     Sh.run "cd #{repo}/tools/packaging/build/"
-#   Sh.run "./packager.py"
+    Sh.run "./packager.py"
     Sh.run "ls -alh #{repo}/build/artifacts/contrail-install-packages_*_all.deb"
 
     # Return the all-in-one debian package file path.
@@ -140,9 +140,9 @@ end
 def verify_contrail
 
     # Verify that contrail-status shows 'up' for all necessary components.
-    Sh.run "ssh #{@vms[0].vmname} openstack-status"
-    Sh.run "ssh #{@vms[0].vmname} contrail-status"
-    Sh.run "ssh #{@vms[1].vmname} contrail-status"
+    Sh.run "ssh #{@vms[0].vmname} /usr/bin/openstack-status"
+    Sh.run "ssh #{@vms[0].vmname} /usr/bin/contrail-status"
+    Sh.run "ssh #{@vms[1].vmname} /usr/bin/contrail-status"
 end
 
 def run_sanity
@@ -168,7 +168,7 @@ def main
     setup_sanity
     verify_contrail
     # run_sanity
-    wait
+    # wait
     cleanup
 end
 
