@@ -132,11 +132,9 @@ def setup_sanity
     vm = @vms.first
     Sh.run "ssh #{vm.vmname} source /opt/contrail/api-venv/bin/activate && pip install fixtures testtools testresources selenium pyvirtualdisplay"
 
-    branch = ENV['ZUUL_BRANCH'] || "master"
-    Sh.run "rm -rf /root/contrail-test"
-    Sh.run "git clone --branch #{branch} git@github.com:Juniper/contrail-test.git /root/contrail-test"
+    branch = ENV['ZUUL_BRANCH'] || "R1.06" # TODO "master"
     Sh.run "ssh #{vm.vmname} rm -rf /root/contrail-test"
-    Sh.run "scp -r /root/contrail-test #{vm.vmname}/root/."
+    Sh.run "ssh #{vm.vmname} git clone --branch #{branch} git@github.com:juniper/contrail-test.git /root/contrail-test"
 end
 
 def verify_contrail
