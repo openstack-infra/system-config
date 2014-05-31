@@ -49,11 +49,13 @@ for level in $LEVELS ; do
     for f in $PO_FILES ; do
         echo "Updating $f"
         msgmerge --update --no-fuzzy-matching $f \
+            --backup=none \
             ${PROJECT}/locale/${PROJECT}-log-${level}.pot
     done
   fi
 done
 
+#
 # Add all changed files to git
 git add $PROJECT/locale/*
 
