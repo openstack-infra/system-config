@@ -86,3 +86,5 @@ if [ "$?" != "0" ]; then
         service nova-compute restart
     fi
 fi
+
+touch /tmp/contrail_ci_init_done
