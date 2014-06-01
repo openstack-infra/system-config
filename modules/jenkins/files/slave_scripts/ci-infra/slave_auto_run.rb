@@ -15,12 +15,10 @@ end
 
 def slave
     # Skip in test mode
-
-    skip = Sh.run "ssh root@jenkins.opencontrail.org ls -1 /root/ci-test/\*#{@HOSTNAME}\*-test"
-    if !skip.nil? and skip =~ /#{@hostname}/ then
-        loop do
-            sleep 10
-        end
+    loop do
+        skip = Sh.run "ssh root@jenkins.opencontrail.org ls -1 /root/ci-test/\*#{@HOSTNAME}\*-test"
+        break if skip.nil? or skip !~ /#{@hostname}/
+        sleep 10
     end
 
     jenkins_user = "ci-admin-f"
