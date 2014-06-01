@@ -80,6 +80,8 @@
       - devstack-checkout
       - shell: |
           #/bin/bash -xe
+          export PROJECTS="stackforge/rally $PROJECTS"
+          export ENABLED_SERVICES=rally
           function post_test_hook {
               cd $BASE/new/rally
               tox -ecli -v
