@@ -2211,9 +2211,9 @@
     jobs:
       - python-jobs
       - rally-jobs
-      - check-rally-install-{node}:
+      - gate-rally-install-{node}:
           node: bare-precise
-      - check-rally-install-{node}:
+      - gate-rally-install-{node}:
           node: bare-centos6
       - 'check-rally-cli':
           node: 'devstack-precise || devstack-precise-check'
