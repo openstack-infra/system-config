@@ -2118,7 +2118,13 @@
           envlist: ceilometer-tip
           node: bare-centos6
       - gate-{name}-tox-{envlist}:
+          envlist: ironic-stable
+      - gate-{name}-tox-{envlist}:
           envlist: ironic-tip
+      - gate-{name}-tox-{envlist}:
+          envlist: barbican-tip
+      - gate-{name}-tox-{envlist}:
+          envlist: storyboard-tip
 
 - project:
     name: stevedore
