@@ -48,9 +48,6 @@ class openstack_project::review_dev (
     contactstore_pubkey             => $contactstore_pubkey,
     contactstore_url                =>
       'https://review-dev.openstack.org/fakestore',
-    script_user                     => 'launchpadsync',
-    script_key_file                 => '/home/gerrit2/.ssh/launchpadsync_rsa',
-    script_logging_conf             => '/home/gerrit2/.sync_logging.conf',
     projects_file                   =>
       'puppet:///modules/openstack_project/review-dev.projects.yaml',
     projects_config                 =>

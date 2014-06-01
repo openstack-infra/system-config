@@ -1,17 +1,6 @@
 # == Class: gerrit::cron
 #
-class gerrit::cron(
-  $script_user = 'update',
-  $script_key_file = '/home/gerrit2/.ssh/id_rsa'
-) {
-
-  cron { 'expireoldreviews':
-    user    => 'gerrit2',
-    hour    => '6',
-    minute  => '3',
-    command => "python /usr/local/bin/expire-old-reviews ${script_user} ${script_key_file}",
-    require => Class['jeepyb'],
-  }
+class gerrit::cron {
 
   cron { 'gerrit_repack':
     user        => 'gerrit2',
@@ -20,6 +9,11 @@ class gerrit::cron(
     minute      => '7',
     command     => 'find /home/gerrit2/review_site/git/ -type d -name "*.git" -print -exec git --git-dir="{}" repack -afd \;',
     environment => 'PATH=/usr/bin:/bin:/usr/sbin:/sbin',
+  }
+
+  cron { 'expireoldreviews':
+    ensure      => 'absent',
+    user        => 'gerrit2',
   }
 
   cron { 'removedbdumps':
