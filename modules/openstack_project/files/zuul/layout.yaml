@@ -1700,7 +1700,6 @@ projects:
       - os-apply-config-coverage
       - os-apply-config-branch-tarball
 
-#TODO: add docs
   - name: openstack/os-cloud-config
     template:
       - name: check-requirements
@@ -1721,6 +1720,7 @@ projects:
       - check-tripleo-ironic-undercloud-precise
       - check-tripleo-overcloud-precise
     post:
+      - os-cloud-config-docs
       - os-cloud-config-coverage
       - os-cloud-config-branch-tarball
 
