@@ -15,6 +15,7 @@ At a Glance
   * nodepool.openstack.org
 :Puppet:
   * :file:`modules/nodepool/`
+  * :file:`modules/openstack_project/manifests/nodepool_prod.pp`
   * :file:`modules/openstack_project/manifests/single_use_slave.pp`
 :Configuration:
   * :file:`modules/openstack_project/templates/nodepool/nodepool.yaml.erb`
