@@ -628,7 +628,9 @@ jobs:
     voting: false
   - name: gate-puppet-vswitch-puppet-syntax
     voting: false
-  - name: gate-config-puppet-apply
+  - name: gate-config-puppet-apply-precise
+    voting: false
+  - name: gate-config-puppet-apply-centos6
     voting: false
   - name: gate-tomograph-python33
     voting: false
@@ -2512,7 +2514,7 @@ projects:
       - gate-config-pep8
       - gate-config-puppet-lint
       - gate-config-puppet-syntax
-      - gate-config-puppet-apply
+      - gate-config-puppet-apply-precise
       - gate-config-irc-access
       - gate-ci-docs
       - check-projects-yaml-alphabetized
@@ -2522,12 +2524,14 @@ projects:
       - gate-config-pep8
       - gate-config-puppet-lint
       - gate-config-puppet-syntax
-      - gate-config-puppet-apply
+      - gate-config-puppet-apply-precise
       - gate-config-irc-access
       - check-projects-yaml-alphabetized
       - check-projects-yaml-upstream
     post:
       - ci-docs
+    experimental:
+      - gate-config-puppet-apply-centos6
 
   - name: openstack-infra/devstack-gate
     template:
