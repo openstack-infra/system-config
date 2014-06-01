@@ -80,7 +80,7 @@ class Vm
         # Disable proxy..
         http_proxy=ENV['http_proxy']
         ENV['http_proxy'] = nil
-        name = Sh.run %{curl -s http://169.254.169.254/openstack/2012-08-10/meta_data.json | python -m json.tool | \grep \\"#{type}\\": | awk -F '\"' '{print $4}'}
+        name = Sh.run(%{curl -s http://169.254.169.254/openstack/2012-08-10/meta_data.json | python -m json.tool | \grep \\"#{type}\\": | awk -F '\"' '{print $4}'}, true, 10, 5)
 
         # Re-enable proxy ..
         ENV['http_proxy'] = http_proxy
