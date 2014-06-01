@@ -17,7 +17,7 @@ function header(activeTabName) {
   tabsLink = new Array();
   tabsName[0] = 'Status'; tabsLink[0] = 'http://status.openstack.org/';
   tabsName[1] = 'Zuul'; tabsLink[1] = 'http://status.openstack.org/zuul/';
-  tabsName[2] = 'Rechecks'; tabsLink[2] = 'http://status.openstack.org/rechecks/';
+  tabsName[2] = 'Rechecks'; tabsLink[2] = 'http://status.openstack.org/elastic-recheck/';
   tabsName[3] = 'Release'; tabsLink[3] = 'http://status.openstack.org/release/';
   tabsName[4] = 'Reviews'; tabsLink[4] = 'http://status.openstack.org/reviews/';
   tabsName[5] = 'Bugday'; tabsLink[5] = 'http://status.openstack.org/bugday/';
