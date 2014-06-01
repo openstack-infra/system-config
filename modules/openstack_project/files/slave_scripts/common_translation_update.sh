@@ -63,6 +63,51 @@ function setup_horizon ()
         -t PO --execute
 }
 
+# Set global variable DocFolder for manuals projects
+function init_manuals ()
+{
+    project=$1
+
+    DocFolder="doc"
+    if [ $project = "api-site" ] ; then
+        DocFolder="./"
+    fi
+}
+
+# Setup project manuals projects (api-site, openstack-manuals,
+# operations-guide) for transifex
+function setup_manuals ()
+{
+    # Generate pot one by one
+    for FILE in ${DocFolder}/*
+    do
+        # Skip non-directories
+        if [ ! -d $FILE ]
+        then
+            continue
+        fi
+        DOCNAME=${FILE#${DocFolder}/}
+        # The www and tools directories do not get translated
+        if [ "$DOCNAME" == "www" -o "$DOCNAME" == "tools" ]
+        then
+            continue
+        fi
+        # Update the .pot file
+        ./tools/generatepot ${DOCNAME}
+        if [ -f ${DocFolder}/${DOCNAME}/locale/${DOCNAME}.pot ]
+        then
+            # Add all changed files to git
+            git add ${DocFolder}/${DOCNAME}/locale/*
+            # Set auto-local
+            tx set --auto-local -r openstack-manuals-i18n.${DOCNAME} \
+                "${DocFolder}/${DOCNAME}/locale/<lang>.po" --source-lang en \
+                --source-file ${DocFolder}/${DOCNAME}/locale/${DOCNAME}.pot \
+                -t PO --execute
+        fi
+    done
+
+}
+
 # Setup git so that git review works
 function setup_git ()
 {
