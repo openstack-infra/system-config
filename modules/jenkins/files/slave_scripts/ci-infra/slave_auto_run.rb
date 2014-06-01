@@ -14,6 +14,15 @@ def setup_hostname
 end
 
 def slave
+    # Skip in test mode
+
+    skip = Sh.run "ssh root@jenkins.opencontrail.org ls -1 /root/ci-test/\*#{@HOSTNAME}\*-test"
+    if !skip.nil? and skip =~ /#{@hostname}/ then
+        loop do
+            sleep 10
+        end
+    end
+
     jenkins_user = "ci-admin-f"
     jenkins_password = ""
 
