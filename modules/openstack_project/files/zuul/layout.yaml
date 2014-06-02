@@ -3716,6 +3716,7 @@ projects:
       - gate-pecan-tox-ironic-stable
       - gate-pecan-tox-ironic-tip
       - gate-pecan-tox-barbican-tip
+        voting: false
       - gate-pecan-tox-storyboard-tip
     gate:
       - gate-pecan-pep8
@@ -3730,6 +3731,7 @@ projects:
       - gate-pecan-tox-ironic-stable
       - gate-pecan-tox-ironic-tip
       - gate-pecan-tox-barbican-tip
+        voting: false
       - gate-pecan-tox-storyboard-tip
     post:
       - pecan-branch-tarball
