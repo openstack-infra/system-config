@@ -116,7 +116,7 @@ class drupal (
   pear::package { 'drush':
       version    => '6.0.0',
       repository => 'pear.drush.org',
-      require    => Pear::Package['PEAR'],
+      require    => [ Pear::Package['PEAR'], Pear::Package['Console_Table'] ],
   }
 
   # site mysql database
@@ -140,7 +140,7 @@ class drupal (
     site_build_flagfile  => $site_build_flagfile,
     site_deploy_flagfile => $site_deploy_flagfile,
     site_makefile        => $site_makefile,
-    require              => Package['httpd'],
+    require              => [ Package['httpd'], Pear::Package['drush'] ],
   }
 
   # drupal site deploy
