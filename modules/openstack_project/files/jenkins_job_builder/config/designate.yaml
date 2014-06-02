@@ -1,0 +1,38 @@
+- job:
+    name: gate-designate-devstack-dsvm
+    node: devstack-precise
+
+    wrappers:
+      - timeout:
+          timeout: 65
+          fail: true
+      - timestamps
+
+    builders:
+      - link-logs
+      - net-info
+      - devstack-checkout
+      - shell: |
+          #!/bin/bash -xe
+          export PYTHONUNBUFFERED=true
+          export DEVSTACK_GATE_TIMEOUT=60
+          export ENABLED_SERVICES=designate,designate-api,designate-central,designate-sink
+          export PROJECTS="stackforge/designate $PROJECTS"
+          export PROJECTS="stackforge/python-designateclient $PROJECTS"
+
+          function pre_test_hook {
+              # Install designate devstack integration
+              DESIGNATE_BASE=/opt/stack/new/designate/contrib/devstack
+              DEVSTACK_BASE=/opt/stack/new/devstack
+              cp $DESIGNATE_BASE/lib/* $DEVSTACK_BASE/lib
+              cp $DESIGNATE_BASE/extras.d/* $DEVSTACK_BASE/extras.d
+              cp $DESIGNATE_BASE/exercises/* $DEVSTACK_BASE/exercises
+          }
+          export -f pre_test_hook
+
+          cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
+          ./safe-devstack-vm-gate-wrap.sh
+
+    publishers:
+      - devstack-logs
+      - console-log
