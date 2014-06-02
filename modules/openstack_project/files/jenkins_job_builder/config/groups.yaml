@@ -49,6 +49,11 @@
             tar -czf groups-$PROJECT_VER.tar.gz dist/
             cp groups-$PROJECT_VER.tar.gz tarballs/groups-latest.tar.gz
             mv groups-$PROJECT_VER.tar.gz tarballs/
+            # generate md5 checksums
+            cd tarballs
+            md5sum groups-$PROJECT_VER.tar.gz > groups-$PROJECT_VER.md5
+            md5sum groups-latest.tar.gz > groups-latest.md5
+            cd ..
     publishers:
         - console-log
         - coverage-log
@@ -61,5 +66,9 @@
                   copy-after-failure: true
                 - target: 'tarballs/groups/'
                   source: 'tarballs/*.tar.gz'
+                  keep-hierarchy: false
+                  copy-after-failure: false
+                - target: 'tarballs/groups/'
+                  source: 'tarballs/*.md5'
                   keep-hierarchy: false
                   copy-after-failure: false
