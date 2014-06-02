@@ -652,6 +652,8 @@ jobs:
     branch: ^(?!stable/(havana|icehouse)).*$
   - name: gate-tuskar-ui-selenium
     voting: false
+  - name: gate-pecan-tox-barbican-tip
+    voting: false
 
 # The project list is grouped by type of project, and within each
 # group, projects are sorted (mostly) alphabetically.
@@ -3729,7 +3731,6 @@ projects:
       - gate-pecan-tox-ceilometer-tip
       - gate-pecan-tox-ironic-stable
       - gate-pecan-tox-ironic-tip
-      - gate-pecan-tox-barbican-tip
       - gate-pecan-tox-storyboard-tip
     post:
       - pecan-branch-tarball
