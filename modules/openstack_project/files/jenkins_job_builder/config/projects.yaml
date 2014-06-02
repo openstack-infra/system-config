@@ -1217,6 +1217,7 @@
 
     jobs:
       - python-jobs
+      - requirements-jobs
       - hook-{name}-rtfd
       - pypi-jobs
 
@@ -1271,6 +1272,7 @@
 
     jobs:
       - python-jobs
+      - requirements-jobs
       - hook-{name}-rtfd
       - pypi-jobs
 
