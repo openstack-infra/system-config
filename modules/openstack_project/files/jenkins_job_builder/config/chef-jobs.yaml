@@ -20,6 +20,7 @@
       - revoke-sudo
       - gerrit-git-prep
       - chef-bundler-prep
+      - chef-berkshelf-prep
       - chef-cookbook-foodcritic
 
     publishers:
@@ -33,6 +34,7 @@
       - revoke-sudo
       - gerrit-git-prep
       - chef-bundler-prep
+      - chef-berkshelf-prep
       - chef-cookbook-rubocop
 
     publishers:
