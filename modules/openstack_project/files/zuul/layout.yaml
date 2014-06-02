@@ -4195,6 +4195,7 @@ projects:
       - gate-rally-install-bare-centos6
       - gate-rally-install-bare-precise
       - check-rally-dsvm-rally
+      - check-rally-dsvm-neutron-rally
       - check-rally-cli
     gate:
       - gate-rally-pep8
