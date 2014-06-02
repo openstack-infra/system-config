@@ -142,9 +142,9 @@
       - shell: |
           COOKBOOK=$(awk '/^name/ {print $NF}' metadata.rb |tr -d \"\')
           if grep rubocop: Strainerfile; then
-              ruby1.9.1 /usr/bin/bundle exec strainer test -o rubocop
+              ruby1.9.1 /usr/bin/bundle exec strainer test --cookbooks-path=.cookbooks --only=rubocop
           else
-              ruby1.9.1 /usr/bin/bundle exec ruby1.9.1 /usr/bin/bundle exec rubocop
+              ruby1.9.1 /usr/bin/bundle exec rubocop
           fi
 
 - builder:
@@ -152,7 +152,7 @@
     builders:
       - shell: |
           if grep foodcritic: Strainerfile; then
-              ruby1.9.1 /usr/bin/bundle exec strainer test -o foodcritic
+              ruby1.9.1 /usr/bin/bundle exec strainer test --cookbooks-path=.cookbooks --only=foodcritic
           else
               ruby1.9.1 /usr/bin/bundle exec foodcritic -f any -t ~FC003 -t ~FC023 .
           fi
@@ -163,7 +163,7 @@
       - shell: |
           COOKBOOK=$(awk '/^name/ {print $NF}' metadata.rb |tr -d \"\')
           if grep chefspec: Strainerfile; then
-              ruby1.9.1 /usr/bin/bundle exec strainer test -o chefspec
+              ruby1.9.1 /usr/bin/bundle exec strainer test --cookbooks-path=.cookbooks --only=chefspec
           else
               ruby1.9.1 /usr/bin/bundle exec rspec .cookbooks/$COOKBOOK/spec
           fi
