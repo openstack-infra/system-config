@@ -651,6 +651,16 @@ jobs:
     voting: false
   - name: gate-pecan-tox-barbican-tip
     voting: false
+  - name: gate-designate-devstack-dsvm
+    voting: false
+  - name: gate-designate-requirements
+    voting: false
+  - name: gate-designate-docs
+    voting: false
+  - name: gate-python-designateclient-requirements
+    voting: false
+  - name: gate-python-designateclient-docs
+    voting: false
 
 # The project list is grouped by type of project, and within each
 # group, projects are sorted (mostly) alphabetically.
@@ -3281,19 +3291,14 @@ projects:
 
   - name: stackforge/designate
     template:
+      - name: python-jobs
+      - name: check-requirements
       - name: publish-to-pypi
       - name: docs-on-rtfd
     check:
-      - gate-designate-pep8
-      - gate-designate-python26
-      - gate-designate-python27
+      - gate-designate-devstack-dsvm
     gate:
-      - gate-designate-pep8
-      - gate-designate-python26
-      - gate-designate-python27
-    post:
-      - designate-coverage
-      - designate-branch-tarball
+      - gate-designate-devstack-dsvm
 
   - name: stackforge/designate-specs
     check:
@@ -4098,19 +4103,14 @@ projects:
 
   - name: stackforge/python-designateclient
     template:
+      - name: python-jobs
+      - name: check-requirements
       - name: publish-to-pypi
       - name: docs-on-rtfd
     check:
-      - gate-python-designateclient-pep8
-      - gate-python-designateclient-python26
-      - gate-python-designateclient-python27
+      - gate-designate-devstack-dsvm
     gate:
-      - gate-python-designateclient-pep8
-      - gate-python-designateclient-python26
-      - gate-python-designateclient-python27
-    post:
-      - python-designateclient-coverage
-      - python-designateclient-branch-tarball
+      - gate-designate-devstack-dsvm
 
   - name: stackforge/python-kiteclient
     template:
