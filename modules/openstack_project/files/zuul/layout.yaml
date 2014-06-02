@@ -1208,10 +1208,14 @@ projects:
       - gate-python-barbicanclient-pep8
       - gate-python-barbicanclient-python26
       - gate-python-barbicanclient-python27
+      - gate-python-barbicanclient-python33
+      - gate-python-barbicanclient-pypy
     gate:
       - gate-python-barbicanclient-pep8
       - gate-python-barbicanclient-python26
       - gate-python-barbicanclient-python27
+      - gate-python-barbicanclient-python33
+      - gate-python-barbicanclient-pypy
     post:
       - python-barbicanclient-branch-tarball
 
