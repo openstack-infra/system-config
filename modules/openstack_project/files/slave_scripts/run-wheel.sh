@@ -32,7 +32,12 @@ rm -f dist/*.whl
 tox -evenv pip install wheel
 tox -evenv python setup.py bdist_wheel
 
-echo "SHA1sum: "
-sha1sum dist/*
-echo "MD5sum: "
-md5sum dist/*
+FILES=dist/*.whl
+for f in $FILES
+do
+  echo -n "SHA1sum for $f: "
+  sha1sum $f | awk '{print $1}' | tee $f.sha1
+
+  echo -n "MD5sum for $f: "
+  md5sum $f  | awk '{print $1}' | tee $f.md5
+done
