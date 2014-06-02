@@ -84,7 +84,7 @@
           export ENABLED_SERVICES=rally
           function post_test_hook {
               cd $BASE/new/rally
-              tox -ecli -v
+              sudo -H -u stack tox -ecli -v
           }
           export -f post_test_hook
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
