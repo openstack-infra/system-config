@@ -310,3 +310,15 @@ projects:
       - noop
     post:
       - noop
+
+  - name: Juniper/contrail-vrouter
+    check:
+      - ci-contrail-vrouter-unittest
+    silent:
+      - noop
+    check-tripleo:
+      - noop
+    gate:
+      - noop
+    post:
+      - noop
