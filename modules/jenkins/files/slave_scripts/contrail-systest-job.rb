@@ -16,6 +16,7 @@ end
 def get_dual_topo (vm1, vm2)
     topo =<<EOF
 from fabric.api import env
+import os
 
 host1 = 'root@#{vm1.hostip}'
 host2 = 'root@#{vm2.hostip}'
@@ -55,6 +56,7 @@ env.ostypes = {
 env.test_repo_dir='#{ENV['HOME']}/contrail-test'
 env.mail_from='ci-admin@opencontrail.org'
 env.mail_to='ci-admin@opencontrail.org'
+env.http_proxy = os.environ.get('http_proxy')
 # env.interface_rename=False
 EOF
     return topo
@@ -146,8 +148,6 @@ def verify_contrail
 end
 
 def run_sanity
-    # Set http-proxy
-    Sh.run "ssh #{vm.vmname} /usr/local/jenkins/slave_scripts/ci-infra/contrail_fab add_images"
     Sh.run "ssh #{@vms.first.vmname} /usr/local/jenkins/slave_scripts/ci-infra/contrail_fab run_sanity:quick_sanity"
 end
 

@@ -76,4 +76,8 @@ echo $CFG > /etc/network/interfaces
 service networking restart
 }
 
+function nested_kvm() {
+echo "options kvm-intel nested=1" > /etc/modprobe.d/kvm-intel.conf
+}
+
 build_vm
