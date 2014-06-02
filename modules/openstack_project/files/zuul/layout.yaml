@@ -1581,6 +1581,12 @@ projects:
     gate:
       - noop
 
+  - name: stackforge/gerrit-dash-creator
+    check:
+      - noop
+    gate:
+      - noop
+
   - name: stackforge/gce-api
     template:
       - name: check-requirements

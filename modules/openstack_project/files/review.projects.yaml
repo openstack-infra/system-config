@@ -669,6 +669,9 @@
   acl-config: /home/gerrit2/acls/stackforge/fuel.config
 - project: stackforge/gce-api
   description: Google Compute Engine API support for OpenStack
+- project: stackforge/gerrit-dash-creator
+  description: Client side gerrit dashboard creator from server side definitions
+  upstream: git://github.com/sdague/gerrit-dash-creator.git
 - project: stackforge/gertty
   description: Console interface to Gerrit Code Review
   use-storyboard: true
