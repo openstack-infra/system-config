@@ -62,38 +62,14 @@ EOF
     return topo
 end
 
-@setup_sh_patch=<<EOF
---- a/setup.sh
-+++ b/setup.sh
-@@ -24,8 +24,14 @@ if [ $? != 0 ]; then
-      mv new_sources.list sources.list
- fi
- 
--#Allow unauthenticated pacakges to get installed
--echo "APT::Get::AllowUnauthenticated \\"true\\";" > apt.conf
-+# Allow unauthenticated pacakges to get installed.
-+# Do not over-write apt.conf. Instead just append what is necessary
-+# retaining other useful configurations such as http::proxy info.
-+apt_auth="APT::Get::AllowUnauthenticated \"true\";"
-+grep --quiet "$apt_auth" apt.conf
-+if [ "$?" != "0" ]; then
-+    echo "$apt_auth" >> apt.conf
-+fi
- 
- #install local repo preferences from /opt/contrail/ to /etc/apt/
- cp /opt/contrail/contrail_packages/preferences /etc/apt/preferences 
-EOF
-
 def setup_contrail(image = @image)
     @image ||= "/root/contrail-install-packages_1.06-12~havana_all.deb"
     dest_image = Sh.run "basename #{@image}"
     puts "setup_contrail: #{@image}"
     topo_file = "/root/testbed_dual.py"
-    patch_file = "/root/setup_sh_patch.diff"
 
     @vms = Vm.all_vms
     @vms = Vm.init_all if @vms.empty?
-    File.open(patch_file, "w") { |fp| fp.write @setup_sh_patch }
 
     @vms.each { |vm|
         Sh.run "ssh root@#{vm.vmname} apt-get update"
@@ -101,9 +77,6 @@ def setup_contrail(image = @image)
         Sh.run "ssh #{vm.vmname} dpkg -i #{dest_image}"
 
         # Apply patch to setup.sh to retain apt.conf proxy settings.
-        Sh.run "scp #{patch_file} #{vm.vmname}:#{patch_file}"
-        Sh.run "ssh #{vm.vmname} patch -p1 -d /opt/contrail/contrail_packages/"+
-               " -i #{patch_file}"
         Sh.run "ssh #{vm.vmname} /opt/contrail/contrail_packages/setup.sh"
     }
 
