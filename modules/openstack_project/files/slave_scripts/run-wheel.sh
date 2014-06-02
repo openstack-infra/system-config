@@ -28,7 +28,7 @@ fi
 
 source /usr/local/jenkins/slave_scripts/select-mirror.sh $org $project
 
-rm -f dist/*.tar.gz
+rm -f dist/*.whl
 tox -evenv pip install wheel
 tox -evenv python setup.py bdist_wheel
 
