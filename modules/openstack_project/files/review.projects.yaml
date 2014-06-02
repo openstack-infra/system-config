@@ -859,6 +859,10 @@
   description: Puppet for OpenStack Design Specifications
   acl-config: /home/gerrit2/acls/stackforge/puppet-modules.config
   upstream: git://github.com/hogepodge/puppet-openstack-specs
+- project: stackforge/puppet-openstacklib
+  group: puppet-openstack
+  description: Module for Common Puppet OpenStack Dependencies
+  acl-config: /home/gerrit2/acls/stackforge/puppet-modules.config
 - project: stackforge/puppet-openstack_dev_env
   group: puppet-openstack
   description: OpenStack Puppet Dev Environment
