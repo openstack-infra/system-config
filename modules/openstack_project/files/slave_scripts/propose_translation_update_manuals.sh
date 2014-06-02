@@ -20,34 +20,15 @@
 ORG="openstack"
 PROJECT=$1
 
-DocFolder="doc"
-if [ $PROJECT = "api-site" ] ; then
-    DocFolder="./"
-fi
-
 source /usr/local/jenkins/slave_scripts/common_translation_update.sh
+
+init_manuals "$PROJECT"
 
 setup_git
 setup_review "$ORG" "$PROJECT"
 setup_translation
 
-# Generate pot one by one
-for FILE in ${DocFolder}/*
-do
-    DOCNAME=${FILE#${DocFolder}/}
-    # Update the .pot file
-    ./tools/generatepot ${DOCNAME}
-    if [ -f ${DocFolder}/${DOCNAME}/locale/${DOCNAME}.pot ]
-    then 
-        # Add all changed files to git
-        git add ${DocFolder}/${DOCNAME}/locale/*
-        # Set auto-local
-        tx set --auto-local -r openstack-manuals-i18n.${DOCNAME} \
-"${DocFolder}/${DOCNAME}/locale/<lang>.po" --source-lang en \
---source-file ${DocFolder}/${DOCNAME}/locale/${DOCNAME}.pot \
--t PO --execute
-    fi
-done
+setup_manuals
 
 # Pull upstream translations of files that are at least 75 %
 # translated
@@ -61,7 +42,7 @@ if [ $PROJECT = "openstack-manuals" ] ; then
     tx pull -f  --minimum-perc=8 -r openstack-manuals-i18n.common
 fi
 
-
+# Add imported upstream translations to git
 for FILE in ${DocFolder}/*
 do
     DOCNAME=${FILE#${DocFolder}/}
