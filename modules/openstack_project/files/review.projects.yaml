@@ -911,6 +911,9 @@
 - project: stackforge/python-solumclient
   description: 'Client library to Solum API. See: https://wiki.openstack.org/wiki/Solum'
   upstream: https://github.com/noorul/python-solumclient.git
+- project: stackforge/python-tackerclient
+  group: tacker
+  upstream: https://github.com/yamahata/python-tackerclient.git
 - project: stackforge/rally
   description: Benchmark System for OpenStack
   upstream: git://github.com/pboris/rally.git
@@ -957,6 +960,12 @@
   description: "Swift mass syncronizer"
   upstream: git://github.com/enovance/swiftsync.git
   acl-config: /home/gerrit2/acls/openstack/swiftsync.config
+- project: stackforge/tacker
+  description: "tacker: specifications a servicevm/device life cycle manager. See https://wiki.openstack.org/wiki/ServiceVM"
+  upstream: https://github.com/yamahata/tacker.git
+- project: stackforge/tacker-specs
+  group: tacker
+  upstream: https://github.com/yamahata/tacker-specs.git
 - project: stackforge/tomograph
   description: "Library to help distributed applications send trace information to metrics backends like Zipkin and Statsd."
   upstream: https://github.com/timjr/tomograph.git

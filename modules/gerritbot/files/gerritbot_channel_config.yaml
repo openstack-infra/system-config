@@ -784,3 +784,15 @@ nova-docker:
       - stackforge/nova-docker
     branches:
       - master
+
+tacker:
+    events:
+      - patchset-created
+      - change-merged
+      - x-vrif-minus-2
+    projects:
+      - openstack/tacker
+      - openstack/tackerc-specs
+      - openstack/python-tackerclient
+    branches:
+      - master
