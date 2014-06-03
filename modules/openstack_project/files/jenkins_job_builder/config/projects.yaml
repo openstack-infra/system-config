@@ -171,6 +171,7 @@
       - gate-{name}-puppet-syntax
       - gate-{name}-puppet-apply
       - gate-{name}-pep8
+      - experimental-swift-logs-{name}-pep8
 
 - project:
     name: gitdm

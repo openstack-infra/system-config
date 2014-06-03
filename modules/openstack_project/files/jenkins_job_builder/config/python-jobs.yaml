@@ -36,6 +36,18 @@
 
     node: '{node}'
 
+- job-template:
+    name: 'experimental-swift-logs-{name}-pep8'
+
+    builders:
+      - revoke-sudo
+      - gerrit-git-prep
+      - pep8:
+          github-org: '{github-org}'
+          project: '{name}'
+      - zuul_swift_upload_console_log
+
+    node: '{node}'
 
 - job-template:
     name: 'gate-{name}-pylint'
