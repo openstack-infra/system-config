@@ -4451,3 +4451,23 @@ projects:
       - noop
     gate:
       - noop
+
+  - name: stackforge/tacker
+    check:
+      - noop
+    gate:
+      - noop
+
+  - name: stackforge/python-tackerclient
+    check:
+      - noop
+    gate:
+      - noop
+
+  - name: stackforge/tacker-specs
+    check:
+      - gate-neutron-specs-python27
+      - gate-neutron-specs-docs
+    gate:
+      - gate-neutron-specs-python27
+      - gate-neutron-specs-docs
