@@ -81,6 +81,7 @@ def setup_contrail
     @image ||= "/root/contrail-install-packages_1.10main-2196~havana_all.deb"
     dest_image = Sh.run "basename #{@image}"
     puts "setup_contrail: #{@image}"
+    `mkdir -p #{ENV['WORKSPACE']}`
     @topo_file = "#{ENV['WORKSPACE']}/testbed.py"
 
     @vms = Vm.all_vms
