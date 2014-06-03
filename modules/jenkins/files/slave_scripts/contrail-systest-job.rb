@@ -139,7 +139,7 @@ end
 
 def run_sanity
     # Get proxy info and then launch sanity tests.
-    Sh.run "ssh #{@vms.first.vmname} (source /etc/bash.bashrc && /usr/local/jenkins/slave_scripts/ci-infra/contrail_fab run_sanity:quick_sanity)"
+    Sh.run "ssh #{@vms.first.vmname} \"(source /etc/bash.bashrc && /usr/local/jenkins/slave_scripts/ci-infra/contrail_fab run_sanity:quick_sanity)\""
 end
 
 def cleanup
