@@ -14,7 +14,7 @@ def create_vms(count = 1)
 end
 
 def get_all_hosts
-    return @vms.each_with_index.map { |vm, i| "host#{i}" }.join(", ")
+    return @vms.each_with_index.map { |vm, i| "host#{i+1}" }.join(", ")
 end
 
 def get_each_hostip
