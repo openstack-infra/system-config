@@ -1736,6 +1736,17 @@
       - puppet-module-unit
 
 - project:
+    name: puppet-openstack_extras
+    github-org: stackforge
+    node: bare-precise
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - gate-{name}-puppet-lint
+      - gate-{name}-puppet-syntax
+      - puppet-module-unit
+
+- project:
     name: puppet-sahara
     github-org: stackforge
     node: bare-precise
