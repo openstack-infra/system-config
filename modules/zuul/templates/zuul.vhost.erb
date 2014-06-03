@@ -11,6 +11,8 @@
   RewriteEngine on
   RewriteRule ^/status.json$ http://127.0.0.1:8001/status.json [P]
 
+
+  AddOutputFilterByType DEFLATE application/json
   Alias /rechecks.html /var/www/recheckwatch/rechecks.html
   Alias /rechecks /var/www/recheckwatch/rechecks.html
 
@@ -20,4 +22,5 @@
   AliasMatch ^/p/(.*/objects/[0-9a-f]{2}/[0-9a-f]{38})$ /var/lib/zuul/git/$1
   AliasMatch ^/p/(.*/objects/pack/pack-[0-9a-f]{40}.(pack|idx))$ /var/lib/zuul/git/$1
   ScriptAlias /p/ /usr/lib/git-core/git-http-backend/
+
 </VirtualHost>
