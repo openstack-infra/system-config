@@ -3979,6 +3979,36 @@ projects:
     gate:
       - noop
 
+  - name: stackforge/puppet_openstack_builder
+    check:
+      - noop
+    gate:
+      - noop
+
+  - name: stackforge/puppet-openstack_dev_env
+    check:
+      - noop
+    gate:
+      - noop
+
+  - name: stackforge/puppet-openstack_extras
+    check:
+      - gate-puppet-openstack_extras-puppet-lint
+      - gate-puppet-openstack_extras-puppet-syntax
+      - gate-puppet-openstack_extras-puppet-unit-2.7
+      - gate-puppet-openstack_extras-puppet-unit-3.1
+      - gate-puppet-openstack_extras-puppet-unit-3.2
+      - gate-puppet-openstack_extras-puppet-unit-3.3
+      - gate-puppet-openstack_extras-puppet-unit-3.4
+    gate:
+      - gate-puppet-openstack_extras-puppet-lint
+      - gate-puppet-openstack_extras-puppet-syntax
+      - gate-puppet-openstack_extras-puppet-unit-2.7
+      - gate-puppet-openstack_extras-puppet-unit-3.1
+      - gate-puppet-openstack_extras-puppet-unit-3.2
+      - gate-puppet-openstack_extras-puppet-unit-3.3
+      - gate-puppet-openstack_extras-puppet-unit-3.4
+
   - name: stackforge/puppet-openstacklib
     check:
       - gate-puppet-openstacklib-puppet-lint
