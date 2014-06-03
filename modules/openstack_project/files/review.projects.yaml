@@ -976,3 +976,12 @@
 - project: stackforge/xenapi-os-testing
   description: Scripts to enable running of tempest tests in a nested Xen instance
   upstream: git://github.com/citrix-openstack/xenapi-os-testing.git
+- project: stackforge/tacker
+  description: "tacker: specifications a servicevm/device life cycle manager. See https://wiki.openstack.org/wiki/ServiceVM"
+  upstream: https://github.com/yamahata/tacker.git
+- project: stackforge/python-tackerclient
+  group: tacker
+  upstream: https://github.com/yamahata/python-tackerclient.git
+- project: stackforge/tacker-specs
+  group: tacker
+  upstream: https://github.com/yamahata/tacker-specs.git
