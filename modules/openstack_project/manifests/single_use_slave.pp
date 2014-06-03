@@ -9,6 +9,7 @@
 class openstack_project::single_use_slave (
   $certname = $::fqdn,
   $install_users = true,
+  $install_resolv_conf = true,
   $sudo = false,
   $thin = true,
   $python3 = false,
@@ -18,10 +19,11 @@ class openstack_project::single_use_slave (
   $ssh_key = $openstack_project::jenkins_ssh_key
 ) inherits openstack_project {
   class { 'openstack_project::template':
-    certname           => $certname,
-    automatic_upgrades => $automatic_upgrades,
-    install_users      => $install_users,
-    iptables_rules4    =>
+    certname            => $certname,
+    automatic_upgrades  => $automatic_upgrades,
+    install_users       => $install_users,
+    install_resolv_conf => $install_resolv_conf,
+    iptables_rules4     =>
       [
         # Ports 69 and 6385 allow to allow ironic VM nodes to reach tftp and
         # the ironic API from the neutron public net

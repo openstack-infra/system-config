@@ -18,6 +18,7 @@
 # recursive resolver.
 
 class unbound (
+  $install_resolv_conf = true
 ) {
 
   if ($::osfamily == 'Debian') {
@@ -62,13 +63,15 @@ class unbound (
     }
   }
 
-  # Rackspace uses static config files
-  file { '/etc/resolv.conf':
-    content => "nameserver 127.0.0.1\n",
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0444',
-    require => Service['unbound'],
+  if ($install_resolv_conf) {
+    # Rackspace uses static config files
+    file { '/etc/resolv.conf':
+      content => "nameserver 127.0.0.1\n",
+      owner   => 'root',
+      group   => 'root',
+      mode    => '0444',
+      require => Service['unbound'],
+    }
   }
 
   service { 'unbound':
