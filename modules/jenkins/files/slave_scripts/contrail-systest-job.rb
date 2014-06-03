@@ -22,11 +22,11 @@ def get_each_hostip
 end
 
 def get_each_host_password
-    return @vms.each_with_index.map { |vm, i| "host#{i+1} = 'c0ntrail123'" }.join(", ")
+    return @vms.each_with_index.map { |vm, i| "host#{i+1}: 'c0ntrail123'" }.join(", ")
 end
 
 def get_each_host_ostype
-    return @vms.each_with_index.map { |vm, i| "host#{i+1} = 'ubuntu'" }.join(",")
+    return @vms.each_with_index.map { |vm, i| "host#{i+1} = 'ubuntu'" }.join(", ")
 end
 
 def get_all_host_names
@@ -81,8 +81,6 @@ def setup_contrail(image = @image)
     @image ||= "/root/contrail-install-packages_1.10main-2196~havana_all.deb"
     dest_image = Sh.run "basename #{@image}"
     puts "setup_contrail: #{@image}"
-    topo_file = "#{ENV['WORKSPACE']}/testbed.py"
-    File.open(topo_file, "w") { |fp| fp.write get_topo }
 
     @vms = Vm.all_vms
     @vms = Vm.init_all if @vms.empty?
@@ -95,6 +93,12 @@ def setup_contrail(image = @image)
         # Apply patch to setup.sh to retain apt.conf proxy settings.
         Sh.run "ssh #{vm.vmname} /opt/contrail/contrail_packages/setup.sh"
     }
+
+end
+
+def install_contrail
+    @topo_file = "#{ENV['WORKSPACE']}/testbed.py"
+    File.open(@topo_file, "w") { |fp| fp.write get_topo }
 
     vm = @vms.first
     Sh.run "scp #{topo_file} #{vm.vmname}:/opt/contrail/utils/fabfile/testbeds/testbed.py"
@@ -151,8 +155,9 @@ end
 
 def main
     # build_contrail_packages
-    create_vms(6)
-    setup_contrail
+#   create_vms(6)
+#   setup_contrail
+    install_contrail
     setup_sanity
     verify_contrail
     # run_sanity
