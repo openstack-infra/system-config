@@ -20,3 +20,13 @@
       - contrail-unittest-jobs
       - contrail-systest-jobs
       - contrail-controller-test-devstack
+
+- project:
+    name: contrail-vrouter
+    github-org: Juniper
+    node: juniper-tests
+    tarball-site: tarballs.openstack.org
+    doc-publisher-site: docs.opencontrail.org
+
+    jobs:
+      - contrail-unittest-jobs
