@@ -52,6 +52,33 @@ pipelines:
       gerrit:
         verified: -1
 
+  - name: check-non-binding
+    description: Newly uploaded patchsets enter this pipeline to receive an initial +/-1 Verified vote from non-binding-ci user.
+    failure-message: Build failed.  For information on how to proceed, see https://wiki.openstack.org/wiki/GerritJenkinsGit#Test_Failures
+    manager: IndependentPipelineManager
+    precedence: low
+    require:
+      open: True
+      current-patchset: True
+    trigger:
+      gerrit:
+        - event: patchset-created
+        - event: change-restored
+        - event: comment-added
+          comment_filter: (?i)^(Patch Set [0-9]+:)?( [\w\\+-]*)*(\n\n)?\s*recheck(( (?:bug|lp)[\s#:]*(\d+))|( no bug))\s*$
+    start:
+      gerrit:
+        verified: 0
+        gerrit_user: non-binding-ci
+    success:
+      gerrit:
+        verified: 1
+        gerrit_user: non-binding-ci
+    failure:
+      gerrit:
+        verified: -1
+        gerrit_user: non-binding-ci
+
   - name: gate
     description: Changes that have been approved by core developers are enqueued in order in this pipeline, and if they pass tests in Jenkins, will be merged.
     failure-message: Build failed.  For information on how to proceed, see https://wiki.openstack.org/wiki/GerritJenkinsGit#Test_Failures
