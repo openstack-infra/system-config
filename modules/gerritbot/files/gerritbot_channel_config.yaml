@@ -806,3 +806,15 @@ openstack-lbaas:
       - stackforge/octavia
     branches:
       - master
+
+tacker:
+    events:
+      - patchset-created
+      - change-merged
+      - x-vrif-minus-2
+    projects:
+      - stackforge/tacker
+      - stackforge/tacker-specs
+      - stackforge/python-tackerclient
+    branches:
+      - master
