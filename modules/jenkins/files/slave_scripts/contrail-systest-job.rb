@@ -23,6 +23,18 @@ def get_each_host
     }.join("\n")
 end
 
+def get_each_host_password
+    return @vms.each_with_index.map { |vm, i|
+        "    host#{i+1} = 'c0ntrail123',"
+    }.join("\n")
+end
+
+def get_each_host_ostype
+    return @vms.each_with_index.map { |vm, i|
+        "    host#{i+1} = 'ubuntu',"
+    }.join("\n")
+end
+
 def get_all_host_names
     return @vms.each_with_index.map { |vm, i| "'#{vm.vmname}'" }.join(", ")
 end
@@ -62,14 +74,12 @@ env.hostnames = {
 
 env.password = 'c0ntrail123'
 env.passwords = {
-    host1: 'c0ntrail123',
-    host2: 'c0ntrail123',
+#{get_each_host_password},
     host_build: 'c0ntrail123',
 }
 
 env.ostypes = {
-    host1:'ubuntu',
-    host2:'ubuntu',
+#{get_each_host_ostype}
 }
 
 env.test_repo_dir='#{ENV['HOME']}/contrail-test'
@@ -155,13 +165,13 @@ def wait
 end
 
 def main
-    build_contrail_packages
+    # build_contrail_packages
     create_vms(6)
     setup_contrail
     setup_sanity
     verify_contrail
     # run_sanity
-    # wait
+    wait
     cleanup
 end
 
