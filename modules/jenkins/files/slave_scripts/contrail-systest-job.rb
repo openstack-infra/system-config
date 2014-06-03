@@ -68,9 +68,10 @@ env.passwords = { #{get_each_host_password}, host_build: 'c0ntrail123' }
 env.ostypes = { #{get_each_host_ostype} }
 
 env.test_repo_dir='#{ENV['HOME']}/contrail-test'
-env.mail_from='ci-admin@opencontrail.org'
-env.mail_to='ci-admin@opencontrail.org'
 env.http_proxy = os.environ.get('http_proxy')
+
+# env.mail_from='ci-admin@opencontrail.org'
+# env.mail_to='ci-admin@opencontrail.org'
 # env.interface_rename=False
 EOF
     puts topo
