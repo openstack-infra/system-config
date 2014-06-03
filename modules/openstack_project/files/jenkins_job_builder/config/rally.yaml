@@ -32,6 +32,7 @@
           #!/bin/bash -xe
           export PROJECTS="stackforge/rally $PROJECTS"
           export ENABLED_SERVICES=rally
+          export DEVSTACK_GATE_NEUTRON={neutron}
           export DEVSTACK_GATE_EXERCISES=0
           export DEVSTACK_GATE_TIMEOUT=120
           export RALLY_SCENARIO={scenario}
@@ -64,6 +65,28 @@
     builders:
       - devstack-rally-gate:
           scenario: '{name}'
+          neutron: '0'
+
+    publishers:
+      - devstack-logs
+      - console-log
+      - rally-plot
+
+
+- job-template:
+    name: 'check-rally-dsvm-neutron-{name}'
+    node: 'devstack-precise || devstack-precise-check'
+
+    wrappers:
+      - timeout:
+          timeout: 125
+          fail: true
+      - timestamps
+
+    builders:
+      - devstack-rally-gate:
+          scenario: '{name}'
+          neutron: '1'
 
     publishers:
       - devstack-logs
@@ -99,3 +122,4 @@
     name: rally-jobs
     jobs:
       - 'check-rally-dsvm-{name}'
+      - 'check-rally-dsvm-neutron-{name}'
