@@ -8,37 +8,56 @@ require 'launch_vms'
 
 Util.ci_setup
 
-def create_vms
+def create_vms(count = 1)
     # Launch 2 ci-subslave VMs
-    Vm.create_subslaves(2)
+    Vm.create_subslaves(count)
 end
 
-def get_dual_topo (vm1, vm2)
+def get_all_hosts
+    return @vms.each_with_index.map { |vm, i| "host#{i}" }.join(", ")
+end
+
+def get_each_host
+    return @vms.each_with_index.map { |vm, i|
+        "host#{i+1} = 'root@#{vm.hostip}'"
+    }.join("\n")
+end
+
+def get_all_host_names
+    return @vms.each_with_index.map { |vm, i| "'#{vm.vmname}'" }.join(", ")
+end
+
+
+# host1 is always controller node
+# Rest are always compute nodes
+def get_topo(compute_start = @vms.size > 1 ? 2 : 1)
+    computes = "host#{compute_start}"
+    (compute_start + 1).upto(@vms.size) { |i| computes += ", host#{i}" }
+
     topo =<<EOF
 from fabric.api import env
 import os
 
-host1 = 'root@#{vm1.hostip}'
-host2 = 'root@#{vm2.hostip}'
-host_build = 'root@#{vm1.hostip}'
+#{get_each_host}
+host_build = 'root@#{@vms[0].hostip}'
 ext_routers = []
 router_asn = 64512
 
 env.roledefs = {
-    'all': [host1, host2],
+    'all': [#{get_all_hosts}],
     'cfgm': [host1],
     'openstack': [host1],
     'control': [host1],
-    'compute': [host2],
     'collector': [host1],
     'webui': [host1],
     'database': [host1],
+    'compute': [#{computes}],
     'build': [host_build],
 }
 
 env.openstack_admin_password = 'c0ntrail123'
 env.hostnames = {
-    'all': ['#{vm1.vmname}', '#{vm2.vmname}']
+    'all': [#{get_all_host_names}]
 }
 
 env.password = 'c0ntrail123'
@@ -81,7 +100,7 @@ def setup_contrail(image = @image)
     }
 
     vm = @vms.first
-    File.open(topo_file, "w") { |fp| fp.write get_dual_topo(@vms[0], @vms[1]) }
+    File.open(topo_file, "w") { |fp| fp.write get_topo }
     Sh.run "scp #{topo_file} #{vm.vmname}:/opt/contrail/utils/fabfile/testbeds/testbed.py"
     Sh.run "ssh #{vm.vmname} /usr/local/jenkins/slave_scripts/ci-infra/contrail_fab install_contrail"
     Sh.run "echo \"perl -ni -e 's/JVM_OPTS -Xss\\d+/JVM_OPTS -Xss512/g; print \\$_;' /etc/cassandra/cassandra-env.sh\" | ssh -t #{vm.vmname} \$(< /dev/fd/0)"
@@ -136,7 +155,7 @@ end
 
 def main
     build_contrail_packages
-    create_vms
+    create_vms(6)
     setup_contrail
     setup_sanity
     verify_contrail
