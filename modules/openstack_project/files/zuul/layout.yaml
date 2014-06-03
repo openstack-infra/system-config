@@ -2534,6 +2534,7 @@ projects:
       - ci-docs
     experimental:
       - gate-config-puppet-apply-centos6
+      - experimental-swift-logs-config-pep8
 
   - name: openstack-infra/devstack-gate
     template:
