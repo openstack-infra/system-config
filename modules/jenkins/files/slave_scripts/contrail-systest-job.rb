@@ -77,7 +77,7 @@ EOF
     return topo
 end
 
-def setup_contrail(image = @image)
+def setup_contrail
     @image ||= "/root/contrail-install-packages_1.10main-2196~havana_all.deb"
     dest_image = Sh.run "basename #{@image}"
     puts "setup_contrail: #{@image}"
@@ -130,12 +130,10 @@ def setup_sanity
     Sh.run "ssh #{vm.vmname} git clone --branch #{branch} git@github.com:juniper/contrail-test.git /root/contrail-test"
 end
 
+# Verify that contrail-status shows 'up' for all necessary components.
 def verify_contrail
-
-    # Verify that contrail-status shows 'up' for all necessary components.
     Sh.run "ssh #{@vms[0].vmname} /usr/bin/openstack-status"
-    Sh.run "ssh #{@vms[0].vmname} /usr/bin/contrail-status"
-    Sh.run "ssh #{@vms[1].vmname} /usr/bin/contrail-status"
+    @vms.each { |vm| Sh.run "ssh #{vm.vmname} /usr/bin/contrail-status" }
 end
 
 def run_sanity
