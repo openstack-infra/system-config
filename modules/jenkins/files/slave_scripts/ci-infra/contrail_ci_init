@@ -27,19 +27,19 @@ if [ "$SLAVE_MASTER" != "localhost" ]; then
     export ftp_proxy=http://$SLAVE_MASTER:3128 # squid
 
     proxy="export http_proxy=$http_proxy"
-    grep --quiet "$proxy" /etc/bash.bashrc
+    grep --quiet "$proxy" /etc/profile
     if [ "$?" != "0" ]; then
-        echo "$proxy" >> /etc/bash.bashrc
+        echo "$proxy" >> /etc/profile
     fi
     proxy="export https_proxy=$https_proxy"
-    grep --quiet "$proxy" /etc/bash.bashrc
+    grep --quiet "$proxy" /etc/profile
     if [ "$?" != "0" ]; then
-        echo "$proxy" >> /etc/bash.bashrc
+        echo "$proxy" >> /etc/profile
     fi
     proxy="export ftp_proxy=$ftp_proxy"
-    grep --quiet "$proxy" /etc/bash.bashrc
+    grep --quiet "$proxy" /etc/profile
     if [ "$?" != "0" ]; then
-        echo "$proxy" >> /etc/bash.bashrc
+        echo "$proxy" >> /etc/profile
     fi
 
     # Set proxy for apt as well, if it is not already set.
