@@ -4411,6 +4411,12 @@ projects:
       - gate-python-solumclient-python33
       - gate-python-solumclient-pypy
 
+  - name: stackforge/python-tackerclient
+    check:
+      - noop
+    gate:
+      - noop
+
   - name: stackforge/solum-dashboard
     template:
       - name: python-jobs
@@ -4721,6 +4727,20 @@ projects:
       - noop
     gate:
       - noop
+
+  - name: stackforge/tacker
+    check:
+      - noop
+    gate:
+      - noop
+
+  - name: stackforge/tacker-specs
+    check:
+      - gate-tacker-specs-python27
+      - gate-tacker-specs-docs
+    gate:
+      - gate-tacker-specs-python27
+      - gate-tacker-specs-docs
 
   - name: openstack/training-guides
     template:

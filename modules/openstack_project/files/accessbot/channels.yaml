@@ -119,6 +119,8 @@ channels:
   - name: storyboard
   - name: syscompass
     mask: full_mask
+  - name: tacker
+    mask: full_mask
   - name: tripleo
   - name: openstack-satori
     mask: full_mask
