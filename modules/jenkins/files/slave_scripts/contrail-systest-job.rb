@@ -123,7 +123,7 @@ end
 
 def setup_sanity
     vm = @vms.first
-    Sh.run "ssh #{vm.vmname} \"(source /opt/contrail/api-venv/bin/activate && pip install fixtures testtools testresources selenium pyvirtualdisplay)\""
+    Sh.run "ssh #{vm.vmname} \"(source /opt/contrail/api-venv/bin/activate && source /etc/bash.bashrc && pip install fixtures testtools testresources selenium pyvirtualdisplay)\""
 
     branch = ENV['ZUUL_BRANCH'] || "master"
     Sh.run "ssh #{vm.vmname} rm -rf /root/contrail-test"
