@@ -693,6 +693,8 @@ projects:
       - gate-tempest-dsvm-postgres-full
       - gate-tempest-dsvm-neutron
       - gate-swift-dsvm-functional
+    experimental:
+      - gate-grenade-dsvm-forward
     post:
       - ceilometer-upstream-translation-update
     pre-release:
