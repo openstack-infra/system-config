@@ -78,6 +78,7 @@ env.mail_to='ci-admin@opencontrail.org'
 env.http_proxy = os.environ.get('http_proxy')
 # env.interface_rename=False
 EOF
+    puts topo
     return topo
 end
 
