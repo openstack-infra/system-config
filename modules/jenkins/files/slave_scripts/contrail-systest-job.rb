@@ -26,7 +26,7 @@ def get_each_host_password
 end
 
 def get_each_host_ostype
-    return @vms.each_with_index.map { |vm, i| "host#{i+1} = 'ubuntu'" }.join(", ")
+    return @vms.each_with_index.map { |vm, i| "host#{i+1}: 'ubuntu'" }.join(", ")
 end
 
 def get_all_host_names
