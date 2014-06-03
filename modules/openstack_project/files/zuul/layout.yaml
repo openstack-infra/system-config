@@ -2141,6 +2141,8 @@ projects:
       - periodic-tempest-dsvm-stress-master
 
   - name: openstack/tripleo-heat-templates
+    template:
+      - name: publish-to-pypi
     check:
       - noop
     check-tripleo:

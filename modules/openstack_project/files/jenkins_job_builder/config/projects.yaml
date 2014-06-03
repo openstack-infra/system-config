@@ -1591,6 +1591,7 @@
 
     jobs:
       - python-jobs
+      - pypi-jobs
 
 - project:
     name: tripleo-image-elements
