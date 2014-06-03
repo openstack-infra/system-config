@@ -83,7 +83,7 @@ EOF
 end
 
 def setup_contrail(image = @image)
-    @image ||= "/root/contrail-install-packages_1.06-12~havana_all.deb"
+    @image ||= "/root/contrail-install-packages_1.10main-2196~havana_all.deb"
     dest_image = Sh.run "basename #{@image}"
     puts "setup_contrail: #{@image}"
     topo_file = "/root/testbed_dual.py"
