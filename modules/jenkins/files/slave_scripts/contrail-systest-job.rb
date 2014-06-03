@@ -24,15 +24,11 @@ def get_each_host
 end
 
 def get_each_host_password
-    return @vms.each_with_index.map { |vm, i|
-        "    host#{i+1} = 'c0ntrail123',"
-    }.join("\n")
+    return @vms.each_with_index.map { |vm, i| "host#{i+1} = 'c0ntrail123'" }.join(", ")
 end
 
 def get_each_host_ostype
-    return @vms.each_with_index.map { |vm, i|
-        "    host#{i+1} = 'ubuntu',"
-    }.join("\n")
+    return @vms.each_with_index.map { |vm, i| "host#{i+1} = 'ubuntu'" }.join(",")
 end
 
 def get_all_host_names
@@ -68,19 +64,10 @@ env.roledefs = {
 }
 
 env.openstack_admin_password = 'c0ntrail123'
-env.hostnames = {
-    'all': [#{get_all_host_names}]
-}
-
+env.hostnames = { 'all': [#{get_all_host_names}] }
 env.password = 'c0ntrail123'
-env.passwords = {
-#{get_each_host_password},
-    host_build: 'c0ntrail123',
-}
-
-env.ostypes = {
-#{get_each_host_ostype}
-}
+env.passwords = { #{get_each_host_password}, host_build: 'c0ntrail123' }
+env.ostypes = { #{get_each_host_ostype} }
 
 env.test_repo_dir='#{ENV['HOME']}/contrail-test'
 env.mail_from='ci-admin@opencontrail.org'
