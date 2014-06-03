@@ -148,7 +148,10 @@ end
 
 def wait
     puts "Waiting for ever!"
-    loop do sleep 1 end
+    loop do
+        break unless File.file? "/root/contrail_systest_job_wait"
+        sleep 10
+    end
 end
 
 def main
@@ -159,7 +162,7 @@ def main
     setup_sanity
     verify_contrail
     run_sanity
-#   wait
+    wait
     cleanup
 end
 
