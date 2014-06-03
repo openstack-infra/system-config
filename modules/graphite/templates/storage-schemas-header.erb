@@ -7,14 +7,3 @@
 
 # Carbon's internal metrics. This entry should match what is specified in
 # CARBON_METRIC_PREFIX and CARBON_METRIC_INTERVAL settings
-[carbon]
-pattern = ^carbon\.
-retentions = 60:90d
-
-[stats]
-pattern = ^stats.*
-retentions = 10:2160,60:10080,600:262974
-
-[default]
-pattern = .*
-retentions = 60:90d

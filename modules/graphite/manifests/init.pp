@@ -5,6 +5,7 @@ class graphite(
   $graphite_admin_user = '',
   $graphite_admin_email = '',
   $graphite_admin_password = '',
+  $defaults = true,
 ) {
   $packages = [ 'python-django',
                 'python-django-tagging',
@@ -153,10 +154,22 @@ class graphite(
     require => File['/etc/graphite'],
   }
 
-  file { '/etc/graphite/storage-schemas.conf':
-    mode    => '0444',
-    content => template('graphite/storage-schemas.conf.erb'),
-    require => File['/etc/graphite'],
+  file_fragment { "header_${::fqdn}":
+    tag     => "carbon_cache_storage_config_${::fqdn}",
+    content => template('graphite/storage-schemas-header.erb'),
+    order   => 01
+  }
+
+  file_concat { '/etc/graphite/storage-schemas.conf':
+    tag     => "carbon_cache_storage_config_${::fqdn}",
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0644',
+    require => File['/etc/graphite']
+  }
+
+  if $defaults == true {
+    include graphite::defaults
   }
 
   file { '/etc/graphite/storage-aggregation.conf':
