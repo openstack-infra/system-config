@@ -23,4 +23,11 @@
   AliasMatch ^/p/(.*/objects/pack/pack-[0-9a-f]{40}.(pack|idx))$ /var/lib/zuul/git/$1
   ScriptAlias /p/ /usr/lib/git-core/git-http-backend/
 
+  <IfModule mod_cache.c>
+    CacheDefaultExpire 5
+    <IfModule mod_mem_cache.c>
+      CacheEnable mem /status.json
+    </IfModule>
+  </IfModule>
+
 </VirtualHost>
