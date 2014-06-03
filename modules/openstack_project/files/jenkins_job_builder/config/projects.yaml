@@ -2671,3 +2671,13 @@
 
     jobs:
       - python-jobs
+
+- project:
+    name: tacker-specs
+    github-org: stackforge
+    node: bare-precise
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - gate-{name}-python27
+      - gate-{name}-docs
