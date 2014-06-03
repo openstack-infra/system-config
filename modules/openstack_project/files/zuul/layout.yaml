@@ -4509,6 +4509,14 @@ projects:
     gate:
       - noop
 
+  - name: stackforge/tacker-specs
+    check:
+      - gate-tacker-specs-python27
+      - gate-tacker-specs-docs
+    gate:
+      - gate-tacker-specs-python27
+      - gate-tacker-specs-docs
+
   - name: openstack/training-guides
     template:
       - name: openstack-doc-gate
