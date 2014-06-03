@@ -636,8 +636,6 @@ jobs:
     voting: false
   - name: check-rally-cli
     voting: false
-  - name: gate-rally-python33
-    voting: false
   - name: gate-stevedore-docs
     voting: false
   - name: gate-cliff-requirements
@@ -4191,7 +4189,6 @@ projects:
       - gate-rally-pep8
       - gate-rally-python26
       - gate-rally-python27
-      - gate-rally-python33
       - gate-rally-install-bare-centos6
       - gate-rally-install-bare-precise
       - check-rally-dsvm-rally
