@@ -82,10 +82,10 @@ def setup_contrail(image = @image)
     dest_image = Sh.run "basename #{@image}"
     puts "setup_contrail: #{@image}"
     @topo_file = "#{ENV['WORKSPACE']}/testbed.py"
-    File.open(@topo_file, "w") { |fp| fp.write get_topo }
 
     @vms = Vm.all_vms
     @vms = Vm.init_all if @vms.empty?
+    File.open(@topo_file, "w") { |fp| fp.write get_topo }
 
     @vms.each { |vm|
         Sh.run "ssh root@#{vm.vmname} apt-get update"
