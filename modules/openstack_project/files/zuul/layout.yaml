@@ -945,7 +945,6 @@ projects:
       - gate-tempest-dsvm-neutron-large-ops
       - check-swift-dsvm-functional
       - check-rally-dsvm-keystone
-      - check-tempest-dsvm-full-apache-services
     gate:
       - gate-devstack-dsvm-cells
       - gate-tempest-dsvm-large-ops
@@ -953,6 +952,7 @@ projects:
       - gate-swift-dsvm-functional
     experimental:
       - gate-grenade-dsvm-forward
+      - check-tempest-dsvm-full-apache-services
     experimental-tripleo:
       - check-tripleo-ironic-seed-precise
       - check-tripleo-undercloud-precise
@@ -1386,7 +1386,6 @@ projects:
       - check-devstack-dsvm-cells
       - gate-tempest-dsvm-large-ops
       - gate-tempest-dsvm-neutron-large-ops
-      - check-tempest-dsvm-full-apache-services
     gate:
       - gate-python-keystoneclient-python33
       - gate-devstack-dsvm-cells
@@ -1394,6 +1393,7 @@ projects:
       - gate-tempest-dsvm-neutron-large-ops
     experimental:
       - gate-grenade-dsvm-forward
+      - check-tempest-dsvm-full-apache-services
     experimental-tripleo:
       - check-tripleo-ironic-seed-precise
       - check-tripleo-undercloud-precise
