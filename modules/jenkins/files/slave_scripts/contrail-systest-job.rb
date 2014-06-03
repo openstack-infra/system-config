@@ -81,6 +81,8 @@ def setup_contrail(image = @image)
     @image ||= "/root/contrail-install-packages_1.10main-2196~havana_all.deb"
     dest_image = Sh.run "basename #{@image}"
     puts "setup_contrail: #{@image}"
+    @topo_file = "#{ENV['WORKSPACE']}/testbed.py"
+    File.open(@topo_file, "w") { |fp| fp.write get_topo }
 
     @vms = Vm.all_vms
     @vms = Vm.init_all if @vms.empty?
@@ -97,9 +99,6 @@ def setup_contrail(image = @image)
 end
 
 def install_contrail
-    @topo_file = "#{ENV['WORKSPACE']}/testbed.py"
-    File.open(@topo_file, "w") { |fp| fp.write get_topo }
-
     vm = @vms.first
     Sh.run "scp #{topo_file} #{vm.vmname}:/opt/contrail/utils/fabfile/testbeds/testbed.py"
     Sh.run "ssh #{vm.vmname} /usr/local/jenkins/slave_scripts/ci-infra/contrail_fab install_contrail"
@@ -154,9 +153,9 @@ def wait
 end
 
 def main
-    # build_contrail_packages
-#   create_vms(6)
-#   setup_contrail
+#   build_contrail_packages
+    create_vms(6)
+    setup_contrail
     install_contrail
     setup_sanity
     verify_contrail
