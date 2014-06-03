@@ -278,4 +278,9 @@ class zuul (
       ensure => present,
     }
   }
+  if ! defined(A2mod['deflate']) {
+    a2mod { 'deflate':
+      ensure => present,
+    }
+  }
 }
