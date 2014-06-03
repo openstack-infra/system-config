@@ -85,7 +85,7 @@
 
     builders:
       - devstack-rally-gate:
-          scenario: '{name}'
+          scenario: '{name}-neutron'
           neutron: '1'
 
     publishers:
