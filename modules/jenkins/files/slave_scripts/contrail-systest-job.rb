@@ -17,10 +17,8 @@ def get_all_hosts
     return @vms.each_with_index.map { |vm, i| "host#{i}" }.join(", ")
 end
 
-def get_each_host
-    return @vms.each_with_index.map { |vm, i|
-        "host#{i+1} = 'root@#{vm.hostip}'"
-    }.join("\n")
+def get_each_hostip
+    return @vms.each_with_index.map { |vm, i| "host#{i+1} = 'root@#{vm.hostip}'" }.join("\n")
 end
 
 def get_each_host_password
@@ -46,7 +44,7 @@ def get_topo(compute_start = @vms.size > 1 ? 2 : 1)
 from fabric.api import env
 import os
 
-#{get_each_host}
+#{get_each_hostip}
 host_build = 'root@#{@vms[0].hostip}'
 ext_routers = []
 router_asn = 64512
@@ -83,7 +81,8 @@ def setup_contrail(image = @image)
     @image ||= "/root/contrail-install-packages_1.10main-2196~havana_all.deb"
     dest_image = Sh.run "basename #{@image}"
     puts "setup_contrail: #{@image}"
-    topo_file = "/root/testbed_dual.py"
+    topo_file = "#{ENV['WORKSPACE']}/testbed.py"
+    File.open(topo_file, "w") { |fp| fp.write get_topo }
 
     @vms = Vm.all_vms
     @vms = Vm.init_all if @vms.empty?
@@ -98,7 +97,6 @@ def setup_contrail(image = @image)
     }
 
     vm = @vms.first
-    File.open(topo_file, "w") { |fp| fp.write get_topo }
     Sh.run "scp #{topo_file} #{vm.vmname}:/opt/contrail/utils/fabfile/testbeds/testbed.py"
     Sh.run "ssh #{vm.vmname} /usr/local/jenkins/slave_scripts/ci-infra/contrail_fab install_contrail"
     Sh.run "echo \"perl -ni -e 's/JVM_OPTS -Xss\\d+/JVM_OPTS -Xss512/g; print \\$_;' /etc/cassandra/cassandra-env.sh\" | ssh -t #{vm.vmname} \$(< /dev/fd/0)"
