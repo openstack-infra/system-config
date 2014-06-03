@@ -79,7 +79,10 @@ EOF
 end
 
 def setup_contrail
-    @image ||= "/root/contrail-install-packages_1.10main-2196~havana_all.deb"
+    if @image.nil? then
+        @image = "/root/contrail-install-packages_1.05-2252~havana_all.deb"
+        ENV['ZUUL_BRANCH'] = "R1.05"
+    end
     dest_image = Sh.run "basename #{@image}"
     puts "setup_contrail: #{@image}"
     `mkdir -p #{ENV['WORKSPACE']}`
