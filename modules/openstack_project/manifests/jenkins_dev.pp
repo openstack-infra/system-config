@@ -14,6 +14,11 @@ class openstack_project::jenkins_dev (
   $hpcloud_project ='',
   $nodepool_template ='nodepool-dev.yaml.erb',
 ) {
+
+  realize (
+    User::Virtual::Localuser['zaro'],
+  )
+
   include openstack_project
 
   class { 'openstack_project::server':
