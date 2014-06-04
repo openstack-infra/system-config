@@ -56,7 +56,7 @@ def subslave
             # If it is not updated within 5 minutes, commit suicide! unless
             # we want to skip it.
             if !File.file? "/root/skip_subslave_keepalive" then
-                fp.puts(Sh.crun "nova delete #{@hostname}") if elapsed > 45
+                fp.puts(Sh.crun "nova delete #{@hostname}") if elapsed > 120
             end
         }
         sleep 10
