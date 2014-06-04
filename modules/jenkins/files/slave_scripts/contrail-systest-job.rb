@@ -108,7 +108,19 @@ def install_contrail
     Sh.run "scp #{@topo_file} #{vm.vmname}:/opt/contrail/utils/fabfile/testbeds/testbed.py"
     Sh.run "ssh #{vm.vmname} /usr/local/jenkins/slave_scripts/ci-infra/contrail_fab install_contrail"
     Sh.run "echo \"perl -ni -e 's/JVM_OPTS -Xss\\d+/JVM_OPTS -Xss512/g; print \\$_;' /etc/cassandra/cassandra-env.sh\" | ssh -t #{vm.vmname} \$(< /dev/fd/0)"
+
     Sh.run "ssh #{vm.vmname} /usr/local/jenkins/slave_scripts/ci-infra/contrail_fab setup_all"
+
+    # Reduce number of nova-api and nova-conductors and fix scheduler for
+    # even distribution of instances across all compute nodes.
+    Sh.run "ssh #{vm.vmname} /usr/bin/openstack-config --set /etc/nova/nova.conf conductor workers 2"
+    Sh.run "ssh #{vm.vmname} /usr/bin/openstack-config --set /etc/nova/nova.conf DEFAULT osapi_compute_workers 2"
+    Sh.run "ssh #{vm.vmname} service nova-api restart"
+    Sh.run "ssh #{vm.vmname} service nova-conductor restart"
+
+#   Sh.run "ssh #{vm.vmname} /usr/bin/openstack-config --set /etc/nova/nova.conf DEFAULT ram_weight_multiplier 1.0"
+#   Sh.run "ssh #{vm.vmname} /usr/bin/openstack-config --set /etc/nova/nova.conf DEFAULT scheduler_weight_classes nova.scheduler.weights.all_weighers"
+#   Sh.run "ssh #{vm.vmname} service nova-scheduler restart"
 end
 
 def build_contrail_packages(repo = "#{ENV['WORKSPACE']}/repo")
