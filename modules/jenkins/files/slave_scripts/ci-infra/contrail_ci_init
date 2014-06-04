@@ -27,21 +27,11 @@ if [ "$SLAVE_MASTER" != "localhost" ]; then
     export ftp_proxy=http://$SLAVE_MASTER:3128 # squid
 
     proxy="export http_proxy=$http_proxy"
-    echo "$proxy" > /etc/contrail_profile
+    echo "$proxy" > /etc/contrail_bashrc
     proxy="export https_proxy=$https_proxy"
-    echo "$proxy" >> /etc/contrail_profile
+    echo "$proxy" >> /etc/contrail_bashrc
     proxy="export ftp_proxy=$ftp_proxy"
-    echo "$proxy" >> /etc/contrail_profile
-
-    grep --quiet "contrail_profile" /etc/bash.bashrc 2>/dev/null
-    if [ "$?" != "0" ]; then
-        echo "source /etc/contrail_profile" >> /etc/bash.bashrc
-    fi
-
-    grep --quiet "openstackrc" /etc/bash.bashrc
-    if [ "$?" != "0" ]; then
-        echo "source /etc/contrail/openstackrc 2>/dev/null || true" >> /etc/bash.bashrc
-    fi
+    echo "$proxy" >> /etc/contrail_bashrc
 
     # Set proxy for apt as well, if it is not already set.
     apt_proxy="Acquire::http::Proxy \"http://$SLAVE_MASTER:3128\";"
