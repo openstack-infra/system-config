@@ -2540,6 +2540,8 @@
       - python-jobs
       - gate-{name}-tox-{envlist}:
           envlist: py27-postgresql
+      - gate-{name}-tox-{envlist}:
+          envlist: py27-mysql
 
 - project:
     name: groups
