@@ -29,8 +29,11 @@ class Sh
             rescue PTY::ChildExited => e
                 exit_code = e.status.exitstatus
             ensure
-                Process.wait(pid)
-                exit_code = $?.exitstatus
+                begin
+                    Process.wait(pid)
+                    exit_code = $?.exitstatus
+                rescue
+                end
             end
         }
         rescue PTY::ChildExited => e
