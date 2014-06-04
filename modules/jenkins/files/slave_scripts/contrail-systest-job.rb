@@ -93,7 +93,7 @@ def setup_contrail
     File.open(@topo_file, "w") { |fp| fp.write get_topo }
 
     @vms.each { |vm|
-        Sh.run "ssh root@#{vm.vmname} apt-get update"
+#       Sh.run "ssh root@#{vm.vmname} apt-get update"
         Sh.run "scp #{@image} root@#{vm.vmname}:#{dest_image}"
         Sh.run "ssh #{vm.vmname} dpkg -i #{dest_image}"
 
