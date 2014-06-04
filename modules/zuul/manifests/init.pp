@@ -235,9 +235,21 @@ class zuul (
     require => File['/var/lib/zuul/www'],
   }
 
-  file { '/var/lib/zuul/www/app.js':
+  file { '/var/lib/zuul/www/styles':
     ensure  => link,
-    target  => '/opt/zuul/etc/status/public_html/app.js',
+    target  => '/opt/zuul/etc/status/public_html/styles',
+    require => File['/var/lib/zuul/www'],
+  }
+
+  file { '/var/lib/zuul/www/zuul.app.js':
+    ensure  => link,
+    target  => '/opt/zuul/etc/status/public_html/zuul.app.js',
+    require => File['/var/lib/zuul/www'],
+  }
+
+  file { '/var/lib/zuul/www/jquery.zuul.js':
+    ensure  => link,
+    target  => '/opt/zuul/etc/status/public_html/jquery.zuul.js',
     require => File['/var/lib/zuul/www'],
   }
 
