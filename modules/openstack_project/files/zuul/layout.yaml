@@ -1039,9 +1039,6 @@ projects:
       - gate-grenade-dsvm-forward
       - check-tempest-dsvm-cells-full
       - check-tempest-dsvm-neutron-pg
-    silent:
-      - gate-tempest-dsvm-large-ops-testing
-      - gate-tempest-dsvm-neutron-large-ops-testing
     experimental-tripleo:
       - check-tripleo-ironic-seed-precise
       - check-tripleo-undercloud-precise
@@ -2580,7 +2577,6 @@ projects:
       - gate-grenade-dsvm-forward
       - check-tempest-master-dsvm-full-havana
       - check-tempest-master-dsvm-neutron-havana
-      - gate-tempest-dsvm-large-ops-testing
     experimental-tripleo:
       - check-tripleo-ironic-seed-precise
       - check-tripleo-undercloud-precise
