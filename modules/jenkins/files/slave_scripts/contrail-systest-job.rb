@@ -42,7 +42,7 @@ def get_topo(compute_start = @vms.size > 1 ? 2 : 1)
 
     topo =<<EOF
 from fabric.api import env
-import os
+import subprocess
 
 #{get_each_hostip}
 host_build = 'root@#{@vms[0].hostip}'
@@ -68,7 +68,7 @@ env.passwords = { #{get_each_host_password}, host_build: 'c0ntrail123' }
 env.ostypes = { #{get_each_host_ostype} }
 
 env.test_repo_dir='#{ENV['HOME']}/contrail-test'
-env.http_proxy = os.environ.get('http_proxy')
+env.http_proxy = subprocess.check_output("\grep http_proxy /etc/contrail_bashrc | awk -F '=' '{print $2}'", shell = True).rstrip()
 
 # env.mail_from='ci-admin@opencontrail.org'
 # env.mail_to='ci-admin@opencontrail.org'
@@ -142,7 +142,7 @@ def verify_contrail
 end
 
 def run_sanity
-    Sh.run "ssh #{@vms.first.vmname} \"(source /etc/contrail_bashrc && /usr/local/jenkins/slave_scripts/ci-infra/contrail_fab run_sanity:quick_sanity)\""
+    Sh.run "ssh #{@vms.first.vmname} /usr/local/jenkins/slave_scripts/ci-infra/contrail_fab run_sanity:quick_sanity"
 end
 
 def cleanup
