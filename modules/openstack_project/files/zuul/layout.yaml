@@ -577,8 +577,6 @@ jobs:
     voting: false
   - name: gate-murano-dashboard-requirements
     voting: false
-  - name: gate-murano-devstack-dsvm
-    voting: false
   - name: gate-oslo.vmware-docs
     voting: false
   - name: gate-oslo.vmware-requirements
@@ -3588,6 +3586,8 @@ projects:
     check:
       - gate-murano-requirements
       - gate-murano-devstack-dsvm
+    gate:
+      - gate-murano-devstack-dsvm
     post:
       - murano-branch-tarball
 
@@ -3614,6 +3614,7 @@ projects:
       - gate-murano-dashboard-pep8
       - gate-murano-dashboard-python26
       - gate-murano-dashboard-python27
+      - gate-murano-devstack-dsvm
     post:
       - murano-dashboard-branch-tarball
     pre-release:
@@ -4164,6 +4165,7 @@ projects:
       - gate-python-muranoclient-pep8
       - gate-python-muranoclient-python26
       - gate-python-muranoclient-python27
+      - gate-murano-devstack-dsvm
     post:
       - python-muranoclient-branch-tarball
 
