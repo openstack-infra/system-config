@@ -1092,6 +1092,7 @@
       - python-jobs
       - python-havana-bitrot-jobs
       - openstack-publish-jobs
+      - rally-jobs
       - translation-jobs
       - '{pipeline}-neutron-dsvm-functional{branch-designator}':
           pipeline: gate
