@@ -128,7 +128,7 @@ end
 
 def setup_sanity
     vm = @vms.first
-    Sh.run "ssh #{vm.vmname} \"(source /opt/contrail/api-venv/bin/activate && source /etc/profile && pip install fixtures testtools testresources selenium pyvirtualdisplay)\""
+    Sh.run "ssh #{vm.vmname} \"(source /opt/contrail/api-venv/bin/activate && source /etc/contrail_profile && pip install fixtures testtools testresources selenium pyvirtualdisplay)\""
 
     branch = ENV['ZUUL_BRANCH'] || "master"
     Sh.run "ssh #{vm.vmname} rm -rf /root/contrail-test"
@@ -142,7 +142,7 @@ def verify_contrail
 end
 
 def run_sanity
-    Sh.run "ssh #{@vms.first.vmname} \"(source /etc/profile && /usr/local/jenkins/slave_scripts/ci-infra/contrail_fab run_sanity:quick_sanity)\""
+    Sh.run "ssh #{@vms.first.vmname} \"(source /etc/contrail_profile && /usr/local/jenkins/slave_scripts/ci-infra/contrail_fab run_sanity:quick_sanity)\""
 end
 
 def cleanup
