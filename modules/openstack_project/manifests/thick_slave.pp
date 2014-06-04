@@ -41,7 +41,6 @@ class openstack_project::thick_slave(
     $::openstack_project::jenkins_params::python_libvirt_package,
     $::openstack_project::jenkins_params::python_lxml_package, # for validating openstack manuals
     $::openstack_project::jenkins_params::python_magic_package, # for pushing files to swift
-    $::openstack_project::jenkins_params::python_requests_package, # for pushing files to swift
     $::openstack_project::jenkins_params::python_zmq_package, # zeromq unittests (not pip installable)
     $::openstack_project::jenkins_params::rubygems_package,
     $::openstack_project::jenkins_params::sbcl_package, # cl-openstack-client testing
@@ -55,6 +54,17 @@ class openstack_project::thick_slave(
 
   package { $packages:
     ensure => present,
+  }
+
+  include pip
+  # for pushing files to swift and uploading to pypi with twine
+  package { 'requests':
+    ensure   => latest,
+    provider => pip,
+  }
+  # transitional for upgrading to the pip version
+  package { $::openstack_project::jenkins_params::python_requests_package:
+    ensure => absent,
   }
 
   if ($::lsbdistcodename == 'trusty') {
