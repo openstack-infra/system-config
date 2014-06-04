@@ -26,23 +26,23 @@ To launch a node in the OpenStack Jenkins account (slave nodes)::
   . ~root/ci-launch/openstackjenkins-rs-nova.sh
   export FQDN=slavename.slave.openstack.org
   nova image-list
-  export IMAGE='Ubuntu 12.04 LTS (Precise Pangolin)'
+  export IMAGE='Ubuntu 12.04 LTS (Precise Pangolin) (PVHVM)'
   nova flavor-list
   export FLAVOR="8 GB Performance"
   sudo puppet cert generate $FQDN
-  ./launch-node.py $FQDN --image "$IMAGE" --flavor "$FLAVOR" --salt
+  ./launch-node.py $FQDN --image "$IMAGE" --flavor "$FLAVOR"
 
-The --salt option tells the script to automatically configure and enroll
-the server as a minion on the salt master.
+There is also a --salt option which can be used to tell the script to
+automatically configure and enroll the server as a minion on the salt
+master.
 
 If you are launching a replacement server, you may skip the generate
 step and specify the name of an existing puppet cert (as long as the
 private key is on this host).
 
 The server name and cert names may be different and the latter can be
-specified with --cert if needed (older Jenkins slave types still use
-shared certs), but launch-node.py will assume they are the same unless
-specified.
+specified with --cert if needed, but launch-node.py will assume they
+are the same unless specified.
 
 Manually add the hostname to DNS (the launch script does not do so
 automatically). Note that this example assumes you've already
