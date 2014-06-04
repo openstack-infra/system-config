@@ -2268,6 +2268,14 @@
     jobs:
       - python-jobs
 
+- project:
+    name: osprofiler
+    github-org: stackforge
+    node: bare-precise
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - python-jobs
 
 - project:
     name: openstack-manuals
