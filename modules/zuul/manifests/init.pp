@@ -278,4 +278,14 @@ class zuul (
       ensure => present,
     }
   }
+  if ! defined(A2mod['cache']) {
+    a2mod { 'cache':
+      ensure => present,
+    }
+  }
+  if ! defined(A2mod['mem_cache']) {
+    a2mod { 'mem_cache':
+      ensure => present,
+    }
+  }
 }
