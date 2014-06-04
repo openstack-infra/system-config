@@ -128,11 +128,14 @@ end
 
 def setup_sanity
     vm = @vms.first
-    Sh.run "ssh #{vm.vmname} \"(source /opt/contrail/api-venv/bin/activate && source /etc/contrail_bashrc && pip install fixtures testtools testresources selenium pyvirtualdisplay)\""
+    if ENV[ZUUL_BRANCH] != "master" then # use venv
+        Sh.run "ssh #{vm.vmname} \"(source /opt/contrail/api-venv/bin/activate && source /etc/contrail_bashrc && pip install fixtures testtools testresources selenium pyvirtualdisplay)\""
+    else
+        Sh.run "ssh #{vm.vmname} \"(source /etc/contrail_bashrc && pip install fixtures testtools testresources selenium pyvirtualdisplay)\""
+    end
 
-    branch = ENV['ZUUL_BRANCH'] || "master"
     Sh.run "ssh #{vm.vmname} rm -rf /root/contrail-test"
-    Sh.run "ssh #{vm.vmname} git clone --branch #{branch} git@github.com:juniper/contrail-test.git /root/contrail-test"
+    Sh.run "ssh #{vm.vmname} git clone --branch #{ENV['ZUUL_BRANCH']} git@github.com:juniper/contrail-test.git /root/contrail-test"
 end
 
 # Verify that contrail-status shows 'up' for all necessary components.

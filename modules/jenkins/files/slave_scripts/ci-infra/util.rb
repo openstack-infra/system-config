@@ -3,8 +3,8 @@
 require 'pp'
 require 'pty'
 
-ENV['USER'] = "jenkins" if ENV['USER'].nil? or ENV['USER'].empty?
-pp ENV
+COLOR_CYAN        = "\e[0;36m"
+COLOR_RESET       = "\e[m"
 
 class Sh
     @ignore_failed_exit_code = false
@@ -22,7 +22,7 @@ class Sh
             # Do stuff with the output here. Just printing to show it works
             stdin.each { |line|
                 output += line
-                print "#{cmd}: #{line}" if debug
+                print "#{COLOR_CYAN}#{cmd}#{COLOR_RESET}: #{line}" if debug
             }
             rescue Errno::EIO
                 exit_code = 0
@@ -40,12 +40,11 @@ class Sh
         output = ""
         exit_code = 0
         1.upto(repeat) { |i|
-            if i == 1 then
-                puts "#{cmd}" if debug
-            else
-                puts "Retry #{i}/#{repeat}: #{cmd}" if debug
+            if i != 1 then
+                print "Retry #{i}/#{repeat}: " if debug
                 sleep(wait)
             end
+            puts "#{COLOR_CYAN}#{cmd}#{COLOR_RESET}: " if debug
             exit_code = 0
             if not dry_run? then
                 if cmd =~ /^cd\s+(.*)/ then
@@ -103,6 +102,7 @@ class Util
     def self.ci_setup
         ENV['WORKSPACE']=ENV['PWD'] if ENV['WORKSPACE'].nil?
         ENV['USER'] = "jenkins" if ENV['USER'].nil? or ENV['USER'].empty?
+        ENV['ZUUL_BRANCH'] ||= "master"
         pp ENV
         if File.file? "#{ENV['WORKSPACE']}/skip_jobs" then
             puts "Jobs skipped due to jenkins.opencontrail.org:/root/ci-test/skip_jobs"
