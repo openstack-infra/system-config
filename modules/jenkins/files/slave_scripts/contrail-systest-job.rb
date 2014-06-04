@@ -128,7 +128,7 @@ end
 
 def setup_sanity
     vm = @vms.first
-    if ENV[ZUUL_BRANCH] != "master" then # use venv
+    if ENV['ZUUL_BRANCH'] != "master" then # use venv
         Sh.run "ssh #{vm.vmname} \"(source /opt/contrail/api-venv/bin/activate && source /etc/contrail_bashrc && pip install fixtures testtools testresources selenium pyvirtualdisplay)\""
     else
         Sh.run "ssh #{vm.vmname} \"(source /etc/contrail_bashrc && pip install fixtures testtools testresources selenium pyvirtualdisplay)\""
@@ -162,7 +162,7 @@ def wait
 end
 
 def main
-    build_contrail_packages
+#   build_contrail_packages
     create_vms(6)
     setup_contrail
     install_contrail
