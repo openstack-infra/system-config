@@ -141,7 +141,7 @@ EOF
 
         # Wait for all VMs to come up.
         @@vms.each { |vm|
-            Sh.run("scp /etc/hosts #{vm.hostip}:/etc/.", false, 20, 3)
+            Sh.run("scp /etc/hosts #{vm.hostip}:/etc/.", true, 20, 3)
         }
     end
 
