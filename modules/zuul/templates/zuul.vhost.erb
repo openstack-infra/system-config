@@ -27,6 +27,13 @@
     CacheDefaultExpire 5
     <IfModule mod_mem_cache.c>
       CacheEnable mem /status.json
+      # 12MByte total cache size.
+      MCacheSize 12288
+      MCacheMaxObjectCount 10
+      MCacheMinObjectSize 1
+      # 8MByte max size per cache entry
+      MCacheMaxObjectSize 8388608
+      MCacheMaxStreamingBuffer 8388608
     </IfModule>
   </IfModule>
 
