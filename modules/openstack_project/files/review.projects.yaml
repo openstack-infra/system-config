@@ -618,6 +618,8 @@
 - project: stackforge/driverlog
   description: Vendor drivers for OpenStack
   upstream: git://github.com/Mirantis/oscp.git
+- project: stackforge/ec2-api
+  description: AWS EC2 and VPC API support in standalone service for OpenStack. At first uses nova's EC2 API for non-VPC functionality. Later it'll be transferred here out of nova.
 - project: stackforge/entropy
   description: A framework for Audit/Repair scripts for openstack
 - project: stackforge/fuel-astute
