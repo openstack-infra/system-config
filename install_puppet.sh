@@ -19,7 +19,22 @@
 # Install pip using get-pip
 PIP_GET_PIP_URL=https://bootstrap.pypa.io/get-pip.py
 
-curl -O $PIP_GET_PIP_URL || wget $PIP_GET_PIP_URL
+ret=1
+if [ -f ./get-pip.py ]; then
+    ret=0
+elif type curl >/dev/null 2>&1; then
+    curl -O $PIP_GET_PIP_URL
+    ret=$?
+elif type wget >/dev/null 2>&1; then
+    wget $PIP_GET_PIP_URL
+    ret=$?
+fi
+
+if [ $ret -ne 0 ]; then
+    echo "Failed to get get-pip.py"
+    exit 1
+fi
+
 python get-pip.py
 
 # Install puppet version 2.7.x from puppetlabs.
