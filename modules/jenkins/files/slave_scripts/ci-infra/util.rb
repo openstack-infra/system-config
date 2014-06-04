@@ -17,6 +17,7 @@ class Sh
         output = ""
         exit_code = 0
 
+        begin
         PTY.spawn(cmd) { |stdin, stdout, pid|
             begin
             # Do stuff with the output here. Just printing to show it works
@@ -25,11 +26,16 @@ class Sh
                 print "#{COLOR_CYAN}#{cmd}#{COLOR_RESET}: #{line}" if debug
             }
             rescue Errno::EIO
-                exit_code = 0
             rescue PTY::ChildExited => e
                 exit_code = e.status.exitstatus
+            ensure
+                Process.wait(pid)
+                exit_code = $?.exitstatus
             end
         }
+        rescue PTY::ChildExited => e
+            exit_code = e.status.exitstatus
+	end
 
         return output, exit_code
     end

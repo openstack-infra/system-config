@@ -128,16 +128,6 @@ class Vm
         return @@vms
     end
 
-    def Vm.retry_cmd(cmd)
-        loop do begin
-            Sh.run(cmd, false, 20, 3)
-            rescue Exception => e
-                puts "Got exception! Retry scp after a second"
-                sleep 1
-            end
-        end
-    end
-
     def Vm.setup_etc_hosts
         etc_hosts = <<EOF
 # launch_vms.rb autogeneration start
@@ -150,7 +140,7 @@ EOF
         File.open("/etc/hosts", "w") { |fp| fp.write(s) }
 
         # Wait for all VMs to come up.
-        @@vms.each { |vm| Vm.retry_cmd(cmd) }
+        @@vms.each { |vm| Sh.run("scp /etc/hosts #{vm.hostip}:/etc/.", true, 20, 4) }
     end
 
     def Vm.setup_image_from_snapshot
@@ -160,8 +150,6 @@ EOF
                 "--progress #{@@base_image}"
     end
 end
-
-Vm.retry_cmd("scp ~/.bashrc dsfds:.")
 
 if __FILE__ == $0 then
     count = 1
