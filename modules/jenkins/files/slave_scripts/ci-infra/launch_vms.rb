@@ -77,7 +77,7 @@ class Vm
         puts "Creating VM #{vmname}"
         net_id = Sh.crun "nova net-list |\grep -w internet | awk '{print $2}'"
         image_id = Sh.crun %{glance image-list |\grep " #{@@base_image} " | awk '{print $2}'}
-        Sh.crun "nova boot --flavor 4 #{slave_master} --nic net-id=#{net_id} --image #{image_id} #{vmname}"
+        Sh.crun "nova boot --flavor #{flavor} #{slave_master} --nic net-id=#{net_id} --image #{image_id} #{vmname}"
 
         private_ip = nil
         while true do
