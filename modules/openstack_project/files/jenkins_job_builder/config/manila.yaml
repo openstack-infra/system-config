@@ -17,9 +17,24 @@
           export PYTHONUNBUFFERED=true
           export DEVSTACK_GATE_TIMEOUT=60
           export DEVSTACK_GATE_NEUTRON=1
+          export DEVSTACK_GATE_TEMPEST_ALLOW_TENANT_ISOLATION=1
           export ENABLED_SERVICES=manila,m-api,m-shr,m-sch,tempest
           export PROJECTS="stackforge/manila $PROJECTS"
           export PROJECTS="stackforge/python-manilaclient $PROJECTS"
+          export API_RATE_LIMIT=False
+
+          # Keep localrc to be able to set some vars in pre_test_hook
+          export KEEP_LOCALRC=1
+
+          # Enable manila service within tempest
+          export TEMPEST_SERVICES+=,manila
+
+          # Set size of backing files
+          export SHARE_BACKING_FILE_SIZE=22G
+          export VOLUME_BACKING_FILE_SIZE=22G
+
+          # Disable multibackendency for manila
+          export MANILA_MULTI_BACKEND=False
 
           function pre_test_hook {
               source $BASE/new/manila/contrib/ci/pre_test_hook.sh
@@ -27,7 +42,8 @@
           export -f pre_test_hook
 
           function post_test_hook {
-              source $BASE/new/manila/contrib/ci/post_test_hook.sh
+              # Configure and run tempest on singlebackend manila installation
+              source $BASE/new/manila/contrib/ci/post_test_hook.sh singlebackend
           }
           export -f post_test_hook
 
@@ -58,17 +74,37 @@
           export PYTHONUNBUFFERED=true
           export DEVSTACK_GATE_TIMEOUT=60
           export DEVSTACK_GATE_NEUTRON=1
+          export DEVSTACK_GATE_TEMPEST_ALLOW_TENANT_ISOLATION=1
           export ENABLED_SERVICES=manila,m-api,m-shr,m-sch,tempest
           export PROJECTS="stackforge/manila $PROJECTS"
           export PROJECTS="stackforge/python-manilaclient $PROJECTS"
+          export API_RATE_LIMIT=False
+
+          # Keep localrc to be able to set some vars in pre_test_hook
+          export KEEP_LOCALRC=1
+
+          # Enable manila service within tempest
+          export TEMPEST_SERVICES+=,manila
+
+          # Set size of backing files
+          export SHARE_BACKING_FILE_SIZE=22G
+          export VOLUME_BACKING_FILE_SIZE=22G
+
+          # Enable multibackendency for manila
+          export MANILA_MULTI_BACKEND=True
+          export MANILA_BACKEND1_CONFIG_GROUP_NAME=london
+          export MANILA_BACKEND2_CONFIG_GROUP_NAME=paris
+          export MANILA_SHARE_BACKEND1_NAME=LONDON
+          export MANILA_SHARE_BACKEND2_NAME=PARIS
 
           function pre_test_hook {
-              source $BASE/new/manila/contrib/ci/multi_backend/pre_test_hook.sh
+              source $BASE/new/manila/contrib/ci/pre_test_hook.sh
           }
           export -f pre_test_hook
 
           function post_test_hook {
-              source $BASE/new/manila/contrib/ci/multi_backend/post_test_hook.sh
+              # Configure and run tempest on multibackend manila installation
+              source $BASE/new/manila/contrib/ci/post_test_hook.sh multibackend
           }
           export -f post_test_hook
 
