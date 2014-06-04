@@ -1,4 +1,21 @@
 #
+# Top-level variables
+#
+# There must not be any whitespace between this comment and the variables or
+# in between any two variables in order for them to be correctly parsed and
+# passed around in test.sh
+#
+$elasticsearch_nodes = [
+  'elasticsearch01.openstack.org',
+  'elasticsearch02.openstack.org',
+  'elasticsearch03.openstack.org',
+  'elasticsearch04.openstack.org',
+  'elasticsearch05.openstack.org',
+  'elasticsearch06.openstack.org',
+  'elasticsearch07.openstack.org',
+]
+
+#
 # Default: should at least behave like an openstack server
 #
 node default {
@@ -243,16 +260,6 @@ node 'wiki.openstack.org' {
     ssl_chain_file_contents => hiera('wiki_ssl_chain_file_contents', 'XXX'),
   }
 }
-
-$elasticsearch_nodes = [
-  'elasticsearch01.openstack.org',
-  'elasticsearch02.openstack.org',
-  'elasticsearch03.openstack.org',
-  'elasticsearch04.openstack.org',
-  'elasticsearch05.openstack.org',
-  'elasticsearch06.openstack.org',
-  'elasticsearch07.openstack.org',
-]
 
 node 'logstash.openstack.org' {
   class { 'openstack_project::logstash':
