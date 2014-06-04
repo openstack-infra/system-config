@@ -597,8 +597,8 @@
           # skip boto tests which expect to spawn an instance
           r="$r|(?:tempest\.thirdparty\.boto\.test_ec2_instance_run.*))"
           r="$r.*(?=.*smoke.*).*$"
-          # enable the single baremetal scenario test
-          r="$r tempest.scenario.test_baremetal_basic_ops"
+          # enable the baremetal scenario tests (basic and advanced)
+          r="$r tempest.scenario.test_baremetal_*"
           export DEVSTACK_GATE_TEMPEST_REGEX="$r"
 
           # pull in libvirt /w ovs support from ubuntu cloud-archive.
