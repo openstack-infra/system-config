@@ -19,4 +19,6 @@ class openstack_project::params {
     }
   }
   $allowed_ssh_command = 'timeout -s 9 30m puppet agent --onetime --ignorecache --no-daemonize --no-usecacheonfailure --no-splay'
+
+  $puppetmaster_host = hiera('puppetmaster_host', 'ci-puppetmaster.openstack.org')
 }

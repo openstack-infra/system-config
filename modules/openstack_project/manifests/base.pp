@@ -2,7 +2,8 @@
 #
 class openstack_project::base(
   $certname = $::fqdn,
-  $install_users = true
+  $install_users = true,
+  $puppetmaster_host = $::openstack_project::params::puppetmaster_host
 ) {
   if ($::osfamily == 'Debian') {
     include apt
