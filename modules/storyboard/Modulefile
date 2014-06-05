@@ -1,0 +1,15 @@
+name 'openstack-storyboard'
+version '0.0.1'
+source 'git://git.openstack.org/openstack-infra/puppet-storyboard.git'
+author 'openstackci'
+license 'Apache 2.0'
+summary 'Puppet module for the OpenStack StoryBoard'
+description 'This module configures StoryBoard either as a standalone, localhost instance or as a fully configurable WSGI app.'
+project_page 'https://github.com/openstack-ci/puppet-storyboard'
+
+## Add dependencies, if any:
+dependency 'puppetlabs/mysql', '= 0.6.1'
+dependency 'puppetlabs/apache', '= 0.0.4'
+dependency 'example42/puppi', '= 2.1.9'
+dependency 'openstackci/vcsrepo', '= 0.0.8'
+dependency 'stankevich/python', '= 1.6.6'
