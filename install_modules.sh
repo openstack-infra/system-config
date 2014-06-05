@@ -54,6 +54,7 @@ MODULES["puppetlabs-inifile"]="1.0.0"
 MODULES["puppetlabs-firewall"]="0.0.4"
 MODULES["puppetlabs-puppetdb"]="3.0.1"
 MODULES["stankevich-python"]="1.6.6"
+MODULES["example42-puppi"]="2.1.9"
 
 SOURCE_MODULES["https://github.com/nibalizer/puppet-module-puppetboard"]="2.4.0"
 
