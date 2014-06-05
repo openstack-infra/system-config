@@ -238,6 +238,20 @@ class zuul (
                     Vcsrepo['/opt/jquery-visibility']],
   }
 
+  vcsrepo { '/opt/graphitejs':
+    ensure   => latest,
+    provider => git,
+    revision => 'master',
+    source   => 'https://github.com/prestontimmons/graphitejs.git',
+  }
+
+  file { '/var/lib/zuul/www/jquery.graphite.js':
+    ensure  => link,
+    target  => '/opt/latest/jquery.graphite.js',
+    require     => [File['/var/lib/zuul/www'],
+                    Vcsrepo['/opt/graphitejs']],
+  }
+
   file { '/var/lib/zuul/www/index.html':
     ensure  => link,
     target  => '/opt/zuul/etc/status/public_html/index.html',
