@@ -14,240 +14,48 @@
 
 # == Class: storyboard
 #
+# This class will install a fully functional standalone instance of
+# storyboard on the current instance. It includes database setup and
+# a set of sane configuration defaults. For more precise configuration,
+# please use individual submodules.
+#
 class storyboard (
-  $vhost_name = $::fqdn,
-  $mysql_host,
-  $mysql_password,
-  $mysql_user,
-  $projects_file,
-  $superusers_file,
-  $ssl_cert_file,
-  $ssl_key_file,
-  $ssl_chain_file,
-  $storyboard_git_source_repo = 'https://git.openstack.org/openstack-infra/storyboard/',
-  $storyboard_revision = 'master',
-  $storyboard_webclient_url = 'http://tarballs.openstack.org/storyboard-webclient/storyboard-webclient-latest.tar.gz',
-  $serveradmin = "webmaster@${::fqdn}",
-  $ssl_cert_file_contents = '',
-  $ssl_key_file_contents = '',
-  $ssl_chain_file_contents = ''
+  $mysql_database      = 'storyboard',
+  $mysql_user          = 'storyboard',
+  $mysql_user_password = 'changeme',
+  $hostname            = $::fqdn,
+  $openid_url          = 'https://login.launchpad.net/+openid',
+
+  $ssl_cert_file       = '/etc/ssl/certs/ssl-cert-snakeoil.pem',
+  $ssl_cert_content    = undef,
+  $ssl_key_file        = '/etc/ssl/private/ssl-cert-snakeoil.key',
+  $ssl_key_content     = undef,
+  $ssl_ca_file         = undef,
+  $ssl_ca_content      = undef
 ) {
-  include apache
-  include mysql::python
-  include pip
 
-  package { 'libapache2-mod-wsgi':
-    ensure => present,
+  class { '::storyboard::cert':
+    ssl_cert_file    => $ssl_cert_file,
+    ssl_cert_content => $ssl_cert_content,
+    ssl_key_file     => $ssl_key_file,
+    ssl_key_content  => $ssl_key_content,
+    ssl_ca_file      => $ssl_ca_file,
+    ssl_ca_content   => $ssl_ca_content
   }
 
-  package { 'curl':
-    ensure => present,
+  class { '::storyboard::mysql':
+    mysql_database      => $mysql_database,
+    mysql_user          => $mysql_user,
+    mysql_user_password => $mysql_user_password
   }
 
-  group { 'storyboard':
-    ensure => present,
-  }
-
-  user { 'storyboard':
-    ensure     => present,
-    home       => '/home/storyboard',
-    shell      => '/bin/bash',
-    gid        => 'storyboard',
-    managehome => true,
-    require    => Group['storyboard'],
-  }
-
-  vcsrepo { '/opt/storyboard':
-    ensure   => latest,
-    provider => git,
-    revision => $storyboard_revision,
-    source   => $storyboard_git_source_repo,
-  }
-
-  exec { 'install-storyboard' :
-    command     => 'pip install /opt/storyboard',
-    path        => '/usr/local/bin:/usr/bin:/bin/',
-    refreshonly => true,
-    subscribe   => Vcsrepo['/opt/storyboard'],
-    notify      => Exec['storyboard-reload'],
-    require     => Class['pip'],
-  }
-
-  file { '/etc/storyboard':
-    ensure => directory,
-  }
-
-  file { '/etc/storyboard/storyboard.conf':
-    ensure  => present,
-    owner   => 'storyboard',
-    mode    => '0400',
-    content => template('storyboard/storyboard.conf.erb'),
-    notify  => Exec['storyboard-reload'],
-    require => [
-      File['/etc/storyboard'],
-      User['storyboard'],
-    ],
-  }
-
-  file { '/etc/storyboard/projects.yaml':
-    ensure  => present,
-    owner   => 'storyboard',
-    mode    => '0400',
-    source  => $projects_file,
-    replace => true,
-    require => [
-      File['/etc/storyboard'],
-      User['storyboard'],
-    ],
-  }
-
-  file { '/etc/storyboard/superusers.yaml':
-    ensure  => present,
-    owner   => 'storyboard',
-    mode    => '0400',
-    source  => $superusers_file,
-    replace => true,
-    require => [
-      File['/etc/storyboard'],
-      User['storyboard'],
-    ],
-  }
-
-  exec { 'migrate-storyboard-db':
-    command     => 'storyboard-db-manage --config-file /etc/storyboard/storyboard.conf upgrade head',
-    path        => '/usr/local/bin:/usr/bin:/bin/',
-    refreshonly => true,
-    subscribe   => Exec['install-storyboard'],
-    require     => [
-      File['/etc/storyboard/storyboard.conf'],
-    ],
-  }
-
-  exec { 'load-projects-yaml':
-    command     => 'storyboard-db-manage --config-file /etc/storyboard/storyboard.conf load_projects /etc/storyboard/projects.yaml',
-    path        => '/usr/local/bin:/usr/bin:/bin/',
-    refreshonly => true,
-    subscribe   => File['/etc/storyboard/projects.yaml'],
-    require     => [
-      File['/etc/storyboard/projects.yaml'],
-      Exec['migrate-storyboard-db'],
-    ],
-  }
-
-  exec { 'load-superusers-yaml':
-    command     => 'storyboard-db-manage --config-file /etc/storyboard/storyboard.conf load_superusers /etc/storyboard/superusers.yaml',
-    path        => '/usr/local/bin:/usr/bin:/bin/',
-    refreshonly => true,
-    subscribe   => File['/etc/storyboard/superusers.yaml'],
-    require     => [
-      File['/etc/storyboard/superusers.yaml'],
-      Exec['migrate-storyboard-db'],
-    ],
-  }
-
-  file { '/var/log/storyboard':
-    ensure  => directory,
-    owner   => 'storyboard',
-    require => User['storyboard'],
-  }
-
-  exec { 'storyboard-reload':
-    command     => 'touch /usr/local/lib/python2.7/dist-packages/storyboard/api/app.wsgi',
-    path        => '/usr/local/bin:/usr/bin:/bin/',
-    refreshonly => true,
-  }
-
-  # START storyboard-webclient
-  $tarball = 'storyboard-webclient.tar.gz'
-
-  file { '/var/lib/storyboard':
-    ensure  => directory,
-    owner   => 'storyboard',
-    group   => 'storyboard',
-  }
-
-  # Checking last modified time versus mtime on the file
-  exec { 'get-webclient':
-    command => "curl ${storyboard_webclient_url} -z ./${tarball} -o ${tarball}",
-    path    => '/bin:/usr/bin',
-    cwd     => '/var/lib/storyboard',
-    onlyif  => "curl -I ${storyboard_webclient_url} -z ./${tarball} | grep '200 OK'",
-    require => [
-      File['/var/lib/storyboard'],
-      Package['curl'],
-    ]
-  }
-
-  exec { 'unpack-webclient':
-    command     => "tar -xzf ${tarball}",
-    path        => '/bin:/usr/bin',
-    cwd         => '/var/lib/storyboard',
-    refreshonly => true,
-    subscribe   => Exec['get-webclient'],
-  }
-
-  file { '/var/lib/storyboard/www':
-    ensure  => directory,
-    owner   => 'storyboard',
-    group   => 'storyboard',
-    require => Exec['unpack-webclient'],
-    source  => '/var/lib/storyboard/dist',
-    recurse => true,
-    purge   => true,
-    force   => true
-  }
-
-  # END storyboard-webclient
-
-  apache::vhost { $vhost_name:
-    port     => 80,
-    docroot  => 'MEANINGLESS ARGUMENT',
-    priority => '50',
-    template => 'storyboard/storyboard.vhost.erb',
-    require  => Package['libapache2-mod-wsgi'],
-    ssl      => true,
-  }
-
-  a2mod { 'proxy':
-    ensure => present,
-  }
-
-  a2mod { 'proxy_http':
-    ensure => present,
-  }
-
-  a2mod {'wsgi':
-    ensure  => present,
-    require => Package['libapache2-mod-wsgi'],
-  }
-
-  if $ssl_cert_file_contents != '' {
-    file { $ssl_cert_file:
-      owner   => 'root',
-      group   => 'root',
-      mode    => '0640',
-      content => $ssl_cert_file_contents,
-      before  => Apache::Vhost[$vhost_name],
-    }
-  }
-
-  if $ssl_key_file_contents != '' {
-    file { $ssl_key_file:
-      owner   => 'root',
-      group   => 'ssl-cert',
-      mode    => '0640',
-      content => $ssl_key_file_contents,
-      before  => Apache::Vhost[$vhost_name],
-    }
-  }
-
-  if $ssl_chain_file_contents != '' {
-    file { $ssl_chain_file:
-      owner   => 'root',
-      group   => 'root',
-      mode    => '0640',
-      content => $ssl_chain_file_contents,
-      before  => Apache::Vhost[$vhost_name],
-    }
+  class { '::storyboard::application':
+    hostname            => $hostname,
+    openid_url          => $openid_url,
+    mysql_host          => 'localhost',
+    mysql_port          => 3306,
+    mysql_database      => $mysql_database,
+    mysql_user          => $mysql_user,
+    mysql_user_password => $mysql_user_password
   }
 }
