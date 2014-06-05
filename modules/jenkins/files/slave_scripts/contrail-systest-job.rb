@@ -174,7 +174,7 @@ end
 
 def main
 #   build_contrail_packages
-    create_vms(4)
+    create_vms(6)
     setup_contrail
     install_contrail
     setup_sanity
