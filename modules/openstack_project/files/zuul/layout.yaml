@@ -693,6 +693,8 @@ projects:
 # Section: OpenStack server projects
 
   - name: openstack/barbican
+    template:
+      - name: translation-jobs
     check:
       - gate-barbican-pep8
       - gate-barbican-python27
@@ -821,6 +823,7 @@ projects:
       - name: python-jobs
       - name: check-requirements
       - name: publish-to-pypi
+      - name: translation-jobs
     check:
       - gate-designate-devstack-dsvm
     gate:
@@ -1008,6 +1011,7 @@ projects:
     template:
       - name: python-jobs
       - name: check-requirements
+      - name: translation-jobs
     check:
       - check-tempest-dsvm-marconi
       - gate-marconi-python33
@@ -1901,6 +1905,7 @@ projects:
       - name: check-requirements
       - name: integrated-gate
       - name: publish-to-pypi
+      - name: translation-jobs
     check:
       - check-devstack-dsvm-cells
       - gate-tempest-dsvm-large-ops
@@ -1922,6 +1927,7 @@ projects:
       - name: check-requirements
       - name: integrated-gate
       - name: publish-to-pypi
+      - name: translation-jobs
     check:
       - gate-oslo.i18n-python33
       - check-devstack-dsvm-cells
@@ -1942,6 +1948,7 @@ projects:
       - name: check-requirements
       - name: integrated-gate
       - name: publish-to-pypi
+      - name: translation-jobs
     check:
       - check-devstack-dsvm-cells
       - gate-tempest-dsvm-large-ops
@@ -2015,6 +2022,7 @@ projects:
       - name: check-requirements
       - name: integrated-gate
       - name: publish-to-pypi
+      - name: translation-jobs
     check:
       - gate-oslo.vmware-requirements
       - gate-oslo.vmware-python33
