@@ -4,6 +4,8 @@ class openstack_project::jenkins (
   $vhost_name = $::fqdn,
   $jenkins_jobs_password = '',
   $jenkins_jobs_username = 'gerrig', # This is not a typo, well it isn't anymore.
+  $jenkins_git_url = 'https://git.openstack.org/openstack-infra/jenkins-job-builder',
+  $jenkins_git_revision = 'master',
   $manage_jenkins_jobs = true,
   $ssl_cert_file = '',
   $ssl_key_file = '',
@@ -151,9 +153,11 @@ class openstack_project::jenkins (
 
   if $manage_jenkins_jobs == true {
     class { '::jenkins::job_builder':
-      url      => "https://${vhost_name}/",
-      username => $jenkins_jobs_username,
-      password => $jenkins_jobs_password,
+      url          => "https://${vhost_name}/",
+      username     => $jenkins_jobs_username,
+      password     => $jenkins_jobs_password,
+      git_revision => $jenkins_git_revision,
+      git_url      => $jenkins_git_url,
     }
 
     file { '/etc/jenkins_jobs/config':
