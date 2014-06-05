@@ -2055,6 +2055,15 @@
       - python-jobs
 
 - project:
+    name: barbican-specs
+    github-org: openstack
+    node: bare-precise
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - gate-{name}-docs
+
+- project:
     name: python-barbicanclient
     github-org: openstack
     node: bare-precise

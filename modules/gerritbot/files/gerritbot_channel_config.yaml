@@ -382,6 +382,7 @@ openstack-barbican:
       - x-vrif-minus-2
     projects:
       - openstack/barbican
+      - openstack/barbican-specs
       - openstack/python-barbicanclient
       - stackforge/kite
       - stackforge/python-kiteclient

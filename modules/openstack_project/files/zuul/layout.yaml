@@ -682,6 +682,12 @@ projects:
     post:
       - barbican-branch-tarball
 
+  - name: openstack/barbican-specs
+    check:
+      - gate-barbican-specs-docs
+    gate:
+      - gate-barbican-specs-docs
+
   - name: openstack/ceilometer
     template:
       - name: python-jobs
