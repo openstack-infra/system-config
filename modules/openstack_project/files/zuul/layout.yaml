@@ -352,6 +352,12 @@ project-templates:
     periodic:
       - '{name}-manuals-propose-translation-update'
 
+  - name: translation-jobs
+    post:
+      - '{name}-upstream-translation-update'
+    periodic:
+      - '{name}-propose-translation-update'
+
   - name: infra-publish-jobs
     check:
       - 'gate-{name}-docs'
@@ -698,6 +704,7 @@ projects:
       - name: periodic-havana
       - name: check-requirements
       - name: integrated-gate
+      - name: translation-jobs
     check:
       - check-devstack-dsvm-cells
       - check-swift-dsvm-functional
@@ -706,15 +713,11 @@ projects:
       - gate-swift-dsvm-functional
     experimental:
       - gate-grenade-dsvm-forward
-    post:
-      - ceilometer-upstream-translation-update
     pre-release:
       - ceilometer-tarball
     release:
       - ceilometer-tarball
       - ceilometer-merge-release-tags
-    periodic:
-      - ceilometer-propose-translation-update
 
   - name: openstack/ceilometer-specs
     check:
@@ -731,6 +734,7 @@ projects:
       - name: periodic-havana
       - name: check-requirements
       - name: integrated-gate
+      - name: translation-jobs
     check:
       - gate-cinder-pylint
       - check-devstack-dsvm-cells
@@ -741,15 +745,11 @@ projects:
       - gate-grenade-dsvm-forward
     experimental-tripleo:
       - check-tripleo-overcloud-precise
-    post:
-      - cinder-upstream-translation-update
     pre-release:
       - cinder-tarball
     release:
       - cinder-tarball
       - cinder-merge-release-tags
-    periodic:
-      - cinder-propose-translation-update
 
   - name: openstack/cinder-specs
     check:
@@ -845,12 +845,11 @@ projects:
       - name: periodic-havana
       - name: check-requirements
       - name: integrated-gate
+      - name: translation-jobs
     check:
       - check-devstack-dsvm-cells
     gate:
       - gate-devstack-dsvm-cells
-    post:
-      - heat-upstream-translation-update
     experimental-tripleo:
       - check-tripleo-ironic-seed-precise
       - check-tripleo-undercloud-precise
@@ -861,8 +860,6 @@ projects:
     release:
       - heat-tarball
       - heat-merge-release-tags
-    periodic:
-      - heat-propose-translation-update
 
   - name: openstack/heat-specs
     check:
@@ -877,6 +874,7 @@ projects:
       - name: periodic-havana
       - name: check-requirements
       - name: integrated-gate
+      - name: translation-jobs
     check:
       - gate-horizon-python27-django14
       - gate-horizon-selenium
@@ -887,21 +885,18 @@ projects:
       - check-devstack-dsvm-cells
     experimental:
       - gate-grenade-dsvm-forward
-    post:
-      - horizon-upstream-translation-update
     pre-release:
       - horizon-tarball
     release:
       - horizon-tarball
       - horizon-merge-release-tags
-    periodic:
-      - horizon-propose-translation-update
 
   - name: openstack/ironic
     template:
       - name: python-jobs
       - name: openstack-server-publish-jobs
       - name: check-requirements
+      - name: translation-jobs
     check:
       - check-tempest-dsvm-ironic
       - check-tempest-dsvm-ironic-postgres
@@ -914,15 +909,11 @@ projects:
       - gate-tempest-dsvm-ironic
       - gate-tempest-dsvm-ironic-postgres
       - gate-tempest-dsvm-virtual-ironic
-    post:
-      - ironic-upstream-translation-update
     pre-release:
       - ironic-tarball
     release:
       - ironic-tarball
       - ironic-merge-release-tags
-    periodic:
-      - ironic-propose-translation-update
 
   - name: openstack/ironic-specs
     check:
@@ -939,6 +930,7 @@ projects:
       - name: periodic-havana
       - name: check-requirements
       - name: integrated-gate
+      - name: translation-jobs
     check:
       - gate-keystone-python33
       - check-devstack-dsvm-cells
@@ -959,15 +951,12 @@ projects:
       - check-tripleo-undercloud-precise
       - check-tripleo-ironic-undercloud-precise
       - check-tripleo-overcloud-precise
-    post:
-      - keystone-upstream-translation-update
     pre-release:
       - keystone-tarball
     release:
       - keystone-tarball
       - keystone-merge-release-tags
     periodic:
-      - keystone-propose-translation-update
       - periodic-swift-dsvm-functional-havana
 
   - name: openstack/marconi
@@ -996,6 +985,7 @@ projects:
       - name: periodic-havana
       - name: check-requirements
       - name: integrated-gate-neutron
+      - name: translation-jobs
     check:
       - check-neutron-dsvm-functional
       - check-tempest-dsvm-neutron-2
@@ -1007,7 +997,6 @@ projects:
     experimental:
       - check-neutron-dsvm-api
       - gate-grenade-dsvm-neutron-forward
-      - neutron-upstream-translation-update
       - experimental-tempest-dsvm-neutron
       - experimental-tempest-dsvm-neutron-pg
     experimental-tripleo:
@@ -1020,8 +1009,6 @@ projects:
     release:
       - neutron-tarball
       - neutron-merge-release-tags
-    periodic:
-      - neutron-propose-translation-update
 
   - name: openstack/neutron-specs
     check:
@@ -1038,6 +1025,7 @@ projects:
       - name: periodic-havana
       - name: check-requirements
       - name: integrated-gate
+      - name: translation-jobs
     check:
       - check-devstack-dsvm-cells
       - gate-tempest-dsvm-large-ops
@@ -1060,15 +1048,11 @@ projects:
       - check-tripleo-undercloud-precise
       - check-tripleo-ironic-undercloud-precise
       - check-tripleo-overcloud-precise
-    post:
-      - nova-upstream-translation-update
     pre-release:
       - nova-tarball
     release:
       - nova-tarball
       - nova-merge-release-tags
-    periodic:
-      - nova-propose-translation-update
 
   - name: openstack/nova-specs
     check:
@@ -1101,14 +1085,11 @@ projects:
       - name: integrated-gate-sahara
       - name: publish-to-pypi
       - name: docs-on-rtfd
+      - name: translation-jobs
     check:
       - gate-sahara-pylint
-    post:
-      - sahara-upstream-translation-update
     release:
       - sahara-merge-release-tags
-    periodic:
-      - sahara-propose-translation-update
 
   - name: openstack/sahara-specs
     check:
@@ -1180,16 +1161,14 @@ projects:
       - name: check-requirements
       - name: integrated-gate
       - name: openstack-doc-gate
+      - name: translation-jobs
     post:
-      - trove-upstream-translation-update
       - trove-tox-doc-publishdocs
     pre-release:
       - trove-tarball
     release:
       - trove-tarball
       - trove-merge-release-tags
-    periodic:
-      - trove-propose-translation-update
     experimental:
       - gate-trove-functional-dsvm-mysql
       - gate-trove-functional-dsvm-mongodb
