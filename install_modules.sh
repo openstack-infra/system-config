@@ -55,6 +55,7 @@ MODULES["puppetlabs-puppetdb"]="3.0.1"
 MODULES["stankevich-python"]="1.6.6"
 
 NONDEP_MODULES["nibalizer-puppetboard"]="2.3.0"
+NONDEP_MODULES["example42-puppi"]="2.1.9"
 
 MODULE_LIST=`puppet module list`
 
