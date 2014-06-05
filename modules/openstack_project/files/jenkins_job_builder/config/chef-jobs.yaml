@@ -2,6 +2,12 @@
     name: 'gate-{name}-chef-unit'
     node: '{node}'
 
+    wrappers:
+      - timeout:
+          timeout: 60
+          fail: true
+      - timestamps
+
     builders:
       - revoke-sudo
       - gerrit-git-prep
@@ -16,6 +22,12 @@
     name: 'gate-{name}-chef-lint'
     node: '{node}'
 
+    wrappers:
+      - timeout:
+          timeout: 60
+          fail: true
+      - timestamps
+
     builders:
       - revoke-sudo
       - gerrit-git-prep
@@ -29,6 +41,12 @@
 - job-template:
     name: 'gate-{name}-chef-style'
     node: '{node}'
+
+    wrappers:
+      - timeout:
+          timeout: 60
+          fail: true
+      - timestamps
 
     builders:
       - revoke-sudo
