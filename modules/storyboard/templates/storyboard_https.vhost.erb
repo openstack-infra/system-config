@@ -1,0 +1,54 @@
+<VirtualHost <%= scope.lookupvar("storyboard::application::hostname") %>:80>
+<% if (scope.lookupvar("storyboard::application::serveradmin") != :undefined) %>
+    ServerAdmin <%= scope.lookupvar("storyboard::application::serveradmin") %>
+<% end %>
+    ServerName <%= scope.lookupvar("storyboard::application::hostname") %>
+
+    DocumentRoot <%= scope.lookupvar("storyboard::application::www_root") %>
+
+    Redirect / https://<%= scope.lookupvar("storyboard::application::hostname") %>/
+
+    LogLevel warn
+    ErrorLog ${APACHE_LOG_DIR}/storyboard-error.log
+    CustomLog ${APACHE_LOG_DIR}/storyboard-access.log combined
+
+</VirtualHost>
+<IfModule mod_ssl.c>
+  <VirtualHost <%= scope.lookupvar("storyboard::application::hostname") %>:443>
+  <% if (scope.lookupvar("storyboard::application::serveradmin") != :undefined) %>
+    ServerAdmin <%= scope.lookupvar("storyboard::application::serveradmin") %>
+  <% end %>
+    ServerName <%= scope.lookupvar("storyboard::application::hostname") %>
+
+    LogLevel warn
+    ErrorLog ${APACHE_LOG_DIR}/storyboard-ssl-error.log
+    CustomLog ${APACHE_LOG_DIR}/storyboard-ssl-access.log combined
+
+    SSLEngine on
+
+    SSLCertificateFile      <%= scope.lookupvar("storyboard::cert::ssl_cert") %>
+    SSLCertificateKeyFile   <%= scope.lookupvar("storyboard::cert::ssl_key") %>
+  <% if scope.lookupvar("storyboard::cert::ssl_ca") != :undef %>
+    SSLCertificateChainFile <%= scope.lookupvar("storyboard::cert::ssl_ca") %>
+  <% end %>
+
+    <FilesMatch "\.(cgi|shtml|phtml|php)$">
+      SSLOptions +StdEnvVars
+    </FilesMatch>
+    <Directory /usr/lib/cgi-bin>
+      SSLOptions +StdEnvVars
+    </Directory>
+
+    BrowserMatch "MSIE [2-6]" \
+        nokeepalive ssl-unclean-shutdown \
+        downgrade-1.0 force-response-1.0
+    # MSIE 7 and newer should be able to use keepalive
+    BrowserMatch "MSIE [17-9]" ssl-unclean-shutdown
+
+    DocumentRoot <%= scope.lookupvar("storyboard::application::www_root") %>
+
+    WSGIDaemonProcess storyboard user=<%= scope.lookupvar("storyboard::params::user") %> group=<%= scope.lookupvar("storyboard::params::group") %> threads=5 python-path=/usr/local/lib/python2.7/dist-packages
+    WSGIScriptAlias /api /var/lib/storyboard/storyboard.wsgi
+    WSGIPassAuthorization On
+  </VirtualHost>
+</IfModule>
