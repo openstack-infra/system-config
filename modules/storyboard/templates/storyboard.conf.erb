@@ -1,6 +1,87 @@
 [DEFAULT]
-# 24 hours expiration
-token_ttl = 86400
+# Default log level is INFO
+# verbose and debug has the same result.
+# One of them will set DEBUG log level output
+# debug = False
+# verbose = False
+
+# Where to store lock files
+lock_path = $state_path/lock
+
+# log_format = %(asctime)s %(levelname)8s [%(name)s] %(message)s
+# log_date_format = %Y-%m-%d %H:%M:%S
+
+# use_syslog                           -> syslog
+# log_file and log_dir                 -> log_dir/log_file
+# (not log_file) and log_dir           -> log_dir/{binary_name}.log
+# use_stderr                           -> stderr
+# (not user_stderr) and (not log_file) -> stdout
+# publish_errors                       -> notification system
+
+# use_syslog = False
+# syslog_log_facility = LOG_USER
+
+# use_stderr = True
+# log_file =
+# log_dir =
+
+# publish_errors = False
+
+# Address to bind the API server
+# bind_host = 0.0.0.0
+
+# Port the bind the API server to
+# bind_port = 8080
+
+# OpenId Authentication endpoint
+openid_url = <%= @openid_url %>
+
+# Time in seconds before an access_token expires
+access_token_ttl = <%= @access_token_ttl %>
+
+# Time in seconds before an refresh_token expires
+refresh_token_ttl = <%= @refresh_token_ttl %>
+
+# List paging configuration options.
+# page_size_maximum = 500
+# page_size_default = 20
 
 [database]
-connection=mysql://<%= mysql_user %>:<%= mysql_password %>@<%= mysql_host %>:3306/storyboard
+# This line MUST be changed to actually run storyboard
+# Example:
+# connection = mysql://root:pass@127.0.0.1:3306/storyboard
+# Replace 127.0.0.1 above with the IP address of the database used by the
+# main storyboard server. (Leave it as is if the database runs on this host.)
+connection=mysql://<%= @mysql_user %>:<%= @mysql_user_password %>@<%= @mysql_host %>:<%= @mysql_port %>/<%= @mysql_database %>
+
+# The SQLAlchemy connection string used to connect to the slave database
+# slave_connection =
+
+# Database reconnection retry times - in event connectivity is lost
+# set to -1 implies an infinite retry count
+# max_retries = 10
+
+# Database reconnection interval in seconds - if the initial connection to the
+# database fails
+# retry_interval = 10
+
+# Minimum number of SQL connections to keep open in a pool
+# min_pool_size = 1
+
+# Maximum number of SQL connections to keep open in a pool
+# max_pool_size = 10
+
+# Timeout in seconds before idle sql connections are reaped
+# idle_timeout = 3600
+
+# If set, use this value for max_overflow with sqlalchemy
+# max_overflow = 20
+
+# Verbosity of SQL debugging information. 0=None, 100=Everything
+# connection_debug = 0
+
+# Add python stack traces to SQL as comment strings
+# connection_trace = False
+
+# If set, use this value for pool_timeout with sqlalchemy
+# pool_timeout = 10
