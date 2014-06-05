@@ -9,7 +9,6 @@ require 'launch_vms'
 Util.ci_setup
 
 def create_vms(count = 1)
-    # Launch 2 ci-subslave VMs
     Vm.create_subslaves(count)
 end
 
@@ -113,10 +112,10 @@ def install_contrail
 
     # Reduce number of nova-api and nova-conductors and fix scheduler for
     # even distribution of instances across all compute nodes.
-    Sh.run "ssh #{vm.vmname} /usr/bin/openstack-config --set /etc/nova/nova.conf conductor workers 2"
-    Sh.run "ssh #{vm.vmname} /usr/bin/openstack-config --set /etc/nova/nova.conf DEFAULT osapi_compute_workers 2"
-    Sh.run "ssh #{vm.vmname} service nova-api restart"
-    Sh.run "ssh #{vm.vmname} service nova-conductor restart"
+#   Sh.run "ssh #{vm.vmname} /usr/bin/openstack-config --set /etc/nova/nova.conf conductor workers 2"
+#   Sh.run "ssh #{vm.vmname} /usr/bin/openstack-config --set /etc/nova/nova.conf DEFAULT osapi_compute_workers 2"
+#   Sh.run "ssh #{vm.vmname} service nova-api restart"
+#   Sh.run "ssh #{vm.vmname} service nova-conductor restart"
 
 #   Sh.run "ssh #{vm.vmname} /usr/bin/openstack-config --set /etc/nova/nova.conf DEFAULT ram_weight_multiplier 1.0"
 #   Sh.run "ssh #{vm.vmname} /usr/bin/openstack-config --set /etc/nova/nova.conf DEFAULT scheduler_weight_classes nova.scheduler.weights.all_weighers"
@@ -175,7 +174,7 @@ end
 
 def main
 #   build_contrail_packages
-    create_vms(3)
+    create_vms(4)
     setup_contrail
     install_contrail
     setup_sanity
