@@ -21,7 +21,7 @@ define lodgeit::site(
     ensure  => present,
     content => template('lodgeit/upstart.erb'),
     replace => true,
-    require => Package['apache2'],
+    require => Package[$::apache::params::apache_name],
     notify  => Service["${name}-paste"],
   }
 
@@ -66,6 +66,6 @@ define lodgeit::site(
   service { "${name}-paste":
     ensure    => running,
     provider  => upstart,
-    require   => Service['apache2'],
+    require   => Service[$::apache::params::apache_name],
   }
 }

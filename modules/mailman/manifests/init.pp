@@ -25,7 +25,7 @@ class mailman($vhost_name=$::fqdn) {
     group   => 'root',
     replace => true,
     mode    => '0444',
-    require => Package['apache2'],
+    require => Package[$::apache::params::apache_name],
   }
 
   file { '/etc/mailman/mm_cfg.py':

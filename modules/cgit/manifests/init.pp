@@ -144,7 +144,7 @@ class cgit(
     group   => 'root',
     mode    => '0644',
     content => template('cgit/ssl.conf.erb'),
-    require => Package['mod_ssl'],
+    require => Package[$::apache::params::ssl_package],
   }
 
   file { $cgitdir:
