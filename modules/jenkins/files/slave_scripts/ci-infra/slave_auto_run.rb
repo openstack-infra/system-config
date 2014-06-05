@@ -36,10 +36,14 @@ def slave
         Sh.run "wget -o #{jar_file} http://maven.jenkins-ci.org/content/repositories/releases/org/jenkins-ci/plugins/swarm-client/1.15/swarm-client-1.15-jar-with-dependencies.jar"
     end
 
-    ENV['SLAVE_NODE_LABEL'] ||= "juniper-tests"
+    slave_labels =`curl -s http://169.254.169.254/openstack/2012-08-10/meta_data.json | python -m json.tool | \grep \"slave-labels\": | awk -F '\"' '{print $4}'`
+    slave_executors =`curl -s http://169.254.169.254/openstack/2012-08-10/meta_data.json | python -m json.tool | \grep \"slave-executors\": | awk -F '\"' '{print $4}'`
+
+    slave_labels = "juniper-tests" if slave_labels.nil? or slave_labels.empty?
+    slave_executors = "1" if slave_executors.nil? or slave_executors.empty?
 
     # CI-Slaves register to jenkins.opencontrail.org
-    exec %{java -jar #{jar_file} -labels #{ENV['SLAVE_NODE_LABEL']} -mode normal -master http://jenkins.opencontrail.org:8080/ -executors 1 -fsroot /home/jenkins -username #{jenkins_user} -password #{jenkins_password} -name #{@hostname} 2>&1 | tee /root/jenkins-slave.log}
+    exec %{java -jar #{jar_file} -labels #{slave_labels} -mode normal -master http://jenkins.opencontrail.org:8080/ -executors #{slave_executors} -fsroot /home/jenkins -username #{jenkins_user} -password #{jenkins_password} -name #{@hostname} 2>&1 | tee /root/jenkins-slave.log}
 end
 
 def subslave

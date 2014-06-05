@@ -146,7 +146,7 @@ def setup_sanity
     end
 
     Sh.run "ssh #{vm.vmname} rm -rf /root/contrail-test"
-    Sh.run "ssh #{vm.vmname} git clone --branch #{ENV['ZUUL_BRANCH']} git@github.com:juniper/contrail-test.git /root/contrail-test"
+    Sh.run "ssh #{vm.vmname} git clone --branch #{ENV['ZUUL_BRANCH']} git@github.com:rombie/contrail-test.git /root/contrail-test"
 end
 
 # Verify that contrail-status shows 'up' for all necessary components.
