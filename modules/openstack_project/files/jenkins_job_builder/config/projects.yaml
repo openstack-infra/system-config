@@ -869,6 +869,7 @@
       - python-jobs
       - openstack-publish-jobs
       - pypi-jobs
+      - translation-jobs
 
 - project:
     name: oslo.i18n
@@ -882,6 +883,7 @@
       - openstack-publish-jobs
       - pypi-jobs
       - oslotest-cross-test
+      - translation-jobs
 
 - project:
     name: oslo.messaging
@@ -1198,6 +1200,7 @@
     jobs:
       - python-jobs
       - openstack-publish-jobs
+      - translation-jobs
 
 - project:
     name: python-marconiclient
@@ -1367,6 +1370,7 @@
     jobs:
       - python-jobs
       - openstack-publish-jobs
+      - translation-jobs
       - 'gate-{name}-tox-{envlist}':
           envlist: func
       - '{pipeline}-swift-dsvm-functional{branch-designator}':
@@ -2053,6 +2057,7 @@
 
     jobs:
       - python-jobs
+      - translation-jobs
 
 - project:
     name: barbican-specs

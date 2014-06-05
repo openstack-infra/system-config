@@ -681,6 +681,9 @@ projects:
       - gate-barbican-devstack-dsvm
     post:
       - barbican-branch-tarball
+      - barbican-upstream-translation-update
+    periodic:
+      - barbican-propose-translation-update
 
   - name: openstack/barbican-specs
     check:
@@ -984,11 +987,14 @@ projects:
       - gate-marconi-pypy
     post:
       - marconi-branch-tarball
+      - marconi-upstream-translation-update
     pre-release:
       - marconi-tarball
     release:
       - marconi-tarball
       - marconi-docs
+    periodic:
+      - marconi-propose-translation-update
 
   - name: openstack/neutron
     template:
@@ -1158,6 +1164,10 @@ projects:
     release:
       - swift-tarball
       - swift-merge-release-tags
+    post:
+      - swift-upstream-translation-update
+    periodic:
+      - swift-propose-translation-update
 
   - name: openstack/taskflow
     template:
@@ -1871,6 +1881,10 @@ projects:
       - check-tripleo-undercloud-precise
       - check-tripleo-ironic-undercloud-precise
       - check-tripleo-overcloud-precise
+    post:
+      - oslo.db-upstream-translation-update
+    periodic:
+      - oslo.db-propose-translation-update
 
   - name: openstack/oslo.i18n
     template:
@@ -1892,6 +1906,10 @@ projects:
       - check-tripleo-undercloud-precise
       - check-tripleo-ironic-undercloud-precise
       - check-tripleo-overcloud-precise
+    post:
+      - oslo.i18n-upstream-translation-update
+    periodic:
+      - oslo.i18n-propose-translation-update
 
   - name: openstack/oslo.messaging
     template:
