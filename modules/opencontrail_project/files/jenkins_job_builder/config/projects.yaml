@@ -8,6 +8,7 @@
     jobs:
       - contrail-unittest-jobs
 #     - contrail-systest-jobs
+#     - contrail-devstack-jobs
 
 - project:
     name: contrail-controller-test
@@ -19,7 +20,7 @@
     jobs:
       - contrail-unittest-jobs
       - contrail-systest-jobs
-      - contrail-controller-test-devstack
+      - contrail-devstack-jobs
 
 - project:
     name: contrail-vrouter
@@ -30,3 +31,5 @@
 
     jobs:
       - contrail-unittest-jobs
+#     - contrail-systest-jobs
+#     - contrail-devstack-jobs
