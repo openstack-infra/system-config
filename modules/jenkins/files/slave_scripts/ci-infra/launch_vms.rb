@@ -107,7 +107,7 @@ class Vm
             ENV['SLAVE_EXECUTORS'] ||= "1"
 
             metadata = "--meta slave-labels=#{ENV['SLAVE_LABELS']} " +
-                       "--mata slave-executors=#{ENV['SLAVE_EXECUTORS']} " +
+                       "--meta slave-executors=#{ENV['SLAVE_EXECUTORS']} " +
                        "--meta slave-master=localhost"
 
             Vm.create_internal("ci-slave-#{floatingip}", floatingip, metadata)
