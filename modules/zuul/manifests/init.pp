@@ -197,15 +197,11 @@ class zuul (
     require => File['/var/lib/zuul'],
   }
 
-  package { 'libjs-jquery':
-    ensure => present,
-  }
-
-  file { '/var/lib/zuul/www/jquery.min.js':
-    ensure  => link,
-    target  => '/usr/share/javascript/jquery/jquery.min.js',
-    require => [File['/var/lib/zuul/www'],
-                Package['libjs-jquery']],
+  exec { 'download-jquery':
+    command => 'curl -L --silent https://code.jquery.com/jquery.min.js > /var/lib/zuul/www/jquery.min.js',
+    onlyif  => 'test ! -f /var/lib/zuul/www/jquery.min.js',
+    path    => 'bin:/usr/bin',
+    require => File['/var/lib/zuul/www'],
   }
 
   vcsrepo { '/opt/twitter-bootstrap':
@@ -219,7 +215,7 @@ class zuul (
     ensure  => link,
     target  => '/opt/twitter-bootstrap/dist',
     require => [File['/var/lib/zuul/www'],
-                Package['libjs-jquery'],
+                Exec['download-jquery'],
                 Vcsrepo['/opt/twitter-bootstrap']],
   }
 

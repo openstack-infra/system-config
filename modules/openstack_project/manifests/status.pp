@@ -55,10 +55,6 @@ class openstack_project::status (
     ensure => directory,
   }
 
-  package { 'libjs-jquery':
-    ensure => present,
-  }
-
   package { 'yui-compressor':
     ensure => present,
   }
@@ -81,11 +77,11 @@ class openstack_project::status (
     require => File['/srv/static/status'],
   }
 
-  file { '/srv/static/status/jquery.min.js':
-    ensure  => link,
-    target  => '/usr/share/javascript/jquery/jquery.min.js',
-    require => [File['/srv/static/status'],
-                Package['libjs-jquery']],
+  exec { 'download-jquery':
+    command => 'curl -L --silent https://code.jquery.com/jquery.min.js > /srv/static/status/jquery.min.js',
+    onlyif  => 'test ! -f /srv/static/status/jquery.min.js',
+    path    => 'bin:/usr/bin',
+    require => File['/srv/static/status'],
   }
 
   vcsrepo { '/opt/jquery-visibility':
