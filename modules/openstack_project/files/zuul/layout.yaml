@@ -687,6 +687,8 @@ projects:
 # Section: OpenStack server projects
 
   - name: openstack/barbican
+    template:
+      - name: translation-jobs
     check:
       - gate-barbican-pep8
       - gate-barbican-python27
@@ -1002,6 +1004,7 @@ projects:
     template:
       - name: python-jobs
       - name: check-requirements
+      - name: translation-jobs
     check:
       - check-tempest-dsvm-marconi
       - gate-marconi-python33
@@ -1011,6 +1014,7 @@ projects:
       - gate-marconi-pypy
     post:
       - marconi-branch-tarball
+      - marconi-upstream-translation-update
     pre-release:
       - marconi-tarball
     release:
@@ -1895,6 +1899,7 @@ projects:
       - name: check-requirements
       - name: integrated-gate
       - name: publish-to-pypi
+      - name: translation-jobs
     check:
       - check-devstack-dsvm-cells
       - gate-tempest-dsvm-large-ops
@@ -1936,6 +1941,7 @@ projects:
       - name: check-requirements
       - name: integrated-gate
       - name: publish-to-pypi
+      - name: translation-jobs
     check:
       - check-devstack-dsvm-cells
       - gate-tempest-dsvm-large-ops

@@ -29,7 +29,9 @@ function setup_project ()
 {
     local project=$1
 
-    tx set --auto-local -r ${project}.${project}-translations \
+    # Transifex project name does not include "."
+    tx_project=${project/\./}
+    tx set --auto-local -r ${tx_project}.${tx_project}-translations \
         "${project}/locale/<lang>/LC_MESSAGES/${project}.po" \
         --source-lang en \
         --source-file ${project}/locale/${project}.pot -t PO \
@@ -181,6 +183,9 @@ function setup_loglevel_project ()
 {
     project=$1
 
+    # Transifex project name does not include "."
+    tx_project=${project/\./}
+
     for level in $LEVELS ; do
         # Bootstrapping: Create file if it does not exist yet,
         # otherwise "tx set" will fail.
@@ -188,7 +193,7 @@ function setup_loglevel_project ()
         then
             touch ${project}/locale/${project}-log-${level}.pot
         fi
-        tx set --auto-local -r ${project}.${project}-log-${level}-translations \
+        tx set --auto-local -r ${tx_project}.${tx_project}-log-${level}-translations \
             "${project}/locale/<lang>/LC_MESSAGES/${project}-log-${level}.po" \
             --source-lang en \
             --source-file ${project}/locale/${project}-log-${level}.pot -t PO \

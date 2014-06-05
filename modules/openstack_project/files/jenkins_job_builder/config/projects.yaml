@@ -908,6 +908,7 @@
       - python-jobs
       - openstack-publish-jobs
       - pypi-jobs
+      - translation-jobs
 
 - project:
     name: oslo.i18n
@@ -1244,6 +1245,7 @@
     jobs:
       - python-jobs
       - openstack-publish-jobs
+      - translation-jobs
 
 - project:
     name: marconi-specs
@@ -2189,6 +2191,7 @@
 
     jobs:
       - python-jobs
+      - translation-jobs
 
 - project:
     name: barbican-specs
