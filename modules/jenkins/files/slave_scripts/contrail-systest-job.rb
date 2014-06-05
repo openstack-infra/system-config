@@ -157,6 +157,12 @@ end
 
 def run_sanity
     Sh.run "ssh #{@vms.first.vmname} /usr/local/jenkins/slave_scripts/ci-infra/contrail_fab run_sanity:quick_sanity"
+
+    # Copy log files
+    # Sh.run "scp #{@vms.first.vmname}:/root/contrail-test/logs #{ENV['WORKSPACE']}/."
+
+    # Dump test_report.html onto stdout
+    # Sh.run("lynx --dymp #{test_report}.html"
 end
 
 def cleanup
@@ -173,7 +179,7 @@ def wait
 end
 
 def main
-    build_contrail_packages
+#   build_contrail_packages
     create_vms(6)
     setup_contrail
     install_contrail
