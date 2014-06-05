@@ -6,6 +6,7 @@ class openstack_project::base(
   $pin_puppet    = '2.7.',
   $pin_facter    = '1.',
   $ca_server     = undef,
+  $puppetmaster_host = $::openstack_project::params::puppetmaster_host
 ) {
   if ($::osfamily == 'Debian') {
     include apt
@@ -47,7 +48,7 @@ class openstack_project::base(
   }
 
   include pip
-  $desired_virtualenv = '1.11.4'
+  $desired_virtualenv = '1.10.1'
 
   if (( versioncmp($::virtualenv_version, $desired_virtualenv) < 0 )) {
     $virtualenv_ensure = $desired_virtualenv
@@ -82,16 +83,12 @@ class openstack_project::base(
   }
 
   ssh_authorized_key { 'puppet-remote-2014-04-17':
-    ensure  => absent,
-    user    => 'root',
-  }
-
-  ssh_authorized_key { 'puppet-remote-2014-05-24':
     ensure  => present,
     user    => 'root',
     type    => 'ssh-rsa',
     key     => 'AAAAB3NzaC1yc2EAAAADAQABAAABAQDSLlN41ftgxkNeUi/kATYPwMPjJdMaSbgokSb9PSkRPZE7GeNai60BCfhu+ky8h5eMe70Bpwb7mQ7GAtHGXPNU1SRBPhMuVN9EYrQbt5KSiwuiTXtQHsWyYrSKtB+XGbl2PhpMQ/TPVtFoL5usxu/MYaakVkCEbt5IbPYNg88/NKPixicJuhi0qsd+l1X1zoc1+Fn87PlwMoIgfLIktwaL8hw9mzqr+pPcDIjCFQQWnjqJVEObOcMstBT20XwKj/ymiH+6p123nnlIHilACJzXhmIZIZO+EGkNF7KyXpcBSfv9efPI+VCE2TOv/scJFdEHtDFkl2kdUBYPC0wQ92rp',
     options => [
+      "command=\"${::openstack_project::params::allowed_ssh_command}\"",
       'from="ci-puppetmaster.openstack.org"',
     ],
     require => File['/root/.ssh'],
@@ -101,8 +98,7 @@ class openstack_project::base(
     user    => 'root',
   }
 
-  # Which Puppet do I take?
-  # Take $puppet_version and pin to that version
+  # Use upstream puppet and pin to version 2.7.*
   if ($::osfamily == 'Debian') {
     apt::source { 'puppetlabs':
       location   => 'http://apt.puppetlabs.com',
@@ -111,21 +107,23 @@ class openstack_project::base(
       key_server => 'pgp.mit.edu',
     }
 
-    file { '/etc/apt/apt.conf.d/80retry':
-      owner   => 'root',
-      group   => 'root',
-      mode    => '0444',
-      source  => 'puppet:///modules/openstack_project/80retry',
-      replace => true,
-    }
+    case $::lsbdistcodename {
+      'trusty': {
+        file { '/etc/apt/preferences.d/00-puppet.pref':
+          ensure => absent,
+        }
+      }
 
-    file { '/etc/apt/preferences.d/00-puppet.pref':
-      ensure  => present,
-      owner   => 'root',
-      group   => 'root',
-      mode    => '0444',
-      content => template('openstack_project/00-puppet.pref.erb'),
-      replace => true,
+      default: {
+        file { '/etc/apt/preferences.d/00-puppet.pref':
+          ensure  => present,
+          owner   => 'root',
+          group   => 'root',
+          mode    => '0444',
+          source  => 'puppet:///modules/openstack_project/00-puppet.pref',
+          replace => true,
+        }
+      }
     }
 
     file { '/etc/default/puppet':
@@ -146,14 +144,6 @@ class openstack_project::base(
       group   => 'root',
       mode    => '0444',
       source  => 'puppet:///modules/openstack_project/centos-puppetlabs.repo',
-      replace => true,
-    }
-    file { '/etc/yum.conf':
-      ensure  => present,
-      owner   => 'root',
-      group   => 'root',
-      mode    => '0444',
-      source  => 'puppet:///modules/openstack_project/yum.conf',
       replace => true,
     }
   }
