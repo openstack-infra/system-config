@@ -98,7 +98,7 @@ def setup_contrail
         Sh.run "ssh #{vm.vmname} dpkg -i #{dest_image}"
 
         # Apply patch to setup.sh to retain apt.conf proxy settings.
-        Sh.run "ssh #{vm.vmname} /opt/contrail/contrail_packages/setup.sh"
+        Sh.run "ssh #{vm.vmname} /opt/contrail/contrail_packages/setup.sh", true
     }
 
 end
@@ -175,7 +175,7 @@ end
 
 def main
 #   build_contrail_packages
-    create_vms(6)
+    create_vms(3)
     setup_contrail
     install_contrail
     setup_sanity
