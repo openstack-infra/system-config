@@ -158,9 +158,29 @@ EOF
     end
 end
 
-if __FILE__ == $0 then
-    count = 1
-    count = ARGV[0].to_i unless ARGV[0].nil?
-    Vm.create_slaves(count)
-    Sh.exit
-end
+exit if __FILE__ != $0
+
+options = OptStruct.new
+options.labels = "juniper-tests"
+options.executors = 1
+options.image = "ci-jenkins-slave"
+options.name = "ci-slave-oc"
+
+opt_parser = OptionParser.new { |o|
+    o.banner = "Usage: #{$0} [options]"
+    o.on("-l", "--labels [LBL]", "Jenkins slave node label") { |l|
+        options.labels = l
+    }
+    o.on("-e", "--executorrs [EXT]", "Jenkins per slave job slots count") { |e|
+        options.label = e
+    }
+    o.on("-i", "--image [IMG]", "Jenkins slave image ") { |i|
+        options.image = i
+    }
+    o.on("-n", "--name [NAME]", "VM Instance name prefix") { |n|
+        options.name = n
+    }
+}
+
+options = opt_parser.parse(ARGV)
+pp options
