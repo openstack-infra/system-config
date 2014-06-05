@@ -947,6 +947,9 @@
 - project: stackforge/solum-dashboard
   description: 'Horizon plugin for Solum. See: https://wiki.openstack.org/wiki/Solum'
   upstream: https://github.com/asalkeld/solum-horizon.git
+- project: stackforge/solum-specs
+  description: 'Solum Design Specifications'
+  upstream: git://github.com/rackerlabs/solum-specs
 - project: stackforge/sphinxcontrib-docbookrestapi
   description: Sphinx extension that generates documentation for api-site from RST files.
   upstream: git://github.com/enovance/sphinxcontrib-docbookrestapi.git
