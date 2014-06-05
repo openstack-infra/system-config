@@ -1,5 +1,4 @@
 #!/usr/bin/env ruby
-
 $LOAD_PATH.unshift "/usr/local/jenkins/slave_scripts/",
                    "/usr/local/jenkins/slave_scripts/ci-infra"
 require 'util'
@@ -36,8 +35,8 @@ def slave
         Sh.run "wget -o #{jar_file} http://maven.jenkins-ci.org/content/repositories/releases/org/jenkins-ci/plugins/swarm-client/1.15/swarm-client-1.15-jar-with-dependencies.jar"
     end
 
-    slave_labels =`curl -s http://169.254.169.254/openstack/2012-08-10/meta_data.json | python -m json.tool | \grep \"slave-labels\": | awk -F '\"' '{print $4}'`
-    slave_executors =`curl -s http://169.254.169.254/openstack/2012-08-10/meta_data.json | python -m json.tool | \grep \"slave-executors\": | awk -F '\"' '{print $4}'`
+    slave_labels =Sh.run(%{curl -s http://169.254.169.254/openstack/2012-08-10/meta_data.json | python -m json.tool | \grep \\"slave-labels\\": | awk -F '\"' '{print $4}'})
+    slave_executors = Sh.run(%{curl -s http://169.254.169.254/openstack/2012-08-10/meta_data.json | python -m json.tool | \grep \\"slave-executors\\": | awk -F '\"' '{print $4}'})
 
     slave_labels = "juniper-tests" if slave_labels.nil? or slave_labels.empty?
     slave_executors = "1" if slave_executors.nil? or slave_executors.empty?
