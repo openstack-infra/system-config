@@ -151,9 +151,11 @@ class openstack_project::jenkins (
 
   if $manage_jenkins_jobs == true {
     class { '::jenkins::job_builder':
-      url      => "https://${vhost_name}/",
-      username => $jenkins_jobs_username,
-      password => $jenkins_jobs_password,
+      url          => "https://${vhost_name}/",
+      username     => $jenkins_jobs_username,
+      password     => $jenkins_jobs_password,
+      git_revision => $openstack_project::jenkins_git_revision,
+      git_url      => $openstack_project::jenkins_git_url,
     }
 
     file { '/etc/jenkins_jobs/config':

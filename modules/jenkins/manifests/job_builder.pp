@@ -4,6 +4,8 @@ class jenkins::job_builder (
   $url = '',
   $username = '',
   $password = '',
+  $git_revision = '',
+  $git_url = ''
 ) {
 
   # A lot of things need yaml, be conservative requiring this package to avoid
@@ -23,8 +25,8 @@ class jenkins::job_builder (
   vcsrepo { '/opt/jenkins_job_builder':
     ensure   => latest,
     provider => git,
-    revision => 'master',
-    source   => 'https://git.openstack.org/openstack-infra/jenkins-job-builder',
+    revision => $git_revision,
+    source   => $git_url,
   }
 
   exec { 'install_jenkins_job_builder':

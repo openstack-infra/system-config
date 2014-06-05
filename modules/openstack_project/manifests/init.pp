@@ -6,4 +6,7 @@ class openstack_project {
 
   $jenkins_dev_ssh_key = 'AAAAB3NzaC1yc2EAAAADAQABAAABAQDbqsicu+KLV4W+XYDmGO9+1RgDO08KFYK3aElpXRU8zTmZfOMOVWdYYrKzj/GTfHMZQPzGHIsgfZYOBDFzplT5K/bhFwBCpyR68pkA1tXlqcJnoNIweC+MhCcWiX2AkjcR/WLiVrUiBj6L4Hl/2LigcbJU8TWZZrilrnki8iJvvgXKXJntOlcyNFDsABFOjl6zybi0vqFRZHAQTVDpVIr3ihrBIRMEYnAbJX8+zDNZmkIhyOFWLQ2uHaDclVH4ZJT/d7xbE7oqUnb3PxMke81uf/AqwfPCa1QKanH89raSwwIFrBKE+XBtdgoLhdS658rYWmMl2ISgQ85BSHv52HTn'
 
+  $jenkins_git_url = hiera('jenkins_jobbuilder_git_url', 'https://git.openstack.org/openstack-infra/jenkins-job-builder')
+
+  $jenkins_git_revision = hiera('jenkins_jobbuilder_git_revision', 'master')
 }
