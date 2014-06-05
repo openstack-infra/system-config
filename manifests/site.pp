@@ -422,7 +422,7 @@ node 'storyboard.openstack.org' {
     mysql_password          => hiera('storyboard_db_password', 'XXX'),
     ssl_cert_file_contents  => hiera('storyboard_ssl_cert_file_contents', 'XXX'),
     ssl_key_file_contents   => hiera('storyboard_ssl_key_file_contents', 'XXX'),
-    ssl_chain_file_contents => hiera('storyboard_ssl_chain_file_contents', 'XXX'),
+    ssl_chain_file_contents => hiera('storyboard_ssl_chain_file_contents', 'XXX')
   }
 }
 
