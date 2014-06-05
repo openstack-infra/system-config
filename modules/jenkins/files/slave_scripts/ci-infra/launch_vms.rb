@@ -114,7 +114,7 @@ class Vm
         slave_master = "--meta slave-master=#{Vm.get_interface_ip}"
         1.upto(count) { |i|
             vmname = "ci-subslave-#{floatingip}-#{i}"
-            hostip = Vm.create_internal(vmname, nil, slave_master, 4) # large
+            hostip = Vm.create_internal(vmname, nil, slave_master, 5) # xlarge
             vm = Vm.new(vmname, hostip)
             vm.send_keepalive
             @@vms.push vm
@@ -140,9 +140,7 @@ EOF
         File.open("/etc/hosts", "w") { |fp| fp.write(s) }
 
         # Wait for all VMs to come up.
-        @@vms.each { |vm|
-            Sh.run("scp /etc/hosts #{vm.hostip}:/etc/.", false, 20, 3)
-        }
+        @@vms.each { |vm| Sh.run("scp /etc/hosts #{vm.hostip}:/etc/.", true, 20, 4) }
     end
 
     def Vm.setup_image_from_snapshot
@@ -159,4 +157,3 @@ if __FILE__ == $0 then
     Vm.create_slaves(count)
     Sh.exit
 end
-

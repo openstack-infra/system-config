@@ -9,7 +9,6 @@ require 'launch_vms'
 Util.ci_setup
 
 def create_vms(count = 1)
-    # Launch 2 ci-subslave VMs
     Vm.create_subslaves(count)
 end
 
@@ -93,12 +92,12 @@ def setup_contrail
     File.open(@topo_file, "w") { |fp| fp.write get_topo }
 
     @vms.each { |vm|
-        Sh.run "ssh root@#{vm.vmname} apt-get update"
+#       Sh.run "ssh root@#{vm.vmname} apt-get update"
         Sh.run "scp #{@image} root@#{vm.vmname}:#{dest_image}"
         Sh.run "ssh #{vm.vmname} dpkg -i #{dest_image}"
 
         # Apply patch to setup.sh to retain apt.conf proxy settings.
-        Sh.run "ssh #{vm.vmname} /opt/contrail/contrail_packages/setup.sh"
+        Sh.run "ssh #{vm.vmname} /opt/contrail/contrail_packages/setup.sh", true
     }
 
 end
@@ -108,7 +107,19 @@ def install_contrail
     Sh.run "scp #{@topo_file} #{vm.vmname}:/opt/contrail/utils/fabfile/testbeds/testbed.py"
     Sh.run "ssh #{vm.vmname} /usr/local/jenkins/slave_scripts/ci-infra/contrail_fab install_contrail"
     Sh.run "echo \"perl -ni -e 's/JVM_OPTS -Xss\\d+/JVM_OPTS -Xss512/g; print \\$_;' /etc/cassandra/cassandra-env.sh\" | ssh -t #{vm.vmname} \$(< /dev/fd/0)"
+
     Sh.run "ssh #{vm.vmname} /usr/local/jenkins/slave_scripts/ci-infra/contrail_fab setup_all"
+
+    # Reduce number of nova-api and nova-conductors and fix scheduler for
+    # even distribution of instances across all compute nodes.
+#   Sh.run "ssh #{vm.vmname} /usr/bin/openstack-config --set /etc/nova/nova.conf conductor workers 2"
+#   Sh.run "ssh #{vm.vmname} /usr/bin/openstack-config --set /etc/nova/nova.conf DEFAULT osapi_compute_workers 2"
+#   Sh.run "ssh #{vm.vmname} service nova-api restart"
+#   Sh.run "ssh #{vm.vmname} service nova-conductor restart"
+
+#   Sh.run "ssh #{vm.vmname} /usr/bin/openstack-config --set /etc/nova/nova.conf DEFAULT ram_weight_multiplier 1.0"
+#   Sh.run "ssh #{vm.vmname} /usr/bin/openstack-config --set /etc/nova/nova.conf DEFAULT scheduler_weight_classes nova.scheduler.weights.all_weighers"
+#   Sh.run "ssh #{vm.vmname} service nova-scheduler restart"
 end
 
 def build_contrail_packages(repo = "#{ENV['WORKSPACE']}/repo")
@@ -128,11 +139,14 @@ end
 
 def setup_sanity
     vm = @vms.first
-    Sh.run "ssh #{vm.vmname} \"(source /opt/contrail/api-venv/bin/activate && source /etc/contrail_bashrc && pip install fixtures testtools testresources selenium pyvirtualdisplay)\""
+    if ENV['ZUUL_BRANCH'] != "master" then # use venv
+        Sh.run "ssh #{vm.vmname} \"(source /opt/contrail/api-venv/bin/activate && source /etc/contrail_bashrc && pip install fixtures testtools testresources selenium pyvirtualdisplay)\""
+    else
+        Sh.run "ssh #{vm.vmname} \"(source /etc/contrail_bashrc && pip install fixtures testtools testresources selenium pyvirtualdisplay)\""
+    end
 
-    branch = ENV['ZUUL_BRANCH'] || "master"
     Sh.run "ssh #{vm.vmname} rm -rf /root/contrail-test"
-    Sh.run "ssh #{vm.vmname} git clone --branch #{branch} git@github.com:juniper/contrail-test.git /root/contrail-test"
+    Sh.run "ssh #{vm.vmname} git clone --branch #{ENV['ZUUL_BRANCH']} git@github.com:juniper/contrail-test.git /root/contrail-test"
 end
 
 # Verify that contrail-status shows 'up' for all necessary components.
