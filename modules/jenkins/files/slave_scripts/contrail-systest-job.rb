@@ -167,10 +167,9 @@ end
 
 def main
 #   build_contrail_packages
-#   create_vms(4)
-#   setup_contrail
-#   install_contrail
-    @vms = Vm.init_all if @vms.nil? or @vms.empty?
+    create_vms(4)
+    setup_contrail
+    install_contrail
     setup_sanity
     verify_contrail
     run_sanity
