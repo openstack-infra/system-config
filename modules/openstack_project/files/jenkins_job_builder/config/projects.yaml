@@ -1142,6 +1142,10 @@
       - openstack-publish-jobs
       - translation-jobs
       - openstack-doc-jobs
+      - 'gate-trove-functional-dsvm-{datastore}':
+          datastore: 'mysql'
+      - 'gate-trove-functional-dsvm-{datastore}':
+          datastore: 'mongodb'
       - '{name}-tox-doc-{envlist}':
           envlist: publishdocs
 
