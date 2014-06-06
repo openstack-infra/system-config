@@ -19,7 +19,7 @@ function setup_ntp {
 
 function install_crontab_hack() {
 # Run this once every 30 minues
-*/30 * * * * java -jar /root/jenkins-cli.jar -s http://jenkins.opencontrail.org:8080 list-jobs | xargs -n 1 java -jar /root/jenkins-cli.jar -s http://jenkins.opencontrail.org:8080 disable-job && java -jar /root/jenkins-cli.jar -s http://jenkins.opencontrail.org:8080 list-jobs | xargs -n 1 java -jar /root/jenkins-cli.jar -s http://jenkins.opencontrail.org:8080 enable-job
+*/30 * * * * java -jar /root/jenkins-cli.jar -s http://jenkins.opencontrail.org:8080 list-jobs | \grep -v "Contrail Neutron" | xargs -n 1 java -jar /root/jenkins-cli.jar -s http://jenkins.opencontrail.org:8080 disable-job && java -jar /root/jenkins-cli.jar -s http://jenkins.opencontrail.org:8080 list-jobs | \grep -v "Contrail Neutron" | xargs -n 1 java -jar /root/jenkins-cli.jar -s http://jenkins.opencontrail.org:8080 enable-job
 }
 
 function iptables_restart {
