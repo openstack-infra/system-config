@@ -2600,6 +2600,7 @@ projects:
       - check-tempest-dsvm-ironic-nv
       - check-tempest-dsvm-ironic-postgres-nv
       - check-tempest-dsvm-virtual-ironic-nv
+      - check-tempest-dsvm-f20
     gate:
       - gate-devstack-gate-unittests
       - gate-devstack-dsvm-cells
