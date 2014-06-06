@@ -52,7 +52,16 @@ class Vm
         return vms
     end
 
+    def wait
+        puts "Waiting for ever!"
+        loop do
+            break unless File.file? "/root/contrail_systest_job_wait"
+            sleep 10
+        end
+    end
+
     def Vm.clean_all
+        wait
         @@vms.each { |vm| vm.delete }
     end
 
@@ -64,7 +73,7 @@ class Vm
                 t = Time.now
                 # puts "Updating time #{t} to #{@vmname}"
                 File.open(kfile, "w") {|fp| t.to_a.each {|i| fp.puts i}}
-                Sh.run "scp #{kfile} root@#{@hostip}:#{kfile}", true, 1, 1, false
+                Sh.run("scp #{kfile} root@#{@hostip}:#{kfile}", true, 1, 1,false)
                 #rescue StandardError, Interrupt, SystemExit
                 rescue Exception => e
                     # puts "ERROR: scp #{kfile} root@#{@hostip}:#{kfile} #{e}"

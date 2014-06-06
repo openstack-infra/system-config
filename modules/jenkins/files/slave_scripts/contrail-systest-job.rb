@@ -93,7 +93,7 @@ def setup_contrail
 
     @vms.each { |vm|
 #       Sh.run "ssh root@#{vm.vmname} apt-get update"
-        Sh.run "scp #{@image} root@#{vm.vmname}:#{dest_image}", true, 20, 4
+        Sh.run("scp #{@image} root@#{vm.vmname}:#{dest_image}", true, 20, 4)
         Sh.run "ssh #{vm.vmname} dpkg -i #{dest_image}"
 
         # Apply patch to setup.sh to retain apt.conf proxy settings.
@@ -104,7 +104,7 @@ end
 
 def install_contrail
     vm = @vms.first
-    Sh.run "scp #{@topo_file} #{vm.vmname}:/opt/contrail/utils/fabfile/testbeds/testbed.py", true, 20, 4
+    Sh.run("scp #{@topo_file} #{vm.vmname}:/opt/contrail/utils/fabfile/testbeds/testbed.py", true, 20, 4)
     Sh.run "ssh #{vm.vmname} /usr/local/jenkins/slave_scripts/ci-infra/contrail_fab install_contrail"
     Sh.run "echo \"perl -ni -e 's/JVM_OPTS -Xss\\d+/JVM_OPTS -Xss512/g; print \\$_;' /etc/cassandra/cassandra-env.sh\" | ssh -t #{vm.vmname} \$(< /dev/fd/0)"
 
@@ -159,23 +159,10 @@ def run_sanity
     Sh.run "ssh #{@vms.first.vmname} /usr/local/jenkins/slave_scripts/ci-infra/contrail_fab run_sanity:quick_sanity"
 
     # Copy log files
-    # Sh.run "scp #{@vms.first.vmname}:/root/contrail-test/logs #{ENV['WORKSPACE']}/.", true, 20, 4
+    # Sh.run("scp #{@vms.first.vmname}:/root/contrail-test/logs #{ENV['WORKSPACE']}/.", true, 20, 4)
 
     # Dump test_report.html onto stdout
     # Sh.run("lynx --dymp #{test_report}.html"
-end
-
-def cleanup
-    Vm.clean_all
-    Sh.exit
-end
-
-def wait
-    puts "Waiting for ever!"
-    loop do
-        break unless File.file? "/root/contrail_systest_job_wait"
-        sleep 10
-    end
 end
 
 def main
@@ -186,8 +173,6 @@ def main
     setup_sanity
     verify_contrail
     run_sanity
-    wait
-    cleanup
 end
 
 main
