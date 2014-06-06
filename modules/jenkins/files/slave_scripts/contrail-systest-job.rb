@@ -88,7 +88,7 @@ def setup_contrail
     @topo_file = "#{ENV['WORKSPACE']}/testbed.py"
 
     @vms = Vm.all_vms
-    @vms = Vm.init_all if @vms.empty?
+    @vms = Vm.init_all if @vms.nil? or @vms.empty?
     File.open(@topo_file, "w") { |fp| fp.write get_topo }
 
     @vms.each { |vm|
@@ -170,7 +170,7 @@ def main
 #   create_vms(4)
 #   setup_contrail
 #   install_contrail
-    @vms = Vm.init_all if @vms.empty?
+    @vms = Vm.init_all if @vms.nil? or @vms.empty?
     setup_sanity
     verify_contrail
     run_sanity
