@@ -21,9 +21,9 @@
 class storyboard::application (
 
   # Installation parameters
-  $www_root            = '/var/lib/storyboard/www',
-  $server_admin        = undef,
-  $hostname            = $::fqdn,
+  $www_root               = '/var/lib/storyboard/www',
+  $server_admin           = undef,
+  $hostname               = $::fqdn,
 
   # storyboard.conf parameters
   $access_token_ttl    = 3600,
@@ -34,6 +34,12 @@ class storyboard::application (
   $mysql_database      = 'storyboard',
   $mysql_user          = 'storyboard',
   $mysql_user_password = 'changeme',
+
+  $rabbitmq_host          = 'localhost',
+  $rabbitmq_port          = 5672,
+  $rabbitmq_vhost         = '/',
+  $rabbitmq_user          = 'storyboard',
+  $rabbitmq_user_password = 'changemetoo'
 ) {
 
   # Dependencies
