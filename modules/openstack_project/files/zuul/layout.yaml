@@ -622,6 +622,8 @@ jobs:
     voting: false
   - name: gate-trove-buildimage-mysql
     voting: false
+  - name: gate-trove-functional-dsvm
+    voting: false
 # puppet-openstack targets
   - name: gate-puppet-vswitch-puppet-lint
     voting: false
@@ -1184,6 +1186,8 @@ projects:
       - trove-merge-release-tags
     periodic:
       - trove-propose-translation-update
+    experimental:
+      - gate-trove-functional-dsvm
 
   - name: openstack/tuskar
     template:
