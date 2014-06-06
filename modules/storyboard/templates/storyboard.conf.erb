@@ -46,6 +46,10 @@ refresh_token_ttl = <%= @refresh_token_ttl %>
 # page_size_maximum = 500
 # page_size_default = 20
 
+# Enable notifications. This feature drives deferred processing, reporting,
+# and subscriptions.
+enable_notifications = True
+
 [database]
 # This line MUST be changed to actually run storyboard
 # Example:
@@ -85,3 +89,23 @@ connection=mysql://<%= @mysql_user %>:<%= @mysql_user_password %>@<%= @mysql_hos
 
 # If set, use this value for pool_timeout with sqlalchemy
 # pool_timeout = 10
+
+[notifications]
+
+# Host of the rabbitmq server.
+rabbit_host=<%= @rabbitmq_host  %>
+
+# The RabbitMQ login method
+rabbit_login_method = AMQPLAIN
+
+# The RabbitMQ userid.
+rabbit_userid = <%= @rabbitmq_user  %>
+
+# The RabbitMQ password.
+rabbit_password = <%= @rabbitmq_user_password  %>
+
+# The RabbitMQ broker port where a single node is used.
+rabbit_port = <%= @rabbitmq_port  %>
+
+# The virtual host within which our queues and exchanges live.
+rabbit_virtual_host = <%= @rabbitmq_vhost  %>
