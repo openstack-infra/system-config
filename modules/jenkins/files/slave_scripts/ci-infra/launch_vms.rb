@@ -174,27 +174,32 @@ Vm.options.dry_run = false
 def parse_options
     opt_parser = OptionParser.new { |o|
         o.banner = "Usage: #{$0} [options] [vms-count(#{Vm.options.count})"
-        o.on("-c", "--count [#{Vm.options.count}]", "Number of VM Instances") { |c|
+        o.on("-c", "--count [#{Vm.options.count}]",
+             "Number of VM Instances") { |c|
             Vm.options.count = c.to_i
         }
-        o.on("-l", "--labels [#{Vm.options.labels}]", "Jenkins slave node label") { |l|
+        o.on("-l", "--labels [#{Vm.options.labels}]",
+             "Jenkins slave node label") { |l|
             Vm.options.labels = l
         }
-        o.on("-e", "--executors [#{Vm.options.executors}]", "Jenkins job slots count per slave") { |e|
+        o.on("-e", "--executors [#{Vm.options.executors}]",
+             "Jenkins job slots count per slave") { |e|
             Vm.options.executors = e
         }
-        o.on("-i", "--image [#{Vm.options.image}]", "Jenkins slave image ") { |i|
+        o.on("-i", "--image [#{Vm.options.image}]",
+             "Jenkins slave image ") { |i|
             Vm.options.image = i
         }
-        o.on("-n", "--name [#{Vm.options.name}-ipaddr]", "VM Instance name prefix") { |n|
+        o.on("-n", "--name [#{Vm.options.name}-ipaddr]",
+             "VM Instance name prefix") { |n|
             Vm.options.name = n
         }
-        o.on("-d", "--[no-]-dry-run [#{Vm.options.dry_run}]", "Just print the nova boot command") { |d|
+        o.on("-d", "--[no-]-dry-run [#{Vm.options.dry_run}]",
+             "Just print the nova boot command") { |d|
             Vm.options.dry_run = d
         }
     }
     opt_parser.parse(ARGV)
-    puts Vm.options.count
 end
 
 def main
