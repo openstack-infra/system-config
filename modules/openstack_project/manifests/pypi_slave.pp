@@ -31,8 +31,14 @@ class openstack_project::pypi_slave (
   include pip
 
   package { 'twine':
-    ensure   => present,
-    provider => 'pip',
+    ensure   => latest,
+    provider => pip,
+    require  => Class['pip'],
+  }
+
+  package { 'wheel':
+    ensure   => latest,
+    provider => pip,
     require  => Class['pip'],
   }
 

@@ -15,9 +15,18 @@
 # Extract Python package name from setup.cfg
 
 import ConfigParser
+import sys
+
+import wheel.bdist_wheel
 
 setup_cfg = ConfigParser.SafeConfigParser()
 setup_cfg.read("setup.cfg")
 distname = setup_cfg.get("metadata", "name")
 assert distname
-print(distname)
+if not len(sys.argv) or sys.argv[1] == "--tarball":
+    print(distname)
+elif sys.argv[1] == "--wheel":
+    print(wheel.bdist_wheel.safer_name(distname))
+else:
+    sys.stderr.write("ERROR: Valid options are --tarball and --wheel")
+    sys.exit(1)
