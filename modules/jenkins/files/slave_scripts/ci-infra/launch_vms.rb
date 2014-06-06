@@ -13,8 +13,10 @@ trap("QUIT") { Vm.clean_all; exit Sh.exit }
 
 class Vm
     attr_accessor :vmname, :hostip
+    @@options = OpenStruct.new
 
-    @@base_image = "ci-jenkins-slave"
+    def Vm.options; return @@options; end
+
     @@vms = [ ]
     def Vm.all_vms; @@vms end
 
@@ -74,8 +76,14 @@ class Vm
     def Vm.create_internal(vmname, floatingip, metadata, flavor = 4) # large
         puts "Creating VM #{vmname}"
         net_id = Sh.crun "nova net-list |\grep -w internet | awk '{print $2}'"
-        image_id = Sh.crun %{glance image-list |\grep " #{@@base_image} " | awk '{print $2}'}
-        Sh.crun "nova boot --flavor #{flavor} #{metadata} --nic net-id=#{net_id} --image #{image_id} #{vmname}"
+        image_id = Sh.crun %{glance image-list |\grep " #{@@options.image} " | awk '{print $2}'}
+        cmd = "nova boot --flavor #{flavor} #{metadata} --nic net-id=#{net_id} --image #{image_id} #{vmname}"
+
+        if @@options.dry_run then
+            puts cmd
+            return
+        end
+        Sh.crun cmd
 
         private_ip = nil
         while true do
@@ -99,28 +107,25 @@ class Vm
         return private_ip
     end
 
-    def Vm.create_slaves(count = 1)
+    def Vm.create_slaves(count = @@options.count)
         1.upto(count) { |i|
             floatingip = Sh.crun %{neutron floatingip-list | \grep -v " 192\." | \grep -m 1 "10\."  | awk '{print $5}'}
 
-            ENV['SLAVE_LABELS'] ||= "juniper-tests"
-            ENV['SLAVE_EXECUTORS'] ||= "1"
-
-            metadata = "--meta slave-labels=#{ENV['SLAVE_LABELS']} " +
-                       "--meta slave-executors=#{ENV['SLAVE_EXECUTORS']} " +
+            metadata = "--meta slave-labels=#{@@options.labels} " +
+                       "--meta slave-executors=#{@@options.executors} " +
                        "--meta slave-master=localhost"
 
-            Vm.create_internal("ci-slave-#{floatingip}", floatingip, metadata)
+            Vm.create_internal("#{@@options.name}-#{floatingip}", floatingip, metadata)
         }
     end
 
-    def Vm.create_subslaves(count = 1)
+    def Vm.create_subslaves(count = @@options.count)
         # Find my floatingip
         floatingip = get_hostip()
 
         metadata = "--meta slave-master=#{Vm.get_interface_ip}"
         1.upto(count) { |i|
-            vmname = "ci-subslave-#{floatingip}-#{i}"
+            vmname = "ci-oc-subslave-#{floatingip}-#{i}"
             hostip = Vm.create_internal(vmname, nil, metadata, 5) # xlarge
             vm = Vm.new(vmname, hostip)
             vm.send_keepalive
@@ -152,15 +157,54 @@ EOF
 
     def Vm.setup_image_from_snapshot
         @@base = "/usr/local/jenkins/slave_scripts/"
-        rsh "nova image-create #{@@base_image} ci-jenkins-slave"
-        rsh "glance image-download --file #{@@base_image}.qcow2 " +
-                "--progress #{@@base_image}"
+        Sh.run "nova image-create instance-id #{@@options.image}"
+        Sh.run "glance image-download --file #{@@options.image}.qcow2 " +
+               "--progress #{@@options.image}"
     end
 end
 
-if __FILE__ == $0 then
-    count = 1
-    count = ARGV[0].to_i unless ARGV[0].nil?
-    Vm.create_slaves(count)
-    Sh.exit
+Vm.options.labels = "juniper-tests"
+Vm.options.executors = 1
+Vm.options.image = "ci-jenkins-slave"
+Vm.options.name = "ci-oc-slave"
+Vm.options.count = 1
+Vm.options.dry_run = false
+
+def parse_options
+    opt_parser = OptionParser.new { |o|
+        o.banner = "Usage: #{$0} [options] [vms-count(#{Vm.options.count})"
+        o.on("-c", "--count [#{Vm.options.count}]",
+             "Number of VM Instances") { |c|
+            Vm.options.count = c.to_i
+        }
+        o.on("-l", "--labels [#{Vm.options.labels}]",
+             "Jenkins slave node label") { |l|
+            Vm.options.labels = l
+        }
+        o.on("-e", "--executors [#{Vm.options.executors}]",
+             "Jenkins job slots count per slave") { |e|
+            Vm.options.executors = e
+        }
+        o.on("-i", "--image [#{Vm.options.image}]",
+             "Jenkins slave image ") { |i|
+            Vm.options.image = i
+        }
+        o.on("-n", "--name [#{Vm.options.name}-ipaddr]",
+             "VM Instance name prefix") { |n|
+            Vm.options.name = n
+        }
+        o.on("-d", "--[no-]dry-run [#{Vm.options.dry_run}]",
+             "Just print the nova boot command") { |d|
+            Vm.options.dry_run = d
+        }
+    }
+    opt_parser.parse!(ARGV)
+    Vm.options.count = ARGV[0].to_i unless ARGV.empty?
 end
+
+def main
+    parse_options
+    Vm.create_slaves
+end
+
+main if __FILE__ == $0
