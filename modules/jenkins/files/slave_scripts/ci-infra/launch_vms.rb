@@ -77,7 +77,7 @@ class Vm
         puts "Creating VM #{vmname}"
         net_id = Sh.crun "nova net-list |\grep -w internet | awk '{print $2}'"
         image_id = Sh.crun %{glance image-list |\grep " #{@@options.image} " | awk '{print $2}'}
-        cmd = "nova boot --flavor #{flavor} #{metadata} --nic net-id=#{net_id} --image #{image_id} #{vmname}"
+        cmd = "nova boot --poll --flavor #{flavor} #{metadata} --nic net-id=#{net_id} --image #{image_id} #{vmname}"
 
         if @@options.dry_run then
             puts cmd
