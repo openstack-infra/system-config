@@ -7,6 +7,7 @@ $LOAD_PATH.unshift "/usr/local/jenkins/slave_scripts/",
 
 require 'util'
 
+trap("EXIT") { Vm.clean_all; exit Sh.exit }
 trap("INT")  { Vm.clean_all; exit Sh.exit }
 trap("KILL") { Vm.clean_all; exit Sh.exit }
 trap("QUIT") { Vm.clean_all; exit Sh.exit }
