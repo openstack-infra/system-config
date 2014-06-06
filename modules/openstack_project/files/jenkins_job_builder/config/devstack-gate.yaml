@@ -1244,10 +1244,8 @@
       - devstack-logs
       - console-log
 
-# experimental test for validating devstack changes on f20 & testing
-# devstack-f20 nodes
 - job:
-    name: 'experimental-devstack-tempest-dsvm-f20'
+    name: 'check-tempest-dsvm-f20'
     node: 'devstack-f20'
 
     wrappers:
