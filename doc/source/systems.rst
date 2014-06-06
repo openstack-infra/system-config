@@ -12,6 +12,7 @@ Major Systems
    zuul
    jjb
    logstash
+   elastic-recheck
    devstack-gate
    nodepool
    jeepyb
