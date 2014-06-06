@@ -198,7 +198,8 @@ def parse_options
             Vm.options.dry_run = d
         }
     }
-    opt_parser.parse(ARGV)
+    opt_parser.parse!(ARGV)
+    Vm.options.count = ARGV[0].to_i unless ARGV.empty?
 end
 
 def main
