@@ -651,16 +651,6 @@ jobs:
     voting: false
   - name: gate-pecan-tox-barbican-tip
     voting: false
-  - name: gate-designate-devstack-dsvm
-    voting: false
-  - name: gate-designate-requirements
-    voting: false
-  - name: gate-designate-docs
-    voting: false
-  - name: gate-python-designateclient-requirements
-    voting: false
-  - name: gate-python-designateclient-docs
-    voting: false
 
 # The project list is grouped by type of project, and within each
 # group, projects are sorted (mostly) alphabetically.
