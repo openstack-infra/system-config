@@ -2315,6 +2315,7 @@
 
     jobs:
       - python-jobs
+      - gate-{name}-docs
       - gate-{name}-pylint
 
 - project:
@@ -2324,6 +2325,7 @@
     tarball-site: tarballs.openstack.org
 
     jobs:
+      - gate-{name}-docs
       - python-jobs
 
 - project:

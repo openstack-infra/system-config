@@ -599,6 +599,10 @@ jobs:
     voting: false
   - name: gate-manila-pylint
     voting: false
+  - name: gate-manila-docs
+    voting: false
+  - name: gate-python-manilaclient-docs
+    voting: false
   - name: gate-manila-tempest-dsvm-neutron
     voting: false
   - name: gate-manila-tempest-dsvm-neutron-multibackend
@@ -3486,6 +3490,7 @@ projects:
 
   - name: stackforge/manila
     check:
+      - gate-manila-docs
       - gate-manila-pep8
       - gate-manila-pylint
       - gate-manila-python26
@@ -4149,6 +4154,7 @@ projects:
 
   - name: stackforge/python-manilaclient
     check:
+      - gate-python-manilaclient-docs
       - gate-python-manilaclient-pep8
       - gate-python-manilaclient-python26
       - gate-python-manilaclient-python27
