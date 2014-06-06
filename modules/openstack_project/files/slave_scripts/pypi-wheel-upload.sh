@@ -23,7 +23,7 @@ TAG=`echo $ZUUL_REF | sed 's/^refs.tags.//'`
 
 # Look in the setup.cfg to determine if a package name is specified, but
 # fall back on the project name if necessary
-DISTNAME=`/usr/local/jenkins/slave_scripts/pypi-extract-name.py \
+DISTNAME=`/usr/local/jenkins/slave_scripts/pypi-extract-name.py --wheel \
     || echo $PROJECT`
 # Look in the setup.cfg to see if this is a universal wheel or not
 WHEELTYPE=`/usr/local/jenkins/slave_scripts/pypi-extract-universal.py`
