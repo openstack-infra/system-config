@@ -4,6 +4,8 @@ class openstack_project::storyboard(
   $mysql_host = '',
   $mysql_password = '',
   $mysql_user = '',
+  $rabbitmq_user = '',
+  $rabbitmq_password = '',
   $sysadmins = [],
   $ssl_cert_file_contents = '',
   $ssl_key_file_contents = '',
@@ -22,12 +24,23 @@ class openstack_project::storyboard(
   }
 
   class { '::storyboard::application':
-    hostname            => $::fqdn,
-    openid_url          => $openid_url,
-    mysql_host          => $mysql_host,
-    mysql_database      => 'storyboard',
-    mysql_user          => $mysql_user,
-    mysql_user_password => $mysql_password
+    hostname               => $::fqdn,
+    openid_url             => $openid_url,
+    mysql_host             => $mysql_host,
+    mysql_database         => 'storyboard',
+    mysql_user             => $mysql_user,
+    mysql_user_password    => $mysql_password,
+
+    rabbitmq_host          => 'localhost',
+    rabbitmq_port          => 5672,
+    rabbitmq_vhost         => '/',
+    rabbitmq_user          => $rabbitmq_user,
+    rabbitmq_user_password => $rabbitmq_password
+  }
+
+  class { '::storyboard::rabbit':
+    rabbitmq_user          => $rabbitmq_user,
+    rabbitmq_user_password => $rabbitmq_password
   }
 
   # Load the projects into the database.

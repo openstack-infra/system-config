@@ -85,3 +85,42 @@ connection=mysql://<%= @mysql_user %>:<%= @mysql_user_password %>@<%= @mysql_hos
 
 # If set, use this value for pool_timeout with sqlalchemy
 # pool_timeout = 10
+
+
+[messaging]
+# Whether to use Highly Available queues - clustering only.
+# rabbit_ha_queues = False
+
+# RabbitMQ Highly Available cluster host:port pairs.
+# rabbit_hosts = $rabbit_host:$rabbit_port
+
+# Host of the rabbitmq server.
+rabbit_host = <%= @rabbitmq_host  %>
+
+# The RabbitMQ broker port where a single node is used.
+rabbit_port =  <%= @rabbitmq_port  %>
+
+# The RabbitMQ login method
+rabbit_login_method = AMQPLAIN
+
+# The RabbitMQ userid.
+rabbit_userid = <%= @rabbitmq_user  %>
+
+# The RabbitMQ password.
+rabbit_password = <%= @rabbitmq_user_password  %>
+
+# The virtual host within which our queues and exchanges live.
+rabbit_virtual_host = <%= @rabbitmq_vhost  %>
+
+# Maximum number of RabbitMQ connection retries.
+# Default is 0 (infinite retry count).
+# rabbit_max_retries = 0
+
+# How long to backoff for between retries when connecting to RabbitMQ.
+# rabbit_retry_backoff = 2
+
+# How frequently to retry connecting with RabbitMQ.
+# rabbit_retry_interval = 1
+
+# Connect over SSL for RabbitMQ.
+# rabbit_use_ssl = False

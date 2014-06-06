@@ -21,19 +21,25 @@
 class storyboard::application (
 
   # Installation parameters
-  $www_root            = '/var/lib/storyboard/www',
-  $server_admin        = undef,
-  $hostname            = $::fqdn,
+  $www_root               = '/var/lib/storyboard/www',
+  $server_admin           = undef,
+  $hostname               = $::fqdn,
 
   # storyboard.conf parameters
-  $access_token_ttl    = 3600,
-  $refresh_token_ttl   = 604800,
-  $openid_url          = 'https://login.launchpad.net/+openid',
-  $mysql_host          = 'localhost',
-  $mysql_port          = 3306,
-  $mysql_database      = 'storyboard',
-  $mysql_user          = 'storyboard',
-  $mysql_user_password = 'changeme'
+  $access_token_ttl       = 3600,
+  $refresh_token_ttl      = 604800,
+  $openid_url             = 'https://login.launchpad.net/+openid',
+  $mysql_host             = 'localhost',
+  $mysql_port             = 3306,
+  $mysql_database         = 'storyboard',
+  $mysql_user             = 'storyboard',
+  $mysql_user_password    = 'changeme',
+
+  $rabbitmq_host          = 'localhost',
+  $rabbitmq_port          = 5672,
+  $rabbitmq_vhost         = '/',
+  $rabbitmq_user          = 'storyboard',
+  $rabbitmq_user_password = 'changemetoo'
 ) {
 
   # Dependencies

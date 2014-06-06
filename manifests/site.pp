@@ -371,6 +371,8 @@ node 'storyboard.openstack.org' {
     mysql_host              => hiera('storyboard_db_host', 'localhost'),
     mysql_user              => hiera('storyboard_db_user', 'username'),
     mysql_password          => hiera('storyboard_db_password', 'XXX'),
+    rabbitmq_user           => hiera('storyboard_rabbit_user', 'username'),
+    rabbitmq_password       => hiera('storyboard_rabbit_password', 'XXX'),
     ssl_cert_file_contents  => hiera('storyboard_ssl_cert_file_contents', 'XXX'),
     ssl_key_file_contents   => hiera('storyboard_ssl_key_file_contents', 'XXX'),
     ssl_chain_file_contents => hiera('storyboard_ssl_chain_file_contents', 'XXX'),

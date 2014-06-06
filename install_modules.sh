@@ -56,6 +56,8 @@ MODULES["stankevich-python"]="1.6.6"
 
 NONDEP_MODULES["nibalizer-puppetboard"]="2.3.0"
 NONDEP_MODULES["example42-puppi"]="2.1.9"
+NONDEP_MODULES["puppetlabs-rabbitmq"]="3.1.0"
+NONDEP_MODULES["garethr-erlang"]="0.1.0"
 
 MODULE_LIST=`puppet module list`
 

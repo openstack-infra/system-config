@@ -28,22 +28,26 @@ A module that installs a standalone instance of StoryBoard.
 
 The standalone StoryBoard module will install a fully functional, independent
 instance of StoryBoard on your node. It includes a local instance of mysql,
-an HTTPS vhost using the apache snakeoil certificates, and an automatic
-redirect from http://$hostname to https://$hostname/.
+RabbitMQ, an HTTPS vhost using the apache snakeoil certificates, and an
+automatic redirect from http://$hostname to https://$hostname/.
 
     node default {
         class { 'storyboard':
-            mysql_database      => 'storyboard',
-            mysql_user          => 'storyboard',
-            mysql_user_password => 'changeme',
-            hostname            => ::fqdn,
-            openid_url          => 'https://login.launchpad.net/+openid',
-            ssl_cert_file       => '/etc/ssl/certs/ssl-cert-snakeoil.pem',
-            ssl_cert_content    => undef,
-            ssl_key_file        => '/etc/ssl/private/ssl-cert-snakeoil.key',
-            ssl_key_content     => undef,
-            ssl_ca_file         => undef,
-            ssl_ca_content      => undef
+            mysql_database         => 'storyboard',
+            mysql_user             => 'storyboard',
+            mysql_user_password    => 'changeme',
+
+            rabbitmq_user          => 'storyboard',
+            rabbitmq_user_password => 'changemetoo',
+
+            hostname               => ::fqdn,
+            openid_url             => 'https://login.launchpad.net/+openid',
+            ssl_cert_file          => '/etc/ssl/certs/ssl-cert-snakeoil.pem',
+            ssl_cert_content       => undef,
+            ssl_key_file           => '/etc/ssl/private/ssl-cert-snakeoil.key',
+            ssl_key_content        => undef,
+            ssl_ca_file            => undef,
+            ssl_ca_content         => undef
         }
     }
 
@@ -106,19 +110,39 @@ and adjust the apache vhost accordingly.
     node default {
         class { 'storyboard::application':
             # Installation parameters
-            www_root            => '/var/lib/storyboard/www',
-            server_admin        => undef,
-            hostname            => ::fqdn,
+            www_root               => '/var/lib/storyboard/www',
+            server_admin           => undef,
+            hostname               => ::fqdn,
           
             # storyboard.conf parameters
-            access_token_ttl    => 3600,
-            refresh_token_ttl   => 604800,
-            openid_url          => 'https://login.launchpad.net/+openid',
-            mysql_host          => 'localhost',
-            mysql_port          => 3306,
-            mysql_database      => 'storyboard',
-            mysql_user          => 'storyboard',
-            mysql_user_password => 'changeme'
+            access_token_ttl       => 3600,
+            refresh_token_ttl      => 604800,
+            openid_url             => 'https://login.launchpad.net/+openid',
+            mysql_host             => 'localhost',
+            mysql_port             => 3306,
+            mysql_database         => 'storyboard',
+            mysql_user             => 'storyboard',
+            mysql_user_password    => 'changeme',
+
+            rabbitmq_host          => 'localhost',
+            rabbitmq_port          => 5672,
+            rabbitmq_vhost         => '/',
+            rabbitmq_user          => 'storyboard',
+            rabbitmq_user_password => 'changemetoo'
+        }
+    }
+
+## ::storyboard::rabbit
+This module installs StoryBoard's RabbitMQ instance.
+
+In order to handle subscriptions, emails, and reporting, storyboard uses
+rabbitmq for deferred processing. This module installs a standalone, local
+instance of rabbit.
+
+    node default {
+        class { 'storyboard::rabbit':
+            rabbitmq_user          => 'storyboard',
+            rabbitmq_user_password => 'changeme'
         }
     }
 
