@@ -36,6 +36,19 @@
           ruby /usr/local/jenkins/slave_scripts/contrail-git-prep.rb use_private
           ruby /usr/local/jenkins/slave_scripts/contrail-systest-job.rb
 
+- job-template:
+    name: 'ci-{name}-devstack'
+    node: '{node}'
+
+    builders:
+      - shell: |
+          #!/bin/bash -xe
+          export USER=jenkins
+          export JOB_NAME={name}
+          /usr/bin/ci_setup.sh
+          ruby /usr/local/jenkins/slave_scripts/contrail-git-prep.rb
+          /usr/local/jenkins/slave_scripts/contrail-devstack-job.sh
+
 - job-group:
     name: contrail-unittest-jobs
     jobs:
@@ -43,6 +56,11 @@
 
 - job-group:
     name: contrail-systest-jobs
+    jobs:
+      - 'ci-{name}-systest'
+
+- job-group:
+    name: contrail-devstack-jobs
     jobs:
       - 'ci-{name}-systest'
 
