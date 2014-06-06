@@ -93,7 +93,7 @@ def setup_contrail
 
     @vms.each { |vm|
 #       Sh.run "ssh root@#{vm.vmname} apt-get update"
-        Sh.run("scp #{@image} root@#{vm.vmname}:#{dest_image}", true, 20, 4)
+        Sh.run("scp #{@image} root@#{vm.vmname}:#{dest_image}", false, 20, 4)
         Sh.run "ssh #{vm.vmname} dpkg -i #{dest_image}"
 
         # Apply patch to setup.sh to retain apt.conf proxy settings.
@@ -104,7 +104,7 @@ end
 
 def install_contrail
     vm = @vms.first
-    Sh.run("scp #{@topo_file} #{vm.vmname}:/opt/contrail/utils/fabfile/testbeds/testbed.py", true, 20, 4)
+    Sh.run("scp #{@topo_file} #{vm.vmname}:/opt/contrail/utils/fabfile/testbeds/testbed.py", false, 20, 4)
     Sh.run "ssh #{vm.vmname} /usr/local/jenkins/slave_scripts/ci-infra/contrail_fab install_contrail"
     Sh.run "echo \"perl -ni -e 's/JVM_OPTS -Xss\\d+/JVM_OPTS -Xss512/g; print \\$_;' /etc/cassandra/cassandra-env.sh\" | ssh -t #{vm.vmname} \$(< /dev/fd/0)"
 
@@ -140,9 +140,9 @@ end
 def setup_sanity
     vm = @vms.first
     if ENV['ZUUL_BRANCH'] != "master" then # use venv
-        Sh.run "ssh #{vm.vmname} \"(source /opt/contrail/api-venv/bin/activate && source /etc/contrail_bashrc && pip install fixtures testtools testresources selenium pyvirtualdisplay)\""
+        Sh.run("ssh #{vm.vmname} \"(source /opt/contrail/api-venv/bin/activate && source /etc/contrail_bashrc && pip install fixtures testtools testresources selenium pyvirtualdisplay)\"", false, 20, 4)
     else
-        Sh.run "ssh #{vm.vmname} \"(source /etc/contrail_bashrc && pip install fixtures testtools testresources selenium pyvirtualdisplay)\""
+        Sh.run("ssh #{vm.vmname} \"(source /etc/contrail_bashrc && pip install fixtures testtools testresources selenium pyvirtualdisplay)\"", false, 20, 4)
     end
 
     Sh.run "ssh #{vm.vmname} rm -rf /root/contrail-test"
@@ -159,17 +159,18 @@ def run_sanity
     Sh.run "ssh #{@vms.first.vmname} /usr/local/jenkins/slave_scripts/ci-infra/contrail_fab run_sanity:quick_sanity"
 
     # Copy log files
-    # Sh.run("scp #{@vms.first.vmname}:/root/contrail-test/logs #{ENV['WORKSPACE']}/.", true, 20, 4)
+    # Sh.run("scp #{@vms.first.vmname}:/root/contrail-test/logs #{ENV['WORKSPACE']}/.", false, 20, 4)
 
     # Dump test_report.html onto stdout
     # Sh.run("lynx --dymp #{test_report}.html"
 end
 
 def main
-    build_contrail_packages
-    create_vms(4)
-    setup_contrail
-    install_contrail
+#   build_contrail_packages
+#   create_vms(4)
+#   setup_contrail
+#   install_contrail
+    @vms = Vm.init_all if @vms.empty?
     setup_sanity
     verify_contrail
     run_sanity
