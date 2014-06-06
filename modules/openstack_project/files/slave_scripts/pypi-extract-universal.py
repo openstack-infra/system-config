@@ -25,4 +25,4 @@ if setup_cfg.has_section("wheel"):
 if universal:
     print("py2.py3")
 else:
-    print("py27")
+    print("py2")
