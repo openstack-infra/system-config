@@ -1,0 +1,62 @@
+- job:
+    name: 'gate-trove-buildimage-mysql'
+    node: 'bare-precise'
+
+    builders:
+      - link-logs
+      - net-info
+      - gerrit-git-prep
+      - shell: |
+          #!/bin/bash -xe
+          sudo mkdir -p /opt/stack
+          sudo chown $(whoami) /opt/stack
+          export DEST=/opt/stack
+          cd scripts
+          ./redstack build-image mysql
+          mv $HOME/images/ubuntu_mysql/ubuntu_mysql.qcow2 $WORKSPACE/ubuntu_mysql.qcow2
+
+    publishers:
+      - scp:
+          site: 'tarballs.openstack.org'
+          files:
+            - source: 'ubuntu_mysql.qcow2'
+              target: 'trove/images/ubuntu_mysql.qcow2'
+              keep-hierarchy: false
+              copy-after-failure: false
+      - console-log
+
+
+- job:
+    name: 'gate-trove-functional-dsvm'
+    node: 'devstack-precise'
+
+    wrappers:
+      - timeout:
+          timeout: 85
+          fail: true
+      - timestamps
+
+    builders:
+      - link-logs
+      - net-info
+      - devstack-checkout
+      - shell: |
+          #!/bin/bash -xe
+          export PYTHONUNBUFFERED=true
+          export DEVSTACK_GATE_TIMEOUT=80
+          export ENABLED_SERVICES=s-proxy,s-object,s-container,s-account,trove,tr-api,tr-tmgr,tr-cond
+          export PROJECTS="openstack/trove-integration openstack/diskimage-builder openstack/tripleo-image-elements $PROJECTS"
+
+          function post_test_hook {
+              cd /opt/stack/new/trove-integration/scripts
+              ./redstack kick-start mysql
+              ./redstack int-tests
+          }
+          export -f post_test_hook
+
+          cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
+          ./safe-devstack-vm-gate-wrap.sh
+
+    publishers:
+      - devstack-logs
+      - console-log
