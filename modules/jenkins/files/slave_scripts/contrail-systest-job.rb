@@ -93,7 +93,7 @@ def setup_contrail
 
     @vms.each { |vm|
 #       Sh.run "ssh root@#{vm.vmname} apt-get update"
-        Sh.run "scp #{@image} root@#{vm.vmname}:#{dest_image}, true, 20, 4"
+        Sh.run "scp #{@image} root@#{vm.vmname}:#{dest_image}", true, 20, 4
         Sh.run "ssh #{vm.vmname} dpkg -i #{dest_image}"
 
         # Apply patch to setup.sh to retain apt.conf proxy settings.
