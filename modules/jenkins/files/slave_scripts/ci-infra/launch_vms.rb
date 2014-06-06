@@ -17,7 +17,6 @@ class Vm
 
     def Vm.options; return @@options; end
 
-    @@base_image = "ci-jenkins-slave"
     @@vms = [ ]
     def Vm.all_vms; @@vms end
 
@@ -77,7 +76,7 @@ class Vm
     def Vm.create_internal(vmname, floatingip, metadata, flavor = 4) # large
         puts "Creating VM #{vmname}"
         net_id = Sh.crun "nova net-list |\grep -w internet | awk '{print $2}'"
-        image_id = Sh.crun %{glance image-list |\grep " #{@@base_image} " | awk '{print $2}'}
+        image_id = Sh.crun %{glance image-list |\grep " #{@@options.image} " | awk '{print $2}'}
         cmd = "nova boot --flavor #{flavor} #{metadata} --nic net-id=#{net_id} --image #{image_id} #{vmname}"
 
         if @@options.dry_run then
@@ -158,9 +157,9 @@ EOF
 
     def Vm.setup_image_from_snapshot
         @@base = "/usr/local/jenkins/slave_scripts/"
-        rsh "nova image-create #{@@base_image} ci-jenkins-slave"
-        rsh "glance image-download --file #{@@base_image}.qcow2 " +
-                "--progress #{@@base_image}"
+        Sh.run "nova image-create instance-id #{@@options.image}"
+        Sh.run "glance image-download --file #{@@options.image}.qcow2 " +
+               "--progress #{@@options.image}"
     end
 end
 
