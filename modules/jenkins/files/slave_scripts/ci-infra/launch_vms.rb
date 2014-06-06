@@ -126,7 +126,7 @@ class Vm
         metadata = "--meta slave-master=#{Vm.get_interface_ip}"
         1.upto(count) { |i|
             vmname = "ci-oc-subslave-#{floatingip}-#{i}"
-            hostip = Vm.create_internal(vmname, nil, metadata, 5) # xlarge
+            hostip = Vm.create_internal(vmname, nil, metadata, 4) # large
             vm = Vm.new(vmname, hostip)
             vm.send_keepalive
             @@vms.push vm

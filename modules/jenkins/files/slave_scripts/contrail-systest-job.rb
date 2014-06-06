@@ -156,7 +156,7 @@ def verify_contrail
 end
 
 def run_sanity
-    Sh.run "ssh #{@vms.first.vmname} /usr/local/jenkins/slave_scripts/ci-infra/contrail_fab run_sanity:quick_sanity"
+    Sh.run "ssh #{@vms.first.vmname} /usr/local/jenkins/slave_scripts/ci-infra/contrail_fab run_sanity:ci_sanity"
 
     # Copy log files
     # Sh.run "scp #{@vms.first.vmname}:/root/contrail-test/logs #{ENV['WORKSPACE']}/."
@@ -180,7 +180,7 @@ end
 
 def main
 #   build_contrail_packages
-    create_vms(6)
+    create_vms(4)
     setup_contrail
     install_contrail
     setup_sanity
