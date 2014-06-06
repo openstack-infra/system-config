@@ -193,7 +193,7 @@ def parse_options
              "VM Instance name prefix") { |n|
             Vm.options.name = n
         }
-        o.on("-d", "--[no-]-dry-run [#{Vm.options.dry_run}]",
+        o.on("-d", "--[no-]dry-run [#{Vm.options.dry_run}]",
              "Just print the nova boot command") { |d|
             Vm.options.dry_run = d
         }
