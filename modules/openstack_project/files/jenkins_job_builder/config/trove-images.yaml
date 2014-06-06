@@ -8,9 +8,10 @@
       - gerrit-git-prep
       - shell: |
           #!/bin/bash -xe
-          sudo mkdir -p /opt/stack
-          sudo chown $(whoami) /opt/stack
-          export DEST=/opt/stack
+          sudo mkdir -p /opt/trove-image-build
+          sudo chown $(whoami) /opt/trove-image-build
+          export DEST=/opt/trove-image-build
+          export KEY_DIR=`pwd`/files/keys
           cd scripts
           ./redstack build-image mysql
           mv $HOME/images/ubuntu_mysql/ubuntu_mysql.qcow2 $WORKSPACE/ubuntu_mysql.qcow2
@@ -20,7 +21,7 @@
           site: 'tarballs.openstack.org'
           files:
             - source: 'ubuntu_mysql.qcow2'
-              target: 'trove/images/ubuntu_mysql.qcow2'
+              target: 'tarballs/trove/images/ubuntu_mysql.qcow2'
               keep-hierarchy: false
               copy-after-failure: false
       - console-log
