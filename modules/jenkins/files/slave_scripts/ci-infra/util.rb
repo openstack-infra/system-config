@@ -103,13 +103,13 @@ class Vm
         return "127.0.0.1"
     end
 
-    def get_primary_interface
+    def Vm.get_primary_interface()
         # Check if vhost0 is present. If so, it is the primary interface
         `ifconfig vhost0`
         return $?.to_i == 0 ? "vhost0" : "eth0"
     end
 
-    def Vm.get_interface_ip (interface = get_primary_interface)
+    def Vm.get_interface_ip (interface = Vm.get_primary_interface)
         ip = "127.0.0.1"
         ip = $1 if Sh.run(%{ifconfig #{interface} |\grep "inet addr"}) =~ /inet addr:(\d+\.\d+\.\d+\.\d+)/
         return ip
