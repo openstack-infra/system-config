@@ -30,7 +30,8 @@ class Sh
             # Do stuff with the output here. Just printing to show it works
             stdin.each { |line|
                 output += line unless ignore_output
-                print "#{COLOR_CYAN}#{cmd}#{COLOR_RESET}: #{line}" if debug
+#               print "#{COLOR_CYAN}#{cmd}#{COLOR_RESET}: #{line}" if debug
+                print %{<b><font color="cyan">#{cmd}:</font></b> #{line}} if debug
             }
             rescue Errno::EIO
             rescue PTY::ChildExited => e
