@@ -149,8 +149,7 @@ def setup_sanity
     end
 
     Sh.run "ssh #{vm.vmname} rm -rf /root/contrail-test"
-    branch = "R1.05_1"
-    Sh.run "ssh #{vm.vmname} git clone --branch #{branch} git@github.com:rombie/contrail-test.git /root/contrail-test"
+    Sh.run "ssh #{vm.vmname} git clone --branch #{branch} git@github.com:juniper/contrail-test.git /root/contrail-test"
 end
 
 # Verify that contrail-status shows 'up' for all necessary components.
@@ -160,7 +159,7 @@ def verify_contrail
 end
 
 def run_sanity
-    Sh.run "ssh #{@vms.first.vmname} /usr/local/jenkins/slave_scripts/ci-infra/contrail_fab run_sanity:quick_sanity"
+    Sh.run "ssh #{@vms.first.vmname} /usr/local/jenkins/slave_scripts/ci-infra/contrail_fab run_sanity:ci_sanity"
 
     # Get http hyper links to the logs and report summary files.
     puts Sh.run(%{ssh #{@vms.first.vmname} lynx --dump /root/logs/*/test_report.html | \grep \" http:\"})
