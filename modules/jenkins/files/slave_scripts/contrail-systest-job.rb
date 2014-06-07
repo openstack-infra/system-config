@@ -158,11 +158,8 @@ end
 def run_sanity
     Sh.run "ssh #{@vms.first.vmname} /usr/local/jenkins/slave_scripts/ci-infra/contrail_fab run_sanity:quick_sanity"
 
-    # Copy log files
-    # Sh.run("scp #{@vms.first.vmname}:/root/contrail-test/logs #{ENV['WORKSPACE']}/.", false, 20, 4)
-
-    # Dump test_report.html onto stdout
-    # Sh.run("lynx --dymp #{test_report}.html"
+    # Get http hyper links to the logs and report summary files.
+    puts Sh.run(%{ssh #{@vms.first.vmname} lynx --dump /root/logs/*/test_report.html | \grep \" http:\"})
 end
 
 def main
