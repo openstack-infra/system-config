@@ -80,6 +80,8 @@ end
 def setup_contrail
     if @image.nil? then
         @image = "/root/contrail-install-packages_1.05-2252~havana_all.deb"
+        Sh.run("scp jenkins.opencontrail.org:#{@image} #{@image}") \
+            unless File.file? @image
         ENV['ZUUL_BRANCH'] = "R1.05"
     end
     dest_image = Sh.run "basename #{@image}"
@@ -146,7 +148,10 @@ def setup_sanity
     end
 
     Sh.run "ssh #{vm.vmname} rm -rf /root/contrail-test"
-    Sh.run "ssh #{vm.vmname} git clone --branch #{ENV['ZUUL_BRANCH']} git@github.com:juniper/contrail-test.git /root/contrail-test"
+    branch = ENV['ZUUL_BRANCH']
+    branch = "R1.05_1" # Temporary change for testing
+
+    Sh.run "ssh #{vm.vmname} git clone --branch #{branch} git@github.com:rombie/contrail-test.git /root/contrail-test"
 end
 
 # Verify that contrail-status shows 'up' for all necessary components.
@@ -156,7 +161,7 @@ def verify_contrail
 end
 
 def run_sanity
-    Sh.run "ssh #{@vms.first.vmname} /usr/local/jenkins/slave_scripts/ci-infra/contrail_fab run_sanity:ci_sanity"
+    Sh.run "ssh #{@vms.first.vmname} /usr/local/jenkins/slave_scripts/ci-infra/contrail_fab run_sanity:quick_sanity"
 
     # Get http hyper links to the logs and report summary files.
     puts Sh.run(%{ssh #{@vms.first.vmname} lynx --dump /root/logs/*/test_report.html | \grep \" http:\"})
