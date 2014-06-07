@@ -55,7 +55,7 @@ class Vm
     end
 
     def Vm.wait
-        puts "Waiting for ever!"
+        puts "Sleeping until /root/contrail_systest_job_wait is gone"
         loop do
             break unless File.file? "/root/contrail_systest_job_wait"
             sleep 10
