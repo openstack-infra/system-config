@@ -84,7 +84,7 @@ def setup_contrail
             unless File.file? @image
         ENV['ZUUL_BRANCH'] = "R1.05"
     end
-    dest_image = Sh.run "basename #{@image}"
+    dest_image = Sh.rrun "basename #{@image}"
     puts "setup_contrail: #{@image}"
     `mkdir -p #{ENV['WORKSPACE']}`
     @topo_file = "#{ENV['WORKSPACE']}/testbed.py"
@@ -135,7 +135,7 @@ def build_contrail_packages(repo = "#{ENV['WORKSPACE']}/repo")
     Sh.run "ls -alh #{repo}/build/artifacts/contrail-install-packages_*_all.deb"
 
     # Return the all-in-one debian package file path.
-    @image = Sh.run "ls -1 #{repo}/build/artifacts/contrail-install-packages_*_all.deb"
+    @image = Sh.rrun "ls -1 #{repo}/build/artifacts/contrail-install-packages_*_all.deb"
     puts "Successfully built package #{@image}"
 end
 

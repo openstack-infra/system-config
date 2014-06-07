@@ -21,7 +21,7 @@ class Sh
         return @@exit_code
     end
 
-    def Sh.spawn(cmd, debug = true)
+    def Sh.spawn(cmd, debug = true, ignore_output)
         output = ""
 
         begin
@@ -29,7 +29,7 @@ class Sh
             begin
             # Do stuff with the output here. Just printing to show it works
             stdin.each { |line|
-                output += line
+                output += line unless ignore_output
                 print "#{COLOR_CYAN}#{cmd}#{COLOR_RESET}: #{line}" if debug
             }
             rescue Errno::EIO
@@ -45,14 +45,22 @@ class Sh
         }
         rescue PTY::ChildExited => e
             @@exit_code = e.status.exitstatus
-	end
+        end
 
-        return output, @@exit_code
+        return output
     end
     private_class_method :spawn
 
+    # Run a shell command and return its output to the caller.
+    def Sh.rrun (cmd, ignore = @ignore_failed_exit_code, repeat = 1, wait = 1,
+                 debug = true, ignore_output = false)
+        return Sh.run(cmd, ignore, repeat, wait, debug, false)
+    end
+
+    # Run a shell command just printing output to stdput. Output is not
+    # collected returned to the caller.
     def Sh.run (cmd, ignore = @ignore_failed_exit_code, repeat = 1, wait = 1,
-                debug = true)
+                debug = true, ignore_output = true)
         output = ""
         @@exit_code = 0
         1.upto(repeat) { |i|
@@ -66,8 +74,7 @@ class Sh
                 if cmd =~ /^cd\s+(.*)/ then
                     Dir.chdir($1)
                 else
-#                   output = `#{cmd}`
-                    output, @@exit_code = spawn(cmd, debug)
+                    output = spawn(cmd, debug, ignore_output)
                 end
                 return output.chomp if @@exit_code == 0
             end
@@ -86,7 +93,7 @@ class Sh
     end
 
     def Sh.crun (cmd, ignore = true, cloud_manager = "10.84.26.14")
-        return run("ssh #{cloud_manager} ci-openstack.sh #{cmd}", ignore)
+        return Sh.rrun("ssh #{cloud_manager} ci-openstack.sh #{cmd}", ignore)
     end
 end
 
@@ -96,7 +103,7 @@ class Vm
         # Disable proxy..
         http_proxy=ENV['http_proxy']
         ENV['http_proxy'] = nil
-        name = Sh.run(%{curl -s http://169.254.169.254/openstack/2012-08-10/meta_data.json | python -m json.tool | \grep \\"#{type}\\": | awk -F '\"' '{print $4}'}, true, 10, 5)
+        name = Sh.rrun(%{curl -s http://169.254.169.254/openstack/2012-08-10/meta_data.json | python -m json.tool | \grep \\"#{type}\\": | awk -F '\"' '{print $4}'}, true, 10, 5)
 
         # Re-enable proxy ..
         ENV['http_proxy'] = http_proxy
@@ -116,7 +123,7 @@ class Vm
 
     def Vm.get_interface_ip (interface = Vm.get_primary_interface)
         ip = "127.0.0.1"
-        ip = $1 if Sh.run(%{ifconfig #{interface} |\grep "inet addr"}) =~ /inet addr:(\d+\.\d+\.\d+\.\d+)/
+        ip = $1 if Sh.rrun(%{ifconfig #{interface} |\grep "inet addr"}) =~ /inet addr:(\d+\.\d+\.\d+\.\d+)/
         return ip
     end
 end
