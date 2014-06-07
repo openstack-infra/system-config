@@ -71,7 +71,7 @@ end
 def main
     setup_hostname
     pp @hostname, @hostip
-    subslave if @hostname =~ /ci-subslave/
+    subslave if @hostname =~ /ci-oc-subslave/
     slave
 end
 
