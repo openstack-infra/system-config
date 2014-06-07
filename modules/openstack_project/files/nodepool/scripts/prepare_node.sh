@@ -30,11 +30,7 @@ forward-zone:
   forward-addr: 8.8.8.8
 EOF
 
-sudo hostname $HOSTNAME
-if ! grep -q $HOSTNAME /etc/hosts
-then
-    echo "127.0.1.1 $HOSTNAME" | sudo tee -a /etc/hosts
-fi
+./fix_hostname.sh "$HOSTNAME"
 
 # Fedora image doesn't come with wget
 if [ -f /usr/bin/yum ]; then
