@@ -120,7 +120,7 @@ class Util
     def self.ci_setup
         ENV['WORKSPACE']=ENV['PWD'] if ENV['WORKSPACE'].nil?
         ENV['USER'] = "jenkins" if ENV['USER'].nil? or ENV['USER'].empty?
-        ENV['ZUUL_BRANCH'] ||= "master"
+        ENV['ZUUL_BRANCH'] ||= "R1.05"
         pp ENV
         if File.file? "#{ENV['WORKSPACE']}/skip_jobs" then
             puts "Jobs skipped due to jenkins.opencontrail.org:/root/ci-test/skip_jobs"
