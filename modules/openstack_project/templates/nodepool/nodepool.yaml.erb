@@ -21,6 +21,7 @@ gearman-servers:
 labels:
   - name: devstack-precise
     image: devstack-precise
+    ready-script: ready_node.sh
     min-ready: 42
     providers:
       - name: hpcloud-b1
@@ -33,11 +34,13 @@ labels:
       - name: rax-iad
   - name: devstack-precise-check
     image: devstack-precise-check
+    ready-script: ready_node.sh
     min-ready: 7
     providers:
       - name: rax-iad
   - name: bare-precise
     image: bare-precise
+    ready-script: ready_node.sh
     min-ready: 42
     providers:
       - name: hpcloud-b1
@@ -50,6 +53,7 @@ labels:
       - name: rax-iad
   - name: bare-centos6
     image: bare-centos6
+    ready-script: ready_node.sh
     min-ready: 21
     providers:
       - name: hpcloud-b1
@@ -93,6 +97,7 @@ labels:
       - name: hpcloud-b5
   - name: devstack-f20
     image: devstack-f20
+    ready-script: ready_node.sh
     min-ready: 5
     providers:
       - name: rax-dfw
