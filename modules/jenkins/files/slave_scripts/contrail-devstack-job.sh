@@ -48,6 +48,8 @@ function run_devstack() {
     cp /home/jenkins/tmp/cache/jenkins/third_party/node-v0.8.15.tar.gz /opt/stack/neutron/.
     chown -R $USER /opt/stack/
     su -c $DEVSTACK_WORKSPACE/stack.sh $USER
+    /usr/bin/contrail-status
+    /usr/bin/openstack-status
 }
 
 function main() {
