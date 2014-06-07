@@ -21,7 +21,7 @@ class Sh
         return @@exit_code
     end
 
-    def Sh.spawn(cmd, debug = true, ignore_output)
+    def Sh.spawn(cmd, debug = true, ignore_output = true)
         output = ""
 
         begin
