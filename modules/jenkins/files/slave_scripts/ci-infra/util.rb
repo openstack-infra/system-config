@@ -30,8 +30,7 @@ class Sh
             # Do stuff with the output here. Just printing to show it works
             stdin.each { |line|
                 output += line unless ignore_output
-#               print "#{COLOR_CYAN}#{cmd}#{COLOR_RESET}: #{line}" if debug
-                print %{<b><font color="cyan">#{cmd}:</font></b> #{line}} if debug
+                print "#{COLOR_CYAN}#{cmd}#{COLOR_RESET}: #{line}" if debug
             }
             rescue Errno::EIO
             rescue PTY::ChildExited => e
@@ -69,8 +68,7 @@ class Sh
                 print "Retry #{i}/#{repeat}: " if debug
                 sleep(wait)
             end
-#           puts "#{COLOR_CYAN}#{cmd}#{COLOR_RESET}: " if debug
-            puts %{<b><font color="cyan">#{cmd}: </font></b>} if debug
+            puts "#{COLOR_CYAN}#{cmd}#{COLOR_RESET}: " if debug
             @@exit_code = 0
             if not dry_run? then
                 if cmd =~ /^cd\s+(.*)/ then
