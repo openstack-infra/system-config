@@ -20,7 +20,7 @@
     jobs:
       - contrail-unittest-jobs
       - contrail-systest-jobs
-#     - contrail-devstack-jobs
+      - contrail-devstack-jobs
 
 - project:
     name: contrail-vrouter
