@@ -54,7 +54,7 @@ class Vm
         return vms
     end
 
-    def wait
+    def Vm.wait
         puts "Waiting for ever!"
         loop do
             break unless File.file? "/root/contrail_systest_job_wait"
@@ -63,7 +63,7 @@ class Vm
     end
 
     def Vm.clean_all
-        wait
+        Vm.wait
         @@vms.each { |vm| vm.delete }
     end
 
