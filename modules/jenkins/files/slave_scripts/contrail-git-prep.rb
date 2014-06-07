@@ -33,48 +33,23 @@ puts "Working with project #{@project}"
 GERRIT_SITE="https://review.opencontrail.org" # ARGV[0]
 GIT_ORIGIN="ssh://zuul@review.opencontrail.org:29418" # ARGV[1]
 
-def dry_run?
-    return !ENV['DRY_RUN'].nil? && ENV['DRY_RUN'].casecmp("true") == 0
-end
-
-def sh (cmd, ignore = false)
-    puts "#{cmd}"
-    exit_code = 0
-    if not dry_run? then
-        if cmd =~ /^cd\s+(.*)/ then
-            Dir.chdir($1)
-        else
-            puts cmd
-            output = `#{cmd}`
-            exit_code = $?.to_i unless ignore
-        end
-    end
-    puts output if !output.nil? and !output.empty?
-
-    if exit_code != 0 then
-        puts "Comamnd #{cmd} failed with exit code #{$?}"
-        exit exit_code
-    end
-    return output
-end
-
 def setup_gerrit_repo
     return unless @gerrit_setup
 
-    sh "rm -rf #{WORKSPACE}/#{@project}"
-    sh "mkdir -p #{WORKSPACE}/#{@project}"
-    sh "cd #{WORKSPACE}/#{@project}"
+    Sh.run "rm -rf #{WORKSPACE}/#{@project}"
+    Sh.run "mkdir -p #{WORKSPACE}/#{@project}"
+    Sh.run "cd #{WORKSPACE}/#{@project}"
 
     # This clones a git repo with appropriate review patch
-    sh "/usr/local/jenkins/slave_scripts/gerrit-git-prep.sh " +
+    Sh.run "/usr/local/jenkins/slave_scripts/gerrit-git-prep.sh " +
        "#{GERRIT_SITE} #{GIT_ORIGIN}", false
 end
 
 def setup_contrail_repo(use_public)
     # Restore to parent directory
-    sh "rm -rf #{WORKSPACE}/repo"
-    sh "mkdir -p #{WORKSPACE}/repo"
-    sh "cd #{WORKSPACE}/repo"
+    Sh.run "rm -rf #{WORKSPACE}/repo"
+    Sh.run "mkdir -p #{WORKSPACE}/repo"
+    Sh.run "cd #{WORKSPACE}/repo"
 
     # Initialize a repo. TODO Do not hard code manifest.xml file path
     branch = ENV['ZUUL_BRANCH'] || "R1.05"
@@ -83,18 +58,18 @@ def setup_contrail_repo(use_public)
     # e.g. ENV['NODE_LABELS' = "ci-10.84.35.174 juniper-tests swarm"
 
     if use_public then
-        sh "repo init -u git@github.com:Juniper/contrail-vnc -b #{branch}"
+        Sh.run "repo init -u git@github.com:Juniper/contrail-vnc -b #{branch}"
     else
         branch = "mainline" if branch == "master"
-        sh "repo init -u git@github.com:Juniper/contrail-vnc-private " +
+        Sh.run "repo init -u git@github.com:Juniper/contrail-vnc-private " +
            "-m #{branch}/ubuntu-12-04/manifest-havana.xml"
     end
 
     # Sync the repo
-    sh "repo sync"
+    Sh.run "repo sync"
 
     # Remove annoying non-exsting shallow file symlink
-    sh "rm -rf third_party/euca2ools/.git/shallow"
+    Sh.run "rm -rf third_party/euca2ools/.git/shallow"
 end
 
 # TODO Ideally, we should tweak .repo/manifest.xml to directly fetch project
@@ -103,7 +78,7 @@ def switch_gerrit_repo
     return unless @gerrit_setup
 
     # Find the project git repo based on .repo/manifest.xml file
-    out = sh "\grep name=\\\"#{@project} .repo/manifest.xml"
+    out = Sh.rrun "\grep name=\\\"#{@project} .repo/manifest.xml"
     if out !~ /path=\"(.*?)\"/ then
         puts "Error! Cannot find project #{@project} path in .repo/manifest.xml"
         exit -1
@@ -112,14 +87,14 @@ def switch_gerrit_repo
     old_project = $1
 
     # Now, switch old_project to project's git repo fetched from gerrit.
-    sh "mv #{WORKSPACE}/repo/#{old_project} #{WORKSPACE}/repo/#{old_project}.orig"
-    sh "mv #{WORKSPACE}/#{@project} #{WORKSPACE}/repo/#{old_project}"
+    Sh.run "mv #{WORKSPACE}/repo/#{old_project} #{WORKSPACE}/repo/#{old_project}.orig"
+    Sh.run "mv #{WORKSPACE}/#{@project} #{WORKSPACE}/repo/#{old_project}"
 end
 
 def pre_build_setup
-    sh "python #{WORKSPACE}/repo/third_party/fetch_packages.py 2>&1 | tee #{WORKSPACE}/third_party_fetch_packages.log"
+    Sh.run "python #{WORKSPACE}/repo/third_party/fetch_packages.py 2>&1 | tee #{WORKSPACE}/third_party_fetch_packages.log"
     if ! @use_public then
-        sh "python #{WORKSPACE}/repo/distro/third_party/fetch_packages.py 2>&1 | tee #{WORKSPACE}/distro_fetch_packages.log"
+        Sh.run "python #{WORKSPACE}/repo/distro/third_party/fetch_packages.py 2>&1 | tee #{WORKSPACE}/distro_fetch_packages.log"
     end
 end
 

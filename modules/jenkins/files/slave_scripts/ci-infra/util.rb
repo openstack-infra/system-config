@@ -69,7 +69,8 @@ class Sh
                 print "Retry #{i}/#{repeat}: " if debug
                 sleep(wait)
             end
-            puts "#{COLOR_CYAN}#{cmd}#{COLOR_RESET}: " if debug
+#           puts "#{COLOR_CYAN}#{cmd}#{COLOR_RESET}: " if debug
+            puts %{<b><font color="cyan">#{cmd}: </font></b>} if debug
             @@exit_code = 0
             if not dry_run? then
                 if cmd =~ /^cd\s+(.*)/ then
