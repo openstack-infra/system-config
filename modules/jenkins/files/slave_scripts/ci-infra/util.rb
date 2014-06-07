@@ -16,9 +16,13 @@ class Sh
         return !ENV['DRY_RUN'].nil? && ENV['DRY_RUN'].casecmp("true") == 0
     end
 
+    @@exit_code = 0
+    def Sh.exit_code
+        return @@exit_code
+    end
+
     def Sh.spawn(cmd, debug = true)
         output = ""
-        exit_code = 0
 
         begin
         PTY.spawn(cmd) { |stdin, stdout, pid|
@@ -30,51 +34,52 @@ class Sh
             }
             rescue Errno::EIO
             rescue PTY::ChildExited => e
-                exit_code = e.status.exitstatus
+                @@exit_code = e.status.exitstatus
             ensure
                 begin
                     Process.wait(pid)
-                    exit_code = $?.exitstatus
+                    @@exit_code = $?.exitstatus
                 rescue
                 end
             end
         }
         rescue PTY::ChildExited => e
-            exit_code = e.status.exitstatus
+            @@exit_code = e.status.exitstatus
 	end
 
-        return output, exit_code
+        return output, @@exit_code
     end
     private_class_method :spawn
 
     def Sh.run (cmd, ignore = @ignore_failed_exit_code, repeat = 1, wait = 1,
                 debug = true)
         output = ""
-        exit_code = 0
+        @@exit_code = 0
         1.upto(repeat) { |i|
             if i != 1 then
                 print "Retry #{i}/#{repeat}: " if debug
                 sleep(wait)
             end
             puts "#{COLOR_CYAN}#{cmd}#{COLOR_RESET}: " if debug
-            exit_code = 0
+            @@exit_code = 0
             if not dry_run? then
                 if cmd =~ /^cd\s+(.*)/ then
                     Dir.chdir($1)
                 else
 #                   output = `#{cmd}`
-                    output, exit_code = spawn(cmd, debug)
+                    output, @@exit_code = spawn(cmd, debug)
                 end
-                return output.chomp if exit_code == 0
+                return output.chomp if @@exit_code == 0
             end
         }
 
-        if exit_code != 0 then
+        if @@exit_code != 0 then
             if ignore then
                 puts "IGNORED: Comamnd #{cmd} failed with exit code #{$?}" if debug
+                @@exit_code = 0
             else
                 puts "ERROR EXIT: Comamnd #{cmd} failed with exit code #{$?}" if debug
-                exit exit_code
+                exit @@exit_code
             end
         end
         return output.chomp
