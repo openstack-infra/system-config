@@ -62,5 +62,5 @@
 - job-group:
     name: contrail-devstack-jobs
     jobs:
-      - 'ci-{name}-systest'
+      - 'ci-{name}-devstack'
 
