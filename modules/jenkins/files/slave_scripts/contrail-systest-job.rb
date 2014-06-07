@@ -159,7 +159,7 @@ def verify_contrail
 end
 
 def run_sanity
-    Sh.run "ssh #{@vms.first.vmname} /usr/local/jenkins/slave_scripts/ci-infra/contrail_fab run_sanity:quick_sanity"
+    Sh.run "ssh #{@vms.first.vmname} /usr/local/jenkins/slave_scripts/ci-infra/contrail_fab run_sanity:ci_sanity"
 
     # Get http hyper links to the logs and report summary files.
     puts Sh.run(%{ssh #{@vms.first.vmname} lynx --dump /root/logs/*/test_report.html | \grep \" http:\"})
