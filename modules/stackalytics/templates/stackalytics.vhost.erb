@@ -1,0 +1,30 @@
+<VirtualHost <%= scope.lookupvar("stackalytics::vhost_name") %>:80>
+  ServerAdmin <%= scope.lookupvar("stackalytics::serveradmin") %>
+
+  ErrorLog ${APACHE_LOG_DIR}/stackalytics-error.log
+
+  LogLevel warn
+
+  CustomLog ${APACHE_LOG_DIR}/stackalytics-access.log combined
+
+  Alias /static/ /usr/local/lib/python2.7/dist-packages/dashboard/static/
+
+  WSGIScriptReloading On
+  WSGIDaemonProcess stackalytics user=stackalytics group=stackalytics threads=5 python-path=/usr/local/lib/python2.7/dist-packages
+  WSGIScriptAlias / /usr/local/lib/python2.7/dist-packages/dashboard/web.wsgi
+
+  # The app.wsgi file has to be accessible by apache. It won't
+  # be visible to clients because of the DocumentRoot though.
+  <Directory /usr/local/lib/python2.7/dist-packages/stackalytics/>
+             WSGIProcessGroup stackalytics
+             WSGIApplicationGroup %{GLOBAL}
+             Order deny,allow
+             Allow from all
+  </Directory>
+
+  <Directory /usr/local/lib/python2.7/dist-packages/dashboard/static>
+    Order deny,allow
+    Allow from all
+  </Directory>
+
+</VirtualHost>
