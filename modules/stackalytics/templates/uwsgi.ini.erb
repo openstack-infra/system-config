@@ -1,0 +1,9 @@
+[uwsgi]
+uid = stackalytics
+gid = stackalytics
+socket = 127.0.0.1:3031
+pythonpath = /usr/local/lib/python2.7/dist-packages
+module = stackalytics.dashboard.web:app()
+processes = 4
+threads = 1
+stats = 127.0.0.1:9191
