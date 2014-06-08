@@ -100,7 +100,7 @@ def setup_contrail
 
         # Apply patch to setup.sh to retain apt.conf proxy settings.
         Sh.run("ssh #{vm.vmname} /opt/contrail/contrail_packages/setup.sh " +
-               "> #{ENV['WORKSPACE']}/#{vm.vmname}_setup.sh.log", true)
+               "2>&1 > #{ENV['WORKSPACE']}/#{vm.vmname}_setup.sh.log", true)
     }
 
 end
