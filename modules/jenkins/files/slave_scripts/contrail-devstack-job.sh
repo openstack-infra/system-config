@@ -40,6 +40,8 @@ function run_devstack() {
     echo CONTRAIL_REPO_SYNC_SKIP=TRUE >> $DEVSTACK_WORKSPACE/localrc
     echo CONTRAIL_SRC=$WORKSPACE/repo >> $DEVSTACK_WORKSPACE/localrc
 
+    rm -rf /opt/stack/contrail
+    ln -sf $WORKSPACE/repo /opt/stack/contrail
     chown -R $USER.$USER $WORKSPACE
 
     rm -rf /etc/contrail
