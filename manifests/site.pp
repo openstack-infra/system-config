@@ -657,4 +657,13 @@ node 'openstackid-dev.openstack.org' {
   }
 }
 
+# A machine to run Storyboard
+# Node-OS: precise
+node 'stackalytics.openstack.org' {
+  class { 'openstack_project::stackalytics':
+    stackalytics_ssh_private_key => hiera('stackalytics_ssh_private_key', 'XXX'),
+    sysadmins                    => hiera('sysadmins', []),
+  }
+}
+
 # vim:sw=2:ts=2:expandtab:textwidth=79
