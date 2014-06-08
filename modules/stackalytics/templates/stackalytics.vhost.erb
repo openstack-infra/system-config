@@ -1,0 +1,19 @@
+<VirtualHost <%= scope.lookupvar("stackalytics::vhost_name") %>:80>
+  ServerAdmin <%= scope.lookupvar("stackalytics::serveradmin") %>
+
+  ErrorLog ${APACHE_LOG_DIR}/stackalytics-error.log
+
+  LogLevel warn
+
+  CustomLog ${APACHE_LOG_DIR}/stackalytics-access.log combined
+
+  <Directory /usr/local/lib/python2.7/dist-packages/stackalytics/dashboard>
+    Order deny,allow
+    Allow from all
+  </Directory>
+
+  ProxyPass /static !
+  ProxyPass / uwsgi://127.0.0.1:3031/ retry=0
+  ProxyPassReverse / uwsgi://127.0.0.1:3031/
+
+</VirtualHost>
