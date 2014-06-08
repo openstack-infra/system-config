@@ -24,6 +24,8 @@ function run_devstack() {
     set +e
     set -x
 
+    apt-get --fix-missing update
+
     rm -rf $DEVSTACK_WORKSPACE
     mkdir -p $DEVSTACK_WORKSPACE
     cd $DEVSTACK_WORKSPACE
