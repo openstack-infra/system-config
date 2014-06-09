@@ -51,7 +51,7 @@ function run_devstack() {
 
     mkdir -p /opt/stack/neutron
     cp /home/jenkins/tmp/cache/jenkins/third_party/node-v0.8.15.tar.gz /opt/stack/neutron/.
-    chown -R $USER /opt/stack/
+    chown -R $USER.$USER /opt/stack/
     su -c $DEVSTACK_WORKSPACE/stack.sh $USER
     /usr/bin/contrail-status
     /usr/bin/openstack-status
