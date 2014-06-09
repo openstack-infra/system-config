@@ -21,12 +21,16 @@
           export PROJECTS="stackforge/python-designateclient $PROJECTS"
 
           function pre_test_hook {
-              # Install designate devstack integration
-              DESIGNATE_BASE=/opt/stack/new/designate
-              DEVSTACK_BASE=/opt/stack/new/devstack
-              cp -R $DESIGNATE_BASE/contrib/devstack/* $DEVSTACK_BASE/
+              cd /opt/stack/new/designate/contrib/devstack
+              ./pre_test_hook.sh
           }
           export -f pre_test_hook
+
+          function post_test_hook {
+              cd /opt/stack/new/designate/contrib/devstack
+              ./post_test_hook.sh
+          }
+          export -f post_test_hook
 
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
