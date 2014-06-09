@@ -50,9 +50,7 @@
           export PROJECT_NAME={name}
           export WORKSPACE=$PWD
 
-          /usr/bin/ci_setup.sh
-          ruby /usr/local/jenkins/slave_scripts/contrail-git-prep.rb
-          /usr/local/jenkins/slave_scripts/contrail-devstack-job.sh
+          ruby /usr/local/jenkins/slave_scripts/contrail-devstack-job.rb
 
 - job-group:
     name: contrail-unittest-jobs
