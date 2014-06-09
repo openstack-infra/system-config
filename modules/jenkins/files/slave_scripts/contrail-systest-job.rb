@@ -96,7 +96,11 @@ def setup_contrail
     @vms.each { |vm|
 #       Sh.run "ssh root@#{vm.vmname} apt-get update"
         Sh.run("scp #{@image} root@#{vm.vmname}:#{dest_image}", false, 50, 10)
-        Sh.run "ssh #{vm.vmname} dpkg -i #{dest_image}"
+
+        Sh.run(%{ssh #{vm.vmname} "dpkg -i #{dest_image} } +
+               %{&> /tmp/#{vm.vmname}_dpkg_i.log" })
+        Sh.run(%{scp #{vm.vmname}:/tmp/#{vm.vmname}_dpkg_i.log } +
+               %{#{ENV['WORKSPACE']}/.})
 
         # Apply patch to setup.sh to retain apt.conf proxy settings.
         # Redirect this to a file, apparently dpkg-scanpackages warnings
@@ -104,7 +108,7 @@ def setup_contrail
         Sh.run(%{ssh #{vm.vmname} "/opt/contrail/contrail_packages/setup.sh } +
                %{&> /tmp/#{vm.vmname}_setup.sh.log"}, true)
         Sh.run(%{scp #{vm.vmname}:/tmp/#{vm.vmname}_setup.sh.log } +
-               %{#{ENV['WORKSPACE']}/#{vm.vmname}_setup.sh.log"}, true)
+               %{#{ENV['WORKSPACE']}/.})
     }
 
 end
@@ -112,10 +116,16 @@ end
 def install_contrail
     vm = @vms.first
     Sh.run("scp #{@topo_file} #{vm.vmname}:/opt/contrail/utils/fabfile/testbeds/testbed.py", false, 20, 4)
-    Sh.run "ssh #{vm.vmname} /usr/local/jenkins/slave_scripts/ci-infra/contrail_fab install_contrail"
+
+    Sh.run %{ssh #{vm.vmname} "/usr/local/jenkins/slave_scripts/ci-infra/contrail_fab install_contrail &> /tmp/#{vm.vmname}_install_contrail.log" }
+    Sh.run(%{scp #{vm.vmname}:/tmp/#{vm.vmname}_install_contrail.log } +
+           %{#{ENV['WORKSPACE']}/.})
+
     Sh.run "echo \"perl -ni -e 's/JVM_OPTS -Xss\\d+/JVM_OPTS -Xss512/g; print \\$_;' /etc/cassandra/cassandra-env.sh\" | ssh -t #{vm.vmname} \$(< /dev/fd/0)"
 
-    Sh.run "ssh #{vm.vmname} /usr/local/jenkins/slave_scripts/ci-infra/contrail_fab setup_all"
+    Sh.run %{ssh #{vm.vmname} "/usr/local/jenkins/slave_scripts/ci-infra/contrail_fab setup_all &> /tmp/#{vm.vmname}_setup_all.log"}
+    Sh.run(%{scp #{vm.vmname}:/tmp/#{vm.vmname}_setup_all.log } +
+           %{#{ENV['WORKSPACE']}/.})
 
     # Reduce number of nova-api and nova-conductors and fix scheduler for
     # even distribution of instances across all compute nodes.
@@ -175,7 +185,7 @@ def run_sanity
 end
 
 def main
-#   build_contrail_packages
+    build_contrail_packages
     create_vms(6)
     setup_contrail
     install_contrail
