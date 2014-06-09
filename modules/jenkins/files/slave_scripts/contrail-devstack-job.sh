@@ -5,6 +5,8 @@ set -o pipefail
 set +e
 set -x
 
+export WORKSPACE=$PWD
+export USER=jenkins
 export CONTRAIL_REPO_SYNC_SKIP=TRUE
 export PHYSICAL_INTERFACE=eth0
 export CONTRAIL_SRC=$WORKSPACE/repo
