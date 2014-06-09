@@ -3721,6 +3721,24 @@ projects:
     gate:
       - noop
 
+  - name: stackforge/osprofiler
+    check:
+      - gate-osprofiler-pep8
+      - gate-osprofiler-python26
+      - gate-osprofiler-python27
+      - gate-osprofiler-python33
+    gate:
+      - gate-osprofiler-pep8
+      - gate-osprofiler-python26
+      - gate-osprofiler-python27
+      - gate-osprofiler-python33
+    post:
+      - osprofiler-branch-tarball
+    pre-release:
+      - osprofiler-tarball
+    release:
+      - osprofiler-tarball
+
   - name: stackforge/ospurge
     check:
       - noop
