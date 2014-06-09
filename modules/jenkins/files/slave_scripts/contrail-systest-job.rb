@@ -159,14 +159,13 @@ def verify_contrail
 end
 
 def run_sanity
-    Sh.run "ssh #{@vms.first.vmname} /usr/local/jenkins/slave_scripts/ci-infra/contrail_fab run_sanity:ci_sanity"
+    Sh.run("ssh #{@vms.first.vmname} /usr/local/jenkins/slave_scripts/ci-infra/contrail_fab run_sanity:ci_sanity", true)
 
     # Copy sanity log files, as the sub-slave VMs will go away.
-    Sh.run("scp -r #{@vms.first.vmname}:/root/logs #{ENV['WORKSPACE']}/.",
-           false, 50, 10)
+    Sh.run("scp -r #{@vms.first.vmname}:/root/logs #{ENV['WORKSPACE']}/.", true)
 
     # Get http hyper links to the logs and report summary files.
-    Sh.run("lynx --dump #{ENV['WORKSPACE']}/logs/*/test_report.html")
+    Sh.run("lynx --dump #{ENV['WORKSPACE']}/logs/*/test_report.html", true)
 end
 
 def main
