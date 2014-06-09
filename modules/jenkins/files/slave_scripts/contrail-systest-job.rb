@@ -4,7 +4,6 @@ $LOAD_PATH.unshift "/usr/local/jenkins/slave_scripts/",
                    "/usr/local/jenkins/slave_scripts/ci-infra"
 
 require 'util'
-require 'launch_vms'
 
 Util.ci_setup
 

@@ -129,7 +129,9 @@ class Vm
                        "--meta slave-executors=#{@@options.executors} " +
                        "--meta slave-master=localhost"
 
-            Vm.create_internal("#{@@options.name}-#{floatingip}", floatingip, metadata)
+            vmname = "#{@@options.name}-#{floatingip}"
+            hostip = Vm.create_internal(vmname, floatingip, metadata)
+            @@vms.push Vm.new(vmname, hostip)
         }
     end
 

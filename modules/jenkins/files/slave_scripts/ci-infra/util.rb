@@ -5,6 +5,7 @@ require 'pty'
 require 'optparse'
 require 'optparse/time'
 require 'ostruct'
+require 'launch_vms'
 
 COLOR_CYAN        = "\e[0;36m"
 COLOR_RESET       = "\e[m"

@@ -5,14 +5,6 @@ set -o pipefail
 set +e
 set -x
 
-export WORKSPACE=$PWD
-SKIP_JOBS=$WORKSPACE/skip_jobs
-if [ -f $SKIP_JOBS ]; then
-    echo Jobs skipped due to jenkins.opencontrail.org:/root/ci-test/skip_jobs
-    exit
-fi
-
-export USER=jenkins
 export CONTRAIL_REPO_SYNC_SKIP=TRUE
 export PHYSICAL_INTERFACE=eth0
 export CONTRAIL_SRC=$WORKSPACE/repo
