@@ -129,10 +129,17 @@ class Vm
 end
 
 class Util
+    def self.ci_default_branch
+        return ENV['ZUUL_BRANCH'] unless ENV['ZUUL_BRANCH'].nil?
+
+        return (!ENV['JOB_NAME'].nil? and
+                ENV['JOB_NAME'] == "contrail-systest-job") ? "R1.05" : "master"
+    end
+
     def self.ci_setup
-        ENV['WORKSPACE']=ENV['PWD'] if ENV['WORKSPACE'].nil?
-        ENV['USER'] = "jenkins" if ENV['USER'].nil? or ENV['USER'].empty?
-        ENV['ZUUL_BRANCH'] ||= "R1.05"
+        ENV['WORKSPACE'] ||= ENV['PWD']
+        ENV['USER'] ||= "jenkins"
+        ENV['ZUUL_BRANCH'] ||= Util.ci_default_branch
         pp ENV
         if File.file? "#{ENV['WORKSPACE']}/skip_jobs" then
             puts "Jobs skipped due to jenkins.opencontrail.org:/root/ci-test/skip_jobs"

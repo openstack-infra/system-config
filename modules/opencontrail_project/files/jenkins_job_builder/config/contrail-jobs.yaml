@@ -9,7 +9,9 @@
       - shell: |
           #!/bin/bash -xe
           export USER=jenkins
-          export JOB_NAME={name}
+          export JOB_NAME="contrail-unittest-job"
+          export PROJECT_NAME={name}
+          export WORKSPACE=$PWD
           /usr/bin/ci_setup.sh
           ruby /usr/local/jenkins/slave_scripts/contrail-git-prep.rb
           ruby /usr/local/jenkins/slave_scripts/contrail-unittests-job.sh
@@ -25,7 +27,10 @@
       - shell: |
           #!/bin/bash -xe
           export USER=jenkins
-          export JOB_NAME={name}
+          export JOB_NAME="contrail-systest-job"
+          export PROJECT_NAME={name}
+          export WORKSPACE=$PWD
+
           /usr/bin/ci_setup.sh
           ruby /usr/local/jenkins/slave_scripts/contrail-git-prep.rb use_private
           ruby /usr/local/jenkins/slave_scripts/contrail-systest-job.rb
@@ -41,7 +46,10 @@
       - shell: |
           #!/bin/bash -xe
           export USER=jenkins
-          export JOB_NAME={name}
+          export JOB_NAME="contrail-devstack-job"
+          export PROJECT_NAME={name}
+          export WORKSPACE=$PWD
+
           /usr/bin/ci_setup.sh
           ruby /usr/local/jenkins/slave_scripts/contrail-git-prep.rb
           /usr/local/jenkins/slave_scripts/contrail-devstack-job.sh

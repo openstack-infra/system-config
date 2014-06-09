@@ -52,7 +52,7 @@ def setup_contrail_repo(use_public)
     Sh.run "cd #{WORKSPACE}/repo"
 
     # Initialize a repo. TODO Do not hard code manifest.xml file path
-    branch = ENV['ZUUL_BRANCH'] || "R1.05"
+    branch = ENV['ZUUL_BRANCH'] || Util.ci_default_branch
 
     # Fix hardcoded ubuntu to the flavor from jenkins slave label
     # e.g. ENV['NODE_LABELS' = "ci-10.84.35.174 juniper-tests swarm"
