@@ -3,10 +3,7 @@
     node: juniper-tests
 
     wrappers:
-      - timeout:
-          timeout: 600
-          fail: true
-      - timestamps
+      - contrail-jobs-wrapper
 
     builders:
       - shell: |
@@ -22,10 +19,7 @@
     node: juniper-tests
 
     wrappers:
-      - timeout:
-          timeout: 600
-          fail: true
-      - timestamps
+      - contrail-jobs-wrapper
 
     builders:
       - shell: |
@@ -39,6 +33,9 @@
 - job-template:
     name: 'ci-{name}-devstack'
     node: 'devstack-tests'
+
+    wrappers:
+      - contrail-jobs-wrapper
 
     builders:
       - shell: |

@@ -1,3 +1,12 @@
+- wrapper:
+    name: contrail-jobs-wrapper
+    wrappers:
+      - timeout:
+          timeout: 600
+          fail: true
+      - timestamps
+      - ansicolor
+
 - builder:
     name: gerrit-git-prep
     builders:
