@@ -601,9 +601,13 @@
           r="$r tempest.scenario.test_baremetal_basic_ops"
           export DEVSTACK_GATE_TEMPEST_REGEX="$r"
 
-          # pull in libvirt /w ovs support from ubuntu cloud-archive.
-          sudo add-apt-repository cloud-archive:icehouse
-          sudo apt-get update
+          if $(grep -Eqs 'Ubuntu 12.04' /etc/lsb-release); then
+              # pull in libvirt /w ovs support from ubuntu cloud-archive for
+              # Precise.
+              sudo apt-get update
+              sudo add-apt-repository cloud-archive:icehouse
+              sudo apt-get update
+          fi
 
           # prevent sshd from jumping to the ovs bridge on Precise instances.
           IP=$(ip addr show eth0 | grep 'inet ' | sed 's/inet \([0-9\.]*\)\/.*/\1/' | tr -d ' ')
