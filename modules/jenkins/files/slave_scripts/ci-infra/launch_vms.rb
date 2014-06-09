@@ -68,6 +68,8 @@ class Vm
     end
 
     def send_keepalive
+        return
+
         # VMs self-destruct themselves unless we periodically ping.
         @thread = Thread.new {
             kfile = "/root/#{@vmname}-jenkins-keepalive.log"

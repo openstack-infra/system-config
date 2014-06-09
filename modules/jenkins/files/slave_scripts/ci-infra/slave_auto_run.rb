@@ -46,6 +46,11 @@ def slave
 end
 
 def subslave
+    loop do
+        sleep(10)
+    end
+    return
+
     # Read the time object, periodically updated by the master.
     last_updated = Time.now
 
