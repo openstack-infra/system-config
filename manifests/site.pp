@@ -13,6 +13,7 @@ node default {
 #
 node 'review.openstack.org' {
   class { 'openstack_project::review':
+    github_username                     => 'openstack-gerrit',
     github_oauth_token                  => hiera('gerrit_github_token', 'XXX'),
     github_project_username             => hiera('github_project_username', 'username'),
     github_project_password             => hiera('github_project_password', 'XXX'),
@@ -38,6 +39,7 @@ node 'review.openstack.org' {
     lp_sync_consumer_key                => hiera('gerrit_lp_consumer_key', 'XXX'),
     lp_sync_token                       => hiera('gerrit_lp_access_token', 'XXX'),
     lp_sync_secret                      => hiera('gerrit_lp_access_secret', 'XXX'),
+    contactstore                        => true,
     contactstore_appsec                 => hiera('gerrit_contactstore_appsec', 'XXX'),
     contactstore_pubkey                 => hiera('gerrit_contactstore_pubkey', 'XXX'),
     sysadmins                           => hiera('sysadmins', ['admins']),
@@ -46,8 +48,46 @@ node 'review.openstack.org' {
   }
 }
 
+node 'review-security.openstack.org' {
+  class { 'openstack_project::review_security':
+    github_username                     => '',
+    github_oauth_token                  => '',
+    github_project_username             => '',
+    github_project_password             => '',
+    mysql_host                          => hiera('gerrit_security_mysql_host', 'localhost'),
+    mysql_password                      => hiera('gerrit_security_mysql_password', 'XXX'),
+    email_private_key                   => hiera('gerrit_security_email_private_key', 'XXX'),
+    gerritbot_password                  => '',
+    gerritbot_ssh_rsa_key_contents      => '',
+    gerritbot_ssh_rsa_pubkey_contents   => '',
+    ssl_cert_file_contents              => hiera('gerrit_security_ssl_cert_file_contents', 'XXX'),
+    ssl_key_file_contents               => hiera('gerrit_security_ssl_key_file_contents', 'XXX'),
+    ssl_chain_file_contents             => hiera('gerrit_security_ssl_chain_file_contents', 'XXX'),
+    ssh_dsa_key_contents                => hiera('gerrit_security_ssh_dsa_key_contents', 'XXX'),
+    ssh_dsa_pubkey_contents             => hiera('gerrit_security_ssh_dsa_pubkey_contents', 'XXX'),
+    ssh_rsa_key_contents                => hiera('gerrit_security_ssh_rsa_key_contents', 'XXX'),
+    ssh_rsa_pubkey_contents             => hiera('gerrit_security_ssh_rsa_pubkey_contents', 'XXX'),
+    ssh_project_rsa_key_contents        => hiera('gerrit_security_project_ssh_rsa_key_contents', 'XXX'),
+    ssh_project_rsa_pubkey_contents     => hiera('gerrit_security_project_ssh_rsa_pubkey_contents', 'XXX'),
+    ssh_welcome_rsa_key_contents        => '',
+    ssh_welcome_rsa_pubkey_contents     => '',
+    ssh_replication_rsa_key_contents    => hiera('gerrit_replication_ssh_rsa_key_contents', 'XXX'),
+    ssh_replication_rsa_pubkey_contents => hiera('gerrit_replication_ssh_rsa_pubkey_contents', 'XXX'),
+    lp_sync_consumer_key                => '',
+    lp_sync_token                       => '',
+    lp_sync_secret                      => '',
+    contactstore                        => false,
+    contactstore_appsec                 => '',
+    contactstore_pubkey                 => '',
+    sysadmins                           => hiera('sysadmins', ['admins']),
+    swift_username                      => '',
+    swift_password                      => '',
+  }
+}
+
 node 'review-dev.openstack.org' {
   class { 'openstack_project::review_dev':
+    github_username                 => 'openstack-gerrit-dev',
     github_oauth_token              => hiera('gerrit_dev_github_token', 'XXX'),
     github_project_username         => hiera('github_dev_project_username', 'username'),
     github_project_password         => hiera('github_dev_project_password', 'XXX'),
@@ -65,6 +105,7 @@ node 'review-dev.openstack.org' {
     lp_sync_consumer_key            => hiera('gerrit_dev_lp_consumer_key', 'XXX'),
     lp_sync_token                   => hiera('gerrit_dev_lp_access_token', 'XXX'),
     lp_sync_secret                  => hiera('gerrit_dev_lp_access_secret', 'XXX'),
+    contactstore                    => false,
     sysadmins                       => hiera('sysadmins', ['admins']),
   }
 }
