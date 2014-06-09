@@ -1,4 +1,4 @@
-# == Class: openstack_project::review
+# == Class: openstack_project::review_security
 
 # Current thinking on Gerrit tuning parameters:
 
@@ -29,7 +29,7 @@
 # 12:08 <@spearce> to a method that accepts milliseconds
 # 12:09 <@spearce> so. you get 5 milliseconds before aborting
 # thus, set it to 5000minutes until the bug is fixed.
-class openstack_project::review (
+class openstack_project::review_security (
   $github_username = '',
   # Created by running jeepyb ?
   $github_oauth_token = '',
@@ -118,7 +118,7 @@ class openstack_project::review (
     projects_file                       =>
       'puppet:///modules/openstack_project/review.projects.yaml',
     projects_config                     =>
-      'openstack_project/review.projects.ini.erb',
+      'openstack_project/review-security.projects.ini.erb',
     github_username                     => $github_username,
     github_oauth_token                  => $github_oauth_token,
     github_project_username             => $github_project_username,
@@ -129,15 +129,8 @@ class openstack_project::review (
     sysadmins                           => $sysadmins,
     swift_username                      => $swift_username,
     swift_password                      => $swift_password,
+    for_security_reviews                => true,
     replication                         => [
-      {
-        name                 => 'github',
-        url                  => 'git@github.com:',
-        authGroup            => 'Anonymous Users',
-        replicationDelay     => '1',
-        replicatePermissions => false,
-        mirror               => true,
-      },
       {
         name                 => 'local',
         url                  => 'file:///opt/lib/git/',
@@ -145,82 +138,7 @@ class openstack_project::review (
         threads              => '4',
         mirror               => true,
       },
-      {
-        name                 => 'git01',
-        url                  => 'cgit@git01.openstack.org:/var/lib/git/',
-        replicationDelay     => '1',
-        threads              => '4',
-        mirror               => true,
-      },
-      {
-        name                 => 'git02',
-        url                  => 'cgit@git02.openstack.org:/var/lib/git/',
-        replicationDelay     => '1',
-        threads              => '4',
-        mirror               => true,
-      },
-      {
-        name                 => 'git03',
-        url                  => 'cgit@git03.openstack.org:/var/lib/git/',
-        replicationDelay     => '1',
-        threads              => '4',
-        mirror               => true,
-      },
-      {
-        name                 => 'git04',
-        url                  => 'cgit@git04.openstack.org:/var/lib/git/',
-        replicationDelay     => '1',
-        threads              => '4',
-        mirror               => true,
-      },
-      {
-        name                 => 'git05',
-        url                  => 'cgit@git05.openstack.org:/var/lib/git/',
-        replicationDelay     => '1',
-        threads              => '4',
-        mirror               => true,
-      },
-      {
-        name                 => 'review-security',
-        url                  => 'gerrit2@review-security.openstack.org:review_site/git/',
-        replicationDelay     => '1',
-        threads              => '4',
-        mirror               => true,
-      },
     ],
-  }
-
-  class { 'gerritbot':
-    nick                    => 'openstackgerrit',
-    password                => $gerritbot_password,
-    server                  => 'irc.freenode.net',
-    user                    => 'gerritbot',
-    vhost_name              => $::fqdn,
-    ssh_rsa_key_contents    => $gerritbot_ssh_rsa_key_contents,
-    ssh_rsa_pubkey_contents => $gerritbot_ssh_rsa_pubkey_contents,
-  }
-  class { 'gerrit::remotes':
-    ensure => absent,
-  }
-
-  package { 'python-launchpadlib':
-    ensure => present,
-  }
-  file { '/home/gerrit2/.launchpadlib':
-    ensure  => directory,
-    owner   => 'gerrit2',
-    group   => 'gerrit2',
-    mode    => '0775',
-    require => User['gerrit2'],
-  }
-  file { '/home/gerrit2/.launchpadlib/creds':
-    ensure  => present,
-    owner   => 'gerrit2',
-    group   => 'gerrit2',
-    mode    => '0600',
-    content => template('openstack_project/gerrit_lp_creds.erb'),
-    replace => true,
-    require => User['gerrit2'],
   }
 
   include bup
