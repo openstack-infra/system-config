@@ -1,13 +1,14 @@
 # == Class: openstack_project::review_dev
 #
 class openstack_project::review_dev (
+  $github_username = '',
   $github_oauth_token = '',
   $github_project_username = '',
   $github_project_password = '',
   $mysql_host = '',
   $mysql_password = '',
   $email_private_key = '',
-  $contactstore = true,
+  $contactstore = '',
   $contactstore_appsec = '',
   $contactstore_pubkey = '',
   $ssh_dsa_key_contents = '',
@@ -52,7 +53,7 @@ class openstack_project::review_dev (
       'puppet:///modules/openstack_project/review-dev.projects.yaml',
     projects_config                 =>
       'openstack_project/review-dev.projects.ini.erb',
-    github_username                 => 'openstack-gerrit-dev',
+    github_username                 => $github_username,
     github_oauth_token              => $github_oauth_token,
     github_project_username         => $github_project_username,
     github_project_password         => $github_project_password,
