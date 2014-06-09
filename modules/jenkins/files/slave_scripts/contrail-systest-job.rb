@@ -99,8 +99,10 @@ def setup_contrail
         Sh.run "ssh #{vm.vmname} dpkg -i #{dest_image}"
 
         # Apply patch to setup.sh to retain apt.conf proxy settings.
+        # Redirect this to a file, apparently dpkg-scanpackages warnings
+        # crashes ruby!
         Sh.run("ssh #{vm.vmname} /opt/contrail/contrail_packages/setup.sh " +
-               "2>&1 > #{ENV['WORKSPACE']}/#{vm.vmname}_setup.sh.log", true)
+               "&> #{ENV['WORKSPACE']}/#{vm.vmname}_setup.sh.log", true)
     }
 
 end
