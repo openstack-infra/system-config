@@ -37,6 +37,7 @@ function run_devstack() {
     cp $DEVSTACK_WORKSPACE/contrail/localrc-single $DEVSTACK_WORKSPACE/localrc
     perl -ni -e 's/PHYSICAL_INTERFACE=.*/PHYSICAL_INTERFACE=eth0/g; print $_;' $DEVSTACK_WORKSPACE/localrc
     perl -ni -e 's/.*GIT_BASE=.*/GIT_BASE=https:\/\/git.openstack.org/g; print $_;' $DEVSTACK_WORKSPACE/localrc
+    perl -ni -e 's/.*CONTRAIL_REPO=.*/CONTRAIL_REPO=devstack.xml; print $_;' $DEVSTACK_WORKSPACE/localrc
     echo CONTRAIL_REPO_SYNC_SKIP=TRUE >> $DEVSTACK_WORKSPACE/localrc
     echo CONTRAIL_SRC=$WORKSPACE/repo >> $DEVSTACK_WORKSPACE/localrc
 
