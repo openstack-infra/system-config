@@ -127,6 +127,7 @@ class openstack_project::cacti (
     'puppetdb.openstack.org',
     'pypi.openstack.org',
     'review.openstack.org',
+    'security-review.openstack.org',
     'review-dev.openstack.org',
     'static.openstack.org',
     'wiki.openstack.org',
