@@ -9,14 +9,18 @@ require 'util'
 
 Util.ci_setup
 
-# Create a new slave node with floating ip!
+# Vm.options.labels = "devstack-subslave"
+# Vm.options.name = "ci-oc-devstack-subslave"
+# Vm.create_slaves
 
-Vm.options.labels = "devstack-subslave"
-Vm.options.name = "ci-oc-devstack-subslave"
-Vm.create_slaves
+# Create a new slave node with floating ip!
+Vm.create_subslaves(1)
+
+@vms = Vm.all_vms
+@vms = Vm.init_all if @vms.nil? or @vms.empty?
 
 # Wait for the the VM to come up and respond.
-Sh.run("ssh #{Vm.all_vms.first.hostip} uptime", false, 1000, 10)
+Sh.run("ssh #{@vms.first.hostip} uptime", false, 1000, 10)
 
 # Setup source
 Sh.run "ssh #{Vm.all_vms.first.hostip} /usr/bin/ci_setup.sh"
