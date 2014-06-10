@@ -164,11 +164,12 @@ def run_sanity
     Sh.run("scp -r #{@vms.first.vmname}:/root/logs #{ENV['WORKSPACE']}/.", true)
 
     # Get http hyper links to the logs and report summary files.
-    Sh.run("lynx --dump #{ENV['WORKSPACE']}/logs/*/test_report.html", true)
+    puts Sh.rrun("lynx --dump #{ENV['WORKSPACE']}/logs/*/test_report.html",
+                 true)
 end
 
 def main
-    build_contrail_packages
+#   build_contrail_packages
     create_vms(6)
     setup_contrail
     install_contrail
