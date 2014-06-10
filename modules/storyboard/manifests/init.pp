@@ -69,7 +69,7 @@ class storyboard (
     path        => '/usr/local/bin:/usr/bin:/bin/',
     refreshonly => true,
     subscribe   => Vcsrepo['/opt/storyboard'],
-    notify      => Exec['storyboard-reload'],
+    notify      => Service['httpd'],
     require     => Class['pip'],
   }
 
@@ -82,7 +82,7 @@ class storyboard (
     owner   => 'storyboard',
     mode    => '0400',
     content => template('storyboard/storyboard.conf.erb'),
-    notify  => Exec['storyboard-reload'],
+    notify  => Service['httpd'],
     require => [
       File['/etc/storyboard'],
       User['storyboard'],
@@ -149,12 +149,6 @@ class storyboard (
     ensure  => directory,
     owner   => 'storyboard',
     require => User['storyboard'],
-  }
-
-  exec { 'storyboard-reload':
-    command     => 'touch /usr/local/lib/python2.7/dist-packages/storyboard/api/app.wsgi',
-    path        => '/usr/local/bin:/usr/bin:/bin/',
-    refreshonly => true,
   }
 
   # START storyboard-webclient
