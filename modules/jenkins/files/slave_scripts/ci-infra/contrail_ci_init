@@ -34,7 +34,7 @@ if [ "$SLAVE_MASTER" != "localhost" ]; then
     echo "$proxy" >> /etc/contrail_bashrc
 
     # no_proxy for the 192 subnet
-    echo "no_proxy=localhost,127.0.0.1,.localdomain.com"
+    echo "no_proxy=localhost,127.0.0.1,.localdomain.com" >> /etc/contrail_bashrc
 
     # Set proxy for apt as well, if it is not already set.
     apt_proxy="Acquire::http::Proxy \"http://$SLAVE_MASTER:3128\";"
