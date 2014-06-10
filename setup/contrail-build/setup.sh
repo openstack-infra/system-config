@@ -81,6 +81,7 @@ echo "options kvm-intel nested=1" > /etc/modprobe.d/kvm-intel.conf
 }
 
 function setup_jenkins_slave_image () {
+set -ex
 instance=$1
 image=$2
 if [ -z $image ]; then
