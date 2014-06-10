@@ -22,7 +22,9 @@ Vm.create_subslaves(1)
 # Wait for the the VM to come up and respond.
 # Sh.run("ssh #{@vms.first.hostip} uptime", false, 1000, 10)
 
-envs = "#{USER=ENV['USER']} #{WORKSPACE=ENV['WORKSPACE']}"
+envs = "USER=#{ENV['USER']} WORKSPACE=#{ENV['WORKSPACE']}"
+
+
 Sh.run "ssh #{Vm.all_vms.first.hostip} #{envs} /usr/bin/ci_setup.sh"
 Sh.run "ssh #{Vm.all_vms.first.hostip} #{envs} ruby /usr/local/jenkins/slave_scripts/contrail-git-prep.rb"
 Sh.run "ssh #{Vm.all_vms.first.hostip} #{envs} /usr/local/jenkins/slave_scripts/contrail-devstack-job.sh"
