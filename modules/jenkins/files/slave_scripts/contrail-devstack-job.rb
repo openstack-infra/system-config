@@ -21,7 +21,7 @@ Vm.create_subslaves(1)
 
 # Wait for the the VM to come up and respond.
 Sh.run("ssh #{@vms.first.hostip} uptime", false, 1000, 10)
-
+sleep 60
 envs = "USER=#{ENV['USER']}"
 envs += " WORKSPACE=#{ENV['WORKSPACE']}"
 envs += " JOB_NAME=#{ENV['JOB_NAME']}"
