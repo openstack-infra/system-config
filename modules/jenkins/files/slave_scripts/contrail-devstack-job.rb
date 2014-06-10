@@ -20,7 +20,7 @@ Vm.create_subslaves(1)
 @vms = Vm.init_all if @vms.nil? or @vms.empty?
 
 # Wait for the the VM to come up and respond.
-# Sh.run("ssh #{@vms.first.hostip} uptime", false, 1000, 10)
+Sh.run("ssh #{@vms.first.hostip} uptime", false, 1000, 10)
 
 envs = "USER=#{ENV['USER']}"
 envs += " WORKSPACE=#{ENV['WORKSPACE']}"
