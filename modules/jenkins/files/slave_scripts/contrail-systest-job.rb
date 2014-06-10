@@ -164,7 +164,8 @@ def run_sanity
     Sh.run("scp -r #{@vms.first.vmname}:/root/logs #{ENV['WORKSPACE']}/.", true)
 
     # Get http hyper links to the logs and report summary files.
-    Sh.run("lynx --dump #{ENV['WORKSPACE']}/logs/*/test_report.html", true)
+    puts Sh.rrun("lynx --dump #{ENV['WORKSPACE']}/logs/*/test_report.html",
+                 true)
 end
 
 def main
