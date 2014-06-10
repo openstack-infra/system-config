@@ -80,7 +80,7 @@ def setup_contrail
     if @image.nil? then
 #       @image = "/root/contrail-install-packages_1.05-5780~havana_all.deb"
 #       ENV['ZUUL_BRANCH'] = "R1.05"
-        @image = "contrail-install-packages_1.10main-9703~havana_all.deb"
+        @image = "/root/contrail-install-packages_1.10main-9703~havana_all.deb"
         Sh.run("scp jenkins.opencontrail.org:#{@image} #{@image}") \
             unless File.file? @image
     end
