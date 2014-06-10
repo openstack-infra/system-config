@@ -101,6 +101,7 @@ def bootstrap_server(server, admin_pass, key, cert, environment, name,
     ssh_client.ssh("mkdir -p /var/lib/puppet/ssl/private_keys")
     ssh_client.ssh("mkdir -p /var/lib/puppet/ssl/public_keys")
     ssh_client.ssh("chown -R puppet:root /var/lib/puppet/ssl")
+    ssh_client.ssh("chown -R puppet:puppet /var/lib/puppet/ssl/private_keys")
     ssh_client.ssh("chmod 0771 /var/lib/puppet/ssl")
     ssh_client.ssh("chmod 0755 /var/lib/puppet/ssl/certs")
     ssh_client.ssh("chmod 0750 /var/lib/puppet/ssl/private_keys")
@@ -188,7 +189,7 @@ def main():
     parser.add_argument("--flavor", dest="flavor", default='1GB',
                         help="name (or substring) of flavor")
     parser.add_argument("--image", dest="image",
-                        default="Ubuntu 12.04 LTS (Precise Pangolin)",
+                        default="Ubuntu 12.04 LTS (Precise Pangolin) (PVHVM)",
                         help="image name")
     parser.add_argument("--environment", dest="environment",
                         default="production",
