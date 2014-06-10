@@ -25,9 +25,9 @@ Vm.create_subslaves(1)
 envs = "USER=#{ENV['USER']} WORKSPACE=#{ENV['WORKSPACE']}"
 
 Sh.run "ssh #{Vm.all_vms.first.hostip} #{envs} mkdir -p #{ENV['WORKSPACE']}"
-Sh.run "ssh #{Vm.all_vms.first.hostip} #{envs} cd #{ENV['WORKSPACE']} && #{envs} " +
-       "#{envs} /usr/bin/ci_setup.sh"
-Sh.run "ssh #{Vm.all_vms.first.hostip}  #{envs} cd #{ENV['WORKSPACE']} && #{envs} " +
-       "ruby /usr/local/jenkins/slave_scripts/contrail-git-prep.rb"
-Sh.run "ssh #{Vm.all_vms.first.hostip}  #{envs} cd #{ENV['WORKSPACE']} && #{envs} " +
-       "/usr/local/jenkins/slave_scripts/contrail-devstack-job.sh"
+Sh.run "ssh #{Vm.all_vms.first.hostip} #{envs} \"cd #{ENV['WORKSPACE']} && #{envs} " +
+       "#{envs} /usr/bin/ci_setup.sh\""
+Sh.run "ssh #{Vm.all_vms.first.hostip}  #{envs} \"cd #{ENV['WORKSPACE']} && #{envs} " +
+       "ruby /usr/local/jenkins/slave_scripts/contrail-git-prep.rb\""
+Sh.run "ssh #{Vm.all_vms.first.hostip}  #{envs} \"cd #{ENV['WORKSPACE']} && #{envs} " +
+       "/usr/local/jenkins/slave_scripts/contrail-devstack-job.sh\""
