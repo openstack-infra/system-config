@@ -22,7 +22,10 @@ Vm.create_subslaves(1)
 # Wait for the the VM to come up and respond.
 # Sh.run("ssh #{@vms.first.hostip} uptime", false, 1000, 10)
 
-envs = "USER=#{ENV['USER']} WORKSPACE=#{ENV['WORKSPACE']}"
+envs = "USER=#{ENV['USER']}"
+envs += " WORKSPACE=#{ENV['WORKSPACE']}"
+envs += " JOB_NAME=#{ENV['JOB_NAME']}"
+envs += " PROJECT=#{ENV['PROJECT']}"
 
 Sh.run "ssh #{Vm.all_vms.first.hostip} \"#{envs} mkdir -p #{ENV['WORKSPACE']}\""
 Sh.run "ssh #{Vm.all_vms.first.hostip} \"#{envs} cd #{ENV['WORKSPACE']} && " +
