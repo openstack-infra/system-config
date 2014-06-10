@@ -35,7 +35,7 @@
           files:
             - target: 'logs/$LOG_PATH'
               source: 'logs/**'
-              keep-hierarchy: false
+              keep-hierarchy: true
               copy-after-failure: true
       - console-log
 
@@ -75,7 +75,7 @@
           files:
             - target: 'logs/$LOG_PATH'
               source: 'logs/**'
-              keep-hierarchy: false
+              keep-hierarchy: true
               copy-after-failure: true
       - console-log
 
@@ -116,7 +116,7 @@
           files:
             - target: 'logs/$LOG_PATH'
               source: 'logs/**'
-              keep-hierarchy: false
+              keep-hierarchy: true
               copy-after-failure: true
       - console-log
 
@@ -156,7 +156,7 @@
           files:
             - target: 'logs/$LOG_PATH'
               source: 'logs/**'
-              keep-hierarchy: false
+              keep-hierarchy: true
               copy-after-failure: true
       - console-log
 
@@ -196,6 +196,6 @@
           files:
             - target: 'logs/$LOG_PATH'
               source: 'logs/**'
-              keep-hierarchy: false
+              keep-hierarchy: true
               copy-after-failure: true
       - console-log
