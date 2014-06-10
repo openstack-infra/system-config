@@ -133,8 +133,9 @@ class Util
     def self.ci_default_branch
         return ENV['ZUUL_BRANCH'] unless ENV['ZUUL_BRANCH'].nil?
 
-        return (!ENV['JOB_NAME'].nil? and
-                ENV['JOB_NAME'] == "contrail-systest-job") ? "R1.05" : "master"
+        return "master"
+#       return (!ENV['JOB_NAME'].nil? and
+#               ENV['JOB_NAME'] == "contrail-systest-job") ? "R1.05" : "master"
     end
 
     def self.ci_setup
