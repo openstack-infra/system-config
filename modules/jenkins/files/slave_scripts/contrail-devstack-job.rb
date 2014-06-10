@@ -23,8 +23,8 @@ Vm.create_subslaves(1)
 Sh.run("ssh #{@vms.first.hostip} uptime", false, 1000, 10)
 
 # Setup source
-Sh.run "ssh #{Vm.all_vms.first.hostip} /usr/bin/ci_setup.sh"
-Sh.run "ssh #{Vm.all_vms.first.hostip} ruby /usr/local/jenkins/slave_scripts/contrail-git-prep.rb"
+Sh.run "ssh #{Vm.all_vms.first.hostip} /usr/bin/ci_setup.sh", false
+Sh.run "ssh #{Vm.all_vms.first.hostip} ruby /usr/local/jenkins/slave_scripts/contrail-git-prep.rb", false
 
 # Run devstack
-Sh.run "ssh #{Vm.all_vms.first.hostip} /usr/local/jenkins/slave_scripts/contrail-devstack-job.sh"
+Sh.run "ssh #{Vm.all_vms.first.hostip} /usr/local/jenkins/slave_scripts/contrail-devstack-job.sh", false
