@@ -146,5 +146,7 @@ class Util
             puts "Jobs skipped due to jenkins.opencontrail.org:/root/ci-test/skip_jobs"
             exit
         end
+
+        Sh.run "rm -rf #{ENV['WORKSPACE']}/* #{ENV['WORKSPACE']}/.*"
     end
 end
