@@ -28,8 +28,17 @@ envs += " JOB_NAME=#{ENV['JOB_NAME']}"
 envs += " PROJECT=#{ENV['PROJECT']}"
 
 Sh.run "ssh #{Vm.all_vms.first.hostip} \"#{envs} mkdir -p #{ENV['WORKSPACE']}\""
-Sh.run "ssh #{Vm.all_vms.first.hostip} \"#{envs} cd #{ENV['WORKSPACE']} && " +
-       "source /etc/contrail_bashrc && #{envs} #{envs} /usr/bin/ci_setup.sh\""
+
+# Sh.run "ssh #{Vm.all_vms.first.hostip} \"#{envs} cd #{ENV['WORKSPACE']} && " +
+#        "source /etc/contrail_bashrc && #{envs} #{envs} /usr/bin/ci_setup.sh\""
+# Wait till slave_auto_run starts in the new subslave vm.
+
+loop do
+    count = Sh.rrun %{ssh #{Vm.all_vms.first.hostip} "ps -efww | grep slave_auto_run.rb | grep -v grep | wc -l"}
+    break if count == "1"
+    sleep 5
+end
+
 Sh.run "ssh #{Vm.all_vms.first.hostip} \"#{envs} cd #{ENV['WORKSPACE']} && " +
        "source /etc/contrail_bashrc && #{envs} ruby /usr/local/jenkins/slave_scripts/contrail-git-prep.rb\""
 Sh.run "ssh #{Vm.all_vms.first.hostip} \"#{envs} cd #{ENV['WORKSPACE']} && " +
