@@ -12,6 +12,7 @@
           export JOB_NAME="contrail-unittest-job"
           export PROJECT_NAME={name}
           export WORKSPACE=$PWD
+          rm -rf $WORKSPACE/* $WORKSPACE/.* || true
           /usr/bin/ci_setup.sh
           ruby /usr/local/jenkins/slave_scripts/contrail-git-prep.rb
           ruby /usr/local/jenkins/slave_scripts/contrail-unittests-job.sh
@@ -30,6 +31,7 @@
           export JOB_NAME="contrail-systest-job"
           export PROJECT_NAME={name}
           export WORKSPACE=$PWD
+          rm -rf $WORKSPACE/* $WORKSPACE/.* || true
 
           /usr/bin/ci_setup.sh
           ruby /usr/local/jenkins/slave_scripts/contrail-git-prep.rb use_private
@@ -49,6 +51,7 @@
           export JOB_NAME="contrail-devstack-job"
           export PROJECT_NAME={name}
           export WORKSPACE=$PWD
+          rm -rf $WORKSPACE/* $WORKSPACE/.* || true
 
           ruby /usr/local/jenkins/slave_scripts/contrail-devstack-job.rb
 
