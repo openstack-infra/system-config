@@ -353,6 +353,8 @@ Next, edit `project.config` to look like::
       value = -1 Work in progress
       value =  0 Ready for reviews
       value = +1 Approved
+  [access "refs/drafts/*"]
+      push = block group Registered Users
 
 Now edit the groups file. The format is::
 
