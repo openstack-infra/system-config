@@ -274,6 +274,10 @@ node 'logstash.openstack.org' {
       'logstash-worker14.openstack.org',
       'logstash-worker15.openstack.org',
       'logstash-worker16.openstack.org',
+      'logstash-worker17.openstack.org',
+      'logstash-worker18.openstack.org',
+      'logstash-worker19.openstack.org',
+      'logstash-worker20.openstack.org',
     ],
     discover_nodes                  => [
       'elasticsearch01.openstack.org:9200',
@@ -316,6 +320,10 @@ node /^elasticsearch\d+\.openstack\.org$/ {
       'logstash-worker14.openstack.org',
       'logstash-worker15.openstack.org',
       'logstash-worker16.openstack.org',
+      'logstash-worker17.openstack.org',
+      'logstash-worker18.openstack.org',
+      'logstash-worker19.openstack.org',
+      'logstash-worker20.openstack.org',
     ],
     discover_nodes        => $elasticsearch_nodes,
   }
