@@ -147,6 +147,6 @@ class Util
             exit
         end
 
-        Sh.run "rm -rf #{ENV['WORKSPACE']}/* #{ENV['WORKSPACE']}/.*"
+        Sh.run("rm -rf #{ENV['WORKSPACE']}/* #{ENV['WORKSPACE']}/.*", true)
     end
 end
