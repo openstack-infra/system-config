@@ -3567,6 +3567,7 @@ projects:
   - name: stackforge/magnetodb
     template:
       - name: publish-to-pypi
+      - name: docs-on-rtfd
     check:
       - gate-magnetodb-pep8
       - gate-magnetodb-python26
