@@ -87,7 +87,7 @@ class graphite(
     ensure  => directory,
     owner   => 'www-data',
     group   => 'www-data',
-    require => [Package['apache2'],
+    require => [Package[$::apache::params::apache_name],
                 File['/var/lib/graphite']]
   }
 
@@ -95,7 +95,7 @@ class graphite(
     ensure  => directory,
     owner   => 'www-data',
     group   => 'www-data',
-    require => Package['apache2'],
+    require => Package[$::apache::params::apache_name],
   }
 
   file { '/etc/graphite':
@@ -110,7 +110,7 @@ class graphite(
     onlyif  => 'test ! -f /var/lib/graphite/storage/graphite.db',
     require => [ Exec['install_graphite_web'],
       File['/var/lib/graphite'],
-      Package['apache2'],
+      Package[$::apache::params::apache_name],
       File['/usr/local/lib/python2.7/dist-packages/graphite/local_settings.py'],
       File['/usr/local/bin/graphite-init-db.py'],
       File['/etc/graphite/admin.ini']],
@@ -182,7 +182,7 @@ class graphite(
     group   => 'www-data',
     content => template('graphite/admin.ini'),
     require => [ File['/etc/graphite'],
-      Package['apache2']],
+      Package[$::apache::params::apache_name]],
   }
 
   file { '/etc/init.d/carbon-cache':
