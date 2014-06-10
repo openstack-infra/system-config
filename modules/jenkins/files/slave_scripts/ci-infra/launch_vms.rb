@@ -130,7 +130,7 @@ class Vm
                        "--meta slave-executors=#{@@options.executors} " +
                        "--meta slave-master=localhost"
 
-            vmname = "#{@@options.name}-#{floatingip}"
+            vmname = "#{@@options.name}-#{floatingip}.localdomain.com"
             hostip = Vm.create_internal(vmname, floatingip, metadata)
             @@vms.push Vm.new(vmname, hostip)
         }
@@ -142,7 +142,7 @@ class Vm
 
         metadata = "--meta slave-master=#{Vm.get_interface_ip}"
         1.upto(count) { |i|
-            vmname = "ci-oc-subslave-#{floatingip}-#{i}"
+            vmname = "ci-oc-subslave-#{floatingip}-#{i}.localdomain.com"
             hostip = Vm.create_internal(vmname, nil, metadata, 5) # xlarge
             vm = Vm.new(vmname, hostip)
             vm.send_keepalive
