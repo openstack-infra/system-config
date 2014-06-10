@@ -65,8 +65,6 @@ FILES=" \
 /opt/stack/tempest/tempest.log \
 /opt/stack/tempest/results.html \
 /opt/stack/tempest/etc/tempest.conf \
-/home/jenkins/devstack/localrc \
-/home/jenkins/devstack/log/stack.log.summary \
 /home/jenkins/devstack/log/stack.log \
 /home/jenkins/devstack/log/screens \
 /home/jenkins/list_tests.txt \
@@ -83,6 +81,8 @@ FILES=" \
 #   popd
 #done
 scp -r -i ~/.ssh/id_rsa $FILES root@jenkins.opencontrail.org:${LOGDIR}
+scp -r -i ~/.ssh/id_rsa /home/jenkins/devstack/localrc root@jenkins.opencontrail.org:${LOGDIR}/localrc.txt
+scp -r -i ~/.ssh/id_rsa /home/jenkins/devstack/log/stack.log.summary root@jenkins.opencontrail.org:${LOGDIR}/stack.log.summary.txt
 
 # send response to Gerrit based along with log link
 
