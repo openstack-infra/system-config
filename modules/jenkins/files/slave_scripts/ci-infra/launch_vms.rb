@@ -63,6 +63,7 @@ class Vm
     end
 
     def Vm.clean_all
+        return if __FILE__ == $0
         Vm.wait
         @@vms.each { |vm| vm.delete }
     end

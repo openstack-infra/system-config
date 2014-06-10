@@ -21,10 +21,25 @@ Vm.create_subslaves(1)
 
 # Wait for the the VM to come up and respond.
 Sh.run("ssh #{@vms.first.hostip} uptime", false, 1000, 10)
+sleep 60
+envs = "USER=#{ENV['USER']}"
+envs += " WORKSPACE=#{ENV['WORKSPACE']}"
+envs += " JOB_NAME=#{ENV['JOB_NAME']}"
+envs += " PROJECT=#{ENV['PROJECT']}"
 
-# Setup source
-Sh.run "ssh #{Vm.all_vms.first.hostip} /usr/bin/ci_setup.sh", false
-Sh.run "ssh #{Vm.all_vms.first.hostip} ruby /usr/local/jenkins/slave_scripts/contrail-git-prep.rb", false
+Sh.run "ssh #{Vm.all_vms.first.hostip} \"#{envs} mkdir -p #{ENV['WORKSPACE']}\""
 
-# Run devstack
-Sh.run "ssh #{Vm.all_vms.first.hostip} /usr/local/jenkins/slave_scripts/contrail-devstack-job.sh", false
+# Sh.run "ssh #{Vm.all_vms.first.hostip} \"#{envs} cd #{ENV['WORKSPACE']} && " +
+#        "source /etc/contrail_bashrc && #{envs} #{envs} /usr/bin/ci_setup.sh\""
+# Wait till slave_auto_run starts in the new subslave vm.
+
+loop do
+    count = Sh.rrun %{ssh #{Vm.all_vms.first.hostip} "ps -efww | grep slave_auto_run.rb | grep -v grep | wc -l"}
+    break if count == "1"
+    sleep 5
+end
+
+Sh.run "ssh #{Vm.all_vms.first.hostip} \"#{envs} cd #{ENV['WORKSPACE']} && " +
+       "source /etc/contrail_bashrc && #{envs} ruby /usr/local/jenkins/slave_scripts/contrail-git-prep.rb\""
+Sh.run "ssh #{Vm.all_vms.first.hostip} \"#{envs} cd #{ENV['WORKSPACE']} && " +
+       "source /etc/contrail_bashrc && #{envs} /usr/local/jenkins/slave_scripts/contrail-devstack-job.sh\""
