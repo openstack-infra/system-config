@@ -15,8 +15,6 @@ echo "GERRIT_REFSPEC=$GERRIT_REFSPEC"
 echo "GERRIT_REFSPEC=$GERRIT_PATCHSET_REVISION"
 echo "BUILD_NUMBER=$BUILD_NUMBER"
 
-DEVSTACK_IP_ADDR=10.84.35.154
-
 pushd /home/jenkins/devstack
 . /home/jenkins/devstack/localrc
 
@@ -51,7 +49,6 @@ fi
 popd
 
 if [ $ret -eq 0 ] ; then
-	#ssh to DEVSTACK_IP_ADDR and run tempest tests
 	pushd  /opt/stack/tempest
 	> tempest.log
 	bash -x ./verify.sh
@@ -66,10 +63,12 @@ ssh -i ~/.ssh/id_rsa root@jenkins.opencontrail.org "mkdir -p ${LOGDIR} && cp /va
 # Copy logs
 FILES=" \
 /opt/stack/tempest/tempest.log \
+/opt/stack/tempest/results.html \
 /opt/stack/tempest/etc/tempest.conf \
 /home/jenkins/devstack/localrc \
 /home/jenkins/devstack/log/stack.log.summary \
 /home/jenkins/devstack/log/stack.log \
+/home/jenkins/devstack/log/screens \
 /home/jenkins/list_tests.txt \
 /home/jenkins/contact.txt \
 "
@@ -97,7 +96,7 @@ else
     verf="--verified=+1"
 fi
 
-gerrit_cmd="ssh -i ~/.ssh/id_rsa-r -p 29418 contrail@localhost gerrit review -m "
+gerrit_cmd="ssh -i ~/.ssh/id_rsa-r -p 29418 contrail@review.openstack gerrit review -m "
 
 echo "${gerrit_cmd} ${log_url} ${verf} ${GERRIT_PATCHSET_REVISION}"
 #print gerrit_cmd_list
