@@ -343,7 +343,6 @@ Next, edit `project.config` to look like::
       abbreviation = R
       copyMinScore = true
       copyAllScoresOnTrivialRebase = true
-      copyAllScoresIfNoCodeChange = true
       value = -2 Do not merge
       value = -1 I would prefer that you didn't merge this
       value =  0 No score
