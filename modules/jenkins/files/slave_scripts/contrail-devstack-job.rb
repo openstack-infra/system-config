@@ -33,8 +33,6 @@ loop do
     sleep 5
 end
 
-sleep(10) while true
-
 Sh.run "ssh #{Vm.all_vms.first.hostip} \"#{envs} cd #{ENV['WORKSPACE']} && " +
        "source /etc/contrail_bashrc && #{envs} ruby /usr/local/jenkins/slave_scripts/contrail-git-prep.rb\""
 Sh.run "ssh #{Vm.all_vms.first.hostip} \"#{envs} cd #{ENV['WORKSPACE']} && " +
