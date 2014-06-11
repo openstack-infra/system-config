@@ -76,11 +76,17 @@ class Vm
         # @thread = Thread.new
         # Thread causes a deadlock/memory corruption with shell commands
         # So, use a new process instead.
+        @parent_pid = Process.pid
         @keepalive_pid = Process.fork
         if @keepalive_pid.nil? then
             kfile = "/root/#{@vmname}-jenkins-keepalive.log"
             hostip = @hostip
             loop do begin
+
+                # Check if parent is still around. If not, we are done..
+                `ps --pid #{@parent_pid}`
+                break if $? != 0
+
                 t = Time.now
                 File.open(kfile, "w") {|fp| t.to_a.each {|i| fp.puts i}}
                 `scp #{kfile} root@#{hostip}:#{kfile} &> /dev/null`
