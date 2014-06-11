@@ -1,0 +1,29 @@
+<?php
+
+$aliases['<%= @site_alias %>'] = array(
+  'root' => '<%= @site_docroot %>',
+  'dsd-root' => '<%= @site_root %>',
+  'uri' => '<%= @site_base_url %>',
+  'db-url' => 'mysql://<%= @site_mysql_user %>:<%= @site_mysql_password %>@<%= @site_mysql_host %>/<%= @site_mysql_database %>',
+  'databases' => array(
+    'default' => array(
+      'driver' => 'mysql',
+      'username' => '<%= @site_mysql_user %>',
+      'password'  => '<%= @site_mysql_password %>',
+      'port' => '',
+      'host' => '<%= @site_mysql_host %>',
+      'database' => '<%= @site_mysql_database %>',
+    ),
+  ),
+  'file-owner' => '<%= @site_file_owner %>',
+  'file-group' => 'www-data',
+  'variables' => array(
+    'site_name' => '<%= @site_name %>',
+  ),
+  'profile' => '<%= @site_profile %>',
+  'default-admin-password' => '<%= @site_admin_password %>',
+  'disable-features-revert' => FALSE,
+  'package-provider' => 'static-tarball',
+  'package-repository' => '<%= @package_repository %>',
+  'package-branch' => '<%= @package_branch %>',
+);

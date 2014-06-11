@@ -18,6 +18,7 @@ class openstack_project::groups_dev (
   $site_admin_password = '',
   $site_mysql_host     = '',
   $site_mysql_password = '',
+  $conf_cron_key = '',
   $sysadmins = [],
 ) {
 
@@ -40,21 +41,22 @@ class openstack_project::groups_dev (
   }
 
   class { 'drupal':
-    site_name            => 'groups-dev.openstack.org',
-    site_docroot         => '/srv/vhosts/groups-dev.openstack.org',
-    site_mysql_host      => $site_mysql_host,
-    site_mysql_user      => 'groups',
-    site_mysql_password  => $site_mysql_password,
-    site_mysql_database  => 'groups_dev',
-    site_vhost_root      => '/srv/vhosts',
-    site_staging_tarball => 'groups-dev.tar.gz',
-    site_admin_password  => $site_admin_password,
-    site_build_reponame  => 'groups-master',
-    site_makefile        => 'build-groups.make',
-    site_repo_url        => 'https://git.openstack.org/openstack-infra/groups',
-    site_profile         => 'groups',
-    site_base_url        => 'http://groups-dev.openstack.org',
-    require              => [ Class['openstack_project::server'],
+    site_name               => 'groups-dev.openstack.org',
+    site_root               => '/srv/vhosts/groups-dev.openstack.org',
+    site_mysql_host         => $site_mysql_host,
+    site_mysql_user         => 'groups',
+    site_mysql_password     => $site_mysql_password,
+    site_mysql_database     => 'groups_dev',
+    site_vhost_root         => '/srv/vhosts',
+    site_admin_password     => $site_admin_password,
+    site_alias              => 'groupsdev',
+    site_profile            => 'groups',
+    site_base_url           => 'http://groups-dev.openstack.org',
+    package_repository      => 'http://tarballs.openstack.org/groups',
+    package_branch          => 'groups-latest',
+    conf_cron_key           => $conf_cron_key,
+    conf_markdown_directory => '/srv/groups-static-pages',
+    require                 => [ Class['openstack_project::server'],
       Vcsrepo['/srv/groups-static-pages'] ]
   }
 
