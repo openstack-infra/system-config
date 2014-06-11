@@ -3412,6 +3412,7 @@ projects:
       - gate-gnocchi-python26
       - gate-gnocchi-python27
       - gate-gnocchi-tox-py27-postgresql
+      - gate-gnocchi-tox-py27-mysql
       - gate-gnocchi-python33
     gate:
       - gate-gnocchi-pep8
@@ -3419,6 +3420,7 @@ projects:
       - gate-gnocchi-python27
       - gate-gnocchi-python33
       - gate-gnocchi-tox-py27-postgresql
+      - gate-gnocchi-tox-py27-mysql
 
   - name: stackforge/healthnmon
     check:
