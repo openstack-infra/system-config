@@ -31,7 +31,8 @@ class Vm
 
 
     def delete
-        @thread.kill unless @thread.nil?
+        # @thread.kill unless @thread.nil?
+        Process.kill("KILL", @keepalive_pid) unless @keepalive_pid.nil?
         Sh.crun "nova delete #{@vmname}"
     end
 
@@ -72,13 +73,17 @@ class Vm
     def send_keepalive
 
         # SubSlave VMs self-destruct themselves unless we periodically ping.
-        @thread = Thread.new {
+        # @thread = Thread.new
+        # Thread causes a deadlock/memory corruption with shell commands
+        # So, use a new process instead.
+        @keepalive_pid = Process.fork
+        if @keepalive_pid == 0 then
             kfile = "/root/#{@vmname}-jenkins-keepalive.log"
             hostip = @hostip
             loop do begin
                 t = Time.now
                 File.open(kfile, "w") {|fp| t.to_a.each {|i| fp.puts i}}
-                `scp #{kfile} root@#{hostip}:#{kfile}`
+                `scp #{kfile} root@#{hostip}:#{kfile} &> /dev/null`
 
                 # puts "Updated time #{t} to #{@vmname}"
                 # Sh.run("scp #{kfile} root@#{@hostip}:#{kfile}", true, 1, 1,
@@ -89,7 +94,9 @@ class Vm
                 end
                 sleep 2
             end
-        }
+            Kernel.exit!
+        end
+        Process.detach(@keepalive_pid)
     end
 
     def Vm.create_internal(vmname, floatingip, metadata, flavor = 4) # large
