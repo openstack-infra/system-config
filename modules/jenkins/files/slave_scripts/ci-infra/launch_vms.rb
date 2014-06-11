@@ -15,7 +15,7 @@ at_exit { Vm.clean_all; Process.exit!(Sh.exit_code) }
 # trap("QUIT") { Vm.clean_all; exit Sh.exit }
 
 class Vm
-    attr_accessor :vmname, :hostip
+    attr_accessor :vmname, :short_name, :hostip
     @@options = OpenStruct.new
 
     def Vm.options; return @@options; end
@@ -171,7 +171,7 @@ class Vm
     def Vm.setup_etc_hosts
         etc_hosts = <<EOF
 # launch_vms.rb autogeneration start
-#{ s = ""; @@vms.each { |vm| s += "#{vm.hostip} #{vm.vmname}\n" }; s }
+#{ s = ""; @@vms.each { |vm| s += "#{vm.hostip} #{vm.short_name} #{vm.vmname}\n" }; s }
 # launch_vms.rb autogeneration end
 EOF
         s = File.open("/etc/hosts", "r") { |fp| fp.read }
