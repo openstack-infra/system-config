@@ -25,8 +25,10 @@ class openstack_project::git (
     sysadmins                 => $sysadmins,
   }
 
-  class { 'selinux':
-    mode => 'enforcing'
+  if ($::osfamily == 'RedHat') {
+    class { 'selinux':
+      mode => 'enforcing'
+    }
   }
 
   package { 'socat':
