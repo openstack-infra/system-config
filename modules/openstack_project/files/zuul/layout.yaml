@@ -653,6 +653,10 @@ jobs:
     voting: false
   - name: gate-pecan-tox-barbican-tip
     voting: false
+  # Swift log publishing details
+  - name: ^experimental-swift-logs.*$
+    swift:
+      - name: logs
 
 # The project list is grouped by type of project, and within each
 # group, projects are sorted (mostly) alphabetically.
