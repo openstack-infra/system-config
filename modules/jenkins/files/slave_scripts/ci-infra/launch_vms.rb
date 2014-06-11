@@ -132,10 +132,10 @@ class Vm
                        "--meta slave-master=localhost"
 
             vmname = "#{@@options.name}-#{floatingip}"
-            vmname.gsub!(/\./, '_')
+            vmname.gsub!(/\./, '-')
 
             short_name = "#{@@options.name}-#{floatingip}"
-            short_name.gsub!(/\./, '_')
+            short_name.gsub!(/\./, '-')
 
             hostip = Vm.create_internal(vmname, floatingip, metadata)
             @@vms.push Vm.new(short_name, vmname, hostip)
@@ -149,11 +149,11 @@ class Vm
         metadata = "--meta slave-master=#{Vm.get_interface_ip}"
         1.upto(count) { |i|
             vmname = "ci-oc-subslave-#{floatingip}-#{i}"
-            vmname.gsub!(/\./, '_')
+            vmname.gsub!(/\./, '-')
             vmname += ".localdomain.com"
 
             short_name = "ci-oc-subslave-#{floatingip}-#{i}"
-            short_name.gsub!(/\./, '_')
+            short_name.gsub!(/\./, '-')
 
             hostip = Vm.create_internal(vmname, nil, metadata, 5) # xlarge
             vm = Vm.new(short_name, vmname, hostip)
