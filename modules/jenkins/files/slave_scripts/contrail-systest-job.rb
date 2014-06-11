@@ -167,6 +167,14 @@ def run_sanity
     # Get http hyper links to the logs and report summary files.
     puts Sh.rrun("lynx --dump #{ENV['WORKSPACE']}/logs/*/test_report.html",
                  true)
+
+    # Check if any test failed or errored.
+    count = Sh.rrun(
+        %{lynx --dump #{ENV['WORKSPACE']}/logs/*/test_report.html | } +
+        %{\grep Status: | \grep "Fail\\|Error" | wc -l}, true).to_i
+
+    puts "****** run_sanity:ci_sanity FAILED ******" if count != 0
+    return count
 end
 
 def main
@@ -176,7 +184,7 @@ def main
     install_contrail
     setup_sanity
     verify_contrail
-    run_sanity
+    Sh.exit(run_sanity)
 end
 
 main

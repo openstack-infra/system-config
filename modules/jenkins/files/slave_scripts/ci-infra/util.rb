@@ -12,12 +12,16 @@ COLOR_RESET       = "\e[m"
 
 class Sh
     @ignore_failed_exit_code = false
-    def Sh.exit(code = 0); Kernel.exit(code) end
+    @@exit_code = 0
+
+    def Sh.exit(code = 0)
+        @@exit_code = code
+        Kernel.exit(code)
+    end
     def Sh.dry_run?
         return !ENV['DRY_RUN'].nil? && ENV['DRY_RUN'].casecmp("true") == 0
     end
 
-    @@exit_code = 0
     def Sh.exit_code
         return @@exit_code
     end
