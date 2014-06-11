@@ -32,7 +32,7 @@ forward-zone:
 EOF
 
 sudo hostname $HOSTNAME
-if ! grep -q $HOSTNAME /etc/hosts
+if [ -n "$HOSTNAME" ] && ! grep -q $HOSTNAME /etc/hosts
 then
     echo "127.0.1.1 $HOSTNAME" | sudo tee -a /etc/hosts
 fi
