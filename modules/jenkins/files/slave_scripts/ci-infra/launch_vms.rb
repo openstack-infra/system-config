@@ -70,17 +70,20 @@ class Vm
     end
 
     def send_keepalive
-        return
 
-        # VMs self-destruct themselves unless we periodically ping.
+        # SubSlave VMs self-destruct themselves unless we periodically ping.
         @thread = Thread.new {
             kfile = "/root/#{@vmname}-jenkins-keepalive.log"
+            hostip = @hostip
             loop do begin
                 t = Time.now
-                # puts "Updating time #{t} to #{@vmname}"
                 File.open(kfile, "w") {|fp| t.to_a.each {|i| fp.puts i}}
-                Sh.run("scp #{kfile} root@#{@hostip}:#{kfile}", true, 1, 1,false)
-                #rescue StandardError, Interrupt, SystemExit
+                `scp #{kfile} root@#{hostip}:#{kfile}`
+
+                # puts "Updated time #{t} to #{@vmname}"
+                # Sh.run("scp #{kfile} root@#{@hostip}:#{kfile}", true, 1, 1,
+                #        false)
+                # rescue StandardError, Interrupt, SystemExit
                 rescue Exception => e
                     # puts "ERROR: scp #{kfile} root@#{@hostip}:#{kfile} #{e}"
                 end
