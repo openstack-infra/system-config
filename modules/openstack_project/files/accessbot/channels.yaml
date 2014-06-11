@@ -99,6 +99,7 @@ channels:
   - name: openstack-merges
   - name: openstack-metering
   - name: openstack-neutron
+  - name: openstack-nfv
   - name: openstack-nova
   - name: openstack-opw
   - name: openstack-oslo
