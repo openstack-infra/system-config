@@ -22,6 +22,7 @@ THIN=$3
 PYTHON3=${4:-false}
 PYPY=${5:-false}
 ALL_MYSQL_PRIVS=${6:-false}
+GIT_BASE=${7:-git://git.openstack.org}
 
 # Save the nameservers configured by our provider.
 cat >/tmp/forwarding.conf <<EOF
@@ -42,7 +43,8 @@ if [ -f /usr/bin/yum ]; then
 fi
 wget https://git.openstack.org/cgit/openstack-infra/config/plain/install_puppet.sh
 sudo bash -xe install_puppet.sh
-sudo git clone --depth=1 git://git.openstack.org/openstack-infra/config.git \
+
+sudo git clone --depth=1 $GIT_BASE/openstack-infra/config.git \
     /root/config
 sudo /bin/bash /root/config/install_modules.sh
 if [ -z "$NODEPOOL_SSH_KEY" ] ; then
@@ -91,7 +93,7 @@ dig git.openstack.org
 
 # Cache all currently known gerrit repos.
 sudo mkdir -p /opt/git
-sudo -i python /opt/nodepool-scripts/cache_git_repos.py
+sudo -i python /opt/nodepool-scripts/cache_git_repos.py $GIT_BASE
 
 # We don't always get ext4 from our clouds, mount ext3 as ext4 on the next
 # boot (eg when this image is used for testing).

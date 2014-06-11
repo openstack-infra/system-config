@@ -19,6 +19,7 @@
 import os.path
 import re
 import shutil
+import sys
 import urllib2
 
 from common import run_local
@@ -27,9 +28,16 @@ URL = ('https://git.openstack.org/cgit/openstack-infra/config/plain/'
        'modules/openstack_project/files/review.projects.yaml')
 PROJECT_RE = re.compile('^-?\s+project:\s+(.*)$')
 
+# Not using an arg libraries in order to avoid module imports that
+# are not available across all python versions
+if len(sys.argv) > 1:
+    GIT_BASE = sys.argv[1]
+else:
+    GIT_BASE = 'git://git.openstack.org'
+
 
 def clone_repo(project):
-    remote = 'git://git.openstack.org/%s.git' % project
+    remote = '%s/%s.git' % (GIT_BASE, project)
 
     # Clear out any existing target directory first, in case of a retry.
     try:
