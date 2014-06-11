@@ -282,19 +282,21 @@ projects:
     check-tripleo:
       - noop
     gate:
-      - ci-contrail-controller-test-systest
+      - noop
     post:
       - noop
 
   - name: Juniper/contrail-controller-test
     check:
       - ci-contrail-controller-test-unittest
+      - ci-contrail-controller-test-devstack
+      - ci-contrail-controller-test-systest
     silent:
       - noop
     check-tripleo:
       - noop
     gate:
-      - ci-contrail-controller-test-systest
+      - noop
     post:
       - noop
 
@@ -306,6 +308,6 @@ projects:
     check-tripleo:
       - noop
     gate:
-      - ci-contrail-controller-test-systest
+      - noop
     post:
       - noop
