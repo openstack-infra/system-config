@@ -434,6 +434,9 @@
 - project: openstack/tempest
   options:
     - direct-release
+- project: openstack/training-guides
+  description: Community created, open source training guides for OpenStack.
+  upstream: git://github.com/fifieldt/openstack-training-guides.git
 - project: openstack/tripleo-heat-templates
   group: tripleo
   description: Heat templates for deploying OpenStack
