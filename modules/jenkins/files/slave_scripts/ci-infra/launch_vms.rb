@@ -77,7 +77,7 @@ class Vm
         # Thread causes a deadlock/memory corruption with shell commands
         # So, use a new process instead.
         @keepalive_pid = Process.fork
-        if @keepalive_pid == 0 then
+        if @keepalive_pid.nil? then
             kfile = "/root/#{@vmname}-jenkins-keepalive.log"
             hostip = @hostip
             loop do begin
