@@ -4412,6 +4412,10 @@ projects:
   - name: stackforge/swift3
     template:
       - name: python-jobs
+    check:
+      - gate-swift3-pylint
+    gate:
+      - gate-swift3-pylint
 
   - name: stackforge/swiftsync
     check:

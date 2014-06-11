@@ -2420,6 +2420,7 @@
 
     jobs:
       - python-jobs
+      - gate-{name}-pylint
 
 - project:
     name: swiftsync
