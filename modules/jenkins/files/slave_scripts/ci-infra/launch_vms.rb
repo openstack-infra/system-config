@@ -184,7 +184,9 @@ EOF
         File.open("/etc/hosts", "w") { |fp| fp.write(s) }
 
         # Wait for all VMs to come up.
-        @@vms.each { |vm| Sh.run("scp /etc/hosts #{vm.hostip}:/etc/.", false, 100, 5) }
+        @@vms.each { |vm|
+            Sh.run("scp /etc/hosts #{vm.hostip}:/etc/.", false, 100, 5)
+        }
     end
 
     def Vm.setup_image_from_snapshot
