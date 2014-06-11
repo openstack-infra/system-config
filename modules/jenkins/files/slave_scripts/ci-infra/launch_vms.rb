@@ -148,8 +148,9 @@ class Vm
 
         metadata = "--meta slave-master=#{Vm.get_interface_ip}"
         1.upto(count) { |i|
-            vmname = "ci-oc-subslave-#{floatingip}-#{i}.localdomain.com"
+            vmname = "ci-oc-subslave-#{floatingip}-#{i}"
             vmname.gsub!(/\./, '_')
+            vmname += ".localdomain.com"
 
             short_name = "ci-oc-subslave-#{floatingip}-#{i}"
             short_name.gsub!(/\./, '_')
