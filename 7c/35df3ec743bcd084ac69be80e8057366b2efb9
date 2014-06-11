@@ -1,0 +1,10 @@
+Verified+2: Jenkins
+Code-Review+2: Clark Boylan <cboylan@sapwetik.org>
+Workflow+1: Clark Boylan <cboylan@sapwetik.org>
+Code-Review+2: Sergey Lukjanov <slukjanov@mirantis.com>
+Code-Review+1: Matthew Oliver <matt@oliver.net.au>
+Submitted-by: Jenkins
+Submitted-at: Wed, 11 Jun 2014 00:01:43 +0000
+Reviewed-on: https://review.openstack.org/97820
+Project: openstack-infra/config
+Branch: refs/heads/master
