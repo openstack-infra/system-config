@@ -33,6 +33,9 @@ if [ "$SLAVE_MASTER" != "localhost" ]; then
     proxy="export ftp_proxy=$ftp_proxy"
     echo "$proxy" >> /etc/contrail_bashrc
 
+    # no_proxy for the 192 subnet
+    echo "no_proxy=localhost,127.0.0.1,.localdomain.com" >> /etc/contrail_bashrc
+
     # Set proxy for apt as well, if it is not already set.
     apt_proxy="Acquire::http::Proxy \"http://$SLAVE_MASTER:3128\";"
     grep --quiet "$apt_proxy" /etc/apt/apt.conf

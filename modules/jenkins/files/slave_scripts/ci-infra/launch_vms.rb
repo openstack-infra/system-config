@@ -15,7 +15,7 @@ at_exit { Vm.clean_all; Process.exit!(Sh.exit_code) }
 # trap("QUIT") { Vm.clean_all; exit Sh.exit }
 
 class Vm
-    attr_accessor :vmname, :hostip
+    attr_accessor :vmname, :short_name, :hostip
     @@options = OpenStruct.new
 
     def Vm.options; return @@options; end
@@ -23,8 +23,9 @@ class Vm
     @@vms = [ ]
     def Vm.all_vms; @@vms end
 
-    def initialize(vmname, hostip)
+    def initialize(short_name, vmname, hostip)
         @vmname = vmname
+        @short_name = short_name
         @hostip = hostip
     end
 
@@ -47,7 +48,7 @@ class Vm
                 break if line =~ /# launch_vms.rb autogeneration start/
                 next unless start
 
-                vms.push(Vm.new(line.split[1], line.split[0])) \
+                vms.push(Vm.new(line.split[1], line.split[2], line.split[0])) \
                     if line =~ /\d+\.\d+\d+\.\d+/
             }
         }
@@ -131,8 +132,13 @@ class Vm
                        "--meta slave-master=localhost"
 
             vmname = "#{@@options.name}-#{floatingip}"
+            vmname.gsub!(/\./, '_')
+
+            short_name = "#{@@options.name}-#{floatingip}"
+            short_name.gsub!(/\./, '_')
+
             hostip = Vm.create_internal(vmname, floatingip, metadata)
-            @@vms.push Vm.new(vmname, hostip)
+            @@vms.push Vm.new(short_name, vmname, hostip)
         }
     end
 
@@ -143,8 +149,14 @@ class Vm
         metadata = "--meta slave-master=#{Vm.get_interface_ip}"
         1.upto(count) { |i|
             vmname = "ci-oc-subslave-#{floatingip}-#{i}"
+            vmname.gsub!(/\./, '_')
+            vmname += ".localdomain.com"
+
+            short_name = "ci-oc-subslave-#{floatingip}-#{i}"
+            short_name.gsub!(/\./, '_')
+
             hostip = Vm.create_internal(vmname, nil, metadata, 5) # xlarge
-            vm = Vm.new(vmname, hostip)
+            vm = Vm.new(short_name, vmname, hostip)
             vm.send_keepalive
             @@vms.push vm
         }
@@ -160,7 +172,7 @@ class Vm
     def Vm.setup_etc_hosts
         etc_hosts = <<EOF
 # launch_vms.rb autogeneration start
-#{ s = ""; @@vms.each { |vm| s += "#{vm.hostip} #{vm.vmname}\n" }; s }
+#{ s = ""; @@vms.each { |vm| s += "#{vm.hostip} #{vm.short_name} #{vm.vmname}\n" }; s }
 # launch_vms.rb autogeneration end
 EOF
         s = File.open("/etc/hosts", "r") { |fp| fp.read }

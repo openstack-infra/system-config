@@ -53,6 +53,7 @@
           export WORKSPACE=$PWD
           rm -rf $WORKSPACE/* $WORKSPACE/.* || true
 
+          /usr/bin/ci_setup.sh
           ruby /usr/local/jenkins/slave_scripts/contrail-devstack-job.rb
 
 - job-group:

@@ -80,4 +80,18 @@ function nested_kvm() {
 echo "options kvm-intel nested=1" > /etc/modprobe.d/kvm-intel.conf
 }
 
+function setup_jenkins_slave_image () {
+set -ex
+instance=$1
+image=$2
+if [ -z $image ]; then
+    image="ci-jenkins-slave"
+fi
+glance image-delete $image
+image_id=`nova list |\grep -w $1 | awk '{print $2}'`
+nova image-create --poll $image_id $image
+glance image-download --file $image.qcow2 --progress $image
+sshpass -p c0ntrail123 scp $image.qcow2 ci-admin@ubuntu-build02:/ci-admin/images/$image.qcow2
+}
+
 build_vm
