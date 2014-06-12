@@ -33,3 +33,23 @@
       - contrail-unittest-jobs
 #     - contrail-systest-jobs
 #     - contrail-devstack-jobs
+
+- project:
+    name: contrail-neutron-plugin
+    github-org: Juniper
+    node: juniper-tests
+    tarball-site: tarballs.openstack.org
+    doc-publisher-site: docs.opencontrail.org
+
+    jobs:
+      - contrail-unittest-jobs
+
+- project:
+    name: contrail-nova-vif-driver
+    github-org: Juniper
+    node: juniper-tests
+    tarball-site: tarballs.openstack.org
+    doc-publisher-site: docs.opencontrail.org
+
+    jobs:
+      - contrail-unittest-jobs
