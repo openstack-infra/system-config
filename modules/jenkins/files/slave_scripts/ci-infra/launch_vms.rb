@@ -87,6 +87,9 @@ class Vm
                 `ps --pid #{@parent_pid}`
                 break if $? != 0
 
+                # Check if init has become the parent.
+                break if Process.ppid == 1
+
                 t = Time.now
                 File.open(kfile, "w") {|fp| t.to_a.each {|i| fp.puts i}}
                 `scp #{kfile} root@#{hostip}:#{kfile} &> /dev/null`
