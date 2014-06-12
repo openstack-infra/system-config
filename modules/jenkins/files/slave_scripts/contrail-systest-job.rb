@@ -80,7 +80,7 @@ def setup_contrail
     if @image.nil? then
 #       @image = "/root/contrail-install-packages_1.05-5780~havana_all.deb"
 #       ENV['ZUUL_BRANCH'] = "R1.05"
-        @image = "/root/contrail-install-packages_1.10main-9703~havana_all.deb"
+        @image = "/root/contrail-install-packages_1.10main-6888~havana_all.deb"
         Sh.run("scp jenkins.opencontrail.org:#{@image} #{@image}") \
             unless File.file? @image
     end
@@ -165,20 +165,23 @@ def run_sanity
     Sh.run("scp -r #{@vms.first.vmname}:/root/logs #{ENV['WORKSPACE']}/.", true)
 
     # Get http hyper links to the logs and report summary files.
-    puts Sh.rrun("lynx --dump #{ENV['WORKSPACE']}/logs/*/test_report.html",
-                 true)
+    Sh.run("lynx --dump #{ENV['WORKSPACE']}/logs/*/test_report.html", true)
 
     # Check if any test failed or errored.
     count = Sh.rrun(
         %{lynx --dump #{ENV['WORKSPACE']}/logs/*/test_report.html | } +
         %{\grep Status: | \grep "Fail\\|Error" | wc -l}, true).to_i
 
-    puts "****** run_sanity:ci_sanity FAILED ******" if count != 0
+    if count != 0 then
+        puts "****** run_sanity:ci_sanity FAILED ******"
+    else
+        puts "****** run_sanity:ci_sanity PASSED ******"
+    end
     return count
 end
 
 def main
-    build_contrail_packages
+#   build_contrail_packages
     create_vms(6)
     setup_contrail
     install_contrail
