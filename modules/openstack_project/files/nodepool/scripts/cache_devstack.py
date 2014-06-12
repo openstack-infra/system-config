@@ -25,6 +25,11 @@ from common import run_local
 DEVSTACK = os.path.expanduser('/opt/git/openstack-dev/devstack')
 CACHEDIR = os.path.expanduser('~/cache/files')
 
+# Some jobs require newer distro packages.  We pre-cache deb packages from
+# specified Ubuntu Cloud Archive pockets.  The icehouse pocket contains
+# Ubuntu 14.04 packages built for 12.04.
+UCA_POCKETS = ['icehouse']
+
 
 def git_branches():
     branches = []
@@ -133,6 +138,24 @@ def download(url, fname):
     run_local(['wget', '-nv', '-c', url, '-O', os.path.join(CACHEDIR, fname)])
 
 
+def cache_debs(debs, uca_pocket=None):
+    """Cache a list of deb packages, optionally pulling from an Ubuntu Cloud
+    Archive pocket.  If a UCA pocket is specified, it is enabled temporarily
+    for caching only.
+    """
+    if uca_pocket:
+        # Note this will install the ubuntu-cloud-keyring package which
+        # contains the required GPG key.
+        run_local(['sudo', 'add-apt-repository', '-y',
+                   'cloud-archive:%s' % uca_pocket])
+        run_local(['sudo', 'apt-get', 'update'])
+    run_local(['sudo', 'apt-get', '-y', '-d', 'install'] + debs)
+    if uca_pocket:
+        run_local(['sudo', 'rm', '-f',
+                  '/etc/apt/sources.list.d/cloudarchive-%s.list' % uca_pocket])
+        run_local(['sudo', 'apt-get', 'update'])
+
+
 def main():
     distribution = sys.argv[1]
 
@@ -140,8 +163,9 @@ def main():
     image_filenames = []
     for branch_data in branches:
         if branch_data.get('debs'):
-            run_local(['sudo', 'apt-get', '-y', '-d', 'install'] +
-                      branch_data['debs'])
+            cache_debs(branch_data['debs'])
+            for uca in UCA_POCKETS:
+                cache_debs(branch_data['debs'], uca)
         elif branch_data.get('rpms'):
             run_local(['sudo', 'yum', 'install', '-y', '--downloadonly'] +
                       branch_data['rpms'])
