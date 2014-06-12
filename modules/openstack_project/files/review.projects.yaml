@@ -956,6 +956,7 @@
 - project: stackforge/python-solumclient
   description: 'Client library to Solum API. See: https://wiki.openstack.org/wiki/Solum'
   upstream: https://github.com/noorul/python-solumclient.git
+- project: stackforge/python-surveilclient
 - project: stackforge/rally
   description: Benchmark System for OpenStack
   upstream: git://github.com/pboris/rally.git
@@ -998,6 +999,9 @@
 - project: stackforge/stacktach
   description: Event-based Debugging, Monitoring and Billing solution for OpenStack.
   upstream: https://github.com/rackerlabs/stacktach.git
+- project: stackforge/surveil
+  description: Monitoring as a Service for OpenStack
+- project: stackforge/surveil-specs
 - project: stackforge/swift-ceph-backend
   description: Ceph backend for Swift
   upstream: git://github.com/enovance/swift-ceph-backend.git
