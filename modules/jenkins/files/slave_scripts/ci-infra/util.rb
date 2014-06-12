@@ -143,6 +143,7 @@ class Util
     end
 
     def self.ci_setup
+        $stdout.sync = true
         ENV['WORKSPACE'] ||= ENV['PWD']
         ENV['USER'] ||= "jenkins"
         ENV['ZUUL_BRANCH'] ||= Util.ci_default_branch

@@ -109,7 +109,7 @@ def install_contrail
     Sh.run "ssh #{vm.vmname} /usr/local/jenkins/slave_scripts/ci-infra/contrail_fab install_contrail"
     Sh.run "echo \"perl -ni -e 's/JVM_OPTS -Xss\\d+/JVM_OPTS -Xss512/g; print \\$_;' /etc/cassandra/cassandra-env.sh\" | ssh -t #{vm.vmname} \$(< /dev/fd/0)"
 
-#   Sh.run "ssh #{vm.vmname} /usr/local/jenkins/slave_scripts/ci-infra/contrail_fab setup_all"
+    Sh.run "ssh #{vm.vmname} /usr/local/jenkins/slave_scripts/ci-infra/contrail_fab setup_all" unless @options.fab_tests.nil?
 
     # Reduce number of nova-api and nova-conductors and fix scheduler for
     # even distribution of instances across all compute nodes.
@@ -140,7 +140,7 @@ end
 
 def setup_sanity
     vm = @vms.first
-    branch = ENV['ZUUL_BRANCH']
+    branch = @options.branch
     if branch != "master" then # use venv
         Sh.run("ssh #{vm.vmname} \"(source /opt/contrail/api-venv/bin/activate && source /etc/contrail_bashrc && pip install fixtures testtools testresources selenium pyvirtualdisplay)\"", false, 20, 4)
     else
@@ -158,7 +158,7 @@ def verify_contrail
 end
 
 def run_sanity
-    Sh.run("ssh #{@vms.first.vmname} /usr/local/jenkins/slave_scripts/ci-infra/contrail_fab run_sanity:ci_sanity", true)
+    Sh.run("ssh #{@vms.first.vmname} /usr/local/jenkins/slave_scripts/ci-infra/contrail_fab #{@options.fab_tests}", true) unless @options.fab_tests.nil?
 
     # Copy sanity log files, as the sub-slave VMs will go away.
     Sh.run("scp -r #{@vms.first.vmname}:/root/logs #{ENV['WORKSPACE']}/.", true)
@@ -178,14 +178,11 @@ def run_sanity
     else
         puts "****** run_sanity:ci_sanity PASSED ******"
     end
-
-    sleep 5
     return count
 end
 
 def run_test
-    ENV['COMPUTE_NODES'] ||= "1"
-    create_vms(0 + ENV['COMPUTE_NODES'].to_i)
+    create_vms(@options.control_nodes + @options.compute_nodes)
     setup_contrail
     install_contrail
     setup_sanity
@@ -195,14 +192,14 @@ end
 
 @options = OpenStruct.new
 @options.compute_nodes = 1
-@options.control_nodes = 1
-@options.image = nil
+@options.control_nodes = 0
+@options.image = "/root/contrail-install-packages_1.10main-6888~havana_all.deb"
 @options.branch = ENV['ZUUL_BRANCH'] || "master"
-@options.test_target = "run_sanity:ci_sanity"
+#@options.fab_tests = "run_sanity:ci_sanity"
 
 def parse_options(args = ARGV)
     opt_parser = OptionParser.new { |o|
-        o.banner = "Usage: #{$0} [options] [vms-count(#{Vm.options.count})"
+        o.banner = "Usage: #{$0} [options] [test-targets})"
         o.on("-c", "--compute-nodes [#{@options.compute_nodes}]",
              "Number of compute nodes") { |c|
             @options.compute_nodes = c.to_i
@@ -214,23 +211,26 @@ def parse_options(args = ARGV)
         o.on("-i", "--image [checkout and build]", "Image to load ") { |i|
             @options.image = i
         }
-        o.on("-b", "--branch [#{@options.branch}]", "Branch to use ") { |i|
-            @options.branch = i
+        o.on("-b", "--branch [#{@options.branch}]", "Branch to use ") { |b|
+            @options.branch = b
         }
-        o.on("-t", "--test [#{@options.test_target}]", "fab test target") { |t|
-            @options.test_target = t
+        o.on("-t", "--test [#{@options.fab_tests}]", "fab test target") { |t|
+            @options.fab_tests = t
         }
     }
     opt_parser.parse!(args)
-#   Vm.options.count = args[0].to_i unless args.empty?
+    if !args.empty? then
+        @options.fab_tests = ""
+        args.each { |t| @options.fab_tests += "#{t} " }
+    end
 end
 
-$stdout.sync = true
 if __FILE__ == $0 then
-    parse_options
     Util.ci_setup
-#   ContrailGitPrep.main(false)
-#   build_contrail_packages
-#   run_test
-    t = 60; 1.upto(t) { |i| print "#{i}/#{t}\n"; sleep 1 }
+    parse_options
+    if @options.image.nil? then
+        ContrailGitPrep.main(false)
+        build_contrail_packages
+    end
+    run_test
 end
