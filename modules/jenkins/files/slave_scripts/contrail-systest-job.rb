@@ -233,4 +233,5 @@ if __FILE__ == $0 then
 #   run_test
     puts "test1"
     puts "test2"
+    sleep 10
 end
