@@ -193,7 +193,6 @@ openstack-sahara:
 
 openstack-nova:
     events:
-      - patchset-created
       - x-vrif-minus-2
     projects:
       - openstack/gantt
