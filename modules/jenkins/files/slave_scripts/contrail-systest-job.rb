@@ -179,6 +179,7 @@ def run_sanity
         puts "****** run_sanity:ci_sanity PASSED ******"
     end
 
+    sleep 5
     return count
 end
 
@@ -192,13 +193,41 @@ def run_test
     Sh.exit(run_sanity)
 end
 
-# --control-nodes [1]
-# --compute-nodes [5]
-# --image-path /ci-admin/test_images/image_name.deb
-# --branch [master]
+@options = OpenStruct.new
+@options.compute_nodes = 1
+@options.control_nodes = 1
+@options.image = nil
+@options.branch = ENV['ZUUL_BRANCH'] || "master"
+@options.test_target = "run_sanity:ci_sanity"
+
+def parse_options(args = ARGV)
+    opt_parser = OptionParser.new { |o|
+        o.banner = "Usage: #{$0} [options] [vms-count(#{Vm.options.count})"
+        o.on("-c", "--compute-nodes [#{@options.compute_nodes}]",
+             "Number of compute nodes") { |c|
+            @options.compute_nodes = c.to_i
+        }
+        o.on("-C", "--control-nodes [#{@options.control_nodes}]",
+             "Number of control nodes") { |c|
+            @options.control_nodes = c.to_i
+        }
+        o.on("-i", "--image [checkout and build]", "Image to load ") { |i|
+            @options.image = i
+        }
+        o.on("-b", "--branch [#{@options.branch}]", "Branch to use ") { |i|
+            @options.branch = i
+        }
+        o.on("-t", "--test [#{@options.branch}]", "fab test target") { |t|
+            @options.test_target = t
+        }
+    }
+    opt_parser.parse!(args)
+#   Vm.options.count = args[0].to_i unless args.empty?
+end
 
 if __FILE__ == $0 then
     Util.ci_setup
+    parse_options
 #   ContrailGitPrep.main(false)
 #   build_contrail_packages
     run_test
