@@ -155,6 +155,16 @@ def verify_contrail
 end
 
 def run_sanity
+
+    # Check if sanities are disabled..
+    if @image_built then
+        skip_file = "/root/ci-test/skip_ci_sanity_#{ENV['ZUUL_BRANCH']}"
+        if Sh.rrun("ssh jenkins.opencontrail.org ls -1 #{skip_file} 2>/dev/null", true) =~ /#{skip_file}/ then
+            puts "SKIPPED: fab run_sanity:ci_sanity due to the presence of the file jenkins.opencontrail.org:#{skip_file}"
+            return 0
+        end
+    end
+
     Sh.run("ssh #{@vms.first.vmname} /usr/local/jenkins/slave_scripts/ci-infra/contrail_fab #{@options.fab_tests}", true) unless @options.fab_tests.nil?
 
     # Copy sanity log files, as the sub-slave VMs will go away.
@@ -228,7 +238,9 @@ end
 if __FILE__ == $0 then
     Util.ci_setup
     parse_options
+    @image_built = false
     if @options.image.nil? then
+        @image_built = true
         ContrailGitPrep.main(false) # Use private repo
         @options.image = build_contrail_packages
     end
