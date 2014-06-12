@@ -514,6 +514,7 @@ solum:
       - stackforge/python-solumclient
       - stackforge/solum-dashboard
       - stackforge/solum-specs
+      - stackforge/solum-infra-guestagent
     branches:
       - master
 
