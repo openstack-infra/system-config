@@ -4426,6 +4426,18 @@ projects:
       - noop
     gate:
       - noop
+      
+  - name: stackforge/solum-infra-guestagent
+    template:
+      - name: python-jobs
+      - name: check-requirements
+      - name: publish-to-pypi-2only
+    check:
+      - gate-solum-infra-guestagent-python33
+      - gate-solum-infra-guestagent-pypy
+    gate:
+      - gate-solum-infra-guestagent-python33
+      - gate-solum-infra-guestagent-pypy
 
   - name: stackforge/rally
     template:

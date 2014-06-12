@@ -2649,6 +2649,16 @@
       - pypi-jobs
 
 - project:
+    name: solum-infra-guestagent
+    github-org: stackforge
+    node: bare-precise
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - python-jobs
+      - pypi-jobs
+
+- project:
     name: heat-translator
     github-org: stackforge
     node: 'bare-precise || bare-trusty'
@@ -2888,4 +2898,3 @@
       - manual-translation-jobs
       - security-doc-{lang}:
           lang: ja
-
