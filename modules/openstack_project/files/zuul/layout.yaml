@@ -4190,6 +4190,22 @@ projects:
       - python-manilaclient-branch-tarball
       - python-manilaclient-coverage
 
+  - name: stackforge/python-monascaclient
+    template:
+      - name: publish-to-pypi
+    check:
+      - gate-python-monascaclient-pep8
+      # Changes need to be made so that the python will run on
+      # 2.6 and 3.3 so just check those for now
+      - gate-python-monascaclient-python26
+      - gate-python-monascaclient-python27
+      - gate-python-monascaclient-python33
+    gate:
+      - gate-python-monascaclient-pep8
+      - gate-python-monascaclient-python27
+    post:
+      - python-monascaclient-coverage
+
   - name: stackforge/python-muranoclient
     template:
       - name: publish-to-pypi
