@@ -193,7 +193,7 @@ end
 
 if __FILE__ == $0 then
     Util.ci_setup
-#   ContrailGitPrep.main(false)
+    ContrailGitPrep.main(false)
 #   build_contrail_packages
     run_test
 end
