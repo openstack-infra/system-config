@@ -217,7 +217,7 @@ def parse_options(args = ARGV)
         o.on("-b", "--branch [#{@options.branch}]", "Branch to use ") { |i|
             @options.branch = i
         }
-        o.on("-t", "--test [#{@options.branch}]", "fab test target") { |t|
+        o.on("-t", "--test [#{@options.test_target}]", "fab test target") { |t|
             @options.test_target = t
         }
     }
@@ -230,5 +230,7 @@ if __FILE__ == $0 then
     Util.ci_setup
 #   ContrailGitPrep.main(false)
 #   build_contrail_packages
-    run_test
+#   run_test
+    puts "test1"
+    puts "test2"
 end
