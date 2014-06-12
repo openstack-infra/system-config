@@ -298,7 +298,7 @@ node /^logstash-worker\d+\.openstack\.org$/ {
   }
 }
 
-node /^elasticsearch\d+\.openstack\.org$/ {
+node /^elasticsearch0[1-6]\.openstack\.org$/ {
   class { 'openstack_project::elasticsearch_node':
     sysadmins             => hiera('sysadmins', ['admin']),
     elasticsearch_nodes   => $elasticsearch_nodes,
