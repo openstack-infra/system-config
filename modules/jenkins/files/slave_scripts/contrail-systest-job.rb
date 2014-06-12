@@ -4,8 +4,7 @@ $LOAD_PATH.unshift "/usr/local/jenkins/slave_scripts/",
                    "/usr/local/jenkins/slave_scripts/ci-infra"
 
 require 'util'
-
-Util.ci_setup
+require 'contrail-git-prep'
 
 def create_vms(count = 1)
     Vm.create_subslaves(count)
@@ -183,14 +182,18 @@ def run_sanity
     return count
 end
 
-def main
-#   build_contrail_packages
-    create_vms(6)
+def run_test
+    create_vms(1)
     setup_contrail
-    install_contrail
-    setup_sanity
-    verify_contrail
+#   install_contrail
+#   setup_sanity
+#   verify_contrail
     Sh.exit(run_sanity)
 end
 
-main
+if __FILE__ == $0 then
+    Util.ci_setup
+#   ContrailGitPrep.main(false)
+#   build_contrail_packages
+    run_test
+end
