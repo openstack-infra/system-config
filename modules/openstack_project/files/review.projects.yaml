@@ -916,6 +916,10 @@
   group: mistral
   upstream: git://github.com/rakhmerov/python-mistralclient.git
   acl-config: /home/gerrit2/acls/stackforge/mistral.config
+- project: stackforge/python-monascaclient
+  description: Python client for Monasca REST API.
+  group: monasca
+  upstream: git://github.com/hpcloud-mon/python-monclient
 - project: stackforge/python-muranoclient
   group: murano
   upstream: git://github.com/Mirantis/python-muranoclient.git
