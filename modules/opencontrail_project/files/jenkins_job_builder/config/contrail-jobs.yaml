@@ -34,7 +34,6 @@
           rm -rf $WORKSPACE/* $WORKSPACE/.* || true
 
           /usr/bin/ci_setup.sh
-#         ruby /usr/local/jenkins/slave_scripts/contrail-git-prep.rb use_private
           ruby /usr/local/jenkins/slave_scripts/contrail-systest-job.rb
 
 - job-template:
