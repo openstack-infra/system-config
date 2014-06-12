@@ -282,7 +282,7 @@ projects:
     check-tripleo:
       - noop
     gate:
-      - ci-contrail-controller-test-systest
+      - ci-contrail-controller-systest
     post:
       - noop
 
@@ -306,6 +306,6 @@ projects:
     check-tripleo:
       - noop
     gate:
-      - ci-contrail-controller-test-systest
+      - ci-contrail-controller-systest
     post:
       - noop
