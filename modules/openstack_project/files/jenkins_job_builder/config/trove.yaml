@@ -1,5 +1,5 @@
-- job:
-    name: 'gate-trove-buildimage-mysql'
+- job-template:
+    name: 'gate-trove-buildimage-{datastore}'
     node: 'bare-precise'
 
     builders:
@@ -13,15 +13,15 @@
           export DEST=/opt/trove-image-build
           export KEY_DIR=`pwd`/scripts/files/keys
           cd scripts
-          ./redstack build-image mysql
-          mv $HOME/images/ubuntu_mysql/ubuntu_mysql.qcow2 $WORKSPACE/ubuntu_mysql.qcow2
+          ./redstack build-image {datastore}
+          mv $HOME/images/ubuntu_{datastore}/ubuntu_{datastore}.qcow2 $WORKSPACE/{datastore}.qcow2
 
     publishers:
       - scp:
           site: 'tarballs.openstack.org'
           files:
-            - source: 'ubuntu_mysql.qcow2'
-              target: 'tarballs/trove/images/ubuntu_mysql.qcow2'
+            - source: '{datastore}.qcow2'
+              target: 'tarballs/trove/images/ubuntu'
               keep-hierarchy: false
               copy-after-failure: false
       - console-log
