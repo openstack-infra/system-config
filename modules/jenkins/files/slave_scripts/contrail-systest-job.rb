@@ -226,8 +226,8 @@ def parse_options(args = ARGV)
 end
 
 if __FILE__ == $0 then
-    Util.ci_setup
     parse_options
+    Util.ci_setup
 #   ContrailGitPrep.main(false)
 #   build_contrail_packages
     run_test
