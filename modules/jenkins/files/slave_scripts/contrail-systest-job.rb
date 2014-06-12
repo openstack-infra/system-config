@@ -231,7 +231,5 @@ if __FILE__ == $0 then
 #   ContrailGitPrep.main(false)
 #   build_contrail_packages
 #   run_test
-    puts "test1"
-    puts "test2"
-    sleep 10
+    t = 60; 1.upto(t) { |i| puts "#{i}/#{t}"; sleep 1 }
 end
