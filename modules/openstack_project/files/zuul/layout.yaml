@@ -4246,6 +4246,18 @@ projects:
     gate:
       - gate-solum-dashboard-pypy
 
+  - name: stackforge/solum-guestagent
+    template:
+      - name: python-jobs
+      - name: check-requirements
+      - name: publish-to-pypi-2only
+    check:
+      - gate-solum-guestagent-python33
+      - gate-solum-guestagent-pypy
+    gate:
+      - gate-solum-guestagent-python33
+      - gate-solum-guestagent-pypy
+
   - name: stackforge/rally
     template:
       - name: check-requirements
