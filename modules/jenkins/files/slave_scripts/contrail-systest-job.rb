@@ -208,7 +208,7 @@ def parse_options(args = ARGV)
         o.on("-i", "--image [checkout and build]", "Image to load") { |i|
             @options.image = i
             dest_image = Sh.rrun "basename #{i}"
-            Sh.run("sshpass -p c0ntrail123 scp ci-admin@ubuntu-build02:#{i} #{dest_image}"
+            Sh.run("sshpass -p c0ntrail123 scp ci-admin@ubuntu-build02:#{i} #{dest_image})"
 
         }
         o.on("-b", "--branch [#{@options.branch}]", "Branch to use ") { |b|
