@@ -105,7 +105,7 @@ class Vm
             end
             Kernel.exit!
         end
-        Process.detach(@keepalive_pid)
+#       Process.detach(@keepalive_pid)
     end
 
     def Vm.create_internal(vmname, floatingip, metadata, flavor = 4) # large
