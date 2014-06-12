@@ -186,14 +186,14 @@ def run_test
     create_vms(1)
     setup_contrail
 #   install_contrail
-#   setup_sanity
+    setup_sanity
 #   verify_contrail
     Sh.exit(run_sanity)
 end
 
 if __FILE__ == $0 then
     Util.ci_setup
-    ContrailGitPrep.main(false)
+#   ContrailGitPrep.main(false)
 #   build_contrail_packages
     run_test
 end
