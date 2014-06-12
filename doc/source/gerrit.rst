@@ -315,8 +315,6 @@ Next, edit `project.config` to look like::
       pushMerge = group Continuous Integration Tools
   [access "refs/for/refs/zuul/*"]
       pushMerge = group Continuous Integration Tools
-  [accounts]
-      sameGroupVisibility = deny group CLA Accepted - ICLA
   [contributor-agreement "ICLA"]
       description = OpenStack Individual Contributor License Agreement
       requireContactInformation = true
