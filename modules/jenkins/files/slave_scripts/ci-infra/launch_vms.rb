@@ -79,6 +79,10 @@ class Vm
         @parent_pid = Process.pid
         @keepalive_pid = Process.fork
         if @keepalive_pid.nil? then
+            # Close file descriptors shared with the parent. This messes up
+            # communication channels with the master otherwise.
+            $stdin.close; $stdout.close; $stderr.close
+
             kfile = "/root/#{@vmname}-jenkins-keepalive.log"
             hostip = @hostip
             loop do begin

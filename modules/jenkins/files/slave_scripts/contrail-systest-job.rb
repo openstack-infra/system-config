@@ -180,7 +180,6 @@ def run_sanity
         puts "****** run_sanity:ci_sanity PASSED ******"
     end
 
-    sleep 5
     return count
 end
 
