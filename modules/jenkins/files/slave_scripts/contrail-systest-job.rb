@@ -225,6 +225,7 @@ def parse_options(args = ARGV)
 #   Vm.options.count = args[0].to_i unless args.empty?
 end
 
+$stdout.sync = true
 if __FILE__ == $0 then
     parse_options
     Util.ci_setup
