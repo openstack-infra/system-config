@@ -1563,7 +1563,6 @@ projects:
       - gate-diskimage-builder-pep8
       - gate-diskimage-builder-python26
       - gate-diskimage-builder-python27
-      - gate-oslotest-dsvm-diskimage-builder
       - gate-tempest-dsvm-virtual-ironic
     experimental-tripleo:
       - check-tripleo-ironic-undercloud-precise
@@ -1840,7 +1839,6 @@ projects:
     gate:
       - gate-oslo.config-python33
       - gate-devstack-dsvm-cells
-      - gate-oslotest-dsvm-oslo.config
     experimental-tripleo:
       - check-tripleo-ironic-seed-precise
       - check-tripleo-undercloud-precise
@@ -1882,7 +1880,6 @@ projects:
     gate:
       - gate-oslo.i18n-python33
       - gate-devstack-dsvm-cells
-      - gate-oslotest-dsvm-oslo.i18n
     experimental-tripleo:
       - check-tripleo-ironic-seed-precise
       - check-tripleo-undercloud-precise
@@ -1905,7 +1902,6 @@ projects:
       - gate-devstack-dsvm-cells
       - gate-tempest-dsvm-large-ops
       - gate-tempest-dsvm-neutron-large-ops
-      - gate-oslotest-dsvm-oslo.messaging
     experimental-tripleo:
       - check-tripleo-ironic-seed-precise
       - check-tripleo-undercloud-precise
@@ -2200,7 +2196,7 @@ projects:
       - check-tripleo-undercloud-precise
       - check-tripleo-overcloud-f20
     gate:
-      - gate-oslotest-dsvm-tripleo-image-elements
+      - noop
     experimental-tripleo:
       - check-tripleo-ironic-undercloud-precise
       - check-tripleo-overcloud-precise
