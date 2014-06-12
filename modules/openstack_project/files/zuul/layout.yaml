@@ -653,6 +653,9 @@ jobs:
     voting: false
   - name: gate-pecan-tox-barbican-tip
     voting: false
+    # this is a terrible configuration that relies on the network too much
+  - name: gate-tempest-dsvm-virtual-ironic
+    voting: false
   # Swift log publishing details
   - name: ^experimental-swift-logs.*$
     swift:
