@@ -690,18 +690,15 @@ projects:
       - name: openstack-server-publish-jobs
       - name: periodic-havana
       - name: check-requirements
+      - name: integrated-gate
     check:
       - check-devstack-dsvm-cells
-      - check-tempest-dsvm-full
-      - check-tempest-dsvm-postgres-full
-      - check-tempest-dsvm-neutron
       - check-swift-dsvm-functional
     gate:
       - gate-devstack-dsvm-cells
-      - gate-tempest-dsvm-full
-      - gate-tempest-dsvm-postgres-full
-      - gate-tempest-dsvm-neutron
       - gate-swift-dsvm-functional
+    experimental:
+      - gate-grenade-dsvm-forward
     post:
       - ceilometer-upstream-translation-update
     pre-release:
