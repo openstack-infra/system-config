@@ -109,7 +109,7 @@ def install_contrail
     Sh.run "ssh #{vm.vmname} /usr/local/jenkins/slave_scripts/ci-infra/contrail_fab install_contrail"
     Sh.run "echo \"perl -ni -e 's/JVM_OPTS -Xss\\d+/JVM_OPTS -Xss512/g; print \\$_;' /etc/cassandra/cassandra-env.sh\" | ssh -t #{vm.vmname} \$(< /dev/fd/0)"
 
-    Sh.run "ssh #{vm.vmname} /usr/local/jenkins/slave_scripts/ci-infra/contrail_fab setup_all"
+#   Sh.run "ssh #{vm.vmname} /usr/local/jenkins/slave_scripts/ci-infra/contrail_fab setup_all"
 
     # Reduce number of nova-api and nova-conductors and fix scheduler for
     # even distribution of instances across all compute nodes.
@@ -183,13 +183,19 @@ def run_sanity
 end
 
 def run_test
-    create_vms(1)
+    ENV['COMPUTE_NODES'] ||= "1"
+    create_vms(0 + ENV['COMPUTE_NODES'].to_i)
     setup_contrail
-#   install_contrail
+    install_contrail
     setup_sanity
-#   verify_contrail
+    verify_contrail
     Sh.exit(run_sanity)
 end
+
+# --control-nodes [1]
+# --compute-nodes [5]
+# --image-path /ci-admin/test_images/image_name.deb
+# --branch [master]
 
 if __FILE__ == $0 then
     Util.ci_setup
