@@ -170,7 +170,8 @@ def run_sanity
         %{lynx --dump #{ENV['WORKSPACE']}/logs/*/test_report.html | } +
         %{\grep Status: | \grep "Fail\\|Error" | wc -l}, true).to_i
 
-    if count.nil? or count != 0 then
+    count = 1 if count.nil?
+    if count != 0 then
         puts "****** run_sanity:ci_sanity FAILED ******"
     else
         puts "****** run_sanity:ci_sanity PASSED ******"
