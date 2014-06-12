@@ -18,6 +18,12 @@ class Sh
         @@exit_code = code
         Kernel.exit(code)
     end
+
+    def Sh.exit!(code = @@exit_code)
+        puts "Fail exit with code #{code}"
+        Process.exit!(code)
+    end
+
     def Sh.dry_run?
         return !ENV['DRY_RUN'].nil? && ENV['DRY_RUN'].casecmp("true") == 0
     end
