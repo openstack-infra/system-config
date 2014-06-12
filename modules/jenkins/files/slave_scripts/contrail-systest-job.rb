@@ -75,16 +75,11 @@ EOF
     return topo
 end
 
-def setup_contrail
-    if @image.nil? then
-#       @image = "/root/contrail-install-packages_1.05-5780~havana_all.deb"
-#       ENV['ZUUL_BRANCH'] = "R1.05"
-        @image = "/root/contrail-install-packages_1.10main-6888~havana_all.deb"
-        Sh.run("scp jenkins.opencontrail.org:#{@image} #{@image}") \
-            unless File.file? @image
-    end
-    dest_image = Sh.rrun "basename #{@image}"
-    puts "setup_contrail: #{@image}"
+def setup_contrail(image)
+    return if image.nil? or !File.file? image
+
+    dest_image = Sh.rrun "basename #{image}"
+    puts "setup_contrail: #{image}"
     `mkdir -p #{ENV['WORKSPACE']}`
     @topo_file = "#{ENV['WORKSPACE']}/testbed.py"
 
@@ -94,7 +89,7 @@ def setup_contrail
 
     @vms.each { |vm|
 #       Sh.run "ssh root@#{vm.vmname} apt-get update"
-        Sh.run("scp #{@image} root@#{vm.vmname}:#{dest_image}", false, 50, 10)
+        Sh.run("scp #{image} root@#{vm.vmname}:#{dest_image}", false, 50, 10)
         Sh.run "ssh #{vm.vmname} dpkg -i #{dest_image}"
 
         # Apply patch to setup.sh to retain apt.conf proxy settings.
@@ -134,8 +129,10 @@ def build_contrail_packages(repo = "#{ENV['WORKSPACE']}/repo")
     Sh.run "ls -alh #{repo}/build/artifacts/contrail-install-packages_*_all.deb"
 
     # Return the all-in-one debian package file path.
-    @image = Sh.rrun "ls -1 #{repo}/build/artifacts/contrail-install-packages_*_all.deb"
-    puts "Successfully built package #{@image}"
+    image = Sh.rrun "ls -1 #{repo}/build/artifacts/contrail-install-packages_*_all.deb"
+    puts "Successfully built package #{image}"
+
+    return image
 end
 
 def setup_sanity
@@ -181,9 +178,9 @@ def run_sanity
     return count
 end
 
-def run_test
+def run_test(image = @options.image)
     create_vms(@options.control_nodes + @options.compute_nodes)
-    setup_contrail
+    setup_contrail(image)
     install_contrail
     setup_sanity
     verify_contrail
@@ -192,10 +189,10 @@ end
 
 @options = OpenStruct.new
 @options.compute_nodes = 1
-@options.control_nodes = 0
-@options.image = "/root/contrail-install-packages_1.10main-6888~havana_all.deb"
+@options.control_nodes = 1
+@options.image = nil
 @options.branch = ENV['ZUUL_BRANCH'] || "master"
-#@options.fab_tests = "run_sanity:ci_sanity"
+@options.fab_tests = "run_sanity:ci_sanity"
 
 def parse_options(args = ARGV)
     opt_parser = OptionParser.new { |o|
@@ -208,8 +205,11 @@ def parse_options(args = ARGV)
              "Number of control nodes") { |c|
             @options.control_nodes = c.to_i
         }
-        o.on("-i", "--image [checkout and build]", "Image to load ") { |i|
+        o.on("-i", "--image [checkout and build]", "Image to load") { |i|
             @options.image = i
+            dest_image = Sh.rrun "basename #{i}"
+            Sh.run("sshpass -p c0ntrail123 scp ci-admin@ubuntu-build02:#{i} #{dest_image}"
+
         }
         o.on("-b", "--branch [#{@options.branch}]", "Branch to use ") { |b|
             @options.branch = b
@@ -229,8 +229,9 @@ if __FILE__ == $0 then
     Util.ci_setup
     parse_options
     if @options.image.nil? then
-        ContrailGitPrep.main(false)
-        build_contrail_packages
+        ContrailGitPrep.main(false) # Use private repo
+        @options.image = build_contrail_packages
     end
+
     run_test
 end
