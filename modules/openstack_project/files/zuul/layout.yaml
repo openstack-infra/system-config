@@ -451,6 +451,8 @@ jobs:
   - name: ^(gate|check)-grenade-dsvm-neutron-forward
     branch: ^(stable/).*$
     voting: false
+  - name: ^(gate|check)-tempest-dsvm-partial-ncpu$
+    branch: ^(?!stable/).*$
   - name: check-tempest-dsvm-full-havana
     voting: false
   - name: check-tempest-dsvm-neutron-havana
