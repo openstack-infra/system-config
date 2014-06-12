@@ -73,10 +73,14 @@ sudo dd of=/etc/rc.local <<EOF
 set -e
 set -o xtrace
 
-echo 'nameserver 127.0.0.1' > /etc/resolv.conf
+echo 'nameserver 127.0.2.1' > /etc/resolv.conf
 
 exit 0
 EOF
+
+# Unbound should listen on 127.0.2.1, to avoid conflicting with
+# Designate managed DNS servers
+sudo bash -c "echo '      interface: 127.0.2.1' >> /etc/unbound/unbound.conf"
 
 sudo bash -c "echo 'include: /etc/unbound/forwarding.conf' >> /etc/unbound/unbound.conf"
 if [ -e /etc/init.d/unbound ] ; then

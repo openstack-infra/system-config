@@ -58,7 +58,7 @@ class unbound (
     }
 
     # HPCloud uses dhclient; tell dhclient to use our nameserver instead.
-    exec { '/usr/bin/printf "\nsupersede domain-name-servers 127.0.0.1;\n" >> /etc/dhcp/dhclient-eth0.conf':
+    exec { '/usr/bin/printf "\nsupersede domain-name-servers 127.0.2.1;\n" >> /etc/dhcp/dhclient-eth0.conf':
         unless => '/bin/grep -q "supersede domain-name-servers" /etc/dhcp/dhclient-eth0.conf'
     }
   }
@@ -66,7 +66,7 @@ class unbound (
   if ($install_resolv_conf) {
     # Rackspace uses static config files
     file { '/etc/resolv.conf':
-      content => "nameserver 127.0.0.1\n",
+      content => "nameserver 127.0.2.1\n",
       owner   => 'root',
       group   => 'root',
       mode    => '0444',
