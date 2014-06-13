@@ -111,7 +111,7 @@ class Sh
     end
 end
 
-Add some useful routines to Vm class.
+# Add some useful routines to Vm class.
 class Vm
     def Vm.get_hostname(type="name")
 
