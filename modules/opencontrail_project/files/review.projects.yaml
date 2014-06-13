@@ -18,12 +18,17 @@
   upstream: git@github.com:Juniper/contrail-vrouter
   acl-config: /home/gerrit2/acls/Juniper/contrail-vrouter.config
 
-- project: Juniper/contrail-neutron-plugin
-  description: Opencontrail Neutron plugin and extensions
-  upstream: git@github.com:Juniper/contrail-neutron-plugin
-  acl-config: /home/gerrit2/acls/Juniper/contrail-neutron-plugin.config
+- project: Juniper/contrail-build
+  description: Contrail VNC build tools
+  upstream: git@github.com:Juniper/contrail-build
+  acl-config: /home/gerrit2/acls/Juniper/contrail-build.config
 
-- project: Juniper/contrail-nova-vif-driver
-  description: OpenStack Nova VIF driver for OpenContrail
-  upstream: git@github.com:Juniper/contrail-nova-vif-driver
-  acl-config: /home/gerrit2/acls/Juniper/contrail-nova-vif-driver.config
+- project: Juniper/contrail-packages
+  description: Build and packaging scripts for OpenContrail.
+  upstream: git@github.com:Juniper/contrail-packages
+  acl-config: /home/gerrit2/acls/Juniper/contrail-packages.config
+
+- project: Juniper/contrail-third-party
+  description: Third Party sources
+  upstream: git@github.com:Juniper/contrail-third-party
+  acl-config: /home/gerrit2/acls/Juniper/contrail-third-party.config

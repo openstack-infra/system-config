@@ -35,7 +35,7 @@
 #     - contrail-devstack-jobs
 
 - project:
-    name: contrail-neutron-plugin
+    name: contrail-build
     github-org: Juniper
     node: juniper-tests
     tarball-site: tarballs.openstack.org
@@ -45,7 +45,17 @@
       - contrail-unittest-jobs
 
 - project:
-    name: contrail-nova-vif-driver
+    name: contrail-packages
+    github-org: Juniper
+    node: juniper-tests
+    tarball-site: tarballs.openstack.org
+    doc-publisher-site: docs.opencontrail.org
+
+    jobs:
+      - contrail-unittest-jobs
+
+- project:
+    name: contrail-third-party
     github-org: Juniper
     node: juniper-tests
     tarball-site: tarballs.openstack.org

@@ -312,9 +312,9 @@ projects:
     post:
       - noop
 
-  - name: Juniper/contrail-neutron-plugin
+  - name: Juniper/contrail-build
     check:
-      - ci-contrail-neutron-plugin-unittest
+      - ci-contrail-build-unittest
     silent:
       - noop
     check-tripleo:
@@ -324,9 +324,21 @@ projects:
     post:
       - noop
 
-  - name: Juniper/contrail-nova-vif-driver
+  - name: Juniper/contrail-packages
     check:
-      - ci-contrail-nova-vif-driver-unittest
+      - ci-contrail-packages-unittest
+    silent:
+      - noop
+    check-tripleo:
+      - noop
+    gate:
+      - noop
+    post:
+      - noop
+
+  - name: Juniper/contrail-third-party
+    check:
+      - ci-contrail-third-party-unittest
     silent:
       - noop
     check-tripleo:
