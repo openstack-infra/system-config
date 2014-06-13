@@ -17,7 +17,6 @@ At a Glance
   * http://devstack-launch.slave.openstack.org/
 :Puppet:
   * :file:`modules/openstack_project/manifests/template.pp`
-  * :file:`modules/openstack_project/manifests/devstack_launch_slave.pp`
 :Projects:
   * https://git.openstack.org/openstack-infra/devstack-gate
 :Bugs:
