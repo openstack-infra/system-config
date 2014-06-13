@@ -196,12 +196,12 @@ end
 @options.fab_tests = "run_sanity:ci_sanity"
 
 @options.nodes = 2
-@options.cfgm = ["host1"],
-@options.openstack = ["host1"],
-@options.control = ["host1"],
-@options.collector = ["host1"],
-@options.webui = ["host1"],
-@options.database = ["host1"],
+@options.cfgm = ["host1"]
+@options.openstack = ["host1"]
+@options.control = ["host1"]
+@options.collector = ["host1"]
+@options.webui = ["host1"]
+@options.database = ["host1"]
 @options.compute = ["host2"]
 
 def parse_options(args = ARGV)
@@ -225,31 +225,31 @@ def parse_options(args = ARGV)
         o.on("-n", "--nodes [#{@options.nodes}]", "Number of nodes") { |n|
             @options.nodes = n
         }
-        o.on("--cfgm host1,host2,..", Array, "List of cfgm nodes " +
+        o.on("--cfgm host1,..", Array, "List of cfgm nodes " +
              "#{@options.cfgm}") { |list|
             @options.cfgm = list
         }
-        o.on("--openstack host1,host2,..", Array, "List of openstack nodes " +
+        o.on("--openstack host1,..", Array, "List of openstack nodes " +
              "#{@options.openstack}") { |list|
             @options.openstack = list
         }
-        o.on("--control host1,host2,..", Array, "List of control nodes " +
+        o.on("--control host1,..", Array, "List of control nodes " +
              "#{@options.control}") { |list|
             @options.control = list
         }
-        o.on("--collector host1,host2,..", Array, "List of collector nodes " +
+        o.on("--collector host1,..", Array, "List of collector nodes " +
              "#{@options.collector}") { |list|
             @options.collector = list
         }
-        o.on("--webui host1,host2,..", Array, "List of webui nodes " +
+        o.on("--webui host1,..", Array, "List of webui nodes " +
              "#{@options.webui}") { |list|
             @options.webui = list
         }
-        o.on("--database host1,host2,..", Array, "List of database nodes " +
+        o.on("--database host1,..", Array, "List of database nodes " +
              "#{@options.database}") { |list|
             @options.database = list
         }
-        o.on("--compute host1,host2,..", Array, "List of compute nodes " +
+        o.on("--compute host2,..", Array, "List of compute nodes " +
              "#{@options.compute}") { |list|
             @options.compute = list
             compute_set = true
