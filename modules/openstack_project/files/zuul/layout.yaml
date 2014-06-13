@@ -732,7 +732,6 @@ projects:
     check:
       - gate-cinder-pylint
       - check-devstack-dsvm-cells
-      - check-tempest-dsvm-postgres-full
       - check-rally-dsvm-cinder
     gate:
       - gate-devstack-dsvm-cells
@@ -1178,10 +1177,6 @@ projects:
       - name: check-requirements
       - name: integrated-gate
       - name: openstack-doc-gate
-    check:
-      - check-tempest-dsvm-postgres-full
-    gate:
-      - gate-tempest-dsvm-postgres-full
     post:
       - trove-upstream-translation-update
       - trove-tox-doc-publishdocs
