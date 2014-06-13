@@ -1561,7 +1561,6 @@
     jobs:
       - python-jobs
       - pypi-jobs
-      - oslotest-cross-test
 
 - project:
     name: dib-utils
@@ -1644,7 +1643,6 @@
     jobs:
       - python-jobs
       - pypi-jobs
-      - oslotest-cross-test
 
 - project:
     name: tripleo-incubator
