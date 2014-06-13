@@ -223,7 +223,7 @@ def parse_options(args = ARGV)
         }
 
         o.on("-n", "--nodes [#{@options.nodes}]", "Number of nodes") { |n|
-            @options.nodes = n
+            @options.nodes = n.to_i
         }
         o.on("--cfgm host1,..", Array, "List of cfgm nodes " +
              "#{@options.cfgm}") { |list|
