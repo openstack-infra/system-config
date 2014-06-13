@@ -268,9 +268,6 @@ def parse_options(args = ARGV)
             2.upto(@options.nodes) { |i| @options.compute.push("host#{i}") }
         end
     end
-
-    get_topo
-    exit
 end
 
 if __FILE__ == $0 then
