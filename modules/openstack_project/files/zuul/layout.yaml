@@ -647,6 +647,9 @@ jobs:
     voting: false
   - name: gate-manila-tempest-dsvm-neutron-multibackend
     voting: false
+  - name: gate-manila-devstack-dsvm-neutron
+    branch: master
+    voting: false
   - name: gate-blazar-devstack-dsvm
     voting: false
   - name: gate-blazar-pylint
@@ -3635,6 +3638,7 @@ projects:
 
   - name: stackforge/manila
     check:
+      - gate-manila-devstack-dsvm-neutron
       - gate-manila-docs
       - gate-manila-pep8
       - gate-manila-pylint
@@ -3646,6 +3650,7 @@ projects:
       - gate-manila-pep8
       - gate-manila-python26
       - gate-manila-python27
+      - gate-manila-devstack-dsvm-neutron
     post:
       - manila-branch-tarball
       - manila-coverage
