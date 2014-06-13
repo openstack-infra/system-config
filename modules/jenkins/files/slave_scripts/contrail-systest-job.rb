@@ -98,6 +98,11 @@ def install_contrail
 
     Sh.run "ssh #{vm.vmname} /usr/local/jenkins/slave_scripts/ci-infra/contrail_fab setup_all" unless @options.fab_tests.nil?
 
+    @vms.each { |vm|
+        Sh.run "echo \"perl -ni -e 's/libvirt_type=kvm/libvirt_type=qemu/g; print \\$_;' /etc/nova/nova-compute.conf\" | ssh -t #{vm.vmname} \$(< /dev/fd/0)", true
+        Sh.run "ssh #{vm.vmname} service nova-compute restart", true
+    }
+
     # Reduce number of nova-api and nova-conductors and fix scheduler for
     # even distribution of instances across all compute nodes.
 #   Sh.run "ssh #{vm.vmname} /usr/bin/openstack-config --set /etc/nova/nova.conf conductor workers 2"
