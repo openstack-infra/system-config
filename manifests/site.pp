@@ -251,6 +251,7 @@ $elasticsearch_nodes = [
   'elasticsearch04.openstack.org',
   'elasticsearch05.openstack.org',
   'elasticsearch06.openstack.org',
+  'elasticsearch07.openstack.org',
 ]
 
 node 'logstash.openstack.org' {
@@ -280,12 +281,12 @@ node 'logstash.openstack.org' {
       'logstash-worker20.openstack.org',
     ],
     discover_nodes                  => [
-      'elasticsearch01.openstack.org:9200',
       'elasticsearch02.openstack.org:9200',
       'elasticsearch03.openstack.org:9200',
       'elasticsearch04.openstack.org:9200',
       'elasticsearch05.openstack.org:9200',
       'elasticsearch06.openstack.org:9200',
+      'elasticsearch07.openstack.org:9200',
     ],
   }
 }
@@ -294,11 +295,11 @@ node /^logstash-worker\d+\.openstack\.org$/ {
   class { 'openstack_project::logstash_worker':
     sysadmins           => hiera('sysadmins', ['admin']),
     elasticsearch_nodes => $elasticsearch_nodes,
-    discover_node       => 'elasticsearch01.openstack.org',
+    discover_node       => 'elasticsearch02.openstack.org',
   }
 }
 
-node /^elasticsearch0[1-6]\.openstack\.org$/ {
+node /^elasticsearch0[1-7]\.openstack\.org$/ {
   class { 'openstack_project::elasticsearch_node':
     sysadmins             => hiera('sysadmins', ['admin']),
     elasticsearch_nodes   => $elasticsearch_nodes,
