@@ -64,10 +64,8 @@ EOF
 else
     #defaults to Ubuntu
 
-    lsbdistcodename=`lsb_release -c -s`
-    if [ $lsbdistcodename != 'trusty' ] ; then
-        # NB: keep in sync with openstack_project/files/00-puppet.pref
-        cat > /etc/apt/preferences.d/00-puppet.pref <<EOF
+    # NB: keep in sync with openstack_project/files/00-puppet.pref
+    cat > /etc/apt/preferences.d/00-puppet.pref <<EOF
 Package: puppet puppet-common puppetmaster puppetmaster-common puppetmaster-passenger
 Pin: version 2.7*
 Pin-Priority: 501
@@ -76,6 +74,9 @@ Package: facter
 Pin: version 1.*
 Pin-Priority: 501
 EOF
+
+    lsbdistcodename=`lsb_release -c -s`
+    if [ $lsbdistcodename != 'trusty' ] ; then
         rubypkg=rubygems
     else
         rubypkg=ruby
