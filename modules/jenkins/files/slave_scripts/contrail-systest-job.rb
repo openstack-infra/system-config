@@ -46,7 +46,7 @@ env.roledefs = {
     'collector': [#{@options.collector.join(",")}],
     'webui': [#{@options.webui.join(",")}],
     'database': [#{@options.database.join(",")}],
-    'compute': [#{@options.compute.join(","))}],
+    'compute': [#{@options.compute.join(",")}],
     'build': [host_build],
 }
 
