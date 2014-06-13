@@ -7,7 +7,7 @@
 
     jobs:
       - contrail-unittest-jobs
-#     - contrail-systest-jobs
+      - contrail-systest-jobs
 #     - contrail-devstack-jobs
 
 - project:
@@ -31,7 +31,7 @@
 
     jobs:
       - contrail-unittest-jobs
-#     - contrail-systest-jobs
+      - contrail-systest-jobs
 #     - contrail-devstack-jobs
 
 - project:

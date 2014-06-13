@@ -4,12 +4,7 @@ $LOAD_PATH.unshift "/usr/local/jenkins/slave_scripts/",
                    "/usr/local/jenkins/slave_scripts/ci-infra"
 
 require 'util'
-
-Util.ci_setup
-
-def create_vms(count = 1)
-    Vm.create_subslaves(count)
-end
+require 'contrail-git-prep'
 
 def get_all_hosts
     return @vms.each_with_index.map { |vm, i| "host#{i+1}" }.join(", ")
@@ -31,31 +26,27 @@ def get_all_host_names
     return @vms.each_with_index.map { |vm, i| "'#{vm.vmname}'" }.join(", ")
 end
 
-
 # host1 is always controller node
 # Rest are always compute nodes
-def get_topo(compute_start = @vms.size > 1 ? 2 : 1)
-    computes = "host#{compute_start}"
-    (compute_start + 1).upto(@vms.size) { |i| computes += ", host#{i}" }
-
+def get_topo(host_build_ip)
     topo =<<EOF
 from fabric.api import env
 import subprocess
 
 #{get_each_hostip}
-host_build = 'root@#{@vms[0].hostip}'
+host_build = 'root@#{host_build_ip}'
 ext_routers = []
 router_asn = 64512
 
 env.roledefs = {
     'all': [#{get_all_hosts}],
-    'cfgm': [host1],
-    'openstack': [host1],
-    'control': [host1],
-    'collector': [host1],
-    'webui': [host1],
-    'database': [host1],
-    'compute': [#{computes}],
+    'cfgm': [#{@options.cfgm.join(",")}],
+    'openstack': [#{@options.openstack.join(",")}],
+    'control': [#{@options.control.join(",")}],
+    'collector': [#{@options.collector.join(",")}],
+    'webui': [#{@options.webui.join(",")}],
+    'database': [#{@options.database.join(",")}],
+    'compute': [#{@options.compute.join(",")}],
     'build': [host_build],
 }
 
@@ -76,26 +67,21 @@ EOF
     return topo
 end
 
-def setup_contrail
-    if @image.nil? then
-#       @image = "/root/contrail-install-packages_1.05-5780~havana_all.deb"
-#       ENV['ZUUL_BRANCH'] = "R1.05"
-        @image = "/root/contrail-install-packages_1.10main-6888~havana_all.deb"
-        Sh.run("scp jenkins.opencontrail.org:#{@image} #{@image}") \
-            unless File.file? @image
-    end
-    dest_image = Sh.rrun "basename #{@image}"
-    puts "setup_contrail: #{@image}"
+def setup_contrail(image)
+    return if image.nil? or !File.file? image
+
+    dest_image = Sh.rrun "basename #{image}"
+    puts "setup_contrail: #{image}"
     `mkdir -p #{ENV['WORKSPACE']}`
     @topo_file = "#{ENV['WORKSPACE']}/testbed.py"
 
     @vms = Vm.all_vms
     @vms = Vm.init_all if @vms.nil? or @vms.empty?
-    File.open(@topo_file, "w") { |fp| fp.write get_topo }
+    File.open(@topo_file, "w") { |fp| fp.write get_topo(@vms[0].hostip) }
 
     @vms.each { |vm|
 #       Sh.run "ssh root@#{vm.vmname} apt-get update"
-        Sh.run("scp #{@image} root@#{vm.vmname}:#{dest_image}", false, 50, 10)
+        Sh.run("scp #{image} root@#{vm.vmname}:#{dest_image}", false, 50, 10)
         Sh.run "ssh #{vm.vmname} dpkg -i #{dest_image}"
 
         # Apply patch to setup.sh to retain apt.conf proxy settings.
@@ -110,7 +96,7 @@ def install_contrail
     Sh.run "ssh #{vm.vmname} /usr/local/jenkins/slave_scripts/ci-infra/contrail_fab install_contrail"
     Sh.run "echo \"perl -ni -e 's/JVM_OPTS -Xss\\d+/JVM_OPTS -Xss512/g; print \\$_;' /etc/cassandra/cassandra-env.sh\" | ssh -t #{vm.vmname} \$(< /dev/fd/0)"
 
-    Sh.run "ssh #{vm.vmname} /usr/local/jenkins/slave_scripts/ci-infra/contrail_fab setup_all"
+    Sh.run "ssh #{vm.vmname} /usr/local/jenkins/slave_scripts/ci-infra/contrail_fab setup_all" unless @options.fab_tests.nil?
 
     # Reduce number of nova-api and nova-conductors and fix scheduler for
     # even distribution of instances across all compute nodes.
@@ -135,13 +121,15 @@ def build_contrail_packages(repo = "#{ENV['WORKSPACE']}/repo")
     Sh.run "ls -alh #{repo}/build/artifacts/contrail-install-packages_*_all.deb"
 
     # Return the all-in-one debian package file path.
-    @image = Sh.rrun "ls -1 #{repo}/build/artifacts/contrail-install-packages_*_all.deb"
-    puts "Successfully built package #{@image}"
+    image = Sh.rrun "ls -1 #{repo}/build/artifacts/contrail-install-packages_*_all.deb"
+    puts "Successfully built package #{image}"
+
+    return image
 end
 
 def setup_sanity
     vm = @vms.first
-    branch = ENV['ZUUL_BRANCH']
+    branch = @options.branch
     if branch != "master" then # use venv
         Sh.run("ssh #{vm.vmname} \"(source /opt/contrail/api-venv/bin/activate && source /etc/contrail_bashrc && pip install fixtures testtools testresources selenium pyvirtualdisplay)\"", false, 20, 4)
     else
@@ -159,7 +147,17 @@ def verify_contrail
 end
 
 def run_sanity
-    Sh.run("ssh #{@vms.first.vmname} /usr/local/jenkins/slave_scripts/ci-infra/contrail_fab run_sanity:ci_sanity", true)
+
+    # Check if sanities are disabled..
+    if @image_built then
+        skip_file = "/root/ci-test/skip_ci_sanity_#{ENV['ZUUL_BRANCH']}"
+        if Sh.rrun("ssh jenkins.opencontrail.org ls -1 #{skip_file} 2>/dev/null", true) =~ /#{skip_file}/ then
+            puts "SKIPPED: fab run_sanity:ci_sanity due to the presence of the file jenkins.opencontrail.org:#{skip_file}"
+            return 0
+        end
+    end
+
+    Sh.run("ssh #{@vms.first.vmname} /usr/local/jenkins/slave_scripts/ci-infra/contrail_fab #{@options.fab_tests}", true) unless @options.fab_tests.nil?
 
     # Copy sanity log files, as the sub-slave VMs will go away.
     Sh.run("scp -r #{@vms.first.vmname}:/root/logs #{ENV['WORKSPACE']}/.", true)
@@ -167,11 +165,14 @@ def run_sanity
     # Get http hyper links to the logs and report summary files.
     Sh.run("lynx --dump #{ENV['WORKSPACE']}/logs/*/test_report.html", true)
 
+    puts "Test complete, checking for any failures.."
+
     # Check if any test failed or errored.
     count = Sh.rrun(
         %{lynx --dump #{ENV['WORKSPACE']}/logs/*/test_report.html | } +
         %{\grep Status: | \grep "Fail\\|Error" | wc -l}, true).to_i
 
+    count = 1 if count.nil?
     if count != 0 then
         puts "****** run_sanity:ci_sanity FAILED ******"
     else
@@ -180,14 +181,104 @@ def run_sanity
     return count
 end
 
-def main
-    build_contrail_packages
-    create_vms(6)
-    setup_contrail
+def run_test(image = @options.image)
+    Vm.create_subslaves(@options.nodes)
+    setup_contrail(image)
     install_contrail
     setup_sanity
     verify_contrail
     Sh.exit(run_sanity)
 end
 
-main
+@options = OpenStruct.new
+@options.image = nil
+@options.branch = ENV['ZUUL_BRANCH'] || "master"
+@options.fab_tests = "run_sanity:ci_sanity"
+
+@options.nodes = 2
+@options.cfgm = ["host1"]
+@options.openstack = ["host1"]
+@options.control = ["host1"]
+@options.collector = ["host1"]
+@options.webui = ["host1"]
+@options.database = ["host1"]
+@options.compute = ["host2"]
+
+def parse_options(args = ARGV)
+    compute_set = false
+    opt_parser = OptionParser.new { |o|
+        o.banner = "Usage: #{$0} [options] [test-targets})"
+
+        o.on("-i", "--image [checkout and build]", "Image to load") { |i|
+            dest_image = Sh.rrun "basename #{i}"
+            @options.image = "#{ENV['WORKSPACE']}/#{dest_image}"
+            Sh.run("sshpass -p c0ntrail123 scp ci-admin@ubuntu-build02:#{i} " +
+                   "#{ENV['WORKSPACE']}/#{dest_image}")
+        }
+        o.on("-b", "--branch [#{@options.branch}]", "Branch to use ") { |b|
+            @options.branch = b
+        }
+        o.on("-t", "--test [#{@options.fab_tests}]", "fab test target") { |t|
+            @options.fab_tests = t
+        }
+
+        o.on("-n", "--nodes [#{@options.nodes}]", "Number of nodes") { |n|
+            @options.nodes = n.to_i
+        }
+        o.on("--cfgm host1,..", Array, "List of cfgm nodes " +
+             "#{@options.cfgm}") { |list|
+            @options.cfgm = list
+        }
+        o.on("--openstack host1,..", Array, "List of openstack nodes " +
+             "#{@options.openstack}") { |list|
+            @options.openstack = list
+        }
+        o.on("--control host1,..", Array, "List of control nodes " +
+             "#{@options.control}") { |list|
+            @options.control = list
+        }
+        o.on("--collector host1,..", Array, "List of collector nodes " +
+             "#{@options.collector}") { |list|
+            @options.collector = list
+        }
+        o.on("--webui host1,..", Array, "List of webui nodes " +
+             "#{@options.webui}") { |list|
+            @options.webui = list
+        }
+        o.on("--database host1,..", Array, "List of database nodes " +
+             "#{@options.database}") { |list|
+            @options.database = list
+        }
+        o.on("--compute host2,..", Array, "List of compute nodes " +
+             "#{@options.compute}") { |list|
+            @options.compute = list
+            compute_set = true
+        }
+    }
+    opt_parser.parse!(args)
+    if !args.empty? then
+        @options.fab_tests = ""
+        args.each { |t| @options.fab_tests += "#{t} " }
+    end
+    if !compute_set then
+        if @options.nodes == 1 then
+            @options.compute = [ "host1" ]
+        else
+            @options.compute = [ ]
+            2.upto(@options.nodes) { |i| @options.compute.push("host#{i}") }
+        end
+    end
+end
+
+if __FILE__ == $0 then
+    Util.ci_setup
+    parse_options
+    @image_built = false
+    if @options.image.nil? then
+        @image_built = true
+        ContrailGitPrep.main(false) # Use private repo
+        @options.image = build_contrail_packages
+    end
+
+    run_test
+end

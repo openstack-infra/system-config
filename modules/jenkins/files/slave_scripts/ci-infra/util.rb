@@ -1,5 +1,7 @@
 #!/usr/bin/env ruby
 
+# Utility routines to do shell and other operations.
+
 require 'pp'
 require 'pty'
 require 'optparse'
@@ -18,6 +20,12 @@ class Sh
         @@exit_code = code
         Kernel.exit(code)
     end
+
+    def Sh.exit!(code = @@exit_code)
+        puts "Fail exit with code #{code}" if code != 0
+        Process.exit!(code)
+    end
+
     def Sh.dry_run?
         return !ENV['DRY_RUN'].nil? && ENV['DRY_RUN'].casecmp("true") == 0
     end
@@ -97,11 +105,13 @@ class Sh
         return output.chomp
     end
 
+    # Cloud run, to run openstack manage commands in the build cluster.
     def Sh.crun (cmd, ignore = true, cloud_manager = "10.84.26.14")
         return Sh.rrun("ssh #{cloud_manager} ci-openstack.sh #{cmd}", ignore)
     end
 end
 
+# Add some useful routines to Vm class.
 class Vm
     def Vm.get_hostname(type="name")
 
@@ -143,6 +153,7 @@ class Util
     end
 
     def self.ci_setup
+        $stdout.sync = true
         ENV['WORKSPACE'] ||= ENV['PWD']
         ENV['USER'] ||= "jenkins"
         ENV['ZUUL_BRANCH'] ||= Util.ci_default_branch

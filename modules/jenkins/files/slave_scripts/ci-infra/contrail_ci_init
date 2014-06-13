@@ -1,5 +1,19 @@
 #!/usr/bin/env bash
 
+# This script is run every time eth0 comes up in the slave images, typically
+# once when the VM starts. It does initial settings such as
+#
+# o hostname
+# o gso disable (for the kernel bug)
+# o /tmp/cache
+# o Update nova.conf for qemu if vmx support is not available
+
+# Also, for sub-slaves (VMs launched by scripts as additional workers)
+# o Set http_proxy, https_proxy
+# o Set ssl over http proxy (for ssh and scp)
+# o Set no_proxy as well for localdomain traffic
+# o Set proxy for apt-get
+
 set -x
 
 # We care only when eth0 comes up.
@@ -20,6 +34,7 @@ fi
 
 echo HOSTNAME $HOSTNAME, SLAVE_MASTER $SLAVE_MASTER
 
+# Set various proxies
 if [ "$SLAVE_MASTER" != "localhost" ]; then
     # Set http proxy in sub-slaves
     export http_proxy=http://$SLAVE_MASTER:3128 # squid

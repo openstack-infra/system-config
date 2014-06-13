@@ -1,4 +1,14 @@
 #!/usr/bin/env ruby
+
+# This is a cron-job like script which is triggered from upstart (/etc/init/.)
+# In slave nodes, it registers with jenkins.opencontrail.org master with
+# appropriate node label, so that the master can scheduler jobs.
+#
+# In the sub-slave mode, this checks for periodic keep-alives (file based
+# time-stamps. If time-stamp is not updated in time, sub-slave node is deleted
+# from the cluster. This is done, to avoid zombie sub-slave VMs from hogging
+# build cluster resources.
+
 $LOAD_PATH.unshift "/usr/local/jenkins/slave_scripts/",
                    "/usr/local/jenkins/slave_scripts/ci-infra"
 require 'util'
