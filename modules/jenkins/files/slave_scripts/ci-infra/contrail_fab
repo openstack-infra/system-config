@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+# This is a wrapper to run fab commands from any directory.
+
 set -ex
 
 cd /opt/contrail/utils

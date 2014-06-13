@@ -1,7 +1,17 @@
 #!/usr/bin/env bash
 
+# This file does the initial setup for each jenkins job triggered by CI.
+# This checkout 'master' branch code it@github.com:juniper/contrail-infra-config.git
+# Quite useful for testing, and also prevents repeated re-imaging of the slave
+# VMs when script changes.
+
+# In order to skip runs, do touch /root/ci-test/skip_jobs in
+# jenkins.opencontrail.org
+
 BRANCH=master
 HOSTNAME=`cat /etc/hostname`
+
+# Check if 'test' branch has to be used (For CI testing)
 ssh root@jenkins.opencontrail.org ls /root/ci-test/\*$HOSTNAME\*-test
 if [ "$?" == "0" ]; then
     BRANCH=test
@@ -24,4 +34,5 @@ if [ "$?" == "0" ]; then
     exit 0
 fi
 
+# Remove stale skip_jobs settings.
 rm -rf $SKIP_JOBS

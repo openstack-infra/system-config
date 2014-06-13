@@ -6,10 +6,6 @@ $LOAD_PATH.unshift "/usr/local/jenkins/slave_scripts/",
 require 'util'
 require 'contrail-git-prep'
 
-def create_vms(count = 1)
-    Vm.create_subslaves(count)
-end
-
 def get_all_hosts
     return @vms.each_with_index.map { |vm, i| "host#{i+1}" }.join(", ")
 end
@@ -30,31 +26,27 @@ def get_all_host_names
     return @vms.each_with_index.map { |vm, i| "'#{vm.vmname}'" }.join(", ")
 end
 
-
 # host1 is always controller node
 # Rest are always compute nodes
-def get_topo(compute_start = @vms.size > 1 ? 2 : 1)
-    computes = "host#{compute_start}"
-    (compute_start + 1).upto(@vms.size) { |i| computes += ", host#{i}" }
-
+def get_topo(host_build_ip)
     topo =<<EOF
 from fabric.api import env
 import subprocess
 
 #{get_each_hostip}
-host_build = 'root@#{@vms[0].hostip}'
+host_build = 'root@#{host_build_ip}'
 ext_routers = []
 router_asn = 64512
 
 env.roledefs = {
     'all': [#{get_all_hosts}],
-    'cfgm': [host1],
-    'openstack': [host1],
-    'control': [host1],
-    'collector': [host1],
-    'webui': [host1],
-    'database': [host1],
-    'compute': [#{computes}],
+    'cfgm': [#{@options.cfgm.join(",")}],
+    'openstack': [#{@options.openstack.join(",")}],
+    'control': [#{@options.control.join(",")}],
+    'collector': [#{@options.collector.join(",")}],
+    'webui': [#{@options.webui.join(",")}],
+    'database': [#{@options.database.join(",")}],
+    'compute': [#{@options.compute.join(","))}],
     'build': [host_build],
 }
 
@@ -85,7 +77,7 @@ def setup_contrail(image)
 
     @vms = Vm.all_vms
     @vms = Vm.init_all if @vms.nil? or @vms.empty?
-    File.open(@topo_file, "w") { |fp| fp.write get_topo }
+    File.open(@topo_file, "w") { |fp| fp.write get_topo(@vms[0].hostip) }
 
     @vms.each { |vm|
 #       Sh.run "ssh root@#{vm.vmname} apt-get update"
@@ -190,7 +182,7 @@ def run_sanity
 end
 
 def run_test(image = @options.image)
-    create_vms(@options.control_nodes + @options.compute_nodes)
+    Vm.create_subslaves(@options.nodes)
     setup_contrail(image)
     install_contrail
     setup_sanity
@@ -199,27 +191,29 @@ def run_test(image = @options.image)
 end
 
 @options = OpenStruct.new
-@options.compute_nodes = 1
-@options.control_nodes = 1
 @options.image = nil
 @options.branch = ENV['ZUUL_BRANCH'] || "master"
 @options.fab_tests = "run_sanity:ci_sanity"
 
+@options.nodes = 2
+@options.cfgm = ["host1"],
+@options.openstack = ["host1"],
+@options.control = ["host1"],
+@options.collector = ["host1"],
+@options.webui = ["host1"],
+@options.database = ["host1"],
+@options.compute = ["host2"]
+
 def parse_options(args = ARGV)
+    compute_set = false
     opt_parser = OptionParser.new { |o|
         o.banner = "Usage: #{$0} [options] [test-targets})"
-        o.on("-c", "--compute-nodes [#{@options.compute_nodes}]",
-             "Number of compute nodes") { |c|
-            @options.compute_nodes = c.to_i
-        }
-        o.on("-C", "--control-nodes [#{@options.control_nodes}]",
-             "Number of control nodes") { |c|
-            @options.control_nodes = c.to_i
-        }
+
         o.on("-i", "--image [checkout and build]", "Image to load") { |i|
             dest_image = Sh.rrun "basename #{i}"
             @options.image = "#{ENV['WORKSPACE']}/#{dest_image}"
-            Sh.run("sshpass -p c0ntrail123 scp ci-admin@ubuntu-build02:#{i} #{ENV['WORKSPACE']}/#{dest_image}")
+            Sh.run("sshpass -p c0ntrail123 scp ci-admin@ubuntu-build02:#{i} " +
+                   "#{ENV['WORKSPACE']}/#{dest_image}")
         }
         o.on("-b", "--branch [#{@options.branch}]", "Branch to use ") { |b|
             @options.branch = b
@@ -227,12 +221,56 @@ def parse_options(args = ARGV)
         o.on("-t", "--test [#{@options.fab_tests}]", "fab test target") { |t|
             @options.fab_tests = t
         }
+
+        o.on("-n", "--nodes [#{@options.nodes}]", "Number of nodes") { |n|
+            @options.nodes = n
+        }
+        o.on("--cfgm host1,host2,..", Array, "List of cfgm nodes " +
+             "#{@options.cfgm}") { |list|
+            @options.cfgm = list
+        }
+        o.on("--openstack host1,host2,..", Array, "List of openstack nodes " +
+             "#{@options.openstack}") { |list|
+            @options.openstack = list
+        }
+        o.on("--control host1,host2,..", Array, "List of control nodes " +
+             "#{@options.control}") { |list|
+            @options.control = list
+        }
+        o.on("--collector host1,host2,..", Array, "List of collector nodes " +
+             "#{@options.collector}") { |list|
+            @options.collector = list
+        }
+        o.on("--webui host1,host2,..", Array, "List of webui nodes " +
+             "#{@options.webui}") { |list|
+            @options.webui = list
+        }
+        o.on("--database host1,host2,..", Array, "List of database nodes " +
+             "#{@options.database}") { |list|
+            @options.database = list
+        }
+        o.on("--compute host1,host2,..", Array, "List of compute nodes " +
+             "#{@options.compute}") { |list|
+            @options.compute = list
+            compute_set = true
+        }
     }
     opt_parser.parse!(args)
     if !args.empty? then
         @options.fab_tests = ""
         args.each { |t| @options.fab_tests += "#{t} " }
     end
+    if !compute_set then
+        if @options.nodes == 1 then
+            @options.compute = [ "host1" ]
+        else
+            @options.compute = [ ]
+            2.upto(@options.nodes) { |i| @options.compute.push("host#{i}") }
+        end
+    end
+
+    get_topo
+    exit
 end
 
 if __FILE__ == $0 then

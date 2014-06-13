@@ -7,6 +7,25 @@ $LOAD_PATH.unshift "/usr/local/jenkins/slave_scripts/",
 
 require 'util'
 
+# This class VM supports creation of new VMs in the build cluster. When run in
+# stand alone mode, it has useful command line arguments as well.
+#
+# There are two types of VMs that we launch. 'Slaves' which act as jenkins
+# slaves to jenkins.opencontrail.org master. They are typically launched by
+# directly running this script from command line. They are assigned floating
+# IP address, so that they can directly contact external jenkins master server.
+#
+# Then there are sub-slaves which scripts use to launch additional VMs such
+# as when Sanities are run.
+#
+# These sub-slaves are run with proxy set to the controlling VM. Thus, all
+# http, https, ssl, etc traffic can stil go through sub-slaves even though
+# they are assigned any floating IP.
+#
+# When controler VM exits, we go ahead and cleanup all the sub-slave VMs as
+# well. In addition, sub-slaves kill themselves if controller VM does not
+# periodically ping (and update a timestamp file)
+
 at_exit { Vm.clean_all; Sh.exit! }
 
 # trap("EXIT") { Vm.clean_all; exit Sh.exit }
@@ -29,7 +48,7 @@ class Vm
         @hostip = hostip
     end
 
-
+    # Delete the VM from the cluster
     def delete
         # @thread.kill unless @thread.nil?
         Process.kill("KILL", @keepalive_pid) unless @keepalive_pid.nil?
