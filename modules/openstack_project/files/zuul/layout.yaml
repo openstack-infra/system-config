@@ -603,6 +603,9 @@ jobs:
     voting: false
   - name: ^(gate|check)-sqlalchemy-migrate-devstack-dsvm$
     voting: false
+  - name: gate-manila-devstack-dsvm
+    branch: master
+    voting: false
   - name: gate-manila-pylint
     voting: false
   - name: gate-manila-docs
@@ -3592,6 +3595,7 @@ projects:
 
   - name: stackforge/manila
     check:
+      - gate-manila-devstack-dsvm
       - gate-manila-docs
       - gate-manila-pep8
       - gate-manila-pylint
@@ -3600,6 +3604,7 @@ projects:
       - gate-manila-tempest-dsvm-neutron
       - gate-manila-tempest-dsvm-neutron-multibackend
     gate:
+      - gate-manila-devstack-dsvm
       - gate-manila-pep8
       - gate-manila-python26
       - gate-manila-python27
