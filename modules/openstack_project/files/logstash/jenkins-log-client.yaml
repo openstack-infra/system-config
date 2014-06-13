@@ -429,3 +429,19 @@ source-files:
       - screen
       - apachecombined
     job-filter: '.*grenade.*'
+# tripleo logs
+  - name: logs/seed_logs/os-collect-config.txt
+    tags:
+      - os-collect-config
+      - seed
+    job-filter: '.*-tripleo-.*'
+  - name: logs/undercloud-undercloud_logs/os-collect-config.txt
+    tags:
+      - os-collect-config
+      - uc-controller
+    job-filter: '.*-tripleo-.*'
+  - name: logs/overcloud-controller0_logs/os-collect-config.txt
+    tags:
+      - os-collect-config
+      - oc-controller
+    job-filter: '.*-tripleo-.*'
