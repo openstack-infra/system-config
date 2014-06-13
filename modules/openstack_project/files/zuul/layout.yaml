@@ -253,14 +253,12 @@ project-templates:
   - name: integrated-gate
     check:
       - 'check-tempest-dsvm-full'
-      - 'check-tempest-dsvm-postgres-full'
-      - 'check-tempest-dsvm-neutron'
+      - 'check-tempest-dsvm-neutron-pg'
       - 'check-tempest-dsvm-neutron-heat-slow'
       - 'check-grenade-dsvm'
     gate:
       - 'gate-tempest-dsvm-full'
-      - 'gate-tempest-dsvm-postgres-full'
-      - 'gate-tempest-dsvm-neutron'
+      - 'gate-tempest-dsvm-neutron-pg'
       - 'gate-grenade-dsvm'
     experimental:
       - 'check-grenade-dsvm-neutron'
@@ -1038,6 +1036,7 @@ projects:
       - name: integrated-gate
     check:
       - check-devstack-dsvm-cells
+      - check-tempest-dsvm-postgres-full
       - gate-tempest-dsvm-large-ops
       - gate-tempest-dsvm-neutron-large-ops
       - gate-nova-pylint
@@ -1045,6 +1044,7 @@ projects:
       - check-tempest-dsvm-virtual-ironic-nv
     gate:
       - gate-devstack-dsvm-cells
+      - gate-tempest-dsvm-postgres-full
       - gate-tempest-dsvm-large-ops
       - gate-tempest-dsvm-neutron-large-ops
       - gate-grenade-dsvm-partial-ncpu
