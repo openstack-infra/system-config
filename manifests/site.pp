@@ -4,7 +4,7 @@
 node default {
   include openstack_project::puppet_cron
   class { 'openstack_project::server':
-    sysadmins => hiera('sysadmins', ['admins']),
+    sysadmins => hiera('sysadmins', ['admin']),
   }
 }
 
@@ -40,7 +40,7 @@ node 'review.openstack.org' {
     lp_sync_secret                      => hiera('gerrit_lp_access_secret', 'XXX'),
     contactstore_appsec                 => hiera('gerrit_contactstore_appsec', 'XXX'),
     contactstore_pubkey                 => hiera('gerrit_contactstore_pubkey', 'XXX'),
-    sysadmins                           => hiera('sysadmins', ['admins']),
+    sysadmins                           => hiera('sysadmins', ['admin']),
     swift_username                      => hiera('swift_store_user', 'username'),
     swift_password                      => hiera('swift_store_key', 'XXX'),
   }
@@ -65,7 +65,7 @@ node 'review-dev.openstack.org' {
     lp_sync_consumer_key            => hiera('gerrit_dev_lp_consumer_key', 'XXX'),
     lp_sync_token                   => hiera('gerrit_dev_lp_access_token', 'XXX'),
     lp_sync_secret                  => hiera('gerrit_dev_lp_access_secret', 'XXX'),
-    sysadmins                       => hiera('sysadmins', ['admins']),
+    sysadmins                       => hiera('sysadmins', ['admin']),
   }
 }
 
@@ -76,7 +76,7 @@ node 'jenkins.openstack.org' {
     ssl_cert_file_contents  => hiera('jenkins_ssl_cert_file_contents', 'XXX'),
     ssl_key_file_contents   => hiera('jenkins_ssl_key_file_contents', 'XXX'),
     ssl_chain_file_contents => hiera('jenkins_ssl_chain_file_contents', 'XXX'),
-    sysadmins               => hiera('sysadmins', ['admins']),
+    sysadmins               => hiera('sysadmins', ['admin']),
     zmq_event_receivers     => ['logstash.openstack.org',
                                 'nodepool.openstack.org',
     ],
@@ -90,7 +90,7 @@ node /^jenkins\d+\.openstack\.org$/ {
     ssl_cert_file           => '/etc/ssl/certs/ssl-cert-snakeoil.pem',
     ssl_key_file            => '/etc/ssl/private/ssl-cert-snakeoil.key',
     ssl_chain_file          => '',
-    sysadmins               => hiera('sysadmins', ['admins']),
+    sysadmins               => hiera('sysadmins', ['admin']),
     zmq_event_receivers     => ['logstash.openstack.org',
                                 'nodepool.openstack.org',
     ],
@@ -100,7 +100,7 @@ node /^jenkins\d+\.openstack\.org$/ {
 node 'jenkins-dev.openstack.org' {
   class { 'openstack_project::jenkins_dev':
     jenkins_ssh_private_key  => hiera('jenkins_dev_ssh_private_key_contents', 'XXX'),
-    sysadmins                => hiera('sysadmins', ['admins']),
+    sysadmins                => hiera('sysadmins', ['admin']),
     mysql_password           => hiera('nodepool_dev_mysql_password', 'XXX'),
     mysql_root_password      => hiera('nodepool_dev_mysql_root_password', 'XXX'),
     nodepool_ssh_private_key => hiera('jenkins_dev_ssh_private_key_contents', 'XXX'),
