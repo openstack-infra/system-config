@@ -4,7 +4,7 @@ class exim(
   $queue_run_max = '5',
   $queue_smtp_domains = '',
   $smarthost = false,
-  $sysadmin = []
+  $sysadmins = []
 ) {
 
   include exim::params

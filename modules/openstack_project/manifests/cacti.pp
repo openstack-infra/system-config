@@ -1,6 +1,4 @@
 # Class to configure cacti on a node.
-# Takes a list of sysadmin email addresses as a parameter. Exim will be
-# configured to email cron spam and other alerts to this list of admins.
 class openstack_project::cacti (
   $sysadmins = []
 ) {

@@ -1,6 +1,4 @@
 # Class to configure graphite on a node.
-# Takes a list of sysadmin email addresses as a parameter. Exim will be
-# configured to email cron spam and other alerts to this list of admins.
 class openstack_project::graphite (
   $sysadmins = [],
   $graphite_admin_user = '',

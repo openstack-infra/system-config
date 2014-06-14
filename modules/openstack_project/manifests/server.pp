@@ -17,6 +17,6 @@ class openstack_project::server (
     certname                  => $certname,
   }
   class { 'exim':
-    sysadmin => $sysadmins,
+    sysadmins => $sysadmins,
   }
 }
