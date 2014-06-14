@@ -47,6 +47,22 @@
       - upload-to-docs-site
 
 - job-template:
+    name: 'openstack-training-guides'
+    node: '{node}'
+
+    builders:
+      - revoke-sudo
+      - gerrit-git-prep
+      - shell: |
+          #!/bin/bash -xe
+          source /usr/local/jenkins/slave_scripts/select-mirror.sh openstack training-guides
+          tox -v -e publishdocs
+
+    publishers:
+      - console-log
+      - upload-to-docs-site
+
+- job-template:
     name: 'gate-{name}-tox-doc-publish-{envlist}'
 
     wrappers:

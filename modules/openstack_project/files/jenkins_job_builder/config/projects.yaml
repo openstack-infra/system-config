@@ -38,6 +38,7 @@
       - openstack-doc-jobs
       - '{name}-tox-doc-{envlist}':
          envlist: publishdocs
+      - openstack-training-guides
 
 - project:
     name: fuel-specs
