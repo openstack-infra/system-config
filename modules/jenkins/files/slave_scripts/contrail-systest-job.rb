@@ -126,6 +126,10 @@ def install_contrail
 end
 
 def build_contrail_packages(repo = "#{ENV['WORKSPACE']}/repo")
+    # Fetch build cache
+    Sh.run("rm -rf /cs-shared/builder/cache/ubuntu1204")
+    Sh.run("sshpass -p c0ntrail123 scp -r ci-admin@ubuntu-build02:/cs-shared/builder/cache/ubuntu1204 /cs-shared/builder/cache/.")
+
     ENV['BUILD_ONLY'] = "1"
     Sh.run "cd #{repo}"
     Sh.run "scons"
