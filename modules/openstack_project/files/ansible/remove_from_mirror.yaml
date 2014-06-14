@@ -1,0 +1,7 @@
+---
+- hosts: mirror*.slave.openstack.org
+  tasks:
+    - shell: 'find /home/jenkins/pypimirror -type f| grep {{ package }} | xargs -n1 rm'
+- hosts: pypi.openstack.org
+  tasks:
+    - shell: 'find /srv/static/pypi -type f| grep {{ package }} | xargs -n1 rm'

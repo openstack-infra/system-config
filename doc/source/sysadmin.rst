@@ -357,3 +357,17 @@ The following example increases the size of a volume by 100G::
   NAME=volumename
   sudo lvextend -L+100G /dev/main/$NAME
   sudo resize2fs /dev/main/$NAME
+
+Mirror Management
+=================
+
+The PyPI mirror at times needs to be poked. There are some ansible
+playbooks that help describe some of those actions.
+
+Removing a package
+------------------
+
+If a package needs to be removed from the mirror, such as when
+setuptools released and then unreleased setuptools v4::
+
+  ansible-playbook -f 10 /etc/ansible/remove_from_mirror.yaml --extra-vars "package=$PACKAGENAME"
