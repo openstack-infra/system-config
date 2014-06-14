@@ -19,7 +19,6 @@ class openstack_project::thick_slave(
     $::openstack_project::jenkins_params::gnome_doc_package, # for generating translation files for docs
     $::openstack_project::jenkins_params::graphviz_package, # for generating graphs in docs
     $::openstack_project::jenkins_params::firefox_package, # for selenium tests
-    $::openstack_project::jenkins_params::mod_wsgi_package,
     $::openstack_project::jenkins_params::language_fonts_packages,
     $::openstack_project::jenkins_params::libcurl_dev_package,
     $::openstack_project::jenkins_params::ldap_dev_package,
