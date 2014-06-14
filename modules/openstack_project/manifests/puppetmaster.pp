@@ -115,6 +115,18 @@ class openstack_project::puppetmaster (
     require => Class[ansible],
   }
 
+  file { '/etc/ansible/run_mirror.yaml':
+    ensure  => present,
+    source  => 'puppet:///modules/openstack_project/ansible/run_mirror.yaml',
+    require => Class[ansible],
+  }
+
+  file { '/etc/ansible/remove_from_mirror.yaml':
+    ensure  => present,
+    source  => 'puppet:///modules/openstack_project/ansible/remove_from_mirror.yaml',
+    require => Class[ansible],
+  }
+
   file { '/etc/ansible/remote_puppet.yaml':
     ensure  => present,
     source  => 'puppet:///modules/openstack_project/ansible/remote_puppet.yaml',
