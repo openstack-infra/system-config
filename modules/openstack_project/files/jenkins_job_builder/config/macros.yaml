@@ -290,7 +290,7 @@
     builders:
       - shell: |
           #!/bin/bash -xe
-          /usr/local/bin/run-mirror -c /home/jenkins/pypimirror/etc/pypi-mirror.yaml
+          run-mirror -c /home/jenkins/pypimirror/etc/pypi-mirror.yaml
           find /home/jenkins/pypimirror/mirror/ \( -name index.html -or -name full.html \) -delete
           rsync -a --ignore-existing --itemize-changes /home/jenkins/pypimirror/mirror/ jenkins@static.openstack.org:/srv/static/pypi/
 
