@@ -90,6 +90,19 @@ def setup_contrail(image)
 
 end
 
+# Update nova libvirt driver.
+def update_nova_libvirt_driver(libvirt_type)
+    return if libvirt_type.nil?
+
+    @vms.each { |vm|
+        Sh.run "echo \"perl -ni -e 's/libvirt_type=.*/libvirt_type=#{libvirt_type}/g; print \\$_;' /etc/nova/nova-compute.conf\" | ssh -t #{vm.vmname} \$(< /dev/fd/0)", true
+        Sh.run "ssh #{vm.vmname} service nova-compute restart", true
+    }
+
+    return
+end
+
+
 def install_contrail
     vm = @vms.first
     Sh.run("scp #{@topo_file} #{vm.vmname}:/opt/contrail/utils/fabfile/testbeds/testbed.py", false, 20, 4)
@@ -98,10 +111,7 @@ def install_contrail
 
     Sh.run "ssh #{vm.vmname} /usr/local/jenkins/slave_scripts/ci-infra/contrail_fab setup_all" unless @options.fab_tests.nil?
 
-    @vms.each { |vm|
-        Sh.run "echo \"perl -ni -e 's/libvirt_type=kvm/libvirt_type=qemu/g; print \\$_;' /etc/nova/nova-compute.conf\" | ssh -t #{vm.vmname} \$(< /dev/fd/0)", true
-        Sh.run "ssh #{vm.vmname} service nova-compute restart", true
-    }
+    update_nova_libvirt_driver(@options.libvirt_type)
 
     # Reduce number of nova-api and nova-conductors and fix scheduler for
     # even distribution of instances across all compute nodes.
@@ -226,7 +236,10 @@ def parse_options(args = ARGV)
         o.on("-t", "--test [#{@options.fab_tests}]", "fab test target") { |t|
             @options.fab_tests = t
         }
-
+        o.on("-l", "--libvirt-type [driver]",
+             "libvirt driver - kvm in vmx env, qemu otherwise") { |driver|
+            @options.libvirt_type = driver
+        }
         o.on("-n", "--nodes [#{@options.nodes}]", "Number of nodes") { |n|
             @options.nodes = n.to_i
         }
