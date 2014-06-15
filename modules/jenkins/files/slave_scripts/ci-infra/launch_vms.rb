@@ -146,7 +146,7 @@ class Vm
         private_ip = nil
         while true do
             o, e = Sh.crun("nova list | \grep -w ACTIVE | \grep #{vmname}")
-            o =~ /internet=(\d+\.\d+\.\d+\.\d+)/ then
+            if o =~ /internet=(\d+\.\d+\.\d+\.\d+)/ then
             if Sh.crun("nova list | \grep -w ACTIVE | \grep #{vmname}") =~
                     /internet=(\d+\.\d+\.\d+\.\d+)/ then
                 private_ip = $1
