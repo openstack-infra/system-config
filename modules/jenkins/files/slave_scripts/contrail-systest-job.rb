@@ -80,7 +80,7 @@ def setup_contrail(image)
     File.open(@topo_file, "w") { |fp| fp.write get_topo(@vms[0].hostip) }
 
     @vms.each { |vm|
-        Sh.run "ssh root@#{vm.vmname} apt-get update", true
+#       Sh.run "ssh root@#{vm.vmname} apt-get update", true
         Sh.run("scp #{image} root@#{vm.vmname}:#{dest_image}", false, 50, 10)
         Sh.run "ssh #{vm.vmname} dpkg -i #{dest_image}"
 
