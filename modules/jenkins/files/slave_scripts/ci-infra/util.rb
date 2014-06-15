@@ -89,10 +89,11 @@ class Sh
                 else
                     output = spawn(cmd, debug, ignore_output)
                 end
-                return output.chomp if @@exit_code == 0
+                return output.chomp, 0 if @@exit_code == 0
             end
         }
 
+        ret_code = @@exit_code
         if @@exit_code != 0 then
             if ignore then
                 puts "IGNORED: Comamnd #{cmd} failed with exit code #{$?}" if debug
@@ -102,7 +103,7 @@ class Sh
                 exit @@exit_code
             end
         end
-        return output.chomp
+        return output.chomp, ret_code
     end
 
     # Cloud run, to run openstack manage commands in the build cluster.
@@ -118,7 +119,7 @@ class Vm
         # Disable proxy..
         http_proxy=ENV['http_proxy']
         ENV['http_proxy'] = nil
-        name = Sh.rrun(%{curl -s http://169.254.169.254/openstack/2012-08-10/meta_data.json | python -m json.tool | \grep \\"#{type}\\": | awk -F '\"' '{print $4}'}, true, 10, 5)
+        name, e = Sh.rrun(%{curl -s http://169.254.169.254/openstack/2012-08-10/meta_data.json | python -m json.tool | \grep \\"#{type}\\": | awk -F '\"' '{print $4}'}, true, 10, 5)
 
         # Re-enable proxy ..
         ENV['http_proxy'] = http_proxy
@@ -138,7 +139,8 @@ class Vm
 
     def Vm.get_interface_ip (interface = Vm.get_primary_interface)
         ip = "127.0.0.1"
-        ip = $1 if Sh.rrun(%{ifconfig #{interface} |\grep "inet addr"}) =~ /inet addr:(\d+\.\d+\.\d+\.\d+)/
+        o, e = Sh.rrun(%{ifconfig #{interface} |\grep "inet addr"})
+        ip = $1 if o =~ /inet addr:(\d+\.\d+\.\d+\.\d+)/
         return ip
     end
 end

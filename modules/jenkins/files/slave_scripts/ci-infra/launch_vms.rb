@@ -133,8 +133,8 @@ class Vm
 
     def Vm.create_internal(vmname, floatingip, metadata, flavor = 4) # large
         puts "Creating VM #{vmname}"
-        net_id = Sh.crun "nova net-list |\grep -w internet | awk '{print $2}'"
-        image_id = Sh.crun %{glance image-list |\grep " #{@@options.image} " | awk '{print $2}'}
+        net_id, e = Sh.crun "nova net-list |\grep -w internet | awk '{print $2}'"
+        image_id, e = Sh.crun %{glance image-list |\grep " #{@@options.image} " | awk '{print $2}'}
         cmd = "nova boot --poll --flavor #{flavor} #{metadata} --nic net-id=#{net_id} --image #{image_id} #{vmname}"
 
         if @@options.dry_run then
@@ -145,6 +145,8 @@ class Vm
 
         private_ip = nil
         while true do
+            o, e = Sh.crun("nova list | \grep -w ACTIVE | \grep #{vmname}")
+            o =~ /internet=(\d+\.\d+\.\d+\.\d+)/ then
             if Sh.crun("nova list | \grep -w ACTIVE | \grep #{vmname}") =~
                     /internet=(\d+\.\d+\.\d+\.\d+)/ then
                 private_ip = $1
@@ -154,8 +156,8 @@ class Vm
         end
 
         if !floatingip.nil? then
-            port_id = Sh.crun "neutron port-list | \grep #{private_ip} | awk '{print $2}'"
-            floatingip_id = Sh.crun "neutron floatingip-list |\grep #{floatingip} | awk '{print $2}'"
+            port_id, e = Sh.crun "neutron port-list | \grep #{private_ip} | awk '{print $2}'"
+            floatingip_id, e = Sh.crun "neutron floatingip-list |\grep #{floatingip} | awk '{print $2}'"
             Sh.crun "neutron floatingip-associate #{floatingip_id} #{port_id}"
         end
 
@@ -167,7 +169,7 @@ class Vm
 
     def Vm.create_slaves(count = @@options.count)
         1.upto(count) { |i|
-            floatingip = Sh.crun %{neutron floatingip-list | \grep -v " 192\." | \grep -m 1 "10\."  | awk '{print $5}'}
+            floatingip, e = Sh.crun %{neutron floatingip-list | \grep -v " 192\." | \grep -m 1 "10\."  | awk '{print $5}'}
 
             metadata = "--meta slave-labels=#{@@options.labels} " +
                        "--meta slave-executors=#{@@options.executors} " +

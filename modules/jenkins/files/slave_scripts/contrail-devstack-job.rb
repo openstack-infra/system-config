@@ -28,7 +28,7 @@ Sh.run "ssh #{Vm.all_vms.first.hostip} \"#{envs} mkdir -p #{ENV['WORKSPACE']}\""
 
 # Wait till slave_auto_run starts in the new subslave vm.
 loop do
-    count = Sh.rrun %{ssh #{Vm.all_vms.first.hostip} "ps -efww | grep slave_auto_run.rb | grep -v grep | wc -l"}
+    count, e = Sh.rrun %{ssh #{Vm.all_vms.first.hostip} "ps -efww | grep slave_auto_run.rb | grep -v grep | wc -l"}
     break if count == "1"
     sleep 5
 end

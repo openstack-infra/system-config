@@ -70,7 +70,7 @@ end
 def setup_contrail(image)
     return if image.nil? or !File.file? image
 
-    dest_image = Sh.rrun "basename #{image}"
+    dest_image, e = Sh.rrun "basename #{image}"
     puts "setup_contrail: #{image}"
     `mkdir -p #{ENV['WORKSPACE']}`
     @topo_file = "#{ENV['WORKSPACE']}/testbed.py"
@@ -141,7 +141,7 @@ def build_contrail_packages(repo = "#{ENV['WORKSPACE']}/repo")
     Sh.run "ls -alh #{repo}/build/artifacts/contrail-install-packages_*_all.deb"
 
     # Return the all-in-one debian package file path.
-    image = Sh.rrun "ls -1 #{repo}/build/artifacts/contrail-install-packages_*_all.deb"
+    image, e = Sh.rrun "ls -1 #{repo}/build/artifacts/contrail-install-packages_*_all.deb"
     puts "Successfully built package #{image}"
 
     return image
@@ -167,19 +167,19 @@ def verify_contrail
 end
 
 def run_sanity
+    return @options.fab_tests.nil?
 
     # Check if sanities are disabled..
     if @image_built then
         skip_file = "/root/ci-test/skip_ci_sanity_#{ENV['ZUUL_BRANCH']}"
-        if Sh.rrun("ssh jenkins.opencontrail.org ls -1 #{skip_file} 2>/dev/null", true) =~ /#{skip_file}/ then
+        o, e = Sh.rrun("ssh jenkins.opencontrail.org ls -1 #{skip_file} 2>/dev/null", true)
+        if o =~ /#{skip_file}/ then
             puts "SKIPPED: fab run_sanity:ci_sanity due to the presence of the file jenkins.opencontrail.org:#{skip_file}"
             return 0
         end
     end
 
-    Sh.run("ssh #{@vms.first.vmname} /usr/local/jenkins/slave_scripts/ci-infra/contrail_fab #{@options.fab_tests}", true) unless @options.fab_tests.nil?
-
-    exit_code = Sh.exit_code
+    o, exit_code = Sh.run("ssh #{@vms.first.vmname} /usr/local/jenkins/slave_scripts/ci-infra/contrail_fab #{@options.fab_tests}", true)
 
     # Copy sanity log files, as the sub-slave VMs will go away.
     Sh.run("scp -r #{@vms.first.vmname}:/root/logs #{ENV['WORKSPACE']}/.", true)
@@ -189,22 +189,19 @@ def run_sanity
 
     puts "Test complete, checking for any failures.."
 
-    # Check if any test failed or errored.
-    count = Sh.rrun(
+    # Check if any test failed or errored. Number of matches is consisdered
+    # as exit-code, and 0 implies success.
+    exit_code, e = Sh.rrun(
         %{lynx --dump #{ENV['WORKSPACE']}/logs/*/test_report.html | } +
-        %{\grep Status: | \grep "Fail\\|Error" | wc -l}, true).to_i
+        %{\grep Status: | \grep "Fail\\|Error" | wc -l}, true).to_i \
+            if exit_code == 0
 
-    count = 1 if count.nil?
-
-    # Restore failed exit-code from the sanity run.
-    count = exit_code if exit_code != 0
-
-    if count != 0 then
+    if exit_code != 0 then
         puts "****** run_sanity:ci_sanity FAILED ******"
     else
         puts "****** run_sanity:ci_sanity PASSED ******"
     end
-    return count
+    return exit_code
 end
 
 def run_test(image = @options.image)
@@ -236,7 +233,7 @@ def parse_options(args = ARGV)
         o.banner = "Usage: #{$0} [options] [test-targets})"
 
         o.on("-i", "--image [checkout and build]", "Image to load") { |i|
-            dest_image = Sh.rrun "basename #{i}"
+            dest_image, e = Sh.rrun "basename #{i}"
             @options.image = "#{ENV['WORKSPACE']}/#{dest_image}"
             Sh.run("sshpass -p c0ntrail123 scp ci-admin@ubuntu-build02:#{i} " +
                    "#{ENV['WORKSPACE']}/#{dest_image}")
