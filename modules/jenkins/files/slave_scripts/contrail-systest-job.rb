@@ -179,6 +179,8 @@ def run_sanity
 
     Sh.run("ssh #{@vms.first.vmname} /usr/local/jenkins/slave_scripts/ci-infra/contrail_fab #{@options.fab_tests}", true) unless @options.fab_tests.nil?
 
+    exit_code = Sh.exit_code
+
     # Copy sanity log files, as the sub-slave VMs will go away.
     Sh.run("scp -r #{@vms.first.vmname}:/root/logs #{ENV['WORKSPACE']}/.", true)
 
@@ -193,6 +195,10 @@ def run_sanity
         %{\grep Status: | \grep "Fail\\|Error" | wc -l}, true).to_i
 
     count = 1 if count.nil?
+
+    # Restore failed exit-code from the sanity run.
+    count = exit_code if exit_code != 0
+
     if count != 0 then
         puts "****** run_sanity:ci_sanity FAILED ******"
     else
