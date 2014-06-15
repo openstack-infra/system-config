@@ -191,10 +191,11 @@ def run_sanity
 
     # Check if any test failed or errored. Number of matches is consisdered
     # as exit-code, and 0 implies success.
-    exit_code, e = Sh.rrun(
-        %{lynx --dump #{ENV['WORKSPACE']}/logs/*/test_report.html | } +
-        %{\grep Status: | \grep "Fail\\|Error" | wc -l}, true).to_i \
-            if exit_code == 0
+    if exit_code == 0 then
+        exit_code, e = Sh.rrun(
+            %{lynx --dump #{ENV['WORKSPACE']}/logs/*/test_report.html | } +
+            %{\grep Status: | \grep "Fail\\|Error" | wc -l}, true).to_i
+    end
 
     if exit_code != 0 then
         puts "****** run_sanity:ci_sanity FAILED ******"
