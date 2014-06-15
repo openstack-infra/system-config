@@ -167,7 +167,7 @@ def verify_contrail
 end
 
 def run_sanity
-    return @options.fab_tests.nil?
+    return if @options.fab_tests.nil?
 
     # Check if sanities are disabled..
     if @image_built then
