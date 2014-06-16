@@ -1879,6 +1879,36 @@
       - gate-{name}-chef-unit
 
 - project:
+    name: cookbook-openstack-client
+    github-org: stackforge
+    node: bare-precise
+
+    jobs:
+      - gate-{name}-chef-lint
+      - gate-{name}-chef-style
+      - gate-{name}-chef-unit
+
+- project:
+    name: cookbook-openstack-data-processing
+    github-org: stackforge
+    node: bare-precise
+
+    jobs:
+      - gate-{name}-chef-lint
+      - gate-{name}-chef-style
+      - gate-{name}-chef-unit
+
+- project:
+    name: cookbook-openstack-database
+    github-org: stackforge
+    node: bare-precise
+
+    jobs:
+      - gate-{name}-chef-lint
+      - gate-{name}-chef-style
+      - gate-{name}-chef-unit
+
+- project:
     name: cookbook-openstack-common
     github-org: stackforge
     node: bare-precise

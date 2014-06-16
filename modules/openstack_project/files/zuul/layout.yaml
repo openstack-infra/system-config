@@ -3224,6 +3224,15 @@ projects:
       - gate-cookbook-ceph-chef-lint
       - gate-cookbook-ceph-chef-unit
 
+  - name: stackforge/cookbook-openstack-client
+    check:
+      - gate-cookbook-openstack-client-chef-lint
+      - gate-cookbook-openstack-client-chef-style
+      - gate-cookbook-openstack-client-chef-unit
+    gate:
+      - gate-cookbook-openstack-client-chef-lint
+      - gate-cookbook-openstack-client-chef-unit
+
   - name: stackforge/cookbook-openstack-common
     check:
       - gate-cookbook-openstack-common-chef-lint
@@ -3250,6 +3259,24 @@ projects:
     gate:
       - gate-cookbook-openstack-dashboard-chef-lint
       - gate-cookbook-openstack-dashboard-chef-unit
+
+  - name: stackforge/cookbook-openstack-data-processing
+    check:
+      - gate-cookbook-openstack-data-processing-chef-lint
+      - gate-cookbook-openstack-data-processing-chef-style
+      - gate-cookbook-openstack-data-processing-chef-unit
+    gate:
+      - gate-cookbook-openstack-data-processing-chef-lint
+      - gate-cookbook-openstack-data-processing-chef-unit
+
+  - name: stackforge/cookbook-openstack-database
+    check:
+      - gate-cookbook-openstack-database-chef-lint
+      - gate-cookbook-openstack-database-chef-style
+      - gate-cookbook-openstack-database-chef-unit
+    gate:
+      - gate-cookbook-openstack-database-chef-lint
+      - gate-cookbook-openstack-database-chef-unit
 
   - name: stackforge/cookbook-openstack-identity
     check:
