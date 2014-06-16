@@ -16,4 +16,6 @@ gerrit2: root
 jenkins: root
 <% if sysadmin.length > 0 -%>
 root: <%= sysadmin.join(",") %>
+<% else -%>
+root: sysadmin
 <% end -%>
