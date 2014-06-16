@@ -3546,6 +3546,13 @@ projects:
     release:
       - libra-tarball
 
+  - name: stackforge/logaas
+    template:
+      - name: python-jobs
+      - name: check-requirements
+      - name: docs-on-rtfd
+      - name: publish-to-pypi
+
   - name: stackforge/manila
     check:
       - gate-manila-docs
