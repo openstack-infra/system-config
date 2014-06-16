@@ -4407,6 +4407,14 @@ projects:
       - stackalytics-tarball:
         - stackalytics-pypi-both-upload
 
+  - name: stackforge/swift-ceph-backend
+    check:
+      - gate-swift-ceph-backend-pep8
+      - gate-swift-ceph-backend-python27
+    gate:
+      - gate-swift-ceph-backend-pep8
+      - gate-swift-ceph-backend-python27
+
   - name: stackforge/swift3
     template:
       - name: python-jobs
