@@ -66,7 +66,43 @@ class exim(
     mode    => '0444',
     owner   => 'root',
     replace => true,
+    require => Sysadmin_check['Check sysadmin'],
   }
+
+  define sysadmin_check {
+    if ($sysadmin == []) {
+      user { 'sysadmin':
+        ensure     => present,
+        comment    => 'sysadmin default',
+        shell      => '/bin/nologin',
+        gid        => 'sysadmin',
+        home       => '/home/sysadmin',
+        managehome => true,
+        require    => Group['sysadmin'],
+      }
+
+      group { 'sysadmin':
+        ensure => present,
+      }
+    } else {
+      user { 'sysadmin':
+        ensure     => absent,
+        comment    => 'sysadmin default',
+        shell      => '/bin/nologin',
+        gid        => 'sysadmin',
+        home       => '/home/sysadmin',
+        managehome => true,
+      }
+
+      group { 'sysadmin':
+        ensure  => absent,
+        require => User['sysadmin'],
+      }
+    }
+  }
+
+  sysadmin_check { 'Check sysadmin': }
+
 }
 
 # vim:sw=2:ts=2:expandtab:textwidth=79
