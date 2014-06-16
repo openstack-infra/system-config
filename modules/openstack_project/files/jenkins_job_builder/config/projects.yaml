@@ -2414,6 +2414,15 @@
       - hook-{name}-rtfd
 
 - project:
+    name: solum-specs
+    github-org: stackforge
+    node: bare-precise
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - gate-{name}-docs
+
+- project:
     name: congress
     github-org: stackforge
     node: bare-precise
