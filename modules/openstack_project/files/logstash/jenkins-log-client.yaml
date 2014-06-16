@@ -34,6 +34,11 @@ source-files:
       - console
       - console.html
     job-filter: '.*grenade.*'
+  - name: logs/grenade.sh.txt
+    tags:
+      - console
+      - console.html
+    job-filter: '.*grenade.*'
   - name: logs/devstacklog.txt
     tags:
       - console
