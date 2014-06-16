@@ -3546,6 +3546,27 @@ projects:
     release:
       - libra-tarball
 
+  - name: stackforge/logaas
+    template:
+      - name: check-requirements
+      - name: docs-on-rtfd
+    check:
+      - gate-logaas-pep8
+      - gate-logaas-python26
+      - gate-logaas-python27
+    gate:
+      - gate-logaas-pep8
+      - gate-logaas-python26
+      - gate-logaas-python27
+    post:
+      - logaas-branch-tarball
+      - logaas-coverage
+    pre-release:
+      - logaas-tarball
+    release:
+      - logaas-tarball
+      - logaas-merge-release-tags
+
   - name: stackforge/manila
     check:
       - gate-manila-docs
