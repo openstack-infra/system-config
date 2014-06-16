@@ -2338,6 +2338,15 @@
       - python-jobs
 
 - project:
+    name: logaas
+    github-org: stackforge
+    node: bare-precise
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - python-jobs
+
+- project:
     name: openstack-manuals
     github-org: openstack
     node: bare-precise
