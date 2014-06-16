@@ -450,13 +450,9 @@
 - project: openstack/tripleo-heat-templates
   group: tripleo
   description: Heat templates for deploying OpenStack
-  options:
-    - direct-release
 - project: openstack/tripleo-image-elements
   group: tripleo
   description: Disk image elements for deployment images of OpenStack
-  options:
-    - direct-release
 - project: openstack/tripleo-incubator
   group: tripleo
   description: The TripleO incubator where unformed things are experimented with.
