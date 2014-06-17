@@ -309,3 +309,39 @@ projects:
       - noop
     post:
       - noop
+
+  - name: Juniper/contrail-build
+    check:
+      - ci-contrail-build-unittest
+    silent:
+      - noop
+    check-tripleo:
+      - noop
+    gate:
+      - noop
+    post:
+      - noop
+
+  - name: Juniper/contrail-packages
+    check:
+      - ci-contrail-packages-unittest
+    silent:
+      - noop
+    check-tripleo:
+      - noop
+    gate:
+      - noop
+    post:
+      - noop
+
+  - name: Juniper/contrail-third-party
+    check:
+      - ci-contrail-third-party-unittest
+    silent:
+      - noop
+    check-tripleo:
+      - noop
+    gate:
+      - noop
+    post:
+      - noop
