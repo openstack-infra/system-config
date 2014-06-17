@@ -628,6 +628,8 @@ jobs:
     voting: false
   - name: gate-trove-functional-dsvm-mysql
     voting: false
+  - name: gate-trove-functional-dsvm-heat-integration-mysql
+    voting: false
   - name: gate-trove-functional-dsvm-mongodb
     voting: false
 # puppet-openstack targets
@@ -1194,6 +1196,7 @@ projects:
       - trove-propose-translation-update
     experimental:
       - gate-trove-functional-dsvm-mysql
+      - gate-trove-functional-dsvm-heat-integration-mysql
       - gate-trove-functional-dsvm-mongodb
 
   - name: openstack/tuskar
