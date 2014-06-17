@@ -41,6 +41,36 @@ then
     echo "Triggered by: $GERRIT_SITE/$ZUUL_CHANGE"
 fi
 
+function retry() {
+    set +e
+
+    CMD=$1
+    shift
+
+    if [ -z $RETRY ]; then
+        RETRY=10
+    fi
+    if [ -z $WAIT ]; then
+        WAIT=10
+    fi
+
+    COUNTER=0
+    while [  $COUNTER -lt $RETRY ]; do
+        $CMD $*
+        if [ "$?" = "0" ]; then
+            return
+        fi
+        let COUNTER=COUNTER+1
+        echo Try again $COUNTER/$RETRY
+        sleep $WAIT
+    done
+
+    set -e
+
+    echo "Error EXIT: $CMD $* Failed with exit code $?"
+    exit -1
+}
+
 set -x
 if [[ ! -e .git ]]
 then
@@ -50,16 +80,7 @@ then
     then
         git clone file:///opt/git/$ZUUL_PROJECT .
     else
-        # This some times fails. Retry a few times
-        COUNTER=0
-        while [  $COUNTER -lt 10 ]; do
-            git clone $GIT_ORIGIN/$ZUUL_PROJECT . || true
-            if [ -d .git ]; then
-                break
-            fi
-            let COUNTER=COUNTER+1
-            echo Try again $COUNTER of 10
-        done
+        retry git clone $GIT_ORIGIN/$ZUUL_PROJECT .
     fi
 fi
 
@@ -81,7 +102,7 @@ fi
 
 if [ -z "$ZUUL_NEWREV" ]
 then
-    git fetch $ZUUL_URL/$ZUUL_PROJECT $ZUUL_REF
+    retry git fetch $ZUUL_URL/$ZUUL_PROJECT $ZUUL_REF
     git checkout FETCH_HEAD
     git reset --hard FETCH_HEAD
     if ! git clean -x -f -d -q ; then
@@ -89,7 +110,7 @@ then
         git clean -x -f -d -q
     fi
 else
-    git checkout $ZUUL_NEWREV
+    retry git checkout $ZUUL_NEWREV
     git reset --hard $ZUUL_NEWREV
     if ! git clean -x -f -d -q ; then
         sleep 1
