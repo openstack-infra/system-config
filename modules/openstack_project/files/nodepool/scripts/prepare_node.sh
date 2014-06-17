@@ -93,7 +93,7 @@ dig git.openstack.org
 
 # Cache all currently known gerrit repos.
 sudo mkdir -p /opt/git
-sudo -i python /opt/nodepool-scripts/cache_git_repos.py $GIT_BASE
+sudo -E python /opt/nodepool-scripts/cache_git_repos.py $GIT_BASE
 
 # We don't always get ext4 from our clouds, mount ext3 as ext4 on the next
 # boot (eg when this image is used for testing).
