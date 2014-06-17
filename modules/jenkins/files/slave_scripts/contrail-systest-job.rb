@@ -246,7 +246,7 @@ end
 @options = OpenStruct.new
 @options.image = nil
 @options.branch = ENV['ZUUL_BRANCH'] || "master"
-@options.fab_tests = ["run_sanity:ci_sanity", "run_sanity:ci_svc_sanity"]
+@options.fab_tests = ["run_sanity:ci_sanity", "qemu_run_sanity:ci_svc_sanity"]
 
 @options.nodes = 2
 @options.cfgm = ["host1"]
