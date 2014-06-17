@@ -1144,6 +1144,8 @@
       - openstack-doc-jobs
       - 'gate-trove-functional-dsvm-{datastore}':
           datastore: 'mysql'
+      - 'gate-trove-functional-dsvm-heat-integration-{datastore}':
+          datastore: 'mysql'
       - 'gate-trove-functional-dsvm-{datastore}':
           datastore: 'mongodb'
       - 'gate-trove-buildimage-{datastore}':
