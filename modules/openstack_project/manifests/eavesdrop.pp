@@ -49,6 +49,7 @@ class openstack_project::eavesdrop (
         '#openstack-infra',
         '#openstack-ironic',
         '#openstack-keystone',
+        '#openstack-lbaas',
         '#openstack-marconi',
         '#openstack-meeting',
         '#openstack-meeting-alt',
