@@ -84,6 +84,8 @@ channels:
   - name: openstack-infra
   - name: openstack-ironic
   - name: openstack-keystone
+  - name: openstack-lbaas
+    mask: full_mask
   - name: openstack-manila
   - name: openstack-marconi
   - name: openstack-meeting
