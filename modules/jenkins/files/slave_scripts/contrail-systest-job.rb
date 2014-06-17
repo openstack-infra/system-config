@@ -183,6 +183,10 @@ def run_sanity
         end
     end
 
+    # Slow down tests
+    ENV['TEST_RETRY_FACTOR'] = "10.0"
+    ENV['TEST_DELAY_FACTOR'] = "1.2"
+
     o, exit_code = Sh.run("ssh #{@vms.first.vmname} /usr/local/jenkins/slave_scripts/ci-infra/contrail_fab #{@options.fab_tests}", true)
 
     # Copy sanity log files, as the sub-slave VMs will go away.
