@@ -59,6 +59,8 @@ channels:
     mask: full_mask
   - name: murano
     mask: full_mask
+  - name: neutron-lbaas
+    mask: full_mask
   - name: openstack
   - name: openstack-101
   - name: openstack-anvil
