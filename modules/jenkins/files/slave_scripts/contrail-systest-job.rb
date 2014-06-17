@@ -314,7 +314,7 @@ def parse_options(args = ARGV)
     opt_parser.parse!(args)
     if !args.empty? then
         @options.fab_tests = [ ]
-        args.each { |t| @options.fab_tests.push += t }
+        args.each { |t| @options.fab_tests.push t }
     end
     if !compute_set then
         if @options.nodes == 1 then
