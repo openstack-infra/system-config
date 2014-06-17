@@ -11,7 +11,12 @@
             mkdir drush
             curl -L https://github.com/drush-ops/drush/archive/6.0.0.tar.gz | tar -xz -C drush --strip 1
             # build distribution
-            ./drush/drush make build-groups.make dist
+            ./drush/drush make drupal-org-core.make dist
+            mkdir -p dist/profiles/groups
+            rsync -a --exclude=dist --exclude=drush . dist/profiles/groups/
+            ./drush/drush make --no-core --no-cache --contrib-destination=profiles/groups drupal-org.make dist.contrib
+            rsync -a dist.contrib/* dist/
+            rm -rf dist.contrib
     publishers:
         - console-log
         - coverage-log
@@ -41,7 +46,12 @@
             mkdir drush
             curl -L https://github.com/drush-ops/drush/archive/6.0.0.tar.gz | tar -xz -C drush --strip 1
             # build distribution
-            ./drush/drush make build-groups.make dist
+            ./drush/drush make drupal-org-core.make dist
+            mkdir -p dist/profiles/groups
+            rsync -a --exclude=dist --exclude=drush . dist/profiles/groups/
+            ./drush/drush make --no-core --no-cache --contrib-destination=profiles/groups drupal-org.make dist.contrib
+            rsync -a dist.contrib/* dist/
+            rm -rf dist.contrib
             # Clean/create a tarball directory
             rm -rf tarballs
             mkdir -p tarballs
