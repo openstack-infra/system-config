@@ -16,6 +16,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import os
 import os.path
 import re
 import shutil
@@ -37,7 +38,11 @@ else:
 
 
 def clone_repo(project):
-    remote = '%s/%s.git' % (GIT_BASE, project)
+    project_git_base = os.environ.get('GIT_BASE_{0}'.format(project.upper()))
+    if project_git_base:
+        remote = '%s/%s.git' % (project_git_base, project)
+    else:
+        remote = '%s/%s.git' % (GIT_BASE, project)
 
     # Clear out any existing target directory first, in case of a retry.
     try:
