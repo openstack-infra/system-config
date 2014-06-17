@@ -1210,6 +1210,16 @@
       - openstack-publish-jobs
 
 - project:
+    name: marconi-specs
+    github-org: openstack
+    node: bare-precise
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - gate-{name}-python27
+      - gate-{name}-docs
+
+- project:
     name: python-marconiclient
     github-org: openstack
     tarball-site: tarballs.openstack.org
