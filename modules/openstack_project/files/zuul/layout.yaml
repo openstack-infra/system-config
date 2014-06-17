@@ -4632,3 +4632,15 @@ projects:
       - name: openstack-doc-gate
     post:
       - training-guides-tox-doc-publishdocs
+
+  - name: stackforge/octavia
+    check:
+      - gate-octavia-pep8
+      - gate-octavia-python26
+      - gate-octavia-python27
+      - gate-octavia-python33
+    gate:
+      - gate-octavia-pep8
+      - gate-octavia-python26
+      - gate-octavia-python27
+      - gate-octavia-python33

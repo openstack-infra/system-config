@@ -796,3 +796,13 @@ nova-docker:
       - stackforge/nova-docker
     branches:
       - master
+
+openstack-lbaas:
+    events:
+      - patchset-created
+      - change-merged
+      - x-vrif-minus-2
+    projects:
+      - stackforge/octavia
+    branches:
+      - master
