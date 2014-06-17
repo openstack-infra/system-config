@@ -203,6 +203,7 @@ def run_sanity(fab_test)
 
     # Copy sanity log files, as the sub-slave VMs will go away.
     Sh.run("scp -r #{@vms.first.vmname}:/root/logs #{ENV['WORKSPACE']}/logs_#{fab_test}", true)
+    Sh.run("ssh #{@vms.first.vmname} rm -rf /root/logs", true)
 
     # Get http hyper links to the logs and report summary files.
     Sh.run("lynx --dump #{ENV['WORKSPACE']}/logs_#{fab_test}/*/test_report.html", true)
