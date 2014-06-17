@@ -134,6 +134,11 @@ def main():
             print("Requirement %s not in openstack/requirements" % str(req))
             failed = True
             continue
+        # hacking doesn't have to always to be synced with global requirements.
+        # Due to the nauture of hacking, it cannot cannot always be rolled out
+        # without any other changes.
+        if name == "hacking":
+            continue
         # pkg_resources.Requirement implements __eq__() but not __ne__().
         # There is no implied relationship between __eq__() and __ne__()
         # so we must negate the result of == here instead of using !=.
