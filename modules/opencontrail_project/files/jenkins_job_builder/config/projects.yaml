@@ -33,3 +33,33 @@
       - contrail-unittest-jobs
       - contrail-systest-jobs
 #     - contrail-devstack-jobs
+
+- project:
+    name: contrail-build
+    github-org: Juniper
+    node: juniper-tests
+    tarball-site: tarballs.openstack.org
+    doc-publisher-site: docs.opencontrail.org
+
+    jobs:
+      - contrail-unittest-jobs
+
+- project:
+    name: contrail-packages
+    github-org: Juniper
+    node: juniper-tests
+    tarball-site: tarballs.openstack.org
+    doc-publisher-site: docs.opencontrail.org
+
+    jobs:
+      - contrail-unittest-jobs
+
+- project:
+    name: contrail-third-party
+    github-org: Juniper
+    node: juniper-tests
+    tarball-site: tarballs.openstack.org
+    doc-publisher-site: docs.opencontrail.org
+
+    jobs:
+      - contrail-unittest-jobs
