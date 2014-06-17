@@ -11,7 +11,8 @@
             mkdir drush
             curl -L https://github.com/drush-ops/drush/archive/6.0.0.tar.gz | tar -xz -C drush --strip 1
             # build distribution
-            ./drush/drush make build-groups.make dist
+            export PATH=./drush:$PATH
+            sh scripts/dev-build.sh
     publishers:
         - console-log
         - coverage-log
@@ -41,12 +42,13 @@
             mkdir drush
             curl -L https://github.com/drush-ops/drush/archive/6.0.0.tar.gz | tar -xz -C drush --strip 1
             # build distribution
-            ./drush/drush make build-groups.make dist
+            export PATH=./drush:$PATH
+            sh scripts/dev-build.sh
             # Clean/create a tarball directory
             rm -rf tarballs
             mkdir -p tarballs
             # Create an archive tarball.
-            tar -czf groups-$PROJECT_VER.tar.gz dist/
+            tar -czf groups-$PROJECT_VER.tar.gz publish/
             cp groups-$PROJECT_VER.tar.gz tarballs/groups-latest.tar.gz
             mv groups-$PROJECT_VER.tar.gz tarballs/
             # generate md5 checksums
