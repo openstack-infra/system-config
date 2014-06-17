@@ -57,6 +57,8 @@ env.passwords = { #{get_each_host_password}, host_build: 'c0ntrail123' }
 env.ostypes = { #{get_each_host_ostype} }
 env.webui_config = False
 env.devstack = False
+env.test_retry_factor = 1.0
+env.test_delay_factor = 1.0
 
 env.test_repo_dir='#{ENV['HOME']}/contrail-test'
 env.http_proxy = subprocess.check_output("\grep http_proxy /etc/contrail_bashrc | awk -F '=' '{print $2}'", shell = True).rstrip()
