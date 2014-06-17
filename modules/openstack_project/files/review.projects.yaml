@@ -1027,3 +1027,5 @@
 - project: stackforge/xenapi-os-testing
   description: Scripts to enable running of tempest tests in a nested Xen instance
   upstream: git://github.com/citrix-openstack/xenapi-os-testing.git
+- project: stackforge/octavia
+  description: A reference implementation for Load Balancing as a Service (LBaaS)
