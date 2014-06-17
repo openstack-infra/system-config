@@ -253,7 +253,6 @@ puppet-openstack:
       - stackforge/puppet-openstack
       - stackforge/puppet-openstacklib
       - stackforge/puppet_openstack_builder
-      - stackforge/puppet-openstack_dev_env
       - stackforge/puppet-openstack_extras
       - stackforge/puppet-swift
       - stackforge/puppet-tempest
