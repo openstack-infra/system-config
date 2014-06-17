@@ -123,3 +123,5 @@ channels:
     mask: full_mask
   - name: nova-docker
     mask: full_mask
+  - name: neutron-lbaas
+    mask: full_mask
