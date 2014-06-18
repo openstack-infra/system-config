@@ -21,13 +21,17 @@
           export PROJECTS="stackforge/manila $PROJECTS"
           export PROJECTS="stackforge/python-manilaclient $PROJECTS"
 
+          # Keep localrc to be able to set some vars in pre_test_hook
+          export KEEP_LOCALRC=1
+
           function pre_test_hook {
               source $BASE/new/manila/contrib/ci/pre_test_hook.sh
           }
           export -f pre_test_hook
 
           function post_test_hook {
-              source $BASE/new/manila/contrib/ci/post_test_hook.sh
+              # Configure and run tempest on singlebackend manila installation
+              source $BASE/new/manila/contrib/ci/post_test_hook.sh singlebackend
           }
           export -f post_test_hook
 
@@ -62,13 +66,17 @@
           export PROJECTS="stackforge/manila $PROJECTS"
           export PROJECTS="stackforge/python-manilaclient $PROJECTS"
 
+          # Keep localrc to be able to set some vars in pre_test_hook
+          export KEEP_LOCALRC=1
+
           function pre_test_hook {
               source $BASE/new/manila/contrib/ci/multi_backend/pre_test_hook.sh
           }
           export -f pre_test_hook
 
           function post_test_hook {
-              source $BASE/new/manila/contrib/ci/multi_backend/post_test_hook.sh
+              # Configure and run tempest on singlebackend manila installation
+              source $BASE/new/manila/contrib/ci/multi_backend/post_test_hook.sh multibackend
           }
           export -f post_test_hook
 
