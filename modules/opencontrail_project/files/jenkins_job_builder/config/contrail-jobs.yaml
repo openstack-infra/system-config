@@ -34,7 +34,7 @@
           rm -rf $WORKSPACE/* $WORKSPACE/.* || true
 
           /usr/bin/ci_setup.sh
-          ruby /usr/local/jenkins/slave_scripts/contrail-systest-job.rb --nodes 6 run_sanity:ci_sanity
+          ruby /usr/local/jenkins/slave_scripts/contrail-systest-job.rb --nodes 3
 
 - job-template:
     name: 'ci-{name}-devstack'
