@@ -48,6 +48,30 @@ labels:
       - name: rax-dfw
       - name: rax-ord
       - name: rax-iad
+  - name: devstack-trusty
+    image: devstack-trusty
+    min-ready: 2
+    providers:
+      - name: hpcloud-b1
+      - name: hpcloud-b2
+      - name: hpcloud-b3
+      - name: hpcloud-b4
+      - name: hpcloud-b5
+      - name: rax-dfw
+      - name: rax-ord
+      - name: rax-iad
+  - name: bare-trusty
+    image: bare-trusty
+    min-ready: 2
+    providers:
+      - name: hpcloud-b1
+      - name: hpcloud-b2
+      - name: hpcloud-b3
+      - name: hpcloud-b4
+      - name: hpcloud-b5
+      - name: rax-dfw
+      - name: rax-ord
+      - name: rax-iad
   - name: bare-centos6
     image: bare-centos6
     min-ready: 21
@@ -141,6 +165,20 @@ providers:
         setup: prepare_node_bare.sh
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
+      - name: devstack-trusty
+        base-image: 'Ubuntu 14.04 LTS (Trusty Tahr) (PVHVM)'
+        min-ram: 8192
+        name-filter: 'Performance'
+        setup: prepare_node_devstack.sh
+        username: jenkins
+        private-key: /home/nodepool/.ssh/id_rsa
+      - name: bare-trusty
+        base-image: 'Ubuntu 14.04 LTS (Trusty Tahr) (PVHVM)'
+        min-ram: 8192
+        name-filter: 'Performance'
+        setup: prepare_node_bare.sh
+        username: jenkins
+        private-key: /home/nodepool/.ssh/id_rsa
       - name: bare-centos6
         base-image: 'CentOS 6.5 (PVHVM)'
         min-ram: 8192
@@ -195,6 +233,20 @@ providers:
         setup: prepare_node_bare.sh
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
+      - name: devstack-trusty
+        base-image: 'Ubuntu 14.04 LTS (Trusty Tahr) (PVHVM)'
+        min-ram: 8192
+        name-filter: 'Performance'
+        setup: prepare_node_devstack.sh
+        username: jenkins
+        private-key: /home/nodepool/.ssh/id_rsa
+      - name: bare-trusty
+        base-image: 'Ubuntu 14.04 LTS (Trusty Tahr) (PVHVM)'
+        min-ram: 8192
+        name-filter: 'Performance'
+        setup: prepare_node_bare.sh
+        username: jenkins
+        private-key: /home/nodepool/.ssh/id_rsa
       - name: bare-centos6
         base-image: 'CentOS 6.5 (PVHVM)'
         min-ram: 8192
@@ -237,6 +289,20 @@ providers:
         private-key: /home/nodepool/.ssh/id_rsa
       - name: bare-precise
         base-image: 'Ubuntu 12.04 LTS (Precise Pangolin)'
+        min-ram: 8192
+        name-filter: 'Performance'
+        setup: prepare_node_bare.sh
+        username: jenkins
+        private-key: /home/nodepool/.ssh/id_rsa
+      - name: devstack-trusty
+        base-image: 'Ubuntu 14.04 LTS (Trusty Tahr) (PVHVM)'
+        min-ram: 8192
+        name-filter: 'Performance'
+        setup: prepare_node_devstack.sh
+        username: jenkins
+        private-key: /home/nodepool/.ssh/id_rsa
+      - name: bare-trusty
+        base-image: 'Ubuntu 14.04 LTS (Trusty Tahr) (PVHVM)'
         min-ram: 8192
         name-filter: 'Performance'
         setup: prepare_node_bare.sh
@@ -370,6 +436,18 @@ providers:
         setup: prepare_node_bare.sh
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
+      - name: devstack-trusty
+        base-image: 'Ubuntu Server 14.04 LTS (amd64 20140607.1) - Partner Image'
+        min-ram: 30720
+        setup: prepare_node_devstack.sh
+        username: jenkins
+        private-key: /home/nodepool/.ssh/id_rsa
+      - name: bare-trusty
+        base-image: 'Ubuntu Server 14.04 LTS (amd64 20140607.1) - Partner Image'
+        min-ram: 30720
+        setup: prepare_node_bare.sh
+        username: jenkins
+        private-key: /home/nodepool/.ssh/id_rsa
       - name: bare-centos6
         base-image: 'CentOS 6.3 Server 64-bit 20130116'
         min-ram: 30720
@@ -420,6 +498,18 @@ providers:
         private-key: /home/nodepool/.ssh/id_rsa
       - name: bare-precise
         base-image: 'Ubuntu Server 12.04.4 LTS (amd64 20140408) - Partner Image'
+        min-ram: 30720
+        setup: prepare_node_bare.sh
+        username: jenkins
+        private-key: /home/nodepool/.ssh/id_rsa
+      - name: devstack-trusty
+        base-image: 'Ubuntu Server 14.04 LTS (amd64 20140607.1) - Partner Image'
+        min-ram: 30720
+        setup: prepare_node_devstack.sh
+        username: jenkins
+        private-key: /home/nodepool/.ssh/id_rsa
+      - name: bare-trusty
+        base-image: 'Ubuntu Server 14.04 LTS (amd64 20140607.1) - Partner Image'
         min-ram: 30720
         setup: prepare_node_bare.sh
         username: jenkins
@@ -478,6 +568,18 @@ providers:
         setup: prepare_node_bare.sh
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
+      - name: devstack-trusty
+        base-image: 'Ubuntu Server 14.04 LTS (amd64 20140607.1) - Partner Image'
+        min-ram: 30720
+        setup: prepare_node_devstack.sh
+        username: jenkins
+        private-key: /home/nodepool/.ssh/id_rsa
+      - name: bare-trusty
+        base-image: 'Ubuntu Server 14.04 LTS (amd64 20140607.1) - Partner Image'
+        min-ram: 30720
+        setup: prepare_node_bare.sh
+        username: jenkins
+        private-key: /home/nodepool/.ssh/id_rsa
       - name: bare-centos6
         base-image: 'CentOS 6.3 Server 64-bit 20130116'
         min-ram: 30720
@@ -532,6 +634,18 @@ providers:
         setup: prepare_node_bare.sh
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
+      - name: devstack-trusty
+        base-image: 'Ubuntu Server 14.04 LTS (amd64 20140607.1) - Partner Image'
+        min-ram: 30720
+        setup: prepare_node_devstack.sh
+        username: jenkins
+        private-key: /home/nodepool/.ssh/id_rsa
+      - name: bare-trusty
+        base-image: 'Ubuntu Server 14.04 LTS (amd64 20140607.1) - Partner Image'
+        min-ram: 30720
+        setup: prepare_node_bare.sh
+        username: jenkins
+        private-key: /home/nodepool/.ssh/id_rsa
       - name: bare-centos6
         base-image: 'CentOS 6.3 Server 64-bit 20130116'
         min-ram: 30720
@@ -582,6 +696,18 @@ providers:
         private-key: /home/nodepool/.ssh/id_rsa
       - name: bare-precise
         base-image: 'Ubuntu Server 12.04.4 LTS (amd64 20140408) - Partner Image'
+        min-ram: 30720
+        setup: prepare_node_bare.sh
+        username: jenkins
+        private-key: /home/nodepool/.ssh/id_rsa
+      - name: devstack-trusty
+        base-image: 'Ubuntu Server 14.04 LTS (amd64 20140607.1) - Partner Image'
+        min-ram: 30720
+        setup: prepare_node_devstack.sh
+        username: jenkins
+        private-key: /home/nodepool/.ssh/id_rsa
+      - name: bare-trusty
+        base-image: 'Ubuntu Server 14.04 LTS (amd64 20140607.1) - Partner Image'
         min-ram: 30720
         setup: prepare_node_bare.sh
         username: jenkins
