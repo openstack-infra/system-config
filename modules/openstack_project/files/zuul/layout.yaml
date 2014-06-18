@@ -3790,6 +3790,9 @@ projects:
       - noop
 
   - name: stackforge/osprofiler
+    template:
+      - name: check-requirements
+      - name: publish-to-pypi
     check:
       - gate-osprofiler-pep8
       - gate-osprofiler-python26

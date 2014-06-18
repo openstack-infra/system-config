@@ -2336,6 +2336,7 @@
 
     jobs:
       - python-jobs
+      - pypi-jobs
 
 - project:
     name: openstack-manuals
