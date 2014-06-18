@@ -1496,6 +1496,12 @@
       # Special jobs for devstack-gate
       - devstack-gate-jobs:
           node: devstack-precise
+      # Trusty node testing
+      - devstack-jobs:
+          pipeline: check
+          node: 'devstack-trusty'
+          branch-designator: '-trusty'
+          branch-override: default
 
 
 - project:
