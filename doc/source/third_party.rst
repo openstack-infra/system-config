@@ -144,11 +144,10 @@ We'll want a few additional details:
   where you've published it so it can be retrieved. This is a non-sensitive piece
   of data, and it's safe for it to be publicly visible.
 
-  2. A preferred (short, alphanumeric) username you want to use for the new SSH
-  account. This is the username you'll use when connecting to Gerrit via SSH.
+  2. Your company/organization name or acronym. If you don't have a company name
+  please identify this in your email, we will need to find an equivalent. 
 
-  3. (optional) A human-readable display name for your testing system, shown on
-  comments and votes in Gerrit.
+  3. What you are verifying: this could be a product, driver or application. 
 
   4. (optional) A unique contact E-mail address or alias for this system, which
   can not be in use as a contact address for any other Gerrit accounts on
