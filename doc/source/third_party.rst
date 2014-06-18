@@ -140,10 +140,31 @@ user name). We'll want a few additional details:
   of data, and it's safe for it to be publicly visible.
 
   2. A preferred (short, alphanumeric) username you want to use for the new SSH
-  account. This is the username you'll use when connecting to Gerrit via SSH.
+  account. Do not use any OpenStack program names here.
+  The format for the username should be a lowercase string with hyphens between
+  words that matches the Full Name (see below), suffixed with "-ci". If the account
+  is for a non-CI system (the system will never verify build status), it should
+  use the suffix "-bot" instead.
+  Example: {company name}-{proprietary company thing that is being tested}-ci
+  or {company name}-ci, if your company will only need one gerrit ci account.
+  This is the username you'll use when connecting to Gerrit via SSH. We may tweak
+  your requested name slightly. We will reply to the email with your username if
+  we change it from the preferred name.
 
-  3. (optional) A human-readable display name for your testing system, shown on
-  comments and votes in Gerrit.
+  3. A human-readable display name for your testing system, shown on
+  comments and votes in Gerrit. Do not use any OpenStack program names here.
+  The format for the Full Name should be a capitalised, minimal uppercase and
+  lowercase string with whitespace between words that matches the username (see above),
+  suffixed with "CI", "-CI" or "-ci".
+  If the account is for a non-CI system (the system will never verify buiid status),
+  it should use the suffix "Bot", "-Bot" or "-bot" instead.
+  Example: {company name} {proprietary company thing that is being tested} CI
+  or {company name} CI, if your company will only need one gerrit ci account.
+
+  Note: We will remove test, testing, jenkins, openstack, tempest, storage, user or
+  some other words from the names as they confuse our developers. We need the names
+  to clearly identify themselves as not OpenStack systems, we will adjust names as
+  required to ensure clarity.
 
   4. (optional) A unique contact E-mail address or alias for this system, which
   can not be in use as a contact address for any other Gerrit accounts on
