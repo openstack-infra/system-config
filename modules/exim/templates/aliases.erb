@@ -14,6 +14,6 @@ security: root
 
 gerrit2: root
 jenkins: root
-<% if sysadmin.length > 0 -%>
-root: <%= sysadmin.join(",") %>
+<% if @sysadmin.length > 0 -%>
+root: <%= @sysadmin.join(",") %>
 <% end -%>
