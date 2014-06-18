@@ -86,6 +86,9 @@ def setup_contrail(image)
     @vms.each { |vm|
 #       Sh.run "ssh root@#{vm.vmname} apt-get update", true
         Sh.run("scp #{image} root@#{vm.vmname}:#{dest_image}", false, 50, 10)
+
+        # Some times dpkg right after scp fails.. Wait for a couple of seconds.
+        sleep 2
         Sh.run "ssh #{vm.vmname} dpkg -i #{dest_image}"
 
         # Apply patch to setup.sh to retain apt.conf proxy settings.
