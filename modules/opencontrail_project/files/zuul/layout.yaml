@@ -348,7 +348,7 @@ projects:
 
   - name: Juniper/contrail-neutron-plugin
     check:
-      - ci-contrail-neutron-plugin-unittest
+      - ci-contrail-neutron-plugin-flake8
     silent:
       - noop
     check-tripleo:
@@ -360,7 +360,7 @@ projects:
 
   - name: Juniper/contrail-generateDS
     check:
-      - ci-contrail-generateDS-unittest
+      - ci-contrail-generateDS-flake8
     silent:
       - noop
     check-tripleo:
