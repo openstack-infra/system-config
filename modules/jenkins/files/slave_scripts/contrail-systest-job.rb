@@ -147,7 +147,7 @@ def build_contrail_packages(repo = "#{ENV['WORKSPACE']}/repo")
 #   Sh.run("rm -rf /cs-shared/builder/cache/ubuntu1204")
 #   Sh.run("sshpass -p c0ntrail123 scp -r ci-admin@ubuntu-build02:/cs-shared/builder/cache/ubuntu1204 /cs-shared/builder/cache/.")
     cache = "/cs-shared/builder/cache/ubuntu1204/"
-    Sh.run("mkdir -p #{cache}"
+    Sh.run("mkdir -p #{cache}")
     Sh.run("sshpass -p c0ntrail123 rsync -az --no-owner --no-group ci-admin@ubuntu-build02:/cs-shared/builder/cache/ubuntu1204/ #{cache}")
     Sh.run("chown -R #{ENV['USER']}.#{ENV['USER']} #{cache}")
     Sh.run("ln -sf ubuntu1204 /cs-shared/builder/cache/ubuntu-12-04")
