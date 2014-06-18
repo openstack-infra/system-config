@@ -2218,6 +2218,7 @@ projects:
     experimental-tripleo:
       - check-tripleo-ironic-undercloud-precise
       - check-tripleo-overcloud-precise
+      - check-tripleo-vlan-precise
     post:
       - tripleo-incubator-docs
     pre-release:
