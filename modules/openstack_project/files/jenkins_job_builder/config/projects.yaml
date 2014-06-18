@@ -2339,6 +2339,17 @@
       - pypi-jobs
 
 - project:
+    name: logaas
+    github-org: stackforge
+    node: bare-precise
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - python-jobs
+      - hook-{name}-rtfd
+      - pypi-jobs
+
+- project:
     name: openstack-manuals
     github-org: openstack
     node: bare-precise
