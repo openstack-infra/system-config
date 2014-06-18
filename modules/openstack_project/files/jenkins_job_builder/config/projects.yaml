@@ -2731,3 +2731,12 @@
 
     jobs:
       - python-jobs
+
+- project:
+    name: cachemonkey
+    github-org: stackforge
+    node: bare-precise
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - python-jobs
