@@ -16,25 +16,25 @@ class Sh
     @ignore_failed_exit_code = false
     @@exit_code = 0
 
-    def Sh.exit(code = 0)
+    def self.exit(code = 0)
         @@exit_code = code
         Kernel.exit(code)
     end
 
-    def Sh.exit!(code = @@exit_code)
+    def self.exit!(code = @@exit_code)
         puts "Fail exit with code #{code}" if code != 0
         Process.exit!(code)
     end
 
-    def Sh.dry_run?
+    def self.dry_run?
         return !ENV['DRY_RUN'].nil? && ENV['DRY_RUN'].casecmp("true") == 0
     end
 
-    def Sh.exit_code
+    def self.exit_code
         return @@exit_code
     end
 
-    def Sh.spawn(cmd, debug = true, ignore_output = true)
+    def self.spawn(cmd, debug = true, ignore_output = true)
         output = ""
 
         begin
@@ -65,14 +65,14 @@ class Sh
     private_class_method :spawn
 
     # Run a shell command and return its output to the caller.
-    def Sh.rrun (cmd, ignore = @ignore_failed_exit_code, repeat = 1, wait = 1,
+    def self.rrun (cmd, ignore = @ignore_failed_exit_code, repeat = 1, wait = 1,
                  debug = true, ignore_output = false)
-        return Sh.run(cmd, ignore, repeat, wait, debug, false)
+        return self.run(cmd, ignore, repeat, wait, debug, false)
     end
 
     # Run a shell command just printing output to stdput. Output is not
     # collected returned to the caller.
-    def Sh.run (cmd, ignore = @ignore_failed_exit_code, repeat = 1, wait = 1,
+    def self.run (cmd, ignore = @ignore_failed_exit_code, repeat = 1, wait = 1,
                 debug = true, ignore_output = true)
         output = ""
         @@exit_code = 0
@@ -107,14 +107,14 @@ class Sh
     end
 
     # Cloud run, to run openstack manage commands in the build cluster.
-    def Sh.crun (cmd, ignore = true, cloud_manager = "10.84.26.14")
-        return Sh.rrun("ssh #{cloud_manager} ci-openstack.sh #{cmd}", ignore)
+    def self.crun (cmd, ignore = true, cloud_manager = "10.84.26.14")
+        return self.rrun("ssh #{cloud_manager} ci-openstack.sh #{cmd}", ignore)
     end
-end
+end # class Sh
 
 # Add some useful routines to Vm class.
 class Vm
-    def Vm.get_hostname(type="name")
+    def self.get_hostname(type="name")
 
         # Disable proxy..
         http_proxy=ENV['http_proxy']
@@ -126,24 +126,27 @@ class Vm
         return name
     end
 
-    def Vm.get_hostip (hostname = get_hostname)
+    def self.get_hostip (hostname = get_hostname)
         return $1 if hostname =~ /ci-.*?(\d+\.\d+\.\d+\.\d+)/
         return "127.0.0.1"
     end
 
-    def Vm.get_primary_interface()
+    def self.get_primary_interface()
         # Check if vhost0 is present. If so, it is the primary interface
         `ifconfig vhost0`
         return $?.to_i == 0 ? "vhost0" : "eth0"
     end
 
-    def Vm.get_interface_ip (interface = Vm.get_primary_interface)
+    def self.get_interface_ip (interface = self.get_primary_interface)
         ip = "127.0.0.1"
         o, e = Sh.rrun(%{ifconfig #{interface} |\grep "inet addr"})
         ip = $1 if o =~ /inet addr:(\d+\.\d+\.\d+\.\d+)/
         return ip
     end
-end
+end # class Vm
+
+# Install exit routine
+at_exit { Util.ci_cleanup }
 
 class Util
     def self.ci_default_branch
@@ -165,4 +168,22 @@ class Util
             exit
         end
     end
-end
+
+    def self.wait
+        puts "Sleeping until /root/ci_job_wait is gone"
+        loop do
+            break unless File.file? "/root/ci_job_wait"
+            sleep 10
+        end
+    end
+
+    def self.ci_cleanup
+        exit_code = Sh.exit_code # Note down the current exit code
+        wait
+
+        # Clean up the workspace, if the job is successful.
+        Sh.run("rm -rf #{ENV['WORKSPACE']}/* #{ENV['WORKSPACE']}/.* 2>/dev/null") if exit_code == 0
+        Vm.clean_all
+        Sh.exit!(exit_code)
+    end
+end # class Util

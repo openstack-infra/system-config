@@ -84,12 +84,30 @@ function run_unittest() {
     print_test_results
 }
 
+function test_wait() {
+    while :
+    do
+        echo Sleeping until /root/ci_job_wait is gone
+        if [ ! -f /root/ci_job_wait ]; then
+            break
+        fi
+        sleep 10
+    done
+}
+
+function ci_cleanup() {
+    test_wait
+    rm -rf $WORKSPACE/* $WORKSPACE/.* 2>/dev/null
+    echo Success
+    exit
+}
+
 function main() {
     build_unittest
     run_unittest
     print_test_results
+    ci_cleanup
 }
 
 env
 main
-echo Success

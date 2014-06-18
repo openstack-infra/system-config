@@ -26,13 +26,6 @@ require 'util'
 # well. In addition, sub-slaves kill themselves if controller VM does not
 # periodically ping (and update a timestamp file)
 
-at_exit { Vm.clean_all; Sh.exit! }
-
-# trap("EXIT") { Vm.clean_all; exit Sh.exit }
-# trap("INT")  { Vm.clean_all; exit Sh.exit }
-# trap("KILL") { Vm.clean_all; exit Sh.exit }
-# trap("QUIT") { Vm.clean_all; exit Sh.exit }
-
 class Vm
     attr_accessor :vmname, :short_name, :hostip
     @@options = OpenStruct.new
@@ -75,17 +68,8 @@ class Vm
         return vms
     end
 
-    def Vm.wait
-        puts "Sleeping until /root/contrail_systest_job_wait is gone"
-        loop do
-            break unless File.file? "/root/contrail_systest_job_wait"
-            sleep 10
-        end
-    end
-
     def Vm.clean_all
         return if __FILE__ == $0
-        Vm.wait
         @@vms.each { |vm| vm.delete }
     end
 
