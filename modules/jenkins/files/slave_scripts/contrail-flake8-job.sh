@@ -30,7 +30,6 @@ function build_unittest() {
     [ -z $FLAKE8 ] && echo "Cannot find FLAKE8, installing..." && $PIP install flake8
  
     $FLAKE8 $1/$2 --exit-zero 2>&1 | tee $WORKSPACE/$2_flake8.log
-    #$FLAKE8 openstack/neutron_plugin --exit-zero 2>&1 | tee $WORKSPACE/$2_flake8.log
 }
 
 function main() {

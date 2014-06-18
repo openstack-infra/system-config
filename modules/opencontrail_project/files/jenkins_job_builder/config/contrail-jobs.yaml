@@ -34,8 +34,8 @@
           rm -rf $WORKSPACE/* $WORKSPACE/.* || true
           /usr/bin/ci_setup.sh
           ruby /usr/local/jenkins/slave_scripts/contrail-git-prep.rb
-          [ $PROJECT_NAME = contrail-neutron-plugin ] && /usr/local/jenkins/slave_scripts/contrail-flake8-job.sh openstack neutron_plugin
-          [ $PROJECT_NAME = contrail-generateDS ] && /usr/local/jenkins/slave_scripts/contrail-flake8-job.sh tools generateds
+          [ $PROJECT_NAME = contrail-neutron-plugin ] && sh /usr/local/jenkins/slave_scripts/contrail-flake8-job.sh openstack neutron_plugin
+          [ $PROJECT_NAME = contrail-generateDS ] && sh /usr/local/jenkins/slave_scripts/contrail-flake8-job.sh tools generateds
 
 - job-template:
     name: 'ci-{name}-systest'
