@@ -433,6 +433,8 @@ jobs:
     voting: false
   - name: ^(gate|check)-tempest-dsvm-cells-full$
     voting: false
+  - name: ^(gate|check)-tempest-dsvm-nova-v3-full$
+    branch: ^(?!stable/havana).*$
   - name: ^(gate|check)-grenade-dsvm$
     branch: ^(?!stable/havana).*$
   - name: ^(gate|check)-grenade-dsvm-neutron$
@@ -1059,6 +1061,7 @@ projects:
       - gate-grenade-dsvm-forward
       - check-tempest-dsvm-cells-full
       - check-tempest-dsvm-neutron-pg
+      - check-tempest-dsvm-nova-v3-full
     experimental-tripleo:
       - check-tripleo-ironic-seed-precise
       - check-tripleo-undercloud-precise
@@ -2142,6 +2145,7 @@ projects:
       - check-tempest-dsvm-marconi
       - check-tempest-dsvm-keystonev3-full
       - check-tempest-dsvm-neutron-keystonev3-full
+      - check-tempest-dsvm-nova-v3-full
       # havana compat jobs for tempest master (non voting)
       - check-tempest-master-dsvm-full-havana
       - check-tempest-master-dsvm-neutron-havana
@@ -2167,6 +2171,7 @@ projects:
       - periodic-tempest-dsvm-neutron-full-non-isolated-master
       - periodic-tempest-dsvm-all-master
       - periodic-tempest-dsvm-stress-master
+      - periodic-tempest-dsvm-nova-v3-full-master
 
   - name: openstack/tripleo-heat-templates
     template:
