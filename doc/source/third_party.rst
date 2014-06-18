@@ -127,23 +127,42 @@ Requesting a Service Account
 ----------------------------
 
 Feel free to contact the OpenStack Infrastructure Team via
-`email <mailto:openstack-infra@lists.openstack.org>`_,
-`bug report <https://bugs.launchpad.net/openstack-ci/>`_
-or in the #openstack-infra IRC channel to arrange setting up a dedicated user
-(so your system can post reviews and vote using a system name rather than your
-user name). We'll want a few additional details:
+`email <mailto:openstack-infra@lists.openstack.org>`_ to arrange setting up a
+dedicated account (so your system can post reviews and vote using a system name
+rather than your user name). We'll want a few additional details:
 
   1. The public SSH key described above (if using OpenSSH, this would be the
   full contents of the account's ~/.ssh/id_rsa.pub file after running
-  'ssh-keygen'). You can attach it to this bug or reply with a hyperlink to
-  where you've published it so I can retrieve it. This is a non-sensitive piece
+  'ssh-keygen'). You can attach it to the email or include a hyperlink to
+  where you've published it so it can be retrieved. This is a non-sensitive piece
   of data, and it's safe for it to be publicly visible.
 
   2. A preferred (short, alphanumeric) username you want to use for the new SSH
-  account. This is the username you'll use when connecting to Gerrit via SSH.
+  account. Do not use any OpenStack program names here.
+  The format for the username should be a lowercase string with hyphens between
+  words that matches the Full Name (see below), suffixed with "-ci". If the account
+  is for a non-CI system (the system will never verify build status), it should
+  use the suffix "-bot" instead.
+  Example: {company name}-{proprietary company thing that is being tested}-ci
+  or {company name}-ci, if your company will only need one gerrit ci account.
+  This is the username you'll use when connecting to Gerrit via SSH. We may tweak
+  your requested name slightly. We will reply to the email with your username if
+  we change it from the preferred name.
 
-  3. (optional) A human-readable display name for your testing system, shown on
-  comments and votes in Gerrit.
+  3. A human-readable display name for your testing system, shown on
+  comments and votes in Gerrit. Do not use any OpenStack program names here.
+  The format for the Full Name should be a capitalised, minimal uppercase and
+  lowercase string with whitespace between words that matches the username (see above),
+  suffixed with "CI", "-CI" or "-ci".
+  If the account is for a non-CI system (the system will never verify buiid status),
+  it should use the suffix "Bot", "-Bot" or "-bot" instead.
+  Example: {company name} {proprietary company thing that is being tested} CI
+  or {company name} CI, if your company will only need one gerrit ci account.
+
+  Note: We will remove test, testing, jenkins, openstack, tempest, storage, user or
+  some other words from the names as they confuse our developers. We need the names
+  to clearly identify themselves as not OpenStack systems, we will adjust names as
+  required to ensure clarity.
 
   4. (optional) A unique contact E-mail address or alias for this system, which
   can not be in use as a contact address for any other Gerrit accounts on
