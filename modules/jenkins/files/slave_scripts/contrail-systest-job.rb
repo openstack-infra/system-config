@@ -144,8 +144,13 @@ end
 
 def build_contrail_packages(repo = "#{ENV['WORKSPACE']}/repo")
     # Fetch build cache
-    Sh.run("rm -rf /cs-shared/builder/cache/ubuntu1204")
-    Sh.run("sshpass -p c0ntrail123 scp -r ci-admin@ubuntu-build02:/cs-shared/builder/cache/ubuntu1204 /cs-shared/builder/cache/.")
+#   Sh.run("rm -rf /cs-shared/builder/cache/ubuntu1204")
+#   Sh.run("sshpass -p c0ntrail123 scp -r ci-admin@ubuntu-build02:/cs-shared/builder/cache/ubuntu1204 /cs-shared/builder/cache/.")
+    cache = "/cs-shared/builder/cache/ubuntu1204/"
+    Sh.run("mkdir -p #{cache}"
+    Sh.run("sshpass -p c0ntrail123 rsync -az --no-owner --no-group ci-admin@ubuntu-build02:/cs-shared/builder/cache/ubuntu1204/ #{cache}")
+    Sh.run("chown -R #{ENV['USER']}.#{ENV['USER']} #{cache}")
+    Sh.run("ln -sf ubuntu1204 /cs-shared/builder/cache/ubuntu-12-04")
 
     ENV['BUILD_ONLY'] = "1"
     ENV['SKIP_CREATE_GIT_IDS'] = "1"
@@ -206,9 +211,6 @@ def run_sanity(fab_test)
     Sh.run("scp -r #{@vms.first.vmname}:/root/logs #{ENV['WORKSPACE']}/logs_#{fab_test}", true)
     Sh.run("ssh #{@vms.first.vmname} rm -rf /root/logs", true)
 
-    # Get http hyper links to the logs and report summary files.
-    Sh.run("lynx --dump #{ENV['WORKSPACE']}/logs_#{fab_test}/*/test_report.html", true)
-
     puts "#{fab_test} complete, checking for any failures.."
 
     # Check if any test failed or errored. Number of matches is consisdered
@@ -216,7 +218,8 @@ def run_sanity(fab_test)
     if exit_code == 0 then
         exit_code, e = Sh.rrun(
             %{lynx --dump #{ENV['WORKSPACE']}/logs_#{fab_test}/*/test_report.html | } +
-            %{\grep Status: | \grep "Fail\\|Error" | wc -l}, true).to_i
+            %{\grep Status: | \grep "Fail\\|Error" | wc -l}, true)
+        exit_code = exit_code.to_i
     end
 
     if exit_code != 0 then
@@ -248,7 +251,8 @@ end
 @options = OpenStruct.new
 @options.image = nil
 @options.branch = ENV['ZUUL_BRANCH'] || "master"
-@options.fab_tests = ["run_sanity:ci_sanity", "qemu_run_sanity:ci_svc_sanity"]
+# @options.fab_tests = ["run_sanity:ci_sanity", "qemu_run_sanity:ci_svc_sanity"]
+@options.fab_tests = ["run_sanity:ci_sanity"]
 
 @options.nodes = 2
 @options.cfgm = ["host1"]
