@@ -1156,6 +1156,10 @@
           datastore: 'mysql'
       - 'gate-trove-functional-dsvm-{datastore}':
           datastore: 'mongodb'
+      - 'gate-trove-buildimage-{datastore}':
+          datastore: 'mysql'
+      - 'gate-trove-buildimage-{datastore}':
+          datastore: 'mongodb'
       - '{name}-tox-doc-{envlist}':
           envlist: publishdocs
 
