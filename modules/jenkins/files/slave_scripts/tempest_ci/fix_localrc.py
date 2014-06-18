@@ -21,6 +21,6 @@ def replace_in_file(file, regexp, replace):
 addrs = netifaces.ifaddresses('eth0')
 local_ip=addrs[netifaces.AF_INET][0]['addr']
 
-replace_in_file('/home/jenkins/devstack/localrc', 'HOST_IP=', 'HOST_IP=' + local_ip)
+replace_in_file('devstack/localrc', 'HOST_IP=', 'HOST_IP=' + local_ip)
 
 
