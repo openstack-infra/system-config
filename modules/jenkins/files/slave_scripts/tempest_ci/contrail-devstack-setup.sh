@@ -13,7 +13,7 @@ if [ -d "${DEVSTACK_DIR}" ]; then
   rm -rf $DEVSTACK_LOG_DIR/stack*
   rm -rf $DEVSTACK_LOG_DIR/screen/*
   popd
-elif
+else
   # Clone devstack
   git clone https://github.com/dsetia/devstack.git ${DEVSTACK_DIR}
   # copy and fix localrc
