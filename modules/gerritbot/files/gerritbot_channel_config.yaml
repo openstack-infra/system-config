@@ -746,6 +746,7 @@ openstack-oslo:
       - openstack/oslo.db
       - openstack/oslo.i18n
       - openstack/oslo-incubator
+      - openstack/oslo.local
       - openstack/oslo.messaging
       - openstack/oslo.rootwrap
       - openstack/oslosphinx

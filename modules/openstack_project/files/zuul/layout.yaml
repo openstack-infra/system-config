@@ -583,6 +583,12 @@ jobs:
     voting: false
   - name: gate-murano-dashboard-requirements
     voting: false
+  - name: gate-oslo.local-docs
+    voting: false
+  - name: gate-oslo.local-requirements
+    voting: false
+  - name: gate-oslo.local-python33
+    voting: false
   - name: gate-oslo.vmware-docs
     voting: false
   - name: gate-oslo.vmware-requirements
@@ -1893,6 +1899,17 @@ projects:
       - check-tripleo-undercloud-precise
       - check-tripleo-ironic-undercloud-precise
       - check-tripleo-overcloud-precise
+
+  - name: openstack/oslo.local
+    template:
+      - name: python-jobs
+      - name: openstack-server-publish-jobs
+      - name: check-requirements
+      - name: integrated-gate
+      - name: publish-to-pypi
+    check:
+      - gate-oslo.local-requirements
+      - gate-oslo.local-python33
 
   - name: openstack/oslo.messaging
     template:

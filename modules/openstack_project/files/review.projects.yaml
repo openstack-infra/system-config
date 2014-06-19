@@ -352,6 +352,9 @@
   group: oslo
   docimpact-group: openstack-manuals
   upstream: https://github.com/dhellmann/oslo.i18n.git
+- project: openstack/oslo.local
+  group: oslo
+  upstream: git://github.com/dims/oslo.local.git
 - project: openstack/oslo.messaging
   docimpact-group: openstack-manuals
   upstream: git://github.com/markmc/oslo.messaging.git
