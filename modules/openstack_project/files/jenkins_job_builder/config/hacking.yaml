@@ -1,6 +1,6 @@
 - job-template:
     name: gate-hacking-integration-{target-project}
-    node: bare-precise
+    node: 'bare-precise || bare-trusty'
 
     builders:
       - revoke-sudo

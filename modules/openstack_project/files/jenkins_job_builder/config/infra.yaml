@@ -1,6 +1,6 @@
 - job:
     name: config-compare-xml
-    node: bare-precise
+    node: 'bare-precise || bare-trusty'
 
     builders:
       - revoke-sudo
@@ -13,7 +13,7 @@
 
 - job:
     name: gate-config-irc-access
-    node: bare-precise
+    node: 'bare-precise || bare-trusty'
 
     builders:
       - revoke-sudo
@@ -29,7 +29,7 @@
 
 - job:
     name: gate-config-layout
-    node: bare-precise
+    node: 'bare-precise || bare-trusty'
 
     builders:
       - revoke-sudo
@@ -45,7 +45,7 @@
 # This is a non-standard docs job because it uses SCP instead of FTP
 - job:
     name: ci-docs
-    node: bare-precise
+    node: 'bare-precise || bare-trusty'
 
     builders:
       - revoke-sudo
@@ -66,7 +66,7 @@
 
 - job:
     name: gate-ci-docs
-    node: bare-precise
+    node: 'bare-precise || bare-trusty'
 
     builders:
       - revoke-sudo
@@ -82,7 +82,7 @@
 
 - job:
     name: check-projects-yaml-alphabetized
-    node: bare-precise
+    node: 'bare-precise || bare-trusty'
 
     builders:
       - revoke-sudo
@@ -98,7 +98,7 @@
 
 - job:
     name: check-projects-yaml-upstream
-    node: bare-precise
+    node: 'bare-precise || bare-trusty'
 
     builders:
       - revoke-sudo

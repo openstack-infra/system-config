@@ -1,7 +1,7 @@
 # Not using the template because openstack-planet does not use tox.
 - job:
     name: 'gate-openstack-planet-unittest'
-    node: bare-precise
+    node: 'bare-precise || bare-trusty'
 
     builders:
       - revoke-sudo

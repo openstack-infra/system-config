@@ -25,7 +25,7 @@
 - job-template:
     name: 'api-site-tox-buildlang-{lang}'
 
-    node: bare-precise
+    node: 'bare-precise || bare-trusty'
 
     builders:
       - revoke-sudo
@@ -41,7 +41,7 @@
 
 - job:
     name: openstack-api-ref
-    node: bare-precise
+    node: 'bare-precise || bare-trusty'
 
     builders:
       - revoke-sudo
@@ -65,7 +65,7 @@
 # this copies static files from www
 - job:
     name: openstack-api-site
-    node: bare-precise
+    node: 'bare-precise || bare-trusty'
 
     builders:
       - revoke-sudo
