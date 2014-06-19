@@ -110,8 +110,8 @@ def zuul_swift_upload(file_path, swift_url, swift_hmac_body, swift_signature,
     swift_form_post_submit(file_list, swift_url, swift_hmac_body,
                            swift_signature)
 
-    return (logserver_prefix + swift_destination_prefix +
-            os.path.basename(index_file))
+    return os.path.join(logserver_prefix + swift_destination_prefix +
+                        os.path.basename(index_file))
 
 
 def grab_args():
@@ -135,7 +135,7 @@ if __name__ == '__main__':
                 os.environ['SWIFT_%s_HMAC_BODY' % args.name],
                 os.environ['SWIFT_%s_SIGNATURE' % args.name],
                 os.environ['SWIFT_%s_LOGSERVER_PREFIX' % args.name],
-                os.environ['SWIFT_%s_DESTINATION_PREFIX' % args.name]
+                os.environ['LOG_PATH']
             )
             print result_url
         except KeyError as e:
