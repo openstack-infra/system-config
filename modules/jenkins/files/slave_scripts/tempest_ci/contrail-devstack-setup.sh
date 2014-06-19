@@ -4,6 +4,9 @@
 DEVSTACK_DIR=/home/jenkins/devstack
 DEVSTACK_LOG_DIR=${DEVSTACK_DIR}/log/
 
+GERRIT_REFSPEC=$1
+#echo ${GERRIT_REFSPEC}
+
 # First cleanup devstack if present 
 if [ -d "${DEVSTACK_DIR}" ]; then
   pushd ${DEVSTACK_DIR}
@@ -13,7 +16,7 @@ if [ -d "${DEVSTACK_DIR}" ]; then
   rm -rf $DEVSTACK_LOG_DIR/stack*
   rm -rf $DEVSTACK_LOG_DIR/screen/*
   popd
-elif
+else
   # Clone devstack
   git clone https://github.com/dsetia/devstack.git ${DEVSTACK_DIR}
   # copy and fix localrc
