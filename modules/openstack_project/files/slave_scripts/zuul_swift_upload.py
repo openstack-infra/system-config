@@ -135,7 +135,7 @@ if __name__ == '__main__':
                 os.environ['SWIFT_%s_HMAC_BODY' % args.name],
                 os.environ['SWIFT_%s_SIGNATURE' % args.name],
                 os.environ['SWIFT_%s_LOGSERVER_PREFIX' % args.name],
-                os.environ['SWIFT_%s_DESTINATION_PREFIX' % args.name]
+                os.environ['LOG_PATH']
             )
             print result_url
         except KeyError as e:
