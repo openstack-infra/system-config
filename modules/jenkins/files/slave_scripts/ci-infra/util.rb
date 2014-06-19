@@ -190,8 +190,8 @@ class Util
         wait
 
         # Clean up the workspace, if the job is successful.
-        Sh.run("rm -rf #{ENV['WORKSPACE']}/* #{ENV['WORKSPACE']}/.* 2>/dev/null", true)
-        if exit_code == 0
+        Sh.run("rm -rf #{ENV['WORKSPACE']}/* #{ENV['WORKSPACE']}/.* 2>/dev/null", true) if exit_code == 0
+
         Vm.clean_all
         Sh.exit!(exit_code)
     end
