@@ -97,7 +97,7 @@ function test_wait() {
 
 function ci_cleanup() {
     test_wait
-    rm -rf $WORKSPACE/* $WORKSPACE/.* 2>/dev/null
+    rm -rf $WORKSPACE/* $WORKSPACE/.* 2>/dev/null || true
     echo Success
     exit
 }
