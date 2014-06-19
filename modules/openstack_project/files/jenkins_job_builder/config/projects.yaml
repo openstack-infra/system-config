@@ -946,6 +946,19 @@
       - pypi-jobs
 
 - project:
+    name: oslo.utils
+    github-org: openstack
+    node: bare-precise
+    tarball-site: tarballs.openstack.org
+    doc-publisher-site: docs.openstack.org
+
+    jobs:
+      - python-jobs
+      - openstack-publish-jobs
+      - pypi-jobs
+
+
+- project:
     name: oslo.version
     github-org: openstack
     node: 'bare-precise || bare-trusty'
