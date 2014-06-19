@@ -52,7 +52,7 @@ class openstack_project::jenkins_dev (
     version => '2.3',
   }
   jenkins::plugin { 'envinject':
-    version => '1.70',
+    version => '1.89',
   }
   jenkins::plugin { 'gearman-plugin':
     version => '0.0.3',
