@@ -328,7 +328,7 @@
 - project:
     name: ceilometer
     github-org: openstack
-    node: bare-precise
+    node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
 
@@ -967,7 +967,7 @@
 - project:
     name: python-ceilometerclient
     github-org: openstack
-    node: bare-precise
+    node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
 
