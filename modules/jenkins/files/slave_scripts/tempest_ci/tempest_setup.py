@@ -41,13 +41,13 @@ import configparser
 c = configparser.ConfigParser()
 c.read(TEMPEST_FILE)
 c['network']['public_network_id'] = network_id
-c['identity']['auth_version'] = v2
-c['identity']['admin_domain_name'] = Default
-c['identity']['admin_tenant_name'] = admin
-c['identity']['admin_username'] = admin
-c['identity']['tenant_name'] = demo
-c['identity']['username'] = demo
-c['network-feature-enabled']['ipv6'] = False
+c['identity']['auth_version'] = 'v2'
+c['identity']['admin_domain_name'] = 'Default'
+c['identity']['admin_tenant_name'] = 'admin'
+c['identity']['admin_username'] = 'admin'
+c['identity']['tenant_name'] = 'demo'
+c['identity']['username'] = 'demo'
+c['network-feature-enabled']['ipv6'] = 'False'
 with open(TEMPEST_FILE, 'w') as f:
     c.write(f)
 
