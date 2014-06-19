@@ -1,6 +1,6 @@
 - job:
     name: gate-manila-tempest-dsvm-neutron
-    node: devstack-precise
+    node: 'devstack-precise || devstack-trusty'
 
     wrappers:
       - timeout:
@@ -41,7 +41,7 @@
 
 - job:
     name: gate-manila-tempest-dsvm-neutron-multibackend
-    node: devstack-precise
+    node: 'devstack-precise || devstack-trusty'
 
     wrappers:
       - timeout:
