@@ -2765,3 +2765,12 @@
 
     jobs:
       - python-jobs
+
+- project:
+    name: octavia
+    github-org: stackforge
+    node: bare-precise
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - python-jobs
