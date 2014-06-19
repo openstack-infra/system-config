@@ -45,6 +45,7 @@ popd
 if [ $ret -eq 0 ] ; then
 	pushd  /opt/stack/tempest
 	> tempest.log
+        testr init
 	bash -x ./verify.sh
 	ret=$?
 	popd
