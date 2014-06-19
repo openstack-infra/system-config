@@ -12,6 +12,8 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 
+import re
+
 
 def set_log_url(item, job, params):
     if hasattr(item.change, 'refspec'):
@@ -29,10 +31,73 @@ def set_log_url(item, job, params):
                                             params['ZUUL_UUID'][:7])
 
 
-def single_use_node(item, job, params):
-    set_log_url(item, job, params)
-    params['OFFLINE_NODE_WHEN_COMPLETE'] = '1'
-
-
 def reusable_node(item, job, params):
+    if 'OFFLINE_NODE_WHEN_COMPLETE' in params:
+        del params['OFFLINE_NODE_WHEN_COMPLETE']
+
+
+def devstack_params(item, job, params):
+    params['ZUUL_NODE'] = 'devstack-precise'
+
+
+def python26_params(item, job, params):
+    params['ZUUL_NODE'] = 'bare-centos6'
+
+
+def python33_params(item, job, params):
+    params['ZUUL_NODE'] = 'py3k-precise'
+
+
+def default_params_precise(item, job, params):
+    params['ZUUL_NODE'] = 'bare-precise'
+
+
+def default_params_trusty(item, job, params):
+    change = item.change
+    # Note we can't fallback on the default labels because
+    # jenkins uses 'bare-precise || bare-trusty'.
+    # This is necessary to get the gearman plugin to register
+    # gearman jobs with both node labels.
+    if (hasattr(change, 'branch') and
+        change.branch == 'stable/havana' or
+        change.branch == 'stable/icehouse'):
+        params['ZUUL_NODE'] = 'bare-precise'
+    else:
+        params['ZUUL_NODE'] = 'bare-trusty'
+
+
+def set_node_options(item, job, params, default):
+    # Set up log url paramter for all jobs
     set_log_url(item, job, params)
+    # Default to single use node. Potentially overriden below.
+    params['OFFLINE_NODE_WHEN_COMPLETE'] = '1'
+    # jobs run on the proposal worker
+    if re.match(r'^.*(merge-release-tags|(propose|upstream)-(requirements|translation)-updates?)$', job.name):
+        reusable_node(item, job, params)
+    # jobs run on the pypi worker
+    elif re.match(r'^.*-(jenkinsci|mavencentral|pypi-(both|wheel))-upload$', job.name):
+        reusable_node(item, job, params)
+    # jobs run on the mirror26, mirror27 and mirror33 workers
+    elif re.match(r'^(periodic|post)-mirror-python(26|27|33)$', job.name):
+        reusable_node(item, job, params)
+    # Select node to run jobs on.
+    # Jobs needing python26
+    if re.match(r'^.*-py(thon)?26.*$', job.name):
+        python26_params(item, job, params)
+    # Jobs needing py33/pypy slaves
+    elif re.match(r'^.*-py(py|(thon)?33).*$', job.name):
+        python33_params(item, job, params)
+    # Jobs needing devstack slaves
+    elif re.match(r'^.*-dsvm.*$', job.name):
+        devstack_params(item, job, params)
+    elif default == 'trusty':
+        default_params_trusty(item, job, params)
+    else:
+        default_params_precise(item, job, params)
+
+def set_node_options_default_precise(item, job, params):
+    set_node_options(item, job, params, 'precise')
+
+
+def set_node_options_default_trusty(item, job, params):
+    set_node_options(item, job, params, 'trusty')
