@@ -2041,10 +2041,13 @@ projects:
       - gate-sahara-extra-pep8
     post:
       - sahara-extra-branch-tarball
+      - sahara-hadoop-swiftfs-branch-release
     pre-release:
       - sahara-extra-tarball
+      - sahara-hadoop-swiftfs-release
     release:
       - sahara-extra-tarball
+      - sahara-hadoop-swiftfs-release
 
 # TODO: add docs
   - name: openstack/sahara-image-elements

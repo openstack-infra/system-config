@@ -280,6 +280,10 @@
     jobs:
       - python-jobs
       - pypi-jobs
+      - 'sahara-hadoop-swiftfs{release-type}-release':
+          release-type: '-branch'
+      - 'sahara-hadoop-swiftfs{release-type}-release':
+          release-type: ''
 
 - project:
     name: sahara-image-elements
