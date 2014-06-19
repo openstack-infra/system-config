@@ -4,6 +4,9 @@
 DEVSTACK_DIR=/home/jenkins/devstack
 DEVSTACK_LOG_DIR=${DEVSTACK_DIR}/log/
 
+GERRIT_REFSPEC=$1
+#echo ${GERRIT_REFSPEC}
+
 # First cleanup devstack if present 
 if [ -d "${DEVSTACK_DIR}" ]; then
   pushd ${DEVSTACK_DIR}
