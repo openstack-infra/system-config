@@ -1,6 +1,6 @@
 - job:
     name: gate-blazar-devstack-dsvm
-    node: devstack-precise
+    node: 'devstack-precise || devstack-trusty'
 
     wrappers:
       - timeout:
