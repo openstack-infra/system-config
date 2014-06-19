@@ -50,6 +50,9 @@ Requirements
     * logs should include a trace of the commands used
   * OpenStack logs
   * Tempest logs (including ``testr_results.html.gz``)
+    * logs must be browsable, logs requiring download are not acceptable,
+      use of dropbox and other non opensource hosting solutions are
+      discouraged
 
 
 Reading the Event Stream
