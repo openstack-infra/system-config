@@ -177,12 +177,21 @@ class Util
         end
     end
 
+    @@cleanup_on_exit = true
+
+    def self.cleanup_on_exit(flag)
+        @@cleanup_on_exit = flag
+    end
+
     def self.ci_cleanup
+        Sh.exit! unless @@cleanup_on_exit
+
         exit_code = Sh.exit_code # Note down the current exit code
         wait
 
         # Clean up the workspace, if the job is successful.
-        Sh.run("rm -rf #{ENV['WORKSPACE']}/* #{ENV['WORKSPACE']}/.* 2>/dev/null") if exit_code == 0
+        Sh.run("rm -rf #{ENV['WORKSPACE']}/* #{ENV['WORKSPACE']}/.* 2>/dev/null", true)
+        if exit_code == 0
         Vm.clean_all
         Sh.exit!(exit_code)
     end
