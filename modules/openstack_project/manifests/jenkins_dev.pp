@@ -50,9 +50,6 @@ class openstack_project::jenkins_dev (
   jenkins::plugin { 'dashboard-view':
     version => '2.3',
   }
-  jenkins::plugin { 'envinject':
-    version => '1.70',
-  }
   jenkins::plugin { 'gearman-plugin':
     version => '0.0.7',
   }
