@@ -460,6 +460,16 @@ openstack-rally:
     branches:
       - master
 
+openstack-logaas:
+    events:
+      - patchset-created
+      - change-merged
+      - x-vrif-minus-2
+    projects:
+      - stackforge/logaas
+    branches:
+      - master
+
 openstack-climate:
     events:
       - patchset-created
