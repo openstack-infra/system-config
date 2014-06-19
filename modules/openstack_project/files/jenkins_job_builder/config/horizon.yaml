@@ -1,6 +1,6 @@
 - job:
     name: gate-horizon-selenium
-    node: bare-precise
+    node: 'bare-precise || bare-trusty'
 
     builders:
       - revoke-sudo
@@ -14,7 +14,7 @@
 
 - job:
     name: gate-horizon-python27-django14
-    node: bare-precise
+    node: 'bare-precise || bare-trusty'
 
     wrappers:
       - timeout:

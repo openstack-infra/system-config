@@ -1,6 +1,6 @@
 - job-template:
     name: 'gate-trove-buildimage-{datastore}'
-    node: 'bare-precise'
+    node: 'bare-precise || bare-trusty'
 
     builders:
       - link-logs

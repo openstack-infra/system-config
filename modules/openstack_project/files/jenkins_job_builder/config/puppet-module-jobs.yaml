@@ -41,7 +41,7 @@
 
 - job-template:
     name: 'gate-{name}-puppet-apply-precise'
-    node: bare-precise
+    node: 'bare-precise || bare-trusty'
 
     builders:
       - gerrit-git-prep

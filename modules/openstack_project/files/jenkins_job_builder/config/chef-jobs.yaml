@@ -60,7 +60,7 @@
 
 - job:
     name: gate-openstack-chef-repo
-    node: bare-precise
+    node: 'bare-precise || bare-trusty'
 
     builders:
       - revoke-sudo
