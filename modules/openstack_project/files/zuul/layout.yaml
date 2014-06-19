@@ -1008,8 +1008,6 @@ projects:
       - check-neutron-dsvm-api
       - gate-grenade-dsvm-neutron-forward
       - neutron-upstream-translation-update
-      - experimental-tempest-dsvm-neutron
-      - experimental-tempest-dsvm-neutron-pg
     experimental-tripleo:
       - check-tripleo-ironic-seed-precise
       - check-tripleo-undercloud-precise
@@ -2413,9 +2411,6 @@ projects:
       - check-tempest-master-dsvm-full-havana
       - check-tempest-master-dsvm-neutron-havana
       - check-tempest-dsvm-f20
-      - check-tempest-dsvm-full-trusty
-      - check-tempest-dsvm-neutron-trusty
-      - check-grenade-dsvm-trusty
 
   - name: openstack-dev/grenade
     check:
@@ -2609,9 +2604,6 @@ projects:
       - check-tempest-master-dsvm-full-havana
       - check-tempest-master-dsvm-neutron-havana
       - check-tempest-dsvm-f20
-      - check-tempest-dsvm-full-trusty
-      - check-tempest-dsvm-neutron-trusty
-      - check-grenade-dsvm-trusty
     experimental-tripleo:
       - check-tripleo-ironic-seed-precise
       - check-tripleo-undercloud-precise

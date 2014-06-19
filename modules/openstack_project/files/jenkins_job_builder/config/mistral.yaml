@@ -1,6 +1,6 @@
 - job:
     name: gate-mistral-devstack-dsvm
-    node: devstack-precise
+    node: 'devstack-precise || devstack-trusty'
 
     wrappers:
       - timeout:
