@@ -35,7 +35,7 @@ print network_id
 # make a back of tempest.conf
 import os, shutil
 if not os.path.exists(TEMPEST_FILE + '_backup'):
-    shutil.copy_files(TEMPEST_FILE, TEMPEST_FILE + '_backup')	
+    shutil.copy(TEMPEST_FILE, TEMPEST_FILE + '_backup')
 
 import configparser
 c = configparser.ConfigParser()
