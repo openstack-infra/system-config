@@ -116,7 +116,7 @@ should look something like::
   - project:
       name: project-name
       github-org: stackforge
-      node: bare-precise
+      node: bare-trusty
       tarball-site: tarballs.openstack.org
 
       jobs:
@@ -131,7 +131,7 @@ used by adding the ``hook-{name}-rtfd`` template to the jobs list::
   - project:
       name: project-name
       github-org: stackforge
-      node: bare-precise
+      node: bare-trusty
       tarball-site: tarballs.openstack.org
 
       jobs:

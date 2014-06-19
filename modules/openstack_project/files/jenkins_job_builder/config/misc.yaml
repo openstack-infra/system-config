@@ -64,4 +64,4 @@
     publishers:
       - console-log
 
-    node: 'bare-precise'
+    node: 'bare-precise || bare-trusty'

@@ -218,7 +218,7 @@ arguments to and instantiates the job templates as real jobs. For example:
 
    - project:
        name: example1
-       node: bare-precise
+       node: bare-trusty
 
        jobs:
          - python-jobs
