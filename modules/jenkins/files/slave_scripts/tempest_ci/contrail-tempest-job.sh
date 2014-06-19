@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
+export GERRIT_REFSPEC=${GERRIT_REFSPEC-refs/changes/30/96630/21}
+export GERRIT_PATCHSET_REVISION=${GERRIT_PATCHSET_REVISION-fc71a70dd7e654515693b00e8f42e92105484381}
+export BUILD_NUMBER=${BUILD_NUMBER-999999}
+
 #echo "GERRIT_REFSPEC=$GERRIT_REFSPEC"
 #echo "GERRIT_REFSPEC=$GERRIT_PATCHSET_REVISION"
 #echo "BUILD_NUMBER=$BUILD_NUMBER"
@@ -13,7 +17,7 @@ pip install netifaces
 # devtack setup
 scp /usr/local/jenkins/slave_scripts/tempest_ci/contrail-devstack-setup.sh jenkins@localhost:
 scp /usr/local/jenkins/slave_scripts/tempest_ci/fix_localrc.py jenkins@localhost:
-ssh jenkins@localhost  "bash -x contrail-devstack-setup.sh"
+ssh jenkins@localhost  "bash -x contrail-devstack-setup.sh $GERRIT_REFSPEC"
 
 # setup tempest for a run
 scp /usr/local/jenkins/slave_scripts/tempest_ci/tempest_setup.py jenkins@localhost:
