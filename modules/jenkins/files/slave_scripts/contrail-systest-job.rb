@@ -194,7 +194,7 @@ def run_sanity(fab_test)
     # Check if sanities are disabled..
     if @image_built then
         skip_file =
-            "/root/ci-test/skip_ci_systest_#{fab_test}_#{@options.branch}"
+            "/root/ci-test/skip_ci_systest_#{fab_test}_run_#{@options.branch}"
         o, e = Sh.rrun("ssh jenkins.opencontrail.org ls -1 #{skip_file} 2>/dev/null", true)
         if o =~ /#{skip_file}/ then
             puts "SKIPPED: fab #{fab_test} due to the presence of the file jenkins.opencontrail.org:#{skip_file}"
@@ -245,7 +245,7 @@ def run_test(image = @options.image)
     }
 
     Sh.run("lynx --dump #{ENV['WORKSPACE']}/logs_*/*/test_report.html", true)
-    Sh.exit(exit_code)
+    return exit_code
 end
 
 @options = OpenStruct.new
@@ -343,5 +343,12 @@ if __FILE__ == $0 then
         @options.image = build_contrail_packages
     end
 
-    run_test
+    exit_code = run_test
+
+    # Check if systest failures are to be ignored, for the moment.
+    if exit_code != 0 then
+        o, e = Sh.rrun("ssh jenkins.opencontrail.org ls -1 /root/ci-test/skip_ci_systest_fail_#{@options.branch} 2>/dev/null", true)
+        exit_code = 0 if e == 0
+    end
+    Sh.exit(exit_code)
 end

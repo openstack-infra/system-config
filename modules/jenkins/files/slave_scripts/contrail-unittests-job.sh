@@ -25,8 +25,8 @@ function build_unittest() {
 
     # Build every thing.
     export BUILD_ONLY=TRUE
-    scons -j $SCONS_JOBS -U . 2>&1 | tee $WORKSPACE/scons_build.log
-    # scons -j $SCONS_JOBS -U test 2>&1 | tee $WORKSPACE/scons_build.log
+    scons -j $SCONS_JOBS . 2>&1 | tee $WORKSPACE/scons_build.log
+    # scons -j $SCONS_JOBS test 2>&1 | tee $WORKSPACE/scons_build.log
 
     unset BUILD_ONLY
 }
@@ -79,7 +79,7 @@ function run_unittest() {
     cd $WORKSPACE/repo
 
     ### Ignore test failures until tests stability is achieved ###
-    scons -i -j $SCONS_JOBS -U test 2>&1 | tee $WORKSPACE/scons_test.log
+    scons -i -j $SCONS_JOBS test 2>&1 | tee $WORKSPACE/scons_test.log
 
     print_test_results
 }
