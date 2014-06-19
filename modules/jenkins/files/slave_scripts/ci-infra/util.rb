@@ -177,7 +177,7 @@ class Util
         end
     end
 
-    @@cleanup_on_exit = true
+    @@cleanup_on_exit = false
 
     def self.cleanup_on_exit(flag)
         @@cleanup_on_exit = flag

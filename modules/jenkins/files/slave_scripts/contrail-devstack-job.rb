@@ -7,6 +7,7 @@ $LOAD_PATH.unshift "/usr/local/jenkins/slave_scripts/",
 
 require 'util'
 
+Util.cleanup_on_exit(true)
 Util.ci_setup
 
 # Vm.options.labels = "devstack-subslave"

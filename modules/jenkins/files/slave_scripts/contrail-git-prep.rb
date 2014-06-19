@@ -98,7 +98,6 @@ def self.pre_build_setup
 end
 
 def self.main(use_public)
-    Util.cleanup_on_exit(false)
     init_project
     setup_gerrit_repo
     @use_public = use_public

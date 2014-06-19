@@ -333,6 +333,7 @@ def parse_options(args = ARGV)
 end
 
 if __FILE__ == $0 then
+    Util.cleanup_on_exit(true)
     Util.ci_setup
     parse_options
     @image_built = false
