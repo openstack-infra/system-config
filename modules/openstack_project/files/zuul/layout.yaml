@@ -3583,7 +3583,7 @@ projects:
       - name: docs-on-rtfd
       - name: publish-to-pypi
     check:
-      - rally-coverage
+      - logaas-coverage
 
   - name: stackforge/manila
     check:
