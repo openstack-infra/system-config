@@ -4349,8 +4349,8 @@ projects:
       - gate-rally-pep8
       - gate-rally-python26
       - gate-rally-python27
-      - gate-rally-install-bare-centos6
-      - gate-rally-install-bare-precise
+      - gate-rally-install-centos
+      - gate-rally-install-ubuntu
       - check-rally-dsvm-rally
       - check-rally-dsvm-neutron-rally
       - check-rally-dsvm-cli
@@ -4358,8 +4358,8 @@ projects:
       - gate-rally-pep8
       - gate-rally-python26
       - gate-rally-python27
-      - gate-rally-install-bare-centos6
-      - gate-rally-install-bare-precise
+      - gate-rally-install-centos
+      - gate-rally-install-ubuntu
     post:
       - rally-branch-tarball
     pre-release:

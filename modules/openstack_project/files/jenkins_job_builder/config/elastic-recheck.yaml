@@ -1,6 +1,6 @@
 - job:
     name: elastic-recheck-docs
-    node: bare-precise
+    node: 'bare-precise || bare-trusty'
 
     builders:
       - revoke-sudo
