@@ -54,7 +54,7 @@ class openstack_project::elasticsearch_node (
     user        => 'root',
     hour        => '2',
     minute      => '0',
-    command     => 'curl -sS -XDELETE "http://localhost:9200/logstash-`date -d \'2 weeks ago\' +\%Y.\%m.\%d`/" > /dev/null',
+    command     => 'curl -sS -XDELETE "http://localhost:9200/logstash-`date -d \'10 days ago\' +\%Y.\%m.\%d`/" > /dev/null',
     environment => 'PATH=/usr/bin:/bin:/usr/sbin:/sbin',
   }
 
