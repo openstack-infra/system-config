@@ -37,19 +37,7 @@ def reusable_node(item, job, params):
 
 
 def devstack_params(item, job, params):
-    change = item.change
-    # Note we can't fallback on the default labels because
-    # jenkins uses 'devstack-precise || devstack-trusty'.
-    # This is necessary to get the gearman plugin to register
-    # gearman jobs with both node labels.
-    if ((hasattr(change, 'branch') and
-        change.branch == 'stable/havana' or
-        change.branch == 'stable/icehouse') or
-        ('havana' in job.name or
-        'icehouse' in job.name)):
-        params['ZUUL_NODE'] = 'devstack-precise'
-    else:
-        params['ZUUL_NODE'] = 'devstack-trusty'
+    params['ZUUL_NODE'] = 'devstack-precise'
 
 
 def default_params_precise(item, job, params):
