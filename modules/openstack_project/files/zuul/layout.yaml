@@ -399,21 +399,11 @@ project-templates:
 
 jobs:
   - name: ^.*$
-    parameter-function: single_use_node
+    parameter-function: set_node_options_default_precise
   # tempest and d-g branchless tests need to only run on master
   # (needs to be early to not impact non-voting stanzas later)
   - name: ^.*(-icehouse|-havana)$
     branch: ^master.*$
-  # jobs run on the proposal worker
-  - name: ^.*(merge-release-tags|(propose|upstream)-(requirements|translation)-updates?)$
-    parameter-function: reusable_node
-  # jobs run on the pypi worker
-  - name: ^.*-(jenkinsci|mavencentral|pypi-(both|wheel))-upload$
-    parameter-function: reusable_node
-  # jobs run on the mirror26, mirror27 and mirror33 workers
-  - name: ^(periodic|post)-mirror-python(26|27|33)$
-    parameter-function: reusable_node
-  # the salt-trigger worker has no jobs yet
   - name: gate-tempest-dsvm-full
     queue-name: integrated
   - name: ^(gate|check)-tempest-dsvm-neutron-full$
