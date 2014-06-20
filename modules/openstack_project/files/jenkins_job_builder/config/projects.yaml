@@ -306,12 +306,12 @@
           env: 27sa07
       - '{pipeline}-sqlalchemy-migrate-devstack-dsvm{branch-designator}':
           pipeline: check
-          node: 'devstack-precise || devstack-trusty'
+          node: 'devstack-precise || devstack-precise-check'
           branch-designator: ''
           branch-override: default
       - '{pipeline}-sqlalchemy-migrate-devstack-dsvm{branch-designator}':
           pipeline: gate
-          node: 'devstack-precise || devstack-trusty'
+          node: 'devstack-precise'
           branch-designator: ''
           branch-override: default
       - hook-{name}-rtfd
@@ -1105,27 +1105,27 @@
       - translation-jobs
       - '{pipeline}-neutron-dsvm-functional{branch-designator}':
           pipeline: gate
-          node: 'devstack-precise || devstack-trusty'
+          node: devstack-precise
           branch-designator: ''
           branch-override: default
       - '{pipeline}-neutron-dsvm-functional{branch-designator}':
           pipeline: check
-          node: 'devstack-precise || devstack-trusty'
+          node: 'devstack-precise || devstack-precise-check'
           branch-designator: ''
           branch-override: default
       - '{pipeline}-neutron-dsvm-api{branch-designator}':
           pipeline: check
-          node: 'devstack-precise || devstack-trusty'
+          node: 'devstack-precise || devstack-precise-check'
           branch-designator: ''
           branch-override: default
       - devstack-jobs:
           pipeline: gate
-          node: 'devstack-precise || devstack-trusty'
+          node: devstack-precise
           branch-designator: '-2'
           branch-override: default
       - devstack-jobs:
           pipeline: check
-          node: 'devstack-precise || devstack-trusty'
+          node: 'devstack-precise || devstack-precise-check'
           branch-designator: '-2'
           branch-override: default
 
@@ -1411,17 +1411,17 @@
           envlist: func
       - '{pipeline}-swift-dsvm-functional{branch-designator}':
           pipeline: gate
-          node: 'devstack-precise || devstack-trusty'
+          node: devstack-precise
           branch-designator: ''
           branch-override: default
       - '{pipeline}-swift-dsvm-functional{branch-designator}':
           pipeline: check
-          node: 'devstack-precise || devstack-trusty'
+          node: 'devstack-precise || devstack-precise-check'
           branch-designator: ''
           branch-override: default
       - '{pipeline}-swift-dsvm-functional{branch-designator}':
           pipeline: periodic
-          node: 'devstack-precise || devstack-trusty'
+          node: 'devstack-precise || devstack-precise-check'
           branch-designator: '-havana'
           branch-override: stable/havana
 # No one is interested in stable/ branches on swift, so don't run bitrot jobs
@@ -1447,50 +1447,61 @@
       # Normal gate and check jobs
       - devstack-jobs:
           pipeline: gate
-          node: 'devstack-precise || devstack-trusty'
+          node: devstack-precise
           branch-designator: ''
           branch-override: default
       - devstack-jobs:
           pipeline: check
-          node: 'devstack-precise || devstack-trusty'
+          node: 'devstack-precise || devstack-precise-check'
+          branch-designator: ''
+          branch-override: default
+      - devstack-jobs:
+          pipeline: experimental
+          node: 'dsvm-precise-krnl'
           branch-designator: ''
           branch-override: default
       # Stable gate jobs for branchless tempest
       - devstack-jobs:
           pipeline: gate
-          node: 'devstack-precise || devstack-trusty'
+          node: devstack-precise
           branch-designator: '-icehouse'
           branch-override: stable/icehouse
       # Stable check jobs for testing devstack gate
       - devstack-jobs:
           pipeline: check
-          node: 'devstack-precise || devstack-trusty'
+          node: 'devstack-precise || devstack-precise-check'
           branch-designator: '-havana'
           branch-override: stable/havana
       - devstack-jobs:
           pipeline: check
-          node: 'devstack-precise || devstack-trusty'
+          node: 'devstack-precise || devstack-precise-check'
           branch-designator: '-icehouse'
           branch-override: stable/icehouse
       # Periodic jobs for various branches
       - devstack-jobs:
           pipeline: periodic
-          node: 'devstack-precise || devstack-trusty'
+          node: devstack-precise
           branch-designator: '-havana'
           branch-override: stable/havana
       - devstack-jobs:
           pipeline: periodic
-          node: 'devstack-precise || devstack-trusty'
+          node: devstack-precise
           branch-designator: '-icehouse'
           branch-override: stable/icehouse
       - devstack-jobs:
           pipeline: periodic
-          node: 'devstack-precise || devstack-trusty'
+          node: devstack-precise
           branch-designator: '-master'
           branch-override: master
       # Special jobs for devstack-gate
       - devstack-gate-jobs:
-          node: 'devstack-precise || devstack-trusty'
+          node: devstack-precise
+      # Trusty node testing
+      - devstack-jobs:
+          pipeline: check
+          node: 'devstack-trusty'
+          branch-designator: '-trusty'
+          branch-override: default
 
 
 - project:
@@ -1507,10 +1518,10 @@
     jobs:
       - '{pipeline}-requirements-integration-dsvm':
           pipeline: gate
-          node: 'devstack-precise || devstack-trusty'
+          node: devstack-precise
       - '{pipeline}-requirements-integration-dsvm':
           pipeline: check
-          node: 'devstack-precise || devstack-trusty'
+          node: 'devstack-precise || devstack-precise-check'
 
 - project:
     name: tempest
@@ -2075,17 +2086,17 @@
       - translation-jobs
       - '{pipeline}-tempest-dsvm-ironic{branch-designator}':
           pipeline: check
-          node: 'devstack-precise || devstack-trusty'
+          node: 'devstack-precise || devstack-precise-check'
           branch-designator: '-nv'
           branch-override: default
       - '{pipeline}-tempest-dsvm-ironic-postgres{branch-designator}':
           pipeline: check
-          node: 'devstack-precise || devstack-trusty'
+          node: 'devstack-precise || devstack-precise-check'
           branch-designator: '-nv'
           branch-override: default
       - '{pipeline}-tempest-dsvm-virtual-ironic{branch-designator}':
           pipeline: check
-          node: 'devstack-precise || devstack-trusty'
+          node: 'devstack-precise || devstack-precise-check'
           branch-designator: '-nv'
           branch-override: default
 
@@ -2330,6 +2341,8 @@
           node: bare-precise
       - gate-rally-install-{node}:
           node: bare-centos6
+      - 'check-rally-cli':
+          node: 'devstack-precise || devstack-precise-check'
 
 - project:
     name: python-rallyclient

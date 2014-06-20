@@ -29,7 +29,7 @@
 
 - job-template:
     name: 'gate-trove-functional-dsvm-{datastore}'
-    node: 'devstack-precise || devstack-trusty'
+    node: 'devstack-precise'
 
     wrappers:
       - timeout:

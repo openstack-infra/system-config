@@ -55,11 +55,11 @@
     jobs:
       - '{pipeline}-{injectedlib}-dsvm-{name}{branch-designator}':
           pipeline: check
-          node: 'devstack-precise || devstack-trusty'
+          node: 'devstack-precise || devstack-precise-check'
           branch-designator: ''
           branch-override: default
       - '{pipeline}-{injectedlib}-dsvm-{name}{branch-designator}':
           pipeline: gate
-          node: 'devstack-precise || devstack-trusty'
+          node: devstack-precise
           branch-designator: ''
           branch-override: default

@@ -1,6 +1,6 @@
 - job:
     name: gate-designate-devstack-dsvm
-    node: 'devstack-precise || devstack-trusty'
+    node: devstack-precise
 
     wrappers:
       - timeout:

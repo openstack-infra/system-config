@@ -54,7 +54,7 @@
 
 - job-template:
     name: 'check-rally-dsvm-{name}'
-    node: 'devstack-precise || devstack-trusty'
+    node: 'devstack-precise || devstack-precise-check'
 
     wrappers:
       - timeout:
@@ -75,7 +75,7 @@
 
 - job-template:
     name: 'check-rally-dsvm-neutron-{name}'
-    node: 'devstack-precise || devstack-trusty'
+    node: 'devstack-precise || devstack-precise-check'
 
     wrappers:
       - timeout:
@@ -95,8 +95,8 @@
 
 
 - job:
-    name: 'check-rally-dsvm-cli'
-    node: 'devstack-precise || devstack-trusty'
+    name: 'check-rally-cli'
+    node: 'devstack-precise || devstack-precise-check'
 
     builders:
       - link-logs

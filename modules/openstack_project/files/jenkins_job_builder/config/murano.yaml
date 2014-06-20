@@ -1,6 +1,6 @@
 - job:
     name: gate-murano-devstack-dsvm
-    node: 'devstack-precise || devstack-trusty'
+    node: devstack-precise
 
     wrappers:
       - timeout:
