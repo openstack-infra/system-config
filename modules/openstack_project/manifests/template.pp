@@ -54,6 +54,20 @@ class openstack_project::template (
       ensure => present,
     }
 
+    if ($::in_chroot) {
+      notify { 'rsyslog in chroot':
+        message => 'rsyslog not refreshed, running in chroot',
+      }
+      $rsyslog_notify = []
+    } else {
+      service { 'rsyslog':
+        ensure     => running,
+        enable     => true,
+        hasrestart => true,
+      }
+      $rsyslog_notify = [ Service['rsyslog'] ]
+    }
+
     # Custom rsyslog config to disable /dev/xconsole noise on Debuntu servers
     file { '/etc/rsyslog.d/50-default.conf':
       ensure  => present,
@@ -63,7 +77,7 @@ class openstack_project::template (
       source  =>
         'puppet:///modules/openstack_project/rsyslog.d_50-default.conf',
       replace => true,
-      notify  => Service['rsyslog'],
+      notify  => $rsyslog_notify,
     }
 
     # Ubuntu installs their whoopsie package by default, but it eats through
@@ -82,13 +96,7 @@ class openstack_project::template (
     owner   => 'root',
     group   => 'root',
     mode    => '0644',
-    notify  => Service['rsyslog'],
-  }
-
-  service { 'rsyslog':
-    ensure     => running,
-    enable     => true,
-    hasrestart => true,
+    notify  => $rsyslog_notify,
   }
 
   if ($::osfamily == 'RedHat') {
