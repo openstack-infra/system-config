@@ -3,6 +3,7 @@
 #
 DEVSTACK_DIR=/home/jenkins/devstack
 DEVSTACK_LOG_DIR=${DEVSTACK_DIR}/log/
+TEMPEST_DIR=/opt/stack/tempest
 
 GERRIT_REFSPEC=$1
 #echo ${GERRIT_REFSPEC}
@@ -32,6 +33,9 @@ fi
 sudo mkdir -p /opt/stack/
 # with the right owner:group
 sudo chown jenkins:root /opt/stack
+
+# remove tempest dir
+rm -rf ${TEMPEST_DIR}
 
 # Clone neutron and apply our patch
 PATCH_DIR=/opt/stack/neutron

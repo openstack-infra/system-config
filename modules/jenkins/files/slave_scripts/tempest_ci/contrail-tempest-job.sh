@@ -27,5 +27,6 @@ ssh jenkins@localhost  "python tempest_setup.py"
 scp /usr/local/jenkins/slave_scripts/tempest_ci/contrail-tempest-devstack-job.sh jenkins@localhost:
 scp /usr/local/jenkins/slave_scripts/tempest_ci/verify.sh jenkins@localhost:/opt/stack/tempest/
 cp /usr/local/jenkins/slave_scripts/tempest_ci/subunit2html /usr/local/bin/
+chmod g+x /usr/local/bin/subunit2html
 ssh jenkins@localhost  "bash -x contrail-tempest-devstack-job.sh $GERRIT_REFSPEC $GERRIT_PATCHSET_REVISION $BUILD_NUMBER"
 
