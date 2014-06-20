@@ -286,6 +286,10 @@
   group: ironic
 - project: openstack/keystone
   docimpact-group: openstack-manuals
+- project: openstack/keystonemiddleware
+  description: OpenStack Identity (Keystone) Middleware
+  group: keystone
+  upstream: git://github.com/morganfainberg/keystonemiddleware
 - project: openstack/keystone-specs
   group: keystone
 - project: openstack/marconi

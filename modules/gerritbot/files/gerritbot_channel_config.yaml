@@ -603,6 +603,7 @@ openstack-keystone:
       - openstack/identity-api
       - openstack/keystone-specs
       - openstack/python-keystoneclient
+      - openstack/keystonemiddleware
     branches:
       - master
 
@@ -635,6 +636,7 @@ openstack-merges:
       - openstack/python-glanceclient
       - openstack/keystone
       - openstack/python-keystoneclient
+      - openstack/keystonemiddleware
       - openstack/horizon
       - openstack/django_openstack_auth
       - openstack/tuskar-ui
