@@ -54,16 +54,18 @@ class openstack_project::template (
       ensure => present,
     }
 
-    # Custom rsyslog config to disable /dev/xconsole noise on Debuntu servers
-    file { '/etc/rsyslog.d/50-default.conf':
-      ensure  => present,
-      owner   => 'root',
-      group   => 'root',
-      mode    => '0644',
-      source  =>
-        'puppet:///modules/openstack_project/rsyslog.d_50-default.conf',
-      replace => true,
-      notify  => Service['rsyslog'],
+    if ! $in_chroot {
+      # Custom rsyslog config to disable /dev/xconsole noise on Debuntu servers
+      file { '/etc/rsyslog.d/50-default.conf':
+        ensure  => present,
+        owner   => 'root',
+        group   => 'root',
+        mode    => '0644',
+        source  =>
+          'puppet:///modules/openstack_project/rsyslog.d_50-default.conf',
+        replace => true,
+        notify  => Service['rsyslog'],
+      }
     }
 
     # Ubuntu installs their whoopsie package by default, but it eats through
@@ -73,22 +75,24 @@ class openstack_project::template (
     }
   }
 
-  # Increase syslog message size in order to capture
-  # python tracebacks with syslog.
-  file { '/etc/rsyslog.d/99-maxsize.conf':
-    ensure  => present,
-    # Note MaxMessageSize is not a puppet variable.
-    content => '$MaxMessageSize 6k',
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0644',
-    notify  => Service['rsyslog'],
-  }
+  if ! $in_chroot {
+    # Increase syslog message size in order to capture
+    # python tracebacks with syslog.
+    file { '/etc/rsyslog.d/99-maxsize.conf':
+      ensure  => present,
+      # Note MaxMessageSize is not a puppet variable.
+      content => '$MaxMessageSize 6k',
+      owner   => 'root',
+      group   => 'root',
+      mode    => '0644',
+      notify  => Service['rsyslog'],
+    }
 
-  service { 'rsyslog':
-    ensure     => running,
-    enable     => true,
-    hasrestart => true,
+    service { 'rsyslog':
+      ensure     => running,
+      enable     => true,
+      hasrestart => true,
+    }
   }
 
   if ($::osfamily == 'RedHat') {
