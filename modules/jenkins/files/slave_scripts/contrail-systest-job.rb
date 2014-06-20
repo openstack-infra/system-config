@@ -333,6 +333,7 @@ def parse_options(args = ARGV)
 end
 
 if __FILE__ == $0 then
+    Sh.always_exit_as_success(true)
     Util.cleanup_on_exit(true)
     Util.ci_setup
     parse_options
@@ -350,5 +351,6 @@ if __FILE__ == $0 then
         o, e = Sh.rrun("ssh jenkins.opencontrail.org ls -1 /root/ci-test/skip_ci_systest_fail_#{@options.branch} 2>/dev/null", true)
         exit_code = 0 if e == 0
     end
+
     Sh.exit(exit_code)
 end

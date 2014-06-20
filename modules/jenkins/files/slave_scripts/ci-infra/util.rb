@@ -13,8 +13,12 @@ COLOR_CYAN        = "\e[0;36m"
 COLOR_RESET       = "\e[m"
 
 class Sh
-    @ignore_failed_exit_code = false
+    @@ignore_failed_exit_code = false
     @@exit_code = 0
+
+    @@always_exit_as_success = false
+    def self.always_exit_as_success() return @@always_exit_as_success end
+    def self.always_exit_as_success=(flag) @@always_exit_as_success = flag end
 
     def self.exit(code = 0)
         @@exit_code = code
@@ -23,6 +27,10 @@ class Sh
 
     def self.exit!(code = @@exit_code)
         puts "Fail exit with code #{code}" if code != 0
+        if always_exit_as_success then
+            puts "IGNORE failed exit code!"
+            code = 0
+        end
         Process.exit!(code)
     end
 
@@ -30,9 +38,7 @@ class Sh
         return !ENV['DRY_RUN'].nil? && ENV['DRY_RUN'].casecmp("true") == 0
     end
 
-    def self.exit_code
-        return @@exit_code
-    end
+    def self.exit_code() return @@exit_code end
 
     def self.spawn(cmd, debug = true, ignore_output = true)
         output = ""
@@ -65,14 +71,14 @@ class Sh
     private_class_method :spawn
 
     # Run a shell command and return its output to the caller.
-    def self.rrun (cmd, ignore = @ignore_failed_exit_code, repeat = 1, wait = 1,
+    def self.rrun (cmd, ignore = @@ignore_failed_exit_code, repeat = 1, wait = 1,
                  debug = true, ignore_output = false)
         return self.run(cmd, ignore, repeat, wait, debug, false)
     end
 
     # Run a shell command just printing output to stdput. Output is not
     # collected returned to the caller.
-    def self.run (cmd, ignore = @ignore_failed_exit_code, repeat = 1, wait = 1,
+    def self.run (cmd, ignore = @@ignore_failed_exit_code, repeat = 1, wait = 1,
                 debug = true, ignore_output = true)
         output = ""
         @@exit_code = 0
