@@ -2,6 +2,7 @@
 #
 class openstack_project::static (
   $sysadmins = [],
+  $keep_logs_days = '120',
 ) {
 
   class { 'openstack_project::server':
@@ -128,11 +129,11 @@ class openstack_project::static (
   }
 
   file { '/usr/local/sbin/log_archive_maintenance.sh':
-    ensure => present,
-    owner  => 'root',
-    group  => 'root',
-    mode   => '0744',
-    source => 'puppet:///modules/openstack_project/log_archive_maintenance.sh',
+    ensure  => present,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0744',
+    content => template('openstack_project/log_archive_maintenance.sh.erb'),
   }
 
   cron { 'gziprmlogs':
