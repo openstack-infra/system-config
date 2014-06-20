@@ -1,0 +1,28 @@
+- job:
+    name: 'ironic-python-agent-buildimage-coreos'
+    node: 'bare-trusty'
+
+    builders:
+      - link-logs
+      - net-info
+      - gerrit-git-prep
+      - shell: |
+          #!/bin/bash -xe
+          sudo apt-get update
+          sudo apt-get install docker.io
+          sudo ln -sf /usr/bin/docker.io /usr/local/bin/docker
+          sudo sed -i '$acomplete -F _docker docker' /etc/bash_completion.d/docker.io
+          make
+          tar czf $WORKSPACE/ipa-coreos.tar.gz $HOME/UPLOAD/coreos_production_pxe_image-oem.cpio.gz $HOME/UPLOAD/coreos_production_pxe.vmlinuz
+          echo "CoreOS IPA image uploaded to: http://tarballs.openstack.org/ironic-python-agent/coreos/ipa-coreos.tar.gz"
+
+
+    publishers:
+      - scp:
+          site: 'tarballs.openstack.org'
+          files:
+            - source: 'ipa-coreos.tar.gz'
+              target: 'tarballs/ironic-python-agent/coreos/ipa-coreos.tar.gz'
+              keep-hierarchy: false
+              copy-after-failure: false
+      - console-log

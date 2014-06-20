@@ -2073,6 +2073,8 @@ projects:
       - gate-ironic-python-agent-pep8
       - gate-ironic-python-agent-python26
       - gate-ironic-python-agent-python27
+    post:
+      - ironic-python-agent-buildimage-coreos
 
   # This is not strictly necessary; there is currently a transitive
   # relationship between g-t-dsvm,
