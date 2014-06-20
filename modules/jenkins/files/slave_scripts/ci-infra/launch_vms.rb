@@ -128,13 +128,13 @@ class Vm
         Sh.crun cmd
 
         private_ip = nil
-        1.upto(12 * 45) { # at most 45 minutes
+        1.upto(6 * 30) { # at most 30 minutes
             o, e = Sh.crun("nova list | \grep -w ACTIVE | \grep #{vmname}")
             if o =~ /internet=(\d+\.\d+\.\d+\.\d+)/ then
                 private_ip = $1
                 break
             end
-            sleep 5
+            sleep 10
         }
 
         if private_ip.nil? then
