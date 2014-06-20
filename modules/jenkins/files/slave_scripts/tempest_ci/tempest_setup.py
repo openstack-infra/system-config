@@ -1,3 +1,4 @@
+import netifaces
 from neutronclient.neutron import client
 from neutronclient.client import HTTPClient
 
@@ -47,7 +48,10 @@ c['identity']['admin_tenant_name'] = 'admin'
 c['identity']['admin_username'] = 'admin'
 c['identity']['tenant_name'] = 'demo'
 c['identity']['username'] = 'demo'
+addrs = netifaces.ifaddresses('vhost0')
+local_ip=addrs[netifaces.AF_INET][0]['addr']
 c['network-feature-enabled']['ipv6'] = 'False'
+c['identity']['uri_v3'] = 'http://%s:5000/v3/' %(local_ip)
 with open(TEMPEST_FILE, 'w') as f:
     c.write(f)
 
