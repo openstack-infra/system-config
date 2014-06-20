@@ -333,7 +333,7 @@ def parse_options(args = ARGV)
 end
 
 if __FILE__ == $0 then
-    Sh.always_exit_as_success(true)
+    Sh.always_exit_as_success = true
     Util.cleanup_on_exit(true)
     Util.ci_setup
     parse_options
