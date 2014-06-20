@@ -980,6 +980,17 @@ projects:
       - keystone-propose-translation-update
       - periodic-swift-dsvm-functional-havana
 
+  - name: openstack/keystonemiddleware
+    template:
+      - name: python-jobs
+      - name: openstack-client-publish-jobs
+      - name: check-requirements
+      - name: publish-to-pypi
+    check:
+      - gate-keystonemiddleware-python33
+    gate:
+      - gate-keystonemiddleware-python33
+
   - name: openstack/marconi
     template:
       - name: python-jobs
