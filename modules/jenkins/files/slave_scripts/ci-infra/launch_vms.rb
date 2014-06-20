@@ -128,13 +128,18 @@ class Vm
         Sh.crun cmd
 
         private_ip = nil
-        while true do
+        1.upto(12 * 45) { # at most 45 minutes
             o, e = Sh.crun("nova list | \grep -w ACTIVE | \grep #{vmname}")
             if o =~ /internet=(\d+\.\d+\.\d+\.\d+)/ then
                 private_ip = $1
                 break
             end
-            sleep 3
+            sleep 5
+        }
+
+        if private_ip.nil? then
+            puts "nova boot failed for instance #{vmname}"
+            Sh.exit(-1)
         end
 
         if !floatingip.nil? then
