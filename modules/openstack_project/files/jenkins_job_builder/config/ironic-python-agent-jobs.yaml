@@ -1,0 +1,33 @@
+- job-template:
+    name: 'gate-ironic-python-agent-buildimage-coreos'
+    node: 'bare-trusty'
+
+    builders:
+      - link-logs
+      - net-info
+      - gerrit-git-prep
+      - shell: |
+          #!/bin/bash -xe
+          sudo apt-get update
+          sudo apt-get install docker.io
+          sudo ln -sf /usr/bin/docker.io /usr/local/bin/docker
+          sudo sed -i '$acomplete -F _docker docker' /etc/bash_completion.d/docker.io
+          
+          make          
+          mv $HOME/UPLOAD/coreos_production_pxe_image-oem.cpio.gz $WORKSPACE/coreos.cpio.gz 
+          mv $HOME/UPLOAD/coreos_production_pxe.vmlinuz $WORKSPACE/coreos.vmlinuz 
+    
+          
+    publishers:
+      - scp:
+          site: 'tarballs.openstack.org'
+          files:
+            - source: 'coreos.cpio.gz'
+              target: 'tarballs/ironic-python-agent/images/coreos.cpio.gz'
+              keep-hierarchy: false
+              copy-after-failure: false
+            - source: 'coreos.vmlinuz'
+              target: 'tarballs/ironic-python-agent/images/coreos.vmlinuz'
+              keep-hierarchy: false
+              copy-after-failure: false
+      - console-log
