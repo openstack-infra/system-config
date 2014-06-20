@@ -48,6 +48,15 @@ class openstack_project::lists(
     mailserver  => $listdomain,
   }
 
+  maillist { 'openstack-gnocchi':
+    ensure      => present,
+    admin       => 'eglynn@redhat.com',
+    password    => $listpassword,
+    description => 'List for discussion about gnocchi (Time-Series-Data-as-a-Service for Ceilometer)',
+    webserver   => $listdomain,
+    mailserver  => $listdomain,
+  }
+
   maillist { 'openstack-i18n':
     ensure      => present,
     admin       => 'guoyingc@cn.ibm.com',
