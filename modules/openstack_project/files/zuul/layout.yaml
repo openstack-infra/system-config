@@ -539,8 +539,6 @@ jobs:
   - name: check-rally-dsvm-keystone
     branch: ^(?!stable/(havana|icehouse)).*$
     voting: false
-  - name: gate-marconi-python33
-    voting: false
   - name: check-rally-dsvm-glance
     voting: false
   - name: gate-python-neutronclient-python33
