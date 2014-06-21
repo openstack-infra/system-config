@@ -77,10 +77,10 @@ function print_test_results() {
 function run_unittest() {
     # Goto the repo top directory.
     cd $WORKSPACE/repo
+    scons -j $SCONS_JOBS test 2>&1 | tee $WORKSPACE/scons_test.log
 
-    ### Ignore test failures until tests stability is achieved ###
-    scons -i -j $SCONS_JOBS test 2>&1 | tee $WORKSPACE/scons_test.log
-
+    # Flaky test results are ignored.
+    scons -j $SCONS_JOBS -i flaky-test 2>&1 | tee $WORKSPACE/scons_flaky_test.log
     print_test_results
 }
 

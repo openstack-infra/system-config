@@ -333,8 +333,7 @@ def parse_options(args = ARGV)
 end
 
 if __FILE__ == $0 then
-    Sh.always_exit_as_success = true
-    Util.cleanup_on_exit(true)
+    Util.cleanup_on_exit = true
     Util.ci_setup
     parse_options
     @image_built = false
@@ -343,6 +342,9 @@ if __FILE__ == $0 then
         ContrailGitPrep.main(false) # Use private repo
         @options.image = build_contrail_packages
     end
+
+    # Ignore exit code from now onwards..
+    Sh.always_exit_as_success = true
 
     exit_code = run_test
 

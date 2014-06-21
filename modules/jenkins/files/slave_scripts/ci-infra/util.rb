@@ -184,10 +184,8 @@ class Util
     end
 
     @@cleanup_on_exit = false
-
-    def self.cleanup_on_exit(flag)
-        @@cleanup_on_exit = flag
-    end
+    def self.cleanup_on_exit() return @@cleanup_on_exit end
+    def self.cleanup_on_exit=(flag) @@cleanup_on_exit = flag end
 
     def self.ci_cleanup
         Sh.exit! unless @@cleanup_on_exit
