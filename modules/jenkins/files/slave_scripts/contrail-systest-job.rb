@@ -204,7 +204,7 @@ def run_sanity(fab_test)
 
     fab_test = update_nova_libvirt_driver(fab_test)
 
-    o, exit_code = Sh.run("ssh #{@vms.first.vmname} \"(export TEST_RETRY_FACTOR=10.0 export TEST_DELAY_FACTOR=1.25; /usr/local/jenkins/slave_scripts/ci-infra/contrail_fab #{fab_test})\"", true)
+    o, exit_code = Sh.run("ssh #{@vms.first.vmname} \"(export TEST_RETRY_FACTOR=20.0 export TEST_DELAY_FACTOR=2; /usr/local/jenkins/slave_scripts/ci-infra/contrail_fab #{fab_test})\"", true)
 
 
     # Copy sanity log files, as the sub-slave VMs will go away.
