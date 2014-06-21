@@ -80,7 +80,7 @@ function run_unittest() {
     scons -j $SCONS_JOBS test 2>&1 | tee $WORKSPACE/scons_test.log
 
     # Flaky test results are ignored.
-    scons -j $SCONS_JOBS -i flaky-test 2>&1 | tee $WORKSPACE/scons_flaky_test.log
+    scons -j $SCONS_JOBS -i flaky-test 2>&1 | tee -a $WORKSPACE/scons_test.log
     print_test_results
 }
 
