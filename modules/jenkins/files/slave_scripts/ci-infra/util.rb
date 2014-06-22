@@ -9,8 +9,23 @@ require 'optparse/time'
 require 'ostruct'
 require 'launch_vms'
 
-COLOR_CYAN        = "\e[0;36m"
 COLOR_RESET       = "\e[m"
+COLOR_BLACK       = "\e[0;30m"
+COLOR_RED         = "\e[0;31m"
+COLOR_GREEN       = "\e[0;32m"
+COLOR_BROWN       = "\e[0;33m"
+COLOR_BLUE        = "\e[0;34m"
+COLOR_MAGENTA     = "\e[0;35m"
+COLOR_CYAN        = "\e[0;36m"
+COLOR_GRAY        = "\e[0;37m"
+COLOR_DARKGRAY    = "\e[1;30m"
+COLOR_DARKBLUE    = "\e[1;34m"
+COLOR_DARKGREEN   = "\e[1;32m"
+COLOR_DARKCYAN    = "\e[1;36m"
+COLOR_DARKRED     = "\e[1;31m"
+COLOR_DARKPURPLE  = "\e[1;35m"
+COLOR_YELLOW      = "\e[1;33m"
+COLOR_WHITE       = "\e[1;37m"
 
 class Sh
     @@ignore_failed_exit_code = false
@@ -49,12 +64,19 @@ class Sh
         output = ""
 
         begin
+        count = 0
+        frame = "#{COLOR_YELLOW}#{caller[4]}() #{caller[5]}() " if debug
         PTY.spawn(cmd) { |stdin, stdout, pid|
             begin
             # Do stuff with the output here. Just printing to show it works
             stdin.each { |line|
                 output += line unless ignore_output
-                print "#{COLOR_CYAN}#{cmd}#{COLOR_RESET}: #{line}" if debug
+                next unless debug
+                count += 1
+                if count % 100 == 0 then
+                    puts "#{frame} #{COLOR_CYAN}#{cmd}#{COLOR_RESET}"
+                end
+                print line
             }
             rescue Errno::EIO
             rescue PTY::ChildExited => e
@@ -87,12 +109,13 @@ class Sh
                 debug = true, ignore_output = true)
         output = ""
         @@exit_code = 0
+        frame = "#{COLOR_YELLOW}#{caller[3]}() #{caller[4]}() "
         1.upto(repeat) { |i|
             if i != 1 then
                 print "Retry #{i}/#{repeat}: " if debug
                 sleep(wait)
             end
-            puts "#{COLOR_CYAN}#{cmd}#{COLOR_RESET}: " if debug
+            puts "#{frame} #{COLOR_CYAN}#{cmd}#{COLOR_RESET}: " if debug
             @@exit_code = 0
             if not dry_run? then
                 if cmd =~ /^cd\s+(.*)/ then
