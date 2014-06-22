@@ -1598,6 +1598,7 @@ projects:
       - name: openstack-client-publish-jobs
       - name: check-requirements
       - name: integrated-gate
+      - name: stable-compat-jobs
     post:
       - django_openstack_auth-upstream-translation-update
     pre-release:
