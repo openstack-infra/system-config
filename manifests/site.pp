@@ -19,7 +19,6 @@ $elasticsearch_nodes = [
 # Default: should at least behave like an openstack server
 #
 node default {
-  include openstack_project::puppet_cron
   class { 'openstack_project::server':
     sysadmins => hiera('sysadmins', ['admins']),
   }
@@ -594,45 +593,6 @@ node 'salt-trigger.slave.openstack.org' {
   include openstack_project
   class { 'openstack_project::salt_trigger_slave':
     jenkins_ssh_public_key => $openstack_project::jenkins_ssh_key,
-  }
-}
-
-node /^precise-dev\d+.*\.slave\.openstack\.org$/ {
-  include openstack_project
-  include openstack_project::puppet_cron
-  class { 'openstack_project::slave':
-    ssh_key   => $openstack_project::jenkins_dev_ssh_key,
-    sysadmins => hiera('sysadmins', ['admin']),
-  }
-}
-
-node /^precisepy3k-dev\d+.*\.slave\.openstack\.org$/ {
-  include openstack_project
-  include openstack_project::puppet_cron
-  class { 'openstack_project::slave':
-    ssh_key      => $openstack_project::jenkins_dev_ssh_key,
-    sysadmins    => hiera('sysadmins', ['admin']),
-    python3      => true,
-    include_pypy => true,
-  }
-}
-
-node /^centos6-dev\d+\.slave\.openstack\.org$/ {
-  include openstack_project
-  include openstack_project::puppet_cron
-  class { 'openstack_project::slave':
-    ssh_key   => $openstack_project::jenkins_dev_ssh_key,
-    sysadmins => hiera('sysadmins', ['admin']),
-  }
-}
-
-node /^fedora18-dev\d+\.slave\.openstack\.org$/ {
-  include openstack_project
-  include openstack_project::puppet_cron
-  class { 'openstack_project::slave':
-    ssh_key   => $openstack_project::jenkins_dev_ssh_key,
-    sysadmins => hiera('sysadmins', ['admin']),
-    python3   => true,
   }
 }
 
