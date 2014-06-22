@@ -109,7 +109,7 @@ class Sh
                 debug = true, ignore_output = true)
         output = ""
         @@exit_code = 0
-        frame = "#{COLOR_YELLOW}#{caller[3]}() #{caller[4]}() "
+        frame = "#{COLOR_YELLOW}#{caller[2]}() #{caller[3]}() "
         1.upto(repeat) { |i|
             if i != 1 then
                 print "Retry #{i}/#{repeat}: " if debug
