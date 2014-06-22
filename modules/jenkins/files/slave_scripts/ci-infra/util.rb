@@ -26,10 +26,15 @@ class Sh
     end
 
     def self.exit!(code = @@exit_code)
-        puts "Fail exit with code #{code}" if code != 0
-        if always_exit_as_success then
-            puts "IGNORE failed exit code!"
-            code = 0
+        if code != 0 then
+            if always_exit_as_success then
+                puts "IGNORE failed exit code!"
+                code = 0
+            else
+                puts "Job failed to complete successfully, exit code #{code}"
+            end
+        else
+            puts "Job successfully completed, exit code #{code}"
         end
         Process.exit!(code)
     end

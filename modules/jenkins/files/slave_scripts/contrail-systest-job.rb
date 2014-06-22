@@ -240,7 +240,7 @@ def run_test(image = @options.image)
     exit_code = 0
     @options.fab_tests.each { |fab_test|
         exit_code = run_sanity(fab_test)
-        break if exit_code
+        break if exit_code != 0
         exit_code = run_sanity(fab_test)
     }
 
