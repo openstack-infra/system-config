@@ -648,9 +648,6 @@ jobs:
   - name: gate-swift-tox-func
     branch: ^(?!stable/(havana|icehouse)).*$
     voting: false
-  - name: ^(gate|check)-tempest-dsvm-full-apache-services
-    voting: false
-    branch: ^(?!stable/(havana|icehouse)).*$
   - name: gate-tuskar-ui-selenium
     voting: false
   - name: gate-pecan-tox-barbican-tip
@@ -946,7 +943,6 @@ projects:
       - gate-tempest-dsvm-neutron-large-ops
       - check-swift-dsvm-functional
       - check-rally-dsvm-keystone
-      - check-tempest-dsvm-full-apache-services
     gate:
       - gate-devstack-dsvm-cells
       - gate-tempest-dsvm-large-ops
@@ -1387,7 +1383,6 @@ projects:
       - check-devstack-dsvm-cells
       - gate-tempest-dsvm-large-ops
       - gate-tempest-dsvm-neutron-large-ops
-      - check-tempest-dsvm-full-apache-services
     gate:
       - gate-python-keystoneclient-python33
       - gate-devstack-dsvm-cells
