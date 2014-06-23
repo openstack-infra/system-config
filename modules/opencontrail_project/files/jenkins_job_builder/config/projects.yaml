@@ -43,6 +43,7 @@
 
     jobs:
       - contrail-unittest-jobs
+      - contrail-systest-jobs
 
 - project:
     name: contrail-packages
@@ -53,6 +54,7 @@
 
     jobs:
       - contrail-unittest-jobs
+      - contrail-systest-jobs
 
 - project:
     name: contrail-third-party
@@ -63,3 +65,4 @@
 
     jobs:
       - contrail-unittest-jobs
+      - contrail-systest-jobs
