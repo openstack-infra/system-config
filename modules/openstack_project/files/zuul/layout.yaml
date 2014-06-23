@@ -15,7 +15,7 @@ pipelines:
         - event: patchset-created
         - event: change-restored
         - event: comment-added
-          comment_filter: (?i)^(Patch Set [0-9]+:)?( [\w\\+-]*)*(\n\n)?\s*recheck(( (?:bug|lp)[\s#:]*(\d+))|( no bug))\s*$
+          comment: (?i)^(Patch Set [0-9]+:)?( [\w\\+-]*)*(\n\n)?\s*recheck(( (?:bug|lp)[\s#:]*(\d+))|( no bug))\s*$
         - event: comment-added
           require-approval:
             - username: jenkins
@@ -26,19 +26,13 @@ pipelines:
             - username: jenkins
               older-than: 24h
         - event: comment-added
-          comment_filter: (?i)^(Patch Set [0-9]+:)?( [\w\\+-]*)*(\n\n)?\s*reverify( (?:bug|lp)[\s#:]*(\d+))\s*$
+          comment: (?i)^(Patch Set [0-9]+:)?( [\w\\+-]*)*(\n\n)?\s*reverify( (?:bug|lp)[\s#:]*(\d+))\s*$
           require-approval:
             - workflow: 1
             - username: jenkins
         - event: comment-added
           require-approval:
-            - verified: -1
-              username: jenkins
-          approval:
-            - workflow: 1
-        - event: comment-added
-          require-approval:
-            - verified: -2
+            - verified: [-1, -2]
               username: jenkins
           approval:
             - workflow: 1
@@ -60,26 +54,20 @@ pipelines:
     require:
       open: True
       current-patchset: True
+      approval:
+        - verified: [1, 2]
+          username: jenkins
+          newer-than: 24h
+        - workflow: 1
     trigger:
       gerrit:
         - event: comment-added
-          require-approval:
-            - verified: 1
-              username: jenkins
-              newer-than: 24h
-          approval:
-            - workflow: 1
-        - event: comment-added
-          require-approval:
-            - verified: 2
-              username: jenkins
-              newer-than: 24h
           approval:
             - workflow: 1
         - event: comment-added
           approval:
             - verified: 1
-          username_filter: jenkins
+          username: jenkins
     start:
       gerrit:
         verified: 0
@@ -137,7 +125,7 @@ pipelines:
       gerrit:
         - event: patchset-created
         - event: comment-added
-          comment_filter: (?i)^(Patch Set [0-9]+:)?( [\w\\+-]*)*(\n\n)?\s*recheck(( (?:bug|lp)[\s#:]*(\d+))|( no bug))\s*$
+          comment: (?i)^(Patch Set [0-9]+:)?( [\w\\+-]*)*(\n\n)?\s*recheck(( (?:bug|lp)[\s#:]*(\d+))|( no bug))\s*$
 
   - name: experimental
     description: On-demand pipeline for requesting a run against a set of jobs that are not yet gating. Leave review comment of "check experimental" to run jobs in this pipeline.
@@ -146,7 +134,7 @@ pipelines:
     trigger:
       gerrit:
         - event: comment-added
-          comment_filter: (?i)^(Patch Set [0-9]+:)?( [\w\\+-]*)*(\n\n)?\s*check experimental\s*$
+          comment: (?i)^(Patch Set [0-9]+:)?( [\w\\+-]*)*(\n\n)?\s*check experimental\s*$
     success:
       gerrit: {}
     failure:
@@ -207,7 +195,7 @@ pipelines:
         - event: patchset-created
         - event: change-restored
         - event: comment-added
-          comment_filter: (?i)^(Patch Set [0-9]+:)?( [\w\\+-]*)*(\n\n)?\s*recheck(( (?:bug|lp)[\s#:]*(\d+))|( no bug))\s*$
+          comment: (?i)^(Patch Set [0-9]+:)?( [\w\\+-]*)*(\n\n)?\s*recheck(( (?:bug|lp)[\s#:]*(\d+))|( no bug))\s*$
         - event: comment-added
           require-approval:
             - username: jenkins
@@ -227,7 +215,7 @@ pipelines:
     trigger:
       gerrit:
         - event: comment-added
-          comment_filter: (?i)^(Patch Set [0-9]+:)?( [\w\\+-]*)*(\n\n)?\s*check experimental\s*$
+          comment: (?i)^(Patch Set [0-9]+:)?( [\w\\+-]*)*(\n\n)?\s*check experimental\s*$
     success:
       gerrit: {}
     failure:
