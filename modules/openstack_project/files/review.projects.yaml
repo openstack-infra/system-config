@@ -374,6 +374,9 @@
   upstream: git://github.com/dhellmann/oslo.test.git
 - project: openstack/pycadf
   description: CADF Python module
+- project: openstack/pylockfile
+  description: Platform-independent file locking module
+  upstream: git://github.com/smontanaro/pylockfile.git
 - project: openstack/python-barbicanclient
   description: Client library for Barbican API.
   upstream: git://github.com/cloudkeep/python-barbicanclient
