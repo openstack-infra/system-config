@@ -754,6 +754,7 @@ openstack-oslo:
       - openstack/oslo.version
       - openstack/oslo.vmware
       - openstack/pycadf
+      - openstack/pylockfile
       - openstack/stevedore
       - openstack/taskflow
       - openstack-dev/cookiecutter
