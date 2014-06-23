@@ -1214,6 +1214,14 @@ projects:
       - name: integrated-gate
       - name: publish-to-pypi
 
+  - name: openstack/pylockfile
+    template:
+      - name: python-jobs
+      - name: python3-jobs
+      - name: openstack-server-publish-jobs
+      - name: check-requirements
+      - name: integrated-gate
+
   - name: openstack/sahara
     template:
       - name: python-jobs
