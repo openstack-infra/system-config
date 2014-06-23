@@ -74,16 +74,19 @@ The next step is to add a Gerrit ACL config file. Edit
 and make it look like::
 
   [access "refs/heads/*"]
-          label-Code-Review = -2..+2 group project-name-core
-          label-Workflow = -1..+1 group project-name-core
-          abandon = group project-name-core
+  abandon = group project-name-core
+  label-Code-Review = -2..+2 group project-name-core
+  label-Workflow = -1..+1 group project-name-core
+
   [access "refs/tags/*"]
-          pushSignedTag = group project-name-ptl
+  pushSignedTag = group project-name-ptl
+
   [receive]
-          requireChangeId = true
-          requireContributorAgreement = true
+  requireChangeId = true
+  requireContributorAgreement = true
+
   [submit]
-          mergeContent = true
+  mergeContent = true
 
 The access sections in the example ACL grant the project's core group
 approval privileges and the ability so set/un-set Workflow status on
