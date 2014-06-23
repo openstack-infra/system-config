@@ -103,6 +103,14 @@ class openstack_project::base(
       key_server => 'pgp.mit.edu',
     }
 
+    file { '/etc/apt/apt.conf.d/80retry':
+      owner   => 'root',
+      group   => 'root',
+      mode    => '0444',
+      source  => 'puppet:///modules/openstack_project/80retry',
+      replace => true,
+    }
+
     case $::lsbdistcodename {
       'trusty': {
         file { '/etc/apt/preferences.d/00-puppet.pref':
