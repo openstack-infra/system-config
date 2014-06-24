@@ -107,9 +107,9 @@ openstack-dns:
       - change-merged
       - x-vrif-minus-2
     projects:
-      - stackforge/designate
-      - stackforge/designate-specs
-      - stackforge/python-designateclient
+      - openstack/designate
+      - openstack/designate-specs
+      - openstack/python-designateclient
     branches:
       - master
       - stable/havana

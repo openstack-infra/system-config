@@ -1273,18 +1273,19 @@
 
 - project:
     name: designate
-    github-org: stackforge
+    github-org: openstack
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
     jobs:
       - python-jobs
+      - openstack-publish-jobs
       - hook-{name}-rtfd
       - pypi-jobs
 
 - project:
     name: designate-specs
-    github-org: stackforge
+    github-org: openstack
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
@@ -1327,12 +1328,13 @@
 
 - project:
     name: python-designateclient
-    github-org: stackforge
+    github-org: openstack
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
     jobs:
       - python-jobs
+      - openstack-publish-jobs
       - hook-{name}-rtfd
       - pypi-jobs
 
