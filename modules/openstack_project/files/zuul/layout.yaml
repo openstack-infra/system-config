@@ -20,6 +20,7 @@ pipelines:
           require-approval:
             - username: jenkins
               older-than: 72h
+              verified: 1
         - event: comment-added
           require-approval:
             - workflow: 1
