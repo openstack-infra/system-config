@@ -34,10 +34,7 @@
         - shell: |
             #!/bin/bash -xe
             /usr/local/jenkins/slave_scripts/version-properties.sh
-        - inject:
-            properties-file: version.properties
-        - shell: |
-            #!/bin/bash -xe
+            source version.properties
             # fetch drush
             mkdir drush
             curl -L https://github.com/drush-ops/drush/archive/6.0.0.tar.gz | tar -xz -C drush --strip 1
