@@ -1783,6 +1783,7 @@
     jobs:
       - gate-{name}-puppet-lint
       - gate-{name}-puppet-syntax
+      - puppet-beaker-rspec
       - puppet-module-unit
 
 - project:
