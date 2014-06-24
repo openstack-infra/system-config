@@ -188,6 +188,7 @@ node 'groups-dev.openstack.org' {
     site_admin_password => hiera('groups_dev_site_admin_password', 'XXX'),
     site_mysql_host     => hiera('groups_dev_site_mysql_host', 'localhost'),
     site_mysql_password => hiera('groups_dev_site_mysql_password', 'XXX'),
+    conf_cron_key       => hiera('groups_dev_conf_cron_key', 'XXX'),
   }
 }
 

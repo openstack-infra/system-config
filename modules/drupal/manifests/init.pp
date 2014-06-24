@@ -19,8 +19,10 @@
 #
 # Actions:
 # - Prepare apache vhost and create mysql database (optional)
-# - Build distribution tarball from git repo as a soruce
-# - Deploy dist tarball and setup Drupal from scratch
+# - Install Drush tool with Drush-dsd extension
+# - Fetch distribution tarball from remote repository
+# - Deploy dist tarball and setup Drupal from scratch or
+#   upgrade an existing site.
 #
 # Site parameters:
 # - site_name: name of the site (FQDN for example)
@@ -28,6 +30,8 @@
 # - site_docroot: root directory of drupal site
 # - site_vhost_root: root directory of virtual hosts
 # - site_create_database: if true, create a new database (default: false)
+# - site_alias: drush site alias name
+# - site_profile: installation profile to deploy
 #
 # Mysql connection:
 # - mysql_user: mysql user of drupal site
@@ -35,39 +39,37 @@
 # - mysql_database: site database name
 # - mysql_host: host of mysql server (default: localhost)
 #
-# Distribution build process:
-# - site_sandbox_root: root directory of sandbox where build happens
-# - site_staging_root: root directory of target tarballs
-# - site_staging_tarball: target tarball of build process
-# - site_makefile: installation profile drush makefile
-# - site_build_reponame: local repository name under sandbox root
-# - site_repo_url: git repo url of installation profile source
-# - site_build_flagfile: triggers a rebuild when missing or git head differs
+# Drupal configuration variables:
+# - conf_cron_key: cron_key setting used for cron access
 #
-# Deploy process:
-# - site_profile: installation profile to deploy
-# - site_deploy_flagfile: triggers a redeploy when this flagfile is missing
+# Remarks:
+# - the site lives in /srv/vhosts/{hostname}/slot0 or slot1 directory
+# - the /srv/vhosts/{hostname}/w symlinks to slot0 or slot1 and
+#   points to actual site root. The upgrade process will begin in
+#   inactive slot so we can avoid typical WSOD issues with Drupal.
+# - for temporary package/tarball download it is using the
+#   /srv/downloads directory.
+#
 
 class drupal (
   $site_name = undef,
-  $site_docroot = undef,
+  $site_root = undef,
+  $site_docroot = "${site_root}/w",
   $site_mysql_host = 'localhost',
   $site_mysql_user = undef,
   $site_mysql_password = undef,
   $site_mysql_database = undef,
   $site_vhost_root = '/srv/vhosts',
-  $site_sandbox_root = '/srv/sandbox',
-  $site_staging_root = '/srv/sandbox/release',
-  $site_staging_tarball = '',
   $site_profile = 'standard',
   $site_admin_password = undef,
-  $site_build_reponame = undef,
-  $site_makefile = undef,
-  $site_repo_url = undef,
-  $site_build_flagfile = '/tmp/drupal-site-build',
-  $site_deploy_flagfile = '/tmp/drupal-site-deploy',
+  $site_alias = undef,
   $site_create_database = false,
   $site_base_url = false,
+  $site_file_owner = 'root',
+  $package_repository = undef,
+  $package_branch = undef,
+  $conf_cron_key = undef,
+  $conf_markdown_directory = undef,
 ) {
   include apache
   include pear
@@ -84,16 +86,26 @@ class drupal (
     port     => 80,
     priority => '50',
     docroot  => $site_docroot,
-    require  => File[$site_docroot],
+    require  => Exec['init-slot-dirs'],
     template => 'drupal/drupal.vhost.erb',
   }
 
-  file { $site_docroot:
+  file { $site_root:
     ensure  => directory,
     owner   => 'root',
     group   => 'www-data',
     mode    => '0755',
     require => Package['httpd'],
+  }
+
+  # Create initial symlink here to allow apache vhost creation
+  # so drush dsd can flip this symlink between slot0/slot1
+  # (won't be recreated until the symlink exists)
+  exec { 'init-slot-dirs':
+    command   => "/bin/ln -s ${site_root}/slot1 ${site_docroot}",
+    unless    => "/usr/bin/test -L ${site_docroot}",
+    logoutput => 'on_failure',
+    require   => File[$site_root],
   }
 
   a2mod { 'rewrite':
@@ -110,13 +122,18 @@ class drupal (
     notify  => Service['httpd'],
   }
 
-  # pear / drush cli tool
-  pear::package { 'PEAR': }
-  pear::package { 'Console_Table': }
-  pear::package { 'drush':
-      version    => '6.0.0',
-      repository => 'pear.drush.org',
-      require    => [ Pear::Package['PEAR'], Pear::Package['Console_Table'] ],
+  # This directory is used to download and cache tarball releases
+  # without proper upstream packages
+  file { '/srv/downloads':
+    ensure => directory,
+    owner  => 'root',
+    group  => 'root',
+    mode   => '0755',
+  }
+
+  # setup drush and drush-dsd extension
+  drush { 'drush':
+    require => File['/srv/downloads'],
   }
 
   # site mysql database
@@ -130,34 +147,95 @@ class drupal (
     }
   }
 
-  # drupal dist-build
-  distbuild { "distbuild-${site_name}":
-    site_sandbox_root    => $site_sandbox_root,
-    site_staging_root    => $site_staging_root,
-    site_repo_url        => $site_repo_url,
-    site_build_repo_name => $site_build_reponame,
-    site_staging_tarball => $site_staging_tarball,
-    site_build_flagfile  => $site_build_flagfile,
-    site_deploy_flagfile => $site_deploy_flagfile,
-    site_makefile        => $site_makefile,
-    require              => [ Package['httpd'], Pear::Package['drush'] ],
+  # drush site-alias definition
+
+  file { '/etc/drush':
+    ensure  => directory,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0755',
   }
 
-  # drupal site deploy
-  sitedeploy { "sitedeploy-${site_name}":
-    site_docroot         => $site_docroot,
-    site_staging_root    => $site_staging_root,
-    site_staging_tarball => $site_staging_tarball,
-    site_deploy_flagfile => $site_deploy_flagfile,
-    site_name            => $site_name,
-    site_profile         => $site_profile,
-    site_mysql_user      => $site_mysql_user,
-    site_mysql_password  => $site_mysql_password,
-    site_mysql_host      => $site_mysql_host,
-    site_mysql_database  => $site_mysql_database,
-    site_admin_password  => $site_admin_password,
-    site_base_url        => $site_base_url,
-    require              => Distbuild["distbuild-${site_name}"],
+  file { '/etc/drush/aliases.drushrc.php':
+    ensure  => present,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0400',
+    content => template('drupal/aliases.drushrc.php.erb'),
+    replace => true,
+    require => [ File['/etc/drush'], Drush['drush'] ],
+  }
+
+  # site custom configuration
+
+  file { "${site_root}/etc":
+    ensure    => directory,
+    owner     => 'root',
+    group     => 'root',
+    mode      => '0755',
+    require   => File[$site_root],
+  }
+
+  file { "${site_root}/etc/settings.php":
+    ensure    => file,
+    owner     => 'root',
+    group     => 'root',
+    mode      => '0400',
+    content   => template('drupal/settings.php.erb'),
+    replace   => true,
+    require   => File["${site_root}/etc"],
+  }
+
+  # add site distro tarball from http repository including
+  # md5 hash file
+  exec { "download:${package_branch}.tar.gz":
+    command   => "/usr/bin/wget ${package_repository}/${package_branch}.tar.gz -O /srv/downloads/${package_branch}.tar.gz",
+    creates   => "/srv/downloads/${package_branch}.tar.gz",
+    logoutput => 'on_failure',
+    require   => File['/srv/downloads'],
+  }
+
+  exec { "download:${package_branch}.md5":
+    command   => "/usr/bin/wget ${package_repository}/${package_branch}.md5 -O /srv/downloads/${package_branch}.md5",
+    creates   => "/srv/downloads/${package_branch}.md5",
+    logoutput => 'on_failure',
+    require   => [ Exec["download:${package_branch}.tar.gz"] ],
+  }
+
+  # deploy a site from scratch when site status is 'NOT INSTALLED'
+  exec { "sitedeploy-${site_name}":
+    command   => "/usr/bin/drush dsd-init @${site_alias} /srv/downloads/${package_branch}.tar.gz",
+    logoutput => true,
+    timeout   => 600,
+    onlyif    => "/usr/bin/drush dsd-status @${site_alias} | /bin/grep -c 'NOT INSTALLED'",
+    require   => [
+      Exec["download:${package_branch}.md5"],
+      File['/etc/drush/aliases.drushrc.php'],
+      ]
+  }
+
+  # update the site into a new slot when a remote update available
+  exec { "siteupdate-${site_name}":
+    command   => "/usr/bin/drush dsd-update @${site_alias} /srv/downloads/${package_branch}.tar.gz",
+    logoutput => true,
+    timeout   => 600,
+    onlyif    => "/usr/bin/drush dsd-status @${site_alias} | /bin/grep -c 'UPDATE'",
+    require   => [
+      Exec["download:${package_branch}.md5"],
+      File['/etc/drush/aliases.drushrc.php'],
+      ]
+  }
+
+  # setup cron job
+
+  cron { $site_name:
+    name    => "${site_name}.cron",
+    command => "wget -O - -q -t 1 ${$site_base_url}/cron.php?cron_key=${$conf_cron_key}",
+    user    => root,
+    minute  => '*/5',
+    require => [
+      Exec["sitedeploy-${site_name}"],
+      ]
   }
 
 }

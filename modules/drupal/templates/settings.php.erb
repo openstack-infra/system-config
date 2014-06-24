@@ -1,0 +1,14 @@
+<?php
+
+/**
+ * @file
+ * Drupal configuration overrides
+ *
+ */
+
+<% if @conf_cron_key %>
+$conf['cron_key'] = '<%= @conf_cron_key %>';
+<% end %>
+<% if @conf_markdown_directory %>
+$conf['groups_feeds_markdown_directory'] = '<%= @conf_markdown_directory %>';
+<% end %>
