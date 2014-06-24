@@ -245,6 +245,8 @@
   group: openstack-api-site
   options:
     - direct-release
+- project: openstack/designate
+- project: openstack/designate-specs
 - project: openstack/dib-utils
   description: Pieces of diskimage-builder that are useful without the full project
   upstream: git://github.com/cybertron/dib-utils.git
@@ -388,6 +390,7 @@
   upstream: git://github.com/asalkeld/python-ceilometerclient.git
 - project: openstack/python-cinderclient
   docimpact-group: openstack-manuals
+- project: openstack/python-designateclient
 - project: openstack/python-ganttclient
   description: Client code for the common scheduler for OpenStack.
   acl-config: /home/gerrit2/acls/openstack/gantt.config
@@ -659,8 +662,6 @@
   acl-config: /home/gerrit2/acls/stackforge/chef-cookbooks.config
   options:
     - direct-release
-- project: stackforge/designate
-- project: stackforge/designate-specs
 - project: stackforge/doc8
   description: Style checker for sphinx (or other) rst documentation.
   upstream: git://github.com/harlowja/doc8.git
@@ -948,7 +949,6 @@
 - project: stackforge/python-blazarclient
   description: Client for OpenStack Blazar
   acl-config: /home/gerrit2/acls/stackforge/blazar.config
-- project: stackforge/python-designateclient
 - project: stackforge/python-jenkins
   upstream: git://github.com/jeblair/python-jenkins.git
   description: Python API for managing jobs and nodes in a Jenkins CI instance

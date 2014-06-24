@@ -1240,7 +1240,7 @@
 
 - project:
     name: designate
-    github-org: stackforge
+    github-org: openstack
     node: bare-precise
     tarball-site: tarballs.openstack.org
 
@@ -1251,7 +1251,7 @@
 
 - project:
     name: designate-specs
-    github-org: stackforge
+    github-org: openstack
     node: bare-precise
     tarball-site: tarballs.openstack.org
 
@@ -1294,7 +1294,7 @@
 
 - project:
     name: python-designateclient
-    github-org: stackforge
+    github-org: openstack
     node: bare-precise
     tarball-site: tarballs.openstack.org
 

@@ -17,8 +17,8 @@
           export PYTHONUNBUFFERED=true
           export DEVSTACK_GATE_TIMEOUT=60
           export ENABLED_SERVICES=designate,designate-api,designate-central,designate-sink
-          export PROJECTS="stackforge/designate $PROJECTS"
-          export PROJECTS="stackforge/python-designateclient $PROJECTS"
+          export PROJECTS="openstack/designate $PROJECTS"
+          export PROJECTS="openstack/python-designateclient $PROJECTS"
 
           function pre_test_hook {
               cd /opt/stack/new/designate/contrib/devstack
