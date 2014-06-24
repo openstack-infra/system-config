@@ -29,10 +29,7 @@
         - shell: |
             #!/bin/bash -xe
             /usr/local/jenkins/slave_scripts/version-properties.sh
-        - inject:
-            properties-file: version.properties
-        - shell: |
-            #!/bin/bash -xe
+            source version.properties
             /usr/local/jenkins/slave_scripts/php-laravel-build.sh
             # Clone to dist
             rm -rf dist
