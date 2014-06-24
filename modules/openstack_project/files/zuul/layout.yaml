@@ -754,6 +754,7 @@ projects:
       - gate-grenade-dsvm-forward
     experimental-tripleo:
       - check-tripleo-overcloud-precise
+      - check-tripleo-overcloud-f20
     pre-release:
       - cinder-tarball
     release:
@@ -851,6 +852,7 @@ projects:
       - check-tripleo-undercloud-precise
       - check-tripleo-ironic-undercloud-precise
       - check-tripleo-overcloud-precise
+      - check-tripleo-overcloud-f20
     pre-release:
       - glance-tarball
     release:
@@ -882,6 +884,7 @@ projects:
       - check-tripleo-undercloud-precise
       - check-tripleo-ironic-undercloud-precise
       - check-tripleo-overcloud-precise
+      - check-tripleo-overcloud-f20
     pre-release:
       - heat-tarball
     release:
@@ -977,6 +980,7 @@ projects:
       - check-tripleo-undercloud-precise
       - check-tripleo-ironic-undercloud-precise
       - check-tripleo-overcloud-precise
+      - check-tripleo-overcloud-f20
     pre-release:
       - keystone-tarball
     release:
@@ -1050,6 +1054,7 @@ projects:
       - check-tripleo-undercloud-precise
       - check-tripleo-ironic-undercloud-precise
       - check-tripleo-overcloud-precise
+      - check-tripleo-overcloud-f20
     pre-release:
       - neutron-tarball
     release:
@@ -1094,6 +1099,7 @@ projects:
       - check-tripleo-undercloud-precise
       - check-tripleo-ironic-undercloud-precise
       - check-tripleo-overcloud-precise
+      - check-tripleo-overcloud-f20
     pre-release:
       - nova-tarball
     release:
@@ -1180,6 +1186,7 @@ projects:
       - check-tripleo-undercloud-precise
       - check-tripleo-ironic-undercloud-precise
       - check-tripleo-overcloud-precise
+      - check-tripleo-overcloud-f20
     pre-release:
       - swift-tarball
     release:
@@ -1295,6 +1302,7 @@ projects:
       - check-tripleo-undercloud-precise
       - check-tripleo-ironic-undercloud-precise
       - check-tripleo-overcloud-precise
+      - check-tripleo-overcloud-f20
 
   - name: openstack/python-designateclient
     template:
@@ -1328,6 +1336,7 @@ projects:
       - check-tripleo-undercloud-precise
       - check-tripleo-ironic-undercloud-precise
       - check-tripleo-overcloud-precise
+      - check-tripleo-overcloud-f20
 
   - name: openstack/python-glanceclient
     template:
@@ -1355,6 +1364,7 @@ projects:
       - check-tripleo-undercloud-precise
       - check-tripleo-ironic-undercloud-precise
       - check-tripleo-overcloud-precise
+      - check-tripleo-overcloud-f20
 
 #TODO: add docs
   - name: openstack/python-heatclient
@@ -1385,6 +1395,7 @@ projects:
       - check-tripleo-undercloud-precise
       - check-tripleo-ironic-undercloud-precise
       - check-tripleo-overcloud-precise
+      - check-tripleo-overcloud-f20
     release:
       - python-heatclient-docs
 
@@ -1434,6 +1445,7 @@ projects:
       - check-tripleo-undercloud-precise
       - check-tripleo-ironic-undercloud-precise
       - check-tripleo-overcloud-precise
+      - check-tripleo-overcloud-f20
 
   - name: openstack/python-marconiclient
     template:
@@ -1474,6 +1486,7 @@ projects:
       - check-tripleo-undercloud-precise
       - check-tripleo-ironic-undercloud-precise
       - check-tripleo-overcloud-precise
+      - check-tripleo-overcloud-f20
 
   - name: openstack/python-novaclient
     template:
@@ -1502,6 +1515,7 @@ projects:
       - check-tripleo-undercloud-precise
       - check-tripleo-ironic-undercloud-precise
       - check-tripleo-overcloud-precise
+      - check-tripleo-overcloud-f20
 
   - name: openstack/python-openstackclient
     template:
@@ -1550,6 +1564,7 @@ projects:
       - check-tripleo-undercloud-precise
       - check-tripleo-ironic-undercloud-precise
       - check-tripleo-overcloud-precise
+      - check-tripleo-overcloud-f20
 
   - name: openstack/python-troveclient
     template:
@@ -1576,6 +1591,7 @@ projects:
       - check-tripleo-ironic-undercloud-precise
       - check-tripleo-undercloud-precise
       - check-tripleo-overcloud-precise
+      - check-tripleo-overcloud-f20
     experimental-tripleo:
       - check-tripleo-ironic-seed-precise
 
@@ -1887,6 +1903,7 @@ projects:
       - check-tripleo-undercloud-precise
       - check-tripleo-ironic-undercloud-precise
       - check-tripleo-overcloud-precise
+      - check-tripleo-overcloud-f20
 
   - name: openstack/oslo.db
     template:
@@ -1908,6 +1925,7 @@ projects:
       - check-tripleo-undercloud-precise
       - check-tripleo-ironic-undercloud-precise
       - check-tripleo-overcloud-precise
+      - check-tripleo-overcloud-f20
 
   - name: openstack/oslo.i18n
     template:
@@ -1928,6 +1946,7 @@ projects:
       - check-tripleo-undercloud-precise
       - check-tripleo-ironic-undercloud-precise
       - check-tripleo-overcloud-precise
+      - check-tripleo-overcloud-f20
 
   - name: openstack/oslo.messaging
     template:
@@ -1950,6 +1969,7 @@ projects:
       - check-tripleo-undercloud-precise
       - check-tripleo-ironic-undercloud-precise
       - check-tripleo-overcloud-precise
+      - check-tripleo-overcloud-f20
 
 #TODO: add docs
   - name: openstack/oslo.rootwrap
@@ -1980,6 +2000,7 @@ projects:
       - check-tripleo-undercloud-precise
       - check-tripleo-ironic-undercloud-precise
       - check-tripleo-overcloud-precise
+      - check-tripleo-overcloud-f20
 
   - name: openstack/oslo.version
     template:
@@ -2001,6 +2022,7 @@ projects:
       - check-tripleo-undercloud-precise
       - check-tripleo-ironic-undercloud-precise
       - check-tripleo-overcloud-precise
+      - check-tripleo-overcloud-f20
 
   - name: openstack/oslo.vmware
     template:
@@ -2041,6 +2063,7 @@ projects:
       - check-tripleo-undercloud-precise
       - check-tripleo-ironic-undercloud-precise
       - check-tripleo-overcloud-precise
+      - check-tripleo-overcloud-f20
 
 # TODO: add docs
   - name: openstack/sahara-dashboard
@@ -2186,6 +2209,7 @@ projects:
       - check-tripleo-undercloud-precise
       - check-tripleo-ironic-undercloud-precise
       - check-tripleo-overcloud-precise
+      - check-tripleo-overcloud-f20
     post:
       - tempest-docs
       - tempest-coverage
@@ -2299,6 +2323,7 @@ projects:
       - check-tripleo-undercloud-precise
       - check-tripleo-ironic-undercloud-precise
       - check-tripleo-overcloud-precise
+      - check-tripleo-overcloud-f20
     post:
       - tuskar-ui-branch-tarball
 
@@ -2543,6 +2568,7 @@ projects:
       - check-tripleo-undercloud-precise
       - check-tripleo-ironic-undercloud-precise
       - check-tripleo-overcloud-precise
+      - check-tripleo-overcloud-f20
     post:
       - pbr-docs
     pre-release:
@@ -2660,6 +2686,7 @@ projects:
       - check-tripleo-undercloud-precise
       - check-tripleo-ironic-undercloud-precise
       - check-tripleo-overcloud-precise
+      - check-tripleo-overcloud-f20
 
   - name: openstack-infra/elastic-recheck
     check:
