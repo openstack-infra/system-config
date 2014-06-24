@@ -4076,6 +4076,7 @@ projects:
       - gate-puppet-nova-puppet-unit-3.2
       - gate-puppet-nova-puppet-unit-3.3
       - gate-puppet-nova-puppet-unit-3.4
+      - gate-puppet-nova-puppet-beaker-rspec
     gate:
       - gate-puppet-nova-puppet-lint
       - gate-puppet-nova-puppet-syntax
