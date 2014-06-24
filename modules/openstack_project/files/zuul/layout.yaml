@@ -809,6 +809,24 @@ projects:
     gate:
       - noop
 
+  - name: openstack/designate
+    template:
+      - name: python-jobs
+      - name: check-requirements
+      - name: publish-to-pypi
+    check:
+      - gate-designate-devstack-dsvm
+    gate:
+      - gate-designate-devstack-dsvm
+
+  - name: openstack/designate-specs
+    check:
+      - gate-designate-specs-python27
+      - gate-designate-specs-docs
+    gate:
+      - gate-designate-specs-python27
+      - gate-designate-specs-docs
+
   - name: openstack/glance
     template:
       - name: python-jobs
@@ -1296,6 +1314,16 @@ projects:
       - check-tripleo-undercloud-precise
       - check-tripleo-ironic-undercloud-precise
       - check-tripleo-overcloud-precise
+
+  - name: openstack/python-designateclient
+    template:
+      - name: python-jobs
+      - name: check-requirements
+      - name: publish-to-pypi
+    check:
+      - gate-designate-devstack-dsvm
+    gate:
+      - gate-designate-devstack-dsvm
 
   - name: openstack/python-ganttclient
     template:
@@ -3423,25 +3451,6 @@ projects:
       - gate-cookbook-openstack-telemetry-chef-lint
       - gate-cookbook-openstack-telemetry-chef-unit
 
-  - name: stackforge/designate
-    template:
-      - name: python-jobs
-      - name: check-requirements
-      - name: publish-to-pypi
-      - name: docs-on-rtfd
-    check:
-      - gate-designate-devstack-dsvm
-    gate:
-      - gate-designate-devstack-dsvm
-
-  - name: stackforge/designate-specs
-    check:
-      - gate-designate-specs-python27
-      - gate-designate-specs-docs
-    gate:
-      - gate-designate-specs-python27
-      - gate-designate-specs-docs
-
   - name: stackforge/entropy
     check:
       - gate-entropy-docs
@@ -4311,17 +4320,6 @@ projects:
       - python-blazarclient-tarball
     release:
       - python-blazarclient-tarball
-
-  - name: stackforge/python-designateclient
-    template:
-      - name: python-jobs
-      - name: check-requirements
-      - name: publish-to-pypi
-      - name: docs-on-rtfd
-    check:
-      - gate-designate-devstack-dsvm
-    gate:
-      - gate-designate-devstack-dsvm
 
   - name: stackforge/python-kiteclient
     template:
