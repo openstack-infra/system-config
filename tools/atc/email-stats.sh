@@ -7,7 +7,7 @@ for project in $(
     | grep '^ *- [A-Za-z_-]\+/[A-Za-z_-]\+$' \
     | sed 's/^ *- //'
 ) ; do
-    python email-stats.py -p $project -o out/$( basename $project ).csv
+    python email_stats.py -p $project -o out/$( basename $project ).csv
 done
 
 # Confirmed list of non-code contributors
