@@ -16,6 +16,26 @@
       - console-log
 
 - job-template:
+    name: 'gate-{name}-puppet-beaker-rspec'
+    node: '{node}'
+
+    builders:
+      - gerrit-git-prep
+      - shell:|
+          #do something to allow ssh from root@subnode
+      - shell: |
+          export PUPPET_GEM_VERSION='~> {puppet_version}.0'
+          mkdir .bundled_gems
+          export GEM_HOME=`pwd`/.bundled_gems
+          IP_ADDR=`cat /etc/nodepool/subnodes` sed -i "s/subnode_ip/$IP_ADDR/" nodethingys
+          bundle install
+          export BEAKER_setfile=`pwd`/spec/acceptance/nodesets/nodepool.yml
+          bundle exec rake spec spec/acceptance
+
+    publishers:
+      - console-log
+
+- job-template:
     name: 'gate-{name}-puppet-lint'
     node: '{node}'
 
