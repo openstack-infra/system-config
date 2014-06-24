@@ -115,13 +115,12 @@
           #!/bin/bash -xe
           cd gerrit
           /usr/local/jenkins/slave_scripts/version-properties.sh
-      - inject:
-          properties-file: gerrit/version.properties
       - install-buck
       - shell: |
           #!/bin/bash -xe
           export PATH=`pwd`/buck/bin:$PATH
           cd gerrit
+          source version.properites
           buck clean
           buck build release
       - shell: "cp gerrit/buck-out/gen/release.war gerrit/buck-out/gen/gerrit-$PROJECT_VER.war"
@@ -154,13 +153,12 @@
           #!/bin/bash -xe
           cd gerrit
           /usr/local/jenkins/slave_scripts/version-properties.sh
-      - inject:
-          properties-file: gerrit/version.properties
       - install-buck
       - shell: |
           #!/bin/bash -xe
           export PATH=`pwd`/buck/bin:$PATH
           cd gerrit
+          source version.properites
           buck clean
           buck build release
       - shell: "cp gerrit/buck-out/gen/release.war gerrit/buck-out/gen/gerrit-$PROJECT_VER.war"
@@ -189,13 +187,12 @@
           #!/bin/bash -xe
           cd gerrit
           /usr/local/jenkins/slave_scripts/version-properties.sh
-      - inject:
-          properties-file: gerrit/version.properties
       - install-buck
       - shell: |
           #!/bin/bash -xe
           export PATH=`pwd`/buck/bin:$PATH
           cd gerrit
+          source version.properites
           buck clean
           buck build release
       - shell: "cp gerrit/buck-out/gen/release.war gerrit/buck-out/gen/gerrit-$PROJECT_VER.war"
