@@ -46,14 +46,18 @@ def devstack_params(item, job, params):
         change.branch == 'stable/havana' or
         change.branch == 'stable/icehouse') or
         ('havana' in job.name or
-        'icehouse' in job.name)):
+        'icehouse' in job.name or
+        'precise' in job.name)):
         params['ZUUL_NODE'] = 'devstack-precise'
     else:
         params['ZUUL_NODE'] = 'devstack-trusty'
 
 
 def default_params_precise(item, job, params):
-    params['ZUUL_NODE'] = 'bare-precise'
+    if 'trusty' in job.name:
+        params['ZUUL_NODE'] = 'bare-trusty'
+    else:
+        params['ZUUL_NODE'] = 'bare-precise'
 
 
 def default_params_trusty(item, job, params):
@@ -62,9 +66,12 @@ def default_params_trusty(item, job, params):
     # jenkins uses 'bare-precise || bare-trusty'.
     # This is necessary to get the gearman plugin to register
     # gearman jobs with both node labels.
-    if (hasattr(change, 'branch') and
+    if ((hasattr(change, 'branch') and
         change.branch == 'stable/havana' or
-        change.branch == 'stable/icehouse'):
+        change.branch == 'stable/icehouse') or
+        ('havana' in job.name or
+        'icehouse' in job.name or
+        'precise' in job.name)):
         params['ZUUL_NODE'] = 'bare-precise'
     else:
         params['ZUUL_NODE'] = 'bare-trusty'
@@ -80,6 +87,7 @@ def set_node_options(item, job, params, default):
     pypi_re = r'^.*-(jenkinsci|mavencentral|pypi-(both|wheel))-upload$'
     mirror_re = r'^(periodic|post)-mirror-python(26|27|33)$'
     python26_re = r'^.*-py(thon)?26.*$'
+    centos6_re = r'^.*-centos6.*$'
     python33_re = r'^.*-py(py|(thon)?33).*$'
     tripleo_re = r'^.*-tripleo.*$'
     devstack_re = r'^.*-dsvm.*$'
@@ -91,6 +99,10 @@ def set_node_options(item, job, params, default):
         reusable_node(item, job, params)
     # Jobs needing python26
     elif re.match(python26_re, job.name):
+        # Pass because job specified label is always correct.
+        pass
+    # Jobs needing centos6
+    elif re.match(centos6_re, job.name):
         # Pass because job specified label is always correct.
         pass
     # Jobs needing py33/pypy slaves
