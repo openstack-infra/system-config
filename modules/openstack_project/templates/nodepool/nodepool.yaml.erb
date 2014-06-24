@@ -21,7 +21,7 @@ gearman-servers:
 labels:
   - name: devstack-precise
     image: devstack-precise
-    min-ready: 42
+    min-ready: 5
     providers:
       - name: hpcloud-b1
       - name: hpcloud-b2
@@ -33,7 +33,7 @@ labels:
       - name: rax-iad
   - name: devstack-precise-check
     image: devstack-precise-check
-    min-ready: 7
+    min-ready: 0
     providers:
       - name: rax-iad
   - name: bare-precise
@@ -50,7 +50,7 @@ labels:
       - name: rax-iad
   - name: devstack-trusty
     image: devstack-trusty
-    min-ready: 2
+    min-ready: 42
     providers:
       - name: hpcloud-b1
       - name: hpcloud-b2
@@ -62,7 +62,7 @@ labels:
       - name: rax-iad
   - name: bare-trusty
     image: bare-trusty
-    min-ready: 2
+    min-ready: 5
     providers:
       - name: hpcloud-b1
       - name: hpcloud-b2
