@@ -106,30 +106,23 @@
 
     builders:
       - revoke-sudo
-      - shell: |
-          #!/bin/bash -xe
-          mkdir -p gerrit
-          cd gerrit
-          /usr/local/jenkins/slave_scripts/gerrit-git-prep.sh https://review.openstack.org git://git.openstack.org
-      - shell: |
-          #!/bin/bash -xe
-          cd gerrit
-          /usr/local/jenkins/slave_scripts/version-properties.sh
-      - inject:
-          properties-file: gerrit/version.properties
       - install-buck
       - shell: |
           #!/bin/bash -xe
           export PATH=`pwd`/buck/bin:$PATH
+          mkdir -p gerrit
           cd gerrit
+          /usr/local/jenkins/slave_scripts/gerrit-git-prep.sh https://review.openstack.org git://git.openstack.org
+          /usr/local/jenkins/slave_scripts/version-properties.sh
+          source version.properites
           buck clean
           buck build release
-      - shell: "cp gerrit/buck-out/gen/release.war gerrit/buck-out/gen/gerrit-$PROJECT_VER.war"
+          cp buck-out/gen/release.war buck-out/gen/gerrit-$PROJECT_VER.war
 
     publishers:
       - war:
           site: 'tarballs.openstack.org'
-          warfile: 'gerrit/buck-out/gen/gerrit-${PROJECT_VER}.war'
+          warfile: 'gerrit/buck-out/gen/gerrit-*.war'
           target: 'tarballs/ci/test'
       - console-log
 
@@ -145,25 +138,18 @@
 
     builders:
       - revoke-sudo
-      - shell: |
-          #!/bin/bash -xe
-          mkdir -p gerrit
-          cd gerrit
-          /usr/local/jenkins/slave_scripts/gerrit-git-prep.sh https://review.openstack.org git://git.openstack.org
-      - shell: |
-          #!/bin/bash -xe
-          cd gerrit
-          /usr/local/jenkins/slave_scripts/version-properties.sh
-      - inject:
-          properties-file: gerrit/version.properties
       - install-buck
       - shell: |
           #!/bin/bash -xe
           export PATH=`pwd`/buck/bin:$PATH
+          mkdir -p gerrit
           cd gerrit
+          /usr/local/jenkins/slave_scripts/gerrit-git-prep.sh https://review.openstack.org git://git.openstack.org
+          /usr/local/jenkins/slave_scripts/version-properties.sh
+          source version.properites
           buck clean
           buck build release
-      - shell: "cp gerrit/buck-out/gen/release.war gerrit/buck-out/gen/gerrit-$PROJECT_VER.war"
+          cp buck-out/gen/release.war buck-out/gen/gerrit-$PROJECT_VER.war
 
     publishers:
       - console-log
@@ -180,29 +166,22 @@
 
     builders:
       - revoke-sudo
-      - shell: |
-          #!/bin/bash -xe
-          mkdir -p gerrit
-          cd gerrit
-          /usr/local/jenkins/slave_scripts/gerrit-git-prep.sh https://review.openstack.org git://git.openstack.org
-      - shell: |
-          #!/bin/bash -xe
-          cd gerrit
-          /usr/local/jenkins/slave_scripts/version-properties.sh
-      - inject:
-          properties-file: gerrit/version.properties
       - install-buck
       - shell: |
           #!/bin/bash -xe
           export PATH=`pwd`/buck/bin:$PATH
+          mkdir -p gerrit
           cd gerrit
+          /usr/local/jenkins/slave_scripts/gerrit-git-prep.sh https://review.openstack.org git://git.openstack.org
+          /usr/local/jenkins/slave_scripts/version-properties.sh
+          source version.properites
           buck clean
           buck build release
-      - shell: "cp gerrit/buck-out/gen/release.war gerrit/buck-out/gen/gerrit-$PROJECT_VER.war"
+          cp gerrit/buck-out/gen/release.war gerrit/buck-out/gen/gerrit-$PROJECT_VER.war
 
     publishers:
       - war:
           site: 'tarballs.openstack.org'
-          warfile: 'gerrit/buck-out/gen/gerrit-${PROJECT_VER}.war'
+          warfile: 'gerrit/buck-out/gen/gerrit-*.war'
           target: 'tarballs/ci/gerrit'
       - console-log
