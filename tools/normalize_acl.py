@@ -9,6 +9,7 @@
 # 3 - remove any project.stat{e,us} = active since it's a default or a typo
 # 4 - strip default *.owner = group Administrators permissions
 # 5 - sort the exclusiveGroupPermissions group lists
+# 6 - replace openstack-ci-admins and openstack-ci-core with infra-core
 
 import re
 import sys
@@ -93,6 +94,15 @@ if '5' in transformations:
                     key, ' '.join(sorted(value.split()))))
             else:
                 newsection.append(option)
+        acl[section] = newsection
+
+if '6' in transformations:
+    for section in acl.keys():
+        newsection = []
+        for option in acl[section]:
+            for group in ('openstack-ci-admins', 'openstack-ci-core'):
+                option = option.replace('group %s' % group, 'group infra-core')
+            newsection.append(option)
         acl[section] = newsection
 
 for section in sorted(acl.keys()):
