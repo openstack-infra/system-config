@@ -16,6 +16,27 @@
       - console-log
 
 - job-template:
+    name: 'gate-{name}-puppet-beaker-rspec'
+    node: bare-precise
+
+    builders:
+      - gerrit-git-prep
+      - shell: |
+          apt-get install -y libxslt-dev libxml2-dev
+          curl -sSL https://get.rvm.io | bash -s stable
+          source /etc/profile.d/rvm.sh
+          rvm install 1.9.3
+          rvm use 1.9.3
+          rvm gemset create beaker-rspec
+          rvm gemset use beaker-rspec
+          bundle install
+          export BEAKER_setfile=`pwd`/spec/acceptance/nodesets/nodepool.yml
+          bundle exec rake spec spec/acceptance
+
+    publishers:
+      - console-log
+
+- job-template:
     name: 'gate-{name}-puppet-lint'
     node: '{node}'
 
@@ -66,6 +87,11 @@
     jobs:
       - 'gate-{name}-puppet-apply-centos6'
       - 'gate-{name}-puppet-apply-precise'
+
+- job-group:
+    name: 'puppet-beaker-rspec'
+    jobs:
+      - 'gate-{name}-puppet-beaker-rspec'
 
 - job-group:
     name: 'puppet-module-unit'
