@@ -351,3 +351,15 @@ projects:
       - noop
     post:
       - noop
+
+  - name: Juniper/contrail-generateDS
+    check:
+      - ci-contrail-generateDS-flake8
+    silent:
+      - noop
+    check-tripleo:
+      - noop
+    gate:
+      - noop
+    post:
+      - noop

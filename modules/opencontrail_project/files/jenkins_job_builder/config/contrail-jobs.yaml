@@ -18,6 +18,26 @@
           ruby /usr/local/jenkins/slave_scripts/contrail-unittests-job.sh
 
 - job-template:
+    name: 'ci-{name}-flake8'
+    node: juniper-tests
+
+    wrappers:
+      - contrail-jobs-wrapper
+
+    builders:
+      - shell: |
+          #!/bin/bash -xe
+          export USER=jenkins
+          export JOB_NAME="contrail-flake8-job"
+          export PROJECT_NAME={name}
+          export WORKSPACE=$PWD
+          rm -rf $WORKSPACE/* $WORKSPACE/.* || true
+          /usr/bin/ci_setup.sh
+          ruby /usr/local/jenkins/slave_scripts/contrail-git-prep.rb
+          [ $PROJECT_NAME = contrail-neutron-plugin ] && sh /usr/local/jenkins/slave_scripts/contrail-flake8-job.sh openstack neutron_plugin
+          [ $PROJECT_NAME = contrail-generateDS ] && sh /usr/local/jenkins/slave_scripts/contrail-flake8-job.sh tools generateds
+
+- job-template:
     name: 'ci-{name}-systest'
     node: juniper-tests
 
@@ -59,6 +79,11 @@
     name: contrail-unittest-jobs
     jobs:
       - 'ci-{name}-unittest'
+
+- job-group:
+    name: contrail-flake8-jobs
+    jobs:
+      - 'ci-{name}-flake8'
 
 - job-group:
     name: contrail-systest-jobs

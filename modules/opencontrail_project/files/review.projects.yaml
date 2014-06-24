@@ -32,3 +32,8 @@
   description: Third Party sources
   upstream: git@github.com:Juniper/contrail-third-party
   acl-config: /home/gerrit2/acls/Juniper/contrail-third-party.config
+
+- project: Juniper/contrail-generateDS
+  description: Contrail XML schema code generator
+  upstream: git@github.com:Juniper/contrail-generateDS
+  acl-config: /home/gerrit2/acls/Juniper/contrail-generateDS.config
