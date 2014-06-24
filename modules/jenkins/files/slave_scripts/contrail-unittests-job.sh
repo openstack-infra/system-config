@@ -103,7 +103,7 @@ function ci_cleanup() {
 }
 
 function main() {
-    build_unittest
+    # build_unittest
     run_unittest
     print_test_results
     ci_cleanup
