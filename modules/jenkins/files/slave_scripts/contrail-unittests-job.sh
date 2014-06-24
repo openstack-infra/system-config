@@ -5,7 +5,6 @@ set -ex
 
 export WORKSPACE=$PWD
 SKIP_JOBS=$WORKSPACE/skip_jobs
-REPO=`echo $WORKSPACE | cut -d '/' -f5 | cut -d '-' -f3`
 if [ -f $SKIP_JOBS ]; then
     echo Jobs skipped due to jenkins.opencontrail.org:/root/ci-test/skip_jobs
     exit
@@ -26,11 +25,7 @@ function build_unittest() {
 
     # Build every thing.
     export BUILD_ONLY=TRUE
-    if [ $REPO = "vrouter" ]; then
-	BUILD_ONLY=TRUE scons -j $SCONS_JOBS 2>&1 | tee $WORKSPACE/scons_build.log
-    else
-        scons -j $SCONS_JOBS . 2>&1 | tee $WORKSPACE/scons_build.log
-    fi
+    scons -j $SCONS_JOBS . 2>&1 | tee $WORKSPACE/scons_build.log
     # scons -j $SCONS_JOBS test 2>&1 | tee $WORKSPACE/scons_build.log
 
     unset BUILD_ONLY
@@ -108,8 +103,8 @@ function ci_cleanup() {
 }
 
 function main() {
-    build_unittest
-    [ $REPO != "vrouter" ] && run_unittest
+    # build_unittest
+    run_unittest
     print_test_results
     ci_cleanup
 }
