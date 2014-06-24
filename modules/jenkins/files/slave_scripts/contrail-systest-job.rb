@@ -336,9 +336,13 @@ if __FILE__ == $0 then
     Util.cleanup_on_exit = true
     Util.ci_setup
     parse_options
+
     @image_built = false
     if @options.image.nil? then
         @image_built = true
+
+        # Temporary fix until base image is fixed.
+        Sh.run("apt-get -y install linux-headers-3.13.0-24-generic")
         ContrailGitPrep.main(false) # Use private repo
         @options.image = build_contrail_packages
     end
