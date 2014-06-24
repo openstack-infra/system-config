@@ -2333,6 +2333,7 @@ projects:
       - api-site-tox-buildlang-es
       - api-site-tox-buildlang-fr
       - api-site-tox-buildlang-ja
+      - api-site-tox-buildlang-ko_KR
 
   - name: openstack/openstack-manuals
     template:

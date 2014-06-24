@@ -2626,6 +2626,7 @@
         - es
         - fr
         - ja
+        - ko_KR
 
     jobs:
       - openstack-doc-jobs
