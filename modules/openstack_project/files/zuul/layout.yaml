@@ -401,6 +401,9 @@ project-templates:
 jobs:
   - name: ^.*$
     parameter-function: set_node_options_default_precise
+  # Pecan ceilometer tests need new mongodb available in trusty
+  - name: ^gate-pecan-tox-ceilometer-.*$
+    parameter-function: set_node_options_default_trusty
   # tempest and d-g branchless tests need to only run on master
   # (needs to be early to not impact non-voting stanzas later)
   - name: ^.*(-icehouse|-havana)$
