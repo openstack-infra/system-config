@@ -4362,6 +4362,12 @@ projects:
     gate:
       - gate-solum-dashboard-pypy
 
+  - name: stackforge/solum-specs
+    check:
+      - gate-solum-specs-docs
+    gate:
+      - gate-solum-specs-docs
+
   - name: stackforge/rally
     template:
       - name: check-requirements
