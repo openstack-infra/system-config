@@ -45,6 +45,7 @@ popd
 if [ $ret -eq 0 ] ; then
 	pushd  /opt/stack/tempest
 	> tempest.log
+        testr init
 	bash -x ./verify.sh
 	ret=$?
 	popd
@@ -91,5 +92,5 @@ gerrit_cmd="ssh -i ~/.ssh/id_rsa-r -p 29418 contrail@review.openstack gerrit rev
 
 echo "${gerrit_cmd} ${log_url} ${verf} ${GERRIT_PATCHSET_REVISION}"
 
-bash -c "${gerrit_cmd} \\\"${log_url}\\\" ${verf} ${GERRIT_PATCHSET_REVISION}"
+#bash -c "${gerrit_cmd} \\\"${log_url}\\\" ${verf} ${GERRIT_PATCHSET_REVISION}"
 

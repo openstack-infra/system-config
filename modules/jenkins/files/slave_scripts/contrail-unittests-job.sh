@@ -25,8 +25,8 @@ function build_unittest() {
 
     # Build every thing.
     export BUILD_ONLY=TRUE
-    scons -j $SCONS_JOBS -U . 2>&1 | tee $WORKSPACE/scons_build.log
-    # scons -j $SCONS_JOBS -U test 2>&1 | tee $WORKSPACE/scons_build.log
+    scons -j $SCONS_JOBS . 2>&1 | tee $WORKSPACE/scons_build.log
+    # scons -j $SCONS_JOBS test 2>&1 | tee $WORKSPACE/scons_build.log
 
     unset BUILD_ONLY
 }
@@ -77,19 +77,37 @@ function print_test_results() {
 function run_unittest() {
     # Goto the repo top directory.
     cd $WORKSPACE/repo
+    scons -j $SCONS_JOBS test 2>&1 | tee $WORKSPACE/scons_test.log
 
-    ### Ignore test failures until tests stability is achieved ###
-    scons -i -j $SCONS_JOBS -U test 2>&1 | tee $WORKSPACE/scons_test.log
-
+    # Flaky test results are ignored.
+    scons -j $SCONS_JOBS -i flaky-test 2>&1 | tee -a $WORKSPACE/scons_test.log
     print_test_results
+}
+
+function test_wait() {
+    while :
+    do
+        echo Sleeping until /root/ci_job_wait is gone
+        if [ ! -f /root/ci_job_wait ]; then
+            break
+        fi
+        sleep 10
+    done
+}
+
+function ci_cleanup() {
+    test_wait
+    rm -rf $WORKSPACE/* $WORKSPACE/.* 2>/dev/null || true
+    echo Success
+    exit
 }
 
 function main() {
     build_unittest
     run_unittest
     print_test_results
+    ci_cleanup
 }
 
 env
 main
-echo Success

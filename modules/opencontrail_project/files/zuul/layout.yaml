@@ -277,6 +277,7 @@ projects:
   - name: Juniper/contrail-controller
     check:
       - ci-contrail-controller-unittest
+      - ci-contrail-controller-systest
     silent:
       - noop
     check-tripleo:
@@ -289,18 +290,20 @@ projects:
   - name: Juniper/contrail-controller-test
     check:
       - ci-contrail-controller-test-unittest
+      - ci-contrail-controller-test-systest
     silent:
       - noop
     check-tripleo:
       - noop
     gate:
-      - ci-contrail-controller-test-systest
+      - noop
     post:
       - noop
 
   - name: Juniper/contrail-vrouter
     check:
       - ci-contrail-vrouter-unittest
+      - ci-contrail-vrouter-systest
     silent:
       - noop
     check-tripleo:
@@ -313,6 +316,7 @@ projects:
   - name: Juniper/contrail-build
     check:
       - ci-contrail-build-unittest
+      - ci-contrail-build-systest
     silent:
       - noop
     check-tripleo:
@@ -325,6 +329,7 @@ projects:
   - name: Juniper/contrail-packages
     check:
       - ci-contrail-packages-unittest
+      - ci-contrail-packages-systest
     silent:
       - noop
     check-tripleo:
@@ -337,6 +342,7 @@ projects:
   - name: Juniper/contrail-third-party
     check:
       - ci-contrail-third-party-unittest
+      - ci-contrail-third-party-systest
     silent:
       - noop
     check-tripleo:

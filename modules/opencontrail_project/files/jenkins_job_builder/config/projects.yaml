@@ -1,7 +1,7 @@
 - project:
     name: contrail-controller
     github-org: Juniper
-    node: master
+    node: juniper-tests
     tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.opencontrail.org
 
@@ -43,6 +43,7 @@
 
     jobs:
       - contrail-unittest-jobs
+      - contrail-systest-jobs
 
 - project:
     name: contrail-packages
@@ -53,6 +54,7 @@
 
     jobs:
       - contrail-unittest-jobs
+      - contrail-systest-jobs
 
 - project:
     name: contrail-third-party
@@ -63,6 +65,7 @@
 
     jobs:
       - contrail-unittest-jobs
+      - contrail-systest-jobs
 
 - project:
     name: contrail-neutron-plugin

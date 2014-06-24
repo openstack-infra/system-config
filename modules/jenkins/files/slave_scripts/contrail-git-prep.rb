@@ -84,6 +84,13 @@ def self.switch_gerrit_repo
 end
 
 def self.pre_build_setup
+
+    # Setup cache first to avoid downloads over the Internet
+    cache = "/tmp/cache/#{ENV['USER']}"
+    Sh.run("mkdir -p #{cache}")
+    Sh.run("sshpass -p c0ntrail123 rsync -az --no-owner --no-group ci-admin@ubuntu-build02:/tmp/cache/ci-admin/ #{cache}")
+    Sh.run("chown -R #{ENV['USER']}.#{ENV['USER']} #{cache}")
+
     Sh.run "python #{ENV['WORKSPACE']}/repo/third_party/fetch_packages.py 2>&1 | tee #{ENV['WORKSPACE']}/third_party_fetch_packages.log"
     if ! @use_public then
         Sh.run "python #{ENV['WORKSPACE']}/repo/distro/third_party/fetch_packages.py 2>&1 | tee #{ENV['WORKSPACE']}/distro_fetch_packages.log"
