@@ -10,11 +10,6 @@
     builders:
       - revoke-sudo
       - gerrit-git-prep
-      - shell: |
-          #!/bin/bash -xe
-          /usr/local/jenkins/slave_scripts/version-properties.sh
-      - inject:
-          properties-file: version.properties
       - js-build:
           command: 'test'
           envlist: 'grunt'
@@ -47,11 +42,6 @@
     builders:
       - revoke-sudo
       - gerrit-git-prep
-      - shell: |
-          #!/bin/bash -xe
-          /usr/local/jenkins/slave_scripts/version-properties.sh
-      - inject:
-          properties-file: version.properties
       - js-build:
           command: 'build'
           envlist: 'grunt'
@@ -59,6 +49,8 @@
           project: '{name}'
       - shell: |
           #!/bin/bash -xe
+          /usr/local/jenkins/slave_scripts/version-properties.sh
+          source version.properties
 
           # Clean/create a tarball directory
           rm -rf tarballs
