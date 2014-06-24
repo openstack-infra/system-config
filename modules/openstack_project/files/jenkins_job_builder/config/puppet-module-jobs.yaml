@@ -16,6 +16,25 @@
       - console-log
 
 - job-template:
+    name: 'gate-{name}-puppet-beaker-rspec'
+    node: bare-precise
+
+    builders:
+      - gerrit-git-prep
+      - shell: |
+          apt-get install -y libxslt-dev libxml2-dev
+          mkdir -p .bundle
+          export GEM_HOME=`pwd`/.bundle
+          ruby1.9.1 /usr/bin/bundle config --global jobs $(nproc)
+          ruby1.9.1 /usr/bin/bundle install --path=.bundle
+          bundle install
+          export BEAKER_setfile=`pwd`/spec/acceptance/nodesets/nodepool.yml
+          bundle exec rake spec spec/acceptance
+
+    publishers:
+      - console-log
+
+- job-template:
     name: 'gate-{name}-puppet-lint'
     node: '{node}'
 
@@ -66,6 +85,11 @@
     jobs:
       - 'gate-{name}-puppet-apply-centos6'
       - 'gate-{name}-puppet-apply-precise'
+
+- job-group:
+    name: 'puppet-beaker-rspec'
+    jobs:
+      - 'gate-{name}-puppet-beaker-rspec'
 
 - job-group:
     name: 'puppet-module-unit'
