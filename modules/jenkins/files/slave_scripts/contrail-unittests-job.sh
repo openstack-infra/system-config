@@ -5,7 +5,7 @@ set -ex
 
 export WORKSPACE=$PWD
 SKIP_JOBS=$WORKSPACE/skip_jobs
-REPO=echo $WORKSPACE | cut -d '/' -f5 | cut -d '-' -f3
+REPO=`echo $WORKSPACE | cut -d '/' -f5 | cut -d '-' -f3`
 if [ -f $SKIP_JOBS ]; then
     echo Jobs skipped due to jenkins.opencontrail.org:/root/ci-test/skip_jobs
     exit
