@@ -4320,6 +4320,7 @@ projects:
     template:
       - name: check-requirements
     check:
+      - python-rallyclient-coverage
       - gate-python-rallyclient-pep8
       - gate-python-rallyclient-python26
       - gate-python-rallyclient-python27
@@ -4359,6 +4360,7 @@ projects:
       - name: check-requirements
       - name: docs-on-rtfd
     check:
+      - rally-coverage
       - gate-rally-pep8
       - gate-rally-python26
       - gate-rally-python27
@@ -4375,6 +4377,7 @@ projects:
       - gate-rally-install-bare-precise
     post:
       - rally-branch-tarball
+      - rally-coverage
     pre-release:
       - rally-tarball
     release:
