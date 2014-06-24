@@ -1,0 +1,9 @@
+Verified+2: Jenkins
+Workflow+1: Clark Boylan <cboylan@sapwetik.org>
+Code-Review+2: Jeremy Stanley <fungi@yuggoth.org>
+Code-Review+2: Joshua Hesketh <joshua.hesketh@rackspace.com>
+Submitted-by: Jenkins
+Submitted-at: Tue, 24 Jun 2014 17:29:52 +0000
+Reviewed-on: https://review.openstack.org/102063
+Project: openstack-infra/config
+Branch: refs/heads/master
