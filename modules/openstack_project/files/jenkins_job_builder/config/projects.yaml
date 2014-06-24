@@ -2232,10 +2232,10 @@
           envlist: wsme-tip
       - gate-{name}-tox-{envlist}:
           envlist: ceilometer-stable
-          node: bare-centos6
+          node: bare-trusty
       - gate-{name}-tox-{envlist}:
           envlist: ceilometer-tip
-          node: bare-centos6
+          node: bare-trusty
       - gate-{name}-tox-{envlist}:
           envlist: ironic-stable
       - gate-{name}-tox-{envlist}:
