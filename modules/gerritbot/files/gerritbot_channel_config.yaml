@@ -227,6 +227,7 @@ openstack-qa:
       - openstack/qa-specs
       - openstack/tempest
       - openstack-dev/devstack
+      - openstack-dev/devstack-doc
       - openstack-dev/grenade
       - openstack-infra/elastic-recheck
       - openstack-infra/devstack-gate
@@ -727,6 +728,7 @@ openstack-merges:
       - openstack/tuskar
       - openstack/python-tuskarclient
       - openstack-dev/devstack
+      - openstack-dev/devstack-doc
       - openstack-infra/release-tools
       - openstack/marconi
       - openstack/python-marconiclient

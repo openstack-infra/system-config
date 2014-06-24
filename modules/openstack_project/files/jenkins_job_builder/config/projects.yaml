@@ -1513,6 +1513,14 @@
       - gate-{name}-bash8
 
 - project:
+    name: devstack-doc
+    github-org: devstack-doc
+    node: bare-precise
+
+    jobs:
+      - gate-{name}-docs
+
+- project:
     name: requirements-jobs
 
     jobs:

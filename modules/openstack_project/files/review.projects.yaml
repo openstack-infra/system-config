@@ -12,6 +12,9 @@
 - project: openstack-dev/devstack
   options:
     - direct-release
+- project: openstack-dev/devstack-doc
+  group: devstack
+  upstream: <devstack docs github url>
 - project: openstack-dev/grenade
   upstream: git://github.com/nebula/grenade
   description: OpenStack upgrade testing tool

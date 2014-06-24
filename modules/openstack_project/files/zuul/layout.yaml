@@ -2422,6 +2422,12 @@ projects:
       - check-tempest-dsvm-neutron-trusty
       - check-grenade-dsvm-trusty
 
+  - name: openstack-dev/devstack-doc
+    check:
+      - gate-devstack-doc-docs
+    gate:
+      - gate-devstack-doc-docs
+
   - name: openstack-dev/grenade
     check:
       - check-grenade-dsvm
