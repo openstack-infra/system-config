@@ -611,6 +611,8 @@ jobs:
     voting: false
   - name: gate-blazar-devstack-dsvm
     voting: false
+  - name: gate-blazar-pylint
+    voting: false
   - name: gate-storyboard-python33
     voting: false
   - name: gate-oslo-incubator-python33
@@ -3149,6 +3151,7 @@ projects:
       - name: check-requirements
     check:
       - gate-blazar-devstack-dsvm
+      - gate-blazar-pylint
     pre-release:
       - blazar-tarball
     release:
