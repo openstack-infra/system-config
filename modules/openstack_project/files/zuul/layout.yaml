@@ -4665,3 +4665,11 @@ projects:
       - gate-octavia-python26
       - gate-octavia-python27
       - gate-octavia-python33
+
+  - name: stackforge/subunit2sql
+    check:
+      - gate-subunit2sql-pep8
+      - gate-subunit2sql-python27
+    gate:
+      - gate-subunit2sql-pep8
+      - gate-subunit2sql-python27

@@ -54,6 +54,7 @@ openstack-infra:
       - openstack/requirements
       - stackforge/gertty
       - stackforge/python-jenkins
+      - stackforge/subunit2sql
     branches:
       - master
       - feature/gearman
@@ -230,6 +231,7 @@ openstack-qa:
       - openstack-dev/grenade
       - openstack-infra/elastic-recheck
       - openstack-infra/devstack-gate
+      - stackforge/subunit2sql
     branches:
       - master
 
