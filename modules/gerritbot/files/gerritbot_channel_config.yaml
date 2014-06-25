@@ -529,6 +529,18 @@ storyboard:
     branches:
       - master
 
+surveil:
+    events:
+      - patchset-created
+      - change-merged
+      - x-vrif-minus-2
+    projects:
+      - stackforge/surveil
+      - stackforge/python-surveilclient
+      - stackforge/surveil-specs
+    branches:
+      - master
+
 milk-dev:
     events:
       - patchset-created

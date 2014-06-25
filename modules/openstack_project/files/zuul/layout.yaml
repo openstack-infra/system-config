@@ -4400,6 +4400,12 @@ projects:
     gate:
       - gate-solum-dashboard-pypy
 
+  - name: stackforge/python-surveilclient
+    check:
+      - noop
+    gate:
+      - noop
+
   - name: stackforge/rally
     template:
       - name: check-requirements
@@ -4665,6 +4671,18 @@ projects:
     gate:
       - gate-stacktach-pep8
       - gate-stacktach-python27
+
+  - name: stackforge/surveil
+    check:
+      - noop
+    gate:
+      - noop
+
+  - name: stackforge/surveil-specs
+    check:
+      - noop
+    gate:
+      - noop
 
   - name: stackforge/xenapi-os-testing
     check:
