@@ -233,7 +233,9 @@ end
 def run_test(image = @options.image)
     # XXX For testing purposes only. Run systest job for every 10th build.
     # To check how this job scales..
-    return 0 if ((ENV['BUILD_NUMBER'] || 1) % 10) != 0
+    build_id = 1
+    build_id = ENV['BUILD_NUMBER'].to_i unless ENV['BUILD_NUMBER'].nil?
+    return 0 if (build_id % 10) != 0
 
     Vm.create_subslaves(@options.nodes)
     setup_contrail(image)
