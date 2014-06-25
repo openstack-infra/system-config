@@ -224,6 +224,9 @@
   group: openstack-api-site
   options:
     - direct-release
+- project: openstack-infra/subunit2sql
+  description: Tooling for converting subunit streams into a SQL DB
+  upstream: https://github.com/mtreinish/subunit2sql
 - project: openstack/barbican
   description: Barbican is a ReST API designed for the secure storage, provisioning and management of secrets, including in OpenStack environments.
   upstream: git://github.com/cloudkeep/barbican.git
