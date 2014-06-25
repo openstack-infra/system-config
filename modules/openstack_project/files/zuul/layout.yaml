@@ -413,6 +413,8 @@ jobs:
     branch: ^master.*$
   - name: gate-tempest-dsvm-full
     queue-name: integrated
+  - name: check-rally-dsvm-neutron-neutron
+    voting: false
   - name: ^(gate|check)-tempest-dsvm-neutron-full$
     voting: false
   - name: ^(gate|check)-tempest-dsvm-neutron-full-icehouse$
@@ -1016,6 +1018,7 @@ projects:
       - name: integrated-gate-neutron
     check:
       - check-neutron-dsvm-functional
+      - check-rally-dsvm-neutron-neutron
       - check-tempest-dsvm-neutron-2
       - check-tempest-dsvm-neutron-pg-2
     gate:
