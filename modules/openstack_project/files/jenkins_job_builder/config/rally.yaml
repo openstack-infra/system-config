@@ -105,6 +105,11 @@
           #/bin/bash -xe
           export PROJECTS="stackforge/rally $PROJECTS"
           export ENABLED_SERVICES=rally
+
+          function pre_test_hook {
+              # Install rally-devstack integration
+              cp -r $BASE/new/rally/contrib/devstack/* $BASE/new/devstack
+          }
           function post_test_hook {
               cd $BASE/new/rally
               sudo -H -u stack tox -ecli -v
