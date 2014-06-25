@@ -2837,6 +2837,16 @@
       - python-jobs
 
 - project:
+    name: subunit2sql
+    github-org: stackforge
+    node: bare-trusty
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - python-jobs
+
+
+- project:
     name: python-magnetodbclient
     github-org: stackforge
     node: bare-precise

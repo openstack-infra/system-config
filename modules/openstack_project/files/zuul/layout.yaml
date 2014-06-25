@@ -4762,6 +4762,14 @@ projects:
     post:
       - training-guides-tox-doc-publishdocs
 
+  - name: stackforge/subunit2sql
+    check:
+      - gate-subunit2sql-pep8
+      - gate-subunit2sql-python27
+    gate:
+      - gate-subunit2sql-pep8
+      - gate-subunit2sql-python27
+
   - name: stackforge/octavia
     check:
       - gate-octavia-pep8
