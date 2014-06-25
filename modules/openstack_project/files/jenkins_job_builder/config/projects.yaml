@@ -2682,6 +2682,15 @@
       - python-jobs
 
 - project:
+    name: ec2-api
+    github-org: stackforge
+    node: bare-precise
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - python-jobs
+
+- project:
     name: gnocchi
     github-org: stackforge
     node: 'bare-precise || bare-trusty'
