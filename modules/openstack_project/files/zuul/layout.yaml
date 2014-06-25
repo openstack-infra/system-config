@@ -1004,6 +1004,14 @@ projects:
       - marconi-tarball
       - marconi-docs
 
+  - name: openstack/marconi-specs
+    check:
+      - gate-marconi-specs-python27
+      - gate-marconi-specs-docs
+    gate:
+      - gate-marconi-specs-python27
+      - gate-marconi-specs-docs
+
   - name: openstack/neutron
     template:
       - name: python-jobs

@@ -435,6 +435,7 @@ openstack-marconi:
       - x-vrif-minus-2
     projects:
       - openstack/marconi
+      - openstack/marconi-specs
       - openstack/python-marconiclient
     branches:
       - master

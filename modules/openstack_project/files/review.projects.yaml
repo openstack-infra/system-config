@@ -296,6 +296,9 @@
   group: keystone
   upstream: git://github.com/morganfainberg/keystonemiddleware
 - project: openstack/marconi
+- project: openstack/marconi-specs
+  group: marconi
+  upstream: git://github.com/FlaPer87/marconi-specs.git
 - project: openstack/netconn-api
   group: openstack-api-site
   options:
