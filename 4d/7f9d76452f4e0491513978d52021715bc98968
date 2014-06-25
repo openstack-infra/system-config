@@ -1,0 +1,12 @@
+Code-Review+2: James E. Blair <corvus@inaugust.com>
+Workflow+1: James E. Blair <corvus@inaugust.com>
+Verified+2: Jenkins
+Code-Review+1: Elizabeth K. Joseph <lyz@princessleia.com>
+Code-Review+1: Khai Do <zaro0508@gmail.com>
+Code-Review+2: Joshua Hesketh <joshua.hesketh@rackspace.com>
+Code-Review+1: Matthew Oliver <matt@oliver.net.au>
+Submitted-by: Jenkins
+Submitted-at: Wed, 25 Jun 2014 22:04:38 +0000
+Reviewed-on: https://review.openstack.org/100305
+Project: openstack-infra/config
+Branch: refs/heads/master
