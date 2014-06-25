@@ -61,6 +61,16 @@ class nodepool (
     ],
   }
 
+  $packages = [
+    'kpartx',
+    'qemu-utils',
+    'debootstrap'
+  ]
+
+  package { $packages:
+    ensure => present,
+  }
+
   file { '/etc/mysql/conf.d/max_connections.cnf':
     ensure  => present,
     content => "[server]\nmax_connections = 8192\n",
