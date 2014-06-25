@@ -1017,6 +1017,9 @@
 - project: stackforge/stacktach
   description: Event-based Debugging, Monitoring and Billing solution for OpenStack.
   upstream: https://github.com/rackerlabs/stacktach.git
+- project: stackforge/subunit2sql
+  description: Tooling for converting subunit streams into a SQL DB
+  upstream: https://github.com/mtreinish/subunit2sql
 - project: stackforge/swift-ceph-backend
   description: Ceph backend for Swift
   upstream: git://github.com/enovance/swift-ceph-backend.git
