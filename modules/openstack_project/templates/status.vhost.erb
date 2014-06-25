@@ -12,15 +12,6 @@ NameVirtualHost <%= vhost_name %>:<%= port %>
 <% end -%>
   DocumentRoot <%= docroot %>
 
-  RewriteEngine on
-
-  RewriteRule ^/rechecks$ /rechecks/ [R]
-  RewriteRule ^/rechecks/$ http://zuul.openstack.org/rechecks.html [P]
-  <Location /rechecks/>
-    Order allow,deny
-    Allow from all
-  </Location>
-
   Alias /bugday /srv/static/bugdaystats
   <Directory /srv/static/bugdaystats>
       AllowOverride None
@@ -54,6 +45,7 @@ NameVirtualHost <%= vhost_name %>:<%= port %>
       allow from all
   </Directory>
 
+  RedirectMatch permanent ^/rechecks(.*) /elastic-recheck
   Alias /elastic-recheck /usr/local/share/elastic-recheck
   <Directory /usr/local/share/elastic-recheck>
       AllowOverride None
