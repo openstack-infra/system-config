@@ -126,12 +126,18 @@ the upstream Jenkins results, use a template for each result matching::
 Requesting a Service Account
 ----------------------------
 
+In order to post comments as a Third Party CI System and eventually verify
+your build status on Gerrit patches, you will need a dedicated Gerrit
+system account. This account is created by a member of the OpenStack
+Infrastructure team, you are unable to create this account yourself. This
+account has no access via the GUI to modify settings.
+
 Feel free to contact the OpenStack Infrastructure Team via
 `email <mailto:openstack-infra@lists.openstack.org>`_,
 `bug report <https://bugs.launchpad.net/openstack-ci/>`_
-or in the #openstack-infra IRC channel to arrange setting up a dedicated user
-(so your system can post reviews and vote using a system name rather than your
-user name). We'll want a few additional details:
+or in the #openstack-infra IRC channel to arrange setting up a dedicated account
+(so your system can post comments and verify build status). We'll want a few
+additional details:
 
   1. The public SSH key described above (if using OpenSSH, this would be the
   full contents of the account's ~/.ssh/id_rsa.pub file after running
