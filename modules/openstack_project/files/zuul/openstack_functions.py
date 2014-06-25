@@ -43,8 +43,8 @@ def devstack_params(item, job, params):
     # This is necessary to get the gearman plugin to register
     # gearman jobs with both node labels.
     if ((hasattr(change, 'branch') and
-        change.branch == 'stable/havana' or
-        change.branch == 'stable/icehouse') or
+        (change.branch == 'stable/havana' or
+        change.branch == 'stable/icehouse')) or
         ('havana' in job.name or
         'icehouse' in job.name or
         'precise' in job.name)):
@@ -67,8 +67,8 @@ def default_params_trusty(item, job, params):
     # This is necessary to get the gearman plugin to register
     # gearman jobs with both node labels.
     if ((hasattr(change, 'branch') and
-        change.branch == 'stable/havana' or
-        change.branch == 'stable/icehouse') or
+        (change.branch == 'stable/havana' or
+        change.branch == 'stable/icehouse')) or
         ('havana' in job.name or
         'icehouse' in job.name or
         'precise' in job.name)):
