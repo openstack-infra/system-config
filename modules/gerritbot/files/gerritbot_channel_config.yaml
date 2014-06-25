@@ -47,6 +47,7 @@ openstack-infra:
       - openstack-infra/statusbot
       - openstack-infra/storyboard
       - openstack-infra/storyboard-webclient
+      - openstack-infra/subunit2sql
       - openstack-infra/vinz
       - openstack-infra/vinz-webclient
       - openstack-infra/zuul
@@ -54,6 +55,7 @@ openstack-infra:
       - openstack/requirements
       - stackforge/gertty
       - stackforge/python-jenkins
+
     branches:
       - master
       - feature/gearman
@@ -233,6 +235,7 @@ openstack-qa:
       - openstack-dev/grenade
       - openstack-infra/elastic-recheck
       - openstack-infra/devstack-gate
+      - openstack-infra/subunit2sql
     branches:
       - master
 
