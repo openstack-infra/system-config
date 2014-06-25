@@ -823,6 +823,9 @@
   group: murano
   upstream: git://github.com/Mirantis/murano-tests.git
   acl-config: /home/gerrit2/acls/stackforge/murano.config
+- project: stackforge/puppet-n1k-vsm
+  description: Foreman Puppet installer for Cisco N1KV Virtual Supervisor Module  
+  upstream: git://github.com/CiscoSystems/puppet-n1k-vsm
 - project: stackforge/nova-docker
   description: Docker driver for OpenStack Nova
   upstream: git://github.com/russellb/nova-docker.git

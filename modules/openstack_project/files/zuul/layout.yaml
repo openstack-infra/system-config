@@ -4738,3 +4738,10 @@ projects:
       - gate-octavia-python26
       - gate-octavia-python27
       - gate-octavia-python33
+
+  - name: stackforge/puppet-n1k-vsm
+    check:
+    - noop
+    gate:
+    - noop
+
