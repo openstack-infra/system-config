@@ -124,6 +124,17 @@
 
 
 - project:
+    name: python-monascaclient
+    github-org: stackforge
+    node: bare-precise
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - python-jobs
+      - pypi-jobs
+
+
+- project:
     name: python-muranoclient
     github-org: stackforge
     node: 'bare-precise || bare-trusty'
