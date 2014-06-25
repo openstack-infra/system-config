@@ -1043,6 +1043,9 @@
 - project: stackforge/surveil
   description: Monitoring as a Service for OpenStack
 - project: stackforge/surveil-specs
+- project: stackforge/subunit2sql
+  description: Tooling for converting subunit streams into a SQL DB
+  upstream: https://github.com/mtreinish/subunit2sql
 - project: stackforge/swift-ceph-backend
   description: Ceph backend for Swift
   upstream: git://github.com/enovance/swift-ceph-backend.git

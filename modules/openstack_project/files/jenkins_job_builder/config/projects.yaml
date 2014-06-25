@@ -2847,3 +2847,12 @@
     jobs:
       - gate-{name}-python27
       - gate-{name}-docs
+
+- project:
+    name: subunit2sql
+    github-org: stackforge
+    node: bare-trusty
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - python-jobs
