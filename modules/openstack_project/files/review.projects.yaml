@@ -528,6 +528,10 @@
   description: Automating Distributed System Deployment to Baremetal Resources
   upstream: git://github.com/huawei-cloud/compass-core.git
   acl-config: /home/gerrit2/acls/stackforge/compass.config
+- project: stackforge/compass-monit
+  group: compass
+  description: Compass related monitoring
+  acl-config: /home/gerrit2/acls/stackforge/compass.config
 - project: stackforge/compass-web
   group: compass
   description: A web-based UI consuming the Restful API service provided by Compass

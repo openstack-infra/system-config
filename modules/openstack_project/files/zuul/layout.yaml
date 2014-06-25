@@ -3243,6 +3243,12 @@ projects:
       - gate-compass-core-python26
       - gate-compass-core-python27
 
+  - name: stackforge/compass-monit
+    check:
+      - noop
+    gate:
+      - noop
+
   - name: stackforge/compass-web
     check:
       - noop

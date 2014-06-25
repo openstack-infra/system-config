@@ -602,6 +602,7 @@ syscompass:
     projects:
       - stackforge/compass-adapters
       - stackforge/compass-core
+      - stackforge/compass-monit
       - stackforge/compass-web
     branches:
       - master
