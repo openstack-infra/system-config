@@ -1,7 +1,7 @@
 # This is a non-standard docs job because it uses SCP instead of FTP
 - job:
     name: zuul-docs
-    node: bare-precise
+    node: 'bare-precise || bare-trusty'
 
     builders:
       - revoke-sudo
@@ -21,7 +21,7 @@
 
 - job:
     name: 'dev-zuul-coverage'
-    node: bare-precise
+    node: 'bare-precise || bare-trusty'
 
     builders:
       - revoke-sudo
@@ -55,4 +55,4 @@
       - test-results
       - console-log
 
-    node: bare-precise
+    node: 'bare-precise || bare-trusty'

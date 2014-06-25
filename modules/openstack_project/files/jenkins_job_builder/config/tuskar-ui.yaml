@@ -1,6 +1,6 @@
 - job:
     name: gate-tuskar-ui-selenium
-    node: bare-precise
+    node: 'bare-precise || bare-trusty'
 
     builders:
       - revoke-sudo
@@ -14,7 +14,7 @@
 
 - job:
     name: gate-tuskar-ui-jshint
-    node: bare-precise
+    node: 'bare-precise || bare-trusty'
 
     builders:
       - revoke-sudo

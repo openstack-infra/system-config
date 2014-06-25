@@ -1,6 +1,6 @@
 - job:
     name: gate-openstackid-unittests
-    node: 'bare-precise'
+    node: 'bare-precise || bare-trusty'
 
     builders:
         - revoke-sudo

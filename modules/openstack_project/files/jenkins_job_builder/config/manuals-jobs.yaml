@@ -1,7 +1,7 @@
 - job-template:
     name: 'openstack-install-deploy-guide-{lang}'
 
-    node: bare-precise
+    node: 'bare-precise || bare-trusty'
 
     builders:
       - revoke-sudo
@@ -17,7 +17,7 @@
 - job-template:
     name: 'openstack-misc-guides-{lang}'
 
-    node: bare-precise
+    node: 'bare-precise || bare-trusty'
 
     builders:
       - revoke-sudo

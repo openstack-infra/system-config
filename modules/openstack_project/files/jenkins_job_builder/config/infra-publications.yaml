@@ -1,7 +1,7 @@
 # simply copy the contents of the repository to the server, no building needed
 - job:
     name: infra-publications-publish
-    node: bare-precise
+    node: 'bare-precise || bare-trusty'
 
     builders:
       - revoke-sudo
@@ -28,7 +28,7 @@
 
 - job:
     name: infra-publications-publish-index
-    node: bare-precise
+    node: 'bare-precise || bare-trusty'
 
     builders:
       - revoke-sudo

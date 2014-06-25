@@ -1312,7 +1312,7 @@
 
 - job:
     name: gate-devstack-gate-unittests
-    node: bare-precise
+    node: 'bare-precise || bare-trusty'
 
     builders:
       - revoke-sudo
