@@ -231,6 +231,10 @@ def run_sanity(fab_test)
 end
 
 def run_test(image = @options.image)
+    # XXX For testing purposes only. Run systest job for every 10th build.
+    # To check how this job scales..
+    return 0 if ((ENV['BUILD_NUMBER'] || 1) % 10) != 0
+
     Vm.create_subslaves(@options.nodes)
     setup_contrail(image)
     install_contrail
@@ -350,7 +354,7 @@ if __FILE__ == $0 then
     # Ignore exit code from now onwards..
     Sh.always_exit_as_success = true
 
-    exit_code = 0 # run_test
+    exit_code = run_test
 
     # Check if systest failures are to be ignored, for the moment.
     if exit_code != 0 then
