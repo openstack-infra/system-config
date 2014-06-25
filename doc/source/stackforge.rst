@@ -166,7 +166,7 @@ It should look something like::
       - project-name-coverage
 
 If you aren't ready to run any gate tests yet and did not configure
-python-jobs in project.yaml, it should look like this instead::
+python-jobs in projects.yaml, it should look like this instead::
 
   - name: stackforge/project-name
     check:
