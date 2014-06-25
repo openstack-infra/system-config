@@ -50,6 +50,12 @@ Requirements
     * logs should include a trace of the commands used
   * OpenStack logs
   * Tempest logs (including ``testr_results.html.gz``)
+* Some repositories will not accept CI comments or verification. If your
+  system comments on these repositories, you will be asked to stop. If
+  you do not stop, your system will be disabled by OpenStack Infra.
+  Repositories include:
+    * devstack-gate
+    * governance
 
 
 Reading the Event Stream
