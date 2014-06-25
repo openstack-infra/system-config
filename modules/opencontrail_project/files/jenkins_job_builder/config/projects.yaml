@@ -76,3 +76,13 @@
 
     jobs:
       - contrail-flake8-jobs
+
+- project:
+    name: contrail-neutron-plugin
+    github-org: Juniper
+    node: juniper-tests
+    tarball-site: tarballs.openstack.org
+    doc-publisher-site: docs.opencontrail.org
+
+    jobs:
+      - contrail-flake8-jobs

@@ -37,3 +37,8 @@
   description: Contrail XML schema code generator
   upstream: git@github.com:Juniper/contrail-generateDS
   acl-config: /home/gerrit2/acls/Juniper/contrail-generateDS.config
+
+- project: Juniper/contrail-neutron-plugin
+  description: Opencontrail Neutron plugin and extensions
+  upstream: git@github.com:Juniper/contrail-neutron-plugin
+  acl-config: /home/gerrit2/acls/Juniper/contrail-neutron-plugin.config
