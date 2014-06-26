@@ -90,7 +90,7 @@ a single project you will want to do the following:
      [access "refs/heads/*"]
              label-Code-Review = -2..+2 group project-name-core
              label-Workflow = -1..+1 group project-name-core
-     [access "refs/heads/milestone-proposed"]
+     [access "refs/heads/proposed/*"]
              label-Code-Review = -2..+2 group project-name-milestone
              label-Workflow = -1..+1 group project-name-milestone
      [project]
