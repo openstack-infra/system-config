@@ -193,6 +193,11 @@
       - shell: "/usr/local/jenkins/slave_scripts/run-unittests.sh 33 {github-org} {project}"
 
 - builder:
+    name: python34
+    builders:
+      - shell:  "/usr/local/jenkins/slave_scripts/run-unittests.sh 34 {github-org} {project}"
+
+- builder:
     name: pypy
     builders:
       - shell: "/usr/local/jenkins/slave_scripts/run-unittests.sh py {github-org} {project}"
