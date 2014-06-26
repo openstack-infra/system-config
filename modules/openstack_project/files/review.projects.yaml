@@ -562,6 +562,31 @@
   acl-config: /home/gerrit2/acls/stackforge/chef-cookbooks.config
   options:
     - direct-release
+- project: stackforge/cookbook-monasca-agent
+  description: Chef Cookbook - Monasca Agent
+  group: monasca
+  upstream: git://github.com/hpcloud-mon/cookbooks-mon_agent
+  acl-config: /home/gerrit2/acls/stackforge/monasca.config
+- project: stackforge/cookbook-monasca-api
+  description: Chef Cookbook - Monasca REST API
+  group: monasca
+  upstream: git://github.com/hpcloud-mon/cookbooks-mon_api
+  acl-config: /home/gerrit2/acls/stackforge/monasca.config
+- project: stackforge/cookbook-monasca-notification
+  description: Chef Cookbook - Monasca Notification Engine
+  group: monasca
+  upstream: git://github.com/hpcloud-mon/cookbooks-mon_notification
+  acl-config: /home/gerrit2/acls/stackforge/monasca.config
+- project: stackforge/cookbook-monasca-persister
+  description: Chef Cookbook - Monasca Database Persister
+  group: monasca
+  upstream: git://github.com/hpcloud-mon/cookbooks-mon_persister
+  acl-config: /home/gerrit2/acls/stackforge/monasca.config
+- project: stackforge/cookbook-monasca-thresh
+  description: Chef Cookbook - Monasca Thresholding Engine
+  group: monasca
+  upstream: git://github.com/hpcloud-mon/cookbooks-mon_thresh
+  acl-config: /home/gerrit2/acls/stackforge/monasca.config
 - project: stackforge/cookbook-openstack-block-storage
   group: openstack-chef
   docimpact-group: openstack-chef
@@ -792,6 +817,51 @@
   group: mistral
   upstream: git://github.com/rakhmerov/mistral-extra.git
   acl-config: /home/gerrit2/acls/stackforge/mistral.config
+- project: stackforge/monasca-agent
+  description: Agent for Monasca
+  group: monasca
+  upstream: git://github.com/hpcloud-mon/mon-agent
+  acl-config: /home/gerrit2/acls/stackforge/monasca.config
+- project: stackforge/monasca-api
+  description: Monasca REST API
+  group: monasca
+  upstream: git://github.com/hpcloud-mon/mon-api
+  acl-config: /home/gerrit2/acls/stackforge/monasca.config
+- project: stackforge/monasca-ceilometer
+  description: Integration between Monasca and Ceilometer
+  group: monasca
+  upstream: git://github.com/hpcloud-mon/mon-ceilometer
+  acl-config: /home/gerrit2/acls/stackforge/monasca.config
+- project: stackforge/monasca-common
+  description: Monasca common classes
+  group: monasca
+  upstream: git://github.com/hpcloud-mon/mon-common
+  acl-config: /home/gerrit2/acls/stackforge/monasca.config
+- project: stackforge/monasca-notification
+  description: Notification Engine for Monasca
+  group: monasca
+  upstream: git://github.com/hpcloud-mon/mon-notification
+  acl-config: /home/gerrit2/acls/stackforge/monasca.config
+- project: stackforge/monasca-persister
+  description: Monasca Database Persister
+  group: monasca
+  upstream: git://github.com/hpcloud-mon/mon-persister
+  acl-config: /home/gerrit2/acls/stackforge/monasca.config
+- project: stackforge/monasca-thresh
+  description: Monasca Thresholding Engine
+  group: monasca
+  upstream: git://github.com/hpcloud-mon/mon-thresh
+  acl-config: /home/gerrit2/acls/stackforge/monasca.config
+- project: stackforge/monasca-ui
+  description: Horizon UI for Monasca
+  group: monasca
+  upstream: git://github.com/hpcloud-mon/mon-ui
+  acl-config: /home/gerrit2/acls/stackforge/monasca.config
+- project: stackforge/monasca-vagrant
+  description: Vagrant test environment for Monasca
+  group: monasca
+  upstream: git://github.com/hpcloud-mon/mon-vagrant
+  acl-config: /home/gerrit2/acls/stackforge/monasca.config
 - project: stackforge/MRaaS
 - project: stackforge/murano
   upstream: git://github.com/Mirantis/murano-api.git
