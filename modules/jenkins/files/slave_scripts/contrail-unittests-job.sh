@@ -94,7 +94,7 @@ function print_test_results() {
 function build_and_run_unittest() {
     # Goto the repo top directory.
     cd $WORKSPACE/repo
-    scons -j $SCONS_JOBS test1 2>&1 | tee $WORKSPACE/scons_test.log
+    scons -j $SCONS_JOBS test 2>&1 | tee $WORKSPACE/scons_test.log
     exit_code=$?
 
     # Exit in case of error
