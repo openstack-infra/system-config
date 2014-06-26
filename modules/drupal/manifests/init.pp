@@ -188,27 +188,38 @@ class drupal (
 
   # add site distro tarball from http repository including
   # md5 hash file
-  exec { "download:${package_branch}.tar.gz":
-    command   => "/usr/bin/wget ${package_repository}/${package_branch}.tar.gz -O /srv/downloads/${package_branch}.tar.gz",
-    creates   => "/srv/downloads/${package_branch}.tar.gz",
+  exec { "download:${package_branch}.md5":
+    command   => "/usr/bin/wget --timestamping ${package_repository}/${package_branch}.md5 -O /tmp/${package_branch}.md5",
     logoutput => 'on_failure',
-    require   => File['/srv/downloads'],
+    cwd       => '/tmp'
   }
 
-  exec { "download:${package_branch}.md5":
-    command   => "/usr/bin/wget ${package_repository}/${package_branch}.md5 -O /srv/downloads/${package_branch}.md5",
-    creates   => "/srv/downloads/${package_branch}.md5",
-    logoutput => 'on_failure',
-    require   => [ Exec["download:${package_branch}.tar.gz"] ],
+  file { "/srv/downloads/${package_branch}.md5":
+    ensure    => present,
+    source    => "/tmp/${package_branch}.md5",
+    owner     => 'root',
+    group     => 'root',
+    mode      => '0644',
+    require   => [ Exec["download:${package_branch}.md5"], File['/srv/downloads'] ]
+  }
+
+  exec { "download:${package_branch}.tar.gz":
+    command     => "/usr/bin/wget ${package_repository}/${package_branch}.tar.gz -O /srv/downloads/${package_branch}.tar.gz",
+    logoutput   => 'on_failure',
+    refreshonly => true,
+    subscribe   => File["/srv/downloads/${package_branch}.md5"],
+    require     => File['/srv/downloads'],
   }
 
   # deploy a site from scratch when site status is 'NOT INSTALLED'
   exec { "sitedeploy-${site_name}":
-    command   => "/usr/bin/drush dsd-init @${site_alias} /srv/downloads/${package_branch}.tar.gz",
-    logoutput => true,
-    timeout   => 600,
-    onlyif    => "/usr/bin/drush dsd-status @${site_alias} | /bin/grep -c 'NOT INSTALLED'",
-    require   => [
+    command     => "/usr/bin/drush dsd-init @${site_alias} /srv/downloads/${package_branch}.tar.gz",
+    logoutput   => true,
+    timeout     => 600,
+    onlyif      => "/usr/bin/drush dsd-status @${site_alias} | /bin/grep -c 'NOT INSTALLED'",
+    refreshonly => true,
+    subscribe   => File["/srv/downloads/${package_branch}.md5"],
+    require     => [
       Exec["download:${package_branch}.md5"],
       File['/etc/drush/aliases.drushrc.php'],
       ]
@@ -216,13 +227,16 @@ class drupal (
 
   # update the site into a new slot when a remote update available
   exec { "siteupdate-${site_name}":
-    command   => "/usr/bin/drush dsd-update @${site_alias} /srv/downloads/${package_branch}.tar.gz",
-    logoutput => true,
-    timeout   => 600,
-    onlyif    => "/usr/bin/drush dsd-status @${site_alias} | /bin/grep -c 'UPDATE'",
-    require   => [
+    command     => "/usr/bin/drush dsd-update @${site_alias} /srv/downloads/${package_branch}.tar.gz",
+    logoutput   => true,
+    timeout     => 600,
+    onlyif      => "/usr/bin/drush dsd-status @${site_alias} | /bin/grep -c 'UPDATE'",
+    refreshonly => true,
+    subscribe   => File["/srv/downloads/${package_branch}.md5"],
+    require     => [
       Exec["download:${package_branch}.md5"],
       File['/etc/drush/aliases.drushrc.php'],
+      Exec["sitedeploy-${site_name}"],
       ]
   }
 
