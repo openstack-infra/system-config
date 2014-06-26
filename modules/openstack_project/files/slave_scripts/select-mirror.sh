@@ -33,7 +33,9 @@ EOF
 
 # For project listed in openstack/requirements,
 # use the pypi.openstack.org mirror exclusively
-if grep -x "$org/$project" /opt/requirements/projects.txt 2>&1
+PIP_FALLBACK_FILE=/opt/requirements/pip_fallback_allowed.txt
+if grep -x "$org/$project" /opt/requirements/projects.txt 2>&1 &&
+	! grep -x "$org/$project" $PIP_FALLBACK_FILE > 1>&1 > /dev/null
 then
     export TOX_INDEX_URL='http://pypi.openstack.org/openstack'
     echo "Switching on internal pypi mirror $TOX_INDEX_URL for $org/$project"
