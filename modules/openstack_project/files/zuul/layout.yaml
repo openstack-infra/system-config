@@ -3679,6 +3679,13 @@ projects:
     post:
       - mistral-extra-branch-tarball
 
+  - name: stackforge/python-congressclient
+    check:
+      - gate-python-congressclient-pep8
+      - gate-python-congressclient-python27
+    gate:
+      - noop
+
   - name: stackforge/python-mistralclient
     template:
       - name: publish-to-pypi

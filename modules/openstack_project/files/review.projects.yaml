@@ -961,6 +961,8 @@
 - project: stackforge/python-blazarclient
   description: Client for OpenStack Blazar
   acl-config: /home/gerrit2/acls/stackforge/blazar.config
+- project: stackforge/python-congressclient
+  description: Client for OpenStack Congress
 - project: stackforge/python-designateclient
 - project: stackforge/python-jenkins
   upstream: git://github.com/jeblair/python-jenkins.git
