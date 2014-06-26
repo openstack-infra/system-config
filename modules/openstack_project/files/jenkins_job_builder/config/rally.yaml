@@ -39,7 +39,7 @@
 
           function pre_test_hook {{
               # Install rally-devstack integration
-              cp -r $BASE/new/rally/contrib/devstack/* $BASE/new/devstack
+              cp -r $BASE/new/rally/contrib/devstack/* $BASE/new/devstack/
           }}
           export -f pre_test_hook
 
@@ -108,12 +108,13 @@
 
           function pre_test_hook {
               # Install rally-devstack integration
-              cp -r $BASE/new/rally/contrib/devstack/* $BASE/new/devstack
+              cp -r $BASE/new/rally/contrib/devstack/* $BASE/new/devstack/
           }
           function post_test_hook {
               cd $BASE/new/rally
               sudo -H -u stack tox -ecli -v
           }
+          export -f pre_test_hook
           export -f post_test_hook
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
