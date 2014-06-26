@@ -664,8 +664,6 @@ jobs:
     voting: false
   - name: gate-tuskar-ui-selenium
     voting: false
-  - name: gate-pecan-tox-barbican-tip
-    voting: false
   # Swift log publishing details
   - name: ^experimental-swift-logs.*$
     swift:
@@ -3931,6 +3929,7 @@ projects:
       - gate-pecan-tox-ceilometer-tip
       - gate-pecan-tox-ironic-stable
       - gate-pecan-tox-ironic-tip
+      - gate-pecan-tox-barbican-tip
       - gate-pecan-tox-storyboard-tip
     post:
       - pecan-branch-tarball
