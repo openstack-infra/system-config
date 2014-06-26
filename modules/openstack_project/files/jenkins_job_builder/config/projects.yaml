@@ -78,6 +78,63 @@
       - pypi-jobs
 
 - project:
+    name: monasca-agent
+    github-org: stackforge
+    node: 'bare-precise || bare-trusty'
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - python-jobs
+      - pypi-jobs
+
+- project:
+    name: monasca-ceilometer
+    github-org: stackforge
+    node: 'bare-precise || bare-trusty'
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - python-jobs
+
+- project:
+    name: monasca-common
+    github-org: stackforge
+    node: 'bare-precise || bare-trusty'
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - maven-plugin-jobs
+
+- project:
+    name: monasca-notification
+    github-org: stackforge
+    node: 'bare-precise || bare-trusty'
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - python-jobs
+      - pypi-jobs
+
+- project:
+    name: monasca-thresh
+    github-org: stackforge
+    node: 'bare-precise || bare-trusty'
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - maven-plugin-jobs
+
+- project:
+    name: monasca-ui
+    github-org: stackforge
+    node: 'bare-precise || bare-trusty'
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - python-jobs
+      - pypi-jobs
+
+- project:
     name: python-mistralclient
     github-org: stackforge
     node: 'bare-precise || bare-trusty'
@@ -141,7 +198,7 @@
 - project:
     name: python-monascaclient
     github-org: stackforge
-    node: bare-precise
+    node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
     jobs:
@@ -1946,6 +2003,56 @@
 
 - project:
     name: cookbook-ceph
+    github-org: stackforge
+    node: 'bare-precise || bare-trusty'
+
+    jobs:
+      - gate-{name}-chef-lint
+      - gate-{name}-chef-style
+      - gate-{name}-chef-unit
+
+- project:
+    name: cookbook-monasca-agent
+    github-org: stackforge
+    node: 'bare-precise || bare-trusty'
+
+    jobs:
+      - gate-{name}-chef-lint
+      - gate-{name}-chef-style
+      - gate-{name}-chef-unit
+
+- project:
+    name: cookbook-monasca-api
+    github-org: stackforge
+    node: 'bare-precise || bare-trusty'
+
+    jobs:
+      - gate-{name}-chef-lint
+      - gate-{name}-chef-style
+      - gate-{name}-chef-unit
+
+- project:
+    name: cookbook-monasca-notification
+    github-org: stackforge
+    node: 'bare-precise || bare-trusty'
+
+    jobs:
+      - gate-{name}-chef-lint
+      - gate-{name}-chef-style
+      - gate-{name}-chef-unit
+
+- project:
+    name: cookbook-monasca-persister
+    github-org: stackforge
+    node: 'bare-precise || bare-trusty'
+
+    jobs:
+      - gate-{name}-chef-lint
+      - gate-{name}-chef-style
+      - gate-{name}-chef-unit
+
+- project:
+    name: cookbook-monasca-thresh
     github-org: stackforge
     node: 'bare-precise || bare-trusty'
 
