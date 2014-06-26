@@ -42,7 +42,7 @@ MODULES["puppetlabs-ntp"]="0.2.0"
 MODULES["openstackci-vcsrepo"]="0.0.8"
 
 MODULES["puppetlabs-apache"]="0.0.4"
-MODULES["puppetlabs-apt"]="1.1.0"
+MODULES["puppetlabs-apt"]="1.4.2"
 MODULES["puppetlabs-haproxy"]="0.4.1"
 MODULES["puppetlabs-mysql"]="0.6.1"
 MODULES["puppetlabs-postgresql"]="3.1.0"
