@@ -982,6 +982,7 @@
   description: Python client for Monasca REST API.
   group: monasca
   upstream: git://github.com/hpcloud-mon/python-monclient
+  acl-config: /home/gerrit2/acls/stackforge/monasca.config
 - project: stackforge/python-muranoclient
   group: murano
   upstream: git://github.com/Mirantis/python-muranoclient.git
