@@ -573,6 +573,8 @@ jobs:
     voting: false
   - name: gate-murano-requirements
     voting: false
+  - name: gate-murano-agent-requirements
+    voting: false
   - name: gate-python-muranoclient-requirements
     voting: false
   - name: gate-murano-dashboard-requirements
@@ -3722,10 +3724,14 @@ projects:
       - noop
 
   - name: stackforge/murano-agent
+    template:
+      - name: python-jobs
     check:
-      - noop
-    gate:
-      - noop
+      - gate-murano-agent-requirements
+    pre-release:
+      - murano-agent-tarball
+    release:
+      - murano-agent-tarball
 
   - name: stackforge/murano
     template:
@@ -3736,8 +3742,10 @@ projects:
       - gate-murano-devstack-dsvm
     gate:
       - gate-murano-devstack-dsvm
-    post:
-      - murano-branch-tarball
+    pre-release:
+      - murano-tarball
+    release:
+      - murano-tarball
 
   - name: stackforge/murano-common
     check:
