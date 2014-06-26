@@ -16,17 +16,40 @@
           #!/bin/bash -xe
           export PYTHONUNBUFFERED=true
           export DEVSTACK_GATE_TIMEOUT=60
-          export ENABLED_SERVICES=blazar,blazar-a,blazar-m
+          export DEVSTACK_GATE_TEMPEST=1
+          export ENABLED_SERVICES=blazar,blazar-a,blazar-m,tempest
           export PROJECTS="stackforge/blazar $PROJECTS"
           export PROJECTS="stackforge/blazar-nova $PROJECTS"
           export PROJECTS="stackforge/python-blazarclient $PROJECTS"
 
           function pre_test_hook {
               # Install blazar devstack integration
-              BLAZAR_BASE=/opt/stack/new/blazar/contrib/devstack
+              BLAZAR_BASE=/opt/stack/new/blazar
+              BLAZAR_DEVSTACK_BASE=$BLAZAR_BASE/contrib/devstack
               DEVSTACK_BASE=/opt/stack/new/devstack
-              cp $BLAZAR_BASE/lib/* $DEVSTACK_BASE/lib
-              cp $BLAZAR_BASE/extras.d/* $DEVSTACK_BASE/extras.d
+              cp $BLAZAR_DEVSTACK_BASE/lib/* $DEVSTACK_BASE/lib
+              cp $BLAZAR_DEVSTACK_BASE/extras.d/* $DEVSTACK_BASE/extras.d
+
+              # Install blazar tempest integration
+              # How many seconds to wait for the API to be responding before giving up
+              API_RESPONDING_TIMEOUT=20
+
+              if ! timeout ${API_RESPONDING_TIMEOUT} sh -c "while ! curl -s http://127.0.0.1:1234/ 2>/dev/null | grep -q 'Authentication required' ; do sleep 1; done"; then
+                  echo "Blazar API failed to respond within ${API_RESPONDING_TIMEOUT} seconds"
+                  exit 1
+              fi
+
+              echo "Successfully contacted Blazar API"
+
+              # Copying Tempest test suites
+              BLAZAR_TEMPEST_DIR=$BLAZAR_BASE/contrib/tempest
+              TEMPEST_DIR=${TEMPEST_DIR:-/opt/stack/new/tempest}
+              cp -R $BLAZAR_TEMPEST_DIR/tempest/* $TEMPEST_DIR/tempest
+
+              # Construct a regex to limiting scope of tempest
+              r="^(?:tempest\.cli\.simple_read_only\.test_resource_.*)"
+              r="$r|^(?:tempest\.scenario\.test_resource_.*)"
+              export DEVSTACK_GATE_TEMPEST_REGEX="$r"
           }
           export -f pre_test_hook
 
