@@ -14,7 +14,19 @@
 
 TAG=$1
 
-if $(git tag --contains origin/milestone-proposed | grep "^$TAG$" >/dev/null)
+# Only merge tag if there is one *proposed* branch at origin
+PROPOSED=$(git branch -r | grep proposed) || exit 0
+
+# If there is more than one *proposed* branch at origin, that's an error
+if [ "$(echo $PROPOSED | wc -w)" != "1" ]
+then
+    echo "Multiple proposed branches found:"
+    echo $PROPOSED
+    exit 1
+fi
+
+# Only merge release tag if it's on the proposed branch HEAD
+if $(git tag --contains origin/${PROPOSED:2} | grep "^$TAG$" >/dev/null)
 then
     git config user.name "OpenStack Proposal Bot"
     git config user.email "openstack-infra@lists.openstack.org"
