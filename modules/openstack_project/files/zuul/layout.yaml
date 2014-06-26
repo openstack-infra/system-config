@@ -463,6 +463,8 @@ jobs:
     voting: false
   - name: check-tempest-dsvm-f20
     voting: false
+  - name: gate-designate-devstack-dsvm
+    branch: ^(?!stable/(?:havana|icehouse)).*$
 # For Gerrit ver 2.4.x (using maven)
   - name: ^(gate|check)-gerrit-unittests$
     branch: ^openstack/2\.4.*$
