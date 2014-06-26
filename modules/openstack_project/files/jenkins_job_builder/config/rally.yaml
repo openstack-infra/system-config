@@ -114,6 +114,7 @@
               cd $BASE/new/rally
               sudo -H -u stack tox -ecli -v
           }
+          export -f pre_test_hook
           export -f post_test_hook
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
