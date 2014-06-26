@@ -14,8 +14,11 @@
 
 TAG=$1
 
-if $(git tag --contains origin/milestone-proposed | grep "^$TAG$" >/dev/null)
+# Only merge release tag if it's not on a stable branch
+if $(git branch -r --contains "$TAG" | grep "stable/" >/dev/null)
 then
+    echo "Tag $TAG was pushed to a stable branch, ignoring."
+else
     git config user.name "OpenStack Proposal Bot"
     git config user.email "openstack-infra@lists.openstack.org"
     git config gitreview.username "proposal-bot"
