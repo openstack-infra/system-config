@@ -52,7 +52,11 @@
               export BRIDGE_IP=10.1.0.1
               cd /opt/stack/new/trove-integration/scripts
               ./redstack kick-start {datastore}
-              ./redstack int-tests
+              DATASTORE_TYPE="{datastore}"
+              if [ "$DATASTORE_TYPE" == "mysql" ]; then
+                  ./redstack int-tests
+              else
+                  ./redstack int-tests --group DATASTORE_TYPE
           }}
           export -f post_test_hook
 
