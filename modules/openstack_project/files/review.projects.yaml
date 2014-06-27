@@ -815,10 +815,7 @@
   group: murano
   upstream: git://github.com/EkaterinaFedorova/python-metadataclient.git
   acl-config: /home/gerrit2/acls/stackforge/murano.config
-- project: stackforge/murano-repository
-  group: murano
-  upstream: git://github.com/EkaterinaFedorova/murano-repository
-  acl-config: /home/gerrit2/acls/stackforge/murano.config
+- project: stackforge-attic/murano-repository
 - project: stackforge/murano-tests
   group: murano
   upstream: git://github.com/Mirantis/murano-tests.git
