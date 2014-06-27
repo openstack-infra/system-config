@@ -2285,6 +2285,10 @@
       - gate-{name}-tox-{envlist}:
           envlist: ironic-tip
       - gate-{name}-tox-{envlist}:
+          envlist: designate-stable
+      - gate-{name}-tox-{envlist}:
+          envlist: designate-tip
+      - gate-{name}-tox-{envlist}:
           envlist: barbican-tip
       - gate-{name}-tox-{envlist}:
           envlist: storyboard-tip

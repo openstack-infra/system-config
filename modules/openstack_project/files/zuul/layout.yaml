@@ -3945,6 +3945,8 @@ projects:
       - gate-pecan-tox-ceilometer-tip
       - gate-pecan-tox-ironic-stable
       - gate-pecan-tox-ironic-tip
+      - gate-pecan-tox-designate-stable
+      - gate-pecan-tox-designate-tip
       - gate-pecan-tox-barbican-tip
       - gate-pecan-tox-storyboard-tip
     gate:
@@ -3959,6 +3961,8 @@ projects:
       - gate-pecan-tox-ceilometer-tip
       - gate-pecan-tox-ironic-stable
       - gate-pecan-tox-ironic-tip
+      - gate-pecan-tox-designate-stable
+      - gate-pecan-tox-designate-tip
       - gate-pecan-tox-barbican-tip
       - gate-pecan-tox-storyboard-tip
     post:
