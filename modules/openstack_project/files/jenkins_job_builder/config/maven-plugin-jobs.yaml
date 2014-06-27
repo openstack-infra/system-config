@@ -17,14 +17,8 @@
       - shell: |
           #!/bin/bash -xe
           /usr/local/jenkins/slave_scripts/version-properties.sh
-      - inject:
-          properties-file: version.properties
-      - maven-target:
-          maven-version: Maven3
-          pom: pom.xml
-          goals: 'clean package'
-          properties:
-            - project-version=${{PROJECT_VER}}
+          source version.properties
+          mvn clean package -Dproject-version=$PROJECT_VER
 
     publishers:
       - console-log
@@ -45,19 +39,13 @@
       - shell: |
           #!/bin/bash -xe
           /usr/local/jenkins/slave_scripts/version-properties.sh
-      - inject:
-          properties-file: version.properties
-      - maven-target:
-          maven-version: Maven3
-          pom: pom.xml
-          goals: 'clean package'
-          properties:
-            - project-version=${{PROJECT_VER}}
+          source version.properties
+          mvn clean package -Dproject-version=$PROJECT_VER
 
     publishers:
       - war:
           site: '{tarball-site}'
-          warfile: 'target/{name}-${{PROJECT_VER}}.jar'
+          warfile: 'target/{name}-*.jar'
           target: 'tarballs/ci/{name}'
       - console-log
 
