@@ -351,7 +351,7 @@ class gerrit(
   # - $robots_txt_source
   apache::vhost { $vhost_name:
     port     => 443,
-    docroot  => 'MEANINGLESS ARGUMENT',
+    docroot  => '/tmp/meaningless_docroot',
     priority => '50',
     template => 'gerrit/gerrit.vhost.erb',
     ssl      => true,
