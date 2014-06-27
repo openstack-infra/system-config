@@ -710,8 +710,6 @@ jobs:
       - name: logs
   - name: gate-tuskar-ui-jshint
     voting: false
-  - name: gate-devstack-bashate
-    voting: false
 
 # The project list is grouped by type of project, and within each
 # group, projects are sorted (mostly) alphabetically.
