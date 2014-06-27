@@ -485,6 +485,8 @@
   group: openstack-api-site
   options:
     - direct-release
+- project: stackforge-attic/murano-metadataclient
+- project: stackforge-attic/murano-repository
 - project: stackforge/anvil
   description: A set of python scripts and utilities to forge raw openstack into a productive tool!
   upstream: git://github.com/yahoo/Openstack-Anvil.git
@@ -811,11 +813,6 @@
   group: murano
   upstream: git://github.com/Mirantis/murano-docs.git
   acl-config: /home/gerrit2/acls/stackforge/murano.config
-- project: stackforge/murano-metadataclient
-  group: murano
-  upstream: git://github.com/EkaterinaFedorova/python-metadataclient.git
-  acl-config: /home/gerrit2/acls/stackforge/murano.config
-- project: stackforge-attic/murano-repository
 - project: stackforge/murano-tests
   group: murano
   upstream: git://github.com/Mirantis/murano-tests.git
