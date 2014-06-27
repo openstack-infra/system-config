@@ -489,6 +489,7 @@
 - project: stackforge-attic/murano-conductor
 - project: stackforge-attic/murano-metadataclient
 - project: stackforge-attic/murano-repository
+- project: stackforge-attic/murano-tests
 - project: stackforge/anvil
   description: A set of python scripts and utilities to forge raw openstack into a productive tool!
   upstream: git://github.com/yahoo/Openstack-Anvil.git
@@ -806,10 +807,6 @@
 - project: stackforge/murano-docs
   group: murano
   upstream: git://github.com/Mirantis/murano-docs.git
-  acl-config: /home/gerrit2/acls/stackforge/murano.config
-- project: stackforge/murano-tests
-  group: murano
-  upstream: git://github.com/Mirantis/murano-tests.git
   acl-config: /home/gerrit2/acls/stackforge/murano.config
 - project: stackforge/nova-docker
   description: Docker driver for OpenStack Nova
