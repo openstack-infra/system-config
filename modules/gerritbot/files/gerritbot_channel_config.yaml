@@ -74,6 +74,7 @@ openstack-doc:
     projects:
       - openstack/api-site
       - openstack/compute-api
+      - openstack/docs-specs
       - openstack/identity-api
       - openstack/image-api
       - openstack/netconn-api

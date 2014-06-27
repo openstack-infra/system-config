@@ -351,6 +351,14 @@ project-templates:
     periodic:
       - '{name}-manuals-propose-translation-update'
 
+  - name: openstack/docs-specs
+    check:
+      - gate-docs-specs-docs
+      - gate-sahara-specs-python27
+    gate:
+      - gate-docs-specs-docs
+      - gate-docs-specs-python27
+
   - name: infra-publish-jobs
     check:
       - 'gate-{name}-docs'
