@@ -254,6 +254,9 @@
   group: django-openstack-auth
   description: A Django authentication backend for use with the OpenStack Keystone Identity backend.
   upstream: git://github.com/gabrielhurley/django_openstack_auth.git
+- project: openstack/docs-specs
+  group: openstack-manuals
+  upstream: https://github.com/annegentle/docs-specs.git
 - project: openstack/gantt
   description: Common scheduler for OpenStack.
   upstream: git://github.com/n0ano/gantt.git
