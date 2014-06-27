@@ -433,6 +433,8 @@ jobs:
     parameter-function: set_node_options_default_trusty
   - name: ^gate-python-ironicclient.*$
     parameter-function: set_node_options_default_trusty
+  - name: ^gate-python-keystoneclient.*$
+    parameter-function: set_node_options_default_trusty
   # tempest and d-g branchless tests need to only run on master
   # (needs to be early to not impact non-voting stanzas later)
   - name: ^.*(-icehouse|-havana)$
