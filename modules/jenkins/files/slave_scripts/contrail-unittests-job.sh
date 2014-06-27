@@ -32,7 +32,7 @@ function build_unittest() {
 }
 
 function archive_failed_test_logs() {
-    find $WORKSPACE/repo/build -name "*.log" |\grep -w test | xargs \grep -lw FAILED | xargs tar -zvcf --ignore-failed-read $WORKSPACE/failed_unit_test_logs.tgz
+    find $WORKSPACE/repo/build -name "*.log" |\grep -w test | xargs \grep -lw FAILED | xargs tar --ignore-failed-read -zvcf $WORKSPACE/failed_unit_test_logs.tgz
     if [ ! -f $WORKSPACE/failed_unit_test_logs.tgz ]; then
         return
     fi
