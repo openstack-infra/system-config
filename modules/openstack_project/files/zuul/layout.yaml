@@ -3845,12 +3845,6 @@ projects:
     gate:
       - noop
 
-  - name: stackforge/murano-repository
-    check:
-      - noop
-    gate:
-      - noop
-
   - name: stackforge/murano-tests
     check:
       - noop
