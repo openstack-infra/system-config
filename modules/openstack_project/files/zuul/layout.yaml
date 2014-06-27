@@ -3796,12 +3796,6 @@ projects:
     release:
       - murano-tarball
 
-  - name: stackforge/murano-conductor
-    check:
-      - noop
-    gate:
-      - noop
-
   - name: stackforge/murano-dashboard
     check:
       - gate-murano-dashboard-pep8
