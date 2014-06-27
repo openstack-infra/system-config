@@ -3796,12 +3796,6 @@ projects:
     release:
       - murano-tarball
 
-  - name: stackforge/murano-common
-    check:
-      - noop
-    gate:
-      - noop
-
   - name: stackforge/murano-conductor
     check:
       - noop
