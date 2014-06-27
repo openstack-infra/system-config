@@ -485,6 +485,7 @@
   group: openstack-api-site
   options:
     - direct-release
+- project: stackforge-attic/murano-common
 - project: stackforge-attic/murano-metadataclient
 - project: stackforge-attic/murano-repository
 - project: stackforge/anvil
@@ -792,10 +793,6 @@
 - project: stackforge/murano-agent
   group: murano
   upstream: git://github.com/Mirantis/murano-agent.git
-  acl-config: /home/gerrit2/acls/stackforge/murano.config
-- project: stackforge/murano-common
-  group: murano
-  upstream: git://github.com/sergmelikyan/murano-common.git
   acl-config: /home/gerrit2/acls/stackforge/murano.config
 - project: stackforge/murano-conductor
   group: murano
