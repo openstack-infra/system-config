@@ -2448,6 +2448,16 @@
       - openstack-misc-guides-{lang}
 
 - project:
+    name: docs-specs
+    github-org: openstack
+    node: bare-precise
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - gate-{name}-docs
+      - gate-{name}-python27
+
+- project:
     name: operations-guide
     github-org: openstack
     node: 'bare-precise || bare-trusty'
