@@ -313,7 +313,6 @@ murano:
     projects:
       - stackforge/murano
       - stackforge/murano-agent
-      - stackforge/murano-conductor
       - stackforge/murano-dashboard
       - stackforge/murano-deployment
       - stackforge/murano-docs

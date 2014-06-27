@@ -486,6 +486,7 @@
   options:
     - direct-release
 - project: stackforge-attic/murano-common
+- project: stackforge-attic/murano-conductor
 - project: stackforge-attic/murano-metadataclient
 - project: stackforge-attic/murano-repository
 - project: stackforge/anvil
@@ -793,10 +794,6 @@
 - project: stackforge/murano-agent
   group: murano
   upstream: git://github.com/Mirantis/murano-agent.git
-  acl-config: /home/gerrit2/acls/stackforge/murano.config
-- project: stackforge/murano-conductor
-  group: murano
-  upstream: git://github.com/Mirantis/murano-conductor.git
   acl-config: /home/gerrit2/acls/stackforge/murano.config
 - project: stackforge/murano-dashboard
   group: murano
