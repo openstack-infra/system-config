@@ -2463,20 +2463,20 @@ projects:
 
 # Section: OpenStack development projects
 
-  - name: openstack-dev/bash8
+  - name: openstack-dev/bashate
     template:
       - name: publish-to-pypi
     check:
-      - gate-bash8-pep8
-      - gate-bash8-python26
-      - gate-bash8-python27
+      - gate-bashate-pep8
+      - gate-bashate-python26
+      - gate-bashate-python27
     gate:
-      - gate-bash8-pep8
-      - gate-bash8-python26
-      - gate-bash8-python27
+      - gate-bashate-pep8
+      - gate-bashate-python26
+      - gate-bashate-python27
     post:
-      - bash8-branch-tarball
-      - bash8-coverage
+      - bashate-branch-tarball
+      - bashate-coverage
 
   - name: openstack-dev/cookiecutter
     check:
@@ -2494,7 +2494,7 @@ projects:
     template:
       - name: integrated-gate
     check:
-      - gate-devstack-bash8
+      - gate-devstack-bashate
       - check-devstack-dsvm-cells
       - check-tempest-dsvm-neutron-full
       - gate-tempest-dsvm-large-ops
@@ -2507,7 +2507,7 @@ projects:
       - check-tempest-dsvm-ironic-postgres-nv
       - check-tempest-dsvm-virtual-ironic-nv
     gate:
-      - gate-devstack-bash8
+      - gate-devstack-bashate
       - gate-devstack-dsvm-cells
       - gate-tempest-dsvm-large-ops
       - gate-tempest-dsvm-neutron-large-ops

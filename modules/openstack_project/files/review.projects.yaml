@@ -3,9 +3,8 @@
 - project: openstack-attic/openstack-chef
 - project: openstack-attic/openstack-qa
 - project: openstack-attic/python-melangeclient
-- project: openstack-dev/bash8
+- project: openstack-dev/bashate
   description: A pep8 equivalent for bash scripts
-  upstream: git://github.com/locke105/bash8.git
 - project: openstack-dev/cookiecutter
   description: Cookiecutter Template for new OpenStack projects
   upstream: git://github.com/emonty/cookiecutter-openstack.git

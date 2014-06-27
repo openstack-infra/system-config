@@ -60,9 +60,9 @@
       - shell: "./tools/version.sh --reset"
 
 - builder:
-    name: bash8
+    name: bashate
     builders:
-      - shell: "/usr/local/jenkins/slave_scripts/run-bash8.sh {github-org} {project}"
+      - shell: "/usr/local/jenkins/slave_scripts/run-bashate.sh {github-org} {project}"
 
 - builder:
     name: pep8

@@ -25,12 +25,12 @@
     node: '{node}'
 
 - job-template:
-    name: 'gate-{name}-bash8'
+    name: 'gate-{name}-bashate'
 
     builders:
       - revoke-sudo
       - gerrit-git-prep
-      - bash8:
+      - bashate:
           github-org: '{github-org}'
           project: '{name}'
 

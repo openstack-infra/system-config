@@ -1545,7 +1545,7 @@
     node: 'bare-precise || bare-trusty'
 
     jobs:
-      - gate-{name}-bash8
+      - gate-{name}-bashate
 
 - project:
     name: requirements-jobs
@@ -2793,7 +2793,7 @@
       - python-jobs
 
 - project:
-    name: bash8
+    name: bashate
     github-org: openstack-dev
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
