@@ -18,8 +18,6 @@
       - js-build:
           command: 'test'
           envlist: 'grunt'
-          github-org: '{github-org}'
-          project: '{name}'
       - assert-no-extra-files
 
     publishers:
@@ -55,8 +53,6 @@
       - js-build:
           command: 'build'
           envlist: 'grunt'
-          github-org: '{github-org}'
-          project: '{name}'
       - shell: |
           #!/bin/bash -xe
 

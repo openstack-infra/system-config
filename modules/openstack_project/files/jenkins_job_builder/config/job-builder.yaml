@@ -6,9 +6,7 @@
     builders:
       - revoke-sudo
       - gerrit-git-prep
-      - docs:
-          github-org: openstack-infra
-          project: jenkins-job-builder
+      - docs
 
     publishers:
       - scp:
@@ -27,7 +25,6 @@
       - revoke-sudo
       - gerrit-git-prep
       - shell: |
-          source /usr/local/jenkins/slave_scripts/select-mirror.sh openstack-infra jenkins-job-builder
           ./tools/run-compare-xml.sh
 
     publishers:

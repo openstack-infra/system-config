@@ -11,9 +11,7 @@
       - revoke-sudo
       - branch-git-prep:
           branch: '{branch}'
-      - python26:
-          github-org: '{github-org}'
-          project: '{name}'
+      - python26
       - assert-no-extra-files
 
     publishers:
@@ -36,9 +34,7 @@
       - revoke-sudo
       - branch-git-prep:
           branch: '{branch}'
-      - python27:
-          github-org: '{github-org}'
-          project: '{name}'
+      - python27
       - assert-no-extra-files
 
     publishers:
@@ -61,9 +57,7 @@
       - revoke-sudo
       - branch-git-prep:
           branch: '{branch}'
-      - docs:
-          github-org: '{github-org}'
-          project: '{name}'
+      - docs
 
     publishers:
       - console-log
