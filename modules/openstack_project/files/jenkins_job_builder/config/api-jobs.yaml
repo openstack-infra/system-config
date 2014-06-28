@@ -11,8 +11,6 @@
       - gerrit-git-prep
       - tox:
           envlist: '{envlist}'
-          github-org: '{github-org}'
-          project: '{name}'
 
     publishers:
       - console-log
@@ -30,8 +28,6 @@
       - gerrit-git-prep
       - tox:
           envlist: 'publishdocs-api'
-          github-org: 'openstack'
-          project: 'api-site'
 
     publishers:
       - console-log

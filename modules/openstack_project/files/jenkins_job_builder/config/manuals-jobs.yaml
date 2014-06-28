@@ -11,8 +11,6 @@
       - gerrit-git-prep
       - tox:
           envlist: '{envlist}'
-          github-org: '{github-org}'
-          project: '{name}'
       - assert-no-extra-files
 
     publishers:

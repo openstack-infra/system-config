@@ -17,7 +17,6 @@
 # The script is to pull the translations from Transifex,
 # and push to Gerrit.
 
-ORG="openstack"
 PROJECT=$1
 
 source /usr/local/jenkins/slave_scripts/common_translation_update.sh
@@ -25,7 +24,7 @@ source /usr/local/jenkins/slave_scripts/common_translation_update.sh
 init_manuals "$PROJECT"
 
 setup_git
-setup_review "$ORG" "$PROJECT"
+setup_review
 setup_translation
 
 setup_manuals
