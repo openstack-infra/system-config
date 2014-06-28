@@ -196,4 +196,21 @@ class openstack_project::static (
     source  => 'puppet:///modules/openstack_project/disallow_robots.txt',
     require => File['/srv/static/pypi'],
   }
+
+  package { 'bandersnatch':
+    provider => 'pip',
+    ensure   => 'present',
+  }
+
+  file { '/etc/bandersnatch.conf':
+    ensure  => present,
+    source  => 'puppet:///modules/openstack_project/bandersnatch.conf',
+  }
+
+  cron { 'bandersnatch':
+    minute      => '*/5',
+    command     => 'bandersnatch mirror',
+    environment => 'PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin',
+  }
+
 }
