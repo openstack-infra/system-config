@@ -6,9 +6,7 @@
     builders:
       - revoke-sudo
       - gerrit-git-prep
-      - docs:
-          github-org: openstack-infra
-          project: storyboard
+      - docs
 
     publishers:
       - scp:

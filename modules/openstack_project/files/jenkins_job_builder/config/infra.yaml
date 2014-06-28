@@ -5,7 +5,7 @@
     builders:
       - revoke-sudo
       - gerrit-git-prep
-      - shell: "./tools/run-compare-xml.sh openstack-infra config"
+      - shell: ./tools/run-compare-xml.sh
 
     publishers:
       - console-log
@@ -20,8 +20,6 @@
       - gerrit-git-prep
       - tox:
           envlist: 'irc'
-          github-org: 'openstack-infra'
-          project: 'config'
 
     publishers:
       - console-log
@@ -35,8 +33,7 @@
       - revoke-sudo
       - gerrit-git-prep
       - shell: |
-          source /usr/local/jenkins/slave_scripts/select-mirror.sh openstack-infra config
-          ./tools/run-layout.sh openstack-infra config
+          ./tools/run-layout.sh
 
     publishers:
       - console-log
@@ -50,9 +47,7 @@
     builders:
       - revoke-sudo
       - gerrit-git-prep
-      - docs:
-          github-org: openstack-infra
-          project: config
+      - docs
 
     publishers:
       - scp:
@@ -71,9 +66,7 @@
     builders:
       - revoke-sudo
       - gerrit-git-prep
-      - docs:
-          github-org: openstack-infra
-          project: config
+      - docs
 
     publishers:
       - console-log
@@ -89,8 +82,6 @@
       - gerrit-git-prep
       - tox:
           envlist: projects_alphabetized
-          github-org: openstack-infra
-          project: config
 
     publishers:
       - console-log
@@ -105,8 +96,6 @@
       - gerrit-git-prep
       - tox:
           envlist: upstream
-          github-org: openstack-infra
-          project: config
 
     publishers:
       - console-log
