@@ -5,9 +5,7 @@
     builders:
         - revoke-sudo
         - gerrit-git-prep
-        - docs:
-            github-org: '{github-org}'
-            project: '{name}'
+        - docs
 
     publishers:
         - console-log

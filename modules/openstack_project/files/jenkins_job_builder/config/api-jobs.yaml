@@ -12,8 +12,6 @@
       - gerrit-git-prep
       - tox:
           envlist: '{envlist}'
-          github-org: '{github-org}'
-          project: '{name}'
 
     publishers:
       - console-log
@@ -31,7 +29,6 @@
       - revoke-sudo
       - gerrit-git-prep
       - shell: |
-          source /usr/local/jenkins/slave_scripts/select-mirror.sh openstack api-site
           tox -v -e buildlang -- {lang}
 
     publishers:
@@ -48,8 +45,6 @@
       - gerrit-git-prep
       - tox:
           envlist: 'publishdocs-api'
-          github-org: 'openstack'
-          project: 'api-site'
 
     publishers:
       - console-log
