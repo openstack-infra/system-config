@@ -181,7 +181,21 @@ class openstack_project::static (
     require  => File['/srv/static/pypi'],
   }
 
+  apache::vhost { 'mirror.openstack.org':
+    port     => 80,
+    priority => '50',
+    docroot  => '/srv/static/mirror',
+    require  => File['/srv/static/mirror'],
+  }
+
   file { '/srv/static/pypi':
+    ensure  => directory,
+    owner   => 'jenkins',
+    group   => 'jenkins',
+    require => User['jenkins'],
+  }
+
+  file { '/srv/static/mirror':
     ensure  => directory,
     owner   => 'jenkins',
     group   => 'jenkins',
@@ -195,5 +209,14 @@ class openstack_project::static (
     mode    => '0444',
     source  => 'puppet:///modules/openstack_project/disallow_robots.txt',
     require => File['/srv/static/pypi'],
+  }
+
+  file { '/srv/static/mirror/robots.txt':
+    ensure  => present,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0444',
+    source  => 'puppet:///modules/openstack_project/disallow_robots.txt',
+    require => File['/srv/static/mirror'],
   }
 }
