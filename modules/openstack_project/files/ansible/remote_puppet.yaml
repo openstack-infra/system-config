@@ -7,4 +7,4 @@
     - puppet
 - hosts: "!review.openstack.org:!git0*"
   roles:
-    - puppet
+    - { role: puppet, puppet_allow_disabled: true }
