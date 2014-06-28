@@ -852,6 +852,7 @@ projects:
   - name: openstack/designate
     template:
       - name: python-jobs
+      - name: openstack-server-publish-jobs
       - name: check-requirements
       - name: publish-to-pypi
     check:
@@ -1358,6 +1359,7 @@ projects:
   - name: openstack/python-designateclient
     template:
       - name: python-jobs
+      - name: openstack-client-publish-jobs
       - name: check-requirements
       - name: publish-to-pypi
     check:
