@@ -539,34 +539,6 @@ node /^ci-backup-.*\.openstack\.org$/ {
   include openstack_project::backup_server
 }
 
-#
-# Jenkins slaves:
-#
-
-node 'mirror26.slave.openstack.org' {
-  include openstack_project
-  class { 'openstack_project::mirror26_slave':
-    jenkins_ssh_public_key  => $openstack_project::jenkins_ssh_key,
-    jenkins_ssh_private_key => hiera('jenkins_ssh_private_key_contents', 'XXX')
-  }
-}
-
-node 'mirror27.slave.openstack.org' {
-  include openstack_project
-  class { 'openstack_project::mirror27_slave':
-    jenkins_ssh_public_key  => $openstack_project::jenkins_ssh_key,
-    jenkins_ssh_private_key => hiera('jenkins_ssh_private_key_contents', 'XXX')
-  }
-}
-
-node 'mirror33.slave.openstack.org' {
-  include openstack_project
-  class { 'openstack_project::mirror33_slave':
-    jenkins_ssh_public_key  => $openstack_project::jenkins_ssh_key,
-    jenkins_ssh_private_key => hiera('jenkins_ssh_private_key_contents', 'XXX')
-  }
-}
-
 node 'proposal.slave.openstack.org' {
   include openstack_project
   class { 'openstack_project::proposal_slave':
