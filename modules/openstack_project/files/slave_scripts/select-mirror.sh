@@ -14,44 +14,14 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 
-org=$1
-project=$2
-
-source /usr/local/jenkins/slave_scripts/functions.sh
-check_variable_org_project "$org" "$project" "$0"
-
-rm -f ~/.pydistutils.cfg
 mkdir -p ~/.pip
-rm -f ~/.pip/pip.conf
 
-# Start with a default pip.conf for use with pypi.python.org
-# (which may be overwritten later)
+cat <<EOF > ~/.pydistutils.cfg
+[easy_install]
+index_url = http://pypi.openstack.org/simple
+EOF
 cat <<EOF > ~/.pip/pip.conf
 [global]
+index-url = http://pypi.openstack.org/simple
 timeout = 60
 EOF
-
-# For project listed in openstack/requirements,
-# use the pypi.openstack.org mirror exclusively
-if grep -x "$org/$project" /opt/requirements/projects.txt 2>&1
-then
-    export TOX_INDEX_URL='http://pypi.openstack.org/openstack'
-    echo "Switching on internal pypi mirror $TOX_INDEX_URL for $org/$project"
-    cat <<EOF > ~/.pydistutils.cfg
-[easy_install]
-index_url = http://pypi.openstack.org/openstack
-EOF
-    cat <<EOF > ~/.pip/pip.conf
-[global]
-index-url = http://pypi.openstack.org/openstack
-timeout = 60
-EOF
-else
-    echo "$org/$project will not use the internal openstack pypi mirror"
-    cat <<EOF > ~/.pip/pip.conf
-[global]
-timeout = 60
-index-url = http://pypi.openstack.org/openstack
-extra-index-url = http://pypi.python.org/simple
-EOF
-fi
