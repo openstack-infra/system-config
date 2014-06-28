@@ -1,3 +1,0 @@
----
-- name: run puppet
-  command: timeout -s 9 30m puppet agent --onetime --ignorecache --no-daemonize --no-usecacheonfailure --no-splay
