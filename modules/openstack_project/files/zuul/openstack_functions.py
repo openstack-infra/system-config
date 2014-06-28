@@ -85,7 +85,6 @@ def set_node_options(item, job, params, default):
     params['OFFLINE_NODE_WHEN_COMPLETE'] = '1'
     proposal_re = r'^.*(merge-release-tags|(propose|upstream)-(requirements|translation)-updates?)$'  # noqa
     pypi_re = r'^.*-(jenkinsci|mavencentral|pypi-(both|wheel))-upload$'
-    mirror_re = r'^(periodic|post)-mirror-python(26|27|33)$'
     python26_re = r'^.*-py(thon)?26.*$'
     centos6_re = r'^.*-centos6.*$'
     f20_re = r'^.*-f20.*$'
@@ -94,9 +93,6 @@ def set_node_options(item, job, params, default):
     devstack_re = r'^.*-dsvm.*$'
     # jobs run on the proposal worker
     if re.match(proposal_re, job.name) or re.match(pypi_re, job.name):
-        reusable_node(item, job, params)
-    # jobs run on the mirror26, mirror27 and mirror33 workers
-    elif re.match(mirror_re, job.name):
         reusable_node(item, job, params)
     # Jobs needing python26
     elif re.match(python26_re, job.name):
