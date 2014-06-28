@@ -90,4 +90,14 @@ class openstack_project::mirror_slave (
     subscribe   => Vcsrepo['/opt/pypi-mirror'],
   }
 
+  package { 'bandersnatch':
+    provider => 'pip',
+    ensure   => 'present',
+  }
+
+  file { '/etc/bandersnatch.conf':
+    ensure  => present,
+    source  => 'puppet:///modules/openstack_project/bandersnatch.conf',
+  }
+
 }
