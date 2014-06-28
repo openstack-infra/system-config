@@ -174,13 +174,6 @@ class openstack_project::static (
   ###########################################################
   # Pypi Mirror
 
-  apache::vhost { 'pypi.openstack.org':
-    port     => 80,
-    priority => '50',
-    docroot  => '/srv/static/pypi',
-    require  => File['/srv/static/pypi'],
-  }
-
   file { '/srv/static/pypi':
     ensure  => directory,
     owner   => 'jenkins',
@@ -188,12 +181,43 @@ class openstack_project::static (
     require => User['jenkins'],
   }
 
-  file { '/srv/static/pypi/robots.txt':
+  file { '/srv/static/pypi/web':
+    ensure  => directory,
+    owner   => 'jenkins',
+    group   => 'jenkins',
+    require => File['/srv/static/pypi'],
+  }
+
+  apache::vhost { 'pypi.openstack.org':
+    port     => 80,
+    priority => '50',
+    docroot  => '/srv/static/pypi/web',
+    require  => File['/srv/static/pypi/web'],
+  }
+
+  file { '/srv/static/pypi/web/robots.txt':
     ensure  => present,
     owner   => 'root',
     group   => 'root',
     mode    => '0444',
     source  => 'puppet:///modules/openstack_project/disallow_robots.txt',
-    require => File['/srv/static/pypi'],
+    require => File['/srv/static/pypi/web'],
   }
+
+  package { 'bandersnatch':
+    ensure   => 'present',
+    provider => 'pip',
+  }
+
+  file { '/etc/bandersnatch.conf':
+    ensure  => present,
+    source  => 'puppet:///modules/openstack_project/bandersnatch.conf',
+  }
+
+  cron { 'bandersnatch':
+    minute      => '*/5',
+    command     => 'bandersnatch mirror',
+    environment => 'PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin',
+  }
+
 }
