@@ -7,14 +7,6 @@
 # what packages we ended up testing.
 #
 
-org=$1
-project=$2
-
-source /usr/local/jenkins/slave_scripts/functions.sh
-check_variable_org_project "$org" "$project" "$0"
-
-source /usr/local/jenkins/slave_scripts/select-mirror.sh $org $project
-
 venv=venv
 
 mkdir -p doc/build

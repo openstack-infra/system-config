@@ -15,9 +15,7 @@
     builders:
       - revoke-sudo
       - gerrit-git-prep
-      - run-tests:
-          github-org: '{github-org}'
-          project: '{name}'
+      - run-tests
 
     publishers:
       - console-log
@@ -30,9 +28,7 @@
     builders:
       - revoke-sudo
       - gerrit-git-prep
-      - bash8:
-          github-org: '{github-org}'
-          project: '{name}'
+      - bash8
 
     publishers:
       - console-log
@@ -45,7 +41,7 @@
     builders:
       - revoke-sudo
       - gerrit-git-prep
-      - shell: '/usr/local/jenkins/slave_scripts/run-unittests.sh {env} {github-org} {name}'
+      - shell: '/usr/local/jenkins/slave_scripts/run-unittests.sh {env}'
       - assert-no-extra-files
 
     publishers:

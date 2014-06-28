@@ -7,7 +7,6 @@
       - gerrit-git-prep
       - shell: |
           #!/bin/bash -xe
-          source /usr/local/jenkins/slave_scripts/select-mirror.sh openstack-dev hacking
           tox -e integration {target-org} {target-project}
 
     publishers:

@@ -5,9 +5,7 @@
     builders:
       - revoke-sudo
       - gerrit-git-prep
-      - selenium:
-          github-org: openstack
-          project: horizon
+      - selenium
 
     publishers:
       - console-log
@@ -25,7 +23,7 @@
     builders:
       - revoke-sudo
       - gerrit-git-prep
-      - shell: '/usr/local/jenkins/slave_scripts/run-unittests.sh 27dj14 openstack horizon'
+      - shell: '/usr/local/jenkins/slave_scripts/run-unittests.sh 27dj14'
       - assert-no-extra-files
 
     publishers:
