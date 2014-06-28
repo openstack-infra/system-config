@@ -198,8 +198,8 @@ class openstack_project::static (
   }
 
   package { 'bandersnatch':
-    provider => 'pip',
     ensure   => 'present',
+    provider => 'pip',
   }
 
   file { '/etc/bandersnatch.conf':
