@@ -9,9 +9,7 @@
     builders:
       - revoke-sudo
       - gerrit-git-prep
-      - coverage:
-          github-org: '{github-org}'
-          project: '{name}'
+      - coverage
 
     publishers:
       - coverage-log
@@ -26,9 +24,7 @@
     builders:
       - revoke-sudo
       - gerrit-git-prep
-      - pep8:
-          github-org: '{github-org}'
-          project: '{name}'
+      - pep8
 
     publishers:
       - console-log
@@ -41,9 +37,7 @@
     builders:
       - revoke-sudo
       - gerrit-git-prep
-      - pep8:
-          github-org: '{github-org}'
-          project: '{name}'
+      - pep8
       - zuul_swift_upload_console_log
 
     node: '{node}'
@@ -54,9 +48,7 @@
     builders:
       - revoke-sudo
       - gerrit-git-prep
-      - pylint:
-          github-org: '{github-org}'
-          project: '{name}'
+      - pylint
 
     publishers:
       - console-log
@@ -75,9 +67,7 @@
     builders:
       - revoke-sudo
       - gerrit-git-prep
-      - python26:
-          github-org: '{github-org}'
-          project: '{name}'
+      - python26
       - assert-no-extra-files
 
     publishers:
@@ -97,9 +87,7 @@
     builders:
       - revoke-sudo
       - gerrit-git-prep
-      - python27:
-          github-org: '{github-org}'
-          project: '{name}'
+      - python27
       - assert-no-extra-files
 
     publishers:
@@ -119,9 +107,7 @@
     builders:
       - revoke-sudo
       - gerrit-git-prep
-      - python33:
-          github-org: '{github-org}'
-          project: '{name}'
+      - python33
       - assert-no-extra-files
 
     publishers:
@@ -142,7 +128,6 @@
       - revoke-sudo
       - gerrit-git-prep
       - python34:
-          github-org: '{github-org}'
           project: '{name}'
       - assert-no-extra-files
 
@@ -163,9 +148,7 @@
     builders:
       - revoke-sudo
       - gerrit-git-prep
-      - pypy:
-          github-org: '{github-org}'
-          project: '{name}'
+      - pypy
       - assert-no-extra-files
 
     publishers:
@@ -180,9 +163,7 @@
     builders:
       - revoke-sudo
       - gerrit-git-prep
-      - docs:
-          github-org: '{github-org}'
-          project: '{name}'
+      - docs
 
     publishers:
       - console-log
@@ -203,8 +184,6 @@
       - gerrit-git-prep
       - tox:
           envlist: '{envlist}'
-          github-org: '{github-org}'
-          project: '{name}'
       - assert-no-extra-files
 
     publishers:
@@ -220,9 +199,7 @@
     builders:
       - revoke-sudo
       - gerrit-git-prep
-      - tarball:
-          github-org: '{github-org}'
-          project: '{name}'
+      - tarball
 
     publishers:
       - tarball:
@@ -241,9 +218,7 @@
     builders:
       - revoke-sudo
       - gerrit-git-prep
-      - tarball:
-          github-org: '{github-org}'
-          project: '{name}'
+      - tarball
       - shell: |
           #!/bin/bash -xe
           BRANCH=$ZUUL_REFNAME

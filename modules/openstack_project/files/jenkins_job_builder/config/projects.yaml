@@ -1,6 +1,5 @@
 - project:
     name: aviator
-    github-org: stackforge
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
@@ -9,7 +8,6 @@
 
 - project:
     name: gantt
-    github-org: openstack
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
@@ -22,7 +20,6 @@
 
 - project:
     name: graffiti
-    github-org: stackforge
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
@@ -31,7 +28,6 @@
 
 - project:
     name: training-guides
-    github-org: openstack
     node: 'bare-precise || bare-trusty'
 
     jobs:
@@ -39,7 +35,6 @@
 
 - project:
     name: fuel-specs
-    github-org: stackforge
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
@@ -49,7 +44,6 @@
 
 - project:
     name: mistral
-    github-org: stackforge
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
@@ -59,7 +53,6 @@
 
 - project:
     name: mistral-extra
-    github-org: stackforge
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
@@ -69,7 +62,6 @@
 
 - project:
     name: mistral-dashboard
-    github-org: stackforge
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
@@ -79,7 +71,6 @@
 
 - project:
     name: python-mistralclient
-    github-org: stackforge
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
@@ -89,7 +80,6 @@
 
 - project:
     name: murano
-    github-org: stackforge
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
@@ -99,7 +89,6 @@
 
 - project:
     name: murano-agent
-    github-org: stackforge
     node: bare-precise
     tarball-site: tarballs.openstack.org
 
@@ -108,7 +97,6 @@
 
 - project:
     name: murano-dashboard
-    github-org: stackforge
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
@@ -118,7 +106,6 @@
 
 - project:
     name: python-congressclient
-    github-org: stackforge
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
@@ -127,7 +114,6 @@
 
 - project:
     name: python-ganttclient
-    github-org: openstack
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
@@ -140,7 +126,6 @@
 
 - project:
     name: python-monascaclient
-    github-org: stackforge
     node: bare-precise
     tarball-site: tarballs.openstack.org
 
@@ -151,7 +136,6 @@
 
 - project:
     name: python-muranoclient
-    github-org: stackforge
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
@@ -162,7 +146,6 @@
 
 - project:
     name: magnetodb
-    github-org: stackforge
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
@@ -173,7 +156,6 @@
 
 - project:
     name: blazar
-    github-org: stackforge
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
@@ -183,7 +165,6 @@
 
 - project:
     name: blazar-nova
-    github-org: stackforge
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
@@ -192,7 +173,6 @@
 
 - project:
     name: python-blazarclient
-    github-org: stackforge
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
@@ -201,7 +181,6 @@
 
 - project:
     name: config
-    github-org: openstack-infra
     node: 'bare-precise || bare-trusty'
 
     jobs:
@@ -213,7 +192,6 @@
 
 - project:
     name: gitdm
-    github-org: openstack-infra
     node: 'bare-precise || bare-trusty'
 
     jobs:
@@ -226,7 +204,6 @@
 
 - project:
     name: infra-manual
-    github-org: openstack-infra
     node: 'bare-precise || bare-trusty'
     doc-publisher-site: docs.openstack.org
     doc-publisher-folder: manual
@@ -236,7 +213,6 @@
 
 - project:
     name: infra-specs
-    github-org: openstack-infra
     node: 'bare-precise || bare-trusty'
 
     jobs:
@@ -244,7 +220,6 @@
 
 - project:
     name: sahara
-    github-org: openstack
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
@@ -259,7 +234,6 @@
 
 - project:
     name: sahara-specs
-    github-org: openstack
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
@@ -269,7 +243,6 @@
 
 - project:
     name: python-saharaclient
-    github-org: openstack
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
@@ -281,7 +254,6 @@
 
 - project:
     name: satori
-    github-org: stackforge
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
@@ -291,7 +263,6 @@
 
 - project:
     name: sahara-dashboard
-    github-org: openstack
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
@@ -301,7 +272,6 @@
 
 - project:
     name: sahara-extra
-    github-org: openstack
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
@@ -311,7 +281,6 @@
 
 - project:
     name: sahara-image-elements
-    github-org: openstack
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
@@ -321,7 +290,6 @@
 
 - project:
     name: sqlalchemy-migrate
-    github-org: stackforge
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
@@ -347,7 +315,6 @@
 
 - project:
     name: kwapi
-    github-org: stackforge
     node: 'bare-precise || bare-trusty'
 
     jobs:
@@ -355,7 +322,6 @@
 
 - project:
     name: ceilometer
-    github-org: openstack
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
@@ -368,7 +334,6 @@
 
 - project:
     name: cinder
-    github-org: openstack
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
@@ -384,7 +349,6 @@
 
 - project:
     name: compute-api
-    github-org: openstack
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
@@ -395,7 +359,6 @@
 
 - project:
     name: hacking
-    github-org: openstack-dev
     node: 'bare-precise || bare-trusty'
     doc-publisher-site: docs.openstack.org
     tarball-site: tarballs.openstack.org
@@ -411,7 +374,6 @@
 
 - project:
     name: pbr
-    github-org: openstack-dev
     node: 'bare-precise || bare-trusty'
     doc-publisher-site: docs.openstack.org
     tarball-site: tarballs.openstack.org
@@ -424,7 +386,6 @@
 
 - project:
     name: os-loganalyze
-    github-org: openstack-infra
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
@@ -433,7 +394,6 @@
 
 - project:
     name: gerrit-powered-agenda
-    github-org: openstack-infra
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
@@ -442,7 +402,6 @@
 
 - project:
     name: gerritbot
-    github-org: openstack-infra
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
@@ -452,7 +411,6 @@
 
 - project:
     name: elastic-recheck
-    github-org: openstack-infra
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
@@ -464,7 +422,6 @@
 
 - project:
     name: statusbot
-    github-org: openstack-infra
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
@@ -475,7 +432,6 @@
 
 - project:
     name: gerritlib
-    github-org: openstack-infra
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
@@ -487,7 +443,6 @@
 
 - project:
     name: jeepyb
-    github-org: openstack-infra
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
@@ -499,7 +454,6 @@
 
 - project:
     name: pypi-mirror
-    github-org: openstack-infra
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
@@ -511,7 +465,6 @@
 
 - project:
     name: gear
-    github-org: openstack-infra
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
@@ -523,7 +476,6 @@
 
 - project:
     name: gearman-plugin
-    github-org: openstack-infra
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
@@ -532,7 +484,6 @@
 
 - project:
     name: clouddocs-maven-plugin
-    github-org: stackforge
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
@@ -567,7 +518,6 @@
 
 - project:
     name: zmq-event-publisher
-    github-org: openstack-infra
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
@@ -577,7 +527,6 @@
 
 - project:
     name: git-review
-    github-org: openstack-infra
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
     jobs:
@@ -587,7 +536,6 @@
 
 - project:
     name: glance
-    github-org: openstack
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
@@ -601,7 +549,6 @@
 
 - project:
     name: glance-specs
-    github-org: openstack
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
@@ -610,7 +557,6 @@
 
 - project:
     name: heat
-    github-org: openstack
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
@@ -623,7 +569,6 @@
 
 - project:
     name: heat-specs
-    github-org: openstack
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
@@ -632,7 +577,6 @@
 
 - project:
     name: python-heatclient
-    github-org: openstack
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
@@ -645,7 +589,6 @@
 
 - project:
     name: heat-cfntools
-    github-org: openstack
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
@@ -658,7 +601,6 @@
 
 - project:
     name: heat-cfnclient
-    github-org: openstack-dev
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
@@ -668,7 +610,6 @@
 
 - project:
     name: horizon
-    github-org: openstack
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
@@ -681,7 +622,6 @@
 
 - project:
     name: django_openstack_auth
-    github-org: openstack
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
@@ -695,7 +635,6 @@
 
 - project:
     name: identity-api
-    github-org: openstack
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
@@ -706,7 +645,6 @@
 
 - project:
     name: keystone-specs
-    github-org: openstack
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
@@ -716,7 +654,6 @@
 
 - project:
     name: image-api
-    github-org: openstack
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
@@ -727,7 +664,6 @@
 
 - project:
     name: jenkins-job-builder
-    github-org: openstack-infra
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
@@ -737,7 +673,6 @@
 
 - project:
     name: keystone
-    github-org: openstack
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
@@ -751,7 +686,6 @@
 
 - project:
     name: keystonemiddleware
-    github-org: openstack
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
@@ -763,7 +697,6 @@
 
 - project:
     name: kite
-    github-org: stackforge
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
@@ -772,7 +705,6 @@
 
 - project:
     name: netconn-api
-    github-org: openstack
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
@@ -783,7 +715,6 @@
 
 - project:
     name: nodepool
-    github-org: openstack-infra
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
@@ -794,7 +725,6 @@
 
 - project:
     name: nose-html-output
-    github-org: openstack-infra
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
@@ -805,7 +735,6 @@
 
 - project:
     name: nova
-    github-org: openstack
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
@@ -819,7 +748,6 @@
 
 - project:
     name: nova-specs
-    github-org: openstack
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
@@ -829,7 +757,6 @@
 
 - project:
     name: nova-docker
-    github-org: stackforge
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
@@ -839,7 +766,6 @@
 
 - project:
     name: object-api
-    github-org: openstack
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
@@ -850,7 +776,6 @@
 
 - project:
     name: swift-specs
-    github-org: openstack
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
@@ -860,7 +785,6 @@
 
 - project:
     name: oslosphinx
-    github-org: openstack
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
@@ -873,7 +797,6 @@
 
 - project:
     name: oslotest
-    github-org: openstack
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
@@ -886,7 +809,6 @@
 
 - project:
     name: oslo.config
-    github-org: openstack
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
@@ -899,7 +821,6 @@
 
 - project:
     name: oslo.db
-    github-org: openstack
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
@@ -911,7 +832,6 @@
 
 - project:
     name: oslo.i18n
-    github-org: openstack
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
@@ -924,7 +844,6 @@
 
 - project:
     name: oslo.messaging
-    github-org: openstack
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
@@ -937,7 +856,6 @@
 
 - project:
     name: oslo.rootwrap
-    github-org: openstack
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
@@ -947,7 +865,6 @@
 
 - project:
     name: oslo.version
-    github-org: openstack
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
@@ -960,7 +877,6 @@
 
 - project:
     name: oslo.vmware
-    github-org: openstack
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
@@ -973,7 +889,6 @@
 
 - project:
     name: oslo-incubator
-    github-org: openstack
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
@@ -984,7 +899,6 @@
 
 - project:
     name: oslo-specs
-    github-org: openstack
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
@@ -995,7 +909,6 @@
 
 - project:
     name: python-ceilometerclient
-    github-org: openstack
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
@@ -1008,7 +921,6 @@
 
 - project:
     name: python-cinderclient
-    github-org: openstack
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
@@ -1021,7 +933,6 @@
 
 - project:
     name: python-glanceclient
-    github-org: openstack
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
@@ -1034,7 +945,6 @@
 
 - project:
     name: python-keystoneclient
-    github-org: openstack
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
@@ -1047,7 +957,6 @@
 
 - project:
     name: python-jenkins
-    github-org: stackforge
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
@@ -1059,7 +968,6 @@
 
 - project:
     name: python-kiteclient
-    github-org: stackforge
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
@@ -1070,7 +978,6 @@
 
 - project:
     name: python-novaclient
-    github-org: openstack
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
@@ -1083,7 +990,6 @@
 
 - project:
     name: python-openstackclient
-    github-org: openstack
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
@@ -1096,7 +1002,6 @@
 
 - project:
     name: python-neutronclient
-    github-org: openstack
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
@@ -1109,7 +1014,6 @@
 
 - project:
     name: python-swiftclient
-    github-org: openstack
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
@@ -1122,7 +1026,6 @@
 
 - project:
     name: neutron
-    github-org: openstack
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
@@ -1161,7 +1064,6 @@
 
 - project:
     name: neutron-specs
-    github-org: openstack
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
@@ -1172,7 +1074,6 @@
 
 - project:
     name: trove
-    github-org: openstack
     tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
     node: 'bare-precise || bare-trusty'
@@ -1193,7 +1094,6 @@
 
 - project:
     name: python-troveclient
-    github-org: openstack
     tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
     node: 'bare-precise || bare-trusty'
@@ -1206,7 +1106,6 @@
 
 - project:
     name: libra
-    github-org: stackforge
     tarball-site: tarballs.openstack.org
     node: 'bare-precise || bare-trusty'
 
@@ -1216,7 +1115,6 @@
 
 - project:
     name: python-libraclient
-    github-org: stackforge
     tarball-site: tarballs.openstack.org
     node: 'bare-precise || bare-trusty'
 
@@ -1227,7 +1125,6 @@
 
 - project:
     name: healthnmon
-    github-org: stackforge
     tarball-site: tarballs.openstack.org
     node: 'bare-precise || bare-trusty'
 
@@ -1236,7 +1133,6 @@
 
 - project:
     name: marconi
-    github-org: openstack
     tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
     node: 'bare-precise || bare-trusty'
@@ -1247,7 +1143,6 @@
 
 - project:
     name: marconi-specs
-    github-org: openstack
     node: bare-precise
     tarball-site: tarballs.openstack.org
 
@@ -1257,7 +1152,6 @@
 
 - project:
     name: python-marconiclient
-    github-org: openstack
     tarball-site: tarballs.openstack.org
     node: 'bare-precise || bare-trusty'
 
@@ -1267,7 +1161,6 @@
 
 - project:
     name: designate
-    github-org: openstack
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
@@ -1279,7 +1172,6 @@
 
 - project:
     name: designate-specs
-    github-org: openstack
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
@@ -1289,7 +1181,6 @@
 
 - project:
     name: billingstack
-    github-org: stackforge
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
@@ -1301,7 +1192,6 @@
 
 - project:
     name: bindep
-    github-org: stackforge
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
@@ -1312,7 +1202,6 @@
 
 - project:
     name: packstack
-    github-org: stackforge
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
@@ -1322,7 +1211,6 @@
 
 - project:
     name: python-designateclient
-    github-org: openstack
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
@@ -1335,7 +1223,6 @@
 
 - project:
     name: bufunfa
-    github-org: stackforge
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
@@ -1346,7 +1233,6 @@
 
 - project:
     name: reviewday
-    github-org: openstack-infra
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
@@ -1357,7 +1243,6 @@
 
 - project:
     name: reviewstats
-    github-org: openstack-infra
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
@@ -1369,7 +1254,6 @@
 
 - project:
     name: bugdaystats
-    github-org: openstack-infra
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
@@ -1379,7 +1263,6 @@
 
 - project:
     name: requirements
-    github-org: openstack
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
@@ -1392,7 +1275,6 @@
 
 - project:
     name: storyboard
-    github-org: openstack-infra
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
@@ -1403,7 +1285,6 @@
 
 - project:
     name: storyboard-webclient
-    github-org: openstack-infra
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
@@ -1416,7 +1297,6 @@
 
 - project:
     name: vinz
-    github-org: openstack-infra
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
@@ -1426,7 +1306,6 @@
 
 - project:
     name: vinz-webclient
-    github-org: openstack-infra
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
@@ -1439,7 +1318,6 @@
 
 - project:
     name: swift
-    github-org: openstack
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
@@ -1469,7 +1347,6 @@
 
 - project:
     name: swift-bench
-    github-org: openstack
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
@@ -1535,7 +1412,6 @@
 
 - project:
     name: devstack
-    github-org: openstack-dev
     node: 'bare-precise || bare-trusty'
 
     jobs:
@@ -1554,7 +1430,6 @@
 
 - project:
     name: tempest
-    github-org: openstack
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
@@ -1566,7 +1441,6 @@
 
 - project:
     name: qa-specs
-    github-org: openstack
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
@@ -1576,7 +1450,6 @@
 
 - project:
     name: zuul
-    github-org: openstack-infra
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
@@ -1587,7 +1460,6 @@
 
 - project:
     name: pyghmi
-    github-org: stackforge
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
@@ -1597,7 +1469,6 @@
 
 - project:
     name: diskimage-builder
-    github-org: openstack
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
@@ -1607,7 +1478,6 @@
 
 - project:
     name: dib-utils
-    github-org: openstack
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
@@ -1617,7 +1487,6 @@
 
 - project:
     name: os-apply-config
-    github-org: openstack
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
@@ -1627,7 +1496,6 @@
 
 - project:
     name: os-cloud-config
-    github-org: openstack
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
@@ -1639,7 +1507,6 @@
 
 - project:
     name: os-collect-config
-    github-org: openstack
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
@@ -1649,7 +1516,6 @@
 
 - project:
     name: os-refresh-config
-    github-org: openstack
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
@@ -1659,7 +1525,6 @@
 
 - project:
     name: ceilometer-specs
-    github-org: openstack
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
@@ -1669,7 +1534,6 @@
 
 - project:
     name: tripleo-heat-templates
-    github-org: openstack
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
@@ -1679,7 +1543,6 @@
 
 - project:
     name: tripleo-image-elements
-    github-org: openstack
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
@@ -1689,7 +1552,6 @@
 
 - project:
     name: tripleo-incubator
-    github-org: openstack
     node: 'bare-precise || bare-trusty'
     doc-publisher-site: docs.openstack.org
     tarball-site: tarballs.openstack.org
@@ -1700,7 +1562,6 @@
 
 - project:
     name: tripleo-specs
-    github-org: openstack
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
@@ -1710,7 +1571,6 @@
 
 - project:
     name: puppet-glance
-    github-org: stackforge
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
@@ -1721,7 +1581,6 @@
 
 - project:
     name: puppet-keystone
-    github-org: stackforge
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
@@ -1732,7 +1591,6 @@
 
 - project:
     name: puppet-ceilometer
-    github-org: stackforge
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
@@ -1743,7 +1601,6 @@
 
 - project:
     name: puppet-cinder
-    github-org: stackforge
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
@@ -1754,7 +1611,6 @@
 
 - project:
     name: puppet-heat
-    github-org: stackforge
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
@@ -1765,7 +1621,6 @@
 
 - project:
     name: puppet-ironic
-    github-org: stackforge
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
@@ -1776,7 +1631,6 @@
 
 - project:
     name: puppet-nova
-    github-org: stackforge
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
@@ -1787,7 +1641,6 @@
 
 - project:
     name: puppet-horizon
-    github-org: stackforge
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
@@ -1798,7 +1651,6 @@
 
 - project:
     name: puppet-openstack
-    github-org: stackforge
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
@@ -1809,7 +1661,6 @@
 
 - project:
     name: puppet-openstacklib
-    github-org: stackforge
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
@@ -1820,7 +1671,6 @@
 
 - project:
     name: puppet-openstack_extras
-    github-org: stackforge
     node: bare-precise
     tarball-site: tarballs.openstack.org
 
@@ -1831,7 +1681,6 @@
 
 - project:
     name: puppet-sahara
-    github-org: stackforge
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
@@ -1842,7 +1691,6 @@
 
 - project:
     name: sahara-ci-config
-    github-org: stackforge
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
@@ -1851,7 +1699,6 @@
 
 - project:
     name: sahara-guestagent
-    github-org: stackforge
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
@@ -1861,7 +1708,6 @@
 
 - project:
     name: puppet-swift
-    github-org: stackforge
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
@@ -1872,7 +1718,6 @@
 
 - project:
     name: puppet-tempest
-    github-org: stackforge
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
@@ -1883,7 +1728,6 @@
 
 - project:
     name: puppet-trove
-    github-org: stackforge
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
@@ -1894,7 +1738,6 @@
 
 - project:
     name: puppet-neutron
-    github-org: stackforge
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
@@ -1905,7 +1748,6 @@
 
 - project:
     name: puppet-vswitch
-    github-org: stackforge
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
@@ -1916,7 +1758,6 @@
 
 - project:
     name: puppet-ceph
-    github-org: stackforge
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
@@ -1927,7 +1768,6 @@
 
 - project:
     name: puppet-designate
-    github-org: stackforge
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
@@ -1938,7 +1778,6 @@
 
 - project:
     name: openstack-chef-repo
-    github-org: stackforge
     node: 'bare-precise || bare-trusty'
 
     jobs:
@@ -1946,7 +1785,6 @@
 
 - project:
     name: cookbook-ceph
-    github-org: stackforge
     node: 'bare-precise || bare-trusty'
 
     jobs:
@@ -1956,7 +1794,6 @@
 
 - project:
     name: cookbook-openstack-client
-    github-org: stackforge
     node: 'bare-precise || bare-trusty'
 
     jobs:
@@ -1966,7 +1803,6 @@
 
 - project:
     name: cookbook-openstack-data-processing
-    github-org: stackforge
     node: 'bare-precise || bare-trusty'
 
     jobs:
@@ -1976,7 +1812,6 @@
 
 - project:
     name: cookbook-openstack-database
-    github-org: stackforge
     node: 'bare-precise || bare-trusty'
 
     jobs:
@@ -1986,7 +1821,6 @@
 
 - project:
     name: cookbook-openstack-common
-    github-org: stackforge
     node: 'bare-precise || bare-trusty'
 
     jobs:
@@ -1996,7 +1830,6 @@
 
 - project:
     name: cookbook-openstack-compute
-    github-org: stackforge
     node: 'bare-precise || bare-trusty'
 
     jobs:
@@ -2006,7 +1839,6 @@
 
 - project:
     name: cookbook-openstack-block-storage
-    github-org: stackforge
     node: 'bare-precise || bare-trusty'
 
     jobs:
@@ -2016,7 +1848,6 @@
 
 - project:
     name: cookbook-openstack-telemetry
-    github-org: stackforge
     node: 'bare-precise || bare-trusty'
 
     jobs:
@@ -2026,7 +1857,6 @@
 
 - project:
     name: cookbook-openstack-network
-    github-org: stackforge
     node: 'bare-precise || bare-trusty'
 
     jobs:
@@ -2036,7 +1866,6 @@
 
 - project:
     name: cookbook-openstack-object-storage
-    github-org: stackforge
     node: 'bare-precise || bare-trusty'
 
     jobs:
@@ -2046,7 +1875,6 @@
 
 - project:
     name: cookbook-openstack-dashboard
-    github-org: stackforge
     node: 'bare-precise || bare-trusty'
 
     jobs:
@@ -2056,7 +1884,6 @@
 
 - project:
     name: cookbook-openstack-image
-    github-org: stackforge
     node: 'bare-precise || bare-trusty'
 
     jobs:
@@ -2066,7 +1893,6 @@
 
 - project:
     name: cookbook-openstack-identity
-    github-org: stackforge
     node: 'bare-precise || bare-trusty'
 
     jobs:
@@ -2076,7 +1902,6 @@
 
 - project:
     name: cookbook-openstack-orchestration
-    github-org: stackforge
     node: 'bare-precise || bare-trusty'
 
     jobs:
@@ -2086,7 +1911,6 @@
 
 - project:
     name: cookbook-openstack-ops-database
-    github-org: stackforge
     node: 'bare-precise || bare-trusty'
 
     jobs:
@@ -2096,7 +1920,6 @@
 
 - project:
     name: cookbook-openstack-ops-messaging
-    github-org: stackforge
     node: 'bare-precise || bare-trusty'
 
     jobs:
@@ -2106,7 +1929,6 @@
 
 - project:
     name: cookbook-openstack-integration-test
-    github-org: stackforge
     node: 'bare-precise || bare-trusty'
 
     jobs:
@@ -2116,7 +1938,6 @@
 
 - project:
     name: ironic-specs
-    github-org: openstack
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
@@ -2126,7 +1947,6 @@
 
 - project:
     name: ironic
-    github-org: openstack
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
@@ -2153,7 +1973,6 @@
 
 - project:
     name: python-ironicclient
-    github-org: openstack
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
@@ -2165,7 +1984,6 @@
 
 - project:
     name: ironic-python-agent
-    github-org: openstack
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
@@ -2175,7 +1993,6 @@
 
 - project:
     name: inception
-    github-org: stackforge
     node: 'bare-precise || bare-trusty'
 
     jobs:
@@ -2183,7 +2000,6 @@
 
 - project:
     name: barbican
-    github-org: openstack
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
@@ -2192,7 +2008,6 @@
 
 - project:
     name: barbican-specs
-    github-org: openstack
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
@@ -2201,7 +2016,6 @@
 
 - project:
     name: python-barbicanclient
-    github-org: openstack
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
@@ -2211,7 +2025,6 @@
 
 - project:
     name: taskflow
-    github-org: openstack
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
@@ -2228,7 +2041,6 @@
 
 - project:
     name: cl-openstack-client
-    github-org: stackforge
     node: 'bare-precise || bare-trusty'
 
     jobs:
@@ -2236,7 +2048,6 @@
 
 - project:
     name: stackalytics
-    github-org: stackforge
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
@@ -2247,7 +2058,6 @@
 
 - project:
     name: anvil
-    github-org: stackforge
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
@@ -2257,7 +2067,6 @@
 
 - project:
     name: pycadf
-    github-org: openstack
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
@@ -2269,7 +2078,6 @@
 
 - project:
     name: pecan
-    github-org: stackforge
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
@@ -2302,7 +2110,6 @@
 
 - project:
     name: stevedore
-    github-org: openstack
     node: 'bare-precise || bare-trusty'
     rtfd-id: 4157
     tarball-site: tarballs.openstack.org
@@ -2314,7 +2121,6 @@
 
 - project:
     name: cliff
-    github-org: openstack
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
@@ -2333,7 +2139,6 @@
 
 - project:
     name: python-tuskarclient
-    github-org: openstack
     tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
     node: 'bare-precise || bare-trusty'
@@ -2344,7 +2149,6 @@
 
 - project:
     name: warm
-    github-org: stackforge
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
@@ -2353,7 +2157,6 @@
 
 - project:
     name: wsme
-    github-org: stackforge
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
@@ -2363,7 +2166,6 @@
 
 - project:
     name: tuskar
-    github-org: openstack
     tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
     node: 'bare-precise || bare-trusty'
@@ -2374,7 +2176,6 @@
 
 - project:
     name: tuskar-ui
-    github-org: openstack
     tarball-site: tarballs.openstack.org
     node: 'bare-precise || bare-trusty'
 
@@ -2384,7 +2185,6 @@
 
 - project:
     name: rally
-    github-org: stackforge
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
@@ -2399,7 +2199,6 @@
 
 - project:
     name: python-rallyclient
-    github-org: stackforge
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
@@ -2408,7 +2207,6 @@
 
 - project:
     name: osprofiler
-    github-org: stackforge
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
@@ -2418,7 +2216,6 @@
 
 - project:
     name: logaas
-    github-org: stackforge
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
@@ -2429,7 +2226,6 @@
 
 - project:
     name: openstack-manuals
-    github-org: openstack
     node: 'bare-precise || bare-trusty'
 
     oldmanual:
@@ -2444,7 +2240,6 @@
 
 - project:
     name: docs-specs
-    github-org: openstack
     node: bare-precise
     tarball-site: tarballs.openstack.org
 
@@ -2454,7 +2249,6 @@
 
 - project:
     name: operations-guide
-    github-org: openstack
     node: 'bare-precise || bare-trusty'
 
     jobs:
@@ -2463,7 +2257,6 @@
 
 - project:
     name: security-doc
-    github-org: openstack
     node: 'bare-precise || bare-trusty'
 
     jobs:
@@ -2472,7 +2265,6 @@
 
 - project:
     name: manila
-    github-org: stackforge
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
@@ -2482,7 +2274,6 @@
 
 - project:
     name: python-manilaclient
-    github-org: stackforge
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
@@ -2491,7 +2282,6 @@
 
 - project:
     name: milk
-    github-org: stackforge
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
@@ -2500,7 +2290,6 @@
 
 - project:
     name: solum
-    github-org: stackforge
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
@@ -2510,7 +2299,6 @@
 
 - project:
     name: solum-specs
-    github-org: stackforge
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
@@ -2519,7 +2307,6 @@
 
 - project:
     name: congress
-    github-org: stackforge
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
@@ -2528,7 +2315,6 @@
 
 - project:
     name: rubick
-    github-org: stackforge
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
@@ -2537,7 +2323,6 @@
 
 - project:
     name: refstack
-    github-org: stackforge
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
@@ -2546,7 +2331,6 @@
 
 - project:
     name: swift-ceph-backend
-    github-org: stackforge
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
@@ -2555,7 +2339,6 @@
 
 - project:
     name: swift3
-    github-org: stackforge
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
@@ -2569,7 +2352,6 @@
 
 - project:
     name: swiftsync
-    github-org: stackforge
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
@@ -2578,7 +2360,6 @@
 
 - project:
     name: tooz
-    github-org: stackforge
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
@@ -2588,7 +2369,6 @@
 
 - project:
     name: sphinxcontrib-docbookrestapi
-    github-org: stackforge
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
@@ -2602,7 +2382,6 @@
 
 - project:
     name: tomograph
-    github-org: stackforge
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
@@ -2612,7 +2391,6 @@
 
 - project:
     name: turbo-hipster
-    github-org: stackforge
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
@@ -2622,7 +2400,6 @@
 
 - project:
     name: python-solumclient
-    github-org: stackforge
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
@@ -2632,7 +2409,6 @@
 
 - project:
     name: solum-dashboard
-    github-org: stackforge
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
@@ -2642,7 +2418,6 @@
 
 - project:
     name: heat-translator
-    github-org: stackforge
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
@@ -2651,7 +2426,6 @@
 
 - project:
     name: release-tools
-    github-org: openstack-infra
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
@@ -2660,7 +2434,6 @@
 
 - project:
     name: entropy
-    github-org: stackforge
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
@@ -2669,7 +2442,6 @@
 
 - project:
     name: openstack-doc-tools
-    github-org: openstack
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
@@ -2681,7 +2453,6 @@
 
 - project:
     name: api-site
-    github-org: openstack
     node: 'bare-precise || bare-trusty'
 
     jobs:
@@ -2690,7 +2461,6 @@
 
 - project:
     name: driverlog
-    github-org: stackforge
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
@@ -2699,7 +2469,6 @@
 
 - project:
     name: volume-api
-    github-org: openstack
     node: 'bare-precise || bare-trusty'
 
     jobs:
@@ -2707,7 +2476,6 @@
 
 - project:
     name: python-openstacksdk
-    github-org: stackforge
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
@@ -2717,7 +2485,6 @@
 
 - project:
     name: gce-api
-    github-org: stackforge
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
@@ -2726,7 +2493,6 @@
 
 - project:
     name: ec2-api
-    github-org: stackforge
     node: bare-precise
     tarball-site: tarballs.openstack.org
 
@@ -2735,7 +2501,6 @@
 
 - project:
     name: gnocchi
-    github-org: stackforge
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
@@ -2748,7 +2513,6 @@
 
 - project:
     name: groups
-    github-org: openstack-infra
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
@@ -2761,7 +2525,6 @@
 
 - project:
     name: groups-static-pages
-    github-org: openstack-infra
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
@@ -2770,7 +2533,6 @@
 
 - project:
     name: openstackid
-    github-org: openstack-infra
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
@@ -2783,7 +2545,6 @@
 
 - project:
     name: compass-core
-    github-org: stackforge
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
@@ -2792,7 +2553,6 @@
 
 - project:
     name: stacktach
-    github-org: stackforge
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
@@ -2801,7 +2561,6 @@
 
 - project:
     name: bashate
-    github-org: openstack-dev
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
@@ -2811,7 +2570,6 @@
 
 - project:
     name: cloudkitty
-    github-org: stackforge
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
@@ -2820,7 +2578,6 @@
 
 - project:
     name: cachemonkey
-    github-org: stackforge
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
@@ -2829,7 +2586,6 @@
 
 - project:
     name: octavia
-    github-org: stackforge
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
@@ -2838,7 +2594,6 @@
 
 - project:
     name: python-magnetodbclient
-    github-org: stackforge
     node: bare-precise
     tarball-site: tarballs.openstack.org
 
@@ -2849,7 +2604,6 @@
 
 - project:
     name: tacker-specs
-    github-org: stackforge
     node: bare-precise
     tarball-site: tarballs.openstack.org
 

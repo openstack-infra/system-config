@@ -23,12 +23,12 @@
 - builder:
     name: coverage
     builders:
-      - shell: "/usr/local/jenkins/slave_scripts/run-cover.sh {github-org} {project}"
+      - shell: "/usr/local/jenkins/slave_scripts/run-cover.sh"
 
 - builder:
     name: docs
     builders:
-      - shell: "/usr/local/jenkins/slave_scripts/run-docs.sh {github-org} {project}"
+      - shell: "/usr/local/jenkins/slave_scripts/run-docs.sh"
 
 - builder:
     name: maven-test
@@ -62,17 +62,17 @@
 - builder:
     name: bashate
     builders:
-      - shell: "/usr/local/jenkins/slave_scripts/run-bashate.sh {github-org} {project}"
+      - shell: "/usr/local/jenkins/slave_scripts/run-bashate.sh"
 
 - builder:
     name: pep8
     builders:
-      - shell: "/usr/local/jenkins/slave_scripts/run-pep8.sh {github-org} {project}"
+      - shell: "/usr/local/jenkins/slave_scripts/run-pep8.sh"
 
 - builder:
     name: pylint
     builders:
-      - shell: "/usr/local/jenkins/slave_scripts/run-pylint.sh {github-org} {project}"
+      - shell: "/usr/local/jenkins/slave_scripts/run-pylint.sh"
 
 - builder:
     name: puppet-lint
@@ -165,32 +165,32 @@
 - builder:
     name: run-tests
     builders:
-      - shell: "./run-tests.sh {github-org} {project}"
+      - shell: "./run-tests.sh"
 
 - builder:
     name: selenium
     builders:
-      - shell: "/usr/local/jenkins/slave_scripts/run-selenium.sh {github-org} {project}"
+      - shell: "/usr/local/jenkins/slave_scripts/run-selenium.sh"
 
 - builder:
     name: js-build
     builders:
-      - shell: "/usr/local/jenkins/slave_scripts/run-jsbuild.sh {command} {github-org} {project}"
+      - shell: "/usr/local/jenkins/slave_scripts/run-jsbuild.sh {command}"
 
 - builder:
     name: python26
     builders:
-      - shell: "/usr/local/jenkins/slave_scripts/run-unittests.sh 26 {github-org} {project}"
+      - shell: "/usr/local/jenkins/slave_scripts/run-unittests.sh 26"
 
 - builder:
     name: python27
     builders:
-      - shell: "/usr/local/jenkins/slave_scripts/run-unittests.sh 27 {github-org} {project}"
+      - shell: "/usr/local/jenkins/slave_scripts/run-unittests.sh 27"
 
 - builder:
     name: python33
     builders:
-      - shell: "/usr/local/jenkins/slave_scripts/run-unittests.sh 33 {github-org} {project}"
+      - shell: "/usr/local/jenkins/slave_scripts/run-unittests.sh 33"
 
 - builder:
     name: python34
@@ -200,12 +200,12 @@
 - builder:
     name: pypy
     builders:
-      - shell: "/usr/local/jenkins/slave_scripts/run-unittests.sh py {github-org} {project}"
+      - shell: "/usr/local/jenkins/slave_scripts/run-unittests.sh py"
 
 - builder:
     name: tox
     builders:
-      - shell: "/usr/local/jenkins/slave_scripts/run-tox.sh {envlist} {github-org} {project}"
+      - shell: "/usr/local/jenkins/slave_scripts/run-tox.sh {envlist}"
 
 - builder:
     name: assert-no-extra-files
@@ -227,8 +227,8 @@
     builders:
       - shell: |
           #!/bin/bash -xe
-          /usr/local/jenkins/slave_scripts/run-tarball.sh {github-org} {project}
-          /usr/local/jenkins/slave_scripts/run-wheel.sh {github-org} {project}
+          /usr/local/jenkins/slave_scripts/run-tarball.sh
+          /usr/local/jenkins/slave_scripts/run-wheel.sh
 
 - builder:
     name: devstack-checkout
