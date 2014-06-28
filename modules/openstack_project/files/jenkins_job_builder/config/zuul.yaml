@@ -6,9 +6,7 @@
     builders:
       - revoke-sudo
       - gerrit-git-prep
-      - docs:
-          github-org: openstack-infra
-          project: zuul
+      - docs
 
     publishers:
       - scp:
@@ -26,9 +24,7 @@
     builders:
       - revoke-sudo
       - gerrit-git-prep
-      - coverage:
-          github-org: openstack-infra
-          project: zuul
+      - coverage
 
     publishers:
       - coverage-log
@@ -47,9 +43,7 @@
       - revoke-sudo
       - branch-git-prep:
           branch: master
-      - python27:
-          github-org: 'openstack-infra'
-          project: 'zuul'
+      - python27
 
     publishers:
       - test-results
