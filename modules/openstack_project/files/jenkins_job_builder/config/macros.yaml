@@ -291,8 +291,10 @@
       - shell: |
           #!/bin/bash -xe
           run-mirror -c /home/jenkins/pypimirror/etc/pypi-mirror.yaml
+          bandersnatch mirror
           find /home/jenkins/pypimirror/mirror/ \( -name index.html -or -name full.html \) -delete
           rsync -a --ignore-existing --itemize-changes /home/jenkins/pypimirror/mirror/ jenkins@static.openstack.org:/srv/static/pypi/
+          rsync -a --ignore-existing --itemize-changes /opt/mirror/ jenkins@static.openstack.org:/srv/static/pypi/
 
 - builder:
     name: install-buck
