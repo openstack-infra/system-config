@@ -30,11 +30,25 @@ class ansible {
     source => 'puppet:///modules/ansible/puppet-inventory',
   }
 
-  file { '/etc/ansible/roles':
+  file { '/usr/share/ansible/config':
     ensure  => directory,
-    recurse => true,
-    source  => 'puppet:///modules/ansible/roles',
-    require => File['/etc/ansible'],
+    require => Package['ansible'],
+  }
+
+  file { '/usr/share/ansible/config/puppet':
+    ensure => present,
+    mode   => '0755',
+    owner  => 'root',
+    group  => 'root',
+    source => 'puppet:///modules/ansible/puppet',
+  }
+
+  file { '/usr/local/bin/puppet-inventory':
+    ensure => present,
+    mode   => '0755',
+    owner  => 'root',
+    group  => 'root',
+    source => 'puppet:///modules/ansible/puppet-inventory',
   }
 
   include logrotate
