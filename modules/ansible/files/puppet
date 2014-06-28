@@ -1,0 +1,109 @@
+#!/usr/bin/python
+
+# Copyright (c) 2014 Hewlett-Packard Development Company, L.P.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#    http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
+# implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+DOCUMENTATION = '''
+---
+module: puppet
+short_description: Runs puppet
+description:
+  - Runs I(puppet) agent in a reliable manner
+version_added: "1.5.6"
+options:
+  timeout:
+    description:
+      - How long to wait for I(puppet) to finish.
+    required: false
+    default: 30m
+  allow_disabled:
+    description:
+      - Should a run on a disabled node be a success.
+    required: false
+    default: no
+    choices: [ "yes", "no" ]
+  show_diff:
+    description:
+      - Should puppet return diffs of changes applied. Defaults to off to avoid leaking secret changes by default.
+    required: false
+    default: no
+    choices: [ "yes", "no" ]
+requirements: [ puppet ]
+author: Monty Taylor
+'''
+
+EXAMPLES = '''
+# Run puppet and fail if anything goes wrong
+- puppet
+
+# Run puppet and timeout in 5 minutes
+- puppet: timeout=5m
+
+# Run puppet and skip over the node if it is marked disabled
+- puppet: allow_disabled=yes
+'''
+
+
+def main():
+    module = AnsibleModule(
+        argument_spec=dict(
+            allow_disabled=dict(
+                default=False, aliases=['update-cache'], type='bool'),
+            timeout=dict(default="30m"),
+            show_diff=dict(
+                default=False, aliases=['show-diff'], type='bool'),
+        ),
+    )
+    p = module.params
+
+    global PUPPET_CMD
+    PUPPET_CMD = module.get_bin_path("puppet", False)
+
+    if not PUPPET_CMD:
+        module.fail_json(
+            msg="Could not find puppet. Please ensure it is installed.")
+
+    cmd = ("timeout -s 9 %(timeout)s %(puppet_cmd)s agent --onetime"
+           " --ignorecache --no-daemonize --no-usecacheonfailure --no-splay"
+           " --detailed-exitcodes --verbose") % dict(
+               timeout=p['timeout'], puppet_cmd=PUPPET_CMD)
+    if p['show_diff']:
+        cmd += " --show-diff"
+    rc, stdout, stderr = module.run_command(cmd)
+
+    if rc == 0:
+        # success
+        module.exit_json(changed=False)
+    elif rc == 1:
+        # compilation failed
+        module.fail_json(
+            msg="puppet errored", error=True, stdout=stdout, stderr=stderr)
+    elif rc == 2:
+        # success with changes
+        module.exit_json(changed=True)
+    elif rc == 124:
+        # timeout
+        module.fail_json(
+            msg="%s timed out" % cmd, stdout=stdout, stderr=stderr)
+    else:
+        # failure
+        module.fail_json(
+            msg="%s failed with return code: %d" % (cmd, rc),
+            stdout=stdout, stderr=stderr)
+
+# import module snippets
+from ansible.module_utils.basic import *
+
+main()
