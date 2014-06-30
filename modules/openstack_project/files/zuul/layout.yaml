@@ -336,6 +336,7 @@ project-templates:
       - 'gate-{name}-tox-checklang'
     post:
       - '{name}-manuals-upstream-translation-update'
+      - '{name}-tox-doc-publishlang'
     periodic:
       - '{name}-manuals-propose-translation-update'
 
@@ -538,9 +539,7 @@ jobs:
 # Continous publishing from master of the following documentation targets:
   - name: ^.*manuals-upstream-translation-update$
     branch: master
-  - name: openstack-install-deploy-guide-ja
-    branch: master
-  - name: openstack-misc-guides-ja
+  - name: ^.*-tox-doc-publishlang$
     branch: master
   - name: gate-openstack-manuals-tox-checkniceness
     voting: false
@@ -2394,10 +2393,6 @@ projects:
       - api-site-tox-doc-publishdocs
       - openstack-api-site
       - openstack-api-ref
-      - api-site-tox-buildlang-de
-      - api-site-tox-buildlang-es
-      - api-site-tox-buildlang-fr
-      - api-site-tox-buildlang-ja
 
   - name: openstack/openstack-manuals
     template:
@@ -2405,8 +2400,6 @@ projects:
       - name: openstack-doc-translation
     post:
       - openstack-manuals-tox-doc-publishdocs
-      - openstack-install-deploy-guide-ja
-      - openstack-misc-guides-ja
 
   - name: openstack/operations-guide
     template:
@@ -2414,7 +2407,6 @@ projects:
       - name: openstack-doc-translation
     post:
       - operations-guide-tox-doc-publishdocs
-      - openstack-operations-guide-ja
 
   - name: openstack/openstack-security-notes
     check:

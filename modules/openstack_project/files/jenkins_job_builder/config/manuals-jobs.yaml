@@ -1,52 +1,4 @@
 - job-template:
-    name: 'openstack-install-deploy-guide-{lang}'
-
-    node: 'bare-precise || bare-trusty'
-
-    builders:
-      - revoke-sudo
-      - gerrit-git-prep
-      - shell: |
-          source /usr/local/jenkins/slave_scripts/select-mirror.sh openstack openstack-manuals
-          tox -v -e buildlang-install -- {lang}
-
-    publishers:
-      - console-log
-      - upload-to-docs-site
-
-- job-template:
-    name: 'openstack-misc-guides-{lang}'
-
-    node: 'bare-precise || bare-trusty'
-
-    builders:
-      - revoke-sudo
-      - gerrit-git-prep
-      - shell: |
-          source /usr/local/jenkins/slave_scripts/select-mirror.sh openstack openstack-manuals
-          tox -v -e buildlang-misc -- {lang}
-
-    publishers:
-      - console-log
-      - upload-to-docs-site
-
-- job-template:
-    name: 'openstack-operations-guide-{lang}'
-    node: '{node}'
-
-    builders:
-      - revoke-sudo
-      - gerrit-git-prep
-      - shell: |
-          #!/bin/bash -xe
-          source /usr/local/jenkins/slave_scripts/select-mirror.sh openstack operations-guide
-          tox -v -e buildlang -- {lang}
-
-    publishers:
-      - console-log
-      - upload-to-docs-site
-
-- job-template:
     name: 'gate-{name}-tox-doc-publish-{envlist}'
 
     wrappers:
@@ -81,3 +33,5 @@
           envlist: checkdeletions
       - gate-{name}-tox-doc-publish-{envlist}:
           envlist: checkbuild
+      - '{name}-tox-doc-{envlist}':
+          envlist: publishdocs
