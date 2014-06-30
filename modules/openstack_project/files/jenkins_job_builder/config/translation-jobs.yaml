@@ -104,3 +104,5 @@
       - '{name}-manuals-propose-translation-update'
       - 'gate-{name}-tox-{envlist}':
           envlist: checklang
+      - '{name}-tox-doc-{envlist}':
+          envlist: publishlang
