@@ -115,5 +115,12 @@ elif [ "$OS_FAMILY" == "RedHat" ] ; then
     fi
 fi
 
+# Remove cron jobs
+# We create fresh servers for these hosts, and they are used once. They don't
+# need to do things like update the locatedb or the mandb or rotate logs
+# or really any of those things. We only want code running here that we want
+# here.
+sudo rm -f /etc/cron.{monthly,weekly,daily,hourly,d}/*
+
 sync
 sleep 5
