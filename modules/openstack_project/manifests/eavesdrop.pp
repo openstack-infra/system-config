@@ -60,6 +60,7 @@ class openstack_project::eavesdrop (
         '#openstack-relmgr-office',
         '#openstack-sahara',
         '#openstack-sdks',
+        '#openstack-security',
         '#openstack-swift',
         '#openstack-trove',
         '#storyboard',

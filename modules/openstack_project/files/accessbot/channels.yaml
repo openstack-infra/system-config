@@ -109,6 +109,7 @@ channels:
   - name: openstack-relmgr-office
   - name: openstack-sahara
   - name: openstack-sdks
+  - name: openstack-security
   - name: openstack-state-management
   - name: openstack-swift
   - name: openstack-translation
