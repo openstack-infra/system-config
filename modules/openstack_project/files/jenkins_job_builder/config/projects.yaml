@@ -2849,3 +2849,17 @@
     jobs:
       - gate-{name}-python27
       - gate-{name}-docs
+
+- project:
+    name: security-doc
+    github-org: openstack
+    node: 'bare-precise || bare-trusty'
+
+    jobs:
+      - openstack-doc-jobs
+      - '{name}-tox-doc-{envlist}':
+         envlist: publishdocs
+      - manual-translation-jobs
+      - security-doc-{lang}:
+          lang: ja
+

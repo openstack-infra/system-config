@@ -69,7 +69,7 @@ function init_manuals ()
     project=$1
 
     DocFolder="doc"
-    if [ $project = "api-site" ] ; then
+    if [ $project = "api-site" -o $project = "security-doc" ] ; then
         DocFolder="./"
     fi
 }
