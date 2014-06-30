@@ -92,6 +92,11 @@ def self.pre_build_setup
     Sh.run("chown -R #{ENV['USER']}.#{ENV['USER']} #{cache}")
 
     Sh.run "python #{ENV['WORKSPACE']}/repo/third_party/fetch_packages.py 2>&1 | tee #{ENV['WORKSPACE']}/third_party_fetch_packages.log"
+
+    webui_fetch_packages = "#{ENV['WORKSPACE']}/contrail-webui-third-party/fetch_packages.py"
+    if File.file?(webui_fetch_packages) then
+        Sh.run "python #{webui_fetch_packages} 2>&1 | tee #{ENV['WORKSPACE']}/webui_fetch_packages.log"
+    end
     if ! @use_public then
         Sh.run "python #{ENV['WORKSPACE']}/repo/distro/third_party/fetch_packages.py 2>&1 | tee #{ENV['WORKSPACE']}/distro_fetch_packages.log"
     end
