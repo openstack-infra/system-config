@@ -681,8 +681,6 @@ jobs:
     voting: false
   - name: gate-tomograph-python33
     voting: false
-  - name: gate-rally-install-bare-centos6
-    voting: false
   - name: check-rally-dsvm-cli
     voting: false
   - name: gate-stevedore-docs
