@@ -55,7 +55,7 @@
       - gerrit-git-prep
       - shell: |
           #!/bin/bash -xe
-          source /usr/local/jenkins/slave_scripts/select-mirror.sh openstack security-guide
+          source /usr/local/jenkins/slave_scripts/select-mirror.sh openstack security-doc
           tox -v -e buildlang -- {lang}
 
     publishers:
