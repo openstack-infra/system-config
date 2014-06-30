@@ -11,5 +11,6 @@ o, e = Sh.rrun("#{CLI} list-jobs")
 o.split(/\r\n/).each { |job|
     next if job !~ /ci-contrail/
     Sh.run("#{CLI} disable-job #{job}")
+    sleep 2
     Sh.run("#{CLI} enable-job #{job}")
 }
