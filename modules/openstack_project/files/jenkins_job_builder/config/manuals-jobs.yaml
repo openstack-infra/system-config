@@ -50,9 +50,8 @@
     name: 'gate-{name}-tox-doc-publish-{envlist}'
 
     wrappers:
-      - timeout:
+      - build-timeout:
           timeout: 40
-          fail: true
       - timestamps
 
     builders:

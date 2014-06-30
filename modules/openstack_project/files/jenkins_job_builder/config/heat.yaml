@@ -3,9 +3,8 @@
     node: 'devstack-precise || devstack-trusty'
 
     wrappers:
-      - timeout:
+      - build-timeout:
           timeout: 120
-          fail: true
       - timestamps
 
     builders:

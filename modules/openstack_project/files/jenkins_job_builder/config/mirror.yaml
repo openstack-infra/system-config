@@ -3,9 +3,8 @@
     node: mirror26
 
     wrappers:
-      - timeout:
+      - build-timeout:
           timeout: 90
-          fail: true
       - timestamps
 
     builders:
@@ -23,9 +22,8 @@
     node: mirror26
 
     wrappers:
-      - timeout:
+      - build-timeout:
           timeout: 90
-          fail: true
       - timestamps
 
     builders:
@@ -43,9 +41,8 @@
     node: mirror27
 
     wrappers:
-      - timeout:
+      - build-timeout:
           timeout: 60
-          fail: true
       - timestamps
 
     builders:
@@ -63,9 +60,8 @@
     node: mirror27
 
     wrappers:
-      - timeout:
+      - build-timeout:
           timeout: 60
-          fail: true
       - timestamps
 
     builders:
@@ -83,9 +79,8 @@
     node: mirror33
 
     wrappers:
-      - timeout:
+      - build-timeout:
           timeout: 60
-          fail: true
       - timestamps
 
     builders:
@@ -103,9 +98,8 @@
     node: mirror33
 
     wrappers:
-      - timeout:
+      - build-timeout:
           timeout: 60
-          fail: true
       - timestamps
 
     builders:

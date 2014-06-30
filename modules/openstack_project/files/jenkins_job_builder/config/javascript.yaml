@@ -2,9 +2,8 @@
     name: 'gate-{name}-js-unittests'
 
     wrappers:
-      - timeout:
+      - build-timeout:
           timeout: 40
-          fail: true
       - timestamps
 
     builders:
