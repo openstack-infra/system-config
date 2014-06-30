@@ -86,3 +86,24 @@
 
     jobs:
       - contrail-flake8-jobs
+
+- project:
+    name: contrail-nova-vif-driver
+    github-org: Juniper
+    node: juniper-tests
+    tarball-site: tarballs.openstack.org
+    doc-publisher-site: docs.opencontrail.org
+
+    jobs:
+      - contrail-flake8-jobs
+
+- project:
+    name: contrail-sandesh
+    github-org: Juniper
+    node: juniper-tests
+    tarball-site: tarballs.openstack.org
+    doc-publisher-site: docs.opencontrail.org
+
+    jobs:
+      - contrail-unittest-jobs
+      - contrail-systest-jobs

@@ -375,3 +375,28 @@ projects:
       - noop
     post:
       - noop
+
+  - name: Juniper/contrail-nova-vif-driver
+    check:
+      - ci-contrail-nova-vif-driver-flake8
+    silent:
+      - noop
+    check-tripleo:
+      - noop
+    gate:
+      - noop
+    post:
+      - noop
+
+  - name: Juniper/contrail-sandesh
+    check:
+      - ci-contrail-sandesh-unittest
+      - ci-contrail-sandesh-systest
+    silent:
+      - noop
+    check-tripleo:
+      - noop
+    gate:
+      - noop
+    post:
+      - noop
