@@ -51,6 +51,7 @@ Requirements
   * OpenStack logs
   * Tempest logs (including ``testr_results.html.gz``)
 
+  Note: all test artifacts must be retained for one month.
 
 Reading the Event Stream
 ------------------------
