@@ -419,6 +419,8 @@ jobs:
     parameter-function: set_node_options_default_trusty
   - name: ^gate-sahara-.*$
     parameter-function: set_node_options_default_trusty
+  - name: ^gate-trove-.*$
+    parameter-function: set_node_options_default_trusty
   - name: ^gate-python-cinderclient.*$
     parameter-function: set_node_options_default_trusty
   - name: ^gate-python-glanceclient.*$
