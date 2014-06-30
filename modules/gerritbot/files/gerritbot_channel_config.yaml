@@ -81,6 +81,8 @@ openstack-doc:
       - openstack/openstack-doc-tools
       - openstack/openstack-manuals
       - openstack/operations-guide
+      - openstack/security-doc
+      - openstack/training-guides
       - openstack/volume-api
       - stackforge/clouddocs-maven-plugin
     branches:
@@ -797,6 +799,16 @@ openstack-sdks:
       - stackforge/openstack-sdk-dotnet
       - stackforge/openstack-cli-powershell
       - stackforge/python-openstacksdk
+    branches:
+      - master
+
+openstack-security:
+    events:
+      - patchset-created
+      - change-merged
+      - x-vrif-minus-2
+    projects:
+      - openstack/security-doc
     branches:
       - master
 
