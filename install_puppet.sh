@@ -32,6 +32,12 @@ function is_rhel6 {
         cat /etc/*release | grep -q 'release 6'
 }
 
+function is_rhel7 {
+    [ -f /usr/bin/yum ] && \
+        cat /etc/*release | grep -q -e "Red Hat" -e "CentOS" && \
+        cat /etc/*release | grep -q 'release 7'
+}
+
 function is_ubuntu {
     [ -f /usr/bin/apt-get ]
 }
@@ -59,6 +65,23 @@ function setup_puppet_fedora {
     # work-around is to just symlink pip-python to "fool" it.
     # See upstream issue:
     #  https://tickets.puppetlabs.com/browse/PUP-1082
+    ln -s /usr/bin/pip /usr/bin/pip-python
+}
+
+function setup_puppet_rhel7 {
+
+    local epel_pkg="http://dl.fedoraproject.org/pub/epel/beta/7/x86_64/epel-release-7-0.2.noarch.rpm"
+    local puppet_pkg="https://yum.puppetlabs.com/el/7/products/x86_64/puppetlabs-release-7-10.noarch.rpm"
+
+    # install EPEL
+    rpm -qi epel-release &> /dev/null || rpm -Uvh $epel_pkg
+
+    # NOTE: we preinstall lsb_release to ensure facter sets lsbdistcodename
+    yum install -y redhat-lsb-core git puppet
+
+    rpm -ivh $puppet_pkg
+
+    # see comments in setup_puppet_fedora
     ln -s /usr/bin/pip /usr/bin/pip-python
 }
 
@@ -157,6 +180,8 @@ if is_fedora; then
     setup_puppet_fedora
 elif is_rhel6; then
     setup_puppet_rhel6
+elif is_rhel7; then
+    setup_puppet_rhel7
 elif is_ubuntu; then
     setup_puppet_ubuntu
 else
