@@ -36,8 +36,6 @@
 
     jobs:
       - openstack-doc-jobs
-      - '{name}-tox-doc-{envlist}':
-         envlist: publishdocs
 
 - project:
     name: fuel-specs
@@ -385,8 +383,6 @@
 
     jobs:
       - openstack-doc-jobs
-      - '{name}-tox-doc-{envlist}':
-          envlist: publishdocs
 
 
 - project:
@@ -698,8 +694,6 @@
 
     jobs:
       - openstack-doc-jobs
-      - '{name}-tox-doc-{envlist}':
-          envlist: publishdocs
 
 
 - project:
@@ -721,8 +715,6 @@
 
     jobs:
       - openstack-doc-jobs
-      - '{name}-tox-doc-{envlist}':
-          envlist: publishdocs
 
 
 - project:
@@ -779,8 +771,6 @@
 
     jobs:
       - openstack-doc-jobs
-      - '{name}-tox-doc-{envlist}':
-          envlist: publishdocs
 
 
 - project:
@@ -848,8 +838,6 @@
 
     jobs:
       - openstack-doc-jobs
-      - '{name}-tox-doc-{envlist}':
-          envlist: publishdocs
 
 
 - project:
@@ -1194,8 +1182,6 @@
           datastore: 'mysql'
       - 'gate-trove-buildimage-{datastore}':
           datastore: 'mongodb'
-      - '{name}-tox-doc-{envlist}':
-          envlist: publishdocs
 
 - project:
     name: python-troveclient
@@ -2433,19 +2419,9 @@
         - network-connectivity-admin
         - object-storage-admin
 
-    lang:
-        - ja
-
     jobs:
       - openstack-doc-jobs
       - manual-translation-jobs
-
-      - '{name}-tox-doc-{envlist}':
-          envlist: publishdocs
-
-      - openstack-install-deploy-guide-{lang}
-
-      - openstack-misc-guides-{lang}
 
 - project:
     name: operations-guide
@@ -2455,10 +2431,15 @@
     jobs:
       - openstack-doc-jobs
       - manual-translation-jobs
-      - '{name}-tox-doc-{envlist}':
-          envlist: publishdocs
-      - openstack-operations-guide-{lang}:
-          lang: ja
+
+- project:
+    name: security-doc
+    github-org: openstack
+    node: 'bare-precise || bare-trusty'
+
+    jobs:
+      - openstack-doc-jobs
+      - manual-translation-jobs
 
 - project:
     name: manila
@@ -2674,18 +2655,9 @@
     github-org: openstack
     node: 'bare-precise || bare-trusty'
 
-    lang:
-        - de
-        - es
-        - fr
-        - ja
-
     jobs:
       - openstack-doc-jobs
       - manual-translation-jobs
-      - '{name}-tox-doc-{envlist}':
-          envlist: publishdocs
-      - 'api-site-tox-buildlang-{lang}'
 
 - project:
     name: driverlog
@@ -2703,8 +2675,6 @@
 
     jobs:
       - openstack-doc-jobs
-      - '{name}-tox-doc-{envlist}':
-          envlist: publishdocs
 
 - project:
     name: python-openstacksdk
@@ -2857,17 +2827,3 @@
     jobs:
       - gate-{name}-python27
       - gate-{name}-docs
-
-- project:
-    name: security-doc
-    github-org: openstack
-    node: 'bare-precise || bare-trusty'
-
-    jobs:
-      - openstack-doc-jobs
-      - '{name}-tox-doc-{envlist}':
-         envlist: publishdocs
-      - manual-translation-jobs
-      - security-doc-{lang}:
-          lang: ja
-
