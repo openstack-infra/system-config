@@ -164,6 +164,30 @@ class jenkins::slave(
     require => Package['ccache'],
   }
 
+  file { "/usr/local/bin/${::hardwareisa}-linux-gnu-gcc":
+    ensure  => link,
+    target  => '/usr/bin/ccache',
+    require => Package['ccache'],
+  }
+
+  file { "/usr/local/bin/${::hardwareisa}-linux-gnu-g++":
+    ensure  => link,
+    target  => '/usr/bin/ccache',
+    require => Package['ccache'],
+  }
+
+  file { "/usr/local/bin/${::hardwareisa}-linux-gnu-cc":
+    ensure  => link,
+    target  => '/usr/bin/ccache',
+    require => Package['ccache'],
+  }
+
+  file { "/usr/local/bin/${::hardwareisa}-linux-gnu-c++":
+    ensure  => link,
+    target  => '/usr/bin/ccache',
+    require => Package['ccache'],
+  }
+
   file { '/usr/local/jenkins':
     ensure => directory,
     owner  => 'root',
