@@ -81,6 +81,8 @@ openstack-doc:
       - openstack/openstack-doc-tools
       - openstack/openstack-manuals
       - openstack/operations-guide
+      - openstack/security-doc
+      - openstack/training-guides
       - openstack/volume-api
       - stackforge/clouddocs-maven-plugin
     branches:
