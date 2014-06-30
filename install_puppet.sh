@@ -57,10 +57,30 @@ if cat /etc/*release | grep -e "Fedora" &> /dev/null; then
     ln -s /usr/bin/pip /usr/bin/pip-python
 
 elif cat /etc/*release | grep -e "CentOS" -e "Red Hat" &> /dev/null; then
-    rpm -qi epel-release &> /dev/null || rpm -Uvh http://download.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm
-    rpm -ivh http://yum.puppetlabs.com/el/6/products/x86_64/puppetlabs-release-6-6.noarch.rpm
 
-    cat > /etc/yum.repos.d/puppetlabs.repo <<"EOF"
+    if cat /etc/*release | grep 'release 7'; then
+        rpm -qi epel-release &> /dev/null || \
+            rpm -Uvh http://dl.fedoraproject.org/pub/epel/beta/7/x86_64/epel-release-7-0.2.noarch.rpm
+
+        rpm -ivh https://yum.puppetlabs.com/el/7/products/x86_64/puppetlabs-release-7-10.noarch.rpm
+
+        cat > /etc/yum.repos.d/puppetlabs.repo <<"EOF"
+[puppetlabs-products]
+name=Puppet Labs Products El 7 - $basearch
+baseurl=http://yum.puppetlabs.com/el/7/products/$basearch
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-puppetlabs
+enabled=1
+gpgcheck=1
+exclude=puppet-2.8* puppet-2.9* puppet-3* facter-2*
+EOF
+
+    else
+
+        rpm -qi epel-release &> /dev/null || \
+            rpm -Uvh http://download.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm
+        rpm -ivh http://yum.puppetlabs.com/el/6/products/x86_64/puppetlabs-release-6-6.noarch.rpm
+
+        cat > /etc/yum.repos.d/puppetlabs.repo <<"EOF"
 [puppetlabs-products]
 name=Puppet Labs Products El 6 - $basearch
 baseurl=http://yum.puppetlabs.com/el/6/products/$basearch
@@ -69,6 +89,8 @@ enabled=1
 gpgcheck=1
 exclude=puppet-2.8* puppet-2.9* puppet-3* facter-2*
 EOF
+
+    fi
 
     yum update -y
     # NOTE: enable the optional-rpms channel (if not already enabled)
