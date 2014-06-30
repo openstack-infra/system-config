@@ -2423,10 +2423,12 @@ projects:
       - noop
 
   - name: openstack/security-doc
-    check:
-      - noop
-    gate:
-      - noop
+    template:
+      - name: openstack-doc-gate
+      - name: openstack-doc-translation
+    post:
+      - security-doc-tox-doc-publishdocs
+      - security-doc-ja
 
 # Section: OpenStack development projects
 
