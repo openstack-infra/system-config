@@ -639,10 +639,6 @@ jobs:
     voting: false
   - name: gate-manila-pylint
     voting: false
-  - name: gate-manila-docs
-    voting: false
-  - name: gate-python-manilaclient-docs
-    voting: false
   - name: gate-manila-tempest-dsvm-neutron
     voting: false
   - name: gate-manila-tempest-dsvm-neutron-multibackend
