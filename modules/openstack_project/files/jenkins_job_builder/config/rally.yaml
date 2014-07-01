@@ -31,11 +31,17 @@
       - shell: |
           #!/bin/bash -xe
           export PROJECTS="stackforge/rally $PROJECTS"
-          export ENABLED_SERVICES=rally
+          export PROJECTS="openstack/ceilometer $PROJECTS"
           export DEVSTACK_GATE_NEUTRON={neutron}
           export DEVSTACK_GATE_EXERCISES=0
           export DEVSTACK_GATE_TIMEOUT=120
           export RALLY_SCENARIO={scenario}
+
+          ENABLED_SERVICES=rally,ceilometer-acompute,ceilometer-acentral,ceilometer-api
+          ENABLED_SERVICES+=,ceilometer-anotification,ceilometer-collector,
+          ENABLED_SERVICES+=,ceilometer-alarm-evaluator,ceilometer-alarm-notifier,
+
+          export ENABLED_SERVICES
 
           function pre_test_hook {{
               # Install rally-devstack integration
