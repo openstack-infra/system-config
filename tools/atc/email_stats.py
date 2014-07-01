@@ -49,6 +49,15 @@ def get_account(accounts, num):
 def main():
     accounts = {}
 
+    for row in csv.reader(open('accounts.csv')):
+        num = int(row[-1])
+        name = row[1]
+        email = row[2]
+        a = get_account(accounts, num)
+        a.full_name = name
+        if email and email != '\\N':
+            a.emails.append(email)
+
     for row in csv.reader(open('emails.csv')):
         num, email, pw, external = row
         num = int(num)
@@ -66,12 +75,6 @@ def main():
                 print a.username
                 raise Exception("Already a username")
             a.username = m.group(1)
-
-    for row in csv.reader(open('accounts.csv')):
-        num = int(row[-1])
-        name = row[1]
-        a = get_account(accounts, num)
-        a.full_name = name
 
     username_accounts = {}
     for a in accounts.values():
