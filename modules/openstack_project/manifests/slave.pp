@@ -27,29 +27,6 @@ class openstack_project::slave (
     python3      => $python3,
   }
 
-  file { '/home/jenkins/.pydistutils.cfg':
-    ensure  => present,
-    owner   => 'jenkins',
-    group   => 'jenkins',
-    mode    => '0644',
-    source  => 'puppet:///modules/openstack_project/pydistutils.cfg',
-    require => Class['jenkins::slave'],
-  }
-
-  file { '/home/jenkins/.pip':
-    ensure  => directory,
-    require => Class['jenkins::slave'],
-  }
-
-  file { '/home/jenkins/.pip/pip.conf':
-    ensure  => present,
-    owner   => 'jenkins',
-    group   => 'jenkins',
-    mode    => '0644',
-    source  => 'puppet:///modules/openstack_project/pip.conf',
-    require => File['/home/jenkins/.pip'],
-  }
-
   class { 'salt':
     salt_master => 'ci-puppetmaster.openstack.org',
   }
