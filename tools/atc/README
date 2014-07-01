@@ -1,36 +1,24 @@
 These are the scripts used to create the ATC lists for use in PTL
 elections and Summit invitations.
 
-0) Write a patch to email_stats.py so steps 1-2 are not necessary.
-1) Edit email_stats.py to set your gerrit username.
-2) Edit email_stats.py to set the start_date and end_date.
-3) Run the following queries on review.openstack.org:
+1) Run the following queries on review.openstack.org:
 
-  SELECT * FROM accounts
-  INTO OUTFILE '/tmp/accounts.csv'
-  FIELDS TERMINATED BY ','
-  ENCLOSED BY '"'
-  LINES TERMINATED BY '\n';
+  sudo -H mysql -e 'SELECT * FROM accounts;' reviewdb > accounts.tab
+  sudo -H mysql -e 'SELECT * FROM account_external_ids;' reviewdb > emails.tab
 
-  SELECT * FROM account_external_ids
-  INTO OUTFILE '/tmp/emails.csv'
-  FIELDS TERMINATED BY ','
-  ENCLOSED BY '"'
-  LINES TERMINATED BY '\n';
-
-4) Copy those files to this directory.
-5) Run:
+2) Copy those files to this directory.
+3) Run:
 
   mkdir out
-  ./email-stats.sh
+  virtualenv venv
+  . venv/bin/activate
+  pip install paramiko requests pyyaml
+  ./email_stats.py --begin <BEGINDATE>
+  # optionally specify --end, --keyfile and --user
   DATE=`date --iso`
-  mkdir $DATE
-  for f in out/*.csv ; do
-      fromdos $f
-      iconv -f ISO-8859-1 -t UTF-8 -o $DATE/`basename $f` $f
-  done
+  mv out $DATE
   cat $DATE/*.csv | sort | uniq > $DATE/all.csv
 
-6) You can use diff.py to get the new ATCs since the previous run:
+4) You can use diff.py to get the new ATCs since the previous run:
 
   ./diff.py $OLD-DATE/all.csv $DATE/all.csv $DATE/new.csv
