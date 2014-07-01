@@ -356,30 +356,10 @@ project-templates:
   - name: publish-to-pypi
     pre-release:
       - '{name}-tarball':
-          - '{name}-pypi-wheel-upload':
-              - post-mirror-python26
-              - post-mirror-python27
-              - post-mirror-python33
+          - '{name}-pypi-wheel-upload'
     release:
       - '{name}-tarball':
-        - '{name}-pypi-both-upload':
-            - post-mirror-python26
-            - post-mirror-python27
-            - post-mirror-python33
-
-  # Publish pre-releases as wheels and official releases as sdist and
-  # wheels, then sync to the python 2 mirrors only.
-  - name: publish-to-pypi-2only
-    pre-release:
-      - '{name}-tarball':
-          - '{name}-pypi-wheel-upload':
-              - post-mirror-python26
-              - post-mirror-python27
-    release:
-      - '{name}-tarball':
-        - '{name}-pypi-both-upload':
-            - post-mirror-python26
-            - post-mirror-python27
+        - '{name}-pypi-both-upload'
 
   - name: docs-on-rtfd
     post:
@@ -1138,7 +1118,7 @@ projects:
       - name: openstack-server-publish-jobs
       - name: check-requirements
       - name: integrated-gate
-      - name: publish-to-pypi-2only
+      - name: publish-to-pypi
 
   - name: openstack/sahara
     template:
@@ -1329,7 +1309,7 @@ projects:
       - name: openstack-client-publish-jobs
       - name: check-requirements
       - name: integrated-gate
-      - name: publish-to-pypi-2only
+      - name: publish-to-pypi
     check:
       - check-devstack-dsvm-cells
       - gate-tempest-dsvm-large-ops
@@ -1911,7 +1891,7 @@ projects:
       - name: openstack-server-publish-jobs
       - name: check-requirements
       - name: integrated-gate
-      - name: publish-to-pypi-2only
+      - name: publish-to-pypi
     check:
       - check-devstack-dsvm-cells
       - gate-tempest-dsvm-large-ops
@@ -2004,7 +1984,7 @@ projects:
       - name: openstack-server-publish-jobs
       - name: check-requirements
       - name: integrated-gate
-      - name: publish-to-pypi-2only
+      - name: publish-to-pypi
     check:
       - gate-oslo.version-pypy
       - gate-oslo.version-python33
@@ -2052,19 +2032,12 @@ projects:
       - gate-tempest-dsvm-neutron-large-ops
       - gate-swift-dsvm-functional
     post:
-      - post-mirror-python26
-      - post-mirror-python27
-      - post-mirror-python33
       - propose-requirements-updates
     experimental-tripleo:
       - check-tripleo-ironic-seed-precise
       - check-tripleo-undercloud-precise
       - check-tripleo-ironic-undercloud-precise
       - check-tripleo-overcloud-precise
-    periodic:
-      - periodic-mirror-python26
-      - periodic-mirror-python27
-      - periodic-mirror-python33
 
 # TODO: add docs
   - name: openstack/sahara-dashboard
@@ -2948,10 +2921,6 @@ projects:
     gate:
       - gate-pypi-mirror-pep8
       - gate-requirements-integration-dsvm
-    post:
-      - post-mirror-python26
-      - post-mirror-python27
-      - post-mirror-python33
 
   - name: stackforge/python-jenkins
     # docs is missing a build_sphinx entry point in setup.py
@@ -4418,7 +4387,7 @@ projects:
     template:
       - name: python-jobs
       - name: check-requirements
-      - name: publish-to-pypi-2only
+      - name: publish-to-pypi
     check:
       - gate-solum-dashboard-pypy
     gate:
@@ -4613,7 +4582,7 @@ projects:
 
   - name: stackforge/tomograph
     template:
-      - name: publish-to-pypi-2only
+      - name: publish-to-pypi
     check:
       - gate-tomograph-pep8
       - gate-tomograph-python26
