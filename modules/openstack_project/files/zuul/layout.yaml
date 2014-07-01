@@ -633,8 +633,6 @@ jobs:
     voting: false
   - name: gate-refstack-python33
     voting: false
-  - name: gate-rubick-python33
-    voting: false
   - name: ^(gate|check)-sqlalchemy-migrate-devstack-dsvm$
     voting: false
   - name: gate-manila-pylint
@@ -4484,6 +4482,7 @@ projects:
     gate:
       - gate-rubick-pep8
       - gate-rubick-python27
+      - gate-rubick-python33
     post:
       - rubick-coverage
 
