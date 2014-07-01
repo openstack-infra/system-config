@@ -4890,6 +4890,10 @@ projects:
     template:
       - name: python-jobs
       - name: publish-to-pypi
+    check:
+      - gate-doc8-pep8
+    gate:
+      - gate-doc8-pep8
 
   - name: stackforge/tacker
     check:
