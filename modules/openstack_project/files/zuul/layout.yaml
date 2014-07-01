@@ -4561,11 +4561,13 @@ projects:
       - gate-stackalytics-pep8
       - gate-stackalytics-python26
       - gate-stackalytics-python27
+      - gate-stackalytics-python33
     gate:
       - gate-stackalytics-docs
       - gate-stackalytics-pep8
       - gate-stackalytics-python26
       - gate-stackalytics-python27
+      - gate-stackalytics-python33
     post:
       - stackalytics-branch-tarball
     pre-release:
