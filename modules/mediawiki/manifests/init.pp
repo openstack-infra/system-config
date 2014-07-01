@@ -56,7 +56,7 @@ class mediawiki(
 
     apache::vhost { $site_hostname:
       port     => 443,
-      docroot  => 'MEANINGLESS ARGUMENT',
+      docroot  => '/tmp/meaningless_docroot',
       priority => '50',
       template => 'mediawiki/apache/mediawiki.erb',
       ssl      => true,
