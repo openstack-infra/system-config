@@ -24,6 +24,7 @@
 
           function post_test_hook {{
               $BASE/new/devstack/unstack.sh
+              # TODO(HenryG): this isn't actually passed through sudo
               export OS_SUDO_TESTING=1
               cd $BASE/new/neutron
               # Run tests as the stack user to allow sudo.
