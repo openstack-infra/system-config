@@ -1297,5 +1297,4 @@
       - '{pipeline}-tempest-dsvm-neutron-full-non-isolated{branch-designator}'
       - '{pipeline}-tempest-dsvm-keystonev3-full{branch-designator}'
       - '{pipeline}-tempest-dsvm-neutron-keystonev3-full{branch-designator}'
-      - '{pipeline}-tempest-dsvm-full-apache-services{branch-designator}'
       - '{pipeline}-tempest-dsvm-nova-v3-full{branch-designator}'
