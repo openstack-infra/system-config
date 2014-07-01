@@ -131,6 +131,28 @@
     node: py3k-precise
 
 - job-template:
+    name: 'gate-{name}-python34'
+
+    wrappers:
+      - build-timeout:
+          timeout: 40
+      - timestamps
+
+    builders:
+      - revoke-sudo
+      - gerrit-git-prep
+      - python34:
+          github-org: '{github-org}'
+          project: '{name}'
+      - assert-no-extra-files
+
+    publishers:
+      - test-results
+      - console-log
+
+    node: '{node}'
+
+- job-template:
     name: 'gate-{name}-pypy'
 
     wrappers:
@@ -258,6 +280,7 @@
       - 'gate-{name}-python26'
       - 'gate-{name}-python27'
       - 'gate-{name}-python33'
+      - 'gate-{name}-python34'
       - 'gate-{name}-pypy'
       - 'gate-{name}-docs'
       - 'gate-{name}-requirements'
