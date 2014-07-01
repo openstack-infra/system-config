@@ -50,10 +50,10 @@ def self.setup_contrail_repo(use_public)
     # e.g. ENV['NODE_LABELS' = "ci-10.84.35.174 juniper-tests swarm"
 
     if use_public then
-        Sh.run "repo init -u git@github.com:Juniper/contrail-vnc -b #{branch}"
+        Sh.run "repo init --repo-url 'https://github.com/opencontrail-ci-admin/git-repo' -u git@github.com:Juniper/contrail-vnc -b #{branch}"
     else
         branch = "mainline" if branch == "master"
-        Sh.run "repo init -u git@github.com:Juniper/contrail-vnc-private " +
+        Sh.run "repo init --repo-url 'https://github.com/opencontrail-ci-admin/git-repo' -u git@github.com:Juniper/contrail-vnc-private " +
            "-m #{branch}/ubuntu-12-04/manifest-havana.xml"
     end
 
