@@ -220,10 +220,26 @@ class openstack_project::static (
     source  => 'puppet:///modules/openstack_project/bandersnatch.conf',
   }
 
+  file { '/var/log/bandersnatch':
+    ensure => directory,
+  }
+
   cron { 'bandersnatch':
     minute      => '*/5',
-    command     => 'bandersnatch mirror',
+    command     => 'bandersnatch mirror >>/var/log/bandersnatch/mirror.log 2>&1',
     environment => 'PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin',
   }
 
+  include logrotate
+  logrotate::file { 'bandersnatch':
+    log     => '/var/log/bandersnatch/mirror.log',
+    options => [
+      'compress',
+      'copytruncate',
+      'missingok',
+      'rotate 7',
+      'daily',
+      'notifempty',
+    ],
+  }
 }
