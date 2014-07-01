@@ -110,7 +110,7 @@
           cd gerrit
           /usr/local/jenkins/slave_scripts/gerrit-git-prep.sh https://review.openstack.org git://git.openstack.org
           /usr/local/jenkins/slave_scripts/version-properties.sh
-          source version.properites
+          source version.properties
           buck clean
           buck build release
           cp buck-out/gen/release.war buck-out/gen/gerrit-$PROJECT_VER.war
@@ -141,7 +141,7 @@
           cd gerrit
           /usr/local/jenkins/slave_scripts/gerrit-git-prep.sh https://review.openstack.org git://git.openstack.org
           /usr/local/jenkins/slave_scripts/version-properties.sh
-          source version.properites
+          source version.properties
           buck clean
           buck build release
           cp buck-out/gen/release.war buck-out/gen/gerrit-$PROJECT_VER.war
@@ -168,7 +168,7 @@
           cd gerrit
           /usr/local/jenkins/slave_scripts/gerrit-git-prep.sh https://review.openstack.org git://git.openstack.org
           /usr/local/jenkins/slave_scripts/version-properties.sh
-          source version.properites
+          source version.properties
           buck clean
           buck build release
           cp gerrit/buck-out/gen/release.war gerrit/buck-out/gen/gerrit-$PROJECT_VER.war
