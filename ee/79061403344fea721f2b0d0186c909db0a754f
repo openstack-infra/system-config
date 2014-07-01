@@ -1,0 +1,11 @@
+Code-Review-1: James E. Blair <corvus@inaugust.com>
+Verified+2: Jenkins
+Code-Review+1: Sean Dague <sean@dague.net>
+Code-Review+2: Jeremy Stanley <fungi@yuggoth.org>
+Workflow+1: Jeremy Stanley <fungi@yuggoth.org>
+Code-Review+1: Paul Michali <pcm@cisco.com>
+Submitted-by: Jenkins
+Submitted-at: Tue, 01 Jul 2014 14:58:24 +0000
+Reviewed-on: https://review.openstack.org/103909
+Project: openstack-infra/config
+Branch: refs/heads/master
