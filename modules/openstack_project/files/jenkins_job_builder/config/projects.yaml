@@ -2552,6 +2552,10 @@
     jobs:
       - python-jobs
       - gate-{name}-pylint
+      - gate-{name}-tox-{envlist}:
+          envlist: tempauth
+      - gate-{name}-tox-{envlist}:
+          envlist: keystone
 
 - project:
     name: swiftsync

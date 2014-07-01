@@ -4589,8 +4589,12 @@ projects:
       - name: python-jobs
     check:
       - gate-swift3-pylint
+      - gate-swift3-tox-tempauth
+      - gate-swift3-tox-keystone
     gate:
       - gate-swift3-pylint
+      - gate-swift3-tox-tempauth
+      - gate-swift3-tox-keystone
 
   - name: stackforge/swiftsync
     check:
