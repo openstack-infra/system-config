@@ -354,6 +354,14 @@
       - gate-{name}-pep8
 
 - project:
+    name: doc8
+    github-org: stackforge
+    node: 'bare-precise || bare-trusty'
+
+    jobs:
+      - gate-{name}-pep8
+
+- project:
     name: ceilometer
     github-org: openstack
     node: 'bare-precise || bare-trusty'

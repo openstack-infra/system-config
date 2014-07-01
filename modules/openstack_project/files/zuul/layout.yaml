@@ -4733,9 +4733,9 @@ projects:
 
   - name: stackforge/doc8
     check:
-      - noop
+      - gate-doc8-pep8
     gate:
-      - noop
+      - gate-doc8-pep8
 
   - name: stackforge/tacker
     check:
