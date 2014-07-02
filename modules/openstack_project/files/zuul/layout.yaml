@@ -2366,6 +2366,14 @@ projects:
       - api-site-tox-buildlang-fr
       - api-site-tox-buildlang-ja
 
+  - name: openstack/docs-specs
+    check:
+      - gate-docs-specs-docs
+      - gate-docs-specs-python27
+    gate:
+      - gate-docs-specs-docs
+      - gate-docs-specs-python27
+
   - name: openstack/openstack-manuals
     template:
       - name: openstack-doc-gate
