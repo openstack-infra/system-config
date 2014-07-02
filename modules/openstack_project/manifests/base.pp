@@ -5,6 +5,7 @@ class openstack_project::base(
   $install_users = true,
   $pin_puppet    = '2.7.',
   $pin_facter    = '1.',
+  $ca_server     = undef,
 ) {
   if ($::osfamily == 'Debian') {
     include apt
