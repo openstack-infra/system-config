@@ -178,7 +178,11 @@ node 'graphite.openstack.org' {
 
 node 'groups.openstack.org' {
   class { 'openstack_project::groups':
-    sysadmins => hiera('sysadmins', ['admin']),
+    sysadmins           => hiera('sysadmins', ['admin']),
+    site_admin_password => hiera('groups_site_admin_password', 'XXX'),
+    site_mysql_host     => hiera('groups_site_mysql_host', 'localhost'),
+    site_mysql_password => hiera('groups_site_mysql_password', 'XXX'),
+    conf_cron_key       => hiera('groups_conf_cron_key', 'XXX'),
   }
 }
 
