@@ -17,12 +17,13 @@
 # limitations under the License.
 
 HOSTNAME=$1
-SUDO=$2
-THIN=$3
-PYTHON3=${4:-false}
-PYPY=${5:-false}
-ALL_MYSQL_PRIVS=${6:-false}
-GIT_BASE=${7:-git://git.openstack.org}
+
+SUDO=${SUDO:-true}
+THIN=${THIN:-true}
+PYTHON3=${PYTHON3:-false}
+PYPY=${PYPY:-false}
+ALL_MYSQL_PRIVS=${ALL_MYSQL_PRIVS:-false}
+GIT_BASE=${GIT_BASE:-git://git.openstack.org}
 
 # Save the nameservers configured by our provider.
 cat >/tmp/forwarding.conf <<EOF
