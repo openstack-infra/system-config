@@ -680,6 +680,14 @@ jobs:
   - name: gate-tuskar-ui-jshint
     voting: false
 
+  # TODO(rpodolyaka): make voting when the jobs pass on all SA versions
+  - name: gate-oslo.db-tox-sqla_07
+    voting: false
+  - name: gate-oslo.db-tox-sqla_08
+    voting: false
+  - name: gate-oslo.db-tox-sqla_09
+    voting: false
+
 # The project list is grouped by type of project, and within each
 # group, projects are sorted (mostly) alphabetically.
 projects:
@@ -1899,10 +1907,16 @@ projects:
       - check-devstack-dsvm-cells
       - gate-tempest-dsvm-large-ops
       - gate-tempest-dsvm-neutron-large-ops
+      - gate-oslo.db-tox-sqla_07
+      - gate-oslo.db-tox-sqla_08
+      - gate-oslo.db-tox-sqla_09
     gate:
       - gate-devstack-dsvm-cells
       - gate-tempest-dsvm-large-ops
       - gate-tempest-dsvm-neutron-large-ops
+      - gate-oslo.db-tox-sqla_07
+      - gate-oslo.db-tox-sqla_08
+      - gate-oslo.db-tox-sqla_09
     experimental-tripleo:
       - check-tripleo-ironic-seed-precise
       - check-tripleo-undercloud-precise

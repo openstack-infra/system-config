@@ -903,11 +903,16 @@
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
+    envlist:
+      - sqla_07
+      - sqla_08
+      - sqla_09
 
     jobs:
       - python-jobs
       - openstack-publish-jobs
       - pypi-jobs
+      - 'gate-{name}-tox-{envlist}'
 
 - project:
     name: oslo.i18n
