@@ -67,7 +67,7 @@ def swift_form_post_submit(file_list, url, hmac_body, signature):
      payload['redirect'],
      payload['max_file_size'],
      payload['max_file_count'],
-     payload['expires']) = hmac_body.split('\\n')
+     payload['expires']) = hmac_body.split('\n')
     payload['signature'] = signature
 
     if len(file_list) > payload['max_file_count']:
