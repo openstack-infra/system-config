@@ -24,6 +24,7 @@ PYTHON3=${PYTHON3:-false}
 PYPY=${PYPY:-false}
 ALL_MYSQL_PRIVS=${ALL_MYSQL_PRIVS:-false}
 GIT_BASE=${GIT_BASE:-git://git.openstack.org}
+PUPPET3=${PUPPET3:-''}
 
 # Save the nameservers configured by our provider.
 cat >/tmp/forwarding.conf <<EOF
@@ -43,7 +44,7 @@ if [ -f /usr/bin/yum ]; then
     sudo yum -y install wget
 fi
 wget https://git.openstack.org/cgit/openstack-infra/config/plain/install_puppet.sh
-sudo bash -xe install_puppet.sh
+sudo bash -xe install_puppet.sh $PUPPET3
 
 sudo git clone --depth=1 $GIT_BASE/openstack-infra/config.git \
     /root/config
