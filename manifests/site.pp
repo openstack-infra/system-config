@@ -160,10 +160,10 @@ node 'ci-puppetmaster.openstack.org' {
 
 node 'puppetmaster.openstack.org' {
   class { 'openstack_project::puppetmaster':
-    root_rsa_key    => hiera('puppetmaster_root_rsa_key'),
+    root_rsa_key    => hiera('puppetmaster_root_rsa_key', 'XXX'),
     salt            => false,
     update_slave    => false,
-    sysadmins       => hiera('sysadmins'),
+    sysadmins       => hiera('sysadmins', ['admin']),
     version         => '3.4.',
   }
 }
