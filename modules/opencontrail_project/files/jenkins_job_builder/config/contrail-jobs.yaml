@@ -35,7 +35,7 @@
           /usr/bin/ci_setup.sh
           ruby /usr/local/jenkins/slave_scripts/contrail-git-prep.rb
           [ $PROJECT_NAME = contrail-neutron-plugin ] && bash +x /usr/local/jenkins/slave_scripts/contrail-flake8-job.sh openstack neutron_plugin
-	  [ $PROJECT_NAME = contrail-nova-vif-driver ] && bash +x /usr/local/jenkins/slave_scripts/contrail-flake8-job.sh openstack nova_contrail_vif
+          [ $PROJECT_NAME = contrail-nova-vif-driver ] && bash +x /usr/local/jenkins/slave_scripts/contrail-flake8-job.sh openstack nova_contrail_vif
           [ $PROJECT_NAME = contrail-generateDS ] && bash +x /usr/local/jenkins/slave_scripts/contrail-flake8-job.sh tools generateds || exit 0
 
 - job-template:
