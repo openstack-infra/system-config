@@ -17,7 +17,7 @@ class etherpad_lite::apache (
   include apache
   apache::vhost { $vhost_name:
     port     => 443,
-    docroot  => '/tmp/meaningless_docroot',
+    docroot  => 'MEANINGLESS ARGUMENT',
     priority => '50',
     template => 'etherpad_lite/etherpadlite.vhost.erb',
     ssl      => true,

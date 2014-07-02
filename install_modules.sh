@@ -41,7 +41,7 @@ MODULES["puppetlabs-ntp"]="0.2.0"
 # licensed
 MODULES["openstackci-vcsrepo"]="0.0.8"
 
-MODULES["puppetlabs-apache"]="0.4.0"
+MODULES["puppetlabs-apache"]="0.0.4"
 MODULES["puppetlabs-apt"]="1.1.0"
 MODULES["puppetlabs-haproxy"]="0.4.1"
 MODULES["puppetlabs-mysql"]="0.6.1"

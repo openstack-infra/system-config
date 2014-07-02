@@ -300,7 +300,7 @@ class zuul (
 
   apache::vhost { $vhost_name:
     port     => 443,
-    docroot  => '/tmp/meaningless_docroot',
+    docroot  => 'MEANINGLESS ARGUMENT',
     priority => '50',
     template => 'zuul/zuul.vhost.erb',
   }
