@@ -23,7 +23,8 @@
 
 #
 # Test condition to install puppet 3
-if [ "$1" = '--three' ]; then
+PUPPET_VERSION=${PUPPET_VERSION:-2}
+if [ "$PUPPET_VERSION" = '3' ]; then
     THREE=yes
     echo "Running in 3 mode"
 fi

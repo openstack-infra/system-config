@@ -25,6 +25,8 @@ PYPY=${PYPY:-false}
 ALL_MYSQL_PRIVS=${ALL_MYSQL_PRIVS:-false}
 GIT_BASE=${GIT_BASE:-git://git.openstack.org}
 
+export PUPPET_VERSION=${PUPPET_VERSION:-'2'}
+
 # Save the nameservers configured by our provider.
 cat >/tmp/forwarding.conf <<EOF
 forward-zone:
