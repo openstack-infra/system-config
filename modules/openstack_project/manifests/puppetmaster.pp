@@ -7,6 +7,7 @@ class openstack_project::puppetmaster (
   $update_slave = true,
   $sysadmins = [],
   $version   = '2.7.',
+  $ca_server = undef,
 ) {
   include logrotate
   include openstack_project::params
@@ -15,6 +16,7 @@ class openstack_project::puppetmaster (
     iptables_public_tcp_ports => [4505, 4506, 8140],
     sysadmins                 => $sysadmins,
     pin_puppet                => $version,
+    ca_server                 => $ca_server,
   }
 
   if ($salt) {

@@ -18,6 +18,10 @@ manifestdir=/opt/config/$environment/manifests
 modulepath=/opt/config/$environment/modules:/etc/puppet/modules
 manifest=$manifestdir/site.pp
 reports=store,puppetdb
+<%= if @ca_server %>
+ca = false
+ca_server = <%= @ca_server %>
+<%= end %>
 
 [agent]
 report=true

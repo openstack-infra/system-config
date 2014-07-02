@@ -8,10 +8,11 @@ class openstack_project::template (
   $iptables_rules4           = [],
   $iptables_rules6           = [],
   $pin_puppet                = '2.7.',
-  $install_users = true,
-  $install_resolv_conf = true,
-  $automatic_upgrades = true,
-  $certname = $::fqdn
+  $install_users             = true,
+  $install_resolv_conf       = true,
+  $automatic_upgrades        = true,
+  $certname                  = $::fqdn
+  $ca_server                 = undef,
 ) {
   include ssh
   include snmpd
@@ -32,6 +33,7 @@ class openstack_project::template (
     install_users => $install_users,
     certname      => $certname,
     pin_puppet    => $pin_puppet,
+    ca_server     => $ca_server,
   }
 
   package { 'lvm2':
