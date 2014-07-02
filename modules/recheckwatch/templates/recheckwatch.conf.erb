@@ -7,7 +7,7 @@ closed_age=5 ; days
 regex=(?i)^(?P<verb>recheck|reverify) (?:bug|lp)[\s#:]*(?P<bugno>\d+)$
 
 [gerrit]
-host=<%= gerrit_server %>
-user=<%= gerrit_user %>
+host=<%= @gerrit_server %>
+user=<%= @gerrit_user %>
 key=/var/lib/recheckwatch/ssh/id_rsa
 port=29418

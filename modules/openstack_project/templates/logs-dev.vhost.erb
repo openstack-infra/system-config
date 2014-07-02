@@ -3,15 +3,15 @@
 # Managed by Puppet
 # ************************************
 
-NameVirtualHost <%= vhost_name %>:<%= port %>
-<VirtualHost <%= vhost_name %>:<%= port %>>
-  ServerName <%= srvname %>
+NameVirtualHost <%= @vhost_name %>:<%= @port %>
+<VirtualHost <%= @vhost_name %>:<%= @port %>>
+  ServerName <%= @srvname %>
 <% if serveraliases.is_a? Array -%>
-<% serveraliases.each do |name| -%><%= " ServerAlias #{name}\n" %><% end -%>
-<% elsif serveraliases != '' -%>
-<%= " ServerAlias #{serveraliases}" %>
+<% serveraliases.each do |name| -%><%= " ServerAlias #{@name}\n" %><% end -%>
+<% elsif @serveraliases != '' -%>
+<%= " ServerAlias #{@serveraliases}" %>
 <% end -%>
-  DocumentRoot <%= docroot %>
+  DocumentRoot <%= @docroot %>
 
   # use Apache to compress the results afterwards, to save on the wire
   # it's approx 18x savings of wire traffic to compress. We need to
@@ -23,37 +23,37 @@ NameVirtualHost <%= vhost_name %>:<%= port %>
     AddDefaultCharset UTF-8
     AddEncoding x-gzip gz
   </FilesMatch>
-  <Directory <%= docroot %>>
-    Options <%= options %>
+  <Directory <%= @docroot %>>
+    Options <%= @options %>
     AllowOverride None
     Order allow,deny
     allow from all
   </Directory>
 
-  <Directory <%= docroot %>/*/*/*/*/*-tempest-dsvm*/*>
+  <Directory <%= @docroot %>/*/*/*/*/*-tempest-dsvm*/*>
      ReadmeName /help/tempest-overview.html
   </Directory>
-  <Directory <%= docroot %>/periodic*/*/*-tempest-dsvm*/*>
+  <Directory <%= @docroot %>/periodic*/*/*-tempest-dsvm*/*>
      ReadmeName /help/tempest-overview.html
   </Directory>
-  <Directory <%= docroot %>/*/*/*/*/*-tempest-dsvm*/*/logs/>
+  <Directory <%= @docroot %>/*/*/*/*/*-tempest-dsvm*/*/logs/>
      ReadmeName /help/tempest-logs.html
   </Directory>
-  <Directory <%= docroot %>/periodic*/*/*-tempest-dsvm*/*/logs/>
+  <Directory <%= @docroot %>/periodic*/*/*-tempest-dsvm*/*/logs/>
      ReadmeName /help/tempest-logs.html
   </Directory>
 
   # old patterns, can be removed in July 2014
-  <Directory <%= docroot %>/*/*/*/*/gate-tempest-devstack*/*>
+  <Directory <%= @docroot %>/*/*/*/*/gate-tempest-devstack*/*>
      ReadmeName /help/tempest-overview.html
   </Directory>
-  <Directory <%= docroot %>/periodic/*/periodic-tempest-devstack*/*>
+  <Directory <%= @docroot %>/periodic/*/periodic-tempest-devstack*/*>
      ReadmeName /help/tempest-overview.html
   </Directory>
-  <Directory <%= docroot %>/*/*/*/*/gate-tempest-devstack*/*/logs/>
+  <Directory <%= @docroot %>/*/*/*/*/gate-tempest-devstack*/*/logs/>
      ReadmeName /help/tempest-logs.html
   </Directory>
-  <Directory <%= docroot %>/periodic/*/periodic-tempest-devstack*/*/logs/>
+  <Directory <%= @docroot %>/periodic/*/periodic-tempest-devstack*/*/logs/>
      ReadmeName /help/tempest-logs.html
   </Directory>
 
@@ -63,8 +63,8 @@ NameVirtualHost <%= vhost_name %>:<%= port %>
   RewriteRule ^/(.*console\.html(\.gz)?)$ /htmlify/$1 [QSA,L,PT]
   WSGIScriptAlias /htmlify /usr/local/lib/python2.7/dist-packages/os_loganalyze/wsgi.py
 
-  ErrorLog /var/log/apache2/<%= name %>_error.log
+  ErrorLog /var/log/apache2/<%= @name %>_error.log
   LogLevel warn
-  CustomLog /var/log/apache2/<%= name %>_access.log combined
+  CustomLog /var/log/apache2/<%= @name %>_access.log combined
   ServerSignature Off
 </VirtualHost>
