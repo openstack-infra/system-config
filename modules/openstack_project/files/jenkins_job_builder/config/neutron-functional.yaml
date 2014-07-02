@@ -24,13 +24,11 @@
 
           function post_test_hook {{
               $BASE/new/devstack/unstack.sh
-              # TODO(HenryG): this isn't actually passed through sudo
-              export OS_SUDO_TESTING=1
               cd $BASE/new/neutron
-              # Run tests as the stack user to allow sudo.
+              # Run tests as the stack user to allow sudo+rootwrap.
               sudo chown -R stack:stack $BASE/new/neutron
               echo "Running neutron functional test suite"
-              sudo -H -u stack tox -e functional
+              sudo -H -u stack tox -e dsvm-functional
           }}
           export -f post_test_hook
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
