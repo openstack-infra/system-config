@@ -1,24 +1,24 @@
-<%= @log %> {
-<% @options.each do |opt| -%> <%= opt %>
+<%= log %> {
+<% options.each do |opt| -%> <%= opt %>
 <% end -%>
-<% if @prerotate != 'undef' -%>
+<% if prerotate != 'undef' -%>
  prerotate
-  <%= @prerotate %>
+  <%= prerotate %>
  endscript
 <% end -%>
-<% if @postrotate != 'undef' -%>
+<% if postrotate != 'undef' -%>
  postrotate
-  <%= @postrotate %>
+  <%= postrotate %>
  endscript
 <% end -%>
-<% if @firstaction != 'undef' -%>
+<% if firstaction != 'undef' -%>
  firstaction
-  <%= @firstaction %>
+  <%= firstaction %>
  endscript
 <% end -%>
-<% if @lastaction != 'undef' -%>
+<% if lastaction != 'undef' -%>
  lastaction
-  <%= @lastaction %>
+  <%= lastaction %>
  endscript
 <% end -%>
 }

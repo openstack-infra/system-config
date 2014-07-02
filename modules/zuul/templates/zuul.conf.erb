@@ -1,13 +1,13 @@
 [gearman]
-server=<%= @gearman_server %>
+server=<%= gearman_server %>
 
 [gearman_server]
-start=<%= @internal_gearman %>
+start=<%= internal_gearman %>
 log_config=/etc/zuul/gearman-logging.conf
 
 [gerrit]
-server=<%= @gerrit_server %>
-user=<%= @gerrit_user %>
+server=<%= gerrit_server %>
+user=<%= gerrit_user %>
 sshkey=/var/lib/zuul/ssh/id_rsa
 
 [zuul]
@@ -15,37 +15,37 @@ layout_config=/etc/zuul/layout.yaml
 log_config=/etc/zuul/logging.conf
 state_dir=/var/lib/zuul
 git_dir=/var/lib/zuul/git
-url_pattern=<%= @url_pattern %>
-status_url=<%= @status_url %>
-job_name_in_report=<%= @job_name_in_report %>
-zuul_url=<%= @zuul_url %>
+url_pattern=<%= url_pattern %>
+status_url=<%= status_url %>
+job_name_in_report=<%= job_name_in_report %>
+zuul_url=<%= zuul_url %>
 
 [merger]
 git_dir=/var/lib/zuul/git
-zuul_url=<%= @zuul_url %>
+zuul_url=<%= zuul_url %>
 log_config=/etc/zuul/merger-logging.conf
-<% if @git_email != "" -%>
-git_user_email=<%= @git_email %>
+<% if git_email != "" -%>
+git_user_email=<%= git_email %>
 <% end -%>
-<% if @git_name != "" -%>
-git_user_name=<%= @git_name %>
+<% if git_name != "" -%>
+git_user_name=<%= git_name %>
 <% end -%>
 
-<% if @swift_authurl != "" -%>
+<% if swift_authurl != "" -%>
 [swift]
-authurl=<%= @swift_authurl %>
-user=<%= @swift_user %>
-key=<%= @swift_key %>
-tenant_name=<%= @swift_tenant_name %>
-region_name=<%= @swift_region_name %>
-default_container=<%= @swift_default_container %>
-default_logserver_prefix=<%= @swift_default_logserver_prefix %>
+authurl=<%= swift_authurl %>
+user=<%= swift_user %>
+key=<%= swift_key %>
+tenant_name=<%= swift_tenant_name %>
+region_name=<%= swift_region_name %>
+default_container=<%= swift_default_container %>
+default_logserver_prefix=<%= swift_default_logserver_prefix %>
 <% end -%>
 
-<% if @smtp_host != "" -%>
+<% if smtp_host != "" -%>
 [smtp]
-server=<%= @smtp_host %>
-port=<%= @smtp_port %>
-default_from=<%= @smtp_default_from %>
-default_to=<%= @smtp_default_to %>
+server=<%= smtp_host %>
+port=<%= smtp_port %>
+default_from=<%= smtp_default_from %>
+default_to=<%= smtp_default_to %>
 <% end -%>
