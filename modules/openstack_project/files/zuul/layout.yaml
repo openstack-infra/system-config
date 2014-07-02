@@ -4241,6 +4241,24 @@ projects:
       - gate-puppet-tempest-puppet-unit-3.3
       - gate-puppet-tempest-puppet-unit-3.4
 
+  - name: stackforge/puppet-trove
+    check:
+      - gate-puppet-trove-puppet-lint
+      - gate-puppet-trove-puppet-syntax
+      - gate-puppet-trove-puppet-unit-2.7
+      - gate-puppet-trove-puppet-unit-3.1
+      - gate-puppet-trove-puppet-unit-3.2
+      - gate-puppet-trove-puppet-unit-3.3
+      - gate-puppet-trove-puppet-unit-3.4
+    gate:
+      - gate-puppet-trove-puppet-lint
+      - gate-puppet-trove-puppet-syntax
+      - gate-puppet-trove-puppet-unit-2.7
+      - gate-puppet-trove-puppet-unit-3.1
+      - gate-puppet-trove-puppet-unit-3.2
+      - gate-puppet-trove-puppet-unit-3.3
+      - gate-puppet-trove-puppet-unit-3.4
+
   - name: stackforge/puppet-vswitch
     check:
       - gate-puppet-vswitch-puppet-lint

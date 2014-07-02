@@ -1896,6 +1896,17 @@
       - puppet-module-unit
 
 - project:
+    name: puppet-trove
+    github-org: stackforge
+    node: 'bare-precise || bare-trusty'
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - gate-{name}-puppet-lint
+      - gate-{name}-puppet-syntax
+      - puppet-module-unit
+
+- project:
     name: puppet-neutron
     github-org: stackforge
     node: 'bare-precise || bare-trusty'

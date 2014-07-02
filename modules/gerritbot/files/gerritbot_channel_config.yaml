@@ -259,6 +259,7 @@ puppet-openstack:
       - stackforge/puppet-openstack_extras
       - stackforge/puppet-swift
       - stackforge/puppet-tempest
+      - stackforge/puppet-ironic
       - stackforge/puppet-vswitch
       - stackforge/puppet-openstack-specs
     branches:
