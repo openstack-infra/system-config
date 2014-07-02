@@ -86,7 +86,7 @@ class cgit(
   apache::vhost { $vhost_name:
     port          => $https_port,
     serveraliases => $serveraliases,
-    docroot       => '/tmp/meaningless_docroot',
+    docroot       => 'MEANINGLESS ARGUMENT',
     priority      => '50',
     template      => 'cgit/git.vhost.erb',
     ssl           => true,

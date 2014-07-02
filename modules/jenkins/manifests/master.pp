@@ -45,7 +45,7 @@ class jenkins::master(
 
   apache::vhost { $vhost_name:
     port     => 443,
-    docroot  => '/tmp/meaningless_docroot',
+    docroot  => 'MEANINGLESS ARGUMENT',
     priority => '50',
     template => 'jenkins/jenkins.vhost.erb',
     ssl      => true,
