@@ -56,7 +56,7 @@ CONFDIR = <%= scope.lookupvar('exim::params::conf_dir') %>
 # +local_domains, +relay_to_domains, and +relay_from_hosts, respectively. They
 # are all colon-separated lists:
 
-domainlist local_domains = @<% if @mailman_domains.length > 0 -%>:<%= @mailman_domains.join(":") %><% end -%>
+domainlist local_domains = @<% if mailman_domains.length > 0 -%>:<%= mailman_domains.join(":") %><% end -%>
 
 domainlist relay_to_domains =
 hostlist   relay_from_hosts = 127.0.0.1
@@ -299,7 +299,7 @@ timeout_frozen_after = 7d
 # interlock with other processes, so additional queue runners can be
 # started by other means, or by killing and restarting the daemon.
 
-queue_run_max = <%= @queue_run_max %>
+queue_run_max = <%= queue_run_max %>
 
 # When this option is set, a delivery process is started whenever a
 # message is received, routing is performed, and local deliveries take
@@ -313,11 +313,11 @@ queue_run_max = <%= @queue_run_max %>
 # to be queued in this way, and is equivalent to setting
 # queue_smtp_domains to "*". See also hold_domains and queue_domains.
 
-<% if @queue_smtp_domains != "" -%>
-queue_smtp_domains = <%= @queue_smtp_domains %>
+<% if queue_smtp_domains != "" -%>
+queue_smtp_domains = <%= queue_smtp_domains %>
 <% end %>
 
-<% if @mailman_domains.length > 0 -%>
+<% if mailman_domains.length > 0 -%>
 # Home dir for your Mailman installation -- aka Mailman's prefix
 # directory.
 MM_HOME=/var/lib/mailman
@@ -330,7 +330,7 @@ MM_GID=list
 #
 # Domains that your lists are in - colon separated list
 # you may wish to add these into local_domains as well
-domainlist mm_domains=<%= @mailman_domains.join(":") %>
+domainlist mm_domains=<%= mailman_domains.join(":") %>
 #
 # -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 #
@@ -559,7 +559,7 @@ acl_check_data:
 
 begin routers
 
-<% if @mailman_domains.length > 0 -%>
+<% if mailman_domains.length > 0 -%>
 # Pick up on messages from our local mailman and route them via our
 # special VERP-enabled transport
 #
@@ -621,12 +621,12 @@ mailman_router:
 # If the DNS lookup fails, no further routers are tried because of the no_more
 # setting, and consequently the address is unrouteable.
 
-<% if @smarthost -%>
+<% if smarthost -%>
 smarthost:
   driver = manualroute
   domains = !+local_domains
   transport = remote_smtp
-  route_list = * <%= @smarthost %>
+  route_list = * <%= smarthost %>
   no_more
 <% else -%>
 dnslookup:
@@ -754,7 +754,7 @@ address_file:
 address_reply:
   driver = autoreply
 
-<% if @mailman_domains.length > 0 -%>
+<% if mailman_domains.length > 0 -%>
 mailman_transport:
   driver  = pipe
   command = MM_WRAP \

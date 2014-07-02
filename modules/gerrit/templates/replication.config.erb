@@ -1,7 +1,7 @@
 # This file is managed by puppet.
 # https://git.openstack.org/cgit/openstack-infra/config
 
-<% @replication.each do |replication| -%>
+<% replication.each do |replication| -%>
 [remote "<%= replication['name'] %>"]
 	url = <%= replication['url'] %>${name}.git
 <% if replication['replicationDelay'] != nil -%>
