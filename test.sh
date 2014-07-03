@@ -12,9 +12,26 @@ sed -i -e 's/^[^][:space:]$]/#&/g' applytest/puppetapplytest*
 sed -i -e 's@hiera(.\([^.]*\).,\([^)]*\))@\2@' applytest/puppetapplytest*
 mv applytest/*00 applytest/head  # These are the top-level variables defined in site.pp
 
+if [ `lsb_release -i -s` == 'CentOS' ]; then
+    if [ `lsb_release -r -s` =~ '6' ]; then
+	CODENAME='centos6'
+    fi
+elif [ `lsb_release -i -s` == 'Ubuntu' ]; then
+    CODENAME=`lsb_release -c -s`
+fi
+
+FOUND=0
 for f in `find applytest -name 'puppetapplytest*' -print` ; do
-    cat applytest/head $f > $f.final
+    if grep "Node-OS: $CODENAME" $f; then
+	cat applytest/head $f > $f.final
+	FOUND=1
+    fi
 done
+
+if [ $FOUND == "0" ]; then
+    echo "No hosts found for node type $CODENAME"
+    exit 1
+fi
 
 find applytest -name 'puppetapplytest*.final' -print0 | \
     xargs -0 -P $(nproc) -n 1 -I filearg \
