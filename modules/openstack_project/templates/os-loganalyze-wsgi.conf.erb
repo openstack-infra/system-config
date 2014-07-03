@@ -1,0 +1,10 @@
+<% if swift_authurl != "" -%>
+[swift]
+authurl=<%= swift_authurl %>
+user=<%= swift_user %>
+password=<%= swift_key %>
+tenant=<%= swift_tenant_name %>
+region=<%= swift_region_name %>
+chunk_size=64
+container=infra-files=<%= swift_default_container %>
+<% end -%>
