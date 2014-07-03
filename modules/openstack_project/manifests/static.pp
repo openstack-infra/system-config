@@ -130,12 +130,12 @@ class openstack_project::static (
   }
 
   file { '/etc/os_loganalyze/wsgi.conf':
-    ensure   => present,
-    owner    => 'root',
-    group    => 'www-data',
-    mode     => '0440',
-    template => 'openstack_project/os-loganalyze-wsgi.conf.erb',
-    require  => File['/etc/os_loganalyze'],
+    ensure  => present,
+    owner   => 'root',
+    group   => 'www-data',
+    mode    => '0440',
+    content => template('openstack_project/os-loganalyze-wsgi.conf.erb'),
+    require => File['/etc/os_loganalyze'],
   }
 
   file { '/srv/static/logs/help':
