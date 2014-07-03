@@ -38,7 +38,8 @@ Requirements
   them available for support as needed. Maintainers are encouraged to be
   in IRC regularly to make it faster to contact them.
 
-  * All CI comments must contain a link to a contact page with the details.
+  * All CI comments must contain a link (using a dns name over a hardcoded ip is
+    recommended) to a contact page with the details.
 * Include a public link to all test artifacts to make debugging failed tests
   easier. This should include:
 
