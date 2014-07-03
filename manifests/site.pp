@@ -407,7 +407,13 @@ node 'storyboard.openstack.org' {
 # A machine to serve static content.
 node 'static.openstack.org' {
   class { 'openstack_project::static':
-    sysadmins => hiera('sysadmins', ['admin']),
+    sysadmins               => hiera('sysadmins', ['admin']),
+    swift_authurl           => 'https://identity.api.rackspacecloud.com/v2.0/',
+    swift_user              => 'infra-files-ro',
+    swift_key               => hiera('infra_files_ro_password', 'XXX'),
+    swift_tenant_name       => hiera('infra_files_tenant_name', 'tenantname'),
+    swift_region_name       => 'DFW',
+    swift_default_container => 'infra-files',
   }
 }
 
