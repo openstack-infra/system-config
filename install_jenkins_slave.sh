@@ -41,7 +41,13 @@ else #defaults to Ubuntu
 
 	apt-get update
 	apt-get dist-upgrade
-	apt-get install -y puppet git rubygems
+        lsbdistcodename=`lsb_release -c -s`
+        if [ $lsbdistcodename != 'trusty' ] ; then
+            rubypkg=rubygems
+        else
+            rubypkg=ruby
+        fi
+	apt-get install -y puppet git $rubypkg
 
 fi
 
