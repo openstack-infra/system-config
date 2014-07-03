@@ -706,7 +706,11 @@ begin transports
 
 remote_smtp:
   driver = smtp
-
+<% if smtp_require_auth -%>
+  hosts = <%= smarthost %>
+  hosts_require_auth = <%= smarthost %>
+  hosts_require_tls = <%= smarthost %>
+<% end -%>
 
 # This transport is used for local delivery to user mailboxes in traditional
 # BSD mailbox format. By default it will be run under the uid and gid of the
@@ -838,6 +842,13 @@ begin rewrite
 # messages from authenticated users from anywhere on the Internet.
 
 begin authenticators
+
+<% if smtp_require_auth -%>
+remote_login:
+  driver = <%= smtp_auth_driver %>
+  public_name = <%= smtp_public_name %>
+  client_send = : <%= smtp_username %> : <%= smtp_password %>
+<% end -%>
 
 # PLAIN authentication has no server prompts. The client sends its
 # credentials in one lump, containing an authorization ID (which we do not

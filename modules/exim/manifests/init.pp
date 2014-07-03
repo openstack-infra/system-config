@@ -4,6 +4,11 @@ class exim(
   $queue_run_max = '5',
   $queue_smtp_domains = '',
   $smarthost = false,
+  $smtp_require_auth = false,
+  $smtp_username = '',
+  $smtp_password = '',
+  $smtp_auth_driver = 'plaintext',
+  $smtp_public_name = 'LOGIN',
   $sysadmin = []
 ) {
 
