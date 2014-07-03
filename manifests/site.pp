@@ -28,6 +28,7 @@ node default {
 #
 # Long lived servers:
 #
+# Node-OS: precise
 node 'review.openstack.org' {
   class { 'openstack_project::review':
     github_oauth_token                  => hiera('gerrit_github_token', 'XXX'),
@@ -63,6 +64,7 @@ node 'review.openstack.org' {
   }
 }
 
+# Node-OS: precise
 node 'review-dev.openstack.org' {
   class { 'openstack_project::review_dev':
     github_oauth_token              => hiera('gerrit_dev_github_token', 'XXX'),
@@ -86,6 +88,7 @@ node 'review-dev.openstack.org' {
   }
 }
 
+# Node-OS: precise
 node 'jenkins.openstack.org' {
   class { 'openstack_project::jenkins':
     jenkins_jobs_password   => hiera('jenkins_jobs_password', 'XXX'),
@@ -100,6 +103,7 @@ node 'jenkins.openstack.org' {
   }
 }
 
+# Node-OS: precise
 node /^jenkins\d+\.openstack\.org$/ {
   class { 'openstack_project::jenkins':
     jenkins_jobs_password   => hiera('jenkins_jobs_password', 'XXX'),
@@ -114,6 +118,7 @@ node /^jenkins\d+\.openstack\.org$/ {
   }
 }
 
+# Node-OS: precise
 node 'jenkins-dev.openstack.org' {
   class { 'openstack_project::jenkins_dev':
     jenkins_ssh_private_key  => hiera('jenkins_dev_ssh_private_key_contents', 'XXX'),
@@ -130,6 +135,7 @@ node 'jenkins-dev.openstack.org' {
   }
 }
 
+# Node-OS: precise
 node 'cacti.openstack.org' {
   include openstack_project::ssl_cert_check
   class { 'openstack_project::cacti':
@@ -137,12 +143,14 @@ node 'cacti.openstack.org' {
   }
 }
 
+# Node-OS: precise
 node 'community.openstack.org' {
   class { 'openstack_project::community':
     sysadmins => hiera('sysadmins', ['admin']),
   }
 }
 
+# Node-OS: precise
 node 'ci-puppetmaster.openstack.org' {
   class { 'openstack_project::puppetmaster':
     root_rsa_key    => hiera('puppetmaster_root_rsa_key', 'XXX'),
@@ -158,23 +166,26 @@ node 'ci-puppetmaster.openstack.org' {
   }
 }
 
+# Node-OS: precise
 node 'puppetmaster.openstack.org' {
   class { 'openstack_project::puppetmaster':
-    root_rsa_key => hiera('puppetmaster_root_rsa_key'),
+    root_rsa_key => hiera('puppetmaster_root_rsa_key', 'XXX'),
     salt         => false,
     update_slave => false,
-    sysadmins    => hiera('sysadmins'),
+    sysadmins    => hiera('sysadmins', ['admin']),
     version      => '3.4.',
     ca_server    => 'ci-puppetmaster.openstack.org',
   }
 }
 
+# Node-OS: precise
 node 'puppetdb.openstack.org' {
   class { 'openstack_project::puppetdb':
     sysadmins => hiera('sysadmins', ['admin']),
   }
 }
 
+# Node-OS: precise
 node 'graphite.openstack.org' {
   class { 'openstack_project::graphite':
     sysadmins               => hiera('sysadmins', ['admin']),
@@ -187,12 +198,14 @@ node 'graphite.openstack.org' {
   }
 }
 
+# Node-OS: precise
 node 'groups.openstack.org' {
   class { 'openstack_project::groups':
     sysadmins => hiera('sysadmins', ['admin']),
   }
 }
 
+# Node-OS: precise
 node 'groups-dev.openstack.org' {
   class { 'openstack_project::groups_dev':
     sysadmins           => hiera('sysadmins', ['admin']),
@@ -203,6 +216,7 @@ node 'groups-dev.openstack.org' {
   }
 }
 
+# Node-OS: precise
 node 'lists.openstack.org' {
   class { 'openstack_project::lists':
     listadmins   => hiera('listadmins', ['admin']),
@@ -210,6 +224,7 @@ node 'lists.openstack.org' {
   }
 }
 
+# Node-OS: precise
 node 'paste.openstack.org' {
   class { 'openstack_project::paste':
     db_host     => hiera('paste_db_host', 'localhost'),
@@ -218,12 +233,14 @@ node 'paste.openstack.org' {
   }
 }
 
+# Node-OS: precise
 node 'planet.openstack.org' {
   class { 'openstack_project::planet':
     sysadmins => hiera('sysadmins', ['admin']),
   }
 }
 
+# Node-OS: precise
 node 'eavesdrop.openstack.org' {
   class { 'openstack_project::eavesdrop':
     nickpass                => hiera('openstack_meetbot_password', 'XXX'),
@@ -242,6 +259,7 @@ node 'eavesdrop.openstack.org' {
   }
 }
 
+# Node-OS: precise
 node 'etherpad.openstack.org' {
   class { 'openstack_project::etherpad':
     ssl_cert_file_contents  => hiera('etherpad_ssl_cert_file_contents', 'XXX'),
@@ -254,6 +272,7 @@ node 'etherpad.openstack.org' {
   }
 }
 
+# Node-OS: precise
 node 'etherpad-dev.openstack.org' {
   class { 'openstack_project::etherpad_dev':
     mysql_host          => hiera('etherpad-dev_db_host', 'localhost'),
@@ -263,6 +282,7 @@ node 'etherpad-dev.openstack.org' {
   }
 }
 
+# Node-OS: precise
 node 'wiki.openstack.org' {
   class { 'openstack_project::wiki':
     mysql_root_password     => hiera('wiki_db_password', 'XXX'),
@@ -273,6 +293,7 @@ node 'wiki.openstack.org' {
   }
 }
 
+# Node-OS: precise
 node 'logstash.openstack.org' {
   class { 'openstack_project::logstash':
     sysadmins                       => hiera('sysadmins', ['admin']),
@@ -310,6 +331,7 @@ node 'logstash.openstack.org' {
   }
 }
 
+# Node-OS: precise
 node /^logstash-worker\d+\.openstack\.org$/ {
   class { 'openstack_project::logstash_worker':
     sysadmins           => hiera('sysadmins', ['admin']),
@@ -318,6 +340,7 @@ node /^logstash-worker\d+\.openstack\.org$/ {
   }
 }
 
+# Node-OS: precise
 node /^elasticsearch0[1-7]\.openstack\.org$/ {
   class { 'openstack_project::elasticsearch_node':
     sysadmins             => hiera('sysadmins', ['admin']),
@@ -350,6 +373,7 @@ node /^elasticsearch0[1-7]\.openstack\.org$/ {
 }
 
 # A CentOS machine to load balance git access.
+# Node-OS: centos6
 node 'git.openstack.org' {
   class { 'openstack_project::git':
     sysadmins               => hiera('sysadmins', ['admin']),
@@ -372,6 +396,7 @@ node 'git.openstack.org' {
 
 # CentOS machines to run cgit and git daemon. Will be
 # load balanced by git.openstack.org.
+# Node-OS: centos6
 node /^git\d+\.openstack\.org$/ {
   include openstack_project
   class { 'openstack_project::git_backend':
@@ -386,6 +411,7 @@ node /^git\d+\.openstack\.org$/ {
 }
 
 # A machine to run ODSREG in preparation for summits.
+# Node-OS: precise
 node 'summit.openstack.org' {
   class { 'openstack_project::summit':
     sysadmins => hiera('sysadmins', ['admin']),
@@ -393,6 +419,7 @@ node 'summit.openstack.org' {
 }
 
 # A machine to run Storyboard
+# Node-OS: precise
 node 'storyboard.openstack.org' {
   class { 'openstack_project::storyboard':
     sysadmins               => hiera('sysadmins', ['admin']),
@@ -406,6 +433,7 @@ node 'storyboard.openstack.org' {
 }
 
 # A machine to serve static content.
+# Node-OS: precise
 node 'static.openstack.org' {
   class { 'openstack_project::static':
     sysadmins => hiera('sysadmins', ['admin']),
@@ -413,6 +441,7 @@ node 'static.openstack.org' {
 }
 
 # A machine to serve various project status updates.
+# Node-OS: precise
 node 'status.openstack.org' {
   class { 'openstack_project::status':
     sysadmins                     => hiera('sysadmins', ['admin']),
@@ -429,6 +458,7 @@ node 'status.openstack.org' {
   }
 }
 
+# Node-OS: precise
 node 'nodepool.openstack.org' {
   class { 'openstack_project::nodepool_prod':
     mysql_password           => hiera('nodepool_mysql_password', 'XXX'),
@@ -451,6 +481,7 @@ node 'nodepool.openstack.org' {
   }
 }
 
+# Node-OS: precise
 node 'zuul.openstack.org' {
   class { 'openstack_project::zuul_prod':
     gerrit_server                  => 'review.openstack.org',
@@ -485,6 +516,7 @@ node 'zuul.openstack.org' {
   }
 }
 
+# Node-OS: precise
 node 'zm01.openstack.org' {
   class { 'openstack_project::zuul_merger':
     gearman_server       => 'zuul.openstack.org',
@@ -496,6 +528,7 @@ node 'zm01.openstack.org' {
   }
 }
 
+# Node-OS: precise
 node 'zm02.openstack.org' {
   class { 'openstack_project::zuul_merger':
     gearman_server       => 'zuul.openstack.org',
@@ -507,6 +540,7 @@ node 'zm02.openstack.org' {
   }
 }
 
+# Node-OS: precise
 node 'zuul-dev.openstack.org' {
   class { 'openstack_project::zuul_dev':
     gerrit_server        => 'review-dev.openstack.org',
@@ -530,6 +564,7 @@ node 'zuul-dev.openstack.org' {
   }
 }
 
+# Node-OS: centos6
 node 'pbx.openstack.org' {
   class { 'openstack_project::pbx':
     sysadmins     => hiera('sysadmins', ['admin']),
@@ -545,6 +580,7 @@ node 'pbx.openstack.org' {
   }
 }
 
+# Node-OS: precise
 # A backup machine.  Don't run cron or puppet agent on it.
 node /^ci-backup-.*\.openstack\.org$/ {
   include openstack_project::backup_server
@@ -554,6 +590,7 @@ node /^ci-backup-.*\.openstack\.org$/ {
 # Jenkins slaves:
 #
 
+# Node-OS: centos6
 node 'mirror26.slave.openstack.org' {
   include openstack_project
   class { 'openstack_project::mirror26_slave':
@@ -562,6 +599,7 @@ node 'mirror26.slave.openstack.org' {
   }
 }
 
+# Node-OS: precise
 node 'mirror27.slave.openstack.org' {
   include openstack_project
   class { 'openstack_project::mirror27_slave':
@@ -570,6 +608,7 @@ node 'mirror27.slave.openstack.org' {
   }
 }
 
+# Node-OS: precise
 node 'mirror33.slave.openstack.org' {
   include openstack_project
   class { 'openstack_project::mirror33_slave':
@@ -578,6 +617,7 @@ node 'mirror33.slave.openstack.org' {
   }
 }
 
+# Node-OS: precise
 node 'proposal.slave.openstack.org' {
   include openstack_project
   class { 'openstack_project::proposal_slave':
@@ -589,6 +629,7 @@ node 'proposal.slave.openstack.org' {
   }
 }
 
+# Node-OS: precise
 node 'pypi.slave.openstack.org' {
   include openstack_project
   class { 'openstack_project::pypi_slave':
@@ -602,6 +643,7 @@ node 'pypi.slave.openstack.org' {
   }
 }
 
+# Node-OS: precise
 node 'salt-trigger.slave.openstack.org' {
   include openstack_project
   class { 'openstack_project::salt_trigger_slave':
@@ -609,6 +651,7 @@ node 'salt-trigger.slave.openstack.org' {
   }
 }
 
+# Node-OS: precise
 node /^precise-dev\d+.*\.slave\.openstack\.org$/ {
   include openstack_project
   include openstack_project::puppet_cron
@@ -618,6 +661,7 @@ node /^precise-dev\d+.*\.slave\.openstack\.org$/ {
   }
 }
 
+# Node-OS: precise
 node /^precisepy3k-dev\d+.*\.slave\.openstack\.org$/ {
   include openstack_project
   include openstack_project::puppet_cron
@@ -629,6 +673,7 @@ node /^precisepy3k-dev\d+.*\.slave\.openstack\.org$/ {
   }
 }
 
+# Node-OS: centos6
 node /^centos6-dev\d+\.slave\.openstack\.org$/ {
   include openstack_project
   include openstack_project::puppet_cron
@@ -638,6 +683,7 @@ node /^centos6-dev\d+\.slave\.openstack\.org$/ {
   }
 }
 
+# Node-OS: fedora18
 node /^fedora18-dev\d+\.slave\.openstack\.org$/ {
   include openstack_project
   include openstack_project::puppet_cron
@@ -648,6 +694,7 @@ node /^fedora18-dev\d+\.slave\.openstack\.org$/ {
   }
 }
 
+# Node-OS: precise
 node 'openstackid-dev.openstack.org' {
   class { 'openstack_project::openstackid_dev':
     sysadmins               => hiera('sysadmins', ['admin']),
