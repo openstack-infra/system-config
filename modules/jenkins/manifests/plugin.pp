@@ -6,6 +6,7 @@
 
 define jenkins::plugin(
   $version=0,
+  $doupdate=false,
 ) {
   $plugin            = "${name}.hpi"
   $plugin_dir        = '/var/lib/jenkins/plugins'
@@ -40,6 +41,32 @@ define jenkins::plugin(
   if (!defined(User['jenkins'])) {
     user { 'jenkins' :
       ensure => present,
+    }
+  }
+# if doupdate is true, check if the plugin is already installed , if so remove it for update
+# stage the plugin update so that later jenkins restarts pickup the new plugin.
+  if $::kernel == 'Linux' and $version != 0 and $doupdate == true
+  {
+    $doupdate_test = "find . -type d|egrep '.*${name}\\/META-INF\$' | xargs -i grep -H Plugin-Version {}/MANIFEST.MF|sed 's/^\\.\\///g' |sed 's/MANIFEST.MF:Plugin-Version://g'|sed 's/META-INF\\/ //g'|awk -F '/' '{print \$1\"=\"\$2}'"
+    exec { "remove-for-update-${name}":
+      command => "rm -rf '${plugin_dir}/${name}'",
+      cwd     => $plugin_dir,
+      require => File[$plugin_dir],
+      path    => ['/bin', '/usr/bin', '/usr/sbin'],
+      user    => 'jenkins',
+      unless  => [  "test ! -d '${plugin_dir}/${name}'",
+      "test ! \$(${doupdate_test}) = \"${name}=${version}\"",
+      ],
+      before  => Exec["download-${name}"],
+    }
+    exec { "remove-plugin-file ${name}":
+      command   => "rm -f '${plugin_dir}/${name}.?pi'",
+      cwd       => $plugin_dir,
+      require   => File[$plugin_dir],
+      path      => ['/bin', '/usr/bin', '/usr/sbin'],
+      user      => 'jenkins',
+      unless    => "test ! -f '${plugin_dir}/${name}.?pi'",
+      subscribe => Exec["remove-for-update-${name}"],
     }
   }
 
