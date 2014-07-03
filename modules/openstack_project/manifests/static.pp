@@ -2,6 +2,12 @@
 #
 class openstack_project::static (
   $sysadmins = [],
+  $swift_authurl = '',
+  $swift_user = '',
+  $swift_key = '',
+  $swift_tenant_name = '',
+  $swift_region_name = '',
+  $swift_default_container = '',
 ) {
 
   class { 'openstack_project::server':
@@ -113,6 +119,23 @@ class openstack_project::static (
     path        => '/bin:/usr/bin',
     refreshonly => true,
     subscribe   => Vcsrepo['/opt/os-loganalyze'],
+  }
+
+  file { '/etc/os_loganalyze':
+    ensure  => directory,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0755',
+    require => Vcsrepo['/opt/os-loganalyze'],
+  }
+
+  file { '/etc/os_loganalyze/wsgi.conf':
+    ensure   => present,
+    owner    => 'root',
+    group    => 'www-data',
+    mode     => '0440',
+    template => 'openstack_project/os-loganalyze-wsgi.conf.erb',
+    require  => File['/etc/os_loganalyze'],
   }
 
   file { '/srv/static/logs/help':
