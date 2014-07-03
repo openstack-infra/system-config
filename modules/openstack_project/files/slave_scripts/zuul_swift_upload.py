@@ -92,8 +92,14 @@ def swift_form_post_submit(file_list, url, hmac_body, signature):
 
     files = {}
 
+    # Zuul's log path is generated without a tailing slash. As such the
+    # object prefix does not contain a slash and the files would be
+    # uploaded as 'prefix' + 'filename'. Assume we want the destination
+    # url to look like a folder and make sure there's a slash between.
+    filename_prefix = '/' if url[-1] != '/' else ''
     for i, f in enumerate(file_list):
-        files['file%d' % (i + 1)] = (f['filename'], open(f['path'], 'rb'),
+        files['file%d' % (i + 1)] = (filename_prefix + f['filename'],
+                                     open(f['path'], 'rb'),
                                      get_file_mime(f['path']))
 
     requests.post(url, data=payload, files=files)
