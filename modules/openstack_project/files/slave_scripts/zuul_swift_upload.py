@@ -78,8 +78,16 @@ def swift_form_post_submit(file_list, url, hmac_body, signature):
     files = {}
 
     for i, f in enumerate(file_list):
+        try:
+            file_mime = magic.from_file(f['path'], mime=True)
+        except AttributeError:
+            # no magic.from_file, we might be using the libmagic bindings
+            m = magic.open(magic.MIME)
+            m.load()
+            file_mime = m.file(f['path']).split(';')[0]
+
         files['file%d' % (i + 1)] = (f['filename'], open(f['path'], 'rb'),
-                                     magic.from_file(f['path'], mime=True))
+                                     file_mime)
 
     requests.post(url, data=payload, files=files)
 
