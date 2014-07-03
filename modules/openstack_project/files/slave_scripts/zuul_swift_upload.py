@@ -56,6 +56,21 @@ def make_index_file(file_list, logserver_prefix, swift_destination_prefix,
     return os.path.join(tempdir, index_filename)
 
 
+def get_file_mime(file_path):
+    """Get the file mime using libmagic"""
+
+    if not os.path.isfile(file_path):
+        return None
+
+    if hasattr(magic, 'from_file'):
+        return magic.from_file(file_path, mime=True)
+    else:
+        # no magic.from_file, we might be using the libmagic bindings
+        m = magic.open(magic.MIME)
+        m.load()
+        return m.file(file_path).split(';')[0]
+
+
 def swift_form_post_submit(file_list, url, hmac_body, signature):
     """Send the files to swift via the FormPost middleware"""
 
@@ -78,16 +93,8 @@ def swift_form_post_submit(file_list, url, hmac_body, signature):
     files = {}
 
     for i, f in enumerate(file_list):
-        try:
-            file_mime = magic.from_file(f['path'], mime=True)
-        except AttributeError:
-            # no magic.from_file, we might be using the libmagic bindings
-            m = magic.open(magic.MIME)
-            m.load()
-            file_mime = m.file(f['path']).split(';')[0]
-
         files['file%d' % (i + 1)] = (f['filename'], open(f['path'], 'rb'),
-                                     file_mime)
+                                     get_file_mime(f['path']))
 
     requests.post(url, data=payload, files=files)
 
