@@ -125,7 +125,7 @@ class openstack_project::jenkins_params {
       $python_magic_package = 'python-magic'
       $python_requests_package = 'python-requests'
       $python_zmq_package = 'python-zmq'
-      if ($::lsbdistcodename) == 'trusty' {
+      if $::lsbdistcodename == 'trusty' {
         $rubygems_package = 'ruby'
       } else {
         $rubygems_package = 'rubygems'
