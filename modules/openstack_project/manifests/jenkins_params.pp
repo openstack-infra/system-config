@@ -47,11 +47,7 @@ class openstack_project::jenkins_params {
       $python_magic_package = 'python-magic'
       $python_requests_package = 'python-requests'
       $python_zmq_package = 'python-zmq'
-      if ($::lsbdistcodename) == 'trusty' {
-        $rubygems_package = 'ruby'
-      } else {
-        $rubygems_package = 'rubygems'
-      }
+      $rubygems_package = 'rubygems'
       # Common Lisp interpreter, used for cl-openstack-client
       $sbcl_package = 'sbcl'
       $sqlite_package = 'sqlite'
@@ -129,7 +125,11 @@ class openstack_project::jenkins_params {
       $python_magic_package = 'python-magic'
       $python_requests_package = 'python-requests'
       $python_zmq_package = 'python-zmq'
-      $rubygems_package = 'rubygems'
+      if ($::lsbdistcodename) == 'trusty' {
+        $rubygems_package = 'ruby'
+      } else {
+        $rubygems_package = 'rubygems'
+      }
       $ruby1_9_1_package = 'ruby1.9.1'
       $ruby1_9_1_dev_package = 'ruby1.9.1-dev'
       $ruby_bundler_package = 'ruby-bundler'
