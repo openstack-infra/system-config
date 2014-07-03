@@ -3682,7 +3682,8 @@ projects:
       - gate-python-congressclient-pep8
       - gate-python-congressclient-python27
     gate:
-      - noop
+      - gate-python-congressclient-pep8
+      - gate-python-congressclient-python27
 
   - name: stackforge/python-mistralclient
     template:
