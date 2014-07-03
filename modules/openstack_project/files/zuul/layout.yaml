@@ -4730,10 +4730,9 @@ projects:
       - noop
 
   - name: stackforge/doc8
-    check:
-      - noop
-    gate:
-      - noop
+    template:
+      - name: python-jobs
+      - name: publish-to-pypi
 
   - name: stackforge/tacker
     check:
