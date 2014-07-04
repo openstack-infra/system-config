@@ -620,8 +620,6 @@ jobs:
     voting: false
   - name: ^(gate|check)-sqlalchemy-migrate-devstack-dsvm$
     voting: false
-  - name: gate-python-manilaclient-python33
-    voting: false
   - name: gate-manila-pylint
     voting: false
   - name: gate-manila-tempest-dsvm-neutron
@@ -4344,6 +4342,7 @@ projects:
       - gate-python-manilaclient-pep8
       - gate-python-manilaclient-python26
       - gate-python-manilaclient-python27
+      - gate-python-manilaclient-python33
     post:
       - python-manilaclient-branch-tarball
       - python-manilaclient-coverage
