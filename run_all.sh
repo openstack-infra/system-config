@@ -24,4 +24,4 @@ git fetch -a && git reset -q --hard @{u}
 touch manifests/site.pp
 
 # Run this as an external script so that the above pull will get new changes
-ansible-playbook -v /etc/ansible/remote_puppet.yaml
+ansible-playbook -v /etc/ansible/remote_puppet.yaml >> /var/log/puppet_run_all.log 2>&1
