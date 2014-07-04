@@ -113,6 +113,7 @@ class openstack_project::puppetmaster (
     puppetdb_server              => 'puppetdb.openstack.org',
     puppet_service_name          => 'apache2',
     puppetdb_soft_write_failure  => true,
+    manage_storeconfigs          => false,
   }
 
 # Playbooks
