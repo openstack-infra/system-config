@@ -49,7 +49,7 @@ class openstack_project::puppetmaster (
     user        => 'root',
     minute      => '*/15',
     command     => $cron_command,
-    environment => 'PATH=/var/lib/gems/1.8/bin:/usr/bin:/bin:/usr/sbin:/sbin',
+    environment => 'PATH=/var/lib/gems/1.8/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin',
   }
 
   cron { 'deleteoldreports':
