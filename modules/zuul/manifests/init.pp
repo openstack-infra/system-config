@@ -50,6 +50,7 @@ class zuul (
   include pip
 
   $packages = [
+    'gcc',  # yappi requires this to build
     'python-webob',
     'python-lockfile',
     'python-paste',
