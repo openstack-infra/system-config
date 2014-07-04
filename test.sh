@@ -38,6 +38,7 @@ HOST=`echo $HOSTNAME |awk -F. '{ print $1 }'`
 echo "127.0.1.1 $HOST.openstack.org $HOST" >> /tmp/hosts
 sudo mv /tmp/hosts /etc/hosts
 
-find applytest -name 'puppetapplytest*.final' -print0 | \
-    xargs -0 -P $(nproc) -n 1 -I filearg \
-        sudo puppet apply --modulepath=${MODULE_PATH} --noop --verbose --debug filearg > /dev/null
+for filearg in `find applytest -name 'puppetapplytest*.final' -print0`; do
+   cat $filearg
+   sudo puppet apply --modulepath=${MODULE_PATH} --noop --verbose --debug $filearg
+done
