@@ -22,7 +22,7 @@ fi
 
 FOUND=0
 for f in `find applytest -name 'puppetapplytest*' -print` ; do
-    if grep "Node-OS: $CODENAME" $f; then
+    if grep -q "Node-OS: $CODENAME" $f; then
 	cat applytest/head $f > $f.final
 	FOUND=1
     fi
