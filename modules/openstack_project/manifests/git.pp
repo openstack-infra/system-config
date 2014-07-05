@@ -107,6 +107,13 @@ class openstack_project::git (
     options           => 'maxqueue 512',
   }
 
+  if ! defined(Service['rsyslog']) {
+    service { 'rsyslog':
+      ensure     => running,
+      enable     => true,
+      hasrestart => true,
+    }
+  }
   file { '/etc/rsyslog.d/haproxy.conf':
     ensure => present,
     owner  => 'root',
