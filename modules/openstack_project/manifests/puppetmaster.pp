@@ -2,7 +2,6 @@
 #
 class openstack_project::puppetmaster (
   $root_rsa_key,
-  $salt = true,
   $update_slave = true,
   $sysadmins = [],
   $version   = '2.7.',
@@ -17,13 +16,6 @@ class openstack_project::puppetmaster (
     sysadmins                 => $sysadmins,
     pin_puppet                => $version,
     ca_server                 => $ca_server,
-  }
-
-  if ($salt) {
-    class { 'salt':
-      salt_master => 'ci-puppetmaster.openstack.org',
-    }
-    class { 'salt::master': }
   }
 
   if ($update_slave) {
@@ -43,6 +35,13 @@ class openstack_project::puppetmaster (
     }
   } else {
     $cron_command = 'sleep $((RANDOM\%600)) && cd /opt/config/production && git fetch -q && git reset -q --hard @{u} && ./install_modules.sh && touch manifests/site.pp'
+  }
+
+  class { 'salt':
+    ensure => absent,
+  }
+  class { 'salt::master':
+    ensure => absent,
   }
 
   cron { 'updatepuppetmaster':
