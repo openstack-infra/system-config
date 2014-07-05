@@ -36,6 +36,12 @@ options:
     required: false
     default: no
     choices: [ "yes", "no" ]
+  override:
+    description:
+      - Run puppet even if puppet is disabled on the host.
+    required: false
+    default: no
+    choices: [ "yes", "no" ]
 requirements: [ puppet ]
 author: Monty Taylor
 '''
@@ -46,6 +52,9 @@ EXAMPLES = '''
 
 # Run puppet and timeout in 5 minutes
 - puppet: timeout=5m
+
+# Force a run of puppet on a host where it's been disabled
+- puppet: override=yes
 '''
 
 
@@ -55,6 +64,7 @@ def main():
             timeout=dict(default="30m"),
             show_diff=dict(
                 default=False, aliases=['show-diff'], type='bool'),
+            override=dict(default=False, type='bool'),
         ),
     )
     p = module.params
@@ -72,6 +82,9 @@ def main():
                timeout=pipes.quote(p['timeout']), puppet_cmd=PUPPET_CMD)
     if p['show_diff']:
         cmd += " --show-diff"
+    if p['override']:
+        cmd += " --puppetdlockfile=/tmp/ansible.puppet.lock"
+
     rc, stdout, stderr = module.run_command(cmd)
 
     if rc == 0:
