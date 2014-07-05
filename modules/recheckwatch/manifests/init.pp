@@ -89,11 +89,12 @@ class recheckwatch (
   }
 
   file { '/var/lib/recheckwatch/ssh/id_rsa':
-    owner   => 'recheckwatch',
-    group   => 'recheckwatch',
-    mode    => '0400',
-    require => File['/var/lib/recheckwatch/ssh'],
-    content => $recheckwatch_ssh_private_key,
+    show_diff => false,
+    owner     => 'recheckwatch',
+    group     => 'recheckwatch',
+    mode      => '0400',
+    require   => File['/var/lib/recheckwatch/ssh'],
+    content   => $recheckwatch_ssh_private_key,
   }
 
   file { '/etc/init.d/recheckwatch':

@@ -127,12 +127,13 @@ class nodepool (
   }
 
   file { '/home/nodepool/.ssh/id_rsa':
-    ensure  => present,
-    content => $nodepool_ssh_private_key,
-    mode    => '0400',
-    owner   => 'nodepool',
-    group   => 'nodepool',
-    require => File['/home/nodepool/.ssh'],
+    ensure    => present,
+    show_diff => false,
+    content   => $nodepool_ssh_private_key,
+    mode      => '0400',
+    owner     => 'nodepool',
+    group     => 'nodepool',
+    require   => File['/home/nodepool/.ssh'],
   }
 
   file { '/home/nodepool/.ssh/config':

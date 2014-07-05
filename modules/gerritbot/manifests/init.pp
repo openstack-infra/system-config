@@ -81,12 +81,13 @@ class gerritbot(
 
   if $ssh_rsa_key_contents != '' {
     file { '/home/gerrit2/.ssh/gerritbot_rsa':
-      owner   => 'gerrit2',
-      group   => 'gerrit2',
-      mode    => '0600',
-      content => $ssh_rsa_key_contents,
-      replace => true,
-      require => File['/home/gerrit2/.ssh']
+      show_diff => false,
+      owner     => 'gerrit2',
+      group     => 'gerrit2',
+      mode      => '0600',
+      content   => $ssh_rsa_key_contents,
+      replace   => true,
+      require   => File['/home/gerrit2/.ssh']
     }
   }
 

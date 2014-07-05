@@ -217,31 +217,34 @@ class storyboard (
 
   if $ssl_cert_file_contents != '' {
     file { $ssl_cert_file:
-      owner   => 'root',
-      group   => 'root',
-      mode    => '0640',
-      content => $ssl_cert_file_contents,
-      before  => Apache::Vhost[$vhost_name],
+      show_diff => false,
+      owner     => 'root',
+      group     => 'root',
+      mode      => '0640',
+      content   => $ssl_cert_file_contents,
+      before    => Apache::Vhost[$vhost_name],
     }
   }
 
   if $ssl_key_file_contents != '' {
     file { $ssl_key_file:
-      owner   => 'root',
-      group   => 'ssl-cert',
-      mode    => '0640',
-      content => $ssl_key_file_contents,
-      before  => Apache::Vhost[$vhost_name],
+      show_diff => false,
+      owner     => 'root',
+      group     => 'ssl-cert',
+      mode      => '0640',
+      content   => $ssl_key_file_contents,
+      before    => Apache::Vhost[$vhost_name],
     }
   }
 
   if $ssl_chain_file_contents != '' {
     file { $ssl_chain_file:
-      owner   => 'root',
-      group   => 'root',
-      mode    => '0640',
-      content => $ssl_chain_file_contents,
-      before  => Apache::Vhost[$vhost_name],
+      show_diff => false,
+      owner     => 'root',
+      group     => 'root',
+      mode      => '0640',
+      content   => $ssl_chain_file_contents,
+      before    => Apache::Vhost[$vhost_name],
     }
   }
 }
