@@ -19,7 +19,6 @@ $elasticsearch_nodes = [
 # Default: should at least behave like an openstack server
 #
 node default {
-  include openstack_project::puppet_cron
   class { 'openstack_project::server':
     sysadmins => hiera('sysadmins', ['admins']),
   }
@@ -637,49 +636,6 @@ node 'pypi.slave.openstack.org' {
     jenkinsci_password     => hiera('jenkins_ci_org_password', 'XXX'),
     mavencentral_username  => hiera('mavencentral_org_user', 'username'),
     mavencentral_password  => hiera('mavencentral_org_password', 'XXX'),
-  }
-}
-
-# Node-OS: precise
-node /^precise-dev\d+.*\.slave\.openstack\.org$/ {
-  include openstack_project
-  include openstack_project::puppet_cron
-  class { 'openstack_project::slave':
-    ssh_key   => $openstack_project::jenkins_dev_ssh_key,
-    sysadmins => hiera('sysadmins', ['admin']),
-  }
-}
-
-# Node-OS: precise
-node /^precisepy3k-dev\d+.*\.slave\.openstack\.org$/ {
-  include openstack_project
-  include openstack_project::puppet_cron
-  class { 'openstack_project::slave':
-    ssh_key      => $openstack_project::jenkins_dev_ssh_key,
-    sysadmins    => hiera('sysadmins', ['admin']),
-    python3      => true,
-    include_pypy => true,
-  }
-}
-
-# Node-OS: centos6
-node /^centos6-dev\d+\.slave\.openstack\.org$/ {
-  include openstack_project
-  include openstack_project::puppet_cron
-  class { 'openstack_project::slave':
-    ssh_key   => $openstack_project::jenkins_dev_ssh_key,
-    sysadmins => hiera('sysadmins', ['admin']),
-  }
-}
-
-# Node-OS: fedora18
-node /^fedora18-dev\d+\.slave\.openstack\.org$/ {
-  include openstack_project
-  include openstack_project::puppet_cron
-  class { 'openstack_project::slave':
-    ssh_key   => $openstack_project::jenkins_dev_ssh_key,
-    sysadmins => hiera('sysadmins', ['admin']),
-    python3   => true,
   }
 }
 

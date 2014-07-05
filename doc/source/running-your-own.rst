@@ -73,8 +73,6 @@ The minimum set of things to port across is:
 
 * modules/openstack_project/manifests/params.pp
 
-* modules/openstack_project/manifests/puppet_cron.pp
-
 * modules/openstack_project/manifests/server.pp
 
 * modules/openstack_project/manifests/template.pp
