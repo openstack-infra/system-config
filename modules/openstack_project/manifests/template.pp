@@ -58,20 +58,6 @@ class openstack_project::template (
       ensure => present,
     }
 
-    if ($::in_chroot) {
-      notify { 'rsyslog in chroot':
-        message => 'rsyslog not refreshed, running in chroot',
-      }
-      $rsyslog_notify = []
-    } else {
-      service { 'rsyslog':
-        ensure     => running,
-        enable     => true,
-        hasrestart => true,
-      }
-      $rsyslog_notify = [ Service['rsyslog'] ]
-    }
-
     # Custom rsyslog config to disable /dev/xconsole noise on Debuntu servers
     file { '/etc/rsyslog.d/50-default.conf':
       ensure  => present,
@@ -89,6 +75,20 @@ class openstack_project::template (
     package { 'whoopsie':
       ensure => absent,
     }
+  }
+
+  if ($::in_chroot) {
+    notify { 'rsyslog in chroot':
+      message => 'rsyslog not refreshed, running in chroot',
+    }
+    $rsyslog_notify = []
+  } else {
+    service { 'rsyslog':
+      ensure     => running,
+      enable     => true,
+      hasrestart => true,
+    }
+    $rsyslog_notify = [ Service['rsyslog'] ]
   }
 
   # Increase syslog message size in order to capture
