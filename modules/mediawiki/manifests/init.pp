@@ -26,31 +26,34 @@ class mediawiki(
 
     if $ssl_cert_file_contents != '' {
       file { $ssl_cert_file:
-        owner   => 'root',
-        group   => 'root',
-        mode    => '0640',
-        content => $ssl_cert_file_contents,
-        before  => Apache::Vhost[$site_hostname],
+        show_diff => false,
+        owner     => 'root',
+        group     => 'root',
+        mode      => '0640',
+        content   => $ssl_cert_file_contents,
+        before    => Apache::Vhost[$site_hostname],
       }
     }
 
     if $ssl_key_file_contents != '' {
       file { $ssl_key_file:
-        owner   => 'root',
-        group   => 'ssl-cert',
-        mode    => '0640',
-        content => $ssl_key_file_contents,
-        before  => Apache::Vhost[$site_hostname],
+        show_diff => false,
+        owner     => 'root',
+        group     => 'ssl-cert',
+        mode      => '0640',
+        content   => $ssl_key_file_contents,
+        before    => Apache::Vhost[$site_hostname],
       }
     }
 
     if $ssl_chain_file_contents != '' {
       file { $ssl_chain_file:
-        owner   => 'root',
-        group   => 'root',
-        mode    => '0640',
-        content => $ssl_chain_file_contents,
-        before  => Apache::Vhost[$site_hostname],
+        show_diff => false,
+        owner     => 'root',
+        group     => 'root',
+        mode      => '0640',
+        content   => $ssl_chain_file_contents,
+        before    => Apache::Vhost[$site_hostname],
       }
     }
 

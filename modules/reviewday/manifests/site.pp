@@ -36,12 +36,13 @@ define reviewday::site(
 
   if $reviewday_rsa_key_contents != '' {
     file { '/var/lib/reviewday/.ssh/id_rsa':
-      owner   => 'reviewday',
-      group   => 'reviewday',
-      mode    => '0600',
-      content => $reviewday_rsa_key_contents,
-      replace => true,
-      require => File['/var/lib/reviewday/.ssh/']
+      show_diff => false,
+      owner     => 'reviewday',
+      group     => 'reviewday',
+      mode      => '0600',
+      content   => $reviewday_rsa_key_contents,
+      replace   => true,
+      require   => File['/var/lib/reviewday/.ssh/']
     }
   }
 

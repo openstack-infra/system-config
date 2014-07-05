@@ -327,13 +327,14 @@ class gerrit(
   # new secure.config file and lose the mysql password.
   # Template uses $mysql_password, $email_private_key
   file { '/home/gerrit2/review_site/etc/secure.config':
-    ensure  => present,
-    owner   => 'gerrit2',
-    group   => 'gerrit2',
-    mode    => '0600',
-    content => template('gerrit/secure.config.erb'),
-    replace => true,
-    require => File['/home/gerrit2/review_site/etc'],
+    ensure    => present,
+    show_diff => false,
+    owner     => 'gerrit2',
+    group     => 'gerrit2',
+    mode      => '0600',
+    content   => template('gerrit/secure.config.erb'),
+    replace   => true,
+    require   => File['/home/gerrit2/review_site/etc'],
   }
 
   # Set up apache.
@@ -408,12 +409,13 @@ class gerrit(
 
   if $ssh_dsa_key_contents != '' {
     file { '/home/gerrit2/review_site/etc/ssh_host_dsa_key':
-      owner   => 'gerrit2',
-      group   => 'gerrit2',
-      mode    => '0600',
-      content => $ssh_dsa_key_contents,
-      replace => true,
-      require => File['/home/gerrit2/review_site/etc']
+      show_diff => false,
+      owner     => 'gerrit2',
+      group     => 'gerrit2',
+      mode      => '0600',
+      content   => $ssh_dsa_key_contents,
+      replace   => true,
+      require   => File['/home/gerrit2/review_site/etc']
     }
   }
 
@@ -430,12 +432,13 @@ class gerrit(
 
   if $ssh_rsa_key_contents != '' {
     file { '/home/gerrit2/review_site/etc/ssh_host_rsa_key':
-      owner   => 'gerrit2',
-      group   => 'gerrit2',
-      mode    => '0600',
-      content => $ssh_rsa_key_contents,
-      replace => true,
-      require => File['/home/gerrit2/review_site/etc']
+      show_diff => false,
+      owner     => 'gerrit2',
+      group     => 'gerrit2',
+      mode      => '0600',
+      content   => $ssh_rsa_key_contents,
+      replace   => true,
+      require   => File['/home/gerrit2/review_site/etc']
     }
   }
 
@@ -452,12 +455,13 @@ class gerrit(
 
   if $ssh_project_rsa_key_contents != '' {
     file { '/home/gerrit2/review_site/etc/ssh_project_rsa_key':
-      owner   => 'gerrit2',
-      group   => 'gerrit2',
-      mode    => '0600',
-      content => $ssh_project_rsa_key_contents,
-      replace => true,
-      require => File['/home/gerrit2/review_site/etc']
+      show_diff => false,
+      owner     => 'gerrit2',
+      group     => 'gerrit2',
+      mode      => '0600',
+      content   => $ssh_project_rsa_key_contents,
+      replace   => true,
+      require   => File['/home/gerrit2/review_site/etc']
     }
   }
 
@@ -474,12 +478,13 @@ class gerrit(
 
   if $ssh_replication_rsa_key_contents != '' {
     file { '/home/gerrit2/.ssh/id_rsa':
-      owner   => 'gerrit2',
-      group   => 'gerrit2',
-      mode    => '0600',
-      content => $ssh_replication_rsa_key_contents,
-      replace => true,
-      require => File['/home/gerrit2/.ssh']
+      show_diff => false,
+      owner     => 'gerrit2',
+      group     => 'gerrit2',
+      mode      => '0600',
+      content   => $ssh_replication_rsa_key_contents,
+      replace   => true,
+      require   => File['/home/gerrit2/.ssh']
     }
   }
 

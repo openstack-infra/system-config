@@ -68,32 +68,35 @@ class jenkins::master(
 
   if $ssl_cert_file_contents != '' {
     file { $ssl_cert_file:
-      owner   => 'root',
-      group   => 'root',
-      mode    => '0640',
-      content => $ssl_cert_file_contents,
-      before  => Apache::Vhost[$vhost_name],
+      show_diff => false,
+      owner     => 'root',
+      group     => 'root',
+      mode      => '0640',
+      content   => $ssl_cert_file_contents,
+      before    => Apache::Vhost[$vhost_name],
     }
   }
 
   if $ssl_key_file_contents != '' {
     file { $ssl_key_file:
-      owner   => 'root',
-      group   => 'ssl-cert',
-      mode    => '0640',
-      content => $ssl_key_file_contents,
-      require => Package['ssl-cert'],
-      before  => Apache::Vhost[$vhost_name],
+      show_diff => false,
+      owner     => 'root',
+      group     => 'ssl-cert',
+      mode      => '0640',
+      content   => $ssl_key_file_contents,
+      require   => Package['ssl-cert'],
+      before    => Apache::Vhost[$vhost_name],
     }
   }
 
   if $ssl_chain_file_contents != '' {
     file { $ssl_chain_file:
-      owner   => 'root',
-      group   => 'root',
-      mode    => '0640',
-      content => $ssl_chain_file_contents,
-      before  => Apache::Vhost[$vhost_name],
+      show_diff => false,
+      owner     => 'root',
+      group     => 'root',
+      mode      => '0640',
+      content   => $ssl_chain_file_contents,
+      before    => Apache::Vhost[$vhost_name],
     }
   }
 
@@ -136,12 +139,13 @@ class jenkins::master(
   }
 
   file { '/var/lib/jenkins/.ssh/id_rsa':
-    owner   => 'jenkins',
-    group   => 'nogroup',
-    mode    => '0600',
-    content => $jenkins_ssh_private_key,
-    replace => true,
-    require => File['/var/lib/jenkins/.ssh/'],
+    show_diff => false,
+    owner     => 'jenkins',
+    group     => 'nogroup',
+    mode      => '0600',
+    content   => $jenkins_ssh_private_key,
+    replace   => true,
+    require   => File['/var/lib/jenkins/.ssh/'],
   }
 
   file { '/var/lib/jenkins/.ssh/id_rsa.pub':

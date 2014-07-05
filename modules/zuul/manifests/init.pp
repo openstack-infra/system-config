@@ -184,11 +184,12 @@ class zuul (
   }
 
   file { '/var/lib/zuul/ssh/id_rsa':
-    owner   => 'zuul',
-    group   => 'zuul',
-    mode    => '0400',
-    require => File['/var/lib/zuul/ssh'],
-    content => $zuul_ssh_private_key,
+    show_diff => false,
+    owner     => 'zuul',
+    group     => 'zuul',
+    mode      => '0400',
+    require   => File['/var/lib/zuul/ssh'],
+    content   => $zuul_ssh_private_key,
   }
 
   file { '/var/lib/zuul/www':

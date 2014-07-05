@@ -128,6 +128,7 @@ class nodepool (
 
   file { '/home/nodepool/.ssh/id_rsa':
     ensure  => present,
+    show_diff => false,
     content => $nodepool_ssh_private_key,
     mode    => '0400',
     owner   => 'nodepool',

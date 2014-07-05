@@ -54,12 +54,13 @@ class elastic_recheck::bot (
 
   if $recheck_ssh_private_key != '' {
     file { '/home/recheck/.ssh/id_rsa':
-      owner   => 'recheck',
-      group   => 'recheck',
-      mode    => '0600',
-      content => $recheck_ssh_private_key,
-      replace => true,
-      require => File['/home/recheck/.ssh/']
+      show_diff => false,
+      owner     => 'recheck',
+      group     => 'recheck',
+      mode      => '0600',
+      content   => $recheck_ssh_private_key,
+      replace   => true,
+      require   => File['/home/recheck/.ssh/']
     }
   }
 
