@@ -37,6 +37,13 @@ class ansible {
     require => File['/etc/ansible'],
   }
 
+  file { '/etc/ansible/library':
+    ensure  => directory,
+    recurse => true,
+    source  => 'puppet:///modules/ansible/library',
+    require => File['/etc/ansible'],
+  }
+
   include logrotate
   logrotate::file { 'ansible':
     log     => '/var/log/ansible.log',
