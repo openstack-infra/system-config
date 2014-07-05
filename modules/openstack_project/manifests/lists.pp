@@ -14,7 +14,7 @@ class openstack_project::lists(
   $listdomain = 'lists.openstack.org'
 
   class { 'exim':
-    sysadmin        => $listadmins,
+    sysadmins       => $listadmins,
     queue_interval  => '1m',
     queue_run_max   => '50',
     mailman_domains => [$listdomain],

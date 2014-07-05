@@ -21,6 +21,6 @@ class openstack_project::server (
     ca_server                 => $ca_server,
   }
   class { 'exim':
-    sysadmin => $sysadmins,
+    sysadmins => $sysadmins,
   }
 }
