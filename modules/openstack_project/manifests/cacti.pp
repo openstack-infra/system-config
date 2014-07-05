@@ -19,7 +19,7 @@ class openstack_project::cacti (
     ensure => present,
   }
 
-  file { '/etc/apache2/conf-available/cacti.conf':
+  file { '/etc/apache2/conf.d/cacti.conf':
     ensure  => present,
     source  => 'puppet:///modules/openstack_project/cacti/apache.conf',
     mode    => '0644',

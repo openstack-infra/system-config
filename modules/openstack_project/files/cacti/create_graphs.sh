@@ -72,12 +72,9 @@ add_ds_graph "Interface - Non-Unicast Packets" "In/Out Non-Unicast Packets" \
 SNMP_QUERY_ID=`php -q add_graphs.php --host-id=$HOST_ID --list-snmp-queries | \
   grep "ucd/net - Get IO Devices"|cut -f 1`
 
-add_ds_graph "ucd/net - Device IO - Operations" "IO Operations" \
-  "diskIODevice" "xvda"
-add_ds_graph "ucd/net - Device IO - Throughput" "IO Throughput" \
-  "diskIODevice" "xvda"
-
-add_ds_graph "ucd/net - Device IO - Operations" "IO Operations" \
-  "diskIODevice" "xvdc"
-add_ds_graph "ucd/net - Device IO - Throughput" "IO Throughput" \
-  "diskIODevice" "xvdc"
+for disk in $(php -q add_graphs.php --host-id=$HOST_ID --snmp-field=diskIODevice --list-snmp-values | grep xvd[a-z]$) ; do
+    add_ds_graph "ucd/net - Device IO - Operations" "IO Operations" \
+        "diskIODevice" "$disk"
+    add_ds_graph "ucd/net - Device IO - Throughput" "IO Throughput" \
+        "diskIODevice" "$disk"
+done
