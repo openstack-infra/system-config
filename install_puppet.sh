@@ -73,7 +73,7 @@ function setup_puppet_fedora {
     # work-around is to just symlink pip-python to "fool" it.
     # See upstream issue:
     #  https://tickets.puppetlabs.com/browse/PUP-1082
-    ln -s /usr/bin/pip /usr/bin/pip-python
+    [ -e /usr/bin/pip-python ] || ln -s /usr/bin/pip /usr/bin/pip-python
 }
 
 function setup_puppet_rhel6 {
