@@ -2558,6 +2558,15 @@
       - python-jobs
 
 - project:
+    name: refstack-client
+    github-org: stackforge
+    node: 'bare-precise || bare-trusty'
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - python-jobs
+
+- project:
     name: swift-ceph-backend
     github-org: stackforge
     node: 'bare-precise || bare-trusty'
