@@ -3,17 +3,15 @@
 - project: openstack-attic/openstack-chef
 - project: openstack-attic/openstack-qa
 - project: openstack-attic/python-melangeclient
-- project: openstack-dev/bashate
+- project: openstack-dev/bash8
   description: A pep8 equivalent for bash scripts
+  upstream: git://github.com/locke105/bash8.git
 - project: openstack-dev/cookiecutter
   description: Cookiecutter Template for new OpenStack projects
   upstream: git://github.com/emonty/cookiecutter-openstack.git
 - project: openstack-dev/devstack
   options:
     - direct-release
-- project: openstack-dev/devstack-vagrant
-  description: Vagrant scripts to build local devstack environments
-  upstream: git://github.com/sdague/devstack-vagrant.git
 - project: openstack-dev/grenade
   upstream: git://github.com/nebula/grenade
   description: OpenStack upgrade testing tool
@@ -157,15 +155,6 @@
   group: openstack-ci
 - project: openstack-infra/puppet-vcsrepo
   group: openstack-ci
-- project: openstack-infra/puppet-vinz
-  description: Puppet module to deploy vinz
-  group: openstack-ci
-- project: openstack-infra/puppet-yum
-  group: openstack-ci
-  upstream: git://github.com/dprince/puppet-yum.git
-- project: openstack-infra/puppet-zuul
-  description: Puppet module to install and configure zuul
-  group: openstack-ci
 - project: openstack-infra/pypi-mirror
   group: openstack-ci
   upstream: git://github.com/openstack-infra/jeepyb.git
@@ -202,13 +191,6 @@
 - project: openstack-infra/tripleo-ci
   description: CI for the tripleo project
   upstream: https://github.com/toci-dev/toci
-- project: openstack-infra/vinz
-  use-storyboard: true
-  description: Standalone UI replacement for Gerrit API
-- project: openstack-infra/vinz-webclient
-  acl-config: /home/gerrit2/acls/openstack-infra/vinz.config
-  description: Standalone UI replacment for Gerrit
-  use-storyboard: true
 - project: openstack-infra/zmq-event-publisher
   group: openstack-ci
   description: Jenkins plugin to publish build events via ZMQ PUB SUB.
@@ -227,9 +209,6 @@
 - project: openstack/barbican
   description: Barbican is a ReST API designed for the secure storage, provisioning and management of secrets, including in OpenStack environments.
   upstream: git://github.com/cloudkeep/barbican.git
-- project: openstack/barbican-specs
-  description: Blueprints for the barbican project
-  upstream: git://github.com/jarretraim/barbican-specs.git
 - project: openstack/ceilometer
 - project: openstack/ceilometer-specs
   group: ceilometer
@@ -244,20 +223,12 @@
   group: openstack-api-site
   options:
     - direct-release
-- project: openstack/designate
-- project: openstack/designate-specs
-- project: openstack/dib-utils
-  description: Pieces of diskimage-builder that are useful without the full project
-  upstream: git://github.com/cybertron/dib-utils.git
 - project: openstack/diskimage-builder
   description: Image building tools for OpenStack
 - project: openstack/django_openstack_auth
   group: django-openstack-auth
   description: A Django authentication backend for use with the OpenStack Keystone Identity backend.
   upstream: git://github.com/gabrielhurley/django_openstack_auth.git
-- project: openstack/docs-specs
-  group: openstack-manuals
-  upstream: https://github.com/annegentle/docs-specs.git
 - project: openstack/gantt
   description: Common scheduler for OpenStack.
   upstream: git://github.com/n0ano/gantt.git
@@ -295,14 +266,7 @@
   docimpact-group: openstack-manuals
 - project: openstack/keystone-specs
   group: keystone
-- project: openstack/keystonemiddleware
-  description: OpenStack Identity (Keystone) Middleware
-  group: keystone
-  upstream: git://github.com/morganfainberg/keystonemiddleware
 - project: openstack/marconi
-- project: openstack/marconi-specs
-  group: marconi
-  upstream: git://github.com/FlaPer87/marconi-specs.git
 - project: openstack/netconn-api
   group: openstack-api-site
   options:
@@ -395,7 +359,6 @@
   upstream: git://github.com/asalkeld/python-ceilometerclient.git
 - project: openstack/python-cinderclient
   docimpact-group: openstack-manuals
-- project: openstack/python-designateclient
 - project: openstack/python-ganttclient
   description: Client code for the common scheduler for OpenStack.
   acl-config: /home/gerrit2/acls/openstack/gantt.config
@@ -439,8 +402,6 @@
   group: sahara
   description: Disk image elements for Sahara
   acl-config: /home/gerrit2/acls/openstack/sahara.config
-- project: openstack/sahara-specs
-  group: sahara
 - project: openstack/security-doc
   description: Documentation work from the OpenStack Security Group (OSSG)
 - project: openstack/stevedore
@@ -459,15 +420,16 @@
 - project: openstack/tempest
   options:
     - direct-release
-- project: openstack/training-guides
-  description: Community created, open source training guides for OpenStack.
-  upstream: git://github.com/fifieldt/openstack-training-guides.git
 - project: openstack/tripleo-heat-templates
   group: tripleo
   description: Heat templates for deploying OpenStack
+  options:
+    - direct-release
 - project: openstack/tripleo-image-elements
   group: tripleo
   description: Disk image elements for deployment images of OpenStack
+  options:
+    - direct-release
 - project: openstack/tripleo-incubator
   group: tripleo
   description: The TripleO incubator where unformed things are experimented with.
@@ -488,11 +450,6 @@
   group: openstack-api-site
   options:
     - direct-release
-- project: stackforge-attic/murano-common
-- project: stackforge-attic/murano-conductor
-- project: stackforge-attic/murano-metadataclient
-- project: stackforge-attic/murano-repository
-- project: stackforge-attic/murano-tests
 - project: stackforge/anvil
   description: A set of python scripts and utilities to forge raw openstack into a productive tool!
   upstream: git://github.com/yahoo/Openstack-Anvil.git
@@ -515,9 +472,6 @@
   acl-config: /home/gerrit2/acls/stackforge/blazar.config
 - project: stackforge/bufunfa
   upstream: git://github.com/ekarlso/bufunfa.git
-- project: stackforge/cachemonkey
-  description: Image pre-caching controller service
-  upstream: git://github.com/bdelliott/cachemonkey.git
 - project: stackforge/cl-openstack-client
   description: Common Lisp OpenStack client libraries
   upstream: git://github.com/jd/cl-openstack-client.git
@@ -540,10 +494,6 @@
   group: compass
   description: Automating Distributed System Deployment to Baremetal Resources
   upstream: git://github.com/huawei-cloud/compass-core.git
-  acl-config: /home/gerrit2/acls/stackforge/compass.config
-- project: stackforge/compass-monit
-  group: compass
-  description: Compass related monitoring
   acl-config: /home/gerrit2/acls/stackforge/compass.config
 - project: stackforge/compass-web
   group: compass
@@ -569,13 +519,6 @@
   acl-config: /home/gerrit2/acls/stackforge/chef-cookbooks.config
   options:
     - direct-release
-- project: stackforge/cookbook-openstack-client
-  group: openstack-chef
-  docimpact-group: openstack-chef
-  description: Chef Cookbook - OpenStack client Resources
-  acl-config: /home/gerrit2/acls/stackforge/chef-cookbooks.config
-  options:
-    - direct-release
 - project: stackforge/cookbook-openstack-common
   group: openstack-chef
   docimpact-group: openstack-chef
@@ -594,20 +537,6 @@
   group: openstack-chef
   docimpact-group: openstack-chef
   description: Chef Cookbook - OpenStack Dashboard
-  acl-config: /home/gerrit2/acls/stackforge/chef-cookbooks.config
-  options:
-    - direct-release
-- project: stackforge/cookbook-openstack-data-processing
-  group: openstack-chef
-  docimpact-group: openstack-chef
-  description: Chef Cookbook - OpenStack Data Processing Service
-  acl-config: /home/gerrit2/acls/stackforge/chef-cookbooks.config
-  options:
-    - direct-release
-- project: stackforge/cookbook-openstack-database
-  group: openstack-chef
-  docimpact-group: openstack-chef
-  description: Chef Cookbook - OpenStack Database as a Service
   acl-config: /home/gerrit2/acls/stackforge/chef-cookbooks.config
   options:
     - direct-release
@@ -676,14 +605,14 @@
   acl-config: /home/gerrit2/acls/stackforge/chef-cookbooks.config
   options:
     - direct-release
+- project: stackforge/designate
+- project: stackforge/designate-specs
 - project: stackforge/doc8
   description: Style checker for sphinx (or other) rst documentation.
   upstream: git://github.com/harlowja/doc8.git
 - project: stackforge/driverlog
   description: Vendor drivers for OpenStack
   upstream: git://github.com/Mirantis/oscp.git
-- project: stackforge/ec2-api
-  description: AWS EC2 and VPC API support in standalone service for OpenStack. At first uses nova's EC2 API for non-VPC functionality. Later it'll be transferred here out of nova.
 - project: stackforge/entropy
   description: A framework for Audit/Repair scripts for openstack
 - project: stackforge/fuel-astute
@@ -735,9 +664,6 @@
   acl-config: /home/gerrit2/acls/stackforge/fuel.config
 - project: stackforge/gce-api
   description: Google Compute Engine API support for OpenStack
-- project: stackforge/gerrit-dash-creator
-  description: Client side gerrit dashboard creator from server side definitions
-  upstream: git://github.com/sdague/gerrit-dash-creator.git
 - project: stackforge/gertty
   description: Console interface to Gerrit Code Review
   use-storyboard: true
@@ -766,9 +692,6 @@
   description: Energy Efficiency Monitoring
   upstream: git://github.com/frossigneux/kwapi.git
 - project: stackforge/libra
-- project: stackforge/logaas
-  description: "Logging as a Service for OpenStack"
-  upstream: https://github.com/boris-42/logaas.git
 - project: stackforge/magnetodb
   description: Key-value database service for OpenStack cloud.
   upstream: git://github.com/Mirantis/magnetodb.git
@@ -799,6 +722,14 @@
   group: murano
   upstream: git://github.com/Mirantis/murano-agent.git
   acl-config: /home/gerrit2/acls/stackforge/murano.config
+- project: stackforge/murano-common
+  group: murano
+  upstream: git://github.com/sergmelikyan/murano-common.git
+  acl-config: /home/gerrit2/acls/stackforge/murano.config
+- project: stackforge/murano-conductor
+  group: murano
+  upstream: git://github.com/Mirantis/murano-conductor.git
+  acl-config: /home/gerrit2/acls/stackforge/murano.config
 - project: stackforge/murano-dashboard
   group: murano
   upstream: git://github.com/Mirantis/murano-dashboard.git
@@ -811,6 +742,18 @@
   group: murano
   upstream: git://github.com/Mirantis/murano-docs.git
   acl-config: /home/gerrit2/acls/stackforge/murano.config
+- project: stackforge/murano-metadataclient
+  group: murano
+  upstream: git://github.com/EkaterinaFedorova/python-metadataclient.git
+  acl-config: /home/gerrit2/acls/stackforge/murano.config
+- project: stackforge/murano-repository
+  group: murano
+  upstream: git://github.com/EkaterinaFedorova/murano-repository
+  acl-config: /home/gerrit2/acls/stackforge/murano.config
+- project: stackforge/murano-tests
+  group: murano
+  upstream: git://github.com/Mirantis/murano-tests.git
+  acl-config: /home/gerrit2/acls/stackforge/murano.config
 - project: stackforge/nova-docker
   description: Docker driver for OpenStack Nova
   upstream: git://github.com/russellb/nova-docker.git
@@ -820,8 +763,6 @@
 - project: stackforge/occi-os
   description: OCCI-OS provides a python egg which can be easily deployed in OpenStack and will thereby add OCCI support and interface to OpenStack.
   upstream: git://github.com/tmetsch/occi-os.git
-- project: stackforge/octavia
-  description: An operator-grade reference implementation for Load Balancing as a Service (LBaaS)
 - project: stackforge/opencafe
   upstream: https://github.com/samu4924/opencafe
   description: Common Automation Framework Engine. Core driver for CloudCAFE
@@ -844,9 +785,6 @@
 - project: stackforge/openvz-nova-driver
   description: OpenVz driver for Nova
   upstream: git://github.com/imsplitbit/openvz-nova-driver.git
-- project: stackforge/osprofiler
-  description: OpenStack cross service/project profiler
-  upstream: git://github.com/pboris/osprofiler.git
 - project: stackforge/ospurge
   description: Cleanup OpenStack project resources.
   upstream: https://github.com/cloudwatt/ospurge.git
@@ -910,19 +848,11 @@
   description: Puppet for OpenStack Design Specifications
   acl-config: /home/gerrit2/acls/stackforge/puppet-modules.config
   upstream: git://github.com/hogepodge/puppet-openstack-specs
-- project: stackforge/puppet-openstacklib
-  group: puppet-openstack
-  description: Module for Common Puppet OpenStack Dependencies
-  acl-config: /home/gerrit2/acls/stackforge/puppet-modules.config
 - project: stackforge/puppet-openstack_dev_env
   group: puppet-openstack
   description: OpenStack Puppet Dev Environment
   acl-config: /home/gerrit2/acls/stackforge/puppet-modules.config
   upstream: git://github.com/puppetlabs/puppetlabs-openstack_dev_env.git
-- project: stackforge/puppet-openstack_extras
-  group: puppet-openstack
-  description: Helper classes that utilize the core Puppet Openstack modules
-  acl-config: /home/gerrit2/acls/stackforge/puppet-modules.config
 - project: stackforge/puppet-sahara
   group: sahara
   description: Sahara Puppet Module
@@ -935,10 +865,6 @@
   description: OpenStack Tempest Puppet Module
   acl-config: /home/gerrit2/acls/stackforge/puppet-modules.config
   upstream: git://github.com/puppetlabs/puppetlabs-tempest.git
-- project: stackforge/puppet-trove
-  description: OpenStack Trove Puppet Module
-  acl-config: /home/gerrit2/acls/stackforge/puppet-modules.config
-  upstream: git://github.com/enovance/puppet-trove.git
 - project: stackforge/puppet-vswitch
   description: Puppet provider for virtual switches.
   acl-config: /home/gerrit2/acls/stackforge/puppet-modules.config
@@ -953,17 +879,13 @@
 - project: stackforge/python-blazarclient
   description: Client for OpenStack Blazar
   acl-config: /home/gerrit2/acls/stackforge/blazar.config
-- project: stackforge/python-congressclient
-  description: Client for OpenStack Congress
+- project: stackforge/python-designateclient
 - project: stackforge/python-jenkins
   upstream: git://github.com/jeblair/python-jenkins.git
   description: Python API for managing jobs and nodes in a Jenkins CI instance
 - project: stackforge/python-kiteclient
   description: Python bindings to Kite.
 - project: stackforge/python-libraclient
-- project: stackforge/python-magnetodbclient
-  description: Python client for MagnetoDB, the key-value database service for OpenStack cloud.
-  upstream: git://github.com/aostapenko/python-magnetodbclient
 - project: stackforge/python-manilaclient
   upstream: git://github.com/bswartz/python-manilaclient.git
 - project: stackforge/python-mistralclient
@@ -971,11 +893,6 @@
   group: mistral
   upstream: git://github.com/rakhmerov/python-mistralclient.git
   acl-config: /home/gerrit2/acls/stackforge/mistral.config
-- project: stackforge/python-monascaclient
-  description: Python client for Monasca REST API.
-  group: monasca
-  upstream: git://github.com/hpcloud-mon/python-monclient
-  acl-config: /home/gerrit2/acls/stackforge/monasca.config
 - project: stackforge/python-muranoclient
   group: murano
   upstream: git://github.com/Mirantis/python-muranoclient.git
@@ -989,15 +906,16 @@
 - project: stackforge/python-solumclient
   description: 'Client library to Solum API. See: https://wiki.openstack.org/wiki/Solum'
   upstream: https://github.com/noorul/python-solumclient.git
-- project: stackforge/python-surveilclient
-- project: stackforge/python-tackerclient
-  group: tacker
 - project: stackforge/rally
   description: Benchmark System for OpenStack
   upstream: git://github.com/pboris/rally.git
 - project: stackforge/refstack
   description: Vendor-facing API for registration of interop-compliance
   upstream: git://github.com/dlenwell/refstack
+  use-storyboard: true
+- project: stackforge/refstack-client
+  description: Testing and upload client for refstack
+  upstream: git://github.com/dlenwell/refstack-client
   use-storyboard: true
 - project: stackforge/rubick
   description: Rule-based diagnostics of configuration of OpenStack platform
@@ -1016,9 +934,6 @@
 - project: stackforge/solum-dashboard
   description: 'Horizon plugin for Solum. See: https://wiki.openstack.org/wiki/Solum'
   upstream: https://github.com/asalkeld/solum-horizon.git
-- project: stackforge/solum-specs
-  description: 'Solum Design Specifications'
-  upstream: git://github.com/rackerlabs/solum-specs
 - project: stackforge/sphinxcontrib-docbookrestapi
   description: Sphinx extension that generates documentation for api-site from RST files.
   upstream: git://github.com/enovance/sphinxcontrib-docbookrestapi.git
@@ -1034,12 +949,6 @@
 - project: stackforge/stacktach
   description: Event-based Debugging, Monitoring and Billing solution for OpenStack.
   upstream: https://github.com/rackerlabs/stacktach.git
-- project: stackforge/surveil
-  description: Monitoring as a Service for OpenStack
-- project: stackforge/surveil-specs
-- project: stackforge/swift-ceph-backend
-  description: Ceph backend for Swift
-  upstream: git://github.com/enovance/swift-ceph-backend.git
 - project: stackforge/swift3
   description: Swift3 Middleware for OpenStack Swift, allowing access to OpenStack swift via the Amazon S3 API.
   upstream: git://github.com/fujita/swift3.git
@@ -1047,11 +956,6 @@
   description: "Swift mass syncronizer"
   upstream: git://github.com/enovance/swiftsync.git
   acl-config: /home/gerrit2/acls/openstack/swiftsync.config
-- project: stackforge/tacker
-  description: "tacker: specifications a servicevm/device life cycle manager. See https://wiki.openstack.org/wiki/ServiceVM"
-- project: stackforge/tacker-specs
-  group: tacker
-  upstream: https://github.com/yamahata/tacker-specs.git
 - project: stackforge/tomograph
   description: "Library to help distributed applications send trace information to metrics backends like Zipkin and Statsd."
   upstream: https://github.com/timjr/tomograph.git
@@ -1071,67 +975,3 @@
 - project: stackforge/xenapi-os-testing
   description: Scripts to enable running of tempest tests in a nested Xen instance
   upstream: git://github.com/citrix-openstack/xenapi-os-testing.git
-- project: stackforge/xstatic-angular
-  description: Angular JavaScript library packaged as XStatic.
-  upstream: https://bitbucket.org/thesheep/xstatic-angular.git
-  acl-config: /home/gerrit2/acls/stackforge/xstatic.config
-- project: stackforge/xstatic-angular-cookies
-  description: Angular-Cookies JavaScript library packaged as XStatic.
-  upstream: https://bitbucket.org/thesheep/xstatic-angular-cookies.git
-  acl-config: /home/gerrit2/acls/stackforge/xstatic.config
-- project: stackforge/xstatic-angular-mock
-  description: Angular-Mock JavaScript library packaged as XStatic.
-  upstream: https://bitbucket.org/thesheep/xstatic-angular-mock.git
-  acl-config: /home/gerrit2/acls/stackforge/xstatic.config
-- project: stackforge/xstatic-bootstrap-datepicker
-  description: Bootstrap-Datepicker JavaScript library packaged as XStatic.
-  upstream: https://bitbucket.org/thesheep/xstatic-bootstrap-datepicker.git
-  acl-config: /home/gerrit2/acls/stackforge/xstatic.config
-- project: stackforge/xstatic-bootstrap-scss
-  description: Bootstrap SCSS library packaged as XStatic.
-  upstream: https://bitbucket.org/thesheep/xstatic-bootstrap-scss.git
-  acl-config: /home/gerrit2/acls/stackforge/xstatic.config
-- project: stackforge/xstatic-d3
-  description: D3 JavaScript library packaged as XStatic.
-  upstream: https://bitbucket.org/thesheep/xstatic-d3.git
-  acl-config: /home/gerrit2/acls/stackforge/xstatic.config
-- project: stackforge/xstatic-hogan
-  description: Hogan JavaScript library packaged as XStatic.
-  upstream: https://bitbucket.org/thesheep/xstatic-hogan.git
-  acl-config: /home/gerrit2/acls/stackforge/xstatic.config
-- project: stackforge/xstatic-jasmine
-  description: Jasmine JavaScript library packaged as XStatic.
-  upstream: https://bitbucket.org/thesheep/xstatic-jasmine.git
-  acl-config: /home/gerrit2/acls/stackforge/xstatic.config
-- project: stackforge/xstatic-jquery-migrate
-  description: Migrate jQuery plugin packaged as XStatic.
-  upstream: https://bitbucket.org/thesheep/xstatic-jquery-migrate.git
-  acl-config: /home/gerrit2/acls/stackforge/xstatic.config
-- project: stackforge/xstatic-jquery.bootstrap.wizard
-  description: Bootstrap.Wizard jQuery plugin packaged as XStatic.
-  upstream: https://bitbucket.org/thesheep/xstatic-jquery.bootstrap.wizard.git
-  acl-config: /home/gerrit2/acls/stackforge/xstatic.config
-- project: stackforge/xstatic-jquery.quicksearch
-  description: Quicksearch jQuery plugin packaged as XStatic.
-  upstream: https://bitbucket.org/thesheep/xstatic-jquery.quicksearch.git
-  acl-config: /home/gerrit2/acls/stackforge/xstatic.config
-- project: stackforge/xstatic-jquery.tablesorter
-  description: Tablesorter jQuery plugin packaged as XStatic.
-  upstream: https://bitbucket.org/thesheep/xstatic-jquery.tablesorter.git
-  acl-config: /home/gerrit2/acls/stackforge/xstatic.config
-- project: stackforge/xstatic-jsencrypt
-  description: JSEncrypt JavaScript library packaged as XStatic.
-  upstream: https://bitbucket.org/thesheep/xstatic-jsencrypt.git
-  acl-config: /home/gerrit2/acls/stackforge/xstatic.config
-- project: stackforge/xstatic-qunit
-  description: QUnit JavaScript library packaged as XStatic.
-  upstream: https://bitbucket.org/thesheep/xstatic-qunit.git
-  acl-config: /home/gerrit2/acls/stackforge/xstatic.config
-- project: stackforge/xstatic-rickshaw
-  description: Rickshaw JavaScript library packaged as XStatic.
-  upstream: https://bitbucket.org/thesheep/xstatic-rickshaw.git
-  acl-config: /home/gerrit2/acls/stackforge/xstatic.config
-- project: stackforge/xstatic-spin
-  description: Spin JavaScript library packaged as XStatic.
-  upstream: https://bitbucket.org/thesheep/xstatic-spin.git
-  acl-config: /home/gerrit2/acls/stackforge/xstatic.config

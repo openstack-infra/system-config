@@ -36,9 +36,6 @@ openstack-infra:
       - openstack-infra/puppet-dashboard
       - openstack-infra/puppet-storyboard
       - openstack-infra/puppet-vcsrepo
-      - openstack-infra/puppet-vinz
-      - openstack-infra/puppet-yum
-      - openstack-infra/puppet-zuul
       - openstack-infra/pypi-mirror
       - openstack-infra/release-tools
       - openstack-infra/releasestatus
@@ -47,8 +44,6 @@ openstack-infra:
       - openstack-infra/statusbot
       - openstack-infra/storyboard
       - openstack-infra/storyboard-webclient
-      - openstack-infra/vinz
-      - openstack-infra/vinz-webclient
       - openstack-infra/zuul
       - openstack-infra/zuul-packaging
       - openstack/requirements
@@ -74,7 +69,6 @@ openstack-doc:
     projects:
       - openstack/api-site
       - openstack/compute-api
-      - openstack/docs-specs
       - openstack/identity-api
       - openstack/image-api
       - openstack/netconn-api
@@ -82,8 +76,6 @@ openstack-doc:
       - openstack/openstack-doc-tools
       - openstack/openstack-manuals
       - openstack/operations-guide
-      - openstack/security-doc
-      - openstack/training-guides
       - openstack/volume-api
       - stackforge/clouddocs-maven-plugin
     branches:
@@ -110,9 +102,9 @@ openstack-dns:
       - change-merged
       - x-vrif-minus-2
     projects:
-      - openstack/designate
-      - openstack/designate-specs
-      - openstack/python-designateclient
+      - stackforge/designate
+      - stackforge/designate-specs
+      - stackforge/python-designateclient
     branches:
       - master
       - stable/havana
@@ -189,7 +181,6 @@ openstack-sahara:
       - openstack/sahara-dashboard
       - openstack/sahara-extra
       - openstack/sahara-image-elements
-      - openstack/sahara-specs
       - stackforge/puppet-sahara
       - stackforge/sahara-ci-config
       - stackforge/sahara-guestagent
@@ -254,12 +245,10 @@ puppet-openstack:
       - stackforge/puppet-neutron
       - stackforge/puppet-nova
       - stackforge/puppet-openstack
-      - stackforge/puppet-openstacklib
       - stackforge/puppet_openstack_builder
-      - stackforge/puppet-openstack_extras
+      - stackforge/puppet-openstack_dev_env
       - stackforge/puppet-swift
       - stackforge/puppet-tempest
-      - stackforge/puppet-trove
       - stackforge/puppet-vswitch
       - stackforge/puppet-openstack-specs
     branches:
@@ -276,12 +265,9 @@ openstack-chef:
     projects:
       - stackforge/cookbook-ceph
       - stackforge/cookbook-openstack-block-storage
-      - stackforge/cookbook-openstack-client
       - stackforge/cookbook-openstack-common
       - stackforge/cookbook-openstack-compute
       - stackforge/cookbook-openstack-dashboard
-      - stackforge/cookbook-openstack-data-processing
-      - stackforge/cookbook-openstack-database
       - stackforge/cookbook-openstack-identity
       - stackforge/cookbook-openstack-image
       - stackforge/cookbook-openstack-integration-test
@@ -295,7 +281,6 @@ openstack-chef:
     branches:
       - master
       - stable/grizzly
-      - stable/havana
 
 openstack-mistral:
     events:
@@ -317,10 +302,15 @@ murano:
     projects:
       - stackforge/murano
       - stackforge/murano-agent
+      - stackforge/murano-conductor
       - stackforge/murano-dashboard
       - stackforge/murano-deployment
       - stackforge/murano-docs
+      - stackforge/murano-tests
       - stackforge/python-muranoclient
+      - stackforge/murano-common
+      - stackforge/murano-repository
+      - stackforge/murano-metadataclient
     branches:
       - master
 
@@ -330,7 +320,6 @@ magnetodb:
       - change-merged
       - x-vrif-minus-2
     projects:
-      - stackforge/python-magnetodbclient
       - stackforge/magnetodb
     branches:
       - master
@@ -390,7 +379,6 @@ openstack-barbican:
       - x-vrif-minus-2
     projects:
       - openstack/barbican
-      - openstack/barbican-specs
       - openstack/python-barbicanclient
       - stackforge/kite
       - stackforge/python-kiteclient
@@ -434,7 +422,6 @@ openstack-marconi:
       - x-vrif-minus-2
     projects:
       - openstack/marconi
-      - openstack/marconi-specs
       - openstack/python-marconiclient
     branches:
       - master
@@ -461,6 +448,18 @@ openstack-rally:
     branches:
       - master
 
+openstack-climate:
+    events:
+      - patchset-created
+      - change-merged
+      - x-vrif-minus-2
+    projects:
+      - stackforge/blazar
+      - stackforge/blazar-nova
+      - stackforge/python-blazarclient
+    branches:
+      - master
+
 openstack-blazar:
     events:
       - patchset-created
@@ -480,6 +479,7 @@ refstack:
       - x-vrif-minus-2
     projects:
       - stackforge/refstack
+      - stackforge/refstack-client
     branches:
       - master
 
@@ -502,7 +502,6 @@ solum:
       - stackforge/solum
       - stackforge/python-solumclient
       - stackforge/solum-dashboard
-      - stackforge/solum-specs
     branches:
       - master
 
@@ -514,18 +513,6 @@ storyboard:
     projects:
       - openstack-infra/storyboard
       - openstack-infra/storyboard-webclient
-    branches:
-      - master
-
-surveil:
-    events:
-      - patchset-created
-      - change-merged
-      - x-vrif-minus-2
-    projects:
-      - stackforge/surveil
-      - stackforge/python-surveilclient
-      - stackforge/surveil-specs
     branches:
       - master
 
@@ -590,7 +577,6 @@ syscompass:
     projects:
       - stackforge/compass-adapters
       - stackforge/compass-core
-      - stackforge/compass-monit
       - stackforge/compass-web
     branches:
       - master
@@ -605,7 +591,6 @@ openstack-keystone:
       - openstack/identity-api
       - openstack/keystone-specs
       - openstack/python-keystoneclient
-      - openstack/keystonemiddleware
     branches:
       - master
 
@@ -638,7 +623,6 @@ openstack-merges:
       - openstack/python-glanceclient
       - openstack/keystone
       - openstack/python-keystoneclient
-      - openstack/keystonemiddleware
       - openstack/horizon
       - openstack/django_openstack_auth
       - openstack/tuskar-ui
@@ -696,8 +680,6 @@ openstack-merges:
       - openstack-infra/puppet-dashboard
       - openstack-infra/puppet-storyboard
       - openstack-infra/puppet-vcsrepo
-      - openstack-infra/puppet-yum
-      - openstack-infra/puppet-zuul
       - openstack-infra/pypi-mirror
       - openstack-infra/releasestatus
       - openstack-infra/reviewday
@@ -743,7 +725,6 @@ openstack-merges:
 openstack-oslo:
     events:
       - patchset-created
-      - change-merged
       - x-vrif-minus-2
     projects:
       - openstack/cliff
@@ -789,47 +770,5 @@ openstack-sdks:
       - stackforge/openstack-sdk-dotnet
       - stackforge/openstack-cli-powershell
       - stackforge/python-openstacksdk
-    branches:
-      - master
-
-openstack-security:
-    events:
-      - patchset-created
-      - change-merged
-      - x-vrif-minus-2
-    projects:
-      - openstack/security-doc
-    branches:
-      - master
-
-nova-docker:
-    events:
-      - patchset-created
-      - change-merged
-      - x-vrif-minus-2
-    projects:
-      - stackforge/nova-docker
-    branches:
-      - master
-
-openstack-lbaas:
-    events:
-      - patchset-created
-      - change-merged
-      - x-vrif-minus-2
-    projects:
-      - stackforge/octavia
-    branches:
-      - master
-
-tacker:
-    events:
-      - patchset-created
-      - change-merged
-      - x-vrif-minus-2
-    projects:
-      - stackforge/tacker
-      - stackforge/tacker-specs
-      - stackforge/python-tackerclient
     branches:
       - master
