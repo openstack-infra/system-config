@@ -408,11 +408,14 @@ To rename a project:
 #. Prepare a change to the Puppet configuration which updates
    projects.yaml/ACLs and jenkins-job-builder for the new name.
 
-#. Stop puppet on review.openstack.org to prevent your interim
-   configuration changes from being reset by the project management
-   routines::
+#. Stop puppet runs on the puppetmaster to prevent early application
+   of configuration changes::
 
-     sudo puppetd --disable
+     sudo crontab -u root -e
+
+   Comment out the crontab entries.  Use ps to make sure that a run is
+   not currently in progress.  When it finishes, make sure the entry
+   has not been added back to the crontab.
 
 #. Gracefully stop Zuul on zuul.openstack.org::
 
@@ -462,9 +465,9 @@ To rename a project:
 #. Merge the prepared Puppet configuration change, removing the
    original Jenkins jobs via the Jenkins WebUI later if needed.
 
-#. Start puppet again on review.openstack.org::
+#. Re-enable puppet runs on the puppetmaster::
 
-     sudo puppetd --enable
+     sudo crontab -u root -e
 
 #. Rename the project in GitHub or, if this is a move to a new org, let
    the project management run create it for you and then remove the
