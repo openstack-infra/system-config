@@ -125,8 +125,8 @@ filter {
 
 output {
   elasticsearch_http {
-    host => "<%= scope.lookupvar("::openstack_project::logstash_worker::discover_node") %>"
+    host => "localhost"
     manage_template => false
-    flush_size => 512
+    flush_size => 1024
   }
 }
