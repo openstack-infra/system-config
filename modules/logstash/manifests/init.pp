@@ -75,7 +75,9 @@ class logstash {
     mode   => '0644',
   }
 
-  package { 'openjdk-7-jre-headless':
-    ensure => present,
+  if ! defined(Package['openjdk-7-jre-headless']) {
+    package { 'openjdk-7-jre-headless':
+      ensure => present,
+    }
   }
 }
