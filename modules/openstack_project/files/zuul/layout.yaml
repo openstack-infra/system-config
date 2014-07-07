@@ -4768,3 +4768,10 @@ projects:
       - gate-octavia-python26
       - gate-octavia-python27
       - gate-octavia-python33
+
+  - name: stackforge/rack
+    check:
+      - noop
+    gate:
+      - noop
+
