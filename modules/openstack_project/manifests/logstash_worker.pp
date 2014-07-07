@@ -57,4 +57,19 @@ class openstack_project::logstash_worker (
   log_processor::worker { 'D':
     config_file => 'puppet:///modules/openstack_project/logstash/jenkins-log-worker.yaml',
   }
+
+  class { '::elasticsearch':
+    es_template_config => {
+      'gateway.recover_after_nodes'          => '5',
+      'gateway.recover_after_time'           => '5m',
+      'gateway.expected_nodes'               => '6',
+      'discovery.zen.minimum_master_nodes'   => '5',
+      'discovery.zen.ping.multicast.enabled' => false,
+      'discovery.zen.ping.unicast.hosts'     => $discover_nodes,
+      'node.master'                          => false,
+      'node.data'                            => false,
+    },
+    heap_size          => '1g',
+    version            => '0.90.9',
+  }
 }

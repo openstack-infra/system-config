@@ -86,6 +86,13 @@ node.name: "<%= scope.lookupvar("::hostname") %>"
 # to disable it, set the following:
 # node.max_local_storage_nodes: 1
 
+<% if es_template_config.has_key?('node.master') then -%>
+node.master: <%= es_template_config['node.master'] %>
+<% end -%>
+<% if es_template_config.has_key?('node.data') then -%>
+node.data: <%= es_template_config['node.data'] %>
+<% end -%>
+
 
 #################################### Index ####################################
 
