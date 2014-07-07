@@ -196,4 +196,12 @@ class openstack_project::lists(
     mailserver  => $listdomain,
   }
 
+  maillist { 'product-wg':
+    ensure      => present,
+    admin       => 'stefano@openstack.org',
+    password    => $listpassword,
+    description => 'Collaboration workspace for OpenStack-related Product Managers working group.',
+    webserver   => $listdomain,
+    mailserver  => $listdomain,
+  }
 }
