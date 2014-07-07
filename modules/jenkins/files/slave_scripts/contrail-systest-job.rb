@@ -59,6 +59,7 @@ env.webui_config = False
 env.devstack = False
 env.test_retry_factor = 1.0
 env.test_delay_factor = 1.0
+env.test_verify_on_setup = False
 
 env.test_repo_dir='#{ENV['HOME']}/contrail-test'
 env.http_proxy = subprocess.check_output("\grep http_proxy /etc/contrail_bashrc | awk -F '=' '{print $2}'", shell = True).rstrip()

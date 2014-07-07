@@ -186,7 +186,7 @@ class Vm
             short_name = "ci-oc-subslave-#{floatingip}-#{i}"
             short_name.gsub!(/\./, '-')
 
-            hostip = Vm.create_internal(vmname, nil, metadata, 5) # xlarge
+            hostip = Vm.create_internal(vmname, nil, metadata, 4) # large
             vm = Vm.new(short_name, vmname, hostip)
             vm.send_keepalive
             @@vms.push vm
