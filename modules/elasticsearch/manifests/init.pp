@@ -20,8 +20,10 @@ class elasticsearch (
   $es_template_config = {}
 ) {
   # install java runtime
-  package { 'openjdk-7-jre-headless':
-    ensure => present,
+  if ! defined(Package['openjdk-7-jre-headless']) {
+    package { 'openjdk-7-jre-headless':
+      ensure => present,
+    }
   }
 
   # Curl is handy for talking to the ES API on localhost. Allows for
