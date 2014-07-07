@@ -274,6 +274,16 @@ repository ``https://git.openstack.org/openstack-infra/config``. This tool is
 run from a checkout on the puppetmaster - please see :file:`launch/README` for
 detailed instructions.
 
+Deleting Old Servers
+====================
+
+In addition to deleting the server in question from nova, a few cleanup tasks
+need to be performed so that nova stops trying to keep track of the node. For
+instance, to delete the server oldserver.openstack.org::
+
+    ansible-playbook /etc/ansible/delete_from_puppet.yaml \
+        --extra-vars='node=oldserver.openstack.org'
+
 .. _cinder:
 
 Cinder Volume Management
