@@ -1,4 +1,4 @@
-- project: Juniper/contrail-controller
+- project: Juniper/contrail_controller
   description: Contrail Controller
   upstream: git@github.com:Juniper/contrail-controller
   acl-config: /home/gerrit2/acls/Juniper/contrail-controller.config

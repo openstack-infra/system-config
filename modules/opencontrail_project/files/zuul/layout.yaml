@@ -274,10 +274,10 @@ jobs:
 # The project list is grouped by type of project, and within each
 # group, projects are sorted (mostly) alphabetically.
 projects:
-  - name: Juniper/contrail-controller
+  - name: Juniper/contrail_controller
     check:
-      - ci-contrail-controller-unittest
-      - ci-contrail-controller-systest
+      - ci-contrail_controller-unittest
+      - ci-contrail_controller-systest
     silent:
       - noop
     check-tripleo:
