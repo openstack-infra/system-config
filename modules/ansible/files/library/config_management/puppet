@@ -42,19 +42,39 @@ options:
     required: false
     default: no
     choices: [ "yes", "no" ]
+  environment:
+    description:
+      - Run puppet in an alternate environment.
+    required: false
+    default: null
+  verbose:
+    description:
+      - Should puppet agent run in verbose mode.
+    required: false
+    default: no
+    choices: [ "yes", "no" ]
 requirements: [ puppet ]
 author: Monty Taylor
 '''
 
 EXAMPLES = '''
 # Run puppet and fail if anything goes wrong
-- puppet
+- puppet:
 
 # Run puppet and timeout in 5 minutes
 - puppet: timeout=5m
 
 # Force a run of puppet on a host where it's been disabled
 - puppet: override=yes
+
+# Run puppet in an alternate environment
+- puppet: environment=preprod
+
+# Run puppet verbosely
+- puppet: verbose=yes
+
+# Run puppet from a test env and get all of the information back possible
+- puppet: environment=test verbose=yes show_diff=yes
 '''
 
 
@@ -65,6 +85,8 @@ def main():
             show_diff=dict(
                 default=False, aliases=['show-diff'], type='bool'),
             override=dict(default=False, type='bool'),
+            verbose=dict(default=False, type='bool'),
+            environment=dict(),
         ),
     )
     p = module.params
@@ -76,14 +98,21 @@ def main():
         module.fail_json(
             msg="Could not find puppet. Please ensure it is installed.")
 
-    cmd = ("timeout -s 9 %(timeout)s %(puppet_cmd)s agent --onetime"
-           " --ignorecache --no-daemonize --no-usecacheonfailure --no-splay"
-           " --detailed-exitcodes --verbose") % dict(
-               timeout=pipes.quote(p['timeout']), puppet_cmd=PUPPET_CMD)
+    cmd = [
+        'timeout', '-s', '9', pipes.quote(p['timeout']),
+        PUPPET_CMD, 'agent',
+        '--onetime', '--ignorecache', '--no-daemonize',
+        '--no-usecacheonfailure', '--no-splay',
+    ]
+
     if p['show_diff']:
-        cmd += " --show-diff"
+        cmd.append('--show-diff')
     if p['override']:
-        cmd += " --puppetdlockfile=/tmp/ansible.puppet.lock"
+        cmd.append('--puppetdlockfile=/tmp/ansible.puppet.lock')
+    if p['environment']:
+        cmd.append('--environment=%s' % pipes.quote(p['environment']))
+    if p['verbose']:
+        cmd.append('--verbose')
 
     rc, stdout, stderr = module.run_command(cmd)
 
