@@ -1,4 +1,5 @@
 ---
-- hosts: *.slave.openstack.org
+- hosts: "*.slave.openstack.org"
+  gather_facts: false
   tasks:
-    - shell: 'rm -rf ~jenkins/workspace/*{{ project }}*'
+    - command: 'rm -rf ~jenkins/workspace/*{{ project | basename }}*'

@@ -1,0 +1,21 @@
+---
+- hosts: git0*
+  gather_facts: false
+  max_fail_percentage: 1
+  tasks:
+    - name: ensure new 
+      command: rm -rf /var/lib/git/{{ newname }}.git
+    - name: rename
+      command: mv /var/lib/git/{{ project }}.git /var/lib/git/{{ newname }}.git
+- hosts: review.openstack.org
+  gather_facts: false
+  tasks:
+    - name: remove repo
+      command: rm -fr ~gerrit2/review_site/git/{{ newname }}.git
+    - name: remove mirror
+      command: rm -fr /var/lib/git/{{ newname }}.git  # if needed
+    - name: move repo
+      command: mv ~gerrit2/review_site/git/{{ project }}.git ~gerrit2/review_site/git/{{ newname }}.git
+    - name: move mirror
+      command: mv /var/lib/git/{{ project }}.git /var/lib/git/{{ newname }}.git
+- include: clean_workspaces.yaml

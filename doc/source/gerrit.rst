@@ -438,21 +438,17 @@ To rename a project:
      set dest_project_name = "openstack/NEW", created_on = created_on
      where dest_project_name = "openstack/OLD";
 
-#. Move both the git repository and the mirror on
-   review.openstack.org::
-
-     sudo mv ~gerrit2/review_site/git/openstack/{OLD,NEW}.git
-     sudo mv /var/lib/git/openstack/{OLD,NEW}.git
-
 #. Reindex the lucene search index on review.openstack.org::
 
      sudo su - gerrit2
      cp -ax review_site/index index.backup.`date +%s`
      java -jar review_site/bin/gerrit.war reindex -d /home/gerrit2/review_site
 
-#. Move the git repository on git{01-04}.openstack.org::
+#. Move both the git repository and the mirror on review.openstack.org and
+   the git farm. Execute this on ci-puppetmaster.openstack.org::
 
-     sudo mv /var/lib/git/openstack/{OLD,NEW}.git
+     sudo ansible-playbook /etc/ansible/rename.yaml \
+              --extra-vars='project=OLD newname=NEW'
 
 #. Start Gerrit on review.openstack.org::
 
@@ -473,13 +469,7 @@ To rename a project:
    the project management run create it for you and then remove the
    original later (assuming you have sufficient permissions).
 
-#. If this is an org move and the project name itself is not
-   changing, gate jobs may fail due to outdated remote URLs. Clear
-   the workspaces on persistent Jenkins slaves to mitigate this::
-
-     sudo ansible-playbook -f 10 /etc/ansible/clean_workspaces.yaml --extra-vars "project=PROJECTNAME"
-
-#. Again, if this is an org move rather than a rename and the GitHub
+#. If this is an org move rather than a rename and the GitHub
    project has been created but is empty, trigger replication to
    populate it::
 
