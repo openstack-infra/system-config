@@ -17,6 +17,7 @@
 # be a 'host:port' string).
 
 class logstash::watchdog (
+  $cron_ensure = 'present',
   $es_api_node = 'localhost'
 ) {
   package { 'jq':
@@ -36,6 +37,7 @@ class logstash::watchdog (
   }
 
   cron { 'logstash-watchdog':
+    ensure      => $cron_ensure,
     minute      => '*/10',
     environment => 'PATH=/bin:/usr/bin:/usr/local/bin',
     command     => "sleep $((RANDOM\%60)) && /usr/local/bin/logstash-watchdog ${es_api_node}",
