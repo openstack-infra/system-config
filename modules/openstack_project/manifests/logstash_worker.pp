@@ -40,7 +40,6 @@ class openstack_project::logstash_worker (
   }
 
   class { 'logstash::watchdog':
-    cron_ensure => 'absent',
     es_api_node => $discover_node,
   }
 
