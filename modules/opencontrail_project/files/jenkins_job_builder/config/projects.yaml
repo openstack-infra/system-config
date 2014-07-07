@@ -1,5 +1,5 @@
 - project:
-    name: contrail_controller
+    name: contrail-controller
     github-org: Juniper
     node: juniper-tests
     tarball-site: tarballs.openstack.org
