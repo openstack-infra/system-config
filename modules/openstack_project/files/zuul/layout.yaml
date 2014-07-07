@@ -3873,6 +3873,9 @@ projects:
       - gate-pecan-python27
       - gate-pecan-python33
       - gate-pecan-pypy
+      - gate-pecan-tox-scaffolds-26
+      - gate-pecan-tox-scaffolds-27
+      - gate-pecan-tox-scaffolds-33
       - gate-pecan-tox-wsme-stable
       - gate-pecan-tox-wsme-tip
       - gate-pecan-tox-ceilometer-stable
