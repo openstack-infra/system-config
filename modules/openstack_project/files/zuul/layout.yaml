@@ -2928,26 +2928,13 @@ projects:
       - gate-requirements-integration-dsvm
 
   - name: stackforge/python-jenkins
-    # docs is missing a build_sphinx entry point in setup.py
+    template:
+      - name: python-jobs
+      - name: python3-jobs
+      - name: publish-to-pypi
+      - name: docs-on-rtfd
     check:
-      #- gate-python-jenkins-docs
-      - gate-python-jenkins-pep8
-      - gate-python-jenkins-python26
-      - gate-python-jenkins-python27
-      - gate-python-jenkins-python33
       - python-jenkins-coverage
-    gate:
-      #- gate-python-jenkins-docs
-      - gate-python-jenkins-pep8
-      - gate-python-jenkins-python26
-      - gate-python-jenkins-python27
-      - gate-python-jenkins-python33
-    post:
-      - python-jenkins-branch-tarball
-      - python-jenkins-coverage
-    release:
-      - python-jenkins-tarball:
-        - python-jenkins-pypi-both-upload
 
   - name: openstack-infra/releasestatus
     check:
