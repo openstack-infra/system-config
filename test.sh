@@ -3,7 +3,7 @@
 ROOT=$(readlink -fn $(dirname $0))
 MODULE_PATH="${ROOT}/modules:/etc/puppet/modules"
 
-if [ ! -d applytest ] ; then
+if [[ ! -d applytest ]] ; then
     mkdir applytest
 fi
 
@@ -12,11 +12,11 @@ sed -i -e 's/^[^][:space:]$]/#&/g' applytest/puppetapplytest*
 sed -i -e 's@hiera(.\([^.]*\).,\([^)]*\))@\2@' applytest/puppetapplytest*
 mv applytest/*00 applytest/head  # These are the top-level variables defined in site.pp
 
-if [ `lsb_release -i -s` == 'CentOS' ]; then
-    if [ `lsb_release -r -s` =~ '6' ]; then
+if [[ `lsb_release -i -s` == 'CentOS' ]]; then
+    if [[ `lsb_release -r -s` =~ '6' ]]; then
 	CODENAME='centos6'
     fi
-elif [ `lsb_release -i -s` == 'Ubuntu' ]; then
+elif [[ `lsb_release -i -s` == 'Ubuntu' ]]; then
     CODENAME=`lsb_release -c -s`
 fi
 
@@ -28,7 +28,7 @@ for f in `find applytest -name 'puppetapplytest*' -print` ; do
     fi
 done
 
-if [ $FOUND == "0" ]; then
+if [[ $FOUND == "0" ]]; then
     echo "No hosts found for node type $CODENAME"
     exit 1
 fi
