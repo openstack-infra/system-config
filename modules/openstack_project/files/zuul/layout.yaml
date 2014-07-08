@@ -374,6 +374,8 @@ project-templates:
 jobs:
   - name: ^.*$
     parameter-function: set_node_options_default_precise
+  - name: ^.*tempest-dsvm-aiopcpu.*$
+    parameter-function: set_node_options_default_trusty
   # Pecan ceilometer tests need new mongodb available in trusty
   - name: ^gate-pecan-tox-ceilometer-.*$
     parameter-function: set_node_options_default_trusty
@@ -491,6 +493,8 @@ jobs:
   - name: check-tempest-dsvm-cells-full
     voting: false
   - name: check-tempest-dsvm-f20
+    voting: false
+  - name: check-tempest-dsvm-aiopcpu
     voting: false
   - name: gate-designate-devstack-dsvm
     branch: ^(?!stable/(?:havana|icehouse)).*$
@@ -2663,6 +2667,7 @@ projects:
       - check-tempest-master-dsvm-full-havana
       - check-tempest-master-dsvm-neutron-havana
       - check-tempest-dsvm-f20
+      - check-tempest-dsvm-aiopcpu
     experimental-tripleo:
       - check-tripleo-ironic-seed-precise
       - check-tripleo-undercloud-precise
