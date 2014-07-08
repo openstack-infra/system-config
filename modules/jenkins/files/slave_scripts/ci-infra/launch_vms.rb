@@ -115,7 +115,7 @@ class Vm
 #       Process.detach(@keepalive_pid)
     end
 
-    def Vm.create_internal(vmname, floatingip, metadata, flavor = 4) # large
+    def Vm.create_internal(vmname, floatingip, metadata, flavor = 3) # medium
         puts "Creating VM #{vmname}"
         net_id, e = Sh.crun "nova net-list |\grep -w internet | awk '{print $2}'"
         image_id, e = Sh.crun %{glance image-list |\grep " #{@@options.image} " | awk '{print $2}'}
