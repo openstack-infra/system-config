@@ -34,12 +34,13 @@ setup_manuals
 # translated
 tx pull -a -f --minimum-perc=75
 
-# The common directory is used by the other guides, let's be more
-# liberal here since teams might only translate the files used by a
-# single guide. We use 8 % since that downloads the currently
-# translated files.
+# The common and glossary directories are used by the other guides,
+# let's be more liberal here since teams might only translate the
+# files used by a single guide. We use 8 % since that downloads the
+# currently translated files.
 if [ $PROJECT = "openstack-manuals" ] ; then
     tx pull -f  --minimum-perc=8 -r openstack-manuals-i18n.common
+    tx pull -f  --minimum-perc=8 -r openstack-manuals-i18n.glossary
 fi
 
 # Add imported upstream translations to git
