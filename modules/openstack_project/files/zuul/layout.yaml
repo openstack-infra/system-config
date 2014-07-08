@@ -4754,6 +4754,9 @@ projects:
       - name: openstack-doc-gate
     post:
       - training-guides-tox-doc-publishdocs
+      - training-guides-manuals-upstream-translation-update
+    periodic:
+      - training-guides-manuals-propose-translation-update
 
   - name: stackforge/octavia
     check:
