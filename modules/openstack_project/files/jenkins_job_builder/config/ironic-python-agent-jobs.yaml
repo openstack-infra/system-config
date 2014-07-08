@@ -1,4 +1,18 @@
 - job:
+    name: 'gate-ironic-python-agent-buildimage-coreos'
+    node: 'bare-trusty'
+
+    builders:
+      - link-logs
+      - net-info
+      - gerrit-git-prep
+      - shell: |
+          imagebuild/coreos/full_trusty_build.sh
+
+    publishers:
+      - console-log
+
+- job:
     name: 'ironic-python-agent-buildimage-coreos'
     node: 'bare-trusty'
 
