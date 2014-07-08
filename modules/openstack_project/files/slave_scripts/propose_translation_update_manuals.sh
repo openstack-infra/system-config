@@ -28,19 +28,10 @@ setup_git
 setup_review "$ORG" "$PROJECT"
 setup_translation
 
-setup_manuals
+setup_manuals "$PROJECT"
 
-# Pull upstream translations of files that are at least 75 %
-# translated
-tx pull -a -f --minimum-perc=75
-
-# The common directory is used by the other guides, let's be more
-# liberal here since teams might only translate the files used by a
-# single guide. We use 8 % since that downloads the currently
-# translated files.
-if [ $PROJECT = "openstack-manuals" ] ; then
-    tx pull -f  --minimum-perc=8 -r openstack-manuals-i18n.common
-fi
+# Pull upstream translations of files
+tx pull -a -f
 
 # Add imported upstream translations to git
 for FILE in ${DocFolder}/*
