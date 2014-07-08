@@ -490,6 +490,8 @@ jobs:
     voting: false
   - name: check-tempest-dsvm-f20
     voting: false
+  - name: check-tempest-dsvm-aiopcpu
+    voting: false
   - name: gate-designate-devstack-dsvm
     branch: ^(?!stable/(?:havana|icehouse)).*$
 # For Gerrit ver 2.4.x (using maven)
@@ -2655,6 +2657,7 @@ projects:
       - check-tempest-master-dsvm-full-havana
       - check-tempest-master-dsvm-neutron-havana
       - check-tempest-dsvm-f20
+      - check-tempest-dvsm-aiopcpu
     experimental-tripleo:
       - check-tripleo-ironic-seed-precise
       - check-tripleo-undercloud-precise
