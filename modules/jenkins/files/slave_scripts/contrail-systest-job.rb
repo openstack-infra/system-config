@@ -156,7 +156,7 @@ def build_contrail_packages(repo = "#{ENV['WORKSPACE']}/repo")
     ENV['BUILD_ONLY'] = "1"
     ENV['SKIP_CREATE_GIT_IDS'] = "1"
     Sh.run "cd #{repo}"
-#   Sh.run "scons"
+    Sh.run "scons"
 #   Sh.run "scons #{repo}/build/third_party/log4cplus"
     Sh.run "rm -rf #{repo}/third_party/euca2ools/.git/shallow"
     Sh.run "cd #{repo}/tools/packaging/build/"
