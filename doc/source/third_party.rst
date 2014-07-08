@@ -237,6 +237,14 @@ The permissions on this group allow for commenting and voting on the
 `openstack-dev/sandbox <https://git.openstack.org/cgit/openstack-dev/sandbox/>`_
 repo as well as commenting without voting on other repos in gerrit.
 
+The OpenStack Infrastructure team disables mis-behaving third-party ci
+accounts at its discretion. This documentation endeavours to outline specific
+circumstances that may lead to an account being disabled. There have been
+times when third-party ci systems behave in ways we didn't envision and therefore
+were unable to document prior to the event. If your third-party ci system has been
+disabled, check your email - we probably tried to contact you, and join us in
+the #openstack-infra irc channel on freenode to discuss your situation.
+
 In order to get your Third Pary CI account to have voting permissions on
 repos in gerrit in addition to ``openstack-dev/sandbox`` you have a greater
 chance of success if you follow these steps:
