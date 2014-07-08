@@ -9,6 +9,9 @@ log_config=/etc/zuul/gearman-logging.conf
 server=<%= gerrit_server %>
 user=<%= gerrit_user %>
 sshkey=/var/lib/zuul/ssh/id_rsa
+<% if gerrit_baseurl != "" -%>
+baseurl=<%= gerrit_baseurl %>
+<% end -%>
 
 [zuul]
 layout_config=/etc/zuul/layout.yaml

@@ -24,6 +24,7 @@ class zuul (
   $internal_gearman = true,
   $gerrit_server = '',
   $gerrit_user = '',
+  $gerrit_baseurl = '',
   $zuul_ssh_private_key = '',
   $url_pattern = '',
   $status_url = "https://${::fqdn}/",
