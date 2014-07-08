@@ -4766,3 +4766,99 @@ projects:
       - gate-octavia-python26
       - gate-octavia-python27
       - gate-octavia-python33
+
+  - name: stackforge/xstatic-angular
+    check:
+      - noop
+    gate:
+      - noop
+
+  - name: stackforge/xstatic-angular-cookies
+    check:
+      - noop
+    gate:
+      - noop
+
+  - name: stackforge/xstatic-angular-mock
+    check:
+      - noop
+    gate:
+      - noop
+
+  - name: stackforge/xstatic-bootstrap-datepicker
+    check:
+      - noop
+    gate:
+      - noop
+
+  - name: stackforge/xstatic-bootstrap-scss
+    check:
+      - noop
+    gate:
+      - noop
+
+  - name: stackforge/xstatic-d3
+    check:
+      - noop
+    gate:
+      - noop
+
+  - name: stackforge/xstatic-hogan
+    check:
+      - noop
+    gate:
+      - noop
+
+  - name: stackforge/xstatic-jasmine
+    check:
+      - noop
+    gate:
+      - noop
+
+  - name: stackforge/xstatic-jquery-migrate
+    check:
+      - noop
+    gate:
+      - noop
+
+  - name: stackforge/xstatic-jquery.bootstrap.wizard
+    check:
+      - noop
+    gate:
+      - noop
+
+  - name: stackforge/xstatic-jquery.quicksearch
+    check:
+      - noop
+    gate:
+      - noop
+
+  - name: stackforge/xstatic-jquery.tablesorter
+    check:
+      - noop
+    gate:
+      - noop
+
+  - name: stackforge/xstatic-jsencrypt
+    check:
+      - noop
+    gate:
+      - noop
+
+  - name: stackforge/xstatic-qunit
+    check:
+      - noop
+    gate:
+      - noop
+
+  - name: stackforge/xstatic-rickshaw
+    check:
+      - noop
+    gate:
+      - noop
+
+  - name: stackforge/xstatic-spin
+    check:
+      - noop
+    gate:
+      - noop

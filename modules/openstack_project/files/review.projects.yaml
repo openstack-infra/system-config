@@ -1071,3 +1071,67 @@
 - project: stackforge/xenapi-os-testing
   description: Scripts to enable running of tempest tests in a nested Xen instance
   upstream: git://github.com/citrix-openstack/xenapi-os-testing.git
+- project: stackforge/xstatic-angular
+  description: Angular JavaScript library packaged as XStatic.
+  upstream: https://bitbucket.org/thesheep/xstatic-angular.git
+  acl-config: /home/gerrit2/acls/stackforge/xstatic.config
+- project: stackforge/xstatic-angular-cookies
+  description: Angular-Cookies JavaScript library packaged as XStatic.
+  upstream: https://bitbucket.org/thesheep/xstatic-angular-cookies.git
+  acl-config: /home/gerrit2/acls/stackforge/xstatic.config
+- project: stackforge/xstatic-angular-mock
+  description: Angular-Mock JavaScript library packaged as XStatic.
+  upstream: https://bitbucket.org/thesheep/xstatic-angular-mock.git
+  acl-config: /home/gerrit2/acls/stackforge/xstatic.config
+- project: stackforge/xstatic-bootstrap-datepicker
+  description: Bootstrap-Datepicker JavaScript library packaged as XStatic.
+  upstream: https://bitbucket.org/thesheep/xstatic-bootstrap-datepicker.git
+  acl-config: /home/gerrit2/acls/stackforge/xstatic.config
+- project: stackforge/xstatic-bootstrap-scss
+  description: Bootstrap SCSS library packaged as XStatic.
+  upstream: https://bitbucket.org/thesheep/xstatic-bootstrap-scss.git
+  acl-config: /home/gerrit2/acls/stackforge/xstatic.config
+- project: stackforge/xstatic-d3
+  description: D3 JavaScript library packaged as XStatic.
+  upstream: https://bitbucket.org/thesheep/xstatic-d3.git
+  acl-config: /home/gerrit2/acls/stackforge/xstatic.config
+- project: stackforge/xstatic-hogan
+  description: Hogan JavaScript library packaged as XStatic.
+  upstream: https://bitbucket.org/thesheep/xstatic-hogan.git
+  acl-config: /home/gerrit2/acls/stackforge/xstatic.config
+- project: stackforge/xstatic-jasmine
+  description: Jasmine JavaScript library packaged as XStatic.
+  upstream: https://bitbucket.org/thesheep/xstatic-jasmine.git
+  acl-config: /home/gerrit2/acls/stackforge/xstatic.config
+- project: stackforge/xstatic-jquery-migrate
+  description: Migrate jQuery plugin packaged as XStatic.
+  upstream: https://bitbucket.org/thesheep/xstatic-jquery-migrate.git
+  acl-config: /home/gerrit2/acls/stackforge/xstatic.config
+- project: stackforge/xstatic-jquery.bootstrap.wizard
+  description: Bootstrap.Wizard jQuery plugin packaged as XStatic.
+  upstream: https://bitbucket.org/thesheep/xstatic-jquery.bootstrap.wizard.git
+  acl-config: /home/gerrit2/acls/stackforge/xstatic.config
+- project: stackforge/xstatic-jquery.quicksearch
+  description: Quicksearch jQuery plugin packaged as XStatic.
+  upstream: https://bitbucket.org/thesheep/xstatic-jquery.quicksearch.git
+  acl-config: /home/gerrit2/acls/stackforge/xstatic.config
+- project: stackforge/xstatic-jquery.tablesorter
+  description: Tablesorter jQuery plugin packaged as XStatic.
+  upstream: https://bitbucket.org/thesheep/xstatic-jquery.tablesorter.git
+  acl-config: /home/gerrit2/acls/stackforge/xstatic.config
+- project: stackforge/xstatic-jsencrypt
+  description: JSEncrypt JavaScript library packaged as XStatic.
+  upstream: https://bitbucket.org/thesheep/xstatic-jsencrypt.git
+  acl-config: /home/gerrit2/acls/stackforge/xstatic.config
+- project: stackforge/xstatic-qunit
+  description: QUnit JavaScript library packaged as XStatic.
+  upstream: https://bitbucket.org/thesheep/xstatic-qunit.git
+  acl-config: /home/gerrit2/acls/stackforge/xstatic.config
+- project: stackforge/xstatic-rickshaw
+  description: Rickshaw JavaScript library packaged as XStatic.
+  upstream: https://bitbucket.org/thesheep/xstatic-rickshaw.git
+  acl-config: /home/gerrit2/acls/stackforge/xstatic.config
+- project: stackforge/xstatic-spin
+  description: Spin JavaScript library packaged as XStatic.
+  upstream: https://bitbucket.org/thesheep/xstatic-spin.git
+  acl-config: /home/gerrit2/acls/stackforge/xstatic.config
