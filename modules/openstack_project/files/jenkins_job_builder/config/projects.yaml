@@ -1531,6 +1531,11 @@
       # Special jobs for devstack-gate
       - devstack-gate-jobs:
           node: 'devstack-precise || devstack-trusty'
+      - '{pipeline}-tempest-dsvm-{topology}{branch-designator}':
+          pipeline: check
+          node: devstack-precise-2-node
+          branch-designator: ''
+          branch-override: default
 
 
 - project:
