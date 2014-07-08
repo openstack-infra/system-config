@@ -23,6 +23,16 @@
               copy-after-failure: true
 
 
+- publisher:
+    name: rally-subunit
+    publishers:
+      - scp:
+          site: 'static.openstack.org'
+          files:
+            - target: 'logs/$LOG_PATH/results.html'
+              source: 'testr_results.html'
+
+
 - builder:
     name: devstack-rally-gate
     builders:
@@ -126,6 +136,7 @@
     publishers:
       - devstack-logs
       - console-log
+      - rally-subunit
 
 
 - job-group:
