@@ -45,13 +45,18 @@
           #!/bin/bash -xe
           export PYTHONUNBUFFERED=true
           export DEVSTACK_GATE_TIMEOUT=80
-          export ENABLED_SERVICES=s-proxy,s-object,s-container,s-account,trove,tr-api,tr-tmgr,tr-cond
+          export ENABLED_SERVICES=tempest,s-proxy,s-object,s-container,s-account,trove,tr-api,tr-tmgr,tr-cond
           export PROJECTS="openstack/trove-integration openstack/diskimage-builder openstack/tripleo-image-elements $PROJECTS"
 
           function post_test_hook {{
               export BRIDGE_IP=10.1.0.1
-              cd /opt/stack/new/trove-integration/scripts
+              export DEST=$BASE/new
+              export PATH_DEVSTACK_SRC=$DEST/devstack
+              sudo chown $(whoami) /etc/trove
+              sudo chown -R $(whoami) $DEST/trove-integration
+              cd $DEST/trove-integration/scripts
               ./redstack kick-start {datastore}
+              sed -i "s/f7999d1955c5014aa32c/secret/g" /etc/trove/trove-guestagent.conf
               ./redstack int-tests
           }}
           export -f post_test_hook
