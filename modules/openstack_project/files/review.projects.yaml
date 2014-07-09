@@ -414,7 +414,6 @@
 - project: openstack/python-openstackclient
 - project: openstack/python-saharaclient
   description: Python bindings and CLI for Sahara.
-  acl-config: /home/gerrit2/acls/openstack/sahara.config
 - project: openstack/python-swiftclient
   docimpact-group: openstack-manuals
 - project: openstack/python-troveclient
