@@ -61,3 +61,7 @@ table.infoTable td.notVotable,
 .changeTable td.dataCell.labelNotApplicable {
     background: inherit;
 }
+
+.addMemberTextBox {
+    width: 20em;
+}
