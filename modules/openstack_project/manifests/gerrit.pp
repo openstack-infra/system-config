@@ -145,6 +145,11 @@ class openstack_project::gerrit (
         link  => 'https://launchpad.net/bugs/$1',
       },
       {
+        name  => 'story',
+        match => '\\bstory:? #?(\\d+)',
+        link  => 'https://storyboard.openstack.org/#!/story/$1',
+      },
+      {
         name  => 'blueprint',
         match => '(\\b[Bb]lue[Pp]rint\\b|\\b[Bb][Pp]\\b)[ \\t#:]*([A-Za-z0-9\\-]+)',
         link  => 'https://blueprints.launchpad.net/openstack/?searchtext=$2',
