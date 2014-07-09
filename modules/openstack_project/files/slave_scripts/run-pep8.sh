@@ -22,6 +22,11 @@ check_variable_org_project "$org" "$project" "$0"
 
 source /usr/local/jenkins/slave_scripts/select-mirror.sh $org $project
 
+echo "Begin pip freeze output from test virtualenv:"
+echo "======================================================================"
+.tox/pep8/bin/pip freeze
+echo "======================================================================"
+
 set -o pipefail
 tox -v -epep8 | tee pep8.txt
 set +o pipefail
