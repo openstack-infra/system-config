@@ -22,7 +22,7 @@ fi
 
 FOUND=0
 for f in `find applytest -name 'puppetapplytest*' -print` ; do
-    if grep "Node-OS: $CODENAME" $f; then
+    if grep -q "Node-OS: $CODENAME" $f; then
 	cat applytest/head $f > $f.final
 	FOUND=1
     fi
@@ -38,6 +38,7 @@ HOST=`echo $HOSTNAME |awk -F. '{ print $1 }'`
 echo "127.0.1.1 $HOST.openstack.org $HOST" >> /tmp/hosts
 sudo mv /tmp/hosts /etc/hosts
 
+sudo mkdir -p /var/run/puppet
 find applytest -name 'puppetapplytest*.final' -print0 | \
     xargs -0 -P $(nproc) -n 1 -I filearg \
         sudo puppet apply --modulepath=${MODULE_PATH} --noop --verbose --debug filearg > /dev/null
