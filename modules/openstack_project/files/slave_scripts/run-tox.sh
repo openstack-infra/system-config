@@ -12,8 +12,12 @@
 # project's tox.ini file).
 
 venv=$1
-org=$2
-project=$3
+shift
+org=$1
+shift
+project=$1
+shift
+extra_args="$@"
 
 if [[ -z "$venv" || -z "$org" || -z "$project" ]]
 then
@@ -22,6 +26,7 @@ then
   echo "VENV: The tox environment to run (eg 'python27')"
   echo "ORG: The project organization (eg 'stackforge')"
   echo "PROJECT: The project name (eg 'nova')"
+  echo "EXTRA_ARGS: Extra arguments to pass to tox (for example, '--notest')"
   exit 1
 fi
 
@@ -31,7 +36,7 @@ sudo /usr/local/jenkins/slave_scripts/jenkins-sudo-grep.sh pre
 
 source /usr/local/jenkins/slave_scripts/select-mirror.sh $org $project
 
-tox -v -e$venv
+tox -v -e$venv $extra_args
 result=$?
 
 sudo /usr/local/jenkins/slave_scripts/jenkins-sudo-grep.sh post

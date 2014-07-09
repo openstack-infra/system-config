@@ -1,5 +1,5 @@
 - job-template:
-    name: '{pipeline}-{injectedlib}-dsvm-{name}{branch-designator}'
+    name: '{pipeline}-{oslo-lib}-dsvm-{name}{branch-designator}'
     node: '{node}'
 
     wrappers:
@@ -15,14 +15,14 @@
           #!/bin/bash -xe
           export PYTHONUNBUFFERED=true
           export DEVSTACK_GATE_TIMEOUT=95
-          export PROJECTS="{injectedrepo} $PROJECTS"
+          export PROJECTS="openstack/{oslo-lib} $PROJECTS"
           export BRANCH_OVERRIDE={branch-override}
           if [ "$BRANCH_OVERRIDE" != "default" ] ; then
               export OVERRIDE_ZUUL_BRANCH=$BRANCH_OVERRIDE
           fi
 
           function gate_hook {{
-              cd /opt/stack/new/$(basename {injectedrepo})
+              cd /opt/stack/new/{oslo-lib}
               remaining_time
               timeout -s 9 ${{REMAINING_TIME}}m ./tools/run_cross_tests.sh /opt/stack/new/{name} py27
           }}
@@ -45,19 +45,66 @@
       - console-log
 
 
-- job-group:
-    name: oslotest-cross-test
+- job-template:
+    name: '{pipeline}-oslo-master-dsvm-{name}{branch-designator}'
+    node: '{node}'
 
-    injectedlib: oslotest
-    injectedrepo: openstack/oslotest
+    wrappers:
+      - build-timeout:
+          timeout: 95
+      - timestamps
+
+    builders:
+      - link-logs
+      - net-info
+      - devstack-checkout
+      - shell: |
+          #!/bin/bash -xe
+          export PYTHONUNBUFFERED=true
+          export DEVSTACK_GATE_TIMEOUT=95
+          export BRANCH_OVERRIDE={branch-override}
+          if [ "$BRANCH_OVERRIDE" != "default" ] ; then
+              export OVERRIDE_ZUUL_BRANCH=$BRANCH_OVERRIDE
+          fi
+          /usr/local/jenkins/slave_scripts/run-tox-with-oslo-master.sh py27 {github-org} {name}
+
+    publishers:
+      - devstack-logs
+      - console-log
+
+
+# Set up check and gate jobs for running unit tests for a project that
+# uses any oslo libraries with the master branches of those libraries
+# when changes are proposed to the consuming project.
+- job-group:
+    name: test-with-oslo-master
 
     jobs:
-      - '{pipeline}-{injectedlib}-dsvm-{name}{branch-designator}':
+      - '{pipeline}-oslo-master-dsvm-{name}{branch-designator}':
           pipeline: check
           node: 'devstack-precise || devstack-trusty'
           branch-designator: ''
           branch-override: default
-      - '{pipeline}-{injectedlib}-dsvm-{name}{branch-designator}':
+      - '{pipeline}-oslo-master-dsvm-{name}{branch-designator}':
+          pipeline: gate
+          node: 'devstack-precise || devstack-trusty'
+          branch-designator: ''
+          branch-override: default
+
+
+# Define jobs meant to be attached to an oslo library to test changes
+# proposed to the library by running the unit tests of the consuming
+# project.
+- job-group:
+    name: uses-oslo-lib
+
+    jobs:
+      - '{pipeline}-{oslo-lib}-dsvm-{name}{branch-designator}':
+          pipeline: check
+          node: 'devstack-precise || devstack-trusty'
+          branch-designator: ''
+          branch-override: default
+      - '{pipeline}-{oslo-lib}-dsvm-{name}{branch-designator}':
           pipeline: gate
           node: 'devstack-precise || devstack-trusty'
           branch-designator: ''

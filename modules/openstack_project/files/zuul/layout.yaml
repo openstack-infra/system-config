@@ -370,6 +370,11 @@ project-templates:
     release:
       - 'hook-{name}-rtfd'
 
+  - name: test-with-oslo-master
+    check:
+      - 'check-oslo-master-dsvm-{name}'
+    gate:
+      - 'gate-oslo-master-dsvm-{name}'
 
 jobs:
   - name: ^.*$
@@ -687,6 +692,11 @@ jobs:
     swift:
       - name: logs
   - name: gate-tuskar-ui-jshint
+  # Unit test cross-test jobs for oslo libraries
+  # FIXME(dhellmann): Make these new jobs non-voting until we are sure they work.
+  - name: ^(gate|check)-(cliff|oslo[^-]+|pycadf|stevedore|taskflow)-dsvm-.*$
+    voting: false
+  - name: ^(gate|check)-oslo-master-dsvm-.*$
     voting: false
   - name: ^(gate|check)-pecan-tox-ceilometer-stable
     voting: false
@@ -731,6 +741,7 @@ projects:
       - name: check-requirements
       - name: integrated-gate
       - name: translation-jobs
+      - name: test-with-oslo-master
     check:
       - check-devstack-dsvm-cells
       - check-swift-dsvm-functional
@@ -761,12 +772,15 @@ projects:
       - name: check-requirements
       - name: integrated-gate
       - name: translation-jobs
+      - name: test-with-oslo-master
     check:
       - gate-cinder-pylint
       - check-devstack-dsvm-cells
       - check-rally-dsvm-cinder
+      - check-tempest-dsvm-postgres-full
     gate:
       - gate-devstack-dsvm-cells
+      - gate-tempest-dsvm-postgres-full
     experimental:
       - gate-grenade-dsvm-forward
     experimental-tripleo:
@@ -792,16 +806,13 @@ projects:
       - name: integrated-gate
       - name: publish-to-pypi
       - name: docs-on-rtfd
+      - name: test-with-oslo-master
     check:
-      - gate-cliff-tox-neutronclient-stable
-      - gate-cliff-tox-neutronclient-tip
-      - gate-cliff-tox-openstackclient-stable
-      - gate-cliff-tox-openstackclient-tip
+      - check-cliff-dsvm-python-neutronclient
+      - check-cliff-dsvm-python-openstackclient
     gate:
-      - gate-cliff-tox-neutronclient-stable
-      - gate-cliff-tox-neutronclient-tip
-      - gate-cliff-tox-openstackclient-stable
-      - gate-cliff-tox-openstackclient-tip
+      - gate-cliff-dsvm-python-neutronclient
+      - gate-cliff-dsvm-python-openstackclient
 
   - name: stackforge/driverlog
     check:
@@ -853,6 +864,7 @@ projects:
       - name: periodic-havana
       - name: check-requirements
       - name: integrated-gate
+      - name: test-with-oslo-master
     check:
       - check-devstack-dsvm-cells
       - gate-tempest-dsvm-large-ops
@@ -891,8 +903,10 @@ projects:
       - name: check-requirements
       - name: integrated-gate
       - name: translation-jobs
+      - name: test-with-oslo-master
     check:
       - check-devstack-dsvm-cells
+      - check-tempest-dsvm-postgres-full
     gate:
       - gate-devstack-dsvm-cells
     experimental-tripleo:
@@ -976,6 +990,7 @@ projects:
       - name: check-requirements
       - name: integrated-gate
       - name: translation-jobs
+      - name: test-with-oslo-master
     check:
       - gate-keystone-python33
       - check-devstack-dsvm-cells
@@ -1052,6 +1067,7 @@ projects:
       - name: check-requirements
       - name: integrated-gate-neutron
       - name: translation-jobs
+      - name: test-with-oslo-master
     check:
       - check-neutron-dsvm-functional
       - check-rally-dsvm-neutron-neutron
@@ -1091,6 +1107,7 @@ projects:
       - name: check-requirements
       - name: integrated-gate
       - name: translation-jobs
+      - name: test-with-oslo-master
     check:
       - check-devstack-dsvm-cells
       - gate-tempest-dsvm-large-ops
@@ -1141,6 +1158,13 @@ projects:
       - name: check-requirements
       - name: integrated-gate
       - name: publish-to-pypi
+      - name: test-with-oslo-master
+    check:
+      - check-pycadf-dsvm-keystone
+      - check-pycadf-dsvm-nova
+    gate:
+      - gate-pycadf-dsvm-keystone
+      - gate-pycadf-dsvm-nova
 
   - name: openstack/sahara
     template:
@@ -1151,6 +1175,7 @@ projects:
       - name: publish-to-pypi
       - name: docs-on-rtfd
       - name: translation-jobs
+      - name: test-with-oslo-master
     check:
       - gate-sahara-pylint
     release:
@@ -1173,6 +1198,42 @@ projects:
       - name: integrated-gate
       - name: publish-to-pypi
       - name: docs-on-rtfd
+    check:
+      - check-stevedore-dsvm-ceilometer
+      - check-stevedore-dsvm-cinder
+      - check-stevedore-dsvm-cliff
+      - check-stevedore-dsvm-glance
+      - check-stevedore-dsvm-heat
+      - check-stevedore-dsvm-ironic
+      - check-stevedore-dsvm-ironic-python-agent
+      - check-stevedore-dsvm-keystone
+      - check-stevedore-dsvm-neutron
+      - check-stevedore-dsvm-nova
+      - check-stevedore-dsvm-oslo.config
+      - check-stevedore-dsvm-oslo.db
+      - check-stevedore-dsvm-oslo.messaging
+      - check-stevedore-dsvm-oslo.vmware
+      - check-stevedore-dsvm-python-keystoneclient
+      - check-stevedore-dsvm-sahara
+      - check-stevedore-dsvm-taskflow
+    gate:
+      - gate-stevedore-dsvm-ceilometer
+      - gate-stevedore-dsvm-cinder
+      - gate-stevedore-dsvm-cliff
+      - gate-stevedore-dsvm-glance
+      - gate-stevedore-dsvm-heat
+      - gate-stevedore-dsvm-ironic
+      - gate-stevedore-dsvm-ironic-python-agent
+      - gate-stevedore-dsvm-keystone
+      - gate-stevedore-dsvm-neutron
+      - gate-stevedore-dsvm-nova
+      - gate-stevedore-dsvm-oslo.db
+      - gate-stevedore-dsvm-oslo.config
+      - gate-stevedore-dsvm-oslo.messaging
+      - gate-stevedore-dsvm-oslo.vmware
+      - gate-stevedore-dsvm-python-keystoneclient
+      - gate-stevedore-dsvm-sahara
+      - gate-stevedore-dsvm-taskflow
 
   - name: openstack/swift
     template:
@@ -1212,12 +1273,15 @@ projects:
       - name: openstack-server-publish-jobs
       - name: integrated-gate
       - name: publish-to-pypi
+      - name: test-with-oslo-master
     check:
       - gate-taskflow-tox-py26-sa7-mysql
       - gate-taskflow-tox-py27-sa8-mysql
+      - check-taskflow-dsvm-cinder
     gate:
       - gate-taskflow-tox-py26-sa7-mysql
       - gate-taskflow-tox-py27-sa8-mysql
+      - gate-taskflow-dsvm-cinder
 
   - name: openstack/trove
     template:
@@ -1227,6 +1291,11 @@ projects:
       - name: integrated-gate
       - name: openstack-doc-gate
       - name: translation-jobs
+      - name: test-with-oslo-master
+    check:
+      - check-oslo.config-dsvm-trove
+    gate:
+      - gate-oslo.config-dsvm-trove
     post:
       - trove-tox-doc-publishdocs
     pre-release:
@@ -1436,6 +1505,7 @@ projects:
       - name: integrated-gate
       - name: stable-compat-jobs
       - name: publish-to-pypi
+      - name: test-with-oslo-master
     check:
       - gate-python-keystoneclient-python33
       - check-devstack-dsvm-cells
@@ -1481,11 +1551,21 @@ projects:
       - name: integrated-gate-neutron
       - name: stable-compat-jobs
       - name: publish-to-pypi
+      - name: test-with-oslo-master
     check:
       - gate-python-neutronclient-python33
       - gate-python-neutronclient-pypy
+      - check-devstack-dsvm-cells
+      - check-tempest-dsvm-postgres-full
+      - check-tempest-dsvm-neutron-full
+      - check-tempest-dsvm-neutron-pg
+      - gate-tempest-dsvm-neutron-large-ops
     gate:
       - gate-python-neutronclient-pypy
+      - gate-devstack-dsvm-cells
+      - gate-tempest-dsvm-postgres-full
+      - gate-tempest-dsvm-neutron-pg
+      - gate-tempest-dsvm-neutron-large-ops
     experimental:
       - gate-grenade-dsvm-forward
     experimental-tripleo:
@@ -1862,12 +1942,6 @@ projects:
       - name: openstack-server-publish-jobs
       - name: check-requirements
       - name: publish-to-pypi
-    check:
-      - check-oslotest-dsvm-oslo.config
-      - check-oslotest-dsvm-oslo.messaging
-    gate:
-      - gate-oslotest-dsvm-oslo.config
-      - gate-oslotest-dsvm-oslo.messaging
 
   - name: openstack/oslo-incubator
     template:
@@ -1894,13 +1968,45 @@ projects:
       - name: check-requirements
       - name: integrated-gate
       - name: publish-to-pypi
+      - name: test-with-oslo-master
     check:
       - gate-oslo.config-python33
       - check-devstack-dsvm-cells
-      - check-oslotest-dsvm-oslo.config
+      - check-oslo.config-dsvm-ceilometer
+      - check-oslo.config-dsvm-cinder
+      - check-oslo.config-dsvm-glance
+      - check-oslo.config-dsvm-heat
+      - check-oslo.config-dsvm-ironic
+      - check-oslo.config-dsvm-ironic-python-agent
+      - check-oslo.config-dsvm-keystone
+      - check-oslo.config-dsvm-neutron
+      - check-oslo.config-dsvm-nova
+      - check-oslo.config-dsvm-oslo.db
+      - check-oslo.config-dsvm-oslo.messaging
+      - check-oslo.config-dsvm-pycadf
+      - check-oslo.config-dsvm-python-keystoneclient
+      - check-oslo.config-dsvm-sahara
+      - check-oslo.config-dsvm-tempest
+      - check-oslo.config-dsvm-trove
     gate:
       - gate-oslo.config-python33
       - gate-devstack-dsvm-cells
+      - gate-oslo.config-dsvm-ceilometer
+      - gate-oslo.config-dsvm-cinder
+      - gate-oslo.config-dsvm-glance
+      - gate-oslo.config-dsvm-heat
+      - gate-oslo.config-dsvm-ironic
+      - gate-oslo.config-dsvm-ironic-python-agent
+      - gate-oslo.config-dsvm-keystone
+      - gate-oslo.config-dsvm-neutron
+      - gate-oslo.config-dsvm-nova
+      - gate-oslo.config-dsvm-oslo.db
+      - gate-oslo.config-dsvm-oslo.messaging
+      - gate-oslo.config-dsvm-pycadf
+      - gate-oslo.config-dsvm-python-keystoneclient
+      - gate-oslo.config-dsvm-sahara
+      - gate-oslo.config-dsvm-tempest
+      - gate-oslo.config-dsvm-trove
     experimental-tripleo:
       - check-tripleo-ironic-seed-precise
       - check-tripleo-undercloud-precise
@@ -1915,14 +2021,19 @@ projects:
       - name: integrated-gate
       - name: publish-to-pypi
       - name: translation-jobs
+      - name: test-with-oslo-master
     check:
       - check-devstack-dsvm-cells
       - gate-tempest-dsvm-large-ops
       - gate-tempest-dsvm-neutron-large-ops
+      - check-oslo.db-dsvm-keystone
+      - check-oslo.db-dsvm-neutron
     gate:
       - gate-devstack-dsvm-cells
       - gate-tempest-dsvm-large-ops
       - gate-tempest-dsvm-neutron-large-ops
+      - gate-oslo.db-dsvm-keystone
+      - gate-oslo.db-dsvm-neutron
     experimental-tripleo:
       - check-tripleo-ironic-seed-precise
       - check-tripleo-undercloud-precise
@@ -1940,10 +2051,8 @@ projects:
     check:
       - gate-oslo.i18n-python33
       - check-devstack-dsvm-cells
-      - check-oslotest-dsvm-oslo.i18n
     gate:
       - gate-oslo.i18n-python33
-      - gate-devstack-dsvm-cells
     experimental-tripleo:
       - check-tripleo-ironic-seed-precise
       - check-tripleo-undercloud-precise
@@ -1958,15 +2067,33 @@ projects:
       - name: integrated-gate
       - name: publish-to-pypi
       - name: translation-jobs
+      - name: test-with-oslo-master
     check:
       - check-devstack-dsvm-cells
       - gate-tempest-dsvm-large-ops
       - gate-tempest-dsvm-neutron-large-ops
-      - check-oslotest-dsvm-oslo.messaging
+      - check-oslo.messaging-dsvm-ceilometer
+      - check-oslo.messaging-dsvm-cinder
+      - check-oslo.messaging-dsvm-glance
+      - check-oslo.messaging-dsvm-heat
+      - check-oslo.messaging-dsvm-keystone
+      - check-oslo.messaging-dsvm-neutron
+      - check-oslo.messaging-dsvm-nova
+      - check-oslo.messaging-dsvm-pycadf
+      - check-oslo.messaging-dsvm-sahara
     gate:
       - gate-devstack-dsvm-cells
       - gate-tempest-dsvm-large-ops
       - gate-tempest-dsvm-neutron-large-ops
+      - gate-oslo.messaging-dsvm-ceilometer
+      - gate-oslo.messaging-dsvm-cinder
+      - gate-oslo.messaging-dsvm-glance
+      - gate-oslo.messaging-dsvm-heat
+      - gate-oslo.messaging-dsvm-keystone
+      - gate-oslo.messaging-dsvm-neutron
+      - gate-oslo.messaging-dsvm-nova
+      - gate-oslo.messaging-dsvm-pycadf
+      - gate-oslo.messaging-dsvm-sahara
     experimental-tripleo:
       - check-tripleo-ironic-seed-precise
       - check-tripleo-undercloud-precise
@@ -2044,9 +2171,15 @@ projects:
       - name: integrated-gate
       - name: publish-to-pypi
       - name: translation-jobs
+      - name: test-with-oslo-master
     check:
       - gate-oslo.vmware-requirements
       - gate-oslo.vmware-python33
+      - check-oslo.vmware-dsvm-ceilometer
+      - check-oslo.vmware-dsvm-glance
+    gate:
+      - gate-oslo.vmware-dsvm-ceilometer
+      - gate-oslo.vmware-dsvm-glance
 
   - name: openstack/requirements
     template:

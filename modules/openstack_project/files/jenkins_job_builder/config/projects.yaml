@@ -256,6 +256,13 @@
       - pypi-jobs
       - translation-jobs
       - openstack-publish-jobs
+      - test-with-oslo-master
+      - uses-oslo-lib:
+          oslo-lib: oslo.config
+      - uses-oslo-lib:
+          oslo-lib: oslo.messaging
+      - uses-oslo-lib:
+          oslo-lib: stevedore
 
 - project:
     name: sahara-specs
@@ -365,6 +372,15 @@
       - python-havana-bitrot-jobs
       - openstack-publish-jobs
       - translation-jobs
+      - test-with-oslo-master
+      - uses-oslo-lib:
+          oslo-lib: oslo.config
+      - uses-oslo-lib:
+          oslo-lib: oslo.messaging
+      - uses-oslo-lib:
+          oslo-lib: oslo.vmware
+      - uses-oslo-lib:
+          oslo-lib: stevedore
 
 - project:
     name: cinder
@@ -380,6 +396,15 @@
       - gate-{name}-pylint
       - translation-jobs
       - rally-jobs
+      - test-with-oslo-master
+      - uses-oslo-lib:
+          oslo-lib: oslo.config
+      - uses-oslo-lib:
+          oslo-lib: oslo.messaging
+      - uses-oslo-lib:
+          oslo-lib: stevedore
+      - uses-oslo-lib:
+          oslo-lib: taskflow
 
 
 - project:
@@ -598,6 +623,15 @@
       - openstack-publish-jobs
       - translation-jobs
       - rally-jobs
+      - test-with-oslo-master
+      - uses-oslo-lib:
+          oslo-lib: oslo.config
+      - uses-oslo-lib:
+          oslo-lib: oslo.messaging
+      - uses-oslo-lib:
+          oslo-lib: oslo.vmware
+      - uses-oslo-lib:
+          oslo-lib: stevedore
 
 - project:
     name: glance-specs
@@ -620,6 +654,13 @@
       - python-havana-bitrot-jobs
       - openstack-publish-jobs
       - translation-jobs
+      - test-with-oslo-master
+      - uses-oslo-lib:
+          oslo-lib: oslo.config
+      - uses-oslo-lib:
+          oslo-lib: oslo.messaging
+      - uses-oslo-lib:
+          oslo-lib: stevedore
 
 - project:
     name: heat-specs
@@ -748,6 +789,19 @@
       - openstack-publish-jobs
       - translation-jobs
       - rally-jobs
+      - test-with-oslo-master
+      - uses-oslo-lib:
+          oslo-lib: oslo.config
+      - uses-oslo-lib:
+          oslo-lib: oslo.db
+      - uses-oslo-lib:
+          oslo-lib: oslo.messaging
+      - uses-oslo-lib:
+          oslo-lib: oslotest
+      - uses-oslo-lib:
+          oslo-lib: pycadf
+      - uses-oslo-lib:
+          oslo-lib: stevedore
 
 - project:
     name: keystonemiddleware
@@ -816,6 +870,17 @@
       - openstack-publish-jobs
       - gate-{name}-pylint
       - translation-jobs
+      - test-with-oslo-master
+      - uses-oslo-lib:
+          oslo-lib: oslo.config
+      - uses-oslo-lib:
+          oslo-lib: oslo.messaging
+      - uses-oslo-lib:
+          oslo-lib: oslotest
+      - uses-oslo-lib:
+          oslo-lib: pycadf
+      - uses-oslo-lib:
+          oslo-lib: stevedore
 
 - project:
     name: nova-specs
@@ -895,7 +960,11 @@
       - python-jobs
       - openstack-publish-jobs
       - pypi-jobs
-      - oslotest-cross-test
+      - test-with-oslo-master
+      - uses-oslo-lib:
+          oslo-lib: oslotest
+      - uses-oslo-lib:
+          oslo-lib: stevedore
 
 - project:
     name: oslo.db
@@ -909,6 +978,15 @@
       - openstack-publish-jobs
       - pypi-jobs
       - translation-jobs
+      - test-with-oslo-master
+      - uses-oslo-lib:
+          oslo-lib: oslo.config
+      - uses-oslo-lib:
+          oslo-lib: oslotest
+      - uses-oslo-lib:
+          oslo-lib: pycadf
+      - uses-oslo-lib:
+          oslo-lib: stevedore
 
 - project:
     name: oslo.i18n
@@ -921,8 +999,10 @@
       - python-jobs
       - openstack-publish-jobs
       - pypi-jobs
-      - oslotest-cross-test
       - translation-jobs
+      - uses-oslo-lib:
+          oslo-lib: oslotest
+      - test-with-oslo-master
 
 - project:
     name: oslo.messaging
@@ -935,8 +1015,14 @@
       - python-jobs
       - openstack-publish-jobs
       - pypi-jobs
-      - oslotest-cross-test
       - translation-jobs
+      - test-with-oslo-master
+      - uses-oslo-lib:
+          oslo-lib: oslo.config
+      - uses-oslo-lib:
+          oslo-lib: oslotest
+      - uses-oslo-lib:
+          oslo-lib: stevedore
 
 - project:
     name: oslo.rootwrap
@@ -985,6 +1071,9 @@
       - openstack-publish-jobs
       - pypi-jobs
       - translation-jobs
+      - test-with-oslo-master
+      - uses-oslo-lib:
+          oslo-lib: stevedore
 
 
 - project:
@@ -997,6 +1086,7 @@
     jobs:
       - python-jobs
       - openstack-publish-jobs
+      - test-with-oslo-master
 
 - project:
     name: oslo-specs
@@ -1059,6 +1149,11 @@
       - python-jobs
       - openstack-publish-jobs
       - pypi-jobs
+      - test-with-oslo-master
+      - uses-oslo-lib:
+          oslo-lib: oslo.config
+      - uses-oslo-lib:
+          oslo-lib: stevedore
 
 
 - project:
@@ -1108,6 +1203,8 @@
       - python-jobs
       - openstack-publish-jobs
       - pypi-jobs
+      - uses-oslo-lib:
+          oslo-lib: cliff
 
 
 - project:
@@ -1121,6 +1218,9 @@
       - python-jobs
       - openstack-publish-jobs
       - pypi-jobs
+      - uses-oslo-lib:
+          oslo-lib: cliff
+      - test-with-oslo-master
 
 
 - project:
@@ -1149,6 +1249,17 @@
       - openstack-publish-jobs
       - rally-jobs
       - translation-jobs
+      - test-with-oslo-master
+      - uses-oslo-lib:
+          oslo-lib: cliff
+      - uses-oslo-lib:
+          oslo-lib: oslo.config
+      - uses-oslo-lib:
+          oslo-lib: oslo.db
+      - uses-oslo-lib:
+          oslo-lib: oslo.messaging
+      - uses-oslo-lib:
+          oslo-lib: stevedore
       - '{pipeline}-neutron-dsvm-functional{branch-designator}':
           pipeline: gate
           node: 'devstack-precise || devstack-trusty'
@@ -1198,6 +1309,9 @@
       - openstack-publish-jobs
       - translation-jobs
       - openstack-doc-jobs
+      - test-with-oslo-master
+      - uses-oslo-lib:
+          oslo-lib: oslo.config
       - 'gate-trove-functional-dsvm-{datastore}':
           datastore: 'mysql'
       - 'gate-trove-functional-dsvm-{datastore}':
@@ -1261,6 +1375,11 @@
       - python-jobs
       - openstack-publish-jobs
       - translation-jobs
+      - test-with-oslo-master
+      - uses-oslo-lib:
+          oslo-lib: oslo.config
+      - uses-oslo-lib:
+          oslo-lib: stevedore
 
 - project:
     name: marconi-specs
@@ -1281,6 +1400,8 @@
     jobs:
       - python-jobs
       - pypi-jobs
+      - uses-oslo-lib:
+          oslo-lib: stevedore
 
 - project:
     name: designate
@@ -1294,6 +1415,7 @@
       - openstack-publish-jobs
       - pypi-jobs
       - translation-jobs
+      - test-with-oslo-master
 
 - project:
     name: designate-specs
@@ -1580,6 +1702,8 @@
     jobs:
       - python-jobs
       - openstack-publish-jobs
+      - uses-oslo-lib:
+          oslo-lib: oslo.config
 
 
 - project:
@@ -1704,6 +1828,8 @@
     jobs:
       - python-jobs
       - pypi-jobs
+      - uses-oslo-lib:
+          oslo-lib: oslotest
 
 - project:
     name: tripleo-incubator
@@ -2168,6 +2294,10 @@
           node: 'devstack-precise || devstack-trusty'
           branch-designator: '-nv'
           branch-override: default
+      - uses-oslo-lib:
+          oslo-lib: oslo.config
+      - uses-oslo-lib:
+          oslo-lib: stevedore
 
 - project:
     name: python-ironicclient
@@ -2190,6 +2320,12 @@
 
     jobs:
       - python-jobs
+      - uses-oslo-lib:
+          oslo-lib: oslo.config
+      - uses-oslo-lib:
+          oslo-lib: oslotest
+      - uses-oslo-lib:
+          oslo-lib: stevedore
 
 - project:
     name: inception
@@ -2208,6 +2344,7 @@
     jobs:
       - python-jobs
       - translation-jobs
+      - test-with-oslo-master
 
 - project:
     name: barbican-specs
@@ -2244,6 +2381,9 @@
           node: bare-centos6
       - gate-{name}-tox-{envlist}:
           envlist: py27-sa8-mysql
+      - test-with-oslo-master
+      - uses-oslo-lib:
+          oslo-lib: stevedore
 
 - project:
     name: cl-openstack-client
@@ -2285,6 +2425,11 @@
       - python-jobs
       - openstack-publish-jobs
       - pypi-jobs
+      - test-with-oslo-master
+      - uses-oslo-lib:
+          oslo-lib: oslo.config
+      - uses-oslo-lib:
+          oslo-lib: oslo.messaging
 
 - project:
     name: pecan
@@ -2347,14 +2492,9 @@
       - python-jobs
       - pypi-jobs
       - hook-{name}-rtfd
-      - gate-{name}-tox-{envlist}:
-          envlist: neutronclient-stable
-      - gate-{name}-tox-{envlist}:
-          envlist: neutronclient-tip
-      - gate-{name}-tox-{envlist}:
-          envlist: openstackclient-stable
-      - gate-{name}-tox-{envlist}:
-          envlist: openstackclient-tip
+      - test-with-oslo-master
+      - uses-oslo-lib:
+          oslo-lib: stevedore
 
 - project:
     name: python-tuskarclient
