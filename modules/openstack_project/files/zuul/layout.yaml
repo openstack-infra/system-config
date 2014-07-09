@@ -380,6 +380,8 @@ jobs:
   # IPA image builds need docker which requires trusty
   - name: ironic-python-agent-buildimage-coreos
     parameter-function: set_node_options_default_trusty
+  - name: gate-ironic-python-agent-buildimage-coreos
+    parameter-function: set_node_options_default_trusty
   - name: ^gate-neutron-.*$
     parameter-function: set_node_options_default_trusty
   - name: ^gate-ceilometer-.*$
@@ -2105,10 +2107,12 @@ projects:
       - gate-ironic-python-agent-pep8
       - gate-ironic-python-agent-python26
       - gate-ironic-python-agent-python27
+      - gate-ironic-python-agent-buildimage-coreos
     gate:
       - gate-ironic-python-agent-pep8
       - gate-ironic-python-agent-python26
       - gate-ironic-python-agent-python27
+      - gate-ironic-python-agent-buildimage-coreos
     post:
       - ironic-python-agent-buildimage-coreos
 
