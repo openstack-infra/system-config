@@ -679,6 +679,12 @@ jobs:
       - name: logs
   - name: gate-tuskar-ui-jshint
     voting: false
+  - name: ^(gate|check)-pecan-tox-ceilometer-stable
+    voting: false
+  - name: ^(gate|check)-pecan-tox-designate-stable
+    voting: false
+  - name: ^(gate|check)-pecan-tox-ironic-stable
+    voting: false
 
 # The project list is grouped by type of project, and within each
 # group, projects are sorted (mostly) alphabetically.
@@ -3893,11 +3899,8 @@ projects:
       - gate-pecan-pypy
       - gate-pecan-tox-wsme-stable
       - gate-pecan-tox-wsme-tip
-      - gate-pecan-tox-ceilometer-stable
       - gate-pecan-tox-ceilometer-tip
-      - gate-pecan-tox-ironic-stable
       - gate-pecan-tox-ironic-tip
-      - gate-pecan-tox-designate-stable
       - gate-pecan-tox-designate-tip
       - gate-pecan-tox-barbican-tip
       - gate-pecan-tox-storyboard-tip
