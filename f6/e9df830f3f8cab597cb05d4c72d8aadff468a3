@@ -1,0 +1,11 @@
+Code-Review+2: Monty Taylor <mordred@inaugust.com>
+Workflow+1: Monty Taylor <mordred@inaugust.com>
+Verified+2: Jenkins
+Code-Review+2: Clark Boylan <cboylan@sapwetik.org>
+Code-Review+1: Jim Rollenhagen <jim@jimrollenhagen.com>
+Code-Review+1: Josh Gachnang <josh@pcsforeducation.com>
+Submitted-by: Jenkins
+Submitted-at: Wed, 09 Jul 2014 14:48:53 +0000
+Reviewed-on: https://review.openstack.org/105475
+Project: openstack-infra/config
+Branch: refs/heads/master
