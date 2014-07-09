@@ -106,10 +106,10 @@ for MOD in ${!SOURCE_MODULES[*]} ; do
       git clone $MOD "${MODULE_PATH}/${MODULE_NAME}"
     fi
   fi
+  # fetch the latest refs from the repo
+  $GIT_CMD_BASE fetch
   # make sure the correct revision is installed, I have to use rev-list b/c rev-parse does not work with tags
   if [ `${GIT_CMD_BASE} rev-list HEAD --max-count 1` != `${GIT_CMD_BASE} rev-list ${SOURCE_MODULES[$MOD]} --max-count 1` ]; then
-    # fetch the latest refs from the repo
-    $GIT_CMD_BASE fetch
     # checkout correct revision
     $GIT_CMD_BASE checkout ${SOURCE_MODULES[$MOD]}
   fi
