@@ -30,7 +30,7 @@
           site: 'static.openstack.org'
           files:
             - target: 'logs/$LOG_PATH/results.html'
-              source: 'testr_results.html'
+              source: '/tmp/rally_testr_results.html.gz'
 
 
 - builder:
