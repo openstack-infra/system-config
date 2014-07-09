@@ -35,17 +35,18 @@ class Vm
     @@vms = [ ]
     def Vm.all_vms; @@vms end
 
-    def initialize(short_name, vmname, hostip)
+    def initialize(short_name, vmname, hostip, uuid = vmname)
         @vmname = vmname
         @short_name = short_name
         @hostip = hostip
+        @uuid = uuid
     end
 
     # Delete the VM from the cluster
     def delete
         # @thread.kill unless @thread.nil?
         Process.kill("KILL", @keepalive_pid) unless @keepalive_pid.nil?
-        Sh.crun "nova delete #{@vmname}"
+        Sh.crun "nova delete #{@uuid}"
     end
 
     # Initialize VMs list from /etc/hosts
@@ -115,7 +116,7 @@ class Vm
 #       Process.detach(@keepalive_pid)
     end
 
-    def Vm.create_internal(vmname, floatingip, metadata, flavor)
+    def Vm.create_internal(vmshort_name, vmname, floatingip, metadata, flavor)
         puts "Creating VM #{vmname}"
         net_id, e = Sh.crun "nova net-list |\grep -w internet | awk '{print $2}'"
         image_id, e = Sh.crun %{glance image-list |\grep " #{@@options.image} " | awk '{print $2}'}
@@ -125,11 +126,18 @@ class Vm
             puts cmd
             return
         end
-        Sh.crun cmd
 
+        # Launch VM and extract its uuid.
+        output, e = Sh.crun(cmd)
+        if output !~ /\s+id\s+\|\s+(.*?)\s+\|/ then
+            puts "nova boot failed - VM's uuid not found!"
+            Sh.exit(-1)
+        end
+
+        uuid = $1
         private_ip = nil
         1.upto(6 * 30) { # at most 30 minutes
-            o, e = Sh.crun("nova list | \grep -w ACTIVE | \grep #{vmname}")
+            o, e = Sh.crun("nova list | \grep -w ACTIVE | \grep #{uuid}")
             if o =~ /internet=(\d+\.\d+\.\d+\.\d+)/ then
                 private_ip = $1
                 break
@@ -149,9 +157,11 @@ class Vm
         end
 
         sleep 1
-        puts "Created instance #{vmname}"
+        puts "Created instance #{vmname} #{uuid}"
 
-        return private_ip
+        vm = Vm.new(vmshort_name, vmname, private_ip, uuid)
+        @@vms.push(vm)
+        return vm
     end
 
     def Vm.create_slaves(count = @@options.count)
@@ -168,8 +178,7 @@ class Vm
             short_name = "#{@@options.name}-#{floatingip}"
             short_name.gsub!(/\./, '-')
 
-            hostip = Vm.create_internal(vmname, floatingip, metadata, 4) # large
-            @@vms.push Vm.new(short_name, vmname, hostip)
+            vm = Vm.create_internal(short_name, vmname, floatingip, metadata, 4) # large
         }
     end
 
@@ -186,10 +195,8 @@ class Vm
             short_name = "ci-oc-subslave-#{floatingip}-#{i}"
             short_name.gsub!(/\./, '-')
 
-            hostip = Vm.create_internal(vmname, nil, metadata, 4) # large
-            vm = Vm.new(short_name, vmname, hostip)
+            vm = Vm.create_internal(short_name, vmname, nil, metadata, 4) # large
             vm.send_keepalive
-            @@vms.push vm
         }
 
         pp @@vms
