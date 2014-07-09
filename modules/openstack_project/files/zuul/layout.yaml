@@ -4862,3 +4862,9 @@ projects:
       - noop
     gate:
       - noop
+
+  - name: stackforge/rack
+    check:
+      - noop
+    gate:
+      - noop
