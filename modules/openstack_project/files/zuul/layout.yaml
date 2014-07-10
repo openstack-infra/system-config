@@ -581,9 +581,6 @@ jobs:
   - name: ^gate-.*-js-draft
     parameter-function: set_node_options_default_trusty
     success-pattern: http://docs-draft.openstack.org/{build.parameters[LOG_PATH]}/dist/
-  - name: gate-vinz-webclient-js-unittests
-    parameter-function: set_node_options_default_trusty
-    success-pattern: http://docs-draft.openstack.org/{build.parameters[LOG_PATH]}/dist/
   - name: infra-publications-publish
     branch: ^(?!master).*$
   - name: ^gate-.*-requirements$
@@ -3036,9 +3033,14 @@ projects:
 
   - name: openstack-infra/vinz-webclient
     check:
-      - gate-vinz-webclient-js-unittests
+      - gate-vinz-webclient-js-test-unit
+      - gate-vinz-webclient-js-test-integration
+      - gate-vinz-webclient-js-test-functional
+      - gate-vinz-webclient-js-draft
     gate:
-      - gate-vinz-webclient-js-unittests
+      - gate-vinz-webclient-js-test-unit
+      - gate-vinz-webclient-js-test-integration
+      - gate-vinz-webclient-js-test-functional
     post:
       - vinz-webclient-js-release-branch
     release:
