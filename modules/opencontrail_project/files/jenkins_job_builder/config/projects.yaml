@@ -18,9 +18,7 @@
     doc-publisher-site: docs.opencontrail.org
 
     jobs:
-      - contrail-unittest-jobs
       - contrail-systest-jobs
-#     - contrail-devstack-jobs
 
 - project:
     name: contrail-build
@@ -90,7 +88,6 @@
     doc-publisher-site: docs.opencontrail.org
 
     jobs:
-      - contrail-unittest-jobs
       - contrail-systest-jobs
 
 - project:

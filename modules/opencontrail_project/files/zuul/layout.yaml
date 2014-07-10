@@ -289,7 +289,6 @@ projects:
 
   - name: Juniper/contrail-vrouter
     check:
-      - ci-contrail-vrouter-unittest
       - ci-contrail-vrouter-systest
     silent:
       - noop
@@ -374,7 +373,6 @@ projects:
 
   - name: Juniper/contrail-sandesh
     check:
-      - ci-contrail-sandesh-unittest
       - ci-contrail-sandesh-systest
     silent:
       - noop
