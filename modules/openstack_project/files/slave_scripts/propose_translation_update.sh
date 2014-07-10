@@ -12,14 +12,7 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 
-# Transitional backward compat test which can get removed once jobs are only
-# calling this with one parameter
-if [ -n "$2" ]
-then
-    PROJECT=$2
-else
-    PROJECT=$1
-fi
+PROJECT=$1
 
 source /usr/local/jenkins/slave_scripts/common_translation_update.sh
 
