@@ -2378,7 +2378,7 @@ projects:
       - gate-docs-specs-docs
       - gate-docs-specs-python27
     gate:
-      - gate-docs-specs-docs
+      - gate-docs-epecs-docs
       - gate-docs-specs-python27
 
   - name: openstack/openstack-manuals
@@ -3279,6 +3279,14 @@ projects:
     gate:
       - gate-congress-pep8
       - gate-congress-python27
+
+  - name: openstack/congress-specs
+    check:
+      - gate-congress-specs-docs
+      - gate-congress-specs-python27
+    gate:
+      - gate-congress-specs-docs
+      - gate-congress-specs-python27
 
   - name: stackforge/cookbook-openstack-block-storage
     check:
