@@ -1,3 +1,5 @@
+# The old javascript unit test build, kept while storyboard and vinz
+# are migrated forward.
 - job-template:
     name: 'gate-{name}-js-unittests'
 
@@ -36,6 +38,146 @@
               copy-after-failure: false
     node: '{node}'
 
+# Runs Grunt Unit Tests. To use this build, your Gruntfile must declare
+# a target named test:unit
+- job-template:
+    name: 'gate-{name}-js-test-unit'
+
+    wrappers:
+      - build-timeout:
+          timeout: 40
+      - timestamps
+
+    builders:
+      - npm-install
+      - revoke-sudo
+      - gerrit-git-prep
+      - js-build:
+          command: 'test:unit'
+          envlist: 'grunt'
+          github-org: '{github-org}'
+          project: '{name}'
+      - assert-no-extra-files
+
+    publishers:
+      - console-log
+      - coverage-log
+      - scp:
+          site: 'static.openstack.org'
+          files:
+            - target: 'logs/$LOG_PATH'
+              source: 'reports/**'
+              keep-hierarchy: true
+              copy-after-failure: true
+    node: '{node}'
+
+# Runs grunt integration tests. To use this build, your Gruntfile must declare
+# a target named test:integration
+- job-template:
+    name: 'gate-{name}-js-test-integration'
+
+    wrappers:
+      - build-timeout:
+          timeout: 40
+      - timestamps
+
+    builders:
+      - npm-install
+      - revoke-sudo
+      - gerrit-git-prep
+      - js-build:
+          command: 'test:integration'
+          envlist: 'grunt'
+          github-org: '{github-org}'
+          project: '{name}'
+      - assert-no-extra-files
+
+    publishers:
+      - console-log
+      - coverage-log
+      - scp:
+          site: 'static.openstack.org'
+          files:
+            - target: 'logs/$LOG_PATH'
+              source: 'reports/**'
+              keep-hierarchy: true
+              copy-after-failure: true
+    node: '{node}'
+
+# Runs grunt functional tests. To use this build, your Gruntfile must declare
+# a target named test:functional
+- job-template:
+    name: 'gate-{name}-js-test-functional'
+
+    wrappers:
+      - build-timeout:
+          timeout: 40
+      - timestamps
+
+    builders:
+      - npm-install
+      - revoke-sudo
+      - gerrit-git-prep
+      - js-build:
+          command: 'test:functional'
+          envlist: 'grunt'
+          github-org: '{github-org}'
+          project: '{name}'
+      - assert-no-extra-files
+
+    publishers:
+      - console-log
+      - coverage-log
+      - scp:
+          site: 'static.openstack.org'
+          files:
+            - target: 'logs/$LOG_PATH'
+              source: 'reports/**'
+              keep-hierarchy: true
+              copy-after-failure: true
+    node: '{node}'
+
+# Builds a draft application and uploads it to docs-draft. To use this build,
+# your Gruntfile must declare a target named "build"
+- job-template:
+    name: 'gate-{name}-js-draft'
+
+    wrappers:
+      - build-timeout:
+          timeout: 40
+      - timestamps
+
+    builders:
+      - npm-install
+      - revoke-sudo
+      - gerrit-git-prep
+      - js-build:
+          command: 'build'
+          envlist: 'grunt'
+          github-org: '{github-org}'
+          project: '{name}'
+      - assert-no-extra-files
+
+    publishers:
+      - console-log
+      - coverage-log
+      - scp:
+          site: 'static.openstack.org'
+          files:
+            - target: 'logs/$LOG_PATH'
+              source: 'reports/**'
+              keep-hierarchy: true
+              copy-after-failure: true
+
+              # We're uploading the compiled app as a pre-release sanity check,
+              # much like we do with docs builds.
+            - target: 'docs-draft/$LOG_PATH'
+              source: 'dist/**'
+              keep-hierarchy: true
+              copy-after-failure: false
+    node: '{node}'
+
+# Builds a release tarball
 - job-template:
     name: '{name}-js-release-{branch-designator}'
 
