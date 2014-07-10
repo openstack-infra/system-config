@@ -139,6 +139,7 @@
           export GEARDSERVER=192.168.1.1
           export DIB_COMMON_ELEMENTS="common-venv stackuser pypi-openstack"
           export TRIPLEO_TEST=overcloud
+          export OVERCLOUD_UPGRADE_TEST=1
           function gate_hook {
               bash -xe /opt/stack/new/tripleo-ci/toci_gate_test.sh
           }
@@ -178,6 +179,7 @@
           export GEARDSERVER=192.168.1.1
           export DIB_COMMON_ELEMENTS="common-venv stackuser pypi-openstack"
           export TRIPLEO_TEST=overcloud
+          export OVERCLOUD_UPGRADE_TEST=1
           function gate_hook {
               bash -xe /opt/stack/new/tripleo-ci/toci_gate_test.sh
           }
