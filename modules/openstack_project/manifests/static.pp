@@ -274,4 +274,30 @@ class openstack_project::static (
     source  => 'puppet:///modules/openstack_project/run_bandersnatch.py',
   }
 
+  ###########################################################
+  # Specs
+
+  apache::vhost { 'specs.openstack.org':
+    port     => 80,
+    priority => '50',
+    docroot  => '/srv/static/specs',
+    require  => File['/srv/static/specs'],
+  }
+
+  file { '/srv/static/specs':
+    ensure  => directory,
+    owner   => 'jenkins',
+    group   => 'jenkins',
+    require => User['jenkins'],
+  }
+
+  file { '/srv/static/specs/robots.txt':
+    ensure  => present,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0444',
+    source  => 'puppet:///modules/openstack_project/disallow_robots.txt',
+    require => File['/srv/static/specs'],
+  }
+
 }
