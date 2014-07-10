@@ -1542,13 +1542,13 @@
       - gate-{name}-bashate
 
 - project:
-    name: requirements-jobs
+    name: pbr-jobs
 
     jobs:
-      - '{pipeline}-requirements-integration-dsvm':
+      - '{pipeline}-pbr-integration-dsvm':
           pipeline: gate
           node: 'devstack-precise || devstack-trusty'
-      - '{pipeline}-requirements-integration-dsvm':
+      - '{pipeline}-pbr-integration-dsvm':
           pipeline: check
           node: 'devstack-precise || devstack-trusty'
 

@@ -2026,7 +2026,7 @@ projects:
       - gate-requirements-pep8
       - gate-requirements-python27
       - gate-requirements-pypy
-      - check-requirements-integration-dsvm
+      - check-pbr-integration-dsvm
       - check-devstack-dsvm-cells
       - gate-tempest-dsvm-large-ops
       - gate-tempest-dsvm-neutron-large-ops
@@ -2035,7 +2035,7 @@ projects:
       - gate-requirements-pep8
       - gate-requirements-python27
       - gate-requirements-pypy
-      - gate-requirements-integration-dsvm
+      - gate-pbr-integration-dsvm
       - gate-devstack-dsvm-cells
       - gate-tempest-dsvm-large-ops
       - gate-tempest-dsvm-neutron-large-ops
@@ -2533,7 +2533,7 @@ projects:
     check:
       - gate-pbr-python33
       - gate-pbr-pypy
-      - check-requirements-integration-dsvm
+      - check-pbr-integration-dsvm
       - check-devstack-dsvm-cells
       - gate-tempest-dsvm-large-ops
       - gate-tempest-dsvm-neutron-large-ops
@@ -2541,7 +2541,7 @@ projects:
     gate:
       - gate-pbr-python33
       - gate-pbr-pypy
-      - gate-requirements-integration-dsvm
+      - gate-pbr-integration-dsvm
       - gate-devstack-dsvm-cells
       - gate-tempest-dsvm-large-ops
       - gate-tempest-dsvm-neutron-large-ops
@@ -2929,10 +2929,10 @@ projects:
       - name: publish-to-pypi
     check:
       - gate-pypi-mirror-pep8
-      - check-requirements-integration-dsvm
+      - check-pbr-integration-dsvm
     gate:
       - gate-pypi-mirror-pep8
-      - gate-requirements-integration-dsvm
+      - gate-pbr-integration-dsvm
 
   - name: stackforge/python-jenkins
     # docs is missing a build_sphinx entry point in setup.py
