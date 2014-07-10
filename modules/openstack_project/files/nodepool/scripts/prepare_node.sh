@@ -23,6 +23,7 @@ PYTHON3=${4:-false}
 PYPY=${5:-false}
 ALL_MYSQL_PRIVS=${6:-false}
 GIT_BASE=${7:-git://git.openstack.org}
+INSTALL_RESOLV_CONF=${INSTALL_RESOLV_CONF:-true}
 
 # Save the nameservers configured by our provider.
 cat >/tmp/forwarding.conf <<EOF
@@ -44,26 +45,43 @@ fi
 wget https://git.openstack.org/cgit/openstack-infra/config/plain/install_puppet.sh
 sudo bash -xe install_puppet.sh
 
-sudo git clone --depth=1 $GIT_BASE/openstack-infra/config.git \
-    /root/config
+sudo git clone --depth=1 $GIT_BASE/openstack-infra/config.git /root/config
+
 sudo /bin/bash /root/config/install_modules.sh
 
-set +e
-if [ -z "$NODEPOOL_SSH_KEY" ] ; then
-    sudo puppet apply --detailed-exitcodes --modulepath=/root/config/modules:/etc/puppet/modules \
-	-e "class {'openstack_project::single_use_slave': sudo => $SUDO, thin => $THIN, python3 => $PYTHON3, include_pypy => $PYPY, all_mysql_privs => $ALL_MYSQL_PRIVS, }"
-    PUPPET_RET_CODE=$?
-else
-    sudo puppet apply --detailed-exitcodes --modulepath=/root/config/modules:/etc/puppet/modules \
-	-e "class {'openstack_project::single_use_slave': install_users => false, sudo => $SUDO, thin => $THIN, python3 => $PYTHON3, include_pypy => $PYPY, all_mysql_privs => $ALL_MYSQL_PRIVS, ssh_key => '$NODEPOOL_SSH_KEY', }"
-    PUPPET_RET_CODE=$?
+cat >/tmp/local.pp <<EOF
+class {'openstack_project::single_use_slave':
+  sudo => $SUDO,
+  thin => $THIN,
+  python3 => $PYTHON3,
+  include_pypy => $PYPY,
+  all_mysql_privs => $ALL_MYSQL_PRIVS,
+  install_resolv_conf => $INSTALL_RESOLV_CONF,
+EOF
+
+if [ -n "$NODEPOOL_SSH_KEY" ] ; then
+  echo " ssh_key => '$NODEPOOL_SSH_KEY'" >> /tmp/local.pp
 fi
+set -e
+
+echo "}" >> /tmp/local.pp
+
+# Puppet doesn't return nonzero if some things fail by default.
+# Use detailed exit codes to get that info and determine whether
+# the return code indicates failure.
+set +e
+sudo puppet apply --detailed-exit-codes \
+    --modulepath=/root/config/modules:/etc/puppet/modules \
+    /tmp/local.pp
+PUPPET_RET_CODE=$?
+
 # Puppet doesn't properly return exit codes. Check here the values that
 # indicate failure of some sort happened. 0 and 2 indicate success.
 if [ "$PUPPET_RET_CODE" -eq "4" ] || [ "$PUPPET_RET_CODE" -eq "6" ] ; then
     exit $PUPPET_RET_CODE
 fi
 set -e
+
 
 # The puppet modules should install unbound.  Take the nameservers
 # that we ended up with at boot and configure unbound to forward to
