@@ -54,6 +54,10 @@ class openstack_project::jenkins_params {
       $zip_package = 'zip'
       $xslt_package = 'libxslt'
       $xvfb_package = 'xorg-x11-server-Xvfb'
+      # NodeJS packages, used for javascript application builds
+      # FIXME: No NodeJS packages on RHEL
+      # $nodejs_package = ''
+      # $nodejs_npm_package = ''
       # PHP package, used for community portal
       $php5_cli_package = 'php-cli'
       # FIXME: No zookeeper packages on RHEL
@@ -138,6 +142,9 @@ class openstack_project::jenkins_params {
       $zip_package = 'zip'
       $xslt_package = 'xsltproc'
       $xvfb_package = 'xvfb'
+      # NodeJS packages, used for javascript application builds
+      $nodejs_package = 'nodejs'
+      $nodejs_npm_package = 'npm'
       # PHP package, used for community portal
       $php5_cli_package = 'php5-cli'
       $php5_mcrypt_package = 'php5-mcrypt'

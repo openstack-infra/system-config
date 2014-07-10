@@ -100,6 +100,22 @@ class jenkins::slave(
         ensure => present,
       }
 
+      # Install NodeJS and NPM, and link /usr/bin/nodejs to /usr/bin/node
+      package { $::jenkins::params::nodejs_package:
+        ensure  => present,
+      }
+
+      package { $::jenkins::params::nodejs_npm_package:
+        ensure  => present,
+        require => Package[$::jenkins::params::nodejs_package],
+      }
+
+      file { '/usr/local/bin/node':
+        ensure  => link,
+        target  => '/usr/bin/nodejs',
+        require => Package[$::jenkins::params::nodejs_package],
+      }
+
       exec { 'update-java-alternatives':
         unless   => '/bin/ls -l /etc/alternatives/java | /bin/grep java-7-openjdk-amd64',
         command  => '/usr/sbin/update-java-alternatives --set java-1.7.0-openjdk-amd64',
