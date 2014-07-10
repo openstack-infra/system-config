@@ -1567,7 +1567,10 @@
     tarball-site: tarballs.openstack.org
 
     jobs:
-      - gate-{name}-js-unittests
+      - gate-{name}-js-test-unit
+      - gate-{name}-js-test-integration
+      - gate-{name}-js-test-functional
+      - gate-{name}-js-draft
       - '{name}-js-release-{branch-designator}':
           branch-designator: 'master'
       - '{name}-js-release-{branch-designator}':
