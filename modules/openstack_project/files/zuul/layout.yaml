@@ -4479,6 +4479,22 @@ projects:
     post:
       - refstack-coverage
 
+  - name: stackforge/requests-mock
+    check:
+      - gate-requests-mock-docs
+      - gate-requests-mock-pep8
+      - gate-requests-mock-python26
+      - gate-requests-mock-python27
+      - gate-requests-mock-python33
+    gate:
+      - gate-requests-mock-docs
+      - gate-requests-mock-pep8
+      - gate-requests-mock-python26
+      - gate-requests-mock-python27
+      - gate-requests-mock-python33
+    post:
+      - requests-mock-coverage
+
   - name: stackforge/rubick
     check:
       - gate-rubick-pep8
