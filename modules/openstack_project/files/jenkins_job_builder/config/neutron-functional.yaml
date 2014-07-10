@@ -29,6 +29,7 @@
               cd $BASE/new/neutron
               # Run tests as the stack user to allow sudo.
               sudo chown -R stack:stack $BASE/new/neutron
+              echo "Defaults:stack !requiretty" | sudo tee /etc/sudoers.d/00_no_tty
               echo "Running neutron functional test suite"
               sudo -H -u stack tox -e functional
           }}
