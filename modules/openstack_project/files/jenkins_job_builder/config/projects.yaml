@@ -2285,6 +2285,12 @@
       - pypi-jobs
       - hook-{name}-rtfd
       - gate-{name}-tox-{envlist}:
+          envlist: scaffolds-26
+      - gate-{name}-tox-{envlist}:
+          envlist: scaffolds-27
+      - gate-{name}-tox-{envlist}:
+          envlist: scaffolds-33
+      - gate-{name}-tox-{envlist}:
           envlist: wsme-stable
       - gate-{name}-tox-{envlist}:
           envlist: wsme-tip
