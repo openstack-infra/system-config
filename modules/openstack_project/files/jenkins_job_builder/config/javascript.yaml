@@ -7,6 +7,7 @@
       - timestamps
 
     builders:
+      - npm-install
       - revoke-sudo
       - gerrit-git-prep
       - js-build:
@@ -39,6 +40,7 @@
     name: '{name}-js-release-{branch-designator}'
 
     builders:
+      - npm-install
       - revoke-sudo
       - gerrit-git-prep
       - js-build:
