@@ -3049,9 +3049,14 @@ projects:
 
   - name: openstack-infra/storyboard-webclient
     check:
-      - gate-storyboard-webclient-js-unittests
+      - gate-storyboard-webclient-js-test-unit
+      - gate-storyboard-webclient-js-test-integration
+      - gate-storyboard-webclient-js-test-functional
+      - gate-storyboard-webclient-js-draft
     gate:
-      - gate-storyboard-webclient-js-unittests
+      - gate-storyboard-webclient-js-test-unit
+      - gate-storyboard-webclient-js-test-integration
+      - gate-storyboard-webclient-js-test-functional
     post:
       - storyboard-webclient-js-release-branch
     release:
