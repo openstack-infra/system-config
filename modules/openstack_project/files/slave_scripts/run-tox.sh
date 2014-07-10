@@ -12,24 +12,18 @@
 # project's tox.ini file).
 
 venv=$1
-org=$2
-project=$3
 
-if [[ -z "$venv" || -z "$org" || -z "$project" ]]
+if [[ -z "$venv" ]]
 then
-  echo "Usage: $? VENV ORG PROJECT"
+  echo "Usage: $?"
   echo
   echo "VENV: The tox environment to run (eg 'python27')"
-  echo "ORG: The project organization (eg 'stackforge')"
-  echo "PROJECT: The project name (eg 'nova')"
   exit 1
 fi
 
 /usr/local/jenkins/slave_scripts/jenkins-oom-grep.sh pre
 
 sudo /usr/local/jenkins/slave_scripts/jenkins-sudo-grep.sh pre
-
-source /usr/local/jenkins/slave_scripts/select-mirror.sh $org $project
 
 tox -v -e$venv
 result=$?

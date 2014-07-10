@@ -11,11 +11,6 @@
 # "py27"/"jenkins27" respectively.
 
 version=$1
-org=$2
-project=$3
-
-source /usr/local/jenkins/slave_scripts/functions.sh
-check_variable_version_org_project "$version" "$org" "$project" "$0"
 
 venv=py$version
 
@@ -28,8 +23,6 @@ trap "rm -rf $TMPDIR" EXIT
 /usr/local/jenkins/slave_scripts/jenkins-oom-grep.sh pre
 
 sudo /usr/local/jenkins/slave_scripts/jenkins-sudo-grep.sh pre
-
-source /usr/local/jenkins/slave_scripts/select-mirror.sh $org $project
 
 tox -e$venv
 result=$?
