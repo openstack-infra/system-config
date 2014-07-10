@@ -2825,6 +2825,16 @@
       - python-jobs
 
 - project:
+    name: requests-mock
+    github-org: stackforge
+    node: 'bare-precise || bare-trusty'
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - python-jobs
+      - hook-{name}-rtfd
+
+- project:
     name: stacktach
     github-org: stackforge
     node: 'bare-precise || bare-trusty'

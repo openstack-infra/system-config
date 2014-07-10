@@ -4532,6 +4532,12 @@ projects:
     post:
       - refstack-client-coverage
 
+  - name: stackforge/requests-mock
+    template:
+      - name: python-jobs
+      - name: python3-jobs
+      - name: pypy-jobs
+
   - name: stackforge/rubick
     check:
       - gate-rubick-pep8

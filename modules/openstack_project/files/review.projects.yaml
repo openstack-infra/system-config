@@ -1012,6 +1012,9 @@
   description: Testing and result upload client for refstack
   upstream: git://github.com/dlenwell/refstack-client
   use-storyboard: true
+- project: stackforge/requests-mock
+  description: Mocked responses for the requests library
+  upstream: git://github.com/jamielennox/requests-mock.git
 - project: stackforge/rubick
   description: Rule-based diagnostics of configuration of OpenStack platform
   upstream: git://github.com/MirantisLabs/rubick
