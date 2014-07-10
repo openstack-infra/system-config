@@ -60,14 +60,14 @@ pipelines:
           require-approval:
             - verified: 1
               username: zuul
-              newer-than: 24h
+              newer-than: 52w
           approval:
             - approved: 1
         - event: comment-added
           require-approval:
             - verified: 2
               username: zuul
-              newer-than: 24h
+              newer-than: 52w
           approval:
             - approved: 1
         - event: comment-added
@@ -287,19 +287,6 @@ projects:
     post:
       - noop
 
-  - name: Juniper/contrail-controller-test
-    check:
-      - ci-contrail-controller-test-unittest
-      - ci-contrail-controller-test-systest
-    silent:
-      - noop
-    check-tripleo:
-      - noop
-    gate:
-      - noop
-    post:
-      - noop
-
   - name: Juniper/contrail-vrouter
     check:
       - ci-contrail-vrouter-unittest
@@ -315,7 +302,6 @@ projects:
 
   - name: Juniper/contrail-build
     check:
-      - ci-contrail-build-unittest
       - ci-contrail-build-systest
     silent:
       - noop
@@ -328,7 +314,6 @@ projects:
 
   - name: Juniper/contrail-packages
     check:
-      - ci-contrail-packages-unittest
       - ci-contrail-packages-systest
     silent:
       - noop
@@ -341,7 +326,6 @@ projects:
 
   - name: Juniper/contrail-third-party
     check:
-      - ci-contrail-third-party-unittest
       - ci-contrail-third-party-systest
     silent:
       - noop

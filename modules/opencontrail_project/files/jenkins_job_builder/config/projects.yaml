@@ -11,18 +11,6 @@
 #     - contrail-devstack-jobs
 
 - project:
-    name: contrail-controller-test
-    github-org: Juniper
-    node: juniper-tests
-    tarball-site: tarballs.openstack.org
-    doc-publisher-site: docs.opencontrail.org
-
-    jobs:
-      - contrail-unittest-jobs
-      - contrail-systest-jobs
-      - contrail-devstack-jobs
-
-- project:
     name: contrail-vrouter
     github-org: Juniper
     node: juniper-tests
@@ -42,7 +30,6 @@
     doc-publisher-site: docs.opencontrail.org
 
     jobs:
-      - contrail-unittest-jobs
       - contrail-systest-jobs
 
 - project:
@@ -53,7 +40,6 @@
     doc-publisher-site: docs.opencontrail.org
 
     jobs:
-      - contrail-unittest-jobs
       - contrail-systest-jobs
 
 - project:
@@ -64,7 +50,6 @@
     doc-publisher-site: docs.opencontrail.org
 
     jobs:
-      - contrail-unittest-jobs
       - contrail-systest-jobs
 
 - project:
