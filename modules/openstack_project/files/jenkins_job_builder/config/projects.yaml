@@ -1404,7 +1404,7 @@
 - project:
     name: storyboard-webclient
     github-org: openstack-infra
-    node: 'bare-precise || bare-trusty'
+    node: 'bare-trusty'
     tarball-site: tarballs.openstack.org
 
     jobs:
@@ -1427,7 +1427,7 @@
 - project:
     name: vinz-webclient
     github-org: openstack-infra
-    node: 'bare-precise || bare-trusty'
+    node: 'bare-trusty'
     tarball-site: tarballs.openstack.org
 
     jobs:
