@@ -23,8 +23,10 @@ class logstash::watchdog (
   package { 'jq':
     ensure => present,
   }
-  package { 'curl':
-    ensure => present,
+  if ! defined(Package['curl']) {
+    package { 'curl':
+      ensure => present,
+    }
   }
 
   file { '/usr/local/bin/logstash-watchdog':
