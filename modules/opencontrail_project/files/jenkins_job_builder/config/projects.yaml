@@ -92,3 +92,23 @@
     jobs:
       - contrail-unittest-jobs
       - contrail-systest-jobs
+
+- project:
+    name: contrail-packaging
+    github-org: Juniper
+    node: juniper-tests
+    tarball-site: tarballs.openstack.org
+    doc-publisher-site: docs.opencontrail.org
+
+    jobs:
+      - contrail-systest-jobs
+
+- project:
+    name: contrail-provisioning
+    github-org: Juniper
+    node: juniper-tests
+    tarball-site: tarballs.openstack.org
+    doc-publisher-site: docs.opencontrail.org
+
+    jobs:
+      - contrail-systest-jobs

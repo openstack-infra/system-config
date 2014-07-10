@@ -52,3 +52,13 @@
   description: Contrail analytics IDL
   upstream: git@github.com:Juniper/contrail-sandesh
   acl-config: /home/gerrit2/acls/Juniper/contrail-sandesh.config
+
+- project: Juniper/contrail-packaging
+  description: Contrail VNC packaging
+  upstream: git@github.com:Juniper/contrail-packaging
+  acl-config: /home/gerrit2/acls/Juniper/contrail-packaging.config
+
+- project: Juniper/contrail-provisioning
+  description: Contrail Provisioning tools
+  upstream: git@github.com:Juniper/contrail-provisioning
+  acl-config: /home/gerrit2/acls/Juniper/contrail-provisioning.config
