@@ -75,6 +75,12 @@
       - shell: "/usr/local/jenkins/slave_scripts/run-pylint.sh {github-org} {project}"
 
 - builder:
+    name: npm-install
+    builders:
+      - shell: "sudo apt-get install nodejs npm"
+      - shell: "sudo ln /usr/bin/nodejs /usr/local/bin/node"
+
+- builder:
     name: puppet-lint
     builders:
       - shell: |
