@@ -709,8 +709,10 @@
     github-org: openstack
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
+    spec-publisher-site: specs.openstack.org
 
     jobs:
+      - openstack-publish-jobs
       - gate-{name}-python27
       - gate-{name}-docs
 
