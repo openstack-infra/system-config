@@ -39,6 +39,7 @@ echo "127.0.1.1 $HOST.openstack.org $HOST" >> /tmp/hosts
 sudo mv /tmp/hosts /etc/hosts
 
 sudo mkdir -p /var/run/puppet
+sudo ./install_modules.sh
 find applytest -name 'puppetapplytest*.final' -print0 | \
     xargs -0 -P $(nproc) -n 1 -I filearg \
         sudo puppet apply --modulepath=${MODULE_PATH} --noop --verbose --debug filearg > /dev/null
