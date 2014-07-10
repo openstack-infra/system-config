@@ -50,8 +50,8 @@ fi
 wget https://git.openstack.org/cgit/openstack-infra/config/plain/install_puppet.sh
 sudo bash -xe install_puppet.sh
 
-sudo git clone --depth=1 $GIT_BASE/openstack-infra/config.git \
-    /root/config
+sudo git clone --depth=1 $GIT_BASE/openstack-infra/config.git /root/config
+
 sudo /bin/bash /root/config/install_modules.sh
 
 set +e
@@ -64,12 +64,24 @@ else
         -e "class {'openstack_project::single_use_slave': install_users => false, sudo => $SUDO, thin => $THIN, python3 => $PYTHON3, include_pypy => $PYPY, all_mysql_privs => $ALL_MYSQL_PRIVS, ssh_key => '$NODEPOOL_SSH_KEY', }"
     PUPPET_RET_CODE=$?
 fi
+set -e
+
+# Puppet doesn't return nonzero if some things fail by default.
+# Use detailed exit codes to get that info and determine whether
+# the return code indicates failure.
+set +e
+sudo puppet apply --detailed-exit-codes \
+    --modulepath=/root/config/modules:/etc/puppet/modules \
+    /tmp/local.pp
+PUPPET_RET_CODE=$?
+
 # Puppet doesn't properly return exit codes. Check here the values that
 # indicate failure of some sort happened. 0 and 2 indicate success.
 if [ "$PUPPET_RET_CODE" -eq "4" ] || [ "$PUPPET_RET_CODE" -eq "6" ] ; then
     exit $PUPPET_RET_CODE
 fi
 set -e
+
 
 # The puppet modules should install unbound.  Take the nameservers
 # that we ended up with at boot and configure unbound to forward to
