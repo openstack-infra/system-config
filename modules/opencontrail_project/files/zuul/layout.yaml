@@ -384,3 +384,27 @@ projects:
       - noop
     post:
       - noop
+
+  - name: Juniper/contrail-packaging
+    check:
+      - ci-contrail-packaging-systest
+    silent:
+      - noop
+    check-tripleo:
+      - noop
+    gate:
+      - noop
+    post:
+      - noop
+
+  - name: Juniper/contrail-provisioning
+    check:
+      - ci-contrail-provisioning-systest
+    silent:
+      - noop
+    check-tripleo:
+      - noop
+    gate:
+      - noop
+    post:
+      - noop
