@@ -41,3 +41,22 @@
     jobs:
       - '{name}-docs'
       - '{name}-merge-release-tags'
+
+
+- job-template:
+    name: '{name}-specs'
+    node: 'bare-precise || bare-trusty'
+
+    builders:
+      - docs:
+          github-org: '{github-org}'
+          project: '{name}'
+
+    publishers:
+      - ftp:
+          site: '{spec-publisher-site}'
+          source: 'doc/build/html/**'
+          target: '{name}'
+          remove-prefix: 'doc/build/html'
+          excludes: ''
+      - console-log
