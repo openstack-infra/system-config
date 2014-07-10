@@ -350,6 +350,8 @@ if __FILE__ == $0 then
 
         # Temporary fix until base image is fixed.
         Sh.run("apt-get -y install linux-headers-3.13.0-24-generic", true)
+        Sh.run("apt-get -y install linux-headers-3.11.0-22", true)
+        Sh.run("apt-get -y install linux-headers-3.11.0-22-generic", true)
         ContrailGitPrep.main(false) # Use private repo
         @options.image = build_contrail_packages
     end
