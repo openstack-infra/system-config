@@ -14,14 +14,6 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 
-org=$1
-project=$2
-
-source /usr/local/jenkins/slave_scripts/functions.sh
-check_variable_org_project "$org" "$project" "$0"
-
-source /usr/local/jenkins/slave_scripts/select-mirror.sh $org $project
-
 set -o pipefail
 tox -v -epylint | tee pylint.txt
 set +o pipefail
