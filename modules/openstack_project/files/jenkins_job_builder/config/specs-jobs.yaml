@@ -1,0 +1,28 @@
+# Jobs for the various *-specs repositories
+
+- job-template:
+    name: '{name}-publish-specs'
+    node: 'bare-precise || bare-trusty'
+
+    builders:
+      - revoke-sudo
+      - gerrit-git-prep
+      - docs:
+          github-org: '{github-org}'
+          project: '{name}'
+
+    publishers:
+      - ftp:
+          site: 'specs.openstack.org'
+          source: 'doc/build/html/**'
+          target: '{name}'
+          remove-prefix: 'doc/build/html'
+          excludes: ''
+      - console-log
+
+- job-group:
+    name: specs-jobs
+    jobs:
+      - gate-{name}-docs
+      - gate-{name}-python27
+      - '{name}-publish-specs'
