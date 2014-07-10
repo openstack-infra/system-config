@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -x
 
 MODULE_PATH=/etc/puppet/modules
 
