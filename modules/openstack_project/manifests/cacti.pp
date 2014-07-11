@@ -121,7 +121,6 @@ class openstack_project::cacti (
     'paste.openstack.org',
     'pbx.openstack.org',
     'planet.openstack.org',
-    'puppet-dashboard.openstack.org',
     'puppetdb.openstack.org',
     'pypi.openstack.org',
     'review.openstack.org',
