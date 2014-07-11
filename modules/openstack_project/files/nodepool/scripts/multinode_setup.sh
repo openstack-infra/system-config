@@ -16,6 +16,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+export PATH=$PATH:/usr/local/sbin:/usr/sbin
+
 for ip in `cat /etc/nodepool/primary_node /etc/nodepool/sub_nodes`; do
     sudo iptables -I openstack-INPUT 1 -s $ip -j ACCEPT
 done
