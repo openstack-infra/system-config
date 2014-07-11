@@ -12,3 +12,4 @@ openstack_infra_config.egg-info/
 /.pydevproject
 tools/invite2summit/settings.py
 tools/invite2summit/done*
+*.egg
