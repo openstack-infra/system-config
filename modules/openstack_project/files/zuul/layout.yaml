@@ -844,6 +844,7 @@ projects:
       - name: periodic-havana
       - name: check-requirements
       - name: integrated-gate
+      - name: translation-jobs
     check:
       - check-devstack-dsvm-cells
       - gate-tempest-dsvm-large-ops
@@ -865,8 +866,6 @@ projects:
     release:
       - glance-tarball
       - glance-merge-release-tags
-    periodic:
-      - glance-propose-translation-update
 
   - name: openstack/glance-specs
     check:
