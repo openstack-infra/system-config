@@ -101,7 +101,8 @@ class openstack_project::base(
     user    => 'root',
   }
 
-  # Use upstream puppet and pin to version 2.7.*
+  # Which Puppet do I take?
+  # Take $puppet_version and pin to that version
   if ($::osfamily == 'Debian') {
     apt::source { 'puppetlabs':
       location   => 'http://apt.puppetlabs.com',
@@ -118,23 +119,13 @@ class openstack_project::base(
       replace => true,
     }
 
-    case $::lsbdistcodename {
-      'trusty': {
-        file { '/etc/apt/preferences.d/00-puppet.pref':
-          ensure => absent,
-        }
-      }
-
-      default: {
-        file { '/etc/apt/preferences.d/00-puppet.pref':
-          ensure  => present,
-          owner   => 'root',
-          group   => 'root',
-          mode    => '0444',
-          content => template('openstack_project/00-puppet.pref.erb'),
-          replace => true,
-        }
-      }
+    file { '/etc/apt/preferences.d/00-puppet.pref':
+      ensure  => present,
+      owner   => 'root',
+      group   => 'root',
+      mode    => '0444',
+      content => template('openstack_project/00-puppet.pref.erb'),
+      replace => true,
     }
 
     file { '/etc/default/puppet':
