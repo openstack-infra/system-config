@@ -36,6 +36,7 @@
 
     jobs:
       - openstack-doc-jobs
+      - manual-translation-jobs
 
 - project:
     name: fuel-specs
