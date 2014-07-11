@@ -437,6 +437,10 @@
               source: '**/*subunit_log.txt.gz'
               keep-hierarchy: false
               copy-after-failure: true
+            - target: 'logs/$LOG_PATH/tox'
+              source: '.tox/*/log/*'
+              keep-hierarchy: false
+              copy-after-failure: true
 
 - publisher:
     name: upload-sphinx-draft
