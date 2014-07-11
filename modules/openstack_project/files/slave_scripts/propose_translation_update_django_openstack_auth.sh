@@ -1,7 +1,5 @@
 #!/bin/bash -xe
 
-# Copyright 2013 IBM Corp.
-#
 # Licensed under the Apache License, Version 2.0 (the "License"); you may
 # not use this file except in compliance with the License. You may obtain
 # a copy of the License at
@@ -14,34 +12,33 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 
-# The script is to pull the translations from Transifex,
-# and push to Gerrit.
-
-ORG="openstack"
-PROJECT=$1
+ORG=openstack
+PROJECT=django_openstack_auth
+COMMIT_MSG="Imported Translations from Transifex"
 
 source /usr/local/jenkins/slave_scripts/common_translation_update.sh
 
-init_manuals "$PROJECT"
-
 setup_git
+
 setup_review "$ORG" "$PROJECT"
-setup_translation
 
-setup_manuals "$PROJECT"
+setup_django_openstack_auth
 
-# Pull upstream translations of files
-tx pull -a -f
+# Pull upstream translations of files that are at least 75 %
+# translated
+tx pull -a -f --minimum-perc=75
 
-# Add imported upstream translations to git
-for FILE in ${DocFolder}/*
-do
-    DOCNAME=${FILE#${DocFolder}/}
-    if [ -d ${DocFolder}/${DOCNAME}/locale ]
-    then
-        git add ${DocFolder}/${DOCNAME}/locale/*
-    fi
-done
+# Update the .pot file
+python setup.py extract_messages
+PO_FILES=`find openstack_auth/locale -name '*.po'`
+if [ -n "$PO_FILES" ]
+then
+    # Use updated .pot file to update translations
+    python setup.py update_catalog --no-fuzzy-matching  --ignore-obsolete=true
+fi
+
+# Add all changed files to git
+git add openstack_auth/locale/*
 
 filter_commits
 

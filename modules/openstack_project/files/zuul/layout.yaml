@@ -1651,8 +1651,7 @@ projects:
       - name: check-requirements
       - name: integrated-gate
       - name: stable-compat-jobs
-    post:
-      - django_openstack_auth-upstream-translation-update
+      - name: translation-jobs
     pre-release:
       - django_openstack_auth-tarball
     release:

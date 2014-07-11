@@ -250,3 +250,32 @@ function extract_messages_log ()
             --output-file ${project}/locale/${project}-log-${level}.pot
     done
 }
+
+# Setup project django_openstack_auth for transifex
+function setup_django_openstack_auth ()
+{
+    tx set --auto-local -r horizon.djangopo \
+        "openstack_auth/locale/<lang>/LC_MESSAGES/django.po" \
+        --source-lang en \
+        --source-file openstack_auth/locale/openstack_auth.pot -t PO \
+        --execute
+}
+
+# Filter out files that we do not want to commit
+function filter_commits ()
+{
+    # Don't send files where the only things which have changed are
+    # the creation date, the version number, the revision date,
+    # comment lines, or diff file information.
+    for f in `git diff --cached --name-only`
+    do
+        changed=$(git diff --cached "$f" \
+            | egrep -v "(POT-Creation-Date|Project-Id-Version|PO-Revision-Date)" \
+            | egrep -c "^([-+][^-+#])")
+        if [ $changed -eq 0 ]
+        then
+            git reset -q "$f"
+            git checkout -- "$f"
+        fi
+    done
+}

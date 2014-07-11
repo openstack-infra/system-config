@@ -34,16 +34,6 @@ tx pull -a -f --minimum-perc=75
 # Add all changed files to git
 git add horizon/locale/* openstack_dashboard/locale/*
 
-# Don't send files where the only things which have changed are the
-# creation date, the version number, the revision date, or comment
-# lines.
-for f in `git diff --cached --name-only`
-do
-  if [ `git diff --cached $f |egrep -v "(POT-Creation-Date|Project-Id-Version|PO-Revision-Date|^\+{3}|^\-{3}|^[-+]#)" | egrep -c "^[\-\+]"` -eq 0 ]
-  then
-      git reset -q $f
-      git checkout -- $f
-  fi
-done
+filter_commits
 
 send_patch

@@ -1,6 +1,6 @@
 #!/bin/bash -xe
 
-# Copyright 2013 IBM Corp.
+# Copyright 2014 IBM Corp.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"); you may
 # not use this file except in compliance with the License. You may obtain
@@ -14,35 +14,28 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 
-# The script is to pull the translations from Transifex,
-# and push to Gerrit.
+# The script is to push the updated English po to Transifex.
 
-ORG="openstack"
-PROJECT=$1
+if [ ! `echo $ZUUL_REFNAME | grep master` ]
+then
+    exit 0
+fi
 
 source /usr/local/jenkins/slave_scripts/common_translation_update.sh
 
-init_manuals "$PROJECT"
-
 setup_git
-setup_review "$ORG" "$PROJECT"
 setup_translation
 
-setup_manuals "$PROJECT"
+setup_django_openstack_auth
 
-# Pull upstream translations of files
-tx pull -a -f
+# Update the .pot file
+python setup.py extract_messages
 
-# Add imported upstream translations to git
-for FILE in ${DocFolder}/*
-do
-    DOCNAME=${FILE#${DocFolder}/}
-    if [ -d ${DocFolder}/${DOCNAME}/locale ]
-    then
-        git add ${DocFolder}/${DOCNAME}/locale/*
-    fi
-done
+# Add all changed files to git
+git add openstack_auth/locale/*
 
-filter_commits
-
-send_patch
+if [ ! `git diff-index --quiet HEAD --` ]
+then
+    # Push .pot changes to transifex
+    tx --debug --traceback push -s
+fi
