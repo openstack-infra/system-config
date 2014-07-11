@@ -22,6 +22,7 @@ Major Systems
    planet
    puppet
    static
+   bandersnatch
    lists
    wiki
    git
