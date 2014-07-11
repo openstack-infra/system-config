@@ -426,6 +426,7 @@ openstack-glance:
     projects:
       - openstack/glance
       - openstack/glance-specs
+      - openstack/glance.stores
       - openstack/python-glanceclient
     branches:
       - master
