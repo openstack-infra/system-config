@@ -39,7 +39,7 @@ class jenkins::slave(
     'RedHat': {
 
       exec { 'yum Group Install':
-        unless  => '/usr/bin/yum grouplist "Development tools" | /bin/grep "^Installed Groups"',
+        unless  => '/usr/bin/yum grouplist "Development tools" | /bin/grep "^Installed [Gg]roups"',
         command => '/usr/bin/yum -y groupinstall "Development tools"',
       }
 
