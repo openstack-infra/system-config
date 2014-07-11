@@ -36,6 +36,7 @@ class iptables(
       hasstatus  => $::iptables::params::service_has_status,
       status     => $::iptables::params::service_status_cmd,
       hasrestart => $::iptables::params::service_has_restart,
+      enable     => true,
     }
     $notify_iptables = Service['iptables']
   }
