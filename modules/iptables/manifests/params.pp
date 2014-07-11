@@ -5,14 +5,20 @@
 class iptables::params {
   case $::osfamily {
     'RedHat': {
-      $package_name = 'iptables'
+      if $::operatingsystem == RedHat and $::operatingsystemrelease >= 7 or
+         $::operatingsystem == Fedora and $::operatingsystemrelease >= 15 {
+             $package_name = 'iptables-services'
+             $service_has_restart = true
+      } else {
+          $package_name = 'iptables'
+          $service_has_restart = false
+      }
       $service_name = 'iptables'
       $rules_dir = '/etc/sysconfig'
       $ipv4_rules = '/etc/sysconfig/iptables'
       $ipv6_rules = '/etc/sysconfig/ip6tables'
       $service_has_status = true
       $service_status_cmd = undef
-      $service_has_restart = false
     }
     'Debian': {
       $package_name = 'iptables-persistent'

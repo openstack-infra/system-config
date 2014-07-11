@@ -1,4 +1,4 @@
-#!/bin/bash -xe
+#!/bin/bash -l
 
 # Copyright (C) 2014 OpenStack Foundation
 #
@@ -15,6 +15,7 @@
 #
 # See the License for the specific language governing permissions and
 # limitations under the License.
+set -xe
 
 for ip in `cat /etc/nodepool/primary_node /etc/nodepool/sub_nodes`; do
     sudo iptables -I openstack-INPUT 1 -s $ip -j ACCEPT
