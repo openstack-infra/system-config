@@ -80,6 +80,7 @@ function init_manuals ()
 # operations-guide) for transifex
 function setup_manuals ()
 {
+    local project=$1
     # Generate pot one by one
     for FILE in ${DocFolder}/*
     do
@@ -94,6 +95,25 @@ function setup_manuals ()
         then
             continue
         fi
+        # Skip glossary in all repos besides openstack-manuals.
+        if [ "$project" != "openstack-manuals" -a "$DOCNAME" == "glossary" ]
+        then
+            continue
+        fi
+        # Minimum amount of translation done, 75 % by default.
+        PERC=75
+        if [ "$project" == "openstack-manuals" ]
+        then
+            # The common and glossary directories are used by the
+            # other guides, let's be more liberal here since teams
+            # might only translate the files used by a single
+            # guide. We use 8 % since that downloads the currently
+            # translated files.
+            if [ "$DOCNAME" == "common" -o "$DOCNAME" == "glossary" ]
+            then
+                PERC=8
+            fi
+        fi
         # Update the .pot file
         ./tools/generatepot ${DOCNAME}
         if [ -f ${DocFolder}/${DOCNAME}/locale/${DOCNAME}.pot ]
@@ -104,6 +124,7 @@ function setup_manuals ()
             tx set --auto-local -r openstack-manuals-i18n.${DOCNAME} \
                 "${DocFolder}/${DOCNAME}/locale/<lang>.po" --source-lang en \
                 --source-file ${DocFolder}/${DOCNAME}/locale/${DOCNAME}.pot \
+                --minimum-perc=$PERC \
                 -t PO --execute
         fi
     done
