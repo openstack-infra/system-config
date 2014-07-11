@@ -5,6 +5,12 @@
 class iptables::params {
   case $::osfamily {
     'RedHat': {
+      if $::operatingsystem == RedHat and $::operatingsystemrelease >= 7 or
+         $::operatingsystem == Fedora and $::operatingsystemrelease >= 15 {
+             $package_name = 'iptables-services'
+      } else {
+          $package_name = 'iptables'
+      }
       $package_name = 'iptables'
       $service_name = 'iptables'
       $rules_dir = '/etc/sysconfig'

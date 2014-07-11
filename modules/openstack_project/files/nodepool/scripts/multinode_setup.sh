@@ -17,7 +17,7 @@
 # limitations under the License.
 
 for ip in `cat /etc/nodepool/primary_node /etc/nodepool/sub_nodes`; do
-    sudo iptables -I openstack-INPUT 1 -s $ip -j ACCEPT
+    sudo /usr/sbin/iptables -I openstack-INPUT 1 -s $ip -j ACCEPT
 done
 
 echo "" >> /home/jenkins/.ssh/authorized_keys
