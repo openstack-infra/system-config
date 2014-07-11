@@ -480,6 +480,7 @@ refstack:
       - x-vrif-minus-2
     projects:
       - stackforge/refstack
+      - stackforge/refstack-client
     branches:
       - master
 
