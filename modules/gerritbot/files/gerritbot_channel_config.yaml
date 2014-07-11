@@ -760,6 +760,7 @@ openstack-oslo:
       - openstack/oslosphinx
       - openstack/oslo-specs
       - openstack/oslotest
+      - openstack/oslo.utils
       - openstack/oslo.version
       - openstack/oslo.vmware
       - openstack/pycadf

@@ -375,6 +375,9 @@
 - project: openstack/oslo.rootwrap
   docimpact-group: openstack-manuals
   upstream: git://github.com/ttx/oslo.rootwrap.git
+- project: openstack/oslo.utils
+  group: oslo
+  upstream: git://github.com/dims/oslo.utils.git
 - project: openstack/oslo.version
   docimpact-group: openstack-manuals
   upstream: git://github.com/emonty/oslo.version.git
