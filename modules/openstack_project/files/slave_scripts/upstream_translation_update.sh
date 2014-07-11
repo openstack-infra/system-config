@@ -36,14 +36,17 @@ git add $PROJECT/locale/*
 if [ ! `git diff-index --quiet HEAD --` ]
 then
     # Push .pot changes to transifex
-    tx --debug --traceback push -s -r ${PROJECT}.${PROJECT}-translations
+
+    # Transifex project name does not include "."
+    tx_project=${PROJECT/\./}
+    tx --debug --traceback push -s -r ${tx_project}.${tx_project}-translations
     for level in $LEVELS ; do
         # Only push if there is actual content in the file. We check
         # that the file contains at least one non-empty msgid string.
         if grep -q 'msgid "[^"]' ${PROJECT}/locale/${PROJECT}-log-${level}.pot
         then
             tx --debug --traceback push -s \
-                -r ${PROJECT}.${PROJECT}-log-${level}-translations
+                -r ${tx_project}.${tx_project}-log-${level}-translations
         fi
     done
 fi
