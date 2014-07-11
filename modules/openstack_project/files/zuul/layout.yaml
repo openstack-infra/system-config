@@ -880,6 +880,34 @@ projects:
     gate:
       - gate-glance-specs-docs
 
+  - name: openstack/glance.store
+    template:
+      - name: python-jobs
+      - name: openstack-server-publish-jobs
+      - name: check-requirements
+      - name: integrated-gate
+      - name: translation-jobs
+      - name: publish-to-pypi
+    check:
+      - check-devstack-dsvm-cells
+      - gate-tempest-dsvm-large-ops
+      - gate-tempest-dsvm-neutron-large-ops
+    gate:
+      - gate-devstack-dsvm-cells
+      - gate-tempest-dsvm-large-ops
+      - gate-tempest-dsvm-neutron-large-ops
+    experimental:
+      - gate-grenade-dsvm-forward
+    experimental-tripleo:
+      - check-tripleo-ironic-seed-precise
+      - check-tripleo-undercloud-precise
+      - check-tripleo-ironic-undercloud-precise
+      - check-tripleo-overcloud-precise
+    pre-release:
+      - glance.store-tarball
+    release:
+      - glance.store-tarball
+
   - name: openstack/heat
     template:
       - name: python-jobs
