@@ -609,6 +609,18 @@
       - gate-{name}-docs
 
 - project:
+    name: glance.stores
+    github-org: openstack
+    node: 'bare-precise || bare-trusty'
+    tarball-site: tarballs.openstack.org
+    doc-publisher-site: docs.openstack.org
+
+    jobs:
+      - python-jobs
+      - openstack-publish-jobs
+      - translation-jobs
+
+- project:
     name: heat
     github-org: openstack
     node: 'bare-precise || bare-trusty'
