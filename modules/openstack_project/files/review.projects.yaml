@@ -199,6 +199,9 @@
   upstream: git://github.com/krotscheck/storyboard-webclient.git
   description: OpenStack Task Tracking Browser Client
   use-storyboard: true
+- project: openstack-infra/subunit2sql
+  description: Tooling for converting subunit streams into a SQL DB
+  upstream: https://github.com/mtreinish/subunit2sql
 - project: openstack-infra/tripleo-ci
   description: CI for the tripleo project
   upstream: https://github.com/toci-dev/toci

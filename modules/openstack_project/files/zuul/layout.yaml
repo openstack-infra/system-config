@@ -3038,6 +3038,14 @@ projects:
     release:
       - storyboard-webclient-js-release-master
 
+  - name: openstack-infra/subunit2sql
+    check:
+      - gate-subunit2sql-pep8
+      - gate-subunit2sql-python27
+    gate:
+      - gate-subunit2sql-pep8
+      - gate-subunit2sql-python27
+
   - name: openstack-infra/vinz
     template:
       - name: publish-to-pypi
