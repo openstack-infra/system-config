@@ -267,6 +267,10 @@
 - project: openstack/glance
   docimpact-group: openstack-manuals
 - project: openstack/glance-specs
+- project: openstack/glance.store
+  description: Glance stores library
+  group: glance
+  upstream: https://github.com/FlaPer87/glance.store.git
 - project: openstack/governance
   description: OpenStack Technical Committee Decisions
 - project: openstack/heat
