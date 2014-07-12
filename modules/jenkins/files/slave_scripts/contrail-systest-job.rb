@@ -76,7 +76,7 @@ end
 def setup_contrail(image)
     return if image.nil? or !File.file? image
 
-    dest_image, e = Sh.rrun "basename #{image}"
+    dest_image = File.basename(image)
     puts "setup_contrail: #{image}"
     `mkdir -p #{ENV['WORKSPACE']}`
     @topo_file = "#{ENV['WORKSPACE']}/testbed.py"
@@ -296,7 +296,7 @@ def parse_options(args = ARGV)
         o.banner = "Usage: #{$0} [options] [test-targets})"
 
         o.on("-i", "--image [checkout and build]", "Image to load") { |i|
-            dest_image, e = Sh.rrun "basename #{i}"
+            dest_image = File.basename(i)
             @options.image = "#{ENV['WORKSPACE']}/#{dest_image}"
             Sh.run("sshpass -p c0ntrail123 scp ci-admin@ubuntu-build02:#{i} " +
                    "#{ENV['WORKSPACE']}/#{dest_image}")
@@ -344,6 +344,7 @@ def parse_options(args = ARGV)
             compute_set = true
         }
     }
+
     opt_parser.parse!(args)
     if !args.empty? then
         @options.fab_tests = [ ]
@@ -359,7 +360,7 @@ def parse_options(args = ARGV)
     end
 end
 
-if __FILE__ == $0 then
+def main
     Util.cleanup_on_exit = true
     Util.ci_setup
     parse_options
@@ -388,4 +389,13 @@ if __FILE__ == $0 then
     end
 
     Sh.exit(exit_code)
+end
+
+if __FILE__ == $0 then
+    begin
+    main()
+    rescue Exception => e
+    puts "Caught exception #{e}"
+    Sh.exit(-1)
+    end
 end
