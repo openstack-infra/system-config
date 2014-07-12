@@ -5,6 +5,7 @@ $LOAD_PATH.unshift "/usr/local/jenkins/slave_scripts/",
 
 require 'util'
 require 'contrail-git-prep'
+require 'timeout'
 
 def get_all_hosts
     return @vms.each_with_index.map { |vm, i| "host#{i+1}" }.join(", ")
@@ -129,7 +130,13 @@ def install_contrail
     Sh.run "ssh #{vm.vmname} /usr/local/jenkins/slave_scripts/ci-infra/contrail_fab install_contrail"
     Sh.run "echo \"perl -ni -e 's/JVM_OPTS -Xss\\d+/JVM_OPTS -Xss512/g; print \\$_;' /etc/cassandra/cassandra-env.sh\" | ssh -t #{vm.vmname} \$(< /dev/fd/0)"
 
-    Sh.run "ssh #{vm.vmname} /usr/local/jenkins/slave_scripts/ci-infra/contrail_fab setup_all" unless @options.fab_tests.empty?
+    return if @options.fab_tests.empty?
+
+    Sh.run "ssh #{vm.vmname} /usr/local/jenkins/slave_scripts/ci-infra/contrail_fab setup_all"
+    Sh.run "ssh #{vm.vmname} reboot"
+    sleep 30
+
+    Sh.run("ssh #{vm.vmname} /usr/local/jenkins/slave_scripts/ci-infra/contrail_fab uptime", false, 120, 10) # 20 mins
 
     # Reduce number of nova-api and nova-conductors and fix scheduler for
     # even distribution of instances across all compute nodes.
@@ -205,8 +212,17 @@ def run_sanity(fab_test)
 
     fab_test = update_nova_libvirt_driver(fab_test)
 
-    o, exit_code = Sh.run("ssh #{@vms.first.vmname} \"(export TEST_RETRY_FACTOR=20.0 export TEST_DELAY_FACTOR=2; /usr/local/jenkins/slave_scripts/ci-infra/contrail_fab #{fab_test})\"", true)
+    exit_code = 0
+    time = 60 * 60 * 2) # 2 hours
+    cmd = "ssh #{@vms.first.vmname} \"(export TEST_RETRY_FACTOR=20.0 export TEST_DELAY_FACTOR=2; /usr/local/jenkins/slave_scripts/ci-infra/contrail_fab #{fab_test})\""
 
+    # run_sanity can potentially hang.. Use a timeout.
+    begin
+    Timeout::timeout(time) { o, exit_code = Sh.run(cmd, true) }
+    rescue Timeout::Error => e
+        puts "ERROR #{e}: #{cmd} timed out after #{time} seconds"
+        exit_code = -1
+    end
 
     # Copy sanity log files, as the sub-slave VMs will go away.
     Sh.run("scp -r #{@vms.first.vmname}:/root/logs #{ENV['WORKSPACE']}/logs_#{fab_test}", true)
