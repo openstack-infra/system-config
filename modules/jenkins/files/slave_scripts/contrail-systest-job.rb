@@ -64,7 +64,7 @@ env.test_delay_factor = 1.0
 env.test_repo_dir='#{ENV['HOME']}/contrail-test'
 env.http_proxy = subprocess.check_output("\grep http_proxy /etc/contrail_bashrc | awk -F '=' '{print $2}'", shell = True).rstrip()
 
-# env.test_verify_on_setup = False
+env.test_verify_on_setup = False
 # env.mail_from='ci-admin@opencontrail.org'
 # env.mail_to='ci-admin@opencontrail.org'
 # env.interface_rename=False
