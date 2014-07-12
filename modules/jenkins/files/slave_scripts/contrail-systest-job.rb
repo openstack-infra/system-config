@@ -133,7 +133,7 @@ def install_contrail
     return if @options.fab_tests.empty?
 
     # Hack setup_all not to reboot..
-    cmd = %{sed -i "s/setup_all\\(reboot='True'\\)/setup_all\\(reboot='False'\\)/g"}
+    cmd = %{sed -i "s/setup_all\\(reboot=\\'True\\'\\)/setup_all\\(reboot=\\'False\\'\\)/g"}
     Sh.run("ssh #{vm.vmname} #{cmd} /opt/contrail/utils/fabfile/tasks/provision.py", true)
 
     Sh.run "ssh #{vm.vmname} /usr/local/jenkins/slave_scripts/ci-infra/contrail_fab setup_all"
