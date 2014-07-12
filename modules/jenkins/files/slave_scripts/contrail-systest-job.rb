@@ -140,7 +140,7 @@ def install_contrail
     Sh.run "ssh #{vm.vmname} reboot"
     sleep 30
 
-    Sh.run("ssh #{vm.vmname} /usr/local/jenkins/slave_scripts/ci-infra/contrail_fab uptime", false, 120, 10) # 20 mins
+    Sh.run("ssh #{vm.vmname} uptime", false, 120, 10) # 20 mins
 
     # Reduce number of nova-api and nova-conductors and fix scheduler for
     # even distribution of instances across all compute nodes.
