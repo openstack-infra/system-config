@@ -646,8 +646,6 @@ jobs:
     voting: false
   - name: gate-refstack-python33
     voting: false
-  - name: gate-refstack-client-python33
-    voting: false
   - name: ^(gate|check)-sqlalchemy-migrate-devstack-dsvm$
     voting: false
   - name: gate-manila-pylint
@@ -4619,7 +4617,6 @@ projects:
     check:
       - gate-refstack-client-pep8
       - gate-refstack-client-python27
-      - gate-refstack-client-python33
     gate:
       - gate-refstack-client-pep8
       - gate-refstack-client-python27
