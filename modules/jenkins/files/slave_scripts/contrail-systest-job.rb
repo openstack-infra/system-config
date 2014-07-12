@@ -391,11 +391,4 @@ def main
     Sh.exit(exit_code)
 end
 
-if __FILE__ == $0 then
-    begin
-    main()
-    rescue Exception => e
-    puts "Caught exception #{e}"
-    Sh.exit(-1)
-    end
-end
+main() if __FILE__ == $0
