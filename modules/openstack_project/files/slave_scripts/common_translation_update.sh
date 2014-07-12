@@ -269,9 +269,12 @@ function filter_commits ()
     # comment lines, or diff file information.
     for f in `git diff --cached --name-only`
     do
+	# It's ok if the grep fails
+	set +e
         changed=$(git diff --cached "$f" \
             | egrep -v "(POT-Creation-Date|Project-Id-Version|PO-Revision-Date)" \
             | egrep -c "^([-+][^-+#])")
+	set -e
         if [ $changed -eq 0 ]
         then
             git reset -q "$f"
