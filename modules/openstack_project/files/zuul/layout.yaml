@@ -3283,22 +3283,12 @@ projects:
       - gate-congress-python27
 
   - name: stackforge/cookbook-openstack-block-storage
-    check:
-      - gate-cookbook-openstack-block-storage-chef-lint
-      - gate-cookbook-openstack-block-storage-chef-style
-      - gate-cookbook-openstack-block-storage-chef-unit
-    gate:
-      - gate-cookbook-openstack-block-storage-chef-lint
-      - gate-cookbook-openstack-block-storage-chef-unit
+    template:
+      - name: chef-jobs
 
   - name: stackforge/cookbook-ceph
-    check:
-      - gate-cookbook-ceph-chef-lint
-      - gate-cookbook-ceph-chef-style
-      - gate-cookbook-ceph-chef-unit
-    gate:
-      - gate-cookbook-ceph-chef-lint
-      - gate-cookbook-ceph-chef-unit
+    template:
+      - name: chef-jobs
 
   - name: stackforge/cookbook-monasca-agent
     template:
@@ -3321,139 +3311,64 @@ projects:
       - name: chef-jobs
 
   - name: stackforge/cookbook-openstack-client
-    check:
-      - gate-cookbook-openstack-client-chef-lint
-      - gate-cookbook-openstack-client-chef-style
-      - gate-cookbook-openstack-client-chef-unit
-    gate:
-      - gate-cookbook-openstack-client-chef-lint
-      - gate-cookbook-openstack-client-chef-unit
+    template:
+      - name: chef-jobs
 
   - name: stackforge/cookbook-openstack-common
-    check:
-      - gate-cookbook-openstack-common-chef-lint
-      - gate-cookbook-openstack-common-chef-style
-      - gate-cookbook-openstack-common-chef-unit
-    gate:
-      - gate-cookbook-openstack-common-chef-lint
-      - gate-cookbook-openstack-common-chef-unit
+    template:
+      - name: chef-jobs
 
   - name: stackforge/cookbook-openstack-compute
-    check:
-      - gate-cookbook-openstack-compute-chef-lint
-      - gate-cookbook-openstack-compute-chef-style
-      - gate-cookbook-openstack-compute-chef-unit
-    gate:
-      - gate-cookbook-openstack-compute-chef-lint
-      - gate-cookbook-openstack-compute-chef-unit
+    template:
+      - name: chef-jobs
 
   - name: stackforge/cookbook-openstack-dashboard
-    check:
-      - gate-cookbook-openstack-dashboard-chef-lint
-      - gate-cookbook-openstack-dashboard-chef-style
-      - gate-cookbook-openstack-dashboard-chef-unit
-    gate:
-      - gate-cookbook-openstack-dashboard-chef-lint
-      - gate-cookbook-openstack-dashboard-chef-unit
+    template:
+      - name: chef-jobs
 
   - name: stackforge/cookbook-openstack-data-processing
-    check:
-      - gate-cookbook-openstack-data-processing-chef-lint
-      - gate-cookbook-openstack-data-processing-chef-style
-      - gate-cookbook-openstack-data-processing-chef-unit
-    gate:
-      - gate-cookbook-openstack-data-processing-chef-lint
-      - gate-cookbook-openstack-data-processing-chef-unit
+    template:
+      - name: chef-jobs
 
   - name: stackforge/cookbook-openstack-database
-    check:
-      - gate-cookbook-openstack-database-chef-lint
-      - gate-cookbook-openstack-database-chef-style
-      - gate-cookbook-openstack-database-chef-unit
-    gate:
-      - gate-cookbook-openstack-database-chef-lint
-      - gate-cookbook-openstack-database-chef-unit
+    template:
+      - name: chef-jobs
 
   - name: stackforge/cookbook-openstack-identity
-    check:
-      - gate-cookbook-openstack-identity-chef-lint
-      - gate-cookbook-openstack-identity-chef-style
-      - gate-cookbook-openstack-identity-chef-unit
-    gate:
-      - gate-cookbook-openstack-identity-chef-lint
-      - gate-cookbook-openstack-identity-chef-unit
+    template:
+      - name: chef-jobs
 
   - name: stackforge/cookbook-openstack-image
-    check:
-      - gate-cookbook-openstack-image-chef-lint
-      - gate-cookbook-openstack-image-chef-style
-      - gate-cookbook-openstack-image-chef-unit
-    gate:
-      - gate-cookbook-openstack-image-chef-lint
-      - gate-cookbook-openstack-image-chef-unit
+    template:
+      - name: chef-jobs
 
   - name: stackforge/cookbook-openstack-network
-    check:
-      - gate-cookbook-openstack-network-chef-lint
-      - gate-cookbook-openstack-network-chef-style
-      - gate-cookbook-openstack-network-chef-unit
-    gate:
-      - gate-cookbook-openstack-network-chef-lint
-      - gate-cookbook-openstack-network-chef-unit
+    template:
+      - name: chef-jobs
 
   - name: stackforge/cookbook-openstack-object-storage
-    check:
-      - gate-cookbook-openstack-object-storage-chef-lint
-      - gate-cookbook-openstack-object-storage-chef-style
-      - gate-cookbook-openstack-object-storage-chef-unit
-    gate:
-      - gate-cookbook-openstack-object-storage-chef-lint
-      - gate-cookbook-openstack-object-storage-chef-unit
+    template:
+      - name: chef-jobs
 
   - name: stackforge/cookbook-openstack-ops-database
-    check:
-      - gate-cookbook-openstack-ops-database-chef-lint
-      - gate-cookbook-openstack-ops-database-chef-style
-      - gate-cookbook-openstack-ops-database-chef-unit
-    gate:
-      - gate-cookbook-openstack-ops-database-chef-lint
-      - gate-cookbook-openstack-ops-database-chef-unit
+    template:
+      - name: chef-jobs
 
   - name: stackforge/cookbook-openstack-ops-messaging
-    check:
-      - gate-cookbook-openstack-ops-messaging-chef-lint
-      - gate-cookbook-openstack-ops-messaging-chef-style
-      - gate-cookbook-openstack-ops-messaging-chef-unit
-    gate:
-      - gate-cookbook-openstack-ops-messaging-chef-lint
-      - gate-cookbook-openstack-ops-messaging-chef-unit
+    template:
+      - name: chef-jobs
 
   - name: stackforge/cookbook-openstack-orchestration
-    check:
-      - gate-cookbook-openstack-orchestration-chef-lint
-      - gate-cookbook-openstack-orchestration-chef-style
-      - gate-cookbook-openstack-orchestration-chef-unit
-    gate:
-      - gate-cookbook-openstack-orchestration-chef-lint
-      - gate-cookbook-openstack-orchestration-chef-unit
+    template:
+      - name: chef-jobs
 
   - name: stackforge/cookbook-openstack-integration-test
-    check:
-      - gate-cookbook-openstack-integration-test-chef-lint
-      - gate-cookbook-openstack-integration-test-chef-style
-      - gate-cookbook-openstack-integration-test-chef-unit
-    gate:
-      - gate-cookbook-openstack-integration-test-chef-lint
-      - gate-cookbook-openstack-integration-test-chef-unit
+    template:
+      - name: chef-jobs
 
   - name: stackforge/cookbook-openstack-telemetry
-    check:
-      - gate-cookbook-openstack-telemetry-chef-lint
-      - gate-cookbook-openstack-telemetry-chef-style
-      - gate-cookbook-openstack-telemetry-chef-unit
-    gate:
-      - gate-cookbook-openstack-telemetry-chef-lint
-      - gate-cookbook-openstack-telemetry-chef-unit
+    template:
+      - name: chef-jobs
 
   - name: stackforge/entropy
     check:
