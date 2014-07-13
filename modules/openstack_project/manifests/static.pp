@@ -249,7 +249,7 @@ class openstack_project::static (
 
   cron { 'bandersnatch':
     minute      => '*/5',
-    command     => 'bandersnatch mirror >>/var/log/bandersnatch/mirror.log 2>&1',
+    command     => 'run-bandersnatch >>/var/log/bandersnatch/mirror.log 2>&1',
     environment => 'PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin',
   }
 
@@ -265,4 +265,13 @@ class openstack_project::static (
       'notifempty',
     ],
   }
+
+  file { '/usr/local/bin/run-bandersnatch':
+    ensure  => present,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0755',
+    source  => 'puppet:///modules/openstack_project/run_bandersnatch.py',
+  }
+
 }
