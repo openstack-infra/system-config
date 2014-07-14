@@ -20,7 +20,7 @@ class openstack_project::status (
   }
 
   include openstack_project
-  class { 'jenkins::jenkinsuser':
+  class { 'openstack_project::jenkinsuser':
     ssh_key => $openstack_project::jenkins_ssh_key,
   }
 
