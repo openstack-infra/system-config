@@ -76,6 +76,7 @@ git clone https://review.openstack.org/p/openstack-infra/pypi-mirror
 git clone https://review.openstack.org/p/openstack-infra/tripleo-ci
 git clone https://review.openstack.org/p/openstack/ceilometer
 git clone https://review.openstack.org/p/openstack/cinder
+git clone https://review.openstack.org/p/openstack/dib-utils
 git clone https://review.openstack.org/p/openstack/diskimage-builder
 git clone https://review.openstack.org/p/openstack/glance
 git clone https://review.openstack.org/p/openstack/heat
