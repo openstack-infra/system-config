@@ -49,8 +49,5 @@ do
 	virsh --connect qemu:///system resume $j
 done
 
-
-
-
-
-
+# TBD
+# rsync, using ssh reverse tunnel
