@@ -13,7 +13,6 @@ class openstack_project::simple_slave(
 
   class { 'jenkins::slave':
     ssh_key => '',
-    user    => false
   }
 }
 
