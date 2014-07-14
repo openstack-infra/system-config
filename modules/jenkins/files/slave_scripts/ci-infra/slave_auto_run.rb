@@ -52,7 +52,7 @@ def slave
     slave_executors = "1" if slave_executors.nil? or slave_executors.empty?
 
     # CI-Slaves register to jenkins.opencontrail.org
-    exec %{java -jar #{jar_file} -labels #{slave_labels} -mode normal -master http://jenkins.opencontrail.org:8080/ -executors #{slave_executors} -fsroot /home/jenkins -username #{jenkins_user} -password #{jenkins_password} -name #{@hostname} 2>&1 | tee /root/jenkins-slave.log}
+    Sh.run(%{java -jar #{jar_file} -labels #{slave_labels} -mode normal -master http://jenkins.opencontrail.org:8080/ -executors #{slave_executors} -fsroot /home/jenkins -username #{jenkins_user} -password #{jenkins_password} -name #{@hostname} 2>&1 | tee /root/jenkins-slave.log}, true)
 end
 
 def subslave
@@ -83,9 +83,11 @@ end
 def main
     setup_hostname
     pp @hostname, @hostip
-    subslave if @hostname =~ /ci-oc-subslave/
-    slave if @hostname =~ /ci-o[cs]-slave/ # oc or os slave
-    loop do sleep 10 end
+    loop do
+        subslave if @hostname =~ /ci-oc-subslave/
+        slave if @hostname =~ /ci-o[cs]-slave/ # oc or os slave
+        sleep 10
+    end
 end
 
 main
