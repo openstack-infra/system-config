@@ -19,6 +19,7 @@ class openstack_project::static (
   class { 'jenkins::jenkinsuser':
     ssh_key => $openstack_project::jenkins_ssh_key,
   }
+  include openstack_project::jenkinsuser
 
   include apache
   include apache::mod::wsgi
