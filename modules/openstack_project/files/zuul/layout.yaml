@@ -636,9 +636,6 @@ jobs:
     voting: false
   - name: gate-manila-tempest-dsvm-neutron-multibackend
     voting: false
-  - name: gate-manila-devstack-dsvm-neutron
-    branch: master
-    voting: false
   - name: gate-blazar-devstack-dsvm
     voting: false
   - name: gate-blazar-pylint
@@ -3656,6 +3653,7 @@ projects:
       - gate-manila-tempest-dsvm-neutron
       - gate-manila-tempest-dsvm-neutron-multibackend
     gate:
+      - gate-manila-devstack-dsvm-neutron
       - gate-manila-docs
       - gate-manila-pep8
       - gate-manila-python26
