@@ -1065,6 +1065,7 @@ projects:
     experimental:
       - check-neutron-dsvm-api
       - gate-grenade-dsvm-neutron-forward
+      - check-tempest-devstack-vm-neutron-dvr-enabled
     experimental-tripleo:
       - check-tripleo-ironic-seed-precise
       - check-tripleo-undercloud-precise
