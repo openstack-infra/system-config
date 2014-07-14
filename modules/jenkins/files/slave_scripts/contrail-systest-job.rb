@@ -216,17 +216,8 @@ def run_sanity(fab_test)
 
     fab_test = update_nova_libvirt_driver(fab_test)
 
-    exit_code = 0
-    time = 60 * 60 * 2 # 2 hours
     cmd = "ssh #{@vms.first.vmname} \"(export TEST_RETRY_FACTOR=20.0 export TEST_DELAY_FACTOR=2; /usr/local/jenkins/slave_scripts/ci-infra/contrail_fab #{fab_test})\""
-
-    # run_sanity can potentially hang.. Use a timeout.
-    begin
-    Timeout::timeout(time) { o, exit_code = Sh.run(cmd, true) }
-    rescue Timeout::Error => e
-        puts "ERROR #{e}: #{cmd} timed out after #{time} seconds"
-        exit_code = -1
-    end
+    o, exit_code = Sh.run(cmd, true)
 
     # Copy sanity log files, as the sub-slave VMs will go away.
     Sh.run("scp -r #{@vms.first.vmname}:/root/logs #{ENV['WORKSPACE']}/logs_#{fab_test}", true)
@@ -379,8 +370,17 @@ def main
 
     # Ignore exit code from now onwards..
     Sh.always_exit_as_success = true
+    exit_code = 0
+    wait_time = 60 * 3 # 3 hours
 
-    exit_code = run_test
+    # run_sanity can potentially hang.. Use a timeout.
+    begin
+    Timeout::timeout(wait_time * 60) { exit_code = run_test }
+    rescue Timeout::Error => e
+    puts "\n#{COLOR_RED} ERROR \"#{e}\": run_test() timed out after " +
+         "#{wait_time} minutes #{COLOR_RESET}"
+    exit_code = -1
+    end
 
     # Check if systest failures are to be ignored, for the moment.
     if exit_code != 0 then
