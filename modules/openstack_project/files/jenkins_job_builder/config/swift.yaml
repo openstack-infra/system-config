@@ -13,6 +13,7 @@
       - devstack-checkout
       - shell: |
           #!/bin/bash -xe
+          export INSTALL_TESTONLY_PACKAGES=true
           export PYTHONUNBUFFERED=true
           export DEVSTACK_GATE_TIMEOUT=90
           export FUNCTEST_TIMEOUT=30
