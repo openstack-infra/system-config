@@ -3069,3 +3069,12 @@
     jobs:
       - python-jobs
       - pypi-jobs
+
+- project:
+    name: rack
+    github-org: stackforge
+    node: bare-trusty
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - python-jobs
