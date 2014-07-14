@@ -4925,8 +4925,14 @@ projects:
     gate:
       - noop
 
-  - name: stackforge/rack
-    check:
-      - noop
-    gate:
-      - noop
+- name: stackforge/rack
+  check:
+    - gate-rack-pep8
+    - gate-rack-python26
+    - gate-rack-python27
+  gate:
+    - gate-rack-pep8
+    - gate-rack-python26
+    - gate-rack-python27
+  post:
+    - rack-coverage
