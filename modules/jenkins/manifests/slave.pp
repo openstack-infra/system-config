@@ -1,20 +1,11 @@
 # == Class: jenkins::slave
 #
 class jenkins::slave(
-  $ssh_key = '',
-  $user = true,
   $python3 = false,
 ) {
 
   include pip
   include jenkins::params
-
-  if ($user == true) {
-    class { 'jenkins::jenkinsuser':
-      ensure  => present,
-      ssh_key => $ssh_key,
-    }
-  }
 
   anchor { 'jenkins::slave::update-java-alternatives': }
 

@@ -16,7 +16,7 @@ class openstack_project::static (
   }
 
   include openstack_project
-  class { 'jenkins::jenkinsuser':
+  class { 'opentack_project::jenkinsuser':
     ssh_key => $openstack_project::jenkins_ssh_key,
   }
 
