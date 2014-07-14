@@ -23,16 +23,6 @@
               copy-after-failure: true
 
 
-- publisher:
-    name: rally-subunit
-    publishers:
-      - scp:
-          site: 'static.openstack.org'
-          files:
-            - target: 'logs/$LOG_PATH/results.html.gz'
-              source: '/tmp/rally_testr_results.html.gz'
-
-
 - builder:
     name: devstack-rally-gate
     builders:
@@ -127,6 +117,8 @@
           function post_test_hook {
               cd $BASE/new/rally
               sudo -H -u stack tox -ecli -v
+              .tox/cli/bin/python /usr/local/jenkins/slave_scripts/subunit2html.py .testrepository/subunit.log $WORKSPACE/results.html
+              gzip -9 $WORKSPACE/results.html
           }
           export -f pre_test_hook
           export -f post_test_hook
@@ -136,7 +128,12 @@
     publishers:
       - devstack-logs
       - console-log
-      - rally-subunit
+      - scp:
+          site: 'static.openstack.org'
+          files:
+            - target: 'logs/$LOG_PATH'
+              source: 'results.html.gz'
+
 
 
 - job-group:
