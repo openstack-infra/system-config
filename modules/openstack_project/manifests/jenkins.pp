@@ -16,6 +16,7 @@ class openstack_project::jenkins (
   $sysadmins = []
 ) {
   include openstack_project
+  include openstack_project::jenkinsuser
 
   $iptables_rule = regsubst ($zmq_event_receivers, '^(.*)$', '-m state --state NEW -m tcp -p tcp --dport 8888 -s \1 -j ACCEPT')
   class { 'openstack_project::server':
