@@ -84,7 +84,8 @@ def main
     setup_hostname
     pp @hostname, @hostip
     subslave if @hostname =~ /ci-oc-subslave/
-    slave
+    slave if @hostname =~ /ci-oc-slave/
+    loop do sleep 10 end
 end
 
 main
