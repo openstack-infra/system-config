@@ -16,6 +16,10 @@
 
 set -x
 
+if [ -z $IFACE ]; then
+    IFACE=$1 # In Centos, interface is an argument
+fi
+
 # We care only when eth0 comes up.
 if [ "$IFACE" != "eth0" ]; then
     exit 0
