@@ -36,10 +36,16 @@ class openstack_project::single_use_slave (
         '-p tcp --dport 8004 -s 172.24.4.0/24 -j ACCEPT',
       ],
   }
+
   class { 'jenkins::slave':
-    ssh_key         => $ssh_key,
-    python3         => $python3,
+    python3  => $python3,
+    user     => false,
   }
+
+  class { 'jenkins::jenkinsuser':
+    ssh_key         => $ssh_key,
+  }
+  include openstack_project::jenkinsuser
 
   class { 'openstack_project::slave_common':
     include_pypy    => $include_pypy,

@@ -20,9 +20,11 @@ class openstack_project::slave (
   }
 
   class { 'jenkins::slave':
-    ssh_key      => $ssh_key,
-    python3      => $python3,
+    ssh_key => $ssh_key,
+    python3 => $python3,
   }
+
+  include openstack_project::jenkinsuser
 
   include jenkins::cgroups
   include ulimit
