@@ -35,21 +35,21 @@ class jenkins::jenkinsuser(
     require => File['/home/jenkins'],
   }
 
-  file { '/home/jenkins/.gitconfig':
-    ensure  => present,
-    owner   => 'jenkins',
-    group   => 'jenkins',
-    mode    => '0640',
-    source  => 'puppet:///modules/jenkins/gitconfig',
-    require => File['/home/jenkins'],
-  }
-
   file { '/home/jenkins/.ssh':
     ensure  => directory,
     owner   => 'jenkins',
     group   => 'jenkins',
     mode    => '0600',
     require => File['/home/jenkins'],
+  }
+
+  file { '/home/jenkins/.ssh/config':
+    ensure  => present,
+    owner   => 'jenkins',
+    group   => 'jenkins',
+    mode    => '0640',
+    require => File['/home/jenkins/.ssh'],
+    source  => 'puppet:///modules/jenkins/ssh_config',
   }
 
   ssh_authorized_key { 'jenkins-master-2014-04-24':
@@ -59,6 +59,7 @@ class jenkins::jenkinsuser(
     key     => $ssh_key,
     require => File['/home/jenkins/.ssh'],
   }
+
   ssh_authorized_key { '/home/jenkins/.ssh/authorized_keys':
     ensure  => absent,
     user    => 'jenkins',
@@ -99,55 +100,12 @@ class jenkins::jenkinsuser(
 
   }
 
-  file { '/home/jenkins/.ssh/config':
-    ensure  => present,
-    owner   => 'jenkins',
-    group   => 'jenkins',
-    mode    => '0640',
-    require => File['/home/jenkins/.ssh'],
-    source  => 'puppet:///modules/jenkins/ssh_config',
-  }
-
-  file { '/home/jenkins/.gnupg':
-    ensure  => directory,
-    owner   => 'jenkins',
-    group   => 'jenkins',
-    mode    => '0700',
-    require => File['/home/jenkins'],
-  }
-
-  file { '/home/jenkins/.gnupg/pubring.gpg':
-    ensure  => present,
-    owner   => 'jenkins',
-    group   => 'jenkins',
-    mode    => '0600',
-    require => File['/home/jenkins/.gnupg'],
-    source  => 'puppet:///modules/jenkins/pubring.gpg',
-  }
-
   file { '/home/jenkins/.config':
     ensure  => directory,
     owner   => 'jenkins',
     group   => 'jenkins',
     mode    => '0755',
     require => File['/home/jenkins'],
-  }
-
-  file { '/home/jenkins/.m2':
-    ensure  => directory,
-    owner   => 'jenkins',
-    group   => 'jenkins',
-    mode    => '0755',
-    require => File['/home/jenkins'],
-  }
-
-  file { '/home/jenkins/.m2/settings.xml':
-    ensure  => present,
-    owner   => 'jenkins',
-    group   => 'jenkins',
-    mode    => '0644',
-    require => File['/home/jenkins/.m2'],
-    source  => 'puppet:///modules/jenkins/settings.xml',
   }
 
 }
