@@ -696,6 +696,8 @@ jobs:
     voting: false
   - name: ^(gate|check)-pecan-tox-ironic-stable
     voting: false
+  - name: ^(gate|check)-marconi-python33
+    branch: ^(?!stable/(havana|icehouse)).*$
 
 # The project list is grouped by type of project, and within each
 # group, projects are sorted (mostly) alphabetically.
