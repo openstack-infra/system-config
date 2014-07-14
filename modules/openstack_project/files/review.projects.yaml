@@ -1029,6 +1029,9 @@
 - project: stackforge/solum-dashboard
   description: 'Horizon plugin for Solum. See: https://wiki.openstack.org/wiki/Solum'
   upstream: https://github.com/asalkeld/solum-horizon.git
+- project: stackforge/solum-infra-guestagent
+  description: 'Guest agent for Solum. See: https://wiki.openstack.org/wiki/Solum'
+  upstream: git://github.com/julienvey/solum-guestagent.git
 - project: stackforge/solum-specs
   description: 'Solum Design Specifications'
   upstream: git://github.com/rackerlabs/solum-specs
