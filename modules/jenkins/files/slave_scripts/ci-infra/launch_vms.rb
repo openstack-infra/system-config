@@ -235,7 +235,7 @@ end
 Vm.options.labels = "juniper-tests"
 Vm.options.executors = 1
 Vm.options.image = "ci-jenkins-slave"
-Vm.options.name = "ci-oc-slave"
+# Vm.options.name = "ci-oc-slave"
 Vm.options.count = 1
 Vm.options.dry_run = false
 
@@ -258,8 +258,7 @@ def parse_options
              "Jenkins slave image ") { |i|
             Vm.options.image = i
         }
-        o.on("-n", "--name [#{Vm.options.name}-ipaddr]",
-             "VM Instance name prefix") { |n|
+        o.on("-n", "--name VM Instance Name", "VM Instance name prefix") { |n|
             Vm.options.name = n
         }
         o.on("-d", "--[no-]dry-run", "[#{Vm.options.dry_run}]",
