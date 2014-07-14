@@ -1,0 +1,21 @@
+Code-Review+2: Monty Taylor <mordred@inaugust.com>
+Workflow+1: Monty Taylor <mordred@inaugust.com>
+Verified+2: Jenkins
+Code-Review+1: Rob Hirschfeld <rob_hirschfeld@dell.com>
+Code-Review+1: Andreas Jaeger <jaegerandi@gmail.com>
+Code-Review+1: Elizabeth K. Joseph <lyz@princessleia.com>
+Code-Review+2: Sergey Lukjanov <slukjanov@mirantis.com>
+Code-Review+1: Sean Roberts <seanroberts66@gmail.com>
+Code-Review+1: Matthew Oliver <matt@oliver.net.au>
+Code-Review+1: Keith Basil <kbasil@redhat.com>
+Code-Review+1: amrith <amrith@tesora.com>
+Code-Review+1: Jacki Bauer <jacki.bauer@rackspace.com>
+Code-Review+1: Dave Neary <dneary@redhat.com>
+Code-Review+1: Ju Lim <julim@redhat.com>
+Code-Review+1: Tushar Katarki <tushar.katarki@gmail.com>
+Code-Review+1: Bryan Thompson <bogeyon18@gmail.com>
+Submitted-by: Jenkins
+Submitted-at: Mon, 14 Jul 2014 21:21:37 +0000
+Reviewed-on: https://review.openstack.org/105251
+Project: openstack-infra/config
+Branch: refs/heads/master
