@@ -20,7 +20,7 @@ def get_each_host_password
 end
 
 def get_each_host_ostype
-    return @vms.each_with_index.map { |vm, i| "host#{i+1}: 'ubuntu'" }.join(", ")
+    return @vms.each_with_index.map { |vm, i| "host#{i+1}: '#{ENV['OS_TYPE']}'" }.join(", ")
 end
 
 def get_all_host_names
@@ -154,15 +154,23 @@ def install_contrail
 #   Sh.run "ssh #{vm.vmname} service nova-scheduler restart"
 end
 
+def get_os_type
+    return "ubuntu1204" if ENV["OS_TYPE"] == "ubuntu"
+    return "centos64"
+end
+
 def build_contrail_packages(repo = "#{ENV['WORKSPACE']}/repo")
     # Fetch build cache
-#   Sh.run("rm -rf /cs-shared/builder/cache/ubuntu1204")
-#   Sh.run("sshpass -p c0ntrail123 scp -r ci-admin@ubuntu-build02:/cs-shared/builder/cache/ubuntu1204 /cs-shared/builder/cache/.")
-    cache = "/cs-shared/builder/cache/ubuntu1204/"
+    cache = "/cs-shared/builder/cache/#{get_os_type}/"
     Sh.run("mkdir -p #{cache}")
-    Sh.run("sshpass -p c0ntrail123 rsync -az --no-owner --no-group ci-admin@ubuntu-build02:/cs-shared/builder/cache/ubuntu1204/ #{cache}")
+    Sh.run("sshpass -p c0ntrail123 rsync -az --no-owner --no-group ci-admin@ubuntu-build02:/cs-shared/builder/cache/#{get_os_type}/ #{cache}")
     Sh.run("chown -R #{ENV['USER']}.#{ENV['USER']} #{cache}")
-    Sh.run("ln -sf ubuntu1204 /cs-shared/builder/cache/ubuntu-12-04")
+
+    if get_os_type == "ubuntu1204" then
+        Sh.run("ln -sf ubuntu1204 /cs-shared/builder/cache/ubuntu-12-04")
+    elsif get_os_type == "centos64" then
+        Sh.run("ln -sf centos64_os /cs-shared/builder/cache/centos64")
+    end
 
     ENV['BUILD_ONLY'] = "1"
     ENV['SKIP_CREATE_GIT_IDS'] = "1"
@@ -170,8 +178,7 @@ def build_contrail_packages(repo = "#{ENV['WORKSPACE']}/repo")
     Sh.run "scons"
 #   Sh.run "scons #{repo}/build/third_party/log4cplus"
     Sh.run "rm -rf #{repo}/third_party/euca2ools/.git/shallow"
-    Sh.run "cd #{repo}/tools/packaging/build/"
-    Sh.run "./packager.py"
+    Sh.run "#{repo}/tools/packaging/build/packager.py --sku havana"
     Sh.run "ls -alh #{repo}/build/artifacts/contrail-install-packages_*_all.deb"
 
     # Return the all-in-one debian package file path.
