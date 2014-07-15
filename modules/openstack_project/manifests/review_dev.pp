@@ -42,7 +42,7 @@ class openstack_project::review_dev (
     ssh_project_rsa_pubkey_contents => $ssh_project_rsa_pubkey_contents,
     email                           => 'review-dev@openstack.org',
     war                             =>
-      'http://tarballs.openstack.org/ci/gerrit/gerrit-v2.8.4.15.6dc8444.war',
+      'http://tarballs.openstack.org/ci/test/gerrit-v2.8.4.16.36a649d.war',
     contactstore                    => $contactstore,
     contactstore_appsec             => $contactstore_appsec,
     contactstore_pubkey             => $contactstore_pubkey,
