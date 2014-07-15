@@ -204,4 +204,13 @@ class openstack_project::lists(
     webserver   => $listdomain,
     mailserver  => $listdomain,
   }
+
+    maillist { 'tax-affairs':
+    ensure      => present,
+    admin       => 'seanroberts66@gmail.com',
+    password    => $listpassword,
+    description => 'board committee focused on tax issues.',
+    webserver   => $listdomain,
+    mailserver  => $listdomain,
+  }
 }
