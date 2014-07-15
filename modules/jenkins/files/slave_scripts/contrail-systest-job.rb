@@ -64,7 +64,7 @@ env.test_delay_factor = 1.0
 env.test_repo_dir='#{ENV['HOME']}/contrail-test'
 env.test_verify_on_setup = False
 
-p = subprocess.Popen("\grep http_proxy /etc/contrail_bashrc | awk -F '=' '{print $2}'", shell = True, stdout = subprocess.pipe)
+p = subprocess.Popen("\grep http_proxy /etc/contrail_bashrc | awk -F '=' '{print $2}'", shell = True, stdout = subprocess.PIPE)
 o, e = p.communicate()
 env.http_proxy = o.rstrip()
 
