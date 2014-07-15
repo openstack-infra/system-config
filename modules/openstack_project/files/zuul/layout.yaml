@@ -4940,6 +4940,12 @@ projects:
 
   - name: stackforge/rack
     check:
-      - noop
+      - gate-rack-pep8
+      - gate-rack-python26
+      - gate-rack-python27
     gate:
-      - noop
+      - gate-rack-pep8
+      - gate-rack-python26
+      - gate-rack-python27
+    post:
+      - rack-coverage
