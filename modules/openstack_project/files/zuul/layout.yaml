@@ -370,6 +370,14 @@ project-templates:
     release:
       - 'hook-{name}-rtfd'
 
+  - name: chef-jobs
+    check:
+      - 'gate-{name}-chef-lint'
+      - 'gate-{name}-chef-style'
+      - 'gate-{name}-chef-unit'
+    gate:
+      - 'gate-{name}-chef-lint'
+      - 'gate-{name}-chef-unit'
 
 jobs:
   - name: ^.*$
@@ -3332,6 +3340,26 @@ projects:
       - gate-cookbook-ceph-chef-lint
       - gate-cookbook-ceph-chef-unit
 
+  - name: stackforge/cookbook-monasca-agent
+    template:
+      - name: chef-jobs
+
+  - name: stackforge/cookbook-monasca-api
+    template:
+      - name: chef-jobs
+
+  - name: stackforge/cookbook-monasca-notification
+    template:
+      - name: chef-jobs
+
+  - name: stackforge/cookbook-monasca-persister
+    template:
+      - name: chef-jobs
+
+  - name: stackforge/cookbook-monasca-thresh
+    template:
+      - name: chef-jobs
+
   - name: stackforge/cookbook-openstack-client
     check:
       - gate-cookbook-openstack-client-chef-lint
@@ -3756,6 +3784,82 @@ projects:
       - magnetodb-branch-tarball
 
   - name: stackforge/MRaaS
+    check:
+      - noop
+    gate:
+      - noop
+
+  - name: stackforge/monasca-agent
+    template:
+      - name: publish-to-pypi
+    check:
+      - gate-monasca-agent-pep8
+      - gate-monasca-agent-python27
+    gate:
+      - gate-monasca-agent-pep8
+      - gate-monasca-agent-python27
+    post:
+      - monasca-agent-coverage
+
+  - name: stackforge/monasca-api
+    check:
+      - noop
+    gate:
+      - noop
+
+  - name: stackforge/monasca-ceilometer
+    check:
+      - gate-monasca-ceilometer-pep8
+    gate:
+      - gate-monasca-ceilometer-pep8
+
+  - name: stackforge/monasca-common
+    check:
+      - gate-monasca-common-build
+    gate:
+      - gate-monasca-common-build
+    post:
+      - monasca-common-localrepo-upload
+
+  - name: stackforge/monasca-notification
+    template:
+      - name: publish-to-pypi
+    check:
+      - gate-monasca-notification-pep8
+      - gate-monasca-notification-python27
+    gate:
+      - gate-monasca-notification-pep8
+      - gate-monasca-notification-python27
+    post:
+      - monasca-notification-coverage
+
+  - name: stackforge/monasca-persister
+    check:
+      - noop
+    gate:
+      - noop
+
+  - name: stackforge/monasca-thresh
+    check:
+      - gate-monasca-thresh-build
+    gate:
+      - gate-monasca-thresh-build
+    post:
+      - monasca-thresh-localrepo-upload
+
+  - name: stackforge/monasca-ui
+    template:
+      - name: publish-to-pypi
+    check:
+      - gate-monasca-ui-pep8
+      - gate-monasca-ui-python27
+    gate:
+      - gate-monasca-ui-pep8
+      - gate-monasca-ui-python27
+    post:
+      - monasca-ui-coverage
+
+  - name: stackforge/monasca-vagrant
     check:
       - noop
     gate:
