@@ -1327,6 +1327,14 @@
       - python-jobs
       - pypi-jobs
 
+- project:
+    name: ovirt-nova-driver
+    github-org: stackforge
+    tarball-site: tarballs.openstack.org
+    node: 'bare-precise || bare-trusty'
+
+    jobs:
+      - python-jobs
 
 - project:
     name: packstack

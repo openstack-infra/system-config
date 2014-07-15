@@ -3899,6 +3899,14 @@ projects:
     gate:
       - noop
 
+  - name: stackforge/ovirt-nova-driver
+    check:
+      - gate-ovirt-nova-driver-pep8
+      - gate-ovirt-nova-driver-python27
+    gate:
+      - gate-ovirt-nova-driver-pep8
+      - gate-ovirt-nova-driver-python27
+
   - name: stackforge/packstack
     check:
       - gate-packstack-pep8
