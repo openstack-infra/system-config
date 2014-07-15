@@ -279,7 +279,7 @@ end
 # @options.fab_tests = ["run_sanity:ci_sanity", "qemu_run_sanity:ci_svc_sanity"]
 @options.fab_tests = ["run_sanity:ci_sanity"]
 
-@options.nodes = 2
+@options.nodes = 1
 @options.cfgm = ["host1"]
 @options.openstack = ["host1"]
 @options.control = ["host1"]
