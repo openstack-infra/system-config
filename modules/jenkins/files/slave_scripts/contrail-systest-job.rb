@@ -89,9 +89,12 @@ def setup_contrail(image)
 #       Sh.run "ssh root@#{vm.vmname} apt-get update", true
         Sh.run("scp #{image} root@#{vm.vmname}:#{dest_image}", false, 50, 10)
         Sh.run("ssh #{vm.vmname} sync", false, 50, 10)
-        Sh.run "ssh #{vm.vmname} dpkg -i #{dest_image}"
 
-        # Apply patch to setup.sh to retain apt.conf proxy settings.
+        if ENV["OS_TYPE"] == "ubuntu" then
+            Sh.run "ssh #{vm.vmname} dpkg -i #{dest_image}"
+        else # centos
+            Sh.run "ssh #{vm.vmname} rpm -ivh #{dest_image}"
+        end
         Sh.run "ssh #{vm.vmname} /opt/contrail/contrail_packages/setup.sh", true
     }
 
@@ -181,8 +184,13 @@ def build_contrail_packages(repo = "#{ENV['WORKSPACE']}/repo")
     Sh.run "#{repo}/tools/packaging/build/packager.py --sku havana"
     Sh.run "ls -alh #{repo}/build/artifacts/contrail-install-packages_*_all.deb"
 
-    # Return the all-in-one debian package file path.
-    image, e = Sh.rrun "ls -1 #{repo}/build/artifacts/contrail-install-packages_*_all.deb"
+    # Return the all-in-one debian/rpm package file path.
+    cmd = "ls -1 #{repo}/build/artifacts/contrail-install-packages_*_all.deb"
+    if ENV["OS_TYPE"] == "centos" then
+        cmd = "ls -1 " +
+              "#{repo}/build/artifacts/contrail-install-packages_*_all.rpm"
+    end
+    image, e = Sh.rrun(cmd)
     puts "Successfully built package #{image}"
 
     return image
@@ -255,6 +263,13 @@ def run_test(image = @options.image)
     build_id = 1
     build_id = ENV['BUILD_NUMBER'].to_i unless ENV['BUILD_NUMBER'].nil?
     return 0 if (build_id % 1) != 0
+
+    # Set image base name based on the platform.
+    if ENV["OS_TYPE"] == "ubuntu" then
+        Vm.options.image = "ci-jenkins-slave"
+    else
+        Vm.options.image = "ci-jenkins-slave-centos"
+    end
 
     Vm.create_subslaves(@options.nodes)
     setup_contrail(image)
