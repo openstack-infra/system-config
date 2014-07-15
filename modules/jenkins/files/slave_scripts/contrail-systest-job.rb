@@ -20,7 +20,7 @@ def get_each_host_password
 end
 
 def get_each_host_ostype
-    return @vms.each_with_index.map { |vm, i| "host#{i+1}: 'ubuntu'" }.join(", ")
+    return @vms.each_with_index.map { |vm, i| "host#{i+1}: '#{ENV['OS_TYPE']}'" }.join(", ")
 end
 
 def get_all_host_names
@@ -89,9 +89,12 @@ def setup_contrail(image)
 #       Sh.run "ssh root@#{vm.vmname} apt-get update", true
         Sh.run("scp #{image} root@#{vm.vmname}:#{dest_image}", false, 50, 10)
         Sh.run("ssh #{vm.vmname} sync", false, 50, 10)
-        Sh.run "ssh #{vm.vmname} dpkg -i #{dest_image}"
 
-        # Apply patch to setup.sh to retain apt.conf proxy settings.
+        if ENV["OS_TYPE"] == "ubuntu" then
+            Sh.run "ssh #{vm.vmname} dpkg -i #{dest_image}"
+        else # centos
+            Sh.run "ssh #{vm.vmname} rpm -ivh #{dest_image}"
+        end
         Sh.run "ssh #{vm.vmname} /opt/contrail/contrail_packages/setup.sh", true
     }
 
@@ -154,15 +157,23 @@ def install_contrail
 #   Sh.run "ssh #{vm.vmname} service nova-scheduler restart"
 end
 
+def get_os_type
+    return "ubuntu1204" if ENV["OS_TYPE"] == "ubuntu"
+    return "centos64"
+end
+
 def build_contrail_packages(repo = "#{ENV['WORKSPACE']}/repo")
     # Fetch build cache
-#   Sh.run("rm -rf /cs-shared/builder/cache/ubuntu1204")
-#   Sh.run("sshpass -p c0ntrail123 scp -r ci-admin@ubuntu-build02:/cs-shared/builder/cache/ubuntu1204 /cs-shared/builder/cache/.")
-    cache = "/cs-shared/builder/cache/ubuntu1204/"
+    cache = "/cs-shared/builder/cache/#{get_os_type}/"
     Sh.run("mkdir -p #{cache}")
-    Sh.run("sshpass -p c0ntrail123 rsync -az --no-owner --no-group ci-admin@ubuntu-build02:/cs-shared/builder/cache/ubuntu1204/ #{cache}")
+    Sh.run("sshpass -p c0ntrail123 rsync -az --no-owner --no-group ci-admin@ubuntu-build02:/cs-shared/builder/cache/#{get_os_type}/ #{cache}")
     Sh.run("chown -R #{ENV['USER']}.#{ENV['USER']} #{cache}")
-    Sh.run("ln -sf ubuntu1204 /cs-shared/builder/cache/ubuntu-12-04")
+
+    if get_os_type == "ubuntu1204" then
+        Sh.run("ln -sf ubuntu1204 /cs-shared/builder/cache/ubuntu-12-04")
+    elsif get_os_type == "centos64" then
+        Sh.run("ln -sf centos64 /cs-shared/builder/cache/centos64_os")
+    end
 
     ENV['BUILD_ONLY'] = "1"
     ENV['SKIP_CREATE_GIT_IDS'] = "1"
@@ -170,12 +181,16 @@ def build_contrail_packages(repo = "#{ENV['WORKSPACE']}/repo")
     Sh.run "scons"
 #   Sh.run "scons #{repo}/build/third_party/log4cplus"
     Sh.run "rm -rf #{repo}/third_party/euca2ools/.git/shallow"
-    Sh.run "cd #{repo}/tools/packaging/build/"
-    Sh.run "./packager.py"
+    Sh.run "#{repo}/tools/packaging/build/packager.py --sku havana"
     Sh.run "ls -alh #{repo}/build/artifacts/contrail-install-packages_*_all.deb"
 
-    # Return the all-in-one debian package file path.
-    image, e = Sh.rrun "ls -1 #{repo}/build/artifacts/contrail-install-packages_*_all.deb"
+    # Return the all-in-one debian/rpm package file path.
+    cmd = "ls -1 #{repo}/build/artifacts/contrail-install-packages_*_all.deb"
+    if ENV["OS_TYPE"] == "centos" then
+        cmd = "ls -1 " +
+              "#{repo}/build/artifacts/contrail-install-packages_*_all.rpm"
+    end
+    image, e = Sh.rrun(cmd)
     puts "Successfully built package #{image}"
 
     return image
@@ -247,7 +262,14 @@ def run_test(image = @options.image)
     # To check how this job scales..
     build_id = 1
     build_id = ENV['BUILD_NUMBER'].to_i unless ENV['BUILD_NUMBER'].nil?
-    return 0 if (build_id % 5) != 0
+    return 0 if (build_id % 1) != 0
+
+    # Set image base name based on the platform.
+    if ENV["OS_TYPE"] == "ubuntu" then
+        Vm.options.image = "ci-jenkins-slave"
+    else
+        Vm.options.image = "ci-jenkins-slave-centos"
+    end
 
     Vm.create_subslaves(@options.nodes)
     setup_contrail(image)
@@ -272,7 +294,7 @@ end
 # @options.fab_tests = ["run_sanity:ci_sanity", "qemu_run_sanity:ci_svc_sanity"]
 @options.fab_tests = ["run_sanity:ci_sanity"]
 
-@options.nodes = 2
+@options.nodes = 1
 @options.cfgm = ["host1"]
 @options.openstack = ["host1"]
 @options.control = ["host1"]
@@ -360,10 +382,8 @@ def main
     if @options.image.nil? then
         @image_built = true
 
-        # Temporary fix until base image is fixed.
-        Sh.run("apt-get -y install linux-headers-3.13.0-24-generic", true)
-        Sh.run("apt-get -y install linux-headers-3.11.0-22", true)
-        Sh.run("apt-get -y install linux-headers-3.11.0-22-generic", true)
+#       Add any software not carved in base image
+#       Sh.run("apt-get -y install linux-headers-3.13.0-24-generic", true)
         ContrailGitPrep.main(false) # Use private repo
         @options.image = build_contrail_packages
     end

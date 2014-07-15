@@ -196,6 +196,7 @@ class Util
         ENV['WORKSPACE'] ||= ENV['PWD']
         ENV['USER'] ||= "jenkins"
         ENV['ZUUL_BRANCH'] ||= Util.ci_default_branch
+        ENV['OS_TYPE'] = `cat /etc/issue | head -n 1 | awk '{print $1}'`.chomp.downcase
         pp ENV
         if File.file? "#{ENV['WORKSPACE']}/skip_jobs" then
             puts "Jobs skipped due to jenkins.opencontrail.org:/root/ci-test/skip_jobs"
