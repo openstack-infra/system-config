@@ -62,6 +62,12 @@ if [ "$SLAVE_MASTER" != "localhost" ]; then
         echo "$apt_proxy" >> /etc/apt/apt.conf
     fi
 
+    yum_proxy="proxy=http://$SLAVE_MASTER:3128"
+    grep --quiet "$yum_proxy" /etc/yum.conf
+    if [ "$?" != "0" ]; then
+        echo "$yum_proxy" >> /etc/yum.conf
+    fi
+
     # Set ssh-proxy for root and jenkins users.
     grep --quiet "ProxyCommand" /root/.ssh/config
     if [ "$?" != "0" ]; then
