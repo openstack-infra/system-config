@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -x
 
 #=======================================================================================
 #title           : backup.sh
@@ -24,7 +24,7 @@ fi
 
 date=`date +"%d-%m-%y"` 
 
-WORKDIR="/tmp/workdir_$$"
+WORKDIR="/backups"
 mkdir -p $WORKDIR
 
 cd $WORKDIR
@@ -36,18 +36,18 @@ for j in $FOUND_VMS
 do
 	virsh --connect qemu:///system suspend $j
 	PAUSED_VMS=`virsh --connect qemu:///system list | grep paused | wc -l`
+	echo $PAUSED_VMS | tee -a /tmp/logs
 	if [ $PAUSED_VMS -ne 1 ]; then 
-		echo "Something fishy, cannot continue backup... !!"
-		echo "Exiting... !!"
+		echo "Something fishy, cannot continue backup... !!" | tee -a /tmp/logs
+		echo "Exiting... !!" | tee -a /tmp/logs
 		exit 1
 	fi
 	
-	BACKUP_IMAGE=`echo $j | sed -e s%opencontrail\.org%%`
+	BACKUP_IMAGE=`echo $j | sed -e s%\.opencontrail\.org%%`
 
-	cp -v /var/lib/libvirt/images/$BACKUP_IMAGE*.opencontrail.org.vmdk $WORKDIR/"$BACKUP_IMAGE.opencontrail.org.vmdk-$date" >> /tmp/logs 
-	gzip "$i-$date" 
+	cp -v /var/lib/libvirt/images/$BACKUP_IMAGE*.opencontrail.org.vmdk $WORKDIR/"$BACKUP_IMAGE.opencontrail.org.vmdk-$date" | tee -a /tmp/logs 
+	gzip $WORKDIR/"$BACKUP_IMAGE.opencontrail.org.vmdk-$date" 
 	virsh --connect qemu:///system resume $j
 done
-
-# TBD
-# rsync, using ssh reverse tunnel
+echo "Done..." | tee -a /tmp/logs
+virsh --connect qemu:///system list | tee -a /tmp/logs
