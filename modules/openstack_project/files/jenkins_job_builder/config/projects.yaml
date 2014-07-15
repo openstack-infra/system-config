@@ -2881,6 +2881,17 @@
       - python-jobs
 
 - project:
+    name: puppet-n1k-vsm
+    github-org: stackforge
+    node: 'bare-precise || bare-trusty'
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - gate-{name}-puppet-lint
+      - gate-{name}-puppet-syntax
+      - puppet-module-unit
+
+- project:
     name: subunit2sql
     github-org: openstack-infra
     node: 'bare-precise || bare-trusty'

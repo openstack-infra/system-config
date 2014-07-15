@@ -3713,6 +3713,24 @@ projects:
     post:
       - mistral-extra-branch-tarball
 
+  - name: stackforge/puppet-n1k-vsm
+    check:
+      - gate-puppet-n1k-vsm-puppet-lint
+      - gate-puppet-n1k-vsm-puppet-syntax
+      - gate-puppet-n1k-vsm-puppet-unit-2.7
+      - gate-puppet-n1k-vsm-puppet-unit-3.1
+      - gate-puppet-n1k-vsm-puppet-unit-3.2
+      - gate-puppet-n1k-vsm-puppet-unit-3.3
+      - gate-puppet-n1k-vsm-puppet-unit-3.4
+    gate:
+      - gate-puppet-n1k-vsm-puppet-lint
+      - gate-puppet-n1k-vsm-puppet-syntax
+      - gate-puppet-n1k-vsm-puppet-unit-2.7
+      - gate-puppet-n1k-vsm-puppet-unit-3.1
+      - gate-puppet-n1k-vsm-puppet-unit-3.2
+      - gate-puppet-n1k-vsm-puppet-unit-3.3
+      - gate-puppet-n1k-vsm-puppet-unit-3.4
+
   - name: stackforge/python-congressclient
     check:
       - gate-python-congressclient-pep8

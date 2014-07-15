@@ -900,6 +900,9 @@
   description: OpenStack Keystone Puppet Module
   acl-config: /home/gerrit2/acls/stackforge/puppet-modules.config
   upstream: git://github.com/puppetlabs/puppetlabs-keystone.git
+- project: stackforge/puppet-n1k-vsm
+  description: Foreman Puppet installer for Cisco N1KV Virtual Supervisor Module
+  upstream: git://github.com/CiscoSystems/puppet-n1k-vsm
 - project: stackforge/puppet-neutron
   description: OpenStack Neutron Puppet Module
   acl-config: /home/gerrit2/acls/stackforge/puppet-modules.config
