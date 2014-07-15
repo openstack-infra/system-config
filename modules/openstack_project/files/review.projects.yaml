@@ -877,6 +877,9 @@
   group: murano
   upstream: git://github.com/Mirantis/murano-agent.git
   acl-config: /home/gerrit2/acls/stackforge/murano.config
+- project: stackforge/murano-apps
+  group: murano
+  acl-config: /home/gerrit2/acls/stackforge/murano.config
 - project: stackforge/murano-dashboard
   group: murano
   upstream: git://github.com/Mirantis/murano-dashboard.git

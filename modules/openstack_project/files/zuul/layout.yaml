@@ -3798,6 +3798,12 @@ projects:
     release:
       - murano-agent-tarball
 
+  - name: stackforge/murano-apps
+    check:
+      - noop
+    gate:
+      - noop
+
   - name: stackforge/murano
     template:
       - name: python-jobs
