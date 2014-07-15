@@ -449,6 +449,9 @@
   group: sahara
 - project: openstack/security-doc
   description: Documentation work from the OpenStack Security Group (OSSG)
+  group: openstack-manuals
+  options:
+    - direct-release
 - project: openstack/stevedore
   group: python-stevedore
   description: Manage dynamic plugins for Python applications
