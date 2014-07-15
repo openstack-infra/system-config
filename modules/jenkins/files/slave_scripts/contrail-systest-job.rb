@@ -169,7 +169,7 @@ def build_contrail_packages(repo = "#{ENV['WORKSPACE']}/repo")
     if get_os_type == "ubuntu1204" then
         Sh.run("ln -sf ubuntu1204 /cs-shared/builder/cache/ubuntu-12-04")
     elsif get_os_type == "centos64" then
-        Sh.run("ln -sf centos64_os /cs-shared/builder/cache/centos64")
+        Sh.run("ln -sf centos64 /cs-shared/builder/cache/centos64_os")
     end
 
     ENV['BUILD_ONLY'] = "1"
