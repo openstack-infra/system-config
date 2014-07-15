@@ -320,6 +320,7 @@ murano:
     projects:
       - stackforge/murano
       - stackforge/murano-agent
+      - stackforge/murano-apps
       - stackforge/murano-dashboard
       - stackforge/murano-deployment
       - stackforge/murano-docs
