@@ -3322,6 +3322,14 @@ projects:
       - gate-congress-pep8
       - gate-congress-python27
 
+  - name: openstack/congress-specs
+    check:
+      - gate-congress-specs-docs
+      - gate-congress-specs-python27
+    gate:
+      - gate-congress-specs-docs
+      - gate-congress-specs-python27
+
   - name: stackforge/cookbook-openstack-block-storage
     template:
       - name: chef-jobs
