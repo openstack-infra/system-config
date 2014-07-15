@@ -97,7 +97,6 @@ def setup_contrail(image)
         end
         Sh.run "ssh #{vm.vmname} /opt/contrail/contrail_packages/setup.sh", true
     }
-
 end
 
 # Update nova libvirt driver.
@@ -129,6 +128,9 @@ end
 
 def install_contrail
     vm = @vms.first
+
+    # Ensure that till contrail_fab is available
+    Sh.run("ssh #{vm.vmname} ls -1 /usr/local/jenkins/slave_scripts/ci-infra/contrail_fab", false, 200, 10)    
     Sh.run("scp #{@topo_file} #{vm.vmname}:/opt/contrail/utils/fabfile/testbeds/testbed.py", false, 20, 4)
     Sh.run "ssh #{vm.vmname} /usr/local/jenkins/slave_scripts/ci-infra/contrail_fab install_contrail"
     Sh.run "echo \"perl -ni -e 's/JVM_OPTS -Xss\\d+/JVM_OPTS -Xss512/g; print \\$_;' /etc/cassandra/cassandra-env.sh\" | ssh -t #{vm.vmname} \$(< /dev/fd/0)"
