@@ -839,3 +839,14 @@ tacker:
       - stackforge/python-tackerclient
     branches:
       - master
+
+congress:
+    events:
+      - patchset-created
+      - change-merged
+      - x-vrif-minus-2
+    projects:
+      - stackforge/congress
+      - stackforge/python-congressclient
+    branches:
+      - master
