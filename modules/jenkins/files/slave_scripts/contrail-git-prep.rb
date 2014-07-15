@@ -49,12 +49,15 @@ def self.setup_contrail_repo(use_public)
     # Fix hardcoded ubuntu to the flavor from jenkins slave label
     # e.g. ENV['NODE_LABELS' = "ci-10.84.35.174 juniper-tests swarm"
 
+    flavor = "ubuntu-12-04"
+    flavor = "centos64_os" if !ENV["OS_TYPE"].nil? and ENV["OS_TYPE"] == "centos"
+
     if use_public then
         Sh.run "repo init --repo-url 'https://github.com/opencontrail-ci-admin/git-repo' -u git@github.com:Juniper/contrail-vnc -b #{branch}"
     else
         branch = "mainline" if branch == "master"
         Sh.run "repo init --repo-url 'https://github.com/opencontrail-ci-admin/git-repo' -u git@github.com:Juniper/contrail-vnc-private " +
-           "-m #{branch}/ubuntu-12-04/manifest-havana.xml"
+           "-m #{branch}/#{flavor}/manifest-havana.xml"
     end
 
     # Sync the repo
