@@ -2298,10 +2298,12 @@
       - hook-{name}-rtfd
       - gate-{name}-tox-{envlist}:
           envlist: scaffolds-26
+          node: bare-centos6
       - gate-{name}-tox-{envlist}:
           envlist: scaffolds-27
       - gate-{name}-tox-{envlist}:
           envlist: scaffolds-33
+          node: bare-precise
       - gate-{name}-tox-{envlist}:
           envlist: wsme-stable
       - gate-{name}-tox-{envlist}:
