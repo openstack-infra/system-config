@@ -183,13 +183,15 @@ def build_contrail_packages(repo = "#{ENV['WORKSPACE']}/repo")
     Sh.run "rm -rf #{repo}/third_party/euca2ools/.git/shallow"
     Sh.run "cd #{repo}/tools/packaging/build/"
     Sh.run "./packager.py --sku havana"
-    Sh.run "ls -alh #{repo}/build/artifacts/contrail-install-packages_*_all.deb"
 
     # Return the all-in-one debian/rpm package file path.
-    cmd = "ls -1 #{repo}/build/artifacts/contrail-install-packages_*_all.deb"
     if ENV["OS_TYPE"] == "centos" then
+        Sh.run "ls -alrh #{repo}/build/artifacts/contrail-install-packages*.rpm"
         cmd = "ls -1 " +
-              "#{repo}/build/artifacts/contrail-install-packages_*_all.rpm"
+              "#{repo}/build/artifacts/contrail-install-packages*.rpm"
+    else
+        Sh.run "ls -alrh #{repo}/build/artifacts/contrail-install-packages_*_all.deb"
+        cmd = "ls -1 #{repo}/build/artifacts/contrail-install-packages_*_all.deb"
     end
     image, e = Sh.rrun(cmd)
     puts "Successfully built package #{image}"
