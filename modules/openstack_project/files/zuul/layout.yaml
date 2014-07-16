@@ -442,7 +442,7 @@ jobs:
     branch: ^master.*$
   - name: gate-tempest-dsvm-full
     queue-name: integrated
-  - name: check-rally-dsvm-neutron-neutron
+  - name: gate-rally-dsvm-neutron-neutron
     voting: false
   - name: ^(gate|check)-tempest-dsvm-neutron-full$
     voting: false
@@ -514,7 +514,7 @@ jobs:
     voting: false
   - name: gate-cinder-pylint
     voting: false
-  - name: check-rally-dsvm-cinder
+  - name: gate-rally-dsvm-cinder
     voting: false
   - name: dev-zuul-coverage
     voting: false
@@ -575,10 +575,10 @@ jobs:
   - name: gate-keystone-python33
     branch: ^(?!stable/(havana|icehouse)).*$
     voting: false
-  - name: check-rally-dsvm-keystone
+  - name: gate-rally-dsvm-keystone
     branch: ^(?!stable/(havana|icehouse)).*$
     voting: false
-  - name: check-rally-dsvm-glance
+  - name: gate-rally-dsvm-glance
     voting: false
   - name: gate-python-neutronclient-python33
     voting: false
@@ -674,7 +674,7 @@ jobs:
     voting: false
   - name: gate-tomograph-python33
     voting: false
-  - name: check-rally-dsvm-cli
+  - name: gate-rally-dsvm-cli
     voting: false
   - name: gate-stevedore-docs
     voting: false
@@ -771,7 +771,7 @@ projects:
     check:
       - gate-cinder-pylint
       - check-devstack-dsvm-cells
-      - check-rally-dsvm-cinder
+      - gate-rally-dsvm-cinder
     gate:
       - gate-devstack-dsvm-cells
     experimental:
@@ -866,7 +866,7 @@ projects:
       - check-devstack-dsvm-cells
       - gate-tempest-dsvm-large-ops
       - gate-tempest-dsvm-neutron-large-ops
-      - check-rally-dsvm-glance
+      - gate-rally-dsvm-glance
     gate:
       - gate-devstack-dsvm-cells
       - gate-tempest-dsvm-large-ops
@@ -989,7 +989,7 @@ projects:
       - gate-tempest-dsvm-large-ops
       - gate-tempest-dsvm-neutron-large-ops
       - check-swift-dsvm-functional
-      - check-rally-dsvm-keystone
+      - gate-rally-dsvm-keystone
     gate:
       - gate-devstack-dsvm-cells
       - gate-tempest-dsvm-large-ops
@@ -1061,7 +1061,7 @@ projects:
       - name: translation-jobs
     check:
       - check-neutron-dsvm-functional
-      - check-rally-dsvm-neutron-neutron
+      - gate-rally-dsvm-neutron-neutron
       - check-tempest-dsvm-neutron-2
       - check-tempest-dsvm-neutron-pg-2
     gate:
@@ -4535,15 +4535,17 @@ projects:
       - gate-rally-python27
       - gate-rally-install-bare-centos6
       - gate-rally-install-bare-precise
-      - check-rally-dsvm-rally
-      - check-rally-dsvm-neutron-rally
-      - check-rally-dsvm-cli
+      - gate-rally-dsvm-rally
+      - gate-rally-dsvm-neutron-rally
+      - gate-rally-dsvm-cli
     gate:
       - gate-rally-pep8
       - gate-rally-python26
       - gate-rally-python27
       - gate-rally-install-bare-centos6
       - gate-rally-install-bare-precise
+      - gate-rally-dsvm-rally
+      - gate-rally-dsvm-neutron-rally
     post:
       - rally-branch-tarball
       - rally-coverage

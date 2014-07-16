@@ -59,7 +59,7 @@
 
 
 - job-template:
-    name: 'check-rally-dsvm-{name}'
+    name: 'gate-rally-dsvm-{name}'
     node: 'devstack-precise || devstack-trusty'
 
     wrappers:
@@ -79,7 +79,7 @@
 
 
 - job-template:
-    name: 'check-rally-dsvm-neutron-{name}'
+    name: 'gate-rally-dsvm-neutron-{name}'
     node: 'devstack-precise || devstack-trusty'
 
     wrappers:
@@ -99,7 +99,7 @@
 
 
 - job:
-    name: 'check-rally-dsvm-cli'
+    name: 'gate-rally-dsvm-cli'
     node: 'devstack-precise || devstack-trusty'
 
     builders:
@@ -139,5 +139,5 @@
 - job-group:
     name: rally-jobs
     jobs:
-      - 'check-rally-dsvm-{name}'
-      - 'check-rally-dsvm-neutron-{name}'
+      - 'gate-rally-dsvm-{name}'
+      - 'gate-rally-dsvm-neutron-{name}'
