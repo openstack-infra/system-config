@@ -21,6 +21,11 @@
 
           function pre_test_hook {
               cd /opt/stack/new/designate/contrib/devstack
+
+              if [ -f gate-env.bash ]; then
+                source gate-env.bash
+              fi
+
               ./pre_test_hook.sh
           }
           export -f pre_test_hook
