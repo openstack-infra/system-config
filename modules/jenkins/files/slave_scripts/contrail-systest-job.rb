@@ -132,10 +132,8 @@ end
 def install_contrail
     vm = @vms.first
 
-    # Ensure that till contrail_fab is available
-    Sh.run("ssh #{vm.vmname} ls -1 /usr/local/jenkins/slave_scripts/ci-infra/contrail_fab", false, 200, 10)    
     Sh.run("scp #{@topo_file} #{vm.vmname}:/opt/contrail/utils/fabfile/testbeds/testbed.py", false, 20, 4)
-    Sh.run "ssh #{vm.vmname} /usr/local/jenkins/slave_scripts/ci-infra/contrail_fab install_contrail"
+    Sh.run "ssh #{vm.vmname} \"(cd /opt/contrail/utils; fab install_contrail)\""
     Sh.run "echo \"perl -ni -e 's/JVM_OPTS -Xss\\d+/JVM_OPTS -Xss512/g; print \\$_;' /etc/cassandra/cassandra-env.sh\" | ssh -t #{vm.vmname} \$(< /dev/fd/0)"
 
     return if @options.fab_tests.empty?
@@ -144,7 +142,7 @@ def install_contrail
     cmd = %{sed -i "s/setup_all\\(reboot=\\'True\\'\\)/setup_all\\(reboot=\\'False\\'\\)/g"}
     Sh.run("ssh #{vm.vmname} #{cmd} /opt/contrail/utils/fabfile/tasks/provision.py", true)
 
-    Sh.run "ssh #{vm.vmname} /usr/local/jenkins/slave_scripts/ci-infra/contrail_fab setup_all"
+    Sh.run "ssh #{vm.vmname} \"(cd /opt/contrail/utils; fab setup_all)\""
     Sh.run "ssh #{vm.vmname} reboot"
     sleep 30
 
@@ -239,7 +237,7 @@ def run_sanity(fab_test)
 
     fab_test = update_nova_libvirt_driver(fab_test)
 
-    cmd = "ssh #{@vms.first.vmname} \"(export TEST_RETRY_FACTOR=20.0 export TEST_DELAY_FACTOR=2; /usr/local/jenkins/slave_scripts/ci-infra/contrail_fab #{fab_test})\""
+    cmd = "ssh #{@vms.first.vmname} \"(export TEST_RETRY_FACTOR=20.0 export TEST_DELAY_FACTOR=2; cd /opt/contrail/utils; fab #{fab_test})\""
     o, exit_code = Sh.run(cmd, true)
 
     # Copy sanity log files, as the sub-slave VMs will go away.
