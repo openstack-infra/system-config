@@ -1,0 +1,5 @@
+plugins:
+    - name: shell_script
+      shell_script: /etc/turbo-hipster/scripts/noop_ci.sh
+      function: build:noop
+      shutdown-th: true
