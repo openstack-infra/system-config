@@ -226,6 +226,7 @@ EOF
         # Make sure that hostname is resolvable inside the VMs.
         @@vms.each { |vm|
             h, e = Sh.rrun("ssh #{vm.hostip} hostname", false, 100, 5)
+            Sh.run("ssh #{vm.hostip} cat /etc/hosts", false, 100, 5)
             Sh.run("ssh #{vm.hostip} ping -q -c 1 #{h}", false, 100, 5)
         }
     end
