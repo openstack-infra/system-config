@@ -175,7 +175,7 @@ def build_contrail_packages(repo = "#{ENV['WORKSPACE']}/repo")
     # Fetch build cache
     cache = "/cs-shared/builder/cache/#{get_os_type}/"
     Sh.run("mkdir -p #{cache}")
-    Sh.run("sshpass -p c0ntrail123 rsync -az --no-owner --no-group ci-admin@ubuntu-build02:/cs-shared/builder/cache/#{get_os_type}/ #{cache}")
+    Sh.run("sshpass -p c0ntrail123 rsync -acz --no-owner --no-group ci-admin@ubuntu-build02:/cs-shared/builder/cache/#{get_os_type}/ #{cache}")
     Sh.run("chown -R #{ENV['USER']}.#{ENV['USER']} #{cache}")
 
     if get_os_type == "ubuntu1204" then
