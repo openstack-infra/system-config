@@ -23,37 +23,6 @@ import argparse
 import magic
 import os
 import requests
-import tempfile
-
-
-def generate_log_index(file_list, logserver_prefix, swift_destination_prefix):
-    """Create an index of logfiles and links to them"""
-
-    output = '<html><head><title>Index of results</title></head><body>'
-    output += '<ul>'
-    for f in file_list:
-        file_url = os.path.join(logserver_prefix, swift_destination_prefix,
-                                f['filename'])
-
-        output += '<li>'
-        output += '<a href="%s">%s</a>' % (file_url, f['filename'])
-        output += '</li>'
-
-    output += '</ul>'
-    output += '</body></html>'
-    return output
-
-
-def make_index_file(file_list, logserver_prefix, swift_destination_prefix,
-                    index_filename='index.html'):
-    """Writes an index into a file for pushing"""
-
-    index_content = generate_log_index(file_list, logserver_prefix,
-                                       swift_destination_prefix)
-    tempdir = tempfile.mkdtemp()
-    fd = open(os.path.join(tempdir, index_filename), 'w')
-    fd.write(index_content)
-    return os.path.join(tempdir, index_filename)
 
 
 def get_file_mime(file_path):
@@ -115,7 +84,6 @@ def zuul_swift_upload(file_path, swift_url, swift_hmac_body, swift_signature,
     if os.path.isfile(file_path):
         file_list.append({'filename': os.path.basename(file_path),
                           'path': file_path})
-        index_file = file_path
     elif os.path.isdir(file_path):
         for path, folders, files in os.walk(file_path):
             for f in files:
@@ -123,16 +91,12 @@ def zuul_swift_upload(file_path, swift_url, swift_hmac_body, swift_signature,
                 relative_name = os.path.relpath(full_path, file_path)
                 file_list.append({'filename': relative_name,
                                   'path': full_path})
-        index_file = make_index_file(file_list, logserver_prefix,
-                                     swift_destination_prefix)
-        file_list.append({'filename': os.path.basename(index_file),
-                          'path': index_file})
 
     swift_form_post_submit(file_list, swift_url, swift_hmac_body,
                            swift_signature)
 
     return os.path.join(logserver_prefix, swift_destination_prefix,
-                        os.path.basename(index_file))
+                        os.path.basename(file_path))
 
 
 def grab_args():
