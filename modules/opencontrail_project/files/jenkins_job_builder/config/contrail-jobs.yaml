@@ -58,6 +58,25 @@
           ruby /usr/local/jenkins/slave_scripts/contrail-systest-job.rb --nodes 1
 
 - job-template:
+    name: 'ci-{name}-systest-centos'
+    node: juniper-tests-centos
+
+    wrappers:
+      - contrail-jobs-wrapper
+
+    builders:
+      - shell: |
+          #!/bin/bash -xe
+          export USER=jenkins
+          export JOB_NAME="contrail-systest-job-centos"
+          export PROJECT_NAME={name}
+          export WORKSPACE=$PWD
+          rm -rf $WORKSPACE/* $WORKSPACE/.* || true
+
+          /usr/bin/ci_setup.sh
+          ruby /usr/local/jenkins/slave_scripts/contrail-systest-job.rb --nodes 1
+
+- job-template:
     name: 'ci-{name}-devstack'
     node: 'devstack-tests'
 
@@ -90,6 +109,11 @@
     name: contrail-systest-jobs
     jobs:
       - 'ci-{name}-systest'
+
+- job-group:
+    name: contrail-systest-jobs-centos
+    jobs:
+      - 'ci-{name}-systest-centos'
 
 - job-group:
     name: contrail-devstack-jobs
