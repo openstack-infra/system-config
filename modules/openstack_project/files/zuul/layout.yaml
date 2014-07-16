@@ -701,6 +701,9 @@ jobs:
     voting: false
   - name: ^(gate|check)-marconi-python33
     branch: ^(?!stable/(havana|icehouse)).*$
+  # infra/config puppet targets
+  - name: ^(gate|check)-config-puppet-three.*$
+    voting: false
 
 # The project list is grouped by type of project, and within each
 # group, projects are sorted (mostly) alphabetically.
@@ -2644,6 +2647,8 @@ projects:
       - gate-config-puppet-syntax
       - gate-config-puppet-apply-precise
       - gate-config-puppet-apply-centos6
+      - gate-config-puppet-three-apply-precise
+      - gate-config-puppet-three-apply-centos6
       - gate-config-irc-access
       - gate-ci-docs
       - check-projects-yaml-alphabetized

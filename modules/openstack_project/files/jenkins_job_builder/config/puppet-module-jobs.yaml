@@ -51,6 +51,17 @@
       - console-log
 
 - job-template:
+    name: 'gate-{name}-puppet-three-apply-precise'
+    node: 'bare-precise || bare-trusty'
+
+    builders:
+      - gerrit-git-prep
+      - puppet-three-apply
+
+    publishers:
+      - console-log
+
+- job-template:
     name: 'gate-{name}-puppet-apply-centos6'
     node: bare-centos6
 
@@ -60,6 +71,23 @@
 
     publishers:
       - console-log
+
+- job-template:
+    name: 'gate-{name}-puppet-three-apply-centos6'
+    node: bare-centos6
+
+    builders:
+      - gerrit-git-prep
+      - puppet-three-apply
+
+    publishers:
+      - console-log
+
+- job-group:
+    name: 'gate-{name}-puppet-three-apply'
+    jobs:
+      - 'gate-{name}-puppet-three-apply-centos6'
+      - 'gate-{name}-puppet-three-apply-precise'
 
 - job-group:
     name: 'gate-{name}-puppet-apply'

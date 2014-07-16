@@ -118,6 +118,11 @@
       - shell: "./test.sh"
 
 - builder:
+    name: puppet-three-apply
+    builders:
+      - shell: "./test.sh --three"
+
+- builder:
     name: chef-bundler-prep
     builders:
       - shell: |
