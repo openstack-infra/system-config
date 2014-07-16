@@ -24,6 +24,7 @@ import magic
 import os
 import requests
 import tempfile
+import time
 
 
 def generate_log_index(file_list, logserver_prefix, swift_destination_prefix):
@@ -85,28 +86,28 @@ def swift_form_post_submit(file_list, url, hmac_body, signature):
      payload['expires']) = hmac_body.split('\n')
     payload['signature'] = signature
 
-    if len(file_list) > payload['max_file_count']:
-        # We can't upload this many files! We'll do what we can but the job
-        # should be reconfigured
-        file_list = file_list[:payload['max_file_count']]
+    # Loop over the file list in chunks of max_file_count
+    for sub_file_list in (file_list[pos:pos + payload['max_file_count']]
+                          for pos in xrange(0, len(file_list),
+                                            payload['max_file_count'])):
+        if payload['expires'] < time.time():
+            raise Exception("Ran out of time uploading files!")
+        files = {}
+        # Zuul's log path is generated without a tailing slash. As such the
+        # object prefix does not contain a slash and the files would be
+        # uploaded as 'prefix' + 'filename'. Assume we want the destination
+        # url to look like a folder and make sure there's a slash between.
+        filename_prefix = '/' if url[-1] != '/' else ''
+        for i, f in enumerate(sub_file_list):
+            files['file%d' % (i + 1)] = (filename_prefix + f['filename'],
+                                         open(f['path'], 'rb'),
+                                         get_file_mime(f['path']))
 
-    files = {}
-
-    # Zuul's log path is generated without a tailing slash. As such the
-    # object prefix does not contain a slash and the files would be
-    # uploaded as 'prefix' + 'filename'. Assume we want the destination
-    # url to look like a folder and make sure there's a slash between.
-    filename_prefix = '/' if url[-1] != '/' else ''
-    for i, f in enumerate(file_list):
-        files['file%d' % (i + 1)] = (filename_prefix + f['filename'],
-                                     open(f['path'], 'rb'),
-                                     get_file_mime(f['path']))
-
-    requests.post(url, data=payload, files=files)
+        requests.post(url, data=payload, files=files)
 
 
-def zuul_swift_upload(file_path, swift_url, swift_hmac_body, swift_signature,
-                      logserver_prefix, swift_destination_prefix):
+def build_file_list(file_path, logserver_prefix, swift_destination_prefix,
+                    create_dir_indexes=True):
     """Upload to swift using instructions from zuul"""
 
     # file_list: a list of dicts with {path=..., filename=...} where filename
@@ -115,24 +116,32 @@ def zuul_swift_upload(file_path, swift_url, swift_hmac_body, swift_signature,
     if os.path.isfile(file_path):
         file_list.append({'filename': os.path.basename(file_path),
                           'path': file_path})
-        index_file = file_path
     elif os.path.isdir(file_path):
         for path, folders, files in os.walk(file_path):
+            folder_contents = []
             for f in files:
                 full_path = os.path.join(path, f)
                 relative_name = os.path.relpath(full_path, file_path)
-                file_list.append({'filename': relative_name,
-                                  'path': full_path})
-        index_file = make_index_file(file_list, logserver_prefix,
-                                     swift_destination_prefix)
-        file_list.append({'filename': os.path.basename(index_file),
-                          'path': index_file})
+                push_file = {'filename': relative_name,
+                             'path': full_path}
+                folder_contents.append(push_file)
+                file_list.append(push_file)
 
-    swift_form_post_submit(file_list, swift_url, swift_hmac_body,
-                           swift_signature)
+            for f in folders:
+                full_path = os.path.join(path, f) + '/'
+                relative_name = os.path.relpath(full_path, file_path)
+                folder_contents.append({'filename': relative_name,
+                                        'path': full_path})
 
-    return os.path.join(logserver_prefix, swift_destination_prefix,
-                        os.path.basename(index_file))
+            if create_dir_indexes:
+                index_file = make_index_file(folder_contents, logserver_prefix,
+                                             swift_destination_prefix)
+                file_list.append({
+                    'filename': os.path.join(os.path.dirname(relative_name),
+                                             os.path.basename(index_file)),
+                    'path': index_file})
+
+    return file_list
 
 
 def grab_args():
@@ -140,24 +149,57 @@ def grab_args():
     parser = argparse.ArgumentParser(
         description="Upload results to swift using instructions from zuul"
     )
+    parser.add_argument('--no-indexes', action='store_true',
+                        help='do not generate any indexes at all')
+    parser.add_argument('--no-root-index', action='store_true',
+                        help='do not generate a root index')
+    parser.add_argument('--no-dir-indexes', action='store_true',
+                        help='do not generate a indexes inside dirs')
     parser.add_argument('-n', '--name', default="logs",
                         help='The instruction-set to use')
     parser.add_argument('files', nargs='+', help='the file(s) to upload')
 
     return parser.parse_args()
 
+
 if __name__ == '__main__':
     args = grab_args()
+    file_list = []
+    root_list = []
+
+    try:
+        logserver_prefix = os.environ['SWIFT_%s_LOGSERVER_PREFIX' % args.name]
+        swift_destination_prefix = os.environ['LOG_PATH']
+        swift_url = os.environ['SWIFT_%s_URL' % args.name]
+        swift_hmac_body = os.environ['SWIFT_%s_HMAC_BODY' % args.name]
+        swift_signature = os.environ['SWIFT_%s_SIGNATURE' % args.name]
+    except KeyError as e:
+        print 'Environment variable %s not found' % e
+        quit()
+
     for file_path in args.files:
-        try:
-            result_url = zuul_swift_upload(
-                file_path,
-                os.environ['SWIFT_%s_URL' % args.name],
-                os.environ['SWIFT_%s_HMAC_BODY' % args.name],
-                os.environ['SWIFT_%s_SIGNATURE' % args.name],
-                os.environ['SWIFT_%s_LOGSERVER_PREFIX' % args.name],
-                os.environ['LOG_PATH']
-            )
-            print result_url
-        except KeyError as e:
-            print 'Environment variable %s not found' % e
+        if os.path.isfile(file_path):
+            root_list.append({'filename': os.path.basename(file_path),
+                              'path': file_path})
+        else:
+            root_list.append({'filename': os.path.basename(file_path) + '/',
+                              'path': file_path})
+
+        file_list += build_file_list(
+            file_path, logserver_prefix, swift_destination_prefix,
+            (not (args.no_indexes and args.no_dir_indexes))
+        )
+
+    index_file = ''
+    if not (args.no_indexes and args.no_root_index):
+        index_file = make_index_file(root_list, logserver_prefix,
+                                     swift_destination_prefix)
+        file_list.append({
+            'filename': os.path.basename(index_file),
+            'path': index_file})
+
+    swift_form_post_submit(file_list, swift_url, swift_hmac_body,
+                           swift_signature)
+
+    print os.path.join(logserver_prefix, swift_destination_prefix,
+                       os.path.basename(index_file))
