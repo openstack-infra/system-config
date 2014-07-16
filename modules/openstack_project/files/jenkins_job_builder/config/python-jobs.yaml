@@ -44,7 +44,8 @@
       - pep8:
           github-org: '{github-org}'
           project: '{name}'
-      - zuul_swift_upload_console_log
+      - zuul_swift_upload_logs_with_console_gen_index:
+          upload_source: '.tox/pep8/log'
 
     publishers:
       - console-log
