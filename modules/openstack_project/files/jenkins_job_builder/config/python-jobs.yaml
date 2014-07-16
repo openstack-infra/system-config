@@ -46,6 +46,9 @@
           project: '{name}'
       - zuul_swift_upload_console_log
 
+    publishers:
+      - console-log
+
     node: '{node}'
 
 - job-template:
