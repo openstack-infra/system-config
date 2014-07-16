@@ -534,6 +534,8 @@ jobs:
     voting: false
     files:
       - 'modules/openstack_project/files/accessbot/channels.yaml'
+  - name: check-tripleo-overcloud-HA
+    voting: false
 # Continous publishing from master of the following documentation targets:
   - name: ^.*manuals-upstream-translation-update$
     branch: master
@@ -2288,6 +2290,7 @@ projects:
       - check-tripleo-undercloud-precise
       - check-tripleo-ironic-undercloud-precise
       - check-tripleo-overcloud-f20
+      - check-tripleo-overcloud-HA
     gate:
       - noop
     experimental-tripleo:
@@ -2309,6 +2312,7 @@ projects:
       - check-tripleo-undercloud-precise
       - check-tripleo-ironic-undercloud-precise
       - check-tripleo-overcloud-f20
+      - check-tripleo-overcloud-HA
     gate:
       - noop
     experimental-tripleo:
@@ -2324,6 +2328,7 @@ projects:
       - check-tripleo-undercloud-precise
       - check-tripleo-ironic-undercloud-precise
       - check-tripleo-overcloud-f20
+      - check-tripleo-overcloud-HA
     gate:
       - gate-tripleo-incubator-docs
     experimental-tripleo:
