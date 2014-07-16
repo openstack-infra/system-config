@@ -1,5 +1,5 @@
 - job:
-    name: 'check-tripleo-ironic-seed-precise'
+    name: 'check-tripleo-ironic-seed-precise-nonha'
     node: 'tripleo-precise'
 
     wrappers:
@@ -20,6 +20,7 @@
           export GEARDSERVER=192.168.1.1
           export DIB_COMMON_ELEMENTS="common-venv stackuser pypi-openstack"
           export TRIPLEO_TEST=seed
+          export OVERCLOUD_CONTROLSCALE=1
           export USE_IRONIC=1
           sudo chown -hR $(whoami) /opt/git
           function gate_hook {
@@ -40,7 +41,7 @@
       - console-log
 
 - job:
-    name: 'check-tripleo-novabm-undercloud-precise'
+    name: 'check-tripleo-novabm-undercloud-precise-nonha'
     node: 'tripleo-precise'
 
     wrappers:
@@ -61,6 +62,7 @@
           export GEARDSERVER=192.168.1.1
           export DIB_COMMON_ELEMENTS="common-venv stackuser pypi-openstack"
           export TRIPLEO_TEST=undercloud
+          export OVERCLOUD_CONTROLSCALE=1
           export USE_IRONIC=0
           sudo chown -hR $(whoami) /opt/git
           function gate_hook {
@@ -81,7 +83,7 @@
       - console-log
 
 - job:
-    name: 'check-tripleo-ironic-undercloud-precise'
+    name: 'check-tripleo-ironic-undercloud-precise-nonha'
     node: 'tripleo-precise'
 
     wrappers:
@@ -102,6 +104,7 @@
           export GEARDSERVER=192.168.1.1
           export DIB_COMMON_ELEMENTS="common-venv stackuser pypi-openstack"
           export TRIPLEO_TEST=undercloud
+          export OVERCLOUD_CONTROLSCALE=1
           export USE_IRONIC=1
           sudo chown -hR $(whoami) /opt/git
           function gate_hook {
@@ -122,7 +125,7 @@
       - console-log
 
 - job:
-    name: 'check-tripleo-novabm-overcloud-precise'
+    name: 'check-tripleo-novabm-overcloud-precise-nonha'
     node: 'tripleo-precise'
 
     wrappers:
@@ -143,6 +146,7 @@
           export GEARDSERVER=192.168.1.1
           export DIB_COMMON_ELEMENTS="common-venv stackuser pypi-openstack"
           export TRIPLEO_TEST=overcloud
+          export OVERCLOUD_CONTROLSCALE=1
           export USE_IRONIC=0
           sudo chown -hR $(whoami) /opt/git
           function gate_hook {
@@ -163,7 +167,7 @@
       - console-log
 
 - job:
-    name: 'check-tripleo-novabm-overcloud-f20'
+    name: 'check-tripleo-novabm-overcloud-f20-nonha'
     node: 'tripleo-f20'
 
     wrappers:
@@ -185,6 +189,7 @@
           export DIB_COMMON_ELEMENTS="common-venv stackuser pypi-openstack"
           export TRIPLEO_TEST=overcloud
           sudo chown -hR $(whoami) /opt/git
+          export OVERCLOUD_CONTROLSCALE=1
           function gate_hook {
               bash -xe /opt/stack/new/tripleo-ci/toci_gate_test.sh
           }
@@ -203,7 +208,48 @@
       - console-log
 
 - job:
-    name: 'check-tripleo-ironic-vlan-precise'
+    name: 'check-tripleo-ironic-overcloud-precise-ha'
+    node: 'tripleo-precise'
+
+    wrappers:
+      - build-timeout:
+          timeout: 145
+      - timestamps
+
+    builders:
+      - link-logs
+      - net-info
+      - devstack-checkout
+      - shell: |
+          #!/bin/bash -xe
+          export PYTHONUNBUFFERED=true
+          export DEVSTACK_GATE_TIMEOUT=140
+          export DEVSTACK_GATE_TEMPEST=0
+          export DEVSTACK_GATE_EXERCISES=0
+          export GEARDSERVER=192.168.1.1
+          export DIB_COMMON_ELEMENTS="common-venv stackuser pypi-openstack"
+          export TRIPLEO_TEST=overcloud
+          export OVERCLOUD_CONTROLSCALE=3
+          export USE_IRONIC=1
+          function gate_hook {
+              bash -xe /opt/stack/new/tripleo-ci/toci_gate_test.sh
+          }
+          export -f gate_hook
+          cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
+          ./safe-devstack-vm-gate-wrap.sh
+
+    publishers:
+      - scp:
+          site: 'static.openstack.org'
+          files:
+            - target: 'logs/$LOG_PATH'
+              source: 'logs/**'
+              keep-hierarchy: true
+              copy-after-failure: true
+      - console-log
+
+- job:
+    name: 'check-tripleo-ironic-vlan-precise-nonha'
     node: 'tripleo-precise'
 
     wrappers:
@@ -224,6 +270,7 @@
           export GEARDSERVER=192.168.1.1
           export DIB_COMMON_ELEMENTS="common-venv stackuser pypi-openstack"
           export TRIPLEO_TEST=vlan
+          export OVERCLOUD_CONTROLSCALE=1
           export USE_IRONIC=1
           sudo chown -hR $(whoami) /opt/git
           function gate_hook {
