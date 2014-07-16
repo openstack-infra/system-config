@@ -285,6 +285,9 @@ def run_test(image = @options.image)
     setup_sanity
     verify_contrail
 
+    # Ignore exit code from now onwards..
+    Sh.always_exit_as_success = true
+
     exit_code = 0
     @options.fab_tests.each { |fab_test|
         exit_code = run_sanity(fab_test)
@@ -396,8 +399,6 @@ def main
         @options.image = build_contrail_packages
     end
 
-    # Ignore exit code from now onwards..
-    Sh.always_exit_as_success = true
     exit_code = 0
     wait_time = 60 * 3 # 3 hours
 
