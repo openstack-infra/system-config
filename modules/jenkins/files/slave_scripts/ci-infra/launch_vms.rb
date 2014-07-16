@@ -188,7 +188,7 @@ class Vm
 
         metadata = "--meta slave-master=#{Vm.get_interface_ip}"
         1.upto(count) { |i|
-            vmname = "ci-oc-subslave-#{floatingip}-#{i}"
+            vmname = "ci-oc-subslave-#{ENV["OS_TYPE"]}-#{floatingip}-#{i}"
             vmname.gsub!(/\./, '-')
             vmname += ".localdomain.com"
 
@@ -221,6 +221,12 @@ EOF
         # Wait for all VMs to come up.
         @@vms.each { |vm|
             Sh.run("scp /etc/hosts #{vm.hostip}:/etc/.", false, 100, 5)
+        }
+
+        # Make sure that hostname is resolvable inside the VMs.
+        @@vms.each { |vm|
+            h, e = Sh.rrun("ssh #{vm.hostip} hostname")
+            Sh.run("ssh #{vm.hostip} ping -q -c 1 #{h}", false, 10, 6)
         }
     end
 
@@ -271,6 +277,7 @@ def parse_options
 end
 
 def main
+    Util.ci_setup
     parse_options
     Vm.create_slaves
 end
