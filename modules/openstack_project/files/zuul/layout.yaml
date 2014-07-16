@@ -2288,6 +2288,7 @@ projects:
       - check-tripleo-undercloud-precise
       - check-tripleo-ironic-undercloud-precise
       - check-tripleo-overcloud-f20
+      - check-tripleo-overcloud-HA
     gate:
       - noop
     experimental-tripleo:
@@ -2309,6 +2310,7 @@ projects:
       - check-tripleo-undercloud-precise
       - check-tripleo-ironic-undercloud-precise
       - check-tripleo-overcloud-f20
+      - check-tripleo-overcloud-HA
     gate:
       - noop
     experimental-tripleo:
@@ -2324,6 +2326,7 @@ projects:
       - check-tripleo-undercloud-precise
       - check-tripleo-ironic-undercloud-precise
       - check-tripleo-overcloud-f20
+      - check-tripleo-overcloud-HA
     gate:
       - gate-tripleo-incubator-docs
     experimental-tripleo:
