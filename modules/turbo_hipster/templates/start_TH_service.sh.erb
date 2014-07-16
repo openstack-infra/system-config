@@ -1,0 +1,13 @@
+#!/bin/bash
+# ==================================================
+# = This file is managed by puppet, modifications  =
+# = to it will not be persistent.                  =
+# ==================================================
+
+# start up turbo-hipster.
+if [ $(ps -eaf |grep -ci "\/[t]urbo-hipster ") -gt 0 ]
+then
+  /etc/init.d/turbo-hipster restart
+else
+  /etc/init.d/turbo-hipster start
+fi

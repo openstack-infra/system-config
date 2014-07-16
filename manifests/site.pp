@@ -576,6 +576,7 @@ node 'zuul-dev.openstack.org' {
       'jenkins06.openstack.org',
       'jenkins07.openstack.org',
       'jenkins-dev.openstack.org',
+      'turbo-hipster-dev.openstack.org',
     ],
   }
 }
@@ -644,6 +645,17 @@ node 'openstackid-dev.openstack.org' {
     ssl_cert_file_contents  => hiera('openstackid_dev_ssl_cert_file_contents', 'XXX'),
     ssl_key_file_contents   => hiera('openstackid_dev_ssl_key_file_contents', 'XXX'),
     ssl_chain_file_contents => hiera('openstackid_dev_ssl_chain_file_contents', 'XXX'),
+  }
+}
+
+node 'turbo-hipster-dev.openstack.org' {
+  class { 'openstack_project::turbo_hipster':
+    sysadmins              => hiera('sysadmins', []),
+    ssh_private_key        => hiera('th_dev_ssh_private_key_contents', 'XXX'),
+    th_repo                => 'https://git.openstack.org/stackforge/turbo-hipster',
+    gerrit_site            => 'http://review-dev.openstack.org',
+    gearman_server         => 'zuul-dev.openstack.org',
+    gearman_port           => 4730,
   }
 }
 
