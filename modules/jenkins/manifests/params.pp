@@ -43,6 +43,7 @@ class jenkins::params {
         $cgconfig_require = Package['cgroups']
         $cgred_require = Package['cgroups']
       }
+      $fixtures = 'python-fixtures'
     }
     'Debian': {
       # common packages
