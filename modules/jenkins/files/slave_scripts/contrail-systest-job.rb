@@ -132,6 +132,11 @@ end
 def install_contrail
     vm = @vms.first
 
+    # XXX Temporary hack. Fix this in the base image itself.
+    if get_os_type == "centos64" then
+        Sh.run("ssh #{vm.vmname} yum -y remove augeas-libs-0.9.0-4.el6.x86_64 gnutls-devel-2.8.5-10.el6_4.2.x86_64", true)
+    end
+
     Sh.run("scp #{@topo_file} #{vm.vmname}:/opt/contrail/utils/fabfile/testbeds/testbed.py", false, 20, 4)
     Sh.run "ssh #{vm.vmname} \"(cd /opt/contrail/utils; fab install_contrail)\""
     Sh.run "echo \"perl -ni -e 's/JVM_OPTS -Xss\\d+/JVM_OPTS -Xss512/g; print \\$_;' /etc/cassandra/cassandra-env.sh\" | ssh -t #{vm.vmname} \$(< /dev/fd/0)"
