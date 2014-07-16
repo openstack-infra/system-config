@@ -67,7 +67,8 @@ NameVirtualHost <%= vhost_name %>:<%= port %>
   RewriteCond %{DOCUMENT_ROOT}%{REQUEST_FILENAME} !-f
   RewriteCond %{DOCUMENT_ROOT}%{REQUEST_FILENAME} !-d
   RewriteCond %{DOCUMENT_ROOT}%{REQUEST_FILENAME} !-l
-  RewriteRule ^/(.*)$ /htmlify/$1 [QSA,L,PT]
+  RewriteCond %{REQUEST_FILENAME} !^/icon
+  RewriteRule ^/(.*)$ /htmlify/$1 [QSA,L]
 
   WSGIScriptAlias /htmlify /usr/local/lib/python2.7/dist-packages/os_loganalyze/wsgi.py
 
