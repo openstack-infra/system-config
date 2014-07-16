@@ -398,6 +398,8 @@ def main
         @options.image = build_contrail_packages
     end
 
+    # Ignore exit code from now onwards..
+    Sh.always_exit_as_success = true if ENV["OS_TYPE"] != "ubuntu"
     exit_code = 0
     wait_time = 60 * 3 # 3 hours
 
