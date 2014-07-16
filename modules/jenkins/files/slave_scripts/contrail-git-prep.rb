@@ -75,8 +75,8 @@ def self.switch_gerrit_repo
     # Find the project git repo based on .repo/manifest.xml file
     out, e = Sh.rrun "\grep name=\\\"#{@project} .repo/manifest.xml"
     if out !~ /path=\"(.*?)\"/ then
-        puts "Error! Cannot find project #{@project} path in .repo/manifest.xml"
-        exit -1
+        puts "Warning! Cannot find project #{@project} path in .repo/manifest.xml"
+        exit 0
     end
 
     old_project = $1
