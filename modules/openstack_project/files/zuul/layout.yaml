@@ -3681,6 +3681,7 @@ projects:
       - gate-python-mistralclient-python27
       - gate-python-mistralclient-python33
       - gate-python-mistralclient-docs
+      - gate-mistral-devstack-dsvm
     gate:
       - gate-python-mistralclient-pep8
       - gate-python-mistralclient-python26
