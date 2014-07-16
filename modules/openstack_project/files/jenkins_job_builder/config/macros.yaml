@@ -330,6 +330,58 @@
          upload_source: '/tmp/consoleText'
 
 
+- builder:
+    name: zuul_swift_upload_logs_with_console
+    builders:
+      - zuul_swift_upload_logs:
+         upload_source: '{upload_source}'
+      - zuul_swift_upload_console_log
+
+
+- builder:
+    name: zuul_swift_gen_index
+    builders:
+      - shell: "/usr/local/jenkins/slave_scripts/zuul_swift_gen_index.py --name {zuul_log_instruction_set} --output {index_destination} {file_list}"
+
+
+- builder:
+    name: zuul_swift_upload_logs_gen_index
+    builders:
+      - zuul_swift_upload_logs:
+         upload_source: '{upload_source}'
+      - zuul_swift_gen_index:
+         zuul_log_instruction_set: logs
+         index_destination: '/tmp/logIndex'
+         file_list: '{upload_source}'
+      - zuul_swift_upload_logs:
+         upload_source: '/tmp/logIndex'
+
+
+- builder:
+    name: zuul_swift_upload_console_log_gen_index
+    builders:
+      - zuul_swift_upload_console_log
+      - zuul_swift_gen_index:
+         zuul_log_instruction_set: logs
+         index_destination: '/tmp/logIndex'
+         file_list: '/tmp/consoleText'
+      - zuul_swift_upload_logs:
+         upload_source: '/tmp/logIndex'
+
+
+- builder:
+    name: zuul_swift_upload_logs_with_console_gen_index
+    builders:
+      - zuul_swift_upload_logs:
+         upload_source: '{upload_source}'
+      - zuul_swift_upload_console_log
+      - zuul_swift_gen_index:
+         zuul_log_instruction_set: logs
+         index_destination: '/tmp/logIndex'
+         file_list: '{upload_source} /tmp/consoleText'
+      - zuul_swift_upload_logs:
+         upload_source: '/tmp/logIndex'
+
 
 # ======================================================================
 
