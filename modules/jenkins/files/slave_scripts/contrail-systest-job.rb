@@ -135,6 +135,7 @@ def install_contrail
     # XXX Temporary hack. Fix this in the base image itself.
     if get_os_type == "centos64" then
         Sh.run("ssh #{vm.vmname} yum -y remove augeas-libs-0.9.0-4.el6.x86_64 gnutls-devel-2.8.5-10.el6_4.2.x86_64", true)
+        Sh.run("service squid start", false)
     end
 
     Sh.run("scp #{@topo_file} #{vm.vmname}:/opt/contrail/utils/fabfile/testbeds/testbed.py", false, 20, 4)
