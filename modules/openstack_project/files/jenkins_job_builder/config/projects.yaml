@@ -1626,6 +1626,8 @@
       - '{pipeline}-requirements-integration-dsvm':
           pipeline: check
           node: 'devstack-precise || devstack-trusty'
+      - '{pipeline}-requirements-integration-py26-dsvm':
+          pipeline: experimental
 
 - project:
     name: tempest
