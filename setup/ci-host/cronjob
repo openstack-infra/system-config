@@ -1,0 +1,31 @@
+#!/bin/bash -x
+
+HOSTNAME=`hostname`
+HOST=148.251.46.180
+SSH_HOST=root@$HOST
+date=`date +"%d-%m-%y"`
+BACKUP_LOC="/ci-admin/images/ci-infra-backup/backups/"
+puppetmaster="ci-puppetmaster.opencontrail.org.vmdk-$date.gz"
+puppetdb="puppetdb.opencontrail.org.vmdk-$date.gz"
+review="review.opencontrail.org.vmdk-$date.gz"
+zuul="zuul.opencontrail.org.vmdk-$date.gz"
+jenkins="jenkins.opencontrail.org.vmdk-$date.gz"
+
+echo $puppetmaster $puppetdb $review $zuul $jenkins
+
+#Suspend vms and copy to a temporary location root@148.251.46.180:/backups
+ssh ${SSH_HOST} " ( 
+	bash -x /root/backup.sh
+) "
+
+#backup vms to a filer
+for vm in $puppetmaster $puppetdb $review $zuul $jenkins
+do
+	scp root@148.251.46.180:/backups/$vm $BACKUP_LOC
+done
+
+#save space
+for rm_vm in $puppetmaster $puppetdb $review $zuul $jenkins
+do
+	ssh root@148.251.46.180 rm /backups/$rm_vm
+done
