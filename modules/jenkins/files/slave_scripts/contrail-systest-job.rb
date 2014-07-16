@@ -292,7 +292,6 @@ def run_test(image = @options.image)
     @options.fab_tests.each { |fab_test|
         exit_code = run_sanity(fab_test)
         break if exit_code != 0
-        exit_code = run_sanity(fab_test)
     }
 
     Sh.run("lynx --dump #{ENV['WORKSPACE']}/logs_*/*/test_report.html", true)
