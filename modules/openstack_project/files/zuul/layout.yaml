@@ -4840,9 +4840,9 @@ projects:
 
   - name: stackforge/tacker
     check:
-      - noop
+      - gate-tacker-pep8
     gate:
-      - noop
+      - gate-tacker-pep8
 
   - name: stackforge/tacker-specs
     check:

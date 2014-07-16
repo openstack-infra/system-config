@@ -404,6 +404,14 @@
       - pypi-jobs
 
 - project:
+    name: tacker
+    github-org: stackforge
+    node: 'bare-precise || bare-trusty'
+
+    jobs:
+      - gate-{name}-pep8
+
+- project:
     name: kwapi
     github-org: stackforge
     node: 'bare-precise || bare-trusty'
