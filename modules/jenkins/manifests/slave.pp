@@ -53,6 +53,11 @@ class jenkins::slave(
           package { $::jenkins::params::mysql_package:
               ensure => present,
           }
+          # Installing Fedora rpm for fixtures, fix the 
+          # Bug 1330763
+          package { $::jenkins::params::fixtures:
+              ensure => present,
+          }
       } else {
           exec { 'update-java-alternatives':
             unless   => '/bin/ls -l /etc/alternatives/java | /bin/grep 1.7.0-openjdk',
