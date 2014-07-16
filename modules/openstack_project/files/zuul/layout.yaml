@@ -584,8 +584,6 @@ jobs:
     voting: false
   - name: gate-python-neutronclient-python33
     voting: false
-  - name: gate-python-openstackclient-python33
-    voting: false
   - name: gate-python-troveclient-pypy
     voting: false
   - name: gate-magnetodb-python26
@@ -1535,13 +1533,12 @@ projects:
   - name: openstack/python-openstackclient
     template:
       - name: python-jobs
+      - name: python3-jobs
       - name: openstack-client-publish-jobs
       - name: check-requirements
       - name: integrated-gate
       - name: stable-compat-jobs
       - name: publish-to-pypi
-    check:
-      - gate-python-openstackclient-python33
 
   - name: openstack/python-saharaclient
     template:
