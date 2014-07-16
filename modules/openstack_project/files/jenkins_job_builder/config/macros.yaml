@@ -327,8 +327,15 @@
     builders:
       - shell: "/usr/local/jenkins/slave_scripts/grab_console_log.sh"
       - zuul_swift_upload_logs:
-         upload_source: '/tmp/consoleText'
+         upload_source: '/tmp/console.txt'
 
+
+- builder:
+    name: zuul_swift_upload_logs_with_console
+    builders:
+      - shell: "/usr/local/jenkins/slave_scripts/grab_console_log.sh"
+      - zuul_swift_upload_logs:
+         upload_source: '{upload_source} /tmp/console.txt'
 
 
 # ======================================================================
