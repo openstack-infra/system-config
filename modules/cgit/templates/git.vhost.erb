@@ -2,10 +2,10 @@
   ServerName <%= scope.lookupvar("cgit::vhost_name") %>
   ServerAdmin <%= scope.lookupvar("cgit::serveradmin") %>
 
-<% if serveraliases.is_a? Array -%>
-<% serveraliases.each do |name| -%><%= "  ServerAlias #{name}\n" %><% end -%>
-<% elsif serveraliases != '' -%>
-<%= "  ServerAlias #{serveraliases}" -%>
+<% if @serveraliases.is_a? Array -%>
+<% @serveraliases.each do |name| -%><%= "  ServerAlias #{name}\n" %><% end -%>
+<% elsif @serveraliases != '' -%>
+<%= "  ServerAlias #{@serveraliases}" -%>
 <% end -%>
 
   Alias /cgit-data /usr/share/cgit
@@ -33,10 +33,10 @@
   ServerName <%= scope.lookupvar("cgit::vhost_name") %>
   ServerAdmin <%= scope.lookupvar("cgit::serveradmin") %>
 
-<% if serveraliases.is_a? Array -%>
+<% if @serveraliases.is_a? Array -%>
 <% serveraliases.each do |name| -%><%= "  ServerAlias #{name}\n" %><% end -%>
-<% elsif serveraliases != '' -%>
-<%= "  ServerAlias #{serveraliases}" -%>
+<% elsif @serveraliases != '' -%>
+<%= "  ServerAlias #{@serveraliases}" -%>
 <% end -%>
 
   Alias /cgit-data /usr/share/cgit
