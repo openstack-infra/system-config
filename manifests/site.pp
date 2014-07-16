@@ -661,4 +661,15 @@ node 'openstackid-dev.openstack.org' {
   }
 }
 
+node 'turbo-hipster-dev.openstack.org' {
+  class { 'openstack_project::turbo_hipster':
+    sysadmins              => hiera('sysadmins', []),
+    ssh_private_key        => hiera('th_dev_ssh_private_key_contents', 'XXX'),
+    th_repo                => 'https://git.openstack.org/stackforge/turbo-hipster',
+    gerrit_site            => "http://review-dev.openstack.org",
+    gearman_server         => "zuul-dev.openstack.org",
+    gearman_port           => 4730,
+  }
+}
+
 # vim:sw=2:ts=2:expandtab:textwidth=79
