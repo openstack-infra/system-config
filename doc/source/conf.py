@@ -16,6 +16,8 @@ import datetime
 import os
 import sys
 
+from jinja2.utils import Markup
+
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
@@ -47,8 +49,10 @@ master_doc = 'index'
 
 # General information about the project.
 project = u'OpenStack Project Infrastructure'
-copyright = (u'2012-2013, OpenStack Infastructure Team'
-             ' - see git repo for details')
+copyright = Markup(u'2012-2014, OpenStack Infastructure Team'
+                   u' - see the <a href="https://git.openstac'
+                   u'k.org/cgit/openstack-infra/config/tree">'
+                   u'config git repo</a> for details')
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
