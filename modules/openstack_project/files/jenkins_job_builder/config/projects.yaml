@@ -2033,6 +2033,14 @@
       - gate-openstack-chef-repo
 
 - project:
+    name: openstack-chef-specs
+    github-org: stackforge
+    node: 'bare-precise || bare-trusty'
+
+    jobs:
+      - gate-{name}-docs
+
+- project:
     name: cookbook-ceph
     github-org: stackforge
     node: 'bare-precise || bare-trusty'
