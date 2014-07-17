@@ -106,11 +106,17 @@ class openstack_project::static (
     require => File['/srv/static/logs'],
   }
 
+  package { 'keyring':
+    ensure   => 'latest',
+    provider => 'pip',
+  }
+
   vcsrepo { '/opt/os-loganalyze':
     ensure   => latest,
     provider => git,
     revision => 'master',
     source   => 'https://git.openstack.org/openstack-infra/os-loganalyze',
+    require  => Package['keyring'],
   }
 
   exec { 'install_os-loganalyze':
