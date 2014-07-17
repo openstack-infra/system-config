@@ -47,8 +47,8 @@ master_doc = 'index'
 
 # General information about the project.
 project = u'OpenStack Project Infrastructure'
-copyright = (u'2012-2013, OpenStack Infastructure Team'
-             ' - see git repo for details')
+copyright = (u'2012-2014, OpenStack Infastructure Team'
+             ' - see the openstack-infra/config git repo for details')
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
