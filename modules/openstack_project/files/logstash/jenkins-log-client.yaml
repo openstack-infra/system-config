@@ -435,18 +435,351 @@ source-files:
       - apachecombined
     job-filter: '.*grenade.*'
 # tripleo logs
+  # tripleo-seed
+  - name: logs/seed_logs/host-info.txt
+    tags:
+      - host-info
+      - seed
+    job-filter: '.*-tripleo-.*'
+  # seed system.journal/upstart
+  - name: logs/seed_logs/glance-api.txt
+    tags:
+      - glance-api
+      - seed
+    job-filter: '.*-tripleo-.*'
+  - name: logs/seed_logs/glance-reg.txt
+    tags:
+      - glance-reg
+      - seed
+    job-filter: '.*-tripleo-.*'
+  - name: logs/seed_logs/heat-api-cfn.txt
+    tags:
+      - heat-api-cfn
+      - seed
+    job-filter: '.*-tripleo-.*'
+  - name: logs/seed_logs/heat-api-cloudwatch.txt
+    tags:
+      - heat-api-cloudwatch
+      - seed
+    job-filter: '.*-tripleo-.*'
+  - name: logs/seed_logs/heat-api.txt
+    tags:
+      - heat-api
+      - seed
+    job-filter: '.*-tripleo-.*'
+  - name: logs/seed_logs/heat-engine.txt
+    tags:
+      - heat-engine
+      - seed
+    job-filter: '.*-tripleo-.*'
+  - name: logs/seed_logs/host_info.txt
+    tags:
+      - host_info
+      - seed
+    job-filter: '.*-tripleo-.*'
+  - name: logs/seed_logs/keystone.txt
+    tags:
+      - keystone
+      - seed
+    job-filter: '.*-tripleo-.*'
+  - name: logs/seed_logs/neutron-dhcp-agent.txt
+    tags:
+      - neutron-dhcp-agent
+      - seed
+    job-filter: '.*-tripleo-.*'
+  - name: logs/seed_logs/neutron-openvswitch-agent.txt
+    tags:
+      - neutron-openvswitch-agent
+      - seed
+    job-filter: '.*-tripleo-.*'
+  - name: logs/seed_logs/neutron-server.txt
+    tags:
+      - neutron-server
+      - seed
+    job-filter: '.*-tripleo-.*'
+  - name: logs/seed_logs/nova-api.txt
+    tags:
+      - nova-api
+      - seed
+    job-filter: '.*-tripleo-.*'
+  - name: logs/seed_logs/nova-baremetal-deploy-helper.txt
+    tags:
+      - nova-baremetal-deploy-helper
+      - seed
+    job-filter: '.*-tripleo-.*'
+  - name: logs/seed_logs/nova-cert.txt
+    tags:
+      - nova-cert
+      - seed
+    job-filter: '.*-tripleo-.*'
+  - name: logs/seed_logs/nova-compute.txt
+    tags:
+      - nova-compute
+      - seed
+    job-filter: '.*-tripleo-.*'
+  - name: logs/seed_logs/nova-conductor.txt
+    tags:
+      - nova-conductor
+      - seed
+    job-filter: '.*-tripleo-.*'
+  - name: logs/seed_logs/nova-consoleauth.txt
+    tags:
+      - nova-consoleauth
+      - seed
+    job-filter: '.*-tripleo-.*'
+  - name: logs/seed_logs/nova-scheduler.txt
+    tags:
+      - nova-scheduler
+      - seed
+    job-filter: '.*-tripleo-.*'
+  - name: logs/seed_logs/openvswitch-nonetwork.txt
+    tags:
+      - openvswitch-nonetwork
+      - seed
+  - name: logs/seed_logs/openvswitch-switch.txt
+    tags:
+      - openvswitch-switch
+      - seed
+    job-filter: '.*-tripleo-.*'
   - name: logs/seed_logs/os-collect-config.txt
     tags:
       - os-collect-config
       - seed
+    job-filter: '.*-tripleo-.*'
+  - name: logs/seed_logs/systemd-logind.txt
+    tags:
+      - systemd-logind
+      - seed
+    job-filter: '.*-tripleo-.*'
+  # tripleo-undercloud
+  - name: logs/undercloud-undercloud_logs/host-info.txt
+    tags:
+      - host-info
+      - uc-controller
+    job-filter: '.*-tripleo-.*'
+  # undercloud system.journal/upstart
+  - name: logs/undercloud-undercloud_logs/glance-api.txt
+    tags:
+      - glance-api
+      - uc-controller
+    job-filter: '.*-tripleo-.*'
+  - name: logs/undercloud-undercloud_logs/glance-reg.txt
+    tags:
+      - glance-reg
+      - uc-controller
+    job-filter: '.*-tripleo-.*'
+  - name: logs/undercloud-undercloud_logs/heat-api-cfn.txt
+    tags:
+      - heat-api-cfn
+      - uc-controller
+    job-filter: '.*-tripleo-.*'
+  - name: logs/undercloud-undercloud_logs/heat-api-cloudwatch.txt
+    tags:
+      - heat-api-cloudwatch
+      - uc-controller
+    job-filter: '.*-tripleo-.*'
+  - name: logs/undercloud-undercloud_logs/heat-api.txt
+    tags:
+      - heat-api
+      - uc-controller
+    job-filter: '.*-tripleo-.*'
+  - name: logs/undercloud-undercloud_logs/heat-engine.txt
+    tags:
+      - heat-engine
+      - uc-controller
+    job-filter: '.*-tripleo-.*'
+  - name: logs/undercloud-undercloud_logs/host_info.txt
+    tags:
+      - host_info
+      - uc-controller
+    job-filter: '.*-tripleo-.*'
+  - name: logs/undercloud-undercloud_logs/keystone.txt
+    tags:
+      - keystone
+      - uc-controller
+    job-filter: '.*-tripleo-.*'
+  - name: logs/undercloud-undercloud_logs/neutron-dhcp-agent.txt
+    tags:
+      - neutron-dhcp-agent
+      - uc-controller
+    job-filter: '.*-tripleo-.*'
+  - name: logs/undercloud-undercloud_logs/neutron-openvswitch-agent.txt
+    tags:
+      - neutron-openvswitch-agent
+      - uc-controller
+    job-filter: '.*-tripleo-.*'
+  - name: logs/undercloud-undercloud_logs/neutron-server.txt
+    tags:
+      - neutron-server
+      - uc-controller
+    job-filter: '.*-tripleo-.*'
+  - name: logs/undercloud-undercloud_logs/nova-api.txt
+    tags:
+      - nova-api
+      - uc-controller
+    job-filter: '.*-tripleo-.*'
+  - name: logs/undercloud-undercloud_logs/nova-baremetal-deploy-helper.txt
+    tags:
+      - nova-baremetal-deploy-helper
+      - uc-controller
+    job-filter: '.*-tripleo-.*'
+  - name: logs/undercloud-undercloud_logs/nova-cert.txt
+    tags:
+      - nova-cert
+      - uc-controller
+    job-filter: '.*-tripleo-.*'
+  - name: logs/undercloud-undercloud_logs/nova-compute.txt
+    tags:
+      - nova-compute
+      - uc-controller
+    job-filter: '.*-tripleo-.*'
+  - name: logs/undercloud-undercloud_logs/nova-conductor.txt
+    tags:
+      - nova-conductor
+      - uc-controller
+    job-filter: '.*-tripleo-.*'
+  - name: logs/undercloud-undercloud_logs/nova-consoleauth.txt
+    tags:
+      - nova-consoleauth
+      - uc-controller
+    job-filter: '.*-tripleo-.*'
+  - name: logs/undercloud-undercloud_logs/nova-scheduler.txt
+    tags:
+      - nova-scheduler
+      - uc-controller
+    job-filter: '.*-tripleo-.*'
+  - name: logs/undercloud-undercloud_logs/openvswitch-nonetwork.txt
+    tags:
+      - openvswitch-nonetwork
+      - uc-controller
+  - name: logs/undercloud-undercloud_logs/openvswitch-switch.txt
+    tags:
+      - openvswitch-switch
+      - uc-controller
     job-filter: '.*-tripleo-.*'
   - name: logs/undercloud-undercloud_logs/os-collect-config.txt
     tags:
       - os-collect-config
       - uc-controller
     job-filter: '.*-tripleo-.*'
+  - name: logs/undercloud-undercloud_logs/systemd-logind.txt
+    tags:
+      - systemd-logind
+      - uc-controller
+    job-filter: '.*-tripleo-.*'
+  # tripleo-overcloud
+  - name: logs/overcloud-controller0_logs/host-info.txt
+    tags:
+      - host-info
+      - oc-controller
+    job-filter: '.*-tripleo-.*'
+  # overcloud system.journal/upstart
+  - name: logs/overcloud-controller0_logs/glance-api.txt
+    tags:
+      - glance-api
+      - oc-controller
+    job-filter: '.*-tripleo-.*'
+  - name: logs/overcloud-controller0_logs/glance-reg.txt
+    tags:
+      - glance-reg
+      - oc-controller
+    job-filter: '.*-tripleo-.*'
+  - name: logs/overcloud-controller0_logs/heat-api-cfn.txt
+    tags:
+      - heat-api-cfn
+      - oc-controller
+    job-filter: '.*-tripleo-.*'
+  - name: logs/overcloud-controller0_logs/heat-api-cloudwatch.txt
+    tags:
+      - heat-api-cloudwatch
+      - oc-controller
+    job-filter: '.*-tripleo-.*'
+  - name: logs/overcloud-controller0_logs/heat-api.txt
+    tags:
+      - heat-api
+      - oc-controller
+    job-filter: '.*-tripleo-.*'
+  - name: logs/overcloud-controller0_logs/heat-engine.txt
+    tags:
+      - heat-engine
+      - oc-controller
+    job-filter: '.*-tripleo-.*'
+  - name: logs/overcloud-controller0_logs/host_info.txt
+    tags:
+      - host_info
+      - oc-controller
+    job-filter: '.*-tripleo-.*'
+  - name: logs/overcloud-controller0_logs/keystone.txt
+    tags:
+      - keystone
+      - oc-controller
+    job-filter: '.*-tripleo-.*'
+  - name: logs/overcloud-controller0_logs/neutron-dhcp-agent.txt
+    tags:
+      - neutron-dhcp-agent
+      - oc-controller
+    job-filter: '.*-tripleo-.*'
+  - name: logs/overcloud-controller0_logs/neutron-openvswitch-agent.txt
+    tags:
+      - neutron-openvswitch-agent
+      - oc-controller
+    job-filter: '.*-tripleo-.*'
+  - name: logs/overcloud-controller0_logs/neutron-server.txt
+    tags:
+      - neutron-server
+      - oc-controller
+    job-filter: '.*-tripleo-.*'
+  - name: logs/overcloud-controller0_logs/nova-api.txt
+    tags:
+      - nova-api
+      - oc-controller
+    job-filter: '.*-tripleo-.*'
+  - name: logs/overcloud-controller0_logs/nova-baremetal-deploy-helper.txt
+    tags:
+      - nova-baremetal-deploy-helper
+      - oc-controller
+    job-filter: '.*-tripleo-.*'
+  - name: logs/overcloud-controller0_logs/nova-cert.txt
+    tags:
+      - nova-cert
+      - oc-controller
+    job-filter: '.*-tripleo-.*'
+  - name: logs/overcloud-controller0_logs/nova-compute.txt
+    tags:
+      - nova-compute
+      - oc-controller
+    job-filter: '.*-tripleo-.*'
+  - name: logs/overcloud-controller0_logs/nova-conductor.txt
+    tags:
+      - nova-conductor
+      - oc-controller
+    job-filter: '.*-tripleo-.*'
+  - name: logs/overcloud-controller0_logs/nova-consoleauth.txt
+    tags:
+      - nova-consoleauth
+      - oc-controller
+    job-filter: '.*-tripleo-.*'
+  - name: logs/overcloud-controller0_logs/nova-scheduler.txt
+    tags:
+      - nova-scheduler
+      - oc-controller
+    job-filter: '.*-tripleo-.*'
+  - name: logs/overcloud-controller0_logs/openvswitch-nonetwork.txt
+    tags:
+      - openvswitch-nonetwork
+      - oc-controller
+  - name: logs/overcloud-controller0_logs/openvswitch-switch.txt
+    tags:
+      - openvswitch-switch
+      - oc-controller
+    job-filter: '.*-tripleo-.*'
   - name: logs/overcloud-controller0_logs/os-collect-config.txt
     tags:
       - os-collect-config
+      - oc-controller
+    job-filter: '.*-tripleo-.*'
+  - name: logs/overcloud-controller0_logs/systemd-logind.txt
+    tags:
+      - systemd-logind
       - oc-controller
     job-filter: '.*-tripleo-.*'
