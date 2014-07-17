@@ -404,7 +404,7 @@ def main
 
     # Ignore exit code from now onwards..
     Sh.always_exit_as_success = true # if ENV["OS_TYPE"] != "ubuntu"
-    exit_code = run_sanity
+    exit_code = run_test
 
     # Check if systest failures are to be ignored, for the moment.
     if exit_code != 0 then
