@@ -14,6 +14,8 @@ class openstack_project::jenkins (
   $jenkins_ssh_private_key = '',
   $zmq_event_receivers = [],
   $sysadmins = []
+  $gearman_server ='zuul.openstack.org',
+  $gearman_port ='4730',
 ) {
   include openstack_project
 
@@ -140,5 +142,17 @@ class openstack_project::jenkins (
       mode   => '0644',
       source => 'puppet:///modules/openstack_project/jenkins/jenkins.default',
     }
+  }
+
+  $connections = [
+    [ 'gearman', "localhost:${gearman_port}", "${gearman_server}:${gearman_port}"],
+  ]
+
+  class { 'stunnel':
+    ssl_cert_file  => $prv_ssl_cert_file,
+    ssl_key_file   => $prv_ssl_key_file,
+    # NOTE: The SSL chain file is required for gearman's SSL connection
+    ssl_chain_file => $ssl_chain_file,
+    connections    => $connections,
   }
 }
