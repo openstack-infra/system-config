@@ -64,7 +64,7 @@ For example:
 
 .. code-block:: bash
 
-   $ ssh -p 29418 review.example.com gerrit stream-events
+   $ ssh -p 29418 USERNAME@review.openstack.org gerrit stream-events
 
 Will give a stream with an output like this (line breaks and indentation added
 in this document for readability, the read JSON will be all one line per event):
@@ -102,7 +102,7 @@ An example of how to post this is as follows:
 
 .. code-block:: bash
 
-   $ ssh -p 29418 review.example.com gerrit review -m '"Test failed on MegaTestSystem <http://megatestsystem.org/tests/1234>"' --verified=-1 c0ff33
+   $ ssh -p 29418 USERNAME@review.openstack.org gerrit review -m '"Test failed on MegaTestSystem <http://megatestsystem.org/tests/1234>"' --verified=-1 c0ff33
 
 In this example ``c0ff33`` is the commit ID for the review.  You can set the
 verified to either `-1` or `+1` depending on whether or not it passed the tests.
