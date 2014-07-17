@@ -109,7 +109,7 @@ function build_and_run_unittest() {
 
     # Find and run relevant tests.
     UNIT_TESTS=`/usr/local/jenkins/slave_scripts/contrail-controller-unittests-gather.rb`
-    if [ ! -z $UNIT_TESTS ]; then
+    if [ ! -z "$UNIT_TESTS" ]; then
         scons -j $SCONS_JOBS $UNIT_TESTS 2>&1 | tee -a $WORKSPACE/scons_test.log
         exit_code=$?
 
