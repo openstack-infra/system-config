@@ -67,19 +67,30 @@ def self.setup_contrail_repo(use_public)
     Sh.run "rm -rf third_party/euca2ools/.git/shallow"
 end
 
+# Workaround for the third_party repo - a hack. code needs reorg here
+# Move each git repo inside third_party into the new folder.
+def self.fix_project(dest, src)
+    o, err = Sh.rrun(%{\grep "path=\\"#{src}/" .repo/manifest.xml})
+    o.split("\n").each { |entry|
+        Sh.run("mv #{$1} #{dest}/") if entry =~ /path=\"(.*?)\"/
+    }
+end
+
 # TODO Ideally, we should tweak .repo/manifest.xml to directly fetch project
 # off gerrit.
 def self.switch_gerrit_repo
     return unless @gerrit_setup
 
     # Find the project git repo based on .repo/manifest.xml file
-    out, e = Sh.rrun "\grep name=\\\"#{@project} .repo/manifest.xml"
+    out, e = Sh.rrun "\grep name=\\\"#{@project}\\\" .repo/manifest.xml"
     if out !~ /path=\"(.*?)\"/ then
         puts "Warning! Cannot find project #{@project} path in .repo/manifest.xml"
         exit 0
     end
 
     old_project = $1
+    fix_project("#{ENV['WORKSPACE']}/#{@project}", old_project) \
+        if @project == "contrail-third-party"
 
     # Now, switch old_project to project's git repo fetched from gerrit.
     Sh.run "mv #{ENV['WORKSPACE']}/repo/#{old_project} #{ENV['WORKSPACE']}/repo/#{old_project}.orig"
