@@ -243,7 +243,7 @@ def run_sanity(fab_test)
 
     fab_test = update_nova_libvirt_driver(fab_test)
 
-    cmd = "ssh #{@vms.first.vmname} \"(export TEST_RETRY_FACTOR=20.0 export TEST_DELAY_FACTOR=2 GUESTVM_IMAGE=cirros-0.3.0-x86_64; cd /opt/contrail/utils; fab #{fab_test})\""
+    cmd = "ssh #{@vms.first.vmname} \"(export TEST_RETRY_FACTOR=20.0 export TEST_DELAY_FACTOR=2 GUESTVM_IMAGE=cirros-0.3.0-x86_64-uec; cd /opt/contrail/utils; fab #{fab_test})\""
     o, exit_code = Sh.run(cmd, true)
 
     # Copy sanity log files, as the sub-slave VMs will go away.
