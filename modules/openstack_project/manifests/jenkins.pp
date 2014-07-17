@@ -14,6 +14,8 @@ class openstack_project::jenkins (
   $jenkins_ssh_private_key = '',
   $zmq_event_receivers = [],
   $sysadmins = []
+  $gearman_server ='zuul.openstack.org',
+  $gearman_port ='4730',
 ) {
   include openstack_project
 
@@ -140,5 +142,14 @@ class openstack_project::jenkins (
       mode   => '0644',
       source => 'puppet:///modules/openstack_project/jenkins/jenkins.default',
     }
+  }
+
+  class { 'openstack_project::stunnel':
+    certificate => $prv_ssl_cert_file,
+    private_key => $prv_ssl_key_file,
+    ca_file     => $ssl_chain_file,
+    accept      => "localhost:${gearman_port}",
+    connect     => "${gearman_server}:${gearman_port}",
+    service     => 'geard',
   }
 }

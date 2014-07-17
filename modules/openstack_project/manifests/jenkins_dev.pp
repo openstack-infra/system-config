@@ -12,7 +12,12 @@ class openstack_project::jenkins_dev (
   $hpcloud_username ='',
   $hpcloud_password ='',
   $hpcloud_project ='',
+  $gearman_server ='zuul-dev.openstack.org',
+  $gearman_port ='4730',
   $nodepool_template ='nodepool-dev.yaml.erb',
+  $ssl_cert_file = '/etc/ssl/certs/ssl-cert-snakeoil.pem',
+  $ssl_key_file = '/etc/ssl/private/ssl-cert-snakeoil.key',
+  $ssl_chain_file = '',
 ) {
 
   realize (
@@ -34,9 +39,9 @@ class openstack_project::jenkins_dev (
     vhost_name              => 'jenkins-dev.openstack.org',
     serveradmin             => 'webmaster@openstack.org',
     logo                    => 'openstack.png',
-    ssl_cert_file           => '/etc/ssl/certs/ssl-cert-snakeoil.pem',
-    ssl_key_file            => '/etc/ssl/private/ssl-cert-snakeoil.key',
-    ssl_chain_file          => '',
+    ssl_cert_file           => $ssl_cert_file,
+    ssl_key_file            => $prv_ssl_key_file,
+    ssl_chain_file          => $ssl_chain_file,
     jenkins_ssh_private_key => $jenkins_ssh_private_key,
     jenkins_ssh_public_key  => $openstack_project::jenkins_dev_ssh_key,
   }
@@ -135,4 +140,12 @@ class openstack_project::jenkins_dev (
     source  => 'puppet:///modules/openstack_project/nodepool/scripts',
   }
 
+  class { 'openstack_project::stunnel':
+    certificate => $ssl_cert_file,
+    private_key => $ssl_key_file,
+    ca_file     => $ssl_chain_file,
+    accept      => "localhost:${gearman_port}",
+    connect     => "${gearman_server}:${gearman_port}",
+    service     => 'geard',
+  }
 }
