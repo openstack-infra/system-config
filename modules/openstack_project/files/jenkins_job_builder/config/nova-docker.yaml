@@ -26,8 +26,8 @@
 
           export PYTHONUNBUFFERED=true
           export DEVSTACK_GATE_TIMEOUT=60
-          export DEVSTACK_GATE_TEMPEST=0
-          export DEVSTACK_GATE_TEMPEST_FULL=0
+          export DEVSTACK_GATE_TEMPEST=1
+          export DEVSTACK_GATE_TEMPEST_FULL=1
           export PROJECTS="stackforge/nova-docker $PROJECTS"
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
