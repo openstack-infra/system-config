@@ -100,14 +100,14 @@ class Vm
 
                 t = Time.now
                 File.open(kfile, "w") {|fp| t.to_a.each {|i| fp.puts i}}
-                `scp #{kfile} root@#{hostip}:#{kfile} &> /dev/null`
+                `rsync -ac #{kfile} root@#{hostip}:#{kfile} &> /dev/null`
 
                 # puts "Updated time #{t} to #{@vmname}"
-                # Sh.run("scp #{kfile} root@#{@hostip}:#{kfile}", true, 1, 1,
+                # Sh.run("rsync -ac #{kfile} root@#{@hostip}:#{kfile}", true, 1, 1,
                 #        false)
                 # rescue StandardError, Interrupt, SystemExit
                 rescue Exception => e
-                    # puts "ERROR: scp #{kfile} root@#{@hostip}:#{kfile} #{e}"
+                    # puts "ERROR: rsync -ac #{kfile} root@#{@hostip}:#{kfile} #{e}"
                 end
                 sleep 2
             end
@@ -188,7 +188,7 @@ class Vm
 
         metadata = "--meta slave-master=#{Vm.get_interface_ip}"
         1.upto(count) { |i|
-            vmname = "ci-oc-subslave-#{floatingip}-#{i}"
+            vmname = "ci-oc-subslave-#{ENV["OS_TYPE"]}-#{floatingip}-#{i}"
             vmname.gsub!(/\./, '-')
             vmname += ".localdomain.com"
 
@@ -220,8 +220,15 @@ EOF
 
         # Wait for all VMs to come up.
         @@vms.each { |vm|
-            Sh.run("scp /etc/hosts #{vm.hostip}:/etc/.", false, 100, 5)
+            Sh.run("rsync -ac /etc/hosts #{vm.hostip}:/etc/.", false, 100, 5)
         }
+
+        # Make sure that hostname is resolvable inside the VMs.
+        # @@vms.each { |vm|
+        #     h, e = Sh.rrun("ssh #{vm.hostip} hostname", false, 100, 5)
+        #     Sh.run("ssh #{vm.hostip} cat /etc/hosts", false, 100, 5)
+        #     Sh.run("ssh #{vm.hostip} ping -q -c 1 #{h}", false, 100, 5)
+        # }
     end
 
     def Vm.setup_image_from_snapshot
@@ -271,6 +278,7 @@ def parse_options
 end
 
 def main
+    Util.ci_setup
     parse_options
     Vm.create_slaves
 end

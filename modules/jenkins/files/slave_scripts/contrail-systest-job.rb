@@ -62,9 +62,12 @@ env.test_retry_factor = 1.0
 env.test_delay_factor = 1.0
 
 env.test_repo_dir='#{ENV['HOME']}/contrail-test'
-env.http_proxy = subprocess.check_output("\grep http_proxy /etc/contrail_bashrc | awk -F '=' '{print $2}'", shell = True).rstrip()
-
 env.test_verify_on_setup = False
+
+p = subprocess.Popen("\grep http_proxy /etc/contrail_bashrc | awk -F '=' '{print $2}'", shell = True, stdout = subprocess.PIPE)
+o, e = p.communicate()
+env.http_proxy = o.rstrip()
+
 # env.mail_from='ci-admin@opencontrail.org'
 # env.mail_to='ci-admin@opencontrail.org'
 # env.interface_rename=False
@@ -87,17 +90,16 @@ def setup_contrail(image)
 
     @vms.each { |vm|
 #       Sh.run "ssh root@#{vm.vmname} apt-get update", true
-        Sh.run("scp #{image} root@#{vm.vmname}:#{dest_image}", false, 50, 10)
-        Sh.run("ssh #{vm.vmname} sync", false, 50, 10)
+        Sh.run("rsync -ac #{image} root@#{vm.vmname}:#{dest_image}", false, 50, 10)
+#       Sh.run("ssh #{vm.vmname} sync", false, 50, 10)
 
         if ENV["OS_TYPE"] == "ubuntu" then
             Sh.run "ssh #{vm.vmname} dpkg -i #{dest_image}"
         else # centos
-            Sh.run "ssh #{vm.vmname} rpm -ivh #{dest_image}"
+            Sh.run "ssh #{vm.vmname} yum -y install #{dest_image}"
         end
         Sh.run "ssh #{vm.vmname} /opt/contrail/contrail_packages/setup.sh", true
     }
-
 end
 
 # Update nova libvirt driver.
@@ -129,8 +131,15 @@ end
 
 def install_contrail
     vm = @vms.first
-    Sh.run("scp #{@topo_file} #{vm.vmname}:/opt/contrail/utils/fabfile/testbeds/testbed.py", false, 20, 4)
-    Sh.run "ssh #{vm.vmname} /usr/local/jenkins/slave_scripts/ci-infra/contrail_fab install_contrail"
+
+    # XXX Temporary hack. Fix this in the base image itself.
+    if get_os_type == "centos64" then
+        Sh.run("ssh #{vm.vmname} yum -y remove augeas-libs-0.9.0-4.el6.x86_64 gnutls-devel-2.8.5-10.el6_4.2.x86_64", true)
+        Sh.run("service squid start", true)
+    end
+
+    Sh.run("rsync -ac #{@topo_file} #{vm.vmname}:/opt/contrail/utils/fabfile/testbeds/testbed.py", false, 20, 4)
+    Sh.run "ssh #{vm.vmname} \"(cd /opt/contrail/utils; fab install_contrail)\""
     Sh.run "echo \"perl -ni -e 's/JVM_OPTS -Xss\\d+/JVM_OPTS -Xss512/g; print \\$_;' /etc/cassandra/cassandra-env.sh\" | ssh -t #{vm.vmname} \$(< /dev/fd/0)"
 
     return if @options.fab_tests.empty?
@@ -139,7 +148,7 @@ def install_contrail
     cmd = %{sed -i "s/setup_all\\(reboot=\\'True\\'\\)/setup_all\\(reboot=\\'False\\'\\)/g"}
     Sh.run("ssh #{vm.vmname} #{cmd} /opt/contrail/utils/fabfile/tasks/provision.py", true)
 
-    Sh.run "ssh #{vm.vmname} /usr/local/jenkins/slave_scripts/ci-infra/contrail_fab setup_all"
+    Sh.run "ssh #{vm.vmname} \"(cd /opt/contrail/utils; fab setup_all)\""
     Sh.run "ssh #{vm.vmname} reboot"
     sleep 30
 
@@ -166,7 +175,7 @@ def build_contrail_packages(repo = "#{ENV['WORKSPACE']}/repo")
     # Fetch build cache
     cache = "/cs-shared/builder/cache/#{get_os_type}/"
     Sh.run("mkdir -p #{cache}")
-    Sh.run("sshpass -p c0ntrail123 rsync -az --no-owner --no-group ci-admin@ubuntu-build02:/cs-shared/builder/cache/#{get_os_type}/ #{cache}")
+    Sh.run("sshpass -p c0ntrail123 rsync -acz --no-owner --no-group ci-admin@ubuntu-build02:/cs-shared/builder/cache/#{get_os_type}/ #{cache}")
     Sh.run("chown -R #{ENV['USER']}.#{ENV['USER']} #{cache}")
 
     if get_os_type == "ubuntu1204" then
@@ -181,14 +190,17 @@ def build_contrail_packages(repo = "#{ENV['WORKSPACE']}/repo")
     Sh.run "scons"
 #   Sh.run "scons #{repo}/build/third_party/log4cplus"
     Sh.run "rm -rf #{repo}/third_party/euca2ools/.git/shallow"
-    Sh.run "#{repo}/tools/packaging/build/packager.py --sku havana"
-    Sh.run "ls -alh #{repo}/build/artifacts/contrail-install-packages_*_all.deb"
+    Sh.run "cd #{repo}/tools/packaging/build/"
+    Sh.run "./packager.py --fail-on-error --sku havana"
 
     # Return the all-in-one debian/rpm package file path.
-    cmd = "ls -1 #{repo}/build/artifacts/contrail-install-packages_*_all.deb"
     if ENV["OS_TYPE"] == "centos" then
+        Sh.run "ls -alrh #{repo}/build/artifacts/contrail-install-packages*.rpm"
         cmd = "ls -1 " +
-              "#{repo}/build/artifacts/contrail-install-packages_*_all.rpm"
+              "#{repo}/build/artifacts/contrail-install-packages*.rpm"
+    else
+        Sh.run "ls -alrh #{repo}/build/artifacts/contrail-install-packages_*_all.deb"
+        cmd = "ls -1 #{repo}/build/artifacts/contrail-install-packages_*_all.deb"
     end
     image, e = Sh.rrun(cmd)
     puts "Successfully built package #{image}"
@@ -231,11 +243,11 @@ def run_sanity(fab_test)
 
     fab_test = update_nova_libvirt_driver(fab_test)
 
-    cmd = "ssh #{@vms.first.vmname} \"(export TEST_RETRY_FACTOR=20.0 export TEST_DELAY_FACTOR=2; /usr/local/jenkins/slave_scripts/ci-infra/contrail_fab #{fab_test})\""
+    cmd = "ssh #{@vms.first.vmname} \"(export TEST_RETRY_FACTOR=20.0 export TEST_DELAY_FACTOR=2 GUESTVM_IMAGE=cirros-0.3.0-x86_64-uec; cd /opt/contrail/utils; fab #{fab_test})\""
     o, exit_code = Sh.run(cmd, true)
 
     # Copy sanity log files, as the sub-slave VMs will go away.
-    Sh.run("scp -r #{@vms.first.vmname}:/root/logs #{ENV['WORKSPACE']}/logs_#{fab_test}", true)
+    Sh.run("rsync -ac #{@vms.first.vmname}:/root/logs #{ENV['WORKSPACE']}/logs_#{fab_test}", true)
     Sh.run("ssh #{@vms.first.vmname} rm -rf /root/logs", true)
 
     puts "#{fab_test} complete, checking for any failures.."
@@ -277,11 +289,13 @@ def run_test(image = @options.image)
     setup_sanity
     verify_contrail
 
+    # Ignore exit code from now onwards..
+    Sh.always_exit_as_success = true
+
     exit_code = 0
     @options.fab_tests.each { |fab_test|
         exit_code = run_sanity(fab_test)
         break if exit_code != 0
-        exit_code = run_sanity(fab_test)
     }
 
     Sh.run("lynx --dump #{ENV['WORKSPACE']}/logs_*/*/test_report.html", true)
@@ -311,7 +325,7 @@ def parse_options(args = ARGV)
         o.on("-i", "--image [checkout and build]", "Image to load") { |i|
             dest_image = File.basename(i)
             @options.image = "#{ENV['WORKSPACE']}/#{dest_image}"
-            Sh.run("sshpass -p c0ntrail123 scp ci-admin@ubuntu-build02:#{i} " +
+            Sh.run("sshpass -p c0ntrail123 rsync -ac ci-admin@ubuntu-build02:#{i} " +
                    "#{ENV['WORKSPACE']}/#{dest_image}")
         }
         o.on("-b", "--branch [#{@options.branch}]", "Branch to use ") { |b|
@@ -389,7 +403,7 @@ def main
     end
 
     # Ignore exit code from now onwards..
-    Sh.always_exit_as_success = true
+    Sh.always_exit_as_success = true # if ENV["OS_TYPE"] != "ubuntu"
     exit_code = 0
     wait_time = 60 * 3 # 3 hours
 

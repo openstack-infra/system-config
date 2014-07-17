@@ -8,6 +8,7 @@
     jobs:
       - contrail-unittest-jobs
       - contrail-systest-jobs
+      - contrail-systest-jobs-centos
 #     - contrail-devstack-jobs
 
 - project:
@@ -19,6 +20,7 @@
 
     jobs:
       - contrail-systest-jobs
+      - contrail-systest-jobs-centos
 
 - project:
     name: contrail-build
@@ -29,6 +31,7 @@
 
     jobs:
       - contrail-systest-jobs
+      - contrail-systest-jobs-centos
 
 - project:
     name: contrail-packages
@@ -39,6 +42,7 @@
 
     jobs:
       - contrail-systest-jobs
+      - contrail-systest-jobs-centos
 
 - project:
     name: contrail-third-party
@@ -49,6 +53,7 @@
 
     jobs:
       - contrail-systest-jobs
+      - contrail-systest-jobs-centos
 
 - project:
     name: contrail-generateDS
@@ -89,6 +94,7 @@
 
     jobs:
       - contrail-systest-jobs
+      - contrail-systest-jobs-centos
 
 - project:
     name: contrail-packaging
@@ -99,6 +105,7 @@
 
     jobs:
       - contrail-systest-jobs
+      - contrail-systest-jobs-centos
 
 - project:
     name: contrail-provisioning
@@ -109,3 +116,4 @@
 
     jobs:
       - contrail-systest-jobs
+      - contrail-systest-jobs-centos

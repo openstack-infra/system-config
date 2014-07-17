@@ -161,7 +161,7 @@ class Vm
     end
 
     def self.get_hostip (hostname = get_hostname)
-        return $1 if hostname =~ /ci-.*?(\d+\.\d+\.\d+\.\d+)/
+        return $1 if hostname =~ /ci-.*?(\d+\-\d+\-\d+\-\d+)/
         return "127.0.0.1"
     end
 

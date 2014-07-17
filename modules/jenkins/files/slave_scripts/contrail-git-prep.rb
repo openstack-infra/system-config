@@ -49,12 +49,15 @@ def self.setup_contrail_repo(use_public)
     # Fix hardcoded ubuntu to the flavor from jenkins slave label
     # e.g. ENV['NODE_LABELS' = "ci-10.84.35.174 juniper-tests swarm"
 
+    flavor = "ubuntu-12-04"
+    flavor = "centos64_os" if !ENV["OS_TYPE"].nil? and ENV["OS_TYPE"] == "centos"
+
     if use_public then
         Sh.run "repo init --repo-url 'https://github.com/opencontrail-ci-admin/git-repo' -u git@github.com:Juniper/contrail-vnc -b #{branch}"
     else
         branch = "mainline" if branch == "master"
         Sh.run "repo init --repo-url 'https://github.com/opencontrail-ci-admin/git-repo' -u git@github.com:Juniper/contrail-vnc-private " +
-           "-m #{branch}/ubuntu-12-04/manifest-havana.xml"
+           "-m #{branch}/#{flavor}/manifest-havana.xml"
     end
 
     # Sync the repo
@@ -72,8 +75,8 @@ def self.switch_gerrit_repo
     # Find the project git repo based on .repo/manifest.xml file
     out, e = Sh.rrun "\grep name=\\\"#{@project} .repo/manifest.xml"
     if out !~ /path=\"(.*?)\"/ then
-        puts "Error! Cannot find project #{@project} path in .repo/manifest.xml"
-        exit -1
+        puts "Warning! Cannot find project #{@project} path in .repo/manifest.xml"
+        exit 0
     end
 
     old_project = $1
@@ -88,7 +91,7 @@ def self.pre_build_setup
     # Setup cache first to avoid downloads over the Internet
     cache = "/tmp/cache/#{ENV['USER']}"
     Sh.run("mkdir -p #{cache}")
-    Sh.run("sshpass -p c0ntrail123 rsync -az --no-owner --no-group ci-admin@ubuntu-build02:/tmp/cache/ci-admin/ #{cache}")
+    Sh.run("sshpass -p c0ntrail123 rsync -acz --no-owner --no-group ci-admin@ubuntu-build02:/tmp/cache/ci-admin/ #{cache}")
     Sh.run("chown -R #{ENV['USER']}.#{ENV['USER']} #{cache}")
 
     Sh.run "python #{ENV['WORKSPACE']}/repo/third_party/fetch_packages.py 2>&1 | tee #{ENV['WORKSPACE']}/third_party_fetch_packages.log"
