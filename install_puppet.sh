@@ -173,6 +173,7 @@ function setup_pip {
     fi
 
     python get-pip.py
+    pip install -U setuptools
 }
 
 #
