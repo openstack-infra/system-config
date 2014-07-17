@@ -17,20 +17,9 @@
               $BASE/new/nova-docker/contrib/devstack/gate_hook.sh
           }
 
-          function post_test_hook {
-              $BASE/new/nova-docker/contrib/devstack/post_test_hook.sh
-          }
-
           export -f gate_hook
-          export -f post_test_hook
 
-          export PYTHONUNBUFFERED=true
-          export DEVSTACK_GATE_TIMEOUT=60
-          export DEVSTACK_GATE_TEMPEST=0
-          export DEVSTACK_GATE_TEMPEST_FULL=0
-          export PROJECTS="stackforge/nova-docker $PROJECTS"
-          cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
-          ./safe-devstack-vm-gate-wrap.sh
+          ./devstack-gate/devstack-vm-gate-wrap.sh
 
     publishers:
       - scp:
