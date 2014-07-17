@@ -404,17 +404,7 @@ def main
 
     # Ignore exit code from now onwards..
     Sh.always_exit_as_success = true # if ENV["OS_TYPE"] != "ubuntu"
-    exit_code = 0
-    wait_time = 60 * 3 # 3 hours
-
-    # run_sanity can potentially hang.. Use a timeout.
-    begin
-    Timeout::timeout(wait_time * 60) { exit_code = run_test }
-    rescue Timeout::Error => e
-    puts "\n#{COLOR_RED} ERROR \"#{e}\": run_test() timed out after " +
-         "#{wait_time} minutes #{COLOR_RESET}"
-    exit_code = -1
-    end
+    exit_code = run_sanity
 
     # Check if systest failures are to be ignored, for the moment.
     if exit_code != 0 then
