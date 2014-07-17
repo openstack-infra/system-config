@@ -3,10 +3,6 @@
 require 'rubygems'
 require 'json'
 
-# "apt-get -y install rubygems"
-# "yum -y install rubygems"
-# "gem install json"
-
 exit(0) if ENV["ZUUL_CHANGES"] !~ /refs\/changes\/(.*)/
 change_set = $1
 

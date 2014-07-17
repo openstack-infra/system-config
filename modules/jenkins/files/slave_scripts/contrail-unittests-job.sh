@@ -107,16 +107,18 @@ function build_and_run_unittest() {
     fi
     unset BUILD_ONLY
 
-    # Find and run relevant tests.
+    # Find and run relevant tests. If cannot find, run all unit tests.
     UNIT_TESTS=`/usr/local/jenkins/slave_scripts/contrail-controller-unittests-gather.rb`
-    if [ ! -z $UNIT_TESTS ]; then
-        scons -j $SCONS_JOBS $UNIT_TESTS 2>&1 | tee -a $WORKSPACE/scons_test.log
-        exit_code=$?
+    if [ -z $UNIT_TESTS ]; then
+        UNIT_TESTS=test
+    fi
 
-        # Exit in case of error
-        if [ "$exit_code" != "0" ]; then
-            ci_exit $exit_code
-        fi
+    scons -j $SCONS_JOBS $UNIT_TESTS 2>&1 | tee -a $WORKSPACE/scons_test.log
+    exit_code=$?
+
+    # Exit in case of error
+    if [ "$exit_code" != "0" ]; then
+        ci_exit $exit_code
     fi
 
     # Flaky test results are ignored.
