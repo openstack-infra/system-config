@@ -172,6 +172,11 @@ function setup_pip {
         exit 1
     fi
 
+    if is_rhel6; then
+        yum erase -y python-setuptools
+        rm -rf /usr/lib/python2.6/site-packages/setuptools*
+    fi
+
     python get-pip.py
     pip install -U setuptools
 }

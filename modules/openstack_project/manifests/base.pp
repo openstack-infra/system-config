@@ -148,6 +148,14 @@ class openstack_project::base(
       source  => 'puppet:///modules/openstack_project/centos-puppetlabs.repo',
       replace => true,
     }
+    file { '/etc/yum.conf':
+      ensure  => present,
+      owner   => 'root',
+      group   => 'root',
+      mode    => '0444',
+      source  => 'puppet:///modules/openstack_project/yum.conf',
+      replace => true,
+    }
   }
 
   file { '/etc/puppet/puppet.conf':
