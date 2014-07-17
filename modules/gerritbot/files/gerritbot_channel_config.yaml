@@ -295,6 +295,7 @@ openstack-chef:
       - stackforge/cookbook-openstack-orchestration
       - stackforge/cookbook-openstack-telemetry
       - stackforge/openstack-chef-repo
+      - stackforge/openstack-chef-specs
     branches:
       - master
       - stable/grizzly
