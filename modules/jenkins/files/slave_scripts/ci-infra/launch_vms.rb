@@ -100,14 +100,14 @@ class Vm
 
                 t = Time.now
                 File.open(kfile, "w") {|fp| t.to_a.each {|i| fp.puts i}}
-                `scp #{kfile} root@#{hostip}:#{kfile} &> /dev/null`
+                `rsync -ac #{kfile} root@#{hostip}:#{kfile} &> /dev/null`
 
                 # puts "Updated time #{t} to #{@vmname}"
-                # Sh.run("scp #{kfile} root@#{@hostip}:#{kfile}", true, 1, 1,
+                # Sh.run("rsync -ac #{kfile} root@#{@hostip}:#{kfile}", true, 1, 1,
                 #        false)
                 # rescue StandardError, Interrupt, SystemExit
                 rescue Exception => e
-                    # puts "ERROR: scp #{kfile} root@#{@hostip}:#{kfile} #{e}"
+                    # puts "ERROR: rsync -ac #{kfile} root@#{@hostip}:#{kfile} #{e}"
                 end
                 sleep 2
             end
@@ -220,7 +220,7 @@ EOF
 
         # Wait for all VMs to come up.
         @@vms.each { |vm|
-            Sh.run("scp /etc/hosts #{vm.hostip}:/etc/.", false, 100, 5)
+            Sh.run("rsync -ac /etc/hosts #{vm.hostip}:/etc/.", false, 100, 5)
         }
 
         # Make sure that hostname is resolvable inside the VMs.
