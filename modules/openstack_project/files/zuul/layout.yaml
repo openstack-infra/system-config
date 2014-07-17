@@ -3362,6 +3362,12 @@ projects:
       - gate-congress-specs-docs
       - gate-congress-specs-python27
 
+  - name: stackforge/openstack-chef-specs
+    check:
+      - gate-openstack-chef-specs-docs
+    gate:
+      - gate-openstack-chef-specs-docs
+
   - name: stackforge/cookbook-openstack-block-storage
     template:
       - name: chef-jobs
@@ -3888,6 +3894,12 @@ projects:
       - noop
 
   - name: stackforge/opencafe
+    check:
+      - noop
+    gate:
+      - noop
+
+  - name: stackforge/openstack-chef-specs
     check:
       - noop
     gate:
