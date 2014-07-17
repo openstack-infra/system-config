@@ -918,6 +918,13 @@
   acl-config: /home/gerrit2/acls/stackforge/chef-cookbooks.config
   options:
     - direct-release
+- project: stackforge/openstack-chef-specs
+  group: openstack-chef
+  docimpact-group: openstack-chef
+  description: Openstack Chef Blueprint specs
+  acl-config: /home/gerrit2/acls/stackforge/chef-cookbooks.config
+  options:
+    - direct-release
 - project: stackforge/openstack-cli-powershell
   description: Powershell environment for Openstack
 - project: stackforge/openstack-sdk-dotnet

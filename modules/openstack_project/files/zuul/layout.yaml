@@ -3893,6 +3893,12 @@ projects:
     gate:
       - noop
 
+  - name: stackforge/openstack-chef-specs
+    check:
+      - noop
+    gate:
+      - noop
+
   - name: stackforge/openstack-chef-repo
     check:
       - gate-openstack-chef-repo
