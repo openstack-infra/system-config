@@ -4862,8 +4862,19 @@ projects:
       - noop
 
   - name: stackforge/doc8
+    check:
+      - gate-doc8-python26
+      - gate-doc8-python27
+      - gate-doc8-python33
+      - gate-doc8-pep8
+    gate:
+      - gate-doc8-python26
+      - gate-doc8-python27
+      - gate-doc8-python33
+      - gate-doc8-pep8
+    post:
+      - doc8-branch-tarball
     template:
-      - name: python-jobs
       - name: publish-to-pypi
 
   - name: stackforge/tacker
