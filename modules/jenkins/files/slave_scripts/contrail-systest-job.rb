@@ -132,10 +132,12 @@ end
 def install_contrail
     vm = @vms.first
 
-    # XXX Temporary hack. Fix this in the base image itself.
+    # Temporary fix until base image is fixed.
     if get_os_type == "centos64" then
         Sh.run("ssh #{vm.vmname} yum -y remove augeas-libs-0.9.0-4.el6.x86_64 gnutls-devel-2.8.5-10.el6_4.2.x86_64", true)
         Sh.run("service squid start", true)
+    else
+        Sh.run("ssh #{vm.vmname} apt-get -y remove nfs-common", true)
     end
 
     Sh.run("rsync -ac #{@topo_file} #{vm.vmname}:/opt/contrail/utils/fabfile/testbeds/testbed.py", false, 20, 4)
