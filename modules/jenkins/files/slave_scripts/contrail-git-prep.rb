@@ -53,15 +53,20 @@ def self.setup_contrail_repo(use_public)
     flavor = "centos64_os" if !ENV["OS_TYPE"].nil? and ENV["OS_TYPE"] == "centos"
 
     if use_public then
-        Sh.run "repo init --repo-url 'https://github.com/opencontrail-ci-admin/git-repo' -u git@github.com:Juniper/contrail-vnc -b #{branch}"
+        Sh.run("repo init --repo-url " +
+               "'https://github.com/opencontrail-ci-admin/git-repo' " +
+               "-u git@github.com:Juniper/contrail-vnc -b #{branch}", false,
+               100, 30)
     else
         branch = "mainline" if branch == "master"
-        Sh.run "repo init --repo-url 'https://github.com/opencontrail-ci-admin/git-repo' -u git@github.com:Juniper/contrail-vnc-private " +
-           "-m #{branch}/#{flavor}/manifest-havana.xml"
+        Sh.run("repo init --repo-url " +
+               "'https://github.com/opencontrail-ci-admin/git-repo' " +
+               "-u git@github.com:Juniper/contrail-vnc-private " +
+               "-m #{branch}/#{flavor}/manifest-havana.xml", false, 100, 30)
     end
 
     # Sync the repo
-    Sh.run "repo sync"
+    Sh.run("repo sync", false, 100, 30)
 
     # Remove annoying non-exsting shallow file symlink
     Sh.run "rm -rf third_party/euca2ools/.git/shallow"
