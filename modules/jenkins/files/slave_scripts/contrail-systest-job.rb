@@ -217,8 +217,13 @@ end
 
 # Verify that contrail-status shows 'up' for all necessary components.
 def verify_contrail
-    Sh.run "ssh #{@vms[0].vmname} /usr/bin/openstack-status"
-    @vms.each { |vm| Sh.run "ssh #{vm.vmname} /usr/bin/contrail-status" }
+    o, e = Sh.rrun("ssh #{@vms[0].vmname} openstack-status")
+    exit_code = (o =~ /failed/) ? -1 : 0
+    @vms.each { |vm|
+        o, e = Sh.rrun("ssh #{vm.vmname} contrail-status")
+        exit_code = -1 if o =~ /failed/
+    }
+    return exit_code
 end
 
 def run_sanity(fab_test)
@@ -237,7 +242,8 @@ def run_sanity(fab_test)
 
     fab_test = update_nova_libvirt_driver(fab_test)
 
-    cmd = "ssh #{@vms.first.vmname} \"(export TEST_RETRY_FACTOR=20.0 export TEST_DELAY_FACTOR=2 GUESTVM_IMAGE=cirros-0.3.0-x86_64-uec; cd /opt/contrail/utils; fab #{fab_test})\""
+    # GUESTVM_IMAGE=cirros-0.3.0-x86_64-uec
+    cmd = "ssh #{@vms.first.vmname} \"(export TEST_RETRY_FACTOR=20.0 export TEST_DELAY_FACTOR=2; cd /opt/contrail/utils; fab #{fab_test})\""
     o, exit_code = Sh.run(cmd, true)
 
     # Copy sanity log files, as the sub-slave VMs will go away.
@@ -281,19 +287,18 @@ def run_test(image = @options.image)
     setup_contrail(image)
     install_contrail
     setup_sanity
-    verify_contrail
 
     # Ignore exit code from now onwards..
     Sh.always_exit_as_success = true
-    return 0
 
-    exit_code = 0
+    exit_code = verify_contrail
     @options.fab_tests.each { |fab_test|
-        exit_code = run_sanity(fab_test)
         break if exit_code != 0
+        exit_code = run_sanity(fab_test)
     }
 
-    Sh.run("lynx --dump #{ENV['WORKSPACE']}/logs_*/logs/*/test_report.html", true)
+    Sh.run("lynx --dump #{ENV['WORKSPACE']}/logs_*/logs/*/test_report.html",
+           true)
     return exit_code
 end
 
