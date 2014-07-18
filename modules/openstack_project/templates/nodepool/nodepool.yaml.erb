@@ -115,6 +115,20 @@ labels:
       - name: hpcloud-b3
       - name: hpcloud-b4
       - name: hpcloud-b5
+  - name: devstack-precise-2-node
+    image: devstack-precise
+    ready-script: multinode_setup.sh
+    subnodes: 1
+    min-ready: 0
+    providers:
+      - name: rax-dfw
+      - name: rax-ord
+      - name: rax-iad
+      - name: hpcloud-b1
+      - name: hpcloud-b2
+      - name: hpcloud-b3
+      - name: hpcloud-b4
+      - name: hpcloud-b5
   - name: devstack-f20
     image: devstack-f20
     min-ready: 5
