@@ -287,14 +287,15 @@ def run_test(image = @options.image)
     setup_contrail(image)
     install_contrail
     setup_sanity
+    exit_code = verify_contrail
+    return exit_code if exit_code != 0
 
     # Ignore exit code from now onwards..
     Sh.always_exit_as_success = true
 
-    exit_code = verify_contrail
     @options.fab_tests.each { |fab_test|
-        break if exit_code != 0
         exit_code = run_sanity(fab_test)
+        break if exit_code != 0
     }
 
     Sh.run("lynx --dump #{ENV['WORKSPACE']}/logs_*/logs/*/test_report.html",
@@ -403,7 +404,7 @@ def main
     end
 
     # Ignore exit code from now onwards..
-    Sh.always_exit_as_success = true # if ENV["OS_TYPE"] != "ubuntu"
+    Sh.always_exit_as_success = true if ENV["OS_TYPE"] != "ubuntu"
     exit_code = run_test
 
     # Check if systest failures are to be ignored, for the moment.
