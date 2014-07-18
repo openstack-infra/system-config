@@ -3239,3 +3239,13 @@
 
     jobs:
       - python-jobs
+
+- project:
+    name: tuskar-ui-sat6
+    github-org: stackforge
+    node: bare-precise
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - python-jobs
+      - pypi-jobs
