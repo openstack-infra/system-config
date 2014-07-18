@@ -1158,6 +1158,9 @@
   docimpact-group: turbo-hipster
   description: A generic zuul worker using the gearman protocol.
   upstream: git://github.com/rcbau/turbo-hipster.git
+- project: stackforge/tuskar-ui-sat6
+  description: A plugin for Satelitte 6 support in Tuskar-UI.
+  upstream: https://github.com/jsomara/tuskar-ui-sat6
 - project: stackforge/warm
   description: Provides the ability to deploy OpenStack resources from Yaml templates.
   upstream: git://github.com/sahid/warm.git
