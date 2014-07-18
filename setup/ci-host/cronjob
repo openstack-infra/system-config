@@ -23,7 +23,10 @@ do
 		scp root@148.251.46.180:/backups/$vm $BACKUP_LOC
 		ssh root@148.251.46.180 rm /backups/$vm
 	else
-		scp root@148.251.46.180:/backups/$review $BACKUP_LOC
-		ssh root@148.251.46.180 rm /backups/$review
+		if [ $vm -eq $review ]; then
+			scp root@148.251.46.180:/backups/$vm $BACKUP_LOC
+			ssh root@148.251.46.180 rm /backups/$vm
+		fi
+		echo "Done..."
 	fi
 done
