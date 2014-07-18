@@ -5671,3 +5671,9 @@ projects:
       - gate-rack-python27
     post:
       - rack-coverage
+
+  - name: stackforge/tuskar-ui-extras
+    check:
+      - noop
+    gate:
+      - noop
