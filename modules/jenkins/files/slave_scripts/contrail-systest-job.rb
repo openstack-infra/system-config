@@ -208,7 +208,7 @@ def setup_sanity
     if branch != "master" then # use venv
         Sh.run("ssh #{vm.vmname} \"(source /opt/contrail/api-venv/bin/activate && source /etc/contrail_bashrc && pip install fixtures testtools testresources selenium pyvirtualdisplay pexpect)\"", false, 20, 4)
     else
-        Sh.run("ssh #{vm.vmname} \"(source /etc/contrail_bashrc && pip install fixtures testtools testresources selenium pyvirtualdisplay)\"", false, 20, 4)
+        Sh.run("ssh #{vm.vmname} \"(source /etc/contrail_bashrc && pip install fixtures testtools testresources selenium pyvirtualdisplay pexpect)\"", false, 20, 4)
     end
 
     Sh.run "ssh #{vm.vmname} rm -rf /root/contrail-test"
