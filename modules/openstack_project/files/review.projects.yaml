@@ -1205,6 +1205,9 @@
   docimpact-group: turbo-hipster
   description: A generic zuul worker using the gearman protocol.
   upstream: git://github.com/rcbau/turbo-hipster.git
+- project: stackforge/tuskar-ui-extras
+  description: Additional plugins for Tuskar-UI.
+  upstream: https://github.com/jsomara/tuskar-ui-sat6
 - project: stackforge/ux
   description: The OpenStack User Experience Project.
   use-storyboard: true
