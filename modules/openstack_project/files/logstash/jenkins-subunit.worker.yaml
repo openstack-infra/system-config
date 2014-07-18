@@ -1,0 +1,6 @@
+gearman-host: logstash.openstack.org
+gearman-port: 4730
+output-host: localhost
+output-port: 9999
+output-mode: tcp
+config: /etc/logstash/subunit2sql.conf
