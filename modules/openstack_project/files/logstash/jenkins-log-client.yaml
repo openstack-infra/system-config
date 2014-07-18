@@ -11,6 +11,11 @@ zmq-publishers:
   - tcp://jenkins06.openstack.org:8888
   - tcp://jenkins07.openstack.org:8888
 
+subunit-files:
+  - name: logs/testrepository.subunit
+    retry-get: True
+  - name: logs/old/testrepository.subunit
+
 # List of files to source logs from.
 source-files:
   - name: console.html
