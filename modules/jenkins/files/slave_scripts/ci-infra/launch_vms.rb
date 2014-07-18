@@ -192,7 +192,7 @@ class Vm
             vmname.gsub!(/\./, '-')
             vmname += ".localdomain.com"
 
-            short_name = "ci-oc-subslave-#{floatingip}-#{i}"
+            short_name = "ci-oc-subslave-#{ENV["OS_TYPE"]}-#{floatingip}-#{i}"
             short_name.gsub!(/\./, '-')
 
             vm = Vm.create_internal(short_name, vmname, nil, metadata, 4) # large
