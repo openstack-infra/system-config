@@ -119,7 +119,7 @@ class Vm
     def Vm.create_internal(vmshort_name, vmname, floatingip, metadata, flavor)
         puts "Creating VM #{vmname}"
         net_id, e = Sh.crun "nova net-list |\grep -w internet | awk '{print $2}'"
-        image_id, e = Sh.crun %{glance image-list |\grep " #{@@options.image} " | awk '{print $2}'}
+        image_id, e = Sh.crun %{glance image-list |\grep " #{@@options.image} " | \grep active | awk '{print $2}'}
         cmd = "nova boot --poll --flavor #{flavor} #{metadata} --nic net-id=#{net_id} --image #{image_id} #{vmname}"
 
         if @@options.dry_run then
