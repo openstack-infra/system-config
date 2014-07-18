@@ -206,7 +206,7 @@ def setup_sanity
     vm = @vms.first
     branch = @options.branch
     if branch != "master" then # use venv
-        Sh.run("ssh #{vm.vmname} \"(source /opt/contrail/api-venv/bin/activate && source /etc/contrail_bashrc && pip install fixtures testtools testresources selenium pyvirtualdisplay)\"", false, 20, 4)
+        Sh.run("ssh #{vm.vmname} \"(source /opt/contrail/api-venv/bin/activate && source /etc/contrail_bashrc && pip install fixtures testtools testresources selenium pyvirtualdisplay pexpect)\"", false, 20, 4)
     else
         Sh.run("ssh #{vm.vmname} \"(source /etc/contrail_bashrc && pip install fixtures testtools testresources selenium pyvirtualdisplay)\"", false, 20, 4)
     end
@@ -250,7 +250,7 @@ def run_sanity(fab_test)
     # as exit-code, and 0 implies success.
     if exit_code == 0 then
         exit_code, e = Sh.rrun(
-            %{lynx --dump #{ENV['WORKSPACE']}/logs_#{fab_test}/*/test_report.html | } +
+            %{lynx --dump #{ENV['WORKSPACE']}/logs_#{fab_test}/logs/*/test_report.html | } +
             %{\grep Status: | \grep "Fail\\|Error" | wc -l}, true)
         exit_code = exit_code.to_i
     end
@@ -292,7 +292,7 @@ def run_test(image = @options.image)
         break if exit_code != 0
     }
 
-    Sh.run("lynx --dump #{ENV['WORKSPACE']}/logs_*/*/test_report.html", true)
+    Sh.run("lynx --dump #{ENV['WORKSPACE']}/logs_*/logs/*/test_report.html", true)
     return exit_code
 end
 
