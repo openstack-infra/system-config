@@ -160,8 +160,8 @@ class Vm
         return name
     end
 
-    def self.get_hostip (hostname = get_hostname)
-        return $1 if hostname =~ /ci-.*?(\d+\-\d+\-\d+\-\d+)/
+    def self.get_floating_ip (hostname = get_hostname)
+        return $1.gsub(/-/, '.') if hostname =~ /(\d+\-\d+\-\d+\-\d+)$/
         return "127.0.0.1"
     end
 

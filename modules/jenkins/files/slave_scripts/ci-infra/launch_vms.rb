@@ -184,7 +184,7 @@ class Vm
 
     def Vm.create_subslaves(count = @@options.count)
         # Find my floatingip
-        floatingip = get_hostip()
+        floatingip = get_floating_ip()
 
         metadata = "--meta slave-master=#{Vm.get_interface_ip}"
         1.upto(count) { |i|
