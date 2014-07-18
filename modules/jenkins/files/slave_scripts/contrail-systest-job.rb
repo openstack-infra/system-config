@@ -132,14 +132,6 @@ end
 def install_contrail
     vm = @vms.first
 
-    # Temporary fix until base image is fixed.
-    if get_os_type == "centos64" then
-        Sh.run("ssh #{vm.vmname} yum -y remove augeas-libs-0.9.0-4.el6.x86_64 gnutls-devel-2.8.5-10.el6_4.2.x86_64", true)
-        Sh.run("service squid start", true)
-    else
-        Sh.run("ssh #{vm.vmname} apt-get -y remove nfs-common", true)
-    end
-
     Sh.run("rsync -ac #{@topo_file} #{vm.vmname}:/opt/contrail/utils/fabfile/testbeds/testbed.py", false, 20, 4)
     Sh.run "ssh #{vm.vmname} \"(cd /opt/contrail/utils; fab install_contrail)\""
     Sh.run "echo \"perl -ni -e 's/JVM_OPTS -Xss\\d+/JVM_OPTS -Xss512/g; print \\$_;' /etc/cassandra/cassandra-env.sh\" | ssh -t #{vm.vmname} \$(< /dev/fd/0)"
@@ -245,7 +237,7 @@ def run_sanity(fab_test)
 
     fab_test = update_nova_libvirt_driver(fab_test)
 
-    cmd = "ssh #{@vms.first.vmname} \"(export TEST_RETRY_FACTOR=20.0 export TEST_DELAY_FACTOR=2; cd /opt/contrail/utils; fab #{fab_test})\""
+    cmd = "ssh #{@vms.first.vmname} \"(export TEST_RETRY_FACTOR=20.0 export TEST_DELAY_FACTOR=2 GUESTVM_IMAGE=cirros-0.3.0-x86_64-uec; cd /opt/contrail/utils; fab #{fab_test})\""
     o, exit_code = Sh.run(cmd, true)
 
     # Copy sanity log files, as the sub-slave VMs will go away.
