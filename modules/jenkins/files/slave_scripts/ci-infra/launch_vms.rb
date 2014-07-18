@@ -198,7 +198,6 @@ class Vm
             vm = Vm.create_internal(short_name, vmname, nil, metadata, 4) # large
             vm.send_keepalive
         }
-
         pp @@vms
         setup_etc_hosts
 
@@ -208,6 +207,7 @@ class Vm
     end
 
     def Vm.setup_etc_hosts
+
         etc_hosts = <<EOF
 # launch_vms.rb autogeneration start
 #{ s = ""; @@vms.each { |vm| s += "#{vm.hostip} #{vm.short_name} #{vm.vmname}\n" }; s }
@@ -220,7 +220,9 @@ EOF
 
         # Wait for all VMs to come up.
         @@vms.each { |vm|
+            Sh.run("ssh #{vm.hostip} uptime", false, 100, 5)
             Sh.run("rsync -ac /etc/hosts #{vm.hostip}:/etc/.", false, 100, 5)
+            Sh.run("ssh #{vm.hostip} cat /etc/hosts", false, 100, 5)
         }
 
         # Make sure that hostname is resolvable inside the VMs.
