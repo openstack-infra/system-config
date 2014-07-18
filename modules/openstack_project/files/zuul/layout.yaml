@@ -4998,6 +4998,8 @@ projects:
       - noop
 
   - name: stackforge/rack
+    template:
+      - name: python-jobs
     check:
       - gate-rack-pep8
       - gate-rack-python26
