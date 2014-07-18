@@ -11,6 +11,13 @@ zmq-publishers:
   - tcp://jenkins06.openstack.org:8888
   - tcp://jenkins07.openstack.org:8888
 
+subunit-files:
+  - name: logs/testrepository.subunit
+    retry-get: True
+    job-filter: 'gate-(tempest|grenade)-dsvm.*'
+  - name: logs/old/testrepository.subunit
+    job-filter: 'gate-grenade-dsvm.*'
+
 # List of files to source logs from.
 source-files:
   - name: console.html
