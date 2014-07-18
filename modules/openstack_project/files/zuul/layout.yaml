@@ -713,6 +713,7 @@ projects:
   - name: openstack/barbican
     template:
       - name: translation-jobs
+      - name: openstack-server-publish-jobs
     check:
       - gate-barbican-pep8
       - gate-barbican-python27
