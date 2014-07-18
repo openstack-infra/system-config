@@ -49,6 +49,8 @@ def devstack_params(item, job, params):
         'icehouse' in job.name or
         'precise' in job.name)):
         params['ZUUL_NODE'] = 'devstack-precise'
+    elif 'aiopcpu' in job.name:
+        params['ZUUL_NODE'] = 'devstack-trusty-2-node'
     else:
         params['ZUUL_NODE'] = 'devstack-trusty'
 
