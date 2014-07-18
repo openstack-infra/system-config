@@ -17,16 +17,11 @@ ssh ${SSH_HOST} " (
 	bash -x /root/backup.sh
 ) "
 
+rsync -avz root@148.251.46.180:/backups/$vm $BACKUP_LOC
+
 for vm in $puppetmaster $puppetdb $review $zuul $jenkins
 do
-	if [ $day_of_week -eq 7 ]; then
-		scp root@148.251.46.180:/backups/$vm $BACKUP_LOC
+	if [ -f $BACKUP_LOC/$vm ]; then
 		ssh root@148.251.46.180 rm /backups/$vm
-	else
-		if [ $vm -eq $review ]; then
-			scp root@148.251.46.180:/backups/$vm $BACKUP_LOC
-			ssh root@148.251.46.180 rm /backups/$vm
-		fi
-		echo "Done..."
 	fi
 done
