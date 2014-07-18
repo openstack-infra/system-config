@@ -903,6 +903,9 @@
 - project: stackforge/novaimagebuilder
   description: Image building tool for OpenStack.
   upstream: git://github.com/redhat-openstack/image-building-poc.git
+- project: stackforge/nova-solver-scheduler
+  description: Nova scheduler driver for constraints-based scheduling
+  upstream: git://github.com/CiscoSystems/nova-solver-scheduler.git
 - project: stackforge/occi-os
   description: OCCI-OS provides a python egg which can be easily deployed in OpenStack and will thereby add OCCI support and interface to OpenStack.
   upstream: git://github.com/tmetsch/occi-os.git
