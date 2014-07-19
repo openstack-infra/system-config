@@ -201,6 +201,9 @@ class Util
             puts "Jobs skipped due to jenkins.opencontrail.org:/root/ci-test/skip_jobs"
             exit
         end
+        File.open("#{ENV['WORKSPACE']}/env.log", "w") { |fp|
+            fp.puts(PP.pp(ENV, "Environment Variables: "))
+        }
     end
 
     def self.wait
