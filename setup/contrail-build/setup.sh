@@ -87,7 +87,7 @@ image=$2
 if [ -z $image ]; then
     image="ci-jenkins-slave"
 fi
-orig_image_id=`glance image-list |\grep -w " ci-jenkins-slave " | awk '{print $2}'`
+orig_image_id=`glance image-list |\grep -w " $image " | awk '{print $2}'`
 instance_id=`nova list |\grep -w $1 | awk '{print $2}'`
 nova image-create --poll $instance_id $image
 glance image-delete $orig_image_id
