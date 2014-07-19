@@ -74,6 +74,10 @@ pipelines:
           approval:
             - verified: 1
           username_filter: zuul
+        - event: comment-added
+          approval:
+            - verified: 2
+          username_filter: opencontrail-admin
     start:
       gerrit:
         verified: 0
