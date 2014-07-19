@@ -120,6 +120,10 @@ class Vm
         puts "Creating VM #{vmname}"
         net_id, e = Sh.crun "nova net-list |\grep -w internet | awk '{print $2}'"
         image_id, e = Sh.crun %{glance image-list |\grep " #{@@options.image} " | \grep active | awk '{print $2}'}
+
+        # Use image_name itself if image_id could not be found..
+        image_id = @@options.image if image_id.nil? or image_id.empty?
+
         cmd = "nova boot --poll --flavor #{flavor} #{metadata} --nic net-id=#{net_id} --image #{image_id} #{vmname}"
 
         if @@options.dry_run then
