@@ -204,6 +204,7 @@ class Util
         File.open("#{ENV['WORKSPACE']}/env.log", "w") { |fp|
             fp.puts(PP.pp(ENV, "Environment Variables: "))
         }
+        Sh.run("mkdir -p #{ENV['WORKSPACE']}")
     end
 
     def self.wait
