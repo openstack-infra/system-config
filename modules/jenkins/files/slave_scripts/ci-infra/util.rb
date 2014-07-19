@@ -193,7 +193,7 @@ class Util
 
     def self.ci_setup
         $stdout.sync = true
-        ENV['WORKSPACE'] ||= ENV['PWD']
+        ENV['WORKSPACE'] ||= "#{ENV['HOME']}/ci"
         ENV['USER'] ||= "jenkins"
         ENV['ZUUL_BRANCH'] ||= Util.ci_default_branch
         ENV['OS_TYPE'] = `cat /etc/issue | head -n 1 | awk '{print $1}'`.chomp.downcase
