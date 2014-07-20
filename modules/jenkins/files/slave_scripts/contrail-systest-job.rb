@@ -96,7 +96,7 @@ def setup_contrail(image)
         if ENV["OS_TYPE"] == "ubuntu" then
             Sh.run "ssh #{vm.vmname} dpkg -i #{dest_image}"
         else # centos
-            Sh.run("ssh #{vm.vmname} yum -y remove gnutls-devel augeas netcf-devel nfs-common", true)
+            Sh.run("ssh #{vm.vmname} yum -y remove gnutls gnutls-devel gnutls-utils augeas netcf-devel nfs-common", true)
             Sh.run "ssh #{vm.vmname} yum -y install #{dest_image}"
         end
         Sh.run "ssh #{vm.vmname} /opt/contrail/contrail_packages/setup.sh", true
