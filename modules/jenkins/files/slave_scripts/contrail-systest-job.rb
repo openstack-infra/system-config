@@ -211,8 +211,17 @@ def setup_sanity
     else
         Sh.run("ssh #{vm.vmname} \"(source /etc/contrail_bashrc && pip install fixtures testtools testresources selenium pyvirtualdisplay pexpect)\"", false, 20, 4)
     end
-    Sh.run "ssh #{vm.vmname} rm -rf #{ENV['HOME']}/contrail-test"
-    Sh.run("rsync -ac --progress #{ENV['WORKSPACE']}/repo/third_party/contrail-test #{vm.vmname}:/#{ENV['HOME']}/", false, 60, 10)
+    src = "#{ENV['WORKSPACE']}/repo/third_party/contrail-test"
+    dest = "#{ENV['HOME']}/contrail-test"
+    Sh.run "ssh #{vm.vmname} rm -rf #{dest}"
+    if File.directory?(src) then
+        Sh.run("rsync -ac --progress #{src} #{vm.vmname}:/#{ENV['HOME']}/",
+               false, 60, 10)
+    else
+        Sh.run("ssh #{vm.vmname} git clone --branch #{branch} " +
+               "git@github.com:juniper/contrail-test.git #{dest}",
+               false, 60, 10)
+    end
 end
 
 # Verify that contrail-status shows 'up' for all necessary components.
