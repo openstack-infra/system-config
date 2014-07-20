@@ -90,7 +90,7 @@ def setup_contrail(image)
 
     @vms.each { |vm|
 #       Sh.run "ssh root@#{vm.vmname} apt-get update", true
-        Sh.run("rsync -ac #{image} root@#{vm.vmname}:#{dest_image}", false, 50, 10)
+        Sh.run("rsync -ac --progress #{image} root@#{vm.vmname}:#{dest_image}", false, 50, 10)
 #       Sh.run("ssh #{vm.vmname} sync", false, 50, 10)
 
         if ENV["OS_TYPE"] == "ubuntu" then
@@ -133,7 +133,7 @@ end
 def install_contrail
     vm = @vms.first
 
-    Sh.run("rsync -ac #{@topo_file} #{vm.vmname}:/opt/contrail/utils/fabfile/testbeds/testbed.py", false, 20, 4)
+    Sh.run("rsync -ac --progress #{@topo_file} #{vm.vmname}:/opt/contrail/utils/fabfile/testbeds/testbed.py", false, 20, 4)
     Sh.run "ssh #{vm.vmname} \"(cd /opt/contrail/utils; fab install_contrail)\""
     Sh.run "echo \"perl -ni -e 's/JVM_OPTS -Xss\\d+/JVM_OPTS -Xss512/g; print \\$_;' /etc/cassandra/cassandra-env.sh\" | ssh -t #{vm.vmname} \$(< /dev/fd/0)"
 
@@ -170,7 +170,7 @@ def build_contrail_packages(repo = "#{ENV['WORKSPACE']}/repo")
     # Fetch build cache
     cache = "/cs-shared/builder/cache/#{get_os_type}/"
     Sh.run("mkdir -p #{cache}")
-    Sh.run("sshpass -p c0ntrail123 rsync -acz --no-owner --no-group ci-admin@ubuntu-build02:/cs-shared/builder/cache/#{get_os_type}/ #{cache}")
+    Sh.run("sshpass -p c0ntrail123 rsync --progress -acz --no-owner --no-group ci-admin@ubuntu-build02:/cs-shared/builder/cache/#{get_os_type}/ #{cache}")
     Sh.run("chown -R #{ENV['USER']}.#{ENV['USER']} #{cache}")
 
     if get_os_type == "ubuntu1204" then
@@ -248,7 +248,7 @@ def run_sanity(fab_test)
     o, exit_code = Sh.run(cmd, true)
 
     # Copy sanity log files, as the sub-slave VMs will go away.
-    Sh.run("rsync -ac #{@vms.first.vmname}:/root/logs #{ENV['WORKSPACE']}/logs_#{fab_test}", true)
+    Sh.run("rsync -ac --progress #{@vms.first.vmname}:/root/logs #{ENV['WORKSPACE']}/logs_#{fab_test}", true)
     Sh.run("ssh #{@vms.first.vmname} rm -rf /root/logs", true)
 
     puts "#{fab_test} complete, checking for any failures.."
@@ -327,7 +327,7 @@ def parse_options(args = ARGV)
         o.on("-i", "--image [checkout and build]", "Image to load") { |i|
             dest_image = File.basename(i)
             @options.image = "#{ENV['WORKSPACE']}/#{dest_image}"
-            Sh.run("sshpass -p c0ntrail123 rsync -ac ci-admin@ubuntu-build02:#{i} " +
+            Sh.run("sshpass -p c0ntrail123 rsync -ac --progress ci-admin@ubuntu-build02:#{i} " +
                    "#{ENV['WORKSPACE']}/#{dest_image}")
         }
         o.on("-b", "--branch [#{@options.branch}]", "Branch to use ") { |b|

@@ -100,14 +100,14 @@ class Vm
 
                 t = Time.now
                 File.open(kfile, "w") {|fp| t.to_a.each {|i| fp.puts i}}
-                `rsync -ac #{kfile} root@#{hostip}:#{kfile} &> /dev/null`
+                `rsync -ac --progress #{kfile} root@#{hostip}:#{kfile} &> /dev/null`
 
                 # puts "Updated time #{t} to #{@vmname}"
-                # Sh.run("rsync -ac #{kfile} root@#{@hostip}:#{kfile}", true, 1, 1,
+                # Sh.run("rsync -ac --progress #{kfile} root@#{@hostip}:#{kfile}", true, 1, 1,
                 #        false)
                 # rescue StandardError, Interrupt, SystemExit
                 rescue Exception => e
-                    # puts "ERROR: rsync -ac #{kfile} root@#{@hostip}:#{kfile} #{e}"
+                    # puts "ERROR: rsync -ac --progress #{kfile} root@#{@hostip}:#{kfile} #{e}"
                 end
                 sleep 2
             end
@@ -225,7 +225,7 @@ EOF
         # Wait for all VMs to come up.
         @@vms.each { |vm|
             Sh.run("ssh #{vm.hostip} uptime", false, 100, 5)
-            Sh.run("rsync -ac /etc/hosts #{vm.hostip}:/etc/.", false, 100, 5)
+            Sh.run("rsync -ac --progress /etc/hosts #{vm.hostip}:/etc/.", false, 100, 5)
             Sh.run("ssh #{vm.hostip} cat /etc/hosts", false, 100, 5)
         }
 
