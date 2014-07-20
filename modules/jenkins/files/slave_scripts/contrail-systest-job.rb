@@ -215,7 +215,7 @@ def setup_sanity
     dest = "#{ENV['HOME']}/contrail-test"
     Sh.run "ssh #{vm.vmname} rm -rf #{dest}"
     if File.directory?(src) then
-        Sh.run("rsync -ac --progress #{src} #{vm.vmname}:/#{ENV['HOME']}/",
+        Sh.run("rsync -ac --progress #{src} #{vm.vmname}:#{ENV['HOME']}/",
                false, 60, 10)
     else
         Sh.run("ssh #{vm.vmname} git clone --branch #{branch} " +
