@@ -119,6 +119,17 @@ function build_and_run_unittest() {
         fi
     fi
 
+    # Build the flaky tests.
+    export BUILD_ONLY=1
+    scons -j $SCONS_JOBS flaky-test 2>&1 | tee -a $WORKSPACE/scons_test.log
+    exit_code=$?
+
+    # Exit in case of error
+    if [ "$exit_code" != "0" ]; then
+        ci_exit $exit_code
+    fi
+    unset BUILD_ONLY
+
     # Flaky test results are ignored.
     scons -j $SCONS_JOBS -i flaky-test 2>&1 | tee -a $WORKSPACE/scons_test.log
     print_test_results
