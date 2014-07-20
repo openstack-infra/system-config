@@ -394,11 +394,6 @@ def main
     Util.ci_setup
     parse_options
 
-    if ENV["OS_TYPE"] == "centos" then
-        Sh.run("yum -y install gnutls-devel augeas netcf-devel nfs-common",
-               true)
-    end
-
     @image_built = false
     if @options.image.nil? then
         @image_built = true
