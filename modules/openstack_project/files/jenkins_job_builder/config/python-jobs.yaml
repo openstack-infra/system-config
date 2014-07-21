@@ -77,6 +77,12 @@
       - timestamps
 
     builders:
+      - shell: |
+          #!/bin/bash -xe
+          if ! rpm -ql libffi-devel >/dev/null ; then
+              yum install -y libffi-devel
+          fi
+          rpm -ql libffi-devel
       - revoke-sudo
       - gerrit-git-prep
       - python26:
