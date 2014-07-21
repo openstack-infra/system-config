@@ -673,9 +673,21 @@ jobs:
     voting: false
   - name: gate-trove-buildimage-mysql
     voting: false
+  - name: gate-trove-buildimage-mongodb
+    voting: false
+  - name: gate-trove-buildimage-couchbase
+    voting: false
+  - name: gate-trove-functional-dsvm-mysql-with-heat
+    voting: false
   - name: gate-trove-functional-dsvm-mysql
     voting: false
+  - name: gate-trove-functional-dsvm-mongodb-with-heat
+    voting: false
   - name: gate-trove-functional-dsvm-mongodb
+    voting: false
+  - name: gate-trove-functional-dsvm-couchbase-with-heat
+    voting: false
+  - name: gate-trove-functional-dsvm-couchbase
     voting: false
 # puppet-openstack targets
   - name: gate-puppet-vswitch-puppet-lint
@@ -1280,7 +1292,9 @@ projects:
       - trove-tarball
       - trove-merge-release-tags
     experimental:
+      - gate-trove-functional-dsvm-mysql-with-heat
       - gate-trove-functional-dsvm-mysql
+      - gate-trove-functional-dsvm-mongodb-with-heat
       - gate-trove-functional-dsvm-mongodb
 
   - name: openstack/tuskar

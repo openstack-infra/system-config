@@ -1268,14 +1268,24 @@
       - openstack-publish-jobs
       - translation-jobs
       - openstack-doc-jobs
-      - 'gate-trove-functional-dsvm-{datastore}':
+      - 'gate-trove-functional-dsvm-{datastore}-with-heat':
           datastore: 'mysql'
       - 'gate-trove-functional-dsvm-{datastore}':
+          datastore: 'mysql'
+      - 'gate-trove-functional-dsvm-{datastore}-with-heat':
           datastore: 'mongodb'
+      - 'gate-trove-functional-dsvm-{datastore}':
+          datastore: 'mongodb'
+      - 'gate-trove-functional-dsvm-{datastore}-with-heat':
+          datastore: 'couchbase'
+      - 'gate-trove-functional-dsvm-{datastore}':
+          datastore: 'couchbase'
       - 'gate-trove-buildimage-{datastore}':
           datastore: 'mysql'
       - 'gate-trove-buildimage-{datastore}':
           datastore: 'mongodb'
+      - 'gate-trove-buildimage-{datastore}':
+          datastore: 'couchbase'
 
 - project:
     name: python-troveclient
