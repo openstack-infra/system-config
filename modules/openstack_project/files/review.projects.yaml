@@ -99,9 +99,11 @@
 - project: openstack-infra/groups
   description: OpenStack Groups community portal
   upstream: git://github.com/mkissam/groups.git
+  use-storyboard: true
 - project: openstack-infra/groups-static-pages
   description: Community portal static pages
   upstream: git://github.com/mkissam/groups-static-pages
+  use-storyboard: true
 - project: openstack-infra/infra-manual
   group: openstack-ci
   options:
