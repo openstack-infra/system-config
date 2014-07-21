@@ -62,3 +62,13 @@
   description: Contrail Provisioning tools
   upstream: git@github.com:Juniper/contrail-provisioning
   acl-config: /home/gerrit2/acls/Juniper/contrail-provisioning.config
+
+- project: Juniper/contrail-test
+  description: Contrail Test Scripts
+  upstream: git@github.com:Juniper/contrail-test
+  acl-config: /home/gerrit2/acls/Juniper/contrail-test.config
+
+- project: Juniper/contrail-fabric-utils
+  description: Contrail Fabirc Utilites
+  upstream: git@github.com:Juniper/contrail-fabric-utils
+  acl-config: /home/gerrit2/acls/Juniper/contrail-fabric-utils.config

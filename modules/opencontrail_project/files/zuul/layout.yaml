@@ -418,3 +418,27 @@ projects:
       - noop
     post:
       - noop
+
+  - name: Juniper/contrail-test
+    check:
+      - ci-contrail-test-systest
+    silent:
+      - noop
+    check-tripleo:
+      - noop
+    gate:
+      - noop
+    post:
+      - noop
+
+  - name: Juniper/contrail-fabric-utils
+    check:
+      - ci-contrail-fabric-utils-systest
+    silent:
+      - noop
+    check-tripleo:
+      - noop
+    gate:
+      - noop
+    post:
+      - noop
