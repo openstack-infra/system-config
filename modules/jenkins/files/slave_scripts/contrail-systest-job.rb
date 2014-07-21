@@ -57,7 +57,6 @@ env.password = 'c0ntrail123'
 env.passwords = { #{get_each_host_password}, host_build: 'c0ntrail123' }
 env.ostypes = { #{get_each_host_ostype} }
 env.webui_config = False
-#env.webui = 'firefox'
 env.devstack = False
 env.test_retry_factor = 1.0
 env.test_delay_factor = 1.0
