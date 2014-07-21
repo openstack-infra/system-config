@@ -27,5 +27,6 @@ Major Systems
    wiki
    git
    openstackid
+   storyboard
 
 
