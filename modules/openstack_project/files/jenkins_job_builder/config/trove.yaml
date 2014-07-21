@@ -1,3 +1,26 @@
+- builder:
+    name: trove-int-tests
+    shell: |
+        #!/bin/bash -xe
+        export PYTHONUNBUFFERED=true
+        export DEVSTACK_GATE_TIMEOUT=80
+        export ENABLED_SERVICES=s-proxy,s-object,s-container,s-account,trove,tr-api,tr-tmgr,tr-cond
+        export PROJECTS="openstack/trove-integration openstack/diskimage-builder openstack/tripleo-image-elements $PROJECTS"
+        export HEAT_PROVISIONING_SUPPORT="{enable_heat}"
+
+        function post_test_hook {{
+            export BRIDGE_IP=10.1.0.1
+            cd /opt/stack/new/trove-integration/scripts
+            ./redstack kick-start {datastore}
+            ./redstack int-tests
+        }}
+
+        export -f post_test_hook
+
+        cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
+        ./safe-devstack-vm-gate-wrap.sh
+
+
 - job-template:
     name: 'gate-trove-buildimage-{datastore}'
     node: 'bare-precise || bare-trusty'
@@ -40,23 +63,29 @@
       - link-logs
       - net-info
       - devstack-checkout
-      - shell: |
-          #!/bin/bash -xe
-          export PYTHONUNBUFFERED=true
-          export DEVSTACK_GATE_TIMEOUT=80
-          export ENABLED_SERVICES=s-proxy,s-object,s-container,s-account,trove,tr-api,tr-tmgr,tr-cond
-          export PROJECTS="openstack/trove-integration openstack/diskimage-builder openstack/tripleo-image-elements $PROJECTS"
+      - trove-int-tests:
+         enable_heat: "False"
 
-          function post_test_hook {{
-              export BRIDGE_IP=10.1.0.1
-              cd /opt/stack/new/trove-integration/scripts
-              ./redstack kick-start {datastore}
-              ./redstack int-tests
-          }}
-          export -f post_test_hook
+    publishers:
+      - devstack-logs
+      - console-log
 
-          cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
-          ./safe-devstack-vm-gate-wrap.sh
+- job-template:
+    name: 'gate-trove-functional-dsvm-heat-integration-{datastore}'
+    node: 'devstack-precise || devstack-trusty'
+
+    wrappers:
+      - timeout:
+          timeout: 85
+          fail: true
+      - timestamps
+
+    builders:
+      - link-logs
+      - net-info
+      - devstack-checkout
+      - trove-int-tests:
+         enable_heat: "True"
 
     publishers:
       - devstack-logs
