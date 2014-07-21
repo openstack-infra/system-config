@@ -17,6 +17,11 @@ source /usr/local/jenkins/slave_scripts/select-mirror.sh $org $project
 
 venv=venv
 
+echo "Begin pip freeze output from test virtualenv:"
+echo "======================================================================"
+tox -e$venv -- pip freeze
+echo "======================================================================"
+
 mkdir -p doc/build
 export HUDSON_PUBLISH_DOCS=1
 tox -e$venv -- python setup.py build_sphinx
@@ -75,10 +80,5 @@ else
     mkdir -p doc/build/html/$BRANCH
     mv doc/build/tmp/* doc/build/html/$BRANCH
 fi
-
-echo "Begin pip freeze output from test virtualenv:"
-echo "======================================================================"
-.tox/$venv/bin/pip freeze
-echo "======================================================================"
 
 exit $result
