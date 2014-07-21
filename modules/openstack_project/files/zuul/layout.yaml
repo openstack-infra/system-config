@@ -2055,6 +2055,7 @@ projects:
       - name: check-requirements
       - name: integrated-gate
       - name: publish-to-pypi
+      - name: translation-jobs
     check:
       - gate-oslo.utils-python33
     gate:
