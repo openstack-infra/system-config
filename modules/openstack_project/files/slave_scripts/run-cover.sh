@@ -21,7 +21,7 @@ venv=cover
 # when either get fixed.
 python setup.py --version
 
-tox -e$venv
+tox --hashseed=noset -e$venv
 result=$?
 
 echo "Begin pip freeze output from test virtualenv:"

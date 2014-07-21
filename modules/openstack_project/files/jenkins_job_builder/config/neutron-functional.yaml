@@ -31,7 +31,7 @@
               sudo chown -R stack:stack $BASE/new/neutron
               echo 'Defaults:stack !requiretty' | sudo tee /etc/sudoers.d/00_no_tty
               echo "Running neutron functional test suite"
-              sudo -H -u stack tox -e functional
+              sudo -H -u stack tox --hashseed=noset -e functional
           }}
           export -f post_test_hook
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh

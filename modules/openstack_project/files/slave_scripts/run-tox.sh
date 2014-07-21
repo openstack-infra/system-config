@@ -31,7 +31,7 @@ sudo /usr/local/jenkins/slave_scripts/jenkins-sudo-grep.sh pre
 
 source /usr/local/jenkins/slave_scripts/select-mirror.sh $org $project
 
-tox -v -e$venv
+tox -v --hashseed=noset -e$venv
 result=$?
 
 sudo /usr/local/jenkins/slave_scripts/jenkins-sudo-grep.sh post

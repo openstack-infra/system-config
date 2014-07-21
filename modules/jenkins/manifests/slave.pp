@@ -119,16 +119,14 @@ class jenkins::slave(
       }
     }
     include pip::python3
-    # Temporarily handle tox separately so we can pin it
     package { 'tox':
-      ensure   => '1.6.1',
+      ensure   => latest,
       provider => pip3,
       require  => Class['pip::python3'],
     }
   } else {
-    # Temporarily handle tox separately so we can pin it
     package { 'tox':
-      ensure   => '1.6.1',
+      ensure   => latest,
       provider => pip,
       require  => Class['pip'],
     }

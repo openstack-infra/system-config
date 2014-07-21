@@ -31,7 +31,7 @@ sudo /usr/local/jenkins/slave_scripts/jenkins-sudo-grep.sh pre
 
 source /usr/local/jenkins/slave_scripts/select-mirror.sh $org $project
 
-tox -e$venv
+tox --hashseed=noset -e$venv
 result=$?
 
 echo "Begin pip freeze output from test virtualenv:"
