@@ -72,3 +72,38 @@
     publishers:
     - devstack-logs
     - console-log
+
+
+- job-group:
+    name: 'gate-trove-functional-dsvm-test-group'
+
+    jobs:
+      - 'gate-trove-functional-dsvm-{datastore}-use-heat-{enable-heat}':
+          datastore: 'mysql'
+          enable-heat: 'False'
+      - 'gate-trove-functional-dsvm-{datastore}-use-heat-{enable-heat}':
+          datastore: 'mysql'
+          enable-heat: 'True'
+      - 'gate-trove-functional-dsvm-{datastore}-use-heat-{enable-heat}':
+          datastore: 'mongodb'
+          enable-heat: 'False'
+      - 'gate-trove-functional-dsvm-{datastore}-use-heat-{enable-heat}':
+          datastore: 'mongodb'
+          enable-heat: 'True'
+      - 'gate-trove-functional-dsvm-{datastore}-use-heat-{enable-heat}':
+          datastore: 'couchbase'
+          enable-heat: 'False'
+      - 'gate-trove-functional-dsvm-{datastore}-use-heat-{enable-heat}':
+          datastore: 'couchbase'
+          enable-heat: 'True'
+
+- job-group:
+    name: 'gate-trove-buildimage-group'
+
+    jobs:
+      - 'gate-trove-buildimage-{datastore}':
+          datastore: 'mysql'
+      - 'gate-trove-buildimage-{datastore}':
+          datastore: 'mongodb'
+      - 'gate-trove-buildimage-{datastore}':
+          datastore: 'couchbase'
