@@ -53,18 +53,32 @@ def self.setup_contrail_repo(use_public)
     flavor = "centos64_os" if !ENV["OS_TYPE"].nil? and ENV["OS_TYPE"] == "centos"
 
     if use_public then
-        Sh.run "repo init --repo-url 'https://github.com/opencontrail-ci-admin/git-repo' -u git@github.com:Juniper/contrail-vnc -b #{branch}"
+        Sh.run("repo init --repo-url " +
+               "'https://github.com/opencontrail-ci-admin/git-repo' " +
+               "-u git@github.com:Juniper/contrail-vnc -b #{branch}", false,
+               100, 30)
     else
         branch = "mainline" if branch == "master"
-        Sh.run "repo init --repo-url 'https://github.com/opencontrail-ci-admin/git-repo' -u git@github.com:Juniper/contrail-vnc-private " +
-           "-m #{branch}/#{flavor}/manifest-havana.xml"
+        Sh.run("repo init --repo-url " +
+               "'https://github.com/opencontrail-ci-admin/git-repo' " +
+               "-u git@github.com:Juniper/contrail-vnc-private " +
+               "-m #{branch}/#{flavor}/manifest-havana.xml", false, 100, 30)
     end
 
     # Sync the repo
-    Sh.run "repo sync"
+    Sh.run("repo sync", false, 100, 30)
 
     # Remove annoying non-exsting shallow file symlink
     Sh.run "rm -rf third_party/euca2ools/.git/shallow"
+end
+
+# Workaround for the third_party repo - a hack. code needs reorg here
+# Move each git repo inside third_party into the new folder.
+def self.fix_project(dest, src)
+    o, err = Sh.rrun(%{\grep "path=\\"#{src}/" .repo/manifest.xml})
+    o.split("\n").each { |entry|
+        Sh.run("mv #{$1} #{dest}/") if entry =~ /path=\"(.*?)\"/
+    }
 end
 
 # TODO Ideally, we should tweak .repo/manifest.xml to directly fetch project
@@ -73,13 +87,15 @@ def self.switch_gerrit_repo
     return unless @gerrit_setup
 
     # Find the project git repo based on .repo/manifest.xml file
-    out, e = Sh.rrun "\grep name=\\\"#{@project} .repo/manifest.xml"
+    out, e = Sh.rrun "\grep name=\\\"#{@project}\\\" .repo/manifest.xml"
     if out !~ /path=\"(.*?)\"/ then
         puts "Warning! Cannot find project #{@project} path in .repo/manifest.xml"
         exit 0
     end
 
     old_project = $1
+    fix_project("#{ENV['WORKSPACE']}/#{@project}", old_project) \
+        if @project == "contrail-third-party"
 
     # Now, switch old_project to project's git repo fetched from gerrit.
     Sh.run "mv #{ENV['WORKSPACE']}/repo/#{old_project} #{ENV['WORKSPACE']}/repo/#{old_project}.orig"
@@ -91,7 +107,7 @@ def self.pre_build_setup
     # Setup cache first to avoid downloads over the Internet
     cache = "/tmp/cache/#{ENV['USER']}"
     Sh.run("mkdir -p #{cache}")
-    Sh.run("sshpass -p c0ntrail123 rsync -acz --no-owner --no-group ci-admin@ubuntu-build02:/tmp/cache/ci-admin/ #{cache}")
+    Sh.run("sshpass -p c0ntrail123 rsync -acz --progress --no-owner --no-group ci-admin@ubuntu-build02:/tmp/cache/ci-admin/ #{cache}")
     Sh.run("chown -R #{ENV['USER']}.#{ENV['USER']} #{cache}")
 
     Sh.run "python #{ENV['WORKSPACE']}/repo/third_party/fetch_packages.py 2>&1 | tee #{ENV['WORKSPACE']}/third_party_fetch_packages.log"

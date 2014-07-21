@@ -100,14 +100,14 @@ class Vm
 
                 t = Time.now
                 File.open(kfile, "w") {|fp| t.to_a.each {|i| fp.puts i}}
-                `rsync -ac #{kfile} root@#{hostip}:#{kfile} &> /dev/null`
+                `rsync -ac --progress #{kfile} root@#{hostip}:#{kfile} &> /dev/null`
 
                 # puts "Updated time #{t} to #{@vmname}"
-                # Sh.run("rsync -ac #{kfile} root@#{@hostip}:#{kfile}", true, 1, 1,
+                # Sh.run("rsync -ac --progress #{kfile} root@#{@hostip}:#{kfile}", true, 1, 1,
                 #        false)
                 # rescue StandardError, Interrupt, SystemExit
                 rescue Exception => e
-                    # puts "ERROR: rsync -ac #{kfile} root@#{@hostip}:#{kfile} #{e}"
+                    # puts "ERROR: rsync -ac --progress #{kfile} root@#{@hostip}:#{kfile} #{e}"
                 end
                 sleep 2
             end
@@ -119,7 +119,11 @@ class Vm
     def Vm.create_internal(vmshort_name, vmname, floatingip, metadata, flavor)
         puts "Creating VM #{vmname}"
         net_id, e = Sh.crun "nova net-list |\grep -w internet | awk '{print $2}'"
-        image_id, e = Sh.crun %{glance image-list |\grep " #{@@options.image} " | awk '{print $2}'}
+        image_id, e = Sh.crun %{glance image-list |\grep " #{@@options.image} " | \grep active | awk '{print $2}'}
+
+        # Use image_name itself if image_id could not be found..
+        image_id = @@options.image if image_id.nil? or image_id.empty?
+
         cmd = "nova boot --poll --flavor #{flavor} #{metadata} --nic net-id=#{net_id} --image #{image_id} #{vmname}"
 
         if @@options.dry_run then
@@ -184,7 +188,7 @@ class Vm
 
     def Vm.create_subslaves(count = @@options.count)
         # Find my floatingip
-        floatingip = get_hostip()
+        floatingip = get_floating_ip()
 
         metadata = "--meta slave-master=#{Vm.get_interface_ip}"
         1.upto(count) { |i|
@@ -192,13 +196,12 @@ class Vm
             vmname.gsub!(/\./, '-')
             vmname += ".localdomain.com"
 
-            short_name = "ci-oc-subslave-#{floatingip}-#{i}"
+            short_name = "ci-oc-subslave-#{ENV["OS_TYPE"]}-#{floatingip}-#{i}"
             short_name.gsub!(/\./, '-')
 
             vm = Vm.create_internal(short_name, vmname, nil, metadata, 4) # large
             vm.send_keepalive
         }
-
         pp @@vms
         setup_etc_hosts
 
@@ -208,6 +211,7 @@ class Vm
     end
 
     def Vm.setup_etc_hosts
+
         etc_hosts = <<EOF
 # launch_vms.rb autogeneration start
 #{ s = ""; @@vms.each { |vm| s += "#{vm.hostip} #{vm.short_name} #{vm.vmname}\n" }; s }
@@ -220,7 +224,9 @@ EOF
 
         # Wait for all VMs to come up.
         @@vms.each { |vm|
-            Sh.run("rsync -ac /etc/hosts #{vm.hostip}:/etc/.", false, 100, 5)
+            Sh.run("ssh #{vm.hostip} uptime", false, 100, 5)
+            Sh.run("rsync -ac --progress /etc/hosts #{vm.hostip}:/etc/.", false, 100, 5)
+            Sh.run("ssh #{vm.hostip} cat /etc/hosts", false, 100, 5)
         }
 
         # Make sure that hostname is resolvable inside the VMs.

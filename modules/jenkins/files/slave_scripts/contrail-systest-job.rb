@@ -90,12 +90,13 @@ def setup_contrail(image)
 
     @vms.each { |vm|
 #       Sh.run "ssh root@#{vm.vmname} apt-get update", true
-        Sh.run("rsync -ac #{image} root@#{vm.vmname}:#{dest_image}", false, 50, 10)
+        Sh.run("rsync -ac --progress #{image} root@#{vm.vmname}:#{dest_image}", false, 50, 10)
 #       Sh.run("ssh #{vm.vmname} sync", false, 50, 10)
 
         if ENV["OS_TYPE"] == "ubuntu" then
             Sh.run "ssh #{vm.vmname} dpkg -i #{dest_image}"
         else # centos
+            Sh.run("ssh #{vm.vmname} yum -y remove gnutls gnutls-devel gnutls-utils augeas netcf-devel nfs-common", true)
             Sh.run "ssh #{vm.vmname} yum -y install #{dest_image}"
         end
         Sh.run "ssh #{vm.vmname} /opt/contrail/contrail_packages/setup.sh", true
@@ -132,13 +133,7 @@ end
 def install_contrail
     vm = @vms.first
 
-    # XXX Temporary hack. Fix this in the base image itself.
-    if get_os_type == "centos64" then
-        Sh.run("ssh #{vm.vmname} yum -y remove augeas-libs-0.9.0-4.el6.x86_64 gnutls-devel-2.8.5-10.el6_4.2.x86_64", true)
-        Sh.run("service squid start", true)
-    end
-
-    Sh.run("rsync -ac #{@topo_file} #{vm.vmname}:/opt/contrail/utils/fabfile/testbeds/testbed.py", false, 20, 4)
+    Sh.run("rsync -ac --progress #{@topo_file} #{vm.vmname}:/opt/contrail/utils/fabfile/testbeds/testbed.py", false, 20, 4)
     Sh.run "ssh #{vm.vmname} \"(cd /opt/contrail/utils; fab install_contrail)\""
     Sh.run "echo \"perl -ni -e 's/JVM_OPTS -Xss\\d+/JVM_OPTS -Xss512/g; print \\$_;' /etc/cassandra/cassandra-env.sh\" | ssh -t #{vm.vmname} \$(< /dev/fd/0)"
 
@@ -175,7 +170,7 @@ def build_contrail_packages(repo = "#{ENV['WORKSPACE']}/repo")
     # Fetch build cache
     cache = "/cs-shared/builder/cache/#{get_os_type}/"
     Sh.run("mkdir -p #{cache}")
-    Sh.run("sshpass -p c0ntrail123 rsync -acz --no-owner --no-group ci-admin@ubuntu-build02:/cs-shared/builder/cache/#{get_os_type}/ #{cache}")
+    Sh.run("sshpass -p c0ntrail123 rsync --progress -acz --no-owner --no-group ci-admin@ubuntu-build02:/cs-shared/builder/cache/#{get_os_type}/ #{cache}")
     Sh.run("chown -R #{ENV['USER']}.#{ENV['USER']} #{cache}")
 
     if get_os_type == "ubuntu1204" then
@@ -212,19 +207,32 @@ def setup_sanity
     vm = @vms.first
     branch = @options.branch
     if branch != "master" then # use venv
-        Sh.run("ssh #{vm.vmname} \"(source /opt/contrail/api-venv/bin/activate && source /etc/contrail_bashrc && pip install fixtures testtools testresources selenium pyvirtualdisplay)\"", false, 20, 4)
+        Sh.run("ssh #{vm.vmname} \"(source /opt/contrail/api-venv/bin/activate && source /etc/contrail_bashrc && pip install fixtures testtools testresources selenium pyvirtualdisplay pexpect)\"", false, 20, 4)
     else
-        Sh.run("ssh #{vm.vmname} \"(source /etc/contrail_bashrc && pip install fixtures testtools testresources selenium pyvirtualdisplay)\"", false, 20, 4)
+        Sh.run("ssh #{vm.vmname} \"(source /etc/contrail_bashrc && pip install fixtures testtools testresources selenium pyvirtualdisplay pexpect)\"", false, 20, 4)
     end
-
-    Sh.run "ssh #{vm.vmname} rm -rf /root/contrail-test"
-    Sh.run "ssh #{vm.vmname} git clone --branch #{branch} git@github.com:juniper/contrail-test.git /root/contrail-test"
+    src = "#{ENV['WORKSPACE']}/repo/third_party/contrail-test"
+    dest = "#{ENV['HOME']}/contrail-test"
+    Sh.run "ssh #{vm.vmname} rm -rf #{dest}"
+    if File.directory?(src) then
+        Sh.run("rsync -ac --progress #{src} #{vm.vmname}:#{ENV['HOME']}/",
+               false, 60, 10)
+    else
+        Sh.run("ssh #{vm.vmname} git clone --branch #{branch} " +
+               "git@github.com:juniper/contrail-test.git #{dest}",
+               false, 60, 10)
+    end
 end
 
 # Verify that contrail-status shows 'up' for all necessary components.
 def verify_contrail
-    Sh.run "ssh #{@vms[0].vmname} /usr/bin/openstack-status"
-    @vms.each { |vm| Sh.run "ssh #{vm.vmname} /usr/bin/contrail-status" }
+    o, e = Sh.rrun("ssh #{@vms[0].vmname} openstack-status")
+    exit_code = (o =~ /failed/) ? -1 : 0
+    @vms.each { |vm|
+        o, e = Sh.rrun("ssh #{vm.vmname} contrail-status")
+        exit_code = -1 if o =~ /failed/
+    }
+    return exit_code
 end
 
 def run_sanity(fab_test)
@@ -243,11 +251,12 @@ def run_sanity(fab_test)
 
     fab_test = update_nova_libvirt_driver(fab_test)
 
-    cmd = "ssh #{@vms.first.vmname} \"(export TEST_RETRY_FACTOR=20.0 export TEST_DELAY_FACTOR=2 GUESTVM_IMAGE=cirros-0.3.0-x86_64-uec; cd /opt/contrail/utils; fab #{fab_test})\""
+    # GUESTVM_IMAGE=cirros-0.3.0-x86_64-uec
+    cmd = "ssh #{@vms.first.vmname} \"(export TEST_RETRY_FACTOR=20.0 export TEST_DELAY_FACTOR=2; cd /opt/contrail/utils; fab #{fab_test})\""
     o, exit_code = Sh.run(cmd, true)
 
     # Copy sanity log files, as the sub-slave VMs will go away.
-    Sh.run("rsync -ac #{@vms.first.vmname}:/root/logs #{ENV['WORKSPACE']}/logs_#{fab_test}", true)
+    Sh.run("rsync -ac --progress #{@vms.first.vmname}:/root/logs #{ENV['WORKSPACE']}/logs_#{fab_test}", true)
     Sh.run("ssh #{@vms.first.vmname} rm -rf /root/logs", true)
 
     puts "#{fab_test} complete, checking for any failures.."
@@ -256,7 +265,7 @@ def run_sanity(fab_test)
     # as exit-code, and 0 implies success.
     if exit_code == 0 then
         exit_code, e = Sh.rrun(
-            %{lynx --dump #{ENV['WORKSPACE']}/logs_#{fab_test}/*/test_report.html | } +
+            %{lynx --dump #{ENV['WORKSPACE']}/logs_#{fab_test}/logs/*/test_report.html | } +
             %{\grep Status: | \grep "Fail\\|Error" | wc -l}, true)
         exit_code = exit_code.to_i
     end
@@ -287,18 +296,19 @@ def run_test(image = @options.image)
     setup_contrail(image)
     install_contrail
     setup_sanity
-    verify_contrail
+    exit_code = verify_contrail
+    return exit_code if exit_code != 0
 
     # Ignore exit code from now onwards..
-    Sh.always_exit_as_success = true
+    # Sh.always_exit_as_success = true
 
-    exit_code = 0
     @options.fab_tests.each { |fab_test|
         exit_code = run_sanity(fab_test)
         break if exit_code != 0
     }
 
-    Sh.run("lynx --dump #{ENV['WORKSPACE']}/logs_*/*/test_report.html", true)
+    Sh.run("lynx --dump #{ENV['WORKSPACE']}/logs_*/logs/*/test_report.html",
+           true)
     return exit_code
 end
 
@@ -325,7 +335,7 @@ def parse_options(args = ARGV)
         o.on("-i", "--image [checkout and build]", "Image to load") { |i|
             dest_image = File.basename(i)
             @options.image = "#{ENV['WORKSPACE']}/#{dest_image}"
-            Sh.run("sshpass -p c0ntrail123 rsync -ac ci-admin@ubuntu-build02:#{i} " +
+            Sh.run("sshpass -p c0ntrail123 rsync -ac --progress ci-admin@ubuntu-build02:#{i} " +
                    "#{ENV['WORKSPACE']}/#{dest_image}")
         }
         o.on("-b", "--branch [#{@options.branch}]", "Branch to use ") { |b|
@@ -403,18 +413,8 @@ def main
     end
 
     # Ignore exit code from now onwards..
-    Sh.always_exit_as_success = true # if ENV["OS_TYPE"] != "ubuntu"
-    exit_code = 0
-    wait_time = 60 * 3 # 3 hours
-
-    # run_sanity can potentially hang.. Use a timeout.
-    begin
-    Timeout::timeout(wait_time * 60) { exit_code = run_test }
-    rescue Timeout::Error => e
-    puts "\n#{COLOR_RED} ERROR \"#{e}\": run_test() timed out after " +
-         "#{wait_time} minutes #{COLOR_RESET}"
-    exit_code = -1
-    end
+    Sh.always_exit_as_success = true if ENV["OS_TYPE"] != "ubuntu"
+    exit_code = run_test
 
     # Check if systest failures are to be ignored, for the moment.
     if exit_code != 0 then

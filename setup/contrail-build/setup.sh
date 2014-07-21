@@ -87,11 +87,13 @@ image=$2
 if [ -z $image ]; then
     image="ci-jenkins-slave"
 fi
-glance image-delete $image
-image_id=`nova list |\grep -w $1 | awk '{print $2}'`
-nova image-create --poll $image_id $image
+orig_image_id=`glance image-list |\grep -w " $image " | awk '{print $2}'`
+instance_id=`nova list |\grep -w $1 | awk '{print $2}'`
+nova image-create --poll $instance_id $image
+glance image-delete $orig_image_id
 glance image-download --file $image.qcow2 --progress $image
-sshpass -p c0ntrail123 scp $image.qcow2 ci-admin@ubuntu-build02:/ci-admin/images/$image.qcow2
+sshpass -p c0ntrail123 rsync -ac --progress $image.qcow2 ci-admin@ubuntu-build02:/ci-admin/images/$image.qcow2
+set +ex
 }
 
 function build_vm_for_neutron_ut () {

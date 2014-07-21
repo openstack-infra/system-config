@@ -160,8 +160,8 @@ class Vm
         return name
     end
 
-    def self.get_hostip (hostname = get_hostname)
-        return $1 if hostname =~ /ci-.*?(\d+\-\d+\-\d+\-\d+)/
+    def self.get_floating_ip (hostname = get_hostname)
+        return $1.gsub(/-/, '.') if hostname =~ /(\d+\-\d+\-\d+\-\d+)$/
         return "127.0.0.1"
     end
 
@@ -193,15 +193,18 @@ class Util
 
     def self.ci_setup
         $stdout.sync = true
-        ENV['WORKSPACE'] ||= ENV['PWD']
+        ENV['WORKSPACE'] ||= "#{ENV['HOME']}/ci"
         ENV['USER'] ||= "jenkins"
         ENV['ZUUL_BRANCH'] ||= Util.ci_default_branch
         ENV['OS_TYPE'] = `cat /etc/issue | head -n 1 | awk '{print $1}'`.chomp.downcase
-        pp ENV
         if File.file? "#{ENV['WORKSPACE']}/skip_jobs" then
             puts "Jobs skipped due to jenkins.opencontrail.org:/root/ci-test/skip_jobs"
             exit
         end
+        Sh.run("mkdir -p #{ENV['WORKSPACE']}")
+        File.open("#{ENV['WORKSPACE']}/env.log", "w") { |fp|
+            fp.puts(PP.pp(ENV, "Environment Variables: "))
+        }
     end
 
     def self.wait

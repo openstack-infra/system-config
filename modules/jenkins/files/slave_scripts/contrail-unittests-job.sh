@@ -41,7 +41,7 @@ function archive_failed_test_logs() {
     fi
     sshpass -p c0ntrail123 ssh ci-admin@ubuntu-build02 \
         mkdir -p /ci-admin/failed_unit_test_logs/$BUILD_NUMBER
-    sshpass -p c0ntrail123 rsync -ac $WORKSPACE/failed_unit_test_logs.tgz \
+    sshpass -p c0ntrail123 rsync -ac --progress $WORKSPACE/failed_unit_test_logs.tgz \
         ci-admin@ubuntu-build02:/ci-admin/failed_unit_test_logs/$BUILD_NUMBER/.
     sshpass -p c0ntrail123 ssh ci-admin@ubuntu-build02 \
         tar -C /ci-admin/failed_unit_test_logs/$BUILD_NUMBER/ -zxf \
@@ -75,7 +75,7 @@ function print_test_results() {
     perl -ni -e 's/.*\/repo\/build\///g; print $_;' $WORKSPACE/scons_all_failed_unittests.log
     sort -u $WORKSPACE/scons_all_failed_unittests.log > $WORKSPACE/scons_all_failed_unittests2.log
     mv $WORKSPACE/scons_all_failed_unittests2.log scons_all_failed_unittests.log
-    rsync -ac -q $WORKSPACE/scons_all_failed_unittests.log 148.251.110.18:/root/ci-test/scons_all_failed_unittests.log
+    rsync -ac --progress -q $WORKSPACE/scons_all_failed_unittests.log 148.251.110.18:/root/ci-test/scons_all_failed_unittests.log
 
     TOTAL_FAIL_COUNT=`cat $WORKSPACE/scons_all_failed_unittests.log | wc -l`
     echo
@@ -118,6 +118,17 @@ function build_and_run_unittest() {
             ci_exit $exit_code
         fi
     fi
+
+    # Build the flaky tests.
+    # export BUILD_ONLY=1
+    # scons -j $SCONS_JOBS flaky-test 2>&1 | tee -a $WORKSPACE/scons_test.log
+    # exit_code=$?
+    #
+    # Exit in case of error
+    # if [ "$exit_code" != "0" ]; then
+    #     ci_exit $exit_code
+    # fi
+    # unset BUILD_ONLY
 
     # Flaky test results are ignored.
     scons -j $SCONS_JOBS -i flaky-test 2>&1 | tee -a $WORKSPACE/scons_test.log

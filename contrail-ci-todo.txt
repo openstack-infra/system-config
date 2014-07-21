@@ -1,0 +1,99 @@
+CI Project status
+
+Current status and many TODO items have been listed here
+
+Backup
+   Should periodically backup VM disks (@daily)
+   Disk files must be compressed and archived in /ci-admin/images/.
+   Files must be rolled over, after 10 days or so to limit disk usage
+   Should work even if VM is changing the disk, or the VM should be suspended
+   to begin with. If so, it should not take too long..
+
+   Vinay - Script has been written, review pending
+
+Setup
+   Bring in all other git repos in CI such as packaging, provisioning, test, etc
+   All but webui work is complete -- Vinay
+
+unit-test jenkins job
+   Trim the unit test job to affected modules. Currently, we run all unit tests which take around 4 hours to build and complete, for every commit. Instead, this should be smartly identified and feature based. One must be able to override via commit log message as well
+   Initial filtering via json file in place -- Ananth
+
+sys-test jenkins job
+   Build images in centos
+      -- contrail-systest-job-centos is now in place -- Ananth
+
+   rabbit-mq does not start during install_contrail at times
+     -- Most likely due to hostname not resolvable at the time
+     -- I added ping to `hostname` and found that it failed many times in the VM
+     https://jenkins.opencontrail.org/job/ci-contrail-controller-systest/352/console
+
+   Job freezes after unpacking some package
+       https://jenkins.opencontrail.org/job/ci-contrail-controller-systest/351/console
+
+   openstack metadata fetch via curl freezes
+      https://jenkins.opencontrail.org/job/ci-contrail-controller-systest/315/console
+     I have put in a timeout in the code, but that did not fire! because VM
+     is complete frozen at the time ?
+
+   o jenkins slave-master communication breaks down many times (java exception)
+      https://jenkins.opencontrail.org/job/ci-contrail-packages-systest/55/console
+
+    o scp/rsync failed - files corrupted
+      changed all scp to use rsync with --check-sum option -- Ananth
+
+
+   systest CI sanity job is not fully active yet. Failures are ignored due to job stability and other CI cluster infrastructure issues
+
+   Add ci:run_svc_sanity also part of the systest job. This takes more time and fatter compute VMs. The job is there, but not sustainable in the current cluster, it looks like
+
+zuul-bugs
+   zuul some times loses track of some of the review entries
+      - Workaround: Abandon and restore the entry
+      Fixed one expiry timeout in zuul configuration and have not see this
+      issue since then -- Ananth
+
+   status.opencontrail.org is not setup yet which contains the status of a review entry in once place (review, jenkins, zuul, etc.)
+   Email based annotation does not work for emails sent out by zuul. Mails bounce instead
+   zuul does not combine multiple commits and reduce number of jenkins jobs run
+
+jenkins-bugs
+   Some times, jenkins job gets disabled. One has to manually go to jenkins master and enable the jobs
+   When a jenkins job is launched, console log url is not posted to review entry right away. It is posted only after job completion. This must be fixed
+
+review-bugs
+   Every time, review is reconfigured via puppet, openstack logo takes over. We have to manually restore opencontrail logo. Fix this in/via puppet
+   Hash out new patch-set submission to an existing entry properly. Does not work properly many times
+   review id is not displayed in the review entries listing page. One has to mouse hover the entry to figure out the review id. This is annoying to say the least..
+
+openstack-bugs
+   Some times, VM creation fails (Nova exception)
+   Some times, VM deletion fails (VMs gets stuck and never get deleted)
+   keystone/memcached stops responding causing CI to fail
+       As a workaround, a cronjob has been placed to restart these every hour
+   Compute nodes have completely gone down a couple of times
+   openstack metadata fetch freezes causing jobs to timeout and fail
+        https://jenkins.opencontrail.org/job/ci-contrail-controller-systest/315/console
+        I have put in a timeout in the code, but looks like VM is frozen
+
+
+Cluster
+   Currently, cluster used is off R1.05 and has only 6 compute nodes
+   Need to add more compute nodes
+   Need to upgrade to next release when ever the release is ready
+   Need cluster health checker script that periodically checks the status of all physical nods in the cluster, contrail and openstack software components, pings between VMs, etc.
+
+Upgrade
+   CI is based off OpenStack CI and uses opensource software every where
+   Need to look for bug fixes and bring in relevant ones to OpenContrail CI
+   Need to upgrade software pieces if it helps (e.g. to resolve many zuul bugs)
+
+Training
+   Need to add more material for new folks to quickly understand and start work on CI
+   Many CI scripts are written in ruby, which not every engineer is aware of
+   Train and let developers write and maintain jenkins jobs which are specific to various modules such as bgp, ifmap, etc.
+
+Test
+   CI testing is quite difficult at the moment, as the system is already live.
+   No unit tests have been written to validate CI code
+   It would be preferable to have a test system, but that should not mess up the production system (** gerrit does a force push. We have learned that the hard way.. **)
