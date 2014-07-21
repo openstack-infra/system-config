@@ -92,3 +92,16 @@
     publishers:
     - devstack-logs
     - console-log
+
+
+- job-group:
+    name: 'trove-functional-jobs'
+    datastore:
+      - mysql
+      - mongodb
+      - couchbase
+
+    jobs:
+      - 'gate-trove-functional-dsvm-{datastore}-with-heat'
+      - 'gate-trove-functional-dsvm-{datastore}'
+      - 'gate-trove-buildimage-{datastore}'
