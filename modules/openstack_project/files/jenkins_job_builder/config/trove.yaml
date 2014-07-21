@@ -92,3 +92,32 @@
     publishers:
     - devstack-logs
     - console-log
+
+
+- job-group:
+    name: 'gate-trove-functional-dsvm-test-group'
+
+    jobs:
+      - 'gate-trove-functional-dsvm-{datastore}-with-heat':
+          datastore: 'mysql'
+      - 'gate-trove-functional-dsvm-{datastore}':
+          datastore: 'mysql'
+      - 'gate-trove-functional-dsvm-{datastore}-with-heat':
+          datastore: 'mongodb'
+      - 'gate-trove-functional-dsvm-{datastore}':
+          datastore: 'mongodb'
+      - 'gate-trove-functional-dsvm-{datastore}-with-heat':
+          datastore: 'couchbase'
+      - 'gate-trove-functional-dsvm-{datastore}':
+          datastore: 'couchbase'
+
+- job-group:
+    name: 'gate-trove-buildimage-group'
+
+    jobs:
+      - 'gate-trove-buildimage-{datastore}':
+          datastore: 'mysql'
+      - 'gate-trove-buildimage-{datastore}':
+          datastore: 'mongodb'
+      - 'gate-trove-buildimage-{datastore}':
+          datastore: 'couchbase'
