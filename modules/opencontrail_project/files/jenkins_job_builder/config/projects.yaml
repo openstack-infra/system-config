@@ -117,3 +117,23 @@
     jobs:
       - contrail-systest-jobs
       - contrail-systest-jobs-centos
+
+- project:
+    name: contrail-test
+    github-org: Juniper
+    node: juniper-tests
+    tarball-site: tarballs.openstack.org
+    doc-publisher-site: docs.opencontrail.org
+
+    jobs:
+      - contrail-systest-jobs
+
+- project:
+    name: contrail-fabric-utils
+    github-org: Juniper
+    node: juniper-tests
+    tarball-site: tarballs.openstack.org
+    doc-publisher-site: docs.opencontrail.org
+
+    jobs:
+      - contrail-systest-jobs

@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -x
 
 #=======================================================================================
 #title           : backup.sh
@@ -23,28 +23,37 @@ if [ $DISTR != precise ]; then
 fi
 
 date=`date +"%d-%m-%y"` 
+day_of_week=`date +"%u"`
 
-WORKDIR="/tmp/workdir_$$"
+WORKDIR="/backups"
 mkdir -p $WORKDIR
 
-cd /var/lib/libvirt/images && FOUND=`find . -type f | grep vmdk | grep -v bkup` 
 cd $WORKDIR
 
-FOUND_VMS=`virsh --connect qemu:///system list | tr -s ' ' | cut -d ' ' -f3 | sed -e s/--$*//g | sed -e s/Name//g`
+if [ $day_of_week -eq "7" ]; then
+	FOUND_VMS=`virsh --connect qemu:///system list | tr -s ' ' | cut -d ' ' -f3 | sed -e s/--$*//g | sed -e s/Name//g`
+else
+	FOUND_VMS="review.opencontrail.org
+fi
+
+VM_TO_CP=`echo $FOUND_VMS | sed -e s%opencontrail\.org%%`
 
 for j in $FOUND_VMS
 do
 	virsh --connect qemu:///system suspend $j
+	PAUSED_VMS=`virsh --connect qemu:///system list | grep paused | wc -l`
+	echo $PAUSED_VMS | tee -a /tmp/logs
+	if [ $PAUSED_VMS -ne 1 ]; then 
+		echo "Something fishy, cannot continue backup... !!" | tee -a /tmp/logs
+		echo "Exiting... !!" | tee -a /tmp/logs
+		exit 1
+	fi
+	
+	BACKUP_IMAGE=`echo $j | sed -e s%\.opencontrail\.org%%`
+
+	cp -v /var/lib/libvirt/images/$BACKUP_IMAGE*.opencontrail.org.vmdk $WORKDIR/"$BACKUP_IMAGE.opencontrail.org.vmdk-$date" | tee -a /tmp/logs 
+	virsh --connect qemu:///system resume $j
+	gzip $WORKDIR/"$BACKUP_IMAGE.opencontrail.org.vmdk-$date"
 done
-
-for i in $FOUND 
-do 
-	cp -v /var/lib/libvirt/images/$i $WORKDIR/"$i-$date" >> /tmp/logs 
-	gzip "$i-$date" 
-done
-
-
-
-
-
-
+echo "Done..." | tee -a /tmp/logs
+virsh --connect qemu:///system list | tee -a /tmp/logs

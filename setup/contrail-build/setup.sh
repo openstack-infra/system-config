@@ -96,4 +96,12 @@ sshpass -p c0ntrail123 rsync -ac --progress $image.qcow2 ci-admin@ubuntu-build02
 set +ex
 }
 
+function build_vm_for_neutron_ut () {
+sudo apt-get install python-nose python-dev -y
+git clone git@github.com:open stack/neutron.git -b stable/icehouse
+[ $? != 0 ] && echo "Cannot clone neutron... !! && return
+cd neutron
+sudo python setup.py develop
+}
+
 build_vm
