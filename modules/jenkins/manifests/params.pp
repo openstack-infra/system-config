@@ -55,7 +55,15 @@ class jenkins::params {
       $memcached_package = 'memcached'
       $ruby1_9_1_package = 'ruby1.9.1'
       $ruby1_9_1_dev_package = 'ruby1.9.1-dev'
-      $ruby_bundler_package = 'ruby-bundler'
+
+      # will install ruby-bundler for Ubuntu Precise
+      # and bundler for Debian or newer Ubuntu distros
+      if $::lsbdistcodename == 'precise' {
+        $ruby_bundler_package = 'ruby-bundler'
+      }
+      else {
+        $ruby_bundler_package = 'bundler'
+      }
       $php5_mcrypt_package = 'php5-mcrypt'
       # For [tooz, taskflow, nova] using zookeeper in unit tests
       $zookeeper_package = 'zookeeperd'
