@@ -87,7 +87,7 @@ def set_node_options(item, job, params, default):
     params['OFFLINE_NODE_WHEN_COMPLETE'] = '1'
     proposal_re = r'^.*(merge-release-tags|(propose|upstream)-(requirements|translation)-updates?)$'  # noqa
     pypi_re = r'^.*-(jenkinsci|mavencentral|pypi-(both|wheel))-upload$'
-    python26_re = r'^.*-py(thon)?26.*$'
+    python26_re = r'^.*-(py(thon)?)?26.*$'
     centos6_re = r'^.*-centos6.*$'
     f20_re = r'^.*-f20.*$'
     python33_re = r'^.*-py(py|(thon)?33).*$'
