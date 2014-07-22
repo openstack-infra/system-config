@@ -3482,6 +3482,12 @@ projects:
     post:
       - entropy-coverage
 
+  - name: stackforge/freezer
+    check:
+      - noop
+    gate:
+      - noop
+
   - name: stackforge/fuel-astute
     check:
       - noop
