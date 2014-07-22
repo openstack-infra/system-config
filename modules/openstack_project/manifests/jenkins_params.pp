@@ -130,7 +130,13 @@ class openstack_project::jenkins_params {
       }
       $ruby1_9_1_package = 'ruby1.9.1'
       $ruby1_9_1_dev_package = 'ruby1.9.1-dev'
-      $ruby_bundler_package = 'ruby-bundler'
+
+      if ($::operatingsystem == 'Debian') {
+        $ruby_bundler_package = 'bundler'
+      }
+      else {
+        $ruby_bundler_package = 'ruby-bundler'
+      }
       # Common Lisp interpreter, used for cl-openstack-client
       $sbcl_package = 'sbcl'
       $sqlite_package = 'sqlite3'
