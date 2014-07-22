@@ -184,6 +184,7 @@
           export GEARDSERVER=192.168.1.1
           export DIB_COMMON_ELEMENTS="common-venv stackuser pypi-openstack"
           export TRIPLEO_TEST=overcloud
+          export USE_IRONIC=0
           sudo chown -hR $(whoami) /opt/git
           function gate_hook {
               bash -xe /opt/stack/new/tripleo-ci/toci_gate_test.sh
