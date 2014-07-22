@@ -1,6 +1,6 @@
 - job:
-    name: 'check-nova-docker-dsvm-f20'
-    node: 'devstack-f20'
+    name: 'check-nova-docker-dsvm'
+    node: 'devstack-precise || devstack-trusty'
 
     wrappers:
       - build-timeout:
