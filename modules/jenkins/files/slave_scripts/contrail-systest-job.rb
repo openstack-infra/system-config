@@ -185,8 +185,12 @@ def build_contrail_packages(repo = "#{ENV['WORKSPACE']}/repo")
     ENV['BUILD_ONLY'] = "1"
     ENV['SKIP_CREATE_GIT_IDS'] = "1"
     Sh.run "cd #{repo}"
-    Sh.run "scons"
-#   Sh.run "scons #{repo}/build/third_party/log4cplus"
+
+    # We have to do scons for pre R1.1 branches.
+    if ["R1.04", "R1.05", "R1.06", "R1.06c1"].include? ENV['ZUUL_BRANCH'] then
+        Sh.run("scons")
+    end
+
     Sh.run "rm -rf #{repo}/third_party/euca2ools/.git/shallow"
     Sh.run "cd #{repo}/tools/packaging/build/"
     Sh.run "./packager.py --fail-on-error --sku havana"
