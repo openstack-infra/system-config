@@ -2940,6 +2940,15 @@
           envlist: py27-mysql
 
 - project:
+    name: python-opentsdbclient
+    github-org: stackforge
+    node: 'bare-precise || bare-trusty'
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - python-jobs
+
+- project:
     name: groups
     github-org: openstack-infra
     node: 'bare-precise || bare-trusty'
