@@ -304,7 +304,6 @@ def run_test(image = @options.image)
 
     # Ignore exit code from now onwards..
     Sh.always_exit_as_success = true
-    return 0
 
     @options.fab_tests.each { |fab_test|
         exit_code = run_sanity(fab_test)
