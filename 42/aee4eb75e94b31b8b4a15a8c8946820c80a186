@@ -1,0 +1,12 @@
+Verified+2: Jenkins
+Code-Review+1: Justin Shepherd <jshepher@rackspace.com>
+Code-Review+2: Sergey Lukjanov <slukjanov@mirantis.com>
+Workflow+1: Sergey Lukjanov <slukjanov@mirantis.com>
+Code-Review+2: Joshua Hesketh <joshua.hesketh@rackspace.com>
+Code-Review+1: Mark Vanderwiel <vanderwl@us.ibm.com>
+Code-Review+1: JJ Asghar <jj@getchef.com>
+Submitted-by: Jenkins
+Submitted-at: Tue, 22 Jul 2014 09:19:27 +0000
+Reviewed-on: https://review.openstack.org/107833
+Project: openstack-infra/config
+Branch: refs/heads/master
