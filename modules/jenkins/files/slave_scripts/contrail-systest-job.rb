@@ -31,6 +31,7 @@ end
 
 def get_default_tests
 	if ENV['ZUUL_PROJECT'].include "contrail-web"
+		sudo apt-get install xvfb firefox
 		@webui_config = "True"
 		return ["run_sanity:ci_webui_sanity"]
 	else
