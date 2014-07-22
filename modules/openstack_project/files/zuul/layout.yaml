@@ -662,7 +662,7 @@ jobs:
     voting: false
   - name: gate-oslo-incubator-python33
     branch: ^(?!stable/havana).*$
-  - name: check-nova-docker-dsvm-f20
+  - name: check-nova-docker-dsvm
     voting: false
   - name: check-neutron-dsvm-functional
     branch: ^(?!stable/havana).*$
@@ -1177,7 +1177,7 @@ projects:
       - name: python-jobs
       - name: check-requirements
     check:
-      - check-nova-docker-dsvm-f20
+      - check-nova-docker-dsvm
 
   - name: openstack/pycadf
     template:
