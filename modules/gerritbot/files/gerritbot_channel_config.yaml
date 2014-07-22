@@ -760,6 +760,7 @@ openstack-oslo:
       - openstack/oslo-incubator
       - openstack/oslo.messaging
       - openstack/oslo.rootwrap
+      - openstack/oslo.serialization
       - openstack/oslosphinx
       - openstack/oslo-specs
       - openstack/oslotest
