@@ -34,6 +34,9 @@ class openstack_project::single_use_slave (
         '-p tcp --dport 8000 -s 172.24.4.0/24 -j ACCEPT',
         '-p tcp --dport 8003 -s 172.24.4.0/24 -j ACCEPT',
         '-p tcp --dport 8004 -s 172.24.4.0/24 -j ACCEPT',
+        # Ports 27410:27510 allow communication between tripleo jumphost and
+        # the CI host running the devtest_seed configuration
+        '-p tcp --dport 27410:27510 -s 172.24.4.0/24 -j ACCEPT',
       ],
   }
   class { 'jenkins::slave':
