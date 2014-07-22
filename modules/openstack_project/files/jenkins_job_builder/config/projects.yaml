@@ -1181,6 +1181,16 @@
 
 
 - project:
+    name: python-opentsdbclient
+    github-org: stackforge
+    node: 'bare-precise || bare-trusty'
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - python-jobs
+
+
+- project:
     name: python-neutronclient
     github-org: openstack
     node: 'bare-precise || bare-trusty'
