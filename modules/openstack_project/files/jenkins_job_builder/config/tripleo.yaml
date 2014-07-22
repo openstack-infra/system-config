@@ -40,7 +40,7 @@
       - console-log
 
 - job:
-    name: 'check-tripleo-undercloud-precise'
+    name: 'check-tripleo-novabm-undercloud-precise'
     node: 'tripleo-precise'
 
     wrappers:
@@ -122,7 +122,7 @@
       - console-log
 
 - job:
-    name: 'check-tripleo-overcloud-precise'
+    name: 'check-tripleo-novabm-overcloud-precise'
     node: 'tripleo-precise'
 
     wrappers:
@@ -163,7 +163,7 @@
       - console-log
 
 - job:
-    name: 'check-tripleo-overcloud-f20'
+    name: 'check-tripleo-novabm-overcloud-f20'
     node: 'tripleo-f20'
 
     wrappers:
@@ -203,7 +203,7 @@
       - console-log
 
 - job:
-    name: 'check-tripleo-vlan-precise'
+    name: 'check-tripleo-ironic-vlan-precise'
     node: 'tripleo-precise'
 
     wrappers:
