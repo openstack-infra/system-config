@@ -72,3 +72,18 @@
   description: Contrail Fabirc Utilites
   upstream: git@github.com:Juniper/contrail-fabric-utils
   acl-config: /home/gerrit2/acls/Juniper/contrail-fabric-utils.config
+
+- project: Juniper/contrail-web-core
+  description: Contrail web ui backend code
+  upstream: git@github.com:Juniper/contrail-web-core
+  acl-config: /home/gerrit2/acls/Juniper/contrail-web-core.config
+
+- project: Juniper/contrail-web-controller
+  description: Contrail web ui controller code
+  upstream: git@github.com:Juniper/contrail-web-controller
+  acl-config: /home/gerrit2/acls/Juniper/contrail-web-controller.config
+
+- project: Juniper/contrail-webui-third-party
+  description: Contrail web ui third party software
+  upstream: git@github.com:Juniper/contrail-webui-third-party
+  acl-config: /home/gerrit2/acls/Juniper/contrail-webui-third-party.config
