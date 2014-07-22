@@ -785,6 +785,8 @@
 - project: stackforge/gnocchi
   description: A time series storage and resources index service.
   upstream: git://github.com/jd/gnocchi.git
+- project: stackforge/python-opentsdbclient
+  description: A simple REST client to communicate with OpenTSDB (needed for Gnocchi to use OpenTSDB as a backend)
 - project: stackforge/golang-client
   description: OpenStack API client for golang
 - project: stackforge/graffiti
