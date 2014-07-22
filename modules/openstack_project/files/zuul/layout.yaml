@@ -4501,6 +4501,18 @@ projects:
     post:
       - python-muranoclient-branch-tarball
 
+  - name: stackforge/python-opentsdbclient
+    check:
+      - gate-gnocchi-pep8
+      - gate-gnocchi-python26
+      - gate-gnocchi-python27
+      - gate-gnocchi-python33
+    gate:
+      - gate-gnocchi-pep8
+      - gate-gnocchi-python26
+      - gate-gnocchi-python27
+      - gate-gnocchi-python33
+
   - name: stackforge/python-rallyclient
     template:
       - name: check-requirements
