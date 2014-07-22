@@ -31,7 +31,7 @@ Requirements
   party testing system breaks.
 * Support recheck to request re-running a test.
 
-  * Support the following syntaxes ``recheck no bug`` and ``recheck bug ###``.
+  * Support the following syntaxes: ``recheck``.
   * Recheck means recheck everything. A single recheck comment should
     re-trigger all testing systems.
 * Publish who the maintainers of the third party testing system are, and make

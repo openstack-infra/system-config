@@ -322,7 +322,7 @@ which get the most load (as they run jobs from anyone).
 
 #. Setup Jenkins per :ref:`jenkins`.
 
-At this stage doing a 'recheck no bug' should still report LOST on a change.
+At this stage doing a 'recheck' should still report LOST on a change.
 But in the zuul debug.log in /var/log/zuul you should see a 'build xxx not
 registered' being reported from gearman : this indicates you have never had an
 executor register itself for that queue, and it's being ignored.
