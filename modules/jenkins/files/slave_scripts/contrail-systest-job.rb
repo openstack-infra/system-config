@@ -30,13 +30,10 @@ def get_all_host_names
 end
 
 def get_default_tests
-	if ENV['ZUUL_PROJECT'].include "contrail-web"
-		sudo apt-get install xvfb firefox
-		@webui_config = "True"
-		return ["run_sanity:ci_webui_sanity"]
-	else
-		return ["run_sanity:ci_sanity"]
-	end
+    Sh.run "ssh root@#{vm.vmname} apt-get install xvfb firefox"
+    @webui_config = "True"
+    return ["run_sanity:ci_sanity"] if ENV["ZUUL_PROJECT"] !~ /contrail-web/
+    return ["run_sanity:ci_webui_sanity"]
 end
 
 # host1 is always controller node
