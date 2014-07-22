@@ -3476,6 +3476,14 @@ projects:
     post:
       - entropy-coverage
 
+- name: stackforge/freezer
+  check:
+    - gate-project-name-docs
+    - gate-project-name-pep8
+  gate:
+    - gate-project-name-docs
+    - gate-project-name-pep8
+
   - name: stackforge/fuel-astute
     check:
       - noop
