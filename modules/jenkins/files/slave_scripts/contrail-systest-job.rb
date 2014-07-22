@@ -27,6 +27,8 @@ def get_all_host_names
     return @vms.each_with_index.map { |vm, i| "'#{vm.vmname}'" }.join(", ")
 end
 
+@webui_config = "False"
+
 # host1 is always controller node
 # Rest are always compute nodes
 def get_topo(host_build_ip)
@@ -56,7 +58,8 @@ env.hostnames = { 'all': [#{get_all_host_names}] }
 env.password = 'c0ntrail123'
 env.passwords = { #{get_each_host_password}, host_build: 'c0ntrail123' }
 env.ostypes = { #{get_each_host_ostype} }
-env.webui_config = False
+env.webui_config = #{@webui_config}
+env.webui = 'firefox'
 env.devstack = False
 env.test_retry_factor = 1.0
 env.test_delay_factor = 1.0
@@ -312,11 +315,21 @@ def run_test(image = @options.image)
     return exit_code
 end
 
+def get_default_tests
+    if ENV["ZUUL_PROJECT"].nil? or ENV["ZUUL_PROJECT"] !~ /contrail-web/ then
+        return [ "run_sanity:ci_sanity" ]
+    end
+
+    # Run webui specific tests
+    @webui_config = "True"
+    return [ "run_sanity:ci_webui_sanity" ]
+end
+
 @options = OpenStruct.new
 @options.image = nil
 @options.branch = ENV['ZUUL_BRANCH'] || "master"
 # @options.fab_tests = ["run_sanity:ci_sanity", "qemu_run_sanity:ci_svc_sanity"]
-@options.fab_tests = ["run_sanity:ci_sanity"]
+@options.fab_tests = get_default_tests
 
 @options.nodes = 1
 @options.cfgm = ["host1"]
@@ -405,9 +418,6 @@ def main
     @image_built = false
     if @options.image.nil? then
         @image_built = true
-
-#       Add any software not carved in base image
-#       Sh.run("apt-get -y install linux-headers-3.13.0-24-generic", true)
         ContrailGitPrep.main(false) # Use private repo
         @options.image = build_contrail_packages
     end
