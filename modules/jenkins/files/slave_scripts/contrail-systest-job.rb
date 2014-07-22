@@ -7,6 +7,8 @@ require 'util'
 require 'contrail-git-prep'
 require 'timeout'
 
+@webui_config = "False"
+
 def get_all_hosts
     return @vms.each_with_index.map { |vm, i| "host#{i+1}" }.join(", ")
 end
@@ -25,6 +27,15 @@ end
 
 def get_all_host_names
     return @vms.each_with_index.map { |vm, i| "'#{vm.vmname}'" }.join(", ")
+end
+
+def get_default_tests
+	if ENV['ZUUL_PROJECT'].include "contrail-web"
+		@webui_config = "True"
+		return ["run_sanity:ci_webui_sanity"]
+	else
+		return ["run_sanity:ci_sanity"]
+	end
 end
 
 # host1 is always controller node
@@ -56,7 +67,8 @@ env.hostnames = { 'all': [#{get_all_host_names}] }
 env.password = 'c0ntrail123'
 env.passwords = { #{get_each_host_password}, host_build: 'c0ntrail123' }
 env.ostypes = { #{get_each_host_ostype} }
-env.webui_config = False
+env.webui_config = #{@webui_config}
+env.webui = 'firefox'
 env.devstack = False
 env.test_retry_factor = 1.0
 env.test_delay_factor = 1.0
@@ -316,19 +328,7 @@ end
 @options.image = nil
 @options.branch = ENV['ZUUL_BRANCH'] || "master"
 # @options.fab_tests = ["run_sanity:ci_sanity", "qemu_run_sanity:ci_svc_sanity"]
-
-if ENV['ZUUL_PROJECT'].include "contrail-web"
-	File.open(@topo_file) { |source_file|
-		contents = source_file.read
-		contents.gsub!(/env.webui_config = False/, 'env.webui_config = True')
-		File.open(@topo_file, "w+") { |f| f.write(contents) }
-		File.open(@topo_file, "a") { |f| f.write('webui = \'firefox\'') }
-	}
-	@options.fab_tests = ["run_sanity:ci_webui_sanity"]
-else
-	@options.fab_tests = ["run_sanity:ci_sanity"]
-end
-
+@options.fab_tests = get_default_tests
 @options.nodes = 1
 @options.cfgm = ["host1"]
 @options.openstack = ["host1"]
