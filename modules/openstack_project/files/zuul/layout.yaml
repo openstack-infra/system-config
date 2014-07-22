@@ -3482,6 +3482,16 @@ projects:
     post:
       - entropy-coverage
 
+  - name: stackforge/freezer
+    template:
+      - name: publish-to-pypi
+    check:
+      - gate-freezer-pep8
+      - gate-freezer-python27
+    gate:
+      - gate-freezer-pep8
+      - gate-freezer-python27
+
   - name: stackforge/fuel-astute
     check:
       - noop

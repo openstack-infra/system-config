@@ -728,6 +728,9 @@
   description: AWS EC2 and VPC API support in standalone service for OpenStack. At first uses nova's EC2 API for non-VPC functionality. Later it'll be transferred here out of nova.
 - project: stackforge/entropy
   description: A framework for Audit/Repair scripts for openstack
+- project: stackforge/freezer
+  description: OpenStack Swift incremental backup and restore automation tool for file system, MongoDB, MySQL. LVM snapshot and encryption support.
+  upstream: git://git.code.sf.net/p/openstack-freezer/freezer
 - project: stackforge/fuel-astute
   group: fuel
   description: Fuel orchestrator
