@@ -7,8 +7,6 @@ require 'util'
 require 'contrail-git-prep'
 require 'timeout'
 
-@webui_config = "False"
-
 def get_all_hosts
     return @vms.each_with_index.map { |vm, i| "host#{i+1}" }.join(", ")
 end
@@ -29,12 +27,7 @@ def get_all_host_names
     return @vms.each_with_index.map { |vm, i| "'#{vm.vmname}'" }.join(", ")
 end
 
-def get_default_tests
-    Sh.run "ssh root@#{vm.vmname} apt-get install xvfb firefox"
-    @webui_config = "True"
-    return ["run_sanity:ci_sanity"] if ENV["ZUUL_PROJECT"] !~ /contrail-web/
-    return ["run_sanity:ci_webui_sanity"]
-end
+@webui_config = "False"
 
 # host1 is always controller node
 # Rest are always compute nodes
@@ -311,6 +304,7 @@ def run_test(image = @options.image)
 
     # Ignore exit code from now onwards..
     Sh.always_exit_as_success = true
+    return 0
 
     @options.fab_tests.each { |fab_test|
         exit_code = run_sanity(fab_test)
@@ -322,11 +316,22 @@ def run_test(image = @options.image)
     return exit_code
 end
 
+def get_default_tests
+    if ENV["ZUUL_PROJECT"].nil? or ENV["ZUUL_PROJECT"] !~ /contrail-web/ then
+        return [ "run_sanity:ci_sanity" ]
+    end
+
+    # Run webui specific tests
+    @webui_config = "True"
+    return [ "run_sanity:ci_webui_sanity" ]
+end
+
 @options = OpenStruct.new
 @options.image = nil
 @options.branch = ENV['ZUUL_BRANCH'] || "master"
 # @options.fab_tests = ["run_sanity:ci_sanity", "qemu_run_sanity:ci_svc_sanity"]
 @options.fab_tests = get_default_tests
+
 @options.nodes = 1
 @options.cfgm = ["host1"]
 @options.openstack = ["host1"]
@@ -414,9 +419,6 @@ def main
     @image_built = false
     if @options.image.nil? then
         @image_built = true
-
-#       Add any software not carved in base image
-#       Sh.run("apt-get -y install linux-headers-3.13.0-24-generic", true)
         ContrailGitPrep.main(false) # Use private repo
         @options.image = build_contrail_packages
     end
