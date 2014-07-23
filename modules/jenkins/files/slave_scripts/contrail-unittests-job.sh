@@ -98,6 +98,8 @@ function build_and_run_unittest() {
     cd $WORKSPACE/repo
 
     export BUILD_ONLY=1
+    export TASK_UTIL_WAIT_TIME=10000 # usecs
+    export TASK_UTIL_RETRY_COUNT=6000
     scons -j $SCONS_JOBS test 2>&1 | tee $WORKSPACE/scons_test.log
     exit_code=$?
 
