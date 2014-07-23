@@ -323,7 +323,7 @@ def get_default_tests
     end
 
     # For pre 1.1 branches, no tests necessary for webui
-    return [ ] if PRE_R11.include? ENV['ZUUL_BRANCH']
+    return [ ] # if PRE_R11.include? ENV['ZUUL_BRANCH']
 
     # Run webui specific tests
     @webui_config = "True"
