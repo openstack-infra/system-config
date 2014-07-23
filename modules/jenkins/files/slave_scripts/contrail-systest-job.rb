@@ -7,6 +7,8 @@ require 'util'
 require 'contrail-git-prep'
 require 'timeout'
 
+PRE_R11 = ["R1.04", "R1.05", "R1.06", "R1.06c1"]
+
 def get_all_hosts
     return @vms.each_with_index.map { |vm, i| "host#{i+1}" }.join(", ")
 end
@@ -140,8 +142,6 @@ def install_contrail
     Sh.run "ssh #{vm.vmname} \"(cd /opt/contrail/utils; fab install_contrail)\""
     Sh.run "echo \"perl -ni -e 's/JVM_OPTS -Xss\\d+/JVM_OPTS -Xss512/g; print \\$_;' /etc/cassandra/cassandra-env.sh\" | ssh -t #{vm.vmname} \$(< /dev/fd/0)"
 
-    return if @options.fab_tests.empty?
-
     # Hack setup_all not to reboot..
     cmd = %{sed -i "s/setup_all\\(reboot=\\'True\\'\\)/setup_all\\(reboot=\\'False\\'\\)/g"}
     Sh.run("ssh #{vm.vmname} #{cmd} /opt/contrail/utils/fabfile/tasks/provision.py", true)
@@ -186,10 +186,8 @@ def build_contrail_packages(repo = "#{ENV['WORKSPACE']}/repo")
     ENV['SKIP_CREATE_GIT_IDS'] = "1"
     Sh.run "cd #{repo}"
 
-    # We have to do scons for pre R1.1 branches.
-    if ["R1.04", "R1.05", "R1.06", "R1.06c1"].include? ENV['ZUUL_BRANCH'] then
-        Sh.run("scons")
-    end
+    # We have to do scons for pre R1.1 branches only.
+    Sh.run("scons") if PRE_R11.include? ENV['ZUUL_BRANCH']
 
     Sh.run "rm -rf #{repo}/third_party/euca2ools/.git/shallow"
     Sh.run "cd #{repo}/tools/packaging/build/"
@@ -323,6 +321,9 @@ def get_default_tests
     if ENV["ZUUL_PROJECT"].nil? or ENV["ZUUL_PROJECT"] !~ /contrail-web/ then
         return [ "run_sanity:ci_sanity" ]
     end
+
+    # For pre 1.1 branches, no tests necessary for webui
+    return [ ] if PRE_R11.include? ENV['ZUUL_BRANCH']
 
     # Run webui specific tests
     @webui_config = "True"
