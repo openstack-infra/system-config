@@ -25,7 +25,7 @@ end
 def slave
     # Skip in test mode
     loop do
-        skip, e = Sh.rrun "ssh root@jenkins.opencontrail.org ls -1 /root/ci-test/\*#{@HOSTNAME}\*-test"
+        skip, e = Sh.rrun("ssh root@jenkins.opencontrail.org ls -1 /root/ci-test/\*#{@HOSTNAME}\*-test", true)
         break if skip.nil? or skip !~ /#{@hostname}/
         sleep 10
     end
