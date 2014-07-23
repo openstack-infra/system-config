@@ -796,9 +796,11 @@ projects:
 
   - name: openstack/cinder-specs
     check:
-      - noop
+      - gate-cinder-specs-python27
+      - gate-cinder-specs-docs
     gate:
-      - noop
+      - gate-cinder-specs-python27
+      - gate-cinder-specs-docs
 
   - name: openstack/cliff
     template:
