@@ -442,3 +442,42 @@ projects:
       - noop
     post:
       - noop
+
+  - name: Juniper/contrail-web-core
+    check:
+      - ci-contrail-web-core-systest
+      - ci-contrail-web-core-systest-centos
+    silent:
+      - noop
+    check-tripleo:
+      - noop
+    gate:
+      - noop
+    post:
+      - noop
+
+  - name: Juniper/contrail-web-controller
+    check:
+      - ci-contrail-web-controller-systest
+      - ci-contrail-web-controller-systest-centos
+    silent:
+      - noop
+    check-tripleo:
+      - noop
+    gate:
+      - noop
+    post:
+      - noop
+
+  - name: Juniper/contrail-webui-third-party
+    check:
+      - ci-contrail-webui-third-party-systest
+      - ci-contrail-webui-third-party-systest-centos
+    silent:
+      - noop
+    check-tripleo:
+      - noop
+    gate:
+      - noop
+    post:
+      - noop
