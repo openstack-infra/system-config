@@ -40,6 +40,7 @@ class zuul (
   $smtp_default_from = "zuul@${::fqdn}",
   $smtp_default_to = "zuul.reports@${::fqdn}",
   $swift_authurl = '',
+  $swift_auth_version = '',
   $swift_user = '',
   $swift_key = '',
   $swift_tenant_name = '',
