@@ -940,11 +940,12 @@ projects:
       - check-devstack-dsvm-cells
     gate:
       - gate-devstack-dsvm-cells
+    check-tripleo:
+      - check-tripleo-novabm-overcloud-precise
     experimental-tripleo:
       - check-tripleo-ironic-seed-precise
       - check-tripleo-novabm-undercloud-precise
       - check-tripleo-ironic-undercloud-precise
-      - check-tripleo-novabm-overcloud-precise
     pre-release:
       - heat-tarball
     release:
