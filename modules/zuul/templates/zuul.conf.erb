@@ -43,6 +43,9 @@ tenant_name=<%= swift_tenant_name %>
 region_name=<%= swift_region_name %>
 default_container=<%= swift_default_container %>
 default_logserver_prefix=<%= swift_default_logserver_prefix %>
+<% if swift_auth_version != "" -%>
+auth_version=<%= swift_auth_version %>
+<% end -%>
 <% end -%>
 
 <% if smtp_host != "" -%>
