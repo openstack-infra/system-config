@@ -139,6 +139,19 @@ A somewhat contrived voting example:
 
 .. _statusbot:
 
+Logging
+^^^^^^^
+
+Meetings are automatically logged and published at
+http://eavesdrop.openstack.org/meetings/
+
+The bot also has the ability to sit in a channel for the sole purpose of logging
+channel activity, not just meetings. Standard channel logs are sent to
+http://eavesdrop.openstack.org/irclogs/
+
+The configuration for specific channel logging can be found in
+:file:`modules/openstack_project/manifests/eavesdrop.pp`.
+
 Statusbot
 =========
 
@@ -183,3 +196,12 @@ Gerritbot's configuration is in
 Teams can add their channel and go through the standard code review process to
 get the bot added to their channel. The configuration is organized by channel,
 with each project that a channel is interested in listed under the channel.
+
+Logging Bot
+===========
+
+The openstack bot sits in a channel for the sole purpose of logging the
+channel which then sends logs to http://eavesdrop.openstack.org/irclogs/
+
+The configuration for this bot can be found in
+:file:`modules/openstack_project/manifests/eavesdrop.pp`.
