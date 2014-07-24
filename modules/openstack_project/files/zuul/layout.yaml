@@ -720,19 +720,19 @@ projects:
 
   - name: openstack/barbican
     template:
+      - name: python-jobs
       - name: translation-jobs
     check:
-      - gate-barbican-pep8
-      - gate-barbican-python27
-      - gate-barbican-python26
       - gate-barbican-devstack-dsvm
     gate:
-      - gate-barbican-pep8
-      - gate-barbican-python27
-      - gate-barbican-python26
       - gate-barbican-devstack-dsvm
     post:
       - barbican-branch-tarball
+    pre-release:
+      - barbican-tarball
+    release:
+      - barbican-tarball
+      - barbican-docs
 
   - name: openstack/barbican-specs
     check:
