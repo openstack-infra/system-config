@@ -13,6 +13,7 @@ class openstack_project::template (
   $automatic_upgrades        = true,
   $certname                  = $::fqdn,
   $ca_server                 = undef,
+  $enable_unbound            = true,
 ) {
   include ssh
   include snmpd
@@ -48,8 +49,9 @@ class openstack_project::template (
     ensure => present,
   }
 
-  class { 'unbound':
-    install_resolv_conf => $install_resolv_conf
+  if ($enable_unbound) {
+    class { 'unbound': }
+      install_resolv_conf => $install_resolv_conf
   }
 
   if $::osfamily == 'Debian' {

@@ -23,6 +23,7 @@ PYTHON3=${4:-false}
 PYPY=${5:-false}
 ALL_MYSQL_PRIVS=${6:-false}
 GIT_BASE=${7:-git://git.openstack.org}
+ENABLE_UNBOUND=${8:-true}
 
 # Save the nameservers configured by our provider.
 cat >/tmp/forwarding.conf <<EOF
@@ -49,10 +50,26 @@ sudo git clone --depth=1 $GIT_BASE/openstack-infra/config.git \
 sudo /bin/bash /root/config/install_modules.sh
 if [ -z "$NODEPOOL_SSH_KEY" ] ; then
     sudo puppet apply --modulepath=/root/config/modules:/etc/puppet/modules \
-	-e "class {'openstack_project::single_use_slave': sudo => $SUDO, thin => $THIN, python3 => $PYTHON3, include_pypy => $PYPY, all_mysql_privs => $ALL_MYSQL_PRIVS, }"
+        -e "class {'openstack_project::single_use_slave':
+                sudo => $SUDO,
+                thin => $THIN,
+                python3 => $PYTHON3,
+                include_pypy => $PYPY,
+                all_mysql_privs => $ALL_MYSQL_PRIVS,
+                enable_unbound => $ENABLE_UNBOUND,
+            }"
 else
     sudo puppet apply --modulepath=/root/config/modules:/etc/puppet/modules \
-	-e "class {'openstack_project::single_use_slave': install_users => false, sudo => $SUDO, thin => $THIN, python3 => $PYTHON3, include_pypy => $PYPY, all_mysql_privs => $ALL_MYSQL_PRIVS, ssh_key => '$NODEPOOL_SSH_KEY', }"
+        -e "class {'openstack_project::single_use_slave':
+                install_users => false,
+                sudo => $SUDO,
+                thin => $THIN,
+                python3 => $PYTHON3,
+                include_pypy => $PYPY,
+                all_mysql_privs => $ALL_MYSQL_PRIVS,
+                ssh_key => '$NODEPOOL_SSH_KEY',
+                enable_unbound => $ENABLE_UNBOUND,
+            }"
 fi
 
 # The puppet modules should install unbound.  Take the nameservers
