@@ -852,3 +852,13 @@ congress:
       - stackforge/python-congressclient
     branches:
       - master
+
+git-upstream:
+    events:
+      - patchset-created
+      - change-merged
+      - x-vrif-minus-2
+    projects:
+      - stackforge/git-upstream
+    branches:
+      - master
