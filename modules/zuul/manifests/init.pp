@@ -67,6 +67,14 @@ class zuul (
     require  => Class['pip'],
   }
 
+  if ! defined(Package['gitpython']) {
+    package { 'gitpython':
+      ensure   => present,
+      provider => pip,
+      require  => Class['pip'],
+    }
+  }
+
   # A lot of things need yaml, be conservative requiring this package to avoid
   # conflicts with other modules.
   if ! defined(Package['python-yaml']) {
