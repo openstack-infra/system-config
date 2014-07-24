@@ -145,7 +145,7 @@ We'll want a few additional details:
   of data, and it's safe for it to be publicly visible.
 
   2. Your company/organization name or acronym. If you don't have a company name
-  please identify this in your email, we will need to find an equivalent. 
+  please identify this in your email, we will need to find an equivalent.
 
   3. What you are verifying: this could be a product, driver or application.
 
