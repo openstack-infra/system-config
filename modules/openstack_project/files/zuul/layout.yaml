@@ -1711,6 +1711,14 @@ projects:
     gate:
       - noop
 
+  - name: stackforge/git-upstream
+    check:
+      - gate-gce-api-pep8
+      - gate-gce-api-python27
+    gate:
+      - gate-gce-api-pep8
+      - gate-gce-api-python27
+
   - name: stackforge/gerrit-dash-creator
     check:
       - noop
