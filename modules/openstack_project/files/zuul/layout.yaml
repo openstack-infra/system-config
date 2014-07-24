@@ -886,7 +886,6 @@ projects:
     experimental:
       - gate-grenade-dsvm-forward
     experimental-tripleo:
-      - check-tripleo-ironic-seed-precise-nonha
       - check-tripleo-novabm-undercloud-precise-nonha
       - check-tripleo-ironic-undercloud-precise-nonha
       - check-tripleo-novabm-overcloud-precise-nonha
@@ -921,7 +920,6 @@ projects:
     experimental:
       - gate-grenade-dsvm-forward
     experimental-tripleo:
-      - check-tripleo-ironic-seed-precise-nonha
       - check-tripleo-novabm-undercloud-precise-nonha
       - check-tripleo-ironic-undercloud-precise-nonha
       - check-tripleo-novabm-overcloud-precise-nonha
@@ -943,7 +941,6 @@ projects:
     gate:
       - gate-devstack-dsvm-cells
     experimental-tripleo:
-      - check-tripleo-ironic-seed-precise-nonha
       - check-tripleo-novabm-undercloud-precise-nonha
       - check-tripleo-ironic-undercloud-precise-nonha
       - check-tripleo-novabm-overcloud-precise-nonha
@@ -996,8 +993,6 @@ projects:
       - check-tempest-dsvm-virtual-ironic
     check-tripleo:
       - check-tripleo-ironic-undercloud-precise-nonha
-    experimental-tripleo:
-      - check-tripleo-ironic-seed-precise-nonha
     gate:
       - gate-tempest-dsvm-ironic
       - gate-tempest-dsvm-ironic-postgres
@@ -1039,7 +1034,6 @@ projects:
     experimental:
       - gate-grenade-dsvm-forward
     experimental-tripleo:
-      - check-tripleo-ironic-seed-precise-nonha
       - check-tripleo-novabm-undercloud-precise-nonha
       - check-tripleo-ironic-undercloud-precise-nonha
       - check-tripleo-novabm-overcloud-precise-nonha
@@ -1113,7 +1107,6 @@ projects:
       - check-neutron-dsvm-api
       - gate-grenade-dsvm-neutron-forward
     experimental-tripleo:
-      - check-tripleo-ironic-seed-precise-nonha
       - check-tripleo-novabm-undercloud-precise-nonha
       - check-tripleo-ironic-undercloud-precise-nonha
       - check-tripleo-novabm-overcloud-precise-nonha
@@ -1157,7 +1150,6 @@ projects:
       - check-tempest-dsvm-neutron-pg
       - check-tempest-dsvm-nova-v3-full
     experimental-tripleo:
-      - check-tripleo-ironic-seed-precise-nonha
       - check-tripleo-novabm-undercloud-precise-nonha
       - check-tripleo-ironic-undercloud-precise-nonha
       - check-tripleo-novabm-overcloud-precise-nonha
@@ -1243,7 +1235,6 @@ projects:
     experimental:
       - gate-grenade-dsvm-forward
     experimental-tripleo:
-      - check-tripleo-ironic-seed-precise-nonha
       - check-tripleo-novabm-undercloud-precise-nonha
       - check-tripleo-ironic-undercloud-precise-nonha
       - check-tripleo-novabm-overcloud-precise-nonha
@@ -1294,7 +1285,6 @@ projects:
       - check-tripleo-novabm-undercloud-precise-nonha
       - check-tripleo-novabm-overcloud-f20-nonha
     experimental-tripleo:
-      - check-tripleo-ironic-seed-precise-nonha
       - check-tripleo-novabm-overcloud-precise-nonha
     pre-release:
       - tuskar-tarball
@@ -1358,7 +1348,6 @@ projects:
     experimental:
       - gate-grenade-dsvm-forward
     experimental-tripleo:
-      - check-tripleo-ironic-seed-precise-nonha
       - check-tripleo-novabm-undercloud-precise-nonha
       - check-tripleo-ironic-undercloud-precise-nonha
       - check-tripleo-novabm-overcloud-precise-nonha
@@ -1392,7 +1381,6 @@ projects:
     experimental:
       - gate-grenade-dsvm-forward
     experimental-tripleo:
-      - check-tripleo-ironic-seed-precise-nonha
       - check-tripleo-novabm-undercloud-precise-nonha
       - check-tripleo-ironic-undercloud-precise-nonha
       - check-tripleo-novabm-overcloud-precise-nonha
@@ -1419,7 +1407,6 @@ projects:
     experimental:
       - gate-grenade-dsvm-forward
     experimental-tripleo:
-      - check-tripleo-ironic-seed-precise-nonha
       - check-tripleo-novabm-undercloud-precise-nonha
       - check-tripleo-ironic-undercloud-precise-nonha
       - check-tripleo-novabm-overcloud-precise-nonha
@@ -1449,7 +1436,6 @@ projects:
       - python-heatclient-branch-tarball
       - python-heatclient-coverage
     experimental-tripleo:
-      - check-tripleo-ironic-seed-precise-nonha
       - check-tripleo-novabm-undercloud-precise-nonha
       - check-tripleo-ironic-undercloud-precise-nonha
       - check-tripleo-novabm-overcloud-precise-nonha
@@ -1469,8 +1455,6 @@ projects:
       - check-tempest-dsvm-virtual-ironic
     check-tripleo:
       - check-tripleo-ironic-undercloud-precise-nonha
-    experimental-tripleo:
-      - check-tripleo-ironic-seed-precise-nonha
     gate:
       - gate-python-ironicclient-python33
       - gate-python-ironicclient-pypy
@@ -1498,7 +1482,6 @@ projects:
     experimental:
       - gate-grenade-dsvm-forward
     experimental-tripleo:
-      - check-tripleo-ironic-seed-precise-nonha
       - check-tripleo-novabm-undercloud-precise-nonha
       - check-tripleo-ironic-undercloud-precise-nonha
       - check-tripleo-novabm-overcloud-precise-nonha
@@ -1538,7 +1521,6 @@ projects:
     experimental:
       - gate-grenade-dsvm-forward
     experimental-tripleo:
-      - check-tripleo-ironic-seed-precise-nonha
       - check-tripleo-novabm-undercloud-precise-nonha
       - check-tripleo-ironic-undercloud-precise-nonha
       - check-tripleo-novabm-overcloud-precise-nonha
@@ -1566,7 +1548,6 @@ projects:
     experimental:
       - gate-grenade-dsvm-forward
     experimental-tripleo:
-      - check-tripleo-ironic-seed-precise-nonha
       - check-tripleo-novabm-undercloud-precise-nonha
       - check-tripleo-ironic-undercloud-precise-nonha
       - check-tripleo-novabm-overcloud-precise-nonha
@@ -1614,7 +1595,6 @@ projects:
       - gate-tempest-dsvm-large-ops
       - gate-tempest-dsvm-neutron-large-ops
     experimental-tripleo:
-      - check-tripleo-ironic-seed-precise-nonha
       - check-tripleo-novabm-undercloud-precise-nonha
       - check-tripleo-ironic-undercloud-precise-nonha
       - check-tripleo-novabm-overcloud-precise-nonha
@@ -1644,8 +1624,6 @@ projects:
       - check-tripleo-ironic-undercloud-precise-nonha
       - check-tripleo-novabm-undercloud-precise-nonha
       - check-tripleo-novabm-overcloud-precise-nonha
-    experimental-tripleo:
-      - check-tripleo-ironic-seed-precise-nonha
 
 # Section: Other OpenStack projects
 
@@ -1669,7 +1647,6 @@ projects:
       - gate-diskimage-builder-python27
       - gate-tempest-dsvm-virtual-ironic
     experimental-tripleo:
-      - check-tripleo-ironic-seed-precise-nonha
       - check-tripleo-novabm-overcloud-precise-nonha
     post:
       - diskimage-builder-coverage
@@ -1689,7 +1666,6 @@ projects:
       - noop
     experimental-tripleo:
       - check-tripleo-novabm-overcloud-precise-nonha
-      - check-tripleo-ironic-seed-precise-nonha
     post:
       - dib-utils-branch-tarball
 
@@ -1812,7 +1788,6 @@ projects:
       - gate-os-apply-config-python26
       - gate-os-apply-config-python27
     experimental-tripleo:
-      - check-tripleo-ironic-seed-precise-nonha
       - check-tripleo-novabm-overcloud-precise-nonha
     post:
       - os-apply-config-coverage
@@ -1835,7 +1810,6 @@ projects:
       - gate-os-cloud-config-python26
       - gate-os-cloud-config-python27
     experimental-tripleo:
-      - check-tripleo-ironic-seed-precise-nonha
       - check-tripleo-novabm-overcloud-precise-nonha
     post:
       - os-cloud-config-docs
@@ -1860,7 +1834,6 @@ projects:
       - gate-os-collect-config-python26
       - gate-os-collect-config-python27
     experimental-tripleo:
-      - check-tripleo-ironic-seed-precise-nonha
       - check-tripleo-novabm-overcloud-precise-nonha
     post:
       - os-collect-config-coverage
@@ -1884,7 +1857,6 @@ projects:
       - gate-os-refresh-config-python26
       - gate-os-refresh-config-python27
     experimental-tripleo:
-      - check-tripleo-ironic-seed-precise-nonha
       - check-tripleo-novabm-overcloud-precise-nonha
     post:
       - os-refresh-config-coverage
@@ -1950,7 +1922,6 @@ projects:
       - gate-oslo.config-python33
       - gate-devstack-dsvm-cells
     experimental-tripleo:
-      - check-tripleo-ironic-seed-precise-nonha
       - check-tripleo-novabm-undercloud-precise-nonha
       - check-tripleo-ironic-undercloud-precise-nonha
       - check-tripleo-novabm-overcloud-precise-nonha
@@ -1972,7 +1943,6 @@ projects:
       - gate-tempest-dsvm-large-ops
       - gate-tempest-dsvm-neutron-large-ops
     experimental-tripleo:
-      - check-tripleo-ironic-seed-precise-nonha
       - check-tripleo-novabm-undercloud-precise-nonha
       - check-tripleo-ironic-undercloud-precise-nonha
       - check-tripleo-novabm-overcloud-precise-nonha
@@ -1993,7 +1963,6 @@ projects:
       - gate-oslo.i18n-python33
       - gate-devstack-dsvm-cells
     experimental-tripleo:
-      - check-tripleo-ironic-seed-precise-nonha
       - check-tripleo-novabm-undercloud-precise-nonha
       - check-tripleo-ironic-undercloud-precise-nonha
       - check-tripleo-novabm-overcloud-precise-nonha
@@ -2016,7 +1985,6 @@ projects:
       - gate-tempest-dsvm-large-ops
       - gate-tempest-dsvm-neutron-large-ops
     experimental-tripleo:
-      - check-tripleo-ironic-seed-precise-nonha
       - check-tripleo-novabm-undercloud-precise-nonha
       - check-tripleo-ironic-undercloud-precise-nonha
       - check-tripleo-novabm-overcloud-precise-nonha
@@ -2046,7 +2014,6 @@ projects:
     post:
       - oslo.rootwrap-branch-tarball
     experimental-tripleo:
-      - check-tripleo-ironic-seed-precise-nonha
       - check-tripleo-novabm-undercloud-precise-nonha
       - check-tripleo-ironic-undercloud-precise-nonha
       - check-tripleo-novabm-overcloud-precise-nonha
@@ -2079,7 +2046,6 @@ projects:
       - gate-oslo.version-python33
       - gate-devstack-dsvm-cells
     experimental-tripleo:
-      - check-tripleo-ironic-seed-precise-nonha
       - check-tripleo-novabm-undercloud-precise-nonha
       - check-tripleo-ironic-undercloud-precise-nonha
       - check-tripleo-novabm-overcloud-precise-nonha
@@ -2120,7 +2086,6 @@ projects:
     post:
       - propose-requirements-updates
     experimental-tripleo:
-      - check-tripleo-ironic-seed-precise-nonha
       - check-tripleo-novabm-undercloud-precise-nonha
       - check-tripleo-ironic-undercloud-precise-nonha
       - check-tripleo-novabm-overcloud-precise-nonha
@@ -2267,7 +2232,6 @@ projects:
       - check-tempest-master-dsvm-full-havana
       - check-tempest-master-dsvm-neutron-havana
     experimental-tripleo:
-      - check-tripleo-ironic-seed-precise-nonha
       - check-tripleo-novabm-undercloud-precise-nonha
       - check-tripleo-ironic-undercloud-precise-nonha
       - check-tripleo-novabm-overcloud-precise-nonha
@@ -2303,7 +2267,6 @@ projects:
     gate:
       - noop
     experimental-tripleo:
-      - check-tripleo-ironic-seed-precise-nonha
       - check-tripleo-novabm-overcloud-precise-nonha
     post:
       - tripleo-heat-templates-branch-tarball
@@ -2325,7 +2288,6 @@ projects:
     gate:
       - noop
     experimental-tripleo:
-      - check-tripleo-ironic-seed-precise-nonha
       - check-tripleo-novabm-overcloud-precise-nonha
     post:
       - tripleo-image-elements-branch-tarball
@@ -2341,7 +2303,6 @@ projects:
     gate:
       - gate-tripleo-incubator-docs
     experimental-tripleo:
-      - check-tripleo-ironic-seed-precise-nonha
       - check-tripleo-novabm-overcloud-precise-nonha
       - check-tripleo-ironic-vlan-precise-nonha
     post:
@@ -2383,7 +2344,6 @@ projects:
       - gate-tuskar-ui-python27
       - gate-tuskar-ui-selenium
     experimental-tripleo:
-      - check-tripleo-ironic-seed-precise-nonha
       - check-tripleo-novabm-undercloud-precise-nonha
       - check-tripleo-ironic-undercloud-precise-nonha
       - check-tripleo-novabm-overcloud-precise-nonha
@@ -2627,7 +2587,6 @@ projects:
       - gate-tempest-dsvm-neutron-large-ops
       - gate-swift-dsvm-functional
     experimental-tripleo:
-      - check-tripleo-ironic-seed-precise-nonha
       - check-tripleo-novabm-undercloud-precise-nonha
       - check-tripleo-ironic-undercloud-precise-nonha
       - check-tripleo-novabm-overcloud-precise-nonha
@@ -2746,7 +2705,6 @@ projects:
       - check-tempest-dsvm-aiopcpu
       - check-tempest-dsvm-neutron-aiopcpu
     experimental-tripleo:
-      - check-tripleo-ironic-seed-precise-nonha
       - check-tripleo-novabm-undercloud-precise-nonha
       - check-tripleo-ironic-undercloud-precise-nonha
       - check-tripleo-novabm-overcloud-precise-nonha
@@ -3150,7 +3108,6 @@ projects:
     gate:
       - noop
     experimental-tripleo:
-      - check-tripleo-ironic-seed-precise-nonha
       - check-tripleo-novabm-overcloud-precise-nonha
 
   - name: openstack-infra/zmq-event-publisher
