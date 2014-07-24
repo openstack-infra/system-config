@@ -1711,6 +1711,12 @@ projects:
     gate:
       - noop
 
+  - name: stackforge/git-upstream
+    check:
+      - noop
+    gate:
+      - noop
+
   - name: stackforge/gerrit-dash-creator
     check:
       - noop
