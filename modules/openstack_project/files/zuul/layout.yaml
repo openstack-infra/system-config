@@ -741,6 +741,8 @@ projects:
       - gate-barbican-specs-docs
     gate:
       - gate-barbican-specs-docs
+    post:
+      - barbican-specs-publish-specs
 
   - name: openstack/ceilometer
     template:
@@ -893,6 +895,8 @@ projects:
       - gate-glance-specs-docs
     gate:
       - gate-glance-specs-docs
+    post:
+      - glance-specs-publish-specs
 
   - name: openstack/glance.store
     template:
@@ -950,6 +954,8 @@ projects:
       - gate-heat-specs-docs
     gate:
       - gate-heat-specs-docs
+    post:
+      - heat-specs-publish-specs
 
   - name: openstack/horizon
     template:
@@ -2189,6 +2195,8 @@ projects:
       - gate-qa-specs-docs
     gate:
       - gate-qa-specs-docs
+    post:
+      - qa-specs-publish-specs
 
   - name: openstack/tempest
     template:
@@ -2391,6 +2399,8 @@ projects:
       - gate-swift-specs-docs
     gate:
       - gate-swift-specs-docs
+    post:
+      - swift-specs-publish-specs
 
   - name: openstack/volume-api
     template:
@@ -2815,6 +2825,8 @@ projects:
       - gate-infra-specs-docs
     gate:
       - gate-infra-specs-docs
+    post:
+      - infra-specs-publish-specs
 
   - name: openstack-infra/groups-static-pages
     check:
@@ -4493,6 +4505,8 @@ projects:
       - gate-solum-specs-docs
     gate:
       - gate-solum-specs-docs
+    post:
+      - solum-specs-publish-specs
 
   - name: stackforge/python-surveilclient
     check:
