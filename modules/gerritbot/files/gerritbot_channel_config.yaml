@@ -103,6 +103,7 @@ openstack-ceilometer:
       - openstack/ceilometer-specs
       - openstack/python-ceilometerclient
       - openstack/pycadf
+      - stackforge/gnocchi
     branches:
       - master
 
