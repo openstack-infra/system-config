@@ -4858,6 +4858,20 @@ projects:
     post:
       - graffiti-coverage
 
+  - name: stackforge/namos
+    check:
+      - gate-namos-docs
+      - gate-namos-pep8
+      - gate-namos-python26
+      - gate-namos-python27
+    gate:
+      - gate-namos-docs
+      - gate-namos-pep8
+      - gate-namos-python26
+      - gate-namos-python27
+    post:
+      - namos-coverage
+
   - name: stackforge/stacktach
     check:
       - gate-stacktach-pep8

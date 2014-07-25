@@ -852,3 +852,13 @@ congress:
       - stackforge/python-congressclient
     branches:
       - master
+
+namos:
+    events:
+      - patchset-created
+      - change-merged
+      - x-vrif-minus-2
+    projects:
+      - stackforge/namos
+    branches:
+      - master
