@@ -26,7 +26,9 @@ function build_unittest() {
     pip install flake8
  
     flake8 $1/$2 --exit-zero 2>&1 | tee $WORKSPACE/$2_flake8.log
-    [ $2 = "neutron_plugin" ] && scons neutron_plugin_contrail:test 2>&1 | tee $WORKSPACE/$2_unittests.log
+    if [ $2 = "neutron_plugin" ]; then
+        scons neutron_plugin_contrail:test 2>&1 | tee $WORKSPACE/$2_unittests.log || true
+    fi
     #This scons command returns exit zero always because of using tee.
 }
 
