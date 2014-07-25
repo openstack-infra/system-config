@@ -55,7 +55,7 @@ def self.setup_contrail_repo(use_public)
     if use_public then
         Sh.run("repo init --repo-url " +
 #              "'https://github.com/opencontrail-ci-admin/git-repo' " +
-               "https://bitbucket.org/contrail_admin/git-repo.git' " +
+               "'https://bitbucket.org/contrail_admin/git-repo.git' " +
                "-u git@github.com:Juniper/contrail-vnc -b #{branch}", false,
                100, 30)
     else
