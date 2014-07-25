@@ -12,6 +12,8 @@
       - coverage:
           github-org: '{github-org}'
           project: '{name}'
+      - zuul_swift_upload_logs_with_console:
+          upload_source: 'cover/**'
 
     publishers:
       - coverage-log
@@ -29,6 +31,7 @@
       - pep8:
           github-org: '{github-org}'
           project: '{name}'
+      - zuul_swift_upload_console_log
 
     publishers:
       - console-log
@@ -61,6 +64,7 @@
       - pylint:
           github-org: '{github-org}'
           project: '{name}'
+      - zuul_swift_upload_console_log
 
     publishers:
       - console-log
@@ -89,6 +93,8 @@
           github-org: '{github-org}'
           project: '{name}'
       - assert-no-extra-files
+      - zuul_swift_upload_logs_with_console:
+          upload_source: '**/*nose_results.html **/*testr_results.html.gz .testrepository/tmp* **/*subunit_log.txt.gz'
 
     publishers:
       - test-results
@@ -111,6 +117,8 @@
           github-org: '{github-org}'
           project: '{name}'
       - assert-no-extra-files
+      - zuul_swift_upload_logs_with_console:
+          upload_source: '**/*nose_results.html **/*testr_results.html.gz .testrepository/tmp* **/*subunit_log.txt.gz'
 
     publishers:
       - test-results
@@ -133,6 +141,8 @@
           github-org: '{github-org}'
           project: '{name}'
       - assert-no-extra-files
+      - zuul_swift_upload_logs_with_console:
+          upload_source: '**/*nose_results.html **/*testr_results.html.gz .testrepository/tmp* **/*subunit_log.txt.gz'
 
     publishers:
       - test-results
@@ -155,6 +165,8 @@
           github-org: '{github-org}'
           project: '{name}'
       - assert-no-extra-files
+      - zuul_swift_upload_logs_with_console:
+          upload_source: '**/*nose_results.html **/*testr_results.html.gz .testrepository/tmp* **/*subunit_log.txt.gz'
 
     publishers:
       - test-results
@@ -177,6 +189,8 @@
           github-org: '{github-org}'
           project: '{name}'
       - assert-no-extra-files
+      - zuul_swift_upload_logs_with_console:
+          upload_source: '**/*nose_results.html **/*testr_results.html.gz .testrepository/tmp* **/*subunit_log.txt.gz'
 
     publishers:
       - test-results
@@ -193,6 +207,8 @@
       - docs:
           github-org: '{github-org}'
           project: '{name}'
+      - zuul_swift_upload_logs_with_console:
+          upload_source: 'doc/build/html/**'
 
     publishers:
       - console-log
@@ -216,6 +232,8 @@
           github-org: '{github-org}'
           project: '{name}'
       - assert-no-extra-files
+      - zuul_swift_upload_logs_with_console:
+          upload_source: '**/*nose_results.html **/*testr_results.html.gz .testrepository/tmp* **/*subunit_log.txt.gz'
 
     publishers:
       - test-results
@@ -233,6 +251,8 @@
       - tarball:
           github-org: '{github-org}'
           project: '{name}'
+      - zuul_swift_upload_console_log
+      # Need macros for uploading tarballs
 
     publishers:
       - tarball:
@@ -259,6 +279,8 @@
           BRANCH=$ZUUL_REFNAME
           BRANCH_PATH=`echo $BRANCH | tr / -`
           mv dist/*.tar.gz dist/{name}-$BRANCH_PATH.tar.gz
+      - zuul_swift_upload_console_log
+      # Need macros for uploading tarballs
 
     publishers:
       - tarball:
@@ -277,6 +299,7 @@
       - shell: |
           #!/bin/bash -xe
           /usr/local/jenkins/slave_scripts/project-requirements-change.py $ZUUL_BRANCH
+      - zuul_swift_upload_console_log
 
     publishers:
       - console-log
