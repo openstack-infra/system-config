@@ -42,7 +42,7 @@ to_check = dict(
         ('Patch Set 1:\n\nrecheck bug 1234', True),
 
         ('Patch Set 1:\n\nrecheck no bug', True),
-        ('Patch Set 1:\n\nrecheck no bug\n\nextra stuff', False),
+        ('Patch Set 1:\n\nrecheck no bug\n\nextra stuff', True),
 
         # fail, not a number
         ('Patch Set 1:\n\nrecheck bug abcd', False),
