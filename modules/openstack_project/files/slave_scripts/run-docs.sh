@@ -24,8 +24,10 @@ echo "======================================================================"
 
 mkdir -p doc/build
 export HUDSON_PUBLISH_DOCS=1
-tox -e$venv -- python setup.py build_sphinx
+set -o pipefail
+tox -e$venv -- python setup.py build_sphinx | tee sphinx.txt
 result=$?
+set +o pipefail
 
 if [ -z "$ZUUL_REFNAME" ] || [ "$ZUUL_REFNAME" == "master" ] ; then
     : # Leave the docs where they are.
