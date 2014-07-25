@@ -34,6 +34,10 @@ Requirements
   * Support the following syntaxes ``recheck no bug`` and ``recheck bug ###``.
   * Recheck means recheck everything. A single recheck comment should
     re-trigger all testing systems.
+  * Commands specific to a 3rd party system **must** be namespace
+    prefixed with the system in question. ``3rdparty-name:
+    command``. Specifically 3rd party systems **must not** extend
+    existing recheck/check syntax with 3rd party specific commands.
 * Publish who the maintainers of the third party testing system are, and make
   them available for support as needed. Maintainers are encouraged to be
   in IRC regularly to make it faster to contact them.
