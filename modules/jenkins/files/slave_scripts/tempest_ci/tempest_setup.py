@@ -2,7 +2,7 @@ import netifaces
 from neutronclient.neutron import client
 from neutronclient.client import HTTPClient
 
-USER='demo'
+USER='admin'
 TENANT='demo'
 PASSWD='contrail123'
 EP_URL='http://127.0.0.1:9696'
@@ -47,7 +47,7 @@ c['identity']['admin_domain_name'] = 'Default'
 c['identity']['admin_tenant_name'] = 'admin'
 c['identity']['admin_username'] = 'admin'
 c['identity']['tenant_name'] = 'demo'
-c['identity']['username'] = 'demo'
+c['identity']['username'] = 'admin'
 addrs = netifaces.ifaddresses('vhost0')
 local_ip=addrs[netifaces.AF_INET][0]['addr']
 c['network-feature-enabled']['ipv6'] = 'False'
@@ -55,3 +55,4 @@ c['identity']['uri_v3'] = 'http://%s:5000/v3/' %(local_ip)
 with open(TEMPEST_FILE, 'w') as f:
     c.write(f)
 
+python -c "from vnc_api import vnc_api; lib=vnc_api.VncApi(); lib.service_template_create(vnc_api.ServiceTemplate('netns-snat-template'))"
