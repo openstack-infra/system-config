@@ -106,7 +106,7 @@ class Sh
     # Run a shell command just printing output to stdput. Output is not
     # collected returned to the caller.
     def self.run (cmd, ignore = @@ignore_failed_exit_code, repeat = 1, wait = 1,
-                debug = true, ignore_output = true)
+                  debug = true, ignore_output = true)
         output = ""
         @@exit_code = 0
         frame = "#{COLOR_YELLOW}#{caller[2]}() #{caller[3]}() "
