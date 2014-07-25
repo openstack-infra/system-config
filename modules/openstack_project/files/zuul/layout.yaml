@@ -4883,6 +4883,10 @@ projects:
     post:
       - graffiti-coverage
 
+  - name: stackforge/namos
+    template:
+      - name: python-jobs
+
   - name: stackforge/stacktach
     check:
       - gate-stacktach-pep8
