@@ -196,11 +196,11 @@ if __name__ == '__main__':
 
         file_list += build_file_list(
             file_path, logserver_prefix, swift_destination_prefix,
-            (not (args.no_indexes and args.no_dir_indexes))
+            (not (args.no_indexes or args.no_dir_indexes))
         )
 
     index_file = ''
-    if not (args.no_indexes and args.no_root_index):
+    if not (args.no_indexes or args.no_root_index):
         index_file = make_index_file(root_list, logserver_prefix,
                                      swift_destination_prefix)
         file_list.append({
