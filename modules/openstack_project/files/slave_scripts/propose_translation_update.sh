@@ -51,6 +51,10 @@ for level in $LEVELS ; do
         msgmerge --update --no-fuzzy-matching $f \
             --backup=none \
             ${PROJECT}/locale/${PROJECT}-log-${level}.pot
+        # Remove obsolete entries
+        msgattrib --no-obsolete \
+            --output-file=${f}.tmp ${f}
+        mv ${f}.tmp ${f}
     done
   fi
 done
