@@ -55,19 +55,8 @@
     builders:
       - revoke-sudo
       - shell: |
-          #!/bin/bash -xe
-          TAG=`echo $ZUUL_REF | sed 's/^refs.tags.//'`
-          FILENAME_HPI="{name}-$TAG.hpi"
-
-          # copy plugin artifacts from tarballs to local workspace
-          rm -rf *.hpi
-          curl -o $FILENAME_HPI http://{tarball-site}/ci/{name}/$FILENAME_HPI
-
-          # deploy to maven repository
-          FILENAME_POM="{name}-$TAG.pom"
-          /usr/local/jenkins/slave_scripts/jenkinsci-upload.sh {name} $TAG \
-              $FILENAME_POM $FILENAME_HPI
-
+          /usr/local/jenkins/slave_scripts/artifact-publish.sh \
+          -a jenkins-plugin -p {name}
     publishers:
       - console-log
 
