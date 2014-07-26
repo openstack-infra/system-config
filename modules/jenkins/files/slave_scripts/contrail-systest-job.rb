@@ -154,10 +154,10 @@ def install_contrail
 
     # Reduce number of nova-api and nova-conductors and fix scheduler for
     # even distribution of instances across all compute nodes.
-#   Sh.run "ssh #{vm.vmname} /usr/bin/openstack-config --set /etc/nova/nova.conf conductor workers 2"
-#   Sh.run "ssh #{vm.vmname} /usr/bin/openstack-config --set /etc/nova/nova.conf DEFAULT osapi_compute_workers 2"
-#   Sh.run "ssh #{vm.vmname} service nova-api restart"
-#   Sh.run "ssh #{vm.vmname} service nova-conductor restart"
+    Sh.run "ssh #{vm.vmname} /usr/bin/openstack-config --set /etc/nova/nova.conf conductor workers 2"
+    Sh.run "ssh #{vm.vmname} /usr/bin/openstack-config --set /etc/nova/nova.conf DEFAULT osapi_compute_workers 2"
+    Sh.run "ssh #{vm.vmname} service nova-api restart"
+    Sh.run "ssh #{vm.vmname} service nova-conductor restart"
 
 #   Sh.run "ssh #{vm.vmname} /usr/bin/openstack-config --set /etc/nova/nova.conf DEFAULT ram_weight_multiplier 1.0"
 #   Sh.run "ssh #{vm.vmname} /usr/bin/openstack-config --set /etc/nova/nova.conf DEFAULT scheduler_weight_classes nova.scheduler.weights.all_weighers"
@@ -257,7 +257,7 @@ def run_sanity(fab_test)
     fab_test = update_nova_libvirt_driver(fab_test)
 
     # GUESTVM_IMAGE=cirros-0.3.0-x86_64-uec
-    cmd = "ssh #{@vms.first.vmname} \"(export TEST_RETRY_FACTOR=20.0 export TEST_DELAY_FACTOR=2; cd /opt/contrail/utils; fab #{fab_test})\""
+    cmd = "ssh #{@vms.first.vmname} \"(export TEST_RETRY_FACTOR=20.0 export TEST_DELAY_FACTOR=2 GUESTVM_IMAGE=cirros-0.3.0-x86_64-uec; cd /opt/contrail/utils; fab #{fab_test})\""
     o, exit_code = Sh.run(cmd, true)
 
     # Copy sanity log files, as the sub-slave VMs will go away.
