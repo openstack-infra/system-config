@@ -213,4 +213,13 @@ class openstack_project::lists(
     webserver   => $listdomain,
     mailserver  => $listdomain,
   }
+
+    maillist { 'openstack-i18n-es':
+    ensure      => present,
+    admin       => 'marian.tort@gmail.com',
+    password    => $listpassword,
+    description => 'Lista sobre la localización al español de OpenStack.',
+    webserver   => $listdomain,
+    mailserver  => $listdomain,
+  }
 }
