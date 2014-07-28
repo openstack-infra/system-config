@@ -278,6 +278,8 @@
       - gate-{name}-puppet-apply
       - gate-{name}-pep8
       - experimental-swift-logs-{name}-pep8
+      - gate-{name}-tox-{envlist}:
+          envlist: jjb
 
 - project:
     name: gitdm

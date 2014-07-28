@@ -2691,6 +2691,7 @@ projects:
       - gate-ci-docs
       - check-projects-yaml-alphabetized
       - check-projects-yaml-upstream
+      - gate-config-tox-jjb
     gate:
       - gate-config-layout
       - gate-config-pep8
@@ -2701,6 +2702,7 @@ projects:
       - gate-config-irc-access
       - check-projects-yaml-alphabetized
       - check-projects-yaml-upstream
+      - gate-config-tox-jjb
     post:
       - ci-docs
     experimental:
