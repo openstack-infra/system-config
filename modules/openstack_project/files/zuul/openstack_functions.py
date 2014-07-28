@@ -90,7 +90,7 @@ def set_node_options(item, job, params, default):
     python26_re = r'^.*-(py(thon)?)?26.*$'
     centos6_re = r'^.*-centos6.*$'
     f20_re = r'^.*-f20.*$'
-    python33_re = r'^.*-py(py|(thon)?33).*$'
+    python33_re = r'^.*-(pypy|py(thon)?33|33).*$'
     tripleo_re = r'^.*-tripleo.*$'
     devstack_re = r'^.*-dsvm.*$'
     # jobs run on the proposal worker

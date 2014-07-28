@@ -2471,7 +2471,7 @@
           envlist: scaffolds-27
       - gate-{name}-tox-{envlist}:
           envlist: scaffolds-33
-          node: bare-precise
+          node: py3k-precise
       - gate-{name}-tox-{envlist}:
           envlist: wsme-stable
       - gate-{name}-tox-{envlist}:
