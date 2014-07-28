@@ -457,6 +457,16 @@
       - translation-jobs
       - rally-jobs
 
+- project:
+    name: cinder-specs
+    github-org: openstack
+    node: 'bare-precise || bare-trusty'
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - gate-{name}-python27
+      - gate-{name}-docs
+
 
 - project:
     name: compute-api
