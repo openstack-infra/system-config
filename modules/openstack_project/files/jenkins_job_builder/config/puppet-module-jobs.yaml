@@ -45,6 +45,7 @@
 
     builders:
       - gerrit-git-prep
+      - puppet-update-modules
       - puppet-apply
 
     publishers:

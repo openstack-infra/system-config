@@ -113,6 +113,11 @@
           done
 
 - builder:
+    name: puppet-update-modules
+    builders:
+      - shell: "sudo ./install_modules.sh"
+
+- builder:
     name: puppet-apply
     builders:
       - shell: "./test.sh"
