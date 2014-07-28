@@ -16,7 +16,6 @@
           export PYTHONUNBUFFERED=true
           export DEVSTACK_GATE_TIMEOUT=60
           export DEVSTACK_GATE_NEUTRON=1
-          export KEEP_LOCALRC=1
           export ENABLED_SERVICES=solum,solum-api,solum-build-api,solum-conductor,solum-deployer,solum-worker,tempest
           export PROJECTS="stackforge/solum $PROJECTS"
 
@@ -25,6 +24,12 @@
               ./pre_test_hook.sh
           }
           export -f pre_test_hook
+
+          function gate_hook {
+              cd /opt/stack/new/solum/functionaltests
+              ./gate_hook.sh
+          }
+          export -f gate_hook
 
           function post_test_hook {
               cd /opt/stack/new/solum/functionaltests
@@ -57,7 +62,6 @@
           export PYTHONUNBUFFERED=true
           export DEVSTACK_GATE_TIMEOUT=60
           export DEVSTACK_GATE_NEUTRON=1
-          export KEEP_LOCALRC=1
           export ENABLED_SERVICES=solum,solum-api,solum-build-api,solum-conductor,solum-deployer,solum-worker,tempest
           export PROJECTS="stackforge/solum $PROJECTS"
 
@@ -66,6 +70,12 @@
               ./pre_test_hook.sh
           }
           export -f pre_test_hook
+
+          function gate_hook {
+              cd /opt/stack/new/solum/functionaltests
+              ./gate_hook.sh
+          }
+          export -f gate_hook
 
           function post_test_hook {
               cd /opt/stack/new/solum/functionaltests
