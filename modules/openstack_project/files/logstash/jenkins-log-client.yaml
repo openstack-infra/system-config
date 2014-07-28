@@ -178,6 +178,9 @@ source-files:
   - name: logs/syslog.txt
     tags:
       - syslog
+  - name: logs/libvirtd.txt
+    tags:
+      - libvirt
   - name: logs/tempest.txt
     tags:
       - screen
