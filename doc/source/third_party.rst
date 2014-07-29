@@ -50,6 +50,8 @@ Requirements
     * logs should include a trace of the commands used
   * OpenStack logs
   * Tempest logs (including ``testr_results.html.gz``)
+    * logs must be browsable; logs requiring download, installation or login
+      to access are not acceptable
 
   Note: all test artifacts must be retained for one month.
 
