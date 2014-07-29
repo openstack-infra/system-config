@@ -1142,15 +1142,12 @@ projects:
     template:
       - name: merge-check
       - name: python-jobs
+      - name: python3-jobs
       - name: openstack-client-publish-jobs
       - name: check-requirements
       - name: integrated-gate
       - name: stable-compat-jobs
       - name: publish-to-pypi
-    check:
-      - gate-keystonemiddleware-python33
-    gate:
-      - gate-keystonemiddleware-python33
 
   - name: openstack/kite
     template:
@@ -1421,18 +1418,17 @@ projects:
   - name: openstack/python-barbicanclient
     template:
       - name: merge-check
+      - name: python3-jobs
       - name: publish-to-pypi
     check:
       - gate-python-barbicanclient-pep8
       - gate-python-barbicanclient-python26
       - gate-python-barbicanclient-python27
-      - gate-python-barbicanclient-python33
       - gate-python-barbicanclient-pypy
     gate:
       - gate-python-barbicanclient-pep8
       - gate-python-barbicanclient-python26
       - gate-python-barbicanclient-python27
-      - gate-python-barbicanclient-python33
       - gate-python-barbicanclient-pypy
     post:
       - python-barbicanclient-branch-tarball
@@ -1441,17 +1437,16 @@ projects:
     template:
       - name: merge-check
       - name: python-jobs
+      - name: python3-jobs
       - name: openstack-client-publish-jobs
       - name: check-requirements
       - name: integrated-gate
       - name: stable-compat-jobs
       - name: publish-to-pypi
     check:
-      - gate-python-ceilometerclient-python33
       - gate-python-ceilometerclient-pypy
       - check-devstack-dsvm-cells
     gate:
-      - gate-python-ceilometerclient-python33
       - gate-python-ceilometerclient-pypy
       - gate-devstack-dsvm-cells
 
@@ -1459,17 +1454,16 @@ projects:
     template:
       - name: merge-check
       - name: python-jobs
+      - name: python3-jobs
       - name: openstack-client-publish-jobs
       - name: check-requirements
       - name: integrated-gate
       - name: stable-compat-jobs
       - name: publish-to-pypi
     check:
-      - gate-python-cinderclient-python33
       - gate-python-cinderclient-pypy
       - check-devstack-dsvm-cells
     gate:
-      - gate-python-cinderclient-python33
       - gate-python-cinderclient-pypy
       - gate-devstack-dsvm-cells
     experimental:
@@ -1542,6 +1536,7 @@ projects:
   - name: openstack/python-heatclient
     template:
       - name: merge-check
+      - name: python3-jobs
       - name: check-requirements
       - name: integrated-gate
       - name: stable-compat-jobs
@@ -1550,14 +1545,12 @@ projects:
       - gate-python-heatclient-pep8
       - gate-python-heatclient-python26
       - gate-python-heatclient-python27
-      - gate-python-heatclient-python33
       - gate-python-heatclient-pypy
       - check-devstack-dsvm-cells
     gate:
       - gate-python-heatclient-pep8
       - gate-python-heatclient-python26
       - gate-python-heatclient-python27
-      - gate-python-heatclient-python33
       - gate-python-heatclient-pypy
       - gate-devstack-dsvm-cells
     post:
@@ -1574,19 +1567,18 @@ projects:
   - name: openstack/python-ironicclient
     template:
       - name: merge-check
+      - name: python3-jobs
       - name: python-jobs
       - name: openstack-client-publish-jobs
       - name: check-requirements
       - name: publish-to-pypi
     check:
-      - gate-python-ironicclient-python33
       - gate-python-ironicclient-pypy
       - check-tempest-dsvm-ironic
       - check-tempest-dsvm-virtual-ironic
     check-tripleo:
       - check-tripleo-ironic-undercloud-precise-nonha
     gate:
-      - gate-python-ironicclient-python33
       - gate-python-ironicclient-pypy
       - gate-tempest-dsvm-ironic
       - gate-tempest-dsvm-virtual-ironic
@@ -1595,6 +1587,7 @@ projects:
     template:
       - name: merge-check
       - name: python-jobs
+      - name: python3-jobs
       - name: openstack-client-publish-jobs
       - name: check-requirements
       - name: integrated-gate
@@ -1602,10 +1595,8 @@ projects:
       - name: stable-compat-jobs
       - name: publish-to-pypi
     check:
-      - gate-python-keystoneclient-python33
       - check-devstack-dsvm-cells
     gate:
-      - gate-python-keystoneclient-python33
       - gate-devstack-dsvm-cells
     experimental:
       - gate-grenade-dsvm-forward
@@ -1630,19 +1621,18 @@ projects:
   - name: openstack/python-zaqarclient
     template:
       - name: merge-check
+      - name: python3-jobs
       - name: check-requirements
       - name: publish-to-pypi
     check:
       - gate-python-zaqarclient-pep8
       - gate-python-zaqarclient-python26
       - gate-python-zaqarclient-python27
-      - gate-python-zaqarclient-python33
       - gate-python-zaqarclient-pypy
     gate:
       - gate-python-zaqarclient-pep8
       - gate-python-zaqarclient-python26
       - gate-python-zaqarclient-python27
-      - gate-python-zaqarclient-python33
       - gate-python-zaqarclient-pypy
     post:
       - python-zaqarclient-branch-tarball
@@ -1673,6 +1663,7 @@ projects:
     template:
       - name: merge-check
       - name: python-jobs
+      - name: python3-jobs
       - name: openstack-client-publish-jobs
       - name: check-requirements
       - name: integrated-gate
@@ -1680,11 +1671,9 @@ projects:
       - name: stable-compat-jobs
       - name: publish-to-pypi
     check:
-      - gate-python-novaclient-python33
       - gate-python-novaclient-pypy
       - check-devstack-dsvm-cells
     gate:
-      - gate-python-novaclient-python33
       - gate-python-novaclient-pypy
       - gate-devstack-dsvm-cells
     experimental:
@@ -1722,6 +1711,7 @@ projects:
     template:
       - name: merge-check
       - name: python-jobs
+      - name: python3-jobs
       - name: openstack-client-publish-jobs
       - name: check-requirements
       - name: integrated-gate
@@ -1729,11 +1719,9 @@ projects:
       - name: stable-compat-jobs
       - name: publish-to-pypi
     check:
-      - gate-python-swiftclient-python33
       - gate-python-swiftclient-pypy
       - check-swift-dsvm-functional
     gate:
-      - gate-python-swiftclient-python33
       - gate-python-swiftclient-pypy
       - gate-swift-dsvm-functional
     experimental-tripleo:
@@ -1748,14 +1736,13 @@ projects:
       - name: check-requirements
       - name: openstack-client-publish-jobs
       - name: python-jobs
+      - name: python3-jobs
       - name: integrated-gate
       - name: stable-compat-jobs
       - name: publish-to-pypi
     check:
-      - gate-python-troveclient-python33
       - gate-python-troveclient-pypy
     gate:
-      - gate-python-troveclient-python33
       - gate-python-troveclient-pypy
 
   - name: openstack/python-tuskarclient
@@ -2076,12 +2063,9 @@ projects:
     template:
       - name: merge-check
       - name: python-jobs
+      - name: python3-jobs
       - name: openstack-server-publish-jobs
       - name: check-requirements
-    check:
-      - gate-oslo-incubator-python33
-    gate:
-      - gate-oslo-incubator-python33
 
   - name: openstack/oslo-specs
     template:
@@ -2106,16 +2090,15 @@ projects:
     template:
       - name: merge-check
       - name: python-jobs
+      - name: python3-jobs
       - name: openstack-server-publish-jobs
       - name: check-requirements
       - name: integrated-gate
       - name: publish-to-pypi
     check:
-      - gate-oslo.config-python33
       - check-devstack-dsvm-cells
       - check-oslotest-dsvm-oslo.config
     gate:
-      - gate-oslo.config-python33
       - gate-devstack-dsvm-cells
     experimental-tripleo:
       - check-tripleo-novabm-undercloud-precise-nonha
@@ -2147,17 +2130,16 @@ projects:
     template:
       - name: merge-check
       - name: python-jobs
+      - name: python3-jobs
       - name: openstack-server-publish-jobs
       - name: check-requirements
       - name: integrated-gate
       - name: publish-to-pypi
       - name: translation-jobs
     check:
-      - gate-oslo.i18n-python33
       - check-devstack-dsvm-cells
       - check-oslotest-dsvm-oslo.i18n
     gate:
-      - gate-oslo.i18n-python33
       - gate-devstack-dsvm-cells
     experimental-tripleo:
       - check-tripleo-novabm-undercloud-precise-nonha
@@ -2201,6 +2183,7 @@ projects:
   - name: openstack/oslo.rootwrap
     template:
       - name: merge-check
+      - name: python3-jobs
       - name: check-requirements
       - name: integrated-gate
       - name: large-ops
@@ -2209,13 +2192,11 @@ projects:
       - gate-oslo.rootwrap-pep8
       - gate-oslo.rootwrap-python26
       - gate-oslo.rootwrap-python27
-      - gate-oslo.rootwrap-python33
       - check-devstack-dsvm-cells
     gate:
       - gate-oslo.rootwrap-pep8
       - gate-oslo.rootwrap-python26
       - gate-oslo.rootwrap-python27
-      - gate-oslo.rootwrap-python33
       - gate-devstack-dsvm-cells
     post:
       - oslo.rootwrap-branch-tarball
@@ -2242,31 +2223,27 @@ projects:
     template:
       - name: merge-check
       - name: python-jobs
+      - name: python3-jobs
       - name: openstack-server-publish-jobs
       - name: check-requirements
       - name: integrated-gate
       - name: publish-to-pypi
       - name: translation-jobs
-    check:
-      - gate-oslo.utils-python33
-    gate:
-      - gate-oslo.utils-python33
 
   - name: openstack/oslo.version
     template:
       - name: merge-check
       - name: python-jobs
+      - name: python3-jobs
       - name: openstack-server-publish-jobs
       - name: check-requirements
       - name: integrated-gate
       - name: publish-to-pypi
     check:
       - gate-oslo.version-pypy
-      - gate-oslo.version-python33
       - check-devstack-dsvm-cells
     gate:
       - gate-oslo.version-pypy
-      - gate-oslo.version-python33
       - gate-devstack-dsvm-cells
     experimental-tripleo:
       - check-tripleo-novabm-undercloud-precise-nonha
@@ -2769,13 +2746,12 @@ projects:
     template:
       - name: merge-check
       - name: python-jobs
+      - name: python3-jobs
       - name: publish-to-pypi
     check:
-      - gate-hacking-python33
       - gate-hacking-pypy
       - gate-hacking-integration-nova
     gate:
-      - gate-hacking-python33
       - gate-hacking-pypy
       - gate-hacking-integration-nova
     post:
@@ -2817,17 +2793,16 @@ projects:
     template:
       - name: merge-check
       - name: python-jobs
+      - name: python3-jobs
       - name: integrated-gate
       - name: large-ops
       - name: publish-to-pypi
     check:
-      - gate-pbr-python33
       - gate-pbr-pypy
       - check-requirements-integration-dsvm
       - check-devstack-dsvm-cells
       - check-swift-dsvm-functional
     gate:
-      - gate-pbr-python33
       - gate-pbr-pypy
       - gate-requirements-integration-dsvm
       - gate-devstack-dsvm-cells
@@ -3018,12 +2993,11 @@ projects:
   - name: openstack-infra/gerrit-powered-agenda
     template:
       - name: merge-check
+      - name: python3-jobs
     check:
       - gate-gerrit-powered-agenda-pep8
-      - gate-gerrit-powered-agenda-python33
     gate:
       - gate-gerrit-powered-agenda-pep8
-      - gate-gerrit-powered-agenda-python33
 
   - name: openstack-infra/gerritbot
     template:
@@ -3058,17 +3032,16 @@ projects:
   - name: openstack-infra/git-review
     template:
       - name: merge-check
+      - name: python3-jobs
       - name: publish-to-pypi
     check:
       - gate-git-review-pep8
       - gate-git-review-python26
       - gate-git-review-python27
-      - gate-git-review-python33
     gate:
       - gate-git-review-pep8
       - gate-git-review-python26
       - gate-git-review-python27
-      - gate-git-review-python33
     post:
       - git-review-branch-tarball
 
@@ -3329,10 +3302,7 @@ projects:
       - name: merge-check
       - name: publish-to-pypi
       - name: python-jobs
-    check:
-      - gate-reviewstats-python33
-    gate:
-      - gate-reviewstats-python33
+      - name: python3-jobs
 
   - name: openstack-infra/statusbot
     template:
@@ -3613,18 +3583,17 @@ projects:
     template:
       - name: merge-check
       - name: docs-on-rtfd
+      - name: python3-jobs
     check:
       - gate-cloudkitty-docs
       - gate-cloudkitty-pep8
       - gate-cloudkitty-python26
       - gate-cloudkitty-python27
-      - gate-cloudkitty-python33
     gate:
       - gate-cloudkitty-docs
       - gate-cloudkitty-pep8
       - gate-cloudkitty-python26
       - gate-cloudkitty-python27
-      - gate-cloudkitty-python33
 
   - name: stackforge/cloudroast
     template:
@@ -3807,18 +3776,17 @@ projects:
   - name: stackforge/entropy
     template:
       - name: merge-check
+      - name: python3-jobs
     check:
       - gate-entropy-docs
       - gate-entropy-pep8
       - gate-entropy-python26
       - gate-entropy-python27
-      - gate-entropy-python33
     gate:
       - gate-entropy-docs
       - gate-entropy-pep8
       - gate-entropy-python26
       - gate-entropy-python27
-      - gate-entropy-python33
     post:
       - entropy-coverage
 
@@ -3926,18 +3894,17 @@ projects:
   - name: stackforge/gnocchi
     template:
       - name: merge-check
+      - name: python3-jobs
     check:
       - gate-gnocchi-pep8
       - gate-gnocchi-python26
       - gate-gnocchi-python27
       - gate-gnocchi-tox-py27-postgresql
       - gate-gnocchi-tox-py27-mysql
-      - gate-gnocchi-python33
     gate:
       - gate-gnocchi-pep8
       - gate-gnocchi-python26
       - gate-gnocchi-python27
-      - gate-gnocchi-python33
       - gate-gnocchi-tox-py27-postgresql
       - gate-gnocchi-tox-py27-mysql
 
@@ -3955,10 +3922,7 @@ projects:
     template:
       - name: merge-check
       - name: python-jobs
-    check:
-      - gate-heat-translator-python33
-    gate:
-      - gate-heat-translator-python33
+      - name: python3-jobs
     post:
       - heat-translator-coverage
       - heat-translator-branch-tarball
@@ -4437,13 +4401,13 @@ projects:
   - name: stackforge/pecan
     template:
       - name: merge-check
+      - name: python3-jobs
       - name: publish-to-pypi
       - name: docs-on-rtfd
     check:
       - gate-pecan-pep8
       - gate-pecan-python26
       - gate-pecan-python27
-      - gate-pecan-python33
       - gate-pecan-pypy
       - gate-pecan-tox-scaffolds-26
       - gate-pecan-tox-scaffolds-27
@@ -4462,7 +4426,6 @@ projects:
       - gate-pecan-pep8
       - gate-pecan-python26
       - gate-pecan-python27
-      - gate-pecan-python33
       - gate-pecan-pypy
       - gate-pecan-tox-scaffolds-26
       - gate-pecan-tox-scaffolds-27
@@ -4981,19 +4944,18 @@ projects:
   - name: stackforge/python-manilaclient
     template:
       - name: merge-check
+      - name: python3-jobs
     check:
       - gate-python-manilaclient-docs
       - gate-python-manilaclient-pep8
       - gate-python-manilaclient-python26
       - gate-python-manilaclient-python27
-      - gate-python-manilaclient-python33
       - gate-manila-tempest-dsvm-neutron
     gate:
       - gate-python-manilaclient-docs
       - gate-python-manilaclient-pep8
       - gate-python-manilaclient-python26
       - gate-python-manilaclient-python27
-      - gate-python-manilaclient-python33
     post:
       - python-manilaclient-branch-tarball
       - python-manilaclient-coverage
@@ -5057,13 +5019,12 @@ projects:
     template:
       - name: merge-check
       - name: python-jobs
+      - name: python3-jobs
       - name: check-requirements
       - name: publish-to-pypi
     check:
-      - gate-python-solumclient-python33
       - gate-python-solumclient-pypy
     gate:
-      - gate-python-solumclient-python33
       - gate-python-solumclient-pypy
 
   - name: stackforge/python-tackerclient
@@ -5105,13 +5066,12 @@ projects:
     template:
       - name: merge-check
       - name: python-jobs
+      - name: python3-jobs
       - name: check-requirements
       - name: publish-to-pypi
     check:
-      - gate-solum-infra-guestagent-python33
       - gate-solum-infra-guestagent-pypy
     gate:
-      - gate-solum-infra-guestagent-python33
       - gate-solum-infra-guestagent-pypy
 
   - name: stackforge/rally
@@ -5180,14 +5140,13 @@ projects:
   - name: stackforge/rubick
     template:
       - name: merge-check
+      - name: python3-jobs
     check:
       - gate-rubick-pep8
       - gate-rubick-python27
-      - gate-rubick-python33
     gate:
       - gate-rubick-pep8
       - gate-rubick-python27
-      - gate-rubick-python33
     post:
       - rubick-coverage
 
@@ -5195,12 +5154,11 @@ projects:
     template:
       - name: merge-check
       - name: python-jobs
+      - name: python3-jobs
       - name: docs-on-rtfd
     check:
-      - gate-satori-python33
       - gate-satori-pypy
     gate:
-      - gate-satori-python33
       - gate-satori-pypy
 
   - name: stackforge/solum
@@ -5225,17 +5183,16 @@ projects:
   - name: stackforge/sphinxcontrib-docbookrestapi
     template:
       - name: merge-check
+      - name: python3-jobs
       - name: publish-to-pypi
     check:
       - gate-sphinxcontrib-docbookrestapi-pep8
       - gate-sphinxcontrib-docbookrestapi-python26
       - gate-sphinxcontrib-docbookrestapi-python27
-      - gate-sphinxcontrib-docbookrestapi-python33
     gate:
       - gate-sphinxcontrib-docbookrestapi-pep8
       - gate-sphinxcontrib-docbookrestapi-python26
       - gate-sphinxcontrib-docbookrestapi-python27
-      - gate-sphinxcontrib-docbookrestapi-python33
 
   - name: stackforge/sqlalchemy-migrate
     template:
@@ -5268,19 +5225,18 @@ projects:
   - name: stackforge/stackalytics
     template:
       - name: merge-check
+      - name: python3-jobs
       - name: docs-on-rtfd
     check:
       - gate-stackalytics-docs
       - gate-stackalytics-pep8
       - gate-stackalytics-python26
       - gate-stackalytics-python27
-      - gate-stackalytics-python33
     gate:
       - gate-stackalytics-docs
       - gate-stackalytics-pep8
       - gate-stackalytics-python26
       - gate-stackalytics-python27
-      - gate-stackalytics-python33
     post:
       - stackalytics-branch-tarball
     pre-release:
@@ -5391,16 +5347,15 @@ projects:
   - name: stackforge/wsme
     template:
       - name: merge-check
+      - name: python3-jobs
       - name: publish-to-pypi
     check:
       - gate-wsme-python26
       - gate-wsme-python27
-      - gate-wsme-python33
       - gate-wsme-pep8
     gate:
       - gate-wsme-python26
       - gate-wsme-python27
-      - gate-wsme-python33
       - gate-wsme-pep8
     post:
       - wsme-branch-tarball
@@ -5409,12 +5364,11 @@ projects:
     template:
       - name: merge-check
       - name: python-jobs
+      - name: python3-jobs
       - name: check-requirements
     check:
-      - gate-python-openstacksdk-python33
       - gate-python-openstacksdk-pypy
     gate:
-      - gate-python-openstacksdk-python33
       - gate-python-openstacksdk-pypy
 
   - name: stackforge/graffiti
@@ -5509,16 +5463,15 @@ projects:
   - name: stackforge/octavia
     template:
       - name: merge-check
+      - name: python3-jobs
     check:
       - gate-octavia-pep8
       - gate-octavia-python26
       - gate-octavia-python27
-      - gate-octavia-python33
     gate:
       - gate-octavia-pep8
       - gate-octavia-python26
       - gate-octavia-python27
-      - gate-octavia-python33
 
   - name: stackforge/xstatic-angular
     template:
