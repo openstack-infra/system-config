@@ -820,6 +820,8 @@
 - project: stackforge/manila
   description: Shared filesystem management project for OpenStack.
   upstream: git://github.com/bswartz/manila.git
+- project: stackforge/merlin
+  description: Framework for building UIs for Openstack projects dealing with complex input data
 - project: stackforge/milk
   description: ETC cloud API framework project
   upstream: git://github.com/sarob/milk.git

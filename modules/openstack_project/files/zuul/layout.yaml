@@ -3670,6 +3670,12 @@ projects:
       - manila-branch-tarball
       - manila-coverage
 
+  - name: stackforge/merlin
+    check:
+      - noop
+    gate:
+      - noop
+
   - name: stackforge/milk
     check:
       - noop
