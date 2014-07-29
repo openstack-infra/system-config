@@ -2797,6 +2797,7 @@
 
     jobs:
       - python-jobs
+      - hook-{name}-rtfd
       - pypi-jobs
 
 - project:
