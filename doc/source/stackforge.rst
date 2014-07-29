@@ -233,6 +233,18 @@ end of this file that looks like::
       branches:
         - master
 
+If you are defining a new channel, add it also in
+``modules/openstack_project/files/accessbot/channels.yaml`` file, optionally
+defining also its mask.
+The mask will be used to define the access level for IRC users who are not
+listed in that file in the ``global`` section or otherwise listed for the
+channel.
+
+For instance:
+
+  - name: new_project
+    mask: full_mask
+
 For more information about channel requirements and IRC services provided by
 the infrastructure team, visit :ref:`irc`
 
