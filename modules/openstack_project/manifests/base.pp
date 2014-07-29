@@ -6,6 +6,7 @@ class openstack_project::base(
   $pin_puppet    = '2.7.',
   $pin_facter    = '1.',
   $ca_server     = undef,
+  $puppetmaster_host = $::openstack_project::params::puppetmaster_host
 ) {
   if ($::osfamily == 'Debian') {
     include apt

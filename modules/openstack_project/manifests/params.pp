@@ -18,4 +18,6 @@ class openstack_project::params {
       fail("Unsupported osfamily: ${::osfamily} The 'openstack_project' module only supports osfamily Debian or RedHat (slaves only).")
     }
   }
+
+  $puppetmaster_host = 'ci-puppetmaster.openstack.org'
 }
