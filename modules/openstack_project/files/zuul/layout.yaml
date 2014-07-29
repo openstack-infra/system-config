@@ -713,6 +713,10 @@ jobs:
     voting: false
   - name: ^(gate|check)-marconi-python33
     branch: ^(?!stable/(havana|icehouse)).*$
+  - name: gate-tempest-dsvm-ceilo-mongodb
+    voting: false
+  - name: gate-tempest-dsvm-ceilo-mongodb-full
+    voting: false
 
 # The project list is grouped by type of project, and within each
 # group, projects are sorted (mostly) alphabetically.
@@ -758,6 +762,8 @@ projects:
       - gate-swift-dsvm-functional
     experimental:
       - gate-grenade-dsvm-forward
+      - gate-tempest-dsvm-ceilo-mongodb
+      - gate-tempest-dsvm-ceilo-mongodb-full
     pre-release:
       - ceilometer-tarball
     release:
