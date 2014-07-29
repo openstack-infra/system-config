@@ -1240,6 +1240,33 @@
       - devstack-logs
       - console-log
 
+- job:
+    name: 'check-tempest-dsvm-centos7'
+    node: 'devstack-centos7'
+
+    wrappers:
+      - build-timeout:
+          timeout: 125
+      - timestamps
+
+    builders:
+      - link-logs
+      - net-info
+      - devstack-checkout
+      - shell: |
+          #!/bin/bash -xe
+          export PYTHONUNBUFFERED=true
+          export DEVSTACK_GATE_TIMEOUT=120
+          export DEVSTACK_GATE_TEMPEST=1
+          export DEVSTACK_GATE_SMOKE_SERIAL=1
+
+          cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
+          ./safe-devstack-vm-gate-wrap.sh
+
+    publishers:
+      - devstack-logs
+      - console-log
+
 - job-template:
     name: '{pipeline}-tempest-dsvm-{topology}{branch-designator}'
     node: '{node}'
