@@ -18,17 +18,6 @@ declare -A MODULES
 # key:value is source location, revision to checkout
 declare -A SOURCE_MODULES
 
-#NOTE: if we previously installed kickstandproject-ntp we nuke it here
-# since puppetlabs-ntp and kickstandproject-ntp install to the same dir
-if grep kickstandproject-ntp /etc/puppet/modules/ntp/Modulefile &> /dev/null; then
-  remove_module "ntp"
-fi
-
-remove_module "gearman" #remove old saz-gearman
-remove_module "limits" # remove saz-limits (required by saz-gearman)
-
-MODULES["puppetlabs-ntp"]="0.2.0"
-
 # freenode #puppet 2012-09-25:
 # 18:25 < jeblair> i would like to use some code that someone wrote,
 # but it's important that i understand how the author wants me to use
@@ -45,6 +34,7 @@ MODULES["puppetlabs-apache"]="0.0.4"
 MODULES["puppetlabs-apt"]="1.1.0"
 MODULES["puppetlabs-haproxy"]="0.4.1"
 MODULES["puppetlabs-mysql"]="0.6.1"
+MODULES["puppetlabs-ntp"]="0.2.0"
 MODULES["puppetlabs-postgresql"]="3.1.0"
 MODULES["puppetlabs-stdlib"]="3.2.0"
 MODULES["saz-memcached"]="2.0.2"
@@ -58,12 +48,6 @@ MODULES["stankevich-python"]="1.6.6"
 SOURCE_MODULES["https://github.com/nibalizer/puppet-module-puppetboard"]="2.4.0"
 
 MODULE_LIST=`puppet module list`
-
-# Transition away from old things
-if [ -d /etc/puppet/modules/vcsrepo/.git ]
-then
-  rm -rf /etc/puppet/modules/vcsrepo
-fi
 
 # Install all the modules
 for MOD in ${!MODULES[*]} ; do
