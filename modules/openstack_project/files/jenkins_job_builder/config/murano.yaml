@@ -21,13 +21,13 @@
           export PROJECTS="stackforge/python-muranoclient $PROJECTS"
 
           function pre_test_hook {
-              cd /opt/stack/new/murano/functionaltests
+              cd /opt/stack/new/murano/murano/tests/functional
               ./pre_test_hook.sh
           }
           export -f pre_test_hook
 
           function post_test_hook {
-              cd /opt/stack/new/murano/functionaltests
+              cd /opt/stack/new/murano/murano/tests/functional
               ./post_test_hook.sh
           }
           export -f post_test_hook
