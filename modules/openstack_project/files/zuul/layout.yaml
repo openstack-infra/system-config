@@ -743,6 +743,7 @@ projects:
   - name: openstack/ceilometer
     template:
       - name: python-jobs
+      - name: python3-jobs
       - name: openstack-server-publish-jobs
       - name: periodic-havana
       - name: check-requirements
