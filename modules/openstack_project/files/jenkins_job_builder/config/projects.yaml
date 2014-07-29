@@ -2139,6 +2139,16 @@
       - gate-{name}-chef-unit
 
 - project:
+    name: cookbook-monasca-schema
+    github-org: stackforge
+    node: 'bare-precise || bare-trusty'
+
+    jobs:
+      - gate-{name}-chef-lint
+      - gate-{name}-chef-style
+      - gate-{name}-chef-unit
+
+- project:
     name: cookbook-monasca-thresh
     github-org: stackforge
     node: 'bare-precise || bare-trusty'

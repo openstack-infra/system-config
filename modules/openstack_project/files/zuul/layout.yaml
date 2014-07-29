@@ -3399,6 +3399,10 @@ projects:
     template:
       - name: chef-jobs
 
+  - name: stackforge/cookbook-monasca-schema
+    template:
+      - name: chef-jobs
+
   - name: stackforge/cookbook-monasca-thresh
     template:
       - name: chef-jobs
