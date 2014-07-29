@@ -92,4 +92,22 @@ class openstack_project::slave_common(
       }
     }
   }
+
+  # oslo.messaging's AMQP 1.0 driver requires the Qpid Proton
+  # AMQP development libraries.
+  if $::osfamily == 'RedHat' {
+    package { 'qpid-proton-c-devel':
+      ensure => latest
+    }
+  }
+  if $::osfamily == 'Debian' {
+    # TODO(kgiusti) Until the packages containing the development
+    # libraries land in the offical debian/ubuntu repos, fetch them
+    # from the Apache Qpid's PPA
+    apt::ppa { 'ppa:qpid/released': }
+    package { 'libqpid-proton2-dev':
+      ensure  => latest,
+      require => Apt::Ppa['ppa:qpid/released']
+    }
+  }
 }
