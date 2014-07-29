@@ -443,6 +443,14 @@
       - translation-jobs
 
 - project:
+    name: python-tackerclient
+    github-org: stackforge
+    node: 'bare-precise || bare-trusty'
+
+    jobs:
+      - gate-{name}-pep8
+
+- project:
     name: cinder
     github-org: openstack
     node: 'bare-precise || bare-trusty'

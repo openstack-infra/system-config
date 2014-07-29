@@ -4552,9 +4552,9 @@ projects:
 
   - name: stackforge/python-tackerclient
     check:
-      - noop
+      - gate-python-tackerclient-pep8
     gate:
-      - noop
+      - gate-python-tackerclient-pep8
 
   - name: stackforge/solum-dashboard
     template:
