@@ -301,6 +301,16 @@ openstack-chef:
       - stable/grizzly
       - stable/havana
 
+openstack-merlin:
+    events:
+      - patchset-created
+      - change-merged
+      - x-vrif-minus-2
+    projects:
+      - stackforge/merlin
+    branches:
+      - master
+
 openstack-mistral:
     events:
       - patchset-created
