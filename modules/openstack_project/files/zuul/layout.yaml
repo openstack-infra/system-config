@@ -2263,6 +2263,7 @@ projects:
       # havana compat jobs for tempest master (non voting)
       - check-tempest-master-dsvm-full-havana
       - check-tempest-master-dsvm-neutron-havana
+      - check-tempest-dsvm-f20
     experimental-tripleo:
       - check-tripleo-ironic-seed-precise-nonha
       - check-tripleo-novabm-undercloud-precise-nonha
