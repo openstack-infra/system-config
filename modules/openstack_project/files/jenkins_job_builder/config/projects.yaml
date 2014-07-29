@@ -423,6 +423,14 @@
       - python-havana-bitrot-jobs
       - openstack-publish-jobs
       - translation-jobs
+      - 'gate-tempest-dsvm-ceilo-{backend}{branch-designator}':
+          - backend: 'mongodb'
+          - node: 'bare-trusty'
+          - branch-designator: ''
+      - 'gate-tempest-dsvm-ceilo-{backend}-full{branch-designator}':
+          - backend: 'mongodb'
+          - node: 'bare-trusty'
+          - branch-designator: ''
 
 - project:
     name: cinder
