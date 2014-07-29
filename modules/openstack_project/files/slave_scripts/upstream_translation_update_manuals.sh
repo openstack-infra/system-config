@@ -30,7 +30,7 @@ init_manuals "$PROJECT"
 setup_git
 setup_translation
 
-setup_manuals
+setup_manuals "$PROJECT"
 
 if [ ! `git diff --cached --quiet HEAD --` ]
 then
