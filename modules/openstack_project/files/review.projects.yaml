@@ -503,6 +503,9 @@
   group: openstack-api-site
   options:
     - direct-release
+- project: openstack/windows-diskimage-builder
+  description: Disk image builder for windows systems.
+  upstream: https://github.com/slokesh184/windows-diskimage-builder.git
 - project: stackforge-attic/murano-common
 - project: stackforge-attic/murano-conductor
 - project: stackforge-attic/murano-metadataclient
