@@ -54,6 +54,7 @@ class zuul (
     'gcc',  # yappi requires this to build
     'python-webob',
     'python-lockfile',
+    'python-lxml',
     'python-paste',
   ]
 
@@ -118,7 +119,19 @@ class zuul (
     path        => '/usr/local/bin:/usr/bin:/bin/',
     refreshonly => true,
     subscribe   => Vcsrepo['/opt/zuul'],
-    require     => Class['pip'],
+    require     => [
+      Class['pip'],
+      Package['gcc'],
+      Package['python-webob'],
+      Package['python-lockfile'],
+      Package['python-paste'],
+      Package['yappi'],
+      Package['python-yaml'],
+      Package['python-paramiko'],
+      Package['python-daemon'],
+      Package['yui-compressor'],
+      Package['python-lxml'],
+    ]
   }
 
   file { '/etc/zuul':
