@@ -5033,3 +5033,9 @@ projects:
       - gate-rack-python27
     post:
       - rack-coverage
+
+  - name: openstack/windows-diskimage-builder
+    check:
+      - noop
+    gate:
+      - noop
