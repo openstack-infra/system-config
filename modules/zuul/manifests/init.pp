@@ -93,6 +93,20 @@ class zuul (
     }
   }
 
+  # install-build-time requirement of lxml which is needed by keystoneclient
+  if ! defined(Package['libxml2-dev']) {
+    package { 'libxml2-dev':
+      ensure => present,
+    }
+  }
+
+  # install-build-time requirement of lxml which is needed by keystoneclient
+  if ! defined(Package['libxslt1-dev']) {
+    package { 'libxslt1-dev':
+      ensure => present,
+    }
+  }
+
   user { 'zuul':
     ensure     => present,
     home       => '/home/zuul',
