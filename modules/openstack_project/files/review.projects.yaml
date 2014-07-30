@@ -1245,3 +1245,6 @@
   description: Spin JavaScript library packaged as XStatic.
   upstream: https://bitbucket.org/thesheep/xstatic-spin.git
   acl-config: /home/gerrit2/acls/stackforge/xstatic.config
+- project: stackforge/windows-diskimage-builder
+  description: Disk image builder for windows systems.
+  upstream: git://github.com/slokesh184/windows-diskimage-builder.git
