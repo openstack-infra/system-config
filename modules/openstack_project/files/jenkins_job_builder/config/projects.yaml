@@ -3275,3 +3275,12 @@
 
     jobs:
       - python-jobs
+
+- project:
+    name: windows-diskimage-builder
+    github-org: stackforge
+    node: bare-trusty
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - python-jobs
