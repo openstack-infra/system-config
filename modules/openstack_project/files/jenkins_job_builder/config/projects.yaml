@@ -146,6 +146,15 @@
       - pypi-jobs
 
 - project:
+    name: poppy
+    github-org: stackforge
+    node: bare-trusty
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - python-jobs
+
+- project:
     name: python-mistralclient
     github-org: stackforge
     node: 'bare-precise || bare-trusty'

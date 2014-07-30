@@ -4004,6 +4004,20 @@ projects:
     post:
       - pecan-branch-tarball
 
+  - name: stackforge/poppy
+    check:
+      - gate-poppy-pep8
+      - gate-poppy-python26
+      - gate-poppy-python27
+      - gate-poppy-python33
+    gate:
+      - gate-poppy-pep8
+      - gate-poppy-python26
+      - gate-poppy-python27
+      - gate-poppy-python33
+    post:
+      - poppy-coverage
+
   - name: stackforge/powervc-driver
     check:
       - noop
