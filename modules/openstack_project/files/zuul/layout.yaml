@@ -679,6 +679,9 @@ jobs:
   - name: check-neutron-dsvm-api
     branch: ^(?!stable/(havana|icehouse)).*$
     voting: false
+  - name: check-tempest-dsvm-neutron-dvr
+    branch: ^(?!stable/(havana|icehouse)).*$
+    voting: false
   - name: gate-trove-buildimage-mysql
     voting: false
   - name: gate-trove-functional-dsvm-mysql
@@ -1110,6 +1113,7 @@ projects:
     experimental:
       - check-neutron-dsvm-api
       - gate-grenade-dsvm-neutron-forward
+      - check-tempest-dsvm-neutron-dvr
     experimental-tripleo:
       - check-tripleo-ironic-seed-precise-nonha
       - check-tripleo-novabm-undercloud-precise-nonha
