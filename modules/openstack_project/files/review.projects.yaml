@@ -515,6 +515,10 @@
 - project: openstack/zaqar
 - project: openstack/zaqar-specs
   group: zaqar
+- project: openstack/windows-diskimage-builder
+  description: Disk image builder for windows systems.
+  upstream: https://github.com/slokesh184/windows-diskimage-builder.git
+  acl-config: /home/gerrit2/acls/openstack/diskimage-builder.config
 - project: stackforge-attic/murano-common
 - project: stackforge-attic/murano-conductor
 - project: stackforge-attic/murano-metadataclient
