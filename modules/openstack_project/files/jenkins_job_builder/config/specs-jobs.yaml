@@ -17,7 +17,7 @@
           files:
             - target: 'specs/{github-org}/{name}'
               source: 'doc/build/html/**'
-              keep-hierarchy: true
+              keep-hierarchy: false
       - console-log
 
 - job-group:
