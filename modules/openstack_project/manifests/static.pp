@@ -297,4 +297,12 @@ class openstack_project::static (
     require => User['jenkins'],
   }
 
+  file { '/srv/static/specs/index.html':
+    ensure  => present,
+    owner   => 'jenkins',
+    group   => 'jenkins',
+    mode    => '0444',
+    source  => 'puppet:///modules/openstack_project/specs/index.html',
+    require => File['/srv/static/specs'],
+  }
 }
