@@ -4,20 +4,27 @@
     name: '{name}-publish-specs'
     node: 'bare-precise || bare-trusty'
 
+    # We want to publish to {github-org}/{name} but the scp publisher
+    # cannot remove paths, so use a shell builder to move the content
+    # in the right place and publish from there.
     builders:
       - revoke-sudo
       - gerrit-git-prep
       - docs:
           github-org: '{github-org}'
           project: '{name}'
+      - shell: |
+          mkdir {github-org}
+          mv doc/build/html {github-org}/{name}
 
     publishers:
       - scp:
           site: 'static.openstack.org'
           files:
-            - target: 'specs/{github-org}/{name}'
-              source: 'doc/build/html/**'
+            - target: 'specs/'
+              source: '{github-org}/{name}/**'
               keep-hierarchy: true
+              copy-after-failure: false
       - console-log
 
 - job-group:
