@@ -21,6 +21,7 @@ function header(activeTabName) {
   tabsName[3] = 'Release'; tabsLink[3] = 'http://status.openstack.org/release/';
   tabsName[4] = 'Reviews'; tabsLink[4] = 'http://status.openstack.org/reviews/';
   tabsName[5] = 'Bugday'; tabsLink[5] = 'http://status.openstack.org/bugday/';
+  tabsName[6] = 'Specs'; tabsLink[6] = 'http://specs.openstack.org/';
 
   document.write(
    '<div id="header" class="container">'+
