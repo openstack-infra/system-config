@@ -308,7 +308,7 @@
     node: 'bare-precise || bare-trusty'
 
     jobs:
-      - gate-{name}-docs
+      - specs-jobs
 
 - project:
     name: sahara
@@ -329,11 +329,9 @@
     name: sahara-specs
     github-org: openstack
     node: 'bare-precise || bare-trusty'
-    tarball-site: tarballs.openstack.org
 
     jobs:
-      - gate-{name}-docs
-      - gate-{name}-python27
+      - specs-jobs
 
 - project:
     name: python-saharaclient
@@ -697,10 +695,9 @@
     name: glance-specs
     github-org: openstack
     node: 'bare-precise || bare-trusty'
-    tarball-site: tarballs.openstack.org
 
     jobs:
-      - gate-{name}-docs
+      - specs-jobs
 
 - project:
     name: glance.store
@@ -732,10 +729,9 @@
     name: heat-specs
     github-org: openstack
     node: 'bare-precise || bare-trusty'
-    tarball-site: tarballs.openstack.org
 
     jobs:
-      - gate-{name}-docs
+      - specs-jobs
 
 - project:
     name: python-heatclient
@@ -814,11 +810,9 @@
     name: keystone-specs
     github-org: openstack
     node: 'bare-precise || bare-trusty'
-    tarball-site: tarballs.openstack.org
 
     jobs:
-      - gate-{name}-python27
-      - gate-{name}-docs
+      - specs-jobs
 
 - project:
     name: image-api
@@ -930,8 +924,7 @@
     tarball-site: tarballs.openstack.org
 
     jobs:
-      - gate-{name}-python27
-      - gate-{name}-docs
+      - specs-jobs
 
 - project:
     name: nova-docker
@@ -958,10 +951,9 @@
     name: swift-specs
     github-org: openstack
     node: 'bare-precise || bare-trusty'
-    tarball-site: tarballs.openstack.org
 
     jobs:
-      - gate-{name}-docs
+      - specs-jobs
 
 
 - project:
@@ -1108,12 +1100,9 @@
     name: oslo-specs
     github-org: openstack
     node: 'bare-precise || bare-trusty'
-    tarball-site: tarballs.openstack.org
 
     jobs:
-      - gate-{name}-python27
-      - gate-{name}-docs
-
+      - specs-jobs
 
 - project:
     name: python-ceilometerclient
@@ -1285,12 +1274,9 @@
     name: neutron-specs
     github-org: openstack
     node: 'bare-precise || bare-trusty'
-    tarball-site: tarballs.openstack.org
 
     jobs:
-      - gate-{name}-python27
-      - gate-{name}-docs
-
+      - specs-jobs
 
 - project:
     name: trove
@@ -1372,11 +1358,9 @@
     name: marconi-specs
     github-org: openstack
     node: bare-precise
-    tarball-site: tarballs.openstack.org
 
     jobs:
-      - gate-{name}-python27
-      - gate-{name}-docs
+      - specs-jobs
 
 - project:
     name: python-marconiclient
@@ -1405,11 +1389,9 @@
     name: designate-specs
     github-org: openstack
     node: 'bare-precise || bare-trusty'
-    tarball-site: tarballs.openstack.org
 
     jobs:
-      - gate-{name}-python27
-      - gate-{name}-docs
+      - specs-jobs
 
 - project:
     name: billingstack
@@ -1704,11 +1686,9 @@
     name: qa-specs
     github-org: openstack
     node: 'bare-precise || bare-trusty'
-    tarball-site: tarballs.openstack.org
 
     jobs:
-      - gate-{name}-docs
-
+      - specs-jobs
 
 - project:
     name: zuul
@@ -1797,11 +1777,9 @@
     name: ceilometer-specs
     github-org: openstack
     node: 'bare-precise || bare-trusty'
-    tarball-site: tarballs.openstack.org
 
     jobs:
-      - gate-{name}-python27
-      - gate-{name}-docs
+      - specs-jobs
 
 - project:
     name: tripleo-heat-templates
@@ -1838,11 +1816,9 @@
     name: tripleo-specs
     github-org: openstack
     node: 'bare-precise || bare-trusty'
-    tarball-site: tarballs.openstack.org
 
     jobs:
-      - gate-{name}-python27
-      - gate-{name}-docs
+      - specs-jobs
 
 - project:
     name: puppet-glance
@@ -2312,11 +2288,9 @@
     name: ironic-specs
     github-org: openstack
     node: 'bare-precise || bare-trusty'
-    tarball-site: tarballs.openstack.org
 
     jobs:
-      - gate-{name}-python27
-      - gate-{name}-docs
+      - specs-jobs
 
 - project:
     name: ironic
@@ -2389,10 +2363,9 @@
     name: barbican-specs
     github-org: openstack
     node: 'bare-precise || bare-trusty'
-    tarball-site: tarballs.openstack.org
 
     jobs:
-      - gate-{name}-docs
+      - specs-jobs
 
 - project:
     name: python-barbicanclient
@@ -2648,12 +2621,10 @@
 - project:
     name: docs-specs
     github-org: openstack
-    node: bare-precise
-    tarball-site: tarballs.openstack.org
+    node: 'bare-precise || bare-trusty'
 
     jobs:
-      - gate-{name}-docs
-      - gate-{name}-python27
+      - specs-jobs
 
 - project:
     name: operations-guide
