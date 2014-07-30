@@ -382,10 +382,8 @@ project-templates:
   - name: specs-jobs
     check:
       - 'gate-{name}-docs'
-      - 'gate-{name}-python27'
     gate:
       - 'gate-{name}-docs'
-      - 'gate-{name}-python27'
     post:
       - '{name}-publish-specs'
 
@@ -747,10 +745,8 @@ projects:
       - barbican-branch-tarball
 
   - name: openstack/barbican-specs
-    check:
-      - gate-barbican-specs-docs
-    gate:
-      - gate-barbican-specs-docs
+    template:
+      - name: specs-jobs
 
   - name: openstack/ceilometer
     template:
@@ -779,6 +775,10 @@ projects:
   - name: openstack/ceilometer-specs
     template:
       - name: specs-jobs
+    check:
+      - gate-ceilometer-specs-python27
+    gate:
+      - gate-ceilometer-specs-python27
 
   - name: openstack/cinder
     template:
@@ -805,12 +805,12 @@ projects:
       - cinder-merge-release-tags
 
   - name: openstack/cinder-specs
+    template:
+      - name: specs-jobs
     check:
       - gate-cinder-specs-python27
-      - gate-cinder-specs-docs
     gate:
       - gate-cinder-specs-python27
-      - gate-cinder-specs-docs
 
   - name: openstack/cliff
     template:
@@ -871,6 +871,10 @@ projects:
   - name: openstack/designate-specs
     template:
       - name: specs-jobs
+    check:
+      - gate-designate-specs-python27
+    gate:
+      - gate-designate-specs-python27
 
   - name: openstack/glance
     template:
@@ -903,10 +907,12 @@ projects:
       - glance-merge-release-tags
 
   - name: openstack/glance-specs
+    template:
+      - name: specs-jobs
     check:
-      - gate-glance-specs-docs
+      - gate-glance-specs-python27
     gate:
-      - gate-glance-specs-docs
+      - gate-glance-specs-python27
 
   - name: openstack/glance.store
     template:
@@ -961,10 +967,8 @@ projects:
       - heat-merge-release-tags
 
   - name: openstack/heat-specs
-    check:
-      - gate-heat-specs-docs
-    gate:
-      - gate-heat-specs-docs
+    template:
+      - name: specs-jobs
 
   - name: openstack/horizon
     template:
@@ -1017,6 +1021,10 @@ projects:
   - name: openstack/ironic-specs
     template:
       - name: specs-jobs
+    check:
+      - gate-ironic-specs-python27
+    gate:
+      - gate-ironic-specs-python27
 
   - name: openstack/keystone
     template:
@@ -1089,6 +1097,10 @@ projects:
   - name: openstack/marconi-specs
     template:
       - name: specs-jobs
+    check:
+      - gate-marconi-specs-python27
+    gate:
+      - gate-marconi-specs-python27
 
   - name: openstack/neutron
     template:
@@ -1124,6 +1136,10 @@ projects:
   - name: openstack/neutron-specs
     template:
       - name: specs-jobs
+    check:
+      - gate-neutron-specs-python27
+    gate:
+      - gate-neutron-specs-python27
 
   - name: openstack/nova
     template:
@@ -1164,6 +1180,10 @@ projects:
   - name: openstack/nova-specs
     template:
       - name: specs-jobs
+    check:
+      - gate-nova-specs-python27
+    gate:
+      - gate-nova-specs-python27
 
   - name: stackforge/nova-docker
     template:
@@ -1197,6 +1217,10 @@ projects:
   - name: openstack/sahara-specs
     template:
       - name: specs-jobs
+    check:
+      - gate-sahara-specs-python27
+    gate:
+      - gate-sahara-specs-python27
 
   - name: openstack/stevedore
     template:
@@ -1915,6 +1939,10 @@ projects:
   - name: openstack/oslo-specs
     template:
       - name: specs-jobs
+    check:
+      - gate-oslo-specs-python27
+    gate:
+      - gate-oslo-specs-python27
 
   - name: openstack/oslo.config
     template:
@@ -2199,10 +2227,8 @@ projects:
       - gate-tempest-dsvm-neutron-large-ops
 
   - name: openstack/qa-specs
-    check:
-      - gate-qa-specs-docs
-    gate:
-      - gate-qa-specs-docs
+    template:
+      - name: specs-jobs
 
   - name: openstack/tempest
     template:
@@ -2336,6 +2362,10 @@ projects:
   - name: openstack/tripleo-specs
     template:
       - name: specs-jobs
+    check:
+      - gate-tripleo-specs-python27
+    gate:
+      - gate-tripleo-specs-python27
 
   - name: openstack/trove-integration
     check:
@@ -2385,6 +2415,10 @@ projects:
   - name: openstack/keystone-specs
     template:
       - name: specs-jobs
+    check:
+      - gate-specs-python27
+    gate:
+      - gate-specs-python27
 
   - name: openstack/image-api
     template:
@@ -2405,10 +2439,8 @@ projects:
       - object-api-tox-doc-publishdocs
 
   - name: openstack/swift-specs
-    check:
-      - gate-swift-specs-docs
-    gate:
-      - gate-swift-specs-docs
+    template:
+      - name: specs-jobs
 
   - name: openstack/volume-api
     template:
@@ -2430,6 +2462,10 @@ projects:
   - name: openstack/docs-specs
     template:
       - name: specs-jobs
+    check:
+      - gate-docs-specs-python27
+    gate:
+      - gate-docs-specs-python27
 
   - name: openstack/openstack-manuals
     template:
@@ -2831,10 +2867,8 @@ projects:
       - noop
 
   - name: openstack-infra/infra-specs
-    check:
-      - gate-infra-specs-docs
-    gate:
-      - gate-infra-specs-docs
+    template:
+      - name: specs-jobs
 
   - name: openstack-infra/groups-static-pages
     check:
