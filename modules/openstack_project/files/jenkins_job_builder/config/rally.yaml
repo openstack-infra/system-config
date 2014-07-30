@@ -119,6 +119,7 @@
               sudo -H -u stack tox -ecli -v
               .tox/cli/bin/python /usr/local/jenkins/slave_scripts/subunit2html.py .testrepository/subunit.log $WORKSPACE/results.html
               gzip -9 $WORKSPACE/results.html
+              .tox/cli/bin/subunit-stats .testrepository/subunit.log
           }
           export -f pre_test_hook
           export -f post_test_hook
