@@ -4720,6 +4720,12 @@ projects:
       - gate-swift3-tox-tempauth
       - gate-swift3-tox-keystone
 
+  - name: stackforge/swiftpolicy
+    check:
+      - noop
+    gate:
+      - noop
+
   - name: stackforge/swiftsync
     check:
       - gate-swiftsync-pep8
