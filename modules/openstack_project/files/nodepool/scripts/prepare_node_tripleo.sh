@@ -18,12 +18,13 @@
 
 HOSTNAME=$1
 
-export SUDO='true'
-export THIN='true'
+export SUDO="true"
+export THIN="true"
+export MANIFEST="openstack_project::tripleo_slave"
 
 # Workaround bug 1270646 during node bootstrapping.
 sudo ip link set mtu 1458 dev eth0
-./prepare_node.sh "$HOSTNAME"
+./prepare_node.sh "$HOSTNAME" "$SUDO" "$THIN"
 sudo -u jenkins -i /opt/nodepool-scripts/prepare_tripleo.sh "$HOSTNAME"
 
 sync
