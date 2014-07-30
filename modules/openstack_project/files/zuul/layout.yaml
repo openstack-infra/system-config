@@ -2581,6 +2581,14 @@ projects:
     experimental:
       - gate-trove-buildimage-mysql
 
+  - name: openstack/windows-diskimage-builder
+    template:
+      - name: merge-check
+    check:
+      - noop
+    gate:
+      - noop
+
 # TODO: add docs
   - name: openstack/tuskar-ui
     template:
