@@ -16,6 +16,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+
 HOSTNAME=$1
 
 SUDO=${SUDO:-true}
@@ -24,6 +25,7 @@ PYTHON3=${PYTHON3:-false}
 PYPY=${PYPY:-false}
 ALL_MYSQL_PRIVS=${ALL_MYSQL_PRIVS:-false}
 GIT_BASE=${GIT_BASE:-git://git.openstack.org}
+MANIFEST=${MANIFEST:-"openstack_project::single_use_slave"}
 
 export PUPPET_VERSION=${PUPPET_VERSION:-'2'}
 
@@ -54,11 +56,11 @@ sudo /bin/bash /root/config/install_modules.sh
 set +e
 if [ -z "$NODEPOOL_SSH_KEY" ] ; then
     sudo puppet apply --detailed-exitcodes --modulepath=/root/config/modules:/etc/puppet/modules \
-        -e "class {'openstack_project::single_use_slave': sudo => $SUDO, thin => $THIN, python3 => $PYTHON3, include_pypy => $PYPY, all_mysql_privs => $ALL_MYSQL_PRIVS, }"
+        -e "class {'$MANIFEST': sudo => $SUDO, thin => $THIN, python3 => $PYTHON3, include_pypy => $PYPY, all_mysql_privs => $ALL_MYSQL_PRIVS, }"
     PUPPET_RET_CODE=$?
 else
     sudo puppet apply --detailed-exitcodes --modulepath=/root/config/modules:/etc/puppet/modules \
-        -e "class {'openstack_project::single_use_slave': install_users => false, sudo => $SUDO, thin => $THIN, python3 => $PYTHON3, include_pypy => $PYPY, all_mysql_privs => $ALL_MYSQL_PRIVS, ssh_key => '$NODEPOOL_SSH_KEY', }"
+        -e "class {'$MANIFEST': install_users => false, sudo => $SUDO, thin => $THIN, python3 => $PYTHON3, include_pypy => $PYPY, all_mysql_privs => $ALL_MYSQL_PRIVS, ssh_key => '$NODEPOOL_SSH_KEY', }"
     PUPPET_RET_CODE=$?
 fi
 # Puppet doesn't properly return exit codes. Check here the values that
