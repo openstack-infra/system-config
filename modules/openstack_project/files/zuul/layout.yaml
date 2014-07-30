@@ -532,8 +532,6 @@ jobs:
     branch: ^openstack/(?!2\.4).*$
   - name: gate-nova-pylint
     voting: false
-  - name: gate-cinder-pylint
-    voting: false
   - name: gate-rally-dsvm-cinder
     voting: false
   - name: dev-zuul-coverage
