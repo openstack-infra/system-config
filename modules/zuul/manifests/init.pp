@@ -52,9 +52,10 @@ class zuul (
 
   $packages = [
     'gcc',  # yappi requires this to build
-    'python-webob',
     'python-lockfile',
+    'python-lxml', # needed by python-keystoneclient, has system bindings
     'python-paste',
+    'python-webob',
   ]
 
   package { $packages:
@@ -118,7 +119,19 @@ class zuul (
     path        => '/usr/local/bin:/usr/bin:/bin/',
     refreshonly => true,
     subscribe   => Vcsrepo['/opt/zuul'],
-    require     => Class['pip'],
+    require     => [
+      Class['pip'],
+      Package['gcc'],
+      Package['python-daemon'],
+      Package['python-lockfile'],
+      Package['python-lxml'],
+      Package['python-paramiko'],
+      Package['python-paste'],
+      Package['python-webob'],
+      Package['python-yaml'],
+      Package['yappi'],
+      Package['yui-compressor'],
+    ],
   }
 
   file { '/etc/zuul':
