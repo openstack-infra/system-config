@@ -4481,6 +4481,18 @@ projects:
     post:
       - python-muranoclient-branch-tarball
 
+  - name: stackforge/python-opentsdbclient
+    check:
+      - gate-python-opentsdbclient-pep8
+      - gate-python-opentsdbclient-python26
+      - gate-python-opentsdbclient-python27
+      - gate-python-opentsdbclient-python33
+    gate:
+      - gate-python-opentsdbclient-pep8
+      - gate-python-opentsdbclient-python26
+      - gate-python-opentsdbclient-python27
+      - gate-python-opentsdbclient-python33
+
   - name: stackforge/python-rallyclient
     template:
       - name: check-requirements
