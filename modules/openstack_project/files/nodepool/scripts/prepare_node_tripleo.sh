@@ -22,7 +22,7 @@ THIN='true'
 
 # Workaround bug 1270646 during node bootstrapping.
 sudo ip link set mtu 1458 dev eth0
-./prepare_node.sh "$HOSTNAME" "$SUDO" "$THIN"
+./prepare_node.sh "$HOSTNAME" "$SUDO" "$THIN" --manifest openstack_project::tripleo_slave
 sudo -u jenkins -i /opt/nodepool-scripts/prepare_tripleo.sh $HOSTNAME
 
 sync

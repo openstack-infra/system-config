@@ -16,6 +16,37 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+
+function show_options () {
+    echo "Usage: $SCRIPT_NAME [options]"
+    echo
+    echo "Prepare a node to run a build."
+    echo
+    echo "Options:"
+    echo "    --manifest   The Puppet manifest to apply"
+    echo "                 Default: openstack_project::single_use_slave"
+  echo
+  exit $1
+}
+
+SCRIPT_NAME=$(basename $0)
+LONG_OPTS="help,manifest:"
+TEMP=$(getopt -o h -l ${LONG_OPTS} -n $SCRIPT_NAME -- "$@")
+if [ $? != 0 ] ; then echo "Terminating..." >&2 ; exit 1 ; fi
+eval set -- "$TEMP"
+
+MANIFEST="openstack_project::single_use_slave"
+
+while true; do
+  case $1 in
+    --manifest) MANIFEST=$2; shift 2;;
+    -h|--help) show_options 0;;
+    --) shift; break;;
+    *) echo "Error: unsupported option $1." ; exit 1 ;;
+  esac
+done
+
+
 HOSTNAME=$1
 SUDO=$2
 THIN=$3
@@ -49,10 +80,10 @@ sudo git clone --depth=1 $GIT_BASE/openstack-infra/config.git \
 sudo /bin/bash /root/config/install_modules.sh
 if [ -z "$NODEPOOL_SSH_KEY" ] ; then
     sudo puppet apply --modulepath=/root/config/modules:/etc/puppet/modules \
-	-e "class {'openstack_project::single_use_slave': sudo => $SUDO, thin => $THIN, python3 => $PYTHON3, include_pypy => $PYPY, all_mysql_privs => $ALL_MYSQL_PRIVS, }"
+	-e "class {'$MANIFEST': sudo => $SUDO, thin => $THIN, python3 => $PYTHON3, include_pypy => $PYPY, all_mysql_privs => $ALL_MYSQL_PRIVS, }"
 else
     sudo puppet apply --modulepath=/root/config/modules:/etc/puppet/modules \
-	-e "class {'openstack_project::single_use_slave': install_users => false, sudo => $SUDO, thin => $THIN, python3 => $PYTHON3, include_pypy => $PYPY, all_mysql_privs => $ALL_MYSQL_PRIVS, ssh_key => '$NODEPOOL_SSH_KEY', }"
+	-e "class {'$MANIFEST': install_users => false, sudo => $SUDO, thin => $THIN, python3 => $PYTHON3, include_pypy => $PYPY, all_mysql_privs => $ALL_MYSQL_PRIVS, ssh_key => '$NODEPOOL_SSH_KEY', }"
 fi
 
 # The puppet modules should install unbound.  Take the nameservers
