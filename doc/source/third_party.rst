@@ -39,8 +39,10 @@ Requirements
   in IRC regularly to make it faster to contact them.
 
   * All CI comments must contain a link to a contact page with the details.
+
 * Include a public link to all test artifacts to make debugging failed tests
-  easier. This should include:
+  easier (using a dns name over a hardcoded ip is recommended).
+  This should include:
 
   * Environment details
     * This must include a utc timestamp of the test run
