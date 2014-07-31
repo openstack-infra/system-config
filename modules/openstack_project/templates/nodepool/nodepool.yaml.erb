@@ -396,52 +396,6 @@ providers:
         setup: prepare_node_devstack.sh
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
-  - name: hpcloud-region-b
-    region-name: 'region-b.geo-1'
-    service-type: 'compute'
-    service-name: 'Compute'
-    username: '<%= hpcloud_username %>'
-    password: '<%= hpcloud_password %>'
-    project-id: '<%= hpcloud_project %>'
-    auth-url: 'https://region-b.geo-1.identity.hpcloudsvc.com:35357/v2.0'
-    boot-timeout: 120
-    max-servers: 200
-    availability-zones:
-      - az1
-      - az2
-      - az3
-    rate: 0.1
-    images:
-      - name: devstack-precise-check
-        base-image: 'Ubuntu Server 12.04 LTS (amd64 20140606) - Partner Image'
-        min-ram: 30720
-        setup: prepare_node_devstack.sh
-        username: jenkins
-        private-key: /home/nodepool/.ssh/id_rsa
-      - name: devstack-precise
-        base-image: 'Ubuntu Server 12.04 LTS (amd64 20140606) - Partner Image'
-        min-ram: 30720
-        setup: prepare_node_devstack.sh
-        username: jenkins
-        private-key: /home/nodepool/.ssh/id_rsa
-      - name: bare-precise
-        base-image: 'Ubuntu Server 12.04 LTS (amd64 20140606) - Partner Image'
-        min-ram: 30720
-        setup: prepare_node_bare.sh
-        username: jenkins
-        private-key: /home/nodepool/.ssh/id_rsa
-      - name: bare-centos6
-        base-image: 'CentOS 6.3 Server 64-bit 20130116'
-        min-ram: 30720
-        setup: prepare_node_bare.sh
-        username: jenkins
-        private-key: /home/nodepool/.ssh/id_rsa
-      - name: py3k-precise
-        base-image: 'Ubuntu Server 12.04 LTS (amd64 20140606) - Partner Image'
-        min-ram: 30720
-        setup: prepare_node_py3k.sh
-        username: jenkins
-        private-key: /home/nodepool/.ssh/id_rsa
   - name: hpcloud-b1
     region-name: 'region-b.geo-1'
     service-type: 'compute'
