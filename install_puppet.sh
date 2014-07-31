@@ -150,7 +150,7 @@ function setup_puppet_ubuntu {
     fi
 
     cat > /etc/apt/preferences.d/00-puppet.pref <<EOF
-Package: puppet puppet-common puppetmaster puppetmaster-common puppetmaster-passenger
+Package: puppet puppet-common puppetmaster puppetmaster-common puppetmaster-passenger puppetdb-terminus
 Pin: version $PUPPET_VERSION
 Pin-Priority: 501
 
