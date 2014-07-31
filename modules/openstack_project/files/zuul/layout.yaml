@@ -241,12 +241,14 @@ project-templates:
       - 'check-tempest-dsvm-postgres-full'
       - 'check-tempest-dsvm-neutron'
       - 'check-tempest-dsvm-neutron-heat-slow'
+      - 'check-heat-dsvm-functional'
       - 'check-grenade-dsvm'
     gate:
       - 'gate-tempest-dsvm-full'
       - 'gate-tempest-dsvm-postgres-full'
       - 'gate-tempest-dsvm-neutron'
       - 'gate-tempest-dsvm-neutron-heat-slow'
+      - 'gate-heat-dsvm-functional'
       - 'gate-grenade-dsvm'
     experimental:
       - 'check-grenade-dsvm-neutron'
@@ -256,6 +258,7 @@ project-templates:
       - 'check-tempest-dsvm-neutron'
       - 'check-tempest-dsvm-neutron-pg'
       - 'check-tempest-dsvm-neutron-heat-slow'
+      - 'check-heat-dsvm-functional'
       - 'check-tempest-dsvm-neutron-full'
       - 'gate-tempest-dsvm-neutron-large-ops'
       - 'check-grenade-dsvm-neutron'
@@ -263,6 +266,7 @@ project-templates:
       - 'gate-tempest-dsvm-neutron'
       - 'gate-tempest-dsvm-neutron-pg'
       - 'gate-tempest-dsvm-neutron-heat-slow'
+      - 'gate-heat-dsvm-functional'
       - 'gate-tempest-dsvm-neutron-large-ops'
 
   - name: integrated-gate-sahara
@@ -474,6 +478,9 @@ jobs:
     voting: false
   - name: ^(gate|check)-tempest-dsvm-neutron-heat-slow
     branch: ^(?!stable/havana).*$
+  - name: ^(gate|check)-heat-dsvm-functional
+    branch: ^(?!stable/(havana|icehouse)).*$
+    voting: false
   - name: check-tempest-dsvm-ironic-nv
     voting: false
   - name: check-tempest-dsvm-ironic-postgres-nv
