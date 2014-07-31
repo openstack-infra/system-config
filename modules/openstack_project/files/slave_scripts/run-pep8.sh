@@ -26,3 +26,7 @@ set -o pipefail
 tox -v -epep8 | tee pep8.txt
 set +o pipefail
 
+echo "Begin pip freeze output from test virtualenv:"
+echo "======================================================================"
+.tox/pep8/bin/pip freeze
+echo "======================================================================"
