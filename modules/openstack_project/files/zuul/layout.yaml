@@ -3872,6 +3872,12 @@ projects:
     gate:
       - noop
 
+  - name: stackforge/nova-solver-scheduler
+    check:
+      - noop
+    gate:
+      - noop
+
   - name: stackforge/novaimagebuilder
     check:
       - noop
