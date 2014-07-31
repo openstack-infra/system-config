@@ -728,6 +728,16 @@
 
     jobs:
       - python-jobs
+      - '{pipeline}-heat-dsvm-functional{branch-designator}':
+          pipeline: gate
+          node: 'devstack-precise || devstack-trusty'
+          branch-designator: ''
+          branch-override: default
+      - '{pipeline}-heat-dsvm-functional{branch-designator}':
+          pipeline: check
+          node: 'devstack-precise || devstack-trusty'
+          branch-designator: ''
+          branch-override: default
       - python-havana-bitrot-jobs
       - openstack-publish-jobs
       - translation-jobs
