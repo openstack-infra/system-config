@@ -15,7 +15,7 @@ pipelines:
         - event: patchset-created
         - event: change-restored
         - event: comment-added
-          comment: (?i)^(Patch Set [0-9]+:)?( [\w\\+-]*)*(\n\n)?\s*recheck
+          comment: (?i)^(Patch Set [0-9]+:)?( [\w\\+-]*)*(\n\n)?\s*(recheck|reverify)
         - event: comment-added
           require-approval:
             - username: jenkins
@@ -27,7 +27,7 @@ pipelines:
             - username: jenkins
               older-than: 24h
         - event: comment-added
-          comment: (?i)^(Patch Set [0-9]+:)?( [\w\\+-]*)*(\n\n)?\s*reverify
+          comment: (?i)^(Patch Set [0-9]+:)?( [\w\\+-]*)*(\n\n)?\s*(recheck|reverify)
           require-approval:
             - workflow: 1
             - username: jenkins
@@ -126,7 +126,7 @@ pipelines:
       gerrit:
         - event: patchset-created
         - event: comment-added
-          comment: (?i)^(Patch Set [0-9]+:)?( [\w\\+-]*)*(\n\n)?\s*recheck
+          comment: (?i)^(Patch Set [0-9]+:)?( [\w\\+-]*)*(\n\n)?\s*(recheck|reverify)
 
   - name: experimental
     description: On-demand pipeline for requesting a run against a set of jobs that are not yet gating. Leave review comment of "check experimental" to run jobs in this pipeline.
@@ -196,7 +196,7 @@ pipelines:
         - event: patchset-created
         - event: change-restored
         - event: comment-added
-          comment: (?i)^(Patch Set [0-9]+:)?( [\w\\+-]*)*(\n\n)?\s*recheck
+          comment: (?i)^(Patch Set [0-9]+:)?( [\w\\+-]*)*(\n\n)?\s*(recheck|reverify)
     success:
       gerrit: {}
     failure:

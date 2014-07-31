@@ -12,7 +12,7 @@ pipelines:
         - event: patchset-created
         - event: change-restored
         - event: comment-added
-          comment_filter: (?i)^(Patch Set [0-9]+:\n\n)?\s*recheck
+          comment_filter: (?i)^(Patch Set [0-9]+:\n\n)?\s*(recheck|reverify)
     success:
       gerrit:
         verified: 1
@@ -31,7 +31,7 @@ pipelines:
           approval:
             - workflow: 1
         - event: comment-added
-          comment_filter: (?i)^(Patch Set [0-9]+:\n\n)?\s*reverify
+          comment_filter: (?i)^(Patch Set [0-9]+:\n\n)?\s*(recheck|reverify)
     start:
       gerrit:
         verified: 0
@@ -89,7 +89,7 @@ pipelines:
       gerrit:
         - event: patchset-created
         - event: comment-added
-          comment_filter: (?i)^(Patch Set [0-9]+:\n\n)?\s*recheck
+          comment_filter: (?i)^(Patch Set [0-9]+:\n\n)?\s*(recheck|reverify)
 
   - name: experimental
     description: On-demand pipeline for requesting a run against a set of jobs that are not yet gating. Leave review comment of "check experimental" to run jobs in this pipeline.
