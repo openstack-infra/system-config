@@ -734,6 +734,7 @@
       - python-havana-bitrot-jobs
       - openstack-publish-jobs
       - translation-jobs
+      - rally-jobs
 
 - project:
     name: heat-specs
