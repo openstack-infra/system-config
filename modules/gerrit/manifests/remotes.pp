@@ -5,7 +5,7 @@ class gerrit::remotes($ensure=present) {
       ensure  => $ensure,
       user    => 'gerrit2',
       minute  => '*/30',
-      command => 'sleep $((RANDOM\%60+90)) && /usr/local/bin/manage-projects',
+      command => 'sleep $((RANDOM\%60+90)) && /usr/local/bin/manage-projects -v | tee /var/log/manage_projects_log | logger -t "manage-projects"',
       require => [Class['jeepyb'], File['/var/lib/jeepyb']],
     }
 

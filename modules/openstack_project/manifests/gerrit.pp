@@ -391,7 +391,7 @@ class openstack_project::gerrit (
 
     if ($testmode == false) {
       exec { 'manage_projects':
-        command     => '/usr/local/bin/manage-projects',
+        command     => '/usr/local/bin/manage-projects -v | tee /var/log/manage_projects_log | logger -t "manage-projects"',
         timeout     => 900, # 15 minutes
         subscribe   => [
             File['/home/gerrit2/projects.yaml'],
