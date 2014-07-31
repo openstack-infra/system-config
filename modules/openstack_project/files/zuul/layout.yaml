@@ -516,6 +516,8 @@ jobs:
     voting: false
   - name: check-tempest-dsvm-f20
     voting: false
+  - name: check-tempest-dsvm-centos7
+    voting: false
   - name: check-tempest-dsvm-aiopcpu
     voting: false
   - name: check-tempest-dsvm-neutron-aiopcpu
@@ -2523,6 +2525,7 @@ projects:
       - gate-grenade-dsvm-forward
       - check-tempest-master-dsvm-full-havana
       - check-tempest-master-dsvm-neutron-havana
+      - check-tempest-dsvm-centos7
 
   - name: openstack-dev/grenade
     check:
