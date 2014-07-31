@@ -381,6 +381,9 @@
 - project: openstack/oslo.rootwrap
   docimpact-group: openstack-manuals
   upstream: git://github.com/ttx/oslo.rootwrap.git
+- project: openstack/oslo.serialization
+  group: oslo
+  upstream: https://github.com/cybertron/oslo.serialization.git
 - project: openstack/oslo.utils
   group: oslo
   upstream: git://github.com/dims/oslo.utils.git
