@@ -474,6 +474,9 @@ jobs:
     voting: false
   - name: ^(gate|check)-tempest-dsvm-neutron-heat-slow
     branch: ^(?!stable/havana).*$
+  - name: ^(gate|check)-heat-dsvm-functional
+    branch: ^(?!stable/(havana|icehouse)).*$
+    voting: false
   - name: check-tempest-dsvm-ironic-nv
     voting: false
   - name: check-tempest-dsvm-ironic-postgres-nv
@@ -957,8 +960,10 @@ projects:
       - name: integrated-gate
       - name: translation-jobs
     check:
+      - check-heat-dsvm-functional
       - check-devstack-dsvm-cells
     gate:
+      - gate-heat-dsvm-functional
       - gate-devstack-dsvm-cells
     experimental-tripleo:
       - check-tripleo-novabm-undercloud-precise-nonha
