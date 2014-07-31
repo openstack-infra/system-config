@@ -2374,10 +2374,12 @@
     github-org: openstack
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
+    doc-publisher-site: docs.openstack.org
 
     jobs:
       - python-jobs
       - translation-jobs
+      - openstack-publish-jobs
 
 - project:
     name: barbican-specs
