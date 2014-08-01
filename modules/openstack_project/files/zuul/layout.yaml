@@ -2745,6 +2745,7 @@ projects:
       - check-tempest-master-dsvm-neutron-havana
       - check-tempest-dsvm-aiopcpu
       - check-tempest-dsvm-neutron-aiopcpu
+      - check-tempest-dsvm-centos7
     experimental-tripleo:
       - check-tripleo-ironic-seed-precise-nonha
       - check-tripleo-novabm-undercloud-precise-nonha
