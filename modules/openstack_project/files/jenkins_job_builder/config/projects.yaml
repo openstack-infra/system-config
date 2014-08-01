@@ -2391,6 +2391,7 @@
 
     jobs:
       - python-jobs
+      - openstack-publish-jobs
       - translation-jobs
       - openstack-publish-jobs
 
