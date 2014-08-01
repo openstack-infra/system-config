@@ -724,7 +724,7 @@ jobs:
     voting: false
   - name: ^(gate|check)-pecan-tox-ironic-stable
     voting: false
-  - name: ^(gate|check)-marconi-python33
+  - name: ^(gate|check)-zaqar-python33
     branch: ^(?!stable/(havana|icehouse)).*$
   - name: gate-tempest-dsvm-ceilometer-mongodb
     voting: false
@@ -1066,27 +1066,27 @@ projects:
     gate:
       - gate-keystonemiddleware-python33
 
-  - name: openstack/marconi
+  - name: openstack/zaqar
     template:
       - name: python-jobs
       - name: check-requirements
       - name: translation-jobs
     check:
-      - check-tempest-dsvm-marconi
-      - gate-marconi-python33
-      - gate-marconi-pypy
+      - check-tempest-dsvm-zaqar
+      - gate-zaqar-python33
+      - gate-zaqar-pypy
     gate:
-      - gate-tempest-dsvm-marconi
-      - gate-marconi-pypy
+      - gate-tempest-dsvm-zaqar
+      - gate-zaqar-pypy
     post:
-      - marconi-branch-tarball
+      - zaqar-branch-tarball
     pre-release:
-      - marconi-tarball
+      - zaqar-tarball
     release:
-      - marconi-tarball
-      - marconi-docs
+      - zaqar-tarball
+      - zaqar-docs
 
-  - name: openstack/marconi-specs
+  - name: openstack/zaqar-specs
     template:
       - name: specs-jobs
 
@@ -1479,24 +1479,24 @@ projects:
       - check-tripleo-ironic-undercloud-precise-nonha
       - check-tripleo-novabm-overcloud-precise-nonha
 
-  - name: openstack/python-marconiclient
+  - name: openstack/python-zaqarclient
     template:
       - name: check-requirements
       - name: publish-to-pypi
     check:
-      - gate-python-marconiclient-pep8
-      - gate-python-marconiclient-python26
-      - gate-python-marconiclient-python27
-      - gate-python-marconiclient-python33
-      - gate-python-marconiclient-pypy
+      - gate-python-zaqarclient-pep8
+      - gate-python-zaqarclient-python26
+      - gate-python-zaqarclient-python27
+      - gate-python-zaqarclient-python33
+      - gate-python-zaqarclient-pypy
     gate:
-      - gate-python-marconiclient-pep8
-      - gate-python-marconiclient-python26
-      - gate-python-marconiclient-python27
-      - gate-python-marconiclient-python33
-      - gate-python-marconiclient-pypy
+      - gate-python-zaqarclient-pep8
+      - gate-python-zaqarclient-python26
+      - gate-python-zaqarclient-python27
+      - gate-python-zaqarclient-python33
+      - gate-python-zaqarclient-pypy
     post:
-      - python-marconiclient-branch-tarball
+      - python-zaqarclient-branch-tarball
 
   - name: openstack/python-neutronclient
     template:
@@ -2235,7 +2235,7 @@ projects:
     experimental:
       - gate-grenade-dsvm-forward
       - check-tempest-dsvm-cells-full
-      - check-tempest-dsvm-marconi
+      - check-tempest-dsvm-zaqar
       - check-tempest-dsvm-keystonev3-full
       - check-tempest-dsvm-neutron-keystonev3-full
       - check-tempest-dsvm-nova-v3-full
@@ -2505,7 +2505,7 @@ projects:
       - gate-swift-dsvm-functional
     experimental:
       - check-tempest-dsvm-cells-full
-      - check-tempest-dsvm-marconi
+      - check-tempest-dsvm-zaqar
       - gate-grenade-dsvm-forward
       - check-tempest-master-dsvm-full-havana
       - check-tempest-master-dsvm-neutron-havana

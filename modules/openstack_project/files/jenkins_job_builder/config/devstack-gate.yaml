@@ -606,7 +606,7 @@
 
 
 - job-template:
-    name: '{pipeline}-tempest-dsvm-marconi{branch-designator}'
+    name: '{pipeline}-tempest-dsvm-zaqar{branch-designator}'
     node: '{node}'
 
     wrappers:
@@ -633,7 +633,7 @@
           ./safe-devstack-vm-gate-wrap.sh
 
           function post_test_hook {{
-              gzip -9 -c /var/log/marconi/queues.log > $WORKSPACE/logs/queues.log.txt.gz
+              gzip -9 -c /var/log/zaqar/queues.log > $WORKSPACE/logs/queues.log.txt.gz
           }}
           export -f post_test_hook
 
@@ -1417,7 +1417,7 @@
       - '{pipeline}-tempest-dsvm-ironic{branch-designator}'
       - '{pipeline}-tempest-dsvm-ironic-postgres{branch-designator}'
       - '{pipeline}-tempest-dsvm-virtual-ironic{branch-designator}'
-      - '{pipeline}-tempest-dsvm-marconi{branch-designator}'
+      - '{pipeline}-tempest-dsvm-zaqar{branch-designator}'
       - '{pipeline}-tempest-dsvm-all{branch-designator}'
       - '{pipeline}-tempest-dsvm-coverage{branch-designator}'
       - '{pipeline}-tempest-dsvm-stress{branch-designator}'

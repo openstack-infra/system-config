@@ -308,10 +308,10 @@
 - project: openstack/keystonemiddleware
   description: OpenStack Identity (Keystone) Middleware
   upstream: git://github.com/morganfainberg/keystonemiddleware
-- project: openstack/marconi
-- project: openstack/marconi-specs
-  group: marconi
-  upstream: git://github.com/FlaPer87/marconi-specs.git
+- project: openstack/zaqar
+- project: openstack/zaqar-specs
+  group: zaqar
+  upstream: git://github.com/FlaPer87/zaqar-specs.git
 - project: openstack/netconn-api
   group: openstack-api-site
   options:
@@ -425,7 +425,7 @@
 - project: openstack/python-ironicclient
   description: A python client implementing the Ironic API.
 - project: openstack/python-keystoneclient
-- project: openstack/python-marconiclient
+- project: openstack/python-zaqarclient
 - project: openstack/python-neutronclient
   docimpact-group: openstack-manuals
 - project: openstack/python-novaclient

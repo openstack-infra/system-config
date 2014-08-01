@@ -50,7 +50,7 @@ class openstack_project::eavesdrop (
         '#openstack-ironic',
         '#openstack-keystone',
         '#openstack-lbaas',
-        '#openstack-marconi',
+        '#openstack-zaqar',
         '#openstack-meeting',
         '#openstack-meeting-alt',
         '#openstack-meeting-3',
