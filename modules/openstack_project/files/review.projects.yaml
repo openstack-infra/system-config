@@ -273,7 +273,7 @@
   description: Glance stores library
   group: glance
   upstream: https://github.com/FlaPer87/glance.store.git
-  acl-config: /home/gerrit2/acls/openstack/glance.config
+  acl-config: /home/gerrit2/acls/openstack/python-glanceclient.config
 - project: openstack/governance
   description: OpenStack Technical Committee Decisions
 - project: openstack/heat
