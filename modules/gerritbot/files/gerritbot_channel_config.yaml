@@ -761,6 +761,7 @@ openstack-oslo:
       - openstack/oslo.i18n
       - openstack/oslo-incubator
       - openstack/oslo.messaging
+      - openstack/oslo.middleware
       - openstack/oslo.rootwrap
       - openstack/oslo.serialization
       - openstack/oslosphinx

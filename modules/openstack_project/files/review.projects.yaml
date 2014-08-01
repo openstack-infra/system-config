@@ -378,6 +378,10 @@
 - project: openstack/oslo.messaging
   docimpact-group: openstack-manuals
   upstream: git://github.com/markmc/oslo.messaging.git
+- project: openstack/oslo.middleware
+  description: OpenStack middleware library
+  group: oslo
+  upstream: https://github.com/chungg/oslo.middleware.git
 - project: openstack/oslo.rootwrap
   docimpact-group: openstack-manuals
   upstream: git://github.com/ttx/oslo.rootwrap.git
