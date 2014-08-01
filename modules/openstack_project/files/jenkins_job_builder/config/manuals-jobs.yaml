@@ -35,3 +35,17 @@
           envlist: checkbuild
       - '{name}-tox-doc-{envlist}':
           envlist: publishdocs
+
+- job:
+    name: propose-openstack-manuals-updates
+    node: proposal
+
+    builders:
+      - revoke-sudo
+      - link-logs
+      - net-info
+      - gerrit-git-prep
+      - shell: /usr/local/jenkins/slave_scripts/propose_openstack_manuals_update.sh
+
+    publishers:
+      - console-log
