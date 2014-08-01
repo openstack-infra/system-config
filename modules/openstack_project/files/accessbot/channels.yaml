@@ -87,7 +87,6 @@ channels:
   - name: openstack-ironic
   - name: openstack-keystone
   - name: openstack-manila
-  - name: openstack-marconi
   - name: openstack-meeting
     meetbots:
       - open_stack
@@ -117,6 +116,7 @@ channels:
   - name: openstack-swift
   - name: openstack-translation
   - name: openstack-trove
+  - name: openstack-zaqar
   - name: packstack-dev
   - name: pecanpy
   - name: refstack
