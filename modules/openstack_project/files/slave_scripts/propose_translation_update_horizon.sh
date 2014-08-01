@@ -12,14 +12,11 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 
-ORG=openstack
-PROJECT=horizon
-
 source /usr/local/jenkins/slave_scripts/common_translation_update.sh
 
 setup_git
 
-setup_review "$ORG" "$PROJECT"
+setup_review
 setup_translation
 setup_horizon
 
