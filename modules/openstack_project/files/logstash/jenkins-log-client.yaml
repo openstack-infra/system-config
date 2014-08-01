@@ -90,7 +90,7 @@ source-files:
   - name: logs/screen-key.txt
     tags:
       - screen
-      - keystonefmt
+      - oslofmt
   - name: logs/screen-n-api.txt
     tags:
       - screen
@@ -214,7 +214,7 @@ source-files:
   - name: logs/new/screen-key.txt
     tags:
       - screen
-      - keystonefmt
+      - oslofmt
     job-filter: '.*grenade.*'
   - name: logs/new/screen-n-api.txt
     tags:
@@ -340,7 +340,7 @@ source-files:
   - name: logs/old/screen-key.txt
     tags:
       - screen
-      - keystonefmt
+      - oslofmt
     job-filter: '.*grenade.*'
   - name: logs/old/screen-n-api.txt
     tags:
