@@ -4010,11 +4010,13 @@ projects:
       - gate-poppy-python26
       - gate-poppy-python27
       - gate-poppy-python33
+      - gate-poppy-pypy
     gate:
       - gate-poppy-pep8
       - gate-poppy-python26
       - gate-poppy-python27
       - gate-poppy-python33
+      - gate-poppy-pypy
     post:
       - poppy-coverage
 
