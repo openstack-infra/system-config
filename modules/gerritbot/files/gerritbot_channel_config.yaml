@@ -434,15 +434,15 @@ openstack-glance:
     branches:
       - master
 
-openstack-marconi:
+openstack-zaqar:
     events:
       - patchset-created
       - change-merged
       - x-vrif-minus-2
     projects:
-      - openstack/marconi
-      - openstack/marconi-specs
-      - openstack/python-marconiclient
+      - openstack/zaqar
+      - openstack/zaqar-specs
+      - openstack/python-zaqarclient
     branches:
       - master
 
@@ -741,8 +741,8 @@ openstack-merges:
       - openstack/python-tuskarclient
       - openstack-dev/devstack
       - openstack-infra/release-tools
-      - openstack/marconi
-      - openstack/python-marconiclient
+      - openstack/zaqar
+      - openstack/python-zaqarclient
       - openstack/sahara
       - openstack/python-saharaclient
       - openstack/sahara-dashboard
