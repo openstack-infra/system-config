@@ -1006,6 +1006,15 @@
       - oslotest-cross-test
 
 - project:
+    name: oslo-cookiecutter
+    github-org: openstack
+    node: 'bare-precise || bare-trusty'
+
+    jobs:
+      - gate-{name}-tox-{envlist}:
+          envlist: cookiecutter
+
+- project:
     name: oslo.db
     github-org: openstack
     node: 'bare-precise || bare-trusty'

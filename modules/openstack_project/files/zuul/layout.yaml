@@ -2601,9 +2601,9 @@ projects:
 
   - name: openstack-dev/oslo-cookiecutter
     check:
-      - noop
+      - gate-oslo-cookiecutter-tox-cookiecutter
     gate:
-      - noop
+      - gate-oslo-cookiecutter-tox-cookiecutter
 
   - name: openstack-dev/pbr
     template:
