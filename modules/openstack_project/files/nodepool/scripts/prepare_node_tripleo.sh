@@ -17,13 +17,14 @@
 # limitations under the License.
 
 HOSTNAME=$1
-SUDO='true'
-THIN='true'
+
+export SUDO='true'
+export THIN='true'
 
 # Workaround bug 1270646 during node bootstrapping.
 sudo ip link set mtu 1458 dev eth0
-./prepare_node.sh "$HOSTNAME" "$SUDO" "$THIN"
-sudo -u jenkins -i /opt/nodepool-scripts/prepare_tripleo.sh $HOSTNAME
+./prepare_node.sh "$HOSTNAME"
+sudo -u jenkins -i /opt/nodepool-scripts/prepare_tripleo.sh "$HOSTNAME"
 
 sync
 sleep 5

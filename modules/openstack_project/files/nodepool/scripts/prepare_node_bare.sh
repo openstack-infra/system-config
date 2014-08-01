@@ -17,12 +17,13 @@
 # limitations under the License.
 
 HOSTNAME=$1
-SUDO='true'
-THIN='false'
-PYTHON3='false'
-PYPY='false'
-ALL_MYSQL_PRIVS='true'
 
-./prepare_node.sh "$HOSTNAME" "$SUDO" "$THIN" "$PYTHON3" "$PYPY" "$ALL_MYSQL_PRIVS"
+export SUDO='true'
+export THIN='false'
+export PYTHON='false'
+export PYPY='false'
+export ALL_MYSQL_PRIVS='true'
+
+./prepare_node.sh "$HOSTNAME"
 
 ./restrict_memory.sh

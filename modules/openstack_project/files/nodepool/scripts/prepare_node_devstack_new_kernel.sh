@@ -17,10 +17,11 @@
 # limitations under the License.
 
 HOSTNAME=$1
-SUDO='true'
-THIN='true'
 
-./prepare_node.sh "$HOSTNAME" "$SUDO" "$THIN"
-sudo -u jenkins -i /opt/nodepool-scripts/prepare_devstack_new_kernel.sh $HOSTNAME
+export SUDO='true'
+export THIN='true'
+
+./prepare_node.sh "$HOSTNAME"
+sudo -u jenkins -i /opt/nodepool-scripts/prepare_devstack_new_kernel.sh "$HOSTNAME"
 
 ./restrict_memory.sh
