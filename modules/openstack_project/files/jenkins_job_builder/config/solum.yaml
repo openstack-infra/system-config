@@ -16,7 +16,7 @@
           export PYTHONUNBUFFERED=true
           export DEVSTACK_GATE_TIMEOUT=60
           export DEVSTACK_GATE_NEUTRON=1
-          export ENABLED_SERVICES=solum,solum-api,solum-build-api,solum-conductor,solum-deployer,solum-worker,tempest,marconi,barbican,mistral
+          export ENABLED_SERVICES=solum,solum-api,solum-build-api,solum-conductor,solum-deployer,solum-worker,tempest,zaqar,barbican,mistral
           export PROJECTS="stackforge/solum $PROJECTS"
           # TODO(ravips): Workaround until barbican, mistral gets into devstack
           export PROJECTS="openstack/barbican stackforge/mistral $PROJECTS"
@@ -64,7 +64,7 @@
           export PYTHONUNBUFFERED=true
           export DEVSTACK_GATE_TIMEOUT=60
           export DEVSTACK_GATE_NEUTRON=1
-          export ENABLED_SERVICES=solum,solum-api,solum-build-api,solum-conductor,solum-deployer,solum-worker,tempest,marconi,barbican,mistral
+          export ENABLED_SERVICES=solum,solum-api,solum-build-api,solum-conductor,solum-deployer,solum-worker,tempest,zaqar,barbican,mistral
           export PROJECTS="stackforge/solum $PROJECTS"
           # TODO(ravips): Workaround until barbican, mistral gets into devstack
           export PROJECTS="openstack/barbican stackforge/mistral $PROJECTS"
