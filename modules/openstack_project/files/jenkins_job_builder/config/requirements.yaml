@@ -41,7 +41,7 @@
       - link-logs
       - net-info
       - gerrit-git-prep
-      - shell: /usr/local/jenkins/slave_scripts/propose_requirements_update.sh
+      - shell: /usr/local/jenkins/slave_scripts/propose_update.sh requirements
 
     publishers:
       - console-log
