@@ -276,6 +276,14 @@ project-templates:
       - 'gate-tempest-dsvm-neutron'
       - 'gate-tempest-dsvm-postgres-full'
 
+  - name: large-ops
+    check:
+      - 'gate-tempest-dsvm-large-ops'
+      - 'gate-tempest-dsvm-neutron-large-ops'
+    gate:
+      - 'gate-tempest-dsvm-large-ops'
+      - 'gate-tempest-dsvm-neutron-large-ops'
+
   - name: python3-jobs
     check:
       - 'gate-{name}-python33'
@@ -886,15 +894,12 @@ projects:
       - name: check-requirements
       - name: integrated-gate
       - name: translation-jobs
+      - name: large-ops
     check:
       - check-devstack-dsvm-cells
-      - gate-tempest-dsvm-large-ops
-      - gate-tempest-dsvm-neutron-large-ops
       - gate-rally-dsvm-glance
     gate:
       - gate-devstack-dsvm-cells
-      - gate-tempest-dsvm-large-ops
-      - gate-tempest-dsvm-neutron-large-ops
     experimental:
       - gate-grenade-dsvm-forward
     experimental-tripleo:
@@ -919,16 +924,13 @@ projects:
       - name: openstack-server-publish-jobs
       - name: check-requirements
       - name: integrated-gate
+      - name: large-ops
       - name: translation-jobs
       - name: publish-to-pypi
     check:
       - check-devstack-dsvm-cells
-      - gate-tempest-dsvm-large-ops
-      - gate-tempest-dsvm-neutron-large-ops
     gate:
       - gate-devstack-dsvm-cells
-      - gate-tempest-dsvm-large-ops
-      - gate-tempest-dsvm-neutron-large-ops
     experimental:
       - gate-grenade-dsvm-forward
     experimental-tripleo:
@@ -1026,18 +1028,15 @@ projects:
       - name: periodic-havana
       - name: check-requirements
       - name: integrated-gate
+      - name: large-ops
       - name: translation-jobs
     check:
       - gate-keystone-python33
       - check-devstack-dsvm-cells
-      - gate-tempest-dsvm-large-ops
-      - gate-tempest-dsvm-neutron-large-ops
       - check-swift-dsvm-functional
       - gate-rally-dsvm-keystone
     gate:
       - gate-devstack-dsvm-cells
-      - gate-tempest-dsvm-large-ops
-      - gate-tempest-dsvm-neutron-large-ops
       - gate-swift-dsvm-functional
     experimental:
       - gate-grenade-dsvm-forward
@@ -1132,18 +1131,15 @@ projects:
       - name: periodic-havana
       - name: check-requirements
       - name: integrated-gate
+      - name: large-ops
       - name: translation-jobs
     check:
       - check-devstack-dsvm-cells
-      - gate-tempest-dsvm-large-ops
-      - gate-tempest-dsvm-neutron-large-ops
       - gate-nova-pylint
       - check-grenade-dsvm-partial-ncpu
       - check-tempest-dsvm-virtual-ironic-nv
     gate:
       - gate-devstack-dsvm-cells
-      - gate-tempest-dsvm-large-ops
-      - gate-tempest-dsvm-neutron-large-ops
       - gate-grenade-dsvm-partial-ncpu
     experimental:
       - gate-grenade-dsvm-forward
@@ -1213,18 +1209,15 @@ projects:
       - name: openstack-server-publish-jobs
       - name: check-requirements
       - name: integrated-gate
+      - name: large-ops
     check:
       - gate-swift-tox-func
       - check-swift-dsvm-functional
       - check-devstack-dsvm-cells
-      - gate-tempest-dsvm-large-ops
-      - gate-tempest-dsvm-neutron-large-ops
     gate:
       - gate-swift-tox-func
       - gate-swift-dsvm-functional
       - gate-devstack-dsvm-cells
-      - gate-tempest-dsvm-large-ops
-      - gate-tempest-dsvm-neutron-large-ops
     experimental:
       - gate-grenade-dsvm-forward
     experimental-tripleo:
@@ -1362,15 +1355,12 @@ projects:
       - name: openstack-client-publish-jobs
       - name: check-requirements
       - name: integrated-gate
+      - name: large-ops
       - name: publish-to-pypi
     check:
       - check-devstack-dsvm-cells
-      - gate-tempest-dsvm-large-ops
-      - gate-tempest-dsvm-neutron-large-ops
     gate:
       - gate-devstack-dsvm-cells
-      - gate-tempest-dsvm-large-ops
-      - gate-tempest-dsvm-neutron-large-ops
     experimental:
       - gate-grenade-dsvm-forward
     experimental-tripleo:
@@ -1385,18 +1375,15 @@ projects:
       - name: openstack-client-publish-jobs
       - name: check-requirements
       - name: integrated-gate
+      - name: large-ops
       - name: stable-compat-jobs
       - name: publish-to-pypi
     check:
       - gate-python-glanceclient-pypy
       - check-devstack-dsvm-cells
-      - gate-tempest-dsvm-large-ops
-      - gate-tempest-dsvm-neutron-large-ops
     gate:
       - gate-python-glanceclient-pypy
       - gate-devstack-dsvm-cells
-      - gate-tempest-dsvm-large-ops
-      - gate-tempest-dsvm-neutron-large-ops
     experimental:
       - gate-grenade-dsvm-forward
     experimental-tripleo:
@@ -1460,18 +1447,15 @@ projects:
       - name: openstack-client-publish-jobs
       - name: check-requirements
       - name: integrated-gate
+      - name: large-ops
       - name: stable-compat-jobs
       - name: publish-to-pypi
     check:
       - gate-python-keystoneclient-python33
       - check-devstack-dsvm-cells
-      - gate-tempest-dsvm-large-ops
-      - gate-tempest-dsvm-neutron-large-ops
     gate:
       - gate-python-keystoneclient-python33
       - gate-devstack-dsvm-cells
-      - gate-tempest-dsvm-large-ops
-      - gate-tempest-dsvm-neutron-large-ops
     experimental:
       - gate-grenade-dsvm-forward
     experimental-tripleo:
@@ -1524,20 +1508,17 @@ projects:
       - name: openstack-client-publish-jobs
       - name: check-requirements
       - name: integrated-gate
+      - name: large-ops
       - name: stable-compat-jobs
       - name: publish-to-pypi
     check:
       - gate-python-novaclient-python33
       - gate-python-novaclient-pypy
       - check-devstack-dsvm-cells
-      - gate-tempest-dsvm-large-ops
-      - gate-tempest-dsvm-neutron-large-ops
     gate:
       - gate-python-novaclient-python33
       - gate-python-novaclient-pypy
       - gate-devstack-dsvm-cells
-      - gate-tempest-dsvm-large-ops
-      - gate-tempest-dsvm-neutron-large-ops
     experimental:
       - gate-grenade-dsvm-forward
     experimental-tripleo:
@@ -1572,20 +1553,17 @@ projects:
       - name: openstack-client-publish-jobs
       - name: check-requirements
       - name: integrated-gate
+      - name: large-ops
       - name: stable-compat-jobs
       - name: publish-to-pypi
     check:
       - gate-python-swiftclient-python33
       - gate-python-swiftclient-pypy
       - check-swift-dsvm-functional
-      - gate-tempest-dsvm-large-ops
-      - gate-tempest-dsvm-neutron-large-ops
     gate:
       - gate-python-swiftclient-python33
       - gate-python-swiftclient-pypy
       - gate-swift-dsvm-functional
-      - gate-tempest-dsvm-large-ops
-      - gate-tempest-dsvm-neutron-large-ops
     experimental-tripleo:
       - check-tripleo-novabm-undercloud-precise-nonha
       - check-tripleo-ironic-undercloud-precise-nonha
@@ -1920,16 +1898,13 @@ projects:
       - name: openstack-server-publish-jobs
       - name: check-requirements
       - name: integrated-gate
+      - name: large-ops
       - name: publish-to-pypi
       - name: translation-jobs
     check:
       - check-devstack-dsvm-cells
-      - gate-tempest-dsvm-large-ops
-      - gate-tempest-dsvm-neutron-large-ops
     gate:
       - gate-devstack-dsvm-cells
-      - gate-tempest-dsvm-large-ops
-      - gate-tempest-dsvm-neutron-large-ops
     experimental-tripleo:
       - check-tripleo-novabm-undercloud-precise-nonha
       - check-tripleo-ironic-undercloud-precise-nonha
@@ -1961,17 +1936,14 @@ projects:
       - name: openstack-server-publish-jobs
       - name: check-requirements
       - name: integrated-gate
+      - name: large-ops
       - name: publish-to-pypi
       - name: translation-jobs
     check:
       - check-devstack-dsvm-cells
-      - gate-tempest-dsvm-large-ops
-      - gate-tempest-dsvm-neutron-large-ops
       - check-oslotest-dsvm-oslo.messaging
     gate:
       - gate-devstack-dsvm-cells
-      - gate-tempest-dsvm-large-ops
-      - gate-tempest-dsvm-neutron-large-ops
     experimental-tripleo:
       - check-tripleo-novabm-undercloud-precise-nonha
       - check-tripleo-ironic-undercloud-precise-nonha
@@ -1992,6 +1964,7 @@ projects:
     template:
       - name: check-requirements
       - name: integrated-gate
+      - name: large-ops
       - name: publish-to-pypi
     check:
       - gate-oslo.rootwrap-pep8
@@ -1999,16 +1972,12 @@ projects:
       - gate-oslo.rootwrap-python27
       - gate-oslo.rootwrap-python33
       - check-devstack-dsvm-cells
-      - gate-tempest-dsvm-large-ops
-      - gate-tempest-dsvm-neutron-large-ops
     gate:
       - gate-oslo.rootwrap-pep8
       - gate-oslo.rootwrap-python26
       - gate-oslo.rootwrap-python27
       - gate-oslo.rootwrap-python33
       - gate-devstack-dsvm-cells
-      - gate-tempest-dsvm-large-ops
-      - gate-tempest-dsvm-neutron-large-ops
     post:
       - oslo.rootwrap-branch-tarball
     experimental-tripleo:
@@ -2076,14 +2045,13 @@ projects:
   - name: openstack/requirements
     template:
       - name: integrated-gate
+      - name: large-ops
     check:
       - gate-requirements-pep8
       - gate-requirements-python27
       - gate-requirements-pypy
       - check-requirements-integration-dsvm
       - check-devstack-dsvm-cells
-      - gate-tempest-dsvm-large-ops
-      - gate-tempest-dsvm-neutron-large-ops
       - check-swift-dsvm-functional
     gate:
       - gate-requirements-pep8
@@ -2091,8 +2059,6 @@ projects:
       - gate-requirements-pypy
       - gate-requirements-integration-dsvm
       - gate-devstack-dsvm-cells
-      - gate-tempest-dsvm-large-ops
-      - gate-tempest-dsvm-neutron-large-ops
       - gate-swift-dsvm-functional
     post:
       - propose-requirements-updates
@@ -2203,13 +2169,12 @@ projects:
     template:
       - name: check-requirements
       - name: integrated-gate
+      - name: large-ops
     check:
       - gate-tempest-pep8
       - gate-tempest-docs
       - gate-tempest-python27
       - check-tempest-dsvm-neutron-full
-      - gate-tempest-dsvm-large-ops
-      - gate-tempest-dsvm-neutron-large-ops
       - check-grenade-dsvm-partial-ncpu
       - check-tempest-dsvm-ironic-nv
       - check-tempest-dsvm-ironic-postgres-nv
@@ -2229,8 +2194,6 @@ projects:
       - gate-tempest-pep8
       - gate-tempest-docs
       - gate-tempest-python27
-      - gate-tempest-dsvm-large-ops
-      - gate-tempest-dsvm-neutron-large-ops
       - gate-grenade-dsvm-partial-ncpu
     experimental:
       - gate-grenade-dsvm-forward
@@ -2480,12 +2443,11 @@ projects:
   - name: openstack-dev/devstack
     template:
       - name: integrated-gate
+      - name: large-ops
     check:
       - gate-devstack-bashate
       - check-devstack-dsvm-cells
       - check-tempest-dsvm-neutron-full
-      - gate-tempest-dsvm-large-ops
-      - gate-tempest-dsvm-neutron-large-ops
       - check-grenade-dsvm-forward
       - check-grenade-dsvm-partial-ncpu
       - check-neutron-dsvm-functional
@@ -2497,8 +2459,6 @@ projects:
     gate:
       - gate-devstack-bashate
       - gate-devstack-dsvm-cells
-      - gate-tempest-dsvm-large-ops
-      - gate-tempest-dsvm-neutron-large-ops
       - gate-grenade-dsvm-forward
       - gate-grenade-dsvm-partial-ncpu
       - gate-neutron-dsvm-functional
@@ -2570,22 +2530,19 @@ projects:
     template:
       - name: python-jobs
       - name: integrated-gate
+      - name: large-ops
       - name: publish-to-pypi
     check:
       - gate-pbr-python33
       - gate-pbr-pypy
       - check-requirements-integration-dsvm
       - check-devstack-dsvm-cells
-      - gate-tempest-dsvm-large-ops
-      - gate-tempest-dsvm-neutron-large-ops
       - check-swift-dsvm-functional
     gate:
       - gate-pbr-python33
       - gate-pbr-pypy
       - gate-requirements-integration-dsvm
       - gate-devstack-dsvm-cells
-      - gate-tempest-dsvm-large-ops
-      - gate-tempest-dsvm-neutron-large-ops
       - gate-swift-dsvm-functional
     experimental-tripleo:
       - check-tripleo-novabm-undercloud-precise-nonha
@@ -2670,14 +2627,13 @@ projects:
   - name: openstack-infra/devstack-gate
     template:
       - name: integrated-gate
+      - name: large-ops
     check:
       - gate-devstack-gate-unittests
       - check-devstack-dsvm-cells
       - check-dg-tempest-dsvm-full
       - check-dg-tempest-dsvm-full-reexec
       - check-dg-hooks-dsvm
-      - gate-tempest-dsvm-large-ops
-      - gate-tempest-dsvm-neutron-large-ops
       - check-grenade-dsvm-partial-ncpu
       - check-swift-dsvm-functional
       - check-tempest-dsvm-full-icehouse
@@ -2695,8 +2651,6 @@ projects:
     gate:
       - gate-devstack-gate-unittests
       - gate-devstack-dsvm-cells
-      - gate-tempest-dsvm-large-ops
-      - gate-tempest-dsvm-neutron-large-ops
       - gate-grenade-dsvm-partial-ncpu
       - gate-swift-dsvm-functional
     experimental:
