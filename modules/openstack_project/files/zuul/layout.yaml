@@ -4809,17 +4809,10 @@ projects:
 
   - name: stackforge/tooz
     template:
+      - name: python-jobs
+      - name: python3-jobs
       - name: publish-to-pypi
-    check:
-      - gate-tooz-pep8
-      - gate-tooz-python26
-      - gate-tooz-python27
-      - gate-tooz-python33
-    gate:
-      - gate-tooz-pep8
-      - gate-tooz-python26
-      - gate-tooz-python27
-      - gate-tooz-python33
+      - name: docs-on-rtfd
     post:
       - tooz-branch-tarball
 
