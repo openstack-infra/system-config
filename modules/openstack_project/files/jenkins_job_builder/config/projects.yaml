@@ -1393,7 +1393,7 @@
       - python-jobs
 
 - project:
-    name: marconi
+    name: zaqar
     github-org: openstack
     tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
@@ -1405,7 +1405,7 @@
       - translation-jobs
 
 - project:
-    name: marconi-specs
+    name: zaqar-specs
     github-org: openstack
     node: bare-precise
 
@@ -1413,7 +1413,7 @@
       - specs-jobs
 
 - project:
-    name: python-marconiclient
+    name: python-zaqarclient
     github-org: openstack
     tarball-site: tarballs.openstack.org
     node: 'bare-precise || bare-trusty'
