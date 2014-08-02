@@ -182,7 +182,6 @@
 
     jobs:
       - python-jobs
-      - gate-{name}-docs
 
 - project:
     name: python-congressclient
@@ -226,7 +225,6 @@
     jobs:
       - python-jobs
       - pypi-jobs
-      - gate-{name}-docs
 
 - project:
     name: magnetodb
