@@ -165,6 +165,11 @@ The config file that tells Logstash how to do this flattening can be
 found at
 :file:`modules/openstack_project/templates/logstash/indexer.conf.erb`
 
+This works via the tags that are associated with a given message.
+When adding a new file to be indexed to
+:file:`modules/openstack_project/files/logstash/jenkins-log-client.yaml`
+at least one tag from the indexer.conf.erb file should be associated
+with the new file.
 
 ElasticSearch
 -------------
