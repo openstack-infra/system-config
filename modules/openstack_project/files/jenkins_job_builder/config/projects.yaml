@@ -391,6 +391,7 @@
 
     jobs:
       - python-jobs
+      - gate-{name}-pep8
       - gate-{name}-unittests-{env}:
           env: 26sa07
           node: bare-centos6
