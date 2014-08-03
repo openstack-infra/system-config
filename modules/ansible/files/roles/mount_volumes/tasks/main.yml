@@ -1,0 +1,19 @@
+---
+- name: Make volume groups
+  lvg: "{{ item.name }}"
+  pvs: "{{ openstack.volumes|selectattr('vg', item.name)|map(attribute='attachments')|map(attribute='device')|join(',') }}"
+  with_items: hosts|selectattr('name', ansible_fqdn)|selectattr('volume_groups')
+- name: Make logical volumes
+- name: Make filesystem
+  lvol: 
+  filesystem:
+      fstype: ext4
+      dev: "{{ item['attachments'][0]['device'] }}"
+  with_items: hosts|selectattr('name', ansible_fqdn).volumes
+- name: Mount volume
+  mount:
+      src: "{{ item['attachments'][0]['device'] }}"
+      name: "{{ item.mount }}"
+      fstype: ext4
+      state: mounted
+  with_items: openstack.volumes

@@ -1,0 +1,38 @@
+---
+- name: Launch Node
+  os_compute:
+      cloud: "{{ cloud }}"
+      name: "{{ name }}"
+      image_name: "{{ image }}"
+      flavor_ram: "{{ flavor }}"
+      meta:
+          group: "{{ group }}"
+      key_name: "{{ launch_keypair }}"
+  register: node
+- name: Attach volumes
+  os_compute_volume:
+      cloud: "{{ cloud }}"
+      server_id: "{{ node.id }}"
+      volume_name: "{{ item.display_name }}"
+  with_items: "{{ volumes }}"
+  register: attached_volumes
+- name: Re-request server to get up to date metadata after the volume loop
+  os_compute_facts:
+      cloud: "{{ cloud }}"
+      name: "{{ name }}"
+  when: attached_volumes.changed
+- name: Wait for SSH to work
+  wait_for: host={{ node.openstack.interface_ip }} port=22
+  when: node.changed == True
+- name: Add all instance public IPs to host group
+  add_host:
+      name: "{{ node.public_ip }}"
+      groups: "{{ provision_group }}"
+      openstack: "{{ openstack }}"
+  when: length(volumes) == 0
+- name: Add all instance public IPs to host and volumes group
+  add_host:
+      name: "{{ node.public_ip }}"
+      groups: "{{ provision_group }}",hasvolumes
+      openstack: "{{ openstack }}"
+  when: length(volumes) != 0
