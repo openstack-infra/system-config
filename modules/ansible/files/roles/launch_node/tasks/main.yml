@@ -1,0 +1,24 @@
+---
+- name: Launch Node
+  nova_compute:
+      login_username: "{{ os_username }}"
+      login_password: "{{ os_password }}"
+      login_tenant_name: "{{ os_tenant_name }}"
+      auth_url: "{{ os_auth_url }}"
+      region_name: "{{ os_region_name }}"
+      name: "{{ name }}"
+      key_name: "{{ launch_keypair }}"
+      image_name: "{{ image }}"
+      flavor_ram: "{{ flavor }}"
+      meta:
+          hostname: "{{ hostname }}"
+          group: "{{ group }}"
+      auto_floating_ip: yes
+      config_drive: yes
+  register: node
+- name: Add all instance public IPs to host group
+  add_host:
+      hostname: "{{ node.public_ip }}"
+      groupname: "{{ provision_group }}"
+- name: Wait for SSH to work
+  wait_for: host={{ node.public_ip }} port=22
