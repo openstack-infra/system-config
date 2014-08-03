@@ -44,6 +44,14 @@ class ansible {
     require => File['/etc/ansible'],
   }
 
+  file { '/usr/local/lib/python2.7/dist-packages/ansible/module_utils/openstack.py':
+    ensure => present,
+    mode   => '0644',
+    owner  => 'root',
+    group  => 'root',
+    source => 'puppet:///modules/ansible/openstack.py',
+  }
+
   include logrotate
   logrotate::file { 'ansible':
     log     => '/var/log/ansible.log',
