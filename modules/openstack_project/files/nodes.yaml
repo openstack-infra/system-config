@@ -1,0 +1,93 @@
+---
+- hosts: localhost
+  connection: local
+  gather_facts: False
+  vars_files:
+    - vars/openstackci_rax_nova.yml
+  roles:
+    - launch_keypair
+    - { role: launch_node, name: ask-staging.openstack.org, image_name: 'Ubuntu 12.04.4', flavor_ram: 1024, hostname: ask-staging.openstack.org, group: servers, provision_group: ubuntu_hosts }
+    - { role: launch_node, name: ask.openstack.org, image_name: 'Ubuntu 12.04.4', flavor_ram: 2048, hostname: ask.openstack.org, group: servers, provision_group: ubuntu_hosts }
+    - { role: launch_node, name: cacti.openstack.org, image_name: 'Ubuntu 12.04.4', flavor_ram: 1024, hostname: cacti.openstack.org, group: servers, provision_group: ubuntu_hosts }
+    - { role: launch_node, name: eavesdrop.openstack.org, image_name: 'Ubuntu 12.04.4', flavor_ram: 1024, hostname: eavesdrop.openstack.org, group: servers, provision_group: ubuntu_hosts }
+    - { role: launch_node, name: elasticsearch02.openstack.org, image_name: 'Ubuntu 12.04.4', flavor_ram: 61440, flavor_include: Performance, hostname: elasticsearch02.openstack.org, group: servers, provision_group: ubuntu_hosts }
+    - { role: launch_node, name: elasticsearch03.openstack.org, image_name: 'Ubuntu 12.04.4', flavor_ram: 61440, flavor_include: Performance, hostname: elasticsearch03.openstack.org, group: servers, provision_group: ubuntu_hosts }
+    - { role: launch_node, name: elasticsearch04.openstack.org, image_name: 'Ubuntu 12.04.4', flavor_ram: 61440, flavor_include: Performance, hostname: elasticsearch04.openstack.org, group: servers, provision_group: ubuntu_hosts }
+    - { role: launch_node, name: elasticsearch05.openstack.org, image_name: 'Ubuntu 12.04.4', flavor_ram: 61440, flavor_include: Performance, hostname: elasticsearch05.openstack.org, group: servers, provision_group: ubuntu_hosts }
+    - { role: launch_node, name: elasticsearch06.openstack.org, image_name: 'Ubuntu 12.04.4', flavor_ram: 61440, flavor_include: Performance, hostname: elasticsearch06.openstack.org, group: servers, provision_group: ubuntu_hosts }
+    - { role: launch_node, name: elasticsearch07.openstack.org, image_name: 'Ubuntu 12.04.4', flavor_ram: 61440, flavor_include: Performance, hostname: elasticsearch07.openstack.org, group: servers, provision_group: ubuntu_hosts }
+    - { role: launch_node, name: etherpad-dev.openstack.org, image_name: 'Ubuntu 12.04.4', flavor_ram: 2048, hostname: etherpad-dev.openstack.org, group: servers, provision_group: ubuntu_hosts }
+    - { role: launch_node, name: etherpad.openstack.org, image_name: 'Ubuntu 12.04.4', flavor_ram: 2048, hostname: etherpad.openstack.org, group: servers, provision_group: ubuntu_hosts }
+    - { role: launch_node, name: git.openstack.org, image_name: 'Ubuntu 12.04.4', flavor_ram: 8192, hostname: git.openstack.org, group: servers, provision_group: ubuntu_hosts }
+    - { role: launch_node, name: git01.openstack.org, image_name: 'CentOS 6.4', flavor_ram: 8192, flavor_include: Performance, hostname: git01.openstack.org, group: servers, provision_group: centos_hosts }
+    - { role: launch_node, name: git02.openstack.org, image_name: 'CentOS 6.4', flavor_ram: 8192, flavor_include: Performance, hostname: git02.openstack.org, group: servers, provision_group: centos_hosts }
+    - { role: launch_node, name: git03.openstack.org, image_name: 'CentOS 6.4', flavor_ram: 8192, flavor_include: Performance, hostname: git03.openstack.org, group: servers, provision_group: centos_hosts }
+    - { role: launch_node, name: git04.openstack.org, image_name: 'CentOS 6.4', flavor_ram: 8192, flavor_include: Performance, hostname: git04.openstack.org, group: servers, provision_group: centos_hosts }
+    - { role: launch_node, name: git05.openstack.org, image_name: 'CentOS 6.4', flavor_ram: 8192, flavor_include: Performance, hostname: git05.openstack.org, group: servers, provision_group: centos_hosts }
+    - { role: launch_node, name: graphite.openstack.org, image_name: 'Ubuntu 12.04.4', flavor_ram: 8192, hostname: graphite.openstack.org, group: servers, provision_group: ubuntu_hosts }
+    - { role: launch_node, name: groups-dev.openstack.org, image_name: 'Ubuntu 12.04.4', flavor_ram: 2048, hostname: groups-dev.openstack.org, group: servers, provision_group: ubuntu_hosts }
+    - { role: launch_node, name: groups.openstack.org, image_name: 'Ubuntu 12.04.4', flavor_ram: 1024, hostname: groups.openstack.org, group: servers, provision_group: ubuntu_hosts }
+    - { role: launch_node, name: ipa.openstack.org, image_name: 'Fedora 20', flavor_ram: 8192, flavor_include: Performance, hostname: ipa.openstack.org, group: servers, provision_group: fedora_hosts }
+    - { role: launch_node, name: jenkins-dev.openstack.org, image_name: 'Ubuntu 12.04.4', flavor_ram: 8192, hostname: jenkins-dev.openstack.org, group: servers, provision_group: ubuntu_hosts }
+    - { role: launch_node, name: jenkins.openstack.org, image_name: 'Ubuntu 12.04.4', flavor_ram: 30720, hostname: jenkins.openstack.org, group: servers, provision_group: ubuntu_hosts }
+    - { role: launch_node, name: jenkins01.openstack.org, image_name: 'Ubuntu 12.04.4', flavor_ram: 30720, hostname: jenkins01.openstack.org, group: servers, provision_group: ubuntu_hosts }
+    - { role: launch_node, name: jenkins02.openstack.org, image_name: 'Ubuntu 12.04.4', flavor_ram: 30720, hostname: jenkins02.openstack.org, group: servers, provision_group: ubuntu_hosts }
+    - { role: launch_node, name: jenkins03.openstack.org, image_name: 'Ubuntu 12.04.4', flavor_ram: 15360, flavor_include: Performance, hostname: jenkins03.openstack.org, group: servers, provision_group: ubuntu_hosts }
+    - { role: launch_node, name: jenkins04.openstack.org, image_name: 'Ubuntu 12.04.4', flavor_ram: 15360, flavor_include: Performance, hostname: jenkins04.openstack.org, group: servers, provision_group: ubuntu_hosts }
+    - { role: launch_node, name: jenkins05.openstack.org, image_name: 'Ubuntu 12.04.4', flavor_ram: 15360, flavor_include: Performance, hostname: jenkins05.openstack.org, group: servers, provision_group: ubuntu_hosts }
+    - { role: launch_node, name: jenkins06.openstack.org, image_name: 'Ubuntu 12.04.4', flavor_ram: 15360, flavor_include: Performance, hostname: jenkins06.openstack.org, group: servers, provision_group: ubuntu_hosts }
+    - { role: launch_node, name: jenkins07.openstack.org, image_name: 'Ubuntu 12.04.4', flavor_ram: 15360, flavor_include: Performance, hostname: jenkins07.openstack.org, group: servers, provision_group: ubuntu_hosts }
+    - { role: launch_node, name: lists.openstack.org, image_name: 'Ubuntu 12.04.4', flavor_ram: 4096, hostname: lists.openstack.org, group: servers, provision_group: ubuntu_hosts }
+    - { role: launch_node, name: logstash-worker01.openstack.org, image_name: 'Ubuntu 12.04.4', flavor_ram: 4096, flavor_include: Performance, hostname: logstash-worker01.openstack.org, group: servers, provision_group: ubuntu_hosts }
+    - { role: launch_node, name: logstash-worker02.openstack.org, image_name: 'Ubuntu 12.04.4', flavor_ram: 4096, flavor_include: Performance, hostname: logstash-worker02.openstack.org, group: servers, provision_group: ubuntu_hosts }
+    - { role: launch_node, name: logstash-worker03.openstack.org, image_name: 'Ubuntu 12.04.4', flavor_ram: 4096, flavor_include: Performance, hostname: logstash-worker03.openstack.org, group: servers, provision_group: ubuntu_hosts }
+    - { role: launch_node, name: logstash-worker04.openstack.org, image_name: 'Ubuntu 12.04.4', flavor_ram: 4096, flavor_include: Performance, hostname: logstash-worker04.openstack.org, group: servers, provision_group: ubuntu_hosts }
+    - { role: launch_node, name: logstash-worker05.openstack.org, image_name: 'Ubuntu 12.04.4', flavor_ram: 4096, flavor_include: Performance, hostname: logstash-worker05.openstack.org, group: servers, provision_group: ubuntu_hosts }
+    - { role: launch_node, name: logstash-worker06.openstack.org, image_name: 'Ubuntu 12.04.4', flavor_ram: 4096, flavor_include: Performance, hostname: logstash-worker06.openstack.org, group: servers, provision_group: ubuntu_hosts }
+    - { role: launch_node, name: logstash-worker07.openstack.org, image_name: 'Ubuntu 12.04.4', flavor_ram: 4096, flavor_include: Performance, hostname: logstash-worker07.openstack.org, group: servers, provision_group: ubuntu_hosts }
+    - { role: launch_node, name: logstash-worker08.openstack.org, image_name: 'Ubuntu 12.04.4', flavor_ram: 4096, flavor_include: Performance, hostname: logstash-worker08.openstack.org, group: servers, provision_group: ubuntu_hosts }
+    - { role: launch_node, name: logstash-worker09.openstack.org, image_name: 'Ubuntu 12.04.4', flavor_ram: 4096, flavor_include: Performance, hostname: logstash-worker09.openstack.org, group: servers, provision_group: ubuntu_hosts }
+    - { role: launch_node, name: logstash-worker10.openstack.org, image_name: 'Ubuntu 12.04.4', flavor_ram: 4096, flavor_include: Performance, hostname: logstash-worker10.openstack.org, group: servers, provision_group: ubuntu_hosts }
+    - { role: launch_node, name: logstash-worker11.openstack.org, image_name: 'Ubuntu 12.04.4', flavor_ram: 4096, flavor_include: Performance, hostname: logstash-worker11.openstack.org, group: servers, provision_group: ubuntu_hosts }
+    - { role: launch_node, name: logstash-worker12.openstack.org, image_name: 'Ubuntu 12.04.4', flavor_ram: 4096, flavor_include: Performance, hostname: logstash-worker12.openstack.org, group: servers, provision_group: ubuntu_hosts }
+    - { role: launch_node, name: logstash-worker13.openstack.org, image_name: 'Ubuntu 12.04.4', flavor_ram: 4096, flavor_include: Performance, hostname: logstash-worker13.openstack.org, group: servers, provision_group: ubuntu_hosts }
+    - { role: launch_node, name: logstash-worker14.openstack.org, image_name: 'Ubuntu 12.04.4', flavor_ram: 4096, flavor_include: Performance, hostname: logstash-worker14.openstack.org, group: servers, provision_group: ubuntu_hosts }
+    - { role: launch_node, name: logstash-worker15.openstack.org, image_name: 'Ubuntu 12.04.4', flavor_ram: 4096, flavor_include: Performance, hostname: logstash-worker15.openstack.org, group: servers, provision_group: ubuntu_hosts }
+    - { role: launch_node, name: logstash-worker16.openstack.org, image_name: 'Ubuntu 12.04.4', flavor_ram: 4096, flavor_include: Performance, hostname: logstash-worker16.openstack.org, group: servers, provision_group: ubuntu_hosts }
+    - { role: launch_node, name: logstash-worker17.openstack.org, image_name: 'Ubuntu 12.04.4', flavor_ram: 4096, flavor_include: Performance, hostname: logstash-worker17.openstack.org, group: servers, provision_group: ubuntu_hosts }
+    - { role: launch_node, name: logstash-worker18.openstack.org, image_name: 'Ubuntu 12.04.4', flavor_ram: 4096, flavor_include: Performance, hostname: logstash-worker18.openstack.org, group: servers, provision_group: ubuntu_hosts }
+    - { role: launch_node, name: logstash-worker19.openstack.org, image_name: 'Ubuntu 12.04.4', flavor_ram: 4096, flavor_include: Performance, hostname: logstash-worker19.openstack.org, group: servers, provision_group: ubuntu_hosts }
+    - { role: launch_node, name: logstash-worker20.openstack.org, image_name: 'Ubuntu 12.04.4', flavor_ram: 4096, flavor_include: Performance, hostname: logstash-worker20.openstack.org, group: servers, provision_group: ubuntu_hosts }
+    - { role: launch_node, name: logstash.openstack.org, image_name: 'Ubuntu 12.04.4', flavor_ram: 2048, hostname: logstash.openstack.org, group: servers, provision_group: ubuntu_hosts }
+    - { role: launch_node, name: nodepool.openstack.org, image_name: 'Ubuntu 12.04.4', flavor_ram: 8192, hostname: nodepool.openstack.org, group: servers, provision_group: ubuntu_hosts }
+    - { role: launch_node, name: openstackid-dev.openstack.org, image_name: 'Ubuntu 12.04.4', flavor_ram: 2048, hostname: openstackid-dev.openstack.org, group: servers, provision_group: ubuntu_hosts }
+    - { role: launch_node, name: paste.openstack.org, image_name: 'Ubuntu 12.04.4', flavor_ram: 2048, hostname: paste.openstack.org, group: servers, provision_group: ubuntu_hosts }
+    - { role: launch_node, name: pbx.openstack.org, image_name: 'Ubuntu 12.04.4', flavor_ram: 2048, hostname: pbx.openstack.org, group: servers, provision_group: ubuntu_hosts }
+    - { role: launch_node, name: planet.openstack.org, image_name: 'Ubuntu 12.04.4', flavor_ram: 1024, hostname: planet.openstack.org, group: servers, provision_group: ubuntu_hosts }
+    - { role: launch_node, name: puppetdb.openstack.org, image_name: 'Ubuntu 12.04.4', flavor_ram: 2048, flavor_include: Performance, hostname: puppetdb.openstack.org, group: servers, provision_group: ubuntu_hosts }
+    - { role: launch_node, name: review-dev.openstack.org, image_name: 'Ubuntu 12.04.4', flavor_ram: 8192, hostname: review-dev.openstack.org, group: servers, provision_group: ubuntu_hosts }
+    - { role: launch_node, name: review.openstack.org, image_name: 'Ubuntu 12.04.4', flavor_ram: 30720, flavor_include: Performance, hostname: review.openstack.org, group: servers, provision_group: ubuntu_hosts }
+    - { role: launch_node, name: stackalytics.openstack.org, image_name: 'Ubuntu 12.04.4', flavor_ram: 8192, flavor_include: Performance, hostname: stackalytics.openstack.org, group: servers, provision_group: ubuntu_hosts }
+    - { role: launch_node, name: static.openstack.org, image_name: 'Ubuntu 12.04.4', flavor_ram: 8192, hostname: static.openstack.org, group: servers, provision_group: ubuntu_hosts }
+    - { role: launch_node, name: status.openstack.org, image_name: 'Ubuntu 12.04.4', flavor_ram: 4096, flavor_include: Performance, hostname: status.openstack.org, group: servers, provision_group: ubuntu_hosts }
+    - { role: launch_node, name: storyboard-dev.openstack.org, image_name: 'Ubuntu 12.04.4', flavor_ram: 4096, flavor_include: Performance, hostname: storyboard-dev.openstack.org, group: servers, provision_group: ubuntu_hosts }
+    - { role: launch_node, name: storyboard.openstack.org, image_name: 'Ubuntu 12.04.4', flavor_ram: 4096, flavor_include: Performance, hostname: storyboard.openstack.org, group: servers, provision_group: ubuntu_hosts }
+    - { role: launch_node, name: summit.openstack.org, image_name: 'Ubuntu 12.04.4', flavor_ram: 1024, hostname: summit.openstack.org, group: servers, provision_group: ubuntu_hosts }
+    - { role: launch_node, name: translate.openstack.org, image_name: 'Ubuntu 12.04.4', flavor_ram: 8192, hostname: translate.openstack.org, group: servers, provision_group: ubuntu_hosts }
+    - { role: launch_node, name: wiki.openstack.org, image_name: 'wiki.openstack.org', flavor_ram: 8192, hostname: wiki.openstack.org, group: servers, provision_group: fedora_hosts }
+    - { role: launch_node, name: zm01.openstack.org, image_name: 'Ubuntu 12.04.4', flavor_ram: 8192, flavor_include: Performance, hostname: zm01.openstack.org, group: servers, provision_group: ubuntu_hosts }
+    - { role: launch_node, name: zm02.openstack.org, image_name: 'Ubuntu 12.04.4', flavor_ram: 8192, flavor_include: Performance, hostname: zm02.openstack.org, group: servers, provision_group: ubuntu_hosts }
+    - { role: launch_node, name: zuul-dev.openstack.org, image_name: 'Ubuntu 12.04.4', flavor_ram: 1024, hostname: zuul-dev.openstack.org, group: servers, provision_group: ubuntu_hosts }
+    - { role: launch_node, name: zuul.openstack.org, image_name: 'Ubuntu 12.04.4', flavor_ram: 30720, flavor_include: Performance, hostname: zuul.openstack.org, group: servers, provision_group: ubuntu_hosts }
+- hosts: ubuntu_hosts
+  remote_user: ubuntu
+  roles:
+    - bootstrap
+- hosts: centos_hosts
+  remote_user: root
+  roles:
+    - bootstrap
+- hosts: fedora_hosts
+remote_user: cloud-user
+  roles:
+    - bootstrap

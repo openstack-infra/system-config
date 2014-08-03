@@ -1,0 +1,30 @@
+---
+- name: Install wget on Redhat derivatives
+  sudo: yes
+  yum: name=wget state=installed
+  when: ansible_os_family == 'RedHat'
+
+- name: Install wget on Debian derivatives
+  sudo: yes
+  apt: name=wget state=installed update_cache=yes
+  when: ansible_os_family == 'Debian'
+
+- name: Grab make_swap script
+  command: wget http://git.openstack.org/cgit/openstack-infra/config/plain/make_swap.sh chdir=/tmp creates=/tmp/make_swap.sh
+
+- name: Fix swap
+  sudo: yes
+  shell: bash /tmp/make_swap.sh
+  when: ansible_swaptotal_mb == 0
+
+- name: Grab install_puppet script
+  command: wget http://git.openstack.org/cgit/openstack-infra/config/plain/install_puppet.sh chdir=/tmp creates=/tmp/install_puppet.sh
+
+- shell: type puppet
+  register: puppet_exists
+  ignore_errors: True
+
+- name: Install puppet
+  sudo: yes
+  shell: bash /tmp/install_puppet.sh
+  when: puppet_exists|failed
