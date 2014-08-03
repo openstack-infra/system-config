@@ -1,0 +1,29 @@
+---
+- hosts: localhost
+  connection: local
+  gather_facts: False
+  roles:
+    - testcommon
+    - role: launch_keypair
+      cloud: openstack
+    - role: launch_node
+      cloud: openstack
+      region_name: region-b.geo-1
+      name: test-ansible
+      image_name: "{{ hostlist['test-ansible'].image_name }}"
+      flavor_ram: "{{ hostlist['test-ansible'].flavor_ram }}"
+      flavor_include: "{{ hostlist['test-ansible'].flavor_include|default(omit) }}"
+      group: "{ hostlist['test-ansible'].group }}"
+      provision_group: "{{ hostlist['test-ansible'].provision_group }}"
+      volumes: "{{ hostlist['test-ansible'].volumes }}"
+- hosts: ubuntu_hosts
+  remote_user: ubuntu
+  sudo: yes
+  vars:
+  - include: vars.yml
+  roles:
+    - testcommon
+    - role: mount_volumes
+      host: "{{ hostlist['test-ansible'] }}"
+    - bootstrap
+    - ssh

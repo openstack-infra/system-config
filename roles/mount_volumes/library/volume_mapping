@@ -1,0 +1,84 @@
+#!/usr/bin/python
+
+# Copyright (c) 2014 Hewlett-Packard Development Company, L.P.
+#
+# This module is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This software is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this software.  If not, see <http://www.gnu.org/licenses/>.
+
+import re
+
+DOCUMENTATION = '''
+---
+module: volume_mapping
+short_description: Returns a mapping of cinder devices to volume groups
+description:
+  - Takes an OpenStack host dict and a volume group and returns a mapping
+options:
+  openstack:
+    description:
+      - The OpenStack hostvars for the current host
+    required: true
+  host:
+    description:
+      - Dict containing the config of the host
+    required: true
+author: Monty Taylor
+'''
+
+
+def main():
+    module = AnsibleModule(
+        argument_spec=dict(
+            openstack=dict(required=True),
+            host=dict(required=True),
+        ),
+    )
+    p = module.params
+
+    if not 'volume_groups' in p['host']:
+        module.exit_json(have_vgs=False, volumes=dict(), lvs=dict(), host=p['host'], openstack=p['openstack'])
+
+    vgs = dict()
+    lvs = dict()
+    for (vgname, vg) in p['host']['volume_groups'].items():
+        vgs[vgname] = []
+        for (lvname, lv) in vg.items():
+            lv['vg'] = vgname
+            if 'fstype' not in lv:
+                lv['fstype'] = 'ext4'
+            lv['device'] = '/dev/mapper/{vgname}-{lvname}'.format(
+                lvname=lvname, vgname=vgname)
+            lvs[lvname] = lv
+
+    for volume in p['openstack']['volumes']:
+        try:
+            (host, vginfo) = volume['display_name'].split('/')
+            (vgname, vgindex) = re.search('(\D+)(\d+)', vginfo).groups()
+        except Exception:
+            continue
+
+        if vgname not in vgs:
+            module.fail_json(
+                msg='Volume {vgname} wants to be part of a'
+                    ' non-existent volume group'.format(vgname=vgname))
+        vgs[vgname].append(volume['device'])
+    volumes = { k: ','.join(v) for (k,v) in vgs.items() }
+
+
+    module.exit_json(have_vgs=True, volumes=volumes, lvs=lvs)
+
+
+# import module snippets
+from ansible.module_utils.basic import *
+
+main()
