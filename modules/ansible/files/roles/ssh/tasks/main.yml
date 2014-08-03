@@ -1,0 +1,13 @@
+---
+- user:
+    name: "{{ item.key }}"
+    comment: "{{ item.value.comment|default(omit) }}"
+    home: "{{ item.value.homedir|default(omit) }}"
+    shell: '/bin/bash'
+    groups: "sudo,admin"
+  with_dict: infra_root
+- authorized_key:
+    user: "{{ item.key }}"
+    key: "{{ item.value.key }}"
+    key_options: "{{ item.value.key_options|default(omit) }}"
+  with_dict: infra_root
