@@ -1,0 +1,10 @@
+---
+- name: Add Launch Keypair
+  os_keypair:
+      login_username: "{{ os_username }}"
+      login_password: "{{ os_password }}"
+      login_tenant_name: "{{ os_tenant_name }}"
+      auth_url: "{{ os_auth_url }}"
+      region_name: "{{ os_region_name }}"
+      name: "{{ launch_keypair }}"
+      public_key: "{{ lookup('file', '~/.ssh/id_rsa.pub') }}"
