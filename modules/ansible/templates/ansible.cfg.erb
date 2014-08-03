@@ -1,4 +1,5 @@
 [defaults]
-hostfile=<%= @ansible_hostfile %>
-library=/usr/share/ansible:/etc/ansible/library
+hostfile=/usr/local/bin/os-inventory
+library=/usr/local/lib/python2.7/dist-packages/shade_ansible/modules:/usr/share/ansible
+roles_path=/opt/system-config/production/roles
 log_path=/var/log/ansible.log

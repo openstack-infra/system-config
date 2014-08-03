@@ -1,0 +1,490 @@
+hosts:
+- name: ask-staging.openstack.org
+  image_name: Ubuntu 12.04.4
+  flavor_ram: 1024
+  group: servers
+  provision_group: ubuntu_hosts
+- name: ask.openstack.org
+  image_name: Ubuntu 12.04.4
+  flavor_ram: 2048
+  group: servers
+  provision_group: ubuntu_hosts
+- name: cacti.openstack.org
+  image_name: Ubuntu 12.04.4
+  flavor_ram: 1024
+  group: servers
+  provision_group: ubuntu_hosts
+- name: eavesdrop.openstack.org
+  image_name: Ubuntu 12.04.4
+  flavor_ram: 1024
+  group: servers
+  provision_group: ubuntu_hosts
+- name: elasticsearch02.openstack.org
+  image_name: Ubuntu 12.04.4
+  flavor_ram: 61440
+  flavor_include: Performance
+  group: servers
+  provision_group: ubuntu_hosts
+  volume_groups:
+  - name: main
+    logical_volumes:
+    - name: elasticsearch
+      size: 1024
+      mount: /var/lib/elasticsearch
+  volumes:
+  - display_name: elasticsearch02.openstack.org/main01
+    size: 1024
+    vg: main
+- name: elasticsearch03.openstack.org
+  image_name: Ubuntu 12.04.4
+  flavor_ram: 61440
+  flavor_include: Performance
+  group: elasticsearch
+  provision_group: ubuntu_hosts
+  volume_groups:
+  - name: main
+    logical_volumes:
+    - name: elasticsearch
+      size: 1024
+      mount: /var/lib/elasticsearch
+  volumes:
+  - display_name: elasticsearch03.openstack.org/main01
+    size: 1024
+    vg: main
+- name: elasticsearch04.openstack.org
+  image_name: Ubuntu 12.04.4
+  flavor_ram: 61440
+  flavor_include: Performance
+  group: elasticsearch
+  provision_group: ubuntu_hosts
+  volume_groups:
+  - name: main
+    logical_volumes:
+    - name: elasticsearch
+      size: 1024
+      mount: /var/lib/elasticsearch
+  volumes:
+  - display_name: elasticsearch04.openstack.org/main01
+    size: 1024
+    vg: main
+- name: elasticsearch05.openstack.org
+  image_name: Ubuntu 12.04.4
+  flavor_ram: 61440
+  flavor_include: Performance
+  group: elasticsearch
+  provision_group: ubuntu_hosts
+  volume_groups:
+  - name: main
+    logical_volumes:
+    - name: elasticsearch
+      size: 1024
+      mount: /var/lib/elasticsearch
+  volumes:
+  - display_name: elasticsearch05.openstack.org/main01
+    size: 1024
+    vg: main
+- name: elasticsearch06.openstack.org
+  image_name: Ubuntu 12.04.4
+  flavor_ram: 61440
+  flavor_include: Performance
+  group: elasticsearch
+  provision_group: ubuntu_hosts
+  volume_groups:
+  - name: main
+    logical_volumes:
+    - name: elasticsearch
+      size: 1024
+      mount: /var/lib/elasticsearch
+  volumes:
+  - display_name: elasticsearch06.openstack.org/main01
+    size: 1024
+    vg: main
+- name: elasticsearch07.openstack.org
+  image_name: Ubuntu 12.04.4
+  flavor_ram: 61440
+  flavor_include: Performance
+  group: elasticsearch
+  provision_group: ubuntu_hosts
+  volume_groups:
+  - name: main
+    logical_volumes:
+    - name: elasticsearch
+      size: 1024
+      mount: /var/lib/elasticsearch
+  - name: ssd
+    logical_volumes:
+    - name: elasticsearch
+      size: 1024
+      mount: /var/lib/elasticsearch
+  volumes:
+  - display_name: elasticsearch07.openstack.org/main01
+    size: 1024
+    vg: main
+  - display_name: elasticsearch07.openstack.org/ssd01
+    size: 1024
+    vg: main
+    volume_type: ssd
+- name: etherpad-dev.openstack.org
+  image_name: Ubuntu 12.04.4
+  flavor_ram: 2048
+  group: servers
+  provision_group: ubuntu_hosts
+- name: etherpad.openstack.org
+  image_name: Ubuntu 12.04.4
+  flavor_ram: 2048
+  group: servers
+  provision_group: ubuntu_hosts
+- name: git.openstack.org
+  image_name: Ubuntu 12.04.4
+  flavor_ram: 8192
+  group: servers
+  provision_group: ubuntu_hosts
+- name: git01.openstack.org
+  image_name: CentOS 6.4
+  flavor_ram: 8192
+  flavor_include: Performance
+  group: servers
+  provision_group: centos_hosts
+- name: git02.openstack.org
+  image_name: CentOS 6.4
+  flavor_ram: 8192
+  flavor_include: Performance
+  group: servers
+  provision_group: centos_hosts
+- name: git03.openstack.org
+  image_name: CentOS 6.4
+  flavor_ram: 8192
+  flavor_include: Performance
+  group: servers
+  provision_group: centos_hosts
+- name: git04.openstack.org
+  image_name: CentOS 6.4
+  flavor_ram: 8192
+  flavor_include: Performance
+  group: servers
+  provision_group: centos_hosts
+- name: git05.openstack.org
+  image_name: CentOS 6.4
+  flavor_ram: 8192
+  flavor_include: Performance
+  group: servers
+  provision_group: centos_hosts
+- name: graphite.openstack.org
+  image_name: Ubuntu 12.04.4
+  flavor_ram: 8192
+  group: servers
+  provision_group: ubuntu_hosts
+- name: groups-dev.openstack.org
+  image_name: Ubuntu 12.04.4
+  flavor_ram: 2048
+  group: servers
+  provision_group: ubuntu_hosts
+- name: groups.openstack.org
+  image_name: Ubuntu 12.04.4
+  flavor_ram: 1024
+  group: servers
+  provision_group: ubuntu_hosts
+- name: ipa.openstack.org
+  image_name: Fedora 20
+  flavor_ram: 8192
+  flavor_include: Performance
+  group: servers
+  provision_group: fedora_hosts
+- name: jenkins-dev.openstack.org
+  image_name: Ubuntu 12.04.4
+  flavor_ram: 8192
+  group: servers
+  provision_group: ubuntu_hosts
+- name: jenkins.openstack.org
+  image_name: Ubuntu 12.04.4
+  flavor_ram: 30720
+  group: servers
+  provision_group: ubuntu_hosts
+- name: jenkins01.openstack.org
+  image_name: Ubuntu 12.04.4
+  flavor_ram: 30720
+  group: servers
+  provision_group: ubuntu_hosts
+- name: jenkins02.openstack.org
+  image_name: Ubuntu 12.04.4
+  flavor_ram: 30720
+  group: servers
+  provision_group: ubuntu_hosts
+- name: jenkins03.openstack.org
+  image_name: Ubuntu 12.04.4
+  flavor_ram: 15360
+  flavor_include: Performance
+  group: servers
+  provision_group: ubuntu_hosts
+- name: jenkins04.openstack.org
+  image_name: Ubuntu 12.04.4
+  flavor_ram: 15360
+  flavor_include: Performance
+  group: servers
+  provision_group: ubuntu_hosts
+- name: jenkins05.openstack.org
+  image_name: Ubuntu 12.04.4
+  flavor_ram: 15360
+  flavor_include: Performance
+  group: servers
+  provision_group: ubuntu_hosts
+- name: jenkins06.openstack.org
+  image_name: Ubuntu 12.04.4
+  flavor_ram: 15360
+  flavor_include: Performance
+  group: servers
+  provision_group: ubuntu_hosts
+- name: jenkins07.openstack.org
+  image_name: Ubuntu 12.04.4
+  flavor_ram: 15360
+  flavor_include: Performance
+  group: servers
+  provision_group: ubuntu_hosts
+- name: lists.openstack.org
+  image_name: Ubuntu 12.04.4
+  flavor_ram: 4096
+  group: servers
+  provision_group: ubuntu_hosts
+- name: logstash-worker01.openstack.org
+  image_name: Ubuntu 12.04.4
+  flavor_ram: 4096
+  flavor_include: Performance
+  group: servers
+  provision_group: ubuntu_hosts
+- name: logstash-worker02.openstack.org
+  image_name: Ubuntu 12.04.4
+  flavor_ram: 4096
+  flavor_include: Performance
+  group: servers
+  provision_group: ubuntu_hosts
+- name: logstash-worker03.openstack.org
+  image_name: Ubuntu 12.04.4
+  flavor_ram: 4096
+  flavor_include: Performance
+  group: servers
+  provision_group: ubuntu_hosts
+- name: logstash-worker04.openstack.org
+  image_name: Ubuntu 12.04.4
+  flavor_ram: 4096
+  flavor_include: Performance
+  group: servers
+  provision_group: ubuntu_hosts
+- name: logstash-worker05.openstack.org
+  image_name: Ubuntu 12.04.4
+  flavor_ram: 4096
+  flavor_include: Performance
+  group: servers
+  provision_group: ubuntu_hosts
+- name: logstash-worker06.openstack.org
+  image_name: Ubuntu 12.04.4
+  flavor_ram: 4096
+  flavor_include: Performance
+  group: servers
+  provision_group: ubuntu_hosts
+- name: logstash-worker07.openstack.org
+  image_name: Ubuntu 12.04.4
+  flavor_ram: 4096
+  flavor_include: Performance
+  group: servers
+  provision_group: ubuntu_hosts
+- name: logstash-worker08.openstack.org
+  image_name: Ubuntu 12.04.4
+  flavor_ram: 4096
+  flavor_include: Performance
+  group: servers
+  provision_group: ubuntu_hosts
+- name: logstash-worker09.openstack.org
+  image_name: Ubuntu 12.04.4
+  flavor_ram: 4096
+  flavor_include: Performance
+  group: servers
+  provision_group: ubuntu_hosts
+- name: logstash-worker10.openstack.org
+  image_name: Ubuntu 12.04.4
+  flavor_ram: 4096
+  flavor_include: Performance
+  group: servers
+  provision_group: ubuntu_hosts
+- name: logstash-worker11.openstack.org
+  image_name: Ubuntu 12.04.4
+  flavor_ram: 4096
+  flavor_include: Performance
+  group: servers
+  provision_group: ubuntu_hosts
+- name: logstash-worker12.openstack.org
+  image_name: Ubuntu 12.04.4
+  flavor_ram: 4096
+  flavor_include: Performance
+  group: servers
+  provision_group: ubuntu_hosts
+- name: logstash-worker13.openstack.org
+  image_name: Ubuntu 12.04.4
+  flavor_ram: 4096
+  flavor_include: Performance
+  group: servers
+  provision_group: ubuntu_hosts
+- name: logstash-worker14.openstack.org
+  image_name: Ubuntu 12.04.4
+  flavor_ram: 4096
+  flavor_include: Performance
+  group: servers
+  provision_group: ubuntu_hosts
+- name: logstash-worker15.openstack.org
+  image_name: Ubuntu 12.04.4
+  flavor_ram: 4096
+  flavor_include: Performance
+  group: servers
+  provision_group: ubuntu_hosts
+- name: logstash-worker16.openstack.org
+  image_name: Ubuntu 12.04.4
+  flavor_ram: 4096
+  flavor_include: Performance
+  group: servers
+  provision_group: ubuntu_hosts
+- name: logstash-worker17.openstack.org
+  image_name: Ubuntu 12.04.4
+  flavor_ram: 4096
+  flavor_include: Performance
+  group: servers
+  provision_group: ubuntu_hosts
+- name: logstash-worker18.openstack.org
+  image_name: Ubuntu 12.04.4
+  flavor_ram: 4096
+  flavor_include: Performance
+  group: servers
+  provision_group: ubuntu_hosts
+- name: logstash-worker19.openstack.org
+  image_name: Ubuntu 12.04.4
+  flavor_ram: 4096
+  flavor_include: Performance
+  group: servers
+  provision_group: ubuntu_hosts
+- name: logstash-worker20.openstack.org
+  image_name: Ubuntu 12.04.4
+  flavor_ram: 4096
+  flavor_include: Performance
+  group: servers
+  provision_group: ubuntu_hosts
+- name: logstash.openstack.org
+  image_name: Ubuntu 12.04.4
+  flavor_ram: 2048
+  group: servers
+  provision_group: ubuntu_hosts
+- name: nodepool.openstack.org
+  image_name: Ubuntu 12.04.4
+  flavor_ram: 8192
+  group: servers
+  provision_group: ubuntu_hosts
+- name: openstackid-dev.openstack.org
+  image_name: Ubuntu 12.04.4
+  flavor_ram: 2048
+  group: servers
+  provision_group: ubuntu_hosts
+- name: paste.openstack.org
+  image_name: Ubuntu 12.04.4
+  flavor_ram: 2048
+  group: servers
+  provision_group: ubuntu_hosts
+- name: pbx.openstack.org
+  image_name: Ubuntu 12.04.4
+  flavor_ram: 2048
+  group: servers
+  provision_group: ubuntu_hosts
+- name: planet.openstack.org
+  image_name: Ubuntu 12.04.4
+  flavor_ram: 1024
+  group: servers
+  provision_group: ubuntu_hosts
+- name: puppetdb.openstack.org
+  image_name: Ubuntu 12.04.4
+  flavor_ram: 2048
+  flavor_include: Performance
+  group: servers
+  provision_group: ubuntu_hosts
+- name: review-dev.openstack.org
+  image_name: Ubuntu 12.04.4
+  flavor_ram: 8192
+  group: servers
+  provision_group: ubuntu_hosts
+- name: review.openstack.org
+  image_name: Ubuntu 12.04.4
+  flavor_ram: 30720
+  flavor_include: Performance
+  group: servers
+  provision_group: ubuntu_hosts
+- name: stackalytics.openstack.org
+  image_name: Ubuntu 12.04.4
+  flavor_ram: 8192
+  flavor_include: Performance
+  group: servers
+  provision_group: ubuntu_hosts
+- name: static.openstack.org
+  image_name: Ubuntu 12.04.4
+  flavor_ram: 8192
+  group: servers
+  provision_group: ubuntu_hosts
+- name: status.openstack.org
+  image_name: Ubuntu 12.04.4
+  flavor_ram: 4096
+  flavor_include: Performance
+  group: servers
+  provision_group: ubuntu_hosts
+- name: storyboard-dev.openstack.org
+  image_name: Ubuntu 12.04.4
+  flavor_ram: 4096
+  flavor_include: Performance
+  group: servers
+  provision_group: ubuntu_hosts
+- name: storyboard.openstack.org
+  image_name: Ubuntu 12.04.4
+  flavor_ram: 4096
+  flavor_include: Performance
+  group: servers
+  provision_group: ubuntu_hosts
+- name: summit.openstack.org
+  image_name: Ubuntu 12.04.4
+  flavor_ram: 1024
+  group: servers
+  provision_group: ubuntu_hosts
+- name: translate.openstack.org
+  image_name: Ubuntu 12.04.4
+  flavor_ram: 8192
+  group: servers
+  provision_group: ubuntu_hosts
+- name: wiki.openstack.org
+  image_name: wiki.openstack.org
+  flavor_ram: 8192
+  group: servers
+  provision_group: fedora_hosts
+- name: zm01.openstack.org
+  image_name: Ubuntu 12.04.4
+  flavor_ram: 8192
+  flavor_include: Performance
+  group: servers
+  provision_group: ubuntu_hosts
+- name: zm02.openstack.org
+  image_name: Ubuntu 12.04.4
+  flavor_ram: 8192
+  flavor_include: Performance
+  group: servers
+  provision_group: ubuntu_hosts
+- name: zuul-dev.openstack.org
+  image_name: Ubuntu 12.04.4
+  flavor_ram: 1024
+  group: servers
+  provision_group: ubuntu_hosts
+- name: zuul.openstack.org
+  image_name: Ubuntu 12.04.4
+  flavor_ram: 30720
+  flavor_include: Performance
+  group: servers
+  provision_group: ubuntu_hosts
+volumes:
+- graphite.openstack.org/main01 graphite.openstack.org/main02 pypi.dfw.openstack.org/main01
+  review.openstack.org/main01 static.openstack.org/main01 static.openstack.org/main02
+  static.openstack.org/main03 static.openstack.org/main04 static.openstack.org/main05
+  static.openstack.org/main06 static.openstack.org/main07 static.openstack.org/main08
+  static.openstack.org/main09 static.openstack.org/main10 static.openstack.org/main11
+  static.openstack.org/main12 static.openstack.org/main13 static.openstack.org/main14
+  zuul.openstack.org/main01 elasticsearch02.openstack.org/main01
+

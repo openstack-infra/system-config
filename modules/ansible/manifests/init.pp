@@ -36,17 +36,11 @@ class ansible (
   }
 
   file { '/etc/ansible/roles':
-    ensure  => directory,
-    recurse => true,
-    source  => 'puppet:///modules/ansible/roles',
-    require => File['/etc/ansible'],
+    ensure => absent,
   }
 
   file { '/etc/ansible/library':
-    ensure  => directory,
-    recurse => true,
-    source  => 'puppet:///modules/ansible/library',
-    require => File['/etc/ansible'],
+    ensure => absent,
   }
 
   include logrotate
