@@ -1,0 +1,49 @@
+---
+- name: Launch Node
+  os_compute:
+      cloud: "{{ cloud }}"
+      region_name: "{{ region_name }}"
+      name: "{{ name }}"
+      image_name: "{{ image_name }}"
+      flavor_ram: "{{ flavor_ram }}"
+      flavor_include: "{{ flavor_include }}"
+      meta:
+          group: "{{ group }}"
+      key_name: "{{ launch_keypair }}"
+  register: node
+- name: Create volumes
+  os_volume:
+      cloud: "{{ cloud }}"
+      size: "{{ item.size }}"
+      display_name: "{{ item.display_name }}"
+  with_items: volumes
+- name: Attach volumes
+  os_compute_volume:
+      cloud: "{{ cloud }}"
+      server_id: "{{ node.id }}"
+      volume_name: "{{ item.display_name }}"
+  with_items: volumes
+  register: attached_volumes
+- name: Re-request server to get up to date metadata after the volume loop
+  os_compute_facts:
+      cloud: "{{ cloud }}"
+      name: "{{ name }}"
+  when: attached_volumes.changed
+- name: Wait for SSH to work
+  wait_for: host={{ node.openstack.interface_ip }} port=22
+  when: node.changed == True
+- name: Add SSH host key to known hosts
+  shell: ssh-keyscan "{{ node.openstack.interface_ip|quote }}" >> ~/.ssh/known_hosts
+  when: node.changed == True
+- name: Add all instance public IPs to host group
+  add_host:
+      name: "{{ node.openstack.interface_ip }}"
+      groups: "{{ provision_group }}"
+      openstack: "{{ node.openstack }}"
+  when: attached_volumes|length == 0
+- name: Add all instance public IPs to host and volumes group
+  add_host:
+      name: "{{ node.openstack.interface_ip }}"
+      groups: "{{ provision_group }},hasvolumes"
+      openstack: "{{ node.openstack }}"
+  when: attached_volumes|length != 0
