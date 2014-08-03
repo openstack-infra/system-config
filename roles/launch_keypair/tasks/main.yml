@@ -1,0 +1,6 @@
+---
+- name: Add Launch Keypair
+  os_keypair:
+      cloud: "{{ cloud }}"
+      name: "{{ launch_keypair }}"
+      public_key: "{{ lookup('file', '~/.ssh/id_rsa.pub') }}"

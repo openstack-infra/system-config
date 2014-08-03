@@ -1,0 +1,44 @@
+---
+- shell: Find LVM tools
+  register: lvm_exists
+  ignore_errors: True
+
+- name: Install lvm on Redhat derivatives
+  sudo: yes
+  yum: name=lvm state=installed
+  when: ansible_os_family == 'RedHat' and lvm_exists|failed
+
+- name: Install lvm2 on Debian derivatives
+  sudo: yes
+  apt: name=lvm2 state=installed update_cache=yes
+  when: ansible_os_family == 'Debian' and lvm_exists|failed
+
+- name: Get volume group mapping
+  volume_mapping:
+    openstack: "{{ openstack }}"
+    host: "{{ host }}"
+  register: mapping
+- debug: var=mapping
+- name: Make volume groups
+  lvg:
+    vg: "{{ item.key }}"
+    pvs: "{{ item.value }}"
+  with_dict: mapping.volumes
+- name: Make logical volumes
+  lvol: 
+    lv: "{{ item.key }}"
+    vg: "{{ item.value.vg }}"
+    size: "{{ item.value.size }}"
+  with_dict: mapping.lvs
+- name: Make filesystem
+  filesystem:
+    fstype: "{{ item.value.fstype }}"
+    dev: "{{ item.value.device }}"
+  with_dict: mapping.lvs
+- name: Mount volume
+  mount:
+    src: "{{ item.value.device }}"
+    name: "{{ item.value.mount }}"
+    fstype: "{{ item.value.fstype }}"
+    state: mounted
+  with_dict: mapping.lvs

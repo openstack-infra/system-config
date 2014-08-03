@@ -1,0 +1,15 @@
+---
+hostlist:
+  test-ansible:
+    image_name: Ubuntu Server 14.04.1 LTS (amd64 20140927) - Partner Image
+    flavor_ram: 1024
+    group: servers
+    provision_group: ubuntu_hosts
+    volumes:
+    - display_name: test-ansible/main01
+      size: 5
+    volume_groups:
+      main:
+        testme:
+          size: 1024
+          mount: /mnt/foo

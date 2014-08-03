@@ -1,0 +1,185 @@
+hostlist:
+  cloud: rackspace
+  region: DFW
+  domain: openstack.org
+  precise:
+    image_name: Ubuntu 12.04.4
+    provision_group: ubuntu_hosts
+    hosts:
+      ask-staging:
+        flavor_ram: 1024
+      ask:
+        flavor_ram: 2048
+      cacti:
+        flavor_ram: 1024
+      eavesdrop:
+        flavor_ram: 1024
+      etherpad-dev:
+        flavor_ram: 2048
+      etherpad:
+        flavor_ram: 2048
+      git:
+        flavor_ram: 8192
+      graphite:
+        flavor_ram: 2048
+        volume_groups:
+        - name: main
+          logical_volumes:
+          - name: graphite
+            size: 2048
+            mount: /var/lib/graphite/storage
+        volumes:
+          - size: 1024
+            vg: main
+            count: 2
+      groups:
+        flavor_ram: 1024
+      jenkins-dev:
+        flavor_ram: 8192
+      jenkins:
+        flavor_ram: 30720
+      lists:
+        flavor_ram: 4096
+      logstash:
+        flavor_ram: 2048
+      nodepool:
+        flavor_ram: 8192
+      openstackid-dev:
+        flavor_ram: 2048
+      paste:
+        flavor_ram: 2048
+      pbx:
+        flavor_ram: 2048
+      planet:
+        flavor_ram: 1024
+      puppetdb:
+        flavor_ram: 2048
+        flavor_include: Performance
+      review-dev:
+        flavor_ram: 8192
+      review:
+        flavor_ram: 30720
+        flavor_include: Performance
+        volume_groups:
+        - name: main
+          logical_volumes:
+          - name: gerrit
+            size: 100
+            mount: /home/gerrit2
+        volumes:
+        - size: 100
+          vg: main
+      stackalytics:
+        flavor_ram: 8192
+        flavor_include: Performance
+      static:
+        flavor_ram: 8192
+        volume_groups:
+        - name: main
+          logical_volumes:
+          - name: static
+            size: 100
+            mount: /srv/static
+          - name: docs--draft
+            size: 1500
+            mount: /srv/static/docs-draft
+          - name: tarballs
+            size: 200
+            mount: /srv/static/tarballs
+          - name: mirror
+            size: 150
+            mount: /srv/static/mirror
+          - name: logs
+            size: 12000
+            mount: /srv/static/logs
+        volumes:
+          - size: 1024
+            vg: main
+            count: 14
+      status:
+        flavor_ram: 4096
+        flavor_include: Performance
+      storyboard-dev:
+        flavor_ram: 4096
+        flavor_include: Performance
+      storyboard:
+        flavor_ram: 4096
+        flavor_include: Performance
+      summit:
+        flavor_ram: 1024
+      translate:
+        flavor_ram: 8192
+      wiki:
+        flavor_ram: 8192
+      zuul-dev:
+        flavor_ram: 1024
+      zuul:
+        flavor_ram: 30720
+        flavor_include: Performance
+  elasticsearch:
+    image_name: Ubuntu 12.04.4
+    provision_group: ubuntu_hosts
+    flavor_include: Performance
+    flavor_ram: 61440
+    volume_groups:
+      - name: main
+        logical_volumes:
+        - name: elasticsearch
+          size: 1024
+          mount: /var/lib/elasticsearch
+    volumes:
+      - size: 1024
+        vg: main
+    count: 7
+    hosts:
+      elasticsearch07:
+        volumes:
+        - display_name: elasticsearch07.openstack.org/ssd01
+          size: 1024
+          vg: main
+          volume_type: ssd
+  git:
+    image_name: CentOS 6.4
+    flavor_ram: 8192
+    flavor_include: Performance
+    provision_group: centos_hosts
+    count: 5
+  jenkins:
+    image_name: Ubuntu 12.04.4
+    flavor_ram: 30720
+    provision_group: ubuntu_hosts
+    flavor_include: Performance
+    count: 7
+    hosts:
+      jenkins02:
+        flavor_ram: 30720
+  logstash-worker:
+    image_name: Ubuntu 12.04.4
+    provision_group: ubuntu_hosts
+    flavor_ram: 4096
+    flavor_include: Performance
+    count: 20
+  pypi:
+    image_name: Ubuntu 12.04.4
+    provision_group: ubuntu_hosts
+    volumes:
+      - size: 200
+        mount: /srv
+    hosts:
+      pypi.dfw:
+        flavor_ram: 2048
+      pypi.iad:
+        flavor_ram: 2048
+        region: IAD
+      pypi.ord:
+        flavor_ram: 2048
+        region: ORD
+      pypi.region-b.geo-1:
+        cloud: hp
+        flavor_ram: 2048
+  zm:
+    image_name: Ubuntu 12.04.4
+    flavor_ram: 8192
+    flavor_include: Performance
+    provision_group: ubuntu_hosts
+    count: 8
