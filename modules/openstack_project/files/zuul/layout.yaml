@@ -1164,6 +1164,7 @@ projects:
       - check-tempest-dsvm-cells-full
       - check-tempest-dsvm-neutron-pg
       - check-tempest-dsvm-nova-v3-full
+      - check-nova-docker-dsvm
     experimental-tripleo:
       - check-tripleo-novabm-undercloud-precise-nonha
       - check-tripleo-ironic-undercloud-precise-nonha
