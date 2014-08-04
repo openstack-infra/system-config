@@ -682,7 +682,7 @@ jobs:
     voting: false
   - name: gate-oslo-incubator-python33
     branch: ^(?!stable/havana).*$
-  - name: check-nova-docker-dsvm
+  - name: check-tempest-dsvm-docker
     voting: false
   - name: check-neutron-dsvm-functional
     branch: ^(?!stable/havana).*$
@@ -1164,6 +1164,7 @@ projects:
       - check-tempest-dsvm-cells-full
       - check-tempest-dsvm-neutron-pg
       - check-tempest-dsvm-nova-v3-full
+      - check-tempest-dsvm-docker
     experimental-tripleo:
       - check-tripleo-novabm-undercloud-precise-nonha
       - check-tripleo-ironic-undercloud-precise-nonha
@@ -1187,7 +1188,7 @@ projects:
       - name: python-jobs
       - name: check-requirements
     check:
-      - check-nova-docker-dsvm
+      - check-tempest-dsvm-docker
 
   - name: openstack/pycadf
     template:
