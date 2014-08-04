@@ -736,6 +736,8 @@ jobs:
     voting: false
   - name: gate-tempest-dsvm-ceilometer-mongodb-full
     voting: false
+  - name: gate-openstack-doc-tools-pylint
+    voting: false
 
 # The project list is grouped by type of project, and within each
 # group, projects are sorted (mostly) alphabetically.
@@ -1754,8 +1756,10 @@ projects:
       - name: publish-to-pypi
     check:
       - gate-openstack-doc-tools-pep8
+      - gate-openstack-doc-tools-pylint
     gate:
       - gate-openstack-doc-tools-pep8
+      - gate-openstack-doc-tools-pylint
 
   - name: openstack/openstack-planet
     check:
