@@ -240,6 +240,24 @@ openstack-qa:
     branches:
       - master
 
+openstack-monasca:
+    events:
+      - patchset-created
+      - change-merged
+      - x-vrif-minus-2
+    projects:
+      - stackforge/monasca-notification
+      - stackforge/python-monascaclient
+      - stackforge/python-monasca-api
+      - stackforge/monasca-api
+      - stackforge/monasca-thresh
+      - stackforge/monasca-ui
+      - stackforge/monasca-common
+      - stackforge/monasca-agent
+      - stackforge/monasca-persister
+    branches:
+      - master
+
 puppet-openstack:
     events:
       - patchset-created
