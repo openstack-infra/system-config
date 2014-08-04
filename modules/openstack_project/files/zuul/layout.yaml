@@ -732,6 +732,8 @@ jobs:
     voting: false
   - name: ^(gate|check)-marconi-python33
     branch: ^(?!stable/(havana|icehouse)).*$
+  - name: ^(gate|check)-.*marconi.*$
+    parameter-function: set_node_options_default_trusty
   - name: gate-tempest-dsvm-ceilometer-mongodb
     voting: false
   - name: gate-tempest-dsvm-ceilometer-mongodb-full
