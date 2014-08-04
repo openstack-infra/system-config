@@ -250,6 +250,7 @@ project-templates:
       - 'gate-grenade-dsvm'
     experimental:
       - 'check-grenade-dsvm-neutron'
+      - 'check-tempest-dsvm-full-ceph'
 
   - name: integrated-gate-neutron
     check:
