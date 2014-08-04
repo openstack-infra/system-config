@@ -19,26 +19,12 @@
   <!--[if lt IE 8]><link rel="stylesheet" href="http://openstack.org/themes/openstack/css/blueprint/ie.css" type="text/css" media="screen, projection"><![endif]-->
   <!-- OpenStack Specific CSS -->
   <link href="http://openstack.org/themes/openstack/css/main.css" media="screen, projection, print" rel="stylesheet" type="text/css"/>
+  <link href="http://docs.openstack.org/common/css/main-landing.css" media="screen, projection, print" rel="stylesheet" type="text/css"/>
   <link href="http://openstack.org/themes/openstack/css/dropdown.css" rel="stylesheet" type="text/css"/>
 
  </HEAD>
 
-  <BODY>
  <body class="docshome" id="docshome">
-  <!-- Top Site Banner -->
-  <div class="topMessage">
-   <div class="container">
-    <div class="span-24 last">
-     <p>
-      Need help with a development problem?
-      <a class="roundedButton" href="https://ask.openstack.org/en/questions/">
-       Ask OpenStack
-      </a>
-     </p>
-    </div>
-   </div>
-  </div>
-  <!-- End Site Banner -->
   <div class="container">
    <div id="header">
     <div class="span-5">
@@ -100,54 +86,91 @@
      </div>
     </div>
    </div>
-   <div class="span-17">
-    <p>
-    </p>
-   </div>
- </div>
-    <div class="container">
-      <div class="opener span-24 last">
-        <h1>OpenStack Specifications</h1>
 
+  <!-- Page Content -->
+  <div class="container">
+   <div class="span-12">
+    <h3 class="subhead">
+      Specifications
+    </h3>
+   </div>
+   <div class="searchArea span-10 last">
+   </div>
+  </div>
+  <div class="container">
+   <div class="span-12">
+   </div>
+  </div>
+  <div class="container">
+   <div class="span-12">
+    <div>
+    </div>
+   </div>
+   <div class="span-12" id="subnav">
+    <ul class="subsectionNav">
+     <li class="link">
+      <a>
+       Projects
+      </a>
+     </li>
+    </ul>
+   <!-- This lists follows the naming of
+        http://docs.openstack.org/developer/openstack-projects.html -->
     <dl>
+     <dd>
+      <a href="openstack/ironic-specs">
+       Bare Metal Provisioning Specifications (ironic)
+      </a>
+     </dd>
+     <dd>
+       <a href="openstack/nova-specs/">Compute Service
+         Specifications (nova)</a>
+     </dd>
+     <dd>
+       <a href="openstack/sahara-specs/">Data Processing Service
+         Specifications (sahara)</a>
+     </dd>
+     <dd>
+        <a href="openstack/keystone-specs/">Identity Program
+          Specifications (keystone)</a>
+     </dd>
+     <dd>
+        <a href="openstack/barbican-specs/">Key Management Service
+        Specifications (barbican)</a>
+      </dd>
+
       <dd>
-        <a href="openstack/barbican-specs/">Barbican Project
-          Specifications</a>
+        <a href="openstack/neutron-specs/">Networking Service
+        Developer Specifications (neutron)</a>
       </dd>
       <dd>
-        <a href="openstack/sahara-specs/">Data Processing Service
-          Specifications</a>
+        <a href="openstack/ceilometer-specs/">Telemetry Service
+          Specifications (ceilometer)</a>
       </dd>
-      <dd>
+    </dl>
+   </div>
+   <div class="span-12 last-right" id="subnav-right">
+    <ul class="subsectionNav last-right">
+     <li class="link">
+      <a>
+       Programs
+      </a>
+     </li>
+    </ul>
+    <dl>
+     <dd>
         <a href="openstack/docs-specs/">Documentation Program
           Specifications</a>
       </dd>
       <dd>
-        <a href="openstack/keystone-specs/">Identity Program
-          Specifications</a>
-      </dd>
-      <dd>
-        <a href="openstack/ironic-specs/">Ironic Project
-          Specifications</a>
-      </dd>
-      <dd>
-        <a href="openstack/neutron-specs/">Neutron Project
-          Specifications</a>
-      </dd>
-      <dd>
-        <a href="openstack/nova-specs/">Nova Project
-          Specifications</a>
-      </dd>
-      <dd>
-        <a href="openstack/ceilometer-specs/">Telemetry Program
-          Specifications</a>
-      </dd>
-      <dd>
-        <a href="openstack/qa-specs/">QA Project
+        <a href="openstack/qa-specs/">QA Program
           Specifications</a>
       </dd>
     </dl>
-      </div>
+   </div>
+  </div>
+  <!-- Page Content -->
+
     <script type="text/javascript">footer();</script>
   </BODY>
 </html>
