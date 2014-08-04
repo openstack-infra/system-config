@@ -1011,7 +1011,7 @@
           export PYTHONUNBUFFERED=true
           export DEVSTACK_GATE_TIMEOUT=120
           export DEVSTACK_GATE_TEMPEST=0
-          export DEVSTACK_GATE_GRENADE=1
+          export DEVSTACK_GATE_GRENADE=pullup
           export BRANCH_OVERRIDE={branch-override}
           if [ "$BRANCH_OVERRIDE" != "default" ] ; then
               export OVERRIDE_ZUUL_BRANCH=$BRANCH_OVERRIDE
@@ -1042,8 +1042,7 @@
           export PYTHONUNBUFFERED=true
           export DEVSTACK_GATE_TIMEOUT=120
           export DEVSTACK_GATE_TEMPEST=0
-          export DEVSTACK_GATE_GRENADE=1
-          export DEVSTACK_GATE_GRENADE_FORWARD=1
+          export DEVSTACK_GATE_GRENADE=forward
           export BRANCH_OVERRIDE={branch-override}
           if [ "$BRANCH_OVERRIDE" != "default" ] ; then
               export OVERRIDE_ZUUL_BRANCH=$BRANCH_OVERRIDE
@@ -1074,7 +1073,7 @@
           export PYTHONUNBUFFERED=true
           export DEVSTACK_GATE_TIMEOUT=120
           export DEVSTACK_GATE_TEMPEST=0
-          export DEVSTACK_GATE_GRENADE=1
+          export DEVSTACK_GATE_GRENADE=pullup
           export DEVSTACK_GATE_NEUTRON=1
           export BRANCH_OVERRIDE={branch-override}
           if [ "$BRANCH_OVERRIDE" != "default" ] ; then
@@ -1106,9 +1105,8 @@
           export PYTHONUNBUFFERED=true
           export DEVSTACK_GATE_TIMEOUT=120
           export DEVSTACK_GATE_TEMPEST=0
-          export DEVSTACK_GATE_GRENADE=1
+          export DEVSTACK_GATE_GRENADE=forward
           export DEVSTACK_GATE_NEUTRON=1
-          export DEVSTACK_GATE_GRENADE_FORWARD=1
           export BRANCH_OVERRIDE={branch-override}
           if [ "$BRANCH_OVERRIDE" != "default" ] ; then
               export OVERRIDE_ZUUL_BRANCH=$BRANCH_OVERRIDE
@@ -1139,8 +1137,7 @@
           export PYTHONUNBUFFERED=true
           export DEVSTACK_GATE_TIMEOUT=120
           export DEVSTACK_GATE_TEMPEST=0
-          export DEVSTACK_GATE_GRENADE=1
-          export DEVSTACK_GATE_GRENADE_PARTIAL_NCPU=1
+          export DEVSTACK_GATE_GRENADE=partial-ncpu
           export BRANCH_OVERRIDE={branch-override}
           if [ "$BRANCH_OVERRIDE" != "default" ] ; then
               export OVERRIDE_ZUUL_BRANCH=$BRANCH_OVERRIDE
