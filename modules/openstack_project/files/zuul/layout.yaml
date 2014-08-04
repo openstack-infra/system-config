@@ -406,6 +406,8 @@ jobs:
   - name: ^gate-pecan-tox-ceilometer-.*$
     parameter-function: set_node_options_default_trusty
   # IPA image builds need docker which requires trusty
+  - name: ^(gate|check)-.*marconi.*$
+    parameter-function: set_node_options_default_trusty
   - name: ironic-python-agent-buildimage-coreos
     parameter-function: set_node_options_default_trusty
   - name: gate-ironic-python-agent-buildimage-coreos
