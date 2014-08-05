@@ -244,7 +244,7 @@ class drupal (
 
   cron { $site_name:
     name    => "${site_name}.cron",
-    command => "wget -O - -q -t 1 ${$site_base_url}/cron.php?cron_key=${$conf_cron_key}",
+    command => "wget -O /dev/null -q -t 1 ${$site_base_url}/cron.php?cron_key=${$conf_cron_key}",
     user    => root,
     minute  => '*/5',
     require => [
