@@ -2799,7 +2799,12 @@
 
     jobs:
       - python-jobs
+      - pypi-jobs
       - hook-{name}-rtfd
+      - gate-{name}-tox-{envlist}:
+          envlist: keystoneclient-tip
+      - gate-{name}-tox-{envlist}:
+          envlist: novaclient-tip
 
 - project:
     name: stacktach
