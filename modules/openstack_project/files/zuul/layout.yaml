@@ -1304,17 +1304,13 @@ projects:
   - name: openstack/tuskar
     template:
       - name: python-jobs
+      - name: publish-to-pypi
     check-tripleo:
       - check-tripleo-ironic-undercloud-precise-nonha
       - check-tripleo-novabm-undercloud-precise-nonha
       - check-tripleo-novabm-overcloud-f20-nonha
     experimental-tripleo:
       - check-tripleo-novabm-overcloud-precise-nonha
-    pre-release:
-      - tuskar-tarball
-    release:
-      - tuskar-tarball:
-        - tuskar-pypi-both-upload
 
 # Section: OpenStack client projects
 
@@ -1686,11 +1682,7 @@ projects:
       - name: integrated-gate
       - name: stable-compat-jobs
       - name: translation-jobs
-    pre-release:
-      - django_openstack_auth-tarball
-    release:
-      - django_openstack_auth-tarball:
-        - django_openstack_auth-pypi-both-upload
+      - name: publish-to-pypi
 
   - name: stackforge/gertty
     check:
@@ -4663,6 +4655,7 @@ projects:
   - name: stackforge/stackalytics
     template:
       - name: docs-on-rtfd
+      - name: publish-to-pypi
     check:
       - gate-stackalytics-docs
       - gate-stackalytics-pep8
@@ -4677,11 +4670,6 @@ projects:
       - gate-stackalytics-python33
     post:
       - stackalytics-branch-tarball
-    pre-release:
-      - stackalytics-tarball
-    release:
-      - stackalytics-tarball:
-        - stackalytics-pypi-both-upload
 
   - name: stackforge/swift-ceph-backend
     check:
