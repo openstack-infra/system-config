@@ -2636,8 +2636,6 @@ projects:
       - noop
 
   - name: openstack-infra/bugdaystats
-    template:
-      - name: publish-to-pypi
     check:
       - gate-bugdaystats-pep8
     gate:
@@ -2873,8 +2871,6 @@ projects:
       - nodepool-docs
 
   - name: openstack-infra/nose-html-output
-    template:
-      - name: publish-to-pypi
     check:
       - noop
     gate:
@@ -3156,7 +3152,6 @@ projects:
 
   - name: stackforge/billingstack
     template:
-      - name: publish-to-pypi
       - name: docs-on-rtfd
     check:
       - gate-billingstack-pep8
@@ -3171,8 +3166,6 @@ projects:
       - billingstack-branch-tarball
 
   - name: stackforge/bindep
-    template:
-      - name: publish-to-pypi
     check:
       - gate-bindep-pep8
       - gate-bindep-python26
@@ -3649,7 +3642,6 @@ projects:
     template:
       - name: python-jobs
       - name: python3-jobs
-      - name: publish-to-pypi
 
   - name: stackforge/mistral-extra
     template:
@@ -4511,7 +4503,6 @@ projects:
     template:
       - name: python-jobs
       - name: check-requirements
-      - name: publish-to-pypi
     check:
       - gate-solum-dashboard-pypy
     gate:
@@ -4727,8 +4718,6 @@ projects:
       - swiftsync-tarball
 
   - name: stackforge/tomograph
-    template:
-      - name: publish-to-pypi
     check:
       - gate-tomograph-pep8
       - gate-tomograph-python26
