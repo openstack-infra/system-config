@@ -110,7 +110,7 @@
 - project:
     name: monasca-common
     github-org: stackforge
-    node: 'bare-precise || bare-trusty'
+    node: bare-trusty
     tarball-site: tarballs.openstack.org
 
     jobs:
@@ -129,7 +129,7 @@
 - project:
     name: monasca-thresh
     github-org: stackforge
-    node: 'bare-precise || bare-trusty'
+    node: bare-trusty
     tarball-site: tarballs.openstack.org
 
     jobs:

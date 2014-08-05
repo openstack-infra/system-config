@@ -434,6 +434,14 @@ jobs:
     parameter-function: set_node_options_default_trusty
   - name: ^gate-trove-.*$
     parameter-function: set_node_options_default_trusty
+  - name: ^gate-monasca-common.*$
+    parameter-function: set_node_options_default_trusty
+  - name: ^monasca-common.*$
+    parameter-function: set_node_options_default_trusty
+  - name: ^gate-monasca-thresh.*$
+    parameter-function: set_node_options_default_trusty
+  - name: ^monasca-thresh.*$
+    parameter-function: set_node_options_default_trusty
   - name: ^gate-python-cinderclient.*$
     parameter-function: set_node_options_default_trusty
   - name: ^gate-python-glanceclient.*$
