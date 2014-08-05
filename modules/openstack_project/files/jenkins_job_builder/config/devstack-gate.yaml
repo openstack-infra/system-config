@@ -474,96 +474,22 @@
       - devstack-logs
       - console-log
 
-
-- job-template:
-    name: '{pipeline}-tempest-dsvm-ironic{branch-designator}'
-    node: '{node}'
-
-    wrappers:
-      - build-timeout:
-          timeout: 125
-      - timestamps
-
+- builder:
+    # NOTE(adam_g): This is a temporary macro until we can define the Ironic d-s-g job in a
+    # standard, minimal fashion.
+    name: devstack-virtual-ironic
     builders:
-      - link-logs
-      - net-info
-      - devstack-checkout
-      - shell: |
-          #!/bin/bash -xe
-          export PYTHONUNBUFFERED=true
-          export DEVSTACK_GATE_TIMEOUT=120
-          export DEVSTACK_GATE_TEMPEST=1
-          export DEVSTACK_GATE_IRONIC=1
-          export DEVSTACK_GATE_SMOKE_SERIAL=1
-          export BRANCH_OVERRIDE={branch-override}
-          if [ "$BRANCH_OVERRIDE" != "default" ] ; then
-              export OVERRIDE_ZUUL_BRANCH=$BRANCH_OVERRIDE
-          fi
-
-          cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
-          ./safe-devstack-vm-gate-wrap.sh
-
-    publishers:
-      - devstack-logs
-      - console-log
-
-
-- job-template:
-    name: '{pipeline}-tempest-dsvm-ironic-postgres{branch-designator}'
-    node: '{node}'
-
-    wrappers:
-      - build-timeout:
-          timeout: 125
-      - timestamps
-
-    builders:
-      - link-logs
-      - net-info
-      - devstack-checkout
-      - shell: |
-          #!/bin/bash -xe
-          export PYTHONUNBUFFERED=true
-          export DEVSTACK_GATE_TIMEOUT=120
-          export DEVSTACK_GATE_TEMPEST=1
-          export DEVSTACK_GATE_POSTGRES=1
-          export DEVSTACK_GATE_IRONIC=1
-          export DEVSTACK_GATE_SMOKE_SERIAL=1
-          export BRANCH_OVERRIDE={branch-override}
-          if [ "$BRANCH_OVERRIDE" != "default" ] ; then
-              export OVERRIDE_ZUUL_BRANCH=$BRANCH_OVERRIDE
-          fi
-
-          cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
-          ./safe-devstack-vm-gate-wrap.sh
-
-    publishers:
-      - devstack-logs
-      - console-log
-
-
-- job-template:
-    name: '{pipeline}-tempest-dsvm-virtual-ironic{branch-designator}'
-    node: '{node}'
-
-    wrappers:
-      - build-timeout:
-          timeout: 125
-      - timestamps
-
-    builders:
-      - link-logs
-      - net-info
-      - devstack-checkout
       - shell: |
           #!/bin/bash -xe
           export PYTHONUNBUFFERED=true
           export DEVSTACK_GATE_TEMPEST_DISABLE_TENANT_ISOLATION=1
           export DEVSTACK_GATE_TIMEOUT=120
           export DEVSTACK_GATE_TEMPEST=1
+          export DEVSTACK_GATE_POSTGRES={postgres}
           export DEVSTACK_GATE_IRONIC=1
           export DEVSTACK_GATE_NEUTRON=1
           export DEVSTACK_GATE_VIRT_DRIVER=ironic
+          export DEVSTACK_GATE_IRONIC_DRIVER={deploy_driver}
           export TEMPEST_CONCURRENCY=1
           export BRANCH_OVERRIDE={branch-override}
           if [ "$BRANCH_OVERRIDE" != "default" ] ; then
@@ -603,10 +529,48 @@
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
 
+- job-template:
+    name: '{pipeline}-tempest-dsvm-ironic-pxe_ssh{branch-designator}'
+    node: '{node}'
+
+    wrappers:
+      - build-timeout:
+          timeout: 125
+      - timestamps
+
+    builders:
+      - link-logs
+      - net-info
+      - devstack-checkout
+      - devstack-virtual-ironic:
+          postgres: 0
+          deploy_driver: pxe_ssh
+          branch-override: '{branch-override}'
     publishers:
       - devstack-logs
       - console-log
 
+- job-template:
+    name: '{pipeline}-tempest-dsvm-ironic-pxe_ssh-postgres{branch-designator}'
+    node: '{node}'
+
+    wrappers:
+      - build-timeout:
+          timeout: 125
+      - timestamps
+
+    builders:
+      - link-logs
+      - net-info
+      - devstack-checkout
+      - devstack-virtual-ironic:
+          postgres: 1
+          deploy_driver: pxe_ssh
+          branch-override: '{branch-override}'
+
+    publishers:
+      - devstack-logs
+      - console-log
 
 - job-template:
     name: '{pipeline}-tempest-dsvm-zaqar{branch-designator}'
@@ -1514,9 +1478,8 @@
       - '{pipeline}-grenade-dsvm-partial-ncpu{branch-designator}'
       - '{pipeline}-grenade-dsvm-ironic-sideways{branch-designator}'
       - '{pipeline}-grenade-dsvm-neutron-sideways{branch-designator}'
-      - '{pipeline}-tempest-dsvm-ironic{branch-designator}'
-      - '{pipeline}-tempest-dsvm-ironic-postgres{branch-designator}'
-      - '{pipeline}-tempest-dsvm-virtual-ironic{branch-designator}'
+      - '{pipeline}-tempest-dsvm-ironic-pxe_ssh{branch-designator}'
+      - '{pipeline}-tempest-dsvm-ironic-pxe_ssh-postgres{branch-designator}'
       - '{pipeline}-tempest-dsvm-zaqar{branch-designator}'
       - '{pipeline}-tempest-dsvm-all{branch-designator}'
       - '{pipeline}-tempest-dsvm-coverage{branch-designator}'
