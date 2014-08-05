@@ -654,6 +654,10 @@ jobs:
     voting: false
   - name: gate-oslo.vmware-python33
     voting: false
+  - name: gate-solum-infra-guestagent-python33
+    voting: false
+  - name: gate-solum-infra-guestagent-pypy
+    voting: false
   - name: gate-solum-pypy
     voting: false
   - name: gate-solum-requirements
