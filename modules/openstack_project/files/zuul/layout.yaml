@@ -4597,6 +4597,12 @@ projects:
       - name: python-jobs
       - name: python3-jobs
       - name: pypy-jobs
+      - name: publish-to-pypi
+      - name: docs-on-rtfd
+    check:
+      - gate-requests-mock-keystoneclient-tip
+    gate:
+      - gate-requests-mock-keystoneclient-tip
 
   - name: stackforge/rubick
     check:
