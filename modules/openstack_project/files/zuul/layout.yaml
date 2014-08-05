@@ -459,11 +459,9 @@ jobs:
   - name: check-heat-dsvm-functional
     branch: ^(?!stable/(havana|icehouse)).*$
     voting: false
-  - name: check-tempest-dsvm-ironic-nv
+  - name: check-tempest-dsvm-ironic-pxe_ssh-nv
     voting: false
-  - name: check-tempest-dsvm-ironic-postgres-nv
-    voting: false
-  - name: check-tempest-dsvm-virtual-ironic-nv
+  - name: check-tempest-dsvm-ironic-pxe_ssh-postgres-nv
     voting: false
   - name: ^(gate|check)-tempest-dsvm-cells$
     voting: false
@@ -1028,15 +1026,13 @@ projects:
       - name: check-requirements
       - name: translation-jobs
     check:
-      - check-tempest-dsvm-ironic
-      - check-tempest-dsvm-ironic-postgres
-      - check-tempest-dsvm-virtual-ironic
+      - check-tempest-dsvm-ironic-pxe_ssh
+      - check-tempest-dsvm-ironic-pxe_ssh-postgres
     check-tripleo:
       - check-tripleo-ironic-undercloud-precise-nonha
     gate:
-      - gate-tempest-dsvm-ironic
-      - gate-tempest-dsvm-ironic-postgres
-      - gate-tempest-dsvm-virtual-ironic
+      - gate-tempest-dsvm-ironic-pxe_ssh
+      - gate-tempest-dsvm-ironic-pxe_ssh-postgres
     experimental:
       - check-grenade-dsvm-ironic-sideways
     pre-release:
@@ -1204,7 +1200,7 @@ projects:
       - check-devstack-dsvm-cells
       - gate-nova-pylint
       - check-grenade-dsvm-partial-ncpu
-      - check-tempest-dsvm-virtual-ironic-nv
+      - check-tempest-dsvm-ironic-pxe_ssh-nv
     gate:
       - gate-devstack-dsvm-cells
       - gate-grenade-dsvm-partial-ncpu
@@ -1534,15 +1530,13 @@ projects:
     check:
       - gate-python-ironicclient-python33
       - gate-python-ironicclient-pypy
-      - check-tempest-dsvm-ironic
-      - check-tempest-dsvm-virtual-ironic
+      - check-tempest-dsvm-ironic-pxe_ssh
     check-tripleo:
       - check-tripleo-ironic-undercloud-precise-nonha
     gate:
       - gate-python-ironicclient-python33
       - gate-python-ironicclient-pypy
-      - gate-tempest-dsvm-ironic
-      - gate-tempest-dsvm-virtual-ironic
+      - gate-tempest-dsvm-ironic-pxe_ssh
 
   - name: openstack/python-keystoneclient
     template:
@@ -1737,7 +1731,7 @@ projects:
       - gate-diskimage-builder-pep8
       - gate-diskimage-builder-python26
       - gate-diskimage-builder-python27
-      - check-tempest-dsvm-virtual-ironic
+      - check-tempest-dsvm-ironic-pxe_ssh
     check-tripleo:
       - check-tripleo-novabm-undercloud-precise-nonha
       - check-tripleo-ironic-undercloud-precise-nonha
@@ -1746,7 +1740,7 @@ projects:
       - gate-diskimage-builder-pep8
       - gate-diskimage-builder-python26
       - gate-diskimage-builder-python27
-      - gate-tempest-dsvm-virtual-ironic
+      - gate-tempest-dsvm-ironic-pxe_ssh
     experimental-tripleo:
       - check-tripleo-novabm-overcloud-precise-nonha
     post:
@@ -2374,8 +2368,8 @@ projects:
       - gate-tempest-docs
       - gate-tempest-python27
       - check-grenade-dsvm-partial-ncpu
-      - check-tempest-dsvm-ironic-nv
-      - check-tempest-dsvm-ironic-postgres-nv
+      - check-tempest-dsvm-ironic-pxe_ssh-nv
+      - check-tempest-dsvm-ironic-pxe_ssh-postgres-nv
       # icehouse compat jobs for tempest master
       - check-tempest-dsvm-full-icehouse
       - check-tempest-dsvm-neutron-icehouse
@@ -2384,7 +2378,7 @@ projects:
       - check-grenade-dsvm-neutron-icehouse
       - check-tempest-dsvm-postgres-full-icehouse
       - check-tempest-dsvm-neutron-full-icehouse
-      - check-tempest-dsvm-virtual-ironic-nv
+      - check-tempest-dsvm-ironic-pxe_ssh-nv
       - gate-tempest-dsvm-large-ops-icehouse
       - gate-tempest-dsvm-neutron-large-ops-icehouse
       - check-grenade-dsvm-partial-ncpu-icehouse
@@ -2676,9 +2670,8 @@ projects:
       - check-grenade-dsvm-partial-ncpu
       - check-neutron-dsvm-functional
       - check-swift-dsvm-functional
-      - check-tempest-dsvm-ironic-nv
-      - check-tempest-dsvm-ironic-postgres-nv
-      - check-tempest-dsvm-virtual-ironic-nv
+      - check-tempest-dsvm-ironic-pxe_ssh-nv
+      - check-tempest-dsvm-ironic-pxe_ssh-postgres-nv
       - check-tempest-dsvm-f20
     gate:
       - gate-devstack-bashate
@@ -2891,9 +2884,8 @@ projects:
       - check-tempest-dsvm-neutron-havana
       - check-tempest-dsvm-postgres-full-havana
       - check-devstack-dsvm-cells-havana
-      - check-tempest-dsvm-ironic-nv
-      - check-tempest-dsvm-ironic-postgres-nv
-      - check-tempest-dsvm-virtual-ironic-nv
+      - check-tempest-dsvm-ironic-pxe_ssh-nv
+      - check-tempest-dsvm-ironic-pxe_ssh-postgres-nv
       - check-tempest-dsvm-f20
     gate:
       - gate-devstack-gate-unittests
