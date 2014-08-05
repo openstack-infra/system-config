@@ -52,7 +52,7 @@ pipelines:
     trigger:
       gerrit:
         - event: ref-updated
-          ref: ^(?!(devnull|refs/.*)).*$
+          ref: ^(?!refs/).*$
 
   - name: tag
     description: This pipeline runs jobs in response to any tag event.
