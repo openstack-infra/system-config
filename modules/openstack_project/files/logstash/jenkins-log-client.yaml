@@ -55,6 +55,21 @@ source-files:
     tags:
       - screen
       - oslofmt
+  - name: logs/screen-designate-api.txt
+    tags:
+      - screen
+      - oslofmt
+    job-filter: '-designate-*'
+  - name: logs/screen-designate-central.txt
+    tags:
+      - screen
+      - oslofmt
+    job-filter: '-designate-*'
+  - name: logs/screen-designate-sink.txt
+    tags:
+      - screen
+      - oslofmt
+    job-filter: '-designate-*'
   - name: logs/screen-g-api.txt
     tags:
       - screen
