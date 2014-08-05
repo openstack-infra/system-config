@@ -14,6 +14,7 @@ class openstack_project::template (
   $certname                  = $::fqdn,
   $ca_server                 = undef,
   $enable_unbound            = true,
+  $ntp_servers               = [],
 ) {
   include ssh
   include snmpd
@@ -28,7 +29,9 @@ class openstack_project::template (
     rules6           => $iptables_rules6,
   }
 
-  class { 'ntp': }
+  class { 'ntp':
+    servers => $ntp_servers,
+  }
 
   class { 'openstack_project::base':
     install_users => $install_users,

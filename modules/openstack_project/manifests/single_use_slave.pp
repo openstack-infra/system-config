@@ -18,6 +18,7 @@ class openstack_project::single_use_slave (
   $all_mysql_privs = false,
   $enable_unbound = true,
   $ssh_key = $openstack_project::jenkins_ssh_key
+  $ntp_servers = [],
 ) inherits openstack_project {
   class { 'openstack_project::template':
     certname            => $certname,
@@ -25,6 +26,7 @@ class openstack_project::single_use_slave (
     install_users       => $install_users,
     install_resolv_conf => $install_resolv_conf,
     enable_unbound      => $enable_unbound,
+    $ntp_servers        => $ntp_servers,
     iptables_rules4     =>
       [
         # Ports 69 and 6385 allow to allow ironic VM nodes to reach tftp and
