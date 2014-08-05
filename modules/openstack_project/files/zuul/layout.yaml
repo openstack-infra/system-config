@@ -1698,6 +1698,14 @@ projects:
     gate:
       - noop
 
+  - name: stackforge/git-upstream
+    check:
+      - gate-git-upstream-pep8
+      - gate-git-upstream-python27
+    gate:
+      - gate-git-upstream-pep8
+      - gate-git-upstream-python27
+
   - name: stackforge/gerrit-dash-creator
     check:
       - noop

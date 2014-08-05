@@ -54,6 +54,8 @@ channels:
     mask: full_mask
   - name: fuel-tracker
     mask: full_mask
+  - name: git-upstream
+    mask: full_mask
   - name: heat
   - name: magnetodb
     mask: full_mask
