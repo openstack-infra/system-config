@@ -439,12 +439,12 @@
       - translation-jobs
       - 'gate-tempest-dsvm-ceilometer-{backend}{branch-designator}':
           backend: 'mongodb'
-          node: 'bare-trusty'
+          node: 'devstack-trusty'
           branch-designator: ''
           branch-override: default
       - 'gate-tempest-dsvm-ceilometer-{backend}-full{branch-designator}':
           backend: 'mongodb'
-          node: 'bare-trusty'
+          node: 'devstack-trusty'
           branch-designator: ''
           branch-override: default
 
