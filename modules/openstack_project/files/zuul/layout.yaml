@@ -642,6 +642,8 @@ jobs:
     voting: false
   - name: gate-murano-dashboard-requirements
     voting: false
+  - name: gate-oslo.db-python33
+    voting: false
   - name: gate-oslo.serialization-docs
     voting: false
   - name: gate-oslo.utils-docs
@@ -1937,8 +1939,10 @@ projects:
       - name: translation-jobs
     check:
       - check-devstack-dsvm-cells
+      - gate-oslo.db-python33
     gate:
       - gate-devstack-dsvm-cells
+      - gate-oslo.db-python33
     experimental-tripleo:
       - check-tripleo-novabm-undercloud-precise-nonha
       - check-tripleo-ironic-undercloud-precise-nonha
