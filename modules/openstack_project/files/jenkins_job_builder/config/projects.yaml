@@ -3064,7 +3064,10 @@
 
     jobs:
       - python-jobs
+      - pypi-jobs
       - hook-{name}-rtfd
+      - gate-{name}-tox-{envlist}:
+          envlist: keystoneclient-tip
 
 - project:
     name: stacktach
