@@ -136,6 +136,18 @@ A somewhat contrived voting example:
   meetbot | Yes (1): bar
   meetbot | No (1): foo
 
+Logging
+^^^^^^^
+
+Meetings are automatically logged and published at
+http://eavesdrop.openstack.org/meetings/
+
+The bot also has the ability to sit in a channel for the sole purpose of logging
+channel activity, not just meetings. Standard channel logs are sent to
+http://eavesdrop.openstack.org/irclogs/
+
+The configuration for specific channel logging can be found in
+:file:`modules/openstack_project/manifests/eavesdrop.pp`.
 
 .. _statusbot:
 
