@@ -70,6 +70,7 @@ class drupal (
   $package_branch = undef,
   $conf_cron_key = undef,
   $conf_markdown_directory = undef,
+  $conf_ga_account = undef,
 ) {
   include apache
   include pear
