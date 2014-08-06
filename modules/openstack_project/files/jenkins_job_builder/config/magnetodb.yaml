@@ -36,3 +36,27 @@
     publishers:
       - devstack-logs
       - console-log
+
+
+- job-template:
+    name: 'gate-magnetodb-cassandra-tox'
+
+    wrappers:
+      - build-timeout:
+          timeout: 40
+      - timestamps
+
+    builders:
+      - gerrit-git-prep
+      - shell: |
+          ./tools/install_cassandra_ccm.sh
+      - revoke-sudo
+      - tox:
+          envlist: '{envlist}'
+      - assert-no-extra-files
+
+    publishers:
+      - test-results
+      - console-log
+
+    node: '{node}'
