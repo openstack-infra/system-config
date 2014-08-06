@@ -2767,10 +2767,9 @@
     name: congress-specs
     github-org: stackforge
     node: 'bare-precise || bare-trusty'
-    tarball-site: tarballs.openstack.org
 
     jobs:
-      - python-jobs
+      - specs-jobs
 
 - project:
     name: rubick
