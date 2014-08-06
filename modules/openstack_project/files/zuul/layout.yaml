@@ -2485,6 +2485,7 @@ projects:
     post:
       - bashate-branch-tarball
       - bashate-coverage
+      - bashate-docs
 
   - name: openstack-dev/cookiecutter
     check:
