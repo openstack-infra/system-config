@@ -355,6 +355,9 @@
   description: Configure a cloud
 - project: openstack/os-collect-config
   description: Collect and cache metadata, run hooks on changes.
+- project: openstack/os-net-config
+  upstream: git://github.com/dprince/os-net-config.git
+  description: Host network configuration tool
 - project: openstack/os-refresh-config
   description: Restart services and coordinate data migration on Heat config changes.
 - project: openstack/oslo-incubator
