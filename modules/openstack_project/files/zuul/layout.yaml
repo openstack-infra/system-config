@@ -460,6 +460,8 @@ jobs:
     queue-name: integrated
   - name: gate-rally-dsvm-neutron-neutron
     voting: false
+  - name: gate-rally-dsvm-fakevirt-nova
+    voting: false
   - name: gate-rally-dsvm-fakevirt-heat
     voting: false
   - name: ^(gate|check)-tempest-dsvm-neutron-full$
@@ -1153,6 +1155,7 @@ projects:
       - check-tempest-dsvm-cells-full
       - check-tempest-dsvm-neutron-pg
       - check-tempest-dsvm-nova-v3-full
+      - gate-rally-dsvm-fakevirt-nova
     experimental-tripleo:
       - check-tripleo-ironic-seed-precise-nonha
       - check-tripleo-novabm-undercloud-precise-nonha
