@@ -826,6 +826,7 @@ projects:
       - gate-grenade-dsvm-forward
     experimental-tripleo:
       - check-tripleo-novabm-overcloud-precise-nonha
+      - check-tripleo-novabm-overcloud-f20-nonha
     pre-release:
       - cinder-tarball
     release:
@@ -924,6 +925,7 @@ projects:
       - check-tripleo-novabm-undercloud-precise-nonha
       - check-tripleo-ironic-undercloud-precise-nonha
       - check-tripleo-novabm-overcloud-precise-nonha
+      - check-tripleo-novabm-overcloud-f20-nonha
     pre-release:
       - glance-tarball
     release:
@@ -957,6 +959,7 @@ projects:
       - check-tripleo-novabm-undercloud-precise-nonha
       - check-tripleo-ironic-undercloud-precise-nonha
       - check-tripleo-novabm-overcloud-precise-nonha
+      - check-tripleo-novabm-overcloud-f20-nonha
     pre-release:
       - glance.store-tarball
     release:
@@ -979,6 +982,7 @@ projects:
       - check-tripleo-ironic-undercloud-precise-nonha
       - check-tripleo-novabm-overcloud-precise-nonha
       - check-tripleo-ironic-overcloud-precise-ha
+      - check-tripleo-novabm-overcloud-f20-nonha
     pre-release:
       - heat-tarball
     release:
@@ -1066,6 +1070,7 @@ projects:
       - check-tripleo-novabm-undercloud-precise-nonha
       - check-tripleo-ironic-undercloud-precise-nonha
       - check-tripleo-novabm-overcloud-precise-nonha
+      - check-tripleo-novabm-overcloud-f20-nonha
     pre-release:
       - keystone-tarball
     release:
@@ -1140,6 +1145,7 @@ projects:
       - check-tripleo-novabm-undercloud-precise-nonha
       - check-tripleo-ironic-undercloud-precise-nonha
       - check-tripleo-novabm-overcloud-precise-nonha
+      - check-tripleo-novabm-overcloud-f20-nonha
     pre-release:
       - neutron-tarball
     release:
@@ -1180,6 +1186,7 @@ projects:
       - check-tripleo-novabm-undercloud-precise-nonha
       - check-tripleo-ironic-undercloud-precise-nonha
       - check-tripleo-novabm-overcloud-precise-nonha
+      - check-tripleo-novabm-overcloud-f20-nonha
     pre-release:
       - nova-tarball
     release:
@@ -1262,6 +1269,7 @@ projects:
       - check-tripleo-novabm-undercloud-precise-nonha
       - check-tripleo-ironic-undercloud-precise-nonha
       - check-tripleo-novabm-overcloud-precise-nonha
+      - check-tripleo-novabm-overcloud-f20-nonha
     pre-release:
       - swift-tarball
     release:
@@ -1375,6 +1383,7 @@ projects:
       - check-tripleo-novabm-undercloud-precise-nonha
       - check-tripleo-ironic-undercloud-precise-nonha
       - check-tripleo-novabm-overcloud-precise-nonha
+      - check-tripleo-novabm-overcloud-f20-nonha
 
   - name: openstack/python-designateclient
     template:
@@ -1405,6 +1414,7 @@ projects:
       - check-tripleo-novabm-undercloud-precise-nonha
       - check-tripleo-ironic-undercloud-precise-nonha
       - check-tripleo-novabm-overcloud-precise-nonha
+      - check-tripleo-novabm-overcloud-f20-nonha
 
   - name: openstack/python-glanceclient
     template:
@@ -1428,6 +1438,7 @@ projects:
       - check-tripleo-novabm-undercloud-precise-nonha
       - check-tripleo-ironic-undercloud-precise-nonha
       - check-tripleo-novabm-overcloud-precise-nonha
+      - check-tripleo-novabm-overcloud-f20-nonha
 
 #TODO: add docs
   - name: openstack/python-heatclient
@@ -1457,6 +1468,7 @@ projects:
       - check-tripleo-novabm-undercloud-precise-nonha
       - check-tripleo-ironic-undercloud-precise-nonha
       - check-tripleo-novabm-overcloud-precise-nonha
+      - check-tripleo-novabm-overcloud-f20-nonha
     release:
       - python-heatclient-docs
 
@@ -1500,6 +1512,7 @@ projects:
       - check-tripleo-novabm-undercloud-precise-nonha
       - check-tripleo-ironic-undercloud-precise-nonha
       - check-tripleo-novabm-overcloud-precise-nonha
+      - check-tripleo-novabm-overcloud-f20-nonha
 
   - name: openstack/python-marconiclient
     template:
@@ -1539,6 +1552,7 @@ projects:
       - check-tripleo-novabm-undercloud-precise-nonha
       - check-tripleo-ironic-undercloud-precise-nonha
       - check-tripleo-novabm-overcloud-precise-nonha
+      - check-tripleo-novabm-overcloud-f20-nonha
 
   - name: openstack/python-novaclient
     template:
@@ -1563,6 +1577,7 @@ projects:
       - check-tripleo-novabm-undercloud-precise-nonha
       - check-tripleo-ironic-undercloud-precise-nonha
       - check-tripleo-novabm-overcloud-precise-nonha
+      - check-tripleo-novabm-overcloud-f20-nonha
 
   - name: openstack/python-openstackclient
     template:
@@ -1606,6 +1621,7 @@ projects:
       - check-tripleo-novabm-undercloud-precise-nonha
       - check-tripleo-ironic-undercloud-precise-nonha
       - check-tripleo-novabm-overcloud-precise-nonha
+      - check-tripleo-novabm-overcloud-f20-nonha
 
   - name: openstack/python-troveclient
     template:
@@ -1632,6 +1648,7 @@ projects:
       - check-tripleo-ironic-undercloud-precise-nonha
       - check-tripleo-novabm-undercloud-precise-nonha
       - check-tripleo-novabm-overcloud-precise-nonha
+      - check-tripleo-novabm-overcloud-f20-nonha
 
 # Section: Other OpenStack projects
 
@@ -1941,6 +1958,7 @@ projects:
       - check-tripleo-novabm-undercloud-precise-nonha
       - check-tripleo-ironic-undercloud-precise-nonha
       - check-tripleo-novabm-overcloud-precise-nonha
+      - check-tripleo-novabm-overcloud-f20-nonha
 
   - name: openstack/oslo.db
     template:
@@ -1959,6 +1977,7 @@ projects:
       - check-tripleo-novabm-undercloud-precise-nonha
       - check-tripleo-ironic-undercloud-precise-nonha
       - check-tripleo-novabm-overcloud-precise-nonha
+      - check-tripleo-novabm-overcloud-f20-nonha
 
   - name: openstack/oslo.i18n
     template:
@@ -1979,6 +1998,7 @@ projects:
       - check-tripleo-novabm-undercloud-precise-nonha
       - check-tripleo-ironic-undercloud-precise-nonha
       - check-tripleo-novabm-overcloud-precise-nonha
+      - check-tripleo-novabm-overcloud-f20-nonha
 
   - name: openstack/oslo.messaging
     template:
@@ -1998,6 +2018,7 @@ projects:
       - check-tripleo-novabm-undercloud-precise-nonha
       - check-tripleo-ironic-undercloud-precise-nonha
       - check-tripleo-novabm-overcloud-precise-nonha
+      - check-tripleo-novabm-overcloud-f20-nonha
 
   - name: openstack/oslo.middleware
     template:
@@ -2034,6 +2055,7 @@ projects:
       - check-tripleo-novabm-undercloud-precise-nonha
       - check-tripleo-ironic-undercloud-precise-nonha
       - check-tripleo-novabm-overcloud-precise-nonha
+      - check-tripleo-novabm-overcloud-f20-nonha
 
   - name: openstack/oslo.serialization
     template:
@@ -2079,6 +2101,7 @@ projects:
       - check-tripleo-novabm-undercloud-precise-nonha
       - check-tripleo-ironic-undercloud-precise-nonha
       - check-tripleo-novabm-overcloud-precise-nonha
+      - check-tripleo-novabm-overcloud-f20-nonha
 
   - name: openstack/oslo.vmware
     template:
@@ -2116,6 +2139,7 @@ projects:
       - check-tripleo-novabm-undercloud-precise-nonha
       - check-tripleo-ironic-undercloud-precise-nonha
       - check-tripleo-novabm-overcloud-precise-nonha
+      - check-tripleo-novabm-overcloud-f20-nonha
 
 # TODO: add docs
   - name: openstack/sahara-dashboard
@@ -2258,6 +2282,7 @@ projects:
       - check-tripleo-novabm-undercloud-precise-nonha
       - check-tripleo-ironic-undercloud-precise-nonha
       - check-tripleo-novabm-overcloud-precise-nonha
+      - check-tripleo-novabm-overcloud-f20-nonha
     post:
       - tempest-docs
       - tempest-coverage
@@ -2370,6 +2395,7 @@ projects:
       - check-tripleo-novabm-undercloud-precise-nonha
       - check-tripleo-ironic-undercloud-precise-nonha
       - check-tripleo-novabm-overcloud-precise-nonha
+      - check-tripleo-novabm-overcloud-f20-nonha
     post:
       - tuskar-ui-branch-tarball
 
@@ -2606,6 +2632,7 @@ projects:
       - check-tripleo-novabm-undercloud-precise-nonha
       - check-tripleo-ironic-undercloud-precise-nonha
       - check-tripleo-novabm-overcloud-precise-nonha
+      - check-tripleo-novabm-overcloud-f20-nonha
     post:
       - pbr-docs
     pre-release:
@@ -2722,6 +2749,7 @@ projects:
       - check-tripleo-novabm-undercloud-precise-nonha
       - check-tripleo-ironic-undercloud-precise-nonha
       - check-tripleo-novabm-overcloud-precise-nonha
+      - check-tripleo-novabm-overcloud-f20-nonha
 
   - name: openstack-infra/elastic-recheck
     check:
