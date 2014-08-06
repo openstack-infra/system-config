@@ -33,6 +33,7 @@ NOVA_URL = os.environ['OS_AUTH_URL']
 NOVA_PROJECT_ID = os.environ['OS_TENANT_NAME']
 NOVA_REGION_NAME = os.environ['OS_REGION_NAME']
 NOVACLIENT_INSECURE = os.getenv('NOVACLIENT_INSECURE', None)
+AUTH_SYSTEM = os.environ.get('OS_AUTH_SYSTEM', 'keystone')
 IPV6 = os.environ.get('IPV6', '0') is 1
 
 SCRIPT_DIR = os.path.dirname(sys.argv[0])
@@ -43,6 +44,11 @@ def get_client():
     kwargs = {}
     kwargs['region_name'] = NOVA_REGION_NAME
     kwargs['service_type'] = 'compute'
+
+    if AUTH_SYSTEM != 'keystone':
+        from novaclient import auth_plugin
+        kwargs['auth_system'] = AUTH_SYSTEM
+        kwargs['auth_plugin'] = auth_plugin.load_plugin(AUTH_SYSTEM)
 
     if NOVACLIENT_INSECURE:
         kwargs['insecure'] = True
