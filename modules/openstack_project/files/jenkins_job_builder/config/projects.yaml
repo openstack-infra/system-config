@@ -1834,6 +1834,16 @@
       - pypi-jobs
 
 - project:
+    name: os-net-config
+    github-org: openstack
+    node: 'bare-precise || bare-trusty'
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - python-jobs
+      - pypi-jobs
+
+- project:
     name: ceilometer-specs
     github-org: openstack
     node: 'bare-precise || bare-trusty'
