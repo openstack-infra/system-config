@@ -1964,6 +1964,30 @@ projects:
       - os-collect-config-branch-tarball
 
 #TODO: add docs
+  - name: openstack/os-net-config
+    template:
+      - name: merge-check
+      - name: check-requirements
+      - name: publish-to-pypi
+    check:
+      - gate-os-net-config-pep8
+      - gate-os-net-config-python26
+      - gate-os-net-config-python27
+    check-tripleo:
+      - check-tripleo-novabm-undercloud-precise-nonha
+      - check-tripleo-ironic-undercloud-precise-nonha
+      - check-tripleo-novabm-overcloud-f20-nonha
+    gate:
+      - gate-os-net-config-pep8
+      - gate-os-net-config-python26
+      - gate-os-net-config-python27
+    experimental-tripleo:
+      - check-tripleo-novabm-overcloud-precise-nonha
+    post:
+      - os-net-config-coverage
+      - os-net-config-branch-tarball
+
+#TODO: add docs
   - name: openstack/os-refresh-config
     template:
       - name: merge-check
