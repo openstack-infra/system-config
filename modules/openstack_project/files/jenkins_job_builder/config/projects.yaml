@@ -240,6 +240,8 @@
       - hook-{name}-rtfd
       - python-jobs
       - pypi-jobs
+      - gate-magnetodb-cassandra-tox-{envlist}:
+          envlist: cassandra-integration-tests
 
 - project:
     name: blazar
