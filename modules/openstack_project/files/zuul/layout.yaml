@@ -1017,6 +1017,8 @@ projects:
       - gate-tempest-dsvm-ironic
       - gate-tempest-dsvm-ironic-postgres
       - gate-tempest-dsvm-virtual-ironic
+    experimental:
+      - check-grenade-dsvm-ironic-sideways
     pre-release:
       - ironic-tarball
     release:
@@ -1124,6 +1126,7 @@ projects:
       - check-neutron-dsvm-api
       - gate-grenade-dsvm-neutron-forward
       - check-tempest-dsvm-neutron-dvr
+      - check-grenade-dsvm-neutron-sideways
     experimental-tripleo:
       - check-tripleo-novabm-undercloud-precise-nonha
       - check-tripleo-ironic-undercloud-precise-nonha
@@ -2508,6 +2511,8 @@ projects:
       - check-tempest-master-dsvm-full-havana
       - check-tempest-master-dsvm-neutron-havana
       - check-tempest-dsvm-centos7
+      - check-grenade-dsvm-ironic-sideways
+      - check-grenade-dsvm-neutron-sideways
 
   - name: openstack-dev/grenade
     check:
@@ -2698,6 +2703,8 @@ projects:
       - check-tempest-dsvm-aiopcpu
       - check-tempest-dsvm-neutron-aiopcpu
       - check-tempest-dsvm-centos7
+      - check-grenade-dsvm-ironic-sideways
+      - check-grenade-dsvm-neutron-sideways
     experimental-tripleo:
       - check-tripleo-novabm-undercloud-precise-nonha
       - check-tripleo-ironic-undercloud-precise-nonha
