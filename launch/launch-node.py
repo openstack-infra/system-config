@@ -194,12 +194,13 @@ def main():
                                        cert)):
         raise Exception("Please specify the name of a signed puppet cert.")
 
-    flavors = [f for f in client.flavors.list() if options.flavor in f.name]
+    flavors = [f for f in client.flavors.list()
+               if options.flavor in (f.name, f.id)]
     flavor = flavors[0]
     print "Found flavor", flavor
 
     images = [i for i in client.images.list()
-              if (options.image.lower() in i.name.lower() and
+              if (options.image.lower() in (i.id, i.name.lower()) and
                   not i.name.endswith('(Kernel)') and
                   not i.name.endswith('(Ramdisk)'))]
 
