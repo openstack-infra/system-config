@@ -885,6 +885,7 @@
       - gate-{name}-pylint
       - gate-{name}-pip-missing-reqs
       - translation-jobs
+      - rally-jobs
 
 - project:
     name: nova-specs
