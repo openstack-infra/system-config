@@ -876,6 +876,7 @@
       - openstack-publish-jobs
       - gate-{name}-pylint
       - translation-jobs
+      - rally-jobs
 
 - project:
     name: nova-specs
