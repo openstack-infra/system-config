@@ -1680,6 +1680,7 @@
 
     jobs:
       - python-jobs
+      - python3-jobs
       - pypi-jobs
 
 - project:
