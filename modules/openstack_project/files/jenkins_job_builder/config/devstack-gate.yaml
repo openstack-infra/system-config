@@ -490,6 +490,7 @@
           export DEVSTACK_GATE_NEUTRON=1
           export DEVSTACK_GATE_VIRT_DRIVER=ironic
           export DEVSTACK_GATE_IRONIC_DRIVER={deploy_driver}
+          export DEVSTACK_GATE_IRONIC_BUILD_RAMDISK={build-ramdisk}
           export TEMPEST_CONCURRENCY=1
           export BRANCH_OVERRIDE={branch-override}
           if [ "$BRANCH_OVERRIDE" != "default" ] ; then
@@ -568,6 +569,50 @@
           deploy_driver: pxe_ssh
           branch-override: '{branch-override}'
 
+    publishers:
+      - devstack-logs
+      - console-log
+
+- job-template:
+    name: '{pipeline}-tempest-dsvm-ironic-agent_ssh{branch-designator}'
+    node: '{node}'
+
+    wrappers:
+      - build-timeout:
+          timeout: 300
+      - timestamps
+
+    builders:
+      - link-logs
+      - net-info
+      - devstack-checkout
+      - devstack-virtual-ironic:
+          postgres: 0
+          build-ramdisk: 0
+          deploy_driver: agent_ssh
+          branch-override: '{branch-override}'
+    publishers:
+      - devstack-logs
+      - console-log
+
+- job-template:
+    name: '{pipeline}-tempest-dsvm-ironic-agent_ssh-src{branch-designator}'
+    node: '{node}'
+
+    wrappers:
+      - build-timeout:
+          timeout: 300
+      - timestamps
+
+    builders:
+      - link-logs
+      - net-info
+      - devstack-checkout
+      - devstack-virtual-ironic:
+          postgres: 0
+          build-ramdisk: 1
+          deploy_driver: agent_ssh
+          branch-override: '{branch-override}'
     publishers:
       - devstack-logs
       - console-log
@@ -1480,6 +1525,8 @@
       - '{pipeline}-grenade-dsvm-neutron-sideways{branch-designator}'
       - '{pipeline}-tempest-dsvm-ironic-pxe_ssh{branch-designator}'
       - '{pipeline}-tempest-dsvm-ironic-pxe_ssh-postgres{branch-designator}'
+      - '{pipeline}-tempest-dsvm-ironic-agent_ssh{branch-designator}'
+      - '{pipeline}-tempest-dsvm-ironic-agent_ssh-src{branch-designator}'
       - '{pipeline}-tempest-dsvm-zaqar{branch-designator}'
       - '{pipeline}-tempest-dsvm-all{branch-designator}'
       - '{pipeline}-tempest-dsvm-coverage{branch-designator}'
