@@ -1066,6 +1066,9 @@
 - project: stackforge/python-blazarclient
   description: Client for OpenStack Blazar
   acl-config: /home/gerrit2/acls/stackforge/blazar.config
+- project: stackforge/python-cloudkittyclient
+  description: Python client for OpenStack CloudKitty
+  acl-config: /home/gerrit2/acls/stackforge/cloudkitty.config
 - project: stackforge/python-congressclient
   description: Client for OpenStack Congress
 - project: stackforge/python-jenkins
