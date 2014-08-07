@@ -112,7 +112,7 @@
 
     builders:
       - devstack-rally-gate:
-          scenario: '{name}-neutron'
+          scenario: '{name}-fakevirt'
           neutron: '0'
           large_ops: '10'
 
