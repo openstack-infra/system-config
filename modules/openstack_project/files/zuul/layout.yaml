@@ -4395,6 +4395,11 @@ projects:
     release:
       - python-blazarclient-tarball
 
+  - name: stackforge/python-cloudkittyclient
+    template:
+      - name: python-jobs
+      - name: python3-jobs
+
   - name: stackforge/python-kiteclient
     template:
       - name: python-jobs
