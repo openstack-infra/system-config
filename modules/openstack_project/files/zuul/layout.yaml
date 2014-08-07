@@ -428,7 +428,7 @@ jobs:
     parameter-function: set_node_options_default_trusty
   - name: ^gate-ironic-.*$
     parameter-function: set_node_options_default_trusty
-  - name: ^gate-nova-.*$
+  - name: ^(gate-)?nova-.*$
     parameter-function: set_node_options_default_trusty
   - name: ^gate-sahara-.*$
     parameter-function: set_node_options_default_trusty
