@@ -570,6 +570,27 @@
       - console-log
 
 - job-template:
+    name: '{pipeline}-tempest-dsvm-ironic-agent_ssh{branch-designator}'
+    node: '{node}'
+
+    wrappers:
+      - build-timeout:
+          timeout: 125
+      - timestamps
+
+    builders:
+      - link-logs
+      - net-info
+      - devstack-checkout
+      - devstack-virtual-ironic:
+          postgres: 0
+          deploy_driver: agent_ssh
+          branch-override: '{branch-override}'
+    publishers:
+      - devstack-logs
+      - console-log
+
+- job-template:
     name: '{pipeline}-tempest-dsvm-marconi{branch-designator}'
     node: '{node}'
 
@@ -1380,6 +1401,7 @@
       - '{pipeline}-grenade-dsvm-partial-ncpu{branch-designator}'
       - '{pipeline}-tempest-dsvm-ironic-pxe_ssh{branch-designator}'
       - '{pipeline}-tempest-dsvm-ironic-pxe_ssh-postgres{branch-designator}'
+      - '{pipeline}-tempest-dsvm-ironic-agent_ssh{branch-designator}'
       - '{pipeline}-tempest-dsvm-marconi{branch-designator}'
       - '{pipeline}-tempest-dsvm-all{branch-designator}'
       - '{pipeline}-tempest-dsvm-coverage{branch-designator}'
