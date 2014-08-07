@@ -1864,6 +1864,7 @@ projects:
       - gate-os-refresh-config-pep8
       - gate-os-refresh-config-python26
       - gate-os-refresh-config-python27
+      - gate-os-refresh-config-python33
     check-tripleo:
       - check-tripleo-novabm-undercloud-precise-nonha
       - check-tripleo-ironic-undercloud-precise-nonha
@@ -1872,6 +1873,7 @@ projects:
       - gate-os-refresh-config-pep8
       - gate-os-refresh-config-python26
       - gate-os-refresh-config-python27
+      - gate-os-refresh-config-python33
     experimental-tripleo:
       - check-tripleo-novabm-overcloud-precise-nonha
     post:
