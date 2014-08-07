@@ -62,7 +62,8 @@
 - builder:
     name: bashate
     builders:
-      - shell: "/usr/local/jenkins/slave_scripts/run-bashate.sh"
+      - tox:
+          envlist: bashate
 
 - builder:
     name: pep8
