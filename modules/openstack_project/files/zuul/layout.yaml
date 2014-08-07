@@ -4526,6 +4526,11 @@ projects:
     release:
       - python-blazarclient-tarball
 
+  - name: stackforge/python-cloudkittyclient
+    template:
+      - name: python-jobs
+      - name: python3-jobs
+
   - name: stackforge/python-libraclient
     template:
       - name: publish-to-pypi
