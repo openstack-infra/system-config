@@ -750,6 +750,8 @@ jobs:
     voting: false
   - name: gate-tempest-dsvm-ceilometer-mongodb-full
     voting: false
+  - name: gate-config-bashate
+    voting: false
 
 # The project list is grouped by type of project, and within each
 # group, projects are sorted (mostly) alphabetically.
@@ -2503,7 +2505,7 @@ projects:
       - name: integrated-gate
       - name: large-ops
     check:
-      - gate-devstack-bashate
+      - gate-devstack-run-tests
       - check-devstack-dsvm-cells
       - check-tempest-dsvm-neutron-full
       - check-grenade-dsvm-forward
@@ -2515,7 +2517,7 @@ projects:
       - check-tempest-dsvm-virtual-ironic-nv
       - check-tempest-dsvm-f20
     gate:
-      - gate-devstack-bashate
+      - gate-devstack-run-tests
       - gate-devstack-dsvm-cells
       - gate-grenade-dsvm-forward
       - gate-grenade-dsvm-partial-ncpu
@@ -2659,6 +2661,7 @@ projects:
       - config-compare-xml
       - gate-config-layout
       - gate-config-pep8
+      - gate-config-bashate
       - gate-config-puppet-lint
       - gate-config-puppet-syntax
       - gate-config-puppet-apply-precise
@@ -2670,6 +2673,7 @@ projects:
     gate:
       - gate-config-layout
       - gate-config-pep8
+      - gate-config-bashate
       - gate-config-puppet-lint
       - gate-config-puppet-syntax
       - gate-config-puppet-apply-precise

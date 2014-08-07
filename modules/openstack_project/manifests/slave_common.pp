@@ -92,4 +92,20 @@ class openstack_project::slave_common(
       }
     }
   }
+
+  vcsrepo { '/opt/bashate':
+    ensure   => latest,
+    provider => git,
+    revision => 'master',
+    source   => 'https://git.openstack.org/openstack-dev/bashate'
+  }
+
+  exec { 'install_bashate' :
+    command     => 'pip install /opt/bashate',
+    path        => '/usr/local/bin:/usr/bin:/bin/',
+    refreshonly => true,
+    subscribe   => Vcsrepo['/opt/bashate'],
+    logoutput   => true,
+  }
+
 }
