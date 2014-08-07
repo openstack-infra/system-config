@@ -478,6 +478,8 @@ jobs:
     queue-name: integrated
   - name: gate-rally-dsvm-neutron-neutron
     voting: false
+  - name: gate-rally-dsvm-fakevirt-heat
+    voting: false
   - name: ^(gate|check)-tempest-dsvm-neutron-full$
     voting: false
   - name: ^(gate|check)-tempest-dsvm-neutron-full-icehouse$
@@ -972,6 +974,7 @@ projects:
       - name: translation-jobs
     check:
       - check-devstack-dsvm-cells
+      - gate-rally-dsvm-fakevirt-heat
     gate:
       - gate-devstack-dsvm-cells
     experimental-tripleo:

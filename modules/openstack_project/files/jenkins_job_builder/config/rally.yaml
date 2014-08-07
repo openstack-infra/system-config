@@ -33,6 +33,7 @@
           export PROJECTS="stackforge/rally $PROJECTS"
           export PROJECTS="openstack/ceilometer $PROJECTS"
           export DEVSTACK_GATE_NEUTRON={neutron}
+          export DEVSTACK_GATE_TEMPEST_LARGE_OPS={large_ops}
           export DEVSTACK_GATE_EXERCISES=0
           export DEVSTACK_GATE_TIMEOUT=120
           export RALLY_SCENARIO={scenario}
@@ -71,6 +72,7 @@
       - devstack-rally-gate:
           scenario: '{name}'
           neutron: '0'
+          large_ops: '0'
 
     publishers:
       - devstack-logs
@@ -91,6 +93,28 @@
       - devstack-rally-gate:
           scenario: '{name}-neutron'
           neutron: '1'
+          large_ops: '0'
+
+    publishers:
+      - devstack-logs
+      - console-log
+      - rally-plot
+
+
+- job-template:
+    name: 'gate-rally-dsvm-fakevirt-{name}'
+    node: 'devstack-precise || devstack-trusty'
+
+    wrappers:
+      - build-timeout:
+          timeout: 125
+      - timestamps
+
+    builders:
+      - devstack-rally-gate:
+          scenario: '{name}-neutron'
+          neutron: '0'
+          large_ops: '10'
 
     publishers:
       - devstack-logs
@@ -142,3 +166,4 @@
     jobs:
       - 'gate-rally-dsvm-{name}'
       - 'gate-rally-dsvm-neutron-{name}'
+      - 'gate-rally-dsvm-fakevirt-{name}'
