@@ -730,6 +730,8 @@ jobs:
     branch: ^(?!stable/(havana|icehouse)).*$
   - name: gate-nova-pip-missing-reqs
     voting: false
+  - name: gate-config-bashate
+    voting: false
 
 # The project list is grouped by type of project, and within each
 # group, projects are sorted (mostly) alphabetically.
@@ -2849,6 +2851,7 @@ projects:
       - config-compare-xml
       - gate-config-layout
       - gate-config-pep8
+      - gate-config-bashate
       - gate-config-puppet-syntax
       - gate-config-puppet-apply-precise
       - gate-config-puppet-apply-centos6
