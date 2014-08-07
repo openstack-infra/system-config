@@ -1860,6 +1860,7 @@ projects:
     template:
       - name: check-requirements
       - name: publish-to-pypi
+      - name: python3-jobs
     check:
       - gate-os-refresh-config-pep8
       - gate-os-refresh-config-python26
