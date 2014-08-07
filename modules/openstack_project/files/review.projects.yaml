@@ -364,6 +364,10 @@
 - project: openstack/oslo-specs
   group: oslo
   upstream: git://github.com/dhellmann/oslo-specs.git
+- project: openstack/oslo.concurrency
+  description: OpenStack library for all concurrency-related code
+  group: oslo
+  upstream: git://github.com/YorikSar/oslo.concurrency.git
 - project: openstack/oslo.config
   docimpact-group: openstack-manuals
 - project: openstack/oslo.db
