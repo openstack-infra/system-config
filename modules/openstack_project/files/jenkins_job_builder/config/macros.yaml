@@ -129,11 +129,12 @@
     name: chef-berkshelf-prep
     builders:
       - shell: |
-          mkdir -p .cookbooks
+          #!/bin/bash -x
           grep -E .*berkshelf.*3\.\d*\.\d*.* Gemfile
           if [ $? -eq 0 ]; then
             ruby1.9.1 /usr/bin/bundle exec berks vendor .cookbooks
           else
+            mkdir -p .cookbooks
             ruby1.9.1 /usr/bin/bundle exec berks install --path=.cookbooks
           fi
           COOKBOOK=$(awk '/^name/ {print $NF}' metadata.rb |tr -d \"\')
