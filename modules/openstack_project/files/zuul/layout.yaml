@@ -1712,6 +1712,8 @@ projects:
       - gate-git-upstream-python27
 
   - name: stackforge/gerrit-dash-creator
+    template:
+      - name: check-requirements
     check:
       - gate-gerrit-dash-creator-pep8
     gate:
