@@ -70,4 +70,8 @@ class storyboard (
     rabbitmq_user          => $rabbitmq_user,
     rabbitmq_user_password => $rabbitmq_user_password
   }
+
+  class { '::storyboard::workers':
+    worker_count => 5
+  }
 }
