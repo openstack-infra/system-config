@@ -43,7 +43,7 @@ class storyboard::load_superusers (
   }
 
   exec { 'load-superusers-yaml':
-    command     => "storyboard-db-manage --config-file /etc/storyboard.conf load_superusers ${superuser_file_path}",
+    command     => "storyboard-db-manage --config-file /etc/storyboard/storyboard.conf load_superusers ${superuser_file_path}",
     path        => '/usr/local/bin:/usr/bin:/bin/',
     refreshonly => true,
     subscribe   => File[$superuser_file_path],
