@@ -3289,6 +3289,21 @@ projects:
       - gate-cloudkitty-python27
       - gate-cloudkitty-python33
 
+  - name: stackforge/cloudkitty-dashboard
+    template:
+      - name: python-jobs
+      - name: python3-jobs
+    check:
+      - gate-cloudkitty-dashboard-docs
+      - gate-cloudkitty-dashboard-pep8
+      - gate-cloudkitty-dashboard-python26
+      - gate-cloudkitty-dashboard-python27
+    gate:
+      - gate-cloudkitty-dashboard-docs
+      - gate-cloudkitty-dashboard-pep8
+      - gate-cloudkitty-dashboard-python26
+      - gate-cloudkitty-dashboard-python27
+
   - name: stackforge/cloudroast
     check:
       - noop
