@@ -7,6 +7,12 @@
       - timestamps
 
     builders:
+      - shell: |
+          #!/bin/bash -xe
+          if ! rpm -ql libffi-devel >/dev/null ; then
+              sudo yum install -y libffi-devel
+          fi
+          rpm -ql libffi-devel
       - revoke-sudo
       - branch-git-prep:
           branch: '{branch}'
