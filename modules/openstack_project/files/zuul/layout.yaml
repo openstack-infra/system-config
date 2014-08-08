@@ -1713,9 +1713,9 @@ projects:
 
   - name: stackforge/gerrit-dash-creator
     check:
-      - noop
+      - gate-gerrit-dash-creator-pep8
     gate:
-      - noop
+      - gate-gerrit-dash-creator-pep8
 
   - name: stackforge/gce-api
     template:
