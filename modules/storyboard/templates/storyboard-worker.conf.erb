@@ -1,0 +1,14 @@
+description "StoryBoard Deferred Event Worker. See storyboard-workers."
+
+stop on stopping storyboard-workers
+respawn
+respawn limit 5 20
+ 
+instance $ID
+
+setuid <%= scope.lookupvar("storyboard::params::user") %>
+setgid <%= scope.lookupvar("storyboard::params::group") %>
+ 
+script
+  storyboard-subscriber
+end script

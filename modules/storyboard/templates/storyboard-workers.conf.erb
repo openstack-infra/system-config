@@ -1,0 +1,13 @@
+description "StoryBoard Deferred Workers"
+
+start on started <%= @so_rabbit %><%= @so_mysql %>network-services
+stop on stopping <%= @so_rabbit %><%= @so_mysql %>network-services
+
+env NUM_WORKERS=<%= @worker_count %>
+
+pre-start script
+  for i in `seq 1 $NUM_WORKERS`
+  do
+    start storyboard-worker ID=$i
+  done
+end script
