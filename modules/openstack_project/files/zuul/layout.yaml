@@ -4006,6 +4006,15 @@ projects:
     post:
       - pecan-branch-tarball
 
+  - name: stackforge/poppy
+    template:
+      - name: python-jobs
+      - name: python3-jobs
+      - name: pypy-jobs
+      - name: check-requirements
+      - name: publish-to-pypi
+      - name: docs-on-rtfd
+
   - name: stackforge/powervc-driver
     check:
       - noop
