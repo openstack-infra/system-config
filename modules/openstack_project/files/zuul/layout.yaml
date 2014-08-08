@@ -4498,6 +4498,7 @@ projects:
   - name: stackforge/python-rallyclient
     template:
       - name: python-jobs
+      - name: python3-jobs
       - name: check-requirements
     check:
       - python-rallyclient-coverage
