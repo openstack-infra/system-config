@@ -34,11 +34,16 @@ def generate_log_index(file_list, logserver_prefix, swift_destination_prefix):
     output = '<html><head><title>Index of results</title></head><body>'
     output += '<ul>'
     for f in file_list:
-        file_url = os.path.join(logserver_prefix, swift_destination_prefix,
-                                f['filename'])
-
+        file_url = os.path.join(logserver_prefix, swift_destination_prefix, f)
+        # Because file_list is simply a list to create an index for and it
+        # isn't necessarily on disk we can't check if a  file is a folder or
+        # not. As such we normalise the name to get the folder/filename but
+        # then need to check if the last character was a trailing slash so to
+        # re-append it to make it obvious that it links to a folder
+        filename_postfix = '/' if f[-1] == '/' else ''
+        filename = os.path.basename(os.path.normpath(f)) + filename_postfix
         output += '<li>'
-        output += '<a href="%s">%s</a>' % (file_url, f['filename'])
+        output += '<a href="%s">%s</a>' % (file_url, filename)
         output += '</li>'
 
     output += '</ul>'
@@ -107,13 +112,13 @@ def swift_form_post_submit(file_list, url, hmac_body, signature):
             files['file%d' % (i + 1)] = (filename_prefix + f['filename'],
                                          open(f['path'], 'rb'),
                                          get_file_mime(f['path']))
-
         requests.post(url, data=payload, files=files)
 
 
 def build_file_list(file_path, logserver_prefix, swift_destination_prefix,
                     create_dir_indexes=True):
-    """Upload to swift using instructions from zuul"""
+    """Generate a list of files to upload to zuul. Recurses through directories
+       and generates index.html files if requested."""
 
     # file_list: a list of dicts with {path=..., filename=...} where filename
     #            is appended to the end of the object (paths can be used)
@@ -132,14 +137,13 @@ def build_file_list(file_path, logserver_prefix, swift_destination_prefix,
                 relative_name = os.path.relpath(full_path, parent_dir)
                 push_file = {'filename': relative_name,
                              'path': full_path}
-                folder_contents.append(push_file)
                 file_list.append(push_file)
+                folder_contents.append(relative_name)
 
             for f in folders:
-                full_path = os.path.join(path, f) + '/'
+                full_path = os.path.join(path, f)
                 relative_name = os.path.relpath(full_path, parent_dir)
-                folder_contents.append({'filename': relative_name,
-                                        'path': full_path})
+                folder_contents.append(relative_name + '/')
 
             if create_dir_indexes:
                 index_file = make_index_file(folder_contents, logserver_prefix,
@@ -187,12 +191,11 @@ if __name__ == '__main__':
         quit()
 
     for file_path in args.files:
+        file_path = os.path.normpath(file_path)
         if os.path.isfile(file_path):
-            root_list.append({'filename': os.path.basename(file_path),
-                              'path': file_path})
+            root_list.append(os.path.basename(file_path))
         else:
-            root_list.append({'filename': os.path.basename(file_path) + '/',
-                              'path': file_path})
+            root_list.append(os.path.basename(file_path) + '/')
 
         file_list += build_file_list(
             file_path, logserver_prefix, swift_destination_prefix,
