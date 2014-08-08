@@ -3289,6 +3289,11 @@ projects:
       - gate-cloudkitty-python27
       - gate-cloudkitty-python33
 
+  - name: stackforge/cloudkitty-dashboard
+    template:
+      - name: python-jobs
+      - name: python3-jobs
+
   - name: stackforge/cloudroast
     check:
       - noop
