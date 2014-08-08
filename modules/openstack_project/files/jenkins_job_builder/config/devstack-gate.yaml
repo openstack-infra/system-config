@@ -1367,6 +1367,66 @@
       - console-log
 
 
+- job-template:
+    name: '{pipeline}-tempest-latest-libvirt-dsvm-full{branch-designator}'
+    node: '{node}'
+
+    wrappers:
+      - build-timeout:
+          timeout: 125
+      - timestamps
+
+    builders:
+      - link-logs
+      - net-info
+      - devstack-checkout
+      - shell: |
+          #!/bin/bash -xe
+
+          # TODO: See if the libvirt team will add a libvirt-current link to
+          # their download site.  Until then, this will have to get bumped
+          # to the latest version of libvirt.
+          export LIBVIRT_VERSION="libvirt-1.2.7"
+
+          sudo service libvirt-bin stop
+          sudo apt-get -y remove libvirt0
+
+          # This list comes from the ubuntu package
+          sudo apt-get -y install build-essential cdbs debhelper \
+              dh-autoreconf libxml2-dev libncurses5-dev libreadline-dev \
+              zlib1g-dev libgnutls-dev libgcrypt11-dev libavahi-client-dev \
+              libsasl2-dev libxen-dev lvm2 open-iscsi-utils libgcrypt11-dev \
+              libparted0-dev parted libdevmapper-dev uuid-dev libudev-dev \
+              libpciaccess-dev module-init-tools policykit-1 \
+              libpolkit-gobject-1-dev libcap-ng-dev libnl-3-dev \
+              libnl-route-3-dev libyajl-dev libpcap0.8-dev libnuma-dev radvd \
+              libnetcf-dev libaudit-dev nfs-common
+
+          wget http://libvirt.org/sources/$LIBVIRT_VERSION.tar.gz
+          tar xvzf $LIBVIRT_VERSION.tar.gz
+          cd $LIBVIRT_VERSION
+          ./configure --prefix=/usr
+          make -j$(nproc)
+          sudo make install
+          cd ..
+          sudo service libvirt-bin start
+
+          export PYTHONUNBUFFERED=true
+          export DEVSTACK_GATE_TIMEOUT=120
+          export DEVSTACK_GATE_TEMPEST=1
+          export DEVSTACK_GATE_TEMPEST_FULL=1
+          export BRANCH_OVERRIDE={branch-override}
+          if [ "$BRANCH_OVERRIDE" != "default" ] ; then
+              export OVERRIDE_ZUUL_BRANCH=$BRANCH_OVERRIDE
+          fi
+          cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
+          ./safe-devstack-vm-gate-wrap.sh
+
+    publishers:
+      - devstack-logs
+      - console-log
+
+
 - job:
     name: gate-devstack-gate-unittests
     node: 'bare-precise || bare-trusty'
@@ -1426,3 +1486,4 @@
       - '{pipeline}-tempest-dsvm-keystonev3-full{branch-designator}'
       - '{pipeline}-tempest-dsvm-neutron-keystonev3-full{branch-designator}'
       - '{pipeline}-tempest-dsvm-nova-v3-full{branch-designator}'
+      - '{pipeline}-tempest-latest-libvirt-dsvm-full{branch-designator}'
