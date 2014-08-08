@@ -4006,6 +4006,18 @@ projects:
     post:
       - pecan-branch-tarball
 
+  - name: stackforge/poppy
+    template:
+      - name: python-jobs
+      - name: check-requirements
+      - name: publish-to-pypi
+    check:
+      - gate-poppy-python33
+      - gate-poppy-pypy
+    gate:
+      - gate-poppy-python33
+      - gate-poppy-pypy
+
   - name: stackforge/powervc-driver
     check:
       - noop
