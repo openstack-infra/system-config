@@ -1,0 +1,9 @@
+Code-Review+2: Monty Taylor <mordred@inaugust.com>
+Workflow+1: Monty Taylor <mordred@inaugust.com>
+Verified+2: Jenkins
+Code-Review+1: Vish Ishaya <vishvananda@gmail.com>
+Submitted-by: Jenkins
+Submitted-at: Fri, 08 Aug 2014 19:23:06 +0000
+Reviewed-on: https://review.openstack.org/112972
+Project: openstack-infra/config
+Branch: refs/heads/master
