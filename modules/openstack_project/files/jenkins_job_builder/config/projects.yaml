@@ -2430,6 +2430,7 @@
     jobs:
       - python-jobs
       - pypi-jobs
+      - 'gate-{name}-python33'
 
 - project:
     name: logaas
