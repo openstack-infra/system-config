@@ -2421,6 +2421,7 @@
 
     jobs:
       - python-jobs
+      - 'gate-{name}-python33'
 
 - project:
     name: osprofiler

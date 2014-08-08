@@ -4501,6 +4501,9 @@ projects:
       - name: check-requirements
     check:
       - python-rallyclient-coverage
+      - gate-rallyclient-python33
+    gate:
+      - gate-rallyclient-python33
 
   - name: stackforge/python-solumclient
     template:
