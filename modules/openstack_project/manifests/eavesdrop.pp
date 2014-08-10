@@ -43,6 +43,7 @@ class openstack_project::eavesdrop (
         '#openstack-barbican',
         '#openstack-blazar',
         '#openstack-ceilometer',
+        '#openstack-chef',
         '#openstack-containers',
         '#openstack-dev',
         '#openstack-dns',
