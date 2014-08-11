@@ -96,11 +96,6 @@ labels:
       - name: rax-dfw
       - name: rax-ord
       - name: rax-iad
-  - name: dsvm-precise-krnl
-    image: dsvm-precise-krnl
-    min-ready: 1
-    providers:
-      - name: rax-dfw
   - name: devstack-trusty-2-node
     image: devstack-trusty
     ready-script: multinode_setup.sh
@@ -212,13 +207,6 @@ providers:
         min-ram: 8192
         name-filter: 'Performance'
         setup: prepare_node_py3k.sh
-        username: jenkins
-        private-key: /home/nodepool/.ssh/id_rsa
-      - name: dsvm-precise-krnl
-        base-image: 'Ubuntu 12.04 LTS (Precise Pangolin)'
-        min-ram: 8192
-        name-filter: 'Performance'
-        setup: prepare_node_devstack_new_kernel.sh
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
       - name: devstack-f20
