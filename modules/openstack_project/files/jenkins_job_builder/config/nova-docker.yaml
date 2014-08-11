@@ -35,3 +35,41 @@
               keep-hierarchy: false
               copy-after-failure: true
       - console-log
+
+- job:
+    name: 'check-tempest-dsvm-f20-docker'
+    node: 'devstack-f20'
+
+    wrappers:
+      - build-timeout:
+          timeout: 65
+      - timestamps
+
+    builders:
+      - link-logs
+      - net-info
+      - devstack-checkout
+      - shell: |
+          #!/bin/bash -xe
+          function gate_hook {
+              $BASE/new/nova-docker/contrib/devstack/gate_hook.sh
+          }
+
+          export -f gate_hook
+
+          export PYTHONUNBUFFERED=true
+          export DEVSTACK_GATE_TIMEOUT=60
+          export PROJECTS="stackforge/nova-docker $PROJECTS"
+
+          cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
+          ./safe-devstack-vm-gate-wrap.sh
+
+    publishers:
+      - scp:
+          site: 'static.openstack.org'
+          files:
+            - target: 'logs/$LOG_PATH'
+              source: 'logs/**'
+              keep-hierarchy: false
+              copy-after-failure: true
+      - console-log
