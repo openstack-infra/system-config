@@ -55,7 +55,7 @@ class storyboard::application (
   }
 
   # Configure the StoryBoard API
-  file { '/etc/storyboard.conf':
+  file { '/etc/storyboard/storyboard.conf':
     ensure  => present,
     owner   => $storyboard::params::user,
     group   => $storyboard::params::group,
@@ -115,16 +115,16 @@ class storyboard::application (
 
   # Migrate the database
   exec { 'migrate-storyboard-db':
-    command     => 'storyboard-db-manage --config-file /etc/storyboard.conf upgrade head',
+    command     => 'storyboard-db-manage --config-file /etc/storyboard/storyboard.conf upgrade head',
     path        => '/usr/local/bin:/usr/bin:/bin/',
     refreshonly => true,
     subscribe   => [
       Exec['install-storyboard'],
-      File['/etc/storyboard.conf'],
+      File['/etc/storyboard/storyboard.conf'],
     ],
     require     => [
       Class['mysql::python'],
-      File['/etc/storyboard.conf'],
+      File['/etc/storyboard/storyboard.conf'],
     ],
     notify      => Service['httpd'],
   }

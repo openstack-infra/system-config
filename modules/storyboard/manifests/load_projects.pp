@@ -47,7 +47,7 @@ class storyboard::load_projects (
   }
 
   exec { 'load-projects-yaml':
-    command     => "storyboard-db-manage --config-file /etc/storyboard.conf load_projects ${project_file_path}",
+    command     => "storyboard-db-manage --config-file /etc/storyboard/storyboard.conf load_projects ${project_file_path}",
     path        => '/usr/local/bin:/usr/bin:/bin/',
     refreshonly => true,
     subscribe   => File[$project_file_path],
