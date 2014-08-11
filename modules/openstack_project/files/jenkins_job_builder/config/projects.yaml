@@ -371,6 +371,16 @@
       - pypi-jobs
 
 - project:
+    name: surveil
+    github-org: stackforge
+    node: 'bare-precise || bare-trusty'
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - python-jobs
+      - hook-{name}-rtfd
+
+- project:
     name: tacker
     node: 'bare-precise || bare-trusty'
 

@@ -4838,9 +4838,13 @@ projects:
 
   - name: stackforge/surveil
     check:
-      - noop
+      - gate-surveil-docs
+      - gate-surveil-pep8
+      - gate-surveil-python27
     gate:
-      - noop
+      - gate-surveil-docs
+      - gate-surveil-pep8
+      - gate-surveil-python27
 
   - name: stackforge/surveil-specs
     check:
