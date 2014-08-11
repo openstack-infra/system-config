@@ -606,6 +606,11 @@
   group: monasca
   upstream: git://github.com/hpcloud-mon/cookbooks-mon_persister
   acl-config: /home/gerrit2/acls/stackforge/monasca.config
+- project: stackforge/cookbook-monasca-schema
+  description: Chef Cookbook - Monasca Database Schemas
+  group: monasca
+  upstream: git://github.com/hpcloud-mon/cookbook-monasca-schema
+  acl-config: /home/gerrit2/acls/stackforge/monasca.config
 - project: stackforge/cookbook-monasca-thresh
   description: Chef Cookbook - Monasca Thresholding Engine
   group: monasca
