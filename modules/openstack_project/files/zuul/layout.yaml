@@ -1249,6 +1249,7 @@ projects:
       - check-tempest-dsvm-neutron-pg
       - check-tempest-dsvm-nova-v3-full
       - gate-nova-pip-missing-reqs
+      - check-tempest-dsvm-full-newlibvirt
     silent:
       - check-tempest-dsvm-docker
     experimental-tripleo:
