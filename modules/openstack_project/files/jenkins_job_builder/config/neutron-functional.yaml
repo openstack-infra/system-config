@@ -37,5 +37,6 @@
           ./safe-devstack-vm-gate-wrap.sh
 
     publishers:
+      - test-results
       - devstack-logs
       - console-log
