@@ -149,7 +149,7 @@ function setup_git ()
 # COMMIT_MSG.
 function setup_review ()
 {
-    FULL_PROJECT=$(grep project .gitreview  | cut -f2 -d= | cut -f1 -d.)
+    FULL_PROJECT=$(grep project .gitreview  | cut -f2 -d= |sed -e 's/\.git//')
     COMMIT_MSG="Imported Translations from Transifex"
 
     git review -s
