@@ -12,3 +12,6 @@ $conf['cron_key'] = '<%= @conf_cron_key %>';
 <% if @conf_markdown_directory %>
 $conf['groups_feeds_markdown_directory'] = '<%= @conf_markdown_directory %>';
 <% end %>
+<% if @conf_ga_account %>
+$conf['googleanalytics_account'] = '<%= @conf_ga_account %>';
+<% end %>
