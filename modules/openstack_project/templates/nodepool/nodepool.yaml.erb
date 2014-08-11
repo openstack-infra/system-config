@@ -141,6 +141,13 @@ labels:
       - name: hpcloud-b3
       - name: hpcloud-b4
       - name: hpcloud-b5
+  - name: devstack-f20-virt-preview
+    image: devstack-f20-virt-preview
+    min-ready: 2
+    providers:
+      - name: rax-dfw
+      - name: rax-ord
+      - name: rax-iad
   - name: devstack-centos7
     image: devstack-centos7
     min-ready: 2
@@ -226,6 +233,13 @@ providers:
         min-ram: 8192
         name-filter: 'Performance'
         setup: prepare_node_devstack.sh
+        username: jenkins
+        private-key: /home/nodepool/.ssh/id_rsa
+      - name: devstack-f20-virt-preview
+        base-image: 'Fedora 20 (Heisenbug) (PVHVM)'
+        min-ram: 8192
+        name-filter: 'Performance'
+        setup: prepare_node_devstack_virt_preview.sh
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
       - name: devstack-centos7
