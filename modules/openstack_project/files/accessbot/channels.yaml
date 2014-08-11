@@ -81,6 +81,7 @@ channels:
   - name: openstack-foundation
   - name: openstack-gantt
   - name: openstack-gate
+  - name: openstack-horizon
   - name: openstack-hyper-v
   - name: openstack-infra
   - name: openstack-ironic
