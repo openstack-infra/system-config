@@ -335,6 +335,7 @@ project-templates:
       - gate-{name}-tox-checkdeletions
       - gate-{name}-tox-doc-publish-checkbuild
     gate:
+      - gate-{name}-tox-checkniceness
       - gate-{name}-tox-checksyntax
       - gate-{name}-tox-checkdeletions
       - gate-{name}-tox-doc-publish-checkbuild
@@ -579,14 +580,10 @@ jobs:
     branch: master
   - name: ^.*-tox-doc-publishlang$
     branch: master
-  - name: gate-openstack-manuals-tox-checkniceness
-    voting: false
   - name: ^gate-.*-tox-doc-publish-checkbuild$
     success-pattern: http://docs-draft.openstack.org/{build.parameters[LOG_PATH]}/publish-docs/
   - name: ^gate-.*-tox-checklang$
     branch: master
-    voting: false
-  - name: ^gate-.*-tox-checkniceness$
     voting: false
   - name: ^gate-.*-docs$
     success-pattern: http://docs-draft.openstack.org/{build.parameters[LOG_PATH]}/doc/build/html/
