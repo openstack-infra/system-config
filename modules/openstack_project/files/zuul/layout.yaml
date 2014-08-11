@@ -1206,6 +1206,7 @@ projects:
       - check-tempest-dsvm-nova-v3-full
       - check-tempest-dsvm-docker
       - gate-nova-pip-missing-reqs
+      - check-tempest-dsvm-full-newlibvirt
     experimental-tripleo:
       - check-tripleo-novabm-undercloud-precise-nonha
       - check-tripleo-ironic-undercloud-precise-nonha

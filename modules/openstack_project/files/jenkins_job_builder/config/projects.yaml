@@ -885,6 +885,11 @@
       - gate-{name}-pylint
       - gate-{name}-pip-missing-reqs
       - translation-jobs
+      - '{pipeline}-tempest-dsvm-full-newlibvirt{branch-designator}':
+          pipeline: experimental
+          node: 'devstack-f20-virt-preview'
+          branch-designator: ''
+          branch-override: default
 
 - project:
     name: nova-specs
