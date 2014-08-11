@@ -861,6 +861,11 @@
       - openstack-publish-jobs
       - gate-{name}-pylint
       - translation-jobs
+      - devstack-jobs:
+          pipeline: experimental
+          node: 'devstack-f20-virt-preview'
+          branch-designator: '-virt-preview'
+          branch-override: default
 
 - project:
     name: nova-specs
