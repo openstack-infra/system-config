@@ -3276,6 +3276,8 @@ projects:
         - clouddocs-maven-plugin-mavencentral-upload
 
   - name: stackforge/cloudkitty
+    template:
+      - name: docs-on-rtfd
     check:
       - gate-cloudkitty-docs
       - gate-cloudkitty-pep8
