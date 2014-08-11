@@ -430,7 +430,7 @@ project-templates:
 
   # Note that we only publish integrated and incubated
   # projects/programs on specs.o.o - the publish-specs job should not
-  # be used for stackforge projects.
+  # be used for stackforge projects, use stackforge-specs-jobs instead.
   - name: specs-jobs
     check:
       - 'gate-{name}-docs'
@@ -438,6 +438,13 @@ project-templates:
       - 'gate-{name}-docs'
     post:
       - '{name}-publish-specs'
+
+  # Same job as specs-job but does not publish to specs.openstack.org.
+  - name: stackforge-specs-jobs
+    check:
+      - 'gate-{name}-docs'
+    gate:
+      - 'gate-{name}-docs'
 
 jobs:
   - name: ^.*$
@@ -3912,12 +3919,11 @@ projects:
   - name: stackforge/fuel-specs
     template:
       - name: merge-check
+      - name: stackforge-specs-jobs
     check:
       - gate-fuel-specs-python27
-      - gate-fuel-specs-docs
     gate:
       - gate-fuel-specs-python27
-      - gate-fuel-specs-docs
 
   - name: stackforge/fuel-web
     template:
@@ -4359,6 +4365,7 @@ projects:
   - name: stackforge/openstack-chef-specs
     template:
       - name: merge-check
+      - name: stackforge-specs-jobs
     check:
       - gate-openstack-chef-specs-docs
     gate:
@@ -5099,6 +5106,7 @@ projects:
   - name: stackforge/solum-specs
     template:
       - name: merge-check
+      - name: stackforge-specs-jobs
     check:
       - gate-solum-specs-docs
     gate:
@@ -5500,12 +5508,11 @@ projects:
   - name: stackforge/tacker-specs
     template:
       - name: merge-check
+      - name: stackforge-specs-jobs
     check:
       - gate-tacker-specs-python27
-      - gate-tacker-specs-docs
     gate:
       - gate-tacker-specs-python27
-      - gate-tacker-specs-docs
 
   - name: openstack/training-guides
     template:
