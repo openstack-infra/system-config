@@ -1,5 +1,5 @@
 - job:
-    name: 'check-nova-docker-dsvm'
+    name: 'check-tempest-dsvm-docker'
     node: 'devstack-precise || devstack-trusty'
 
     wrappers:
