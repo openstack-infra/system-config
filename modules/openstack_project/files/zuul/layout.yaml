@@ -1184,6 +1184,7 @@ projects:
       - check-tempest-dsvm-neutron-pg
       - check-tempest-dsvm-nova-v3-full
       - check-tempest-dsvm-docker
+      - check-tempest-dsvm-full-newlibvirt
     experimental-tripleo:
       - check-tripleo-novabm-undercloud-precise-nonha
       - check-tripleo-ironic-undercloud-precise-nonha
