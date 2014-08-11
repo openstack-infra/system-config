@@ -250,6 +250,7 @@ project-templates:
       - 'gate-grenade-dsvm'
     experimental:
       - 'check-grenade-dsvm-neutron'
+      - 'check-tempest-dsvm-full-ceph'
 
   - name: integrated-gate-neutron
     check:
@@ -712,6 +713,8 @@ jobs:
   - name: gate-trove-functional-dsvm-mysql
     voting: false
   - name: gate-trove-functional-dsvm-mongodb
+    voting: false
+  - name: check-tempest-dsvm-full-ceph
     voting: false
 # puppet-openstack targets
   - name: gate-puppet-vswitch-puppet-lint
