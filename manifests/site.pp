@@ -619,6 +619,7 @@ node 'openstackid-dev.openstack.org' {
     site_admin_password     => hiera('openstackid_dev_site_admin_password', 'XXX'),
     id_mysql_host           => hiera('openstackid_dev_id_mysql_host', 'localhost'),
     id_mysql_password       => hiera('openstackid_dev_id_mysql_password', 'XXX'),
+    id_mysql_user           => hiera('openstackid_dev_id_mysql_user', 'username'),
     ss_mysql_host           => hiera('openstackid_dev_ss_mysql_host', 'localhost'),
     ss_mysql_password       => hiera('openstackid_dev_ss_mysql_password', 'XXX'),
     ss_mysql_user           => hiera('openstackid_dev_ss_mysql_user', 'username'),
