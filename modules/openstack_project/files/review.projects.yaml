@@ -809,7 +809,7 @@
 - project: stackforge/graffiti
   description: Cloud Capability Service
 - project: stackforge/healthnmon
-  description: Healthnmon aims to deliver 'Cloud Resource Monitor', an extensible service to OpenStack Cloud Operating system by providing monitoring service for Cloud Resources and Infrastructure with a pluggable framework for 'Inventory Management', 'Alerts and notifications' and 'Utilization Data.
+  description: Healthnmon aims to deliver 'Cloud Resource Monitor', an extensible service to OpenStack Cloud Operating system by providing monitoring service for Cloud Resources and Infrastructure with a pluggable framework for 'Inventory Management', 'Alerts and notifications' and 'Utilization Data.'
   upstream: git://github.com/healthnmon/healthnmon.git
 - project: stackforge/heat-translator
   description: Translate non-heat templates to Heat Orchestration Template.
