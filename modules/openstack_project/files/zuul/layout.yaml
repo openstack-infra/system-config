@@ -2972,12 +2972,6 @@ projects:
     gate:
       - noop
 
-  - name: openstack-infra/puppet-dashboard
-    check:
-      - noop
-    gate:
-      - noop
-
   - name: openstack-infra/puppet-storyboard
     check:
       - gate-config-puppet-lint

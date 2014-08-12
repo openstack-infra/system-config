@@ -33,7 +33,6 @@ openstack-infra:
       - openstack-infra/os-loganalyze
       - openstack-infra/publications
       - openstack-infra/puppet-apparmor
-      - openstack-infra/puppet-dashboard
       - openstack-infra/puppet-storyboard
       - openstack-infra/puppet-vcsrepo
       - openstack-infra/puppet-vinz
@@ -720,7 +719,6 @@ openstack-merges:
       - openstack-infra/os-loganalyze
       - openstack-infra/publications
       - openstack-infra/puppet-apparmor
-      - openstack-infra/puppet-dashboard
       - openstack-infra/puppet-storyboard
       - openstack-infra/puppet-vcsrepo
       - openstack-infra/puppet-yum
