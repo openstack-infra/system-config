@@ -6,13 +6,35 @@
 # passed around in test.sh
 #
 $elasticsearch_nodes = [
-  'elasticsearch01.openstack.org',
   'elasticsearch02.openstack.org',
   'elasticsearch03.openstack.org',
   'elasticsearch04.openstack.org',
   'elasticsearch05.openstack.org',
   'elasticsearch06.openstack.org',
   'elasticsearch07.openstack.org',
+]
+$elasticsearch_clients = [
+  'logstash.openstack.org',
+  'logstash-worker01.openstack.org',
+  'logstash-worker02.openstack.org',
+  'logstash-worker03.openstack.org',
+  'logstash-worker04.openstack.org',
+  'logstash-worker05.openstack.org',
+  'logstash-worker06.openstack.org',
+  'logstash-worker07.openstack.org',
+  'logstash-worker08.openstack.org',
+  'logstash-worker09.openstack.org',
+  'logstash-worker10.openstack.org',
+  'logstash-worker11.openstack.org',
+  'logstash-worker12.openstack.org',
+  'logstash-worker13.openstack.org',
+  'logstash-worker14.openstack.org',
+  'logstash-worker15.openstack.org',
+  'logstash-worker16.openstack.org',
+  'logstash-worker17.openstack.org',
+  'logstash-worker18.openstack.org',
+  'logstash-worker19.openstack.org',
+  'logstash-worker20.openstack.org',
 ]
 
 #
@@ -290,31 +312,10 @@ node 'wiki.openstack.org' {
 # Node-OS: precise
 node 'logstash.openstack.org' {
   class { 'openstack_project::logstash':
-    sysadmins                       => hiera('sysadmins', []),
-    elasticsearch_nodes             => $elasticsearch_nodes,
-    gearman_workers                 => [
-      'logstash-worker01.openstack.org',
-      'logstash-worker02.openstack.org',
-      'logstash-worker03.openstack.org',
-      'logstash-worker04.openstack.org',
-      'logstash-worker05.openstack.org',
-      'logstash-worker06.openstack.org',
-      'logstash-worker07.openstack.org',
-      'logstash-worker08.openstack.org',
-      'logstash-worker09.openstack.org',
-      'logstash-worker10.openstack.org',
-      'logstash-worker11.openstack.org',
-      'logstash-worker12.openstack.org',
-      'logstash-worker13.openstack.org',
-      'logstash-worker14.openstack.org',
-      'logstash-worker15.openstack.org',
-      'logstash-worker16.openstack.org',
-      'logstash-worker17.openstack.org',
-      'logstash-worker18.openstack.org',
-      'logstash-worker19.openstack.org',
-      'logstash-worker20.openstack.org',
-    ],
-    discover_nodes                  => [
+    sysadmins           => hiera('sysadmins', []),
+    elasticsearch_nodes => $elasticsearch_nodes,
+    gearman_workers     => $elasticsearch_clients,
+    discover_nodes      => [
       'elasticsearch02.openstack.org:9200',
       'elasticsearch03.openstack.org:9200',
       'elasticsearch04.openstack.org:9200',
@@ -328,9 +329,10 @@ node 'logstash.openstack.org' {
 # Node-OS: precise
 node /^logstash-worker\d+\.openstack\.org$/ {
   class { 'openstack_project::logstash_worker':
-    sysadmins           => hiera('sysadmins', []),
-    elasticsearch_nodes => $elasticsearch_nodes,
-    discover_node       => 'elasticsearch02.openstack.org',
+    sysadmins             => hiera('sysadmins', []),
+    elasticsearch_nodes   => $elasticsearch_nodes,
+    elasticsearch_clients => $elasticsearch_clients,
+    discover_node         => 'elasticsearch02.openstack.org',
   }
 }
 
@@ -339,29 +341,7 @@ node /^elasticsearch0[1-7]\.openstack\.org$/ {
   class { 'openstack_project::elasticsearch_node':
     sysadmins             => hiera('sysadmins', []),
     elasticsearch_nodes   => $elasticsearch_nodes,
-    elasticsearch_clients => [
-      'logstash.openstack.org',
-      'logstash-worker01.openstack.org',
-      'logstash-worker02.openstack.org',
-      'logstash-worker03.openstack.org',
-      'logstash-worker04.openstack.org',
-      'logstash-worker05.openstack.org',
-      'logstash-worker06.openstack.org',
-      'logstash-worker07.openstack.org',
-      'logstash-worker08.openstack.org',
-      'logstash-worker09.openstack.org',
-      'logstash-worker10.openstack.org',
-      'logstash-worker11.openstack.org',
-      'logstash-worker12.openstack.org',
-      'logstash-worker13.openstack.org',
-      'logstash-worker14.openstack.org',
-      'logstash-worker15.openstack.org',
-      'logstash-worker16.openstack.org',
-      'logstash-worker17.openstack.org',
-      'logstash-worker18.openstack.org',
-      'logstash-worker19.openstack.org',
-      'logstash-worker20.openstack.org',
-    ],
+    elasticsearch_clients => $elasticsearch_clients,
     discover_nodes        => $elasticsearch_nodes,
   }
 }
