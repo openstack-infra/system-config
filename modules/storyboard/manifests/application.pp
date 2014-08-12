@@ -54,6 +54,14 @@ class storyboard::application (
     }
   }
 
+  # Create the storyboard configuration directory.
+  file { '/etc/storyboard':
+    ensure  => directory,
+    owner   => $storyboard::params::user,
+    group   => $storyboard::params::group,
+    mode    => '0400',
+  }
+
   # Configure the StoryBoard API
   file { '/etc/storyboard/storyboard.conf':
     ensure  => present,
@@ -62,7 +70,10 @@ class storyboard::application (
     mode    => '0400',
     content => template('storyboard/storyboard.conf.erb'),
     notify  => Service['httpd'],
-    require => Class['apache::params'],
+    require => [
+      Class['apache::params'],
+      File['/etc/storyboard']
+    ]
   }
 
   # Download the latest StoryBoard Source
