@@ -2,6 +2,7 @@
 - project: openstack-attic/melange
 - project: openstack-attic/openstack-chef
 - project: openstack-attic/openstack-qa
+- project: openstack-attic/puppet-dashboard
 - project: openstack-attic/python-melangeclient
 - project: openstack-dev/bashate
   description: A pep8 equivalent for bash scripts
@@ -151,8 +152,6 @@
   options:
     - direct-release
 - project: openstack-infra/puppet-apparmor
-  group: openstack-ci
-- project: openstack-infra/puppet-dashboard
   group: openstack-ci
 - project: openstack-infra/puppet-storyboard
   description: Puppet module to deploy storyboard
