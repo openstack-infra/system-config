@@ -2513,17 +2513,7 @@ projects:
   - name: openstack-dev/bashate
     template:
       - name: publish-to-pypi
-    check:
-      - gate-bashate-pep8
-      - gate-bashate-python26
-      - gate-bashate-python27
-    gate:
-      - gate-bashate-pep8
-      - gate-bashate-python26
-      - gate-bashate-python27
-    post:
-      - bashate-branch-tarball
-      - bashate-coverage
+      - name: python-jobs
 
   - name: openstack-dev/cookiecutter
     check:
