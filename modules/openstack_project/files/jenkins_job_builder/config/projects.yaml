@@ -254,8 +254,7 @@
     node: 'bare-precise || bare-trusty'
 
     jobs:
-      - gate-{name}-puppet-lint
-      - gate-{name}-puppet-syntax
+      - puppet-checks
       - gate-{name}-puppet-apply
       - gate-{name}-pep8
       - experimental-swift-logs-{name}-pep8
@@ -1751,8 +1750,7 @@
     tarball-site: tarballs.openstack.org
 
     jobs:
-      - gate-{name}-puppet-lint
-      - gate-{name}-puppet-syntax
+      - puppet-checks
       - puppet-module-unit
 
 - project:
@@ -1761,8 +1759,7 @@
     tarball-site: tarballs.openstack.org
 
     jobs:
-      - gate-{name}-puppet-lint
-      - gate-{name}-puppet-syntax
+      - puppet-checks
       - puppet-module-unit
 
 - project:
@@ -1771,8 +1768,7 @@
     tarball-site: tarballs.openstack.org
 
     jobs:
-      - gate-{name}-puppet-lint
-      - gate-{name}-puppet-syntax
+      - puppet-checks
       - puppet-module-unit
 
 - project:
@@ -1781,8 +1777,7 @@
     tarball-site: tarballs.openstack.org
 
     jobs:
-      - gate-{name}-puppet-lint
-      - gate-{name}-puppet-syntax
+      - puppet-checks
       - puppet-module-unit
 
 - project:
@@ -1791,8 +1786,7 @@
     tarball-site: tarballs.openstack.org
 
     jobs:
-      - gate-{name}-puppet-lint
-      - gate-{name}-puppet-syntax
+      - puppet-checks
       - puppet-module-unit
 
 - project:
@@ -1801,8 +1795,7 @@
     tarball-site: tarballs.openstack.org
 
     jobs:
-      - gate-{name}-puppet-lint
-      - gate-{name}-puppet-syntax
+      - puppet-checks
       - puppet-module-unit
 
 - project:
@@ -1811,8 +1804,7 @@
     tarball-site: tarballs.openstack.org
 
     jobs:
-      - gate-{name}-puppet-lint
-      - gate-{name}-puppet-syntax
+      - puppet-checks
       - puppet-module-unit
 
 - project:
@@ -1821,8 +1813,7 @@
     tarball-site: tarballs.openstack.org
 
     jobs:
-      - gate-{name}-puppet-lint
-      - gate-{name}-puppet-syntax
+      - puppet-checks
       - puppet-module-unit
 
 - project:
@@ -1831,8 +1822,7 @@
     tarball-site: tarballs.openstack.org
 
     jobs:
-      - gate-{name}-puppet-lint
-      - gate-{name}-puppet-syntax
+      - puppet-checks
       - puppet-module-unit
 
 - project:
@@ -1841,8 +1831,7 @@
     tarball-site: tarballs.openstack.org
 
     jobs:
-      - gate-{name}-puppet-lint
-      - gate-{name}-puppet-syntax
+      - puppet-checks
       - puppet-module-unit
 
 - project:
@@ -1851,8 +1840,7 @@
     tarball-site: tarballs.openstack.org
 
     jobs:
-      - gate-{name}-puppet-lint
-      - gate-{name}-puppet-syntax
+      - puppet-checks
       - puppet-module-unit
 
 - project:
@@ -1861,8 +1849,7 @@
     tarball-site: tarballs.openstack.org
 
     jobs:
-      - gate-{name}-puppet-lint
-      - gate-{name}-puppet-syntax
+      - puppet-checks
       - puppet-module-unit
 
 - project:
@@ -1888,8 +1875,7 @@
     tarball-site: tarballs.openstack.org
 
     jobs:
-      - gate-{name}-puppet-lint
-      - gate-{name}-puppet-syntax
+      - puppet-checks
       - puppet-module-unit
 
 - project:
@@ -1898,8 +1884,7 @@
     tarball-site: tarballs.openstack.org
 
     jobs:
-      - gate-{name}-puppet-lint
-      - gate-{name}-puppet-syntax
+      - puppet-checks
       - puppet-module-unit
 
 - project:
@@ -1908,8 +1893,7 @@
     tarball-site: tarballs.openstack.org
 
     jobs:
-      - gate-{name}-puppet-lint
-      - gate-{name}-puppet-syntax
+      - puppet-checks
       - puppet-module-unit
 
 - project:
@@ -1918,8 +1902,7 @@
     tarball-site: tarballs.openstack.org
 
     jobs:
-      - gate-{name}-puppet-lint
-      - gate-{name}-puppet-syntax
+      - puppet-checks
       - puppet-module-unit
 
 - project:
@@ -1928,8 +1911,7 @@
     tarball-site: tarballs.openstack.org
 
     jobs:
-      - gate-{name}-puppet-lint
-      - gate-{name}-puppet-syntax
+      - puppet-checks
       - puppet-module-unit
 
 - project:
@@ -1938,8 +1920,7 @@
     tarball-site: tarballs.openstack.org
 
     jobs:
-      - gate-{name}-puppet-lint
-      - gate-{name}-puppet-syntax
+      - puppet-checks
       - puppet-module-unit
 
 - project:
@@ -1948,8 +1929,7 @@
     tarball-site: tarballs.openstack.org
 
     jobs:
-      - gate-{name}-puppet-lint
-      - gate-{name}-puppet-syntax
+      - puppet-checks
       - puppet-module-unit
 
 - project:

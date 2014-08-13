@@ -39,6 +39,12 @@
     publishers:
       - console-log
 
+- job-group:
+    name: 'puppet-checks'
+    jobs:
+      - 'gate-{name}-puppet-lint'
+      - 'gate-{name}-puppet-syntax'
+
 - job-template:
     name: 'gate-{name}-puppet-apply-precise'
     node: 'bare-precise || bare-trusty'
