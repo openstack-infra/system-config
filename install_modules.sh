@@ -55,9 +55,10 @@ MODULES["puppetlabs-firewall"]="0.0.4"
 MODULES["puppetlabs-puppetdb"]="3.0.1"
 MODULES["stankevich-python"]="1.6.6"
 MODULES["example42-puppi"]="2.1.9"
+MODULES["puppetlabs-rabbitmq"]="4.0.0"
 
 SOURCE_MODULES["https://github.com/nibalizer/puppet-module-puppetboard"]="2.4.0"
-SOURCE_MODULES["https://git.openstack.org/openstack-infra/puppet-storyboard"]="e4857b1a70d697cca2e8eedeb626a4422c705bdf"
+SOURCE_MODULES["https://git.openstack.org/openstack-infra/puppet-storyboard"]="fb38fa63b3e7d9969d9130a46add4c24580cfc47"
 
 MODULE_LIST=`puppet module list`
 
