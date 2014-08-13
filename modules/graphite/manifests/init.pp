@@ -218,5 +218,15 @@ class graphite(
                     Vcsrepo['/opt/statsd']],
   }
 
+  # remove any stats that haven't been updated for two weeks and
+  # remove empty dirs  
+  cron { 'remove_old_stats':
+    user        => 'root',
+    hour        => '2',
+    minute      => '0',
+    command     => 'find /var/lib/graphite/storage/whisper -type f -mtime +14 -name \*.wsp -delete; find /var/lib/graphite/storage/whisper -depth -type d -empty -delete > /dev/null'
+    environment => 'PATH=/usr/bin:/bin:/usr/sbin:/sbin'
+  }
+  
 }
 
