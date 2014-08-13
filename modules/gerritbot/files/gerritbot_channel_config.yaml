@@ -884,3 +884,13 @@ git-upstream:
       - stackforge/git-upstream
     branches:
       - master
+
+openstack-poppy:
+    events:
+      - patchset-created
+      - change-merged
+      - x-vrif-minus-2
+    projects:
+      - stackforge/poppy
+    branches:
+      - master
