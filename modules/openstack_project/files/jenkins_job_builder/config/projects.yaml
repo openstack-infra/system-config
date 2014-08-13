@@ -372,7 +372,6 @@
 
 - project:
     name: surveil
-    github-org: stackforge
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
@@ -2003,7 +2002,6 @@
 
 - project:
     name: cookbook-monasca-schema
-    github-org: stackforge
     node: 'bare-precise || bare-trusty'
 
     jobs:
