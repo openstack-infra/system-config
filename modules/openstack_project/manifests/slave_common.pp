@@ -61,6 +61,15 @@ class openstack_project::slave_common(
     mode   => '0440',
   }
 
+  # Several cloud images has firewalld installed and running by default
+  # However the libvirt with firewalld has performance issues at the moment
+  # http://lists.openstack.org/pipermail/openstack-infra/2014-August/001715.html
+  # Ensure firewalld is not installed on the jenkins slave.
+
+  package { "firewalld":
+    ensure => "absent"
+  }
+
   # Temporary for debugging glance launch problem
   # https://lists.launchpad.net/openstack/msg13381.html
   # NOTE(dprince): ubuntu only as RHEL6 doesn't have sysctl.d yet
