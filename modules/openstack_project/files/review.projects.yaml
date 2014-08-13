@@ -449,15 +449,15 @@
 - project: openstack/sahara-dashboard
   group: sahara
   description: Sahara Horizon plugin.
-  acl-config: /home/gerrit2/acls/openstack/sahara.config
+  acl-config: /home/gerrit2/acls/openstack/sahara-etc.config
 - project: openstack/sahara-extra
   group: sahara
   description: Repo for sahara-related utils.
-  acl-config: /home/gerrit2/acls/openstack/sahara.config
+  acl-config: /home/gerrit2/acls/openstack/sahara-etc.config
 - project: openstack/sahara-image-elements
   group: sahara
   description: Disk image elements for Sahara
-  acl-config: /home/gerrit2/acls/openstack/sahara.config
+  acl-config: /home/gerrit2/acls/openstack/sahara-etc.config
 - project: openstack/sahara-specs
   group: sahara
 - project: openstack/security-doc
