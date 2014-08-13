@@ -750,6 +750,8 @@ jobs:
     voting: false
   - name: ^(gate|check)-pecan-tox-ironic-stable
     voting: false
+  - name: gate-horizon-jshint
+    voting: false
   - name: ^(gate|check)-marconi-python33
     branch: ^(?!stable/(havana|icehouse)).*$
   - name: gate-tempest-dsvm-ceilometer-mongodb
@@ -1014,6 +1016,7 @@ projects:
     check:
       - gate-horizon-python27-django14
       - gate-horizon-selenium
+      - gate-horizon-jshint
       - check-devstack-dsvm-cells
     gate:
       - gate-horizon-python27-django14
