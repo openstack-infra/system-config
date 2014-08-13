@@ -15,7 +15,7 @@
 // this regex matches the hash part of review pages
 var hashRegex = /^\#\/c\/[\/\d]+$/
 // this regex matches CI comments
-var ciRegex = / CI$/
+var ciRegex = /^(.* CI|Jenkins)$/
 // this regex matches "Patch set #"
 var psRegex = /^Patch Set (\d+):/
 
