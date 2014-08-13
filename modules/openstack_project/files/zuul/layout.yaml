@@ -758,6 +758,8 @@ jobs:
     voting: false
   - name: gate-tempest-dsvm-ceilometer-mongodb-full
     voting: false
+  - name: gate-ceilometer-python33
+    branch: ^(?!stable/(havana|icehouse)).*$
   # Temporary until mongodb is restored to EPEL (in progress)
   - name: gate-ceilometer-python26
     voting: false
