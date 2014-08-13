@@ -194,4 +194,9 @@ class jenkins::slave(
     group  => 'root',
     mode   => '0755',
   }
+
+  service { 'haveged':
+    ensure  => 'running',
+    require => Package[$::jenkins::params::haveged_package],
+  }
 }
