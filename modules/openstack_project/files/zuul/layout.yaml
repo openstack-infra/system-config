@@ -240,12 +240,14 @@ project-templates:
       - 'check-tempest-dsvm-full'
       - 'check-tempest-dsvm-postgres-full'
       - 'check-tempest-dsvm-neutron'
+      - 'check-tempest-dsvm-neutron-full'
       - 'check-tempest-dsvm-neutron-heat-slow'
       - 'check-grenade-dsvm'
     gate:
       - 'gate-tempest-dsvm-full'
       - 'gate-tempest-dsvm-postgres-full'
       - 'gate-tempest-dsvm-neutron'
+      - 'check-tempest-dsvm-neutron-full'
       - 'gate-tempest-dsvm-neutron-heat-slow'
       - 'gate-grenade-dsvm'
     experimental:
@@ -2259,7 +2261,6 @@ projects:
       - gate-tempest-pep8
       - gate-tempest-docs
       - gate-tempest-python27
-      - check-tempest-dsvm-neutron-full
       - check-grenade-dsvm-partial-ncpu
       - check-tempest-dsvm-ironic-nv
       - check-tempest-dsvm-ironic-postgres-nv
@@ -2534,7 +2535,6 @@ projects:
     check:
       - gate-devstack-bashate
       - check-devstack-dsvm-cells
-      - check-tempest-dsvm-neutron-full
       - check-grenade-dsvm-forward
       - check-grenade-dsvm-partial-ncpu
       - check-neutron-dsvm-functional
