@@ -34,12 +34,16 @@ Requirements
   * Support the following syntaxes: ``recheck``.
   * Recheck means recheck everything. A single recheck comment should
     re-trigger all testing systems.
-* Publish who the maintainers of the third party testing system are, and make
-  them available for support as needed. Maintainers are encouraged to be
-  in IRC regularly to make it faster to contact them.
+* Publish contact information for the maintainers.
 
-  * All CI comments must contain a link to a contact page with the details.
-
+  * Follow the instructions on the `ThirdPartySystems wiki page
+    <https://wiki.openstack.org/wiki/ThirdPartySystems>`_ to add your
+    system.  When complete, there should be a page dedicated to your
+    system with a URL like:
+    <https://wiki.openstack.org/wiki/ThirdPartySystems/Example>.
+  * All comments from your CI system must contain a link to the wiki
+    page for your CI system.
+  * Maintainers are encouraged to be in IRC regularly to make it faster to contact them.
 * Include a public link to all test artifacts to make debugging failed tests
   easier (using a dns name over a hardcoded ip is recommended).
   This should include:
