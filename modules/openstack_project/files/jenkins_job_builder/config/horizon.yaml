@@ -28,3 +28,16 @@
     publishers:
       - test-results
       - console-log
+
+- job:
+    name: gate-horizon-jshint
+    node: 'bare-precise || bare-trusty'
+
+    builders:
+      - revoke-sudo
+      - gerrit-git-prep
+      - tox:
+          envlist: jshint
+
+    publishers:
+      - console-log

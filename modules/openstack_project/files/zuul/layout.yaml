@@ -757,6 +757,8 @@ jobs:
   - name: gate-tempest-dsvm-ceilometer-mongodb-full
     voting: false
   # Temporary until mongodb is restored to EPEL (in progress)
+  - name: gate-horizon-jshint
+    voting: false
   - name: gate-ceilometer-python26
     voting: false
 
@@ -1014,6 +1016,7 @@ projects:
     check:
       - gate-horizon-python27-django14
       - gate-horizon-selenium
+      - gate-horizon-jshint
       - check-devstack-dsvm-cells
     gate:
       - gate-horizon-python27-django14
