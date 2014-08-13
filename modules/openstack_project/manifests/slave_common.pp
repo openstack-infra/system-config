@@ -61,6 +61,15 @@ class openstack_project::slave_common(
     mode   => '0440',
   }
 
+  # Several cloud images has firewalld installed and running by default.
+  # We have two issue with this
+  # * the libvirt with firewalld has performance issues at the moment
+  # * the iptables puppet module expect plain iptables service
+
+  package { 'firewalld':
+    ensure => 'absent'
+  }
+
   # Temporary for debugging glance launch problem
   # https://lists.launchpad.net/openstack/msg13381.html
   # NOTE(dprince): ubuntu only as RHEL6 doesn't have sysctl.d yet
