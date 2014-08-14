@@ -926,7 +926,6 @@ projects:
       - name: check-requirements
       - name: integrated-gate
       - name: translation-jobs
-      - name: large-ops
     check:
       - check-devstack-dsvm-cells
       - gate-rally-dsvm-glance
@@ -959,7 +958,6 @@ projects:
       - name: openstack-server-publish-jobs
       - name: check-requirements
       - name: integrated-gate
-      - name: large-ops
       - name: translation-jobs
       - name: publish-to-pypi
     check:
@@ -1069,7 +1067,6 @@ projects:
       - name: periodic-havana
       - name: check-requirements
       - name: integrated-gate
-      - name: large-ops
       - name: translation-jobs
     check:
       - gate-keystone-python33
@@ -1270,7 +1267,6 @@ projects:
       - name: openstack-server-publish-jobs
       - name: check-requirements
       - name: integrated-gate
-      - name: large-ops
     check:
       - gate-swift-tox-func
       - check-swift-dsvm-functional
@@ -1439,7 +1435,6 @@ projects:
       - name: openstack-client-publish-jobs
       - name: check-requirements
       - name: integrated-gate
-      - name: large-ops
       - name: stable-compat-jobs
       - name: publish-to-pypi
     check:
@@ -1513,7 +1508,6 @@ projects:
       - name: openstack-client-publish-jobs
       - name: check-requirements
       - name: integrated-gate
-      - name: large-ops
       - name: stable-compat-jobs
       - name: publish-to-pypi
     check:
@@ -1622,7 +1616,6 @@ projects:
       - name: openstack-client-publish-jobs
       - name: check-requirements
       - name: integrated-gate
-      - name: large-ops
       - name: stable-compat-jobs
       - name: publish-to-pypi
     check:
