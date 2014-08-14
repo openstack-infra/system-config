@@ -3352,6 +3352,8 @@ projects:
       - noop
 
   - name: stackforge/congress
+    template:
+      - name: check-requirements
     check:
       - gate-congress-pep8
       - gate-congress-python27
@@ -3714,6 +3716,8 @@ projects:
       - mistral-extra-branch-tarball
 
   - name: stackforge/python-congressclient
+    template:
+      - name: check-requirements
     check:
       - gate-python-congressclient-pep8
       - gate-python-congressclient-python27
