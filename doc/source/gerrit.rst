@@ -428,7 +428,7 @@ To rename a project:
 
 #. Update the database on review.openstack.org::
 
-     sudo mysql --defaults-file=/etc/mysql/debian.cnf reviewdb
+     sudo -H mysql reviewdb
 
      update account_project_watches
      set project_name = "openstack/NEW"
@@ -450,7 +450,7 @@ To rename a project:
      cp -ax review_site/index index.backup.`date +%s`
      java -jar review_site/bin/gerrit.war reindex -d /home/gerrit2/review_site
 
-#. Move the git repository on git{01-04}.openstack.org::
+#. Move the git repository on git{01-05}.openstack.org::
 
      sudo mv /var/lib/git/openstack/{OLD,NEW}.git
 
