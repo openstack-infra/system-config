@@ -4643,6 +4643,14 @@ projects:
       - name: python-jobs
       - name: python3-jobs
       - name: pypy-jobs
+      - name: publish-to-pypi
+      - name: docs-on-rtfd
+    check:
+        - gate-requests-mock-tox-keystoneclient-tip
+        - gate-requests-mock-tox-novaclient-tip
+    gate:
+        - gate-requests-mock-tox-keystoneclient-tip
+        - gate-requests-mock-tox-novaclient-tip
 
   - name: stackforge/rubick
     check:
