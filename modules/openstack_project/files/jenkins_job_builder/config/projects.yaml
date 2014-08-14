@@ -871,6 +871,8 @@
       - openstack-publish-jobs
       - gate-{name}-pylint
       - translation-jobs
+      - gate-{name}-tox-{envlist}:
+          envlist: pip-missing-reqs
 
 - project:
     name: nova-specs

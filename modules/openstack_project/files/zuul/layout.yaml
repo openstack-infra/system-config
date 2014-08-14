@@ -763,6 +763,8 @@ jobs:
   # Temporary until mongodb is restored to EPEL (in progress)
   - name: gate-ceilometer-python26
     voting: false
+  - name: gate-nova-tox-pip-missing-reqs
+    voting: false
 
 # The project list is grouped by type of project, and within each
 # group, projects are sorted (mostly) alphabetically.
@@ -1188,9 +1190,11 @@ projects:
       - gate-nova-pylint
       - check-grenade-dsvm-partial-ncpu
       - check-tempest-dsvm-virtual-ironic-nv
+      - gate-nova-tox-pip-missing-reqs
     gate:
       - gate-devstack-dsvm-cells
       - gate-grenade-dsvm-partial-ncpu
+      - gate-nova-tox-pip-missing-reqs
     experimental:
       - gate-grenade-dsvm-forward
       - check-tempest-dsvm-cells-full
