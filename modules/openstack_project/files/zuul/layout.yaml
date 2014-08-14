@@ -2945,6 +2945,7 @@ projects:
   - name: openstack-infra/devstack-gate
     template:
       - name: merge-check
+      - name: check-requirements
       - name: integrated-gate
       - name: large-ops
     check:
