@@ -872,6 +872,7 @@ congress:
     projects:
       - stackforge/congress
       - stackforge/python-congressclient
+      - stackforge/congress-specs
     branches:
       - master
 

@@ -3364,10 +3364,8 @@ projects:
 
   - name: openstack/congress-specs
     check:
-      - gate-congress-specs-python27
       - gate-congress-specs-docs
     gate:
-      - gate-congress-specs-python27
       - gate-congress-specs-docs
 
   - name: stackforge/cookbook-openstack-block-storage

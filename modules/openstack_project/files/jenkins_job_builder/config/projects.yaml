@@ -2565,10 +2565,9 @@
 - project:
     name: congress-specs
     node: 'bare-precise || bare-trusty'
-    tarball-site: tarballs.openstack.org
 
     jobs:
-      - python-jobs
+      - gate-{name}-docs
 
 - project:
     name: rubick
