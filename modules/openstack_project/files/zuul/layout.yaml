@@ -4900,6 +4900,8 @@ projects:
       - gate-stacktach-python27
 
   - name: stackforge/surveil
+    template:
+      - name: docs-on-rtfd
     check:
       - gate-surveil-docs
       - gate-surveil-pep8
