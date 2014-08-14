@@ -763,9 +763,6 @@ jobs:
     voting: false
   - name: gate-ceilometer-python33
     branch: ^(?!stable/(havana|icehouse)).*$
-  # Temporary until mongodb is restored to EPEL (in progress)
-  - name: gate-ceilometer-python26
-    voting: false
 
 # The project list is grouped by type of project, and within each
 # group, projects are sorted (mostly) alphabetically.
