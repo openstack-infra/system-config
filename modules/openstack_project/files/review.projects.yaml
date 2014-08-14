@@ -1115,6 +1115,9 @@
 - project: stackforge/rack
   description: Provides the ability that can control OpenStack as program resource with an application. It enables you to implement a large scale distributed system in a variety of programming languages on OpenStack.
   upstream: https://github.com/ctc-g/rack
+- project: stackforge/radar
+  description: dashboard for ci reporting
+  upstream: https://github.com/rcbau/hacks/tree/master/gerrit
 - project: stackforge/rally
   description: Benchmark System for OpenStack
   upstream: git://github.com/pboris/rally.git
