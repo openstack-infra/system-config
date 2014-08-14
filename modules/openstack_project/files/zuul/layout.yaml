@@ -763,6 +763,8 @@ jobs:
   # Temporary until mongodb is restored to EPEL (in progress)
   - name: gate-ceilometer-python26
     voting: false
+  - name: gate-nova-tox-pip-missing-reqs
+    voting: false
 
 # The project list is grouped by type of project, and within each
 # group, projects are sorted (mostly) alphabetically.
@@ -1197,6 +1199,7 @@ projects:
       - check-tempest-dsvm-neutron-pg
       - check-tempest-dsvm-nova-v3-full
       - check-tempest-dsvm-docker
+      - gate-nova-tox-pip-missing-reqs
     experimental-tripleo:
       - check-tripleo-novabm-undercloud-precise-nonha
       - check-tripleo-ironic-undercloud-precise-nonha
