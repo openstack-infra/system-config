@@ -247,7 +247,7 @@ project-templates:
       - 'gate-tempest-dsvm-full'
       - 'gate-tempest-dsvm-postgres-full'
       - 'gate-tempest-dsvm-neutron'
-      - 'check-tempest-dsvm-neutron-full'
+      - 'gate-tempest-dsvm-neutron-full'
       - 'gate-tempest-dsvm-neutron-heat-slow'
       - 'gate-grenade-dsvm'
     experimental:
