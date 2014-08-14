@@ -3362,7 +3362,7 @@ projects:
       - gate-congress-pep8
       - gate-congress-python27
 
-  - name: openstack/congress-specs
+  - name: stackforge/congress-specs
     check:
       - gate-congress-specs-docs
     gate:
