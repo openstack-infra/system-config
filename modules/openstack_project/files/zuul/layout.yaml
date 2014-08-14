@@ -4593,6 +4593,14 @@ projects:
       - gate-solum-infra-guestagent-python33
       - gate-solum-infra-guestagent-pypy
 
+  - name: stackforge/radar
+    template:
+      - name: docs-on-rtfd
+    check:
+      - gate-radar-pep8
+    gate:
+      - gate-radar-pep8
+
   - name: stackforge/rally
     template:
       - name: python-jobs
