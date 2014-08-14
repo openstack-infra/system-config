@@ -371,6 +371,14 @@
       - pypi-jobs
 
 - project:
+    name: radar
+    node: 'bare-precise || bare-trusty'
+
+    jobs:
+      - gate-{name}-pep8
+      - hook-{name}-rtfd
+
+- project:
     name: surveil
     github-org: stackforge
     node: 'bare-precise || bare-trusty'
