@@ -3065,3 +3065,9 @@
 
     jobs:
       - python-jobs
+
+- project:
+    name: devstack-gate
+
+    jobs:
+      - 'gate-{name}-requirements
