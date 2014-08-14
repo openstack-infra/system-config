@@ -3077,6 +3077,12 @@
       - pypi-jobs
 
 - project:
+    name: devstack-gate
+
+    jobs:
+      - 'gate-{name}-requirements'
+
+- project:
     name: doc8
     node: bare-precise
     tarball-site: tarballs.openstack.org
