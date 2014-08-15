@@ -26,6 +26,7 @@ At a Glance
   * http://logstash.net/
   * http://kibana.org/
   * http://www.elasticsearch.org/
+  * http://crm114.sourceforge.net/
 :Bugs:
   * http://bugs.launchpad.net/openstack-ci
   * https://logstash.jira.com/secure/Dashboard.jspa
@@ -236,3 +237,29 @@ General query tips:
 * This system is growing fast and may not always keep up with the load.
   Be patient. If expected logs do not show up immediately after the
   Jenkins job completes wait a few minutes.
+
+crm114
+=======
+
+In an effort to assist with automated failure detection, the infra team
+has started leveraging crm114 to classify and analyze the messages stored
+by logstash.
+
+The tool utilizes a statistical approach for classifying data, and is
+frequently used as an email spam detector.  For logstash data, the idea
+is to flag those log entries that are not in passing runs and only in
+failing ones, which should be useful in pinpointing what caused the
+failures.
+
+In the OpenStack logstash system, crm114 attaches an error_pr attribute
+to all indexed entries.  Values from -1000.00 to -10.00 should be considered
+sufficient to get all potential errors as identified by the program.
+Used in a kibana query, it would be structured like this:
+   * ``error_pr:["-1000.0" TO "-10.0"]``
+
+
+This is still an early effort and additional tuning and refinement should
+be expected.  Should the crm114 settings need to be tuned or expanded,
+a patch may be submitted for this file, which controls the process:
+:file:`modules/log_processor/files/classify-log.crm`
+
