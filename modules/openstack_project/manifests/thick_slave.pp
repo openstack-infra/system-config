@@ -61,10 +61,18 @@ class openstack_project::thick_slave(
     ensure   => latest,
     provider => pip,
   }
-  # transitional for upgrading to the pip version
-  package { $::openstack_project::jenkins_params::python_requests_package:
-    ensure => absent,
-    before => Package['requests'],
+  if ($::osfamily == 'RedHat') {
+    # Work around https://bugzilla.redhat.com/show_bug.cgi?id=973375
+    exec { 'remove_requests':
+      command => "/usr/bin/yum remove -y ${::openstack_project::jenkins_params::python_requests_package}",
+      onlyif  => "/bin/rpm -qa|/bin/grep -q ${::openstack_project::jenkins_params::python_requests_package}",
+      before  => Package['requests'],
+    }
+  } else {
+    package { $::openstack_project::jenkins_params::python_requests_package:
+      ensure => absent,
+      before => Package['requests'],
+    }
   }
 
   if ($::lsbdistcodename == 'trusty') {
