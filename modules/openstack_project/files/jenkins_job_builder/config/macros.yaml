@@ -122,8 +122,7 @@
     builders:
       - shell: |
           mkdir -p .bundle
-          bundle config --global jobs $(nproc)
-          bundle install --path=.bundle
+          bundle install --path=.bundle --jobs 1 --retry 3
 
 - builder:
     name: chef-berkshelf-prep
