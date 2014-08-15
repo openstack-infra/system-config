@@ -286,16 +286,19 @@ project-templates:
 
   - name: integrated-gate-neutron
     check:
+      - 'check-tempest-dsvm-neutron-heat-slow'
       - 'check-tempest-dsvm-neutron'
       - 'check-tempest-dsvm-neutron-pg'
-      - 'check-tempest-dsvm-neutron-heat-slow'
       - 'check-tempest-dsvm-neutron-full'
+      - 'check-tempest-dsvm-neutron-pg-full'
       - 'gate-tempest-dsvm-neutron-large-ops'
       - 'check-grenade-dsvm-neutron'
     gate:
       - 'gate-tempest-dsvm-neutron'
       - 'gate-tempest-dsvm-neutron-pg'
       - 'gate-tempest-dsvm-neutron-heat-slow'
+      - 'gate-tempest-dsvm-neutron-full'
+      - 'gate-tempest-dsvm-neutron-pg-full'
       - 'gate-tempest-dsvm-neutron-large-ops'
 
   - name: integrated-gate-sahara
@@ -514,8 +517,13 @@ jobs:
     voting: false
   - name: gate-rally-dsvm-fakevirt-heat
     voting: false
-  - name: ^(gate|check)-tempest-dsvm-neutron-full$
+  - name: ^(gate|check)-tempest-dsvm-neutron-full(-2)?$
+    branch: ^(?!stable/(havana|icehouse)).*$
+  - name: ^(gate|check)-tempest-dsvm-neutron-pg-full(-2)?$
+    branch: ^(?!stable/(havana|icehouse)).*$
     voting: false
+  - name: ^(gate|check)-tempest-dsvm-neutron(-2)?$
+    branch: ^(stable/).*$
   - name: ^(gate|check)-tempest-dsvm-neutron-full-icehouse$
     voting: false
   - name: ^(gate|check)-tempest-dsvm-neutron-heat-slow
@@ -1178,10 +1186,14 @@ projects:
       - gate-rally-dsvm-neutron-neutron
       - check-tempest-dsvm-neutron-2
       - check-tempest-dsvm-neutron-pg-2
+      - check-tempest-dsvm-neutron-full-2
+      - check-tempest-dsvm-neutron-pg-full-2
     gate:
       - gate-neutron-dsvm-functional
       - gate-tempest-dsvm-neutron-2
       - gate-tempest-dsvm-neutron-pg-2
+      - gate-tempest-dsvm-neutron-full-2
+      - gate-tempest-dsvm-neutron-pg-full-2
     experimental:
       - check-neutron-dsvm-api
       - gate-grenade-dsvm-neutron-forward
