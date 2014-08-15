@@ -38,6 +38,13 @@ pipelines:
               username: jenkins
           approval:
             - workflow: 1
+      zuul:
+        - event: parent-change-enqueued
+          pipeline: gate
+          require-approval:
+            - workflow: 1
+            - username: jenkins
+              older-than: 24h
     start:
       gerrit:
         verified: 0
