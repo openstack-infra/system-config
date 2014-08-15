@@ -937,6 +937,19 @@
 
 
 - project:
+    name: oslo.concurrency
+    node: 'bare-precise || bare-trusty'
+    tarball-site: tarballs.openstack.org
+    doc-publisher-site: docs.openstack.org
+
+    jobs:
+      - python-jobs
+      - openstack-publish-jobs
+      - pypi-jobs
+      - translation-jobs
+
+
+- project:
     name: oslo.config
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org

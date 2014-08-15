@@ -1958,6 +1958,15 @@ projects:
     gate:
       - gate-oslo-specs-python27
 
+  - name: openstack/oslo.concurrency
+    template:
+      - name: python-jobs
+      - name: check-requirements
+      - name: integrated-gate
+      - name: publish-to-pypi
+      - name: python3-jobs
+      - name: translation-jobs
+
   - name: openstack/oslo.config
     template:
       - name: python-jobs
