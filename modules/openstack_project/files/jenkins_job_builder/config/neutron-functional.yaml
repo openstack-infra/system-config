@@ -14,6 +14,8 @@
       - shell: |
           #!/bin/bash -xe
           export PYTHONUNBUFFERED=true
+          # This job uses devstack only to install neutron's system dependencies.
+          export ENABLED_SERVICES=mysql,rabbit,sysstat
           export DEVSTACK_GATE_TIMEOUT=120
           export DEVSTACK_GATE_TEMPEST=0
           export DEVSTACK_GATE_EXERCISES=0
@@ -24,8 +26,26 @@
               export OVERRIDE_ZUUL_BRANCH=$BRANCH_OVERRIDE
           fi
 
-          function post_test_hook {{
+          function gate_hook {{
+              $BASE/new/devstack-gate/devstack-vm-gate.sh
+
+              # Ideally devstack would only install dependencies
+              # rather than starting services, but for now unstack is
+              # a cheap way of accomplishing the same result.
               $BASE/new/devstack/unstack.sh
+
+              # Add a rootwrap filter to support test-only
+              # configuration (e.g. a KillFilter for processes that
+              # use the python installed in a tox env).
+              FUNC_FILTER=$BASE/new/neutron/neutron/tests/functional/functional.filters
+              if [[ -f $FUNC_FILTER ]]; then
+                  sed -e "s+\$BASE_PATH+$BASE/new/neutron/.tox/dsvm-functional+" \
+                      $FUNC_FILTER > /etc/neutron/rootwrap.d/functional.filters
+              fi
+          }}
+          export -f gate_hook
+
+          function post_test_hook {{
               cd $BASE/new/neutron
               # Run tests as the stack user to allow sudo+rootwrap.
               sudo chown -R stack:stack $BASE/new/neutron
