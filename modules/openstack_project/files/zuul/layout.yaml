@@ -231,8 +231,25 @@ pipelines:
     failure:
       gerrit: {}
 
+  - name: merge-check
+    description: >
+      Each time a change merges, this pipeline verifies that all open changes
+      on the same project are still mergable.
+    manager: IndependentPipelineManager
+    source: gerrit
+    trigger:
+      zuul:
+        - event: project-change-merged
+    merge-failure:
+      gerrit:
+        verified: -1
+
 
 project-templates:
+  - name: merge-check
+    merge-check:
+      - noop
+
   - name: python-jobs
     check:
       - 'gate-{name}-pep8'
@@ -2710,6 +2727,8 @@ projects:
       - bugdaystats-coverage
 
   - name: openstack-infra/config
+    template:
+      - name: merge-check
     check:
       - config-compare-xml
       - gate-config-layout
@@ -3178,8 +3197,8 @@ projects:
 
   - name: openstack-infra/zuul
     template:
+      - name: merge-check
       - name: publish-to-pypi
-    template:
       - name: python-jobs
     check:
       - dev-zuul-coverage
