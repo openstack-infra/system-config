@@ -19,32 +19,10 @@ pipelines:
           comment: (?i)^(Patch Set [0-9]+:)?( [\w\\+-]*)*(\n\n)?\s*(recheck|reverify)
         - event: comment-added
           require-approval:
-            - username: jenkins
-              older-than: 72h
-              verified: 1
-        - event: comment-added
-          require-approval:
-            - workflow: 1
-            - username: jenkins
-              older-than: 24h
-        - event: comment-added
-          comment: (?i)^(Patch Set [0-9]+:)?( [\w\\+-]*)*(\n\n)?\s*(recheck|reverify)
-          require-approval:
-            - workflow: 1
-            - username: jenkins
-        - event: comment-added
-          require-approval:
             - verified: [-1, -2]
               username: jenkins
           approval:
             - workflow: 1
-      zuul:
-        - event: parent-change-enqueued
-          pipeline: gate
-          require-approval:
-            - workflow: 1
-            - username: jenkins
-              older-than: 24h
     start:
       gerrit:
         verified: 0
@@ -67,7 +45,6 @@ pipelines:
       approval:
         - verified: [1, 2]
           username: jenkins
-          newer-than: 24h
         - workflow: 1
     trigger:
       gerrit:
