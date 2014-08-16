@@ -462,6 +462,10 @@ To rename a project:
 
      sudo invoke-rc.d zuul start
 
+#. Rename any associated groups whose names may have changed::
+
+     ssh -p 29418 review.openstack.org gerrit rename-group OLDNAME NEWNAME
+
 #. Merge the prepared Puppet configuration change, removing the
    original Jenkins jobs via the Jenkins WebUI later if needed.
 
