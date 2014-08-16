@@ -2556,12 +2556,6 @@ projects:
     post:
       - operations-guide-tox-doc-publishdocs
 
-  - name: openstack/openstack-security-notes
-    check:
-      - noop
-    gate:
-      - noop
-
   - name: openstack/security-doc
     template:
       - name: openstack-doc-gate
