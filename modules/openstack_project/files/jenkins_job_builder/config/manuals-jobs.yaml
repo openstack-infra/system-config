@@ -1,3 +1,17 @@
+- job:
+    name: propose-openstack-manuals-updates
+    node: proposal
+
+    builders:
+      - revoke-sudo
+      - link-logs
+      - net-info
+      - gerrit-git-prep
+      - shell: /usr/local/jenkins/slave_scripts/propose_update.sh openstack-manuals
+
+    publishers:
+      - console-log
+
 - job-template:
     name: 'gate-{name}-tox-doc-publish-{envlist}'
 

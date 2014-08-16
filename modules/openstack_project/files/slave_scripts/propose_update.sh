@@ -12,8 +12,18 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 
-INITIAL_COMMIT_MSG="Updated from global requirements"
-TOPIC="openstack/requirements"
+OWN_PROJECT=$1
+if [ -z "$OWN_PROJECT" ] ; then
+    echo "usage: $0 project"
+    exit 1
+fi
+if [ "$OWN_PROJECT" == "requirements" ] ; then
+    INITIAL_COMMIT_MSG="Updated from global requirements"
+    TOPIC="openstack/requirements"
+else
+    INITIAL_COMMIT_MSG="Updated from openstack-manuals"
+    TOPIC="openstack/openstack-manuals"
+fi
 USERNAME="proposal-bot"
 BRANCH=$ZUUL_REF
 ALL_SUCCESS=0
@@ -80,7 +90,11 @@ EOF
             continue
         fi
 
-        python update.py $PROJECT_DIR
+        if [ "$OWN_PROJECT" == "requirements" ] ; then
+            python update.py $PROJECT_DIR
+        else
+            bash -xe tools/sync-projects.sh $PROJECT_DIR
+        fi
 
         pushd $PROJECT_DIR
         if ! git diff --exit-code HEAD ; then

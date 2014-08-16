@@ -2570,6 +2570,7 @@ projects:
       - name: openstack-doc-translation
     post:
       - openstack-manuals-tox-doc-publishdocs
+      - propose-openstack-manuals-updates
 
   - name: openstack/operations-guide
     template:
