@@ -310,10 +310,6 @@
 - project: openstack/keystonemiddleware
   description: OpenStack Identity (Keystone) Middleware
   upstream: git://github.com/morganfainberg/keystonemiddleware
-- project: openstack/marconi
-- project: openstack/marconi-specs
-  group: marconi
-  upstream: git://github.com/FlaPer87/marconi-specs.git
 - project: openstack/netconn-api
   group: openstack-api-site
   options:
@@ -428,7 +424,6 @@
 - project: openstack/python-ironicclient
   description: A python client implementing the Ironic API.
 - project: openstack/python-keystoneclient
-- project: openstack/python-marconiclient
 - project: openstack/python-neutronclient
   docimpact-group: openstack-manuals
 - project: openstack/python-novaclient
@@ -442,6 +437,7 @@
 - project: openstack/python-tuskarclient
   description: Python bindings and CLI to Tuskar.
   upstream: git://github.com/tuskar/python-tuskarclient.git
+- project: openstack/python-zaqarclient
 - project: openstack/qa-specs
   group: tempest
 - project: openstack/requirements
@@ -512,6 +508,9 @@
   group: openstack-api-site
   options:
     - direct-release
+- project: openstack/zaqar
+- project: openstack/zaqar-specs
+  group: zaqar
 - project: stackforge-attic/murano-common
 - project: stackforge-attic/murano-conductor
 - project: stackforge-attic/murano-metadataclient
