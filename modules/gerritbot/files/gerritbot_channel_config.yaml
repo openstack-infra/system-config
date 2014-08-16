@@ -415,9 +415,9 @@ openstack-barbican:
     projects:
       - openstack/barbican
       - openstack/barbican-specs
+      - openstack/kite
       - openstack/python-barbicanclient
-      - stackforge/kite
-      - stackforge/python-kiteclient
+      - openstack/python-kiteclient
     branches:
       - master
 
