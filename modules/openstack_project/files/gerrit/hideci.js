@@ -18,9 +18,14 @@ var hashRegex = /^\#\/c\/[\/\d]+$/
 var ciRegex = /^(.* CI|Jenkins)$/
 // this regex matches "Patch set #"
 var psRegex = /^Patch Set (\d+):/
+// this regex matches merge failure messages
+var mergeFailedRegex = /^Merge Failed\./
+// this regex matches the name of CI systems we trust to report merge failures
+var trustedCIRegex = /^(OpenStack CI|Jenkins)$/
 
 ci_find_comments = function() {
     var comments = [];
+    var last_merge_failure = null;
     $("p").each(function() {
         var match = psRegex.exec(this.innerHTML);
         if (match !== null) {
@@ -31,9 +36,45 @@ ci_find_comments = function() {
                 top = $(this).parent().parent().parent();
                 name = $(this).parent().prev().children()[0].innerHTML;
             }
-            comments.push({"name":name, "psnum":psnum, "top":top, "comment":$(this).parent()});
+            // Search this comment for results
+	    var comment_object = $(this).parent();
+            var result_list = [];
+            comment_object.find("li.comment_test").each(function(i, li) {
+		var result = {};
+		result["name"] = $(li).find("span.comment_test_name").find("a")[0].innerHTML;
+		result["link"] = $(li).find("span.comment_test_name").find("a")[0];
+		result["result"] = $(li).find("span.comment_test_result")[0];
+		result_list.push(result);
+            });
+
+	    var comment = {"name":name, "psnum":psnum, "top":top, 
+			   "merge_failure":null,
+			   "results":result_list,
+			   "comment":comment_object};
+            comments.push(comment);
+
+	    // Keep a pointer to the most recent merge failure message from
+	    // the trusted CI system.  If there is a message from the system
+	    // after it, drop the reference.  This way we end up with a pointer
+	    // iff the last comment from the trusted system is a merge failure.
+	    if (trustedCIRegex.exec(name) !== null) {
+		if ($(this).next().length>0 &&
+		    mergeFailedRegex.exec($(this).next()[0].innerHTML) !== null) {
+		    last_merge_failure = comment;
+		} else if (result_list.length>0) {
+		    last_merge_failure = null;
+		}
+	    }
+
         }
     });
+    // If the last comment from the trusted system is a merge failure,
+    // mark that comment as a merge failure so it is displayed.  (We
+    // want to ignore it if there was a merge failure that was
+    // superceded.)
+    if (last_merge_failure !== null) {
+	last_merge_failure["merge_failure"] = true;
+    }
     return comments;
 };
 
@@ -43,20 +84,13 @@ ci_update_table = function() {
     var comments = ci_find_comments();
     $.each(comments, function(comment_index, comment) {
         while (patchsets.length < comment["psnum"]) {
-            patchsets.push({});
+	    // Whether there is a current merge failure in this
+	    // patchset.
+            patchsets.push({"_merge_failure": false});
         }
-        // Search this comment for results
-        var result_list = [];
-        comment["comment"].find("li.comment_test").each(function(i, li) {
-            var result = {};
-            result["name"] = $(li).find("span.comment_test_name").find("a")[0].innerHTML;
-            result["link"] = $(li).find("span.comment_test_name").find("a")[0];
-            result["result"] = $(li).find("span.comment_test_result")[0];
-            result_list.push(result);
-        });
 
         // If this comment has results
-        if (result_list.length > 0) {
+        if (comment["results"].length > 0) {
             // Get the name of the system
             var name = comment["name"];
             // an item in patchsets is a hash of systems
@@ -73,7 +107,7 @@ ci_update_table = function() {
                 system = {"jobs": [], "results": {}}
                 systems[name] = system;
             }
-            $.each(result_list, function(i, result) {
+            $.each(comment["results"], function(i, result) {
                 // For each result, add the name of the job to the
                 // ordered list if it isn't there already
                 if (system["jobs"].indexOf(result["name"]) < 0) {
@@ -83,6 +117,11 @@ ci_update_table = function() {
                 system["results"][result["name"]] = result;
             });
         }
+	// The merge failure flag will only be set on a comment if it
+	// is the most recent comment and is a merge failure.
+	if (comment["merge_failure"] === true) {
+	    patchsets[comment["psnum"]-1]["_merge_failure"] = true;
+	}
     });
 
     if (patchsets.length > 0) {
@@ -117,19 +156,23 @@ ci_update_table = function() {
             $(table).empty();
         }
         var patchset = patchsets[patchsets.length-1];
-        $.each(patchset, function(name, system) {
-            // Add a header for each system
-            var header = $("<tr>").append($('<td class="header" colspan="2">'+name+'</td>'));
-            $(table).append(header)
-            // Add the results
-            $.each(system["jobs"], function(i, name) {
-                var result = system["results"][name]
-                var tr = $("<tr>");
-                tr.append($("<td>").append($(result["link"]).clone()));
-                tr.append($("<td>").append($(result["result"]).clone()));
-                $(table).append(tr)
+	if (!patchset["_merge_failure"]) {
+            $.each(patchset, function(name, system) {
+		if (name != "_merge_failure") {
+                    // Add a header for each system
+                    var header = $("<tr>").append($('<td class="header" colspan="2">'+name+'</td>'));
+                    $(table).append(header);
+                    // Add the results
+                    $.each(system["jobs"], function(i, name) {
+                        var result = system["results"][name]
+                        var tr = $("<tr>");
+                        tr.append($("<td>").append($(result["link"]).clone()));
+                        tr.append($("<td>").append($(result["result"]).clone()));
+                        $(table).append(tr)
+                    });
+		}
             });
-        });
+	}
     }
 };
 
@@ -147,7 +190,8 @@ ci_toggle_visibility = function(comments) {
         comments = ci_find_comments();
     }
     $.each(comments, function(i, comment) {
-        if (ciRegex.exec(comment["name"])) {
+        if (ciRegex.exec(comment["name"]) &&
+	    !comment["merge_failure"]) {
             comment["top"].toggle();
         }
     });
