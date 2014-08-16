@@ -1099,6 +1099,17 @@ projects:
     gate:
       - gate-keystonemiddleware-python33
 
+  - name: openstack/kite
+    template:
+      - name: python-jobs
+      - name: check-requirements
+    check:
+      - gate-kite-python33
+    pre-release:
+      - kite-tarball
+    release:
+      - kite-tarball
+
   - name: openstack/zaqar
     template:
       - name: python-jobs
@@ -1521,6 +1532,17 @@ projects:
       - check-tripleo-ironic-undercloud-precise-nonha
       - check-tripleo-novabm-overcloud-precise-nonha
       - check-tripleo-novabm-overcloud-f20-nonha
+
+  - name: openstack/python-kiteclient
+    template:
+      - name: python-jobs
+      - name: publish-to-pypi
+    check:
+      - gate-python-kiteclient-requirements
+      - gate-python-kiteclient-python33
+    gate:
+      - gate-python-kiteclient-requirements
+      - gate-python-kiteclient-python33
 
   - name: openstack/python-zaqarclient
     template:
@@ -3614,17 +3636,6 @@ projects:
     gate:
       - noop
 
-  - name: stackforge/kite
-    template:
-      - name: python-jobs
-      - name: check-requirements
-    check:
-      - gate-kite-python33
-    pre-release:
-      - kite-tarball
-    release:
-      - kite-tarball
-
   - name: stackforge/libra
     template:
       - name: docs-on-rtfd
@@ -4435,17 +4446,6 @@ projects:
       - python-blazarclient-tarball
     release:
       - python-blazarclient-tarball
-
-  - name: stackforge/python-kiteclient
-    template:
-      - name: python-jobs
-      - name: publish-to-pypi
-    check:
-      - gate-python-kiteclient-requirements
-      - gate-python-kiteclient-python33
-    gate:
-      - gate-python-kiteclient-requirements
-      - gate-python-kiteclient-python33
 
   - name: stackforge/python-libraclient
     template:

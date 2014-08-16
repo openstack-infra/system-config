@@ -308,6 +308,8 @@
 - project: openstack/keystonemiddleware
   description: OpenStack Identity (Keystone) Middleware
   upstream: git://github.com/morganfainberg/keystonemiddleware
+- project: openstack/kite
+  description: A service for managing and distributing message encryption keys.
 - project: openstack/netconn-api
   group: openstack-api-site
   options:
@@ -421,6 +423,8 @@
 - project: openstack/python-ironicclient
   description: A python client implementing the Ironic API.
 - project: openstack/python-keystoneclient
+- project: openstack/python-kiteclient
+  description: Python bindings to Kite.
 - project: openstack/python-neutronclient
   docimpact-group: openstack-manuals
 - project: openstack/python-novaclient
@@ -819,8 +823,6 @@
 - project: stackforge/kickstack
   description: Rapid OpenStack deployment with puppet-dashboard, The Foreman, or any other Puppet ENC
   upstream: git://github.com/hastexo/kickstack
-- project: stackforge/kite
-  description: A service for managing and distributing message encryption keys.
 - project: stackforge/kwapi
   description: Energy Efficiency Monitoring
   upstream: git://github.com/frossigneux/kwapi.git
@@ -1075,8 +1077,6 @@
 - project: stackforge/python-jenkins
   upstream: git://github.com/jeblair/python-jenkins.git
   description: Python API for managing jobs and nodes in a Jenkins CI instance
-- project: stackforge/python-kiteclient
-  description: Python bindings to Kite.
 - project: stackforge/python-libraclient
 - project: stackforge/python-magnetodbclient
   description: Python client for MagnetoDB, the key-value database service for OpenStack cloud.
