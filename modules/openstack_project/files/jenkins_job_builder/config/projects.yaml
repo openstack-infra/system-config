@@ -1334,7 +1334,7 @@
 
 - project:
     name: zaqar-specs
-    node: bare-precise
+    node: 'bare-precise || bare-trusty'
 
     jobs:
       - specs-jobs
