@@ -237,6 +237,10 @@ pipelines:
       on the same project are still mergable.
     manager: IndependentPipelineManager
     source: gerrit
+    require:
+      approval:
+        - verified: [1, 2]
+          username: jenkins
     trigger:
       zuul:
         - event: project-change-merged
