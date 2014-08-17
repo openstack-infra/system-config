@@ -16,7 +16,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-for ip in `cat /etc/nodepool/primary_node /etc/nodepool/sub_nodes`; do
+for ip in `cat /etc/nodepool/primary_node /etc/nodepool/sub_nodes /etc/nodepool/primary_node_fixed /etc/nodepool/sub_nodes_fixed | sort -u`; do
     sudo iptables -I openstack-INPUT 1 -s $ip -j ACCEPT
 done
 
