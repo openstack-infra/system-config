@@ -87,7 +87,7 @@ def set_node_options(item, job, params, default):
     # Default to single use node. Potentially overriden below.
     # Select node to run job on.
     params['OFFLINE_NODE_WHEN_COMPLETE'] = '1'
-    proposal_re = r'^.*(merge-release-tags|(propose|upstream)-(requirements|translation)-updates?)$'  # noqa
+    proposal_re = r'^.*(merge-release-tags|(propose|upstream)-(openstack-manuals|requirements|translation)-updates?)$'  # noqa
     pypi_re = r'^.*-(jenkinsci|mavencentral|pypi-(both|wheel))-upload$'
     python26_re = r'^.*-(py(thon)?)?26.*$'
     centos6_re = r'^.*-centos6.*$'
