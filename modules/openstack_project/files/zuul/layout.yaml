@@ -1050,10 +1050,11 @@ projects:
       - gate-rally-dsvm-fakevirt-heat
     gate:
       - gate-devstack-dsvm-cells
+    check-tripleo:
+      - check-tripleo-novabm-overcloud-precise-nonha
     experimental-tripleo:
       - check-tripleo-novabm-undercloud-precise-nonha
       - check-tripleo-ironic-undercloud-precise-nonha
-      - check-tripleo-novabm-overcloud-precise-nonha
       - check-tripleo-ironic-overcloud-precise-ha
       - check-tripleo-novabm-overcloud-f20-nonha
     pre-release:
