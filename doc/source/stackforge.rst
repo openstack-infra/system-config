@@ -151,6 +151,8 @@ and add a new section for your project in alphabetical order within the file.
 It should look something like::
 
   - name: stackforge/project-name
+    template:
+      - name: merge-check
     check:
       - gate-project-name-docs
       - gate-project-name-pep8
@@ -170,6 +172,8 @@ If you aren't ready to run any gate tests yet and did not configure
 python-jobs in projects.yaml, it should look like this instead::
 
   - name: stackforge/project-name
+    template:
+      - name: merge-check
     check:
       - noop
     gate:
