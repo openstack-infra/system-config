@@ -30,6 +30,14 @@ class nodepool (
   $environment = {},
 ) {
 
+  $packages = [
+    'python-lxml', # needed by python-keystoneclient, has system bindings
+  ]
+
+  package { $packages:
+    ensure => present,
+  }
+
   class { 'mysql::server':
     config_hash => {
       'root_password'  => $mysql_root_password,
@@ -87,7 +95,10 @@ class nodepool (
     path        => '/usr/local/bin:/usr/bin:/bin/',
     refreshonly => true,
     subscribe   => Vcsrepo['/opt/nodepool'],
-    require     => Class['pip'],
+    require     => [
+      Class['pip'],
+      Package['python-lxml'],
+    ],
   }
 
   file { '/etc/nodepool':
