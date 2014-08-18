@@ -165,6 +165,22 @@ The config file that tells Logstash how to do this flattening can be
 found at
 :file:`modules/openstack_project/templates/logstash/indexer.conf.erb`
 
+This works via the tags that are associated with a given message.
+
+The tags in
+:file:`modules/openstack_project/templates/logstash/indexer.conf.erb`
+are used to tell logstash how to parse a given file's messages, based
+on the file's message format.
+
+When adding a new file to be indexed to
+:file:`modules/openstack_project/files/logstash/jenkins-log-client.yaml`
+at least one tag from the indexer.conf.erb file should be associated
+with the new file.  One can expect to see '{%logmessage%}' instead of
+actual message data if indexing is not working properly.
+
+In the event a new file's format is not covered, a patch for
+:file:`modules/openstack_project/templates/logstash/indexer.conf.erb`
+should be submitted with an appropriate parsing pattern.
 
 ElasticSearch
 -------------
