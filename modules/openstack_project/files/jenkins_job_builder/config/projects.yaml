@@ -3092,3 +3092,12 @@
 
     jobs:
       - python-jobs
+
+- project:
+    name: xstatic-angular-bootstrap
+    github-org: stackforge
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - python-jobs
+      - pypi-jobs
