@@ -1205,11 +1205,6 @@
   docimpact-group: turbo-hipster
   description: A generic zuul worker using the gearman protocol.
   upstream: git://github.com/rcbau/turbo-hipster.git
-- project: stackforge/ux
-  description: The OpenStack User Experience Project.
-  use-storyboard: true
-  options:
-    - no-gerrit
 - project: stackforge/warm
   description: Provides the ability to deploy OpenStack resources from Yaml templates.
   upstream: git://github.com/sahid/warm.git
