@@ -97,7 +97,7 @@ EOF
         fi
 
         pushd $PROJECT_DIR
-        if ! git diff --exit-code HEAD ; then
+        if ! git diff --stat --exit-code HEAD ; then
             # Commit and review
             git_args="-a -F-"
             git commit $git_args <<EOF
