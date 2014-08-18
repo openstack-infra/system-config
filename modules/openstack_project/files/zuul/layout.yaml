@@ -293,16 +293,16 @@ project-templates:
       - 'check-tempest-dsvm-neutron-heat-slow'
       - 'check-tempest-dsvm-neutron'
       - 'check-tempest-dsvm-neutron-pg'
-      - 'check-tempest-dsvm-neutron-full'
-      - 'check-tempest-dsvm-neutron-pg-full'
+      - 'check-tempest-dsvm-neutron-full-ext'
+      - 'check-tempest-dsvm-neutron-pg-full-ext'
       - 'gate-tempest-dsvm-neutron-large-ops'
       - 'check-grenade-dsvm-neutron'
     gate:
       - 'gate-tempest-dsvm-neutron'
       - 'gate-tempest-dsvm-neutron-pg'
       - 'gate-tempest-dsvm-neutron-heat-slow'
-      - 'gate-tempest-dsvm-neutron-full'
-      - 'gate-tempest-dsvm-neutron-pg-full'
+      - 'gate-tempest-dsvm-neutron-full-ext'
+      - 'gate-tempest-dsvm-neutron-pg-full-ext'
       - 'gate-tempest-dsvm-neutron-large-ops'
 
   - name: integrated-gate-sahara
