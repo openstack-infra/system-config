@@ -5137,3 +5137,9 @@ projects:
       - gate-rack-python27
     post:
       - rack-coverage
+
+  - name: stackforge/xstatic-angular-bootstrap
+    check:
+      - noop
+    gate:
+      - noop

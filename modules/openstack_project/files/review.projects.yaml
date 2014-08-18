@@ -1218,6 +1218,10 @@
   description: Angular JavaScript library packaged as XStatic.
   upstream: https://bitbucket.org/thesheep/xstatic-angular.git
   acl-config: /home/gerrit2/acls/stackforge/xstatic.config
+- project: stackforge/xstatic-angular-bootstrap
+  description: Angular Bootstrap JavaScript library packaged as XStatic.
+  upstream: https://github.com/IxDay/xstatic-angular-bootstrap
+  acl-config: /home/gerrit2/acls/stackforge/xstatic.config
 - project: stackforge/xstatic-angular-cookies
   description: Angular-Cookies JavaScript library packaged as XStatic.
   upstream: https://bitbucket.org/thesheep/xstatic-angular-cookies.git
