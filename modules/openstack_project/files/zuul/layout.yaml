@@ -5036,6 +5036,18 @@ projects:
     gate:
       - noop
 
+  - name: stackforge/xstatic-angular-animate
+    check:
+      - noop
+    gate:
+      - noop
+
+  - name: stackforge/xstatic-angular-bootstrap
+    check:
+      - noop
+    gate:
+      - noop
+
   - name: stackforge/xstatic-angular-cookies
     check:
       - noop
@@ -5043,6 +5055,12 @@ projects:
       - noop
 
   - name: stackforge/xstatic-angular-mock
+    check:
+      - noop
+    gate:
+      - noop
+
+  - name: stackforge/xstatic-angular-sanitize
     check:
       - noop
     gate:

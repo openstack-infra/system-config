@@ -2942,6 +2942,24 @@
       - pypi-jobs
 
 - project:
+    name: xstatic-angular-animate
+    node: bare-precise
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - python-jobs
+      - pypi-jobs
+
+- project:
+    name: xstatic-angular-bootstrap
+    node: bare-precise
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - python-jobs
+      - pypi-jobs
+
+- project:
     name: xstatic-angular-cookies
     node: bare-precise
     tarball-site: tarballs.openstack.org
@@ -2952,6 +2970,15 @@
 
 - project:
     name: xstatic-angular-mock
+    node: bare-precise
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - python-jobs
+      - pypi-jobs
+
+- project:
+    name: xstatic-angular-sanitize
     node: bare-precise
     tarball-site: tarballs.openstack.org
 
