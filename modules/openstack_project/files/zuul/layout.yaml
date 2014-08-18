@@ -784,6 +784,9 @@ jobs:
     voting: false
   - name: gate-ceilometer-python33
     branch: ^(?!stable/(havana|icehouse)).*$
+  - name: gate-horizon-integration
+    branch: ^(?!stable/(havana|icehouse)).*$
+    voting: false
 
 # The project list is grouped by type of project, and within each
 # group, projects are sorted (mostly) alphabetically.
@@ -1066,6 +1069,7 @@ projects:
       - gate-horizon-selenium
       - check-devstack-dsvm-cells
     experimental:
+      - gate-horizon-integration
       - gate-grenade-dsvm-forward
     pre-release:
       - horizon-tarball
