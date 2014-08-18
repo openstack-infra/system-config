@@ -780,6 +780,9 @@ jobs:
     voting: false
   - name: gate-oslo.db-tox-sqla_09
     voting: false
+  - name: gate-horizon-dsvm-integration
+    branch: ^(?!stable/(havana|icehouse)).*$
+    voting: false
 
 # The project list is grouped by type of project, and within each
 # group, projects are sorted (mostly) alphabetically.
@@ -1068,6 +1071,7 @@ projects:
       - gate-horizon-selenium
       - check-devstack-dsvm-cells
     experimental:
+      - gate-horizon-dsvm-integration
       - gate-grenade-dsvm-forward
     pre-release:
       - horizon-tarball
