@@ -428,6 +428,9 @@ project-templates:
       - 'gate-{name}-chef-lint'
       - 'gate-{name}-chef-unit'
 
+  # Note that we only publish integrated and incubated
+  # projects/programs on specs.o.o - the publish-specs job should not
+  # be used for stackforge projects.
   - name: specs-jobs
     check:
       - 'gate-{name}-docs'
