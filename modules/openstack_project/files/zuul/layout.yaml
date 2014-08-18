@@ -716,6 +716,9 @@ jobs:
     branch: ^(?!stable/(havana|icehouse)).*$
   - name: gate-nova-pip-missing-reqs
     voting: false
+  - name: gate-horizon-integration
+    branch: ^(?!stable/(havana|icehouse)).*$
+    voting: false
 
 # The project list is grouped by type of project, and within each
 # group, projects are sorted (mostly) alphabetically.
@@ -999,6 +1002,7 @@ projects:
       - gate-horizon-selenium
       - check-devstack-dsvm-cells
     experimental:
+      - gate-horizon-integration
       - gate-grenade-dsvm-forward
     pre-release:
       - horizon-tarball
