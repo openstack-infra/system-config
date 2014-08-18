@@ -5036,6 +5036,12 @@ projects:
     gate:
       - noop
 
+  - name: stackforge/xstatic-angular-bootstrap
+    check:
+      - noop
+    gate:
+      - noop
+
   - name: stackforge/xstatic-angular-cookies
     check:
       - noop
