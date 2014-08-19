@@ -441,79 +441,11 @@ project-templates:
 
 jobs:
   - name: ^.*$
+    parameter-function: set_node_options_default_trusty
+  # The infra puppet configs predominantly run on precise nodes.
+  # Test puppet for infra by default on precise nodes until that changes.
+  - name: ^gate-config-puppet.*$
     parameter-function: set_node_options_default_precise
-  - name: ^.*tempest-dsvm-aiopcpu.*$
-    parameter-function: set_node_options_default_trusty
-  - name: ^.*tempest-dsvm-neutron-aiopcpu.*$
-    parameter-function: set_node_options_default_trusty
-  # Pecan ceilometer tests need new mongodb available in trusty
-  - name: ^gate-pecan-tox-ceilometer-.*$
-    parameter-function: set_node_options_default_trusty
-  # IPA image builds need docker which requires trusty
-  - name: ^(gate|check)-.*zaqar.*$
-    parameter-function: set_node_options_default_trusty
-  - name: ironic-python-agent-buildimage-coreos
-    parameter-function: set_node_options_default_trusty
-  - name: gate-ironic-python-agent-buildimage-coreos
-    parameter-function: set_node_options_default_trusty
-  - name: ^gate-neutron-.*$
-    parameter-function: set_node_options_default_trusty
-  - name: ^gate-ceilometer-.*$
-    parameter-function: set_node_options_default_trusty
-  - name: ^gate-cinder-.*$
-    parameter-function: set_node_options_default_trusty
-  - name: ^gate-glance-.*$
-    parameter-function: set_node_options_default_trusty
-  - name: ^gate-swift-.*$
-    parameter-function: set_node_options_default_trusty
-  - name: ^gate-heat-.*$
-    parameter-function: set_node_options_default_trusty
-  - name: ^gate-keystone.*$
-    parameter-function: set_node_options_default_trusty
-  - name: ^gate-ironic-.*$
-    parameter-function: set_node_options_default_trusty
-  - name: ^(gate-)?nova-.*$
-    parameter-function: set_node_options_default_trusty
-  - name: ^gate-sahara-.*$
-    parameter-function: set_node_options_default_trusty
-  - name: ^gate-trove-.*$
-    parameter-function: set_node_options_default_trusty
-  - name: ^gate-monasca-common.*$
-    parameter-function: set_node_options_default_trusty
-  - name: ^monasca-common.*$
-    parameter-function: set_node_options_default_trusty
-  - name: ^gate-monasca-thresh.*$
-    parameter-function: set_node_options_default_trusty
-  - name: ^monasca-thresh.*$
-    parameter-function: set_node_options_default_trusty
-  - name: ^gate-python-cinderclient.*$
-    parameter-function: set_node_options_default_trusty
-  - name: ^gate-python-glanceclient.*$
-    parameter-function: set_node_options_default_trusty
-  - name: ^gate-python-heatclient.*$
-    parameter-function: set_node_options_default_trusty
-  - name: ^gate-python-ironicclient.*$
-    parameter-function: set_node_options_default_trusty
-  - name: ^gate-python-keystoneclient.*$
-    parameter-function: set_node_options_default_trusty
-  - name: ^gate-python-ceilometerclient.*$
-    parameter-function: set_node_options_default_trusty
-  - name: ^gate-python-neutronclient.*$
-    parameter-function: set_node_options_default_trusty
-  - name: ^gate-python-novaclient.*$
-    parameter-function: set_node_options_default_trusty
-  - name: ^gate-python-swiftclient.*$
-    parameter-function: set_node_options_default_trusty
-  - name: ^gate-python-saharaclient.*$
-    parameter-function: set_node_options_default_trusty
-  - name: ^gate-python-troveclient.*$
-    parameter-function: set_node_options_default_trusty
-  - name: ^gate-oslo.*$
-    parameter-function: set_node_options_default_trusty
-  - name: ^.*-js-release-branch$
-    parameter-function: set_node_options_default_trusty
-  - name: ^gate-rack-.*$
-    parameter-function: set_node_options_default_trusty
   # tempest and d-g branchless tests need to only run on master
   # (needs to be early to not impact non-voting stanzas later)
   - name: ^(?!periodic-).*(-icehouse|-havana)$
