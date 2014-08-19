@@ -3100,6 +3100,16 @@
       - python-jobs
 
 - project:
+    name: tuskar-ui-extras
+    github-org: stackforge
+    node: bare-precise
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - python-jobs
+      - pypi-jobs
+
+- project:
     name: gerrit-dash-creator
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
