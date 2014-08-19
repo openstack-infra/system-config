@@ -213,4 +213,23 @@ class openstack_project::lists(
     webserver   => $listdomain,
     mailserver  => $listdomain,
   }
+
+  maillist { 'third-party-announce':
+    ensure      => present,
+    admin       => 'anteaya@anteaya.info',
+    password    => $listpassword,
+    description => 'Announcements for third party system admins.',
+    webserver   => $listdomain,
+    mailserver  => $listdomain,
+  }
+
+  maillist { 'third-party-request':
+    ensure      => present,
+    admin       => 'anteaya@anteaya.info',
+    password    => $listpassword,
+    description => 'Third party system account requests.',
+    webserver   => $listdomain,
+    mailserver  => $listdomain,
+  }
+
 }
