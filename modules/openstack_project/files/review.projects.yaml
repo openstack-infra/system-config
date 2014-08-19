@@ -1183,6 +1183,9 @@
 - project: stackforge/swift3
   description: Swift3 Middleware for OpenStack Swift, allowing access to OpenStack swift via the Amazon S3 API.
   upstream: git://github.com/fujita/swift3.git
+- project: stackforge/swiftonfile
+  description: Swift Object Server implementation that enables objects created using the Swift API to be accessed as files on a POSIX filesystem.
+  upstream: git://github.com/swiftonfile/swiftonfile.git
 - project: stackforge/swiftpolicy
   description: SwiftPolicy Middleware for OpenStack Swift allows to use a JSON policy file to handle swift authorizations.
   upstream: git://github.com/cloudwatt/swiftpolicy.git
