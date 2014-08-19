@@ -1238,6 +1238,10 @@
   description: D3 JavaScript library packaged as XStatic.
   upstream: https://bitbucket.org/thesheep/xstatic-d3.git
   acl-config: /home/gerrit2/acls/stackforge/xstatic.config
+- project: stackforge/xstatic-font-awesome
+  description: An icon font for web pages packaged as XStatic.
+  upstream: https://bitbucket.org/thesheep/xstatic-font-awesome.git
+  acl-config: /home/gerrit2/acls/stackforge/xstatic.config
 - project: stackforge/xstatic-hogan
   description: Hogan JavaScript library packaged as XStatic.
   upstream: https://bitbucket.org/thesheep/xstatic-hogan.git
