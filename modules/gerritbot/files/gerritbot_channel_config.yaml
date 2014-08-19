@@ -896,3 +896,13 @@ openstack-poppy:
       - stackforge/poppy
     branches:
       - master
+
+swiftonfile:
+    events:
+      - patchset-created
+      - change-merged
+      - x-vrif-minus-2
+    projects:
+      - stackforge/swiftonfile
+    branches:
+      - master
