@@ -74,13 +74,13 @@ function setup_puppet_fedora {
         ln -s /usr/local/share/gems/gems/hiera-puppet-* /etc/puppet/modules/
     fi
 
-    # Puppet expects for an expects the command to be pip-python on
+    # Puppet expects the pip command named as pip-python on
     # Fedora, as per the packaged command name.  However, we're
     # installing from get-pip.py so it's just 'pip'.  An easy
     # work-around is to just symlink pip-python to "fool" it.
     # See upstream issue:
     #  https://tickets.puppetlabs.com/browse/PUP-1082
-    ln -s /usr/bin/pip /usr/bin/pip-python
+    ln -fs /usr/bin/pip /usr/bin/pip-python
 }
 
 function setup_puppet_rhel7 {
