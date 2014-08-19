@@ -1798,6 +1798,7 @@ projects:
       - name: merge-check
       - name: check-requirements
       - name: publish-to-pypi
+      - name: python3-jobs
     check:
       - gate-diskimage-builder-pep8
       - gate-diskimage-builder-python26
