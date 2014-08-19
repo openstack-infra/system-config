@@ -32,6 +32,7 @@
           #!/bin/bash -xe
           export PROJECTS="stackforge/rally $PROJECTS"
           export PROJECTS="openstack/ceilometer $PROJECTS"
+          export CEILOMETER_NOTIFICATION_TOPICS=notifications,profiler
           export DEVSTACK_GATE_NEUTRON={neutron}
           export DEVSTACK_GATE_TEMPEST_LARGE_OPS={large_ops}
           export DEVSTACK_GATE_EXERCISES=0
