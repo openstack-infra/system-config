@@ -3092,3 +3092,12 @@
 
     jobs:
       - python-jobs
+
+- project:
+    name: gerrit-dash-creator
+    node: 'bare-precise || bare-trusty'
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - python-jobs
+      - pypi-jobs
