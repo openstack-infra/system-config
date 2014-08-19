@@ -786,14 +786,10 @@ jobs:
   - name: gate-swift-tox-func
     branch: ^(?!stable/(havana|icehouse)).*$
     voting: false
-  - name: gate-tuskar-ui-selenium
-    voting: false
   # Swift log publishing details
   - name: ^experimental-swift-logs.*$
     swift:
       - name: logs
-  - name: gate-tuskar-ui-jshint
-    voting: false
   - name: ^(gate|check)-pecan-tox-ceilometer-stable
     voting: false
   - name: ^(gate|check)-pecan-tox-designate-stable
@@ -2604,6 +2600,7 @@ projects:
       - gate-tuskar-ui-python26
       - gate-tuskar-ui-python27
       - gate-tuskar-ui-selenium
+      - gate-tuskar-ui-jshint
     experimental-tripleo:
       - check-tripleo-novabm-undercloud-precise-nonha
       - check-tripleo-ironic-undercloud-precise-nonha
