@@ -5368,6 +5368,14 @@ projects:
     post:
       - graffiti-coverage
 
+  - name: stackforge/namos
+    template:
+      - name: merge-check
+    check:
+      - noop
+    gate:
+      - noop
+
   - name: stackforge/stacktach
     template:
       - name: merge-check
