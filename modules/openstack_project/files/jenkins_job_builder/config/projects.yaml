@@ -2616,6 +2616,14 @@
       - gate-{name}-docs
 
 - project:
+    name: containers
+    node: 'bare-precise || bare-trusty'
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - python-jobs
+
+- project:
     name: rubick
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org

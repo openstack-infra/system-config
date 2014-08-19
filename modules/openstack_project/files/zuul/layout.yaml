@@ -853,6 +853,26 @@ projects:
       - gate-cliff-tox-openstackclient-stable
       - gate-cliff-tox-openstackclient-tip
 
+  - name: openstack/containers
+    template:
+      - name: merge-check
+      - name: python-jobs
+      - name: integrated-gate
+      - name: check-requirements
+      - name: docs-on-rtfd
+    check:
+      - gate-containers-pep8
+      - gate-containers-python27
+      - gate-solum-devstack-dsvm
+    gate:
+      - gate-containers-pep8
+      - gate-containers-python27
+      - gate-solum-devstack-dsvm
+    pre-release:
+      - containers-tarball
+    release:
+      - containers-tarball
+
   - name: stackforge/driverlog
     template:
       - name: merge-check

@@ -251,6 +251,8 @@
   group: openstack-api-site
   options:
     - direct-release
+- project: openstack/containers
+  description: OpenStack Containers Service
 - project: openstack/designate
 - project: openstack/designate-specs
 - project: openstack/dib-utils

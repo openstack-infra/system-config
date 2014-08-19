@@ -877,6 +877,16 @@ congress:
     branches:
       - master
 
+openstack-containers:
+    events:
+      - patchset-created
+      - change-merged
+      - x-vrif-minus-2
+    projects:
+      - openstack/containers
+    branches:
+      - master
+
 git-upstream:
     events:
       - patchset-created
