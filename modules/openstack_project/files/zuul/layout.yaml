@@ -2917,7 +2917,6 @@ projects:
       - config-compare-xml
       - gate-config-layout
       - gate-config-pep8
-      - gate-config-puppet-lint
       - gate-config-puppet-syntax
       - gate-config-puppet-apply-precise
       - gate-config-puppet-apply-centos6
@@ -2928,7 +2927,6 @@ projects:
     gate:
       - gate-config-layout
       - gate-config-pep8
-      - gate-config-puppet-lint
       - gate-config-puppet-syntax
       - gate-config-puppet-apply-precise
       - gate-config-puppet-apply-centos6
