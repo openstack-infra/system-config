@@ -5316,6 +5316,16 @@ projects:
       - gate-swift-ceph-backend-pep8
       - gate-swift-ceph-backend-python27
 
+  - name: stackforge/swiftonfile
+    template:
+      - name: merge-check
+    check:
+      - gate-swiftonfile-pep8
+      - gate-swiftonfile-python27
+    gate:
+      - gate-swiftonfile-pep8
+      - gate-swiftonfile-python27
+
   - name: stackforge/swift3
     template:
       - name: merge-check

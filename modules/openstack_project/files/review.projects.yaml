@@ -1180,6 +1180,9 @@
 - project: stackforge/swift-ceph-backend
   description: Ceph backend for Swift
   upstream: git://github.com/enovance/swift-ceph-backend.git
+- project: stackforge/swiftonfile
+  description: Swift Object Server implementation that enables objects created using the Swift API to be accessed as files on a POSIX filesystem.
+  upstream: git://github.com/swiftonfile/swiftonfile.git
 - project: stackforge/swift3
   description: Swift3 Middleware for OpenStack Swift, allowing access to OpenStack swift via the Amazon S3 API.
   upstream: git://github.com/fujita/swift3.git

@@ -2621,6 +2621,14 @@
       - python-jobs
 
 - project:
+    name: swiftonfile
+    node: bare-trusty
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - python-jobs
+
+- project:
     name: swift3
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
