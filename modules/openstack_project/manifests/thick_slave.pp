@@ -96,9 +96,14 @@ class openstack_project::thick_slave(
     require  => Package[$::openstack_project::jenkins_params::rubygems_package],
   }
 
+  package { 'puppet-lint':
+    ensure   => '0.3.2',
+    provider => gem,
+    require  => Package[$::openstack_project::jenkins_params::rubygems_package],
+  }
+
   $gem_packages = [
     'bundler',
-    'puppet-lint',
     'puppetlabs_spec_helper',
   ]
 
