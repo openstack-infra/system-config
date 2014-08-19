@@ -3657,6 +3657,17 @@ projects:
       - name: merge-check
       - name: stackforge-specs-jobs
 
+  - name: stackforge/containers
+    template:
+      - name: merge-check
+      - name: check-requirements
+    check:
+      - gate-containers-pep8
+      - gate-containers-python27
+    gate:
+      - gate-containers-pep8
+      - gate-containers-python27
+
   - name: stackforge/cookbook-openstack-block-storage
     template:
       - name: merge-check
