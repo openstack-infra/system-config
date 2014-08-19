@@ -543,6 +543,7 @@ jobs:
   - name: check-tempest-dsvm-ironic-postgres-nv
     voting: false
   - name: check-tempest-dsvm-virtual-ironic-nv
+    branch: ^(?!stable/havana).*$
     voting: false
   - name: ^(gate|check)-tempest-dsvm-cells$
     voting: false
