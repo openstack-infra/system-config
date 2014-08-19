@@ -134,6 +134,7 @@ class openstack_project::cacti (
     'wiki.openstack.org',
     'zm01.openstack.org',
     'zm02.openstack.org',
+    'zm03.openstack.org',
     'zuul.openstack.org',
   ]
 
