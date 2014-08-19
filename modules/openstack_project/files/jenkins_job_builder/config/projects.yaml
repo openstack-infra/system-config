@@ -886,6 +886,14 @@
       - python-jobs
       - pypi-jobs
 
+- project:
+    name: magnum
+    node: 'bare-precise || bare-trusty'
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - python-jobs
+      - openstack-publish-jobs
 
 - project:
     name: nova

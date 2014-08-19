@@ -1165,6 +1165,18 @@ projects:
     gate:
       - gate-zaqar-specs-python27
 
+  - name: openstack/magnum
+    template:
+      - name: merge-check
+      - name: python-jobs
+      - name: integrated-gate
+      - name: check-requirements
+      - name: openstack-server-publish-jobs
+    pre-release:
+      - magnum-tarball
+    release:
+      - magnum-tarball
+
   - name: openstack/neutron
     template:
       - name: merge-check

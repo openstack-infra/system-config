@@ -312,6 +312,8 @@
   upstream: git://github.com/morganfainberg/keystonemiddleware
 - project: openstack/kite
   description: A service for managing and distributing message encryption keys.
+- project: openstack/magnum
+  description: OpenStack Containers Service
 - project: openstack/netconn-api
   group: openstack-api-site
   options:

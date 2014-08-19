@@ -200,6 +200,16 @@ openstack-sahara:
       - master
       - stable/icehouse
 
+openstack-magnum:
+    events:
+      - patchset-created
+      - change-merged
+      - x-vrif-minus-2
+    projects:
+      - openstack/magnum
+    branches:
+      - master
+
 openstack-nova:
     events:
       - patchset-created
