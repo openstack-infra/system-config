@@ -795,6 +795,8 @@ jobs:
     voting: false
   - name: ^(gate|check)-zaqar-python33
     branch: ^(?!stable/(havana|icehouse)).*$
+  - name: gate-horizon-jshint
+    voting: false
   - name: gate-tempest-dsvm-ceilometer-mongodb
     voting: false
   - name: gate-tempest-dsvm-ceilometer-mongodb-full
@@ -1076,6 +1078,7 @@ projects:
     check:
       - gate-horizon-python27-django14
       - gate-horizon-selenium
+      - gate-horizon-jshint
       - check-devstack-dsvm-cells
     gate:
       - gate-horizon-python27-django14
