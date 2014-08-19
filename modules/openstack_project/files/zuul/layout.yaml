@@ -5368,6 +5368,11 @@ projects:
     post:
       - graffiti-coverage
 
+  - name: stackforge/namos
+    template:
+      - name: python-jobs
+      - name: merge-check
+
   - name: stackforge/stacktach
     template:
       - name: merge-check
