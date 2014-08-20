@@ -1014,6 +1014,7 @@
       - pypi-jobs
       - oslotest-cross-test
       - translation-jobs
+      - check-oslo.messaging-dsvm-amqp1
 
 - project:
    name: oslo.middleware

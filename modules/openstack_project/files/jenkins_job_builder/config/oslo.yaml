@@ -62,3 +62,35 @@
           node: 'devstack-precise || devstack-trusty'
           branch-designator: ''
           branch-override: default
+
+- job:
+    # Run the AMQP 1.0 messaging tests under devstack, as the required
+    # AMQP libraries must be installed
+    name: 'check-oslo.messaging-dsvm-amqp1'
+    node: 'devstack-trusty || devstack-centos7'
+
+    builders:
+      - link-logs
+      - devstack-checkout
+      - shell: |
+          #!/bin/bash -xe
+          export PYTHONUNBUFFERED=true
+          export DEVSTACK_GATE_TEMPEST=0
+          export DEVSTACK_GATE_EXERCISES=0
+          export RPC_MESSAGING_PROTOCOL=AMQP1
+
+          function post_test_hook {
+              cd $BASE/new/oslo.messaging
+              # Run tests as the stack user to allow sudo+rootwrap.
+              sudo chown -R stack:stack $BASE/new/oslo.messaging
+              echo "Running oslo.messaging AMQP 1.0 test suite"
+              sudo -H -u stack tox -eamqp1 -v
+          }
+          export -f post_test_hook
+          cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
+          ./safe-devstack-vm-gate-wrap.sh
+
+    publishers:
+      - test-results
+      - devstack-logs
+      - console-log
