@@ -62,3 +62,26 @@
           node: 'devstack-precise || devstack-trusty'
           branch-designator: ''
           branch-override: default
+
+- job:
+    # Install the AMQP development libraries then run the AMQP 1.0
+    # messaging functional tests
+    name: 'check-oslo.messaging-amqp1'
+    node: 'devstack-f20'
+
+    builders:
+      - shell: |
+          #!/bin/bash -xe
+          if ! rpm -ql qpid-proton-c-devel >/dev/null ; then
+              sudo yum install -y qpid-proton-c-devel
+          fi
+          rpm -ql qpid-proton-c-devel
+      - revoke-sudo
+      - gerrit-git-prep
+      - tox:
+          envlist: 'amqp1'
+      - assert-no-extra-files
+
+    publishers:
+      - test-results
+      - console-log
