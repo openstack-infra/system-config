@@ -1063,6 +1063,7 @@
       - pypi-jobs
       - oslotest-cross-test
       - translation-jobs
+      - oslo.messaging-qpid-tests
 
 - project:
    name: oslo.middleware

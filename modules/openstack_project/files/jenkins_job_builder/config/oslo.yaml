@@ -62,3 +62,73 @@
           node: 'devstack-precise || devstack-trusty'
           branch-designator: ''
           branch-override: default
+
+
+- job-template:
+    # validate oslo.messaging Apache QPID backend
+    name: '{pipeline}-tempest-dsvm-oslo.messaging-qpid-{protocol}{branch-override}'
+    node: '{node}'
+
+    wrappers:
+      - build-timeout:
+          timeout: 125
+      - timestamps
+
+    builders:
+      - link-logs
+      - net-info
+      - devstack-checkout
+      - shell: |
+          #!/bin/bash -xe
+          export PYTHONUNBUFFERED=true
+          export RPC_MESSAGING_PROTOCOL={protocol}
+          export DEVSTACK_GATE_QPID=1
+          export DEVSTACK_GATE_TIMEOUT=120
+          export DEVSTACK_GATE_TEMPEST=1
+          export DEVSTACK_GATE_TEMPEST_FULL=1
+          export BRANCH_OVERRIDE={branch-override}
+          if [ "$BRANCH_OVERRIDE" != "default" ] ; then
+              export OVERRIDE_ZUUL_BRANCH=$BRANCH_OVERRIDE
+          fi
+
+          # if using version 1.0 of the protocol, also run the
+          # 1.0 functional tox tests
+          if [ "$RPC_MESSAGING_PROTOCOL" == "AMQP1" ] ; then
+              function post_test_hook {{
+                  /usr/local/jenkins/slave_scripts/run-tox.sh amqp1
+              }}
+              export -f post_test_hook
+          fi
+
+          cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
+          ./safe-devstack-vm-gate-wrap.sh
+
+    publishers:
+      - test-results
+      - devstack-logs
+      - console-log
+
+- job-group:
+    name: oslo.messaging-qpid-tests
+
+    # TODO(kgiusti) AMQP 1.0 tests only work on f20+, el7+ for now,
+    # as other nodes only support old pre-1.0 qpidd
+    jobs:
+      - '{pipeline}-tempest-dsvm-oslo.messaging-qpid-{protocol}{branch-override}':
+          pipeline: check
+          protocol: legacy010
+          branch-override: default
+      - '{pipeline}-tempest-dsvm-oslo.messaging-qpid-{protocol}{branch-override}':
+          pipeline: gate
+          protocol: legacy010
+          branch-override: default
+      - '{pipeline}-tempest-dsvm-oslo.messaging-qpid-{protocol}{branch-override}':
+          pipeline: check
+          protocol: AMQP1
+          node: 'devstack-f20'
+          branch-override: default
+      - '{pipeline}-tempest-dsvm-oslo.messaging-qpid-{protocol}{branch-override}':
+          pipeline: gate
+          protocol: AMQP1
+          node: 'devstack-f20'
+          branch-override: default

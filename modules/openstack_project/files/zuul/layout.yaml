@@ -674,6 +674,8 @@ jobs:
     voting: false
   - name: gate-oslo.vmware-python33
     voting: false
+  - name: ^(gate|check)-tempest-dsvm-oslo.messaging-qpid-.*$
+    voting: false
   - name: gate-solum-infra-guestagent-python33
     voting: false
   - name: gate-solum-infra-guestagent-pypy
@@ -2210,6 +2212,7 @@ projects:
       - name: large-ops
       - name: publish-to-pypi
       - name: translation-jobs
+      - name: oslo.messaging-qpid-tests
     check:
       - check-devstack-dsvm-cells
       - check-oslotest-dsvm-oslo.messaging
