@@ -607,8 +607,6 @@ jobs:
       - 'modules/openstack_project/files/accessbot/channels.yaml'
   - name: check-tripleo-ironic-overcloud-precise-ha
     voting: false
-  - name: gate-os-cloud-config-python33
-    voting: false
 # Continous publishing from master of the following documentation targets:
   - name: ^.*manuals-upstream-translation-update$
     branch: master
@@ -1974,25 +1972,14 @@ projects:
       - name: merge-check
       - name: check-requirements
       - name: publish-to-pypi
-    check:
-      - gate-os-cloud-config-pep8
-      - gate-os-cloud-config-python26
-      - gate-os-cloud-config-python27
-      - gate-os-cloud-config-python33
+      - name: python-jobs
+      - name: python3-jobs
     check-tripleo:
       - check-tripleo-novabm-undercloud-precise-nonha
       - check-tripleo-ironic-undercloud-precise-nonha
       - check-tripleo-novabm-overcloud-f20-nonha
-    gate:
-      - gate-os-cloud-config-pep8
-      - gate-os-cloud-config-python26
-      - gate-os-cloud-config-python27
     experimental-tripleo:
       - check-tripleo-novabm-overcloud-precise-nonha
-    post:
-      - os-cloud-config-docs
-      - os-cloud-config-coverage
-      - os-cloud-config-branch-tarball
 
 #TODO: add docs
   - name: openstack/os-collect-config
