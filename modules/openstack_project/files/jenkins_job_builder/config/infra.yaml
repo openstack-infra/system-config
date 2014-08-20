@@ -99,3 +99,17 @@
 
     publishers:
       - console-log
+
+
+- job:
+    name: gate-config-projects-yaml
+    node: 'bare-precise || bare-trusty'
+
+    builders:
+      - revoke-sudo
+      - gerrit-git-prep
+      - tox:
+          envlist: projects
+
+    publishers:
+      - console-log
