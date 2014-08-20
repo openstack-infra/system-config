@@ -122,8 +122,8 @@
     builders:
       - shell: |
           mkdir -p .bundle
-          ruby1.9.1 /usr/bin/bundle config --global jobs $(nproc)
-          ruby1.9.1 /usr/bin/bundle install --path=.bundle
+          bundle config --global jobs $(nproc)
+          bundle install --path=.bundle
 
 - builder:
     name: chef-berkshelf-prep
@@ -132,10 +132,10 @@
           #!/bin/bash -x
           grep -E .*berkshelf.*3\.\d*\.\d*.* Gemfile
           if [ $? -eq 0 ]; then
-            ruby1.9.1 /usr/bin/bundle exec berks vendor .cookbooks
+            bundle exec berks vendor .cookbooks
           else
             mkdir -p .cookbooks
-            ruby1.9.1 /usr/bin/bundle exec berks install --path=.cookbooks
+            bundle exec berks install --path=.cookbooks
           fi
           COOKBOOK=$(awk '/^name/ {print $NF}' metadata.rb |tr -d \"\')
           if [ -z $COOKBOOK ]; then
@@ -148,9 +148,9 @@
     builders:
       - shell: |
           if grep rubocop: Strainerfile; then
-              ruby1.9.1 /usr/bin/bundle exec strainer test --cookbooks-path=.cookbooks --only=rubocop
+              bundle exec strainer test --cookbooks-path=.cookbooks --only=rubocop
           else
-              ruby1.9.1 /usr/bin/bundle exec rubocop
+              bundle exec rubocop
           fi
 
 - builder:
@@ -158,9 +158,9 @@
     builders:
       - shell: |
           if grep foodcritic: Strainerfile; then
-              ruby1.9.1 /usr/bin/bundle exec strainer test --cookbooks-path=.cookbooks --only=foodcritic
+              bundle exec strainer test --cookbooks-path=.cookbooks --only=foodcritic
           else
-              ruby1.9.1 /usr/bin/bundle exec foodcritic -f any -t ~FC003 -t ~FC023 .
+              bundle exec foodcritic -f any -t ~FC003 -t ~FC023 .
           fi
 
 - builder:
@@ -169,9 +169,9 @@
       - shell: |
           COOKBOOK=$(awk '/^name/ {print $NF}' metadata.rb |tr -d \"\')
           if grep chefspec: Strainerfile; then
-              ruby1.9.1 /usr/bin/bundle exec strainer test --cookbooks-path=.cookbooks --only=chefspec
+              bundle exec strainer test --cookbooks-path=.cookbooks --only=chefspec
           else
-              ruby1.9.1 /usr/bin/bundle exec rspec .cookbooks/$COOKBOOK/spec
+              bundle exec rspec .cookbooks/$COOKBOOK/spec
           fi
 
 - builder:

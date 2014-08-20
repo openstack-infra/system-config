@@ -65,12 +65,12 @@
       - shell: |
           #!/bin/bash -xe
           mkdir -p .cookbooks .bundle
-          ruby1.9.1 /usr/bin/bundle config --global jobs $(nproc)
-          ruby1.9.1 /usr/bin/bundle install --path=.bundle
+          bundle config --global jobs $(nproc)
+          bundle install --path=.bundle
           # Validates cookbooks
-          ruby1.9.1 /usr/bin/bundle exec berks install --path=.cookbooks
+          bundle exec berks install --path=.cookbooks
           # Validates roles
-          ruby1.9.1 /usr/bin/bundle exec spiceweasel infrastructure.yml --debug
+          bundle exec spiceweasel infrastructure.yml --debug
 
     publishers:
       - console-log
