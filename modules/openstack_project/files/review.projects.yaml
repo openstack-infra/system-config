@@ -1227,6 +1227,14 @@
   description: Angular JavaScript library packaged as XStatic.
   upstream: https://bitbucket.org/thesheep/xstatic-angular.git
   acl-config: /home/gerrit2/acls/stackforge/xstatic.config
+- project: stackforge/xstatic-angular-animate
+  description: Angular Animate JavaScript library packaged as XStatic.
+  upstream: https://github.com/enovance/xstatic-angular-animate
+  acl-config: /home/gerrit2/acls/stackforge/xstatic.config
+- project: stackforge/xstatic-angular-bootstrap
+  description: Angular Bootstrap JavaScript library packaged as XStatic.
+  upstream: https://github.com/enovance/xstatic-angular-bootstrap
+  acl-config: /home/gerrit2/acls/stackforge/xstatic.config
 - project: stackforge/xstatic-angular-cookies
   description: Angular-Cookies JavaScript library packaged as XStatic.
   upstream: https://bitbucket.org/thesheep/xstatic-angular-cookies.git
@@ -1234,6 +1242,10 @@
 - project: stackforge/xstatic-angular-mock
   description: Angular-Mock JavaScript library packaged as XStatic.
   upstream: https://bitbucket.org/thesheep/xstatic-angular-mock.git
+  acl-config: /home/gerrit2/acls/stackforge/xstatic.config
+- project: stackforge/xstatic-angular-sanitize
+  description: Angular Sanitize JavaScript library packaged as XStatic.
+  upstream: https://github.com/enovance/xstatic-angular-sanitize
   acl-config: /home/gerrit2/acls/stackforge/xstatic.config
 - project: stackforge/xstatic-bootstrap-datepicker
   description: Bootstrap-Datepicker JavaScript library packaged as XStatic.

@@ -5472,6 +5472,22 @@ projects:
     gate:
       - noop
 
+  - name: stackforge/xstatic-angular-animate
+    template:
+      - name: merge-check
+    check:
+      - noop
+    gate:
+      - noop
+
+  - name: stackforge/xstatic-angular-bootstrap
+    template:
+      - name: merge-check
+    check:
+      - noop
+    gate:
+      - noop
+
   - name: stackforge/xstatic-angular-cookies
     template:
       - name: merge-check
@@ -5481,6 +5497,14 @@ projects:
       - noop
 
   - name: stackforge/xstatic-angular-mock
+    template:
+      - name: merge-check
+    check:
+      - noop
+    gate:
+      - noop
+
+  - name: stackforge/xstatic-angular-sanitize
     template:
       - name: merge-check
     check:
