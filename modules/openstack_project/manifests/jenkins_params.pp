@@ -130,15 +130,6 @@ class openstack_project::jenkins_params {
       }
       $ruby1_9_1_package = 'ruby1.9.1'
       $ruby1_9_1_dev_package = 'ruby1.9.1-dev'
-
-      # will install ruby-bundler for Ubuntu Precise
-      # and bundler for Debian or newer Ubuntu distros
-      if ($::lsbdistcodename == 'precise') {
-        $ruby_bundler_package = 'ruby-bundler'
-      }
-      else {
-        $ruby_bundler_package = 'bundler'
-      }
       # Common Lisp interpreter, used for cl-openstack-client
       $sbcl_package = 'sbcl'
       $sqlite_package = 'sqlite3'

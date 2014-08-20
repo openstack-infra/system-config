@@ -81,10 +81,6 @@ class jenkins::slave(
         ensure => present,
       }
 
-      package { $::jenkins::params::ruby_bundler_package:
-        ensure => present,
-      }
-
       package { 'openjdk-6-jre-headless':
         ensure  => purged,
         require => Package[$::jenkins::params::jdk_package],

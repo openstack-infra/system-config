@@ -8,8 +8,8 @@
             cp test/environment.yml.travis-ci test/environment.yml
             mkdir .bundled_gems
             export GEM_HOME=`pwd`/.bundled_gems
-            ruby1.9.1 /usr/bin/bundle --without development
-            ruby1.9.1 /usr/bin/bundle exec rake
+            bundle --without development
+            bundle exec rake
 
     publishers:
       - console-log
