@@ -5538,6 +5538,14 @@ projects:
     gate:
       - noop
 
+  - name: stackforge/xstatic-font-awesome
+    template:
+      - name: merge-check
+    check:
+      - noop
+    gate:
+      - noop
+
   - name: stackforge/xstatic-hogan
     template:
       - name: merge-check
