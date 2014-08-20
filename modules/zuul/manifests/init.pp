@@ -211,15 +211,17 @@ class zuul (
     require => File['/var/lib/zuul'],
   }
 
-  package { 'libjs-jquery':
-    ensure => present,
+  package { 'jquery':
+    ensure   => present,
+    provider => 'npm',
+    version  => '1.11.1'
   }
 
   file { '/var/lib/zuul/www/jquery.min.js':
     ensure  => link,
-    target  => '/usr/share/javascript/jquery/jquery.min.js',
+    target  => '/usr/share/lib/node_modules/jquery/dist/jquery.min.js',
     require => [File['/var/lib/zuul/www'],
-                Package['libjs-jquery']],
+                Package['jquery']],
   }
 
   vcsrepo { '/opt/twitter-bootstrap':
@@ -233,7 +235,7 @@ class zuul (
     ensure  => link,
     target  => '/opt/twitter-bootstrap/dist',
     require => [File['/var/lib/zuul/www'],
-                Package['libjs-jquery'],
+                Package['jquery'],
                 Vcsrepo['/opt/twitter-bootstrap']],
   }
 
