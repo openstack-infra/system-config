@@ -23,9 +23,6 @@ pipelines:
               username: jenkins
           approval:
             - workflow: 1
-    start:
-      gerrit:
-        verified: 0
     success:
       gerrit:
         verified: 1
