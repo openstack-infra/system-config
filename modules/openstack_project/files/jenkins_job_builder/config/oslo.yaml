@@ -62,3 +62,19 @@
           node: 'devstack-precise || devstack-trusty'
           branch-designator: ''
           branch-override: default
+
+- job:
+    # Run the AMQP 1.0 messaging functional tests
+    name: 'check-oslo.messaging-amqp1'
+    node: 'devstack-f20'
+
+    builders:
+      - revoke-sudo
+      - gerrit-git-prep
+      - tox:
+          envlist: 'amqp1'
+      - assert-no-extra-files
+
+    publishers:
+      - test-results
+      - console-log
