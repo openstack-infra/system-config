@@ -62,3 +62,81 @@
           node: 'devstack-precise || devstack-trusty'
           branch-designator: ''
           branch-override: default
+
+
+- job-template:
+    # validate oslo.messaging Apache QPID backend
+    name: '{pipeline}-tempest-dsvm-oslo.messaging-qpid-{protocol}'
+    node: '{node}'
+
+    wrappers:
+      - build-timeout:
+          timeout: 125
+      - timestamps
+
+    builders:
+      - link-logs
+      - net-info
+      - devstack-checkout
+      - shell: |
+          #!/bin/bash -xe
+          export PYTHONUNBUFFERED=true
+          export RPC_MESSAGING_PROTOCOL={protocol}
+          export DEVSTACK_GATE_QPID=1
+          export DEVSTACK_GATE_TIMEOUT=120
+          export DEVSTACK_GATE_TEMPEST=1
+          export DEVSTACK_GATE_TEMPEST_FULL=1
+          export BRANCH_OVERRIDE={branch-override}
+          if [ "$BRANCH_OVERRIDE" != "default" ] ; then
+              export OVERRIDE_ZUUL_BRANCH=$BRANCH_OVERRIDE
+          fi
+
+          # if using version 1.0 of the protocol, also run the
+          # 1.0 functional tox tests
+          if [ "$RPC_MESSAGING_PROTOCOL" == "AMQP1" ] ; then
+              function post_test_hook {{
+                  /usr/local/jenkins/slave_scripts/run-tox.sh amqp1
+              }}
+              export -f post_test_hook
+          fi
+
+          cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
+          ./safe-devstack-vm-gate-wrap.sh
+
+    publishers:
+      - test-results
+      - devstack-logs
+      - console-log
+
+- job-group:
+    name: oslo.messaging-qpid-tests
+
+    # Test the legacy AMQP 0-10 protocol on qpidd:
+    jobs:
+      - '{pipeline}-tempest-dsvm-oslo.messaging-qpid-{protocol}':
+          pipeline: check
+          protocol: legacy010
+          branch-override: default
+      - '{pipeline}-tempest-dsvm-oslo.messaging-qpid-{protocol}':
+          pipeline: gate
+          protocol: legacy010
+          branch-override: default
+
+- job-group:
+    name: oslo.messaging-amqp1-tests
+
+    # TODO(kgiusti) the AMQP 1.0 driver is supported only by the qpidd
+    # broker for now. qpidd must be at least version 0.26, which
+    # is only available on f20+ and el7+ nodes, as other nodes only
+    # have old pre-1.0 qpidd
+    jobs:
+      - '{pipeline}-tempest-dsvm-oslo.messaging-qpid-{protocol}':
+          pipeline: check
+          protocol: AMQP1
+          node: 'devstack-f20'
+          branch-override: default
+      - '{pipeline}-tempest-dsvm-oslo.messaging-qpid-{protocol}':
+          pipeline: gate
+          protocol: AMQP1
+          node: 'devstack-f20'
+          branch-override: default

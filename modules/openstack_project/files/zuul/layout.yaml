@@ -673,6 +673,8 @@ jobs:
     voting: false
   - name: gate-oslo.vmware-python33
     voting: false
+  - name: ^(gate|check)-tempest-dsvm-oslo.messaging-qpid-.*$
+    voting: false
   - name: gate-solum-infra-guestagent-python33
     voting: false
   - name: gate-solum-infra-guestagent-pypy
@@ -2253,8 +2255,12 @@ projects:
     check:
       - check-devstack-dsvm-cells
       - check-oslotest-dsvm-oslo.messaging
+      - check-tempest-dsvm-oslo.messaging-qpid-legacy010
+      - check-tempest-dsvm-oslo.messaging-qpid-AMQP1
     gate:
       - gate-devstack-dsvm-cells
+      - gate-tempest-dsvm-oslo.messaging-qpid-legacy010
+      - gate-tempest-dsvm-oslo.messaging-qpid-AMQP1
     experimental-tripleo:
       - check-tripleo-novabm-undercloud-precise-nonha
       - check-tripleo-ironic-undercloud-precise-nonha
