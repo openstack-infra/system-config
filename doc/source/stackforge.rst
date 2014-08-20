@@ -174,10 +174,7 @@ python-jobs in projects.yaml, it should look like this instead::
   - name: stackforge/project-name
     template:
       - name: merge-check
-    check:
-      - noop
-    gate:
-      - noop
+      - name: noop-jobs
 
 That concludes the bare minimum openstack-infra/config changes necessary to
 add a project to StackForge. You can commit these changes and submit
