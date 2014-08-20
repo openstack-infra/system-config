@@ -636,6 +636,8 @@ jobs:
     voting: false
   - name: gate-murano-dashboard-requirements
     voting: false
+  - name: check-oslo.messaging-amqp1
+    voting: false
   - name: gate-oslo.log-python33
     voting: false
   - name: gate-oslo.utils-python33
@@ -2178,6 +2180,7 @@ projects:
     check:
       - check-devstack-dsvm-cells
       - check-oslotest-dsvm-oslo.messaging
+      - check-oslo.messaging-amqp1
     gate:
       - gate-devstack-dsvm-cells
     experimental-tripleo:
