@@ -27,6 +27,10 @@ Requirements
 
   * A system can also be set up to only do '+1' reviews and leave all the
     '-1's to be manually confirmed.
+
+* A third-party system may only leave one comment per patch set
+  (unless it is retriggered).
+
 * The maintainers are responsible for re-triggering tests when their third
   party testing system breaks.
 * Support recheck to request re-running a test.
