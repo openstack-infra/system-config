@@ -3626,6 +3626,12 @@ projects:
       - gate-cloudkitty-python27
       - gate-cloudkitty-python33
 
+  - name: stackforge/cloudkitty-dashboard
+    template:
+      - name: merge-check
+      - name: python-jobs
+      - name: python3-jobs
+
   - name: stackforge/cloudroast
     template:
       - name: merge-check
