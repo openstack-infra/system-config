@@ -3158,10 +3158,8 @@ projects:
     template:
       - name: merge-check
     check:
-      - gate-config-puppet-lint
       - gate-config-puppet-syntax
     gate:
-      - gate-config-puppet-lint
       - gate-config-puppet-syntax
 
   - name: openstack-infra/puppet-vinz
