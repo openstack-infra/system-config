@@ -69,6 +69,10 @@ class openstack_project::thick_slave(
       onlyif  => "/bin/rpm -qa|/bin/grep -q ${::openstack_project::jenkins_params::python_requests_package}",
       before  => Package['requests'],
     }
+    # library needed for AMQP 1.0 support in oslo.messaging, available via EPEL:
+    package { $::openstack_project::jenkins_params::qpid_proton_dev_package:
+      ensure   => '0.7',
+    }
   } else {
     package { $::openstack_project::jenkins_params::python_requests_package:
       ensure => absent,
