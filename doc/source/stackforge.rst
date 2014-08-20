@@ -79,7 +79,7 @@ and make it look like::
   label-Workflow = -1..+1 group project-name-core
 
   [access "refs/tags/*"]
-  pushSignedTag = group project-name-ptl
+  pushSignedTag = group project-name-release
 
   [receive]
   requireChangeId = true
