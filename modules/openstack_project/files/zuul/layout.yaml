@@ -651,6 +651,8 @@ jobs:
     voting: false
   - name: gate-oslo.vmware-python33
     voting: false
+  - name: check-oslo.messaging-amqp1
+    voting: false
   - name: gate-solum-infra-guestagent-python33
     voting: false
   - name: gate-solum-infra-guestagent-pypy
@@ -2179,6 +2181,7 @@ projects:
     check:
       - check-devstack-dsvm-cells
       - check-oslotest-dsvm-oslo.messaging
+      - check-oslo.messaging-amqp1
     gate:
       - gate-devstack-dsvm-cells
     experimental-tripleo:
