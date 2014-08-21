@@ -411,14 +411,22 @@ project-templates:
 
   # Note that we only publish integrated and incubated
   # projects/programs on specs.o.o - the publish-specs job should not
-  # be used for stackforge projects.
-  - name: specs-jobs
+  # be used for stackforge projects, use stackforge-specs-jobs instead.
+  - name: openstack-specs-jobs
     check:
       - 'gate-{name}-docs'
     gate:
       - 'gate-{name}-docs'
     post:
       - '{name}-publish-specs'
+
+  # Same job as openstack-specs-job but does not publish to
+  # specs.openstack.org.
+  - name: stackforge-specs-jobs
+    check:
+      - 'gate-{name}-docs'
+    gate:
+      - 'gate-{name}-docs'
 
 jobs:
   - name: ^.*$
@@ -741,7 +749,7 @@ projects:
   - name: openstack/barbican-specs
     template:
       - name: merge-check
-      - name: specs-jobs
+      - name: openstack-specs-jobs
 
   - name: openstack/ceilometer
     template:
@@ -772,7 +780,7 @@ projects:
   - name: openstack/ceilometer-specs
     template:
       - name: merge-check
-      - name: specs-jobs
+      - name: openstack-specs-jobs
     check:
       - gate-ceilometer-specs-python27
     gate:
@@ -807,7 +815,7 @@ projects:
   - name: openstack/cinder-specs
     template:
       - name: merge-check
-      - name: specs-jobs
+      - name: openstack-specs-jobs
     check:
       - gate-cinder-specs-python27
     gate:
@@ -877,7 +885,7 @@ projects:
   - name: openstack/designate-specs
     template:
       - name: merge-check
-      - name: specs-jobs
+      - name: openstack-specs-jobs
     check:
       - gate-designate-specs-python27
     gate:
@@ -914,7 +922,7 @@ projects:
   - name: openstack/glance-specs
     template:
       - name: merge-check
-      - name: specs-jobs
+      - name: openstack-specs-jobs
     check:
       - gate-glance-specs-python27
     gate:
@@ -978,7 +986,7 @@ projects:
   - name: openstack/heat-specs
     template:
       - name: merge-check
-      - name: specs-jobs
+      - name: openstack-specs-jobs
 
   - name: openstack/horizon
     template:
@@ -1032,7 +1040,7 @@ projects:
   - name: openstack/ironic-specs
     template:
       - name: merge-check
-      - name: specs-jobs
+      - name: openstack-specs-jobs
     check:
       - gate-ironic-specs-python27
     gate:
@@ -1121,7 +1129,7 @@ projects:
   - name: openstack/zaqar-specs
     template:
       - name: merge-check
-      - name: specs-jobs
+      - name: openstack-specs-jobs
     check:
       - gate-zaqar-specs-python27
     gate:
@@ -1167,7 +1175,7 @@ projects:
   - name: openstack/neutron-specs
     template:
       - name: merge-check
-      - name: specs-jobs
+      - name: openstack-specs-jobs
     check:
       - gate-neutron-specs-python27
     gate:
@@ -1212,7 +1220,7 @@ projects:
   - name: openstack/nova-specs
     template:
       - name: merge-check
-      - name: specs-jobs
+      - name: openstack-specs-jobs
     check:
       - gate-nova-specs-python27
     gate:
@@ -1253,7 +1261,7 @@ projects:
   - name: openstack/sahara-specs
     template:
       - name: merge-check
-      - name: specs-jobs
+      - name: openstack-specs-jobs
     check:
       - gate-sahara-specs-python27
     gate:
@@ -2010,7 +2018,7 @@ projects:
   - name: openstack/oslo-specs
     template:
       - name: merge-check
-      - name: specs-jobs
+      - name: openstack-specs-jobs
     check:
       - gate-oslo-specs-python27
     gate:
@@ -2340,7 +2348,7 @@ projects:
   - name: openstack/qa-specs
     template:
       - name: merge-check
-      - name: specs-jobs
+      - name: openstack-specs-jobs
 
   - name: openstack/tempest
     template:
@@ -2474,7 +2482,7 @@ projects:
   - name: openstack/tripleo-specs
     template:
       - name: merge-check
-      - name: specs-jobs
+      - name: openstack-specs-jobs
     check:
       - gate-tripleo-specs-python27
     gate:
@@ -2534,7 +2542,7 @@ projects:
   - name: openstack/keystone-specs
     template:
       - name: merge-check
-      - name: specs-jobs
+      - name: openstack-specs-jobs
     check:
       - gate-keystone-specs-python27
     gate:
@@ -2564,7 +2572,7 @@ projects:
   - name: openstack/swift-specs
     template:
       - name: merge-check
-      - name: specs-jobs
+      - name: openstack-specs-jobs
 
   - name: openstack/volume-api
     template:
@@ -2588,7 +2596,7 @@ projects:
   - name: openstack/docs-specs
     template:
       - name: merge-check
-      - name: specs-jobs
+      - name: openstack-specs-jobs
     check:
       - gate-docs-specs-python27
     gate:
@@ -3019,7 +3027,7 @@ projects:
   - name: openstack-infra/infra-specs
     template:
       - name: merge-check
-      - name: specs-jobs
+      - name: openstack-specs-jobs
 
   - name: openstack-infra/groups-static-pages
     template:
@@ -3615,10 +3623,7 @@ projects:
   - name: stackforge/congress-specs
     template:
       - name: merge-check
-    check:
-      - gate-congress-specs-docs
-    gate:
-      - gate-congress-specs-docs
+      - name: stackforge-specs-jobs
 
   - name: stackforge/cookbook-openstack-block-storage
     template:
@@ -3831,12 +3836,11 @@ projects:
   - name: stackforge/fuel-specs
     template:
       - name: merge-check
+      - name: stackforge-specs-jobs
     check:
       - gate-fuel-specs-python27
-      - gate-fuel-specs-docs
     gate:
       - gate-fuel-specs-python27
-      - gate-fuel-specs-docs
 
   - name: stackforge/fuel-web
     template:
@@ -4278,10 +4282,7 @@ projects:
   - name: stackforge/openstack-chef-specs
     template:
       - name: merge-check
-    check:
-      - gate-openstack-chef-specs-docs
-    gate:
-      - gate-openstack-chef-specs-docs
+      - name: stackforge-specs-jobs
 
   - name: stackforge/openstack-chef-repo
     template:
@@ -5025,10 +5026,7 @@ projects:
   - name: stackforge/solum-specs
     template:
       - name: merge-check
-    check:
-      - gate-solum-specs-docs
-    gate:
-      - gate-solum-specs-docs
+      - name: stackforge-specs-jobs
 
   - name: stackforge/python-surveilclient
     template:
@@ -5426,12 +5424,11 @@ projects:
   - name: stackforge/tacker-specs
     template:
       - name: merge-check
+      - name: stackforge-specs-jobs
     check:
       - gate-tacker-specs-python27
-      - gate-tacker-specs-docs
     gate:
       - gate-tacker-specs-python27
-      - gate-tacker-specs-docs
 
   - name: openstack/training-guides
     template:
