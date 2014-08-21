@@ -4153,7 +4153,7 @@ projects:
     gate:
       - gate-monasca-thresh-build
     post:
-      - monasca-thresh-localrepo-upload
+      - monasca-thresh-maven-tar-upload
 
   - name: stackforge/monasca-ui
     template:

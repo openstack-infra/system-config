@@ -356,6 +356,18 @@
 
 # ======================================================================
 
+
+- publisher:
+    name: named-tarball
+    publishers:
+      - archive:
+          artifacts: '{tarball}'
+      - scp:
+          site: '{site}'
+          files:
+            - target: 'tarballs/{project}/'
+              source: '{tarball}'
+
 - publisher:
     name: tarball
     publishers:
