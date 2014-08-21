@@ -349,6 +349,12 @@ project-templates:
       - 'periodic-{name}-python26-havana'
       - 'periodic-{name}-python27-havana'
 
+  - name: periodic-icehouse
+    periodic-stable:
+      - 'periodic-{name}-docs-icehouse'
+      - 'periodic-{name}-python26-icehouse'
+      - 'periodic-{name}-python27-icehouse'
+
   - name: openstack-doc-gate
     check:
       - gate-{name}-tox-checkniceness
@@ -760,6 +766,7 @@ projects:
       - name: python3-jobs
       - name: openstack-server-publish-jobs
       - name: periodic-havana
+      - name: periodic-icehouse
       - name: check-requirements
       - name: integrated-gate
       - name: translation-jobs
@@ -794,6 +801,7 @@ projects:
       - name: python-jobs
       - name: openstack-server-publish-jobs
       - name: periodic-havana
+      - name: periodic-icehouse
       - name: check-requirements
       - name: integrated-gate
       - name: translation-jobs
@@ -899,6 +907,7 @@ projects:
       - name: python-jobs
       - name: openstack-server-publish-jobs
       - name: periodic-havana
+      - name: periodic-icehouse
       - name: check-requirements
       - name: integrated-gate
       - name: translation-jobs
@@ -962,6 +971,7 @@ projects:
       - name: python-jobs
       - name: openstack-server-publish-jobs
       - name: periodic-havana
+      - name: periodic-icehouse
       - name: check-requirements
       - name: integrated-gate
       - name: translation-jobs
@@ -996,6 +1006,7 @@ projects:
       - name: python-jobs
       - name: openstack-server-publish-jobs
       - name: periodic-havana
+      - name: periodic-icehouse
       - name: check-requirements
       - name: integrated-gate
       - name: translation-jobs
@@ -1054,6 +1065,7 @@ projects:
       - name: python-jobs
       - name: openstack-server-publish-jobs
       - name: periodic-havana
+      - name: periodic-icehouse
       - name: check-requirements
       - name: integrated-gate
       - name: large-ops
@@ -1143,6 +1155,7 @@ projects:
       - name: python-jobs
       - name: openstack-server-publish-jobs
       - name: periodic-havana
+      - name: periodic-icehouse
       - name: check-requirements
       - name: integrated-gate-neutron
       - name: translation-jobs
@@ -1189,6 +1202,7 @@ projects:
       - name: python-jobs
       - name: openstack-server-publish-jobs
       - name: periodic-havana
+      - name: periodic-icehouse
       - name: check-requirements
       - name: integrated-gate
       - name: large-ops
@@ -1330,6 +1344,7 @@ projects:
       - name: merge-check
       - name: python-jobs
       - name: openstack-server-publish-jobs
+      - name: periodic-icehouse
       - name: check-requirements
       - name: integrated-gate
       - name: openstack-doc-gate
@@ -2413,6 +2428,9 @@ projects:
       - periodic-tempest-dsvm-full-havana
       - periodic-tempest-dsvm-neutron-havana
       - periodic-tempest-dsvm-postgres-full-havana
+      - periodic-tempest-dsvm-full-icehouse
+      - periodic-tempest-dsvm-neutron-icehouse
+      - periodic-tempest-dsvm-postgres-full-icehouse
     periodic-qa:
       - periodic-tempest-dsvm-full-non-isolated-master
       - periodic-tempest-dsvm-neutron-full-non-isolated-master
