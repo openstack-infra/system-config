@@ -610,15 +610,7 @@ jobs:
     voting: false
   - name: gate-murano-dashboard-requirements
     voting: false
-  - name: gate-oslo.serialization-docs
-    voting: false
-  - name: gate-oslo.utils-docs
-    voting: false
   - name: gate-oslo.utils-python33
-    voting: false
-  - name: gate-oslo.vmware-docs
-    voting: false
-  - name: gate-oslo.vmware-requirements
     voting: false
   - name: gate-oslo.vmware-python33
     voting: false
