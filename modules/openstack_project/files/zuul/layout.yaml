@@ -958,11 +958,12 @@ projects:
     check:
       - check-heat-dsvm-functional
       - check-devstack-dsvm-cells
-      - gate-rally-dsvm-fakevirt-heat
     gate:
       - gate-devstack-dsvm-cells
     check-tripleo:
       - check-tripleo-novabm-overcloud-precise-nonha
+    experimental:
+      - gate-rally-dsvm-fakevirt-heat
     experimental-tripleo:
       - check-tripleo-novabm-undercloud-precise-nonha
       - check-tripleo-ironic-undercloud-precise-nonha
