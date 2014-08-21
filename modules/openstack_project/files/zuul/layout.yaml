@@ -666,6 +666,8 @@ jobs:
     branch: ^(?!stable/havana).*$
   - name: check-tempest-dsvm-docker
     voting: false
+  - name: check-tempest-dsvm-f20-docker
+    voting: false
   - name: check-neutron-dsvm-functional
     branch: ^(?!stable/havana).*$
   - name: gate-neutron-dsvm-functional
@@ -1233,6 +1235,7 @@ projects:
       - name: check-requirements
     check:
       - check-tempest-dsvm-docker
+      - check-tempest-dsvm-f20-docker
 
   - name: openstack/pycadf
     template:
