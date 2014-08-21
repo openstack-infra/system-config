@@ -112,6 +112,10 @@ channels:
   - name: openstack-sahara
   - name: openstack-sdks
   - name: openstack-security
+    operators:
+      - bdpayne
+      - hyakuhei
+      - nkinder
   - name: openstack-state-management
   - name: openstack-swift
   - name: openstack-translation
