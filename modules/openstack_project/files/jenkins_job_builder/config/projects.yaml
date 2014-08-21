@@ -1871,7 +1871,7 @@
 
 - project:
     name: puppet-openstack_extras
-    node: bare-precise
+    node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
     jobs:
@@ -2463,7 +2463,7 @@
       - rally-jobs
       - hook-{name}-rtfd
       - gate-rally-install-{node}:
-          node: bare-precise
+          node: 'bare-precise || bare-trusty'
       - gate-rally-install-{node}:
           node: bare-centos6
 
@@ -2786,7 +2786,7 @@
 
 - project:
     name: ec2-api
-    node: bare-precise
+    node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
     jobs:
@@ -2922,7 +2922,7 @@
 
 - project:
     name: python-magnetodbclient
-    node: bare-precise
+    node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
     jobs:
@@ -2932,7 +2932,7 @@
 
 - project:
     name: tacker-specs
-    node: bare-precise
+    node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
     jobs:
@@ -2941,7 +2941,7 @@
 
 - project:
     name: xstatic-angular
-    node: bare-precise
+    node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
     jobs:
@@ -2950,7 +2950,7 @@
 
 - project:
     name: xstatic-angular-cookies
-    node: bare-precise
+    node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
     jobs:
@@ -2959,7 +2959,7 @@
 
 - project:
     name: xstatic-angular-mock
-    node: bare-precise
+    node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
     jobs:
@@ -2968,7 +2968,7 @@
 
 - project:
     name: xstatic-bootstrap-datepicker
-    node: bare-precise
+    node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
     jobs:
@@ -2977,7 +2977,7 @@
 
 - project:
     name: xstatic-bootstrap-scss
-    node: bare-precise
+    node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
     jobs:
@@ -2986,7 +2986,7 @@
 
 - project:
     name: xstatic-d3
-    node: bare-precise
+    node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
     jobs:
@@ -2995,7 +2995,7 @@
 
 - project:
     name: xstatic-hogan
-    node: bare-precise
+    node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
     jobs:
@@ -3004,7 +3004,7 @@
 
 - project:
     name: xstatic-jasmine
-    node: bare-precise
+    node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
     jobs:
@@ -3013,7 +3013,7 @@
 
 - project:
     name: xstatic-jquery-migrate
-    node: bare-precise
+    node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
     jobs:
@@ -3022,7 +3022,7 @@
 
 - project:
     name: xstatic-jquery.bootstrap.wizard
-    node: bare-precise
+    node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
     jobs:
@@ -3031,7 +3031,7 @@
 
 - project:
     name: xstatic-jquery.quicksearch
-    node: bare-precise
+    node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
     jobs:
@@ -3040,7 +3040,7 @@
 
 - project:
     name: xstatic-jquery.tablesorter
-    node: bare-precise
+    node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
     jobs:
@@ -3049,7 +3049,7 @@
 
 - project:
     name: xstatic-jsencrypt
-    node: bare-precise
+    node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
     jobs:
@@ -3058,7 +3058,7 @@
 
 - project:
     name: xstatic-qunit
-    node: bare-precise
+    node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
     jobs:
@@ -3067,7 +3067,7 @@
 
 - project:
     name: xstatic-spin
-    node: bare-precise
+    node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
     jobs:
@@ -3076,7 +3076,7 @@
 
 - project:
     name: xstatic-rickshaw
-    node: bare-precise
+    node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
     jobs:
@@ -3085,7 +3085,7 @@
 
 - project:
     name: doc8
-    node: bare-precise
+    node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
     jobs:
@@ -3103,7 +3103,7 @@
 - project:
     name: tuskar-ui-extras
     github-org: stackforge
-    node: bare-precise
+    node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
     jobs:
