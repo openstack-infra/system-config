@@ -77,3 +77,14 @@
       - 'periodic-{name}-python26{branch-name}'
       - 'periodic-{name}-python27{branch-name}'
       - 'periodic-{name}-docs{branch-name}'
+
+
+- job-group:
+    name: python-icehouse-bitrot-jobs
+    branch: 'stable/icehouse'
+    branch-name: '-icehouse'
+    node: 'bare-precise || bare-trusty'
+    jobs:
+      - 'periodic-{name}-python26{branch-name}'
+      - 'periodic-{name}-python27{branch-name}'
+      - 'periodic-{name}-docs{branch-name}'

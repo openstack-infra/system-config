@@ -349,6 +349,12 @@ project-templates:
       - 'periodic-{name}-python26-havana'
       - 'periodic-{name}-python27-havana'
 
+  - name: periodic-icehouse
+    periodic-stable:
+      - 'periodic-{name}-docs-icehouse'
+      - 'periodic-{name}-python26-icehouse'
+      - 'periodic-{name}-python27-icehouse'
+
   - name: openstack-doc-gate
     check:
       - gate-{name}-tox-checkniceness
