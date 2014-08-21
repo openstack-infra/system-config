@@ -83,8 +83,13 @@ fi
 # Overwrite /etc/resolv.conf at boot
 sudo dd of=/etc/rc.local <<EOF
 #!/bin/bash
-set -e
 set -o xtrace
+
+# Some providers inject dynamic network config statically. Work around this
+# for DNS nameservers. This is expected to fail on some nodes so remove -e.
+set +e
+sed -i -e 's/\(DNS[0-9]*=[.0-9]\+\)/#\1/g' /etc/sysconfig/network-scripts/ifcfg-*
+set -e
 
 echo 'nameserver 127.0.0.1' > /etc/resolv.conf
 
