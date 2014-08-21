@@ -27,6 +27,25 @@
       - console-log
 
 - job-template:
+    name: '{name}-maven-tar-upload'
+    node: '{node}'
+
+    wrappers:
+      - build-timeout:
+          timeout: 30
+      - timestamps
+
+    builders:
+      - revoke-sudo
+
+    publishers:
+      - named-tarball:
+          site: '{tarball-site}'
+          tarball: '{name}/target/*.tar.gz'
+          project: '{name}'
+      - console-log
+
+- job-template:
     name: '{name}-mavencentral-upload'
     node: pypi
 
@@ -54,4 +73,5 @@
     jobs:
       - 'gate-{name}-build'
       - '{name}-localrepo-upload'
+      - '{name}-maven-tar-upload'
       - '{name}-mavencentral-upload'
