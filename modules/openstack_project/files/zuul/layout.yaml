@@ -716,6 +716,8 @@ jobs:
     voting: false
   - name: gate-ceilometer-python33
     branch: ^(?!stable/(havana|icehouse)).*$
+  - name: gate-nova-pip-missing-reqs
+    voting: false
 
 # The project list is grouped by type of project, and within each
 # group, projects are sorted (mostly) alphabetically.
@@ -1196,6 +1198,7 @@ projects:
       - check-tempest-dsvm-neutron-pg
       - check-tempest-dsvm-nova-v3-full
       - check-tempest-dsvm-docker
+      - gate-nova-pip-missing-reqs
     experimental-tripleo:
       - check-tripleo-novabm-undercloud-precise-nonha
       - check-tripleo-ironic-undercloud-precise-nonha
