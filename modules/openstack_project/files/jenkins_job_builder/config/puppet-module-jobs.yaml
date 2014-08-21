@@ -3,6 +3,7 @@
     node: '{node}'
 
     builders:
+      - uninstall-puppet
       - revoke-sudo
       - gerrit-git-prep
       - shell: |
