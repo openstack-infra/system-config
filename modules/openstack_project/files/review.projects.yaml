@@ -925,6 +925,8 @@
   group: murano
   upstream: git://github.com/Mirantis/murano-docs.git
   acl-config: /home/gerrit2/acls/stackforge/murano.config
+- project: stackforge/namos
+  description: Device and Service manager
 - project: stackforge/nova-docker
   description: Docker driver for OpenStack Nova
   upstream: git://github.com/russellb/nova-docker.git
