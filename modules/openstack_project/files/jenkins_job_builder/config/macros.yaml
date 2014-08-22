@@ -220,6 +220,14 @@
       - shell: "/usr/local/jenkins/slave_scripts/run-tox.sh {envlist}"
 
 - builder:
+    name: unittests
+    builders:
+      # NOTE(harlowja): the 'py' prefix will be added on automatically to the
+      # {envlist} by the internals of the run-unittests.sh script (so make
+      # sure you don't include it yourself).
+      - shell: "/usr/local/jenkins/slave_scripts/run-unittests.sh {envlist}"
+
+- builder:
     name: assert-no-extra-files
     builders:
       - shell: |

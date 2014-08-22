@@ -2313,11 +2313,12 @@
       - python-jobs
       - openstack-publish-jobs
       - pypi-jobs
-      - gate-{name}-tox-{envlist}:
-          envlist: py26-sa7-mysql
+      - gate-taskflow-unittests-{envlist}:
+          # NOTE(harlowja): the 'py' prefix will be added on automatically.
+          envlist: "26-sa7-mysql"
           node: bare-centos6
-      - gate-{name}-tox-{envlist}:
-          envlist: py27-sa8-mysql
+      - gate-taskflow-unittests-{envlist}:
+          envlist: "27-sa8-mysql"
 
 - project:
     name: cl-openstack-client

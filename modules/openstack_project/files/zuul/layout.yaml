@@ -1327,11 +1327,11 @@ projects:
       - name: integrated-gate
       - name: publish-to-pypi
     check:
-      - gate-taskflow-tox-py26-sa7-mysql
-      - gate-taskflow-tox-py27-sa8-mysql
+      - gate-taskflow-unittests-26-sa7-mysql
+      - gate-taskflow-unittests-27-sa8-mysql
     gate:
-      - gate-taskflow-tox-py26-sa7-mysql
-      - gate-taskflow-tox-py27-sa8-mysql
+      - gate-taskflow-unittests-26-sa7-mysql
+      - gate-taskflow-unittests-27-sa8-mysql
 
   - name: openstack/trove
     template:
