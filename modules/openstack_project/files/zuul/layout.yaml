@@ -1213,6 +1213,7 @@ projects:
       - check-tempest-dsvm-cells-full
       - check-tempest-dsvm-neutron-pg
       - check-tempest-dsvm-nova-v3-full
+    silent:
       - check-tempest-dsvm-docker
       - gate-nova-pip-missing-reqs
     experimental-tripleo:
