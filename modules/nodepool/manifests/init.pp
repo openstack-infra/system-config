@@ -30,12 +30,12 @@ class nodepool (
   $environment = {},
 ) {
 
-  $packages = [
-    'python-lxml', # needed by python-keystoneclient, has system bindings
-  ]
-
-  package { $packages:
-    ensure => present,
+  # needed by python-keystoneclient, has system bindings
+  # Zuul and Nodepool both need it, so make it conditional
+  if ! defined(Package['python-lxml']) {
+    package { 'python-lxml':
+      ensure => present,
+    }
   }
 
   class { 'mysql::server':

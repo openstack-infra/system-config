@@ -54,7 +54,6 @@ class zuul (
   $packages = [
     'gcc',  # yappi requires this to build
     'python-lockfile',
-    'python-lxml', # needed by python-keystoneclient, has system bindings
     'python-paste',
     'python-webob',
   ]
@@ -67,6 +66,14 @@ class zuul (
     ensure   => present,
     provider => pip,
     require  => Class['pip'],
+  }
+
+  # needed by python-keystoneclient, has system bindings
+  # Zuul and Nodepool both need it, so make it conditional
+  if ! defined(Package['python-lxml']) {
+    package { 'python-lxml':
+      ensure => present,
+    }
   }
 
   # A lot of things need yaml, be conservative requiring this package to avoid
