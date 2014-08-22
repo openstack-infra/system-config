@@ -40,6 +40,9 @@ then
     echo "127.0.1.1 $HOSTNAME" | sudo tee -a /etc/hosts
 fi
 
+echo $HOSTNAME > /tmp/image-hostname.txt
+sudo mv /tmp/image-hostname.txt /etc/image-hostname.txt
+
 # Fedora image doesn't come with wget
 if [ -f /usr/bin/yum ]; then
     sudo yum -y install wget

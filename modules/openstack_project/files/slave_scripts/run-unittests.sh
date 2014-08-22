@@ -20,6 +20,8 @@ export NOSE_HTML_OUT_FILE='nose_results.html'
 export TMPDIR=`/bin/mktemp -d`
 trap "rm -rf $TMPDIR" EXIT
 
+cat /etc/image-hostname.txt
+
 /usr/local/jenkins/slave_scripts/jenkins-oom-grep.sh pre
 
 sudo /usr/local/jenkins/slave_scripts/jenkins-sudo-grep.sh pre
