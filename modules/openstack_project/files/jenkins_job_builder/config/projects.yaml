@@ -1780,7 +1780,7 @@
 
 - project:
     name: puppet-glance
-    node: 'bare-precise || bare-trusty'
+    node: 'bare-precise'
     tarball-site: tarballs.openstack.org
 
     jobs:
@@ -1790,7 +1790,7 @@
 
 - project:
     name: puppet-keystone
-    node: 'bare-precise || bare-trusty'
+    node: 'bare-precise'
     tarball-site: tarballs.openstack.org
 
     jobs:
@@ -1800,7 +1800,7 @@
 
 - project:
     name: puppet-ceilometer
-    node: 'bare-precise || bare-trusty'
+    node: 'bare-precise'
     tarball-site: tarballs.openstack.org
 
     jobs:
@@ -1810,7 +1810,7 @@
 
 - project:
     name: puppet-cinder
-    node: 'bare-precise || bare-trusty'
+    node: 'bare-precise'
     tarball-site: tarballs.openstack.org
 
     jobs:
@@ -1820,7 +1820,7 @@
 
 - project:
     name: puppet-heat
-    node: 'bare-precise || bare-trusty'
+    node: 'bare-precise'
     tarball-site: tarballs.openstack.org
 
     jobs:
@@ -1830,7 +1830,7 @@
 
 - project:
     name: puppet-ironic
-    node: 'bare-precise || bare-trusty'
+    node: 'bare-precise'
     tarball-site: tarballs.openstack.org
 
     jobs:
@@ -1840,7 +1840,7 @@
 
 - project:
     name: puppet-nova
-    node: 'bare-precise || bare-trusty'
+    node: 'bare-precise'
     tarball-site: tarballs.openstack.org
 
     jobs:
@@ -1850,7 +1850,7 @@
 
 - project:
     name: puppet-horizon
-    node: 'bare-precise || bare-trusty'
+    node: 'bare-precise'
     tarball-site: tarballs.openstack.org
 
     jobs:
@@ -1860,7 +1860,7 @@
 
 - project:
     name: puppet-openstack
-    node: 'bare-precise || bare-trusty'
+    node: 'bare-precise'
     tarball-site: tarballs.openstack.org
 
     jobs:
@@ -1870,7 +1870,7 @@
 
 - project:
     name: puppet-openstacklib
-    node: 'bare-precise || bare-trusty'
+    node: 'bare-precise'
     tarball-site: tarballs.openstack.org
 
     jobs:
@@ -1880,7 +1880,7 @@
 
 - project:
     name: puppet-openstack_extras
-    node: 'bare-precise || bare-trusty'
+    node: 'bare-precise'
     tarball-site: tarballs.openstack.org
 
     jobs:
@@ -1890,7 +1890,7 @@
 
 - project:
     name: puppet-sahara
-    node: 'bare-precise || bare-trusty'
+    node: 'bare-precise'
     tarball-site: tarballs.openstack.org
 
     jobs:
@@ -1900,7 +1900,7 @@
 
 - project:
     name: sahara-ci-config
-    node: 'bare-precise || bare-trusty'
+    node: 'bare-precise'
     tarball-site: tarballs.openstack.org
 
     jobs:
@@ -1908,7 +1908,7 @@
 
 - project:
     name: sahara-guestagent
-    node: 'bare-precise || bare-trusty'
+    node: 'bare-precise'
     tarball-site: tarballs.openstack.org
 
     jobs:
@@ -1917,7 +1917,7 @@
 
 - project:
     name: puppet-swift
-    node: 'bare-precise || bare-trusty'
+    node: 'bare-precise'
     tarball-site: tarballs.openstack.org
 
     jobs:
@@ -1927,7 +1927,7 @@
 
 - project:
     name: puppet-tempest
-    node: 'bare-precise || bare-trusty'
+    node: 'bare-precise'
     tarball-site: tarballs.openstack.org
 
     jobs:
@@ -1937,7 +1937,7 @@
 
 - project:
     name: puppet-trove
-    node: 'bare-precise || bare-trusty'
+    node: 'bare-precise'
     tarball-site: tarballs.openstack.org
 
     jobs:
@@ -1947,7 +1947,7 @@
 
 - project:
     name: puppet-neutron
-    node: 'bare-precise || bare-trusty'
+    node: 'bare-precise'
     tarball-site: tarballs.openstack.org
 
     jobs:
@@ -1957,7 +1957,7 @@
 
 - project:
     name: puppet-vswitch
-    node: 'bare-precise || bare-trusty'
+    node: 'bare-precise'
     tarball-site: tarballs.openstack.org
 
     jobs:
@@ -1967,7 +1967,7 @@
 
 - project:
     name: puppet-ceph
-    node: 'bare-precise || bare-trusty'
+    node: 'bare-precise'
     tarball-site: tarballs.openstack.org
 
     jobs:
@@ -1977,7 +1977,7 @@
 
 - project:
     name: puppet-designate
-    node: 'bare-precise || bare-trusty'
+    node: 'bare-precise'
     tarball-site: tarballs.openstack.org
 
     jobs:
