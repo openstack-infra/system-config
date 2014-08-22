@@ -21,6 +21,8 @@ then
   exit 1
 fi
 
+cat /etc/image-hostname.txt
+
 /usr/local/jenkins/slave_scripts/jenkins-oom-grep.sh pre
 
 sudo /usr/local/jenkins/slave_scripts/jenkins-sudo-grep.sh pre
