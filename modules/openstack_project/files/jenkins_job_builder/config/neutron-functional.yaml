@@ -26,15 +26,16 @@
               export OVERRIDE_ZUUL_BRANCH=$BRANCH_OVERRIDE
           fi
 
+          function gate_hook {{
+              $BASE/new/neutron/neutron/tests/functional/contrib/gate_hook.sh
+          }}
+          export -f gate_hook
+
           function post_test_hook {{
-              $BASE/new/devstack/unstack.sh
-              cd $BASE/new/neutron
-              # Run tests as the stack user to allow sudo+rootwrap.
-              sudo chown -R stack:stack $BASE/new/neutron
-              echo "Running neutron functional test suite"
-              sudo -H -u stack tox -e dsvm-functional
+              $BASE/new/neutron/neutron/tests/functional/contrib/post_test_hook.sh
           }}
           export -f post_test_hook
+
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
 
