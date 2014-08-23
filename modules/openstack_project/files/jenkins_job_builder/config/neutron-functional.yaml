@@ -14,6 +14,8 @@
       - shell: |
           #!/bin/bash -xe
           export PYTHONUNBUFFERED=true
+          # This job uses devstack only to install neutron's system dependencies.
+          export ENABLED_SERVICES=mysql,rabbit,sysstat
           export DEVSTACK_GATE_TIMEOUT=120
           export DEVSTACK_GATE_TEMPEST=0
           export DEVSTACK_GATE_EXERCISES=0
