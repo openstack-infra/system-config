@@ -50,18 +50,24 @@
           export DEVSTACK_GATE_NEUTRON=1
           export DEVSTACK_GATE_TEMPEST=0
           export DEVSTACK_GATE_EXERCISES=0
-          export HEAT_CREATE_TEST_IMAGE=True
+
           export BRANCH_OVERRIDE={branch-override}
           if [ "$BRANCH_OVERRIDE" != "default" ] ; then
               export OVERRIDE_ZUUL_BRANCH=$BRANCH_OVERRIDE
           fi
 
+          function pre_test_hook {{
+              cd /opt/stack/new/heat/functionaltests
+              ./pre_test_hook.sh
+          }}
+          export -f pre_test_hook
+
           function post_test_hook {{
-              source /opt/stack/new/devstack/accrc/demo/demo
-              cd /opt/stack/new/heat
-              tox -efunctional
+              cd /opt/stack/new/heat/functionaltests
+              ./post_test_hook.sh
           }}
           export -f post_test_hook
+
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
 
