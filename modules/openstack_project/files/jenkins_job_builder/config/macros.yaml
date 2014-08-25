@@ -81,6 +81,11 @@
       - shell: "sudo ln /usr/bin/nodejs /usr/local/bin/node"
 
 - builder:
+    name: uninstall-puppet
+    builders:
+      - shell: "sudo apt-get remove -y --purge puppet"
+
+- builder:
     name: puppet-lint
     builders:
       - shell: |
