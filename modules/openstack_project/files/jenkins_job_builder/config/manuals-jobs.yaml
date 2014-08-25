@@ -38,6 +38,8 @@
     name: openstack-doc-jobs
     jobs:
       - gate-{name}-tox-{envlist}:
+          envlist: checklinks
+      - gate-{name}-tox-{envlist}:
           envlist: checkniceness
       - gate-{name}-tox-{envlist}:
           envlist: checksyntax

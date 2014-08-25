@@ -351,6 +351,7 @@ project-templates:
 
   - name: openstack-doc-gate
     check:
+      - gate-{name}-tox-checklinks
       - gate-{name}-tox-checkniceness
       - gate-{name}-tox-checksyntax
       - gate-{name}-tox-checkdeletions
@@ -559,6 +560,9 @@ jobs:
   - name: ^gate-.*-tox-doc-publish-checkbuild$
     success-pattern: http://docs-draft.openstack.org/{build.parameters[LOG_PATH]}/publish-docs/
   - name: ^gate-.*-tox-checklang$
+    branch: master
+    voting: false
+  - name: ^gate-.*-tox-checklinks$
     branch: master
     voting: false
   - name: ^gate-.*-docs$
