@@ -146,10 +146,14 @@ system account. This account is created by a member of the OpenStack
 Infrastructure team, you are unable to create this account yourself. This
 account has no access via the GUI to modify settings.
 
-Feel free to contact the OpenStack Infrastructure Team via
-`email <mailto:openstack-infra@lists.openstack.org>`_ to arrange setting up a
-dedicated account (so your system can post comments and verify build status).
-We'll want a few additional details:
+You will need to subscribe to two email accounts `third-party-announce
+<mailto:third-party-announce@lists.openstack.org>`_ to be aware if your
+system is disabled and `third-party-request
+<mailto:http://lists.openstack.org/cgi-bin/mailman/listinfo/third-party-request>`_
+to request your dedicated third party gerrit account.
+
+When submitting your request to the third-party-request mailing list, the
+following information is necessary:
 
   1. The public SSH key described above (if using OpenSSH, this would be the
   full contents of the account's ~/.ssh/id_rsa.pub file after running
@@ -161,13 +165,6 @@ We'll want a few additional details:
   please identify this in your email, we will need to find an equivalent.
 
   3. What you are verifying: this could be a product, driver or application.
-
-  4. (optional) A unique contact E-mail address or alias for this system, which
-  can not be in use as a contact address for any other Gerrit accounts on
-  review.openstack.org (Gerrit doesn't deal well with duplicate E-mail
-  addresses between accounts). This is so that contributors and reviewers can
-  see how to get in touch with people who might be able to fix problems with
-  the system if it starts leaving erroneous votes.
 
 The Jenkins Gerrit Trigger Plugin Way
 -------------------------------------
