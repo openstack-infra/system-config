@@ -2236,9 +2236,9 @@ projects:
       - name: integrated-gate
       - name: publish-to-pypi
     check:
-      - gate-oslo.utils-python33
+      - gate-oslo.serialization-python33
     gate:
-      - gate-oslo.utils-python33
+      - gate-oslo.serialization-python33
 
   - name: openstack/oslo.utils
     template:
