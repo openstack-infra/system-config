@@ -133,6 +133,7 @@ EOF
 }
 
 function setup_puppet_ubuntu {
+
     lsbdistcodename=`lsb_release -c -s`
     if [ $lsbdistcodename != 'trusty' ] ; then
         rubypkg=rubygems
@@ -143,16 +144,22 @@ function setup_puppet_ubuntu {
 
     # NB: keep in sync with openstack_project/files/00-puppet.pref
     if [ "$THREE" == 'yes' ]; then
-        PUPPET_VERSION=3.4.*
+        PUPPET_VERSION=3.6.*
+        PUPPETDB_TERMINUS_VERSION=2.2.*
         FACTER_VERSION=2.*
     else
         PUPPET_VERSION=2.7*
+        PUPPETDB_TERMINUS_VERSION=2.2.*
         FACTER_VERSION=1.*
     fi
 
     cat > /etc/apt/preferences.d/00-puppet.pref <<EOF
-Package: puppet puppet-common puppetmaster puppetmaster-common puppetmaster-passenger puppetdb-terminus
+Package: puppet puppet-common puppetmaster puppetmaster-common puppetmaster-passenger
 Pin: version $PUPPET_VERSION
+Pin-Priority: 501
+
+Package: puppetdb-terminus
+Pin: version $PUPPETDB_TERMINUS_VERSION
 Pin-Priority: 501
 
 Package: facter
@@ -170,6 +177,9 @@ EOF
         --assume-yes dist-upgrade
     DEBIAN_FRONTEND=noninteractive apt-get --option 'Dpkg::Options::=--force-confold' \
         --assume-yes install -y --force-yes puppet git $rubypkg
+
+    # Touch hiera.yaml to qwell warnings
+    touch /etc/puppet/hiera.yaml
 }
 
 #
