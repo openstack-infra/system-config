@@ -430,6 +430,7 @@
     jobs:
       - python-jobs
       - python-havana-bitrot-jobs
+      - python-icehouse-bitrot-jobs
       - openstack-publish-jobs
       - translation-jobs
       - 'gate-tempest-dsvm-ceilometer-{backend}{branch-designator}':
@@ -459,6 +460,7 @@
     jobs:
       - python-jobs
       - python-havana-bitrot-jobs
+      - python-icehouse-bitrot-jobs
       - openstack-publish-jobs
       - gate-{name}-pylint
       - translation-jobs
@@ -678,6 +680,7 @@
     jobs:
       - python-jobs
       - python-havana-bitrot-jobs
+      - python-icehouse-bitrot-jobs
       - openstack-publish-jobs
       - translation-jobs
       - rally-jobs
@@ -715,6 +718,7 @@
           branch-designator: ''
           branch-override: default
       - python-havana-bitrot-jobs
+      - python-icehouse-bitrot-jobs
       - openstack-publish-jobs
       - translation-jobs
       - rally-jobs
@@ -768,6 +772,7 @@
     jobs:
       - python-jobs
       - python-havana-bitrot-jobs
+      - python-icehouse-bitrot-jobs
       - openstack-publish-jobs
 
 
@@ -828,6 +833,7 @@
     jobs:
       - python-jobs
       - python-havana-bitrot-jobs
+      - python-icehouse-bitrot-jobs
       - openstack-publish-jobs
       - translation-jobs
       - rally-jobs
@@ -890,6 +896,7 @@
     jobs:
       - python-jobs
       - python-havana-bitrot-jobs
+      - python-icehouse-bitrot-jobs
       - openstack-publish-jobs
       - gate-{name}-pylint
       - gate-{name}-pip-missing-reqs
@@ -1244,6 +1251,7 @@
     jobs:
       - python-jobs
       - python-havana-bitrot-jobs
+      - python-icehouse-bitrot-jobs
       - openstack-publish-jobs
       - rally-jobs
       - translation-jobs
@@ -1288,6 +1296,7 @@
 
     jobs:
       - python-jobs
+      - python-icehouse-bitrot-jobs
       - openstack-publish-jobs
       - translation-jobs
       - openstack-doc-jobs
