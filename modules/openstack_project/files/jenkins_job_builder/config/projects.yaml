@@ -2767,6 +2767,7 @@
 
     jobs:
       - gate-{name}-pep8
+      - 'gate-{name}-requirements'
       - '{name}-tarball'
       - pypi-jobs
 
