@@ -133,6 +133,7 @@ EOF
 }
 
 function setup_puppet_ubuntu {
+
     lsbdistcodename=`lsb_release -c -s`
     if [ $lsbdistcodename != 'trusty' ] ; then
         rubypkg=rubygems
@@ -143,16 +144,22 @@ function setup_puppet_ubuntu {
 
     # NB: keep in sync with openstack_project/files/00-puppet.pref
     if [ "$THREE" == 'yes' ]; then
-        PUPPET_VERSION=3.4.*
+        PUPPET_VERSION=3.6.*
+        PUPPETDB_TERMINUS_VERSION=2.2.*
         FACTER_VERSION=2.*
     else
         PUPPET_VERSION=2.7*
+        PUPPETDB_TERMINUS_VERSION=2.2.*
         FACTER_VERSION=1.*
     fi
 
     cat > /etc/apt/preferences.d/00-puppet.pref <<EOF
-Package: puppet puppet-common puppetmaster puppetmaster-common puppetmaster-passenger puppetdb-terminus
+Package: puppet puppet-common puppetmaster puppetmaster-common puppetmaster-passenger
 Pin: version $PUPPET_VERSION
+Pin-Priority: 501
+
+Package: puppetdb-terminus
+Pin: version $PUPPETDB_TERMINUS_VERSION
 Pin-Priority: 501
 
 Package: facter
@@ -213,6 +220,38 @@ function setup_puppet_finally {
     touch /etc/puppet/hiera.yaml
     # Symlink hiera config files together
     ln -s /etc/puppet/hiera.yaml /etc/hiera.yaml
+
+    if [ "$THREE" == 'yes' ]; then
+        echo "Setting up directory environments"
+        echo "Creating environmentpath directory"
+        mkdir -p /etc/puppet/environments
+        echo "Creating puppet.conf"
+
+        cat > /etc/puppet/puppet.conf <<EOF
+[main]
+logdir=/var/log/puppet
+vardir=/var/lib/puppet
+ssldir=/var/lib/puppet/ssl
+rundir=/var/run/puppet
+factpath=$vardir/lib/facter
+basemodulepath = /etc/puppet/modules
+environmentpath = /etc/puppet/environments
+environmenttimeout = 0
+
+[master]
+# These are needed when the puppetmaster is run by passenger
+# and can safely be removed if webrick is used.
+ssl_client_header = SSL_CLIENT_S_DN
+ssl_client_verify_header = SSL_CLIENT_VERIFY
+EOF
+
+    echo "Creating production environment directory"
+    mkdir -p /etc/puppet/environments/production
+    cat > /etc/puppet/environments/production/environment.conf <<EOF
+manifest = /opt/config/production/manifest/site.pp
+modulepath = \$basemodulepath:modules:/opt/config/production/modules
+EOF
+    fi
 
 }
 
