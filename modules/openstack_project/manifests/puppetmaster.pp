@@ -95,12 +95,25 @@ class openstack_project::puppetmaster (
   package { ['python-cinderclient', 'python-novaclient']:
     ensure   => latest,
     provider => pip,
-    require  => Package['python-lxml'],
+    require  => Package[
+      'python-lxml',
+      'libxml2-dev',
+      'libxslt1-dev',
+      'libz-dev'],
   }
   package { 'python-paramiko':
     ensure => present,
   }
   package { 'python-lxml':
+    ensure => present,
+  }
+  package { 'libxml2-dev':
+    ensure => present,
+  }
+  package { 'libxslt1-dev':
+    ensure => present,
+  }
+  package { 'libz-dev':
     ensure => present,
   }
 
