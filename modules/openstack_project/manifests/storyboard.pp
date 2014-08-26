@@ -36,7 +36,8 @@ class openstack_project::storyboard(
     rabbitmq_port          => 5672,
     rabbitmq_vhost         => '/',
     rabbitmq_user          => $rabbitmq_user,
-    rabbitmq_user_password => $rabbitmq_password
+    rabbitmq_user_password => $rabbitmq_password,
+    enable_notifications   => 'False'
   }
 
   class { '::storyboard::rabbit':
