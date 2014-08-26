@@ -83,7 +83,7 @@
 - builder:
     name: uninstall-puppet
     builders:
-      - shell: "sudo apt-get remove -y --purge puppet"
+      - shell: "sudo apt-get remove -y --purge puppet puppet-common"
 
 - builder:
     name: puppet-lint
