@@ -215,7 +215,7 @@ pipelines:
   - name: merge-check
     description: >
       Each time a change merges, this pipeline verifies that all open changes
-      on the same project are still mergable.
+      on the same project are still mergeable.
     manager: IndependentPipelineManager
     source: gerrit
     require:
