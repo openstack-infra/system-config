@@ -75,11 +75,13 @@ class openstack_project::jenkins_params {
           Package['cgroups'],
           Package['cgroups-tools'],
         ]
+        $dvipng_package = 'texlive-dvipng'
       } else {
         $mysql_dev_package = 'mysql-devel'
         $cgroups_tools_package = ''
         $cgconfig_require = Package['cgroups']
         $cgred_require = Package['cgroups']
+        $dvipng_package = 'dvipng'
       }
     }
     'Debian': {
@@ -91,6 +93,7 @@ class openstack_project::jenkins_params {
       $docbook_xml_package = 'docbook-xml'
       $docbook5_xml_package = 'docbook5-xml'
       $docbook5_xsl_package = 'docbook-xsl'
+      $dvipng_package = 'dvipng'
       $firefox_package = 'firefox'
       $graphviz_package = 'graphviz'
       $libcurl_dev_package = 'libcurl4-gnutls-dev'
