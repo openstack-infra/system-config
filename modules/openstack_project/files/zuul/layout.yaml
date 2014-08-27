@@ -442,6 +442,9 @@ jobs:
   # Test puppet for infra by default on precise nodes until that changes.
   - name: ^gate-config-puppet.*$
     parameter-function: set_node_options_default_precise
+  # We're planning on Puppet 2.7 support to Spring 2015.
+  - name: ^.*puppet-unit-2.7$
+    parameter-function: set_node_options_default_precise
   # tempest and d-g branchless tests need to only run on master
   # (needs to be early to not impact non-voting stanzas later)
   - name: ^(?!periodic-).*(-icehouse|-havana)$
