@@ -1171,7 +1171,7 @@
           export PYTHONUNBUFFERED=true
           export DEVSTACK_GATE_TIMEOUT=120
           export DEVSTACK_GATE_TEMPEST=0
-          export DEVSTACK_GATE_GRENADE=sideways
+          export DEVSTACK_GATE_GRENADE=sideways-ironic
           export DEVSTACK_GATE_IRONIC=1
           export BRANCH_OVERRIDE={branch-override}
           if [ "$BRANCH_OVERRIDE" != "default" ] ; then
@@ -1203,7 +1203,7 @@
           export PYTHONUNBUFFERED=true
           export DEVSTACK_GATE_TIMEOUT=120
           export DEVSTACK_GATE_TEMPEST=0
-          export DEVSTACK_GATE_GRENADE=sideways
+          export DEVSTACK_GATE_GRENADE=sideways-neutron
           export DEVSTACK_GATE_NEUTRON=1
           export BRANCH_OVERRIDE={branch-override}
           if [ "$BRANCH_OVERRIDE" != "default" ] ; then
