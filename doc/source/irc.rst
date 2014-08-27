@@ -67,8 +67,8 @@ Supybot
 In order to run Meetbot you will need to get Supybot. You can find the latest
 release `here <http://sourceforge.net/projects/supybot/files/>`_. Once you have
 extracted the release you will want to read the ``INSTALL`` and
-``doc/GETTING_STARTED`` files. Those two files should have enough information to
-get you going, but there are other goodies in ``doc/``.
+``doc/GETTING_STARTED`` files. Those two files should have enough
+information to get you going, but there are other goodies in ``doc/``.
 
 Once you have Supybot installed you will need to configure a bot. The
 ``supybot-wizard`` command can get you started with a basic config, or you can
@@ -142,9 +142,9 @@ Logging
 Meetings are automatically logged and published at
 http://eavesdrop.openstack.org/meetings/
 
-The bot also has the ability to sit in a channel for the sole purpose of logging
-channel activity, not just meetings. Standard channel logs are sent to
-http://eavesdrop.openstack.org/irclogs/
+The bot also has the ability to sit in a channel for the sole purpose
+of logging channel activity, not just meetings. Standard channel logs
+are sent to http://eavesdrop.openstack.org/irclogs/
 
 The configuration for specific channel logging can be found in
 :file:`modules/openstack_project/manifests/eavesdrop.pp`.
