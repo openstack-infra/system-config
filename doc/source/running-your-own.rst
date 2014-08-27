@@ -223,7 +223,7 @@ least 10G+ of RAM, as gerrit is configured for 8G of heap.
 Follow the :file:`doc/source/gerrit.rst` for instructions on getting gerrit
 configured once installed.
 
-Finally, you should be able to follow :ref:`stackforge` to setup a project at
+Finally, you should be able to follow :ref:`StackForge` to setup a project at
 this point. (Zuul and Jenkins jobs obviously won't work yet).
 
 Stage 4 - Zuul

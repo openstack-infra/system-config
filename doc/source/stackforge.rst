@@ -1,5 +1,7 @@
 :title: StackForge
 
+.. _stackforge:
+
 StackForge
 ##########
 

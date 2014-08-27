@@ -1,3 +1,7 @@
+:title Third Party Testing
+
+.. _third_party:
+
 Third Party Testing
 ===================
 
@@ -64,6 +68,7 @@ Requirements
 
     * logs must be browsable; logs requiring download, installation or login
       to access are not acceptable
+
   Note: all test artifacts must be retained for one month.
 
 Reading the Event Stream
@@ -105,11 +110,12 @@ Further documentation on how to use the events stream can be found in `Gerrit's 
 Posting Result To Gerrit
 ------------------------
 
-External testing systems can give non-gating votes to Gerrit by means of a -1/+1
-verify vote.  OpenStack Jenkins has extra permissions to give a +2/-2 verify
-vote which is gating.  Comments should also be provided to explain what kind of
-test failed..  We do also ask that the comments contain public links to the
-failure so that the developer can see what caused the failure.
+External testing systems can give non-gating votes to Gerrit by means
+of a -1/+1 verify vote.  OpenStack Jenkins has extra permissions to
+give a +2/-2 verify vote which is gating.  Comments should also be
+provided to explain what kind of test failed. We do also ask that
+the comments contain public links to the failure so that the developer
+can see what caused the failure.
 
 An example of how to post this is as follows:
 
@@ -117,10 +123,12 @@ An example of how to post this is as follows:
 
    $ ssh -p 29418 USERNAME@review.openstack.org gerrit review -m '"Test failed on MegaTestSystem <http://megatestsystem.org/tests/1234>"' --verified=-1 c0ff33
 
-In this example ``c0ff33`` is the commit ID for the review.  You can set the
-verified to either `-1` or `+1` depending on whether or not it passed the tests.
+In this example ``c0ff33`` is the commit ID for the review.  You can
+set the verified to either `-1` or `+1` depending on whether or not it
+passed the tests.
 
-Further documentation on the `review` command in Gerrit can be found in the `Gerrit review documentation page <http://gerrit-documentation.googlecode.com/svn/Documentation/2.3/cmd-review.html>`_.
+Further documentation on the `review` command in Gerrit can be found
+in the `Gerrit review documentation page <http://gerrit-documentation.googlecode.com/svn/Documentation/2.3/cmd-review.html>`_.
 
 We do suggest cautious testing of these systems and have a development Gerrit
 setup to test on if required.  In SmokeStack's case all failures are manually
@@ -250,12 +258,13 @@ The permissions on this group allow for commenting and voting on the
 repo as well as commenting without voting on other repos in gerrit.
 
 The OpenStack Infrastructure team disables mis-behaving third-party ci
-accounts at its discretion. This documentation endeavours to outline specific
-circumstances that may lead to an account being disabled. There have been
-times when third-party ci systems behave in ways we didn't envision and therefore
-were unable to document prior to the event. If your third-party ci system has been
-disabled, check your email - we probably tried to contact you, and join us in
-the #openstack-infra irc channel on freenode to discuss your situation.
+accounts at its discretion. This documentation endeavours to outline
+specific circumstances that may lead to an account being
+disabled. There have been times when third-party ci systems behave in
+ways we didn't envision and therefore were unable to document prior to
+the event. If your third-party ci system has been disabled, check your
+email - we probably tried to contact you, and join us in the
+#openstack-infra irc channel on freenode to discuss your situation.
 
 In order to get your Third Pary CI account to have voting permissions on
 repos in gerrit in addition to ``openstack-dev/sandbox`` you have a greater
@@ -265,21 +274,27 @@ chance of success if you follow these steps:
   above (this will create a history of activity associated with your account
   which will be evaluated when you apply for voting permissions).
 
-* Post comments, that adhere to the "Requirements" listed above, that demonstrate
-  the format for your system communication to the repos you want your system to test.
+* Post comments, that adhere to the "Requirements" listed above, that
+  demonstrate the format for your system communication to the repos
+  you want your system to test.
 
-* Once your Third Party Account has a history on gerrit so that others can evaluate
-  your format for comments, and the stability of your voting pattern (in the sandbox repo):
+* Once your Third Party Account has a history on gerrit so that others
+  can evaluate your format for comments, and the stability of your
+  voting pattern (in the sandbox repo):
 
-  * send an email to the openstack-dev mailing list nominating your system for voting
-    permissions
+  * send an email to the openstack-dev mailing list nominating your
+    system for voting permissions:
+
       * openstack-dev@lists.openstack.org
-      * use tags [Infra][Nova] for the Nova program, please replace [Nova] with [Program],
-        where [Program] is the name of the program your CI account will test
+      * use tags [Infra][Nova] for the Nova program, please replace
+        [Nova] with [Program], where [Program] is the name of the
+        program your CI account will test
   * present your account history
   * address any questions and concerns with your system
 
-* If the members of the program you want voting permissions from agree your system should be
-  able to vote, the ptl or a core-reviewer from the program communicates this decision to the
-  OpenStack Infrastructure team who will move your Third Party CI System to the `Voting
-  Third-Party CI Gerrit group <https://review.openstack.org/#/admin/groups/91,members>`_.
+* If the members of the program you want voting permissions from agree
+  your system should be able to vote, the ptl or a core-reviewer from
+  the program communicates this decision to the OpenStack
+  Infrastructure team who will move your Third Party CI System to the
+  `Voting Third-Party CI Gerrit group
+  <https://review.openstack.org/#/admin/groups/91,members>`_.

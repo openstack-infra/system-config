@@ -502,8 +502,8 @@ Third-Party Testing Access
 --------------------------
 
 The command to add an account for an automated system which gets
--1/+1 code verify voting rights (as outlined in `Third Party
-Testing`_) looks like:
+-1/+1 code verify voting rights (as outlined in
+`third_party`_) looks like:
 
 .. code-block:: shell
 

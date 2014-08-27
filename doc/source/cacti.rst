@@ -1,7 +1,5 @@
 :title: Cacti
 
-.. _cacti:
-
 Cacti
 ######
 
