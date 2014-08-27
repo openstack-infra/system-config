@@ -110,6 +110,7 @@ channels:
   - name: openstack-packaging
   - name: openstack-qa
   - name: openstack-raksha
+  - name: openstack-rating
   - name: openstack-relmgr-office
   - name: openstack-sahara
   - name: openstack-sdks

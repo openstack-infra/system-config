@@ -60,6 +60,7 @@ class openstack_project::eavesdrop (
         '#openstack-operators',
         '#openstack-oslo',
         '#openstack-qa',
+        '#openstack-rating',
         '#openstack-relmgr-office',
         '#openstack-sahara',
         '#openstack-sdks',
