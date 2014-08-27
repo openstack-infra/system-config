@@ -276,6 +276,11 @@
       - gate-{name}-puppet-apply
       - gate-{name}-pep8
       - experimental-swift-logs-{name}-pep8
+      - gate-infra-puppet-apply-{ostype}:
+          ostype:
+            - precise
+            - trusty
+            - centos6
 
 - project:
     name: gitdm

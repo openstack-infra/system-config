@@ -2897,6 +2897,8 @@ projects:
       - ci-docs
     experimental:
       - experimental-swift-logs-config-pep8
+      - gate-infra-puppet-apply-precise
+      - gate-infra-puppet-apply-centos6
 
   - name: openstack-infra/devstack-gate
     template:
