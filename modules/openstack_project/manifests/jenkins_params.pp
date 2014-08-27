@@ -59,6 +59,13 @@ class openstack_project::jenkins_params {
       # FIXME: No zookeeper packages on RHEL
       #$zookeeper_package = 'zookeeper-server'
       $cgroups_package = 'libcgroup'
+      if (($::operatingsystem == 'Fedora') and ($::operatingsystemrelease <= 17))
+         or (($::operatingsystem == 'CentOS') and ($::operatingsystemrelease <= 6)) {
+        #FIXME no dvipng package in Fedora <9 and CentOS <6
+        $dvipng = 'dvipng'
+      } else {
+        $dvipng = 'texlive-dvipng'
+      }
       if ($::operatingsystem == 'Fedora') and ($::operatingsystemrelease >= 19) {
         # From Fedora 19 and onwards there's no longer
         # support to mysql-devel.
@@ -91,6 +98,7 @@ class openstack_project::jenkins_params {
       $docbook_xml_package = 'docbook-xml'
       $docbook5_xml_package = 'docbook5-xml'
       $docbook5_xsl_package = 'docbook-xsl'
+      $dvipng = 'dvipng'
       $firefox_package = 'firefox'
       $graphviz_package = 'graphviz'
       $libcurl_dev_package = 'libcurl4-gnutls-dev'
