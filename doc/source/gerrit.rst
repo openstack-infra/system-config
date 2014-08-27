@@ -501,11 +501,11 @@ or manually update their remotes with something like::
 Third-Party Testing Access
 --------------------------
 
-The command to add an account for an automated system which gets
--1/+1 code verify voting rights (as outlined in `Third Party
-Testing`_) looks like:
+The command to add an account for an automated system which gets -1/+1
+code verify voting rights (as outlined in :ref:`third-party-testing`)
+looks like:
 
-.. code-block:: shell
+.. code-block:: bash
 
   ssh -p 29418 review.openstack.org "gerrit create-account \
       --group 'Third-Party CI' \

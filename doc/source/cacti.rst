@@ -3,9 +3,9 @@
 .. _cacti:
 
 Cacti
-######
+#####
 
-The `Cacti <http://www.cacti.net/>`_ network graphing tool
+The `Cacti network graphing tool <http://www.cacti.net/>`_
 is installed on cacti.openstack.org.
 
 At a Glance
