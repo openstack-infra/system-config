@@ -899,7 +899,6 @@
       - python-icehouse-bitrot-jobs
       - openstack-publish-jobs
       - gate-{name}-pylint
-      - gate-{name}-pip-missing-reqs
       - translation-jobs
 
 - project:
