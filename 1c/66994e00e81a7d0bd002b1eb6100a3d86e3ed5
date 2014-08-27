@@ -1,0 +1,22 @@
+Verified+2: Jenkins
+Code-Review+1: Jon-Paul Sullivan (jp_at_hp) <jonpaul.sullivan@hp.com>
+Code-Review+1: Tom Fifield <tom@openstack.org>
+Code-Review+1: Mark McLoughlin <markmc@redhat.com>
+Code-Review+1: Antoine Musso <hashar@free.fr>
+Code-Review+2: Clark Boylan <cboylan@sapwetik.org>
+Code-Review+1: Craig Vyvial <cp16net@gmail.com>
+Code-Review+2: Jeremy Stanley <fungi@yuggoth.org>
+Workflow+1: Jeremy Stanley <fungi@yuggoth.org>
+Code-Review+1: Nikhil Manchanda <SlickNik@gmail.com>
+Code-Review+1: Anita Kuno <anteaya@anteaya.info>
+Code-Review+1: Fei Long Wang <flwang@catalyst.net.nz>
+Code-Review+1: Andreas Jaeger <jaegerandi@gmail.com>
+Code-Review+1: Sylvain Bauza <sbauza@redhat.com>
+Code-Review+1: Petr Blaho <pblaho@redhat.com>
+Code-Review+1: amrith <amrith@tesora.com>
+Code-Review+1: Sean McGinnis <sean_mcginnis@dell.com>
+Submitted-by: Jenkins
+Submitted-at: Wed, 27 Aug 2014 22:39:38 +0000
+Reviewed-on: https://review.openstack.org/116176
+Project: openstack-infra/config
+Branch: refs/heads/master
