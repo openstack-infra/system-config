@@ -76,14 +76,16 @@ file should have mode 0600.
 Adding a node
 -------------
 
-On the new server connecting (for example, review.openstack.org) to the puppet master:
+On the new server connecting (for example, review.openstack.org) to
+the puppet master:
 
 .. code-block:: bash
 
   sudo apt-get install puppet
 
-The node then needs to be configured to set a fixed hostname and the hostname
-of the puppet master with the following additions to ``/etc/puppet/puppet.conf``:
+The node then needs to be configured to set a fixed hostname and the
+hostname of the puppet master with the following additions to
+``/etc/puppet/puppet.conf``:
 
 .. code-block:: ini
 

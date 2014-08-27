@@ -228,7 +228,8 @@ SSH because it's fast, and it gets syntax checked).
 
 #. Visit ``https://$HOST/#/admin/projects/All-Projects,access`` and click on Edit.
 
-#. Look for the reference to 'refs/meta/config', click on the drop-box for 'add permission' and choose 'PUSH'.
+#. Look for the reference to 'refs/meta/config', click on the drop-box
+   for 'add permission' and choose 'PUSH'.
 
 #. Type in Administrators as the group name
 

@@ -18,7 +18,8 @@ another project.
 Requirements
 ============
 
-* You need a cloud of some sort, all our tooling is built for OpenStack clouds :).
+* You need a cloud of some sort, all our tooling is built for
+  OpenStack clouds :).
 
 * A service account for your CI systems within that cloud/clouds.
 
@@ -64,8 +65,8 @@ are scaled horizonally, thus the separation). To run your own infrastructure we
 recommend you copy the entire tree, delete any servers you won't run, and
 replace hostnames and class names with yours throughout.
 
-Some templates can be used as-is by leaving their references to point within the
-openstack_project tree.
+Some templates can be used as-is by leaving their references to point
+within the openstack_project tree.
 
 Bootstrapping
 ~~~~~~~~~~~~~
@@ -184,7 +185,8 @@ Migrate the manifests:
   * Contact store should be set to false as at this stage we don't have a
     secure store setup.
 
-  * Start with just local replication, plus github if you have a github organisation already.
+  * Start with just local replication, plus github if you have a
+    github organisation already.
 
   * Ditto starting without gerritbot.
 
@@ -235,7 +237,8 @@ can now set up a scheduler.  Once setup, new patches uploaded
 to gerrit should be picked up and have a zuul verification fail (with 'LOST'
 which indicates the Jenkins environment is gone).
 
-#. Create a zuul user (the upstream site.pp uses jenkins for historical reasons):
+#. Create a zuul user (the upstream site.pp uses jenkins for
+   historical reasons):
 
    ::
 
@@ -361,8 +364,9 @@ gets their own puppet cert. The openstack/site.pp has a legacy setting for
 #. Go into the Jenkins config and press 'test connection' on the gearman config
    to register the new slave.
 
-Now, if you push a change, zuul should pick it up and run it on jenkins, and you can
-get onto the interesting thing of debugging why it fails.
+Now, if you push a change, zuul should pick it up and run it on
+jenkins, and you can get onto the interesting thing of debugging why
+it fails.
 
 Later chapters will cover setting up the test storage servers so you can see
 build history without logging into Jenkins.
