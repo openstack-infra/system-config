@@ -126,8 +126,16 @@
     name: chef-bundler-prep
     builders:
       - shell: |
+          #!/bin/bash -x
           mkdir -p .bundle
-          bundle install --path=.bundle --jobs 1 --retry 3 --verbose
+          grep -E .*berkshelf.*3\.\d*\.\d*.* Gemfile
+          if [ $? -eq 0 ]; then
+            # For Berkshelf 3.x use the system gecode 3.x libraries
+            sudo apt-get install -y libgecode-dev
+            USE_SYSTEM_GECODE=1 bundle install --path=.bundle --jobs 1 --retry 3 --verbose
+          else
+            bundle install --path=.bundle --jobs 1 --retry 3 --verbose
+          fi
 
 - builder:
     name: chef-berkshelf-prep
