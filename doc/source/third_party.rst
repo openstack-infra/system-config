@@ -64,6 +64,7 @@ Requirements
 
     * logs must be browsable; logs requiring download, installation or login
       to access are not acceptable
+
   Note: all test artifacts must be retained for one month.
 
 Reading the Event Stream
@@ -273,6 +274,7 @@ chance of success if you follow these steps:
 
   * send an email to the openstack-dev mailing list nominating your system for voting
     permissions
+
       * openstack-dev@lists.openstack.org
       * use tags [Infra][Nova] for the Nova program, please replace [Nova] with [Program],
         where [Program] is the name of the program your CI account will test

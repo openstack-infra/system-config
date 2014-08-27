@@ -1,4 +1,5 @@
 :title: OpenstackId
+
 ==================
 OpenstackId Server
 ==================
@@ -39,13 +40,13 @@ used to determine the current environment. You may add other environments and ma
 
 .. code:: php
 
-<?php
+    <?php
 
-$env = $app->detectEnvironment(array(
+    $env = $app->detectEnvironment(array(
 
-    'local' => array('your-machine-name'),
+        'local' => array('your-machine-name'),
 
-));
+    ));
 
 Database Configuration
 ______________________

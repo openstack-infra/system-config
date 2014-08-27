@@ -237,13 +237,13 @@ which indicates the Jenkins environment is gone).
 
 #. Create a zuul user (the upstream site.pp uses jenkins for historical reasons)::
 
-  ssh-keygen -t rsa -P '' -f zuul_ssh_key
+    ssh-keygen -t rsa -P '' -f zuul_ssh_key
 
-  cat zuul_ssh_key.pub | ssh -p 29418 $USER@$HOST gerrit create-account \
-    --group "'Continuous Integration Tools'" \
-    --full-name "'Zuul'" \
-    --email zuul@lists.openstack.org \
-    --ssh-key - zuul
+    cat zuul_ssh_key.pub | ssh -p 29418 $USER@$HOST gerrit create-account \
+      --group "'Continuous Integration Tools'" \
+      --full-name "'Zuul'" \
+      --email zuul@lists.openstack.org \
+      --ssh-key - zuul
 
 #. Add the private key you made to hiera as ``zuul_ssh_private_key_contents``.
 
@@ -282,7 +282,7 @@ which get the most load (as they run jobs from anyone).
 
 #. Make a jenkins master ssh key (shared across all jenkins masters)::
 
-  ssh-keygen -t rsa -P '' -f jenkins_ssh_key
+    ssh-keygen -t rsa -P '' -f jenkins_ssh_key
 
 #. Make a self signed certificate for the jenkins site.
 
