@@ -686,11 +686,19 @@ openstack-merges:
       - openstack/ironic
       - openstack/python-ironicclient
       - openstack/oslo-incubator
+      - openstack/oslo-specs
+      - openstack/oslo.concurrency
       - openstack/oslo.config
+      - openstack/oslo.db
+      - openstack/oslo.i18n
       - openstack/oslo.messaging
+      - openstack/oslo.middleware
       - openstack/oslo.rootwrap
+      - openstack/oslo.serialization
       - openstack/oslo.sphinx
+      - openstack/oslo.utils
       - openstack/oslo.version
+      - openstack/oslo.vmware
       - openstack-dev/cookiecutter
       - openstack-dev/hacking
       - openstack-dev/pbr
@@ -779,6 +787,7 @@ openstack-oslo:
       - openstack/oslo.db
       - openstack/oslo.i18n
       - openstack/oslo-incubator
+      - openstack/oslo-specs
       - openstack/oslo.messaging
       - openstack/oslo.middleware
       - openstack/oslo.rootwrap
