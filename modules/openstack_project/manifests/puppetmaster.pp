@@ -6,6 +6,7 @@ class openstack_project::puppetmaster (
   $sysadmins = [],
   $version   = '2.7.',
   $ca_server = undef,
+  $puppetdb = true,
 ) {
   include ansible
   include logrotate
@@ -105,11 +106,13 @@ class openstack_project::puppetmaster (
 
 # Enable puppetdb
 
-  class { 'puppetdb::master::config':
-    puppetdb_server              => 'puppetdb.openstack.org',
-    puppet_service_name          => 'apache2',
-    puppetdb_soft_write_failure  => true,
-    manage_storeconfigs          => false,
+  if $puppetdb {
+    class { 'puppetdb::master::config':
+      puppetdb_server              => 'puppetdb.openstack.org',
+      puppet_service_name          => 'apache2',
+      puppetdb_soft_write_failure  => true,
+      manage_storeconfigs          => false,
+    }
   }
 
 # Playbooks
