@@ -1,3 +1,5 @@
+.. _third-party-testing:
+
 Third Party Testing
 ===================
 
@@ -44,7 +46,7 @@ Requirements
     <https://wiki.openstack.org/wiki/ThirdPartySystems>`_ to add your
     system.  When complete, there should be a page dedicated to your
     system with a URL like:
-    <https://wiki.openstack.org/wiki/ThirdPartySystems/Example>.
+    ``https://wiki.openstack.org/wiki/ThirdPartySystems/Example``.
   * All comments from your CI system must contain a link to the wiki
     page for your CI system.
   * Maintainers are encouraged to be in IRC regularly to make it faster to contact them.
@@ -64,7 +66,8 @@ Requirements
 
     * logs must be browsable; logs requiring download, installation or login
       to access are not acceptable
-  Note: all test artifacts must be retained for one month.
+
+  .. note:: All test artifacts must be retained for one month.
 
 Reading the Event Stream
 ------------------------
@@ -177,9 +180,11 @@ processes described in this document.  So if your testing system is Jenkins
 based you can use it to simplify things.  You will still need an account to do
 this as described in the :ref:`request-account-label` section above.
 
-The Gerrit Trigger plugin for Jenkins can be found on
-`the Jenkins repository <http://repo.jenkins-ci.org/repo/com/sonyericsson/hudson/plugins/gerrit/gerrit-trigger/>`_.
-You can install it using the Advanced tab in the Jenkins Plugin Manager.
+The Gerrit Trigger plugin for Jenkins can be found on `the Jenkins
+repository`_.  You can install it using the Advanced tab in the
+Jenkins Plugin Manager.
+
+.. _the Jenkins repository: http://repo.jenkins-ci.org/repo/com/sonyericsson/hudson/plugins/gerrit/gerrit-trigger/
 
 Once installed Jenkins will have a new `Gerrit Trigger` option in the `Manage
 Jenkins` menu.  This should be given the following options::
@@ -246,8 +251,10 @@ Permissions on your Third Party System
 When your CI account is created it will be in the `Third-Party CI Gerrit
 group <https://review.openstack.org/#/admin/groups/270,members>`_.
 The permissions on this group allow for commenting and voting on the
-`openstack-dev/sandbox <https://git.openstack.org/cgit/openstack-dev/sandbox/>`_
+`openstack-dev/sandbox`_
 repo as well as commenting without voting on other repos in gerrit.
+
+.. _openstack-dev/sandbox: https://git.openstack.org/cgit/openstack-dev/sandbox/
 
 The OpenStack Infrastructure team disables mis-behaving third-party ci
 accounts at its discretion. This documentation endeavours to outline specific
@@ -273,9 +280,11 @@ chance of success if you follow these steps:
 
   * send an email to the openstack-dev mailing list nominating your system for voting
     permissions
+
       * openstack-dev@lists.openstack.org
       * use tags [Infra][Nova] for the Nova program, please replace [Nova] with [Program],
         where [Program] is the name of the program your CI account will test
+
   * present your account history
   * address any questions and concerns with your system
 
