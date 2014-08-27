@@ -349,7 +349,7 @@ Next, edit `project.config` to look like::
   copyMinScore = true
   function = MaxWithBlock
   value = -2 Do not merge
-  value = -1 I would prefer that you didn't merge this
+  value = -1 This patch needs further work before it can be merged
   value = 0 No score
   value = +1 Looks good to me, but someone else must approve
   value = +2 Looks good to me (core reviewer)
