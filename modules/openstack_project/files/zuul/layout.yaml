@@ -739,6 +739,12 @@ jobs:
   - name: gate-nova-pip-missing-reqs
     voting: false
 
+  # TODO(rpodolyaka): make voting when the jobs pass on all SA versions
+  - name: gate-oslo.db-tox-sqla_08
+    voting: false
+  - name: gate-oslo.db-tox-sqla_09
+    voting: false
+
 # The project list is grouped by type of project, and within each
 # group, projects are sorted (mostly) alphabetically.
 projects:
@@ -2097,6 +2103,8 @@ projects:
       - name: translation-jobs
     check:
       - check-devstack-dsvm-cells
+      - gate-oslo.db-tox-sqla_08
+      - gate-oslo.db-tox-sqla_09
     gate:
       - gate-devstack-dsvm-cells
     experimental-tripleo:
