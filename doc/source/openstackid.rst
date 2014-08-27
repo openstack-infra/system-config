@@ -1,4 +1,5 @@
 :title: OpenstackId
+
 ==================
 OpenstackId Server
 ==================
@@ -37,15 +38,15 @@ you must make a copy and rename it to bootstrap/environment.php
 In this file you will find an **$app->detectEnvironment** call. The array passed to this method is
 used to determine the current environment. You may add other environments and machine names to the array as needed.
 
-.. code:: php
+.. code-block:: php
 
-<?php
+   <?php
 
-$env = $app->detectEnvironment(array(
+   $env = $app->detectEnvironment(array(
 
-    'local' => array('your-machine-name'),
+       'local' => array('your-machine-name'),
 
-));
+   ));
 
 Database Configuration
 ______________________

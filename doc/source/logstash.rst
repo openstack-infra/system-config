@@ -271,7 +271,10 @@ In the OpenStack logstash system, crm114 attaches an error_pr attribute
 to all indexed entries.  Values from -1000.00 to -10.00 should be considered
 sufficient to get all potential errors as identified by the program.
 Used in a kibana query, it would be structured like this:
-   * ``error_pr:["-1000.0" TO "-10.0"]``
+
+::
+
+  error_pr:["-1000.0" TO "-10.0"]
 
 
 This is still an early effort and additional tuning and refinement should
