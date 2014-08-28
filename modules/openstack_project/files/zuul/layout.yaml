@@ -1235,9 +1235,9 @@ projects:
       - check-tempest-dsvm-cells-full
       - check-tempest-dsvm-neutron-pg
       - check-tempest-dsvm-nova-v3-full
+      - gate-nova-pip-missing-reqs
     silent:
       - check-tempest-dsvm-docker
-      - gate-nova-pip-missing-reqs
     experimental-tripleo:
       - check-tripleo-novabm-undercloud-precise-nonha
       - check-tripleo-ironic-undercloud-precise-nonha
