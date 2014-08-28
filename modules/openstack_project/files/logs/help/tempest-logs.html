@@ -7,6 +7,48 @@
   process. Use the timestamp of the failed test in
   the <a href="../console.html">current tempest run</a>.
 </p>
+<h2>Types of logs </h2>
+<p>
+<ul>
+  <li> <b>cinder</b>
+  <ul>
+    <li><a href="screen-c-api.txt.gz">screen-c-api.txt.gz</a>: cinder-api
+    <li><a href="screen-c-bak.txt.gz">screen-c-bak.txt.gz</a>: cinder-backup
+    <li><a href="screen-c-sch.txt.gz">screen-c-sch.txt.gz</a>: cinder-scheduler
+    <li><a href="screen-c-vol.txt.gz">screen-c-vol.txt.gz</a>: cinder-volume
+  </ul>
+  <li> <b>ceilometer</b>
+  <ul>
+    <li><a href="screen-ceilometer-acentral.txt.gz">screen-ceilometer-acentral.txt.gz</a>: ceilometer-agent-central
+    <li><a href="screen-ceilometer-acompute.txt.gz">screen-ceilometer-acompute.txt.gz</a>: ceilometer-agent-compute
+    <li><a href="screen-ceilometer-alarm-evaluator.txt.gz">screen-ceilometer-alarm-evaluator.txt.gz</a>: ceilometer-alarm-evaluator
+    <li><a href="screen-ceilometer-alarm-notifier.txt.gz">screen-ceilometer-alarm-notifier.txt.gz</a>: ceilometer-alarm-notifier
+    <li><a href="screen-ceilometer-anotification.txt.gz">screen-ceilometer-anotification.txt.gz</a>: ceilometer-agent-notifier
+    <li><a href="screen-ceilometer-api.txt.gz">screen-ceilometer-api.txt.gz</a>: ceilometer-api
+    <li><a href="screen-ceilometer-collector.txt.gz">screen-ceilometer-collector.txt.gz</a>: ceilometer-api
+  </ul>
+  <li> <b>glance</b>
+  <li> <b>heat</b>
+  <li> <b>horizon</b>
+  <ul>
+    <li><a href="horizon_error.txt.gz">horizon_error.txt.gz</a>: horizon logs
+  </ul>
+  <li> <b>keystone</b>
+  <li> <b>nova</b>
+  <li> <b>swift</b>
+  <li> <b>system</b>
+  <ul>
+    <li><a href="pip-freeze.txt.gz">pip-freeze.txt.gz</a>: List of pip installed python packages. Output of 'pip freeze'
+    <li><a href="dpkg-l.txt.gz">dpkg-l.txt.gz</a>: List of apt-get installed packages. Output of 'dpkg -l'
+    <li><a href="df.txt.gz">df.txt.gz</a>:
+    <li><a href="syslog.txt.gz">syslog.txt.gz</a>:
+    <li><a href="screen-dstat.txt.gz">screen-dstat.txt.gz</a>:
+  </ul>
+  <li> <b>trove</b>
+  <li> <b>tempest</b>
+  <li> <b>keystone</b>
+</ul>
+</p>
 <h2>Nova Compute Fails</h2>
 <p>
   If there is a compute test failure, especially a server not getting
