@@ -2755,9 +2755,11 @@
     name: heat-translator
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
+    doc-publisher-site: docs.openstack.org
 
     jobs:
       - python-jobs
+      - hook-{name}-rtfd
 
 - project:
     name: release-tools
