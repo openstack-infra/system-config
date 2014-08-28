@@ -490,6 +490,12 @@
 - project: openstack/tempest
   options:
     - direct-release
+- project: openstack/tempest-lib
+  options:
+    - direct-release
+  upstream: git://github.com/mtreinish/tempest-lib.git
+  group: tempest
+  acl-config: /home/gerrit2/acls/openstack/tempest.config
 - project: openstack/training-guides
   description: Community created, open source training guides for OpenStack.
   upstream: git://github.com/fifieldt/openstack-training-guides.git
