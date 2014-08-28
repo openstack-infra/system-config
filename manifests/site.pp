@@ -626,4 +626,18 @@ node 'openstackid-dev.openstack.org' {
   }
 }
 
+# Node-OS: centos6
+# Node-OS: precise
+# Node-OS: trusty
+# This is not meant to be an actual node that connects to the master.
+# This is a dummy node definition to trigger a test of the code path used by
+# nodepool's prepare_node scripts in the apply tests
+node 'single-use-slave' {
+  class { 'openstack_project::single_use_slave':
+    # Test non-default values from prepare_node_bare.sh
+    sudo => true,
+    thin => false,
+  }
+}
+
 # vim:sw=2:ts=2:expandtab:textwidth=79
