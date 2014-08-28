@@ -7,6 +7,101 @@
   process. Use the timestamp of the failed test in
   the <a href="../console.html">current tempest run</a>.
 </p>
+<h2>Types of logs </h2>
+<p>
+<ul>
+  <li> <b>cinder</b>
+  <ul>
+    <li><a href="screen-c-api.txt.gz">screen-c-api.txt.gz</a>: cinder-api
+    <li><a href="screen-c-bak.txt.gz">screen-c-bak.txt.gz</a>: cinder-backup
+    <li><a href="screen-c-sch.txt.gz">screen-c-sch.txt.gz</a>: cinder-scheduler
+    <li><a href="screen-c-vol.txt.gz">screen-c-vol.txt.gz</a>: cinder-volume
+  </ul>
+  <li> <b>ceilometer</b>
+  <ul>
+    <li><a href="screen-ceilometer-acentral.txt.gz">screen-ceilometer-acentral.txt.gz</a>: ceilometer-agent-central
+    <li><a href="screen-ceilometer-acompute.txt.gz">screen-ceilometer-acompute.txt.gz</a>: ceilometer-agent-compute
+    <li><a href="screen-ceilometer-alarm-evaluator.txt.gz">screen-ceilometer-alarm-evaluator.txt.gz</a>: ceilometer-alarm-evaluator
+    <li><a href="screen-ceilometer-alarm-notifier.txt.gz">screen-ceilometer-alarm-notifier.txt.gz</a>: ceilometer-alarm-notifier
+    <li><a href="screen-ceilometer-anotification.txt.gz">screen-ceilometer-anotification.txt.gz</a>: ceilometer-agent-notifier
+    <li><a href="screen-ceilometer-api.txt.gz">screen-ceilometer-api.txt.gz</a>: ceilometer-api
+    <li><a href="screen-ceilometer-collector.txt.gz">screen-ceilometer-collector.txt.gz</a>: ceilometer-collector
+  </ul>
+  <li> <b>glance</b>
+  <ul>
+    <li><a href="screen-g-api.txt.gz">screen-g-api.txt.gz</a>: glance-api
+    <li><a href="screen-g-reg.txt.gz">screen-g-reg.txt.gz</a>: glance-registry
+  </ul>
+  <li><b>heat</b>
+  <ul>
+    <li><a href="screen-h-api-cfn.txt.gz">screen-h-api-cfn.txt.gz</a>: heat-api-cfn
+    <li><a href="screen-h-api-cw.txt.gz">screen-h-api-cw.txt.gz</a>: heat-api-cloudwatch
+    <li><a href="screen-h-api.txt.gz">screen-h-api.txt.gz</a>: heat-api
+    <li><a href="screen-h-eng.txt.gz">screen-h-eng.txt.gz</a>: heat-engine
+  </ul>
+  <li> <b>horizon</b>
+  <ul>
+    <li><a href="horizon_error.txt.gz">horizon_error.txt.gz</a>: horizon logs
+  </ul>
+  <li> <b>keystone</b>
+  <ul>
+    <li><a href="screen-key.txt.gz">screen-key.txt.gz</a>: Keystone Log file
+  </ul>
+  <li> <b>nova</b>
+  <ul>
+    <li><a href="screen-n-api.txt.gz">screen-n-api.txt.gz</a>: nova-api
+    <li><a href="screen-n-cond.txt.gz">screen-n-cond.txt.gz</a>: nova-conductor
+    <li><a href="screen-n-cpu.txt.gz">screen-n-cpu.txt.gz</a>: nova-compute
+    <li><a href="screen-n-crt.txt.gz">screen-n-crt.txt.gz</a>: nova-cert
+    <li><a href="screen-n-net.txt.gz">screen-n-net.txt.gz</a>: nova-network
+    <li><a href="screen-n-obj.txt.gz">screen-n-obj.txt.gz</a>: nova-objectstore
+    <li><a href="screen-n-sch.txt.gz">screen-n-sch.txt.gz</a>: nova-scheduler
+  </ul>
+  <li> <b>neutron</b>
+  <ul>
+    <li><a href="screen-q-agt.txt.gz">screen-q-agt.txt.gz</a>: neutron-openvswitch-agent
+    <li><a href="screen-q-dhcp.txt.gz">screen-q-dhcp.txt.gz</a>: neutron-dhcp-agent
+    <li><a href="screen-q-lbaas.txt.gz">screen-q-lbaas.txt.gz</a>: neutron-lbaas-agent
+    <li><a href="screen-q-meta.txt.gz">screen-q-meta.txt.gz</a>: neutron-metadata-agent
+    <li><a href="screen-q-metering.txt.gz">screen-q-metering.txt.gz</a>: neutron-metering-agent
+    <li><a href="screen-q-svc.txt.gz">screen-q-svc.txt.gz</a>: neutron-server
+    <li><a href="screen-q-vpn.txt.gz">screen-q-vpn.txt.gz</a>: neutron-vpn-agent
+  </ul>
+  <li> <b>swift</b>
+  <ul>
+    <li><a href="screen-s-account.txt.gz">screen-s-account.txt.gz</a>: swift-account-server
+    <li><a href="screen-s-container.txt.gz">screen-s-container.txt.gz</a>: swift-container-server
+    <li><a href="screen-s-object.txt.gz">screen-s-object.txt.gz</a>: swift-object-server
+    <li><a href="screen-s-proxy.txt.gz">screen-s-proxt.txt.gz</a>: swift-proxy-server
+  </ul>
+  <li> <b>system</b>
+  <ul>
+    <li><a href="pip-freeze.txt.gz">pip-freeze.txt.gz</a>: List of pip installed python packages. Output of 'pip freeze'
+    <li><a href="dpkg-l.txt.gz">dpkg-l.txt.gz</a>: List of apt-get installed packages. Output of 'dpkg -l'
+    <li><a href="df.txt.gz">df.txt.gz</a>:
+    <li><a href="syslog.txt.gz">syslog.txt.gz</a>: syslog for the test slave
+    <li><a href="screen-dstat.txt.gz">screen-dstat.txt.gz</a>: dstat output during the test job
+    <li><a href="sudoers.txt.gz">syslog.txt.gz</a>: sudoers file
+  </ul>
+  <li> <b>trove</b>
+  <ul>
+    <li><a href="screen-tr-api.txt.gz">screen-tr-api.txt.gz</a>: trove-api
+    <li><a href="screen-tr-cond.txt.gz">screen-tr-cond.txt.gz</a>: trove-conductor
+    <li><a href="screen-tr-tmgr.txt.gz">screen-tr-tmgr.txt.gz</a>: trove-taskmanager
+  </ul>
+  <li> <b>tempest</b>
+  <ul>
+    <li><a href="tempest.txt.gz">tempest.txt.gz</a>: Tempest log file
+    <li><a href="tempest_conf.txt.gz">tempest_conf.txt.gz</a>: Tempest config file
+    <li><a href="subunit_log.txt.gz">subunit_log.txt.gz</a>: Subunit v1 stream from tempest run
+    <li><a href="testr_results.html.gz">testr_results.html.gz</a>: html formatted output of test results
+  </ul>
+  <li> <b>devstack</b>
+  <ul>
+      <li><a href=devstacklog.txt.gz>devstacklog.txt.gz</a>: Devstack log
+  </ul>
+</ul>
+</p>
 <h2>Nova Compute Fails</h2>
 <p>
   If there is a compute test failure, especially a server not getting
