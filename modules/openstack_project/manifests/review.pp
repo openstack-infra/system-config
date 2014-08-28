@@ -113,7 +113,7 @@ class openstack_project::review (
     contactstore_appsec                 => $contactstore_appsec,
     contactstore_pubkey                 => $contactstore_pubkey,
     contactstore_url                    =>
-      'http://www.openstack.org/verify/member/',
+      'http://direct.openstack.org/verify/member/',
     projects_file                       =>
       'puppet:///modules/openstack_project/review.projects.yaml',
     projects_config                     =>
