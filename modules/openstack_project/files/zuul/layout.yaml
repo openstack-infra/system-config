@@ -2527,7 +2527,6 @@ projects:
       - check-tempest-dsvm-ironic-nv
       - check-tempest-dsvm-ironic-postgres-nv
       - check-tempest-dsvm-virtual-ironic-nv
-      - check-tempest-dsvm-f20
     gate:
       - gate-devstack-bashate
       - gate-devstack-dsvm-cells
@@ -2543,6 +2542,7 @@ projects:
       - gate-grenade-dsvm-forward
       - check-tempest-master-dsvm-full-havana
       - check-tempest-master-dsvm-neutron-havana
+      - check-tempest-dsvm-f20
 
   - name: openstack-dev/grenade
     check:
@@ -2725,7 +2725,6 @@ projects:
       - check-tempest-dsvm-ironic-nv
       - check-tempest-dsvm-ironic-postgres-nv
       - check-tempest-dsvm-virtual-ironic-nv
-      - check-tempest-dsvm-f20
     gate:
       - gate-devstack-gate-unittests
       - gate-devstack-dsvm-cells
@@ -2737,6 +2736,7 @@ projects:
       - gate-grenade-dsvm-forward
       - check-tempest-master-dsvm-full-havana
       - check-tempest-master-dsvm-neutron-havana
+      - check-tempest-dsvm-f20
       - check-tempest-dsvm-aiopcpu
       - check-tempest-dsvm-neutron-aiopcpu
     experimental-tripleo:
