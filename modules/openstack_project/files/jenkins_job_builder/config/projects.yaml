@@ -1024,6 +1024,19 @@
       - translation-jobs
 
 - project:
+    name: oslo.log
+    node: 'bare-precise || bare-trusty'
+    tarball-site: tarballs.openstack.org
+    doc-publisher-site: docs.openstack.org
+
+    jobs:
+      - python-jobs
+      - openstack-publish-jobs
+      - pypi-jobs
+      - oslotest-cross-test
+      - translation-jobs
+
+- project:
     name: oslo.messaging
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
