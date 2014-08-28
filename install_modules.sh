@@ -58,6 +58,10 @@ MODULES["puppetlabs-rabbitmq"]="4.0.0"
 
 SOURCE_MODULES["https://github.com/nibalizer/puppet-module-puppetboard"]="2.4.0"
 SOURCE_MODULES["https://git.openstack.org/openstack-infra/puppet-storyboard"]="master"
+# (2014-08-28) for f20-bare nodes, until upstream release with
+# 0c4f2a96470cf0ce211757422b2db9f96e9ada07 (~ 2 weeks expected).
+# tested with this master commit
+SOURCE_MODULES["https://github.com/puppetlabs/puppetlabs-postgresql"]="4b8b3aaa1ce72439c957fe8d9cb6364aa4656bea"
 
 MODULE_LIST=`puppet module list`
 
