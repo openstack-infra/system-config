@@ -232,6 +232,7 @@ openstack-qa:
     projects:
       - openstack/qa-specs
       - openstack/tempest
+      - openstack/tempest-lib
       - openstack-dev/devstack
       - openstack-dev/grenade
       - openstack-infra/elastic-recheck
@@ -747,6 +748,7 @@ openstack-merges:
       - openstack/operations-guide
       - openstack/volume-api
       - openstack/tempest
+      - openstack/tempest-lib
       - openstack-dev/grenade
       - openstack/diskimage-builder
       - openstack/os-apply-config
