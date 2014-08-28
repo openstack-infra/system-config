@@ -45,7 +45,6 @@ MODULES["puppetlabs-apache"]="0.0.4"
 MODULES["puppetlabs-apt"]="1.4.2"
 MODULES["puppetlabs-haproxy"]="0.4.1"
 MODULES["puppetlabs-mysql"]="0.6.1"
-MODULES["puppetlabs-postgresql"]="3.4.1"
 MODULES["puppetlabs-stdlib"]="4.3.2"
 MODULES["saz-memcached"]="2.0.2"
 MODULES["spiette-selinux"]="0.5.1"
@@ -60,6 +59,10 @@ MODULES["puppetlabs-rabbitmq"]="4.0.0"
 # we do not update local branches in this script.
 SOURCE_MODULES["https://github.com/nibalizer/puppet-module-puppetboard"]="2.4.0"
 SOURCE_MODULES["https://git.openstack.org/openstack-infra/puppet-storyboard"]="origin/master"
+# (2014-08-28) for f20-bare nodes, until upstream release with
+# 0c4f2a96470cf0ce211757422b2db9f96e9ada07 (~ 2 weeks expected).
+# tested with this master commit
+SOURCE_MODULES["https://github.com/puppetlabs/puppetlabs-postgresql"]="4b8b3aaa1ce72439c957fe8d9cb6364aa4656bea"
 
 MODULE_LIST=`puppet module list`
 
