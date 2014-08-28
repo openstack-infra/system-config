@@ -3904,6 +3904,14 @@ projects:
     gate:
       - noop
 
+  - name: stackforge/fuel-tasklib
+    template:
+      - name: merge-check
+    check:
+      - noop
+    gate:
+      - noop
+
   - name: stackforge/golang-client
     template:
       - name: merge-check

@@ -801,6 +801,11 @@
   description: Fuel UI
   upstream: git://github.com/Mirantis/fuelweb.git
   acl-config: /home/gerrit2/acls/stackforge/fuel.config
+- project: stackforge/fuel-tasklib
+  group: fuel
+  description: Fuel Task Library
+  upstream: git://github.com/dmitryilyin/tasklib.git
+  acl-config: /home/gerrit2/acls/stackforge/fuel.config
 - project: stackforge/gce-api
   description: Google Compute Engine API support for OpenStack
 - project: stackforge/gerrit-dash-creator
