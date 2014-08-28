@@ -4043,6 +4043,14 @@ projects:
       - manila-branch-tarball
       - manila-coverage
 
+  - name: stackforge/merlin
+    template:
+      - name: merge-check
+    check:
+      - noop
+    gate:
+      - noop
+
   - name: stackforge/milk
     template:
       - name: merge-check

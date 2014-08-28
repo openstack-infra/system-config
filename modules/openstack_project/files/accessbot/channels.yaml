@@ -98,6 +98,7 @@ channels:
       - open_stack
   - name: openstack-meniscus
   - name: openstack-merges
+  - name: openstack-merlin
   - name: openstack-metering
   - name: openstack-monasca
   - name: openstack-neutron
