@@ -1162,6 +1162,9 @@
 - project: stackforge/sahara-guestagent
   description: Guest agent for Sahara project
   acl-config: /home/gerrit2/acls/stackforge/sahara-guestagent.config
+- project: stackforge/saml-generator
+  description: Saml generation tool that generates saml responses for federation testing
+  upstream: https://github.com/rackerlabs/saml-generator.git
 - project: stackforge/satori
   description: Configuration Discovery
 - project: stackforge/solum

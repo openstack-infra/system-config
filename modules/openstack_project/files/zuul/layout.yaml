@@ -1821,6 +1821,14 @@ projects:
       - django_openstack_auth-tarball:
         - django_openstack_auth-pypi-both-upload
 
+  - name: stackforge/saml-generator
+    template:
+      - name: merge-check
+    check:
+      - noop
+    gate:
+      - noop
+
   - name: stackforge/gertty
     template:
       - name: merge-check
