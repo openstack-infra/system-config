@@ -404,6 +404,7 @@ openstack-state-management:
       - x-vrif-minus-2
     projects:
       - openstack/taskflow
+      - stackforge/tooz
     branches:
       - master
 
