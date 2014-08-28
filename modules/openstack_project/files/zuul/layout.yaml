@@ -3942,6 +3942,7 @@ projects:
 
   - name: stackforge/heat-translator
     template:
+      - name: docs-on-rtfd
       - name: merge-check
       - name: python-jobs
     check:
