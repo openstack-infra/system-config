@@ -5,14 +5,36 @@
 class iptables::params {
   case $::osfamily {
     'RedHat': {
-      $package_name = 'iptables'
+      case $::operatingsystem {
+        'Fedora': {
+          $package_name = 'iptables-services'
+          $service_has_restart = true
+        }
+        'RedHat','CentOS','Scientific': {
+            case $::operatingsystemrelease {
+              /^7/: {
+                $package_name = 'iptables-services'
+                $service_has_restart = true
+              }
+              /^6/: {
+                $package_name = 'iptables'
+                $service_has_restart = false
+              }
+              default: {
+                fail("Unsupported operatingsystemrelease: ${::operatingsystemrelease} The 'iptables' module recognize only 6, 7 as RedHat major versions.")
+              }
+          }
+        }
+        default: {
+          fail("Unsupported operatingsystem: ${::operatingsystem} The 'iptables' module with RedHat osfamily.")
+        }
+      }
       $service_name = 'iptables'
       $rules_dir = '/etc/sysconfig'
       $ipv4_rules = '/etc/sysconfig/iptables'
       $ipv6_rules = '/etc/sysconfig/ip6tables'
       $service_has_status = true
       $service_status_cmd = undef
-      $service_has_restart = false
     }
     'Debian': {
       $package_name = 'iptables-persistent'
