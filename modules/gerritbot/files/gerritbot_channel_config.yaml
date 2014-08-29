@@ -88,6 +88,7 @@ openstack-doc:
       - openstack/training-guides
       - openstack/volume-api
       - stackforge/clouddocs-maven-plugin
+      - stackforge/doc8
     branches:
       - master
       - stable/havana
