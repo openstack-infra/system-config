@@ -693,7 +693,7 @@
       - specs-jobs
 
 - project:
-    name: glance.store
+    name: glance_store
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
