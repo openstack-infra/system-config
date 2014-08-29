@@ -205,6 +205,17 @@ function setup_pip {
     pip install -U setuptools
 }
 
+# Final steps
+
+function setup_puppet_finally {
+
+    # Touch hiera.yaml to quiet warnings
+    touch /etc/puppet/hiera.yaml
+    # Symlink hiera config files together
+    ln -s /etc/puppet/hiera.yaml /etc/hiera.yaml
+
+}
+
 #
 # Install pip & puppet
 #
@@ -223,3 +234,5 @@ else
     echo "*** Can not setup puppet: distribution not recognized"
     exit 1
 fi
+
+setup_puppet_finally
