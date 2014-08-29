@@ -1135,6 +1135,28 @@ projects:
     release:
       - kite-tarball
 
+  - name: openstack/manila
+    template:
+      - name: merge-check
+    check:
+      - gate-manila-devstack-dsvm-neutron
+      - gate-manila-docs
+      - gate-manila-pep8
+      - gate-manila-pylint
+      - gate-manila-python26
+      - gate-manila-python27
+      - gate-manila-tempest-dsvm-neutron
+      - gate-manila-tempest-dsvm-neutron-multibackend
+    gate:
+      - gate-manila-devstack-dsvm-neutron
+      - gate-manila-docs
+      - gate-manila-pep8
+      - gate-manila-python26
+      - gate-manila-python27
+    post:
+      - manila-branch-tarball
+      - manila-coverage
+
   - name: openstack/zaqar
     template:
       - name: merge-check
@@ -1613,6 +1635,26 @@ projects:
     gate:
       - gate-python-kiteclient-requirements
       - gate-python-kiteclient-python33
+
+  - name: openstack/python-manilaclient
+    template:
+      - name: merge-check
+    check:
+      - gate-python-manilaclient-docs
+      - gate-python-manilaclient-pep8
+      - gate-python-manilaclient-python26
+      - gate-python-manilaclient-python27
+      - gate-python-manilaclient-python33
+      - gate-manila-tempest-dsvm-neutron
+    gate:
+      - gate-python-manilaclient-docs
+      - gate-python-manilaclient-pep8
+      - gate-python-manilaclient-python26
+      - gate-python-manilaclient-python27
+      - gate-python-manilaclient-python33
+    post:
+      - python-manilaclient-branch-tarball
+      - python-manilaclient-coverage
 
   - name: openstack/python-zaqarclient
     template:
@@ -4029,28 +4071,6 @@ projects:
     check:
       - logaas-coverage
 
-  - name: stackforge/manila
-    template:
-      - name: merge-check
-    check:
-      - gate-manila-devstack-dsvm-neutron
-      - gate-manila-docs
-      - gate-manila-pep8
-      - gate-manila-pylint
-      - gate-manila-python26
-      - gate-manila-python27
-      - gate-manila-tempest-dsvm-neutron
-      - gate-manila-tempest-dsvm-neutron-multibackend
-    gate:
-      - gate-manila-devstack-dsvm-neutron
-      - gate-manila-docs
-      - gate-manila-pep8
-      - gate-manila-python26
-      - gate-manila-python27
-    post:
-      - manila-branch-tarball
-      - manila-coverage
-
   - name: stackforge/merlin
     template:
       - name: merge-check
@@ -4999,26 +5019,6 @@ projects:
       - python-magnetodbclient-tarball
     release:
       - python-magnetodbclient-tarball
-
-  - name: stackforge/python-manilaclient
-    template:
-      - name: merge-check
-    check:
-      - gate-python-manilaclient-docs
-      - gate-python-manilaclient-pep8
-      - gate-python-manilaclient-python26
-      - gate-python-manilaclient-python27
-      - gate-python-manilaclient-python33
-      - gate-manila-tempest-dsvm-neutron
-    gate:
-      - gate-python-manilaclient-docs
-      - gate-python-manilaclient-pep8
-      - gate-python-manilaclient-python26
-      - gate-python-manilaclient-python27
-      - gate-python-manilaclient-python33
-    post:
-      - python-manilaclient-branch-tarball
-      - python-manilaclient-coverage
 
   - name: stackforge/python-monascaclient
     template:

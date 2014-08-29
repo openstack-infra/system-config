@@ -653,8 +653,8 @@ openstack-manila:
       - change-merged
       - x-vrif-minus-2
     projects:
-      - stackforge/manila
-      - stackforge/python-manilaclient
+      - openstack/manila
+      - openstack/python-manilaclient
     branches:
       - master
 

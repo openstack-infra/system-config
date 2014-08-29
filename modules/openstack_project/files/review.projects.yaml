@@ -311,6 +311,8 @@
   upstream: git://github.com/morganfainberg/keystonemiddleware
 - project: openstack/kite
   description: A service for managing and distributing message encryption keys.
+- project: openstack/manila
+  description: Shared filesystem management project for OpenStack.
 - project: openstack/netconn-api
   group: openstack-api-site
   options:
@@ -434,6 +436,7 @@
 - project: openstack/python-keystoneclient
 - project: openstack/python-kiteclient
   description: Python bindings to Kite.
+- project: openstack/python-manilaclient
 - project: openstack/python-neutronclient
   docimpact-group: openstack-manuals
 - project: openstack/python-novaclient
@@ -844,9 +847,6 @@
 - project: stackforge/magnetodb
   description: Key-value database service for OpenStack cloud.
   upstream: git://github.com/Mirantis/magnetodb.git
-- project: stackforge/manila
-  description: Shared filesystem management project for OpenStack.
-  upstream: git://github.com/bswartz/manila.git
 - project: stackforge/merlin
   description: Framework for building UIs for OpenStack projects dealing with complex input data
 - project: stackforge/milk
@@ -1105,8 +1105,6 @@
 - project: stackforge/python-magnetodbclient
   description: Python client for MagnetoDB, the key-value database service for OpenStack cloud.
   upstream: git://github.com/aostapenko/python-magnetodbclient
-- project: stackforge/python-manilaclient
-  upstream: git://github.com/bswartz/python-manilaclient.git
 - project: stackforge/python-mistralclient
   description: Python client for Mistral REST API.
   group: mistral
