@@ -17,8 +17,8 @@
           export DEVSTACK_GATE_TIMEOUT=35
           export DEVSTACK_GATE_NEUTRON=1
           export ENABLED_SERVICES=manila,m-api,m-shr,m-sch
-          export PROJECTS="stackforge/manila $PROJECTS"
-          export PROJECTS="stackforge/python-manilaclient $PROJECTS"
+          export PROJECTS="openstack/manila $PROJECTS"
+          export PROJECTS="openstack/python-manilaclient $PROJECTS"
 
           # Keep localrc to be able to set some vars in pre_test_hook
           export KEEP_LOCALRC=1
@@ -56,8 +56,8 @@
           export DEVSTACK_GATE_TIMEOUT=60
           export DEVSTACK_GATE_NEUTRON=1
           export ENABLED_SERVICES=manila,m-api,m-shr,m-sch,tempest
-          export PROJECTS="stackforge/manila $PROJECTS"
-          export PROJECTS="stackforge/python-manilaclient $PROJECTS"
+          export PROJECTS="openstack/manila $PROJECTS"
+          export PROJECTS="openstack/python-manilaclient $PROJECTS"
 
           # Keep localrc to be able to set some vars in pre_test_hook
           export KEEP_LOCALRC=1
@@ -100,8 +100,8 @@
           export DEVSTACK_GATE_TIMEOUT=60
           export DEVSTACK_GATE_NEUTRON=1
           export ENABLED_SERVICES=manila,m-api,m-shr,m-sch,tempest
-          export PROJECTS="stackforge/manila $PROJECTS"
-          export PROJECTS="stackforge/python-manilaclient $PROJECTS"
+          export PROJECTS="openstack/manila $PROJECTS"
+          export PROJECTS="openstack/python-manilaclient $PROJECTS"
 
           # Keep localrc to be able to set some vars in pre_test_hook
           export KEEP_LOCALRC=1
