@@ -1,6 +1,22 @@
 #!/bin/bash
+# Copyright 2014 OpenStack Foundation.
+# Copyright 2014 Hewlett-Packard Development Company, L.P.
+#
+# Licensed under the Apache License, Version 2.0 (the "License"); you may
+# not use this file except in compliance with the License. You may obtain
+# a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+# WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+# License for the specific language governing permissions and limitations
+# under the License.
 
 MODULE_PATH=/etc/puppet/modules
+SCRIPT_NAME=$(basename $0)
+SCRIPT_DIR=$(readlink -f "$(dirname $0)")
 
 function remove_module {
   local SHORT_MODULE_NAME=$1
@@ -27,42 +43,17 @@ fi
 remove_module "gearman" #remove old saz-gearman
 remove_module "limits" # remove saz-limits (required by saz-gearman)
 
-MODULES["puppetlabs-ntp"]="0.2.0"
+# load modules.env to populate MODULES[*] and SOURCE_MODULES[*]
+# for processing.
+MODULE_ENV_FILE=${MODULE_FILE:-modules.env}
+MODULE_ENV_PATH=${MODULE_ENV_PATH:-${SCRIPT_DIR}}
+if [ -f "${MODULE_ENV_PATH}/${MODULE_ENV_FILE}" ] ; then
+    . "${MODULE_ENV_PATH}/${MODULE_ENV_FILE}"
+fi
 
-# freenode #puppet 2012-09-25:
-# 18:25 < jeblair> i would like to use some code that someone wrote,
-# but it's important that i understand how the author wants me to use
-# it...
-# 18:25 < jeblair> in the case of the vcsrepo module, there is
-# ambiguity, and so we are trying to determine what the author(s)
-# intent is
-# 18:30 < jamesturnbull> jeblair: since we - being PL - are the author
-# - our intent was not to limit it's use and it should be Apache
-# licensed
-MODULES["openstackci-vcsrepo"]="0.0.8"
-
-MODULES["puppetlabs-apache"]="0.0.4"
-MODULES["puppetlabs-apt"]="1.4.2"
-MODULES["puppetlabs-haproxy"]="0.4.1"
-MODULES["puppetlabs-mysql"]="0.6.1"
-MODULES["puppetlabs-postgresql"]="4.0.0"
-MODULES["puppetlabs-stdlib"]="4.3.2"
-MODULES["saz-memcached"]="2.0.2"
-MODULES["spiette-selinux"]="0.5.1"
-MODULES["rafaelfc-pear"]="1.0.3"
-MODULES["puppetlabs-inifile"]="1.0.0"
-MODULES["puppetlabs-firewall"]="0.0.4"
-MODULES["puppetlabs-puppetdb"]="3.0.1"
-MODULES["stankevich-python"]="1.6.6"
-MODULES["puppetlabs-rabbitmq"]="4.0.0"
-
-# Source modules should use tags, explicit refs or remote branches because
-# we do not update local branches in this script.
-SOURCE_MODULES["https://github.com/puppet-community/puppet-module-puppetboard"]="2.4.0"
-
-# Add modules that should be part of the openstack-infra integration test here
-if [[ "$PUPPET_INTEGRATION_TEST" -ne "1" ]]; then
-  SOURCE_MODULES["https://git.openstack.org/openstack-infra/puppet-storyboard"]="origin/master"
+if [ -z "${!MODULES[*]}" ] && [ -z "${!SOURCE_MODULES[*]}" ] ; then
+    echo "nothing to do , unable to find MODULES env or SOURCE_MODULES"
+    exit 0
 fi
 
 MODULE_LIST=`puppet module list`
