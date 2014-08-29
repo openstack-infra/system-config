@@ -27,7 +27,7 @@ fi
 remove_module "gearman" #remove old saz-gearman
 remove_module "limits" # remove saz-limits (required by saz-gearman)
 
-MODULES["puppetlabs-ntp"]="0.2.0"
+MODULES["puppetlabs-ntp"]="3.1.2"
 
 # freenode #puppet 2012-09-25:
 # 18:25 < jeblair> i would like to use some code that someone wrote,
