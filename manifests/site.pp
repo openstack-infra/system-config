@@ -495,6 +495,7 @@ node 'zuul.openstack.org' {
       'zm01.openstack.org',
       'zm02.openstack.org',
       'zm03.openstack.org',
+      'zm04.openstack.org',
     ],
   }
 }
