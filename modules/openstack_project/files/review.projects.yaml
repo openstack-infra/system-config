@@ -816,6 +816,10 @@
 - project: stackforge/git-upstream
   description: Staying close to latest from OpenStack through git-upstream
   upstream: https://github.com/dguerri/git-upstream.git
+- project: stackforge/tricircle
+  group: tricircle
+  description: Tricircle is a project for OpenStack cascading solution.
+  upstream: https://github.com/joeysuperman/tricircle.git
 - project: stackforge/gnocchi
   description: A time series storage and resources index service.
   upstream: git://github.com/jd/gnocchi.git
