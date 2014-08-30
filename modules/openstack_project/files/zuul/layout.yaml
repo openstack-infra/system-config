@@ -5380,6 +5380,14 @@ projects:
     post:
       - tooz-branch-tarball
 
+  - name: stackforge/tricircle
+    template:
+      - name: merge-check
+    check:
+      - noop
+    gate:
+      - noop
+
   - name: stackforge/turbo-hipster
     template:
       - name: merge-check
