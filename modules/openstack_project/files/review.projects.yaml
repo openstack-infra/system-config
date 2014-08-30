@@ -1220,6 +1220,10 @@
   upstream: https://github.com/timjr/tomograph.git
 - project: stackforge/tooz
   description: Coordinate distributed systems.
+- project: stackforge/tricircle
+  group: tricircle
+  description: Tricircle is a project for OpenStack cascading solution.
+  upstream: https://github.com/joeysuperman/tricircle.git
 - project: stackforge/turbo-hipster
   group: turbo-hipster
   docimpact-group: turbo-hipster

@@ -3199,6 +3199,14 @@
       - python-jobs
 
 - project:
+    name: tricircle
+    node: 'bare-precise || bare-trusty'
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - python-jobs
+
+- project:
     name: tuskar-ui-extras
     github-org: stackforge
     node: 'bare-precise || bare-trusty'
