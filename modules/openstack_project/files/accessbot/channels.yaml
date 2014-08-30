@@ -68,6 +68,8 @@ channels:
   - name: openstack-barbican
   - name: openstack-blazar
   - name: openstack-board
+  - name: openstack-cascading
+    mask: full_mask
   - name: openstack-ceilometer
   - name: openstack-chef
   - name: openstack-cinder
