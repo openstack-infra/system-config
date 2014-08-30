@@ -5380,6 +5380,16 @@ projects:
     post:
       - tooz-branch-tarball
 
+  - name: stackforge/tricircle
+    template:
+      - name: merge-check
+    check:
+      - gate-project-name-pep8
+      - gate-project-name-python27
+    gate:
+      - gate-project-name-pep8
+      - gate-project-name-python27
+
   - name: stackforge/turbo-hipster
     template:
       - name: merge-check
