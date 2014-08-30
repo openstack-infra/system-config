@@ -951,7 +951,7 @@ projects:
     gate:
       - gate-glance-specs-python27
 
-  - name: openstack/glance.store
+  - name: openstack/glance_store
     template:
       - name: merge-check
       - name: python-jobs
@@ -973,9 +973,9 @@ projects:
       - check-tripleo-novabm-overcloud-precise-nonha
       - check-tripleo-novabm-overcloud-f20-nonha
     pre-release:
-      - glance.store-tarball
+      - glance_store-tarball
     release:
-      - glance.store-tarball
+      - glance_store-tarball
 
   - name: openstack/heat
     template:
