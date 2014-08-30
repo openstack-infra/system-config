@@ -633,6 +633,16 @@ syscompass:
     branches:
       - master
 
+openstack-cascading:
+    events:
+      - patchset-created
+      - change-merged
+      - x-vrif-minus-2
+    projects:
+      - stackforge/glance-cascading
+    branches:
+      - master
+
 openstack-keystone:
     events:
       - change-merged
