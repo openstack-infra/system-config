@@ -442,7 +442,7 @@ To rename a project:
    review.openstack.org::
 
      sudo mv ~gerrit2/review_site/git/openstack/{OLD,NEW}.git
-     sudo mv /var/lib/git/openstack/{OLD,NEW}.git
+     sudo mv /opt/lib/git/openstack/{OLD,NEW}.git
 
 #. Reindex the lucene search index on review.openstack.org::
 
