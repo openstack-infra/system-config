@@ -95,7 +95,9 @@ The minimum set of things to port across is:
 
 * The puppetdb definition in site.pp
 
-Then follow the puppet.rsh instructions for bringing up a puppetmaster,
+Then follow the puppet.rst 
+<https://git.openstack.org/cgit/openstack-infra/config/tree/doc/source/puppet.rst>
+instructions for bringing up a puppetmaster,
 replacing openstack_project with your project name. You'll need to populate
 hiera at the end with the minimum set of keys:
 
