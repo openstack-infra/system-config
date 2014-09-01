@@ -5064,6 +5064,14 @@ projects:
       - gate-python-opentsdbclient-python27
       - gate-python-opentsdbclient-python33
 
+  - name: stackforge/python-rackclient
+    template:
+      - name: merge-check
+    check:
+      - noop
+    gate:
+      - noop
+
   - name: stackforge/python-rallyclient
     template:
       - name: merge-check
