@@ -5723,3 +5723,11 @@ projects:
       - noop
     gate:
       - noop
+
+  - name: stackforge/python-rackclient
+    template:
+      - name: merge-check
+    check:
+      - noop
+    gate:
+      - noop

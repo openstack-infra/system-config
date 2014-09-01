@@ -1126,6 +1126,9 @@
   upstream: https://github.com/jnoller/openstacksdk.git
 - project: stackforge/python-opentsdbclient
   description: A simple REST client to communicate with OpenTSDB (needed for Gnocchi to use OpenTSDB as a backend)
+- project: stackforge/python-rackclient
+  description: Client library for RACK API
+  upstream: https://github.com/ctc-g/python-rackclient
 - project: stackforge/python-rallyclient
   group: rally
   acl-config: /home/gerrit2/acls/stackforge/rally.config
