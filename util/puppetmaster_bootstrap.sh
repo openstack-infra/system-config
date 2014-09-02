@@ -1,14 +1,11 @@
 #!/bin/bash
 set -x
 
-# There are some things to tweak here since I am using my own
-# development environment for now.
+apt-get update
+apt-get install git
+git clone https://git.openstack.org/openstack-infra/config
 
-#apt-get update
-#apt-get install git
-#git clone https://git.openstack.org/openstack-infra/config
-
-cd /vagrant/config
+cd config
 
 cat > manifests/local.pp <<EOF
 node default {
