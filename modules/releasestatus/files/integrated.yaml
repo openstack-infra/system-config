@@ -28,8 +28,7 @@ products:
  - horizon
  - neutron
  - cinder
- - oslo
- - oslo.messaging
+ - oslo-incubator
  - ceilometer
  - heat
  - trove
