@@ -5131,6 +5131,14 @@ projects:
       - gate-solum-infra-guestagent-python33
       - gate-solum-infra-guestagent-pypy
 
+  - name: stackforge/radar
+    template:
+      - name: merge-check
+    check:
+      - noop
+    gate:
+      - noop
+
   - name: stackforge/rally
     template:
       - name: merge-check
