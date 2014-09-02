@@ -56,8 +56,10 @@ MODULES["puppetlabs-puppetdb"]="3.0.1"
 MODULES["stankevich-python"]="1.6.6"
 MODULES["puppetlabs-rabbitmq"]="4.0.0"
 
+# Source modules should use tags, explicit refs or remote branches because
+# we do not update local branches in this script.
 SOURCE_MODULES["https://github.com/nibalizer/puppet-module-puppetboard"]="2.4.0"
-SOURCE_MODULES["https://git.openstack.org/openstack-infra/puppet-storyboard"]="master"
+SOURCE_MODULES["https://git.openstack.org/openstack-infra/puppet-storyboard"]="origin/master"
 
 MODULE_LIST=`puppet module list`
 
@@ -109,7 +111,7 @@ for MOD in ${!SOURCE_MODULES[*]} ; do
     fi
   fi
   # fetch the latest refs from the repo
-  $GIT_CMD_BASE fetch
+  $GIT_CMD_BASE remote update
   # make sure the correct revision is installed, I have to use rev-list b/c rev-parse does not work with tags
   if [ `${GIT_CMD_BASE} rev-list HEAD --max-count=1` != `${GIT_CMD_BASE} rev-list ${SOURCE_MODULES[$MOD]} --max-count=1` ]; then
     # checkout correct revision
