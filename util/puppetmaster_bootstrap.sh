@@ -2,6 +2,7 @@
 set -x
 
 # Script to build a puppet 3 master to infra/config standards
+
 apt-get update
 apt-get install git
 git clone https://git.openstack.org/openstack-infra/config
