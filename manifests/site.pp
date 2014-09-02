@@ -185,8 +185,9 @@ node 'puppetmaster.openstack.org' {
     root_rsa_key => hiera('puppetmaster_root_rsa_key', 'XXX'),
     update_slave => false,
     sysadmins    => hiera('sysadmins', []),
-    version      => '3.4.',
+    version      => '3.6.',
     ca_server    => 'ci-puppetmaster.openstack.org',
+    puppetdb     => false,
   }
 }
 
