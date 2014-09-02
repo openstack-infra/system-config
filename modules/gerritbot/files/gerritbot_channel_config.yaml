@@ -608,6 +608,7 @@ packstack-dev:
       - master
       - grizzly
       - havana
+      - icehouse
 
 openstack-anvil:
     events:
