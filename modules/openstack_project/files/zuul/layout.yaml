@@ -5405,8 +5405,16 @@ projects:
       - gate-warm-pep8
       - gate-warm-python27
 
-  - name: stackforge/wsme
+  - name: stackforge/windows-diskimage-builder
     template:
+      - name: merge-check
+    check:
+      - noop
+    gate:
+      - noop
+
+  - name: stackforge/wsme
+    template:0
       - name: merge-check
       - name: publish-to-pypi
     check:
