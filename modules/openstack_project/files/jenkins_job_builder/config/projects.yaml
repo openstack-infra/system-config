@@ -2971,6 +2971,7 @@
 
     jobs:
       - python-jobs
+      - pypi-jobs
 
 - project:
     name: puppet-n1k-vsm
