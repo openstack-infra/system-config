@@ -445,6 +445,9 @@ jobs:
   # We're planning on Puppet 2.7 support to Spring 2015.
   - name: ^.*puppet-unit-2.7$
     parameter-function: set_node_options_default_precise
+  # Berkshelf 3.x requires GeCode 3.x on precise.
+  - name: ^gate-.*-chef-(lint|style|unit)$
+    parameter-function: set_node_options_default_precise
   # tempest and d-g branchless tests need to only run on master
   # (needs to be early to not impact non-voting stanzas later)
   - name: ^(?!periodic-).*(-icehouse|-havana)$
