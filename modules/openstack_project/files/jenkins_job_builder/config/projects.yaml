@@ -2720,6 +2720,7 @@
       - 'gate-{name}-python26'
       - 'gate-{name}-python27'
       - 'gate-{name}-python33'
+      - 'gate-{name}-python34'
       - '{name}-tarball'
       - pypi-jobs
 
