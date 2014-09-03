@@ -3,6 +3,9 @@
 ROOT=$(readlink -fn $(dirname $0))
 MODULE_PATH="${ROOT}/modules:/etc/puppet/modules"
 
+sudo rm -fr /etc/puppet/modules
+sudo mkdir -p /etc/puppet/modules
+
 if [[ ! -d applytest ]] ; then
     mkdir applytest
 fi
