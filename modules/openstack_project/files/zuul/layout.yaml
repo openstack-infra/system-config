@@ -738,6 +738,8 @@ jobs:
     branch: ^(?!stable/(havana|icehouse)).*$
   - name: gate-nova-pip-missing-reqs
     voting: false
+  - name: gate-config-bashate
+    voting: false
 
   # TODO(rpodolyaka): make voting when the jobs pass on all SA versions
   - name: gate-oslo.db-tox-sqla_08
@@ -2906,6 +2908,7 @@ projects:
       - config-compare-xml
       - gate-config-layout
       - gate-config-pep8
+      - gate-config-bashate
       - gate-config-puppet-syntax
       - gate-config-puppet-apply-precise
       - gate-config-puppet-apply-centos6
