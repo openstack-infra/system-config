@@ -47,6 +47,7 @@ class openstack_project::eavesdrop (
         '#openstack-containers',
         '#openstack-dev',
         '#openstack-dns',
+        '#openstack-fr',
         '#openstack-horizon',
         '#openstack-infra',
         '#openstack-ironic',
