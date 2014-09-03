@@ -56,6 +56,16 @@ class openstack_project::thick_slave(
     ensure => present,
   }
 
+  # Only install PyPy and Python 3.4 packages on Ubuntu 14.04 LTS (Trusty)
+  if ($::lsbdistcodename == 'trusty') {
+    package { $::openstack_project::jenkins_params::pypy_package:
+      ensure => present,
+    }
+    package { $::openstack_project::jenkins_params::python34_package:
+      ensure => present,
+    }
+  }
+
   include pip
   # for pushing files to swift and uploading to pypi with twine
   package { 'requests':
