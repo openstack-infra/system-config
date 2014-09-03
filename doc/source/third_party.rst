@@ -124,8 +124,8 @@ Further documentation on the `review` command in Gerrit can be found in the `Ger
 
 We do suggest cautious testing of these systems and have a development Gerrit
 setup to test on if required.  In SmokeStack's case all failures are manually
-reviewed before getting pushed to OpenStack, whilst this may no scale it is
-advisable during initial testing of the setup.
+reviewed before getting pushed to OpenStack, while this may not scale it is
+advisable during the initial testing of the setup.
 
 There are several triggers that gerrit will match to alter the
 formatting of comments.  The raw regular expressions can be seen in
