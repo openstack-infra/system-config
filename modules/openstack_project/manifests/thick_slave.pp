@@ -77,10 +77,25 @@ class openstack_project::thick_slave(
   }
 
   if ($::lsbdistcodename == 'trusty') {
+
+    # Only install PyPy and Python 3.4 packages on Ubuntu 14.04 LTS (Trusty)
+    package { $::openstack_project::jenkins_params::pypy_package:
+      ensure => present,
+    }
+    package { $::openstack_project::jenkins_params::python3_dev_package:
+      ensure => present,
+    }
+    package { $::openstack_project::jenkins_params::python3_package:
+      ensure => present,
+    }
+
+    # Don't install the Ruby Gems profile script on Trusty
     file { '/etc/profile.d/rubygems.sh':
       ensure => absent,
     }
+
   } else {
+
     file { '/etc/profile.d/rubygems.sh':
       ensure => present,
       owner  => 'root',
@@ -88,6 +103,7 @@ class openstack_project::thick_slave(
       mode   => '0644',
       source => 'puppet:///modules/openstack_project/rubygems.sh',
     }
+
   }
 
   package { 'rake':

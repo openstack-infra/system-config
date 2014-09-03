@@ -41,6 +41,9 @@ class openstack_project::jenkins_params {
       $mongodb_package = 'mongodb-server'
       $pandoc_package = 'pandoc'
       $pkgconfig_package = 'pkgconfig'
+      # FIXME: no PyPy on RHEL
+      # FIXME: no Python 3 headers on RHEL
+      # FIXME: no Python 3 on RHEL
       $python_libvirt_package = 'libvirt-python'
       $python_lxml_package = 'python-lxml'
       $python_magic_package = 'python-magic'
@@ -121,6 +124,9 @@ class openstack_project::jenkins_params {
       $mongodb_package = 'mongodb'
       $pandoc_package = 'pandoc'
       $pkgconfig_package = 'pkg-config'
+      $pypy_package = 'pypy'
+      $python3_dev_package = 'python3-all-dev'
+      $python3_package = 'python3.4'
       $python_libvirt_package = 'python-libvirt'
       $python_lxml_package = 'python-lxml'
       $python_magic_package = 'python-magic'
