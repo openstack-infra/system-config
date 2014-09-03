@@ -349,10 +349,13 @@
   description: Apply configuration from cloud metadata.
 - project: openstack/os-cloud-config
   description: Configure a cloud
+  acl-config: /home/gerrit2/acls/openstack/os-apply-config.config
 - project: openstack/os-collect-config
   description: Collect and cache metadata, run hooks on changes.
+  acl-config: /home/gerrit2/acls/openstack/os-apply-config.config
 - project: openstack/os-refresh-config
   description: Restart services and coordinate data migration on Heat config changes.
+  acl-config: /home/gerrit2/acls/openstack/os-apply-config.config
 - project: openstack/oslo-incubator
   group: oslo
   docimpact-group: openstack-manuals
