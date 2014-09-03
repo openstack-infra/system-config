@@ -10,7 +10,11 @@ class openstack_project::params {
       $update_pkg_list_cmd = ''
     }
     'Debian': {
-      $packages = ['puppet', 'wget']
+      if ($::lsbdistcodename == 'trusty') {
+        $packages = ['puppet', 'pypy', 'python3.4', 'wget']
+      } else {
+        $packages = ['puppet', 'wget']
+      }
       $user_packages = ['byobu', 'emacs23-nox', 'vim-nox']
       $update_pkg_list_cmd = 'apt-get update >/dev/null 2>&1;'
     }
