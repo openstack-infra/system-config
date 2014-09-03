@@ -212,7 +212,7 @@
 - builder:
     name: python34
     builders:
-      - shell:  "/usr/local/jenkins/slave_scripts/run-unittests.sh 34"
+      - shell: "/usr/local/jenkins/slave_scripts/run-unittests.sh 34"
 
 - builder:
     name: pypy
