@@ -1,11 +1,10 @@
 # == Class: openstack_project::base
 #
 class openstack_project::base(
-  $certname      = $::fqdn,
-  $install_users = true,
-  $pin_puppet    = '2.7.',
-  $pin_facter    = '1.',
-  $ca_server     = undef,
+  $certname              = $::fqdn,
+  $install_users         = true,
+  $pin_puppet            = '2.7.',
+  $ca_server             = undef,
 ) {
   if ($::osfamily == 'Debian') {
     include apt
@@ -13,6 +12,16 @@ class openstack_project::base(
   include openstack_project::params
   include openstack_project::users
   include sudoers
+
+  $pin_facter = $pin_puppet ? {
+    /3.*/   => '2.',
+    default => '1.',
+  }
+
+  $pin_puppetdb_terminus = $pin_puppet ? {
+    /3.*/   => '2.',
+    default => '1.',
+  }
 
   file { '/etc/profile.d/Z98-byobu.sh':
     ensure => absent,
