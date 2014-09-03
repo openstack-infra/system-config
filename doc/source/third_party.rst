@@ -148,8 +148,8 @@ account has no access via the GUI to modify settings.
 
 You will need to subscribe to two mailing lists `third-party-announce
 <http://lists.openstack.org/cgi-bin/mailman/listinfo/third-party-announce>`_
-to be aware if your system is disabled and `third-party-request
-<http://lists.openstack.org/cgi-bin/mailman/listinfo/third-party-request>`_
+to be aware if your system is disabled and `third-party-requests
+<http://lists.openstack.org/cgi-bin/mailman/listinfo/third-party-requests>`_
 to request your dedicated third party gerrit account.
 
 When submitting your request to the third-party-request mailing list, the
