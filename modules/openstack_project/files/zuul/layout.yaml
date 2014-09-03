@@ -588,6 +588,8 @@ jobs:
     files:
       - '^tools/.*-requires$'
       - '^.*requirements.txt$'
+  - name: gate-cloudkitty-dashboard-python33
+    voting: false
   - name: gate-hacking-pypy
     voting: false
   - name: gate-hacking-integration-nova
@@ -3640,7 +3642,8 @@ projects:
     template:
       - name: merge-check
       - name: python-jobs
-      - name: python3-jobs
+    experimental:
+      - gate-cloudkitty-dashboard-python33
 
   - name: stackforge/cloudroast
     template:
