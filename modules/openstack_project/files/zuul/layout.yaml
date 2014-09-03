@@ -1071,6 +1071,7 @@ projects:
       - gate-tempest-dsvm-virtual-ironic
     experimental:
       - check-grenade-dsvm-ironic-sideways
+      - check-tempest-dsvm-ironic-parallel
     pre-release:
       - ironic-tarball
     release:
@@ -2464,6 +2465,7 @@ projects:
       - check-tempest-master-dsvm-full-havana
       - check-tempest-master-dsvm-neutron-havana
       - check-tempest-dsvm-f20
+      - check-tempest-dsvm-ironic-parallel
     experimental-tripleo:
       - check-tripleo-novabm-undercloud-precise-nonha
       - check-tripleo-ironic-undercloud-precise-nonha
