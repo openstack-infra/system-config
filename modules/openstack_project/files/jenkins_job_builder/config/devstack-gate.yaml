@@ -509,6 +509,40 @@
 
 
 - job-template:
+    name: '{pipeline}-tempest-dsvm-ironic-parallel{branch-designator}'
+    node: '{node}'
+
+    wrappers:
+      - build-timeout:
+          timeout: 125
+      - timestamps
+
+    builders:
+      - link-logs
+      - net-info
+      - devstack-checkout
+      - shell: |
+          #!/bin/bash -xe
+          export PYTHONUNBUFFERED=true
+          export DEVSTACK_GATE_TIMEOUT=120
+          export DEVSTACK_GATE_TEMPEST=1
+          export DEVSTACK_GATE_IRONIC=1
+          export DEVSTACK_GATE_VIRT_DRIVER=ironic
+          export TEMPEST_CONCURRNECY=2
+          export BRANCH_OVERRIDE={branch-override}
+          if [ "$BRANCH_OVERRIDE" != "default" ] ; then
+              export OVERRIDE_ZUUL_BRANCH=$BRANCH_OVERRIDE
+          fi
+
+          cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
+          ./safe-devstack-vm-gate-wrap.sh
+
+    publishers:
+      - devstack-logs
+      - console-log
+
+
+- job-template:
     name: '{pipeline}-tempest-dsvm-ironic-postgres{branch-designator}'
     node: '{node}'
 
@@ -1515,6 +1549,7 @@
       - '{pipeline}-tempest-dsvm-ironic{branch-designator}'
       - '{pipeline}-tempest-dsvm-ironic-postgres{branch-designator}'
       - '{pipeline}-tempest-dsvm-virtual-ironic{branch-designator}'
+      - '{pipeline}-tempest-dsvm-ironic-parallel{branch-designator}'
       - '{pipeline}-tempest-dsvm-zaqar{branch-designator}'
       - '{pipeline}-tempest-dsvm-all{branch-designator}'
       - '{pipeline}-tempest-dsvm-coverage{branch-designator}'
