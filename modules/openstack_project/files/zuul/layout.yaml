@@ -482,6 +482,8 @@ jobs:
     voting: false
   - name: check-tempest-dsvm-ironic-postgres-nv
     voting: false
+  - name: check-tempest-dsvm-ironic-parallel-nv
+    voting: false
   - name: check-tempest-dsvm-virtual-ironic-nv
     branch: ^(?!stable/havana).*$
     voting: false
@@ -1062,6 +1064,7 @@ projects:
     check:
       - check-tempest-dsvm-ironic
       - check-tempest-dsvm-ironic-postgres
+      - check-tempest-dsvm-ironic-parallel-nv
       - check-tempest-dsvm-virtual-ironic
     check-tripleo:
       - check-tripleo-ironic-undercloud-precise-nonha
@@ -2464,6 +2467,7 @@ projects:
       - check-tempest-master-dsvm-full-havana
       - check-tempest-master-dsvm-neutron-havana
       - check-tempest-dsvm-f20
+      - check-tempest-dsvm-ironic-parallel
     experimental-tripleo:
       - check-tripleo-novabm-undercloud-precise-nonha
       - check-tripleo-ironic-undercloud-precise-nonha
