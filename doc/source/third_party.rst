@@ -38,6 +38,12 @@ Requirements
   * Support the following syntaxes: ``recheck``.
   * Recheck means recheck everything. A single recheck comment should
     re-trigger all testing systems.
+    * Some third-party CI systems may not have the resources to be able to
+      support all rechecks meant for other systems, in this case a third-party
+      system can support a recheck comment of ``recheck-<system name>`` If this
+      syntax is supported, it must be explained in your third-party wiki page
+      and patch comments. If this is not done, it will be assumed that your
+      third-party testing system will restart tests with ``recheck`` only.
 * Publish contact information for the maintainers.
 
   * Follow the instructions on the `ThirdPartySystems wiki page
