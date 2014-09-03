@@ -479,6 +479,113 @@
     # standard, minimal fashion.
     name: devstack-virtual-ironic
     builders:
+<<<<<<< HEAD
+=======
+      - link-logs
+      - net-info
+      - devstack-checkout
+      - shell: |
+          #!/bin/bash -xe
+          export PYTHONUNBUFFERED=true
+          export DEVSTACK_GATE_TIMEOUT=120
+          export DEVSTACK_GATE_TEMPEST=1
+          export DEVSTACK_GATE_IRONIC=1
+          export DEVSTACK_GATE_SMOKE_SERIAL=1
+          export BRANCH_OVERRIDE={branch-override}
+          if [ "$BRANCH_OVERRIDE" != "default" ] ; then
+              export OVERRIDE_ZUUL_BRANCH=$BRANCH_OVERRIDE
+          fi
+
+          cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
+          ./safe-devstack-vm-gate-wrap.sh
+
+    publishers:
+      - devstack-logs
+      - console-log
+
+
+- job-template:
+    name: '{pipeline}-tempest-dsvm-ironic-parallel{branch-designator}'
+    node: '{node}'
+
+    wrappers:
+      - build-timeout:
+          timeout: 125
+      - timestamps
+
+    builders:
+      - link-logs
+      - net-info
+      - devstack-checkout
+      - shell: |
+          #!/bin/bash -xe
+          export PYTHONUNBUFFERED=true
+          export DEVSTACK_GATE_TIMEOUT=120
+          export DEVSTACK_GATE_TEMPEST=1
+          export DEVSTACK_GATE_IRONIC=1
+          export DEVSTACK_GATE_VIRT_DRIVER=ironic
+          export TEMPEST_CONCURRENCY=2
+          export BRANCH_OVERRIDE={branch-override}
+          if [ "$BRANCH_OVERRIDE" != "default" ] ; then
+              export OVERRIDE_ZUUL_BRANCH=$BRANCH_OVERRIDE
+          fi
+
+          cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
+          ./safe-devstack-vm-gate-wrap.sh
+
+    publishers:
+      - devstack-logs
+      - console-log
+
+
+- job-template:
+    name: '{pipeline}-tempest-dsvm-ironic-postgres{branch-designator}'
+    node: '{node}'
+
+    wrappers:
+      - build-timeout:
+          timeout: 125
+      - timestamps
+
+    builders:
+      - link-logs
+      - net-info
+      - devstack-checkout
+      - shell: |
+          #!/bin/bash -xe
+          export PYTHONUNBUFFERED=true
+          export DEVSTACK_GATE_TIMEOUT=120
+          export DEVSTACK_GATE_TEMPEST=1
+          export DEVSTACK_GATE_POSTGRES=1
+          export DEVSTACK_GATE_IRONIC=1
+          export DEVSTACK_GATE_SMOKE_SERIAL=1
+          export BRANCH_OVERRIDE={branch-override}
+          if [ "$BRANCH_OVERRIDE" != "default" ] ; then
+              export OVERRIDE_ZUUL_BRANCH=$BRANCH_OVERRIDE
+          fi
+
+          cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
+          ./safe-devstack-vm-gate-wrap.sh
+
+    publishers:
+      - devstack-logs
+      - console-log
+
+
+- job-template:
+    name: '{pipeline}-tempest-dsvm-virtual-ironic{branch-designator}'
+    node: '{node}'
+
+    wrappers:
+      - build-timeout:
+          timeout: 125
+      - timestamps
+
+    builders:
+      - link-logs
+      - net-info
+      - devstack-checkout
+>>>>>>> Adds support for Ironic parallel Tempest testing
       - shell: |
           #!/bin/bash -xe
           export PYTHONUNBUFFERED=true
@@ -1139,6 +1246,7 @@
           export DEVSTACK_GATE_IRONIC=1
           export DEVSTACK_GATE_NEUTRON=1
           export DEVSTACK_GATE_VIRT_DRIVER=ironic
+          export TEMPEST_CONCURRENCY=2
           export BRANCH_OVERRIDE={branch-override}
           if [ "$BRANCH_OVERRIDE" != "default" ] ; then
               export OVERRIDE_ZUUL_BRANCH=$BRANCH_OVERRIDE
@@ -1480,6 +1588,7 @@
       - '{pipeline}-grenade-dsvm-neutron-sideways{branch-designator}'
       - '{pipeline}-tempest-dsvm-ironic-pxe_ssh{branch-designator}'
       - '{pipeline}-tempest-dsvm-ironic-pxe_ssh-postgres{branch-designator}'
+      - '{pipeline}-tempest-dsvm-ironic-parallel{branch-designator}'
       - '{pipeline}-tempest-dsvm-zaqar{branch-designator}'
       - '{pipeline}-tempest-dsvm-all{branch-designator}'
       - '{pipeline}-tempest-dsvm-coverage{branch-designator}'
