@@ -1929,6 +1929,7 @@ projects:
     template:
       - name: merge-check
       - name: publish-to-pypi
+      - name: check-requirements
     check:
       - gate-openstack-doc-tools-pep8
     gate:
