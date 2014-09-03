@@ -145,14 +145,20 @@ function setup_puppet_ubuntu {
     if [ "$THREE" == 'yes' ]; then
         PUPPET_VERSION=3.4.*
         FACTER_VERSION=2.*
+        TERMINUS_VERSION=2.*
     else
         PUPPET_VERSION=2.7*
         FACTER_VERSION=1.*
+        TERMINUS_VERSION=1.*
     fi
 
     cat > /etc/apt/preferences.d/00-puppet.pref <<EOF
-Package: puppet puppet-common puppetmaster puppetmaster-common puppetmaster-passenger puppetdb-terminus
+Package: puppet puppet-common puppetmaster puppetmaster-common puppetmaster-passenger
 Pin: version $PUPPET_VERSION
+Pin-Priority: 501
+
+Package: puppetdb-terminus
+Pin: version $TERMINUS_VERSION
 Pin-Priority: 501
 
 Package: facter
