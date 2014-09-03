@@ -104,6 +104,7 @@ channels:
   - name: openstack-neutron
   - name: openstack-nfv
   - name: openstack-nova
+  - name: openstack-operators
   - name: openstack-opw
   - name: openstack-oslo
   - name: openstack-packaging
