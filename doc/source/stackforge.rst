@@ -158,13 +158,13 @@ It should look something like::
       - gate-project-name-pep8
       - gate-project-name-python26
       - gate-project-name-python27
-      - gate-project-name-python33
+      - gate-project-name-python34
     gate:
       - gate-project-name-docs
       - gate-project-name-pep8
       - gate-project-name-python26
       - gate-project-name-python27
-      - gate-project-name-python33
+      - gate-project-name-python34
     post:
       - project-name-coverage
 
