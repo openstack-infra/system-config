@@ -2036,10 +2036,10 @@ projects:
       - os-refresh-config-coverage
       - os-refresh-config-branch-tarball
 
-#TODO: add docs
   - name: openstack/oslosphinx
     template:
       - name: merge-check
+      - name: openstack-server-publish-jobs
       - name: check-requirements
       - name: publish-to-pypi
     check:
@@ -2089,6 +2089,7 @@ projects:
     template:
       - name: merge-check
       - name: python-jobs
+      - name: openstack-server-publish-jobs
       - name: check-requirements
       - name: integrated-gate
       - name: publish-to-pypi
@@ -2209,6 +2210,7 @@ projects:
   - name: openstack/oslo.rootwrap
     template:
       - name: merge-check
+      - name: openstack-server-publish-jobs
       - name: check-requirements
       - name: integrated-gate
       - name: large-ops
