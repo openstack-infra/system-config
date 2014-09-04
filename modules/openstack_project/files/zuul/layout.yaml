@@ -780,8 +780,6 @@ jobs:
     branch: ^(?!stable/(havana|icehouse)).*$
   - name: gate-nova-pip-missing-reqs
     voting: false
-  - name: gate-config-bashate
-    voting: false
 
   # TODO(rpodolyaka): make voting when the jobs pass on all SA versions
   - name: gate-oslo.db-tox-sqla_08
