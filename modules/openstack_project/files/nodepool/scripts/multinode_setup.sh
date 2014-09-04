@@ -37,3 +37,5 @@ fi
 sudo chown -R root:root /etc/nodepool
 sudo chmod 0755 /etc/nodepool
 sudo chmod 0444 /etc/nodepool/*
+
+/opt/nodepool-scripts/configure_mirror.sh
