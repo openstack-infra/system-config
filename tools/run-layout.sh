@@ -16,8 +16,8 @@
 
 mkdir -p .test
 cd .test
-[ -d zuul ] || git clone https://review.openstack.org/p/openstack-infra/zuul --depth 1
-[ -d jenkins-job-builder ] || git clone https://review.openstack.org/p/openstack-infra/jenkins-job-builder --depth 1
+[ -d zuul ] || git clone https://git.openstack.org/openstack-infra/zuul --depth 1
+[ -d jenkins-job-builder ] || git clone https://git.openstack.org/openstack-infra/jenkins-job-builder --depth 1
 cd jenkins-job-builder
 # These are $WORKSPACE/.test/jenkins-job-builder/.test/...
 mkdir -p .test/new/config
