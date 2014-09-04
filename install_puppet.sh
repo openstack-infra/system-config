@@ -133,6 +133,11 @@ EOF
 }
 
 function setup_puppet_ubuntu {
+    if ! which lsb_release > /dev/null 2<&1 ; then
+      DEBIAN_FRONTEND=noninteractive apt-get --option 'Dpkg::Options::=--force-confold' \
+        --assume-yes install -y --force-yes lsb-release
+    fi
+
     lsbdistcodename=`lsb_release -c -s`
     if [ $lsbdistcodename != 'trusty' ] ; then
         rubypkg=rubygems
