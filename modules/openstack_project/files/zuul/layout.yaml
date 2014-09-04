@@ -1839,6 +1839,7 @@ projects:
     template:
       - name: merge-check
       - name: noop-jobs
+      - name: publish-to-pypi
 
   - name: stackforge/git-upstream
     template:
