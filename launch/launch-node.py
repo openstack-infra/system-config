@@ -18,6 +18,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import pwd
 import sys
 import os
 import time
@@ -136,20 +137,12 @@ def build_server(
 
     create_kwargs = dict(image=image, flavor=flavor, name=name)
 
-    key_name = 'launch-%i' % (time.time())
+    key_name = 'launch-node-%s' % pwd.getpwuid(os.getuid()).pw_name
     if 'os-keypairs' in utils.get_extensions(client):
         print "Adding keypair"
-        key, kp = utils.add_keypair(client, key_name)
+        key = utils.add_keypair(client, key_name)
         create_kwargs['key_name'] = key_name
-    try:
-        server = client.servers.create(**create_kwargs)
-    except Exception:
-        try:
-            kp.delete()
-        except Exception:
-            print "Exception encountered deleting keypair:"
-            traceback.print_exc()
-        raise
+    server = client.servers.create(**create_kwargs)
 
     try:
         admin_pass = server.adminPass
@@ -165,8 +158,6 @@ def build_server(
         print('UUID=%s\nIPV4=%s\nIPV6=%s\n' % (server.id,
                                                server.accessIPv4,
                                                server.accessIPv6))
-        if key:
-            kp.delete()
     except Exception:
         try:
             if keep:
