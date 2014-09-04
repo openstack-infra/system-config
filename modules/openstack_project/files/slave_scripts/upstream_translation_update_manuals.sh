@@ -18,8 +18,7 @@
 
 PROJECT=$1
 
-if [ ! `echo $ZUUL_REFNAME | grep master` ]
-then
+if [ ! `echo $ZUUL_REFNAME | grep master` ] ; then
     exit 0
 fi
 
@@ -32,8 +31,7 @@ setup_translation
 
 setup_manuals "$PROJECT"
 
-if [ ! `git diff --cached --quiet HEAD --` ]
-then
+if [ ! `git diff --cached --quiet HEAD --` ] ; then
     # Push .pot changes to transifex
     tx --debug --traceback push -s
 fi

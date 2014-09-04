@@ -1,9 +1,8 @@
 #!/bin/bash -xe
 
-if [ -z "$PROJECT" ]
-then
-	echo '$PROJECT not set.'
-	exit 1
+if [ -z "$PROJECT" ] ; then
+    echo '$PROJECT not set.'
+    exit 1
 fi
 
 case "$ZUUL_REFNAME" in
@@ -33,8 +32,7 @@ tarball="$(echo dist/$PROJECT*.tar.gz)"
 version="${tarball%.tar.gz}"
 version="${version#*$PROJECT-}"
 base_version=$version
-if [ -n "${EXTRAVERSION}" ]
-then
+if [ -n "${EXTRAVERSION}" ] ; then
     version="${version%~*}${EXTRAVERSION}~${version#*~}"
 fi
 tar xvzf "${tarball}"
@@ -50,8 +48,7 @@ ln -s "${tarball}" "${PROJECT}_${version}.orig.tar.gz"
 echo bzr checkout -r ${PACKAGING_REVNO} --lightweight $BZR_BRANCH $PROJECT-*
 bzr checkout -r ${PACKAGING_REVNO} --lightweight $BZR_BRANCH $PROJECT-*
 cd $PROJECT-*
-if [ -d .git ]
-then
+if [ -d .git ] ; then
     PACKAGING_REVNO="$(git log --oneline | wc -l)"
     rm -rf .git
 else
@@ -68,10 +65,8 @@ buildno=$BUILD_NUMBER
 pkgversion="${version}-0ubuntu0~${series}${buildno}"
 dch -b --force-distribution --v "${pkgversion}" "Automated PPA build. Packaging revision: ${PACKAGING_REVNO}." -D $series
 dpkg-buildpackage -rfakeroot -S -sa -nc -k32EE128C
-if ! [ "$DO_UPLOAD" = "no" ]
-then
-    for ppa in $PPAS
-    do
+if ! [ "$DO_UPLOAD" = "no" ] ; then
+    for ppa in $PPAS ; do
         dput --force $ppa "../${PROJECT}_${pkgversion}_source.changes"
     done
 fi
