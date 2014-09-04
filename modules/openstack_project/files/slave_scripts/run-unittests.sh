@@ -69,8 +69,7 @@ fi
 sudo /usr/local/jenkins/slave_scripts/jenkins-sudo-grep.sh post
 sudoresult=$?
 
-if [ $sudoresult -ne "0" ]
-then
+if [ $sudoresult -ne "0" ] ; then
     echo
     echo "This test has failed because it attempted to execute commands"
     echo "with sudo.  See above for the exact commands used."
@@ -81,8 +80,7 @@ fi
 /usr/local/jenkins/slave_scripts/jenkins-oom-grep.sh post
 oomresult=$?
 
-if [ $oomresult -ne "0" ]
-then
+if [ $oomresult -ne "0" ] ; then
     echo
     echo "This test has failed because it attempted to exceed configured"
     echo "memory limits and was killed prior to completion.  See above"
@@ -92,11 +90,9 @@ then
 fi
 
 htmlreport=$(find . -name $NOSE_HTML_OUT_FILE)
-if [ -f "$htmlreport" ]
-then
+if [ -f "$htmlreport" ] ; then
     passcount=$(grep -c 'tr class=.passClass' $htmlreport)
-    if [ $passcount -eq "0" ]
-    then
+    if [ $passcount -eq "0" ] ; then
         echo
         echo "Zero tests passed, which probably means there was an error"
         echo "parsing one of the python files, or that some other failure"
