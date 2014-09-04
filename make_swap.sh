@@ -14,7 +14,6 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 
-
 # If we're running on a cloud server with no swap, fix that:
 if [ `grep SwapTotal /proc/meminfo | awk '{ print $2; }'` -eq 0 ]; then
     if [ -b /dev/vdb ]; then
@@ -37,9 +36,9 @@ if [ `grep SwapTotal /proc/meminfo | awk '{ print $2; }'` -eq 0 ]; then
         mount ${DEV}2 /mnt
         rsync -a /opt/ /mnt/
         umount /mnt
+        perl -nle "m,${DEV}, || print" -i /etc/fstab
         echo "${DEV}1  none  swap  sw                           0  0" >> /etc/fstab
         echo "${DEV}2  /opt  ext4  errors=remount-ro,barrier=0  0  2" >> /etc/fstab
         mount -a
     fi
 fi
-
