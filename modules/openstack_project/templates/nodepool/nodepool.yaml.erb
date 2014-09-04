@@ -21,6 +21,7 @@ gearman-servers:
 labels:
   - name: devstack-precise
     image: devstack-precise
+    ready-script: configure_mirror.sh
     min-ready: 5
     providers:
       - name: hpcloud-b1
@@ -38,6 +39,7 @@ labels:
       - name: rax-iad
   - name: bare-precise
     image: bare-precise
+    ready-script: configure_mirror.sh
     min-ready: 21
     providers:
       - name: hpcloud-b1
@@ -50,6 +52,7 @@ labels:
       - name: rax-iad
   - name: devstack-trusty
     image: devstack-trusty
+    ready-script: configure_mirror.sh
     min-ready: 42
     providers:
       - name: hpcloud-b1
@@ -62,6 +65,7 @@ labels:
       - name: rax-iad
   - name: bare-trusty
     image: bare-trusty
+    ready-script: configure_mirror.sh
     min-ready: 21
     providers:
       - name: hpcloud-b1
@@ -74,6 +78,7 @@ labels:
       - name: rax-iad
   - name: bare-centos6
     image: bare-centos6
+    ready-script: configure_mirror.sh
     min-ready: 21
     providers:
       - name: hpcloud-b1
@@ -86,6 +91,7 @@ labels:
       - name: rax-iad
   - name: py3k-precise
     image: py3k-precise
+    ready-script: configure_mirror.sh
     min-ready: 21
     providers:
       - name: hpcloud-b1
@@ -126,6 +132,7 @@ labels:
       - name: hpcloud-b5
   - name: devstack-f20
     image: devstack-f20
+    ready-script: configure_mirror.sh
     min-ready: 5
     providers:
       - name: rax-dfw
@@ -138,6 +145,7 @@ labels:
       - name: hpcloud-b5
   - name: devstack-f20-virt-preview
     image: devstack-f20-virt-preview
+    ready-script: configure_mirror.sh
     min-ready: 2
     providers:
       - name: rax-dfw
@@ -145,6 +153,7 @@ labels:
       - name: rax-iad
   - name: devstack-centos7
     image: devstack-centos7
+    ready-script: configure_mirror.sh
     min-ready: 2
     providers:
       - name: rax-dfw
