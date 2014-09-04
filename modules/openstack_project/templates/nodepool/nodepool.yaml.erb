@@ -21,7 +21,7 @@ gearman-servers:
 labels:
   - name: devstack-precise
     image: devstack-precise
-    min-ready: 5
+    min-ready: 1
     providers:
       - name: hpcloud-b1
       - name: hpcloud-b2
@@ -38,7 +38,7 @@ labels:
       - name: rax-iad
   - name: bare-precise
     image: bare-precise
-    min-ready: 21
+    min-ready: 1
     providers:
       - name: hpcloud-b1
       - name: hpcloud-b2
@@ -50,7 +50,7 @@ labels:
       - name: rax-iad
   - name: devstack-trusty
     image: devstack-trusty
-    min-ready: 42
+    min-ready: 20
     providers:
       - name: hpcloud-b1
       - name: hpcloud-b2
@@ -62,7 +62,7 @@ labels:
       - name: rax-iad
   - name: bare-trusty
     image: bare-trusty
-    min-ready: 21
+    min-ready: 8
     providers:
       - name: hpcloud-b1
       - name: hpcloud-b2
@@ -74,7 +74,7 @@ labels:
       - name: rax-iad
   - name: bare-centos6
     image: bare-centos6
-    min-ready: 21
+    min-ready: 2
     providers:
       - name: hpcloud-b1
       - name: hpcloud-b2
@@ -86,7 +86,7 @@ labels:
       - name: rax-iad
   - name: py3k-precise
     image: py3k-precise
-    min-ready: 21
+    min-ready: 2
     providers:
       - name: hpcloud-b1
       - name: hpcloud-b2
@@ -100,7 +100,7 @@ labels:
     image: devstack-trusty
     ready-script: multinode_setup.sh
     subnodes: 1
-    min-ready: 2
+    min-ready: 1
     providers:
       - name: rax-dfw
       - name: rax-ord
@@ -126,7 +126,7 @@ labels:
       - name: hpcloud-b5
   - name: devstack-f20
     image: devstack-f20
-    min-ready: 5
+    min-ready: 1
     providers:
       - name: rax-dfw
       - name: rax-ord
@@ -138,14 +138,14 @@ labels:
       - name: hpcloud-b5
   - name: devstack-f20-virt-preview
     image: devstack-f20-virt-preview
-    min-ready: 2
+    min-ready: 1
     providers:
       - name: rax-dfw
       - name: rax-ord
       - name: rax-iad
   - name: devstack-centos7
     image: devstack-centos7
-    min-ready: 2
+    min-ready: 1
     providers:
       - name: rax-dfw
       - name: rax-ord
