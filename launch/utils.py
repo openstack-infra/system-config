@@ -93,6 +93,12 @@ def get_public_ip(server, version=4):
         for addr in server.manager.api.floating_ips.list():
             if addr.instance_id == server.id:
                 return addr.ip
+        # We don't have one - so add one please
+        new_ip = server.manager.api.floating_ips.create()
+        server.add_floating_ip(new_ip)
+        for addr in server.manager.api.floating_ips.list():
+            if addr.instance_id == server.id:
+                return addr.ip
     for addr in server.addresses.get('public', []):
         if type(addr) == type(u''):  # Rackspace/openstack 1.0
             return addr
