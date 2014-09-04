@@ -52,8 +52,8 @@ def get_client():
     return client
 
 
-def bootstrap_server(
-        server, admin_pass, key, cert, environment, name, puppetmaster):
+def bootstrap_server(server, admin_pass, key, cert, environment, name,
+                     puppetmaster, volume):
     ip = utils.get_public_ip(server)
     if not ip:
         raise Exception("Unable to find public ip of server")
@@ -87,6 +87,11 @@ def bootstrap_server(
     ssh_client.scp(os.path.join(SCRIPT_DIR, '..', 'make_swap.sh'),
                    'make_swap.sh')
     ssh_client.ssh('bash -x make_swap.sh')
+
+    if volume:
+        ssh_client.scp(os.path.join(SCRIPT_DIR, '..', 'mount_volume.sh'),
+                       'mount_volume.sh')
+        ssh_client.ssh('bash -x mount_volume.sh')
 
     ssh_client.scp(os.path.join(SCRIPT_DIR, '..', 'install_puppet.sh'),
                    'install_puppet.sh')
@@ -124,7 +129,7 @@ def bootstrap_server(
 
 
 def build_server(
-        client, name, image, flavor, cert, environment, puppetmaster):
+        client, name, image, flavor, cert, environment, puppetmaster, volume):
     key = None
     server = None
 
@@ -148,8 +153,14 @@ def build_server(
     try:
         admin_pass = server.adminPass
         server = utils.wait_for_resource(server)
+        if volume:
+            vobj = client.volumes.create_server_volume(
+                server.id, volume, None)
+        if not vobj:
+            raise Exception("Couldn't attach volume")
+
         bootstrap_server(server, admin_pass, key, cert, environment, name,
-                         puppetmaster)
+                         puppetmaster, volume)
         print('UUID=%s\nIPV4=%s\nIPV6=%s\n' % (server.id,
                                                server.accessIPv4,
                                                server.accessIPv6))
@@ -181,6 +192,9 @@ def main():
                         "hostname.example.com.pem)")
     parser.add_argument("--server", dest="server", help="Puppetmaster to use.",
                         default="ci-puppetmaster.openstack.org")
+    parser.add_argument("--volume", dest="volume",
+                        help="UUID of volume to attach to the new server.",
+                        default=None)
     options = parser.parse_args()
 
     client = get_client()
@@ -220,7 +234,7 @@ def main():
     print "Found image", image
 
     build_server(client, options.name, image, flavor, cert,
-                 options.environment, options.server)
+                 options.environment, options.server, options.volume)
     dns.print_dns(client, options.name)
 
 if __name__ == '__main__':
