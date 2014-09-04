@@ -133,9 +133,9 @@
           if [ $? -eq 0 ]; then
             # For Berkshelf 3.x use the system gecode 3.x libraries
             sudo apt-get install -y libgecode-dev
-            USE_SYSTEM_GECODE=1 bundle install --path=.bundle --jobs 1 --retry 3 --verbose
+            USE_SYSTEM_GECODE=1 ruby1.9.1 `which bundle` install --path=.bundle --jobs 1 --retry 3 --verbose
           else
-            bundle install --path=.bundle --jobs 1 --retry 3 --verbose
+            ruby1.9.1 `which bundle` install --path=.bundle --jobs 1 --retry 3 --verbose
           fi
 
 - builder:
@@ -145,10 +145,10 @@
           #!/bin/bash -x
           grep -E .*berkshelf.*3\.\d*\.\d*.* Gemfile
           if [ $? -eq 0 ]; then
-            bundle exec berks vendor .cookbooks
+            ruby1.9.1 `which bundle` exec berks vendor .cookbooks
           else
             mkdir -p .cookbooks
-            bundle exec berks install --path=.cookbooks
+            ruby1.9.1 `which bundle` exec berks install --path=.cookbooks
           fi
           COOKBOOK=$(awk '/^name/ {print $NF}' metadata.rb |tr -d \"\')
           if [ -z $COOKBOOK ]; then
@@ -160,31 +160,34 @@
     name: chef-cookbook-rubocop
     builders:
       - shell: |
+          #!/bin/bash -x
           if grep rubocop: Strainerfile; then
-              bundle exec strainer test --cookbooks-path=.cookbooks --only=rubocop
+              ruby1.9.1 `which bundle` exec strainer test --cookbooks-path=.cookbooks --only=rubocop
           else
-              bundle exec rubocop
+              ruby1.9.1 `which bundle` exec rubocop
           fi
 
 - builder:
     name: chef-cookbook-foodcritic
     builders:
       - shell: |
+          #!/bin/bash -x
           if grep foodcritic: Strainerfile; then
-              bundle exec strainer test --cookbooks-path=.cookbooks --only=foodcritic
+              ruby1.9.1 `which bundle` exec strainer test --cookbooks-path=.cookbooks --only=foodcritic
           else
-              bundle exec foodcritic -f any -t ~FC003 -t ~FC023 .
+              ruby1.9.1 `which bundle` exec foodcritic -f any -t ~FC003 -t ~FC023 .
           fi
 
 - builder:
     name: chef-cookbook-chefspec
     builders:
       - shell: |
+          #!/bin/bash -x
           COOKBOOK=$(awk '/^name/ {print $NF}' metadata.rb |tr -d \"\')
           if grep chefspec: Strainerfile; then
-              bundle exec strainer test --cookbooks-path=.cookbooks --only=chefspec
+              ruby1.9.1 `which bundle` exec strainer test --cookbooks-path=.cookbooks --only=chefspec
           else
-              bundle exec rspec .cookbooks/$COOKBOOK/spec
+              ruby1.9.1 `which bundle` exec rspec .cookbooks/$COOKBOOK/spec
           fi
 
 - builder:
