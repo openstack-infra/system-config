@@ -21,12 +21,12 @@ mkdir -p ~/cache/pip
 
 if [ -f /usr/bin/yum ]; then
     sudo yum -y install python-devel make automake gcc gcc-c++ \
-      kernel-devel redhat-lsb-core
+        kernel-devel redhat-lsb-core
 elif [ -f /usr/bin/apt-get ]; then
     sudo DEBIAN_FRONTEND=noninteractive apt-get \
-      --option "Dpkg::Options::=--force-confold" \
-      --assume-yes install build-essential python-dev \
-      python-software-properties linux-headers-virtual linux-headers-`uname -r`
+        --option "Dpkg::Options::=--force-confold" \
+        --assume-yes install build-essential python-dev \
+        python-software-properties linux-headers-virtual linux-headers-`uname -r`
 else
     echo "Unsupported distro."
     exit 1
