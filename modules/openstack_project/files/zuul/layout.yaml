@@ -435,6 +435,12 @@ project-templates:
     gate:
       - 'gate-{name}-docs'
 
+  - name: noop-jobs
+    check:
+      - noop
+    gate:
+      - noop
+
 jobs:
   - name: ^.*$
     parameter-function: set_node_options_default_trusty
@@ -1797,14 +1803,11 @@ projects:
       - name: merge-check
       - name: check-requirements
       - name: publish-to-pypi
-    check:
-      - noop
+      - name: noop-jobs
     check-tripleo:
       - check-tripleo-novabm-undercloud-precise-nonha
       - check-tripleo-ironic-undercloud-precise-nonha
       - check-tripleo-novabm-overcloud-f20-nonha
-    gate:
-      - noop
     experimental-tripleo:
       - check-tripleo-novabm-overcloud-precise-nonha
     post:
@@ -1837,10 +1840,7 @@ projects:
   - name: stackforge/gertty
     template:
       - name: merge-check
-    check:
-      - noop
-    gate:
-      - noop
+      - name: noop-jobs
 
   - name: stackforge/git-upstream
     template:
@@ -1887,10 +1887,7 @@ projects:
   - name: openstack/governance
     template:
       - name: merge-check
-    check:
-      - noop
-    gate:
-      - noop
+      - name: noop-jobs
 
 #TODO: add docs
   - name: openstack/heat-cfntools
@@ -1923,10 +1920,7 @@ projects:
   - name: openstack/openstack
     template:
       - name: merge-check
-    check:
-      - noop
-    gate:
-      - noop
+      - name: noop-jobs
 
   - name: openstack/openstack-doc-tools
     template:
@@ -2499,15 +2493,12 @@ projects:
     template:
       - name: merge-check
       - name: publish-to-pypi
-    check:
-      - noop
+      - name: noop-jobs
     check-tripleo:
       - check-tripleo-novabm-undercloud-precise-nonha
       - check-tripleo-ironic-undercloud-precise-nonha
       - check-tripleo-novabm-overcloud-f20-nonha
       - check-tripleo-ironic-overcloud-precise-ha
-    gate:
-      - noop
     experimental-tripleo:
       - check-tripleo-novabm-overcloud-precise-nonha
     post:
@@ -2521,15 +2512,12 @@ projects:
     template:
       - name: merge-check
       - name: publish-to-pypi
-    check:
-      - noop
+      - name: noop-jobs
     check-tripleo:
       - check-tripleo-novabm-undercloud-precise-nonha
       - check-tripleo-ironic-undercloud-precise-nonha
       - check-tripleo-novabm-overcloud-f20-nonha
       - check-tripleo-ironic-overcloud-precise-ha
-    gate:
-      - noop
     experimental-tripleo:
       - check-tripleo-novabm-overcloud-precise-nonha
     post:
@@ -2569,10 +2557,7 @@ projects:
   - name: openstack/trove-integration
     template:
       - name: merge-check
-    check:
-      - noop
-    gate:
-      - noop
+      - name: noop-jobs
     experimental:
       - gate-trove-buildimage-mysql
 
@@ -2716,18 +2701,12 @@ projects:
   - name: openstack-dev/cookiecutter
     template:
       - name: merge-check
-    check:
-      - noop
-    gate:
-      - noop
+      - name: noop-jobs
 
   - name: openstack-dev/devstack-vagrant
     template:
       - name: merge-check
-    check:
-      - noop
-    gate:
-      - noop
+      - name: noop-jobs
 
   - name: openstack-dev/devstack
     template:
@@ -2813,10 +2792,7 @@ projects:
   - name: openstack-dev/openstack-nose
     template:
       - name: merge-check
-    check:
-      - noop
-    gate:
-      - noop
+      - name: noop-jobs
 
   - name: openstack-dev/oslo-cookiecutter
     template:
@@ -2860,10 +2836,7 @@ projects:
   - name: openstack-dev/sandbox
     template:
       - name: merge-check
-    check:
-      - noop
-    gate:
-      - noop
+      - name: noop-jobs
     pre-release:
       - sandbox-tag
     release:
@@ -2872,28 +2845,19 @@ projects:
   - name: openstack-dev/specs-cookiecutter
     template:
       - name: merge-check
-    check:
-      - noop
-    gate:
-      - noop
+      - name: noop-jobs
 
 # Section: OpenStack infrastructure projects
 
   - name: openstack-infra/activity-board
     template:
       - name: merge-check
-    check:
-      - noop
-    gate:
-      - noop
+      - name: noop-jobs
 
   - name: openstack-infra/askbot-theme
     template:
       - name: merge-check
-    check:
-      - noop
-    gate:
-      - noop
+      - name: noop-jobs
 
   - name: openstack-infra/bugdaystats
     template:
@@ -3115,10 +3079,7 @@ projects:
   - name: openstack-infra/groups-static-pages
     template:
       - name: merge-check
-    check:
-      - noop
-    gate:
-      - noop
+      - name: noop-jobs
 
   - name: openstack-infra/jeepyb
     template:
@@ -3144,18 +3105,12 @@ projects:
   - name: openstack-infra/lodgeit
     template:
       - name: merge-check
-    check:
-      - noop
-    gate:
-      - noop
+      - name: noop-jobs
 
   - name: openstack-infra/meetbot
     template:
       - name: merge-check
-    check:
-      - noop
-    gate:
-      - noop
+      - name: noop-jobs
 
   - name: openstack-infra/nodepool
     template:
@@ -3169,20 +3124,14 @@ projects:
     template:
       - name: merge-check
       - name: publish-to-pypi
-    check:
-      - noop
-    gate:
-      - noop
+      - name: noop-jobs
     post:
       - nose-html-output-branch-tarball
 
   - name: openstack-infra/odsreg
     template:
       - name: merge-check
-    check:
-      - noop
-    gate:
-      - noop
+      - name: noop-jobs
 
   - name: openstack-infra/openstackid
     template:
@@ -3209,10 +3158,7 @@ projects:
   - name: openstack-infra/publications
     template:
       - name: merge-check
-    check:
-      - noop
-    gate:
-      - noop
+      - name: noop-jobs
     post:
       - infra-publications-publish
       - infra-publications-publish-index
@@ -3223,18 +3169,12 @@ projects:
   - name: openstack-infra/puppet-apparmor
     template:
       - name: merge-check
-    check:
-      - noop
-    gate:
-      - noop
+      - name: noop-jobs
 
   - name: openstack-infra/puppet-dashboard
     template:
       - name: merge-check
-    check:
-      - noop
-    gate:
-      - noop
+      - name: noop-jobs
 
   - name: openstack-infra/puppet-storyboard
     template:
@@ -3269,10 +3209,7 @@ projects:
   - name: openstack-infra/puppet-vcsrepo
     template:
       - name: merge-check
-    check:
-      - noop
-    gate:
-      - noop
+      - name: noop-jobs
 
   - name: openstack-infra/puppet-yum
     template:
@@ -3308,10 +3245,7 @@ projects:
   - name: openstack-infra/releasestatus
     template:
       - name: merge-check
-    check:
-      - noop
-    gate:
-      - noop
+      - name: noop-jobs
 
 # TODO: add docs
   - name: openstack-infra/release-tools
@@ -3432,14 +3366,11 @@ projects:
   - name: openstack-infra/tripleo-ci
     template:
       - name: merge-check
-    check:
-      - noop
+      - name: noop-jobs
     check-tripleo:
       - check-tripleo-novabm-undercloud-precise-nonha
       - check-tripleo-ironic-undercloud-precise-nonha
       - check-tripleo-novabm-overcloud-f20-nonha
-    gate:
-      - noop
     experimental-tripleo:
       - check-tripleo-novabm-overcloud-precise-nonha
 
@@ -3475,10 +3406,7 @@ projects:
   - name: openstack-infra/zuul-packaging
     template:
       - name: merge-check
-    check:
-      - noop
-    gate:
-      - noop
+      - name: noop-jobs
 
 # Section: Stackforge projects
 
@@ -3607,10 +3535,7 @@ projects:
   - name: stackforge/cloudcafe
     template:
       - name: merge-check
-    check:
-      - noop
-    gate:
-      - noop
+      - name: noop-jobs
 
   - name: stackforge/clouddocs-maven-plugin
     template:
@@ -3652,18 +3577,12 @@ projects:
   - name: stackforge/cloudroast
     template:
       - name: merge-check
-    check:
-      - noop
-    gate:
-      - noop
+      - name: noop-jobs
 
   - name: stackforge/compass-adapters
     template:
       - name: merge-check
-    check:
-      - noop
-    gate:
-      - noop
+      - name: noop-jobs
 
   - name: stackforge/compass-core
     template:
@@ -3680,18 +3599,12 @@ projects:
   - name: stackforge/compass-monit
     template:
       - name: merge-check
-    check:
-      - noop
-    gate:
-      - noop
+      - name: noop-jobs
 
   - name: stackforge/compass-web
     template:
       - name: merge-check
-    check:
-      - noop
-    gate:
-      - noop
+      - name: noop-jobs
 
   - name: stackforge/congress
     template:
@@ -3856,66 +3769,42 @@ projects:
   - name: stackforge/fuel-astute
     template:
       - name: merge-check
-    check:
-      - noop
-    gate:
-      - noop
+      - name: noop-jobs
 
   - name: stackforge/fuel-devops
     template:
       - name: merge-check
-    check:
-      - noop
-    gate:
-      - noop
+      - name: noop-jobs
 
   - name: stackforge/fuel-docs
     template:
       - name: merge-check
-    check:
-      - noop
-    gate:
-      - noop
+      - name: noop-jobs
 
   - name: stackforge/fuel-library
     template:
       - name: merge-check
-    check:
-      - noop
-    gate:
-      - noop
+      - name: noop-jobs
 
   - name: stackforge/fuel-main
     template:
       - name: merge-check
-    check:
-      - noop
-    gate:
-      - noop
+      - name: noop-jobs
 
   - name: stackforge/fuel-ostf
     template:
       - name: merge-check
-    check:
-      - noop
-    gate:
-      - noop
+      - name: noop-jobs
 
   - name: stackforge/fuel-ostf-plugin
     template:
       - name: merge-check
-    check:
-      - noop
-    gate:
-      - noop
+      - name: noop-jobs
 
   - name: stackforge/fuel-provision
     template:
       - name: merge-check
-    check:
-      - noop
-    gate:
-      - noop
+      - name: noop-jobs
 
   - name: stackforge/fuel-specs
     template:
@@ -3929,18 +3818,12 @@ projects:
   - name: stackforge/fuel-web
     template:
       - name: merge-check
-    check:
-      - noop
-    gate:
-      - noop
+      - name: noop-jobs
 
   - name: stackforge/golang-client
     template:
       - name: merge-check
-    check:
-      - noop
-    gate:
-      - noop
+      - name: noop-jobs
 
   - name: stackforge/gnocchi
     template:
@@ -4006,10 +3889,7 @@ projects:
   - name: stackforge/kickstack
     template:
       - name: merge-check
-    check:
-      - noop
-    gate:
-      - noop
+      - name: noop-jobs
 
   - name: stackforge/libra
     template:
@@ -4071,10 +3951,7 @@ projects:
   - name: stackforge/milk
     template:
       - name: merge-check
-    check:
-      - noop
-    gate:
-      - noop
+      - name: noop-jobs
 
   - name: stackforge/mistral
     template:
@@ -4173,10 +4050,7 @@ projects:
   - name: stackforge/MRaaS
     template:
       - name: merge-check
-    check:
-      - noop
-    gate:
-      - noop
+      - name: noop-jobs
 
   - name: stackforge/monasca-agent
     template:
@@ -4194,10 +4068,7 @@ projects:
   - name: stackforge/monasca-api
     template:
       - name: merge-check
-    check:
-      - noop
-    gate:
-      - noop
+      - name: noop-jobs
 
   - name: stackforge/monasca-ceilometer
     template:
@@ -4233,10 +4104,7 @@ projects:
   - name: stackforge/monasca-persister
     template:
       - name: merge-check
-    check:
-      - noop
-    gate:
-      - noop
+      - name: noop-jobs
 
   - name: stackforge/monasca-thresh
     template:
@@ -4264,10 +4132,7 @@ projects:
   - name: stackforge/monasca-vagrant
     template:
       - name: merge-check
-    check:
-      - noop
-    gate:
-      - noop
+      - name: noop-jobs
 
   - name: stackforge/murano-agent
     template:
@@ -4283,10 +4148,7 @@ projects:
   - name: stackforge/murano-apps
     template:
       - name: merge-check
-    check:
-      - noop
-    gate:
-      - noop
+      - name: noop-jobs
 
   - name: stackforge/murano
     template:
@@ -4327,50 +4189,32 @@ projects:
   - name: stackforge/murano-deployment
     template:
       - name: merge-check
-    check:
-      - noop
-    gate:
-      - noop
+      - name: noop-jobs
 
   - name: stackforge/murano-docs
     template:
       - name: merge-check
-    check:
-      - noop
-    gate:
-      - noop
+      - name: noop-jobs
 
   - name: stackforge/nova-solver-scheduler
     template:
       - name: merge-check
-    check:
-      - noop
-    gate:
-      - noop
+      - name: noop-jobs
 
   - name: stackforge/novaimagebuilder
     template:
       - name: merge-check
-    check:
-      - noop
-    gate:
-      - noop
+      - name: noop-jobs
 
   - name: stackforge/occi-os
     template:
       - name: merge-check
-    check:
-      - noop
-    gate:
-      - noop
+      - name: noop-jobs
 
   - name: stackforge/opencafe
     template:
       - name: merge-check
-    check:
-      - noop
-    gate:
-      - noop
+      - name: noop-jobs
 
   - name: stackforge/openstack-chef-specs
     template:
@@ -4388,42 +4232,27 @@ projects:
   - name: stackforge/openstack-cli-powershell
     template:
       - name: merge-check
-    check:
-      - noop
-    gate:
-      - noop
+      - name: noop-jobs
 
   - name: stackforge/openstack-sdk-dotnet
     template:
       - name: merge-check
-    check:
-      - noop
-    gate:
-      - noop
+      - name: noop-jobs
 
   - name: stackforge/openstack-sdk-php
     template:
       - name: merge-check
-    check:
-      - noop
-    gate:
-      - noop
+      - name: noop-jobs
 
   - name: stackforge/openstackdroid
     template:
       - name: merge-check
-    check:
-      - noop
-    gate:
-      - noop
+      - name: noop-jobs
 
   - name: stackforge/openvz-nova-driver
     template:
       - name: merge-check
-    check:
-      - noop
-    gate:
-      - noop
+      - name: noop-jobs
 
   - name: stackforge/osprofiler
     template:
@@ -4442,10 +4271,7 @@ projects:
   - name: stackforge/ospurge
     template:
       - name: merge-check
-    check:
-      - noop
-    gate:
-      - noop
+      - name: noop-jobs
 
   - name: stackforge/packstack
     template:
@@ -4515,10 +4341,7 @@ projects:
   - name: stackforge/powervc-driver
     template:
       - name: merge-check
-    check:
-      - noop
-    gate:
-      - noop
+      - name: noop-jobs
 
   - name: stackforge/puppet-ceilometer
     template:
@@ -4777,10 +4600,7 @@ projects:
   - name: stackforge/puppet-openstack-specs
     template:
       - name: merge-check
-    check:
-      - noop
-    gate:
-      - noop
+      - name: noop-jobs
 
   - name: stackforge/puppet-openstacklib
     template:
@@ -4805,18 +4625,12 @@ projects:
   - name: stackforge/puppet_openstack_builder
     template:
       - name: merge-check
-    check:
-      - noop
-    gate:
-      - noop
+      - name: noop-jobs
 
   - name: stackforge/puppet-openstack_dev_env
     template:
       - name: merge-check
-    check:
-      - noop
-    gate:
-      - noop
+      - name: noop-jobs
 
   - name: stackforge/puppet-openstack_extras
     template:
@@ -5124,10 +4938,7 @@ projects:
   - name: stackforge/python-surveilclient
     template:
       - name: merge-check
-    check:
-      - noop
-    gate:
-      - noop
+      - name: noop-jobs
 
   - name: stackforge/solum-infra-guestagent
     template:
@@ -5296,10 +5107,7 @@ projects:
   - name: stackforge/staccato
     template:
       - name: merge-check
-    check:
-      - noop
-    gate:
-      - noop
+      - name: noop-jobs
 
   - name: stackforge/stackalytics
     template:
@@ -5351,10 +5159,7 @@ projects:
   - name: stackforge/swiftpolicy
     template:
       - name: merge-check
-    check:
-      - noop
-    gate:
-      - noop
+      - name: noop-jobs
 
   - name: stackforge/swiftsync
     template:
@@ -5503,18 +5308,12 @@ projects:
   - name: stackforge/surveil-specs
     template:
       - name: merge-check
-    check:
-      - noop
-    gate:
-      - noop
+      - name: noop-jobs
 
   - name: stackforge/xenapi-os-testing
     template:
       - name: merge-check
-    check:
-      - noop
-    gate:
-      - noop
+      - name: noop-jobs
 
   - name: stackforge/doc8
     template:
@@ -5564,10 +5363,7 @@ projects:
   - name: stackforge/xstatic-angular
     template:
       - name: merge-check
-    check:
-      - noop
-    gate:
-      - noop
+      - name: noop-jobs
 
   - name: stackforge/xstatic-angular-animate
     template:
@@ -5588,18 +5384,12 @@ projects:
   - name: stackforge/xstatic-angular-cookies
     template:
       - name: merge-check
-    check:
-      - noop
-    gate:
-      - noop
+      - name: noop-jobs
 
   - name: stackforge/xstatic-angular-mock
     template:
       - name: merge-check
-    check:
-      - noop
-    gate:
-      - noop
+      - name: noop-jobs
 
   - name: stackforge/xstatic-angular-sanitize
     template:
@@ -5612,26 +5402,17 @@ projects:
   - name: stackforge/xstatic-bootstrap-datepicker
     template:
       - name: merge-check
-    check:
-      - noop
-    gate:
-      - noop
+      - name: noop-jobs
 
   - name: stackforge/xstatic-bootstrap-scss
     template:
       - name: merge-check
-    check:
-      - noop
-    gate:
-      - noop
+      - name: noop-jobs
 
   - name: stackforge/xstatic-d3
     template:
       - name: merge-check
-    check:
-      - noop
-    gate:
-      - noop
+      - name: noop-jobs
 
   - name: stackforge/xstatic-font-awesome
     template:
@@ -5644,82 +5425,52 @@ projects:
   - name: stackforge/xstatic-hogan
     template:
       - name: merge-check
-    check:
-      - noop
-    gate:
-      - noop
+      - name: noop-jobs
 
   - name: stackforge/xstatic-jasmine
     template:
       - name: merge-check
-    check:
-      - noop
-    gate:
-      - noop
+      - name: noop-jobs
 
   - name: stackforge/xstatic-jquery-migrate
     template:
       - name: merge-check
-    check:
-      - noop
-    gate:
-      - noop
+      - name: noop-jobs
 
   - name: stackforge/xstatic-jquery.bootstrap.wizard
     template:
       - name: merge-check
-    check:
-      - noop
-    gate:
-      - noop
+      - name: noop-jobs
 
   - name: stackforge/xstatic-jquery.quicksearch
     template:
       - name: merge-check
-    check:
-      - noop
-    gate:
-      - noop
+      - name: noop-jobs
 
   - name: stackforge/xstatic-jquery.tablesorter
     template:
       - name: merge-check
-    check:
-      - noop
-    gate:
-      - noop
+      - name: noop-jobs
 
   - name: stackforge/xstatic-jsencrypt
     template:
       - name: merge-check
-    check:
-      - noop
-    gate:
-      - noop
+      - name: noop-jobs
 
   - name: stackforge/xstatic-qunit
     template:
       - name: merge-check
-    check:
-      - noop
-    gate:
-      - noop
+      - name: noop-jobs
 
   - name: stackforge/xstatic-rickshaw
     template:
       - name: merge-check
-    check:
-      - noop
-    gate:
-      - noop
+      - name: noop-jobs
 
   - name: stackforge/xstatic-spin
     template:
       - name: merge-check
-    check:
-      - noop
-    gate:
-      - noop
+      - name: noop-jobs
 
   - name: stackforge/rack
     template:
@@ -5736,7 +5487,5 @@ projects:
       - rack-coverage
 
   - name: stackforge/tuskar-ui-extras
-    check:
-      - noop
-    gate:
-      - noop
+    template:
+      - name: noop-jobs
