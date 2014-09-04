@@ -643,6 +643,8 @@ jobs:
     voting: false
   - name: gate-murano-dashboard-requirements
     voting: false
+  - name: gate-oslo.db-python33
+    voting: false
   - name: gate-oslo.log-python33
     voting: false
   - name: gate-oslo.utils-python33
@@ -2110,6 +2112,7 @@ projects:
     template:
       - name: merge-check
       - name: python-jobs
+      - name: python3-jobs
       - name: openstack-server-publish-jobs
       - name: check-requirements
       - name: integrated-gate
