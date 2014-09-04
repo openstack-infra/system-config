@@ -12,7 +12,7 @@ GIT_HOST="review.openstack.org:29418"
 PROJECT_PREFIX="openstack"
 
 if [[ ! -e ${PROJECT} ]]; then
-  git clone ssh://$GIT_HOST/$PROJECT_PREFIX/$PROJECT
+    git clone ssh://$GIT_HOST/$PROJECT_PREFIX/$PROJECT
 fi
 cd $PROJECT
 git checkout master
@@ -21,17 +21,16 @@ git checkout master
 git fetch origin +refs/meta/*:refs/remotes/meta/*
 
 # Checkout or create the meta/openstack/release branch
-if ! { git branch -a |grep ^[[:space:]]*remotes/meta/openstack/release$; }
-then
-  git checkout --orphan release
-  # Delete everything so the first commit is truly empty:
-  git rm -rf .
-  # git rm -rf leaves submodule directories:
-  find -maxdepth 1 -not -regex '\./\.git\(/.*\)?' -not -name . -exec rm -fr {} \;
-  ls -la
+if ! { git branch -a |grep ^[[:space:]]*remotes/meta/openstack/release$; } ; then
+    git checkout --orphan release
+    # Delete everything so the first commit is truly empty:
+    git rm -rf .
+    # git rm -rf leaves submodule directories:
+    find -maxdepth 1 -not -regex '\./\.git\(/.*\)?' -not -name . -exec rm -fr {} \;
+    ls -la
 else
-  git branch -D release || /bin/true
-  git checkout -b release remotes/meta/openstack/release
+    git branch -D release || /bin/true
+    git checkout -b release remotes/meta/openstack/release
 fi
 
 # Normally a branch name will just be a file, but we can have branches
@@ -40,12 +39,11 @@ fi
 mkdir -p `dirname $BRANCH`
 
 # Read and update the value for the branch
-if [ -e "$BRANCH" ]
-then
-  echo "Current contents of ${BRANCH}:"
-  cat "${BRANCH}"
+if [ -e "$BRANCH" ] ; then
+    echo "Current contents of ${BRANCH}:"
+    cat "${BRANCH}"
 else
-  echo "${BRANCH} does not exist. Creating it."
+    echo "${BRANCH} does not exist. Creating it."
 fi
 
 echo "Updating ${BRANCH} to read $VALUE"
