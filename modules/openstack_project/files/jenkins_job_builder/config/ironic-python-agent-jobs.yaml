@@ -28,6 +28,14 @@
       - scp:
           site: 'tarballs.openstack.org'
           files:
+            - source: 'imagebuild/coreos/UPLOAD/coreos_production_pxe.vmlinuz'
+              target: 'tarballs/ironic-python-agent/coreos/files'
+              keep-hierarchy: false
+              copy-after-failure: false
+            - source: 'imagebuild/coreos/UPLOAD/coreos_production_pxe-oem.cpio.gz'
+              target: 'tarballs/ironic-python-agent/coreos/files'
+              keep-hierarchy: false
+              copy-after-failure: false
             - source: 'ipa-coreos.tar.gz'
               target: 'tarballs/ironic-python-agent/coreos'
               keep-hierarchy: false
