@@ -20,6 +20,6 @@
 # libvirt and qemu.  The packages from this repo will get installed via
 # prepare_devstack.sh.
 wget http://fedorapeople.org/groups/virt/virt-preview/fedora-virt-preview.repo
-sudo mv fedora-virt-preview.repo /etc/yum.repos.d/.
+sudo mv fedora-virt-preview.repo /etc/yum.repos.d/
 
-./prepare_devstack.sh
+/opt/nodepool-scripts/prepare_devstack.sh
