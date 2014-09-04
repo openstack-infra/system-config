@@ -20,7 +20,7 @@
 # Enable precise-backports so we can install jq
 if [ -f /usr/bin/apt-get ]; then
     sudo sed -i -e 's/# \(deb .*precise-backports main \)/\1/g' \
-      /etc/apt/sources.list
+        /etc/apt/sources.list
     sudo apt-get update
 fi
 
@@ -37,7 +37,7 @@ sudo pip install gear os-apply-config
 # tests.
 
 if [ -d /etc/sysconfig/network-scripts ]; then
-  sudo dd of=/etc/sysconfig/network-scripts/ifcfg-eth1 << EOF
+    sudo dd of=/etc/sysconfig/network-scripts/ifcfg-eth1 << EOF
 DEVICE="eth1"
 BOOTPROTO="dhcp"
 ONBOOT="yes"
@@ -46,13 +46,13 @@ PEERDNS="no"
 EOF
 
 elif [ -f /etc/network/interfaces ]; then
-  sudo dd of=/etc/network/interfaces oflag=append conv=notrunc << EOF
+    sudo dd of=/etc/network/interfaces oflag=append conv=notrunc << EOF
 auto eth1
 iface eth1 inet dhcp
 EOF
 
 # Workaround bug 1270646 for actual slaves
-  sudo dd of=/etc/network/interfaces.d/eth0.cfg oflag=append conv=notrunc << EOF
+    sudo dd of=/etc/network/interfaces.d/eth0.cfg oflag=append conv=notrunc << EOF
     post-up ip link set mtu 1458 dev eth0
 EOF
 

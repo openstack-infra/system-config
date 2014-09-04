@@ -88,7 +88,7 @@ DOMZERO_USER=domzero
 # directory to ramdisk.
 XSINST_DIRECTORY="/xsinst"
 
-function main() {
+function main {
     case "$(get_state)" in
         "START")
             dump_disk_config
@@ -146,7 +146,7 @@ function main() {
     esac
 }
 
-function set_state() {
+function set_state {
     local state
 
     state="$1"
@@ -154,7 +154,7 @@ function set_state() {
     echo "$state" > $STATE_FILE
 }
 
-function get_state() {
+function get_state {
     if [ -e "$STATE_FILE" ]; then
         cat $STATE_FILE
     else
@@ -162,7 +162,7 @@ function get_state() {
     fi
 }
 
-function create_resizing_initramfs_config() {
+function create_resizing_initramfs_config {
     cp "$THIS_DIR/xenserver_helper_initramfs_hook.sh" \
         /usr/share/initramfs-tools/hooks/resize
     chmod +x /usr/share/initramfs-tools/hooks/resize
@@ -172,12 +172,12 @@ function create_resizing_initramfs_config() {
     chmod +x /usr/share/initramfs-tools/scripts/local-premount/resize
 }
 
-function delete_resizing_initramfs_config() {
+function delete_resizing_initramfs_config {
     rm -f /usr/share/initramfs-tools/hooks/resize
     rm -f /usr/share/initramfs-tools/scripts/local-premount/resize
 }
 
-function run_this_script_on_each_boot() {
+function run_this_script_on_each_boot {
     cat > /etc/init/xenserver.conf << EOF
 start on stopped rc RUNLEVEL=[2345]
 
@@ -189,13 +189,13 @@ end script
 EOF
 }
 
-function create_done_file_on_appliance() {
+function create_done_file_on_appliance {
     while ! echo "sudo touch $FILE_TO_TOUCH_ON_COMPLETION" | bash_on_appliance; do
         sleep 1
     done
 }
 
-function download_xenserver_files() {
+function download_xenserver_files {
     local tgt
 
     tgt="$1"
@@ -203,7 +203,7 @@ function download_xenserver_files() {
     wget -qO "$tgt" "$XENSERVER_ISO_URL"
 }
 
-function download_appliance() {
+function download_appliance {
     local appliance_url
 
     appliance_url="$1"
@@ -211,7 +211,7 @@ function download_appliance() {
     wget -qO /root/staging_vm.xva "$appliance_url"
 }
 
-function print_answerfile() {
+function print_answerfile {
     local repository
     local postinst
     local xenserver_pass
@@ -238,7 +238,7 @@ function print_answerfile() {
 EOF
 }
 
-function print_postinst_file() {
+function print_postinst_file {
     local rclocal
     rclocal="$1"
 
@@ -252,7 +252,7 @@ cp /tmp/ramdisk/authorized_keys \$1/root/.ssh/
 EOF
 }
 
-function print_rclocal() {
+function print_rclocal {
     cat << EOF
 # This is the contents of the rc.local file on XenServer
 mkdir -p /mnt/ubuntu
@@ -263,7 +263,7 @@ mkdir -p $(dirname $INSTALL_DIR)
 EOF
 }
 
-function create_ramdisk_contents() {
+function create_ramdisk_contents {
     local isofile
     local target_dir
 
@@ -280,7 +280,7 @@ function create_ramdisk_contents() {
         "$XENSERVER_PASSWORD" > "$target_dir/answerfile.xml"
 }
 
-function extract_xs_installer() {
+function extract_xs_installer {
     local isofile
     local targetpath
 
@@ -300,7 +300,7 @@ function extract_xs_installer() {
     umount $mountdir
 }
 
-function generate_xs_installer_grub_config() {
+function generate_xs_installer_grub_config {
     local bootfiles
     local answerfile
 
@@ -319,7 +319,7 @@ EOF
     chmod +x /etc/grub.d/45_xs-install
 }
 
-function configure_grub() {
+function configure_grub {
     sed -ie 's/^GRUB_HIDDEN_TIMEOUT/#GRUB_HIDDEN_TIMEOUT/g' /etc/default/grub
     sed -ie 's/^GRUB_HIDDEN_TIMEOUT_QUIET/#GRUB_HIDDEN_TIMEOUT_QUIET/g' /etc/default/grub
     # sed -ie 's/^GRUB_TIMEOUT=.*$/GRUB_TIMEOUT=-1/g' /etc/default/grub
@@ -327,11 +327,11 @@ function configure_grub() {
     sed -ie 's/GRUB_DEFAULT=0/GRUB_DEFAULT=saved/g' /etc/default/grub
 }
 
-function set_xenserver_installer_as_nextboot() {
+function set_xenserver_installer_as_nextboot {
     grub-set-default "XenServer installer"
 }
 
-function store_cloud_settings() {
+function store_cloud_settings {
     local targetpath
 
     targetpath="$1"
@@ -345,7 +345,7 @@ NAMESERVERS=$(cat /etc/resolv.conf | grep nameserver | cut -d " " -f 2 | sort | 
 EOF
 }
 
-function store_authorized_keys() {
+function store_authorized_keys {
     local targetpath
 
     targetpath="$1"
@@ -353,13 +353,13 @@ function store_authorized_keys() {
     cp /root/.ssh/authorized_keys $1
 }
 
-function wait_for_xapi() {
+function wait_for_xapi {
     while ! [ -e /var/run/xapi_init_complete.cookie ]; do
         sleep 1
     done
 }
 
-function forget_networking() {
+function forget_networking {
     xe host-management-disable
     IFS=,
     for vlan in $(xe vlan-list --minimal); do
@@ -374,7 +374,7 @@ function forget_networking() {
     unset IFS
 }
 
-function add_boot_config_for_ubuntu() {
+function add_boot_config_for_ubuntu {
     local ubuntu_bootfiles
     local bootfiles
 
@@ -398,7 +398,7 @@ label ubuntu
 UBUNTU
 }
 
-function start_ubuntu_on_next_boot() {
+function start_ubuntu_on_next_boot {
     local bootfiles
 
     bootfiles="$1"
@@ -406,7 +406,7 @@ function start_ubuntu_on_next_boot() {
     sed -ie 's,default xe-serial,default ubuntu,g' $bootfiles/extlinux.conf
 }
 
-function start_xenserver_on_next_boot() {
+function start_xenserver_on_next_boot {
     local bootfiles
 
     bootfiles="$1"
@@ -414,7 +414,7 @@ function start_xenserver_on_next_boot() {
     sed -ie 's,default ubuntu,default xe-serial,g' $bootfiles/extlinux.conf
 }
 
-function mount_dom0_fs() {
+function mount_dom0_fs {
     local target
 
     target="$1"
@@ -423,13 +423,13 @@ function mount_dom0_fs() {
     mount /dev/xvda2 $target
 }
 
-function wait_for_networking() {
+function wait_for_networking {
     while ! ping -c 1 xenserver.org > /dev/null 2>&1; do
         sleep 1
     done
 }
 
-function bash_on_appliance() {
+function bash_on_appliance {
     local vm_ip
     local vm
 
@@ -452,7 +452,7 @@ function bash_on_appliance() {
         "$DOMZERO_USER@$vm_ip" bash -e -u -s -x -- "$@"
 }
 
-function configure_networking() {
+function configure_networking {
     local network_settings
 
     network_settings="$1"
@@ -576,7 +576,7 @@ EOF
     cat $tmpdomzerokey >> /root/.ssh/authorized_keys
 }
 
-function transfer_settings_to_appliance() {
+function transfer_settings_to_appliance {
     local network_settings
 
     network_settings="$1"
@@ -585,7 +585,7 @@ function transfer_settings_to_appliance() {
     /opt/xensource/libexec/interface-reconfigure rewrite
 }
 
-function dump_disk_config() {
+function dump_disk_config {
     echo "DUMPING Primary disk's configuration"
     sfdisk -d /dev/xvda
 }
