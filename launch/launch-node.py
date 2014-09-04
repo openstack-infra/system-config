@@ -124,11 +124,20 @@ def bootstrap_server(
 
 
 def build_server(
-        client, name, image, flavor, cert, environment, puppetmaster):
+        client, name, image, flavor, cert, environment, puppetmaster, volume):
     key = None
     server = None
+    block_device_mapping_v2 = None
 
-    create_kwargs = dict(image=image, flavor=flavor, name=name)
+    if volume:
+        block_device_mapping_v2 = [{
+            'uuid': volume,
+            'source_type': 'volume',
+            'destination_type': 'volume',
+            'delete_on_termination': False,
+            }]
+    create_kwargs = dict(image=image, flavor=flavor, name=name,
+                         block_device_mapping_v2=block_device_mapping_v2)
 
     key_name = 'launch-%i' % (time.time())
     if 'os-keypairs' in utils.get_extensions(client):
@@ -181,6 +190,9 @@ def main():
                         "hostname.example.com.pem)")
     parser.add_argument("--server", dest="server", help="Puppetmaster to use.",
                         default="ci-puppetmaster.openstack.org")
+    parser.add_argument("--volume", dest="volume",
+                        help="UUID of volume to attach to the new server.",
+                        default=None)
     options = parser.parse_args()
 
     client = get_client()
@@ -220,7 +232,7 @@ def main():
     print "Found image", image
 
     build_server(client, options.name, image, flavor, cert,
-                 options.environment, options.server)
+                 options.environment, options.server, options.volume)
     dns.print_dns(client, options.name)
 
 if __name__ == '__main__':
