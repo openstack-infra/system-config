@@ -3326,6 +3326,7 @@ projects:
   - name: openstack-infra/subunit2sql
     template:
       - name: merge-check
+      - name: publish-to-pypi
     check:
       - gate-subunit2sql-pep8
       - gate-subunit2sql-python27
