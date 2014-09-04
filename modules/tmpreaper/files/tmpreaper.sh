@@ -41,10 +41,10 @@ if grep '^TMPTIME=' /etc/default/rcS >/dev/null 2>&1; then
         # Don't clean files if TMPTIME is negative or 'infinite'
         # to mimic the way /lib/init/bootclean.sh works.
         case "$TMPTIME" in
-          -*|infinite|infinity)
+            -*|infinite|infinity)
                 # don't use this as default
                 ;;
-           *)
+            *)
                 if [ "$TMPTIME" -gt 0 ]; then
                     TMPREAPER_TIME=${TMPTIME}d
                 else
@@ -96,14 +96,14 @@ TMPREAPER_PROTECT_EXTRA=${TMPREAPER_PROTECT_EXTRA:-''}
 TMPREAPER_DIRS=${TMPREAPER_DIRS:-'/tmp/.'}
 
 nice -n10 tmpreaper --delay=$TMPREAPER_DELAY --mtime-dir --symlinks $TMPREAPER_TIME  \
-  $TMPREAPER_ADDITIONALOPTIONS \
-  --ctime \
-  --protect '/tmp/.X*-{lock,unix,unix/*}' \
-  --protect '/tmp/.ICE-{unix,unix/*}' \
-  --protect '/tmp/.iroha_{unix,unix/*}' \
-  --protect '/tmp/.ki2-{unix,unix/*}' \
-  --protect '/tmp/lost+found' \
-  --protect '/tmp/journal.dat' \
-  --protect '/tmp/quota.{user,group}' \
-  `for i in $TMPREAPER_PROTECT_EXTRA; do echo --protect "$i"; done` \
-  $TMPREAPER_DIRS
+    $TMPREAPER_ADDITIONALOPTIONS \
+    --ctime \
+    --protect '/tmp/.X*-{lock,unix,unix/*}' \
+    --protect '/tmp/.ICE-{unix,unix/*}' \
+    --protect '/tmp/.iroha_{unix,unix/*}' \
+    --protect '/tmp/.ki2-{unix,unix/*}' \
+    --protect '/tmp/lost+found' \
+    --protect '/tmp/journal.dat' \
+    --protect '/tmp/quota.{user,group}' \
+    `for i in $TMPREAPER_PROTECT_EXTRA; do echo --protect "$i"; done` \
+    $TMPREAPER_DIRS

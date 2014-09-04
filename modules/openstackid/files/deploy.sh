@@ -23,17 +23,17 @@ source $TOP_DIR/deployrc
 
 command="${1}"
 case $command in
-  init)
-    site_init ${2}
-    ;;
-  status)
-    site_status ${2}
-    ;;
-  update)
-    site_update ${2}
-    ;;
-  *)
-    print_help
-    exit 1
-    ;;
+    init)
+        site_init ${2}
+        ;;
+    status)
+        site_status ${2}
+        ;;
+    update)
+        site_update ${2}
+        ;;
+    *)
+        print_help
+        exit 1
+        ;;
 esac
