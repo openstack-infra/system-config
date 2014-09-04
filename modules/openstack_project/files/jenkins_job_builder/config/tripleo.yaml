@@ -194,6 +194,7 @@
           export OVERCLOUD_CONTROLSCALE=3
           export USE_IRONIC=1
           export USE_CIRROS=1
+          export TRIPLEO_DEBUG=--degbug-logging
           sudo chown -hR $(whoami) /opt/git
           function gate_hook {
               bash -xe /opt/stack/new/tripleo-ci/toci_gate_test.sh
