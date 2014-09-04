@@ -20,43 +20,40 @@
 
 case $( facter osfamily ) in
     Debian)
-	PATTERN="sudo.*jenkins.*:.*incorrect password attempts"
-	OLDLOGFILE=/var/log/auth.log.1
-	LOGFILE=/var/log/auth.log
-	;;
+        PATTERN="sudo.*jenkins.*:.*incorrect password attempts"
+        OLDLOGFILE=/var/log/auth.log.1
+        LOGFILE=/var/log/auth.log
+        ;;
     RedHat)
-	PATTERN="sudo.*jenkins.*:.*command not allowed"
-	OLDLOGFILE=$( ls /var/log/secure-* | sort | tail -n1 )
-	LOGFILE=/var/log/secure
-	;;
+        PATTERN="sudo.*jenkins.*:.*command not allowed"
+        OLDLOGFILE=$( ls /var/log/secure-* | sort | tail -n1 )
+        LOGFILE=/var/log/secure
+        ;;
 esac
 
 case "$1" in
     pre)
-	rm -fr /tmp/jenkins-sudo-log
-	mkdir /tmp/jenkins-sudo-log
-	if [ -f $OLDLOGFILE ]
-	then
-	    stat -c %Y $OLDLOGFILE > /tmp/jenkins-sudo-log/mtime-pre
-	else
-	    echo "0" > /tmp/jenkins-sudo-log/mtime-pre
-	fi
-	grep -h "$PATTERN" $LOGFILE > /tmp/jenkins-sudo-log/pre
-	exit 0
-	;;
+        rm -fr /tmp/jenkins-sudo-log
+        mkdir /tmp/jenkins-sudo-log
+        if [ -f $OLDLOGFILE ] ; then
+            stat -c %Y $OLDLOGFILE > /tmp/jenkins-sudo-log/mtime-pre
+        else
+            echo "0" > /tmp/jenkins-sudo-log/mtime-pre
+        fi
+        grep -h "$PATTERN" $LOGFILE > /tmp/jenkins-sudo-log/pre
+        exit 0
+        ;;
     post)
-	if [ -f $OLDLOGFILE ]
-	then
-	    stat -c %Y $OLDLOGFILE > /tmp/jenkins-sudo-log/mtime-post
-	else
-	    echo "0" > /tmp/jenkins-sudo-log/mtime-post
-	fi
-	if ! diff /tmp/jenkins-sudo-log/mtime-pre /tmp/jenkins-sudo-log/mtime-post > /dev/null
-	then
-	    echo "diff"
-	    grep -h "$PATTERN" $OLDLOGFILE > /tmp/jenkins-sudo-log/post
-	fi
-	grep -h "$PATTERN" $LOGFILE >> /tmp/jenkins-sudo-log/post
-	diff /tmp/jenkins-sudo-log/pre /tmp/jenkins-sudo-log/post
-	;;
+        if [ -f $OLDLOGFILE ] ; then
+            stat -c %Y $OLDLOGFILE > /tmp/jenkins-sudo-log/mtime-post
+        else
+            echo "0" > /tmp/jenkins-sudo-log/mtime-post
+        fi
+        if ! diff /tmp/jenkins-sudo-log/mtime-pre /tmp/jenkins-sudo-log/mtime-post > /dev/null ; then
+            echo "diff"
+            grep -h "$PATTERN" $OLDLOGFILE > /tmp/jenkins-sudo-log/post
+        fi
+        grep -h "$PATTERN" $LOGFILE >> /tmp/jenkins-sudo-log/post
+        diff /tmp/jenkins-sudo-log/pre /tmp/jenkins-sudo-log/post
+        ;;
 esac
