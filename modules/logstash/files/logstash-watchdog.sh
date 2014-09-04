@@ -15,8 +15,7 @@ echo "$CURL_RET" >> /var/log/logstash/watchdog.log
 RESULT=$(echo $JSON_OUT | jq '.nodes == {}')
 echo "$RESULT" >> /var/log/logstash/watchdog.log
 
-if [ "$CURL_RET" == "0" ] && [ "$RESULT" == "true" ] ;
-then
+if [ "$CURL_RET" == "0" ] && [ "$RESULT" == "true" ] ; then
     echo "restarting" >> /var/log/logstash/watchdog.log
     /sbin/stop --quiet logstash-indexer
     /sbin/start --quiet logstash-indexer
