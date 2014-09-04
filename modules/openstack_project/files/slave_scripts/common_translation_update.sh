@@ -15,8 +15,7 @@
 # under the License.
 
 # Initial transifex setup
-function setup_translation ()
-{
+function setup_translation {
     # Track in HAS_CONFIG whether we run "tx init" since calling it
     # will add the file .tx/config - and "tx set" might update it. If
     # "tx set" updates .tx/config, we need to handle the file if it
@@ -31,8 +30,7 @@ function setup_translation ()
 }
 
 # Setup a project for transifex
-function setup_project ()
-{
+function setup_project {
     local project=$1
 
     # Transifex project name does not include "."
@@ -45,8 +43,7 @@ function setup_project ()
 }
 
 # Setup project horizon for transifex
-function setup_horizon ()
-{
+function setup_horizon {
     local project=horizon
 
     # Horizon JavaScript Translations
@@ -72,8 +69,7 @@ function setup_horizon ()
 }
 
 # Set global variable DocFolder for manuals projects
-function init_manuals ()
-{
+function init_manuals {
     project=$1
 
     DocFolder="doc"
@@ -84,46 +80,38 @@ function init_manuals ()
 
 # Setup project manuals projects (api-site, openstack-manuals,
 # operations-guide) for transifex
-function setup_manuals ()
-{
+function setup_manuals {
     local project=$1
     # Generate pot one by one
-    for FILE in ${DocFolder}/*
-    do
+    for FILE in ${DocFolder}/* ; do
         # Skip non-directories
-        if [ ! -d $FILE ]
-        then
+        if [ ! -d $FILE ] ; then
             continue
         fi
         DOCNAME=${FILE#${DocFolder}/}
         # Ignore directories that will not get translated
-        if [ "$DOCNAME" == "www" -o "$DOCNAME" == "tools" -o "$DOCNAME" == "generated" -o "$DOCNAME" == "publish-docs" ]
-        then
+        if [ "$DOCNAME" == "www" -o "$DOCNAME" == "tools" -o "$DOCNAME" == "generated" -o "$DOCNAME" == "publish-docs" ] ; then
             continue
         fi
         # Skip glossary in all repos besides openstack-manuals.
-        if [ "$project" != "openstack-manuals" -a "$DOCNAME" == "glossary" ]
-        then
+        if [ "$project" != "openstack-manuals" -a "$DOCNAME" == "glossary" ] ; then
             continue
         fi
         # Minimum amount of translation done, 75 % by default.
         PERC=75
-        if [ "$project" == "openstack-manuals" ]
-        then
+        if [ "$project" == "openstack-manuals" ] ; then
             # The common and glossary directories are used by the
             # other guides, let's be more liberal here since teams
             # might only translate the files used by a single
             # guide. We use 8 % since that downloads the currently
             # translated files.
-            if [ "$DOCNAME" == "common" -o "$DOCNAME" == "glossary" ]
-            then
+            if [ "$DOCNAME" == "common" -o "$DOCNAME" == "glossary" ] ; then
                 PERC=8
             fi
         fi
         # Update the .pot file
         ./tools/generatepot ${DOCNAME}
-        if [ -f ${DocFolder}/${DOCNAME}/locale/${DOCNAME}.pot ]
-        then
+        if [ -f ${DocFolder}/${DOCNAME}/locale/${DOCNAME}.pot ] ; then
             # Add all changed files to git
             git add ${DocFolder}/${DOCNAME}/locale/*
             # Set auto-local
@@ -138,8 +126,7 @@ function setup_manuals ()
 }
 
 # Setup git so that git review works
-function setup_git ()
-{
+function setup_git {
     git config user.name "OpenStack Proposal Bot"
     git config user.email "openstack-infra@lists.openstack.org"
     git config gitreview.username "proposal-bot"
@@ -147,8 +134,7 @@ function setup_git ()
 
 # Setup project so that git review works, sets global variable
 # COMMIT_MSG.
-function setup_review ()
-{
+function setup_review {
     FULL_PROJECT=$(grep project .gitreview  | cut -f2 -d= |sed -e 's/\.git$//')
     COMMIT_MSG="Imported Translations from Transifex"
 
@@ -199,19 +185,16 @@ EOF
 }
 
 # Propose patch using COMMIT_MSG
-function send_patch ()
-{
+function send_patch {
 
     # Revert any changes done to .tx/config
-    if [ $HAS_CONFIG -eq 1 ]
-    then
+    if [ $HAS_CONFIG -eq 1 ] ; then
         git reset -q .tx/config
         git checkout -- .tx/config
     fi
 
     # Don't send a review if nothing has changed.
-    if [ `git diff --cached |wc -l` -gt 0 ]
-    then
+    if [ `git diff --cached |wc -l` -gt 0 ] ; then
         # Commit and review
         git commit -F- <<EOF
 $COMMIT_MSG
@@ -222,8 +205,7 @@ EOF
 }
 
 # Setup global variables LEVELS and LKEYWORDS
-function setup_loglevel_vars ()
-{
+function setup_loglevel_vars {
     # Strings for various log levels
     LEVELS="info warning error critical"
     # Keywords for each log level:
@@ -236,8 +218,7 @@ function setup_loglevel_vars ()
 
 # Setup transifex configuration for log level message translation.
 # Needs variables setup via setup_loglevel_vars.
-function setup_loglevel_project ()
-{
+function setup_loglevel_project {
     project=$1
 
     # Transifex project name does not include "."
@@ -246,8 +227,7 @@ function setup_loglevel_project ()
     for level in $LEVELS ; do
         # Bootstrapping: Create file if it does not exist yet,
         # otherwise "tx set" will fail.
-        if [ ! -e  ${project}/locale/${project}-log-${level}.pot ]
-        then
+        if [ ! -e  ${project}/locale/${project}-log-${level}.pot ] ; then
             touch ${project}/locale/${project}-log-${level}.pot
         fi
         tx set --auto-local -r ${tx_project}.${tx_project}-log-${level}-translations \
@@ -260,8 +240,7 @@ function setup_loglevel_project ()
 
 # Run extract_messages for user visible messages and log messages.
 # Needs variables setup via setup_loglevel_vars.
-function extract_messages_log ()
-{
+function extract_messages_log {
     project=$1
 
     # Update the .pot files
@@ -274,8 +253,7 @@ function extract_messages_log ()
 }
 
 # Setup project django_openstack_auth for transifex
-function setup_django_openstack_auth ()
-{
+function setup_django_openstack_auth {
     tx set --auto-local -r horizon.djangopo \
         "openstack_auth/locale/<lang>/LC_MESSAGES/django.po" \
         --source-lang en \
@@ -284,14 +262,12 @@ function setup_django_openstack_auth ()
 }
 
 # Filter out files that we do not want to commit
-function filter_commits ()
-{
+function filter_commits {
     # Don't send files where the only things which have changed are
     # the creation date, the version number, the revision date,
     # comment lines, or diff file information.
     PO_CHANGE=0
-    for f in `git diff --cached --name-only`
-    do
+    for f in `git diff --cached --name-only` ; do
         # Check for all files endig with ".po"
         if [[ $f =~ .po$ ]] ; then
             PO_CHANGE=1
@@ -302,8 +278,7 @@ function filter_commits ()
             | egrep -v "(POT-Creation-Date|Project-Id-Version|PO-Revision-Date)" \
             | egrep -c "^([-+][^-+#])")
         set -e
-        if [ $changed -eq 0 ]
-        then
+        if [ $changed -eq 0 ] ; then
             git reset -q "$f"
             git checkout -- "$f"
         fi
