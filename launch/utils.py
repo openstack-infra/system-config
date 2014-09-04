@@ -135,10 +135,18 @@ def add_public_ip(server):
 
 
 def add_keypair(client, name):
-    key = paramiko.RSAKey.generate(2048)
-    public_key = key.get_name() + ' ' + key.get_base64()
-    kp = client.keypairs.create(name, public_key)
-    return key, kp
+
+    for kp in client.keypairs.list():
+        if kp.name == name:
+            return None
+    try:
+        key = None
+        public_key = open(os.path.expanduser('~/.ssh/id_rsa.pub'), 'r').read()
+    except Exception:
+        key = paramiko.RSAKey.generate(2048)
+        public_key = key.get_name() + ' ' + key.get_base64()
+    client.keypairs.create(name, public_key)
+    return key
 
 
 def wait_for_resource(wait_resource):
