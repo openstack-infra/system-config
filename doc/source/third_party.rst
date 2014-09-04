@@ -155,7 +155,7 @@ to be aware if your system is disabled and `third-party-requests
 <http://lists.openstack.org/cgi-bin/mailman/listinfo/third-party-requests>`_
 to request your dedicated third party gerrit account.
 
-When submitting your request to the third-party-request mailing list, the
+When submitting your request to the third-party-requests mailing list, the
 following information is necessary:
 
   1. The public SSH key described above (if using OpenSSH, this would be the
