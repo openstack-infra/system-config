@@ -642,6 +642,7 @@ openstack-keystone:
       - openstack/keystone
       - openstack/identity-api
       - openstack/keystone-specs
+      - openstack/pycadf
       - openstack/python-keystoneclient
       - openstack/keystonemiddleware
     branches:
@@ -801,7 +802,6 @@ openstack-oslo:
       - openstack/oslo.utils
       - openstack/oslo.version
       - openstack/oslo.vmware
-      - openstack/pycadf
       - openstack/pylockfile
       - openstack/stevedore
       - openstack/taskflow
