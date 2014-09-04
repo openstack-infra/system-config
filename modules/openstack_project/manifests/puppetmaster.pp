@@ -95,13 +95,16 @@ class openstack_project::puppetmaster (
   package { ['python-cinderclient', 'python-novaclient']:
     ensure   => latest,
     provider => pip,
-    require  => Package['python-lxml'],
+    require  => [Package['python-lxml'], Package['libxslt1-dev']],
   }
   package { 'python-paramiko':
     ensure => present,
   }
   package { 'python-lxml':
     ensure => present,
+  }
+  package { 'libxslt1-dev':
+  ensure => present,
   }
 
 # Enable puppetdb
