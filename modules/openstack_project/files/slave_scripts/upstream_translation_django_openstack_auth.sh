@@ -16,8 +16,7 @@
 
 # The script is to push the updated English po to Transifex.
 
-if [ ! `echo $ZUUL_REFNAME | grep master` ]
-then
+if [ ! `echo $ZUUL_REFNAME | grep master` ] ; then
     exit 0
 fi
 
@@ -34,8 +33,7 @@ python setup.py extract_messages
 # Add all changed files to git
 git add openstack_auth/locale/*
 
-if [ ! `git diff-index --quiet HEAD --` ]
-then
+if [ ! `git diff-index --quiet HEAD --` ] ; then
     # Push .pot changes to transifex
     tx --debug --traceback push -s
 fi
