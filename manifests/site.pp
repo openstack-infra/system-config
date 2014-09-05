@@ -384,6 +384,14 @@ node /^git\d+\.openstack\.org$/ {
   }
 }
 
+# Machines in each region to run PyPI mirrors.
+# Node-OS: precise
+node /^pypi\..*\.openstack\.org$/ {
+  class { 'openstack_project::pypi':
+    sysadmins               => hiera('sysadmins', []),
+  }
+}
+
 # A machine to run ODSREG in preparation for summits.
 # Node-OS: precise
 node 'summit.openstack.org' {
