@@ -208,10 +208,7 @@ class openstack_project::static (
 
   # Legacy pypi mirror
   file { '/srv/static/mirror/web/openstack':
-    ensure  => directory,
-    owner   => 'jenkins',
-    group   => 'jenkins',
-    require => [User['jenkins'], File['/srv/static/mirror']],
+    ensure  => absent,
   }
 
   ###########################################################
