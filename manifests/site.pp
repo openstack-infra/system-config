@@ -621,6 +621,25 @@ node 'pypi.slave.openstack.org' {
 }
 
 # Node-OS: precise
+node 'openstackid.org' {
+  class { 'openstack_project::openstackid':
+    sysadmins               => hiera('sysadmins', []),
+    site_admin_password     => hiera('openstackid_site_admin_password', 'XXX'),
+    id_mysql_host           => hiera('openstackid_id_mysql_host', 'localhost'),
+    id_mysql_password       => hiera('openstackid_id_mysql_password', 'XXX'),
+    id_mysql_user           => hiera('openstackid_id_mysql_user', 'username'),
+    ss_mysql_host           => hiera('openstackid_ss_mysql_host', 'localhost'),
+    ss_mysql_password       => hiera('openstackid_ss_mysql_password', 'XXX'),
+    ss_mysql_user           => hiera('openstackid_ss_mysql_user', 'username'),
+    ss_db_name              => hiera('openstackid_ss_db_name', 'username'),
+    redis_password          => hiera('openstackid_redis_password', 'XXX'),
+    ssl_cert_file_contents  => hiera('openstackid_ssl_cert_file_contents', 'XXX'),
+    ssl_key_file_contents   => hiera('openstackid_ssl_key_file_contents', 'XXX'),
+    ssl_chain_file_contents => hiera('openstackid_ssl_chain_file_contents', 'XXX'),
+  }
+}
+
+# Node-OS: precise
 node 'openstackid-dev.openstack.org' {
   class { 'openstack_project::openstackid_dev':
     sysadmins               => hiera('sysadmins', []),
