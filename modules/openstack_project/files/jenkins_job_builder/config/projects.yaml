@@ -1575,6 +1575,7 @@
     jobs:
       - python-jobs
       - openstack-publish-jobs
+      - translation-jobs
       - 'gate-{name}-tox-{envlist}':
           envlist: func
       - '{pipeline}-swift-dsvm-functional{branch-designator}':

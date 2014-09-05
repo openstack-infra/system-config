@@ -1341,6 +1341,7 @@ projects:
       - name: check-requirements
       - name: integrated-gate
       - name: large-ops
+      - name: translation-jobs
     check:
       - gate-swift-tox-func
       - check-swift-dsvm-functional
