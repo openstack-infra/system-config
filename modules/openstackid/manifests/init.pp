@@ -48,6 +48,7 @@ class openstackid (
   $id_recaptcha_public_key = '',
   $id_recaptcha_private_key = '',
   $id_recaptcha_template = '',
+  $openstackid_release = 'latest',
 ) {
 
   # php packages needed for openid server
