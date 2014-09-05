@@ -2491,6 +2491,54 @@ projects:
       - periodic-tempest-dsvm-stress-master
       - periodic-tempest-dsvm-nova-v3-full-master
 
+  - name: openstack/tempest-lib
+    template:
+      - name: merge-check
+      - name: check-requirements
+      - name: integrated-gate
+      - name: large-ops
+      - name: publish-to-pypi
+    check:
+      - gate-tempest-lib-pep8
+      - gate-tempest-lib-docs
+      - gate-tempest-lib-python27
+      - gate-tempest-lib-python34
+      - gate-tempest-lib-pypy
+      - check-grenade-dsvm-partial-ncpu
+      - check-tempest-dsvm-ironic-nv
+      - check-tempest-dsvm-ironic-postgres-nv
+      # icehouse compat jobs for tempest master
+      - check-tempest-dsvm-full-icehouse
+      - check-tempest-dsvm-neutron-icehouse
+      - check-tempest-dsvm-neutron-heat-slow-icehouse
+      - check-grenade-dsvm-icehouse
+      - check-grenade-dsvm-neutron-icehouse
+      - check-tempest-dsvm-postgres-full-icehouse
+      - check-tempest-dsvm-neutron-full-icehouse
+      - check-tempest-dsvm-virtual-ironic-nv
+      - gate-tempest-dsvm-large-ops-icehouse
+      - gate-tempest-dsvm-neutron-large-ops-icehouse
+      - check-grenade-dsvm-partial-ncpu-icehouse
+    gate:
+      - gate-tempest-lib-pep8
+      - gate-tempest-lib-docs
+      - gate-tempest-lib-python27
+      - gate-tempest-lib-python34
+      - gate-grenade-dsvm-partial-ncpu
+    experimental:
+      - gate-grenade-dsvm-forward
+      - check-tempest-dsvm-keystonev3-full
+      - check-tempest-dsvm-neutron-keystonev3-full
+      - check-tempest-dsvm-nova-v3-full
+    post:
+      - tempest-lib-docs
+      - tempest-lib-coverage
+      - tempest-lib-branch-tarball
+    pre-release:
+      - tempest-lib-tarball
+    release:
+      - tempest-lib-tarball
+
   - name: openstack/tripleo-heat-templates
     template:
       - name: merge-check
