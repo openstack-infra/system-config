@@ -129,7 +129,8 @@ def bootstrap_server(server, admin_pass, key, cert, environment, name,
 
 
 def build_server(
-        client, name, image, flavor, cert, environment, puppetmaster, volume):
+        client, name, image, flavor, cert, environment, puppetmaster, volume,
+        keep):
     key = None
     server = None
 
@@ -168,7 +169,10 @@ def build_server(
             kp.delete()
     except Exception:
         try:
-            utils.delete_server(server)
+            if keep:
+                print "Server failed to build, keeping as requested."
+            else:
+                utils.delete_server(server)
         except Exception:
             print "Exception encountered deleting server:"
             traceback.print_exc()
@@ -195,6 +199,10 @@ def main():
     parser.add_argument("--volume", dest="volume",
                         help="UUID of volume to attach to the new server.",
                         default=None)
+    parser.add_argument("--keep", dest="keep",
+                        help="Don't clean up or delete the server on error.",
+                        action='store_true',
+                        default=False)
     options = parser.parse_args()
 
     client = get_client()
@@ -234,7 +242,8 @@ def main():
     print "Found image", image
 
     build_server(client, options.name, image, flavor, cert,
-                 options.environment, options.server, options.volume)
+                 options.environment, options.server, options.volume,
+                 options.keep)
     dns.print_dns(client, options.name)
 
 if __name__ == '__main__':
