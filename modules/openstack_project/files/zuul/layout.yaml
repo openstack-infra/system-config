@@ -647,10 +647,6 @@ jobs:
     voting: false
   - name: gate-oslo.db-python33
     voting: false
-  - name: gate-oslo.log-python33
-    voting: false
-  - name: gate-oslo.utils-python33
-    voting: false
   - name: gate-oslo.vmware-python33
     voting: false
   - name: gate-solum-infra-guestagent-python33
