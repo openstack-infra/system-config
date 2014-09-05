@@ -202,15 +202,6 @@ class openstack_project::static (
     require => File['/srv/static/docs-draft'],
   }
 
-  class { 'openstack_project::pypi_mirror':
-    vhost_name => 'pypi.openstack.org',
-  }
-
-  # Legacy pypi mirror
-  file { '/srv/static/mirror/web/openstack':
-    ensure  => absent,
-  }
-
   ###########################################################
   # Specs
 
