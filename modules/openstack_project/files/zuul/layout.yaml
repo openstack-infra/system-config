@@ -1154,10 +1154,12 @@ projects:
       - name: translation-jobs
     check:
       - check-tempest-dsvm-zaqar
+      - check-tempest-dsvm-redis-zaqar
       - gate-zaqar-python33
       - gate-zaqar-pypy
     gate:
       - gate-tempest-dsvm-zaqar
+      - gate-tempest-dsvm-redis-zaqar
       - gate-zaqar-pypy
     post:
       - zaqar-branch-tarball
