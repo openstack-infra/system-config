@@ -156,6 +156,10 @@
   group: openstack-ci
 - project: openstack-infra/puppet-dashboard
   group: openstack-ci
+- project: openstack-infra/puppet-pip
+  description: Puppet module to add pip provider
+  group: openstack-ci
+  upstream: git://github.com/nibalizer/puppet-module-openstack-pip.git
 - project: openstack-infra/puppet-storyboard
   description: Puppet module to deploy storyboard
   group: openstack-ci
