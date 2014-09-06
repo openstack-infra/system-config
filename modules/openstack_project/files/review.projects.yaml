@@ -252,6 +252,7 @@
   options:
     - direct-release
 - project: openstack/designate
+- project: openstack/designate-dashboard
 - project: openstack/designate-specs
 - project: openstack/dib-utils
   description: Pieces of diskimage-builder that are useful without the full project
