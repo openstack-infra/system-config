@@ -3226,6 +3226,16 @@ projects:
       - name: merge-check
       - name: noop-jobs
 
+  - name: openstack-infra/puppet-pip
+    template:
+      - name: merge-check
+    check:
+      - gate-puppet-pip-puppet-lint
+      - gate-puppet-pip-puppet-syntax
+    gate:
+      - gate-puppet-pip-puppet-lint
+      - gate-puppet-pip-puppet-syntax
+
   - name: openstack-infra/puppet-storyboard
     template:
       - name: merge-check
