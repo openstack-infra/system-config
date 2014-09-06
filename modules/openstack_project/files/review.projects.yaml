@@ -238,6 +238,7 @@
   description: Blueprints for the barbican project
   upstream: git://github.com/jarretraim/barbican-specs.git
 - project: openstack/ceilometer
+  docimpact-group: openstack-manuals
 - project: openstack/ceilometer-specs
   group: ceilometer
 - project: openstack/cinder
@@ -515,6 +516,7 @@
   group: tripleo
   upstream: git://github.com/derekhiggins/tripleo-specs.git
 - project: openstack/trove
+  docimpact-group: openstack-manuals
 - project: openstack/trove-integration
 - project: openstack/tuskar
   description: A service for managing OpenStack deployments
