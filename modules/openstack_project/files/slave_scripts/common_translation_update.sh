@@ -265,8 +265,12 @@ function filter_commits ()
     # Don't send files where the only things which have changed are
     # the creation date, the version number, the revision date,
     # comment lines, or diff file information.
+    PO_CHANGE=0
     for f in `git diff --cached --name-only`
     do
+        if [[ $f =~ "\.po$" ]] ; then
+            PO_CHANGE=1
+        fi
         # It's ok if the grep fails
         set +e
         changed=$(git diff --cached "$f" \
@@ -279,4 +283,13 @@ function filter_commits ()
             git checkout -- "$f"
         fi
     done
+    # If no po file was changed, only pot source files were changed
+    # and those changes can be ignored as they give no benefit on
+    # their own.
+    if [ $PO_CHANGE ] ; then
+        for f in `git diff --cached --name-only` ; do
+            git reset -q "$f"
+            git checkout -- "$f"
+        done
+    fi
 }
