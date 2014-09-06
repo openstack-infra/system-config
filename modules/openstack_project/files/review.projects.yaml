@@ -817,6 +817,9 @@
 - project: stackforge/gerrit-dash-creator
   description: Client side gerrit dashboard creator from server side definitions
   upstream: git://github.com/sdague/gerrit-dash-creator.git
+- project: stackforge/dox
+  description: Run tests in a docker container
+  upstream: git://github.com/emonty/dox.git
 - project: stackforge/gertty
   description: Console interface to Gerrit Code Review
   use-storyboard: true
