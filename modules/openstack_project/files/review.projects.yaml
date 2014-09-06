@@ -755,6 +755,9 @@
 - project: stackforge/doc8
   description: Style checker for sphinx (or other) rst documentation.
   upstream: git://github.com/harlowja/doc8.git
+- project: stackforge/dox
+  description: Run tests in a docker container
+  upstream: git://github.com/emonty/dox.git
 - project: stackforge/driverlog
   description: Vendor drivers for OpenStack
   upstream: git://github.com/Mirantis/oscp.git

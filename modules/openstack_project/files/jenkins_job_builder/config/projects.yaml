@@ -3241,3 +3241,12 @@
     jobs:
       - python-jobs
       - pypi-jobs
+
+- project:
+    name: dox
+    node: 'bare-precise || bare-trusty'
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - python-jobs
+      - pypi-jobs

@@ -1853,6 +1853,16 @@ projects:
       - gate-git-upstream-pep8
       - gate-git-upstream-python27
 
+  - name: stackforge/dox
+    template:
+      - name: merge-check
+    check:
+      - gate-git-upstream-pep8
+      - gate-git-upstream-python27
+    gate:
+      - gate-git-upstream-pep8
+      - gate-git-upstream-python27
+
   - name: stackforge/gerrit-dash-creator
     template:
       - name: merge-check
