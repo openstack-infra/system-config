@@ -833,6 +833,14 @@
   description: OpenStack API client for golang
 - project: stackforge/graffiti
   description: Cloud Capability Service
+- project: stackforge/group-based-policy
+  description: Group Based Policy
+  upstream: git://github.com/group-based-policy/policy.git
+  acl-config: /home/gerrit2/acls/stackforge/group-based-policy.config
+- project: stackforge/group-based-policy-specs
+  description: Group Based Policy Design Specifications
+  upstream: git://github.com/group-based-policy/specs.git
+  acl-config: /home/gerrit2/acls/stackforge/group-based-policy.config
 - project: stackforge/healthnmon
   description: Healthnmon aims to deliver 'Cloud Resource Monitor', an extensible service to OpenStack Cloud Operating system by providing monitoring service for Cloud Resources and Infrastructure with a pluggable framework for 'Inventory Management', 'Alerts and notifications' and 'Utilization Data.'
   upstream: git://github.com/healthnmon/healthnmon.git
@@ -1109,6 +1117,10 @@
   acl-config: /home/gerrit2/acls/stackforge/cloudkitty.config
 - project: stackforge/python-congressclient
   description: Client for OpenStack Congress
+- project: stackforge/python-group-based-policy-client
+  description: Client for OpenStack Group Based Policy
+  upstream: git://github.com/group-based-policy/client.git
+  acl-config: /home/gerrit2/acls/stackforge/group-based-policy.config
 - project: stackforge/python-jenkins
   upstream: git://github.com/jeblair/python-jenkins.git
   description: Python API for managing jobs and nodes in a Jenkins CI instance
