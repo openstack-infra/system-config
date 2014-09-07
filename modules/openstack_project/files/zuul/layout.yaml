@@ -2210,6 +2210,7 @@ projects:
       - name: integrated-gate
       - name: pypy-jobs
       - name: publish-to-pypi
+      - name: translation-jobs
 
 #TODO: add docs
   - name: openstack/oslo.rootwrap
