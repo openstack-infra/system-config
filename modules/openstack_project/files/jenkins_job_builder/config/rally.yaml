@@ -21,7 +21,9 @@
               source: 'rally-plot/**'
               keep-hierarchy: true
               copy-after-failure: true
-
+            - targe: 'logs/$LOG_PATH/index.html'
+              source: 'rally-plot/index.html'
+              copy-after-failure: true
 
 - builder:
     name: devstack-rally-gate
