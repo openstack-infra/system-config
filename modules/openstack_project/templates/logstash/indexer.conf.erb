@@ -48,23 +48,6 @@ filter {
       match => { "message" => "(?m)^%{TIMESTAMP_ISO8601:logdate}%{SPACE}%{NUMBER:pid}?%{SPACE}?(?<loglevel>AUDIT|CRITICAL|DEBUG|INFO|TRACE|WARNING|ERROR) \[?\b%{NOTSPACE:module}\b\]?%{SPACE}?%{GREEDYDATA:logmessage}?" }
       add_field => { "received_at" => "%{@timestamp}" }
     }
-  } else if "keystonefmt" in [tags] {
-    if [message] == "" {
-      drop {}
-    }
-    multiline {
-      negate => true
-      pattern => "^\(\b%{NOTSPACE}\b\):"
-      what => "previous"
-      stream_identity => "%{host}.%{filename}"
-    }
-    grok {
-      # Do multiline matching as the above mutliline filter may add newlines
-      # to the log messages.
-      # TODO move the LOGLEVELs into a proper grok pattern.
-      match => { "message" => "(?m)^\(\b%{NOTSPACE:module}\b\):%{SPACE}%{TIMESTAMP_ISO8601:logdate}%{SPACE}(?<loglevel>AUDIT|CRITICAL|DEBUG|INFO|TRACE|WARNING|ERROR)%{SPACE}%{GREEDYDATA:logmessage}" }
-      add_field => { "received_at" => "%{@timestamp}" }
-    }
   } else if "apachecombined" in [tags] {
     grok {
       match => { "message" => "%{COMBINEDAPACHELOG}" }
