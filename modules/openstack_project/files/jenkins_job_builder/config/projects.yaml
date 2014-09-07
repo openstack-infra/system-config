@@ -3250,3 +3250,18 @@
     jobs:
       - python-jobs
       - pypi-jobs
+
+- project:
+    name: group-based-policy
+    node: 'bare-precise || bare-trusty'
+    tarball-site: tarballs.openstack.org
+
+- project:
+    name: python-group-based-policy-client
+    node: 'bare-precise || bare-trusty'
+    tarball-site: tarballs.openstack.org
+
+- project:
+    name: group-based-policy-specs
+    node: 'bare-precise || bare-trusty'
+    tarball-site: tarballs.openstack.org
