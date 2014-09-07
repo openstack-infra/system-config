@@ -48,8 +48,9 @@ yaml config files:
 * Jenkins Jobs Macros to give larger config sections meaningful names in
   ``macros.yaml``.
 * Project specific configurations in ``project_name.yaml``.
-* Job template configurations. Need a ``projects.yaml`` file to specify how
-  the templates should be filled out and templates go in ``template_name.yaml``.
+* Job template configurations. Need a ``projects.yaml`` file to
+  specify how the templates should be filled out and templates go in
+  ``template_name.yaml``.
 
 YAML Format
 ===========
@@ -246,8 +247,8 @@ Job Caching
 The Jenkins Jobs builder maintains a special `cache`_ that
 contains an MD5 of every generated XML that it builds.  If
 it finds the XML is different then it will proceed to send this
-to Jenkins, otherwise it is skipped.  If a job is accidentally deleted then this
-file should be modified or removed.
+to Jenkins, otherwise it is skipped. If a job is accidentally deleted
+then this file should be modified or removed.
 
 .. _cache: http://ci.openstack.org/jenkins-job-builder/installation.html#running
 

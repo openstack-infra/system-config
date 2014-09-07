@@ -113,8 +113,8 @@ hand:
 
 #. Login.
 
-#. Setup matrix security: add the 'authenticated' pseudo user and 
-   grant Admin access to your own user. 
+#. Setup matrix security: add the 'authenticated' pseudo user and
+   grant Admin access to your own user.
 
 #. Setup one account per `http://ci.openstack.org/jenkins-job-builder/installation.html#configuration-file`
    and grab the API token for it.
