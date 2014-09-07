@@ -53,6 +53,7 @@ openstack-infra:
       - openstack-infra/zuul
       - openstack-infra/zuul-packaging
       - openstack/requirements
+      - stackforge/dox
       - stackforge/gertty
       - stackforge/python-jenkins
 
@@ -919,5 +920,15 @@ openstack-poppy:
       - x-vrif-minus-2
     projects:
       - stackforge/poppy
+    branches:
+      - master
+
+dox:
+    events:
+      - patchset-created
+      - change-merged
+      - x-vrif-minus-2
+    projects:
+      - stackforge/dox
     branches:
       - master
