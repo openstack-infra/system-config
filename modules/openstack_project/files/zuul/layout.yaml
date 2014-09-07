@@ -5568,3 +5568,18 @@ projects:
   - name: stackforge/tuskar-ui-extras
     template:
       - name: noop-jobs
+
+  - name: stackforge/group-based-policy
+    template:
+      - name: merge-check
+      - name: noop-jobs
+
+  - name: stackforge/group-based-policy-specs
+    template:
+      - name: merge-check
+      - name: noop-jobs
+
+  - name: stackforge/python-group-based-policy-client
+    template:
+      - name: merge-check
+      - name: noop-jobs

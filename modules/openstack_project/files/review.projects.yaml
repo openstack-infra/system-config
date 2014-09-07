@@ -1338,3 +1338,15 @@
   description: Spin JavaScript library packaged as XStatic.
   upstream: https://bitbucket.org/thesheep/xstatic-spin.git
   acl-config: /home/gerrit2/acls/stackforge/xstatic.config
+- project: stackforge/group-based-policy
+  description: Group Based Policy
+  upstream: git://github.com/group-based-policy/policy.git
+  acl-config: /home/gerrit2/acls/stackforge/group-based-policy.config
+- project: stackforge/python-group-based-policy-client
+  description: Client for OpenStack Group Based Policy
+  upstream: git://github.com/group-based-policy/client.git
+  acl-config: /home/gerrit2/acls/stackforge/group-based-policy.config
+- project: stackforge/group-based-policy-specs
+  description: Group Based Policy Design Specifications
+  upstream: git://github.com/group-based-policy/specs.git
+  acl-config: /home/gerrit2/acls/stackforge/group-based-policy.config
