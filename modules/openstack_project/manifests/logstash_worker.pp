@@ -40,11 +40,6 @@ class openstack_project::logstash_worker (
     conf_template => 'openstack_project/logstash/indexer.conf.erb',
   }
 
-  class { 'logstash::watchdog':
-    cron_ensure => 'absent',
-    es_api_node => $discover_node,
-  }
-
   include log_processor
   log_processor::worker { 'A':
     config_file => 'puppet:///modules/openstack_project/logstash/jenkins-log-worker.yaml',
