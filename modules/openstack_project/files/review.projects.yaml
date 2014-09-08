@@ -562,6 +562,9 @@
 - project: stackforge/cl-openstack-client
   description: Common Lisp OpenStack client libraries
   upstream: git://github.com/jd/cl-openstack-client.git
+- project: stackforge/cloudbase-init
+  description: Cross-platform instance initialization
+  upstream: git://github.com/cloudbase/cloudbase-init.git
 - project: stackforge/cloudcafe
   upstream: https://github.com/samu4924/cloudcafe
   description: OpenStack based test automation framework. Based on OpenCAFE engine
