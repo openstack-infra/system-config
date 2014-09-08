@@ -856,6 +856,7 @@ openstack-security:
       - x-vrif-minus-2
     projects:
       - openstack/security-doc
+      - stackforge/bandit
     branches:
       - master
 
