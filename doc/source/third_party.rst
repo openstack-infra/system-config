@@ -20,7 +20,9 @@ on the review in Gerrit.
 You can view a list of current 3rd party testing accounts and the relevant
 contact information for each account in the `Gerrit group for 3rd party
 testing <https://review.openstack.org/#/admin/groups/270,members>`_ (you must
-be signed in to Gerrit to view this page).
+be signed in to Gerrit to view this page). All accounts must have a wikipage
+entry `on this page <https://wiki.openstack.org/wiki/ThirdPartySystems>_`.
+Details are below under Requirements.
 
 Requirements
 ------------
@@ -85,7 +87,7 @@ For example:
    $ ssh -p 29418 USERNAME@review.openstack.org gerrit stream-events
 
 Will give a stream with an output like this (line breaks and
-indentation added in this document for readability, the read JSON will
+indentation added in this document for readability, the real JSON will
 be all one line per event):
 
 .. code-block:: javascript
@@ -241,13 +243,13 @@ uploaded and will report the results to Gerrit automatically.
 Testing your CI setup
 ---------------------
 
-You can use ``openstack-dev/sandbox`` project to test your external CI
-infrastructure with OpenStack Gerrit system. By using sandbox project you
+You can use the ``openstack-dev/sandbox`` project to test your external CI
+infrastructure with OpenStack's Gerrit. By using the sandbox project you
 can test your CI system without affecting regular OpenStack reviews.
 
-Once you confirm your CI system works as you expected, change your
-configuration of gerrit trigger plugin or zuul to subscribe gerrit events
-from your target project.
+Once you confirm your CI system works as you expect, change your
+configuration of the gerrit trigger plugin or zuul to subscribe to gerrit
+events from your target project.
 
 Permissions on your Third Party System
 --------------------------------------
@@ -265,9 +267,13 @@ accounts at its discretion. This documentation endeavours to outline specific
 circumstances that may lead to an account being disabled. There have been
 times when third-party ci systems behave in ways we didn't envision
 and therefore were unable to document prior to the event. If your
-third-party ci system has been disabled, check your email - we
-probably tried to contact you, and join us in the #openstack-infra irc
-channel on freenode to discuss your situation.
+third-party ci system has been disabled, check the archives of the
+`third-party-announce
+<http://lists.openstack.org/cgi-bin/mailman/listinfo/third-party-announce>`_
+mailing list to which you hopefully are subscribed. The email that notifies
+this list that your account has been disabled will include instructions for
+getting your system re-enabled. You are also welcome to join us in the
+#openstack-infra irc channel on freenode to discuss your situation.
 
 In order to get your Third Pary CI account to have voting permissions on
 repos in gerrit in addition to ``openstack-dev/sandbox`` you have a greater
