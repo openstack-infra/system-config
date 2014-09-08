@@ -28,7 +28,7 @@
 - builder:
     name: docs
     builders:
-      - shell: "/usr/local/jenkins/slave_scripts/run-docs.sh"
+      - shell: "/usr/local/jenkins/slave_scripts/run-docs.sh {envlist}"
 
 - builder:
     name: maven-test

@@ -172,7 +172,8 @@
     builders:
       - revoke-sudo
       - gerrit-git-prep
-      - docs
+      - docs:
+          envlist: '{envlist}'
 
     publishers:
       - console-log

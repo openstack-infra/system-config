@@ -7,7 +7,15 @@
 # what packages we ended up testing.
 #
 
-venv=venv
+venv="venv"
+
+# This allows those that have custom virtualenvs that are just for making
+# the docs to use them as they feel appropriate, a large majority of projects
+# have a 'docs' environment that is more customized then the one currently
+# used here.
+if [ -n "$1" ]; then
+    venv="$1"
+fi
 
 echo "Begin pip freeze output from test virtualenv:"
 echo "======================================================================"
@@ -16,8 +24,13 @@ echo "======================================================================"
 
 mkdir -p doc/build
 export HUDSON_PUBLISH_DOCS=1
-tox -e$venv -- python setup.py build_sphinx
-result=$?
+if [ "$venv" == "venv" ]; then
+    tox -e$venv -- python setup.py build_sphinx
+    result=$?
+else
+    tox -e$venv
+    result=$?
+fi
 
 if [ -z "$ZUUL_REFNAME" ] || [ "$ZUUL_REFNAME" == "master" ] ; then
     : # Leave the docs where they are.
