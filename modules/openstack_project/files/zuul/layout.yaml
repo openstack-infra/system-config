@@ -3928,6 +3928,16 @@ projects:
       - gate-gnocchi-tox-py27-postgresql
       - gate-gnocchi-tox-py27-mysql
 
+  - name: stackforge/group-based-policy
+    template:
+      - name: merge-check
+      - name: noop-jobs
+
+  - name: stackforge/group-based-policy-specs
+    template:
+      - name: merge-check
+      - name: noop-jobs
+
   - name: stackforge/healthnmon
     template:
       - name: merge-check
@@ -4092,6 +4102,11 @@ projects:
     gate:
       - gate-python-congressclient-pep8
       - gate-python-congressclient-python27
+
+  - name: stackforge/python-group-based-policy-client
+    template:
+      - name: merge-check
+      - name: noop-jobs
 
   - name: stackforge/python-mistralclient
     template:
