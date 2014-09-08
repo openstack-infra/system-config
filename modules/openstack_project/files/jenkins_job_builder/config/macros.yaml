@@ -124,6 +124,17 @@
       - shell: "./test.sh"
 
 - builder:
+    name: ruby-191-prep
+    builders:
+      - shell: |
+          #!/bin/bash -x
+          sudo update-alternatives --install /usr/bin/ruby ruby /usr/bin/ruby1.9.1 20
+          sudo update-alternatives --set ruby /usr/bin/ruby1.9.1
+          sudo update-alternatives --install /usr/bin/gem gem /usr/bin/gem1.9.1 10
+          sudo update-alternatives --set gem /usr/bin/gem1.9.1
+          sudo gem update --no-rdoc --no-ri
+
+- builder:
     name: chef-bundler-prep
     builders:
       - shell: |
@@ -133,9 +144,9 @@
           if [ $? -eq 0 ]; then
             # For Berkshelf 3.x use the system gecode 3.x libraries
             sudo apt-get install -y libgecode-dev
-            USE_SYSTEM_GECODE=1 ruby1.9.1 `which bundle` install --path=.bundle --jobs 1 --retry 3 --verbose
+            USE_SYSTEM_GECODE=1 bundle install --path=.bundle --jobs 1 --retry 3 --verbose
           else
-            ruby1.9.1 `which bundle` install --path=.bundle --jobs 1 --retry 3 --verbose
+            bundle install --path=.bundle --jobs 1 --retry 3 --verbose
           fi
 
 - builder:
@@ -145,10 +156,10 @@
           #!/bin/bash -x
           grep -E .*berkshelf.*3\.\d*\.\d*.* Gemfile
           if [ $? -eq 0 ]; then
-            ruby1.9.1 `which bundle` exec berks vendor .cookbooks
+            bundle exec berks vendor .cookbooks
           else
             mkdir -p .cookbooks
-            ruby1.9.1 `which bundle` exec berks install --path=.cookbooks
+            bundle exec berks install --path=.cookbooks
           fi
           COOKBOOK=$(awk '/^name/ {print $NF}' metadata.rb |tr -d \"\')
           if [ -z $COOKBOOK ]; then
@@ -162,9 +173,9 @@
       - shell: |
           #!/bin/bash -x
           if grep rubocop: Strainerfile; then
-              ruby1.9.1 `which bundle` exec strainer test --cookbooks-path=.cookbooks --only=rubocop
+              bundle exec strainer test --cookbooks-path=.cookbooks --only=rubocop
           else
-              ruby1.9.1 `which bundle` exec rubocop
+              bundle exec rubocop
           fi
 
 - builder:
@@ -173,9 +184,9 @@
       - shell: |
           #!/bin/bash -x
           if grep foodcritic: Strainerfile; then
-              ruby1.9.1 `which bundle` exec strainer test --cookbooks-path=.cookbooks --only=foodcritic
+              bundle exec strainer test --cookbooks-path=.cookbooks --only=foodcritic
           else
-              ruby1.9.1 `which bundle` exec foodcritic -f any -t ~FC003 -t ~FC023 .
+              bundle exec foodcritic -f any -t ~FC003 -t ~FC023 .
           fi
 
 - builder:
@@ -185,9 +196,9 @@
           #!/bin/bash -x
           COOKBOOK=$(awk '/^name/ {print $NF}' metadata.rb |tr -d \"\')
           if grep chefspec: Strainerfile; then
-              ruby1.9.1 `which bundle` exec strainer test --cookbooks-path=.cookbooks --only=chefspec
+              bundle exec strainer test --cookbooks-path=.cookbooks --only=chefspec
           else
-              ruby1.9.1 `which bundle` exec rspec .cookbooks/$COOKBOOK/spec
+              bundle exec rspec .cookbooks/$COOKBOOK/spec
           fi
 
 - builder:

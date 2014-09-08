@@ -9,6 +9,7 @@
 
     builders:
       - gerrit-git-prep
+      - ruby-191-prep
       - chef-bundler-prep
       - revoke-sudo
       - chef-berkshelf-prep
@@ -28,6 +29,7 @@
 
     builders:
       - gerrit-git-prep
+      - ruby-191-prep
       - chef-bundler-prep
       - revoke-sudo
       - chef-berkshelf-prep
@@ -47,6 +49,7 @@
 
     builders:
       - gerrit-git-prep
+      - ruby-191-prep
       - chef-bundler-prep
       - revoke-sudo
       - chef-berkshelf-prep
@@ -61,13 +64,14 @@
 
     builders:
       - gerrit-git-prep
+      - ruby-191-prep
       - chef-bundler-prep
       - revoke-sudo
       - chef-berkshelf-prep
       - shell: |
           #!/bin/bash -xe
           # Validates roles
-          ruby1.9.1 `which bundle` exec spiceweasel infrastructure.yml --debug
+          bundle exec spiceweasel infrastructure.yml --debug
 
     publishers:
       - console-log
