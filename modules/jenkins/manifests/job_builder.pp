@@ -7,6 +7,7 @@ class jenkins::job_builder (
   $git_revision = 'master',
   $git_url = 'https://git.openstack.org/openstack-infra/jenkins-job-builder',
   $config_dir = '',
+  $logoutput = "false",
 ) {
 
   # A lot of things need yaml, be conservative requiring this package to avoid
@@ -59,6 +60,7 @@ class jenkins::job_builder (
     timeout     => '600',
     path        => '/bin:/usr/bin:/usr/local/bin',
     refreshonly => true,
+    logoutput   => $logoutput,
     require     => [
       File['/etc/jenkins_jobs/jenkins_jobs.ini'],
       Package['python-jenkins'],
