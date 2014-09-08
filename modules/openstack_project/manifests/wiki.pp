@@ -62,7 +62,7 @@ class openstack_project::wiki (
       'bootstrap.mlockall'               => true,
       'discovery.zen.ping.unicast.hosts' => ['localhost'],
     },
-    version            => '1.1.1',
+    version            => '1.3.2',
     heap_size          => '1g',
   }
 
