@@ -108,6 +108,13 @@ openstack-ceilometer:
     branches:
       - master
 
+openstack-dev:
+    events:
+      - patchset-created
+      - change-merged
+    projects:
+      - openstack/governance
+
 openstack-dns:
     events:
       - patchset-created
