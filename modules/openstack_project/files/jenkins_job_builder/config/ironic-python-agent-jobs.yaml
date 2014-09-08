@@ -32,7 +32,7 @@
               target: 'tarballs/ironic-python-agent/coreos/files'
               keep-hierarchy: false
               copy-after-failure: false
-            - source: 'imagebuild/coreos/UPLOAD/coreos_production_pxe-oem.cpio.gz'
+            - source: 'imagebuild/coreos/UPLOAD/coreos_production_pxe_image-oem.cpio.gz'
               target: 'tarballs/ironic-python-agent/coreos/files'
               keep-hierarchy: false
               copy-after-failure: false
