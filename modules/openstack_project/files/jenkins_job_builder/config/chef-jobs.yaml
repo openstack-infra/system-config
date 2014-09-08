@@ -8,9 +8,9 @@
       - timestamps
 
     builders:
-      - revoke-sudo
       - gerrit-git-prep
       - chef-bundler-prep
+      - revoke-sudo
       - chef-berkshelf-prep
       - chef-cookbook-chefspec
 
@@ -27,9 +27,9 @@
       - timestamps
 
     builders:
-      - revoke-sudo
       - gerrit-git-prep
       - chef-bundler-prep
+      - revoke-sudo
       - chef-berkshelf-prep
       - chef-cookbook-foodcritic
 
@@ -46,9 +46,9 @@
       - timestamps
 
     builders:
-      - revoke-sudo
       - gerrit-git-prep
       - chef-bundler-prep
+      - revoke-sudo
       - chef-berkshelf-prep
       - chef-cookbook-rubocop
 
@@ -60,17 +60,14 @@
     node: 'bare-precise || bare-trusty'
 
     builders:
-      - revoke-sudo
       - gerrit-git-prep
+      - chef-bundler-prep
+      - revoke-sudo
+      - chef-berkshelf-prep
       - shell: |
           #!/bin/bash -xe
-          mkdir -p .cookbooks .bundle
-          bundle config --global jobs $(nproc)
-          bundle install --path=.bundle
-          # Validates cookbooks
-          bundle exec berks install --path=.cookbooks
           # Validates roles
-          bundle exec spiceweasel infrastructure.yml --debug
+          ruby1.9.1 `which bundle` exec spiceweasel infrastructure.yml --debug
 
     publishers:
       - console-log
