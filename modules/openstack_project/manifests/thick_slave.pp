@@ -90,6 +90,33 @@ class openstack_project::thick_slave(
     }
   }
 
+  case $::osfamily {
+    'RedHat': {
+      if ($::operatingsystem == 'Fedora') {
+        # For [tooz, taskflow, nova] using zookeeper in unit tests
+        package { $::openstack_project::jenkins_params::zookeeper_package:
+            ensure => present,
+        }
+
+        # Fedora needs community-mysql package for mysql_config
+        # command used in some gate-{project}-python27
+        # jobs in Jenkins
+        package { $::openstack_project::jenkins_params::mysql_package:
+            ensure => present,
+        }
+      }
+    'Debian': {
+      # For [tooz, taskflow, nova] using zookeeper in unit tests
+      package { $::openstack_project::jenkins_params::zookeeper_package:
+        ensure => present,
+      }
+
+      # For openstackid using php5-mcrypt for distro build
+      package { $::openstack_project::jenkins_params::php5_mcrypt_package:
+        ensure => present,
+      }
+    }
+  }
   package { 'rake':
     ensure   => '10.1.1',
     provider => gem,
