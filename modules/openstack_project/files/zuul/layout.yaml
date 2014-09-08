@@ -1862,6 +1862,22 @@ projects:
       - gate-git-upstream-pep8
       - gate-git-upstream-python27
 
+  - name: stackforge/cloudbase-init
+    template:
+      - name: merge-check
+    check:
+      - gate-cloudbase-init-docs
+      - gate-cloudbase-init-pep8
+      - gate-cloudbase-init-python27
+      - gate-cloudbase-init-python33
+    gate:
+      - gate-cloudbase-init-docs
+      - gate-cloudbase-init-pep8
+      - gate-cloudbase-init-python27
+      - gate-cloudbase-init-python33
+    post:
+      - cloudbase-init-coverage
+
   - name: stackforge/dox
     template:
       - name: merge-check
