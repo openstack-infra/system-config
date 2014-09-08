@@ -45,6 +45,7 @@ class jenkins::job_builder (
     timeout     => '600',
     path        => '/bin:/usr/bin:/usr/local/bin',
     refreshonly => true,
+    logoutput   => "on_failure",
     require     => [
       File['/etc/jenkins_jobs/jenkins_jobs.ini'],
       Package['python-jenkins'],
