@@ -2617,6 +2617,7 @@ projects:
       - name: noop-jobs
     experimental:
       - gate-trove-buildimage-mysql
+      - gate-trove-functional-dsvm-mysql
 
 # TODO: add docs
   - name: openstack/tuskar-ui
