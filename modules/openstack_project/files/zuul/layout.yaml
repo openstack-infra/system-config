@@ -1627,6 +1627,18 @@ projects:
       - check-tripleo-novabm-overcloud-precise-nonha
       - check-tripleo-novabm-overcloud-f20-nonha
 
+  - name: openstack/python-keystoneclient-kerberos
+    template:
+      - name: merge-check
+      - name: publish-to-pypi
+    experimental:
+      - gate-python-keystoneclient-kerberos-pep8
+      - gate-python-keystoneclient-kerberos-docs
+      - gate-python-keystoneclient-kerberos-python26
+      - gate-python-keystoneclient-kerberos-python27
+      - gate-python-keystoneclient-kerberos-python34
+      - gate-python-keystoneclient-kerberos-requirements
+
   - name: openstack/python-kiteclient
     template:
       - name: merge-check
