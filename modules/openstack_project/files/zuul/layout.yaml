@@ -1627,6 +1627,16 @@ projects:
       - check-tripleo-novabm-overcloud-precise-nonha
       - check-tripleo-novabm-overcloud-f20-nonha
 
+  - name: openstack/python-keystoneclient
+    template:
+      - name: merge-check
+      - name: python-jobs
+      - name: openstack-client-publish-jobs
+      - name: check-requirements
+      - name: publish-to-pypi
+    experimental:
+      - name: python3-jobs
+
   - name: openstack/python-kiteclient
     template:
       - name: merge-check
