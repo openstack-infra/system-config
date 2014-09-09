@@ -646,6 +646,7 @@ openstack-keystone:
       - openstack/identity-api
       - openstack/keystone-specs
       - openstack/python-keystoneclient
+      - openstack/python-keystoneclient-middleware
       - openstack/keystonemiddleware
     branches:
       - master
