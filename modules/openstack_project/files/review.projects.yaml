@@ -506,6 +506,9 @@
 - project: openstack/tripleo-image-elements
   group: tripleo
   description: Disk image elements for deployment images of OpenStack
+- project: enovance/tripleo-puppet-elements
+  group: tripleo
+  description: Puppet elements for deployment of OpenStack
 - project: openstack/tripleo-incubator
   group: tripleo
   description: The TripleO incubator where unformed things are experimented with.
