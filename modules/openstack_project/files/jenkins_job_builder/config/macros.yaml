@@ -128,11 +128,12 @@
     builders:
       - shell: |
           #!/bin/bash -x
-          sudo update-alternatives --install /usr/bin/ruby ruby /usr/bin/ruby1.9.1 20
-          sudo update-alternatives --set ruby /usr/bin/ruby1.9.1
-          sudo update-alternatives --install /usr/bin/gem gem /usr/bin/gem1.9.1 10
-          sudo update-alternatives --set gem /usr/bin/gem1.9.1
-          sudo gem update --no-rdoc --no-ri
+          # Uninstall ruby 1.8 gems and packages
+          gem1.8 list | cut -d" " -f1 | xargs sudo gem1.8 uninstall -aIx
+          sudo apt-get remove -y libruby1.8 ruby1.8 ruby1.8-dev rubygems1.8
+          # Set 1.9.1 ruby and gem as default
+          wget https://opscode-omnibus-packages.s3.amazonaws.com/ubuntu/12.04/x86_64/chefdk_0.2.1-1_amd64.deb}
+          sudo dpkg -i chefdk_0.2.1-1_amb64.deb
 
 - builder:
     name: chef-bundler-prep
@@ -175,7 +176,7 @@
           if grep rubocop: Strainerfile; then
               bundle exec strainer test --cookbooks-path=.cookbooks --only=rubocop
           else
-              bundle exec rubocop
+              chef exec rubocop
           fi
 
 - builder:
@@ -186,7 +187,7 @@
           if grep foodcritic: Strainerfile; then
               bundle exec strainer test --cookbooks-path=.cookbooks --only=foodcritic
           else
-              bundle exec foodcritic -f any -t ~FC003 -t ~FC023 .
+              chef exec foodcritic -f any -t ~FC003 -t ~FC023 .
           fi
 
 - builder:
@@ -198,7 +199,7 @@
           if grep chefspec: Strainerfile; then
               bundle exec strainer test --cookbooks-path=.cookbooks --only=chefspec
           else
-              bundle exec rspec .cookbooks/$COOKBOOK/spec
+              chef exec rspec .cookbooks/$COOKBOOK/spec
           fi
 
 - builder:
