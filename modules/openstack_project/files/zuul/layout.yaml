@@ -284,7 +284,6 @@ project-templates:
       - 'gate-tempest-dsvm-neutron-heat-slow'
       - 'gate-tempest-dsvm-neutron-full'
       - 'gate-tempest-dsvm-neutron-pg-full'
-      - 'gate-tempest-dsvm-neutron-large-ops'
 
   - name: integrated-gate-sahara
     check:
@@ -299,9 +298,6 @@ project-templates:
 
   - name: large-ops
     check:
-      - 'gate-tempest-dsvm-large-ops'
-      - 'gate-tempest-dsvm-neutron-large-ops'
-    gate:
       - 'gate-tempest-dsvm-large-ops'
       - 'gate-tempest-dsvm-neutron-large-ops'
 
@@ -2135,7 +2131,6 @@ projects:
       - name: openstack-server-publish-jobs
       - name: check-requirements
       - name: integrated-gate
-      - name: large-ops
       - name: publish-to-pypi
       - name: translation-jobs
     check:
@@ -2864,7 +2859,6 @@ projects:
       - name: python-jobs
       - name: python3-jobs
       - name: integrated-gate
-      - name: large-ops
       - name: publish-to-pypi
     check:
       - gate-pbr-pypy
