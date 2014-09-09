@@ -7,6 +7,7 @@ class openstack_project::puppetmaster (
   $version   = '2.7.',
   $ca_server = undef,
   $puppetdb = true,
+  $puppetdb_server = 'puppetdb.openstack.org',
 ) {
   include ansible
   include logrotate
@@ -111,7 +112,7 @@ class openstack_project::puppetmaster (
 
   if $puppetdb {
     class { 'puppetdb::master::config':
-      puppetdb_server              => 'puppetdb.openstack.org',
+      puppetdb_server              => $puppetdb_server,
       puppet_service_name          => 'apache2',
       puppetdb_soft_write_failure  => true,
       manage_storeconfigs          => false,
