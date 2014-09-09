@@ -155,6 +155,7 @@ tripleo:
       - openstack/tripleo-specs
       - openstack/tuskar
       - openstack/tuskar-ui
+      - stackforge/tripleo-puppet-elements
       - stackforge/windows-diskimage-builder
     branches:
       - master
