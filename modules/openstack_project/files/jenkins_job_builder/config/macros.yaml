@@ -128,11 +128,16 @@
     builders:
       - shell: |
           #!/bin/bash -x
+          # Uninstall ruby 1.8 gems and packages
+          gem1.8 list | cut -d" " -f1 | xargs sudo gem1.8 uninstall -aIx
+          sudo apt-get remove -y libruby1.8 ruby1.8 ruby1.8-dev rubygems1.8
+          # Set 1.9.1 ruby and gem as default
           sudo update-alternatives --install /usr/bin/ruby ruby /usr/bin/ruby1.9.1 20
           sudo update-alternatives --set ruby /usr/bin/ruby1.9.1
           sudo update-alternatives --install /usr/bin/gem gem /usr/bin/gem1.9.1 10
           sudo update-alternatives --set gem /usr/bin/gem1.9.1
-          sudo gem update --no-rdoc --no-ri
+          gem env
+          gem install bundler --no-rdoc --no-ri --verbose
 
 - builder:
     name: chef-bundler-prep
@@ -143,6 +148,7 @@
           grep -E .*berkshelf.*3\.\d*\.\d*.* Gemfile
           if [ $? -eq 0 ]; then
             # For Berkshelf 3.x use the system gecode 3.x libraries
+            sudo apt-get update
             sudo apt-get install -y libgecode-dev
             USE_SYSTEM_GECODE=1 bundle install --path=.bundle --jobs 1 --retry 3 --verbose
           else
