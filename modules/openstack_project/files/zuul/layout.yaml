@@ -2580,6 +2580,21 @@ projects:
     post:
       - tripleo-image-elements-branch-tarball
 
+  - name: stackforge/tripleo-puppet-elements
+    template:
+      - name: merge-check
+      - name: publish-to-pypi
+      - name: noop-jobs
+    check-tripleo:
+      - check-tripleo-novabm-undercloud-precise-nonha
+      - check-tripleo-ironic-undercloud-precise-nonha
+      - check-tripleo-novabm-overcloud-f20-nonha
+      - check-tripleo-ironic-overcloud-precise-ha
+    experimental-tripleo:
+      - check-tripleo-novabm-overcloud-precise-nonha
+    post:
+      - tripleo-puppet-elements-branch-tarball
+
   - name: openstack/tripleo-incubator
     template:
       - name: merge-check
