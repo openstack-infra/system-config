@@ -1288,6 +1288,10 @@
   description: Angular-Cookies JavaScript library packaged as XStatic.
   upstream: https://bitbucket.org/thesheep/xstatic-angular-cookies.git
   acl-config: /home/gerrit2/acls/stackforge/xstatic.config
+- project: stackforge/xstatic-angular-fileupload
+  description: Angular-FileUpload JavaScript library packaged as XStatic.
+  upstream: https://github.com/jsomara/xstatic-angular-fileupload
+  acl-config: /home/gerrit2/acls/stackforge/xstatic.config
 - project: stackforge/xstatic-angular-mock
   description: Angular-Mock JavaScript library packaged as XStatic.
   upstream: https://bitbucket.org/thesheep/xstatic-angular-mock.git

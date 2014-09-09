@@ -3075,6 +3075,11 @@
       - pypi-jobs
 
 - project:
+    name: xstatic-angular-fileupload
+    node: 'bare-precise || bare-trusty'
+    tarball-site: tarballs.openstack.org
+
+- project:
     name: xstatic-angular-mock
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
