@@ -1859,6 +1859,14 @@
       - pypi-jobs
 
 - project:
+    name: tripleo-puppet-elements
+    node: 'bare-precise || bare-trusty'
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - python-jobs
+
+- project:
     name: tripleo-incubator
     node: 'bare-precise || bare-trusty'
     doc-publisher-site: docs.openstack.org
