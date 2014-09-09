@@ -128,17 +128,15 @@
     builders:
       - shell: |
           #!/bin/bash -x
-          sudo update-alternatives --install /usr/bin/ruby ruby /usr/bin/ruby1.9.1 20
-          sudo update-alternatives --set ruby /usr/bin/ruby1.9.1
-          sudo update-alternatives --install /usr/bin/gem gem /usr/bin/gem1.9.1 10
-          sudo update-alternatives --set gem /usr/bin/gem1.9.1
-          sudo gem update --no-rdoc --no-ri
+          sudo apt-get install -y curl
+          \curl -sSL https://get.rvm.io | bash -s stable --ruby=1.9.3
 
 - builder:
     name: chef-bundler-prep
     builders:
       - shell: |
           #!/bin/bash -x
+          source .rvm/scripts/rvm
           mkdir -p .bundle
           grep -E .*berkshelf.*3\.\d*\.\d*.* Gemfile
           if [ $? -eq 0 ]; then
@@ -154,6 +152,7 @@
     builders:
       - shell: |
           #!/bin/bash -x
+          source .rvm/scripts/rvm
           grep -E .*berkshelf.*3\.\d*\.\d*.* Gemfile
           if [ $? -eq 0 ]; then
             bundle exec berks vendor .cookbooks
@@ -172,6 +171,7 @@
     builders:
       - shell: |
           #!/bin/bash -x
+          source .rvm/scripts/rvm
           if grep rubocop: Strainerfile; then
               bundle exec strainer test --cookbooks-path=.cookbooks --only=rubocop
           else
@@ -183,6 +183,7 @@
     builders:
       - shell: |
           #!/bin/bash -x
+          source .rvm/scripts/rvm
           if grep foodcritic: Strainerfile; then
               bundle exec strainer test --cookbooks-path=.cookbooks --only=foodcritic
           else
@@ -194,6 +195,7 @@
     builders:
       - shell: |
           #!/bin/bash -x
+          source .rvm/scripts/rvm
           COOKBOOK=$(awk '/^name/ {print $NF}' metadata.rb |tr -d \"\')
           if grep chefspec: Strainerfile; then
               bundle exec strainer test --cookbooks-path=.cookbooks --only=chefspec
