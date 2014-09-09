@@ -128,22 +128,22 @@
     builders:
       - shell: |
           #!/bin/bash -x
-          sudo update-alternatives --install /usr/bin/ruby ruby /usr/bin/ruby1.9.1 20
-          sudo update-alternatives --set ruby /usr/bin/ruby1.9.1
-          sudo update-alternatives --install /usr/bin/gem gem /usr/bin/gem1.9.1 10
-          sudo update-alternatives --set gem /usr/bin/gem1.9.1
-          sudo gem update --no-rdoc --no-ri
+          sudo apt-get update # this is to confirm the cache is uptodate
+          sudo apt-get install -y curl
+          \curl -sSL https://get.rvm.io | bash -s stable --ruby=1.9.3 # rvm makes life easier
 
 - builder:
     name: chef-bundler-prep
     builders:
       - shell: |
           #!/bin/bash -x
+          source ~/.rvm/scripts/rvm
           mkdir -p .bundle
           grep -E .*berkshelf.*3\.\d*\.\d*.* Gemfile
           if [ $? -eq 0 ]; then
-            # For Berkshelf 3.x use the system gecode 3.x libraries
-            sudo apt-get install -y libgecode-dev
+            # For Berkshelf 3.x use the system gecode 3.x libraries and it's dependencies because we need the kitchen sink
+            sudo apt-get update
+            sudo apt-get install -y libgecode-dev libxml2-dev libxml2 libxslt-dev build-essential
             USE_SYSTEM_GECODE=1 bundle install --path=.bundle --jobs 1 --retry 3 --verbose
           else
             bundle install --path=.bundle --jobs 1 --retry 3 --verbose
@@ -154,6 +154,7 @@
     builders:
       - shell: |
           #!/bin/bash -x
+          source ~/.rvm/scripts/rvm
           grep -E .*berkshelf.*3\.\d*\.\d*.* Gemfile
           if [ $? -eq 0 ]; then
             bundle exec berks vendor .cookbooks
@@ -161,17 +162,13 @@
             mkdir -p .cookbooks
             bundle exec berks install --path=.cookbooks
           fi
-          COOKBOOK=$(awk '/^name/ {print $NF}' metadata.rb |tr -d \"\')
-          if [ -z $COOKBOOK ]; then
-              echo "Cookbook name not defined in metadata.rb"
-              exit 1
-          fi
 
 - builder:
     name: chef-cookbook-rubocop
     builders:
       - shell: |
           #!/bin/bash -x
+          source ~/.rvm/scripts/rvm
           if grep rubocop: Strainerfile; then
               bundle exec strainer test --cookbooks-path=.cookbooks --only=rubocop
           else
@@ -183,6 +180,7 @@
     builders:
       - shell: |
           #!/bin/bash -x
+          source ~/.rvm/scripts/rvm
           if grep foodcritic: Strainerfile; then
               bundle exec strainer test --cookbooks-path=.cookbooks --only=foodcritic
           else
@@ -194,6 +192,7 @@
     builders:
       - shell: |
           #!/bin/bash -x
+          source ~/.rvm/scripts/rvm
           COOKBOOK=$(awk '/^name/ {print $NF}' metadata.rb |tr -d \"\')
           if grep chefspec: Strainerfile; then
               bundle exec strainer test --cookbooks-path=.cookbooks --only=chefspec
