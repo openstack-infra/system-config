@@ -5198,6 +5198,11 @@ projects:
       - name: merge-check
       - name: noop-jobs
 
+  - name: stackforge/xstatic-angular-fileupload
+    template:
+      - name: merge-check
+      - name: noop-jobs
+
   - name: stackforge/xstatic-angular-mock
     template:
       - name: merge-check
