@@ -1200,6 +1200,17 @@
 
 
 - project:
+    name: python-keystoneclient-kerberos
+    node: 'bare-precise || bare-trusty'
+    tarball-site: tarballs.openstack.org
+    doc-publisher-site: docs.openstack.org
+
+    jobs:
+      - python-jobs
+      - pypi-jobs
+
+
+- project:
     name: python-jenkins
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
