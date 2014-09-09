@@ -1245,6 +1245,10 @@
   upstream: https://github.com/timjr/tomograph.git
 - project: stackforge/tooz
   description: Coordinate distributed systems.
+- project: stackforge/tripleo-puppet-elements
+  group: tripleo
+  description: Puppet elements for deployment of OpenStack
+  upstream: https://github.com/enovance/tripleo-puppet-elements.git
 - project: stackforge/turbo-hipster
   group: turbo-hipster
   docimpact-group: turbo-hipster
