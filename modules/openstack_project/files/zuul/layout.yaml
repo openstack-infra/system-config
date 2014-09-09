@@ -582,6 +582,8 @@ jobs:
     voting: false
     failure-message: Jenkins XML output has changed.
     success-message: Jenkins XML output is unchanged.
+  - name: gate-git-review-python34
+    voting: false
   - name: gate-jenkins-job-builder-python33
     voting: false
   - name: gate-config-irc-access
@@ -3098,6 +3100,7 @@ projects:
       - gate-git-review-pep8
       - gate-git-review-python26
       - gate-git-review-python27
+      - gate-git-review-python34
     gate:
       - gate-git-review-pep8
       - gate-git-review-python26
