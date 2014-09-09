@@ -524,6 +524,10 @@
   description: The TripleO incubator where unformed things are experimented with.
   options:
     - direct-release
+- project: openstack/tripleo-puppet-elements
+  group: tripleo
+  description: Puppet elements for deployment of OpenStack
+  upstream: https://github.com/enovance/tripleo-puppet-elements.git
 - project: openstack/tripleo-specs
   group: tripleo
   upstream: git://github.com/derekhiggins/tripleo-specs.git
