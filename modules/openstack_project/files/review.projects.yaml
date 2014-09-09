@@ -1248,6 +1248,10 @@
 - project: stackforge/tricircle
   group: tricircle
   description: Tricircle is a project for OpenStack cascading solution.
+- project: stackforge/tripleo-puppet-elements
+  group: tripleo
+  description: Puppet elements for deployment of OpenStack
+  upstream: https://github.com/enovance/tripleo-puppet-elements.git
 - project: stackforge/turbo-hipster
   group: turbo-hipster
   docimpact-group: turbo-hipster
