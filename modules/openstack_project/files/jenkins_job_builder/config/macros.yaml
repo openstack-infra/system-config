@@ -339,6 +339,12 @@
             ant
           fi
 
+- builder:
+    name: version-properties
+    builders:
+      - shell: |
+          #!/bin/bash -xe
+          /usr/local/jenkins/slave_scripts/version-properties.sh
 
 - builder:
     name: zuul_swift_upload

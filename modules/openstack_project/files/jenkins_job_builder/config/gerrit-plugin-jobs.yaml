@@ -11,6 +11,9 @@
     builders:
       - revoke-sudo
       - install-buck
+      - version-properties
+      - inject:
+          properties-file: version.properties
       - shell: |
           #!/bin/bash -xe
           export PATH=`pwd`/buck/bin:$PATH
@@ -18,8 +21,6 @@
           git clone -b {gerrit-branch} {gerrit-project}
           git clone -b {plugin-branch} {plugin-project} gerrit/plugins/{plugin-name}
           cd gerrit/plugins/{plugin-name}
-          /usr/local/jenkins/slave_scripts/version-properties.sh
-          source version.properties
           cd $WORKSPACE/gerrit
           buck clean
           buck build plugins/{plugin-name}:{plugin-name}

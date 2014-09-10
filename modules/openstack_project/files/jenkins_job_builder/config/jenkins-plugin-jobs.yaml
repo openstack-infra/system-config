@@ -13,10 +13,11 @@
     builders:
       - revoke-sudo
       - gerrit-git-prep
+      - version-properties
+      - inject:
+          properties-file: version.properties
       - shell: |
           #!/bin/bash -xe
-          /usr/local/jenkins/slave_scripts/version-properties.sh
-          source version.properties
           mvn clean package -B -Dproject-version=$PROJECT_VER
 
     publishers:
@@ -34,10 +35,11 @@
     builders:
       - revoke-sudo
       - gerrit-git-prep
+      - version-properties
+      - inject:
+          properties-file: version.properties
       - shell: |
           #!/bin/bash -xe
-          /usr/local/jenkins/slave_scripts/version-properties.sh
-          source version.properties
           mvn clean package -B -Dproject-version=$PROJECT_VER
           cp ./target/{name}.hpi ./target/{name}-$PROJECT_VER.hpi
 
