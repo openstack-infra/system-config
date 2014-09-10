@@ -1649,11 +1649,13 @@ projects:
       - gate-python-zaqarclient-python26
       - gate-python-zaqarclient-python27
       - gate-python-zaqarclient-pypy
+      - check-zaqarclient-dsvm-functional
     gate:
       - gate-python-zaqarclient-pep8
       - gate-python-zaqarclient-python26
       - gate-python-zaqarclient-python27
       - gate-python-zaqarclient-pypy
+      - gate-zaqarclient-dsvm-functional
     post:
       - python-zaqarclient-branch-tarball
 
