@@ -2939,9 +2939,8 @@ projects:
       - gate-config-puppet-apply-precise
       - gate-config-puppet-apply-centos6
       - gate-config-irc-access
+      - gate-config-projects-yaml
       - gate-ci-docs
-      - check-projects-yaml-alphabetized
-      - check-projects-yaml-upstream
     gate:
       - gate-config-layout
       - gate-config-pep8
@@ -2949,8 +2948,8 @@ projects:
       - gate-config-puppet-apply-precise
       - gate-config-puppet-apply-centos6
       - gate-config-irc-access
-      - check-projects-yaml-alphabetized
-      - check-projects-yaml-upstream
+      - gate-config-projects-yaml
+      - gate-ci-docs
     post:
       - ci-docs
     experimental:
