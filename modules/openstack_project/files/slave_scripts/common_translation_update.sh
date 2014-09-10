@@ -268,7 +268,8 @@ function filter_commits ()
     PO_CHANGE=0
     for f in `git diff --cached --name-only`
     do
-        if [[ $f =~ "\.po$" ]] ; then
+        # Check for all files without ".pot"
+        if [[ ! $f =~ ".pot" ]] ; then
             PO_CHANGE=1
         fi
         # It's ok if the grep fails
