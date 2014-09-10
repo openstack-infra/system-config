@@ -113,3 +113,21 @@
 
     publishers:
       - console-log
+
+- builder:
+    name: infra-puppet-apply
+    builders:
+
+- job-template:
+    name: 'gate-infra-puppet-apply-{ostype}'
+    node: 'bare-{ostype}'
+
+    builders:
+      - shell: |
+          #!/bin/bash -xe
+          /usr/zuul-env/bin/zuul-cloner --cache-dir /opt/git git://git.openstack.org openstack-infra/config
+          cd openstack-infra/config
+          ./tools/apply-test.sh
+
+    publishers:
+      - console-log
