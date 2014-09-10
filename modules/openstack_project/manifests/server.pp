@@ -8,7 +8,7 @@ class openstack_project::server (
   $iptables_rules6           = [],
   $sysadmins                 = [],
   $certname                  = $::fqdn,
-  $pin_puppet                = '2.7.',
+  $pin_puppet                = '3.',
   $ca_server                 = undef,
 ) {
   class { 'openstack_project::template':
