@@ -3248,3 +3248,8 @@
     name: group-based-policy-specs
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
+
+- project:
+    name: keystone-formula
+    node: 'bare-precise || bare-trusty'
+    tarball-site: tarballs.openstack.org
