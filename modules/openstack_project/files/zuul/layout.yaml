@@ -1841,10 +1841,7 @@ projects:
   - name: stackforge/saml-generator
     template:
       - name: merge-check
-    check:
-      - noop
-    gate:
-      - noop
+      - name: noop-jobs
 
   - name: stackforge/gertty
     template:
@@ -3999,10 +3996,7 @@ projects:
   - name: stackforge/merlin
     template:
       - name: merge-check
-    check:
-      - noop
-    gate:
-      - noop
+      - name: noop-jobs
 
   - name: stackforge/milk
     template:
@@ -4697,10 +4691,7 @@ projects:
   - name: stackforge/python-rackclient
     template:
       - name: merge-check
-    check:
-      - noop
-    gate:
-      - noop
+      - name: noop-jobs
 
   - name: stackforge/python-rallyclient
     template:
@@ -4767,10 +4758,7 @@ projects:
   - name: stackforge/radar
     template:
       - name: merge-check
-    check:
-      - noop
-    gate:
-      - noop
+      - name: noop-jobs
 
   - name: stackforge/rally
     template:
@@ -5039,10 +5027,7 @@ projects:
   - name: stackforge/windows-diskimage-builder
     template:
       - name: merge-check
-    check:
-      - noop
-    gate:
-      - noop
+      - name: noop-jobs
 
   - name: stackforge/wsme
     template:
@@ -5090,10 +5075,7 @@ projects:
   - name: stackforge/namos
     template:
       - name: merge-check
-    check:
-      - noop
-    gate:
-      - noop
+      - name: noop-jobs
 
   - name: stackforge/stacktach
     template:
@@ -5181,18 +5163,12 @@ projects:
   - name: stackforge/xstatic-angular-animate
     template:
       - name: merge-check
-    check:
-      - noop
-    gate:
-      - noop
+      - name: noop-jobs
 
   - name: stackforge/xstatic-angular-bootstrap
     template:
       - name: merge-check
-    check:
-      - noop
-    gate:
-      - noop
+      - name: noop-jobs
 
   - name: stackforge/xstatic-angular-cookies
     template:
@@ -5207,10 +5183,7 @@ projects:
   - name: stackforge/xstatic-angular-sanitize
     template:
       - name: merge-check
-    check:
-      - noop
-    gate:
-      - noop
+      - name: noop-jobs
 
   - name: stackforge/xstatic-bootstrap-datepicker
     template:
@@ -5230,10 +5203,7 @@ projects:
   - name: stackforge/xstatic-font-awesome
     template:
       - name: merge-check
-    check:
-      - noop
-    gate:
-      - noop
+      - name: noop-jobs
 
   - name: stackforge/xstatic-hogan
     template:
@@ -5301,4 +5271,5 @@ projects:
 
   - name: stackforge/tuskar-ui-extras
     template:
+      - name: merge-check
       - name: noop-jobs
