@@ -53,6 +53,7 @@ def main():
     module = AnsibleModule(
         argument_spec=dict(
             timeout=dict(default="30m"),
+            puppetmaster=dict(required=True),
             show_diff=dict(
                 default=False, aliases=['show-diff'], type='bool'),
         ),
@@ -67,9 +68,11 @@ def main():
             msg="Could not find puppet. Please ensure it is installed.")
 
     cmd = ("timeout -s 9 %(timeout)s %(puppet_cmd)s agent --onetime"
+           " --server %(puppetmaster)s"
            " --ignorecache --no-daemonize --no-usecacheonfailure --no-splay"
            " --detailed-exitcodes --verbose") % dict(
-               timeout=pipes.quote(p['timeout']), puppet_cmd=PUPPET_CMD)
+               timeout=pipes.quote(p['timeout']), puppet_cmd=PUPPET_CMD,
+               puppetmaster=pipes.quote(p['puppetmaster']))
     if p['show_diff']:
         cmd += " --show-diff"
     rc, stdout, stderr = module.run_command(cmd)
