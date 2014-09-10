@@ -762,6 +762,8 @@ jobs:
     voting: false
   - name: ^(gate|check)-zaqar-python33
     branch: ^(?!stable/(havana|icehouse)).*$
+  - name: ^(gate|check)-zaqarclient-dsvm-functional$
+    voting: false
   - name: gate-horizon-jshint
     voting: false
   - name: gate-tempest-dsvm-ceilometer-mongodb
@@ -1649,11 +1651,13 @@ projects:
       - gate-python-zaqarclient-python26
       - gate-python-zaqarclient-python27
       - gate-python-zaqarclient-pypy
+      - check-zaqarclient-dsvm-functional
     gate:
       - gate-python-zaqarclient-pep8
       - gate-python-zaqarclient-python26
       - gate-python-zaqarclient-python27
       - gate-python-zaqarclient-pypy
+      - gate-zaqarclient-dsvm-functional
     post:
       - python-zaqarclient-branch-tarball
 
