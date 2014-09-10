@@ -5302,3 +5302,7 @@ projects:
   - name: stackforge/tuskar-ui-extras
     template:
       - name: noop-jobs
+
+  - name: stackforge/keystone-keystone
+    template:
+      - name: merge-check

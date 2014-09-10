@@ -1346,3 +1346,6 @@
   description: Spin JavaScript library packaged as XStatic.
   upstream: https://bitbucket.org/thesheep/xstatic-spin.git
   acl-config: /home/gerrit2/acls/stackforge/xstatic.config
+- project: stackforge/keystone-formula
+  description: Openstack Keystone Salt Formula
+  acl-config: /home/gerrit2/acls/stackforge/salt-formula.config
