@@ -57,6 +57,13 @@ NameVirtualHost <%= vhost_name %>:<%= port %>
      ReadmeName /help/tempest-logs.html
   </Directory>
 
+  # wsgi app for downloading tarball of log directory
+  <Directory /var/www/download_logs>
+      Order allow,deny
+      Allow from all
+  </Directory>
+  WSGIScriptAlias /download /var/www/download_logs/download_logs.wsgi
+
   RewriteEngine On
   # rewrite all txt.gz & html.gz files to map to our internal htmlify wsgi app
   # PT, Pass-through: to come back around and get picked up by the WSGIScriptAlias

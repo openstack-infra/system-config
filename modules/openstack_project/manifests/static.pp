@@ -176,6 +176,14 @@ class openstack_project::static (
     require     => File['/usr/local/sbin/log_archive_maintenance.sh'],
   }
 
+  file { '/var/www/download_logs/download_logs.wsgi':
+    ensure => present,
+    owner  => 'www-data',
+    group  => 'www-data',
+    mode   => '0755',
+    source => 'puppet:///modules/openstack_project/logs/download_logs.wsgi',
+  }
+
   ###########################################################
   # Docs-draft
 
