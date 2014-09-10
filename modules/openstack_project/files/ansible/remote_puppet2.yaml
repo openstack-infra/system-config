@@ -3,12 +3,12 @@
   gather_facts: false
   max_fail_percentage: 1
   roles:
-    - puppet
+    - { role: puppet, puppetmaster: ci-puppetmaster.openstack.org }
 - hosts: review.openstack.org
   gather_facts: false
   roles:
-    - puppet
+    - { role: puppet, puppetmaster: ci-puppetmaster.openstack.org }
 - hosts: "!review.openstack.org:!git0*"
   gather_facts: false
   roles:
-    - puppet
+    - { role: puppet, puppetmaster: ci-puppetmaster.openstack.org }
