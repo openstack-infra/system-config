@@ -4,6 +4,7 @@
   max_fail_percentage: 1
   roles:
     - puppet
+      #need to pass puppetmasterargument here.
 - hosts: review.openstack.org
   gather_facts: false
   roles:
