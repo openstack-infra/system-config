@@ -186,7 +186,6 @@ node 'puppetmaster.openstack.org' {
     update_slave => false,
     sysadmins    => hiera('sysadmins', []),
     version      => '3.6.',
-    ca_server    => 'ci-puppetmaster.openstack.org',
   }
 }
 
