@@ -157,8 +157,8 @@ def build_server(
         if volume:
             vobj = client.volumes.create_server_volume(
                 server.id, volume, None)
-        if not vobj:
-            raise Exception("Couldn't attach volume")
+            if not vobj:
+                raise Exception("Couldn't attach volume")
 
         bootstrap_server(server, admin_pass, key, cert, environment, name,
                          puppetmaster, volume)
