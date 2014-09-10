@@ -132,15 +132,6 @@ class openstack_project::base(
       replace => true,
     }
 
-    file { '/etc/apt/preferences.d/00-puppet.pref':
-      ensure  => present,
-      owner   => 'root',
-      group   => 'root',
-      mode    => '0444',
-      content => template('openstack_project/00-puppet.pref.erb'),
-      replace => true,
-    }
-
     file { '/etc/default/puppet':
       ensure  => present,
       owner   => 'root',
