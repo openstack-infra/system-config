@@ -1282,6 +1282,10 @@
   description: An notification event processing library based on persistent streams.
   acl-config: /home/gerrit2/acls/stackforge/stacktach.config
   upstream: https://github.com/stacktach/winchester.git
+- project: stackforge/stacktach-quincy
+  description: REST interface to StackTach.v3
+  acl-config: /home/gerrit2/acls/stackforge/stacktach.config
+  upstream: https://github.com/stacktach/quincy.git
 - project: stackforge/surveil
   description: Monitoring as a Service for OpenStack
 - project: stackforge/surveil-specs

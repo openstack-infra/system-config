@@ -5223,6 +5223,11 @@ projects:
       - name: merge-check
       - name: noop-jobs
 
+  - name: stackforge/stacktach-quincy
+    template:
+      - name: merge-check
+      - name: noop-jobs
+
   - name: stackforge/surveil
     template:
       - name: merge-check
