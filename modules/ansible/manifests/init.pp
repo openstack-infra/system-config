@@ -1,6 +1,8 @@
 # == Class: ansible
 #
-class ansible {
+class ansible (
+  $ansible_hostfile = '/usr/local/bin/puppet-inventory'
+) {
 
   include logrotate
   include pip
@@ -18,7 +20,10 @@ class ansible {
 
   file { '/etc/ansible/ansible.cfg':
     ensure  => present,
-    source  => 'puppet:///modules/ansible/ansible.cfg',
+    mode   => '0644',
+    owner  => 'root',
+    group  => 'root',
+    content => template('ansible/ansible.cfg.erb'),
     require => File['/etc/ansible'],
   }
 

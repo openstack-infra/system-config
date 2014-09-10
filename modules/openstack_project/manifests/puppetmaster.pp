@@ -9,7 +9,6 @@ class openstack_project::puppetmaster (
   $puppetdb = true,
   $puppetdb_server = 'puppetdb.openstack.org',
 ) {
-  include ansible
   include logrotate
   include openstack_project::params
 
@@ -18,6 +17,28 @@ class openstack_project::puppetmaster (
     sysadmins                 => $sysadmins,
     pin_puppet                => $version,
     ca_server                 => $ca_server,
+  }
+
+  if ($version == '2.7.'){
+    $ansible_hostfile_source = 'puppet:///modules/openstack_project/ansible/puppet2-hostfile'
+    $ansible_remote_puppet_source  => 'puppet:///modules/openstack_project/ansible/remote_puppet2.yaml'
+  }
+  else {
+    $ansible_hostfile_source = 'puppet:///modules/openstack_project/ansible/puppet3-hostfile'
+    $ansible_remote_puppet_source  => 'puppet:///modules/openstack_project/ansible/remote_puppet3.yaml'
+  }
+
+  class { 'ansible':
+    ansible_hostfile => '/etc/ansible/hostfile',
+  }
+
+  file { '/etc/ansible/hostfile':
+    ensure => present,
+    owner  => 'root',
+    group  => 'root',
+    mode   => '0644',
+    #source => $ansible_hostfile_source,
+    requre => Class['ansible'],
   }
 
   if ($update_slave) {
@@ -123,7 +144,7 @@ class openstack_project::puppetmaster (
 #
   file { '/etc/ansible/remote_puppet.yaml':
     ensure  => present,
-    source  => 'puppet:///modules/openstack_project/ansible/remote_puppet.yaml',
+    source  => $ansible_remote_puppet_source,
     require => Class[ansible],
   }
 
