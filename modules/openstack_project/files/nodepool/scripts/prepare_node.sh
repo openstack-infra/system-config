@@ -147,6 +147,11 @@ sudo rm -f /etc/cron.{monthly,weekly,daily,hourly,d}/*
 # This is in /usr instead of /usr/local due to this bug on precise:
 # https://bugs.launchpad.net/ubuntu/+source/python2.7/+bug/839588
 git clone /opt/git/openstack-infra/zuul /tmp/zuul
+# Install libxslt-devel on Fedora, its not on the default cloud image
+# and required to build lxml.
+if [ -f /usr/bin/yum ]; then
+    sudo yum -y install libxslt-devel
+fi
 sudo virtualenv /usr/zuul-env
 sudo /usr/zuul-env/bin/pip install /tmp/zuul
 sudo rm -fr /tmp/zuul
