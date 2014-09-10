@@ -847,6 +847,9 @@
 - project: stackforge/inception
   description: Inception Cloud Project
   upstream: git://github.com/maoy/inception.git
+- project: stackforge/keystone-formula
+  description: Openstack Keystone Salt Formula
+  acl-config: /home/gerrit2/acls/stackforge/salt-formula.config
 - project: stackforge/kickstack
   description: Rapid OpenStack deployment with puppet-dashboard, The Foreman, or any other Puppet ENC
   upstream: git://github.com/hastexo/kickstack
