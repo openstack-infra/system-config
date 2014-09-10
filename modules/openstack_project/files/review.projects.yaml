@@ -1219,6 +1219,9 @@
 - project: stackforge/stacktach
   description: Event-based Debugging, Monitoring and Billing solution for OpenStack.
   upstream: https://github.com/rackerlabs/stacktach.git
+- project: stackforge/stacktach-quincy
+  description: REST interface to StackTach.v3
+  upstream: https://github.com/stacktach/quincy.git
 - project: stackforge/surveil
   description: Monitoring as a Service for OpenStack
 - project: stackforge/surveil-specs

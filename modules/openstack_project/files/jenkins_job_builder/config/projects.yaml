@@ -2928,6 +2928,11 @@
       - python-jobs
 
 - project:
+    name: stacktach-quincy
+    node: 'bare-precise || bare-trusty'
+    tarball-site: tarballs.openstack.org
+
+- project:
     name: bashate
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
