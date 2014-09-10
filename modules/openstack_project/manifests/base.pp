@@ -3,7 +3,7 @@
 class openstack_project::base(
   $certname              = $::fqdn,
   $install_users         = true,
-  $pin_puppet            = '2.7.',
+  $pin_puppet            = '3.',
   $ca_server             = undef,
 ) {
   if ($::osfamily == 'Debian') {
@@ -129,6 +129,15 @@ class openstack_project::base(
       group   => 'root',
       mode    => '0444',
       source  => 'puppet:///modules/openstack_project/80retry',
+      replace => true,
+    }
+
+    file { '/etc/apt/preferences.d/00-puppet.pref':
+      ensure  => present,
+      owner   => 'root',
+      group   => 'root',
+      mode    => '0444',
+      content => template('openstack_project/00-puppet.pref.erb'),
       replace => true,
     }
 
