@@ -5199,6 +5199,11 @@ projects:
       - name: merge-check
       - name: noop-jobs
 
+  - name: stackforge/stacktach-quince
+    template:
+      - name: merge-check
+      - name: noop-jobs
+
   - name: stackforge/stacktach-shoebox
     template:
       - name: merge-check

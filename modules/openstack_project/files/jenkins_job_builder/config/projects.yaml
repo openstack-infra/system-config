@@ -3051,6 +3051,11 @@
     tarball-site: tarballs.openstack.org
 
 - project:
+    name: stacktach-quince
+    node: 'bare-precise || bare-trusty'
+    tarball-site: tarballs.openstack.org
+
+- project:
     name: stacktach-shoebox
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
