@@ -2471,6 +2471,9 @@ projects:
       - check-tempest-master-dsvm-full-havana
       - check-tempest-master-dsvm-neutron-havana
       - check-tempest-dsvm-f20
+      # verify non-isolated on experimental as well
+      - check-tempest-dsvm-full-non-isolated-master
+      - check-tempest-dsvm-neutron-full-non-isolated-master
     experimental-tripleo:
       - check-tripleo-novabm-undercloud-precise-nonha
       - check-tripleo-ironic-undercloud-precise-nonha
