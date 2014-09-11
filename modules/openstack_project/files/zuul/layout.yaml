@@ -5224,6 +5224,11 @@ projects:
       - name: merge-check
       - name: noop-jobs
 
+  - name: stackforge/stacktach-timex
+    template:
+      - name: merge-check
+      - name: noop-jobs
+
   - name: stackforge/surveil
     template:
       - name: merge-check
