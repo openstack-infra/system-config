@@ -2469,9 +2469,6 @@ projects:
       - gate-tempest-dsvm-ceilometer-mongodb-full
       - check-tempest-dsvm-full-non-isolated
       - check-tempest-dsvm-neutron-full-non-isolated
-      # havana compat jobs for tempest master (non voting)
-      - check-tempest-master-dsvm-full-havana
-      - check-tempest-master-dsvm-neutron-havana
       - check-tempest-dsvm-f20
     experimental-tripleo:
       - check-tripleo-novabm-undercloud-precise-nonha
