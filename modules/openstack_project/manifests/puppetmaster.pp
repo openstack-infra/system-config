@@ -24,6 +24,26 @@ class openstack_project::puppetmaster (
   }
   else {
     $ansible_remote_puppet_source = 'puppet:///modules/openstack_project/ansible/remote_puppet3.yaml'
+
+    file {'/etc/puppet/environments':
+      ensure => directory,
+      owner  => 'root',
+      group  => 'root',
+      mode   => '0755',
+    }
+    file {'/etc/puppet/environments/production':
+      ensure => directory,
+      owner  => 'root',
+      group  => 'root',
+      mode   => '0755',
+    }
+    file {'/etc/puppet/environments/production/environment.conf':
+      ensure => file,
+      owner  => 'root',
+      group  => 'root',
+      mode   => '0644',
+      source => 'puppet:///modules/openstack_project/puppetmaster/production_environment.conf',
+    }
   }
 
   class { 'ansible':
