@@ -172,6 +172,26 @@ Change-Id: $change_id
 EOF
         set -e
     fi
+    # If the open change an already approved, let's not queue a new
+    # patch but let's merge the other patch first.
+    # This solves the problem that when the gate pipeline backup
+    # reaches roughly a day, no matter how quickly you approve the new
+    # update it will always get sniped out of the gate by another.
+    # It also helps, when you approve close to the time this job is
+    # run.
+    # Let's check for Workflow approval, no -2 votes and no -1 by
+    # Jenkins and no WIP.
+    if [ "x${previous}" != "x" ] ; then
+        # Use the JSON format since it is very compact and easy to grep
+        change_info=`ssh -p 29418 proposal-bot@review.openstack.org gerrit query --current-patch-set --format=JSON $change_id`
+        if [ `echo $change_info|grep '{"type":"Workflow","description":"Workflow","value":"1"'`
+            -a ! `echo $change_info|grep '{"type":"Verified","description":"Verified","value":"1","grantedOn":[0-9]*,"by":{"name":"Jenkins","username":"jenkins"}}'`
+            -a `echo $change_info|grep '{"type":"Code-Review","description":"Code-Review","value":"-2"'`
+            -a `echo $change_info|grep '{"type":"Workflow","description":"Workflow","value":"-1"'`] ; then
+            echo "Job already approved, exiting"
+            exit 0
+        fi
+    fi
 }
 
 # Propose patch using COMMIT_MSG
