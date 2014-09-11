@@ -145,9 +145,10 @@
           function post_test_hook {
               cd $BASE/new/rally
               sudo -H -u stack tox -ecli -v
+              EXIT_CODE=$?
               .tox/cli/bin/python /usr/local/jenkins/slave_scripts/subunit2html.py .testrepository/subunit.log $WORKSPACE/results.html
               gzip -9 $WORKSPACE/results.html
-              .tox/cli/bin/subunit-stats .testrepository/subunit.log
+              return $EXIT_CODE
           }
           export -f pre_test_hook
           export -f post_test_hook
