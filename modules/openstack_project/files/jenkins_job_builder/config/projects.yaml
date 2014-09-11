@@ -3041,6 +3041,11 @@
       - python-jobs
 
 - project:
+    name: stacktach-notigen
+    node: 'bare-precise || bare-trusty'
+    tarball-site: tarballs.openstack.org
+
+- project:
     name: stacktach-shoebox
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
