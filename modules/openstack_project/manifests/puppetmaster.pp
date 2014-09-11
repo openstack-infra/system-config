@@ -24,6 +24,17 @@ class openstack_project::puppetmaster (
   }
   else {
     $ansible_remote_puppet_source = 'puppet:///modules/openstack_project/ansible/remote_puppet3.yaml'
+
+    file {'/etc/puppet/environments':
+      ensure => directory,
+    }
+    file {'/etc/puppet/environments/production':
+      ensure => directory,
+    }
+    file {'/etc/puppet/environments/production/environment.conf':
+      ensure => file,
+      source => 'puppet:///modules/openstack_project/puppetmaster/production_environment.conf',
+    }
   }
 
   class { 'ansible':
