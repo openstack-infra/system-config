@@ -128,11 +128,12 @@
     builders:
       - shell: |
           #!/bin/bash -x
+          # Set 1.9.1 ruby and gem as default
           sudo update-alternatives --install /usr/bin/ruby ruby /usr/bin/ruby1.9.1 20
           sudo update-alternatives --set ruby /usr/bin/ruby1.9.1
           sudo update-alternatives --install /usr/bin/gem gem /usr/bin/gem1.9.1 10
           sudo update-alternatives --set gem /usr/bin/gem1.9.1
-          sudo gem update --no-rdoc --no-ri
+          gem install bundler --no-rdoc --no-ri --verbose
 
 - builder:
     name: chef-bundler-prep
@@ -143,7 +144,8 @@
           grep -E .*berkshelf.*3\.\d*\.\d*.* Gemfile
           if [ $? -eq 0 ]; then
             # For Berkshelf 3.x use the system gecode 3.x libraries
-            sudo apt-get install -y libgecode-dev
+            sudo apt-get update
+            sudo apt-get install -y libgecode-dev libxml2-dev libxml2 libxslt-dev build-essential
             USE_SYSTEM_GECODE=1 bundle install --path=.bundle --jobs 1 --retry 3 --verbose
           else
             bundle install --path=.bundle --jobs 1 --retry 3 --verbose
