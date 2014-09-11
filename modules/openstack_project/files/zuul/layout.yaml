@@ -5208,6 +5208,11 @@ projects:
       - name: merge-check
       - name: noop-jobs
 
+  - name: stackforge/stacktach-stackdistiller
+    template:
+      - name: merge-check
+      - name: noop-jobs
+
   - name: stackforge/surveil
     template:
       - name: merge-check
