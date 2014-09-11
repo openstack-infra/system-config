@@ -2,7 +2,6 @@
 #
 class openstack_project::puppetmaster (
   $root_rsa_key,
-  $update_slave = true,
   $sysadmins = [],
   $version   = '2.7.',
   $ca_server = undef,
@@ -38,30 +37,25 @@ class openstack_project::puppetmaster (
     require => Class['ansible'],
   }
 
-  if ($update_slave) {
-    $cron_command = 'bash /opt/config/production/run_all.sh'
-    logrotate::file { 'updatepuppetmaster':
-      ensure  => present,
-      log     => '/var/log/puppet_run_all.log',
-      options => ['compress',
-        'copytruncate',
-        'delaycompress',
-        'missingok',
-        'rotate 7',
-        'daily',
-        'notifempty',
-      ],
-      require => Cron['updatepuppetmaster'],
-    }
-  } else {
-    $cron_command = 'sleep $((RANDOM\%600)) && cd /opt/config/production && git fetch -q && git reset -q --hard @{u} && ./install_modules.sh && touch manifests/site.pp'
-  }
-
   cron { 'updatepuppetmaster':
     user        => 'root',
     minute      => '*/15',
-    command     => $cron_command,
+    command     => 'bash /opt/config/production/run_all.sh',
     environment => 'PATH=/var/lib/gems/1.8/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin',
+  }
+
+  logrotate::file { 'updatepuppetmaster':
+    ensure  => present,
+    log     => '/var/log/puppet_run_all.log',
+    options => ['compress',
+      'copytruncate',
+      'delaycompress',
+      'missingok',
+      'rotate 7',
+      'daily',
+      'notifempty',
+    ],
+    require => Cron['updatepuppetmaster'],
   }
 
   cron { 'deleteoldreports':
