@@ -30,6 +30,10 @@ options:
       - How long to wait for I(puppet) to finish.
     required: false
     default: 30m
+  puppetmaster:
+    description:
+      - The hostname of the puppetmaster to contact.
+    required: true
   show_diff:
     description:
       - Should puppet return diffs of changes applied. Defaults to off to avoid leaking secret changes by default.
