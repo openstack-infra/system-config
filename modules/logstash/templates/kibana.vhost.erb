@@ -9,7 +9,7 @@
     CustomLog ${APACHE_LOG_DIR}/<%= scope.lookupvar("::logstash::web::vhost_name") %>-access.log combined
 
     <IfModule mod_proxy.c>
-        <% if proxy_elasticsearch == true %>
+        <% if @proxy_elasticsearch == true %>
         # Proxy GETs for elasticsearch _aliases, .*/_status, .*/_search,
         # .*/_mapping, _cluster/health, and _nodes.
         RewriteEngine on
