@@ -636,6 +636,16 @@ syscompass:
     branches:
       - master
 
+tricircle:
+    events:
+      - patchset-created
+      - change-merged
+      - x-vrif-minus-2
+    projects:
+      - stackforge/tricircle
+    branches:
+      - master
+
 openstack-keystone:
     events:
       - change-merged
