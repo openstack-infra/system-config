@@ -965,6 +965,7 @@
   upstream: git://github.com/tmetsch/occi-os.git
 - project: stackforge/octavia
   description: An operator-grade reference implementation for Load Balancing as a Service (LBaaS)
+  use-storyboard: true
 - project: stackforge/opencafe
   upstream: https://github.com/samu4924/opencafe
   description: Common Automation Framework Engine. Core driver for CloudCAFE
