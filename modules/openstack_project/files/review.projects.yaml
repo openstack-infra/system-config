@@ -1262,6 +1262,10 @@
   description: Cmdline tool and client library for StackTach.v3
   acl-config: /home/gerrit2/acls/stackforge/stacktach.config
   upstream: https://github.com/stacktach/klugman.git
+- project: stackforge/stacktach-quince
+  description: Quincy-compliant API implemenation for StackTach.v3. Works with Winchester.
+  acl-config: /home/gerrit2/acls/stackforge/stacktach.config
+  upstream: https://github.com/stacktach/quince.git
 - project: stackforge/surveil
   description: Monitoring as a Service for OpenStack
 - project: stackforge/surveil-specs

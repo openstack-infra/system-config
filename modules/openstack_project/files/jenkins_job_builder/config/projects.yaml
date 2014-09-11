@@ -3049,6 +3049,11 @@
     tarball-site: tarballs.openstack.org
 
 - project:
+    name: stacktach-quince
+    node: 'bare-precise || bare-trusty'
+    tarball-site: tarballs.openstack.org
+
+- project:
     name: bashate
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
