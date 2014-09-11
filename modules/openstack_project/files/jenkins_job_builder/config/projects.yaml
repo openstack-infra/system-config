@@ -3039,6 +3039,11 @@
     tarball-site: tarballs.openstack.org
 
 - project:
+    name: stacktach-notigen
+    node: 'bare-precise || bare-trusty'
+    tarball-site: tarballs.openstack.org
+
+- project:
     name: bashate
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
