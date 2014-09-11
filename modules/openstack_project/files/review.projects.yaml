@@ -435,6 +435,10 @@
 - project: openstack/python-ironicclient
   description: A python client implementing the Ironic API.
 - project: openstack/python-keystoneclient
+- project: openstack/python-keystoneclient-federation
+  description: Federation authentication plugins for OpenStack clients.
+  acl-config: /home/gerrit2/acls/openstack/python-keystoneclient.config
+  upstream: git://github.com/jamielennox/python-keystoneclient-federation.git
 - project: openstack/python-keystoneclient-kerberos
   description: Kerberos authentication plugins for OpenStack clients.
   acl-config: /home/gerrit2/acls/openstack/python-keystoneclient.config
