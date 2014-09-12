@@ -47,6 +47,12 @@ class jenkins::slave(
           package { $::jenkins::params::zookeeper_package:
               ensure => present,
           }
+          package { $::jenkins::params::redis_package:
+            ensure => present,
+          }
+          package { $::jenkins::params::memcached_package:
+            ensure => present,
+          }
           # Fedora needs community-mysql package for mysql_config
           # command used in some gate-{project}-python27
           # jobs in Jenkins
@@ -88,6 +94,14 @@ class jenkins::slave(
 
       # For [tooz, taskflow, nova] using zookeeper in unit tests
       package { $::jenkins::params::zookeeper_package:
+        ensure => present,
+      }
+
+      package { $::jenkins::params::redis_package:
+        ensure => present,
+      }
+
+      package { $::jenkins::params::memcached_package:
         ensure => present,
       }
 
