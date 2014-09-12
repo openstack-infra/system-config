@@ -27,6 +27,10 @@ class jenkins::params {
         # mariadb packages.
         $mysql_dev_package = 'community-mysql-devel'
         $zookeeper_package = 'zookeeper'
+        # For tooz unit tests
+        $memcached_package = 'memcached'
+        # For [tooz, ceilometer] unit tests
+        $redis_package = 'redis'
         $mysql_package = 'community-mysql'
         $cgroups_tools_package = 'libcgroup-tools'
         $cgconfig_require = [
@@ -53,6 +57,8 @@ class jenkins::params {
       $maven_package = 'maven2'
       # For tooz unit tests
       $memcached_package = 'memcached'
+      # For [tooz, ceilometer] unit tests
+      $redis_package = 'redis-server'
       $ruby1_9_1_package = 'ruby1.9.1'
       $ruby1_9_1_dev_package = 'ruby1.9.1-dev'
       $php5_mcrypt_package = 'php5-mcrypt'
