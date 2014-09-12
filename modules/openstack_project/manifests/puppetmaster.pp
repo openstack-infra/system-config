@@ -115,6 +115,17 @@ class openstack_project::puppetmaster (
     ensure => present,
   }
 
+# To set LANG to utf8, otherwise we get charset errors on manifests
+# with non-ascii chars
+  file { '/etc/apache2/envvars':
+    ensure  => present,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0444',
+    source  => 'puppet:///modules/openstack_project/puppetmaster/envvars.debian',
+    require => Package['puppetmaster-passenger'],
+  }
+
 # For launch/launch-node.py.
   package { ['python-cinderclient', 'python-novaclient']:
     ensure   => latest,
