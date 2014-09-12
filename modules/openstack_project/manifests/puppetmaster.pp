@@ -124,6 +124,11 @@ class openstack_project::puppetmaster (
     mode   => '0750',
     }
 
+# For puppet master apache serving.
+  package { 'puppetmaster-passenger':
+    ensure => present,
+  }
+
 # For launch/launch-node.py.
   package { ['python-cinderclient', 'python-novaclient']:
     ensure   => latest,
