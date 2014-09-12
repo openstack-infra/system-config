@@ -1288,6 +1288,10 @@
   description: A time expressions library implementing a mini-language for manipulating datetimes.
   acl-config: /home/gerrit2/acls/stackforge/stacktach.config
   upstream: https://github.com/stacktach/timex.git
+- project: stackforge/stacktach-winchester
+  description: An notification event processing library based on persistent streams.
+  acl-config: /home/gerrit2/acls/stackforge/stacktach.config
+  upstream: https://github.com/stacktach/winchester.git
 - project: stackforge/surveil
   description: Monitoring as a Service for OpenStack
 - project: stackforge/surveil-specs
