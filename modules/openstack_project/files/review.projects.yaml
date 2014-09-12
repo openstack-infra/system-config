@@ -1260,6 +1260,10 @@
   description: Cmdline tool and client library for StackTach.v3
   acl-config: /home/gerrit2/acls/stackforge/stacktach.config
   upstream: https://github.com/stacktach/klugman.git
+- project: stackforge/stacktach-notification-utils
+  description: Utility library for working with Openstack notifications.
+  acl-config: /home/gerrit2/acls/stackforge/stacktach.config
+  upstream: https://github.com/stacktach/notification_utils.git
 - project: stackforge/stacktach-notigen
   description: OpenStack-like notification generator/simulator.
   acl-config: /home/gerrit2/acls/stackforge/stacktach.config
