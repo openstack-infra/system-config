@@ -2,6 +2,7 @@
 #
 class etherpad_lite::apache (
   $vhost_name = $::fqdn,
+  $serveradmin = "webmaster@${::fqdn}",
   $ssl_cert_file = '',
   $ssl_key_file = '',
   $ssl_chain_file = '',
