@@ -10,7 +10,6 @@ class openstack_project::slave (
 ) {
 
   include openstack_project
-  include openstack_project::automatic_upgrades
   include openstack_project::tmpcleanup
 
   class { 'openstack_project::server':
