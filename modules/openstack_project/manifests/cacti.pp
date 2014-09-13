@@ -73,7 +73,6 @@ class openstack_project::cacti (
   $cacti_hosts = [
     # community is currently not running puppet.
     #'community.openstack.org',
-    'ci-puppetmaster.openstack.org',
     'eavesdrop.openstack.org',
     'elasticsearch01.openstack.org',
     'elasticsearch02.openstack.org',
@@ -127,6 +126,7 @@ class openstack_project::cacti (
     'pbx.openstack.org',
     'planet.openstack.org',
     'puppetdb.openstack.org',
+    'puppetmaster.openstack.org',
     'pypi.openstack.org',
     'review.openstack.org',
     'review-dev.openstack.org',
