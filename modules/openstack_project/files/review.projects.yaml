@@ -345,6 +345,12 @@
   description: OpenStack Operations Guide
   options:
     - direct-release
+- project: openstack/ha-guide
+  group: openstack-manuals
+  upstream: git://github.com/annegentle/ha-guide
+  description: OpenStack High Availability Guide
+  options:
+    - direct-release
 - project: openstack/os-apply-config
   description: Apply configuration from cloud metadata.
 - project: openstack/os-cloud-config
