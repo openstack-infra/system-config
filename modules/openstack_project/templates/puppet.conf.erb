@@ -28,6 +28,8 @@ modulepath=/opt/config/$environment/modules:/etc/puppet/modules
 manifest=$manifestdir/site.pp
 <% end -%>
 reports=store,puppetdb
+storeconfigs=true
+storeconfigs_backend=puppetdb
 <% if @ca_server -%>
 ca = false
 ca_server = <%= @ca_server %>
