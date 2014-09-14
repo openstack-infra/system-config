@@ -78,6 +78,7 @@ openstack-doc:
       - openstack/api-site
       - openstack/compute-api
       - openstack/docs-specs
+      - openstack/ha-guide
       - openstack/identity-api
       - openstack/image-api
       - openstack/netconn-api

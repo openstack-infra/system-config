@@ -2580,6 +2580,14 @@
       - specs-jobs
 
 - project:
+    name: ha-guide
+    node: 'bare-precise || bare-trusty'
+
+    jobs:
+      - openstack-doc-jobs
+      - manual-translation-jobs
+
+- project:
     name: operations-guide
     node: 'bare-precise || bare-trusty'
 
