@@ -139,11 +139,11 @@ function setup_puppet_ubuntu {
     # NB: keep in sync with openstack_project/files/00-puppet.pref
     if [ "$THREE" == 'yes' ]; then
         PUPPET_VERSION=3.*
-        PUPPETDB_TERMINUS_VERSION=2.*
+        PUPPETDB_VERSION=2.*
         FACTER_VERSION=2.*
     else
         PUPPET_VERSION=2.7*
-        PUPPETDB_TERMINUS_VERSION=1.*
+        PUPPETDB_VERSION=1.*
         FACTER_VERSION=1.*
     fi
 
@@ -152,8 +152,8 @@ Package: puppet puppet-common puppetmaster puppetmaster-common puppetmaster-pass
 Pin: version $PUPPET_VERSION
 Pin-Priority: 501
 
-Package: puppetdb-terminus
-Pin: version $PUPPETDB_TERMINUS_VERSION
+Package: puppetdb puppetdb-terminus
+Pin: version $PUPPETDB_VERSION
 Pin-Priority: 501
 
 Package: facter

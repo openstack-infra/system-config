@@ -16,11 +16,11 @@ class openstack_project::base(
   case $pin_puppet {
     '2.7.': {
       $pin_facter = '1.'
-      $pin_puppetdb_terminus = '1.'
+      $pin_puppetdb = '1.'
     }
     /^3\./: {
       $pin_facter = '2.'
-      $pin_puppetdb_terminus = '2.'
+      $pin_puppetdb = '2.'
     }
     default: {
       fail("Puppet version not supported")
