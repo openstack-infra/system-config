@@ -31,6 +31,7 @@ openstack-infra:
       - openstack-infra/nose-html-output
       - openstack-infra/odsreg
       - openstack-infra/os-loganalyze
+      - openstack-infra/project-config
       - openstack-infra/publications
       - openstack-infra/puppet-apparmor
       - openstack-infra/puppet-dashboard
@@ -750,6 +751,7 @@ openstack-merges:
       - openstack-infra/odsreg
       - openstack-infra/openstackid
       - openstack-infra/os-loganalyze
+      - openstack-infra/project-config
       - openstack-infra/publications
       - openstack-infra/puppet-apparmor
       - openstack-infra/puppet-dashboard
