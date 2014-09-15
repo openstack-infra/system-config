@@ -2936,26 +2936,24 @@ projects:
       - gate-config-pep8
       - gate-config-bashate
       - gate-config-puppet-syntax
-      - gate-config-puppet-apply-precise
-      - gate-config-puppet-apply-centos6
       - gate-config-irc-access
       - gate-config-projects-yaml
       - gate-ci-docs
+      - gate-infra-puppet-apply-precise
+      - gate-infra-puppet-apply-centos6
     gate:
       - gate-config-layout
       - gate-config-pep8
       - gate-config-puppet-syntax
-      - gate-config-puppet-apply-precise
-      - gate-config-puppet-apply-centos6
       - gate-config-irc-access
       - gate-config-projects-yaml
       - gate-ci-docs
+      - gate-infra-puppet-apply-precise
+      - gate-infra-puppet-apply-centos6
     post:
       - ci-docs
     experimental:
       - experimental-swift-logs-config-pep8
-      - gate-infra-puppet-apply-precise
-      - gate-infra-puppet-apply-centos6
 
   - name: openstack-infra/devstack-gate
     template:
@@ -3235,11 +3233,15 @@ projects:
     template:
       - name: merge-check
     check:
-      - gate-config-puppet-lint
-      - gate-config-puppet-syntax
+      - gate-puppet-storyboard-puppet-lint
+      - gate-puppet-storyboard-puppet-syntax
+      - gate-infra-puppet-apply-precise
+      - gate-infra-puppet-apply-centos6
     gate:
-      - gate-config-puppet-lint
-      - gate-config-puppet-syntax
+      - gate-puppet-storyboard-puppet-lint
+      - gate-puppet-storyboard-puppet-syntax
+      - gate-infra-puppet-apply-precise
+      - gate-infra-puppet-apply-centos6
 
   - name: openstack-infra/puppet-vinz
     template:
