@@ -1,4 +1,4 @@
-#!/bin/bash -e
+#!/bin/bash -ex
 
 ROOT=$(readlink -fn $(dirname $0))
 MODULE_PATH="${ROOT}/modules:/etc/puppet/modules"
@@ -43,6 +43,8 @@ sudo mv /tmp/hosts /etc/hosts
 
 sudo mkdir -p /var/run/puppet
 sudo bash -x ./install_modules.sh
+echo "Running apply test on these hosts:"
+find applytest -name 'puppetapplytest*.final' -print0
 find applytest -name 'puppetapplytest*.final' -print0 | \
     xargs -0 -P $(nproc) -n 1 -I filearg \
         sudo puppet apply --modulepath=${MODULE_PATH} --noop --verbose --debug filearg > /dev/null
