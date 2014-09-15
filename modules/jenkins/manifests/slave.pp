@@ -4,6 +4,7 @@ class jenkins::slave(
   $ssh_key = '',
   $user = true,
   $python3 = false,
+  $maven_settings_xml_source = undef,
 ) {
 
   include pip
@@ -169,5 +170,16 @@ class jenkins::slave(
   service { 'haveged':
     enable  => true,
     require => Package[$::jenkins::params::haveged_package],
+  }
+
+  if ($maven_settings_xml_source) {
+    file { $::jenkins::params::maven_settings_file_path:
+      ensure  => file,
+      owner   => 'root',
+      group   => 'root',
+      mode    => '0644',
+      require => Package[$::jenkins::params::maven_package],
+      source  => $maven_settings_xml_source,
+    }
   }
 }

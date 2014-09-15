@@ -37,6 +37,12 @@ class jenkins::params {
       $python_netaddr_package = 'python-netaddr'
       $haveged_package = 'haveged'
       $maven_package = 'maven2'
+      $maven_settings_file_path = $maven_package ? {
+        'maven'  => '/etc/maven/settings.xml',
+        'maven2' => '/etc/maven2/settings.xml',
+      }
+      # For tooz unit tests
+      $memcached_package = 'memcached'
       $ruby1_9_1_package = 'ruby1.9.1'
       $ruby1_9_1_dev_package = 'ruby1.9.1-dev'
       $cgroups_package = 'cgroup-bin'
