@@ -2619,6 +2619,15 @@ projects:
       - gate-trove-buildimage-mysql
       - gate-trove-functional-dsvm-mysql
 
+  - name: openstack/trove-specs
+    template:
+      - name: merge-check
+      - name: openstack-specs-jobs
+    check:
+      - gate-trove-specs-python27
+    gate:
+      - gate-trove-specs-python27
+
 # TODO: add docs
   - name: openstack/tuskar-ui
     template:
