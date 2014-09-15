@@ -172,14 +172,6 @@ node 'community.openstack.org' {
 }
 
 # Node-OS: precise
-node 'ci-puppetmaster.openstack.org' {
-  class { 'openstack_project::puppetmaster':
-    root_rsa_key    => hiera('puppetmaster_root_rsa_key', 'XXX'),
-    sysadmins       => hiera('sysadmins', []),
-  }
-}
-
-# Node-OS: precise
 node 'puppetmaster.openstack.org' {
   class { 'openstack_project::puppetmaster':
     root_rsa_key => hiera('puppetmaster_root_rsa_key', 'XXX'),
