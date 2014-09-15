@@ -516,6 +516,9 @@
   upstream: git://github.com/derekhiggins/tripleo-specs.git
 - project: openstack/trove
 - project: openstack/trove-integration
+- project: openstack/trove-specs
+  description: Design Specifications for the Trove project
+  upstream: git://github.com/SlickNik/trove-specs.git
 - project: openstack/tuskar
   description: A service for managing OpenStack deployments
   upstream: git://github.com/tuskar/tuskar.git

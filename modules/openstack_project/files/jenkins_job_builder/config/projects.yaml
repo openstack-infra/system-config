@@ -1345,6 +1345,14 @@
           datastore: 'mongodb'
 
 - project:
+    name: trove-specs
+    node: 'bare-precise || bare-trusty'
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - specs-jobs
+
+- project:
     name: python-troveclient
     tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
