@@ -86,8 +86,5 @@ Subsystem sftp <%= scope.lookupvar('::ssh::params::sftp_path') %>
 UsePAM yes
 
 # allow ansible connections from puppetmaster host
-Match host ci-puppetmaster.openstack.org
-    PermitRootLogin without-password
-
 Match host puppetmaster.openstack.org
     PermitRootLogin without-password
