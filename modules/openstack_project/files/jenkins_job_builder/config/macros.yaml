@@ -133,7 +133,7 @@
           sudo update-alternatives --set ruby /usr/bin/ruby1.9.1
           sudo update-alternatives --install /usr/bin/gem gem /usr/bin/gem1.9.1 10
           sudo update-alternatives --set gem /usr/bin/gem1.9.1
-          gem install bundler --no-rdoc --no-ri --verbose
+          sudo gem install bundler --no-rdoc --no-ri --verbose
 
 - builder:
     name: chef-bundler-prep
