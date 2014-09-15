@@ -1172,20 +1172,17 @@ projects:
       - name: python-jobs
       - name: check-requirements
       - name: translation-jobs
+      - name: openstack-server-publish-jobs
+      - name: pypy-jobs
     check:
       - check-tempest-dsvm-zaqar
       - gate-zaqar-python33
-      - gate-zaqar-pypy
     gate:
       - gate-tempest-dsvm-zaqar
-      - gate-zaqar-pypy
-    post:
-      - zaqar-branch-tarball
     pre-release:
       - zaqar-tarball
     release:
       - zaqar-tarball
-      - zaqar-docs
 
   - name: openstack/zaqar-specs
     template:
@@ -1644,16 +1641,15 @@ projects:
       - name: python3-jobs
       - name: check-requirements
       - name: publish-to-pypi
+      - name: pypy-jobs
     check:
       - gate-python-zaqarclient-pep8
       - gate-python-zaqarclient-python26
       - gate-python-zaqarclient-python27
-      - gate-python-zaqarclient-pypy
     gate:
       - gate-python-zaqarclient-pep8
       - gate-python-zaqarclient-python26
       - gate-python-zaqarclient-python27
-      - gate-python-zaqarclient-pypy
     post:
       - python-zaqarclient-branch-tarball
 
