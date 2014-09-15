@@ -6,7 +6,7 @@ rundir=/var/run/puppet
 <% if @puppet_version.to_f < 3.6 -%>
 factpath=$vardir/lib/facter
 templatedir=$confdir/templates
-server=ci-puppetmaster.openstack.org
+server=puppetmaster.openstack.org
 certname=<%= @certname %>
 pluginsync=true
 <% end %>
