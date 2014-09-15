@@ -7,7 +7,7 @@ class openstack_project::template (
   $iptables_public_udp_ports = [],
   $iptables_rules4           = [],
   $iptables_rules6           = [],
-  $pin_puppet                = '2.7.',
+  $pin_puppet                = '3.',
   $install_users             = true,
   $install_resolv_conf       = true,
   $automatic_upgrades        = true,

@@ -16,14 +16,8 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 
-#
-# Distro identification functions
-#  note, can't rely on lsb_release for these as we're bare-bones and
-#  it may not be installed yet)
-
-#
 # Test condition to install puppet 3
-PUPPET_VERSION=${PUPPET_VERSION:-2}
+PUPPET_VERSION=${PUPPET_VERSION:-3}
 if [ "$PUPPET_VERSION" = '3' ]; then
     THREE=yes
     echo "Running in 3 mode"
@@ -144,7 +138,7 @@ function setup_puppet_ubuntu {
 
     # NB: keep in sync with openstack_project/files/00-puppet.pref
     if [ "$THREE" == 'yes' ]; then
-        PUPPET_VERSION=3.6.*
+        PUPPET_VERSION=3.*
         PUPPETDB_TERMINUS_VERSION=2.*
         FACTER_VERSION=2.*
     else

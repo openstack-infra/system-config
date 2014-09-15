@@ -3,7 +3,7 @@
 class openstack_project::puppetmaster (
   $root_rsa_key,
   $sysadmins = [],
-  $version   = '2.7.',
+  $version   = '3.',
   $ca_server = undef,
   $puppetdb = true,
   $puppetdb_server = 'puppetdb.openstack.org',
