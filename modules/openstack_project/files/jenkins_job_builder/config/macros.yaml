@@ -119,11 +119,6 @@
           done
 
 - builder:
-    name: puppet-apply
-    builders:
-      - shell: "./test.sh"
-
-- builder:
     name: ruby-191-prep
     builders:
       - shell: |
