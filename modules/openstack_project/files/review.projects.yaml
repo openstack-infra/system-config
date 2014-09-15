@@ -147,6 +147,9 @@
   group: openstack-ci
   description: log analyzer tools for logs.openstack.org
   upstream: git://github.com/sdague/os_loganalyze.git
+- project: openstack-infra/project-config
+  group: openstack-ci
+  description: configuration of infrastruture
 - project: openstack-infra/publications
   group: openstack-ci
   description: OpenStack Infra Team conference presentations and papers
