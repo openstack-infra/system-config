@@ -1,0 +1,12 @@
+Verified+2: Jenkins
+Code-Review+2: Clark Boylan <cboylan@sapwetik.org>
+Code-Review+1: Anita Kuno <anteaya@anteaya.info>
+Code-Review+1: Andreas Jaeger <jaegerandi@gmail.com>
+Code-Review+1: Spencer Krum <krum.spencer@gmail.com>
+Code-Review+2: Joshua Hesketh <joshua.hesketh@rackspace.com>
+Workflow+1: Joshua Hesketh <joshua.hesketh@rackspace.com>
+Submitted-by: Jenkins
+Submitted-at: Mon, 15 Sep 2014 13:59:46 +0000
+Reviewed-on: https://review.openstack.org/118861
+Project: openstack-infra/config
+Branch: refs/heads/master
