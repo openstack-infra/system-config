@@ -26,7 +26,7 @@ clonemap:
 EOF
 
 # Add puppet modules that should be installed to the end of this list
-sudo /usr/zuul-env/bin/zuul-cloner -m clonemap.yaml --cache-dir /opt/git \
+sudo -E /usr/zuul-env/bin/zuul-cloner -m clonemap.yaml --cache-dir /opt/git \
     git://git.openstack.org \
     openstack-infra/puppet-storyboard
 
