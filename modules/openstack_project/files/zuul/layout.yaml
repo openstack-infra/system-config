@@ -3296,6 +3296,28 @@ projects:
       - gate-os-loganalyze-pep8
       - gate-os-loganalyze-python27
 
+  - name: openstack-infra/project-config
+    template:
+      - name: merge-check
+    check:
+      - config-compare-xml
+      - gate-config-layout
+      - gate-project-config-pep8
+      - gate-project-config-bashate
+      - gate-project-config-puppet-syntax
+      - gate-infra-puppet-apply-precise
+      - gate-infra-puppet-apply-centos6
+      - gate-config-irc-access
+      - gate-config-projects-yaml
+    gate:
+      - gate-config-layout
+      - gate-project-config-pep8
+      - gate-project-config-puppet-syntax
+      - gate-infra-puppet-apply-precise
+      - gate-infra-puppet-apply-centos6
+      - gate-config-irc-access
+      - gate-config-projects-yaml
+
   - name: openstack-infra/publications
     template:
       - name: merge-check

@@ -536,6 +536,20 @@
       - python-jobs
 
 - project:
+    name: project-config
+    node: 'bare-precise || bare-trusty'
+
+    jobs:
+      - puppet-check-jobs
+      - gate-{name}-pep8
+      - gate-{name}-bashate
+      - gate-infra-puppet-apply-{ostype}:
+          ostype:
+            - precise
+            - trusty
+            - centos6
+
+- project:
     name: gerrit-powered-agenda
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
