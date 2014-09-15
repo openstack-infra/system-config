@@ -195,7 +195,7 @@ def main():
                         help="name of signed puppet certificate file (e.g., "
                         "hostname.example.com.pem)")
     parser.add_argument("--server", dest="server", help="Puppetmaster to use.",
-                        default="ci-puppetmaster.openstack.org")
+                        default="puppetmaster.openstack.org")
     parser.add_argument("--volume", dest="volume",
                         help="UUID of volume to attach to the new server.",
                         default=None)
