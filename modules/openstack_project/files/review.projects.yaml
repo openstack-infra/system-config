@@ -168,6 +168,10 @@
     - openstack-ci
   description: log analyzer tools for logs.openstack.org
   upstream: git://github.com/sdague/os_loganalyze.git
+- project: openstack-infra/project-config
+  group: openstack-ci
+  description: configuration files for project CI systems
+  upstream: git://github.com/anteaya/project-config.git
 - project: openstack-infra/publications
   groups:
     - openstack-ci

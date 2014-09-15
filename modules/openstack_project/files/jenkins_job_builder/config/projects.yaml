@@ -544,6 +544,14 @@
       - python-jobs
 
 - project:
+    name: project-config
+    node: 'bare-precise || bare-trusty'
+
+    jobs:
+      - gate-{name}-pep8
+      - gate-{name}-bashate
+
+- project:
     name: gerrit-powered-agenda
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
