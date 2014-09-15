@@ -114,10 +114,6 @@
     publishers:
       - console-log
 
-- builder:
-    name: infra-puppet-apply
-    builders:
-
 - job-template:
     name: 'gate-infra-puppet-apply-{ostype}'
     node: 'bare-{ostype}'
