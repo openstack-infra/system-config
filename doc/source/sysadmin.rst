@@ -285,7 +285,7 @@ Adding a New Device
 If the main volume group doesn't have enough space for what you want
 to do, this is how you can add a new volume.
 
-Log into ci-puppetmaster.openstack.org and run::
+Log into puppetmaster.openstack.org and run::
 
   . ~root/cinder-venv/bin/activate
   . ~root/ci-launch/cinder.sh
