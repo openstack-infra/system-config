@@ -50,7 +50,7 @@ site.pp
 ~~~~~~~
 
 This file lists the specific servers you are running. Minimally you need a
-ci-puppetmaster, gerrit (review), jenkins (secure jobs such as making
+puppetmaster, gerrit (review), jenkins (secure jobs such as making
 releases), jenkins01 (untrusted jobs from any code author), puppetboard,
 nodepool, zuul, and then one or more slaves with appropriate distro choices.
 
@@ -92,7 +92,7 @@ The minimum set of things to port across is:
 
 * The default node definition in site.pp
 
-* The ci-puppetmaster definition in site.pp
+* The puppetmaster definition in site.pp
 
 * The puppetdb definition in site.pp
 
@@ -120,7 +120,7 @@ for full details)::
     . /root/ci-launch/
     export FQDN=servername.project.example.com
     puppet cert generate $FQDN
-    ./launch-node.py $FQDN --server ci-puppetmaster.project.example.com
+    ./launch-node.py $FQDN --server puppetmaster.project.example.com
 
 * This will chug for a while.
 
