@@ -1209,6 +1209,7 @@ projects:
       - check-tempest-dsvm-neutron-pg-2
       - check-tempest-dsvm-neutron-full-2
       - check-tempest-dsvm-neutron-pg-full-2
+      - check-tempest-dsvm-neutron-dvr
     gate:
       - gate-neutron-dsvm-functional
       - gate-tempest-dsvm-neutron-2
@@ -1218,7 +1219,6 @@ projects:
     experimental:
       - check-neutron-dsvm-api
       - gate-grenade-dsvm-neutron-forward
-      - check-tempest-dsvm-neutron-dvr
       - check-grenade-dsvm-neutron-sideways
     experimental-tripleo:
       - check-tripleo-novabm-undercloud-precise-nonha
