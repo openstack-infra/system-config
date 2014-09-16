@@ -2,6 +2,123 @@
 # https://issues.jenkins-ci.org/browse/JENKINS-14193
 
 - job-template:
+    name: 'gate-{name}-maven-build'
+    node: '{node}'
+    tarball-site: '{tarball-site}'
+
+    wrappers:
+      - build-timeout:
+          timeout: 30
+      - timestamps
+
+    builders:
+      - gerrit-git-prep
+      - shell: 'git log -2'
+      - shell: |
+          #!/bin/bash -xe
+          /usr/local/jenkins/slave_scripts/version-properties.sh
+          source version.properties
+      - inject:
+          properties-file: version.properties
+      - maven-target:
+          maven-version: Maven3
+          pom: pom.xml
+          goals: 'clean package'
+          settings: m2/settings.xml
+          properties:
+            - project-version=${{PROJECT_VER}}
+
+    publishers:
+      - console-log
+
+- job-template:
+    name: 'post-{name}-maven-build-upload'
+    node: '{node}'
+    tarball-site: '{tarball-site}'
+
+    wrappers:
+      - build-timeout:
+          timeout: 30
+      - timestamps
+
+    builders:
+      - gerrit-git-prep
+      - shell: 'git log -2'
+      - shell: |
+          #!/bin/bash -xe
+          /usr/local/jenkins/slave_scripts/version-properties.sh
+          source version.properties
+      - inject:
+          properties-file: version.properties
+      - maven-target:
+          maven-version: Maven3
+          pom: pom.xml
+          goals: 'clean package'
+          settings: m2/settings.xml
+          properties:
+            - project-version=${{PROJECT_VER}}
+
+    publishers:
+      - console-log
+      - scp:
+          site: '{tarball-site}'
+          files:
+            - target: 'ci/{name}/${{PROJECT_VER}}/'
+              source: '*/target/*,*/pom.xml'
+              keep-hierarchy: true
+              copy-after-failure: false
+
+- job-template:
+    name: 'post-{name}-maven-repository-deploy'
+    node: '{node}'
+    tarball-site: '{tarball-site}'
+    maven-repository-id: '{maven-repository-id}'
+    maven-repository-url: '{maven-repository-url}'
+
+    wrappers:
+      - build-timeout:
+          timeout: 30
+      - timestamps
+
+    builders:
+      - gerrit-git-prep
+      - shell: 'git log -2'
+      - shell: |
+          #!/bin/bash -xe
+          /usr/local/jenkins/slave_scripts/version-properties.sh
+          source version.properties
+      - inject:
+          properties-file: version.properties
+      - shell: |
+          #!/bin/bash -xe
+          wget -r -P artifacts/ -I ci/{name}/${{PROJECT_VER}} \
+              -R index.html*,${{PROJECT_VER}} \
+              -nH -np --cut-dirs=3 \
+              {tarball-site}/ci/{name}/${{PROJECT_VER}}/
+
+          set +x
+          source "$HOME"/.maven-repository-creds
+          set -x
+          export MAVEN_REPOSITORY_USERNAME
+          export MAVEN_REPOSITORY_PASSWORD
+
+          for ARTIFACT_FOLDER in artifacts/* ; do
+            mv "$ARTIFACT_FOLDER"/target/* "$ARTIFACT_FOLDER"
+            rm -fr "$ARTIFACT_FOLDER"/target
+
+            for ARTIFACT in $(ls "$ARTIFACT_FOLDER" | grep -v pom.xml) ; do
+              mvn deploy:deploy-file -Dfile="$ARTIFACT_FOLDER"/"$ARTIFACT" \
+                                     -DrepositoryId={maven-repository-id} \
+                                     -DpomFile="$ARTIFACT_FOLDER"/pom.xml \
+                                     -Durl={maven-repository-url} \
+                                     -s m2/settings.xml
+            done
+          done
+
+    publishers:
+      - console-log
+
+- job-template:
     name: '{name}-localrepo-upload'
     node: '{node}'
 
