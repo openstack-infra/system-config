@@ -176,6 +176,10 @@ following information is necessary:
 
   3. What you are verifying: this could be a product, driver or application.
 
+Requests typically take a week to handle after any issues/questions are
+resolved. Please plan accordingly and be patient. Use an ordinary reviewer
+account for testing purposes.
+
 The Jenkins Gerrit Trigger Plugin Way
 -------------------------------------
 
