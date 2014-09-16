@@ -274,7 +274,6 @@
 
     jobs:
       - puppet-check-jobs
-      - gate-{name}-puppet-apply
       - gate-{name}-pep8
       - gate-{name}-bashate
       - experimental-swift-logs-{name}-pep8
@@ -1547,6 +1546,14 @@
           branch-designator: 'master'
       - '{name}-js-release-{branch-designator}':
           branch-designator: 'branch'
+
+- project:
+    name: puppet-storyboard
+    node: 'bare-precise || bare-trusty'
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - puppet-check-jobs
 
 - project:
     name: vinz
