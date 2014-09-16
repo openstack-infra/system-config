@@ -547,6 +547,9 @@
 - project: stackforge/aviator
   description: An OpenStack client library for Ruby
   upstream: git://github.com/aviator/aviator
+- project: stackforge/bandit
+  description: Python AST-based static analyzer from OpenStack Security Group
+  upstream: git://github.com/chair6/bandit.git
 - project: stackforge/billingstack
   upstream: git://github.com/billingstack/billingstack
   description: Billing software
