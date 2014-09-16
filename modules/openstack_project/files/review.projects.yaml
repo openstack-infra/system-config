@@ -238,6 +238,7 @@
   description: Blueprints for the barbican project
   upstream: git://github.com/jarretraim/barbican-specs.git
 - project: openstack/ceilometer
+  docimpact-group: openstack-manuals
 - project: openstack/ceilometer-specs
   group: ceilometer
 - project: openstack/cinder
@@ -424,6 +425,7 @@
   description: Client library for Barbican API.
   upstream: git://github.com/cloudkeep/python-barbicanclient
 - project: openstack/python-ceilometerclient
+  docimpact-group: openstack-manuals
   upstream: git://github.com/asalkeld/python-ceilometerclient.git
 - project: openstack/python-cinderclient
   docimpact-group: openstack-manuals
@@ -450,6 +452,7 @@
 - project: openstack/python-swiftclient
   docimpact-group: openstack-manuals
 - project: openstack/python-troveclient
+  docimpact-group: openstack-manuals
 - project: openstack/python-tuskarclient
   description: Python bindings and CLI to Tuskar.
   upstream: git://github.com/tuskar/python-tuskarclient.git
@@ -518,6 +521,7 @@
   group: tripleo
   upstream: git://github.com/derekhiggins/tripleo-specs.git
 - project: openstack/trove
+  docimpact-group: openstack-manuals
 - project: openstack/trove-integration
 - project: openstack/tuskar
   description: A service for managing OpenStack deployments
