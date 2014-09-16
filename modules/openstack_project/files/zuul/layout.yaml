@@ -2149,7 +2149,6 @@ projects:
     template:
       - name: merge-check
       - name: python-jobs
-      - name: python3-jobs
       - name: openstack-server-publish-jobs
       - name: check-requirements
       - name: integrated-gate
@@ -2160,6 +2159,7 @@ projects:
       - check-devstack-dsvm-cells
       - gate-oslo.db-tox-sqla_08
       - gate-oslo.db-tox-sqla_09
+      - gate-oslo.db-python33
     gate:
       - gate-devstack-dsvm-cells
     experimental-tripleo:
