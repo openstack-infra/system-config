@@ -19,7 +19,7 @@ class openstack_project::template (
   include snmpd
   if $automatic_upgrades == true {
     class { 'openstack_project::automatic_upgrades':
-      origins => "Puppetlabs:${lsbdistcodename}",
+      origins => ["Puppetlabs:${lsbdistcodename}"],
     }
   }
 
