@@ -2283,17 +2283,12 @@
       - python-jobs
       - openstack-publish-jobs
       - translation-jobs
-      - '{pipeline}-tempest-dsvm-ironic{branch-designator}':
+      - '{pipeline}-tempest-dsvm-ironic-pxe_ssh{branch-designator}':
           pipeline: check
           node: 'devstack-precise || devstack-trusty'
           branch-designator: '-nv'
           branch-override: default
-      - '{pipeline}-tempest-dsvm-ironic-postgres{branch-designator}':
-          pipeline: check
-          node: 'devstack-precise || devstack-trusty'
-          branch-designator: '-nv'
-          branch-override: default
-      - '{pipeline}-tempest-dsvm-virtual-ironic{branch-designator}':
+      - '{pipeline}-tempest-dsvm-ironic-pxe_ssh-postgres{branch-designator}':
           pipeline: check
           node: 'devstack-precise || devstack-trusty'
           branch-designator: '-nv'
