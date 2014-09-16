@@ -2610,10 +2610,12 @@
     name: manila
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
+    doc-publisher-site: docs.openstack.org
 
     jobs:
       - python-jobs
       - gate-{name}-pylint
+      - openstack-publish-jobs
 
 - project:
     name: python-manilaclient
