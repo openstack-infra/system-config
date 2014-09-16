@@ -18,7 +18,9 @@ class openstack_project::template (
   include ssh
   include snmpd
   if $automatic_upgrades == true {
-    include openstack_project::automatic_upgrades
+    class { 'openstack_project::automatic_upgrades':
+      origins => "Puppetlabs:${lsbdistcodename}",
+    }
   }
 
   class { 'iptables':
