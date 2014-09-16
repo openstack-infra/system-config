@@ -74,34 +74,6 @@
 
 
 - job:
-    name: check-projects-yaml-alphabetized
-    node: 'bare-precise || bare-trusty'
-
-    builders:
-      - revoke-sudo
-      - gerrit-git-prep
-      - tox:
-          envlist: projects_alphabetized
-
-    publishers:
-      - console-log
-
-
-- job:
-    name: check-projects-yaml-upstream
-    node: 'bare-precise || bare-trusty'
-
-    builders:
-      - revoke-sudo
-      - gerrit-git-prep
-      - tox:
-          envlist: upstream
-
-    publishers:
-      - console-log
-
-
-- job:
     name: gate-config-projects-yaml
     node: 'bare-precise || bare-trusty'
 
