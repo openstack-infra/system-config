@@ -1165,24 +1165,15 @@ projects:
   - name: openstack/manila
     template:
       - name: merge-check
+      - name: openstack-server-publish-jobs
+      - name: python-jobs
     check:
       - gate-manila-devstack-dsvm-neutron
-      - gate-manila-docs
-      - gate-manila-pep8
       - gate-manila-pylint
-      - gate-manila-python26
-      - gate-manila-python27
       - gate-manila-tempest-dsvm-neutron
       - gate-manila-tempest-dsvm-neutron-multibackend
     gate:
       - gate-manila-devstack-dsvm-neutron
-      - gate-manila-docs
-      - gate-manila-pep8
-      - gate-manila-python26
-      - gate-manila-python27
-    post:
-      - manila-branch-tarball
-      - manila-coverage
 
   - name: openstack/zaqar
     template:
@@ -1658,21 +1649,11 @@ projects:
   - name: openstack/python-manilaclient
     template:
       - name: merge-check
+      - name: openstack-client-publish-jobs
+      - name: python-jobs
       - name: python3-jobs
     check:
-      - gate-python-manilaclient-docs
-      - gate-python-manilaclient-pep8
-      - gate-python-manilaclient-python26
-      - gate-python-manilaclient-python27
       - gate-manila-tempest-dsvm-neutron
-    gate:
-      - gate-python-manilaclient-docs
-      - gate-python-manilaclient-pep8
-      - gate-python-manilaclient-python26
-      - gate-python-manilaclient-python27
-    post:
-      - python-manilaclient-branch-tarball
-      - python-manilaclient-coverage
 
   - name: openstack/python-zaqarclient
     template:
