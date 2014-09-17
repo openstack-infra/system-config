@@ -4184,7 +4184,15 @@ projects:
   - name: stackforge/monasca-persister
     template:
       - name: merge-check
-      - name: noop-jobs
+      - name: publish-to-pypi
+    check:
+      - gate-monasca-persister-pep8
+      - gate-monasca-persister-python27
+    gate:
+      - gate-monasca-persister-pep8
+      - gate-monasca-persister-python27
+    post:
+      - monasca-persister-coverage
 
   - name: stackforge/monasca-thresh
     template:
