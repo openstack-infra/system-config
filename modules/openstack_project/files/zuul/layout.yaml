@@ -714,6 +714,7 @@ jobs:
     voting: false
   - name: check-neutron-dsvm-functional
     branch: ^(?!stable/havana).*$
+    voting: false
   - name: gate-neutron-dsvm-functional
     branch: ^(?!stable/havana).*$
   - name: check-neutron-dsvm-api
