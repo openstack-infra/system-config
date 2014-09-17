@@ -3891,6 +3891,11 @@ projects:
       - name: merge-check
       - name: noop-jobs
 
+  - name: stackforge/glance-formula
+    template:
+      - name: merge-check
+      - name: noop-jobs
+
   - name: stackforge/golang-client
     template:
       - name: merge-check
