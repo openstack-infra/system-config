@@ -39,6 +39,22 @@ MODULES["puppetlabs-ntp"]="0.2.0"
 # 18:30 < jamesturnbull> jeblair: since we - being PL - are the author
 # - our intent was not to limit it's use and it should be Apache
 # licensed
+MODULE_KEYS=( puppetlabs-stdlib
+              puppetlabs-mysql
+              puppetlabs-postgresql
+              puppetlabs-apt
+              puppetlabs-apache
+              puppetlabs-rabbitmq
+              puppetlabs-haproxy
+              puppetlabs-inifile
+              puppetlabs-firewall
+              saz-memcached
+              spiette-selinux
+              rafaelfc-pear
+              openstackci-vcsrepo
+              puppetlabs-puppetdb
+              stankevich-python )
+
 MODULES["openstackci-vcsrepo"]="0.0.8"
 
 MODULES["puppetlabs-apache"]="0.0.4"
@@ -73,8 +89,9 @@ then
   rm -rf /etc/puppet/modules/vcsrepo
 fi
 
-# Install all the modules
-for MOD in ${!MODULES[*]} ; do
+# Install all the modules in order
+for MOD in "${MODULE_KEYS[@]}"
+do
   # If the module at the current version does not exist upgrade or install it.
   if ! echo $MODULE_LIST | grep "$MOD ([^v]*v${MODULES[$MOD]}" >/dev/null 2>&1
   then
