@@ -1165,24 +1165,15 @@ projects:
   - name: openstack/manila
     template:
       - name: merge-check
+      - name: openstack-server-publish-jobs
+      - name: python-jobs
     check:
       - gate-manila-devstack-dsvm-neutron
-      - gate-manila-docs
-      - gate-manila-pep8
       - gate-manila-pylint
-      - gate-manila-python26
-      - gate-manila-python27
       - gate-manila-tempest-dsvm-neutron
       - gate-manila-tempest-dsvm-neutron-multibackend
     gate:
       - gate-manila-devstack-dsvm-neutron
-      - gate-manila-docs
-      - gate-manila-pep8
-      - gate-manila-python26
-      - gate-manila-python27
-    post:
-      - manila-branch-tarball
-      - manila-coverage
 
   - name: openstack/zaqar
     template:
