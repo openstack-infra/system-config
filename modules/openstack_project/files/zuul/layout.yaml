@@ -2946,24 +2946,18 @@ projects:
       - name: merge-check
     check:
       - config-compare-xml
-      - gate-config-layout
       - gate-config-pep8
       - gate-config-bashate
       - gate-config-puppet-syntax
-      - gate-config-irc-access
-      - gate-config-projects-yaml
+      - gate-config-puppet-apply-precise
+      - gate-config-puppet-apply-centos6
       - gate-ci-docs
-      - gate-infra-puppet-apply-precise
-      - gate-infra-puppet-apply-centos6
     gate:
-      - gate-config-layout
       - gate-config-pep8
       - gate-config-puppet-syntax
-      - gate-config-irc-access
-      - gate-config-projects-yaml
+      - gate-config-puppet-apply-precise
+      - gate-config-puppet-apply-centos6
       - gate-ci-docs
-      - gate-infra-puppet-apply-precise
-      - gate-infra-puppet-apply-centos6
     post:
       - ci-docs
     experimental:
