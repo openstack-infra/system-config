@@ -164,7 +164,7 @@
       - test-results
       - console-log
 
-    node: py3k-precise
+    node: '{node}'
 
 - job-template:
     name: 'gate-{name}-docs'
