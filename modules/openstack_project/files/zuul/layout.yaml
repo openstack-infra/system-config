@@ -586,6 +586,8 @@ jobs:
     voting: false
     files:
       - 'modules/openstack_project/files/accessbot/channels.yaml'
+  - name: check-tripleo-novabm-overcloud-precise-nonha
+    voting: false
   - name: check-tripleo-ironic-overcloud-precise-ha
     voting: false
 # Continous publishing from master of the following documentation targets:
@@ -1422,7 +1424,6 @@ projects:
       - check-tripleo-ironic-undercloud-precise-nonha
       - check-tripleo-novabm-undercloud-precise-nonha
       - check-tripleo-novabm-overcloud-f20-nonha
-    experimental-tripleo:
       - check-tripleo-novabm-overcloud-precise-nonha
     pre-release:
       - tuskar-tarball
@@ -1790,13 +1791,12 @@ projects:
       - check-tripleo-novabm-undercloud-precise-nonha
       - check-tripleo-ironic-undercloud-precise-nonha
       - check-tripleo-novabm-overcloud-f20-nonha
+      - check-tripleo-novabm-overcloud-precise-nonha
     gate:
       - gate-diskimage-builder-pep8
       - gate-diskimage-builder-python26
       - gate-diskimage-builder-python27
       - gate-tempest-dsvm-ironic-pxe_ssh
-    experimental-tripleo:
-      - check-tripleo-novabm-overcloud-precise-nonha
     post:
       - diskimage-builder-coverage
       - diskimage-builder-branch-tarball
@@ -1811,7 +1811,6 @@ projects:
       - check-tripleo-novabm-undercloud-precise-nonha
       - check-tripleo-ironic-undercloud-precise-nonha
       - check-tripleo-novabm-overcloud-f20-nonha
-    experimental-tripleo:
       - check-tripleo-novabm-overcloud-precise-nonha
     post:
       - dib-utils-branch-tarball
@@ -1967,12 +1966,11 @@ projects:
       - check-tripleo-novabm-undercloud-precise-nonha
       - check-tripleo-ironic-undercloud-precise-nonha
       - check-tripleo-novabm-overcloud-f20-nonha
+      - check-tripleo-novabm-overcloud-precise-nonha
     gate:
       - gate-os-apply-config-pep8
       - gate-os-apply-config-python26
       - gate-os-apply-config-python27
-    experimental-tripleo:
-      - check-tripleo-novabm-overcloud-precise-nonha
     post:
       - os-apply-config-coverage
       - os-apply-config-branch-tarball
@@ -1988,7 +1986,6 @@ projects:
       - check-tripleo-novabm-undercloud-precise-nonha
       - check-tripleo-ironic-undercloud-precise-nonha
       - check-tripleo-novabm-overcloud-f20-nonha
-    experimental-tripleo:
       - check-tripleo-novabm-overcloud-precise-nonha
 
 #TODO: add docs
@@ -2006,12 +2003,11 @@ projects:
       - check-tripleo-novabm-undercloud-precise-nonha
       - check-tripleo-ironic-undercloud-precise-nonha
       - check-tripleo-novabm-overcloud-f20-nonha
+      - check-tripleo-novabm-overcloud-precise-nonha
     gate:
       - gate-os-collect-config-pep8
       - gate-os-collect-config-python26
       - gate-os-collect-config-python27
-    experimental-tripleo:
-      - check-tripleo-novabm-overcloud-precise-nonha
     post:
       - os-collect-config-coverage
       - os-collect-config-branch-tarball
@@ -2030,12 +2026,11 @@ projects:
       - check-tripleo-novabm-undercloud-precise-nonha
       - check-tripleo-ironic-undercloud-precise-nonha
       - check-tripleo-novabm-overcloud-f20-nonha
+      - check-tripleo-novabm-overcloud-precise-nonha
     gate:
       - gate-os-net-config-pep8
       - gate-os-net-config-python26
       - gate-os-net-config-python27
-    experimental-tripleo:
-      - check-tripleo-novabm-overcloud-precise-nonha
     post:
       - os-net-config-coverage
       - os-net-config-branch-tarball
@@ -2055,12 +2050,11 @@ projects:
       - check-tripleo-novabm-undercloud-precise-nonha
       - check-tripleo-ironic-undercloud-precise-nonha
       - check-tripleo-novabm-overcloud-f20-nonha
+      - check-tripleo-novabm-overcloud-precise-nonha
     gate:
       - gate-os-refresh-config-pep8
       - gate-os-refresh-config-python26
       - gate-os-refresh-config-python27
-    experimental-tripleo:
-      - check-tripleo-novabm-overcloud-precise-nonha
     post:
       - os-refresh-config-coverage
       - os-refresh-config-branch-tarball
@@ -2570,7 +2564,6 @@ projects:
       - check-tripleo-ironic-undercloud-precise-nonha
       - check-tripleo-novabm-overcloud-f20-nonha
       - check-tripleo-ironic-overcloud-precise-ha
-    experimental-tripleo:
       - check-tripleo-novabm-overcloud-precise-nonha
     post:
       - tripleo-heat-templates-branch-tarball
@@ -2589,7 +2582,6 @@ projects:
       - check-tripleo-ironic-undercloud-precise-nonha
       - check-tripleo-novabm-overcloud-f20-nonha
       - check-tripleo-ironic-overcloud-precise-ha
-    experimental-tripleo:
       - check-tripleo-novabm-overcloud-precise-nonha
     post:
       - tripleo-image-elements-branch-tarball
@@ -2604,10 +2596,10 @@ projects:
       - check-tripleo-ironic-undercloud-precise-nonha
       - check-tripleo-novabm-overcloud-f20-nonha
       - check-tripleo-ironic-overcloud-precise-ha
+      - check-tripleo-novabm-overcloud-precise-nonha
     gate:
       - gate-tripleo-incubator-docs
     experimental-tripleo:
-      - check-tripleo-novabm-overcloud-precise-nonha
       - check-tripleo-ironic-vlan-precise-nonha
     post:
       - tripleo-incubator-docs
@@ -3438,7 +3430,6 @@ projects:
       - check-tripleo-novabm-undercloud-precise-nonha
       - check-tripleo-ironic-undercloud-precise-nonha
       - check-tripleo-novabm-overcloud-f20-nonha
-    experimental-tripleo:
       - check-tripleo-novabm-overcloud-precise-nonha
 
   - name: openstack-infra/zmq-event-publisher
