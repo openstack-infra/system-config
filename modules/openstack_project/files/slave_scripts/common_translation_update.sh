@@ -186,10 +186,10 @@ EOF
         # 1) Workflow approval (+1)
         # 2) no -1/-2 by Jenkins
         # 3) no -2 by reviewers
-        # 4) and no Workflow -1 (WIP)
+        # 4) no Workflow -1 (WIP)
         #
         if  `echo $change_info|grep -q '{"type":"Workflow","description":"Workflow","value":"1"'` \
-            && ! `echo $change_info|grep -q '{"type":"Verified","description":"Verified","value":"-1","grantedOn":[0-9]*,"by":{"name":"Jenkins","username":"jenkins"}}'`  \
+            && ! `echo $change_info|grep -q '{"type":"Verified","description":"Verified","value":"-[12]","grantedOn":[0-9]*,"by":{"name":"Jenkins","username":"jenkins"}}'`  \
             && ! `echo $change_info|grep -q '{"type":"Code-Review","description":"Code-Review","value":"-2"'` \
             && ! `echo $change_info|grep -q '{"type":"Workflow","description":"Workflow","value":"-1"'`  ; then
             echo "Job already approved, exiting"
