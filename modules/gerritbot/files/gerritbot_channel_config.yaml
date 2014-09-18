@@ -128,6 +128,7 @@ openstack-trove:
       - x-vrif-minus-2
     projects:
       - openstack/trove
+      - openstack/trove-specs
       - openstack/trove-integration
       - openstack/python-troveclient
     branches:
