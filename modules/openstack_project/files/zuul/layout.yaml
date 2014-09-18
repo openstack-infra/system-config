@@ -477,6 +477,8 @@ jobs:
   # Berkshelf 3.x requires GeCode 3.x on precise.
   - name: ^gate-.*-chef-(lint|style|unit)$
     parameter-function: set_node_options_default_precise
+  # openstackid doesn't work with php5-mcrypt on trusty
+  - name: ^gate-openstackid-unittests$
   # tempest and d-g branchless tests need to only run on master
   # (needs to be early to not impact non-voting stanzas later)
   - name: ^(?!periodic-).*(-icehouse|-havana)$
