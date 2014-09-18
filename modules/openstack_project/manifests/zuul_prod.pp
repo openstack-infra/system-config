@@ -20,6 +20,7 @@ class openstack_project::zuul_prod(
   $sysadmins = [],
   $statsd_host = '',
   $gearman_workers = [],
+  $project_config_repo = '',
 ) {
   # Turn a list of hostnames into a list of iptables rules
   $iptables_rules = regsubst ($gearman_workers, '^(.*)$', '-m state --state NEW -m tcp -p tcp --dport 4730 -s \1 -j ACCEPT')
@@ -29,6 +30,10 @@ class openstack_project::zuul_prod(
     iptables_rules6           => $iptables_rules,
     iptables_rules4           => $iptables_rules,
     sysadmins                 => $sysadmins,
+  }
+
+  class { 'project_config':
+    url  => $project_config_repo,
   }
 
   class { '::zuul':
@@ -54,7 +59,10 @@ class openstack_project::zuul_prod(
     swift_default_logserver_prefix => $swift_default_logserver_prefix,
   }
 
-  class { '::zuul::server': }
+  class { '::zuul::server':
+    layout_dir => $::project_config::zuul_layout_dir,
+    require    => $::project_config::config_dir,
+  }
 
   if $gerrit_ssh_host_key != '' {
     file { '/home/zuul/.ssh':
@@ -73,18 +81,6 @@ class openstack_project::zuul_prod(
       replace => true,
       require => File['/home/zuul/.ssh'],
     }
-  }
-
-  file { '/etc/zuul/layout/layout.yaml':
-    ensure => present,
-    source => 'puppet:///modules/openstack_project/zuul/layout.yaml',
-    notify => Exec['zuul-reload'],
-  }
-
-  file { '/etc/zuul/layout/openstack_functions.py':
-    ensure => present,
-    source => 'puppet:///modules/openstack_project/zuul/openstack_functions.py',
-    notify => Exec['zuul-reload'],
   }
 
   file { '/etc/zuul/logging.conf':
