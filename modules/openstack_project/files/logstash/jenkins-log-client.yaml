@@ -457,14 +457,17 @@ source-files:
     tags:
       - os-collect-config
       - seed
+      - syslog
     job-filter: '.*-tripleo-.*'
   - name: logs/undercloud-undercloud_logs/os-collect-config.txt
     tags:
       - os-collect-config
       - uc-controller
+      - syslog
     job-filter: '.*-tripleo-.*'
   - name: logs/overcloud-controller0_logs/os-collect-config.txt
     tags:
       - os-collect-config
       - oc-controller
+      - syslog
     job-filter: '.*-tripleo-.*'
