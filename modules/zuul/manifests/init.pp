@@ -146,11 +146,6 @@ class zuul (
     ensure => directory,
   }
 
-  file { '/etc/zuul/layout':
-    ensure  => directory,
-    require => File['/etc/zuul'],
-  }
-
 # TODO: We should put in  notify either Service['zuul'] or Exec['zuul-reload']
 #       at some point, but that still has some problems.
   file { '/etc/zuul/zuul.conf':
