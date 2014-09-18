@@ -17,11 +17,6 @@
           export DEVSTACK_GATE_TIMEOUT=120
           export DEVSTACK_GATE_TEMPEST=0
           export DEVSTACK_GATE_EXERCISES=0
-          export GEARDSERVER=192.168.1.1
-          export DIB_COMMON_ELEMENTS="common-venv stackuser pypi-openstack"
-          export TRIPLEO_TEST=undercloud
-          export OVERCLOUD_CONTROLSCALE=1
-          export USE_IRONIC=0
           sudo chown -hR $(whoami) /opt/git
           function gate_hook {
               bash -xe /opt/stack/new/tripleo-ci/toci_gate_test.sh
@@ -59,11 +54,6 @@
           export DEVSTACK_GATE_TIMEOUT=120
           export DEVSTACK_GATE_TEMPEST=0
           export DEVSTACK_GATE_EXERCISES=0
-          export GEARDSERVER=192.168.1.1
-          export DIB_COMMON_ELEMENTS="common-venv stackuser pypi-openstack"
-          export TRIPLEO_TEST=undercloud
-          export OVERCLOUD_CONTROLSCALE=1
-          export USE_IRONIC=1
           sudo chown -hR $(whoami) /opt/git
           function gate_hook {
               bash -xe /opt/stack/new/tripleo-ci/toci_gate_test.sh
@@ -101,11 +91,6 @@
           export DEVSTACK_GATE_TIMEOUT=140
           export DEVSTACK_GATE_TEMPEST=0
           export DEVSTACK_GATE_EXERCISES=0
-          export GEARDSERVER=192.168.1.1
-          export DIB_COMMON_ELEMENTS="common-venv stackuser pypi-openstack"
-          export TRIPLEO_TEST=overcloud
-          export OVERCLOUD_CONTROLSCALE=1
-          export USE_IRONIC=0
           sudo chown -hR $(whoami) /opt/git
           function gate_hook {
               bash -xe /opt/stack/new/tripleo-ci/toci_gate_test.sh
@@ -143,13 +128,7 @@
           export DEVSTACK_GATE_TIMEOUT=140
           export DEVSTACK_GATE_TEMPEST=0
           export DEVSTACK_GATE_EXERCISES=0
-          export GEARDSERVER=192.168.1.1
-          export DIB_COMMON_ELEMENTS="common-venv stackuser pypi-openstack"
-          export TRIPLEO_TEST=overcloud
-          export USE_IRONIC=0
           sudo chown -hR $(whoami) /opt/git
-          export OVERCLOUD_CONTROLSCALE=1
-          export USE_CIRROS=1
           function gate_hook {
               bash -xe /opt/stack/new/tripleo-ci/toci_gate_test.sh
           }
@@ -188,13 +167,6 @@
           export DEVSTACK_GATE_TIMEOUT=140
           export DEVSTACK_GATE_TEMPEST=0
           export DEVSTACK_GATE_EXERCISES=0
-          export GEARDSERVER=192.168.1.1
-          export DIB_COMMON_ELEMENTS="common-venv stackuser pypi-openstack"
-          export TRIPLEO_TEST=overcloud
-          export OVERCLOUD_CONTROLSCALE=3
-          export USE_IRONIC=1
-          export USE_CIRROS=1
-          export TRIPLEO_DEBUG=1
           sudo chown -hR $(whoami) /opt/git
           function gate_hook {
               bash -xe /opt/stack/new/tripleo-ci/toci_gate_test.sh
@@ -232,11 +204,6 @@
           export DEVSTACK_GATE_TIMEOUT=140
           export DEVSTACK_GATE_TEMPEST=0
           export DEVSTACK_GATE_EXERCISES=0
-          export GEARDSERVER=192.168.1.1
-          export DIB_COMMON_ELEMENTS="common-venv stackuser pypi-openstack"
-          export TRIPLEO_TEST=vlan
-          export OVERCLOUD_CONTROLSCALE=1
-          export USE_IRONIC=1
           sudo chown -hR $(whoami) /opt/git
           function gate_hook {
               bash -xe /opt/stack/new/tripleo-ci/toci_gate_test.sh
