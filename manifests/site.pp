@@ -472,6 +472,7 @@ node 'nodepool.openstack.org' {
 # Node-OS: precise
 node 'zuul.openstack.org' {
   class { 'openstack_project::zuul_prod':
+    project_config_repo            => 'https://git.openstack.org/openstack-infra/project-config',
     gerrit_server                  => 'review.openstack.org',
     gerrit_user                    => 'jenkins',
     gerrit_ssh_host_key            => hiera('gerrit_ssh_rsa_pubkey_contents', 'XXX'),
@@ -557,6 +558,7 @@ node 'zm04.openstack.org' {
 # Node-OS: precise
 node 'zuul-dev.openstack.org' {
   class { 'openstack_project::zuul_dev':
+    project_config_repo  => 'https://git.openstack.org/openstack-infra/project-config',
     gerrit_server        => 'review-dev.openstack.org',
     gerrit_user          => 'zuul-dev',
     zuul_ssh_private_key => hiera('zuul_dev_ssh_private_key_contents', 'XXX'),
