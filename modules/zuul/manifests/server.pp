@@ -16,6 +16,7 @@
 # == Class: zuul::server
 #
 class zuul::server (
+  $layout_dir = '',
 ) {
   service { 'zuul':
     name       => 'zuul',
@@ -28,6 +29,19 @@ class zuul::server (
     command     => '/etc/init.d/zuul reload',
     require     => File['/etc/init.d/zuul'],
     refreshonly => true,
+  }
+
+  file { '/etc/zuul/layout':
+    ensure  => directory,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0755',
+    recurse => true,
+    purge   => true,
+    force   => true,
+    source  => $layout_dir,
+    require => File['/etc/zuul'],
+    notify  => Exec['zuul-reload'],
   }
 
   include logrotate

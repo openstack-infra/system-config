@@ -12,6 +12,7 @@ class openstack_project::zuul_dev(
   $sysadmins = [],
   $statsd_host = '',
   $gearman_workers = [],
+  $project_config_repo = '',
 ) {
 
   realize (
@@ -26,6 +27,11 @@ class openstack_project::zuul_dev(
     iptables_rules6           => $iptables_rules,
     iptables_rules4           => $iptables_rules,
     sysadmins                 => $sysadmins,
+  }
+
+  class { 'project_config':
+    url  => $project_config_repo,
+    base => '/dev',
   }
 
   class { '::zuul':
@@ -43,7 +49,11 @@ class openstack_project::zuul_dev(
     git_name             => 'OpenStack Jenkins',
   }
 
-  class { '::zuul::server': }
+  class { '::zuul::server':
+    layout_dir => $::project_config::zuul_layout_dir,
+    require    => $::project_config::config_dir,
+  }
+
   class { '::zuul::merger': }
 
   if $gerrit_ssh_host_key != '' {
@@ -63,18 +73,6 @@ class openstack_project::zuul_dev(
       replace => true,
       require => File['/home/zuul/.ssh'],
     }
-  }
-
-  file { '/etc/zuul/layout/layout.yaml':
-    ensure => present,
-    source => 'puppet:///modules/openstack_project/zuul/layout-dev.yaml',
-    notify => Exec['zuul-reload'],
-  }
-
-  file { '/etc/zuul/layout/openstack_functions.py':
-    ensure => present,
-    source => 'puppet:///modules/openstack_project/zuul/openstack_functions.py',
-    notify => Exec['zuul-reload'],
   }
 
   file { '/etc/zuul/logging.conf':
