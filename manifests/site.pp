@@ -314,10 +314,10 @@ node 'wiki.openstack.org' {
 # Node-OS: precise
 node 'logstash.openstack.org' {
   class { 'openstack_project::logstash':
-    sysadmins           => hiera('sysadmins', []),
-    elasticsearch_nodes => $elasticsearch_nodes,
-    gearman_workers     => $elasticsearch_clients,
-    discover_nodes      => [
+    sysadmins               => hiera('sysadmins', []),
+    elasticsearch_nodes     => $elasticsearch_nodes,
+    gearman_workers         => $elasticsearch_clients,
+    discover_nodes          => [
       'elasticsearch02.openstack.org:9200',
       'elasticsearch03.openstack.org:9200',
       'elasticsearch04.openstack.org:9200',
@@ -325,8 +325,9 @@ node 'logstash.openstack.org' {
       'elasticsearch06.openstack.org:9200',
       'elasticsearch07.openstack.org:9200',
     ],
-    subunit2sql_db_host  => hiera('subunit2sql_db_host', ''),
-    subunit2sql_db_pass  => hiera('subunit2sql_db_pass', ''),
+    subunit2sql_db_host     => hiera('subunit2sql_db_host', ''),
+    subunit2sql_db_pass     => hiera('subunit2sql_db_pass', ''),
+    mysql_proxy_admin_pass  => hiera('subunit2sql_proxy_pass', ''),
   }
 }
 
