@@ -2074,8 +2074,10 @@ projects:
       - name: publish-to-pypi
     check:
       - gate-oslosphinx-pep8
+      - gate-oslosphinx-docs
     gate:
       - gate-oslosphinx-pep8
+      - gate-oslosphinx-docs
     post:
       - oslosphinx-branch-tarball
 
