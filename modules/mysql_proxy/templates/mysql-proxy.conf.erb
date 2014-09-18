@@ -1,0 +1,7 @@
+[mysql-proxy]
+log-file = /var/log/mysql-proxy.log
+log-level = message
+proxy-read-only-backend-addresses = <%= db_host_and_port %>
+<% if luascript != '' -%>
+<%= "proxy-lua-script=/etc/mysql-proxy/lua.d/#{luascript}" -%>
+<% end -%>
