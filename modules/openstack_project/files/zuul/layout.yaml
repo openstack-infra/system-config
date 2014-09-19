@@ -4992,6 +4992,16 @@ projects:
       - gate-swift3-tox-tempauth
       - gate-swift3-tox-keystone
 
+  - name: stackforge/swiftonfile
+    template:
+      - name: merge-check
+    check:
+      - gate-swiftonfile-pep8
+      - gate-swiftonfile-python27
+    gate:
+      - gate-swiftonfile-pep8
+      - gate-swiftonfile-python27
+
   - name: stackforge/swiftpolicy
     template:
       - name: merge-check

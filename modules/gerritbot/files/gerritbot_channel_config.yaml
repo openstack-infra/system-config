@@ -938,6 +938,16 @@ openstack-poppy:
     branches:
       - master
 
+swiftonfile:
+    events:
+      - patchset-created
+      - change-merged
+      - x-vrif-minus-2
+    projects:
+      - stackforge/swiftonfile
+    branches:
+      - master
+
 dox:
     events:
       - patchset-created

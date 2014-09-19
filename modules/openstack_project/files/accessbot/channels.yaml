@@ -138,3 +138,4 @@ channels:
   - name: openstack-lbaas
     mask: full_mask
   - name: congress
+  - name: swiftonfile
