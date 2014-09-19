@@ -4901,7 +4901,7 @@ projects:
       - gate-solum-devstack-dsvm-f20
     gate:
       - gate-solum-pypy
-      - gate-solum-devstack-dsvm-f20
+      - gate-solum-devstack-dsvm
     pre-release:
       - solum-tarball
     release:
