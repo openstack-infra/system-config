@@ -29,7 +29,10 @@ class project_config(
     }
   }
 
+  $gerrit_acls_dir                = "/etc/project-config/${base}gerrit/acls"
+  $gerrit_notify_impact_file      = "/etc/project-config/${base}gerrit/notify_impact.yaml"
+  $jeepyb_project_file            = "/etc/project-config/${base}gerrit/projects.yaml
   $jenkins_job_builder_config_dir = "/etc/project-config/${base}jenkins/jobs"
-  $jenkins_scripts_dir = "/etc/project-config/${base}jenkins/scripts"
-  $zuul_layout_dir = "/etc/project-config/${base}zuul"
+  $jenkins_scripts_dir            = "/etc/project-config/${base}jenkins/scripts"
+  $zuul_layout_dir                = "/etc/project-config/${base}zuul"
 }
