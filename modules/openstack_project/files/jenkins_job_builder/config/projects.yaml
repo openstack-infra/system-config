@@ -1240,6 +1240,14 @@
 
     jobs:
       - python-jobs
+      - '{pipeline}-osc-functional':
+          pipeline: check
+          node: 'devstack-precise || devstack-trusty'
+          branch-override: default
+      - '{pipeline}-osc-functional':
+          pipeline: gate
+          node: 'devstack-precise || devstack-trusty'
+          branch-override: default
       - openstack-publish-jobs
       - pypi-jobs
 
