@@ -52,6 +52,7 @@ node default {
 # Node-OS: precise
 node 'review.openstack.org' {
   class { 'openstack_project::review':
+    project_config_repo                 => 'https://git.openstack.org/openstack-infra/project-config',
     github_oauth_token                  => hiera('gerrit_github_token', 'XXX'),
     github_project_username             => hiera('github_project_username', 'username'),
     github_project_password             => hiera('github_project_password', 'XXX'),
@@ -88,6 +89,7 @@ node 'review.openstack.org' {
 # Node-OS: precise
 node 'review-dev.openstack.org' {
   class { 'openstack_project::review_dev':
+    project_config_repo             => 'https://git.openstack.org/openstack-infra/project-config',
     github_oauth_token              => hiera('gerrit_dev_github_token', 'XXX'),
     github_project_username         => hiera('github_dev_project_username', 'username'),
     github_project_password         => hiera('github_dev_project_password', 'XXX'),
