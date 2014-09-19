@@ -74,6 +74,11 @@ pipelines:
       gerrit:
         - event: ref-updated
           ref: ^(?!refs/).*$
+    failure:
+      smtp:
+        from: jenkins@openstack.org
+        to: openstack-qa@lists.openstack.org
+        subject: 'Post jobs for {change.project} failed'
 
   - name: tag
     description: This pipeline runs jobs in response to any tag event.
