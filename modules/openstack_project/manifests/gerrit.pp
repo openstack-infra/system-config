@@ -43,6 +43,8 @@ class openstack_project::gerrit (
   $contactstore_appsec = '',
   $contactstore_pubkey = '',
   $contactstore_url = '',
+  $acls_dir = 'UNDEF',
+  $notify_impact_file = 'UNDEF',
   $projects_file = 'UNDEF',
   $projects_config = 'UNDEF',
   $github_username = '',
@@ -322,11 +324,12 @@ class openstack_project::gerrit (
     require => Class['::gerrit'],
   }
 
-  file { '/home/gerrit2/review_site/hooks/notify_impact.yaml':
-    ensure  => present,
-    source  =>
-      'puppet:///modules/openstack_project/gerrit/notify_impact.yaml',
-    require => Class['::gerrit'],
+  if ($notify_impact_file != 'UNDEF') {
+    file { '/home/gerrit2/review_site/hooks/notify_impact.yaml':
+      ensure  => present,
+      source  => $notify_impact_file,
+      require => Class['::gerrit'],
+    }
   }
 
   file { '/home/gerrit2/review_site/hooks/patchset-created':
@@ -407,7 +410,7 @@ class openstack_project::gerrit (
       replace => true,
       purge   => true,
       force   => true,
-      source  => 'puppet:///modules/openstack_project/gerrit/acls',
+      source  => $acls_dir,
       require => Class['::gerrit']
     }
 

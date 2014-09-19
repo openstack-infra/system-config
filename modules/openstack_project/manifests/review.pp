@@ -78,8 +78,14 @@ class openstack_project::review (
   $sysadmins = [],
   # For openstackwatch.
   $swift_username = '',
-  $swift_password = ''
+  $swift_password = '',
+  $project_config_repo = '',
 ) {
+
+  class { 'project_config':
+    url  => $project_config_repo,
+    base => '/dev',
+  }
 
   class { 'openstack_project::gerrit':
     ssl_cert_file                       => $ssl_cert_file,
@@ -114,8 +120,9 @@ class openstack_project::review (
     contactstore_pubkey                 => $contactstore_pubkey,
     contactstore_url                    =>
       'http://direct.openstack.org/verify/member/',
-    projects_file                       =>
-      'puppet:///modules/openstack_project/review.projects.yaml',
+    acls_dir                            => $::project_config::gerrit_acls_dir,
+    notify_impact_file                  => $::project_config::gerrit_notify_impact_file,
+    projects_file                       => $::project_config::gerrit_project_file,
     projects_config                     =>
       'openstack_project/review.projects.ini.erb',
     github_username                     => 'openstack-gerrit',
@@ -180,6 +187,7 @@ class openstack_project::review (
         mirror               => true,
       },
     ],
+    require                             => $::project_config::config_dir,
   }
 
   gerrit::plugin { 'javamelody':
