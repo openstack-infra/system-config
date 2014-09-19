@@ -5,7 +5,8 @@ class jenkins::job_builder (
   $username = '',
   $password = '',
   $git_revision = 'master',
-  $git_url = 'https://git.openstack.org/openstack-infra/jenkins-job-builder'
+  $git_url = 'https://git.openstack.org/openstack-infra/jenkins-job-builder',
+  $config_dir = '',
 ) {
 
   # A lot of things need yaml, be conservative requiring this package to avoid
@@ -38,6 +39,19 @@ class jenkins::job_builder (
 
   file { '/etc/jenkins_jobs':
     ensure => directory,
+  }
+
+  file { '/etc/jenkins_jobs/config':
+    ensure  => directory,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0755',
+    recurse => true,
+    purge   => true,
+    force   => true,
+    source  => $config_dir,
+    require => File['/etc/jenkins_jobs'],
+    notify  => Exec['jenkins_jobs_update'],
   }
 
   exec { 'jenkins_jobs_update':
