@@ -3923,12 +3923,14 @@ projects:
       - gate-gnocchi-python27
       - gate-gnocchi-tox-py27-postgresql
       - gate-gnocchi-tox-py27-mysql
+      - gate-gnocchi-tox-py33-postgresql
     gate:
       - gate-gnocchi-pep8
       - gate-gnocchi-python26
       - gate-gnocchi-python27
       - gate-gnocchi-tox-py27-postgresql
       - gate-gnocchi-tox-py27-mysql
+      - gate-gnocchi-tox-py33-postgresql
 
   - name: stackforge/group-based-policy
     template:
