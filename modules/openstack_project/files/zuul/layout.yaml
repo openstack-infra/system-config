@@ -684,7 +684,7 @@ jobs:
     voting: false
   - name: gate-solum-python33
     voting: false
-  - name: gate-solum-devstack-dsvm
+  - name: gate-solum-devstack-dsvm-f20
     voting: false
   - name: gate-reviewstats-python33
     voting: false
@@ -4901,7 +4901,7 @@ projects:
       - gate-solum-devstack-dsvm-f20
     gate:
       - gate-solum-pypy
-      - gate-solum-devstack-dsvm-f20
+      - gate-solum-devstack-dsvm
     pre-release:
       - solum-tarball
     release:
