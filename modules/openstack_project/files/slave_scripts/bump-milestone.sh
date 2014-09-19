@@ -40,8 +40,7 @@ fi
 mkdir -p `dirname $BRANCH`
 
 # Read and update the value for the branch
-if [ -e "$BRANCH" ]
-then
+if [ -e "$BRANCH" ]; then
   echo "Current contents of ${BRANCH}:"
   cat "${BRANCH}"
 else

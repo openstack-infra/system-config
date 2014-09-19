@@ -36,8 +36,7 @@ tx pull -a -f
 for FILE in ${DocFolder}/*
 do
     DOCNAME=${FILE#${DocFolder}/}
-    if [ -d ${DocFolder}/${DOCNAME}/locale ]
-    then
+    if [ -d ${DocFolder}/${DOCNAME}/locale ]; then
         git add ${DocFolder}/${DOCNAME}/locale/*
     fi
 done

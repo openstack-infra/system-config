@@ -35,8 +35,7 @@ case "$1" in
     pre)
         rm -fr /tmp/jenkins-sudo-log
         mkdir /tmp/jenkins-sudo-log
-        if [ -f $OLDLOGFILE ]
-        then
+        if [ -f $OLDLOGFILE ]; then
             stat -c %Y $OLDLOGFILE > /tmp/jenkins-sudo-log/mtime-pre
         else
             echo "0" > /tmp/jenkins-sudo-log/mtime-pre
@@ -45,14 +44,12 @@ case "$1" in
         exit 0
         ;;
     post)
-        if [ -f $OLDLOGFILE ]
-        then
+        if [ -f $OLDLOGFILE ]; then
             stat -c %Y $OLDLOGFILE > /tmp/jenkins-sudo-log/mtime-post
         else
             echo "0" > /tmp/jenkins-sudo-log/mtime-post
         fi
-        if ! diff /tmp/jenkins-sudo-log/mtime-pre /tmp/jenkins-sudo-log/mtime-post > /dev/null
-        then
+        if ! diff /tmp/jenkins-sudo-log/mtime-pre /tmp/jenkins-sudo-log/mtime-post > /dev/null; then
             echo "diff"
             grep -h "$PATTERN" $OLDLOGFILE > /tmp/jenkins-sudo-log/post
         fi
