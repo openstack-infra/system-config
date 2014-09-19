@@ -29,6 +29,10 @@ class project_config(
     }
   }
 
+  $accessbot_channels_yaml        = "/etc/project-config/${base}accessbot/channels.yaml"
+  $gerrit_acls_dir                = "/etc/project-config/${base}gerrit/acls/"
+  $gerrit_notify_impact_file      = "/etc/project-config/${base}gerrit/notify_impact.yaml"
+  $jeepyb_project_file            = "/etc/project-config/${base}gerrit/projects.yaml
   $jenkins_job_builder_config_dir = "/etc/project-config/${base}jenkins_job_builder"
-  $zuul_layout_dir = "/etc/project-config/${base}zuul"
+  $zuul_layout_dir                = "/etc/project-config/${base}zuul"
 }
