@@ -91,39 +91,33 @@ function setup_manuals ()
     for FILE in ${DocFolder}/*
     do
         # Skip non-directories
-        if [ ! -d $FILE ]
-        then
+        if [ ! -d $FILE ]; then
             continue
         fi
         DOCNAME=${FILE#${DocFolder}/}
         # Ignore directories that will not get translated
-        if [ "$DOCNAME" == "www" -o "$DOCNAME" == "tools" -o "$DOCNAME" == "generated" -o "$DOCNAME" == "publish-docs" ]
-        then
+        if [ "$DOCNAME" == "www" -o "$DOCNAME" == "tools" -o "$DOCNAME" == "generated" -o "$DOCNAME" == "publish-docs" ]; then
             continue
         fi
         # Skip glossary in all repos besides openstack-manuals.
-        if [ "$project" != "openstack-manuals" -a "$DOCNAME" == "glossary" ]
-        then
+        if [ "$project" != "openstack-manuals" -a "$DOCNAME" == "glossary" ]; then
             continue
         fi
         # Minimum amount of translation done, 75 % by default.
         PERC=75
-        if [ "$project" == "openstack-manuals" ]
-        then
+        if [ "$project" == "openstack-manuals" ]; then
             # The common and glossary directories are used by the
             # other guides, let's be more liberal here since teams
             # might only translate the files used by a single
             # guide. We use 8 % since that downloads the currently
             # translated files.
-            if [ "$DOCNAME" == "common" -o "$DOCNAME" == "glossary" ]
-            then
+            if [ "$DOCNAME" == "common" -o "$DOCNAME" == "glossary" ]; then
                 PERC=8
             fi
         fi
         # Update the .pot file
         ./tools/generatepot ${DOCNAME}
-        if [ -f ${DocFolder}/${DOCNAME}/locale/${DOCNAME}.pot ]
-        then
+        if [ -f ${DocFolder}/${DOCNAME}/locale/${DOCNAME}.pot ]; then
             # Add all changed files to git
             git add ${DocFolder}/${DOCNAME}/locale/*
             # Set auto-local
@@ -203,15 +197,13 @@ function send_patch ()
 {
 
     # Revert any changes done to .tx/config
-    if [ $HAS_CONFIG -eq 1 ]
-    then
+    if [ $HAS_CONFIG -eq 1 ]; then
         git reset -q .tx/config
         git checkout -- .tx/config
     fi
 
     # Don't send a review if nothing has changed.
-    if [ `git diff --cached |wc -l` -gt 0 ]
-    then
+    if [ `git diff --cached |wc -l` -gt 0 ]; then
         # Commit and review
         git commit -F- <<EOF
 $COMMIT_MSG
@@ -246,8 +238,7 @@ function setup_loglevel_project ()
     for level in $LEVELS ; do
         # Bootstrapping: Create file if it does not exist yet,
         # otherwise "tx set" will fail.
-        if [ ! -e  ${project}/locale/${project}-log-${level}.pot ]
-        then
+        if [ ! -e  ${project}/locale/${project}-log-${level}.pot ]; then
             touch ${project}/locale/${project}-log-${level}.pot
         fi
         tx set --auto-local -r ${tx_project}.${tx_project}-log-${level}-translations \
@@ -302,8 +293,7 @@ function filter_commits ()
             | egrep -v "(POT-Creation-Date|Project-Id-Version|PO-Revision-Date)" \
             | egrep -c "^([-+][^-+#])")
         set -e
-        if [ $changed -eq 0 ]
-        then
+        if [ $changed -eq 0 ]; then
             git reset -q "$f"
             git checkout -- "$f"
         fi

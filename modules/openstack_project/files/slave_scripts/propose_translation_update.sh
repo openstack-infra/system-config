@@ -32,8 +32,7 @@ tx pull -a -f --minimum-perc=75
 extract_messages_log "$PROJECT"
 
 PO_FILES=`find ${PROJECT}/locale -name "${PROJECT}.po"`
-if [ -n "$PO_FILES" ]
-then
+if [ -n "$PO_FILES" ]; then
     # Use updated .pot file to update translations
     python setup.py update_catalog --no-fuzzy-matching  --ignore-obsolete=true
 fi
@@ -43,8 +42,7 @@ fi
 # directly.
 for level in $LEVELS ; do
   PO_FILES=`find ${PROJECT}/locale -name "${PROJECT}-log-${level}.po"`
-  if [ -n "$PO_FILES" ]
-  then
+  if [ -n "$PO_FILES" ]; then
     for f in $PO_FILES ; do
         echo "Updating $f"
         msgmerge --update --no-fuzzy-matching $f \
