@@ -2,8 +2,8 @@
 
 if [ -z "$PROJECT" ]
 then
-	echo '$PROJECT not set.'
-	exit 1
+        echo '$PROJECT not set.'
+        exit 1
 fi
 
 case "$ZUUL_REFNAME" in

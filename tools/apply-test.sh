@@ -41,7 +41,7 @@ mv applytest/*00 applytest/head  # These are the top-level variables defined in 
 
 if [[ `lsb_release -i -s` == 'CentOS' ]]; then
     if [[ `lsb_release -r -s` =~ '6' ]]; then
-	CODENAME='centos6'
+        CODENAME='centos6'
     fi
 elif [[ `lsb_release -i -s` == 'Ubuntu' ]]; then
     CODENAME=`lsb_release -c -s`
@@ -50,8 +50,8 @@ fi
 FOUND=0
 for f in `find applytest -name 'puppetapplytest*' -print` ; do
     if grep -q "Node-OS: $CODENAME" $f; then
-	cat applytest/head $f > $f.final
-	FOUND=1
+        cat applytest/head $f > $f.final
+        FOUND=1
     fi
 done
 

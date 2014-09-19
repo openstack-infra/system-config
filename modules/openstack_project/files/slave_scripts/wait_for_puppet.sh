@@ -14,7 +14,7 @@ while [ $DONE != 1 ]; do
     DONE=1
     for hostname in $HOSTS
     do
-	if !(grep "$hostname $FINISH_RE" $LOGFILE >/dev/null); then DONE=0; fi
+        if !(grep "$hostname $FINISH_RE" $LOGFILE >/dev/null); then DONE=0; fi
     done
     sleep 5
 done
