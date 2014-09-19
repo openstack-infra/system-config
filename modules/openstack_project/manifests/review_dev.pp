@@ -21,12 +21,18 @@ class openstack_project::review_dev (
   $lp_sync_secret = '',
   $sysadmins = [],
   $swift_username = '',
-  $swift_password = ''
+  $swift_password = '',
+  $project_config_repo = '',
 ) {
 
   realize (
     User::Virtual::Localuser['zaro'],
   )
+
+  class { 'project_config':
+    url  => $project_config_repo,
+    base => 'dev/',
+  }
 
   class { 'openstack_project::gerrit':
     vhost_name                      => 'review-dev.openstack.org',
@@ -48,8 +54,9 @@ class openstack_project::review_dev (
     contactstore_pubkey             => $contactstore_pubkey,
     contactstore_url                =>
       'https://review-dev.openstack.org/fakestore',
-    projects_file                   =>
-      'puppet:///modules/openstack_project/review-dev.projects.yaml',
+    acls_dir                        => $::project_config::gerrit_acls_dir,
+    notify_impact_file              => $::project_config::gerrit_notify_impact_file,
+    projects_file                   => $::project_config::gerrit_project_file,
     projects_config                 =>
       'openstack_project/review-dev.projects.ini.erb',
     github_username                 => 'openstack-gerrit-dev',
@@ -81,6 +88,7 @@ class openstack_project::review_dev (
         mirror               => true,
       },
     ],
+    require                         => $::project_config::config_dir,
   }
 
   gerrit::plugin { 'javamelody':
