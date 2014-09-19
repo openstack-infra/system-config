@@ -29,5 +29,6 @@ class project_config(
     }
   }
 
+  $jenkins_job_builder_config_dir = "/etc/project-config/${base}jenkins_job_builder"
   $zuul_layout_dir = "/etc/project-config/${base}zuul"
 }
