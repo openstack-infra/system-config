@@ -2747,6 +2747,14 @@ projects:
     gate:
       - gate-docs-specs-python27
 
+  - name: openstack/ha-guide
+    template:
+      - name: merge-check
+      - name: openstack-doc-gate
+      - name: openstack-doc-translation
+    post:
+      - operations-guide-tox-doc-publishdocs
+
   - name: openstack/openstack-manuals
     template:
       - name: merge-check

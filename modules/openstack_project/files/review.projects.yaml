@@ -278,6 +278,10 @@
   acl-config: /home/gerrit2/acls/openstack/python-glanceclient.config
 - project: openstack/governance
   description: OpenStack Technical Committee Decisions
+- project: openstack/ha-guide
+  group: openstack-manuals
+  upstream: git://github.com/ajaeger/ha-guide.git
+  description: OpenStack High Availability Guide
 - project: openstack/heat
 - project: openstack/heat-cfntools
   upstream: git://github.com/heat-api/heat-cfntools.git
