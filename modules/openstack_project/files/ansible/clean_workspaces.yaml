@@ -1,4 +1,4 @@
 ---
-- hosts: *.slave.openstack.org
+- hosts: '*.slave.openstack.org'
   tasks:
     - shell: 'rm -rf ~jenkins/workspace/*{{ project }}*'
