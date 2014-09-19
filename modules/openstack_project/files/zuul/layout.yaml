@@ -779,6 +779,10 @@ jobs:
   - name: gate-oslo.db-tox-sqla_09
     voting: false
 
+  # TODO(stevemar): Enable voting when we have some basic coverage
+  - name: ^(gate|check)-osc-functional
+    voting: false
+
 # The project list is grouped by type of project, and within each
 # group, projects are sorted (mostly) alphabetically.
 projects:
