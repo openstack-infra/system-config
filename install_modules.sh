@@ -68,8 +68,7 @@ fi
 MODULE_LIST=`puppet module list`
 
 # Transition away from old things
-if [ -d /etc/puppet/modules/vcsrepo/.git ]
-then
+if [ -d /etc/puppet/modules/vcsrepo/.git ]; then
   rm -rf /etc/puppet/modules/vcsrepo
 fi
 

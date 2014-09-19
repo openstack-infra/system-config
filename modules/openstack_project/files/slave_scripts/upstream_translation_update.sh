@@ -14,8 +14,7 @@
 
 PROJECT=$1
 
-if [ ! `echo $ZUUL_REFNAME | grep master` ]
-then
+if [ ! `echo $ZUUL_REFNAME | grep master` ]; then
     exit 0
 fi
 
@@ -33,8 +32,7 @@ extract_messages_log "$PROJECT"
 # Add all changed files to git
 git add $PROJECT/locale/*
 
-if [ ! `git diff-index --quiet HEAD --` ]
-then
+if [ ! `git diff-index --quiet HEAD --` ]; then
     # Push .pot changes to transifex
 
     # Transifex project name does not include "."
