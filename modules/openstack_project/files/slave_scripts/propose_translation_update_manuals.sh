@@ -33,8 +33,7 @@ setup_manuals "$PROJECT"
 tx pull -a -f
 
 # Add imported upstream translations to git
-for FILE in ${DocFolder}/*
-do
+for FILE in ${DocFolder}/*; do
     DOCNAME=${FILE#${DocFolder}/}
     if [ -d ${DocFolder}/${DOCNAME}/locale ]; then
         git add ${DocFolder}/${DOCNAME}/locale/*
