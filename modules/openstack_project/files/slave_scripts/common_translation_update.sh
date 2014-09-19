@@ -88,8 +88,7 @@ function setup_manuals ()
 {
     local project=$1
     # Generate pot one by one
-    for FILE in ${DocFolder}/*
-    do
+    for FILE in ${DocFolder}/*; do
         # Skip non-directories
         if [ ! -d $FILE ]; then
             continue
@@ -281,8 +280,7 @@ function filter_commits ()
     # the creation date, the version number, the revision date,
     # comment lines, or diff file information.
     PO_CHANGE=0
-    for f in `git diff --cached --name-only`
-    do
+    for f in `git diff --cached --name-only`; do
         # Check for all files endig with ".po"
         if [[ $f =~ .po$ ]] ; then
             PO_CHANGE=1
