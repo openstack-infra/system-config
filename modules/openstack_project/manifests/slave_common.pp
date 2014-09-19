@@ -5,12 +5,17 @@
 class openstack_project::slave_common(
   $include_pypy = false,
   $sudo         = false,
+  $project_config_repo = 'https://git.openstack.org/openstack-infra/project-config',
 ){
   vcsrepo { '/opt/requirements':
     ensure   => latest,
     provider => git,
     revision => 'master',
     source   => 'https://git.openstack.org/openstack/requirements',
+  }
+
+  class { 'project_config':
+    url  => $project_config_repo,
   }
 
   file { '/usr/local/jenkins/slave_scripts':
@@ -21,8 +26,9 @@ class openstack_project::slave_common(
     recurse => true,
     purge   => true,
     force   => true,
-    require => File['/usr/local/jenkins'],
-    source  => 'puppet:///modules/openstack_project/slave_scripts',
+    require => [File['/usr/local/jenkins'],
+                $::project_config::config_dir],
+    source  => $::project_config::jenkins_scripts_dir,
   }
 
   file { '/home/jenkins/.pydistutils.cfg':

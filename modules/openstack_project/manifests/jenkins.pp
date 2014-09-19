@@ -15,7 +15,8 @@ class openstack_project::jenkins (
   $ssl_chain_file_contents = '',
   $jenkins_ssh_private_key = '',
   $zmq_event_receivers = [],
-  $sysadmins = []
+  $sysadmins = [],
+  $project_config_repo = '',
 ) {
   include openstack_project
 
@@ -116,25 +117,18 @@ class openstack_project::jenkins (
   }
 
   if $manage_jenkins_jobs == true {
+    class { 'project_config':
+      url  => $project_config_repo,
+    }
+
     class { '::jenkins::job_builder':
       url          => "https://${vhost_name}/",
       username     => $jenkins_jobs_username,
       password     => $jenkins_jobs_password,
       git_revision => $jenkins_git_revision,
       git_url      => $jenkins_git_url,
-    }
-
-    file { '/etc/jenkins_jobs/config':
-      ensure  => directory,
-      owner   => 'root',
-      group   => 'root',
-      mode    => '0755',
-      recurse => true,
-      purge   => true,
-      force   => true,
-      source  =>
-        'puppet:///modules/openstack_project/jenkins_job_builder/config',
-      notify  => Exec['jenkins_jobs_update'],
+      config_dir   => $::project_config::jenkins_job_builder_config_dir,
+      require      => $::project_config::config_dir,
     }
 
     file { '/etc/default/jenkins':
