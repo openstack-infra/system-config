@@ -18,8 +18,7 @@ rm -f dist/*.tar.gz
 tox -evenv python setup.py sdist
 
 FILES=dist/*.tar.gz
-for f in $FILES
-do
+for f in $FILES; do
   echo "SHA1sum for $f:"
   sha1sum $f | awk '{print $1}' > $f.sha1
   cat $f.sha1

@@ -20,8 +20,7 @@ php -q poller_reindex_hosts.php --id=$HOST_ID
 
 php -q add_graphs.php --list-graph-templates \
   --host-template-id=$HOST_TEMPLATE_ID | \
-  while read line
-do
+while read line; do
   if echo $line | grep "Known" >/dev/null || [ "$line" == "" ]
   then 
     continue
