@@ -286,16 +286,23 @@ function setup_django_openstack_auth ()
 # Filter out files that we do not want to commit
 function filter_commits ()
 {
+    # Don't add new empty files.
+    for f in `git diff --cached --name-only --diff-filter=A`
+    do
+        # Files should have at least one non-empty msgid string.
+        if grep -q 'msgid "[^"]' "$f" ; then
+            git reset -q "$f"
+            rm "$f"
+        fi
+    done
+
     # Don't send files where the only things which have changed are
     # the creation date, the version number, the revision date,
     # comment lines, or diff file information.
+    # Also, don't send files if only .pot files would be changed.
     PO_CHANGE=0
     for f in `git diff --cached --name-only`
     do
-        # Check for all files endig with ".po"
-        if [[ $f =~ .po$ ]] ; then
-            PO_CHANGE=1
-        fi
         # It's ok if the grep fails
         set +e
         changed=$(git diff --cached "$f" \
@@ -306,6 +313,9 @@ function filter_commits ()
         then
             git reset -q "$f"
             git checkout -- "$f"
+        # Check for all files endig with ".po"
+        elif [[ $f =~ .po$ ]] ; then
+            PO_CHANGE=1
         fi
     done
     # If no po file was changed, only pot source files were changed
