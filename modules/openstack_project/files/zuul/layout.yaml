@@ -3975,7 +3975,17 @@ projects:
       - name: merge-check
       - name: noop-jobs
 
+  - name: stackforge/group-based-policy-automation
+    template:
+      - name: merge-check
+      - name: noop-jobs
+
   - name: stackforge/group-based-policy-specs
+    template:
+      - name: merge-check
+      - name: noop-jobs
+
+  - name: stackforge/group-based-policy-ui
     template:
       - name: merge-check
       - name: noop-jobs
