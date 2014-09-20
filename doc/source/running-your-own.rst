@@ -2,6 +2,8 @@
 
 .. _running-your-own:
 
+.. warning:: Parts of this file are out of date
+
 Running your own CI infrastructure
 ##################################
 
