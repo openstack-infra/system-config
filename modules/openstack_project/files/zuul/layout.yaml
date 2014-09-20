@@ -4012,6 +4012,14 @@ projects:
     gate:
       - gate-inception-pep8
 
+  - name: stackforge/kolla
+    template:
+      - name: merge-check
+    check:
+      - gate-kolla-pep8
+    gate:
+      - gate-kolla-pep8
+
   - name: stackforge/kwapi
     template:
       - name: merge-check

@@ -156,6 +156,7 @@ tripleo:
       - openstack/tuskar
       - openstack/tuskar-ui
       - stackforge/windows-diskimage-builder
+      - stackforge/kolla
     branches:
       - master
 
