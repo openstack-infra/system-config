@@ -28,6 +28,8 @@ class nodepool (
   $image_log_document_root = '/var/log/nodepool/image',
   $enable_image_log_via_http = false,
   $environment = {},
+  $scripts_dir = '',
+  $elements_dir = '',
 ) {
 
   # needed by python-keystoneclient, has system bindings
@@ -112,6 +114,34 @@ class nodepool (
 
   file { '/etc/nodepool':
     ensure => directory,
+  }
+
+  if ($scripts_dir != '') {
+    file { '/etc/nodepool/scripts':
+      ensure  => directory,
+      owner   => 'root',
+      group   => 'root',
+      mode    => '0755',
+      recurse => true,
+      purge   => true,
+      force   => true,
+      require => File['/etc/nodepool'],
+      source  => $scripts_dir,
+    }
+  }
+
+  if ($elements_dir != '') {
+    file { '/etc/nodepool/elements':
+      ensure  => directory,
+      owner   => 'root',
+      group   => 'root',
+      mode    => '0755',
+      recurse => true,
+      purge   => true,
+      force   => true,
+      require => File['/etc/nodepool'],
+      source  => $elements_dir
+    }
   }
 
   file { '/etc/default/nodepool':
