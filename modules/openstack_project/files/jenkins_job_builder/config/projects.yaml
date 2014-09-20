@@ -3291,6 +3291,19 @@
     tarball-site: tarballs.openstack.org
 
 - project:
+    name: group-based-policy-automation
+    node: 'bare-precise || bare-trusty'
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - python-jobs
+      - '{pipeline}-heat-dsvm-functional{branch-designator}':
+          pipeline: check
+          node: 'devstack-precise || devstack-trusty'
+          branch-designator: ''
+          branch-override: default
+
+- project:
     name: python-group-based-policy-client
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
@@ -3299,3 +3312,11 @@
     name: group-based-policy-specs
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
+
+- project:
+    name: group-based-policy-ui
+    node: 'bare-precise || bare-trusty'
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - python-jobs
