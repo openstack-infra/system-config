@@ -17,7 +17,7 @@ At a Glance
 :Puppet:
   * :file:`modules/jenkins/manifests/job_builder.pp`
 :Configuration:
-  * :file:`modules/openstack_project/files/jenkins_job_builder/config/`
+  * :config:`jenkins/jobs/`
 :Projects:
   * https://git.openstack.org/cgit/openstack-infra/jenkins-job-builder
 :Bugs:
@@ -28,7 +28,7 @@ At a Glance
 Overview
 ========
 
-In order to make the process of managing hundreds of Jenkins jobs
+In order to make the process of managing thousands of Jenkins jobs
 easier, Jenkins Job Builder was designed to take YAML based
 configurations and convert those into jobs that are injected into
 Jenkins.
@@ -40,9 +40,9 @@ Configuring Projects
 ====================
 
 The YAML scripts to make this work are stored in the
-:file:`modules/openstack_project/files/jenkins_job_builder/config/`
-directory.  In this directory you can have four different types of
-yaml config files:
+:config:`jenkins/jobs/` directory of the project-config repository.
+In this directory you can have four different types of yaml config
+files:
 
 * Jenkins Jobs Defaults in ``defaults.yaml``.
 * Jenkins Jobs Macros to give larger config sections meaningful names in
@@ -64,19 +64,6 @@ Example defaults config:
 
    - defaults:
        name: global
-       description: |
-         <p><b>This job is managed by puppet and will be overwritten.</b></p>
-
-         <p><b>Do not edit this job through the web</b></p>
-
-         <p>If you would like to make changes to this job, please see:
-
-           <a href="https://git.openstack.org/cgit/openstack-infra/config">
-             https://git.openstack.org/cgit/openstack-infra/config
-           </a>
-
-         In modules/openstack_project/files/jenkins_jobs
-         </p>
        project-type: freestyle
        concurrent: true
 
