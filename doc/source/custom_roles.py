@@ -41,7 +41,32 @@ def file_role(name, rawtext, text, lineno, inliner,
 
     ref = ('https://git.openstack.org/cgit/openstack-infra/config/tree/%s'
            % text)
-    node = nodes.reference(rawtext, text, refuri=ref, **options)
+    linktext = 'config: %s' % text
+    node = nodes.reference(rawtext, linktext, refuri=ref, **options)
+    return [node], []
+
+
+def config_role(name, rawtext, text, lineno, inliner,
+              options={}, content=[]):
+    """Link a local path to a cgit file view.
+
+    Returns 2 part tuple containing list of nodes to insert into the
+    document and a list of system messages.  Both are allowed to be
+    empty.
+
+    :param name: The role name used in the document.
+    :param rawtext: The entire markup snippet, with role.
+    :param text: The text marked with the role.
+    :param lineno: The line number where rawtext appears in the input.
+    :param inliner: The inliner instance that called us.
+    :param options: Directive options for customization.
+    :param content: The directive content for customization.
+    """
+
+    ref = ('https://git.openstack.org/cgit/openstack-infra/project-config/tree/%s'
+           % text)
+    linktext = 'project-config: %s' % text
+    node = nodes.reference(rawtext, linktext, refuri=ref, **options)
     return [node], []
 
 
@@ -51,4 +76,5 @@ def setup(app):
     :param app: Sphinx application context.
     """
     app.add_role('file', file_role)
+    app.add_role('config', config_role)
     return
