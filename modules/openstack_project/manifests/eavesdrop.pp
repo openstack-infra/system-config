@@ -14,6 +14,7 @@ class openstack_project::eavesdrop (
   $statusbot_wiki_pageid = '',
   $accessbot_nick = '',
   $accessbot_password = '',
+  $project_config_repo = '',
 ) {
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [80],
@@ -97,10 +98,15 @@ class openstack_project::eavesdrop (
     ensure => present,
   }
 
+  class { 'project_config':
+    url  => $project_config_repo,
+  }
+
   class { 'accessbot':
     nick          => $accessbot_nick,
     password      => $accessbot_password,
     server        => $statusbot_server,
-    channel_file  => 'puppet:///modules/openstack_project/accessbot/channels.yaml',
+    channel_file  => $::project_config::accessbot_channels_yaml,
+    require       => $::project_config::config_dir,
   }
 }
