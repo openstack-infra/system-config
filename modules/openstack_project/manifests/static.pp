@@ -8,11 +8,16 @@ class openstack_project::static (
   $swift_tenant_name = '',
   $swift_region_name = '',
   $swift_default_container = '',
+  $project_config_repo = '',
 ) {
 
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [22, 80, 443],
     sysadmins                 => $sysadmins,
+  }
+
+  class { 'project_config':
+    url  => $project_config_repo,
   }
 
   include openstack_project
@@ -234,7 +239,7 @@ class openstack_project::static (
     owner   => 'jenkins',
     group   => 'jenkins',
     mode    => '0444',
-    source  => 'puppet:///modules/openstack_project/specs/index.html',
+    source  => $::project_config::specs_index_file,
     require => File['/srv/static/specs'],
   }
 }
