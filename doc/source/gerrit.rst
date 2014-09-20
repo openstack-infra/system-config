@@ -25,7 +25,7 @@ At a Glance
   * :file:`modules/openstack_project/manifests/review_dev.pp`
 :Configuration:
   * :file:`modules/openstack_project/templates/review.projects.ini.erb`
-  * :file:`modules/openstack_project/files/review.projects.yaml`
+  * :config:`gerrit/projects.yaml`
 :Projects:
   * http://code.google.com/p/gerrit/
 :Bugs:

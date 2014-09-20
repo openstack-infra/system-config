@@ -20,7 +20,7 @@ At a Glance
   * :file:`modules/openstack_project/manifests/zuul_prod.pp`
   * :file:`modules/openstack_project/manifests/zuul_dev.pp`
 :Configuration:
-  * :file:`modules/openstack_project/files/zuul/layout.yaml`
+  * :config:`zuul/layout.yaml`
 :Projects:
   * http://launchpad.net/zuul
   * https://git.openstack.org/cgit/openstack-infra/zuul
@@ -78,9 +78,8 @@ each commit is correctly tested.
 Zuul's current status may be viewed at
 `<http://status.openstack.org/zuul/>`_.
 
-Zuul's configuration is stored in
-:file:`modules/openstack_project/files/zuul/layout.yaml`.  Anyone may
-propose a change to the configuration by editing that file and
+Zuul's configuration is stored in :config:`zuul/layout.yaml`.  Anyone
+may propose a change to the configuration by editing that file and
 submitting the change to Gerrit for review.
 
 For the full syntax of Zuul's configuration file format, see the `Zuul

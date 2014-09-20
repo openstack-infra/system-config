@@ -21,7 +21,7 @@ At a Glance
   * :file:`modules/openstack_project/manifests/review_dev.pp`
 :Configuration:
   * :file:`modules/openstack_project/templates/review.projects.ini.erb`
-  * :file:`modules/openstack_project/files/review.projects.yaml`
+  * :config:`gerrit/projects.yaml`
   * :file:`modules/openstack_project/files/pypi-mirror.yaml`
 :Projects:
   * https://git.openstack.org/cgit/openstack-infra/jeepyb
@@ -56,9 +56,8 @@ connect to things or how to operate is in
      has-downloads=False
 
 OpenStack Gerrit projects are configured in the
-:file:`modules/openstack_project/files/review.projects.yaml`.
-file.  When this file is updated, ``manage-projects`` is run
-automatically.
+:config:`gerrit/projects.yaml`.  file.  When this file is updated,
+``manage-projects`` is run automatically.
 
 #. Project definition::
 
@@ -70,20 +69,19 @@ automatically.
        has-wiki: True
        acl-config: /path/to/acl/file
 
-The above config gives puppet and its related scripts enough information
-to create new projects, but not enough to add access controls to each
-project. To add access control you need to have an ``acl-config``
-option for the project in ``review.projects.yaml`` file. That option
-should have a value that is a path to the ``project.config`` for that
-project.
+The above config gives puppet and its related scripts enough
+information to create new projects, but not enough to add access
+controls to each project. To add access control you need to have an
+``acl-config`` option for the project in ``projects.yaml``. That
+option should have a value that is a path to the ``project.config``
+for that project.
 
 That is the high level view of how we can configure projects using the
 pupppet repository. To create an actual change that does all of this for
 a single project you will want to do the following:
 
-#. Add a
-   ``modules/openstack_project/files/gerrit/acls/project-name.config``
-   file to the repo. The contents will probably end up looking like
+#. Add a ``gerrit/acls/project-name.config`` file to the
+   ``project-config`` repo. The contents will probably end up looking like
    the block below (note that the sections are in alphabetical order
    and each indentation is 8 spaces)::
 
@@ -102,8 +100,8 @@ a single project you will want to do the following:
      [submit]
      mergeContent = true
 
-#. Add a project entry for the project in
-   ``modules/openstack_project/files/review.projects.yaml``.::
+#. Add a project entry for the project in ``gerrit/projects.yaml`` in
+   the ``project-config`` repo.::
 
      - project: openstack/project-name
        acl-config: /home/gerrit2/acls/project-name.config
