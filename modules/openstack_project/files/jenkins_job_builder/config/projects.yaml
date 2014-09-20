@@ -3290,12 +3290,37 @@
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
+    jobs:
+      - python-jobs
+      - '{pipeline}-neutron-dsvm-functional{branch-designator}':
+          pipeline: check
+          node: 'devstack-precise || devstack-trusty'
+          branch-designator: ''
+          branch-override: default
+      - '{pipeline}-neutron-dsvm-api{branch-designator}':
+          pipeline: check
+          node: 'devstack-precise || devstack-trusty'
+          branch-designator: ''
+          branch-override: default
+      - devstack-jobs:
+          pipeline: check
+          node: 'devstack-precise || devstack-trusty'
+          branch-designator: '-2'
+          branch-override: default
+
 - project:
     name: python-group-based-policy-client
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
+    jobs:
+      - python-jobs
+      - pypi-jobs
+
 - project:
     name: group-based-policy-specs
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
+
+    jobs:
+      - specs-jobs
