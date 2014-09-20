@@ -3973,12 +3973,24 @@ projects:
   - name: stackforge/group-based-policy
     template:
       - name: merge-check
-      - name: noop-jobs
+      - name: python-jobs
+      - name: check-requirements
+    check:
+      - check-neutron-dsvm-functional
+      - check-tempest-dsvm-neutron-2
+      - check-tempest-dsvm-neutron-pg-2
+      - check-tempest-dsvm-neutron-full-2
+      - check-tempest-dsvm-neutron-pg-full-2
+      - check-tempest-dsvm-neutron-dvr
+    experimental:
+      - check-neutron-dsvm-api
 
   - name: stackforge/group-based-policy-specs
     template:
       - name: merge-check
-      - name: noop-jobs
+      - name: openstack-specs-jobs
+    check:
+      - gate-group-based-policy-specs-python27
 
   - name: stackforge/healthnmon
     template:
@@ -4120,7 +4132,12 @@ projects:
   - name: stackforge/python-group-based-policy-client
     template:
       - name: merge-check
-      - name: noop-jobs
+      - name: python-jobs
+      - name: check-requirements
+      - name: publish-to-pypi
+    check:
+      - gate-python-neutronclient-python33
+      - gate-python-neutronclient-pypy
 
   - name: stackforge/python-mistralclient
     template:
