@@ -19,7 +19,8 @@ At a Glance
   * :file:`modules/openstack_project/manifests/single_use_slave.pp`
 :Configuration:
   * :file:`modules/openstack_project/templates/nodepool/nodepool.yaml.erb`
-  * :file:`modules/openstack_project/files/nodepool/scripts/`
+  * :config:`nodepool/scripts/`
+  * :config:`nodepool/elements/`
 :Projects:
   * https://git.openstack.org/openstack-infra/nodepool
 :Bugs:
