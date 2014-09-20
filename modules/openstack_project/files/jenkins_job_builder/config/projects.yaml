@@ -3367,15 +3367,24 @@
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
+    jobs:
+      - python-jobs
+
 - project:
     name: python-group-based-policy-client
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
 
+    jobs:
+      - python-jobs
+
 - project:
     name: group-based-policy-specs
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
+
+    jobs:
+      - specs-jobs
 
 - project:
     name: keystone-formula
