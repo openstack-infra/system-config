@@ -30,6 +30,8 @@ class nodepool (
   $environment = {},
   # enable sudo for nodepool user. Useful for using dib with nodepool
   $sudo = true,
+  $scripts_dir = '',
+  $elements_dir = '',
 ) {
 
   # needed by python-keystoneclient, has system bindings
@@ -114,6 +116,34 @@ class nodepool (
 
   file { '/etc/nodepool':
     ensure => directory,
+  }
+
+  if ($scripts_dir != '') {
+    file { '/etc/nodepool/scripts':
+      ensure  => directory,
+      owner   => 'root',
+      group   => 'root',
+      mode    => '0755',
+      recurse => true,
+      purge   => true,
+      force   => true,
+      require => File['/etc/nodepool'],
+      source  => $scripts_dir,
+    }
+  }
+
+  if ($elements_dir != '') {
+    file { '/etc/nodepool/elements':
+      ensure  => directory,
+      owner   => 'root',
+      group   => 'root',
+      mode    => '0755',
+      recurse => true,
+      purge   => true,
+      force   => true,
+      require => File['/etc/nodepool'],
+      source  => $elements_dir
+    }
   }
 
   file { '/etc/default/nodepool':
