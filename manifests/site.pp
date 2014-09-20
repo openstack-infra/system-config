@@ -422,6 +422,7 @@ node 'storyboard.openstack.org' {
 # Node-OS: precise
 node 'static.openstack.org' {
   class { 'openstack_project::static':
+    project_config_repo     => 'https://git.openstack.org/openstack-infra/project-config',
     sysadmins               => hiera('sysadmins', []),
     swift_authurl           => 'https://identity.api.rackspacecloud.com/v2.0/',
     swift_user              => 'infra-files-ro',
