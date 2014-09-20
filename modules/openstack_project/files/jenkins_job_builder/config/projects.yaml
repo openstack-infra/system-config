@@ -1692,6 +1692,17 @@
           branch-designator: ''
           branch-override: default
           topology: aiopcpu
+      # Experimental jobs for testing dib images.
+      - '{pipeline}-tempest-dsvm-full{branch-designator}'
+          pipeline: experimental
+          node: devstack-trusty-dib
+          branch-designator: '-dibtest'
+          branch-override: default
+      - '{pipeline}-tempest-dsvm-neutron-full{branch-designator}'
+          pipeline: experimental
+          node: devstack-trusty-dib
+          branch-designator: '-dibtest'
+          branch-override: default
 
 
 - project:
