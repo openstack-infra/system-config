@@ -444,6 +444,7 @@ node 'status.openstack.org' {
 # Node-OS: precise
 node 'nodepool.openstack.org' {
   class { 'openstack_project::nodepool_prod':
+    project_config_repo      => 'https://git.openstack.org/openstack-infra/project-config',
     mysql_password           => hiera('nodepool_mysql_password', 'XXX'),
     mysql_root_password      => hiera('nodepool_mysql_root_password', 'XXX'),
     nodepool_ssh_private_key => hiera('jenkins_ssh_private_key_contents', 'XXX'),
