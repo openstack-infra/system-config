@@ -201,6 +201,7 @@ class openstack_project::review (
     vhost_name              => $::fqdn,
     ssh_rsa_key_contents    => $gerritbot_ssh_rsa_key_contents,
     ssh_rsa_pubkey_contents => $gerritbot_ssh_rsa_pubkey_contents,
+    channel_file            => $::project_config::gerritbot_channel_file,
   }
   class { 'gerrit::remotes':
     ensure => absent,

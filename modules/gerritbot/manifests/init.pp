@@ -8,6 +8,7 @@ class gerritbot(
   $vhost_name = '',
   $ssh_rsa_key_contents = '',
   $ssh_rsa_pubkey_contents = '',
+  $channel_file = '',
 ) {
   include pip
 
@@ -56,7 +57,7 @@ class gerritbot(
     owner   => 'root',
     replace => true,
     require => User['gerrit2'],
-    source  => 'puppet:///modules/gerritbot/gerritbot_channel_config.yaml',
+    source  => $channel_file,
   }
 
   file { '/etc/gerritbot/logging.config':
