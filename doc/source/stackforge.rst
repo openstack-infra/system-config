@@ -46,15 +46,16 @@ Add a Project to StackForge
 Create a new StackForge Project with Puppet
 ===========================================
 
-OpenStack uses Puppet and a management script to create Gerrit projects
-with simple changes to the openstack-infra/config repository. To start make
-sure you have cloned the openstack-infra/config repository
-``git clone https://git.openstack.org/openstack-infra/config``.
+OpenStack uses Puppet and a management script to create Gerrit
+projects with simple changes to the openstack-infra/project-config
+repository. To start make sure you have cloned the
+openstack-infra/project-config repository ``git clone
+https://git.openstack.org/openstack-infra/project-config``.
 
-First you need to add your StackForge project to the master project list.
-Edit ``modules/openstack_project/files/review.projects.yaml`` and add a
-new section for your project in alphabetical order within the file.
-It should look something like::
+First you need to add your StackForge project to the master project
+list.  Edit :config:`gerrit/projects.yaml` and add a new section for
+your project in alphabetical order within the file.  It should look
+something like::
 
   - project: stackforge/project-name
     description: Latest and greatest cloud stuff.
@@ -72,8 +73,7 @@ unnecessary branches and tags after the merge requires an openstack-infra
 core member to do so.
 
 The next step is to add a Gerrit ACL config file. Edit
-``modules/openstack_project/files/gerrit/acls/stackforge/project-name.config``
-and make it look like::
+``gerrit/acls/stackforge/project-name.config`` and make it look like::
 
   [access "refs/heads/*"]
   abandon = group project-name-core
@@ -108,15 +108,15 @@ these additional tools.
 Add Jenkins Jobs to StackForge Projects
 =======================================
 
-In the same openstack-infra/config repository (and in the same change
-if you like) we need to edit additional files to setup Jenkins jobs
-and Zuul for the new StackForge project.
+In the same openstack-infra/project-config repository (and in the same
+change if you like) we need to edit additional files to setup Jenkins
+jobs and Zuul for the new StackForge project.
 
 If you are interested in using the standard python Jenkins jobs (docs,
 pep8, python 2.6 and 2.7 unittests, and coverage), edit
-``modules/openstack_project/files/jenkins_job_builder/config/projects.yaml``
-and add a new section for your project in alphabetical order in the file. It
-should look something like::
+:config:`jenkins/jobs/projects.yaml` and add a new section for your
+project in alphabetical order in the file. It should look something
+like::
 
   - project:
       name: project-name
@@ -127,10 +127,10 @@ should look something like::
         - python-jobs
 
 List of jobs included to the ``python-jobs`` jobs group is located in
-``modules/openstack_project/files/jenkins_job_builder/config/python-jobs.yaml``.
-For document publication there's also a publisher job template for the
-popular `Read the Docs`_ documentation hosting service, which can be
-used by adding the ``hook-{name}-rtfd`` template to the jobs list::
+:config:`jenkins/jobs/python-jobs.yaml`.  For document publication
+there's also a publisher job template for the popular `Read the Docs`_
+documentation hosting service, which can be used by adding the
+``hook-{name}-rtfd`` template to the jobs list::
 
   - project:
       name: project-name
@@ -147,10 +147,9 @@ If you aren't ready to run any gate tests or other project-specific
 jobs yet, you don't need to edit ``projects.yaml``.
 
 Now that we have Jenkins jobs we need to tell Zuul to run them when
-appropriate. Edit
-``modules/openstack_project/files/zuul/layout.yaml``
-and add a new section for your project in alphabetical order within the file.
-It should look something like::
+appropriate. Edit :config:`zuul/layout.yaml` and add a new section for
+your project in alphabetical order within the file.  It should look
+something like::
 
   - name: stackforge/project-name
     template:
@@ -159,17 +158,17 @@ It should look something like::
       - name: python3-jobs
 
 If you aren't ready to run any gate tests yet and did not configure
-python-jobs in projects.yaml, it should look like this instead::
+python-jobs in ``projects.yaml``, it should look like this instead::
 
   - name: stackforge/project-name
     template:
       - name: merge-check
       - name: noop-jobs
 
-That concludes the bare minimum openstack-infra/config changes necessary to
-add a project to StackForge. You can commit these changes and submit
-them to review.openstack.org at this point, or you can wait a little
-longer and add your project to GerritBot first.
+That concludes the bare minimum openstack-infra/project-config changes
+necessary to add a project to StackForge. You can commit these changes
+and submit them to review.openstack.org at this point, or you can wait
+a little longer and add your project to GerritBot first.
 
 Request an Initial Gerrit Core Group Member
 ===========================================
@@ -190,12 +189,10 @@ project group management.
 Configure StackForge Project to use GerritBot
 =============================================
 
-To have GerritBot send Gerrit events for your project to a Freenode IRC
-channel edit
-``modules/gerritbot/files/gerritbot_channel_config.yaml``.
-If you want to configure GerritBot to leave alerts in a channel
-GerritBot has always joined just add your project to the project list
-for that channel::
+To have GerritBot send Gerrit events for your project to a Freenode
+IRC channel edit :config:`gerritbot/channels.yaml`.  If you want to
+configure GerritBot to leave alerts in a channel GerritBot has always
+joined just add your project to the project list for that channel::
 
   stackforge-dev:
       events:
@@ -223,11 +220,10 @@ end of this file that looks like::
         - master
 
 If you are defining a new channel, add it also in
-``modules/openstack_project/files/accessbot/channels.yaml`` file, optionally
-defining also its mask.
-The mask will be used to define the access level for IRC users who are not
-listed in that file in the ``global`` section or otherwise listed for the
-channel.
+:conf:`accessbot/channels.yaml` file, optionally defining also its
+mask.  The mask will be used to define the access level for IRC users
+who are not listed in that file in the ``global`` section or otherwise
+listed for the channel.
 
 For instance:
 

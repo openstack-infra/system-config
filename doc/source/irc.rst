@@ -22,7 +22,7 @@ At a Glance
   * :file:`modules/openstack_project/manifests/eavesdrop.pp`
   * :file:`modules/openstack_project/manifests/review.pp`
 :Configuration:
-  * :file:`modules/gerritbot/files/gerritbot_channel_config.yaml`
+  * :config:`gerritbot/channels.yaml`
 :Projects:
   * http://wiki.debian.org/MeetBot
   * http://sourceforge.net/projects/supybot/
@@ -189,8 +189,7 @@ Gerritbot watches the Gerrit event stream (using the "stream-events"
 Gerrit command) and announces events (such as patchset-created, or
 change-merged) to relevant IRC channels.
 
-Gerritbot's configuration is in
-:file:`modules/gerritbot/files/gerritbot_channel_config.yaml`.
+Gerritbot's configuration is in :config:`gerritbot/channels.yaml`
 
 Teams can add their channel and go through the standard code review process to
 get the bot added to their channel. The configuration is organized by channel,
