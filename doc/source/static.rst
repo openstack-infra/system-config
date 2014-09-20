@@ -19,6 +19,8 @@ At a Glance
   * http://specs.openstack.org
 :Puppet:
   * :file:`modules/openstack_project/manifests/static.pp`
+:Configuration:
+  * :config:`specs/index.html`
 :Projects:
   * http://apache.org/
 :Bugs:
