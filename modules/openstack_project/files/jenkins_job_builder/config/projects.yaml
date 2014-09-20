@@ -61,6 +61,15 @@
       - gate-{name}-python27
       - gate-{name}-docs
 
+  project:
+    name: kolla
+    node: 'bare-precise || bare-trusty'
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - python-jobs
+      - pypi-jobs
+
 - project:
     name: mistral
     node: 'bare-precise || bare-trusty'
