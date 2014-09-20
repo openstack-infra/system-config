@@ -3368,6 +3368,14 @@
     tarball-site: tarballs.openstack.org
 
 - project:
+    name: group-based-policy-automation
+    node: 'bare-precise || bare-trusty'
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - python-jobs
+
+- project:
     name: python-group-based-policy-client
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
@@ -3376,6 +3384,14 @@
     name: group-based-policy-specs
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
+
+- project:
+    name: group-based-policy-ui
+    node: 'bare-precise || bare-trusty'
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - python-jobs
 
 - project:
     name: keystone-formula
