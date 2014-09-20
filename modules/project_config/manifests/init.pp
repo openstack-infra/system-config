@@ -32,6 +32,7 @@ class project_config(
   }
 
   $accessbot_channels_yaml        = "/etc/project-config/${base}accessbot/channels.yaml"
+  $gerritbot_channel_file         = "/etc/project-config/${base}gerritbot/channels.yaml"
   $gerrit_acls_dir                = "/etc/project-config/${base}gerrit/acls"
   $gerrit_notify_impact_file      = "/etc/project-config/${base}gerrit/notify_impact.yaml"
   $jeepyb_project_file            = "/etc/project-config/${base}gerrit/projects.yaml"
