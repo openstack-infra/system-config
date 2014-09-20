@@ -21,10 +21,15 @@ class openstack_project::nodepool_prod(
   $tripleo_project ='',
   $image_log_document_root = '/var/log/nodepool/image',
   $enable_image_log_via_http = true,
+  $project_config_repo = '',
 ) {
   class { 'openstack_project::server':
     sysadmins                 => $sysadmins,
     iptables_public_tcp_ports => [80],
+  }
+
+  class { 'project_config':
+    url  => $project_config_repo,
   }
 
   class { '::nodepool':
@@ -34,6 +39,9 @@ class openstack_project::nodepool_prod(
     statsd_host               => $statsd_host,
     image_log_document_root   => $image_log_document_root,
     enable_image_log_via_http => $enable_image_log_via_http,
+    scripts_dir               => $::project_config::nodepool_scripts_dir,
+    elements_dir              => $::project_config::nodepool_elements_dir,
+    require                   => $::project_config::config_dir,
   }
 
   file { '/etc/nodepool/nodepool.yaml':
@@ -47,29 +55,4 @@ class openstack_project::nodepool_prod(
       User['nodepool'],
     ],
   }
-
-  file { '/etc/nodepool/scripts':
-    ensure  => directory,
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0755',
-    recurse => true,
-    purge   => true,
-    force   => true,
-    require => File['/etc/nodepool'],
-    source  => 'puppet:///modules/openstack_project/nodepool/scripts',
-  }
-
-  file { '/etc/nodepool/elements':
-    ensure  => directory,
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0755',
-    recurse => true,
-    purge   => true,
-    force   => true,
-    require => File['/etc/nodepool'],
-    source  => 'puppet:///modules/openstack_project/nodepool/elements',
-  }
-
 }
