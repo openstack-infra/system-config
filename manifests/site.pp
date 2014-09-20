@@ -260,6 +260,7 @@ node 'planet.openstack.org' {
 # Node-OS: precise
 node 'eavesdrop.openstack.org' {
   class { 'openstack_project::eavesdrop':
+    project_config_repo     => 'https://git.openstack.org/openstack-infra/project-config',
     nickpass                => hiera('openstack_meetbot_password', 'XXX'),
     sysadmins               => hiera('sysadmins', []),
     statusbot_nick          => hiera('statusbot_nick', 'username'),
