@@ -513,6 +513,8 @@ jobs:
     voting: false
   - name: check-tempest-dsvm-ironic-agent_ssh-src-nv
     voting: false
+  - name: check-tempest-dsvm-ironic-parallel-nv
+    voting: false
   - name: ^(gate|check)-tempest-dsvm-cells$
     voting: false
   - name: ^(gate|check)-tempest-dsvm-cells-full$
@@ -1087,6 +1089,7 @@ projects:
       - check-tempest-dsvm-ironic-pxe_ssh
       - check-tempest-dsvm-ironic-pxe_ssh-postgres
       - check-tempest-dsvm-ironic-agent_ssh-nv
+      - check-tempest-dsvm-ironic-parallel-nv
     check-tripleo:
       - check-tripleo-ironic-undercloud-precise-nonha
     gate:
@@ -2532,6 +2535,7 @@ projects:
       - check-tempest-dsvm-full-non-isolated
       - check-tempest-dsvm-neutron-full-non-isolated
       - check-tempest-dsvm-f20
+      - check-tempest-dsvm-ironic-parallel-nv
     experimental-tripleo:
       - check-tripleo-novabm-undercloud-precise-nonha
       - check-tripleo-ironic-undercloud-precise-nonha
