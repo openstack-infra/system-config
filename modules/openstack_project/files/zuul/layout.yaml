@@ -513,8 +513,6 @@ jobs:
     voting: false
   - name: ^(gate|check)-tempest-dsvm-cells-full$
     voting: false
-  - name: ^(gate|check)-tempest-dsvm-nova-v3-full$
-    branch: ^(?!stable/havana).*$
   - name: ^(gate|check)-grenade-dsvm$
     branch: ^(?!stable/havana).*$
   - name: ^(gate|check)-grenade-dsvm-neutron$
@@ -1284,7 +1282,6 @@ projects:
       - gate-grenade-dsvm-forward
       - check-tempest-dsvm-cells-full
       - check-tempest-dsvm-neutron-pg
-      - check-tempest-dsvm-nova-v3-full
       - gate-nova-pip-missing-reqs
     silent:
       - check-tempest-dsvm-docker
@@ -2520,7 +2517,6 @@ projects:
       - check-tempest-dsvm-zaqar
       - check-tempest-dsvm-keystonev3-full
       - check-tempest-dsvm-neutron-keystonev3-full
-      - check-tempest-dsvm-nova-v3-full
       - gate-tempest-dsvm-ceilometer-mongodb
       - gate-tempest-dsvm-ceilometer-mongodb-full
       # havana compat jobs for tempest master (non voting)
@@ -2552,7 +2548,6 @@ projects:
       - periodic-tempest-dsvm-neutron-full-non-isolated-master
       - periodic-tempest-dsvm-all-master
       - periodic-tempest-dsvm-stress-master
-      - periodic-tempest-dsvm-nova-v3-full-master
 
   - name: openstack/tempest-lib
     template:
@@ -2591,7 +2586,6 @@ projects:
       - gate-grenade-dsvm-forward
       - check-tempest-dsvm-keystonev3-full
       - check-tempest-dsvm-neutron-keystonev3-full
-      - check-tempest-dsvm-nova-v3-full
     post:
       - tempest-lib-docs
       - tempest-lib-coverage

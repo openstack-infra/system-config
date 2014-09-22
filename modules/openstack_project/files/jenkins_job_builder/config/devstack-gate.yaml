@@ -794,39 +794,6 @@
       - console-log
 
 - job-template:
-    name: '{pipeline}-tempest-dsvm-nova-v3-full{branch-designator}'
-    node: '{node}'
-
-    wrappers:
-      - build-timeout:
-          timeout: 125
-      - timestamps
-
-    builders:
-      - link-logs
-      - net-info
-      - devstack-checkout
-      - shell: |
-          #!/bin/bash -xe
-          export PYTHONUNBUFFERED=true
-          export DEVSTACK_GATE_TIMEOUT=120
-          export DEVSTACK_GATE_TEMPEST=1
-          export DEVSTACK_GATE_TEMPEST_FULL=1
-          export DEVSTACK_GATE_TEMPEST_NOVA_V3_API=1
-          export BRANCH_OVERRIDE={branch-override}
-          if [ "$BRANCH_OVERRIDE" != "default" ] ; then
-              export OVERRIDE_ZUUL_BRANCH=$BRANCH_OVERRIDE
-          fi
-          export OVERRIDE_TEMPEST_PROJECT_BRANCH=master
-          cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
-          ./safe-devstack-vm-gate-wrap.sh
-
-    publishers:
-      - devstack-logs
-      - console-log
-
-
-- job-template:
     name: '{pipeline}-tempest-dsvm-postgres-zeromq-full{branch-designator}'
     node: '{node}'
 
@@ -1488,5 +1455,4 @@
       - '{pipeline}-tempest-dsvm-neutron-full-non-isolated{branch-designator}'
       - '{pipeline}-tempest-dsvm-keystonev3-full{branch-designator}'
       - '{pipeline}-tempest-dsvm-neutron-keystonev3-full{branch-designator}'
-      - '{pipeline}-tempest-dsvm-nova-v3-full{branch-designator}'
       - '{pipeline}-tempest-dsvm-full-ceph{branch-designator}'
