@@ -53,6 +53,9 @@ def devstack_params(item, job, params):
         params['ZUUL_NODE'] = 'devstack-centos7'
     elif 'aiopcpu' in job.name:
         params['ZUUL_NODE'] = 'devstack-trusty-2-node'
+    # Remove this when we are done doing prelimindary dib testing.
+    elif 'dibtest' in job.name:
+        params['ZUUL_NODE'] = 'devstack-trusty-dib'
     else:
         params['ZUUL_NODE'] = 'devstack-trusty'
 
