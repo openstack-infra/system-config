@@ -859,6 +859,7 @@ openstack-sdks:
       - stackforge/golang-client
       - stackforge/openstack-sdk-dotnet
       - stackforge/openstack-cli-powershell
+      - stackforge/os-client-config
       - stackforge/python-openstacksdk
     branches:
       - master

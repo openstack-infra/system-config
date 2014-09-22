@@ -1011,6 +1011,9 @@
 - project: stackforge/openvz-nova-driver
   description: OpenVz driver for Nova
   upstream: git://github.com/imsplitbit/openvz-nova-driver.git
+- project: stackforge/os-client-config
+  description: Unified config handling for client libraries and programs
+  upstream: https://github.com/emonty/os-client-config.git
 - project: stackforge/osprofiler
   description: OpenStack cross service/project profiler
   upstream: git://github.com/pboris/osprofiler.git
