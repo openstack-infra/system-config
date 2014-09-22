@@ -1284,7 +1284,6 @@ projects:
       - gate-grenade-dsvm-forward
       - check-tempest-dsvm-cells-full
       - check-tempest-dsvm-neutron-pg
-      - check-tempest-dsvm-nova-v3-full
       - gate-nova-pip-missing-reqs
     silent:
       - check-tempest-dsvm-docker
@@ -2520,7 +2519,6 @@ projects:
       - check-tempest-dsvm-zaqar
       - check-tempest-dsvm-keystonev3-full
       - check-tempest-dsvm-neutron-keystonev3-full
-      - check-tempest-dsvm-nova-v3-full
       - gate-tempest-dsvm-ceilometer-mongodb
       - gate-tempest-dsvm-ceilometer-mongodb-full
       # havana compat jobs for tempest master (non voting)
@@ -2591,7 +2589,6 @@ projects:
       - gate-grenade-dsvm-forward
       - check-tempest-dsvm-keystonev3-full
       - check-tempest-dsvm-neutron-keystonev3-full
-      - check-tempest-dsvm-nova-v3-full
     post:
       - tempest-lib-docs
       - tempest-lib-coverage
