@@ -475,8 +475,6 @@
       - console-log
 
 - builder:
-    # NOTE(adam_g): This is a temporary macro until we can define the Ironic d-s-g job in a
-    # standard, minimal fashion.
     name: devstack-virtual-ironic
     builders:
       - shell: |
@@ -491,41 +489,11 @@
           export DEVSTACK_GATE_VIRT_DRIVER=ironic
           export DEVSTACK_GATE_IRONIC_DRIVER={deploy_driver}
           export DEVSTACK_GATE_IRONIC_BUILD_RAMDISK={build-ramdisk}
-          export TEMPEST_CONCURRENCY=1
+          export TEMPEST_CONCURRENCY=2
           export BRANCH_OVERRIDE={branch-override}
           if [ "$BRANCH_OVERRIDE" != "default" ] ; then
               export OVERRIDE_ZUUL_BRANCH=$BRANCH_OVERRIDE
           fi
-
-          # Construct a regex to use when limiting scope of tempest
-          # to avoid features unsupported by Ironic.
-          # skip all compute API tests that touch secgroups, volumes, servers and
-          # snapshots
-          r="^(?!.*(?:(compute\.|compute\.v3\.)(security_groups\.test_security_groups|images\.test_images_oneserver|servers\.*))"
-          r="$r|^(?:tempest\.api\.database\.*)"
-          # skip volumes attach tests
-          r="$r|(?:tempest\.api\.volume\.test_volumes_actions.*)"
-          # skip all scenario tests
-          r="$r|(?:tempest\.scenario\.*)"
-          # skip boto tests which expect to spawn an instance
-          r="$r|(?:tempest\.thirdparty\.boto\.test_ec2_instance_run.*))"
-          r="$r.*(?=.*smoke.*).*$"
-          # enable the baremetal scenario tests (basic and advanced)
-          r="$r tempest.scenario.test_baremetal_*"
-          export DEVSTACK_GATE_TEMPEST_REGEX="$r"
-
-          if $(grep -Eqs 'Ubuntu 12.04' /etc/lsb-release); then
-              # pull in libvirt /w ovs support from ubuntu cloud-archive for
-              # Precise.
-              sudo apt-get update
-              sudo add-apt-repository cloud-archive:icehouse
-              sudo apt-get update
-          fi
-
-          # prevent sshd from jumping to the ovs bridge on Precise instances.
-          IP=$(ip addr show eth0 | grep 'inet ' | sed 's/inet \([0-9\.]*\)\/.*/\1/' | tr -d ' ')
-          sudo sed -i "s/#ListenAddress 0.0.0.0/ListenAddress $IP/" /etc/ssh/sshd_config
-          sudo service ssh restart
 
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
@@ -574,41 +542,6 @@
     publishers:
       - devstack-logs
       - console-log
-
-
-- job-template:
-    name: '{pipeline}-tempest-dsvm-ironic-parallel{branch-designator}'
-    node: '{node}'
-
-    wrappers:
-      - build-timeout:
-          timeout: 125
-      - timestamps
-
-    builders:
-      - link-logs
-      - net-info
-      - devstack-checkout
-      - shell: |
-          #!/bin/bash -xe
-          export PYTHONUNBUFFERED=true
-          export DEVSTACK_GATE_TIMEOUT=120
-          export DEVSTACK_GATE_TEMPEST=1
-          export DEVSTACK_GATE_IRONIC=1
-          export DEVSTACK_GATE_VIRT_DRIVER=ironic
-          export TEMPEST_CONCURRENCY=2
-          export BRANCH_OVERRIDE={branch-override}
-          if [ "$BRANCH_OVERRIDE" != "default" ] ; then
-              export OVERRIDE_ZUUL_BRANCH=$BRANCH_OVERRIDE
-          fi
-
-          cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
-          ./safe-devstack-vm-gate-wrap.sh
-
-    publishers:
-      - devstack-logs
-      - console-log
-
 
 - job-template:
     name: '{pipeline}-tempest-dsvm-ironic-agent_ssh{branch-designator}'
@@ -1565,7 +1498,6 @@
       - '{pipeline}-tempest-dsvm-ironic-pxe_ssh-postgres{branch-designator}'
       - '{pipeline}-tempest-dsvm-ironic-agent_ssh{branch-designator}'
       - '{pipeline}-tempest-dsvm-ironic-agent_ssh-src{branch-designator}'
-      - '{pipeline}-tempest-dsvm-ironic-parallel{branch-designator}'
       - '{pipeline}-tempest-dsvm-zaqar{branch-designator}'
       - '{pipeline}-tempest-dsvm-all{branch-designator}'
       - '{pipeline}-tempest-dsvm-coverage{branch-designator}'
