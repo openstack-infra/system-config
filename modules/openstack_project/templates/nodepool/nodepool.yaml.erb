@@ -65,6 +65,16 @@ labels:
       - name: rax-dfw
       - name: rax-ord
       - name: rax-iad
+  - name: devstack-trusty-dib
+    image: devstack-trusty-dib
+    ready-script: configure_mirror.sh
+    min-ready: 1
+    providers:
+      - name: hpcloud-b1
+      - name: hpcloud-b2
+      - name: hpcloud-b3
+      - name: hpcloud-b4
+      - name: hpcloud-b5
   - name: bare-trusty
     image: bare-trusty
     ready-script: configure_mirror.sh
@@ -496,6 +506,9 @@ providers:
         setup: prepare_node_devstack.sh
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
+      - name: devstack-trusty-dib
+        min-ram: 30720
+        diskimage: devstack-trusty-dib
       - name: bare-trusty
         base-image: 'Ubuntu Server 14.04.1 LTS (amd64 20140724) - Partner Image'
         min-ram: 30720
@@ -566,6 +579,9 @@ providers:
         setup: prepare_node_devstack.sh
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
+      - name: devstack-trusty-dib
+        min-ram: 30720
+        diskimage: devstack-trusty-dib
       - name: bare-trusty
         base-image: 'Ubuntu Server 14.04.1 LTS (amd64 20140724) - Partner Image'
         min-ram: 30720
@@ -636,6 +652,9 @@ providers:
         setup: prepare_node_devstack.sh
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
+      - name: devstack-trusty-dib
+        min-ram: 30720
+        diskimage: devstack-trusty-dib
       - name: bare-trusty
         base-image: 'Ubuntu Server 14.04.1 LTS (amd64 20140724) - Partner Image'
         min-ram: 30720
@@ -707,6 +726,9 @@ providers:
         setup: prepare_node_devstack.sh
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
+      - name: devstack-trusty-dib
+        min-ram: 30720
+        diskimage: devstack-trusty-dib
       - name: bare-trusty
         base-image: 'Ubuntu Server 14.04.1 LTS (amd64 20140724) - Partner Image'
         min-ram: 30720
@@ -779,6 +801,9 @@ providers:
         setup: prepare_node_devstack.sh
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
+      - name: devstack-trusty-dib
+        min-ram: 30720
+        diskimage: devstack-trusty-dib
       - name: bare-trusty
         base-image: 'Ubuntu Server 14.04.1 LTS (amd64 20140724) - Partner Image'
         min-ram: 30720
@@ -909,3 +934,14 @@ targets:
       user: '<%= jenkins_api_user %>'
       apikey: '<%= jenkins_api_key %>'
       credentials-id: '<%= jenkins_credentials_id %>'
+
+diskimages:
+  - name: devstack-trusty-dib
+    elements:
+      - ubuntu
+      - vm
+      - openstack-repos
+      - puppet
+      - nodepool-base
+      - node-devstack
+    release: trusty
