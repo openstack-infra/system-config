@@ -354,6 +354,9 @@
     - direct-release
 - project: openstack/os-apply-config
   description: Apply configuration from cloud metadata.
+- project: stackforge/os-client-config
+  description: Unified config handling for client libraries and programs
+  upstream: https://github.com/emonty/os-client-config.git
 - project: openstack/os-cloud-config
   description: Configure a cloud
   acl-config: /home/gerrit2/acls/openstack/os-apply-config.config
