@@ -3082,6 +3082,8 @@ projects:
       - check-tempest-dsvm-centos7
       - check-grenade-dsvm-ironic-sideways
       - check-grenade-dsvm-neutron-sideways
+      - experimental-tempest-dsvm-full-dibtest
+      - experimental-tempest-dsvm-neutron-full-dibtest
     experimental-tripleo:
       - check-tripleo-novabm-undercloud-precise-nonha
       - check-tripleo-ironic-undercloud-precise-nonha
