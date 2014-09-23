@@ -1234,6 +1234,10 @@
 - project: stackforge/stacktach
   description: Event-based Debugging, Monitoring and Billing solution for OpenStack.
   upstream: https://github.com/rackerlabs/stacktach.git
+- project: stackforge/stacktach-shoebox
+  description: Binary data archiving library - supports uploading to object storage.
+  acl-config: /home/gerrit2/acls/stackforge/stacktach.config
+  upstream: https://github.com/stacktach/shoebox.git
 - project: stackforge/surveil
   description: Monitoring as a Service for OpenStack
 - project: stackforge/surveil-specs

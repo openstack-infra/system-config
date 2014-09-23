@@ -5159,6 +5159,11 @@ projects:
       - gate-stacktach-pep8
       - gate-stacktach-python27
 
+  - name: stackforge/stacktach-shoebox
+    template:
+      - name: merge-check
+      - name: noop-jobs
+
   - name: stackforge/surveil
     template:
       - name: merge-check
