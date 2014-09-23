@@ -14,7 +14,7 @@ At a Glance
 ===========
 
 :Hosts:
-  * ci-puppetmaster.openstack.org
+  * puppetmaster.openstack.org
 :Puppet:
   * :file:`modules/openstack_project/manifests/puppetmaster.pp`
 :Projects:
@@ -90,7 +90,7 @@ hostname of the puppet master with the following additions to
 .. code-block:: ini
 
    [main]
-   server=ci-puppetmaster.openstack.org
+   server=puppetmaster.openstack.org
    certname=review.openstack.org
 
 The cert signing process needs to be started with:
