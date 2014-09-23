@@ -13,4 +13,4 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-docker.io run --privileged=true -v ~/.cache:/.cache -v $(git rev-parse --show-toplevel):/opt/config -w /opt/config -i -t openstack_infra/ubuntu /bin/bash tools/build-image.sh
+docker.io run --privileged=true -v ~/.cache:/.cache -v $(git rev-parse --show-toplevel):/opt/config -w /opt/config -i -t openstack_infra/ubuntu /bin/bash tools/build-image.sh trusty

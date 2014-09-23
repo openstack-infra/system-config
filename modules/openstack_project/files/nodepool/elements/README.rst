@@ -12,7 +12,7 @@ Install the dependencies:
 
 ::
 
-  sudo apt-get install kpartx qemu-utils curl
+  sudo apt-get install kpartx qemu-utils curl python-yaml
 
 Install diskimage-builder:
 
@@ -28,9 +28,9 @@ Building an image is simple, we have a script!
 
 ::
 
-  bash tools/build-image.sh
+  bash tools/build-image.sh trusty|centos7|...
 
-You should be left with a file called devstack-gate-precise.qcow2.
+You should be left with a .qcow2 image file of your selected distribution
 
 Mounting the image
 ------------------
