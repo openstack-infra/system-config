@@ -2930,7 +2930,7 @@
 
 - project:
     name: groups
-    node: 'bare-precise || bare-trusty'
+    node: 'bare-precise'
     tarball-site: tarballs.openstack.org
 
     jobs:

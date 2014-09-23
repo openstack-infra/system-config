@@ -1,6 +1,6 @@
 - job:
     name: gate-groups-unittests
-    node: 'bare-precise || bare-trusty'
+    node: 'bare-precise'
 
     builders:
         - revoke-sudo
