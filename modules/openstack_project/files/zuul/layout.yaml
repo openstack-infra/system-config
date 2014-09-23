@@ -4234,6 +4234,19 @@ projects:
       - name: merge-check
       - name: noop-jobs
 
+  - name: stackforge/monasca-statsd
+    template:
+      - name: merge-check
+      - name: publish-to-pypi
+    check:
+      - gate-monasca-statsd-pep8
+      - gate-monasca-statsd-python27
+    gate:
+      - gate-monasca-statsd-pep8
+      - gate-monasca-statsd-python27
+    post:
+      - monasca-statsd-coverage
+
   - name: stackforge/monasca-thresh
     template:
       - name: merge-check

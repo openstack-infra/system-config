@@ -929,6 +929,10 @@
   group: monasca
   upstream: git://github.com/hpcloud-mon/mon-persister
   acl-config: /home/gerrit2/acls/stackforge/monasca.config
+- project: stackforge/monasca-statsd
+  description: Python Statsd library for sending statsd messages via the Monasca Agent
+  group: monasca
+  acl-config: /home/gerrit2/acls/stackforge/monasca.config
 - project: stackforge/monasca-thresh
   description: Monasca Thresholding Engine
   group: monasca
