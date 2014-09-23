@@ -183,6 +183,16 @@ labels:
       - name: rax-dfw
       - name: rax-ord
       - name: rax-iad
+  - name: devstack-centos7-dib
+    image: devstack-centos7-dib
+    ready-script: configure_mirror.sh
+    min-ready: 1
+    providers:
+      - name: hpcloud-b1
+      - name: hpcloud-b2
+      - name: hpcloud-b3
+      - name: hpcloud-b4
+      - name: hpcloud-b5
   - name: tripleo-precise
     image: tripleo-precise
     min-ready: 8
@@ -535,6 +545,11 @@ providers:
         setup: prepare_node_bare.sh
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
+      - name: devstack-centos7-dib
+        min-ram: 30720
+        diskimage: devstack-centos7-dib
+        username: jenkins
+        private-key: /home/nodepool/.ssh/id_rsa
       - name: py3k-precise
         base-image: 'Ubuntu Server 12.04.5 LTS (amd64 20140806) - Partner Image'
         min-ram: 30720
@@ -610,6 +625,11 @@ providers:
         setup: prepare_node_bare.sh
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
+      - name: devstack-centos7-dib
+        min-ram: 30720
+        diskimage: devstack-centos7-dib
+        username: jenkins
+        private-key: /home/nodepool/.ssh/id_rsa
       - name: py3k-precise
         base-image: 'Ubuntu Server 12.04.5 LTS (amd64 20140806) - Partner Image'
         min-ram: 30720
@@ -677,6 +697,11 @@ providers:
         base-image: 'Fedora 20 Server 64-bit 20140407 - Partner Image'
         min-ram: 30720
         setup: prepare_node_devstack.sh
+        username: jenkins
+        private-key: /home/nodepool/.ssh/id_rsa
+      - name: devstack-centos7-dib
+        min-ram: 30720
+        diskimage: devstack-centos7-dib
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
       - name: bare-f20
@@ -761,6 +786,11 @@ providers:
         setup: prepare_node_bare.sh
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
+      - name: devstack-centos7-dib
+        min-ram: 30720
+        diskimage: devstack-centos7-dib
+        username: jenkins
+        private-key: /home/nodepool/.ssh/id_rsa
       - name: py3k-precise
         base-image: 'Ubuntu Server 12.04.5 LTS (amd64 20140806) - Partner Image'
         min-ram: 30720
@@ -836,6 +866,11 @@ providers:
         base-image: 'Fedora 20 Server 64-bit 20140407 - Partner Image'
         min-ram: 30720
         setup: prepare_node_bare.sh
+        username: jenkins
+        private-key: /home/nodepool/.ssh/id_rsa
+      - name: devstack-centos7-dib
+        min-ram: 30720
+        diskimage: devstack-centos7-dib
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
       - name: py3k-precise
@@ -955,3 +990,12 @@ diskimages:
       - nodepool-base
       - node-devstack
     release: trusty
+  - name: devstack-centos7-dib
+    elements:
+      - centos7
+      - vm
+      - openstack-repos
+      - puppet
+      - nodepool-base
+      - node-devstack
+    release: GenericCloud-GA-7.0.1406_01
