@@ -28,6 +28,8 @@ class nodepool (
   $image_log_document_root = '/var/log/nodepool/image',
   $enable_image_log_via_http = false,
   $environment = {},
+  # enable sudo for nodepool user. Useful for using dib with nodepool
+  $sudo = true,
 ) {
 
   # needed by python-keystoneclient, has system bindings
@@ -219,5 +221,19 @@ class nodepool (
         ],
       }
     }
+  }
+
+  if $sudo == true {
+    $sudo_file_ensure = present
+  }
+  else {
+    $sudo_file_ensure = absent
+  }
+  file { '/etc/sudoers.d/nodepool-sudo':
+    ensure => $sudo_file_ensure,
+    source => 'puppet:///modules/nodepool/nodepool-sudo.sudo',
+    owner  => 'root',
+    group  => 'root',
+    mode   => '0440',
   }
 }

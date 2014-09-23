@@ -1,0 +1,1 @@
+nodepool ALL=(ALL) NOPASSWD:ALL
