@@ -185,14 +185,34 @@ ci_page_loaded = function() {
     }
 };
 
+function set_cookie(name, value) {
+    document.cookie = name + "=" + value + "; path=/";
+}
+
+function read_cookie(name) {
+    var nameEQ = name + "=";
+    var ca = document.cookie.split(';');
+    for(var i=0;i < ca.length;i++) {
+        var c = ca[i];
+        while (c.charAt(0)==' ') c = c.substring(1,c.length);
+        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+    }
+    return null;
+}
+
 ci_toggle_visibility = function(comments) {
     if (!comments) {
         comments = ci_find_comments();
     }
+    var cookie = read_cookie('show-ci-comments');
+    // show only if the cookie is set to the string 'true'
+    showOrHide = cookie == 'true';
+    // flip it around for next time
+    set_cookie('show-ci-comments', showOrHide ? 'false' : 'true');
     $.each(comments, function(i, comment) {
         if (ciRegex.exec(comment["name"]) &&
             !comment["merge_failure"]) {
-            comment["top"].toggle();
+            comment["top"].toggle(showOrHide);
         }
     });
 };
