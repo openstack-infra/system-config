@@ -20,8 +20,20 @@ import os
 import subprocess
 import sys
 
+# this is a bit weird; we want to get the filter to use on the
+# devstack lib/[apt|rpm] files to pre-install them.  So we have to
+# swizzle things around
+RELEASE=None
+if 'DIB_RELEASE' in os.environ:
+    RELEASE=os.environ['DIB_RELEASE']
+if 'DISTRO_NAME' in os.environ:
+    if os.environ['DISTRO_NAME'] == 'centos7':
+        # centos7 matches as rhel7 in devstack
+        RELEASE='rhel7'
+if not RELEASE:
+    print "Can not determine RELEASE"
+    sys.exit(1)
 
-RELEASE = os.environ['DIB_RELEASE']
 TMP_MOUNT_PATH = os.environ['TMP_MOUNT_PATH']
 TMP_HOOKS_PATH = os.environ['TMP_HOOKS_PATH']
 
@@ -157,6 +169,9 @@ def main():
                 pkgs.write(" ".join(branch_data['rpms']) + "\n")
             else:
                 sys.exit('No supported package data found.')
+
+    if 'SKIP_REPOS' in os.environ:
+        return
 
     image_filenames = []
     line_template = "%(name)s file %(location)s %(url)s\n"

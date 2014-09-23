@@ -16,13 +16,34 @@
 
 set -e
 
+usage="usage: build-image.sh trusty|centos7"
+
+if [ -z "$1" ]; then
+    echo $usage
+    exit 1
+fi
+
 export ELEMENTS_PATH=${ELEMENTS_PATH:-modules/openstack_project/files/nodepool/elements}
-export DISTRO=${DISTRO:-ubuntu}
-export DIB_RELEASE=${DIB_RELEASE:-trusty}
-export DIB_IMAGE_NAME=${DIB_IMAGE_NAME:-${DISTRO}_${DIB_RELEASE}}
-export DIB_IMAGE_FILENAME=${DIB_IMAGE_FILENAME:-${DIB_IMAGE_NAME}.qcow}
 export NODEPOOL_SCRIPTDIR=${NODEPOOL_SCRIPTDIR:-modules/openstack_project/files/nodepool/scripts}
 export CONFIG_SOURCE=${CONFIG_SOURCE:-file://$(pwd)}
 export CONFIG_REF=${CONFIG_REF:-$(git rev-parse HEAD)}
 
-disk-image-create -x --no-tmpfs -o devstack-gate-$DIB_RELEASE $DISTRO vm openstack-repos puppet nodepool-base node-devstack
+COMMON_ELEMENTS="vm puppet nodepool-base node-devstack openstack-repos"
+
+case $1 in
+    trusty*)
+        export DISTRO=${DISTRO:-ubuntu}
+        export DIB_RELEASE=${DIB_RELEASE:-trusty}
+        export DIB_IMAGE_NAME=${DIB_IMAGE_NAME:-${DISTRO}_${DIB_RELEASE}}
+        export DIB_IMAGE_FILENAME=${DIB_IMAGE_FILENAME:-${DIB_IMAGE_NAME}.qcow}
+        disk-image-create -x --no-tmpfs -o devstack-gate-$DIB_RELEASE $DISTRO \
+            $COMMON_ELEMENTS
+        ;;
+    centos7*)
+        disk-image-create -x --no-tmpfs -o devstack-gate-centos7 centos7 \
+            $COMMON_ELEMENTS
+        ;;
+    *)
+        echo usage
+        exit 1
+esac
