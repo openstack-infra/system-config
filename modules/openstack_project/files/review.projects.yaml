@@ -1274,6 +1274,10 @@
 - project: stackforge/tricircle
   group: tricircle
   description: Tricircle is a project for OpenStack cascading solution.
+- project: stackforge/tripleo-ansible
+  group: tripleo-ansible
+  description: Update a TripleO installation using Ansible.
+  upstream: https://github.com/SpamapS/tripleo-ansible.git
 - project: stackforge/turbo-hipster
   group: turbo-hipster
   docimpact-group: turbo-hipster
