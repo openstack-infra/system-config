@@ -6,6 +6,7 @@
       - revoke-sudo
       - gerrit-git-prep
       - shell: ./tools/run-compare-xml.sh
+      - zuul_swift_upload_console_log
 
     publishers:
       - console-log
@@ -20,6 +21,7 @@
       - gerrit-git-prep
       - tox:
           envlist: 'irc'
+      - zuul_swift_upload_console_log
 
     publishers:
       - console-log
@@ -34,6 +36,7 @@
       - gerrit-git-prep
       - shell: |
           ./tools/run-layout.sh
+      - zuul_swift_upload_console_log
 
     publishers:
       - console-log
@@ -48,6 +51,8 @@
       - revoke-sudo
       - gerrit-git-prep
       - docs
+      - zuul_swift_upload_console_log
+      # TODO(jhesketh): Add job for uploading built docs
 
     publishers:
       - scp:
@@ -67,6 +72,8 @@
       - revoke-sudo
       - gerrit-git-prep
       - docs
+      - zuul_swift_upload_console_log
+      # TODO(jhesketh): Add job for uploading sphinx docs
 
     publishers:
       - console-log
@@ -82,6 +89,7 @@
       - gerrit-git-prep
       - tox:
           envlist: projects
+      - zuul_swift_upload_console_log
 
     publishers:
       - console-log
@@ -96,6 +104,7 @@
           /usr/zuul-env/bin/zuul-cloner --cache-dir /opt/git git://git.openstack.org openstack-infra/config
           cd openstack-infra/config
           ./tools/apply-test.sh
+      - zuul_swift_upload_console_log
 
     publishers:
       - console-log
