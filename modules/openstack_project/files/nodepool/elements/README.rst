@@ -12,7 +12,7 @@ Install the dependencies:
 
 ::
 
-  sudo apt-get install kpartx qemu-utils curl
+  sudo apt-get install kpartx qemu-utils curl python-yaml
 
 Install diskimage-builder:
 
@@ -28,9 +28,15 @@ Building an image is simple, we have a script!
 
 ::
 
-  bash tools/build-image.sh
+  DISTRO="ubuntu" bash tools/build-image.sh
 
-You should be left with a file called devstack-gate-precise.qcow2.
+See the script for environment variables to set distribution, etc.
+You should be left with a .qcow2 image file of your selected
+distribution.
+
+It is a good idea to set ``TMP_DIR`` to somewhere with plenty of space
+to avoid the disappointment of a full-disk mid-way through the script
+run.
 
 Mounting the image
 ------------------

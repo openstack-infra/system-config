@@ -16,13 +16,21 @@
 
 set -e
 
-export ELEMENTS_PATH=${ELEMENTS_PATH:-modules/openstack_project/files/nodepool/elements}
 export DISTRO=${DISTRO:-ubuntu}
-export DIB_RELEASE=${DIB_RELEASE:-trusty}
-export DIB_IMAGE_NAME=${DIB_IMAGE_NAME:-${DISTRO}_${DIB_RELEASE}}
-export DIB_IMAGE_FILENAME=${DIB_IMAGE_FILENAME:-${DIB_IMAGE_NAME}.qcow}
+
+if [[ $DISTRO == "centos7" ]]; then
+    export DIB_RELEASE=${DIB_RELEASE:-GenericCloud-GA-7.0.1406_01}
+else
+    export DIB_RELEASE=${DIB_RELEASE:-trusty}
+fi
+
+export ELEMENTS_PATH=${ELEMENTS_PATH:-modules/openstack_project/files/nodepool/elements}
 export NODEPOOL_SCRIPTDIR=${NODEPOOL_SCRIPTDIR:-modules/openstack_project/files/nodepool/scripts}
 export CONFIG_SOURCE=${CONFIG_SOURCE:-file://$(pwd)}
 export CONFIG_REF=${CONFIG_REF:-$(git rev-parse HEAD)}
 
-disk-image-create -x --no-tmpfs -o devstack-gate-$DIB_RELEASE $DISTRO vm openstack-repos puppet nodepool-base node-devstack
+export DIB_IMAGE_NAME=${DIB_IMAGE_NAME:-${DISTRO}_${DIB_RELEASE}}
+export DIB_IMAGE_FILENAME=${DIB_IMAGE_FILENAME:-${DIB_IMAGE_NAME}.qcow}
+
+disk-image-create -x --no-tmpfs -o devstack-gate-$DIB_RELEASE $DISTRO \
+    "vm puppet nodepool-base node-devstack openstack-repos"
