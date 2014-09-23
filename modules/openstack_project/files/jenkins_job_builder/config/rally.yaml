@@ -63,6 +63,70 @@
           ./safe-devstack-vm-gate-wrap.sh
 
 
+- builder:
+    name: devstack-designate-rally-gate
+    builders:
+      - link-logs
+      - devstack-checkout
+      - shell: |
+          #!/bin/bash -xe
+          export PROJECTS="stackforge/rally $PROJECTS"
+          export PROJECTS="openstack/ceilometer $PROJECTS"
+          export PROJECTS="openstack/designate $PROJECTS"
+          export PROJECTS="openstack/python-designateclient $PROJECTS"
+          export CEILOMETER_NOTIFICATION_TOPICS=notifications,profiler
+          export DEVSTACK_GATE_NEUTRON={neutron}
+          export DEVSTACK_GATE_TEMPEST_LARGE_OPS={large_ops}
+          export DEVSTACK_GATE_EXERCISES=0
+          export DEVSTACK_GATE_TIMEOUT=120
+          export RALLY_SCENARIO={scenario}
+
+          ENABLED_SERVICES=rally,ceilometer-acompute,ceilometer-acentral,ceilometer-api
+          ENABLED_SERVICES+=,ceilometer-anotification,ceilometer-collector,
+          ENABLED_SERVICES+=,ceilometer-alarm-evaluator,ceilometer-alarm-notifier,
+          ENABLED_SERVICES+=,designate,designate-api,designate-central,designate-sink,designate-mdns,
+
+          export ENABLED_SERVICES
+
+          function pre_test_hook {{
+              # Install rally-devstack integration
+              cp -r $BASE/new/rally/contrib/devstack/* $BASE/new/devstack/
+              # Install designate-devstack integration
+              cd /opt/stack/new/designate/contrib/devstack
+              ./pre_test_hook.sh
+          }}
+          export -f pre_test_hook
+
+          function post_test_hook {{
+              $BASE/new/rally/tests_ci/rally-gate.sh
+          }}
+          export -f post_test_hook
+
+          cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
+          ./safe-devstack-vm-gate-wrap.sh
+
+
+- job-template:
+    name: 'gate-rally-dsvm-designate-{name}'
+    node: 'devstack-precise || devstack-trusty'
+
+    wrappers:
+      - build-timeout:
+          timeout: 125
+      - timestamps
+
+    builders:
+        - devstack-designate-rally-gate:
+          scenario: '{name}-designate'
+          neutron: '0'
+          large_ops: '0'
+
+    publishers:
+      - devstack-logs
+      - console-log
+      - rally-plot
+
+
 - job-template:
     name: 'gate-rally-dsvm-{name}'
     node: 'devstack-precise || devstack-trusty'
@@ -169,5 +233,6 @@
     name: rally-jobs
     jobs:
       - 'gate-rally-dsvm-{name}'
+      - 'gate-rally-dsvm-designate-{name}'
       - 'gate-rally-dsvm-neutron-{name}'
       - 'gate-rally-dsvm-fakevirt-{name}'
