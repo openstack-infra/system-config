@@ -23,7 +23,7 @@ access:
   masters: +AFRfiorstv
   status: +Vt
   meetbots: +O
-  operators: +Afortv
+  operators: +Aforstv
   channel_op_mask: +AVOfortv
   full_mask: +AFORVfiorstv
 
