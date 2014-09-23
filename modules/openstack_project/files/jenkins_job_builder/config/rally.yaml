@@ -37,6 +37,7 @@
           export PROJECTS="openstack/ceilometer $PROJECTS"
           export CEILOMETER_NOTIFICATION_TOPICS=notifications,profiler
           export DEVSTACK_GATE_NEUTRON={neutron}
+          export DEVSTACK_GATE_ZAQAR={zaqar}
           export DEVSTACK_GATE_TEMPEST_LARGE_OPS={large_ops}
           export DEVSTACK_GATE_EXERCISES=0
           export DEVSTACK_GATE_TIMEOUT=120
@@ -140,6 +141,7 @@
       - devstack-rally-gate:
           scenario: '{name}'
           neutron: '0'
+          zaqar: '0'
           large_ops: '0'
 
     publishers:
@@ -161,6 +163,7 @@
       - devstack-rally-gate:
           scenario: '{name}-neutron'
           neutron: '1'
+          zaqar: '0'
           large_ops: '0'
 
     publishers:
@@ -182,7 +185,30 @@
       - devstack-rally-gate:
           scenario: '{name}-fakevirt'
           neutron: '0'
+          zaqar: '0'
           large_ops: '10'
+
+    publishers:
+      - devstack-logs
+      - console-log
+      - rally-plot
+
+
+- job-template:
+    name: 'gate-rally-dsvm-zaqar-{name}'
+    node: 'devstack-precise || devstack-trusty'
+
+    wrappers:
+      - build-timeout:
+          timeout: 125
+      - timestamps
+
+    builders:
+      - devstack-rally-gate:
+          scenario: '{name}-zaqar'
+          neutron: '0'
+          zaqar: '1'
+          large_ops: '0'
 
     publishers:
       - devstack-logs
@@ -237,3 +263,4 @@
       - 'gate-rally-dsvm-designate-{name}'
       - 'gate-rally-dsvm-neutron-{name}'
       - 'gate-rally-dsvm-fakevirt-{name}'
+      - 'gate-rally-dsvm-zaqar-{name}'
