@@ -1670,13 +1670,10 @@ projects:
   - name: openstack/python-kiteclient
     template:
       - name: merge-check
+      - name: check-requirements
       - name: python-jobs
       - name: python3-jobs
       - name: publish-to-pypi
-    check:
-      - gate-python-kiteclient-requirements
-    gate:
-      - gate-python-kiteclient-requirements
 
   - name: openstack/python-manilaclient
     template:
@@ -4664,13 +4661,12 @@ projects:
   - name: stackforge/pyghmi
     template:
       - name: merge-check
+      - name: check-requirements
       - name: publish-to-pypi
     check:
       - gate-pyghmi-pep8
-      - gate-pyghmi-requirements
     gate:
       - gate-pyghmi-pep8
-      - gate-pyghmi-requirements
     post:
       - pyghmi-branch-tarball
 
