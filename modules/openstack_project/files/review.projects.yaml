@@ -1283,6 +1283,10 @@
   description: Simple import library for Python (not entry-point based)
   acl-config: /home/gerrit2/acls/stackforge/stacktach.config
   upstream: https://github.com/stacktach/simport.git
+- project: stackforge/stacktach-stackdistiller
+  description: A data extraction and transformation library for OpenStack notifications.
+  acl-config: /home/gerrit2/acls/stackforge/stacktach.config
+  upstream: https://github.com/stacktach/stackdistiller.git
 - project: stackforge/surveil
   description: Monitoring as a Service for OpenStack
 - project: stackforge/surveil-specs
