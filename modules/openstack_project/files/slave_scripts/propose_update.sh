@@ -90,10 +90,19 @@ EOF
             continue
         fi
 
+        # Don't short circuit when one project fails to sync.
+        set +e
         if [ "$OWN_PROJECT" == "requirements" ] ; then
             python update.py $PROJECT_DIR
         else
             bash -xe tools/sync-projects.sh $PROJECT_DIR
+        fi
+        RET=$?
+        set -e
+        if [ "$RET" -ne "0" ] ; then
+            ALL_SUCCESS=1
+            echo "Error in syncing: Ignoring $PROJECT"
+            continue
         fi
 
         pushd $PROJECT_DIR
