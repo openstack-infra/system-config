@@ -3329,3 +3329,42 @@
     name: group-based-policy-specs
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
+
+- project:
+    name: 'novabm-undercloud-precise-nonha'
+    node: 'tripleo-precise'
+    jobs:
+        - 'check-tripleo-{name}'
+
+
+- project:
+    name: 'ironic-undercloud-precise-nonha'
+    node: 'tripleo-precise'
+    jobs:
+        - 'check-tripleo-{name}'
+
+- project:
+    name: 'novabm-overcloud-precise-nonha'
+    node: 'tripleo-precise'
+    jobs:
+        - 'check-tripleo-{name}'
+
+- project:
+    name: 'novabm-overcloud-f20-nonha'
+    node: 'tripleo-f20'
+    jobs:
+        - 'check-tripleo-{name}'
+
+# This job is aiming to become:
+# check-tripleo-ironic-undercloud-overcloud-precise-ha-reboot
+- project:
+    name: 'ironic-overcloud-precise-ha'
+    node: 'tripleo-precise'
+    jobs:
+        - 'check-tripleo-{name}'
+
+- project:
+    name: 'ironic-vlan-precise-nonha'
+    node: 'tripleo-precise'
+    jobs:
+        - 'check-tripleo-{name}'
