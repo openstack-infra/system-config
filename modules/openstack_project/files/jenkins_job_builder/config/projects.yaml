@@ -1574,6 +1574,8 @@
       - gate-{name}-pep8
       - gate-{name}-python27
       - gate-{name}-pypy
+      - gate-{name}-tox-{envlist}:
+          envlist: versions-overlap-parent
 
 
 - project:
