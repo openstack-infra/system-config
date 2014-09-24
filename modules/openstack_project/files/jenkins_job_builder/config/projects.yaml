@@ -16,6 +16,14 @@
       - 'gate-aviator-tests'
 
 - project:
+    name: cloudbase-init
+    node: bare-trusty
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - python-jobs
+
+- project:
     name: freezer
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
