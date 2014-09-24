@@ -1,80 +1,6 @@
-- job:
-    name: 'check-tripleo-novabm-undercloud-precise-nonha'
-    node: 'tripleo-precise'
-
-    wrappers:
-      - build-timeout:
-          timeout: 125
-      - timestamps
-
-    builders:
-      - link-logs
-      - net-info
-      - devstack-checkout
-      - shell: |
-          #!/bin/bash -xe
-          export PYTHONUNBUFFERED=true
-          export DEVSTACK_GATE_TIMEOUT=120
-          export DEVSTACK_GATE_TEMPEST=0
-          export DEVSTACK_GATE_EXERCISES=0
-          sudo chown -hR $(whoami) /opt/git
-          function gate_hook {
-              bash -xe /opt/stack/new/tripleo-ci/toci_gate_test.sh
-          }
-          export -f gate_hook
-          cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
-          ./safe-devstack-vm-gate-wrap.sh
-
-    publishers:
-      - scp:
-          site: 'static.openstack.org'
-          files:
-            - target: 'logs/$LOG_PATH'
-              source: 'logs/**'
-              keep-hierarchy: true
-              copy-after-failure: true
-      - console-log
-
-- job:
-    name: 'check-tripleo-ironic-undercloud-precise-nonha'
-    node: 'tripleo-precise'
-
-    wrappers:
-      - build-timeout:
-          timeout: 125
-      - timestamps
-
-    builders:
-      - link-logs
-      - net-info
-      - devstack-checkout
-      - shell: |
-          #!/bin/bash -xe
-          export PYTHONUNBUFFERED=true
-          export DEVSTACK_GATE_TIMEOUT=120
-          export DEVSTACK_GATE_TEMPEST=0
-          export DEVSTACK_GATE_EXERCISES=0
-          sudo chown -hR $(whoami) /opt/git
-          function gate_hook {
-              bash -xe /opt/stack/new/tripleo-ci/toci_gate_test.sh
-          }
-          export -f gate_hook
-          cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
-          ./safe-devstack-vm-gate-wrap.sh
-
-    publishers:
-      - scp:
-          site: 'static.openstack.org'
-          files:
-            - target: 'logs/$LOG_PATH'
-              source: 'logs/**'
-              keep-hierarchy: true
-              copy-after-failure: true
-      - console-log
-
-- job:
-    name: 'check-tripleo-novabm-overcloud-precise-nonha'
-    node: 'tripleo-precise'
+- job-template:
+    name: 'check-tripleo-{name}'
+    node: '{node}'
 
     wrappers:
       - build-timeout:
@@ -92,9 +18,9 @@
           export DEVSTACK_GATE_TEMPEST=0
           export DEVSTACK_GATE_EXERCISES=0
           sudo chown -hR $(whoami) /opt/git
-          function gate_hook {
+          function gate_hook {{
               bash -xe /opt/stack/new/tripleo-ci/toci_gate_test.sh
-          }
+          }}
           export -f gate_hook
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
@@ -109,116 +35,41 @@
               copy-after-failure: true
       - console-log
 
-- job:
-    name: 'check-tripleo-novabm-overcloud-f20-nonha'
+- project:
+    name: 'novabm-undercloud-precise-nonha'
+    node: 'tripleo-precise'
+    jobs:
+        - 'check-tripleo-{name}'
+
+
+- project:
+    name: 'ironic-undercloud-precise-nonha'
+    node: 'tripleo-precise'
+    jobs:
+        - 'check-tripleo-{name}'
+
+- project:
+    name: 'novabm-overcloud-precise-nonha'
+    node: 'tripleo-precise'
+    jobs:
+        - 'check-tripleo-{name}'
+
+- project:
+    name: 'novabm-overcloud-f20-nonha'
     node: 'tripleo-f20'
-
-    wrappers:
-      - build-timeout:
-          timeout: 145
-      - timestamps
-
-    builders:
-      - link-logs
-      - net-info
-      - devstack-checkout
-      - shell: |
-          #!/bin/bash -xe
-          export PYTHONUNBUFFERED=true
-          export DEVSTACK_GATE_TIMEOUT=140
-          export DEVSTACK_GATE_TEMPEST=0
-          export DEVSTACK_GATE_EXERCISES=0
-          sudo chown -hR $(whoami) /opt/git
-          function gate_hook {
-              bash -xe /opt/stack/new/tripleo-ci/toci_gate_test.sh
-          }
-          export -f gate_hook
-          cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
-          ./safe-devstack-vm-gate-wrap.sh
-
-    publishers:
-      - scp:
-          site: 'static.openstack.org'
-          files:
-            - target: 'logs/$LOG_PATH'
-              source: 'logs/**'
-              keep-hierarchy: true
-              copy-after-failure: true
-      - console-log
+    jobs:
+        - 'check-tripleo-{name}'
 
 # This job is aiming to become:
 # check-tripleo-ironic-undercloud-overcloud-precise-ha-reboot
-- job:
-    name: 'check-tripleo-ironic-overcloud-precise-ha'
+- project:
+    name: 'ironic-overcloud-precise-ha'
     node: 'tripleo-precise'
+    jobs:
+        - 'check-tripleo-{name}'
 
-    wrappers:
-      - build-timeout:
-          timeout: 145
-      - timestamps
-
-    builders:
-      - link-logs
-      - net-info
-      - devstack-checkout
-      - shell: |
-          #!/bin/bash -xe
-          export PYTHONUNBUFFERED=true
-          export DEVSTACK_GATE_TIMEOUT=140
-          export DEVSTACK_GATE_TEMPEST=0
-          export DEVSTACK_GATE_EXERCISES=0
-          sudo chown -hR $(whoami) /opt/git
-          function gate_hook {
-              bash -xe /opt/stack/new/tripleo-ci/toci_gate_test.sh
-          }
-          export -f gate_hook
-          cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
-          ./safe-devstack-vm-gate-wrap.sh
-
-    publishers:
-      - scp:
-          site: 'static.openstack.org'
-          files:
-            - target: 'logs/$LOG_PATH'
-              source: 'logs/**'
-              keep-hierarchy: true
-              copy-after-failure: true
-      - console-log
-
-- job:
-    name: 'check-tripleo-ironic-vlan-precise-nonha'
+- project:
+    name: 'ironic-vlan-precise-nonha'
     node: 'tripleo-precise'
-
-    wrappers:
-      - build-timeout:
-          timeout: 145
-      - timestamps
-
-    builders:
-      - link-logs
-      - net-info
-      - devstack-checkout
-      - shell: |
-          #!/bin/bash -xe
-          export PYTHONUNBUFFERED=true
-          export DEVSTACK_GATE_TIMEOUT=140
-          export DEVSTACK_GATE_TEMPEST=0
-          export DEVSTACK_GATE_EXERCISES=0
-          sudo chown -hR $(whoami) /opt/git
-          function gate_hook {
-              bash -xe /opt/stack/new/tripleo-ci/toci_gate_test.sh
-          }
-          export -f gate_hook
-          cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
-          ./safe-devstack-vm-gate-wrap.sh
-
-    publishers:
-      - scp:
-          site: 'static.openstack.org'
-          files:
-            - target: 'logs/$LOG_PATH'
-              source: 'logs/**'
-              keep-hierarchy: true
-              copy-after-failure: true
-      - console-log
-
+    jobs:
+        - 'check-tripleo-{name}'
