@@ -1271,6 +1271,10 @@
   description: Quincy-compliant API implemenation for StackTach.v3. Works with Winchester.
   acl-config: /home/gerrit2/acls/stackforge/stacktach.config
   upstream: https://github.com/stacktach/quince.git
+- project: stackforge/stacktach-sandbox
+  description: DevStack-like environment for StackTach.v3
+  acl-config: /home/gerrit2/acls/stackforge/stacktach.config
+  upstream: https://github.com/stacktach/sandbox.git
 - project: stackforge/stacktach-shoebox
   description: Binary data archiving library - supports uploading to object storage.
   acl-config: /home/gerrit2/acls/stackforge/stacktach.config
