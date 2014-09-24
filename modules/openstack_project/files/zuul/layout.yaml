@@ -5243,6 +5243,11 @@ projects:
       - name: merge-check
       - name: noop-jobs
 
+  - name: stackforge/stacktach-winchester
+    template:
+      - name: merge-check
+      - name: noop-jobs
+
   - name: stackforge/surveil
     template:
       - name: merge-check
