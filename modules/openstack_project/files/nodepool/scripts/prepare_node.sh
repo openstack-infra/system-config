@@ -27,13 +27,6 @@ GIT_BASE=${GIT_BASE:-git://git.openstack.org}
 
 export PUPPET_VERSION=${PUPPET_VERSION:-'2'}
 
-# Save the nameservers configured by our provider.
-cat >/tmp/forwarding.conf <<EOF
-forward-zone:
-  name: "."
-  forward-addr: 8.8.8.8
-EOF
-
 sudo hostname $HOSTNAME
 if [ -n "$HOSTNAME" ] && ! grep -q $HOSTNAME /etc/hosts
 then
@@ -71,9 +64,12 @@ if [ "$PUPPET_RET_CODE" -eq "4" ] || [ "$PUPPET_RET_CODE" -eq "6" ] ; then
 fi
 set -e
 
-# The puppet modules should install unbound.  Take the nameservers
-# that we ended up with at boot and configure unbound to forward to
-# them.
+# The puppet modules should install unbound.  Set up some nameservers.
+cat >/tmp/forwarding.conf <<EOF
+forward-zone:
+  name: "."
+  forward-addr: 8.8.8.8
+EOF
 sudo mv /tmp/forwarding.conf /etc/unbound/
 sudo chown root:root /etc/unbound/forwarding.conf
 sudo chmod a+r /etc/unbound/forwarding.conf
