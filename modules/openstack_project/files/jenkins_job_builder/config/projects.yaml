@@ -3062,6 +3062,11 @@
       - python-jobs
 
 - project:
+    name: stacktach-klugman
+    node: 'bare-precise || bare-trusty'
+    tarball-site: tarballs.openstack.org
+
+- project:
     name: stacktach-notigen
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
