@@ -49,6 +49,10 @@ function is_ubuntu {
     [ -f /usr/bin/apt-get ]
 }
 
+function is_opensuse {
+    [ -f /usr/bin/zypper ] && \
+        cat /etc/os-release | grep -q -e "openSUSE"
+}
 
 #
 # Distro specific puppet installs
@@ -180,6 +184,13 @@ EOF
         --assume-yes install -y --force-yes puppet git $rubypkg
 }
 
+function setup_puppet_opensuse {
+    local version=`grep -e "VERSION_ID" /etc/os-release | tr -d "\"" | cut -d "=" -f2`
+    zypper ar http://download.opensuse.org/repositories/systemsmanagement:/puppet/openSUSE_${version}/systemsmanagement:puppet.repo
+    zypper -v --gpg-auto-import-keys --no-gpg-checks -n ref
+    zypper --non-interactive in --force-resolution puppet
+}
+
 #
 # pip setup
 #
@@ -209,6 +220,10 @@ function setup_pip {
         rm -rf /usr/lib/python2.6/site-packages/setuptools*
     fi
 
+    if is_opensuse; then
+        zypper --non-interactive in --force-resolution python python-xml
+    fi
+
     python get-pip.py
     pip install -U setuptools
 }
@@ -223,6 +238,8 @@ elif is_rhel7; then
     setup_puppet_rhel7
 elif is_ubuntu; then
     setup_puppet_ubuntu
+elif is_opensuse; then
+    setup_puppet_opensuse
 else
     echo "*** Can not setup puppet: distribution not recognized"
     exit 1
