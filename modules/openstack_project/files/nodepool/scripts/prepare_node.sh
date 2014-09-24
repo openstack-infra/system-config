@@ -23,13 +23,6 @@ PYTHON3=${4:-false}
 PYPY=${5:-false}
 ALL_MYSQL_PRIVS=${6:-false}
 
-# Save the nameservers configured by our provider.
-cat >/tmp/forwarding.conf <<EOF
-forward-zone:
-  name: "."
-  forward-addr: 8.8.8.8
-EOF
-
 sudo hostname $HOSTNAME
 # Fedora image doesn't come with wget
 if [ -f /usr/bin/yum ]; then
@@ -48,9 +41,12 @@ else
 	-e "class {'openstack_project::single_use_slave': install_users => false, sudo => $SUDO, bare => $BARE, python3 => $PYTHON3, include_pypy => $PYPY, all_mysql_privs => $ALL_MYSQL_PRIVS, ssh_key => '$NODEPOOL_SSH_KEY', }"
 fi
 
-# The puppet modules should install unbound.  Take the nameservers
-# that we ended up with at boot and configure unbound to forward to
-# them.
+# The puppet modules should install unbound.  Set up some nameservers.
+cat >/tmp/forwarding.conf <<EOF
+forward-zone:
+  name: "."
+  forward-addr: 8.8.8.8
+EOF
 sudo mv /tmp/forwarding.conf /etc/unbound/
 sudo chown root:root /etc/unbound/forwarding.conf
 sudo chmod a+r /etc/unbound/forwarding.conf
