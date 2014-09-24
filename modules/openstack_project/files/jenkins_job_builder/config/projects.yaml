@@ -3381,3 +3381,8 @@
     name: keystone-formula
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
+
+- project:
+    name: glance-formula
+    node: 'bare-precise || bare-trusty'
+    tarball-site: tarballs.openstack.org
