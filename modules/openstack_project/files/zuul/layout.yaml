@@ -5147,6 +5147,18 @@ projects:
     post:
       - wsme-branch-tarball
 
+  - name: stackforge/os-client-config
+    template:
+      - name: check-requirements
+      - name: merge-check
+      - name: publish-to-pypi
+      - name: python-jobs
+      - name: python3-jobs
+    check:
+      - gate-os-client-config-pypy
+    gate:
+      - gate-os-client-config-pypy
+
   - name: stackforge/python-openstacksdk
     template:
       - name: merge-check
