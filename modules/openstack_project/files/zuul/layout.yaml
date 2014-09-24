@@ -5034,9 +5034,11 @@ projects:
       - name: merge-check
     check:
       - gate-swiftonfile-pep8
+      - gate-swiftonfile-python26
       - gate-swiftonfile-python27
     gate:
       - gate-swiftonfile-pep8
+      - gate-swiftonfile-python26
       - gate-swiftonfile-python27
 
   - name: stackforge/swiftpolicy
