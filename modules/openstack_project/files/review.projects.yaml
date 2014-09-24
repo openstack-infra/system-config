@@ -1250,6 +1250,10 @@
   description: Binary data archiving library - supports uploading to object storage.
   acl-config: /home/gerrit2/acls/stackforge/stacktach.config
   upstream: https://github.com/stacktach/shoebox.git
+- project: stackforge/stacktach-simport
+  description: Simple import library for Python (not entry-point based)
+  acl-config: /home/gerrit2/acls/stackforge/stacktach.config
+  upstream: https://github.com/stacktach/simport.git
 - project: stackforge/surveil
   description: Monitoring as a Service for OpenStack
 - project: stackforge/surveil-specs
