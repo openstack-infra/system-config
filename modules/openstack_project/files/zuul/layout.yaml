@@ -509,7 +509,7 @@ jobs:
     voting: false
   - name: check-tempest-dsvm-ironic-pxe_ssh-nv
     voting: false
-    branch: ^(?!stable/havana).*$
+    branch: ^(?!stable/(havana|icehouse)).*$
   - name: check-tempest-dsvm-ironic-pxe_ssh-postgres-nv
     voting: false
   - name: check-tempest-dsvm-ironic-agent_ssh-nv
