@@ -4037,6 +4037,11 @@ projects:
     gate:
       - gate-inception-pep8
 
+  - name: stackforge/keystone-formula
+    template:
+      - name: merge-check
+      - name: noop-jobs
+
   - name: stackforge/kwapi
     template:
       - name: merge-check
