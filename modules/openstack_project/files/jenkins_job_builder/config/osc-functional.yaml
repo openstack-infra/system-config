@@ -24,14 +24,12 @@
               export OVERRIDE_ZUUL_BRANCH=$BRANCH_OVERRIDE
           fi
 
-          # Do nothing for now, just setup and tear down devstack.
-          # Eventually we want something like:
-          #function post_test_hook {{
-              #source /opt/stack/new/devstack/accrc/admin/admin
-              #cd /opt/stack/new/python-openstackclient
-              #tox -e func
-          #}}
-          #export -f post_test_hook
+          function post_test_hook {{
+              source /opt/stack/new/devstack/accrc/admin/admin
+              cd /opt/stack/new/python-openstackclient
+              tox -e func
+          }}
+          export -f post_test_hook
 
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
