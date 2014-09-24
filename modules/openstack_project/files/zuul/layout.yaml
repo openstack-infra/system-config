@@ -5094,12 +5094,7 @@ projects:
   - name: stackforge/tricircle
     template:
       - name: merge-check
-    check:
-      - gate-tricircle-pep8
-      - gate-tricircle-python27
-    gate:
-      - gate-tricircle-pep8
-      - gate-tricircle-python27
+      - name: noop-jobs
 
   - name: stackforge/tripleo-ansible
     template:
