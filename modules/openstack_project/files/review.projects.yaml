@@ -282,6 +282,8 @@
   group: openstack-manuals
   upstream: git://github.com/ajaeger/ha-guide.git
   description: OpenStack High Availability Guide
+  options:
+    - direct-release
 - project: openstack/heat
 - project: openstack/heat-cfntools
   upstream: git://github.com/heat-api/heat-cfntools.git
@@ -521,6 +523,8 @@
 - project: openstack/training-guides
   description: Community created, open source training guides for OpenStack.
   upstream: git://github.com/fifieldt/openstack-training-guides.git
+  options:
+    - direct-release
 - project: openstack/tripleo-heat-templates
   group: tripleo
   description: Heat templates for deploying OpenStack
