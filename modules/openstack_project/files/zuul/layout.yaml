@@ -788,7 +788,7 @@ jobs:
     voting: false
 
   # TODO(stevemar): Enable voting when we have some basic coverage
-  - name: ^(gate|check)-osc-functional
+  - name: ^(gate|check)-osc-dsvm-functional
     voting: false
   - name: gate-horizon-dsvm-integration
     branch: ^(?!stable/(havana|icehouse)).*$
@@ -1761,9 +1761,9 @@ projects:
       - name: stable-compat-jobs
       - name: publish-to-pypi
     check:
-      - check-osc-functional
+      - check-osc-dsvm-functional
     gate:
-      - gate-osc-functional
+      - gate-osc-dsvm-functional
 
   - name: openstack/python-saharaclient
     template:
