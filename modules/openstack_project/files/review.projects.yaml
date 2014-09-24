@@ -158,6 +158,7 @@
   group: openstack-ci
 - project: openstack-infra/puppet-storyboard
   description: Puppet module to deploy storyboard
+  use-storyboard: true
   group: openstack-ci
 - project: openstack-infra/puppet-vcsrepo
   group: openstack-ci
