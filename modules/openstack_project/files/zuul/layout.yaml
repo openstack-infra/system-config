@@ -4858,6 +4858,8 @@ projects:
       - gate-rally-install-bare-precise
       - gate-rally-dsvm-rally
       - gate-rally-dsvm-neutron-rally
+    experimental:
+      - gate-rally-dsvm-designate-rally
     pre-release:
       - rally-tarball
     release:
