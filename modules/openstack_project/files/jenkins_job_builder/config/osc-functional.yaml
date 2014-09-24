@@ -1,5 +1,5 @@
 - job-template:
-    name: '{pipeline}-osc-functional{branch-designator}'
+    name: '{pipeline}-osc-dsvm-functional{branch-designator}'
     node: '{node}'
 
     wrappers:
