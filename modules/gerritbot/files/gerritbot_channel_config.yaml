@@ -279,6 +279,7 @@ puppet-openstack:
       - stackforge/puppet-horizon
       - stackforge/puppet-ironic
       - stackforge/puppet-keystone
+      - stackforge/puppet-manila
       - stackforge/puppet-neutron
       - stackforge/puppet-nova
       - stackforge/puppet-openstack
@@ -672,6 +673,7 @@ openstack-manila:
     projects:
       - openstack/manila
       - openstack/python-manilaclient
+      - stackforge/puppet-manila
     branches:
       - master
 
