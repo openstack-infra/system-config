@@ -53,6 +53,8 @@ def devstack_params(item, job, params):
         params['ZUUL_NODE'] = 'devstack-centos7'
     elif 'aiopcpu' in job.name:
         params['ZUUL_NODE'] = 'devstack-trusty-2-node'
+    elif 'newlibvirt' in job.name:
+        params['ZUUL_NODE'] = 'devstack-f20-virt-preview'
     else:
         params['ZUUL_NODE'] = 'devstack-trusty'
 
