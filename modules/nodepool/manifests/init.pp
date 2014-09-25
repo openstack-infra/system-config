@@ -66,6 +66,8 @@ class nodepool (
   $packages = [
     'kpartx',
     'qemu-utils',
+    # debootstrap is needed for building Debian images    
+    'debootstrap'
   ]
 
   package { $packages:
