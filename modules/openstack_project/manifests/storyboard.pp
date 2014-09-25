@@ -28,11 +28,16 @@ class openstack_project::storyboard(
     ssl_cert         => '/etc/ssl/certs/storyboard.openstack.org.pem',
     ssl_key_content  => $ssl_key_file_contents,
     ssl_key          => '/etc/ssl/private/storyboard.openstack.org.key',
-    ssl_ca_content   => $ssl_chain_file_contents
+    ssl_ca_content   => $ssl_chain_file_contents,
   }
 
   class { '::storyboard::application':
     hostname               => $::fqdn,
+    cors_allowed_origins   => [
+      'https://storyboard.openstack.org',
+      'http://docs-draft.openstack.org',
+    ],
+    cors_max_age           => 3600,
     openid_url             => $openid_url,
     mysql_host             => $mysql_host,
     mysql_database         => 'storyboard',
@@ -42,12 +47,12 @@ class openstack_project::storyboard(
     rabbitmq_port          => 5672,
     rabbitmq_vhost         => '/',
     rabbitmq_user          => $rabbitmq_user,
-    rabbitmq_user_password => $rabbitmq_password
+    rabbitmq_user_password => $rabbitmq_password,
   }
 
   class { '::storyboard::rabbit':
     rabbitmq_user          => $rabbitmq_user,
-    rabbitmq_user_password => $rabbitmq_password
+    rabbitmq_user_password => $rabbitmq_password,
   }
 
   # Load the projects into the database.
