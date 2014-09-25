@@ -424,7 +424,7 @@
           export PYTHONUNBUFFERED=true
           export DEVSTACK_GATE_TIMEOUT=120
           export DEVSTACK_GATE_TEMPEST=1
-          export DEVSTACK_GATE_TEMPEST_TESTR_FULL=1
+          export DEVSTACK_GATE_TEMPEST_FULL=1
           export DEVSTACK_GATE_NEUTRON=1
           export DEVSTACK_GATE_TEMPEST_ALLOW_TENANT_ISOLATION=1
           export BRANCH_OVERRIDE={branch-override}
@@ -458,7 +458,7 @@
           export PYTHONUNBUFFERED=true
           export DEVSTACK_GATE_TIMEOUT=120
           export DEVSTACK_GATE_TEMPEST=1
-          export DEVSTACK_GATE_TEMPEST_TESTR_FULL=1
+          export DEVSTACK_GATE_TEMPEST_FULL=1
           export DEVSTACK_GATE_POSTGRES=1
           export DEVSTACK_GATE_NEUTRON=1
           export DEVSTACK_GATE_TEMPEST_ALLOW_TENANT_ISOLATION=1
@@ -1024,7 +1024,7 @@
           export PYTHONUNBUFFERED=true
           export DEVSTACK_GATE_TIMEOUT=120
           export DEVSTACK_GATE_TEMPEST=1
-          export DEVSTACK_GATE_TEMPEST_TESTR_FULL=1
+          export DEVSTACK_GATE_TEMPEST_FULL=1
           export DEVSTACK_GATE_NEUTRON=1
           export DEVSTACK_GATE_TEMPEST_ALLOW_TENANT_ISOLATION=1
           export DEVSTACK_GATE_KEYSTONE_V3=1
