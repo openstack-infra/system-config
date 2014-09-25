@@ -80,18 +80,17 @@ That is the high level view of how we can configure projects using the
 pupppet repository. To create an actual change that does all of this for
 a single project you will want to do the following:
 
-#. Add a ``gerrit/acls/project-name.config`` file to the
+#. Add a ``gerrit/acls/organization/project-name.config`` file to the
    ``project-config`` repo. The contents will probably end up looking like
-   the block below (note that the sections are in alphabetical order
-   and each indentation is 8 spaces)::
+   the block below (note that the sections are in alphabetical order)::
 
      [access "refs/heads/*"]
      label-Code-Review = -2..+2 group project-name-core
      label-Workflow = -1..+1 group project-name-core
 
      [access "refs/heads/proposed/*"]
-     label-Code-Review = -2..+2 group project-name-milestone
-     label-Workflow = -1..+1 group project-name-milestone
+     label-Code-Review = -2..+2 group project-name-release
+     label-Workflow = -1..+1 group project-name-release
 
      [receive]
      requireChangeId = true
@@ -103,8 +102,8 @@ a single project you will want to do the following:
 #. Add a project entry for the project in ``gerrit/projects.yaml`` in
    the ``project-config`` repo.::
 
-     - project: openstack/project-name
-       acl-config: /home/gerrit2/acls/project-name.config
+     - project: organization/project-name
+       acl-config: /home/gerrit2/acls/organization/project-name.config
 
 #. If there is an existing repo that is being replaced by this new
    project you can set the upstream value for the project. When an
@@ -112,7 +111,7 @@ a single project you will want to do the following:
    instead of an empty repository. eg::
 
      - project: openstack/project-name
-       acl-config: /home/gerrit2/acls/project-name.config
+       acl-config: /home/gerrit2/acls/organization/project-name.config
        upstream: git://github.com/awesumsauce/project-name.git
 
 That is all you need to do. Push the change to gerrit and if necessary
