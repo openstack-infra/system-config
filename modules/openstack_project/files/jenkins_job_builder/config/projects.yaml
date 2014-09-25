@@ -2128,6 +2128,15 @@
       - puppet-module-unit
 
 - project:
+    name: puppet-manila
+    node: 'bare-precise || bare-trusty'
+    tarball-site: tarballs.openstack.org
+
+    jobs:
+      - puppet-check-jobs
+      - puppet-module-unit
+
+- project:
     name: openstack-chef-repo
     node: 'bare-precise || bare-trusty'
 

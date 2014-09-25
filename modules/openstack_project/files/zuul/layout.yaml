@@ -4571,6 +4571,12 @@ projects:
       - name: puppet-check-jobs
       - name: puppet-module-unit-jobs
 
+  - name: stackforge/puppet-manila
+    template:
+      - name: merge-check
+      - name: puppet-check-jobs
+      - name: puppet-module-unit-jobs
+
   - name: stackforge/puppet-n1k-vsm
     template:
       - name: merge-check
