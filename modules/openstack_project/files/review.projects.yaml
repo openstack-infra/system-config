@@ -1143,6 +1143,9 @@
   acl-config: /home/gerrit2/acls/stackforge/murano.config
 - project: stackforge/namos
   description: Device and Service manager
+- project: stackforge/neutron-formula
+  description: SaltStack formula used for installing Openstack Neutron
+  acl-config: /home/gerrit2/acls/stackforge/salt-formula.config
 - project: stackforge/nova-docker
   description: Docker driver for OpenStack Nova
   upstream: git://github.com/russellb/nova-docker.git

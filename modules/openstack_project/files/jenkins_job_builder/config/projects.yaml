@@ -898,6 +898,10 @@
     jobs:
       - openstack-doc-jobs
 
+- project:
+    name: neutron-formula
+    node: 'bare-precise || bare-trusty'
+    tarball-site: tarballs.openstack.org
 
 - project:
     name: nodepool

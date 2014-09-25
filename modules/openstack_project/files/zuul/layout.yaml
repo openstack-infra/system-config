@@ -4372,6 +4372,11 @@ projects:
       - name: merge-check
       - name: noop-jobs
 
+  - name: stackforge/neutron-formula
+    template:
+      - name: merge-check
+      - name: noop-jobs
+
   - name: stackforge/nova-solver-scheduler
     template:
       - name: merge-check
