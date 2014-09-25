@@ -118,9 +118,9 @@
 
     builders:
         - devstack-designate-rally-gate:
-          scenario: '{name}-designate'
-          neutron: '0'
-          large_ops: '0'
+            scenario: '{name}-designate'
+            neutron: '0'
+            large_ops: '0'
 
     publishers:
       - devstack-logs
