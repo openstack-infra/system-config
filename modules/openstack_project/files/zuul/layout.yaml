@@ -3906,6 +3906,12 @@ projects:
     post:
       - entropy-coverage
 
+  - name: stackforge/flame
+    template:
+    - name: merge-check
+    - name: python-jobs
+    - name: python3-jobs
+
   - name: stackforge/freezer
     template:
       - name: merge-check
