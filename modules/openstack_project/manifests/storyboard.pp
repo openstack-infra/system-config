@@ -10,8 +10,14 @@ class openstack_project::storyboard(
   $ssl_cert_file_contents = undef,
   $ssl_key_file_contents = undef,
   $ssl_chain_file_contents = undef,
-  $openid_url = 'https://login.launchpad.net/+openid'
+  $openid_url = 'https://login.launchpad.net/+openid',
+  $project_config_repo = '',
 ) {
+
+  class { 'project_config':
+    url  => $project_config_repo,
+  }
+
   class { 'openstack_project::server':
     sysadmins                 => $sysadmins,
     iptables_public_tcp_ports => [80, 443],
@@ -46,7 +52,8 @@ class openstack_project::storyboard(
 
   # Load the projects into the database.
   class { '::storyboard::load_projects':
-    source => 'puppet:///modules/openstack_project/review.projects.yaml',
+    source  => $::project_config::jeepyb_project_file,
+    require => $::project_config::config_dir,
   }
 
   # Load the superusers into the database

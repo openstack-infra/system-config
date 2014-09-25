@@ -22,8 +22,14 @@ class openstack_project::git_backend (
   $ssl_cert_file_contents = '',
   $ssl_key_file_contents = '',
   $ssl_chain_file_contents = '',
-  $behind_proxy = false
+  $behind_proxy = false,
+  $project_config_repo = '',
 ) {
+
+  class { 'project_config':
+    url  => $project_config_repo,
+  }
+
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [4443, 8080, 29418],
     sysadmins                 => $sysadmins,
@@ -81,7 +87,8 @@ class openstack_project::git_backend (
     owner   => 'cgit',
     group   => 'cgit',
     mode    => '0444',
-    source  => 'puppet:///modules/openstack_project/review.projects.yaml',
+    source  => $::project_config::jeepyb_project_file,
+    require => $::project_config::config_dir,
     replace => true,
   }
 

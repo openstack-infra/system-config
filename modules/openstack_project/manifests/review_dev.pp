@@ -56,7 +56,7 @@ class openstack_project::review_dev (
       'https://review-dev.openstack.org/fakestore',
     acls_dir                        => $::project_config::gerrit_acls_dir,
     notify_impact_file              => $::project_config::gerrit_notify_impact_file,
-    projects_file                   => $::project_config::gerrit_project_file,
+    projects_file                   => $::project_config::jeepyb_project_file,
     projects_config                 =>
       'openstack_project/review-dev.projects.ini.erb',
     github_username                 => 'openstack-gerrit-dev',

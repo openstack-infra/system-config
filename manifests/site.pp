@@ -368,6 +368,7 @@ node 'git.openstack.org' {
 node /^git\d+\.openstack\.org$/ {
   include openstack_project
   class { 'openstack_project::git_backend':
+    project_config_repo     => 'https://git.openstack.org/openstack-infra/project-config',
     vhost_name              => 'git.openstack.org',
     sysadmins               => hiera('sysadmins', []),
     git_gerrit_ssh_key      => hiera('gerrit_replication_ssh_rsa_pubkey_contents', 'XXX'),
@@ -398,6 +399,7 @@ node 'summit.openstack.org' {
 # Node-OS: precise
 node 'storyboard.openstack.org' {
   class { 'openstack_project::storyboard':
+    project_config_repo     => 'https://git.openstack.org/openstack-infra/project-config',
     sysadmins               => hiera('sysadmins', []),
     mysql_host              => hiera('storyboard_db_host', 'localhost'),
     mysql_user              => hiera('storyboard_db_user', 'username'),
