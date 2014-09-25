@@ -68,6 +68,11 @@
               source: 'dist/**'
               keep-hierarchy: true
               copy-after-failure: false
+              # Upload any additional files necessary for the docs-draft build
+            - target: 'docs-draft/$LOG_PATH'
+              source: 'test/draft/**'
+              keep-hierarchy: true
+              copy-after-failure: false
     node: '{node}'
 
 # Builds a release tarball
