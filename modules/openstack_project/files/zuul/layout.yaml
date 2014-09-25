@@ -1906,6 +1906,11 @@ projects:
       - gate-git-upstream-pep8
       - gate-git-upstream-python27
 
+  - name: stackforge/cinder-formula
+    template:
+      - name: merge-check
+      - name: noop-jobs
+
   - name: stackforge/cloudbase-init
     template:
       - name: merge-check
