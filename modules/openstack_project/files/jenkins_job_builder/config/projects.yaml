@@ -940,6 +940,11 @@
           branch-override: default
 
 - project:
+  name: nova-formula
+    node: 'bare-precise || bare-trusty'
+    tarball-site: tarballs.openstack.org
+
+- project:
     name: nova-specs
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org

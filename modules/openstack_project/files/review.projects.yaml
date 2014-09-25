@@ -1146,6 +1146,10 @@
 - project: stackforge/nova-docker
   description: Docker driver for OpenStack Nova
   upstream: git://github.com/russellb/nova-docker.git
+- project: stackforge/nova-formula
+  description: SaltStack formula used for installing Openstack Nova
+  acl-config: /home/gerrit2/acls/stackforge/salt-formula.config
+  upstream: https://github.com/jeffrey4l/nova-formula.git
 - project: stackforge/nova-solver-scheduler
   description: Nova scheduler driver for constraints-based scheduling
   upstream: git://github.com/CiscoSystems/nova-solver-scheduler.git
