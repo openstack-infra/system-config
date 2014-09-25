@@ -4,14 +4,14 @@
 # accessed by other classes.
 class snmpd::params {
   case $::osfamily {
-    'RedHat': {
+    /^(RedHat|Suse)$/: {
       $package_name = 'net-snmp'
     }
     'Debian': {
       $package_name = 'snmpd'
     }
     default: {
-      fail("Unsupported osfamily: ${::osfamily} The 'snmpd' module only supports osfamily Debian or RedHat (slaves only).")
+      fail("Unsupported osfamily: ${::osfamily} The 'snmpd' module only supports osfamily Debian, RedHat or SUSE (slaves only).")
     }
   }
 }
