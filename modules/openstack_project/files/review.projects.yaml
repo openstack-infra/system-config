@@ -678,6 +678,10 @@
 - project: stackforge/cachemonkey
   description: Image pre-caching controller service
   upstream: git://github.com/bdelliott/cachemonkey.git
+- project: stackforge/cinder-formula
+  description: SaltStack formula used for installing Openstack Cinder
+  acl-config: /home/gerrit2/acls/stackforge/salt-formula.config
+  upstream: https://github.com/jeffrey4l/cinder-formula.git
 - project: stackforge/cl-openstack-client
   description: Common Lisp OpenStack client libraries
   upstream: git://github.com/jd/cl-openstack-client.git
