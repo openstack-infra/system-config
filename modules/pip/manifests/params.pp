@@ -4,7 +4,7 @@
 # accessed by other classes.
 class pip::params {
   case $::osfamily {
-    'RedHat': {
+    /^(RedHat|Suse)$/: {
       $python_devel_package = 'python-devel'
       $python3_devel_package = 'python3-devel'
       $python3_pip_package   = 'python3-pip'
