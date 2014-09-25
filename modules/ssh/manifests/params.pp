@@ -14,8 +14,13 @@ class ssh::params {
       $service_name = 'ssh'
       $sftp_path    = '/usr/lib/openssh/sftp-server'
     }
+    'Suse': {
+        $package_name = 'openssh'
+        $service_name = 'sshd'
+        $sftp_path    = '/usr/lib/ssh/sftp-server'
+    }
     default: {
-      fail("Unsupported osfamily: ${::osfamily} The 'ssh' module only supports osfamily Debian or RedHat (slaves only).")
+      fail("Unsupported osfamily: ${::osfamily} The 'ssh' module only supports osfamily Debian, RedHat or SUSE (slaves only).")
     }
   }
 }
