@@ -189,17 +189,27 @@ def main():
         '-k', '--keyfile', default='~/.ssh/id_rsa',
         help='SSH key (default is ~/.ssh/id_rsa)')
     optparser.add_option(
+        '-r', '--ref', default='',
+        help='governance git ref (e.g. sept-2014-elections')
+    optparser.add_option(
         '-u', '--user', default=os.environ['USER'],
         help='SSH username (default is $USER)')
     options, args = optparser.parse_args()
 
-    for project in get_projects(PROGRAMS_URL):
+    if options.ref:
+        programs_url = '%s?id=%s' % (PROGRAMS_URL, options.ref)
+        extra_atcs_url = '%s?id=%s' % (EXTRA_ATCS_URL, options.ref)
+    else:
+        programs_url = PROGRAMS_URL
+        extra_atcs_url = EXTRA_ATCS_URL
+
+    for project in get_projects(programs_url):
         output = 'out/%s.csv' % project.split('/')[-1]
         project_stats(project, output, options.begin, options.end,
                       options.keyfile, options.user)
 
     writer = csv.writer(open('out/extra-atcs.csv', 'w'))
-    for atc in get_extra_atcs(EXTRA_ATCS_URL):
+    for atc in get_extra_atcs(extra_atcs_url):
         try:
             writer.writerow([''] + list(EXTRA_ATC_RE.match(atc).groups()))
         except AttributeError:
