@@ -14,7 +14,7 @@ elections and Summit invitations.
   . venv/bin/activate
   pip install paramiko requests pyyaml
   ./email_stats.py --begin <BEGINDATE>
-  # optionally specify --end, --keyfile and --user
+  # optionally specify --end, --keyfile, --ref and --user
   DATE=`date --iso`
   mv out $DATE
   cat $DATE/*.csv | sort | uniq > $DATE/all.csv
