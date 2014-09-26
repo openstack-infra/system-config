@@ -109,10 +109,12 @@ def project_stats(project, output, begin, end, keyfile, user):
 
     done = False
     last_sortkey = ''
-    start_date = datetime.datetime(int(begin[0:4]), int(begin[4:6]),
-                                   int(begin[6:8]), 0, 0, 0)
-    end_date = datetime.datetime(int(end[0:4]), int(end[4:6]), int(end[6:8]),
-                                 0, 0, 0)
+    begin_time = datetime.datetime(
+            int(begin[0:4]), int(begin[4:6]), int(begin[6:8]),
+            int(begin[8:10]), int(begin[10:12]), int(begin[12:14]))
+    end_time = datetime.datetime(
+            int(end[0:4]), int(end[4:6]), int(end[6:8]),
+            int(end[8:10]), int(end[10:12]), int(end[12:14]))
 
     count = 0
     earliest = datetime.datetime.now()
@@ -138,7 +140,7 @@ def project_stats(project, output, begin, end, keyfile, user):
                     if aprv['type'] != 'SUBM':
                         continue
                     ts = datetime.datetime.fromtimestamp(aprv['grantedOn'])
-                    if ts < start_date or ts > end_date:
+                    if ts < begin_time or ts > end_time:
                         continue
                     approved = True
                     if ts < earliest:
@@ -177,14 +179,14 @@ def get_extra_atcs(url):
 
 
 def main():
-    today = ''.join(
-            '%02d' % x for x in datetime.datetime.utcnow().utctimetuple()[:3])
+    now = ''.join(
+            '%02d' % x for x in datetime.datetime.utcnow().utctimetuple()[:6])
 
     optparser = optparse.OptionParser()
     optparser.add_option(
-        '-b', '--begin', help='begin date (e.g. 20131017)')
+        '-b', '--begin', help='begin date/time (e.g. 20131017000000)')
     optparser.add_option(
-        '-e', '--end', default=today, help='end date (default is today)')
+        '-e', '--end', default=now, help='end date/time (default is now)')
     optparser.add_option(
         '-k', '--keyfile', default='~/.ssh/id_rsa',
         help='SSH key (default is ~/.ssh/id_rsa)')
