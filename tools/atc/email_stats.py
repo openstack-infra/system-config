@@ -34,7 +34,7 @@ import yaml
 
 MAILTO_RE = re.compile('mailto:(.*)')
 USERNAME_RE = re.compile('username:(.*)')
-EXTRA_ATC_RE = re.compile('[^:]*: ([^\(]*) \(([^@]*@[^\)]*)\) \[[^\[]*\]')
+EXTRA_ATC_RE = re.compile('^[^#][^:]*: ([^\(]*) \(([^@]*@[^\)]*)\) \[[^\[]*\]')
 PROGRAMS_URL = ('https://git.openstack.org/cgit/openstack/governance/plain'
                 '/reference/programs.yaml')
 EXTRA_ATCS_URL = ('https://git.openstack.org/cgit/openstack/governance/plain'
