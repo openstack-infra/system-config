@@ -87,6 +87,9 @@ class openstack_project::jenkins_params {
         $cgred_require = Package['cgroups']
         $dvipng_package = 'dvipng'
       }
+      # AMQP 1.0 support for olso.messaging
+      $qpid_proton_dev_package = 'qpid-proton-c-devel'
+      $python_qpid_proton_package = 'python-qpid-proton'
     }
     'Debian': {
       # packages needed by slaves
@@ -163,6 +166,10 @@ class openstack_project::jenkins_params {
         Package['cgroups'],
         File['/etc/init/cgred.conf'],
       ]
+      # AMQP 1.0 support for olso.messaging:
+      # TODO(kgiusti) enable once proton available via distros:
+      # $qpid_proton_dev_package = 'libqpid-proton-dev'
+      # $python_qpid_proton_package = 'python-qpid-proton'
     }
     default: {
       fail("Unsupported osfamily: ${::osfamily} The 'jenkins' module only supports osfamily Debian or RedHat (slaves only).")
