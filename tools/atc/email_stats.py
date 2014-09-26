@@ -189,9 +189,16 @@ def main():
         '-k', '--keyfile', default='~/.ssh/id_rsa',
         help='SSH key (default is ~/.ssh/id_rsa)')
     optparser.add_option(
+        '-r', '--ref', default='',
+        help='governance git ref (e.g. sept-2014-elections')
+    optparser.add_option(
         '-u', '--user', default=os.environ['USER'],
         help='SSH username (default is $USER)')
     options, args = optparser.parse_args()
+
+    if options.ref:
+        EXTRA_ATCS_URL = '%s?id=%s' % (EXTRA_ATCS_URL, options.ref)
+        PROGRAMS_URL = '%s?id=%s' % (PROGRAMS_URL, options.ref)
 
     for project in get_projects(PROGRAMS_URL):
         output = 'out/%s.csv' % project.split('/')[-1]
