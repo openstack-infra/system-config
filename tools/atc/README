@@ -13,12 +13,12 @@ elections and Summit invitations.
   virtualenv venv
   . venv/bin/activate
   pip install paramiko requests pyyaml
-  ./email_stats.py --begin <BEGINDATE>
+  ./email_stats.py --begin <BEGINTIME>
   # optionally specify --end, --keyfile, --ref and --user
-  DATE=`date --iso`
-  mv out $DATE
-  cat $DATE/*.csv | sort | uniq > $DATE/all.csv
+  TIME=`date +%Y%m%d%H%M%S`
+  mv out $TIME
+  cat $TIME/*.csv | sort | uniq > $TIME/all.csv
 
 4) You can use diff.py to get the new ATCs since the previous run:
 
-  ./diff.py $OLD-DATE/all.csv $DATE/all.csv $DATE/new.csv
+  ./diff.py $OLD-TIME/all.csv $TIME/all.csv $TIME/new.csv
