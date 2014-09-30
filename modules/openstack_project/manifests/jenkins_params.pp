@@ -70,6 +70,8 @@ class openstack_project::jenkins_params {
         # install mysql-devel you get a conflict with
         # mariadb packages.
         $mysql_dev_package = 'community-mysql-devel'
+        $mysql_package = 'community-mysql'
+        $zookeeper_package = 'zookeeper'
         $cgroups_tools_package = 'libcgroup-tools'
         $cgconfig_require = [
           Package['cgroups'],

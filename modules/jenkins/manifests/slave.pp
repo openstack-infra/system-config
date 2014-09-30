@@ -37,32 +37,20 @@ class jenkins::slave(
 
   case $::osfamily {
     'RedHat': {
-
       exec { 'yum Group Install':
         unless  => '/usr/bin/yum grouplist "Development tools" | /bin/grep "^Installed [Gg]roups"',
         command => '/usr/bin/yum -y groupinstall "Development tools"',
       }
 
-      if ($::operatingsystem == 'Fedora') {
-          package { $::jenkins::params::zookeeper_package:
-              ensure => present,
-          }
-          # Fedora needs community-mysql package for mysql_config
-          # command used in some gate-{project}-python27
-          # jobs in Jenkins
-          package { $::jenkins::params::mysql_package:
-              ensure => present,
-          }
-      } else {
-          exec { 'update-java-alternatives':
-            unless   => '/bin/ls -l /etc/alternatives/java | /bin/grep 1.7.0-openjdk',
-            command  => '/usr/sbin/alternatives --set java /usr/lib/jvm/jre-1.7.0-openjdk.x86_64/bin/java && /usr/sbin/alternatives --set javac /usr/lib/jvm/java-1.7.0-openjdk.x86_64/bin/javac',
-            require  => Anchor['jenkins::slave::update-java-alternatives']
-          }
+      if ($::operatingsystem != 'Fedora') {
+        exec { 'update-java-alternatives':
+          unless   => '/bin/ls -l /etc/alternatives/java | /bin/grep 1.7.0-openjdk',
+          command  => '/usr/sbin/alternatives --set java /usr/lib/jvm/jre-1.7.0-openjdk.x86_64/bin/java && /usr/sbin/alternatives --set javac /usr/lib/jvm/java-1.7.0-openjdk.x86_64/bin/javac',
+          require  => Anchor['jenkins::slave::update-java-alternatives']
+        }
       }
     }
     'Debian': {
-
       # install build-essential package group
       package { 'build-essential':
         ensure => present,
@@ -86,22 +74,11 @@ class jenkins::slave(
         require => Package[$::jenkins::params::jdk_package],
       }
 
-      # For [tooz, taskflow, nova] using zookeeper in unit tests
-      package { $::jenkins::params::zookeeper_package:
-        ensure => present,
-      }
-
-      # For openstackid using php5-mcrypt for distro build
-      package { $::jenkins::params::php5_mcrypt_package:
-        ensure => present,
-      }
-
       exec { 'update-java-alternatives':
         unless   => '/bin/ls -l /etc/alternatives/java | /bin/grep java-7-openjdk-amd64',
         command  => '/usr/sbin/update-java-alternatives --set java-1.7.0-openjdk-amd64',
         require  => Anchor['jenkins::slave::update-java-alternatives']
       }
-
     }
     default: {
       fail("Unsupported osfamily: ${::osfamily} The 'jenkins' module only supports osfamily Debian or RedHat (slaves only).")
