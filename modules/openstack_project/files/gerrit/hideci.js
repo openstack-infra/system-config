@@ -204,6 +204,7 @@ window.onload = function() {
         var span = $("span.rpcStatus");
         $.each(mutations, function(i, mutation) {
             if (mutation.target === span[0] &&
+                mutation.attributeName === "style" &&
                 (!(span.is(":visible:")))) {
                 ci_page_loaded();
             }
