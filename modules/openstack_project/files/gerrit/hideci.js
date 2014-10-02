@@ -150,7 +150,7 @@ ci_update_table = function() {
                 var td = $(big_table_row).children()[1];
                 $(td).append(table);
             }
-            // Hide existing comments
+            // Hide or Show existing comments based on cookie
             ci_toggle_visibility(comments);
         } else {
             $(table).empty();
@@ -185,14 +185,34 @@ ci_page_loaded = function() {
     }
 };
 
+var set_cookie = function (name, value) {
+    document.cookie = name + "=" + value + "; path=/";
+};
+
+var read_cookie = function (name) {
+    var nameEQ = name + "=";
+    var ca = document.cookie.split(';');
+    for (var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') {
+            c = c.substring(1, c.length);
+        }
+        if (c.indexOf(nameEQ) == 0) {
+            return c.substring(nameEQ.length, c.length);
+        }
+    }
+    return null;
+};
+
 ci_toggle_visibility = function(comments) {
     if (!comments) {
         comments = ci_find_comments();
     }
+    var showOrHide = 'true' == read_cookie('show-ci-comments');
     $.each(comments, function(i, comment) {
         if (ciRegex.exec(comment["name"]) &&
             !comment["merge_failure"]) {
-            comment["top"].toggle();
+            comment["top"].toggle(showOrHide);
         }
     });
 };
@@ -203,7 +223,13 @@ window.onload = function() {
     input.type = "button";
     input.className = "gwt-Button";
     input.value = "Toggle CI";
-    input.onclick = function() { ci_toggle_visibility(null); };
+    input.onclick = function() {
+        // Flip the cookie
+        var showOrHide = 'true' == read_cookie('show-ci-comments');
+        set_cookie('show-ci-comments', showOrHide ? 'false' : 'true');
+        // Hide or Show existing comments based on cookie
+        ci_toggle_visibility(null);
+    };
     document.body.appendChild(input);
 
     MutationObserver = window.MutationObserver || window.WebKitMutationObserver;
