@@ -243,13 +243,32 @@ var ci_display_results = function(comments) {
     }
 };
 
-var ci_toggle_visibility = function(comments) {
+var set_cookie = function (name, value) {
+    document.cookie = name + "=" + value + "; path=/";
+};
+
+var read_cookie = function (name) {
+    var nameEQ = name + "=";
+    var ca = document.cookie.split(';');
+    for (var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') {
+            c = c.substring(1, c.length);
+        }
+        if (c.indexOf(nameEQ) == 0) {
+            return c.substring(nameEQ.length, c.length);
+        }
+    }
+    return null;
+};
+
+var ci_toggle_visibility = function(comments, showOrHide) {
     if (!comments) {
         comments = ci_parse_comments();
     }
     $.each(comments, function(i, comment) {
         if (comment.is_ci) {
-            $(comment.ref).toggle();
+            $(comment.ref).toggle(showOrHide);
         }
     });
 };
@@ -270,7 +289,10 @@ var ci_page_loaded = function() {
         $("#toggleci").show();
         var comments = ci_parse_comments();
         ci_display_results(comments);
-        ci_hide_ci_comments(comments);
+        var showOrHide = 'true' == read_cookie('show-ci-comments');
+        if (!showOrHide) {
+            ci_hide_ci_comments(comments);
+        }
     } else {
         $("#toggleci").hide();
     }
@@ -283,7 +305,13 @@ window.onload = function() {
     input.type = "button";
     input.className = "gwt-Button";
     input.value = "Toggle CI";
-    input.onclick = function() { ci_toggle_visibility(null); };
+    input.onclick = function () {
+        // Flip the cookie
+        var showOrHide = 'true' == read_cookie('show-ci-comments');
+        set_cookie('show-ci-comments', showOrHide ? 'false' : 'true');
+        // Hide or Show existing comments based on cookie
+        ci_toggle_visibility(null, !showOrHide);
+    };
     document.body.appendChild(input);
 
     MutationObserver = window.MutationObserver || window.WebKitMutationObserver;
