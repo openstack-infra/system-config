@@ -51,7 +51,7 @@ master_doc = 'index'
 project = u'OpenStack Project Infrastructure'
 copyright = Markup(u'2012-2014, OpenStack Infastructure Team'
                    u' - see the <a href="https://git.openstack.org/cgit/'
-                   u'openstack-infra/config/">config git repo</a> for details')
+                   u'openstack-infra/system-config/">system-config git repo</a> for details')
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the

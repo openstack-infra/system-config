@@ -39,9 +39,9 @@ def file_role(name, rawtext, text, lineno, inliner,
     :param content: The directive content for customization.
     """
 
-    ref = ('https://git.openstack.org/cgit/openstack-infra/config/tree/%s'
+    ref = ('https://git.openstack.org/cgit/openstack-infra/system-config/tree/%s'
            % text)
-    linktext = 'config: %s' % text
+    linktext = 'system-config: %s' % text
     node = nodes.reference(rawtext, linktext, refuri=ref, **options)
     return [node], []
 

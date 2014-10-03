@@ -43,9 +43,9 @@ manage OpenStack infrastructure systems.
 Configuration
 =============
 
-Much of StoryBoard's default configuration is managed from within infra/config
-itself. To add a project, admin, or modify a team, please follow the
-instructions below.
+Much of StoryBoard's default configuration is managed from within
+infra/system-config itself. To add a project, admin, or modify a team, please
+follow the instructions below.
 
 Adding a Project to StoryBoard
 ------------------------------

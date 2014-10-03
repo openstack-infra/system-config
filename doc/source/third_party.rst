@@ -139,7 +139,7 @@ advisable during the initial testing of the setup.
 
 There are several triggers that gerrit will match to alter the
 formatting of comments.  The raw regular expressions can be seen in
-`gerrit.pp <https://git.openstack.org/cgit/openstack-infra/config/tree/modules/openstack_project/manifests/gerrit.pp>`_.
+`gerrit.pp <https://git.openstack.org/cgit/openstack-infra/system-config/tree/modules/openstack_project/manifests/gerrit.pp>`_.
 For example, to have your test results formatted in the same manner as
 the upstream Jenkins results, use a template for each result matching::
 
