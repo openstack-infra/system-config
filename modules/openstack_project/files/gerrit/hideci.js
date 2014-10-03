@@ -14,7 +14,7 @@
 // under the License.
 
 // this regex matches the hash part of review pages
-var hashRegex = /^\#\/c\/[\/\d]+$/;
+var hashRegex = /^\#\/c\/([\d]+)\/([\/\d+])?$/;
 // this regex matches CI comments
 var ciRegex = /^(.* CI|Jenkins)$/;
 // this regex matches "Patch set #"
@@ -23,6 +23,33 @@ var psRegex = /^<p>(Uploaded patch set|Patch Set) (\d+)(:|\.)/;
 var mergeFailedRegex = /Merge Failed\./;
 // this regex matches the name of CI systems we trust to report merge failures
 var trustedCIRegex = /^(OpenStack CI|Jenkins)$/;
+
+function format_time(ms, words) {
+    if (ms == null) {
+        return "unknown";
+    }
+    var seconds = (+ms)/1000;
+    var minutes = Math.floor(seconds/60);
+    var hours = Math.floor(minutes/60);
+    seconds = Math.floor(seconds % 60);
+    minutes = Math.floor(minutes % 60);
+    r = '';
+    if (words) {
+        if (hours) {
+            r += hours;
+            r += ' hr ';
+        }
+        r += minutes + ' min';
+    } else {
+        if (hours < 10) r += '0';
+        r += hours + ':';
+        if (minutes < 10) r += '0';
+        r += minutes + ':';
+        if (seconds < 10) r += '0';
+        r += seconds;
+    }
+    return r;
+}
 
 var ci_parse_psnum = function($panel) {
     var match = psRegex.exec($panel.html());
@@ -100,6 +127,7 @@ var ci_prepare_results_table = function() {
         table = document.createElement("table");
         $(table).addClass("test_result_table");
         $(table).addClass("infoTable").css({"margin-top":"1em", "margin-bottom":"1em"});
+
         var approval_table = $("div.approvalTable");
         if (approval_table.length) {
             var outer_table = document.createElement("table");
@@ -184,11 +212,112 @@ var ci_page_loaded = function() {
         var comments = ci_parse_comments();
         ci_display_results(comments);
         ci_hide_ci_comments(comments);
+        ci_zuul_for_change();
     } else {
         $("#toggleci").hide();
     }
 };
 
+var ci_current_change = function() {
+    var change = hashRegex.exec(window.location.hash);
+    if (change.length > 1) {
+        return change[1];
+    }
+    return null;
+};
+
+// recursively find the zuul status change, will be much more
+// efficient once zuul supports since json status.
+var ci_find_zuul_status = function (data, change) {
+    var objects = [];
+    for (var i in data) {
+        if (!data.hasOwnProperty(i)) continue;
+        if (typeof data[i] == 'object') {
+            objects = objects.concat(ci_find_zuul_status(data[i], change));
+        } else if (i == 'id' && data.id == change) {
+            objects.push(data);
+        }
+    }
+    return objects;
+};
+
+var ci_zuul_all_status = function(jobs) {
+    var status = "passing";
+    for (var i = 0; i < jobs.length; i++) {
+        if (jobs[i].result && jobs[i].result != "SUCCESS") {
+            status = "failing";
+        }
+    }
+    return status;
+};
+
+var ci_zuul_display_status = function(status) {
+    var zuul_table = $("table.zuul_result_table")[0];
+    if (!zuul_table) {
+        var test_results = $("table.test_result_table")[0];
+        if (test_results) {
+            zuul_table = document.createElement("table");
+            $(zuul_table).addClass("zuul_result_table");
+            $(zuul_table).addClass("infoTable").css({"margin-bottom":"1em"});
+            $(test_results).prepend(zuul_table);
+        }
+    }
+    $(zuul_table).empty();
+    $(zuul_table).show();
+    $(zuul_table).append("<tr><td class='header'>Review currently being tested (<a href='http://status.openstack.org/zuul'>full status</a>)</td></tr>");
+    for (var i = 0; i < status.length; i++) {
+        var item = status[i];
+        var queue = item.jobs[0].pipeline;
+        var passing = (item.failing_reasons && item.failing_reasons.length > 0) ? "failing" : "passing";
+        var timeleft = item.remaining_time;
+        var row = "<tr><td>";
+        if (queue != null) {
+            row += queue + " queue: " + passing;
+            row += " (" + format_time(timeleft, false) + " left)";
+        } else {
+            row += "in between queues, status should update shortly";
+        }
+        row += "</td></tr>";
+
+        $(zuul_table).append(row);
+    }
+};
+
+var ci_zuul_clear_status = function () {
+    var zuul_table = $("table.zuul_result_table")[0];
+    if (zuul_table) {
+        $(zuul_table).hide();
+    }
+};
+
+var ci_zuul_process_changes = function(data, change) {
+    var zuul_status = ci_find_zuul_status(data, change);
+    if (zuul_status.length) {
+        ci_zuul_display_status(zuul_status);
+    } else {
+        ci_zuul_clear_status();
+    }
+};
+
+var ci_zuul_inner_loop = function(change) {
+    var current = ci_current_change();
+    if (current && change.indexOf(current) != 0) {
+        // window url is dead
+        return;
+    }
+    $.getJSON("http://zuul.openstack.org/status.json", function(data) {
+        ci_zuul_process_changes(data, change);
+    });
+    setTimeout(function() {ci_zuul_inner_loop(change);}, 10000);
+};
+
+var ci_zuul_for_change = function() {
+    var comments = ci_parse_comments();
+    var change = ci_current_change();
+    var psnum = ci_latest_patchset(comments);
+    change = change + "," + psnum;
+    ci_zuul_inner_loop(change);
+};
 
 window.onload = function() {
     var input = document.createElement("input");
