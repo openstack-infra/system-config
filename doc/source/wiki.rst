@@ -27,8 +27,8 @@ wiki.openstack.org runs off of Wikmedia Foundation deployment branches.
 This was done to ease the pain of managing Mediawiki extensions. The
 foundation branches come with git submodules that refer to known good
 versions of extensions. Much (but not all) of the configuration is in
-puppet in the ``openstack-infra/config`` repository.  Mediawiki upgrades
-are currently performed manually.
+puppet in the ``openstack-infra/system-config`` repository.  Mediawiki
+upgrades are currently performed manually.
 
 Mediawiki Upgrades
 ==================
