@@ -1,5 +1,5 @@
 # This file is managed by puppet.
-# https://git.openstack.org/cgit/openstack-infra/config
+# https://git.openstack.org/cgit/openstack-infra/system-config
 
 cache-root: /home/jenkins/pypimirror/cache
 
@@ -11,5 +11,5 @@ mirrors:
 
   - name: openstack-infra
     projects:
-      - git://git.openstack.org/openstack-infra/config
+      - git://git.openstack.org/openstack-infra/system-config
     output: /home/jenkins/pypimirror/mirror/openstack-infra
