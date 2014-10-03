@@ -18,7 +18,7 @@ Documentation
 ==============
 
 The documentation presented at http://ci.openstack.org comes from
-git://git.openstack.org/openstack-infra/config repo's docs/source.  To
+git://git.openstack.org/openstack-infra/system-config repo's docs/source.  To
 build the documentation use
 
  $ tox -evenv python setup.py build_sphinx
