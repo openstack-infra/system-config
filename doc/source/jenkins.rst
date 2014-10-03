@@ -20,7 +20,7 @@ At a Glance
   * :file:`modules/openstack_project/manifests/jenkins.pp`
   * :file:`modules/openstack_project/manifests/jenkins_dev.pp`
 :Configuration:
-  * :file:`modules/openstack_project/files/jenkins_job_builder/config/`
+:config:`jenkins/jobs`
 :Projects:
   * http://jenkins-ci.org/
   * :ref:`zuul`
@@ -37,13 +37,13 @@ Overview
 
 A large number and variety of jobs are defined in Jenkins.  The
 configuration of all of those jobs is stored in git in the
-openstack-infra/config repository.  They are defined in YAML files
-that are read by :ref:`jjb` which configures the actual jobs in
+openstack-infra/project-config repository.  They are defined in YAML
+files that are read by :ref:`jjb` which configures the actual jobs in
 Jenkins.
 
-Anyone may submit a change to the openstack-infra/config repository
-that defines a new job or alters an existing job by editing the
-appropriate YAML files.  See :ref:`jjb` for more information.
+Anyone may submit a change to the openstack-infra/project-config
+repository that defines a new job or alters an existing job by editing
+the appropriate YAML files.  See :ref:`jjb` for more information.
 
 Because of the large number of builds that Jenkins executes, the
 OpenStack project favors the following approach in configuring Jenkins

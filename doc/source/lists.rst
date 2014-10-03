@@ -28,7 +28,7 @@ At a Glance
 Adding a List
 =============
 
-A list may be added by adding it to the ``openstack-infra/config``
+A list may be added by adding it to the ``openstack-infra/system-config``
 repository in ``modules/openstack_project/manifests/lists.pp``.  For
 example:
 
