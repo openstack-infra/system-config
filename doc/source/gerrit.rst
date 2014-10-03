@@ -171,7 +171,7 @@ New Project Creation
 ====================
 
 Gerrit project creation is now managed through changes to the
-openstack-infra/config repository.  :ref:`jeepyb` handles
+openstack-infra/system-config repository.  :ref:`jeepyb` handles
 automatically creating any new projects defined in the configuration
 files.
 

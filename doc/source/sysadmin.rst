@@ -14,7 +14,7 @@ collaborate on code reviews.
 The configuration of every system operated by the infrastructure team
 is managed by Puppet in a single Git repository:
 
-  https://git.openstack.org/cgit/openstack-infra/config
+  https://git.openstack.org/cgit/openstack-infra/system-config
 
 All system configuration should be encoded in that repository so that
 anyone may propose a change in the running configuration to Gerrit.
@@ -24,19 +24,19 @@ Making a Change in Puppet
 
 Many changes to the Puppet configuration can safely be made while only
 performing syntax checks.  Some more complicated changes merit local
-testing and an interactive development cycle.  The config repo is
-structured to facilitate local testing before proposing a change for
-review.  This is accomplished by separating the puppet configuration
-into several layers with increasing specificity about site
-configuration higher in the stack.
+testing and an interactive development cycle.  The system-config repo
+is structured to facilitate local testing before proposing a change
+for review.  This is accomplished by separating the puppet
+configuration into several layers with increasing specificity about
+site configuration higher in the stack.
 
 The `modules/` directory holds puppet modules that abstractly describe
 the configuration of a service.  Ideally, these should have no
 OpenStack-specific information in them, and eventually they should all
 become modules that are directly consumed from PuppetForge, only
-existing in the config repo during an initial incubation period.  This
-is not yet the case, so you may find OpenStack-specific configuration
-in these modules, though we are working to reduce it.
+existing in the system-config repo during an initial incubation period.
+This is not yet the case, so you may find OpenStack-specific
+configuration in these modules, though we are working to reduce it.
 
 The `modules/openstack_project/manifests/` directory holds
 configuration for each of the servers that the OpenStack project runs.
@@ -60,13 +60,13 @@ simply by providing a different manifest file instead of site.pp.
    the root user.
 
 As an example, to run the etherpad configuration on your own server,
-start by ensuring git is installed and then cloning the config Git
-repo::
+start by ensuring git is installed and then cloning the system-config
+Git repo::
 
   sudo su -
   apt-get install git
-  git clone https://git.openstack.org/openstack-infra/config
-  cd config
+  git clone https://git.openstack.org/openstack-infra/system-config
+  cd system-config
 
 Then copy the etherpad node definition from manifests/site.pp to a new
 file (be sure to specify the FQDN of the host you are working with in
@@ -83,8 +83,8 @@ the node specifier).  It might look something like this::
    since it is not installed yet. You should be able to comment out the logic
    safely.
 
-Then to apply that configuration, run the following from the root of the config
-repository::
+Then to apply that configuration, run the following from the root of the
+system-config repository::
 
   ./install_puppet.sh
   ./install_modules.sh
@@ -92,9 +92,9 @@ repository::
 
 That should turn the system you are logged into into an etherpad
 server with the same configuration as that used by the OpenStack
-project.  You can edit the contents of the config repo and iterate as
-needed.  When you're ready to propose the change for review, you can
-propose the change with git-review.  See the `Gerrit Workflow wiki
+project.  You can edit the contents of the system-config repo and
+iterate as needed.  When you're ready to propose the change for review,
+you can propose the change with git-review.  See the `Gerrit Workflow wiki
 article <https://wiki.openstack.org/wiki/GerritWorkflow>`_ for more
 information.
 
@@ -156,7 +156,7 @@ following practices must be observed for SSH access:
    OpenStack machines should be kept to a minimum.
  * OpenStack Infrastructure machines must use puppet to centrally manage and
    configure user accounts, and the SSH authorized_keys files from the
-   openstack-infra/config repository.
+   openstack-infra/system-config repository.
  * SSH keys should be periodically rotated (at least once per year).
    During rotation, a new key can be added to puppet for a time, and
    then the old one removed.  Be sure to run puppet on the backup
@@ -270,9 +270,9 @@ Launching New Servers
 =====================
 
 New servers are launched using the ``launch/launch-node.py`` tool from the git
-repository ``https://git.openstack.org/openstack-infra/config``. This tool is
-run from a checkout on the puppetmaster - please see :file:`launch/README` for
-detailed instructions.
+repository ``https://git.openstack.org/openstack-infra/system-config``. This
+tool is run from a checkout on the puppetmaster - please see :file:`launch/README`
+for detailed instructions.
 
 .. _cinder:
 
