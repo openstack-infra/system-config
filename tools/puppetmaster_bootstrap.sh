@@ -1,13 +1,13 @@
 #!/bin/bash
 set -x
 
-# Script to build a puppet 3 master to infra/config standards
+# Script to build a puppet 3 master to infra/system-config standards
 
 apt-get update
 apt-get install git
-git clone https://git.openstack.org/openstack-infra/config
+git clone https://git.openstack.org/openstack-infra/system-config
 
-cd config
+cd system-config
 
 cat > manifests/local.pp <<EOF
 node default {
