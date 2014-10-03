@@ -124,6 +124,9 @@ EOF
     fi
 
     yum update -y
+
+    # see comments in setup_puppet_fedora
+    ln -s /usr/bin/pip /usr/bin/pip-python
 }
 
 function setup_puppet_ubuntu {
