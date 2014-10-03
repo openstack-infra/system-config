@@ -24,7 +24,7 @@ At a Glance
   * https://git.openstack.org/cgit/openstack-infra/storyboard-webclient
   * https://git.openstack.org/cgit/openstack-infra/puppet-storyboard
 :Configuration:
-  * :file:`modules/openstack_project/files/review.projects.yaml`
+  * :config:`gerrit/projects.yaml`
   * :file:`modules/openstack_project/files/storyboard/superusers.yaml`
 :Bugs:
   * https://storyboard.openstack.org/#!/project/456
@@ -43,9 +43,10 @@ manage OpenStack infrastructure systems.
 Configuration
 =============
 
-Much of StoryBoard's default configuration is managed from within infra/config
-itself. To add a project, admin, or modify a team, please follow the
-instructions below.
+The default superusers configuration of StoryBoard is managed from within
+infra/system-config. The rest of the configuration is on projects-config.
+To add a project, admin, or modify a team, please follow the instructions
+below.
 
 Adding a Project to StoryBoard
 ------------------------------
@@ -59,7 +60,7 @@ Projects loaded into StoryBoard are handled from the same file that drives our
 gerrit projects. Adding a new project is as simple as modifying a single
 file and adding the line ``use-storyboard: true``:
 
-``/modules/openstack_project/files/review.projects.yaml``::
+``:config:`gerrit/projects.yaml```::
 
      - project: openstack-infra/storyboard
        description: OpenStack Task Tracking API
@@ -73,7 +74,7 @@ StoryBoard administrators are handled from a single configuration file, and
 are identified by OpenID. To add a new administator, simply add their
 Launchpad OpenID string and email as follows:
 
-``/modules/openstack_project/files/review.projects.yaml``::
+``:config:`gerrit/projects.yaml```::
 
     - openid: https://login.launchpad.net/+id/LOLPONIES
       email: pinkie.pie@example.com
