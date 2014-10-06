@@ -8,7 +8,10 @@ class openstack_project::wiki (
   $ssl_chain_file_contents = ''
 ) {
 
-  include openssl
+  package { ['openssl', 'ssl-cert']:
+    ensure => present;
+  }
+
   include subversion
 
   class { 'openstack_project::server':
