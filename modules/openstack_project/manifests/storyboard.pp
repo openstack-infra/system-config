@@ -55,6 +55,10 @@ class openstack_project::storyboard(
     rabbitmq_user_password => $rabbitmq_password,
   }
 
+  class { '::storyboard::workers':
+    worker_count => 5,
+  }
+
   # Load the projects into the database.
   class { '::storyboard::load_projects':
     source  => $::project_config::jeepyb_project_file,
