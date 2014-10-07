@@ -41,6 +41,18 @@ class jenkins::master(
       Package['openjdk-7-jre-headless'],
     ],
     include_src => false,
+    ensure      => absent,
+  }
+
+  apt::source { 'jenkins-stable':
+    location    => 'http://pkg.jenkins-ci.org/debian-stable',
+    release     => 'binary/',
+    repos       => '',
+    require     => [
+      Apt::Key['jenkins'],
+      Package['openjdk-7-jre-headless'],
+    ],
+    include_src => false,
   }
 
   apache::vhost { $vhost_name:
