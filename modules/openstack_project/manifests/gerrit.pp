@@ -258,6 +258,7 @@ class openstack_project::gerrit (
     ensure  => present,
     source  => 'puppet:///modules/openstack_project/openstack.png',
     require => Class['::gerrit'],
+    notify => Exec['reload_gerrit_header'],
   }
 
   file { '/home/gerrit2/review_site/static/openstack-page-bkg.jpg':
@@ -275,12 +276,14 @@ class openstack_project::gerrit (
     source  => '/usr/share/javascript/jquery/jquery.min.js',
     require => [Class['::gerrit'],
                 Package['libjs-jquery']],
+    notify => Exec['reload_gerrit_header'],
   }
 
   file { '/home/gerrit2/review_site/static/hideci.js':
     ensure  => present,
     source  => 'puppet:///modules/openstack_project/gerrit/hideci.js',
     require => Class['::gerrit'],
+    notify => Exec['reload_gerrit_header'],
   }
 
   file { '/home/gerrit2/review_site/etc/GerritSite.css':
@@ -294,6 +297,12 @@ class openstack_project::gerrit (
     source  =>
       'puppet:///modules/openstack_project/gerrit/GerritSiteHeader.html',
     require => Class['::gerrit'],
+  }
+
+  exec { 'reload_gerrit_header':
+    command     => 'touch /home/gerrit2/review_site/etc/GerritSiteHeader.html',
+    path        => 'bin:/usr/bin',
+    refreshonly => true,
   }
 
   cron { 'gerritsyncusers':
