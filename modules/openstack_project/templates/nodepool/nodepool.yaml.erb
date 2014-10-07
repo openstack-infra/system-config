@@ -198,11 +198,13 @@ labels:
     min-ready: 8
     providers:
       - name: tripleo-test-cloud-rh1
+      - name: tripleo-test-cloud-hp1
   - name: tripleo-f20
     image: tripleo-f20
     min-ready: 8
     providers:
       - name: tripleo-test-cloud-rh1
+      - name: tripleo-test-cloud-hp1
 
 providers:
   - name: rax-dfw
@@ -915,6 +917,34 @@ providers:
     networks:
       - net-id: 505a106c-7d65-44a7-b3e7-99bb49d2ebab
       - net-id: deedbc59-a076-4d9c-94a8-21fc5a7b8e0b
+    images:
+      - name: tripleo-precise
+        base-image: 'Ubuntu Precise 12.04 LTS Server 64-bit'
+        min-ram: 8192
+        name-filter: h1
+        setup: prepare_node_tripleo.sh
+        username: jenkins
+        private-key: /home/nodepool/.ssh/id_rsa
+      - name: tripleo-f20
+        base-image: 'Fedora 20 64-bit'
+        min-ram: 8192
+        name-filter: h1
+        setup: prepare_node_tripleo.sh
+        username: jenkins
+        private-key: /home/nodepool/.ssh/id_rsa
+  - name: tripleo-test-cloud-hp1
+    service-type: 'compute'
+    service-name: 'nova'
+    username: '<%= tripleo_username %>'
+    password: '<%= tripleo_password %>'
+    project-id: '<%= tripleo_project %>'
+    auth-url: 'https://ci-overcloud.hp1.tripleo.org:13000/v2.0'
+    boot-timeout: 120
+    max-servers: 90
+    rate: 0.001
+    networks:
+      - net-id: cac89503-3569-468a-b703-e03f8a2a82ba
+      - net-id: 75fcfd5d-c1ee-45e1-852b-4a6019c4e10b
     images:
       - name: tripleo-precise
         base-image: 'Ubuntu Precise 12.04 LTS Server 64-bit'
