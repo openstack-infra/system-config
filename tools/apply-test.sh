@@ -33,7 +33,8 @@ sudo -E /usr/zuul-env/bin/zuul-cloner -m clonemap.yaml --cache-dir /opt/git \
     openstack-infra/puppet-storyboard \
     openstack-infra/project-config \
     openstack-infra/puppet-jenkins \
-    openstack-infra/puppet-kibana
+    openstack-infra/puppet-kibana \
+    openstack-infra/puppet-github
 
 
 if [[ ! -d applytest ]] ; then
