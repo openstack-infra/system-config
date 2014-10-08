@@ -1038,3 +1038,12 @@ diskimages:
       - nodepool-base
       - node-devstack
     release: precise
+  - name: devstack-centos7-dib
+    elements:
+      - centos7
+      - vm
+      - openstack-repos
+      - puppet
+      - nodepool-base
+      - nodepool-devstack
+    release: GenericCloud-GA-7.0.1406_01
