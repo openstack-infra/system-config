@@ -20,6 +20,7 @@ class openstack_project::logstash (
   $discover_nodes = ['elasticsearch01.openstack.org:9200'],
   $statsd_host = 'graphite.openstack.org',
   $sysadmins = []
+  $subunit2sql_db_uri= '',
 ) {
   $iptables_es_rule = regsubst ($elasticsearch_nodes, '^(.*)$', '-m state --state NEW -m tcp -p tcp --dport 9200:9400 -s \1 -j ACCEPT')
   $iptables_gm_rule = regsubst ($gearman_workers, '^(.*)$', '-m state --state NEW -m tcp -p tcp --dport 4730 -s \1 -j ACCEPT')
@@ -42,5 +43,9 @@ class openstack_project::logstash (
   class { 'log_processor::client':
     config_file => 'puppet:///modules/openstack_project/logstash/jenkins-log-client.yaml',
     statsd_host => $statsd_host,
+  }
+
+  class { 'subunit2sql::server':
+    subunit2sql_db_uri => $subunit2sql_db_uri,
   }
 }
