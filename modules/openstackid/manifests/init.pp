@@ -64,6 +64,11 @@ class openstackid (
     ensure => present,
   }
 
+  # the deploy scripts use the curl CLI
+  package { 'curl':
+    ensure => present,
+  }
+
   group { 'openstackid':
     ensure => present,
   }
@@ -211,6 +216,7 @@ class openstackid (
       File['/etc/openstackid/database.php'],
       File['/etc/openstackid/log.php'],
       File['/etc/openstackid/environment.php'],
+      Package['curl'],
       Package[$php5_packages] ],
   }
 
