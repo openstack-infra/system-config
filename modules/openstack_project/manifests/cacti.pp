@@ -122,6 +122,7 @@ class openstack_project::cacti (
     'logstash-worker19.openstack.org',
     'logstash-worker20.openstack.org',
     'nodepool.openstack.org',
+    'openstackid.org',
     'paste.openstack.org',
     'pbx.openstack.org',
     'planet.openstack.org',
