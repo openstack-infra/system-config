@@ -42,6 +42,7 @@ class openstack_project::openstackid_prod (
 ) {
 
   class { 'openstack_project::server':
+    iptables_public_tcp_ports => [80, 443],
     sysadmins                 => $sysadmins,
   }
 
