@@ -37,6 +37,8 @@ class openstack_project::jenkins_params {
       #$maven_package = 'maven'
       # For tooz unit tests
       $memcached_package = 'memcached'
+      # For tooz unit tests (and others that use redis)
+      $redis_package = 'redis'
       # For Ceilometer unit tests
       $mongodb_package = 'mongodb-server'
       $pandoc_package = 'pandoc'
@@ -123,6 +125,8 @@ class openstack_project::jenkins_params {
       $maven_package = 'maven2'
       # For tooz unit tests
       $memcached_package = 'memcached'
+      # For tooz unit tests (and others that use redis)
+      $redis_package = 'redis-server'
       # For Ceilometer unit tests
       $mongodb_package = 'mongodb'
       $pandoc_package = 'pandoc'
