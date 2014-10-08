@@ -200,6 +200,12 @@ source-files:
     tags:
       - screen
       - oslofmt
+  - name: logs/javelin.txt
+    tags:
+      - screen
+      - oslofmt
+    job-filter: '.*grenade.*'
+
 # Grenade new logs below
   - name: logs/new/screen-c-api.txt
     tags:
