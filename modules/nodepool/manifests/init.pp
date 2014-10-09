@@ -42,6 +42,13 @@ class nodepool (
     }
   }
 
+  # required by the nodepool diskimage-builder element scripts
+  if ! defined(Package['python-yaml']) {
+    package { 'python-yaml':
+      ensure => present,
+    }
+  }
+
   class { 'mysql::server':
     config_hash => {
       'root_password'  => $mysql_root_password,
@@ -100,6 +107,15 @@ class nodepool (
     provider => git,
     revision => $revision,
     source   => $git_source_repo,
+  }
+
+  package { 'diskimage-builder':
+    ensure   => latest,
+    provider => pip,
+    require  => [
+      Class['pip'],
+      Package['python-yaml'],
+    ],
   }
 
   include pip
