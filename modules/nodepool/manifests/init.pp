@@ -32,12 +32,22 @@ class nodepool (
   $sudo = true,
   $scripts_dir = '',
   $elements_dir = '',
+  # diskimage-builder
+  $dib_git_source_repo = 'https://git.openstack.org/openstack/diskimage-builder',
+  $dib_revision = 'master',
 ) {
 
   # needed by python-keystoneclient, has system bindings
   # Zuul and Nodepool both need it, so make it conditional
   if ! defined(Package['python-lxml']) {
     package { 'python-lxml':
+      ensure => present,
+    }
+  }
+
+  # required by the nodepool diskimage-builder element scripts
+  if ! defined(Package['python-yaml']) {
+    package { 'python-yaml':
       ensure => present,
     }
   }
@@ -102,6 +112,13 @@ class nodepool (
     source   => $git_source_repo,
   }
 
+  vcsrepo { '/opt/diskimage-builder':
+    ensure   => latest,
+    provider => git,
+    revision => $dib_revision,
+    source   => $dib_git_source_repo,
+  }
+
   include pip
   exec { 'install_nodepool' :
     command     => 'pip install /opt/nodepool',
@@ -111,6 +128,17 @@ class nodepool (
     require     => [
       Class['pip'],
       Package['python-lxml'],
+    ],
+  }
+
+  exec { 'install_dib' :
+    command     => 'pip install /opt/diskimage-builder',
+    path        => '/usr/local/bin:/usr/bin:/bin/',
+    refreshonly => true,
+    subscribe   => Vcsrepo['/opt/diskimage-builder'],
+    require     => [
+      Class['pip'],
+      Package['python-yaml'],
     ],
   }
 
