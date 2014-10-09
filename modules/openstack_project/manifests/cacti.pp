@@ -90,6 +90,8 @@ class openstack_project::cacti (
     'git04.openstack.org',
     'git05.openstack.org',
     'graphite.openstack.org',
+    'groups.openstack.org',
+    'groups-dev.openstack.org',
     'jenkins.openstack.org',
     'jenkins01.openstack.org',
     'jenkins02.openstack.org',
