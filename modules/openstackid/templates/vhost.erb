@@ -35,5 +35,10 @@
     Allow from all
   </Directory>
 
+  <IfModule security2_module>
+    Include "/usr/share/modsecurity-crs/*.conf"
+    Include "/usr/share/modsecurity-crs/base_rules/*.conf"
+  </IfModule>
+
 </VirtualHost>
 </IfModule>

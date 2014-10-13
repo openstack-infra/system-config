@@ -49,6 +49,7 @@ class openstackid (
   $id_recaptcha_private_key = '',
   $id_recaptcha_template = '',
   $openstackid_release = 'latest',
+  $modsec_engine = 'On',
 ) {
 
   # php packages needed for openid server
@@ -191,6 +192,34 @@ class openstackid (
       content => $ssl_chain_file_contents,
       before  => Apache::Vhost[$vhost_name],
     }
+  }
+
+  package { 'libapache2-modsecurity':
+    ensure  => present,
+    require => Package['httpd'],
+  }
+
+  file { '/etc/modsecurity/modsecurity.conf':
+    content => template('openstackid/modsecurity.conf.erb'),
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0644',
+    require => Package['libapache2-modsecurity'],
+    notify  => Service['httpd'],
+  }
+
+  include logrotate
+  logrotate::file { 'modsec_audit.log':
+    log     => '/var/log/apache2/modsec_audit.log',
+    options => [
+      'compress',
+      'copytruncate',
+      'missingok',
+      'rotate 7',
+      'daily',
+      'notifempty',
+    ],
+    require => Service['httpd'],
   }
 
   deploy { 'deploytool':
