@@ -77,9 +77,9 @@ function setup_puppet_fedora {
     ln -fs /usr/bin/pip /usr/bin/pip-python
 }
 
-function setup_puppet_rhel7 {
+function setup_puppet_rhel7 {http://mirror.as24220.net/pub/
 
-    local epel_pkg="http://dl.fedoraproject.org/pub/epel/beta/7/x86_64/epel-release-7-0.2.noarch.rpm"
+    local epel_pkg="http://dl.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-2.noarch.rpm"
     local puppet_pkg="https://yum.puppetlabs.com/el/7/products/x86_64/puppetlabs-release-7-10.noarch.rpm"
 
     # install EPEL
