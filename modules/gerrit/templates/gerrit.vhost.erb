@@ -24,7 +24,7 @@
   CustomLog ${APACHE_LOG_DIR}/gerrit-ssl-access.log combined
 
   SSLEngine on
-
+  SSLProtocol all -SSLv2 -SSLv3
   SSLCertificateFile      <%= scope.lookupvar("gerrit::ssl_cert_file") %>
   SSLCertificateKeyFile   <%= scope.lookupvar("gerrit::ssl_key_file") %>
 <% if scope.lookupvar("gerrit::ssl_chain_file") != "" %>
