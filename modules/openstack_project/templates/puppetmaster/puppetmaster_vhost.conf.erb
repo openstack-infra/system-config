@@ -1,0 +1,60 @@
+# This Apache 2 virtual host config shows how to use Puppet as a Rack
+# application via Passenger. See
+# http://docs.puppetlabs.com/guides/passenger.html for more information.
+
+# You can also use the included config.ru file to run Puppet with other Rack
+# servers instead of Passenger.
+
+# This file is basically the one shipped by puppet with changes annotated
+# below.
+
+# you probably want to tune these settings
+PassengerHighPerformance on
+PassengerMaxPoolSize 12
+PassengerPoolIdleTime 1500
+# This line is commented out by puppet and uncommented here to avoid a
+# memory leak.
+PassengerMaxRequests 1000
+PassengerStatThrottleRate 120
+
+Listen 8140
+
+<VirtualHost *:8140>
+        SSLEngine on
+        # This replaces puppet's default SSLProtocol spec to prevent POODLE
+        SSLProtocol             ALL -SSLv2 -SSLv3
+        SSLCipherSuite          ALL:!aNULL:!eNULL:!DES:!3DES:!IDEA:!SEED:!DSS:!PSK:!RC4:!MD5:+HIGH:+MEDIUM:!LOW:!SSLv2:!EXP
+        SSLHonorCipherOrder     on
+
+        SSLCertificateFile      /var/lib/puppet/ssl/certs/<%= @fqdn %>.pem
+        SSLCertificateKeyFile   /var/lib/puppet/ssl/private_keys/<%= @fqdn %>.pem
+        SSLCertificateChainFile /var/lib/puppet/ssl/certs/ca.pem
+        SSLCACertificateFile    /var/lib/puppet/ssl/certs/ca.pem
+        # If Apache complains about invalid signatures on the CRL, you can try disabling
+        # CRL checking by commenting the next line, but this is not recommended.
+        SSLCARevocationFile     /var/lib/puppet/ssl/ca/ca_crl.pem
+        # Apache 2.4 introduces the SSLCARevocationCheck directive and sets it to none
+        # which effectively disables CRL checking; if you are using Apache 2.4+ you must
+        # specify 'SSLCARevocationCheck chain' to actually use the CRL.
+        SSLCARevocationCheck chain
+        SSLVerifyClient optional
+        SSLVerifyDepth  1
+        # The `ExportCertData` option is needed for agent certificate expiration warnings
+        SSLOptions +StdEnvVars +ExportCertData
+
+        # This header needs to be set if using a loadbalancer or proxy
+        RequestHeader unset X-Forwarded-For
+
+        RequestHeader set X-SSL-Subject %{SSL_CLIENT_S_DN}e
+        RequestHeader set X-Client-DN %{SSL_CLIENT_S_DN}e
+        RequestHeader set X-Client-Verify %{SSL_CLIENT_VERIFY}e
+
+        DocumentRoot /usr/share/puppet/rack/puppetmasterd/public/
+        RackBaseURI /
+        <Directory /usr/share/puppet/rack/puppetmasterd/>
+                Options None
+                AllowOverride None
+                Order allow,deny
+                allow from all
+        </Directory>
+</VirtualHost>
