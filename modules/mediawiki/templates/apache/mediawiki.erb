@@ -39,6 +39,7 @@
         ServerName <%= scope.lookupvar("mediawiki::site_hostname") %>
 
         SSLEngine on
+        SSLProtocol +TLSv1 +TLSv1.1 +TLSv1.2
         SSLCertificateFile      <%= scope.lookupvar("mediawiki::ssl_cert_file") %>
         SSLCertificateKeyFile   <%= scope.lookupvar("mediawiki::ssl_key_file") %>
         <% if scope.lookupvar("mediawiki::ssl_chain_file") != "" %>
