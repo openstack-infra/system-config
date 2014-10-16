@@ -19,7 +19,7 @@
   CustomLog ${APACHE_LOG_DIR}/openstackid-ssl-access.log combined
 
   SSLEngine on
-  SSLProtocol +TLSv1 +TLSv1.1 +TLSv1.2
+  SSLProtocol All -SSLv2 -SSLv3
   SSLCertificateFile      <%= scope.lookupvar("openstackid::ssl_cert_file") %>
   SSLCertificateKeyFile   <%= scope.lookupvar("openstackid::ssl_key_file") %>
 <% if scope.lookupvar("openstackid::ssl_chain_file") != "" %>
