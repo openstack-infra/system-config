@@ -34,7 +34,7 @@ import yaml
 
 MAILTO_RE = re.compile('mailto:(.*)')
 USERNAME_RE = re.compile('username:(.*)')
-EXTRA_ATC_RE = re.compile('[^:]*: ([^\(]*) \(([^@]*@[^\)]*)\) \[[^\[]*\]')
+EXTRA_ATC_RE = re.compile('^[^#][^:]*: ([^\(]*) \(([^@]*@[^\)]*)\) \[[^\[]*\]')
 PROGRAMS_URL = ('https://git.openstack.org/cgit/openstack/governance/plain'
                 '/reference/programs.yaml')
 EXTRA_ATCS_URL = ('https://git.openstack.org/cgit/openstack/governance/plain'
@@ -200,7 +200,10 @@ def main():
 
     writer = csv.writer(open('out/extra-atcs.csv', 'w'))
     for atc in get_extra_atcs(EXTRA_ATCS_URL):
-        writer.writerow([''] + list(EXTRA_ATC_RE.match(atc).groups()))
+        try:
+            writer.writerow([''] + list(EXTRA_ATC_RE.match(atc).groups()))
+        except AttributeError:
+            pass
 
 
 if __name__ == "__main__":
