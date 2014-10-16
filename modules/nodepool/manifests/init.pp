@@ -267,6 +267,17 @@ class nodepool (
         ],
       }
     }
+
+    # htaccess to enable the large .log files to send with gzip
+    # compression
+    file { "${image_log_document_root}/.htaccess":
+      ensure  => present,
+      source  => 'puppet:///modules/nodepool/nodepool-log.htaccess',
+      mode    => '0644',
+      owner   => 'nodepool',
+      group   => 'nodepool',
+      require => File[$image_log_document_root],
+    }
   }
 
   if $sudo == true {
