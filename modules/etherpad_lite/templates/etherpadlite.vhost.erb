@@ -23,7 +23,7 @@
   CustomLog ${APACHE_LOG_DIR}/<%= scope.lookupvar("etherpad_lite::apache::vhost_name") %>-ssl-access.log combined
 
   SSLEngine on
-  SSLProtocol +TLSv1 +TLSv1.1 +TLSv1.2
+  SSLProtocol All -SSLv2 -SSLv3
 
   SSLCertificateFile      <%= scope.lookupvar("etherpad_lite::apache::ssl_cert_file") %>
   SSLCertificateKeyFile   <%= scope.lookupvar("etherpad_lite::apache::ssl_key_file") %>
