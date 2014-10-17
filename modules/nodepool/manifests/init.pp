@@ -253,6 +253,7 @@ class nodepool (
       port     => 80,
       priority => '50',
       docroot  => $image_log_document_root,
+      override => 'All',
     }
 
     if $image_log_document_root != '/var/log/nodepool' {

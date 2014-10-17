@@ -1,3 +1,5 @@
+AddType text/plain .log
+
 <IfModule mod_deflate.c>
-AddOutputFilterByType DEFLATE text/text
+SetOutputFilter DEFLATE
 </IfModule>
