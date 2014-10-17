@@ -15,7 +15,7 @@
 # under the License.
 
 
-cd /opt/config/production
+cd /opt/system-config/production
 git fetch -a && git reset -q --hard @{u}
 ./install_modules.sh
 

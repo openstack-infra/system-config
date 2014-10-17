@@ -23,8 +23,8 @@ environmenttimeout = 0
 ssl_client_header = SSL_CLIENT_S_DN
 ssl_client_verify_header = SSL_CLIENT_VERIFY
 <% if @puppet_version.to_f < 3.6 -%>
-manifestdir=/opt/config/$environment/manifests
-modulepath=/opt/config/$environment/modules:/etc/puppet/modules
+manifestdir=/opt/system-config/$environment/manifests
+modulepath=/opt/system-config/$environment/modules:/etc/puppet/modules
 manifest=$manifestdir/site.pp
 <% end -%>
 reports=store,puppetdb

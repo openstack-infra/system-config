@@ -47,8 +47,8 @@ compatible, so be sure to use an older release - e.g. Ubuntu Precise.
 .. code-block:: bash
 
    sudo su -
-   git clone https://git.openstack.org/openstack-infra/system-config /opt/config/production
-   /opt/config/production/install_puppet.sh
+   git clone https://git.openstack.org/openstack-infra/system-config /opt/system-config/production
+   /opt/system-config/production/install_puppet.sh
    apt-get install puppetmaster-passenger hiera hiera-puppet
 
 Finally, install the modules, fix your hostname and use ``puppet apply`` to
@@ -56,10 +56,10 @@ finish configuration:
 
 .. code-block:: bash
 
-   bash /opt/config/production/install_modules.sh
+   bash /opt/system-config/production/install_modules.sh
    echo $REAL_HOSTNAME > /etc/hostname
    service hostname restart
-   puppet apply --modulepath='/opt/config/production/modules:/etc/puppet/modules' -e 'include openstack_project::puppetmaster'
+   puppet apply --modulepath='/opt/system-config/production/modules:/etc/puppet/modules' -e 'include openstack_project::puppetmaster'
 
 Note: Hiera uses a systemwide configuration file in ``/etc/puppet/hiera.yaml``
 and this setup supports multiple configurations. The two sets of environments
@@ -128,7 +128,7 @@ each host we know about. We do not use the daemon mode of puppet agent
 because it experiences random hangs, and also does not allow us to control
 sequencing in any meaningful way.
 
-The entry point for this process is ``/opt/config/production/run_all.sh``
+The entry point for this process is ``/opt/system-config/production/run_all.sh``
 
 There are a set of nodes, which are configured in puppet as "override" nodes,
 which are run in sequence before the rest of the nodes are run in parallel.

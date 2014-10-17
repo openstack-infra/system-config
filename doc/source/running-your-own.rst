@@ -118,7 +118,7 @@ Then start up your puppet db with puppet board (see :file:`launch/README`
 for full details)::
 
     sudo su -
-    cd /opt/config/production/launch
+    cd /opt/system-config/production/launch
     . /root/ci-launch/
     export FQDN=servername.project.example.com
     puppet cert generate $FQDN
