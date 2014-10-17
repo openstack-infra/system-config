@@ -1,0 +1,14 @@
+Code-Review+2: James E. Blair <corvus@inaugust.com>
+Verified+1: Jenkins
+Code-Review+2: Clark Boylan <cboylan@sapwetik.org>
+Code-Review+2: Jeremy Stanley <fungi@yuggoth.org>
+Verified+2: Jeremy Stanley <fungi@yuggoth.org>
+Workflow+1: Jeremy Stanley <fungi@yuggoth.org>
+Code-Review+1: Andreas Jaeger <jaegerandi@gmail.com>
+Code-Review+1: Elizabeth K. Joseph <lyz@princessleia.com>
+Code-Review+1: Ramy Asselin <ramy.asselin@hp.com>
+Submitted-by: Jeremy Stanley <fungi@yuggoth.org>
+Submitted-at: Fri, 17 Oct 2014 21:37:21 +0000
+Reviewed-on: https://review.openstack.org/126043
+Project: openstack-infra/system-config
+Branch: refs/heads/master
