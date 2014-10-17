@@ -252,7 +252,8 @@ class nodepool (
     apache::vhost { $vhost_name:
       port     => 80,
       priority => '50',
-      docroot  => $image_log_document_root,
+      docroot  => 'MEANINGLESS_ARGUMENT',
+      template => 'nodepool/nodepool-log.vhost.erb',
     }
 
     if $image_log_document_root != '/var/log/nodepool' {
@@ -266,17 +267,6 @@ class nodepool (
           File['/var/log/nodepool'],
         ],
       }
-    }
-
-    # htaccess to enable the large .log files to send with gzip
-    # compression
-    file { "${image_log_document_root}/.htaccess":
-      ensure  => present,
-      source  => 'puppet:///modules/nodepool/nodepool-log.htaccess',
-      mode    => '0644',
-      owner   => 'nodepool',
-      group   => 'nodepool',
-      require => File[$image_log_document_root],
     }
   }
 

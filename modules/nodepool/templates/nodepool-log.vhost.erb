@@ -1,0 +1,22 @@
+<VirtualHost <%= scope.lookupvar("nodepool::vhost_name") %>:80>
+
+  DocumentRoot <%= scope.lookupvar("nodepool:image_log_document_root") %>
+  <Directory>
+    Options <%= scope.lookupvar("apache::params::options") %>
+    AllowOverride None
+    Order allow,deny
+    allow from all
+  </Directory>
+
+  ErrorLog /var/log/<%= scope.lookupvar("apache::params::apache_name") %>/nodepool_error.log
+  LogLevel warn
+  CustomLog /var/log/<%= scope.lookupvar("apache::params::apache_name") %>/nodepool_access.log combined
+  ServerSignature Off
+
+  AddType text/plain .log
+
+  <IfModule mod_deflate.c>
+      SetOutputFilter DEFLATE
+  </IfModule>
+
+</VirtualHost>
