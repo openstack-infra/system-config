@@ -40,7 +40,9 @@ class cgit(
     $daemon_port = 9418
   }
 
-  include apache
+  class {'apache':
+    conf_temple   => 'cgit/httpd.conf.erb',
+  }
 
   if ($::osfamily == 'RedHat') {
     include cgit::selinux
@@ -94,15 +96,6 @@ class cgit(
       File[$staticfiles],
       Package['cgit'],
     ],
-  }
-
-  file { '/etc/httpd/conf/httpd.conf':
-    ensure  => present,
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0644',
-    content => template('cgit/httpd.conf.erb'),
-    require => Package['httpd'],
   }
 
   file { '/etc/httpd/conf.d/ssl.conf':
