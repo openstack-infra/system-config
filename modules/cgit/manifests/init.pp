@@ -89,20 +89,12 @@ class cgit(
     docroot       => 'MEANINGLESS ARGUMENT',
     priority      => '50',
     template      => 'cgit/git.vhost.erb',
+    conf_temple   => 'cgit/httpd.conf.erb',
     ssl           => true,
     require       => [
       File[$staticfiles],
       Package['cgit'],
     ],
-  }
-
-  file { '/etc/httpd/conf/httpd.conf':
-    ensure  => present,
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0644',
-    content => template('cgit/httpd.conf.erb'),
-    require => Package['httpd'],
   }
 
   file { '/etc/httpd/conf.d/ssl.conf':
