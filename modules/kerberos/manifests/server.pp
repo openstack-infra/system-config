@@ -7,7 +7,6 @@ class kerberos::server (
 ) {
 
   include haveged
-  include ntp
 
   class { 'kerberos::client':
     realm          => $realm,

@@ -14,6 +14,7 @@ class openstack_project::slave (
 
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [],
+    iptables_public_udp_ports => [],
     certname                  => $certname,
     sysadmins                 => $sysadmins,
   }
