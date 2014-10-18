@@ -14,7 +14,9 @@ class openstack_project::template (
   $certname                  = $::fqdn,
   $ca_server                 = undef,
   $enable_unbound            = true,
+  $afs                       = false,
 ) {
+  include ntp
   include ssh
   include snmpd
   if $automatic_upgrades == true {
@@ -23,14 +25,29 @@ class openstack_project::template (
     }
   }
 
+  if ( $afs ) {
+    $all_udp = concat(
+      $iptables_public_udp_ports, [7001])
+
+    class { 'afs::client':
+      cell         => 'openstack.org',
+      realm        => 'OPENSTACK.ORG',
+      admin_server => 'kdc.openstack.org',
+      kdcs         => [
+        'kdc01.openstack.org',
+        'kdc02.openstack.org',
+      ],
+    }
+  } else {
+    $all_udp = $iptables_public_udp_ports
+  }
+
   class { 'iptables':
     public_tcp_ports => $iptables_public_tcp_ports,
-    public_udp_ports => $iptables_public_udp_ports,
+    public_udp_ports => $all_udp,
     rules4           => $iptables_rules4,
     rules6           => $iptables_rules6,
   }
-
-  class { 'ntp': }
 
   class { 'openstack_project::base':
     install_users => $install_users,
