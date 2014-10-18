@@ -4,6 +4,8 @@ class kerberos::client (
   $admin_server,
 ) {
 
+  include ntp
+
   package { 'krb5-user':
     ensure  => present,
     require => File['/etc/krb5.conf'],

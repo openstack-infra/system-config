@@ -25,3 +25,6 @@ touch manifests/site.pp
 
 # Run this as an external script so that the above pull will get new changes
 ansible-playbook /etc/ansible/remote_puppet.yaml >> /var/log/puppet_run_all.log 2>&1
+# Run AFS changes separately so we can make sure to only do one at a time
+# (turns out quorum is nice to have)
+ansible-playbook -f 1 /etc/ansible/remote_puppet_afs.yaml >> /var/log/puppet_run_all.log 2>&1
