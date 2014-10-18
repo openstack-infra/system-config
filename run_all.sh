@@ -14,6 +14,10 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 
+# If updating the puppet system-config repo or installing puppet modules
+# fails then abort the puppet run as we will not get the results we
+# expect.
+set -e
 
 cd /opt/system-config/production
 git fetch -a && git reset -q --hard @{u}
