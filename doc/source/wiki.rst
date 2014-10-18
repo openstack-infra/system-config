@@ -68,6 +68,14 @@ active Mediawiki install slot. To perform a Mediawiki upgrade:
      slot). If you used the ``cd`` in step 2 this should be the case.
      Mediawiki DB schemas are backward compatible so we can upgrade it
      without taking down the active slot.
+  #. If there were updates to the CirrusSearch extension, search may stop
+     working unless the index is rebuilt. The easiest way to do this is
+     ``php extensions/CirrusSearch/maintenance/updateSearchIndexConfig.php
+     --startOver`` followed by ``php
+     extensions/CirrusSearch/maintenance/forceSearchIndex.php`` relative to
+     the inactive slot you've upgraded (option 1.A as described at
+     https://git.wikimedia.org/blob/mediawiki%2Fextensions%2FCirrusSearch.git/HEAD/README
+     in the upgrading section).
   #. At this point we are ready to change the ``/srv/mediawiki/w``
      symlink to point to the slot we just upgraded
      ``rm -f /srv/mediawiki/w && ln -s /srv/mediawiki/$PREVIOUSLY_INACTIVE_SLOT /srv/mediawiki/w``.
