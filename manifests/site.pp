@@ -649,4 +649,19 @@ node 'single-use-slave' {
   }
 }
 
+# Node-OS: trusty
+node 'kdc01.openstack.org' {
+  class { 'openstack_project::kdc':
+    sysadmins => hiera('sysadmins', []),
+  }
+}
+
+# Node-OS: trusty
+node 'kdc02.openstack.org' {
+  class { 'openstack_project::kdc':
+    sysadmins => hiera('sysadmins', []),
+    slave     => true,
+  }
+}
+
 # vim:sw=2:ts=2:expandtab:textwidth=79
