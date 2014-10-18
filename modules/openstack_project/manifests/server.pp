@@ -10,6 +10,7 @@ class openstack_project::server (
   $certname                  = $::fqdn,
   $pin_puppet                = '3.',
   $ca_server                 = undef,
+  $afs                       = false,
 ) {
   class { 'openstack_project::template':
     iptables_public_tcp_ports => $iptables_public_tcp_ports,
@@ -19,6 +20,7 @@ class openstack_project::server (
     certname                  => $certname,
     pin_puppet                => $pin_puppet,
     ca_server                 => $ca_server,
+    afs                       => $afs,
   }
   class { 'exim':
     sysadmins => $sysadmins,
