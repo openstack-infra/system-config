@@ -696,4 +696,18 @@ node 'kdc02.openstack.org' {
   }
 }
 
+# Node-OS: trusty
+node /^afsdb.*\.openstack\.org$/ {
+  class { 'openstack_project::afsdb':
+    sysadmins => hiera('sysadmins', []),
+  }
+}
+
+# Node-OS: trusty
+node /^afs.*\..*\.openstack\.org$/ {
+  class { 'openstack_project::afsfs':
+    sysadmins => hiera('sysadmins', []),
+  }
+}
+
 # vim:sw=2:ts=2:expandtab:textwidth=79
