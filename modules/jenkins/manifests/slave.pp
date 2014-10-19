@@ -9,6 +9,7 @@ class jenkins::slave(
   $gerrituser = 'jenkins',
 ) {
 
+  include haveged
   include pip
   include jenkins::params
 
@@ -29,7 +30,6 @@ class jenkins::slave(
     $::jenkins::params::jdk_package, # jdk for building java jobs
     $::jenkins::params::ccache_package,
     $::jenkins::params::python_netaddr_package, # Needed for devstack address_in_net()
-    $::jenkins::params::haveged_package, # entropy is useful to have
   ]
 
   file { '/etc/apt/sources.list.d/cloudarchive.list':
@@ -172,8 +172,4 @@ class jenkins::slave(
     mode   => '0755',
   }
 
-  service { 'haveged':
-    enable  => true,
-    require => Package[$::jenkins::params::haveged_package],
-  }
 }

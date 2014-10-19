@@ -10,7 +10,6 @@ class jenkins::params {
       $jdk_package = 'java-1.7.0-openjdk-devel'
       $ccache_package = 'ccache'
       $python_netaddr_package = 'python-netaddr'
-      $haveged_package = 'haveged'
       # FIXME: No Maven packages on RHEL
       #$maven_package = 'maven'
       $cgroups_package = 'libcgroup'
@@ -35,7 +34,6 @@ class jenkins::params {
       $jdk_package = 'openjdk-7-jdk'
       $ccache_package = 'ccache'
       $python_netaddr_package = 'python-netaddr'
-      $haveged_package = 'haveged'
       $maven_package = 'maven2'
       $ruby1_9_1_package = 'ruby1.9.1'
       $ruby1_9_1_dev_package = 'ruby1.9.1-dev'
