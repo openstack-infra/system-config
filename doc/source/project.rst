@@ -13,7 +13,7 @@ members.  You can read about the OpenStack way on the wiki:
 * https://wiki.openstack.org/wiki/How_To_Contribute
 * https://wiki.openstack.org/wiki/Open
 * https://wiki.openstack.org/wiki/Governance
-* https://wiki.openstack.org/wiki/Teams
+* https://wiki.openstack.org/wiki/Programs
 
 Scope
 =====
