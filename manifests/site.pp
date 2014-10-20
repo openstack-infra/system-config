@@ -508,43 +508,7 @@ node 'zuul.openstack.org' {
 }
 
 # Node-OS: precise
-node 'zm01.openstack.org' {
-  class { 'openstack_project::zuul_merger':
-    gearman_server       => 'zuul.openstack.org',
-    gerrit_server        => 'review.openstack.org',
-    gerrit_user          => 'jenkins',
-    gerrit_ssh_host_key  => hiera('gerrit_ssh_rsa_pubkey_contents', 'XXX'),
-    zuul_ssh_private_key => hiera('zuul_ssh_private_key_contents', 'XXX'),
-    sysadmins            => hiera('sysadmins', []),
-  }
-}
-
-# Node-OS: precise
-node 'zm02.openstack.org' {
-  class { 'openstack_project::zuul_merger':
-    gearman_server       => 'zuul.openstack.org',
-    gerrit_server        => 'review.openstack.org',
-    gerrit_user          => 'jenkins',
-    gerrit_ssh_host_key  => hiera('gerrit_ssh_rsa_pubkey_contents', 'XXX'),
-    zuul_ssh_private_key => hiera('zuul_ssh_private_key_contents', 'XXX'),
-    sysadmins            => hiera('sysadmins', []),
-  }
-}
-
-# Node-OS: precise
-node 'zm03.openstack.org' {
-  class { 'openstack_project::zuul_merger':
-    gearman_server       => 'zuul.openstack.org',
-    gerrit_server        => 'review.openstack.org',
-    gerrit_user          => 'jenkins',
-    gerrit_ssh_host_key  => hiera('gerrit_ssh_rsa_pubkey_contents', 'XXX'),
-    zuul_ssh_private_key => hiera('zuul_ssh_private_key_contents', 'XXX'),
-    sysadmins            => hiera('sysadmins', []),
-  }
-}
-
-# Node-OS: precise
-node 'zm04.openstack.org' {
+node /^zm\d+\.openstack\.org$/ {
   class { 'openstack_project::zuul_merger':
     gearman_server       => 'zuul.openstack.org',
     gerrit_server        => 'review.openstack.org',
