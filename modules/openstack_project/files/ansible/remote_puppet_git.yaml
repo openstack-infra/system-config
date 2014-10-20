@@ -8,7 +8,3 @@
   gather_facts: false
   roles:
     - { role: puppet, puppetmaster: puppetmaster.openstack.org }
-- hosts: "!review.openstack.org:!git0*:!afs*"
-  gather_facts: false
-  roles:
-    - { role: puppet, puppetmaster: puppetmaster.openstack.org }
