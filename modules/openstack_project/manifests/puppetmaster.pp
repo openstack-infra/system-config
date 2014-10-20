@@ -1,7 +1,7 @@
 # == Class: openstack_project::puppetmaster
 #
 class openstack_project::puppetmaster (
-  $root_rsa_key,
+  $root_rsa_key = undef,
   $sysadmins = [],
   $version   = '3.',
   $ca_server = undef,
@@ -105,10 +105,12 @@ class openstack_project::puppetmaster (
     }
   }
 
-  file { '/root/.ssh/id_rsa':
-    ensure  => present,
-    mode    => '0400',
-    content => $root_rsa_key,
+  if defined('$root_rsa_key') {
+    file { '/root/.ssh/id_rsa':
+      ensure  => present,
+      mode    => '0400',
+      content => $root_rsa_key,
+    }
   }
 
 # Cloud credentials are stored in this directory for launch-node.py.
