@@ -54,10 +54,23 @@ Copy the file `/etc/krb5.keytab` to the second kdc host.
 
 The puppet config sets up slave propogation scripts and cron jobs to run them.
 
+.. _addprinc:
+
 Adding principals
 -----------------
 
-To add an admin principal::
+First, ensure the user has an entry in puppet so they have a unix
+shell account on our hosts.  SSH access is not necessary, but keeping
+track of usernames and uids with account entries is necessary.
 
-   # execute kadmin.local then run these commands
-   addprinc corvus/admin@OPENSTACK.ORG
+Then, add the user to Kerberos using kadmin (while authenticated as a
+kerberos admin) or kadmin.local on the kdc::
+
+  kadmin: addprinc $USERNAME@OPENSTACK.ORG
+
+Where `$USERNAME` is the lower-case username of their unix account in
+puppet.  `OPENSTACK.ORG` should be capitalized.
+
+If you are adding an admin principal, use
+`username/admin@OPENSTACK.ORG`.  Admins should additionally have
+regular user principals.
