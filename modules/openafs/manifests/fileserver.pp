@@ -5,7 +5,7 @@ class openafs::fileserver (
 
   file { '/etc/openafs/server':
     ensure  => directory,
-    require => Class['Afs::Client'],
+    require => Class['Openafs::Client'],
   }
 
   file { '/etc/openafs/server/CellServDB':
