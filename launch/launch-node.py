@@ -119,11 +119,14 @@ def bootstrap_server(server, admin_pass, key, cert, environment, name,
     ssh_client.scp("/var/lib/puppet/ssl/certs/ca.pem",
                    "/var/lib/puppet/ssl/certs/ca.pem")
 
-    ssh_client.ssh("puppet agent "
-                   "--environment %s "
-                   "--server %s "
-                   "--no-daemonize --verbose --onetime --pluginsync true "
-                   "--certname %s" % (environment, puppetmaster, certname))
+    (rc, output) = ssh_client.ssh(
+        "puppet agent "
+        "--environment %s "
+        "--server %s "
+        "--detailed-exitcodes "
+        "--no-daemonize --verbose --onetime --pluginsync true "
+        "--certname %s" % (environment, puppetmaster, certname))
+    utils.interpret_puppet_exitcodes(rc, output)
 
     ssh_client.ssh("reboot")
 
