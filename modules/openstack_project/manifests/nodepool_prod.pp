@@ -4,7 +4,7 @@ class openstack_project::nodepool_prod(
   $mysql_root_password,
   $mysql_password,
   $nodepool_ssh_private_key = '',
-  $nodepool_template = 'nodepool.yaml.erb',
+  $nodepool_template = 'openstack_project/nodepool/nodepool.yaml.erb',
   $sysadmins = [],
   $statsd_host = '',
   $jenkins_api_user ='',
@@ -49,7 +49,7 @@ class openstack_project::nodepool_prod(
     owner   => 'nodepool',
     group   => 'root',
     mode    => '0400',
-    content => template("openstack_project/nodepool/${nodepool_template}"),
+    content => template($nodepool_template),
     require => [
       File['/etc/nodepool'],
       User['nodepool'],
