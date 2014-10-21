@@ -24,7 +24,7 @@ class nodepool (
   $git_source_repo = 'https://git.openstack.org/openstack-infra/nodepool',
   $revision = 'master',
   $statsd_host = '',
-  $vhost_name = 'nodepool.openstack.org',
+  $vhost_name = $::fqdn,
   $image_log_document_root = '/var/log/nodepool/image',
   $enable_image_log_via_http = false,
   $environment = {},
