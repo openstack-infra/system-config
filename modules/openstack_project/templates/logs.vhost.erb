@@ -58,11 +58,14 @@ NameVirtualHost <%= vhost_name %>:<%= port %>
   </Directory>
 
   RewriteEngine On
-  # rewrite all txt.gz & html.gz files to map to our internal htmlify wsgi app
-  # PT, Pass-through: to come back around and get picked up by the WSGIScriptAlias
-  # NS, No-subrequest: on coming back through, mod-autoindex may have added index.html
-  #                    which would match the !-f condition. We therefore ensure the
-  #                    rewrite doesn't trigger by disallowing subrequests.
+  # rewrite txt.gz & console.html[.gz] files to map to our internal htmlify
+  # wsgi app
+  # PT, Pass-through:  to come back around and get picked up by the
+  #                    WSGIScriptAlias
+  # NS, No-subrequest: on coming back through, mod-autoindex may have added
+  #                    index.html which would match the !-f condition. We
+  #                    therefore ensure the rewrite doesn't trigger by
+  #                    disallowing subrequests.
   RewriteRule ^/(.*\.txt\.gz)$ /htmlify/$1 [QSA,L,PT,NS]
   RewriteRule ^/(.*console\.html(\.gz)?)$ /htmlify/$1 [QSA,L,PT,NS]
 
