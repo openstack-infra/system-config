@@ -243,4 +243,14 @@ class openstack_project::static (
     require => [File['/srv/static/specs'],
                 $::project_config::config_dir],
   }
+
+  ###########################################################
+  # legacy devstack.org site redirect
+
+  apache::vhost { 'devstack.org':
+    port          => 80,
+    priority      => '50',
+    serveraliases => ['*.devstack.org'],
+    template      => 'openstack_project/devstack.vhost.erb',
+  }
 }
