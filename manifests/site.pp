@@ -51,6 +51,7 @@ node default {
 #
 # Node-OS: precise
 node 'review.openstack.org' {
+  #fail("This should fail the test")
   class { 'openstack_project::review':
     project_config_repo                 => 'https://git.openstack.org/openstack-infra/project-config',
     github_oauth_token                  => hiera('gerrit_github_token', 'XXX'),
