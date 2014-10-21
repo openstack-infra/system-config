@@ -482,7 +482,7 @@ To rename a project:
    changing, gate jobs may fail due to outdated remote URLs. Clear
    the workspaces on persistent Jenkins slaves to mitigate this::
 
-     sudo ansible-playbook -f 10 /etc/ansible/clean_workspaces.yaml --extra-vars "project=PROJECTNAME"
+     sudo ansible-playbook -f 10 /etc/ansible/playbooks/clean_workspaces.yaml --extra-vars "project=PROJECTNAME"
 
 #. Again, if this is an org move rather than a rename and the GitHub
    project has been created but is empty, trigger replication to
