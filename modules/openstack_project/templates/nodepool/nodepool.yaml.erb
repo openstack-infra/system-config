@@ -531,8 +531,9 @@ providers:
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
       - name: devstack-trusty
+        base-image: 'Ubuntu Server 14.04.1 LTS (amd64 20140927) - Partner Image'
         min-ram: 30720
-        diskimage: devstack-trusty
+        setup: prepare_node_devstack.sh
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
       - name: devstack-trusty-dib
@@ -621,8 +622,9 @@ providers:
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
       - name: devstack-trusty
+        base-image: 'Ubuntu Server 14.04.1 LTS (amd64 20140927) - Partner Image'
         min-ram: 30720
-        diskimage: devstack-trusty
+        setup: prepare_node_devstack.sh
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
       - name: devstack-trusty-dib
@@ -711,8 +713,9 @@ providers:
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
       - name: devstack-trusty
+        base-image: 'Ubuntu Server 14.04.1 LTS (amd64 20140927) - Partner Image'
         min-ram: 30720
-        diskimage: devstack-trusty
+        setup: prepare_node_devstack.sh
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
       - name: devstack-trusty-dib
@@ -802,8 +805,9 @@ providers:
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
       - name: devstack-trusty
+        base-image: 'Ubuntu Server 14.04.1 LTS (amd64 20140927) - Partner Image'
         min-ram: 30720
-        diskimage: devstack-trusty
+        setup: prepare_node_devstack.sh
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
       - name: devstack-trusty-dib
@@ -894,8 +898,9 @@ providers:
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
       - name: devstack-trusty
+        base-image: 'Ubuntu Server 14.04.1 LTS (amd64 20140927) - Partner Image'
         min-ram: 30720
-        diskimage: devstack-trusty
+        setup: prepare_node_devstack.sh
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
       - name: devstack-trusty-dib
@@ -1046,15 +1051,6 @@ targets:
       credentials-id: '<%= jenkins_credentials_id %>'
 
 diskimages:
-  - name: devstack-trusty
-    elements:
-      - ubuntu
-      - vm
-      - openstack-repos
-      - puppet
-      - nodepool-base
-      - node-devstack
-    release: trusty
   - name: devstack-trusty-dib
     elements:
       - ubuntu
