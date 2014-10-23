@@ -1,6 +1,6 @@
 <VirtualHost <%= scope.lookupvar("nodepool::vhost_name") %>:80>
 
-  DocumentRoot <%= scope.lookupvar("nodepool:image_log_document_root") %>
+  DocumentRoot <%= scope.lookupvar("nodepool::image_log_document_root") %>
   <Directory>
     Options <%= scope.lookupvar("apache::params::options") %>
     AllowOverride None
