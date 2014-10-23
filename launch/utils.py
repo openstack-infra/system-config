@@ -88,13 +88,13 @@ def get_flavor(client, min_ram):
     return flavors[0]
 
 
-def get_public_ip(server, version=4):
+def get_public_ip(server, version=4, floating_ip_pool=None):
     if 'os-floating-ips' in get_extensions(server.manager.api):
         for addr in server.manager.api.floating_ips.list():
             if addr.instance_id == server.id:
                 return addr.ip
         # We don't have one - so add one please
-        new_ip = server.manager.api.floating_ips.create()
+        new_ip = server.manager.api.floating_ips.create(pool=floating_ip_pool)
         server.add_floating_ip(new_ip)
         for addr in server.manager.api.floating_ips.list():
             if addr.instance_id == server.id:

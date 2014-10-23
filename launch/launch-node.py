@@ -53,8 +53,8 @@ def get_client():
 
 
 def bootstrap_server(server, admin_pass, key, cert, environment, name,
-                     puppetmaster, volume):
-    ip = utils.get_public_ip(server)
+                     puppetmaster, volume, floating_ip_pool):
+    ip = utils.get_public_ip(server, floating_ip_pool=floating_ip_pool)
     if not ip:
         raise Exception("Unable to find public ip of server")
 
@@ -133,11 +133,18 @@ def bootstrap_server(server, admin_pass, key, cert, environment, name,
 
 def build_server(
         client, name, image, flavor, cert, environment, puppetmaster, volume,
-        keep):
+        keep, net_label, floating_ip_pool):
     key = None
     server = None
 
     create_kwargs = dict(image=image, flavor=flavor, name=name)
+
+    if net_label:
+        nics = []
+        for net in client.networks.list():
+            if net.label == net_label:
+                nics.append({'net-id': net.id})
+        create_kwargs['nics'] = nics
 
     key_name = 'launch-%i' % (time.time())
     if 'os-keypairs' in utils.get_extensions(client):
@@ -164,7 +171,7 @@ def build_server(
                 raise Exception("Couldn't attach volume")
 
         bootstrap_server(server, admin_pass, key, cert, environment, name,
-                         puppetmaster, volume)
+                         puppetmaster, volume, floating_ip_pool)
         print('UUID=%s\nIPV4=%s\nIPV6=%s\n' % (server.id,
                                                server.accessIPv4,
                                                server.accessIPv6))
@@ -206,6 +213,10 @@ def main():
                         help="Don't clean up or delete the server on error.",
                         action='store_true',
                         default=False)
+    parser.add_argument("--net-label", dest="net_label", default='',
+                        help="network label to attach instance to")
+    parser.add_argument("--fip-pool", dest="floating_ip_pool", default=None,
+                        help="pool to assign floating IP from")
     options = parser.parse_args()
 
     client = get_client()
@@ -246,7 +257,7 @@ def main():
 
     build_server(client, options.name, image, flavor, cert,
                  options.environment, options.server, options.volume,
-                 options.keep)
+                 options.keep, options.net_label, options.floating_ip_pool)
     dns.print_dns(client, options.name)
 
 if __name__ == '__main__':
