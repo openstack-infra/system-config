@@ -31,7 +31,8 @@ EOF
 sudo -E /usr/zuul-env/bin/zuul-cloner -m clonemap.yaml --cache-dir /opt/git \
     git://git.openstack.org \
     openstack-infra/puppet-storyboard \
-    openstack-infra/project-config
+    openstack-infra/project-config \
+    openstack-infra/puppet-kibana
 
 if [[ ! -d applytest ]] ; then
     mkdir applytest
