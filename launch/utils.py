@@ -205,3 +205,24 @@ def delete_server(server):
 
     print "Deleting server", server.id
     server.delete()
+
+
+def interpret_puppet_exitcodes(rc, output):
+    if rc == 0:
+        # success
+        return
+    elif rc == 1:
+        # rc==1 could be because it's disabled
+        # rc==1 could also mean there was a compilation failure
+        disabled = "administratively disabled" in output
+        if disabled:
+            msg = "puppet is disabled"
+        else:
+            msg = "puppet did not run"
+        raise Exception(msg)
+    elif rc == 2:
+        # success with changes
+        return
+    elif rc == 124:
+        # timeout
+        raise Exception("Puppet timed out")
