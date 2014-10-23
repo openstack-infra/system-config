@@ -227,7 +227,6 @@ class nodepool (
     owner   => 'root',
     group   => 'root',
     content => template('nodepool/nodepool.logging.conf.erb'),
-    notify  => Service['nodepool'],
   }
 
   file { '/etc/init.d/nodepool':
