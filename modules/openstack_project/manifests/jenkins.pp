@@ -70,7 +70,7 @@ class openstack_project::jenkins (
     version => '1.70',
   }
   jenkins::plugin { 'gearman-plugin':
-    version => '0.0.7',
+    version => '0.1.1',
   }
   jenkins::plugin { 'git':
     version => '1.1.23',
