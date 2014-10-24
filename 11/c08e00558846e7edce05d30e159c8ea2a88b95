@@ -1,0 +1,9 @@
+Verified+2: Jenkins
+Code-Review+2: Jeremy Stanley <fungi@yuggoth.org>
+Code-Review+2: Sergey Lukjanov <slukjanov@mirantis.com>
+Workflow+1: Sergey Lukjanov <slukjanov@mirantis.com>
+Submitted-by: Jenkins
+Submitted-at: Fri, 24 Oct 2014 08:56:53 +0000
+Reviewed-on: https://review.openstack.org/130639
+Project: openstack-infra/system-config
+Branch: refs/heads/master
