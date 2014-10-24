@@ -1,5 +1,5 @@
 #!/bin/sh
-kdclist = "<% @slaves.each do |slave| -%><%= slave %> <% end -%>"
+kdclist="<% @slaves.each do |slave| -%><%= slave %> <% end -%>"
 kdb5_util dump /var/krb5kdc/slave_datatrans
 for kdc in $kdclist
 do
