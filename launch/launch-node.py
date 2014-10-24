@@ -64,7 +64,7 @@ def bootstrap_server(server, admin_pass, key, cert, environment, name,
     else:
         ssh_kwargs['password'] = admin_pass
 
-    for username in ['root', 'ubuntu']:
+    for username in ['root', 'ubuntu', 'centos']:
         ssh_client = utils.ssh_connect(ip, username, ssh_kwargs, timeout=600)
         if ssh_client:
             break
@@ -72,6 +72,9 @@ def bootstrap_server(server, admin_pass, key, cert, environment, name,
     if not ssh_client:
         raise Exception("Unable to log in via SSH")
 
+    # cloud-init puts the "please log in as user foo" message and
+    # subsequent exit() in root's authorized_keys -- overwrite it with
+    # a normal version to get root login working again.
     if username != 'root':
         ssh_client.ssh("sudo cp ~/.ssh/authorized_keys"
                        " ~root/.ssh/authorized_keys")
