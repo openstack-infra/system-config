@@ -73,6 +73,10 @@ class openstack_project::cacti (
   $cacti_hosts = [
     # community is currently not running puppet.
     #'community.openstack.org',
+    'afs01.dfw.openstack.org',
+    'afs01.ord.openstack.org',
+    'afsdb01.openstack.org',
+    'afsdb02.openstack.org',
     'eavesdrop.openstack.org',
     'elasticsearch01.openstack.org',
     'elasticsearch02.openstack.org',
@@ -101,6 +105,8 @@ class openstack_project::cacti (
     'jenkins06.openstack.org',
     'jenkins07.openstack.org',
     'jenkins-dev.openstack.org',
+    'kdc01.openstack.org',
+    'kdc02.openstack.org',
     'lists.openstack.org',
     'logstash.openstack.org',
     'logstash-worker01.openstack.org',
