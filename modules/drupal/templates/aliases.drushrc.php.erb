@@ -23,7 +23,10 @@ $aliases['<%= @site_alias %>'] = array(
   'profile' => '<%= @site_profile %>',
   'default-admin-password' => '<%= @site_admin_password %>',
   'disable-features-revert' => FALSE,
-  'package-provider' => 'static-tarball',
+  'package-provider' => 'drush-dl',
   'package-repository' => '<%= @package_repository %>',
-  'package-branch' => '<%= @package_branch %>',
+  'package-dist-name' => 'groups',
+<% if @package_branch == 'dev' %>
+  'package-dev-branch' => TRUE,
+<% end %>
 );
