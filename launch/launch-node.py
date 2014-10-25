@@ -128,7 +128,7 @@ def bootstrap_server(server, admin_pass, key, cert, environment, name,
         "--server %s "
         "--detailed-exitcodes "
         "--no-daemonize --verbose --onetime --pluginsync true "
-        "--certname %s" % (environment, puppetmaster, certname))
+        "--certname %s" % (environment, puppetmaster, certname), error_ok=True)
     utils.interpret_puppet_exitcodes(rc, output)
 
     ssh_client.ssh("reboot")
