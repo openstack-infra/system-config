@@ -1,0 +1,11 @@
+Code-Review+2: James E. Blair <corvus@inaugust.com>
+Workflow+1: James E. Blair <corvus@inaugust.com>
+Verified+2: Jenkins
+Code-Review+1: Stefano Maffulli <stefano@openstack.org>
+Code-Review+2: Clark Boylan <cboylan@sapwetik.org>
+Code-Review+1: Marton Kiss <marton.kiss@gmail.com>
+Submitted-by: Jenkins
+Submitted-at: Mon, 27 Oct 2014 16:03:31 +0000
+Reviewed-on: https://review.openstack.org/127025
+Project: openstack-infra/system-config
+Branch: refs/heads/master
