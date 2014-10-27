@@ -23,6 +23,8 @@ var psRegex = /^<p>(Uploaded patch set|Patch Set) (\d+)(:|\.)/;
 var mergeFailedRegex = /Merge Failed\./;
 // this regex matches the name of CI systems we trust to report merge failures
 var trustedCIRegex = /^(OpenStack CI|Jenkins)$/;
+// this regex matches the pipeline markup
+var pipelineNameRegex = /Build \w+ \((\w+) pipeline\)/;
 
 var ci_parse_psnum = function($panel) {
     var match = psRegex.exec($panel.html());
@@ -36,9 +38,19 @@ var ci_parse_is_merge_conflict = function($panel) {
     return (mergeFailedRegex.exec($panel.html()) !== null);
 };
 
+var ci_find_pipeline = function($panel) {
+    var match = pipelineNameRegex.exec($panel.html());
+    if (match !== null) {
+        return match[1];
+    } else {
+        return null;
+    }
+};
+
 var ci_parse_results = function($panel) {
     var result_list = [];
     var test_results = $panel.find("li.comment_test");
+    var pipeline = null;
     if (test_results !== null) {
         test_results.each(function(i, li) {
             var result = {};
@@ -51,6 +63,63 @@ var ci_parse_results = function($panel) {
     return result_list;
 };
 
+/***
+ * function ci_group_by_pipeline - create a group by structure for iterating on pipelines
+ *
+ * This function takes the full list of comments, the current patch
+ * number, and builds an array of (pipelinename, comments array)
+ * tuples. That makes it very easy to process during the display
+ * phase to ensure we only display the latest result for every
+ * pipeline.
+ *
+ * Comments that do not have a parsable pipeline (3rd party ci
+ * systems) get collapsed by name, and we specify 'check' for their
+ * pipeline.
+ *
+ **/
+
+var ci_group_by_pipeline = function(current, comments) {
+    var pipelines = [];
+    var pipeline_comments = [];
+    var nonpipelines = [];
+    var nonpipeline_comments = [];
+    for (var i = 0; i < comments.length; i++) {
+        var comment = comments[i];
+        if ((comment.psnum != current) || !comment.is_ci || (comment.results.length == 0)) {
+            continue;
+        }
+        if (comment.pipeline === null) {
+            var index = nonpipelines.indexOf(comment.name);
+            if (index == -1) {
+                // not found, so create new entries
+                nonpipelines.push(comment.name);
+                nonpipeline_comments.push([comment]);
+            } else {
+                nonpipeline_comments[index].push(comment);
+            }
+        } else {
+            var index = pipelines.indexOf(comment.pipeline);
+            if (index == -1) {
+                // not found, so create new entries
+                pipelines.push(comment.pipeline);
+                pipeline_comments.push([comment]);
+            } else {
+                pipeline_comments[index].push(comment);
+            }
+        }
+    }
+
+    var results = [];
+    for (i = 0; i < pipelines.length; i++) {
+        results.push([pipelines[i], pipeline_comments[i]]);
+    }
+    for (i = 0; i < nonpipeline_comments.length; i++) {
+        // if you don't specify a pipline, it defaults to check
+        results.push(['check', nonpipeline_comments[i]]);
+    }
+    return results;
+};
+
 var ci_parse_comments = function() {
     var comments = [];
     $(".commentPanel").each(function() {
@@ -61,6 +130,7 @@ var ci_parse_comments = function() {
         var comment_panel = $(this).find(".commentPanelMessage");
         comment.psnum = ci_parse_psnum(comment_panel);
         comment.merge_conflict = ci_parse_is_merge_conflict(comment_panel);
+        comment.pipeline = ci_find_pipeline(comment_panel);
         comment.results = ci_parse_results(comment_panel);
         comment.is_ci = (ciRegex.exec(comment.name) !== null);
         comment.is_trusted_ci = (trustedCIRegex.exec(comment.name) !== null);
@@ -138,20 +208,27 @@ var ci_display_results = function(comments) {
         return;
     }
     var current = ci_latest_patchset(comments);
-    for (var i = 0; i < comments.length; i++) {
-        var comment = comments[i];
-        if ((comment.psnum == current) && comment.is_ci && (comment.results.length > 0)) {
-            var header = $("<tr>").append($('<td class="header">' + comment.name + '</td>'));
-            header.append('<td class="header ci_date">' + comment.date + '</td>');
-            $(table).append(header);
+    var pipelines = ci_group_by_pipeline(current, comments);
+    for (var i = 0; i < pipelines.length; i++) {
+        var pipeline_name = pipelines[i][0];
+        var pipeline_comments = pipelines[i][1];
+        // the most recent comment on a pipeline
+        var last = pipelines[i][1].length - 1;
+        var comment = pipeline_comments[last];
+        var rechecks = "";
+        if (last > 0) {
+            rechecks = " (" + last + " rechecks)";
+        }
 
-            for (var j = 0; j < comment.results.length; j++) {
-                var result = comment.results[j];
-                var tr = $("<tr>");
-                tr.append($("<td>").append($(result["link"]).clone()));
-                tr.append($("<td>").append($(result["result"]).clone()));
-                $(table).append(tr);
-            }
+        var header = $("<tr>").append($('<td class="header">' + comment.name + " " + pipeline_name + rechecks + '</td>'));
+        header.append('<td class="header ci_date">' + comment.date + '</td>');
+        $(table).append(header);
+        for (var j = 0; j < comment.results.length; j++) {
+            var result = comment.results[j];
+            var tr = $("<tr>");
+            tr.append($("<td>").append($(result["link"]).clone()));
+            tr.append($("<td>").append($(result["result"]).clone()));
+            $(table).append(tr);
         }
     }
 };
