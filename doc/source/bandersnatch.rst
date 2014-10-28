@@ -11,7 +11,7 @@ At a Glance
 ===========
 
 :Hosts:
-  * http://pypi.openstack.org
+  * http://pypi.dfw.openstack.org
 :Puppet:
   * :file:`modules/openstack_project/manifests/static.pp`
 :Projects:

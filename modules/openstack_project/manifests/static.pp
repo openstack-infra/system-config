@@ -208,7 +208,7 @@ class openstack_project::static (
   }
 
   class { 'openstack_project::pypi_mirror':
-    vhost_name => 'pypi.openstack.org',
+    vhost_name => 'pypi.dfw.openstack.org',
   }
 
   # Legacy pypi mirror

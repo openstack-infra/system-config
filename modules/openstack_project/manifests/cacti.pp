@@ -136,7 +136,7 @@ class openstack_project::cacti (
     'planet.openstack.org',
     'puppetdb.openstack.org',
     'puppetmaster.openstack.org',
-    'pypi.openstack.org',
+    'pypi.dfw.openstack.org',
     'review.openstack.org',
     'review-dev.openstack.org',
     'static.openstack.org',
