@@ -22,8 +22,8 @@
 # - download_dir: download directory, local copy of release tarball lives here
 
 define drupal::drush (
-  $drushdsdtar     = 'https://github.com/mkissam/drush-dsd/archive/v0.9.tar.gz',
-  $basedrushdsdtar = 'drush-dsd-0.9.tar.gz',
+  $drushdsdtar     = 'https://github.com/mkissam/drush-dsd/archive/v0.10.tar.gz',
+  $basedrushdsdtar = 'drush-dsd-0.10.tar.gz',
   $download_dir    = '/srv/downloads',
 ) {
 
