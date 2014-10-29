@@ -18,21 +18,13 @@ var hashRegex = /^\#\/c\/[\/\d]+$/;
 // this regex matches CI comments
 var ciRegex = /^(.* CI|Jenkins)$/;
 // this regex matches "Patch set #"
-var psRegex = /^<p>(Uploaded patch set|Patch Set) (\d+)(:|\.)/;
+var psRegex = /^(Uploaded patch set|Patch Set) (\d+)(:|\.)/;
 // this regex matches merge failure messages
 var mergeFailedRegex = /Merge Failed\./;
 // this regex matches the name of CI systems we trust to report merge failures
 var trustedCIRegex = /^(OpenStack CI|Jenkins)$/;
 // this regex matches the pipeline markup
 var pipelineNameRegex = /Build \w+ \((\w+) pipeline\)/;
-
-var ci_parse_psnum = function($panel) {
-    var match = psRegex.exec($panel.html());
-    if (match !== null) {
-        return parseInt(match[2]);
-    }
-    return 0;
-};
 
 var ci_parse_is_merge_conflict = function($panel) {
     return (mergeFailedRegex.exec($panel.html()) !== null);
@@ -122,20 +114,38 @@ var ci_group_by_pipeline = function(current, comments) {
 
 var ci_parse_comments = function() {
     var comments = [];
-    $(".commentPanel").each(function() {
-        var comment = {};
-        comment.name = $(this).attr("name");
-        comment.email = $(this).attr("email");
-        comment.date = $(this).find(".commentPanelDateCell").attr("title");
-        var comment_panel = $(this).find(".commentPanelMessage");
-        comment.psnum = ci_parse_psnum(comment_panel);
-        comment.merge_conflict = ci_parse_is_merge_conflict(comment_panel);
-        comment.pipeline = ci_find_pipeline(comment_panel);
-        comment.results = ci_parse_results(comment_panel);
-        comment.is_ci = (ciRegex.exec(comment.name) !== null);
-        comment.is_trusted_ci = (trustedCIRegex.exec(comment.name) !== null);
-        comment.ref = this;
-        comments.push(comment);
+    $("p").each(function() {
+        var match = psRegex.exec($(this).html());
+        if (match !== null) {
+            var psnum = parseInt(match[2]);
+            var top = $(this).parent().parent().parent();
+            // old change screen
+            var name = top.attr("name");
+            if (!name) {
+                // new change screen
+                name = $(this).parent().prev().children()[0].innerHTML;
+            }
+            var comment = {};
+            comment.name = name;
+
+            var date_cell = top.find(".commentPanelDateCell");
+            if (date_cell.attr("title")) {
+                // old change screen
+                comment.date = date_cell.attr("title");
+            } else {
+                // new change screen
+                comment.date = $(this).parent().prev().children()[2].innerHTML;
+            }
+            var comment_panel = $(this).parent();
+            comment.psnum = psnum;
+            comment.merge_conflict = ci_parse_is_merge_conflict(comment_panel);
+            comment.pipeline = ci_find_pipeline(comment_panel);
+            comment.results = ci_parse_results(comment_panel);
+            comment.is_ci = (ciRegex.exec(comment.name) !== null);
+            comment.is_trusted_ci = (trustedCIRegex.exec(comment.name) !== null);
+            comment.ref = top;
+            comments.push(comment);
+        }
     });
     return comments;
 };
