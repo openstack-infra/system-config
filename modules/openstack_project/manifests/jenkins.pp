@@ -13,6 +13,7 @@ class openstack_project::jenkins (
   $ssl_cert_file_contents = '',
   $ssl_key_file_contents = '',
   $ssl_chain_file_contents = '',
+  $jenkins_ssh_public_key = $openstack_project::jenkins_ssh_key,
   $jenkins_ssh_private_key = '',
   $zmq_event_receivers = [],
   $sysadmins = [],
@@ -54,7 +55,7 @@ class openstack_project::jenkins (
     ssl_key_file_contents   => $ssl_key_file_contents,
     ssl_chain_file_contents => $ssl_chain_file_contents,
     jenkins_ssh_private_key => $jenkins_ssh_private_key,
-    jenkins_ssh_public_key  => $openstack_project::jenkins_ssh_key,
+    jenkins_ssh_public_key  => $jenkins_ssh_public_key,
   }
 
   jenkins::plugin { 'build-timeout':
