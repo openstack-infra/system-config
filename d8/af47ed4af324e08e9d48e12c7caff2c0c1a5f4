@@ -1,0 +1,9 @@
+Verified+2: Jenkins
+Code-Review+2: Sergey Lukjanov <slukjanov@mirantis.com>
+Workflow+1: Sergey Lukjanov <slukjanov@mirantis.com>
+Code-Review+2: Joshua Hesketh <joshua.hesketh@rackspace.com>
+Submitted-by: Jenkins
+Submitted-at: Wed, 29 Oct 2014 18:28:15 +0000
+Reviewed-on: https://review.openstack.org/131249
+Project: openstack-infra/system-config
+Branch: refs/heads/master
