@@ -71,6 +71,7 @@ class drupal (
   $conf_cron_key = undef,
   $conf_markdown_directory = undef,
   $conf_ga_account = undef,
+  $conf_openid_provider = undef,
 ) {
   include apache
   include pear
