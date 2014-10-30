@@ -6,7 +6,10 @@ class openstack_project::etherpad (
   $mysql_host = 'localhost',
   $mysql_user = 'eplite',
   $mysql_db_name = 'etherpad-lite',
-  $sysadmins = []
+  $sysadmins = [],
+  $use_bap = 'no',
+  $bup_backup_user = 'bup-etherpad',
+  $bup_backup_server = 'ci-backup-rs-ord.openstack.org'
 ) {
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [22, 80, 443],
@@ -43,10 +46,12 @@ class openstack_project::etherpad (
     require           => Class['etherpad_lite'],
   }
 
-  include bup
-  bup::site { 'rs-ord':
-    backup_user   => 'bup-etherpad',
-    backup_server => 'ci-backup-rs-ord.openstack.org',
+  if $use_bap == 'yes' {
+    include bup
+    bup::site { 'rs-ord':
+      backup_user     => $bup_backup_user,
+      backup_server   => $bup_backup_server
+    }
   }
 }
 
