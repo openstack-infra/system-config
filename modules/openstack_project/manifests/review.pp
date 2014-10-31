@@ -80,6 +80,7 @@ class openstack_project::review (
   $swift_username = '',
   $swift_password = '',
   $project_config_repo = '',
+  $projects_config = 'openstack_project/review.projects.ini.erb',
 ) {
 
   class { 'project_config':
@@ -122,8 +123,7 @@ class openstack_project::review (
     acls_dir                            => $::project_config::gerrit_acls_dir,
     notify_impact_file                  => $::project_config::gerrit_notify_impact_file,
     projects_file                       => $::project_config::jeepyb_project_file,
-    projects_config                     =>
-      'openstack_project/review.projects.ini.erb',
+    projects_config                     => $projects_config,
     github_username                     => 'openstack-gerrit',
     github_oauth_token                  => $github_oauth_token,
     github_project_username             => $github_project_username,
