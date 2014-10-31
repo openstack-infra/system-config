@@ -1,10 +1,27 @@
 # == Class: openstack_project::base
 #
 class openstack_project::base(
-  $certname              = $::fqdn,
-  $install_users         = true,
-  $pin_puppet            = '3.',
-  $ca_server             = undef,
+  $certname                          = $::fqdn,
+  $install_users                     = true,
+  $pin_puppet                        = '3.',
+  $ca_server                         = undef,
+  $desired_virtualenv                = '1.11.4',
+  $admin_users                       = [
+    'mordred',
+    'corvus',
+    'clarkb',
+    'fungi',
+    'slukjanov',
+  ],
+  $puppetlabs_location               = 'http://apt.puppetlabs.com',
+  $puppetlabs_repos                  = 'main',
+  $puppetlabs_key                    = '4BD6EC30',
+  $puppetlabs_key_server             = 'pgp.mit.edu',
+  $most_recent_puppet_resource_title = 'puppet-remote-2014-09-15',
+  $most_recent_puppet_key            = 'AAAAB3NzaC1yc2EAAAADAQABAAABAQDSLlN41ftgxkNeUi/kATYPwMPjJdMaSbgokSb9PSkRPZE7GeNai60BCfhu+ky8h5eMe70Bpwb7mQ7GAtHGXPNU1SRBPhMuVN9EYrQbt5KSiwuiTXtQHsWyYrSKtB+XGbl2PhpMQ/TPVtFoL5usxu/MYaakVkCEbt5IbPYNg88/NKPixicJuhi0qsd+l1X1zoc1+Fn87PlwMoIgfLIktwaL8hw9mzqr+pPcDIjCFQQWnjqJVEObOcMstBT20XwKj/ymiH+6p123nnlIHilACJzXhmIZIZO+EGkNF7KyXpcBSfv9efPI+VCE2TOv/scJFdEHtDFkl2kdUBYPC0wQ92rp',
+  $most_recent_puppet_options        = [
+    'from="puppetmaster.openstack.org"',
+  ]
 ) {
   if ($::osfamily == 'Debian') {
     include apt
@@ -60,13 +77,13 @@ class openstack_project::base(
   }
 
   include pip
-  $desired_virtualenv = '1.11.4'
 
-  if (( versioncmp($::virtualenv_version, $desired_virtualenv) < 0 )) {
+  if (versioncmp($::virtualenv_version, $desired_virtualenv) < 0) {
     $virtualenv_ensure = $desired_virtualenv
   } else {
     $virtualenv_ensure = present
   }
+
   package { 'virtualenv':
     ensure   => $virtualenv_ensure,
     provider => pip,
@@ -79,11 +96,7 @@ class openstack_project::base(
     }
 
     realize (
-      User::Virtual::Localuser['mordred'],
-      User::Virtual::Localuser['corvus'],
-      User::Virtual::Localuser['clarkb'],
-      User::Virtual::Localuser['fungi'],
-      User::Virtual::Localuser['slukjanov'],
+      User::Virtual::Localuser[$admin_users],
     )
   }
 
@@ -94,42 +107,30 @@ class openstack_project::base(
     }
   }
 
-  ssh_authorized_key { 'puppet-remote-2014-04-17':
-    ensure  => absent,
-    user    => 'root',
-  }
-  ssh_authorized_key { 'puppet-remote-2014-05-24':
-    ensure  => absent,
-    user    => 'root',
-  }
-  ssh_authorized_key { 'puppet-remote-2014-09-11':
-    ensure  => absent,
-    user    => 'root',
+  user { 'root':
+    ensure         => present,
+    home           => '/root',
+    uid            => '0',
+    purge_ssh_keys => true,
   }
 
-  ssh_authorized_key { 'puppet-remote-2014-09-15':
+  ssh_authorized_key { "${most_recent_puppet_resource_title}":
     ensure  => present,
     user    => 'root',
     type    => 'ssh-rsa',
-    key     => 'AAAAB3NzaC1yc2EAAAADAQABAAABAQDSLlN41ftgxkNeUi/kATYPwMPjJdMaSbgokSb9PSkRPZE7GeNai60BCfhu+ky8h5eMe70Bpwb7mQ7GAtHGXPNU1SRBPhMuVN9EYrQbt5KSiwuiTXtQHsWyYrSKtB+XGbl2PhpMQ/TPVtFoL5usxu/MYaakVkCEbt5IbPYNg88/NKPixicJuhi0qsd+l1X1zoc1+Fn87PlwMoIgfLIktwaL8hw9mzqr+pPcDIjCFQQWnjqJVEObOcMstBT20XwKj/ymiH+6p123nnlIHilACJzXhmIZIZO+EGkNF7KyXpcBSfv9efPI+VCE2TOv/scJFdEHtDFkl2kdUBYPC0wQ92rp',
-    options => [
-      'from="puppetmaster.openstack.org"',
-    ],
+    key     => $most_recent_puppet_key,
+    options => $most_recent_puppet_options,
     require => File['/root/.ssh'],
-  }
-  ssh_authorized_key { '/root/.ssh/authorized_keys':
-    ensure  => absent,
-    user    => 'root',
   }
 
   # Which Puppet do I take?
   # Take $puppet_version and pin to that version
   if ($::osfamily == 'Debian') {
     apt::source { 'puppetlabs':
-      location   => 'http://apt.puppetlabs.com',
-      repos      => 'main',
-      key        => '4BD6EC30',
-      key_server => 'pgp.mit.edu',
+      location   => $puppetlabs_location,
+      repos      => $puppetlabs_repos,
+      key        => $puppetlabs_key,
+      key_server => $puppetlabs_key_server,
     }
 
     file { '/etc/apt/apt.conf.d/80retry':
