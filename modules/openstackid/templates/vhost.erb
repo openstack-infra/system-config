@@ -1,4 +1,5 @@
-<VirtualHost <%= scope.lookupvar("openstackid::vhost_name") %>:80>
+<VirtualHost *:80>
+  ServerName <%= scope.lookupvar("openstackid::vhost_name") %>
   ServerAdmin <%= scope.lookupvar("openstackid::serveradmin") %>
 
   ErrorLog ${APACHE_LOG_DIR}/openstackid-error.log
@@ -10,7 +11,7 @@
 </VirtualHost>
 
 <IfModule mod_ssl.c>
-<VirtualHost <%= scope.lookupvar("openstackid::vhost_name") %>:443>
+<VirtualHost *:443>
   ServerName <%= scope.lookupvar("openstackid::vhost_name") %>
   ServerAdmin <%= scope.lookupvar("openstackid::serveradmin") %>
 
