@@ -245,6 +245,16 @@ class openstack_project::static (
   }
 
   ###########################################################
+  # legacy summit.openstack.org site redirect
+
+  apache::vhost { 'summit.openstack.org':
+    port          => 80,
+    priority      => '50',
+    docroot       => 'MEANINGLESS_ARGUMENT',
+    template      => 'openstack_project/summit.vhost.erb',
+  }
+
+  ###########################################################
   # legacy devstack.org site redirect
 
   apache::vhost { 'devstack.org':
