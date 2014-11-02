@@ -218,6 +218,23 @@ class openstack_project::static (
   }
 
   ###########################################################
+  # Governance
+
+  apache::vhost { 'governance.openstack.org':
+    port     => 80,
+    priority => '50',
+    docroot  => '/srv/static/governance',
+    require  => File['/srv/static/governance'],
+  }
+
+  file { '/srv/static/governance':
+    ensure  => directory,
+    owner   => 'jenkins',
+    group   => 'jenkins',
+    require => User['jenkins'],
+  }
+
+  ###########################################################
   # Specs
 
   apache::vhost { 'specs.openstack.org':
