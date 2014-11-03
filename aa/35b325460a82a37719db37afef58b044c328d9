@@ -1,0 +1,11 @@
+Verified+2: Jenkins
+Code-Review+1: Thierry Carrez <thierry@openstack.org>
+Code-Review+1: Joshua Harlow <harlowja@yahoo-inc.com>
+Code-Review+2: Jeremy Stanley <fungi@yuggoth.org>
+Workflow+1: Jeremy Stanley <fungi@yuggoth.org>
+Code-Review+1: Andreas Jaeger <jaegerandi@gmail.com>
+Submitted-by: Jenkins
+Submitted-at: Mon, 03 Nov 2014 07:13:21 +0000
+Reviewed-on: https://review.openstack.org/132434
+Project: openstack-infra/system-config
+Branch: refs/heads/master
