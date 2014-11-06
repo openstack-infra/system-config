@@ -5,7 +5,7 @@
 class openstack_project::slave_common(
   $include_pypy = false,
   $sudo         = false,
-  $project_config_repo = 'https://git.openstack.org/openstack-infra/project-config',
+  $project_config_repo = '',
 ){
   vcsrepo { '/opt/requirements':
     ensure   => latest,
