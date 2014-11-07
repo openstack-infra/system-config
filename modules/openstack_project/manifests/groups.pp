@@ -55,6 +55,7 @@ class openstack_project::groups (
     conf_cron_key           => $conf_cron_key,
     conf_markdown_directory => '/srv/groups-static-pages',
     conf_ga_account         => 'UA-17511903-1',
+    conf_openid_provider    => 'https://openstackid.org',
     require                 => [ Class['openstack_project::server'],
       Vcsrepo['/srv/groups-static-pages'] ],
   }
