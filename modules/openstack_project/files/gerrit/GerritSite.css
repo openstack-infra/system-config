@@ -65,3 +65,8 @@ table.infoTable td.notVotable,
 .addMemberTextBox {
     width: 20em;
 }
+
+/* css attribute selector to make -1s show up red in new screen */
+[title="This patch needs further work before it can be merged"] {
+    color: red;
+}
