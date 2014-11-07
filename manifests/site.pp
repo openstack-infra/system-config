@@ -317,6 +317,7 @@ node 'logstash.openstack.org' {
       'elasticsearch06.openstack.org:9200',
       'elasticsearch07.openstack.org:9200',
     ],
+    subunit2sql_db_uri  => hiera('subunit2sql_db_uri', ''),
   }
 }
 
