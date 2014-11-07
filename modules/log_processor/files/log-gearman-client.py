@@ -75,7 +75,11 @@ class EventProcessor(threading.Thread):
             output['source_url'] = source_url
             output['retry'] = fileopts.get('retry-get', False)
             output['event'] = out_event
-            job = gear.Job(b'push-log', json.dumps(output).encode('utf8'))
+            if 'subunit' in fileopts.get('name'):
+                job = gear.Job(b'push-subunit',
+                               json.dumps(output).encode('utf8'))
+            else:
+                job = gear.Job(b'push-log', json.dumps(output).encode('utf8'))
             try:
                 self.gearman_client.submitJob(job)
             except:
@@ -146,10 +150,14 @@ class Server(object):
             gearclient = gear.Client()
             gearclient.addServer('localhost')
             gearclient.waitForServer()
-            processor = EventProcessor(
+            log_processor = EventProcessor(
                 publisher, gearclient,
                 self.config['source-files'], self.source_url)
-            self.processors.append(processor)
+            subunit_processor = EventProcessor(
+                publisher, gearclient,
+                self.config['subunit-files'], self.source_url)
+            self.processors.append(log_processor)
+            self.processors.append(subunit_processor)
 
     def main(self):
         statsd_host = os.environ.get('STATSD_HOST')
