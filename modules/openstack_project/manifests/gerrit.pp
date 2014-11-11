@@ -5,6 +5,7 @@
 
 class openstack_project::gerrit (
   $mysql_host,
+  $mysql_user = 'gerrit2',
   $mysql_password,
   $vhost_name = $::fqdn,
   $canonicalweburl = "https://${::fqdn}/",
@@ -63,12 +64,83 @@ class openstack_project::gerrit (
   $cla_name = 'ICLA',
   $testmode = false,
   $sysadmins = [],
-  $swift_username = '',
-  $swift_password = '',
   $gitweb = true,
   $cgit = false,
   $web_repo_url = '',
   $secondary_index = true,
+  $openidssourl = 'https://login.launchpad.net/+openid',
+  $openstackwatch_projects = [
+    'openstack/ceilometer',
+    'openstack/cinder',
+    'openstack/glance',
+    'openstack/heat',
+    'openstack/horizon',
+    'openstack/infra',
+    'openstack/keystone',
+    'openstack/nova',
+    'openstack/oslo',
+    'openstack/neutron',
+    'openstack/swift',
+    'openstack/tempest',
+    'openstack-dev/devstack',
+  ],
+  $openstackwatch_container = 'rss',
+  $openstackwatch_feed = 'openstackwatch.xml',
+  $openstackwatch_json_url = 'https://review.openstack.org/query?q=status:open',
+  $swift_username = '',
+  $swift_password = '',
+  $openstackwatch_swift_auth_url = 'https://auth.api.rackspacecloud.com/v1.0',
+  $openstackwatch_auth_version   = '1.0',
+  $gerrit_commentlinks = [
+    {
+      name  => 'bugheader',
+      match => '([Cc]loses|[Pp]artial|[Rr]elated)-[Bb]ug:\\s*#?(\\d+)',
+      link  => 'https://launchpad.net/bugs/$2',
+    },
+    {
+      name  => 'bug',
+      match => '\\bbug:? #?(\\d+)',
+      link  => 'https://launchpad.net/bugs/$1',
+    },
+    {
+      name  => 'story',
+      match => '\\bstory:? #?(\\d+)',
+      link  => 'https://storyboard.openstack.org/#!/story/$1',
+    },
+    {
+      name  => 'blueprint',
+      match => '(\\b[Bb]lue[Pp]rint\\b|\\b[Bb][Pp]\\b)[ \\t#:]*([A-Za-z0-9\\-]+)',
+      link  => 'https://blueprints.launchpad.net/openstack/?searchtext=$2',
+    },
+    {
+      name  => 'testresult',
+      match => '<li>([^ ]+) <a href=\"[^\"]+\" target=\"_blank\">([^<]+)</a> : ([^ ]+)([^<]*)</li>',
+      html  => '<li class=\"comment_test\"><span class=\"comment_test_name\"><a href=\"$2\">$1</a></span> <span class=\"comment_test_result\"><span class=\"result_$3\">$3</span>$4</span></li>',
+    },
+    {
+      name  => 'launchpadbug',
+      match => '<a href=\"(https://bugs\\.launchpad\\.net/[a-zA-Z0-9\\-]+/\\+bug/(\\d+))[^\"]*\">[^<]+</a>',
+      html  => '<a href=\"$1\">$1</a>'
+    },
+    {
+      name  => 'changeid',
+      match => '(I[0-9a-f]{8,40})',
+      link  => '#q,$1,n,z',
+    },
+    {
+      name  => 'gitsha',
+      match => '(<p>|[\\s(])([0-9a-f]{40})(</p>|[\\s.,;:)])',
+      html  => '$1<a href=\"#q,$2,n,z\">$2</a>$3',
+    },
+    trackingids => [
+      {
+        name   => 'storyboard',
+        footer => 'story:',
+        match  => '\\#?(\\d+)',
+        system => 'Storyboard',
+      },
+    ],
+  ],
 ) {
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [80, 443, 29418],
@@ -76,28 +148,14 @@ class openstack_project::gerrit (
   }
 
   class { 'jeepyb::openstackwatch':
-    projects       => [
-      'openstack/ceilometer',
-      'openstack/cinder',
-      'openstack/glance',
-      'openstack/heat',
-      'openstack/horizon',
-      'openstack/infra',
-      'openstack/keystone',
-      'openstack/nova',
-      'openstack/oslo',
-      'openstack/neutron',
-      'openstack/swift',
-      'openstack/tempest',
-      'openstack-dev/devstack',
-    ],
-    container      => 'rss',
-    feed           => 'openstackwatch.xml',
-    json_url       => 'https://review.openstack.org/query?q=status:open',
+    projects       => $openstackwatch_projects,
+    container      => $openstackwatch_container,
+    feed           => $openstackwatch_feed,
+    json_url       => $openstackwatch_json_url,
     swift_username => $swift_username,
     swift_password => $swift_password,
-    swift_auth_url => 'https://auth.api.rackspacecloud.com/v1.0',
-    auth_version   => '1.0',
+    swift_auth_url => $openstackwatch_swift_auth_url,
+    auth_version   => $openstackwatch_auth_version,
   }
 
   class { '::gerrit':
@@ -124,7 +182,7 @@ class openstack_project::gerrit (
     ssh_replication_rsa_key_contents    => $ssh_replication_rsa_key_contents,
     ssh_replication_rsa_pubkey_contents => $ssh_replication_rsa_pubkey_contents,
     email                               => $email,
-    openidssourl                        => 'https://login.launchpad.net/+openid',
+    openidssourl                        => $openidssourl,
     database_poollimit                  => $database_poollimit,
     container_heaplimit                 => $container_heaplimit,
     core_packedgitopenfiles             => $core_packedgitopenfiles,
@@ -135,56 +193,7 @@ class openstack_project::gerrit (
     httpd_minthreads                    => $httpd_minthreads,
     httpd_maxthreads                    => $httpd_maxthreads,
     httpd_maxwait                       => $httpd_maxwait,
-    commentlinks                        => [
-      {
-        name  => 'bugheader',
-        match => '([Cc]loses|[Pp]artial|[Rr]elated)-[Bb]ug:\\s*#?(\\d+)',
-        link  => 'https://launchpad.net/bugs/$2',
-      },
-      {
-        name  => 'bug',
-        match => '\\bbug:? #?(\\d+)',
-        link  => 'https://launchpad.net/bugs/$1',
-      },
-      {
-        name  => 'story',
-        match => '\\bstory:? #?(\\d+)',
-        link  => 'https://storyboard.openstack.org/#!/story/$1',
-      },
-      {
-        name  => 'blueprint',
-        match => '(\\b[Bb]lue[Pp]rint\\b|\\b[Bb][Pp]\\b)[ \\t#:]*([A-Za-z0-9\\-]+)',
-        link  => 'https://blueprints.launchpad.net/openstack/?searchtext=$2',
-      },
-      {
-        name  => 'testresult',
-        match => '<li>([^ ]+) <a href=\"[^\"]+\" target=\"_blank\">([^<]+)</a> : ([^ ]+)([^<]*)</li>',
-        html  => '<li class=\"comment_test\"><span class=\"comment_test_name\"><a href=\"$2\">$1</a></span> <span class=\"comment_test_result\"><span class=\"result_$3\">$3</span>$4</span></li>',
-      },
-      {
-        name  => 'launchpadbug',
-        match => '<a href=\"(https://bugs\\.launchpad\\.net/[a-zA-Z0-9\\-]+/\\+bug/(\\d+))[^\"]*\">[^<]+</a>',
-        html  => '<a href=\"$1\">$1</a>'
-      },
-      {
-        name  => 'changeid',
-        match => '(I[0-9a-f]{8,40})',
-        link  => '#q,$1,n,z',
-      },
-      {
-        name  => 'gitsha',
-        match => '(<p>|[\\s(])([0-9a-f]{40})(</p>|[\\s.,;:)])',
-        html  => '$1<a href=\"#q,$2,n,z\">$2</a>$3',
-      },
-    ],
-    trackingids                         => [
-      {
-        name   => 'storyboard',
-        footer => 'story:',
-        match  => '\\#?(\\d+)',
-        system => 'Storyboard',
-      },
-    ],
+    commentlinks                        => $gerrit_commentlinks,
     war                                 => $war,
     contactstore                        => $contactstore,
     contactstore_appsec                 => $contactstore_appsec,
@@ -206,7 +215,7 @@ class openstack_project::gerrit (
 
   mysql_backup::backup_remote { 'gerrit':
     database_host     => $mysql_host,
-    database_user     => 'gerrit2',
+    database_user     => $mysql_user,
     database_password => $mysql_password,
     require           => Class['::gerrit'],
   }
