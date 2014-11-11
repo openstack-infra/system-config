@@ -1,5 +1,8 @@
 class openstack_project::community (
-  $sysadmins = []
+  $sysadmins = [],
+  $admin_users = [
+    'smaffulli',
+  ],
 ) {
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [80, 443, 8099, 8080],
@@ -7,7 +10,7 @@ class openstack_project::community (
   }
 
   realize (
-    User::Virtual::Localuser['smaffulli'],
+    User::Virtual::Localuser[$admin_users],
   )
 }
 
