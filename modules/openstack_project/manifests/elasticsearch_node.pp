@@ -17,9 +17,10 @@
 class openstack_project::elasticsearch_node (
   $elasticsearch_nodes = [],
   $elasticsearch_clients = [],
+  $elasticsearch_version = '0.90.9',
   $discover_nodes = ['localhost'],
   $heap_size = '30g',
-  $sysadmins = []
+  $sysadmins = [],
 ) {
   $iptables_nodes_rule = regsubst ($elasticsearch_nodes, '^(.*)$', '-m state --state NEW -m tcp -p tcp --dport 9200:9400 -s \1 -j ACCEPT')
   $iptables_clients_rule = regsubst ($elasticsearch_clients, '^(.*)$', '-m state --state NEW -m tcp -p tcp --dport 9200:9400 -s \1 -j ACCEPT')
@@ -47,7 +48,7 @@ class openstack_project::elasticsearch_node (
       'discovery.zen.ping.unicast.hosts'     => $discover_nodes,
     },
     heap_size          => $heap_size,
-    version            => '0.90.9',
+    version            => $elasticsearch_version,
   }
 
   cron { 'delete_old_es_indices':
