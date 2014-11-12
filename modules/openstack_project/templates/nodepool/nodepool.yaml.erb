@@ -208,6 +208,16 @@ labels:
       - name: hpcloud-b3
       - name: hpcloud-b4
       - name: hpcloud-b5
+  - name: devstack-fedora21-dib
+    image: devstack-fedora21-dib
+    ready-script: configure_mirror.sh
+    min-ready: 0
+    providers:
+      - name: hpcloud-b1
+      - name: hpcloud-b2
+      - name: hpcloud-b3
+      - name: hpcloud-b4
+      - name: hpcloud-b5
   - name: tripleo-precise
     image: tripleo-precise
     min-ready: 8
@@ -576,6 +586,11 @@ providers:
         diskimage: devstack-centos7-dib
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
+      - name: devstack-fedora21-dib
+        min-ram: 30720
+        diskimage: devstack-fedora21-dib
+        username: jenkins
+        private-key: /home/nodepool/.ssh/id_rsa
       - name: py3k-precise
         base-image: 'Ubuntu Server 12.04.5 LTS (amd64 20140927) - Partner Image'
         min-ram: 30720
@@ -667,6 +682,11 @@ providers:
         diskimage: devstack-centos7-dib
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
+      - name: devstack-fedora21-dib
+        min-ram: 30720
+        diskimage: devstack-fedora21-dib
+        username: jenkins
+        private-key: /home/nodepool/.ssh/id_rsa
       - name: py3k-precise
         base-image: 'Ubuntu Server 12.04.5 LTS (amd64 20140927) - Partner Image'
         min-ram: 30720
@@ -750,6 +770,11 @@ providers:
       - name: devstack-centos7-dib
         min-ram: 30720
         diskimage: devstack-centos7-dib
+        username: jenkins
+        private-key: /home/nodepool/.ssh/id_rsa
+      - name: devstack-fedora21-dib
+        min-ram: 30720
+        diskimage: devstack-fedora21-dib
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
       - name: bare-f20
@@ -850,6 +875,11 @@ providers:
         diskimage: devstack-centos7-dib
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
+      - name: devstack-fedora21-dib
+        min-ram: 30720
+        diskimage: devstack-fedora21-dib
+        username: jenkins
+        private-key: /home/nodepool/.ssh/id_rsa
       - name: py3k-precise
         base-image: 'Ubuntu Server 12.04.5 LTS (amd64 20140927) - Partner Image'
         min-ram: 30720
@@ -941,6 +971,11 @@ providers:
       - name: devstack-centos7-dib
         min-ram: 30720
         diskimage: devstack-centos7-dib
+        username: jenkins
+        private-key: /home/nodepool/.ssh/id_rsa
+      - name: devstack-fedora21-dib
+        min-ram: 30720
+        diskimage: devstack-fedora21-dib
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
       - name: py3k-precise
@@ -1077,4 +1112,14 @@ diskimages:
       - puppet
       - nodepool-base
       - node-devstack
-
+  - name: devstack-fedora21-dib
+    elements:
+      - fedora
+      - vm
+      - puppet
+      - nodepool-base
+      - node-devstack
+    release: 21
+    env-vars:
+      - DIB_CLOUD_IMAGES: http://download.fedoraproject.org/pub/fedora/linux/releases/test/21-Beta/Cloud/Images/x86_64/
+      - BASE_IMAGE_FILE: Fedora-Cloud-Base-20141029-21_Beta.x86_64.qcow2
