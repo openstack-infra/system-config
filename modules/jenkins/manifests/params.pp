@@ -7,7 +7,11 @@ class jenkins::params {
     'RedHat': {
       #yum groupinstall "Development Tools"
       # common packages
-      $jdk_package = 'java-1.7.0-openjdk-devel'
+      if ($::operatingsystem == 'Fedora') and ($::operatingsystemrelease >= 21) {
+        $jdk_package = 'java-1.8.0-openjdk-devel'
+      } else {
+        $jdk_package = 'java-1.7.0-openjdk-devel'
+      }
       $ccache_package = 'ccache'
       $python_netaddr_package = 'python-netaddr'
       # FIXME: No Maven packages on RHEL
