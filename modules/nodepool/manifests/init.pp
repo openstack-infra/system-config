@@ -75,6 +75,7 @@ class nodepool (
   $packages = [
     'kpartx',
     'qemu-utils',
+    'g++',
   ]
 
   package { $packages:
