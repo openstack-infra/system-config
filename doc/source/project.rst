@@ -43,7 +43,7 @@ Feel free to attend our `weekly IRC meeting
 on Tuesdays at 19:00 UTC in #openstack-meeting.
 
 Check out our open bugs, particularly the `low-hanging-fruit
-<https://bugs.launchpad.net/openstack-ci/+bugs?field.tag=low-hanging-fruit>`_,
+<https://storyboard.openstack.org/#!/project_group/55>`_,
 which are smaller (but still important!) tasks that may not require a
 great deal of in-depth knowledge.
 
@@ -103,7 +103,7 @@ Bugs
 
 The infrastructure project maintains a bug list at:
 
-  https://bugs.launchpad.net/openstack-ci
+  https://storyboard.openstack.org/#!/project_group/55
 
 Both defects and new features are tracked in the bug system.  A number
 of tags are used to indicate relevance to a particular subsystem.

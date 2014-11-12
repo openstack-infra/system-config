@@ -17,7 +17,7 @@ At a Glance
 :Projects:
   * https://git.openstack.org/cgit/openstack-infra/devstack-gate
 :Bugs:
-  * http://bugs.launchpad.net/openstack-ci
+  * https://storyboard.openstack.org/#!/project/712
 :Resources:
   * `Devstack-gate README <https://git.openstack.org/cgit/openstack-infra/devstack-gate/tree/README.rst>`_
 

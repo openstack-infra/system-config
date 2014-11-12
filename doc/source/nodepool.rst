@@ -24,7 +24,7 @@ At a Glance
 :Projects:
   * https://git.openstack.org/openstack-infra/nodepool
 :Bugs:
-  * http://bugs.launchpad.net/openstack-ci
+  * https://storyboard.openstack.org/#!/project/668
 :Resources:
   * `Nodepool Reference Manual <http://ci.openstack.org/nodepool>`_
 

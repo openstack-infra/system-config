@@ -21,7 +21,7 @@ At a Glance
 :Projects:
   * http://git.zx2c4.com/cgit/
 :Bugs:
-  * http://bugs.launchpad.net/openstack-ci
+  * https://storyboard.openstack.org/#!/project/748
   * http://lists.zx2c4.com/mailman/listinfo/cgit
 
 Overview

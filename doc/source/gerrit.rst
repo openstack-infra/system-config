@@ -29,7 +29,7 @@ At a Glance
 :Projects:
   * http://code.google.com/p/gerrit/
 :Bugs:
-  * http://bugs.launchpad.net/openstack-ci
+  * https://storyboard.openstack.org/#!/project/715
   * http://code.google.com/p/gerrit/issues/list
 :Resources:
   * `Gerrit Documentation <https://review.openstack.org/Documentation/index.html>`_

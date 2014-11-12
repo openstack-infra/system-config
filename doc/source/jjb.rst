@@ -21,7 +21,7 @@ At a Glance
 :Projects:
   * https://git.openstack.org/cgit/openstack-infra/jenkins-job-builder
 :Bugs:
-  * http://bugs.launchpad.net/openstack-ci
+  * https://storyboard.openstack.org/#!/project/723
 :Resources:
   * `Reference Manual <http://ci.openstack.org/jenkins-job-builder>`_
 

@@ -19,7 +19,7 @@ At a Glance
 :Documentation:
   * https://pypi.python.org/pypi/bandersnatch#configuration
 :Bugs:
-  * http://bugs.launchpad.net/openstack-ci
+  * https://storyboard.openstack.org/#!/project/748
   * https://bitbucket.org/pypa/bandersnatch/issues?status=new&status=open
 
 Overview

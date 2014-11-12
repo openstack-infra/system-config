@@ -22,10 +22,10 @@ At a Glance
 :Configuration:
   * :config:`zuul/layout.yaml`
 :Projects:
-  * http://launchpad.net/zuul
+  * https://storyboard.openstack.org/#!/project/679
   * https://git.openstack.org/cgit/openstack-infra/zuul
 :Bugs:
-  * http://bugs.launchpad.net/zuul
+  * https://storyboard.openstack.org/#!/project/679
 :Resources:
   * `Zuul Reference Manual <http://ci.openstack.org/zuul>`_
 
