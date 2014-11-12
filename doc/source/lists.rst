@@ -20,7 +20,7 @@ At a Glance
 :Projects:
   * http://www.gnu.org/software/mailman/
 :Bugs:
-  * http://bugs.launchpad.net/openstack-ci
+  * https://storyboard.openstack.org/#!/project/748
   * https://bugs.launchpad.net/mailman
 :Resources:
   * `Mailman Documentation <http://www.gnu.org/software/mailman/docs.html>`_

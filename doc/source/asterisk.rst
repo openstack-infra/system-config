@@ -21,7 +21,7 @@ At a Glance
   * https://wiki.openstack.org/wiki/Infrastructure/Conferencing
   * http://ofps.oreilly.com/titles/9781449332426/
 :Bugs:
-  * http://bugs.launchpad.net/openstack-ci
+  * https://storyboard.openstack.org/#!/project/748
   * http://issues.asterisk.org
 
 Overview

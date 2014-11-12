@@ -17,7 +17,7 @@ At a Glance
 :Projects:
   * http://git.openstack.org/cgit/openstack-infra/openstackid/
 :Bugs:
-  * https://bugs.launchpad.net/openstackid
+  * https://storyboard.openstack.org/#!/project/728
 :Resources:
   * http://laravel.com/docs/installation
   * http://laravel.com/docs/configuration

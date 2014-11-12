@@ -23,7 +23,7 @@ At a Glance
   * https://git.openstack.org/cgit/openstack/openstack-planet
   * http://www.intertwingly.net/code/venus/
 :Bugs:
-  * http://bugs.launchpad.net/openstack-ci
+  * https://storyboard.openstack.org/#!/project/748
 :Resources:
   * `Planet Venus Documentation <http://intertwingly.net/code/venus/docs/index.html>`_
 

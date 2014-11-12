@@ -26,7 +26,7 @@ At a Glance
 :Projects:
   * https://git.openstack.org/cgit/openstack-infra/jeepyb
 :Bugs:
-  * http://bugs.launchpad.net/openstack-ci
+  * https://storyboard.openstack.org/#!/project/722
 
 
 Gerrit Project Configuration

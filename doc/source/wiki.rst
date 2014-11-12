@@ -19,7 +19,7 @@ At a Glance
 :Projects:
   * http://www.mediawiki.org/wiki/MediaWiki
 :Bugs:
-  * http://bugs.launchpad.net/openstack-ci
+  * https://storyboard.openstack.org/#!/project/748
 
 Overview
 ========

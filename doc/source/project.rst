@@ -42,10 +42,8 @@ Feel free to attend our `weekly IRC meeting
 <https://wiki.openstack.org/wiki/Meetings/InfraTeamMeeting>`_.
 on Tuesdays at 19:00 UTC in #openstack-meeting.
 
-Check out our open bugs, particularly the `low-hanging-fruit
-<https://bugs.launchpad.net/openstack-ci/+bugs?field.tag=low-hanging-fruit>`_,
-which are smaller (but still important!) tasks that may not require a
-great deal of in-depth knowledge.
+Check out our open bugs on `StoryBoard
+<https://storyboard.openstack.org/#!/project_group/55>`_.
 
 We hold regular `bug days
 <https://wiki.openstack.org/wiki/InfraTeam#Bugs>`_ where we review and
@@ -103,7 +101,7 @@ Bugs
 
 The infrastructure project maintains a bug list at:
 
-  https://bugs.launchpad.net/openstack-ci
+  https://storyboard.openstack.org/#!/project_group/55
 
 Both defects and new features are tracked in the bug system.  A number
 of tags are used to indicate relevance to a particular subsystem.

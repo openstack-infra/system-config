@@ -21,7 +21,7 @@ At a Glance
 :Projects:
   * http://web.mit.edu/kerberos
 :Bugs:
-  * http://bugs.launchpad.net/openstack-ci
+  * https://storyboard.openstack.org/#!/project/748
   * http://krbdev.mit.edu/rt/
 :Resources:
   * `Kerberos Website <http://web.mit.edu/kerberos>`_
