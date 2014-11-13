@@ -1,8 +1,8 @@
 # Name of the series
-series: juno
+series: kilo
 
 # Final release date
-releasedate: 2014-10-16
+releasedate: 2015-04-30
 
 # Short milestone codes, with number of weeks leading to them, not including
 # the milestone week. The last one should be the release date.
@@ -14,10 +14,10 @@ releasedate: 2014-10-16
 # [5, j3] - 5 full weeks between j2 and j3 (not including j2 or j3 weeks)
 # [5, Oct 16] - 5 weeks for rc and release, not including release week
 milestones:
- - [6, j1]
- - [5, j2]
- - [5, j3]
- - [5, Oct 16]
+ - [7, k1]
+ - [6, k2]
+ - [5, k3]
+ - [5, Apr 30]
 
 # Set of projects to consider in the report
 products:
@@ -33,3 +33,4 @@ products:
  - heat
  - trove
  - sahara
+ - ironic
