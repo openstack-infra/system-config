@@ -4,8 +4,6 @@ vardir=/var/lib/puppet
 ssldir=/var/lib/puppet/ssl
 rundir=/var/run/puppet
 <% if @puppet_version.to_f < 3.6 -%>
-factpath=$vardir/lib/facter
-templatedir=$confdir/templates
 server=puppetmaster.openstack.org
 certname=<%= @certname %>
 pluginsync=true
