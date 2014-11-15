@@ -27,13 +27,19 @@ clonemap:
     dest: '/etc/puppet/modules/\2'
 EOF
 
+module_shortnames=""
+source modules.env
+for MOD in ${!INTEGRATION_MODULES[*]}; do
+    project_scope=$(basename `dirname $MOD`)
+    repo_name=`basename $MOD`
+    module_shortnames+=" $project_scope/$repo_name"
+done
+
 # Add puppet modules that should be installed to the end of this list
 sudo -E /usr/zuul-env/bin/zuul-cloner -m clonemap.yaml --cache-dir /opt/git \
     git://git.openstack.org \
-    openstack-infra/puppet-storyboard \
     openstack-infra/project-config \
-    openstack-infra/puppet-jenkins \
-    openstack-infra/puppet-kibana
+    $module_shortnames
 
 
 if [[ ! -d applytest ]] ; then
