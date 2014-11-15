@@ -34,6 +34,11 @@ declare -A MODULES
 # key:value is source location, revision to checkout
 declare -A SOURCE_MODULES
 
+# Array of modues to be installed from source and without dependency resolution from openstack git
+# key:value is source location, revision to checkout
+declare -A INTEGRATION_MODULES
+
+
 #NOTE: if we previously installed kickstandproject-ntp we nuke it here
 # since puppetlabs-ntp and kickstandproject-ntp install to the same dir
 if grep kickstandproject-ntp /etc/puppet/modules/ntp/Modulefile &> /dev/null; then
