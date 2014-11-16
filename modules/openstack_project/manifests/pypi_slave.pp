@@ -69,4 +69,13 @@ class openstack_project::pypi_slave (
     require => File['/home/jenkins'],
   }
 
+  file { '/home/jenkins/.puppetforge.yml':
+    ensure  => present,
+    owner   => 'jenkins',
+    group   => 'jenkins',
+    mode    => '0600',
+    content => template('openstack_project/puppetforge.yml'),
+    require => File['/home/jenkins'],
+  }
+
 }
