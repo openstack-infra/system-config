@@ -22,7 +22,9 @@ class openstack_project::pypi_slave (
   $jenkinsci_username,
   $jenkinsci_password,
   $mavencentral_username,
-  $mavencentral_password
+  $mavencentral_password,
+  $puppet_forge_username,
+  $puppet_forge_password,
 ) {
   class { 'openstack_project::slave':
     ssh_key => $jenkins_ssh_public_key,
@@ -66,6 +68,15 @@ class openstack_project::pypi_slave (
     group   => 'jenkins',
     mode    => '0600',
     content => template('openstack_project/mavencentral-curl.erb'),
+    require => File['/home/jenkins'],
+  }
+
+  file { '/home/jenkins/.puppetforge.yml':
+    ensure  => present,
+    owner   => 'jenkins',
+    group   => 'jenkins',
+    mode    => '0600',
+    content => template('openstack_project/puppetforge.yml'),
     require => File['/home/jenkins'],
   }
 
