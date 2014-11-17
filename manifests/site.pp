@@ -331,6 +331,14 @@ node /^logstash-worker\d+\.openstack\.org$/ {
   }
 }
 
+# Node-OS: trusty
+node /^subunit2sql-worker\d+\.openstack\.org$/ {
+  class { 'openstack_project::subunit_worker':
+    sysadmins             => hiera('sysadmins', []),
+    subunit2sql_db_uri    => hiera('subunit2sql_db_uri', ''),
+  }
+}
+
 # Node-OS: precise
 node /^elasticsearch0[1-7]\.openstack\.org$/ {
   class { 'openstack_project::elasticsearch_node':
