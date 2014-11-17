@@ -173,10 +173,14 @@ following information is necessary:
   visible.
 
   2. Your company/organization name or acronym. If you don't have a
-  company name please identify this in your email, we will need to
-  find an equivalent.
+  company or organization name please identify this in your email,
+  we will need to find an equivalent.
 
-  3. What you are verifying: this could be a product, driver or application.
+  3. What you are verifying: this could be a product, driver or
+  application. (If this is the sole external CI for a specific
+  project, run by that project's community, it's acceptable to use
+  that project's name for #2 and #3 since it both indicates the
+  responsible group of people and the software being tested.)
 
 Requests typically take a week to handle after any issues/questions are
 resolved. Please plan accordingly and be patient. Use an ordinary reviewer
