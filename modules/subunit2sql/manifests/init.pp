@@ -33,6 +33,30 @@ class subunit2sql (
     require  => Class['pip'],
   }
 
+  package { 'python-daemon':
+    ensure => present,
+  }
+
+  package { 'python-zmq':
+    ensure => present,
+  }
+
+  package { 'python-yaml':
+    ensure => present,
+  }
+
+  package { 'gear':
+    ensure   => latest,
+    provider => 'pip',
+    require  => Class['pip'],
+  }
+
+  package { 'statsd':
+    ensure   => latest,
+    provider => 'pip',
+    require  => Class['pip']
+  }
+
   package { 'subunit2sql':
     ensure   => latest,
     provider => 'pip',
