@@ -21,28 +21,38 @@ define subunit2sql::worker (
 ) {
   $suffix = "-${name}"
 
-  package { 'python-daemon':
-    ensure => present,
+  if ! defined(Package['python-daemon']) {
+    package { 'python-daemon':
+      ensure => present,
+    }
   }
 
-  package { 'python-zmq':
-    ensure => present,
+  if ! defined(Package['python-zmq']) {
+    package { 'python-zmq':
+      ensure => present,
+    }
   }
 
-  package { 'python-yaml':
-    ensure => present,
+  if ! defined(Package['python-yaml']) {
+    package { 'python-yaml':
+      ensure => present,
+    }
   }
 
-  package { 'gear':
-    ensure   => latest,
-    provider => 'pip',
-    require  => Class['pip'],
+  if ! defined(Package['gear']) {
+    package { 'gear':
+      ensure   => latest,
+      provider => 'pip',
+      require  => Class['pip'],
+    }
   }
 
-  package { 'statsd':
-    ensure   => latest,
-    provider => 'pip',
-    require  => Class['pip']
+  if ! defined(Package['statsd']) {
+    package { 'statsd':
+      ensure   => latest,
+      provider => 'pip',
+      require  => Class['pip']
+    }
   }
 
   file { '/usr/local/bin/subunit-gearman-worker.py':
