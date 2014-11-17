@@ -60,7 +60,7 @@ if [ -z "${!MODULES[*]}" ] && [ -z "${!SOURCE_MODULES[*]}" ] ; then
     exit 0
 fi
 
-MODULE_LIST=`puppet module list`
+MODULE_LIST=`puppet module list --color=false`
 
 # Transition away from old things
 if [ -d /etc/puppet/modules/vcsrepo/.git ]; then
@@ -72,9 +72,9 @@ for MOD in ${!MODULES[*]} ; do
     # If the module at the current version does not exist upgrade or install it.
     if ! echo $MODULE_LIST | grep "$MOD ([^v]*v${MODULES[$MOD]}" >/dev/null 2>&1 ; then
         # Attempt module upgrade. If that fails try installing the module.
-        if ! puppet module upgrade $MOD --version ${MODULES[$MOD]} >/dev/null 2>&1 ; then
+        if ! puppet module upgrade $MOD --color=false --version ${MODULES[$MOD]} >/dev/null 2>&1 ; then
             # This will get run in cron, so silence non-error output
-            puppet module install $MOD --version ${MODULES[$MOD]} >/dev/null
+            puppet module install $MOD --color=false --version ${MODULES[$MOD]} >/dev/null
         fi
     fi
 done
