@@ -174,9 +174,14 @@ following information is necessary:
 
   2. Your company/organization name or acronym. If you don't have a
   company name please identify this in your email, we will need to
-  find an equivalent.
+  find an equivalent. (For example, if the system is collaboratively
+  run by the developer community of a StackForge project, there may
+  be no company involved.)
 
-  3. What you are verifying: this could be a product, driver or application.
+  3. What you are verifying: this could be a product, driver or
+  application. (If this is the sole external CI for a specific
+  project, run by that project's community, it's acceptable to use
+  that instead.)
 
 Requests typically take a week to handle after any issues/questions are
 resolved. Please plan accordingly and be patient. Use an ordinary reviewer
