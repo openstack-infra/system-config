@@ -229,4 +229,13 @@ class openstack_project::lists(
     mailserver  => $listdomain,
   }
 
+  maillist { 'women-of-openstack':
+    ensure      => present,
+    admin       => 'claire@openstack.org',
+    password    => $listpassword,
+    description => 'Women of OpenStack discussion list.',
+    webserver   => $listdomain,
+    mailserver  => $listdomain,
+  }
+
 }
