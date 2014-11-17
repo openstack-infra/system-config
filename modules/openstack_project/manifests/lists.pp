@@ -184,9 +184,6 @@ class openstack_project::lists(
     mailserver  => $listdomain,
   }
 
-  maillist { 'openstack-superuser': ensure => absent }
-
-
   maillist { 'enterprise-wg':
     ensure      => present,
     admin       => 'carol.l.barrett@intel.com',
@@ -205,7 +202,7 @@ class openstack_project::lists(
     mailserver  => $listdomain,
   }
 
-    maillist { 'tax-affairs':
+  maillist { 'tax-affairs':
     ensure      => present,
     admin       => 'seanroberts66@gmail.com',
     password    => $listpassword,
