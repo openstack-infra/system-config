@@ -1,6 +1,0 @@
-description "launch cgrulesengd"
-author "Jeremy Stanley <fungi@yuggoth.org>"
-start on started cgconfig
-pre-start script
-	/usr/sbin/cgrulesengd
-end script
