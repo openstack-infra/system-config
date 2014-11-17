@@ -21,64 +21,15 @@ define subunit2sql::worker (
 ) {
   $suffix = "-${name}"
 
-  if ! defined(Package['python-daemon']) {
-    package { 'python-daemon':
-      ensure => present,
+  if ! defined(File['/etc/logstash/subunit2sql.conf']) {
+    file { '/etc/logstash/subunit2sql.conf':
+      ensure  => present,
+      owner   => 'root',
+      group   => 'root',
+      mode    => '0555',
+      content => template('subunit2sql/subunit2sql.conf.erb'),
+      require => Class['logstash::indexer'],
     }
-  }
-
-  if ! defined(Package['python-zmq']) {
-    package { 'python-zmq':
-      ensure => present,
-    }
-  }
-
-  if ! defined(Package['python-yaml']) {
-    package { 'python-yaml':
-      ensure => present,
-    }
-  }
-
-  if ! defined(Package['gear']) {
-    package { 'gear':
-      ensure   => latest,
-      provider => 'pip',
-      require  => Class['pip'],
-    }
-  }
-
-  if ! defined(Package['statsd']) {
-    package { 'statsd':
-      ensure   => latest,
-      provider => 'pip',
-      require  => Class['pip']
-    }
-  }
-
-  file { '/usr/local/bin/subunit-gearman-worker.py':
-    ensure  => present,
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0755',
-    source  => 'puppet:///modules/log_processor/subunit-gearman-worker.py',
-    require => [
-      Package['python-daemon'],
-      Package['python-zmq'],
-      Package['python-yaml'],
-      Package['gear'],
-      Package['subunit2sql'],
-      Package['python-subunit'],
-      Package['testtools']
-    ],
-  }
-
-  file { '/etc/logstash/subunit2sql.conf':
-    ensure  => present,
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0555',
-    content => template('subunit2sql/subunit2sql.conf.erb'),
-    require => Class['logstash::indexer'],
   }
 
   file { "/etc/logstash/jenkins-subunit-worker${suffix}.yaml":

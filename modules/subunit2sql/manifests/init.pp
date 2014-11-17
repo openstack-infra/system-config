@@ -49,4 +49,54 @@ class subunit2sql (
     require  => Class['pip'],
   }
 
+  if ! defined(Package['python-daemon']) {
+    package { 'python-daemon':
+      ensure => present,
+    }
+  }
+
+  if ! defined(Package['python-zmq']) {
+    package { 'python-zmq':
+      ensure => present,
+    }
+  }
+
+  if ! defined(Package['python-yaml']) {
+    package { 'python-yaml':
+      ensure => present,
+    }
+  }
+
+  if ! defined(Package['gear']) {
+    package { 'gear':
+      ensure   => latest,
+      provider => 'pip',
+      require  => Class['pip'],
+    }
+  }
+
+  if ! defined(Package['statsd']) {
+    package { 'statsd':
+      ensure   => latest,
+      provider => 'pip',
+      require  => Class['pip']
+    }
+  }
+
+  file { '/usr/local/bin/subunit-gearman-worker.py':
+    ensure  => present,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0755',
+    source  => 'puppet:///modules/log_processor/subunit-gearman-worker.py',
+    require => [
+      Package['python-daemon'],
+      Package['python-zmq'],
+      Package['python-yaml'],
+      Package['gear'],
+      Package['subunit2sql'],
+      Package['python-subunit'],
+      Package['testtools']
+    ],
+  }
 }
