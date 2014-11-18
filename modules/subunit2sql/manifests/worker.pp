@@ -21,6 +21,7 @@ define subunit2sql::worker (
 ) {
   $suffix = "-${name}"
 
+  include logstash
   if ! defined(File['/etc/logstash/subunit2sql.conf']) {
     file { '/etc/logstash/subunit2sql.conf':
       ensure  => present,
