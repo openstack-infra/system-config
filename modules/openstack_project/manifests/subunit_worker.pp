@@ -16,7 +16,7 @@
 #
 class openstack_project::subunit_worker (
   $sysadmins = [],
-  $subunit2sql_db_uri
+  $subunit2sql_db_uri,
 ) {
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [22],
