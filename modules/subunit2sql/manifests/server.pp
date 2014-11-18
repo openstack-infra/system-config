@@ -30,6 +30,6 @@ class subunit2sql::server (
   exec { 'upgrade_subunit2sql_db':
     command     => 'subunit2sql-db-manage --config-file /etc/subunit2sql.conf upgrade head',
     path        => '/usr/local/bin:/usr/bin:/bin/',
-    subscribe   => Package['subunit2sql'],
+    subscribe   => Exec['install_subunit2sql'],
   }
 }
