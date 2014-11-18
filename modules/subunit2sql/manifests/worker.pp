@@ -21,7 +21,15 @@ define subunit2sql::worker (
 ) {
   $suffix = "-${name}"
 
-  include logstash::indexer
+  if ! defined(File['/etc/logstash']) {
+    file { '/etc/logstash':
+      ensure => directory,
+      owner  => 'logstash',
+      group  => 'logstash',
+      mode   => '0644',
+    }
+  }
+
   if ! defined(File['/etc/logstash/subunit2sql.conf']) {
     file { '/etc/logstash/subunit2sql.conf':
       ensure  => present,
@@ -29,7 +37,7 @@ define subunit2sql::worker (
       group   => 'root',
       mode    => '0555',
       content => template('subunit2sql/subunit2sql.conf.erb'),
-      require => Class['logstash::indexer'],
+      require => File['/etc/logstash'],
     }
   }
 
@@ -39,7 +47,7 @@ define subunit2sql::worker (
     group   => 'root',
     mode    => '0555',
     source  => $config_file,
-    require => Class['logstash::indexer'],
+    require => File['/etc/logstash'],
   }
 
   file { "/etc/init.d/jenkins-subunit-worker${suffix}":
@@ -59,7 +67,7 @@ define subunit2sql::worker (
     hasrestart => true,
     subscribe  => File["/etc/logstash/jenkins-subunit-worker${suffix}.yaml"],
     require    => [
-      Class['logstash::indexer'],
+      File['/etc/logstash'],
       File["/etc/init.d/jenkins-subunit-worker${suffix}"],
     ],
   }
