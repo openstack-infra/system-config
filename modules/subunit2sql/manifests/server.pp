@@ -31,5 +31,6 @@ class subunit2sql::server (
     command     => 'subunit2sql-db-manage --config-file /etc/subunit2sql.conf upgrade head',
     path        => '/usr/local/bin:/usr/bin:/bin/',
     subscribe   => Package['subunit2sql'],
+    refreshonly => true,
   }
 }
