@@ -33,10 +33,19 @@ class subunit2sql (
     require  => Class['pip'],
   }
 
-  package { 'subunit2sql':
-    ensure   => latest,
-    provider => 'pip',
-    require  => [
+  vcsrepo { '/opt/subunit2sql':
+    ensure   => present,
+    provider => git,
+    source   => 'git://git.openstack.org/openstack-infra/subunit2sql',
+    revision => '0.2.0',
+  }
+
+  exec { 'install_subunit2sql':
+    command     => 'pip install /opt/subunit2sql',
+    path        => '/usr/local/bin:/usr/bin:/bin/',
+    refreshonly => true,
+    subscribe   => Vcsrepo['/opt/subunit2sql'],
+    require     => [
       Class['pip'],
       Package['python-mysqldb'],
       Package['python-psycopg2']
