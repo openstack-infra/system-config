@@ -88,7 +88,7 @@ class subunit2sql (
     owner   => 'root',
     group   => 'root',
     mode    => '0755',
-    source  => 'puppet:///modules/log_processor/subunit-gearman-worker.py',
+    source  => 'puppet:///modules/subunit2sql/subunit-gearman-worker.py',
     require => [
       Package['python-daemon'],
       Package['python-zmq'],
