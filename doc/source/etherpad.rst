@@ -23,7 +23,7 @@ At a Glance
   * http://etherpad.org/
   * https://github.com/ether/etherpad-lite
 :Bugs:
-  * http://bugs.launchpad.net/openstack-ci
+  * https://storyboard.openstack.org/#!/project/748
   * https://github.com/ether/etherpad-lite/issues
 
 Overview

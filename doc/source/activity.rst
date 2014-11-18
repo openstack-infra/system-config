@@ -14,7 +14,7 @@ At a glance:
   * http://activity.openstack.org
 
 :Bugs:
-  * https://bugs.launchpad.net/openstack-community
+  * https://storyboard.openstack.org/#!/project/709
 
 :Source code:
   * http://sourceforge.net/projects/wikidsopenstack/

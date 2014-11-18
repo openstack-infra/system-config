@@ -18,7 +18,7 @@ At a Glance
 :Projects:
   * http://www.cacti.net
 :Bugs:
-  * http://bugs.launchpad.net/openstack-ci
+  * https://storyboard.openstack.org/#!/project/748
   * http://www.cacti.net/bugs.php
 :Resources:
   * `Cacti Documentation <http://www.cacti.net/documentation.php>`_

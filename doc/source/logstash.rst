@@ -28,7 +28,7 @@ At a Glance
   * http://www.elasticsearch.org/
   * http://crm114.sourceforge.net/
 :Bugs:
-  * http://bugs.launchpad.net/openstack-ci
+  * https://storyboard.openstack.org/#!/project/748
   * https://logstash.jira.com/secure/Dashboard.jspa
   * https://github.com/rashidkpc/Kibana/issues
   * https://github.com/elasticsearch/elasticsearch/issues

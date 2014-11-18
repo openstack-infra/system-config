@@ -20,7 +20,7 @@ At a Glance
 :Projects:
   * https://puppetlabs.com/
 :Bugs:
-  * http://bugs.launchpad.net/openstack-ci
+  * https://storyboard.openstack.org/#!/project/748
   * http://projects.puppetlabs.com/
 :Resources:
   * `Puppet Language Reference <http://docs.puppetlabs.com/references/2.7.latest/type.html>`_

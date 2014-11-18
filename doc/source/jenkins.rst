@@ -26,7 +26,7 @@ At a Glance
   * :ref:`zuul`
   * :ref:`jjb`
 :Bugs:
-  * http://bugs.launchpad.net/openstack-ci
+  * https://storyboard.openstack.org/#!/project/748
   * https://wiki.jenkins-ci.org/display/JENKINS/Issue+Tracking
 :Resources:
   * :ref:`zuul`

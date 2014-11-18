@@ -181,7 +181,7 @@ to approve code changes to your project as defined in your ACL, and to
 add other Gerrit users to the group.
 
 You can request an initial Gerrit group member by opening a bug at
-https://bugs.launchpad.net/openstack-ci/+filebug (make sure to mention
+https://storyboard.openstack.org/#!/project/748 (make sure to mention
 the Gerrit full name or E-mail address of your initial member). See
 https://wiki.openstack.org/wiki/Project_Group_Management for details on
 project group management.

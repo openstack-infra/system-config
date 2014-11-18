@@ -30,7 +30,7 @@ At a Glance
   * https://git.openstack.org/cgit/openstack-infra/gerritbot
   * https://git.openstack.org/cgit/openstack-infra/statusbot
 :Bugs:
-  * http://bugs.launchpad.net/openstack-ci
+  * https://storyboard.openstack.org/#!/project/748
 
 Channel Requirements
 ====================

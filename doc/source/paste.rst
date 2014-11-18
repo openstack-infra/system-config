@@ -23,7 +23,7 @@ At a Glance
   * https://bitbucket.org/dcolish/lodgeit-main
   * http://www.pocoo.org/projects/lodgeit/
 :Bugs:
-  * http://bugs.launchpad.net/openstack-ci
+  * https://storyboard.openstack.org/#!/project/748
 
 Overview
 ========

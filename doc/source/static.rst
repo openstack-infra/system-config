@@ -24,7 +24,7 @@ At a Glance
 :Projects:
   * http://apache.org/
 :Bugs:
-  * http://bugs.launchpad.net/openstack-ci
+  * https://storyboard.openstack.org/#!/project/748
 
 Overview
 ========
