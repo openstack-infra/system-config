@@ -3,8 +3,23 @@
 # Managed by Puppet
 # ************************************
 
-NameVirtualHost <%= @vhost_name %>:<%= @port %>
-<VirtualHost <%= @vhost_name %>:<%= @port %>>
+NameVirtualHost <%= @vhost_name %>:80
+<VirtualHost <%= @vhost_name %>:80>
+<% if @site_ssl_enabled %>
+  ServerName <%= @srvname %>
+  Redirect / https://<%= @srvname %>/
+</VirtualHost>
+
+NameVirtualHost <%= @vhost_name %>:443
+<VirtualHost <%= @vhost_name %>:443>
+  SSLEngine on
+  SSLProtocol All -SSLv2 -SSLv3
+  SSLCertificateFile      /etc/ssl/certs/<%= @site_name %>.pem
+  SSLCertificateKeyFile   /etc/ssl/private/<%= @site_name %>.key
+<% if @site_ssl_chain_file_contents != '' %>
+  SSLCertificateChainFile /etc/ssl/certs/<%= @site_name %>_CA.pem
+<% end %>
+<% end %>
   ServerName <%= @srvname %>
 <% if @serveraliases.is_a? Array -%>
 <% @serveraliases.each do |name| -%><%= " ServerAlias #{name}\n" %><% end -%>

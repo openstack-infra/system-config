@@ -33,6 +33,12 @@
 # - site_alias: drush site alias name
 # - site_profile: installation profile to deploy
 #
+# SSL configuration:
+# - site_ssl_enabled: true if ssl is enabled (default: false)
+# - site_ssl_cert_file_contents: x509 certificate of vhost in pem format
+# - site_ssl_key_file_contents: rsa key of x509 certificate in pem format
+# - site_ssl_chain_file_contents: trusted chain of parent certificates (optional)
+#
 # Mysql connection:
 # - mysql_user: mysql user of drupal site
 # - mysql_password: password of site user
@@ -66,6 +72,10 @@ class drupal (
   $site_create_database = false,
   $site_base_url = false,
   $site_file_owner = 'root',
+  $site_ssl_enabled = false,
+  $site_ssl_cert_file_contents = undef,
+  $site_ssl_key_file_contents = undef,
+  $site_ssl_chain_file_contents = undef,
   $package_repository = undef,
   $package_branch = undef,
   $conf_cron_key = undef,
@@ -75,6 +85,45 @@ class drupal (
 ) {
   include apache
   include pear
+
+  # ssl certificates
+  if $site_ssl_enabled == true {
+
+    include apache::ssl
+
+    # site x509 certificate
+    if $site_ssl_cert_file_contents != '' {
+      file { "/etc/ssl/certs/${site_name}.pem":
+        owner   => 'root',
+        group   => 'root',
+        mode    => '0640',
+        content => $site_ssl_cert_file_contents,
+        before  => Apache::Vhost[$site_name],
+      }
+    }
+
+    # site ssl key
+    if $site_ssl_key_file_contents != '' {
+      file { "/etc/ssl/private/${site_name}.key":
+        owner   => 'root',
+        group   => 'root',
+        mode    => '0640',
+        content => $site_ssl_key_file_contents,
+        before  => Apache::Vhost[$site_name],
+      }
+    }
+
+    # site ca certificates file
+    if $site_ssl_chain_file_contents != '' {
+      file { "/etc/ssl/certs/${site_name}_CA.pem":
+        owner   => 'root',
+        group   => 'root',
+        mode    => '0640',
+        content => $site_ssl_chain_file_contents,
+        before  => Apache::Vhost[$site_name],
+      }
+    }
+  }
 
   # setup apache and virtualhosts, enable mod rewrite
   file { $site_vhost_root:
