@@ -35,6 +35,7 @@ $elasticsearch_clients = [
   'logstash-worker18.openstack.org',
   'logstash-worker19.openstack.org',
   'logstash-worker20.openstack.org',
+  'subunit-worker01.openstack.org',
 ]
 
 #
