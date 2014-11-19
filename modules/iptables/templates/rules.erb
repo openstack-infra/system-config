@@ -25,5 +25,6 @@
 <% @rules4.each do |rule| -%>
 -A openstack-INPUT <%= rule %>
 <% end -%>
+-A openstack-INPUT -j LOG -m limit --limit 2/min --log-prefix "iptables dropped: "
 -A openstack-INPUT -j REJECT --reject-with icmp-host-prohibited
 COMMIT
