@@ -9,8 +9,11 @@ OpenId Idp/ OAuth2.0 AS/RS
 At a Glance
 ===========
 
+:Wiki:
+  * https://wiki.openstack.org/wiki/OpenStackID
 :Hosts:
   * https://openstackid-dev.openstack.org
+  * https://openstackid.org
 :Puppet:
   * :file:`modules/openstackid`
   * :file:`modules/openstack_project/manifests/openstackid_dev.pp`
@@ -21,6 +24,16 @@ At a Glance
 :Resources:
   * http://laravel.com/docs/installation
   * http://laravel.com/docs/configuration
+
+Objective
+=========
+
+OpenStackID has been developed to provide a unique online identity for 
+all OpenStack web properties. The intention is to replace Launchpad as
+openID provider. The code provides authentication via OpenID and 
+authentication + authorization via OAuth2. More details about 
+OpenStackID server are on the wiki.
+
 
 Configuration
 =============
