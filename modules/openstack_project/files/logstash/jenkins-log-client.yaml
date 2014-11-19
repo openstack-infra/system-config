@@ -15,8 +15,10 @@ subunit-files:
   - name: logs/testrepository.subunit
     retry-get: True
     job-filter: 'gate-(tempest|grenade)-dsvm.*'
+    build-queue-filter: 'gate'
   - name: logs/old/testrepository.subunit
     job-filter: 'gate-grenade-dsvm.*'
+    build-queue-filter: 'gate'
 
 # List of files to source logs from.
 source-files:

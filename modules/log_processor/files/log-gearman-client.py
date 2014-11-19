@@ -72,6 +72,11 @@ class EventProcessor(threading.Thread):
             if (job_filter and
                 not re.match(job_filter, out_event['fields']['build_name'])):
                 continue
+            build_queue_filter = fileopts.get('build-queue-filter')
+            if (build_queue_filter and
+                not re.match(build_queue_filter,
+                             out_event['fields']['build_queue')):
+                continue
             output['source_url'] = source_url
             output['retry'] = fileopts.get('retry-get', False)
             output['event'] = out_event
