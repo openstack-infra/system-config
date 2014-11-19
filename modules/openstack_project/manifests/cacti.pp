@@ -140,6 +140,7 @@ class openstack_project::cacti (
     'review.openstack.org',
     'review-dev.openstack.org',
     'static.openstack.org',
+    'subunit-worker01.openstack.org',
     'wiki.openstack.org',
     'zm01.openstack.org',
     'zm02.openstack.org',
