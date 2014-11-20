@@ -179,6 +179,24 @@ class nodepool (
     require => User['nodepool'],
   }
 
+  # used for storage of d-i-b cached data
+  file { '/opt/dib_cache':
+    ensure  => directory,
+    mode    => '0755',
+    owner   => 'nodepool',
+    group   => 'nodepool',
+    require => User['nodepool'],
+  }
+
+  # used as TMPDIR during d-i-b image builds
+  file { '/opt/dib_tmp':
+    ensure  => directory,
+    mode    => '0755',
+    owner   => 'nodepool',
+    group   => 'nodepool',
+    require => User['nodepool'],
+  }
+
   file { '/var/log/nodepool':
     ensure  => directory,
     mode    => '0755',

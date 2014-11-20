@@ -1095,6 +1095,9 @@ diskimages:
       - nodepool-base
       - node-devstack
     release: trusty
+    env-vars:
+      TMPDIR: /opt/dib_tmp
+      DIB_IMAGE_CACHE: /opt/dib_cache
   - name: devstack-precise-dib
     elements:
       - ubuntu
@@ -1104,6 +1107,9 @@ diskimages:
       - nodepool-base
       - node-devstack
     release: precise
+    env-vars:
+      TMPDIR: /opt/dib_tmp
+      DIB_IMAGE_CACHE: /opt/dib_cache
   - name: devstack-centos7-dib
     elements:
       - centos7
@@ -1112,6 +1118,9 @@ diskimages:
       - puppet
       - nodepool-base
       - node-devstack
+    env-vars:
+      TMPDIR: /opt/dib_tmp
+      DIB_IMAGE_CACHE: /opt/dib_cache
   - name: devstack-fedora21-dib
     elements:
       - fedora
@@ -1121,5 +1130,7 @@ diskimages:
       - node-devstack
     release: 21
     env-vars:
-      - DIB_CLOUD_IMAGES: http://download.fedoraproject.org/pub/fedora/linux/releases/test/21-Beta/Cloud/Images/x86_64/
-      - BASE_IMAGE_FILE: Fedora-Cloud-Base-20141029-21_Beta.x86_64.qcow2
+      TMPDIR: /opt/dib_tmp
+      DIB_IMAGE_CACHE: /opt/dib_cache
+      DIB_CLOUD_IMAGES: http://download.fedoraproject.org/pub/fedora/linux/releases/test/21-Beta/Cloud/Images/x86_64/
+      BASE_IMAGE_FILE: Fedora-Cloud-Base-20141029-21_Beta.x86_64.qcow2
