@@ -73,6 +73,7 @@ class nodepool (
   }
 
   $packages = [
+    'build-essential',
     'kpartx',
     'qemu-utils',
   ]
@@ -126,6 +127,7 @@ class nodepool (
     subscribe   => Vcsrepo['/opt/nodepool'],
     require     => [
       Class['pip'],
+      Package['build-essential'],
       Package['python-lxml'],
     ],
   }
