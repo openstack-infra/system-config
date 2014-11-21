@@ -4,7 +4,7 @@
 # Copyright 2013 OpenStack Foundation
 #
 # Licensed under the Apache License, Version 2.0 (the "License"); you may
-# not use this file except in compliance with the License. You may obtain
+
 # a copy of the License at
 #
 #      http://www.apache.org/licenses/LICENSE-2.0
@@ -73,6 +73,8 @@ class nodepool (
   }
 
   $packages = [
+    'build-essential',
+    'libffi-dev',
     'kpartx',
     'qemu-utils',
   ]
@@ -126,6 +128,8 @@ class nodepool (
     subscribe   => Vcsrepo['/opt/nodepool'],
     require     => [
       Class['pip'],
+      Package['build-essential'],
+      Package['libffi-dev'],
       Package['python-lxml'],
     ],
   }
