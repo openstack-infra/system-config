@@ -73,10 +73,13 @@ class nodepool (
   }
 
   $packages = [
+    'debootstrap',
     'kpartx',
     'qemu-utils',
     # debootstrap is needed for building Debian images
     'debootstrap'
+    # rinse is needed for building CenOS images
+    'rinse',
   ]
 
   package { $packages:
