@@ -73,6 +73,7 @@ class nodepool (
   }
 
   $packages = [
+    'debootstrap',
     'kpartx',
     'qemu-utils',
   ]
