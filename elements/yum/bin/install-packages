@@ -1,0 +1,94 @@
+#!/bin/bash
+
+# Copyright 2012 Hewlett-Packard Development Company, L.P.
+#
+# Licensed under the Apache License, Version 2.0 (the "License"); you may
+# not use this file except in compliance with the License. You may obtain
+# a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+# WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+# License for the specific language governing permissions and limitations
+# under the License.
+
+set -eu
+set -o pipefail
+
+EXTRA_ARGS=
+ACTION=install
+MAP_ELEMENT=
+
+SCRIPTNAME=$(basename $0)
+function show_options () {
+    echo "Usage: $SCRIPTNAME [package ...]"
+    echo
+    echo "Options:"
+    echo "    -u          -- update all packages"
+    echo "    -d          -- download the packages only"
+    echo "    -e          -- erase/remove packages"
+    echo "    -m          -- use custom element package map (Example: -m nova)"
+    exit 0
+}
+
+TEMP=$(getopt -o hudem: -n $SCRIPTNAME -- "$@")
+if [ $? != 0 ] ; then echo "Terminating..." >&2 ; exit 1 ; fi
+eval set -- "$TEMP"
+
+while true ; do
+    case "$1" in
+        -u) yum -y update; exit 0;;
+        -d) EXTRA_ARGS="--downloadonly"; shift;;
+        -e) ACTION="erase"; shift;;
+        -m) MAP_ELEMENT=$2; shift 2;;
+        -h) show_options;;
+        --) shift; break ;;
+        *) echo "Error: unsupported option $1."; exit 1;;
+    esac
+done
+
+# Packages that aren't available in the distro but requested for installation
+# can be ignored by adding them to the exclude list
+BLACKLIST=$(cat /tmp/yum-blacklist 2>/dev/null || echo "")
+WHITELIST=""
+for i in "$@"
+do
+    PKG_NAME=$i
+    if [ -n "$MAP_ELEMENT" ]; then
+        if !  PKG_NAME=$(pkg-map --element $MAP_ELEMENT $i); then
+            echo "bin/pkg-map error. $PKG_NAME"
+            exit 1
+        fi
+    fi
+    if [[ ! ${BLACKLIST[*]} =~ $PKG_NAME ]]; then
+        WHITELIST="$WHITELIST $i"
+    else
+        echo "The package $i is not available and will not be installed"
+    fi
+done
+if [ -n "$WHITELIST" ]; then
+    if [ -f /etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release ]; then
+        rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release
+    fi
+    if [ -n "$MAP_ELEMENT" ]; then
+        if ! PKGS=$(pkg-map --element $MAP_ELEMENT $WHITELIST); then
+            echo "bin/pkg-map error. $PKGS"
+            exit 1
+        fi
+    else
+        PKGS=$(map-packages $WHITELIST)
+    fi
+    if [ -z "${PKGS}" ]; then
+        echo "Not running install-packages $ACTION with empty packages list"
+    else
+        echo "Running install-packages ${ACTION}. Package list: $PKGS"
+        yum -y $ACTION $EXTRA_ARGS $PKGS
+        for pkg in "$@"; do
+            if [ "$pkg" = "python-pip" ] ; then
+                alternatives --install /usr/bin/pip pip /usr/bin/pip-python 10
+            fi
+        done
+    fi
+fi
