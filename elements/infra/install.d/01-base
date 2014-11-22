@@ -1,0 +1,15 @@
+#!/bin/bash
+
+set -eu
+set -o pipefail
+
+# We should manage this in a betterer way
+cat << EOF >/etc/apt/sources.list
+deb http://us.archive.ubuntu.com/ubuntu trusty main restricted universe
+deb http://us.archive.ubuntu.com/ubuntu trusty-updates main restricted universe
+deb http://us.archive.ubuntu.com/ubuntu trusty-backports main restricted universe
+deb http://us.archive.ubuntu.com/ubuntu trusty-security main restricted universe
+EOF
+apt-get update
+
+install-packages openssh-server file less curl rsync lsb-release wget linux-image-generic
