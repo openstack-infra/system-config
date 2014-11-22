@@ -1,0 +1,70 @@
+#!/bin/bash
+
+# Copyright 2012 Hewlett-Packard Development Company, L.P.
+#
+# Licensed under the Apache License, Version 2.0 (the "License"); you may
+# not use this file except in compliance with the License. You may obtain
+# a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+# WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+# License for the specific language governing permissions and limitations
+# under the License.
+
+set -eu
+set -o pipefail
+
+# install-packages package [package ...]
+
+ACTION=install
+MAP_ELEMENT=""
+
+SCRIPTNAME=$(basename $0)
+function show_options () {
+    echo "Usage: $SCRIPTNAME [package ...]"
+    echo
+    echo "Options:"
+    echo "    -u          -- update all packages"
+    echo "    -e          -- erase/remove packages"
+    echo "    -m          -- use custom element package map (Example: -m nova)"
+    exit 0
+}
+
+install_deb_packages () {
+    DEBIAN_FRONTEND=noninteractive \
+        http_proxy=${http_proxy:-} https_proxy=${https_proxy:-} \
+        no_proxy=${no_proxy:-} \
+        apt-get --option "Dpkg::Options::=--force-confold" --assume-yes "$@"
+}
+
+TEMP=$(getopt -o hudem: -n $SCRIPTNAME -- "$@")
+if [ $? != 0 ] ; then echo "Terminating..." >&2 ; exit 1 ; fi
+eval set -- "$TEMP"
+
+while true ; do
+    case "$1" in
+        -u) install_deb_packages dist-upgrade; exit 0;;
+        -e) ACTION="remove"; shift;;
+        -m) MAP_ELEMENT=$2; shift 2;;
+        -h) show_options;;
+        --) shift; break ;;
+        *) echo "Error: unsupported option $1."; exit 1;;
+    esac
+done
+
+PKGS=$@
+if [ -n "$MAP_ELEMENT" ]; then
+    if ! PKGS=$(pkg-map --element $MAP_ELEMENT $@); then
+        echo "bin/pkg-map error. $PKGS"
+        exit 1
+    fi
+fi
+
+if [ -z "${PKGS}" ]; then
+    echo "Not running install-packages $ACTION with empty packages list"
+else
+    install_deb_packages $ACTION $PKGS
+fi
