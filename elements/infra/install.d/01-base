@@ -1,0 +1,6 @@
+#!/bin/bash
+
+set -eu
+set -o pipefail
+
+install-packages openssh-server file less curl rsync lsb-release wget linux-image-generic
