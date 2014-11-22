@@ -81,6 +81,8 @@ class nodepool (
     'libgmp-dev',         # transitive dep of paramiko
     # debootstrap is needed for building Debian images
     'debootstrap',
+    # rinse is needed for building CenOS images
+    'rinse',
   ]
 
   package { $packages:
