@@ -1,0 +1,6 @@
+#!/bin/bash
+
+set -eu
+set -o pipefail
+
+install-packages sudo adduser locales openssh-server file less curl rsync lsb-release
