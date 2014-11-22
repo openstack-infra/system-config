@@ -1,0 +1,11 @@
+#!/bin/bash
+
+set -eu
+set -o pipefail
+
+install-packages openssh-server file less curl rsync lsb-release wget linux-image-generic
+
+cat > /etc/cloud/cloud.cfg.d/90_dpkg.cfg <<'EOF'
+# to update this file, run dpkg-reconfigure cloud-init
+datasource_list: [ ConfigDrive, None ]
+EOF
