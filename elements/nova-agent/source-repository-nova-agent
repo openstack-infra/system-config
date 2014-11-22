@@ -1,0 +1,1 @@
+nova-agent tar /tmp/nova-agent http://boot.rackspace.com/files/nova-agent/nova-agent-Linux-x86_64-1.39.0.tar.gz .
