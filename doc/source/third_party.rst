@@ -17,11 +17,8 @@ Smokestack reads the Gerrit event stream and runs its own tests on the commits.
 If one of the tests fails it will publish information and links to the failure
 on the review in Gerrit.
 
-You can view a list of current 3rd party testing accounts and the relevant
-contact information for each account in the `Gerrit group for 3rd party
-testing <https://review.openstack.org/#/admin/groups/270,members>`_ (you must
-be signed in to Gerrit to view this page). All accounts must have a wikipage
-entry `on this page <https://wiki.openstack.org/wiki/ThirdPartySystems>`_.
+All accounts must have a wikipage entry
+`on this page <https://wiki.openstack.org/wiki/ThirdPartySystems>`_.
 Details are below under Requirements.
 
 Requirements
@@ -38,11 +35,13 @@ Requirements
 
 * The maintainers are responsible for re-triggering tests when their third
   party testing system breaks.
+
 * Support recheck to request re-running a test.
 
   * Support the following syntaxes: ``recheck``.
   * Recheck means recheck everything. A single recheck comment should
     re-trigger all testing systems.
+
 * Publish contact information for the maintainers.
 
   * Follow the instructions on the `ThirdPartySystems wiki page
@@ -54,6 +53,7 @@ Requirements
     page for your CI system.
   * Maintainers are encouraged to be in IRC regularly to make it
     faster to contact them.
+
 * Include a public link to all test artifacts to make debugging failed tests
   easier (using a dns name over a hardcoded ip is recommended).
   This should include:
@@ -147,40 +147,58 @@ the upstream Jenkins results, use a template for each result matching::
 
 .. _request-account-label:
 
-Requesting a Service Account
-----------------------------
+Creating a Service Account
+--------------------------
 
 In order to post comments as a Third Party CI System and eventually verify
 your build status on Gerrit patches, you will need a dedicated Gerrit
-system account. This account is created by a member of the OpenStack
-Infrastructure team, you are unable to create this account yourself. This
-account has no access via the GUI to modify settings.
+CI account. You will need to create this account in our OpenID provider
+`Launchpad <https://launchpad.net>`. You may already have an existing
+personal account in Launchpad, but you should create a new and entirely
+separate account for this purpose.
 
-You will need to subscribe to two mailing lists `third-party-announce
+Once you have created this account with the OpenID provider you can log
+into Gerrit with that new account as you would with your normal user
+account. Once logged in you will need to do several things:
+
+  1. Set an SSH username at https://review.openstack.org/#/settings/ if
+  it isn't already set. This is the username your CI system will use to
+  SSH to Gerrit in order to read the event stream.
+
+  2. Set the account's fullname at https://review.openstack.org/#/settings/contact
+  This name should follow a few rules in order to make it clear in Gerrit
+  comments what this CI system exists to test. The name should have three
+  pieces ``Organization`` ``Product/technology`` ``CI designator``. The
+  organization value should be your company name or other organization
+  affiliation. Product/technology should describe the product or technology
+  you are testing in conjunction with OpenStack. This should be the name of
+  a component which cannot be tested in the official OpenStack
+  infrastructure (requires particular physical hardware, proprietary
+  software, some hypervisor feature not available in public clouds,
+  et cetera). Note this should not be the name of an OpenStack project but
+  rather the thing you are testing with OpenStack projects. And finally
+  the CI designator is used to denote this is a CI system so that automatic
+  Gerrit comment parsers can filter these comments out. This value should
+  be ``CI`` for most CI systems but can be ``Bot`` if you are not
+  performing continuous integration. An example of a proper name would be
+  something like ``IBM DB2 CI``.
+
+  3. Add the SSH public key you will be using to the Gerrit account at
+  https://review.openstack.org/#/settings/ssh-keys You can generate an
+  ssh key using ``ssh-keygen``. You want to give Gerrit the contents of
+  the generated id_rsa.pub file.
+
+Note you should also subscribe to the `third-party-announce
 <http://lists.openstack.org/cgi-bin/mailman/listinfo/third-party-announce>`_
-to be aware if your system is disabled and `third-party-requests
-<http://lists.openstack.org/cgi-bin/mailman/listinfo/third-party-requests>`_
-to request your dedicated third party gerrit account.
+list to keep on top of announcements there which can include account
+disablement notices.
 
-When submitting your request to the third-party-requests mailing list, the
-following information is necessary:
-
-  1. The public SSH key described above (if using OpenSSH, this would be the
-  full contents of the account's ~/.ssh/id_rsa.pub file after running
-  'ssh-keygen'). You can attach it to the email or include a hyperlink to
-  where you've published it so it can be retrieved. This is a
-  non-sensitive piece of data, and it's safe for it to be publicly
-  visible.
-
-  2. Your company/organization name or acronym. If you don't have a
-  company name please identify this in your email, we will need to
-  find an equivalent.
-
-  3. What you are verifying: this could be a product, driver or application.
-
-Requests typically take a week to handle after any issues/questions are
-resolved. Please plan accordingly and be patient. Use an ordinary reviewer
-account for testing purposes.
+Once you have done this you will have everything you need to comment on
+Gerrit changes from our CI system but you will not be able to vote +/-1
+Verified on changes. To get voting rights you will need to get the release
+group of the project you are testing to add you to their project specific
+voting-testers group. Please contact the project in question when you are
+ready to start voting and they can add you to this group.
 
 The Jenkins Gerrit Trigger Plugin Way
 -------------------------------------
@@ -247,7 +265,7 @@ uploaded and will report the results to Gerrit automatically.
 Testing your CI setup
 ---------------------
 
-You can use the ``openstack-dev/sandbox`` project to test your external CI
+You can use the ``openstack-dev/ci-sandbox`` project to test your external CI
 infrastructure with OpenStack's Gerrit. By using the sandbox project you
 can test your CI system without affecting regular OpenStack reviews.
 
@@ -258,13 +276,14 @@ events from your target project.
 Permissions on your Third Party System
 --------------------------------------
 
-When your CI account is created it will be in the `Third-Party CI Gerrit
-group <https://review.openstack.org/#/admin/groups/270,members>`_.
-The permissions on this group allow for commenting and voting on the
-`openstack-dev/sandbox`_
-repo as well as commenting without voting on other repos in gerrit.
+When you create your CI account it will have no special permissions.
+This means it can comment on changes but generally not vote +/-1
+Verified on any changes. The exception to this is on the
+``openstack-dev/ci-sandbox`` project. Any account is able to vote +/-1
+Verified on that account and it provides a way to test your CI's voting
+abilities before you vote on other projects.
 
-.. _openstack-dev/sandbox: https://git.openstack.org/cgit/openstack-dev/sandbox/
+.. _openstack-dev/ci-sandbox: https://git.openstack.org/cgit/openstack-dev/ci-sandbox/
 
 The OpenStack Infrastructure team disables mis-behaving third-party ci
 accounts at its discretion. This documentation endeavours to outline specific
@@ -280,7 +299,7 @@ getting your system re-enabled. You are also welcome to join us in the
 #openstack-infra irc channel on freenode to discuss your situation.
 
 In order to get your Third Pary CI account to have voting permissions on
-repos in gerrit in addition to ``openstack-dev/sandbox`` you have a greater
+repos in gerrit in addition to ``openstack-dev/ci-sandbox`` you have a greater
 chance of success if you follow these steps:
 
 * Set up your system and test it according to "Testing your CI setup" outlined
@@ -307,8 +326,6 @@ chance of success if you follow these steps:
   * address any questions and concerns with your system
 
 * If the members of the program you want voting permissions from agree
-  your system should be able to vote, the ptl or a core-reviewer from
-  the program communicates this decision to the OpenStack
-  Infrastructure team who will move your Third Party CI System to the
-  `Voting Third-Party CI Gerrit group
-  <https://review.openstack.org/#/admin/groups/91,members>`_.
+  your system should be able to vote, the release group for that program
+  or project can add you to the voting-testers group specific to that
+  program/project.
