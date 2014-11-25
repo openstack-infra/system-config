@@ -103,6 +103,9 @@ class openstack_project::jenkins (
   jenkins::plugin { 'openid':
     version => '1.5',
   }
+  jenkins::plugin { 'postbuildscript':
+    version => '0.16',
+  }
   jenkins::plugin { 'publish-over-ftp':
     version => '1.7',
   }
