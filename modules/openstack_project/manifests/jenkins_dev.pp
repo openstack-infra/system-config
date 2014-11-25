@@ -1,22 +1,50 @@
 # == Class: openstack_project::jenkins_dev
 #
 class openstack_project::jenkins_dev (
+  $admin_users = [
+    'zaro',
+  ],
   $jenkins_ssh_private_key = '',
   $sysadmins = [],
   $mysql_root_password,
   $mysql_password,
   $nodepool_ssh_private_key = '',
-  $jenkins_api_user ='',
-  $jenkins_api_key ='',
-  $jenkins_credentials_id ='',
-  $hpcloud_username ='',
-  $hpcloud_password ='',
-  $hpcloud_project ='',
-  $nodepool_template ='nodepool-dev.yaml.erb',
+  $jenkins_api_user = '',
+  $jenkins_api_key = '',
+  $jenkins_credentials_id = '',
+  $jenkins_vhost_name = 'jenkins-dev.openstack.org',
+  $jenkins_plugins = {
+    'build-timeout' => { version => '1.14' },
+    'copyartifact' => { version => '1.22' },
+    'dashboard-view' => { version => '2.3' },
+    'gearman-plugin' => { version => '0.1.1' },
+    'git' => { version => '1.1.23' },
+    'greenballs' => { version => '1.12' },
+    'extended-read-permission' => { version => '1.0' },
+    'zmq-event-publisher' => { version => '0.0.3' },
+    # TODO(jeblair): release #'scp' => { version => '1.9' },
+    'monitoring' => { version => '1.40.0' },
+    'nodelabelparameter' => { version => '1.2.1' },
+    'notification' => { version => '1.4' },
+    'openid' => { version => '1.5' },
+    'publish-over-ftp' => { version => '1.7' },
+    'simple-theme-plugin' => { version => '0.2' },
+    'timestamper' => { version => '1.3.1' },
+    'token-macro' => { version => '1.5.1' },
+  },
+  $jenkins_serveradmin_email = 'webmaster@openstack.org',
+  $jenkins_log_filename = 'openstack.png',
+  $hpcloud_username = '',
+  $hpcloud_password = '',
+  $hpcloud_project = '',
+  $nodepool_template = 'nodepool-dev.yaml.erb',
+  $use_bup = true,
+  $bup_backup_user = 'bup-jenkins-dev',
+  $bup_backup_server = 'ci-backup-rs-ord.openstack.org',
 ) {
 
   realize (
-    User::Virtual::Localuser['zaro'],
+    User::Virtual::Localuser[$admin_users],
   )
 
   include openstack_project
@@ -25,15 +53,19 @@ class openstack_project::jenkins_dev (
     iptables_public_tcp_ports => [80, 443],
     sysadmins                 => $sysadmins,
   }
-  include bup
-  bup::site { 'rs-ord':
-    backup_user   => 'bup-jenkins-dev',
-    backup_server => 'ci-backup-rs-ord.openstack.org',
+
+  if $use_bup {
+    include bup
+    bup::site { 'rs-ord':
+      backup_user   => $bup_backup_user,
+      backup_server => $bup_backup_server,
+    }
   }
+
   class { '::jenkins::master':
-    vhost_name              => 'jenkins-dev.openstack.org',
-    serveradmin             => 'webmaster@openstack.org',
-    logo                    => 'openstack.png',
+    vhost_name              => $jenkins_vhost_name,
+    serveradmin             => $jenkins_serveradmin_email,
+    logo                    => $jenkins_log_filename,
     ssl_cert_file           => '/etc/ssl/certs/ssl-cert-snakeoil.pem',
     ssl_key_file            => '/etc/ssl/private/ssl-cert-snakeoil.key',
     ssl_chain_file          => '',
@@ -41,58 +73,7 @@ class openstack_project::jenkins_dev (
     jenkins_ssh_public_key  => $openstack_project::jenkins_dev_ssh_key,
   }
 
-  jenkins::plugin { 'build-timeout':
-    version => '1.14',
-  }
-  jenkins::plugin { 'copyartifact':
-    version => '1.22',
-  }
-  jenkins::plugin { 'dashboard-view':
-    version => '2.3',
-  }
-  jenkins::plugin { 'gearman-plugin':
-    version => '0.1.1',
-  }
-  jenkins::plugin { 'git':
-    version => '1.1.23',
-  }
-  jenkins::plugin { 'greenballs':
-    version => '1.12',
-  }
-  jenkins::plugin { 'extended-read-permission':
-    version => '1.0',
-  }
-  jenkins::plugin { 'zmq-event-publisher':
-    version => '0.0.3',
-  }
-#  TODO(jeblair): release
-#  jenkins::plugin { 'scp':
-#    version => '1.9',
-#  }
-  jenkins::plugin { 'monitoring':
-    version => '1.40.0',
-  }
-  jenkins::plugin { 'nodelabelparameter':
-    version => '1.2.1',
-  }
-  jenkins::plugin { 'notification':
-    version => '1.4',
-  }
-  jenkins::plugin { 'openid':
-    version => '1.5',
-  }
-  jenkins::plugin { 'publish-over-ftp':
-    version => '1.7',
-  }
-  jenkins::plugin { 'simple-theme-plugin':
-    version => '0.2',
-  }
-  jenkins::plugin { 'timestamper':
-    version => '1.3.1',
-  }
-  jenkins::plugin { 'token-macro':
-    version => '1.5.1',
-  }
+  create_resources('jenkins::plugin',$jenkins_plugins)
 
   file { '/etc/default/jenkins':
     ensure => present,
