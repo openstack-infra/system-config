@@ -124,6 +124,7 @@ node 'jenkins.openstack.org' {
     sysadmins               => hiera('sysadmins', []),
     zmq_event_receivers     => ['logstash.openstack.org',
                                 'nodepool.openstack.org',
+                                'nodepool-dev.openstack.org',
     ],
   }
 }
@@ -139,6 +140,7 @@ node /^jenkins\d+\.openstack\.org$/ {
     sysadmins               => hiera('sysadmins', []),
     zmq_event_receivers     => ['logstash.openstack.org',
                                 'nodepool.openstack.org',
+                                'nodepool-dev.openstack.org',
     ],
   }
 }
@@ -200,6 +202,7 @@ node 'graphite.openstack.org' {
     graphite_admin_password => hiera('graphite_admin_password', 'XXX'),
     statsd_hosts            => ['logstash.openstack.org',
                                 'nodepool.openstack.org',
+                                'nodepool-dev.openstack.org',
                                 'zuul.openstack.org'],
   }
 }
@@ -504,6 +507,7 @@ node 'zuul.openstack.org' {
     statsd_host                    => 'graphite.openstack.org',
     gearman_workers                => [
       'nodepool.openstack.org',
+      'nodepool-dev.openstack.org',
       'jenkins.openstack.org',
       'jenkins01.openstack.org',
       'jenkins02.openstack.org',
