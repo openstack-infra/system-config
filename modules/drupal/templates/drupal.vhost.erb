@@ -16,7 +16,7 @@ NameVirtualHost <%= @vhost_name %>:443
   SSLProtocol All -SSLv2 -SSLv3
   SSLCertificateFile      <%= @site_ssl_cert_file %>
   SSLCertificateKeyFile   <%= @site_ssl_key_file %>
-<% if @site_ssl_chain_file_contents != '' %>
+<% if @site_ssl_chain_file_contents %>
   SSLCertificateChainFile <%= @site_ssl_chain_file %>
 <% end %>
 <% end %>

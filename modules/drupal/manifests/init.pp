@@ -78,6 +78,7 @@ class drupal (
   $site_ssl_enabled = false,
   $site_ssl_cert_file_contents = undef,
   $site_ssl_key_file_contents = undef,
+  $site_ssl_chain_file_contents = undef,
   $site_ssl_cert_file = '',
   $site_ssl_key_file = '',
   $site_ssl_chain_file = '',
