@@ -70,7 +70,7 @@ function format_progress(elapsed, remaining) {
     return r;
 }
 
-function is_hidden(project, change_id) {
+function is_hidden(project, change_id, owner) {
     var filters = window.zuul_filter;
     if (filters.length == 0) {
         return false;
@@ -80,6 +80,8 @@ function is_hidden(project, change_id) {
         if(project.indexOf(filter) != -1)
             hide = false;
         if(change_id !== null && change_id.indexOf(filter) != -1)
+            hide = false;
+        if(owner !== null && owner.indexOf(filter) != -1)
             hide = false;
     });
     return hide;
@@ -182,13 +184,28 @@ function format_pipeline(data) {
         $.each(change_queue['heads'], function(head_i, head) {
             var projects = "";
             var change_ids = "";
+            var owner = "";
             var hide_queue = true;
             $.each(head, function(change_i, change) {
                 projects += change['project'] + "|";
                 change_ids += change['id'];
+                if (change['owner'] != null) {
+                    if (change['owner']['email'] != null) {
+                        owner += change['owner']['email'] + "|";
+                    }
+                    if (change['owner']['username'] != null) {
+                        owner += change['owner']['username'] + "|";
+                    }
+                    if (change['owner']['name'] != null) {
+                        owner += change['owner']['name'] + "|";
+                    }
+                }
                 hide_queue &= is_hidden(change['project'], change['id']);
             });
-            html += '<div change_id="' + change_ids + '" project="' + projects + '" style="'
+            html += '<div change_id="' + change_ids +
+                       '" project="' + projects +
+                       '" owner="' + owner +
+                       '" style="'
                 + (hide_queue ? 'display:none;' : '') + '">';
 
             if (data['change_queues'].length > 1 && head_i == 0) {
@@ -532,7 +549,8 @@ $(function() {
             val = $(val);
             var project = val.attr('project');
             var change_id = val.attr('change_id');
-            if (is_hidden(project, change_id)) {
+            var owner = val.attr('owner');
+            if (is_hidden(project, change_id, owner)) {
                 val.hide(100);
             } else {
                 val.show(100);
