@@ -20,6 +20,10 @@ class openstack_project::groups_dev (
   $site_mysql_password = '',
   $conf_cron_key = '',
   $sysadmins = [],
+  $site_ssl_cert_file_contents = undef,
+  $site_ssl_key_file_contents = undef,
+  $site_ssl_cert_file = '/etc/ssl/private/ssl-cert-snakeoil.key',
+  $site_ssl_key_file = '/etc/ssl/private/groups-dev.openstack.org.key',
 ) {
 
   realize (
@@ -41,23 +45,28 @@ class openstack_project::groups_dev (
   }
 
   class { 'drupal':
-    site_name               => 'groups-dev.openstack.org',
-    site_root               => '/srv/vhosts/groups-dev.openstack.org',
-    site_mysql_host         => $site_mysql_host,
-    site_mysql_user         => 'groups',
-    site_mysql_password     => $site_mysql_password,
-    site_mysql_database     => 'groups_dev',
-    site_vhost_root         => '/srv/vhosts',
-    site_admin_password     => $site_admin_password,
-    site_alias              => 'groupsdev',
-    site_profile            => 'groups',
-    site_base_url           => 'http://groups-dev.openstack.org',
-    package_repository      => 'http://tarballs.openstack.org/groups/drupal-updates/release-history',
-    package_branch          => 'dev',
-    conf_cron_key           => $conf_cron_key,
-    conf_markdown_directory => '/srv/groups-static-pages',
-    conf_openid_provider    => 'https://openstackid-dev.openstack.org',
-    require                 => [ Class['openstack_project::server'],
+    site_name                    => 'groups-dev.openstack.org',
+    site_root                    => '/srv/vhosts/groups-dev.openstack.org',
+    site_mysql_host              => $site_mysql_host,
+    site_mysql_user              => 'groups',
+    site_mysql_password          => $site_mysql_password,
+    site_mysql_database          => 'groups_dev',
+    site_vhost_root              => '/srv/vhosts',
+    site_admin_password          => $site_admin_password,
+    site_alias                   => 'groupsdev',
+    site_profile                 => 'groups',
+    site_base_url                => 'http://groups-dev.openstack.org',
+    site_ssl_enabled             => true,
+    site_ssl_cert_file_contents  => $site_ssl_cert_file_contents,
+    site_ssl_key_file_contents   => $site_ssl_key_file_contents,
+    site_ssl_cert_file           => $site_ssl_cert_file,
+    site_ssl_key_file            => $site_ssl_key_file,
+    package_repository           => 'http://tarballs.openstack.org/groups/drupal-updates/release-history',
+    package_branch               => 'dev',
+    conf_cron_key                => $conf_cron_key,
+    conf_markdown_directory      => '/srv/groups-static-pages',
+    conf_openid_provider         => 'https://openstackid-dev.openstack.org',
+    require                      => [ Class['openstack_project::server'],
       Vcsrepo['/srv/groups-static-pages'] ]
   }
 
