@@ -170,6 +170,12 @@ class openstack_project::puppetmaster (
     require => Class[ansible],
   }
 
+  file { '/etc/ansible/remote_puppet_afs.yaml':
+    ensure  => present,
+    source  => 'puppet:///modules/openstack_project/ansible/remote_puppet_afs.yaml',
+    require => Class[ansible],
+  }
+
   file { '/etc/ansible/clean_workspaces.yaml':
     ensure  => present,
     source  => 'puppet:///modules/openstack_project/ansible/clean_workspaces.yaml',
