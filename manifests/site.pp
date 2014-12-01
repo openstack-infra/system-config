@@ -210,11 +210,15 @@ node 'graphite.openstack.org' {
 # Node-OS: precise
 node 'groups.openstack.org' {
   class { 'openstack_project::groups':
-    sysadmins           => hiera('sysadmins', []),
-    site_admin_password => hiera('groups_site_admin_password', 'XXX'),
-    site_mysql_host     => hiera('groups_site_mysql_host', 'localhost'),
-    site_mysql_password => hiera('groups_site_mysql_password', 'XXX'),
-    conf_cron_key       => hiera('groups_conf_cron_key', 'XXX'),
+    sysadmins                    => hiera('sysadmins', []),
+    site_admin_password          => hiera('groups_site_admin_password', 'XXX'),
+    site_mysql_host              => hiera('groups_site_mysql_host', 'localhost'),
+    site_mysql_password          => hiera('groups_site_mysql_password', 'XXX'),
+    conf_cron_key                => hiera('groups_conf_cron_key', 'XXX'),
+    site_ssl_cert_file_contents  => hiera('groups_site_ssl_cert_file_contents', undef),
+    site_ssl_key_file_contents   => hiera('groups_site_ssl_key_file_contents', undef),
+    site_ssl_cert_file           => '/etc/ssl/certs/groups.openstack.org.pem',
+    site_ssl_key_file            => '/etc/ssl/private/groups.openstack.org.key',
   }
 }
 
