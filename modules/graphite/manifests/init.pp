@@ -12,6 +12,7 @@ class graphite(
                 'nodejs' ]
 
   include apache
+  include apache::mod::wsgi
   include pip
 
   package { $packages:
