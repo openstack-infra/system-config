@@ -6,6 +6,28 @@ class openstack_project::jenkins (
   $jenkins_jobs_username = 'gerrig', # This is not a typo, well it isn't anymore.
   $jenkins_git_url = 'https://git.openstack.org/openstack-infra/jenkins-job-builder',
   $jenkins_git_revision = 'master',
+  $jenkins_plugins = {
+    'build-timeout' => { version => '1.14' },
+    'copyartifact' => { version => '1.22' },
+    'dashboard-view' => { version => '2.3' },
+    'envinject' => { version => '1.70' },
+    'gearman-plugin' => { version => '0.1.1' },
+    'git' => { version => '1.1.23' },
+    'greenballs' => { version => '1.12' },
+    'extended-read-permission' => { version => '1.0' },
+    'zmq-event-publisher' => { version => '0.0.3' },
+    # TODO(jeblair): release # 'scp' => { version' => '1.9' },
+    'jobConfigHistory' => { version => '1.13' },
+    'monitoring' => { version => '1.40.0' },
+    'nodelabelparameter' => { version => '1.2.1' },
+    'notification' => { version => '1.4' },
+    'openid' => { version => '1.5' },
+    'postbuildscript' => { version => '0.16' },
+    'publish-over-ftp' => { version => '1.7' },
+    'simple-theme-plugin' => { version => '0.2' },
+    'timestamper' => { version => '1.3.1' },
+    'token-macro' => { version => '1.5.1' },
+  },
   $manage_jenkins_jobs = true,
   $ssl_cert_file = '',
   $ssl_key_file = '',
@@ -57,67 +79,7 @@ class openstack_project::jenkins (
     jenkins_ssh_public_key  => $openstack_project::jenkins_ssh_key,
   }
 
-  jenkins::plugin { 'build-timeout':
-    version => '1.14',
-  }
-  jenkins::plugin { 'copyartifact':
-    version => '1.22',
-  }
-  jenkins::plugin { 'dashboard-view':
-    version => '2.3',
-  }
-  jenkins::plugin { 'envinject':
-    version => '1.70',
-  }
-  jenkins::plugin { 'gearman-plugin':
-    version => '0.1.1',
-  }
-  jenkins::plugin { 'git':
-    version => '1.1.23',
-  }
-  jenkins::plugin { 'greenballs':
-    version => '1.12',
-  }
-  jenkins::plugin { 'extended-read-permission':
-    version => '1.0',
-  }
-  jenkins::plugin { 'zmq-event-publisher':
-    version => '0.0.3',
-  }
-#  TODO(jeblair): release
-#  jenkins::plugin { 'scp':
-#    version => '1.9',
-#  }
-  jenkins::plugin { 'jobConfigHistory':
-    version => '1.13',
-  }
-  jenkins::plugin { 'monitoring':
-    version => '1.40.0',
-  }
-  jenkins::plugin { 'nodelabelparameter':
-    version => '1.2.1',
-  }
-  jenkins::plugin { 'notification':
-    version => '1.4',
-  }
-  jenkins::plugin { 'openid':
-    version => '1.5',
-  }
-  jenkins::plugin { 'postbuildscript':
-    version => '0.16',
-  }
-  jenkins::plugin { 'publish-over-ftp':
-    version => '1.7',
-  }
-  jenkins::plugin { 'simple-theme-plugin':
-    version => '0.2',
-  }
-  jenkins::plugin { 'timestamper':
-    version => '1.3.1',
-  }
-  jenkins::plugin { 'token-macro':
-    version => '1.5.1',
-  }
+  create_resources('jenkins::plugin',$jenkins_plugins)
 
   if $manage_jenkins_jobs == true {
     class { 'project_config':
