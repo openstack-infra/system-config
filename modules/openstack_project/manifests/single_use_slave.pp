@@ -17,7 +17,8 @@ class openstack_project::single_use_slave (
   $automatic_upgrades = false,
   $all_mysql_privs = false,
   $enable_unbound = true,
-  $ssh_key = $openstack_project::jenkins_ssh_key
+  $ssh_key = $openstack_project::jenkins_ssh_key,
+  $project_config_repo = 'https://git.openstack.org/openstack-infra/project-config',
 ) inherits openstack_project {
   class { 'openstack_project::template':
     certname            => $certname,
@@ -44,8 +45,9 @@ class openstack_project::single_use_slave (
   }
 
   class { 'openstack_project::slave_common':
-    include_pypy    => $include_pypy,
-    sudo            => $sudo,
+    include_pypy        => $include_pypy,
+    sudo                => $sudo,
+    project_config_repo => $project_config_repo,
   }
 
   if (! $thin) {
