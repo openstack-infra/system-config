@@ -23,6 +23,13 @@ class openstack_project::storyboard(
     iptables_public_tcp_ports => [80, 443],
   }
 
+  mysql_backup::backup_remote { 'storyboard':
+    database_host     => $mysql_host,
+    database_user     => $mysql_user,
+    database_password => $mysql_password,
+    require           => Class['::storyboard::application'],
+  }
+
   class { '::storyboard::cert':
     ssl_cert_content => $ssl_cert_file_contents,
     ssl_cert         => '/etc/ssl/certs/storyboard.openstack.org.pem',
