@@ -76,4 +76,10 @@ class openstack_project::storyboard(
   class { '::storyboard::load_superusers':
     source => 'puppet:///modules/openstack_project/storyboard/superusers.yaml',
   }
+
+  include bup
+  bup::site { 'rs-ord':
+    backup_user   => 'bup-storyboard',
+    backup_server => 'ci-backup-rs-ord.openstack.org',
+  }
 }
