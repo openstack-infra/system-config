@@ -17,7 +17,6 @@ Contents:
 .. sidebar:: HOWTOs
 
    * :doc:`third_party`
-   * :doc:`stackforge`
    * :doc:`running-your-own`
 
 .. toctree::
