@@ -325,7 +325,8 @@ node 'logstash.openstack.org' {
       'elasticsearch06.openstack.org:9200',
       'elasticsearch07.openstack.org:9200',
     ],
-    subunit2sql_db_uri  => hiera('subunit2sql_db_uri', ''),
+    subunit2sql_db_host  => hiera('subunit2sql_db_host', ''),
+    subunit2sql_db_pass  => hiera('subunit2sql_db_password', ''),
   }
 }
 
@@ -343,7 +344,8 @@ node /^logstash-worker\d+\.openstack\.org$/ {
 node /^subunit-worker\d+\.openstack\.org$/ {
   class { 'openstack_project::subunit_worker':
     sysadmins             => hiera('sysadmins', []),
-    subunit2sql_db_uri    => hiera('subunit2sql_db_uri', ''),
+    subunit2sql_db_host => hiera('subunit2sql_db_host', ''),
+    subunit2sql_db_pass => hiera('subunit2sql_db_password', ''),
   }
 }
 
