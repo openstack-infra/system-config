@@ -20,7 +20,8 @@ class openstack_project::logstash (
   $discover_nodes = ['elasticsearch01.openstack.org:9200'],
   $statsd_host = 'graphite.openstack.org',
   $sysadmins = [],
-  $subunit2sql_db_uri= ''
+  $subunit2sql_db_host,
+  $subunit2sql_db_pass,
 ) {
   $iptables_es_rule = regsubst ($elasticsearch_nodes, '^(.*)$', '-m state --state NEW -m tcp -p tcp --dport 9200:9400 -s \1 -j ACCEPT')
   $iptables_gm_rule = regsubst ($gearman_workers, '^(.*)$', '-m state --state NEW -m tcp -p tcp --dport 4730 -s \1 -j ACCEPT')
@@ -48,6 +49,7 @@ class openstack_project::logstash (
   include 'subunit2sql'
 
   class { 'subunit2sql::server':
-    subunit2sql_db_uri => $subunit2sql_db_uri,
+    db_host => $subunit2sql_db_host,
+    db_pass => $subunit2sql_db_pass,
   }
 }
