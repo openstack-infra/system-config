@@ -155,7 +155,9 @@ your build status on Gerrit patches, you will need a dedicated Gerrit
 CI account. You will need to create this account in our OpenID provider
 `Launchpad <https://launchpad.net>`. You may already have an existing
 personal account in Launchpad, but you should create a new and entirely
-separate account for this purpose.
+separate account for this purpose. It also needs to use a different email
+address than any existing accounts you have, because Gerrit assumes email
+addresses are unique across all accounts.
 
 Once you have created this account with the OpenID provider you can log
 into Gerrit with that new account as you would with your normal user
