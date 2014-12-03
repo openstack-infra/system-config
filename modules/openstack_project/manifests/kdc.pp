@@ -1,5 +1,14 @@
 # kerberos kdc servers
 class openstack_project::kdc (
+  $kerberos_realm = 'OPENSTACK.ORG',
+  $kdc_admin_server = 'kdc.openstack.org',
+  $kdc_servers = [
+      'kdc01.openstack.org',
+      'kdc02.openstack.org',
+  ],
+  $kdc_slave_servers = [
+      'kdc02.openstack.org',
+  ],
   $slave = false,
   $sysadmins = [],
 ) {
@@ -9,15 +18,10 @@ class openstack_project::kdc (
     sysadmins                 => $sysadmins
   }
   class { 'kerberos::server':
-    realm        => 'OPENSTACK.ORG',
-    kdcs         => [
-      'kdc01.openstack.org',
-      'kdc02.openstack.org',
-    ],
-    admin_server => 'kdc.openstack.org',
-    slaves       => [
-      'kdc02.openstack.org',
-    ],
+    realm        => $kerberos_realm,
+    kdcs         => $kdc_servers,
+    admin_server => $kdc_admin_server,
+    slaves       => $kdc_slave_servers,
     slave        => $slave,
   }
 }
