@@ -172,7 +172,7 @@ Migrate the manifests:
 
   * You need to modify the puppet path for gerrit acls - they should come from
     your project - make the directory but you can leave it empty (except for a
-    . file to let git add it).  ``http://ci.openstack.org/stackforge.html``
+    . file to let git add it).  The `Project Creator's Guide <http://docs.openstack.org/infra/manual/creators.html>`_
     covers how it gets populated when your infrastructure is working.
 
   * Ditto projects.yaml and projects.ini, which is passed in from your
@@ -227,7 +227,7 @@ least 10G+ of RAM, as gerrit is configured for 8G of heap.
 Follow the :file:`doc/source/gerrit.rst` for instructions on getting gerrit
 configured once installed.
 
-Finally, you should be able to follow :ref:`stackforge` to setup a project at
+Finally, you should be able to follow the `Project Creator’s Guide <http://docs.openstack.org/infra/manual/creators.html>`_ to setup a project at
 this point. (Zuul and Jenkins jobs obviously won't work yet).
 
 Stage 4 - Zuul
@@ -300,7 +300,7 @@ which get the most load (as they run jobs from anyone).
 
 #. Setup an equivalent to
    modules/openstack_project/files/jenkins_job_builder/config for your project.
-   This is documented in :ref:`stackforge`. You should copy hooks.yaml and
+   This is documented in the `Project Creator's Guide <http://docs.openstack.org/infra/manual/creators.html>`_. You should copy hooks.yaml and
    defaults.yaml across as-is, and if you want the stock set of python jobs
    that OpenStack uses, the python-jobs.yaml and pypi-jobs.yaml files too.
    Macros.yaml will need to be copied and customised.  See the
