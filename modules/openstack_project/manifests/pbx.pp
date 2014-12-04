@@ -16,6 +16,10 @@
 #
 # == Class: openstack_project::pbx
 class openstack_project::pbx (
+  $admin_users = [
+    'rbryant',
+    'pabelanger',
+  ],
   $sysadmins = [],
   $sip_providers = [],
 ) {
@@ -36,8 +40,7 @@ class openstack_project::pbx (
   }
 
   realize (
-    User::Virtual::Localuser['rbryant'],
-    User::Virtual::Localuser['pabelanger'],
+    User::Virtual::Localuser[$admin_users],
   )
 
   class { 'asterisk':
