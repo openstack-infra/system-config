@@ -197,7 +197,7 @@ Once you have done this you will have everything you need to comment on
 Gerrit changes from our CI system but you will not be able to vote +/-1
 Verified on changes. To get voting rights you will need to get the release
 group of the project you are testing to add you to their project specific
-voting-testers group. Please contact the project in question when you are
+<project>-ci group. Please contact the project in question when you are
 ready to start voting and they can add you to this group.
 
 The Jenkins Gerrit Trigger Plugin Way
@@ -327,5 +327,5 @@ chance of success if you follow these steps:
 
 * If the members of the program you want voting permissions from agree
   your system should be able to vote, the release group for that program
-  or project can add you to the voting-testers group specific to that
+  or project can add you to the <project>-ci group specific to that
   program/project.
