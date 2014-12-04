@@ -92,9 +92,9 @@ system-config repository::
 
 That should turn the system you are logged into into an etherpad
 server with the same configuration as that used by the OpenStack
-project.  You can edit the contents of the system-config repo and
-iterate as needed.  When you're ready to propose the change for
-review, you can propose the change with git-review.  See the
+project. You can edit the contents of the system-config repo and
+iterate ``puppet apply`` as needed. When you're ready to propose the
+change for review, you can propose the change with git-review. See the
 `Development workflow section in the Developer's Guide
 <http://docs.openstack.org/infra/manual/developers.html#development-workflow>`_
 for more information.
