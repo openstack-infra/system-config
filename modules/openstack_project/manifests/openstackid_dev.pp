@@ -15,6 +15,10 @@
 # openstackid idp(sso-openid) dev server
 #
 class openstack_project::openstackid_dev (
+  $admin_users = [
+    'smarcet',
+    'mkiss',
+  ],
   $sysadmins = [],
   $site_admin_password = '',
   $id_mysql_host = '',
@@ -37,12 +41,11 @@ class openstack_project::openstackid_dev (
   $id_environment = 'dev',
   $ssl_cert_file_contents = '',
   $ssl_key_file_contents = '',
-  $ssl_chain_file_contents = ''
+  $ssl_chain_file_contents = '',
 ) {
 
   realize (
-    User::Virtual::Localuser['smarcet'],
-    User::Virtual::Localuser['mkiss'],
+    User::Virtual::Localuser[$admin_users],
   )
 
   class { 'openstack_project::server':
